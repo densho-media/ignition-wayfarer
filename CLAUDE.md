@@ -9,7 +9,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 Follow the loop in AGENTS.md. The parent Densho application's CLAUDE.md and
 tooling don't apply to this Blender project. There are no project skills or hooks.
 Work on a task branch (AGENTS.md step 5): `local/<task>` on the workstation,
-`claude/<task>` in Claude Code Cloud. Never commit to `main` directly.
+`claude/<task>` in Claude Code Cloud. Never commit to `main` directly. Open no
+pull requests or issues; after the owner's approval, squash the branch onto `main`.
 
 ## Development flow
 

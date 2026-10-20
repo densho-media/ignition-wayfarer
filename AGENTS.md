@@ -33,9 +33,12 @@ tests, tooling or abstractions the next visible result doesn't need.
    asks, one change per commit. Git is the undo.
    Branches: `main` is the approved, validated baseline; nobody commits to it
    directly. Work on `local/<task>` (workstation) or `claude/<task>` (Claude Code
-   Cloud), validate as above, and merge into `main` only with the owner's explicit
-   approval. The repository is public: every pushed branch is visible, so push
-   nothing that the publication rules below keep local.
+   Cloud) and validate as above. No pull requests or GitHub issues: once the owner
+   approves in chat or by text, squash the branch onto `main` as one commit
+   (`git merge --squash`) and push `main`. Then delete the branch, or restart it
+   from the new `main` before reusing it. The repository is public: every pushed
+   branch and `main` are visible at once, so push nothing that the publication
+   rules below keep local.
 6. After a slice or phase is committed, prune `runs/`: delete every run directory
    the commit no longer needs. Keep the newest passing `pipeline` and
    `runtime-export` runs, any run named in TODO, docs, `references/` or an open

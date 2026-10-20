@@ -81,7 +81,8 @@ The `.blend` files, renders, runs and Godot imports are generated and are not in
 
 - `main` is the approved, validated baseline.
 - Work happens on `local/<task>` (workstation) or `claude/<task>` (Claude Code Cloud) branches.
-- A branch is merged after validation and with owner approval.
+- After validation and the owner's approval, a branch is squashed onto `main` as one commit.
+  The project uses no pull requests or GitHub issues.
 
 ## Licence
 
