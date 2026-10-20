@@ -1,0 +1,1973 @@
+{
+ "vehicle": "WF_WAYFARER_001.blend",
+ "contact_tolerance_m": 0.03,
+ "characters": {
+  "test_a": {
+   "entry_chamber": {
+    "gravity": "float (docked, rings stopped)",
+    "intersection_depth_m": {
+     "hands": 0.01
+    },
+    "surfaces": {
+     "hands": "Dock_Primary_Handrail_1"
+    },
+    "contacts": [
+     "Dock_Primary_Handrail_1"
+    ],
+    "least_clearance_m": {
+     "head": 0.197,
+     "torso": 0.45,
+     "arms": 0.13,
+     "hands": 0.0,
+     "legs": 0.203,
+     "feet": 0.109
+    },
+    "hand_to_grip_m": {
+     "hand_left": 0.138
+    },
+    "foot_to_footing_m": {
+     "foot_left": 0.0,
+     "foot_right": 0.0
+    },
+    "reach_short_m": {},
+    "verdict": "FIT",
+    "clashes": {}
+   },
+   "trunk": {
+    "gravity": "float (docked, rings stopped)",
+    "intersection_depth_m": {
+     "hands": 0.018,
+     "arms": 0.009
+    },
+    "surfaces": {
+     "hands": "Crew_Trunk_Handrail_2_2",
+     "arms": "Crew_Trunk_Handrail_2_2"
+    },
+    "contacts": [
+     "Crew_Trunk",
+     "Crew_Trunk_Handrail_2_2",
+     "Structural_Spine"
+    ],
+    "least_clearance_m": {
+     "head": 0.148,
+     "torso": 0.111,
+     "arms": 0.001,
+     "hands": 0.0,
+     "legs": 0.111,
+     "feet": 0.038
+    },
+    "hand_to_grip_m": {
+     "hand_right": 0.0
+    },
+    "foot_to_footing_m": {
+     "foot_left": 0.011
+    },
+    "reach_short_m": {},
+    "verdict": "FIT",
+    "clashes": {}
+   },
+   "vestibule_ring_a": {
+    "gravity": "float (despun drum)",
+    "intersection_depth_m": {
+     "hands": 0.021,
+     "arms": 0.012
+    },
+    "surfaces": {
+     "hands": "Crew_Vestibule_1_Handrail_1",
+     "arms": "Crew_Vestibule_1_Handrail_1"
+    },
+    "contacts": [
+     "Crew_Vestibule_1",
+     "Crew_Vestibule_1_Fit_Panel_Bezel",
+     "Crew_Vestibule_1_Handrail_1",
+     "Crew_Vestibule_1_Handrail_1_Bracket_2",
+     "Crew_Vestibule_1_Transfer_Panel"
+    ],
+    "least_clearance_m": {
+     "head": 0.094,
+     "torso": 0.231,
+     "arms": 0.001,
+     "hands": 0.0,
+     "legs": 0.34,
+     "feet": 0.155
+    },
+    "hand_to_grip_m": {
+     "hand_left": 0.0
+    },
+    "foot_to_footing_m": {
+     "foot_left": 0.0,
+     "foot_right": 0.0
+    },
+    "reach_short_m": {},
+    "verdict": "FIT",
+    "clashes": {}
+   },
+   "tube_ladder_ring_a": {
+    "gravity": "radial-down (ring spinning)",
+    "intersection_depth_m": {
+     "hands": 0.017,
+     "arms": 0.038,
+     "torso": 0.046,
+     "head": 0.034,
+     "legs": 0.037
+    },
+    "surfaces": {
+     "hands": "Crew_Tube_1_1_Ladder_Stile_1",
+     "arms": "Crew_Tube_1_1_Ladder_Stile_2",
+     "torso": "Crew_Tube_1_1_Ladder_Stile_2",
+     "head": "Crew_Tube_1_1_Arrest_Rail",
+     "legs": "Crew_Tube_1_1_Ladder_Rungs"
+    },
+    "contacts": [
+     "Crew_Tube_1_1",
+     "Crew_Tube_1_1_Ladder_Stile_1",
+     "Crew_Tube_1_1_Ladder_Stile_2"
+    ],
+    "least_clearance_m": {
+     "head": 0.0,
+     "torso": 0.0,
+     "arms": 0.0,
+     "hands": 0.0,
+     "legs": 0.0,
+     "feet": 0.01
+    },
+    "hand_to_grip_m": {
+     "hand_left": 0.0,
+     "hand_right": 0.0
+    },
+    "foot_to_footing_m": {
+     "foot_right": 0.0,
+     "foot_left": 0.0
+    },
+    "reach_short_m": {},
+    "verdict": "FIT",
+    "clashes": {},
+    "stance_of_the_mannequin": {
+     "verdict": "CLASH",
+     "clashes": {
+      "arms": 0.038,
+      "torso": 0.046,
+      "head": 0.034,
+      "legs": 0.037
+     }
+    },
+    "standoff_to_clear_m": 0.15,
+    "knee_drop_m": 0.0,
+    "stance": "climber: ball of the foot on the rung, hips 0.15 m off the ladder",
+    "at_standoff": {
+     "least_clearance_m": {
+      "head": 0.001,
+      "torso": 0.022,
+      "arms": 0.001,
+      "hands": 0.0,
+      "legs": 0.064,
+      "feet": 0.004
+     },
+     "hand_to_grip_m": {
+      "hand_left": 0.0,
+      "hand_right": 0.0
+     },
+     "reach_short_m": {},
+     "contacts": [
+      "Crew_Tube_1_1",
+      "Crew_Tube_1_1_Ladder_Stile_1",
+      "Crew_Tube_1_1_Ladder_Stile_2"
+     ],
+     "ball_of_foot_to_mannequin_footing_m": {
+      "right": 0.094,
+      "left": 0.094
+     }
+    }
+   },
+   "sector_landing": {
+    "gravity": "radial-down (ring spinning)",
+    "intersection_depth_m": {
+     "hands": 0.015,
+     "arms": 0.013,
+     "feet": 0.007
+    },
+    "surfaces": {
+     "hands": "Sector_Ladder_Stile_1",
+     "arms": "Sector_Ladder_Stile_1",
+     "feet": "Interior_Deck"
+    },
+    "contacts": [
+     "Interior_Deck",
+     "Sector_Ladder_Stile_1",
+     "Sector_Ladder_Stile_2"
+    ],
+    "least_clearance_m": {
+     "head": 0.285,
+     "torso": 0.294,
+     "arms": 0.0,
+     "hands": 0.0,
+     "legs": 0.093,
+     "feet": 0.0
+    },
+    "hand_to_grip_m": {
+     "hand_right": 0.0,
+     "hand_left": 0.0
+    },
+    "foot_to_footing_m": {
+     "foot_right": 0.0,
+     "foot_left": 0.0
+    },
+    "reach_short_m": {},
+    "verdict": "FIT",
+    "clashes": {}
+   },
+   "refuge": {
+    "gravity": "float (docked, rings stopped)",
+    "intersection_depth_m": {
+     "hands": 0.019,
+     "arms": 0.011
+    },
+    "surfaces": {
+     "hands": "Refuge_Hoop_Rail_Aft",
+     "arms": "Refuge_Hoop_Rail_Aft"
+    },
+    "contacts": [
+     "Refuge_Hoop_Rail_Aft",
+     "Refuge_Inner_Wall"
+    ],
+    "least_clearance_m": {
+     "head": 0.245,
+     "torso": 0.086,
+     "arms": 0.0,
+     "hands": 0.0,
+     "legs": 0.111,
+     "feet": 0.313
+    },
+    "hand_to_grip_m": {
+     "hand_left": 0.0
+    },
+    "foot_to_footing_m": {
+     "foot_right": 0.0,
+     "foot_left": 0.0
+    },
+    "reach_short_m": {},
+    "verdict": "FIT",
+    "clashes": {}
+   },
+   "trunk_ladder_thrust": {
+    "gravity": "aft-down (thrust, rings locked)",
+    "intersection_depth_m": {
+     "hands": 0.018,
+     "arms": 0.038,
+     "torso": 0.045,
+     "legs": 0.037,
+     "head": 0.034
+    },
+    "surfaces": {
+     "hands": "Crew_Trunk_Ladder_Stile_1",
+     "arms": "Crew_Trunk_Ladder_Stile_2",
+     "torso": "Crew_Trunk_Ladder_Stile_2",
+     "legs": "Crew_Trunk_Ladder_Rungs",
+     "head": "Crew_Trunk_Arrest_Rail"
+    },
+    "contacts": [
+     "Crew_Trunk",
+     "Crew_Trunk_Ladder_Stile_1",
+     "Crew_Trunk_Ladder_Stile_2"
+    ],
+    "least_clearance_m": {
+     "head": 0.0,
+     "torso": 0.0,
+     "arms": 0.0,
+     "hands": 0.001,
+     "legs": 0.0,
+     "feet": 0.009
+    },
+    "hand_to_grip_m": {
+     "hand_right": 0.0,
+     "hand_left": 0.0
+    },
+    "foot_to_footing_m": {
+     "foot_right": 0.0,
+     "foot_left": 0.0
+    },
+    "reach_short_m": {},
+    "verdict": "FIT",
+    "clashes": {},
+    "stance_of_the_mannequin": {
+     "verdict": "CLASH",
+     "clashes": {
+      "arms": 0.038,
+      "torso": 0.045,
+      "legs": 0.037,
+      "head": 0.034
+     }
+    },
+    "standoff_to_clear_m": 0.15,
+    "knee_drop_m": 0.0,
+    "stance": "climber: ball of the foot on the rung, hips 0.15 m off the ladder",
+    "at_standoff": {
+     "least_clearance_m": {
+      "head": 0.0,
+      "torso": 0.022,
+      "arms": 0.0,
+      "hands": 0.0,
+      "legs": 0.063,
+      "feet": 0.003
+     },
+     "hand_to_grip_m": {
+      "hand_right": 0.0,
+      "hand_left": 0.0
+     },
+     "reach_short_m": {},
+     "contacts": [
+      "Crew_Trunk",
+      "Crew_Trunk_Ladder_Stile_1",
+      "Crew_Trunk_Ladder_Stile_2"
+     ],
+     "ball_of_foot_to_mannequin_footing_m": {
+      "right": 0.094,
+      "left": 0.094
+     }
+    }
+   },
+   "tube_elbow_thrust": {
+    "gravity": "aft-down (thrust, rings locked)",
+    "intersection_depth_m": {
+     "hands": 0.013,
+     "arms": 0.012,
+     "feet": 0.021
+    },
+    "surfaces": {
+     "hands": "Crew_Tube_1_1_Floor_Ladder_2_Stile_1",
+     "arms": "Crew_Tube_1_1_Floor_Ladder_2_Stile_2",
+     "feet": "Crew_Tube_1_1_Floor_Ladder_2_Rungs"
+    },
+    "contacts": [
+     "Crew_Tube_1_1_Floor_Ladder_2_Rungs",
+     "Crew_Tube_1_1_Floor_Ladder_2_Stile_1",
+     "Crew_Tube_1_1_Floor_Ladder_2_Stile_2"
+    ],
+    "least_clearance_m": {
+     "head": 0.424,
+     "torso": 0.04,
+     "arms": 0.001,
+     "hands": 0.001,
+     "legs": 0.02,
+     "feet": 0.0
+    },
+    "hand_to_grip_m": {
+     "hand_right": 0.0,
+     "hand_left": 0.0
+    },
+    "foot_to_footing_m": {
+     "foot_right": 0.0,
+     "foot_left": 0.0
+    },
+    "reach_short_m": {},
+    "verdict": "FIT",
+    "clashes": {}
+   },
+   "hatch_step_thrust": {
+    "gravity": "aft-down (thrust, rings locked)",
+    "intersection_depth_m": {
+     "legs": 0.035,
+     "hands": 0.024,
+     "arms": 0.009
+    },
+    "surfaces": {
+     "legs": "Sector_Hatch_Frame",
+     "hands": "Sector_Ladder_Stile_1",
+     "arms": "Sector_Ladder_Stile_1"
+    },
+    "contacts": [
+     "Sector_Ladder_Brackets",
+     "Sector_Ladder_Rungs",
+     "Sector_Ladder_Stile_1",
+     "Sector_Ladder_Stile_2"
+    ],
+    "least_clearance_m": {
+     "head": 0.229,
+     "torso": 0.215,
+     "arms": 0.001,
+     "hands": 0.0,
+     "legs": 0.001,
+     "feet": 0.0
+    },
+    "hand_to_grip_m": {
+     "hand_left": 0.0,
+     "hand_right": 0.114
+    },
+    "foot_to_footing_m": {
+     "foot_left": 0.011
+    },
+    "reach_short_m": {},
+    "verdict": "CLASH",
+    "clashes": {
+     "legs": 0.035
+    },
+    "standoff_to_clear_m": null,
+    "closest_stance": {
+     "back": 0.0,
+     "drop": 0.0,
+     "lateral": -0.12,
+     "clashes": {
+      "legs": 0.051
+     },
+     "surfaces": {
+      "legs": "Sector_Thrust_Step_Rungs"
+     },
+     "hand_to_grip_m": {
+      "hand_left": 0.0,
+      "hand_right": 0.032
+     }
+    }
+   },
+   "greeting_instructor": {
+    "gravity": "float (docked, rings stopped)",
+    "intersection_depth_m": {
+     "feet": 0.026
+    },
+    "surfaces": {
+     "feet": "Dock_Primary_Fit_Chamber_Frame_2_3"
+    },
+    "contacts": [
+     "Dock_Primary_Entry_Chamber",
+     "Dock_Primary_Fit_Chamber_Deck_Band",
+     "Dock_Primary_Fit_Chamber_Frame_2_3"
+    ],
+    "least_clearance_m": {
+     "head": 0.38,
+     "legs": 0.093,
+     "feet": 0.0
+    },
+    "hand_to_grip_m": {
+     "hand_right": 0.0,
+     "hand_left": 0.0
+    },
+    "foot_to_footing_m": {},
+    "reach_short_m": {},
+    "verdict": "FIT",
+    "clashes": {}
+   },
+   "greeting_newcomer": {
+    "gravity": "float (docked, rings stopped)",
+    "intersection_depth_m": {
+     "hands": 0.022
+    },
+    "surfaces": {
+     "hands": "Dock_Primary_Outer_Hatch_Frame"
+    },
+    "contacts": [
+     "Dock_Primary_Entry_Chamber",
+     "Dock_Primary_Fit_Outer_Hatch_Mark",
+     "Dock_Primary_Outer_Hatch_Frame"
+    ],
+    "least_clearance_m": {
+     "torso": 0.305,
+     "head": 0.442,
+     "arms": 0.012,
+     "hands": 0.0,
+     "legs": 0.272
+    },
+    "hand_to_grip_m": {
+     "hand_right": 0.0,
+     "hand_left": 0.0
+    },
+    "foot_to_footing_m": {},
+    "reach_short_m": {},
+    "verdict": "FIT",
+    "clashes": {}
+   },
+   "couch_newcomer": {
+    "gravity": "radial-down (docked induction pose)",
+    "intersection_depth_m": {
+     "torso": 0.011
+    },
+    "surfaces": {
+     "torso": "Medical_Couch"
+    },
+    "contacts": [],
+    "least_clearance_m": {
+     "head": 0.053,
+     "torso": 0.0,
+     "arms": 0.055,
+     "hands": 0.12,
+     "legs": 0.01,
+     "feet": 0.012
+    },
+    "hand_to_grip_m": {},
+    "foot_to_footing_m": {},
+    "reach_short_m": {},
+    "verdict": "CLASH",
+    "clashes": {
+     "torso": 0.011
+    }
+   }
+  },
+  "test_b": {
+   "entry_chamber": {
+    "gravity": "float (docked, rings stopped)",
+    "intersection_depth_m": {},
+    "surfaces": {},
+    "contacts": [],
+    "least_clearance_m": {
+     "head": 0.361,
+     "torso": 0.491,
+     "hands": 0.032,
+     "arms": 0.2,
+     "legs": 0.2,
+     "feet": 0.11
+    },
+    "hand_to_grip_m": {
+     "hand_left": 0.205
+    },
+    "foot_to_footing_m": {
+     "foot_left": 0.0,
+     "foot_right": 0.0
+    },
+    "reach_short_m": {},
+    "verdict": "FIT",
+    "clashes": {}
+   },
+   "trunk": {
+    "gravity": "float (docked, rings stopped)",
+    "intersection_depth_m": {
+     "hands": 0.022,
+     "arms": 0.009
+    },
+    "surfaces": {
+     "hands": "Crew_Trunk_Handrail_2_2",
+     "arms": "Crew_Trunk_Handrail_2_2"
+    },
+    "contacts": [
+     "Crew_Trunk",
+     "Crew_Trunk_Handrail_2_2",
+     "Structural_Spine"
+    ],
+    "least_clearance_m": {
+     "head": 0.159,
+     "torso": 0.118,
+     "arms": 0.002,
+     "hands": 0.0,
+     "legs": 0.113,
+     "feet": 0.061
+    },
+    "hand_to_grip_m": {
+     "hand_right": 0.0
+    },
+    "foot_to_footing_m": {
+     "foot_left": 0.012
+    },
+    "reach_short_m": {
+     "arm_l": 0.004
+    },
+    "verdict": "FIT",
+    "clashes": {}
+   },
+   "vestibule_ring_a": {
+    "gravity": "float (despun drum)",
+    "intersection_depth_m": {
+     "hands": 0.013,
+     "arms": 0.012
+    },
+    "surfaces": {
+     "hands": "Crew_Vestibule_1_Handrail_1",
+     "arms": "Crew_Vestibule_1_Handrail_1"
+    },
+    "contacts": [
+     "Crew_Vestibule_1",
+     "Crew_Vestibule_1_Handrail_1",
+     "Crew_Vestibule_1_Handrail_1_Bracket_2",
+     "Crew_Vestibule_1_Transfer_Panel"
+    ],
+    "least_clearance_m": {
+     "head": 0.199,
+     "torso": 0.303,
+     "arms": 0.002,
+     "hands": 0.0,
+     "legs": 0.343,
+     "feet": 0.177
+    },
+    "hand_to_grip_m": {
+     "hand_left": 0.0
+    },
+    "foot_to_footing_m": {
+     "foot_left": 0.0,
+     "foot_right": 0.0
+    },
+    "reach_short_m": {},
+    "verdict": "FIT",
+    "clashes": {}
+   },
+   "tube_ladder_ring_a": {
+    "gravity": "radial-down (ring spinning)",
+    "intersection_depth_m": {
+     "hands": 0.017,
+     "arms": 0.017,
+     "head": 0.034,
+     "torso": 0.024,
+     "legs": 0.038
+    },
+    "surfaces": {
+     "hands": "Crew_Tube_1_1_Ladder_Stile_2",
+     "arms": "Crew_Tube_1_1_Ladder_Stile_2",
+     "head": "Crew_Tube_1_1_Arrest_Rail",
+     "torso": "Crew_Tube_1_1_Ladder_Rungs",
+     "legs": "Crew_Tube_1_1_Ladder_Rungs"
+    },
+    "contacts": [
+     "Crew_Tube_1_1",
+     "Crew_Tube_1_1_Ladder_Stile_1",
+     "Crew_Tube_1_1_Ladder_Stile_2"
+    ],
+    "least_clearance_m": {
+     "head": 0.0,
+     "torso": 0.0,
+     "arms": 0.001,
+     "hands": 0.0,
+     "legs": 0.0,
+     "feet": 0.009
+    },
+    "hand_to_grip_m": {
+     "hand_left": 0.0,
+     "hand_right": 0.0
+    },
+    "foot_to_footing_m": {
+     "foot_right": 0.0,
+     "foot_left": 0.0
+    },
+    "reach_short_m": {},
+    "verdict": "FIT",
+    "clashes": {},
+    "stance_of_the_mannequin": {
+     "verdict": "CLASH",
+     "clashes": {
+      "head": 0.034,
+      "torso": 0.024,
+      "legs": 0.038
+     }
+    },
+    "standoff_to_clear_m": 0.13,
+    "knee_drop_m": 0.0,
+    "stance": "climber: ball of the foot on the rung, hips 0.13 m off the ladder",
+    "at_standoff": {
+     "least_clearance_m": {
+      "head": 0.0,
+      "torso": 0.009,
+      "arms": 0.001,
+      "hands": 0.0,
+      "legs": 0.052,
+      "feet": 0.007
+     },
+     "hand_to_grip_m": {
+      "hand_left": 0.0,
+      "hand_right": 0.0
+     },
+     "reach_short_m": {},
+     "contacts": [
+      "Crew_Tube_1_1",
+      "Crew_Tube_1_1_Ladder_Stile_1",
+      "Crew_Tube_1_1_Ladder_Stile_2"
+     ],
+     "ball_of_foot_to_mannequin_footing_m": {
+      "right": 0.093,
+      "left": 0.093
+     }
+    }
+   },
+   "sector_landing": {
+    "gravity": "radial-down (ring spinning)",
+    "intersection_depth_m": {
+     "hands": 0.011,
+     "feet": 0.005
+    },
+    "surfaces": {
+     "hands": "Sector_Ladder_Stile_1",
+     "feet": "Interior_Deck"
+    },
+    "contacts": [
+     "Interior_Deck",
+     "Sector_Ladder_Stile_1",
+     "Sector_Ladder_Stile_2"
+    ],
+    "least_clearance_m": {
+     "head": 0.285,
+     "torso": 0.289,
+     "arms": 0.065,
+     "hands": 0.0,
+     "legs": 0.09,
+     "feet": 0.0
+    },
+    "hand_to_grip_m": {
+     "hand_right": 0.086,
+     "hand_left": 0.086
+    },
+    "foot_to_footing_m": {
+     "foot_right": 0.0,
+     "foot_left": 0.0
+    },
+    "reach_short_m": {},
+    "verdict": "FIT",
+    "clashes": {}
+   },
+   "refuge": {
+    "gravity": "float (docked, rings stopped)",
+    "intersection_depth_m": {
+     "hands": 0.016,
+     "arms": 0.01
+    },
+    "surfaces": {
+     "hands": "Refuge_Hoop_Rail_Aft",
+     "arms": "Refuge_Hoop_Rail_Aft"
+    },
+    "contacts": [
+     "Refuge_Hoop_Rail_Aft",
+     "Refuge_Inner_Wall"
+    ],
+    "least_clearance_m": {
+     "head": 0.187,
+     "torso": 0.08,
+     "arms": 0.001,
+     "hands": 0.0,
+     "legs": 0.125,
+     "feet": 0.319
+    },
+    "hand_to_grip_m": {
+     "hand_left": 0.0
+    },
+    "foot_to_footing_m": {
+     "foot_right": 0.0,
+     "foot_left": 0.0
+    },
+    "reach_short_m": {},
+    "verdict": "FIT",
+    "clashes": {}
+   },
+   "trunk_ladder_thrust": {
+    "gravity": "aft-down (thrust, rings locked)",
+    "intersection_depth_m": {
+     "hands": 0.017,
+     "arms": 0.017,
+     "head": 0.032,
+     "torso": 0.024,
+     "legs": 0.038
+    },
+    "surfaces": {
+     "hands": "Crew_Trunk_Ladder_Stile_2",
+     "arms": "Crew_Trunk_Ladder_Stile_2",
+     "head": "Crew_Trunk_Arrest_Rail",
+     "torso": "Crew_Trunk_Ladder_Rungs",
+     "legs": "Crew_Trunk_Ladder_Rungs"
+    },
+    "contacts": [
+     "Crew_Trunk",
+     "Crew_Trunk_Ladder_Stile_1",
+     "Crew_Trunk_Ladder_Stile_2"
+    ],
+    "least_clearance_m": {
+     "head": 0.0,
+     "torso": 0.0,
+     "arms": 0.0,
+     "hands": 0.0,
+     "legs": 0.0,
+     "feet": 0.007
+    },
+    "hand_to_grip_m": {
+     "hand_right": 0.0,
+     "hand_left": 0.0
+    },
+    "foot_to_footing_m": {
+     "foot_right": 0.0,
+     "foot_left": 0.0
+    },
+    "reach_short_m": {},
+    "verdict": "FIT",
+    "clashes": {},
+    "stance_of_the_mannequin": {
+     "verdict": "CLASH",
+     "clashes": {
+      "head": 0.032,
+      "torso": 0.024,
+      "legs": 0.038
+     }
+    },
+    "standoff_to_clear_m": 0.14,
+    "knee_drop_m": 0.0,
+    "stance": "climber: ball of the foot on the rung, hips 0.14 m off the ladder",
+    "at_standoff": {
+     "least_clearance_m": {
+      "head": 0.003,
+      "torso": 0.018,
+      "arms": 0.0,
+      "hands": 0.0,
+      "legs": 0.058,
+      "feet": 0.005
+     },
+     "hand_to_grip_m": {
+      "hand_right": 0.0,
+      "hand_left": 0.0
+     },
+     "reach_short_m": {},
+     "contacts": [
+      "Crew_Trunk",
+      "Crew_Trunk_Ladder_Stile_1",
+      "Crew_Trunk_Ladder_Stile_2"
+     ],
+     "ball_of_foot_to_mannequin_footing_m": {
+      "right": 0.092,
+      "left": 0.092
+     }
+    }
+   },
+   "tube_elbow_thrust": {
+    "gravity": "aft-down (thrust, rings locked)",
+    "intersection_depth_m": {
+     "hands": 0.006,
+     "arms": 0.013,
+     "feet": 0.02
+    },
+    "surfaces": {
+     "hands": "Crew_Tube_1_1_Floor_Ladder_2_Stile_2",
+     "arms": "Crew_Tube_1_1_Floor_Ladder_2_Stile_2",
+     "feet": "Crew_Tube_1_1_Floor_Ladder_2_Rungs"
+    },
+    "contacts": [
+     "Crew_Tube_1_1_Floor_Ladder_2_Rungs",
+     "Crew_Tube_1_1_Floor_Ladder_2_Stile_1",
+     "Crew_Tube_1_1_Floor_Ladder_2_Stile_2"
+    ],
+    "least_clearance_m": {
+     "head": 0.285,
+     "torso": 0.022,
+     "arms": 0.001,
+     "hands": 0.001,
+     "legs": 0.016,
+     "feet": 0.001
+    },
+    "hand_to_grip_m": {
+     "hand_right": 0.0,
+     "hand_left": 0.0
+    },
+    "foot_to_footing_m": {
+     "foot_right": 0.0,
+     "foot_left": 0.0
+    },
+    "reach_short_m": {},
+    "verdict": "FIT",
+    "clashes": {}
+   },
+   "hatch_step_thrust": {
+    "gravity": "aft-down (thrust, rings locked)",
+    "intersection_depth_m": {
+     "legs": 0.029,
+     "hands": 0.016,
+     "arms": 0.011
+    },
+    "surfaces": {
+     "legs": "Sector_Hatch_Frame",
+     "hands": "Sector_Ladder_Stile_1",
+     "arms": "Sector_Ladder_Stile_1"
+    },
+    "contacts": [
+     "Sector_Ladder_Brackets",
+     "Sector_Ladder_Rungs",
+     "Sector_Ladder_Stile_1"
+    ],
+    "least_clearance_m": {
+     "head": 0.242,
+     "torso": 0.144,
+     "arms": 0.0,
+     "hands": 0.0,
+     "legs": 0.001,
+     "feet": 0.021
+    },
+    "hand_to_grip_m": {
+     "hand_left": 0.0,
+     "hand_right": 0.237
+    },
+    "foot_to_footing_m": {
+     "foot_left": 0.012
+    },
+    "reach_short_m": {},
+    "verdict": "CLASH",
+    "clashes": {
+     "legs": 0.029
+    },
+    "standoff_to_clear_m": null,
+    "closest_stance": {
+     "back": 0.0,
+     "drop": 0.0,
+     "lateral": -0.12,
+     "clashes": {
+      "legs": 0.043
+     },
+     "surfaces": {
+      "legs": "Sector_Thrust_Step_Rungs"
+     },
+     "hand_to_grip_m": {
+      "hand_left": 0.0,
+      "hand_right": 0.166
+     }
+    }
+   },
+   "greeting_instructor": {
+    "gravity": "float (docked, rings stopped)",
+    "intersection_depth_m": {
+     "feet": 0.024
+    },
+    "surfaces": {
+     "feet": "Dock_Primary_Fit_Chamber_Frame_2_3"
+    },
+    "contacts": [
+     "Dock_Primary_Entry_Chamber",
+     "Dock_Primary_Fit_Chamber_Deck_Band",
+     "Dock_Primary_Fit_Chamber_Frame_2_3"
+    ],
+    "least_clearance_m": {
+     "legs": 0.098,
+     "feet": 0.0
+    },
+    "hand_to_grip_m": {
+     "hand_right": 0.04,
+     "hand_left": 0.0
+    },
+    "foot_to_footing_m": {},
+    "reach_short_m": {},
+    "verdict": "FIT",
+    "clashes": {}
+   },
+   "greeting_newcomer": {
+    "gravity": "float (docked, rings stopped)",
+    "intersection_depth_m": {
+     "hands": 0.012
+    },
+    "surfaces": {
+     "hands": "Dock_Primary_Outer_Hatch_Frame"
+    },
+    "contacts": [
+     "Dock_Primary_Outer_Hatch_Frame"
+    ],
+    "least_clearance_m": {
+     "torso": 0.334,
+     "head": 0.45,
+     "arms": 0.012,
+     "hands": 0.0,
+     "legs": 0.28,
+     "feet": 0.483
+    },
+    "hand_to_grip_m": {
+     "hand_right": 0.056,
+     "hand_left": 0.0
+    },
+    "foot_to_footing_m": {},
+    "reach_short_m": {},
+    "verdict": "FIT",
+    "clashes": {}
+   },
+   "couch_newcomer": {
+    "gravity": "radial-down (docked induction pose)",
+    "intersection_depth_m": {},
+    "surfaces": {},
+    "contacts": [],
+    "least_clearance_m": {
+     "head": 0.067,
+     "torso": 0.0,
+     "arms": 0.075,
+     "hands": 0.125,
+     "legs": 0.01,
+     "feet": 0.011
+    },
+    "hand_to_grip_m": {},
+    "foot_to_footing_m": {},
+    "reach_short_m": {},
+    "verdict": "FIT",
+    "clashes": {}
+   }
+  },
+  "instructor": {
+   "entry_chamber": {
+    "gravity": "float (docked, rings stopped)",
+    "intersection_depth_m": {
+     "hands": 0.009
+    },
+    "surfaces": {
+     "hands": "Dock_Primary_Handrail_1"
+    },
+    "contacts": [
+     "Dock_Primary_Handrail_1"
+    ],
+    "least_clearance_m": {
+     "head": 0.206,
+     "torso": 0.471,
+     "arms": 0.122,
+     "hands": 0.0,
+     "legs": 0.196,
+     "feet": 0.111
+    },
+    "hand_to_grip_m": {
+     "hand_left": 0.13
+    },
+    "foot_to_footing_m": {
+     "foot_left": 0.0,
+     "foot_right": 0.0
+    },
+    "reach_short_m": {},
+    "verdict": "FIT",
+    "clashes": {}
+   },
+   "trunk": {
+    "gravity": "float (docked, rings stopped)",
+    "intersection_depth_m": {
+     "hands": 0.018,
+     "arms": 0.009
+    },
+    "surfaces": {
+     "hands": "Crew_Trunk_Handrail_2_2",
+     "arms": "Crew_Trunk_Handrail_2_2"
+    },
+    "contacts": [
+     "Crew_Trunk",
+     "Crew_Trunk_Handrail_2_2",
+     "Structural_Spine"
+    ],
+    "least_clearance_m": {
+     "head": 0.134,
+     "torso": 0.114,
+     "arms": 0.002,
+     "hands": 0.0,
+     "legs": 0.107,
+     "feet": 0.034
+    },
+    "hand_to_grip_m": {
+     "hand_right": 0.0
+    },
+    "foot_to_footing_m": {
+     "foot_left": 0.011
+    },
+    "reach_short_m": {},
+    "verdict": "FIT",
+    "clashes": {}
+   },
+   "vestibule_ring_a": {
+    "gravity": "float (despun drum)",
+    "intersection_depth_m": {
+     "hands": 0.027,
+     "arms": 0.011
+    },
+    "surfaces": {
+     "hands": "Crew_Vestibule_1_Handrail_1",
+     "arms": "Crew_Vestibule_1_Handrail_1"
+    },
+    "contacts": [
+     "Crew_Vestibule_1",
+     "Crew_Vestibule_1_Fit_Panel_Bezel",
+     "Crew_Vestibule_1_Handrail_1",
+     "Crew_Vestibule_1_Handrail_1_Bracket_2",
+     "Crew_Vestibule_1_Transfer_Panel"
+    ],
+    "least_clearance_m": {
+     "head": 0.091,
+     "torso": 0.232,
+     "arms": 0.001,
+     "hands": 0.0,
+     "legs": 0.335,
+     "feet": 0.153
+    },
+    "hand_to_grip_m": {
+     "hand_left": 0.0
+    },
+    "foot_to_footing_m": {
+     "foot_left": 0.0,
+     "foot_right": 0.0
+    },
+    "reach_short_m": {},
+    "verdict": "FIT",
+    "clashes": {}
+   },
+   "tube_ladder_ring_a": {
+    "gravity": "radial-down (ring spinning)",
+    "intersection_depth_m": {
+     "hands": 0.014,
+     "arms": 0.053,
+     "torso": 0.055,
+     "legs": 0.042,
+     "head": 0.024
+    },
+    "surfaces": {
+     "hands": "Crew_Tube_1_1_Ladder_Stile_2",
+     "arms": "Crew_Tube_1_1_Ladder_Stile_1",
+     "torso": "Crew_Tube_1_1_Ladder_Stile_1",
+     "legs": "Crew_Tube_1_1_Ladder_Rungs",
+     "head": "Crew_Tube_1_1_Arrest_Rail"
+    },
+    "contacts": [
+     "Crew_Tube_1_1",
+     "Crew_Tube_1_1_Ladder_Stile_1",
+     "Crew_Tube_1_1_Ladder_Stile_2"
+    ],
+    "least_clearance_m": {
+     "head": 0.002,
+     "torso": 0.001,
+     "arms": 0.0,
+     "hands": 0.0,
+     "legs": 0.0,
+     "feet": 0.009
+    },
+    "hand_to_grip_m": {
+     "hand_left": 0.0,
+     "hand_right": 0.0
+    },
+    "foot_to_footing_m": {
+     "foot_right": 0.0,
+     "foot_left": 0.0
+    },
+    "reach_short_m": {},
+    "verdict": "FIT",
+    "clashes": {},
+    "stance_of_the_mannequin": {
+     "verdict": "CLASH",
+     "clashes": {
+      "arms": 0.053,
+      "torso": 0.055,
+      "legs": 0.042,
+      "head": 0.024
+     }
+    },
+    "standoff_to_clear_m": 0.16,
+    "knee_drop_m": 0.0,
+    "stance": "climber: ball of the foot on the rung, hips 0.16 m off the ladder",
+    "at_standoff": {
+     "least_clearance_m": {
+      "head": 0.0,
+      "torso": 0.03,
+      "arms": 0.0,
+      "hands": 0.0,
+      "legs": 0.072,
+      "feet": 0.004
+     },
+     "hand_to_grip_m": {
+      "hand_left": 0.0,
+      "hand_right": 0.0
+     },
+     "reach_short_m": {},
+     "contacts": [
+      "Crew_Tube_1_1",
+      "Crew_Tube_1_1_Ladder_Stile_1",
+      "Crew_Tube_1_1_Ladder_Stile_2"
+     ],
+     "ball_of_foot_to_mannequin_footing_m": {
+      "right": 0.094,
+      "left": 0.094
+     }
+    }
+   },
+   "sector_landing": {
+    "gravity": "radial-down (ring spinning)",
+    "intersection_depth_m": {
+     "hands": 0.015,
+     "arms": 0.013
+    },
+    "surfaces": {
+     "hands": "Sector_Ladder_Stile_1",
+     "arms": "Sector_Ladder_Stile_1"
+    },
+    "contacts": [
+     "Sector_Ladder_Stile_1",
+     "Sector_Ladder_Stile_2"
+    ],
+    "least_clearance_m": {
+     "head": 0.276,
+     "torso": 0.291,
+     "arms": 0.0,
+     "hands": 0.0,
+     "legs": 0.086,
+     "feet": 0.001
+    },
+    "hand_to_grip_m": {
+     "hand_right": 0.0,
+     "hand_left": 0.0
+    },
+    "foot_to_footing_m": {
+     "foot_right": 0.0,
+     "foot_left": 0.0
+    },
+    "reach_short_m": {},
+    "verdict": "FIT",
+    "clashes": {}
+   },
+   "refuge": {
+    "gravity": "float (docked, rings stopped)",
+    "intersection_depth_m": {
+     "hands": 0.019,
+     "arms": 0.014
+    },
+    "surfaces": {
+     "hands": "Refuge_Hoop_Rail_Aft",
+     "arms": "Refuge_Hoop_Rail_Aft"
+    },
+    "contacts": [
+     "Refuge_Hoop_Rail_Aft",
+     "Refuge_Inner_Wall"
+    ],
+    "least_clearance_m": {
+     "head": 0.221,
+     "torso": 0.079,
+     "arms": 0.003,
+     "hands": 0.0,
+     "legs": 0.113,
+     "feet": 0.313
+    },
+    "hand_to_grip_m": {
+     "hand_left": 0.0
+    },
+    "foot_to_footing_m": {
+     "foot_right": 0.0,
+     "foot_left": 0.0
+    },
+    "reach_short_m": {},
+    "verdict": "FIT",
+    "clashes": {}
+   },
+   "trunk_ladder_thrust": {
+    "gravity": "aft-down (thrust, rings locked)",
+    "intersection_depth_m": {
+     "hands": 0.015,
+     "arms": 0.054,
+     "torso": 0.063,
+     "legs": 0.042,
+     "head": 0.028
+    },
+    "surfaces": {
+     "hands": "Crew_Trunk",
+     "arms": "Crew_Trunk_Ladder_Stile_1",
+     "torso": "Crew_Trunk_Ladder_Stile_1",
+     "legs": "Crew_Trunk_Ladder_Rungs",
+     "head": "Crew_Trunk_Arrest_Rail"
+    },
+    "contacts": [
+     "Crew_Trunk",
+     "Crew_Trunk_Ladder_Stile_1",
+     "Crew_Trunk_Ladder_Stile_2"
+    ],
+    "least_clearance_m": {
+     "head": 0.002,
+     "torso": 0.001,
+     "arms": 0.0,
+     "hands": 0.0,
+     "legs": 0.0,
+     "feet": 0.009
+    },
+    "hand_to_grip_m": {
+     "hand_right": 0.0,
+     "hand_left": 0.0
+    },
+    "foot_to_footing_m": {
+     "foot_right": 0.0,
+     "foot_left": 0.0
+    },
+    "reach_short_m": {},
+    "verdict": "FIT",
+    "clashes": {},
+    "stance_of_the_mannequin": {
+     "verdict": "CLASH",
+     "clashes": {
+      "arms": 0.054,
+      "torso": 0.063,
+      "legs": 0.042,
+      "head": 0.028
+     }
+    },
+    "standoff_to_clear_m": 0.17,
+    "knee_drop_m": 0.0,
+    "stance": "climber: ball of the foot on the rung, hips 0.17 m off the ladder",
+    "at_standoff": {
+     "least_clearance_m": {
+      "head": 0.006,
+      "torso": 0.04,
+      "arms": 0.0,
+      "hands": 0.0,
+      "legs": 0.077,
+      "feet": 0.003
+     },
+     "hand_to_grip_m": {
+      "hand_right": 0.0,
+      "hand_left": 0.0
+     },
+     "reach_short_m": {},
+     "contacts": [
+      "Crew_Trunk",
+      "Crew_Trunk_Ladder_Stile_1",
+      "Crew_Trunk_Ladder_Stile_2"
+     ],
+     "ball_of_foot_to_mannequin_footing_m": {
+      "right": 0.093,
+      "left": 0.093
+     }
+    }
+   },
+   "tube_elbow_thrust": {
+    "gravity": "aft-down (thrust, rings locked)",
+    "intersection_depth_m": {
+     "hands": 0.016,
+     "arms": 0.012,
+     "feet": 0.025
+    },
+    "surfaces": {
+     "hands": "Crew_Tube_1_1_Floor_Ladder_2_Stile_1",
+     "arms": "Crew_Tube_1_1_Floor_Ladder_2_Stile_2",
+     "feet": "Crew_Tube_1_1_Floor_Ladder_2_Rungs"
+    },
+    "contacts": [
+     "Crew_Tube_1_1_Floor_Ladder_2_Rungs",
+     "Crew_Tube_1_1_Floor_Ladder_2_Stile_1",
+     "Crew_Tube_1_1_Floor_Ladder_2_Stile_2"
+    ],
+    "least_clearance_m": {
+     "head": 0.396,
+     "torso": 0.03,
+     "arms": 0.0,
+     "hands": 0.0,
+     "legs": 0.022,
+     "feet": 0.001
+    },
+    "hand_to_grip_m": {
+     "hand_right": 0.0,
+     "hand_left": 0.0
+    },
+    "foot_to_footing_m": {
+     "foot_right": 0.0,
+     "foot_left": 0.0
+    },
+    "reach_short_m": {},
+    "verdict": "FIT",
+    "clashes": {}
+   },
+   "hatch_step_thrust": {
+    "gravity": "aft-down (thrust, rings locked)",
+    "intersection_depth_m": {
+     "legs": 0.036,
+     "hands": 0.019,
+     "arms": 0.009,
+     "feet": 0.01
+    },
+    "surfaces": {
+     "legs": "Sector_Hatch_Frame",
+     "hands": "Sector_Ladder_Stile_1",
+     "arms": "Sector_Ladder_Stile_1",
+     "feet": "Interior_Overhead"
+    },
+    "contacts": [
+     "Interior_Overhead",
+     "Sector_Ladder_Brackets",
+     "Sector_Ladder_Rungs",
+     "Sector_Ladder_Stile_1",
+     "Sector_Ladder_Stile_2"
+    ],
+    "least_clearance_m": {
+     "head": 0.215,
+     "torso": 0.208,
+     "arms": 0.002,
+     "hands": 0.0,
+     "legs": 0.0,
+     "feet": 0.0
+    },
+    "hand_to_grip_m": {
+     "hand_left": 0.0,
+     "hand_right": 0.119
+    },
+    "foot_to_footing_m": {
+     "foot_left": 0.011
+    },
+    "reach_short_m": {},
+    "verdict": "CLASH",
+    "clashes": {
+     "legs": 0.036
+    },
+    "standoff_to_clear_m": null,
+    "closest_stance": {
+     "back": 0.0,
+     "drop": 0.0,
+     "lateral": -0.12,
+     "clashes": {
+      "legs": 0.057
+     },
+     "surfaces": {
+      "legs": "Sector_Thrust_Step_Rungs"
+     },
+     "hand_to_grip_m": {
+      "hand_left": 0.0,
+      "hand_right": 0.036
+     }
+    }
+   },
+   "greeting_instructor": {
+    "gravity": "float (docked, rings stopped)",
+    "intersection_depth_m": {
+     "feet": 0.027
+    },
+    "surfaces": {
+     "feet": "Dock_Primary_Fit_Chamber_Frame_2_3"
+    },
+    "contacts": [
+     "Dock_Primary_Entry_Chamber",
+     "Dock_Primary_Fit_Chamber_Deck_Band",
+     "Dock_Primary_Fit_Chamber_Frame_2_3"
+    ],
+    "least_clearance_m": {
+     "head": 0.394,
+     "legs": 0.085,
+     "feet": 0.0
+    },
+    "hand_to_grip_m": {
+     "hand_right": 0.0,
+     "hand_left": 0.0
+    },
+    "foot_to_footing_m": {},
+    "reach_short_m": {},
+    "verdict": "FIT",
+    "clashes": {},
+    "proxy_render": "renders/p1/human_system/fit/instructor_greeting_instructor_proxy.png"
+   },
+   "greeting_newcomer": {
+    "gravity": "float (docked, rings stopped)",
+    "intersection_depth_m": {
+     "hands": 0.022,
+     "arms": 0.009
+    },
+    "surfaces": {
+     "hands": "Dock_Primary_Outer_Hatch_Frame",
+     "arms": "Dock_Primary_Outer_Hatch_Frame"
+    },
+    "contacts": [
+     "Dock_Primary_Entry_Chamber",
+     "Dock_Primary_Fit_Outer_Hatch_Mark",
+     "Dock_Primary_Outer_Hatch_Frame"
+    ],
+    "least_clearance_m": {
+     "torso": 0.292,
+     "head": 0.43,
+     "arms": 0.009,
+     "hands": 0.0,
+     "legs": 0.272
+    },
+    "hand_to_grip_m": {
+     "hand_right": 0.0,
+     "hand_left": 0.0
+    },
+    "foot_to_footing_m": {},
+    "reach_short_m": {},
+    "verdict": "FIT",
+    "clashes": {}
+   },
+   "couch_newcomer": {
+    "gravity": "radial-down (docked induction pose)",
+    "intersection_depth_m": {},
+    "surfaces": {},
+    "contacts": [],
+    "least_clearance_m": {
+     "head": 0.062,
+     "torso": 0.012,
+     "arms": 0.06,
+     "hands": 0.116,
+     "legs": 0.008,
+     "feet": 0.009
+    },
+    "hand_to_grip_m": {},
+    "foot_to_footing_m": {},
+    "reach_short_m": {},
+    "verdict": "FIT",
+    "clashes": {}
+   }
+  },
+  "newcomer": {
+   "entry_chamber": {
+    "gravity": "float (docked, rings stopped)",
+    "intersection_depth_m": {
+     "hands": 0.006
+    },
+    "surfaces": {
+     "hands": "Dock_Primary_Handrail_1"
+    },
+    "contacts": [
+     "Dock_Primary_Handrail_1"
+    ],
+    "least_clearance_m": {
+     "head": 0.285,
+     "arms": 0.157,
+     "torso": 0.49,
+     "hands": 0.0,
+     "legs": 0.197,
+     "feet": 0.109
+    },
+    "hand_to_grip_m": {
+     "hand_left": 0.162
+    },
+    "foot_to_footing_m": {
+     "foot_left": 0.0,
+     "foot_right": 0.0
+    },
+    "reach_short_m": {},
+    "verdict": "FIT",
+    "clashes": {}
+   },
+   "trunk": {
+    "gravity": "float (docked, rings stopped)",
+    "intersection_depth_m": {
+     "hands": 0.016,
+     "arms": 0.007
+    },
+    "surfaces": {
+     "hands": "Crew_Trunk_Handrail_2_2",
+     "arms": "Crew_Trunk_Handrail_2_2"
+    },
+    "contacts": [
+     "Crew_Trunk",
+     "Crew_Trunk_Handrail_2_2",
+     "Structural_Spine"
+    ],
+    "least_clearance_m": {
+     "head": 0.153,
+     "torso": 0.118,
+     "arms": 0.0,
+     "hands": 0.0,
+     "legs": 0.119,
+     "feet": 0.05
+    },
+    "hand_to_grip_m": {
+     "hand_right": 0.0
+    },
+    "foot_to_footing_m": {
+     "foot_left": 0.012
+    },
+    "reach_short_m": {
+     "arm_l": 0.003
+    },
+    "verdict": "FIT",
+    "clashes": {}
+   },
+   "vestibule_ring_a": {
+    "gravity": "float (despun drum)",
+    "intersection_depth_m": {
+     "hands": 0.015,
+     "arms": 0.009
+    },
+    "surfaces": {
+     "hands": "Crew_Vestibule_1_Transfer_Panel",
+     "arms": "Crew_Vestibule_1_Handrail_1"
+    },
+    "contacts": [
+     "Crew_Vestibule_1",
+     "Crew_Vestibule_1_Fit_Panel_Bezel",
+     "Crew_Vestibule_1_Handrail_1",
+     "Crew_Vestibule_1_Handrail_1_Bracket_2",
+     "Crew_Vestibule_1_Transfer_Panel"
+    ],
+    "least_clearance_m": {
+     "head": 0.152,
+     "torso": 0.272,
+     "arms": 0.001,
+     "hands": 0.0,
+     "legs": 0.339,
+     "feet": 0.165
+    },
+    "hand_to_grip_m": {
+     "hand_left": 0.0
+    },
+    "foot_to_footing_m": {
+     "foot_left": 0.0,
+     "foot_right": 0.0
+    },
+    "reach_short_m": {},
+    "verdict": "FIT",
+    "clashes": {}
+   },
+   "tube_ladder_ring_a": {
+    "gravity": "radial-down (ring spinning)",
+    "intersection_depth_m": {
+     "hands": 0.019,
+     "arms": 0.032,
+     "torso": 0.051,
+     "head": 0.032,
+     "legs": 0.037
+    },
+    "surfaces": {
+     "hands": "Crew_Tube_1_1_Ladder_Stile_2",
+     "arms": "Crew_Tube_1_1_Ladder_Stile_2",
+     "torso": "Crew_Tube_1_1_Ladder_Stile_2",
+     "head": "Crew_Tube_1_1_Arrest_Rail",
+     "legs": "Crew_Tube_1_1_Ladder_Rungs"
+    },
+    "contacts": [
+     "Crew_Tube_1_1",
+     "Crew_Tube_1_1_Ladder_Stile_1",
+     "Crew_Tube_1_1_Ladder_Stile_2"
+    ],
+    "least_clearance_m": {
+     "head": 0.0,
+     "torso": 0.001,
+     "arms": 0.0,
+     "hands": 0.0,
+     "legs": 0.001,
+     "feet": 0.009
+    },
+    "hand_to_grip_m": {
+     "hand_left": 0.0,
+     "hand_right": 0.0
+    },
+    "foot_to_footing_m": {
+     "foot_right": 0.0,
+     "foot_left": 0.0
+    },
+    "reach_short_m": {},
+    "verdict": "FIT",
+    "clashes": {},
+    "stance_of_the_mannequin": {
+     "verdict": "CLASH",
+     "clashes": {
+      "arms": 0.032,
+      "torso": 0.051,
+      "head": 0.032,
+      "legs": 0.037
+     }
+    },
+    "standoff_to_clear_m": 0.15,
+    "knee_drop_m": 0.0,
+    "stance": "climber: ball of the foot on the rung, hips 0.15 m off the ladder",
+    "at_standoff": {
+     "least_clearance_m": {
+      "head": 0.007,
+      "torso": 0.027,
+      "arms": 0.0,
+      "hands": 0.0,
+      "legs": 0.064,
+      "feet": 0.006
+     },
+     "hand_to_grip_m": {
+      "hand_left": 0.0,
+      "hand_right": 0.0
+     },
+     "reach_short_m": {},
+     "contacts": [
+      "Crew_Tube_1_1",
+      "Crew_Tube_1_1_Ladder_Stile_1",
+      "Crew_Tube_1_1_Ladder_Stile_2"
+     ],
+     "ball_of_foot_to_mannequin_footing_m": {
+      "right": 0.091,
+      "left": 0.091
+     }
+    }
+   },
+   "sector_landing": {
+    "gravity": "radial-down (ring spinning)",
+    "intersection_depth_m": {
+     "hands": 0.015,
+     "arms": 0.007,
+     "feet": 0.007
+    },
+    "surfaces": {
+     "hands": "Sector_Ladder_Stile_1",
+     "arms": "Sector_Ladder_Stile_1",
+     "feet": "Interior_Deck"
+    },
+    "contacts": [
+     "Interior_Deck",
+     "Sector_Ladder_Stile_1",
+     "Sector_Ladder_Stile_2"
+    ],
+    "least_clearance_m": {
+     "head": 0.293,
+     "torso": 0.296,
+     "arms": 0.003,
+     "hands": 0.0,
+     "legs": 0.088,
+     "feet": 0.0
+    },
+    "hand_to_grip_m": {
+     "hand_right": 0.004,
+     "hand_left": 0.004
+    },
+    "foot_to_footing_m": {
+     "foot_right": 0.0,
+     "foot_left": 0.0
+    },
+    "reach_short_m": {},
+    "verdict": "FIT",
+    "clashes": {}
+   },
+   "refuge": {
+    "gravity": "float (docked, rings stopped)",
+    "intersection_depth_m": {
+     "hands": 0.017,
+     "arms": 0.011
+    },
+    "surfaces": {
+     "hands": "Refuge_Hoop_Rail_Aft",
+     "arms": "Refuge_Hoop_Rail_Aft"
+    },
+    "contacts": [
+     "Refuge_Hoop_Rail_Aft",
+     "Refuge_Inner_Wall"
+    ],
+    "least_clearance_m": {
+     "head": 0.21,
+     "torso": 0.085,
+     "arms": 0.003,
+     "hands": 0.0,
+     "legs": 0.118,
+     "feet": 0.317
+    },
+    "hand_to_grip_m": {
+     "hand_left": 0.0
+    },
+    "foot_to_footing_m": {
+     "foot_right": 0.0,
+     "foot_left": 0.0
+    },
+    "reach_short_m": {},
+    "verdict": "FIT",
+    "clashes": {}
+   },
+   "trunk_ladder_thrust": {
+    "gravity": "aft-down (thrust, rings locked)",
+    "intersection_depth_m": {
+     "hands": 0.018,
+     "arms": 0.032,
+     "torso": 0.05,
+     "head": 0.034,
+     "legs": 0.037
+    },
+    "surfaces": {
+     "hands": "Crew_Trunk_Ladder_Stile_2",
+     "arms": "Crew_Trunk_Ladder_Stile_2",
+     "torso": "Crew_Trunk_Ladder_Stile_1",
+     "head": "Crew_Trunk_Arrest_Rail",
+     "legs": "Crew_Trunk_Ladder_Rungs"
+    },
+    "contacts": [
+     "Crew_Trunk",
+     "Crew_Trunk_Ladder_Stile_1",
+     "Crew_Trunk_Ladder_Stile_2"
+    ],
+    "least_clearance_m": {
+     "head": 0.0,
+     "torso": 0.002,
+     "arms": 0.0,
+     "hands": 0.001,
+     "legs": 0.002,
+     "feet": 0.007
+    },
+    "hand_to_grip_m": {
+     "hand_right": 0.0,
+     "hand_left": 0.0
+    },
+    "foot_to_footing_m": {
+     "foot_right": 0.0,
+     "foot_left": 0.0
+    },
+    "reach_short_m": {},
+    "verdict": "FIT",
+    "clashes": {},
+    "stance_of_the_mannequin": {
+     "verdict": "CLASH",
+     "clashes": {
+      "arms": 0.032,
+      "torso": 0.05,
+      "head": 0.034,
+      "legs": 0.037
+     }
+    },
+    "standoff_to_clear_m": 0.14,
+    "knee_drop_m": 0.0,
+    "stance": "climber: ball of the foot on the rung, hips 0.14 m off the ladder",
+    "at_standoff": {
+     "least_clearance_m": {
+      "head": 0.0,
+      "torso": 0.018,
+      "arms": 0.0,
+      "hands": 0.0,
+      "legs": 0.058,
+      "feet": 0.004
+     },
+     "hand_to_grip_m": {
+      "hand_right": 0.0,
+      "hand_left": 0.0
+     },
+     "reach_short_m": {},
+     "contacts": [
+      "Crew_Trunk",
+      "Crew_Trunk_Ladder_Stile_1",
+      "Crew_Trunk_Ladder_Stile_2"
+     ],
+     "ball_of_foot_to_mannequin_footing_m": {
+      "right": 0.092,
+      "left": 0.092
+     }
+    }
+   },
+   "tube_elbow_thrust": {
+    "gravity": "aft-down (thrust, rings locked)",
+    "intersection_depth_m": {
+     "hands": 0.017,
+     "arms": 0.011,
+     "feet": 0.019
+    },
+    "surfaces": {
+     "hands": "Crew_Tube_1_1_Floor_Ladder_2_Stile_2",
+     "arms": "Crew_Tube_1_1_Floor_Ladder_2_Stile_1",
+     "feet": "Crew_Tube_1_1_Floor_Ladder_2_Rungs"
+    },
+    "contacts": [
+     "Crew_Tube_1_1_Floor_Ladder_2_Rungs",
+     "Crew_Tube_1_1_Floor_Ladder_2_Stile_1",
+     "Crew_Tube_1_1_Floor_Ladder_2_Stile_2"
+    ],
+    "least_clearance_m": {
+     "head": 0.343,
+     "torso": 0.032,
+     "arms": 0.001,
+     "hands": 0.0,
+     "legs": 0.021,
+     "feet": 0.0
+    },
+    "hand_to_grip_m": {
+     "hand_right": 0.0,
+     "hand_left": 0.0
+    },
+    "foot_to_footing_m": {
+     "foot_right": 0.0,
+     "foot_left": 0.0
+    },
+    "reach_short_m": {},
+    "verdict": "FIT",
+    "clashes": {}
+   },
+   "hatch_step_thrust": {
+    "gravity": "aft-down (thrust, rings locked)",
+    "intersection_depth_m": {
+     "legs": 0.034,
+     "hands": 0.014,
+     "arms": 0.012
+    },
+    "surfaces": {
+     "legs": "Sector_Hatch_Frame",
+     "hands": "Sector_Ladder_Stile_1",
+     "arms": "Sector_Ladder_Stile_1"
+    },
+    "contacts": [
+     "Sector_Ladder_Brackets",
+     "Sector_Ladder_Rungs",
+     "Sector_Ladder_Stile_1"
+    ],
+    "least_clearance_m": {
+     "head": 0.236,
+     "torso": 0.172,
+     "arms": 0.0,
+     "hands": 0.0,
+     "legs": 0.0,
+     "feet": 0.012
+    },
+    "hand_to_grip_m": {
+     "hand_left": 0.0,
+     "hand_right": 0.173
+    },
+    "foot_to_footing_m": {
+     "foot_left": 0.012
+    },
+    "reach_short_m": {},
+    "verdict": "CLASH",
+    "clashes": {
+     "legs": 0.034
+    },
+    "standoff_to_clear_m": null,
+    "closest_stance": {
+     "back": 0.0,
+     "drop": 0.0,
+     "lateral": -0.12,
+     "clashes": {
+      "legs": 0.058
+     },
+     "surfaces": {
+      "legs": "Sector_Thrust_Step_Rungs"
+     },
+     "hand_to_grip_m": {
+      "hand_left": 0.0,
+      "hand_right": 0.096
+     }
+    }
+   },
+   "greeting_instructor": {
+    "gravity": "float (docked, rings stopped)",
+    "intersection_depth_m": {
+     "feet": 0.023
+    },
+    "surfaces": {
+     "feet": "Dock_Primary_Fit_Chamber_Frame_2_3"
+    },
+    "contacts": [
+     "Dock_Primary_Entry_Chamber",
+     "Dock_Primary_Fit_Chamber_Deck_Band",
+     "Dock_Primary_Fit_Chamber_Frame_2_3"
+    ],
+    "least_clearance_m": {
+     "head": 0.47,
+     "legs": 0.092,
+     "feet": 0.0
+    },
+    "hand_to_grip_m": {
+     "hand_right": 0.003,
+     "hand_left": 0.0
+    },
+    "foot_to_footing_m": {},
+    "reach_short_m": {},
+    "verdict": "FIT",
+    "clashes": {}
+   },
+   "greeting_newcomer": {
+    "gravity": "float (docked, rings stopped)",
+    "intersection_depth_m": {
+     "hands": 0.019
+    },
+    "surfaces": {
+     "hands": "Dock_Primary_Outer_Hatch_Frame"
+    },
+    "contacts": [
+     "Dock_Primary_Entry_Chamber",
+     "Dock_Primary_Fit_Outer_Hatch_Mark",
+     "Dock_Primary_Outer_Hatch_Frame"
+    ],
+    "least_clearance_m": {
+     "torso": 0.314,
+     "head": 0.443,
+     "arms": 0.012,
+     "hands": 0.0,
+     "legs": 0.282
+    },
+    "hand_to_grip_m": {
+     "hand_right": 0.0,
+     "hand_left": 0.0
+    },
+    "foot_to_footing_m": {},
+    "reach_short_m": {},
+    "verdict": "FIT",
+    "clashes": {},
+    "proxy_render": "renders/p1/human_system/fit/newcomer_greeting_newcomer_proxy.png"
+   },
+   "couch_newcomer": {
+    "gravity": "radial-down (docked induction pose)",
+    "intersection_depth_m": {},
+    "surfaces": {},
+    "contacts": [],
+    "least_clearance_m": {
+     "head": 0.051,
+     "torso": 0.0,
+     "arms": 0.053,
+     "hands": 0.115,
+     "legs": 0.011,
+     "feet": 0.011
+    },
+    "hand_to_grip_m": {},
+    "foot_to_footing_m": {},
+    "reach_short_m": {},
+    "verdict": "FIT",
+    "clashes": {}
+   }
+  }
+ }
+}

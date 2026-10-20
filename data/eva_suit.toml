@@ -1,0 +1,415 @@
+# WAYFARER_EVA_Y155: the guided-EVA pressure suit and the exterior training route (EVA-001, docs/EVA.md).
+# Owners: S&E 43_EVA_SUIT_REQUIREMENTS (EVA-001..039) and 44_EVA_SUIT_BLENDER (ASSET/RIG/ANIM/SIM/EXP/QA/RUN) own the ship suit contract;
+# Technology 53_EVA_SUIT_SYSTEMS the generic science; Tale 26_GUIDED_EVA the tour; Art Style / Fashion the look. Evidence: the live Drive
+# read of 2026-10-10 (references/EVA_SOURCES_2026-10-10.md; S&E modified 19:52Z, Technology 19:39Z, Tale 19:52Z); formal capture
+# references/drive_capture_2026-10-11 (S&E 21:39Z, Technology 19:39Z, Tale 21:39Z; every value below matches it). Read by src/wayfarer/eva_suit.py and eva_route.py; built by src/wayfarer/build/eva_suit.py.
+#
+# Rules (EVA-034, RIG-01, RUN-012, RUN-016): every physical quantity the owners have not released is null with status OPEN, never a guess.
+# Every dimension below is a PROTOTYPE display or fit choice made here, labelled as such, and is never a suit specification. Nothing here
+# is CERTIFIED (QA-03). Separate from data/wayfarer_3d.toml on purpose: the suit never changes spacecraft geometry.
+
+[suit]
+id = "WAYFARER_EVA_Y155"
+title = "Wayfarer EVA service suit, Y155 Great Union (PROTOTYPE)"
+status = "PROTOTYPE"
+certification = "NOT CERTIFIED (44!40 QA-03): no owner-approved dimensional or physical values"
+architecture = "conventional gas-pressure suit: LCVG, continuous bladder, restraint, rigid hard upper torso, soft articulated limbs with bearings, sealed gloves and helmet, dorsal PLSS (EVA-005, EVA-021, Technology 53!3, 53!10)"
+mcp = "OPTION / NOT BASELINE (EVA-006, 53!4): not modelled as a pressure layer"
+source_ref = "S&E 43!2:40, 44!2:60; Technology 53!2:21"
+
+# The data contract of EVA-039 / RIG-01: value, unit, status and source per field; unknown stays null and the runtime treats it as unsafe.
+[telemetry]
+cabin_pressure_kpa = { value = 80.0, unit = "kPa", status = "BASELINE", source = "S&E 43!4 EVA-003 (12_HABITAT_LAYOUT)" }
+cabin_o2_partial_kpa = { value = 20.0, unit = "kPa", status = "BASELINE", source = "S&E 43!4 EVA-003" }
+suit_pressure_kpa = { value = "", unit = "kPa", status = "OPEN", note = "trade study 30-40 kPa, not a setpoint", source = "S&E 43!5 EVA-004; Technology 53!3" }
+suit_o2_fraction = { value = "", unit = "1", status = "OPEN", note = "oxygen-rich, no fraction released", source = "S&E 43!5 EVA-004" }
+prebreathe_protocol = { value = "", unit = "min", status = "OPEN", note = "medical owner; no clock is shown", source = "S&E 43!5 EVA-004, 44!22 ANIM-02; Tale 26!6" }
+suit_dry_mass_kg = { value = "", unit = "kg", status = "OPEN", source = "S&E 43!29 EVA-028" }
+eva_duration_h = { value = "", unit = "h", status = "OPEN", source = "S&E 43!29 EVA-028" }
+o2_primary_reserve = { value = "", unit = "kg", status = "OPEN", source = "S&E 43!9 EVA-008" }
+o2_emergency_reserve = { value = "", unit = "min", status = "OPEN", source = "S&E 43!9 EVA-008, 43!27 EVA-026" }
+co2_removal_capacity = { value = "", unit = "h", status = "OPEN", source = "S&E 43!9 EVA-008; Technology 53!7" }
+heat_rejection_w = { value = "", unit = "W", status = "OPEN", source = "S&E 43!10 EVA-009; Technology 53!9" }
+leak_rate = { value = "", unit = "kPa/min", status = "OPEN", source = "S&E 43!6 EVA-005" }
+radiation_dose_budget = { value = "", unit = "mSv", status = "OPEN", source = "S&E 43!14 EVA-013; Technology 53!13" }
+radiator_proximity_gate = { value = "", unit = "m", status = "OPEN", note = "released safe-state temperature / view-factor / radiant budget required", source = "S&E 43!36 EVA-035, 43!11 EVA-010" }
+ring_keepout_m = { value = "", unit = "m", status = "OPEN", note = "suit and tether sweep, not static hull", source = "S&E 43!16 EVA-015" }
+debris_condition = { value = "", unit = "", status = "OPEN", note = "dynamic thresholds await owner values", source = "S&E 43!39 EVA-038, 43!13 EVA-012" }
+tether_length_m = { value = "", unit = "m", status = "OPEN", source = "S&E 44!31 SIM-03" }
+telemetry_status = { value = "EXAMPLE", unit = "", status = "PROTOTYPE", note = "HUD runs in explicit example mode (EVA-039)", source = "S&E 43!40 EVA-039" }
+
+# Assembly tree (RUN-005): one collection per assembly, every part a stable semantic id. `asset` is the 44 ASSET row it answers.
+[assemblies]
+PRESSURE = { title = "Pressure envelope", asset = ["ASSET-02", "ASSET-03"], parts = ["SUIT_PRESSURE_HARD_TORSO", "SUIT_PRESSURE_BLADDER", "SUIT_NECK_RING", "SUIT_WAIST_RING"] }
+PROTECTION = { title = "Restraint and outer protective layers", asset = ["ASSET-04", "ASSET-12"], parts = ["SUIT_RESTRAINT_LAYERS", "MMOD_OUTER_SHELL"] }
+JOINTS = { title = "Bearings, gloves and boots", asset = ["ASSET-05", "ASSET-07", "ASSET-08"], parts = ["SUIT_JOINTS", "SUIT_GLOVES", "SUIT_BOOTS"] }
+HELMET = { title = "Helmet, visor and display", asset = ["ASSET-06"], parts = ["SUIT_HELMET_VISOR"] }
+PLSS = { title = "Primary and emergency life support", asset = ["ASSET-09"], parts = ["PLSS_PRIMARY"] }
+COOLING = { title = "Cooling and ventilation garment", asset = ["ASSET-11"], parts = ["LCVG_INNER"] }
+TETHERS = { title = "Tethers and safety connectors", asset = ["ASSET-13"], parts = ["TETHERS"] }
+TOOLS = { title = "Tools and maintenance hardware", asset = ["ASSET-14"], parts = ["TOOLS"] }
+MARKINGS = { title = "Safety markings", asset = ["ASSET-15"], parts = ["SAFETY_MARKINGS"] }
+RIG = { title = "Skeleton, sockets and animation helpers", asset = ["RIG-02", "RIG-03", "RIG-04"], parts = ["SOCKETS"] }
+
+# Soft layers: offset shells of the wearer's own body, skinned with its weights, so they follow every existing action and corrective
+# (RIG-02/03). Offsets in metres outward along the body normal, PROTOTYPE fit allowances (no layup thickness is sourced).
+[layers]
+LCVG_INNER = { offset_m = 0.006, smooth = 2, job = "liquid cooling and ventilation garment: water tubing and vent ducts against the skin (EVA-009, 53!8)", show = "cutaway" }
+SUIT_PRESSURE_BLADDER = { offset_m = 0.020, smooth = 8, job = "continuous gas bladder: the pressure boundary (EVA-005, 44!4)", show = "cutaway" }
+MMOD_OUTER_SHELL = { offset_m = 0.034, smooth = 14, job = "restraint layer plus replaceable thermal/MMOD outer textile with abrasion patches (EVA-005, 44!5, 44!13, 53!11)", show = "always" }
+# The hands keep their fingers (less smoothing, thinner); the feet get the boot allowance.
+region_offset_m = { hand = 0.011, foot = 0.026 }
+region_smooth = { hand = 1, foot = 4 }
+# Body faces the helmet covers (the head stays a separate, visible body inside the helmet).
+uncovered_groups = ["head", "scalp", "ears", "lips"]
+
+# Rigid parts: sized from the wearer's measured body at build time (eva_suit.rigid_parts). Margins are PROTOTYPE fit allowances.
+[rigid]
+hut_margin_m = 0.045               # hard upper torso shell clear of the chest of the outer layer
+hut_shell_m = 0.010                # display shell thickness
+helmet_clearance_m = 0.040         # head-to-shell clearance for head motion inside the torso-fixed helmet
+helmet_forward_m = 0.030           # helmet centre ahead of the head centre (face room)
+visor_half_angle_deg = [62.0, 40.0]   # visor window half-angles (horizontal, vertical) about the helmet's forward axis: sightline (SIM-04), PROTOTYPE
+bearing_minor_m = 0.016            # rotary bearing ring section radius (shoulder, upper arm, wrist, hip, thigh, ankle), PROTOTYPE
+bearing_clearance_m = 0.0          # bearing ring seated into the outer layer (its section centre 0.2 section radii inside the layer)
+# PLSS display envelope: width, depth, height (m). PROTOTYPE, of the order of the operational EMU's pack; packaging, mass and volume are
+# OPEN (44!10 ASSET-09, EVA-024, EVA-028). The fit check reports the largest depth each bottleneck admits instead of shrinking it (RUN-010).
+plss_size_m = [0.50, 0.22, 0.62]
+plss_compact_size_m = [0.58, 0.14, 0.56]   # ASSET-10 PLSS_COMPACT_STUDY: distributed alternative, same contents, shown only as a study
+dcm_size_m = [0.22, 0.08, 0.12]    # chest display and control module
+boot_sole_m = [0.12, 0.30, 0.025]  # rigid service sole with toe hook (foot-restraint compatible, 44!9)
+
+# Suit mobility used to author the EVA actions (ANIM-04..08). Display limits of a pressurized soft joint, PROTOTYPE: joint torque and
+# range are OPEN (EVA-033, 44!6 "work against real suit joint torque limits"). Tests check the actions stay inside them.
+[mobility]
+elbow_max_deg = 115.0
+knee_max_deg = 95.0
+shoulder_flex_max_deg = 120.0
+head_in_helmet_max_deg = 20.0      # the helmet is fixed to the torso; the head turns inside it
+translation_speed_m_s = 0.20       # display pace of hand-over-hand translation (gameplay tuning, RUN-016), not an EVA rate
+abort_speed_m_s = 0.32
+hand_stride_m = 0.50
+
+# Variants (EXP-03): one assembly sized to each wearer; markings differ. Identity stays OPEN (Tale 26!18, WTF-16).
+[variant.instructor]
+wearer = "instructor"              # data/characters.toml [human.instructor]
+markings = "Great Union deep-blue identification panels (helmet band, chest, upper arms), GUIDED EVA INSTRUCTOR role band, suit serial PROTOTYPE"
+role_band = "gu_blue"
+[variant.newcomer]
+wearer = "newcomer"
+markings = "neutral grey visitor markings, GUIDED EVA VISITOR band, no institutional plates"
+role_band = "visitor_grey"
+
+# Palette (EVA-025, 53!20, 44!57 RUN-017). PROTOTYPE colours until Art Style and Fashion define them.
+[palette]
+shell = [0.80, 0.80, 0.77]         # matte off-white ceramic-composite / textile outer
+shell_grey = [0.52, 0.53, 0.53]
+joint = [0.09, 0.095, 0.11]        # dark elastomer joints, bearings
+bladder = [0.62, 0.36, 0.20]       # cutaway: urethane-coated bladder
+lcvg = [0.36, 0.55, 0.70]          # cutaway: cooling garment
+gu_blue = [0.04, 0.10, 0.32]
+visitor_grey = [0.66, 0.68, 0.70]
+safety_orange = [0.92, 0.36, 0.06] # tethers and hazard marks only
+visor = [0.12, 0.10, 0.06]         # gold-tinted glare visor
+glass = [0.55, 0.62, 0.66]         # clear pressure visor
+metal = [0.62, 0.63, 0.64]
+
+# The guided exterior route (TRAINING SIMULATION): built by eva_route.py from the ship spec. No exterior rail, anchor or EVA hatch geometry
+# is released (14_HULL_SERVICE has none; 12A SP-51 is HIGH / STRUCTURE OPEN), so per 44!51 RUN-011 every rail, anchor and hold point here
+# is PROTOTYPE and the route is labelled simulation-only until the owners release anchors and hazard limits (RUN-012).
+[route]
+mode = "TRAINING_SIMULATION"
+configuration = "EVA"              # 11!5: drive OFF, rings may rotate, blades fixed with restricted output, EYE Quiet Watch
+rail_standoff_m = 0.15             # handrail axis above the collar skin, PROTOTYPE
+rail_azimuth_deg = 50.0            # along the airlock's azimuth (prototype.airlock_angle_deg)
+anchor_spacing_m = 1.5             # PROTOTYPE anchor pitch along the rail
+tether_reach_m = 2.0               # gameplay tuning: how far a clipped tether lets the body move (tether_length_m is OPEN)
+aft_hold_x_m = 95.6                # aft hold: the last anchor short of the forward collar's aft edge
+forward_hold_x_m = 106.0           # forward hold under the shield silhouette
+
+# Stations: Tale 26_GUIDED_EVA SCRIPT-05..11 (WORKING SCRIPT; 26!26 APPROVED STAGING / WORDING WORKING; 43 EVA-052 provisional). `what`, `why`
+# and `safety` are the Tale lines verbatim (the "What:" / "Why:" prefixes dropped); Tale owns them and updates them when releases change.
+# `show` names the runtime demonstration and `show_text` says what it shows; `script_show` keeps Tale's Show instruction for reference.
+# No line states an unreleased number (26!26). Each station opens at its hold (airlock stations by phase: suit prep, airlock, return).
+[[station]]
+id = "S1_SUIT_PREP"
+title = "Suit preparation (SP-12)"
+hold = "airlock"
+tour = "TOUR-05"
+script = "SCRIPT-05"
+what = "This pressure bladder keeps breathing gas around the body; the outer layers protect it."
+why = "Cabin gas contains nitrogen, so changing to a lower-pressure suit requires planned preparation; joint and pack design trade mobility against pressure integrity."
+safety = "Guide / character remain in SP-12 until all required checks."
+show = "suit_cutaway"
+show_text = "Cutaway of the instructor's suit, step by step: outer thermal/MMOD layer, pressure bladder and restraint, cooling garment, then the backpack: oxygen, CO2 removal, cooling. No prebreathe countdown: the protocol is not released."
+script_show = "Show: Toggle pressure boundary, suit life-support, O2 / CO2 / cooling cutaways. Do NOT run an invented prebreathe countdown."
+sources = "Tale 26!19 SCRIPT-05; S&E 43 EVA-003..009, EVA-040, EVA-042; 45 P-01..P-10, O-01; 12A SP-12"
+[[station]]
+id = "S2_AIRLOCK"
+title = "Airlock operation (SP-11)"
+hold = "airlock"
+tour = "TOUR-06"
+script = "SCRIPT-06"
+what = "The EVA lock is a pressure-isolated passage between cabin and vacuum."
+why = "Inner and outer doors cannot both be open while pressure must be retained."
+safety = "Training simulation until SP-11 geometry and gas system are released."
+show = "airlock_states"
+show_text = "The two-door interlock: inner hatch, chamber, outer hatch, and the tether check before the outer hatch opens. Pressure equalization is shown generically; durations are not released. The chamber drawn is a study candidate, not ship geometry."
+script_show = "Show: Two-door state, pressure equalization illustrated generically, tether check; durations OPEN."
+sources = "Tale 26!20 SCRIPT-06; S&E 43 EVA-007, EVA-043, EVA-044, EVA-056..058; 12A SP-11; references/p1_eva_sp11.json (EVA-003 STUDY)"
+[[station]]
+id = "S3_RINGS"
+title = "Rotating rings"
+hold = "aft_hold"
+tour = "TOUR-07"
+script = "SCRIPT-07"
+what = "Two 60m habitat rings can counter-rotate to create artificial gravity in occupied sectors."
+why = "Stationary service equipment and moving habitat structures require isolated transfer and protective keepouts."
+safety = "Never claim static gap alone establishes EVA safety."
+show = "ring_sweep"
+show_text = "The rings turn at their exported rate and their sweep is drawn as a volume no one enters. The distance from this hold is measured; it is not a safety margin."
+script_show = "Show: Real ring motion state and non-enterable sweep volume; rings may rotate during EVA."
+sources = "Tale 26!21 SCRIPT-07; S&E 43 EVA-015, EVA-046; 11!5; 15 E3; 45 O-05"
+[[station]]
+id = "S4_HEAT"
+title = "Heat rejection"
+hold = "aft_hold"
+tour = "TOUR-08"
+script = "SCRIPT-08"
+what = "Radiators reject heat by infrared radiation into space, not by convection to vacuum."
+why = "Heat from the hot blades makes nearby human maintenance dangerous long after a drive shutdown."
+safety = "No unqualified approach to current 1800K blades."
+show = "radiator_feed"
+show_text = "Remote crawler-camera view (simulated) along the nearest blade, with the thermal gate at NO-GO: the blade faces this hold can see, and a view-factor readback for teaching. No close approach."
+script_show = "Show: Remote camera, heat/radiance visual and view-factor education with NO-GO state; no close-up EVA."
+sources = "Tale 26!22 SCRIPT-08; S&E 43 EVA-010, EVA-035, EVA-045; 45 H-01..H-13; 40_THERMAL"
+[[station]]
+id = "S5_DRIVE"
+title = "Fiji drive and propulsion"
+hold = "aft_hold"
+tour = "TOUR-09"
+script = "SCRIPT-09"
+what = "One fusion source feeds a controlled drive-lattice and magnetic manifold with four nozzle channels."
+why = "Magnetic guidance and heat rejection are linked design compromises, not effortless engine magic."
+safety = "Main drive OFF during routine EVA; display of active drive is recorded/virtual."
+show = "drive_cutaway"
+show_text = "Remote view of the drive section (simulated). The drive is OFF in the EVA configuration; the crew specialists explain the lattice and the reactor."
+script_show = "Show: Power-to-plasma flow diagram or approved owner cutaway; no made-up energy flux."
+sources = "Tale 26!23 SCRIPT-09; S&E 43 EVA-011; 06_PROPULSION_ARCHITECTURE; Fiji 25_MAGNETIC_MANIFOLD; Tale S004C"
+[[station]]
+id = "S6_BROW_EYE"
+title = "Brow and EYE"
+hold = "forward_hold"
+tour = "TOUR-10"
+script = "SCRIPT-10"
+what = "The fixed forward Brow protects the ship; four recessed facets form one biohybrid EYE."
+why = "Hypervelocity debris and sensor vulnerability require layered forward shielding and intelligent detection/navigation."
+safety = "No forward exterior ram exposure at high speed."
+show = "forward_feed"
+show_text = "Remote camera view (simulated) of the Brow and the EYE's sealed facet apertures from ahead; no person goes there. The navigator's view is Seraph's to show."
+script_show = "Show: Sealed shutter apertures and Seraph's approved navigator view via remote/hologram."
+sources = "Tale 26!24 SCRIPT-10; S&E 43 EVA-012, EVA-038, EVA-047; 14!13..15; Wayfarer Eye"
+[[station]]
+id = "S7_RETURN"
+title = "Return and debrief"
+hold = "airlock"
+tour = "TOUR-11"
+script = "SCRIPT-11"
+what = "A tethered return, sealed hatch and repressurization end the EVA safely."
+why = "Every fault has finite reserve and the crew needs a planned route home."
+safety = "Guide and visitor depart before First Ignition as S004D requires."
+show = "tether_handoff"
+show_text = "Two-tether transfer back to the hatch, and the abort drill (X): the same route in reverse, anchor by anchor. Tagged SIMULATION_ONLY while gate inputs are unknown."
+script_show = "Show: Two-tether transfer and emergency abort training, tagged SIMULATION_ONLY when gate inputs unknown."
+sources = "Tale 26!25 SCRIPT-11; S&E 43 EVA-014, EVA-054; 44 ANIM-06, ANIM-08; Tale 11!27 S004D"
+
+# ---------------------------------------------------------------------------------------------------------------------------------
+# EVA-002 (S&E 43 EVA-040..055, 44 EVA2-001..008, 45_EVA_ENGINEERING_CASES; Tale 26 SCRIPT-05..11; live read 2026-10-10 21:39Z,
+# references/EVA2_SOURCES_2026-10-10.md; captured in references/drive_capture_2026-10-11). Read by eva_access.py (suited access, SP-11/12/13 study) and eva_route.py (gates, modes).
+
+# 45 P-06..P-10: ONE working trade case for pressure-shell and PLSS interface studies inside the 30-40 kPa trade space (EVA-004, EVA-042).
+# Shown labelled; never a setpoint, never a prebreathe or exposure clearance. The runtime must not animate consumption from it.
+[reference_case]
+id = "45 P-06..P-10"
+status = "WORKING TRADE CASE"
+suit_pressure_kpa = 40.0           # P-06, absolute
+suit_o2_fraction = 1.0             # P-07, pure O2 reference only
+suit_o2_partial_kpa = 40.0         # P-08 (DERIVED TRADE CASE)
+cabin_to_suit_drop_kpa = 40.0      # P-09 (DERIVED TRADE CASE): not a DCS risk or a prebreathe time
+shell_differential_kn_m2 = 40.0    # P-10 (DERIVED TRADE CASE): not a part-level load
+cabin_n2_partial_kpa = 60.0        # P-05 (DERIVED): illustrative starting condition, not tissue kinetics
+note = "40 kPa absolute, pure O2: a study case only. Not flight-certified; prebreathe, DCS risk, O2 exposure, flammability and consumables stay OPEN (43 EVA-042, EVA-051; 45 O-01..O-03)."
+
+# 45 H-01..H-13: the thermal gate's inputs. Known values are source links; the rest is OPEN and the flag stays HOLD (EVA-045).
+[thermal_case]
+blade_temperature_k = { value = 1800.0, status = "SOURCE LINK / WORKING", source = "45 H-01 (40_THERMAL!B8); post-shutdown T(t) OPEN" }
+blade_emissivity = { value = 0.9, status = "SOURCE LINK / WORKING", source = "45 H-02 (40_THERMAL!B9)" }
+ideal_exitance_w_m2 = { value = 535727.9025, status = "IDEAL DIAGNOSTIC", source = "45 H-04: grey single face, not irradiance at the astronaut" }
+view_factor = { value = "", status = "OPEN REQUIRED", source = "45 H-05: owner ray/solid-angle release" }
+projected_area_m2 = { value = "", status = "OPEN REQUIRED", source = "45 H-06: geometry readback from Claude, released by the owner" }
+absorptivity = { value = "", status = "OPEN REQUIRED", source = "45 H-07" }
+suit_cooling_w = { value = "", status = "OPEN REQUIRED", source = "45 H-09" }
+metabolic_w = { value = "", status = "OPEN REQUIRED", source = "45 H-10" }
+other_heat_w = { value = "", status = "OPEN REQUIRED", source = "45 H-11" }
+go_flag = { value = "HOLD / INPUTS OPEN", status = "AUTO DIAGNOSTIC", source = "45 H-13" }
+
+# Operating modes (43 EVA-049, 44 EVA2-008, 45 O-07). TRAINING_SIMULATION is the only available mode. FLIGHT_EVA is a separate state that
+# only an all-gates owner release can enable; it is LOCKED here and nothing in the model or the runtime can unlock it.
+[modes]
+training = { id = "TRAINING_SIMULATION", available = true, label = "TRAINING SIMULATION: no physical EVA is cleared" }
+flight = { id = "FLIGHT_EVA", available = false, state = "HOLD", lock = "45 O-07 HOLD / SIMULATION_ONLY, LOCKED UNTIL RELEASE (EVA-049, EVA2-008)" }
+# The status vocabulary of EVA-049: every gate and value shows one of these.
+states = ["UNKNOWN", "HOLD", "PROTOTYPE", "VALIDATED"]
+
+# Suited access (43 EVA-040/041, 44 EVA2-002). The interior induction is shirt-sleeve; the suit is donned in SP-12 beside SP-11 on the
+# stationary structure and serviced in SP-13. The legacy route-sweep key human_entry.mannequin.suited_envelope_diameter_m (0.70 m) keeps its
+# name for compatibility (EVA-041: no silent migration) and is read here as the UNSUITED route-control envelope.
+[access]
+legacy_envelope_key = "human_entry.mannequin.suited_envelope_diameter_m"
+legacy_envelope_class = "UNSUITED_ROUTE_CONTROL (PROTOTYPE, 43 EVA-041): not an EVA suit envelope"
+suited_route = ["SP12", "SP11_INNER_HATCH", "SP11_CHAMBER", "SP11_OUTER_HATCH", "EXTERIOR_TRAINING_RAIL"]
+suit_margin_m = 0.05               # PROTOTYPE pass margin of a suited body to a wall, a door frame, a leaf sweep or another body
+reach_elevation_max_deg = 120.0    # = mobility.shoulder_flex_max_deg: a hand target above this from body-down needs the body pitched
+unlatch_standoff_m = 0.15          # PROTOTYPE: the operator's helmet top this far under the shut outer leaf while unlatching it
+casualty_restrained = "PROTOTYPE assumption: a rescuer straps the casualty's arms and legs (strap hardware OPEN); its envelope is the passive suited pose"
+
+# SP-11 door and chamber study (43 EVA-043/044, 44 EVA2-003, 45 G-06). Disposable alternatives on the existing PROTOTYPE airlock axis
+# (hull_geometry Airlock_EVA, X 101.85, 50 deg); nothing is cut into the ship. Door hardware is the docking port's hinged plug leaf family
+# (human_entry: frame width, overlap, leaf thickness, swing clearance, 90 deg), seated from the high-pressure side.
+[airlock_study]
+apertures_m = [1.00, 1.10, 1.20, 1.35]   # 1.35 added by EVA-003 (45 G-14)
+target_m = 1.10                    # 45 G-06 STUDY ONLY: the first CAD study target
+layouts = ["two_person", "sequential"]
+hinge_steps = 8                    # hinge azimuths tried for the outer leaf (the best one is reported)
+casualty_tilt_deg = [0.0, 10.0, 20.0, 30.0]   # orientations tried for a casualty passing a door (the best one is reported)
+step_m = 0.025                     # search step of the chamber length
+
+# EVA-003 SP-11 comparison (43 EVA-056..058/061, 44 EVA3-001..003, 45 G-11..G-15; docs/EVA.md "EVA-003"). Two-person chambers only
+# (EVA-044); 1.10 m is the MARGINAL benchmark (G-11), 1.20 m the lead study (G-13), 1.35 m the rescue comparison (G-14). Every value
+# below is a PROTOTYPE study choice made here, not a hatch, seal, latch or medical specification.
+[sp11_eva3]
+benchmark_m = 1.10                 # 45 G-11 MARGINAL comparator
+lead_m = 1.20                      # 45 G-13 PROTOTYPE CANDIDATE
+rescue_m = 1.35                    # 45 G-14 PROTOTYPE CANDIDATE (largest free limp posture 1.30 m + 0.05 m study margin)
+# Inner-hatch mechanisms compared at each aperture (EVA-056 H57: slide/translate, alternate hinge, relocated sill).
+mechanisms = ["hinged_into_sp12", "hinged_floor_recess", "parallel_plug_slide", "hinged_into_chamber", "bi_parting"]
+plug_stroke_m = 0.08               # parallel-linkage plug: drop clear of the seat before the slide (PROTOTYPE)
+slide_rail_depth_m = 0.10          # its carriage and rails on the leaf's SP-12 face
+slide_directions = ["+X", "-X", "+az", "-az"]   # slide in the bulkhead plane, along the ship or around it; the Blender study keeps the clear ones
+slide_lead = "-az"                 # the lead's pocket: inside SP-12 and clear of the ship (eva_sp11_study); +X meets the donning stands, -X the storeroom
+recess_floor_r_m = 1.10            # a local well under the swing: spine 0.95 + the 0.15 mechanical clearance, the utility layer removed there
+mullion_m = 0.10                   # bi-parting leaves need a seam beam across the opening (or a latch-only seam)
+shell_kg_m2 = 20.0                 # PROTOTYPE pressure-shell areal mass, the SERV-002 survey's value (no MMOD; Sheets own mass)
+# The extension latch (EVA-057, EVA3-002): a frame-mounted lever station on the chamber wall where the rig's hand goes (eva_latch_extension),
+# driving the outer hatch's latch dogs through a torque tube up the wall; an opening strap hangs from the leaf.
+glove_clear_m = 0.10               # a gloved hand round a lever or strap needs this clear of the wall and of a body
+bracket_max_m = 0.45               # a wall bracket longer than this is a structure of its own (reported, not a pass limit)
+# Rescue support (EVA-058, EVA3-003): equipment the casualty is secured to, in the casualty's body frame. Study geometry only.
+[rescue_support]
+frame_rail_r_m = 0.02              # litter frame: two side rails and two cross bars, rails this radius
+frame_rail_gap_m = 0.04            # rail clear of the suit's widest point
+frame_head_m = 0.10                # frame beyond the helmet top
+frame_foot_m = 0.05                # frame beyond the boot soles
+mattress_m = 0.06                  # vacuum mattress thickness around the suit (cross-section)
+kit = [0.40, 0.25, 0.20]           # medical / O2 kit strapped to the frame in front of the shins (x, y, z)
+
+# SP-12 EVA preparation and SP-13 suit service (12A SP-12/13 PROPOSED / PROGRAM). PROTOTYPE annular-sector rooms around the spine on the
+# airlock's side of the forward collar, X from survival reserve 1 to the forward mount: radial floor toward the spine, ceiling under shield
+# keel 1 (r 4.81 m) less the mechanical clearance; azimuth clear of survival reserve 1 (78-138 deg). The SP-11 chamber rises out of SP-12's
+# ceiling zone; its inner hatch opens into SP-12. No room dimension is canon (EVA-044); the Blender study measures them against the ship.
+[sp12]
+x_m = [100.75, 104.85]               # aft: survival reserve 1 (to X 100.60) plus the mechanical clearance
+az_deg = [5.0, 75.0]
+r_m = [1.25, 4.60]                 # floor: spine 0.95 + mechanical clearance 0.15 + 0.15 floor/utility depth (PROTOTYPE); ceiling: keel 1 at 4.81 less 0.15 and its radius
+fixtures = [
+  { id = "SP12_DON_STAND_A", job = "suit donning stand A: suit hung on its PLSS docking frame, entered through the rear-entry hatch", kind = "stand", x = 103.40, az = 20.0, size = [0.95, 1.00, 2.05] },
+  { id = "SP12_DON_STAND_B", job = "suit donning stand B", kind = "stand", x = 104.30, az = 20.0, size = [0.95, 1.00, 2.05] },
+  { id = "SP12_PRESSURE_CHECK", job = "leak / pressure-check panel and umbilical (no setpoint or leak limit released)", kind = "panel", x = 103.85, az = 8.0, size = [0.70, 0.12, 0.60] },
+  { id = "SP12_O2_INTERFACE", job = "oxygen preparation interface (prebreathe supply; no duration, no flow budget)", kind = "panel", x = 104.70, az = 40.0, size = [0.10, 0.60, 0.60] },
+  { id = "SP12_TOOL_CHECKOUT", job = "tool and tether checkout board with a tether tug-test fixture (EVA-003: on the aft wall, clear of the SP-11 inner plug's parking pocket)", kind = "board", x = 100.85, az = 14.0, size = [0.12, 1.20, 1.00] },
+  { id = "SP12_BUDDY_ZONE", job = "buddy-check zone: two suited bodies, foot restraints", kind = "zone", x = 103.85, az = 55.0, size = [1.60, 1.50, 2.05] },
+]
+[sp13]
+x_m = [104.95, 107.10]
+az_deg = [5.0, 75.0]
+r_m = [1.25, 4.60]
+fixtures = [
+  { id = "SP13_DRY_RACK", job = "suit drying and storage rack (two suits)", kind = "rack", x = 105.60, az = 25.0, size = [0.95, 1.80, 2.05] },
+  { id = "SP13_CHARGE_PANEL", job = "battery charging, O2 recharge and water/consumables exchange interfaces (capacities OPEN)", kind = "panel", x = 107.00, az = 30.0, size = [0.10, 0.90, 0.80] },
+  { id = "SP13_BENCH", job = "pressure-shell inspection and component-replacement bench", kind = "bench", x = 106.40, az = 58.0, size = [1.00, 0.90, 0.90] },
+  { id = "SP13_SPARES", job = "spares lockers: gloves, visors, bearings, seals, PLSS modules", kind = "locker", x = 105.30, az = 62.0, size = [0.70, 0.60, 1.60] },
+]
+
+# SP-11 1.20 m sliding plug (owner direction 2026-10-11: S&E 15!A134 AIRLOCK-004 STUDY DIRECTION ACCEPTED / STRUCTURAL FLIGHT RELEASE HOLD,
+# 43 EVA-062 PREFERRED PROTOTYPE / PRESSURE FLIGHT HOLD, 45 I-01..I-04). Every geometry value is a PROTOTYPE choice of the study, not a rating.
+[sp11_plug]
+aperture_m = 1.20
+dog_count = 12                     # radial dogs on the leaf rim, engaging keeper lugs on the SP-12 side of the frame (reverse retention)
+dog_h_m = 0.02                     # dog axial thickness
+ledge_h_m = 0.02                   # keeper ledge under a dog (the bearing face for chamber-high pressure)
+dog_w_m = 0.08                     # dog tangential width
+dog_stroke_m = 0.03                # radial travel; inside the 0.05 m seat band
+seal_band_frac = 0.5               # the face seal sits this fraction across the 0.05 m seat band from the bore (PROTOTYPE)
+friction = 0.15                    # dog / ledge friction, a diagnostic assumption for the self-locking check
+face_draft_deg = 2.0               # tolerance draft of the bearing faces (nominal 0)
+toggle_throw_m = 0.05              # crank radius of the dog-cam toggle; it locks over centre by this angle against a fixed stop
+toggle_overcentre_deg = 8.0
+block_pin_d_m = 0.012              # Δp-interlock blocking pins on the dog cam ring (two, opposite)
+step_lateral = 8                   # samples of the lateral park
+strap_tail_stowed_m = 0.05         # litter strap tail beyond the rail with the buckle tucked
+strap_tail_loose_m = 0.25          # litter strap tail left hanging (sensitivity)
+strap_band_m = 0.05
+strap_stand_off_m = 0.04           # strap over the suit front
+strap_fracs = [0.85, 0.55, 0.30, 0.08]    # chest, hips, knees, ankles, as fractions of the body span on the frame
+panel_prot_m = 0.06                # control panel stand-off from the wall (handwheel plane)
+panel_len_m = 0.60                 # panel length along the axis: release ring, valve, gauge at -0.20 / 0 / +0.20
+panel_half_w_m = 0.08
+panel_pitch_m = 0.20
+lever_arc_min_m = 0.30             # panel to the wall lever stations
+gauge_view_max_m = 1.0             # head to the gauge, PROTOTYPE
+standoff_sp12_m = 0.10             # SP-12 side: front of the body to the chamber's outer wall at the station
+# Interlock test point and force targets (45 I-01..I-04). Thresholds are inputs: the study threshold stays OPEN.
+dp_test_point_kpa = 0.05           # I-01 STUDY ONLY
+lever_force_target_n = 50.0        # I-03 HUMAN FACTORS STUDY
+reverse_load_readback_n = 106185.8317 # 45 I-08 owner bounding diagnostic (Ø1.30 m outer leaf x 80 kPa; I-04 106 kN superseded)
+ideal_aperture_force_n = 56.54866776   # I-02 DIAGNOSTIC (dp A at the 1.20 m circle)
+
+# SIM-027 redline study variants (owner 2026-10-11 16:45, 15!A152:A154 SP11-006/007, 15!A157 DIST-005). Every value is a PROTOTYPE study
+# choice, not a rating; the baseline keys above stay the published model. Keeper: the leaf's drop (stroke) must clear the keeper lugs
+# hanging under the frame seat (lug hang = dog_h + ledge_h - ledge_recess); rail_m is the carriage/guide depth under the dropped leaf.
+redline_keeper = [
+  { id = "KP0_baseline", stroke_m = 0.08, dog_h_m = 0.02, ledge_h_m = 0.02, ledge_recess_m = 0.0, rail_m = 0.10, what = "published model: 0.08 m drop, 0.02 + 0.02 m lugs, carriage 0.10 m" },
+  { id = "KP1_stroke_0.10", stroke_m = 0.10, dog_h_m = 0.02, ledge_h_m = 0.02, ledge_recess_m = 0.0, rail_m = 0.10, what = "longer stroke 0.10 m" },
+  { id = "KP2_stroke_0.12", stroke_m = 0.12, dog_h_m = 0.02, ledge_h_m = 0.02, ledge_recess_m = 0.0, rail_m = 0.10, what = "longer stroke 0.12 m" },
+  { id = "KP3_thin_lugs", stroke_m = 0.08, dog_h_m = 0.012, ledge_h_m = 0.012, ledge_recess_m = 0.0, rail_m = 0.10, what = "thinner dogs and ledges 0.012 + 0.012 m (bearing face area unchanged; dog bending and shear are FEA items, OPEN)" },
+  { id = "KP4_recessed_ledge", stroke_m = 0.08, dog_h_m = 0.02, ledge_h_m = 0.02, ledge_recess_m = 0.02, rail_m = 0.10, what = "ledge recessed into a pocket of the frame ring: lug hangs only the dog height 0.02 m" },
+  { id = "KP5_guide_moved", stroke_m = 0.08, dog_h_m = 0.02, ledge_h_m = 0.02, ledge_recess_m = 0.0, rail_m = 0.06, what = "guide moved from under the carriage to pins at the leaf rim: carriage depth 0.06 m" },
+  { id = "KP6_stroke_0.10_guide_moved", stroke_m = 0.10, dog_h_m = 0.02, ledge_h_m = 0.02, ledge_recess_m = 0.0, rail_m = 0.06, what = "0.10 m stroke with the moved guide" },
+  { id = "KP7_stroke_0.10_thin_recessed", stroke_m = 0.10, dog_h_m = 0.012, ledge_h_m = 0.012, ledge_recess_m = 0.012, rail_m = 0.06, what = "0.10 m stroke, thin lugs with the ledge recessed, moved guide" },
+]
+# SP-12-side control cluster (equalization valve, gauge, release) and fit-out study positions. layout: vertical = three controls stacked along the
+# axis in `order` (lowest first), pitch_m apart; row = side by side at one height (a), pitch_m apart along the wall. stand_a_*: donning stand A study
+# position (removable fixture; the SP-11 bulkhead is never moved). zone_*: buddy-check zone study position. standoff_m: body front to the outer wall.
+redline_controls = [
+  { id = "CT0_baseline", layout = "vertical", order = ["release", "valve", "gauge"], a_min_m = 2.8, pitch_m = 0.20, standoff_m = 0.10, phi_step_deg = 15.0, stand_a_x_m = 103.40, stand_a_az_deg = 20.0, zone_x_m = 103.85, zone_az_deg = 55.0, what = "published layout (release / valve / gauge stacked), 15 deg station search, stand A at az 20" },
+  { id = "CT1_vertical_fine_angle", layout = "vertical", order = ["release", "valve", "gauge"], a_min_m = 2.8, pitch_m = 0.20, standoff_m = 0.10, phi_step_deg = 5.0, stand_a_x_m = 103.40, stand_a_az_deg = 20.0, zone_x_m = 103.85, zone_az_deg = 55.0, what = "stacked cluster, station angle searched in 5 deg steps (cluster moved around the chamber wall away from stand A)" },
+  { id = "CT2_row_fine_angle", layout = "row", order = ["release", "valve", "gauge"], a_min_m = 2.7, pitch_m = 0.20, standoff_m = 0.10, phi_step_deg = 5.0, stand_a_x_m = 103.40, stand_a_az_deg = 20.0, zone_x_m = 103.85, zone_az_deg = 55.0, what = "horizontal row at one height, 5 deg station search, stand A not moved" },
+  { id = "CT3_row_fine_angle_standoff_0.13", layout = "row", order = ["release", "valve", "gauge"], a_min_m = 2.7, pitch_m = 0.20, standoff_m = 0.13, phi_step_deg = 5.0, stand_a_x_m = 103.40, stand_a_az_deg = 20.0, zone_x_m = 103.85, zone_az_deg = 55.0, what = "row, operator 0.13 m off the wall (more room for the body, less reach)" },
+  { id = "CT4_row_fine_angle_zone_moved", layout = "row", order = ["release", "valve", "gauge"], a_min_m = 2.7, pitch_m = 0.20, standoff_m = 0.10, phi_step_deg = 5.0, stand_a_x_m = 103.40, stand_a_az_deg = 20.0, zone_x_m = 104.05, zone_az_deg = 66.0, what = "row, buddy zone moved to az 66 / X 104.05 (its limit in the room)" },
+  { id = "CT5_row_standA_az12", layout = "row", order = ["release", "valve", "gauge"], a_min_m = 2.7, pitch_m = 0.20, standoff_m = 0.10, phi_step_deg = 5.0, stand_a_x_m = 103.40, stand_a_az_deg = 12.0, zone_x_m = 103.85, zone_az_deg = 55.0, what = "row, donning stand A moved to az 12 (its 1.00 m width then leaves the room's az 5 wall by more: reported)" },
+]
+# SP-12 casualty exit / litter turn variants (DIST-005, owner 2026-10-11 16:45): N1 1.10 x 2.50 m axial slot stays the comparator. fitout: built = the published
+# SP12 fixtures; rearranged = donning stands A and B moved to stand_az_deg (removable, non-structural); bare = no fit-out (geometry limit of the room). route: corner =
+# the N1 route (vertical drop in the chamber, 90 deg corner at the floor, run along X); diagonal = the carrier leaves the aperture on a slant (head toward +X) and
+# lowers into the slot; end: slot_end = the N1 route end (head at slot end, X 104.90) or lowering = the head stops at the lowering station over the slot. slot_x_m =
+# slot centre X. staff: two = a rescuer at each end; foot = one rescuer at the foot end with a hoist holding the head end (PROTOTYPE hoist, line and head not modelled).
+redline_sp12_path = [
+  { id = "LT0_N1_comparator", fitout = "built", route = "corner", end = "slot_end", slot_x_m = 103.65, staff = "two", stand_az_deg = 20.0, what = "N1 as run in RESCUE-004 (comparator)" },
+  { id = "LT1_N1_stop_at_lowering", fitout = "built", route = "corner", end = "lowering", slot_x_m = 103.65, staff = "two", stand_az_deg = 20.0, what = "N1, the floor run ends at the lowering station" },
+  { id = "LT2_N1_stands_rearranged", fitout = "rearranged", route = "corner", end = "lowering", slot_x_m = 103.65, staff = "two", stand_az_deg = 8.0, what = "N1, donning stands A and B moved to az 8" },
+  { id = "LT3_diagonal_rearranged", fitout = "rearranged", route = "diagonal", end = "lowering", slot_x_m = 103.65, staff = "two", stand_az_deg = 8.0, what = "diagonal leaving the aperture, stands at az 8" },
+  { id = "LT4_diagonal_slot_aft", fitout = "rearranged", route = "diagonal", end = "lowering", slot_x_m = 103.00, staff = "two", stand_az_deg = 8.0, what = "diagonal with the slot shifted aft under the aperture (slot X 101.75-104.25; spine-core cut OPEN)" },
+  { id = "LT5_diagonal_hoist_one_rescuer", fitout = "rearranged", route = "diagonal", end = "lowering", slot_x_m = 103.65, staff = "foot", stand_az_deg = 8.0, what = "LT3 with a hoist on the head end: one rescuer at the foot end" },
+  { id = "LT6_bare_geometry_limit", fitout = "bare", route = "corner", end = "lowering", slot_x_m = 103.65, staff = "two", stand_az_deg = 20.0, what = "N1 with the fit-out removed (geometry limit of the room)" },
+  { id = "LT7_N1_aperture_1.35_comparator", fitout = "rearranged", route = "corner", end = "lowering", slot_x_m = 103.65, staff = "two", stand_az_deg = 8.0, aperture_m = 1.35, what = "LT2 with the SP-11 aperture at the 1.35 m comparator (45 G-14): is the 1.20 m aperture the limit of the turn? (the plug parking pocket is left as built)" },
+]

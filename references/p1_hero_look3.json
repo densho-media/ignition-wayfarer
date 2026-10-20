@@ -1,0 +1,75 @@
+{
+ "study": "FUT-003-LOOK comparison (15!A131); presentation only, nothing saved, no geometry or canon change",
+ "blades_deg": [
+  30.0,
+  150.0,
+  270.0
+ ],
+ "establishing": {
+  "azimuth_deg": 196.7,
+  "blade_score": 0.396,
+  "face": 0.198,
+  "spread_deg": 90.9
+ },
+ "three_quarter": {
+  "azimuth_deg": 120.0,
+  "off_axis_deg": 50,
+  "blade_score": 0.766,
+  "direction": [
+   -0.643,
+   -0.383,
+   0.663
+  ],
+  "face": 0.383,
+  "spread_deg": 96.1
+ },
+ "views": {
+  "tq_physical": {
+   "file": "look3_tq_physical.png",
+   "state": "FIRST_IGNITION",
+   "physical": true,
+   "label": [
+    "actual light: one sun 87 deg from aft (outward burn, pointing OPEN) | hot face 1800 K grey body | no plume drawn",
+    "camera 50 deg off the aft axis at azimuth 120 deg: blades 23+ deg off edge-on, fanned 96+ deg apart (establishing: 11 deg, 91 deg)"
+   ]
+  },
+  "tq_fill": {
+   "file": "look3_tq_fill.png",
+   "state": "FIRST_IGNITION",
+   "physical": false,
+   "label": [
+    "actual light: one sun 87 deg from aft (outward burn, pointing OPEN) | hot face 1800 K grey body | no plume drawn",
+    "camera 50 deg off the aft axis at azimuth 120 deg: blades 23+ deg off edge-on, fanned 96+ deg apart (establishing: 11 deg, 91 deg)",
+    "ILLUSTRATIVE FILL - NOT PHYSICAL (a non-diegetic light added for the concept view; no such light exists at First Ignition)"
+   ]
+  },
+  "eye_physical": {
+   "file": "look3_eye_physical.png",
+   "state": "FIRST_IGNITION",
+   "physical": true,
+   "label": [
+    "actual light: one sun 87 deg from aft (outward burn, pointing OPEN) | hot face 1800 K grey body | no plume drawn",
+    "the Brow and EYE face forward, away from the sun during the outward burn: strictly physical, they read dark"
+   ]
+  },
+  "eye_fill": {
+   "file": "look3_eye_fill.png",
+   "state": "FIRST_IGNITION",
+   "physical": false,
+   "label": [
+    "actual light: one sun 87 deg from aft (outward burn, pointing OPEN) | hot face 1800 K grey body | no plume drawn",
+    "the Brow and EYE face forward, away from the sun during the outward burn: strictly physical, they read dark",
+    "ILLUSTRATIVE FILL - NOT PHYSICAL (a non-diegetic light added for the concept view; no such light exists at First Ignition)"
+   ]
+  },
+  "eye_offburn": {
+   "file": "look3_eye_offburn.png",
+   "state": "COAST",
+   "physical": false,
+   "label": [
+    "separate off-burn orientation: COAST, sun 30 deg off the nose (this attitude is OPEN); NOT the First Ignition burn",
+    "hot face not emitting (COAST temperature OPEN) | no exhaust | REP_PROXY grey"
+   ]
+  }
+ }
+}

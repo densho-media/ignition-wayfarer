@@ -1,0 +1,5382 @@
+{
+ "study": "SIM-027 / DIST-006: SP-13 independent second exit, L1-A trunk ladder vs district port at Dock_Primary, SP-52 containment geometry (owner 2026-10-11 16:45) + owner 2026-10-13 15!A170/A171 extensions (A170-*/A171-* segments) + owner 2026-10-13b 15!A176-A178 (A176-*/A177-*/A178-* segments)",
+ "source": [
+  "src/wayfarer/studies/eva3_sp13_l1a.py",
+  "references/p1_eva_sp13_l1a.json",
+  "references/p1_hum003.json",
+  "references/p1_eva_exits.json",
+  "references/p1_eva_district.json",
+  "references/p1_eva_access.json",
+  "data/eva_suit.toml"
+ ],
+ "segments": [
+  {
+   "id": "SP13-CTRL-ALL",
+   "route": "SP-13",
+   "states": [
+    "0g",
+    "stopped",
+    "locked_1.5g",
+    "spin"
+   ],
+   "variant": "control: as-built fit-out, radial exit D 1.10 m at az 45, X 106.025",
+   "case": "carriers A, S, K and suited crew with rescuers at both ends; minimum over all",
+   "least_m": -0.341,
+   "status": "FAIL",
+   "worst_case_over": [
+    "carrier A",
+    "carrier S",
+    "carrier K",
+    "suited crew",
+    "rescuers (A, S, K)",
+    "seeds [17, 23, 41]"
+   ],
+   "seed_spread_m": [
+    -0.341,
+    -0.114
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "EVA-003 follow-up port re-run with this study seeds; the carrier turns 90 deg in the 1.6 m trunk extension. Worst: carrier S."
+  },
+  {
+   "id": "SP13-CTRL-A",
+   "route": "SP-13",
+   "states": [
+    "0g",
+    "stopped",
+    "locked_1.5g",
+    "spin"
+   ],
+   "variant": "control: as-built fit-out, radial exit D 1.10 m at az 45, X 106.025",
+   "case": "carrier A through the exit with rescuers",
+   "least_m": -0.152,
+   "status": "FAIL",
+   "worst_case_over": [
+    "carrier A",
+    "body",
+    "rescuers",
+    "seeds [17, 23, 41]"
+   ],
+   "seed_spread_m": [
+    -0.152,
+    -0.114
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "body -0.140 m, rescuers -0.152; sampled-pose sweep capped at 0.10 m."
+  },
+  {
+   "id": "SP13-CTRL-S",
+   "route": "SP-13",
+   "states": [
+    "0g",
+    "stopped",
+    "locked_1.5g",
+    "spin"
+   ],
+   "variant": "control: as-built fit-out, radial exit D 1.10 m at az 45, X 106.025",
+   "case": "carrier S through the exit with rescuers",
+   "least_m": -0.341,
+   "status": "FAIL",
+   "worst_case_over": [
+    "carrier S",
+    "body",
+    "rescuers",
+    "seeds [17, 23, 41]"
+   ],
+   "seed_spread_m": [
+    -0.341,
+    -0.142
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "body -0.341 m, rescuers -0.297; sampled-pose sweep capped at 0.10 m."
+  },
+  {
+   "id": "SP13-CTRL-K",
+   "route": "SP-13",
+   "states": [
+    "0g",
+    "stopped",
+    "locked_1.5g",
+    "spin"
+   ],
+   "variant": "control: as-built fit-out, radial exit D 1.10 m at az 45, X 106.025",
+   "case": "carrier K through the exit with rescuers",
+   "least_m": -0.164,
+   "status": "FAIL",
+   "worst_case_over": [
+    "carrier K",
+    "body",
+    "rescuers",
+    "seeds [17, 23, 41]"
+   ],
+   "seed_spread_m": [
+    -0.164,
+    -0.125
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "body -0.140 m, rescuers -0.164; sampled-pose sweep capped at 0.10 m."
+  },
+  {
+   "id": "SP13-CTRL-U",
+   "route": "SP-13",
+   "states": [
+    "0g",
+    "stopped",
+    "locked_1.5g",
+    "spin"
+   ],
+   "variant": "control: as-built fit-out, radial exit D 1.10 m at az 45, X 106.025",
+   "case": "suited crew through the exit (self-propelled, no rescuers)",
+   "least_m": -0.336,
+   "status": "FAIL",
+   "worst_case_over": [
+    "suited crew",
+    "body",
+    "body only",
+    "seeds [17, 23, 41]"
+   ],
+   "seed_spread_m": [
+    -0.336,
+    -0.293
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "body -0.336 m, rescuers None; sampled-pose sweep capped at 0.10 m."
+  },
+  {
+   "id": "SP13-RADREARR-ALL",
+   "route": "SP-13",
+   "states": [
+    "0g",
+    "stopped",
+    "locked_1.5g",
+    "spin"
+   ],
+   "variant": "rearranged fit-out, radial exit az 60, X 106.30",
+   "case": "carriers A, S, K and suited crew with rescuers at both ends; minimum over all",
+   "least_m": -0.074,
+   "status": "FAIL",
+   "worst_case_over": [
+    "carrier A",
+    "carrier S",
+    "carrier K",
+    "suited crew",
+    "rescuers (A, S, K)",
+    "seeds [17, 23, 41]"
+   ],
+   "seed_spread_m": [
+    -0.074,
+    0.12
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "best radial arrangement found by the layout search. Worst: carrier S."
+  },
+  {
+   "id": "SP13-RADREARR-A",
+   "route": "SP-13",
+   "states": [
+    "0g",
+    "stopped",
+    "locked_1.5g",
+    "spin"
+   ],
+   "variant": "rearranged fit-out, radial exit az 60, X 106.30",
+   "case": "carrier A through the exit with rescuers",
+   "least_m": 0.011,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "carrier A",
+    "body",
+    "rescuers",
+    "seeds [17, 23, 41]"
+   ],
+   "seed_spread_m": [
+    0.011,
+    0.055
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "body +0.048 m, rescuers 0.011; sampled-pose sweep capped at 0.10 m."
+  },
+  {
+   "id": "SP13-RADREARR-S",
+   "route": "SP-13",
+   "states": [
+    "0g",
+    "stopped",
+    "locked_1.5g",
+    "spin"
+   ],
+   "variant": "rearranged fit-out, radial exit az 60, X 106.30",
+   "case": "carrier S through the exit with rescuers",
+   "least_m": -0.074,
+   "status": "FAIL",
+   "worst_case_over": [
+    "carrier S",
+    "body",
+    "rescuers",
+    "seeds [17, 23, 41]"
+   ],
+   "seed_spread_m": [
+    -0.074,
+    0.06
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "body -0.066 m, rescuers -0.074; sampled-pose sweep capped at 0.10 m."
+  },
+  {
+   "id": "SP13-RADREARR-K",
+   "route": "SP-13",
+   "states": [
+    "0g",
+    "stopped",
+    "locked_1.5g",
+    "spin"
+   ],
+   "variant": "rearranged fit-out, radial exit az 60, X 106.30",
+   "case": "carrier K through the exit with rescuers",
+   "least_m": 0.021,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "carrier K",
+    "body",
+    "rescuers",
+    "seeds [17, 23, 41]"
+   ],
+   "seed_spread_m": [
+    0.021,
+    0.12
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "body +0.021 m, rescuers 0.046; sampled-pose sweep capped at 0.10 m."
+  },
+  {
+   "id": "SP13-RADREARR-U",
+   "route": "SP-13",
+   "states": [
+    "0g",
+    "stopped",
+    "locked_1.5g",
+    "spin"
+   ],
+   "variant": "rearranged fit-out, radial exit az 60, X 106.30",
+   "case": "suited crew through the exit (self-propelled, no rescuers)",
+   "least_m": -0.019,
+   "status": "FAIL",
+   "worst_case_over": [
+    "suited crew",
+    "body",
+    "body only",
+    "seeds [17, 23, 41]"
+   ],
+   "seed_spread_m": [
+    -0.019,
+    0.014
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "body -0.019 m, rescuers None; sampled-pose sweep capped at 0.10 m."
+  },
+  {
+   "id": "SP13-SEL-ALL",
+   "route": "SP-13",
+   "states": [
+    "0g",
+    "stopped",
+    "locked_1.5g",
+    "spin"
+   ],
+   "variant": "rearranged fit-out (REARR_D110_b45_x105.90_az50), exit D 1.10 m leaning 45 deg aft of radial at az 50, X 105.90",
+   "case": "carriers A, S, K and suited crew with rescuers at both ends; minimum over all",
+   "least_m": 0.0,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "carrier A",
+    "carrier S",
+    "carrier K",
+    "suited crew",
+    "rescuers (A, S, K)",
+    "seeds [17, 23, 41, 59, 73, 97]"
+   ],
+   "seed_spread_m": [
+    0.0,
+    0.116
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "selected arrangement of the layout search (highest minimum over carriers), re-run with six seeds. Worst: carrier S."
+  },
+  {
+   "id": "SP13-SEL-A",
+   "route": "SP-13",
+   "states": [
+    "0g",
+    "stopped",
+    "locked_1.5g",
+    "spin"
+   ],
+   "variant": "rearranged fit-out (REARR_D110_b45_x105.90_az50), exit D 1.10 m leaning 45 deg aft of radial at az 50, X 105.90",
+   "case": "carrier A through the exit with rescuers",
+   "least_m": 0.089,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier A",
+    "body",
+    "rescuers",
+    "seeds [17, 23, 41, 59, 73, 97]"
+   ],
+   "seed_spread_m": [
+    0.089,
+    0.116
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "body +0.100 m, rescuers 0.089; sampled-pose sweep capped at 0.10 m."
+  },
+  {
+   "id": "SP13-SEL-S",
+   "route": "SP-13",
+   "states": [
+    "0g",
+    "stopped",
+    "locked_1.5g",
+    "spin"
+   ],
+   "variant": "rearranged fit-out (REARR_D110_b45_x105.90_az50), exit D 1.10 m leaning 45 deg aft of radial at az 50, X 105.90",
+   "case": "carrier S through the exit with rescuers",
+   "least_m": 0.0,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "carrier S",
+    "body",
+    "rescuers",
+    "seeds [17, 23, 41, 59, 73, 97]"
+   ],
+   "seed_spread_m": [
+    0.0,
+    0.102
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "body +0.038 m, rescuers 0.0; sampled-pose sweep capped at 0.10 m."
+  },
+  {
+   "id": "SP13-SEL-K",
+   "route": "SP-13",
+   "states": [
+    "0g",
+    "stopped",
+    "locked_1.5g",
+    "spin"
+   ],
+   "variant": "rearranged fit-out (REARR_D110_b45_x105.90_az50), exit D 1.10 m leaning 45 deg aft of radial at az 50, X 105.90",
+   "case": "carrier K through the exit with rescuers",
+   "least_m": 0.091,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier K",
+    "body",
+    "rescuers",
+    "seeds [17, 23, 41, 59, 73, 97]"
+   ],
+   "seed_spread_m": [
+    0.091,
+    0.108
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "body +0.091 m, rescuers 0.093; sampled-pose sweep capped at 0.10 m."
+  },
+  {
+   "id": "SP13-SEL-U",
+   "route": "SP-13",
+   "states": [
+    "0g",
+    "stopped",
+    "locked_1.5g",
+    "spin"
+   ],
+   "variant": "rearranged fit-out (REARR_D110_b45_x105.90_az50), exit D 1.10 m leaning 45 deg aft of radial at az 50, X 105.90",
+   "case": "suited crew through the exit (self-propelled, no rescuers)",
+   "least_m": 0.06,
+   "status": "PASS",
+   "worst_case_over": [
+    "suited crew",
+    "body",
+    "body only",
+    "seeds [17, 23, 41, 59, 73, 97]"
+   ],
+   "seed_spread_m": [
+    0.06,
+    0.085
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "body +0.060 m, rescuers None; sampled-pose sweep capped at 0.10 m."
+  },
+  {
+   "id": "SP13-WIDE-ALL",
+   "route": "SP-13",
+   "states": [
+    "0g",
+    "stopped",
+    "locked_1.5g",
+    "spin"
+   ],
+   "variant": "SENSITIVITY aperture 1.20 m (not the 1.10 m comparator), exit leaning 35 deg aft at az 30, X 106.30",
+   "case": "carriers A, S, K and suited crew with rescuers at both ends; minimum over all",
+   "least_m": -0.035,
+   "status": "FAIL",
+   "worst_case_over": [
+    "carrier A",
+    "carrier S",
+    "carrier K",
+    "suited crew",
+    "rescuers (A, S, K)",
+    "seeds [17, 23, 41, 59, 73, 97]"
+   ],
+   "seed_spread_m": [
+    -0.035,
+    0.108
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "sensitivity only; a wider aperture is an owner decision. Worst: carrier S."
+  },
+  {
+   "id": "SP13-WIDE-A",
+   "route": "SP-13",
+   "states": [
+    "0g",
+    "stopped",
+    "locked_1.5g",
+    "spin"
+   ],
+   "variant": "SENSITIVITY aperture 1.20 m (not the 1.10 m comparator), exit leaning 35 deg aft at az 30, X 106.30",
+   "case": "carrier A through the exit with rescuers",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier A",
+    "body",
+    "rescuers",
+    "seeds [17, 23, 41, 59, 73, 97]"
+   ],
+   "seed_spread_m": [
+    0.1,
+    0.101
+   ],
+   "nearest": null,
+   "note": "body +0.100 m, rescuers 0.101; sampled-pose sweep capped at 0.10 m."
+  },
+  {
+   "id": "SP13-WIDE-S",
+   "route": "SP-13",
+   "states": [
+    "0g",
+    "stopped",
+    "locked_1.5g",
+    "spin"
+   ],
+   "variant": "SENSITIVITY aperture 1.20 m (not the 1.10 m comparator), exit leaning 35 deg aft at az 30, X 106.30",
+   "case": "carrier S through the exit with rescuers",
+   "least_m": -0.035,
+   "status": "FAIL",
+   "worst_case_over": [
+    "carrier S",
+    "body",
+    "rescuers",
+    "seeds [17, 23, 41, 59, 73, 97]"
+   ],
+   "seed_spread_m": [
+    -0.035,
+    0.108
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "body +0.061 m, rescuers -0.035; sampled-pose sweep capped at 0.10 m."
+  },
+  {
+   "id": "SP13-WIDE-K",
+   "route": "SP-13",
+   "states": [
+    "0g",
+    "stopped",
+    "locked_1.5g",
+    "spin"
+   ],
+   "variant": "SENSITIVITY aperture 1.20 m (not the 1.10 m comparator), exit leaning 35 deg aft at az 30, X 106.30",
+   "case": "carrier K through the exit with rescuers",
+   "least_m": 0.083,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier K",
+    "body",
+    "rescuers",
+    "seeds [17, 23, 41, 59, 73, 97]"
+   ],
+   "seed_spread_m": [
+    0.083,
+    0.101
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "body +0.087 m, rescuers 0.083; sampled-pose sweep capped at 0.10 m."
+  },
+  {
+   "id": "SP13-WIDE-U",
+   "route": "SP-13",
+   "states": [
+    "0g",
+    "stopped",
+    "locked_1.5g",
+    "spin"
+   ],
+   "variant": "SENSITIVITY aperture 1.20 m (not the 1.10 m comparator), exit leaning 35 deg aft at az 30, X 106.30",
+   "case": "suited crew through the exit (self-propelled, no rescuers)",
+   "least_m": 0.064,
+   "status": "PASS",
+   "worst_case_over": [
+    "suited crew",
+    "body",
+    "body only",
+    "seeds [17, 23, 41, 59, 73, 97]"
+   ],
+   "seed_spread_m": [
+    0.064,
+    0.07
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "body +0.064 m, rescuers None; sampled-pose sweep capped at 0.10 m."
+  },
+  {
+   "id": "SP13-BARE-ALL",
+   "route": "SP-13",
+   "states": [
+    "0g",
+    "stopped",
+    "locked_1.5g",
+    "spin"
+   ],
+   "variant": "bare room (no fit-out), same exit as the selected one",
+   "case": "carriers A, S, K and suited crew with rescuers at both ends; minimum over all",
+   "least_m": 0.032,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "carrier A",
+    "carrier S",
+    "carrier K",
+    "suited crew",
+    "rescuers (A, S, K)",
+    "seeds [17, 23, 41, 59, 73, 97]"
+   ],
+   "seed_spread_m": [
+    0.032,
+    0.12
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "upper bound of the room geometry for this exit; fixtures removed. Worst: carrier A."
+  },
+  {
+   "id": "SP13-BARE-A",
+   "route": "SP-13",
+   "states": [
+    "0g",
+    "stopped",
+    "locked_1.5g",
+    "spin"
+   ],
+   "variant": "bare room (no fit-out), same exit as the selected one",
+   "case": "carrier A through the exit with rescuers",
+   "least_m": 0.032,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "carrier A",
+    "body",
+    "rescuers",
+    "seeds [17, 23, 41, 59, 73, 97]"
+   ],
+   "seed_spread_m": [
+    0.032,
+    0.12
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "body +0.100 m, rescuers 0.032; sampled-pose sweep capped at 0.10 m."
+  },
+  {
+   "id": "SP13-BARE-S",
+   "route": "SP-13",
+   "states": [
+    "0g",
+    "stopped",
+    "locked_1.5g",
+    "spin"
+   ],
+   "variant": "bare room (no fit-out), same exit as the selected one",
+   "case": "carrier S through the exit with rescuers",
+   "least_m": 0.043,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "carrier S",
+    "body",
+    "rescuers",
+    "seeds [17, 23, 41, 59, 73, 97]"
+   ],
+   "seed_spread_m": [
+    0.043,
+    0.104
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "body +0.043 m, rescuers 0.059; sampled-pose sweep capped at 0.10 m."
+  },
+  {
+   "id": "SP13-BARE-K",
+   "route": "SP-13",
+   "states": [
+    "0g",
+    "stopped",
+    "locked_1.5g",
+    "spin"
+   ],
+   "variant": "bare room (no fit-out), same exit as the selected one",
+   "case": "carrier K through the exit with rescuers",
+   "least_m": 0.055,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier K",
+    "body",
+    "rescuers",
+    "seeds [17, 23, 41, 59, 73, 97]"
+   ],
+   "seed_spread_m": [
+    0.055,
+    0.114
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "body +0.089 m, rescuers 0.055; sampled-pose sweep capped at 0.10 m."
+  },
+  {
+   "id": "SP13-BARE-U",
+   "route": "SP-13",
+   "states": [
+    "0g",
+    "stopped",
+    "locked_1.5g",
+    "spin"
+   ],
+   "variant": "bare room (no fit-out), same exit as the selected one",
+   "case": "suited crew through the exit (self-propelled, no rescuers)",
+   "least_m": 0.035,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "suited crew",
+    "body",
+    "body only",
+    "seeds [17, 23, 41, 59, 73, 97]"
+   ],
+   "seed_spread_m": [
+    0.035,
+    0.072
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "body +0.035 m, rescuers None; sampled-pose sweep capped at 0.10 m."
+  },
+  {
+   "id": "SP13-SERVICE-DRY",
+   "route": "SP-13",
+   "states": [
+    "0g",
+    "stopped",
+    "locked_1.5g",
+    "spin"
+   ],
+   "variant": "rearranged (REARR_D110_b45_x105.90_az50)",
+   "case": "service access: free depth in front of the rack on its best side minus the 0.70 m arm reach (free depth capped at 1.0 m)",
+   "least_m": 0.3,
+   "status": "PASS",
+   "worst_case_over": [
+    "best of sides +x, -x, +tangential, -tangential, toward the axis"
+   ],
+   "seed_spread_m": null,
+   "nearest": "SP13_DRY_RACK on side -t",
+   "note": "rearranged: depth 1.00 m on -t, mounted outer wall, overflow past the room walls 0.087 m (as built 0.424 m; as built service depth 0.00 m on None). Points checked at 5 positions along the side and three heights."
+  },
+  {
+   "id": "SP13-SERVICE-BENCH",
+   "route": "SP-13",
+   "states": [
+    "0g",
+    "stopped",
+    "locked_1.5g",
+    "spin"
+   ],
+   "variant": "rearranged (REARR_D110_b45_x105.90_az50)",
+   "case": "service access: free depth in front of the bench on its best side minus the 0.70 m arm reach (free depth capped at 1.0 m)",
+   "least_m": 0.3,
+   "status": "PASS",
+   "worst_case_over": [
+    "best of sides +x, -x, +tangential, -tangential, toward the axis"
+   ],
+   "seed_spread_m": null,
+   "nearest": "SP13_BENCH on side -r",
+   "note": "rearranged: depth 1.00 m on -r, mounted outer wall, overflow past the room walls 0.027 m (as built 0.065 m; as built service depth 0.15 m on +x). Points checked at 5 positions along the side and three heights."
+  },
+  {
+   "id": "SP13-POCKET",
+   "route": "SP-13",
+   "states": [
+    "0g",
+    "stopped",
+    "locked_1.5g",
+    "spin"
+   ],
+   "variant": "rearranged (REARR_D110_b45_x105.90_az50)",
+   "case": "exit closure leaf parked beside the aperture vs the fit-out",
+   "least_m": -0.877,
+   "status": "FAIL",
+   "worst_case_over": [
+    "four parking directions (best)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "minus_t",
+   "note": "parked leaf radius 0.83 m (the aperture ellipse long half-axis + 0.05), 1.71 m from the aperture centre on the SP-13 floor; a sliding leaf needs a free floor strip that SP-13 (2.15 m x 1.5 m floor) does not have; the closure type is OPEN"
+  },
+  {
+   "id": "SP13-INDEP-N0N2N3",
+   "route": "SP-13",
+   "states": [
+    "0g",
+    "stopped",
+    "locked_1.5g",
+    "spin"
+   ],
+   "variant": "exit solid vs SP-12 N0 branch, N2/N3 oblique duct (REARR_D110_b45_x105.90_az50)",
+   "case": "solid separation between the SP-13 exit solid and the SP-12 N0 branch, N2/N3 oblique duct solid(s)",
+   "least_m": 1.803,
+   "status": "PASS",
+   "worst_case_over": [
+    "N0_branch_0.90",
+    "N0_branch_1.10",
+    "N2_oblique15_1.10",
+    "N3_oblique15_1.20"
+   ],
+   "seed_spread_m": null,
+   "nearest": "N3_oblique15_1.20",
+   "note": "no shared closure, no SP-12 room volume on the SP-13 route; the trunk extension is the shared destination volume. Separation of solids only; the wall thickness between them is OPEN."
+  },
+  {
+   "id": "SP13-INDEP-N1",
+   "route": "SP-13",
+   "states": [
+    "0g",
+    "stopped",
+    "locked_1.5g",
+    "spin"
+   ],
+   "variant": "exit solid vs SP-12 N1 axial slot (REARR_D110_b45_x105.90_az50)",
+   "case": "solid separation between the SP-13 exit solid and the SP-12 N1 axial slot solid(s)",
+   "least_m": -0.4,
+   "status": "FAIL",
+   "worst_case_over": [
+    "N1_axial_slot"
+   ],
+   "seed_spread_m": null,
+   "nearest": "N1_axial_slot",
+   "note": "no shared closure, no SP-12 room volume on the SP-13 route; the trunk extension is the shared destination volume. Separation of solids only; the wall thickness between them is OPEN."
+  },
+  {
+   "id": "SP13-INDEP-PARTITION",
+   "route": "SP-13",
+   "states": [
+    "0g",
+    "stopped",
+    "locked_1.5g",
+    "spin"
+   ],
+   "variant": "aperture vs the SP-12/SP-13 partition (REARR_D110_b45_x105.90_az50)",
+   "case": "aft edge of the aperture ellipse in the SP-13 floor plane vs SP-13 aft wall X 104.95",
+   "least_m": 0.172,
+   "status": "PASS",
+   "worst_case_over": [
+    "aperture ellipse, floor plane"
+   ],
+   "seed_spread_m": null,
+   "nearest": "SP-13 aft wall",
+   "note": "the aperture must not open into SP-12; the study constraint is 0.05 m. The SP-12/SP-13 partition itself (X 104.85-104.95) is unchanged."
+  },
+  {
+   "id": "SP13-VEHICLE",
+   "route": "SP-13",
+   "states": [
+    "0g",
+    "stopped",
+    "locked_1.5g",
+    "spin"
+   ],
+   "variant": "exit solid vs the saved vehicle (REARR_D110_b45_x105.90_az50)",
+   "case": "exit solid boxes at the 0.15 m mechanical clearance against every stationary mesh and inside the hull",
+   "least_m": null,
+   "status": "PASS",
+   "worst_case_over": [
+    "stationary meshes",
+    "hull inner radius"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "CLEAR; refuge objects hit: none; spine-core cut 1.62 m of X (structural, OPEN)."
+  },
+  {
+   "id": "LAD-REF",
+   "route": "dock_bridge",
+   "states": [
+    "locked_1.5g"
+   ],
+   "variant": "built ladder 285 deg, district port 240 deg (L1-A as scanned)",
+   "case": "ladder lines vs openings to X 104.9, margin 0 (the built ladder rule)",
+   "least_m": -0.179,
+   "status": "FAIL",
+   "worst_case_over": [
+    "stile_a",
+    "stile_b",
+    "arrest rail",
+    "every opening 81.6-104.9 m",
+    "dock window excluded (bridged)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "stile_a / District_Port at X 104.1",
+   "note": "dock bridge span 1.26 m (margin 0) / 1.764 m (0.20 margin; accepted prototype 1.764); unbridged extra gaps at margin 0: [('stile_a', 103.755, 104.445, ['District_Port']), ('rail', 103.901, 104.299, ['District_Port'])]. the 240 deg port crosses the stile-a line at X 103.76-104.45."
+  },
+  {
+   "id": "LAD-A-305",
+   "route": "dock_bridge",
+   "states": [
+    "locked_1.5g"
+   ],
+   "variant": "(a) trunk ladder relocated to 305 deg, port stays 240 deg",
+   "case": "ladder lines vs openings to X 104.9, margin 0",
+   "least_m": -0.134,
+   "status": "FAIL",
+   "worst_case_over": [
+    "stile_a",
+    "stile_b",
+    "arrest rail",
+    "every opening 81.6-104.9 m",
+    "dock window excluded (bridged)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "stile_b / Crew_Refuge_Port at X 95.55",
+   "note": "dock bridge span 0.88 m (margin 0) / 1.288 m (0.20 margin; accepted prototype 1.764); unbridged extra gaps at margin 0: [('stile_b', 95.228, 95.87, ['Crew_Refuge_Port']), ('rail', 95.371, 95.727, ['Crew_Refuge_Port'])]. Dock_Service mouth 53% covered by the ladder strip (built 285: 33%); nearest trunk fixture 0.107 m (Trunk_Fit_Frame_10_4)."
+  },
+  {
+   "id": "LAD-A-310",
+   "route": "dock_bridge",
+   "states": [
+    "locked_1.5g"
+   ],
+   "variant": "(a) trunk ladder relocated to 310 deg, port stays 240 deg",
+   "case": "ladder lines vs openings to X 104.9, margin 0",
+   "least_m": -0.18,
+   "status": "FAIL",
+   "worst_case_over": [
+    "stile_a",
+    "stile_b",
+    "arrest rail",
+    "every opening 81.6-104.9 m",
+    "dock window excluded (bridged)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "stile_b / Crew_Refuge_Port at X 95.55",
+   "note": "dock bridge span 0.89 m (margin 0) / 1.296 m (0.20 margin; accepted prototype 1.764); unbridged extra gaps at margin 0: [('stile_b', 95.18, 95.919, ['Crew_Refuge_Port']), ('rail', 95.306, 95.792, ['Crew_Refuge_Port'])]. Dock_Service mouth 54% covered by the ladder strip (built 285: 33%); nearest trunk fixture 0.107 m (Trunk_Fit_Frame_10_4)."
+  },
+  {
+   "id": "LAD-A-315",
+   "route": "dock_bridge",
+   "states": [
+    "locked_1.5g"
+   ],
+   "variant": "(a) trunk ladder relocated to 315 deg, port stays 240 deg",
+   "case": "ladder lines vs openings to X 104.9, margin 0",
+   "least_m": -0.229,
+   "status": "FAIL",
+   "worst_case_over": [
+    "stile_a",
+    "stile_b",
+    "arrest rail",
+    "every opening 81.6-104.9 m",
+    "dock window excluded (bridged)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "stile_b / Crew_Refuge_Port at X 95.55",
+   "note": "dock bridge span 0.90 m (margin 0) / 1.300 m (0.20 margin; accepted prototype 1.764); unbridged extra gaps at margin 0: [('stile_b', 95.141, 95.958, ['Crew_Refuge_Port']), ('rail', 95.254, 95.845, ['Crew_Refuge_Port'])]. Dock_Service mouth 55% covered by the ladder strip (built 285: 33%); nearest trunk fixture 0.107 m (Trunk_Fit_Frame_11_3)."
+  },
+  {
+   "id": "LAD-A-320",
+   "route": "dock_bridge",
+   "states": [
+    "locked_1.5g"
+   ],
+   "variant": "(a) trunk ladder relocated to 320 deg, port stays 240 deg",
+   "case": "ladder lines vs openings to X 104.9, margin 0",
+   "least_m": -0.28,
+   "status": "FAIL",
+   "worst_case_over": [
+    "stile_a",
+    "stile_b",
+    "arrest rail",
+    "every opening 81.6-104.9 m",
+    "dock window excluded (bridged)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "stile_b / Crew_Refuge_Port at X 95.55",
+   "note": "dock bridge span 0.89 m (margin 0) / 1.296 m (0.20 margin; accepted prototype 1.764); unbridged extra gaps at margin 0: [('stile_b', 95.109, 95.989, ['Crew_Refuge_Port']), ('rail', 95.209, 95.889, ['Crew_Refuge_Port'])]. Dock_Service mouth 54% covered by the ladder strip (built 285: 33%); nearest trunk fixture 0.107 m (Trunk_Fit_Frame_2_1)."
+  },
+  {
+   "id": "LAD-A-325",
+   "route": "dock_bridge",
+   "states": [
+    "locked_1.5g"
+   ],
+   "variant": "(a) trunk ladder relocated to 325 deg, port stays 240 deg",
+   "case": "ladder lines vs openings to X 104.9, margin 0",
+   "least_m": -0.333,
+   "status": "FAIL",
+   "worst_case_over": [
+    "stile_a",
+    "stile_b",
+    "arrest rail",
+    "every opening 81.6-104.9 m",
+    "dock window excluded (bridged)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "stile_b / Crew_Refuge_Port at X 95.55",
+   "note": "dock bridge span 0.88 m (margin 0) / 1.288 m (0.20 margin; accepted prototype 1.764); unbridged extra gaps at margin 0: [('stile_b', 95.085, 96.014, ['Crew_Refuge_Port']), ('rail', 95.171, 95.927, ['Crew_Refuge_Port'])]. Dock_Service mouth 53% covered by the ladder strip (built 285: 33%); nearest trunk fixture 0.107 m (Trunk_Fit_Frame_10_4)."
+  },
+  {
+   "id": "LAD-A-330",
+   "route": "dock_bridge",
+   "states": [
+    "locked_1.5g"
+   ],
+   "variant": "(a) trunk ladder relocated to 330 deg, port stays 240 deg",
+   "case": "ladder lines vs openings to X 104.9, margin 0",
+   "least_m": -0.387,
+   "status": "FAIL",
+   "worst_case_over": [
+    "stile_a",
+    "stile_b",
+    "arrest rail",
+    "every opening 81.6-104.9 m",
+    "dock window excluded (bridged)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "stile_b / Crew_Refuge_Port at X 95.55",
+   "note": "dock bridge span 0.90 m (margin 0) / 1.298 m (0.20 margin; accepted prototype 1.764); unbridged extra gaps at margin 0: [('stile_a', 95.4, 95.699, ['Crew_Refuge_Port']), ('stile_b', 95.067, 96.032, ['Crew_Refuge_Port']), ('stile_b', 97.919, 98.279, ['Crew_Store_Port']), ('rail', 95.139, 95.96, ['Crew_Refuge_Port'])]. Dock_Service mouth 50% covered by the ladder strip (built 285: 33%); nearest trunk fixture 0.107 m (Trunk_Fit_Frame_4_1)."
+  },
+  {
+   "id": "LAD-B-200",
+   "route": "dock_bridge",
+   "states": [
+    "locked_1.5g"
+   ],
+   "variant": "(b) ladder stays 285 deg, workshop port moved to 200 deg on the workshop face",
+   "case": "ladder lines vs openings to X 104.9, margin 0",
+   "least_m": 0.018,
+   "status": "FAIL",
+   "worst_case_over": [
+    "stile_a",
+    "stile_b",
+    "arrest rail",
+    "every opening 81.6-104.9 m",
+    "dock window excluded (bridged)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "stile_a / Crew_Port_2_2 at X 88.95",
+   "note": "dock bridge span 1.26 m (margin 0) / 1.764 m (0.20 margin; accepted prototype 1.764); unbridged extra gaps at margin 0: none. port screen: BLOCKED (tangential offset on the workshop face -0.92 m; vehicle hits ['Survival_Reserve_2']). The least value is the BUILT ladder passing Crew_Port_2_2 (existing 0.018 m) while the port edge itself is clear by +0.121 m."
+  },
+  {
+   "id": "LAD-B-205",
+   "route": "dock_bridge",
+   "states": [
+    "locked_1.5g"
+   ],
+   "variant": "(b) ladder stays 285 deg, workshop port moved to 205 deg on the workshop face",
+   "case": "ladder lines vs openings to X 104.9, margin 0",
+   "least_m": 0.018,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "stile_a",
+    "stile_b",
+    "arrest rail",
+    "every opening 81.6-104.9 m",
+    "dock window excluded (bridged)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "stile_a / Crew_Port_2_2 at X 88.95",
+   "note": "dock bridge span 1.26 m (margin 0) / 1.764 m (0.20 margin; accepted prototype 1.764); unbridged extra gaps at margin 0: none. port screen: CLEAR (tangential offset on the workshop face -0.77 m; vehicle hits none). The least value is the BUILT ladder passing Crew_Port_2_2 (existing 0.018 m) while the port edge itself is clear by +0.096 m."
+  },
+  {
+   "id": "LAD-B-210",
+   "route": "dock_bridge",
+   "states": [
+    "locked_1.5g"
+   ],
+   "variant": "(b) ladder stays 285 deg, workshop port moved to 210 deg on the workshop face",
+   "case": "ladder lines vs openings to X 104.9, margin 0",
+   "least_m": 0.018,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "stile_a",
+    "stile_b",
+    "arrest rail",
+    "every opening 81.6-104.9 m",
+    "dock window excluded (bridged)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "stile_a / Crew_Port_2_2 at X 88.95",
+   "note": "dock bridge span 1.26 m (margin 0) / 1.764 m (0.20 margin; accepted prototype 1.764); unbridged extra gaps at margin 0: none. port screen: CLEAR (tangential offset on the workshop face -0.64 m; vehicle hits none). The least value is the BUILT ladder passing Crew_Port_2_2 (existing 0.018 m) while the port edge itself is clear by +0.068 m."
+  },
+  {
+   "id": "LAD-B-215",
+   "route": "dock_bridge",
+   "states": [
+    "locked_1.5g"
+   ],
+   "variant": "(b) ladder stays 285 deg, workshop port moved to 215 deg on the workshop face",
+   "case": "ladder lines vs openings to X 104.9, margin 0",
+   "least_m": 0.018,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "stile_a",
+    "stile_b",
+    "arrest rail",
+    "every opening 81.6-104.9 m",
+    "dock window excluded (bridged)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "stile_a / Crew_Port_2_2 at X 88.95",
+   "note": "dock bridge span 1.26 m (margin 0) / 1.764 m (0.20 margin; accepted prototype 1.764); unbridged extra gaps at margin 0: none. port screen: CLEAR (tangential offset on the workshop face -0.51 m; vehicle hits none). The least value is the BUILT ladder passing Crew_Port_2_2 (existing 0.018 m) while the port edge itself is clear by +0.035 m."
+  },
+  {
+   "id": "LAD-B-220",
+   "route": "dock_bridge",
+   "states": [
+    "locked_1.5g"
+   ],
+   "variant": "(b) ladder stays 285 deg, workshop port moved to 220 deg on the workshop face",
+   "case": "ladder lines vs openings to X 104.9, margin 0",
+   "least_m": -0.001,
+   "status": "FAIL",
+   "worst_case_over": [
+    "stile_a",
+    "stile_b",
+    "arrest rail",
+    "every opening 81.6-104.9 m",
+    "dock window excluded (bridged)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "stile_a / District_Port at X 104.1",
+   "note": "dock bridge span 1.26 m (margin 0) / 1.764 m (0.20 margin; accepted prototype 1.764); unbridged extra gaps at margin 0: none. port screen: CLEAR (tangential offset on the workshop face -0.40 m; vehicle hits none). The least value is the BUILT ladder passing Crew_Port_2_2 (existing 0.018 m) while the port edge itself is clear by -0.001 m."
+  },
+  {
+   "id": "LAD-B-225",
+   "route": "dock_bridge",
+   "states": [
+    "locked_1.5g"
+   ],
+   "variant": "(b) ladder stays 285 deg, workshop port moved to 225 deg on the workshop face",
+   "case": "ladder lines vs openings to X 104.9, margin 0",
+   "least_m": -0.041,
+   "status": "FAIL",
+   "worst_case_over": [
+    "stile_a",
+    "stile_b",
+    "arrest rail",
+    "every opening 81.6-104.9 m",
+    "dock window excluded (bridged)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "stile_a / District_Port at X 104.1",
+   "note": "dock bridge span 1.26 m (margin 0) / 1.764 m (0.20 margin; accepted prototype 1.764); unbridged extra gaps at margin 0: [('stile_a', 103.956, 104.244, ['District_Port'])]. port screen: CLEAR (tangential offset on the workshop face -0.29 m; vehicle hits none). The least value is the BUILT ladder passing Crew_Port_2_2 (existing 0.018 m) while the port edge itself is clear by -0.041 m."
+  },
+  {
+   "id": "DOCK-BRIDGE",
+   "route": "dock_bridge",
+   "states": [
+    "locked_1.5g"
+   ],
+   "variant": "accepted rigid ladder bridge over the Dock_Primary mouth, 285 deg (imported)",
+   "case": "climber figure vs the connector rim and dock passage envelope",
+   "least_m": 0.106,
+   "status": "PASS",
+   "worst_case_over": [
+    "climber body rods",
+    "connector rim curve"
+   ],
+   "seed_spread_m": null,
+   "nearest": "Human_Trunk_Climber_Arm_1",
+   "note": "imported from references/p1_eva_exits.json bypass.climber_vs_connector_rim (not re-run); dock passage envelope 0.35 m vs stiles 0.273 m. Structure, arrester lock and swing OPEN."
+  },
+  {
+   "id": "SP52-STANDOFF-0.30",
+   "route": "L1-A",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "warm module 0.30 m from the workshop wall, scan angles (workshop 240, module 210)",
+   "case": "geometric clearances of the module envelope: workshop wall, spine, struts, shield column",
+   "least_m": 0.154,
+   "status": "OPEN",
+   "worst_case_over": [
+    "workshop wall",
+    "vehicle meshes within 0.8 m",
+    "shield column"
+   ],
+   "seed_spread_m": null,
+   "nearest": "Structural_Spine",
+   "note": "GEOMETRY ONLY. Heat transfer, wall temperature, insulation and fire-barrier performance are OPEN (null): no owner emissivity, conductivity, rating or dissipation exists."
+  },
+  {
+   "id": "SP52-CONT-0.10",
+   "route": "L1-A",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "containment envelope 0.10 m thick on every face, module moved out by 0.10 m",
+   "case": "envelope against the vehicle (0.15 m clearance), the hull, and the air gap left to the workshop wall",
+   "least_m": 0.2,
+   "status": "OPEN",
+   "worst_case_over": [
+    "vehicle meshes",
+    "hull",
+    "workshop wall"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "fits geometrically: True; robot 0.60 m cube pockets free on faces ['outer', 'forward', 'side_plus', 'side_minus'] (aft face toward the workshop never). Thickness is a geometry parameter, not a design."
+  },
+  {
+   "id": "SP52-CONT-0.20",
+   "route": "L1-A",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "containment envelope 0.20 m thick on every face, module moved out by 0.20 m",
+   "case": "envelope against the vehicle (0.15 m clearance), the hull, and the air gap left to the workshop wall",
+   "least_m": 0.1,
+   "status": "OPEN",
+   "worst_case_over": [
+    "vehicle meshes",
+    "hull",
+    "workshop wall"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "fits geometrically: True; robot 0.60 m cube pockets free on faces ['outer', 'forward', 'side_plus', 'side_minus'] (aft face toward the workshop never). Thickness is a geometry parameter, not a design."
+  },
+  {
+   "id": "A170-SP12-N2_oblique30_1.10-S",
+   "route": "SP-12 exit (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N2_oblique30_1.10",
+   "case": "carrier S with two rescuers, chamber -> SP-12 -> exit -> trunk",
+   "least_m": -0.125,
+   "status": "FAIL",
+   "worst_case_over": [
+    "carrier S",
+    "body",
+    "rescuers at both ends",
+    "seeds [17, 23, 41]"
+   ],
+   "seed_spread_m": [
+    -0.125,
+    -0.051
+   ],
+   "nearest": "Trunk_Fit_Frame_13_1",
+   "note": "body -0.125 m (zone T), rescuers -0.121; sampled-pose sweep capped 0.10 m; 1.10 m round duct at 30 deg to the trunk axis from (X 102.45, r 1.80) to the trunk at X 99.97."
+  },
+  {
+   "id": "A170-SP12-N2_oblique30_1.10-A",
+   "route": "SP-12 exit (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N2_oblique30_1.10",
+   "case": "carrier A with two rescuers, chamber -> SP-12 -> exit -> trunk",
+   "least_m": -0.052,
+   "status": "FAIL",
+   "worst_case_over": [
+    "carrier A",
+    "body",
+    "rescuers at both ends",
+    "seeds [17, 23, 41]"
+   ],
+   "seed_spread_m": [
+    -0.052,
+    0.036
+   ],
+   "nearest": "Trunk_Fit_Frame_13_1",
+   "note": "body +0.031 m (zone T), rescuers -0.052; sampled-pose sweep capped 0.10 m; 1.10 m round duct at 30 deg to the trunk axis from (X 102.45, r 1.80) to the trunk at X 99.97."
+  },
+  {
+   "id": "A170-SP12-N2_oblique30_1.10-K",
+   "route": "SP-12 exit (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N2_oblique30_1.10",
+   "case": "carrier K with two rescuers, chamber -> SP-12 -> exit -> trunk",
+   "least_m": -0.075,
+   "status": "FAIL",
+   "worst_case_over": [
+    "carrier K",
+    "body",
+    "rescuers at both ends",
+    "seeds [17, 23, 41]"
+   ],
+   "seed_spread_m": [
+    -0.075,
+    0.029
+   ],
+   "nearest": "Trunk_Fit_Frame_13_1",
+   "note": "body +0.018 m (zone T), rescuers -0.075; sampled-pose sweep capped 0.10 m; 1.10 m round duct at 30 deg to the trunk axis from (X 102.45, r 1.80) to the trunk at X 99.97."
+  },
+  {
+   "id": "A170-SP12-N2_oblique30_1.10-OP-sp12_side",
+   "route": "SP-12 exit (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N2_oblique30_1.10",
+   "case": "opposite-side operation of the exit closure from the sp12 side",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "operator torso r 0.25 m",
+    "shoulder within 0.70 m of the release"
+   ],
+   "seed_spread_m": null,
+   "nearest": "FREE_SPACE_WALL",
+   "note": "reach used 0.464 m."
+  },
+  {
+   "id": "A170-SP12-N2_oblique30_1.10-OP-trunk_side",
+   "route": "SP-12 exit (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N2_oblique30_1.10",
+   "case": "opposite-side operation of the exit closure from the trunk side",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "operator torso r 0.25 m",
+    "shoulder within 0.70 m of the release"
+   ],
+   "seed_spread_m": null,
+   "nearest": "FREE_SPACE_WALL",
+   "note": "reach used 0.594 m."
+  },
+  {
+   "id": "A170-SP12-N2_oblique30_1.10-VS-SP13",
+   "route": "SP-12 exit (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N2_oblique30_1.10",
+   "case": "SP-12 exit solid vs the SP-13 exit duct solid (independence)",
+   "least_m": 1.663,
+   "status": "PASS",
+   "worst_case_over": [
+    "axis-cylinder solids"
+   ],
+   "seed_spread_m": null,
+   "nearest": "SP-13 exit duct",
+   "note": "route envelope gap (S capsules outside the trunk) 3.604 m; shared trunk only. Wall thickness between OPEN."
+  },
+  {
+   "id": "A170-SP12-N2_oblique30_1.10-VEHICLE",
+   "route": "SP-12 exit (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N2_oblique30_1.10",
+   "case": "exit solid vs the saved vehicle (0.15 m)",
+   "least_m": null,
+   "status": "PASS",
+   "worst_case_over": [
+    "stationary meshes",
+    "hull"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "CLEAR; spine-core cut 2.1 m of X (OPEN)."
+  },
+  {
+   "id": "A170-SP12-N2_oblique35_1.10-S",
+   "route": "SP-12 exit (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N2_oblique35_1.10",
+   "case": "carrier S with two rescuers, chamber -> SP-12 -> exit -> trunk",
+   "least_m": -0.2,
+   "status": "FAIL",
+   "worst_case_over": [
+    "carrier S",
+    "body",
+    "rescuers at both ends",
+    "seeds [17, 23, 41]"
+   ],
+   "seed_spread_m": [
+    -0.2,
+    -0.042
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "body -0.200 m (zone T), rescuers -0.143; sampled-pose sweep capped 0.10 m; 1.10 m round duct at 35 deg to the trunk axis from (X 102.45, r 1.80) to the trunk at X 100.41."
+  },
+  {
+   "id": "A170-SP12-N2_oblique35_1.10-A",
+   "route": "SP-12 exit (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N2_oblique35_1.10",
+   "case": "carrier A with two rescuers, chamber -> SP-12 -> exit -> trunk",
+   "least_m": -0.085,
+   "status": "FAIL",
+   "worst_case_over": [
+    "carrier A",
+    "body",
+    "rescuers at both ends",
+    "seeds [17, 23, 41]"
+   ],
+   "seed_spread_m": [
+    -0.085,
+    0.004
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "body -0.024 m (zone T), rescuers -0.085; sampled-pose sweep capped 0.10 m; 1.10 m round duct at 35 deg to the trunk axis from (X 102.45, r 1.80) to the trunk at X 100.41."
+  },
+  {
+   "id": "A170-SP12-N2_oblique35_1.10-K",
+   "route": "SP-12 exit (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N2_oblique35_1.10",
+   "case": "carrier K with two rescuers, chamber -> SP-12 -> exit -> trunk",
+   "least_m": -0.102,
+   "status": "FAIL",
+   "worst_case_over": [
+    "carrier K",
+    "body",
+    "rescuers at both ends",
+    "seeds [17, 23, 41]"
+   ],
+   "seed_spread_m": [
+    -0.102,
+    0.004
+   ],
+   "nearest": "Trunk_Fit_Frame_13_1",
+   "note": "body -0.024 m (zone T), rescuers -0.102; sampled-pose sweep capped 0.10 m; 1.10 m round duct at 35 deg to the trunk axis from (X 102.45, r 1.80) to the trunk at X 100.41."
+  },
+  {
+   "id": "A170-SP12-N2_oblique35_1.10-OP-sp12_side",
+   "route": "SP-12 exit (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N2_oblique35_1.10",
+   "case": "opposite-side operation of the exit closure from the sp12 side",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "operator torso r 0.25 m",
+    "shoulder within 0.70 m of the release"
+   ],
+   "seed_spread_m": null,
+   "nearest": "FREE_SPACE_WALL",
+   "note": "reach used 0.32 m."
+  },
+  {
+   "id": "A170-SP12-N2_oblique35_1.10-OP-trunk_side",
+   "route": "SP-12 exit (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N2_oblique35_1.10",
+   "case": "opposite-side operation of the exit closure from the trunk side",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "operator torso r 0.25 m",
+    "shoulder within 0.70 m of the release"
+   ],
+   "seed_spread_m": null,
+   "nearest": "FREE_SPACE_WALL",
+   "note": "reach used 0.594 m."
+  },
+  {
+   "id": "A170-SP12-N2_oblique35_1.10-VS-SP13",
+   "route": "SP-12 exit (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N2_oblique35_1.10",
+   "case": "SP-12 exit solid vs the SP-13 exit duct solid (independence)",
+   "least_m": 1.688,
+   "status": "PASS",
+   "worst_case_over": [
+    "axis-cylinder solids"
+   ],
+   "seed_spread_m": null,
+   "nearest": "SP-13 exit duct",
+   "note": "route envelope gap (S capsules outside the trunk) 3.599 m; shared trunk only. Wall thickness between OPEN."
+  },
+  {
+   "id": "A170-SP12-N2_oblique35_1.10-VEHICLE",
+   "route": "SP-12 exit (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N2_oblique35_1.10",
+   "case": "exit solid vs the saved vehicle (0.15 m)",
+   "least_m": null,
+   "status": "PASS",
+   "worst_case_over": [
+    "stationary meshes",
+    "hull"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "CLEAR; spine-core cut 1.78 m of X (OPEN)."
+  },
+  {
+   "id": "A170-SP12-N0_branch_0.90-S",
+   "route": "SP-12 exit (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N0_branch_0.90",
+   "case": "carrier S with two rescuers, chamber -> SP-12 -> exit -> trunk",
+   "least_m": -0.19,
+   "status": "FAIL",
+   "worst_case_over": [
+    "carrier S",
+    "body",
+    "rescuers at both ends",
+    "seeds [17, 23, 41]"
+   ],
+   "seed_spread_m": [
+    -0.19,
+    -0.058
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "body -0.119 m (zone T), rescuers -0.19; sampled-pose sweep capped 0.10 m; radial branch 0.90 m on the airlock axis (control; turn in the trunk)."
+  },
+  {
+   "id": "A170-SP12-N0_branch_0.90-A",
+   "route": "SP-12 exit (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N0_branch_0.90",
+   "case": "carrier A with two rescuers, chamber -> SP-12 -> exit -> trunk",
+   "least_m": -0.021,
+   "status": "FAIL",
+   "worst_case_over": [
+    "carrier A",
+    "body",
+    "rescuers at both ends",
+    "seeds [17, 23, 41]"
+   ],
+   "seed_spread_m": [
+    -0.021,
+    0.037
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "body +0.004 m (zone T), rescuers -0.021; sampled-pose sweep capped 0.10 m; radial branch 0.90 m on the airlock axis (control; turn in the trunk)."
+  },
+  {
+   "id": "A170-SP12-N0_branch_0.90-K",
+   "route": "SP-12 exit (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N0_branch_0.90",
+   "case": "carrier K with two rescuers, chamber -> SP-12 -> exit -> trunk",
+   "least_m": -0.042,
+   "status": "FAIL",
+   "worst_case_over": [
+    "carrier K",
+    "body",
+    "rescuers at both ends",
+    "seeds [17, 23, 41]"
+   ],
+   "seed_spread_m": [
+    -0.042,
+    0.003
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "body -0.024 m (zone T), rescuers -0.042; sampled-pose sweep capped 0.10 m; radial branch 0.90 m on the airlock axis (control; turn in the trunk)."
+  },
+  {
+   "id": "A170-SP12-N0_branch_0.90-OP-sp12_side",
+   "route": "SP-12 exit (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N0_branch_0.90",
+   "case": "opposite-side operation of the exit closure from the sp12 side",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "operator torso r 0.25 m",
+    "shoulder within 0.70 m of the release"
+   ],
+   "seed_spread_m": null,
+   "nearest": "FREE_SPACE_WALL",
+   "note": "reach used 0.464 m."
+  },
+  {
+   "id": "A170-SP12-N0_branch_0.90-OP-trunk_side",
+   "route": "SP-12 exit (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N0_branch_0.90",
+   "case": "opposite-side operation of the exit closure from the trunk side",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "operator torso r 0.25 m",
+    "shoulder within 0.70 m of the release"
+   ],
+   "seed_spread_m": null,
+   "nearest": "FREE_SPACE_WALL",
+   "note": "reach used 0.594 m."
+  },
+  {
+   "id": "A170-SP12-N0_branch_0.90-VS-SP13",
+   "route": "SP-12 exit (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N0_branch_0.90",
+   "case": "SP-12 exit solid vs the SP-13 exit duct solid (independence)",
+   "least_m": 2.201,
+   "status": "PASS",
+   "worst_case_over": [
+    "axis-cylinder solids"
+   ],
+   "seed_spread_m": null,
+   "nearest": "SP-13 exit duct",
+   "note": "route envelope gap (S capsules outside the trunk) 3.59 m; shared trunk only. Wall thickness between OPEN."
+  },
+  {
+   "id": "A170-SP12-N0_branch_0.90-VEHICLE",
+   "route": "SP-12 exit (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N0_branch_0.90",
+   "case": "exit solid vs the saved vehicle (0.15 m)",
+   "least_m": null,
+   "status": "PASS",
+   "worst_case_over": [
+    "stationary meshes",
+    "hull"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "CLEAR; spine-core cut 0.9 m of X (OPEN)."
+  },
+  {
+   "id": "A170-SP12-N0_branch_1.10-S",
+   "route": "SP-12 exit (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N0_branch_1.10",
+   "case": "carrier S with two rescuers, chamber -> SP-12 -> exit -> trunk",
+   "least_m": -0.036,
+   "status": "FAIL",
+   "worst_case_over": [
+    "carrier S",
+    "body",
+    "rescuers at both ends",
+    "seeds [17, 23, 41]"
+   ],
+   "seed_spread_m": [
+    -0.036,
+    0.025
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "body -0.024 m (zone T), rescuers -0.036; sampled-pose sweep capped 0.10 m; radial branch 1.10 m on the airlock axis (control; turn in the trunk)."
+  },
+  {
+   "id": "A170-SP12-N0_branch_1.10-A",
+   "route": "SP-12 exit (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N0_branch_1.10",
+   "case": "carrier A with two rescuers, chamber -> SP-12 -> exit -> trunk",
+   "least_m": -0.013,
+   "status": "FAIL",
+   "worst_case_over": [
+    "carrier A",
+    "body",
+    "rescuers at both ends",
+    "seeds [17, 23, 41]"
+   ],
+   "seed_spread_m": [
+    -0.013,
+    0.07
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "body +0.053 m (zone T), rescuers -0.013; sampled-pose sweep capped 0.10 m; radial branch 1.10 m on the airlock axis (control; turn in the trunk)."
+  },
+  {
+   "id": "A170-SP12-N0_branch_1.10-K",
+   "route": "SP-12 exit (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N0_branch_1.10",
+   "case": "carrier K with two rescuers, chamber -> SP-12 -> exit -> trunk",
+   "least_m": 0.027,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "carrier K",
+    "body",
+    "rescuers at both ends",
+    "seeds [17, 23, 41]"
+   ],
+   "seed_spread_m": [
+    0.027,
+    0.125
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "body +0.027 m (zone T), rescuers 0.076; sampled-pose sweep capped 0.10 m; radial branch 1.10 m on the airlock axis (control; turn in the trunk)."
+  },
+  {
+   "id": "A170-SP12-N0_branch_1.10-OP-sp12_side",
+   "route": "SP-12 exit (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N0_branch_1.10",
+   "case": "opposite-side operation of the exit closure from the sp12 side",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "operator torso r 0.25 m",
+    "shoulder within 0.70 m of the release"
+   ],
+   "seed_spread_m": null,
+   "nearest": "FREE_SPACE_WALL",
+   "note": "reach used 0.464 m."
+  },
+  {
+   "id": "A170-SP12-N0_branch_1.10-OP-trunk_side",
+   "route": "SP-12 exit (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N0_branch_1.10",
+   "case": "opposite-side operation of the exit closure from the trunk side",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "operator torso r 0.25 m",
+    "shoulder within 0.70 m of the release"
+   ],
+   "seed_spread_m": null,
+   "nearest": "FREE_SPACE_WALL",
+   "note": "reach used 0.512 m."
+  },
+  {
+   "id": "A170-SP12-N0_branch_1.10-VS-SP13",
+   "route": "SP-12 exit (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N0_branch_1.10",
+   "case": "SP-12 exit solid vs the SP-13 exit duct solid (independence)",
+   "least_m": 2.101,
+   "status": "PASS",
+   "worst_case_over": [
+    "axis-cylinder solids"
+   ],
+   "seed_spread_m": null,
+   "nearest": "SP-13 exit duct",
+   "note": "route envelope gap (S capsules outside the trunk) 3.59 m; shared trunk only. Wall thickness between OPEN."
+  },
+  {
+   "id": "A170-SP12-N0_branch_1.10-VEHICLE",
+   "route": "SP-12 exit (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N0_branch_1.10",
+   "case": "exit solid vs the saved vehicle (0.15 m)",
+   "least_m": null,
+   "status": "PASS",
+   "worst_case_over": [
+    "stationary meshes",
+    "hull"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "CLEAR; spine-core cut 1.1 m of X (OPEN)."
+  },
+  {
+   "id": "A170-SP12-N3_oblique30_1.20-S",
+   "route": "SP-12 exit (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N3_oblique30_1.20",
+   "case": "carrier S with two rescuers, chamber -> SP-12 -> exit -> trunk",
+   "least_m": -0.123,
+   "status": "FAIL",
+   "worst_case_over": [
+    "carrier S",
+    "body",
+    "rescuers at both ends",
+    "seeds [17, 23, 41]"
+   ],
+   "seed_spread_m": [
+    -0.123,
+    -0.032
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "body -0.105 m (zone T), rescuers -0.123; sampled-pose sweep capped 0.10 m; 1.20 m round duct at 30 deg to the trunk axis from (X 102.45, r 1.80) to the trunk at X 99.97."
+  },
+  {
+   "id": "A170-SP12-N3_oblique30_1.20-A",
+   "route": "SP-12 exit (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N3_oblique30_1.20",
+   "case": "carrier A with two rescuers, chamber -> SP-12 -> exit -> trunk",
+   "least_m": -0.048,
+   "status": "FAIL",
+   "worst_case_over": [
+    "carrier A",
+    "body",
+    "rescuers at both ends",
+    "seeds [17, 23, 41]"
+   ],
+   "seed_spread_m": [
+    -0.048,
+    0.068
+   ],
+   "nearest": "Trunk_Fit_Frame_13_1",
+   "note": "body +0.046 m (zone T), rescuers -0.048; sampled-pose sweep capped 0.10 m; 1.20 m round duct at 30 deg to the trunk axis from (X 102.45, r 1.80) to the trunk at X 99.97."
+  },
+  {
+   "id": "A170-SP12-N3_oblique30_1.20-K",
+   "route": "SP-12 exit (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N3_oblique30_1.20",
+   "case": "carrier K with two rescuers, chamber -> SP-12 -> exit -> trunk",
+   "least_m": -0.095,
+   "status": "FAIL",
+   "worst_case_over": [
+    "carrier K",
+    "body",
+    "rescuers at both ends",
+    "seeds [17, 23, 41]"
+   ],
+   "seed_spread_m": [
+    -0.095,
+    0.036
+   ],
+   "nearest": "Trunk_Fit_Frame_13_1",
+   "note": "body +0.025 m (zone T), rescuers -0.095; sampled-pose sweep capped 0.10 m; 1.20 m round duct at 30 deg to the trunk axis from (X 102.45, r 1.80) to the trunk at X 99.97."
+  },
+  {
+   "id": "A170-SP12-N3_oblique30_1.20-OP-sp12_side",
+   "route": "SP-12 exit (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N3_oblique30_1.20",
+   "case": "opposite-side operation of the exit closure from the sp12 side",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "operator torso r 0.25 m",
+    "shoulder within 0.70 m of the release"
+   ],
+   "seed_spread_m": null,
+   "nearest": "FREE_SPACE_WALL",
+   "note": "reach used 0.464 m."
+  },
+  {
+   "id": "A170-SP12-N3_oblique30_1.20-OP-trunk_side",
+   "route": "SP-12 exit (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N3_oblique30_1.20",
+   "case": "opposite-side operation of the exit closure from the trunk side",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "operator torso r 0.25 m",
+    "shoulder within 0.70 m of the release"
+   ],
+   "seed_spread_m": null,
+   "nearest": "Crew_Trunk_Light_1_8",
+   "note": "reach used 0.594 m."
+  },
+  {
+   "id": "A170-SP12-N3_oblique30_1.20-VS-SP13",
+   "route": "SP-12 exit (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N3_oblique30_1.20",
+   "case": "SP-12 exit solid vs the SP-13 exit duct solid (independence)",
+   "least_m": 1.613,
+   "status": "PASS",
+   "worst_case_over": [
+    "axis-cylinder solids"
+   ],
+   "seed_spread_m": null,
+   "nearest": "SP-13 exit duct",
+   "note": "route envelope gap (S capsules outside the trunk) 3.604 m; shared trunk only. Wall thickness between OPEN."
+  },
+  {
+   "id": "A170-SP12-N3_oblique30_1.20-VEHICLE",
+   "route": "SP-12 exit (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N3_oblique30_1.20",
+   "case": "exit solid vs the saved vehicle (0.15 m)",
+   "least_m": null,
+   "status": "FAIL",
+   "worst_case_over": [
+    "stationary meshes",
+    "hull"
+   ],
+   "seed_spread_m": null,
+   "nearest": "Survival_Reserve_1",
+   "note": "BLOCKED; spine-core cut 2.2 m of X (OPEN)."
+  },
+  {
+   "id": "A170-SP12-N2_fwd45_1.10-S",
+   "route": "SP-12 exit (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N2_fwd45_1.10",
+   "case": "carrier S with two rescuers, chamber -> SP-12 -> exit -> trunk",
+   "least_m": 0.044,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "carrier S",
+    "body",
+    "rescuers at both ends",
+    "seeds [17, 23, 41, 59, 73, 97]"
+   ],
+   "seed_spread_m": [
+    0.044,
+    0.109
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "body +0.053 m (zone E), rescuers 0.044; sampled-pose sweep capped 0.10 m; 1.10 m round duct leaning 45 deg FORWARD from under the chamber (X 101.85, r 1.45) to the L1-A extension at X 102.93; the carrier enters head first, aligns in the extension and is moved aft feet first."
+  },
+  {
+   "id": "A170-SP12-N2_fwd45_1.10-A",
+   "route": "SP-12 exit (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N2_fwd45_1.10",
+   "case": "carrier A with two rescuers, chamber -> SP-12 -> exit -> trunk",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier A",
+    "body",
+    "rescuers at both ends",
+    "seeds [17, 23, 41, 59, 73, 97]"
+   ],
+   "seed_spread_m": [
+    0.1,
+    0.112
+   ],
+   "nearest": null,
+   "note": "body +0.100 m (zone H), rescuers 0.101; sampled-pose sweep capped 0.10 m; 1.10 m round duct leaning 45 deg FORWARD from under the chamber (X 101.85, r 1.45) to the L1-A extension at X 102.93; the carrier enters head first, aligns in the extension and is moved aft feet first."
+  },
+  {
+   "id": "A170-SP12-N2_fwd45_1.10-K",
+   "route": "SP-12 exit (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N2_fwd45_1.10",
+   "case": "carrier K with two rescuers, chamber -> SP-12 -> exit -> trunk",
+   "least_m": 0.085,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier K",
+    "body",
+    "rescuers at both ends",
+    "seeds [17, 23, 41, 59, 73, 97]"
+   ],
+   "seed_spread_m": [
+    0.085,
+    0.119
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "body +0.085 m (zone E), rescuers 0.1; sampled-pose sweep capped 0.10 m; 1.10 m round duct leaning 45 deg FORWARD from under the chamber (X 101.85, r 1.45) to the L1-A extension at X 102.93; the carrier enters head first, aligns in the extension and is moved aft feet first."
+  },
+  {
+   "id": "A170-SP12-N2_fwd45_1.10-OP-sp12_side",
+   "route": "SP-12 exit (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N2_fwd45_1.10",
+   "case": "opposite-side operation of the exit closure from the sp12 side",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "operator torso r 0.25 m",
+    "shoulder within 0.70 m of the release"
+   ],
+   "seed_spread_m": null,
+   "nearest": "FREE_SPACE_WALL",
+   "note": "reach used 0.464 m."
+  },
+  {
+   "id": "A170-SP12-N2_fwd45_1.10-OP-trunk_side",
+   "route": "SP-12 exit (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N2_fwd45_1.10",
+   "case": "opposite-side operation of the exit closure from the trunk side",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "operator torso r 0.25 m",
+    "shoulder within 0.70 m of the release"
+   ],
+   "seed_spread_m": null,
+   "nearest": "FREE_SPACE_WALL",
+   "note": "reach used 0.287 m."
+  },
+  {
+   "id": "A170-SP12-N2_fwd45_1.10-VS-SP13",
+   "route": "SP-12 exit (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N2_fwd45_1.10",
+   "case": "SP-12 exit solid vs the SP-13 exit duct solid (independence)",
+   "least_m": 0.674,
+   "status": "PASS",
+   "worst_case_over": [
+    "axis-cylinder solids"
+   ],
+   "seed_spread_m": null,
+   "nearest": "SP-13 exit duct",
+   "note": "route envelope gap (S capsules outside the trunk) 3.243 m; shared trunk only. Wall thickness between OPEN."
+  },
+  {
+   "id": "A170-SP12-N2_fwd45_1.10-VEHICLE",
+   "route": "SP-12 exit (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N2_fwd45_1.10",
+   "case": "exit solid vs the saved vehicle (0.15 m)",
+   "least_m": null,
+   "status": "PASS",
+   "worst_case_over": [
+    "stationary meshes",
+    "hull"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "CLEAR; spine-core cut 1.66 m of X (OPEN)."
+  },
+  {
+   "id": "A170-SP13-CLOSURE-single_aft_selected_fitout",
+   "route": "SP-13 closure (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "single hinged dogged leaf, hinge aft, offset 0.02 m, selected fit-out",
+   "case": "carriers A, S, K (two rescuers) and suited crew through the exit with the leaf parked open, the leaf park and swing envelopes, operation from both sides; minimum over all",
+   "least_m": -0.413,
+   "status": "FAIL",
+   "worst_case_over": [
+    "carrier A",
+    "carrier S",
+    "carrier K",
+    "suited crew",
+    "rescuers",
+    "leaf park",
+    "leaf swing 5-90 deg",
+    "operator SP-13 side",
+    "operator trunk side",
+    "seeds [17, 23, 41]"
+   ],
+   "seed_spread_m": null,
+   "nearest": "FREE_SPACE_WALL",
+   "note": "carriers {'A': 0.1, 'S': 0.06, 'K': 0.098, 'U': 0.054}; leaf park -0.182, swing -0.413; operators {'sp13_side': 0.1, 'trunk_side': 0.1}."
+  },
+  {
+   "id": "A170-SP13-CLOSURE-single_aft_selected_fitout-OP-sp13_side",
+   "route": "SP-13 closure (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "single_aft_selected_fitout",
+   "case": "operation of the closed leaf from the sp13 side",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "operator torso r 0.25 m",
+    "shoulder within 0.70 m of the handwheel"
+   ],
+   "seed_spread_m": null,
+   "nearest": "FREE_SPACE_WALL",
+   "note": "reach used 0.464 m."
+  },
+  {
+   "id": "A170-SP13-CLOSURE-single_aft_selected_fitout-OP-trunk_side",
+   "route": "SP-13 closure (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "single_aft_selected_fitout",
+   "case": "operation of the closed leaf from the trunk side",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "operator torso r 0.25 m",
+    "shoulder within 0.70 m of the handwheel"
+   ],
+   "seed_spread_m": null,
+   "nearest": "FREE_SPACE_WALL",
+   "note": "reach used 0.354 m."
+  },
+  {
+   "id": "A170-SP13-CLOSURE-single_fwd_selected_fitout",
+   "route": "SP-13 closure (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "single hinged dogged leaf, hinge fwd, offset 0.1 m, selected fit-out",
+   "case": "carriers A, S, K (two rescuers) and suited crew through the exit with the leaf parked open, the leaf park and swing envelopes, operation from both sides; minimum over all",
+   "least_m": -0.145,
+   "status": "FAIL",
+   "worst_case_over": [
+    "carrier A",
+    "carrier S",
+    "carrier K",
+    "suited crew",
+    "rescuers",
+    "leaf park",
+    "leaf swing 5-90 deg",
+    "operator SP-13 side",
+    "operator trunk side",
+    "seeds [17, 23, 41]"
+   ],
+   "seed_spread_m": null,
+   "nearest": "FREE_SPACE_WALL",
+   "note": "carriers {'A': 0.1, 'S': -0.038, 'K': 0.053, 'U': -0.038}; leaf park 0.192, swing -0.145; operators {'sp13_side': 0.1, 'trunk_side': 0.1}."
+  },
+  {
+   "id": "A170-SP13-CLOSURE-single_fwd_selected_fitout-OP-sp13_side",
+   "route": "SP-13 closure (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "single_fwd_selected_fitout",
+   "case": "operation of the closed leaf from the sp13 side",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "operator torso r 0.25 m",
+    "shoulder within 0.70 m of the handwheel"
+   ],
+   "seed_spread_m": null,
+   "nearest": "FREE_SPACE_WALL",
+   "note": "reach used 0.43 m."
+  },
+  {
+   "id": "A170-SP13-CLOSURE-single_fwd_selected_fitout-OP-trunk_side",
+   "route": "SP-13 closure (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "single_fwd_selected_fitout",
+   "case": "operation of the closed leaf from the trunk side",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "operator torso r 0.25 m",
+    "shoulder within 0.70 m of the handwheel"
+   ],
+   "seed_spread_m": null,
+   "nearest": "FREE_SPACE_WALL",
+   "note": "reach used 0.354 m."
+  },
+  {
+   "id": "A170-SP13-CLOSURE-single_plus_t_selected_fitout",
+   "route": "SP-13 closure (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "single hinged dogged leaf, hinge plus_t, offset 0.02 m, selected fit-out",
+   "case": "carriers A, S, K (two rescuers) and suited crew through the exit with the leaf parked open, the leaf park and swing envelopes, operation from both sides; minimum over all",
+   "least_m": -0.008,
+   "status": "FAIL",
+   "worst_case_over": [
+    "carrier A",
+    "carrier S",
+    "carrier K",
+    "suited crew",
+    "rescuers",
+    "leaf park",
+    "leaf swing 5-90 deg",
+    "operator SP-13 side",
+    "operator trunk side",
+    "seeds [17, 23, 41]"
+   ],
+   "seed_spread_m": null,
+   "nearest": "FREE_SPACE_WALL",
+   "note": "carriers {'A': 0.071, 'S': 0.058, 'K': 0.075, 'U': 0.041}; leaf park 0.009, swing -0.008; operators {'sp13_side': 0.1, 'trunk_side': 0.1}."
+  },
+  {
+   "id": "A170-SP13-CLOSURE-single_plus_t_selected_fitout-OP-sp13_side",
+   "route": "SP-13 closure (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "single_plus_t_selected_fitout",
+   "case": "operation of the closed leaf from the sp13 side",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "operator torso r 0.25 m",
+    "shoulder within 0.70 m of the handwheel"
+   ],
+   "seed_spread_m": null,
+   "nearest": "FREE_SPACE_WALL",
+   "note": "reach used 0.536 m."
+  },
+  {
+   "id": "A170-SP13-CLOSURE-single_plus_t_selected_fitout-OP-trunk_side",
+   "route": "SP-13 closure (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "single_plus_t_selected_fitout",
+   "case": "operation of the closed leaf from the trunk side",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "operator torso r 0.25 m",
+    "shoulder within 0.70 m of the handwheel"
+   ],
+   "seed_spread_m": null,
+   "nearest": "FREE_SPACE_WALL",
+   "note": "reach used 0.354 m."
+  },
+  {
+   "id": "A170-SP13-CLOSURE-single_minus_t_selected_fitout",
+   "route": "SP-13 closure (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "single hinged dogged leaf, hinge minus_t, offset 0.1 m, selected fit-out",
+   "case": "carriers A, S, K (two rescuers) and suited crew through the exit with the leaf parked open, the leaf park and swing envelopes, operation from both sides; minimum over all",
+   "least_m": -0.088,
+   "status": "FAIL",
+   "worst_case_over": [
+    "carrier A",
+    "carrier S",
+    "carrier K",
+    "suited crew",
+    "rescuers",
+    "leaf park",
+    "leaf swing 5-90 deg",
+    "operator SP-13 side",
+    "operator trunk side",
+    "seeds [17, 23, 41]"
+   ],
+   "seed_spread_m": null,
+   "nearest": "FREE_SPACE_WALL",
+   "note": "carriers {'A': 0.1, 'S': 0.039, 'K': 0.096, 'U': 0.067}; leaf park -0.088, swing -0.088; operators {'sp13_side': 0.1, 'trunk_side': 0.1}."
+  },
+  {
+   "id": "A170-SP13-CLOSURE-single_minus_t_selected_fitout-OP-sp13_side",
+   "route": "SP-13 closure (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "single_minus_t_selected_fitout",
+   "case": "operation of the closed leaf from the sp13 side",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "operator torso r 0.25 m",
+    "shoulder within 0.70 m of the handwheel"
+   ],
+   "seed_spread_m": null,
+   "nearest": "FREE_SPACE_WALL",
+   "note": "reach used 0.464 m."
+  },
+  {
+   "id": "A170-SP13-CLOSURE-single_minus_t_selected_fitout-OP-trunk_side",
+   "route": "SP-13 closure (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "single_minus_t_selected_fitout",
+   "case": "operation of the closed leaf from the trunk side",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "operator torso r 0.25 m",
+    "shoulder within 0.70 m of the handwheel"
+   ],
+   "seed_spread_m": null,
+   "nearest": "FREE_SPACE_WALL",
+   "note": "reach used 0.354 m."
+  },
+  {
+   "id": "A170-SP13-CLOSURE-single_aft_resited_fitout",
+   "route": "SP-13 closure (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "single hinged dogged leaf, hinge aft, offset 0.02 m, resited fit-out",
+   "case": "carriers A, S, K (two rescuers) and suited crew through the exit with the leaf parked open, the leaf park and swing envelopes, operation from both sides; minimum over all",
+   "least_m": 0.016,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "carrier A",
+    "carrier S",
+    "carrier K",
+    "suited crew",
+    "rescuers",
+    "leaf park",
+    "leaf swing 5-90 deg",
+    "operator SP-13 side",
+    "operator trunk side",
+    "seeds [17, 23, 41, 59, 73, 97]"
+   ],
+   "seed_spread_m": null,
+   "nearest": "FREE_SPACE_WALL",
+   "note": "carriers {'A': 0.1, 'S': 0.043, 'K': 0.079, 'U': 0.054}; leaf park 0.022, swing 0.016; operators {'sp13_side': 0.1, 'trunk_side': 0.1}."
+  },
+  {
+   "id": "A170-SP13-CLOSURE-single_aft_resited_fitout-OP-sp13_side",
+   "route": "SP-13 closure (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "single_aft_resited_fitout",
+   "case": "operation of the closed leaf from the sp13 side",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "operator torso r 0.25 m",
+    "shoulder within 0.70 m of the handwheel"
+   ],
+   "seed_spread_m": null,
+   "nearest": "FREE_SPACE_WALL",
+   "note": "reach used 0.464 m."
+  },
+  {
+   "id": "A170-SP13-CLOSURE-single_aft_resited_fitout-OP-trunk_side",
+   "route": "SP-13 closure (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "single_aft_resited_fitout",
+   "case": "operation of the closed leaf from the trunk side",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "operator torso r 0.25 m",
+    "shoulder within 0.70 m of the handwheel"
+   ],
+   "seed_spread_m": null,
+   "nearest": "FREE_SPACE_WALL",
+   "note": "reach used 0.354 m."
+  },
+  {
+   "id": "A170-SP13-CLOSURE-single_fwd_resited_fitout",
+   "route": "SP-13 closure (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "single hinged dogged leaf, hinge fwd, offset 0.1 m, resited fit-out",
+   "case": "carriers A, S, K (two rescuers) and suited crew through the exit with the leaf parked open, the leaf park and swing envelopes, operation from both sides; minimum over all",
+   "least_m": -0.084,
+   "status": "FAIL",
+   "worst_case_over": [
+    "carrier A",
+    "carrier S",
+    "carrier K",
+    "suited crew",
+    "rescuers",
+    "leaf park",
+    "leaf swing 5-90 deg",
+    "operator SP-13 side",
+    "operator trunk side",
+    "seeds [17, 23, 41]"
+   ],
+   "seed_spread_m": null,
+   "nearest": "FREE_SPACE_WALL",
+   "note": "carriers {'A': 0.081, 'S': -0.084, 'K': 0.079, 'U': 0.036}; leaf park 0.192, swing 0.019; operators {'sp13_side': 0.1, 'trunk_side': 0.1}."
+  },
+  {
+   "id": "A170-SP13-CLOSURE-single_fwd_resited_fitout-OP-sp13_side",
+   "route": "SP-13 closure (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "single_fwd_resited_fitout",
+   "case": "operation of the closed leaf from the sp13 side",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "operator torso r 0.25 m",
+    "shoulder within 0.70 m of the handwheel"
+   ],
+   "seed_spread_m": null,
+   "nearest": "FREE_SPACE_WALL",
+   "note": "reach used 0.584 m."
+  },
+  {
+   "id": "A170-SP13-CLOSURE-single_fwd_resited_fitout-OP-trunk_side",
+   "route": "SP-13 closure (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "single_fwd_resited_fitout",
+   "case": "operation of the closed leaf from the trunk side",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "operator torso r 0.25 m",
+    "shoulder within 0.70 m of the handwheel"
+   ],
+   "seed_spread_m": null,
+   "nearest": "FREE_SPACE_WALL",
+   "note": "reach used 0.354 m."
+  },
+  {
+   "id": "A170-SP13-CLOSURE-dual_fwd_resited_fitout",
+   "route": "SP-13 closure (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "dual hinged dogged leaf, hinge fwd, offset 0.1 m, resited fit-out",
+   "case": "carriers A, S, K (two rescuers) and suited crew through the exit with the leaf parked open, the leaf park and swing envelopes, operation from both sides; minimum over all",
+   "least_m": -0.038,
+   "status": "FAIL",
+   "worst_case_over": [
+    "carrier A",
+    "carrier S",
+    "carrier K",
+    "suited crew",
+    "rescuers",
+    "leaf park",
+    "leaf swing 5-90 deg",
+    "operator SP-13 side",
+    "operator trunk side",
+    "seeds [17, 23, 41]"
+   ],
+   "seed_spread_m": null,
+   "nearest": "FREE_SPACE_WALL",
+   "note": "carriers {'A': -0.038, 'S': -0.0, 'K': 0.083, 'U': 0.036}; leaf park 0.092, swing 0.019; operators {'sp13_side': 0.1, 'trunk_side': 0.1}."
+  },
+  {
+   "id": "A170-SP13-CLOSURE-dual_fwd_resited_fitout-OP-sp13_side",
+   "route": "SP-13 closure (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "dual_fwd_resited_fitout",
+   "case": "operation of the closed leaf from the sp13 side",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "operator torso r 0.25 m",
+    "shoulder within 0.70 m of the handwheel"
+   ],
+   "seed_spread_m": null,
+   "nearest": "FREE_SPACE_WALL",
+   "note": "reach used 0.584 m."
+  },
+  {
+   "id": "A170-SP13-CLOSURE-dual_fwd_resited_fitout-OP-trunk_side",
+   "route": "SP-13 closure (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "dual_fwd_resited_fitout",
+   "case": "operation of the closed leaf from the trunk side",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "operator torso r 0.25 m",
+    "shoulder within 0.70 m of the handwheel"
+   ],
+   "seed_spread_m": null,
+   "nearest": "FREE_SPACE_WALL",
+   "note": "reach used 0.354 m."
+  },
+  {
+   "id": "A170-SP13-CLOSURE-single_minus_t_resited_fitout",
+   "route": "SP-13 closure (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "single hinged dogged leaf, hinge minus_t, offset 0.1 m, resited fit-out",
+   "case": "carriers A, S, K (two rescuers) and suited crew through the exit with the leaf parked open, the leaf park and swing envelopes, operation from both sides; minimum over all",
+   "least_m": -0.001,
+   "status": "FAIL",
+   "worst_case_over": [
+    "carrier A",
+    "carrier S",
+    "carrier K",
+    "suited crew",
+    "rescuers",
+    "leaf park",
+    "leaf swing 5-90 deg",
+    "operator SP-13 side",
+    "operator trunk side",
+    "seeds [17, 23, 41, 59, 73, 97]"
+   ],
+   "seed_spread_m": null,
+   "nearest": "FREE_SPACE_WALL",
+   "note": "carriers {'A': 0.1, 'S': 0.058, 'K': 0.075, 'U': 0.077}; leaf park 0.122, swing 0.031; operators {'sp13_side': 0.1, 'trunk_side': 0.1}."
+  },
+  {
+   "id": "A170-SP13-CLOSURE-single_minus_t_resited_fitout-OP-sp13_side",
+   "route": "SP-13 closure (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "single_minus_t_resited_fitout",
+   "case": "operation of the closed leaf from the sp13 side",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "operator torso r 0.25 m",
+    "shoulder within 0.70 m of the handwheel"
+   ],
+   "seed_spread_m": null,
+   "nearest": "FREE_SPACE_WALL",
+   "note": "reach used 0.464 m."
+  },
+  {
+   "id": "A170-SP13-CLOSURE-single_minus_t_resited_fitout-OP-trunk_side",
+   "route": "SP-13 closure (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "single_minus_t_resited_fitout",
+   "case": "operation of the closed leaf from the trunk side",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "operator torso r 0.25 m",
+    "shoulder within 0.70 m of the handwheel"
+   ],
+   "seed_spread_m": null,
+   "nearest": "FREE_SPACE_WALL",
+   "note": "reach used 0.354 m."
+  },
+  {
+   "id": "A170-SP13-CLOSURE-dual_minus_t_resited_fitout",
+   "route": "SP-13 closure (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "dual hinged dogged leaf, hinge minus_t, offset 0.1 m, resited fit-out",
+   "case": "carriers A, S, K (two rescuers) and suited crew through the exit with the leaf parked open, the leaf park and swing envelopes, operation from both sides; minimum over all",
+   "least_m": -0.027,
+   "status": "FAIL",
+   "worst_case_over": [
+    "carrier A",
+    "carrier S",
+    "carrier K",
+    "suited crew",
+    "rescuers",
+    "leaf park",
+    "leaf swing 5-90 deg",
+    "operator SP-13 side",
+    "operator trunk side",
+    "seeds [17, 23, 41, 59, 73, 97]"
+   ],
+   "seed_spread_m": null,
+   "nearest": "FREE_SPACE_WALL",
+   "note": "carriers {'A': 0.06, 'S': 0.052, 'K': 0.051, 'U': 0.06}; leaf park 0.093, swing 0.031; operators {'sp13_side': 0.1, 'trunk_side': 0.1}."
+  },
+  {
+   "id": "A170-SP13-CLOSURE-dual_minus_t_resited_fitout-OP-sp13_side",
+   "route": "SP-13 closure (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "dual_minus_t_resited_fitout",
+   "case": "operation of the closed leaf from the sp13 side",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "operator torso r 0.25 m",
+    "shoulder within 0.70 m of the handwheel"
+   ],
+   "seed_spread_m": null,
+   "nearest": "FREE_SPACE_WALL",
+   "note": "reach used 0.464 m."
+  },
+  {
+   "id": "A170-SP13-CLOSURE-dual_minus_t_resited_fitout-OP-trunk_side",
+   "route": "SP-13 closure (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "dual_minus_t_resited_fitout",
+   "case": "operation of the closed leaf from the trunk side",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "operator torso r 0.25 m",
+    "shoulder within 0.70 m of the handwheel"
+   ],
+   "seed_spread_m": null,
+   "nearest": "FREE_SPACE_WALL",
+   "note": "reach used 0.354 m."
+  },
+  {
+   "id": "A170-SP13-LEAF-single_aft_o0.10",
+   "route": "SP-13 closure (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "single_aft_o0.10",
+   "case": "leaf parked (90 deg) and swing envelope vs room walls and fit-out",
+   "least_m": -0.473,
+   "status": "FAIL",
+   "worst_case_over": [
+    "park envelope",
+    "swing 5-90 deg",
+    "room walls",
+    "fit-out boxes"
+   ],
+   "seed_spread_m": null,
+   "nearest": "SP13_DRY_RACK",
+   "note": "park {'to_room_m': -0.058, 'to_fitout_m': -0.102, 'nearest_fixture': 'SP13_DRY_RACK'}, swing {'to_room_m': -0.058, 'to_fitout_m': -0.473, 'nearest_fixture': 'SP13_DRY_RACK'}."
+  },
+  {
+   "id": "A170-SP13-LEAF-single_aft_o0.02",
+   "route": "SP-13 closure (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "single_aft_o0.02",
+   "case": "leaf parked (90 deg) and swing envelope vs room walls and fit-out",
+   "least_m": -0.413,
+   "status": "FAIL",
+   "worst_case_over": [
+    "park envelope",
+    "swing 5-90 deg",
+    "room walls",
+    "fit-out boxes"
+   ],
+   "seed_spread_m": null,
+   "nearest": "SP13_DRY_RACK",
+   "note": "park {'to_room_m': 0.022, 'to_fitout_m': -0.182, 'nearest_fixture': 'SP13_DRY_RACK'}, swing {'to_room_m': 0.016, 'to_fitout_m': -0.413, 'nearest_fixture': 'SP13_DRY_RACK'}."
+  },
+  {
+   "id": "A170-SP13-LEAF-single_fwd_o0.10",
+   "route": "SP-13 closure (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "single_fwd_o0.10",
+   "case": "leaf parked (90 deg) and swing envelope vs room walls and fit-out",
+   "least_m": -0.145,
+   "status": "FAIL",
+   "worst_case_over": [
+    "park envelope",
+    "swing 5-90 deg",
+    "room walls",
+    "fit-out boxes"
+   ],
+   "seed_spread_m": null,
+   "nearest": "SP13_CHARGE_PANEL",
+   "note": "park {'to_room_m': 0.192, 'to_fitout_m': 0.231, 'nearest_fixture': 'SP13_CHARGE_PANEL'}, swing {'to_room_m': 0.019, 'to_fitout_m': -0.145, 'nearest_fixture': 'SP13_DRY_RACK'}."
+  },
+  {
+   "id": "A170-SP13-LEAF-single_fwd_o0.02",
+   "route": "SP-13 closure (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "single_fwd_o0.02",
+   "case": "leaf parked (90 deg) and swing envelope vs room walls and fit-out",
+   "least_m": -0.113,
+   "status": "FAIL",
+   "worst_case_over": [
+    "park envelope",
+    "swing 5-90 deg",
+    "room walls",
+    "fit-out boxes"
+   ],
+   "seed_spread_m": null,
+   "nearest": "SP13_CHARGE_PANEL",
+   "note": "park {'to_room_m': 0.272, 'to_fitout_m': 0.294, 'nearest_fixture': 'SP13_CHARGE_PANEL'}, swing {'to_room_m': 0.016, 'to_fitout_m': -0.113, 'nearest_fixture': 'SP13_DRY_RACK'}."
+  },
+  {
+   "id": "A170-SP13-LEAF-single_plus_t_o0.10",
+   "route": "SP-13 closure (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "single_plus_t_o0.10",
+   "case": "leaf parked (90 deg) and swing envelope vs room walls and fit-out",
+   "least_m": -0.03,
+   "status": "FAIL",
+   "worst_case_over": [
+    "park envelope",
+    "swing 5-90 deg",
+    "room walls",
+    "fit-out boxes"
+   ],
+   "seed_spread_m": null,
+   "nearest": "SP13_DRY_RACK",
+   "note": "park {'to_room_m': -0.03, 'to_fitout_m': -0.03, 'nearest_fixture': 'SP13_DRY_RACK'}, swing {'to_room_m': -0.03, 'to_fitout_m': -0.03, 'nearest_fixture': 'SP13_DRY_RACK'}."
+  },
+  {
+   "id": "A170-SP13-LEAF-single_plus_t_o0.02",
+   "route": "SP-13 closure (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "single_plus_t_o0.02",
+   "case": "leaf parked (90 deg) and swing envelope vs room walls and fit-out",
+   "least_m": -0.008,
+   "status": "FAIL",
+   "worst_case_over": [
+    "park envelope",
+    "swing 5-90 deg",
+    "room walls",
+    "fit-out boxes"
+   ],
+   "seed_spread_m": null,
+   "nearest": "SP13_DRY_RACK",
+   "note": "park {'to_room_m': 0.009, 'to_fitout_m': 0.026, 'nearest_fixture': 'SP13_DRY_RACK'}, swing {'to_room_m': -0.008, 'to_fitout_m': 0.026, 'nearest_fixture': 'SP13_DRY_RACK'}."
+  },
+  {
+   "id": "A170-SP13-LEAF-single_minus_t_o0.10",
+   "route": "SP-13 closure (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "single_minus_t_o0.10",
+   "case": "leaf parked (90 deg) and swing envelope vs room walls and fit-out",
+   "least_m": -0.088,
+   "status": "FAIL",
+   "worst_case_over": [
+    "park envelope",
+    "swing 5-90 deg",
+    "room walls",
+    "fit-out boxes"
+   ],
+   "seed_spread_m": null,
+   "nearest": "SP13_DRY_RACK",
+   "note": "park {'to_room_m': 0.122, 'to_fitout_m': -0.088, 'nearest_fixture': 'SP13_DRY_RACK'}, swing {'to_room_m': 0.031, 'to_fitout_m': -0.088, 'nearest_fixture': 'SP13_DRY_RACK'}."
+  },
+  {
+   "id": "A170-SP13-LEAF-single_minus_t_o0.02",
+   "route": "SP-13 closure (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "single_minus_t_o0.02",
+   "case": "leaf parked (90 deg) and swing envelope vs room walls and fit-out",
+   "least_m": -0.004,
+   "status": "FAIL",
+   "worst_case_over": [
+    "park envelope",
+    "swing 5-90 deg",
+    "room walls",
+    "fit-out boxes"
+   ],
+   "seed_spread_m": null,
+   "nearest": "SP13_DRY_RACK",
+   "note": "park {'to_room_m': 0.122, 'to_fitout_m': -0.004, 'nearest_fixture': 'SP13_DRY_RACK'}, swing {'to_room_m': 0.027, 'to_fitout_m': -0.004, 'nearest_fixture': 'SP13_DRY_RACK'}."
+  },
+  {
+   "id": "A170-SP13-LEAF-dual_aft_o0.10",
+   "route": "SP-13 closure (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "dual_aft_o0.10",
+   "case": "leaf parked (90 deg) and swing envelope vs room walls and fit-out",
+   "least_m": -0.473,
+   "status": "FAIL",
+   "worst_case_over": [
+    "park envelope",
+    "swing 5-90 deg",
+    "room walls",
+    "fit-out boxes"
+   ],
+   "seed_spread_m": null,
+   "nearest": "SP13_DRY_RACK",
+   "note": "park {'to_room_m': -0.158, 'to_fitout_m': -0.102, 'nearest_fixture': 'SP13_DRY_RACK'}, swing {'to_room_m': -0.158, 'to_fitout_m': -0.473, 'nearest_fixture': 'SP13_DRY_RACK'}."
+  },
+  {
+   "id": "A170-SP13-LEAF-dual_aft_o0.02",
+   "route": "SP-13 closure (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "dual_aft_o0.02",
+   "case": "leaf parked (90 deg) and swing envelope vs room walls and fit-out",
+   "least_m": -0.462,
+   "status": "FAIL",
+   "worst_case_over": [
+    "park envelope",
+    "swing 5-90 deg",
+    "room walls",
+    "fit-out boxes"
+   ],
+   "seed_spread_m": null,
+   "nearest": "SP13_DRY_RACK",
+   "note": "park {'to_room_m': -0.078, 'to_fitout_m': -0.182, 'nearest_fixture': 'SP13_DRY_RACK'}, swing {'to_room_m': -0.078, 'to_fitout_m': -0.462, 'nearest_fixture': 'SP13_DRY_RACK'}."
+  },
+  {
+   "id": "A170-SP13-LEAF-dual_fwd_o0.10",
+   "route": "SP-13 closure (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "dual_fwd_o0.10",
+   "case": "leaf parked (90 deg) and swing envelope vs room walls and fit-out",
+   "least_m": -0.226,
+   "status": "FAIL",
+   "worst_case_over": [
+    "park envelope",
+    "swing 5-90 deg",
+    "room walls",
+    "fit-out boxes"
+   ],
+   "seed_spread_m": null,
+   "nearest": "SP13_CHARGE_PANEL",
+   "note": "park {'to_room_m': 0.092, 'to_fitout_m': 0.231, 'nearest_fixture': 'SP13_CHARGE_PANEL'}, swing {'to_room_m': 0.019, 'to_fitout_m': -0.226, 'nearest_fixture': 'SP13_DRY_RACK'}."
+  },
+  {
+   "id": "A170-SP13-LEAF-dual_fwd_o0.02",
+   "route": "SP-13 closure (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "dual_fwd_o0.02",
+   "case": "leaf parked (90 deg) and swing envelope vs room walls and fit-out",
+   "least_m": -0.194,
+   "status": "FAIL",
+   "worst_case_over": [
+    "park envelope",
+    "swing 5-90 deg",
+    "room walls",
+    "fit-out boxes"
+   ],
+   "seed_spread_m": null,
+   "nearest": "SP13_CHARGE_PANEL",
+   "note": "park {'to_room_m': 0.172, 'to_fitout_m': 0.246, 'nearest_fixture': 'SP13_CHARGE_PANEL'}, swing {'to_room_m': 0.016, 'to_fitout_m': -0.194, 'nearest_fixture': 'SP13_DRY_RACK'}."
+  },
+  {
+   "id": "A170-SP13-LEAF-dual_plus_t_o0.10",
+   "route": "SP-13 closure (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "dual_plus_t_o0.10",
+   "case": "leaf parked (90 deg) and swing envelope vs room walls and fit-out",
+   "least_m": -0.211,
+   "status": "FAIL",
+   "worst_case_over": [
+    "park envelope",
+    "swing 5-90 deg",
+    "room walls",
+    "fit-out boxes"
+   ],
+   "seed_spread_m": null,
+   "nearest": "SP13_DRY_RACK",
+   "note": "park {'to_room_m': -0.036, 'to_fitout_m': -0.065, 'nearest_fixture': 'SP13_DRY_RACK'}, swing {'to_room_m': -0.036, 'to_fitout_m': -0.211, 'nearest_fixture': 'SP13_DRY_RACK'}."
+  },
+  {
+   "id": "A170-SP13-LEAF-dual_plus_t_o0.02",
+   "route": "SP-13 closure (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "dual_plus_t_o0.02",
+   "case": "leaf parked (90 deg) and swing envelope vs room walls and fit-out",
+   "least_m": -0.146,
+   "status": "FAIL",
+   "worst_case_over": [
+    "park envelope",
+    "swing 5-90 deg",
+    "room walls",
+    "fit-out boxes"
+   ],
+   "seed_spread_m": null,
+   "nearest": "SP13_DRY_RACK",
+   "note": "park {'to_room_m': 0.003, 'to_fitout_m': -0.142, 'nearest_fixture': 'SP13_DRY_RACK'}, swing {'to_room_m': -0.008, 'to_fitout_m': -0.146, 'nearest_fixture': 'SP13_DRY_RACK'}."
+  },
+  {
+   "id": "A170-SP13-LEAF-dual_minus_t_o0.10",
+   "route": "SP-13 closure (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "dual_minus_t_o0.10",
+   "case": "leaf parked (90 deg) and swing envelope vs room walls and fit-out",
+   "least_m": -0.228,
+   "status": "FAIL",
+   "worst_case_over": [
+    "park envelope",
+    "swing 5-90 deg",
+    "room walls",
+    "fit-out boxes"
+   ],
+   "seed_spread_m": null,
+   "nearest": "SP13_DRY_RACK",
+   "note": "park {'to_room_m': 0.122, 'to_fitout_m': -0.228, 'nearest_fixture': 'SP13_DRY_RACK'}, swing {'to_room_m': 0.031, 'to_fitout_m': -0.228, 'nearest_fixture': 'SP13_DRY_RACK'}."
+  },
+  {
+   "id": "A170-SP13-LEAF-dual_minus_t_o0.02",
+   "route": "SP-13 closure (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "dual_minus_t_o0.02",
+   "case": "leaf parked (90 deg) and swing envelope vs room walls and fit-out",
+   "least_m": -0.208,
+   "status": "FAIL",
+   "worst_case_over": [
+    "park envelope",
+    "swing 5-90 deg",
+    "room walls",
+    "fit-out boxes"
+   ],
+   "seed_spread_m": null,
+   "nearest": "SP13_DRY_RACK",
+   "note": "park {'to_room_m': 0.122, 'to_fitout_m': -0.208, 'nearest_fixture': 'SP13_DRY_RACK'}, swing {'to_room_m': 0.027, 'to_fitout_m': -0.208, 'nearest_fixture': 'SP13_DRY_RACK'}."
+  },
+  {
+   "id": "A170-SP13-LEAF-resited_single_aft_o0.02",
+   "route": "SP-13 closure (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "resited_single_aft_o0.02",
+   "case": "leaf parked (90 deg) and swing envelope vs room walls and fit-out",
+   "least_m": 0.016,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "park envelope",
+    "swing 5-90 deg",
+    "room walls",
+    "fit-out boxes"
+   ],
+   "seed_spread_m": null,
+   "nearest": "SP13_DRY_RACK",
+   "note": "park {'to_room_m': 0.022, 'to_fitout_m': 0.321, 'nearest_fixture': 'SP13_DRY_RACK'}, swing {'to_room_m': 0.016, 'to_fitout_m': 0.072, 'nearest_fixture': 'SP13_DRY_RACK'}."
+  },
+  {
+   "id": "A170-SP13-LEAF-resited_dual_aft_o0.02",
+   "route": "SP-13 closure (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "resited_dual_aft_o0.02",
+   "case": "leaf parked (90 deg) and swing envelope vs room walls and fit-out",
+   "least_m": -0.078,
+   "status": "FAIL",
+   "worst_case_over": [
+    "park envelope",
+    "swing 5-90 deg",
+    "room walls",
+    "fit-out boxes"
+   ],
+   "seed_spread_m": null,
+   "nearest": "SP13_DRY_RACK",
+   "note": "park {'to_room_m': -0.078, 'to_fitout_m': 0.321, 'nearest_fixture': 'SP13_DRY_RACK'}, swing {'to_room_m': -0.078, 'to_fitout_m': -0.017, 'nearest_fixture': 'SP13_DRY_RACK'}."
+  },
+  {
+   "id": "A170-SP13-LEAF-resited_single_fwd_o0.10",
+   "route": "SP-13 closure (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "resited_single_fwd_o0.10",
+   "case": "leaf parked (90 deg) and swing envelope vs room walls and fit-out",
+   "least_m": 0.019,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "park envelope",
+    "swing 5-90 deg",
+    "room walls",
+    "fit-out boxes"
+   ],
+   "seed_spread_m": null,
+   "nearest": "SP13_CHARGE_PANEL",
+   "note": "park {'to_room_m': 0.192, 'to_fitout_m': 0.231, 'nearest_fixture': 'SP13_CHARGE_PANEL'}, swing {'to_room_m': 0.019, 'to_fitout_m': 0.132, 'nearest_fixture': 'SP13_SPARES'}."
+  },
+  {
+   "id": "A170-SP13-LEAF-resited_dual_fwd_o0.10",
+   "route": "SP-13 closure (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "resited_dual_fwd_o0.10",
+   "case": "leaf parked (90 deg) and swing envelope vs room walls and fit-out",
+   "least_m": 0.019,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "park envelope",
+    "swing 5-90 deg",
+    "room walls",
+    "fit-out boxes"
+   ],
+   "seed_spread_m": null,
+   "nearest": "SP13_CHARGE_PANEL",
+   "note": "park {'to_room_m': 0.092, 'to_fitout_m': 0.231, 'nearest_fixture': 'SP13_CHARGE_PANEL'}, swing {'to_room_m': 0.019, 'to_fitout_m': 0.059, 'nearest_fixture': 'SP13_SPARES'}."
+  },
+  {
+   "id": "A170-SP13-LEAF-resited_single_minus_t_o0.10",
+   "route": "SP-13 closure (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "resited_single_minus_t_o0.10",
+   "case": "leaf parked (90 deg) and swing envelope vs room walls and fit-out",
+   "least_m": 0.031,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "park envelope",
+    "swing 5-90 deg",
+    "room walls",
+    "fit-out boxes"
+   ],
+   "seed_spread_m": null,
+   "nearest": "SP13_CHARGE_PANEL",
+   "note": "park {'to_room_m': 0.122, 'to_fitout_m': 0.236, 'nearest_fixture': 'SP13_CHARGE_PANEL'}, swing {'to_room_m': 0.031, 'to_fitout_m': 0.236, 'nearest_fixture': 'SP13_CHARGE_PANEL'}."
+  },
+  {
+   "id": "A170-SP13-LEAF-resited_dual_minus_t_o0.10",
+   "route": "SP-13 closure (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "resited_dual_minus_t_o0.10",
+   "case": "leaf parked (90 deg) and swing envelope vs room walls and fit-out",
+   "least_m": 0.031,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "park envelope",
+    "swing 5-90 deg",
+    "room walls",
+    "fit-out boxes"
+   ],
+   "seed_spread_m": null,
+   "nearest": "SP13_DRY_RACK",
+   "note": "park {'to_room_m': 0.122, 'to_fitout_m': 0.093, 'nearest_fixture': 'SP13_DRY_RACK'}, swing {'to_room_m': 0.031, 'to_fitout_m': 0.093, 'nearest_fixture': 'SP13_DRY_RACK'}."
+  },
+  {
+   "id": "A170-SP13-DP80-a_single",
+   "route": "SP-13 closure (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "a_single",
+   "case": "80 kPa nominal both directions",
+   "least_m": null,
+   "status": "OPEN",
+   "worst_case_over": [
+    "SP-13 high (trunk or SP-13 side loss)",
+    "trunk high (SP-13 depressurized)"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "ideal dp x clear area 107.5 kN, x leaf outer 124.8 kN (DIAGNOSTIC); no rating; hinge not assumed to resist reversed pressure."
+  },
+  {
+   "id": "A170-SP13-DP80-b_dual_stacked",
+   "route": "SP-13 closure (A170)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "b_dual_stacked",
+   "case": "80 kPa nominal both directions",
+   "least_m": null,
+   "status": "OPEN",
+   "worst_case_over": [
+    "SP-13 high",
+    "trunk high"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "ideal dp x clear area 107.5 kN, x leaf outer 124.8 kN (DIAGNOSTIC); no rating; hinge not assumed to resist reversed pressure."
+  },
+  {
+   "id": "A171-L1A-PORT205-ROUTE",
+   "route": "L1-A district (A171)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "district port moved to 205 deg (reversible WHITEBOX), ladder 285 deg",
+   "case": "whole route: minimum over every measured element",
+   "least_m": 0.018,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "ladder lines vs every opening (built ladder incl.)",
+    "moved port edge vs ladder",
+    "ladder vs trunk fixtures",
+    "climber (1.5 g pose) vs moved port rim",
+    "hoist line 0.25 m @105 deg, A vs ladder rods",
+    "hoist line, S vs ladder rods",
+    "port tube vs SP-13 exit solid",
+    "port tube vs SP-12 exit solid",
+    "carrier S past the extended ladder with rescuers",
+    "carrier A past the extended ladder with rescuers",
+    "carrier K past the extended ladder with rescuers",
+    "carrier U past the extended ladder (suited crew, self-propelled)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "ladder lines vs every opening (built ladder incl.)",
+   "note": "no new ladder break: True; port screen CLEAR. the trunk, the district and SP-12/13 are on the non-rotating spine, so a clearance of fixed geometry is the same number in 0 g, spin, stopped and locked 1.5 g; the sampled-pose carriers are free poses (any state); the climber figure is the 1.5 g aft-down pose only; a 0 g free-float traverse pose, Coriolis and the loads of each state are not represented."
+  },
+  {
+   "id": "A171-L1A-PORT205-E00",
+   "route": "L1-A district (A171)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "port 205 deg",
+   "case": "ladder lines vs every opening (built ladder incl.)",
+   "least_m": 0.018,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "ladder lines vs every opening (built ladder incl.)"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A171-L1A-PORT205-E01",
+   "route": "L1-A district (A171)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "port 205 deg",
+   "case": "moved port edge vs ladder",
+   "least_m": 0.092,
+   "status": "PASS",
+   "worst_case_over": [
+    "moved port edge vs ladder"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A171-L1A-PORT205-E02",
+   "route": "L1-A district (A171)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "port 205 deg",
+   "case": "ladder vs trunk fixtures",
+   "least_m": 0.133,
+   "status": "PASS",
+   "worst_case_over": [
+    "ladder vs trunk fixtures"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A171-L1A-PORT205-E03",
+   "route": "L1-A district (A171)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "port 205 deg",
+   "case": "climber (1.5 g pose) vs moved port rim",
+   "least_m": 0.322,
+   "status": "PASS",
+   "worst_case_over": [
+    "climber (1.5 g pose) vs moved port rim"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A171-L1A-PORT205-E04",
+   "route": "L1-A district (A171)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "port 205 deg",
+   "case": "hoist line 0.25 m @105 deg, A vs ladder rods",
+   "least_m": 0.487,
+   "status": "PASS",
+   "worst_case_over": [
+    "hoist line 0.25 m @105 deg, A vs ladder rods"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A171-L1A-PORT205-E05",
+   "route": "L1-A district (A171)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "port 205 deg",
+   "case": "hoist line, S vs ladder rods",
+   "least_m": 0.372,
+   "status": "PASS",
+   "worst_case_over": [
+    "hoist line, S vs ladder rods"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A171-L1A-PORT205-E06",
+   "route": "L1-A district (A171)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "port 205 deg",
+   "case": "port tube vs SP-13 exit solid",
+   "least_m": 1.393,
+   "status": "PASS",
+   "worst_case_over": [
+    "port tube vs SP-13 exit solid"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A171-L1A-PORT205-E07",
+   "route": "L1-A district (A171)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "port 205 deg",
+   "case": "port tube vs SP-12 exit solid",
+   "least_m": 1.509,
+   "status": "PASS",
+   "worst_case_over": [
+    "port tube vs SP-12 exit solid"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A171-L1A-PORT205-E08",
+   "route": "L1-A district (A171)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "port 205 deg",
+   "case": "carrier S past the extended ladder with rescuers",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier S past the extended ladder with rescuers"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A171-L1A-PORT205-E09",
+   "route": "L1-A district (A171)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "port 205 deg",
+   "case": "carrier A past the extended ladder with rescuers",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier A past the extended ladder with rescuers"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A171-L1A-PORT205-E10",
+   "route": "L1-A district (A171)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "port 205 deg",
+   "case": "carrier K past the extended ladder with rescuers",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier K past the extended ladder with rescuers"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A171-L1A-PORT205-E11",
+   "route": "L1-A district (A171)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "port 205 deg",
+   "case": "carrier U past the extended ladder (suited crew, self-propelled)",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier U past the extended ladder (suited crew, self-propelled)"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A171-L1A-PORT210-ROUTE",
+   "route": "L1-A district (A171)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "district port moved to 210 deg (reversible WHITEBOX), ladder 285 deg",
+   "case": "whole route: minimum over every measured element",
+   "least_m": 0.018,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "ladder lines vs every opening (built ladder incl.)",
+    "moved port edge vs ladder",
+    "ladder vs trunk fixtures",
+    "climber (1.5 g pose) vs moved port rim",
+    "hoist line 0.25 m @105 deg, A vs ladder rods",
+    "hoist line, S vs ladder rods",
+    "port tube vs SP-13 exit solid",
+    "port tube vs SP-12 exit solid",
+    "carrier S past the extended ladder with rescuers",
+    "carrier A past the extended ladder with rescuers",
+    "carrier K past the extended ladder with rescuers",
+    "carrier U past the extended ladder (suited crew, self-propelled)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "ladder lines vs every opening (built ladder incl.)",
+   "note": "no new ladder break: True; port screen CLEAR. the trunk, the district and SP-12/13 are on the non-rotating spine, so a clearance of fixed geometry is the same number in 0 g, spin, stopped and locked 1.5 g; the sampled-pose carriers are free poses (any state); the climber figure is the 1.5 g aft-down pose only; a 0 g free-float traverse pose, Coriolis and the loads of each state are not represented."
+  },
+  {
+   "id": "A171-L1A-PORT210-E00",
+   "route": "L1-A district (A171)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "port 210 deg",
+   "case": "ladder lines vs every opening (built ladder incl.)",
+   "least_m": 0.018,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "ladder lines vs every opening (built ladder incl.)"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A171-L1A-PORT210-E01",
+   "route": "L1-A district (A171)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "port 210 deg",
+   "case": "moved port edge vs ladder",
+   "least_m": 0.068,
+   "status": "PASS",
+   "worst_case_over": [
+    "moved port edge vs ladder"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A171-L1A-PORT210-E02",
+   "route": "L1-A district (A171)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "port 210 deg",
+   "case": "ladder vs trunk fixtures",
+   "least_m": 0.133,
+   "status": "PASS",
+   "worst_case_over": [
+    "ladder vs trunk fixtures"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A171-L1A-PORT210-E03",
+   "route": "L1-A district (A171)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "port 210 deg",
+   "case": "climber (1.5 g pose) vs moved port rim",
+   "least_m": 0.268,
+   "status": "PASS",
+   "worst_case_over": [
+    "climber (1.5 g pose) vs moved port rim"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A171-L1A-PORT210-E04",
+   "route": "L1-A district (A171)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "port 210 deg",
+   "case": "hoist line 0.25 m @105 deg, A vs ladder rods",
+   "least_m": 0.487,
+   "status": "PASS",
+   "worst_case_over": [
+    "hoist line 0.25 m @105 deg, A vs ladder rods"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A171-L1A-PORT210-E05",
+   "route": "L1-A district (A171)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "port 210 deg",
+   "case": "hoist line, S vs ladder rods",
+   "least_m": 0.372,
+   "status": "PASS",
+   "worst_case_over": [
+    "hoist line, S vs ladder rods"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A171-L1A-PORT210-E06",
+   "route": "L1-A district (A171)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "port 210 deg",
+   "case": "port tube vs SP-13 exit solid",
+   "least_m": 1.438,
+   "status": "PASS",
+   "worst_case_over": [
+    "port tube vs SP-13 exit solid"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A171-L1A-PORT210-E07",
+   "route": "L1-A district (A171)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "port 210 deg",
+   "case": "port tube vs SP-12 exit solid",
+   "least_m": 1.55,
+   "status": "PASS",
+   "worst_case_over": [
+    "port tube vs SP-12 exit solid"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A171-L1A-PORT210-E08",
+   "route": "L1-A district (A171)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "port 210 deg",
+   "case": "carrier S past the extended ladder with rescuers",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier S past the extended ladder with rescuers"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A171-L1A-PORT210-E09",
+   "route": "L1-A district (A171)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "port 210 deg",
+   "case": "carrier A past the extended ladder with rescuers",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier A past the extended ladder with rescuers"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A171-L1A-PORT210-E10",
+   "route": "L1-A district (A171)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "port 210 deg",
+   "case": "carrier K past the extended ladder with rescuers",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier K past the extended ladder with rescuers"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A171-L1A-PORT210-E11",
+   "route": "L1-A district (A171)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "port 210 deg",
+   "case": "carrier U past the extended ladder (suited crew, self-propelled)",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier U past the extended ladder (suited crew, self-propelled)"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A171-L1A-PORT215-ROUTE",
+   "route": "L1-A district (A171)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "district port moved to 215 deg (reversible WHITEBOX), ladder 285 deg",
+   "case": "whole route: minimum over every measured element",
+   "least_m": 0.018,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "ladder lines vs every opening (built ladder incl.)",
+    "moved port edge vs ladder",
+    "ladder vs trunk fixtures",
+    "climber (1.5 g pose) vs moved port rim",
+    "hoist line 0.25 m @105 deg, A vs ladder rods",
+    "hoist line, S vs ladder rods",
+    "port tube vs SP-13 exit solid",
+    "port tube vs SP-12 exit solid",
+    "carrier S past the extended ladder with rescuers",
+    "carrier A past the extended ladder with rescuers",
+    "carrier K past the extended ladder with rescuers",
+    "carrier U past the extended ladder (suited crew, self-propelled)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "ladder lines vs every opening (built ladder incl.)",
+   "note": "no new ladder break: True; port screen CLEAR. the trunk, the district and SP-12/13 are on the non-rotating spine, so a clearance of fixed geometry is the same number in 0 g, spin, stopped and locked 1.5 g; the sampled-pose carriers are free poses (any state); the climber figure is the 1.5 g aft-down pose only; a 0 g free-float traverse pose, Coriolis and the loads of each state are not represented."
+  },
+  {
+   "id": "A171-L1A-PORT215-E00",
+   "route": "L1-A district (A171)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "port 215 deg",
+   "case": "ladder lines vs every opening (built ladder incl.)",
+   "least_m": 0.018,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "ladder lines vs every opening (built ladder incl.)"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A171-L1A-PORT215-E01",
+   "route": "L1-A district (A171)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "port 215 deg",
+   "case": "moved port edge vs ladder",
+   "least_m": 0.035,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "moved port edge vs ladder"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A171-L1A-PORT215-E02",
+   "route": "L1-A district (A171)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "port 215 deg",
+   "case": "ladder vs trunk fixtures",
+   "least_m": 0.133,
+   "status": "PASS",
+   "worst_case_over": [
+    "ladder vs trunk fixtures"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A171-L1A-PORT215-E03",
+   "route": "L1-A district (A171)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "port 215 deg",
+   "case": "climber (1.5 g pose) vs moved port rim",
+   "least_m": 0.217,
+   "status": "PASS",
+   "worst_case_over": [
+    "climber (1.5 g pose) vs moved port rim"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A171-L1A-PORT215-E04",
+   "route": "L1-A district (A171)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "port 215 deg",
+   "case": "hoist line 0.25 m @105 deg, A vs ladder rods",
+   "least_m": 0.487,
+   "status": "PASS",
+   "worst_case_over": [
+    "hoist line 0.25 m @105 deg, A vs ladder rods"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A171-L1A-PORT215-E05",
+   "route": "L1-A district (A171)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "port 215 deg",
+   "case": "hoist line, S vs ladder rods",
+   "least_m": 0.372,
+   "status": "PASS",
+   "worst_case_over": [
+    "hoist line, S vs ladder rods"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A171-L1A-PORT215-E06",
+   "route": "L1-A district (A171)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "port 215 deg",
+   "case": "port tube vs SP-13 exit solid",
+   "least_m": 1.48,
+   "status": "PASS",
+   "worst_case_over": [
+    "port tube vs SP-13 exit solid"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A171-L1A-PORT215-E07",
+   "route": "L1-A district (A171)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "port 215 deg",
+   "case": "port tube vs SP-12 exit solid",
+   "least_m": 1.588,
+   "status": "PASS",
+   "worst_case_over": [
+    "port tube vs SP-12 exit solid"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A171-L1A-PORT215-E08",
+   "route": "L1-A district (A171)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "port 215 deg",
+   "case": "carrier S past the extended ladder with rescuers",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier S past the extended ladder with rescuers"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A171-L1A-PORT215-E09",
+   "route": "L1-A district (A171)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "port 215 deg",
+   "case": "carrier A past the extended ladder with rescuers",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier A past the extended ladder with rescuers"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A171-L1A-PORT215-E10",
+   "route": "L1-A district (A171)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "port 215 deg",
+   "case": "carrier K past the extended ladder with rescuers",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier K past the extended ladder with rescuers"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A171-L1A-PORT215-E11",
+   "route": "L1-A district (A171)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "port 215 deg",
+   "case": "carrier U past the extended ladder (suited crew, self-propelled)",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier U past the extended ladder (suited crew, self-propelled)"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A171-L1A-TETHER-FALL",
+   "route": "L1-A district (A171)",
+   "states": [
+    "locked_1.5g",
+    "0g",
+    "spin",
+    "stopped"
+   ],
+   "variant": "ladder 285 deg, port 205-215 deg",
+   "case": "tether fall load on the arrest rail",
+   "least_m": null,
+   "status": "OPEN",
+   "worst_case_over": [],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "OPEN: no load assumed."
+  },
+  {
+   "id": "A176-SP12-N2FWD45-E2E-S",
+   "route": "SP-12 exit N2 fwd45 (A176)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N2 fwd45 1.10 m, NEXT REVERSIBLE comparison only",
+   "case": "carrier S: complete litter route chamber -> SP-12 -> duct -> extension -> shunt aft -> refuge port station",
+   "least_m": 0.044,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "carrier S",
+    "body",
+    "rescuers",
+    "seeds [17, 23, 41, 59, 73, 97]"
+   ],
+   "seed_spread_m": [
+    0.044,
+    0.11
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "body 0.053, rescuers 0.044, limiting zone E."
+  },
+  {
+   "id": "A176-SP12-N2FWD45-E2E-A",
+   "route": "SP-12 exit N2 fwd45 (A176)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N2 fwd45 1.10 m, NEXT REVERSIBLE comparison only",
+   "case": "carrier A: complete litter route chamber -> SP-12 -> duct -> extension -> shunt aft -> refuge port station",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier A",
+    "body",
+    "rescuers",
+    "seeds [17, 23, 41, 59, 73, 97]"
+   ],
+   "seed_spread_m": [
+    0.1,
+    0.112
+   ],
+   "nearest": null,
+   "note": "body 0.1, rescuers 0.101, limiting zone H."
+  },
+  {
+   "id": "A176-SP12-N2FWD45-E2E-K",
+   "route": "SP-12 exit N2 fwd45 (A176)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N2 fwd45 1.10 m, NEXT REVERSIBLE comparison only",
+   "case": "carrier K: complete litter route chamber -> SP-12 -> duct -> extension -> shunt aft -> refuge port station",
+   "least_m": 0.085,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier K",
+    "body",
+    "rescuers",
+    "seeds [17, 23, 41, 59, 73, 97]"
+   ],
+   "seed_spread_m": [
+    0.085,
+    0.12
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "body 0.085, rescuers 0.1, limiting zone E."
+  },
+  {
+   "id": "A176-SP12-N2FWD45-OP-sp12_side",
+   "route": "SP-12 exit N2 fwd45 (A176)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N2 fwd45 1.10 m",
+   "case": "opposite-side operation retest, sp12 side (search to 0.30 m)",
+   "least_m": 0.3,
+   "status": "PASS",
+   "worst_case_over": [
+    "operator torso r 0.25 m",
+    "seeds [17, 23, 41, 59, 73, 97]"
+   ],
+   "seed_spread_m": null,
+   "nearest": "FREE_SPACE_WALL",
+   "note": "by seed [0.3, 0.3, 0.3, 0.3, 0.3, 0.3]; reach used [0.503, 0.473, 0.35, 0.445, 0.267, 0.35]."
+  },
+  {
+   "id": "A176-SP12-N2FWD45-OP-trunk_side",
+   "route": "SP-12 exit N2 fwd45 (A176)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N2 fwd45 1.10 m",
+   "case": "opposite-side operation retest, trunk side (search to 0.30 m)",
+   "least_m": 0.197,
+   "status": "PASS",
+   "worst_case_over": [
+    "operator torso r 0.25 m",
+    "seeds [17, 23, 41, 59, 73, 97]"
+   ],
+   "seed_spread_m": null,
+   "nearest": "FREE_SPACE_WALL",
+   "note": "by seed [0.249, 0.212, 0.221, 0.232, 0.222, 0.197]; reach used [0.594, 0.273, 0.456, 0.482, 0.373, 0.526]."
+  },
+  {
+   "id": "A176-SP12-N2FWD45-SF-rescuer_down_in_duct-S",
+   "route": "SP-12 exit N2 fwd45 (A176)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N2 fwd45 1.10 m, single fault",
+   "case": "carrier S: incapacitated rescuer (capsule r 0.25 m, 1.25 m) lying along the SP-12 duct axis at r 1.10",
+   "least_m": -0.292,
+   "status": "FAIL",
+   "worst_case_over": [
+    "carrier S",
+    "body",
+    "rescuers",
+    "seeds [17, 23, 41]"
+   ],
+   "seed_spread_m": [
+    -0.292,
+    -0.128
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "body -0.292, rescuers -0.184, limiting zone E."
+  },
+  {
+   "id": "A176-SP12-N2FWD45-SF-rescuer_down_in_duct-A",
+   "route": "SP-12 exit N2 fwd45 (A176)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N2 fwd45 1.10 m, single fault",
+   "case": "carrier A: incapacitated rescuer (capsule r 0.25 m, 1.25 m) lying along the SP-12 duct axis at r 1.10",
+   "least_m": -0.158,
+   "status": "FAIL",
+   "worst_case_over": [
+    "carrier A",
+    "body",
+    "rescuers",
+    "seeds [17, 23, 41]"
+   ],
+   "seed_spread_m": [
+    -0.158,
+    -0.056
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "body -0.067, rescuers -0.158, limiting zone E."
+  },
+  {
+   "id": "A176-SP12-N2FWD45-SF-rescuer_down_in_extension-S",
+   "route": "SP-12 exit N2 fwd45 (A176)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N2 fwd45 1.10 m, single fault",
+   "case": "carrier S: incapacitated rescuer pushed against the extension wall at az 140, centre X 104.0",
+   "least_m": -0.017,
+   "status": "FAIL",
+   "worst_case_over": [
+    "carrier S",
+    "body",
+    "rescuers",
+    "seeds [17, 23, 41]"
+   ],
+   "seed_spread_m": [
+    -0.017,
+    0.031
+   ],
+   "nearest": "L1A_LADDER_EXTENSION",
+   "note": "body -0.017, rescuers -0.016, limiting zone S_extension."
+  },
+  {
+   "id": "A176-SP12-N2FWD45-SF-rescuer_down_in_extension-A",
+   "route": "SP-12 exit N2 fwd45 (A176)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N2 fwd45 1.10 m, single fault",
+   "case": "carrier A: incapacitated rescuer pushed against the extension wall at az 140, centre X 104.0",
+   "least_m": 0.06,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier A",
+    "body",
+    "rescuers",
+    "seeds [17, 23, 41]"
+   ],
+   "seed_spread_m": [
+    0.06,
+    0.101
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "body 0.085, rescuers 0.06, limiting zone E."
+  },
+  {
+   "id": "A176-SP12-N2FWD45-SF-carrier_jammed_in_duct_vs_release-sp12_side",
+   "route": "SP-12 exit N2 fwd45 (A176)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N2 fwd45 1.10 m, single fault",
+   "case": "carrier S jammed in the SP-12 duct, head at the duct mouth on the trunk wall (r 0.80), tail up the duct: release reachable from the sp12 side",
+   "least_m": 0.029,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "operator torso r 0.25 m"
+   ],
+   "seed_spread_m": null,
+   "nearest": "FREE_SPACE_WALL",
+   "note": "by seed [0.032, 0.045, 0.03, 0.049, 0.048, 0.029]."
+  },
+  {
+   "id": "A176-SP12-N2FWD45-SF-carrier_jammed_in_duct_vs_release-trunk_side",
+   "route": "SP-12 exit N2 fwd45 (A176)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N2 fwd45 1.10 m, single fault",
+   "case": "carrier S jammed in the SP-12 duct, head at the duct mouth on the trunk wall (r 0.80), tail up the duct: release reachable from the trunk side",
+   "least_m": -0.02,
+   "status": "FAIL",
+   "worst_case_over": [
+    "operator torso r 0.25 m"
+   ],
+   "seed_spread_m": null,
+   "nearest": "FREE_SPACE_WALL",
+   "note": "by seed [0.016, 0.025, -0.001, -0.004, -0.02, 0.005]."
+  },
+  {
+   "id": "A176-SP12-N2FWD45-HOIST-axis",
+   "route": "SP-12 exit N2 fwd45 (A176)",
+   "states": [
+    "locked_1.5g"
+   ],
+   "variant": "hoist anchor axis at [105.663, 0.0, 0.0]",
+   "case": "hoist line (lift and lowering) vs the SP-13 exit solid and the SP-13 carrier S envelope",
+   "least_m": -0.428,
+   "status": "FAIL",
+   "worst_case_over": [
+    "line while lifting (H, D, E)",
+    "line while lowering aft"
+   ],
+   "seed_spread_m": null,
+   "nearest": "SP-13 S envelope",
+   "note": "anchor to SP-13 exit solid 0.166 m; line vs walls while lifting {'H': -0.224, 'D': -0.185, 'E': 0.35} (negative = needs a deflector); loads OPEN."
+  },
+  {
+   "id": "A176-SP12-N2FWD45-HOIST-offset_0.25_at_105deg",
+   "route": "SP-12 exit N2 fwd45 (A176)",
+   "states": [
+    "locked_1.5g"
+   ],
+   "variant": "hoist anchor offset_0.25_at_105deg (HUM-003 hoist line) at [105.663, -0.065, 0.241]",
+   "case": "hoist line (lift and lowering) vs the SP-13 exit solid and the SP-13 carrier S envelope",
+   "least_m": -0.35,
+   "status": "FAIL",
+   "worst_case_over": [
+    "line while lifting (H, D, E)",
+    "line while lowering aft"
+   ],
+   "seed_spread_m": null,
+   "nearest": "SP-13 S envelope",
+   "note": "anchor to SP-13 exit solid 0.098 m; line vs walls while lifting {'H': -0.224, 'D': -0.222, 'E': 0.329} (negative = needs a deflector); loads OPEN."
+  },
+  {
+   "id": "A176-SP12-N2FWD45-HOIST-extension_forward_end",
+   "route": "SP-12 exit N2 fwd45 (A176)",
+   "states": [
+    "locked_1.5g"
+   ],
+   "variant": "hoist anchor extension_forward_end at [107.25, 0.0, 0.0]",
+   "case": "hoist line (lift and lowering) vs the SP-13 exit solid and the SP-13 carrier S envelope",
+   "least_m": -0.428,
+   "status": "FAIL",
+   "worst_case_over": [
+    "line while lifting (H, D, E)",
+    "line while lowering aft"
+   ],
+   "seed_spread_m": null,
+   "nearest": "SP-13 S envelope",
+   "note": "anchor to SP-13 exit solid 1.288 m; line vs walls while lifting {'H': -0.223, 'D': -0.221, 'E': 0.15} (negative = needs a deflector); loads OPEN."
+  },
+  {
+   "id": "A176-SP12-N2FWD45-HOIST-LOADS",
+   "route": "SP-12 exit N2 fwd45 (A176)",
+   "states": [
+    "locked_1.5g"
+   ],
+   "variant": "N2 fwd45 1.10 m",
+   "case": "hoist / lowering anchor loads for the 2.628 m lift",
+   "least_m": null,
+   "status": "OPEN",
+   "worst_case_over": [],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "OPEN: no load, rating or effort assumed."
+  },
+  {
+   "id": "A177-SP13-no_fault_N2_fwd45-U",
+   "route": "SP-13 exit vs SP-12 faults (A177)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "no_fault_N2_fwd45",
+   "case": "suited crew: no SP-12 fault (reference)",
+   "least_m": 0.06,
+   "status": "PASS",
+   "worst_case_over": [
+    "suited crew",
+    "body",
+    "self-propelled",
+    "seeds [17, 23, 41, 59, 73, 97]"
+   ],
+   "seed_spread_m": [
+    0.06,
+    0.078
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "body 0.06, rescuers None, limiting zone T."
+  },
+  {
+   "id": "A177-SP13-no_fault_N2_fwd45-S",
+   "route": "SP-13 exit vs SP-12 faults (A177)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "no_fault_N2_fwd45",
+   "case": "carrier S: no SP-12 fault (reference)",
+   "least_m": 0.039,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "carrier S",
+    "body",
+    "rescuers",
+    "seeds [17, 23, 41, 59, 73, 97]"
+   ],
+   "seed_spread_m": [
+    0.039,
+    0.106
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "body 0.039, rescuers 0.064, limiting zone T."
+  },
+  {
+   "id": "A177-SP13-N2_fwd45_stuck_in_duct_mouth-U",
+   "route": "SP-13 exit vs SP-12 faults (A177)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N2_fwd45_stuck_in_duct_mouth",
+   "case": "suited crew: carrier S jammed in the SP-12 duct, head at the duct mouth on the trunk wall (r 0.80), tail up the duct",
+   "least_m": 0.035,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "suited crew",
+    "body",
+    "self-propelled",
+    "seeds [17, 23, 41, 59, 73, 97]"
+   ],
+   "seed_spread_m": [
+    0.035,
+    0.078
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "body 0.035, rescuers None, limiting zone T."
+  },
+  {
+   "id": "A177-SP13-N2_fwd45_stuck_in_duct_mouth-S",
+   "route": "SP-13 exit vs SP-12 faults (A177)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N2_fwd45_stuck_in_duct_mouth",
+   "case": "carrier S: carrier S jammed in the SP-12 duct, head at the duct mouth on the trunk wall (r 0.80), tail up the duct",
+   "least_m": 0.044,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "carrier S",
+    "body",
+    "rescuers",
+    "seeds [17, 23, 41, 59, 73, 97]"
+   ],
+   "seed_spread_m": [
+    0.044,
+    0.115
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "body 0.048, rescuers 0.044, limiting zone T."
+  },
+  {
+   "id": "A177-SP13-N2_fwd45_stuck_on_axis_shunt_start-U",
+   "route": "SP-13 exit vs SP-12 faults (A177)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N2_fwd45_stuck_on_axis_shunt_start",
+   "case": "suited crew: carrier S jammed on the bore axis at the shunt start (head X 105.53, the forward-most point of the SP-12 corridor)",
+   "least_m": -0.373,
+   "status": "FAIL",
+   "worst_case_over": [
+    "suited crew",
+    "body",
+    "self-propelled",
+    "seeds [17, 23, 41]"
+   ],
+   "seed_spread_m": [
+    -0.373,
+    -0.355
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "body -0.373, rescuers None, limiting zone T."
+  },
+  {
+   "id": "A177-SP13-N2_fwd45_stuck_on_axis_shunt_start-S",
+   "route": "SP-13 exit vs SP-12 faults (A177)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N2_fwd45_stuck_on_axis_shunt_start",
+   "case": "carrier S: carrier S jammed on the bore axis at the shunt start (head X 105.53, the forward-most point of the SP-12 corridor)",
+   "least_m": -0.364,
+   "status": "FAIL",
+   "worst_case_over": [
+    "carrier S",
+    "body",
+    "rescuers",
+    "seeds [17, 23, 41]"
+   ],
+   "seed_spread_m": [
+    -0.364,
+    -0.21
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "body -0.364, rescuers -0.339, limiting zone T."
+  },
+  {
+   "id": "A177-SP13-N2_fwd45_litter_pushed_to_wall-U",
+   "route": "SP-13 exit vs SP-12 faults (A177)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N2_fwd45_litter_pushed_to_wall",
+   "case": "suited crew: rigid litter A jammed but pushed flat against the bore wall at az 140, centre X 104.23",
+   "least_m": 0.028,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "suited crew",
+    "body",
+    "self-propelled",
+    "seeds [17, 23, 41, 59, 73, 97]"
+   ],
+   "seed_spread_m": [
+    0.028,
+    0.056
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "body 0.028, rescuers None, limiting zone T."
+  },
+  {
+   "id": "A177-SP13-N2_fwd45_litter_pushed_to_wall-S",
+   "route": "SP-13 exit vs SP-12 faults (A177)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N2_fwd45_litter_pushed_to_wall",
+   "case": "carrier S: rigid litter A jammed but pushed flat against the bore wall at az 140, centre X 104.23",
+   "least_m": 0.011,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "carrier S",
+    "body",
+    "rescuers",
+    "seeds [17, 23, 41, 59, 73, 97]"
+   ],
+   "seed_spread_m": [
+    0.011,
+    0.093
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "body 0.03, rescuers 0.011, limiting zone T."
+  },
+  {
+   "id": "A177-SP13-N2_fwd60_1.10_stuck_on_axis_shunt_start-U",
+   "route": "SP-13 exit vs SP-12 faults (A177)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N2_fwd60_1.10_stuck_on_axis_shunt_start",
+   "case": "suited crew: carrier S jammed on the bore axis at the shunt start (head X 105.07, the forward-most point of the SP-12 corridor)",
+   "least_m": -0.428,
+   "status": "FAIL",
+   "worst_case_over": [
+    "suited crew",
+    "body",
+    "self-propelled",
+    "seeds [17, 23, 41, 59, 73, 97]"
+   ],
+   "seed_spread_m": [
+    -0.428,
+    -0.374
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "body -0.428, rescuers None, limiting zone T."
+  },
+  {
+   "id": "A177-SP13-N2_fwd60_1.10_stuck_on_axis_shunt_start-S",
+   "route": "SP-13 exit vs SP-12 faults (A177)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N2_fwd60_1.10_stuck_on_axis_shunt_start",
+   "case": "carrier S: carrier S jammed on the bore axis at the shunt start (head X 105.07, the forward-most point of the SP-12 corridor)",
+   "least_m": -0.399,
+   "status": "FAIL",
+   "worst_case_over": [
+    "carrier S",
+    "body",
+    "rescuers",
+    "seeds [17, 23, 41, 59, 73, 97]"
+   ],
+   "seed_spread_m": [
+    -0.399,
+    -0.219
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "body -0.399, rescuers -0.344, limiting zone T."
+  },
+  {
+   "id": "A177-SP13-N2_fwd60_1.10_litter_pushed_to_wall-U",
+   "route": "SP-13 exit vs SP-12 faults (A177)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N2_fwd60_1.10_litter_pushed_to_wall",
+   "case": "suited crew: rigid litter A jammed but pushed flat against the bore wall at az 140, centre X 103.77",
+   "least_m": 0.035,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "suited crew",
+    "body",
+    "self-propelled",
+    "seeds [17, 23, 41, 59, 73, 97]"
+   ],
+   "seed_spread_m": [
+    0.035,
+    0.059
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "body 0.035, rescuers None, limiting zone T."
+  },
+  {
+   "id": "A177-SP13-N2_fwd60_1.10_litter_pushed_to_wall-S",
+   "route": "SP-13 exit vs SP-12 faults (A177)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N2_fwd60_1.10_litter_pushed_to_wall",
+   "case": "carrier S: rigid litter A jammed but pushed flat against the bore wall at az 140, centre X 103.77",
+   "least_m": -0.009,
+   "status": "FAIL",
+   "worst_case_over": [
+    "carrier S",
+    "body",
+    "rescuers",
+    "seeds [17, 23, 41, 59, 73, 97]"
+   ],
+   "seed_spread_m": [
+    -0.009,
+    0.103
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "body 0.031, rescuers -0.009, limiting zone T."
+  },
+  {
+   "id": "A177-SP13-N2_oblique30_1.10_stuck_on_axis_trunk_landing-U",
+   "route": "SP-13 exit vs SP-12 faults (A177)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N2_oblique30_1.10_stuck_on_axis_trunk_landing",
+   "case": "suited crew: carrier S jammed on the bore axis at the trunk landing (head X 98.97, tail forward)",
+   "least_m": -0.45,
+   "status": "FAIL",
+   "worst_case_over": [
+    "suited crew",
+    "body",
+    "self-propelled",
+    "seeds [17, 23, 41, 59, 73, 97]"
+   ],
+   "seed_spread_m": [
+    -0.45,
+    -0.432
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "body -0.45, rescuers None, limiting zone T."
+  },
+  {
+   "id": "A177-SP13-N2_oblique30_1.10_stuck_on_axis_trunk_landing-S",
+   "route": "SP-13 exit vs SP-12 faults (A177)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N2_oblique30_1.10_stuck_on_axis_trunk_landing",
+   "case": "carrier S: carrier S jammed on the bore axis at the trunk landing (head X 98.97, tail forward)",
+   "least_m": -0.461,
+   "status": "FAIL",
+   "worst_case_over": [
+    "carrier S",
+    "body",
+    "rescuers",
+    "seeds [17, 23, 41, 59, 73, 97]"
+   ],
+   "seed_spread_m": [
+    -0.461,
+    -0.276
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "body -0.461, rescuers -0.387, limiting zone T."
+  },
+  {
+   "id": "A177-SP13-N2_oblique30_1.10_litter_pushed_to_wall-U",
+   "route": "SP-13 exit vs SP-12 faults (A177)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N2_oblique30_1.10_litter_pushed_to_wall",
+   "case": "suited crew: rigid litter A jammed but pushed flat against the bore wall at az 140, centre X 99.57",
+   "least_m": 0.039,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "suited crew",
+    "body",
+    "self-propelled",
+    "seeds [17, 23, 41, 59, 73, 97]"
+   ],
+   "seed_spread_m": [
+    0.039,
+    0.071
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "body 0.039, rescuers None, limiting zone T."
+  },
+  {
+   "id": "A177-SP13-N2_oblique30_1.10_litter_pushed_to_wall-S",
+   "route": "SP-13 exit vs SP-12 faults (A177)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N2_oblique30_1.10_litter_pushed_to_wall",
+   "case": "carrier S: rigid litter A jammed but pushed flat against the bore wall at az 140, centre X 99.57",
+   "least_m": 0.042,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "carrier S",
+    "body",
+    "rescuers",
+    "seeds [17, 23, 41, 59, 73, 97]"
+   ],
+   "seed_spread_m": [
+    0.042,
+    0.11
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "body 0.042, rescuers 0.059, limiting zone T."
+  },
+  {
+   "id": "A177-ALT-N2_fwd60_1.10-SP12-S",
+   "route": "SP-12 alternate corridor (A177)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N2_fwd60_1.10",
+   "case": "carrier S: SP-12 carriers, chamber to the refuge port station / trunk",
+   "least_m": -0.147,
+   "status": "FAIL",
+   "worst_case_over": [
+    "carrier S",
+    "body",
+    "rescuers",
+    "seeds [17, 23, 41, 59, 73, 97]"
+   ],
+   "seed_spread_m": [
+    -0.147,
+    0.087
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "body -0.012, rescuers -0.147, limiting zone E. vehicle CLEAR; spine-core cut 1.32 m."
+  },
+  {
+   "id": "A177-ALT-N2_fwd60_1.10-SP12-A",
+   "route": "SP-12 alternate corridor (A177)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N2_fwd60_1.10",
+   "case": "carrier A: SP-12 carriers, chamber to the refuge port station / trunk",
+   "least_m": 0.01,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "carrier A",
+    "body",
+    "rescuers",
+    "seeds [17, 23, 41, 59, 73, 97]"
+   ],
+   "seed_spread_m": [
+    0.01,
+    0.105
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "body 0.048, rescuers 0.01, limiting zone E. vehicle CLEAR; spine-core cut 1.32 m."
+  },
+  {
+   "id": "A177-ALT-N2_fwd60_1.10-SP12-K",
+   "route": "SP-12 alternate corridor (A177)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N2_fwd60_1.10",
+   "case": "carrier K: SP-12 carriers, chamber to the refuge port station / trunk",
+   "least_m": -0.031,
+   "status": "FAIL",
+   "worst_case_over": [
+    "carrier K",
+    "body",
+    "rescuers",
+    "seeds [17, 23, 41, 59, 73, 97]"
+   ],
+   "seed_spread_m": [
+    -0.031,
+    0.109
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "body 0.025, rescuers -0.031, limiting zone E. vehicle CLEAR; spine-core cut 1.32 m."
+  },
+  {
+   "id": "A177-ALT-N2_oblique30_1.10-SP12-S",
+   "route": "SP-12 alternate corridor (A177)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N2_oblique30_1.10",
+   "case": "carrier S: SP-12 carriers, chamber to the refuge port station / trunk",
+   "least_m": -0.134,
+   "status": "FAIL",
+   "worst_case_over": [
+    "carrier S",
+    "body",
+    "rescuers",
+    "seeds [17, 23, 41, 59, 73, 97]"
+   ],
+   "seed_spread_m": [
+    -0.134,
+    -0.018
+   ],
+   "nearest": "Trunk_Fit_Frame_13_1",
+   "note": "body -0.134, rescuers -0.121, limiting zone T. vehicle CLEAR; spine-core cut 2.36 m."
+  },
+  {
+   "id": "A177-ALT-N2_oblique30_1.10-SP12-A",
+   "route": "SP-12 alternate corridor (A177)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N2_oblique30_1.10",
+   "case": "carrier A: SP-12 carriers, chamber to the refuge port station / trunk",
+   "least_m": -0.092,
+   "status": "FAIL",
+   "worst_case_over": [
+    "carrier A",
+    "body",
+    "rescuers",
+    "seeds [17, 23, 41, 59, 73, 97]"
+   ],
+   "seed_spread_m": [
+    -0.092,
+    0.046
+   ],
+   "nearest": "Trunk_Fit_Frame_13_1",
+   "note": "body 0.025, rescuers -0.092, limiting zone T. vehicle CLEAR; spine-core cut 2.36 m."
+  },
+  {
+   "id": "A177-ALT-N2_oblique30_1.10-SP12-K",
+   "route": "SP-12 alternate corridor (A177)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N2_oblique30_1.10",
+   "case": "carrier K: SP-12 carriers, chamber to the refuge port station / trunk",
+   "least_m": -0.092,
+   "status": "FAIL",
+   "worst_case_over": [
+    "carrier K",
+    "body",
+    "rescuers",
+    "seeds [17, 23, 41, 59, 73, 97]"
+   ],
+   "seed_spread_m": [
+    -0.092,
+    0.032
+   ],
+   "nearest": "Trunk_Fit_Frame_13_1",
+   "note": "body 0.008, rescuers -0.092, limiting zone T. vehicle CLEAR; spine-core cut 2.36 m."
+  },
+  {
+   "id": "A177-ENV-N2_fwd45_1.10",
+   "route": "SP-12 / SP-13 shared extension (A177)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N2_fwd45_1.10",
+   "case": "SP-12 corridor (S envelope) vs the SP-13 exit route from SP-13 to its landing",
+   "least_m": -0.848,
+   "status": "FAIL",
+   "worst_case_over": [
+    "S capsule envelopes"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "vs SP-13 exit solid -0.649 m; transverse isolation window -2.186 m; corridor in the bore X [102.5, 105.53]."
+  },
+  {
+   "id": "A177-ENV-N2_fwd60_1.10",
+   "route": "SP-12 / SP-13 shared extension (A177)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N2_fwd60_1.10",
+   "case": "SP-12 corridor (S envelope) vs the SP-13 exit route from SP-13 to its landing",
+   "least_m": -0.843,
+   "status": "FAIL",
+   "worst_case_over": [
+    "S capsule envelopes"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "vs SP-13 exit solid -0.585 m; transverse isolation window -1.729 m; corridor in the bore X [102.23, 105.07]."
+  },
+  {
+   "id": "A177-ENV-N2_oblique30_1.10",
+   "route": "SP-12 / SP-13 shared extension (A177)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N2_oblique30_1.10",
+   "case": "SP-12 corridor (S envelope) vs the SP-13 exit route from SP-13 to its landing",
+   "least_m": 0.487,
+   "status": "PASS",
+   "worst_case_over": [
+    "S capsule envelopes"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "vs SP-13 exit solid 2.517 m; transverse isolation window 2.631 m; corridor in the bore X [97.07, 100.71]."
+  },
+  {
+   "id": "A177-SP13-OUTER-LEAF-ACCESS",
+   "route": "SP-13 exit vs SP-12 faults (A177)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "N2 fwd45 carrier S at its shunt start",
+   "case": "trunk-side operation of the SP-13 leaf",
+   "least_m": -0.021,
+   "status": "FAIL",
+   "worst_case_over": [
+    "operator torso r 0.25 m"
+   ],
+   "seed_spread_m": null,
+   "nearest": "FREE_SPACE_WALL",
+   "note": "release to SP-12 corridor surface 0.799 m."
+  },
+  {
+   "id": "A177-ISOLATION",
+   "route": "SP-12 / SP-13 shared extension (A177)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "all layouts studied",
+   "case": "pressure isolation between the SP-12 and SP-13 routes",
+   "least_m": null,
+   "status": "OPEN",
+   "worst_case_over": [],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "the L1-A extension X 102.45-107.4 and the built trunk: no transverse closure between the SP-12 landing and the SP-13 landing in any layout studied"
+  },
+  {
+   "id": "A178-SP13-LEAF-partition_and_sideways",
+   "route": "SP-13 closure (A178)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "aft hinge, offset 0.02 m, partition aft 0.04 m, mount fwd 0.0 m, sideways 0.04 m (az 48.17), side wall out 0.0 m",
+   "case": "carriers, leaf park / swing, operation from both sides; minimum over all",
+   "least_m": -0.016,
+   "status": "FAIL",
+   "worst_case_over": [
+    "carrier A",
+    "carrier S",
+    "carrier K",
+    "suited crew",
+    "rescuers",
+    "leaf park",
+    "leaf swing 5-90 deg",
+    "operator SP-13 side",
+    "operator trunk side",
+    "seeds [17, 23, 41, 59, 73, 97]"
+   ],
+   "seed_spread_m": null,
+   "nearest": "FREE_SPACE_WALL",
+   "note": "carriers {'A': 0.083, 'S': -0.016, 'K': 0.028, 'U': 0.01}; park 0.062, swing 0.062; operators {'sp13_side': 0.3, 'trunk_side': 0.121}; SP-12 fixture margin 0.035 m."
+  },
+  {
+   "id": "A178-SP13-LEAF-partition_and_sideways-OUTER-ACCESS",
+   "route": "SP-13 closure (A178)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "partition_and_sideways",
+   "case": "outer (trunk-side) leaf access with the SP-12 N2 fwd45 carrier at its forward-most point",
+   "least_m": -0.015,
+   "status": "FAIL",
+   "worst_case_over": [
+    "operator torso r 0.25 m"
+   ],
+   "seed_spread_m": null,
+   "nearest": "FREE_SPACE_WALL",
+   "note": "by seed [0.014, 0.038, 0.037, 0.064, -0.015, 0.084]."
+  },
+  {
+   "id": "A178-SP13-LEAF-mount_x_and_sideways",
+   "route": "SP-13 closure (A178)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "aft hinge, offset 0.02 m, partition aft 0.0 m, mount fwd 0.04 m, sideways 0.04 m (az 48.17), side wall out 0.0 m",
+   "case": "carriers, leaf park / swing, operation from both sides; minimum over all",
+   "least_m": -0.178,
+   "status": "FAIL",
+   "worst_case_over": [
+    "carrier A",
+    "carrier S",
+    "carrier K",
+    "suited crew",
+    "rescuers",
+    "leaf park",
+    "leaf swing 5-90 deg",
+    "operator SP-13 side",
+    "operator trunk side",
+    "seeds [17, 23, 41, 59, 73, 97]"
+   ],
+   "seed_spread_m": null,
+   "nearest": "FREE_SPACE_WALL",
+   "note": "carriers {'A': -0.018, 'S': -0.178, 'K': 0.079, 'U': 0.014}; park 0.062, swing 0.062; operators {'sp13_side': 0.3, 'trunk_side': 0.121}; SP-12 fixture margin 0.075 m."
+  },
+  {
+   "id": "A178-SP13-LEAF-mount_x_and_sideways-OUTER-ACCESS",
+   "route": "SP-13 closure (A178)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "mount_x_and_sideways",
+   "case": "outer (trunk-side) leaf access with the SP-12 N2 fwd45 carrier at its forward-most point",
+   "least_m": -0.015,
+   "status": "FAIL",
+   "worst_case_over": [
+    "operator torso r 0.25 m"
+   ],
+   "seed_spread_m": null,
+   "nearest": "FREE_SPACE_WALL",
+   "note": "by seed [0.014, 0.064, 0.041, 0.064, -0.015, 0.084]."
+  },
+  {
+   "id": "A178-SP13-LEAF-partition_and_side_wall",
+   "route": "SP-13 closure (A178)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "aft hinge, offset 0.02 m, partition aft 0.04 m, mount fwd 0.0 m, sideways 0.0 m (az 50.0), side wall out 0.04 m",
+   "case": "carriers, leaf park / swing, operation from both sides; minimum over all",
+   "least_m": -0.057,
+   "status": "FAIL",
+   "worst_case_over": [
+    "carrier A",
+    "carrier S",
+    "carrier K",
+    "suited crew",
+    "rescuers",
+    "leaf park",
+    "leaf swing 5-90 deg",
+    "operator SP-13 side",
+    "operator trunk side",
+    "seeds [17, 23, 41, 59, 73, 97]"
+   ],
+   "seed_spread_m": null,
+   "nearest": "FREE_SPACE_WALL",
+   "note": "carriers {'A': 0.069, 'S': 0.02, 'K': -0.057, 'U': -0.001}; park 0.062, swing 0.062; operators {'sp13_side': 0.3, 'trunk_side': 0.135}; SP-12 fixture margin 0.035 m."
+  },
+  {
+   "id": "A178-SP13-LEAF-partition_and_side_wall-OUTER-ACCESS",
+   "route": "SP-13 closure (A178)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "partition_and_side_wall",
+   "case": "outer (trunk-side) leaf access with the SP-12 N2 fwd45 carrier at its forward-most point",
+   "least_m": -0.012,
+   "status": "FAIL",
+   "worst_case_over": [
+    "operator torso r 0.25 m"
+   ],
+   "seed_spread_m": null,
+   "nearest": "FREE_SPACE_WALL",
+   "note": "by seed [0.022, -0.012, 0.066, 0.068, -0.001, 0.07]."
+  },
+  {
+   "id": "A178-SP13-LEAF-mount_x_and_side_wall",
+   "route": "SP-13 closure (A178)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "aft hinge, offset 0.02 m, partition aft 0.0 m, mount fwd 0.04 m, sideways 0.0 m (az 50.0), side wall out 0.04 m",
+   "case": "carriers, leaf park / swing, operation from both sides; minimum over all",
+   "least_m": 0.006,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "carrier A",
+    "carrier S",
+    "carrier K",
+    "suited crew",
+    "rescuers",
+    "leaf park",
+    "leaf swing 5-90 deg",
+    "operator SP-13 side",
+    "operator trunk side",
+    "seeds [17, 23, 41, 59, 73, 97]"
+   ],
+   "seed_spread_m": null,
+   "nearest": "FREE_SPACE_WALL",
+   "note": "carriers {'A': 0.062, 'S': 0.018, 'K': 0.053, 'U': 0.006}; park 0.062, swing 0.062; operators {'sp13_side': 0.3, 'trunk_side': 0.135}; SP-12 fixture margin 0.075 m."
+  },
+  {
+   "id": "A178-SP13-LEAF-mount_x_and_side_wall-OUTER-ACCESS",
+   "route": "SP-13 closure (A178)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "mount_x_and_side_wall",
+   "case": "outer (trunk-side) leaf access with the SP-12 N2 fwd45 carrier at its forward-most point",
+   "least_m": 0.015,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "operator torso r 0.25 m"
+   ],
+   "seed_spread_m": null,
+   "nearest": "FREE_SPACE_WALL",
+   "note": "by seed [0.022, 0.025, 0.092, 0.068, 0.015, 0.07]."
+  },
+  {
+   "id": "A178-SP13-DP80",
+   "route": "SP-13 closure (A178)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "aft hinged dogged leaf",
+   "case": "80 kPa both directions, dogs / preload, jammed-leaf egress, manual release",
+   "least_m": null,
+   "status": "OPEN",
+   "worst_case_over": [
+    "inward and outward 80 kPa and the design extremes (two polarities; SP-13-high seats the leaf, trunk-high is carried by the dogs only)",
+    "dog count, dog / keeper capacity and preload; seat and seal",
+    "jammed-leaf egress (a leaf jammed shut blocks the SP-13 exit; no second exit from SP-13 except the SP-12/SP-13 door, not modelled)",
+    "manual release (handwheel through spindle reaches the dogs from both faces in geometry; forces, equalization valve, dp interlock threshold OPEN)",
+    "hinge: not assumed to resist reversed pressure (owner hold); final door style, hull aperture and certification not chosen"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "ideal dp x clear area 107.5 kN (DIAGNOSTIC only)."
+  }
+ ]
+}

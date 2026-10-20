@@ -1,0 +1,177 @@
+# MECH-003 six-year life-support stock/flow (S&E 58 MECH-003, 59 POL-009; references/SIM_INTEGRATION_PLAN_2026-10-17.md Milestone C).
+# Inputs are the owner's study rows in 41_SURVIVAL_RESOURCES (read 2026-10-17, S&E modified 2026-10-17T14:07:54Z; row numbers counted
+# from the returned values, +/-1). 41!A2: "numeric study targets are NOT canon. Unknown equipment must remain text OPEN, never zero."
+# Nothing here is a Wayfarer inventory: an OPEN store has no value, and the simulator shows it as OPEN.
+
+[life_support]
+id = "WF.LIFE_SUPPORT"
+version = 1
+status = "STUDY"
+workbook = "IGNITION — Wayfarer Science & Engineering Model"
+workbook_id = "18BQQEMXxu3qEw1jKN68VwC3rkOiVmafiWeoQORYgI0A"
+sheet_modified_utc = "2026-10-17T14:07:54Z"
+read_utc = "2026-10-17"
+scope = "Five conventional human consumers; Seraph is a nonhuman person with no human food or O2 consumption (41!A2, 38 S27)."
+notice = "STUDY — 41_SURVIVAL_RESOURCES targets, not canon; inventories OPEN"
+
+[duration]
+value = 2191.5
+unit = "days"
+source = "41!B6 Mission duration days (six-year story; source Wayfarer 35)"
+
+[consumers]
+story = 5
+stress = 12
+story_source = "41!B7 conventional human consumers aboard"
+stress_source = "41!B8 rated maximum worst-case human survival test (includes Seraph's place conservatively)"
+
+# Per consumer-day rates (41 ROOT INPUT block, column D is the owner's confidence text).
+[[rate]]
+id = "O2"
+value = 0.84
+unit = "kg/human-day"
+source = "41!B14"
+confidence = "NASA empirical comparable source"
+
+[[rate]]
+id = "CO2_REMOVED"
+value = 1.0
+unit = "kg/human-day"
+source = "41!B15"
+confidence = "STUDY HYPOTHESIS; depends on metabolism, diet, adsorption"
+
+[[rate]]
+id = "WATER_TURNOVER"
+value = 4.16
+unit = "kg/human-day"
+source = "41!B16"
+confidence = "NASA comparable service flow, NOT drinking-only reserve"
+
+[[rate]]
+id = "POTABLE_REFUGE"
+value = 2.5
+unit = "kg/human-day"
+source = "41!B17"
+confidence = "WHAT-IF, not a defined NASA Wayfarer reserve"
+
+[[rate]]
+id = "FOOD"
+value = 1.83
+unit = "kg/human-day"
+source = "41!B18"
+confidence = "NASA reference incl. packaging"
+
+[[rate]]
+id = "WASTE"
+value = 1.0
+unit = "kg/human-day"
+source = "41!B19"
+confidence = "WHAT-IF throughput; includes launched solids already in stores"
+
+# Stores. known = false means OPEN: no value, never zero.
+[[store]]
+id = "FOOD"
+known = true
+value = 10000.0
+unit = "kg"
+source = "41!B21 Six-year food launch category"
+status = "CATEGORY"
+note = "The 10 t category includes consumables, so the food inside it is less than 10 t; not enough for the planned six-year food (41, 38 S08)."
+
+[[store]]
+id = "O2"
+known = false
+unit = "kg"
+source = "38 S03 Stored O2/gas reserve: SIZING OPEN"
+status = "OPEN"
+
+[[store]]
+id = "WATER_MAKEUP"
+known = false
+unit = "kg"
+source = "38 S05; the 180 t water shield and 20 t stationary water are shielding allocations, not a released potable reserve (33, 38 A3)"
+status = "OPEN"
+
+# Process fractions. Owner scenarios only; a verified value does not exist.
+[process.water_recovery]
+scenarios = [0.90, 0.98]
+default = 0.90
+source = "41 makeup rows at 90 % and 98 % recovery; 38 S05 '98% GOAL IS NOT ACHIEVED'"
+status = "SCENARIO / NOT ACHIEVED"
+
+[process.o2_recovery]
+default = 0.0
+source = "38 S02 'Do not count oxygen recovery fraction as verified actual loop'; no recovery efficiency in 33/38/41"
+status = "OPEN (0 = no credit, not a measured zero)"
+
+[process.garden_food]
+default = 0.0
+source = "41!B20 Garden certified caloric replacement fraction = 0; 38 S10 'No automatic Garden nutrition, O2 or CO2 credit'"
+status = "0 until the crop study closes"
+
+# The owner's own results in 41 (CONSUMABLE / 72H REFUGE STRESS block): the module and the simulator must reproduce them.
+[[check]]
+id = "FOOD_6Y_5"
+expected = 20052.225
+unit = "kg"
+source = "41 Total stored packaged food 5 human/6y"
+
+[[check]]
+id = "FOOD_SHORTFALL"
+expected = 10052.225
+unit = "kg"
+source = "41 Food shortfall vs current food/consumables bucket"
+
+[[check]]
+id = "O2_72H_12"
+expected = 30.24
+unit = "kg"
+source = "41 72h O2 supply if no recycling for 12 humans"
+
+[[check]]
+id = "CO2_72H_12"
+expected = 36.0
+unit = "kg"
+source = "41 72h CO2 removed / sorbent throughput"
+
+[[check]]
+id = "WATER_LOOP_72H_12"
+expected = 149.76
+unit = "kg"
+source = "41 72h water-loop use/turnover"
+
+[[check]]
+id = "POTABLE_72H_12"
+expected = 90.0
+unit = "kg"
+source = "41 72h independent drinkable-water supply without recycling"
+
+[[check]]
+id = "RATIONS_72H_12"
+expected = 65.88
+unit = "kg"
+source = "41 72h packaged emergency rations"
+
+[[check]]
+id = "WASTE_6Y_5"
+expected = 10957.5
+unit = "kg"
+source = "41 Six-year waste material throughput, five humans"
+
+[[check]]
+id = "WATER_RECOVERED_98"
+expected = 44671.536
+unit = "kg"
+source = "41 Recovered water mass if 98% over 6y"
+
+[[check]]
+id = "MAKEUP_90"
+expected = 4558.32
+unit = "kg"
+source = "41 Makeup water at 90% recovery"
+
+[[check]]
+id = "MAKEUP_98"
+expected = 911.664
+unit = "kg"
+source = "41 Makeup water at 98% recovery"

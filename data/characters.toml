@@ -1,0 +1,143 @@
+# Wayfarer character system (S&E 15_MODEL_INTERFACES C1-C3, 98 "Wayfarer character-production foundation"; docs/CHARACTERS.md).
+# One shared human system (MPFB 2.0.17, assets/external/manifest.toml) and per-person recipes. Read by src/wayfarer/human_system.py;
+# built by src/wayfarer/build/human.py into assets/characters/WF_CHAR_HUMAN_<ID>.blend. Separate from data/wayfarer_3d.toml on purpose:
+# characters never change spacecraft geometry, so they never need a vehicle build.
+#
+# Ownership: Tale owns identity and roles (the induction pair: 11_SCENE_LEDGER S004A-D); Art Style owns depiction; Fashion owns clothing; S&E owns this
+# pipeline. Nothing here is character canon. Every appearance value is PROTOTYPE until its owner defines it, and generator defaults
+# (MPFB's phenotype sliders) are never canon.
+
+[human_system]
+status = "PROTOTYPE"                 # technical contract, decided locally (C2 allows PROTOTYPE retarget maps and control layers)
+mpfb = "2.0.17"                      # must equal the manifest's pinned MPFB
+rig = "game_engine"                  # MPFB's 53-bone deform skeleton (UE-style names), the runtime skeleton
+units = "m"
+up = "+Z"
+forward = "-Y"                       # MPFB's front; Blender's glTF exporter writes it as glTF +Z, Godot's MODEL_FRONT
+origin = "floor, centred between the feet (the Root bone)"
+stature = "sole to the top of the head on the baked body mesh, in the rest pose"
+stature_tolerance_m = 0.005
+rest_pose = "MPFB A-pose (arms about 45 degrees down, palms in)"
+root_bone = "Root"
+fps = 30
+max_influences = 4                   # glTF skinning budget; the build keeps the four largest weights and renormalizes
+subdiv_levels = 0
+skin_groups = ["head", "scalp", "ears", "lips", "hand_l", "hand_r", "fingernails"]   # base-mesh groups shown as skin; the rest wears the suit
+# Review palette (PROTOTYPE depiction, not Art Style): "clay" is a flat neutral body for crew whose skin the owners have not defined; the
+# suit colour is the current proxies' Spacer under-suit (components/figures.py PALETTE.suit).
+clay_rgb = [0.62, 0.55, 0.50]
+suit_rgb = [0.085, 0.095, 0.12]
+
+[human_system.bisection]
+# The MPFB `height` macro is searched until the baked stature is within stature_tolerance_m of the recipe's stature_m.
+steps = 14
+
+# Technical fixtures: they test the pipeline and are nobody. Two deliberately different bodies prove one rig contract carries variation.
+[human.test_a]
+title = "CHAR_HUMAN_TEST_A, technical fixture (non-canon)"
+kind = "fixture"
+stature_m = 1.80                     # = prototype.human_height_m, the scale mannequins' height, for a direct comparison
+phenotype = { gender = 0.5, age = 0.5, muscle = 0.5, weight = 0.5, proportions = 0.5, cupsize = 0.5, firmness = 0.5 }
+race = { asian = 0.333, caucasian = 0.333, african = 0.334 }
+skin = "clay"
+suit = true
+eyes = "high-poly/high-poly.mhclo"
+eyebrows = "eyebrow001/eyebrow001.mhclo"
+eyelashes = "eyelashes01/eyelashes01.mhclo"
+
+[human.test_b]
+title = "CHAR_HUMAN_TEST_B, technical fixture (non-canon): a different sex, stature and build, textured skin path"
+kind = "fixture"
+stature_m = 1.62
+phenotype = { gender = 0.0, age = 0.75, muscle = 0.35, weight = 0.62, proportions = 0.5, cupsize = 0.5, firmness = 0.5 }
+race = { asian = 0.333, caucasian = 0.333, african = 0.334 }
+skin = "skins/middleage_african_female/middleage_african_female.mhmat"
+suit = false
+eyes = "high-poly/high-poly.mhclo"
+eyebrows = "eyebrow004/eyebrow004.mhclo"
+eyelashes = "eyelashes02/eyelashes02.mhclo"
+
+# The induction pair: the two characters the ship is experienced through (Tale 11_SCENE_LEDGER!A24:I27 S004A-D, 22_REVEALS_EXPOSITION
+# !A16:F18, 98_DECISION_LOG!A22, all WORKING; S&E 98!A36): the trainer, a dedicated Wayfarer flight instructor who leaves before First
+# Ignition, and the trainee, the first-time arrival the player follows. They are not the six-person crew. Identity, body and outfit are
+# open (request Doc Q49), so the body is PROTOTYPE throughout; the IND-001 proxies' statures ([characters.instructor] and
+# [characters.newcomer] in wayfarer_3d.toml) carry over.
+[human.instructor]
+title = "Instructor, the trainer (induction prototype)"
+kind = "induction"
+proxy = "instructor"                 # [characters.instructor]: the IND-001 proxy this body replaces at the S004A greeting
+identity_ref = "Tale 11_SCENE_LEDGER!A24 (S004A), 22_REVEALS_EXPOSITION!A18 (Instructor character), 98_DECISION_LOG!A22 (WORKING); S&E 98!A36"
+stature_m = 1.78                     # PROTOTYPE: the proxy's stature
+phenotype = { gender = 1.0, age = 0.5, muscle = 0.6, weight = 0.5, proportions = 0.5, cupsize = 0.5, firmness = 0.5 }   # gender: Tale 98!F22 calls the instructor "him" (WORKING)
+race = { asian = 0.333, caucasian = 0.333, african = 0.334 }   # PROTOTYPE: MPFB's neutral mix, not a depiction choice
+skin = "clay"                        # PROTOTYPE until Art Style defines the instructor
+suit = true                          # PROTOTYPE body-close under-suit, replaced by the outfit below; the kit's volumes stay on the proxy
+outfit = "instructor"                # [outfit.instructor]: FUT-003 S004 outfit pass
+eyes = "high-poly/high-poly.mhclo"
+eyebrows = "eyebrow001/eyebrow001.mhclo"
+eyelashes = "eyelashes01/eyelashes01.mhclo"
+unknown = ["name", "culture", "occupation title and employer", "body stack", "face", "hair", "skin", "body proportions", "outfit", "facial setup"]
+
+[human.newcomer]
+title = "Newcomer, the trainee (induction prototype)"
+kind = "induction"
+proxy = "newcomer"                   # [characters.newcomer]
+identity_ref = "Tale 11_SCENE_LEDGER!A24:A27 (S004A-D, first-time arrival / interactive POV), 22_REVEALS_EXPOSITION!A16 (WORKING); S&E 98!A36"
+stature_m = 1.70                     # PROTOTYPE: the proxy's stature
+phenotype = { gender = 0.5, age = 0.5, muscle = 0.5, weight = 0.5, proportions = 0.5, cupsize = 0.5, firmness = 0.5 }   # neutral: fixed or player-chosen is open (Q49b)
+race = { asian = 0.333, caucasian = 0.333, african = 0.334 }
+skin = "clay"
+suit = true                          # PROTOTYPE; replaced by the outfit below; the kit pack's volume stays on the proxy
+outfit = "newcomer"                  # [outfit.newcomer]
+eyes = "high-poly/high-poly.mhclo"
+eyebrows = "eyebrow001/eyebrow001.mhclo"
+eyelashes = "eyelashes01/eyelashes01.mhclo"
+unknown = ["fixed character or player-chosen body", "face", "hair", "skin", "body proportions", "issued garment", "facial setup"]
+
+# FUT-003 S004 outfit pass (ART-S004-2026-10-10, 15!A120; Q49 roles, 15!A104; Fashion Y155 / Spacer / Great Union through the local brief
+# docs/SURFACE_BRIEF.md). PROTOTYPE depiction, not Fashion canon: it dresses the role, not a cast person (identity OPEN, Tale WTF-16).
+# Each outfit is material zones painted on the body mesh, with no added geometry, so the in-ship fit, the rig and the content fingerprint are
+# unchanged. Zones apply in order and a later zone wins. A face belongs to its vertices' most common dominant deform bone. Rules:
+# bones (that bone), z = [[bone, offset], [bone, offset]] (between those heights above the floor, from the bones' rest heads), abs_x (|x|
+# range in m), along (fraction from the bone's head to its tail), outer (the limb side away from the body), normal_z_min (faces looking up),
+# bone_prefixes (any bone so named). Zones paint only the suit, not the skin groups, unless over_skin (gloves); skin = true paints the skin
+# back, so bare hands end at a clean cuff.
+# Colours are Blender linear base colours; roughness and metallic as the S004 look's surfaces (data/wayfarer_3d.toml [look]).
+[outfit.instructor]
+title = "Y155 Great Union flight-safety instructor in Spacer-close test gear (Q49)"
+zones = [
+  { name = "Spacer_Suit", color = [0.035, 0.040, 0.050], roughness = 0.55 },
+  { name = "Spacer_Panel", color = [0.16, 0.17, 0.19], roughness = 0.60, bones = ["upperarm_l", "upperarm_r", "lowerarm_l", "lowerarm_r", "thigh_l", "thigh_r", "calf_l", "calf_r"], outer = true },
+  { name = "GU_Vest", color = [0.020, 0.050, 0.17], roughness = 0.70, bones = ["pelvis", "spine_01", "spine_02", "spine_03", "clavicle_l", "clavicle_r"], z = [["pelvis", 0.07], ["clavicle_l", 0.04]] },
+  { name = "Harness", color = [0.85, 0.32, 0.05], roughness = 0.60, bones = ["pelvis", "spine_01", "spine_02", "spine_03", "clavicle_l", "clavicle_r"], abs_x = [0.07, 0.105], z = [["pelvis", 0.04], ["clavicle_l", 0.03]] },
+  { name = "Harness", color = [0.85, 0.32, 0.05], roughness = 0.60, bones = ["pelvis", "spine_01", "thigh_l", "thigh_r"], z = [["pelvis", 0.0], ["pelvis", 0.045]] },
+  { name = "GU_Shoulder_Board", color = [0.80, 0.82, 0.85], roughness = 0.40, metallic = 0.30, bones = ["clavicle_l", "clavicle_r", "upperarm_l", "upperarm_r", "spine_03"], z = [["clavicle_l", -0.04], ["neck_01", 0.0]], abs_x = [0.09, 0.21], normal_z_min = 0.55 },
+  { name = "Seal_Collar", color = [0.62, 0.64, 0.67], roughness = 0.30, metallic = 0.80, bones = ["neck_01", "spine_03", "clavicle_l", "clavicle_r"], z = [["neck_01", -0.04], ["neck_01", 0.03]] },
+  { name = "Wrist_Unit", color = [0.06, 0.07, 0.08], roughness = 0.25, metallic = 0.20, bones = ["lowerarm_l"], along = [0.66, 0.90] },
+  { name = "Boots", color = [0.09, 0.09, 0.10], roughness = 0.70, bones = ["foot_l", "foot_r", "ball_l", "ball_r", "calf_l", "calf_r"], z = [["Root", 0.0], ["Root", 0.16]] },
+  { name = "Flight_Gloves", color = [0.07, 0.075, 0.085], roughness = 0.60, bone_prefixes = ["hand_", "thumb_", "index_", "middle_", "ring_", "pinky_"], over_skin = true },
+]
+
+[outfit.newcomer]
+title = "Great Union-issued induction undersuit with a visitor band (Q49)"
+zones = [
+  { name = "Issued_Suit", color = [0.30, 0.32, 0.35], roughness = 0.65 },
+  { name = "Issued_Panel", color = [0.040, 0.070, 0.15], roughness = 0.65, bones = ["upperarm_l", "upperarm_r", "lowerarm_l", "lowerarm_r", "thigh_l", "thigh_r", "calf_l", "calf_r"], outer = true },
+  { name = "Issued_Panel", color = [0.040, 0.070, 0.15], roughness = 0.65, bones = ["pelvis", "spine_01", "spine_02", "spine_03"], abs_x = [0.13, 1.0] },
+  { name = "Harness", color = [0.85, 0.32, 0.05], roughness = 0.60, bones = ["pelvis", "spine_01", "spine_02", "spine_03", "clavicle_l", "clavicle_r"], abs_x = [0.07, 0.105], z = [["pelvis", 0.04], ["clavicle_l", 0.03]] },
+  { name = "Harness", color = [0.85, 0.32, 0.05], roughness = 0.60, bones = ["pelvis", "spine_01", "thigh_l", "thigh_r"], z = [["pelvis", 0.0], ["pelvis", 0.045]] },
+  { name = "Seal_Collar", color = [0.62, 0.64, 0.67], roughness = 0.30, metallic = 0.80, bones = ["neck_01", "spine_03", "clavicle_l", "clavicle_r"], z = [["neck_01", -0.04], ["neck_01", 0.03]] },
+  { name = "Visitor_Band", color = [0.78, 0.62, 0.04], roughness = 0.55, bones = ["upperarm_l"], along = [0.35, 0.60] },
+  { name = "Bare_Hands", skin = true, bone_prefixes = ["hand_", "thumb_", "index_", "middle_", "ring_", "pinky_"] },
+  { name = "Boots", color = [0.09, 0.09, 0.10], roughness = 0.70, bones = ["foot_l", "foot_r", "ball_l", "ball_r", "calf_l", "calf_r"], z = [["Root", 0.0], ["Root", 0.16]] },
+]
+
+# Shared action library (human_system.ACTIONS builds them from these values; PROTOTYPE motion, not mocap).
+[actions]
+walk_speed_m_s = 1.2
+walk_cadence_steps_min = 108
+step_height_m = 0.08
+crawl_speed_m_s = 0.35
+# Ship-bound values come from data/wayfarer_3d.toml so the actions fit the ship: the seat height (sector_whitebox.seat_height_m) and the
+# tube ladders' rung pitch (human_entry.spoke_rung_pitch_m).
+climb_rungs_per_s = 1.2

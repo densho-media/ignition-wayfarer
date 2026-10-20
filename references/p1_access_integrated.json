@@ -1,0 +1,5687 @@
+{
+ "study": "ACCESS-005 integrated rescue + pressure + stationary access (S&E 15!A164, OD-040, 47 SIM-025)",
+ "status": "NONCANON DISPOSABLE STUDY; PRIORITY DESIGN STUDY / NO HULL CUTOUT; no closure, port, guard, pin, rail or room released",
+ "owner_rules": [
+  "worst case over pose families, body sizes, injury classes, two rescuers, kit, doors, seeds (RINGB-006)",
+  "every occupied sector: care + refuge access in 0 g / spin / stopped / locked 1.5 g; no 1.5 g re-index (RINGB-007, CALC-R05)",
+  "positive bidirectional closures, dual closure only where the fault layout needs it (CLOSURE-005, PRESS-004)",
+  "study target >= 0.05 m, never widened",
+  "locked 1.5 g: restrain and stabilize at the rated burn couch, no routine transfer (15!A197 OWN-RES-2026-10-17, 98!A109); Garden_Rack_1 stays",
+  "ring A is not a passing comparator; B3H2 arrest links <= 0.206 m, 0.207-0.213 m only as unapproved sensitivity (15!A198)"
+ ],
+ "segment_sources": [
+  "p1_access_seg_d03_gallery.json",
+  "p1_access_seg_l1a_stile.json",
+  "p1_access_seg_ringb.json",
+  "p1_access_seg_ringb_care.json",
+  "p1_access_seg_sp11_sp12.json",
+  "p1_access_seg_sp13_l1a.json",
+  "p1_access_seg_step.json"
+ ],
+ "segments": 925,
+ "architecture_A": {
+  "ringB_to_refuge": {
+   "title": "ring B sector -> port -> trunk -> hoist -> refuge slot 1.00 x 2.30 m",
+   "states": {
+    "0g": {
+     "status": "FAIL",
+     "elements": {
+      "ring B port variant": {
+       "status": "FAIL",
+       "candidate": "G1_1.10_guard0.10",
+       "worst": {
+        "status": "FAIL",
+        "least_m": -0.135,
+        "worst_id": "ringB_B2->trunk|G1|S",
+        "file": "p1_access_seg_ringb.json",
+        "least_measured_m": -0.135
+       },
+       "candidates": {
+        "V0_1.06_aft0.16": {
+         "status": "FAIL",
+         "least_m": -0.153,
+         "worst_id": "ringB_B2->trunk|V0|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": -0.153
+        },
+        "V1_1.10_aft0.20": {
+         "status": "FAIL",
+         "least_m": -0.137,
+         "worst_id": "ringB_B2->trunk|V1|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": -0.137
+        },
+        "G1_1.10_guard0.10": {
+         "status": "FAIL",
+         "least_m": -0.135,
+         "worst_id": "ringB_B2->trunk|G1|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": -0.135
+        }
+       }
+      },
+      "hoist line / rail": {
+       "status": "MARGINAL",
+       "candidate": "hoist|V0_rail150|line120|e0.25",
+       "worst": {
+        "status": "MARGINAL",
+        "least_m": 0.017,
+        "worst_id": "hoist|V0_rail150|line120|e0.25|S",
+        "file": "p1_access_seg_ringb.json",
+        "least_measured_m": 0.017
+       },
+       "candidates": {
+        "hoist|V0|line90|e0.20": {
+         "status": "FAIL",
+         "least_m": -0.05,
+         "worst_id": "hoist|V0|line90|e0.20|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": -0.05
+        },
+        "hoist|V0|line90|e0.25": {
+         "status": "FAIL",
+         "least_m": -0.003,
+         "worst_id": "hoist|V0|line90|e0.25|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": -0.003
+        },
+        "hoist|V0|line90|e0.30": {
+         "status": "MARGINAL",
+         "least_m": 0.002,
+         "worst_id": "hoist|V0|line90|e0.30|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": 0.002
+        },
+        "hoist|V0|line100|e0.20": {
+         "status": "FAIL",
+         "least_m": -0.041,
+         "worst_id": "hoist|V0|line100|e0.20|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": -0.041
+        },
+        "hoist|V0|line100|e0.25": {
+         "status": "MARGINAL",
+         "least_m": 0.008,
+         "worst_id": "hoist|V0|line100|e0.25|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": 0.008
+        },
+        "hoist|V0|line100|e0.30": {
+         "status": "MARGINAL",
+         "least_m": 0.002,
+         "worst_id": "hoist|V0|line100|e0.30|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": 0.002
+        },
+        "hoist|V0|line105|e0.20": {
+         "status": "FAIL",
+         "least_m": -0.037,
+         "worst_id": "hoist|V0|line105|e0.20|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": -0.037
+        },
+        "hoist|V0|line105|e0.25": {
+         "status": "MARGINAL",
+         "least_m": 0.012,
+         "worst_id": "hoist|V0|line105|e0.25|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": 0.012
+        },
+        "hoist|V0|line105|e0.30": {
+         "status": "MARGINAL",
+         "least_m": 0.002,
+         "worst_id": "hoist|V0|line105|e0.30|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": 0.002
+        },
+        "hoist|V0|line110|e0.20": {
+         "status": "FAIL",
+         "least_m": -0.035,
+         "worst_id": "hoist|V0|line110|e0.20|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": -0.035
+        },
+        "hoist|V0|line110|e0.25": {
+         "status": "MARGINAL",
+         "least_m": 0.015,
+         "worst_id": "hoist|V0|line110|e0.25|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": 0.015
+        },
+        "hoist|V0|line110|e0.30": {
+         "status": "FAIL",
+         "least_m": -0.003,
+         "worst_id": "hoist|V0|line110|e0.30|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": -0.003
+        },
+        "hoist|V0|line120|e0.20": {
+         "status": "FAIL",
+         "least_m": -0.033,
+         "worst_id": "hoist|V0|line120|e0.20|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": -0.033
+        },
+        "hoist|V0|line120|e0.25": {
+         "status": "MARGINAL",
+         "least_m": 0.014,
+         "worst_id": "hoist|V0|line120|e0.25|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": 0.014
+        },
+        "hoist|V0|line120|e0.30": {
+         "status": "FAIL",
+         "least_m": -0.032,
+         "worst_id": "hoist|V0|line120|e0.30|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": -0.032
+        },
+        "hoist|V0_rail150|line110|e0.20": {
+         "status": "FAIL",
+         "least_m": -0.035,
+         "worst_id": "hoist|V0_rail150|line110|e0.20|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": -0.035
+        },
+        "hoist|V0_rail150|line110|e0.25": {
+         "status": "MARGINAL",
+         "least_m": 0.015,
+         "worst_id": "hoist|V0_rail150|line110|e0.25|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": 0.015
+        },
+        "hoist|V0_rail150|line110|e0.30": {
+         "status": "MARGINAL",
+         "least_m": 0.002,
+         "worst_id": "hoist|V0_rail150|line110|e0.30|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": 0.002
+        },
+        "hoist|V0_rail150|line120|e0.20": {
+         "status": "FAIL",
+         "least_m": -0.033,
+         "worst_id": "hoist|V0_rail150|line120|e0.20|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": -0.033
+        },
+        "hoist|V0_rail150|line120|e0.25": {
+         "status": "MARGINAL",
+         "least_m": 0.017,
+         "worst_id": "hoist|V0_rail150|line120|e0.25|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": 0.017
+        },
+        "hoist|V0_rail150|line120|e0.30": {
+         "status": "MARGINAL",
+         "least_m": 0.002,
+         "worst_id": "hoist|V0_rail150|line120|e0.30|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": 0.002
+        },
+        "hoist|V0_rail165|line120|e0.20": {
+         "status": "FAIL",
+         "least_m": -0.033,
+         "worst_id": "hoist|V0_rail165|line120|e0.20|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": -0.033
+        },
+        "hoist|V0_rail165|line120|e0.25": {
+         "status": "MARGINAL",
+         "least_m": 0.017,
+         "worst_id": "hoist|V0_rail165|line120|e0.25|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": 0.017
+        },
+        "hoist|V0_rail165|line120|e0.30": {
+         "status": "MARGINAL",
+         "least_m": 0.002,
+         "worst_id": "hoist|V0_rail165|line120|e0.30|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": 0.002
+        }
+       }
+      }
+     }
+    },
+    "spin": {
+     "status": "FAIL",
+     "elements": {
+      "ring B port variant": {
+       "status": "FAIL",
+       "candidate": "V0_1.06_aft0.16",
+       "worst": {
+        "status": "FAIL",
+        "least_m": -0.422,
+        "worst_id": "ringB_spin_port_turn|V0|S",
+        "file": "p1_access_seg_ringb.json",
+        "least_measured_m": -0.422
+       },
+       "candidates": {
+        "V0_1.06_aft0.16": {
+         "status": "FAIL",
+         "least_m": -0.422,
+         "worst_id": "ringB_spin_port_turn|V0|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": -0.422
+        },
+        "V1_1.10_aft0.20": {
+         "status": "FAIL",
+         "least_m": -0.423,
+         "worst_id": "ringB_spin_port_turn|V1|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": -0.423
+        },
+        "G1_1.10_guard0.10": {
+         "status": "FAIL",
+         "least_m": -0.422,
+         "worst_id": "ringB_spin_port_turn|G1|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": -0.422
+        }
+       }
+      },
+      "hoist line / rail": {
+       "status": "MARGINAL",
+       "candidate": "hoist|V0_rail150|line120|e0.25",
+       "worst": {
+        "status": "MARGINAL",
+        "least_m": 0.017,
+        "worst_id": "hoist|V0_rail150|line120|e0.25|S",
+        "file": "p1_access_seg_ringb.json",
+        "least_measured_m": 0.017
+       },
+       "candidates": {
+        "hoist|V0|line90|e0.20": {
+         "status": "FAIL",
+         "least_m": -0.05,
+         "worst_id": "hoist|V0|line90|e0.20|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": -0.05
+        },
+        "hoist|V0|line90|e0.25": {
+         "status": "FAIL",
+         "least_m": -0.003,
+         "worst_id": "hoist|V0|line90|e0.25|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": -0.003
+        },
+        "hoist|V0|line90|e0.30": {
+         "status": "MARGINAL",
+         "least_m": 0.002,
+         "worst_id": "hoist|V0|line90|e0.30|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": 0.002
+        },
+        "hoist|V0|line100|e0.20": {
+         "status": "FAIL",
+         "least_m": -0.041,
+         "worst_id": "hoist|V0|line100|e0.20|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": -0.041
+        },
+        "hoist|V0|line100|e0.25": {
+         "status": "MARGINAL",
+         "least_m": 0.008,
+         "worst_id": "hoist|V0|line100|e0.25|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": 0.008
+        },
+        "hoist|V0|line100|e0.30": {
+         "status": "MARGINAL",
+         "least_m": 0.002,
+         "worst_id": "hoist|V0|line100|e0.30|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": 0.002
+        },
+        "hoist|V0|line105|e0.20": {
+         "status": "FAIL",
+         "least_m": -0.037,
+         "worst_id": "hoist|V0|line105|e0.20|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": -0.037
+        },
+        "hoist|V0|line105|e0.25": {
+         "status": "MARGINAL",
+         "least_m": 0.012,
+         "worst_id": "hoist|V0|line105|e0.25|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": 0.012
+        },
+        "hoist|V0|line105|e0.30": {
+         "status": "MARGINAL",
+         "least_m": 0.002,
+         "worst_id": "hoist|V0|line105|e0.30|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": 0.002
+        },
+        "hoist|V0|line110|e0.20": {
+         "status": "FAIL",
+         "least_m": -0.035,
+         "worst_id": "hoist|V0|line110|e0.20|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": -0.035
+        },
+        "hoist|V0|line110|e0.25": {
+         "status": "MARGINAL",
+         "least_m": 0.015,
+         "worst_id": "hoist|V0|line110|e0.25|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": 0.015
+        },
+        "hoist|V0|line110|e0.30": {
+         "status": "FAIL",
+         "least_m": -0.003,
+         "worst_id": "hoist|V0|line110|e0.30|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": -0.003
+        },
+        "hoist|V0|line120|e0.20": {
+         "status": "FAIL",
+         "least_m": -0.033,
+         "worst_id": "hoist|V0|line120|e0.20|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": -0.033
+        },
+        "hoist|V0|line120|e0.25": {
+         "status": "MARGINAL",
+         "least_m": 0.014,
+         "worst_id": "hoist|V0|line120|e0.25|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": 0.014
+        },
+        "hoist|V0|line120|e0.30": {
+         "status": "FAIL",
+         "least_m": -0.032,
+         "worst_id": "hoist|V0|line120|e0.30|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": -0.032
+        },
+        "hoist|V0_rail150|line110|e0.20": {
+         "status": "FAIL",
+         "least_m": -0.035,
+         "worst_id": "hoist|V0_rail150|line110|e0.20|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": -0.035
+        },
+        "hoist|V0_rail150|line110|e0.25": {
+         "status": "MARGINAL",
+         "least_m": 0.015,
+         "worst_id": "hoist|V0_rail150|line110|e0.25|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": 0.015
+        },
+        "hoist|V0_rail150|line110|e0.30": {
+         "status": "MARGINAL",
+         "least_m": 0.002,
+         "worst_id": "hoist|V0_rail150|line110|e0.30|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": 0.002
+        },
+        "hoist|V0_rail150|line120|e0.20": {
+         "status": "FAIL",
+         "least_m": -0.033,
+         "worst_id": "hoist|V0_rail150|line120|e0.20|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": -0.033
+        },
+        "hoist|V0_rail150|line120|e0.25": {
+         "status": "MARGINAL",
+         "least_m": 0.017,
+         "worst_id": "hoist|V0_rail150|line120|e0.25|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": 0.017
+        },
+        "hoist|V0_rail150|line120|e0.30": {
+         "status": "MARGINAL",
+         "least_m": 0.002,
+         "worst_id": "hoist|V0_rail150|line120|e0.30|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": 0.002
+        },
+        "hoist|V0_rail165|line120|e0.20": {
+         "status": "FAIL",
+         "least_m": -0.033,
+         "worst_id": "hoist|V0_rail165|line120|e0.20|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": -0.033
+        },
+        "hoist|V0_rail165|line120|e0.25": {
+         "status": "MARGINAL",
+         "least_m": 0.017,
+         "worst_id": "hoist|V0_rail165|line120|e0.25|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": 0.017
+        },
+        "hoist|V0_rail165|line120|e0.30": {
+         "status": "MARGINAL",
+         "least_m": 0.002,
+         "worst_id": "hoist|V0_rail165|line120|e0.30|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": 0.002
+        }
+       }
+      }
+     }
+    },
+    "stopped": {
+     "status": "FAIL",
+     "elements": {
+      "ring B port variant": {
+       "status": "FAIL",
+       "candidate": "G1_1.10_guard0.10",
+       "worst": {
+        "status": "FAIL",
+        "least_m": -0.135,
+        "worst_id": "ringB_B2->trunk|G1|S",
+        "file": "p1_access_seg_ringb.json",
+        "least_measured_m": -0.135
+       },
+       "candidates": {
+        "V0_1.06_aft0.16": {
+         "status": "FAIL",
+         "least_m": -0.153,
+         "worst_id": "ringB_B2->trunk|V0|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": -0.153
+        },
+        "V1_1.10_aft0.20": {
+         "status": "FAIL",
+         "least_m": -0.137,
+         "worst_id": "ringB_B2->trunk|V1|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": -0.137
+        },
+        "G1_1.10_guard0.10": {
+         "status": "FAIL",
+         "least_m": -0.135,
+         "worst_id": "ringB_B2->trunk|G1|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": -0.135
+        }
+       }
+      },
+      "hoist line / rail": {
+       "status": "MARGINAL",
+       "candidate": "hoist|V0_rail150|line120|e0.25",
+       "worst": {
+        "status": "MARGINAL",
+        "least_m": 0.017,
+        "worst_id": "hoist|V0_rail150|line120|e0.25|S",
+        "file": "p1_access_seg_ringb.json",
+        "least_measured_m": 0.017
+       },
+       "candidates": {
+        "hoist|V0|line90|e0.20": {
+         "status": "FAIL",
+         "least_m": -0.05,
+         "worst_id": "hoist|V0|line90|e0.20|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": -0.05
+        },
+        "hoist|V0|line90|e0.25": {
+         "status": "FAIL",
+         "least_m": -0.003,
+         "worst_id": "hoist|V0|line90|e0.25|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": -0.003
+        },
+        "hoist|V0|line90|e0.30": {
+         "status": "MARGINAL",
+         "least_m": 0.002,
+         "worst_id": "hoist|V0|line90|e0.30|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": 0.002
+        },
+        "hoist|V0|line100|e0.20": {
+         "status": "FAIL",
+         "least_m": -0.041,
+         "worst_id": "hoist|V0|line100|e0.20|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": -0.041
+        },
+        "hoist|V0|line100|e0.25": {
+         "status": "MARGINAL",
+         "least_m": 0.008,
+         "worst_id": "hoist|V0|line100|e0.25|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": 0.008
+        },
+        "hoist|V0|line100|e0.30": {
+         "status": "MARGINAL",
+         "least_m": 0.002,
+         "worst_id": "hoist|V0|line100|e0.30|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": 0.002
+        },
+        "hoist|V0|line105|e0.20": {
+         "status": "FAIL",
+         "least_m": -0.037,
+         "worst_id": "hoist|V0|line105|e0.20|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": -0.037
+        },
+        "hoist|V0|line105|e0.25": {
+         "status": "MARGINAL",
+         "least_m": 0.012,
+         "worst_id": "hoist|V0|line105|e0.25|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": 0.012
+        },
+        "hoist|V0|line105|e0.30": {
+         "status": "MARGINAL",
+         "least_m": 0.002,
+         "worst_id": "hoist|V0|line105|e0.30|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": 0.002
+        },
+        "hoist|V0|line110|e0.20": {
+         "status": "FAIL",
+         "least_m": -0.035,
+         "worst_id": "hoist|V0|line110|e0.20|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": -0.035
+        },
+        "hoist|V0|line110|e0.25": {
+         "status": "MARGINAL",
+         "least_m": 0.015,
+         "worst_id": "hoist|V0|line110|e0.25|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": 0.015
+        },
+        "hoist|V0|line110|e0.30": {
+         "status": "FAIL",
+         "least_m": -0.003,
+         "worst_id": "hoist|V0|line110|e0.30|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": -0.003
+        },
+        "hoist|V0|line120|e0.20": {
+         "status": "FAIL",
+         "least_m": -0.033,
+         "worst_id": "hoist|V0|line120|e0.20|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": -0.033
+        },
+        "hoist|V0|line120|e0.25": {
+         "status": "MARGINAL",
+         "least_m": 0.014,
+         "worst_id": "hoist|V0|line120|e0.25|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": 0.014
+        },
+        "hoist|V0|line120|e0.30": {
+         "status": "FAIL",
+         "least_m": -0.032,
+         "worst_id": "hoist|V0|line120|e0.30|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": -0.032
+        },
+        "hoist|V0_rail150|line110|e0.20": {
+         "status": "FAIL",
+         "least_m": -0.035,
+         "worst_id": "hoist|V0_rail150|line110|e0.20|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": -0.035
+        },
+        "hoist|V0_rail150|line110|e0.25": {
+         "status": "MARGINAL",
+         "least_m": 0.015,
+         "worst_id": "hoist|V0_rail150|line110|e0.25|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": 0.015
+        },
+        "hoist|V0_rail150|line110|e0.30": {
+         "status": "MARGINAL",
+         "least_m": 0.002,
+         "worst_id": "hoist|V0_rail150|line110|e0.30|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": 0.002
+        },
+        "hoist|V0_rail150|line120|e0.20": {
+         "status": "FAIL",
+         "least_m": -0.033,
+         "worst_id": "hoist|V0_rail150|line120|e0.20|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": -0.033
+        },
+        "hoist|V0_rail150|line120|e0.25": {
+         "status": "MARGINAL",
+         "least_m": 0.017,
+         "worst_id": "hoist|V0_rail150|line120|e0.25|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": 0.017
+        },
+        "hoist|V0_rail150|line120|e0.30": {
+         "status": "MARGINAL",
+         "least_m": 0.002,
+         "worst_id": "hoist|V0_rail150|line120|e0.30|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": 0.002
+        },
+        "hoist|V0_rail165|line120|e0.20": {
+         "status": "FAIL",
+         "least_m": -0.033,
+         "worst_id": "hoist|V0_rail165|line120|e0.20|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": -0.033
+        },
+        "hoist|V0_rail165|line120|e0.25": {
+         "status": "MARGINAL",
+         "least_m": 0.017,
+         "worst_id": "hoist|V0_rail165|line120|e0.25|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": 0.017
+        },
+        "hoist|V0_rail165|line120|e0.30": {
+         "status": "MARGINAL",
+         "least_m": 0.002,
+         "worst_id": "hoist|V0_rail165|line120|e0.30|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": 0.002
+        }
+       }
+      }
+     }
+    },
+    "locked_1.5g": {
+     "status": "FAIL",
+     "elements": {
+      "ring B port variant": {
+       "status": "FAIL",
+       "candidate": "G1_1.10_guard0.10",
+       "worst": {
+        "status": "FAIL",
+        "least_m": -0.135,
+        "worst_id": "ringB_B2->trunk|G1|S",
+        "file": "p1_access_seg_ringb.json",
+        "least_measured_m": -0.135
+       },
+       "candidates": {
+        "V0_1.06_aft0.16": {
+         "status": "FAIL",
+         "least_m": -0.153,
+         "worst_id": "ringB_B2->trunk|V0|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": -0.153
+        },
+        "V1_1.10_aft0.20": {
+         "status": "FAIL",
+         "least_m": -0.137,
+         "worst_id": "ringB_B2->trunk|V1|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": -0.137
+        },
+        "G1_1.10_guard0.10": {
+         "status": "FAIL",
+         "least_m": -0.135,
+         "worst_id": "ringB_B2->trunk|G1|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": -0.135
+        }
+       }
+      },
+      "hoist line / rail": {
+       "status": "MARGINAL",
+       "candidate": "hoist|V0_rail150|line120|e0.25",
+       "worst": {
+        "status": "MARGINAL",
+        "least_m": 0.017,
+        "worst_id": "hoist|V0_rail150|line120|e0.25|S",
+        "file": "p1_access_seg_ringb.json",
+        "least_measured_m": 0.017
+       },
+       "candidates": {
+        "hoist|V0|line90|e0.20": {
+         "status": "FAIL",
+         "least_m": -0.05,
+         "worst_id": "hoist|V0|line90|e0.20|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": -0.05
+        },
+        "hoist|V0|line90|e0.25": {
+         "status": "FAIL",
+         "least_m": -0.003,
+         "worst_id": "hoist|V0|line90|e0.25|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": -0.003
+        },
+        "hoist|V0|line90|e0.30": {
+         "status": "MARGINAL",
+         "least_m": 0.002,
+         "worst_id": "hoist|V0|line90|e0.30|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": 0.002
+        },
+        "hoist|V0|line100|e0.20": {
+         "status": "FAIL",
+         "least_m": -0.041,
+         "worst_id": "hoist|V0|line100|e0.20|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": -0.041
+        },
+        "hoist|V0|line100|e0.25": {
+         "status": "MARGINAL",
+         "least_m": 0.008,
+         "worst_id": "hoist|V0|line100|e0.25|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": 0.008
+        },
+        "hoist|V0|line100|e0.30": {
+         "status": "MARGINAL",
+         "least_m": 0.002,
+         "worst_id": "hoist|V0|line100|e0.30|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": 0.002
+        },
+        "hoist|V0|line105|e0.20": {
+         "status": "FAIL",
+         "least_m": -0.037,
+         "worst_id": "hoist|V0|line105|e0.20|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": -0.037
+        },
+        "hoist|V0|line105|e0.25": {
+         "status": "MARGINAL",
+         "least_m": 0.012,
+         "worst_id": "hoist|V0|line105|e0.25|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": 0.012
+        },
+        "hoist|V0|line105|e0.30": {
+         "status": "MARGINAL",
+         "least_m": 0.002,
+         "worst_id": "hoist|V0|line105|e0.30|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": 0.002
+        },
+        "hoist|V0|line110|e0.20": {
+         "status": "FAIL",
+         "least_m": -0.035,
+         "worst_id": "hoist|V0|line110|e0.20|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": -0.035
+        },
+        "hoist|V0|line110|e0.25": {
+         "status": "MARGINAL",
+         "least_m": 0.015,
+         "worst_id": "hoist|V0|line110|e0.25|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": 0.015
+        },
+        "hoist|V0|line110|e0.30": {
+         "status": "FAIL",
+         "least_m": -0.003,
+         "worst_id": "hoist|V0|line110|e0.30|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": -0.003
+        },
+        "hoist|V0|line120|e0.20": {
+         "status": "FAIL",
+         "least_m": -0.033,
+         "worst_id": "hoist|V0|line120|e0.20|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": -0.033
+        },
+        "hoist|V0|line120|e0.25": {
+         "status": "MARGINAL",
+         "least_m": 0.014,
+         "worst_id": "hoist|V0|line120|e0.25|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": 0.014
+        },
+        "hoist|V0|line120|e0.30": {
+         "status": "FAIL",
+         "least_m": -0.032,
+         "worst_id": "hoist|V0|line120|e0.30|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": -0.032
+        },
+        "hoist|V0_rail150|line110|e0.20": {
+         "status": "FAIL",
+         "least_m": -0.035,
+         "worst_id": "hoist|V0_rail150|line110|e0.20|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": -0.035
+        },
+        "hoist|V0_rail150|line110|e0.25": {
+         "status": "MARGINAL",
+         "least_m": 0.015,
+         "worst_id": "hoist|V0_rail150|line110|e0.25|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": 0.015
+        },
+        "hoist|V0_rail150|line110|e0.30": {
+         "status": "MARGINAL",
+         "least_m": 0.002,
+         "worst_id": "hoist|V0_rail150|line110|e0.30|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": 0.002
+        },
+        "hoist|V0_rail150|line120|e0.20": {
+         "status": "FAIL",
+         "least_m": -0.033,
+         "worst_id": "hoist|V0_rail150|line120|e0.20|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": -0.033
+        },
+        "hoist|V0_rail150|line120|e0.25": {
+         "status": "MARGINAL",
+         "least_m": 0.017,
+         "worst_id": "hoist|V0_rail150|line120|e0.25|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": 0.017
+        },
+        "hoist|V0_rail150|line120|e0.30": {
+         "status": "MARGINAL",
+         "least_m": 0.002,
+         "worst_id": "hoist|V0_rail150|line120|e0.30|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": 0.002
+        },
+        "hoist|V0_rail165|line120|e0.20": {
+         "status": "FAIL",
+         "least_m": -0.033,
+         "worst_id": "hoist|V0_rail165|line120|e0.20|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": -0.033
+        },
+        "hoist|V0_rail165|line120|e0.25": {
+         "status": "MARGINAL",
+         "least_m": 0.017,
+         "worst_id": "hoist|V0_rail165|line120|e0.25|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": 0.017
+        },
+        "hoist|V0_rail165|line120|e0.30": {
+         "status": "MARGINAL",
+         "least_m": 0.002,
+         "worst_id": "hoist|V0_rail165|line120|e0.30|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": 0.002
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "ringB_care": {
+   "title": "ring B sector -> B2 medical couch",
+   "states": {
+    "0g": {
+     "status": "FAIL",
+     "elements": {
+      "ring B port variant": {
+       "status": "FAIL",
+       "candidate": "G1_1.10_guard0.10",
+       "worst": {
+        "status": "FAIL",
+        "least_m": -0.135,
+        "worst_id": "ringB_B2->couch|G1|S",
+        "file": "p1_access_seg_ringb.json",
+        "least_measured_m": -0.135
+       },
+       "candidates": {
+        "V0_1.06_aft0.16": {
+         "status": "FAIL",
+         "least_m": -0.153,
+         "worst_id": "ringB_B2->couch|V0|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": -0.153
+        },
+        "V1_1.10_aft0.20": {
+         "status": "FAIL",
+         "least_m": -0.137,
+         "worst_id": "ringB_B2->couch|V1|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": -0.137
+        },
+        "G1_1.10_guard0.10": {
+         "status": "FAIL",
+         "least_m": -0.135,
+         "worst_id": "ringB_B2->couch|G1|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": -0.135
+        }
+       }
+      }
+     }
+    },
+    "spin": {
+     "status": "FAIL",
+     "elements": {
+      "ring B port variant": {
+       "status": "FAIL",
+       "candidate": "V1_1.10_aft0.20",
+       "worst": {
+        "status": "FAIL",
+        "least_m": -0.245,
+        "worst_id": "B3->B2|V1|S",
+        "file": "p1_access_seg_ringb.json",
+        "least_measured_m": -0.245
+       },
+       "candidates": {
+        "V0_1.06_aft0.16": {
+         "status": "FAIL",
+         "least_m": -0.258,
+         "worst_id": "B1->B2|V0|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": -0.258
+        },
+        "V1_1.10_aft0.20": {
+         "status": "FAIL",
+         "least_m": -0.245,
+         "worst_id": "B3->B2|V1|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": -0.245
+        },
+        "G1_1.10_guard0.10": {
+         "status": "FAIL",
+         "least_m": -0.248,
+         "worst_id": "B3->B2|G1|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": -0.248
+        }
+       }
+      }
+     }
+    },
+    "stopped": {
+     "status": "FAIL",
+     "elements": {
+      "ring B port variant": {
+       "status": "FAIL",
+       "candidate": "V1_1.10_aft0.20",
+       "worst": {
+        "status": "FAIL",
+        "least_m": -0.245,
+        "worst_id": "B3->B2|V1|S",
+        "file": "p1_access_seg_ringb.json",
+        "least_measured_m": -0.245
+       },
+       "candidates": {
+        "V0_1.06_aft0.16": {
+         "status": "FAIL",
+         "least_m": -0.258,
+         "worst_id": "B1->B2|V0|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": -0.258
+        },
+        "V1_1.10_aft0.20": {
+         "status": "FAIL",
+         "least_m": -0.245,
+         "worst_id": "B3->B2|V1|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": -0.245
+        },
+        "G1_1.10_guard0.10": {
+         "status": "FAIL",
+         "least_m": -0.248,
+         "worst_id": "B3->B2|G1|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": -0.248
+        }
+       }
+      }
+     }
+    },
+    "locked_1.5g": {
+     "status": "FAIL",
+     "elements": {
+      "ring B port variant": {
+       "status": "FAIL",
+       "candidate": "V1_1.10_aft0.20",
+       "worst": {
+        "status": "FAIL",
+        "least_m": -0.245,
+        "worst_id": "B3->B2|V1|S",
+        "file": "p1_access_seg_ringb.json",
+        "least_measured_m": -0.245
+       },
+       "candidates": {
+        "V0_1.06_aft0.16": {
+         "status": "FAIL",
+         "least_m": -0.258,
+         "worst_id": "B1->B2|V0|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": -0.258
+        },
+        "V1_1.10_aft0.20": {
+         "status": "FAIL",
+         "least_m": -0.245,
+         "worst_id": "B3->B2|V1|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": -0.245
+        },
+        "G1_1.10_guard0.10": {
+         "status": "FAIL",
+         "least_m": -0.248,
+         "worst_id": "B3->B2|G1|S",
+         "file": "p1_access_seg_ringb.json",
+         "least_measured_m": -0.248
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "ringA": {
+   "title": "ring A sector -> A2 couch / trunk (stop/index, worst case 2026-10-13)",
+   "states": {
+    "0g": {
+     "status": "FAIL",
+     "elements": {
+      "ring A as built, worst case": {
+       "status": "FAIL",
+       "candidate": "(single)",
+       "worst": {
+        "status": "FAIL",
+        "least_m": -0.171,
+        "worst_id": "ringA-wc:A1|built_wc|S",
+        "file": "p1_access_seg_ringb_care.json",
+        "least_measured_m": -0.171
+       },
+       "candidates": {
+        "(single)": {
+         "status": "FAIL",
+         "least_m": -0.171,
+         "worst_id": "ringA-wc:A1|built_wc|S",
+         "file": "p1_access_seg_ringb_care.json",
+         "least_measured_m": -0.171
+        }
+       }
+      }
+     }
+    },
+    "spin": {
+     "status": "FAIL",
+     "elements": {
+      "ring A as built, worst case": {
+       "status": "FAIL",
+       "candidate": "(single)",
+       "worst": {
+        "status": "FAIL",
+        "least_m": -0.455,
+        "worst_id": "ringA-wc:A2|built_wc|S",
+        "file": "p1_access_seg_ringb_care.json",
+        "least_measured_m": -0.455
+       },
+       "candidates": {
+        "(single)": {
+         "status": "FAIL",
+         "least_m": -0.455,
+         "worst_id": "ringA-wc:A2|built_wc|S",
+         "file": "p1_access_seg_ringb_care.json",
+         "least_measured_m": -0.455
+        }
+       }
+      }
+     }
+    },
+    "stopped": {
+     "status": "FAIL",
+     "elements": {
+      "ring A as built, worst case": {
+       "status": "FAIL",
+       "candidate": "(single)",
+       "worst": {
+        "status": "FAIL",
+        "least_m": -0.251,
+        "worst_id": "ringA-wc:A3=>A2|built_wc|S",
+        "file": "p1_access_seg_ringb_care.json",
+        "least_measured_m": -0.251
+       },
+       "candidates": {
+        "(single)": {
+         "status": "FAIL",
+         "least_m": -0.251,
+         "worst_id": "ringA-wc:A3=>A2|built_wc|S",
+         "file": "p1_access_seg_ringb_care.json",
+         "least_measured_m": -0.251
+        }
+       }
+      }
+     }
+    },
+    "locked_1.5g": {
+     "status": "FAIL",
+     "elements": {
+      "ring A as built, worst case": {
+       "status": "FAIL",
+       "candidate": "(single)",
+       "worst": {
+        "status": "FAIL",
+        "least_m": -0.251,
+        "worst_id": "ringA-wc:A3=>A2|built_wc|S",
+        "file": "p1_access_seg_ringb_care.json",
+        "least_measured_m": -0.251
+       },
+       "candidates": {
+        "(single)": {
+         "status": "FAIL",
+         "least_m": -0.251,
+         "worst_id": "ringA-wc:A3=>A2|built_wc|S",
+         "file": "p1_access_seg_ringb_care.json",
+         "least_measured_m": -0.251
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "eva_sp11_sp12": {
+   "title": "SP-11 1.20 m plug -> SP-12 -> trunk (casualty)",
+   "states": {
+    "0g": {
+     "status": "FAIL",
+     "elements": {
+      "SP-11 keeper": {
+       "status": "PASS",
+       "candidate": "KP7_stroke_0.10_thin_recessed",
+       "worst": {
+        "status": "PASS",
+        "least_m": 0.088,
+        "worst_id": "SP11.keeper_drop.KP7_stroke_0.10_thin_recessed",
+        "file": "p1_access_seg_sp11_sp12.json",
+        "least_measured_m": 0.088
+       },
+       "candidates": {
+        "KP0_baseline": {
+         "status": "MARGINAL",
+         "least_m": 0.04,
+         "worst_id": "SP11.keeper_drop.KP0_baseline",
+         "file": "p1_access_seg_sp11_sp12.json",
+         "least_measured_m": 0.04
+        },
+        "KP1_stroke_0.10": {
+         "status": "PASS",
+         "least_m": 0.06,
+         "worst_id": "SP11.keeper_drop.KP1_stroke_0.10",
+         "file": "p1_access_seg_sp11_sp12.json",
+         "least_measured_m": 0.06
+        },
+        "KP2_stroke_0.12": {
+         "status": "PASS",
+         "least_m": 0.08,
+         "worst_id": "SP11.keeper_drop.KP2_stroke_0.12",
+         "file": "p1_access_seg_sp11_sp12.json",
+         "least_measured_m": 0.08
+        },
+        "KP3_thin_lugs": {
+         "status": "PASS",
+         "least_m": 0.056,
+         "worst_id": "SP11.keeper_drop.KP3_thin_lugs",
+         "file": "p1_access_seg_sp11_sp12.json",
+         "least_measured_m": 0.056
+        },
+        "KP4_recessed_ledge": {
+         "status": "PASS",
+         "least_m": 0.06,
+         "worst_id": "SP11.keeper_drop.KP4_recessed_ledge",
+         "file": "p1_access_seg_sp11_sp12.json",
+         "least_measured_m": 0.06
+        },
+        "KP5_guide_moved": {
+         "status": "MARGINAL",
+         "least_m": 0.04,
+         "worst_id": "SP11.keeper_drop.KP5_guide_moved",
+         "file": "p1_access_seg_sp11_sp12.json",
+         "least_measured_m": 0.04
+        },
+        "KP6_stroke_0.10_guide_moved": {
+         "status": "PASS",
+         "least_m": 0.06,
+         "worst_id": "SP11.keeper_drop.KP6_stroke_0.10_guide_moved",
+         "file": "p1_access_seg_sp11_sp12.json",
+         "least_measured_m": 0.06
+        },
+        "KP7_stroke_0.10_thin_recessed": {
+         "status": "PASS",
+         "least_m": 0.088,
+         "worst_id": "SP11.keeper_drop.KP7_stroke_0.10_thin_recessed",
+         "file": "p1_access_seg_sp11_sp12.json",
+         "least_measured_m": 0.088
+        }
+       }
+      },
+      "SP-11 aperture": {
+       "status": "FAIL",
+       "candidate": "(single)",
+       "worst": {
+        "status": "FAIL",
+        "least_m": -0.099,
+        "worst_id": "SP11.aperture_passage.limp_casualty",
+        "file": "p1_access_seg_sp11_sp12.json",
+        "least_measured_m": -0.099
+       },
+       "candidates": {
+        "(single)": {
+         "status": "FAIL",
+         "least_m": -0.099,
+         "worst_id": "SP11.aperture_passage.limp_casualty",
+         "file": "p1_access_seg_sp11_sp12.json",
+         "least_measured_m": -0.099
+        }
+       }
+      },
+      "SP-11 chamber controls": {
+       "status": "PASS",
+       "candidate": "(single)",
+       "worst": {
+        "status": "PASS",
+        "least_m": 0.089,
+        "worst_id": "SP11.controls_chamber.reach",
+        "file": "p1_access_seg_sp11_sp12.json",
+        "least_measured_m": 0.089
+       },
+       "candidates": {
+        "(single)": {
+         "status": "PASS",
+         "least_m": 0.089,
+         "worst_id": "SP11.controls_chamber.reach",
+         "file": "p1_access_seg_sp11_sp12.json",
+         "least_measured_m": 0.089
+        }
+       }
+      },
+      "SP-12 control cluster": {
+       "status": "PASS",
+       "candidate": "CT3_row_fine_angle_standoff_0.13",
+       "worst": {
+        "status": "PASS",
+        "least_m": 0.07,
+        "worst_id": "SP12.operator_clearance.CT3_row_fine_angle_standoff_0.13",
+        "file": "p1_access_seg_sp11_sp12.json",
+        "least_measured_m": 0.07
+       },
+       "candidates": {
+        "CT0_baseline": {
+         "status": "MARGINAL",
+         "least_m": 0.0,
+         "worst_id": "SP12.operator_clearance.CT0_baseline",
+         "file": "p1_access_seg_sp11_sp12.json",
+         "least_measured_m": 0.0
+        },
+        "CT1_vertical_fine_angle": {
+         "status": "MARGINAL",
+         "least_m": 0.0,
+         "worst_id": "SP12.operator_clearance.CT1_vertical_fine_angle",
+         "file": "p1_access_seg_sp11_sp12.json",
+         "least_measured_m": 0.0
+        },
+        "CT2_row_fine_angle": {
+         "status": "MARGINAL",
+         "least_m": 0.042,
+         "worst_id": "SP12.operator_clearance.CT2_row_fine_angle",
+         "file": "p1_access_seg_sp11_sp12.json",
+         "least_measured_m": 0.042
+        },
+        "CT3_row_fine_angle_standoff_0.13": {
+         "status": "PASS",
+         "least_m": 0.07,
+         "worst_id": "SP12.operator_clearance.CT3_row_fine_angle_standoff_0.13",
+         "file": "p1_access_seg_sp11_sp12.json",
+         "least_measured_m": 0.07
+        },
+        "CT4_row_fine_angle_zone_moved": {
+         "status": "MARGINAL",
+         "least_m": 0.042,
+         "worst_id": "SP12.operator_clearance.CT4_row_fine_angle_zone_moved",
+         "file": "p1_access_seg_sp11_sp12.json",
+         "least_measured_m": 0.042
+        },
+        "CT5_row_standA_az12": {
+         "status": "MARGINAL",
+         "least_m": 0.042,
+         "worst_id": "SP12.operator_clearance.CT5_row_standA_az12",
+         "file": "p1_access_seg_sp11_sp12.json",
+         "least_measured_m": 0.042
+        }
+       }
+      },
+      "SP-12 exit (N1 rejected)": {
+       "status": "MARGINAL",
+       "candidate": "N2_fwd45_1.10",
+       "worst": {
+        "status": "MARGINAL",
+        "least_m": 0.044,
+        "worst_id": "A170-SP12-N2_fwd45_1.10-S",
+        "file": "p1_access_seg_sp13_l1a.json",
+        "least_measured_m": 0.044
+       },
+       "candidates": {
+        "N2_oblique30_1.10": {
+         "status": "FAIL",
+         "least_m": -0.125,
+         "worst_id": "A170-SP12-N2_oblique30_1.10-S",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.125
+        },
+        "N2_oblique35_1.10": {
+         "status": "FAIL",
+         "least_m": -0.2,
+         "worst_id": "A170-SP12-N2_oblique35_1.10-S",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.2
+        },
+        "N0_branch_0.90": {
+         "status": "FAIL",
+         "least_m": -0.19,
+         "worst_id": "A170-SP12-N0_branch_0.90-S",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.19
+        },
+        "N0_branch_1.10": {
+         "status": "FAIL",
+         "least_m": -0.036,
+         "worst_id": "A170-SP12-N0_branch_1.10-S",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.036
+        },
+        "N3_oblique30_1.20": {
+         "status": "FAIL",
+         "least_m": -0.123,
+         "worst_id": "A170-SP12-N3_oblique30_1.20-S",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.123
+        },
+        "N2_fwd45_1.10": {
+         "status": "MARGINAL",
+         "least_m": 0.044,
+         "worst_id": "A170-SP12-N2_fwd45_1.10-S",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": 0.044
+        }
+       }
+      },
+      "N2 fwd45 complete route and opposite side": {
+       "status": "MARGINAL",
+       "candidate": "(single)",
+       "worst": {
+        "status": "MARGINAL",
+        "least_m": 0.044,
+        "worst_id": "A176-SP12-N2FWD45-E2E-S",
+        "file": "p1_access_seg_sp13_l1a.json",
+        "least_measured_m": 0.044
+       },
+       "candidates": {
+        "(single)": {
+         "status": "MARGINAL",
+         "least_m": 0.044,
+         "worst_id": "A176-SP12-N2FWD45-E2E-S",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": 0.044
+        }
+       }
+      },
+      "N2 fwd45 single fault": {
+       "status": "FAIL",
+       "candidate": "(single)",
+       "worst": {
+        "status": "FAIL",
+        "least_m": -0.292,
+        "worst_id": "A176-SP12-N2FWD45-SF-rescuer_down_in_duct-S",
+        "file": "p1_access_seg_sp13_l1a.json",
+        "least_measured_m": -0.292
+       },
+       "candidates": {
+        "(single)": {
+         "status": "FAIL",
+         "least_m": -0.292,
+         "worst_id": "A176-SP12-N2FWD45-SF-rescuer_down_in_duct-S",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.292
+        }
+       }
+      }
+     }
+    },
+    "spin": {
+     "status": "FAIL",
+     "elements": {
+      "SP-11 keeper": {
+       "status": "PASS",
+       "candidate": "KP7_stroke_0.10_thin_recessed",
+       "worst": {
+        "status": "PASS",
+        "least_m": 0.088,
+        "worst_id": "SP11.keeper_drop.KP7_stroke_0.10_thin_recessed",
+        "file": "p1_access_seg_sp11_sp12.json",
+        "least_measured_m": 0.088
+       },
+       "candidates": {
+        "KP0_baseline": {
+         "status": "MARGINAL",
+         "least_m": 0.04,
+         "worst_id": "SP11.keeper_drop.KP0_baseline",
+         "file": "p1_access_seg_sp11_sp12.json",
+         "least_measured_m": 0.04
+        },
+        "KP1_stroke_0.10": {
+         "status": "PASS",
+         "least_m": 0.06,
+         "worst_id": "SP11.keeper_drop.KP1_stroke_0.10",
+         "file": "p1_access_seg_sp11_sp12.json",
+         "least_measured_m": 0.06
+        },
+        "KP2_stroke_0.12": {
+         "status": "PASS",
+         "least_m": 0.08,
+         "worst_id": "SP11.keeper_drop.KP2_stroke_0.12",
+         "file": "p1_access_seg_sp11_sp12.json",
+         "least_measured_m": 0.08
+        },
+        "KP3_thin_lugs": {
+         "status": "PASS",
+         "least_m": 0.056,
+         "worst_id": "SP11.keeper_drop.KP3_thin_lugs",
+         "file": "p1_access_seg_sp11_sp12.json",
+         "least_measured_m": 0.056
+        },
+        "KP4_recessed_ledge": {
+         "status": "PASS",
+         "least_m": 0.06,
+         "worst_id": "SP11.keeper_drop.KP4_recessed_ledge",
+         "file": "p1_access_seg_sp11_sp12.json",
+         "least_measured_m": 0.06
+        },
+        "KP5_guide_moved": {
+         "status": "MARGINAL",
+         "least_m": 0.04,
+         "worst_id": "SP11.keeper_drop.KP5_guide_moved",
+         "file": "p1_access_seg_sp11_sp12.json",
+         "least_measured_m": 0.04
+        },
+        "KP6_stroke_0.10_guide_moved": {
+         "status": "PASS",
+         "least_m": 0.06,
+         "worst_id": "SP11.keeper_drop.KP6_stroke_0.10_guide_moved",
+         "file": "p1_access_seg_sp11_sp12.json",
+         "least_measured_m": 0.06
+        },
+        "KP7_stroke_0.10_thin_recessed": {
+         "status": "PASS",
+         "least_m": 0.088,
+         "worst_id": "SP11.keeper_drop.KP7_stroke_0.10_thin_recessed",
+         "file": "p1_access_seg_sp11_sp12.json",
+         "least_measured_m": 0.088
+        }
+       }
+      },
+      "SP-11 aperture": {
+       "status": "OPEN",
+       "candidate": null,
+       "worst": null,
+       "candidates": {}
+      },
+      "SP-11 chamber controls": {
+       "status": "OPEN",
+       "candidate": null,
+       "worst": null,
+       "candidates": {}
+      },
+      "SP-12 control cluster": {
+       "status": "OPEN",
+       "candidate": null,
+       "worst": null,
+       "candidates": {}
+      },
+      "SP-12 exit (N1 rejected)": {
+       "status": "MARGINAL",
+       "candidate": "N2_fwd45_1.10",
+       "worst": {
+        "status": "MARGINAL",
+        "least_m": 0.044,
+        "worst_id": "A170-SP12-N2_fwd45_1.10-S",
+        "file": "p1_access_seg_sp13_l1a.json",
+        "least_measured_m": 0.044
+       },
+       "candidates": {
+        "N2_oblique30_1.10": {
+         "status": "FAIL",
+         "least_m": -0.125,
+         "worst_id": "A170-SP12-N2_oblique30_1.10-S",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.125
+        },
+        "N2_oblique35_1.10": {
+         "status": "FAIL",
+         "least_m": -0.2,
+         "worst_id": "A170-SP12-N2_oblique35_1.10-S",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.2
+        },
+        "N0_branch_0.90": {
+         "status": "FAIL",
+         "least_m": -0.19,
+         "worst_id": "A170-SP12-N0_branch_0.90-S",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.19
+        },
+        "N0_branch_1.10": {
+         "status": "FAIL",
+         "least_m": -0.036,
+         "worst_id": "A170-SP12-N0_branch_1.10-S",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.036
+        },
+        "N3_oblique30_1.20": {
+         "status": "FAIL",
+         "least_m": -0.123,
+         "worst_id": "A170-SP12-N3_oblique30_1.20-S",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.123
+        },
+        "N2_fwd45_1.10": {
+         "status": "MARGINAL",
+         "least_m": 0.044,
+         "worst_id": "A170-SP12-N2_fwd45_1.10-S",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": 0.044
+        }
+       }
+      },
+      "N2 fwd45 complete route and opposite side": {
+       "status": "MARGINAL",
+       "candidate": "(single)",
+       "worst": {
+        "status": "MARGINAL",
+        "least_m": 0.044,
+        "worst_id": "A176-SP12-N2FWD45-E2E-S",
+        "file": "p1_access_seg_sp13_l1a.json",
+        "least_measured_m": 0.044
+       },
+       "candidates": {
+        "(single)": {
+         "status": "MARGINAL",
+         "least_m": 0.044,
+         "worst_id": "A176-SP12-N2FWD45-E2E-S",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": 0.044
+        }
+       }
+      },
+      "N2 fwd45 single fault": {
+       "status": "FAIL",
+       "candidate": "(single)",
+       "worst": {
+        "status": "FAIL",
+        "least_m": -0.292,
+        "worst_id": "A176-SP12-N2FWD45-SF-rescuer_down_in_duct-S",
+        "file": "p1_access_seg_sp13_l1a.json",
+        "least_measured_m": -0.292
+       },
+       "candidates": {
+        "(single)": {
+         "status": "FAIL",
+         "least_m": -0.292,
+         "worst_id": "A176-SP12-N2FWD45-SF-rescuer_down_in_duct-S",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.292
+        }
+       }
+      }
+     }
+    },
+    "stopped": {
+     "status": "FAIL",
+     "elements": {
+      "SP-11 keeper": {
+       "status": "PASS",
+       "candidate": "KP7_stroke_0.10_thin_recessed",
+       "worst": {
+        "status": "PASS",
+        "least_m": 0.088,
+        "worst_id": "SP11.keeper_drop.KP7_stroke_0.10_thin_recessed",
+        "file": "p1_access_seg_sp11_sp12.json",
+        "least_measured_m": 0.088
+       },
+       "candidates": {
+        "KP0_baseline": {
+         "status": "MARGINAL",
+         "least_m": 0.04,
+         "worst_id": "SP11.keeper_drop.KP0_baseline",
+         "file": "p1_access_seg_sp11_sp12.json",
+         "least_measured_m": 0.04
+        },
+        "KP1_stroke_0.10": {
+         "status": "PASS",
+         "least_m": 0.06,
+         "worst_id": "SP11.keeper_drop.KP1_stroke_0.10",
+         "file": "p1_access_seg_sp11_sp12.json",
+         "least_measured_m": 0.06
+        },
+        "KP2_stroke_0.12": {
+         "status": "PASS",
+         "least_m": 0.08,
+         "worst_id": "SP11.keeper_drop.KP2_stroke_0.12",
+         "file": "p1_access_seg_sp11_sp12.json",
+         "least_measured_m": 0.08
+        },
+        "KP3_thin_lugs": {
+         "status": "PASS",
+         "least_m": 0.056,
+         "worst_id": "SP11.keeper_drop.KP3_thin_lugs",
+         "file": "p1_access_seg_sp11_sp12.json",
+         "least_measured_m": 0.056
+        },
+        "KP4_recessed_ledge": {
+         "status": "PASS",
+         "least_m": 0.06,
+         "worst_id": "SP11.keeper_drop.KP4_recessed_ledge",
+         "file": "p1_access_seg_sp11_sp12.json",
+         "least_measured_m": 0.06
+        },
+        "KP5_guide_moved": {
+         "status": "MARGINAL",
+         "least_m": 0.04,
+         "worst_id": "SP11.keeper_drop.KP5_guide_moved",
+         "file": "p1_access_seg_sp11_sp12.json",
+         "least_measured_m": 0.04
+        },
+        "KP6_stroke_0.10_guide_moved": {
+         "status": "PASS",
+         "least_m": 0.06,
+         "worst_id": "SP11.keeper_drop.KP6_stroke_0.10_guide_moved",
+         "file": "p1_access_seg_sp11_sp12.json",
+         "least_measured_m": 0.06
+        },
+        "KP7_stroke_0.10_thin_recessed": {
+         "status": "PASS",
+         "least_m": 0.088,
+         "worst_id": "SP11.keeper_drop.KP7_stroke_0.10_thin_recessed",
+         "file": "p1_access_seg_sp11_sp12.json",
+         "least_measured_m": 0.088
+        }
+       }
+      },
+      "SP-11 aperture": {
+       "status": "FAIL",
+       "candidate": "(single)",
+       "worst": {
+        "status": "FAIL",
+        "least_m": -0.099,
+        "worst_id": "SP11.aperture_passage.limp_casualty",
+        "file": "p1_access_seg_sp11_sp12.json",
+        "least_measured_m": -0.099
+       },
+       "candidates": {
+        "(single)": {
+         "status": "FAIL",
+         "least_m": -0.099,
+         "worst_id": "SP11.aperture_passage.limp_casualty",
+         "file": "p1_access_seg_sp11_sp12.json",
+         "least_measured_m": -0.099
+        }
+       }
+      },
+      "SP-11 chamber controls": {
+       "status": "PASS",
+       "candidate": "(single)",
+       "worst": {
+        "status": "PASS",
+        "least_m": 0.089,
+        "worst_id": "SP11.controls_chamber.reach",
+        "file": "p1_access_seg_sp11_sp12.json",
+        "least_measured_m": 0.089
+       },
+       "candidates": {
+        "(single)": {
+         "status": "PASS",
+         "least_m": 0.089,
+         "worst_id": "SP11.controls_chamber.reach",
+         "file": "p1_access_seg_sp11_sp12.json",
+         "least_measured_m": 0.089
+        }
+       }
+      },
+      "SP-12 control cluster": {
+       "status": "PASS",
+       "candidate": "CT3_row_fine_angle_standoff_0.13",
+       "worst": {
+        "status": "PASS",
+        "least_m": 0.07,
+        "worst_id": "SP12.operator_clearance.CT3_row_fine_angle_standoff_0.13",
+        "file": "p1_access_seg_sp11_sp12.json",
+        "least_measured_m": 0.07
+       },
+       "candidates": {
+        "CT0_baseline": {
+         "status": "MARGINAL",
+         "least_m": 0.0,
+         "worst_id": "SP12.operator_clearance.CT0_baseline",
+         "file": "p1_access_seg_sp11_sp12.json",
+         "least_measured_m": 0.0
+        },
+        "CT1_vertical_fine_angle": {
+         "status": "MARGINAL",
+         "least_m": 0.0,
+         "worst_id": "SP12.operator_clearance.CT1_vertical_fine_angle",
+         "file": "p1_access_seg_sp11_sp12.json",
+         "least_measured_m": 0.0
+        },
+        "CT2_row_fine_angle": {
+         "status": "MARGINAL",
+         "least_m": 0.042,
+         "worst_id": "SP12.operator_clearance.CT2_row_fine_angle",
+         "file": "p1_access_seg_sp11_sp12.json",
+         "least_measured_m": 0.042
+        },
+        "CT3_row_fine_angle_standoff_0.13": {
+         "status": "PASS",
+         "least_m": 0.07,
+         "worst_id": "SP12.operator_clearance.CT3_row_fine_angle_standoff_0.13",
+         "file": "p1_access_seg_sp11_sp12.json",
+         "least_measured_m": 0.07
+        },
+        "CT4_row_fine_angle_zone_moved": {
+         "status": "MARGINAL",
+         "least_m": 0.042,
+         "worst_id": "SP12.operator_clearance.CT4_row_fine_angle_zone_moved",
+         "file": "p1_access_seg_sp11_sp12.json",
+         "least_measured_m": 0.042
+        },
+        "CT5_row_standA_az12": {
+         "status": "MARGINAL",
+         "least_m": 0.042,
+         "worst_id": "SP12.operator_clearance.CT5_row_standA_az12",
+         "file": "p1_access_seg_sp11_sp12.json",
+         "least_measured_m": 0.042
+        }
+       }
+      },
+      "SP-12 exit (N1 rejected)": {
+       "status": "MARGINAL",
+       "candidate": "N2_fwd45_1.10",
+       "worst": {
+        "status": "MARGINAL",
+        "least_m": 0.044,
+        "worst_id": "A170-SP12-N2_fwd45_1.10-S",
+        "file": "p1_access_seg_sp13_l1a.json",
+        "least_measured_m": 0.044
+       },
+       "candidates": {
+        "N2_oblique30_1.10": {
+         "status": "FAIL",
+         "least_m": -0.125,
+         "worst_id": "A170-SP12-N2_oblique30_1.10-S",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.125
+        },
+        "N2_oblique35_1.10": {
+         "status": "FAIL",
+         "least_m": -0.2,
+         "worst_id": "A170-SP12-N2_oblique35_1.10-S",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.2
+        },
+        "N0_branch_0.90": {
+         "status": "FAIL",
+         "least_m": -0.19,
+         "worst_id": "A170-SP12-N0_branch_0.90-S",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.19
+        },
+        "N0_branch_1.10": {
+         "status": "FAIL",
+         "least_m": -0.036,
+         "worst_id": "A170-SP12-N0_branch_1.10-S",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.036
+        },
+        "N3_oblique30_1.20": {
+         "status": "FAIL",
+         "least_m": -0.123,
+         "worst_id": "A170-SP12-N3_oblique30_1.20-S",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.123
+        },
+        "N2_fwd45_1.10": {
+         "status": "MARGINAL",
+         "least_m": 0.044,
+         "worst_id": "A170-SP12-N2_fwd45_1.10-S",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": 0.044
+        }
+       }
+      },
+      "N2 fwd45 complete route and opposite side": {
+       "status": "MARGINAL",
+       "candidate": "(single)",
+       "worst": {
+        "status": "MARGINAL",
+        "least_m": 0.044,
+        "worst_id": "A176-SP12-N2FWD45-E2E-S",
+        "file": "p1_access_seg_sp13_l1a.json",
+        "least_measured_m": 0.044
+       },
+       "candidates": {
+        "(single)": {
+         "status": "MARGINAL",
+         "least_m": 0.044,
+         "worst_id": "A176-SP12-N2FWD45-E2E-S",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": 0.044
+        }
+       }
+      },
+      "N2 fwd45 single fault": {
+       "status": "FAIL",
+       "candidate": "(single)",
+       "worst": {
+        "status": "FAIL",
+        "least_m": -0.292,
+        "worst_id": "A176-SP12-N2FWD45-SF-rescuer_down_in_duct-S",
+        "file": "p1_access_seg_sp13_l1a.json",
+        "least_measured_m": -0.292
+       },
+       "candidates": {
+        "(single)": {
+         "status": "FAIL",
+         "least_m": -0.292,
+         "worst_id": "A176-SP12-N2FWD45-SF-rescuer_down_in_duct-S",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.292
+        }
+       }
+      }
+     }
+    },
+    "locked_1.5g": {
+     "status": "FAIL",
+     "elements": {
+      "SP-11 keeper": {
+       "status": "PASS",
+       "candidate": "KP7_stroke_0.10_thin_recessed",
+       "worst": {
+        "status": "PASS",
+        "least_m": 0.088,
+        "worst_id": "SP11.keeper_drop.KP7_stroke_0.10_thin_recessed",
+        "file": "p1_access_seg_sp11_sp12.json",
+        "least_measured_m": 0.088
+       },
+       "candidates": {
+        "KP0_baseline": {
+         "status": "MARGINAL",
+         "least_m": 0.04,
+         "worst_id": "SP11.keeper_drop.KP0_baseline",
+         "file": "p1_access_seg_sp11_sp12.json",
+         "least_measured_m": 0.04
+        },
+        "KP1_stroke_0.10": {
+         "status": "PASS",
+         "least_m": 0.06,
+         "worst_id": "SP11.keeper_drop.KP1_stroke_0.10",
+         "file": "p1_access_seg_sp11_sp12.json",
+         "least_measured_m": 0.06
+        },
+        "KP2_stroke_0.12": {
+         "status": "PASS",
+         "least_m": 0.08,
+         "worst_id": "SP11.keeper_drop.KP2_stroke_0.12",
+         "file": "p1_access_seg_sp11_sp12.json",
+         "least_measured_m": 0.08
+        },
+        "KP3_thin_lugs": {
+         "status": "PASS",
+         "least_m": 0.056,
+         "worst_id": "SP11.keeper_drop.KP3_thin_lugs",
+         "file": "p1_access_seg_sp11_sp12.json",
+         "least_measured_m": 0.056
+        },
+        "KP4_recessed_ledge": {
+         "status": "PASS",
+         "least_m": 0.06,
+         "worst_id": "SP11.keeper_drop.KP4_recessed_ledge",
+         "file": "p1_access_seg_sp11_sp12.json",
+         "least_measured_m": 0.06
+        },
+        "KP5_guide_moved": {
+         "status": "MARGINAL",
+         "least_m": 0.04,
+         "worst_id": "SP11.keeper_drop.KP5_guide_moved",
+         "file": "p1_access_seg_sp11_sp12.json",
+         "least_measured_m": 0.04
+        },
+        "KP6_stroke_0.10_guide_moved": {
+         "status": "PASS",
+         "least_m": 0.06,
+         "worst_id": "SP11.keeper_drop.KP6_stroke_0.10_guide_moved",
+         "file": "p1_access_seg_sp11_sp12.json",
+         "least_measured_m": 0.06
+        },
+        "KP7_stroke_0.10_thin_recessed": {
+         "status": "PASS",
+         "least_m": 0.088,
+         "worst_id": "SP11.keeper_drop.KP7_stroke_0.10_thin_recessed",
+         "file": "p1_access_seg_sp11_sp12.json",
+         "least_measured_m": 0.088
+        }
+       }
+      },
+      "SP-11 aperture": {
+       "status": "OPEN",
+       "candidate": null,
+       "worst": null,
+       "candidates": {}
+      },
+      "SP-11 chamber controls": {
+       "status": "OPEN",
+       "candidate": null,
+       "worst": null,
+       "candidates": {}
+      },
+      "SP-12 control cluster": {
+       "status": "OPEN",
+       "candidate": null,
+       "worst": null,
+       "candidates": {}
+      },
+      "SP-12 exit (N1 rejected)": {
+       "status": "MARGINAL",
+       "candidate": "N2_fwd45_1.10",
+       "worst": {
+        "status": "MARGINAL",
+        "least_m": 0.044,
+        "worst_id": "A170-SP12-N2_fwd45_1.10-S",
+        "file": "p1_access_seg_sp13_l1a.json",
+        "least_measured_m": 0.044
+       },
+       "candidates": {
+        "N2_oblique30_1.10": {
+         "status": "FAIL",
+         "least_m": -0.125,
+         "worst_id": "A170-SP12-N2_oblique30_1.10-S",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.125
+        },
+        "N2_oblique35_1.10": {
+         "status": "FAIL",
+         "least_m": -0.2,
+         "worst_id": "A170-SP12-N2_oblique35_1.10-S",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.2
+        },
+        "N0_branch_0.90": {
+         "status": "FAIL",
+         "least_m": -0.19,
+         "worst_id": "A170-SP12-N0_branch_0.90-S",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.19
+        },
+        "N0_branch_1.10": {
+         "status": "FAIL",
+         "least_m": -0.036,
+         "worst_id": "A170-SP12-N0_branch_1.10-S",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.036
+        },
+        "N3_oblique30_1.20": {
+         "status": "FAIL",
+         "least_m": -0.123,
+         "worst_id": "A170-SP12-N3_oblique30_1.20-S",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.123
+        },
+        "N2_fwd45_1.10": {
+         "status": "MARGINAL",
+         "least_m": 0.044,
+         "worst_id": "A170-SP12-N2_fwd45_1.10-S",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": 0.044
+        }
+       }
+      },
+      "N2 fwd45 complete route and opposite side": {
+       "status": "MARGINAL",
+       "candidate": "(single)",
+       "worst": {
+        "status": "MARGINAL",
+        "least_m": 0.044,
+        "worst_id": "A176-SP12-N2FWD45-E2E-S",
+        "file": "p1_access_seg_sp13_l1a.json",
+        "least_measured_m": 0.044
+       },
+       "candidates": {
+        "(single)": {
+         "status": "MARGINAL",
+         "least_m": 0.044,
+         "worst_id": "A176-SP12-N2FWD45-E2E-S",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": 0.044
+        }
+       }
+      },
+      "N2 fwd45 single fault": {
+       "status": "FAIL",
+       "candidate": "(single)",
+       "worst": {
+        "status": "FAIL",
+        "least_m": -0.292,
+        "worst_id": "A176-SP12-N2FWD45-SF-rescuer_down_in_duct-S",
+        "file": "p1_access_seg_sp13_l1a.json",
+        "least_measured_m": -0.292
+       },
+       "candidates": {
+        "(single)": {
+         "status": "FAIL",
+         "least_m": -0.292,
+         "worst_id": "A176-SP12-N2FWD45-SF-rescuer_down_in_duct-S",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.292
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "eva_sp13": {
+   "title": "SP-13 independent second exit (fit-out kept; the 1.20 m and bare-room rows are comparisons)",
+   "states": {
+    "0g": {
+     "status": "FAIL",
+     "elements": {
+      "SP-13 exit and fit-out": {
+       "status": "MARGINAL",
+       "candidate": "SEL",
+       "worst": {
+        "status": "MARGINAL",
+        "least_m": 0.0,
+        "worst_id": "SP13-SEL-S",
+        "file": "p1_access_seg_sp13_l1a.json",
+        "least_measured_m": 0.0
+       },
+       "candidates": {
+        "CTRL": {
+         "status": "FAIL",
+         "least_m": -0.341,
+         "worst_id": "SP13-CTRL-S",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.341
+        },
+        "RADREARR": {
+         "status": "FAIL",
+         "least_m": -0.074,
+         "worst_id": "SP13-RADREARR-S",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.074
+        },
+        "SEL": {
+         "status": "MARGINAL",
+         "least_m": 0.0,
+         "worst_id": "SP13-SEL-S",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": 0.0
+        }
+       }
+      },
+      "service capability kept": {
+       "status": "PASS",
+       "candidate": "(single)",
+       "worst": {
+        "status": "PASS",
+        "least_m": 0.3,
+        "worst_id": "SP13-SERVICE-DRY",
+        "file": "p1_access_seg_sp13_l1a.json",
+        "least_measured_m": 0.3
+       },
+       "candidates": {
+        "(single)": {
+         "status": "PASS",
+         "least_m": 0.3,
+         "worst_id": "SP13-SERVICE-DRY",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": 0.3
+        }
+       }
+      },
+      "exit closure (hinged dogged / dual)": {
+       "status": "OPEN",
+       "candidate": "single_aft_resited_fitout",
+       "worst": {
+        "status": "OPEN",
+        "least_m": null,
+        "worst_id": "A170-SP13-DP80-a_single",
+        "file": "p1_access_seg_sp13_l1a.json",
+        "least_measured_m": 0.016
+       },
+       "candidates": {
+        "single_aft_selected_fitout": {
+         "status": "FAIL",
+         "least_m": -0.413,
+         "worst_id": "A170-SP13-CLOSURE-single_aft_selected_fitout",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.413
+        },
+        "single_fwd_selected_fitout": {
+         "status": "FAIL",
+         "least_m": -0.145,
+         "worst_id": "A170-SP13-CLOSURE-single_fwd_selected_fitout",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.145
+        },
+        "single_plus_t_selected_fitout": {
+         "status": "FAIL",
+         "least_m": -0.008,
+         "worst_id": "A170-SP13-CLOSURE-single_plus_t_selected_fitout",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.008
+        },
+        "single_minus_t_selected_fitout": {
+         "status": "FAIL",
+         "least_m": -0.088,
+         "worst_id": "A170-SP13-CLOSURE-single_minus_t_selected_fitout",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.088
+        },
+        "single_aft_resited_fitout": {
+         "status": "OPEN",
+         "least_m": null,
+         "worst_id": "A170-SP13-DP80-a_single",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": 0.016
+        },
+        "single_fwd_resited_fitout": {
+         "status": "FAIL",
+         "least_m": -0.084,
+         "worst_id": "A170-SP13-CLOSURE-single_fwd_resited_fitout",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.084
+        },
+        "dual_fwd_resited_fitout": {
+         "status": "FAIL",
+         "least_m": -0.038,
+         "worst_id": "A170-SP13-CLOSURE-dual_fwd_resited_fitout",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.038
+        },
+        "single_minus_t_resited_fitout": {
+         "status": "FAIL",
+         "least_m": -0.001,
+         "worst_id": "A170-SP13-CLOSURE-single_minus_t_resited_fitout",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.001
+        },
+        "dual_minus_t_resited_fitout": {
+         "status": "FAIL",
+         "least_m": -0.027,
+         "worst_id": "A170-SP13-CLOSURE-dual_minus_t_resited_fitout",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.027
+        },
+        "A178:partition_and_sideways": {
+         "status": "FAIL",
+         "least_m": -0.016,
+         "worst_id": "A178-SP13-LEAF-partition_and_sideways",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.016
+        },
+        "A178:mount_x_and_sideways": {
+         "status": "FAIL",
+         "least_m": -0.178,
+         "worst_id": "A178-SP13-LEAF-mount_x_and_sideways",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.178
+        },
+        "A178:partition_and_side_wall": {
+         "status": "FAIL",
+         "least_m": -0.057,
+         "worst_id": "A178-SP13-LEAF-partition_and_side_wall",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.057
+        },
+        "A178:mount_x_and_side_wall": {
+         "status": "OPEN",
+         "least_m": null,
+         "worst_id": "A170-SP13-DP80-a_single",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": 0.006
+        }
+       }
+      },
+      "independent of SP-12 (N1 rejected)": {
+       "status": "PASS",
+       "candidate": "(single)",
+       "worst": {
+        "status": "PASS",
+        "least_m": 0.172,
+        "worst_id": "SP13-INDEP-PARTITION",
+        "file": "p1_access_seg_sp13_l1a.json",
+        "least_measured_m": 0.172
+       },
+       "candidates": {
+        "(single)": {
+         "status": "PASS",
+         "least_m": 0.172,
+         "worst_id": "SP13-INDEP-PARTITION",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": 0.172
+        }
+       }
+      },
+      "SP-12 faults in the shared extension": {
+       "status": "FAIL",
+       "candidate": "(single)",
+       "worst": {
+        "status": "FAIL",
+        "least_m": -0.373,
+        "worst_id": "A177-SP13-N2_fwd45_stuck_on_axis_shunt_start-U",
+        "file": "p1_access_seg_sp13_l1a.json",
+        "least_measured_m": -0.373
+       },
+       "candidates": {
+        "(single)": {
+         "status": "FAIL",
+         "least_m": -0.373,
+         "worst_id": "A177-SP13-N2_fwd45_stuck_on_axis_shunt_start-U",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.373
+        }
+       }
+      }
+     }
+    },
+    "spin": {
+     "status": "FAIL",
+     "elements": {
+      "SP-13 exit and fit-out": {
+       "status": "MARGINAL",
+       "candidate": "SEL",
+       "worst": {
+        "status": "MARGINAL",
+        "least_m": 0.0,
+        "worst_id": "SP13-SEL-S",
+        "file": "p1_access_seg_sp13_l1a.json",
+        "least_measured_m": 0.0
+       },
+       "candidates": {
+        "CTRL": {
+         "status": "FAIL",
+         "least_m": -0.341,
+         "worst_id": "SP13-CTRL-S",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.341
+        },
+        "RADREARR": {
+         "status": "FAIL",
+         "least_m": -0.074,
+         "worst_id": "SP13-RADREARR-S",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.074
+        },
+        "SEL": {
+         "status": "MARGINAL",
+         "least_m": 0.0,
+         "worst_id": "SP13-SEL-S",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": 0.0
+        }
+       }
+      },
+      "service capability kept": {
+       "status": "PASS",
+       "candidate": "(single)",
+       "worst": {
+        "status": "PASS",
+        "least_m": 0.3,
+        "worst_id": "SP13-SERVICE-DRY",
+        "file": "p1_access_seg_sp13_l1a.json",
+        "least_measured_m": 0.3
+       },
+       "candidates": {
+        "(single)": {
+         "status": "PASS",
+         "least_m": 0.3,
+         "worst_id": "SP13-SERVICE-DRY",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": 0.3
+        }
+       }
+      },
+      "exit closure (hinged dogged / dual)": {
+       "status": "OPEN",
+       "candidate": "single_aft_resited_fitout",
+       "worst": {
+        "status": "OPEN",
+        "least_m": null,
+        "worst_id": "A170-SP13-DP80-a_single",
+        "file": "p1_access_seg_sp13_l1a.json",
+        "least_measured_m": 0.016
+       },
+       "candidates": {
+        "single_aft_selected_fitout": {
+         "status": "FAIL",
+         "least_m": -0.413,
+         "worst_id": "A170-SP13-CLOSURE-single_aft_selected_fitout",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.413
+        },
+        "single_fwd_selected_fitout": {
+         "status": "FAIL",
+         "least_m": -0.145,
+         "worst_id": "A170-SP13-CLOSURE-single_fwd_selected_fitout",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.145
+        },
+        "single_plus_t_selected_fitout": {
+         "status": "FAIL",
+         "least_m": -0.008,
+         "worst_id": "A170-SP13-CLOSURE-single_plus_t_selected_fitout",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.008
+        },
+        "single_minus_t_selected_fitout": {
+         "status": "FAIL",
+         "least_m": -0.088,
+         "worst_id": "A170-SP13-CLOSURE-single_minus_t_selected_fitout",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.088
+        },
+        "single_aft_resited_fitout": {
+         "status": "OPEN",
+         "least_m": null,
+         "worst_id": "A170-SP13-DP80-a_single",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": 0.016
+        },
+        "single_fwd_resited_fitout": {
+         "status": "FAIL",
+         "least_m": -0.084,
+         "worst_id": "A170-SP13-CLOSURE-single_fwd_resited_fitout",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.084
+        },
+        "dual_fwd_resited_fitout": {
+         "status": "FAIL",
+         "least_m": -0.038,
+         "worst_id": "A170-SP13-CLOSURE-dual_fwd_resited_fitout",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.038
+        },
+        "single_minus_t_resited_fitout": {
+         "status": "FAIL",
+         "least_m": -0.001,
+         "worst_id": "A170-SP13-CLOSURE-single_minus_t_resited_fitout",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.001
+        },
+        "dual_minus_t_resited_fitout": {
+         "status": "FAIL",
+         "least_m": -0.027,
+         "worst_id": "A170-SP13-CLOSURE-dual_minus_t_resited_fitout",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.027
+        },
+        "A178:partition_and_sideways": {
+         "status": "FAIL",
+         "least_m": -0.016,
+         "worst_id": "A178-SP13-LEAF-partition_and_sideways",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.016
+        },
+        "A178:mount_x_and_sideways": {
+         "status": "FAIL",
+         "least_m": -0.178,
+         "worst_id": "A178-SP13-LEAF-mount_x_and_sideways",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.178
+        },
+        "A178:partition_and_side_wall": {
+         "status": "FAIL",
+         "least_m": -0.057,
+         "worst_id": "A178-SP13-LEAF-partition_and_side_wall",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.057
+        },
+        "A178:mount_x_and_side_wall": {
+         "status": "OPEN",
+         "least_m": null,
+         "worst_id": "A170-SP13-DP80-a_single",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": 0.006
+        }
+       }
+      },
+      "independent of SP-12 (N1 rejected)": {
+       "status": "PASS",
+       "candidate": "(single)",
+       "worst": {
+        "status": "PASS",
+        "least_m": 0.172,
+        "worst_id": "SP13-INDEP-PARTITION",
+        "file": "p1_access_seg_sp13_l1a.json",
+        "least_measured_m": 0.172
+       },
+       "candidates": {
+        "(single)": {
+         "status": "PASS",
+         "least_m": 0.172,
+         "worst_id": "SP13-INDEP-PARTITION",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": 0.172
+        }
+       }
+      },
+      "SP-12 faults in the shared extension": {
+       "status": "FAIL",
+       "candidate": "(single)",
+       "worst": {
+        "status": "FAIL",
+        "least_m": -0.373,
+        "worst_id": "A177-SP13-N2_fwd45_stuck_on_axis_shunt_start-U",
+        "file": "p1_access_seg_sp13_l1a.json",
+        "least_measured_m": -0.373
+       },
+       "candidates": {
+        "(single)": {
+         "status": "FAIL",
+         "least_m": -0.373,
+         "worst_id": "A177-SP13-N2_fwd45_stuck_on_axis_shunt_start-U",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.373
+        }
+       }
+      }
+     }
+    },
+    "stopped": {
+     "status": "FAIL",
+     "elements": {
+      "SP-13 exit and fit-out": {
+       "status": "MARGINAL",
+       "candidate": "SEL",
+       "worst": {
+        "status": "MARGINAL",
+        "least_m": 0.0,
+        "worst_id": "SP13-SEL-S",
+        "file": "p1_access_seg_sp13_l1a.json",
+        "least_measured_m": 0.0
+       },
+       "candidates": {
+        "CTRL": {
+         "status": "FAIL",
+         "least_m": -0.341,
+         "worst_id": "SP13-CTRL-S",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.341
+        },
+        "RADREARR": {
+         "status": "FAIL",
+         "least_m": -0.074,
+         "worst_id": "SP13-RADREARR-S",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.074
+        },
+        "SEL": {
+         "status": "MARGINAL",
+         "least_m": 0.0,
+         "worst_id": "SP13-SEL-S",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": 0.0
+        }
+       }
+      },
+      "service capability kept": {
+       "status": "PASS",
+       "candidate": "(single)",
+       "worst": {
+        "status": "PASS",
+        "least_m": 0.3,
+        "worst_id": "SP13-SERVICE-DRY",
+        "file": "p1_access_seg_sp13_l1a.json",
+        "least_measured_m": 0.3
+       },
+       "candidates": {
+        "(single)": {
+         "status": "PASS",
+         "least_m": 0.3,
+         "worst_id": "SP13-SERVICE-DRY",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": 0.3
+        }
+       }
+      },
+      "exit closure (hinged dogged / dual)": {
+       "status": "OPEN",
+       "candidate": "single_aft_resited_fitout",
+       "worst": {
+        "status": "OPEN",
+        "least_m": null,
+        "worst_id": "A170-SP13-DP80-a_single",
+        "file": "p1_access_seg_sp13_l1a.json",
+        "least_measured_m": 0.016
+       },
+       "candidates": {
+        "single_aft_selected_fitout": {
+         "status": "FAIL",
+         "least_m": -0.413,
+         "worst_id": "A170-SP13-CLOSURE-single_aft_selected_fitout",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.413
+        },
+        "single_fwd_selected_fitout": {
+         "status": "FAIL",
+         "least_m": -0.145,
+         "worst_id": "A170-SP13-CLOSURE-single_fwd_selected_fitout",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.145
+        },
+        "single_plus_t_selected_fitout": {
+         "status": "FAIL",
+         "least_m": -0.008,
+         "worst_id": "A170-SP13-CLOSURE-single_plus_t_selected_fitout",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.008
+        },
+        "single_minus_t_selected_fitout": {
+         "status": "FAIL",
+         "least_m": -0.088,
+         "worst_id": "A170-SP13-CLOSURE-single_minus_t_selected_fitout",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.088
+        },
+        "single_aft_resited_fitout": {
+         "status": "OPEN",
+         "least_m": null,
+         "worst_id": "A170-SP13-DP80-a_single",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": 0.016
+        },
+        "single_fwd_resited_fitout": {
+         "status": "FAIL",
+         "least_m": -0.084,
+         "worst_id": "A170-SP13-CLOSURE-single_fwd_resited_fitout",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.084
+        },
+        "dual_fwd_resited_fitout": {
+         "status": "FAIL",
+         "least_m": -0.038,
+         "worst_id": "A170-SP13-CLOSURE-dual_fwd_resited_fitout",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.038
+        },
+        "single_minus_t_resited_fitout": {
+         "status": "FAIL",
+         "least_m": -0.001,
+         "worst_id": "A170-SP13-CLOSURE-single_minus_t_resited_fitout",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.001
+        },
+        "dual_minus_t_resited_fitout": {
+         "status": "FAIL",
+         "least_m": -0.027,
+         "worst_id": "A170-SP13-CLOSURE-dual_minus_t_resited_fitout",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.027
+        },
+        "A178:partition_and_sideways": {
+         "status": "FAIL",
+         "least_m": -0.016,
+         "worst_id": "A178-SP13-LEAF-partition_and_sideways",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.016
+        },
+        "A178:mount_x_and_sideways": {
+         "status": "FAIL",
+         "least_m": -0.178,
+         "worst_id": "A178-SP13-LEAF-mount_x_and_sideways",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.178
+        },
+        "A178:partition_and_side_wall": {
+         "status": "FAIL",
+         "least_m": -0.057,
+         "worst_id": "A178-SP13-LEAF-partition_and_side_wall",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.057
+        },
+        "A178:mount_x_and_side_wall": {
+         "status": "OPEN",
+         "least_m": null,
+         "worst_id": "A170-SP13-DP80-a_single",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": 0.006
+        }
+       }
+      },
+      "independent of SP-12 (N1 rejected)": {
+       "status": "PASS",
+       "candidate": "(single)",
+       "worst": {
+        "status": "PASS",
+        "least_m": 0.172,
+        "worst_id": "SP13-INDEP-PARTITION",
+        "file": "p1_access_seg_sp13_l1a.json",
+        "least_measured_m": 0.172
+       },
+       "candidates": {
+        "(single)": {
+         "status": "PASS",
+         "least_m": 0.172,
+         "worst_id": "SP13-INDEP-PARTITION",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": 0.172
+        }
+       }
+      },
+      "SP-12 faults in the shared extension": {
+       "status": "FAIL",
+       "candidate": "(single)",
+       "worst": {
+        "status": "FAIL",
+        "least_m": -0.373,
+        "worst_id": "A177-SP13-N2_fwd45_stuck_on_axis_shunt_start-U",
+        "file": "p1_access_seg_sp13_l1a.json",
+        "least_measured_m": -0.373
+       },
+       "candidates": {
+        "(single)": {
+         "status": "FAIL",
+         "least_m": -0.373,
+         "worst_id": "A177-SP13-N2_fwd45_stuck_on_axis_shunt_start-U",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.373
+        }
+       }
+      }
+     }
+    },
+    "locked_1.5g": {
+     "status": "FAIL",
+     "elements": {
+      "SP-13 exit and fit-out": {
+       "status": "MARGINAL",
+       "candidate": "SEL",
+       "worst": {
+        "status": "MARGINAL",
+        "least_m": 0.0,
+        "worst_id": "SP13-SEL-S",
+        "file": "p1_access_seg_sp13_l1a.json",
+        "least_measured_m": 0.0
+       },
+       "candidates": {
+        "CTRL": {
+         "status": "FAIL",
+         "least_m": -0.341,
+         "worst_id": "SP13-CTRL-S",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.341
+        },
+        "RADREARR": {
+         "status": "FAIL",
+         "least_m": -0.074,
+         "worst_id": "SP13-RADREARR-S",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.074
+        },
+        "SEL": {
+         "status": "MARGINAL",
+         "least_m": 0.0,
+         "worst_id": "SP13-SEL-S",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": 0.0
+        }
+       }
+      },
+      "service capability kept": {
+       "status": "PASS",
+       "candidate": "(single)",
+       "worst": {
+        "status": "PASS",
+        "least_m": 0.3,
+        "worst_id": "SP13-SERVICE-DRY",
+        "file": "p1_access_seg_sp13_l1a.json",
+        "least_measured_m": 0.3
+       },
+       "candidates": {
+        "(single)": {
+         "status": "PASS",
+         "least_m": 0.3,
+         "worst_id": "SP13-SERVICE-DRY",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": 0.3
+        }
+       }
+      },
+      "exit closure (hinged dogged / dual)": {
+       "status": "OPEN",
+       "candidate": "single_aft_resited_fitout",
+       "worst": {
+        "status": "OPEN",
+        "least_m": null,
+        "worst_id": "A170-SP13-DP80-a_single",
+        "file": "p1_access_seg_sp13_l1a.json",
+        "least_measured_m": 0.016
+       },
+       "candidates": {
+        "single_aft_selected_fitout": {
+         "status": "FAIL",
+         "least_m": -0.413,
+         "worst_id": "A170-SP13-CLOSURE-single_aft_selected_fitout",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.413
+        },
+        "single_fwd_selected_fitout": {
+         "status": "FAIL",
+         "least_m": -0.145,
+         "worst_id": "A170-SP13-CLOSURE-single_fwd_selected_fitout",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.145
+        },
+        "single_plus_t_selected_fitout": {
+         "status": "FAIL",
+         "least_m": -0.008,
+         "worst_id": "A170-SP13-CLOSURE-single_plus_t_selected_fitout",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.008
+        },
+        "single_minus_t_selected_fitout": {
+         "status": "FAIL",
+         "least_m": -0.088,
+         "worst_id": "A170-SP13-CLOSURE-single_minus_t_selected_fitout",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.088
+        },
+        "single_aft_resited_fitout": {
+         "status": "OPEN",
+         "least_m": null,
+         "worst_id": "A170-SP13-DP80-a_single",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": 0.016
+        },
+        "single_fwd_resited_fitout": {
+         "status": "FAIL",
+         "least_m": -0.084,
+         "worst_id": "A170-SP13-CLOSURE-single_fwd_resited_fitout",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.084
+        },
+        "dual_fwd_resited_fitout": {
+         "status": "FAIL",
+         "least_m": -0.038,
+         "worst_id": "A170-SP13-CLOSURE-dual_fwd_resited_fitout",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.038
+        },
+        "single_minus_t_resited_fitout": {
+         "status": "FAIL",
+         "least_m": -0.001,
+         "worst_id": "A170-SP13-CLOSURE-single_minus_t_resited_fitout",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.001
+        },
+        "dual_minus_t_resited_fitout": {
+         "status": "FAIL",
+         "least_m": -0.027,
+         "worst_id": "A170-SP13-CLOSURE-dual_minus_t_resited_fitout",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.027
+        },
+        "A178:partition_and_sideways": {
+         "status": "FAIL",
+         "least_m": -0.016,
+         "worst_id": "A178-SP13-LEAF-partition_and_sideways",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.016
+        },
+        "A178:mount_x_and_sideways": {
+         "status": "FAIL",
+         "least_m": -0.178,
+         "worst_id": "A178-SP13-LEAF-mount_x_and_sideways",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.178
+        },
+        "A178:partition_and_side_wall": {
+         "status": "FAIL",
+         "least_m": -0.057,
+         "worst_id": "A178-SP13-LEAF-partition_and_side_wall",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.057
+        },
+        "A178:mount_x_and_side_wall": {
+         "status": "OPEN",
+         "least_m": null,
+         "worst_id": "A170-SP13-DP80-a_single",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": 0.006
+        }
+       }
+      },
+      "independent of SP-12 (N1 rejected)": {
+       "status": "PASS",
+       "candidate": "(single)",
+       "worst": {
+        "status": "PASS",
+        "least_m": 0.172,
+        "worst_id": "SP13-INDEP-PARTITION",
+        "file": "p1_access_seg_sp13_l1a.json",
+        "least_measured_m": 0.172
+       },
+       "candidates": {
+        "(single)": {
+         "status": "PASS",
+         "least_m": 0.172,
+         "worst_id": "SP13-INDEP-PARTITION",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": 0.172
+        }
+       }
+      },
+      "SP-12 faults in the shared extension": {
+       "status": "FAIL",
+       "candidate": "(single)",
+       "worst": {
+        "status": "FAIL",
+        "least_m": -0.428,
+        "worst_id": "A176-SP12-N2FWD45-HOIST-axis",
+        "file": "p1_access_seg_sp13_l1a.json",
+        "least_measured_m": -0.428
+       },
+       "candidates": {
+        "(single)": {
+         "status": "FAIL",
+         "least_m": -0.428,
+         "worst_id": "A176-SP12-N2FWD45-HOIST-axis",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": -0.428
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "district_l1a": {
+   "title": "L1-A district / Dock_Primary protected 1.5 g route",
+   "states": {
+    "0g": {
+     "status": "OPEN",
+     "elements": {
+      "district port 205-215 deg + stile": {
+       "status": "OPEN",
+       "candidate": "CB2J6",
+       "worst": {
+        "status": "OPEN",
+        "least_m": null,
+        "worst_id": "A179-L1A-STILE-CB2J6-LOADS",
+        "file": "p1_access_seg_l1a_stile.json",
+        "least_measured_m": 0.064
+       },
+       "candidates": {
+        "OR4": {
+         "status": "OPEN",
+         "least_m": null,
+         "worst_id": "A179-L1A-STILE-OR4-LOADS",
+         "file": "p1_access_seg_l1a_stile.json",
+         "least_measured_m": 0.059
+        },
+        "CB2J6": {
+         "status": "OPEN",
+         "least_m": null,
+         "worst_id": "A179-L1A-STILE-CB2J6-LOADS",
+         "file": "p1_access_seg_l1a_stile.json",
+         "least_measured_m": 0.064
+        },
+        "CB2J8": {
+         "status": "OPEN",
+         "least_m": null,
+         "worst_id": "A179-L1A-STILE-CB2J8-LOADS",
+         "file": "p1_access_seg_l1a_stile.json",
+         "least_measured_m": 0.054
+        },
+        "OR4DP": {
+         "status": "OPEN",
+         "least_m": null,
+         "worst_id": "A179-L1A-STILE-OR4DP-LOADS",
+         "file": "p1_access_seg_l1a_stile.json",
+         "least_measured_m": 0.059
+        },
+        "CB2J8DP": {
+         "status": "OPEN",
+         "least_m": null,
+         "worst_id": "A179-L1A-STILE-CB2J8DP-LOADS",
+         "file": "p1_access_seg_l1a_stile.json",
+         "least_measured_m": 0.054
+        },
+        "CB2J6DP": {
+         "status": "OPEN",
+         "least_m": null,
+         "worst_id": "A179-L1A-STILE-CB2J6DP-LOADS",
+         "file": "p1_access_seg_l1a_stile.json",
+         "least_measured_m": 0.064
+        }
+       }
+      },
+      "dock bridge": {
+       "status": "OPEN",
+       "candidate": null,
+       "worst": null,
+       "candidates": {}
+      },
+      "SP-52 containment (heat transfer OPEN)": {
+       "status": "OPEN",
+       "candidate": "SP52-CONT-0.10",
+       "worst": {
+        "status": "OPEN",
+        "least_m": 0.154,
+        "worst_id": "SP52-STANDOFF-0.30",
+        "file": "p1_access_seg_sp13_l1a.json",
+        "least_measured_m": 0.154
+       },
+       "candidates": {
+        "SP52-CONT-0.10": {
+         "status": "OPEN",
+         "least_m": 0.154,
+         "worst_id": "SP52-STANDOFF-0.30",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": 0.154
+        },
+        "SP52-CONT-0.20": {
+         "status": "OPEN",
+         "least_m": 0.1,
+         "worst_id": "SP52-CONT-0.20",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": 0.1
+        }
+       }
+      }
+     }
+    },
+    "spin": {
+     "status": "OPEN",
+     "elements": {
+      "district port 205-215 deg + stile": {
+       "status": "OPEN",
+       "candidate": "CB2J6",
+       "worst": {
+        "status": "OPEN",
+        "least_m": null,
+        "worst_id": "A179-L1A-STILE-CB2J6-LOADS",
+        "file": "p1_access_seg_l1a_stile.json",
+        "least_measured_m": 0.064
+       },
+       "candidates": {
+        "OR4": {
+         "status": "OPEN",
+         "least_m": null,
+         "worst_id": "A179-L1A-STILE-OR4-LOADS",
+         "file": "p1_access_seg_l1a_stile.json",
+         "least_measured_m": 0.059
+        },
+        "CB2J6": {
+         "status": "OPEN",
+         "least_m": null,
+         "worst_id": "A179-L1A-STILE-CB2J6-LOADS",
+         "file": "p1_access_seg_l1a_stile.json",
+         "least_measured_m": 0.064
+        },
+        "CB2J8": {
+         "status": "OPEN",
+         "least_m": null,
+         "worst_id": "A179-L1A-STILE-CB2J8-LOADS",
+         "file": "p1_access_seg_l1a_stile.json",
+         "least_measured_m": 0.054
+        },
+        "OR4DP": {
+         "status": "OPEN",
+         "least_m": null,
+         "worst_id": "A179-L1A-STILE-OR4DP-LOADS",
+         "file": "p1_access_seg_l1a_stile.json",
+         "least_measured_m": 0.059
+        },
+        "CB2J8DP": {
+         "status": "OPEN",
+         "least_m": null,
+         "worst_id": "A179-L1A-STILE-CB2J8DP-LOADS",
+         "file": "p1_access_seg_l1a_stile.json",
+         "least_measured_m": 0.054
+        },
+        "CB2J6DP": {
+         "status": "OPEN",
+         "least_m": null,
+         "worst_id": "A179-L1A-STILE-CB2J6DP-LOADS",
+         "file": "p1_access_seg_l1a_stile.json",
+         "least_measured_m": 0.064
+        }
+       }
+      },
+      "dock bridge": {
+       "status": "OPEN",
+       "candidate": null,
+       "worst": null,
+       "candidates": {}
+      },
+      "SP-52 containment (heat transfer OPEN)": {
+       "status": "OPEN",
+       "candidate": "SP52-CONT-0.10",
+       "worst": {
+        "status": "OPEN",
+        "least_m": 0.154,
+        "worst_id": "SP52-STANDOFF-0.30",
+        "file": "p1_access_seg_sp13_l1a.json",
+        "least_measured_m": 0.154
+       },
+       "candidates": {
+        "SP52-CONT-0.10": {
+         "status": "OPEN",
+         "least_m": 0.154,
+         "worst_id": "SP52-STANDOFF-0.30",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": 0.154
+        },
+        "SP52-CONT-0.20": {
+         "status": "OPEN",
+         "least_m": 0.1,
+         "worst_id": "SP52-CONT-0.20",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": 0.1
+        }
+       }
+      }
+     }
+    },
+    "stopped": {
+     "status": "OPEN",
+     "elements": {
+      "district port 205-215 deg + stile": {
+       "status": "OPEN",
+       "candidate": "CB2J6",
+       "worst": {
+        "status": "OPEN",
+        "least_m": null,
+        "worst_id": "A179-L1A-STILE-CB2J6-LOADS",
+        "file": "p1_access_seg_l1a_stile.json",
+        "least_measured_m": 0.064
+       },
+       "candidates": {
+        "OR4": {
+         "status": "OPEN",
+         "least_m": null,
+         "worst_id": "A179-L1A-STILE-OR4-LOADS",
+         "file": "p1_access_seg_l1a_stile.json",
+         "least_measured_m": 0.059
+        },
+        "CB2J6": {
+         "status": "OPEN",
+         "least_m": null,
+         "worst_id": "A179-L1A-STILE-CB2J6-LOADS",
+         "file": "p1_access_seg_l1a_stile.json",
+         "least_measured_m": 0.064
+        },
+        "CB2J8": {
+         "status": "OPEN",
+         "least_m": null,
+         "worst_id": "A179-L1A-STILE-CB2J8-LOADS",
+         "file": "p1_access_seg_l1a_stile.json",
+         "least_measured_m": 0.054
+        },
+        "OR4DP": {
+         "status": "OPEN",
+         "least_m": null,
+         "worst_id": "A179-L1A-STILE-OR4DP-LOADS",
+         "file": "p1_access_seg_l1a_stile.json",
+         "least_measured_m": 0.059
+        },
+        "CB2J8DP": {
+         "status": "OPEN",
+         "least_m": null,
+         "worst_id": "A179-L1A-STILE-CB2J8DP-LOADS",
+         "file": "p1_access_seg_l1a_stile.json",
+         "least_measured_m": 0.054
+        },
+        "CB2J6DP": {
+         "status": "OPEN",
+         "least_m": null,
+         "worst_id": "A179-L1A-STILE-CB2J6DP-LOADS",
+         "file": "p1_access_seg_l1a_stile.json",
+         "least_measured_m": 0.064
+        }
+       }
+      },
+      "dock bridge": {
+       "status": "OPEN",
+       "candidate": null,
+       "worst": null,
+       "candidates": {}
+      },
+      "SP-52 containment (heat transfer OPEN)": {
+       "status": "OPEN",
+       "candidate": "SP52-CONT-0.10",
+       "worst": {
+        "status": "OPEN",
+        "least_m": 0.154,
+        "worst_id": "SP52-STANDOFF-0.30",
+        "file": "p1_access_seg_sp13_l1a.json",
+        "least_measured_m": 0.154
+       },
+       "candidates": {
+        "SP52-CONT-0.10": {
+         "status": "OPEN",
+         "least_m": 0.154,
+         "worst_id": "SP52-STANDOFF-0.30",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": 0.154
+        },
+        "SP52-CONT-0.20": {
+         "status": "OPEN",
+         "least_m": 0.1,
+         "worst_id": "SP52-CONT-0.20",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": 0.1
+        }
+       }
+      }
+     }
+    },
+    "locked_1.5g": {
+     "status": "OPEN",
+     "elements": {
+      "district port 205-215 deg + stile": {
+       "status": "OPEN",
+       "candidate": "CB2J6",
+       "worst": {
+        "status": "OPEN",
+        "least_m": null,
+        "worst_id": "A179-L1A-STILE-CB2J6-LOADS",
+        "file": "p1_access_seg_l1a_stile.json",
+        "least_measured_m": 0.064
+       },
+       "candidates": {
+        "OR4": {
+         "status": "OPEN",
+         "least_m": null,
+         "worst_id": "A179-L1A-STILE-OR4-LOADS",
+         "file": "p1_access_seg_l1a_stile.json",
+         "least_measured_m": 0.059
+        },
+        "CB2J6": {
+         "status": "OPEN",
+         "least_m": null,
+         "worst_id": "A179-L1A-STILE-CB2J6-LOADS",
+         "file": "p1_access_seg_l1a_stile.json",
+         "least_measured_m": 0.064
+        },
+        "CB2J8": {
+         "status": "OPEN",
+         "least_m": null,
+         "worst_id": "A179-L1A-STILE-CB2J8-LOADS",
+         "file": "p1_access_seg_l1a_stile.json",
+         "least_measured_m": 0.054
+        },
+        "OR4DP": {
+         "status": "OPEN",
+         "least_m": null,
+         "worst_id": "A179-L1A-STILE-OR4DP-LOADS",
+         "file": "p1_access_seg_l1a_stile.json",
+         "least_measured_m": 0.059
+        },
+        "CB2J8DP": {
+         "status": "OPEN",
+         "least_m": null,
+         "worst_id": "A179-L1A-STILE-CB2J8DP-LOADS",
+         "file": "p1_access_seg_l1a_stile.json",
+         "least_measured_m": 0.054
+        },
+        "CB2J6DP": {
+         "status": "OPEN",
+         "least_m": null,
+         "worst_id": "A179-L1A-STILE-CB2J6DP-LOADS",
+         "file": "p1_access_seg_l1a_stile.json",
+         "least_measured_m": 0.064
+        }
+       }
+      },
+      "dock bridge": {
+       "status": "PASS",
+       "candidate": "(single)",
+       "worst": {
+        "status": "PASS",
+        "least_m": 0.106,
+        "worst_id": "DOCK-BRIDGE",
+        "file": "p1_access_seg_sp13_l1a.json",
+        "least_measured_m": 0.106
+       },
+       "candidates": {
+        "(single)": {
+         "status": "PASS",
+         "least_m": 0.106,
+         "worst_id": "DOCK-BRIDGE",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": 0.106
+        }
+       }
+      },
+      "SP-52 containment (heat transfer OPEN)": {
+       "status": "OPEN",
+       "candidate": "SP52-CONT-0.10",
+       "worst": {
+        "status": "OPEN",
+        "least_m": 0.154,
+        "worst_id": "SP52-STANDOFF-0.30",
+        "file": "p1_access_seg_sp13_l1a.json",
+        "least_measured_m": 0.154
+       },
+       "candidates": {
+        "SP52-CONT-0.10": {
+         "status": "OPEN",
+         "least_m": 0.154,
+         "worst_id": "SP52-STANDOFF-0.30",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": 0.154
+        },
+        "SP52-CONT-0.20": {
+         "status": "OPEN",
+         "least_m": 0.1,
+         "worst_id": "SP52-CONT-0.20",
+         "file": "p1_access_seg_sp13_l1a.json",
+         "least_measured_m": 0.1
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "thrust_hatch_step": {
+   "title": "thrust hatch step B3H2 (tube -> sector under thrust)",
+   "states": {
+    "0g": {
+     "status": "OPEN",
+     "elements": {
+      "B3H2 rigs, both hands (grip always taken / released where it costs clearance)": {
+       "status": "MARGINAL",
+       "candidate": "both_hands_optional",
+       "worst": {
+        "status": "MARGINAL",
+        "least_m": 0.049,
+        "worst_id": "tsh2.newcomer.body.both_hands_optional",
+        "file": "p1_access_seg_step.json",
+        "least_measured_m": 0.049
+       },
+       "candidates": {
+        "both_hands": {
+         "status": "MARGINAL",
+         "least_m": 0.03,
+         "worst_id": "tsh2.test_a.body.both_hands",
+         "file": "p1_access_seg_step.json",
+         "least_measured_m": 0.03
+        },
+        "both_hands_optional": {
+         "status": "MARGINAL",
+         "least_m": 0.049,
+         "worst_id": "tsh2.newcomer.body.both_hands_optional",
+         "file": "p1_access_seg_step.json",
+         "least_measured_m": 0.049
+        }
+       }
+      },
+      "B3H2 parts": {
+       "status": "MARGINAL",
+       "candidate": "(single)",
+       "worst": {
+        "status": "MARGINAL",
+        "least_m": 0.03,
+        "worst_id": "tsh2.test_a.part.arm",
+        "file": "p1_access_seg_step.json",
+        "least_measured_m": 0.03
+       },
+       "candidates": {
+        "(single)": {
+         "status": "MARGINAL",
+         "least_m": 0.03,
+         "worst_id": "tsh2.test_a.part.arm",
+         "file": "p1_access_seg_step.json",
+         "least_measured_m": 0.03
+        }
+       }
+      },
+      "single-hand sequence": {
+       "status": "OPEN",
+       "candidate": "(single)",
+       "worst": {
+        "status": "OPEN",
+        "least_m": 0.049,
+        "worst_id": "tsh2.newcomer.sequence.one",
+        "file": "p1_access_seg_step.json",
+        "least_measured_m": 0.049
+       },
+       "candidates": {
+        "(single)": {
+         "status": "OPEN",
+         "least_m": 0.049,
+         "worst_id": "tsh2.newcomer.sequence.one",
+         "file": "p1_access_seg_step.json",
+         "least_measured_m": 0.049
+        }
+       }
+      },
+      "carriers past the handgrip": {
+       "status": "PASS",
+       "candidate": "all_study_hardware",
+       "worst": {
+        "status": "PASS",
+        "least_m": 0.19,
+        "worst_id": "tsh2.carrier.S.all_study_hardware",
+        "file": "p1_access_seg_step.json",
+        "least_measured_m": 0.19
+       },
+       "candidates": {
+        "all_study_hardware": {
+         "status": "PASS",
+         "least_m": 0.19,
+         "worst_id": "tsh2.carrier.S.all_study_hardware",
+         "file": "p1_access_seg_step.json",
+         "least_measured_m": 0.19
+        },
+        "without_handgrip": {
+         "status": "PASS",
+         "least_m": 0.19,
+         "worst_id": "tsh2.carrier.S.without_handgrip",
+         "file": "p1_access_seg_step.json",
+         "least_measured_m": 0.19
+        }
+       }
+      },
+      "leaf sweep and guide": {
+       "status": "OPEN",
+       "candidate": "(single)",
+       "worst": {
+        "status": "OPEN",
+        "least_m": null,
+        "worst_id": "tsh2.leaf.guide_overlap",
+        "file": "p1_access_seg_step.json",
+        "least_measured_m": 0.063
+       },
+       "candidates": {
+        "(single)": {
+         "status": "OPEN",
+         "least_m": null,
+         "worst_id": "tsh2.leaf.guide_overlap",
+         "file": "p1_access_seg_step.json",
+         "least_measured_m": 0.063
+        }
+       }
+      },
+      "arrest link, 0 g feet-free": {
+       "status": "OPEN",
+       "candidate": "(single)",
+       "worst": {
+        "status": "OPEN",
+        "least_m": null,
+        "worst_id": "tsh2.instructor.arrest_link",
+        "file": "p1_access_seg_step.json",
+        "least_measured_m": null
+       },
+       "candidates": {
+        "(single)": {
+         "status": "OPEN",
+         "least_m": null,
+         "worst_id": "tsh2.instructor.arrest_link",
+         "file": "p1_access_seg_step.json",
+         "least_measured_m": null
+        }
+       }
+      }
+     }
+    },
+    "spin": {
+     "status": "OPEN",
+     "elements": {
+      "B3H2 rigs, both hands (grip always taken / released where it costs clearance)": {
+       "status": "OPEN",
+       "candidate": null,
+       "worst": null,
+       "candidates": {}
+      },
+      "B3H2 parts": {
+       "status": "OPEN",
+       "candidate": null,
+       "worst": null,
+       "candidates": {}
+      },
+      "single-hand sequence": {
+       "status": "OPEN",
+       "candidate": null,
+       "worst": null,
+       "candidates": {}
+      },
+      "carriers past the handgrip": {
+       "status": "OPEN",
+       "candidate": null,
+       "worst": null,
+       "candidates": {}
+      },
+      "leaf sweep and guide": {
+       "status": "OPEN",
+       "candidate": null,
+       "worst": null,
+       "candidates": {}
+      },
+      "arrest link, 0 g feet-free": {
+       "status": "OPEN",
+       "candidate": null,
+       "worst": null,
+       "candidates": {}
+      }
+     }
+    },
+    "stopped": {
+     "status": "OPEN",
+     "elements": {
+      "B3H2 rigs, both hands (grip always taken / released where it costs clearance)": {
+       "status": "OPEN",
+       "candidate": null,
+       "worst": null,
+       "candidates": {}
+      },
+      "B3H2 parts": {
+       "status": "OPEN",
+       "candidate": null,
+       "worst": null,
+       "candidates": {}
+      },
+      "single-hand sequence": {
+       "status": "OPEN",
+       "candidate": null,
+       "worst": null,
+       "candidates": {}
+      },
+      "carriers past the handgrip": {
+       "status": "OPEN",
+       "candidate": null,
+       "worst": null,
+       "candidates": {}
+      },
+      "leaf sweep and guide": {
+       "status": "OPEN",
+       "candidate": null,
+       "worst": null,
+       "candidates": {}
+      },
+      "arrest link, 0 g feet-free": {
+       "status": "OPEN",
+       "candidate": null,
+       "worst": null,
+       "candidates": {}
+      }
+     }
+    },
+    "locked_1.5g": {
+     "status": "OPEN",
+     "elements": {
+      "B3H2 rigs, both hands (grip always taken / released where it costs clearance)": {
+       "status": "MARGINAL",
+       "candidate": "both_hands_optional",
+       "worst": {
+        "status": "MARGINAL",
+        "least_m": 0.049,
+        "worst_id": "tsh2.newcomer.body.both_hands_optional",
+        "file": "p1_access_seg_step.json",
+        "least_measured_m": 0.049
+       },
+       "candidates": {
+        "both_hands": {
+         "status": "MARGINAL",
+         "least_m": 0.03,
+         "worst_id": "tsh2.test_a.body.both_hands",
+         "file": "p1_access_seg_step.json",
+         "least_measured_m": 0.03
+        },
+        "both_hands_optional": {
+         "status": "MARGINAL",
+         "least_m": 0.049,
+         "worst_id": "tsh2.newcomer.body.both_hands_optional",
+         "file": "p1_access_seg_step.json",
+         "least_measured_m": 0.049
+        }
+       }
+      },
+      "B3H2 parts": {
+       "status": "MARGINAL",
+       "candidate": "(single)",
+       "worst": {
+        "status": "MARGINAL",
+        "least_m": 0.03,
+        "worst_id": "tsh2.test_a.part.arm",
+        "file": "p1_access_seg_step.json",
+        "least_measured_m": 0.03
+       },
+       "candidates": {
+        "(single)": {
+         "status": "MARGINAL",
+         "least_m": 0.03,
+         "worst_id": "tsh2.test_a.part.arm",
+         "file": "p1_access_seg_step.json",
+         "least_measured_m": 0.03
+        }
+       }
+      },
+      "single-hand sequence": {
+       "status": "OPEN",
+       "candidate": "(single)",
+       "worst": {
+        "status": "OPEN",
+        "least_m": 0.049,
+        "worst_id": "tsh2.newcomer.sequence.one",
+        "file": "p1_access_seg_step.json",
+        "least_measured_m": 0.049
+       },
+       "candidates": {
+        "(single)": {
+         "status": "OPEN",
+         "least_m": 0.049,
+         "worst_id": "tsh2.newcomer.sequence.one",
+         "file": "p1_access_seg_step.json",
+         "least_measured_m": 0.049
+        }
+       }
+      },
+      "carriers past the handgrip": {
+       "status": "PASS",
+       "candidate": "all_study_hardware",
+       "worst": {
+        "status": "PASS",
+        "least_m": 0.19,
+        "worst_id": "tsh2.carrier.S.all_study_hardware",
+        "file": "p1_access_seg_step.json",
+        "least_measured_m": 0.19
+       },
+       "candidates": {
+        "all_study_hardware": {
+         "status": "PASS",
+         "least_m": 0.19,
+         "worst_id": "tsh2.carrier.S.all_study_hardware",
+         "file": "p1_access_seg_step.json",
+         "least_measured_m": 0.19
+        },
+        "without_handgrip": {
+         "status": "PASS",
+         "least_m": 0.19,
+         "worst_id": "tsh2.carrier.S.without_handgrip",
+         "file": "p1_access_seg_step.json",
+         "least_measured_m": 0.19
+        }
+       }
+      },
+      "leaf sweep and guide": {
+       "status": "OPEN",
+       "candidate": "(single)",
+       "worst": {
+        "status": "OPEN",
+        "least_m": null,
+        "worst_id": "tsh2.leaf.guide_overlap",
+        "file": "p1_access_seg_step.json",
+        "least_measured_m": 0.063
+       },
+       "candidates": {
+        "(single)": {
+         "status": "OPEN",
+         "least_m": null,
+         "worst_id": "tsh2.leaf.guide_overlap",
+         "file": "p1_access_seg_step.json",
+         "least_measured_m": 0.063
+        }
+       }
+      },
+      "arrest link, 0 g feet-free": {
+       "status": "OPEN",
+       "candidate": "(single)",
+       "worst": {
+        "status": "OPEN",
+        "least_m": null,
+        "worst_id": "tsh2.instructor.arrest_link",
+        "file": "p1_access_seg_step.json",
+        "least_measured_m": null
+       },
+       "candidates": {
+        "(single)": {
+         "status": "OPEN",
+         "least_m": null,
+         "worst_id": "tsh2.instructor.arrest_link",
+         "file": "p1_access_seg_step.json",
+         "least_measured_m": null
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ },
+ "sector_coverage": {
+  "source": "p1_access_seg_ringb.json",
+  "A": {
+   "Sector_2_2": {
+    "0g": "FAIL",
+    "spin": "FAIL",
+    "stopped": "FAIL",
+    "locked_1.5g": "FAIL",
+    "basis": "V0 (1.06 m). Sector 2 is the indexed sector with the couch. Care = trunk-or-landing to couch B2-M worst -0.046; in-sector landing to couch (zones 5, M) 0.1. Refuge = B2 to trunk -0.046, hoist 0.092 (line 120, e 0.25), slot 0.042. Spin: the ring-turning port turn B1 is -0.147 (rigid carrier FAIL), so refuge access needs the ring stopped/indexed; spun-ring transport not credited."
+   },
+   "Sector_2_1": {
+    "0g": "FAIL",
+    "spin": "FAIL",
+    "stopped": "FAIL",
+    "locked_1.5g": "FAIL",
+    "basis": "V0 (1.06 m). 0 g: re-index to this sector (B2 geometry -0.046) and go straight to the trunk; care by two indexings -0.046 or by the annulus -0.116; refuge -0.046. Stopped / locked 1.5 g (no re-index, CALC-R05): annulus to sector 2 -0.116, annulus to the couch -0.116; refuge = annulus -0.116 then B2 -0.046, hoist 0.092, slot 0.042. Spin: the port turn is -0.147 (FAIL); the annulus legs are not credited under spin."
+   },
+   "Sector_2_3": {
+    "0g": "FAIL",
+    "spin": "FAIL",
+    "stopped": "FAIL",
+    "locked_1.5g": "FAIL",
+    "basis": "V0 (1.06 m). 0 g: re-index to this sector (B2 geometry -0.046) and go straight to the trunk; care by two indexings -0.046 or by the annulus -0.108; refuge -0.046. Stopped / locked 1.5 g (no re-index, CALC-R05): annulus to sector 2 -0.108, annulus to the couch -0.108; refuge = annulus -0.108 then B2 -0.046, hoist 0.092, slot 0.042. Spin: the port turn is -0.147 (FAIL); the annulus legs are not credited under spin."
+   },
+   "Sector_1_1": {
+    "0g": "FAIL",
+    "spin": "FAIL",
+    "stopped": "FAIL",
+    "locked_1.5g": "FAIL",
+    "basis": "Quoted built_A (ring A stop/index only, owner). A1 indexed to trunk 0.1; annulus A1-A2 0.062, A1-A2-M 0.031; port turn A2/A3 -0.049; refuge tail hoist 0.092 + slot 0.042."
+   },
+   "Sector_1_2": {
+    "0g": "FAIL",
+    "spin": "FAIL",
+    "stopped": "FAIL",
+    "locked_1.5g": "FAIL",
+    "basis": "Quoted built_A. A2 indexed (A1 geometry by symmetry) 0.1; landing to couch PASS (zone M >= 0.10 in built_A); refuge tail hoist 0.092 + slot 0.042. Spin: port turn -0.049 FAIL."
+   },
+   "Sector_1_3": {
+    "0g": "FAIL",
+    "spin": "FAIL",
+    "stopped": "FAIL",
+    "locked_1.5g": "FAIL",
+    "basis": "Quoted built_A. A3 indexed 0.1; annulus A3-A2 0.081, A3-A2-M 0.062; port turn -0.049; refuge tail hoist 0.092 + slot 0.042."
+   }
+  },
+  "B": {
+   "Sector_2_2": {
+    "0g": "FAIL",
+    "spin": "FAIL",
+    "stopped": "FAIL",
+    "locked_1.5g": "FAIL"
+   },
+   "Sector_2_1": {
+    "0g": "FAIL",
+    "spin": "FAIL",
+    "stopped": "FAIL",
+    "locked_1.5g": "FAIL"
+   },
+   "Sector_2_3": {
+    "0g": "FAIL",
+    "spin": "FAIL",
+    "stopped": "FAIL",
+    "locked_1.5g": "FAIL"
+   },
+   "Sector_1_1": {
+    "0g": "FAIL",
+    "spin": "FAIL",
+    "stopped": "FAIL",
+    "locked_1.5g": "FAIL"
+   },
+   "Sector_1_2": {
+    "0g": "FAIL",
+    "spin": "FAIL",
+    "stopped": "FAIL",
+    "locked_1.5g": "FAIL"
+   },
+   "Sector_1_3": {
+    "0g": "FAIL",
+    "spin": "FAIL",
+    "stopped": "FAIL",
+    "locked_1.5g": "FAIL"
+   }
+  },
+  "tally_A": {
+   "FAIL": 24,
+   "OPEN": 0,
+   "MARGINAL": 0,
+   "PASS": 0
+  },
+  "tally_B": {
+   "FAIL": 24,
+   "OPEN": 0,
+   "MARGINAL": 0,
+   "PASS": 0
+  }
+ },
+ "operating_rule_1_5g": {
+  "source": "S&E 15!A197 OWN-RES-2026-10-17, 98!A109",
+  "status": "SELECTED WORKING RULE / CLINICAL + FLIGHT PROCEDURE HOLD",
+  "by_sector": {
+   "Sector_2_2": {
+    "0g": "TRANSFER_STUDY",
+    "spin": "TRANSFER_STUDY",
+    "stopped": "TRANSFER_STUDY",
+    "locked_1.5g": "STABILIZE_AT_BURN_COUCH (no transfer; thrust reduction first; hold time, trigger and clinical capacity HOLD)"
+   },
+   "Sector_2_1": {
+    "0g": "TRANSFER_STUDY",
+    "spin": "TRANSFER_STUDY",
+    "stopped": "TRANSFER_STUDY",
+    "locked_1.5g": "STABILIZE_AT_BURN_COUCH (no transfer; thrust reduction first; hold time, trigger and clinical capacity HOLD)"
+   },
+   "Sector_2_3": {
+    "0g": "TRANSFER_STUDY",
+    "spin": "TRANSFER_STUDY",
+    "stopped": "TRANSFER_STUDY",
+    "locked_1.5g": "STABILIZE_AT_BURN_COUCH (no transfer; thrust reduction first; hold time, trigger and clinical capacity HOLD)"
+   },
+   "Sector_1_1": {
+    "0g": "TRANSFER_STUDY",
+    "spin": "TRANSFER_STUDY",
+    "stopped": "TRANSFER_STUDY",
+    "locked_1.5g": "STABILIZE_AT_BURN_COUCH (no transfer; thrust reduction first; hold time, trigger and clinical capacity HOLD)"
+   },
+   "Sector_1_2": {
+    "0g": "TRANSFER_STUDY",
+    "spin": "TRANSFER_STUDY",
+    "stopped": "TRANSFER_STUDY",
+    "locked_1.5g": "STABILIZE_AT_BURN_COUCH (no transfer; thrust reduction first; hold time, trigger and clinical capacity HOLD)"
+   },
+   "Sector_1_3": {
+    "0g": "TRANSFER_STUDY",
+    "spin": "TRANSFER_STUDY",
+    "stopped": "TRANSFER_STUDY",
+    "locked_1.5g": "STABILIZE_AT_BURN_COUCH (no transfer; thrust reduction first; hold time, trigger and clinical capacity HOLD)"
+   }
+  }
+ },
+ "distributed_alternative": {
+  "params": {
+   "couch": [
+    2.0,
+    0.7
+   ],
+   "attendant_w": 0.6,
+   "head_end": 0.6,
+   "stand_h": 1.9,
+   "kneel_h": 1.2,
+   "thick_deck": 0.8,
+   "thick_floor": 0.3,
+   "walk_w": 0.6,
+   "grid": 0.05
+  },
+  "sector_length_m": 3.5,
+  "deck_width_m": 5.55,
+  "headroom_m": 2.9,
+  "aisle_m": 0.9,
+  "landing_well_x_m": [
+   -0.5,
+   0.5
+  ],
+  "landing_well_z_m": [
+   -2.07,
+   -0.45
+  ],
+  "chase_z_m": [
+   -2.472035646774306,
+   -2.07
+  ],
+  "functions": {
+   "HABITATION": {
+    "deck": {
+     "new_couch": {
+      "standing": {
+       "clearance_m": -0.2,
+       "fits": false,
+       "meets_0_05": false,
+       "reachable_by_0_60_path": false,
+       "couch_centre_uz": [
+        -0.7,
+        -0.3
+       ],
+       "long_axis": "u",
+       "attendant_side": 1,
+       "airway_end": 1,
+       "nearest": "landing_well",
+       "env": [
+        [
+         -1.7,
+         0.3,
+         -0.65,
+         0.05,
+         0.0,
+         0.8
+        ],
+        [
+         -1.7,
+         0.3,
+         0.05,
+         0.65,
+         0.0,
+         1.9
+        ],
+        [
+         0.3,
+         0.9,
+         -0.65,
+         0.05,
+         0.0,
+         1.9
+        ]
+       ]
+      },
+      "kneeling": {
+       "clearance_m": -0.2,
+       "fits": false,
+       "meets_0_05": false,
+       "reachable_by_0_60_path": false,
+       "couch_centre_uz": [
+        -0.7,
+        -0.3
+       ],
+       "long_axis": "u",
+       "attendant_side": 1,
+       "airway_end": 1,
+       "nearest": "landing_well",
+       "env": [
+        [
+         -1.7,
+         0.3,
+         -0.65,
+         0.05,
+         0.0,
+         0.8
+        ],
+        [
+         -1.7,
+         0.3,
+         0.05,
+         0.65,
+         0.0,
+         1.2
+        ],
+        [
+         0.3,
+         0.9,
+         -0.65,
+         0.05,
+         0.0,
+         1.2
+        ]
+       ]
+      }
+     },
+     "existing": [
+      {
+       "block": "Bunk_1",
+       "note": "the lowest berth tier, open to the aisle (1.95 x 0.75 m minimum berth)",
+       "stance": "standing",
+       "clearance_m": 0.05,
+       "fits": true,
+       "meets_0_05": true,
+       "nearest": "Bunk_4",
+       "attendant_side": -1,
+       "airway_end": -1,
+       "reachable_by_0_60_path": true,
+       "env": [
+        [
+         -0.4,
+         1.6,
+         0.45,
+         1.4,
+         0.22,
+         1.03
+        ],
+        [
+         -0.4,
+         1.6,
+         -0.15,
+         0.45,
+         0.0,
+         1.9
+        ],
+        [
+         -1.0,
+         -0.4,
+         0.45,
+         1.4,
+         0.0,
+         1.9
+        ]
+       ]
+      },
+      {
+       "block": "Bunk_1",
+       "note": "the lowest berth tier, open to the aisle (1.95 x 0.75 m minimum berth)",
+       "stance": "kneeling",
+       "clearance_m": 0.05,
+       "fits": true,
+       "meets_0_05": true,
+       "nearest": "Bunk_4",
+       "attendant_side": -1,
+       "airway_end": -1,
+       "reachable_by_0_60_path": true,
+       "env": [
+        [
+         -0.4,
+         1.6,
+         0.45,
+         1.4,
+         0.22,
+         1.03
+        ],
+        [
+         -0.4,
+         1.6,
+         -0.15,
+         0.45,
+         0.0,
+         1.2
+        ],
+        [
+         -1.0,
+         -0.4,
+         0.45,
+         1.4,
+         0.0,
+         1.2
+        ]
+       ]
+      }
+     ]
+    },
+    "aft": {
+     "new_couch": {
+      "standing": {
+       "clearance_m": -0.2,
+       "fits": false,
+       "meets_0_05": false,
+       "reachable_by_0_60_path": false,
+       "couch_centre_uz": [
+        -1.5,
+        0.35
+       ],
+       "long_axis": "u",
+       "attendant_side": -1,
+       "airway_end": -1,
+       "nearest": "end_wall",
+       "env": [
+        [
+         -2.5,
+         -0.5,
+         -0.0,
+         0.7,
+         0.0,
+         0.3
+        ],
+        [
+         -2.5,
+         -0.5,
+         -0.6,
+         -0.0,
+         0.0,
+         1.9
+        ],
+        [
+         -3.1,
+         -2.5,
+         -0.0,
+         0.7,
+         0.0,
+         1.9
+        ]
+       ]
+      },
+      "kneeling": {
+       "clearance_m": -0.1,
+       "fits": false,
+       "meets_0_05": false,
+       "reachable_by_0_60_path": false,
+       "couch_centre_uz": [
+        -1.9,
+        -0.3
+       ],
+       "long_axis": "u",
+       "attendant_side": 1,
+       "airway_end": 1,
+       "nearest": "Burn_Couch_2",
+       "env": [
+        [
+         -2.9,
+         -0.9,
+         -0.65,
+         0.05,
+         0.0,
+         0.3
+        ],
+        [
+         -2.9,
+         -0.9,
+         0.05,
+         0.65,
+         0.0,
+         1.2
+        ],
+        [
+         -0.9,
+         -0.3,
+         -0.65,
+         0.05,
+         0.0,
+         1.2
+        ]
+       ]
+      }
+     },
+     "existing": [
+      {
+       "block": "Burn_Couch_1",
+       "note": "the aft-bulkhead burn couch (supine, aft down at 1.5 g), 2.0 x 0.7 m",
+       "stance": "standing",
+       "clearance_m": -0.6,
+       "fits": false,
+       "meets_0_05": false,
+       "nearest": "end_wall",
+       "attendant_side": -1,
+       "airway_end": 1,
+       "reachable_by_0_60_path": true,
+       "env": [
+        [
+         -2.0,
+         0.0,
+         0.55,
+         1.25,
+         0.1,
+         0.55
+        ],
+        [
+         -2.0,
+         0.0,
+         -0.05,
+         0.55,
+         0.0,
+         1.9
+        ],
+        [
+         0.0,
+         0.6,
+         0.55,
+         1.25,
+         0.0,
+         1.9
+        ]
+       ]
+      },
+      {
+       "block": "Burn_Couch_1",
+       "note": "the aft-bulkhead burn couch (supine, aft down at 1.5 g), 2.0 x 0.7 m",
+       "stance": "kneeling",
+       "clearance_m": 0.1,
+       "fits": true,
+       "meets_0_05": true,
+       "nearest": "Bunk_1",
+       "attendant_side": -1,
+       "airway_end": -1,
+       "reachable_by_0_60_path": true,
+       "env": [
+        [
+         -2.0,
+         0.0,
+         0.55,
+         1.25,
+         0.1,
+         0.55
+        ],
+        [
+         -2.0,
+         0.0,
+         -0.05,
+         0.55,
+         0.0,
+         1.2
+        ],
+        [
+         -2.6,
+         -2.0,
+         0.55,
+         1.25,
+         0.0,
+         1.2
+        ]
+       ]
+      },
+      {
+       "block": "Burn_Couch_2",
+       "note": "the aft-bulkhead burn couch on the other side of the aisle",
+       "stance": "standing",
+       "clearance_m": -0.6,
+       "fits": false,
+       "meets_0_05": false,
+       "nearest": "end_wall",
+       "attendant_side": 1,
+       "airway_end": 1,
+       "reachable_by_0_60_path": true,
+       "env": [
+        [
+         -2.0,
+         0.0,
+         -1.25,
+         -0.55,
+         0.1,
+         0.55
+        ],
+        [
+         -2.0,
+         0.0,
+         -0.55,
+         0.05,
+         0.0,
+         1.9
+        ],
+        [
+         0.0,
+         0.6,
+         -1.25,
+         -0.55,
+         0.0,
+         1.9
+        ]
+       ]
+      },
+      {
+       "block": "Burn_Couch_2",
+       "note": "the aft-bulkhead burn couch on the other side of the aisle",
+       "stance": "kneeling",
+       "clearance_m": 0.0,
+       "fits": true,
+       "meets_0_05": false,
+       "nearest": "landing_well",
+       "attendant_side": -1,
+       "airway_end": -1,
+       "reachable_by_0_60_path": true,
+       "env": [
+        [
+         -2.0,
+         0.0,
+         -1.25,
+         -0.55,
+         0.1,
+         0.55
+        ],
+        [
+         -2.0,
+         0.0,
+         -1.85,
+         -1.25,
+         0.0,
+         1.2
+        ],
+        [
+         -2.6,
+         -2.0,
+         -1.25,
+         -0.55,
+         0.0,
+         1.2
+        ]
+       ]
+      }
+     ]
+    }
+   },
+   "WORK_MEDICAL_OPS": {
+    "deck": {
+     "new_couch": {
+      "standing": {
+       "clearance_m": -0.2,
+       "fits": false,
+       "meets_0_05": false,
+       "reachable_by_0_60_path": false,
+       "couch_centre_uz": [
+        -0.7,
+        -0.3
+       ],
+       "long_axis": "u",
+       "attendant_side": 1,
+       "airway_end": 1,
+       "nearest": "landing_well",
+       "env": [
+        [
+         -1.7,
+         0.3,
+         -0.65,
+         0.05,
+         0.0,
+         0.8
+        ],
+        [
+         -1.7,
+         0.3,
+         0.05,
+         0.65,
+         0.0,
+         1.9
+        ],
+        [
+         0.3,
+         0.9,
+         -0.65,
+         0.05,
+         0.0,
+         1.9
+        ]
+       ]
+      },
+      "kneeling": {
+       "clearance_m": -0.2,
+       "fits": false,
+       "meets_0_05": false,
+       "reachable_by_0_60_path": false,
+       "couch_centre_uz": [
+        -0.7,
+        -0.3
+       ],
+       "long_axis": "u",
+       "attendant_side": 1,
+       "airway_end": 1,
+       "nearest": "landing_well",
+       "env": [
+        [
+         -1.7,
+         0.3,
+         -0.65,
+         0.05,
+         0.0,
+         0.8
+        ],
+        [
+         -1.7,
+         0.3,
+         0.05,
+         0.65,
+         0.0,
+         1.2
+        ],
+        [
+         0.3,
+         0.9,
+         -0.65,
+         0.05,
+         0.0,
+         1.2
+        ]
+       ]
+      }
+     },
+     "existing": [
+      {
+       "block": "Medical_Couch",
+       "note": "the built treatment couch (SP-33)",
+       "stance": "standing",
+       "clearance_m": 0.05,
+       "fits": true,
+       "meets_0_05": true,
+       "nearest": "Ops_Stations",
+       "attendant_side": -1,
+       "airway_end": -1,
+       "reachable_by_0_60_path": true,
+       "env": [
+        [
+         -0.4,
+         1.6,
+         0.45,
+         1.15,
+         -0.0,
+         1.2
+        ],
+        [
+         -0.4,
+         1.6,
+         -0.15,
+         0.45,
+         0.0,
+         1.9
+        ],
+        [
+         -1.0,
+         -0.4,
+         0.45,
+         1.15,
+         0.0,
+         1.9
+        ]
+       ]
+      },
+      {
+       "block": "Medical_Couch",
+       "note": "the built treatment couch (SP-33)",
+       "stance": "kneeling",
+       "clearance_m": 0.05,
+       "fits": true,
+       "meets_0_05": true,
+       "nearest": "Ops_Stations",
+       "attendant_side": -1,
+       "airway_end": -1,
+       "reachable_by_0_60_path": true,
+       "env": [
+        [
+         -0.4,
+         1.6,
+         0.45,
+         1.15,
+         -0.0,
+         1.2
+        ],
+        [
+         -0.4,
+         1.6,
+         -0.15,
+         0.45,
+         0.0,
+         1.2
+        ],
+        [
+         -1.0,
+         -0.4,
+         0.45,
+         1.15,
+         0.0,
+         1.2
+        ]
+       ]
+      }
+     ]
+    },
+    "aft": {
+     "new_couch": {
+      "standing": {
+       "clearance_m": -0.15,
+       "fits": false,
+       "meets_0_05": false,
+       "reachable_by_0_60_path": false,
+       "couch_centre_uz": [
+        -1.45,
+        0.35
+       ],
+       "long_axis": "u",
+       "attendant_side": -1,
+       "airway_end": -1,
+       "nearest": "landing_well",
+       "env": [
+        [
+         -2.45,
+         -0.45,
+         -0.0,
+         0.7,
+         0.0,
+         0.3
+        ],
+        [
+         -2.45,
+         -0.45,
+         -0.6,
+         -0.0,
+         0.0,
+         1.9
+        ],
+        [
+         -3.05,
+         -2.45,
+         -0.0,
+         0.7,
+         0.0,
+         1.9
+        ]
+       ]
+      },
+      "kneeling": {
+       "clearance_m": -0.1,
+       "fits": false,
+       "meets_0_05": false,
+       "reachable_by_0_60_path": false,
+       "couch_centre_uz": [
+        -1.9,
+        -0.3
+       ],
+       "long_axis": "u",
+       "attendant_side": 1,
+       "airway_end": 1,
+       "nearest": "Burn_Couch_2",
+       "env": [
+        [
+         -2.9,
+         -0.9,
+         -0.65,
+         0.05,
+         0.0,
+         0.3
+        ],
+        [
+         -2.9,
+         -0.9,
+         0.05,
+         0.65,
+         0.0,
+         1.2
+        ],
+        [
+         -0.9,
+         -0.3,
+         -0.65,
+         0.05,
+         0.0,
+         1.2
+        ]
+       ]
+      }
+     },
+     "existing": [
+      {
+       "block": "Burn_Couch_1",
+       "note": "the aft-bulkhead burn couch (supine, aft down at 1.5 g), 2.0 x 0.7 m",
+       "stance": "standing",
+       "clearance_m": -0.1,
+       "fits": false,
+       "meets_0_05": false,
+       "nearest": "Medical_Couch",
+       "attendant_side": -1,
+       "airway_end": -1,
+       "reachable_by_0_60_path": true,
+       "env": [
+        [
+         -2.0,
+         0.0,
+         0.55,
+         1.25,
+         0.1,
+         0.55
+        ],
+        [
+         -2.0,
+         0.0,
+         -0.05,
+         0.55,
+         0.0,
+         1.9
+        ],
+        [
+         -2.6,
+         -2.0,
+         0.55,
+         1.25,
+         0.0,
+         1.9
+        ]
+       ]
+      },
+      {
+       "block": "Burn_Couch_1",
+       "note": "the aft-bulkhead burn couch (supine, aft down at 1.5 g), 2.0 x 0.7 m",
+       "stance": "kneeling",
+       "clearance_m": 0.1,
+       "fits": true,
+       "meets_0_05": true,
+       "nearest": "Medical_Couch",
+       "attendant_side": -1,
+       "airway_end": -1,
+       "reachable_by_0_60_path": true,
+       "env": [
+        [
+         -2.0,
+         0.0,
+         0.55,
+         1.25,
+         0.1,
+         0.55
+        ],
+        [
+         -2.0,
+         0.0,
+         -0.05,
+         0.55,
+         0.0,
+         1.2
+        ],
+        [
+         -2.6,
+         -2.0,
+         0.55,
+         1.25,
+         0.0,
+         1.2
+        ]
+       ]
+      },
+      {
+       "block": "Burn_Couch_2",
+       "note": "the aft-bulkhead burn couch on the other side of the aisle",
+       "stance": "standing",
+       "clearance_m": -0.6,
+       "fits": false,
+       "meets_0_05": false,
+       "nearest": "end_wall",
+       "attendant_side": 1,
+       "airway_end": 1,
+       "reachable_by_0_60_path": true,
+       "env": [
+        [
+         -2.0,
+         0.0,
+         -1.25,
+         -0.55,
+         0.1,
+         0.55
+        ],
+        [
+         -2.0,
+         0.0,
+         -0.55,
+         0.05,
+         0.0,
+         1.9
+        ],
+        [
+         0.0,
+         0.6,
+         -1.25,
+         -0.55,
+         0.0,
+         1.9
+        ]
+       ]
+      },
+      {
+       "block": "Burn_Couch_2",
+       "note": "the aft-bulkhead burn couch on the other side of the aisle",
+       "stance": "kneeling",
+       "clearance_m": 0.0,
+       "fits": true,
+       "meets_0_05": false,
+       "nearest": "landing_well",
+       "attendant_side": -1,
+       "airway_end": -1,
+       "reachable_by_0_60_path": true,
+       "env": [
+        [
+         -2.0,
+         0.0,
+         -1.25,
+         -0.55,
+         0.1,
+         0.55
+        ],
+        [
+         -2.0,
+         0.0,
+         -1.85,
+         -1.25,
+         0.0,
+         1.2
+        ],
+        [
+         -2.6,
+         -2.0,
+         -1.25,
+         -0.55,
+         0.0,
+         1.2
+        ]
+       ]
+      }
+     ]
+    }
+   },
+   "LIFE_SUPPORT_GARDEN_COMMON": {
+    "deck": {
+     "new_couch": {
+      "standing": {
+       "clearance_m": -0.2,
+       "fits": false,
+       "meets_0_05": false,
+       "reachable_by_0_60_path": false,
+       "couch_centre_uz": [
+        -0.7,
+        -0.3
+       ],
+       "long_axis": "u",
+       "attendant_side": 1,
+       "airway_end": 1,
+       "nearest": "landing_well",
+       "env": [
+        [
+         -1.7,
+         0.3,
+         -0.65,
+         0.05,
+         0.0,
+         0.8
+        ],
+        [
+         -1.7,
+         0.3,
+         0.05,
+         0.65,
+         0.0,
+         1.9
+        ],
+        [
+         0.3,
+         0.9,
+         -0.65,
+         0.05,
+         0.0,
+         1.9
+        ]
+       ]
+      },
+      "kneeling": {
+       "clearance_m": -0.2,
+       "fits": false,
+       "meets_0_05": false,
+       "reachable_by_0_60_path": false,
+       "couch_centre_uz": [
+        -0.7,
+        -0.3
+       ],
+       "long_axis": "u",
+       "attendant_side": 1,
+       "airway_end": 1,
+       "nearest": "landing_well",
+       "env": [
+        [
+         -1.7,
+         0.3,
+         -0.65,
+         0.05,
+         0.0,
+         0.8
+        ],
+        [
+         -1.7,
+         0.3,
+         0.05,
+         0.65,
+         0.0,
+         1.2
+        ],
+        [
+         0.3,
+         0.9,
+         -0.65,
+         0.05,
+         0.0,
+         1.2
+        ]
+       ]
+      }
+     },
+     "existing": []
+    },
+    "aft": {
+     "new_couch": {
+      "standing": {
+       "clearance_m": -0.15,
+       "fits": false,
+       "meets_0_05": false,
+       "reachable_by_0_60_path": false,
+       "couch_centre_uz": [
+        -1.45,
+        0.35
+       ],
+       "long_axis": "u",
+       "attendant_side": -1,
+       "airway_end": -1,
+       "nearest": "landing_well",
+       "env": [
+        [
+         -2.45,
+         -0.45,
+         -0.0,
+         0.7,
+         0.0,
+         0.3
+        ],
+        [
+         -2.45,
+         -0.45,
+         -0.6,
+         -0.0,
+         0.0,
+         1.9
+        ],
+        [
+         -3.05,
+         -2.45,
+         -0.0,
+         0.7,
+         0.0,
+         1.9
+        ]
+       ]
+      },
+      "kneeling": {
+       "clearance_m": -0.1,
+       "fits": false,
+       "meets_0_05": false,
+       "reachable_by_0_60_path": false,
+       "couch_centre_uz": [
+        -1.9,
+        -0.3
+       ],
+       "long_axis": "u",
+       "attendant_side": 1,
+       "airway_end": 1,
+       "nearest": "Burn_Couch_2",
+       "env": [
+        [
+         -2.9,
+         -0.9,
+         -0.65,
+         0.05,
+         0.0,
+         0.3
+        ],
+        [
+         -2.9,
+         -0.9,
+         0.05,
+         0.65,
+         0.0,
+         1.2
+        ],
+        [
+         -0.9,
+         -0.3,
+         -0.65,
+         0.05,
+         0.0,
+         1.2
+        ]
+       ]
+      }
+     },
+     "existing": [
+      {
+       "block": "Burn_Couch_1",
+       "note": "the aft-bulkhead burn couch (supine, aft down at 1.5 g), 2.0 x 0.7 m",
+       "stance": "standing",
+       "clearance_m": -0.1,
+       "fits": false,
+       "meets_0_05": false,
+       "nearest": "Garden_Rack_1",
+       "attendant_side": -1,
+       "airway_end": -1,
+       "reachable_by_0_60_path": true,
+       "env": [
+        [
+         -2.0,
+         0.0,
+         0.55,
+         1.25,
+         0.1,
+         0.55
+        ],
+        [
+         -2.0,
+         0.0,
+         -0.05,
+         0.55,
+         0.0,
+         1.9
+        ],
+        [
+         -2.6,
+         -2.0,
+         0.55,
+         1.25,
+         0.0,
+         1.9
+        ]
+       ]
+      },
+      {
+       "block": "Burn_Couch_1",
+       "note": "the aft-bulkhead burn couch (supine, aft down at 1.5 g), 2.0 x 0.7 m",
+       "stance": "kneeling",
+       "clearance_m": -0.05,
+       "fits": false,
+       "meets_0_05": false,
+       "nearest": "Garden_Rack_1",
+       "attendant_side": -1,
+       "airway_end": -1,
+       "reachable_by_0_60_path": true,
+       "env": [
+        [
+         -2.0,
+         0.0,
+         0.55,
+         1.25,
+         0.1,
+         0.55
+        ],
+        [
+         -2.0,
+         0.0,
+         -0.05,
+         0.55,
+         0.0,
+         1.2
+        ],
+        [
+         -2.6,
+         -2.0,
+         0.55,
+         1.25,
+         0.0,
+         1.2
+        ]
+       ]
+      },
+      {
+       "block": "Burn_Couch_2",
+       "note": "the aft-bulkhead burn couch on the other side of the aisle",
+       "stance": "standing",
+       "clearance_m": -0.6,
+       "fits": false,
+       "meets_0_05": false,
+       "nearest": "end_wall",
+       "attendant_side": 1,
+       "airway_end": 1,
+       "reachable_by_0_60_path": true,
+       "env": [
+        [
+         -2.0,
+         0.0,
+         -1.25,
+         -0.55,
+         0.1,
+         0.55
+        ],
+        [
+         -2.0,
+         0.0,
+         -0.55,
+         0.05,
+         0.0,
+         1.9
+        ],
+        [
+         0.0,
+         0.6,
+         -1.25,
+         -0.55,
+         0.0,
+         1.9
+        ]
+       ]
+      },
+      {
+       "block": "Burn_Couch_2",
+       "note": "the aft-bulkhead burn couch on the other side of the aisle",
+       "stance": "kneeling",
+       "clearance_m": 0.0,
+       "fits": true,
+       "meets_0_05": false,
+       "nearest": "landing_well",
+       "attendant_side": -1,
+       "airway_end": -1,
+       "reachable_by_0_60_path": true,
+       "env": [
+        [
+         -2.0,
+         0.0,
+         -1.25,
+         -0.55,
+         0.1,
+         0.55
+        ],
+        [
+         -2.0,
+         0.0,
+         -1.85,
+         -1.25,
+         0.0,
+         1.2
+        ],
+        [
+         -2.6,
+         -2.0,
+         -1.25,
+         -0.55,
+         0.0,
+         1.2
+        ]
+       ]
+      }
+     ]
+    }
+   }
+  },
+  "status": "PROTOTYPE fit screen of the zone blocks; no medical or protection qualification; not a generator change",
+  "by_sector": {
+   "Sector_1_1": {
+    "function": "HABITATION",
+    "deck": {
+     "frame": "0g/spin/stopped (deck frame)",
+     "candidate": "Bunk_1",
+     "stance": "standing",
+     "clearance_m": 0.05,
+     "reachable_by_0_60_path": true,
+     "status": "PASS",
+     "nearest": "Bunk_4"
+    },
+    "aft": {
+     "frame": "locked_1.5g (aft-floor frame)",
+     "candidate": "Burn_Couch_1",
+     "stance": "kneeling",
+     "clearance_m": 0.1,
+     "reachable_by_0_60_path": true,
+     "status": "PASS",
+     "nearest": "Bunk_1"
+    }
+   },
+   "Sector_1_2": {
+    "function": "WORK_MEDICAL_OPS",
+    "deck": {
+     "frame": "0g/spin/stopped (deck frame)",
+     "candidate": "Medical_Couch",
+     "stance": "standing",
+     "clearance_m": 0.05,
+     "reachable_by_0_60_path": true,
+     "status": "PASS",
+     "nearest": "Ops_Stations"
+    },
+    "aft": {
+     "frame": "locked_1.5g (aft-floor frame)",
+     "candidate": "Burn_Couch_1",
+     "stance": "kneeling",
+     "clearance_m": 0.1,
+     "reachable_by_0_60_path": true,
+     "status": "PASS",
+     "nearest": "Medical_Couch"
+    }
+   },
+   "Sector_1_3": {
+    "function": "LIFE_SUPPORT_GARDEN_COMMON",
+    "deck": {
+     "frame": "0g/spin/stopped (deck frame)",
+     "candidate": "new couch",
+     "stance": "standing/kneeling best",
+     "clearance_m": -0.2,
+     "reachable_by_0_60_path": false,
+     "status": "FAIL",
+     "nearest": "landing_well"
+    },
+    "aft": {
+     "frame": "locked_1.5g (aft-floor frame)",
+     "candidate": "Burn_Couch_2",
+     "stance": "kneeling",
+     "clearance_m": 0.0,
+     "reachable_by_0_60_path": true,
+     "status": "MARGINAL",
+     "nearest": "landing_well"
+    }
+   },
+   "Sector_2_1": {
+    "function": "HABITATION",
+    "deck": {
+     "frame": "0g/spin/stopped (deck frame)",
+     "candidate": "Bunk_1",
+     "stance": "standing",
+     "clearance_m": 0.05,
+     "reachable_by_0_60_path": true,
+     "status": "PASS",
+     "nearest": "Bunk_4"
+    },
+    "aft": {
+     "frame": "locked_1.5g (aft-floor frame)",
+     "candidate": "Burn_Couch_1",
+     "stance": "kneeling",
+     "clearance_m": 0.1,
+     "reachable_by_0_60_path": true,
+     "status": "PASS",
+     "nearest": "Bunk_1"
+    }
+   },
+   "Sector_2_2": {
+    "function": "WORK_MEDICAL_OPS",
+    "deck": {
+     "frame": "0g/spin/stopped (deck frame)",
+     "candidate": "Medical_Couch",
+     "stance": "standing",
+     "clearance_m": 0.05,
+     "reachable_by_0_60_path": true,
+     "status": "PASS",
+     "nearest": "Ops_Stations"
+    },
+    "aft": {
+     "frame": "locked_1.5g (aft-floor frame)",
+     "candidate": "Burn_Couch_1",
+     "stance": "kneeling",
+     "clearance_m": 0.1,
+     "reachable_by_0_60_path": true,
+     "status": "PASS",
+     "nearest": "Medical_Couch"
+    }
+   },
+   "Sector_2_3": {
+    "function": "LIFE_SUPPORT_GARDEN_COMMON",
+    "deck": {
+     "frame": "0g/spin/stopped (deck frame)",
+     "candidate": "new couch",
+     "stance": "standing/kneeling best",
+     "clearance_m": -0.2,
+     "reachable_by_0_60_path": false,
+     "status": "FAIL",
+     "nearest": "landing_well"
+    },
+    "aft": {
+     "frame": "locked_1.5g (aft-floor frame)",
+     "candidate": "Burn_Couch_2",
+     "stance": "kneeling",
+     "clearance_m": 0.0,
+     "reachable_by_0_60_path": true,
+     "status": "MARGINAL",
+     "nearest": "landing_well"
+    }
+   }
+  }
+ },
+ "closures": {
+  "cabin_pressure_kpa": 80.0,
+  "method": "ideal clear/leaf area x 80 kPa, the same in both directions (CALC-R02); DIAGNOSTIC, no rating",
+  "survey": [
+   {
+    "closure": "Dock outer hatch",
+    "family": "F4 primary dock",
+    "sides": [
+     "OUTSIDE",
+     "Dock_Primary_Entry_Chamber"
+    ],
+    "seats_from": "Dock_Primary_Entry_Chamber",
+    "architecture": "PAIR_IN_SERIES",
+    "why": "two closures already in series (drum door + tube hatch, dock outer + inner); each still needs a positive reverse path",
+    "load_each_direction_kN": 181.6,
+    "compliant_today": false,
+    "held_today": "latches only (conditional: docked and pressurized)",
+    "status": "BUILT PROTOTYPE",
+    "qualification": "NOT QUALIFIED (OD-034, 45 I-24 OPEN)"
+   },
+   {
+    "closure": "Dock inner hatch",
+    "family": "F4 primary dock",
+    "sides": [
+     "Dock_Primary_Entry_Chamber",
+     "Dock_Primary_Trunk_Node"
+    ],
+    "seats_from": "Dock_Primary_Trunk_Node",
+    "architecture": "PAIR_IN_SERIES",
+    "why": "two closures already in series (drum door + tube hatch, dock outer + inner); each still needs a positive reverse path",
+    "load_each_direction_kN": 181.6,
+    "compliant_today": false,
+    "held_today": "latches only",
+    "status": "BUILT PROTOTYPE",
+    "qualification": "NOT QUALIFIED (OD-034, 45 I-24 OPEN)"
+   },
+   {
+    "closure": "Storeroom hatch",
+    "family": "F3 spine-shell branch (trunk side)",
+    "sides": [
+     "Crew_Trunk",
+     "Storeroom_Shell"
+    ],
+    "seats_from": "Storeroom_Shell",
+    "architecture": "REVERSIBLE_SEATED_DOGGED",
+    "why": "one closure: seated by its normal side, positive dogs/keepers for the reverse polarity",
+    "load_each_direction_kN": 62.8,
+    "compliant_today": false,
+    "held_today": "latches only",
+    "status": "BUILT PROTOTYPE",
+    "qualification": "NOT QUALIFIED (OD-034, 45 I-24 OPEN)"
+   },
+   {
+    "closure": "Refuge port closure",
+    "family": "F3 spine-shell branch (trunk side)",
+    "sides": [
+     "Crew_Trunk",
+     "Refuge_Storm_Shelter"
+    ],
+    "seats_from": null,
+    "architecture": "DUAL",
+    "why": "owner 12:34a / CLOSURE-005: an independent second closure where the fault layout needs it (refuge, SP-12 branch)",
+    "load_each_direction_kN": null,
+    "compliant_today": false,
+    "held_today": "OPEN (one direction will be latch-only)",
+    "status": "BUILT PROTOTYPE",
+    "qualification": "NOT QUALIFIED (OD-034, 45 I-24 OPEN)"
+   },
+   {
+    "closure": "Spine port gate A",
+    "family": "F3 spine-shell branch (trunk side)",
+    "sides": [
+     "Crew_Trunk",
+     "Crew_Vestibule_1"
+    ],
+    "seats_from": null,
+    "architecture": "REVERSIBLE_SEATED_DOGGED",
+    "why": "one closure: seated by its normal side, positive dogs/keepers for the reverse polarity",
+    "load_each_direction_kN": 181.6,
+    "compliant_today": false,
+    "held_today": "OPEN (one direction will be latch-only)",
+    "status": "BUILT PROTOTYPE, seat side OPEN",
+    "qualification": "NOT QUALIFIED (OD-034, 45 I-24 OPEN)"
+   },
+   {
+    "closure": "Drum door A1",
+    "family": "F2 transfer pair (drum door + tube hatch)",
+    "sides": [
+     "Crew_Vestibule_1",
+     "Crew_Tube_1_1"
+    ],
+    "seats_from": "Crew_Tube_1_1",
+    "architecture": "PAIR_IN_SERIES",
+    "why": "two closures already in series (drum door + tube hatch, dock outer + inner); each still needs a positive reverse path",
+    "load_each_direction_kN": 181.6,
+    "compliant_today": false,
+    "held_today": "latches only",
+    "status": "BUILT PROTOTYPE",
+    "qualification": "NOT QUALIFIED (OD-034, 45 I-24 OPEN)"
+   },
+   {
+    "closure": "Tube hatch A1",
+    "family": "F2 transfer pair (drum door + tube hatch)",
+    "sides": [
+     "Crew_Vestibule_1",
+     "Crew_Tube_1_1"
+    ],
+    "seats_from": "Crew_Tube_1_1",
+    "architecture": "PAIR_IN_SERIES",
+    "why": "two closures already in series (drum door + tube hatch, dock outer + inner); each still needs a positive reverse path",
+    "load_each_direction_kN": 181.6,
+    "compliant_today": false,
+    "held_today": "latches only",
+    "status": "BUILT PROTOTYPE",
+    "qualification": "NOT QUALIFIED (OD-034, 45 I-24 OPEN)"
+   },
+   {
+    "closure": "Sector hatch A1",
+    "family": "F1 sector hatch",
+    "sides": [
+     "Crew_Tube_1_1",
+     "Sector_1_1"
+    ],
+    "seats_from": "Sector_1_1",
+    "architecture": "REVERSIBLE_SEATED_DOGGED",
+    "why": "one closure: seated by its normal side, positive dogs/keepers for the reverse polarity",
+    "load_each_direction_kN": 181.6,
+    "compliant_today": false,
+    "held_today": "latches only",
+    "status": "BUILT PROTOTYPE",
+    "qualification": "NOT QUALIFIED (OD-034, 45 I-24 OPEN)"
+   },
+   {
+    "closure": "Drum door A2",
+    "family": "F2 transfer pair (drum door + tube hatch)",
+    "sides": [
+     "Crew_Vestibule_1",
+     "Crew_Tube_1_2"
+    ],
+    "seats_from": "Crew_Tube_1_2",
+    "architecture": "PAIR_IN_SERIES",
+    "why": "two closures already in series (drum door + tube hatch, dock outer + inner); each still needs a positive reverse path",
+    "load_each_direction_kN": 181.6,
+    "compliant_today": false,
+    "held_today": "latches only",
+    "status": "BUILT PROTOTYPE",
+    "qualification": "NOT QUALIFIED (OD-034, 45 I-24 OPEN)"
+   },
+   {
+    "closure": "Tube hatch A2",
+    "family": "F2 transfer pair (drum door + tube hatch)",
+    "sides": [
+     "Crew_Vestibule_1",
+     "Crew_Tube_1_2"
+    ],
+    "seats_from": "Crew_Tube_1_2",
+    "architecture": "PAIR_IN_SERIES",
+    "why": "two closures already in series (drum door + tube hatch, dock outer + inner); each still needs a positive reverse path",
+    "load_each_direction_kN": 181.6,
+    "compliant_today": false,
+    "held_today": "latches only",
+    "status": "BUILT PROTOTYPE",
+    "qualification": "NOT QUALIFIED (OD-034, 45 I-24 OPEN)"
+   },
+   {
+    "closure": "Sector hatch A2",
+    "family": "F1 sector hatch",
+    "sides": [
+     "Crew_Tube_1_2",
+     "Sector_1_2"
+    ],
+    "seats_from": "Sector_1_2",
+    "architecture": "REVERSIBLE_SEATED_DOGGED",
+    "why": "one closure: seated by its normal side, positive dogs/keepers for the reverse polarity",
+    "load_each_direction_kN": 181.6,
+    "compliant_today": false,
+    "held_today": "latches only",
+    "status": "BUILT PROTOTYPE",
+    "qualification": "NOT QUALIFIED (OD-034, 45 I-24 OPEN)"
+   },
+   {
+    "closure": "Drum door A3",
+    "family": "F2 transfer pair (drum door + tube hatch)",
+    "sides": [
+     "Crew_Vestibule_1",
+     "Crew_Tube_1_3"
+    ],
+    "seats_from": "Crew_Tube_1_3",
+    "architecture": "PAIR_IN_SERIES",
+    "why": "two closures already in series (drum door + tube hatch, dock outer + inner); each still needs a positive reverse path",
+    "load_each_direction_kN": 181.6,
+    "compliant_today": false,
+    "held_today": "latches only",
+    "status": "BUILT PROTOTYPE",
+    "qualification": "NOT QUALIFIED (OD-034, 45 I-24 OPEN)"
+   },
+   {
+    "closure": "Tube hatch A3",
+    "family": "F2 transfer pair (drum door + tube hatch)",
+    "sides": [
+     "Crew_Vestibule_1",
+     "Crew_Tube_1_3"
+    ],
+    "seats_from": "Crew_Tube_1_3",
+    "architecture": "PAIR_IN_SERIES",
+    "why": "two closures already in series (drum door + tube hatch, dock outer + inner); each still needs a positive reverse path",
+    "load_each_direction_kN": 181.6,
+    "compliant_today": false,
+    "held_today": "latches only",
+    "status": "BUILT PROTOTYPE",
+    "qualification": "NOT QUALIFIED (OD-034, 45 I-24 OPEN)"
+   },
+   {
+    "closure": "Sector hatch A3",
+    "family": "F1 sector hatch",
+    "sides": [
+     "Crew_Tube_1_3",
+     "Sector_1_3"
+    ],
+    "seats_from": "Sector_1_3",
+    "architecture": "REVERSIBLE_SEATED_DOGGED",
+    "why": "one closure: seated by its normal side, positive dogs/keepers for the reverse polarity",
+    "load_each_direction_kN": 181.6,
+    "compliant_today": false,
+    "held_today": "latches only",
+    "status": "BUILT PROTOTYPE",
+    "qualification": "NOT QUALIFIED (OD-034, 45 I-24 OPEN)"
+   },
+   {
+    "closure": "Spine port gate B",
+    "family": "F3 spine-shell branch (trunk side)",
+    "sides": [
+     "Crew_Trunk",
+     "Crew_Vestibule_2"
+    ],
+    "seats_from": null,
+    "architecture": "REVERSIBLE_SEATED_DOGGED",
+    "why": "one closure: seated by its normal side, positive dogs/keepers for the reverse polarity",
+    "load_each_direction_kN": 62.8,
+    "compliant_today": false,
+    "held_today": "OPEN (one direction will be latch-only)",
+    "status": "BUILT PROTOTYPE, seat side OPEN",
+    "qualification": "NOT QUALIFIED (OD-034, 45 I-24 OPEN)"
+   },
+   {
+    "closure": "Drum door B1",
+    "family": "F2 transfer pair (drum door + tube hatch)",
+    "sides": [
+     "Crew_Vestibule_2",
+     "Crew_Tube_2_1"
+    ],
+    "seats_from": "Crew_Tube_2_1",
+    "architecture": "PAIR_IN_SERIES",
+    "why": "two closures already in series (drum door + tube hatch, dock outer + inner); each still needs a positive reverse path",
+    "load_each_direction_kN": 62.8,
+    "compliant_today": false,
+    "held_today": "latches only",
+    "status": "BUILT PROTOTYPE",
+    "qualification": "NOT QUALIFIED (OD-034, 45 I-24 OPEN)"
+   },
+   {
+    "closure": "Tube hatch B1",
+    "family": "F2 transfer pair (drum door + tube hatch)",
+    "sides": [
+     "Crew_Vestibule_2",
+     "Crew_Tube_2_1"
+    ],
+    "seats_from": "Crew_Tube_2_1",
+    "architecture": "PAIR_IN_SERIES",
+    "why": "two closures already in series (drum door + tube hatch, dock outer + inner); each still needs a positive reverse path",
+    "load_each_direction_kN": 62.8,
+    "compliant_today": false,
+    "held_today": "latches only",
+    "status": "BUILT PROTOTYPE",
+    "qualification": "NOT QUALIFIED (OD-034, 45 I-24 OPEN)"
+   },
+   {
+    "closure": "Sector hatch B1",
+    "family": "F1 sector hatch",
+    "sides": [
+     "Crew_Tube_2_1",
+     "Sector_2_1"
+    ],
+    "seats_from": "Sector_2_1",
+    "architecture": "REVERSIBLE_SEATED_DOGGED",
+    "why": "one closure: seated by its normal side, positive dogs/keepers for the reverse polarity",
+    "load_each_direction_kN": 181.6,
+    "compliant_today": false,
+    "held_today": "latches only",
+    "status": "BUILT PROTOTYPE",
+    "qualification": "NOT QUALIFIED (OD-034, 45 I-24 OPEN)"
+   },
+   {
+    "closure": "Drum door B2",
+    "family": "F2 transfer pair (drum door + tube hatch)",
+    "sides": [
+     "Crew_Vestibule_2",
+     "Crew_Tube_2_2"
+    ],
+    "seats_from": "Crew_Tube_2_2",
+    "architecture": "PAIR_IN_SERIES",
+    "why": "two closures already in series (drum door + tube hatch, dock outer + inner); each still needs a positive reverse path",
+    "load_each_direction_kN": 62.8,
+    "compliant_today": false,
+    "held_today": "latches only",
+    "status": "BUILT PROTOTYPE",
+    "qualification": "NOT QUALIFIED (OD-034, 45 I-24 OPEN)"
+   },
+   {
+    "closure": "Tube hatch B2",
+    "family": "F2 transfer pair (drum door + tube hatch)",
+    "sides": [
+     "Crew_Vestibule_2",
+     "Crew_Tube_2_2"
+    ],
+    "seats_from": "Crew_Tube_2_2",
+    "architecture": "PAIR_IN_SERIES",
+    "why": "two closures already in series (drum door + tube hatch, dock outer + inner); each still needs a positive reverse path",
+    "load_each_direction_kN": 62.8,
+    "compliant_today": false,
+    "held_today": "latches only",
+    "status": "BUILT PROTOTYPE",
+    "qualification": "NOT QUALIFIED (OD-034, 45 I-24 OPEN)"
+   },
+   {
+    "closure": "Sector hatch B2",
+    "family": "F1 sector hatch",
+    "sides": [
+     "Crew_Tube_2_2",
+     "Sector_2_2"
+    ],
+    "seats_from": "Sector_2_2",
+    "architecture": "REVERSIBLE_SEATED_DOGGED",
+    "why": "one closure: seated by its normal side, positive dogs/keepers for the reverse polarity",
+    "load_each_direction_kN": 181.6,
+    "compliant_today": false,
+    "held_today": "latches only",
+    "status": "BUILT PROTOTYPE",
+    "qualification": "NOT QUALIFIED (OD-034, 45 I-24 OPEN)"
+   },
+   {
+    "closure": "Drum door B3",
+    "family": "F2 transfer pair (drum door + tube hatch)",
+    "sides": [
+     "Crew_Vestibule_2",
+     "Crew_Tube_2_3"
+    ],
+    "seats_from": "Crew_Tube_2_3",
+    "architecture": "PAIR_IN_SERIES",
+    "why": "two closures already in series (drum door + tube hatch, dock outer + inner); each still needs a positive reverse path",
+    "load_each_direction_kN": 62.8,
+    "compliant_today": false,
+    "held_today": "latches only",
+    "status": "BUILT PROTOTYPE",
+    "qualification": "NOT QUALIFIED (OD-034, 45 I-24 OPEN)"
+   },
+   {
+    "closure": "Tube hatch B3",
+    "family": "F2 transfer pair (drum door + tube hatch)",
+    "sides": [
+     "Crew_Vestibule_2",
+     "Crew_Tube_2_3"
+    ],
+    "seats_from": "Crew_Tube_2_3",
+    "architecture": "PAIR_IN_SERIES",
+    "why": "two closures already in series (drum door + tube hatch, dock outer + inner); each still needs a positive reverse path",
+    "load_each_direction_kN": 62.8,
+    "compliant_today": false,
+    "held_today": "latches only",
+    "status": "BUILT PROTOTYPE",
+    "qualification": "NOT QUALIFIED (OD-034, 45 I-24 OPEN)"
+   },
+   {
+    "closure": "Sector hatch B3",
+    "family": "F1 sector hatch",
+    "sides": [
+     "Crew_Tube_2_3",
+     "Sector_2_3"
+    ],
+    "seats_from": "Sector_2_3",
+    "architecture": "REVERSIBLE_SEATED_DOGGED",
+    "why": "one closure: seated by its normal side, positive dogs/keepers for the reverse polarity",
+    "load_each_direction_kN": 181.6,
+    "compliant_today": false,
+    "held_today": "latches only",
+    "status": "BUILT PROTOTYPE",
+    "qualification": "NOT QUALIFIED (OD-034, 45 I-24 OPEN)"
+   },
+   {
+    "closure": "Crew_Connector_Airlock_EVA hatch",
+    "family": "F3 spine-shell branch (trunk side)",
+    "sides": [
+     "Crew_Trunk",
+     "Airlock_EVA"
+    ],
+    "seats_from": null,
+    "architecture": "REVERSIBLE_SEATED_DOGGED",
+    "why": "one closure: seated by its normal side, positive dogs/keepers for the reverse polarity",
+    "load_each_direction_kN": null,
+    "compliant_today": false,
+    "held_today": "OPEN (one direction will be latch-only)",
+    "status": "BUILT PROXY, hatch OPEN (D1/E4)",
+    "qualification": "NOT QUALIFIED (OD-034, 45 I-24 OPEN)"
+   },
+   {
+    "closure": "Crew_Connector_Dock_Service hatch",
+    "family": "F3 spine-shell branch (trunk side)",
+    "sides": [
+     "Crew_Trunk",
+     "Dock_Service"
+    ],
+    "seats_from": null,
+    "architecture": "REVERSIBLE_SEATED_DOGGED",
+    "why": "one closure: seated by its normal side, positive dogs/keepers for the reverse polarity",
+    "load_each_direction_kN": null,
+    "compliant_today": false,
+    "held_today": "OPEN (one direction will be latch-only)",
+    "status": "BUILT PROXY, hatch OPEN (D1/E4)",
+    "qualification": "NOT QUALIFIED (OD-034, 45 I-24 OPEN)"
+   },
+   {
+    "closure": "SP-12 branch hatch (STUDY)",
+    "family": "F5 EVA district (STUDY)",
+    "sides": [
+     "Crew_Trunk",
+     "SP12"
+    ],
+    "seats_from": "Crew_Trunk",
+    "architecture": "DUAL",
+    "why": "owner 12:34a / CLOSURE-005: an independent second closure where the fault layout needs it (refuge, SP-12 branch)",
+    "load_each_direction_kN": 62.8,
+    "compliant_today": false,
+    "held_today": "latches only",
+    "status": "STUDY",
+    "qualification": "NOT QUALIFIED (OD-034, 45 I-24 OPEN)"
+   },
+   {
+    "closure": "SP-11 inner hatch (STUDY, 1.20 m lead)",
+    "family": "F5 EVA district (STUDY)",
+    "sides": [
+     "SP12",
+     "SP11"
+    ],
+    "seats_from": "SP12",
+    "architecture": "REVERSIBLE_SEATED_DOGGED",
+    "why": "one closure: seated by its normal side, positive dogs/keepers for the reverse polarity",
+    "load_each_direction_kN": 106.2,
+    "compliant_today": false,
+    "held_today": "latches only",
+    "status": "STUDY",
+    "qualification": "NOT QUALIFIED (OD-034, 45 I-24 OPEN)"
+   },
+   {
+    "closure": "SP-11 outer hatch (STUDY, 1.20 m lead)",
+    "family": "F5 EVA district (STUDY)",
+    "sides": [
+     "OUTSIDE",
+     "SP11"
+    ],
+    "seats_from": "SP11",
+    "architecture": "REVERSIBLE_SEATED_DOGGED",
+    "why": "one closure: seated by its normal side, positive dogs/keepers for the reverse polarity",
+    "load_each_direction_kN": null,
+    "compliant_today": true,
+    "held_today": "n/a",
+    "status": "STUDY",
+    "qualification": "NOT QUALIFIED (OD-034, 45 I-24 OPEN)"
+   },
+   {
+    "closure": "SP-12/13 door (STUDY)",
+    "family": "F5 EVA district (STUDY)",
+    "sides": [
+     "SP12",
+     "SP13"
+    ],
+    "seats_from": "SP12",
+    "architecture": "REVERSIBLE_SEATED_DOGGED",
+    "why": "one closure: seated by its normal side, positive dogs/keepers for the reverse polarity",
+    "load_each_direction_kN": null,
+    "compliant_today": false,
+    "held_today": "latches only",
+    "status": "STUDY",
+    "qualification": "NOT QUALIFIED (OD-034, 45 I-24 OPEN)"
+   },
+   {
+    "closure": "District hatch (STUDY, L1-A)",
+    "family": "F5 EVA district (STUDY)",
+    "sides": [
+     "Crew_Trunk",
+     "DISTRICT"
+    ],
+    "seats_from": "Crew_Trunk",
+    "architecture": "REVERSIBLE_SEATED_DOGGED",
+    "why": "one closure: seated by its normal side, positive dogs/keepers for the reverse polarity",
+    "load_each_direction_kN": 181.6,
+    "compliant_today": false,
+    "held_today": "latches only",
+    "status": "STUDY",
+    "qualification": "NOT QUALIFIED (OD-034, 45 I-24 OPEN)"
+   },
+   {
+    "closure": "Workshop port hatch (STUDY, L1-A)",
+    "family": "F5 EVA district (STUDY)",
+    "sides": [
+     "DISTRICT",
+     "WORKSHOP"
+    ],
+    "seats_from": null,
+    "architecture": "REVERSIBLE_SEATED_DOGGED",
+    "why": "one closure: seated by its normal side, positive dogs/keepers for the reverse polarity",
+    "load_each_direction_kN": 62.8,
+    "compliant_today": false,
+    "held_today": "OPEN (one direction will be latch-only)",
+    "status": "STUDY",
+    "qualification": "NOT QUALIFIED (OD-034, 45 I-24 OPEN)"
+   }
+  ],
+  "proposed": [
+   {
+    "closure": "Refuge axial slot 1.00 x 2.30 m (STUDY)",
+    "architecture": "DUAL",
+    "load_each_direction_kN": 184.0,
+    "source": "45 I-12"
+   },
+   {
+    "closure": "SP-12 N1 axial slot 1.10 x 2.50 m (STUDY comparator)",
+    "architecture": "DUAL",
+    "load_each_direction_kN": 220.0,
+    "source": "45 I-13"
+   },
+   {
+    "closure": "Ring B port 1.10 m (STUDY comparison)",
+    "architecture": "PAIR_IN_SERIES",
+    "load_each_direction_kN": 76.0,
+    "source": "45 I-11"
+   },
+   {
+    "closure": "SP-11 inner plug 1.20 m (STUDY lead)",
+    "architecture": "REVERSIBLE_SEATED_DOGGED",
+    "load_each_direction_kN": 106.19,
+    "source": "45 I-08"
+   }
+  ],
+  "families": {
+   "PAIR_IN_SERIES": {
+    "count": 14,
+    "non_compliant": 14,
+    "max_load_kN": 181.6,
+    "closures": [
+     "Dock outer hatch",
+     "Dock inner hatch",
+     "Drum door A1",
+     "Tube hatch A1",
+     "Drum door A2",
+     "Tube hatch A2",
+     "Drum door A3",
+     "Tube hatch A3",
+     "Drum door B1",
+     "Tube hatch B1",
+     "Drum door B2",
+     "Tube hatch B2",
+     "Drum door B3",
+     "Tube hatch B3"
+    ]
+   },
+   "REVERSIBLE_SEATED_DOGGED": {
+    "count": 16,
+    "non_compliant": 15,
+    "max_load_kN": 181.6,
+    "closures": [
+     "Storeroom hatch",
+     "Spine port gate A",
+     "Sector hatch A1",
+     "Sector hatch A2",
+     "Sector hatch A3",
+     "Spine port gate B",
+     "Sector hatch B1",
+     "Sector hatch B2",
+     "Sector hatch B3",
+     "Crew_Connector_Airlock_EVA hatch",
+     "Crew_Connector_Dock_Service hatch",
+     "SP-11 inner hatch (STUDY, 1.20 m lead)",
+     "SP-11 outer hatch (STUDY, 1.20 m lead)",
+     "SP-12/13 door (STUDY)",
+     "District hatch (STUDY, L1-A)",
+     "Workshop port hatch (STUDY, L1-A)"
+    ]
+   },
+   "DUAL": {
+    "count": 2,
+    "non_compliant": 2,
+    "max_load_kN": 62.8,
+    "closures": [
+     "Refuge port closure",
+     "SP-12 branch hatch (STUDY)"
+    ]
+   }
+  },
+  "non_compliant": 31,
+  "total": 32
+ }
+}

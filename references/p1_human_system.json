@@ -1,0 +1,782 @@
+{
+ "mpfb": "2.0.17",
+ "rig": "game_engine",
+ "fps": 30,
+ "characters": {
+  "test_a": {
+   "height_macro": 0.607178,
+   "bisection_stature_m": 1.8,
+   "generate_s": 4.81,
+   "stature_m": 1.8,
+   "contract": {
+    "bones": 53,
+    "root": "Root",
+    "max_influences": 4,
+    "unweighted_vertices": 0
+   },
+   "hip_height_m": 0.9531,
+   "vertices": {
+    "CHAR_TEST_A_Body": 13380,
+    "CHAR_TEST_A_Eyebrow001": 124,
+    "CHAR_TEST_A_Eyelashes01": 250,
+    "CHAR_TEST_A_High_Poly": 1064
+   },
+   "materials": [
+    "CHAR_TEST_A.eyebrow001",
+    "CHAR_TEST_A.eyelashes01",
+    "CHAR_TEST_A.high-poly",
+    "WF_MAT_Human_Clay",
+    "WF_MAT_Human_UnderSuit"
+   ],
+   "correctives": {
+    "corrective_knee_l": {
+     "rest_deg": 0.0,
+     "onset_deg": 39.43,
+     "full_deg": 112.66,
+     "vertices": 466,
+     "max_offset_mm": 36.2
+    },
+    "corrective_knee_r": {
+     "rest_deg": 0.0,
+     "onset_deg": 39.43,
+     "full_deg": 112.66,
+     "vertices": 484,
+     "max_offset_mm": 38.0
+    },
+    "corrective_hip_l": {
+     "rest_deg": 0.0,
+     "onset_deg": 33.4,
+     "full_deg": 95.44,
+     "vertices": 594,
+     "max_offset_mm": 20.3
+    },
+    "corrective_hip_r": {
+     "rest_deg": 0.0,
+     "onset_deg": 33.24,
+     "full_deg": 94.98,
+     "vertices": 592,
+     "max_offset_mm": 15.9
+    },
+    "corrective_elbow_l": {
+     "rest_deg": 0.0,
+     "onset_deg": 33.89,
+     "full_deg": 96.83,
+     "vertices": 443,
+     "max_offset_mm": 19.0
+    },
+    "corrective_elbow_r": {
+     "rest_deg": 0.0,
+     "onset_deg": 33.89,
+     "full_deg": 96.83,
+     "vertices": 451,
+     "max_offset_mm": 19.1
+    },
+    "corrective_shoulder_l": {
+     "rest_deg": 0.0,
+     "onset_deg": 44.48,
+     "full_deg": 127.08,
+     "vertices": 698,
+     "max_offset_mm": 31.7
+    },
+    "corrective_shoulder_r": {
+     "rest_deg": 0.0,
+     "onset_deg": 44.48,
+     "full_deg": 127.08,
+     "vertices": 702,
+     "max_offset_mm": 31.7
+    }
+   },
+   "proportions": {
+    "hip_x": 0.0597,
+    "waist_z": 0.0916,
+    "chest_z": 0.1373,
+    "shoulder_z": 0.2715,
+    "shoulder_x": 0.1,
+    "neck_z": 0.3263,
+    "head_z": 0.4289,
+    "upper_arm": 0.1494,
+    "forearm": 0.1431,
+    "hand": 0.031,
+    "thigh": 0.2498,
+    "shank": 0.2412,
+    "ankle": 0.0417,
+    "foot": 0.1199
+   },
+   "actions": {
+    "idle": {
+     "frames": 120,
+     "loop": true,
+     "root_motion": false,
+     "slip_mm": {
+      "foot_right": 0.0,
+      "foot_left": 0.0
+     },
+     "reach_short_mm": {}
+    },
+    "walk": {
+     "frames": 33,
+     "loop": true,
+     "root_motion": true,
+     "slip_mm": {
+      "foot_right": 0.0,
+      "foot_left": 0.0
+     },
+     "reach_short_mm": {}
+    },
+    "sit": {
+     "frames": 75,
+     "loop": false,
+     "root_motion": false,
+     "slip_mm": {
+      "foot_right": 0.0,
+      "foot_left": 0.0
+     },
+     "reach_short_mm": {}
+    },
+    "crawl": {
+     "frames": 48,
+     "loop": true,
+     "root_motion": true,
+     "slip_mm": {
+      "hand_right": 2.4,
+      "hand_left": 2.4,
+      "knee_right": 0.0,
+      "knee_left": 0.0
+     },
+     "reach_short_mm": {}
+    },
+    "climb": {
+     "frames": 50,
+     "loop": true,
+     "root_motion": true,
+     "slip_mm": {
+      "foot_right": 0.0,
+      "hand_left": 0.0,
+      "foot_left": 0.0,
+      "hand_right": 0.0
+     },
+     "reach_short_mm": {}
+    }
+   },
+   "retarget": {
+    "source": "human_system procedural library at this stature",
+    "scale": 1.0
+   },
+   "solver_vs_blender_m": 0.0,
+   "fingerprint": "ad3f185dd0c5242aecb86c56ebadbdb4ec56083965bfae5db53963097a0e1b55"
+  },
+  "test_b": {
+   "height_macro": 0.554016,
+   "bisection_stature_m": 1.6181,
+   "generate_s": 6.27,
+   "stature_m": 1.6181,
+   "contract": {
+    "bones": 53,
+    "root": "Root",
+    "max_influences": 4,
+    "unweighted_vertices": 0
+   },
+   "hip_height_m": 0.8374,
+   "vertices": {
+    "CHAR_TEST_B_Body": 13380,
+    "CHAR_TEST_B_Eyebrow004": 124,
+    "CHAR_TEST_B_Eyelashes02": 250,
+    "CHAR_TEST_B_High_Poly": 1064
+   },
+   "materials": [
+    "CHAR_TEST_B.body",
+    "CHAR_TEST_B.eyebrow004",
+    "CHAR_TEST_B.eyelashes02",
+    "CHAR_TEST_B.high-poly"
+   ],
+   "correctives": {
+    "corrective_knee_l": {
+     "rest_deg": 0.0,
+     "onset_deg": 39.09,
+     "full_deg": 111.69,
+     "vertices": 453,
+     "max_offset_mm": 35.4
+    },
+    "corrective_knee_r": {
+     "rest_deg": 0.0,
+     "onset_deg": 39.09,
+     "full_deg": 111.69,
+     "vertices": 479,
+     "max_offset_mm": 38.2
+    },
+    "corrective_hip_l": {
+     "rest_deg": 0.0,
+     "onset_deg": 32.56,
+     "full_deg": 93.03,
+     "vertices": 594,
+     "max_offset_mm": 20.2
+    },
+    "corrective_hip_r": {
+     "rest_deg": 0.0,
+     "onset_deg": 32.56,
+     "full_deg": 93.03,
+     "vertices": 590,
+     "max_offset_mm": 17.3
+    },
+    "corrective_elbow_l": {
+     "rest_deg": 0.0,
+     "onset_deg": 35.93,
+     "full_deg": 102.67,
+     "vertices": 441,
+     "max_offset_mm": 19.2
+    },
+    "corrective_elbow_r": {
+     "rest_deg": 0.0,
+     "onset_deg": 35.93,
+     "full_deg": 102.67,
+     "vertices": 447,
+     "max_offset_mm": 19.4
+    },
+    "corrective_shoulder_l": {
+     "rest_deg": 0.0,
+     "onset_deg": 43.76,
+     "full_deg": 125.03,
+     "vertices": 698,
+     "max_offset_mm": 29.0
+    },
+    "corrective_shoulder_r": {
+     "rest_deg": 0.0,
+     "onset_deg": 43.76,
+     "full_deg": 125.03,
+     "vertices": 701,
+     "max_offset_mm": 29.0
+    }
+   },
+   "actions": {
+    "idle": {
+     "frames": 120,
+     "loop": true,
+     "root_motion": false,
+     "slip_mm": {
+      "foot_right": 0.3,
+      "foot_left": 0.3
+     },
+     "reach_short_mm": {
+      "leg_l": 4.8,
+      "leg_r": 4.8
+     }
+    },
+    "walk": {
+     "frames": 33,
+     "loop": true,
+     "root_motion": true,
+     "slip_mm": {
+      "foot_right": 0.0,
+      "foot_left": 0.0
+     },
+     "reach_short_mm": {}
+    },
+    "sit": {
+     "frames": 75,
+     "loop": false,
+     "root_motion": false,
+     "slip_mm": {
+      "foot_right": 4.8,
+      "foot_left": 4.8
+     },
+     "reach_short_mm": {
+      "leg_l": 4.8,
+      "leg_r": 4.8
+     }
+    },
+    "crawl": {
+     "frames": 48,
+     "loop": true,
+     "root_motion": true,
+     "slip_mm": {
+      "hand_right": 2.1,
+      "hand_left": 2.1,
+      "knee_right": 0.7,
+      "knee_left": 0.7
+     },
+     "reach_short_mm": {}
+    },
+    "climb": {
+     "frames": 50,
+     "loop": true,
+     "root_motion": true,
+     "slip_mm": {
+      "foot_right": 0.0,
+      "hand_left": 0.0,
+      "foot_left": 0.0,
+      "hand_right": 0.0
+     },
+     "reach_short_mm": {}
+    }
+   },
+   "retarget": {
+    "source": "CHAR_TEST_A rig (game_engine), read as joints",
+    "leg_ratio": 0.8702,
+    "ankle_from_to_m": [
+     0.0751,
+     0.0744
+    ]
+   },
+   "fingerprint": "4a3abeb9e93ac797b7f457df4dbf13ec174231d4691fa05c996413a0d6b5bd77"
+  },
+  "instructor": {
+   "height_macro": 0.545044,
+   "bisection_stature_m": 1.78,
+   "generate_s": 3.56,
+   "outfit": {
+    "name": "instructor",
+    "faces": {
+     "skin": 4078,
+     "Spacer_Suit": 1249,
+     "Seal_Collar": 222,
+     "GU_Vest": 890,
+     "GU_Shoulder_Board": 72,
+     "Spacer_Panel": 988,
+     "Harness": 374,
+     "Flight_Gloves": 3190,
+     "Boots": 2262,
+     "Wrist_Unit": 53
+    }
+   },
+   "stature_m": 1.78,
+   "contract": {
+    "bones": 53,
+    "root": "Root",
+    "max_influences": 4,
+    "unweighted_vertices": 0
+   },
+   "hip_height_m": 0.9498,
+   "vertices": {
+    "CHAR_INSTRUCTOR_Body": 13380,
+    "CHAR_INSTRUCTOR_Eyebrow001": 124,
+    "CHAR_INSTRUCTOR_Eyelashes01": 250,
+    "CHAR_INSTRUCTOR_High_Poly": 1064
+   },
+   "materials": [
+    "CHAR_INSTRUCTOR.eyebrow001",
+    "CHAR_INSTRUCTOR.eyelashes01",
+    "CHAR_INSTRUCTOR.high-poly",
+    "WF_MAT_Human_Clay",
+    "WF_MAT_Outfit_Boots",
+    "WF_MAT_Outfit_Flight_Gloves",
+    "WF_MAT_Outfit_GU_Shoulder_Board",
+    "WF_MAT_Outfit_GU_Vest",
+    "WF_MAT_Outfit_Harness",
+    "WF_MAT_Outfit_Seal_Collar",
+    "WF_MAT_Outfit_Spacer_Panel",
+    "WF_MAT_Outfit_Spacer_Suit",
+    "WF_MAT_Outfit_Wrist_Unit"
+   ],
+   "correctives": {
+    "corrective_knee_l": {
+     "rest_deg": 0.0,
+     "onset_deg": 39.61,
+     "full_deg": 113.18,
+     "vertices": 478,
+     "max_offset_mm": 36.3
+    },
+    "corrective_knee_r": {
+     "rest_deg": 0.0,
+     "onset_deg": 39.61,
+     "full_deg": 113.18,
+     "vertices": 483,
+     "max_offset_mm": 38.3
+    },
+    "corrective_hip_l": {
+     "rest_deg": 0.0,
+     "onset_deg": 33.32,
+     "full_deg": 95.19,
+     "vertices": 587,
+     "max_offset_mm": 19.2
+    },
+    "corrective_hip_r": {
+     "rest_deg": 0.0,
+     "onset_deg": 33.15,
+     "full_deg": 94.71,
+     "vertices": 590,
+     "max_offset_mm": 18.1
+    },
+    "corrective_elbow_l": {
+     "rest_deg": 0.0,
+     "onset_deg": 33.22,
+     "full_deg": 94.91,
+     "vertices": 445,
+     "max_offset_mm": 17.1
+    },
+    "corrective_elbow_r": {
+     "rest_deg": 0.0,
+     "onset_deg": 33.22,
+     "full_deg": 94.91,
+     "vertices": 453,
+     "max_offset_mm": 17.2
+    },
+    "corrective_shoulder_l": {
+     "rest_deg": 0.0,
+     "onset_deg": 44.76,
+     "full_deg": 127.88,
+     "vertices": 703,
+     "max_offset_mm": 34.8
+    },
+    "corrective_shoulder_r": {
+     "rest_deg": 0.0,
+     "onset_deg": 44.76,
+     "full_deg": 127.88,
+     "vertices": 702,
+     "max_offset_mm": 34.8
+    }
+   },
+   "proportions": {
+    "hip_x": 0.0622,
+    "waist_z": 0.0932,
+    "chest_z": 0.1285,
+    "shoulder_z": 0.2656,
+    "shoulder_x": 0.1067,
+    "neck_z": 0.3252,
+    "head_z": 0.4253,
+    "upper_arm": 0.1468,
+    "forearm": 0.1539,
+    "hand": 0.0329,
+    "thigh": 0.2457,
+    "shank": 0.2501,
+    "ankle": 0.0414,
+    "foot": 0.1227
+   },
+   "actions": {
+    "idle": {
+     "frames": 120,
+     "loop": true,
+     "root_motion": false,
+     "slip_mm": {
+      "foot_right": 0.0,
+      "foot_left": 0.0
+     },
+     "reach_short_mm": {}
+    },
+    "walk": {
+     "frames": 33,
+     "loop": true,
+     "root_motion": true,
+     "slip_mm": {
+      "foot_right": 0.0,
+      "foot_left": 0.0
+     },
+     "reach_short_mm": {}
+    },
+    "sit": {
+     "frames": 75,
+     "loop": false,
+     "root_motion": false,
+     "slip_mm": {
+      "foot_right": 0.0,
+      "foot_left": 0.0
+     },
+     "reach_short_mm": {}
+    },
+    "crawl": {
+     "frames": 48,
+     "loop": true,
+     "root_motion": true,
+     "slip_mm": {
+      "hand_right": 2.7,
+      "hand_left": 2.7,
+      "knee_right": 0.0,
+      "knee_left": 0.0
+     },
+     "reach_short_mm": {}
+    },
+    "climb": {
+     "frames": 50,
+     "loop": true,
+     "root_motion": true,
+     "slip_mm": {
+      "foot_right": 0.0,
+      "hand_left": 0.0,
+      "foot_left": 0.0,
+      "hand_right": 0.0
+     },
+     "reach_short_mm": {}
+    },
+    "stage_S004A": {
+     "frames": 10,
+     "loop": true,
+     "root_motion": false,
+     "slip_mm": {},
+     "reach_short_mm": {}
+    }
+   },
+   "retarget": {
+    "source": "human_system procedural library at this stature",
+    "scale": 1.0
+   },
+   "solver_vs_blender_m": 1e-06,
+   "stage": {
+    "scene": "S004A",
+    "function": "ENTRY_CHAMBER",
+    "action": "stage_S004A",
+    "proxy": "instructor",
+    "matrix": [
+     [
+      0.0,
+      -0.0,
+      1.0,
+      98.18000030517578
+     ],
+     [
+      0.258819043636322,
+      0.9659258127212524,
+      0.0,
+      -5.13234806060791
+     ],
+     [
+      -0.9659258127212524,
+      0.258819043636322,
+      0.0,
+      -1.3234446048736572
+     ],
+     [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ]
+    ],
+    "source": "characters.greeting (IND-001 PROTOTYPE staging, re-staged for this body: recipe greeting_offset_m), vehicle frame at the docked pose"
+   },
+   "stages": [
+    "S004A"
+   ],
+   "fingerprint": "bfd229061a5d25561fe553eba914a77cde75b04d97c1f719d844f225e2054bee"
+  },
+  "newcomer": {
+   "height_macro": 0.538025,
+   "bisection_stature_m": 1.6999,
+   "generate_s": 5.02,
+   "outfit": {
+    "name": "newcomer",
+    "faces": {
+     "skin": 7268,
+     "Issued_Suit": 1919,
+     "Seal_Collar": 250,
+     "Issued_Panel": 1233,
+     "Harness": 386,
+     "Boots": 2264,
+     "Visitor_Band": 58
+    }
+   },
+   "stature_m": 1.6999,
+   "contract": {
+    "bones": 53,
+    "root": "Root",
+    "max_influences": 4,
+    "unweighted_vertices": 0
+   },
+   "hip_height_m": 0.8909,
+   "vertices": {
+    "CHAR_NEWCOMER_Body": 13380,
+    "CHAR_NEWCOMER_Eyebrow001": 124,
+    "CHAR_NEWCOMER_Eyelashes01": 250,
+    "CHAR_NEWCOMER_High_Poly": 1064
+   },
+   "materials": [
+    "CHAR_NEWCOMER.eyebrow001",
+    "CHAR_NEWCOMER.eyelashes01",
+    "CHAR_NEWCOMER.high-poly",
+    "WF_MAT_Human_Clay",
+    "WF_MAT_Outfit_Boots",
+    "WF_MAT_Outfit_Harness",
+    "WF_MAT_Outfit_Issued_Panel",
+    "WF_MAT_Outfit_Issued_Suit",
+    "WF_MAT_Outfit_Seal_Collar",
+    "WF_MAT_Outfit_Visitor_Band"
+   ],
+   "correctives": {
+    "corrective_knee_l": {
+     "rest_deg": 0.0,
+     "onset_deg": 39.48,
+     "full_deg": 112.8,
+     "vertices": 467,
+     "max_offset_mm": 36.8
+    },
+    "corrective_knee_r": {
+     "rest_deg": 0.0,
+     "onset_deg": 39.48,
+     "full_deg": 112.8,
+     "vertices": 482,
+     "max_offset_mm": 39.1
+    },
+    "corrective_hip_l": {
+     "rest_deg": 0.0,
+     "onset_deg": 33.31,
+     "full_deg": 95.17,
+     "vertices": 587,
+     "max_offset_mm": 19.4
+    },
+    "corrective_hip_r": {
+     "rest_deg": 0.0,
+     "onset_deg": 33.14,
+     "full_deg": 94.68,
+     "vertices": 583,
+     "max_offset_mm": 15.3
+    },
+    "corrective_elbow_l": {
+     "rest_deg": 0.0,
+     "onset_deg": 33.86,
+     "full_deg": 96.73,
+     "vertices": 442,
+     "max_offset_mm": 18.2
+    },
+    "corrective_elbow_r": {
+     "rest_deg": 0.0,
+     "onset_deg": 33.86,
+     "full_deg": 96.73,
+     "vertices": 450,
+     "max_offset_mm": 18.4
+    },
+    "corrective_shoulder_l": {
+     "rest_deg": 0.0,
+     "onset_deg": 44.49,
+     "full_deg": 127.13,
+     "vertices": 698,
+     "max_offset_mm": 30.4
+    },
+    "corrective_shoulder_r": {
+     "rest_deg": 0.0,
+     "onset_deg": 44.49,
+     "full_deg": 127.13,
+     "vertices": 703,
+     "max_offset_mm": 30.4
+    }
+   },
+   "proportions": {
+    "hip_x": 0.0607,
+    "waist_z": 0.0925,
+    "chest_z": 0.1379,
+    "shoulder_z": 0.2731,
+    "shoulder_x": 0.1017,
+    "neck_z": 0.3291,
+    "head_z": 0.4336,
+    "upper_arm": 0.147,
+    "forearm": 0.1436,
+    "hand": 0.0311,
+    "thigh": 0.2414,
+    "shank": 0.2443,
+    "ankle": 0.0417,
+    "foot": 0.1194
+   },
+   "actions": {
+    "idle": {
+     "frames": 120,
+     "loop": true,
+     "root_motion": false,
+     "slip_mm": {
+      "foot_right": 0.0,
+      "foot_left": 0.0
+     },
+     "reach_short_mm": {}
+    },
+    "walk": {
+     "frames": 33,
+     "loop": true,
+     "root_motion": true,
+     "slip_mm": {
+      "foot_right": 0.0,
+      "foot_left": 0.0
+     },
+     "reach_short_mm": {}
+    },
+    "sit": {
+     "frames": 75,
+     "loop": false,
+     "root_motion": false,
+     "slip_mm": {
+      "foot_right": 0.0,
+      "foot_left": 0.0
+     },
+     "reach_short_mm": {}
+    },
+    "crawl": {
+     "frames": 48,
+     "loop": true,
+     "root_motion": true,
+     "slip_mm": {
+      "hand_right": 7.1,
+      "hand_left": 7.1,
+      "knee_right": 0.0,
+      "knee_left": 0.0
+     },
+     "reach_short_mm": {}
+    },
+    "climb": {
+     "frames": 50,
+     "loop": true,
+     "root_motion": true,
+     "slip_mm": {
+      "foot_right": 0.0,
+      "hand_left": 0.0,
+      "foot_left": 0.0,
+      "hand_right": 0.0
+     },
+     "reach_short_mm": {}
+    },
+    "stage_S004A": {
+     "frames": 10,
+     "loop": true,
+     "root_motion": false,
+     "slip_mm": {},
+     "reach_short_mm": {}
+    },
+    "stage_S004B": {
+     "frames": 10,
+     "loop": true,
+     "root_motion": false,
+     "slip_mm": {},
+     "reach_short_mm": {}
+    }
+   },
+   "retarget": {
+    "source": "human_system procedural library at this stature",
+    "scale": 1.0
+   },
+   "solver_vs_blender_m": 1e-06,
+   "back_depth_m": 0.102,
+   "stage": {
+    "scene": "S004A",
+    "function": "ENTRY_CHAMBER",
+    "action": "stage_S004A",
+    "proxy": "newcomer",
+    "matrix": [
+     [
+      0.0,
+      -1.0,
+      0.0,
+      99.44999694824219
+     ],
+     [
+      0.258819043636322,
+      -0.0,
+      0.9659258127212524,
+      -7.152655601501465
+     ],
+     [
+      -0.9659258127212524,
+      -0.0,
+      0.258819043636322,
+      -2.206425666809082
+     ],
+     [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ]
+    ],
+    "source": "characters.greeting (IND-001 PROTOTYPE staging, re-staged for this body: recipe greeting_offset_m), vehicle frame at the docked pose"
+   },
+   "stages": [
+    "S004A",
+    "S004B"
+   ],
+   "fingerprint": "c9482f9d7757998d80c11c19dd668508a56c9f66f747bd4c215a01a9c6dab602"
+  }
+ }
+}

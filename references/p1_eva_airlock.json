@@ -1,0 +1,376 @@
+{
+ "contract": "eva_airlock v1",
+ "status": "STUDY: geometric readback only, no pressure-shell change, not certification (EVA-043/055)",
+ "mechanical_clearance_m": 0.15,
+ "candidates": {
+  "SP11_TWO_PERSON_100": {
+   "chamber_shell": {
+    "intersects": [],
+    "below_clearance": {},
+    "nearest": {
+     "Hull_Forward_Collar": 0.314,
+     "Shield_Sector_Keel_1": 0.523,
+     "Ext_Airlock_Flood_1": 0.578,
+     "Ext_Airlock_Flood_2": 0.578,
+     "Casing_Collar_Seams_Long": 0.635,
+     "Storeroom_Shell": 0.7
+    },
+    "status": "CLEAR"
+   },
+   "outer_neck": {
+    "intersects": [],
+    "below_clearance": {},
+    "nearest": {
+     "Hull_Forward_Collar": 0.607,
+     "Casing_Collar_Seams_Long": 0.952,
+     "Ext_Airlock_Flood_1": 0.96,
+     "Ext_Airlock_Flood_2": 0.96,
+     "Casing_Collar_Seams_Hoop": 1.208
+    },
+    "status": "CLEAR"
+   },
+   "leaf": {
+    "intersects": [],
+    "below_clearance": {},
+    "nearest": {
+     "Hull_Forward_Collar": 0.793,
+     "Ext_Airlock_Flood_1": 1.094,
+     "Ext_Airlock_Flood_2": 1.094,
+     "Casing_Collar_Seams_Long": 1.136,
+     "Storeroom_Shell": 1.2,
+     "Storeroom_Light": 1.265
+    },
+    "status": "CLEAR"
+   },
+   "hull_penetration_outside_m": 1.3
+  },
+  "SP11_SEQUENTIAL_100": {
+   "chamber_shell": {
+    "intersects": [],
+    "below_clearance": {},
+    "nearest": {
+     "Hull_Forward_Collar": 0.348,
+     "Shield_Sector_Keel_1": 0.573,
+     "Ext_Airlock_Flood_1": 0.626,
+     "Ext_Airlock_Flood_2": 0.626,
+     "Casing_Collar_Seams_Long": 0.677,
+     "Storeroom_Shell": 0.75
+    },
+    "status": "CLEAR"
+   },
+   "outer_neck": {
+    "intersects": [],
+    "below_clearance": {},
+    "nearest": {
+     "Hull_Forward_Collar": 0.607,
+     "Casing_Collar_Seams_Long": 0.952,
+     "Ext_Airlock_Flood_1": 0.96,
+     "Ext_Airlock_Flood_2": 0.96,
+     "Casing_Collar_Seams_Hoop": 1.208
+    },
+    "status": "CLEAR"
+   },
+   "leaf": {
+    "intersects": [],
+    "below_clearance": {},
+    "nearest": {
+     "Hull_Forward_Collar": 0.793,
+     "Ext_Airlock_Flood_1": 1.094,
+     "Ext_Airlock_Flood_2": 1.094,
+     "Casing_Collar_Seams_Long": 1.136,
+     "Storeroom_Shell": 1.2,
+     "Storeroom_Light": 1.265
+    },
+    "status": "CLEAR"
+   },
+   "hull_penetration_outside_m": 1.3
+  },
+  "SP11_TWO_PERSON_110": {
+   "chamber_shell": {
+    "intersects": [],
+    "below_clearance": {},
+    "nearest": {
+     "Hull_Forward_Collar": 0.314,
+     "Shield_Sector_Keel_1": 0.524,
+     "Ext_Airlock_Flood_1": 0.578,
+     "Ext_Airlock_Flood_2": 0.578,
+     "Casing_Collar_Seams_Long": 0.635,
+     "Storeroom_Shell": 0.7
+    },
+    "status": "CLEAR"
+   },
+   "outer_neck": {
+    "intersects": [],
+    "below_clearance": {},
+    "nearest": {
+     "Hull_Forward_Collar": 0.557,
+     "Casing_Collar_Seams_Long": 0.903,
+     "Ext_Airlock_Flood_1": 0.91,
+     "Ext_Airlock_Flood_2": 0.91,
+     "Casing_Collar_Seams_Hoop": 1.158
+    },
+    "status": "CLEAR"
+   },
+   "leaf": {
+    "intersects": [],
+    "below_clearance": {},
+    "nearest": {
+     "Hull_Forward_Collar": 0.749,
+     "Ext_Airlock_Flood_1": 1.046,
+     "Ext_Airlock_Flood_2": 1.046,
+     "Casing_Collar_Seams_Long": 1.091,
+     "Storeroom_Shell": 1.15,
+     "Storeroom_Light": 1.235
+    },
+    "status": "CLEAR"
+   },
+   "hull_penetration_outside_m": 1.4
+  },
+  "SP11_SEQUENTIAL_110": {
+   "chamber_shell": {
+    "intersects": [],
+    "below_clearance": {},
+    "nearest": {
+     "Hull_Forward_Collar": 0.314,
+     "Shield_Sector_Keel_1": 0.524,
+     "Ext_Airlock_Flood_1": 0.578,
+     "Ext_Airlock_Flood_2": 0.578,
+     "Casing_Collar_Seams_Long": 0.635,
+     "Storeroom_Shell": 0.7
+    },
+    "status": "CLEAR"
+   },
+   "outer_neck": {
+    "intersects": [],
+    "below_clearance": {},
+    "nearest": {
+     "Hull_Forward_Collar": 0.557,
+     "Casing_Collar_Seams_Long": 0.903,
+     "Ext_Airlock_Flood_1": 0.91,
+     "Ext_Airlock_Flood_2": 0.91,
+     "Casing_Collar_Seams_Hoop": 1.158
+    },
+    "status": "CLEAR"
+   },
+   "leaf": {
+    "intersects": [],
+    "below_clearance": {},
+    "nearest": {
+     "Hull_Forward_Collar": 0.749,
+     "Ext_Airlock_Flood_1": 1.046,
+     "Ext_Airlock_Flood_2": 1.046,
+     "Casing_Collar_Seams_Long": 1.091,
+     "Storeroom_Shell": 1.15,
+     "Storeroom_Light": 1.235
+    },
+    "status": "CLEAR"
+   },
+   "hull_penetration_outside_m": 1.4
+  },
+  "SP11_TWO_PERSON_120": {
+   "chamber_shell": {
+    "intersects": [],
+    "below_clearance": {},
+    "nearest": {
+     "Hull_Forward_Collar": 0.285,
+     "Shield_Sector_Keel_1": 0.477,
+     "Ext_Airlock_Flood_1": 0.529,
+     "Ext_Airlock_Flood_2": 0.529,
+     "Casing_Collar_Seams_Long": 0.593,
+     "Storeroom_Shell": 0.65
+    },
+    "status": "CLEAR"
+   },
+   "outer_neck": {
+    "intersects": [],
+    "below_clearance": {},
+    "nearest": {
+     "Hull_Forward_Collar": 0.508,
+     "Casing_Collar_Seams_Long": 0.854,
+     "Ext_Airlock_Flood_1": 0.86,
+     "Ext_Airlock_Flood_2": 0.86,
+     "Casing_Collar_Seams_Hoop": 1.109
+    },
+    "status": "CLEAR"
+   },
+   "leaf": {
+    "intersects": [],
+    "below_clearance": {},
+    "nearest": {
+     "Hull_Forward_Collar": 0.706,
+     "Ext_Airlock_Flood_1": 0.998,
+     "Ext_Airlock_Flood_2": 0.998,
+     "Casing_Collar_Seams_Long": 1.046,
+     "Storeroom_Shell": 1.1,
+     "Storeroom_Light": 1.213
+    },
+    "status": "CLEAR"
+   },
+   "hull_penetration_outside_m": 1.5
+  },
+  "SP11_SEQUENTIAL_120": {
+   "chamber_shell": {
+    "intersects": [],
+    "below_clearance": {},
+    "nearest": {
+     "Hull_Forward_Collar": 0.285,
+     "Shield_Sector_Keel_1": 0.477,
+     "Ext_Airlock_Flood_1": 0.529,
+     "Ext_Airlock_Flood_2": 0.529,
+     "Casing_Collar_Seams_Long": 0.593,
+     "Storeroom_Shell": 0.65
+    },
+    "status": "CLEAR"
+   },
+   "outer_neck": {
+    "intersects": [],
+    "below_clearance": {},
+    "nearest": {
+     "Hull_Forward_Collar": 0.508,
+     "Casing_Collar_Seams_Long": 0.854,
+     "Ext_Airlock_Flood_1": 0.86,
+     "Ext_Airlock_Flood_2": 0.86,
+     "Casing_Collar_Seams_Hoop": 1.109
+    },
+    "status": "CLEAR"
+   },
+   "leaf": {
+    "intersects": [],
+    "below_clearance": {},
+    "nearest": {
+     "Hull_Forward_Collar": 0.706,
+     "Ext_Airlock_Flood_1": 0.998,
+     "Ext_Airlock_Flood_2": 0.998,
+     "Casing_Collar_Seams_Long": 1.046,
+     "Storeroom_Shell": 1.1,
+     "Storeroom_Light": 1.213
+    },
+    "status": "CLEAR"
+   },
+   "hull_penetration_outside_m": 1.5
+  },
+  "SP11_TWO_PERSON_135": {
+   "chamber_shell": {
+    "intersects": [],
+    "below_clearance": {},
+    "nearest": {
+     "Hull_Forward_Collar": 0.281,
+     "Shield_Sector_Keel_1": 0.327,
+     "Ext_Airlock_Flood_1": 0.409,
+     "Ext_Airlock_Flood_2": 0.409,
+     "Storeroom_Shell": 0.5,
+     "Casing_Collar_Seams_Long": 0.513
+    },
+    "status": "CLEAR"
+   },
+   "outer_neck": {
+    "intersects": [],
+    "below_clearance": {},
+    "nearest": {
+     "Hull_Forward_Collar": 0.442,
+     "Casing_Collar_Seams_Long": 0.778,
+     "Ext_Airlock_Flood_1": 0.785,
+     "Ext_Airlock_Flood_2": 0.785,
+     "Casing_Collar_Seams_Hoop": 1.033
+    },
+    "status": "CLEAR"
+   },
+   "leaf": {
+    "intersects": [],
+    "below_clearance": {},
+    "nearest": {
+     "Hull_Forward_Collar": 0.674,
+     "Ext_Airlock_Flood_1": 0.942,
+     "Ext_Airlock_Flood_2": 0.942,
+     "Casing_Collar_Seams_Long": 1.003,
+     "Storeroom_Shell": 1.025,
+     "Casing_Collar_Seams_Hoop": 1.211
+    },
+    "status": "CLEAR"
+   },
+   "hull_penetration_outside_m": 1.65
+  },
+  "SP11_SEQUENTIAL_135": {
+   "chamber_shell": {
+    "intersects": [],
+    "below_clearance": {},
+    "nearest": {
+     "Hull_Forward_Collar": 0.281,
+     "Shield_Sector_Keel_1": 0.328,
+     "Ext_Airlock_Flood_1": 0.409,
+     "Ext_Airlock_Flood_2": 0.409,
+     "Storeroom_Shell": 0.5,
+     "Casing_Collar_Seams_Long": 0.513
+    },
+    "status": "CLEAR"
+   },
+   "outer_neck": {
+    "intersects": [],
+    "below_clearance": {},
+    "nearest": {
+     "Hull_Forward_Collar": 0.442,
+     "Casing_Collar_Seams_Long": 0.778,
+     "Ext_Airlock_Flood_1": 0.785,
+     "Ext_Airlock_Flood_2": 0.785,
+     "Casing_Collar_Seams_Hoop": 1.033
+    },
+    "status": "CLEAR"
+   },
+   "leaf": {
+    "intersects": [],
+    "below_clearance": {},
+    "nearest": {
+     "Hull_Forward_Collar": 0.674,
+     "Ext_Airlock_Flood_1": 0.942,
+     "Ext_Airlock_Flood_2": 0.942,
+     "Casing_Collar_Seams_Long": 1.003,
+     "Storeroom_Shell": 1.025,
+     "Storeroom_Light": 1.196
+    },
+    "status": "CLEAR"
+   },
+   "hull_penetration_outside_m": 1.65
+  }
+ },
+ "rooms": {
+  "room": {
+   "intersects": [],
+   "below_clearance": {},
+   "nearest": {
+    "Survival_Reserve_1": 0.172,
+    "Shield_Sector_Keel_1": 0.221,
+    "Forward_Mount_Strut_0": 0.233,
+    "Structural_Spine": 0.25,
+    "Crew_Trunk": 0.35,
+    "Crew_Trunk_Light_1_8": 0.399
+   },
+   "status": "CLEAR"
+  },
+  "fixture": {
+   "intersects": [],
+   "below_clearance": {},
+   "nearest": {
+    "Structural_Spine": 0.305,
+    "Forward_Mount_Strut_0": 0.528,
+    "Crew_Trunk": 0.688,
+    "Storeroom_Shell": 0.691,
+    "Storeroom_Rack_Inner_1_Net": 0.741,
+    "Storeroom_Light": 0.741
+   },
+   "status": "CLEAR"
+  }
+ },
+ "fixtures_vs_chamber": {
+  "SP12_DON_STAND_A": "CLEAR",
+  "SP12_DON_STAND_B": "CLEAR",
+  "SP12_PRESSURE_CHECK": "CLEAR",
+  "SP12_O2_INTERFACE": "CLEAR",
+  "SP12_TOOL_CHECKOUT": "CLEAR",
+  "SP12_BUDDY_ZONE": "CLEAR",
+  "SP13_DRY_RACK": "CLEAR",
+  "SP13_CHARGE_PANEL": "CLEAR",
+  "SP13_BENCH": "CLEAR",
+  "SP13_SPARES": "CLEAR"
+ },
+ "recommendation": "SP11_TWO_PERSON_110"
+}

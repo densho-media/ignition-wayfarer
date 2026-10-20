@@ -1,0 +1,91 @@
+{
+ "study": "Tank-bay survey (B01 measurement; owner 2026-10-17 S&E 15!A200 OWN-SCI, 98!A114)",
+ "status": "MEASUREMENT / DIAGNOSTIC; no tank, inventory or mass released or chosen",
+ "method": "Saved COAST vehicle, every stationary object sampled along its edges (<= 0.2 m) into 0.25 m axial bins over X -101.0..82.0 m; inner limit = spine outer radius + 0.15 m, outer limit = least radius of other hardware - 0.15 m (hull skin, envelopes, display objects and the schematic tanks skipped); bays start forward of the engineering envelope (X -71.85 m) and are runs with >= 1.0 m free annulus. Patterns at the bay's narrowest section: ANNULAR, FOUR / SIX cylinders around the spine (PROTOTYPE geometry).",
+ "reference_density": {
+  "lh2_kg_m3": 70.85,
+  "status": "REFERENCE PHYSICS (scale only)"
+ },
+ "built_tanks": {
+  "x0_m": -73.0,
+  "x1_m": -61.0,
+  "count": 4,
+  "radius_m": 1.4,
+  "length_m": 12.0,
+  "volume_m3": 295.6,
+  "centroid_x_m": -67.0,
+  "lh2_t_at_nbp": 20.9,
+  "status": "PROTOTYPE"
+ },
+ "bays": [
+  {
+   "x0_m": -68.25,
+   "x1_m": -60.5,
+   "length_m": 7.75,
+   "centroid_x_m": -64.37,
+   "envelope_m3": 517.0,
+   "envelope_lh2_t_at_nbp": 36.6,
+   "narrowest": {
+    "r_in_m": 1.025,
+    "r_out_m": 4.721,
+    "limited_by": "Primary_Rail_10_2"
+   },
+   "patterns": {
+    "ANNULAR": {
+     "tank_radius_m": null,
+     "volume_m3": 517.0,
+     "lh2_t_at_nbp": 36.6
+    },
+    "FOUR": {
+     "tank_radius_m": 1.848,
+     "volume_m3": 332.5,
+     "lh2_t_at_nbp": 23.6
+    },
+    "SIX": {
+     "tank_radius_m": 1.436,
+     "volume_m3": 301.4,
+     "lh2_t_at_nbp": 21.4
+    }
+   }
+  },
+  {
+   "x0_m": -57.5,
+   "x1_m": 81.25,
+   "length_m": 138.75,
+   "centroid_x_m": 11.88,
+   "envelope_m3": 9256.0,
+   "envelope_lh2_t_at_nbp": 655.8,
+   "narrowest": {
+    "r_in_m": 1.025,
+    "r_out_m": 4.721,
+    "limited_by": "Primary_Rail_43_0"
+   },
+   "patterns": {
+    "ANNULAR": {
+     "tank_radius_m": null,
+     "volume_m3": 9255.9,
+     "lh2_t_at_nbp": 655.8
+    },
+    "FOUR": {
+     "tank_radius_m": 1.848,
+     "volume_m3": 5953.5,
+     "lh2_t_at_nbp": 421.8
+    },
+    "SIX": {
+     "tank_radius_m": 1.436,
+     "volume_m3": 5396.3,
+     "lh2_t_at_nbp": 382.3
+    }
+   }
+  }
+ ],
+ "svg": "runs/20261017T1600Z-tank-bays/elevation.svg",
+ "totals": {
+  "envelope_m3": 9773.0,
+  "envelope_lh2_t_at_nbp": 692.4,
+  "centroid_x_m": 7.85,
+  "four_m3": 6286.0,
+  "six_m3": 5697.7
+ },
+ "findings": "## Findings (Claude, from the tables)\n\n1. **The model already has a large unallocated interior.** Between the battery / pulse bank and ring A's vestibule the hull body holds only\n   the spine near the axis; the free annulus runs from the spine to just inside the cage, the drone and crawler rails and the radiator root\n   chases. Its gross envelope is the total above, many times the 4 schematic tanks.\n2. **What limits it** is the hardware on the cage line (rails, stays, root posts, chases), not the hull skin: the narrowest sections are\n   named per bay. A tank pattern at a constant section loses the bulges; FOUR / SIX cylinders keep a service gap between them.\n3. **Consequences the owner should weigh** (none decided here): a tank bay over the whole body moves the reaction-mass centroid to about\n   the envelope centroid (far forward of the drive), lengthens the cryogenic feed and the stepped shield penetrations, and fills the only\n   axial path aft of the crew trunk (no internal crew route aft exists in the model; an aft service corridor is OPEN and would reduce\n   every figure). The interior hot-loop route from the drive to the radiator root chases (OPEN, HR-001) would cross it as well.\n   Geometric shadowing behind the shield slab is not a dose result (OD-026).\n4. **LH2 tonnes are a scale only** (liquid parahydrogen at 20.3 K, no ullage, insulation, wall, structure, boil-off or D / He-3 split)."
+}

@@ -1,0 +1,1922 @@
+{
+ "study": "Ring B in-sector care + ring A worst-case comparator (owner 15!A169, 2026-10-13); NONCANON PROTOTYPE disposable",
+ "source": [
+  "src/wayfarer/studies/ringb_insector_care.py",
+  "runs/20261013T1515Z-ringb-insector-care"
+ ],
+ "note": "route keys deliberately outside access_integrated.CHAINS filters: re-running access_integrated does not change its chains until a chain is added",
+ "segments": [
+  {
+   "id": "care|A1|deck",
+   "route": "ringA-care:A1 in-sector care",
+   "states": [
+    "0g",
+    "spin",
+    "stopped"
+   ],
+   "variant": "as built",
+   "case": "worst part: carrier sweep hatch -> care point + slide (worst class)",
+   "least_m": -0.439,
+   "status": "FAIL",
+   "worst_case_over": [
+    "injury classes A rigid litter, C vacuum mattress, K litter + kit, S suited",
+    "body size x1.00 and x1.08",
+    "doors 1.00 and 0.90 (the sector hatch leaf)",
+    "search seeds 17,101,102,103 (+201,202 large, 301 doors 0.90)",
+    "6 pose families with six +-0.02 m / +-0.05 rad wobbles",
+    "two inline rescuers (both ends, inline and +-0.10 m)",
+    "slide onto the care point: six poses, best-found about each, every state and seed",
+    "zone screen: care, transfer (A/C/K/S x1.00/x1.08), reach, egress"
+   ],
+   "seed_spread_m": null,
+   "nearest": "Bunk_1",
+   "note": "HABITATION sector A1, deck frame; care point Bunk_1; parts {\"screen care station (care point + kit + two attendants)\": 0.15, \"screen transfer station (worst carrier beside + rescuers)\": -0.03, \"screen attendant reach (0.60 m)\": 0.091, \"screen egress past the deployed station (0.60 m)\": -0.142, \"mesh attendants (capsules, built meshes)\": 0.043, \"mesh kit (no overlap)\": 0.0, \"carrier sweep hatch -> care point + slide (worst class)\": -0.439}; unsuited-only least -0.142."
+  },
+  {
+   "id": "care|A1|aft",
+   "route": "ringA-care:A1 in-sector care",
+   "states": [
+    "locked_1.5g"
+   ],
+   "variant": "as built",
+   "case": "worst part: screen transfer station (worst carrier beside + rescuers)",
+   "least_m": -0.28,
+   "status": "FAIL",
+   "worst_case_over": [
+    "injury classes A rigid litter, C vacuum mattress, K litter + kit, S suited",
+    "body size x1.00 and x1.08",
+    "doors 1.00 and 0.90 (the sector hatch leaf)",
+    "search seeds 17,101,102,103 (+201,202 large, 301 doors 0.90)",
+    "6 pose families with six +-0.02 m / +-0.05 rad wobbles",
+    "two inline rescuers (both ends, inline and +-0.10 m)",
+    "slide onto the care point: six poses, best-found about each, every state and seed",
+    "zone screen: care, transfer (A/C/K/S x1.00/x1.08), reach, egress"
+   ],
+   "seed_spread_m": null,
+   "nearest": "Seraph_Niche_Partition",
+   "note": "HABITATION sector A1, aft frame; care point Burn_Couch_2; parts {\"screen care station (care point + kit + two attendants)\": 0.108, \"screen transfer station (worst carrier beside + rescuers)\": -0.28, \"screen attendant reach (0.60 m)\": 0.08, \"screen egress past the deployed station (0.60 m)\": -0.25, \"mesh attendants (capsules, built meshes)\": 0.1, \"mesh kit (no overlap)\": 0.3, \"carrier sweep hatch -> care point + slide (worst class)\": 0.06}; unsuited-only least -0.25."
+  },
+  {
+   "id": "care|A2|deck",
+   "route": "ringA-care:A2 in-sector care",
+   "states": [
+    "0g",
+    "spin",
+    "stopped"
+   ],
+   "variant": "as built",
+   "case": "worst part: carrier sweep hatch -> care point + slide (worst class)",
+   "least_m": -0.14,
+   "status": "FAIL",
+   "worst_case_over": [
+    "injury classes A rigid litter, C vacuum mattress, K litter + kit, S suited",
+    "body size x1.00 and x1.08",
+    "doors 1.00 and 0.90 (the sector hatch leaf)",
+    "search seeds 17,101,102,103 (+201,202 large, 301 doors 0.90)",
+    "6 pose families with six +-0.02 m / +-0.05 rad wobbles",
+    "two inline rescuers (both ends, inline and +-0.10 m)",
+    "slide onto the care point: six poses, best-found about each, every state and seed",
+    "zone screen: care, transfer (A/C/K/S x1.00/x1.08), reach, egress"
+   ],
+   "seed_spread_m": null,
+   "nearest": "Medical_Couch",
+   "note": "WORK_MEDICAL_OPS sector A2, deck frame; care point Medical_Couch; parts {\"screen care station (care point + kit + two attendants)\": 0.125, \"screen transfer station (worst carrier beside + rescuers)\": -0.03, \"screen attendant reach (0.60 m)\": 0.091, \"screen egress past the deployed station (0.60 m)\": 0.1, \"mesh attendants (capsules, built meshes)\": 0.036, \"mesh kit (no overlap)\": 0.3, \"carrier sweep hatch -> care point + slide (worst class)\": -0.14}; unsuited-only least -0.14."
+  },
+  {
+   "id": "care|A2|aft",
+   "route": "ringA-care:A2 in-sector care",
+   "states": [
+    "locked_1.5g"
+   ],
+   "variant": "as built",
+   "case": "worst part: carrier sweep hatch -> care point + slide (worst class)",
+   "least_m": -0.45,
+   "status": "FAIL",
+   "worst_case_over": [
+    "injury classes A rigid litter, C vacuum mattress, K litter + kit, S suited",
+    "body size x1.00 and x1.08",
+    "doors 1.00 and 0.90 (the sector hatch leaf)",
+    "search seeds 17,101,102,103 (+201,202 large, 301 doors 0.90)",
+    "6 pose families with six +-0.02 m / +-0.05 rad wobbles",
+    "two inline rescuers (both ends, inline and +-0.10 m)",
+    "slide onto the care point: six poses, best-found about each, every state and seed",
+    "zone screen: care, transfer (A/C/K/S x1.00/x1.08), reach, egress"
+   ],
+   "seed_spread_m": null,
+   "nearest": "Medical_Couch",
+   "note": "WORK_MEDICAL_OPS sector A2, aft frame; care point Burn_Couch_1; parts {\"screen care station (care point + kit + two attendants)\": 0.1, \"screen transfer station (worst carrier beside + rescuers)\": -0.28, \"screen attendant reach (0.60 m)\": 0.08, \"screen egress past the deployed station (0.60 m)\": -0.066, \"mesh attendants (capsules, built meshes)\": -0.199, \"mesh kit (no overlap)\": 0.3, \"carrier sweep hatch -> care point + slide (worst class)\": -0.45}; unsuited-only least -0.249."
+  },
+  {
+   "id": "care|A3|deck",
+   "route": "ringA-care:A3 in-sector care",
+   "states": [
+    "0g",
+    "spin",
+    "stopped"
+   ],
+   "variant": "garden swap + fold-down couch (PROTOTYPE)",
+   "case": "worst part: screen egress past the deployed station (0.60 m)",
+   "least_m": 0.075,
+   "status": "PASS",
+   "worst_case_over": [
+    "injury classes A rigid litter, C vacuum mattress, K litter + kit, S suited",
+    "body size x1.00 and x1.08",
+    "doors 1.00 and 0.90 (the sector hatch leaf)",
+    "search seeds 17,101,102,103 (+201,202 large, 301 doors 0.90)",
+    "6 pose families with six +-0.02 m / +-0.05 rad wobbles",
+    "two inline rescuers (both ends, inline and +-0.10 m)",
+    "slide onto the care point: six poses, best-found about each, every state and seed",
+    "zone screen: care, transfer (A/C/K/S x1.00/x1.08), reach, egress"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "LIFE_SUPPORT_GARDEN_COMMON sector A3, deck frame; care point Care_Couch; parts {\"screen care station (care point + kit + two attendants)\": 0.3, \"screen transfer station (worst carrier beside + rescuers)\": 0.3, \"screen attendant reach (0.60 m)\": 0.156, \"screen egress past the deployed station (0.60 m)\": 0.075, \"mesh attendants (capsules, built meshes)\": 0.2, \"mesh kit (no overlap)\": 0.3, \"carrier sweep hatch -> care point + slide (worst class)\": 0.1, \"screen stowed-couch egress (0.60 m)\": 0.075}; unsuited-only least 0.075."
+  },
+  {
+   "id": "care|A3|aft",
+   "route": "ringA-care:A3 in-sector care",
+   "states": [
+    "locked_1.5g"
+   ],
+   "variant": "garden swap + fold-down couch (PROTOTYPE)",
+   "case": "worst part: carrier sweep hatch -> care point + slide (worst class)",
+   "least_m": -0.311,
+   "status": "FAIL",
+   "worst_case_over": [
+    "injury classes A rigid litter, C vacuum mattress, K litter + kit, S suited",
+    "body size x1.00 and x1.08",
+    "doors 1.00 and 0.90 (the sector hatch leaf)",
+    "search seeds 17,101,102,103 (+201,202 large, 301 doors 0.90)",
+    "6 pose families with six +-0.02 m / +-0.05 rad wobbles",
+    "two inline rescuers (both ends, inline and +-0.10 m)",
+    "slide onto the care point: six poses, best-found about each, every state and seed",
+    "zone screen: care, transfer (A/C/K/S x1.00/x1.08), reach, egress"
+   ],
+   "seed_spread_m": null,
+   "nearest": "Sector_Hatch_Leaf",
+   "note": "LIFE_SUPPORT_GARDEN_COMMON sector A3, aft frame; care point Burn_Couch_1; parts {\"screen care station (care point + kit + two attendants)\": 0.3, \"screen transfer station (worst carrier beside + rescuers)\": -0.28, \"screen attendant reach (0.60 m)\": 0.08, \"screen egress past the deployed station (0.60 m)\": -0.066, \"mesh attendants (capsules, built meshes)\": 0.057, \"mesh kit (no overlap)\": 0.3, \"carrier sweep hatch -> care point + slide (worst class)\": -0.311}; unsuited-only least -0.201."
+  },
+  {
+   "id": "care|B1|deck",
+   "route": "ringB-care:B1 in-sector care",
+   "states": [
+    "0g",
+    "spin",
+    "stopped"
+   ],
+   "variant": "as built",
+   "case": "worst part: carrier sweep hatch -> care point + slide (worst class)",
+   "least_m": -0.439,
+   "status": "FAIL",
+   "worst_case_over": [
+    "injury classes A rigid litter, C vacuum mattress, K litter + kit, S suited",
+    "body size x1.00 and x1.08",
+    "doors 1.00 and 0.90 (the sector hatch leaf)",
+    "search seeds 17,101,102,103 (+201,202 large, 301 doors 0.90)",
+    "6 pose families with six +-0.02 m / +-0.05 rad wobbles",
+    "two inline rescuers (both ends, inline and +-0.10 m)",
+    "slide onto the care point: six poses, best-found about each, every state and seed",
+    "zone screen: care, transfer (A/C/K/S x1.00/x1.08), reach, egress"
+   ],
+   "seed_spread_m": null,
+   "nearest": "Bunk_1",
+   "note": "HABITATION sector B1, deck frame; care point Bunk_1; parts {\"screen care station (care point + kit + two attendants)\": 0.15, \"screen transfer station (worst carrier beside + rescuers)\": -0.03, \"screen attendant reach (0.60 m)\": 0.091, \"screen egress past the deployed station (0.60 m)\": -0.142, \"mesh attendants (capsules, built meshes)\": 0.043, \"mesh kit (no overlap)\": 0.0, \"carrier sweep hatch -> care point + slide (worst class)\": -0.439}; unsuited-only least -0.142."
+  },
+  {
+   "id": "care|B1|aft",
+   "route": "ringB-care:B1 in-sector care",
+   "states": [
+    "locked_1.5g"
+   ],
+   "variant": "as built",
+   "case": "worst part: screen transfer station (worst carrier beside + rescuers)",
+   "least_m": -0.28,
+   "status": "FAIL",
+   "worst_case_over": [
+    "injury classes A rigid litter, C vacuum mattress, K litter + kit, S suited",
+    "body size x1.00 and x1.08",
+    "doors 1.00 and 0.90 (the sector hatch leaf)",
+    "search seeds 17,101,102,103 (+201,202 large, 301 doors 0.90)",
+    "6 pose families with six +-0.02 m / +-0.05 rad wobbles",
+    "two inline rescuers (both ends, inline and +-0.10 m)",
+    "slide onto the care point: six poses, best-found about each, every state and seed",
+    "zone screen: care, transfer (A/C/K/S x1.00/x1.08), reach, egress"
+   ],
+   "seed_spread_m": null,
+   "nearest": "Seraph_Niche_Partition",
+   "note": "HABITATION sector B1, aft frame; care point Burn_Couch_2; parts {\"screen care station (care point + kit + two attendants)\": 0.108, \"screen transfer station (worst carrier beside + rescuers)\": -0.28, \"screen attendant reach (0.60 m)\": 0.08, \"screen egress past the deployed station (0.60 m)\": -0.25, \"mesh attendants (capsules, built meshes)\": 0.1, \"mesh kit (no overlap)\": 0.3, \"carrier sweep hatch -> care point + slide (worst class)\": 0.06}; unsuited-only least -0.25."
+  },
+  {
+   "id": "care|B2|deck",
+   "route": "ringB-care:B2 in-sector care",
+   "states": [
+    "0g",
+    "spin",
+    "stopped"
+   ],
+   "variant": "as built",
+   "case": "worst part: carrier sweep hatch -> care point + slide (worst class)",
+   "least_m": -0.14,
+   "status": "FAIL",
+   "worst_case_over": [
+    "injury classes A rigid litter, C vacuum mattress, K litter + kit, S suited",
+    "body size x1.00 and x1.08",
+    "doors 1.00 and 0.90 (the sector hatch leaf)",
+    "search seeds 17,101,102,103 (+201,202 large, 301 doors 0.90)",
+    "6 pose families with six +-0.02 m / +-0.05 rad wobbles",
+    "two inline rescuers (both ends, inline and +-0.10 m)",
+    "slide onto the care point: six poses, best-found about each, every state and seed",
+    "zone screen: care, transfer (A/C/K/S x1.00/x1.08), reach, egress"
+   ],
+   "seed_spread_m": null,
+   "nearest": "Medical_Couch",
+   "note": "WORK_MEDICAL_OPS sector B2, deck frame; care point Medical_Couch; parts {\"screen care station (care point + kit + two attendants)\": 0.125, \"screen transfer station (worst carrier beside + rescuers)\": -0.03, \"screen attendant reach (0.60 m)\": 0.091, \"screen egress past the deployed station (0.60 m)\": 0.1, \"mesh attendants (capsules, built meshes)\": 0.036, \"mesh kit (no overlap)\": 0.3, \"carrier sweep hatch -> care point + slide (worst class)\": -0.14}; unsuited-only least -0.14."
+  },
+  {
+   "id": "care|B2|aft",
+   "route": "ringB-care:B2 in-sector care",
+   "states": [
+    "locked_1.5g"
+   ],
+   "variant": "as built",
+   "case": "worst part: carrier sweep hatch -> care point + slide (worst class)",
+   "least_m": -0.45,
+   "status": "FAIL",
+   "worst_case_over": [
+    "injury classes A rigid litter, C vacuum mattress, K litter + kit, S suited",
+    "body size x1.00 and x1.08",
+    "doors 1.00 and 0.90 (the sector hatch leaf)",
+    "search seeds 17,101,102,103 (+201,202 large, 301 doors 0.90)",
+    "6 pose families with six +-0.02 m / +-0.05 rad wobbles",
+    "two inline rescuers (both ends, inline and +-0.10 m)",
+    "slide onto the care point: six poses, best-found about each, every state and seed",
+    "zone screen: care, transfer (A/C/K/S x1.00/x1.08), reach, egress"
+   ],
+   "seed_spread_m": null,
+   "nearest": "Medical_Couch",
+   "note": "WORK_MEDICAL_OPS sector B2, aft frame; care point Burn_Couch_1; parts {\"screen care station (care point + kit + two attendants)\": 0.1, \"screen transfer station (worst carrier beside + rescuers)\": -0.28, \"screen attendant reach (0.60 m)\": 0.08, \"screen egress past the deployed station (0.60 m)\": -0.066, \"mesh attendants (capsules, built meshes)\": -0.199, \"mesh kit (no overlap)\": 0.3, \"carrier sweep hatch -> care point + slide (worst class)\": -0.45}; unsuited-only least -0.249."
+  },
+  {
+   "id": "care|B3|deck",
+   "route": "ringB-care:B3 in-sector care",
+   "states": [
+    "0g",
+    "spin",
+    "stopped"
+   ],
+   "variant": "garden swap + fold-down couch (PROTOTYPE)",
+   "case": "worst part: screen egress past the deployed station (0.60 m)",
+   "least_m": 0.075,
+   "status": "PASS",
+   "worst_case_over": [
+    "injury classes A rigid litter, C vacuum mattress, K litter + kit, S suited",
+    "body size x1.00 and x1.08",
+    "doors 1.00 and 0.90 (the sector hatch leaf)",
+    "search seeds 17,101,102,103 (+201,202 large, 301 doors 0.90)",
+    "6 pose families with six +-0.02 m / +-0.05 rad wobbles",
+    "two inline rescuers (both ends, inline and +-0.10 m)",
+    "slide onto the care point: six poses, best-found about each, every state and seed",
+    "zone screen: care, transfer (A/C/K/S x1.00/x1.08), reach, egress"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "LIFE_SUPPORT_GARDEN_COMMON sector B3, deck frame; care point Care_Couch; parts {\"screen care station (care point + kit + two attendants)\": 0.3, \"screen transfer station (worst carrier beside + rescuers)\": 0.3, \"screen attendant reach (0.60 m)\": 0.156, \"screen egress past the deployed station (0.60 m)\": 0.075, \"mesh attendants (capsules, built meshes)\": 0.2, \"mesh kit (no overlap)\": 0.3, \"carrier sweep hatch -> care point + slide (worst class)\": 0.1, \"screen stowed-couch egress (0.60 m)\": 0.075}; unsuited-only least 0.075."
+  },
+  {
+   "id": "care|B3|aft",
+   "route": "ringB-care:B3 in-sector care",
+   "states": [
+    "locked_1.5g"
+   ],
+   "variant": "garden swap + fold-down couch (PROTOTYPE)",
+   "case": "worst part: carrier sweep hatch -> care point + slide (worst class)",
+   "least_m": -0.311,
+   "status": "FAIL",
+   "worst_case_over": [
+    "injury classes A rigid litter, C vacuum mattress, K litter + kit, S suited",
+    "body size x1.00 and x1.08",
+    "doors 1.00 and 0.90 (the sector hatch leaf)",
+    "search seeds 17,101,102,103 (+201,202 large, 301 doors 0.90)",
+    "6 pose families with six +-0.02 m / +-0.05 rad wobbles",
+    "two inline rescuers (both ends, inline and +-0.10 m)",
+    "slide onto the care point: six poses, best-found about each, every state and seed",
+    "zone screen: care, transfer (A/C/K/S x1.00/x1.08), reach, egress"
+   ],
+   "seed_spread_m": null,
+   "nearest": "Sector_Hatch_Leaf",
+   "note": "LIFE_SUPPORT_GARDEN_COMMON sector B3, aft frame; care point Burn_Couch_1; parts {\"screen care station (care point + kit + two attendants)\": 0.3, \"screen transfer station (worst carrier beside + rescuers)\": -0.28, \"screen attendant reach (0.60 m)\": 0.08, \"screen egress past the deployed station (0.60 m)\": -0.066, \"mesh attendants (capsules, built meshes)\": 0.057, \"mesh kit (no overlap)\": 0.3, \"carrier sweep hatch -> care point + slide (worst class)\": -0.311}; unsuited-only least -0.201."
+  },
+  {
+   "id": "ringA-wc:A1|built_wc|U",
+   "route": "ringA-wc:A1",
+   "states": [
+    "0g",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "built (ring A as built), worst-case re-run",
+   "case": "unsuited A/C/K, worst: A x1.08 doors 1.00 best family (+-0.02 m wobble)",
+   "least_m": -0.103,
+   "status": "FAIL",
+   "worst_case_over": [
+    "injury classes A rigid litter, C vacuum mattress, K litter + kit",
+    "body size x1.00 and x1.08",
+    "doors open 1.00 and 0.90",
+    "search seeds 17,101,102,103 (+201,202 large, 301 doors 0.90)",
+    "6 pose families (axis seed x roll -30/0/+30 deg) with six +-0.02 m / +-0.05 rad wobbles",
+    "two rescuers (both ends, inline and +-0.10 m lateral)"
+   ],
+   "seed_spread_m": [
+    0.016,
+    0.1
+   ],
+   "nearest": "Crew_Trunk",
+   "note": "ring A comparator (15!A169), ringb_unified.survey method on the built model; per class {\"A\": -0.103, \"C\": 0.018, \"K\": -0.103}; single-seed quote was 0.1; owner 15!A175: FAIL / REDESIGN REQUIRED; the single-seed quote is raw regression provenance only"
+  },
+  {
+   "id": "ringA-wc:A1|built_wc|S",
+   "route": "ringA-wc:A1",
+   "states": [
+    "0g",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "built (ring A as built), worst-case re-run",
+   "case": "suited S, worst: S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+   "least_m": -0.171,
+   "status": "FAIL",
+   "worst_case_over": [
+    "suited casualty S (0.857 m capsule on a litter frame)",
+    "body size x1.00 and x1.08",
+    "doors open 1.00 and 0.90",
+    "search seeds",
+    "6 pose families with wobbles",
+    "two rescuers"
+   ],
+   "seed_spread_m": [
+    -0.009,
+    0.069
+   ],
+   "nearest": "Crew_Trunk_Arrest_Rail",
+   "note": "ring A comparator (15!A169), ringb_unified.survey method on the built model; per class {\"S\": -0.171}; single-seed quote was 0.1; owner 15!A175: FAIL / REDESIGN REQUIRED; the single-seed quote is raw regression provenance only"
+  },
+  {
+   "id": "ringA-wc:A2|built_wc|U",
+   "route": "ringA-wc:A2",
+   "states": [
+    "spin"
+   ],
+   "variant": "built (ring A as built), worst-case re-run",
+   "case": "unsuited A/C/K, worst: A x1.00 doors 1.00 best family (+-0.02 m wobble)",
+   "least_m": -0.14,
+   "status": "FAIL",
+   "worst_case_over": [
+    "injury classes A rigid litter, C vacuum mattress, K litter + kit",
+    "body size x1.00 and x1.08",
+    "doors open 1.00 and 0.90",
+    "search seeds 17,101,102,103 (+201,202 large, 301 doors 0.90)",
+    "6 pose families (axis seed x roll -30/0/+30 deg) with six +-0.02 m / +-0.05 rad wobbles",
+    "two rescuers (both ends, inline and +-0.10 m lateral)"
+   ],
+   "seed_spread_m": [
+    -0.063,
+    0.003
+   ],
+   "nearest": "Structural_Spine",
+   "note": "ring A comparator (15!A169), ringb_unified.survey method on the built model; per class {\"A\": -0.14, \"C\": -0.14, \"K\": -0.14}; single-seed quote was -0.044; owner 15!A175: FAIL / REDESIGN REQUIRED; the single-seed quote is raw regression provenance only"
+  },
+  {
+   "id": "ringA-wc:A2|built_wc|S",
+   "route": "ringA-wc:A2",
+   "states": [
+    "spin"
+   ],
+   "variant": "built (ring A as built), worst-case re-run",
+   "case": "suited S, worst: S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+   "least_m": -0.455,
+   "status": "FAIL",
+   "worst_case_over": [
+    "suited casualty S (0.857 m capsule on a litter frame)",
+    "body size x1.00 and x1.08",
+    "doors open 1.00 and 0.90",
+    "search seeds",
+    "6 pose families with wobbles",
+    "two rescuers"
+   ],
+   "seed_spread_m": [
+    -0.218,
+    -0.15
+   ],
+   "nearest": "Crew_Trunk",
+   "note": "ring A comparator (15!A169), ringb_unified.survey method on the built model; per class {\"S\": -0.455}; single-seed quote was -0.044; owner 15!A175: FAIL / REDESIGN REQUIRED; the single-seed quote is raw regression provenance only"
+  },
+  {
+   "id": "ringA-wc:A3|built_wc|U",
+   "route": "ringA-wc:A3",
+   "states": [
+    "spin"
+   ],
+   "variant": "built (ring A as built), worst-case re-run",
+   "case": "unsuited A/C/K, worst: A x1.00 doors 1.00 best family (+-0.02 m wobble)",
+   "least_m": -0.14,
+   "status": "FAIL",
+   "worst_case_over": [
+    "injury classes A rigid litter, C vacuum mattress, K litter + kit",
+    "body size x1.00 and x1.08",
+    "doors open 1.00 and 0.90",
+    "search seeds 17,101,102,103 (+201,202 large, 301 doors 0.90)",
+    "6 pose families (axis seed x roll -30/0/+30 deg) with six +-0.02 m / +-0.05 rad wobbles",
+    "two rescuers (both ends, inline and +-0.10 m lateral)"
+   ],
+   "seed_spread_m": [
+    -0.104,
+    -0.001
+   ],
+   "nearest": "Structural_Spine",
+   "note": "ring A comparator (15!A169), ringb_unified.survey method on the built model; per class {\"A\": -0.14, \"C\": -0.14, \"K\": -0.14}; single-seed quote was -0.049; owner 15!A175: FAIL / REDESIGN REQUIRED; the single-seed quote is raw regression provenance only"
+  },
+  {
+   "id": "ringA-wc:A3|built_wc|S",
+   "route": "ringA-wc:A3",
+   "states": [
+    "spin"
+   ],
+   "variant": "built (ring A as built), worst-case re-run",
+   "case": "suited S, worst: S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+   "least_m": -0.452,
+   "status": "FAIL",
+   "worst_case_over": [
+    "suited casualty S (0.857 m capsule on a litter frame)",
+    "body size x1.00 and x1.08",
+    "doors open 1.00 and 0.90",
+    "search seeds",
+    "6 pose families with wobbles",
+    "two rescuers"
+   ],
+   "seed_spread_m": [
+    -0.217,
+    -0.16
+   ],
+   "nearest": "Crew_Trunk",
+   "note": "ring A comparator (15!A169), ringb_unified.survey method on the built model; per class {\"S\": -0.452}; single-seed quote was -0.049; owner 15!A175: FAIL / REDESIGN REQUIRED; the single-seed quote is raw regression provenance only"
+  },
+  {
+   "id": "ringA-wc:A2=>M|built_wc|U",
+   "route": "ringA-wc:A2=>M",
+   "states": [
+    "spin"
+   ],
+   "variant": "built (ring A as built), worst-case re-run",
+   "case": "unsuited A/C/K, worst: A x1.00 doors 1.00 best family (+-0.02 m wobble)",
+   "least_m": -0.14,
+   "status": "FAIL",
+   "worst_case_over": [
+    "injury classes A rigid litter, C vacuum mattress, K litter + kit",
+    "body size x1.00 and x1.08",
+    "doors open 1.00 and 0.90",
+    "search seeds 17,101,102,103 (+201,202 large, 301 doors 0.90)",
+    "6 pose families (axis seed x roll -30/0/+30 deg) with six +-0.02 m / +-0.05 rad wobbles",
+    "two rescuers (both ends, inline and +-0.10 m lateral)"
+   ],
+   "seed_spread_m": [
+    -0.063,
+    0.003
+   ],
+   "nearest": "Structural_Spine",
+   "note": "ring A comparator (15!A169), ringb_unified.survey method on the built model; per class {\"A\": -0.14, \"C\": -0.14, \"K\": -0.14}; single-seed quote was None; owner 15!A175: FAIL / REDESIGN REQUIRED; the single-seed quote is raw regression provenance only"
+  },
+  {
+   "id": "ringA-wc:A2=>M|built_wc|S",
+   "route": "ringA-wc:A2=>M",
+   "states": [
+    "spin"
+   ],
+   "variant": "built (ring A as built), worst-case re-run",
+   "case": "suited S, worst: S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+   "least_m": -0.455,
+   "status": "FAIL",
+   "worst_case_over": [
+    "suited casualty S (0.857 m capsule on a litter frame)",
+    "body size x1.00 and x1.08",
+    "doors open 1.00 and 0.90",
+    "search seeds",
+    "6 pose families with wobbles",
+    "two rescuers"
+   ],
+   "seed_spread_m": [
+    -0.218,
+    -0.15
+   ],
+   "nearest": "Crew_Trunk",
+   "note": "ring A comparator (15!A169), ringb_unified.survey method on the built model; per class {\"S\": -0.455}; single-seed quote was None; owner 15!A175: FAIL / REDESIGN REQUIRED; the single-seed quote is raw regression provenance only"
+  },
+  {
+   "id": "ringA-wc:A1=>A2|built_wc|U",
+   "route": "ringA-wc:A1=>A2",
+   "states": [
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "built (ring A as built), worst-case re-run",
+   "case": "unsuited A/C/K, worst: K x1.08 doors 1.00 best family (+-0.02 m wobble)",
+   "least_m": -0.065,
+   "status": "FAIL",
+   "worst_case_over": [
+    "injury classes A rigid litter, C vacuum mattress, K litter + kit",
+    "body size x1.00 and x1.08",
+    "doors open 1.00 and 0.90",
+    "search seeds 17,101,102,103 (+201,202 large, 301 doors 0.90)",
+    "6 pose families (axis seed x roll -30/0/+30 deg) with six +-0.02 m / +-0.05 rad wobbles",
+    "two rescuers (both ends, inline and +-0.10 m lateral)"
+   ],
+   "seed_spread_m": [
+    -0.005,
+    0.086
+   ],
+   "nearest": "Crew_Vestibule_1",
+   "note": "ring A comparator (15!A169), ringb_unified.survey method on the built model; per class {\"A\": -0.052, \"C\": 0.014, \"K\": -0.065}; single-seed quote was 0.062; owner 15!A175: FAIL / REDESIGN REQUIRED; the single-seed quote is raw regression provenance only"
+  },
+  {
+   "id": "ringA-wc:A1=>A2|built_wc|S",
+   "route": "ringA-wc:A1=>A2",
+   "states": [
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "built (ring A as built), worst-case re-run",
+   "case": "suited S, worst: S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+   "least_m": -0.243,
+   "status": "FAIL",
+   "worst_case_over": [
+    "suited casualty S (0.857 m capsule on a litter frame)",
+    "body size x1.00 and x1.08",
+    "doors open 1.00 and 0.90",
+    "search seeds",
+    "6 pose families with wobbles",
+    "two rescuers"
+   ],
+   "seed_spread_m": [
+    -0.035,
+    -0.026
+   ],
+   "nearest": "Structural_Spine",
+   "note": "ring A comparator (15!A169), ringb_unified.survey method on the built model; per class {\"S\": -0.243}; single-seed quote was 0.062; owner 15!A175: FAIL / REDESIGN REQUIRED; the single-seed quote is raw regression provenance only"
+  },
+  {
+   "id": "ringA-wc:A3=>A2|built_wc|U",
+   "route": "ringA-wc:A3=>A2",
+   "states": [
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "built (ring A as built), worst-case re-run",
+   "case": "unsuited A/C/K, worst: A x1.08 doors 1.00 best family (+-0.02 m wobble)",
+   "least_m": -0.073,
+   "status": "FAIL",
+   "worst_case_over": [
+    "injury classes A rigid litter, C vacuum mattress, K litter + kit",
+    "body size x1.00 and x1.08",
+    "doors open 1.00 and 0.90",
+    "search seeds 17,101,102,103 (+201,202 large, 301 doors 0.90)",
+    "6 pose families (axis seed x roll -30/0/+30 deg) with six +-0.02 m / +-0.05 rad wobbles",
+    "two rescuers (both ends, inline and +-0.10 m lateral)"
+   ],
+   "seed_spread_m": [
+    0.036,
+    0.081
+   ],
+   "nearest": "Crew_Vestibule_1_Fit_Frame_4",
+   "note": "ring A comparator (15!A169), ringb_unified.survey method on the built model; per class {\"A\": -0.073, \"C\": 0.021, \"K\": -0.067}; single-seed quote was 0.081; owner 15!A175: FAIL / REDESIGN REQUIRED; the single-seed quote is raw regression provenance only"
+  },
+  {
+   "id": "ringA-wc:A3=>A2|built_wc|S",
+   "route": "ringA-wc:A3=>A2",
+   "states": [
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "built (ring A as built), worst-case re-run",
+   "case": "suited S, worst: S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+   "least_m": -0.251,
+   "status": "FAIL",
+   "worst_case_over": [
+    "suited casualty S (0.857 m capsule on a litter frame)",
+    "body size x1.00 and x1.08",
+    "doors open 1.00 and 0.90",
+    "search seeds",
+    "6 pose families with wobbles",
+    "two rescuers"
+   ],
+   "seed_spread_m": [
+    -0.077,
+    -0.022
+   ],
+   "nearest": "Structural_Spine",
+   "note": "ring A comparator (15!A169), ringb_unified.survey method on the built model; per class {\"S\": -0.251}; single-seed quote was 0.081; owner 15!A175: FAIL / REDESIGN REQUIRED; the single-seed quote is raw regression provenance only"
+  },
+  {
+   "id": "ringA-wc:A1=>A2=>M|built_wc|U",
+   "route": "ringA-wc:A1=>A2=>M",
+   "states": [
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "built (ring A as built), worst-case re-run",
+   "case": "unsuited A/C/K, worst: K x1.08 doors 1.00 best family (+-0.02 m wobble)",
+   "least_m": -0.065,
+   "status": "FAIL",
+   "worst_case_over": [
+    "injury classes A rigid litter, C vacuum mattress, K litter + kit",
+    "body size x1.00 and x1.08",
+    "doors open 1.00 and 0.90",
+    "search seeds 17,101,102,103 (+201,202 large, 301 doors 0.90)",
+    "6 pose families (axis seed x roll -30/0/+30 deg) with six +-0.02 m / +-0.05 rad wobbles",
+    "two rescuers (both ends, inline and +-0.10 m lateral)"
+   ],
+   "seed_spread_m": [
+    -0.005,
+    0.086
+   ],
+   "nearest": "Crew_Vestibule_1",
+   "note": "ring A comparator (15!A169), ringb_unified.survey method on the built model; per class {\"A\": -0.052, \"C\": 0.014, \"K\": -0.065}; single-seed quote was 0.031; owner 15!A175: FAIL / REDESIGN REQUIRED; the single-seed quote is raw regression provenance only"
+  },
+  {
+   "id": "ringA-wc:A1=>A2=>M|built_wc|S",
+   "route": "ringA-wc:A1=>A2=>M",
+   "states": [
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "built (ring A as built), worst-case re-run",
+   "case": "suited S, worst: S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+   "least_m": -0.243,
+   "status": "FAIL",
+   "worst_case_over": [
+    "suited casualty S (0.857 m capsule on a litter frame)",
+    "body size x1.00 and x1.08",
+    "doors open 1.00 and 0.90",
+    "search seeds",
+    "6 pose families with wobbles",
+    "two rescuers"
+   ],
+   "seed_spread_m": [
+    -0.035,
+    -0.026
+   ],
+   "nearest": "Structural_Spine",
+   "note": "ring A comparator (15!A169), ringb_unified.survey method on the built model; per class {\"S\": -0.243}; single-seed quote was 0.031; owner 15!A175: FAIL / REDESIGN REQUIRED; the single-seed quote is raw regression provenance only"
+  },
+  {
+   "id": "ringA-wc:A3=>A2=>M|built_wc|U",
+   "route": "ringA-wc:A3=>A2=>M",
+   "states": [
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "built (ring A as built), worst-case re-run",
+   "case": "unsuited A/C/K, worst: A x1.08 doors 1.00 best family (+-0.02 m wobble)",
+   "least_m": -0.073,
+   "status": "FAIL",
+   "worst_case_over": [
+    "injury classes A rigid litter, C vacuum mattress, K litter + kit",
+    "body size x1.00 and x1.08",
+    "doors open 1.00 and 0.90",
+    "search seeds 17,101,102,103 (+201,202 large, 301 doors 0.90)",
+    "6 pose families (axis seed x roll -30/0/+30 deg) with six +-0.02 m / +-0.05 rad wobbles",
+    "two rescuers (both ends, inline and +-0.10 m lateral)"
+   ],
+   "seed_spread_m": [
+    0.036,
+    0.081
+   ],
+   "nearest": "Crew_Vestibule_1_Fit_Frame_4",
+   "note": "ring A comparator (15!A169), ringb_unified.survey method on the built model; per class {\"A\": -0.073, \"C\": 0.021, \"K\": -0.067}; single-seed quote was 0.062; owner 15!A175: FAIL / REDESIGN REQUIRED; the single-seed quote is raw regression provenance only"
+  },
+  {
+   "id": "ringA-wc:A3=>A2=>M|built_wc|S",
+   "route": "ringA-wc:A3=>A2=>M",
+   "states": [
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "built (ring A as built), worst-case re-run",
+   "case": "suited S, worst: S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+   "least_m": -0.251,
+   "status": "FAIL",
+   "worst_case_over": [
+    "suited casualty S (0.857 m capsule on a litter frame)",
+    "body size x1.00 and x1.08",
+    "doors open 1.00 and 0.90",
+    "search seeds",
+    "6 pose families with wobbles",
+    "two rescuers"
+   ],
+   "seed_spread_m": [
+    -0.077,
+    -0.022
+   ],
+   "nearest": "Structural_Spine",
+   "note": "ring A comparator (15!A169), ringb_unified.survey method on the built model; per class {\"S\": -0.251}; single-seed quote was 0.062; owner 15!A175: FAIL / REDESIGN REQUIRED; the single-seed quote is raw regression provenance only"
+  },
+  {
+   "id": "care|A1|aft|o13-V1",
+   "route": "ringA-care:A1 in-sector care, locked 1.5 g aid V1",
+   "states": [
+    "locked_1.5g"
+   ],
+   "variant": "V1 local controlled lowering at Burn_Couch_2 (PROTOTYPE, owner 15!A173)",
+   "case": "worst part: egress past the deployed aid (0.60 m)",
+   "least_m": -0.22,
+   "status": "FAIL",
+   "worst_case_over": [
+    "injury classes A rigid litter, C vacuum mattress, K litter + kit, S suited",
+    "body size x1.00 and x1.08",
+    "doors 1.00 and 0.90 (the sector hatch leaf)",
+    "search seeds 17,101,102,103 (+201,202 large, 301 doors 0.90)",
+    "6 pose families with six +-0.02 m / +-0.05 rad wobbles",
+    "two inline rescuers on the route",
+    "device poses: best-found about each, every state and seed",
+    "plane screen: litter swept envelope, hardware, two rescuers (standing / kneeling), reach, egress, care with the aid parked",
+    "mesh: hardware, rescuer capsules, care attendants and kit"
+   ],
+   "seed_spread_m": null,
+   "nearest": "Seraph_Niche_Partition",
+   "note": "HABITATION A1; other couch Burn_Couch_1 -0.568; loads, mass, dynamics, ratings OPEN"
+  },
+  {
+   "id": "care|A1|aft|o13-V2",
+   "route": "ringA-care:A1 in-sector care, locked 1.5 g aid V2",
+   "states": [
+    "locked_1.5g"
+   ],
+   "variant": "V2 restrained platform at Burn_Couch_2 (PROTOTYPE, owner 15!A173)",
+   "case": "worst part: egress past the deployed aid (0.60 m)",
+   "least_m": -0.29,
+   "status": "FAIL",
+   "worst_case_over": [
+    "injury classes A rigid litter, C vacuum mattress, K litter + kit, S suited",
+    "body size x1.00 and x1.08",
+    "doors 1.00 and 0.90 (the sector hatch leaf)",
+    "search seeds 17,101,102,103 (+201,202 large, 301 doors 0.90)",
+    "6 pose families with six +-0.02 m / +-0.05 rad wobbles",
+    "two inline rescuers on the route",
+    "device poses: best-found about each, every state and seed",
+    "plane screen: litter swept envelope, hardware, two rescuers (standing / kneeling), reach, egress, care with the aid parked",
+    "mesh: hardware, rescuer capsules, care attendants and kit"
+   ],
+   "seed_spread_m": null,
+   "nearest": "Sector_Hatch_Frame",
+   "note": "HABITATION A1; other couch Burn_Couch_1 -0.379; loads, mass, dynamics, ratings OPEN"
+  },
+  {
+   "id": "care|A1|aft|o13-V3",
+   "route": "ringA-care:A1 in-sector care, locked 1.5 g aid V3",
+   "states": [
+    "locked_1.5g"
+   ],
+   "variant": "V3 rated assist at Burn_Couch_2 (PROTOTYPE, owner 15!A173)",
+   "case": "worst part: egress past the deployed aid (0.60 m)",
+   "least_m": -0.22,
+   "status": "FAIL",
+   "worst_case_over": [
+    "injury classes A rigid litter, C vacuum mattress, K litter + kit, S suited",
+    "body size x1.00 and x1.08",
+    "doors 1.00 and 0.90 (the sector hatch leaf)",
+    "search seeds 17,101,102,103 (+201,202 large, 301 doors 0.90)",
+    "6 pose families with six +-0.02 m / +-0.05 rad wobbles",
+    "two inline rescuers on the route",
+    "device poses: best-found about each, every state and seed",
+    "plane screen: litter swept envelope, hardware, two rescuers (standing / kneeling), reach, egress, care with the aid parked",
+    "mesh: hardware, rescuer capsules, care attendants and kit"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "HABITATION A1; other couch Burn_Couch_1 -0.494; loads, mass, dynamics, ratings OPEN"
+  },
+  {
+   "id": "care|A1|deck|o13-fold_grab",
+   "route": "ringA-care:A1 in-sector care, local change fold_grab",
+   "states": [
+    "0g",
+    "spin",
+    "stopped"
+   ],
+   "variant": "Bunk_1 grab bar and step rung in the berth opening hinged / folded flat for the transfer (PROTOTYPE); room labels moved; kit inset 0.05 m; attendant 1 on a 1.00 m strip (PROTOTYPE, owner 15!A174)",
+   "case": "worst part: carrier sweep hatch -> care point + slide (worst class)",
+   "least_m": -0.338,
+   "status": "FAIL",
+   "worst_case_over": [
+    "injury classes A rigid litter, C vacuum mattress, K litter + kit, S suited",
+    "body size x1.00 and x1.08",
+    "doors 1.00 and 0.90 (the sector hatch leaf)",
+    "search seeds 17,101,102,103 (+201,202 large, 301 doors 0.90)",
+    "6 pose families with six +-0.02 m / +-0.05 rad wobbles",
+    "two inline rescuers on the route",
+    "slide onto the care point, best along-couch offset, every state and seed",
+    "zone screen: care, transfer (park search 1.00 m), reach, egress",
+    "mesh: care attendants and kit"
+   ],
+   "seed_spread_m": null,
+   "nearest": "Hygiene",
+   "note": "HABITATION A1; unsuited-only least -0.142"
+  },
+  {
+   "id": "care|A2|aft|o13-V1",
+   "route": "ringA-care:A2 in-sector care, locked 1.5 g aid V1",
+   "states": [
+    "locked_1.5g"
+   ],
+   "variant": "V1 local controlled lowering at Burn_Couch_2 (PROTOTYPE, owner 15!A173)",
+   "case": "worst part: rescuer reach (0.60 m path)",
+   "least_m": -0.14,
+   "status": "FAIL",
+   "worst_case_over": [
+    "injury classes A rigid litter, C vacuum mattress, K litter + kit, S suited",
+    "body size x1.00 and x1.08",
+    "doors 1.00 and 0.90 (the sector hatch leaf)",
+    "search seeds 17,101,102,103 (+201,202 large, 301 doors 0.90)",
+    "6 pose families with six +-0.02 m / +-0.05 rad wobbles",
+    "two inline rescuers on the route",
+    "device poses: best-found about each, every state and seed",
+    "plane screen: litter swept envelope, hardware, two rescuers (standing / kneeling), reach, egress, care with the aid parked",
+    "mesh: hardware, rescuer capsules, care attendants and kit"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "WORK_MEDICAL_OPS A2; other couch Burn_Couch_1 -0.576; loads, mass, dynamics, ratings OPEN"
+  },
+  {
+   "id": "care|A2|aft|o13-V2",
+   "route": "ringA-care:A2 in-sector care, locked 1.5 g aid V2",
+   "states": [
+    "locked_1.5g"
+   ],
+   "variant": "V2 restrained platform at Burn_Couch_2 (PROTOTYPE, owner 15!A173)",
+   "case": "worst part: egress past the deployed aid (0.60 m)",
+   "least_m": -0.29,
+   "status": "FAIL",
+   "worst_case_over": [
+    "injury classes A rigid litter, C vacuum mattress, K litter + kit, S suited",
+    "body size x1.00 and x1.08",
+    "doors 1.00 and 0.90 (the sector hatch leaf)",
+    "search seeds 17,101,102,103 (+201,202 large, 301 doors 0.90)",
+    "6 pose families with six +-0.02 m / +-0.05 rad wobbles",
+    "two inline rescuers on the route",
+    "device poses: best-found about each, every state and seed",
+    "plane screen: litter swept envelope, hardware, two rescuers (standing / kneeling), reach, egress, care with the aid parked",
+    "mesh: hardware, rescuer capsules, care attendants and kit"
+   ],
+   "seed_spread_m": null,
+   "nearest": "Sector_Hatch_Frame",
+   "note": "WORK_MEDICAL_OPS A2; other couch Burn_Couch_1 -0.306; loads, mass, dynamics, ratings OPEN"
+  },
+  {
+   "id": "care|A2|aft|o13-V3",
+   "route": "ringA-care:A2 in-sector care, locked 1.5 g aid V3",
+   "states": [
+    "locked_1.5g"
+   ],
+   "variant": "V3 rated assist at Burn_Couch_2 (PROTOTYPE, owner 15!A173)",
+   "case": "worst part: rescuer reach (0.60 m path)",
+   "least_m": -0.14,
+   "status": "FAIL",
+   "worst_case_over": [
+    "injury classes A rigid litter, C vacuum mattress, K litter + kit, S suited",
+    "body size x1.00 and x1.08",
+    "doors 1.00 and 0.90 (the sector hatch leaf)",
+    "search seeds 17,101,102,103 (+201,202 large, 301 doors 0.90)",
+    "6 pose families with six +-0.02 m / +-0.05 rad wobbles",
+    "two inline rescuers on the route",
+    "device poses: best-found about each, every state and seed",
+    "plane screen: litter swept envelope, hardware, two rescuers (standing / kneeling), reach, egress, care with the aid parked",
+    "mesh: hardware, rescuer capsules, care attendants and kit"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "WORK_MEDICAL_OPS A2; other couch Burn_Couch_1 -0.406; loads, mass, dynamics, ratings OPEN"
+  },
+  {
+   "id": "care|A2|deck|o13-fold_foot",
+   "route": "ringA-care:A2 in-sector care, local change fold_foot",
+   "states": [
+    "0g",
+    "spin",
+    "stopped"
+   ],
+   "variant": "treatment-couch foot plate hinged, folded to table level for the transfer (PROTOTYPE); room labels moved (PROTOTYPE, owner 15!A174)",
+   "case": "worst part: carrier sweep hatch -> care point + slide (worst class)",
+   "least_m": -0.031,
+   "status": "FAIL",
+   "worst_case_over": [
+    "injury classes A rigid litter, C vacuum mattress, K litter + kit, S suited",
+    "body size x1.00 and x1.08",
+    "doors 1.00 and 0.90 (the sector hatch leaf)",
+    "search seeds 17,101,102,103 (+201,202 large, 301 doors 0.90)",
+    "6 pose families with six +-0.02 m / +-0.05 rad wobbles",
+    "two inline rescuers on the route",
+    "slide onto the care point, best along-couch offset, every state and seed",
+    "zone screen: care, transfer (park search 1.00 m), reach, egress",
+    "mesh: care attendants and kit"
+   ],
+   "seed_spread_m": null,
+   "nearest": "Burn_Couch_2",
+   "note": "WORK_MEDICAL_OPS A2; unsuited-only least 0.066"
+  },
+  {
+   "id": "care|A3|aft|o13-V1",
+   "route": "ringA-care:A3 in-sector care, locked 1.5 g aid V1",
+   "states": [
+    "locked_1.5g"
+   ],
+   "variant": "V1 local controlled lowering at Burn_Couch_2 (PROTOTYPE, owner 15!A173)",
+   "case": "worst part: rescuer reach (0.60 m path)",
+   "least_m": -0.14,
+   "status": "FAIL",
+   "worst_case_over": [
+    "injury classes A rigid litter, C vacuum mattress, K litter + kit, S suited",
+    "body size x1.00 and x1.08",
+    "doors 1.00 and 0.90 (the sector hatch leaf)",
+    "search seeds 17,101,102,103 (+201,202 large, 301 doors 0.90)",
+    "6 pose families with six +-0.02 m / +-0.05 rad wobbles",
+    "two inline rescuers on the route",
+    "device poses: best-found about each, every state and seed",
+    "plane screen: litter swept envelope, hardware, two rescuers (standing / kneeling), reach, egress, care with the aid parked",
+    "mesh: hardware, rescuer capsules, care attendants and kit"
+   ],
+   "seed_spread_m": null,
+   "nearest": "Couch_Lockers_2",
+   "note": "LIFE_SUPPORT_GARDEN_COMMON A3; other couch Burn_Couch_1 -0.31; loads, mass, dynamics, ratings OPEN"
+  },
+  {
+   "id": "care|A3|aft|o13-V2",
+   "route": "ringA-care:A3 in-sector care, locked 1.5 g aid V2",
+   "states": [
+    "locked_1.5g"
+   ],
+   "variant": "V2 restrained platform at Burn_Couch_1 (PROTOTYPE, owner 15!A173)",
+   "case": "worst part: egress past the deployed aid (0.60 m)",
+   "least_m": -0.278,
+   "status": "FAIL",
+   "worst_case_over": [
+    "injury classes A rigid litter, C vacuum mattress, K litter + kit, S suited",
+    "body size x1.00 and x1.08",
+    "doors 1.00 and 0.90 (the sector hatch leaf)",
+    "search seeds 17,101,102,103 (+201,202 large, 301 doors 0.90)",
+    "6 pose families with six +-0.02 m / +-0.05 rad wobbles",
+    "two inline rescuers on the route",
+    "device poses: best-found about each, every state and seed",
+    "plane screen: litter swept envelope, hardware, two rescuers (standing / kneeling), reach, egress, care with the aid parked",
+    "mesh: hardware, rescuer capsules, care attendants and kit"
+   ],
+   "seed_spread_m": null,
+   "nearest": "Sector_Hatch_Frame",
+   "note": "LIFE_SUPPORT_GARDEN_COMMON A3; other couch Burn_Couch_2 -0.29; loads, mass, dynamics, ratings OPEN"
+  },
+  {
+   "id": "care|A3|aft|o13-V3",
+   "route": "ringA-care:A3 in-sector care, locked 1.5 g aid V3",
+   "states": [
+    "locked_1.5g"
+   ],
+   "variant": "V3 rated assist at Burn_Couch_1 (PROTOTYPE, owner 15!A173)",
+   "case": "worst part: egress past the deployed aid (0.60 m)",
+   "least_m": -0.066,
+   "status": "FAIL",
+   "worst_case_over": [
+    "injury classes A rigid litter, C vacuum mattress, K litter + kit, S suited",
+    "body size x1.00 and x1.08",
+    "doors 1.00 and 0.90 (the sector hatch leaf)",
+    "search seeds 17,101,102,103 (+201,202 large, 301 doors 0.90)",
+    "6 pose families with six +-0.02 m / +-0.05 rad wobbles",
+    "two inline rescuers on the route",
+    "device poses: best-found about each, every state and seed",
+    "plane screen: litter swept envelope, hardware, two rescuers (standing / kneeling), reach, egress, care with the aid parked",
+    "mesh: hardware, rescuer capsules, care attendants and kit"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "LIFE_SUPPORT_GARDEN_COMMON A3; other couch Burn_Couch_2 -0.14; loads, mass, dynamics, ratings OPEN"
+  },
+  {
+   "id": "care|B1|aft|o13-V1",
+   "route": "ringB-care:B1 in-sector care, locked 1.5 g aid V1",
+   "states": [
+    "locked_1.5g"
+   ],
+   "variant": "V1 local controlled lowering at Burn_Couch_2 (PROTOTYPE, owner 15!A173)",
+   "case": "worst part: egress past the deployed aid (0.60 m)",
+   "least_m": -0.22,
+   "status": "FAIL",
+   "worst_case_over": [
+    "injury classes A rigid litter, C vacuum mattress, K litter + kit, S suited",
+    "body size x1.00 and x1.08",
+    "doors 1.00 and 0.90 (the sector hatch leaf)",
+    "search seeds 17,101,102,103 (+201,202 large, 301 doors 0.90)",
+    "6 pose families with six +-0.02 m / +-0.05 rad wobbles",
+    "two inline rescuers on the route",
+    "device poses: best-found about each, every state and seed",
+    "plane screen: litter swept envelope, hardware, two rescuers (standing / kneeling), reach, egress, care with the aid parked",
+    "mesh: hardware, rescuer capsules, care attendants and kit"
+   ],
+   "seed_spread_m": null,
+   "nearest": "Seraph_Niche_Partition",
+   "note": "HABITATION B1; other couch Burn_Couch_1 -0.568; loads, mass, dynamics, ratings OPEN"
+  },
+  {
+   "id": "care|B1|aft|o13-V2",
+   "route": "ringB-care:B1 in-sector care, locked 1.5 g aid V2",
+   "states": [
+    "locked_1.5g"
+   ],
+   "variant": "V2 restrained platform at Burn_Couch_2 (PROTOTYPE, owner 15!A173)",
+   "case": "worst part: egress past the deployed aid (0.60 m)",
+   "least_m": -0.29,
+   "status": "FAIL",
+   "worst_case_over": [
+    "injury classes A rigid litter, C vacuum mattress, K litter + kit, S suited",
+    "body size x1.00 and x1.08",
+    "doors 1.00 and 0.90 (the sector hatch leaf)",
+    "search seeds 17,101,102,103 (+201,202 large, 301 doors 0.90)",
+    "6 pose families with six +-0.02 m / +-0.05 rad wobbles",
+    "two inline rescuers on the route",
+    "device poses: best-found about each, every state and seed",
+    "plane screen: litter swept envelope, hardware, two rescuers (standing / kneeling), reach, egress, care with the aid parked",
+    "mesh: hardware, rescuer capsules, care attendants and kit"
+   ],
+   "seed_spread_m": null,
+   "nearest": "Sector_Hatch_Frame",
+   "note": "HABITATION B1; other couch Burn_Couch_1 -0.379; loads, mass, dynamics, ratings OPEN"
+  },
+  {
+   "id": "care|B1|aft|o13-V3",
+   "route": "ringB-care:B1 in-sector care, locked 1.5 g aid V3",
+   "states": [
+    "locked_1.5g"
+   ],
+   "variant": "V3 rated assist at Burn_Couch_2 (PROTOTYPE, owner 15!A173)",
+   "case": "worst part: egress past the deployed aid (0.60 m)",
+   "least_m": -0.22,
+   "status": "FAIL",
+   "worst_case_over": [
+    "injury classes A rigid litter, C vacuum mattress, K litter + kit, S suited",
+    "body size x1.00 and x1.08",
+    "doors 1.00 and 0.90 (the sector hatch leaf)",
+    "search seeds 17,101,102,103 (+201,202 large, 301 doors 0.90)",
+    "6 pose families with six +-0.02 m / +-0.05 rad wobbles",
+    "two inline rescuers on the route",
+    "device poses: best-found about each, every state and seed",
+    "plane screen: litter swept envelope, hardware, two rescuers (standing / kneeling), reach, egress, care with the aid parked",
+    "mesh: hardware, rescuer capsules, care attendants and kit"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "HABITATION B1; other couch Burn_Couch_1 -0.494; loads, mass, dynamics, ratings OPEN"
+  },
+  {
+   "id": "care|B1|deck|o13-fold_grab",
+   "route": "ringB-care:B1 in-sector care, local change fold_grab",
+   "states": [
+    "0g",
+    "spin",
+    "stopped"
+   ],
+   "variant": "Bunk_1 grab bar and step rung in the berth opening hinged / folded flat for the transfer (PROTOTYPE); room labels moved; kit inset 0.05 m; attendant 1 on a 1.00 m strip (PROTOTYPE, owner 15!A174)",
+   "case": "worst part: carrier sweep hatch -> care point + slide (worst class)",
+   "least_m": -0.338,
+   "status": "FAIL",
+   "worst_case_over": [
+    "injury classes A rigid litter, C vacuum mattress, K litter + kit, S suited",
+    "body size x1.00 and x1.08",
+    "doors 1.00 and 0.90 (the sector hatch leaf)",
+    "search seeds 17,101,102,103 (+201,202 large, 301 doors 0.90)",
+    "6 pose families with six +-0.02 m / +-0.05 rad wobbles",
+    "two inline rescuers on the route",
+    "slide onto the care point, best along-couch offset, every state and seed",
+    "zone screen: care, transfer (park search 1.00 m), reach, egress",
+    "mesh: care attendants and kit"
+   ],
+   "seed_spread_m": null,
+   "nearest": "Hygiene",
+   "note": "HABITATION B1; unsuited-only least -0.142"
+  },
+  {
+   "id": "care|B2|aft|o13-V1",
+   "route": "ringB-care:B2 in-sector care, locked 1.5 g aid V1",
+   "states": [
+    "locked_1.5g"
+   ],
+   "variant": "V1 local controlled lowering at Burn_Couch_2 (PROTOTYPE, owner 15!A173)",
+   "case": "worst part: rescuer reach (0.60 m path)",
+   "least_m": -0.14,
+   "status": "FAIL",
+   "worst_case_over": [
+    "injury classes A rigid litter, C vacuum mattress, K litter + kit, S suited",
+    "body size x1.00 and x1.08",
+    "doors 1.00 and 0.90 (the sector hatch leaf)",
+    "search seeds 17,101,102,103 (+201,202 large, 301 doors 0.90)",
+    "6 pose families with six +-0.02 m / +-0.05 rad wobbles",
+    "two inline rescuers on the route",
+    "device poses: best-found about each, every state and seed",
+    "plane screen: litter swept envelope, hardware, two rescuers (standing / kneeling), reach, egress, care with the aid parked",
+    "mesh: hardware, rescuer capsules, care attendants and kit"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "WORK_MEDICAL_OPS B2; other couch Burn_Couch_1 -0.576; loads, mass, dynamics, ratings OPEN"
+  },
+  {
+   "id": "care|B2|aft|o13-V2",
+   "route": "ringB-care:B2 in-sector care, locked 1.5 g aid V2",
+   "states": [
+    "locked_1.5g"
+   ],
+   "variant": "V2 restrained platform at Burn_Couch_2 (PROTOTYPE, owner 15!A173)",
+   "case": "worst part: egress past the deployed aid (0.60 m)",
+   "least_m": -0.29,
+   "status": "FAIL",
+   "worst_case_over": [
+    "injury classes A rigid litter, C vacuum mattress, K litter + kit, S suited",
+    "body size x1.00 and x1.08",
+    "doors 1.00 and 0.90 (the sector hatch leaf)",
+    "search seeds 17,101,102,103 (+201,202 large, 301 doors 0.90)",
+    "6 pose families with six +-0.02 m / +-0.05 rad wobbles",
+    "two inline rescuers on the route",
+    "device poses: best-found about each, every state and seed",
+    "plane screen: litter swept envelope, hardware, two rescuers (standing / kneeling), reach, egress, care with the aid parked",
+    "mesh: hardware, rescuer capsules, care attendants and kit"
+   ],
+   "seed_spread_m": null,
+   "nearest": "Sector_Hatch_Frame",
+   "note": "WORK_MEDICAL_OPS B2; other couch Burn_Couch_1 -0.306; loads, mass, dynamics, ratings OPEN"
+  },
+  {
+   "id": "care|B2|aft|o13-V3",
+   "route": "ringB-care:B2 in-sector care, locked 1.5 g aid V3",
+   "states": [
+    "locked_1.5g"
+   ],
+   "variant": "V3 rated assist at Burn_Couch_2 (PROTOTYPE, owner 15!A173)",
+   "case": "worst part: rescuer reach (0.60 m path)",
+   "least_m": -0.14,
+   "status": "FAIL",
+   "worst_case_over": [
+    "injury classes A rigid litter, C vacuum mattress, K litter + kit, S suited",
+    "body size x1.00 and x1.08",
+    "doors 1.00 and 0.90 (the sector hatch leaf)",
+    "search seeds 17,101,102,103 (+201,202 large, 301 doors 0.90)",
+    "6 pose families with six +-0.02 m / +-0.05 rad wobbles",
+    "two inline rescuers on the route",
+    "device poses: best-found about each, every state and seed",
+    "plane screen: litter swept envelope, hardware, two rescuers (standing / kneeling), reach, egress, care with the aid parked",
+    "mesh: hardware, rescuer capsules, care attendants and kit"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "WORK_MEDICAL_OPS B2; other couch Burn_Couch_1 -0.406; loads, mass, dynamics, ratings OPEN"
+  },
+  {
+   "id": "care|B2|deck|o13-fold_foot",
+   "route": "ringB-care:B2 in-sector care, local change fold_foot",
+   "states": [
+    "0g",
+    "spin",
+    "stopped"
+   ],
+   "variant": "treatment-couch foot plate hinged, folded to table level for the transfer (PROTOTYPE); room labels moved (PROTOTYPE, owner 15!A174)",
+   "case": "worst part: carrier sweep hatch -> care point + slide (worst class)",
+   "least_m": -0.031,
+   "status": "FAIL",
+   "worst_case_over": [
+    "injury classes A rigid litter, C vacuum mattress, K litter + kit, S suited",
+    "body size x1.00 and x1.08",
+    "doors 1.00 and 0.90 (the sector hatch leaf)",
+    "search seeds 17,101,102,103 (+201,202 large, 301 doors 0.90)",
+    "6 pose families with six +-0.02 m / +-0.05 rad wobbles",
+    "two inline rescuers on the route",
+    "slide onto the care point, best along-couch offset, every state and seed",
+    "zone screen: care, transfer (park search 1.00 m), reach, egress",
+    "mesh: care attendants and kit"
+   ],
+   "seed_spread_m": null,
+   "nearest": "Burn_Couch_2",
+   "note": "WORK_MEDICAL_OPS B2; unsuited-only least 0.066"
+  },
+  {
+   "id": "care|B3|aft|o13-V1",
+   "route": "ringB-care:B3 in-sector care, locked 1.5 g aid V1",
+   "states": [
+    "locked_1.5g"
+   ],
+   "variant": "V1 local controlled lowering at Burn_Couch_2 (PROTOTYPE, owner 15!A173)",
+   "case": "worst part: rescuer reach (0.60 m path)",
+   "least_m": -0.14,
+   "status": "FAIL",
+   "worst_case_over": [
+    "injury classes A rigid litter, C vacuum mattress, K litter + kit, S suited",
+    "body size x1.00 and x1.08",
+    "doors 1.00 and 0.90 (the sector hatch leaf)",
+    "search seeds 17,101,102,103 (+201,202 large, 301 doors 0.90)",
+    "6 pose families with six +-0.02 m / +-0.05 rad wobbles",
+    "two inline rescuers on the route",
+    "device poses: best-found about each, every state and seed",
+    "plane screen: litter swept envelope, hardware, two rescuers (standing / kneeling), reach, egress, care with the aid parked",
+    "mesh: hardware, rescuer capsules, care attendants and kit"
+   ],
+   "seed_spread_m": null,
+   "nearest": "Couch_Lockers_2",
+   "note": "LIFE_SUPPORT_GARDEN_COMMON B3; other couch Burn_Couch_1 -0.31; loads, mass, dynamics, ratings OPEN"
+  },
+  {
+   "id": "care|B3|aft|o13-V2",
+   "route": "ringB-care:B3 in-sector care, locked 1.5 g aid V2",
+   "states": [
+    "locked_1.5g"
+   ],
+   "variant": "V2 restrained platform at Burn_Couch_1 (PROTOTYPE, owner 15!A173)",
+   "case": "worst part: egress past the deployed aid (0.60 m)",
+   "least_m": -0.278,
+   "status": "FAIL",
+   "worst_case_over": [
+    "injury classes A rigid litter, C vacuum mattress, K litter + kit, S suited",
+    "body size x1.00 and x1.08",
+    "doors 1.00 and 0.90 (the sector hatch leaf)",
+    "search seeds 17,101,102,103 (+201,202 large, 301 doors 0.90)",
+    "6 pose families with six +-0.02 m / +-0.05 rad wobbles",
+    "two inline rescuers on the route",
+    "device poses: best-found about each, every state and seed",
+    "plane screen: litter swept envelope, hardware, two rescuers (standing / kneeling), reach, egress, care with the aid parked",
+    "mesh: hardware, rescuer capsules, care attendants and kit"
+   ],
+   "seed_spread_m": null,
+   "nearest": "Sector_Hatch_Frame",
+   "note": "LIFE_SUPPORT_GARDEN_COMMON B3; other couch Burn_Couch_2 -0.29; loads, mass, dynamics, ratings OPEN"
+  },
+  {
+   "id": "care|B3|aft|o13-V3",
+   "route": "ringB-care:B3 in-sector care, locked 1.5 g aid V3",
+   "states": [
+    "locked_1.5g"
+   ],
+   "variant": "V3 rated assist at Burn_Couch_1 (PROTOTYPE, owner 15!A173)",
+   "case": "worst part: egress past the deployed aid (0.60 m)",
+   "least_m": -0.066,
+   "status": "FAIL",
+   "worst_case_over": [
+    "injury classes A rigid litter, C vacuum mattress, K litter + kit, S suited",
+    "body size x1.00 and x1.08",
+    "doors 1.00 and 0.90 (the sector hatch leaf)",
+    "search seeds 17,101,102,103 (+201,202 large, 301 doors 0.90)",
+    "6 pose families with six +-0.02 m / +-0.05 rad wobbles",
+    "two inline rescuers on the route",
+    "device poses: best-found about each, every state and seed",
+    "plane screen: litter swept envelope, hardware, two rescuers (standing / kneeling), reach, egress, care with the aid parked",
+    "mesh: hardware, rescuer capsules, care attendants and kit"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "LIFE_SUPPORT_GARDEN_COMMON B3; other couch Burn_Couch_2 -0.14; loads, mass, dynamics, ratings OPEN"
+  },
+  {
+   "id": "care|A3|aft|o13c-canon-V1",
+   "route": "ringA-care:A3 in-sector care, locked 1.5 g aid V1, Garden_Rack_1 canon",
+   "states": [
+    "locked_1.5g"
+   ],
+   "variant": "V1 at Burn_Couch_2; rack canon: rack in its normal (canon) position, nothing moved: the time-independent state (PROTOTYPE, 15!A173 / A174)",
+   "case": "worst part: rescuer reach (0.60 m path)",
+   "least_m": -0.14,
+   "status": "FAIL",
+   "worst_case_over": [
+    "injury classes A rigid litter, C vacuum mattress, K litter + kit, S suited",
+    "body size x1.00 and x1.08",
+    "doors 1.00 and 0.90 (the sector hatch leaf)",
+    "search seeds 17,101,102,103 (+201,202 large, 301 doors 0.90)",
+    "6 pose families with six +-0.02 m / +-0.05 rad wobbles",
+    "two inline rescuers on the route",
+    "device poses: best-found about each, every state and seed",
+    "plane screen: litter, hardware, rescuers, reach, egress, care with the aid parked",
+    "mesh: hardware, rescuer capsules, care attendants and kit",
+    "rack stowage motion and stowed position (plane + mesh)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "Couch_Lockers_2",
+   "note": "LIFE_SUPPORT_GARDEN_COMMON A3; other couch Burn_Couch_1 -0.513; Mess displaced as 15!A169; loads, mass, ratings, stowage time, plant survival OPEN"
+  },
+  {
+   "id": "care|A3|aft|o13c-canon-V3",
+   "route": "ringA-care:A3 in-sector care, locked 1.5 g aid V3, Garden_Rack_1 canon",
+   "states": [
+    "locked_1.5g"
+   ],
+   "variant": "V3 at Burn_Couch_2; rack canon: rack in its normal (canon) position, nothing moved: the time-independent state (PROTOTYPE, 15!A173 / A174)",
+   "case": "worst part: rescuer reach (0.60 m path)",
+   "least_m": -0.14,
+   "status": "FAIL",
+   "worst_case_over": [
+    "injury classes A rigid litter, C vacuum mattress, K litter + kit, S suited",
+    "body size x1.00 and x1.08",
+    "doors 1.00 and 0.90 (the sector hatch leaf)",
+    "search seeds 17,101,102,103 (+201,202 large, 301 doors 0.90)",
+    "6 pose families with six +-0.02 m / +-0.05 rad wobbles",
+    "two inline rescuers on the route",
+    "device poses: best-found about each, every state and seed",
+    "plane screen: litter, hardware, rescuers, reach, egress, care with the aid parked",
+    "mesh: hardware, rescuer capsules, care attendants and kit",
+    "rack stowage motion and stowed position (plane + mesh)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "Couch_Lockers_2",
+   "note": "LIFE_SUPPORT_GARDEN_COMMON A3; other couch Burn_Couch_1 -0.556; Mess displaced as 15!A169; loads, mass, ratings, stowage time, plant survival OPEN"
+  },
+  {
+   "id": "care|A3|deck|o13c-canon",
+   "route": "ringA-care:A3 in-sector care, fold-down couch, Garden_Rack_1 canon",
+   "states": [
+    "0g",
+    "spin",
+    "stopped"
+   ],
+   "variant": "fold-down couch u [-1.1, 0.9, 1.918, 2.618] (re-placed); rack canon: rack in its normal (canon) position, nothing moved: the time-independent state (PROTOTYPE)",
+   "case": "worst part: carrier sweep hatch -> care point + slide (worst class)",
+   "least_m": -0.444,
+   "status": "FAIL",
+   "worst_case_over": [
+    "injury classes A rigid litter, C vacuum mattress, K litter + kit, S suited",
+    "body size x1.00 and x1.08",
+    "doors 1.00 and 0.90 (the sector hatch leaf)",
+    "search seeds 17,101,102,103 (+201,202 large, 301 doors 0.90)",
+    "6 pose families with six +-0.02 m / +-0.05 rad wobbles",
+    "two inline rescuers on the route",
+    "slide onto the care point, every state and seed",
+    "zone screen: care, transfer, reach, egress, normal-state stow",
+    "mesh: care attendants and kit",
+    "rack stowage motion and stowed position (plane + mesh)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "Study_Garden_Rack_1_A_1",
+   "note": "LIFE_SUPPORT_GARDEN_COMMON A3; unsuited-only least -0.25; Mess displaced as 15!A169"
+  },
+  {
+   "id": "care|B3|aft|o13c-canon-V1",
+   "route": "ringB-care:B3 in-sector care, locked 1.5 g aid V1, Garden_Rack_1 canon",
+   "states": [
+    "locked_1.5g"
+   ],
+   "variant": "V1 at Burn_Couch_2; rack canon: rack in its normal (canon) position, nothing moved: the time-independent state (PROTOTYPE, 15!A173 / A174)",
+   "case": "worst part: rescuer reach (0.60 m path)",
+   "least_m": -0.14,
+   "status": "FAIL",
+   "worst_case_over": [
+    "injury classes A rigid litter, C vacuum mattress, K litter + kit, S suited",
+    "body size x1.00 and x1.08",
+    "doors 1.00 and 0.90 (the sector hatch leaf)",
+    "search seeds 17,101,102,103 (+201,202 large, 301 doors 0.90)",
+    "6 pose families with six +-0.02 m / +-0.05 rad wobbles",
+    "two inline rescuers on the route",
+    "device poses: best-found about each, every state and seed",
+    "plane screen: litter, hardware, rescuers, reach, egress, care with the aid parked",
+    "mesh: hardware, rescuer capsules, care attendants and kit",
+    "rack stowage motion and stowed position (plane + mesh)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "Couch_Lockers_2",
+   "note": "LIFE_SUPPORT_GARDEN_COMMON B3; other couch Burn_Couch_1 -0.513; Mess displaced as 15!A169; loads, mass, ratings, stowage time, plant survival OPEN"
+  },
+  {
+   "id": "care|B3|aft|o13c-canon-V3",
+   "route": "ringB-care:B3 in-sector care, locked 1.5 g aid V3, Garden_Rack_1 canon",
+   "states": [
+    "locked_1.5g"
+   ],
+   "variant": "V3 at Burn_Couch_2; rack canon: rack in its normal (canon) position, nothing moved: the time-independent state (PROTOTYPE, 15!A173 / A174)",
+   "case": "worst part: rescuer reach (0.60 m path)",
+   "least_m": -0.14,
+   "status": "FAIL",
+   "worst_case_over": [
+    "injury classes A rigid litter, C vacuum mattress, K litter + kit, S suited",
+    "body size x1.00 and x1.08",
+    "doors 1.00 and 0.90 (the sector hatch leaf)",
+    "search seeds 17,101,102,103 (+201,202 large, 301 doors 0.90)",
+    "6 pose families with six +-0.02 m / +-0.05 rad wobbles",
+    "two inline rescuers on the route",
+    "device poses: best-found about each, every state and seed",
+    "plane screen: litter, hardware, rescuers, reach, egress, care with the aid parked",
+    "mesh: hardware, rescuer capsules, care attendants and kit",
+    "rack stowage motion and stowed position (plane + mesh)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "Couch_Lockers_2",
+   "note": "LIFE_SUPPORT_GARDEN_COMMON B3; other couch Burn_Couch_1 -0.556; Mess displaced as 15!A169; loads, mass, ratings, stowage time, plant survival OPEN"
+  },
+  {
+   "id": "care|B3|deck|o13c-canon",
+   "route": "ringB-care:B3 in-sector care, fold-down couch, Garden_Rack_1 canon",
+   "states": [
+    "0g",
+    "spin",
+    "stopped"
+   ],
+   "variant": "fold-down couch u [-1.1, 0.9, 1.918, 2.618] (re-placed); rack canon: rack in its normal (canon) position, nothing moved: the time-independent state (PROTOTYPE)",
+   "case": "worst part: carrier sweep hatch -> care point + slide (worst class)",
+   "least_m": -0.444,
+   "status": "FAIL",
+   "worst_case_over": [
+    "injury classes A rigid litter, C vacuum mattress, K litter + kit, S suited",
+    "body size x1.00 and x1.08",
+    "doors 1.00 and 0.90 (the sector hatch leaf)",
+    "search seeds 17,101,102,103 (+201,202 large, 301 doors 0.90)",
+    "6 pose families with six +-0.02 m / +-0.05 rad wobbles",
+    "two inline rescuers on the route",
+    "slide onto the care point, every state and seed",
+    "zone screen: care, transfer, reach, egress, normal-state stow",
+    "mesh: care attendants and kit",
+    "rack stowage motion and stowed position (plane + mesh)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "Study_Garden_Rack_1_A_2",
+   "note": "LIFE_SUPPORT_GARDEN_COMMON B3; unsuited-only least -0.25; Mess displaced as 15!A169"
+  },
+  {
+   "id": "care|A3|aft|o13c-swing-V1",
+   "route": "ringA-care:A3 in-sector care, locked 1.5 g aid V1, Garden_Rack_1 swing",
+   "states": [
+    "locked_1.5g"
+   ],
+   "variant": "V1 at Burn_Couch_2; rack swing: centre-post double leaf: the rack splits at the fold-down couch's aft edge into an aft leaf A and a forward leaf F, both hinged on one vertical post at the split, back (outboard) corner; a leaf swings 90 deg outboard into the bay the Mess gives up (A169) and stands across the sector until it is swung back (PROTOTYPE, 15!A173 / A174)",
+   "case": "worst part: rescuer reach (0.60 m path)",
+   "least_m": -0.14,
+   "status": "FAIL",
+   "worst_case_over": [
+    "injury classes A rigid litter, C vacuum mattress, K litter + kit, S suited",
+    "body size x1.00 and x1.08",
+    "doors 1.00 and 0.90 (the sector hatch leaf)",
+    "search seeds 17,101,102,103 (+201,202 large, 301 doors 0.90)",
+    "6 pose families with six +-0.02 m / +-0.05 rad wobbles",
+    "two inline rescuers on the route",
+    "device poses: best-found about each, every state and seed",
+    "plane screen: litter, hardware, rescuers, reach, egress, care with the aid parked",
+    "mesh: hardware, rescuer capsules, care attendants and kit",
+    "rack stowage motion and stowed position (plane + mesh)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "Couch_Lockers_2",
+   "note": "LIFE_SUPPORT_GARDEN_COMMON A3; other couch Burn_Couch_1 -0.313; Mess displaced as 15!A169; loads, mass, ratings, stowage time, plant survival OPEN"
+  },
+  {
+   "id": "care|A3|aft|o13c-swing-V3",
+   "route": "ringA-care:A3 in-sector care, locked 1.5 g aid V3, Garden_Rack_1 swing",
+   "states": [
+    "locked_1.5g"
+   ],
+   "variant": "V3 at Burn_Couch_2; rack swing: centre-post double leaf: the rack splits at the fold-down couch's aft edge into an aft leaf A and a forward leaf F, both hinged on one vertical post at the split, back (outboard) corner; a leaf swings 90 deg outboard into the bay the Mess gives up (A169) and stands across the sector until it is swung back (PROTOTYPE, 15!A173 / A174)",
+   "case": "worst part: rescuer reach (0.60 m path)",
+   "least_m": -0.14,
+   "status": "FAIL",
+   "worst_case_over": [
+    "injury classes A rigid litter, C vacuum mattress, K litter + kit, S suited",
+    "body size x1.00 and x1.08",
+    "doors 1.00 and 0.90 (the sector hatch leaf)",
+    "search seeds 17,101,102,103 (+201,202 large, 301 doors 0.90)",
+    "6 pose families with six +-0.02 m / +-0.05 rad wobbles",
+    "two inline rescuers on the route",
+    "device poses: best-found about each, every state and seed",
+    "plane screen: litter, hardware, rescuers, reach, egress, care with the aid parked",
+    "mesh: hardware, rescuer capsules, care attendants and kit",
+    "rack stowage motion and stowed position (plane + mesh)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "Couch_Lockers_2",
+   "note": "LIFE_SUPPORT_GARDEN_COMMON A3; other couch Burn_Couch_1 -0.15; Mess displaced as 15!A169; loads, mass, ratings, stowage time, plant survival OPEN"
+  },
+  {
+   "id": "care|A3|deck|o13c-swing",
+   "route": "ringA-care:A3 in-sector care, fold-down couch, Garden_Rack_1 swing",
+   "states": [
+    "0g",
+    "spin",
+    "stopped"
+   ],
+   "variant": "fold-down couch v [0.9, 1.6, -0.4, 1.6] (re-placed); rack swing: centre-post double leaf: the rack splits at the fold-down couch's aft edge into an aft leaf A and a forward leaf F, both hinged on one vertical post at the split, back (outboard) corner; a leaf swings 90 deg outboard into the bay the Mess gives up (A169) and stands across the sector until it is swung back (PROTOTYPE)",
+   "case": "worst part: screen care station (care point + kit + two attendants)",
+   "least_m": -0.5,
+   "status": "FAIL",
+   "worst_case_over": [
+    "injury classes A rigid litter, C vacuum mattress, K litter + kit, S suited",
+    "body size x1.00 and x1.08",
+    "doors 1.00 and 0.90 (the sector hatch leaf)",
+    "search seeds 17,101,102,103 (+201,202 large, 301 doors 0.90)",
+    "6 pose families with six +-0.02 m / +-0.05 rad wobbles",
+    "two inline rescuers on the route",
+    "slide onto the care point, every state and seed",
+    "zone screen: care, transfer, reach, egress, normal-state stow",
+    "mesh: care attendants and kit",
+    "rack stowage motion and stowed position (plane + mesh)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "ECLSS_Bay",
+   "note": "LIFE_SUPPORT_GARDEN_COMMON A3; unsuited-only least -0.5; Mess displaced as 15!A169"
+  },
+  {
+   "id": "care|B3|aft|o13c-swing-V1",
+   "route": "ringB-care:B3 in-sector care, locked 1.5 g aid V1, Garden_Rack_1 swing",
+   "states": [
+    "locked_1.5g"
+   ],
+   "variant": "V1 at Burn_Couch_2; rack swing: centre-post double leaf: the rack splits at the fold-down couch's aft edge into an aft leaf A and a forward leaf F, both hinged on one vertical post at the split, back (outboard) corner; a leaf swings 90 deg outboard into the bay the Mess gives up (A169) and stands across the sector until it is swung back (PROTOTYPE, 15!A173 / A174)",
+   "case": "worst part: rescuer reach (0.60 m path)",
+   "least_m": -0.14,
+   "status": "FAIL",
+   "worst_case_over": [
+    "injury classes A rigid litter, C vacuum mattress, K litter + kit, S suited",
+    "body size x1.00 and x1.08",
+    "doors 1.00 and 0.90 (the sector hatch leaf)",
+    "search seeds 17,101,102,103 (+201,202 large, 301 doors 0.90)",
+    "6 pose families with six +-0.02 m / +-0.05 rad wobbles",
+    "two inline rescuers on the route",
+    "device poses: best-found about each, every state and seed",
+    "plane screen: litter, hardware, rescuers, reach, egress, care with the aid parked",
+    "mesh: hardware, rescuer capsules, care attendants and kit",
+    "rack stowage motion and stowed position (plane + mesh)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "Couch_Lockers_2",
+   "note": "LIFE_SUPPORT_GARDEN_COMMON B3; other couch Burn_Couch_1 -0.313; Mess displaced as 15!A169; loads, mass, ratings, stowage time, plant survival OPEN"
+  },
+  {
+   "id": "care|B3|aft|o13c-swing-V3",
+   "route": "ringB-care:B3 in-sector care, locked 1.5 g aid V3, Garden_Rack_1 swing",
+   "states": [
+    "locked_1.5g"
+   ],
+   "variant": "V3 at Burn_Couch_2; rack swing: centre-post double leaf: the rack splits at the fold-down couch's aft edge into an aft leaf A and a forward leaf F, both hinged on one vertical post at the split, back (outboard) corner; a leaf swings 90 deg outboard into the bay the Mess gives up (A169) and stands across the sector until it is swung back (PROTOTYPE, 15!A173 / A174)",
+   "case": "worst part: rescuer reach (0.60 m path)",
+   "least_m": -0.14,
+   "status": "FAIL",
+   "worst_case_over": [
+    "injury classes A rigid litter, C vacuum mattress, K litter + kit, S suited",
+    "body size x1.00 and x1.08",
+    "doors 1.00 and 0.90 (the sector hatch leaf)",
+    "search seeds 17,101,102,103 (+201,202 large, 301 doors 0.90)",
+    "6 pose families with six +-0.02 m / +-0.05 rad wobbles",
+    "two inline rescuers on the route",
+    "device poses: best-found about each, every state and seed",
+    "plane screen: litter, hardware, rescuers, reach, egress, care with the aid parked",
+    "mesh: hardware, rescuer capsules, care attendants and kit",
+    "rack stowage motion and stowed position (plane + mesh)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "Couch_Lockers_2",
+   "note": "LIFE_SUPPORT_GARDEN_COMMON B3; other couch Burn_Couch_1 -0.15; Mess displaced as 15!A169; loads, mass, ratings, stowage time, plant survival OPEN"
+  },
+  {
+   "id": "care|B3|deck|o13c-swing",
+   "route": "ringB-care:B3 in-sector care, fold-down couch, Garden_Rack_1 swing",
+   "states": [
+    "0g",
+    "spin",
+    "stopped"
+   ],
+   "variant": "fold-down couch v [0.9, 1.6, -0.4, 1.6] (re-placed); rack swing: centre-post double leaf: the rack splits at the fold-down couch's aft edge into an aft leaf A and a forward leaf F, both hinged on one vertical post at the split, back (outboard) corner; a leaf swings 90 deg outboard into the bay the Mess gives up (A169) and stands across the sector until it is swung back (PROTOTYPE)",
+   "case": "worst part: screen care station (care point + kit + two attendants)",
+   "least_m": -0.5,
+   "status": "FAIL",
+   "worst_case_over": [
+    "injury classes A rigid litter, C vacuum mattress, K litter + kit, S suited",
+    "body size x1.00 and x1.08",
+    "doors 1.00 and 0.90 (the sector hatch leaf)",
+    "search seeds 17,101,102,103 (+201,202 large, 301 doors 0.90)",
+    "6 pose families with six +-0.02 m / +-0.05 rad wobbles",
+    "two inline rescuers on the route",
+    "slide onto the care point, every state and seed",
+    "zone screen: care, transfer, reach, egress, normal-state stow",
+    "mesh: care attendants and kit",
+    "rack stowage motion and stowed position (plane + mesh)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "ECLSS_Bay",
+   "note": "LIFE_SUPPORT_GARDEN_COMMON B3; unsuited-only least -0.5; Mess displaced as 15!A169"
+  },
+  {
+   "id": "care|A3|aft|o13c-slide-V1",
+   "route": "ringA-care:A3 in-sector care, locked 1.5 g aid V1, Garden_Rack_1 slide",
+   "states": [
+    "locked_1.5g"
+   ],
+   "variant": "V1 at Burn_Couch_2; rack slide: lateral drawer: the moved section runs outboard on floor runners (parallel to the split plane) until its back is at the outboard wall allowance; slides back afterwards (PROTOTYPE, 15!A173 / A174)",
+   "case": "worst part: rescuer reach (0.60 m path)",
+   "least_m": -0.14,
+   "status": "FAIL",
+   "worst_case_over": [
+    "injury classes A rigid litter, C vacuum mattress, K litter + kit, S suited",
+    "body size x1.00 and x1.08",
+    "doors 1.00 and 0.90 (the sector hatch leaf)",
+    "search seeds 17,101,102,103 (+201,202 large, 301 doors 0.90)",
+    "6 pose families with six +-0.02 m / +-0.05 rad wobbles",
+    "two inline rescuers on the route",
+    "device poses: best-found about each, every state and seed",
+    "plane screen: litter, hardware, rescuers, reach, egress, care with the aid parked",
+    "mesh: hardware, rescuer capsules, care attendants and kit",
+    "rack stowage motion and stowed position (plane + mesh)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "Couch_Lockers_2",
+   "note": "LIFE_SUPPORT_GARDEN_COMMON A3; other couch Burn_Couch_1 -0.31; Mess displaced as 15!A169; loads, mass, ratings, stowage time, plant survival OPEN"
+  },
+  {
+   "id": "care|A3|aft|o13c-slide-V3",
+   "route": "ringA-care:A3 in-sector care, locked 1.5 g aid V3, Garden_Rack_1 slide",
+   "states": [
+    "locked_1.5g"
+   ],
+   "variant": "V3 at Burn_Couch_1; rack slide: lateral drawer: the moved section runs outboard on floor runners (parallel to the split plane) until its back is at the outboard wall allowance; slides back afterwards (PROTOTYPE, 15!A173 / A174)",
+   "case": "worst part: egress past the deployed aid (0.60 m)",
+   "least_m": -0.066,
+   "status": "FAIL",
+   "worst_case_over": [
+    "injury classes A rigid litter, C vacuum mattress, K litter + kit, S suited",
+    "body size x1.00 and x1.08",
+    "doors 1.00 and 0.90 (the sector hatch leaf)",
+    "search seeds 17,101,102,103 (+201,202 large, 301 doors 0.90)",
+    "6 pose families with six +-0.02 m / +-0.05 rad wobbles",
+    "two inline rescuers on the route",
+    "device poses: best-found about each, every state and seed",
+    "plane screen: litter, hardware, rescuers, reach, egress, care with the aid parked",
+    "mesh: hardware, rescuer capsules, care attendants and kit",
+    "rack stowage motion and stowed position (plane + mesh)"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "LIFE_SUPPORT_GARDEN_COMMON A3; other couch Burn_Couch_2 -0.14; Mess displaced as 15!A169; loads, mass, ratings, stowage time, plant survival OPEN"
+  },
+  {
+   "id": "care|A3|deck|o13c-slide",
+   "route": "ringA-care:A3 in-sector care, fold-down couch, Garden_Rack_1 slide",
+   "states": [
+    "0g",
+    "spin",
+    "stopped"
+   ],
+   "variant": "fold-down couch v [0.9, 1.6, 0.1, 2.1] (re-placed); rack slide: lateral drawer: the moved section runs outboard on floor runners (parallel to the split plane) until its back is at the outboard wall allowance; slides back afterwards (PROTOTYPE)",
+   "case": "worst part: normal state: stowed couch vs canon rack / room (plane)",
+   "least_m": -0.3,
+   "status": "FAIL",
+   "worst_case_over": [
+    "injury classes A rigid litter, C vacuum mattress, K litter + kit, S suited",
+    "body size x1.00 and x1.08",
+    "doors 1.00 and 0.90 (the sector hatch leaf)",
+    "search seeds 17,101,102,103 (+201,202 large, 301 doors 0.90)",
+    "6 pose families with six +-0.02 m / +-0.05 rad wobbles",
+    "two inline rescuers on the route",
+    "slide onto the care point, every state and seed",
+    "zone screen: care, transfer, reach, egress, normal-state stow",
+    "mesh: care attendants and kit",
+    "rack stowage motion and stowed position (plane + mesh)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "Care_Couch_deployed_1",
+   "note": "LIFE_SUPPORT_GARDEN_COMMON A3; unsuited-only least -0.3; Mess displaced as 15!A169"
+  },
+  {
+   "id": "care|B3|aft|o13c-slide-V1",
+   "route": "ringB-care:B3 in-sector care, locked 1.5 g aid V1, Garden_Rack_1 slide",
+   "states": [
+    "locked_1.5g"
+   ],
+   "variant": "V1 at Burn_Couch_2; rack slide: lateral drawer: the moved section runs outboard on floor runners (parallel to the split plane) until its back is at the outboard wall allowance; slides back afterwards (PROTOTYPE, 15!A173 / A174)",
+   "case": "worst part: rescuer reach (0.60 m path)",
+   "least_m": -0.14,
+   "status": "FAIL",
+   "worst_case_over": [
+    "injury classes A rigid litter, C vacuum mattress, K litter + kit, S suited",
+    "body size x1.00 and x1.08",
+    "doors 1.00 and 0.90 (the sector hatch leaf)",
+    "search seeds 17,101,102,103 (+201,202 large, 301 doors 0.90)",
+    "6 pose families with six +-0.02 m / +-0.05 rad wobbles",
+    "two inline rescuers on the route",
+    "device poses: best-found about each, every state and seed",
+    "plane screen: litter, hardware, rescuers, reach, egress, care with the aid parked",
+    "mesh: hardware, rescuer capsules, care attendants and kit",
+    "rack stowage motion and stowed position (plane + mesh)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "Couch_Lockers_2",
+   "note": "LIFE_SUPPORT_GARDEN_COMMON B3; other couch Burn_Couch_1 -0.31; Mess displaced as 15!A169; loads, mass, ratings, stowage time, plant survival OPEN"
+  },
+  {
+   "id": "care|B3|aft|o13c-slide-V3",
+   "route": "ringB-care:B3 in-sector care, locked 1.5 g aid V3, Garden_Rack_1 slide",
+   "states": [
+    "locked_1.5g"
+   ],
+   "variant": "V3 at Burn_Couch_1; rack slide: lateral drawer: the moved section runs outboard on floor runners (parallel to the split plane) until its back is at the outboard wall allowance; slides back afterwards (PROTOTYPE, 15!A173 / A174)",
+   "case": "worst part: egress past the deployed aid (0.60 m)",
+   "least_m": -0.066,
+   "status": "FAIL",
+   "worst_case_over": [
+    "injury classes A rigid litter, C vacuum mattress, K litter + kit, S suited",
+    "body size x1.00 and x1.08",
+    "doors 1.00 and 0.90 (the sector hatch leaf)",
+    "search seeds 17,101,102,103 (+201,202 large, 301 doors 0.90)",
+    "6 pose families with six +-0.02 m / +-0.05 rad wobbles",
+    "two inline rescuers on the route",
+    "device poses: best-found about each, every state and seed",
+    "plane screen: litter, hardware, rescuers, reach, egress, care with the aid parked",
+    "mesh: hardware, rescuer capsules, care attendants and kit",
+    "rack stowage motion and stowed position (plane + mesh)"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "LIFE_SUPPORT_GARDEN_COMMON B3; other couch Burn_Couch_2 -0.14; Mess displaced as 15!A169; loads, mass, ratings, stowage time, plant survival OPEN"
+  },
+  {
+   "id": "care|B3|deck|o13c-slide",
+   "route": "ringB-care:B3 in-sector care, fold-down couch, Garden_Rack_1 slide",
+   "states": [
+    "0g",
+    "spin",
+    "stopped"
+   ],
+   "variant": "fold-down couch v [0.9, 1.6, 0.1, 2.1] (re-placed); rack slide: lateral drawer: the moved section runs outboard on floor runners (parallel to the split plane) until its back is at the outboard wall allowance; slides back afterwards (PROTOTYPE)",
+   "case": "worst part: normal state: stowed couch vs canon rack / room (plane)",
+   "least_m": -0.3,
+   "status": "FAIL",
+   "worst_case_over": [
+    "injury classes A rigid litter, C vacuum mattress, K litter + kit, S suited",
+    "body size x1.00 and x1.08",
+    "doors 1.00 and 0.90 (the sector hatch leaf)",
+    "search seeds 17,101,102,103 (+201,202 large, 301 doors 0.90)",
+    "6 pose families with six +-0.02 m / +-0.05 rad wobbles",
+    "two inline rescuers on the route",
+    "slide onto the care point, every state and seed",
+    "zone screen: care, transfer, reach, egress, normal-state stow",
+    "mesh: care attendants and kit",
+    "rack stowage motion and stowed position (plane + mesh)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "Care_Couch_deployed_2",
+   "note": "LIFE_SUPPORT_GARDEN_COMMON B3; unsuited-only least -0.3; Mess displaced as 15!A169"
+  },
+  {
+   "id": "care|A3|aft|o13c-trays-V1",
+   "route": "ringA-care:A3 in-sector care, locked 1.5 g aid V1, Garden_Rack_1 trays",
+   "states": [
+    "locked_1.5g"
+   ],
+   "variant": "V1 at Burn_Couch_2; rack trays: removable tray modules: the crop modules of the moved section (Crop_0 and each tray with its crop) are pulled out through the aisle face and stacked in a stowage column against the outboard wall in the Mess bay; the frame (base reservoir, back, lid, ends) stays in place; modules return afterwards (PROTOTYPE, 15!A173 / A174)",
+   "case": "worst part: rescuer reach (0.60 m path)",
+   "least_m": -0.14,
+   "status": "FAIL",
+   "worst_case_over": [
+    "injury classes A rigid litter, C vacuum mattress, K litter + kit, S suited",
+    "body size x1.00 and x1.08",
+    "doors 1.00 and 0.90 (the sector hatch leaf)",
+    "search seeds 17,101,102,103 (+201,202 large, 301 doors 0.90)",
+    "6 pose families with six +-0.02 m / +-0.05 rad wobbles",
+    "two inline rescuers on the route",
+    "device poses: best-found about each, every state and seed",
+    "plane screen: litter, hardware, rescuers, reach, egress, care with the aid parked",
+    "mesh: hardware, rescuer capsules, care attendants and kit",
+    "rack stowage motion and stowed position (plane + mesh)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "Couch_Lockers_2",
+   "note": "LIFE_SUPPORT_GARDEN_COMMON A3; other couch Burn_Couch_1 -0.456; Mess displaced as 15!A169; loads, mass, ratings, stowage time, plant survival OPEN"
+  },
+  {
+   "id": "care|A3|aft|o13c-trays-V3",
+   "route": "ringA-care:A3 in-sector care, locked 1.5 g aid V3, Garden_Rack_1 trays",
+   "states": [
+    "locked_1.5g"
+   ],
+   "variant": "V3 at Burn_Couch_2; rack trays: removable tray modules: the crop modules of the moved section (Crop_0 and each tray with its crop) are pulled out through the aisle face and stacked in a stowage column against the outboard wall in the Mess bay; the frame (base reservoir, back, lid, ends) stays in place; modules return afterwards (PROTOTYPE, 15!A173 / A174)",
+   "case": "worst part: rescuer reach (0.60 m path)",
+   "least_m": -0.14,
+   "status": "FAIL",
+   "worst_case_over": [
+    "injury classes A rigid litter, C vacuum mattress, K litter + kit, S suited",
+    "body size x1.00 and x1.08",
+    "doors 1.00 and 0.90 (the sector hatch leaf)",
+    "search seeds 17,101,102,103 (+201,202 large, 301 doors 0.90)",
+    "6 pose families with six +-0.02 m / +-0.05 rad wobbles",
+    "two inline rescuers on the route",
+    "device poses: best-found about each, every state and seed",
+    "plane screen: litter, hardware, rescuers, reach, egress, care with the aid parked",
+    "mesh: hardware, rescuer capsules, care attendants and kit",
+    "rack stowage motion and stowed position (plane + mesh)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "Couch_Lockers_2",
+   "note": "LIFE_SUPPORT_GARDEN_COMMON A3; other couch Burn_Couch_1 -0.456; Mess displaced as 15!A169; loads, mass, ratings, stowage time, plant survival OPEN"
+  },
+  {
+   "id": "care|A3|deck|o13c-trays",
+   "route": "ringA-care:A3 in-sector care, fold-down couch, Garden_Rack_1 trays",
+   "states": [
+    "0g",
+    "spin",
+    "stopped"
+   ],
+   "variant": "fold-down couch v [0.9, 1.6, 0.45, 2.45] (as screened); rack trays: removable tray modules: the crop modules of the moved section (Crop_0 and each tray with its crop) are pulled out through the aisle face and stacked in a stowage column against the outboard wall in the Mess bay; the frame (base reservoir, back, lid, ends) stays in place; modules return afterwards (PROTOTYPE)",
+   "case": "worst part: screen transfer station (worst carrier beside + rescuers)",
+   "least_m": -0.531,
+   "status": "FAIL",
+   "worst_case_over": [
+    "injury classes A rigid litter, C vacuum mattress, K litter + kit, S suited",
+    "body size x1.00 and x1.08",
+    "doors 1.00 and 0.90 (the sector hatch leaf)",
+    "search seeds 17,101,102,103 (+201,202 large, 301 doors 0.90)",
+    "6 pose families with six +-0.02 m / +-0.05 rad wobbles",
+    "two inline rescuers on the route",
+    "slide onto the care point, every state and seed",
+    "zone screen: care, transfer, reach, egress, normal-state stow",
+    "mesh: care attendants and kit",
+    "rack stowage motion and stowed position (plane + mesh)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "Study_Garden_Rack_1_A_Back_1",
+   "note": "LIFE_SUPPORT_GARDEN_COMMON A3; unsuited-only least -0.531; Mess displaced as 15!A169"
+  },
+  {
+   "id": "care|B3|aft|o13c-trays-V1",
+   "route": "ringB-care:B3 in-sector care, locked 1.5 g aid V1, Garden_Rack_1 trays",
+   "states": [
+    "locked_1.5g"
+   ],
+   "variant": "V1 at Burn_Couch_2; rack trays: removable tray modules: the crop modules of the moved section (Crop_0 and each tray with its crop) are pulled out through the aisle face and stacked in a stowage column against the outboard wall in the Mess bay; the frame (base reservoir, back, lid, ends) stays in place; modules return afterwards (PROTOTYPE, 15!A173 / A174)",
+   "case": "worst part: rescuer reach (0.60 m path)",
+   "least_m": -0.14,
+   "status": "FAIL",
+   "worst_case_over": [
+    "injury classes A rigid litter, C vacuum mattress, K litter + kit, S suited",
+    "body size x1.00 and x1.08",
+    "doors 1.00 and 0.90 (the sector hatch leaf)",
+    "search seeds 17,101,102,103 (+201,202 large, 301 doors 0.90)",
+    "6 pose families with six +-0.02 m / +-0.05 rad wobbles",
+    "two inline rescuers on the route",
+    "device poses: best-found about each, every state and seed",
+    "plane screen: litter, hardware, rescuers, reach, egress, care with the aid parked",
+    "mesh: hardware, rescuer capsules, care attendants and kit",
+    "rack stowage motion and stowed position (plane + mesh)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "Couch_Lockers_2",
+   "note": "LIFE_SUPPORT_GARDEN_COMMON B3; other couch Burn_Couch_1 -0.456; Mess displaced as 15!A169; loads, mass, ratings, stowage time, plant survival OPEN"
+  },
+  {
+   "id": "care|B3|aft|o13c-trays-V3",
+   "route": "ringB-care:B3 in-sector care, locked 1.5 g aid V3, Garden_Rack_1 trays",
+   "states": [
+    "locked_1.5g"
+   ],
+   "variant": "V3 at Burn_Couch_2; rack trays: removable tray modules: the crop modules of the moved section (Crop_0 and each tray with its crop) are pulled out through the aisle face and stacked in a stowage column against the outboard wall in the Mess bay; the frame (base reservoir, back, lid, ends) stays in place; modules return afterwards (PROTOTYPE, 15!A173 / A174)",
+   "case": "worst part: rescuer reach (0.60 m path)",
+   "least_m": -0.14,
+   "status": "FAIL",
+   "worst_case_over": [
+    "injury classes A rigid litter, C vacuum mattress, K litter + kit, S suited",
+    "body size x1.00 and x1.08",
+    "doors 1.00 and 0.90 (the sector hatch leaf)",
+    "search seeds 17,101,102,103 (+201,202 large, 301 doors 0.90)",
+    "6 pose families with six +-0.02 m / +-0.05 rad wobbles",
+    "two inline rescuers on the route",
+    "device poses: best-found about each, every state and seed",
+    "plane screen: litter, hardware, rescuers, reach, egress, care with the aid parked",
+    "mesh: hardware, rescuer capsules, care attendants and kit",
+    "rack stowage motion and stowed position (plane + mesh)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "Couch_Lockers_2",
+   "note": "LIFE_SUPPORT_GARDEN_COMMON B3; other couch Burn_Couch_1 -0.456; Mess displaced as 15!A169; loads, mass, ratings, stowage time, plant survival OPEN"
+  },
+  {
+   "id": "care|B3|deck|o13c-trays",
+   "route": "ringB-care:B3 in-sector care, fold-down couch, Garden_Rack_1 trays",
+   "states": [
+    "0g",
+    "spin",
+    "stopped"
+   ],
+   "variant": "fold-down couch v [0.9, 1.6, 0.45, 2.45] (as screened); rack trays: removable tray modules: the crop modules of the moved section (Crop_0 and each tray with its crop) are pulled out through the aisle face and stacked in a stowage column against the outboard wall in the Mess bay; the frame (base reservoir, back, lid, ends) stays in place; modules return afterwards (PROTOTYPE)",
+   "case": "worst part: screen transfer station (worst carrier beside + rescuers)",
+   "least_m": -0.531,
+   "status": "FAIL",
+   "worst_case_over": [
+    "injury classes A rigid litter, C vacuum mattress, K litter + kit, S suited",
+    "body size x1.00 and x1.08",
+    "doors 1.00 and 0.90 (the sector hatch leaf)",
+    "search seeds 17,101,102,103 (+201,202 large, 301 doors 0.90)",
+    "6 pose families with six +-0.02 m / +-0.05 rad wobbles",
+    "two inline rescuers on the route",
+    "slide onto the care point, every state and seed",
+    "zone screen: care, transfer, reach, egress, normal-state stow",
+    "mesh: care attendants and kit",
+    "rack stowage motion and stowed position (plane + mesh)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "Study_Garden_Rack_1_A_Back_2",
+   "note": "LIFE_SUPPORT_GARDEN_COMMON B3; unsuited-only least -0.531; Mess displaced as 15!A169"
+  }
+ ],
+ "note_o13": "segments with |o13- in the id: owner 2026-10-13 15!A173:A175 (1.5 g aids, local care-point changes); same keys as the other segments",
+ "note_o13c": "segments with |o13c- in the id: Garden_Rack_1 emergency stowage 2026-10-13c (canon / swing / slide / trays); same keys"
+}

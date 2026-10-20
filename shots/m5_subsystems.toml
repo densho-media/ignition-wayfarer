@@ -1,0 +1,130 @@
+# M5 functional cutaway: the ship's twelve functional subsystems, as presentation data over the saved assets.
+# An explanatory overlay colour per subsystem (never a ship material), the selectors that assign each shot item to it, its
+# source references and its maturity. Classification: the first subsystem (file order) whose `select` matches wins; an item no `select`
+# matches falls to the first matching `fallback` (whole assemblies); anything else is CTX (context: hull casing, unclassified).
+# Read by representation.load_subsystems() for shots that name this file (`subsystems = "m5_subsystems.toml"`) and by
+# studies/m5_cutaway.py for the subsystem map (references/m5_subsystem_map.json).
+schema = 1
+
+[[subsystem]]
+id = "S01"
+name = "Forward protection, EYE and Dust Lance"
+color = [0.25, 0.42, 0.78]
+select = []   # rim RCS pods and rim strobes are claimed by S11 (a select beats every fallback)
+fallback = ["group:Assembly_FORWARD_SHIELD*", "group:Assembly_EYE*"]
+sources = "14_HULL_SERVICE / 15 Q2, FD-V2 rows 15!A189:A192, Eye 45/50; forward_shield.py, eye_placement.py"
+maturity = "WORKING envelope (90 m shield, 12 m Lance); truss, Crown, EYE wells PROTOTYPE"
+label = { text = "S01 FORWARD SHIELD / EYE / DUST LANCE", select = ["kind:shield_skin"], offset = [0.0, 0.0, 52.0], size = 2.4 }
+
+[[subsystem]]
+id = "S02"
+name = "Central spine and primary load paths"
+color = [0.55, 0.55, 0.58]
+select = ["name:Structural_Spine*", "name:Primary_*", "name:Central_Thrust_Hub*", "name:Hub_Web*", "name:Ring_Web*", "name:Forward_Mount_Strut*", "name:Nozzle_Pickup*", "name:Thrust_Ring*", "kind:thrust_node*", "kind:tank_support", "kind:drive_thrust_strut"]
+fallback = ["group:Assembly_STRUCTURE*"]
+sources = "07_PRIMARY_STRUCTURE (cage, keels, frames), 08 thrust ring; hull_geometry.py, components/structure.py"
+maturity = "WORKING layout; member sizing OPEN; lobe supports PROTOTYPE"
+label = { text = "S02 SPINE + KEEL CAGE + THRUST RING", select = ["name:Structural_Spine*"], offset = [-20.0, 0.0, -30.0], size = 2.4 }
+
+[[subsystem]]
+id = "S03"
+name = "Counter-rotating habitat rings and transfer mechanisms"
+color = [0.36, 0.66, 0.62]
+select = ["kind:ring_*", "kind:rotor*", "kind:transfer_drum", "kind:transfer_closure", "kind:ring_stop_lock", "kind:crew_bracket", "kind:sector_pressure", "kind:ring_sector"]
+fallback = ["group:Assembly_HABITAT*", "group:Assembly_ROTOR_INTERFACE*"]
+sources = "08 rings (r 30 m, residual momentum), Q46 despun drum (ANSWERED 2026-10-07); habitat_ring.py, rotor_interface.py"
+maturity = "BASELINE ring envelope; frames and mechanisms PROTOTYPE"
+label = { text = "S03 COUNTER-ROTATING RINGS + TRANSFER DRUMS", select = ["kind:ring_frame"], offset = [0.0, 0.0, 40.0], size = 2.4 }
+
+[[subsystem]]
+id = "S04"
+name = "Pressurized crew and survival spaces"
+color = [0.93, 0.79, 0.28]
+select = ["kind:sector_interior*", "kind:crew_vestibule", "kind:survival_envelope", "kind:crew_refuge", "kind:refuge_wall", "kind:storeroom*", "name:Refuge_*", "name:Survival_Refuge*", "name:Crew_Refuge*"]
+fallback = []
+sources = "HUM-001 zones 1-5, storm refuge for 12 (15 rows), storeroom survey; habitat_interior.py, storeroom.py"
+maturity = "PROTOTYPE whitebox (human-scale reviewed); room fit-out STUDY"
+label = { text = "S04 PRESSURIZED SECTORS + STORM REFUGE", select = ["kind:crew_refuge"], offset = [-25.0, 0.0, 26.0], size = 2.4 }
+
+[[subsystem]]
+id = "S05"
+name = "D-3He fusion-fuel cryostats"
+color = [0.69, 0.48, 0.63]
+colors = { "kind:he3_cryostat" = [0.62, 0.38, 0.85], "kind:d2_cryostat" = [0.95, 0.52, 0.62] }
+select = ["kind:he3_cryostat", "kind:d2_cryostat"]
+fallback = []
+sources = "S&E 62_FUEL_STORAGE_STUDY (IDEAL MIN), 28 col E; BODY-001 option C; studies/m5_cutaway.py"
+maturity = "STUDY; IDEAL BOUNDS ONLY / INVENTORY HOLD (15!A208, 98!A115); BODY-C reversible L2 study (15!A207)"
+label = { text = "S05 He-3 (3.2 K) + D2 (20 K) CRYOSTATS", select = ["kind:he3_cryostat"], offset = [15.0, 0.0, -14.0], size = 2.4 }
+
+[[subsystem]]
+id = "S06"
+name = "Hydrogen reaction-mass storage"
+color = [0.55, 0.78, 0.95]
+select = ["kind:h2_tank", "name:Tank_Volume*", "kind:shortfall_scale"]
+fallback = []
+sources = "S&E 62 (H2 HYPOTHESIS), 30/34 PROXY FAIL; BODY-001 option C; schematic feed tanks (WF_STORAGE)"
+maturity = "STUDY; WORKING STUDY CHOICE BODY-C / FUEL QUANTITY OPEN (15!A207); 600 t PROVISIONAL aggregate D+He-3+H2; 5,490 / 8,032 m3 deficits shown"
+label = { text = "S06 H2 REACTION MASS", select = ["name:Tank_Volume*"], offset = [10.0, 0.0, -14.0], size = 2.4 }
+
+[[subsystem]]
+id = "S07"
+name = "Refrigeration, isolation and transfer"
+color = [0.95, 0.56, 0.17]
+colors = { "kind:insulation_envelope" = [0.80, 0.76, 0.62], "kind:cryo_coil_jacket" = [0.80, 0.76, 0.62] }   # cream: insulation / vacuum-jacket allowance; orange: plant
+select = ["kind:cryo_*", "kind:refrigeration_frame", "kind:transfer_pump_frame", "kind:vent_frame", "kind:insulation_envelope", "kind:transfer_manifold"]
+fallback = ["group:Assembly_STORAGE*"]
+sources = "34 tank-bay overhead 250 m3 (proxy), 14 cryogenic_storage_stack, 15!A69 (no core-to-tank sight line)"
+maturity = "PROTOTYPE envelopes; heat leak, cooler power and boil-off OPEN; tankage dry mass SUBALLOCATION STUDY (15!A209); coil cryogenics HOLD (15!A215)"
+label = { text = "S07 REFRIGERATION / PUMPS / VENTS / MLI", select = ["kind:refrigeration_frame"], offset = [0.0, 0.0, 14.0], size = 2.4 }
+
+[[subsystem]]
+id = "S08"
+name = "Power distribution and auxiliary equipment"
+color = [0.35, 0.63, 0.31]
+select = ["kind:power_storage", "kind:ride_through", "kind:generator_proxy", "name:Brayton_Train*", "kind:equipment_envelope", "kind:drive_power_lead", "kind:drive_quench_dump"]
+fallback = ["group:Assembly_POWER_STORAGE*"]
+sources = "power_storage (main battery, pulse bank, survival reserves), Brayton A/B, 34 fore hardware envelopes"
+maturity = "PROTOTYPE; power budget and conversion OPEN"
+label = { text = "S08 POWER + EQUIPMENT BAY", select = ["kind:equipment_envelope"], offset = [0.0, 0.0, -30.0], size = 2.4 }
+
+[[subsystem]]
+id = "S09"
+name = "Heat rejection, coolant routing and radiator interfaces"
+color = [0.88, 0.34, 0.35]
+select = ["kind:coolant_*", "kind:root_boom", "kind:casing_boot", "kind:thermal_support", "kind:warm_panel*"]
+fallback = ["group:Assembly_THERMAL*"]
+sources = "Q52 option D blades (4,978 m2 net / 26,882 m2 effective), AFT-009; 28 hot-radiator screen FAIL DIAGNOSTIC"
+maturity = "BASELINE blades; thermal balance FAIL DIAGNOSTIC at First Ignition (28 col E)"
+label = { text = "S09 THERMAL BLADES + COOLANT CHASES", select = ["kind:root_boom"], offset = [-20.0, 0.0, 44.0], size = 2.4 }
+
+[[subsystem]]
+id = "S10"
+name = "Reactor, magnetic manifold and four-nozzle propulsion"
+color = [0.61, 0.46, 0.37]
+select = ["name:Reactor_Shadow_Shield*", "name:Engineering_Envelope*"]
+fallback = ["group:Assembly_PROPULSION*", "group:Assembly_SHIELDING*"]
+sources = "Fiji lattice manifold, 28 (4 nozzles LOCKED), Q40 magnetic nozzles; drive_manifold.py"
+maturity = "P0 PHYSICS HOLD (15!A200); rigged PROTOTYPE geometry; pickup as built, axial bipod PREFERRED STUDY (15!A214); coils OD-024/025 HOLD (15!A215)"
+label = { text = "S10 REACTOR / MANIFOLD / 4 MAGNETIC NOZZLES", select = ["name:Fusion_Core*"], offset = [0.0, 0.0, -30.0], size = 2.4 }
+
+[[subsystem]]
+id = "S11"
+name = "Communications, navigation and attitude"
+color = [0.09, 0.75, 0.81]
+select = ["kind:comms_antenna", "kind:exterior_hardware", "kind:rcs_thruster", "kind:rcs_balanced_*", "kind:rcs_plume_cone*", "kind:nav_light", "name:Survival_Lasercom*", "name:Survival_RF*", "name:Survival_Star_Tracker*", "name:Ext_*"]
+fallback = []
+sources = "S&E 37 F14-F17, 38 S20, 63_COMMS_ATTITUDE_STUDY (screen), owner 15!A210:A212 (2026-10-18); exterior_hardware.py"
+maturity = "PROTOTYPE bounding case; L2 OPS DESIGN / RCS PERFORMANCE HOLD (15!A210:A212, 98!A116); high-speed flip FORBIDDEN (15!A211)"
+label = { text = "S11 COMMS / NAV / RCS", select = ["name:Ext_HGA_1_Dish*"], offset = [0.0, 0.0, -14.0], size = 2.4 }
+
+[[subsystem]]
+id = "S12"
+name = "Access corridors, service interfaces and maintenance"
+color = [0.92, 0.92, 0.90]
+colors = { "kind:eva_rail_forward" = [0.25, 0.85, 0.35], "kind:eva_rail_crossing" = [0.95, 0.85, 0.20], "kind:eva_rail_aft" = [0.95, 0.35, 0.15], "kind:eva_target" = [0.95, 0.20, 0.85] }   # EVA L2 comparison rails by option; targets magenta
+select = ["kind:eva_*", "kind:crew_trunk", "kind:crew_passage", "kind:route_fitout", "kind:entry_*", "kind:casing_detail", "kind:hull_opening", "kind:service_*", "kind:dock_capture_ring", "kind:hatch_hinge", "kind:drone_proxy", "kind:spine_tunnel", "name:Dock_*", "name:Airlock*", "name:Crew_*", "name:Trunk_*", "name:Casing_*"]
+fallback = ["group:Assembly_CREW_TRANSFER*", "group:Assembly_SERVICE*", "group:Assembly_DRONES*"]
+sources = "HUM-001 route, SERV-002, DRONE-001 L2, BODY-001 spine tunnel; EVA exterior rails NOT released (44 RUN-011)"
+maturity = "PROTOTYPE route (built, inspected); service tunnel and lanes STUDY; aft service ROBOTIC ONLY, WORKING (15!A213, 98!A117); FLIGHT_EVA HOLD"
+label = { text = "S12 CREW TRUNK / DOCKS / SERVICE TUNNEL", select = ["kind:crew_trunk"], offset = [-40.0, 0.0, 14.0], size = 2.4 }

@@ -1,0 +1,2043 @@
+{
+ "task": "P1-008",
+ "scope": "Sourced rotor-interface architecture; PROTOTYPE hub proxies, service paths and display states. No bearing, motor, coupler, loss or spin-down sizing.",
+ "passed": true,
+ "failures": [],
+ "running": {
+  "clearances": {
+   "magnetic_display_gap_m": 0.030000000000000027,
+   "touchdown_display_clearance_m": 0.015000000000000124,
+   "spine_to_stationary_m": 0.025000000000000022,
+   "ring_to_drum_m": 0.010000000000000009,
+   "ring_lock_to_drum_m": 0.17999999999999994,
+   "ring_lock_to_spokes_m": 0.20999999999999996,
+   "fluid_face_seal_display_gap_m": 0.040000000000000036,
+   "spoke_to_fluid_face_m": 0.16000000000000014,
+   "rotor2_fwd_to_refuge_m": 0.75,
+   "rotor1_fwd_to_rotor2_aft_m": 2.510000000000005,
+   "rotor2_fwd_to_forward_mount_m": 14.00063752276867,
+   "ring_sweep_aft_to_outer_cage_m": 1.5499999999999972,
+   "ring_sweep_to_radiator_front_m": 1.5,
+   "ring_planes_gap_m": 1.6999999999999886,
+   "ring_sweep_fwd_to_forward_mount_m": 14.200637522768659
+  },
+  "failures": [],
+  "passed": true
+ },
+ "withdrawal": {
+  "Hub1_TOUCHDOWN_A_S1": {
+   "module": "TOUCHDOWN_A",
+   "direction": "AFT",
+   "path_x_m": [
+    84.06936247723134,
+    84.44936247723135
+   ],
+   "fixed_obstacles": {
+    "ROTATING": [],
+    "STOPPED_LOCKED": []
+   },
+   "prerequisites": [],
+   "passed": true
+  },
+  "Hub1_TOUCHDOWN_A_S2": {
+   "module": "TOUCHDOWN_A",
+   "direction": "AFT",
+   "path_x_m": [
+    84.06936247723134,
+    84.44936247723135
+   ],
+   "fixed_obstacles": {
+    "ROTATING": [],
+    "STOPPED_LOCKED": []
+   },
+   "prerequisites": [],
+   "passed": true
+  },
+  "Hub1_TOUCHDOWN_A_S3": {
+   "module": "TOUCHDOWN_A",
+   "direction": "AFT",
+   "path_x_m": [
+    84.06936247723134,
+    84.44936247723135
+   ],
+   "fixed_obstacles": {
+    "ROTATING": [],
+    "STOPPED_LOCKED": []
+   },
+   "prerequisites": [],
+   "passed": true
+  },
+  "Hub1_MAGNETIC_A_S1": {
+   "module": "MAGNETIC_A",
+   "direction": "AFT",
+   "path_x_m": [
+    83.91936247723132,
+    84.64936247723134
+   ],
+   "fixed_obstacles": {
+    "ROTATING": [],
+    "STOPPED_LOCKED": []
+   },
+   "prerequisites": [
+    "Hub1_TOUCHDOWN_A_S1"
+   ],
+   "passed": true
+  },
+  "Hub1_MAGNETIC_A_S2": {
+   "module": "MAGNETIC_A",
+   "direction": "AFT",
+   "path_x_m": [
+    83.91936247723132,
+    84.64936247723134
+   ],
+   "fixed_obstacles": {
+    "ROTATING": [],
+    "STOPPED_LOCKED": []
+   },
+   "prerequisites": [
+    "Hub1_TOUCHDOWN_A_S2"
+   ],
+   "passed": true
+  },
+  "Hub1_MAGNETIC_A_S3": {
+   "module": "MAGNETIC_A",
+   "direction": "AFT",
+   "path_x_m": [
+    83.91936247723132,
+    84.64936247723134
+   ],
+   "fixed_obstacles": {
+    "ROTATING": [],
+    "STOPPED_LOCKED": []
+   },
+   "prerequisites": [
+    "Hub1_TOUCHDOWN_A_S3"
+   ],
+   "passed": true
+  },
+  "Hub1_MOTOR_S1": {
+   "module": "MOTOR",
+   "direction": "FWD",
+   "path_x_m": [
+    85.79936247723134,
+    87.99936247723134
+   ],
+   "fixed_obstacles": {
+    "ROTATING": [],
+    "STOPPED_LOCKED": []
+   },
+   "prerequisites": [
+    "Hub1_DATA_S1",
+    "Hub1_EMERGENCY_POWER_S1",
+    "Hub1_MAGNETIC_B_S1",
+    "Hub1_POWER_S1",
+    "Hub1_TOUCHDOWN_B_S1"
+   ],
+   "passed": true
+  },
+  "Hub1_MOTOR_S2": {
+   "module": "MOTOR",
+   "direction": "FWD",
+   "path_x_m": [
+    85.79936247723134,
+    87.99936247723134
+   ],
+   "fixed_obstacles": {
+    "ROTATING": [],
+    "STOPPED_LOCKED": []
+   },
+   "prerequisites": [
+    "Hub1_DATA_S2",
+    "Hub1_MAGNETIC_B_S2",
+    "Hub1_POWER_S2",
+    "Hub1_TOUCHDOWN_B_S2"
+   ],
+   "passed": true
+  },
+  "Hub1_MOTOR_S3": {
+   "module": "MOTOR",
+   "direction": "FWD",
+   "path_x_m": [
+    85.79936247723134,
+    87.99936247723134
+   ],
+   "fixed_obstacles": {
+    "ROTATING": [],
+    "STOPPED_LOCKED": []
+   },
+   "prerequisites": [
+    "Hub1_DATA_S3",
+    "Hub1_MAGNETIC_B_S3",
+    "Hub1_POWER_S3",
+    "Hub1_TOUCHDOWN_B_S3"
+   ],
+   "passed": true
+  },
+  "Hub1_POWER_S1": {
+   "module": "POWER",
+   "direction": "FWD",
+   "path_x_m": [
+    86.14936247723134,
+    87.49936247723134
+   ],
+   "fixed_obstacles": {
+    "ROTATING": [],
+    "STOPPED_LOCKED": []
+   },
+   "prerequisites": [
+    "Hub1_DATA_S1",
+    "Hub1_EMERGENCY_POWER_S1",
+    "Hub1_MAGNETIC_B_S1",
+    "Hub1_TOUCHDOWN_B_S1"
+   ],
+   "passed": true
+  },
+  "Hub1_POWER_S2": {
+   "module": "POWER",
+   "direction": "FWD",
+   "path_x_m": [
+    86.14936247723134,
+    87.49936247723134
+   ],
+   "fixed_obstacles": {
+    "ROTATING": [],
+    "STOPPED_LOCKED": []
+   },
+   "prerequisites": [
+    "Hub1_DATA_S2",
+    "Hub1_MAGNETIC_B_S2",
+    "Hub1_TOUCHDOWN_B_S2"
+   ],
+   "passed": true
+  },
+  "Hub1_POWER_S3": {
+   "module": "POWER",
+   "direction": "FWD",
+   "path_x_m": [
+    86.14936247723134,
+    87.49936247723134
+   ],
+   "fixed_obstacles": {
+    "ROTATING": [],
+    "STOPPED_LOCKED": []
+   },
+   "prerequisites": [
+    "Hub1_DATA_S3",
+    "Hub1_MAGNETIC_B_S3",
+    "Hub1_TOUCHDOWN_B_S3"
+   ],
+   "passed": true
+  },
+  "Hub1_DATA_S1": {
+   "module": "DATA",
+   "direction": "FWD",
+   "path_x_m": [
+    86.34936247723134,
+    87.34936247723134
+   ],
+   "fixed_obstacles": {
+    "ROTATING": [],
+    "STOPPED_LOCKED": []
+   },
+   "prerequisites": [
+    "Hub1_EMERGENCY_POWER_S1",
+    "Hub1_MAGNETIC_B_S1",
+    "Hub1_TOUCHDOWN_B_S1"
+   ],
+   "passed": true
+  },
+  "Hub1_DATA_S2": {
+   "module": "DATA",
+   "direction": "FWD",
+   "path_x_m": [
+    86.34936247723134,
+    87.34936247723134
+   ],
+   "fixed_obstacles": {
+    "ROTATING": [],
+    "STOPPED_LOCKED": []
+   },
+   "prerequisites": [
+    "Hub1_MAGNETIC_B_S2",
+    "Hub1_TOUCHDOWN_B_S2"
+   ],
+   "passed": true
+  },
+  "Hub1_DATA_S3": {
+   "module": "DATA",
+   "direction": "FWD",
+   "path_x_m": [
+    86.34936247723134,
+    87.34936247723134
+   ],
+   "fixed_obstacles": {
+    "ROTATING": [],
+    "STOPPED_LOCKED": []
+   },
+   "prerequisites": [
+    "Hub1_MAGNETIC_B_S3",
+    "Hub1_TOUCHDOWN_B_S3"
+   ],
+   "passed": true
+  },
+  "Hub1_EMERGENCY_POWER_S1": {
+   "module": "EMERGENCY_POWER",
+   "direction": "FWD",
+   "path_x_m": [
+    86.49936247723134,
+    87.29936247723136
+   ],
+   "fixed_obstacles": {
+    "ROTATING": [],
+    "STOPPED_LOCKED": []
+   },
+   "prerequisites": [
+    "Hub1_MAGNETIC_B_S1",
+    "Hub1_TOUCHDOWN_B_S1"
+   ],
+   "passed": true
+  },
+  "Hub1_MAGNETIC_B_S1": {
+   "module": "MAGNETIC_B",
+   "direction": "FWD",
+   "path_x_m": [
+    86.84936247723134,
+    87.49936247723134
+   ],
+   "fixed_obstacles": {
+    "ROTATING": [],
+    "STOPPED_LOCKED": []
+   },
+   "prerequisites": [
+    "Hub1_TOUCHDOWN_B_S1"
+   ],
+   "passed": true
+  },
+  "Hub1_MAGNETIC_B_S2": {
+   "module": "MAGNETIC_B",
+   "direction": "FWD",
+   "path_x_m": [
+    86.84936247723134,
+    87.49936247723134
+   ],
+   "fixed_obstacles": {
+    "ROTATING": [],
+    "STOPPED_LOCKED": []
+   },
+   "prerequisites": [
+    "Hub1_TOUCHDOWN_B_S2"
+   ],
+   "passed": true
+  },
+  "Hub1_MAGNETIC_B_S3": {
+   "module": "MAGNETIC_B",
+   "direction": "FWD",
+   "path_x_m": [
+    86.84936247723134,
+    87.49936247723134
+   ],
+   "fixed_obstacles": {
+    "ROTATING": [],
+    "STOPPED_LOCKED": []
+   },
+   "prerequisites": [
+    "Hub1_TOUCHDOWN_B_S3"
+   ],
+   "passed": true
+  },
+  "Hub1_TOUCHDOWN_B_S1": {
+   "module": "TOUCHDOWN_B",
+   "direction": "FWD",
+   "path_x_m": [
+    87.04936247723134,
+    87.34936247723135
+   ],
+   "fixed_obstacles": {
+    "ROTATING": [],
+    "STOPPED_LOCKED": []
+   },
+   "prerequisites": [],
+   "passed": true
+  },
+  "Hub1_TOUCHDOWN_B_S2": {
+   "module": "TOUCHDOWN_B",
+   "direction": "FWD",
+   "path_x_m": [
+    87.04936247723134,
+    87.34936247723135
+   ],
+   "fixed_obstacles": {
+    "ROTATING": [],
+    "STOPPED_LOCKED": []
+   },
+   "prerequisites": [],
+   "passed": true
+  },
+  "Hub1_TOUCHDOWN_B_S3": {
+   "module": "TOUCHDOWN_B",
+   "direction": "FWD",
+   "path_x_m": [
+    87.04936247723134,
+    87.34936247723135
+   ],
+   "fixed_obstacles": {
+    "ROTATING": [],
+    "STOPPED_LOCKED": []
+   },
+   "prerequisites": [],
+   "passed": true
+  },
+  "Hub1_FLUID_COUPLING_Stator": {
+   "module": "FLUID_COUPLING",
+   "direction": "FWD",
+   "path_x_m": [
+    87.39936247723134,
+    87.80936247723133
+   ],
+   "fixed_obstacles": {
+    "ROTATING": [],
+    "STOPPED_LOCKED": []
+   },
+   "prerequisites": [],
+   "passed": true
+  },
+  "Hub2_TOUCHDOWN_A_S1": {
+   "module": "TOUCHDOWN_A",
+   "direction": "AFT",
+   "path_x_m": [
+    90.06936247723134,
+    90.44936247723135
+   ],
+   "fixed_obstacles": {
+    "ROTATING": [],
+    "STOPPED_LOCKED": []
+   },
+   "prerequisites": [],
+   "passed": true
+  },
+  "Hub2_TOUCHDOWN_A_S2": {
+   "module": "TOUCHDOWN_A",
+   "direction": "AFT",
+   "path_x_m": [
+    90.06936247723134,
+    90.44936247723135
+   ],
+   "fixed_obstacles": {
+    "ROTATING": [],
+    "STOPPED_LOCKED": []
+   },
+   "prerequisites": [],
+   "passed": true
+  },
+  "Hub2_TOUCHDOWN_A_S3": {
+   "module": "TOUCHDOWN_A",
+   "direction": "AFT",
+   "path_x_m": [
+    90.06936247723134,
+    90.44936247723135
+   ],
+   "fixed_obstacles": {
+    "ROTATING": [],
+    "STOPPED_LOCKED": []
+   },
+   "prerequisites": [],
+   "passed": true
+  },
+  "Hub2_MAGNETIC_A_S1": {
+   "module": "MAGNETIC_A",
+   "direction": "AFT",
+   "path_x_m": [
+    89.91936247723132,
+    90.64936247723134
+   ],
+   "fixed_obstacles": {
+    "ROTATING": [],
+    "STOPPED_LOCKED": []
+   },
+   "prerequisites": [
+    "Hub2_TOUCHDOWN_A_S1"
+   ],
+   "passed": true
+  },
+  "Hub2_MAGNETIC_A_S2": {
+   "module": "MAGNETIC_A",
+   "direction": "AFT",
+   "path_x_m": [
+    89.91936247723132,
+    90.64936247723134
+   ],
+   "fixed_obstacles": {
+    "ROTATING": [],
+    "STOPPED_LOCKED": []
+   },
+   "prerequisites": [
+    "Hub2_TOUCHDOWN_A_S2"
+   ],
+   "passed": true
+  },
+  "Hub2_MAGNETIC_A_S3": {
+   "module": "MAGNETIC_A",
+   "direction": "AFT",
+   "path_x_m": [
+    89.91936247723132,
+    90.64936247723134
+   ],
+   "fixed_obstacles": {
+    "ROTATING": [],
+    "STOPPED_LOCKED": []
+   },
+   "prerequisites": [
+    "Hub2_TOUCHDOWN_A_S3"
+   ],
+   "passed": true
+  },
+  "Hub2_MOTOR_S1": {
+   "module": "MOTOR",
+   "direction": "FWD",
+   "path_x_m": [
+    91.79936247723134,
+    93.99936247723134
+   ],
+   "fixed_obstacles": {
+    "ROTATING": [],
+    "STOPPED_LOCKED": []
+   },
+   "prerequisites": [
+    "Hub2_DATA_S1",
+    "Hub2_EMERGENCY_POWER_S1",
+    "Hub2_MAGNETIC_B_S1",
+    "Hub2_POWER_S1",
+    "Hub2_TOUCHDOWN_B_S1"
+   ],
+   "passed": true
+  },
+  "Hub2_MOTOR_S2": {
+   "module": "MOTOR",
+   "direction": "FWD",
+   "path_x_m": [
+    91.79936247723134,
+    93.99936247723134
+   ],
+   "fixed_obstacles": {
+    "ROTATING": [],
+    "STOPPED_LOCKED": []
+   },
+   "prerequisites": [
+    "Hub2_DATA_S2",
+    "Hub2_MAGNETIC_B_S2",
+    "Hub2_POWER_S2",
+    "Hub2_TOUCHDOWN_B_S2"
+   ],
+   "passed": true
+  },
+  "Hub2_MOTOR_S3": {
+   "module": "MOTOR",
+   "direction": "FWD",
+   "path_x_m": [
+    91.79936247723134,
+    93.99936247723134
+   ],
+   "fixed_obstacles": {
+    "ROTATING": [],
+    "STOPPED_LOCKED": []
+   },
+   "prerequisites": [
+    "Hub2_DATA_S3",
+    "Hub2_MAGNETIC_B_S3",
+    "Hub2_POWER_S3",
+    "Hub2_TOUCHDOWN_B_S3"
+   ],
+   "passed": true
+  },
+  "Hub2_POWER_S1": {
+   "module": "POWER",
+   "direction": "FWD",
+   "path_x_m": [
+    92.14936247723134,
+    93.49936247723134
+   ],
+   "fixed_obstacles": {
+    "ROTATING": [],
+    "STOPPED_LOCKED": []
+   },
+   "prerequisites": [
+    "Hub2_DATA_S1",
+    "Hub2_EMERGENCY_POWER_S1",
+    "Hub2_MAGNETIC_B_S1",
+    "Hub2_TOUCHDOWN_B_S1"
+   ],
+   "passed": true
+  },
+  "Hub2_POWER_S2": {
+   "module": "POWER",
+   "direction": "FWD",
+   "path_x_m": [
+    92.14936247723134,
+    93.49936247723134
+   ],
+   "fixed_obstacles": {
+    "ROTATING": [],
+    "STOPPED_LOCKED": []
+   },
+   "prerequisites": [
+    "Hub2_DATA_S2",
+    "Hub2_MAGNETIC_B_S2",
+    "Hub2_TOUCHDOWN_B_S2"
+   ],
+   "passed": true
+  },
+  "Hub2_POWER_S3": {
+   "module": "POWER",
+   "direction": "FWD",
+   "path_x_m": [
+    92.14936247723134,
+    93.49936247723134
+   ],
+   "fixed_obstacles": {
+    "ROTATING": [],
+    "STOPPED_LOCKED": []
+   },
+   "prerequisites": [
+    "Hub2_DATA_S3",
+    "Hub2_MAGNETIC_B_S3",
+    "Hub2_TOUCHDOWN_B_S3"
+   ],
+   "passed": true
+  },
+  "Hub2_DATA_S1": {
+   "module": "DATA",
+   "direction": "FWD",
+   "path_x_m": [
+    92.34936247723134,
+    93.34936247723134
+   ],
+   "fixed_obstacles": {
+    "ROTATING": [],
+    "STOPPED_LOCKED": []
+   },
+   "prerequisites": [
+    "Hub2_EMERGENCY_POWER_S1",
+    "Hub2_MAGNETIC_B_S1",
+    "Hub2_TOUCHDOWN_B_S1"
+   ],
+   "passed": true
+  },
+  "Hub2_DATA_S2": {
+   "module": "DATA",
+   "direction": "FWD",
+   "path_x_m": [
+    92.34936247723134,
+    93.34936247723134
+   ],
+   "fixed_obstacles": {
+    "ROTATING": [],
+    "STOPPED_LOCKED": []
+   },
+   "prerequisites": [
+    "Hub2_MAGNETIC_B_S2",
+    "Hub2_TOUCHDOWN_B_S2"
+   ],
+   "passed": true
+  },
+  "Hub2_DATA_S3": {
+   "module": "DATA",
+   "direction": "FWD",
+   "path_x_m": [
+    92.34936247723134,
+    93.34936247723134
+   ],
+   "fixed_obstacles": {
+    "ROTATING": [],
+    "STOPPED_LOCKED": []
+   },
+   "prerequisites": [
+    "Hub2_MAGNETIC_B_S3",
+    "Hub2_TOUCHDOWN_B_S3"
+   ],
+   "passed": true
+  },
+  "Hub2_EMERGENCY_POWER_S1": {
+   "module": "EMERGENCY_POWER",
+   "direction": "FWD",
+   "path_x_m": [
+    92.49936247723134,
+    93.29936247723136
+   ],
+   "fixed_obstacles": {
+    "ROTATING": [],
+    "STOPPED_LOCKED": []
+   },
+   "prerequisites": [
+    "Hub2_MAGNETIC_B_S1",
+    "Hub2_TOUCHDOWN_B_S1"
+   ],
+   "passed": true
+  },
+  "Hub2_MAGNETIC_B_S1": {
+   "module": "MAGNETIC_B",
+   "direction": "FWD",
+   "path_x_m": [
+    92.84936247723134,
+    93.49936247723134
+   ],
+   "fixed_obstacles": {
+    "ROTATING": [],
+    "STOPPED_LOCKED": []
+   },
+   "prerequisites": [
+    "Hub2_TOUCHDOWN_B_S1"
+   ],
+   "passed": true
+  },
+  "Hub2_MAGNETIC_B_S2": {
+   "module": "MAGNETIC_B",
+   "direction": "FWD",
+   "path_x_m": [
+    92.84936247723134,
+    93.49936247723134
+   ],
+   "fixed_obstacles": {
+    "ROTATING": [],
+    "STOPPED_LOCKED": []
+   },
+   "prerequisites": [
+    "Hub2_TOUCHDOWN_B_S2"
+   ],
+   "passed": true
+  },
+  "Hub2_MAGNETIC_B_S3": {
+   "module": "MAGNETIC_B",
+   "direction": "FWD",
+   "path_x_m": [
+    92.84936247723134,
+    93.49936247723134
+   ],
+   "fixed_obstacles": {
+    "ROTATING": [],
+    "STOPPED_LOCKED": []
+   },
+   "prerequisites": [
+    "Hub2_TOUCHDOWN_B_S3"
+   ],
+   "passed": true
+  },
+  "Hub2_TOUCHDOWN_B_S1": {
+   "module": "TOUCHDOWN_B",
+   "direction": "FWD",
+   "path_x_m": [
+    93.04936247723134,
+    93.34936247723135
+   ],
+   "fixed_obstacles": {
+    "ROTATING": [],
+    "STOPPED_LOCKED": []
+   },
+   "prerequisites": [],
+   "passed": true
+  },
+  "Hub2_TOUCHDOWN_B_S2": {
+   "module": "TOUCHDOWN_B",
+   "direction": "FWD",
+   "path_x_m": [
+    93.04936247723134,
+    93.34936247723135
+   ],
+   "fixed_obstacles": {
+    "ROTATING": [],
+    "STOPPED_LOCKED": []
+   },
+   "prerequisites": [],
+   "passed": true
+  },
+  "Hub2_TOUCHDOWN_B_S3": {
+   "module": "TOUCHDOWN_B",
+   "direction": "FWD",
+   "path_x_m": [
+    93.04936247723134,
+    93.34936247723135
+   ],
+   "fixed_obstacles": {
+    "ROTATING": [],
+    "STOPPED_LOCKED": []
+   },
+   "prerequisites": [],
+   "passed": true
+  },
+  "Hub2_FLUID_COUPLING_Stator": {
+   "module": "FLUID_COUPLING",
+   "direction": "FWD",
+   "path_x_m": [
+    93.39936247723134,
+    93.80936247723133
+   ],
+   "fixed_obstacles": {
+    "ROTATING": [],
+    "STOPPED_LOCKED": []
+   },
+   "prerequisites": [],
+   "passed": true
+  }
+ },
+ "contract": {
+  "generation": "P1-008",
+  "direction": "Active magnetic primary support with mechanical touchdown backup; direct hub motor; contactless power/data; only essential fluids through serviceable redundant rotary couplings.",
+  "canon": {
+   "canon_status": "WORKING",
+   "source_ref": "rotor_interface_i5"
+  },
+  "architecture": {
+   "magnetic_support": {
+    "role": "PRIMARY",
+    "technology": "ACTIVE_MAGNETIC_BEARING",
+    "control": "POSITION_SENSED_ACTIVE",
+    "failure_response": "CONTROLLED_TOUCHDOWN_AND_SPIN_DOWN",
+    "zero_loss": false,
+    "canon_status": "WORKING",
+    "source_ref": "rotor_magnetic_bearings"
+   },
+   "touchdown_bearings": {
+    "role": "BACKUP",
+    "duty": [
+     "STARTUP",
+     "SHUTDOWN",
+     "OVERLOAD",
+     "MAGNETIC_FAILURE"
+    ],
+    "continuous_duty": false,
+    "lubrication": "DRY_OR_SOLID_LUBRICATED",
+    "module": "SERVICEABLE_CARTRIDGE",
+    "inspect_after_touchdown": true,
+    "canon_status": "WORKING",
+    "source_ref": "rotor_touchdown_bearings"
+   },
+   "hub_motor": {
+    "drive": "DIRECT_ELECTROMAGNETIC",
+    "mechanical_reduction": false,
+    "reduction_fallback": [
+     "MAGNETIC_GEARING",
+     "CONVENTIONAL_GEARING"
+    ],
+    "single_channel_loss_tolerant": true,
+    "lock_before_high_thrust": true,
+    "canon_status": "WORKING",
+    "source_ref": "rotor_hub_motor"
+   },
+   "power_data": {
+    "power": "INDUCTIVE",
+    "data_candidates": [
+     "OPTICAL",
+     "MAGNETIC",
+     "CAPACITIVE"
+    ],
+    "redundant_channels": true,
+    "emergency_low_power_path": true,
+    "normal_slip_rings": false,
+    "canon_status": "WORKING",
+    "source_ref": "rotor_power_data_transfer"
+   },
+   "fluids": {
+    "rotor_autonomy": "MAXIMIZE",
+    "crossing": "ESSENTIAL_ONLY",
+    "coupling": "MODULAR_REDUNDANT_MULTIPASS_CARTRIDGE",
+    "seal_life": "LIFE_LIMITED_REPLACEABLE",
+    "features": [
+     "LEAK_DETECTION",
+     "ISOLATION",
+     "BYPASS",
+     "LOCAL_RESERVE"
+    ],
+    "canon_status": "WORKING",
+    "source_ref": "rotor_fluid_transfer"
+   },
+   "serviceability": {
+    "modules": [
+     "BEARING_PACKS",
+     "ROTARY_SEALS",
+     "ACTUATORS",
+     "PUMPS",
+     "LOCK_DRIVES"
+    ],
+    "module_form": "CARTRIDGE",
+    "spine_dismantle_for_removal": false,
+    "canon_status": "WORKING",
+    "source_ref": "mechanism_serviceability"
+   },
+   "ring_stop_locks": {
+    "rule": "Independent mechanical locks carry the high-thrust axial load after spin-down and indexing; they must not need continuous actuator power; actuators are not structural load paths (MEC-011).",
+    "actuator_in_load_path": false,
+    "axial_load_ref": "physics.rotor_dynamics.high_thrust_axial_load_each_N",
+    "canon_status": "WORKING",
+    "source_ref": "ring_stop_lock"
+   },
+   "health_channels": {
+    "channels": [
+     "BEARING_GAP",
+     "VIBRATION",
+     "TEMPERATURE",
+     "TORQUE",
+     "SEAL_LEAKAGE",
+     "LUBRICANT_STATE",
+     "TOUCHDOWN_EVENTS"
+    ],
+    "feeds": [
+     "DEGRADED_MODE_MATRIX",
+     "MAINTENANCE_PLANNING"
+    ],
+    "canon_status": "WORKING",
+    "source_ref": "mechanism_health_monitoring"
+   }
+  },
+  "open": {
+   "ring_stop_locks.rating": {
+    "known": false,
+    "canon_status": "OPEN",
+    "evidence_ref": "ring_stop_lock",
+    "reason": "Lock geometry, stroke, safety/dynamic factors and rating OPEN (MEC-011 OPEN DETAIL, OD-016)."
+   },
+   "magnetic_support.sizing": {
+    "known": false,
+    "canon_status": "OPEN",
+    "evidence_ref": "rotor_bearing_open_item",
+    "reason": "OD-013 / MEC-002: station count, gap, stiffness, bandwidth and loads are unsolved. [rotor_interface] shows two PROTOTYPE stations and a display gap.",
+    "items": [
+     "station_count",
+     "air_gap",
+     "stiffness",
+     "control_bandwidth",
+     "radial_axial_loads"
+    ]
+   },
+   "magnetic_support.losses": {
+    "known": false,
+    "canon_status": "OPEN",
+    "evidence_ref": "rotor_bearing_losses",
+    "reason": "MEC-010 / S6: tracked separately from mechanical friction and never zero; no loss coefficient or controller power is sourced.",
+    "items": [
+     "controller_power",
+     "eddy_hysteresis_losses",
+     "imbalance_force",
+     "touchdown_events"
+    ]
+   },
+   "touchdown_bearings.sizing": {
+    "known": false,
+    "canon_status": "OPEN",
+    "evidence_ref": "rotor_bearing_open_item",
+    "reason": "OD-013 / MEC-010: touchdown impact, whirl and the emergency thermal case are unsolved.",
+    "items": [
+     "load_rating",
+     "clearance",
+     "impact_whirl_case",
+     "emergency_thermal_load"
+    ]
+   },
+   "touchdown_bearings.material_stack": {
+    "known": false,
+    "canon_status": "OPEN",
+    "evidence_ref": "bearing_material_candidates",
+    "reason": "MEC-008 candidates only; no material is selected before load, temperature, radiation and lifetime testing."
+   },
+   "hub_motor.rating": {
+    "known": false,
+    "canon_status": "OPEN",
+    "evidence_ref": "rotor_hub_motor",
+    "reason": "MEC-004: motor topology, torque and gearing are OPEN. The DERIVED ring-equivalent spin-up torque (physics.rotor_dynamics) is an average for the sourced spin-up time, not a rating.",
+    "items": [
+     "topology",
+     "torque",
+     "gearing"
+    ]
+   },
+   "power_data.rating": {
+    "known": false,
+    "canon_status": "OPEN",
+    "evidence_ref": "rotor_power_data_transfer",
+    "reason": "MEC-005: the hub power rating is tied to the S5 whole-ship electrical budget (power.rating OPEN). EMI/EMC and alignment effects are unsolved."
+   },
+   "power_data.emergency_source": {
+    "known": false,
+    "canon_status": "OPEN",
+    "evidence_ref": "rotor_power_data_transfer",
+    "reason": "A low-power emergency path is required; its source is not stated. The model does not wire it to the survival reserve, whose sourced loads do not name the rotor hub (17_POWER_STORAGE A6)."
+   },
+   "fluids.circuits": {
+    "known": false,
+    "canon_status": "OPEN",
+    "evidence_ref": "rotor_transfer_open_item",
+    "reason": "OD-002: required fluid circuits, coupling geometry and leak isolation are OPEN; I5 allows a PROTOTYPE circuit count.",
+    "items": [
+     "circuit_count",
+     "media",
+     "coupling_size"
+    ]
+   },
+   "health_channels.thresholds": {
+    "known": false,
+    "canon_status": "OPEN",
+    "evidence_ref": "mechanism_health_monitoring",
+    "reason": "Sensors, alarm thresholds and the degraded-mode responses (OD-010) are not sourced."
+   },
+   "spin_down": {
+    "known": false,
+    "canon_status": "OPEN",
+    "evidence_ref": "rotor_bearing_losses",
+    "reason": "Controlled coast-down duration, braking torque, the touchdown thermal case and the control law are OPEN (MEC-010, OD-013). The WF_RING_STOP_LOCK and WF_ROTOR_TOUCHDOWN actions use PROTOTYPE display timing; only the sourced spin-up time exists.",
+    "items": [
+     "duration",
+     "braking_torque",
+     "touchdown_thermal_case",
+     "control_law"
+    ]
+   },
+   "bearing_seal": {
+    "known": false,
+    "canon_status": "OPEN"
+   }
+  },
+  "derived": {
+   "kinetic_energy_each_J": {
+    "known": true,
+    "value": 10552581.026721006,
+    "unit": "J",
+    "canon_status": "DERIVED",
+    "evidence_ref": "rotor_dynamics",
+    "basis": "Ring-equivalent 0.5*I*omega^2 per rotor: the energy a full spin-down removes by motor braking and/or touchdown friction. The split, rate and heat path are OPEN."
+   }
+  },
+  "power_path": {
+   "sources": [
+    "POWER_BUS_A",
+    "POWER_BUS_B"
+   ],
+   "ride_through": [
+    "IF_RIDE_THROUGH_ROTOR_TRANSFER_1",
+    "IF_RIDE_THROUGH_ROTOR_TRANSFER_2"
+   ],
+   "transfer": "INDUCTIVE",
+   "excludes": [
+    "SURVIVAL_RESERVE"
+   ],
+   "emergency_path_source_known": false,
+   "note": "The survival reserve is fault-isolated and its sourced loads do not name the rotor hub; whether rotating-side life support needs its own reserve is an owner question."
+  },
+  "rotors": [
+   {
+    "name": "ROTOR_1",
+    "anchor": "WF_SIM_ROTOR_1_AXIS",
+    "control": "ROTOR_1_MECH_CTRL",
+    "modules": [
+     {
+      "id": "TOUCHDOWN_A",
+      "function": "TOUCHDOWN_BEARING",
+      "x_m": [
+       84.44936247723135,
+       84.59936247723134
+      ],
+      "segments": 3,
+      "withdraw": "AFT",
+      "removal_prerequisites": []
+     },
+     {
+      "id": "MAGNETIC_A",
+      "function": "MAGNETIC_BEARING",
+      "x_m": [
+       84.64936247723134,
+       84.94936247723135
+      ],
+      "segments": 3,
+      "withdraw": "AFT",
+      "removal_prerequisites": [
+       "Hub1_TOUCHDOWN_A_S1"
+      ]
+     },
+     {
+      "id": "MOTOR",
+      "function": "HUB_MOTOR",
+      "x_m": [
+       84.99936247723134,
+       85.79936247723134
+      ],
+      "segments": 3,
+      "withdraw": "FWD",
+      "removal_prerequisites": [
+       "Hub1_DATA_S1",
+       "Hub1_EMERGENCY_POWER_S1",
+       "Hub1_MAGNETIC_B_S1",
+       "Hub1_POWER_S1",
+       "Hub1_TOUCHDOWN_B_S1"
+      ]
+     },
+     {
+      "id": "POWER",
+      "function": "CONTACTLESS_POWER",
+      "x_m": [
+       85.84936247723134,
+       86.14936247723134
+      ],
+      "segments": 3,
+      "withdraw": "FWD",
+      "removal_prerequisites": [
+       "Hub1_DATA_S1",
+       "Hub1_EMERGENCY_POWER_S1",
+       "Hub1_MAGNETIC_B_S1",
+       "Hub1_TOUCHDOWN_B_S1"
+      ]
+     },
+     {
+      "id": "DATA",
+      "function": "CONTACTLESS_DATA",
+      "x_m": [
+       86.19936247723135,
+       86.34936247723134
+      ],
+      "segments": 3,
+      "withdraw": "FWD",
+      "removal_prerequisites": [
+       "Hub1_EMERGENCY_POWER_S1",
+       "Hub1_MAGNETIC_B_S1",
+       "Hub1_TOUCHDOWN_B_S1"
+      ]
+     },
+     {
+      "id": "EMERGENCY_POWER",
+      "function": "EMERGENCY_POWER_PATH",
+      "x_m": [
+       86.39936247723134,
+       86.49936247723134
+      ],
+      "segments": 1,
+      "withdraw": "FWD",
+      "removal_prerequisites": [
+       "Hub1_MAGNETIC_B_S1",
+       "Hub1_TOUCHDOWN_B_S1"
+      ]
+     },
+     {
+      "id": "MAGNETIC_B",
+      "function": "MAGNETIC_BEARING",
+      "x_m": [
+       86.54936247723134,
+       86.84936247723134
+      ],
+      "segments": 3,
+      "withdraw": "FWD",
+      "removal_prerequisites": [
+       "Hub1_TOUCHDOWN_B_S1"
+      ]
+     },
+     {
+      "id": "TOUCHDOWN_B",
+      "function": "TOUCHDOWN_BEARING",
+      "x_m": [
+       86.89936247723134,
+       87.04936247723134
+      ],
+      "segments": 3,
+      "withdraw": "FWD",
+      "removal_prerequisites": []
+     },
+     {
+      "id": "FLUID_COUPLING",
+      "function": "FLUID_COUPLING",
+      "x_m": [
+       87.13936247723134,
+       87.39936247723134
+      ],
+      "segments": 1,
+      "withdraw": "FWD",
+      "removal_prerequisites": []
+     }
+    ],
+    "interfaces": [
+     "IF_HUB1_TOUCHDOWN_A",
+     "IF_HUB1_MAGNETIC_A",
+     "IF_HUB1_MOTOR",
+     "IF_HUB1_POWER",
+     "IF_HUB1_DATA",
+     "IF_HUB1_EMERGENCY_POWER",
+     "IF_HUB1_MAGNETIC_B",
+     "IF_HUB1_TOUCHDOWN_B",
+     "IF_HUB1_POWER_FEED",
+     "IF_HUB1_FLUID_STATIONARY",
+     "IF_HUB1_INDEX_LOCK",
+     "IF_HUB1_HEALTH",
+     "IF_HUB1_SERVICE_AFT",
+     "IF_HUB1_SERVICE_FWD",
+     "IF_HUB1_ROTOR_BUS",
+     "IF_HUB1_FLUID_ROTATING"
+    ],
+    "ring_stop_locks": [
+     "Ring_Stop_Lock_1_1",
+     "Ring_Stop_Lock_1_2",
+     "Ring_Stop_Lock_1_3"
+    ],
+    "geometry_status": "PROTOTYPE"
+   },
+   {
+    "name": "ROTOR_2",
+    "anchor": "WF_SIM_ROTOR_2_AXIS",
+    "control": "ROTOR_2_MECH_CTRL",
+    "modules": [
+     {
+      "id": "TOUCHDOWN_A",
+      "function": "TOUCHDOWN_BEARING",
+      "x_m": [
+       90.44936247723135,
+       90.59936247723134
+      ],
+      "segments": 3,
+      "withdraw": "AFT",
+      "removal_prerequisites": []
+     },
+     {
+      "id": "MAGNETIC_A",
+      "function": "MAGNETIC_BEARING",
+      "x_m": [
+       90.64936247723134,
+       90.94936247723135
+      ],
+      "segments": 3,
+      "withdraw": "AFT",
+      "removal_prerequisites": [
+       "Hub2_TOUCHDOWN_A_S1"
+      ]
+     },
+     {
+      "id": "MOTOR",
+      "function": "HUB_MOTOR",
+      "x_m": [
+       90.99936247723134,
+       91.79936247723134
+      ],
+      "segments": 3,
+      "withdraw": "FWD",
+      "removal_prerequisites": [
+       "Hub2_DATA_S1",
+       "Hub2_EMERGENCY_POWER_S1",
+       "Hub2_MAGNETIC_B_S1",
+       "Hub2_POWER_S1",
+       "Hub2_TOUCHDOWN_B_S1"
+      ]
+     },
+     {
+      "id": "POWER",
+      "function": "CONTACTLESS_POWER",
+      "x_m": [
+       91.84936247723134,
+       92.14936247723134
+      ],
+      "segments": 3,
+      "withdraw": "FWD",
+      "removal_prerequisites": [
+       "Hub2_DATA_S1",
+       "Hub2_EMERGENCY_POWER_S1",
+       "Hub2_MAGNETIC_B_S1",
+       "Hub2_TOUCHDOWN_B_S1"
+      ]
+     },
+     {
+      "id": "DATA",
+      "function": "CONTACTLESS_DATA",
+      "x_m": [
+       92.19936247723135,
+       92.34936247723134
+      ],
+      "segments": 3,
+      "withdraw": "FWD",
+      "removal_prerequisites": [
+       "Hub2_EMERGENCY_POWER_S1",
+       "Hub2_MAGNETIC_B_S1",
+       "Hub2_TOUCHDOWN_B_S1"
+      ]
+     },
+     {
+      "id": "EMERGENCY_POWER",
+      "function": "EMERGENCY_POWER_PATH",
+      "x_m": [
+       92.39936247723134,
+       92.49936247723134
+      ],
+      "segments": 1,
+      "withdraw": "FWD",
+      "removal_prerequisites": [
+       "Hub2_MAGNETIC_B_S1",
+       "Hub2_TOUCHDOWN_B_S1"
+      ]
+     },
+     {
+      "id": "MAGNETIC_B",
+      "function": "MAGNETIC_BEARING",
+      "x_m": [
+       92.54936247723134,
+       92.84936247723134
+      ],
+      "segments": 3,
+      "withdraw": "FWD",
+      "removal_prerequisites": [
+       "Hub2_TOUCHDOWN_B_S1"
+      ]
+     },
+     {
+      "id": "TOUCHDOWN_B",
+      "function": "TOUCHDOWN_BEARING",
+      "x_m": [
+       92.89936247723134,
+       93.04936247723134
+      ],
+      "segments": 3,
+      "withdraw": "FWD",
+      "removal_prerequisites": []
+     },
+     {
+      "id": "FLUID_COUPLING",
+      "function": "FLUID_COUPLING",
+      "x_m": [
+       93.13936247723134,
+       93.39936247723134
+      ],
+      "segments": 1,
+      "withdraw": "FWD",
+      "removal_prerequisites": []
+     }
+    ],
+    "interfaces": [
+     "IF_HUB2_TOUCHDOWN_A",
+     "IF_HUB2_MAGNETIC_A",
+     "IF_HUB2_MOTOR",
+     "IF_HUB2_POWER",
+     "IF_HUB2_DATA",
+     "IF_HUB2_EMERGENCY_POWER",
+     "IF_HUB2_MAGNETIC_B",
+     "IF_HUB2_TOUCHDOWN_B",
+     "IF_HUB2_POWER_FEED",
+     "IF_HUB2_FLUID_STATIONARY",
+     "IF_HUB2_INDEX_LOCK",
+     "IF_HUB2_HEALTH",
+     "IF_HUB2_SERVICE_AFT",
+     "IF_HUB2_SERVICE_FWD",
+     "IF_HUB2_ROTOR_BUS",
+     "IF_HUB2_FLUID_ROTATING"
+    ],
+    "ring_stop_locks": [
+     "Ring_Stop_Lock_2_1",
+     "Ring_Stop_Lock_2_2",
+     "Ring_Stop_Lock_2_3"
+    ],
+    "geometry_status": "PROTOTYPE"
+   }
+  ],
+  "states": {
+   "ROTATING": {
+    "levitation_active": 1.0,
+    "touchdown_contact": 0.0,
+    "motor_driving": 1.0,
+    "motor_braking": 0.0,
+    "spin_fraction": 1.0,
+    "index_lock_engaged": 0.0,
+    "ring_locks_engaged": 0.0,
+    "health_alarm": 0.0,
+    "inspection_required": 0.0,
+    "vestibule_isolated": 0.0
+   },
+   "STOPPED_LOCKED": {
+    "levitation_active": 0.0,
+    "touchdown_contact": 1.0,
+    "motor_driving": 0.0,
+    "motor_braking": 0.0,
+    "spin_fraction": 0.0,
+    "index_lock_engaged": 1.0,
+    "ring_locks_engaged": 1.0,
+    "health_alarm": 0.0,
+    "inspection_required": 0.0,
+    "vestibule_isolated": 0.0
+   },
+   "saved_preset": "COAST",
+   "by_configuration": {
+    "COAST": {
+     "levitation_active": 1.0,
+     "touchdown_contact": 0.0,
+     "motor_driving": 1.0,
+     "motor_braking": 0.0,
+     "spin_fraction": 1.0,
+     "index_lock_engaged": 0.0,
+     "ring_locks_engaged": 0.0,
+     "health_alarm": 0.0,
+     "inspection_required": 0.0,
+     "vestibule_isolated": 0.0
+    },
+    "LOW_THRUST": {
+     "levitation_active": 1.0,
+     "touchdown_contact": 0.0,
+     "motor_driving": 1.0,
+     "motor_braking": 0.0,
+     "spin_fraction": 1.0,
+     "index_lock_engaged": 0.0,
+     "ring_locks_engaged": 0.0,
+     "health_alarm": 0.0,
+     "inspection_required": 0.0,
+     "vestibule_isolated": 0.0
+    },
+    "EVA": {
+     "levitation_active": 1.0,
+     "touchdown_contact": 0.0,
+     "motor_driving": 1.0,
+     "motor_braking": 0.0,
+     "spin_fraction": 1.0,
+     "index_lock_engaged": 0.0,
+     "ring_locks_engaged": 0.0,
+     "health_alarm": 0.0,
+     "inspection_required": 0.0,
+     "vestibule_isolated": 0.0
+    },
+    "HIGH_POWER": {
+     "levitation_active": 0.0,
+     "touchdown_contact": 1.0,
+     "motor_driving": 0.0,
+     "motor_braking": 0.0,
+     "spin_fraction": 0.0,
+     "index_lock_engaged": 1.0,
+     "ring_locks_engaged": 1.0,
+     "health_alarm": 0.0,
+     "inspection_required": 0.0,
+     "vestibule_isolated": 0.0
+    },
+    "FIRST_IGNITION": {
+     "levitation_active": 0.0,
+     "touchdown_contact": 1.0,
+     "motor_driving": 0.0,
+     "motor_braking": 0.0,
+     "spin_fraction": 0.0,
+     "index_lock_engaged": 1.0,
+     "ring_locks_engaged": 1.0,
+     "health_alarm": 0.0,
+     "inspection_required": 0.0,
+     "vestibule_isolated": 0.0
+    },
+    "DOCKED": {
+     "levitation_active": 0.0,
+     "touchdown_contact": 1.0,
+     "motor_driving": 0.0,
+     "motor_braking": 0.0,
+     "spin_fraction": 0.0,
+     "index_lock_engaged": 1.0,
+     "ring_locks_engaged": 1.0,
+     "health_alarm": 0.0,
+     "inspection_required": 0.0,
+     "vestibule_isolated": 0.0
+    }
+   },
+   "status": "PROTOTYPE display states on ROTOR_n_MECH_CTRL; not a control law"
+  },
+  "actions": {
+   "WF_RING_STOP_LOCK": {
+    "description": "Stop and lock before high thrust: motor-braked regenerative spin-down while levitated, stop at the index angle, index lock, set down on the touchdown cartridges at zero speed, then the ring-stop locks. The rings stay full size and no room turns.",
+    "frame_range": [
+     1,
+     240
+    ],
+    "slots": {
+     "ROTOR_1_MECH_CTRL": [
+      {
+       "frame": 1,
+       "state": {
+        "levitation_active": 1.0,
+        "touchdown_contact": 0.0,
+        "motor_driving": 1.0,
+        "motor_braking": 0.0,
+        "spin_fraction": 1.0,
+        "index_lock_engaged": 0.0,
+        "ring_locks_engaged": 0.0,
+        "health_alarm": 0.0,
+        "inspection_required": 0.0,
+        "vestibule_isolated": 0.0
+       }
+      },
+      {
+       "frame": 24,
+       "state": {
+        "levitation_active": 1.0,
+        "touchdown_contact": 0.0,
+        "motor_driving": 0.0,
+        "motor_braking": 1.0,
+        "spin_fraction": 1.0,
+        "index_lock_engaged": 0.0,
+        "ring_locks_engaged": 0.0,
+        "health_alarm": 0.0,
+        "inspection_required": 0.0,
+        "vestibule_isolated": 0.0
+       }
+      },
+      {
+       "frame": 120,
+       "state": {
+        "levitation_active": 1.0,
+        "touchdown_contact": 0.0,
+        "motor_driving": 0.0,
+        "motor_braking": 0.0,
+        "spin_fraction": 0.0,
+        "index_lock_engaged": 0.0,
+        "ring_locks_engaged": 0.0,
+        "health_alarm": 0.0,
+        "inspection_required": 0.0,
+        "vestibule_isolated": 0.0
+       }
+      },
+      {
+       "frame": 132,
+       "state": {
+        "levitation_active": 1.0,
+        "touchdown_contact": 0.0,
+        "motor_driving": 0.0,
+        "motor_braking": 0.0,
+        "spin_fraction": 0.0,
+        "index_lock_engaged": 1.0,
+        "ring_locks_engaged": 0.0,
+        "health_alarm": 0.0,
+        "inspection_required": 0.0,
+        "vestibule_isolated": 0.0
+       }
+      },
+      {
+       "frame": 144,
+       "state": {
+        "levitation_active": 0.0,
+        "touchdown_contact": 1.0,
+        "motor_driving": 0.0,
+        "motor_braking": 0.0,
+        "spin_fraction": 0.0,
+        "index_lock_engaged": 1.0,
+        "ring_locks_engaged": 0.0,
+        "health_alarm": 0.0,
+        "inspection_required": 0.0,
+        "vestibule_isolated": 0.0
+       }
+      },
+      {
+       "frame": 168,
+       "state": {
+        "levitation_active": 0.0,
+        "touchdown_contact": 1.0,
+        "motor_driving": 0.0,
+        "motor_braking": 0.0,
+        "spin_fraction": 0.0,
+        "index_lock_engaged": 1.0,
+        "ring_locks_engaged": 1.0,
+        "health_alarm": 0.0,
+        "inspection_required": 0.0,
+        "vestibule_isolated": 0.0
+       }
+      },
+      {
+       "frame": 240,
+       "state": {
+        "levitation_active": 0.0,
+        "touchdown_contact": 1.0,
+        "motor_driving": 0.0,
+        "motor_braking": 0.0,
+        "spin_fraction": 0.0,
+        "index_lock_engaged": 1.0,
+        "ring_locks_engaged": 1.0,
+        "health_alarm": 0.0,
+        "inspection_required": 0.0,
+        "vestibule_isolated": 0.0
+       }
+      }
+     ],
+     "ROTOR_2_MECH_CTRL": [
+      {
+       "frame": 1,
+       "state": {
+        "levitation_active": 1.0,
+        "touchdown_contact": 0.0,
+        "motor_driving": 1.0,
+        "motor_braking": 0.0,
+        "spin_fraction": 1.0,
+        "index_lock_engaged": 0.0,
+        "ring_locks_engaged": 0.0,
+        "health_alarm": 0.0,
+        "inspection_required": 0.0,
+        "vestibule_isolated": 0.0
+       }
+      },
+      {
+       "frame": 24,
+       "state": {
+        "levitation_active": 1.0,
+        "touchdown_contact": 0.0,
+        "motor_driving": 0.0,
+        "motor_braking": 1.0,
+        "spin_fraction": 1.0,
+        "index_lock_engaged": 0.0,
+        "ring_locks_engaged": 0.0,
+        "health_alarm": 0.0,
+        "inspection_required": 0.0,
+        "vestibule_isolated": 0.0
+       }
+      },
+      {
+       "frame": 120,
+       "state": {
+        "levitation_active": 1.0,
+        "touchdown_contact": 0.0,
+        "motor_driving": 0.0,
+        "motor_braking": 0.0,
+        "spin_fraction": 0.0,
+        "index_lock_engaged": 0.0,
+        "ring_locks_engaged": 0.0,
+        "health_alarm": 0.0,
+        "inspection_required": 0.0,
+        "vestibule_isolated": 0.0
+       }
+      },
+      {
+       "frame": 132,
+       "state": {
+        "levitation_active": 1.0,
+        "touchdown_contact": 0.0,
+        "motor_driving": 0.0,
+        "motor_braking": 0.0,
+        "spin_fraction": 0.0,
+        "index_lock_engaged": 1.0,
+        "ring_locks_engaged": 0.0,
+        "health_alarm": 0.0,
+        "inspection_required": 0.0,
+        "vestibule_isolated": 0.0
+       }
+      },
+      {
+       "frame": 144,
+       "state": {
+        "levitation_active": 0.0,
+        "touchdown_contact": 1.0,
+        "motor_driving": 0.0,
+        "motor_braking": 0.0,
+        "spin_fraction": 0.0,
+        "index_lock_engaged": 1.0,
+        "ring_locks_engaged": 0.0,
+        "health_alarm": 0.0,
+        "inspection_required": 0.0,
+        "vestibule_isolated": 0.0
+       }
+      },
+      {
+       "frame": 168,
+       "state": {
+        "levitation_active": 0.0,
+        "touchdown_contact": 1.0,
+        "motor_driving": 0.0,
+        "motor_braking": 0.0,
+        "spin_fraction": 0.0,
+        "index_lock_engaged": 1.0,
+        "ring_locks_engaged": 1.0,
+        "health_alarm": 0.0,
+        "inspection_required": 0.0,
+        "vestibule_isolated": 0.0
+       }
+      },
+      {
+       "frame": 240,
+       "state": {
+        "levitation_active": 0.0,
+        "touchdown_contact": 1.0,
+        "motor_driving": 0.0,
+        "motor_braking": 0.0,
+        "spin_fraction": 0.0,
+        "index_lock_engaged": 1.0,
+        "ring_locks_engaged": 1.0,
+        "health_alarm": 0.0,
+        "inspection_required": 0.0,
+        "vestibule_isolated": 0.0
+       }
+      }
+     ]
+    }
+   },
+   "WF_ROTOR_TOUCHDOWN": {
+    "description": "Loss of levitation on rotor 1 (example): it lands on its touchdown cartridges at speed and brakes to a stop; rotor 2 stays levitated and brakes on the same curve. Inspection required before full-speed service.",
+    "frame_range": [
+     1,
+     264
+    ],
+    "slots": {
+     "ROTOR_1_MECH_CTRL": [
+      {
+       "frame": 1,
+       "state": {
+        "levitation_active": 1.0,
+        "touchdown_contact": 0.0,
+        "motor_driving": 1.0,
+        "motor_braking": 0.0,
+        "spin_fraction": 1.0,
+        "index_lock_engaged": 0.0,
+        "ring_locks_engaged": 0.0,
+        "health_alarm": 0.0,
+        "inspection_required": 0.0,
+        "vestibule_isolated": 0.0
+       }
+      },
+      {
+       "frame": 24,
+       "state": {
+        "levitation_active": 0.0,
+        "touchdown_contact": 1.0,
+        "motor_driving": 0.0,
+        "motor_braking": 1.0,
+        "spin_fraction": 1.0,
+        "index_lock_engaged": 0.0,
+        "ring_locks_engaged": 0.0,
+        "health_alarm": 1.0,
+        "inspection_required": 1.0,
+        "vestibule_isolated": 0.0
+       }
+      },
+      {
+       "frame": 216,
+       "state": {
+        "levitation_active": 0.0,
+        "touchdown_contact": 1.0,
+        "motor_driving": 0.0,
+        "motor_braking": 0.0,
+        "spin_fraction": 0.0,
+        "index_lock_engaged": 0.0,
+        "ring_locks_engaged": 0.0,
+        "health_alarm": 1.0,
+        "inspection_required": 1.0,
+        "vestibule_isolated": 0.0
+       }
+      },
+      {
+       "frame": 228,
+       "state": {
+        "levitation_active": 0.0,
+        "touchdown_contact": 1.0,
+        "motor_driving": 0.0,
+        "motor_braking": 0.0,
+        "spin_fraction": 0.0,
+        "index_lock_engaged": 1.0,
+        "ring_locks_engaged": 0.0,
+        "health_alarm": 1.0,
+        "inspection_required": 1.0,
+        "vestibule_isolated": 0.0
+       }
+      },
+      {
+       "frame": 264,
+       "state": {
+        "levitation_active": 0.0,
+        "touchdown_contact": 1.0,
+        "motor_driving": 0.0,
+        "motor_braking": 0.0,
+        "spin_fraction": 0.0,
+        "index_lock_engaged": 1.0,
+        "ring_locks_engaged": 0.0,
+        "health_alarm": 1.0,
+        "inspection_required": 1.0,
+        "vestibule_isolated": 0.0
+       }
+      }
+     ],
+     "ROTOR_2_MECH_CTRL": [
+      {
+       "frame": 1,
+       "state": {
+        "levitation_active": 1.0,
+        "touchdown_contact": 0.0,
+        "motor_driving": 1.0,
+        "motor_braking": 0.0,
+        "spin_fraction": 1.0,
+        "index_lock_engaged": 0.0,
+        "ring_locks_engaged": 0.0,
+        "health_alarm": 0.0,
+        "inspection_required": 0.0,
+        "vestibule_isolated": 0.0
+       }
+      },
+      {
+       "frame": 24,
+       "state": {
+        "levitation_active": 1.0,
+        "touchdown_contact": 0.0,
+        "motor_driving": 0.0,
+        "motor_braking": 1.0,
+        "spin_fraction": 1.0,
+        "index_lock_engaged": 0.0,
+        "ring_locks_engaged": 0.0,
+        "health_alarm": 0.0,
+        "inspection_required": 0.0,
+        "vestibule_isolated": 0.0
+       }
+      },
+      {
+       "frame": 216,
+       "state": {
+        "levitation_active": 1.0,
+        "touchdown_contact": 0.0,
+        "motor_driving": 0.0,
+        "motor_braking": 0.0,
+        "spin_fraction": 0.0,
+        "index_lock_engaged": 0.0,
+        "ring_locks_engaged": 0.0,
+        "health_alarm": 0.0,
+        "inspection_required": 0.0,
+        "vestibule_isolated": 0.0
+       }
+      },
+      {
+       "frame": 228,
+       "state": {
+        "levitation_active": 1.0,
+        "touchdown_contact": 0.0,
+        "motor_driving": 0.0,
+        "motor_braking": 0.0,
+        "spin_fraction": 0.0,
+        "index_lock_engaged": 1.0,
+        "ring_locks_engaged": 0.0,
+        "health_alarm": 0.0,
+        "inspection_required": 0.0,
+        "vestibule_isolated": 0.0
+       }
+      },
+      {
+       "frame": 264,
+       "state": {
+        "levitation_active": 1.0,
+        "touchdown_contact": 0.0,
+        "motor_driving": 0.0,
+        "motor_braking": 0.0,
+        "spin_fraction": 0.0,
+        "index_lock_engaged": 1.0,
+        "ring_locks_engaged": 0.0,
+        "health_alarm": 0.0,
+        "inspection_required": 0.0,
+        "vestibule_isolated": 0.0
+       }
+      }
+     ]
+    }
+   },
+   "WF_VESTIBULE_SEAL_FAULT": {
+    "description": "A leak path across a vestibule seal on rotor 1 (example): the hatches isolate the vestibule, the health alarm and inspection flags are raised and both rotors stop and lock on the stop-lock curve (matched spin-down keeps the counter-rotating momenta cancelled). The second seal plane still holds the pressure boundary.",
+    "frame_range": [
+     1,
+     240
+    ],
+    "slots": {
+     "ROTOR_1_MECH_CTRL": [
+      {
+       "frame": 1,
+       "state": {
+        "levitation_active": 1.0,
+        "touchdown_contact": 0.0,
+        "motor_driving": 1.0,
+        "motor_braking": 0.0,
+        "spin_fraction": 1.0,
+        "index_lock_engaged": 0.0,
+        "ring_locks_engaged": 0.0,
+        "health_alarm": 0.0,
+        "inspection_required": 0.0,
+        "vestibule_isolated": 0.0
+       }
+      },
+      {
+       "frame": 24,
+       "state": {
+        "levitation_active": 1.0,
+        "touchdown_contact": 0.0,
+        "motor_driving": 0.0,
+        "motor_braking": 1.0,
+        "spin_fraction": 1.0,
+        "index_lock_engaged": 0.0,
+        "ring_locks_engaged": 0.0,
+        "health_alarm": 1.0,
+        "inspection_required": 1.0,
+        "vestibule_isolated": 1.0
+       }
+      },
+      {
+       "frame": 120,
+       "state": {
+        "levitation_active": 1.0,
+        "touchdown_contact": 0.0,
+        "motor_driving": 0.0,
+        "motor_braking": 0.0,
+        "spin_fraction": 0.0,
+        "index_lock_engaged": 0.0,
+        "ring_locks_engaged": 0.0,
+        "health_alarm": 1.0,
+        "inspection_required": 1.0,
+        "vestibule_isolated": 1.0
+       }
+      },
+      {
+       "frame": 132,
+       "state": {
+        "levitation_active": 1.0,
+        "touchdown_contact": 0.0,
+        "motor_driving": 0.0,
+        "motor_braking": 0.0,
+        "spin_fraction": 0.0,
+        "index_lock_engaged": 1.0,
+        "ring_locks_engaged": 0.0,
+        "health_alarm": 1.0,
+        "inspection_required": 1.0,
+        "vestibule_isolated": 1.0
+       }
+      },
+      {
+       "frame": 144,
+       "state": {
+        "levitation_active": 0.0,
+        "touchdown_contact": 1.0,
+        "motor_driving": 0.0,
+        "motor_braking": 0.0,
+        "spin_fraction": 0.0,
+        "index_lock_engaged": 1.0,
+        "ring_locks_engaged": 0.0,
+        "health_alarm": 1.0,
+        "inspection_required": 1.0,
+        "vestibule_isolated": 1.0
+       }
+      },
+      {
+       "frame": 168,
+       "state": {
+        "levitation_active": 0.0,
+        "touchdown_contact": 1.0,
+        "motor_driving": 0.0,
+        "motor_braking": 0.0,
+        "spin_fraction": 0.0,
+        "index_lock_engaged": 1.0,
+        "ring_locks_engaged": 1.0,
+        "health_alarm": 1.0,
+        "inspection_required": 1.0,
+        "vestibule_isolated": 1.0
+       }
+      },
+      {
+       "frame": 240,
+       "state": {
+        "levitation_active": 0.0,
+        "touchdown_contact": 1.0,
+        "motor_driving": 0.0,
+        "motor_braking": 0.0,
+        "spin_fraction": 0.0,
+        "index_lock_engaged": 1.0,
+        "ring_locks_engaged": 1.0,
+        "health_alarm": 1.0,
+        "inspection_required": 1.0,
+        "vestibule_isolated": 1.0
+       }
+      }
+     ],
+     "ROTOR_2_MECH_CTRL": [
+      {
+       "frame": 1,
+       "state": {
+        "levitation_active": 1.0,
+        "touchdown_contact": 0.0,
+        "motor_driving": 1.0,
+        "motor_braking": 0.0,
+        "spin_fraction": 1.0,
+        "index_lock_engaged": 0.0,
+        "ring_locks_engaged": 0.0,
+        "health_alarm": 0.0,
+        "inspection_required": 0.0,
+        "vestibule_isolated": 0.0
+       }
+      },
+      {
+       "frame": 24,
+       "state": {
+        "levitation_active": 1.0,
+        "touchdown_contact": 0.0,
+        "motor_driving": 0.0,
+        "motor_braking": 1.0,
+        "spin_fraction": 1.0,
+        "index_lock_engaged": 0.0,
+        "ring_locks_engaged": 0.0,
+        "health_alarm": 0.0,
+        "inspection_required": 0.0,
+        "vestibule_isolated": 0.0
+       }
+      },
+      {
+       "frame": 120,
+       "state": {
+        "levitation_active": 1.0,
+        "touchdown_contact": 0.0,
+        "motor_driving": 0.0,
+        "motor_braking": 0.0,
+        "spin_fraction": 0.0,
+        "index_lock_engaged": 0.0,
+        "ring_locks_engaged": 0.0,
+        "health_alarm": 0.0,
+        "inspection_required": 0.0,
+        "vestibule_isolated": 0.0
+       }
+      },
+      {
+       "frame": 132,
+       "state": {
+        "levitation_active": 1.0,
+        "touchdown_contact": 0.0,
+        "motor_driving": 0.0,
+        "motor_braking": 0.0,
+        "spin_fraction": 0.0,
+        "index_lock_engaged": 1.0,
+        "ring_locks_engaged": 0.0,
+        "health_alarm": 0.0,
+        "inspection_required": 0.0,
+        "vestibule_isolated": 0.0
+       }
+      },
+      {
+       "frame": 144,
+       "state": {
+        "levitation_active": 0.0,
+        "touchdown_contact": 1.0,
+        "motor_driving": 0.0,
+        "motor_braking": 0.0,
+        "spin_fraction": 0.0,
+        "index_lock_engaged": 1.0,
+        "ring_locks_engaged": 0.0,
+        "health_alarm": 0.0,
+        "inspection_required": 0.0,
+        "vestibule_isolated": 0.0
+       }
+      },
+      {
+       "frame": 168,
+       "state": {
+        "levitation_active": 0.0,
+        "touchdown_contact": 1.0,
+        "motor_driving": 0.0,
+        "motor_braking": 0.0,
+        "spin_fraction": 0.0,
+        "index_lock_engaged": 1.0,
+        "ring_locks_engaged": 1.0,
+        "health_alarm": 0.0,
+        "inspection_required": 0.0,
+        "vestibule_isolated": 0.0
+       }
+      },
+      {
+       "frame": 240,
+       "state": {
+        "levitation_active": 0.0,
+        "touchdown_contact": 1.0,
+        "motor_driving": 0.0,
+        "motor_braking": 0.0,
+        "spin_fraction": 0.0,
+        "index_lock_engaged": 1.0,
+        "ring_locks_engaged": 1.0,
+        "health_alarm": 0.0,
+        "inspection_required": 0.0,
+        "vestibule_isolated": 0.0
+       }
+      }
+     ]
+    }
+   }
+  }
+ }
+}

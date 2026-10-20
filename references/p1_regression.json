@@ -1,0 +1,18 @@
+{
+  "result": "PASS",
+  "tests": [
+    "save/reopen all 25 production assets; both geometry realizations",
+    "simulation rig contract regenerated and checked",
+    "two identical-input builds",
+    "unique stable generated IDs",
+    "preserve ART and unowned GEN sentinels",
+    "exact backup of overwritten asset",
+    "targeted radiator rebuild leaves unrelated assets byte-identical",
+    "targeted hull rebuild leaves unrelated assets byte-identical",
+    "targeted Garden interior rebuild leaves unrelated assets byte-identical",
+    "relocated nested relative links",
+    "snapshot and source-map hashes",
+    "invalid spec fails CLI before asset writes"
+  ],
+  "production_assets_modified_by_tests": false
+}

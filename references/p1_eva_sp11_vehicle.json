@@ -1,0 +1,1550 @@
+{
+ "contract": "eva_sp11_vehicle v1",
+ "status": "STUDY: geometric readback of disposable SP-11 alternatives; no pressure-shell change, no hatch, latch, medical or flight release (EVA-061)",
+ "mechanical_clearance_m": 0.15,
+ "rows": {
+  "EVA3_SP11_110": {
+   "structure": {
+    "chamber_shell": {
+     "intersects": [],
+     "below_clearance": {},
+     "nearest": {
+      "Hull_Forward_Collar": 0.314,
+      "Shield_Sector_Keel_1": 0.523,
+      "Ext_Airlock_Flood_1": 0.578,
+      "Ext_Airlock_Flood_2": 0.578,
+      "Casing_Collar_Seams_Long": 0.635,
+      "Storeroom_Shell": 0.7
+     },
+     "status": "CLEAR"
+    },
+    "outer_neck": {
+     "intersects": [],
+     "below_clearance": {},
+     "nearest": {
+      "Hull_Forward_Collar": 0.557,
+      "Casing_Collar_Seams_Long": 0.903,
+      "Ext_Airlock_Flood_1": 0.91,
+      "Ext_Airlock_Flood_2": 0.91,
+      "Casing_Collar_Seams_Hoop": 1.158
+     },
+     "status": "CLEAR"
+    },
+    "leaf": {
+     "intersects": [],
+     "below_clearance": {},
+     "nearest": {
+      "Hull_Forward_Collar": 0.749,
+      "Ext_Airlock_Flood_1": 1.046,
+      "Ext_Airlock_Flood_2": 1.046,
+      "Casing_Collar_Seams_Long": 1.091,
+      "Storeroom_Shell": 1.15,
+      "Storeroom_Light": 1.311
+     },
+     "status": "CLEAR"
+    }
+   },
+   "mechanisms": {
+    "pocket+X": {
+     "intersects": [],
+     "below_clearance": {},
+     "nearest": {
+      "Structural_Spine": 1.284,
+      "Crew_Trunk": 1.401
+     },
+     "status": "CLEAR"
+    },
+    "pocket-X": {
+     "intersects": [
+      "Storeroom_Shell"
+     ],
+     "below_clearance": {},
+     "nearest": {
+      "Storeroom_Shell": 0.004,
+      "Storeroom_Light": 0.384,
+      "Storeroom_Rack_Inner_Uprights": 0.412,
+      "Storeroom_Rack_Inner_2_Net": 0.416,
+      "Storeroom_Container_Inner_2_4_1": 0.472,
+      "Storeroom_Rack_Inner_2_Shelf_4": 0.582
+     },
+     "status": "CONFLICT"
+    },
+    "pocket+az": {
+     "intersects": [],
+     "below_clearance": {},
+     "nearest": {
+      "Survival_Reserve_1": 0.68,
+      "Storeroom_Shell": 1.1,
+      "Storeroom_Rack_Inner_Uprights": 1.153,
+      "Storeroom_Rack_Inner_2_Net": 1.18,
+      "Storeroom_Container_Inner_2_4_1": 1.268,
+      "Storeroom_Light": 1.343
+     },
+     "status": "CLEAR"
+    },
+    "pocket-az": {
+     "intersects": [],
+     "below_clearance": {},
+     "nearest": {
+      "Storeroom_Shell": 1.1,
+      "Storeroom_Light": 1.152,
+      "Storeroom_Rack_Inner_1_Net": 1.18,
+      "Storeroom_Rack_Inner_Uprights": 1.181,
+      "Storeroom_Container_Inner_1_4_2": 1.309,
+      "Structural_Spine": 1.348
+     },
+     "status": "CLEAR"
+    },
+    "recess": {
+     "intersects": [],
+     "below_clearance": {},
+     "nearest": {
+      "Structural_Spine": 0.154,
+      "Crew_Trunk": 0.251,
+      "Prod_TRK_Housings": 0.395,
+      "Crew_Trunk_Light_1_8": 0.397,
+      "Trunk_Fit_Frame_13_1": 0.452,
+      "Prod_TRK_Trays": 0.498
+     },
+     "status": "CLEAR"
+    }
+   },
+   "fixtures": {
+    "pocket+X": [
+     "SP12_BUDDY_ZONE"
+    ],
+    "pocket-X": "CLEAR",
+    "pocket+az": "CLEAR",
+    "pocket-az": "CLEAR",
+    "recess": "CLEAR"
+   },
+   "rigs_latch": {
+    "instructor": {
+     "latch": {
+      "frames": [
+       45,
+       75,
+       105
+      ],
+      "partner_wall_m": 0.23,
+      "wall_m": 0.053,
+      "partner_m": 0.168,
+      "leaf_sweep_m": 0.196
+     },
+     "strap": {
+      "frames": [
+       165,
+       210
+      ],
+      "partner_wall_m": 0.23,
+      "wall_m": 0.079,
+      "partner_m": 0.168,
+      "leaf_sweep_m": 0.196
+     }
+    },
+    "newcomer": {
+     "latch": {
+      "frames": [
+       45,
+       75,
+       105
+      ],
+      "partner_wall_m": 0.218,
+      "wall_m": 0.09,
+      "partner_m": 0.167,
+      "leaf_sweep_m": 0.108
+     },
+     "strap": {
+      "frames": [
+       165,
+       210
+      ],
+      "partner_wall_m": 0.218,
+      "wall_m": 0.081,
+      "partner_m": 0.167,
+      "leaf_sweep_m": 0.108
+     }
+    }
+   },
+   "rigs_rescue": {
+    "instructor+newcomer": {
+     "rescuer_wall_m": 0.233,
+     "casualty_wall_m": 0.24,
+     "litter_wall_m": 0.225,
+     "rescuer_to_casualty_m": 0.109,
+     "to_leaf_sweep_m": 0.109
+    },
+    "newcomer+instructor": {
+     "rescuer_wall_m": 0.235,
+     "casualty_wall_m": 0.233,
+     "litter_wall_m": 0.225,
+     "rescuer_to_casualty_m": 0.173,
+     "to_leaf_sweep_m": 0.128
+    }
+   }
+  },
+  "EVA3_SP11_120": {
+   "structure": {
+    "chamber_shell": {
+     "intersects": [],
+     "below_clearance": {},
+     "nearest": {
+      "Hull_Forward_Collar": 0.285,
+      "Shield_Sector_Keel_1": 0.475,
+      "Ext_Airlock_Flood_1": 0.529,
+      "Ext_Airlock_Flood_2": 0.529,
+      "Casing_Collar_Seams_Long": 0.593,
+      "Storeroom_Shell": 0.65
+     },
+     "status": "CLEAR"
+    },
+    "outer_neck": {
+     "intersects": [],
+     "below_clearance": {},
+     "nearest": {
+      "Hull_Forward_Collar": 0.508,
+      "Casing_Collar_Seams_Long": 0.854,
+      "Ext_Airlock_Flood_1": 0.86,
+      "Ext_Airlock_Flood_2": 0.86,
+      "Casing_Collar_Seams_Hoop": 1.109
+     },
+     "status": "CLEAR"
+    },
+    "leaf": {
+     "intersects": [],
+     "below_clearance": {},
+     "nearest": {
+      "Hull_Forward_Collar": 0.706,
+      "Ext_Airlock_Flood_1": 0.998,
+      "Ext_Airlock_Flood_2": 0.998,
+      "Casing_Collar_Seams_Long": 1.046,
+      "Storeroom_Shell": 1.1,
+      "Casing_Collar_Seams_Hoop": 1.271
+     },
+     "status": "CLEAR"
+    }
+   },
+   "mechanisms": {
+    "pocket+X": {
+     "intersects": [],
+     "below_clearance": {},
+     "nearest": {
+      "Structural_Spine": 1.234,
+      "Crew_Trunk": 1.363
+     },
+     "status": "CLEAR"
+    },
+    "pocket-X": {
+     "intersects": [
+      "Storeroom_Shell"
+     ],
+     "below_clearance": {},
+     "nearest": {
+      "Storeroom_Shell": 0.0,
+      "Storeroom_Rack_Inner_Uprights": 0.395,
+      "Storeroom_Rack_Inner_2_Net": 0.402,
+      "Storeroom_Light": 0.428,
+      "Storeroom_Container_Inner_2_4_1": 0.432,
+      "Storeroom_Rack_Inner_2_Shelf_4": 0.457
+     },
+     "status": "CONFLICT"
+    },
+    "pocket+az": {
+     "intersects": [],
+     "below_clearance": {},
+     "nearest": {
+      "Survival_Reserve_1": 0.62,
+      "Storeroom_Shell": 1.05,
+      "Storeroom_Rack_Inner_Uprights": 1.101,
+      "Storeroom_Rack_Inner_2_Net": 1.139,
+      "Storeroom_Container_Inner_2_4_1": 1.218,
+      "Structural_Spine": 1.312
+     },
+     "status": "CLEAR"
+    },
+    "pocket-az": {
+     "intersects": [],
+     "below_clearance": {},
+     "nearest": {
+      "Storeroom_Shell": 1.05,
+      "Storeroom_Light": 1.103,
+      "Storeroom_Rack_Inner_1_Net": 1.122,
+      "Storeroom_Rack_Inner_Uprights": 1.123,
+      "Storeroom_Container_Inner_1_4_2": 1.25,
+      "Structural_Spine": 1.311
+     },
+     "status": "CLEAR"
+    },
+    "recess": {
+     "intersects": [],
+     "below_clearance": {},
+     "nearest": {
+      "Structural_Spine": 0.155,
+      "Crew_Trunk": 0.25,
+      "Crew_Trunk_Light_1_8": 0.397,
+      "Prod_TRK_Housings": 0.397,
+      "Trunk_Fit_Frame_13_1": 0.42,
+      "Prod_TRK_Trays": 0.464
+     },
+     "status": "CLEAR"
+    }
+   },
+   "fixtures": {
+    "pocket+X": [
+     "SP12_DON_STAND_A",
+     "SP12_DON_STAND_B",
+     "SP12_BUDDY_ZONE"
+    ],
+    "pocket-X": "CLEAR",
+    "pocket+az": "CLEAR",
+    "pocket-az": "CLEAR",
+    "recess": "CLEAR"
+   },
+   "rigs_latch": {
+    "instructor": {
+     "latch": {
+      "frames": [
+       45,
+       75,
+       105
+      ],
+      "partner_wall_m": 0.28,
+      "wall_m": 0.103,
+      "partner_m": 0.168,
+      "leaf_sweep_m": 0.18
+     },
+     "strap": {
+      "frames": [
+       165,
+       210
+      ],
+      "partner_wall_m": 0.28,
+      "wall_m": 0.129,
+      "partner_m": 0.168,
+      "leaf_sweep_m": 0.18
+     }
+    },
+    "newcomer": {
+     "latch": {
+      "frames": [
+       45,
+       75,
+       105
+      ],
+      "partner_wall_m": 0.268,
+      "wall_m": 0.14,
+      "partner_m": 0.167,
+      "leaf_sweep_m": 0.105
+     },
+     "strap": {
+      "frames": [
+       165,
+       210
+      ],
+      "partner_wall_m": 0.268,
+      "wall_m": 0.131,
+      "partner_m": 0.167,
+      "leaf_sweep_m": 0.105
+     }
+    }
+   },
+   "rigs_rescue": {
+    "instructor+newcomer": {
+     "rescuer_wall_m": 0.283,
+     "casualty_wall_m": 0.29,
+     "litter_wall_m": 0.275,
+     "rescuer_to_casualty_m": 0.109,
+     "to_leaf_sweep_m": 0.103
+    },
+    "newcomer+instructor": {
+     "rescuer_wall_m": 0.285,
+     "casualty_wall_m": 0.283,
+     "litter_wall_m": 0.275,
+     "rescuer_to_casualty_m": 0.173,
+     "to_leaf_sweep_m": 0.123
+    }
+   }
+  },
+  "EVA3_SP11_135": {
+   "structure": {
+    "chamber_shell": {
+     "intersects": [],
+     "below_clearance": {},
+     "nearest": {
+      "Hull_Forward_Collar": 0.281,
+      "Shield_Sector_Keel_1": 0.328,
+      "Ext_Airlock_Flood_1": 0.409,
+      "Ext_Airlock_Flood_2": 0.409,
+      "Storeroom_Shell": 0.5,
+      "Casing_Collar_Seams_Long": 0.513
+     },
+     "status": "CLEAR"
+    },
+    "outer_neck": {
+     "intersects": [],
+     "below_clearance": {},
+     "nearest": {
+      "Hull_Forward_Collar": 0.442,
+      "Casing_Collar_Seams_Long": 0.778,
+      "Ext_Airlock_Flood_1": 0.785,
+      "Ext_Airlock_Flood_2": 0.785,
+      "Casing_Collar_Seams_Hoop": 1.033
+     },
+     "status": "CLEAR"
+    },
+    "leaf": {
+     "intersects": [],
+     "below_clearance": {},
+     "nearest": {
+      "Hull_Forward_Collar": 0.674,
+      "Ext_Airlock_Flood_1": 0.942,
+      "Ext_Airlock_Flood_2": 0.942,
+      "Casing_Collar_Seams_Long": 1.003,
+      "Storeroom_Shell": 1.025,
+      "Survival_Reserve_1": 1.1
+     },
+     "status": "CLEAR"
+    }
+   },
+   "mechanisms": {
+    "pocket+X": {
+     "intersects": [],
+     "below_clearance": {},
+     "nearest": {
+      "Structural_Spine": 1.034,
+      "Crew_Trunk": 1.17,
+      "Trunk_Fit_Route_Stripe_3": 1.48
+     },
+     "status": "CLEAR"
+    },
+    "pocket-X": {
+     "intersects": [
+      "Storeroom_Shell"
+     ],
+     "below_clearance": {},
+     "nearest": {
+      "Storeroom_Shell": 0.016,
+      "Storeroom_Rack_Inner_2_Shelf_4": 0.35,
+      "Storeroom_Rack_Inner_Uprights": 0.386,
+      "Storeroom_Container_Inner_2_4_1": 0.411,
+      "Storeroom_Rack_Inner_1_Shelf_4": 0.416,
+      "Storeroom_Panel": 0.42
+     },
+     "status": "CONFLICT"
+    },
+    "pocket+az": {
+     "intersects": [],
+     "below_clearance": {},
+     "nearest": {
+      "Survival_Reserve_1": 0.491,
+      "Storeroom_Shell": 0.975,
+      "Storeroom_Rack_Inner_Uprights": 1.025,
+      "Storeroom_Rack_Inner_2_Net": 1.134,
+      "Structural_Spine": 1.142,
+      "Storeroom_Container_Inner_2_4_1": 1.143
+     },
+     "status": "CLEAR"
+    },
+    "pocket-az": {
+     "intersects": [],
+     "below_clearance": {},
+     "nearest": {
+      "Storeroom_Shell": 0.975,
+      "Storeroom_Rack_Inner_1_Net": 1.026,
+      "Storeroom_Rack_Inner_Uprights": 1.028,
+      "Storeroom_Light": 1.048,
+      "Structural_Spine": 1.144,
+      "Storeroom_Container_Inner_1_4_2": 1.146
+     },
+     "status": "CLEAR"
+    },
+    "recess": {
+     "intersects": [],
+     "below_clearance": {},
+     "nearest": {
+      "Structural_Spine": 0.154,
+      "Crew_Trunk": 0.251,
+      "Trunk_Fit_Frame_13_1": 0.381,
+      "Prod_TRK_Housings": 0.4,
+      "Crew_Trunk_Light_1_8": 0.402,
+      "Prod_TRK_Trays": 0.416
+     },
+     "status": "CLEAR"
+    }
+   },
+   "fixtures": {
+    "pocket+X": [
+     "SP12_DON_STAND_A",
+     "SP12_DON_STAND_B",
+     "SP12_BUDDY_ZONE"
+    ],
+    "pocket-X": "CLEAR",
+    "pocket+az": "CLEAR",
+    "pocket-az": "CLEAR",
+    "recess": "CLEAR"
+   },
+   "rigs_latch": {
+    "instructor": {
+     "latch": {
+      "frames": [
+       45,
+       75,
+       105
+      ],
+      "partner_wall_m": 0.43,
+      "wall_m": 0.253,
+      "partner_m": 0.168,
+      "leaf_sweep_m": 0.17
+     },
+     "strap": {
+      "frames": [
+       165,
+       210
+      ],
+      "partner_wall_m": 0.43,
+      "wall_m": 0.279,
+      "partner_m": 0.168,
+      "leaf_sweep_m": 0.17
+     }
+    },
+    "newcomer": {
+     "latch": {
+      "frames": [
+       45,
+       75,
+       105
+      ],
+      "partner_wall_m": 0.418,
+      "wall_m": 0.29,
+      "partner_m": 0.167,
+      "leaf_sweep_m": 0.107
+     },
+     "strap": {
+      "frames": [
+       165,
+       210
+      ],
+      "partner_wall_m": 0.418,
+      "wall_m": 0.281,
+      "partner_m": 0.167,
+      "leaf_sweep_m": 0.107
+     }
+    }
+   },
+   "rigs_rescue": {
+    "instructor+newcomer": {
+     "rescuer_wall_m": 0.433,
+     "casualty_wall_m": 0.44,
+     "litter_wall_m": 0.425,
+     "rescuer_to_casualty_m": 0.109,
+     "to_leaf_sweep_m": 0.101
+    },
+    "newcomer+instructor": {
+     "rescuer_wall_m": 0.435,
+     "casualty_wall_m": 0.433,
+     "litter_wall_m": 0.425,
+     "rescuer_to_casualty_m": 0.173,
+     "to_leaf_sweep_m": 0.121
+    }
+   }
+  }
+ },
+ "sliding_plug": {
+  "status": "STUDY: real suit meshes and vehicle meshes against the sliding-plug study geometry",
+  "vehicle": {
+   "plug_parked": {
+    "status": "CLEAR",
+    "intersects": [],
+    "below_clearance": {},
+    "nearest": {
+     "Storeroom_Shell": 1.1,
+     "Storeroom_Light": 1.18,
+     "Storeroom_Rack_Inner_1_Net": 1.186,
+     "Storeroom_Rack_Inner_Uprights": 1.186,
+     "Storeroom_Container_Inner_1_4_2": 1.312,
+     "Structural_Spine": 1.421
+    }
+   },
+   "plug_carriage": {
+    "status": "CLEAR",
+    "intersects": [],
+    "below_clearance": {},
+    "nearest": {
+     "Storeroom_Shell": 1.05,
+     "Storeroom_Light": 1.109,
+     "Storeroom_Rack_Inner_1_Net": 1.119,
+     "Storeroom_Rack_Inner_Uprights": 1.12,
+     "Storeroom_Container_Inner_1_4_2": 1.247,
+     "Structural_Spine": 1.311
+    }
+   },
+   "plug_swept": {
+    "status": "CLEAR",
+    "intersects": [],
+    "below_clearance": {},
+    "nearest": {
+     "Survival_Reserve_1": 0.958,
+     "Storeroom_Shell": 1.05,
+     "Storeroom_Light": 1.109,
+     "Storeroom_Rack_Inner_1_Net": 1.118,
+     "Storeroom_Rack_Inner_Uprights": 1.118,
+     "Storeroom_Rack_Inner_2_Net": 1.185
+    }
+   },
+   "plug_rails": {
+    "status": "CLEAR",
+    "intersects": [],
+    "below_clearance": {},
+    "nearest": {
+     "Structural_Spine": 1.234,
+     "Storeroom_Shell": 1.28,
+     "Survival_Reserve_1": 1.325,
+     "Crew_Trunk": 1.33,
+     "Storeroom_Light": 1.339,
+     "Storeroom_Rack_Inner_1_Net": 1.348
+    }
+   },
+   "frame_ring": {
+    "status": "CLEAR",
+    "intersects": [],
+    "below_clearance": {},
+    "nearest": {
+     "Storeroom_Shell": 1.0,
+     "Storeroom_Light": 1.137,
+     "Survival_Reserve_1": 1.296,
+     "Storeroom_Rack_Inner_2_Net": 1.319,
+     "Storeroom_Rack_Inner_Uprights": 1.32,
+     "Storeroom_Container_Inner_2_4_1": 1.455
+    }
+   },
+   "dogs": {
+    "status": "CLEAR",
+    "intersects": [],
+    "below_clearance": {},
+    "nearest": {
+     "Storeroom_Shell": 1.07,
+     "Storeroom_Light": 1.232,
+     "Survival_Reserve_1": 1.338,
+     "Storeroom_Rack_Inner_2_Net": 1.396,
+     "Storeroom_Rack_Inner_Uprights": 1.397,
+     "Structural_Spine": 1.454
+    }
+   },
+   "keeper_ledges": {
+    "status": "CLEAR",
+    "intersects": [],
+    "below_clearance": {},
+    "nearest": {
+     "Storeroom_Shell": 1.03,
+     "Storeroom_Light": 1.201,
+     "Survival_Reserve_1": 1.292,
+     "Storeroom_Rack_Inner_2_Net": 1.36,
+     "Storeroom_Rack_Inner_Uprights": 1.36,
+     "Structural_Spine": 1.434
+    }
+   },
+   "plug_lever": {
+    "status": "CLEAR",
+    "intersects": [],
+    "below_clearance": {},
+    "nearest": {
+     "Storeroom_Shell": 0.877,
+     "Storeroom_Rack_Outer_1_Net": 0.929,
+     "Storeroom_Light": 0.93,
+     "Storeroom_Rack_Outer_Uprights": 0.98,
+     "Storeroom_Rack_Inner_2_Net": 1.011,
+     "Storeroom_Rack_Inner_Uprights": 1.012
+    }
+   },
+   "panel_sp12": {
+    "status": "CLEAR",
+    "intersects": [],
+    "below_clearance": {},
+    "nearest": {}
+   },
+   "ctl_valve_sp12": {
+    "status": "CLEAR",
+    "intersects": [],
+    "below_clearance": {},
+    "nearest": {}
+   },
+   "ctl_gauge_sp12": {
+    "status": "CLEAR",
+    "intersects": [],
+    "below_clearance": {},
+    "nearest": {}
+   },
+   "ctl_release_sp12": {
+    "status": "CLEAR",
+    "intersects": [],
+    "below_clearance": {},
+    "nearest": {}
+   }
+  },
+  "fixtures_nearest_m": {
+   "plug_swept": {
+    "SP12_DON_STAND_A": 0.376,
+    "SP12_DON_STAND_B": 1.276,
+    "SP12_PRESSURE_CHECK": 0.956,
+    "SP12_O2_INTERFACE": 2.101,
+    "SP12_TOOL_CHECKOUT": 0.239,
+    "SP12_BUDDY_ZONE": 0.501,
+    "SP13_DRY_RACK": 2.576,
+    "SP13_CHARGE_PANEL": 9.0,
+    "SP13_BENCH": 9.0,
+    "SP13_SPARES": 2.401
+   },
+   "plug_carriage": {
+    "SP12_DON_STAND_A": 0.376,
+    "SP12_DON_STAND_B": 1.276,
+    "SP12_PRESSURE_CHECK": 0.958,
+    "SP12_O2_INTERFACE": 2.101,
+    "SP12_TOOL_CHECKOUT": 0.239,
+    "SP12_BUDDY_ZONE": 0.502,
+    "SP13_DRY_RACK": 2.576,
+    "SP13_CHARGE_PANEL": 9.0,
+    "SP13_BENCH": 9.0,
+    "SP13_SPARES": 2.512
+   },
+   "plug_parked": {
+    "SP12_DON_STAND_A": 0.426,
+    "SP12_DON_STAND_B": 1.326,
+    "SP12_PRESSURE_CHECK": 1.089,
+    "SP12_O2_INTERFACE": 2.211,
+    "SP12_TOOL_CHECKOUT": 0.289,
+    "SP12_BUDDY_ZONE": 0.764,
+    "SP13_DRY_RACK": 2.626,
+    "SP13_CHARGE_PANEL": 9.0,
+    "SP13_BENCH": 9.0,
+    "SP13_SPARES": 2.774
+   },
+   "panel_sp12": {
+    "SP12_DON_STAND_A": 0.681,
+    "SP12_DON_STAND_B": 1.062,
+    "SP12_PRESSURE_CHECK": 1.646,
+    "SP12_O2_INTERFACE": 1.642,
+    "SP12_TOOL_CHECKOUT": 2.194,
+    "SP12_BUDDY_ZONE": 0.041,
+    "SP13_DRY_RACK": 2.117,
+    "SP13_CHARGE_PANEL": 9.0,
+    "SP13_BENCH": 2.908,
+    "SP13_SPARES": 1.946
+   }
+  },
+  "fixtures_min_m": {
+   "plug_swept": 0.239,
+   "plug_carriage": 0.239,
+   "plug_parked": 0.289,
+   "panel_sp12": 0.041
+  },
+  "rigs_routine": {
+   "instructor": {
+    "chamber": {
+     "to_plug_envelope_m": 0.529,
+     "to_chamber_panels_m": 0.281,
+     "to_panel_gap_partner_m": 0.268
+    },
+    "latch": {
+     "to_plug_envelope_m": 0.529,
+     "to_chamber_panels_m": 0.243,
+     "to_panel_gap_partner_m": 0.268
+    },
+    "strap": {
+     "to_plug_envelope_m": 0.529,
+     "to_chamber_panels_m": 0.257,
+     "to_panel_gap_partner_m": 0.268
+    }
+   },
+   "newcomer": {
+    "chamber": {
+     "to_plug_envelope_m": 0.616,
+     "to_chamber_panels_m": 0.268,
+     "to_panel_gap_partner_m": 0.281
+    },
+    "latch": {
+     "to_plug_envelope_m": 0.616,
+     "to_chamber_panels_m": 0.24,
+     "to_panel_gap_partner_m": 0.281
+    },
+    "strap": {
+     "to_plug_envelope_m": 0.616,
+     "to_chamber_panels_m": 0.261,
+     "to_panel_gap_partner_m": 0.281
+    }
+   }
+  },
+  "rigs_rescue_litter": {
+   "instructor+newcomer": {
+    "casualty_litter_straps_to_plug_envelope_m": 0.418,
+    "rescuer_to_plug_envelope_m": 0.49,
+    "casualty_litter_straps_to_chamber_panels_m": 0.282,
+    "rescuer_to_chamber_panels_m": 0.287,
+    "straps_to_wall_m": 0.169
+   },
+   "newcomer+instructor": {
+    "casualty_litter_straps_to_plug_envelope_m": 0.33,
+    "rescuer_to_plug_envelope_m": 0.579,
+    "casualty_litter_straps_to_chamber_panels_m": 0.28,
+    "rescuer_to_chamber_panels_m": 0.28,
+    "straps_to_wall_m": 0.174
+   }
+  },
+  "transit_casualty_centred": {
+   "variant": "newcomer",
+   "depths_m": {
+    "depth_0.0": {
+     "suit_to_frame_ring_m": 0.483,
+     "litter_to_frame_ring_m": 0.345,
+     "straps_to_frame_ring_m": 0.453,
+     "all_to_parked_leaf_m": 0.777,
+     "all_to_carriage_m": 0.74
+    },
+    "depth_0.4": {
+     "suit_to_frame_ring_m": 0.331,
+     "litter_to_frame_ring_m": 0.206,
+     "straps_to_frame_ring_m": 0.053,
+     "all_to_parked_leaf_m": 0.574,
+     "all_to_carriage_m": 0.538
+    },
+    "depth_0.8": {
+     "suit_to_frame_ring_m": 0.374,
+     "litter_to_frame_ring_m": 0.478,
+     "straps_to_frame_ring_m": 0.062,
+     "all_to_parked_leaf_m": 0.55,
+     "all_to_carriage_m": 0.493
+    },
+    "depth_1.2": {
+     "suit_to_frame_ring_m": 0.218,
+     "litter_to_frame_ring_m": 0.85,
+     "straps_to_frame_ring_m": 0.125,
+     "all_to_parked_leaf_m": 0.431,
+     "all_to_carriage_m": 0.428
+    }
+   },
+   "note": "suit mesh, litter rails and the box straps (an envelope wider than the contour-following bands of eva_sp11_plug); the frame ring is the bore edge, the parked leaf and carriage the plug"
+  },
+  "sp12_operators_suited": {
+   "instructor": {
+    "to_chamber_outer_wall_m": 0.1,
+    "to_plug_envelope_m": 0.618,
+    "to_panel_m": 0.04,
+    "to_fixtures_m": {
+     "SP12_DON_STAND_A": 0.0,
+     "SP12_DON_STAND_B": 0.304,
+     "SP12_PRESSURE_CHECK": 1.126,
+     "SP12_O2_INTERFACE": 0.803,
+     "SP12_TOOL_CHECKOUT": 2.357,
+     "SP12_BUDDY_ZONE": 0.0,
+     "SP13_DRY_RACK": 1.278,
+     "SP13_CHARGE_PANEL": 9.0,
+     "SP13_BENCH": 2.062,
+     "SP13_SPARES": 1.104
+    }
+   },
+   "newcomer": {
+    "to_chamber_outer_wall_m": 0.088,
+    "to_plug_envelope_m": 0.57,
+    "to_panel_m": 0.028,
+    "to_fixtures_m": {
+     "SP12_DON_STAND_A": 0.011,
+     "SP12_DON_STAND_B": 0.35,
+     "SP12_PRESSURE_CHECK": 1.147,
+     "SP12_O2_INTERFACE": 0.843,
+     "SP12_TOOL_CHECKOUT": 2.314,
+     "SP12_BUDDY_ZONE": 0.0,
+     "SP13_DRY_RACK": 1.318,
+     "SP13_CHARGE_PANEL": 9.0,
+     "SP13_BENCH": 2.097,
+     "SP13_SPARES": 1.144
+    }
+   }
+  }
+ },
+ "redlines": {
+  "keeper": {
+   "KP0_baseline": {
+    "envelope_least_m": 0.33,
+    "envelope_least_at": "newcomer+instructor.casualty_litter_straps_to_plug_envelope",
+    "parked_leaf_carriage_least_m": 0.428,
+    "parked_leaf_carriage_least_at": "transit.depth_1.2.to_carriage",
+    "vehicle": {
+     "plug_parked": "CLEAR",
+     "plug_carriage": "CLEAR",
+     "plug_swept": "CLEAR",
+     "plug_rails": "CLEAR",
+     "frame_ring": "CLEAR",
+     "dogs": "CLEAR",
+     "keeper_ledges": "CLEAR",
+     "plug_lever": "CLEAR",
+     "panel_sp12": "CLEAR",
+     "ctl_valve_sp12": "CLEAR",
+     "ctl_gauge_sp12": "CLEAR",
+     "ctl_release_sp12": "CLEAR"
+    },
+    "vehicle_intersects": {},
+    "fixtures_min_m": {
+     "plug_swept": 0.239,
+     "plug_carriage": 0.239,
+     "plug_parked": 0.289,
+     "panel_sp12": 0.041
+    },
+    "distances_m": {
+     "instructor.chamber.rig_to_plug_envelope": 0.529,
+     "instructor.latch.rig_to_plug_envelope": 0.529,
+     "instructor.strap.rig_to_plug_envelope": 0.529,
+     "newcomer.chamber.rig_to_plug_envelope": 0.616,
+     "newcomer.latch.rig_to_plug_envelope": 0.616,
+     "newcomer.strap.rig_to_plug_envelope": 0.616,
+     "instructor+newcomer.casualty_litter_straps_to_plug_envelope": 0.418,
+     "instructor+newcomer.rescuer_to_plug_envelope": 0.49,
+     "newcomer+instructor.casualty_litter_straps_to_plug_envelope": 0.33,
+     "newcomer+instructor.rescuer_to_plug_envelope": 0.579,
+     "sp12_operator_instructor.to_plug_envelope": 0.618,
+     "sp12_operator_newcomer.to_plug_envelope": 0.57,
+     "transit.depth_0.0.to_parked_leaf": 0.777,
+     "transit.depth_0.0.to_carriage": 0.74,
+     "transit.depth_0.4.to_parked_leaf": 0.574,
+     "transit.depth_0.4.to_carriage": 0.538,
+     "transit.depth_0.8.to_parked_leaf": 0.55,
+     "transit.depth_0.8.to_carriage": 0.493,
+     "transit.depth_1.2.to_parked_leaf": 0.431,
+     "transit.depth_1.2.to_carriage": 0.428
+    }
+   },
+   "KP1_stroke_0.10": {
+    "envelope_least_m": 0.35,
+    "envelope_least_at": "newcomer+instructor.casualty_litter_straps_to_plug_envelope",
+    "parked_leaf_carriage_least_m": 0.445,
+    "parked_leaf_carriage_least_at": "transit.depth_1.2.to_parked_leaf",
+    "vehicle": {
+     "plug_parked": "CLEAR",
+     "plug_carriage": "CLEAR",
+     "plug_swept": "CLEAR",
+     "plug_rails": "CLEAR",
+     "frame_ring": "CLEAR",
+     "dogs": "CLEAR",
+     "keeper_ledges": "CLEAR",
+     "plug_lever": "CLEAR",
+     "panel_sp12": "CLEAR",
+     "ctl_valve_sp12": "CLEAR",
+     "ctl_gauge_sp12": "CLEAR",
+     "ctl_release_sp12": "CLEAR"
+    },
+    "vehicle_intersects": {},
+    "fixtures_min_m": {
+     "plug_swept": 0.239,
+     "plug_carriage": 0.239,
+     "plug_parked": 0.289,
+     "panel_sp12": 0.041
+    },
+    "distances_m": {
+     "instructor.chamber.rig_to_plug_envelope": 0.549,
+     "instructor.latch.rig_to_plug_envelope": 0.549,
+     "instructor.strap.rig_to_plug_envelope": 0.549,
+     "newcomer.chamber.rig_to_plug_envelope": 0.636,
+     "newcomer.latch.rig_to_plug_envelope": 0.636,
+     "newcomer.strap.rig_to_plug_envelope": 0.636,
+     "instructor+newcomer.casualty_litter_straps_to_plug_envelope": 0.438,
+     "instructor+newcomer.rescuer_to_plug_envelope": 0.51,
+     "newcomer+instructor.casualty_litter_straps_to_plug_envelope": 0.35,
+     "newcomer+instructor.rescuer_to_plug_envelope": 0.599,
+     "sp12_operator_instructor.to_plug_envelope": 0.623,
+     "sp12_operator_newcomer.to_plug_envelope": 0.576,
+     "transit.depth_0.0.to_parked_leaf": 0.791,
+     "transit.depth_0.0.to_carriage": 0.753,
+     "transit.depth_0.4.to_parked_leaf": 0.58,
+     "transit.depth_0.4.to_carriage": 0.545,
+     "transit.depth_0.8.to_parked_leaf": 0.552,
+     "transit.depth_0.8.to_carriage": 0.493,
+     "transit.depth_1.2.to_parked_leaf": 0.445,
+     "transit.depth_1.2.to_carriage": 0.445
+    }
+   },
+   "KP2_stroke_0.12": {
+    "envelope_least_m": 0.37,
+    "envelope_least_at": "newcomer+instructor.casualty_litter_straps_to_plug_envelope",
+    "parked_leaf_carriage_least_m": 0.46,
+    "parked_leaf_carriage_least_at": "transit.depth_1.2.to_parked_leaf",
+    "vehicle": {
+     "plug_parked": "CLEAR",
+     "plug_carriage": "CLEAR",
+     "plug_swept": "CLEAR",
+     "plug_rails": "CLEAR",
+     "frame_ring": "CLEAR",
+     "dogs": "CLEAR",
+     "keeper_ledges": "CLEAR",
+     "plug_lever": "CLEAR",
+     "panel_sp12": "CLEAR",
+     "ctl_valve_sp12": "CLEAR",
+     "ctl_gauge_sp12": "CLEAR",
+     "ctl_release_sp12": "CLEAR"
+    },
+    "vehicle_intersects": {},
+    "fixtures_min_m": {
+     "plug_swept": 0.239,
+     "plug_carriage": 0.239,
+     "plug_parked": 0.289,
+     "panel_sp12": 0.041
+    },
+    "distances_m": {
+     "instructor.chamber.rig_to_plug_envelope": 0.569,
+     "instructor.latch.rig_to_plug_envelope": 0.569,
+     "instructor.strap.rig_to_plug_envelope": 0.569,
+     "newcomer.chamber.rig_to_plug_envelope": 0.656,
+     "newcomer.latch.rig_to_plug_envelope": 0.656,
+     "newcomer.strap.rig_to_plug_envelope": 0.656,
+     "instructor+newcomer.casualty_litter_straps_to_plug_envelope": 0.458,
+     "instructor+newcomer.rescuer_to_plug_envelope": 0.53,
+     "newcomer+instructor.casualty_litter_straps_to_plug_envelope": 0.37,
+     "newcomer+instructor.rescuer_to_plug_envelope": 0.619,
+     "sp12_operator_instructor.to_plug_envelope": 0.627,
+     "sp12_operator_newcomer.to_plug_envelope": 0.581,
+     "transit.depth_0.0.to_parked_leaf": 0.805,
+     "transit.depth_0.0.to_carriage": 0.767,
+     "transit.depth_0.4.to_parked_leaf": 0.586,
+     "transit.depth_0.4.to_carriage": 0.554,
+     "transit.depth_0.8.to_parked_leaf": 0.553,
+     "transit.depth_0.8.to_carriage": 0.493,
+     "transit.depth_1.2.to_parked_leaf": 0.46,
+     "transit.depth_1.2.to_carriage": 0.463
+    }
+   },
+   "KP3_thin_lugs": {
+    "envelope_least_m": 0.33,
+    "envelope_least_at": "newcomer+instructor.casualty_litter_straps_to_plug_envelope",
+    "parked_leaf_carriage_least_m": 0.428,
+    "parked_leaf_carriage_least_at": "transit.depth_1.2.to_carriage",
+    "vehicle": {
+     "plug_parked": "CLEAR",
+     "plug_carriage": "CLEAR",
+     "plug_swept": "CLEAR",
+     "plug_rails": "CLEAR",
+     "frame_ring": "CLEAR",
+     "dogs": "CLEAR",
+     "keeper_ledges": "CLEAR",
+     "plug_lever": "CLEAR",
+     "panel_sp12": "CLEAR",
+     "ctl_valve_sp12": "CLEAR",
+     "ctl_gauge_sp12": "CLEAR",
+     "ctl_release_sp12": "CLEAR"
+    },
+    "vehicle_intersects": {},
+    "fixtures_min_m": {
+     "plug_swept": 0.239,
+     "plug_carriage": 0.239,
+     "plug_parked": 0.289,
+     "panel_sp12": 0.041
+    },
+    "distances_m": {
+     "instructor.chamber.rig_to_plug_envelope": 0.529,
+     "instructor.latch.rig_to_plug_envelope": 0.529,
+     "instructor.strap.rig_to_plug_envelope": 0.529,
+     "newcomer.chamber.rig_to_plug_envelope": 0.616,
+     "newcomer.latch.rig_to_plug_envelope": 0.616,
+     "newcomer.strap.rig_to_plug_envelope": 0.616,
+     "instructor+newcomer.casualty_litter_straps_to_plug_envelope": 0.418,
+     "instructor+newcomer.rescuer_to_plug_envelope": 0.49,
+     "newcomer+instructor.casualty_litter_straps_to_plug_envelope": 0.33,
+     "newcomer+instructor.rescuer_to_plug_envelope": 0.579,
+     "sp12_operator_instructor.to_plug_envelope": 0.618,
+     "sp12_operator_newcomer.to_plug_envelope": 0.57,
+     "transit.depth_0.0.to_parked_leaf": 0.777,
+     "transit.depth_0.0.to_carriage": 0.74,
+     "transit.depth_0.4.to_parked_leaf": 0.574,
+     "transit.depth_0.4.to_carriage": 0.538,
+     "transit.depth_0.8.to_parked_leaf": 0.55,
+     "transit.depth_0.8.to_carriage": 0.493,
+     "transit.depth_1.2.to_parked_leaf": 0.431,
+     "transit.depth_1.2.to_carriage": 0.428
+    }
+   },
+   "KP4_recessed_ledge": {
+    "envelope_least_m": 0.33,
+    "envelope_least_at": "newcomer+instructor.casualty_litter_straps_to_plug_envelope",
+    "parked_leaf_carriage_least_m": 0.428,
+    "parked_leaf_carriage_least_at": "transit.depth_1.2.to_carriage",
+    "vehicle": {
+     "plug_parked": "CLEAR",
+     "plug_carriage": "CLEAR",
+     "plug_swept": "CLEAR",
+     "plug_rails": "CLEAR",
+     "frame_ring": "CLEAR",
+     "dogs": "CLEAR",
+     "keeper_ledges": "CLEAR",
+     "plug_lever": "CLEAR",
+     "panel_sp12": "CLEAR",
+     "ctl_valve_sp12": "CLEAR",
+     "ctl_gauge_sp12": "CLEAR",
+     "ctl_release_sp12": "CLEAR"
+    },
+    "vehicle_intersects": {},
+    "fixtures_min_m": {
+     "plug_swept": 0.239,
+     "plug_carriage": 0.239,
+     "plug_parked": 0.289,
+     "panel_sp12": 0.041
+    },
+    "distances_m": {
+     "instructor.chamber.rig_to_plug_envelope": 0.529,
+     "instructor.latch.rig_to_plug_envelope": 0.529,
+     "instructor.strap.rig_to_plug_envelope": 0.529,
+     "newcomer.chamber.rig_to_plug_envelope": 0.616,
+     "newcomer.latch.rig_to_plug_envelope": 0.616,
+     "newcomer.strap.rig_to_plug_envelope": 0.616,
+     "instructor+newcomer.casualty_litter_straps_to_plug_envelope": 0.418,
+     "instructor+newcomer.rescuer_to_plug_envelope": 0.49,
+     "newcomer+instructor.casualty_litter_straps_to_plug_envelope": 0.33,
+     "newcomer+instructor.rescuer_to_plug_envelope": 0.579,
+     "sp12_operator_instructor.to_plug_envelope": 0.618,
+     "sp12_operator_newcomer.to_plug_envelope": 0.57,
+     "transit.depth_0.0.to_parked_leaf": 0.777,
+     "transit.depth_0.0.to_carriage": 0.74,
+     "transit.depth_0.4.to_parked_leaf": 0.574,
+     "transit.depth_0.4.to_carriage": 0.538,
+     "transit.depth_0.8.to_parked_leaf": 0.55,
+     "transit.depth_0.8.to_carriage": 0.493,
+     "transit.depth_1.2.to_parked_leaf": 0.431,
+     "transit.depth_1.2.to_carriage": 0.428
+    }
+   },
+   "KP5_guide_moved": {
+    "envelope_least_m": 0.33,
+    "envelope_least_at": "newcomer+instructor.casualty_litter_straps_to_plug_envelope",
+    "parked_leaf_carriage_least_m": 0.428,
+    "parked_leaf_carriage_least_at": "transit.depth_1.2.to_carriage",
+    "vehicle": {
+     "plug_parked": "CLEAR",
+     "plug_carriage": "CLEAR",
+     "plug_swept": "CLEAR",
+     "plug_rails": "CLEAR",
+     "frame_ring": "CLEAR",
+     "dogs": "CLEAR",
+     "keeper_ledges": "CLEAR",
+     "plug_lever": "CLEAR",
+     "panel_sp12": "CLEAR",
+     "ctl_valve_sp12": "CLEAR",
+     "ctl_gauge_sp12": "CLEAR",
+     "ctl_release_sp12": "CLEAR"
+    },
+    "vehicle_intersects": {},
+    "fixtures_min_m": {
+     "plug_swept": 0.239,
+     "plug_carriage": 0.239,
+     "plug_parked": 0.289,
+     "panel_sp12": 0.041
+    },
+    "distances_m": {
+     "instructor.chamber.rig_to_plug_envelope": 0.529,
+     "instructor.latch.rig_to_plug_envelope": 0.529,
+     "instructor.strap.rig_to_plug_envelope": 0.529,
+     "newcomer.chamber.rig_to_plug_envelope": 0.616,
+     "newcomer.latch.rig_to_plug_envelope": 0.616,
+     "newcomer.strap.rig_to_plug_envelope": 0.616,
+     "instructor+newcomer.casualty_litter_straps_to_plug_envelope": 0.418,
+     "instructor+newcomer.rescuer_to_plug_envelope": 0.49,
+     "newcomer+instructor.casualty_litter_straps_to_plug_envelope": 0.33,
+     "newcomer+instructor.rescuer_to_plug_envelope": 0.579,
+     "sp12_operator_instructor.to_plug_envelope": 0.618,
+     "sp12_operator_newcomer.to_plug_envelope": 0.57,
+     "transit.depth_0.0.to_parked_leaf": 0.777,
+     "transit.depth_0.0.to_carriage": 0.74,
+     "transit.depth_0.4.to_parked_leaf": 0.574,
+     "transit.depth_0.4.to_carriage": 0.538,
+     "transit.depth_0.8.to_parked_leaf": 0.55,
+     "transit.depth_0.8.to_carriage": 0.494,
+     "transit.depth_1.2.to_parked_leaf": 0.431,
+     "transit.depth_1.2.to_carriage": 0.428
+    }
+   },
+   "KP6_stroke_0.10_guide_moved": {
+    "envelope_least_m": 0.35,
+    "envelope_least_at": "newcomer+instructor.casualty_litter_straps_to_plug_envelope",
+    "parked_leaf_carriage_least_m": 0.445,
+    "parked_leaf_carriage_least_at": "transit.depth_1.2.to_parked_leaf",
+    "vehicle": {
+     "plug_parked": "CLEAR",
+     "plug_carriage": "CLEAR",
+     "plug_swept": "CLEAR",
+     "plug_rails": "CLEAR",
+     "frame_ring": "CLEAR",
+     "dogs": "CLEAR",
+     "keeper_ledges": "CLEAR",
+     "plug_lever": "CLEAR",
+     "panel_sp12": "CLEAR",
+     "ctl_valve_sp12": "CLEAR",
+     "ctl_gauge_sp12": "CLEAR",
+     "ctl_release_sp12": "CLEAR"
+    },
+    "vehicle_intersects": {},
+    "fixtures_min_m": {
+     "plug_swept": 0.239,
+     "plug_carriage": 0.239,
+     "plug_parked": 0.289,
+     "panel_sp12": 0.041
+    },
+    "distances_m": {
+     "instructor.chamber.rig_to_plug_envelope": 0.549,
+     "instructor.latch.rig_to_plug_envelope": 0.549,
+     "instructor.strap.rig_to_plug_envelope": 0.549,
+     "newcomer.chamber.rig_to_plug_envelope": 0.636,
+     "newcomer.latch.rig_to_plug_envelope": 0.636,
+     "newcomer.strap.rig_to_plug_envelope": 0.636,
+     "instructor+newcomer.casualty_litter_straps_to_plug_envelope": 0.438,
+     "instructor+newcomer.rescuer_to_plug_envelope": 0.51,
+     "newcomer+instructor.casualty_litter_straps_to_plug_envelope": 0.35,
+     "newcomer+instructor.rescuer_to_plug_envelope": 0.599,
+     "sp12_operator_instructor.to_plug_envelope": 0.623,
+     "sp12_operator_newcomer.to_plug_envelope": 0.576,
+     "transit.depth_0.0.to_parked_leaf": 0.791,
+     "transit.depth_0.0.to_carriage": 0.753,
+     "transit.depth_0.4.to_parked_leaf": 0.58,
+     "transit.depth_0.4.to_carriage": 0.545,
+     "transit.depth_0.8.to_parked_leaf": 0.552,
+     "transit.depth_0.8.to_carriage": 0.493,
+     "transit.depth_1.2.to_parked_leaf": 0.445,
+     "transit.depth_1.2.to_carriage": 0.445
+    }
+   },
+   "KP7_stroke_0.10_thin_recessed": {
+    "envelope_least_m": 0.35,
+    "envelope_least_at": "newcomer+instructor.casualty_litter_straps_to_plug_envelope",
+    "parked_leaf_carriage_least_m": 0.445,
+    "parked_leaf_carriage_least_at": "transit.depth_1.2.to_parked_leaf",
+    "vehicle": {
+     "plug_parked": "CLEAR",
+     "plug_carriage": "CLEAR",
+     "plug_swept": "CLEAR",
+     "plug_rails": "CLEAR",
+     "frame_ring": "CLEAR",
+     "dogs": "CLEAR",
+     "keeper_ledges": "CLEAR",
+     "plug_lever": "CLEAR",
+     "panel_sp12": "CLEAR",
+     "ctl_valve_sp12": "CLEAR",
+     "ctl_gauge_sp12": "CLEAR",
+     "ctl_release_sp12": "CLEAR"
+    },
+    "vehicle_intersects": {},
+    "fixtures_min_m": {
+     "plug_swept": 0.239,
+     "plug_carriage": 0.239,
+     "plug_parked": 0.289,
+     "panel_sp12": 0.041
+    },
+    "distances_m": {
+     "instructor.chamber.rig_to_plug_envelope": 0.549,
+     "instructor.latch.rig_to_plug_envelope": 0.549,
+     "instructor.strap.rig_to_plug_envelope": 0.549,
+     "newcomer.chamber.rig_to_plug_envelope": 0.636,
+     "newcomer.latch.rig_to_plug_envelope": 0.636,
+     "newcomer.strap.rig_to_plug_envelope": 0.636,
+     "instructor+newcomer.casualty_litter_straps_to_plug_envelope": 0.438,
+     "instructor+newcomer.rescuer_to_plug_envelope": 0.51,
+     "newcomer+instructor.casualty_litter_straps_to_plug_envelope": 0.35,
+     "newcomer+instructor.rescuer_to_plug_envelope": 0.599,
+     "sp12_operator_instructor.to_plug_envelope": 0.623,
+     "sp12_operator_newcomer.to_plug_envelope": 0.576,
+     "transit.depth_0.0.to_parked_leaf": 0.791,
+     "transit.depth_0.0.to_carriage": 0.753,
+     "transit.depth_0.4.to_parked_leaf": 0.58,
+     "transit.depth_0.4.to_carriage": 0.545,
+     "transit.depth_0.8.to_parked_leaf": 0.552,
+     "transit.depth_0.8.to_carriage": 0.493,
+     "transit.depth_1.2.to_parked_leaf": 0.445,
+     "transit.depth_1.2.to_carriage": 0.445
+    }
+   }
+  },
+  "controls": {
+   "CT0_baseline": {
+    "operators_suited": {
+     "instructor": {
+      "to_chamber_outer_wall_m": 0.1,
+      "to_plug_envelope_m": 0.618,
+      "to_panel_plate_m": 0.04,
+      "to_fixtures_m": {
+       "SP12_DON_STAND_A": 0.0,
+       "SP12_DON_STAND_B": 0.304,
+       "SP12_PRESSURE_CHECK": 1.126,
+       "SP12_O2_INTERFACE": 0.803,
+       "SP12_TOOL_CHECKOUT": 2.357,
+       "SP13_DRY_RACK": 1.278,
+       "SP13_CHARGE_PANEL": 9.0,
+       "SP13_BENCH": 2.062,
+       "SP13_SPARES": 1.104
+      },
+      "to_buddy_zone_surface_m": 0.0,
+      "least_m": 0.0
+     },
+     "newcomer": {
+      "to_chamber_outer_wall_m": 0.088,
+      "to_plug_envelope_m": 0.57,
+      "to_panel_plate_m": 0.028,
+      "to_fixtures_m": {
+       "SP12_DON_STAND_A": 0.011,
+       "SP12_DON_STAND_B": 0.35,
+       "SP12_PRESSURE_CHECK": 1.147,
+       "SP12_O2_INTERFACE": 0.843,
+       "SP12_TOOL_CHECKOUT": 2.314,
+       "SP13_DRY_RACK": 1.318,
+       "SP13_CHARGE_PANEL": 9.0,
+       "SP13_BENCH": 2.097,
+       "SP13_SPARES": 1.144
+      },
+      "to_buddy_zone_surface_m": 0.0,
+      "least_m": 0.011
+     }
+    },
+    "least_m": 0.0,
+    "least_component": "to_fixtures_m",
+    "components_least_m": {
+     "to_chamber_outer_wall_m": 0.088,
+     "to_plug_envelope_m": 0.57,
+     "to_panel_plate_m": 0.028,
+     "to_fixtures_m": 0.0
+    }
+   },
+   "CT1_vertical_fine_angle": {
+    "operators_suited": {
+     "instructor": {
+      "to_chamber_outer_wall_m": 0.1,
+      "to_plug_envelope_m": 0.618,
+      "to_panel_plate_m": 0.04,
+      "to_fixtures_m": {
+       "SP12_DON_STAND_A": 0.0,
+       "SP12_DON_STAND_B": 0.304,
+       "SP12_PRESSURE_CHECK": 1.126,
+       "SP12_O2_INTERFACE": 0.803,
+       "SP12_TOOL_CHECKOUT": 2.357,
+       "SP13_DRY_RACK": 1.278,
+       "SP13_CHARGE_PANEL": 9.0,
+       "SP13_BENCH": 2.062,
+       "SP13_SPARES": 1.104
+      },
+      "to_buddy_zone_surface_m": 0.0,
+      "least_m": 0.0
+     },
+     "newcomer": {
+      "to_chamber_outer_wall_m": 0.088,
+      "to_plug_envelope_m": 0.57,
+      "to_panel_plate_m": 0.028,
+      "to_fixtures_m": {
+       "SP12_DON_STAND_A": 0.011,
+       "SP12_DON_STAND_B": 0.35,
+       "SP12_PRESSURE_CHECK": 1.147,
+       "SP12_O2_INTERFACE": 0.843,
+       "SP12_TOOL_CHECKOUT": 2.314,
+       "SP13_DRY_RACK": 1.318,
+       "SP13_CHARGE_PANEL": 9.0,
+       "SP13_BENCH": 2.097,
+       "SP13_SPARES": 1.144
+      },
+      "to_buddy_zone_surface_m": 0.0,
+      "least_m": 0.011
+     }
+    },
+    "least_m": 0.0,
+    "least_component": "to_fixtures_m",
+    "components_least_m": {
+     "to_chamber_outer_wall_m": 0.088,
+     "to_plug_envelope_m": 0.57,
+     "to_panel_plate_m": 0.028,
+     "to_fixtures_m": 0.0
+    }
+   },
+   "CT2_row_fine_angle": {
+    "operators_suited": {
+     "instructor": {
+      "to_chamber_outer_wall_m": 0.102,
+      "to_plug_envelope_m": 0.604,
+      "to_panel_plate_m": 0.076,
+      "to_fixtures_m": {
+       "SP12_DON_STAND_A": 0.11,
+       "SP12_DON_STAND_B": 0.347,
+       "SP12_PRESSURE_CHECK": 1.248,
+       "SP12_O2_INTERFACE": 0.798,
+       "SP12_TOOL_CHECKOUT": 2.395,
+       "SP13_DRY_RACK": 1.271,
+       "SP13_CHARGE_PANEL": 9.0,
+       "SP13_BENCH": 2.053,
+       "SP13_SPARES": 1.115
+      },
+      "to_buddy_zone_surface_m": 0.0,
+      "least_m": 0.076
+     },
+     "newcomer": {
+      "to_chamber_outer_wall_m": 0.09,
+      "to_plug_envelope_m": 0.558,
+      "to_panel_plate_m": 0.042,
+      "to_fixtures_m": {
+       "SP12_DON_STAND_A": 0.127,
+       "SP12_DON_STAND_B": 0.386,
+       "SP12_PRESSURE_CHECK": 1.27,
+       "SP12_O2_INTERFACE": 0.837,
+       "SP12_TOOL_CHECKOUT": 2.352,
+       "SP13_DRY_RACK": 1.309,
+       "SP13_CHARGE_PANEL": 9.0,
+       "SP13_BENCH": 2.088,
+       "SP13_SPARES": 1.152
+      },
+      "to_buddy_zone_surface_m": 0.0,
+      "least_m": 0.042
+     }
+    },
+    "least_m": 0.042,
+    "least_component": "to_panel_plate_m",
+    "components_least_m": {
+     "to_chamber_outer_wall_m": 0.09,
+     "to_plug_envelope_m": 0.558,
+     "to_panel_plate_m": 0.042,
+     "to_fixtures_m": 0.11
+    }
+   },
+   "CT3_row_fine_angle_standoff_0.13": {
+    "operators_suited": {
+     "instructor": {
+      "to_chamber_outer_wall_m": 0.132,
+      "to_plug_envelope_m": 0.633,
+      "to_panel_plate_m": 0.104,
+      "to_fixtures_m": {
+       "SP12_DON_STAND_A": 0.113,
+       "SP12_DON_STAND_B": 0.322,
+       "SP12_PRESSURE_CHECK": 1.25,
+       "SP12_O2_INTERFACE": 0.768,
+       "SP12_TOOL_CHECKOUT": 2.424,
+       "SP13_DRY_RACK": 1.241,
+       "SP13_CHARGE_PANEL": 9.0,
+       "SP13_BENCH": 2.023,
+       "SP13_SPARES": 1.085
+      },
+      "to_buddy_zone_surface_m": 0.001,
+      "least_m": 0.104
+     },
+     "newcomer": {
+      "to_chamber_outer_wall_m": 0.12,
+      "to_plug_envelope_m": 0.586,
+      "to_panel_plate_m": 0.07,
+      "to_fixtures_m": {
+       "SP12_DON_STAND_A": 0.129,
+       "SP12_DON_STAND_B": 0.361,
+       "SP12_PRESSURE_CHECK": 1.27,
+       "SP12_O2_INTERFACE": 0.807,
+       "SP12_TOOL_CHECKOUT": 2.38,
+       "SP13_DRY_RACK": 1.279,
+       "SP13_CHARGE_PANEL": 9.0,
+       "SP13_BENCH": 2.058,
+       "SP13_SPARES": 1.122
+      },
+      "to_buddy_zone_surface_m": 0.0,
+      "least_m": 0.07
+     }
+    },
+    "least_m": 0.07,
+    "least_component": "to_panel_plate_m",
+    "components_least_m": {
+     "to_chamber_outer_wall_m": 0.12,
+     "to_plug_envelope_m": 0.586,
+     "to_panel_plate_m": 0.07,
+     "to_fixtures_m": 0.113
+    }
+   },
+   "CT4_row_fine_angle_zone_moved": {
+    "operators_suited": {
+     "instructor": {
+      "to_chamber_outer_wall_m": 0.102,
+      "to_plug_envelope_m": 0.604,
+      "to_panel_plate_m": 0.076,
+      "to_fixtures_m": {
+       "SP12_DON_STAND_A": 0.11,
+       "SP12_DON_STAND_B": 0.347,
+       "SP12_PRESSURE_CHECK": 1.248,
+       "SP12_O2_INTERFACE": 0.798,
+       "SP12_TOOL_CHECKOUT": 2.395,
+       "SP13_DRY_RACK": 1.271,
+       "SP13_CHARGE_PANEL": 9.0,
+       "SP13_BENCH": 2.053,
+       "SP13_SPARES": 1.115
+      },
+      "to_buddy_zone_surface_m": 0.0,
+      "least_m": 0.076
+     },
+     "newcomer": {
+      "to_chamber_outer_wall_m": 0.09,
+      "to_plug_envelope_m": 0.558,
+      "to_panel_plate_m": 0.042,
+      "to_fixtures_m": {
+       "SP12_DON_STAND_A": 0.127,
+       "SP12_DON_STAND_B": 0.386,
+       "SP12_PRESSURE_CHECK": 1.27,
+       "SP12_O2_INTERFACE": 0.837,
+       "SP12_TOOL_CHECKOUT": 2.352,
+       "SP13_DRY_RACK": 1.309,
+       "SP13_CHARGE_PANEL": 9.0,
+       "SP13_BENCH": 2.088,
+       "SP13_SPARES": 1.152
+      },
+      "to_buddy_zone_surface_m": 0.0,
+      "least_m": 0.042
+     }
+    },
+    "least_m": 0.042,
+    "least_component": "to_panel_plate_m",
+    "components_least_m": {
+     "to_chamber_outer_wall_m": 0.09,
+     "to_plug_envelope_m": 0.558,
+     "to_panel_plate_m": 0.042,
+     "to_fixtures_m": 0.11
+    }
+   },
+   "CT5_row_standA_az12": {
+    "operators_suited": {
+     "instructor": {
+      "to_chamber_outer_wall_m": 0.1,
+      "to_plug_envelope_m": 0.618,
+      "to_panel_plate_m": 0.076,
+      "to_fixtures_m": {
+       "SP12_DON_STAND_A": 0.161,
+       "SP12_DON_STAND_B": 0.304,
+       "SP12_PRESSURE_CHECK": 1.126,
+       "SP12_O2_INTERFACE": 0.803,
+       "SP12_TOOL_CHECKOUT": 2.357,
+       "SP13_DRY_RACK": 1.278,
+       "SP13_CHARGE_PANEL": 9.0,
+       "SP13_BENCH": 2.062,
+       "SP13_SPARES": 1.104
+      },
+      "to_buddy_zone_surface_m": 0.0,
+      "least_m": 0.076
+     },
+     "newcomer": {
+      "to_chamber_outer_wall_m": 0.088,
+      "to_plug_envelope_m": 0.57,
+      "to_panel_plate_m": 0.042,
+      "to_fixtures_m": {
+       "SP12_DON_STAND_A": 0.18,
+       "SP12_DON_STAND_B": 0.35,
+       "SP12_PRESSURE_CHECK": 1.147,
+       "SP12_O2_INTERFACE": 0.843,
+       "SP12_TOOL_CHECKOUT": 2.314,
+       "SP13_DRY_RACK": 1.318,
+       "SP13_CHARGE_PANEL": 9.0,
+       "SP13_BENCH": 2.097,
+       "SP13_SPARES": 1.144
+      },
+      "to_buddy_zone_surface_m": 0.0,
+      "least_m": 0.042
+     }
+    },
+    "least_m": 0.042,
+    "least_component": "to_panel_plate_m",
+    "components_least_m": {
+     "to_chamber_outer_wall_m": 0.088,
+     "to_plug_envelope_m": 0.57,
+     "to_panel_plate_m": 0.042,
+     "to_fixtures_m": 0.161
+    }
+   }
+  },
+  "status": "STUDY: real suit meshes against SIM-027 variants (disposable objects, nothing saved)"
+ }
+}

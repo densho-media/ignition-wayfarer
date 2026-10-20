@@ -1,0 +1,30 @@
+G.U.C. Wayfarer 001 — IGNITION universe — Densho (https://densho.media)
+
+This repository contains two kinds of material under different terms.
+
+1. Code: Apache License 2.0 (see LICENSE).
+   This covers the source code and scripts in src/, tools/ and tests/, the Godot project files,
+   scenes and scripts in godot/, and the agent configuration in .claude/.
+
+2. IGNITION content: Copyright (c) 2026 Densho. All rights reserved.
+   This covers the IGNITION universe and its lore, names, characters, story, factions and
+   terminology; the design of G.U.C. Wayfarer 001; the parameter and scenario data in data/ and
+   simulations/; the documentation (README.md, AGENTS.md, CLAUDE.md, TODO.md, docs/); the
+   reports and baselines in references/; the shot definitions in shots/; and every model, image,
+   render or export generated from them.
+
+   You may view this content, and clone, build and run the project for personal evaluation,
+   study and contribution to this repository. You may not redistribute the content or works
+   generated from it, publish derivative works, or use it commercially without written
+   permission from Densho.
+
+"IGNITION", "Wayfarer", "G.U.C." and "Densho" are names of Densho and are not licensed under
+the Apache License (see its section 6).
+
+Third-party components are not part of this repository. They are fetched at build time under
+their own licences (assets/external/manifest.toml), for example MPFB (GPL-3.0-or-later code, run
+as a Blender extension, never copied here) and the MakeHuman system assets (CC0-1.0). Blender
+(GPL) and Godot (MIT) are used as external tools; Apache-2.0 code is compatible with GPL-3.0, so
+the Blender scripts may be run inside Blender.
+
+Contact: https://densho.media

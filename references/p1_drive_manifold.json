@@ -1,0 +1,434 @@
+{
+  "generated_by": "drive_manifold.py",
+  "status": "PROTOTYPE geometry screen; not an engineering validation",
+  "pass_": true,
+  "failures": [],
+  "measurements": {
+    "spine_x": [
+      -79.8,
+      108.5
+    ],
+    "spine_core_axial_gap_m": 2.700000000000003,
+    "branch_max_off_axis_deg": 21.573398964863518,
+    "branch_min_bend_radius_m": 4.742140694529086,
+    "branch_end_angles_deg": [
+      0.0,
+      0.0
+    ],
+    "branch_centreline_separation_min_m": 2.4041630560342613,
+    "branch_gap_at_max_radius_m": 1.2041630560342613,
+    "branch_hub_gap_m": 1.4052220706176732,
+    "branch_ring_gap_m": 0.7635652467528109,
+    "branch_ring_member_min_gap_m": 0.20364464628621243,
+    "exhaust_ring_member_min_gap_m": 0.1599344253584577,
+    "yoke_coil_gap_m": 0.050000000000000044,
+    "yoke_outer_axis_radius_m": 5.556955262170048,
+    "yoke_skin_gap_m": 0.3430447378299528,
+    "yoke_neighbour_gap_m": 1.4400000000000002,
+    "branch_lattice_gap_m": 0.3299266490057594,
+    "branch_seed_coil_gap_m": 0.11866311134255236,
+    "exhaust_nozzle_coil_gap_m": 0.08999999999999975,
+    "bypass_gaps_m": {
+      "Fusion_Core": 0.25000000000000033,
+      "Common_Plasma_Region": 1.35,
+      "Magnetic_Manifold": 1.35,
+      "Lattice": 1.4500000000000002,
+      "Seed_coils": 1.4,
+      "Branch_plasma": 1.2789523694484886,
+      "Exhaust_plasma": 1.0255303392174238,
+      "Route_beams": 0.25000000000000566,
+      "Route_mirrors": 0.3403124237432884
+    },
+    "bypass_member_min_gap_m": 0.25000000000000033,
+    "bypass_plasma_min_gap_m": 1.0255303392174238,
+    "bypass_rails": {
+      "30.0": [
+        -103.0,
+        80.44936247723133
+      ],
+      "150.0": [
+        -103.0,
+        80.44936247723133
+      ],
+      "270.0": [
+        -103.0,
+        80.44936247723133
+      ]
+    },
+    "bore_spine_gap_m": 0.17500000000000004,
+    "bore_hub_wall_m": 0.22356624775262524,
+    "route_separation_m": 0.2503863328386533,
+    "head_gap_angle_min_deg": 16.419013780432355,
+    "gate_beam_branch_gap_m": 0.4492771150047629,
+    "gate_beam_seed_coil_gap_m": 0.8611874208078342,
+    "gate_beam_other_sector_min_m": 1.0444644586421394,
+    "route_cage_min_gap_m": 0.25000000000000566,
+    "route_mirror_cage_min_gap_m": 0.3403124237432884,
+    "route_skin_min_gap_m": 0.20000000000000034,
+    "route_envelope_min_gap_m": 0.3500000000000057,
+    "route_shield_face_gap_m": 0.2,
+    "route_core_face_gap_m": 0.3500000000000057,
+    "cold_optics_core_sight": {
+      "LASER_A": false,
+      "LASER_B": false,
+      "OPTICAL_TURN_MIRROR_A": false,
+      "OPTICAL_ENTRY_MIRROR_A": false,
+      "OPTICAL_JOG_MIRROR_A_1": false,
+      "OPTICAL_TURN_MIRROR_B": false,
+      "OPTICAL_ENTRY_MIRROR_B": false,
+      "OPTICAL_JOG_MIRROR_B_1": false
+    },
+    "lasers_in_shadow": {
+      "LASER_A": true,
+      "LASER_B": true
+    },
+    "exhaust_radiator_member_min_m": 39.82746247892403,
+    "core_liner_layers": 1,
+    "throat_liner_layers_per_module": 1,
+    "core_liner_plasma_gap_m": 0.7999999999999998,
+    "core_liner_envelope_gap_m": 0.6499999999999999,
+    "core_liner_end_gap_m": 0.3199999999999932,
+    "core_liner_feed_gap_m": 0.2628410820010305,
+    "throat_liner_plasma_gap_m": 0.09058835465996128,
+    "throat_liner_seed_coil_gap_m": 0.29924929555353363,
+    "throat_liner_manifold_gap_m": 0.2999999999999998,
+    "throat_liner_lattice_gap_m": 0.4565084884205325,
+    "gate_beam_liner_gap_m": 0.7927052858834677,
+    "nozzle_liner_plasma_gap_m": 0.06022624434389101,
+    "cryo_feed_member_min_gap_m": 0.21999999999999936,
+    "cryo_feed_nearest_member": "Common_Plasma_Region",
+    "cryo_feed_gaps_m": {
+      "CRYO_FEED_LINE_01": 1.1430447378299524,
+      "CRYO_FEED_LINE_02": 1.1430447378299524,
+      "CRYO_FEED_LINE_03": 0.21999999999999936,
+      "CRYO_FEED_LINE_04": 0.21999999999999936
+    },
+    "cryo_feed_sleeve_open_sight_lines": {
+      "CRYO_FEED_LINE_01": 0,
+      "CRYO_FEED_LINE_02": 0,
+      "CRYO_FEED_LINE_03": 0,
+      "CRYO_FEED_LINE_04": 0
+    },
+    "optical_bore_open_sight_lines": {
+      "OPTICAL_BORE_A": 0,
+      "OPTICAL_BORE_B": 0
+    },
+    "h2_injection_ring_gap_m": 0.19999999999999973,
+    "cryo_feed_in_shadow": true,
+    "cryo_feed_cold_optics_exposed": {}
+  },
+  "findings": [
+    {
+      "id": "SPINE_TERMINATION",
+      "detail": "Structural_Spine (r 0.875 m) ends on the PROTOTYPE terminated hub (r 2.00 m) on the forward face of the shadow shield; no structure crosses the core, common region or manifold, and the plasma is solid. Drive thrust reaches the forward ship through the 12-node thrust ring and the three outer sector rails around the core. The bulkhead structure, hub shielding and load shares are OPEN (07!H16, 15!G70).",
+      "spine_x": [
+        -79.8,
+        108.5
+      ],
+      "hub_x": [
+        -80.5,
+        -79.8
+      ],
+      "core_x": [
+        -89.5,
+        -82.5
+      ],
+      "bypass_rails_deg": [
+        30.0,
+        150.0,
+        270.0
+      ]
+    },
+    {
+      "id": "HOT_SIDE_OPTICS",
+      "detail": "The replaceable cartridges are hot-side: the second jog mirror ends the aft leg of each bore and so sees the core, the splitter sits in the shield-to-core gap, and the corridor mirrors, distributor heads and gate windows sit aft of the shield. They must be sacrificial or robotically replaceable; humans enter only after shutdown and cooldown (15!C83). Cartridge geometry and protection are OPEN (14!G31).",
+      "elements": [
+        "OPTICAL_JOG_MIRROR_A_2",
+        "OPTICAL_SPLITTER_A",
+        "OPTICAL_CORRIDOR_MIRROR_A_1_1",
+        "OPTICAL_CORRIDOR_MIRROR_A_1_2",
+        "OPTICAL_CORRIDOR_MIRROR_A_2_1",
+        "OPTICAL_CORRIDOR_MIRROR_A_2_2",
+        "OPTICAL_JOG_MIRROR_B_2",
+        "OPTICAL_SPLITTER_B",
+        "OPTICAL_CORRIDOR_MIRROR_B_1_1",
+        "OPTICAL_CORRIDOR_MIRROR_B_1_2",
+        "OPTICAL_CORRIDOR_MIRROR_B_2_1",
+        "OPTICAL_CORRIDOR_MIRROR_B_2_2",
+        "OPTICAL_HEAD_A_1",
+        "OPTICAL_HEAD_A_2",
+        "OPTICAL_HEAD_B_1",
+        "OPTICAL_HEAD_B_2",
+        "OPTICAL_WINDOW_A_L1",
+        "OPTICAL_WINDOW_A_L2",
+        "OPTICAL_WINDOW_A_L3",
+        "OPTICAL_WINDOW_A_L4",
+        "OPTICAL_WINDOW_B_L1",
+        "OPTICAL_WINDOW_B_L3",
+        "OPTICAL_WINDOW_B_L2",
+        "OPTICAL_WINDOW_B_L4"
+      ]
+    },
+    {
+      "id": "SEPARATRIX_THROUGH_HUB_WEBS",
+      "detail": "Separatrices sit midway between branches (0/90/180/270 deg), the same angles as the hub webs at the thrust ring. They are field boundaries, not material, so this only shows in the debug layer."
+    },
+    {
+      "id": "CHANNEL_ISOLATION_COUPLE",
+      "detail": "Owner recovery (06!A51, 15!C76): isolating a flux channel and derating its diametric opposite leaves the surviving diagonal at 50% thrust with couple 0.000 m for every failed channel. The rejected default, a three-channel asymmetric state with the failed channel simply dropped, leaves 1.23 m. The transition torque falls to RCS/Momentum control (15!I76), not modelled; vector authority is OPEN.",
+      "recovery_couple": {
+        "pitch_arm_m": 0.0,
+        "yaw_arm_m": 0.0,
+        "roll_arm_m": 0.0,
+        "couple_arm_m": 0.0
+      },
+      "rejected_three_channel_couple": {
+        "pitch_arm_m": 0.866666666667,
+        "yaw_arm_m": 0.866666666667,
+        "roll_arm_m": 0.0,
+        "couple_arm_m": 1.225651754057
+      }
+    },
+    {
+      "id": "CRYO_FEED_SHIELD_PENETRATION",
+      "detail": "Each cryogenic feed line crosses the shadow-shield slab through a stepped (dog-leg) sleeve, the convention of the optical bores; the 0.3 m between the 5.7 m shield and the 6.0 m casing cannot carry a line around the rim. The D and 3He lines step by the sleeve step; the two hydrogen lines step out to the cage-to-skin corridor with staggered jog planes (15!G68). The PROTOTYPE steps and jog insets leave no straight core-to-tank line of sight through any sleeve bore and no cold optics or laser within conservative straight-sleeve reach; the cold tanks are within that conservative reach by construction. Thermal intercepts and labyrinth shielding are annotated on the sleeve interfaces, not drawn. The hydrogen run through the hot corridor sees nuclear and radiant heating, and its boil-off cost is OPEN (OD-026, 06!E46). The penetration design, scattering and dose are OPEN (OD-026).",
+      "sleeves": [
+        {
+          "line": "CRYO_FEED_LINE_01",
+          "family": "deuterium",
+          "terminus": "core",
+          "shield_point": [
+            -81.0,
+            2.953553390593273,
+            2.953553390593273
+          ],
+          "sleeve_radius_m": 0.13,
+          "open_sight_lines": 0
+        },
+        {
+          "line": "CRYO_FEED_LINE_02",
+          "family": "helium-3",
+          "terminus": "core",
+          "shield_point": [
+            -81.0,
+            -2.953553390593273,
+            2.953553390593273
+          ],
+          "sleeve_radius_m": 0.13,
+          "open_sight_lines": 0
+        },
+        {
+          "line": "CRYO_FEED_LINE_03",
+          "family": "hydrogen",
+          "terminus": "injection_ring",
+          "shield_point": [
+            -81.0,
+            -2.953553390593273,
+            -2.953553390593273
+          ],
+          "sleeve_radius_m": 0.13,
+          "open_sight_lines": 0
+        },
+        {
+          "line": "CRYO_FEED_LINE_04",
+          "family": "hydrogen",
+          "terminus": "injection_ring",
+          "shield_point": [
+            -81.0,
+            3.8183766184073566,
+            -3.8183766184073566
+          ],
+          "sleeve_radius_m": 0.13,
+          "open_sight_lines": 0
+        }
+      ],
+      "cold_items_in_reach": {
+        "CRYO_FEED_LINE_01": [
+          "Tank_Volume_01",
+          "Tank_Volume_02",
+          "Tank_Volume_04"
+        ],
+        "CRYO_FEED_LINE_02": [
+          "Tank_Volume_01",
+          "Tank_Volume_02",
+          "Tank_Volume_03"
+        ],
+        "CRYO_FEED_LINE_03": [
+          "Tank_Volume_02",
+          "Tank_Volume_03",
+          "Tank_Volume_04"
+        ],
+        "CRYO_FEED_LINE_04": [
+          "Tank_Volume_01",
+          "Tank_Volume_03",
+          "Tank_Volume_04"
+        ]
+      },
+      "cold_optics_in_reach": {}
+    },
+    {
+      "id": "OPTICAL_ROUTE_PENETRATIONS",
+      "detail": "Each optical route passes the terminated hub and the shield through its own dog-leg bore beside the spine end: one in-bore jog of route_jog_m, so no straight line crosses the bore (zero open sight lines, screened). The bores are shield penetrations whose material, streaming dose and thermal intercepts are OPEN (15!C73).",
+      "bores": [
+        {
+          "bore": "OPTICAL_BORE_A",
+          "open_sight_lines": 0,
+          "jog_m": 0.8,
+          "offset_m": 1.3,
+          "radius_m": 0.25
+        },
+        {
+          "bore": "OPTICAL_BORE_B",
+          "open_sight_lines": 0,
+          "jog_m": 0.8,
+          "offset_m": 1.3,
+          "radius_m": 0.25
+        }
+      ]
+    },
+    {
+      "id": "H2_INJECTION_OPEN",
+      "detail": "Hydrogen reaction mass enters a PROTOTYPE injection ring around the common region at h2_injection_x, downstream of the burn and ahead of the manifold. Injector ports, count, mixing and the heat load on the ring are OPEN; so are the nuclear and radiant heating and boil-off of the hydrogen run in the hot corridor (OD-026, 06!E46); only the ring station is drawn.",
+      "ring": {
+        "x": -91.5,
+        "radius_m": 3.8,
+        "tube_m": 0.1
+      },
+      "lines": [
+        "CRYO_FEED_LINE_03",
+        "CRYO_FEED_LINE_04"
+      ]
+    }
+  ],
+  "couples": {
+    "balanced": {
+      "pitch_arm_m": 0.0,
+      "yaw_arm_m": 0.0,
+      "roll_arm_m": 0.0,
+      "couple_arm_m": 0.0
+    },
+    "pitch": {
+      "pitch_arm_m": 0.52,
+      "yaw_arm_m": 0.0,
+      "roll_arm_m": 0.0,
+      "couple_arm_m": 0.52
+    },
+    "yaw": {
+      "pitch_arm_m": 0.0,
+      "yaw_arm_m": -0.52,
+      "roll_arm_m": 0.0,
+      "couple_arm_m": 0.52
+    },
+    "owner_example_yaw": {
+      "pitch_arm_m": 0.0,
+      "yaw_arm_m": 0.52,
+      "roll_arm_m": 0.0,
+      "couple_arm_m": 0.52
+    },
+    "channel_loss_recovery_F3": {
+      "pitch_arm_m": 0.0,
+      "yaw_arm_m": 0.0,
+      "roll_arm_m": 0.0,
+      "couple_arm_m": 0.0
+    },
+    "rejected_three_channel_F3": {
+      "pitch_arm_m": 0.866666666667,
+      "yaw_arm_m": 0.866666666667,
+      "roll_arm_m": 0.0,
+      "couple_arm_m": 1.225651754057
+    }
+  },
+  "actions": {
+    "WF_DRIVE_STARTUP": {
+      "frame_range": [
+        1,
+        240
+      ],
+      "description": "Black-start order (17_POWER_STORAGE steps 3-8): seed coils, plasma breakdown, pulse heating, first fusion, lattice activation, field lock; then optics, gates, split, streams, nozzle fields, 25/25/25/25."
+    },
+    "WF_DRIVE_IDLE": {
+      "frame_range": [
+        1,
+        48
+      ],
+      "description": "Hot standby: seed field, lattice and optics held; drive at a low display level."
+    },
+    "WF_MANIFOLD_BALANCED": {
+      "frame_range": [
+        1,
+        48
+      ],
+      "description": "Nominal straight acceleration, 25/25/25/25 (LOCKED)."
+    },
+    "WF_MANIFOLD_PITCH": {
+      "frame_range": [
+        1,
+        144
+      ],
+      "description": "Pitch demo: +Z pair N1/N2 0.30, -Z pair N3/N4 0.20. Gates trim first, shares follow."
+    },
+    "WF_MANIFOLD_YAW": {
+      "frame_range": [
+        1,
+        144
+      ],
+      "description": "Yaw demo: +Y pair N1/N3 0.30, -Y pair N2/N4 0.20."
+    },
+    "WF_MANIFOLD_IMBALANCE": {
+      "frame_range": [
+        1,
+        144
+      ],
+      "description": "Owner example 20/30/20/30 (Fiji 25!C26:C29): a yaw couple under the owner N1-N4 map, the -Y pair N2/N4 at 0.30 and the +Y pair N1/N3 at 0.20, no pitch (06!E48, 15!C71)."
+    },
+    "WF_LASER_A_FAIL": {
+      "frame_range": [
+        1,
+        144
+      ],
+      "description": "Laser A fails; B assumes all four gate channels; gate balance restored (Fiji 25!A69)."
+    },
+    "WF_LASER_B_FAIL": {
+      "frame_range": [
+        1,
+        144
+      ],
+      "description": "Laser B fails; A assumes all four gate channels."
+    },
+    "WF_LASER_AB_FAIL": {
+      "frame_range": [
+        1,
+        144
+      ],
+      "description": "Both sources lost: fast optical trim lost; hold the seed-coil base manifold and derate (Fiji 25!A70)."
+    },
+    "WF_GATE_1_FAIL": {
+      "frame_range": [
+        1,
+        144
+      ],
+      "description": "Gate L1 response drops; branch 1 weakens; seed coils and the quadrant-neighbour gates L2/L3 compensate; precautionary derate (Fiji 25!A71)."
+    },
+    "WF_FLUX_CHANNEL_FAIL": {
+      "frame_range": [
+        1,
+        144
+      ],
+      "description": "Flux channel F3 field collapse (Fiji 25!A40): the branch weakens, F3 is isolated and its diametric opposite F2 is derated at once, and N1/N4 stabilize at drive 0.5 with zero couple (owner recovery 06!A51, 15!C76). Transition torque: RCS/Momentum control (15!I76), not modelled. No hull strike is implied."
+    },
+    "WF_DRIVE_SHUTDOWN": {
+      "frame_range": [
+        1,
+        276
+      ],
+      "description": "Stepped hysteretic descent (05_DRIVE_INTERFACE A12, LOCKED): output, feed, rebalance, gates, lattice, exhaust clears while fields still confine, seed-field steps, optics off."
+    }
+  },
+  "open": [
+    "optical_power",
+    "optical_wavelength",
+    "gate_response_time",
+    "optical_to_lattice_coupling",
+    "throat_field_profile"
+  ]
+}

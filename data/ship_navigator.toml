@@ -1,0 +1,326 @@
+# WAYFARER Ship Navigator (SNAV-001): the module registry, hotspots, status taxonomy and guidance modes of the in-world GU orientation
+# instrument. Owner: S&E 49_SHIP_NAVIGATOR NAV-001..029 (APPROVED FEATURE / NOT BUILT, 2026-10-11), 47 SIM-036/037, 48 WF-028; Tale
+# 26_GUIDED_EVA NAV-TOUR-01..08; Art Style Bible Objects & Tech rows 16-17. Evidence: the live read of 2026-10-12
+# (references/SHIP_NAVIGATOR_SOURCES_2026-10-12.md), captured formally in references/drive_capture_2026-10-13.
+# Read by src/wayfarer/ship_navigator.py, which validates every binding against the rig and emits the rig's `navigator` block.
+#
+# Rules (NAV-007, NAV-029): the navigator owns no dimension, physics, chronology or crew identity. Every number a hotspot shows is a
+# `fact` resolved from data/wayfarer_3d.toml with its source_ref; an unknown fact stays OPEN and is never shown as 0. Modes change
+# guidance only: they carry no permission field (NAV-003). Wording here is DRAFT exposition (Claude), not Tale canon.
+
+[navigator]
+id = "WF.NAV.SHIP_NAVIGATOR"
+version = 1
+status = "PROTOTYPE"
+scope = "Integrated Demonstrator 01 slice: corner locator, state-gated route, one hotspot (NAV-021, WF-028)"
+source_ref = "S&E 49_SHIP_NAVIGATOR!A1:H30; 47_SIM_PRODUCTION!A37:I38; 48_WORKFLOW_GATES!A29; Tale 26_GUIDED_EVA NAV-TOUR-01..08; Art Style Objects & Tech!A16:F17"
+read_on = "2026-10-12"
+
+# NAV-007 taxonomy. Every state has a text label and a glyph, so no state relies on colour alone (NAV-019). `tone` names a palette slot.
+[status]
+ACTIVE = { glyph = "▶", tone = "go", text = "ACTIVE" }
+INACTIVE = { glyph = "○", tone = "quiet", text = "INACTIVE" }
+RESTRICTED = { glyph = "■", tone = "caution", text = "RESTRICTED" }
+HOLD = { glyph = "‖", tone = "caution", text = "HOLD" }
+SIMULATION_ONLY = { glyph = "◇", tone = "quiet", text = "SIMULATION ONLY" }
+OPEN = { glyph = "?", tone = "quiet", text = "OPEN" }
+DANGER = { glyph = "▲", tone = "danger", text = "DANGER" }
+
+# Art Style Objects & Tech row 16 (palette direction); the exact values are a PROTOTYPE display choice.
+[palette]
+status = "PROTOTYPE"
+base = "0d1620"
+graphite = "1d2730"
+structure = "5f9aa6"
+structure_faint = "34525a"
+player = "eef2ec"
+go = "8fc9b8"
+caution = "d9a441"
+danger = "c8483c"
+quiet = "8a969c"
+text = "d6dee0"
+
+# The map silhouette shares the loaded GLB's meshes (no second ship model, NAV-005, Art Style row 17): groups and a size floor.
+[silhouette]
+status = "PROTOTYPE"
+groups = ["Assembly_HULL", "Assembly_STRUCTURE", "Assembly_HABITAT", "Assembly_CREW_TRANSFER", "Assembly_THERMAL", "Assembly_FORWARD_SHIELD", "Assembly_PROPULSION", "Assembly_EYE", "Assembly_SERVICE", "Assembly_ROTOR_INTERFACE", "Assembly_SHIELDING", "Assembly_STORAGE", "Assembly_POWER_STORAGE"]
+min_extent_m = 1.5
+always_kinds = ["crew_passage", "transfer_closure"]
+
+# Modules (NAV-002, NAV-015): one registry for every level. `frame` is the runtime frame the module turns with (STATIONARY, or a rig
+# rotor / drum id); `zones` the induction rail zones it owns; `nav` the dynamics.nav nodes; `groups` the manifest assemblies it isolates.
+# A module's map geometry is its groups' meshes in its frame (the drum's own meshes are Assembly_HABITAT parts on the drum pivot).
+# `access` is what the map may say about entering it; it never grants access (the route gate does).
+[[module]]
+id = "WF.NAVMOD.DOCK_PRIMARY"
+label = "Primary dock and airlock"
+frame = "STATIONARY"
+zones = ["entry"]
+nav = ["DOCK_PRIMARY"]
+groups = ["Assembly_SERVICE"]
+access = "ROUTE"
+
+[[module]]
+id = "WF.NAVMOD.SPINE"
+label = "Stationary spine"
+detail = "the pressure trunk and the storm refuge"
+frame = "STATIONARY"
+zones = ["trunk"]
+nav = ["TRUNK", "REFUGE", "STOREROOM", "SP12"]
+groups = ["Assembly_STRUCTURE", "Assembly_HULL"]
+access = "ROUTE"
+
+[[module]]
+id = "WF.NAVMOD.VESTIBULE_A"
+label = "Ring A transfer drum"
+detail = "the despun transfer vestibule between the spine and ring A"
+frame = "WF.CREW.1.DRUM"
+zones = ["vestibule"]
+nav = ["VESTIBULE_1"]
+groups = ["Assembly_HABITAT", "Assembly_CREW_TRANSFER"]
+access = "ROUTE"
+
+[[module]]
+id = "WF.NAVMOD.RING_A"
+label = "Habitat ring A (aft)"
+frame = "WF.ROTOR.1"
+zones = ["tube", "landing", "aisle"]
+nav = ["SECTOR_1_1", "SECTOR_1_2", "SECTOR_1_3"]
+groups = ["Assembly_HABITAT"]
+access = "ROUTE"
+
+[[module]]
+id = "WF.NAVMOD.RING_B"
+label = "Habitat ring B (forward)"
+frame = "WF.ROTOR.2"
+zones = []
+nav = ["VESTIBULE_2", "SECTOR_2_1", "SECTOR_2_2", "SECTOR_2_3"]
+groups = ["Assembly_HABITAT"]
+access = "NOT_ON_DEMO_ROUTE"
+
+[[module]]
+id = "WF.NAVMOD.EVA"
+label = "EVA airlock and exterior"
+frame = "STATIONARY"
+zones = []
+nav = ["AIRLOCK_EVA", "EVA_EXTERIOR"]
+groups = []
+access = "HOLD"
+note = "FLIGHT_EVA HOLD; the exterior is SIMULATION_ONLY in the EVA scene and never a navigable area here (NAV-014)"
+
+[[module]]
+id = "WF.NAVMOD.RADIATORS"
+label = "Radiator blades"
+frame = "STATIONARY"
+zones = []
+nav = []
+groups = ["Assembly_THERMAL"]
+access = "NO_ENTRY"
+note = "exterior hazard; remote view only (NAV-014)"
+
+[[module]]
+id = "WF.NAVMOD.DRIVE"
+label = "Drive and nozzles"
+frame = "STATIONARY"
+zones = []
+nav = []
+groups = ["Assembly_PROPULSION"]
+access = "NO_ENTRY"
+note = "exterior hazard; remote view only (NAV-014)"
+
+[[module]]
+id = "WF.NAVMOD.SHIELD_EYE"
+label = "Forward shield and EYE"
+frame = "STATIONARY"
+zones = []
+nav = []
+groups = ["Assembly_FORWARD_SHIELD", "Assembly_EYE"]
+access = "NO_ENTRY"
+note = "exterior hazard; remote view only (NAV-014)"
+
+[[module]]
+id = "WF.NAVMOD.DRONES"
+label = "Maintenance drones"
+detail = "the study service fleet: docks, tracks and one spine crawler"
+frame = "STATIONARY"
+zones = []
+nav = []
+groups = []
+access = "NO_ENTRY"
+note = "exterior and interior service robots (S&E 51-54 STUDY / HOLD); remote view only; the drone overlay draws the docks and the crawler from the rig, the proxies are below the map's size floor"
+
+# Where each induction stop sits in the nav graph (the route's topology gate). The rail stays the geometry.
+[stop_nodes]
+arrival = "DOCK_PRIMARY"
+spine = "TRUNK"
+transfer = "VESTIBULE_1"
+habitat = "SECTOR_1_1"
+garden = "SECTOR_1_3"
+burn_readiness = "SECTOR_1_2"
+specialists = "SECTOR_1_2"
+burn_station = "SECTOR_1_2"
+
+# The opening kinds on the rail and the nav edge each crosses (the edge's modes/actors/gate decide it). "SECTOR" is the opening's own
+# ring A sector, read from its id (WF.OPENING.A<n>.*: sector n, nav SECTOR_1_<n>).
+[opening_edges]
+AIRLOCK_OUTER = ["DOCK_PRIMARY", "TRUNK"]
+AIRLOCK_INNER = ["DOCK_PRIMARY", "TRUNK"]
+PORT_GATE = ["TRUNK", "VESTIBULE_1"]
+DRUM_DOOR_TUBE_HATCH = ["VESTIBULE_1", "SECTOR"]
+SECTOR_LEAF = ["VESTIBULE_1", "SECTOR"]
+
+# Hotspots (NAV-006, NAV-TOUR-05): WHAT / WHY / SHOW ME. `facts` are dotted paths into data/wayfarer_3d.toml; each is shown with its
+# owner range or as OPEN. `show` names what SHOW ME isolates and highlights on the map (modules and opening kinds).
+[[hotspot]]
+id = "WF.HOTSPOT.VESTIBULE_A"
+module = "WF.NAVMOD.VESTIBULE_A"
+title = "Despun transfer vestibule"
+wording = "DRAFT"
+what = "An isolated drum between the stationary spine and ring A. It holds still with the spine, or turns with the ring, so a crew member never steps across a moving edge."
+why = "The ring turns at its working rate while the spine does not. Grabbing a spinning wall, or one seal carrying the pressure alone, is unsafe; two independently closable boundaries and a drum that matches speed first remove both risks."
+show = "The map isolates the spine, the drum and ring A, cuts the hull away and marks the spine port gate and the drum door with their live state."
+show_modules = ["WF.NAVMOD.SPINE", "WF.NAVMOD.VESTIBULE_A", "WF.NAVMOD.RING_A"]
+show_openings = ["PORT_GATE", "DRUM_DOOR_TUBE_HATCH"]
+facts = [
+  { label = "Ring rate", path = "habitat.rpm", unit = "rpm" },
+  { label = "Deck radius", path = "habitat.floor_radius" },
+  { label = "Routine transfer", path = "habitat.transfer.routine_transfer_mode" },
+  { label = "Backup transfer", path = "habitat.transfer.backup_transfer_mode" },
+  { label = "Seal planes per side (min)", path = "habitat.transfer.seal_planes_min" },
+  { label = "Drum size, seals, sync cycle time", path = "habitat.transfer.despun_vestibule" },
+]
+
+[[hotspot]]
+id = "WF.HOTSPOT.STORM_REFUGE"
+module = "WF.NAVMOD.SPINE"
+title = "Storm refuge"
+wording = "DRAFT"
+what = "One shielded shelter for the whole crew in the stationary spine, beside the transfer hub. It does not turn, so it is reachable whether the rings spin or stand still."
+why = "A solar storm leaves too little time to shield every room. Concentrating mass around one shelter close to the transfer path protects everyone at a fraction of the mass, and a stationary room never waits for a ring to stop."
+show = "The map isolates the stationary spine with the transfer drums beside it."
+show_modules = ["WF.NAVMOD.SPINE", "WF.NAVMOD.VESTIBULE_A"]
+show_openings = ["PORT_GATE"]
+facts = [
+  { label = "Rated occupancy", path = "shielding.refuge.capacity_persons", unit = "persons" },
+  { label = "Shield areal density", path = "shielding.refuge.areal_density_g_cm2", unit = "g/cm2" },
+  { label = "Volume per person", path = "shielding.refuge.volume_per_person_m3", unit = "m3" },
+  { label = "Structure and material stack", path = "shielding.refuge.geometry" },
+]
+
+[[hotspot]]
+id = "WF.HOTSPOT.GARDEN"
+module = "WF.NAVMOD.RING_A"
+title = "Garden and life support"
+wording = "DRAFT"
+what = "Plant racks and the life-support bays share the common sectors of each habitat ring, under the ring's own gravity."
+why = "Plants and water handling work best with a floor and a settled liquid surface. Mirroring the same functions in both rings means losing one ring does not lose the Garden or the air loop."
+show = "The map isolates habitat ring A; the common sectors hold the Garden."
+show_modules = ["WF.NAVMOD.RING_A"]
+show_openings = []
+facts = [
+  { label = "Garden volume (both rings)", path = "habitat.layout.garden_m3", unit = "m3" },
+  { label = "Usable volume per ring", path = "habitat.layout.usable_per_ring_m3", unit = "m3" },
+  { label = "Functions in both rings", path = "habitat.layout.ring_functions" },
+  { label = "Ring rate", path = "habitat.rpm", unit = "rpm" },
+]
+
+[[hotspot]]
+id = "WF.HOTSPOT.RADIATORS"
+module = "WF.NAVMOD.RADIATORS"
+title = "Radiator blades"
+wording = "DRAFT"
+what = "Long fixed blades that run fore and aft along the flight axis and glow away the drive's waste heat into space."
+why = "In vacuum heat leaves only as radiation, so the surface must be large and hot. Blades edge-on to the flight axis stay inside the forward shield's shadow and outside the plume."
+show = "The map isolates the radiator blades from the hull."
+show_modules = ["WF.NAVMOD.RADIATORS"]
+show_openings = []
+facts = [
+  { label = "Blades", path = "radiators.count" },
+  { label = "Surface temperature", path = "radiators.temperature" },
+  { label = "Effective emitting area", path = "radiators.effective_area" },
+  { label = "Mechanism", path = "radiators.layout.mechanism_note" },
+  { label = "Drive waste heat at thrust", path = "radiators.drive_waste_heat" },
+]
+
+[[hotspot]]
+id = "WF.HOTSPOT.DRIVE"
+module = "WF.NAVMOD.DRIVE"
+title = "Drive and nozzles"
+wording = "DRAFT"
+what = "The fusion drive at the stern: one core feeding a common region, a manifold and the nozzles."
+why = "Everything else on the ship is arranged around this line of thrust: the radiators, rings and shield keep clear of its plume and field."
+show = "The map isolates the drive and its nozzles."
+show_modules = ["WF.NAVMOD.DRIVE"]
+show_openings = []
+facts = [
+  { label = "Cores", path = "propulsion.core_count" },
+  { label = "Nozzles", path = "propulsion.nozzle_count" },
+  { label = "Exclusion rule", path = "radiators.engine_exclusion.rule" },
+  { label = "Reaction mass", path = "physics.reaction_mass" },
+]
+
+[[hotspot]]
+id = "WF.HOTSPOT.SHIELD_EYE"
+module = "WF.NAVMOD.SHIELD_EYE"
+title = "Forward shield and EYE"
+wording = "DRAFT"
+what = "A broad shield at the bow, with the EYE sensor facets recessed in wells in its face, watching the path ahead."
+why = "At speed, anything ahead of the ship arrives from the front. The occupied rings and the radiators stay inside the shield's silhouette, and the EYE looks out from behind the shield face instead of from an exposed nose."
+show = "The map isolates the shield and the EYE at the bow and opens the forward defense explorer: observe the Eye placements and the Crown bays, replay an unresolved-dust case, inspect damage and repair. Remote view only."
+show_modules = ["WF.NAVMOD.SHIELD_EYE"]
+show_openings = []
+facts = [
+  { label = "Shield diameter", path = "forward_shield.diameter" },
+  { label = "Shadow rule", path = "forward_shield.shadow_rule.rule" },
+  { label = "EYE facets", path = "eye.facet_count" },
+  { label = "Aperture", path = "eye.aperture" },
+  { label = "Array baseline (r4 calibration)", path = "eye.array_baseline" },
+  { label = "Field of view", path = "eye.field_of_view" },
+]
+
+[[hotspot]]
+id = "WF.HOTSPOT.DRONES"
+module = "WF.NAVMOD.DRONES"
+title = "Maintenance drones"
+wording = "DRAFT"
+what = "Task-specific service robots: survey flyers, ring rovers and duct crawlers inside; Brow, radiator-root, spine and aft crawlers outside; two fixed arms. Each has its own dock, and none is a universal robot."
+why = "Six people cannot inspect the whole ship by EVA. Docked robots on fixed tracks can survey and fetch, but only where a released safe state allows. They never cross the moving rings or the hot blades, never work on the ram face, and they are tools under crew and Seraph supervision, not persons."
+show = "The map marks every proposed dock and arm base and opens the spine crawler demonstration: a service run along its track and three fault replays. Simulation only; every performance value is OPEN."
+show_modules = ["WF.NAVMOD.DRONES", "WF.NAVMOD.SPINE"]
+show_openings = []
+facts = [
+  { label = "Mobile robots (study)", path = "drones.fleet.total" },
+  { label = "Reserves", path = "drones.fleet.reserve" },
+  { label = "Fixed arms", path = "drones.fleet.fixed_arms" },
+  { label = "Robot mass", path = "drones.mass" },
+  { label = "Robot power", path = "drones.power" },
+]
+
+# Guidance modes (NAV-003, NAV-020, NAV-TOUR-02/07): hints and objectives only. Assisted is the default.
+[[mode]]
+id = "GUIDED"
+title = "Guided induction"
+target = "TOUR"
+route = true
+hints = true
+narration = true
+note = "follows the existing induction stop order (TOUR-01..04)"
+
+[[mode]]
+id = "ASSISTED"
+title = "Assisted exploration"
+default = true
+target = "CHOSEN"
+route = true
+hints = true
+narration = false
+note = "the visitor picks a stop; the route is shown, nearby systems suggested"
+
+[[mode]]
+id = "FREE"
+title = "Free exploration"
+target = "CHOSEN"
+route = false
+hints = false
+narration = false
+note = "minimal guidance; a chosen stop shows only its marker"

@@ -1,0 +1,1693 @@
+{
+ "passed": true,
+ "failures": [],
+ "ports": {
+  "Dock_Primary": {
+   "stations_m": {
+    "clear": 0.8,
+    "outer": 0.85,
+    "wall": 0.05,
+    "r_leaf": 0.8500000000000001,
+    "r_hinge": 0.9,
+    "chamber_r": 1.3,
+    "skin": 6.4,
+    "top": 6.1000000000000005,
+    "a_out": 6.050000000000001,
+    "a_in": 3.8500000000000005,
+    "bottom": 3.8000000000000007,
+    "port_face": 6.8,
+    "root": 1.2,
+    "outer_hinge_a": 5.910000000000001,
+    "inner_hinge_a": 3.6600000000000006,
+    "node_r": 1.3,
+    "node_in": 1.85,
+    "node_floor": 1.8
+   },
+   "passage_radius_m": {
+    "outer_neck": 0.8,
+    "outer_hatch_frame": 0.8,
+    "chamber": 1.3,
+    "inner_hatch_frame": 0.8,
+    "trunk_node": 1.3,
+    "inboard_neck": 0.8,
+    "crew_connector": 0.8,
+    "trunk": 0.8
+   },
+   "suited_margin_m": 0.45000000000000007,
+   "hull_gap_m": 0.15240046097703175,
+   "leaf_wall_gap_m": 0.062058159686001035,
+   "leaf_axial_m": [
+    4.160000000000002,
+    5.970000000000002
+   ],
+   "parked_leaf_min_radius_m": 0.8400000000000034,
+   "inner_leaf_wall_gap_m": 0.062058159686001035,
+   "inner_leaf_axial_m": [
+    1.910000000000001,
+    3.7200000000000015
+   ],
+   "inner_parked_leaf_min_radius_m": 0.8400000000000034,
+   "fixture_min_radius_m": {
+    "Dock_Primary_Outer_Hatch_Frame": 0.7999999999999968,
+    "Dock_Primary_Inner_Hatch_Frame": 0.7999999999999968,
+    "Dock_Primary_Handrail_1": 1.2125000000000001,
+    "Dock_Primary_Handrail_1_Bracket_1": 1.2475,
+    "Dock_Primary_Handrail_1_Bracket_2": 1.2474999999999996,
+    "Dock_Primary_Handrail_1_Bracket_3": 1.2475,
+    "Dock_Primary_Handrail_2": 1.2125,
+    "Dock_Primary_Handrail_2_Bracket_1": 1.2474999999999998,
+    "Dock_Primary_Handrail_2_Bracket_2": 1.2475,
+    "Dock_Primary_Handrail_2_Bracket_3": 1.2475,
+    "Dock_Primary_Light_1": 1.2806248474865676,
+    "Dock_Primary_Light_2": 1.2806248474865676,
+    "Dock_Primary_Node_Handrail_1": 1.2125,
+    "Dock_Primary_Node_Handrail_1_Bracket_1": 1.2475,
+    "Dock_Primary_Node_Handrail_1_Bracket_2": 1.2475000000000005,
+    "Dock_Primary_Node_Handrail_1_Bracket_3": 1.2474999999999996,
+    "Dock_Primary_Node_Handrail_2": 1.2125,
+    "Dock_Primary_Node_Handrail_2_Bracket_1": 1.2475,
+    "Dock_Primary_Node_Handrail_2_Bracket_2": 1.2475,
+    "Dock_Primary_Node_Handrail_2_Bracket_3": 1.2475,
+    "Dock_Primary_Node_Light_1": 1.2806248474865676,
+    "Dock_Primary_Node_Light_2": 1.2806248474865678,
+    "Dock_Primary_Entry_Panel": 1.2453513560437477,
+    "Dock_Primary_Node_Panel": 1.2453513560437475,
+    "Dock_Primary_Equalization_Valve_Outer": 1.0300498978540644,
+    "Dock_Primary_Equalization_Valve_Inner": 1.0300498978540644,
+    "Dock_Primary_Equalization_Valve_Inner_Node": 1.0300498978540644
+   },
+   "fixture_leaf_gap_m": {
+    "Dock_Primary_Outer_Hatch_Frame": 2.249999999999999,
+    "Dock_Primary_Inner_Hatch_Frame": 0.3600000000000012,
+    "Dock_Primary_Handrail_1": 0.36251393312964086,
+    "Dock_Primary_Handrail_1_Bracket_1": 0.5376647661228962,
+    "Dock_Primary_Handrail_1_Bracket_2": 0.4563935217173868,
+    "Dock_Primary_Handrail_1_Bracket_3": 0.3854695118345386,
+    "Dock_Primary_Handrail_2": 0.3625139331296403,
+    "Dock_Primary_Handrail_2_Bracket_1": 0.537664766122896,
+    "Dock_Primary_Handrail_2_Bracket_2": 0.4563935217173877,
+    "Dock_Primary_Handrail_2_Bracket_3": 0.38546951183453837,
+    "Dock_Primary_Light_1": 0.4402035514090881,
+    "Dock_Primary_Light_2": 0.44020355140908846,
+    "Dock_Primary_Node_Handrail_1": 0.36251393312964,
+    "Dock_Primary_Node_Handrail_1_Bracket_1": 0.6863799848126246,
+    "Dock_Primary_Node_Handrail_1_Bracket_2": 0.42761511356820886,
+    "Dock_Primary_Node_Handrail_1_Bracket_3": 0.3854695118345381,
+    "Dock_Primary_Node_Handrail_2": 0.3625139331296402,
+    "Dock_Primary_Node_Handrail_2_Bracket_1": 0.6863799848126249,
+    "Dock_Primary_Node_Handrail_2_Bracket_2": 0.4276151135682085,
+    "Dock_Primary_Node_Handrail_2_Bracket_3": 0.3854695118345383,
+    "Dock_Primary_Node_Light_1": 0.43496601027958254,
+    "Dock_Primary_Node_Light_2": 0.43496601027958237,
+    "Dock_Primary_Entry_Panel": 0.49587883248460135,
+    "Dock_Primary_Node_Panel": 0.3029391923032535,
+    "Dock_Primary_Equalization_Valve_Outer": 0.19471725379211696,
+    "Dock_Primary_Equalization_Valve_Inner": 0.22710383307265047,
+    "Dock_Primary_Equalization_Valve_Inner_Node": 0.19471725379211702
+   },
+   "neighbour_gap_m": {
+    "min": 0.15240046097703175,
+    "obstacle": "Hull_Forward_Collar"
+   },
+   "mannequin": {
+    "feet_a_m": 5.800000000000001,
+    "head_a_m": 4.000000000000001,
+    "reach_m": {
+     "Human_Entry_Arm_Rail": 0.6325,
+     "Human_Entry_Arm_Reach": 0.5024937810560418
+    },
+    "body_max_radius_m": 0.7100000000000003,
+    "leaf_gap_m": 0.6537803322593498
+   },
+   "cameras": [
+    {
+     "name": "CAM_HUM_ENTRY_PORT",
+     "at": [
+      99.4,
+      -6.37511045350785,
+      -1.708205697676637
+     ],
+     "lens": 18.0,
+     "role": "eye of crew entering through the open outer hatch"
+    },
+    {
+     "name": "CAM_HUM_ENTRY_EYE",
+     "at": [
+      99.38064624835204,
+      -3.838386651872827,
+      -1.7093147125149524
+     ],
+     "lens": 18.0,
+     "role": "mannequin's eye on the leak-check panel beside the inner hatch"
+    },
+    {
+     "name": "CAM_HUM_NODE",
+     "at": [
+      99.4,
+      -3.4290366833261934,
+      -0.918807610113949
+     ],
+     "lens": 18.0,
+     "role": "eye of crew coming through the open inner hatch into the trunk node, looking down the neck into the trunk"
+    },
+    {
+     "name": "CAM_HUM_TRUNK_EYE",
+     "at": [
+      96.65,
+      -0.013312599682756748,
+      -0.35877956280937556
+     ],
+     "lens": 18.0,
+     "role": "zone-2 mannequin's eye looking aft along the trunk toward the hubs"
+    },
+    {
+     "name": "CAM_HUM_VESTIBULE_PORT",
+     "at": [
+      82.59936247723134,
+      -1.8369701987210297e-17,
+      -0.3
+     ],
+     "lens": 18.0,
+     "role": "eye of crew in the trunk below the ring-A spine port, looking up through the port into the rotary vestibule"
+    },
+    {
+     "name": "CAM_HUM_VESTIBULE_EYE",
+     "at": [
+      82.59936247723134,
+      -1.549554470416084,
+      0.5931112401679209
+     ],
+     "lens": 18.0,
+     "role": "zone-3 mannequin's eye at the transfer panel, looking around the ring-A vestibule annulus to the next sector hatch"
+    },
+    {
+     "name": "CAM_HUM_SPOKE_TOP",
+     "at": [
+      85.04936247723134,
+      0.9500000000000003,
+      5.9
+     ],
+     "lens": 18.0,
+     "role": "eye of crew at the top of the ring-A sector-1 spoke run, looking down the shaft past the climbing mannequin; ladder at the top"
+    },
+    {
+     "name": "CAM_HUM_SPOKE_EYE",
+     "at": [
+      85.04936247723134,
+      1.5900000000000005,
+      9.282499999999999
+     ],
+     "lens": 18.0,
+     "role": "zone-4 mannequin's eye on the ladder, looking up the shaft to the elbows; ladder at the bottom"
+    },
+    {
+     "name": "CAM_HUM_LANDING_EYE",
+     "at": [
+      85.04936247723134,
+      1.387947366142828,
+      26.35
+     ],
+     "lens": 18.0,
+     "role": "zone-5 mannequin's eye at the foot of the ring-A sector-1 landing ladder, looking up through the open hatch into the crew tube; ladder at the bottom"
+    },
+    {
+     "name": "CAM_HUM_LANDING_AISLE",
+     "at": [
+      85.04936247723134,
+      -0.2999999999999984,
+      26.35
+     ],
+     "lens": 18.0,
+     "role": "eye of crew standing in the ring-A sector-1 aisle, looking at the landing well, the ladder and the open overhead hatch"
+    },
+    {
+     "name": "CAM_HUM_VESTIBULE_B_PORT",
+     "at": [
+      88.94936247723135,
+      0.2598076211353316,
+      0.1499999999999999
+     ],
+     "lens": 18.0,
+     "role": "eye of crew in the trunk below the ring-B spine port, looking up through the port into the rotary vestibule"
+    },
+    {
+     "name": "CAM_HUM_VESTIBULE_B_EYE",
+     "at": [
+      88.94936247723135,
+      0.26112783395252903,
+      -1.6385091560120317
+     ],
+     "lens": 18.0,
+     "role": "zone-3 mannequin's eye at the transfer panel, looking around the ring-B vestibule annulus to the next sector hatch"
+    },
+    {
+     "name": "CAM_HUM_SPOKE_B_BULKHEAD",
+     "at": [
+      88.94936247723135,
+      -2.6413774815425413,
+      -1.5249999999999984
+     ],
+     "lens": 18.0,
+     "role": "eye of crew at the first elbow of ring B's sector-2 tube, looking down the collar through the bulkhead's neck to the spine port"
+    },
+    {
+     "name": "CAM_HUM_REFUGE_PORT",
+     "at": [
+      95.54936247723134,
+      -0.3,
+      -0.0
+     ],
+     "lens": 18.0,
+     "role": "eye of crew in the trunk below the refuge port, looking up through the port into the storm refuge"
+    },
+    {
+     "name": "CAM_HUM_REFUGE_EYE",
+     "at": [
+      94.84936247723134,
+      1.011637506785933,
+      -1.1320289549582823
+     ],
+     "lens": 18.0,
+     "role": "refuge mannequin's eye at the refuge panel, looking round the annulus past the port to the occupants' anchor rails"
+    },
+    {
+     "name": "CAM_HUM_REFUGE_APPROACH",
+     "at": [
+      93.04936247723134,
+      0.0,
+      0.0
+     ],
+     "lens": 18.0,
+     "role": "eye of crew coming forward along the trunk from the rings, approaching the refuge port and its rails; port side up"
+    },
+    {
+     "name": "CAM_HUM_TRUNK_SHAFT",
+     "at": [
+      83.29936247723134,
+      -0.09058666578588206,
+      0.3380740392011739
+     ],
+     "lens": 18.0,
+     "role": "eye of crew standing on the trunk floor beside the ring-A spine port under thrust (aft down), looking up the shaft; ladder side down"
+    },
+    {
+     "name": "CAM_HUM_TRUNK_CLIMB_EYE",
+     "at": [
+      95.56686247723134,
+      0.11388037984510893,
+      -0.4250073635671901
+     ],
+     "lens": 18.0,
+     "role": "thrust climber's eye on the trunk ladder, level with the refuge port, looking across at the port it climbs into; forward up"
+    },
+    {
+     "name": "CAM_HUM_THRUST_ELBOW",
+     "at": [
+      82.59936247723134,
+      1.729813603795636e-16,
+      2.8249999999999993
+     ],
+     "lens": 18.0,
+     "role": "eye of crew at the first elbow of ring A's sector-1 tube under thrust (aft down), looking up the ramp leg at the climber on the steep leg's floor ladder; forward up"
+    },
+    {
+     "name": "CAM_HUM_THRUST_STEP",
+     "at": [
+      84.99936247723134,
+      -0.39999999999999836,
+      27.4
+     ],
+     "lens": 18.0,
+     "role": "eye of crew standing on the ring-A sector-1 aft wall in the aisle under thrust, looking at the figure on the step below the hatch; forward up"
+    },
+    {
+     "name": "CAM_IND_HABITAT",
+     "at": [
+      84.44936247723135,
+      0.3000000000000016,
+      26.35
+     ],
+     "lens": 18.0,
+     "role": "eye of crew in the ring-A sector-1 aisle at the 'habitat' stop, looking at the aisle figure at Bunk_3"
+    },
+    {
+     "name": "CAM_IND_GARDEN",
+     "at": [
+      84.37436247723134,
+      22.669769389719953,
+      -13.434807621135345
+     ],
+     "lens": 18.0,
+     "role": "eye of crew in the ring-A sector-3 aisle at the 'garden' stop, looking at the garden figure at Garden_Rack_1"
+    },
+    {
+     "name": "CAM_IND_BURN_READINESS",
+     "at": [
+      86.29936247723134,
+      -22.96976938971996,
+      -12.91519237886466
+     ],
+     "lens": 18.0,
+     "role": "eye of crew in the ring-A sector-2 aisle at the 'burn_readiness' stop, looking at the patient figure at Medical_Couch"
+    },
+    {
+     "name": "CAM_IND_SPECIALISTS",
+     "at": [
+      84.34936247723134,
+      -22.96976938971996,
+      -12.91519237886466
+     ],
+     "lens": 18.0,
+     "role": "eye of crew in the ring-A sector-2 aisle at the 'specialists' stop, looking at the operator figure at Ops_Stations"
+    },
+    {
+     "name": "CAM_IND_BURN_STATION",
+     "at": [
+      83.79936247723134,
+      -22.96976938971996,
+      -12.91519237886466
+     ],
+     "lens": 18.0,
+     "role": "eye of crew in the ring-A sector-2 aisle at the 'burn_station' stop, looking at the couch figure at Burn_Couch_1"
+    }
+   ]
+  }
+ },
+ "trunk": {
+  "clear_radius_m": 0.8,
+  "cavity_x_m": [
+   81.64936247723134,
+   102.39936247723135
+  ],
+  "clear_between_fixtures_m": 1.1012493144523212,
+  "fixture_max_radius_m": 0.8009993757800316,
+  "handrail_pieces": 5,
+  "lights": 13,
+  "fixture_opening_gap_m": {
+   "Crew_Connector_Airlock_EVA": 0.2631463051827439,
+   "Crew_Connector_Dock_Primary": 0.11628269474059427,
+   "Crew_Connector_Dock_Service": 0.25177841111808436,
+   "Crew_Refuge_Port": 0.039241228783351234,
+   "Crew_Port_1_1": 0.19150836374014935,
+   "Crew_Port_2_2": 0.03924122878335112
+  },
+  "mannequin": {
+   "feet_x_m": 98.30000000000001,
+   "head_x_m": 96.50000000000001,
+   "reach_m": {
+    "Human_Trunk_Arm_Rail": 0.36250000000000004,
+    "Human_Trunk_Arm_Reach": 0.4716990566028329
+   },
+   "body_max_radius_m": 0.55,
+   "rail_gap_m": 0.12680343963342813,
+   "grip_on_rail_m": -5.898059818321144e-17
+  },
+  "thrust": {
+   "ladder": {
+    "angle_deg": 285.0,
+    "x_m": [
+     81.64936247723134,
+     98.60594613038884
+    ],
+    "height_m": 16.95658365315751,
+    "rungs": 56,
+    "first_rung_above_floor_m": 0.25,
+    "reaches_floor": true,
+    "stile_radius_m": 0.64,
+    "rail_radius_m": 0.5704473661428265,
+    "rail_x_m": [
+     81.84936247723134,
+     98.60594613038884
+    ]
+   },
+   "ports": {
+    "Crew_Connector_Airlock_EVA": {
+     "sill_x_m": 101.39936247723134,
+     "sill_above_floor_m": 19.75,
+     "served": false
+    },
+    "Crew_Connector_Dock_Primary": {
+     "sill_x_m": 98.60000000000001,
+     "sill_above_floor_m": 16.950637522768673,
+     "served": true,
+     "sill_above_rung_m": 0.2006375227686732,
+     "near_stile_gap_m": 0.18256077207560711,
+     "rail_from_mouth_edge_m": 0.20955263385717346
+    },
+    "Crew_Connector_Dock_Service": {
+     "sill_x_m": 98.95,
+     "sill_above_floor_m": 17.300637522768668,
+     "served": false
+    },
+    "Crew_Refuge_Port": {
+     "sill_x_m": 95.09936247723134,
+     "sill_above_floor_m": 13.450000000000003,
+     "served": true,
+     "sill_above_rung_m": 0.0,
+     "near_stile_gap_m": 0.06798631875384999,
+     "rail_from_mouth_edge_m": 0.5036300992084313
+    },
+    "Crew_Port_1_1": {
+     "sill_x_m": 81.79936247723134,
+     "sill_above_floor_m": 0.15000000000000568,
+     "served": true,
+     "sill_above_rung_m": 0.15000000000000568,
+     "near_stile_gap_m": null,
+     "rail_from_mouth_edge_m": 0.8339215241467762
+    },
+    "Crew_Port_2_2": {
+     "sill_x_m": 88.49936247723134,
+     "sill_above_floor_m": 6.8500000000000085,
+     "served": true,
+     "sill_above_rung_m": 1.4210854715202004e-14,
+     "near_stile_gap_m": 0.06803842252042237,
+     "rail_from_mouth_edge_m": 0.5036300992084312
+    }
+   },
+   "falls": {
+    "ring_B_port": {
+     "low_thrust_g": {
+      "height_m": 6.8500000000000085,
+      "speed_m_s": 3.6653936350684106,
+      "height_1g_m": 0.6850000000000009
+     },
+     "first_ignition_peak_g": {
+      "height_m": 6.8500000000000085,
+      "speed_m_s": 14.196008505914621,
+      "height_1g_m": 10.275000000000013
+     }
+    },
+    "refuge_port": {
+     "low_thrust_g": {
+      "height_m": 13.450000000000003,
+      "speed_m_s": 5.13613556090569,
+      "height_1g_m": 1.3450000000000004
+     },
+     "first_ignition_peak_g": {
+      "height_m": 13.450000000000003,
+      "speed_m_s": 19.892167491251428,
+      "height_1g_m": 20.175000000000004
+     }
+    },
+    "ladder_top_rung": {
+     "low_thrust_g": {
+      "height_m": 16.75,
+      "speed_m_s": 5.731690631916555,
+      "height_1g_m": 1.675
+     },
+     "first_ignition_peak_g": {
+      "height_m": 16.75,
+      "speed_m_s": 22.198742363025882,
+      "height_1g_m": 25.125
+     }
+    }
+   },
+   "sectors": {
+    "A1": {
+     "deck_level_above_spine_port_m": 2.450000000000003,
+     "trunk_climb_m": 13.299999999999997,
+     "trunk_rungs": 45,
+     "steep_legs": [
+      {
+       "zone": 4,
+       "slope_deg": 53.048386437476154,
+       "length_m": 2.252411601975033,
+       "rise_m": 1.7999999999999972
+      }
+     ]
+    },
+    "A2": {
+     "deck_level_above_spine_port_m": 2.450000000000003,
+     "trunk_climb_m": 13.299999999999997,
+     "trunk_rungs": 45,
+     "steep_legs": [
+      {
+       "zone": 4,
+       "slope_deg": 53.04838643747617,
+       "length_m": 2.252411601975033,
+       "rise_m": 1.7999999999999972
+      }
+     ]
+    },
+    "A3": {
+     "deck_level_above_spine_port_m": 2.450000000000003,
+     "trunk_climb_m": 13.299999999999997,
+     "trunk_rungs": 45,
+     "steep_legs": [
+      {
+       "zone": 4,
+       "slope_deg": 53.048386437476154,
+       "length_m": 2.2524116019750333,
+       "rise_m": 1.7999999999999972
+      }
+     ]
+    },
+    "B1": {
+     "deck_level_above_spine_port_m": 2.0999999999999943,
+     "trunk_climb_m": 6.599999999999994,
+     "trunk_rungs": 22,
+     "steep_legs": [
+      {
+       "zone": 4,
+       "slope_deg": 52.094555194055275,
+       "length_m": 1.8377094550893458,
+       "rise_m": 1.4500000000000028
+      }
+     ]
+    },
+    "B2": {
+     "deck_level_above_spine_port_m": 2.0999999999999943,
+     "trunk_climb_m": 6.599999999999994,
+     "trunk_rungs": 22,
+     "steep_legs": [
+      {
+       "zone": 4,
+       "slope_deg": 52.094555194055275,
+       "length_m": 1.8377094550893458,
+       "rise_m": 1.4500000000000028
+      }
+     ]
+    },
+    "B3": {
+     "deck_level_above_spine_port_m": 2.0999999999999943,
+     "trunk_climb_m": 6.599999999999994,
+     "trunk_rungs": 22,
+     "steep_legs": [
+      {
+       "zone": 4,
+       "slope_deg": 52.09455519405526,
+       "length_m": 1.8377094550893462,
+       "rise_m": 1.4500000000000028
+      }
+     ]
+    }
+   },
+   "steep_leg_deg": 30.0,
+   "sector_hatch_sill_above_aft_bulkhead_m": 0.95,
+   "climber": {
+    "feet_x_m": 93.91686247723133,
+    "rung_x_m": 93.89936247723134,
+    "reach_m": {
+     "Human_Trunk_Climber_Arm_1": 0.38488166542090374,
+     "Human_Trunk_Climber_Arm_2": 0.38488166542090374
+    },
+    "body_max_radius_m": 0.6234323524515026,
+    "fixture_gap_m": 0.13310092155237904,
+    "grip_on_stile_m": -0.0175,
+    "refuge_rim_from_shoulder_m": 0.6043253786885979
+   },
+   "q47": {
+    "tubes": {
+     "A1": {
+      "floor_ladders": [
+       {
+        "leg": 1,
+        "slope_deg": 20.361186026672808,
+        "rungs": 3,
+        "rise_per_rung_m": 0.3,
+        "first_step_m": 0.2999999999999998,
+        "last_step_m": -0.11054593185044848,
+        "stile_length_m": 1.949459781954032
+       },
+       {
+        "leg": 2,
+        "slope_deg": 53.0483864374762,
+        "rungs": 5,
+        "rise_per_rung_m": 0.3,
+        "first_step_m": 0.2999999999999994,
+        "last_step_m": 0.1145171628831253,
+        "stile_length_m": 1.9037407885230153
+       }
+      ],
+      "run_clear_height_m": 1.6,
+      "run_stoop_m": 0.19999999999999996,
+      "run_seated_headroom_m": 0.664,
+      "run_arrest_rail_above_floor_m": 0.8000000000000002
+     },
+     "B2": {
+      "floor_ladders": [
+       {
+        "leg": 1,
+        "slope_deg": 20.361186026672815,
+        "rungs": 3,
+        "rise_per_rung_m": 0.3,
+        "first_step_m": 0.2999999999999998,
+        "last_step_m": -0.11298560274097369,
+        "stile_length_m": 1.9432734647619871
+       },
+       {
+        "leg": 2,
+        "slope_deg": 52.09455519405522,
+        "rungs": 4,
+        "rise_per_rung_m": 0.3,
+        "first_step_m": 0.30000000000000004,
+        "last_step_m": 0.06861018570915822,
+        "stile_length_m": 1.4909654893170243
+       }
+      ],
+      "run_clear_height_m": 1.6,
+      "run_stoop_m": 0.19999999999999996,
+      "run_seated_headroom_m": 0.664,
+      "run_arrest_rail_above_floor_m": 0.8000000000000004
+     }
+    },
+    "vestibules": {
+     "A": {
+      "clear_length_m": 1.8000000000000003,
+      "clear_depth_m": 0.9500000000000001,
+      "crawl_rail_above_floor_m": 0.1,
+      "crawl_rail_m": 10.449796982164598,
+      "bare_beside_each_opening_m": 0.40183725421784483
+     },
+     "B": {
+      "clear_length_m": 1.1,
+      "clear_depth_m": 0.9500000000000001,
+      "crawl_rail_above_floor_m": 0.1,
+      "crawl_rail_m": 10.449796982164598,
+      "bare_beside_each_opening_m": 0.40183725421784483
+     }
+    },
+    "elbow_climber": {
+     "sector": 1,
+     "leg": 2,
+     "reach_m": {
+      "Human_Elbow_Climber_Arm_1": 0.43551052045985295,
+      "Human_Elbow_Climber_Arm_2": 0.43551052045985295
+     },
+     "arrester_link_m": 0.20574595483546204,
+     "bore_margin_m": 0.1439011383354643,
+     "fixture_gap_m": 0.4404566180459596,
+     "grip_on_stile_m": 1.3877787807814457e-16
+    },
+    "sector_step": {
+     "floor_x_m": -1.7,
+     "rungs_above_floor_m": [
+      0.25,
+      0.55
+     ],
+     "sill_above_floor_m": 0.8999999999999999,
+     "sill_above_top_rung_m": 0.34999999999999987,
+     "stepper_reach_m": {
+      "Human_Thrust_Step_Arm_1": 0.4077442773698614,
+      "Human_Thrust_Step_Arm_2": 0.48192882848805624
+     },
+     "headroom_above_top_step_m": {
+      "HABITATION": 1.7325,
+      "WORK_MEDICAL_OPS": 2.8324999999999996,
+      "LIFE_SUPPORT_GARDEN_COMMON": 2.8324999999999996
+     },
+     "stepper_block_gap_m": 0.15000000000000024,
+     "stepper_fixture_gap_m": 0.1551677489152821,
+     "grip_on_stile_m": 6.938893903907228e-17
+    }
+   }
+  }
+ },
+ "vestibule": {
+  "rotor": 1,
+  "x_m": [
+   81.44936247723135,
+   83.74936247723134
+  ],
+  "chamber_u_m": [
+   -3.4000000000000004,
+   -1.5
+  ],
+  "chamber_clear_length_m": 1.8000000000000005,
+  "clear_radii_m": [
+   0.975,
+   1.925
+  ],
+  "clear_depth_m": 0.9500000000000001,
+  "spine_port_clear_m": 1.6,
+  "outer_hatch_clear_m": 1.6,
+  "window_u_m": null,
+  "annulus_fixture_gap_m": {
+   "Crew_Vestibule_1_Hatch_Frame_1": 0.6347522646723183,
+   "Crew_Vestibule_1_Hatch_Frame_2": 0.6347522646723179,
+   "Crew_Vestibule_1_Hatch_Frame_3": 0.6347522646723183,
+   "Crew_Vestibule_1_Handrail_1": 0.3875000000000002,
+   "Crew_Vestibule_1_Handrail_1_Bracket_1": 0.762995928721977,
+   "Crew_Vestibule_1_Handrail_1_Bracket_2": 0.41025000000000017,
+   "Crew_Vestibule_1_Handrail_1_Bracket_3": 0.7629959287219769,
+   "Crew_Vestibule_1_Light_1": 0.45500000000000007,
+   "Crew_Vestibule_1_Handrail_2": 0.3875,
+   "Crew_Vestibule_1_Handrail_2_Bracket_1": 0.762995928721977,
+   "Crew_Vestibule_1_Handrail_2_Bracket_2": 0.4102500000000001,
+   "Crew_Vestibule_1_Handrail_2_Bracket_3": 0.7629959287219767,
+   "Crew_Vestibule_1_Light_2": 0.45500000000000024,
+   "Crew_Vestibule_1_Handrail_3": 0.3875,
+   "Crew_Vestibule_1_Handrail_3_Bracket_1": 0.762995928721977,
+   "Crew_Vestibule_1_Handrail_3_Bracket_2": 0.4102500000000002,
+   "Crew_Vestibule_1_Handrail_3_Bracket_3": 0.7629959287219769,
+   "Crew_Vestibule_1_Light_3": 0.45500000000000007,
+   "Crew_Vestibule_1_Crawl_Rail_1": 0.8784123685025123,
+   "Crew_Vestibule_1_Crawl_Rail_1_Brackets": 0.8924957340278621,
+   "Crew_Vestibule_1_Crawl_Rail_2": 0.8784123685025123,
+   "Crew_Vestibule_1_Crawl_Rail_2_Brackets": 0.892495734027862,
+   "Crew_Vestibule_1_Crawl_Rail_3": 0.8784123685025123,
+   "Crew_Vestibule_1_Crawl_Rail_3_Brackets": 0.892495734027862,
+   "Crew_Vestibule_1_Transfer_Panel": 0.39500000000000024
+  },
+  "suited_margin_m": 0.03750000000000003,
+  "fixture_passage_gap_m": {
+   "Crew_Vestibule_1_Handrail_1": 0.7889771240201335,
+   "Crew_Vestibule_1_Handrail_1_Bracket_1": 0.9398214349741643,
+   "Crew_Vestibule_1_Handrail_1_Bracket_2": 0.8155075685863613,
+   "Crew_Vestibule_1_Handrail_1_Bracket_3": 0.939821434974164,
+   "Crew_Vestibule_1_Light_1": 1.266161900723174,
+   "Crew_Vestibule_1_Handrail_2": Infinity,
+   "Crew_Vestibule_1_Handrail_2_Bracket_1": Infinity,
+   "Crew_Vestibule_1_Handrail_2_Bracket_2": Infinity,
+   "Crew_Vestibule_1_Handrail_2_Bracket_3": Infinity,
+   "Crew_Vestibule_1_Light_2": Infinity,
+   "Crew_Vestibule_1_Handrail_3": 0.7889771240201342,
+   "Crew_Vestibule_1_Handrail_3_Bracket_1": 0.9398214349741651,
+   "Crew_Vestibule_1_Handrail_3_Bracket_2": 0.8155075685863622,
+   "Crew_Vestibule_1_Handrail_3_Bracket_3": 0.9398214349741649,
+   "Crew_Vestibule_1_Light_3": 0.41756524023627883,
+   "Crew_Vestibule_1_Crawl_Rail_1": 0.007654783926895448,
+   "Crew_Vestibule_1_Crawl_Rail_1_Brackets": 0.026557284859257346,
+   "Crew_Vestibule_1_Crawl_Rail_2": Infinity,
+   "Crew_Vestibule_1_Crawl_Rail_2_Brackets": Infinity,
+   "Crew_Vestibule_1_Crawl_Rail_3": 0.007654783926895559,
+   "Crew_Vestibule_1_Crawl_Rail_3_Brackets": 0.026557284859257346,
+   "Crew_Vestibule_1_Transfer_Panel": 0.9434334712544665
+  },
+  "mannequin": {
+   "reach_m": {
+    "Human_Vestibule_Arm_Rail": 0.36695588301472565,
+    "Human_Vestibule_Arm_Reach": 0.5
+   },
+   "cavity_margin_m": 0.061668494430601344,
+   "fixture_gap_m": 0.2888547640784672,
+   "grip_on_rail_m": 1.7694179454963432e-16
+  }
+ },
+ "vestibule_B": {
+  "rotor": 2,
+  "x_m": [
+   88.14936247723134,
+   89.74936247723134
+  ],
+  "chamber_u_m": [
+   -2.7,
+   -1.5
+  ],
+  "chamber_clear_length_m": 1.1000000000000003,
+  "clear_radii_m": [
+   0.975,
+   1.925
+  ],
+  "clear_depth_m": 0.9500000000000001,
+  "spine_port_clear_m": 0.9,
+  "outer_hatch_clear_m": 0.9,
+  "window_u_m": [
+   -2.8999999999999915,
+   -1.3
+  ],
+  "annulus_fixture_gap_m": {
+   "Crew_Vestibule_2_Hatch_Frame_1": 0.5269183878151156,
+   "Crew_Vestibule_2_Hatch_Frame_2": 0.5269183878151155,
+   "Crew_Vestibule_2_Hatch_Frame_3": 0.5269183878151157,
+   "Crew_Vestibule_2_Handrail_1": 0.3875000000000002,
+   "Crew_Vestibule_2_Handrail_1_Bracket_1": 0.5059258871271417,
+   "Crew_Vestibule_2_Handrail_1_Bracket_2": 0.41025000000000017,
+   "Crew_Vestibule_2_Handrail_1_Bracket_3": 0.5059258871271416,
+   "Crew_Vestibule_2_Light_1": 0.45500000000000007,
+   "Crew_Vestibule_2_Handrail_2": 0.3875,
+   "Crew_Vestibule_2_Handrail_2_Bracket_1": 0.5059258871271417,
+   "Crew_Vestibule_2_Handrail_2_Bracket_2": 0.4102500000000001,
+   "Crew_Vestibule_2_Handrail_2_Bracket_3": 0.5059258871271415,
+   "Crew_Vestibule_2_Light_2": 0.45500000000000024,
+   "Crew_Vestibule_2_Handrail_3": 0.3875,
+   "Crew_Vestibule_2_Handrail_3_Bracket_1": 0.5059258871271417,
+   "Crew_Vestibule_2_Handrail_3_Bracket_2": 0.4102500000000002,
+   "Crew_Vestibule_2_Handrail_3_Bracket_3": 0.5059258871271416,
+   "Crew_Vestibule_2_Light_3": 0.45500000000000007,
+   "Crew_Vestibule_2_Crawl_Rail_1": 0.5867838505502038,
+   "Crew_Vestibule_2_Crawl_Rail_1_Brackets": 0.6050544979923721,
+   "Crew_Vestibule_2_Crawl_Rail_2": 0.5867838505502038,
+   "Crew_Vestibule_2_Crawl_Rail_2_Brackets": 0.6050544979923721,
+   "Crew_Vestibule_2_Crawl_Rail_3": 0.5867838505502038,
+   "Crew_Vestibule_2_Crawl_Rail_3_Brackets": 0.6050544979923721,
+   "Crew_Vestibule_2_Transfer_Panel": 0.3950000000000002
+  },
+  "suited_margin_m": 0.03750000000000003,
+  "fixture_passage_gap_m": {
+   "Crew_Vestibule_2_Handrail_1": 1.139126838946092,
+   "Crew_Vestibule_2_Handrail_1_Bracket_1": 1.1927357048679708,
+   "Crew_Vestibule_2_Handrail_1_Bracket_2": 1.1655075685863612,
+   "Crew_Vestibule_2_Handrail_1_Bracket_3": 1.1927357048679708,
+   "Crew_Vestibule_2_Light_1": 0.5722353516835668,
+   "Crew_Vestibule_2_Handrail_2": 1.139126838946092,
+   "Crew_Vestibule_2_Handrail_2_Bracket_1": 1.192735704867971,
+   "Crew_Vestibule_2_Handrail_2_Bracket_2": 1.1655075685863614,
+   "Crew_Vestibule_2_Handrail_2_Bracket_3": 1.192735704867971,
+   "Crew_Vestibule_2_Light_2": 1.5074281596012662,
+   "Crew_Vestibule_2_Handrail_3": Infinity,
+   "Crew_Vestibule_2_Handrail_3_Bracket_1": Infinity,
+   "Crew_Vestibule_2_Handrail_3_Bracket_2": Infinity,
+   "Crew_Vestibule_2_Handrail_3_Bracket_3": Infinity,
+   "Crew_Vestibule_2_Light_3": Infinity,
+   "Crew_Vestibule_2_Crawl_Rail_1": 0.02650419725328762,
+   "Crew_Vestibule_2_Crawl_Rail_1_Brackets": 0.05360620741328409,
+   "Crew_Vestibule_2_Crawl_Rail_2": 0.026504197253287676,
+   "Crew_Vestibule_2_Crawl_Rail_2_Brackets": 0.053606207413283646,
+   "Crew_Vestibule_2_Crawl_Rail_3": Infinity,
+   "Crew_Vestibule_2_Crawl_Rail_3_Brackets": Infinity,
+   "Crew_Vestibule_2_Transfer_Panel": 1.2934334712544662
+  },
+  "mannequin": {
+   "reach_m": {
+    "Human_Vestibule_B_Arm_Rail": 0.3669558830147257,
+    "Human_Vestibule_B_Arm_Reach": 0.49999999999999994
+   },
+   "cavity_margin_m": 0.061668494430601344,
+   "fixture_gap_m": 0.2750663678344217,
+   "grip_on_rail_m": 6.938893903907228e-17
+  }
+ },
+ "spoke": {
+  "rotor": 1,
+  "tube_clear_m": 1.6,
+  "tube_outer_m": 1.7000000000000002,
+  "hatch_frame_clear_m": 1.6,
+  "sectors": {
+   "1": {
+    "axis_m": [
+     [
+      -2.45,
+      2.0549999999999997,
+      0.0
+     ],
+     [
+      -2.45,
+      2.8249999999999993,
+      0.0
+     ],
+     [
+      -1.8000000000000003,
+      4.145984481362291,
+      -1.15
+     ],
+     [
+      0.0,
+      5.5,
+      -1.15
+     ],
+     [
+      0.0,
+      25.0,
+      -1.15
+     ]
+    ],
+    "length_m": 24.390565771201977,
+    "elbows_deg": [
+     44.99999999999998,
+     45.321976082704445,
+     53.04838643747621
+    ],
+    "ladder_run_t_m": [
+     0.0998217870374809,
+     19.6125
+    ],
+    "hatch_panel_reach_m": 0.5475760137777241,
+    "rungs": 65,
+    "lights": 8,
+    "fixture_max_radius_m": 0.8062257748298408,
+    "clear_between_fixtures_m": 1.1008947322856464,
+    "suited_sweep_margin_m": 0.20044736614282588
+   },
+   "2": {
+    "axis_m": [
+     [
+      -2.45,
+      -1.027499999999998,
+      1.7796822047770213
+     ],
+     [
+      -2.45,
+      -1.4124999999999979,
+      2.4465217656910383
+     ],
+     [
+      -1.8000000000000003,
+      -1.0770630263290393,
+      4.165527884555797
+     ],
+     [
+      0.0,
+      -1.7540707856478939,
+      5.338139720814414
+     ],
+     [
+      0.0,
+      -11.504070785647889,
+      22.22563509461097
+     ]
+    ],
+    "length_m": 24.390565771201974,
+    "elbows_deg": [
+     44.999999999999964,
+     45.32197608270447,
+     53.04838643747621
+    ],
+    "ladder_run_t_m": [
+     0.09982178703748038,
+     19.612499999999997
+    ],
+    "hatch_panel_reach_m": 0.5475760137777244,
+    "rungs": 65,
+    "lights": 8,
+    "fixture_max_radius_m": 0.8062257748298761,
+    "clear_between_fixtures_m": 1.1008947322856464,
+    "suited_sweep_margin_m": 0.20044736614282488
+   },
+   "3": {
+    "axis_m": [
+     [
+      -2.45,
+      -1.0275000000000016,
+      -1.7796822047770213
+     ],
+     [
+      -2.45,
+      -1.4125000000000014,
+      -2.4465217656910383
+     ],
+     [
+      -1.8000000000000003,
+      -3.068921455033251,
+      -3.015527884555793
+     ],
+     [
+      0.0,
+      -3.7459292143521057,
+      -4.188139720814411
+     ],
+     [
+      0.0,
+      -13.495929214352115,
+      -21.07563509461096
+     ]
+    ],
+    "length_m": 24.390565771201974,
+    "elbows_deg": [
+     44.999999999999986,
+     45.32197608270446,
+     53.04838643747622
+    ],
+    "ladder_run_t_m": [
+     0.09982178703748049,
+     19.6125
+    ],
+    "hatch_panel_reach_m": 0.5475760137777245,
+    "rungs": 65,
+    "lights": 8,
+    "fixture_max_radius_m": 0.8062257748299466,
+    "clear_between_fixtures_m": 1.1008947322856513,
+    "suited_sweep_margin_m": 0.20044736614282488
+   }
+  },
+  "neck": null,
+  "ladder_push": {
+   "ladder_wall": "antispinward",
+   "pulled_off_when": "climbing",
+   "body_off_radial_m": 1.5099999999999998,
+   "lean_toward_ladder_g": 0.027016774029223808,
+   "coriolis_g_per_m_s": 0.08542754569167638,
+   "neutral_speed_m_s": 0.31625366046137243,
+   "review_speed_m_s": 0.5,
+   "pulled_off_g": 0.01569699881661438,
+   "pressed_on_g": 0.069730546875062,
+   "radius_m": {
+    "run_top": 5.599821787037481,
+    "tube_tip": 25.0
+   },
+   "spin_gravity_g": {
+    "run_top": 0.10019147008232838,
+    "tube_tip": 0.4472975832652949
+   },
+   "overhang_deg": {
+    "run_top": 8.904149037001405,
+    "tube_tip": 2.0098540488979157
+   },
+   "at_rest_lean_deg": {
+    "run_top": 15.090959355408355,
+    "tube_tip": 3.4564659169925958
+   },
+   "fall_speed_m_s": 11.491661715798056,
+   "fall_height_1g_m": 6.733098917078652
+  },
+  "mannequin": {
+   "sector": 1,
+   "feet_radius_m": 10.9325,
+   "reach_m": {
+    "Human_Spoke_Arm_1": 0.38488166542089974,
+    "Human_Spoke_Arm_2": 0.3848816654208997
+   },
+   "bore_margin_m": 0.1765676475484968,
+   "fixture_gap_m": 0.03423052672207423,
+   "rung_gap_m": 0.02455467415507516,
+   "grip_on_stile_m": -0.01749999999999989,
+   "arrester_off_rail_axis_m": 3.469446951953614e-17,
+   "arrester_link_m": 0.04544736614282652
+  },
+  "arrest_rail": {
+   "radius_from_tube_axis_m": 0.5704473661428265,
+   "length_m": 24.399414135120033,
+   "brackets": 10,
+   "clip_on_spin_gravity_g": 0.041490244698015155,
+   "unclipped_drop_to_deck_m": 1.5915000000000001
+  }
+ },
+ "spoke_B": {
+  "rotor": 2,
+  "tube_clear_m": 1.6,
+  "tube_outer_m": 1.7000000000000002,
+  "hatch_frame_clear_m": 0.9,
+  "sectors": {
+   "1": {
+    "axis_m": [
+     [
+      -2.1,
+      2.1499999999999986,
+      0.0
+     ],
+     [
+      -2.1,
+      3.0500000000000007,
+      0.0
+     ],
+     [
+      -1.4500000000000002,
+      4.370984481362292,
+      -1.15
+     ],
+     [
+      0.0,
+      5.5,
+      -1.15
+     ],
+     [
+      0.0,
+      25.0,
+      -1.15
+     ]
+    ],
+    "length_m": 24.105863624316285,
+    "elbows_deg": [
+     44.99999999999998,
+     44.85049150029891,
+     52.09455519405522
+    ],
+    "ladder_run_t_m": [
+     0.09775088778643237,
+     19.6125
+    ],
+    "hatch_panel_reach_m": 0.5475760137777241,
+    "rungs": 65,
+    "lights": 8,
+    "fixture_max_radius_m": 0.8062257748298408,
+    "clear_between_fixtures_m": 1.1008947322856464,
+    "suited_sweep_margin_m": 0.2004473661428261
+   },
+   "2": {
+    "axis_m": [
+     [
+      -2.1,
+      -1.0749999999999975,
+      1.8619546181365436
+     ],
+     [
+      -2.1,
+      -1.5249999999999986,
+      2.6413774815425413
+     ],
+     [
+      -1.4500000000000002,
+      -1.18956302632904,
+      4.360383600407296
+     ],
+     [
+      0.0,
+      -1.7540707856478939,
+      5.338139720814414
+     ],
+     [
+      0.0,
+      -11.504070785647889,
+      22.22563509461097
+     ]
+    ],
+    "length_m": 24.105863624316285,
+    "elbows_deg": [
+     44.999999999999964,
+     44.850491500298915,
+     52.094555194055225
+    ],
+    "ladder_run_t_m": [
+     0.09775088778643246,
+     19.612499999999997
+    ],
+    "hatch_panel_reach_m": 0.5475760137777244,
+    "rungs": 65,
+    "lights": 8,
+    "fixture_max_radius_m": 0.8062257748298761,
+    "clear_between_fixtures_m": 1.1008947322856464,
+    "suited_sweep_margin_m": 0.20044736614282332
+   },
+   "3": {
+    "axis_m": [
+     [
+      -2.1,
+      -1.075000000000001,
+      -1.86195461813654
+     ],
+     [
+      -2.1,
+      -1.5250000000000021,
+      -2.6413774815425377
+     ],
+     [
+      -1.4500000000000002,
+      -3.181421455033252,
+      -3.2103836004072925
+     ],
+     [
+      0.0,
+      -3.7459292143521057,
+      -4.188139720814411
+     ],
+     [
+      0.0,
+      -13.495929214352115,
+      -21.07563509461096
+     ]
+    ],
+    "length_m": 24.10586362431629,
+    "elbows_deg": [
+     45.00000000000004,
+     44.85049150029893,
+     52.09455519405522
+    ],
+    "ladder_run_t_m": [
+     0.09775088778643304,
+     19.6125
+    ],
+    "hatch_panel_reach_m": 0.5475760137777245,
+    "rungs": 65,
+    "lights": 8,
+    "fixture_max_radius_m": 0.8062257748299466,
+    "clear_between_fixtures_m": 1.1008947322856524,
+    "suited_sweep_margin_m": 0.20044736614282488
+   }
+  },
+  "neck": {
+   "clear_m": 0.9,
+   "outer_m": 1.0,
+   "bulkhead_radius_m": [
+    2.15,
+    2.1999999999999997
+   ],
+   "above_outer_wall_m": 0.17499999999999982,
+   "suited_margin_m": 0.10000000000000003
+  },
+  "ladder_push": {
+   "ladder_wall": "spinward",
+   "pulled_off_when": "descending",
+   "body_off_radial_m": 1.5099999999999998,
+   "lean_toward_ladder_g": 0.027016774029223808,
+   "coriolis_g_per_m_s": 0.08542754569167638,
+   "neutral_speed_m_s": 0.31625366046137243,
+   "review_speed_m_s": 0.5,
+   "pulled_off_g": 0.01569699881661438,
+   "pressed_on_g": 0.069730546875062,
+   "radius_m": {
+    "run_top": 5.597750887786434,
+    "tube_tip": 25.0
+   },
+   "spin_gravity_g": {
+    "run_top": 0.10015441775312123,
+    "tube_tip": 0.4472975832652949
+   },
+   "overhang_deg": {
+    "run_top": 8.90739033391638,
+    "tube_tip": 2.0098540488979157
+   },
+   "at_rest_lean_deg": {
+    "run_top": 15.096287509642485,
+    "tube_tip": 3.4564659169925958
+   },
+   "fall_speed_m_s": 11.491838744589963,
+   "fall_height_1g_m": 6.7333063651531875
+  },
+  "mannequin": {
+   "sector": 2,
+   "feet_radius_m": 7.332500000000003,
+   "reach_m": {
+    "Human_Spoke_B_Arm_1": 0.384881665420899,
+    "Human_Spoke_B_Arm_2": 0.38488166542089897
+   },
+   "bore_margin_m": 0.17656764754849713,
+   "fixture_gap_m": 0.03423052672207387,
+   "rung_gap_m": 0.02455467415507459,
+   "grip_on_stile_m": -0.017499999999999558,
+   "arrester_off_rail_axis_m": 9.020562075079397e-17,
+   "arrester_link_m": 0.0454473661428263
+  },
+  "arrest_rail": {
+   "radius_from_tube_axis_m": 0.5704473661428265,
+   "length_m": 24.061200956156352,
+   "brackets": 10,
+   "clip_on_spin_gravity_g": 0.04402145021975405,
+   "unclipped_drop_to_deck_m": 1.5915000000000001
+  }
+ },
+ "landing": {
+  "hatch_clear_m": 1.6,
+  "frame_radii_m": [
+   0.8,
+   0.9
+  ],
+  "frame_y_m": [
+   -3.039023151496754,
+   -2.8200000000000003
+  ],
+  "ceiling_y_m": -2.9000000000000004,
+  "headroom_m": 2.9000000000000004,
+  "leaf_radius_m": 0.8500000000000001,
+  "leaf_travel_m": 1.7500000000000002,
+  "leaf_gaps_m": {
+   "tube_stile_ends": 0.05893797794354126,
+   "Sector_Hatch_Rail_1": 0.056157731058639054,
+   "Sector_Hatch_Rail_2": 0.056157731058639054,
+   "Sector_Ladder_Stile_1": 0.05893797794354126,
+   "Sector_Ladder_Stile_2": 0.05893797794354136,
+   "Sector_Ladder_Rungs": 0.07283999309068447,
+   "Sector_Ladder_Brackets": 0.32833750351123375,
+   "Sector_Landing_Chase": 0.06999999999999962,
+   "Sector_Hatch_Panel": 1.091832260460898,
+   "Sector_Landing_Light": 0.2906133723864217,
+   "Sector_Aisle_Light_1": 0.41773197148410846,
+   "Sector_Aisle_Light_2": 0.41773197148410846,
+   "Sector_Thrust_Step_Stile_1": 0.2416714497271723,
+   "Sector_Thrust_Step_Stile_2": 0.14000000000000018,
+   "Sector_Thrust_Step_Rungs": 0.2824999999999998,
+   "Sector_Thrust_Step_Brackets": 0.19525000000000023,
+   "blocks": 0.08999999999999986
+  },
+  "ladder": {
+   "stile_z_m": -1.7579473661428264,
+   "stile_y_m": [
+    -2.6725000000000003,
+    0.0
+   ],
+   "tube_stile_end_y_m": -2.8875,
+   "rungs": 9,
+   "rung_y_m": [
+    -0.25,
+    -0.55,
+    -0.85,
+    -1.15,
+    -1.45,
+    -1.75,
+    -2.05,
+    -2.35,
+    -2.65
+   ]
+  },
+  "well_m": {
+   "x": [
+    -0.5,
+    0.5
+   ],
+   "z": [
+    -2.07,
+    -0.45
+   ],
+   "width": 1.0,
+   "depth": 1.6199999999999999
+  },
+  "blocks_in_well": [],
+  "fixture_block_gap_m": {
+   "Sector_Hatch_Frame": 0.17000000000000037,
+   "Sector_Hatch_Rail_1": 0.5139517732710074,
+   "Sector_Hatch_Rail_2": 0.10000000000000009,
+   "Sector_Ladder_Stile_1": 0.38249999999999995,
+   "Sector_Ladder_Stile_2": 0.38249999999999995,
+   "Sector_Ladder_Rungs": 0.39999999999999997,
+   "Sector_Ladder_Brackets": 0.38774999999999993,
+   "Sector_Landing_Chase": 0.09999999999999998,
+   "Sector_Hatch_Panel": 0.14,
+   "Sector_Landing_Light": 0.13999999999999996,
+   "Sector_Aisle_Light_1": 0.8800000000000008,
+   "Sector_Aisle_Light_2": 0.23000000000000043,
+   "Sector_Thrust_Step_Stile_1": 0.6225,
+   "Sector_Thrust_Step_Stile_2": 0.6400798859922336,
+   "Sector_Thrust_Step_Rungs": 0.6225,
+   "Sector_Thrust_Step_Brackets": 0.6575000000000002,
+   "Sector_Hatch_Leaf": 0.08999999999999986
+  },
+  "fixtures_outside_skin": [],
+  "descent_suited_margin_m": 0.24044736614282658,
+  "walk_suited_margin_m": 0.10000000000000003,
+  "mannequin": {
+   "sector": 1,
+   "reach_m": {
+    "Human_Landing_Arm_1": 0.5381043114489977,
+    "Human_Landing_Arm_2": 0.5381043114489977
+   },
+   "feet_y_m": [
+    -0.07,
+    -0.07
+   ],
+   "fixture_gap_m": 0.3024999999999999,
+   "block_gap_m": 0.39999999999999997,
+   "grip_on_stile_m": 6.938893903907228e-17,
+   "in_well": true
+  }
+ },
+ "refuge": {
+  "port": {
+   "x_m": 95.54936247723134,
+   "angle_deg": 0.0,
+   "clear_m": 0.9,
+   "length_m": 0.24999999999999978,
+   "suited_margin_m": 0.10000000000000003,
+   "spine_opening_deg": 63.513727718594254
+  },
+  "cavity": {
+   "x_m": [
+    94.34936247723134,
+    96.74936247723134
+   ],
+   "radii_m": [
+    1.0999999999999999,
+    2.89
+   ],
+   "length_m": 2.4000000000000057,
+   "depth_m": 1.7900000000000003,
+   "inner_wall_radii_m": [
+    1.0499999999999998,
+    1.0999999999999999
+   ],
+   "inner_wall_to_spine_m": 0.09999999999999987,
+   "pressure_volume_m3": 53.850165338888914,
+   "volume_per_person_m3": 4.487513778240743,
+   "thrust_floor_m2_per_person": 1.869797407600305
+  },
+  "occupants": {
+   "stations": 12,
+   "rated_occupancy": 12,
+   "body_axis_radius_m": 2.4525,
+   "axial_margin_m": 0.3000000000000028,
+   "neighbour_gap_m": 0.5695074162278644,
+   "outer_wall_gap_m": 0.08750000000000002,
+   "fixture_gap_m": 0.4276888983651941,
+   "circulation_radius_m": 1.645,
+   "circulation_margin_m": 0.10749999999999993
+  },
+  "fixtures_outside_cavity": [],
+  "fixture_port_gap_m": 0.18250000000000455,
+  "anchor_rails": 12,
+  "lights": 6,
+  "mannequin": {
+   "reach_m": {
+    "Human_Refuge_Arm_Rail": 0.2830441169852741,
+    "Human_Refuge_Arm_Reach": 0.5000000000000001
+   },
+   "cavity_margin_m": 0.17046278065502318,
+   "fixture_gap_m": 0.3301741785647685,
+   "grip_on_rail_m": 1.734723475976807e-17,
+   "panel_from_shoulder_m": 0.5118315688074181
+  },
+  "emergency": {
+   "port_rail_reach_m": 0.43736261662176634,
+   "trunk_rail_reach_m": 0.8700001588999227,
+   "reach_m": 0.65,
+   "sectors": {
+    "A1": {
+     "to_refuge_m": 44.29556577120197,
+     "rungs": 74,
+     "minutes_at_review_pace": 1.4765188590400657
+    },
+    "A2": {
+     "to_refuge_m": 47.331475131829364,
+     "rungs": 74,
+     "minutes_at_review_pace": 1.5777158377276455
+    },
+    "A3": {
+     "to_refuge_m": 47.33155066656895,
+     "rungs": 74,
+     "minutes_at_review_pace": 1.5777183555522984
+    },
+    "B1": {
+     "to_refuge_m": 40.79177298494366,
+     "rungs": 74,
+     "minutes_at_review_pace": 1.3597257661647888
+    },
+    "B2": {
+     "to_refuge_m": 37.75586362431628,
+     "rungs": 74,
+     "minutes_at_review_pace": 1.2585287874772093
+    },
+    "B3": {
+     "to_refuge_m": 40.79177298494367,
+     "rungs": 74,
+     "minutes_at_review_pace": 1.359725766164789
+    }
+   },
+   "review_speed_m_s": 0.5,
+   "round_to_far_station_m": 5.16791991515521,
+   "spin_transfer": {
+    "A": {
+     "port_speed_m_s": {
+      "spine": 0.40840704496667307,
+      "mid_depth": 0.6073745796940266,
+      "outer_rails": 0.7770205829878755
+     },
+     "port_passes_every_s": 15.0,
+     "mid_depth_g": 0.025943259829387097
+    },
+    "B": {
+     "port_speed_m_s": {
+      "spine": 0.40840704496667307,
+      "mid_depth": 0.6073745796940266,
+      "outer_rails": 0.7770205829878755
+     },
+     "port_passes_every_s": 15.0,
+     "mid_depth_g": 0.025943259829387097
+    }
+   }
+  }
+ },
+ "induction": {
+  "ring": "A",
+  "sectors": [
+   1,
+   3,
+   2
+  ],
+  "legs": {
+   "A1": {
+    "length_m": 55.546203293970635,
+    "rungs": 74,
+    "minutes_at_review_pace": 1.8515401097990212
+   },
+   "A1-A3": {
+    "length_m": 60.00211643777093,
+    "rungs": 148,
+    "minutes_at_review_pace": 2.0000705479256977
+   },
+   "A3-A2": {
+    "length_m": 63.22704090303134,
+    "rungs": 148,
+    "minutes_at_review_pace": 2.1075680301010444
+   }
+  },
+  "total_m": 178.7753606347729,
+  "total_rungs": 370,
+  "sequence": [
+   "board",
+   "spin_up",
+   "tour"
+  ],
+  "stops": [
+   {
+    "key": "arrival",
+    "at": "entry",
+    "scenes": [
+     "S004A"
+    ],
+    "point": [
+     99.4,
+     -4.781332840130889,
+     -1.281154273257478
+    ],
+    "step": "board",
+    "state": "DOCKED",
+    "habitat": "STOPPED_LOCKED",
+    "rpm": 0.0,
+    "g": 0.0
+   },
+   {
+    "key": "spine",
+    "at": "refuge_port",
+    "scenes": [
+     "S004A"
+    ],
+    "point": [
+     95.54936247723134,
+     0.0,
+     0.0
+    ],
+    "step": "board",
+    "state": "DOCKED",
+    "habitat": "STOPPED_LOCKED",
+    "rpm": 0.0,
+    "g": 0.0
+   },
+   {
+    "key": "transfer",
+    "at": "vestibule",
+    "scenes": [
+     "S004A"
+    ],
+    "point": [
+     82.59936247723134,
+     8.878689293818311e-17,
+     1.45
+    ],
+    "step": "tour",
+    "state": "COAST",
+    "habitat": "ROTATING",
+    "rpm": 4.0,
+    "g": 0.025943259829387097
+   },
+   {
+    "key": "habitat",
+    "at": "sector",
+    "scenes": [
+     "S004A"
+    ],
+    "point": [
+     85.64936247723134,
+     1.7145055188062944e-15,
+     28.0
+    ],
+    "function": "HABITATION",
+    "pose": "aisle",
+    "block": "Bunk_3",
+    "aisle_x_m": 0.6000000000000001,
+    "aisle_to_landing_m": 0.6000000000000001,
+    "to_refuge_m": 44.89556577120197,
+    "minutes_to_refuge_at_review_pace": 1.4965188590400658,
+    "step": "tour",
+    "state": "COAST",
+    "habitat": "ROTATING",
+    "rpm": 4.0,
+    "g": 0.5009732932571302
+   },
+   {
+    "key": "garden",
+    "at": "sector",
+    "scenes": [
+     "S004A",
+     "S004C"
+    ],
+    "point": [
+     85.57436247723135,
+     24.248711305964274,
+     -14.000000000000014
+    ],
+    "function": "LIFE_SUPPORT_GARDEN_COMMON",
+    "pose": "garden",
+    "block": "Garden_Rack_1",
+    "aisle_x_m": 0.525,
+    "aisle_to_landing_m": 0.525,
+    "to_refuge_m": 47.85655066656895,
+    "minutes_to_refuge_at_review_pace": 1.5952183555522983,
+    "step": "tour",
+    "state": "COAST",
+    "habitat": "ROTATING",
+    "rpm": 4.0,
+    "g": 0.5009732932571302
+   },
+   {
+    "key": "burn_readiness",
+    "at": "sector",
+    "scenes": [
+     "S004B"
+    ],
+    "point": [
+     86.29936247723134,
+     -24.248711305964285,
+     -13.999999999999991
+    ],
+    "function": "WORK_MEDICAL_OPS",
+    "pose": "patient",
+    "block": "Medical_Couch",
+    "aisle_x_m": 1.25,
+    "aisle_to_landing_m": 1.25,
+    "to_refuge_m": 48.581475131829364,
+    "minutes_to_refuge_at_review_pace": 1.6193825043943122,
+    "step": "tour",
+    "state": "COAST",
+    "habitat": "ROTATING",
+    "rpm": 4.0,
+    "g": 0.5009732932571301
+   },
+   {
+    "key": "specialists",
+    "at": "sector",
+    "scenes": [
+     "S004C"
+    ],
+    "point": [
+     84.34936247723134,
+     -24.248711305964285,
+     -13.999999999999991
+    ],
+    "function": "WORK_MEDICAL_OPS",
+    "pose": "operator",
+    "block": "Ops_Stations",
+    "aisle_x_m": -0.7,
+    "aisle_to_landing_m": 0.7,
+    "to_refuge_m": 48.03147513182937,
+    "minutes_to_refuge_at_review_pace": 1.6010491710609789,
+    "step": "tour",
+    "state": "COAST",
+    "habitat": "ROTATING",
+    "rpm": 4.0,
+    "g": 0.5009732932571301
+   },
+   {
+    "key": "burn_station",
+    "at": "sector",
+    "scenes": [
+     "S004B",
+     "S004C"
+    ],
+    "point": [
+     83.79936247723134,
+     -24.248711305964285,
+     -13.999999999999991
+    ],
+    "function": "WORK_MEDICAL_OPS",
+    "pose": "couch",
+    "block": "Burn_Couch_1",
+    "aisle_x_m": -1.25,
+    "aisle_to_landing_m": 1.25,
+    "to_refuge_m": 48.581475131829364,
+    "minutes_to_refuge_at_review_pace": 1.6193825043943122,
+    "step": "tour",
+    "state": "COAST",
+    "habitat": "ROTATING",
+    "rpm": 4.0,
+    "g": 0.5009732932571301
+   }
+  ]
+ }
+}

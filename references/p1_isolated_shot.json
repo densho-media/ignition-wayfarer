@@ -1,0 +1,51 @@
+{
+  "result": "PASS",
+  "fixture_only": true,
+  "habitat_shot": {
+    "libraries_loaded": [
+      "WF_HABITAT.blend",
+      "WF_HABITAT_POD.blend",
+      "WF_INTERIOR_GARDEN.blend",
+      "WF_INTERIOR_HABITATION.blend",
+      "WF_INTERIOR_WORK.blend"
+    ],
+    "pod_pressure_instances": 6,
+    "interior_instances": 6,
+    "interior_functions": [
+      "HABITATION",
+      "LIFE_SUPPORT_GARDEN_COMMON",
+      "WORK_MEDICAL_OPS"
+    ],
+    "interiors_follow_pods_frames": [
+      1,
+      91
+    ],
+    "rotor_drivers_evaluate": true
+  },
+  "garden_set_shot": {
+    "libraries_loaded": [
+      "WF_HABITAT_POD.blend",
+      "WF_INTERIOR_GARDEN.blend"
+    ],
+    "pod_pressure_instances": 1,
+    "interior_instances": 1,
+    "shot_local_override": "Garden_Rack_1 moved +0.25 m in the shot only",
+    "source_rack_unchanged": true
+  },
+  "not_loaded": [
+    "WF_PROPULSION",
+    "WF_NOZZLE",
+    "WF_THERMAL",
+    "WF_RADIATOR",
+    "WF_HULL",
+    "WF_ROTOR_BAY_DOORS",
+    "WF_SERVICE",
+    "WF_STRUCTURE",
+    "WF_EYE",
+    "WF_STORAGE",
+    "WF_SHIELDING"
+  ],
+  "relative_links_after_relocation": true,
+  "source_assets_byte_identical": true,
+  "scope": "Isolated habitat and Garden reuse. Pod functions and the Garden pods are WORKING (12_HABITAT_LAYOUT); the interiors are PROTOTYPE blocking and room-by-room geometry stays OPEN."
+}

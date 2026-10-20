@@ -1,0 +1,1185 @@
+{
+ "study": "M5 slice 2: comms / attitude / RCS CAD readback for S&E 63 (NONCANON; physics.inertia stays OPEN)",
+ "mass_model": "1,100 t burnout budget (02, PROVISIONAL) spread over the built meshes per region; area-weighted shells and structure, volume-weighted water, stores and study zones",
+ "fingerprint": "runs/20261018T095350Z-pipeline/fingerprint.json",
+ "regions": {
+  "main_structure+margin": {
+   "objects": 759
+  },
+  "power_computers_steering_comms": {
+   "objects": 79
+  },
+  "main_structure:rot": {
+   "objects": 905
+  },
+  "life_support+food": {
+   "objects": 78
+  },
+  "water_radiation_shielding:rot": {
+   "objects": 6
+  },
+  "habitat_pressure_structure": {
+   "objects": 6
+  },
+  "drive_package": {
+   "objects": 116
+  },
+  "water_radiation_shielding:refuge": {
+   "objects": 2
+  },
+  "workshop_spares_cargo": {
+   "objects": 132
+  },
+  "eye_sensors": {
+   "objects": 9
+  },
+  "forward_impact_shielding": {
+   "objects": 482
+  },
+  "radiators_thermal": {
+   "objects": 1212
+  },
+  "prop:d2_cryostat": {
+   "objects": 3
+  },
+  "prop:he3_cryostat": {
+   "objects": 24
+  }
+ },
+ "budget_kg": {
+  "main_structure+margin": 155000.0,
+  "main_structure:rot": 25000.0,
+  "forward_impact_shielding": 100000.0,
+  "habitat_pressure_structure": 90000.0,
+  "eye_sensors": 25000.0,
+  "life_support+food": 65000.0,
+  "water_radiation_shielding:rot": 160000.0,
+  "water_radiation_shielding:refuge": 20000.0,
+  "workshop_spares_cargo": 60000.0,
+  "drive_package": 250000.0,
+  "radiators_thermal": 100000.0,
+  "power_computers_steering_comms": 50000.0
+ },
+ "cases": {
+  "burnout_1100t": {
+   "mass_t": 1100.0,
+   "com_m": [
+    25.32,
+    0.0,
+    0.19
+   ],
+   "I_kg_m2": [
+    [
+     417680000.0,
+     -2801300.0,
+     -10099000.0
+    ],
+    [
+     -2801300.0,
+     7514300000.0,
+     692150.0
+    ],
+    [
+     -10099000.0,
+     692150.0,
+     7509500000.0
+    ]
+   ],
+   "principal_kg_m2": [
+    417660000.0,
+    7509400000.0,
+    7514400000.0
+   ],
+   "products_over_transverse": 0.00134,
+   "roll_stationary_only_kg_m2": 181160000.0,
+   "stationary_mass_t": 760.0,
+   "note": "roll: rings on bearings do not follow a roll torque on the stationary body, so the RCS sees the stationary roll inertia"
+  },
+  "burnout_plus_housed_fusion_fuel_C": {
+   "mass_t": 1344.0,
+   "com_m": [
+    18.18,
+    0.0,
+    0.16
+   ],
+   "I_kg_m2": [
+    [
+     420340000.0,
+     -2809800.0,
+     -11602000.0
+    ],
+    [
+     -2809800.0,
+     8134200000.0,
+     692110.0
+    ],
+    [
+     -11602000.0,
+     692110.0,
+     8129300000.0
+    ]
+   ],
+   "principal_kg_m2": [
+    420320000.0,
+    8129200000.0,
+    8134300000.0
+   ],
+   "products_over_transverse": 0.00143,
+   "roll_stationary_only_kg_m2": 183810000.0,
+   "stationary_mass_t": 1004.0,
+   "note": "He-3 164.8 t + D2 79.2 t in the BODY-C vessels (housed part only)"
+  }
+ },
+ "modes": {
+  "axes": {
+   "roll+": {
+    "couple": {
+     "torque_N_m": 18234,
+     "duty": {
+      "Ext_RCS_Aft_1_Tan_Neg": 1.0,
+      "Ext_RCS_Aft_2_Tan_Neg": 1.0,
+      "Ext_RCS_Aft_3_Radial": 0.002,
+      "Ext_RCS_Aft_3_Tan_Neg": 1.0,
+      "Ext_RCS_Rim_1_Radial": 1.0,
+      "Ext_RCS_Rim_1_Tan_Neg": 1.0,
+      "Ext_RCS_Rim_2_Radial": 0.001,
+      "Ext_RCS_Rim_2_Tan_Neg": 1.0,
+      "Ext_RCS_Rim_3_Radial": 0.998,
+      "Ext_RCS_Rim_3_Tan_Neg": 1.0,
+      "Ext_RCS_Rim_4_Tan_Neg": 1.0
+     },
+     "n": 11,
+     "sum_duty": 9.0,
+     "axial_force_N": 239.5,
+     "lateral_force_N": 0.0,
+     "cross_torque_N_m": 0.0
+    },
+    "on_off_couple": {
+     "torque_N_m": 18234,
+     "jets": [
+      "Ext_RCS_Rim_3_Tan_Neg",
+      "Ext_RCS_Rim_4_Tan_Neg",
+      "Ext_RCS_Rim_2_Tan_Neg",
+      "Ext_RCS_Rim_1_Tan_Neg",
+      "Ext_RCS_Aft_3_Tan_Neg",
+      "Ext_RCS_Aft_2_Tan_Neg",
+      "Ext_RCS_Aft_1_Tan_Neg"
+     ],
+     "n": 7,
+     "net_force_N": 239.4,
+     "axial_force_N": 239.4,
+     "lateral_force_N": 0.0,
+     "cross_torque_N_m": 45
+    },
+    "force_free_couple": false,
+    "I_axis_kg_m2": 181160000.0,
+    "flip_180_min": 5.9,
+    "propellant_per_flip": {
+     "isp_200_kg": 162.1,
+     "isp_800_kg": 40.5,
+     "isp_1000_kg": 32.4
+    },
+    "arcjet_power_MW": 8.83,
+    "arcjet_waste_heat_MW": 4.41,
+    "forward_dv_per_flip_m_s": 0.0769,
+    "alpha_deg_s2": 0.005767
+   },
+   "roll-": {
+    "couple": {
+     "torque_N_m": 18234,
+     "duty": {
+      "Ext_RCS_Aft_1_Radial": 0.997,
+      "Ext_RCS_Aft_1_Tan_Pos": 1.0,
+      "Ext_RCS_Aft_2_Radial": 0.997,
+      "Ext_RCS_Aft_2_Tan_Pos": 1.0,
+      "Ext_RCS_Aft_3_Radial": 1.0,
+      "Ext_RCS_Aft_3_Tan_Pos": 1.0,
+      "Ext_RCS_Rim_1_Radial": 0.003,
+      "Ext_RCS_Rim_1_Tan_Pos": 1.0,
+      "Ext_RCS_Rim_2_Radial": 0.001,
+      "Ext_RCS_Rim_2_Tan_Pos": 1.0,
+      "Ext_RCS_Rim_3_Tan_Pos": 1.0,
+      "Ext_RCS_Rim_4_Tan_Pos": 1.0
+     },
+     "n": 12,
+     "sum_duty": 10.0,
+     "axial_force_N": 341.8,
+     "lateral_force_N": 0.0,
+     "cross_torque_N_m": 0.0
+    },
+    "on_off_couple": {
+     "torque_N_m": 18234,
+     "jets": [
+      "Ext_RCS_Rim_3_Tan_Pos",
+      "Ext_RCS_Rim_4_Tan_Pos",
+      "Ext_RCS_Rim_2_Tan_Pos",
+      "Ext_RCS_Rim_1_Tan_Pos",
+      "Ext_RCS_Aft_3_Tan_Pos",
+      "Ext_RCS_Aft_1_Tan_Pos",
+      "Ext_RCS_Aft_2_Tan_Pos"
+     ],
+     "n": 7,
+     "net_force_N": 239.4,
+     "axial_force_N": 239.4,
+     "lateral_force_N": 0.0,
+     "cross_torque_N_m": 45
+    },
+    "force_free_couple": false,
+    "I_axis_kg_m2": 181160000.0,
+    "flip_180_min": 5.9,
+    "propellant_per_flip": {
+     "isp_200_kg": 180.2,
+     "isp_800_kg": 45.0,
+     "isp_1000_kg": 36.0
+    },
+    "arcjet_power_MW": 9.81,
+    "arcjet_waste_heat_MW": 4.9,
+    "forward_dv_per_flip_m_s": 0.1098,
+    "alpha_deg_s2": 0.005767
+   },
+   "pitch+": {
+    "couple": {
+     "torque_N_m": 60880,
+     "duty": {
+      "Ext_RCS_Aft_1_Tan_Neg": 1.0,
+      "Ext_RCS_Aft_2_Tan_Pos": 1.0,
+      "Ext_RCS_Aft_3_Radial": 1.0,
+      "Ext_RCS_Aft_3_Tan_Pos": 1.0,
+      "Ext_RCS_Aft_3_Tan_Neg": 0.971,
+      "Ext_RCS_Rim_1_Radial": 1.0,
+      "Ext_RCS_Rim_1_Tan_Pos": 1.0,
+      "Ext_RCS_Rim_1_Tan_Neg": 1.0,
+      "Ext_RCS_Rim_2_Radial": 0.749,
+      "Ext_RCS_Rim_2_Tan_Pos": 0.094,
+      "Ext_RCS_Rim_2_Tan_Neg": 1.0,
+      "Ext_RCS_Rim_4_Tan_Pos": 0.902
+     },
+     "n": 12,
+     "sum_duty": 10.72,
+     "axial_force_N": 306.7,
+     "lateral_force_N": 0.0,
+     "cross_torque_N_m": 0.0
+    },
+    "on_off_couple": null,
+    "force_free_couple": false,
+    "I_axis_kg_m2": 7514300000.0,
+    "flip_180_min": 20.8,
+    "propellant_per_flip": {
+     "isp_200_kg": 680.7,
+     "isp_800_kg": 170.2,
+     "isp_1000_kg": 136.1
+    },
+    "arcjet_power_MW": 10.51,
+    "arcjet_waste_heat_MW": 5.26,
+    "forward_dv_per_flip_m_s": 0.3472,
+    "alpha_deg_s2": 0.0004642
+   },
+   "pitch-": {
+    "couple": {
+     "torque_N_m": 60990,
+     "duty": {
+      "Ext_RCS_Aft_1_Radial": 1.0,
+      "Ext_RCS_Aft_1_Tan_Pos": 1.0,
+      "Ext_RCS_Aft_2_Radial": 1.0,
+      "Ext_RCS_Aft_2_Tan_Neg": 1.0,
+      "Ext_RCS_Aft_3_Tan_Neg": 0.029,
+      "Ext_RCS_Rim_2_Radial": 0.251,
+      "Ext_RCS_Rim_2_Tan_Pos": 0.906,
+      "Ext_RCS_Rim_3_Radial": 1.0,
+      "Ext_RCS_Rim_3_Tan_Pos": 1.0,
+      "Ext_RCS_Rim_3_Tan_Neg": 1.0,
+      "Ext_RCS_Rim_4_Radial": 1.0,
+      "Ext_RCS_Rim_4_Tan_Pos": 0.098,
+      "Ext_RCS_Rim_4_Tan_Neg": 1.0
+     },
+     "n": 13,
+     "sum_duty": 10.28,
+     "axial_force_N": 274.7,
+     "lateral_force_N": 0.0,
+     "cross_torque_N_m": 0.0
+    },
+    "on_off_couple": null,
+    "force_free_couple": false,
+    "I_axis_kg_m2": 7514300000.0,
+    "flip_180_min": 20.7,
+    "propellant_per_flip": {
+     "isp_200_kg": 652.2,
+     "isp_800_kg": 163.0,
+     "isp_1000_kg": 130.4
+    },
+    "arcjet_power_MW": 10.08,
+    "arcjet_waste_heat_MW": 5.04,
+    "forward_dv_per_flip_m_s": 0.3107,
+    "alpha_deg_s2": 0.000465
+   },
+   "yaw+": {
+    "couple": {
+     "torque_N_m": 55373,
+     "duty": {
+      "Ext_RCS_Aft_1_Radial": 1.0,
+      "Ext_RCS_Aft_1_Tan_Neg": 1.0,
+      "Ext_RCS_Aft_2_Tan_Neg": 1.0,
+      "Ext_RCS_Aft_3_Radial": 0.498,
+      "Ext_RCS_Aft_3_Tan_Pos": 1.0,
+      "Ext_RCS_Rim_1_Radial": 0.347,
+      "Ext_RCS_Rim_1_Tan_Pos": 0.822,
+      "Ext_RCS_Rim_2_Radial": 1.0,
+      "Ext_RCS_Rim_2_Tan_Pos": 1.0,
+      "Ext_RCS_Rim_2_Tan_Neg": 1.0,
+      "Ext_RCS_Rim_3_Radial": 1.0,
+      "Ext_RCS_Rim_3_Tan_Pos": 0.3,
+      "Ext_RCS_Rim_3_Tan_Neg": 1.0
+     },
+     "n": 13,
+     "sum_duty": 10.97,
+     "axial_force_N": 294.8,
+     "lateral_force_N": 0.0,
+     "cross_torque_N_m": 0.0
+    },
+    "on_off_couple": null,
+    "force_free_couple": false,
+    "I_axis_kg_m2": 7509500000.0,
+    "flip_180_min": 21.8,
+    "propellant_per_flip": {
+     "isp_200_kg": 730.2,
+     "isp_800_kg": 182.5,
+     "isp_1000_kg": 146.0
+    },
+    "arcjet_power_MW": 10.76,
+    "arcjet_waste_heat_MW": 5.38,
+    "forward_dv_per_flip_m_s": 0.3499,
+    "alpha_deg_s2": 0.0004225
+   },
+   "yaw-": {
+    "couple": {
+     "torque_N_m": 55374,
+     "duty": {
+      "Ext_RCS_Aft_1_Tan_Pos": 1.0,
+      "Ext_RCS_Aft_2_Radial": 1.0,
+      "Ext_RCS_Aft_2_Tan_Pos": 1.0,
+      "Ext_RCS_Aft_3_Radial": 0.507,
+      "Ext_RCS_Aft_3_Tan_Neg": 1.0,
+      "Ext_RCS_Rim_1_Radial": 0.658,
+      "Ext_RCS_Rim_1_Tan_Pos": 0.178,
+      "Ext_RCS_Rim_1_Tan_Neg": 1.0,
+      "Ext_RCS_Rim_3_Tan_Pos": 0.7,
+      "Ext_RCS_Rim_4_Radial": 1.0,
+      "Ext_RCS_Rim_4_Tan_Pos": 1.0,
+      "Ext_RCS_Rim_4_Tan_Neg": 1.0
+     },
+     "n": 12,
+     "sum_duty": 10.04,
+     "axial_force_N": 286.8,
+     "lateral_force_N": 0.0,
+     "cross_torque_N_m": 0.0
+    },
+    "on_off_couple": null,
+    "force_free_couple": false,
+    "I_axis_kg_m2": 7509500000.0,
+    "flip_180_min": 21.8,
+    "propellant_per_flip": {
+     "isp_200_kg": 668.3,
+     "isp_800_kg": 167.1,
+     "isp_1000_kg": 133.7
+    },
+    "arcjet_power_MW": 9.85,
+    "arcjet_waste_heat_MW": 4.92,
+    "forward_dv_per_flip_m_s": 0.3404,
+    "alpha_deg_s2": 0.0004225
+   }
+  },
+  "gyroscopic": {
+   "ring_residual_H_N_m_s": 50384.86298,
+   "peak_slew_rate_deg_s": 0.2885,
+   "gyro_torque_N_m": 253.7,
+   "note": "omega x H_residual during a bang-bang flip; compare the couple"
+  },
+  "operating_modes": [
+   {
+    "mode": "1 micro-slew + precision hold",
+    "rcs": "minimum-impulse pulses of one couple; hold accuracy OPEN (S02-Q2)"
+   },
+   {
+    "mode": "2 low-hazard maintenance orientation",
+    "rcs": "slow slews at a fraction of the couple; only below the dust-speed limit"
+   },
+   {
+    "mode": "3 high-speed forward-only protected flight",
+    "rcs": "hold inside the shield-shadow tolerance below; NO 180 deg flip (63 HOLD)"
+   }
+  ]
+ },
+ "shadow": {
+  "shield_r_m": 45.0,
+  "shield_x_m": 105.9,
+  "per_azimuth": [
+   {
+    "phi_deg": 0.0,
+    "theta_max_deg": 2.496,
+    "binding": "Radiator blade 1 (30 deg)"
+   },
+   {
+    "phi_deg": 5.0,
+    "theta_max_deg": 2.408,
+    "binding": "Radiator blade 1 (30 deg)"
+   },
+   {
+    "phi_deg": 10.0,
+    "theta_max_deg": 2.339,
+    "binding": "Radiator blade 1 (30 deg)"
+   },
+   {
+    "phi_deg": 15.0,
+    "theta_max_deg": 2.288,
+    "binding": "Radiator blade 1 (30 deg)"
+   },
+   {
+    "phi_deg": 20.0,
+    "theta_max_deg": 2.252,
+    "binding": "Radiator blade 1 (30 deg)"
+   },
+   {
+    "phi_deg": 25.0,
+    "theta_max_deg": 2.231,
+    "binding": "Radiator blade 1 (30 deg)"
+   },
+   {
+    "phi_deg": 30.0,
+    "theta_max_deg": 2.224,
+    "binding": "Radiator blade 1 (30 deg)"
+   },
+   {
+    "phi_deg": 35.0,
+    "theta_max_deg": 2.231,
+    "binding": "Radiator blade 1 (30 deg)"
+   },
+   {
+    "phi_deg": 40.0,
+    "theta_max_deg": 2.252,
+    "binding": "Radiator blade 1 (30 deg)"
+   },
+   {
+    "phi_deg": 45.0,
+    "theta_max_deg": 2.288,
+    "binding": "Radiator blade 1 (30 deg)"
+   },
+   {
+    "phi_deg": 50.0,
+    "theta_max_deg": 2.339,
+    "binding": "Radiator blade 1 (30 deg)"
+   },
+   {
+    "phi_deg": 55.0,
+    "theta_max_deg": 2.408,
+    "binding": "Radiator blade 1 (30 deg)"
+   },
+   {
+    "phi_deg": 60.0,
+    "theta_max_deg": 2.496,
+    "binding": "Radiator blade 1 (30 deg)"
+   },
+   {
+    "phi_deg": 65.0,
+    "theta_max_deg": 2.605,
+    "binding": "Radiator blade 1 (30 deg)"
+   },
+   {
+    "phi_deg": 70.0,
+    "theta_max_deg": 2.74,
+    "binding": "Radiator blade 1 (30 deg)"
+   },
+   {
+    "phi_deg": 75.0,
+    "theta_max_deg": 2.904,
+    "binding": "Radiator blade 1 (30 deg)"
+   },
+   {
+    "phi_deg": 80.0,
+    "theta_max_deg": 3.104,
+    "binding": "Radiator blade 1 (30 deg)"
+   },
+   {
+    "phi_deg": 85.0,
+    "theta_max_deg": 3.346,
+    "binding": "Radiator blade 1 (30 deg)"
+   },
+   {
+    "phi_deg": 90.0,
+    "theta_max_deg": 3.639,
+    "binding": "Radiator blade 1 (30 deg)"
+   },
+   {
+    "phi_deg": 95.0,
+    "theta_max_deg": 3.346,
+    "binding": "Radiator blade 2 (150 deg)"
+   },
+   {
+    "phi_deg": 100.0,
+    "theta_max_deg": 3.104,
+    "binding": "Radiator blade 2 (150 deg)"
+   },
+   {
+    "phi_deg": 105.0,
+    "theta_max_deg": 2.904,
+    "binding": "Radiator blade 2 (150 deg)"
+   },
+   {
+    "phi_deg": 110.0,
+    "theta_max_deg": 2.74,
+    "binding": "Radiator blade 2 (150 deg)"
+   },
+   {
+    "phi_deg": 115.0,
+    "theta_max_deg": 2.605,
+    "binding": "Radiator blade 2 (150 deg)"
+   },
+   {
+    "phi_deg": 120.0,
+    "theta_max_deg": 2.496,
+    "binding": "Radiator blade 2 (150 deg)"
+   },
+   {
+    "phi_deg": 125.0,
+    "theta_max_deg": 2.408,
+    "binding": "Radiator blade 2 (150 deg)"
+   },
+   {
+    "phi_deg": 130.0,
+    "theta_max_deg": 2.339,
+    "binding": "Radiator blade 2 (150 deg)"
+   },
+   {
+    "phi_deg": 135.0,
+    "theta_max_deg": 2.288,
+    "binding": "Radiator blade 2 (150 deg)"
+   },
+   {
+    "phi_deg": 140.0,
+    "theta_max_deg": 2.252,
+    "binding": "Radiator blade 2 (150 deg)"
+   },
+   {
+    "phi_deg": 145.0,
+    "theta_max_deg": 2.231,
+    "binding": "Radiator blade 2 (150 deg)"
+   },
+   {
+    "phi_deg": 150.0,
+    "theta_max_deg": 2.224,
+    "binding": "Radiator blade 2 (150 deg)"
+   },
+   {
+    "phi_deg": 155.0,
+    "theta_max_deg": 2.231,
+    "binding": "Radiator blade 2 (150 deg)"
+   },
+   {
+    "phi_deg": 160.0,
+    "theta_max_deg": 2.252,
+    "binding": "Radiator blade 2 (150 deg)"
+   },
+   {
+    "phi_deg": 165.0,
+    "theta_max_deg": 2.288,
+    "binding": "Radiator blade 2 (150 deg)"
+   },
+   {
+    "phi_deg": 170.0,
+    "theta_max_deg": 2.339,
+    "binding": "Radiator blade 2 (150 deg)"
+   },
+   {
+    "phi_deg": 175.0,
+    "theta_max_deg": 2.408,
+    "binding": "Radiator blade 2 (150 deg)"
+   },
+   {
+    "phi_deg": 180.0,
+    "theta_max_deg": 2.496,
+    "binding": "Radiator blade 2 (150 deg)"
+   },
+   {
+    "phi_deg": 185.0,
+    "theta_max_deg": 2.605,
+    "binding": "Radiator blade 2 (150 deg)"
+   },
+   {
+    "phi_deg": 190.0,
+    "theta_max_deg": 2.74,
+    "binding": "Radiator blade 2 (150 deg)"
+   },
+   {
+    "phi_deg": 195.0,
+    "theta_max_deg": 2.904,
+    "binding": "Radiator blade 2 (150 deg)"
+   },
+   {
+    "phi_deg": 200.0,
+    "theta_max_deg": 3.104,
+    "binding": "Radiator blade 2 (150 deg)"
+   },
+   {
+    "phi_deg": 205.0,
+    "theta_max_deg": 3.346,
+    "binding": "Radiator blade 2 (150 deg)"
+   },
+   {
+    "phi_deg": 210.0,
+    "theta_max_deg": 3.639,
+    "binding": "Radiator blade 2 (150 deg)"
+   },
+   {
+    "phi_deg": 215.0,
+    "theta_max_deg": 3.346,
+    "binding": "Radiator blade 3 (270 deg)"
+   },
+   {
+    "phi_deg": 220.0,
+    "theta_max_deg": 3.104,
+    "binding": "Radiator blade 3 (270 deg)"
+   },
+   {
+    "phi_deg": 225.0,
+    "theta_max_deg": 2.904,
+    "binding": "Radiator blade 3 (270 deg)"
+   },
+   {
+    "phi_deg": 230.0,
+    "theta_max_deg": 2.74,
+    "binding": "Radiator blade 3 (270 deg)"
+   },
+   {
+    "phi_deg": 235.0,
+    "theta_max_deg": 2.605,
+    "binding": "Radiator blade 3 (270 deg)"
+   },
+   {
+    "phi_deg": 240.0,
+    "theta_max_deg": 2.496,
+    "binding": "Radiator blade 3 (270 deg)"
+   },
+   {
+    "phi_deg": 245.0,
+    "theta_max_deg": 2.408,
+    "binding": "Radiator blade 3 (270 deg)"
+   },
+   {
+    "phi_deg": 250.0,
+    "theta_max_deg": 2.339,
+    "binding": "Radiator blade 3 (270 deg)"
+   },
+   {
+    "phi_deg": 255.0,
+    "theta_max_deg": 2.288,
+    "binding": "Radiator blade 3 (270 deg)"
+   },
+   {
+    "phi_deg": 260.0,
+    "theta_max_deg": 2.252,
+    "binding": "Radiator blade 3 (270 deg)"
+   },
+   {
+    "phi_deg": 265.0,
+    "theta_max_deg": 2.231,
+    "binding": "Radiator blade 3 (270 deg)"
+   },
+   {
+    "phi_deg": 270.0,
+    "theta_max_deg": 2.224,
+    "binding": "Radiator blade 3 (270 deg)"
+   },
+   {
+    "phi_deg": 275.0,
+    "theta_max_deg": 2.231,
+    "binding": "Radiator blade 3 (270 deg)"
+   },
+   {
+    "phi_deg": 280.0,
+    "theta_max_deg": 2.252,
+    "binding": "Radiator blade 3 (270 deg)"
+   },
+   {
+    "phi_deg": 285.0,
+    "theta_max_deg": 2.288,
+    "binding": "Radiator blade 3 (270 deg)"
+   },
+   {
+    "phi_deg": 290.0,
+    "theta_max_deg": 2.339,
+    "binding": "Radiator blade 3 (270 deg)"
+   },
+   {
+    "phi_deg": 295.0,
+    "theta_max_deg": 2.408,
+    "binding": "Radiator blade 3 (270 deg)"
+   },
+   {
+    "phi_deg": 300.0,
+    "theta_max_deg": 2.496,
+    "binding": "Radiator blade 3 (270 deg)"
+   },
+   {
+    "phi_deg": 305.0,
+    "theta_max_deg": 2.605,
+    "binding": "Radiator blade 3 (270 deg)"
+   },
+   {
+    "phi_deg": 310.0,
+    "theta_max_deg": 2.74,
+    "binding": "Radiator blade 3 (270 deg)"
+   },
+   {
+    "phi_deg": 315.0,
+    "theta_max_deg": 2.904,
+    "binding": "Radiator blade 3 (270 deg)"
+   },
+   {
+    "phi_deg": 320.0,
+    "theta_max_deg": 3.104,
+    "binding": "Radiator blade 3 (270 deg)"
+   },
+   {
+    "phi_deg": 325.0,
+    "theta_max_deg": 3.346,
+    "binding": "Radiator blade 3 (270 deg)"
+   },
+   {
+    "phi_deg": 330.0,
+    "theta_max_deg": 3.639,
+    "binding": "Radiator blade 1 (30 deg)"
+   },
+   {
+    "phi_deg": 335.0,
+    "theta_max_deg": 3.346,
+    "binding": "Radiator blade 1 (30 deg)"
+   },
+   {
+    "phi_deg": 340.0,
+    "theta_max_deg": 3.104,
+    "binding": "Radiator blade 1 (30 deg)"
+   },
+   {
+    "phi_deg": 345.0,
+    "theta_max_deg": 2.904,
+    "binding": "Radiator blade 1 (30 deg)"
+   },
+   {
+    "phi_deg": 350.0,
+    "theta_max_deg": 2.74,
+    "binding": "Radiator blade 1 (30 deg)"
+   },
+   {
+    "phi_deg": 355.0,
+    "theta_max_deg": 2.605,
+    "binding": "Radiator blade 1 (30 deg)"
+   }
+  ],
+  "minimum": {
+   "phi_deg": 30.0,
+   "theta_max_deg": 2.224,
+   "binding": "Radiator blade 1 (30 deg)"
+  },
+  "note": "geometric only: the velocity-vector misalignment at which a built corner leaves the shield shadow; margin for dust, plasma and uncertainty not included (63: actual safe tolerance < geometric max)"
+ },
+ "s63": {
+  "I_pitch_yaw": 3000000000.0,
+  "torque_N_m": 14000.0,
+  "arm_m": 35.0,
+  "jets": 4,
+  "flip_min": 27.35,
+  "isp_cold_s": 200.0,
+  "isp_arcjet_s": 1000.0,
+  "arcjet_eff": 0.5,
+  "shadow_half_angle_deg": 2.29,
+  "shadow_margin_m": 8.0,
+  "lever_m": 200.0
+ },
+ "jets": [
+  {
+   "name": "Ext_RCS_Aft_1_Radial",
+   "at": [
+    -102.81,
+    5.53,
+    3.19
+   ],
+   "force_N": [
+    34.2,
+    -81.4,
+    -47.0
+   ],
+   "torque_N_m": [
+    -15,
+    -5917,
+    10238
+   ]
+  },
+  {
+   "name": "Ext_RCS_Aft_1_Tan_Pos",
+   "at": [
+    -103.06,
+    5.12,
+    3.57
+   ],
+   "force_N": [
+    34.2,
+    8.2,
+    -93.6
+   ],
+   "torque_N_m": [
+    -507,
+    -11902,
+    -1227
+   ]
+  },
+  {
+   "name": "Ext_RCS_Aft_1_Tan_Neg",
+   "at": [
+    -103.06,
+    5.65,
+    2.65
+   ],
+   "force_N": [
+    34.2,
+    -77.0,
+    53.9
+   ],
+   "torque_N_m": [
+    494,
+    7004,
+    9689
+   ]
+  },
+  {
+   "name": "Ext_RCS_Aft_2_Radial",
+   "at": [
+    -102.81,
+    -5.53,
+    3.19
+   ],
+   "force_N": [
+    34.2,
+    81.4,
+    -47.0
+   ],
+   "torque_N_m": [
+    15,
+    -5917,
+    -10238
+   ]
+  },
+  {
+   "name": "Ext_RCS_Aft_2_Tan_Pos",
+   "at": [
+    -103.06,
+    -5.65,
+    2.65
+   ],
+   "force_N": [
+    34.2,
+    77.0,
+    53.9
+   ],
+   "torque_N_m": [
+    -494,
+    7004,
+    -9689
+   ]
+  },
+  {
+   "name": "Ext_RCS_Aft_2_Tan_Neg",
+   "at": [
+    -103.06,
+    -5.12,
+    3.57
+   ],
+   "force_N": [
+    34.2,
+    -8.2,
+    -93.6
+   ],
+   "torque_N_m": [
+    507,
+    -11902,
+    1227
+   ]
+  },
+  {
+   "name": "Ext_RCS_Aft_3_Radial",
+   "at": [
+    -102.81,
+    -0.0,
+    -6.39
+   ],
+   "force_N": [
+    34.2,
+    0.0,
+    94.0
+   ],
+   "torque_N_m": [
+    0,
+    11815,
+    0
+   ]
+  },
+  {
+   "name": "Ext_RCS_Aft_3_Tan_Pos",
+   "at": [
+    -103.06,
+    0.53,
+    -6.22
+   ],
+   "force_N": [
+    34.2,
+    -85.2,
+    39.7
+   ],
+   "torque_N_m": [
+    -525,
+    4879,
+    10915
+   ]
+  },
+  {
+   "name": "Ext_RCS_Aft_3_Tan_Neg",
+   "at": [
+    -103.06,
+    -0.53,
+    -6.22
+   ],
+   "force_N": [
+    34.2,
+    85.2,
+    39.7
+   ],
+   "torque_N_m": [
+    525,
+    4879,
+    -10915
+   ]
+  },
+  {
+   "name": "Ext_RCS_Rim_1_Radial",
+   "at": [
+    105.4,
+    11.62,
+    43.35
+   ],
+   "force_N": [
+    -0.0,
+    -25.9,
+    -96.6
+   ],
+   "torque_N_m": [
+    -5,
+    7735,
+    -2073
+   ]
+  },
+  {
+   "name": "Ext_RCS_Rim_1_Tan_Pos",
+   "at": [
+    105.34,
+    10.91,
+    43.1
+   ],
+   "force_N": [
+    34.2,
+    90.8,
+    -24.3
+   ],
+   "torque_N_m": [
+    -4160,
+    3414,
+    6890
+   ]
+  },
+  {
+   "name": "Ext_RCS_Rim_1_Tan_Neg",
+   "at": [
+    105.34,
+    12.1,
+    42.78
+   ],
+   "force_N": [
+    34.2,
+    -90.8,
+    24.3
+   ],
+   "torque_N_m": [
+    4160,
+    -490,
+    -7677
+   ]
+  },
+  {
+   "name": "Ext_RCS_Rim_2_Radial",
+   "at": [
+    105.4,
+    -43.35,
+    11.62
+   ],
+   "force_N": [
+    -0.0,
+    96.6,
+    -25.9
+   ],
+   "torque_N_m": [
+    18,
+    2073,
+    7735
+   ]
+  },
+  {
+   "name": "Ext_RCS_Rim_2_Tan_Pos",
+   "at": [
+    105.34,
+    -43.1,
+    10.91
+   ],
+   "force_N": [
+    34.2,
+    24.3,
+    90.8
+   ],
+   "torque_N_m": [
+    -4172,
+    -6897,
+    3420
+   ]
+  },
+  {
+   "name": "Ext_RCS_Rim_2_Tan_Neg",
+   "at": [
+    105.34,
+    -42.78,
+    12.1
+   ],
+   "force_N": [
+    34.2,
+    -24.3,
+    -90.8
+   ],
+   "torque_N_m": [
+    4172,
+    7670,
+    -483
+   ]
+  },
+  {
+   "name": "Ext_RCS_Rim_3_Radial",
+   "at": [
+    105.4,
+    -11.62,
+    -43.35
+   ],
+   "force_N": [
+    -0.0,
+    25.9,
+    96.6
+   ],
+   "torque_N_m": [
+    5,
+    -7735,
+    2073
+   ]
+  },
+  {
+   "name": "Ext_RCS_Rim_3_Tan_Pos",
+   "at": [
+    105.34,
+    -10.91,
+    -43.1
+   ],
+   "force_N": [
+    34.2,
+    -90.8,
+    24.3
+   ],
+   "torque_N_m": [
+    -4194,
+    -3427,
+    -6890
+   ]
+  },
+  {
+   "name": "Ext_RCS_Rim_3_Tan_Neg",
+   "at": [
+    105.34,
+    -12.1,
+    -42.78
+   ],
+   "force_N": [
+    34.2,
+    90.8,
+    -24.3
+   ],
+   "torque_N_m": [
+    4194,
+    477,
+    7677
+   ]
+  },
+  {
+   "name": "Ext_RCS_Rim_4_Radial",
+   "at": [
+    105.4,
+    43.35,
+    -11.62
+   ],
+   "force_N": [
+    -0.0,
+    -96.6,
+    25.9
+   ],
+   "torque_N_m": [
+    -18,
+    -2073,
+    -7735
+   ]
+  },
+  {
+   "name": "Ext_RCS_Rim_4_Tan_Pos",
+   "at": [
+    105.34,
+    43.1,
+    -10.91
+   ],
+   "force_N": [
+    34.2,
+    -24.3,
+    -90.8
+   ],
+   "torque_N_m": [
+    -4182,
+    6884,
+    -3420
+   ]
+  },
+  {
+   "name": "Ext_RCS_Rim_4_Tan_Neg",
+   "at": [
+    105.34,
+    42.78,
+    -12.1
+   ],
+   "force_N": [
+    34.2,
+    24.3,
+    90.8
+   ],
+   "torque_N_m": [
+    4182,
+    -7683,
+    483
+   ]
+  }
+ ],
+ "los_clear_fraction_full_sky": {
+  "HGA_1_coast": 0.654,
+  "HGA_1_burn15": 0.633,
+  "HGA_2_coast": 0.654,
+  "HGA_2_burn15": 0.633,
+  "OPT_coast": 0.616,
+  "OPT_burn15": 0.598
+ }
+}

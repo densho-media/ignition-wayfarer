@@ -1,0 +1,3106 @@
+{
+ "study": "Ring A port and spin-port turn L2 WHITEBOX (owner 2026-10-17, S&E 15!A198 OWN-RES-RA; r2-A)",
+ "status": "NONCANON PROTOTYPE DISPOSABLE STUDY; L2 COMPARATIVE / ALL HIGH-G SAFETY HOLD; no port, chamber, cutout or rating released",
+ "method": "ringb_unified.survey worst case (RINGB-006) in disposable workspaces; [human_entry.study] knobs of crew_transfer.vestibule; U = worst of A/C/K, S = suited; PASS >= 0.05 m, MARGINAL 0..0.05, FAIL < 0",
+ "worst_case_over": {
+  "U": [
+   "injury classes A rigid litter, C vacuum mattress, K litter + kit",
+   "body size x1.00 and x1.08",
+   "doors open 1.00 and 0.90",
+   "search seeds 17,101,102,103 (+201,202 large, 301 doors 0.90)",
+   "6 pose families (axis seed x roll -30/0/+30 deg) with six +-0.02 m / +-0.05 rad wobbles",
+   "two rescuers (both ends, inline and +-0.10 m lateral)"
+  ],
+  "S": [
+   "suited casualty S (0.857 m capsule on a litter frame)",
+   "body size x1.00 and x1.08",
+   "doors open 1.00 and 0.90",
+   "search seeds",
+   "6 pose families with wobbles",
+   "two rescuers"
+  ]
+ },
+ "variants": {
+  "built": {
+   "spec": {
+    "pc": null,
+    "depth": 0.0,
+    "note": "ring A as built (2026-10-13 worst-case re-run)"
+   },
+   "geom": null,
+   "routes": {
+    "A1": {
+     "states": [
+      "0g",
+      "stopped",
+      "locked_1.5g"
+     ],
+     "U": {
+      "least_m": -0.103,
+      "status": "FAIL",
+      "nearest": "Crew_Trunk",
+      "case": "A x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": -0.103,
+       "C": 0.018,
+       "K": -0.103
+      }
+     },
+     "S": {
+      "least_m": -0.171,
+      "status": "FAIL",
+      "nearest": "Crew_Trunk_Arrest_Rail",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.171
+      }
+     }
+    },
+    "A2": {
+     "states": [
+      "spin"
+     ],
+     "U": {
+      "least_m": -0.14,
+      "status": "FAIL",
+      "nearest": "Structural_Spine",
+      "case": "A x1.00 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": -0.14,
+       "C": -0.14,
+       "K": -0.14
+      }
+     },
+     "S": {
+      "least_m": -0.455,
+      "status": "FAIL",
+      "nearest": "Crew_Trunk",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.455
+      }
+     }
+    },
+    "A3": {
+     "states": [
+      "spin"
+     ],
+     "U": {
+      "least_m": -0.14,
+      "status": "FAIL",
+      "nearest": "Structural_Spine",
+      "case": "A x1.00 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": -0.14,
+       "C": -0.14,
+       "K": -0.14
+      }
+     },
+     "S": {
+      "least_m": -0.452,
+      "status": "FAIL",
+      "nearest": "Crew_Trunk",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.452
+      }
+     }
+    },
+    "A1-A2": {
+     "states": [
+      "stopped",
+      "locked_1.5g"
+     ],
+     "U": {
+      "least_m": -0.065,
+      "status": "FAIL",
+      "nearest": "Crew_Vestibule_1",
+      "case": "K x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": -0.052,
+       "C": 0.014,
+       "K": -0.065
+      }
+     },
+     "S": {
+      "least_m": -0.243,
+      "status": "FAIL",
+      "nearest": "Structural_Spine",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.243
+      }
+     }
+    },
+    "A3-A2": {
+     "states": [
+      "stopped",
+      "locked_1.5g"
+     ],
+     "U": {
+      "least_m": -0.073,
+      "status": "FAIL",
+      "nearest": "Crew_Vestibule_1_Fit_Frame_4",
+      "case": "A x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": -0.073,
+       "C": 0.021,
+       "K": -0.067
+      }
+     },
+     "S": {
+      "least_m": -0.251,
+      "status": "FAIL",
+      "nearest": "Structural_Spine",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.251
+      }
+     }
+    },
+    "A2-M": {
+     "states": [
+      "spin"
+     ],
+     "U": {
+      "least_m": -0.14,
+      "status": "FAIL",
+      "nearest": "Structural_Spine",
+      "case": "A x1.00 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": -0.14,
+       "C": -0.14,
+       "K": -0.14
+      }
+     },
+     "S": {
+      "least_m": -0.455,
+      "status": "FAIL",
+      "nearest": "Crew_Trunk",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.455
+      }
+     }
+    },
+    "A1-A2-M": {
+     "states": [
+      "stopped",
+      "locked_1.5g"
+     ],
+     "U": {
+      "least_m": -0.065,
+      "status": "FAIL",
+      "nearest": "Crew_Vestibule_1",
+      "case": "K x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": -0.052,
+       "C": 0.014,
+       "K": -0.065
+      }
+     },
+     "S": {
+      "least_m": -0.243,
+      "status": "FAIL",
+      "nearest": "Structural_Spine",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.243
+      }
+     }
+    },
+    "A3-A2-M": {
+     "states": [
+      "stopped",
+      "locked_1.5g"
+     ],
+     "U": {
+      "least_m": -0.073,
+      "status": "FAIL",
+      "nearest": "Crew_Vestibule_1_Fit_Frame_4",
+      "case": "A x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": -0.073,
+       "C": 0.021,
+       "K": -0.067
+      }
+     },
+     "S": {
+      "least_m": -0.251,
+      "status": "FAIL",
+      "nearest": "Structural_Spine",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.251
+      }
+     }
+    }
+   }
+  },
+  "RA_D20": {
+   "spec": {
+    "pc": null,
+    "depth": 0.2,
+    "note": "chamber 0.20 m deeper, port as built (1.60 m)"
+   },
+   "geom": {
+    "variant": "RA_D20",
+    "port_clear_m": 1.6,
+    "vestibule_u_m": [
+     -3.6,
+     -1.3
+    ],
+    "chamber_clear_radius_m": 2.125,
+    "chamber_outer_radius_m": 2.175,
+    "mesh_overlaps": {},
+    "done": true
+   },
+   "routes": {
+    "A1": {
+     "states": [
+      "0g",
+      "stopped",
+      "locked_1.5g"
+     ],
+     "U": {
+      "least_m": -0.103,
+      "status": "FAIL",
+      "nearest": "Crew_Trunk",
+      "case": "A x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": -0.103,
+       "C": 0.018,
+       "K": -0.103
+      }
+     },
+     "S": {
+      "least_m": -0.171,
+      "status": "FAIL",
+      "nearest": "Crew_Trunk_Arrest_Rail",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.171
+      }
+     }
+    },
+    "A2": {
+     "states": [
+      "spin"
+     ],
+     "U": {
+      "least_m": -0.106,
+      "status": "FAIL",
+      "nearest": "Crew_Port_1_1",
+      "case": "A x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": -0.106,
+       "C": -0.076,
+       "K": -0.106
+      }
+     },
+     "S": {
+      "least_m": -0.344,
+      "status": "FAIL",
+      "nearest": "Crew_Port_1_1",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.344
+      }
+     }
+    },
+    "A3": {
+     "states": [
+      "spin"
+     ],
+     "U": {
+      "least_m": -0.114,
+      "status": "FAIL",
+      "nearest": "Crew_Port_1_1",
+      "case": "K x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": -0.11,
+       "C": -0.078,
+       "K": -0.114
+      }
+     },
+     "S": {
+      "least_m": -0.337,
+      "status": "FAIL",
+      "nearest": "Crew_Port_1_1",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.337
+      }
+     }
+    },
+    "A1-A2": {
+     "states": [
+      "stopped",
+      "locked_1.5g"
+     ],
+     "U": {
+      "least_m": 0.012,
+      "status": "MARGINAL",
+      "nearest": "Structural_Spine",
+      "case": "A x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": 0.012,
+       "C": 0.074,
+       "K": 0.012
+      }
+     },
+     "S": {
+      "least_m": -0.159,
+      "status": "FAIL",
+      "nearest": "Structural_Spine",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.159
+      }
+     }
+    },
+    "A3-A2": {
+     "states": [
+      "stopped",
+      "locked_1.5g"
+     ],
+     "U": {
+      "least_m": 0.012,
+      "status": "MARGINAL",
+      "nearest": "Structural_Spine",
+      "case": "A x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": 0.012,
+       "C": 0.079,
+       "K": 0.012
+      }
+     },
+     "S": {
+      "least_m": -0.152,
+      "status": "FAIL",
+      "nearest": "Structural_Spine",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.152
+      }
+     }
+    },
+    "A2-M": {
+     "states": [
+      "spin"
+     ],
+     "U": {
+      "least_m": -0.106,
+      "status": "FAIL",
+      "nearest": "Crew_Port_1_1",
+      "case": "A x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": -0.106,
+       "C": -0.076,
+       "K": -0.106
+      }
+     },
+     "S": {
+      "least_m": -0.344,
+      "status": "FAIL",
+      "nearest": "Crew_Port_1_1",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.344
+      }
+     }
+    },
+    "A1-A2-M": {
+     "states": [
+      "stopped",
+      "locked_1.5g"
+     ],
+     "U": {
+      "least_m": 0.012,
+      "status": "MARGINAL",
+      "nearest": "Medical_Couch",
+      "case": "A x1.00 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": 0.012,
+       "C": 0.018,
+       "K": 0.012
+      }
+     },
+     "S": {
+      "least_m": -0.18,
+      "status": "FAIL",
+      "nearest": "Medical_Couch",
+      "case": "S x1.00 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.18
+      }
+     }
+    },
+    "A3-A2-M": {
+     "states": [
+      "stopped",
+      "locked_1.5g"
+     ],
+     "U": {
+      "least_m": 0.012,
+      "status": "MARGINAL",
+      "nearest": "Medical_Couch",
+      "case": "A x1.00 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": 0.012,
+       "C": 0.018,
+       "K": 0.012
+      }
+     },
+     "S": {
+      "least_m": -0.18,
+      "status": "FAIL",
+      "nearest": "Medical_Couch",
+      "case": "S x1.00 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.18
+      }
+     }
+    }
+   }
+  },
+  "RA_D40": {
+   "spec": {
+    "pc": null,
+    "depth": 0.4,
+    "note": "chamber 0.40 m deeper, port as built (1.60 m)"
+   },
+   "geom": {
+    "variant": "RA_D40",
+    "port_clear_m": 1.6,
+    "vestibule_u_m": [
+     -3.6,
+     -1.3
+    ],
+    "chamber_clear_radius_m": 2.325,
+    "chamber_outer_radius_m": 2.375,
+    "mesh_overlaps": {},
+    "done": true
+   },
+   "routes": {
+    "A1": {
+     "states": [
+      "0g",
+      "stopped",
+      "locked_1.5g"
+     ],
+     "U": {
+      "least_m": -0.103,
+      "status": "FAIL",
+      "nearest": "Crew_Trunk",
+      "case": "A x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": -0.103,
+       "C": 0.018,
+       "K": -0.103
+      }
+     },
+     "S": {
+      "least_m": -0.171,
+      "status": "FAIL",
+      "nearest": "Crew_Trunk_Arrest_Rail",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.171
+      }
+     }
+    },
+    "A2": {
+     "states": [
+      "spin"
+     ],
+     "U": {
+      "least_m": -0.106,
+      "status": "FAIL",
+      "nearest": "Crew_Trunk_Ladder_Stile_1",
+      "case": "K x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": -0.104,
+       "C": 0.018,
+       "K": -0.106
+      }
+     },
+     "S": {
+      "least_m": -0.171,
+      "status": "FAIL",
+      "nearest": "Crew_Trunk_Arrest_Rail",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.171
+      }
+     }
+    },
+    "A3": {
+     "states": [
+      "spin"
+     ],
+     "U": {
+      "least_m": -0.104,
+      "status": "FAIL",
+      "nearest": "Crew_Trunk_Ladder_Stile_1",
+      "case": "A x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": -0.104,
+       "C": 0.018,
+       "K": -0.104
+      }
+     },
+     "S": {
+      "least_m": -0.171,
+      "status": "FAIL",
+      "nearest": "Crew_Trunk_Arrest_Rail",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.171
+      }
+     }
+    },
+    "A1-A2": {
+     "states": [
+      "stopped",
+      "locked_1.5g"
+     ],
+     "U": {
+      "least_m": 0.033,
+      "status": "MARGINAL",
+      "nearest": "Crew_Tube_1_2",
+      "case": "K x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": 0.038,
+       "C": 0.066,
+       "K": 0.033
+      }
+     },
+     "S": {
+      "least_m": -0.122,
+      "status": "FAIL",
+      "nearest": "Crew_Tube_1_1_Floor_Ladder_2_Arrest_Rail",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.122
+      }
+     }
+    },
+    "A3-A2": {
+     "states": [
+      "stopped",
+      "locked_1.5g"
+     ],
+     "U": {
+      "least_m": 0.033,
+      "status": "MARGINAL",
+      "nearest": "Crew_Tube_1_2",
+      "case": "K x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": 0.036,
+       "C": 0.066,
+       "K": 0.033
+      }
+     },
+     "S": {
+      "least_m": -0.114,
+      "status": "FAIL",
+      "nearest": "Crew_Tube_1_2_Floor_Ladder_2_Arrest_Rail",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.114
+      }
+     }
+    },
+    "A2-M": {
+     "states": [
+      "spin"
+     ],
+     "U": {
+      "least_m": -0.106,
+      "status": "FAIL",
+      "nearest": "Crew_Trunk_Ladder_Stile_1",
+      "case": "K x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": -0.104,
+       "C": 0.018,
+       "K": -0.106
+      }
+     },
+     "S": {
+      "least_m": -0.171,
+      "status": "FAIL",
+      "nearest": "Crew_Trunk_Arrest_Rail",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.171
+      }
+     }
+    },
+    "A1-A2-M": {
+     "states": [
+      "stopped",
+      "locked_1.5g"
+     ],
+     "U": {
+      "least_m": 0.023,
+      "status": "MARGINAL",
+      "nearest": "Medical_Couch",
+      "case": "A x1.00 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": 0.023,
+       "C": 0.029,
+       "K": 0.023
+      }
+     },
+     "S": {
+      "least_m": -0.179,
+      "status": "FAIL",
+      "nearest": "Medical_Couch",
+      "case": "S x1.00 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.179
+      }
+     }
+    },
+    "A3-A2-M": {
+     "states": [
+      "stopped",
+      "locked_1.5g"
+     ],
+     "U": {
+      "least_m": 0.023,
+      "status": "MARGINAL",
+      "nearest": "Medical_Couch",
+      "case": "A x1.00 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": 0.023,
+       "C": 0.029,
+       "K": 0.023
+      }
+     },
+     "S": {
+      "least_m": -0.179,
+      "status": "FAIL",
+      "nearest": "Medical_Couch",
+      "case": "S x1.00 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.179
+      }
+     }
+    }
+   }
+  },
+  "RA_D20_JG": {
+   "spec": {
+    "pc": null,
+    "depth": 0.2,
+    "base": "RA_D20",
+    "lad": {
+     "kind": "jog",
+     "dth": 30.0,
+     "drl": 0.04
+    },
+    "note": "RA_D20 + trunk ladder and arrest rail joggled 30 deg away from the swing side and 0.04 m outward in the port window (L1-A JG/OR style)"
+   },
+   "geom": {
+    "variant": "RA_D20_JG",
+    "port_clear_m": 1.6,
+    "vestibule_u_m": [
+     -3.6,
+     -1.3
+    ],
+    "chamber_clear_radius_m": 2.125,
+    "chamber_outer_radius_m": 2.175,
+    "mesh_overlaps": {},
+    "done": true,
+    "ladder": {
+     "port_x_m": 82.599,
+     "window_x_m": [
+      81.499,
+      83.699
+     ],
+     "members": {
+      "Crew_Trunk_Ladder_Stile_1": {
+       "x_start_m": 81.667,
+       "in_window": true,
+       "deg": [
+        295.2,
+        298.4
+       ],
+       "max_radius_m": 0.696
+      },
+      "Crew_Trunk_Ladder_Stile_2": {
+       "x_start_m": 81.667,
+       "in_window": true,
+       "deg": [
+        331.8,
+        334.6
+       ],
+       "max_radius_m": 0.697
+      },
+      "Crew_Trunk_Ladder_Brackets": {
+       "x_start_m": 81.737,
+       "in_window": true,
+       "deg": [
+        295.9,
+        334.1
+       ],
+       "max_radius_m": 0.84
+      },
+      "Crew_Trunk_Ladder_Rungs": {
+       "x_start_m": 81.882,
+       "in_window": true,
+       "deg": [
+        296.4,
+        333.6
+       ],
+       "max_radius_m": 0.694
+      },
+      "Crew_Trunk_Arrest_Rail": {
+       "x_start_m": 81.849,
+       "in_window": true,
+       "deg": [
+        313.0,
+        316.9
+       ],
+       "max_radius_m": 0.63
+      },
+      "Crew_Trunk_Arrest_Rail_Brackets": {
+       "x_start_m": 81.887,
+       "in_window": true,
+       "deg": [
+        314.0,
+        316.0
+       ],
+       "max_radius_m": 0.84
+      }
+     }
+    }
+   },
+   "routes": {
+    "A1": {
+     "states": [
+      "0g",
+      "stopped",
+      "locked_1.5g"
+     ],
+     "U": {
+      "least_m": -0.033,
+      "status": "FAIL",
+      "nearest": "Crew_Trunk_Handrail_2_1",
+      "case": "K x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": 0.001,
+       "C": 0.088,
+       "K": -0.033
+      }
+     },
+     "S": {
+      "least_m": -0.113,
+      "status": "FAIL",
+      "nearest": "Crew_Tube_1_1_Floor_Ladder_2_Arrest_Rail",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.113
+      }
+     }
+    },
+    "A2": {
+     "states": [
+      "spin"
+     ],
+     "U": {
+      "least_m": -0.106,
+      "status": "FAIL",
+      "nearest": "Crew_Port_1_1",
+      "case": "A x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": -0.106,
+       "C": -0.076,
+       "K": -0.106
+      }
+     },
+     "S": {
+      "least_m": -0.344,
+      "status": "FAIL",
+      "nearest": "Crew_Port_1_1",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.344
+      }
+     }
+    },
+    "A3": {
+     "states": [
+      "spin"
+     ],
+     "U": {
+      "least_m": -0.132,
+      "status": "FAIL",
+      "nearest": "Crew_Port_1_1",
+      "case": "K x1.08 doors 1.00 seed 202 staff",
+      "per_class": {
+       "A": -0.11,
+       "C": -0.078,
+       "K": -0.132
+      }
+     },
+     "S": {
+      "least_m": -0.337,
+      "status": "FAIL",
+      "nearest": "Crew_Port_1_1",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.337
+      }
+     }
+    },
+    "A1-A2": {
+     "states": [
+      "stopped",
+      "locked_1.5g"
+     ],
+     "U": {
+      "least_m": 0.012,
+      "status": "MARGINAL",
+      "nearest": "Structural_Spine",
+      "case": "A x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": 0.012,
+       "C": 0.074,
+       "K": 0.012
+      }
+     },
+     "S": {
+      "least_m": -0.159,
+      "status": "FAIL",
+      "nearest": "Structural_Spine",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.159
+      }
+     }
+    },
+    "A3-A2": {
+     "states": [
+      "stopped",
+      "locked_1.5g"
+     ],
+     "U": {
+      "least_m": 0.012,
+      "status": "MARGINAL",
+      "nearest": "Structural_Spine",
+      "case": "A x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": 0.012,
+       "C": 0.079,
+       "K": 0.012
+      }
+     },
+     "S": {
+      "least_m": -0.152,
+      "status": "FAIL",
+      "nearest": "Structural_Spine",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.152
+      }
+     }
+    },
+    "A2-M": {
+     "states": [
+      "spin"
+     ],
+     "U": {
+      "least_m": -0.106,
+      "status": "FAIL",
+      "nearest": "Crew_Port_1_1",
+      "case": "A x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": -0.106,
+       "C": -0.076,
+       "K": -0.106
+      }
+     },
+     "S": {
+      "least_m": -0.344,
+      "status": "FAIL",
+      "nearest": "Crew_Port_1_1",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.344
+      }
+     }
+    },
+    "A1-A2-M": {
+     "states": [
+      "stopped",
+      "locked_1.5g"
+     ],
+     "U": {
+      "least_m": 0.012,
+      "status": "MARGINAL",
+      "nearest": "Medical_Couch",
+      "case": "A x1.00 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": 0.012,
+       "C": 0.018,
+       "K": 0.012
+      }
+     },
+     "S": {
+      "least_m": -0.18,
+      "status": "FAIL",
+      "nearest": "Medical_Couch",
+      "case": "S x1.00 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.18
+      }
+     }
+    },
+    "A3-A2-M": {
+     "states": [
+      "stopped",
+      "locked_1.5g"
+     ],
+     "U": {
+      "least_m": 0.012,
+      "status": "MARGINAL",
+      "nearest": "Medical_Couch",
+      "case": "A x1.00 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": 0.012,
+       "C": 0.018,
+       "K": 0.012
+      }
+     },
+     "S": {
+      "least_m": -0.18,
+      "status": "FAIL",
+      "nearest": "Medical_Couch",
+      "case": "S x1.00 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.18
+      }
+     }
+    }
+   }
+  },
+  "RA_D20_CL": {
+   "spec": {
+    "pc": null,
+    "depth": 0.2,
+    "base": "RA_D20",
+    "lad": {
+     "kind": "cut",
+     "pad": 0.25
+    },
+    "note": "RA_D20 + trunk ladder and arrest rail start above the port window (the bend free of members; the lower section folds away, PROTOTYPE)"
+   },
+   "geom": {
+    "variant": "RA_D20_CL",
+    "port_clear_m": 1.6,
+    "vestibule_u_m": [
+     -3.6,
+     -1.3
+    ],
+    "chamber_clear_radius_m": 2.125,
+    "chamber_outer_radius_m": 2.175,
+    "mesh_overlaps": {},
+    "done": true,
+    "ladder": {
+     "port_x_m": 82.599,
+     "window_x_m": [
+      81.499,
+      83.699
+     ],
+     "members": {
+      "Crew_Trunk_Ladder_Stile_1": {
+       "x_start_m": 83.699,
+       "in_window": true,
+       "deg": [
+        265.2,
+        268.4
+       ],
+       "max_radius_m": 0.656
+      },
+      "Crew_Trunk_Ladder_Stile_2": {
+       "x_start_m": 83.699,
+       "in_window": true,
+       "deg": [
+        301.8,
+        304.6
+       ],
+       "max_radius_m": 0.657
+      },
+      "Crew_Trunk_Ladder_Brackets": {
+       "x_start_m": 84.53,
+       "in_window": true,
+       "deg": [
+        265.9,
+        304.1
+       ],
+       "max_radius_m": 0.8
+      },
+      "Crew_Trunk_Ladder_Rungs": {
+       "x_start_m": 83.708,
+       "in_window": true,
+       "deg": [
+        266.4,
+        303.6
+       ],
+       "max_radius_m": 0.654
+      },
+      "Crew_Trunk_Arrest_Rail": {
+       "x_start_m": 83.699,
+       "in_window": true,
+       "deg": [
+        283.0,
+        286.9
+       ],
+       "max_radius_m": 0.59
+      },
+      "Crew_Trunk_Arrest_Rail_Brackets": {
+       "x_start_m": 98.544,
+       "in_window": true,
+       "deg": [
+        284.0,
+        286.0
+       ],
+       "max_radius_m": 0.8
+      }
+     }
+    }
+   },
+   "routes": {
+    "A1": {
+     "states": [
+      "0g",
+      "stopped",
+      "locked_1.5g"
+     ],
+     "U": {
+      "least_m": -0.046,
+      "status": "FAIL",
+      "nearest": "Crew_Trunk_Arrest_Rail",
+      "case": "K x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": -0.035,
+       "C": 0.072,
+       "K": -0.046
+      }
+     },
+     "S": {
+      "least_m": -0.113,
+      "status": "FAIL",
+      "nearest": "Crew_Tube_1_1_Floor_Ladder_2_Arrest_Rail",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.113
+      }
+     }
+    },
+    "A2": {
+     "states": [
+      "spin"
+     ],
+     "U": {
+      "least_m": -0.106,
+      "status": "FAIL",
+      "nearest": "Crew_Port_1_1",
+      "case": "A x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": -0.106,
+       "C": -0.076,
+       "K": -0.106
+      }
+     },
+     "S": {
+      "least_m": -0.344,
+      "status": "FAIL",
+      "nearest": "Crew_Port_1_1",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.344
+      }
+     }
+    },
+    "A3": {
+     "states": [
+      "spin"
+     ],
+     "U": {
+      "least_m": -0.114,
+      "status": "FAIL",
+      "nearest": "Crew_Trunk",
+      "case": "K x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": -0.11,
+       "C": -0.078,
+       "K": -0.114
+      }
+     },
+     "S": {
+      "least_m": -0.337,
+      "status": "FAIL",
+      "nearest": "Crew_Port_1_1",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.337
+      }
+     }
+    },
+    "A1-A2": {
+     "states": [
+      "stopped",
+      "locked_1.5g"
+     ],
+     "U": {
+      "least_m": 0.012,
+      "status": "MARGINAL",
+      "nearest": "Structural_Spine",
+      "case": "A x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": 0.012,
+       "C": 0.074,
+       "K": 0.012
+      }
+     },
+     "S": {
+      "least_m": -0.159,
+      "status": "FAIL",
+      "nearest": "Structural_Spine",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.159
+      }
+     }
+    },
+    "A3-A2": {
+     "states": [
+      "stopped",
+      "locked_1.5g"
+     ],
+     "U": {
+      "least_m": 0.012,
+      "status": "MARGINAL",
+      "nearest": "Structural_Spine",
+      "case": "A x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": 0.012,
+       "C": 0.079,
+       "K": 0.012
+      }
+     },
+     "S": {
+      "least_m": -0.152,
+      "status": "FAIL",
+      "nearest": "Structural_Spine",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.152
+      }
+     }
+    },
+    "A2-M": {
+     "states": [
+      "spin"
+     ],
+     "U": {
+      "least_m": -0.106,
+      "status": "FAIL",
+      "nearest": "Crew_Port_1_1",
+      "case": "A x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": -0.106,
+       "C": -0.076,
+       "K": -0.106
+      }
+     },
+     "S": {
+      "least_m": -0.344,
+      "status": "FAIL",
+      "nearest": "Crew_Port_1_1",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.344
+      }
+     }
+    },
+    "A1-A2-M": {
+     "states": [
+      "stopped",
+      "locked_1.5g"
+     ],
+     "U": {
+      "least_m": 0.012,
+      "status": "MARGINAL",
+      "nearest": "Medical_Couch",
+      "case": "A x1.00 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": 0.012,
+       "C": 0.018,
+       "K": 0.012
+      }
+     },
+     "S": {
+      "least_m": -0.18,
+      "status": "FAIL",
+      "nearest": "Medical_Couch",
+      "case": "S x1.00 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.18
+      }
+     }
+    },
+    "A3-A2-M": {
+     "states": [
+      "stopped",
+      "locked_1.5g"
+     ],
+     "U": {
+      "least_m": 0.012,
+      "status": "MARGINAL",
+      "nearest": "Medical_Couch",
+      "case": "A x1.00 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": 0.012,
+       "C": 0.018,
+       "K": 0.012
+      }
+     },
+     "S": {
+      "least_m": -0.18,
+      "status": "FAIL",
+      "nearest": "Medical_Couch",
+      "case": "S x1.00 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.18
+      }
+     }
+    }
+   }
+  },
+  "RA_D20_CL_CS": {
+   "spec": {
+    "pc": null,
+    "depth": 0.2,
+    "base": "RA_D20",
+    "lad": {
+     "kind": "cut",
+     "pad": 0.25
+    },
+    "cs": true,
+    "note": "RA_D20_CL + couch-side transfer space at A2: the litter parks alongside the Medical_Couch at carry height, the Lab_Bench is relocated (location OPEN)"
+   },
+   "geom": {
+    "variant": "RA_D20_CL_CS",
+    "port_clear_m": 1.6,
+    "vestibule_u_m": [
+     -3.6,
+     -1.3
+    ],
+    "chamber_clear_radius_m": 2.125,
+    "chamber_outer_radius_m": 2.175,
+    "mesh_overlaps": {},
+    "done": true,
+    "ladder": {
+     "port_x_m": 82.599,
+     "window_x_m": [
+      81.499,
+      83.699
+     ],
+     "members": {
+      "Crew_Trunk_Ladder_Stile_1": {
+       "x_start_m": 83.699,
+       "in_window": true,
+       "deg": [
+        265.2,
+        268.4
+       ],
+       "max_radius_m": 0.656
+      },
+      "Crew_Trunk_Ladder_Stile_2": {
+       "x_start_m": 83.699,
+       "in_window": true,
+       "deg": [
+        301.8,
+        304.6
+       ],
+       "max_radius_m": 0.657
+      },
+      "Crew_Trunk_Ladder_Brackets": {
+       "x_start_m": 84.53,
+       "in_window": true,
+       "deg": [
+        265.9,
+        304.1
+       ],
+       "max_radius_m": 0.8
+      },
+      "Crew_Trunk_Ladder_Rungs": {
+       "x_start_m": 83.708,
+       "in_window": true,
+       "deg": [
+        266.4,
+        303.6
+       ],
+       "max_radius_m": 0.654
+      },
+      "Crew_Trunk_Arrest_Rail": {
+       "x_start_m": 83.699,
+       "in_window": true,
+       "deg": [
+        283.0,
+        286.9
+       ],
+       "max_radius_m": 0.59
+      },
+      "Crew_Trunk_Arrest_Rail_Brackets": {
+       "x_start_m": 98.544,
+       "in_window": true,
+       "deg": [
+        284.0,
+        286.0
+       ],
+       "max_radius_m": 0.8
+      }
+     }
+    },
+    "couch_side": {
+     "litter_centre_z_m": -0.079,
+     "couch_edge_z_m": 0.45,
+     "strip_to_next_block_m": 2.1,
+     "attendant_strip_m": 1.143,
+     "relocated": "Lab_Bench"
+    }
+   },
+   "routes": {
+    "A1": {
+     "states": [
+      "0g",
+      "stopped",
+      "locked_1.5g"
+     ],
+     "U": {
+      "least_m": -0.046,
+      "status": "FAIL",
+      "nearest": "Crew_Trunk_Arrest_Rail",
+      "case": "K x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": -0.035,
+       "C": 0.072,
+       "K": -0.046
+      }
+     },
+     "S": {
+      "least_m": -0.113,
+      "status": "FAIL",
+      "nearest": "Crew_Tube_1_1_Floor_Ladder_2_Arrest_Rail",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.113
+      }
+     }
+    },
+    "A2": {
+     "states": [
+      "spin"
+     ],
+     "U": {
+      "least_m": -0.106,
+      "status": "FAIL",
+      "nearest": "Crew_Port_1_1",
+      "case": "A x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": -0.106,
+       "C": -0.076,
+       "K": -0.106
+      }
+     },
+     "S": {
+      "least_m": -0.344,
+      "status": "FAIL",
+      "nearest": "Crew_Port_1_1",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.344
+      }
+     }
+    },
+    "A3": {
+     "states": [
+      "spin"
+     ],
+     "U": {
+      "least_m": -0.114,
+      "status": "FAIL",
+      "nearest": "Crew_Trunk",
+      "case": "K x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": -0.11,
+       "C": -0.078,
+       "K": -0.114
+      }
+     },
+     "S": {
+      "least_m": -0.337,
+      "status": "FAIL",
+      "nearest": "Crew_Port_1_1",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.337
+      }
+     }
+    },
+    "A1-A2": {
+     "states": [
+      "stopped",
+      "locked_1.5g"
+     ],
+     "U": {
+      "least_m": 0.012,
+      "status": "MARGINAL",
+      "nearest": "Structural_Spine",
+      "case": "A x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": 0.012,
+       "C": 0.074,
+       "K": 0.012
+      }
+     },
+     "S": {
+      "least_m": -0.159,
+      "status": "FAIL",
+      "nearest": "Structural_Spine",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.159
+      }
+     }
+    },
+    "A3-A2": {
+     "states": [
+      "stopped",
+      "locked_1.5g"
+     ],
+     "U": {
+      "least_m": 0.012,
+      "status": "MARGINAL",
+      "nearest": "Structural_Spine",
+      "case": "A x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": 0.012,
+       "C": 0.079,
+       "K": 0.012
+      }
+     },
+     "S": {
+      "least_m": -0.152,
+      "status": "FAIL",
+      "nearest": "Structural_Spine",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.152
+      }
+     }
+    },
+    "A2-M": {
+     "states": [
+      "spin"
+     ],
+     "U": {
+      "least_m": -0.106,
+      "status": "FAIL",
+      "nearest": "Crew_Port_1_1",
+      "case": "A x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": -0.106,
+       "C": -0.076,
+       "K": -0.106
+      }
+     },
+     "S": {
+      "least_m": -0.344,
+      "status": "FAIL",
+      "nearest": "Crew_Port_1_1",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.344
+      }
+     }
+    },
+    "A1-A2-M": {
+     "states": [
+      "stopped",
+      "locked_1.5g"
+     ],
+     "U": {
+      "least_m": 0.012,
+      "status": "MARGINAL",
+      "nearest": "Structural_Spine",
+      "case": "A x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": 0.012,
+       "C": 0.074,
+       "K": 0.012
+      }
+     },
+     "S": {
+      "least_m": -0.159,
+      "status": "FAIL",
+      "nearest": "Structural_Spine",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.159
+      }
+     }
+    },
+    "A3-A2-M": {
+     "states": [
+      "stopped",
+      "locked_1.5g"
+     ],
+     "U": {
+      "least_m": 0.012,
+      "status": "MARGINAL",
+      "nearest": "Structural_Spine",
+      "case": "A x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": 0.012,
+       "C": 0.079,
+       "K": 0.012
+      }
+     },
+     "S": {
+      "least_m": -0.152,
+      "status": "FAIL",
+      "nearest": "Structural_Spine",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.152
+      }
+     }
+    }
+   }
+  },
+  "RA_D40_JG": {
+   "spec": {
+    "pc": null,
+    "depth": 0.4,
+    "base": "RA_D40",
+    "lad": {
+     "kind": "jog",
+     "dth": 30.0,
+     "drl": 0.04
+    },
+    "note": "RA_D40 + trunk ladder and arrest rail joggled 30 deg away from the swing side and 0.04 m outward in the port window (L1-A JG/OR style)"
+   },
+   "geom": {
+    "variant": "RA_D40_JG",
+    "port_clear_m": 1.6,
+    "vestibule_u_m": [
+     -3.6,
+     -1.3
+    ],
+    "chamber_clear_radius_m": 2.325,
+    "chamber_outer_radius_m": 2.375,
+    "mesh_overlaps": {},
+    "done": true,
+    "ladder": {
+     "port_x_m": 82.599,
+     "window_x_m": [
+      81.499,
+      83.699
+     ],
+     "members": {
+      "Crew_Trunk_Ladder_Stile_1": {
+       "x_start_m": 81.667,
+       "in_window": true,
+       "deg": [
+        295.2,
+        298.4
+       ],
+       "max_radius_m": 0.696
+      },
+      "Crew_Trunk_Ladder_Stile_2": {
+       "x_start_m": 81.667,
+       "in_window": true,
+       "deg": [
+        331.8,
+        334.6
+       ],
+       "max_radius_m": 0.697
+      },
+      "Crew_Trunk_Ladder_Brackets": {
+       "x_start_m": 81.737,
+       "in_window": true,
+       "deg": [
+        295.9,
+        334.1
+       ],
+       "max_radius_m": 0.84
+      },
+      "Crew_Trunk_Ladder_Rungs": {
+       "x_start_m": 81.882,
+       "in_window": true,
+       "deg": [
+        296.4,
+        333.6
+       ],
+       "max_radius_m": 0.694
+      },
+      "Crew_Trunk_Arrest_Rail": {
+       "x_start_m": 81.849,
+       "in_window": true,
+       "deg": [
+        313.0,
+        316.9
+       ],
+       "max_radius_m": 0.63
+      },
+      "Crew_Trunk_Arrest_Rail_Brackets": {
+       "x_start_m": 81.887,
+       "in_window": true,
+       "deg": [
+        314.0,
+        316.0
+       ],
+       "max_radius_m": 0.84
+      }
+     }
+    }
+   },
+   "routes": {
+    "A1": {
+     "states": [
+      "0g",
+      "stopped",
+      "locked_1.5g"
+     ],
+     "U": {
+      "least_m": -0.033,
+      "status": "FAIL",
+      "nearest": "Crew_Trunk_Handrail_2_1",
+      "case": "K x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": 0.001,
+       "C": 0.094,
+       "K": -0.033
+      }
+     },
+     "S": {
+      "least_m": -0.117,
+      "status": "FAIL",
+      "nearest": "Crew_Tube_1_1_Floor_Ladder_2_Arrest_Rail",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.117
+      }
+     }
+    },
+    "A2": {
+     "states": [
+      "spin"
+     ],
+     "U": {
+      "least_m": -0.039,
+      "status": "FAIL",
+      "nearest": "Crew_Trunk_Ladder_Stile_1",
+      "case": "K x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": -0.013,
+       "C": 0.038,
+       "K": -0.039
+      }
+     },
+     "S": {
+      "least_m": -0.169,
+      "status": "FAIL",
+      "nearest": "Crew_Port_1_1",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.169
+      }
+     }
+    },
+    "A3": {
+     "states": [
+      "spin"
+     ],
+     "U": {
+      "least_m": -0.033,
+      "status": "FAIL",
+      "nearest": "Crew_Trunk_Handrail_2_1",
+      "case": "K x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": -0.014,
+       "C": 0.04,
+       "K": -0.033
+      }
+     },
+     "S": {
+      "least_m": -0.165,
+      "status": "FAIL",
+      "nearest": "Crew_Port_1_1",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.165
+      }
+     }
+    },
+    "A1-A2": {
+     "states": [
+      "stopped",
+      "locked_1.5g"
+     ],
+     "U": {
+      "least_m": 0.033,
+      "status": "MARGINAL",
+      "nearest": "Crew_Tube_1_2",
+      "case": "K x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": 0.038,
+       "C": 0.066,
+       "K": 0.033
+      }
+     },
+     "S": {
+      "least_m": -0.122,
+      "status": "FAIL",
+      "nearest": "Crew_Tube_1_1_Floor_Ladder_2_Arrest_Rail",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.122
+      }
+     }
+    },
+    "A3-A2": {
+     "states": [
+      "stopped",
+      "locked_1.5g"
+     ],
+     "U": {
+      "least_m": 0.033,
+      "status": "MARGINAL",
+      "nearest": "Crew_Tube_1_2",
+      "case": "K x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": 0.036,
+       "C": 0.066,
+       "K": 0.033
+      }
+     },
+     "S": {
+      "least_m": -0.114,
+      "status": "FAIL",
+      "nearest": "Crew_Tube_1_2_Floor_Ladder_2_Arrest_Rail",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.114
+      }
+     }
+    },
+    "A2-M": {
+     "states": [
+      "spin"
+     ],
+     "U": {
+      "least_m": -0.039,
+      "status": "FAIL",
+      "nearest": "Crew_Trunk_Ladder_Stile_1",
+      "case": "K x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": -0.013,
+       "C": 0.038,
+       "K": -0.039
+      }
+     },
+     "S": {
+      "least_m": -0.169,
+      "status": "FAIL",
+      "nearest": "Crew_Port_1_1",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.169
+      }
+     }
+    },
+    "A1-A2-M": {
+     "states": [
+      "stopped",
+      "locked_1.5g"
+     ],
+     "U": {
+      "least_m": 0.023,
+      "status": "MARGINAL",
+      "nearest": "Medical_Couch",
+      "case": "A x1.00 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": 0.023,
+       "C": 0.029,
+       "K": 0.023
+      }
+     },
+     "S": {
+      "least_m": -0.179,
+      "status": "FAIL",
+      "nearest": "Medical_Couch",
+      "case": "S x1.00 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.179
+      }
+     }
+    },
+    "A3-A2-M": {
+     "states": [
+      "stopped",
+      "locked_1.5g"
+     ],
+     "U": {
+      "least_m": 0.023,
+      "status": "MARGINAL",
+      "nearest": "Medical_Couch",
+      "case": "A x1.00 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": 0.023,
+       "C": 0.029,
+       "K": 0.023
+      }
+     },
+     "S": {
+      "least_m": -0.179,
+      "status": "FAIL",
+      "nearest": "Medical_Couch",
+      "case": "S x1.00 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.179
+      }
+     }
+    }
+   }
+  },
+  "RA_D40_CL": {
+   "spec": {
+    "pc": null,
+    "depth": 0.4,
+    "base": "RA_D40",
+    "lad": {
+     "kind": "cut",
+     "pad": 0.25
+    },
+    "note": "RA_D40 + trunk ladder and arrest rail start above the port window (the bend free of members; the lower section folds away, PROTOTYPE)"
+   },
+   "geom": {
+    "variant": "RA_D40_CL",
+    "port_clear_m": 1.6,
+    "vestibule_u_m": [
+     -3.6,
+     -1.3
+    ],
+    "chamber_clear_radius_m": 2.325,
+    "chamber_outer_radius_m": 2.375,
+    "mesh_overlaps": {},
+    "done": true,
+    "ladder": {
+     "port_x_m": 82.599,
+     "window_x_m": [
+      81.499,
+      83.699
+     ],
+     "members": {
+      "Crew_Trunk_Ladder_Stile_1": {
+       "x_start_m": 83.699,
+       "in_window": true,
+       "deg": [
+        265.2,
+        268.4
+       ],
+       "max_radius_m": 0.656
+      },
+      "Crew_Trunk_Ladder_Stile_2": {
+       "x_start_m": 83.699,
+       "in_window": true,
+       "deg": [
+        301.8,
+        304.6
+       ],
+       "max_radius_m": 0.657
+      },
+      "Crew_Trunk_Ladder_Brackets": {
+       "x_start_m": 84.53,
+       "in_window": true,
+       "deg": [
+        265.9,
+        304.1
+       ],
+       "max_radius_m": 0.8
+      },
+      "Crew_Trunk_Ladder_Rungs": {
+       "x_start_m": 83.708,
+       "in_window": true,
+       "deg": [
+        266.4,
+        303.6
+       ],
+       "max_radius_m": 0.654
+      },
+      "Crew_Trunk_Arrest_Rail": {
+       "x_start_m": 83.699,
+       "in_window": true,
+       "deg": [
+        283.0,
+        286.9
+       ],
+       "max_radius_m": 0.59
+      },
+      "Crew_Trunk_Arrest_Rail_Brackets": {
+       "x_start_m": 98.544,
+       "in_window": true,
+       "deg": [
+        284.0,
+        286.0
+       ],
+       "max_radius_m": 0.8
+      }
+     }
+    }
+   },
+   "routes": {
+    "A1": {
+     "states": [
+      "0g",
+      "stopped",
+      "locked_1.5g"
+     ],
+     "U": {
+      "least_m": -0.046,
+      "status": "FAIL",
+      "nearest": "Crew_Trunk_Arrest_Rail",
+      "case": "K x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": -0.035,
+       "C": 0.072,
+       "K": -0.046
+      }
+     },
+     "S": {
+      "least_m": -0.117,
+      "status": "FAIL",
+      "nearest": "Crew_Tube_1_1_Floor_Ladder_2_Arrest_Rail",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.117
+      }
+     }
+    },
+    "A2": {
+     "states": [
+      "spin"
+     ],
+     "U": {
+      "least_m": -0.05,
+      "status": "FAIL",
+      "nearest": "Crew_Trunk_Arrest_Rail",
+      "case": "K x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": -0.043,
+       "C": 0.038,
+       "K": -0.05
+      }
+     },
+     "S": {
+      "least_m": -0.169,
+      "status": "FAIL",
+      "nearest": "Crew_Port_1_1",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.169
+      }
+     }
+    },
+    "A3": {
+     "states": [
+      "spin"
+     ],
+     "U": {
+      "least_m": -0.046,
+      "status": "FAIL",
+      "nearest": "Crew_Trunk_Arrest_Rail",
+      "case": "K x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": -0.043,
+       "C": 0.04,
+       "K": -0.046
+      }
+     },
+     "S": {
+      "least_m": -0.165,
+      "status": "FAIL",
+      "nearest": "Crew_Port_1_1",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.165
+      }
+     }
+    },
+    "A1-A2": {
+     "states": [
+      "stopped",
+      "locked_1.5g"
+     ],
+     "U": {
+      "least_m": 0.033,
+      "status": "MARGINAL",
+      "nearest": "Crew_Tube_1_2",
+      "case": "K x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": 0.038,
+       "C": 0.066,
+       "K": 0.033
+      }
+     },
+     "S": {
+      "least_m": -0.122,
+      "status": "FAIL",
+      "nearest": "Crew_Tube_1_1_Floor_Ladder_2_Arrest_Rail",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.122
+      }
+     }
+    },
+    "A3-A2": {
+     "states": [
+      "stopped",
+      "locked_1.5g"
+     ],
+     "U": {
+      "least_m": 0.033,
+      "status": "MARGINAL",
+      "nearest": "Crew_Tube_1_2",
+      "case": "K x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": 0.036,
+       "C": 0.066,
+       "K": 0.033
+      }
+     },
+     "S": {
+      "least_m": -0.114,
+      "status": "FAIL",
+      "nearest": "Crew_Tube_1_2_Floor_Ladder_2_Arrest_Rail",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.114
+      }
+     }
+    },
+    "A2-M": {
+     "states": [
+      "spin"
+     ],
+     "U": {
+      "least_m": -0.05,
+      "status": "FAIL",
+      "nearest": "Crew_Trunk_Arrest_Rail",
+      "case": "K x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": -0.043,
+       "C": 0.038,
+       "K": -0.05
+      }
+     },
+     "S": {
+      "least_m": -0.169,
+      "status": "FAIL",
+      "nearest": "Crew_Port_1_1",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.169
+      }
+     }
+    },
+    "A1-A2-M": {
+     "states": [
+      "stopped",
+      "locked_1.5g"
+     ],
+     "U": {
+      "least_m": 0.023,
+      "status": "MARGINAL",
+      "nearest": "Medical_Couch",
+      "case": "A x1.00 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": 0.023,
+       "C": 0.029,
+       "K": 0.023
+      }
+     },
+     "S": {
+      "least_m": -0.179,
+      "status": "FAIL",
+      "nearest": "Medical_Couch",
+      "case": "S x1.00 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.179
+      }
+     }
+    },
+    "A3-A2-M": {
+     "states": [
+      "stopped",
+      "locked_1.5g"
+     ],
+     "U": {
+      "least_m": 0.023,
+      "status": "MARGINAL",
+      "nearest": "Medical_Couch",
+      "case": "A x1.00 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": 0.023,
+       "C": 0.029,
+       "K": 0.023
+      }
+     },
+     "S": {
+      "least_m": -0.179,
+      "status": "FAIL",
+      "nearest": "Medical_Couch",
+      "case": "S x1.00 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.179
+      }
+     }
+    }
+   }
+  },
+  "RA_D40_CL_CS": {
+   "spec": {
+    "pc": null,
+    "depth": 0.4,
+    "base": "RA_D40",
+    "lad": {
+     "kind": "cut",
+     "pad": 0.25
+    },
+    "cs": true,
+    "note": "RA_D40_CL + couch-side transfer space at A2: the litter parks alongside the Medical_Couch at carry height, the Lab_Bench is relocated (location OPEN)"
+   },
+   "geom": {
+    "variant": "RA_D40_CL_CS",
+    "port_clear_m": 1.6,
+    "vestibule_u_m": [
+     -3.6,
+     -1.3
+    ],
+    "chamber_clear_radius_m": 2.325,
+    "chamber_outer_radius_m": 2.375,
+    "mesh_overlaps": {},
+    "done": true,
+    "ladder": {
+     "port_x_m": 82.599,
+     "window_x_m": [
+      81.499,
+      83.699
+     ],
+     "members": {
+      "Crew_Trunk_Ladder_Stile_1": {
+       "x_start_m": 83.699,
+       "in_window": true,
+       "deg": [
+        265.2,
+        268.4
+       ],
+       "max_radius_m": 0.656
+      },
+      "Crew_Trunk_Ladder_Stile_2": {
+       "x_start_m": 83.699,
+       "in_window": true,
+       "deg": [
+        301.8,
+        304.6
+       ],
+       "max_radius_m": 0.657
+      },
+      "Crew_Trunk_Ladder_Brackets": {
+       "x_start_m": 84.53,
+       "in_window": true,
+       "deg": [
+        265.9,
+        304.1
+       ],
+       "max_radius_m": 0.8
+      },
+      "Crew_Trunk_Ladder_Rungs": {
+       "x_start_m": 83.708,
+       "in_window": true,
+       "deg": [
+        266.4,
+        303.6
+       ],
+       "max_radius_m": 0.654
+      },
+      "Crew_Trunk_Arrest_Rail": {
+       "x_start_m": 83.699,
+       "in_window": true,
+       "deg": [
+        283.0,
+        286.9
+       ],
+       "max_radius_m": 0.59
+      },
+      "Crew_Trunk_Arrest_Rail_Brackets": {
+       "x_start_m": 98.544,
+       "in_window": true,
+       "deg": [
+        284.0,
+        286.0
+       ],
+       "max_radius_m": 0.8
+      }
+     }
+    },
+    "couch_side": {
+     "litter_centre_z_m": -0.079,
+     "couch_edge_z_m": 0.45,
+     "strip_to_next_block_m": 2.1,
+     "attendant_strip_m": 1.143,
+     "relocated": "Lab_Bench"
+    }
+   },
+   "routes": {
+    "A1": {
+     "states": [
+      "0g",
+      "stopped",
+      "locked_1.5g"
+     ],
+     "U": {
+      "least_m": -0.046,
+      "status": "FAIL",
+      "nearest": "Crew_Trunk_Arrest_Rail",
+      "case": "K x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": -0.035,
+       "C": 0.072,
+       "K": -0.046
+      }
+     },
+     "S": {
+      "least_m": -0.117,
+      "status": "FAIL",
+      "nearest": "Crew_Tube_1_1_Floor_Ladder_2_Arrest_Rail",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.117
+      }
+     }
+    },
+    "A2": {
+     "states": [
+      "spin"
+     ],
+     "U": {
+      "least_m": -0.05,
+      "status": "FAIL",
+      "nearest": "Crew_Trunk_Arrest_Rail",
+      "case": "K x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": -0.043,
+       "C": 0.038,
+       "K": -0.05
+      }
+     },
+     "S": {
+      "least_m": -0.169,
+      "status": "FAIL",
+      "nearest": "Crew_Port_1_1",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.169
+      }
+     }
+    },
+    "A3": {
+     "states": [
+      "spin"
+     ],
+     "U": {
+      "least_m": -0.046,
+      "status": "FAIL",
+      "nearest": "Crew_Trunk_Arrest_Rail",
+      "case": "K x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": -0.043,
+       "C": 0.04,
+       "K": -0.046
+      }
+     },
+     "S": {
+      "least_m": -0.165,
+      "status": "FAIL",
+      "nearest": "Crew_Port_1_1",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.165
+      }
+     }
+    },
+    "A1-A2": {
+     "states": [
+      "stopped",
+      "locked_1.5g"
+     ],
+     "U": {
+      "least_m": 0.033,
+      "status": "MARGINAL",
+      "nearest": "Crew_Tube_1_2",
+      "case": "K x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": 0.038,
+       "C": 0.066,
+       "K": 0.033
+      }
+     },
+     "S": {
+      "least_m": -0.122,
+      "status": "FAIL",
+      "nearest": "Crew_Tube_1_1_Floor_Ladder_2_Arrest_Rail",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.122
+      }
+     }
+    },
+    "A3-A2": {
+     "states": [
+      "stopped",
+      "locked_1.5g"
+     ],
+     "U": {
+      "least_m": 0.033,
+      "status": "MARGINAL",
+      "nearest": "Crew_Tube_1_2",
+      "case": "K x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": 0.036,
+       "C": 0.066,
+       "K": 0.033
+      }
+     },
+     "S": {
+      "least_m": -0.114,
+      "status": "FAIL",
+      "nearest": "Crew_Tube_1_2_Floor_Ladder_2_Arrest_Rail",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.114
+      }
+     }
+    },
+    "A2-M": {
+     "states": [
+      "spin"
+     ],
+     "U": {
+      "least_m": -0.05,
+      "status": "FAIL",
+      "nearest": "Crew_Trunk_Arrest_Rail",
+      "case": "K x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": -0.043,
+       "C": 0.038,
+       "K": -0.05
+      }
+     },
+     "S": {
+      "least_m": -0.169,
+      "status": "FAIL",
+      "nearest": "Crew_Port_1_1",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.169
+      }
+     }
+    },
+    "A1-A2-M": {
+     "states": [
+      "stopped",
+      "locked_1.5g"
+     ],
+     "U": {
+      "least_m": 0.033,
+      "status": "MARGINAL",
+      "nearest": "Crew_Tube_1_2",
+      "case": "K x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": 0.038,
+       "C": 0.066,
+       "K": 0.033
+      }
+     },
+     "S": {
+      "least_m": -0.122,
+      "status": "FAIL",
+      "nearest": "Crew_Tube_1_1_Floor_Ladder_2_Arrest_Rail",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.122
+      }
+     }
+    },
+    "A3-A2-M": {
+     "states": [
+      "stopped",
+      "locked_1.5g"
+     ],
+     "U": {
+      "least_m": 0.033,
+      "status": "MARGINAL",
+      "nearest": "Crew_Tube_1_2",
+      "case": "K x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": 0.036,
+       "C": 0.066,
+       "K": 0.033
+      }
+     },
+     "S": {
+      "least_m": -0.114,
+      "status": "FAIL",
+      "nearest": "Crew_Tube_1_2_Floor_Ladder_2_Arrest_Rail",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.114
+      }
+     }
+    }
+   }
+  },
+  "RA_D40_CF60_TR_CS": {
+   "spec": {
+    "pc": null,
+    "depth": 0.4,
+    "base": "RA_D40",
+    "cs": true,
+    "lad": {
+     "kind": "cut",
+     "pad": 0.6,
+     "extra": [
+      "Crew_Trunk_Handrail_2"
+     ],
+     "fold": [
+      "Crew_Tube_1_1_Floor_Ladder_2_Arrest_Rail",
+      "Crew_Tube_1_2_Floor_Ladder_2_Arrest_Rail"
+     ]
+    },
+    "note": "RA_D40_CL_CS with the cut 0.60 m above the port window, trunk handrail 2 cut too, and the tube floor-ladder-2 arrest rails folded away (PROTOTYPE stowable sections)"
+   },
+   "geom": {
+    "variant": "RA_D40_CF60_TR_CS",
+    "port_clear_m": 1.6,
+    "vestibule_u_m": [
+     -3.6,
+     -1.3
+    ],
+    "chamber_clear_radius_m": 2.325,
+    "chamber_outer_radius_m": 2.375,
+    "mesh_overlaps": {},
+    "done": true,
+    "ladder": {
+     "port_x_m": 82.599,
+     "window_x_m": [
+      81.499,
+      83.699
+     ],
+     "members": {
+      "Crew_Trunk_Ladder_Stile_1": {
+       "x_start_m": 84.049,
+       "in_window": true,
+       "deg": [
+        265.2,
+        268.4
+       ],
+       "max_radius_m": 0.656
+      },
+      "Crew_Trunk_Ladder_Stile_2": {
+       "x_start_m": 84.049,
+       "in_window": true,
+       "deg": [
+        301.8,
+        304.6
+       ],
+       "max_radius_m": 0.657
+      },
+      "Crew_Trunk_Ladder_Brackets": {
+       "x_start_m": 84.53,
+       "in_window": true,
+       "deg": [
+        265.9,
+        304.1
+       ],
+       "max_radius_m": 0.8
+      },
+      "Crew_Trunk_Ladder_Rungs": {
+       "x_start_m": 84.282,
+       "in_window": true,
+       "deg": [
+        266.4,
+        303.6
+       ],
+       "max_radius_m": 0.654
+      },
+      "Crew_Trunk_Arrest_Rail": {
+       "x_start_m": 84.049,
+       "in_window": true,
+       "deg": [
+        283.0,
+        286.9
+       ],
+       "max_radius_m": 0.59
+      },
+      "Crew_Trunk_Arrest_Rail_Brackets": {
+       "x_start_m": 98.544,
+       "in_window": true,
+       "deg": [
+        284.0,
+        286.0
+       ],
+       "max_radius_m": 0.8
+      }
+     }
+    },
+    "couch_side": {
+     "litter_centre_z_m": -0.079,
+     "couch_edge_z_m": 0.45,
+     "strip_to_next_block_m": 2.1,
+     "attendant_strip_m": 1.143,
+     "relocated": "Lab_Bench"
+    }
+   },
+   "routes": {
+    "A1": {
+     "states": [
+      "0g",
+      "stopped",
+      "locked_1.5g"
+     ],
+     "U": {
+      "least_m": -0.008,
+      "status": "FAIL",
+      "nearest": "Trunk_Fit_Supply_Diffuser",
+      "case": "A x1.08 doors 1.00 seed 202 staff",
+      "per_class": {
+       "A": -0.008,
+       "C": 0.084,
+       "K": 0.012
+      }
+     },
+     "S": {
+      "least_m": -0.069,
+      "status": "FAIL",
+      "nearest": "Crew_Trunk_Arrest_Rail",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.069
+      }
+     }
+    },
+    "A2": {
+     "states": [
+      "spin"
+     ],
+     "U": {
+      "least_m": -0.013,
+      "status": "FAIL",
+      "nearest": "Crew_Port_1_1",
+      "case": "A x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": -0.013,
+       "C": 0.038,
+       "K": -0.013
+      }
+     },
+     "S": {
+      "least_m": -0.169,
+      "status": "FAIL",
+      "nearest": "Crew_Port_1_1",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.169
+      }
+     }
+    },
+    "A3": {
+     "states": [
+      "spin"
+     ],
+     "U": {
+      "least_m": -0.014,
+      "status": "FAIL",
+      "nearest": "Crew_Port_1_1",
+      "case": "A x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": -0.014,
+       "C": 0.04,
+       "K": -0.014
+      }
+     },
+     "S": {
+      "least_m": -0.165,
+      "status": "FAIL",
+      "nearest": "Crew_Port_1_1",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.165
+      }
+     }
+    },
+    "A1-A2": {
+     "states": [
+      "stopped",
+      "locked_1.5g"
+     ],
+     "U": {
+      "least_m": 0.033,
+      "status": "MARGINAL",
+      "nearest": "Crew_Tube_1_2",
+      "case": "K x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": 0.038,
+       "C": 0.084,
+       "K": 0.033
+      }
+     },
+     "S": {
+      "least_m": -0.067,
+      "status": "FAIL",
+      "nearest": "Crew_Tube_1_1_Floor_Ladder_2_Arrest_Rail_Brackets",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.067
+      }
+     }
+    },
+    "A3-A2": {
+     "states": [
+      "stopped",
+      "locked_1.5g"
+     ],
+     "U": {
+      "least_m": 0.033,
+      "status": "MARGINAL",
+      "nearest": "Crew_Tube_1_2",
+      "case": "K x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": 0.036,
+       "C": 0.084,
+       "K": 0.033
+      }
+     },
+     "S": {
+      "least_m": -0.113,
+      "status": "FAIL",
+      "nearest": "Crew_Tube_1_3_Floor_Ladder_2_Arrest_Rail",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.113
+      }
+     }
+    },
+    "A2-M": {
+     "states": [
+      "spin"
+     ],
+     "U": {
+      "least_m": -0.013,
+      "status": "FAIL",
+      "nearest": "Crew_Port_1_1",
+      "case": "A x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": -0.013,
+       "C": 0.038,
+       "K": -0.013
+      }
+     },
+     "S": {
+      "least_m": -0.169,
+      "status": "FAIL",
+      "nearest": "Crew_Port_1_1",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.169
+      }
+     }
+    },
+    "A1-A2-M": {
+     "states": [
+      "stopped",
+      "locked_1.5g"
+     ],
+     "U": {
+      "least_m": 0.033,
+      "status": "MARGINAL",
+      "nearest": "Crew_Tube_1_2",
+      "case": "K x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": 0.038,
+       "C": 0.084,
+       "K": 0.033
+      }
+     },
+     "S": {
+      "least_m": -0.067,
+      "status": "FAIL",
+      "nearest": "Crew_Tube_1_1_Floor_Ladder_2_Arrest_Rail_Brackets",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.067
+      }
+     }
+    },
+    "A3-A2-M": {
+     "states": [
+      "stopped",
+      "locked_1.5g"
+     ],
+     "U": {
+      "least_m": 0.033,
+      "status": "MARGINAL",
+      "nearest": "Crew_Tube_1_2",
+      "case": "K x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": 0.036,
+       "C": 0.084,
+       "K": 0.033
+      }
+     },
+     "S": {
+      "least_m": -0.113,
+      "status": "FAIL",
+      "nearest": "Crew_Tube_1_3_Floor_Ladder_2_Arrest_Rail",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.113
+      }
+     }
+    }
+   }
+  },
+  "RA_D40_CF100_TR_CS": {
+   "spec": {
+    "pc": null,
+    "depth": 0.4,
+    "base": "RA_D40",
+    "cs": true,
+    "lad": {
+     "kind": "cut",
+     "pad": 1.0,
+     "extra": [
+      "Crew_Trunk_Handrail_2"
+     ],
+     "fold": [
+      "Crew_Tube_1_1_Floor_Ladder_2_Arrest_Rail",
+      "Crew_Tube_1_2_Floor_Ladder_2_Arrest_Rail"
+     ]
+    },
+    "note": "RA_D40_CL_CS with the cut 1.00 m above the port window, trunk handrail 2 cut too, and the tube floor-ladder-2 arrest rails folded away (PROTOTYPE stowable sections)"
+   },
+   "geom": {
+    "variant": "RA_D40_CF100_TR_CS",
+    "port_clear_m": 1.6,
+    "vestibule_u_m": [
+     -3.6,
+     -1.3
+    ],
+    "chamber_clear_radius_m": 2.325,
+    "chamber_outer_radius_m": 2.375,
+    "mesh_overlaps": {},
+    "done": true,
+    "ladder": {
+     "port_x_m": 82.599,
+     "window_x_m": [
+      81.499,
+      83.699
+     ],
+     "members": {
+      "Crew_Trunk_Ladder_Stile_1": {
+       "x_start_m": 84.449,
+       "in_window": true,
+       "deg": [
+        265.2,
+        268.4
+       ],
+       "max_radius_m": 0.656
+      },
+      "Crew_Trunk_Ladder_Stile_2": {
+       "x_start_m": 84.449,
+       "in_window": true,
+       "deg": [
+        301.8,
+        304.6
+       ],
+       "max_radius_m": 0.657
+      },
+      "Crew_Trunk_Ladder_Brackets": {
+       "x_start_m": 84.53,
+       "in_window": true,
+       "deg": [
+        265.9,
+        304.1
+       ],
+       "max_radius_m": 0.8
+      },
+      "Crew_Trunk_Ladder_Rungs": {
+       "x_start_m": 84.582,
+       "in_window": true,
+       "deg": [
+        266.4,
+        303.6
+       ],
+       "max_radius_m": 0.654
+      },
+      "Crew_Trunk_Arrest_Rail": {
+       "x_start_m": 84.449,
+       "in_window": true,
+       "deg": [
+        283.0,
+        286.9
+       ],
+       "max_radius_m": 0.59
+      },
+      "Crew_Trunk_Arrest_Rail_Brackets": {
+       "x_start_m": 98.544,
+       "in_window": true,
+       "deg": [
+        284.0,
+        286.0
+       ],
+       "max_radius_m": 0.8
+      }
+     }
+    },
+    "couch_side": {
+     "litter_centre_z_m": -0.079,
+     "couch_edge_z_m": 0.45,
+     "strip_to_next_block_m": 2.1,
+     "attendant_strip_m": 1.143,
+     "relocated": "Lab_Bench"
+    }
+   },
+   "routes": {
+    "A1": {
+     "states": [
+      "0g",
+      "stopped",
+      "locked_1.5g"
+     ],
+     "U": {
+      "least_m": 0.012,
+      "status": "MARGINAL",
+      "nearest": "Trunk_Fit_Frame_1_1",
+      "case": "K x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": 0.021,
+       "C": 0.088,
+       "K": 0.012
+      }
+     },
+     "S": {
+      "least_m": -0.064,
+      "status": "FAIL",
+      "nearest": "Crew_Tube_1_1_Floor_Ladder_2_Arrest_Rail_Brackets",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.064
+      }
+     }
+    },
+    "A2": {
+     "states": [
+      "spin"
+     ],
+     "U": {
+      "least_m": -0.013,
+      "status": "FAIL",
+      "nearest": "Crew_Port_1_1",
+      "case": "A x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": -0.013,
+       "C": 0.038,
+       "K": -0.013
+      }
+     },
+     "S": {
+      "least_m": -0.169,
+      "status": "FAIL",
+      "nearest": "Crew_Port_1_1",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.169
+      }
+     }
+    },
+    "A3": {
+     "states": [
+      "spin"
+     ],
+     "U": {
+      "least_m": -0.014,
+      "status": "FAIL",
+      "nearest": "Crew_Port_1_1",
+      "case": "A x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": -0.014,
+       "C": 0.04,
+       "K": -0.014
+      }
+     },
+     "S": {
+      "least_m": -0.165,
+      "status": "FAIL",
+      "nearest": "Crew_Port_1_1",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.165
+      }
+     }
+    },
+    "A1-A2": {
+     "states": [
+      "stopped",
+      "locked_1.5g"
+     ],
+     "U": {
+      "least_m": 0.033,
+      "status": "MARGINAL",
+      "nearest": "Crew_Tube_1_2",
+      "case": "K x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": 0.038,
+       "C": 0.084,
+       "K": 0.033
+      }
+     },
+     "S": {
+      "least_m": -0.067,
+      "status": "FAIL",
+      "nearest": "Crew_Tube_1_1_Floor_Ladder_2_Arrest_Rail_Brackets",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.067
+      }
+     }
+    },
+    "A3-A2": {
+     "states": [
+      "stopped",
+      "locked_1.5g"
+     ],
+     "U": {
+      "least_m": 0.033,
+      "status": "MARGINAL",
+      "nearest": "Crew_Tube_1_2",
+      "case": "K x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": 0.036,
+       "C": 0.084,
+       "K": 0.033
+      }
+     },
+     "S": {
+      "least_m": -0.113,
+      "status": "FAIL",
+      "nearest": "Crew_Tube_1_3_Floor_Ladder_2_Arrest_Rail",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.113
+      }
+     }
+    },
+    "A2-M": {
+     "states": [
+      "spin"
+     ],
+     "U": {
+      "least_m": -0.013,
+      "status": "FAIL",
+      "nearest": "Crew_Port_1_1",
+      "case": "A x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": -0.013,
+       "C": 0.038,
+       "K": -0.013
+      }
+     },
+     "S": {
+      "least_m": -0.169,
+      "status": "FAIL",
+      "nearest": "Crew_Port_1_1",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.169
+      }
+     }
+    },
+    "A1-A2-M": {
+     "states": [
+      "stopped",
+      "locked_1.5g"
+     ],
+     "U": {
+      "least_m": 0.033,
+      "status": "MARGINAL",
+      "nearest": "Crew_Tube_1_2",
+      "case": "K x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": 0.038,
+       "C": 0.084,
+       "K": 0.033
+      }
+     },
+     "S": {
+      "least_m": -0.067,
+      "status": "FAIL",
+      "nearest": "Crew_Tube_1_1_Floor_Ladder_2_Arrest_Rail_Brackets",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.067
+      }
+     }
+    },
+    "A3-A2-M": {
+     "states": [
+      "stopped",
+      "locked_1.5g"
+     ],
+     "U": {
+      "least_m": 0.033,
+      "status": "MARGINAL",
+      "nearest": "Crew_Tube_1_2",
+      "case": "K x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "A": 0.036,
+       "C": 0.084,
+       "K": 0.033
+      }
+     },
+     "S": {
+      "least_m": -0.113,
+      "status": "FAIL",
+      "nearest": "Crew_Tube_1_3_Floor_Ladder_2_Arrest_Rail",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "per_class": {
+       "S": -0.113
+      }
+     }
+    }
+   }
+  }
+ },
+ "not_buildable": {
+  "RA_P090": "spine port 1.80 m clear > 1.60 m trunk bore: human_entry.check math domain error (asin(clear/trunk radius) > 1)"
+ }
+}

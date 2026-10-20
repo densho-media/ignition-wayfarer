@@ -1,0 +1,1574 @@
+{
+ "status": "WORKING DIRECTION (robotic-only aft, 15!A213 / 98!A117) / FLIGHT_EVA HOLD / DGT-009 HOLD",
+ "rules": {
+  "working_reach_m": 1.6,
+  "step_m": 0.5,
+  "join_m": 0.6,
+  "dock_transfer_m": 1.5,
+  "note": "PROTOTYPE: robot working reach = the slice 3 crew rule (1.60 m) so the counts compare; manipulator / tool reach OPEN (15!A186)"
+ },
+ "network": {
+  "tracks": {
+   "Robot_Casing_Long_0": 182.4,
+   "Robot_Casing_Long_120": 182.4,
+   "Robot_Casing_Long_240": 182.4,
+   "Robot_Casing_Hoop_Aft_0": 9.9,
+   "Robot_Casing_Hoop_Aft_1": 9.9,
+   "Robot_Casing_Hoop_Aft_2": 9.9,
+   "Robot_Casing_Hoop_Fwd": 38.6,
+   "Robot_Ring_Spur_30": 2.1,
+   "Robot_Ring_Spur_90": 3.2,
+   "Robot_Ring_Spur_150": 2.1,
+   "Robot_Ring_Spur_210": 3.2,
+   "Robot_Ring_Spur_270": 2.1,
+   "Robot_Ring_Spur_330": 3.2,
+   "Robot_DS13_Track_0": 181.4,
+   "Robot_DS13_Track_1": 181.4
+  },
+  "total_m": 994.2,
+  "nodes": 1980
+ },
+ "docks": {
+  "Drone_Dock_DS-13_1": {
+   "station": "DS-13",
+   "node": 1270,
+   "transfer_m": 0.17,
+   "on_network": true
+  },
+  "Drone_Dock_DS-13_2": {
+   "station": "DS-13",
+   "node": 1435,
+   "transfer_m": 0.24,
+   "on_network": true
+  },
+  "Drone_Dock_DS-13_3": {
+   "station": "DS-13",
+   "node": 1604,
+   "transfer_m": 0.23,
+   "on_network": true
+  },
+  "Drone_Dock_DS-14_1": {
+   "station": "DS-14",
+   "node": 1104,
+   "transfer_m": 1.1,
+   "on_network": true
+  },
+  "Drone_Dock_DS-14_2": {
+   "station": "DS-14",
+   "node": 1142,
+   "transfer_m": 1.1,
+   "on_network": true
+  }
+ },
+ "summary": {
+  "targets": 57,
+  "robot_reach": 55,
+  "unreachable": [
+   "Ext_HGA_1_Gimbal",
+   "Ext_HGA_2_Gimbal"
+  ],
+  "drive_zone": 6,
+  "longest_path_m": 212.8,
+  "max_reach_needed_m": 1.59,
+  "longest_path_with_third_cradle_m": 102.8,
+  "third_cradle": {
+   "at": [
+    -99.5,
+    -5.38,
+    -3.11
+   ],
+   "transfer_m": 1.1,
+   "note": "PROTOTYPE DS-14 style cradle at 210 deg beside the DS-16 arm: the 150-270 deg aft sector has no aft dock"
+  }
+ },
+ "targets": [
+  {
+   "target": "Ext_RCS_Aft_1",
+   "why": "aft RCS pod",
+   "zone": "DRIVE_ZONE",
+   "track_distance_m": 0.89,
+   "access": "ROBOT_REACH",
+   "path_from_dock_m": 7.0,
+   "from_track_point": [
+    -102.4,
+    5.2,
+    3.64
+   ],
+   "arm_DS16_distance_m": 13.52,
+   "gates": [
+    "BLADES_COLD (DOP-08; blade cooldown curve OPEN, 45 H-01)",
+    "DRIVE_SAFE: drive off, field, plume, radiation and cryo states released (DOP-09, DGT-008 keep-out)"
+   ],
+   "point": [
+    -103.0,
+    5.17,
+    2.985
+   ],
+   "path_with_third_cradle_m": 7.0
+  },
+  {
+   "target": "Ext_RCS_Aft_2",
+   "why": "aft RCS pod",
+   "zone": "DRIVE_ZONE",
+   "track_distance_m": 0.89,
+   "access": "ROBOT_REACH",
+   "path_from_dock_m": 212.8,
+   "from_track_point": [
+    -102.4,
+    -5.76,
+    2.68
+   ],
+   "arm_DS16_distance_m": 8.53,
+   "gates": [
+    "BLADES_COLD (DOP-08; blade cooldown curve OPEN, 45 H-01)",
+    "DRIVE_SAFE: drive off, field, plume, radiation and cryo states released (DOP-09, DGT-008 keep-out)"
+   ],
+   "point": [
+    -103.0,
+    -5.17,
+    2.985
+   ],
+   "path_with_third_cradle_m": 7.0
+  },
+  {
+   "target": "Ext_RCS_Aft_3",
+   "why": "aft RCS pod",
+   "zone": "DRIVE_ZONE",
+   "track_distance_m": 0.89,
+   "access": "ROBOT_REACH",
+   "path_from_dock_m": 7.0,
+   "from_track_point": [
+    -102.4,
+    0.55,
+    -6.33
+   ],
+   "arm_DS16_distance_m": 8.53,
+   "gates": [
+    "BLADES_COLD (DOP-08; blade cooldown curve OPEN, 45 H-01)",
+    "DRIVE_SAFE: drive off, field, plume, radiation and cryo states released (DOP-09, DGT-008 keep-out)"
+   ],
+   "point": [
+    -103.0,
+    -0.0,
+    -5.97
+   ],
+   "path_with_third_cradle_m": 7.0
+  },
+  {
+   "target": "Ext_HGA_1_Gimbal",
+   "why": "antenna gimbal / feed service",
+   "zone": "DRIVE_ZONE",
+   "track_distance_m": 2.24,
+   "access": "UNREACHABLE",
+   "path_from_dock_m": 3.2,
+   "from_track_point": [
+    -103.6,
+    0.0,
+    7.1
+   ],
+   "arm_DS16_distance_m": 15.32,
+   "gates": [
+    "BLADES_COLD (DOP-08; blade cooldown curve OPEN, 45 H-01)",
+    "DRIVE_SAFE: drive off, field, plume, radiation and cryo states released (DOP-09, DGT-008 keep-out)"
+   ],
+   "point": [
+    -105.0,
+    0.0,
+    8.85
+   ],
+   "path_with_third_cradle_m": 3.2
+  },
+  {
+   "target": "Ext_HGA_2_Gimbal",
+   "why": "antenna gimbal / feed service",
+   "zone": "DRIVE_ZONE",
+   "track_distance_m": 2.24,
+   "access": "UNREACHABLE",
+   "path_from_dock_m": 209.0,
+   "from_track_point": [
+    -103.6,
+    -6.15,
+    -3.55
+   ],
+   "arm_DS16_distance_m": 8.44,
+   "gates": [
+    "BLADES_COLD (DOP-08; blade cooldown curve OPEN, 45 H-01)",
+    "DRIVE_SAFE: drive off, field, plume, radiation and cryo states released (DOP-09, DGT-008 keep-out)"
+   ],
+   "point": [
+    -105.0,
+    -7.664,
+    -4.425
+   ],
+   "path_with_third_cradle_m": 3.2
+  },
+  {
+   "target": "Ext_OPT_Gimbal",
+   "why": "antenna gimbal / feed service",
+   "zone": "DRIVE_ZONE",
+   "track_distance_m": 1.59,
+   "access": "ROBOT_REACH",
+   "path_from_dock_m": 3.2,
+   "from_track_point": [
+    -103.6,
+    6.15,
+    -3.55
+   ],
+   "arm_DS16_distance_m": 14.55,
+   "gates": [
+    "BLADES_COLD (DOP-08; blade cooldown curve OPEN, 45 H-01)",
+    "DRIVE_SAFE: drive off, field, plume, radiation and cryo states released (DOP-09, DGT-008 keep-out)"
+   ],
+   "point": [
+    -105.0,
+    6.798,
+    -3.925
+   ],
+   "path_with_third_cradle_m": 3.2
+  },
+  {
+   "target": "Casing_Access_01_000",
+   "why": "casing access panel (cage-to-skin corridor)",
+   "zone": "CASING_BLADE_ROOT_BAND",
+   "track_distance_m": 0.18,
+   "access": "ROBOT_REACH",
+   "path_from_dock_m": 7.2,
+   "from_track_point": [
+    -96.59,
+    6.15,
+    0.0
+   ],
+   "arm_DS16_distance_m": 11.75,
+   "gates": [
+    "BLADES_COLD (DOP-08; blade cooldown curve OPEN, 45 H-01)"
+   ],
+   "point": [
+    -96.5,
+    6.0,
+    0.0
+   ],
+   "path_with_third_cradle_m": 7.2
+  },
+  {
+   "target": "Casing_Access_01_120",
+   "why": "casing access panel (cage-to-skin corridor)",
+   "zone": "CASING_BLADE_ROOT_BAND",
+   "track_distance_m": 0.18,
+   "access": "ROBOT_REACH",
+   "path_from_dock_m": 7.2,
+   "from_track_point": [
+    -96.59,
+    -3.08,
+    5.33
+   ],
+   "arm_DS16_distance_m": 8.61,
+   "gates": [
+    "BLADES_COLD (DOP-08; blade cooldown curve OPEN, 45 H-01)"
+   ],
+   "point": [
+    -96.5,
+    -3.0,
+    5.196
+   ],
+   "path_with_third_cradle_m": 7.2
+  },
+  {
+   "target": "Casing_Access_01_240",
+   "why": "casing access panel (cage-to-skin corridor)",
+   "zone": "CASING_BLADE_ROOT_BAND",
+   "track_distance_m": 0.18,
+   "access": "ROBOT_REACH",
+   "path_from_dock_m": 198.5,
+   "from_track_point": [
+    -96.59,
+    -3.08,
+    -5.33
+   ],
+   "arm_DS16_distance_m": 3.19,
+   "gates": [
+    "BLADES_COLD (DOP-08; blade cooldown curve OPEN, 45 H-01)"
+   ],
+   "point": [
+    -96.5,
+    -3.0,
+    -5.196
+   ],
+   "path_with_third_cradle_m": 7.2
+  },
+  {
+   "target": "Casing_Access_02_000",
+   "why": "casing access panel (cage-to-skin corridor)",
+   "zone": "CASING_BLADE_ROOT_BAND",
+   "track_distance_m": 0.16,
+   "access": "ROBOT_REACH",
+   "path_from_dock_m": 18.8,
+   "from_track_point": [
+    -85.07,
+    6.15,
+    0.0
+   ],
+   "arm_DS16_distance_m": 16.78,
+   "gates": [
+    "BLADES_COLD (DOP-08; blade cooldown curve OPEN, 45 H-01)"
+   ],
+   "point": [
+    -85.0,
+    6.0,
+    0.0
+   ],
+   "path_with_third_cradle_m": 18.8
+  },
+  {
+   "target": "Casing_Access_02_120",
+   "why": "casing access panel (cage-to-skin corridor)",
+   "zone": "CASING_BLADE_ROOT_BAND",
+   "track_distance_m": 0.16,
+   "access": "ROBOT_REACH",
+   "path_from_dock_m": 18.8,
+   "from_track_point": [
+    -85.07,
+    -3.08,
+    5.33
+   ],
+   "arm_DS16_distance_m": 14.76,
+   "gates": [
+    "BLADES_COLD (DOP-08; blade cooldown curve OPEN, 45 H-01)"
+   ],
+   "point": [
+    -85.0,
+    -3.0,
+    5.196
+   ],
+   "path_with_third_cradle_m": 18.8
+  },
+  {
+   "target": "Casing_Access_02_240",
+   "why": "casing access panel (cage-to-skin corridor)",
+   "zone": "CASING_BLADE_ROOT_BAND",
+   "track_distance_m": 0.16,
+   "access": "ROBOT_REACH",
+   "path_from_dock_m": 187.0,
+   "from_track_point": [
+    -85.07,
+    -3.08,
+    -5.33
+   ],
+   "arm_DS16_distance_m": 12.41,
+   "gates": [
+    "BLADES_COLD (DOP-08; blade cooldown curve OPEN, 45 H-01)"
+   ],
+   "point": [
+    -85.0,
+    -3.0,
+    -5.196
+   ],
+   "path_with_third_cradle_m": 18.8
+  },
+  {
+   "target": "Casing_Access_03_000",
+   "why": "casing access panel (cage-to-skin corridor)",
+   "zone": "CASING_BLADE_ROOT_BAND",
+   "track_distance_m": 0.16,
+   "access": "ROBOT_REACH",
+   "path_from_dock_m": 30.8,
+   "from_track_point": [
+    -73.04,
+    6.15,
+    0.0
+   ],
+   "arm_DS16_distance_m": 26.72,
+   "gates": [
+    "BLADES_COLD (DOP-08; blade cooldown curve OPEN, 45 H-01)"
+   ],
+   "point": [
+    -73.0,
+    6.0,
+    0.0
+   ],
+   "path_with_third_cradle_m": 30.8
+  },
+  {
+   "target": "Casing_Access_03_120",
+   "why": "casing access panel (cage-to-skin corridor)",
+   "zone": "CASING_BLADE_ROOT_BAND",
+   "track_distance_m": 0.16,
+   "access": "ROBOT_REACH",
+   "path_from_dock_m": 30.8,
+   "from_track_point": [
+    -73.04,
+    -3.08,
+    5.33
+   ],
+   "arm_DS16_distance_m": 25.49,
+   "gates": [
+    "BLADES_COLD (DOP-08; blade cooldown curve OPEN, 45 H-01)"
+   ],
+   "point": [
+    -73.0,
+    -3.0,
+    5.196
+   ],
+   "path_with_third_cradle_m": 30.8
+  },
+  {
+   "target": "Casing_Access_03_240",
+   "why": "casing access panel (cage-to-skin corridor)",
+   "zone": "CASING_BLADE_ROOT_BAND",
+   "track_distance_m": 0.16,
+   "access": "ROBOT_REACH",
+   "path_from_dock_m": 175.0,
+   "from_track_point": [
+    -73.04,
+    -3.08,
+    -5.33
+   ],
+   "arm_DS16_distance_m": 24.21,
+   "gates": [
+    "BLADES_COLD (DOP-08; blade cooldown curve OPEN, 45 H-01)"
+   ],
+   "point": [
+    -73.0,
+    -3.0,
+    -5.196
+   ],
+   "path_with_third_cradle_m": 30.8
+  },
+  {
+   "target": "Casing_Access_04_000",
+   "why": "casing access panel (cage-to-skin corridor)",
+   "zone": "CASING_BLADE_ROOT_BAND",
+   "track_distance_m": 0.15,
+   "access": "ROBOT_REACH",
+   "path_from_dock_m": 42.8,
+   "from_track_point": [
+    -61.01,
+    6.15,
+    0.0
+   ],
+   "arm_DS16_distance_m": 37.86,
+   "gates": [
+    "BLADES_COLD (DOP-08; blade cooldown curve OPEN, 45 H-01)"
+   ],
+   "point": [
+    -61.0,
+    6.0,
+    0.0
+   ],
+   "path_with_third_cradle_m": 42.8
+  },
+  {
+   "target": "Casing_Access_04_120",
+   "why": "casing access panel (cage-to-skin corridor)",
+   "zone": "CASING_BLADE_ROOT_BAND",
+   "track_distance_m": 0.15,
+   "access": "ROBOT_REACH",
+   "path_from_dock_m": 42.8,
+   "from_track_point": [
+    -61.01,
+    -3.08,
+    5.33
+   ],
+   "arm_DS16_distance_m": 37.01,
+   "gates": [
+    "BLADES_COLD (DOP-08; blade cooldown curve OPEN, 45 H-01)"
+   ],
+   "point": [
+    -61.0,
+    -3.0,
+    5.196
+   ],
+   "path_with_third_cradle_m": 42.8
+  },
+  {
+   "target": "Casing_Access_04_240",
+   "why": "casing access panel (cage-to-skin corridor)",
+   "zone": "CASING_BLADE_ROOT_BAND",
+   "track_distance_m": 0.15,
+   "access": "ROBOT_REACH",
+   "path_from_dock_m": 163.0,
+   "from_track_point": [
+    -61.01,
+    -3.08,
+    -5.33
+   ],
+   "arm_DS16_distance_m": 36.14,
+   "gates": [
+    "BLADES_COLD (DOP-08; blade cooldown curve OPEN, 45 H-01)"
+   ],
+   "point": [
+    -61.0,
+    -3.0,
+    -5.196
+   ],
+   "path_with_third_cradle_m": 42.8
+  },
+  {
+   "target": "Casing_Access_05_000",
+   "why": "casing access panel (cage-to-skin corridor)",
+   "zone": "CASING_BLADE_ROOT_BAND",
+   "track_distance_m": 0.15,
+   "access": "ROBOT_REACH",
+   "path_from_dock_m": 54.8,
+   "from_track_point": [
+    -48.99,
+    6.15,
+    0.0
+   ],
+   "arm_DS16_distance_m": 49.41,
+   "gates": [
+    "BLADES_COLD (DOP-08; blade cooldown curve OPEN, 45 H-01)"
+   ],
+   "point": [
+    -49.0,
+    6.0,
+    0.0
+   ],
+   "path_with_third_cradle_m": 54.8
+  },
+  {
+   "target": "Casing_Access_05_120",
+   "why": "casing access panel (cage-to-skin corridor)",
+   "zone": "CASING_BLADE_ROOT_BAND",
+   "track_distance_m": 0.15,
+   "access": "ROBOT_REACH",
+   "path_from_dock_m": 54.8,
+   "from_track_point": [
+    -48.99,
+    -3.08,
+    5.33
+   ],
+   "arm_DS16_distance_m": 48.76,
+   "gates": [
+    "BLADES_COLD (DOP-08; blade cooldown curve OPEN, 45 H-01)"
+   ],
+   "point": [
+    -49.0,
+    -3.0,
+    5.196
+   ],
+   "path_with_third_cradle_m": 54.8
+  },
+  {
+   "target": "Casing_Access_05_240",
+   "why": "casing access panel (cage-to-skin corridor)",
+   "zone": "CASING_BLADE_ROOT_BAND",
+   "track_distance_m": 0.15,
+   "access": "ROBOT_REACH",
+   "path_from_dock_m": 150.9,
+   "from_track_point": [
+    -48.99,
+    -3.08,
+    -5.33
+   ],
+   "arm_DS16_distance_m": 48.1,
+   "gates": [
+    "BLADES_COLD (DOP-08; blade cooldown curve OPEN, 45 H-01)"
+   ],
+   "point": [
+    -49.0,
+    -3.0,
+    -5.196
+   ],
+   "path_with_third_cradle_m": 54.8
+  },
+  {
+   "target": "Casing_Access_06_000",
+   "why": "casing access panel (cage-to-skin corridor)",
+   "zone": "CASING_BLADE_ROOT_BAND",
+   "track_distance_m": 0.16,
+   "access": "ROBOT_REACH",
+   "path_from_dock_m": 66.9,
+   "from_track_point": [
+    -36.96,
+    6.15,
+    0.0
+   ],
+   "arm_DS16_distance_m": 61.14,
+   "gates": [
+    "BLADES_COLD (DOP-08; blade cooldown curve OPEN, 45 H-01)"
+   ],
+   "point": [
+    -37.0,
+    6.0,
+    0.0
+   ],
+   "path_with_third_cradle_m": 66.9
+  },
+  {
+   "target": "Casing_Access_06_120",
+   "why": "casing access panel (cage-to-skin corridor)",
+   "zone": "CASING_BLADE_ROOT_BAND",
+   "track_distance_m": 0.16,
+   "access": "ROBOT_REACH",
+   "path_from_dock_m": 66.9,
+   "from_track_point": [
+    -36.96,
+    -3.08,
+    5.33
+   ],
+   "arm_DS16_distance_m": 60.61,
+   "gates": [
+    "BLADES_COLD (DOP-08; blade cooldown curve OPEN, 45 H-01)"
+   ],
+   "point": [
+    -37.0,
+    -3.0,
+    5.196
+   ],
+   "path_with_third_cradle_m": 66.9
+  },
+  {
+   "target": "Casing_Access_06_240",
+   "why": "casing access panel (cage-to-skin corridor)",
+   "zone": "CASING_BLADE_ROOT_BAND",
+   "track_distance_m": 0.16,
+   "access": "ROBOT_REACH",
+   "path_from_dock_m": 138.9,
+   "from_track_point": [
+    -36.96,
+    -3.08,
+    -5.33
+   ],
+   "arm_DS16_distance_m": 60.08,
+   "gates": [
+    "BLADES_COLD (DOP-08; blade cooldown curve OPEN, 45 H-01)"
+   ],
+   "point": [
+    -37.0,
+    -3.0,
+    -5.196
+   ],
+   "path_with_third_cradle_m": 66.9
+  },
+  {
+   "target": "Casing_Access_07_000",
+   "why": "casing access panel (cage-to-skin corridor)",
+   "zone": "CASING_BLADE_ROOT_BAND",
+   "track_distance_m": 0.16,
+   "access": "ROBOT_REACH",
+   "path_from_dock_m": 78.9,
+   "from_track_point": [
+    -24.93,
+    6.15,
+    0.0
+   ],
+   "arm_DS16_distance_m": 72.95,
+   "gates": [
+    "BLADES_COLD (DOP-08; blade cooldown curve OPEN, 45 H-01)"
+   ],
+   "point": [
+    -25.0,
+    6.0,
+    0.0
+   ],
+   "path_with_third_cradle_m": 78.9
+  },
+  {
+   "target": "Casing_Access_07_120",
+   "why": "casing access panel (cage-to-skin corridor)",
+   "zone": "CASING_BLADE_ROOT_BAND",
+   "track_distance_m": 0.16,
+   "access": "ROBOT_REACH",
+   "path_from_dock_m": 78.9,
+   "from_track_point": [
+    -24.93,
+    -3.08,
+    5.33
+   ],
+   "arm_DS16_distance_m": 72.51,
+   "gates": [
+    "BLADES_COLD (DOP-08; blade cooldown curve OPEN, 45 H-01)"
+   ],
+   "point": [
+    -25.0,
+    -3.0,
+    5.196
+   ],
+   "path_with_third_cradle_m": 78.9
+  },
+  {
+   "target": "Casing_Access_07_240",
+   "why": "casing access panel (cage-to-skin corridor)",
+   "zone": "CASING_BLADE_ROOT_BAND",
+   "track_distance_m": 0.16,
+   "access": "ROBOT_REACH",
+   "path_from_dock_m": 126.9,
+   "from_track_point": [
+    -24.93,
+    -3.08,
+    -5.33
+   ],
+   "arm_DS16_distance_m": 72.07,
+   "gates": [
+    "BLADES_COLD (DOP-08; blade cooldown curve OPEN, 45 H-01)"
+   ],
+   "point": [
+    -25.0,
+    -3.0,
+    -5.196
+   ],
+   "path_with_third_cradle_m": 78.9
+  },
+  {
+   "target": "Casing_Access_08_000",
+   "why": "casing access panel (cage-to-skin corridor)",
+   "zone": "CASING_BLADE_ROOT_BAND",
+   "track_distance_m": 0.18,
+   "access": "ROBOT_REACH",
+   "path_from_dock_m": 90.9,
+   "from_track_point": [
+    -12.91,
+    6.15,
+    0.0
+   ],
+   "arm_DS16_distance_m": 84.82,
+   "gates": [
+    "BLADES_COLD (DOP-08; blade cooldown curve OPEN, 45 H-01)"
+   ],
+   "point": [
+    -13.0,
+    6.0,
+    0.0
+   ],
+   "path_with_third_cradle_m": 90.9
+  },
+  {
+   "target": "Casing_Access_08_120",
+   "why": "casing access panel (cage-to-skin corridor)",
+   "zone": "CASING_BLADE_ROOT_BAND",
+   "track_distance_m": 0.18,
+   "access": "ROBOT_REACH",
+   "path_from_dock_m": 90.9,
+   "from_track_point": [
+    -12.91,
+    -3.08,
+    5.33
+   ],
+   "arm_DS16_distance_m": 84.44,
+   "gates": [
+    "BLADES_COLD (DOP-08; blade cooldown curve OPEN, 45 H-01)"
+   ],
+   "point": [
+    -13.0,
+    -3.0,
+    5.196
+   ],
+   "path_with_third_cradle_m": 90.9
+  },
+  {
+   "target": "Casing_Access_08_240",
+   "why": "casing access panel (cage-to-skin corridor)",
+   "zone": "CASING_BLADE_ROOT_BAND",
+   "track_distance_m": 0.18,
+   "access": "ROBOT_REACH",
+   "path_from_dock_m": 114.8,
+   "from_track_point": [
+    -12.91,
+    -3.08,
+    -5.33
+   ],
+   "arm_DS16_distance_m": 84.06,
+   "gates": [
+    "BLADES_COLD (DOP-08; blade cooldown curve OPEN, 45 H-01)"
+   ],
+   "point": [
+    -13.0,
+    -3.0,
+    -5.196
+   ],
+   "path_with_third_cradle_m": 90.9
+  },
+  {
+   "target": "Casing_Access_09_000",
+   "why": "casing access panel (cage-to-skin corridor)",
+   "zone": "CASING_BLADE_ROOT_BAND",
+   "track_distance_m": 0.19,
+   "access": "ROBOT_REACH",
+   "path_from_dock_m": 100.6,
+   "from_track_point": [
+    -0.88,
+    6.15,
+    0.0
+   ],
+   "arm_DS16_distance_m": 96.71,
+   "gates": [
+    "BLADES_COLD (DOP-08; blade cooldown curve OPEN, 45 H-01)"
+   ],
+   "point": [
+    -1.0,
+    6.0,
+    0.0
+   ],
+   "path_with_third_cradle_m": 100.6
+  },
+  {
+   "target": "Casing_Access_09_120",
+   "why": "casing access panel (cage-to-skin corridor)",
+   "zone": "CASING_BLADE_ROOT_BAND",
+   "track_distance_m": 0.19,
+   "access": "ROBOT_REACH",
+   "path_from_dock_m": 89.9,
+   "from_track_point": [
+    -0.88,
+    -3.08,
+    5.33
+   ],
+   "arm_DS16_distance_m": 96.38,
+   "gates": [
+    "BLADES_COLD (DOP-08; blade cooldown curve OPEN, 45 H-01)"
+   ],
+   "point": [
+    -1.0,
+    -3.0,
+    5.196
+   ],
+   "path_with_third_cradle_m": 89.9
+  },
+  {
+   "target": "Casing_Access_09_240",
+   "why": "casing access panel (cage-to-skin corridor)",
+   "zone": "CASING_BLADE_ROOT_BAND",
+   "track_distance_m": 0.19,
+   "access": "ROBOT_REACH",
+   "path_from_dock_m": 102.8,
+   "from_track_point": [
+    -0.88,
+    -3.08,
+    -5.33
+   ],
+   "arm_DS16_distance_m": 96.05,
+   "gates": [
+    "BLADES_COLD (DOP-08; blade cooldown curve OPEN, 45 H-01)"
+   ],
+   "point": [
+    -1.0,
+    -3.0,
+    -5.196
+   ],
+   "path_with_third_cradle_m": 102.8
+  },
+  {
+   "target": "Casing_Access_10_000",
+   "why": "casing access panel (cage-to-skin corridor)",
+   "zone": "CASING_BLADE_ROOT_BAND",
+   "track_distance_m": 0.21,
+   "access": "ROBOT_REACH",
+   "path_from_dock_m": 88.6,
+   "from_track_point": [
+    11.15,
+    6.15,
+    0.0
+   ],
+   "arm_DS16_distance_m": 108.64,
+   "gates": [
+    "BLADES_COLD (DOP-08; blade cooldown curve OPEN, 45 H-01)"
+   ],
+   "point": [
+    11.0,
+    6.0,
+    0.0
+   ],
+   "path_with_third_cradle_m": 88.6
+  },
+  {
+   "target": "Casing_Access_10_120",
+   "why": "casing access panel (cage-to-skin corridor)",
+   "zone": "CASING_BLADE_ROOT_BAND",
+   "track_distance_m": 0.21,
+   "access": "ROBOT_REACH",
+   "path_from_dock_m": 77.9,
+   "from_track_point": [
+    11.15,
+    -3.08,
+    5.33
+   ],
+   "arm_DS16_distance_m": 108.34,
+   "gates": [
+    "BLADES_COLD (DOP-08; blade cooldown curve OPEN, 45 H-01)"
+   ],
+   "point": [
+    11.0,
+    -3.0,
+    5.196
+   ],
+   "path_with_third_cradle_m": 77.9
+  },
+  {
+   "target": "Casing_Access_10_240",
+   "why": "casing access panel (cage-to-skin corridor)",
+   "zone": "CASING_BLADE_ROOT_BAND",
+   "track_distance_m": 0.21,
+   "access": "ROBOT_REACH",
+   "path_from_dock_m": 90.8,
+   "from_track_point": [
+    11.15,
+    -3.08,
+    -5.33
+   ],
+   "arm_DS16_distance_m": 108.05,
+   "gates": [
+    "BLADES_COLD (DOP-08; blade cooldown curve OPEN, 45 H-01)"
+   ],
+   "point": [
+    11.0,
+    -3.0,
+    -5.196
+   ],
+   "path_with_third_cradle_m": 90.8
+  },
+  {
+   "target": "Casing_Access_11_000",
+   "why": "casing access panel (cage-to-skin corridor)",
+   "zone": "CASING_BLADE_ROOT_BAND",
+   "track_distance_m": 0.23,
+   "access": "ROBOT_REACH",
+   "path_from_dock_m": 76.5,
+   "from_track_point": [
+    23.17,
+    6.15,
+    0.0
+   ],
+   "arm_DS16_distance_m": 120.57,
+   "gates": [
+    "BLADES_COLD (DOP-08; blade cooldown curve OPEN, 45 H-01)"
+   ],
+   "point": [
+    23.0,
+    6.0,
+    0.0
+   ],
+   "path_with_third_cradle_m": 76.5
+  },
+  {
+   "target": "Casing_Access_11_120",
+   "why": "casing access panel (cage-to-skin corridor)",
+   "zone": "CASING_BLADE_ROOT_BAND",
+   "track_distance_m": 0.23,
+   "access": "ROBOT_REACH",
+   "path_from_dock_m": 65.9,
+   "from_track_point": [
+    23.17,
+    -3.08,
+    5.33
+   ],
+   "arm_DS16_distance_m": 120.31,
+   "gates": [
+    "BLADES_COLD (DOP-08; blade cooldown curve OPEN, 45 H-01)"
+   ],
+   "point": [
+    23.0,
+    -3.0,
+    5.196
+   ],
+   "path_with_third_cradle_m": 65.9
+  },
+  {
+   "target": "Casing_Access_11_240",
+   "why": "casing access panel (cage-to-skin corridor)",
+   "zone": "CASING_BLADE_ROOT_BAND",
+   "track_distance_m": 0.23,
+   "access": "ROBOT_REACH",
+   "path_from_dock_m": 78.8,
+   "from_track_point": [
+    23.17,
+    -3.08,
+    -5.33
+   ],
+   "arm_DS16_distance_m": 120.04,
+   "gates": [
+    "BLADES_COLD (DOP-08; blade cooldown curve OPEN, 45 H-01)"
+   ],
+   "point": [
+    23.0,
+    -3.0,
+    -5.196
+   ],
+   "path_with_third_cradle_m": 78.8
+  },
+  {
+   "target": "Casing_Access_12_000",
+   "why": "casing access panel (cage-to-skin corridor)",
+   "zone": "CASING_BLADE_ROOT_BAND",
+   "track_distance_m": 0.25,
+   "access": "ROBOT_REACH",
+   "path_from_dock_m": 64.5,
+   "from_track_point": [
+    35.2,
+    6.15,
+    0.0
+   ],
+   "arm_DS16_distance_m": 132.52,
+   "gates": [
+    "BLADES_COLD (DOP-08; blade cooldown curve OPEN, 45 H-01)"
+   ],
+   "point": [
+    35.0,
+    6.0,
+    0.0
+   ],
+   "path_with_third_cradle_m": 64.5
+  },
+  {
+   "target": "Casing_Access_12_120",
+   "why": "casing access panel (cage-to-skin corridor)",
+   "zone": "CASING_BLADE_ROOT_BAND",
+   "track_distance_m": 0.25,
+   "access": "ROBOT_REACH",
+   "path_from_dock_m": 53.9,
+   "from_track_point": [
+    35.2,
+    -3.08,
+    5.33
+   ],
+   "arm_DS16_distance_m": 132.28,
+   "gates": [
+    "BLADES_COLD (DOP-08; blade cooldown curve OPEN, 45 H-01)"
+   ],
+   "point": [
+    35.0,
+    -3.0,
+    5.196
+   ],
+   "path_with_third_cradle_m": 53.9
+  },
+  {
+   "target": "Casing_Access_12_240",
+   "why": "casing access panel (cage-to-skin corridor)",
+   "zone": "CASING_BLADE_ROOT_BAND",
+   "track_distance_m": 0.25,
+   "access": "ROBOT_REACH",
+   "path_from_dock_m": 66.7,
+   "from_track_point": [
+    35.2,
+    -3.08,
+    -5.33
+   ],
+   "arm_DS16_distance_m": 132.04,
+   "gates": [
+    "BLADES_COLD (DOP-08; blade cooldown curve OPEN, 45 H-01)"
+   ],
+   "point": [
+    35.0,
+    -3.0,
+    -5.196
+   ],
+   "path_with_third_cradle_m": 66.7
+  },
+  {
+   "target": "Casing_Access_13_000",
+   "why": "casing access panel (cage-to-skin corridor)",
+   "zone": "CASING_BLADE_ROOT_BAND",
+   "track_distance_m": 0.27,
+   "access": "ROBOT_REACH",
+   "path_from_dock_m": 52.5,
+   "from_track_point": [
+    47.22,
+    6.15,
+    0.0
+   ],
+   "arm_DS16_distance_m": 144.48,
+   "gates": [
+    "BLADES_COLD (DOP-08; blade cooldown curve OPEN, 45 H-01)"
+   ],
+   "point": [
+    47.0,
+    6.0,
+    0.0
+   ],
+   "path_with_third_cradle_m": 52.5
+  },
+  {
+   "target": "Casing_Access_13_120",
+   "why": "casing access panel (cage-to-skin corridor)",
+   "zone": "CASING_BLADE_ROOT_BAND",
+   "track_distance_m": 0.27,
+   "access": "ROBOT_REACH",
+   "path_from_dock_m": 41.8,
+   "from_track_point": [
+    47.22,
+    -3.08,
+    5.33
+   ],
+   "arm_DS16_distance_m": 144.26,
+   "gates": [
+    "BLADES_COLD (DOP-08; blade cooldown curve OPEN, 45 H-01)"
+   ],
+   "point": [
+    47.0,
+    -3.0,
+    5.196
+   ],
+   "path_with_third_cradle_m": 41.8
+  },
+  {
+   "target": "Casing_Access_13_240",
+   "why": "casing access panel (cage-to-skin corridor)",
+   "zone": "CASING_BLADE_ROOT_BAND",
+   "track_distance_m": 0.27,
+   "access": "ROBOT_REACH",
+   "path_from_dock_m": 54.7,
+   "from_track_point": [
+    47.22,
+    -3.08,
+    -5.33
+   ],
+   "arm_DS16_distance_m": 144.03,
+   "gates": [
+    "BLADES_COLD (DOP-08; blade cooldown curve OPEN, 45 H-01)"
+   ],
+   "point": [
+    47.0,
+    -3.0,
+    -5.196
+   ],
+   "path_with_third_cradle_m": 54.7
+  },
+  {
+   "target": "Casing_Access_14_000",
+   "why": "casing access panel (cage-to-skin corridor)",
+   "zone": "CASING_BLADE_ROOT_BAND",
+   "track_distance_m": 0.29,
+   "access": "ROBOT_REACH",
+   "path_from_dock_m": 40.5,
+   "from_track_point": [
+    59.25,
+    6.15,
+    0.0
+   ],
+   "arm_DS16_distance_m": 156.44,
+   "gates": [
+    "BLADES_COLD (DOP-08; blade cooldown curve OPEN, 45 H-01)"
+   ],
+   "point": [
+    59.0,
+    6.0,
+    0.0
+   ],
+   "path_with_third_cradle_m": 40.5
+  },
+  {
+   "target": "Casing_Access_14_120",
+   "why": "casing access panel (cage-to-skin corridor)",
+   "zone": "CASING_BLADE_ROOT_BAND",
+   "track_distance_m": 0.29,
+   "access": "ROBOT_REACH",
+   "path_from_dock_m": 29.8,
+   "from_track_point": [
+    59.25,
+    -3.08,
+    5.33
+   ],
+   "arm_DS16_distance_m": 156.24,
+   "gates": [
+    "BLADES_COLD (DOP-08; blade cooldown curve OPEN, 45 H-01)"
+   ],
+   "point": [
+    59.0,
+    -3.0,
+    5.196
+   ],
+   "path_with_third_cradle_m": 29.8
+  },
+  {
+   "target": "Casing_Access_14_240",
+   "why": "casing access panel (cage-to-skin corridor)",
+   "zone": "CASING_BLADE_ROOT_BAND",
+   "track_distance_m": 0.29,
+   "access": "ROBOT_REACH",
+   "path_from_dock_m": 42.7,
+   "from_track_point": [
+    59.25,
+    -3.08,
+    -5.33
+   ],
+   "arm_DS16_distance_m": 156.03,
+   "gates": [
+    "BLADES_COLD (DOP-08; blade cooldown curve OPEN, 45 H-01)"
+   ],
+   "point": [
+    59.0,
+    -3.0,
+    -5.196
+   ],
+   "path_with_third_cradle_m": 42.7
+  },
+  {
+   "target": "Casing_Access_15_000",
+   "why": "casing access panel (cage-to-skin corridor)",
+   "zone": "CASING_BLADE_ROOT_BAND",
+   "track_distance_m": 0.27,
+   "access": "ROBOT_REACH",
+   "path_from_dock_m": 28.9,
+   "from_track_point": [
+    70.78,
+    6.15,
+    0.0
+   ],
+   "arm_DS16_distance_m": 168.41,
+   "gates": [
+    "BLADES_COLD (DOP-08; blade cooldown curve OPEN, 45 H-01)"
+   ],
+   "point": [
+    71.0,
+    6.0,
+    0.0
+   ],
+   "path_with_third_cradle_m": 28.9
+  },
+  {
+   "target": "Casing_Access_15_120",
+   "why": "casing access panel (cage-to-skin corridor)",
+   "zone": "CASING_BLADE_ROOT_BAND",
+   "track_distance_m": 0.27,
+   "access": "ROBOT_REACH",
+   "path_from_dock_m": 18.3,
+   "from_track_point": [
+    70.78,
+    -3.08,
+    5.33
+   ],
+   "arm_DS16_distance_m": 168.22,
+   "gates": [
+    "BLADES_COLD (DOP-08; blade cooldown curve OPEN, 45 H-01)"
+   ],
+   "point": [
+    71.0,
+    -3.0,
+    5.196
+   ],
+   "path_with_third_cradle_m": 18.3
+  },
+  {
+   "target": "Casing_Access_15_240",
+   "why": "casing access panel (cage-to-skin corridor)",
+   "zone": "CASING_BLADE_ROOT_BAND",
+   "track_distance_m": 0.27,
+   "access": "ROBOT_REACH",
+   "path_from_dock_m": 31.2,
+   "from_track_point": [
+    70.78,
+    -3.08,
+    -5.33
+   ],
+   "arm_DS16_distance_m": 168.03,
+   "gates": [
+    "BLADES_COLD (DOP-08; blade cooldown curve OPEN, 45 H-01)"
+   ],
+   "point": [
+    71.0,
+    -3.0,
+    -5.196
+   ],
+   "path_with_third_cradle_m": 31.2
+  },
+  {
+   "target": "Radiator_Root_1_-101",
+   "why": "radiator root boot / boom (blade root datum or slide)",
+   "zone": "CASING_BLADE_ROOT_BAND",
+   "track_distance_m": 1.29,
+   "access": "ROBOT_REACH",
+   "path_from_dock_m": 5.7,
+   "from_track_point": [
+    -101.25,
+    4.64,
+    4.03
+   ],
+   "arm_DS16_distance_m": 13.27,
+   "gates": [
+    "BLADES_COLD (DOP-08; blade cooldown curve OPEN, 45 H-01)"
+   ],
+   "point": [
+    -101.0,
+    5.629,
+    3.25
+   ],
+   "path_with_third_cradle_m": 5.7
+  },
+  {
+   "target": "Radiator_Root_1_81",
+   "why": "radiator root boot / boom (blade root datum or slide)",
+   "zone": "CASING_BLADE_ROOT_BAND",
+   "track_distance_m": 0.74,
+   "access": "ROBOT_REACH",
+   "path_from_dock_m": 14.7,
+   "from_track_point": [
+    81.8,
+    5.33,
+    3.08
+   ],
+   "arm_DS16_distance_m": 178.6,
+   "gates": [
+    "BLADES_COLD (DOP-08; blade cooldown curve OPEN, 45 H-01)"
+   ],
+   "point": [
+    81.149,
+    5.629,
+    3.25
+   ],
+   "path_with_third_cradle_m": 14.7
+  },
+  {
+   "target": "Radiator_Root_2_-101",
+   "why": "radiator root boot / boom (blade root datum or slide)",
+   "zone": "CASING_BLADE_ROOT_BAND",
+   "track_distance_m": 1.29,
+   "access": "ROBOT_REACH",
+   "path_from_dock_m": 211.4,
+   "from_track_point": [
+    -101.25,
+    -5.81,
+    2.0
+   ],
+   "arm_DS16_distance_m": 7.49,
+   "gates": [
+    "BLADES_COLD (DOP-08; blade cooldown curve OPEN, 45 H-01)"
+   ],
+   "point": [
+    -101.0,
+    -5.629,
+    3.25
+   ],
+   "path_with_third_cradle_m": 5.7
+  },
+  {
+   "target": "Radiator_Root_2_81",
+   "why": "radiator root boot / boom (blade root datum or slide)",
+   "zone": "CASING_BLADE_ROOT_BAND",
+   "track_distance_m": 0.74,
+   "access": "ROBOT_REACH",
+   "path_from_dock_m": 10.5,
+   "from_track_point": [
+    81.8,
+    -5.33,
+    3.08
+   ],
+   "arm_DS16_distance_m": 178.26,
+   "gates": [
+    "BLADES_COLD (DOP-08; blade cooldown curve OPEN, 45 H-01)"
+   ],
+   "point": [
+    81.149,
+    -5.629,
+    3.25
+   ],
+   "path_with_third_cradle_m": 10.5
+  },
+  {
+   "target": "Radiator_Root_3_-101",
+   "why": "radiator root boot / boom (blade root datum or slide)",
+   "zone": "CASING_BLADE_ROOT_BAND",
+   "track_distance_m": 1.29,
+   "access": "ROBOT_REACH",
+   "path_from_dock_m": 5.7,
+   "from_track_point": [
+    -101.25,
+    1.17,
+    -6.03
+   ],
+   "arm_DS16_distance_m": 7.49,
+   "gates": [
+    "BLADES_COLD (DOP-08; blade cooldown curve OPEN, 45 H-01)"
+   ],
+   "point": [
+    -101.0,
+    -0.0,
+    -6.5
+   ],
+   "path_with_third_cradle_m": 5.7
+  },
+  {
+   "target": "Radiator_Root_3_81",
+   "why": "radiator root boot / boom (blade root datum or slide)",
+   "zone": "CASING_BLADE_ROOT_BAND",
+   "track_distance_m": 0.74,
+   "access": "ROBOT_REACH",
+   "path_from_dock_m": 23.4,
+   "from_track_point": [
+    81.8,
+    0.0,
+    -6.15
+   ],
+   "arm_DS16_distance_m": 178.26,
+   "gates": [
+    "BLADES_COLD (DOP-08; blade cooldown curve OPEN, 45 H-01)"
+   ],
+   "point": [
+    81.149,
+    -0.0,
+    -6.5
+   ],
+   "path_with_third_cradle_m": 23.4
+  }
+ ],
+ "fallback": [
+  {
+   "target": "Ext_HGA_1_Gimbal",
+   "spur_extension_m": 0.64,
+   "spur": [
+    [
+     -103.6,
+     0.0,
+     7.1
+    ],
+    [
+     -103.998,
+     0.0,
+     7.597
+    ]
+   ],
+   "DS16_arm_reach_needed_m": 15.32
+  },
+  {
+   "target": "Ext_HGA_2_Gimbal",
+   "spur_extension_m": 0.64,
+   "spur": [
+    [
+     -103.6,
+     -6.15,
+     -3.55
+    ],
+    [
+     -103.998,
+     -6.58,
+     -3.798
+    ]
+   ],
+   "DS16_arm_reach_needed_m": 8.44
+  }
+ ],
+ "hga_oru": {
+  "status": "PREFERRED CONCEPT FOR COMPARISON (owner 2026-10-19); interface, mass, latch and RF rotary joint UNKNOWN",
+  "units": [
+   {
+    "antenna": "HGA_1",
+    "azimuth_deg": 90.0,
+    "interface_flange": [
+     -103.0,
+     0.0,
+     5.72
+    ],
+    "flange_track_distance_m": 0.88,
+    "flange_in_reach": true,
+    "oru_length_m": 5.93,
+    "oru_dish_diameter_m": 4.0,
+    "path_from_dock_m": 2.2,
+    "path_with_third_cradle_m": 2.2,
+    "mass_kg": null,
+    "gates": [
+     "DRIVE_SAFE",
+     "BLADES_COLD",
+     "link handed to the other HGA / OPT first (15!A210 store and forward)"
+    ]
+   },
+   {
+    "antenna": "HGA_2",
+    "azimuth_deg": 210.0,
+    "interface_flange": [
+     -103.0,
+     -4.95,
+     -2.86
+    ],
+    "flange_track_distance_m": 0.88,
+    "flange_in_reach": true,
+    "oru_length_m": 5.93,
+    "oru_dish_diameter_m": 4.0,
+    "path_from_dock_m": 207.9,
+    "path_with_third_cradle_m": 2.2,
+    "mass_kg": null,
+    "gates": [
+     "DRIVE_SAFE",
+     "BLADES_COLD",
+     "link handed to the other HGA / OPT first (15!A210 store and forward)"
+    ]
+   }
+  ],
+  "compare": {
+   "spur": {
+    "change": "0.64 m robot spur up each boom",
+    "risk": "more track hardware near the dish sweep; gimbal still serviced in place"
+   },
+   "oru": {
+    "change": "boom-root flange (mechanical, power, RF) + spare unit stowage",
+    "risk": "spare mass and flange design UNKNOWN; exchange needs a manipulator that can carry the boom-length unit (reach / load OPEN, 15!A186)"
+   }
+  }
+ },
+ "third_cradle_study": {
+  "at": [
+   -99.5,
+   -5.38,
+   -3.11
+  ],
+  "azimuth_deg": 210.0,
+  "clearances_m": {
+   "DS16_arm_base": 2.5,
+   "nearest_blade_plane": 5.38,
+   "rcs_b_aft_pod_210": 7.5,
+   "hga2_boom_root": 3.53
+  },
+  "targets_saved": 11,
+  "largest_saving": {
+   "target": "Ext_RCS_Aft_2",
+   "before_m": 212.8,
+   "after_m": 7.0
+  },
+  "saved": [
+   {
+    "target": "Ext_RCS_Aft_2",
+    "before_m": 212.8,
+    "after_m": 7.0
+   },
+   {
+    "target": "Ext_HGA_2_Gimbal",
+    "before_m": 209.0,
+    "after_m": 3.2
+   },
+   {
+    "target": "Casing_Access_01_240",
+    "before_m": 198.5,
+    "after_m": 7.2
+   },
+   {
+    "target": "Casing_Access_02_240",
+    "before_m": 187.0,
+    "after_m": 18.8
+   },
+   {
+    "target": "Casing_Access_03_240",
+    "before_m": 175.0,
+    "after_m": 30.8
+   },
+   {
+    "target": "Casing_Access_04_240",
+    "before_m": 163.0,
+    "after_m": 42.8
+   },
+   {
+    "target": "Casing_Access_05_240",
+    "before_m": 150.9,
+    "after_m": 54.8
+   },
+   {
+    "target": "Casing_Access_06_240",
+    "before_m": 138.9,
+    "after_m": 66.9
+   },
+   {
+    "target": "Casing_Access_07_240",
+    "before_m": 126.9,
+    "after_m": 78.9
+   },
+   {
+    "target": "Casing_Access_08_240",
+    "before_m": 114.8,
+    "after_m": 90.9
+   },
+   {
+    "target": "Radiator_Root_2_-101",
+    "before_m": 211.4,
+    "after_m": 5.7
+   }
+  ],
+  "status": "STUDY / PROTOTYPE: not on the DRONE-001 station list until the owner adds it; dock hardware, power and mass UNKNOWN"
+ }
+}

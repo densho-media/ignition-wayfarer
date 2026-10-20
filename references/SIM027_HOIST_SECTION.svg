@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="420" font-family="sans-serif" font-size="11"><rect width="100%" height="100%" fill="#fff"/>
+<text x="10" y="18" font-size="13" font-weight="bold">Trunk section (X-axis toward the viewer): handrails, ladder and the hoist line options</text>
+<circle cx="120" cy="190" r="108.0" fill="none" stroke="#333"/>
+<circle cx="50.3" cy="120.3" r="4" fill="#1565c0"/>
+<circle cx="94.5" cy="285.2" r="4" fill="#1565c0"/>
+<rect x="141.9" y="84.6" width="10" height="10" fill="#f9a825"/>
+<rect x="188.5" y="258.5" width="10" height="10" fill="#f9a825"/>
+<circle cx="160.5" cy="260.1" r="5" fill="#6a1b9a"/><text x="168.5" y="264.1" fill="#6a1b9a">ladder 300</text>
+<circle cx="103.1" cy="160.8" r="57.8" fill="#c62828" fill-opacity="0.12" stroke="#c62828"/>
+<text x="20" y="320">workspace V0_1.06_aft0.16: handrail 1 at 135 deg</text>
+<text x="20" y="336" fill="#e0a800">S, line 120 deg, e 0.25 m: worst +0.014 m</text>
+<circle cx="400" cy="190" r="108.0" fill="none" stroke="#333"/>
+<circle cx="314.7" cy="140.7" r="4" fill="#1565c0"/>
+<circle cx="374.5" cy="285.2" r="4" fill="#1565c0"/>
+<rect x="421.9" y="84.6" width="10" height="10" fill="#f9a825"/>
+<rect x="468.5" y="258.5" width="10" height="10" fill="#f9a825"/>
+<circle cx="440.5" cy="260.1" r="5" fill="#6a1b9a"/><text x="448.5" y="264.1" fill="#6a1b9a">ladder 300</text>
+<circle cx="383.1" cy="160.8" r="57.8" fill="#c62828" fill-opacity="0.12" stroke="#c62828"/>
+<text x="300" y="320">workspace V0_rail150: handrail 1 at 150 deg</text>
+<text x="300" y="336" fill="#e0a800">S, line 120 deg, e 0.25 m: worst +0.017 m</text>
+<circle cx="680" cy="190" r="108.0" fill="none" stroke="#333"/>
+<circle cx="584.8" cy="164.5" r="4" fill="#1565c0"/>
+<circle cx="654.5" cy="285.2" r="4" fill="#1565c0"/>
+<rect x="701.9" y="84.6" width="10" height="10" fill="#f9a825"/>
+<rect x="748.5" y="258.5" width="10" height="10" fill="#f9a825"/>
+<circle cx="720.5" cy="260.1" r="5" fill="#6a1b9a"/><text x="728.5" y="264.1" fill="#6a1b9a">ladder 300</text>
+<circle cx="663.1" cy="160.8" r="57.8" fill="#c62828" fill-opacity="0.12" stroke="#c62828"/>
+<text x="580" y="320">workspace V0_rail165: handrail 1 at 165 deg</text>
+<text x="580" y="336" fill="#e0a800">S, line 120 deg, e 0.25 m: worst +0.017 m</text>
+<text x="10" y="410" fill="#555">blue: handrails (r 0.73), amber: light strips, violet: ladder, red circle: suited casualty S (0.857 m) on the 120 deg line at e = 0.25 m</text></svg>

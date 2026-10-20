@@ -1,0 +1,5443 @@
+{
+ "study": "A179 L1-A stile / bracket at Crew_Port_2_2 and Crew_Refuge_Port (owner 2026-10-13 15!A179 OWN-RES-D1), NONCANON PROTOTYPE",
+ "source": [
+  "src/wayfarer/studies/l1a_stile.py",
+  "references/L1A_STILE_2026-10-13.json",
+  "references/p1_eva_sp13_l1a.json"
+ ],
+ "segments": [
+  {
+   "id": "A179-L1A-STILE-OR4-PORT205-ROUTE",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "PROTOTYPE OR4: ladder section offset 0.04 m outward (standoff 0.16 -> 0.12 m) in both windows; district port 205 deg (reversible WHITEBOX), ladder 285 deg",
+   "case": "whole route: minimum over every measured element",
+   "least_m": 0.059,
+   "status": "PASS",
+   "worst_case_over": [
+    "stiles + arrest rail vs every opening (candidate ladder, whole length)",
+    "rungs vs every opening",
+    "stile brackets vs every opening",
+    "moved port edge vs ladder",
+    "ladder vs trunk fixtures",
+    "climber (1.5 g pose, following the ladder) vs moved district port rim",
+    "climber (1.5 g pose, following the ladder) vs Crew_Port_2_2 rim",
+    "climber (1.5 g pose, following the ladder) vs Crew_Refuge_Port rim",
+    "hoist line 0.25 m @105 deg, A vs ladder rods",
+    "hoist line, S vs ladder rods",
+    "port tube vs SP-13 exit solid [o13, unchanged]",
+    "port tube vs SP-12 exit solid [o13, unchanged]",
+    "carrier S full trunk route X 105.3 -> 88.2 with rescuers",
+    "carrier A full trunk route X 105.3 -> 88.2 with rescuers",
+    "carrier K full trunk route X 105.3 -> 88.2 with rescuers",
+    "carrier U full trunk route X 105.3 -> 88.2 (suited crew, self-propelled)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "stiles + arrest rail vs every opening (candidate ladder, whole length)",
+   "note": "no new ladder break: True; pressure boundary untouched (no cut, no new penetration); loads OPEN. the trunk, the district and SP-12/13 are on the non-rotating spine, so a clearance of fixed geometry is the same number in 0 g, spin, stopped and locked 1.5 g; the sampled-pose carriers are free poses (any state); the climber figure is the 1.5 g aft-down pose only; a 0 g free-float traverse pose, Coriolis and the loads of each state are not represented."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4-PORT205-E00",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4, port 205 deg",
+   "case": "stiles + arrest rail vs every opening (candidate ladder, whole length)",
+   "least_m": 0.059,
+   "status": "PASS",
+   "worst_case_over": [
+    "stiles + arrest rail vs every opening (candidate ladder, whole length)"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4-PORT205-E01",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4, port 205 deg",
+   "case": "rungs vs every opening",
+   "least_m": 0.078,
+   "status": "PASS",
+   "worst_case_over": [
+    "rungs vs every opening"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4-PORT205-E02",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4, port 205 deg",
+   "case": "stile brackets vs every opening",
+   "least_m": 0.101,
+   "status": "PASS",
+   "worst_case_over": [
+    "stile brackets vs every opening"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4-PORT205-E03",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4, port 205 deg",
+   "case": "moved port edge vs ladder",
+   "least_m": 0.092,
+   "status": "PASS",
+   "worst_case_over": [
+    "moved port edge vs ladder"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4-PORT205-E04",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4, port 205 deg",
+   "case": "ladder vs trunk fixtures",
+   "least_m": 0.131,
+   "status": "PASS",
+   "worst_case_over": [
+    "ladder vs trunk fixtures"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4-PORT205-E05",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4, port 205 deg",
+   "case": "climber (1.5 g pose, following the ladder) vs moved district port rim",
+   "least_m": 0.322,
+   "status": "PASS",
+   "worst_case_over": [
+    "climber (1.5 g pose, following the ladder) vs moved district port rim"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4-PORT205-E06",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4, port 205 deg",
+   "case": "climber (1.5 g pose, following the ladder) vs Crew_Port_2_2 rim",
+   "least_m": 0.22,
+   "status": "PASS",
+   "worst_case_over": [
+    "climber (1.5 g pose, following the ladder) vs Crew_Port_2_2 rim"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4-PORT205-E07",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4, port 205 deg",
+   "case": "climber (1.5 g pose, following the ladder) vs Crew_Refuge_Port rim",
+   "least_m": 0.22,
+   "status": "PASS",
+   "worst_case_over": [
+    "climber (1.5 g pose, following the ladder) vs Crew_Refuge_Port rim"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4-PORT205-E08",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4, port 205 deg",
+   "case": "hoist line 0.25 m @105 deg, A vs ladder rods",
+   "least_m": 0.487,
+   "status": "PASS",
+   "worst_case_over": [
+    "hoist line 0.25 m @105 deg, A vs ladder rods"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4-PORT205-E09",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4, port 205 deg",
+   "case": "hoist line, S vs ladder rods",
+   "least_m": 0.372,
+   "status": "PASS",
+   "worst_case_over": [
+    "hoist line, S vs ladder rods"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4-PORT205-E10",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4, port 205 deg",
+   "case": "port tube vs SP-13 exit solid [o13, unchanged]",
+   "least_m": 1.393,
+   "status": "PASS",
+   "worst_case_over": [
+    "port tube vs SP-13 exit solid [o13, unchanged]"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4-PORT205-E11",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4, port 205 deg",
+   "case": "port tube vs SP-12 exit solid [o13, unchanged]",
+   "least_m": 1.509,
+   "status": "PASS",
+   "worst_case_over": [
+    "port tube vs SP-12 exit solid [o13, unchanged]"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4-PORT205-E12",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4, port 205 deg",
+   "case": "carrier S full trunk route X 105.3 -> 88.2 with rescuers",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier S full trunk route X 105.3 -> 88.2 with rescuers"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4-PORT205-E13",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4, port 205 deg",
+   "case": "carrier A full trunk route X 105.3 -> 88.2 with rescuers",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier A full trunk route X 105.3 -> 88.2 with rescuers"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4-PORT205-E14",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4, port 205 deg",
+   "case": "carrier K full trunk route X 105.3 -> 88.2 with rescuers",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier K full trunk route X 105.3 -> 88.2 with rescuers"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4-PORT205-E15",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4, port 205 deg",
+   "case": "carrier U full trunk route X 105.3 -> 88.2 (suited crew, self-propelled)",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier U full trunk route X 105.3 -> 88.2 (suited crew, self-propelled)"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4-PORT210-ROUTE",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "PROTOTYPE OR4: ladder section offset 0.04 m outward (standoff 0.16 -> 0.12 m) in both windows; district port 210 deg (reversible WHITEBOX), ladder 285 deg",
+   "case": "whole route: minimum over every measured element",
+   "least_m": 0.059,
+   "status": "PASS",
+   "worst_case_over": [
+    "stiles + arrest rail vs every opening (candidate ladder, whole length)",
+    "rungs vs every opening",
+    "stile brackets vs every opening",
+    "moved port edge vs ladder",
+    "ladder vs trunk fixtures",
+    "climber (1.5 g pose, following the ladder) vs moved district port rim",
+    "climber (1.5 g pose, following the ladder) vs Crew_Port_2_2 rim",
+    "climber (1.5 g pose, following the ladder) vs Crew_Refuge_Port rim",
+    "hoist line 0.25 m @105 deg, A vs ladder rods",
+    "hoist line, S vs ladder rods",
+    "port tube vs SP-13 exit solid [o13, unchanged]",
+    "port tube vs SP-12 exit solid [o13, unchanged]",
+    "carrier S full trunk route X 105.3 -> 88.2 with rescuers",
+    "carrier A full trunk route X 105.3 -> 88.2 with rescuers",
+    "carrier K full trunk route X 105.3 -> 88.2 with rescuers",
+    "carrier U full trunk route X 105.3 -> 88.2 (suited crew, self-propelled)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "stiles + arrest rail vs every opening (candidate ladder, whole length)",
+   "note": "no new ladder break: True; pressure boundary untouched (no cut, no new penetration); loads OPEN. the trunk, the district and SP-12/13 are on the non-rotating spine, so a clearance of fixed geometry is the same number in 0 g, spin, stopped and locked 1.5 g; the sampled-pose carriers are free poses (any state); the climber figure is the 1.5 g aft-down pose only; a 0 g free-float traverse pose, Coriolis and the loads of each state are not represented."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4-PORT210-E00",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4, port 210 deg",
+   "case": "stiles + arrest rail vs every opening (candidate ladder, whole length)",
+   "least_m": 0.059,
+   "status": "PASS",
+   "worst_case_over": [
+    "stiles + arrest rail vs every opening (candidate ladder, whole length)"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4-PORT210-E01",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4, port 210 deg",
+   "case": "rungs vs every opening",
+   "least_m": 0.068,
+   "status": "PASS",
+   "worst_case_over": [
+    "rungs vs every opening"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4-PORT210-E02",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4, port 210 deg",
+   "case": "stile brackets vs every opening",
+   "least_m": 0.101,
+   "status": "PASS",
+   "worst_case_over": [
+    "stile brackets vs every opening"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4-PORT210-E03",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4, port 210 deg",
+   "case": "moved port edge vs ladder",
+   "least_m": 0.068,
+   "status": "PASS",
+   "worst_case_over": [
+    "moved port edge vs ladder"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4-PORT210-E04",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4, port 210 deg",
+   "case": "ladder vs trunk fixtures",
+   "least_m": 0.131,
+   "status": "PASS",
+   "worst_case_over": [
+    "ladder vs trunk fixtures"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4-PORT210-E05",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4, port 210 deg",
+   "case": "climber (1.5 g pose, following the ladder) vs moved district port rim",
+   "least_m": 0.268,
+   "status": "PASS",
+   "worst_case_over": [
+    "climber (1.5 g pose, following the ladder) vs moved district port rim"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4-PORT210-E06",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4, port 210 deg",
+   "case": "climber (1.5 g pose, following the ladder) vs Crew_Port_2_2 rim",
+   "least_m": 0.22,
+   "status": "PASS",
+   "worst_case_over": [
+    "climber (1.5 g pose, following the ladder) vs Crew_Port_2_2 rim"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4-PORT210-E07",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4, port 210 deg",
+   "case": "climber (1.5 g pose, following the ladder) vs Crew_Refuge_Port rim",
+   "least_m": 0.22,
+   "status": "PASS",
+   "worst_case_over": [
+    "climber (1.5 g pose, following the ladder) vs Crew_Refuge_Port rim"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4-PORT210-E08",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4, port 210 deg",
+   "case": "hoist line 0.25 m @105 deg, A vs ladder rods",
+   "least_m": 0.487,
+   "status": "PASS",
+   "worst_case_over": [
+    "hoist line 0.25 m @105 deg, A vs ladder rods"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4-PORT210-E09",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4, port 210 deg",
+   "case": "hoist line, S vs ladder rods",
+   "least_m": 0.372,
+   "status": "PASS",
+   "worst_case_over": [
+    "hoist line, S vs ladder rods"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4-PORT210-E10",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4, port 210 deg",
+   "case": "port tube vs SP-13 exit solid [o13, unchanged]",
+   "least_m": 1.438,
+   "status": "PASS",
+   "worst_case_over": [
+    "port tube vs SP-13 exit solid [o13, unchanged]"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4-PORT210-E11",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4, port 210 deg",
+   "case": "port tube vs SP-12 exit solid [o13, unchanged]",
+   "least_m": 1.55,
+   "status": "PASS",
+   "worst_case_over": [
+    "port tube vs SP-12 exit solid [o13, unchanged]"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4-PORT210-E12",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4, port 210 deg",
+   "case": "carrier S full trunk route X 105.3 -> 88.2 with rescuers",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier S full trunk route X 105.3 -> 88.2 with rescuers"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4-PORT210-E13",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4, port 210 deg",
+   "case": "carrier A full trunk route X 105.3 -> 88.2 with rescuers",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier A full trunk route X 105.3 -> 88.2 with rescuers"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4-PORT210-E14",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4, port 210 deg",
+   "case": "carrier K full trunk route X 105.3 -> 88.2 with rescuers",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier K full trunk route X 105.3 -> 88.2 with rescuers"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4-PORT210-E15",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4, port 210 deg",
+   "case": "carrier U full trunk route X 105.3 -> 88.2 (suited crew, self-propelled)",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier U full trunk route X 105.3 -> 88.2 (suited crew, self-propelled)"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4-LOADS",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4",
+   "case": "stile/rail/bracket load path, tether fall load, arrester passage over the local offset",
+   "least_m": null,
+   "status": "OPEN",
+   "worst_case_over": [],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "OPEN: no load, stiffness or arrest number assumed."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6-PORT205-ROUTE",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "PROTOTYPE CB2J6: offset 0.02 m outward (standoff 0.14 m) + rotated 6 deg away, both windows; district port 205 deg (reversible WHITEBOX), ladder 285 deg",
+   "case": "whole route: minimum over every measured element",
+   "least_m": 0.064,
+   "status": "PASS",
+   "worst_case_over": [
+    "stiles + arrest rail vs every opening (candidate ladder, whole length)",
+    "rungs vs every opening",
+    "stile brackets vs every opening",
+    "moved port edge vs ladder",
+    "ladder vs trunk fixtures",
+    "climber (1.5 g pose, following the ladder) vs moved district port rim",
+    "climber (1.5 g pose, following the ladder) vs Crew_Port_2_2 rim",
+    "climber (1.5 g pose, following the ladder) vs Crew_Refuge_Port rim",
+    "hoist line 0.25 m @105 deg, A vs ladder rods",
+    "hoist line, S vs ladder rods",
+    "port tube vs SP-13 exit solid [o13, unchanged]",
+    "port tube vs SP-12 exit solid [o13, unchanged]",
+    "carrier S full trunk route X 105.3 -> 88.2 with rescuers",
+    "carrier A full trunk route X 105.3 -> 88.2 with rescuers",
+    "carrier K full trunk route X 105.3 -> 88.2 with rescuers",
+    "carrier U full trunk route X 105.3 -> 88.2 (suited crew, self-propelled)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "stiles + arrest rail vs every opening (candidate ladder, whole length)",
+   "note": "no new ladder break: True; pressure boundary untouched (no cut, no new penetration); loads OPEN. the trunk, the district and SP-12/13 are on the non-rotating spine, so a clearance of fixed geometry is the same number in 0 g, spin, stopped and locked 1.5 g; the sampled-pose carriers are free poses (any state); the climber figure is the 1.5 g aft-down pose only; a 0 g free-float traverse pose, Coriolis and the loads of each state are not represented."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6-PORT205-E00",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6, port 205 deg",
+   "case": "stiles + arrest rail vs every opening (candidate ladder, whole length)",
+   "least_m": 0.064,
+   "status": "PASS",
+   "worst_case_over": [
+    "stiles + arrest rail vs every opening (candidate ladder, whole length)"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6-PORT205-E01",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6, port 205 deg",
+   "case": "rungs vs every opening",
+   "least_m": 0.091,
+   "status": "PASS",
+   "worst_case_over": [
+    "rungs vs every opening"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6-PORT205-E02",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6, port 205 deg",
+   "case": "stile brackets vs every opening",
+   "least_m": 0.115,
+   "status": "PASS",
+   "worst_case_over": [
+    "stile brackets vs every opening"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6-PORT205-E03",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6, port 205 deg",
+   "case": "moved port edge vs ladder",
+   "least_m": 0.092,
+   "status": "PASS",
+   "worst_case_over": [
+    "moved port edge vs ladder"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6-PORT205-E04",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6, port 205 deg",
+   "case": "ladder vs trunk fixtures",
+   "least_m": 0.071,
+   "status": "PASS",
+   "worst_case_over": [
+    "ladder vs trunk fixtures"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6-PORT205-E05",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6, port 205 deg",
+   "case": "climber (1.5 g pose, following the ladder) vs moved district port rim",
+   "least_m": 0.322,
+   "status": "PASS",
+   "worst_case_over": [
+    "climber (1.5 g pose, following the ladder) vs moved district port rim"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6-PORT205-E06",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6, port 205 deg",
+   "case": "climber (1.5 g pose, following the ladder) vs Crew_Port_2_2 rim",
+   "least_m": 0.286,
+   "status": "PASS",
+   "worst_case_over": [
+    "climber (1.5 g pose, following the ladder) vs Crew_Port_2_2 rim"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6-PORT205-E07",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6, port 205 deg",
+   "case": "climber (1.5 g pose, following the ladder) vs Crew_Refuge_Port rim",
+   "least_m": 0.286,
+   "status": "PASS",
+   "worst_case_over": [
+    "climber (1.5 g pose, following the ladder) vs Crew_Refuge_Port rim"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6-PORT205-E08",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6, port 205 deg",
+   "case": "hoist line 0.25 m @105 deg, A vs ladder rods",
+   "least_m": 0.487,
+   "status": "PASS",
+   "worst_case_over": [
+    "hoist line 0.25 m @105 deg, A vs ladder rods"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6-PORT205-E09",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6, port 205 deg",
+   "case": "hoist line, S vs ladder rods",
+   "least_m": 0.372,
+   "status": "PASS",
+   "worst_case_over": [
+    "hoist line, S vs ladder rods"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6-PORT205-E10",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6, port 205 deg",
+   "case": "port tube vs SP-13 exit solid [o13, unchanged]",
+   "least_m": 1.393,
+   "status": "PASS",
+   "worst_case_over": [
+    "port tube vs SP-13 exit solid [o13, unchanged]"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6-PORT205-E11",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6, port 205 deg",
+   "case": "port tube vs SP-12 exit solid [o13, unchanged]",
+   "least_m": 1.509,
+   "status": "PASS",
+   "worst_case_over": [
+    "port tube vs SP-12 exit solid [o13, unchanged]"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6-PORT205-E12",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6, port 205 deg",
+   "case": "carrier S full trunk route X 105.3 -> 88.2 with rescuers",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier S full trunk route X 105.3 -> 88.2 with rescuers"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6-PORT205-E13",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6, port 205 deg",
+   "case": "carrier A full trunk route X 105.3 -> 88.2 with rescuers",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier A full trunk route X 105.3 -> 88.2 with rescuers"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6-PORT205-E14",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6, port 205 deg",
+   "case": "carrier K full trunk route X 105.3 -> 88.2 with rescuers",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier K full trunk route X 105.3 -> 88.2 with rescuers"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6-PORT205-E15",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6, port 205 deg",
+   "case": "carrier U full trunk route X 105.3 -> 88.2 (suited crew, self-propelled)",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier U full trunk route X 105.3 -> 88.2 (suited crew, self-propelled)"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6-PORT210-ROUTE",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "PROTOTYPE CB2J6: offset 0.02 m outward (standoff 0.14 m) + rotated 6 deg away, both windows; district port 210 deg (reversible WHITEBOX), ladder 285 deg",
+   "case": "whole route: minimum over every measured element",
+   "least_m": 0.064,
+   "status": "PASS",
+   "worst_case_over": [
+    "stiles + arrest rail vs every opening (candidate ladder, whole length)",
+    "rungs vs every opening",
+    "stile brackets vs every opening",
+    "moved port edge vs ladder",
+    "ladder vs trunk fixtures",
+    "climber (1.5 g pose, following the ladder) vs moved district port rim",
+    "climber (1.5 g pose, following the ladder) vs Crew_Port_2_2 rim",
+    "climber (1.5 g pose, following the ladder) vs Crew_Refuge_Port rim",
+    "hoist line 0.25 m @105 deg, A vs ladder rods",
+    "hoist line, S vs ladder rods",
+    "port tube vs SP-13 exit solid [o13, unchanged]",
+    "port tube vs SP-12 exit solid [o13, unchanged]",
+    "carrier S full trunk route X 105.3 -> 88.2 with rescuers",
+    "carrier A full trunk route X 105.3 -> 88.2 with rescuers",
+    "carrier K full trunk route X 105.3 -> 88.2 with rescuers",
+    "carrier U full trunk route X 105.3 -> 88.2 (suited crew, self-propelled)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "stiles + arrest rail vs every opening (candidate ladder, whole length)",
+   "note": "no new ladder break: True; pressure boundary untouched (no cut, no new penetration); loads OPEN. the trunk, the district and SP-12/13 are on the non-rotating spine, so a clearance of fixed geometry is the same number in 0 g, spin, stopped and locked 1.5 g; the sampled-pose carriers are free poses (any state); the climber figure is the 1.5 g aft-down pose only; a 0 g free-float traverse pose, Coriolis and the loads of each state are not represented."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6-PORT210-E00",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6, port 210 deg",
+   "case": "stiles + arrest rail vs every opening (candidate ladder, whole length)",
+   "least_m": 0.064,
+   "status": "PASS",
+   "worst_case_over": [
+    "stiles + arrest rail vs every opening (candidate ladder, whole length)"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6-PORT210-E01",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6, port 210 deg",
+   "case": "rungs vs every opening",
+   "least_m": 0.068,
+   "status": "PASS",
+   "worst_case_over": [
+    "rungs vs every opening"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6-PORT210-E02",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6, port 210 deg",
+   "case": "stile brackets vs every opening",
+   "least_m": 0.115,
+   "status": "PASS",
+   "worst_case_over": [
+    "stile brackets vs every opening"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6-PORT210-E03",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6, port 210 deg",
+   "case": "moved port edge vs ladder",
+   "least_m": 0.068,
+   "status": "PASS",
+   "worst_case_over": [
+    "moved port edge vs ladder"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6-PORT210-E04",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6, port 210 deg",
+   "case": "ladder vs trunk fixtures",
+   "least_m": 0.071,
+   "status": "PASS",
+   "worst_case_over": [
+    "ladder vs trunk fixtures"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6-PORT210-E05",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6, port 210 deg",
+   "case": "climber (1.5 g pose, following the ladder) vs moved district port rim",
+   "least_m": 0.268,
+   "status": "PASS",
+   "worst_case_over": [
+    "climber (1.5 g pose, following the ladder) vs moved district port rim"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6-PORT210-E06",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6, port 210 deg",
+   "case": "climber (1.5 g pose, following the ladder) vs Crew_Port_2_2 rim",
+   "least_m": 0.286,
+   "status": "PASS",
+   "worst_case_over": [
+    "climber (1.5 g pose, following the ladder) vs Crew_Port_2_2 rim"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6-PORT210-E07",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6, port 210 deg",
+   "case": "climber (1.5 g pose, following the ladder) vs Crew_Refuge_Port rim",
+   "least_m": 0.286,
+   "status": "PASS",
+   "worst_case_over": [
+    "climber (1.5 g pose, following the ladder) vs Crew_Refuge_Port rim"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6-PORT210-E08",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6, port 210 deg",
+   "case": "hoist line 0.25 m @105 deg, A vs ladder rods",
+   "least_m": 0.487,
+   "status": "PASS",
+   "worst_case_over": [
+    "hoist line 0.25 m @105 deg, A vs ladder rods"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6-PORT210-E09",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6, port 210 deg",
+   "case": "hoist line, S vs ladder rods",
+   "least_m": 0.372,
+   "status": "PASS",
+   "worst_case_over": [
+    "hoist line, S vs ladder rods"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6-PORT210-E10",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6, port 210 deg",
+   "case": "port tube vs SP-13 exit solid [o13, unchanged]",
+   "least_m": 1.438,
+   "status": "PASS",
+   "worst_case_over": [
+    "port tube vs SP-13 exit solid [o13, unchanged]"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6-PORT210-E11",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6, port 210 deg",
+   "case": "port tube vs SP-12 exit solid [o13, unchanged]",
+   "least_m": 1.55,
+   "status": "PASS",
+   "worst_case_over": [
+    "port tube vs SP-12 exit solid [o13, unchanged]"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6-PORT210-E12",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6, port 210 deg",
+   "case": "carrier S full trunk route X 105.3 -> 88.2 with rescuers",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier S full trunk route X 105.3 -> 88.2 with rescuers"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6-PORT210-E13",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6, port 210 deg",
+   "case": "carrier A full trunk route X 105.3 -> 88.2 with rescuers",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier A full trunk route X 105.3 -> 88.2 with rescuers"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6-PORT210-E14",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6, port 210 deg",
+   "case": "carrier K full trunk route X 105.3 -> 88.2 with rescuers",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier K full trunk route X 105.3 -> 88.2 with rescuers"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6-PORT210-E15",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6, port 210 deg",
+   "case": "carrier U full trunk route X 105.3 -> 88.2 (suited crew, self-propelled)",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier U full trunk route X 105.3 -> 88.2 (suited crew, self-propelled)"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6-LOADS",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6",
+   "case": "stile/rail/bracket load path, tether fall load, arrester passage over the local offset",
+   "least_m": null,
+   "status": "OPEN",
+   "worst_case_over": [],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "OPEN: no load, stiffness or arrest number assumed."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8-PORT205-ROUTE",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "PROTOTYPE CB2J8: offset 0.02 m outward (standoff 0.14 m) + rotated 8 deg away, both windows; district port 205 deg (reversible WHITEBOX), ladder 285 deg",
+   "case": "whole route: minimum over every measured element",
+   "least_m": 0.054,
+   "status": "PASS",
+   "worst_case_over": [
+    "stiles + arrest rail vs every opening (candidate ladder, whole length)",
+    "rungs vs every opening",
+    "stile brackets vs every opening",
+    "moved port edge vs ladder",
+    "ladder vs trunk fixtures",
+    "climber (1.5 g pose, following the ladder) vs moved district port rim",
+    "climber (1.5 g pose, following the ladder) vs Crew_Port_2_2 rim",
+    "climber (1.5 g pose, following the ladder) vs Crew_Refuge_Port rim",
+    "hoist line 0.25 m @105 deg, A vs ladder rods",
+    "hoist line, S vs ladder rods",
+    "port tube vs SP-13 exit solid [o13, unchanged]",
+    "port tube vs SP-12 exit solid [o13, unchanged]",
+    "carrier S full trunk route X 105.3 -> 88.2 with rescuers",
+    "carrier A full trunk route X 105.3 -> 88.2 with rescuers",
+    "carrier K full trunk route X 105.3 -> 88.2 with rescuers",
+    "carrier U full trunk route X 105.3 -> 88.2 (suited crew, self-propelled)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "ladder vs trunk fixtures",
+   "note": "no new ladder break: True; pressure boundary untouched (no cut, no new penetration); loads OPEN. the trunk, the district and SP-12/13 are on the non-rotating spine, so a clearance of fixed geometry is the same number in 0 g, spin, stopped and locked 1.5 g; the sampled-pose carriers are free poses (any state); the climber figure is the 1.5 g aft-down pose only; a 0 g free-float traverse pose, Coriolis and the loads of each state are not represented."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8-PORT205-E00",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8, port 205 deg",
+   "case": "stiles + arrest rail vs every opening (candidate ladder, whole length)",
+   "least_m": 0.067,
+   "status": "PASS",
+   "worst_case_over": [
+    "stiles + arrest rail vs every opening (candidate ladder, whole length)"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8-PORT205-E01",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8, port 205 deg",
+   "case": "rungs vs every opening",
+   "least_m": 0.097,
+   "status": "PASS",
+   "worst_case_over": [
+    "rungs vs every opening"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8-PORT205-E02",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8, port 205 deg",
+   "case": "stile brackets vs every opening",
+   "least_m": 0.125,
+   "status": "PASS",
+   "worst_case_over": [
+    "stile brackets vs every opening"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8-PORT205-E03",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8, port 205 deg",
+   "case": "moved port edge vs ladder",
+   "least_m": 0.092,
+   "status": "PASS",
+   "worst_case_over": [
+    "moved port edge vs ladder"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8-PORT205-E04",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8, port 205 deg",
+   "case": "ladder vs trunk fixtures",
+   "least_m": 0.054,
+   "status": "PASS",
+   "worst_case_over": [
+    "ladder vs trunk fixtures"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8-PORT205-E05",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8, port 205 deg",
+   "case": "climber (1.5 g pose, following the ladder) vs moved district port rim",
+   "least_m": 0.322,
+   "status": "PASS",
+   "worst_case_over": [
+    "climber (1.5 g pose, following the ladder) vs moved district port rim"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8-PORT205-E06",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8, port 205 deg",
+   "case": "climber (1.5 g pose, following the ladder) vs Crew_Port_2_2 rim",
+   "least_m": 0.309,
+   "status": "PASS",
+   "worst_case_over": [
+    "climber (1.5 g pose, following the ladder) vs Crew_Port_2_2 rim"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8-PORT205-E07",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8, port 205 deg",
+   "case": "climber (1.5 g pose, following the ladder) vs Crew_Refuge_Port rim",
+   "least_m": 0.309,
+   "status": "PASS",
+   "worst_case_over": [
+    "climber (1.5 g pose, following the ladder) vs Crew_Refuge_Port rim"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8-PORT205-E08",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8, port 205 deg",
+   "case": "hoist line 0.25 m @105 deg, A vs ladder rods",
+   "least_m": 0.487,
+   "status": "PASS",
+   "worst_case_over": [
+    "hoist line 0.25 m @105 deg, A vs ladder rods"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8-PORT205-E09",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8, port 205 deg",
+   "case": "hoist line, S vs ladder rods",
+   "least_m": 0.372,
+   "status": "PASS",
+   "worst_case_over": [
+    "hoist line, S vs ladder rods"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8-PORT205-E10",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8, port 205 deg",
+   "case": "port tube vs SP-13 exit solid [o13, unchanged]",
+   "least_m": 1.393,
+   "status": "PASS",
+   "worst_case_over": [
+    "port tube vs SP-13 exit solid [o13, unchanged]"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8-PORT205-E11",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8, port 205 deg",
+   "case": "port tube vs SP-12 exit solid [o13, unchanged]",
+   "least_m": 1.509,
+   "status": "PASS",
+   "worst_case_over": [
+    "port tube vs SP-12 exit solid [o13, unchanged]"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8-PORT205-E12",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8, port 205 deg",
+   "case": "carrier S full trunk route X 105.3 -> 88.2 with rescuers",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier S full trunk route X 105.3 -> 88.2 with rescuers"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8-PORT205-E13",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8, port 205 deg",
+   "case": "carrier A full trunk route X 105.3 -> 88.2 with rescuers",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier A full trunk route X 105.3 -> 88.2 with rescuers"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8-PORT205-E14",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8, port 205 deg",
+   "case": "carrier K full trunk route X 105.3 -> 88.2 with rescuers",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier K full trunk route X 105.3 -> 88.2 with rescuers"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8-PORT205-E15",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8, port 205 deg",
+   "case": "carrier U full trunk route X 105.3 -> 88.2 (suited crew, self-propelled)",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier U full trunk route X 105.3 -> 88.2 (suited crew, self-propelled)"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8-PORT210-ROUTE",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "PROTOTYPE CB2J8: offset 0.02 m outward (standoff 0.14 m) + rotated 8 deg away, both windows; district port 210 deg (reversible WHITEBOX), ladder 285 deg",
+   "case": "whole route: minimum over every measured element",
+   "least_m": 0.054,
+   "status": "PASS",
+   "worst_case_over": [
+    "stiles + arrest rail vs every opening (candidate ladder, whole length)",
+    "rungs vs every opening",
+    "stile brackets vs every opening",
+    "moved port edge vs ladder",
+    "ladder vs trunk fixtures",
+    "climber (1.5 g pose, following the ladder) vs moved district port rim",
+    "climber (1.5 g pose, following the ladder) vs Crew_Port_2_2 rim",
+    "climber (1.5 g pose, following the ladder) vs Crew_Refuge_Port rim",
+    "hoist line 0.25 m @105 deg, A vs ladder rods",
+    "hoist line, S vs ladder rods",
+    "port tube vs SP-13 exit solid [o13, unchanged]",
+    "port tube vs SP-12 exit solid [o13, unchanged]",
+    "carrier S full trunk route X 105.3 -> 88.2 with rescuers",
+    "carrier A full trunk route X 105.3 -> 88.2 with rescuers",
+    "carrier K full trunk route X 105.3 -> 88.2 with rescuers",
+    "carrier U full trunk route X 105.3 -> 88.2 (suited crew, self-propelled)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "ladder vs trunk fixtures",
+   "note": "no new ladder break: True; pressure boundary untouched (no cut, no new penetration); loads OPEN. the trunk, the district and SP-12/13 are on the non-rotating spine, so a clearance of fixed geometry is the same number in 0 g, spin, stopped and locked 1.5 g; the sampled-pose carriers are free poses (any state); the climber figure is the 1.5 g aft-down pose only; a 0 g free-float traverse pose, Coriolis and the loads of each state are not represented."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8-PORT210-E00",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8, port 210 deg",
+   "case": "stiles + arrest rail vs every opening (candidate ladder, whole length)",
+   "least_m": 0.067,
+   "status": "PASS",
+   "worst_case_over": [
+    "stiles + arrest rail vs every opening (candidate ladder, whole length)"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8-PORT210-E01",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8, port 210 deg",
+   "case": "rungs vs every opening",
+   "least_m": 0.068,
+   "status": "PASS",
+   "worst_case_over": [
+    "rungs vs every opening"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8-PORT210-E02",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8, port 210 deg",
+   "case": "stile brackets vs every opening",
+   "least_m": 0.125,
+   "status": "PASS",
+   "worst_case_over": [
+    "stile brackets vs every opening"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8-PORT210-E03",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8, port 210 deg",
+   "case": "moved port edge vs ladder",
+   "least_m": 0.068,
+   "status": "PASS",
+   "worst_case_over": [
+    "moved port edge vs ladder"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8-PORT210-E04",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8, port 210 deg",
+   "case": "ladder vs trunk fixtures",
+   "least_m": 0.054,
+   "status": "PASS",
+   "worst_case_over": [
+    "ladder vs trunk fixtures"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8-PORT210-E05",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8, port 210 deg",
+   "case": "climber (1.5 g pose, following the ladder) vs moved district port rim",
+   "least_m": 0.268,
+   "status": "PASS",
+   "worst_case_over": [
+    "climber (1.5 g pose, following the ladder) vs moved district port rim"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8-PORT210-E06",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8, port 210 deg",
+   "case": "climber (1.5 g pose, following the ladder) vs Crew_Port_2_2 rim",
+   "least_m": 0.309,
+   "status": "PASS",
+   "worst_case_over": [
+    "climber (1.5 g pose, following the ladder) vs Crew_Port_2_2 rim"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8-PORT210-E07",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8, port 210 deg",
+   "case": "climber (1.5 g pose, following the ladder) vs Crew_Refuge_Port rim",
+   "least_m": 0.309,
+   "status": "PASS",
+   "worst_case_over": [
+    "climber (1.5 g pose, following the ladder) vs Crew_Refuge_Port rim"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8-PORT210-E08",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8, port 210 deg",
+   "case": "hoist line 0.25 m @105 deg, A vs ladder rods",
+   "least_m": 0.487,
+   "status": "PASS",
+   "worst_case_over": [
+    "hoist line 0.25 m @105 deg, A vs ladder rods"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8-PORT210-E09",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8, port 210 deg",
+   "case": "hoist line, S vs ladder rods",
+   "least_m": 0.372,
+   "status": "PASS",
+   "worst_case_over": [
+    "hoist line, S vs ladder rods"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8-PORT210-E10",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8, port 210 deg",
+   "case": "port tube vs SP-13 exit solid [o13, unchanged]",
+   "least_m": 1.438,
+   "status": "PASS",
+   "worst_case_over": [
+    "port tube vs SP-13 exit solid [o13, unchanged]"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8-PORT210-E11",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8, port 210 deg",
+   "case": "port tube vs SP-12 exit solid [o13, unchanged]",
+   "least_m": 1.55,
+   "status": "PASS",
+   "worst_case_over": [
+    "port tube vs SP-12 exit solid [o13, unchanged]"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8-PORT210-E12",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8, port 210 deg",
+   "case": "carrier S full trunk route X 105.3 -> 88.2 with rescuers",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier S full trunk route X 105.3 -> 88.2 with rescuers"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8-PORT210-E13",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8, port 210 deg",
+   "case": "carrier A full trunk route X 105.3 -> 88.2 with rescuers",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier A full trunk route X 105.3 -> 88.2 with rescuers"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8-PORT210-E14",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8, port 210 deg",
+   "case": "carrier K full trunk route X 105.3 -> 88.2 with rescuers",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier K full trunk route X 105.3 -> 88.2 with rescuers"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8-PORT210-E15",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8, port 210 deg",
+   "case": "carrier U full trunk route X 105.3 -> 88.2 (suited crew, self-propelled)",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier U full trunk route X 105.3 -> 88.2 (suited crew, self-propelled)"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8-LOADS",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8",
+   "case": "stile/rail/bracket load path, tether fall load, arrester passage over the local offset",
+   "least_m": null,
+   "status": "OPEN",
+   "worst_case_over": [],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "OPEN: no load, stiffness or arrest number assumed."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4DP-PORT205-ROUTE",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "PROTOTYPE OR4DP: OR4 in both windows and at the moved district port (X 104.1, on the study ladder extension); district port 205 deg (reversible WHITEBOX), ladder 285 deg",
+   "case": "whole route: minimum over every measured element",
+   "least_m": 0.059,
+   "status": "PASS",
+   "worst_case_over": [
+    "stiles + arrest rail vs every opening (candidate ladder, whole length)",
+    "rungs vs every opening",
+    "stile brackets vs every opening",
+    "moved port edge vs ladder",
+    "ladder vs trunk fixtures",
+    "climber (1.5 g pose, following the ladder) vs moved district port rim",
+    "climber (1.5 g pose, following the ladder) vs Crew_Port_2_2 rim",
+    "climber (1.5 g pose, following the ladder) vs Crew_Refuge_Port rim",
+    "hoist line 0.25 m @105 deg, A vs ladder rods",
+    "hoist line, S vs ladder rods",
+    "port tube vs SP-13 exit solid [o13, unchanged]",
+    "port tube vs SP-12 exit solid [o13, unchanged]",
+    "carrier S full trunk route X 105.3 -> 88.2 with rescuers",
+    "carrier A full trunk route X 105.3 -> 88.2 with rescuers",
+    "carrier K full trunk route X 105.3 -> 88.2 with rescuers",
+    "carrier U full trunk route X 105.3 -> 88.2 (suited crew, self-propelled)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "stiles + arrest rail vs every opening (candidate ladder, whole length)",
+   "note": "no new ladder break: True; pressure boundary untouched (no cut, no new penetration); loads OPEN. the trunk, the district and SP-12/13 are on the non-rotating spine, so a clearance of fixed geometry is the same number in 0 g, spin, stopped and locked 1.5 g; the sampled-pose carriers are free poses (any state); the climber figure is the 1.5 g aft-down pose only; a 0 g free-float traverse pose, Coriolis and the loads of each state are not represented."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4DP-PORT205-E00",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4DP, port 205 deg",
+   "case": "stiles + arrest rail vs every opening (candidate ladder, whole length)",
+   "least_m": 0.059,
+   "status": "PASS",
+   "worst_case_over": [
+    "stiles + arrest rail vs every opening (candidate ladder, whole length)"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4DP-PORT205-E01",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4DP, port 205 deg",
+   "case": "rungs vs every opening",
+   "least_m": 0.078,
+   "status": "PASS",
+   "worst_case_over": [
+    "rungs vs every opening"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4DP-PORT205-E02",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4DP, port 205 deg",
+   "case": "stile brackets vs every opening",
+   "least_m": 0.101,
+   "status": "PASS",
+   "worst_case_over": [
+    "stile brackets vs every opening"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4DP-PORT205-E03",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4DP, port 205 deg",
+   "case": "moved port edge vs ladder",
+   "least_m": 0.133,
+   "status": "PASS",
+   "worst_case_over": [
+    "moved port edge vs ladder"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4DP-PORT205-E04",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4DP, port 205 deg",
+   "case": "ladder vs trunk fixtures",
+   "least_m": 0.131,
+   "status": "PASS",
+   "worst_case_over": [
+    "ladder vs trunk fixtures"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4DP-PORT205-E05",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4DP, port 205 deg",
+   "case": "climber (1.5 g pose, following the ladder) vs moved district port rim",
+   "least_m": 0.329,
+   "status": "PASS",
+   "worst_case_over": [
+    "climber (1.5 g pose, following the ladder) vs moved district port rim"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4DP-PORT205-E06",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4DP, port 205 deg",
+   "case": "climber (1.5 g pose, following the ladder) vs Crew_Port_2_2 rim",
+   "least_m": 0.22,
+   "status": "PASS",
+   "worst_case_over": [
+    "climber (1.5 g pose, following the ladder) vs Crew_Port_2_2 rim"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4DP-PORT205-E07",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4DP, port 205 deg",
+   "case": "climber (1.5 g pose, following the ladder) vs Crew_Refuge_Port rim",
+   "least_m": 0.22,
+   "status": "PASS",
+   "worst_case_over": [
+    "climber (1.5 g pose, following the ladder) vs Crew_Refuge_Port rim"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4DP-PORT205-E08",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4DP, port 205 deg",
+   "case": "hoist line 0.25 m @105 deg, A vs ladder rods",
+   "least_m": 0.487,
+   "status": "PASS",
+   "worst_case_over": [
+    "hoist line 0.25 m @105 deg, A vs ladder rods"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4DP-PORT205-E09",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4DP, port 205 deg",
+   "case": "hoist line, S vs ladder rods",
+   "least_m": 0.372,
+   "status": "PASS",
+   "worst_case_over": [
+    "hoist line, S vs ladder rods"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4DP-PORT205-E10",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4DP, port 205 deg",
+   "case": "port tube vs SP-13 exit solid [o13, unchanged]",
+   "least_m": 1.393,
+   "status": "PASS",
+   "worst_case_over": [
+    "port tube vs SP-13 exit solid [o13, unchanged]"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4DP-PORT205-E11",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4DP, port 205 deg",
+   "case": "port tube vs SP-12 exit solid [o13, unchanged]",
+   "least_m": 1.509,
+   "status": "PASS",
+   "worst_case_over": [
+    "port tube vs SP-12 exit solid [o13, unchanged]"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4DP-PORT205-E12",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4DP, port 205 deg",
+   "case": "carrier S full trunk route X 105.3 -> 88.2 with rescuers",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier S full trunk route X 105.3 -> 88.2 with rescuers"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4DP-PORT205-E13",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4DP, port 205 deg",
+   "case": "carrier A full trunk route X 105.3 -> 88.2 with rescuers",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier A full trunk route X 105.3 -> 88.2 with rescuers"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4DP-PORT205-E14",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4DP, port 205 deg",
+   "case": "carrier K full trunk route X 105.3 -> 88.2 with rescuers",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier K full trunk route X 105.3 -> 88.2 with rescuers"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4DP-PORT205-E15",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4DP, port 205 deg",
+   "case": "carrier U full trunk route X 105.3 -> 88.2 (suited crew, self-propelled)",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier U full trunk route X 105.3 -> 88.2 (suited crew, self-propelled)"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4DP-PORT210-ROUTE",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "PROTOTYPE OR4DP: OR4 in both windows and at the moved district port (X 104.1, on the study ladder extension); district port 210 deg (reversible WHITEBOX), ladder 285 deg",
+   "case": "whole route: minimum over every measured element",
+   "least_m": 0.059,
+   "status": "PASS",
+   "worst_case_over": [
+    "stiles + arrest rail vs every opening (candidate ladder, whole length)",
+    "rungs vs every opening",
+    "stile brackets vs every opening",
+    "moved port edge vs ladder",
+    "ladder vs trunk fixtures",
+    "climber (1.5 g pose, following the ladder) vs moved district port rim",
+    "climber (1.5 g pose, following the ladder) vs Crew_Port_2_2 rim",
+    "climber (1.5 g pose, following the ladder) vs Crew_Refuge_Port rim",
+    "hoist line 0.25 m @105 deg, A vs ladder rods",
+    "hoist line, S vs ladder rods",
+    "port tube vs SP-13 exit solid [o13, unchanged]",
+    "port tube vs SP-12 exit solid [o13, unchanged]",
+    "carrier S full trunk route X 105.3 -> 88.2 with rescuers",
+    "carrier A full trunk route X 105.3 -> 88.2 with rescuers",
+    "carrier K full trunk route X 105.3 -> 88.2 with rescuers",
+    "carrier U full trunk route X 105.3 -> 88.2 (suited crew, self-propelled)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "stiles + arrest rail vs every opening (candidate ladder, whole length)",
+   "note": "no new ladder break: True; pressure boundary untouched (no cut, no new penetration); loads OPEN. the trunk, the district and SP-12/13 are on the non-rotating spine, so a clearance of fixed geometry is the same number in 0 g, spin, stopped and locked 1.5 g; the sampled-pose carriers are free poses (any state); the climber figure is the 1.5 g aft-down pose only; a 0 g free-float traverse pose, Coriolis and the loads of each state are not represented."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4DP-PORT210-E00",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4DP, port 210 deg",
+   "case": "stiles + arrest rail vs every opening (candidate ladder, whole length)",
+   "least_m": 0.059,
+   "status": "PASS",
+   "worst_case_over": [
+    "stiles + arrest rail vs every opening (candidate ladder, whole length)"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4DP-PORT210-E01",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4DP, port 210 deg",
+   "case": "rungs vs every opening",
+   "least_m": 0.078,
+   "status": "PASS",
+   "worst_case_over": [
+    "rungs vs every opening"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4DP-PORT210-E02",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4DP, port 210 deg",
+   "case": "stile brackets vs every opening",
+   "least_m": 0.101,
+   "status": "PASS",
+   "worst_case_over": [
+    "stile brackets vs every opening"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4DP-PORT210-E03",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4DP, port 210 deg",
+   "case": "moved port edge vs ladder",
+   "least_m": 0.108,
+   "status": "PASS",
+   "worst_case_over": [
+    "moved port edge vs ladder"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4DP-PORT210-E04",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4DP, port 210 deg",
+   "case": "ladder vs trunk fixtures",
+   "least_m": 0.131,
+   "status": "PASS",
+   "worst_case_over": [
+    "ladder vs trunk fixtures"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4DP-PORT210-E05",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4DP, port 210 deg",
+   "case": "climber (1.5 g pose, following the ladder) vs moved district port rim",
+   "least_m": 0.27,
+   "status": "PASS",
+   "worst_case_over": [
+    "climber (1.5 g pose, following the ladder) vs moved district port rim"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4DP-PORT210-E06",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4DP, port 210 deg",
+   "case": "climber (1.5 g pose, following the ladder) vs Crew_Port_2_2 rim",
+   "least_m": 0.22,
+   "status": "PASS",
+   "worst_case_over": [
+    "climber (1.5 g pose, following the ladder) vs Crew_Port_2_2 rim"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4DP-PORT210-E07",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4DP, port 210 deg",
+   "case": "climber (1.5 g pose, following the ladder) vs Crew_Refuge_Port rim",
+   "least_m": 0.22,
+   "status": "PASS",
+   "worst_case_over": [
+    "climber (1.5 g pose, following the ladder) vs Crew_Refuge_Port rim"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4DP-PORT210-E08",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4DP, port 210 deg",
+   "case": "hoist line 0.25 m @105 deg, A vs ladder rods",
+   "least_m": 0.487,
+   "status": "PASS",
+   "worst_case_over": [
+    "hoist line 0.25 m @105 deg, A vs ladder rods"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4DP-PORT210-E09",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4DP, port 210 deg",
+   "case": "hoist line, S vs ladder rods",
+   "least_m": 0.372,
+   "status": "PASS",
+   "worst_case_over": [
+    "hoist line, S vs ladder rods"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4DP-PORT210-E10",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4DP, port 210 deg",
+   "case": "port tube vs SP-13 exit solid [o13, unchanged]",
+   "least_m": 1.438,
+   "status": "PASS",
+   "worst_case_over": [
+    "port tube vs SP-13 exit solid [o13, unchanged]"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4DP-PORT210-E11",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4DP, port 210 deg",
+   "case": "port tube vs SP-12 exit solid [o13, unchanged]",
+   "least_m": 1.55,
+   "status": "PASS",
+   "worst_case_over": [
+    "port tube vs SP-12 exit solid [o13, unchanged]"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4DP-PORT210-E12",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4DP, port 210 deg",
+   "case": "carrier S full trunk route X 105.3 -> 88.2 with rescuers",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier S full trunk route X 105.3 -> 88.2 with rescuers"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4DP-PORT210-E13",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4DP, port 210 deg",
+   "case": "carrier A full trunk route X 105.3 -> 88.2 with rescuers",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier A full trunk route X 105.3 -> 88.2 with rescuers"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4DP-PORT210-E14",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4DP, port 210 deg",
+   "case": "carrier K full trunk route X 105.3 -> 88.2 with rescuers",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier K full trunk route X 105.3 -> 88.2 with rescuers"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4DP-PORT210-E15",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4DP, port 210 deg",
+   "case": "carrier U full trunk route X 105.3 -> 88.2 (suited crew, self-propelled)",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier U full trunk route X 105.3 -> 88.2 (suited crew, self-propelled)"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4DP-PORT215-ROUTE",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "PROTOTYPE OR4DP: OR4 in both windows and at the moved district port (X 104.1, on the study ladder extension); district port 215 deg (reversible WHITEBOX), ladder 285 deg",
+   "case": "whole route: minimum over every measured element",
+   "least_m": 0.059,
+   "status": "PASS",
+   "worst_case_over": [
+    "stiles + arrest rail vs every opening (candidate ladder, whole length)",
+    "rungs vs every opening",
+    "stile brackets vs every opening",
+    "moved port edge vs ladder",
+    "ladder vs trunk fixtures",
+    "climber (1.5 g pose, following the ladder) vs moved district port rim",
+    "climber (1.5 g pose, following the ladder) vs Crew_Port_2_2 rim",
+    "climber (1.5 g pose, following the ladder) vs Crew_Refuge_Port rim",
+    "hoist line 0.25 m @105 deg, A vs ladder rods",
+    "hoist line, S vs ladder rods",
+    "port tube vs SP-13 exit solid [o13, unchanged]",
+    "port tube vs SP-12 exit solid [o13, unchanged]",
+    "carrier S full trunk route X 105.3 -> 88.2 with rescuers",
+    "carrier A full trunk route X 105.3 -> 88.2 with rescuers",
+    "carrier K full trunk route X 105.3 -> 88.2 with rescuers",
+    "carrier U full trunk route X 105.3 -> 88.2 (suited crew, self-propelled)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "stiles + arrest rail vs every opening (candidate ladder, whole length)",
+   "note": "no new ladder break: True; pressure boundary untouched (no cut, no new penetration); loads OPEN. the trunk, the district and SP-12/13 are on the non-rotating spine, so a clearance of fixed geometry is the same number in 0 g, spin, stopped and locked 1.5 g; the sampled-pose carriers are free poses (any state); the climber figure is the 1.5 g aft-down pose only; a 0 g free-float traverse pose, Coriolis and the loads of each state are not represented."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4DP-PORT215-E00",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4DP, port 215 deg",
+   "case": "stiles + arrest rail vs every opening (candidate ladder, whole length)",
+   "least_m": 0.059,
+   "status": "PASS",
+   "worst_case_over": [
+    "stiles + arrest rail vs every opening (candidate ladder, whole length)"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4DP-PORT215-E01",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4DP, port 215 deg",
+   "case": "rungs vs every opening",
+   "least_m": 0.075,
+   "status": "PASS",
+   "worst_case_over": [
+    "rungs vs every opening"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4DP-PORT215-E02",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4DP, port 215 deg",
+   "case": "stile brackets vs every opening",
+   "least_m": 0.101,
+   "status": "PASS",
+   "worst_case_over": [
+    "stile brackets vs every opening"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4DP-PORT215-E03",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4DP, port 215 deg",
+   "case": "moved port edge vs ladder",
+   "least_m": 0.075,
+   "status": "PASS",
+   "worst_case_over": [
+    "moved port edge vs ladder"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4DP-PORT215-E04",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4DP, port 215 deg",
+   "case": "ladder vs trunk fixtures",
+   "least_m": 0.131,
+   "status": "PASS",
+   "worst_case_over": [
+    "ladder vs trunk fixtures"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4DP-PORT215-E05",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4DP, port 215 deg",
+   "case": "climber (1.5 g pose, following the ladder) vs moved district port rim",
+   "least_m": 0.213,
+   "status": "PASS",
+   "worst_case_over": [
+    "climber (1.5 g pose, following the ladder) vs moved district port rim"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4DP-PORT215-E06",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4DP, port 215 deg",
+   "case": "climber (1.5 g pose, following the ladder) vs Crew_Port_2_2 rim",
+   "least_m": 0.22,
+   "status": "PASS",
+   "worst_case_over": [
+    "climber (1.5 g pose, following the ladder) vs Crew_Port_2_2 rim"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4DP-PORT215-E07",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4DP, port 215 deg",
+   "case": "climber (1.5 g pose, following the ladder) vs Crew_Refuge_Port rim",
+   "least_m": 0.22,
+   "status": "PASS",
+   "worst_case_over": [
+    "climber (1.5 g pose, following the ladder) vs Crew_Refuge_Port rim"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4DP-PORT215-E08",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4DP, port 215 deg",
+   "case": "hoist line 0.25 m @105 deg, A vs ladder rods",
+   "least_m": 0.487,
+   "status": "PASS",
+   "worst_case_over": [
+    "hoist line 0.25 m @105 deg, A vs ladder rods"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4DP-PORT215-E09",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4DP, port 215 deg",
+   "case": "hoist line, S vs ladder rods",
+   "least_m": 0.372,
+   "status": "PASS",
+   "worst_case_over": [
+    "hoist line, S vs ladder rods"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4DP-PORT215-E10",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4DP, port 215 deg",
+   "case": "port tube vs SP-13 exit solid [o13, unchanged]",
+   "least_m": 1.48,
+   "status": "PASS",
+   "worst_case_over": [
+    "port tube vs SP-13 exit solid [o13, unchanged]"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4DP-PORT215-E11",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4DP, port 215 deg",
+   "case": "port tube vs SP-12 exit solid [o13, unchanged]",
+   "least_m": 1.588,
+   "status": "PASS",
+   "worst_case_over": [
+    "port tube vs SP-12 exit solid [o13, unchanged]"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4DP-PORT215-E12",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4DP, port 215 deg",
+   "case": "carrier S full trunk route X 105.3 -> 88.2 with rescuers",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier S full trunk route X 105.3 -> 88.2 with rescuers"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4DP-PORT215-E13",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4DP, port 215 deg",
+   "case": "carrier A full trunk route X 105.3 -> 88.2 with rescuers",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier A full trunk route X 105.3 -> 88.2 with rescuers"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4DP-PORT215-E14",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4DP, port 215 deg",
+   "case": "carrier K full trunk route X 105.3 -> 88.2 with rescuers",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier K full trunk route X 105.3 -> 88.2 with rescuers"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4DP-PORT215-E15",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4DP, port 215 deg",
+   "case": "carrier U full trunk route X 105.3 -> 88.2 (suited crew, self-propelled)",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier U full trunk route X 105.3 -> 88.2 (suited crew, self-propelled)"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-OR4DP-LOADS",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "OR4DP",
+   "case": "stile/rail/bracket load path, tether fall load, arrester passage over the local offset",
+   "least_m": null,
+   "status": "OPEN",
+   "worst_case_over": [],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "OPEN: no load, stiffness or arrest number assumed."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8DP-PORT205-ROUTE",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "PROTOTYPE CB2J8DP: CB2J8 in both windows and at the moved district port (X 104.1, on the study ladder extension); district port 205 deg (reversible WHITEBOX), ladder 285 deg",
+   "case": "whole route: minimum over every measured element",
+   "least_m": 0.054,
+   "status": "PASS",
+   "worst_case_over": [
+    "stiles + arrest rail vs every opening (candidate ladder, whole length)",
+    "rungs vs every opening",
+    "stile brackets vs every opening",
+    "moved port edge vs ladder",
+    "ladder vs trunk fixtures",
+    "climber (1.5 g pose, following the ladder) vs moved district port rim",
+    "climber (1.5 g pose, following the ladder) vs Crew_Port_2_2 rim",
+    "climber (1.5 g pose, following the ladder) vs Crew_Refuge_Port rim",
+    "hoist line 0.25 m @105 deg, A vs ladder rods",
+    "hoist line, S vs ladder rods",
+    "port tube vs SP-13 exit solid [o13, unchanged]",
+    "port tube vs SP-12 exit solid [o13, unchanged]",
+    "carrier S full trunk route X 105.3 -> 88.2 with rescuers",
+    "carrier A full trunk route X 105.3 -> 88.2 with rescuers",
+    "carrier K full trunk route X 105.3 -> 88.2 with rescuers",
+    "carrier U full trunk route X 105.3 -> 88.2 (suited crew, self-propelled)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "ladder vs trunk fixtures",
+   "note": "no new ladder break: True; pressure boundary untouched (no cut, no new penetration); loads OPEN. the trunk, the district and SP-12/13 are on the non-rotating spine, so a clearance of fixed geometry is the same number in 0 g, spin, stopped and locked 1.5 g; the sampled-pose carriers are free poses (any state); the climber figure is the 1.5 g aft-down pose only; a 0 g free-float traverse pose, Coriolis and the loads of each state are not represented."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8DP-PORT205-E00",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8DP, port 205 deg",
+   "case": "stiles + arrest rail vs every opening (candidate ladder, whole length)",
+   "least_m": 0.067,
+   "status": "PASS",
+   "worst_case_over": [
+    "stiles + arrest rail vs every opening (candidate ladder, whole length)"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8DP-PORT205-E01",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8DP, port 205 deg",
+   "case": "rungs vs every opening",
+   "least_m": 0.101,
+   "status": "PASS",
+   "worst_case_over": [
+    "rungs vs every opening"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8DP-PORT205-E02",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8DP, port 205 deg",
+   "case": "stile brackets vs every opening",
+   "least_m": 0.125,
+   "status": "PASS",
+   "worst_case_over": [
+    "stile brackets vs every opening"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8DP-PORT205-E03",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8DP, port 205 deg",
+   "case": "moved port edge vs ladder",
+   "least_m": 0.121,
+   "status": "PASS",
+   "worst_case_over": [
+    "moved port edge vs ladder"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8DP-PORT205-E04",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8DP, port 205 deg",
+   "case": "ladder vs trunk fixtures",
+   "least_m": 0.054,
+   "status": "PASS",
+   "worst_case_over": [
+    "ladder vs trunk fixtures"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8DP-PORT205-E05",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8DP, port 205 deg",
+   "case": "climber (1.5 g pose, following the ladder) vs moved district port rim",
+   "least_m": 0.417,
+   "status": "PASS",
+   "worst_case_over": [
+    "climber (1.5 g pose, following the ladder) vs moved district port rim"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8DP-PORT205-E06",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8DP, port 205 deg",
+   "case": "climber (1.5 g pose, following the ladder) vs Crew_Port_2_2 rim",
+   "least_m": 0.309,
+   "status": "PASS",
+   "worst_case_over": [
+    "climber (1.5 g pose, following the ladder) vs Crew_Port_2_2 rim"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8DP-PORT205-E07",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8DP, port 205 deg",
+   "case": "climber (1.5 g pose, following the ladder) vs Crew_Refuge_Port rim",
+   "least_m": 0.309,
+   "status": "PASS",
+   "worst_case_over": [
+    "climber (1.5 g pose, following the ladder) vs Crew_Refuge_Port rim"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8DP-PORT205-E08",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8DP, port 205 deg",
+   "case": "hoist line 0.25 m @105 deg, A vs ladder rods",
+   "least_m": 0.487,
+   "status": "PASS",
+   "worst_case_over": [
+    "hoist line 0.25 m @105 deg, A vs ladder rods"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8DP-PORT205-E09",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8DP, port 205 deg",
+   "case": "hoist line, S vs ladder rods",
+   "least_m": 0.372,
+   "status": "PASS",
+   "worst_case_over": [
+    "hoist line, S vs ladder rods"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8DP-PORT205-E10",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8DP, port 205 deg",
+   "case": "port tube vs SP-13 exit solid [o13, unchanged]",
+   "least_m": 1.393,
+   "status": "PASS",
+   "worst_case_over": [
+    "port tube vs SP-13 exit solid [o13, unchanged]"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8DP-PORT205-E11",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8DP, port 205 deg",
+   "case": "port tube vs SP-12 exit solid [o13, unchanged]",
+   "least_m": 1.509,
+   "status": "PASS",
+   "worst_case_over": [
+    "port tube vs SP-12 exit solid [o13, unchanged]"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8DP-PORT205-E12",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8DP, port 205 deg",
+   "case": "carrier S full trunk route X 105.3 -> 88.2 with rescuers",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier S full trunk route X 105.3 -> 88.2 with rescuers"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8DP-PORT205-E13",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8DP, port 205 deg",
+   "case": "carrier A full trunk route X 105.3 -> 88.2 with rescuers",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier A full trunk route X 105.3 -> 88.2 with rescuers"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8DP-PORT205-E14",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8DP, port 205 deg",
+   "case": "carrier K full trunk route X 105.3 -> 88.2 with rescuers",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier K full trunk route X 105.3 -> 88.2 with rescuers"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8DP-PORT205-E15",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8DP, port 205 deg",
+   "case": "carrier U full trunk route X 105.3 -> 88.2 (suited crew, self-propelled)",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier U full trunk route X 105.3 -> 88.2 (suited crew, self-propelled)"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8DP-PORT210-ROUTE",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "PROTOTYPE CB2J8DP: CB2J8 in both windows and at the moved district port (X 104.1, on the study ladder extension); district port 210 deg (reversible WHITEBOX), ladder 285 deg",
+   "case": "whole route: minimum over every measured element",
+   "least_m": 0.054,
+   "status": "PASS",
+   "worst_case_over": [
+    "stiles + arrest rail vs every opening (candidate ladder, whole length)",
+    "rungs vs every opening",
+    "stile brackets vs every opening",
+    "moved port edge vs ladder",
+    "ladder vs trunk fixtures",
+    "climber (1.5 g pose, following the ladder) vs moved district port rim",
+    "climber (1.5 g pose, following the ladder) vs Crew_Port_2_2 rim",
+    "climber (1.5 g pose, following the ladder) vs Crew_Refuge_Port rim",
+    "hoist line 0.25 m @105 deg, A vs ladder rods",
+    "hoist line, S vs ladder rods",
+    "port tube vs SP-13 exit solid [o13, unchanged]",
+    "port tube vs SP-12 exit solid [o13, unchanged]",
+    "carrier S full trunk route X 105.3 -> 88.2 with rescuers",
+    "carrier A full trunk route X 105.3 -> 88.2 with rescuers",
+    "carrier K full trunk route X 105.3 -> 88.2 with rescuers",
+    "carrier U full trunk route X 105.3 -> 88.2 (suited crew, self-propelled)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "ladder vs trunk fixtures",
+   "note": "no new ladder break: True; pressure boundary untouched (no cut, no new penetration); loads OPEN. the trunk, the district and SP-12/13 are on the non-rotating spine, so a clearance of fixed geometry is the same number in 0 g, spin, stopped and locked 1.5 g; the sampled-pose carriers are free poses (any state); the climber figure is the 1.5 g aft-down pose only; a 0 g free-float traverse pose, Coriolis and the loads of each state are not represented."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8DP-PORT210-E00",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8DP, port 210 deg",
+   "case": "stiles + arrest rail vs every opening (candidate ladder, whole length)",
+   "least_m": 0.067,
+   "status": "PASS",
+   "worst_case_over": [
+    "stiles + arrest rail vs every opening (candidate ladder, whole length)"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8DP-PORT210-E01",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8DP, port 210 deg",
+   "case": "rungs vs every opening",
+   "least_m": 0.101,
+   "status": "PASS",
+   "worst_case_over": [
+    "rungs vs every opening"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8DP-PORT210-E02",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8DP, port 210 deg",
+   "case": "stile brackets vs every opening",
+   "least_m": 0.125,
+   "status": "PASS",
+   "worst_case_over": [
+    "stile brackets vs every opening"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8DP-PORT210-E03",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8DP, port 210 deg",
+   "case": "moved port edge vs ladder",
+   "least_m": 0.117,
+   "status": "PASS",
+   "worst_case_over": [
+    "moved port edge vs ladder"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8DP-PORT210-E04",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8DP, port 210 deg",
+   "case": "ladder vs trunk fixtures",
+   "least_m": 0.054,
+   "status": "PASS",
+   "worst_case_over": [
+    "ladder vs trunk fixtures"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8DP-PORT210-E05",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8DP, port 210 deg",
+   "case": "climber (1.5 g pose, following the ladder) vs moved district port rim",
+   "least_m": 0.359,
+   "status": "PASS",
+   "worst_case_over": [
+    "climber (1.5 g pose, following the ladder) vs moved district port rim"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8DP-PORT210-E06",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8DP, port 210 deg",
+   "case": "climber (1.5 g pose, following the ladder) vs Crew_Port_2_2 rim",
+   "least_m": 0.309,
+   "status": "PASS",
+   "worst_case_over": [
+    "climber (1.5 g pose, following the ladder) vs Crew_Port_2_2 rim"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8DP-PORT210-E07",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8DP, port 210 deg",
+   "case": "climber (1.5 g pose, following the ladder) vs Crew_Refuge_Port rim",
+   "least_m": 0.309,
+   "status": "PASS",
+   "worst_case_over": [
+    "climber (1.5 g pose, following the ladder) vs Crew_Refuge_Port rim"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8DP-PORT210-E08",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8DP, port 210 deg",
+   "case": "hoist line 0.25 m @105 deg, A vs ladder rods",
+   "least_m": 0.487,
+   "status": "PASS",
+   "worst_case_over": [
+    "hoist line 0.25 m @105 deg, A vs ladder rods"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8DP-PORT210-E09",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8DP, port 210 deg",
+   "case": "hoist line, S vs ladder rods",
+   "least_m": 0.372,
+   "status": "PASS",
+   "worst_case_over": [
+    "hoist line, S vs ladder rods"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8DP-PORT210-E10",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8DP, port 210 deg",
+   "case": "port tube vs SP-13 exit solid [o13, unchanged]",
+   "least_m": 1.438,
+   "status": "PASS",
+   "worst_case_over": [
+    "port tube vs SP-13 exit solid [o13, unchanged]"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8DP-PORT210-E11",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8DP, port 210 deg",
+   "case": "port tube vs SP-12 exit solid [o13, unchanged]",
+   "least_m": 1.55,
+   "status": "PASS",
+   "worst_case_over": [
+    "port tube vs SP-12 exit solid [o13, unchanged]"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8DP-PORT210-E12",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8DP, port 210 deg",
+   "case": "carrier S full trunk route X 105.3 -> 88.2 with rescuers",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier S full trunk route X 105.3 -> 88.2 with rescuers"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8DP-PORT210-E13",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8DP, port 210 deg",
+   "case": "carrier A full trunk route X 105.3 -> 88.2 with rescuers",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier A full trunk route X 105.3 -> 88.2 with rescuers"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8DP-PORT210-E14",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8DP, port 210 deg",
+   "case": "carrier K full trunk route X 105.3 -> 88.2 with rescuers",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier K full trunk route X 105.3 -> 88.2 with rescuers"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8DP-PORT210-E15",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8DP, port 210 deg",
+   "case": "carrier U full trunk route X 105.3 -> 88.2 (suited crew, self-propelled)",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier U full trunk route X 105.3 -> 88.2 (suited crew, self-propelled)"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8DP-PORT215-ROUTE",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "PROTOTYPE CB2J8DP: CB2J8 in both windows and at the moved district port (X 104.1, on the study ladder extension); district port 215 deg (reversible WHITEBOX), ladder 285 deg",
+   "case": "whole route: minimum over every measured element",
+   "least_m": 0.054,
+   "status": "PASS",
+   "worst_case_over": [
+    "stiles + arrest rail vs every opening (candidate ladder, whole length)",
+    "rungs vs every opening",
+    "stile brackets vs every opening",
+    "moved port edge vs ladder",
+    "ladder vs trunk fixtures",
+    "climber (1.5 g pose, following the ladder) vs moved district port rim",
+    "climber (1.5 g pose, following the ladder) vs Crew_Port_2_2 rim",
+    "climber (1.5 g pose, following the ladder) vs Crew_Refuge_Port rim",
+    "hoist line 0.25 m @105 deg, A vs ladder rods",
+    "hoist line, S vs ladder rods",
+    "port tube vs SP-13 exit solid [o13, unchanged]",
+    "port tube vs SP-12 exit solid [o13, unchanged]",
+    "carrier S full trunk route X 105.3 -> 88.2 with rescuers",
+    "carrier A full trunk route X 105.3 -> 88.2 with rescuers",
+    "carrier K full trunk route X 105.3 -> 88.2 with rescuers",
+    "carrier U full trunk route X 105.3 -> 88.2 (suited crew, self-propelled)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "ladder vs trunk fixtures",
+   "note": "no new ladder break: True; pressure boundary untouched (no cut, no new penetration); loads OPEN. the trunk, the district and SP-12/13 are on the non-rotating spine, so a clearance of fixed geometry is the same number in 0 g, spin, stopped and locked 1.5 g; the sampled-pose carriers are free poses (any state); the climber figure is the 1.5 g aft-down pose only; a 0 g free-float traverse pose, Coriolis and the loads of each state are not represented."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8DP-PORT215-E00",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8DP, port 215 deg",
+   "case": "stiles + arrest rail vs every opening (candidate ladder, whole length)",
+   "least_m": 0.067,
+   "status": "PASS",
+   "worst_case_over": [
+    "stiles + arrest rail vs every opening (candidate ladder, whole length)"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8DP-PORT215-E01",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8DP, port 215 deg",
+   "case": "rungs vs every opening",
+   "least_m": 0.101,
+   "status": "PASS",
+   "worst_case_over": [
+    "rungs vs every opening"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8DP-PORT215-E02",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8DP, port 215 deg",
+   "case": "stile brackets vs every opening",
+   "least_m": 0.125,
+   "status": "PASS",
+   "worst_case_over": [
+    "stile brackets vs every opening"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8DP-PORT215-E03",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8DP, port 215 deg",
+   "case": "moved port edge vs ladder",
+   "least_m": 0.106,
+   "status": "PASS",
+   "worst_case_over": [
+    "moved port edge vs ladder"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8DP-PORT215-E04",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8DP, port 215 deg",
+   "case": "ladder vs trunk fixtures",
+   "least_m": 0.054,
+   "status": "PASS",
+   "worst_case_over": [
+    "ladder vs trunk fixtures"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8DP-PORT215-E05",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8DP, port 215 deg",
+   "case": "climber (1.5 g pose, following the ladder) vs moved district port rim",
+   "least_m": 0.302,
+   "status": "PASS",
+   "worst_case_over": [
+    "climber (1.5 g pose, following the ladder) vs moved district port rim"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8DP-PORT215-E06",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8DP, port 215 deg",
+   "case": "climber (1.5 g pose, following the ladder) vs Crew_Port_2_2 rim",
+   "least_m": 0.309,
+   "status": "PASS",
+   "worst_case_over": [
+    "climber (1.5 g pose, following the ladder) vs Crew_Port_2_2 rim"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8DP-PORT215-E07",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8DP, port 215 deg",
+   "case": "climber (1.5 g pose, following the ladder) vs Crew_Refuge_Port rim",
+   "least_m": 0.309,
+   "status": "PASS",
+   "worst_case_over": [
+    "climber (1.5 g pose, following the ladder) vs Crew_Refuge_Port rim"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8DP-PORT215-E08",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8DP, port 215 deg",
+   "case": "hoist line 0.25 m @105 deg, A vs ladder rods",
+   "least_m": 0.487,
+   "status": "PASS",
+   "worst_case_over": [
+    "hoist line 0.25 m @105 deg, A vs ladder rods"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8DP-PORT215-E09",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8DP, port 215 deg",
+   "case": "hoist line, S vs ladder rods",
+   "least_m": 0.372,
+   "status": "PASS",
+   "worst_case_over": [
+    "hoist line, S vs ladder rods"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8DP-PORT215-E10",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8DP, port 215 deg",
+   "case": "port tube vs SP-13 exit solid [o13, unchanged]",
+   "least_m": 1.48,
+   "status": "PASS",
+   "worst_case_over": [
+    "port tube vs SP-13 exit solid [o13, unchanged]"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8DP-PORT215-E11",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8DP, port 215 deg",
+   "case": "port tube vs SP-12 exit solid [o13, unchanged]",
+   "least_m": 1.588,
+   "status": "PASS",
+   "worst_case_over": [
+    "port tube vs SP-12 exit solid [o13, unchanged]"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8DP-PORT215-E12",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8DP, port 215 deg",
+   "case": "carrier S full trunk route X 105.3 -> 88.2 with rescuers",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier S full trunk route X 105.3 -> 88.2 with rescuers"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8DP-PORT215-E13",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8DP, port 215 deg",
+   "case": "carrier A full trunk route X 105.3 -> 88.2 with rescuers",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier A full trunk route X 105.3 -> 88.2 with rescuers"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8DP-PORT215-E14",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8DP, port 215 deg",
+   "case": "carrier K full trunk route X 105.3 -> 88.2 with rescuers",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier K full trunk route X 105.3 -> 88.2 with rescuers"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8DP-PORT215-E15",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8DP, port 215 deg",
+   "case": "carrier U full trunk route X 105.3 -> 88.2 (suited crew, self-propelled)",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier U full trunk route X 105.3 -> 88.2 (suited crew, self-propelled)"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J8DP-LOADS",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J8DP",
+   "case": "stile/rail/bracket load path, tether fall load, arrester passage over the local offset",
+   "least_m": null,
+   "status": "OPEN",
+   "worst_case_over": [],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "OPEN: no load, stiffness or arrest number assumed."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6DP-PORT205-ROUTE",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "PROTOTYPE CB2J6DP: CB2J6 in both windows and at the moved district port (X 104.1, on the study ladder extension); district port 205 deg (reversible WHITEBOX), ladder 285 deg",
+   "case": "whole route: minimum over every measured element",
+   "least_m": 0.064,
+   "status": "PASS",
+   "worst_case_over": [
+    "stiles + arrest rail vs every opening (candidate ladder, whole length)",
+    "rungs vs every opening",
+    "stile brackets vs every opening",
+    "moved port edge vs ladder",
+    "ladder vs trunk fixtures",
+    "climber (1.5 g pose, following the ladder) vs moved district port rim",
+    "climber (1.5 g pose, following the ladder) vs Crew_Port_2_2 rim",
+    "climber (1.5 g pose, following the ladder) vs Crew_Refuge_Port rim",
+    "hoist line 0.25 m @105 deg, A vs ladder rods",
+    "hoist line, S vs ladder rods",
+    "port tube vs SP-13 exit solid [o13, unchanged]",
+    "port tube vs SP-12 exit solid [o13, unchanged]",
+    "carrier S full trunk route X 105.3 -> 88.2 with rescuers",
+    "carrier A full trunk route X 105.3 -> 88.2 with rescuers",
+    "carrier K full trunk route X 105.3 -> 88.2 with rescuers",
+    "carrier U full trunk route X 105.3 -> 88.2 (suited crew, self-propelled)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "stiles + arrest rail vs every opening (candidate ladder, whole length)",
+   "note": "no new ladder break: True; pressure boundary untouched (no cut, no new penetration); loads OPEN. the trunk, the district and SP-12/13 are on the non-rotating spine, so a clearance of fixed geometry is the same number in 0 g, spin, stopped and locked 1.5 g; the sampled-pose carriers are free poses (any state); the climber figure is the 1.5 g aft-down pose only; a 0 g free-float traverse pose, Coriolis and the loads of each state are not represented."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6DP-PORT205-E00",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6DP, port 205 deg",
+   "case": "stiles + arrest rail vs every opening (candidate ladder, whole length)",
+   "least_m": 0.064,
+   "status": "PASS",
+   "worst_case_over": [
+    "stiles + arrest rail vs every opening (candidate ladder, whole length)"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6DP-PORT205-E01",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6DP, port 205 deg",
+   "case": "rungs vs every opening",
+   "least_m": 0.091,
+   "status": "PASS",
+   "worst_case_over": [
+    "rungs vs every opening"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6DP-PORT205-E02",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6DP, port 205 deg",
+   "case": "stile brackets vs every opening",
+   "least_m": 0.115,
+   "status": "PASS",
+   "worst_case_over": [
+    "stile brackets vs every opening"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6DP-PORT205-E03",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6DP, port 205 deg",
+   "case": "moved port edge vs ladder",
+   "least_m": 0.12,
+   "status": "PASS",
+   "worst_case_over": [
+    "moved port edge vs ladder"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6DP-PORT205-E04",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6DP, port 205 deg",
+   "case": "ladder vs trunk fixtures",
+   "least_m": 0.071,
+   "status": "PASS",
+   "worst_case_over": [
+    "ladder vs trunk fixtures"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6DP-PORT205-E05",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6DP, port 205 deg",
+   "case": "climber (1.5 g pose, following the ladder) vs moved district port rim",
+   "least_m": 0.394,
+   "status": "PASS",
+   "worst_case_over": [
+    "climber (1.5 g pose, following the ladder) vs moved district port rim"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6DP-PORT205-E06",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6DP, port 205 deg",
+   "case": "climber (1.5 g pose, following the ladder) vs Crew_Port_2_2 rim",
+   "least_m": 0.286,
+   "status": "PASS",
+   "worst_case_over": [
+    "climber (1.5 g pose, following the ladder) vs Crew_Port_2_2 rim"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6DP-PORT205-E07",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6DP, port 205 deg",
+   "case": "climber (1.5 g pose, following the ladder) vs Crew_Refuge_Port rim",
+   "least_m": 0.286,
+   "status": "PASS",
+   "worst_case_over": [
+    "climber (1.5 g pose, following the ladder) vs Crew_Refuge_Port rim"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6DP-PORT205-E08",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6DP, port 205 deg",
+   "case": "hoist line 0.25 m @105 deg, A vs ladder rods",
+   "least_m": 0.487,
+   "status": "PASS",
+   "worst_case_over": [
+    "hoist line 0.25 m @105 deg, A vs ladder rods"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6DP-PORT205-E09",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6DP, port 205 deg",
+   "case": "hoist line, S vs ladder rods",
+   "least_m": 0.372,
+   "status": "PASS",
+   "worst_case_over": [
+    "hoist line, S vs ladder rods"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6DP-PORT205-E10",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6DP, port 205 deg",
+   "case": "port tube vs SP-13 exit solid [o13, unchanged]",
+   "least_m": 1.393,
+   "status": "PASS",
+   "worst_case_over": [
+    "port tube vs SP-13 exit solid [o13, unchanged]"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6DP-PORT205-E11",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6DP, port 205 deg",
+   "case": "port tube vs SP-12 exit solid [o13, unchanged]",
+   "least_m": 1.509,
+   "status": "PASS",
+   "worst_case_over": [
+    "port tube vs SP-12 exit solid [o13, unchanged]"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6DP-PORT205-E12",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6DP, port 205 deg",
+   "case": "carrier S full trunk route X 105.3 -> 88.2 with rescuers",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier S full trunk route X 105.3 -> 88.2 with rescuers"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6DP-PORT205-E13",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6DP, port 205 deg",
+   "case": "carrier A full trunk route X 105.3 -> 88.2 with rescuers",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier A full trunk route X 105.3 -> 88.2 with rescuers"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6DP-PORT205-E14",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6DP, port 205 deg",
+   "case": "carrier K full trunk route X 105.3 -> 88.2 with rescuers",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier K full trunk route X 105.3 -> 88.2 with rescuers"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6DP-PORT205-E15",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6DP, port 205 deg",
+   "case": "carrier U full trunk route X 105.3 -> 88.2 (suited crew, self-propelled)",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier U full trunk route X 105.3 -> 88.2 (suited crew, self-propelled)"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6DP-PORT210-ROUTE",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "PROTOTYPE CB2J6DP: CB2J6 in both windows and at the moved district port (X 104.1, on the study ladder extension); district port 210 deg (reversible WHITEBOX), ladder 285 deg",
+   "case": "whole route: minimum over every measured element",
+   "least_m": 0.064,
+   "status": "PASS",
+   "worst_case_over": [
+    "stiles + arrest rail vs every opening (candidate ladder, whole length)",
+    "rungs vs every opening",
+    "stile brackets vs every opening",
+    "moved port edge vs ladder",
+    "ladder vs trunk fixtures",
+    "climber (1.5 g pose, following the ladder) vs moved district port rim",
+    "climber (1.5 g pose, following the ladder) vs Crew_Port_2_2 rim",
+    "climber (1.5 g pose, following the ladder) vs Crew_Refuge_Port rim",
+    "hoist line 0.25 m @105 deg, A vs ladder rods",
+    "hoist line, S vs ladder rods",
+    "port tube vs SP-13 exit solid [o13, unchanged]",
+    "port tube vs SP-12 exit solid [o13, unchanged]",
+    "carrier S full trunk route X 105.3 -> 88.2 with rescuers",
+    "carrier A full trunk route X 105.3 -> 88.2 with rescuers",
+    "carrier K full trunk route X 105.3 -> 88.2 with rescuers",
+    "carrier U full trunk route X 105.3 -> 88.2 (suited crew, self-propelled)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "stiles + arrest rail vs every opening (candidate ladder, whole length)",
+   "note": "no new ladder break: True; pressure boundary untouched (no cut, no new penetration); loads OPEN. the trunk, the district and SP-12/13 are on the non-rotating spine, so a clearance of fixed geometry is the same number in 0 g, spin, stopped and locked 1.5 g; the sampled-pose carriers are free poses (any state); the climber figure is the 1.5 g aft-down pose only; a 0 g free-float traverse pose, Coriolis and the loads of each state are not represented."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6DP-PORT210-E00",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6DP, port 210 deg",
+   "case": "stiles + arrest rail vs every opening (candidate ladder, whole length)",
+   "least_m": 0.064,
+   "status": "PASS",
+   "worst_case_over": [
+    "stiles + arrest rail vs every opening (candidate ladder, whole length)"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6DP-PORT210-E01",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6DP, port 210 deg",
+   "case": "rungs vs every opening",
+   "least_m": 0.091,
+   "status": "PASS",
+   "worst_case_over": [
+    "rungs vs every opening"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6DP-PORT210-E02",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6DP, port 210 deg",
+   "case": "stile brackets vs every opening",
+   "least_m": 0.115,
+   "status": "PASS",
+   "worst_case_over": [
+    "stile brackets vs every opening"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6DP-PORT210-E03",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6DP, port 210 deg",
+   "case": "moved port edge vs ladder",
+   "least_m": 0.114,
+   "status": "PASS",
+   "worst_case_over": [
+    "moved port edge vs ladder"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6DP-PORT210-E04",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6DP, port 210 deg",
+   "case": "ladder vs trunk fixtures",
+   "least_m": 0.071,
+   "status": "PASS",
+   "worst_case_over": [
+    "ladder vs trunk fixtures"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6DP-PORT210-E05",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6DP, port 210 deg",
+   "case": "climber (1.5 g pose, following the ladder) vs moved district port rim",
+   "least_m": 0.336,
+   "status": "PASS",
+   "worst_case_over": [
+    "climber (1.5 g pose, following the ladder) vs moved district port rim"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6DP-PORT210-E06",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6DP, port 210 deg",
+   "case": "climber (1.5 g pose, following the ladder) vs Crew_Port_2_2 rim",
+   "least_m": 0.286,
+   "status": "PASS",
+   "worst_case_over": [
+    "climber (1.5 g pose, following the ladder) vs Crew_Port_2_2 rim"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6DP-PORT210-E07",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6DP, port 210 deg",
+   "case": "climber (1.5 g pose, following the ladder) vs Crew_Refuge_Port rim",
+   "least_m": 0.286,
+   "status": "PASS",
+   "worst_case_over": [
+    "climber (1.5 g pose, following the ladder) vs Crew_Refuge_Port rim"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6DP-PORT210-E08",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6DP, port 210 deg",
+   "case": "hoist line 0.25 m @105 deg, A vs ladder rods",
+   "least_m": 0.487,
+   "status": "PASS",
+   "worst_case_over": [
+    "hoist line 0.25 m @105 deg, A vs ladder rods"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6DP-PORT210-E09",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6DP, port 210 deg",
+   "case": "hoist line, S vs ladder rods",
+   "least_m": 0.372,
+   "status": "PASS",
+   "worst_case_over": [
+    "hoist line, S vs ladder rods"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6DP-PORT210-E10",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6DP, port 210 deg",
+   "case": "port tube vs SP-13 exit solid [o13, unchanged]",
+   "least_m": 1.438,
+   "status": "PASS",
+   "worst_case_over": [
+    "port tube vs SP-13 exit solid [o13, unchanged]"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6DP-PORT210-E11",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6DP, port 210 deg",
+   "case": "port tube vs SP-12 exit solid [o13, unchanged]",
+   "least_m": 1.55,
+   "status": "PASS",
+   "worst_case_over": [
+    "port tube vs SP-12 exit solid [o13, unchanged]"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6DP-PORT210-E12",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6DP, port 210 deg",
+   "case": "carrier S full trunk route X 105.3 -> 88.2 with rescuers",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier S full trunk route X 105.3 -> 88.2 with rescuers"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6DP-PORT210-E13",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6DP, port 210 deg",
+   "case": "carrier A full trunk route X 105.3 -> 88.2 with rescuers",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier A full trunk route X 105.3 -> 88.2 with rescuers"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6DP-PORT210-E14",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6DP, port 210 deg",
+   "case": "carrier K full trunk route X 105.3 -> 88.2 with rescuers",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier K full trunk route X 105.3 -> 88.2 with rescuers"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6DP-PORT210-E15",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6DP, port 210 deg",
+   "case": "carrier U full trunk route X 105.3 -> 88.2 (suited crew, self-propelled)",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier U full trunk route X 105.3 -> 88.2 (suited crew, self-propelled)"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6DP-PORT215-ROUTE",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "PROTOTYPE CB2J6DP: CB2J6 in both windows and at the moved district port (X 104.1, on the study ladder extension); district port 215 deg (reversible WHITEBOX), ladder 285 deg",
+   "case": "whole route: minimum over every measured element",
+   "least_m": 0.064,
+   "status": "PASS",
+   "worst_case_over": [
+    "stiles + arrest rail vs every opening (candidate ladder, whole length)",
+    "rungs vs every opening",
+    "stile brackets vs every opening",
+    "moved port edge vs ladder",
+    "ladder vs trunk fixtures",
+    "climber (1.5 g pose, following the ladder) vs moved district port rim",
+    "climber (1.5 g pose, following the ladder) vs Crew_Port_2_2 rim",
+    "climber (1.5 g pose, following the ladder) vs Crew_Refuge_Port rim",
+    "hoist line 0.25 m @105 deg, A vs ladder rods",
+    "hoist line, S vs ladder rods",
+    "port tube vs SP-13 exit solid [o13, unchanged]",
+    "port tube vs SP-12 exit solid [o13, unchanged]",
+    "carrier S full trunk route X 105.3 -> 88.2 with rescuers",
+    "carrier A full trunk route X 105.3 -> 88.2 with rescuers",
+    "carrier K full trunk route X 105.3 -> 88.2 with rescuers",
+    "carrier U full trunk route X 105.3 -> 88.2 (suited crew, self-propelled)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "stiles + arrest rail vs every opening (candidate ladder, whole length)",
+   "note": "no new ladder break: True; pressure boundary untouched (no cut, no new penetration); loads OPEN. the trunk, the district and SP-12/13 are on the non-rotating spine, so a clearance of fixed geometry is the same number in 0 g, spin, stopped and locked 1.5 g; the sampled-pose carriers are free poses (any state); the climber figure is the 1.5 g aft-down pose only; a 0 g free-float traverse pose, Coriolis and the loads of each state are not represented."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6DP-PORT215-E00",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6DP, port 215 deg",
+   "case": "stiles + arrest rail vs every opening (candidate ladder, whole length)",
+   "least_m": 0.064,
+   "status": "PASS",
+   "worst_case_over": [
+    "stiles + arrest rail vs every opening (candidate ladder, whole length)"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6DP-PORT215-E01",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6DP, port 215 deg",
+   "case": "rungs vs every opening",
+   "least_m": 0.091,
+   "status": "PASS",
+   "worst_case_over": [
+    "rungs vs every opening"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6DP-PORT215-E02",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6DP, port 215 deg",
+   "case": "stile brackets vs every opening",
+   "least_m": 0.115,
+   "status": "PASS",
+   "worst_case_over": [
+    "stile brackets vs every opening"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6DP-PORT215-E03",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6DP, port 215 deg",
+   "case": "moved port edge vs ladder",
+   "least_m": 0.094,
+   "status": "PASS",
+   "worst_case_over": [
+    "moved port edge vs ladder"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6DP-PORT215-E04",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6DP, port 215 deg",
+   "case": "ladder vs trunk fixtures",
+   "least_m": 0.071,
+   "status": "PASS",
+   "worst_case_over": [
+    "ladder vs trunk fixtures"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6DP-PORT215-E05",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6DP, port 215 deg",
+   "case": "climber (1.5 g pose, following the ladder) vs moved district port rim",
+   "least_m": 0.28,
+   "status": "PASS",
+   "worst_case_over": [
+    "climber (1.5 g pose, following the ladder) vs moved district port rim"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6DP-PORT215-E06",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6DP, port 215 deg",
+   "case": "climber (1.5 g pose, following the ladder) vs Crew_Port_2_2 rim",
+   "least_m": 0.286,
+   "status": "PASS",
+   "worst_case_over": [
+    "climber (1.5 g pose, following the ladder) vs Crew_Port_2_2 rim"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6DP-PORT215-E07",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6DP, port 215 deg",
+   "case": "climber (1.5 g pose, following the ladder) vs Crew_Refuge_Port rim",
+   "least_m": 0.286,
+   "status": "PASS",
+   "worst_case_over": [
+    "climber (1.5 g pose, following the ladder) vs Crew_Refuge_Port rim"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6DP-PORT215-E08",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6DP, port 215 deg",
+   "case": "hoist line 0.25 m @105 deg, A vs ladder rods",
+   "least_m": 0.487,
+   "status": "PASS",
+   "worst_case_over": [
+    "hoist line 0.25 m @105 deg, A vs ladder rods"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6DP-PORT215-E09",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6DP, port 215 deg",
+   "case": "hoist line, S vs ladder rods",
+   "least_m": 0.372,
+   "status": "PASS",
+   "worst_case_over": [
+    "hoist line, S vs ladder rods"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6DP-PORT215-E10",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6DP, port 215 deg",
+   "case": "port tube vs SP-13 exit solid [o13, unchanged]",
+   "least_m": 1.48,
+   "status": "PASS",
+   "worst_case_over": [
+    "port tube vs SP-13 exit solid [o13, unchanged]"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6DP-PORT215-E11",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6DP, port 215 deg",
+   "case": "port tube vs SP-12 exit solid [o13, unchanged]",
+   "least_m": 1.588,
+   "status": "PASS",
+   "worst_case_over": [
+    "port tube vs SP-12 exit solid [o13, unchanged]"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6DP-PORT215-E12",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6DP, port 215 deg",
+   "case": "carrier S full trunk route X 105.3 -> 88.2 with rescuers",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier S full trunk route X 105.3 -> 88.2 with rescuers"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6DP-PORT215-E13",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6DP, port 215 deg",
+   "case": "carrier A full trunk route X 105.3 -> 88.2 with rescuers",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier A full trunk route X 105.3 -> 88.2 with rescuers"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6DP-PORT215-E14",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6DP, port 215 deg",
+   "case": "carrier K full trunk route X 105.3 -> 88.2 with rescuers",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier K full trunk route X 105.3 -> 88.2 with rescuers"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6DP-PORT215-E15",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6DP, port 215 deg",
+   "case": "carrier U full trunk route X 105.3 -> 88.2 (suited crew, self-propelled)",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier U full trunk route X 105.3 -> 88.2 (suited crew, self-propelled)"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "element of the whole-route minimum."
+  },
+  {
+   "id": "A179-L1A-STILE-CB2J6DP-LOADS",
+   "route": "L1-A district (A179 stile at Crew_Port_2_2)",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "CB2J6DP",
+   "case": "stile/rail/bracket load path, tether fall load, arrester passage over the local offset",
+   "least_m": null,
+   "status": "OPEN",
+   "worst_case_over": [],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "OPEN: no load, stiffness or arrest number assumed."
+  }
+ ]
+}

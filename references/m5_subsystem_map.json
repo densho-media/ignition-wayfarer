@@ -1,0 +1,297 @@
+{
+ "schema": 1,
+ "note": "M5 subsystem map: shot items of WF_WAYFARER_001 + WF_STUDY_BODY_C classified by shots/m5_subsystems.toml (overlay colours are explanatory, never ship materials)",
+ "subsystems": {
+  "CTX": {
+   "name": "Context: hull casing and unclassified",
+   "sources": "14_HULL_SERVICE (13 m body)",
+   "maturity": "BASELINE envelope; casing PROTOTYPE",
+   "color": [
+    0.3,
+    0.31,
+    0.33
+   ],
+   "objects": 148,
+   "kinds": {
+    "hull_shell": 2,
+    "scale_reference": 146
+   }
+  },
+  "S01": {
+   "name": "Forward protection, EYE and Dust Lance",
+   "sources": "14_HULL_SERVICE / 15 Q2, FD-V2 rows 15!A189:A192, Eye 45/50; forward_shield.py, eye_placement.py",
+   "maturity": "WORKING envelope (90 m shield, 12 m Lance); truss, Crown, EYE wells PROTOTYPE",
+   "color": [
+    0.25,
+    0.42,
+    0.78
+   ],
+   "objects": 491,
+   "kinds": {
+    "geometry": 5,
+    "eye_facet": 4,
+    "shield_skin": 1,
+    "shield_hub": 1,
+    "shield_rim": 1,
+    "shield_truss": 43,
+    "sector_keel": 3,
+    "sector_frame": 2,
+    "sector_tie": 9,
+    "bypass_collar": 48,
+    "eye_well": 4,
+    "eye_shutter": 8,
+    "eye_window": 4,
+    "shield_spine_column": 1,
+    "shield_mount": 4,
+    "dust_lance": 1,
+    "dust_lance_tip": 1,
+    "disruptor_layer": 1,
+    "disruptor_post": 60,
+    "crown_housing": 14,
+    "truss_node": 120,
+    "crown_housing_rib": 12,
+    "crown_service_hatch": 12,
+    "brow_panel_joint": 72,
+    "crown_shutter": 12,
+    "crown_port_cover": 12,
+    "crown_carriage": 12,
+    "crown_emitter": 12,
+    "crown_launcher": 12
+   }
+  },
+  "S02": {
+   "name": "Central spine and primary load paths",
+   "sources": "07_PRIMARY_STRUCTURE (cage, keels, frames), 08 thrust ring; hull_geometry.py, components/structure.py",
+   "maturity": "WORKING layout; member sizing OPEN; lobe supports PROTOTYPE",
+   "color": [
+    0.55,
+    0.55,
+    0.58
+   ],
+   "objects": 457,
+   "kinds": {
+    "geometry": 408,
+    "thrust_node": 12,
+    "thrust_node_plate": 12,
+    "hull_envelope": 1,
+    "tank_support": 24
+   }
+  },
+  "S03": {
+   "name": "Counter-rotating habitat rings and transfer mechanisms",
+   "sources": "08 rings (r 30 m, residual momentum), Q46 despun drum (ANSWERED 2026-10-07); habitat_ring.py, rotor_interface.py",
+   "maturity": "BASELINE ring envelope; frames and mechanisms PROTOTYPE",
+   "color": [
+    0.36,
+    0.66,
+    0.62
+   ],
+   "objects": 192,
+   "kinds": {
+    "rotor_hub_drum": 2,
+    "rotor_mechanism": 64,
+    "crew_bracket": 60,
+    "transfer_closure": 14,
+    "ring_frame": 4,
+    "ring_fill": 6,
+    "ring_spoke": 24,
+    "sector_pressure": 6,
+    "rotor_mount": 6,
+    "ring_stop_lock": 6
+   }
+  },
+  "S04": {
+   "name": "Pressurized crew and survival spaces",
+   "sources": "HUM-001 zones 1-5, storm refuge for 12 (15 rows), storeroom survey; habitat_interior.py, storeroom.py",
+   "maturity": "PROTOTYPE whitebox (human-scale reviewed); room fit-out STUDY",
+   "color": [
+    0.93,
+    0.79,
+    0.28
+   ],
+   "objects": 202,
+   "kinds": {
+    "crew_vestibule": 6,
+    "sector_interior_deck": 6,
+    "sector_interior_overhead": 6,
+    "sector_interior_zone": 60,
+    "crew_refuge": 1,
+    "refuge_wall": 1,
+    "storeroom_shell": 1,
+    "storeroom_fixture": 22,
+    "storeroom_stowage": 24,
+    "survival_envelope": 39,
+    "crew_passage": 1,
+    "entry_fixture": 35
+   }
+  },
+  "S05": {
+   "name": "D-3He fusion-fuel cryostats",
+   "sources": "S&E 62_FUEL_STORAGE_STUDY (IDEAL MIN), 28 col E; BODY-001 option C; studies/m5_cutaway.py",
+   "maturity": "STUDY; IDEAL BOUNDS ONLY / INVENTORY HOLD (15!A208, 98!A115); BODY-C reversible L2 study (15!A207)",
+   "color": [
+    0.69,
+    0.48,
+    0.63
+   ],
+   "objects": 27,
+   "kinds": {
+    "d2_cryostat": 3,
+    "he3_cryostat": 24
+   }
+  },
+  "S06": {
+   "name": "Hydrogen reaction-mass storage",
+   "sources": "S&E 62 (H2 HYPOTHESIS), 30/34 PROXY FAIL; BODY-001 option C; schematic feed tanks (WF_STORAGE)",
+   "maturity": "STUDY; WORKING STUDY CHOICE BODY-C / FUEL QUANTITY OPEN (15!A207); 600 t PROVISIONAL aggregate D+He-3+H2; 5,490 / 8,032 m3 deficits shown",
+   "color": [
+    0.55,
+    0.78,
+    0.95
+   ],
+   "objects": 7,
+   "kinds": {
+    "geometry": 4,
+    "shortfall_scale": 3
+   }
+  },
+  "S07": {
+   "name": "Refrigeration, isolation and transfer",
+   "sources": "34 tank-bay overhead 250 m3 (proxy), 14 cryogenic_storage_stack, 15!A69 (no core-to-tank sight line)",
+   "maturity": "PROTOTYPE envelopes; heat leak, cooler power and boil-off OPEN; tankage dry mass SUBALLOCATION STUDY (15!A209); coil cryogenics HOLD (15!A215)",
+   "color": [
+    0.95,
+    0.56,
+    0.17
+   ],
+   "objects": 175,
+   "kinds": {
+    "cryo_feed_line": 4,
+    "insulation_envelope": 162,
+    "refrigeration_frame": 2,
+    "transfer_pump_frame": 2,
+    "vent_frame": 2,
+    "transfer_manifold": 3
+   }
+  },
+  "S08": {
+   "name": "Power distribution and auxiliary equipment",
+   "sources": "power_storage (main battery, pulse bank, survival reserves), Brayton A/B, 34 fore hardware envelopes",
+   "maturity": "PROTOTYPE; power budget and conversion OPEN",
+   "color": [
+    0.35,
+    0.63,
+    0.31
+   ],
+   "objects": 13,
+   "kinds": {
+    "generator_proxy": 2,
+    "power_storage": 4,
+    "equipment_envelope": 7
+   }
+  },
+  "S09": {
+   "name": "Heat rejection, coolant routing and radiator interfaces",
+   "sources": "Q52 option D blades (4,978 m2 net / 26,882 m2 effective), AFT-009; 28 hot-radiator screen FAIL DIAGNOSTIC",
+   "maturity": "BASELINE blades; thermal balance FAIL DIAGNOSTIC at First Ignition (28 col E)",
+   "color": [
+    0.88,
+    0.34,
+    0.35
+   ],
+   "objects": 1212,
+   "kinds": {
+    "radiator_cell": 480,
+    "geometry": 342,
+    "leading_edge_proxy": 3,
+    "coolant_proxy": 12,
+    "expansion_joint": 81,
+    "deployed_lock": 6,
+    "thermal_mount": 33,
+    "datum_lug": 6,
+    "root_saddle": 6,
+    "slide_stop": 30,
+    "joint_shoe": 54,
+    "root_boom": 6,
+    "thermal_support": 12,
+    "coolant_chase": 6,
+    "casing_boot": 45,
+    "warm_panel_candidate": 18,
+    "warm_panel_bracket": 72
+   }
+  },
+  "S10": {
+   "name": "Reactor, magnetic manifold and four-nozzle propulsion",
+   "sources": "Fiji lattice manifold, 28 (4 nozzles LOCKED), Q40 magnetic nozzles; drive_manifold.py",
+   "maturity": "P0 PHYSICS HOLD (15!A200); rigged PROTOTYPE geometry; pickup as built, axial bipod PREFERRED STUDY (15!A214); coils OD-024/025 HOLD (15!A215)",
+   "color": [
+    0.61,
+    0.46,
+    0.37
+   ],
+   "objects": 146,
+   "kinds": {
+    "geometry": 25,
+    "magnetic_field": 5,
+    "plasma": 10,
+    "spine_hub": 1,
+    "seed_coil": 2,
+    "pfc_liner": 2,
+    "lattice_sector": 4,
+    "lattice_cells": 4,
+    "pfc_band": 8,
+    "nozzle_yoke": 16,
+    "nozzle_yoke_strap": 16,
+    "h2_injection_ring": 1,
+    "optical_source": 2,
+    "optical_beam": 14,
+    "optical_channel": 2,
+    "optical_mirror": 18,
+    "optical_distributor": 4,
+    "optical_window": 8,
+    "optical_gate": 4
+   }
+  },
+  "S11": {
+   "name": "Communications, navigation and attitude",
+   "sources": "S&E 37 F14-F17, 38 S20, 63_COMMS_ATTITUDE_STUDY (screen), owner 15!A210:A212 (2026-10-18); exterior_hardware.py",
+   "maturity": "PROTOTYPE bounding case; L2 OPS DESIGN / RCS PERFORMANCE HOLD (15!A210:A212, 98!A116); high-speed flip FORBIDDEN (15!A211)",
+   "color": [
+    0.09,
+    0.75,
+    0.81
+   ],
+   "objects": 66,
+   "kinds": {
+    "exterior_hardware": 35,
+    "comms_antenna": 11,
+    "nav_light": 4,
+    "rcs_thruster": 16
+   }
+  },
+  "S12": {
+   "name": "Access corridors, service interfaces and maintenance",
+   "sources": "HUM-001 route, SERV-002, DRONE-001 L2, BODY-001 spine tunnel; EVA exterior rails NOT released (44 RUN-011)",
+   "maturity": "PROTOTYPE route (built, inspected); service tunnel and lanes STUDY; aft service ROBOTIC ONLY, WORKING (15!A213, 98!A117); FLIGHT_EVA HOLD",
+   "color": [
+    0.92,
+    0.92,
+    0.9
+   ],
+   "objects": 1084,
+   "kinds": {
+    "crew_passage": 12,
+    "entry_fixture": 410,
+    "route_fitout": 526,
+    "service_fitting": 6,
+    "dock_capture_ring": 2,
+    "casing_detail": 49,
+    "crew_trunk": 1,
+    "drone_proxy": 49,
+    "service_lane": 27,
+    "service_workshop": 1,
+    "spine_tunnel": 1
+   }
+  }
+ }
+}

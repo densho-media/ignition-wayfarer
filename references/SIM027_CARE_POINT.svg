@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="400" font-family="sans-serif" font-size="10"><rect width="100%" height="100%" fill="#fff"/>
+<text x="10" y="14" font-size="13" font-weight="bold">Protected care point in each sector (deck frame, plan; x along the ring axis, z tangential)</text>
+<rect x="43.1" y="40.0" width="201.7" height="232.8" fill="none" stroke="#333"/>
+<rect x="165.1" y="50.0" width="27.0" height="29.9" fill="#bbb" stroke="#888"/>
+<text x="167.1" y="60.0" fill="#444">Burn_Couch_1</text>
+<rect x="194.0" y="50.0" width="48.3" height="29.9" fill="#bbb" stroke="#888"/>
+<text x="196.0" y="60.0" fill="#444">Couch_Lockers_</text>
+<rect x="95.8" y="50.0" width="27.0" height="29.9" fill="#bbb" stroke="#888"/>
+<text x="97.8" y="60.0" fill="#444">Burn_Couch_2</text>
+<rect x="45.6" y="50.0" width="48.3" height="29.9" fill="#bbb" stroke="#888"/>
+<text x="47.6" y="60.0" fill="#444">Couch_Lockers_</text>
+<rect x="161.3" y="129.8" width="36.6" height="133.0" fill="#bbb" stroke="#888"/>
+<text x="163.3" y="139.8" fill="#444">Bunk_1</text>
+<rect x="161.3" y="129.8" width="36.6" height="133.0" fill="#bbb" stroke="#888"/>
+<text x="163.3" y="139.8" fill="#444">Bunk_2</text>
+<rect x="161.3" y="129.8" width="36.6" height="133.0" fill="#bbb" stroke="#888"/>
+<text x="163.3" y="139.8" fill="#444">Bunk_3</text>
+<rect x="161.3" y="129.8" width="36.6" height="133.0" fill="#bbb" stroke="#888"/>
+<text x="163.3" y="139.8" fill="#444">Bunk_Base_1</text>
+<rect x="199.8" y="129.8" width="46.9" height="133.0" fill="#bbb" stroke="#888"/>
+<text x="201.8" y="139.8" fill="#444">Bunk_4</text>
+<rect x="199.8" y="129.8" width="43.6" height="133.0" fill="#bbb" stroke="#888"/>
+<text x="201.8" y="139.8" fill="#444">Bunk_5</text>
+<rect x="199.8" y="129.8" width="40.4" height="133.0" fill="#bbb" stroke="#888"/>
+<text x="201.8" y="139.8" fill="#444">Bunk_6</text>
+<rect x="199.8" y="129.8" width="50.1" height="133.0" fill="#bbb" stroke="#888"/>
+<text x="201.8" y="139.8" fill="#444">Bunk_Base_4</text>
+<rect x="45.6" y="196.3" width="81.1" height="66.5" fill="#bbb" stroke="#888"/>
+<text x="47.6" y="206.3" fill="#444">Hygiene</text>
+<rect x="47.8" y="196.3" width="78.9" height="66.5" fill="#bbb" stroke="#888"/>
+<text x="49.8" y="206.3" fill="#444">Crew_Stowage_U</text>
+<rect x="64.3" y="123.1" width="62.4" height="66.5" fill="#42a5f5" fill-opacity="0.3" stroke="#1565c0"/>
+<rect x="161.3" y="129.8" width="36.6" height="133.0" fill="#2e7d32" fill-opacity="0.65" stroke="#2e7d32"/>
+<rect x="138.2" y="129.8" width="23.1" height="133.0" fill="#a5d6a7" fill-opacity="0.65" stroke="#2e7d32"/>
+<rect x="161.3" y="89.9" width="36.6" height="39.9" fill="#c8e6c9" fill-opacity="0.65" stroke="#2e7d32"/>
+<text x="40" y="289">HABITATION: Bunk_1 + strip +0.05 m</text>
+<rect x="363.1" y="40.0" width="201.7" height="232.8" fill="none" stroke="#333"/>
+<rect x="485.1" y="50.0" width="27.0" height="29.9" fill="#bbb" stroke="#888"/>
+<text x="487.1" y="60.0" fill="#444">Burn_Couch_1</text>
+<rect x="514.0" y="50.0" width="48.3" height="29.9" fill="#bbb" stroke="#888"/>
+<text x="516.0" y="60.0" fill="#444">Couch_Lockers_</text>
+<rect x="415.8" y="50.0" width="27.0" height="29.9" fill="#bbb" stroke="#888"/>
+<text x="417.8" y="60.0" fill="#444">Burn_Couch_2</text>
+<rect x="365.6" y="50.0" width="48.3" height="66.5" fill="#bbb" stroke="#888"/>
+<text x="367.6" y="60.0" fill="#444">Couch_Lockers_</text>
+<rect x="481.3" y="129.8" width="27.0" height="133.0" fill="#bbb" stroke="#888"/>
+<text x="483.3" y="139.8" fill="#444">Medical_Couch</text>
+<rect x="510.1" y="129.8" width="54.2" height="133.0" fill="#bbb" stroke="#888"/>
+<text x="512.1" y="139.8" fill="#444">Ops_Stations</text>
+<rect x="541.0" y="129.8" width="19.8" height="133.0" fill="#bbb" stroke="#888"/>
+<text x="543.0" y="139.8" fill="#444">Medical_Stowag</text>
+<rect x="423.5" y="196.3" width="23.1" height="66.5" fill="#bbb" stroke="#888"/>
+<text x="425.5" y="206.3" fill="#444">Lab_Bench</text>
+<rect x="373.5" y="196.3" width="27.0" height="66.5" fill="#bbb" stroke="#888"/>
+<text x="375.5" y="206.3" fill="#444">Workbench</text>
+<rect x="384.3" y="123.1" width="62.4" height="66.5" fill="#42a5f5" fill-opacity="0.3" stroke="#1565c0"/>
+<rect x="481.3" y="129.8" width="27.0" height="133.0" fill="#2e7d32" fill-opacity="0.65" stroke="#2e7d32"/>
+<rect x="458.2" y="129.8" width="23.1" height="133.0" fill="#a5d6a7" fill-opacity="0.65" stroke="#2e7d32"/>
+<rect x="481.3" y="89.9" width="27.0" height="39.9" fill="#c8e6c9" fill-opacity="0.65" stroke="#2e7d32"/>
+<text x="360" y="289">WORK_MEDICAL: Medical_Couch + strip +0.05 m</text>
+<rect x="683.1" y="40.0" width="201.7" height="232.8" fill="none" stroke="#333"/>
+<rect x="805.1" y="50.0" width="27.0" height="29.9" fill="#bbb" stroke="#888"/>
+<text x="807.1" y="60.0" fill="#444">Burn_Couch_1</text>
+<rect x="834.0" y="50.0" width="48.3" height="29.9" fill="#bbb" stroke="#888"/>
+<text x="836.0" y="60.0" fill="#444">Couch_Lockers_</text>
+<rect x="735.8" y="50.0" width="27.0" height="29.9" fill="#bbb" stroke="#888"/>
+<text x="737.8" y="60.0" fill="#444">Burn_Couch_2</text>
+<rect x="685.6" y="50.0" width="48.3" height="66.5" fill="#bbb" stroke="#888"/>
+<text x="687.6" y="60.0" fill="#444">Couch_Lockers_</text>
+<rect x="801.3" y="119.8" width="19.2" height="143.0" fill="#bbb" stroke="#888"/>
+<text x="803.3" y="129.8" fill="#444">Garden_Rack_1</text>
+<rect x="820.5" y="119.8" width="64.6" height="119.7" fill="#bbb" stroke="#888"/>
+<text x="822.5" y="129.8" fill="#444">Mess</text>
+<rect x="685.6" y="229.5" width="81.1" height="33.2" fill="#bbb" stroke="#888"/>
+<text x="687.6" y="239.5" fill="#444">ECLSS_Bay</text>
+<rect x="704.3" y="123.1" width="62.4" height="66.5" fill="#42a5f5" fill-opacity="0.3" stroke="#1565c0"/>
+<text x="680" y="289" fill="#c62828">LIFE_SUPPORT: no berth/couch; new couch -0.20 m</text>
+<text x="10" y="390" fill="#555">grey: zone blocks; blue: hatch landing well and chase; green: care furniture, attendant strip (0.60 m) and airway end (0.60 m)</text></svg>

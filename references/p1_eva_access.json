@@ -1,0 +1,2184 @@
+{
+ "contract": "eva_access v1",
+ "status": "STUDY: geometric readback only, no pressure-shell change, not certification (EVA-043/055)",
+ "envelopes": {
+  "instructor": {
+   "UNSUITED": {
+    "route_control_m": 0.7,
+    "measured_m": 0.658,
+    "use": "interior induction (shirt-sleeve); the 0.70 m key keeps its legacy name (EVA-041)"
+   },
+   "EVA_SUITED": {
+    "measured_m": 0.857,
+    "length_m": 1.916,
+    "projected_area": {
+     "status": "GEOMETRY READBACK for 45 H-06 (convex silhouette, upper bound); not released",
+     "min_m2": 0.467,
+     "min_dir_body": [
+      0.0,
+      0.0,
+      -1.0
+     ],
+     "max_m2": 1.278,
+     "max_dir_body": [
+      0.866,
+      -0.5,
+      0.0
+     ]
+    },
+    "use": "SP-12 -> SP-11 -> exterior only (EVA-040)"
+   },
+   "EVA_OPERATIONAL": {
+    "measured_m": 1.074,
+    "length_m": 1.963,
+    "operate_m": 1.217,
+    "use": "hatch passage with the hands ahead; panel and handle work"
+   },
+   "RESCUE": {
+    "casualty": {
+     "diameter_m": 1.299,
+     "tilt_deg": [
+      10.0,
+      10.0
+     ]
+    },
+    "rescuer_m": 1.133,
+    "use": "an unresponsive suited crew member moved by a rescuer (EVA-054)"
+   }
+  },
+  "newcomer": {
+   "UNSUITED": {
+    "route_control_m": 0.7,
+    "measured_m": 0.602,
+    "use": "interior induction (shirt-sleeve); the 0.70 m key keeps its legacy name (EVA-041)"
+   },
+   "EVA_SUITED": {
+    "measured_m": 0.832,
+    "length_m": 1.83,
+    "projected_area": {
+     "status": "GEOMETRY READBACK for 45 H-06 (convex silhouette, upper bound); not released",
+     "min_m2": 0.432,
+     "min_dir_body": [
+      0.0,
+      0.0,
+      -1.0
+     ],
+     "max_m2": 1.183,
+     "max_dir_body": [
+      0.866,
+      -0.5,
+      0.0
+     ]
+    },
+    "use": "SP-12 -> SP-11 -> exterior only (EVA-040)"
+   },
+   "EVA_OPERATIONAL": {
+    "measured_m": 1.026,
+    "length_m": 1.872,
+    "operate_m": 1.168,
+    "use": "hatch passage with the hands ahead; panel and handle work"
+   },
+   "RESCUE": {
+    "casualty": {
+     "diameter_m": 1.221,
+     "tilt_deg": [
+      10.0,
+      10.0
+     ]
+    },
+    "rescuer_m": 1.088,
+    "use": "an unresponsive suited crew member moved by a rescuer (EVA-054)"
+   }
+  }
+ },
+ "route_access": [
+  {
+   "bottleneck": "Q33 docking passage / trunk / ring-A tubes (1.6 m)",
+   "clear_diameter_m": 1.6,
+   "kind": "interior route (shirt-sleeve, EVA-040)",
+   "UNSUITED": "CLEAR",
+   "EVA_SUITED.instructor": {
+    "geometry": "CLEAR",
+    "margin_m": 0.691,
+    "permitted": "NOT A SUITED ROUTE (EVA-040)"
+   },
+   "EVA_OPERATIONAL.instructor": {
+    "geometry": "CLEAR",
+    "margin_m": 0.526,
+    "permitted": "NOT A SUITED ROUTE (EVA-040)"
+   },
+   "RESCUE.instructor": {
+    "geometry": "CLEAR",
+    "margin_m": 0.301,
+    "permitted": "NOT A SUITED ROUTE (EVA-040)"
+   },
+   "EVA_SUITED.newcomer": {
+    "geometry": "CLEAR",
+    "margin_m": 0.715,
+    "permitted": "NOT A SUITED ROUTE (EVA-040)"
+   },
+   "EVA_OPERATIONAL.newcomer": {
+    "geometry": "CLEAR",
+    "margin_m": 0.574,
+    "permitted": "NOT A SUITED ROUTE (EVA-040)"
+   },
+   "RESCUE.newcomer": {
+    "geometry": "CLEAR",
+    "margin_m": 0.379,
+    "permitted": "NOT A SUITED ROUTE (EVA-040)"
+   }
+  },
+  {
+   "bottleneck": "ring B spine port, necks and refuge port (0.90 m)",
+   "clear_diameter_m": 0.9,
+   "kind": "interior route (shirt-sleeve, EVA-040)",
+   "UNSUITED": "CLEAR",
+   "EVA_SUITED.instructor": {
+    "geometry": "BLOCKED",
+    "margin_m": -0.009,
+    "permitted": "NOT A SUITED ROUTE (EVA-040)"
+   },
+   "EVA_OPERATIONAL.instructor": {
+    "geometry": "BLOCKED",
+    "margin_m": -0.174,
+    "permitted": "NOT A SUITED ROUTE (EVA-040)"
+   },
+   "RESCUE.instructor": {
+    "geometry": "BLOCKED",
+    "margin_m": -0.399,
+    "permitted": "NOT A SUITED ROUTE (EVA-040)"
+   },
+   "EVA_SUITED.newcomer": {
+    "geometry": "CLEAR",
+    "margin_m": 0.015,
+    "permitted": "NOT A SUITED ROUTE (EVA-040)"
+   },
+   "EVA_OPERATIONAL.newcomer": {
+    "geometry": "BLOCKED",
+    "margin_m": -0.126,
+    "permitted": "NOT A SUITED ROUTE (EVA-040)"
+   },
+   "RESCUE.newcomer": {
+    "geometry": "BLOCKED",
+    "margin_m": -0.321,
+    "permitted": "NOT A SUITED ROUTE (EVA-040)"
+   }
+  },
+  {
+   "bottleneck": "ring B drum chamber length (1.10 m crawl, 15!A113)",
+   "clear_diameter_m": 1.1,
+   "kind": "crawl with aft down",
+   "UNSUITED": "CLEAR",
+   "EVA_SUITED.instructor": {
+    "geometry": "CLEAR",
+    "margin_m": 0.191,
+    "permitted": "NOT A SUITED ROUTE (EVA-040)"
+   },
+   "EVA_OPERATIONAL.instructor": {
+    "geometry": "CLEAR",
+    "margin_m": 0.026,
+    "permitted": "NOT A SUITED ROUTE (EVA-040)"
+   },
+   "RESCUE.instructor": {
+    "geometry": "BLOCKED",
+    "margin_m": -0.199,
+    "permitted": "NOT A SUITED ROUTE (EVA-040)"
+   },
+   "EVA_SUITED.newcomer": {
+    "geometry": "CLEAR",
+    "margin_m": 0.215,
+    "permitted": "NOT A SUITED ROUTE (EVA-040)"
+   },
+   "EVA_OPERATIONAL.newcomer": {
+    "geometry": "CLEAR",
+    "margin_m": 0.074,
+    "permitted": "NOT A SUITED ROUTE (EVA-040)"
+   },
+   "RESCUE.newcomer": {
+    "geometry": "BLOCKED",
+    "margin_m": -0.121,
+    "permitted": "NOT A SUITED ROUTE (EVA-040)"
+   }
+  },
+  {
+   "bottleneck": "route sweep assumption: suited_envelope_diameter_m",
+   "clear_diameter_m": 0.7,
+   "kind": "legacy UNSUITED route-control envelope (EVA-041), not a passage",
+   "UNSUITED": "CLEAR",
+   "EVA_SUITED.instructor": {
+    "geometry": "BLOCKED",
+    "margin_m": -0.209,
+    "permitted": "NOT A SUITED ROUTE (EVA-040)"
+   },
+   "EVA_OPERATIONAL.instructor": {
+    "geometry": "BLOCKED",
+    "margin_m": -0.374,
+    "permitted": "NOT A SUITED ROUTE (EVA-040)"
+   },
+   "RESCUE.instructor": {
+    "geometry": "BLOCKED",
+    "margin_m": -0.599,
+    "permitted": "NOT A SUITED ROUTE (EVA-040)"
+   },
+   "EVA_SUITED.newcomer": {
+    "geometry": "BLOCKED",
+    "margin_m": -0.185,
+    "permitted": "NOT A SUITED ROUTE (EVA-040)"
+   },
+   "EVA_OPERATIONAL.newcomer": {
+    "geometry": "BLOCKED",
+    "margin_m": -0.326,
+    "permitted": "NOT A SUITED ROUTE (EVA-040)"
+   },
+   "RESCUE.newcomer": {
+    "geometry": "BLOCKED",
+    "margin_m": -0.521,
+    "permitted": "NOT A SUITED ROUTE (EVA-040)"
+   }
+  },
+  {
+   "bottleneck": "sector maintenance strip (0.60 m, SERV-STRIPS 15!A119)",
+   "clear_diameter_m": 0.6,
+   "kind": "shirt-sleeve only",
+   "UNSUITED": "BLOCKED",
+   "EVA_SUITED.instructor": {
+    "geometry": "BLOCKED",
+    "margin_m": -0.309,
+    "permitted": "NOT A SUITED ROUTE (EVA-040)"
+   },
+   "EVA_OPERATIONAL.instructor": {
+    "geometry": "BLOCKED",
+    "margin_m": -0.474,
+    "permitted": "NOT A SUITED ROUTE (EVA-040)"
+   },
+   "RESCUE.instructor": {
+    "geometry": "BLOCKED",
+    "margin_m": -0.699,
+    "permitted": "NOT A SUITED ROUTE (EVA-040)"
+   },
+   "EVA_SUITED.newcomer": {
+    "geometry": "BLOCKED",
+    "margin_m": -0.285,
+    "permitted": "NOT A SUITED ROUTE (EVA-040)"
+   },
+   "EVA_OPERATIONAL.newcomer": {
+    "geometry": "BLOCKED",
+    "margin_m": -0.426,
+    "permitted": "NOT A SUITED ROUTE (EVA-040)"
+   },
+   "RESCUE.newcomer": {
+    "geometry": "BLOCKED",
+    "margin_m": -0.621,
+    "permitted": "NOT A SUITED ROUTE (EVA-040)"
+   }
+  }
+ ],
+ "suited_route": [
+  "SP12",
+  "SP11_INNER_HATCH",
+  "SP11_CHAMBER",
+  "SP11_OUTER_HATCH",
+  "EXTERIOR_TRAINING_RAIL"
+ ],
+ "legacy_envelope": {
+  "key": "human_entry.mannequin.suited_envelope_diameter_m",
+  "value_m": 0.7,
+  "classification": "UNSUITED_ROUTE_CONTROL (PROTOTYPE, 43 EVA-041): not an EVA suit envelope"
+ },
+ "sp11": [
+  {
+   "id": "SP11_TWO_PERSON_100",
+   "aperture_m": 1.0,
+   "layout": "two_person",
+   "study_target": false,
+   "door": {
+    "clear_m": 1.0,
+    "r_clear": 0.5,
+    "r_leaf": 0.55,
+    "r_hinge": 0.6,
+    "t": 0.06,
+    "frame_depth": 0.08,
+    "swing_depth_m": 1.15,
+    "park_radius_m": 0.909,
+    "seat_load_kn": 76.0,
+    "seat_load_basis": "cabin 80 kPa (BASELINE) x leaf area; DERIVED, not a structural release",
+    "hull_penetration_outside_m": 1.3
+   },
+   "door_passage": {
+    "instructor.hatch_pass": {
+     "need_m": 1.074,
+     "margin_m": -0.074,
+     "tilt_deg": [
+      0.0,
+      0.0
+     ],
+     "required": true,
+     "status": "FAIL"
+    },
+    "instructor.suited": {
+     "need_m": 0.857,
+     "margin_m": 0.143,
+     "tilt_deg": [
+      0.0,
+      0.0
+     ],
+     "required": true,
+     "status": "PASS"
+    },
+    "instructor.casualty_restrained": {
+     "need_m": 0.857,
+     "margin_m": 0.143,
+     "tilt_deg": [
+      0.0,
+      0.0
+     ],
+     "required": true,
+     "status": "PASS"
+    },
+    "instructor.casualty_free": {
+     "need_m": 1.299,
+     "margin_m": -0.299,
+     "tilt_deg": [
+      10.0,
+      10.0
+     ],
+     "required": false,
+     "status": "FAIL"
+    },
+    "newcomer.hatch_pass": {
+     "need_m": 1.026,
+     "margin_m": -0.026,
+     "tilt_deg": [
+      0.0,
+      0.0
+     ],
+     "required": true,
+     "status": "FAIL"
+    },
+    "newcomer.suited": {
+     "need_m": 0.832,
+     "margin_m": 0.168,
+     "tilt_deg": [
+      0.0,
+      0.0
+     ],
+     "required": true,
+     "status": "PASS"
+    },
+    "newcomer.casualty_restrained": {
+     "need_m": 0.832,
+     "margin_m": 0.168,
+     "tilt_deg": [
+      0.0,
+      0.0
+     ],
+     "required": true,
+     "status": "PASS"
+    },
+    "newcomer.casualty_free": {
+     "need_m": 1.221,
+     "margin_m": -0.221,
+     "tilt_deg": [
+      10.0,
+      10.0
+     ],
+     "required": false,
+     "status": "FAIL"
+    }
+   },
+   "door_ok": false,
+   "chamber": {
+    "clear_radius_m": 1.0,
+    "clear_diameter_m": 2.0,
+    "body_radius_m": 0.929,
+    "clear_length_m": 3.15,
+    "outer_bulkhead_a_m": 6.15,
+    "inner_bulkhead_a_m": 2.9,
+    "inner_leaf_floor_a_m": 1.56,
+    "leaf_face_a_m": 5.96,
+    "body_top_a_m": 5.035,
+    "sp12_floor_r_m": 1.25,
+    "radial_budget_m": 0.31,
+    "fits_radially": true,
+    "outer_leaf": {
+     "gap": 0.925,
+     "hinge_deg": 90.0
+    },
+    "volume_m3": 9.9,
+    "hull_skin_m": 6.4,
+    "fitting_outside_m": 2.1,
+    "existing_fitting_outside_m": 2.2
+   },
+   "operator_reach": {
+    "instructor": {
+     "side": "r",
+     "handle_rho_m": 0.202,
+     "distance_m": 0.573,
+     "reach_m": 0.616,
+     "elevation_deg": 180.0,
+     "ok": true,
+     "pitch_needed_deg": 60.0
+    },
+    "newcomer": {
+     "side": "r",
+     "handle_rho_m": 0.244,
+     "distance_m": 0.555,
+     "reach_m": 0.577,
+     "elevation_deg": 180.0,
+     "ok": true,
+     "pitch_needed_deg": 60.0
+    }
+   },
+   "rescue": {
+    "status": "PASS",
+    "routine_only_clear_m": [
+     1.9,
+     3.15
+    ],
+    "note": "the chamber is sized for the routine pair and both rescuer/casualty pairings (casualty in the free neutral posture)",
+    "occupants": [
+     [
+      {
+       "variant": "instructor",
+       "pose": "rescue",
+       "theta_deg": 0.0,
+       "shift_m": [
+        0.5505,
+        -0.0023
+       ],
+       "a_top_m": 5.035,
+       "zmax_m": 1.983
+      },
+      {
+       "variant": "newcomer",
+       "pose": "casualty",
+       "theta_deg": 180.0,
+       "shift_m": [
+        -0.3335,
+        -0.1517
+       ],
+       "a_top_m": 5.035,
+       "zmax_m": 0.928
+      }
+     ],
+     [
+      {
+       "variant": "newcomer",
+       "pose": "rescue",
+       "theta_deg": 0.0,
+       "shift_m": [
+        0.5817,
+        -0.0726
+       ],
+       "a_top_m": 5.035,
+       "zmax_m": 1.899
+      },
+      {
+       "variant": "instructor",
+       "pose": "casualty",
+       "theta_deg": 180.0,
+       "shift_m": [
+        -0.3283,
+        -0.2191
+       ],
+       "a_top_m": 5.035,
+       "zmax_m": 0.956
+      }
+     ]
+    ]
+   },
+   "cycles_per_pair": 1,
+   "occupants": [
+    {
+     "variant": "instructor",
+     "pose": "chamber",
+     "theta_deg": 0.0,
+     "shift_m": [
+      0.389,
+      -0.008
+     ],
+     "a_top_m": 5.035,
+     "zmax_m": 1.893
+    },
+    {
+     "variant": "newcomer",
+     "pose": "chamber",
+     "theta_deg": 180.0,
+     "shift_m": [
+      -0.416,
+      0.012
+     ],
+     "a_top_m": 5.035,
+     "zmax_m": 1.807
+    }
+   ],
+   "fitting": {
+    "x": 101.8494,
+    "theta_deg": 50.0,
+    "port_face_a_m": 6.8,
+    "wall_m": 0.05
+   },
+   "conditions": [
+    "instructor: unlatching needs the body pitched 60.0 deg toward the hatch (or an extension handle, OPEN)",
+    "newcomer: unlatching needs the body pitched 60.0 deg toward the hatch (or an extension handle, OPEN)"
+   ],
+   "geometry_fail": [
+    "door: instructor.hatch_pass FAIL (margin -0.074 m)",
+    "door: newcomer.hatch_pass FAIL (margin -0.026 m)"
+   ],
+   "status": "STUDY FAIL"
+  },
+  {
+   "id": "SP11_SEQUENTIAL_100",
+   "aperture_m": 1.0,
+   "layout": "sequential",
+   "study_target": false,
+   "door": {
+    "clear_m": 1.0,
+    "r_clear": 0.5,
+    "r_leaf": 0.55,
+    "r_hinge": 0.6,
+    "t": 0.06,
+    "frame_depth": 0.08,
+    "swing_depth_m": 1.15,
+    "park_radius_m": 0.909,
+    "seat_load_kn": 76.0,
+    "seat_load_basis": "cabin 80 kPa (BASELINE) x leaf area; DERIVED, not a structural release",
+    "hull_penetration_outside_m": 1.3
+   },
+   "door_passage": {
+    "instructor.hatch_pass": {
+     "need_m": 1.074,
+     "margin_m": -0.074,
+     "tilt_deg": [
+      0.0,
+      0.0
+     ],
+     "required": true,
+     "status": "FAIL"
+    },
+    "instructor.suited": {
+     "need_m": 0.857,
+     "margin_m": 0.143,
+     "tilt_deg": [
+      0.0,
+      0.0
+     ],
+     "required": true,
+     "status": "PASS"
+    },
+    "instructor.casualty_restrained": {
+     "need_m": 0.857,
+     "margin_m": 0.143,
+     "tilt_deg": [
+      0.0,
+      0.0
+     ],
+     "required": true,
+     "status": "PASS"
+    },
+    "instructor.casualty_free": {
+     "need_m": 1.299,
+     "margin_m": -0.299,
+     "tilt_deg": [
+      10.0,
+      10.0
+     ],
+     "required": false,
+     "status": "FAIL"
+    },
+    "newcomer.hatch_pass": {
+     "need_m": 1.026,
+     "margin_m": -0.026,
+     "tilt_deg": [
+      0.0,
+      0.0
+     ],
+     "required": true,
+     "status": "FAIL"
+    },
+    "newcomer.suited": {
+     "need_m": 0.832,
+     "margin_m": 0.168,
+     "tilt_deg": [
+      0.0,
+      0.0
+     ],
+     "required": true,
+     "status": "PASS"
+    },
+    "newcomer.casualty_restrained": {
+     "need_m": 0.832,
+     "margin_m": 0.168,
+     "tilt_deg": [
+      0.0,
+      0.0
+     ],
+     "required": true,
+     "status": "PASS"
+    },
+    "newcomer.casualty_free": {
+     "need_m": 1.221,
+     "margin_m": -0.221,
+     "tilt_deg": [
+      10.0,
+      10.0
+     ],
+     "required": false,
+     "status": "FAIL"
+    }
+   },
+   "door_ok": false,
+   "chamber": {
+    "clear_radius_m": 0.9500000000000001,
+    "clear_diameter_m": 1.9,
+    "body_radius_m": 0.429,
+    "clear_length_m": 3.15,
+    "outer_bulkhead_a_m": 6.15,
+    "inner_bulkhead_a_m": 2.9,
+    "inner_leaf_floor_a_m": 1.56,
+    "leaf_face_a_m": 5.96,
+    "body_top_a_m": 5.01,
+    "sp12_floor_r_m": 1.25,
+    "radial_budget_m": 0.31,
+    "fits_radially": true,
+    "outer_leaf": {
+     "gap": 0.95,
+     "hinge_deg": 45.0
+    },
+    "volume_m3": 8.93,
+    "hull_skin_m": 6.4,
+    "fitting_outside_m": 2.0,
+    "existing_fitting_outside_m": 2.2
+   },
+   "operator_reach": {
+    "instructor": {
+     "side": "r",
+     "handle_rho_m": 0.199,
+     "distance_m": 0.573,
+     "reach_m": 0.616,
+     "elevation_deg": 180.0,
+     "ok": true,
+     "pitch_needed_deg": 60.0
+    }
+   },
+   "rescue": {
+    "status": "FAIL",
+    "note": "an unresponsive crew member cannot cycle a single-person lock alone; a rescuer must share the chamber (or a ship-side remote cycle, OPEN): the sequential layout serves routine egress only (EVA-044, EVA-054)"
+   },
+   "cycles_per_pair": 2,
+   "occupants": [
+    {
+     "variant": "instructor",
+     "pose": "chamber",
+     "theta_deg": 0.0,
+     "shift_m": [
+      -0.0,
+      -0.0327
+     ],
+     "a_top_m": 5.01,
+     "zmax_m": 1.893
+    }
+   ],
+   "fitting": {
+    "x": 101.8494,
+    "theta_deg": 50.0,
+    "port_face_a_m": 6.8,
+    "wall_m": 0.05
+   },
+   "conditions": [
+    "instructor: unlatching needs the body pitched 60.0 deg toward the hatch (or an extension handle, OPEN)"
+   ],
+   "geometry_fail": [
+    "door: instructor.hatch_pass FAIL (margin -0.074 m)",
+    "door: newcomer.hatch_pass FAIL (margin -0.026 m)",
+    "rescue: an incapacitated crew member cannot be cycled"
+   ],
+   "status": "STUDY FAIL"
+  },
+  {
+   "id": "SP11_TWO_PERSON_110",
+   "aperture_m": 1.1,
+   "layout": "two_person",
+   "study_target": true,
+   "door": {
+    "clear_m": 1.1,
+    "r_clear": 0.55,
+    "r_leaf": 0.6000000000000001,
+    "r_hinge": 0.65,
+    "t": 0.06,
+    "frame_depth": 0.08,
+    "swing_depth_m": 1.25,
+    "park_radius_m": 0.98,
+    "seat_load_kn": 90.5,
+    "seat_load_basis": "cabin 80 kPa (BASELINE) x leaf area; DERIVED, not a structural release",
+    "hull_penetration_outside_m": 1.4
+   },
+   "door_passage": {
+    "instructor.hatch_pass": {
+     "need_m": 1.074,
+     "margin_m": 0.026,
+     "tilt_deg": [
+      0.0,
+      0.0
+     ],
+     "required": true,
+     "status": "MARGINAL"
+    },
+    "instructor.suited": {
+     "need_m": 0.857,
+     "margin_m": 0.243,
+     "tilt_deg": [
+      0.0,
+      0.0
+     ],
+     "required": true,
+     "status": "PASS"
+    },
+    "instructor.casualty_restrained": {
+     "need_m": 0.857,
+     "margin_m": 0.243,
+     "tilt_deg": [
+      0.0,
+      0.0
+     ],
+     "required": true,
+     "status": "PASS"
+    },
+    "instructor.casualty_free": {
+     "need_m": 1.299,
+     "margin_m": -0.199,
+     "tilt_deg": [
+      10.0,
+      10.0
+     ],
+     "required": false,
+     "status": "FAIL"
+    },
+    "newcomer.hatch_pass": {
+     "need_m": 1.026,
+     "margin_m": 0.074,
+     "tilt_deg": [
+      0.0,
+      0.0
+     ],
+     "required": true,
+     "status": "PASS"
+    },
+    "newcomer.suited": {
+     "need_m": 0.832,
+     "margin_m": 0.268,
+     "tilt_deg": [
+      0.0,
+      0.0
+     ],
+     "required": true,
+     "status": "PASS"
+    },
+    "newcomer.casualty_restrained": {
+     "need_m": 0.832,
+     "margin_m": 0.268,
+     "tilt_deg": [
+      0.0,
+      0.0
+     ],
+     "required": true,
+     "status": "PASS"
+    },
+    "newcomer.casualty_free": {
+     "need_m": 1.221,
+     "margin_m": -0.121,
+     "tilt_deg": [
+      10.0,
+      10.0
+     ],
+     "required": false,
+     "status": "FAIL"
+    }
+   },
+   "door_ok": false,
+   "chamber": {
+    "clear_radius_m": 1.0,
+    "clear_diameter_m": 2.0,
+    "body_radius_m": 0.929,
+    "clear_length_m": 3.25,
+    "outer_bulkhead_a_m": 6.15,
+    "inner_bulkhead_a_m": 2.8,
+    "inner_leaf_floor_a_m": 1.36,
+    "leaf_face_a_m": 5.96,
+    "body_top_a_m": 4.96,
+    "sp12_floor_r_m": 1.25,
+    "radial_budget_m": 0.11,
+    "fits_radially": true,
+    "outer_leaf": {
+     "gap": 1.0,
+     "hinge_deg": 90.0
+    },
+    "volume_m3": 10.21,
+    "hull_skin_m": 6.4,
+    "fitting_outside_m": 2.1,
+    "existing_fitting_outside_m": 2.2
+   },
+   "operator_reach": {
+    "instructor": {
+     "side": "r",
+     "handle_rho_m": 0.202,
+     "distance_m": 0.573,
+     "reach_m": 0.616,
+     "elevation_deg": 180.0,
+     "ok": true,
+     "pitch_needed_deg": 60.0
+    },
+    "newcomer": {
+     "side": "r",
+     "handle_rho_m": 0.244,
+     "distance_m": 0.555,
+     "reach_m": 0.577,
+     "elevation_deg": 180.0,
+     "ok": true,
+     "pitch_needed_deg": 60.0
+    }
+   },
+   "rescue": {
+    "status": "PASS",
+    "routine_only_clear_m": [
+     2.0,
+     3.2
+    ],
+    "note": "the chamber is sized for the routine pair and both rescuer/casualty pairings (casualty in the free neutral posture)",
+    "occupants": [
+     [
+      {
+       "variant": "instructor",
+       "pose": "rescue",
+       "theta_deg": 0.0,
+       "shift_m": [
+        0.5505,
+        -0.0023
+       ],
+       "a_top_m": 4.96,
+       "zmax_m": 1.983
+      },
+      {
+       "variant": "newcomer",
+       "pose": "casualty",
+       "theta_deg": 180.0,
+       "shift_m": [
+        -0.3335,
+        -0.1517
+       ],
+       "a_top_m": 4.96,
+       "zmax_m": 0.928
+      }
+     ],
+     [
+      {
+       "variant": "newcomer",
+       "pose": "rescue",
+       "theta_deg": 0.0,
+       "shift_m": [
+        0.5817,
+        -0.0726
+       ],
+       "a_top_m": 4.96,
+       "zmax_m": 1.899
+      },
+      {
+       "variant": "instructor",
+       "pose": "casualty",
+       "theta_deg": 180.0,
+       "shift_m": [
+        -0.3283,
+        -0.2191
+       ],
+       "a_top_m": 4.96,
+       "zmax_m": 0.956
+      }
+     ]
+    ]
+   },
+   "cycles_per_pair": 1,
+   "occupants": [
+    {
+     "variant": "instructor",
+     "pose": "chamber",
+     "theta_deg": 0.0,
+     "shift_m": [
+      0.389,
+      -0.008
+     ],
+     "a_top_m": 4.96,
+     "zmax_m": 1.893
+    },
+    {
+     "variant": "newcomer",
+     "pose": "chamber",
+     "theta_deg": 180.0,
+     "shift_m": [
+      -0.416,
+      0.012
+     ],
+     "a_top_m": 4.96,
+     "zmax_m": 1.807
+    }
+   ],
+   "fitting": {
+    "x": 101.8494,
+    "theta_deg": 50.0,
+    "port_face_a_m": 6.8,
+    "wall_m": 0.05
+   },
+   "conditions": [
+    "instructor: unlatching needs the body pitched 60.0 deg toward the hatch (or an extension handle, OPEN)",
+    "newcomer: unlatching needs the body pitched 60.0 deg toward the hatch (or an extension handle, OPEN)"
+   ],
+   "geometry_fail": [
+    "door: instructor.hatch_pass MARGINAL (margin 0.026 m)"
+   ],
+   "status": "STUDY FAIL"
+  },
+  {
+   "id": "SP11_SEQUENTIAL_110",
+   "aperture_m": 1.1,
+   "layout": "sequential",
+   "study_target": true,
+   "door": {
+    "clear_m": 1.1,
+    "r_clear": 0.55,
+    "r_leaf": 0.6000000000000001,
+    "r_hinge": 0.65,
+    "t": 0.06,
+    "frame_depth": 0.08,
+    "swing_depth_m": 1.25,
+    "park_radius_m": 0.98,
+    "seat_load_kn": 90.5,
+    "seat_load_basis": "cabin 80 kPa (BASELINE) x leaf area; DERIVED, not a structural release",
+    "hull_penetration_outside_m": 1.4
+   },
+   "door_passage": {
+    "instructor.hatch_pass": {
+     "need_m": 1.074,
+     "margin_m": 0.026,
+     "tilt_deg": [
+      0.0,
+      0.0
+     ],
+     "required": true,
+     "status": "MARGINAL"
+    },
+    "instructor.suited": {
+     "need_m": 0.857,
+     "margin_m": 0.243,
+     "tilt_deg": [
+      0.0,
+      0.0
+     ],
+     "required": true,
+     "status": "PASS"
+    },
+    "instructor.casualty_restrained": {
+     "need_m": 0.857,
+     "margin_m": 0.243,
+     "tilt_deg": [
+      0.0,
+      0.0
+     ],
+     "required": true,
+     "status": "PASS"
+    },
+    "instructor.casualty_free": {
+     "need_m": 1.299,
+     "margin_m": -0.199,
+     "tilt_deg": [
+      10.0,
+      10.0
+     ],
+     "required": false,
+     "status": "FAIL"
+    },
+    "newcomer.hatch_pass": {
+     "need_m": 1.026,
+     "margin_m": 0.074,
+     "tilt_deg": [
+      0.0,
+      0.0
+     ],
+     "required": true,
+     "status": "PASS"
+    },
+    "newcomer.suited": {
+     "need_m": 0.832,
+     "margin_m": 0.268,
+     "tilt_deg": [
+      0.0,
+      0.0
+     ],
+     "required": true,
+     "status": "PASS"
+    },
+    "newcomer.casualty_restrained": {
+     "need_m": 0.832,
+     "margin_m": 0.268,
+     "tilt_deg": [
+      0.0,
+      0.0
+     ],
+     "required": true,
+     "status": "PASS"
+    },
+    "newcomer.casualty_free": {
+     "need_m": 1.221,
+     "margin_m": -0.121,
+     "tilt_deg": [
+      10.0,
+      10.0
+     ],
+     "required": false,
+     "status": "FAIL"
+    }
+   },
+   "door_ok": false,
+   "chamber": {
+    "clear_radius_m": 1.0,
+    "clear_diameter_m": 2.0,
+    "body_radius_m": 0.429,
+    "clear_length_m": 3.25,
+    "outer_bulkhead_a_m": 6.15,
+    "inner_bulkhead_a_m": 2.8,
+    "inner_leaf_floor_a_m": 1.36,
+    "leaf_face_a_m": 5.96,
+    "body_top_a_m": 4.935,
+    "sp12_floor_r_m": 1.25,
+    "radial_budget_m": 0.11,
+    "fits_radially": true,
+    "outer_leaf": {
+     "gap": 1.025,
+     "hinge_deg": 90.0
+    },
+    "volume_m3": 10.21,
+    "hull_skin_m": 6.4,
+    "fitting_outside_m": 2.1,
+    "existing_fitting_outside_m": 2.2
+   },
+   "operator_reach": {
+    "instructor": {
+     "side": "r",
+     "handle_rho_m": 0.199,
+     "distance_m": 0.573,
+     "reach_m": 0.616,
+     "elevation_deg": 180.0,
+     "ok": true,
+     "pitch_needed_deg": 60.0
+    }
+   },
+   "rescue": {
+    "status": "FAIL",
+    "note": "an unresponsive crew member cannot cycle a single-person lock alone; a rescuer must share the chamber (or a ship-side remote cycle, OPEN): the sequential layout serves routine egress only (EVA-044, EVA-054)"
+   },
+   "cycles_per_pair": 2,
+   "occupants": [
+    {
+     "variant": "instructor",
+     "pose": "chamber",
+     "theta_deg": 0.0,
+     "shift_m": [
+      -0.0,
+      -0.0327
+     ],
+     "a_top_m": 4.935,
+     "zmax_m": 1.893
+    }
+   ],
+   "fitting": {
+    "x": 101.8494,
+    "theta_deg": 50.0,
+    "port_face_a_m": 6.8,
+    "wall_m": 0.05
+   },
+   "conditions": [
+    "instructor: unlatching needs the body pitched 60.0 deg toward the hatch (or an extension handle, OPEN)"
+   ],
+   "geometry_fail": [
+    "door: instructor.hatch_pass MARGINAL (margin 0.026 m)",
+    "rescue: an incapacitated crew member cannot be cycled"
+   ],
+   "status": "STUDY FAIL"
+  },
+  {
+   "id": "SP11_TWO_PERSON_120",
+   "aperture_m": 1.2,
+   "layout": "two_person",
+   "study_target": false,
+   "door": {
+    "clear_m": 1.2,
+    "r_clear": 0.6,
+    "r_leaf": 0.65,
+    "r_hinge": 0.7,
+    "t": 0.06,
+    "frame_depth": 0.08,
+    "swing_depth_m": 1.35,
+    "park_radius_m": 1.05,
+    "seat_load_kn": 106.2,
+    "seat_load_basis": "cabin 80 kPa (BASELINE) x leaf area; DERIVED, not a structural release",
+    "hull_penetration_outside_m": 1.5
+   },
+   "door_passage": {
+    "instructor.hatch_pass": {
+     "need_m": 1.074,
+     "margin_m": 0.126,
+     "tilt_deg": [
+      0.0,
+      0.0
+     ],
+     "required": true,
+     "status": "PASS"
+    },
+    "instructor.suited": {
+     "need_m": 0.857,
+     "margin_m": 0.343,
+     "tilt_deg": [
+      0.0,
+      0.0
+     ],
+     "required": true,
+     "status": "PASS"
+    },
+    "instructor.casualty_restrained": {
+     "need_m": 0.857,
+     "margin_m": 0.343,
+     "tilt_deg": [
+      0.0,
+      0.0
+     ],
+     "required": true,
+     "status": "PASS"
+    },
+    "instructor.casualty_free": {
+     "need_m": 1.299,
+     "margin_m": -0.099,
+     "tilt_deg": [
+      10.0,
+      10.0
+     ],
+     "required": false,
+     "status": "FAIL"
+    },
+    "newcomer.hatch_pass": {
+     "need_m": 1.026,
+     "margin_m": 0.174,
+     "tilt_deg": [
+      0.0,
+      0.0
+     ],
+     "required": true,
+     "status": "PASS"
+    },
+    "newcomer.suited": {
+     "need_m": 0.832,
+     "margin_m": 0.368,
+     "tilt_deg": [
+      0.0,
+      0.0
+     ],
+     "required": true,
+     "status": "PASS"
+    },
+    "newcomer.casualty_restrained": {
+     "need_m": 0.832,
+     "margin_m": 0.368,
+     "tilt_deg": [
+      0.0,
+      0.0
+     ],
+     "required": true,
+     "status": "PASS"
+    },
+    "newcomer.casualty_free": {
+     "need_m": 1.221,
+     "margin_m": -0.021,
+     "tilt_deg": [
+      10.0,
+      10.0
+     ],
+     "required": false,
+     "status": "FAIL"
+    }
+   },
+   "door_ok": true,
+   "chamber": {
+    "clear_radius_m": 1.05,
+    "clear_diameter_m": 2.1,
+    "body_radius_m": 0.929,
+    "clear_length_m": 3.35,
+    "outer_bulkhead_a_m": 6.15,
+    "inner_bulkhead_a_m": 2.7,
+    "inner_leaf_floor_a_m": 1.16,
+    "leaf_face_a_m": 5.96,
+    "body_top_a_m": 4.835,
+    "sp12_floor_r_m": 1.25,
+    "radial_budget_m": -0.09,
+    "fits_radially": false,
+    "outer_leaf": {
+     "gap": 1.125,
+     "hinge_deg": 90.0
+    },
+    "volume_m3": 11.6,
+    "hull_skin_m": 6.4,
+    "fitting_outside_m": 2.2,
+    "existing_fitting_outside_m": 2.2
+   },
+   "operator_reach": {
+    "instructor": {
+     "side": "r",
+     "handle_rho_m": 0.202,
+     "distance_m": 0.573,
+     "reach_m": 0.616,
+     "elevation_deg": 180.0,
+     "ok": true,
+     "pitch_needed_deg": 60.0
+    },
+    "newcomer": {
+     "side": "r",
+     "handle_rho_m": 0.244,
+     "distance_m": 0.555,
+     "reach_m": 0.577,
+     "elevation_deg": 180.0,
+     "ok": true,
+     "pitch_needed_deg": 60.0
+    }
+   },
+   "rescue": {
+    "status": "PASS",
+    "routine_only_clear_m": [
+     2.1,
+     3.35
+    ],
+    "note": "the chamber is sized for the routine pair and both rescuer/casualty pairings (casualty in the free neutral posture)",
+    "occupants": [
+     [
+      {
+       "variant": "instructor",
+       "pose": "rescue",
+       "theta_deg": 0.0,
+       "shift_m": [
+        0.5505,
+        -0.0023
+       ],
+       "a_top_m": 4.835,
+       "zmax_m": 1.983
+      },
+      {
+       "variant": "newcomer",
+       "pose": "casualty",
+       "theta_deg": 180.0,
+       "shift_m": [
+        -0.3335,
+        -0.1517
+       ],
+       "a_top_m": 4.835,
+       "zmax_m": 0.928
+      }
+     ],
+     [
+      {
+       "variant": "newcomer",
+       "pose": "rescue",
+       "theta_deg": 0.0,
+       "shift_m": [
+        0.5817,
+        -0.0726
+       ],
+       "a_top_m": 4.835,
+       "zmax_m": 1.899
+      },
+      {
+       "variant": "instructor",
+       "pose": "casualty",
+       "theta_deg": 180.0,
+       "shift_m": [
+        -0.3283,
+        -0.2191
+       ],
+       "a_top_m": 4.835,
+       "zmax_m": 0.956
+      }
+     ]
+    ]
+   },
+   "cycles_per_pair": 1,
+   "occupants": [
+    {
+     "variant": "instructor",
+     "pose": "chamber",
+     "theta_deg": 0.0,
+     "shift_m": [
+      0.389,
+      -0.008
+     ],
+     "a_top_m": 4.835,
+     "zmax_m": 1.893
+    },
+    {
+     "variant": "newcomer",
+     "pose": "chamber",
+     "theta_deg": 180.0,
+     "shift_m": [
+      -0.416,
+      0.012
+     ],
+     "a_top_m": 4.835,
+     "zmax_m": 1.807
+    }
+   ],
+   "fitting": {
+    "x": 101.8494,
+    "theta_deg": 50.0,
+    "port_face_a_m": 6.8,
+    "wall_m": 0.05
+   },
+   "conditions": [
+    "instructor: unlatching needs the body pitched 60.0 deg toward the hatch (or an extension handle, OPEN)",
+    "newcomer: unlatching needs the body pitched 60.0 deg toward the hatch (or an extension handle, OPEN)"
+   ],
+   "geometry_fail": [
+    "radial budget -0.09 m: the inner leaf's swing (with its 0.05 m clearance) reaches below the SP-12 floor"
+   ],
+   "status": "STUDY FAIL"
+  },
+  {
+   "id": "SP11_SEQUENTIAL_120",
+   "aperture_m": 1.2,
+   "layout": "sequential",
+   "study_target": false,
+   "door": {
+    "clear_m": 1.2,
+    "r_clear": 0.6,
+    "r_leaf": 0.65,
+    "r_hinge": 0.7,
+    "t": 0.06,
+    "frame_depth": 0.08,
+    "swing_depth_m": 1.35,
+    "park_radius_m": 1.05,
+    "seat_load_kn": 106.2,
+    "seat_load_basis": "cabin 80 kPa (BASELINE) x leaf area; DERIVED, not a structural release",
+    "hull_penetration_outside_m": 1.5
+   },
+   "door_passage": {
+    "instructor.hatch_pass": {
+     "need_m": 1.074,
+     "margin_m": 0.126,
+     "tilt_deg": [
+      0.0,
+      0.0
+     ],
+     "required": true,
+     "status": "PASS"
+    },
+    "instructor.suited": {
+     "need_m": 0.857,
+     "margin_m": 0.343,
+     "tilt_deg": [
+      0.0,
+      0.0
+     ],
+     "required": true,
+     "status": "PASS"
+    },
+    "instructor.casualty_restrained": {
+     "need_m": 0.857,
+     "margin_m": 0.343,
+     "tilt_deg": [
+      0.0,
+      0.0
+     ],
+     "required": true,
+     "status": "PASS"
+    },
+    "instructor.casualty_free": {
+     "need_m": 1.299,
+     "margin_m": -0.099,
+     "tilt_deg": [
+      10.0,
+      10.0
+     ],
+     "required": false,
+     "status": "FAIL"
+    },
+    "newcomer.hatch_pass": {
+     "need_m": 1.026,
+     "margin_m": 0.174,
+     "tilt_deg": [
+      0.0,
+      0.0
+     ],
+     "required": true,
+     "status": "PASS"
+    },
+    "newcomer.suited": {
+     "need_m": 0.832,
+     "margin_m": 0.368,
+     "tilt_deg": [
+      0.0,
+      0.0
+     ],
+     "required": true,
+     "status": "PASS"
+    },
+    "newcomer.casualty_restrained": {
+     "need_m": 0.832,
+     "margin_m": 0.368,
+     "tilt_deg": [
+      0.0,
+      0.0
+     ],
+     "required": true,
+     "status": "PASS"
+    },
+    "newcomer.casualty_free": {
+     "need_m": 1.221,
+     "margin_m": -0.021,
+     "tilt_deg": [
+      10.0,
+      10.0
+     ],
+     "required": false,
+     "status": "FAIL"
+    }
+   },
+   "door_ok": true,
+   "chamber": {
+    "clear_radius_m": 1.05,
+    "clear_diameter_m": 2.1,
+    "body_radius_m": 0.429,
+    "clear_length_m": 3.35,
+    "outer_bulkhead_a_m": 6.15,
+    "inner_bulkhead_a_m": 2.7,
+    "inner_leaf_floor_a_m": 1.16,
+    "leaf_face_a_m": 5.96,
+    "body_top_a_m": 4.835,
+    "sp12_floor_r_m": 1.25,
+    "radial_budget_m": -0.09,
+    "fits_radially": false,
+    "outer_leaf": {
+     "gap": 1.125,
+     "hinge_deg": 45.0
+    },
+    "volume_m3": 11.6,
+    "hull_skin_m": 6.4,
+    "fitting_outside_m": 2.2,
+    "existing_fitting_outside_m": 2.2
+   },
+   "operator_reach": {
+    "instructor": {
+     "side": "r",
+     "handle_rho_m": 0.199,
+     "distance_m": 0.573,
+     "reach_m": 0.616,
+     "elevation_deg": 180.0,
+     "ok": true,
+     "pitch_needed_deg": 60.0
+    }
+   },
+   "rescue": {
+    "status": "FAIL",
+    "note": "an unresponsive crew member cannot cycle a single-person lock alone; a rescuer must share the chamber (or a ship-side remote cycle, OPEN): the sequential layout serves routine egress only (EVA-044, EVA-054)"
+   },
+   "cycles_per_pair": 2,
+   "occupants": [
+    {
+     "variant": "instructor",
+     "pose": "chamber",
+     "theta_deg": 0.0,
+     "shift_m": [
+      -0.0,
+      -0.0327
+     ],
+     "a_top_m": 4.835,
+     "zmax_m": 1.893
+    }
+   ],
+   "fitting": {
+    "x": 101.8494,
+    "theta_deg": 50.0,
+    "port_face_a_m": 6.8,
+    "wall_m": 0.05
+   },
+   "conditions": [
+    "instructor: unlatching needs the body pitched 60.0 deg toward the hatch (or an extension handle, OPEN)"
+   ],
+   "geometry_fail": [
+    "radial budget -0.09 m: the inner leaf's swing (with its 0.05 m clearance) reaches below the SP-12 floor",
+    "rescue: an incapacitated crew member cannot be cycled"
+   ],
+   "status": "STUDY FAIL"
+  },
+  {
+   "id": "SP11_TWO_PERSON_135",
+   "aperture_m": 1.35,
+   "layout": "two_person",
+   "study_target": false,
+   "door": {
+    "clear_m": 1.35,
+    "r_clear": 0.675,
+    "r_leaf": 0.7250000000000001,
+    "r_hinge": 0.775,
+    "t": 0.06,
+    "frame_depth": 0.08,
+    "swing_depth_m": 1.5,
+    "park_radius_m": 1.156,
+    "seat_load_kn": 132.1,
+    "seat_load_basis": "cabin 80 kPa (BASELINE) x leaf area; DERIVED, not a structural release",
+    "hull_penetration_outside_m": 1.65
+   },
+   "door_passage": {
+    "instructor.hatch_pass": {
+     "need_m": 1.074,
+     "margin_m": 0.276,
+     "tilt_deg": [
+      0.0,
+      0.0
+     ],
+     "required": true,
+     "status": "PASS"
+    },
+    "instructor.suited": {
+     "need_m": 0.857,
+     "margin_m": 0.493,
+     "tilt_deg": [
+      0.0,
+      0.0
+     ],
+     "required": true,
+     "status": "PASS"
+    },
+    "instructor.casualty_restrained": {
+     "need_m": 0.857,
+     "margin_m": 0.493,
+     "tilt_deg": [
+      0.0,
+      0.0
+     ],
+     "required": true,
+     "status": "PASS"
+    },
+    "instructor.casualty_free": {
+     "need_m": 1.299,
+     "margin_m": 0.051,
+     "tilt_deg": [
+      10.0,
+      10.0
+     ],
+     "required": false,
+     "status": "PASS"
+    },
+    "newcomer.hatch_pass": {
+     "need_m": 1.026,
+     "margin_m": 0.324,
+     "tilt_deg": [
+      0.0,
+      0.0
+     ],
+     "required": true,
+     "status": "PASS"
+    },
+    "newcomer.suited": {
+     "need_m": 0.832,
+     "margin_m": 0.518,
+     "tilt_deg": [
+      0.0,
+      0.0
+     ],
+     "required": true,
+     "status": "PASS"
+    },
+    "newcomer.casualty_restrained": {
+     "need_m": 0.832,
+     "margin_m": 0.518,
+     "tilt_deg": [
+      0.0,
+      0.0
+     ],
+     "required": true,
+     "status": "PASS"
+    },
+    "newcomer.casualty_free": {
+     "need_m": 1.221,
+     "margin_m": 0.129,
+     "tilt_deg": [
+      10.0,
+      10.0
+     ],
+     "required": false,
+     "status": "PASS"
+    }
+   },
+   "door_ok": true,
+   "chamber": {
+    "clear_radius_m": 1.2000000000000002,
+    "clear_diameter_m": 2.4,
+    "body_radius_m": 0.929,
+    "clear_length_m": 3.5,
+    "outer_bulkhead_a_m": 6.1,
+    "inner_bulkhead_a_m": 2.5,
+    "inner_leaf_floor_a_m": 0.81,
+    "leaf_face_a_m": 5.91,
+    "body_top_a_m": 4.66,
+    "sp12_floor_r_m": 1.25,
+    "radial_budget_m": -0.44,
+    "fits_radially": false,
+    "outer_leaf": {
+     "gap": 1.25,
+     "hinge_deg": 90.0
+    },
+    "volume_m3": 15.83,
+    "hull_skin_m": 6.4,
+    "fitting_outside_m": 2.5,
+    "existing_fitting_outside_m": 2.2
+   },
+   "operator_reach": {
+    "instructor": {
+     "side": "r",
+     "handle_rho_m": 0.202,
+     "distance_m": 0.573,
+     "reach_m": 0.616,
+     "elevation_deg": 180.0,
+     "ok": true,
+     "pitch_needed_deg": 60.0
+    },
+    "newcomer": {
+     "side": "r",
+     "handle_rho_m": 0.244,
+     "distance_m": 0.555,
+     "reach_m": 0.577,
+     "elevation_deg": 180.0,
+     "ok": true,
+     "pitch_needed_deg": 60.0
+    }
+   },
+   "rescue": {
+    "status": "PASS",
+    "routine_only_clear_m": [
+     2.4,
+     3.45
+    ],
+    "note": "the chamber is sized for the routine pair and both rescuer/casualty pairings (casualty in the free neutral posture)",
+    "occupants": [
+     [
+      {
+       "variant": "instructor",
+       "pose": "rescue",
+       "theta_deg": 0.0,
+       "shift_m": [
+        0.5505,
+        -0.0023
+       ],
+       "a_top_m": 4.66,
+       "zmax_m": 1.983
+      },
+      {
+       "variant": "newcomer",
+       "pose": "casualty",
+       "theta_deg": 180.0,
+       "shift_m": [
+        -0.3335,
+        -0.1517
+       ],
+       "a_top_m": 4.66,
+       "zmax_m": 0.928
+      }
+     ],
+     [
+      {
+       "variant": "newcomer",
+       "pose": "rescue",
+       "theta_deg": 0.0,
+       "shift_m": [
+        0.5817,
+        -0.0726
+       ],
+       "a_top_m": 4.66,
+       "zmax_m": 1.899
+      },
+      {
+       "variant": "instructor",
+       "pose": "casualty",
+       "theta_deg": 180.0,
+       "shift_m": [
+        -0.3283,
+        -0.2191
+       ],
+       "a_top_m": 4.66,
+       "zmax_m": 0.956
+      }
+     ]
+    ]
+   },
+   "cycles_per_pair": 1,
+   "occupants": [
+    {
+     "variant": "instructor",
+     "pose": "chamber",
+     "theta_deg": 0.0,
+     "shift_m": [
+      0.389,
+      -0.008
+     ],
+     "a_top_m": 4.66,
+     "zmax_m": 1.893
+    },
+    {
+     "variant": "newcomer",
+     "pose": "chamber",
+     "theta_deg": 180.0,
+     "shift_m": [
+      -0.416,
+      0.012
+     ],
+     "a_top_m": 4.66,
+     "zmax_m": 1.807
+    }
+   ],
+   "fitting": {
+    "x": 101.8494,
+    "theta_deg": 50.0,
+    "port_face_a_m": 6.8,
+    "wall_m": 0.05
+   },
+   "conditions": [
+    "instructor: unlatching needs the body pitched 60.0 deg toward the hatch (or an extension handle, OPEN)",
+    "newcomer: unlatching needs the body pitched 60.0 deg toward the hatch (or an extension handle, OPEN)"
+   ],
+   "geometry_fail": [
+    "radial budget -0.44 m: the inner leaf's swing (with its 0.05 m clearance) reaches below the SP-12 floor"
+   ],
+   "status": "STUDY FAIL"
+  },
+  {
+   "id": "SP11_SEQUENTIAL_135",
+   "aperture_m": 1.35,
+   "layout": "sequential",
+   "study_target": false,
+   "door": {
+    "clear_m": 1.35,
+    "r_clear": 0.675,
+    "r_leaf": 0.7250000000000001,
+    "r_hinge": 0.775,
+    "t": 0.06,
+    "frame_depth": 0.08,
+    "swing_depth_m": 1.5,
+    "park_radius_m": 1.156,
+    "seat_load_kn": 132.1,
+    "seat_load_basis": "cabin 80 kPa (BASELINE) x leaf area; DERIVED, not a structural release",
+    "hull_penetration_outside_m": 1.65
+   },
+   "door_passage": {
+    "instructor.hatch_pass": {
+     "need_m": 1.074,
+     "margin_m": 0.276,
+     "tilt_deg": [
+      0.0,
+      0.0
+     ],
+     "required": true,
+     "status": "PASS"
+    },
+    "instructor.suited": {
+     "need_m": 0.857,
+     "margin_m": 0.493,
+     "tilt_deg": [
+      0.0,
+      0.0
+     ],
+     "required": true,
+     "status": "PASS"
+    },
+    "instructor.casualty_restrained": {
+     "need_m": 0.857,
+     "margin_m": 0.493,
+     "tilt_deg": [
+      0.0,
+      0.0
+     ],
+     "required": true,
+     "status": "PASS"
+    },
+    "instructor.casualty_free": {
+     "need_m": 1.299,
+     "margin_m": 0.051,
+     "tilt_deg": [
+      10.0,
+      10.0
+     ],
+     "required": false,
+     "status": "PASS"
+    },
+    "newcomer.hatch_pass": {
+     "need_m": 1.026,
+     "margin_m": 0.324,
+     "tilt_deg": [
+      0.0,
+      0.0
+     ],
+     "required": true,
+     "status": "PASS"
+    },
+    "newcomer.suited": {
+     "need_m": 0.832,
+     "margin_m": 0.518,
+     "tilt_deg": [
+      0.0,
+      0.0
+     ],
+     "required": true,
+     "status": "PASS"
+    },
+    "newcomer.casualty_restrained": {
+     "need_m": 0.832,
+     "margin_m": 0.518,
+     "tilt_deg": [
+      0.0,
+      0.0
+     ],
+     "required": true,
+     "status": "PASS"
+    },
+    "newcomer.casualty_free": {
+     "need_m": 1.221,
+     "margin_m": 0.129,
+     "tilt_deg": [
+      10.0,
+      10.0
+     ],
+     "required": false,
+     "status": "PASS"
+    }
+   },
+   "door_ok": true,
+   "chamber": {
+    "clear_radius_m": 1.2000000000000002,
+    "clear_diameter_m": 2.4,
+    "body_radius_m": 0.429,
+    "clear_length_m": 3.45,
+    "outer_bulkhead_a_m": 6.1,
+    "inner_bulkhead_a_m": 2.55,
+    "inner_leaf_floor_a_m": 0.86,
+    "leaf_face_a_m": 5.91,
+    "body_top_a_m": 4.66,
+    "sp12_floor_r_m": 1.25,
+    "radial_budget_m": -0.39,
+    "fits_radially": false,
+    "outer_leaf": {
+     "gap": 1.25,
+     "hinge_deg": 45.0
+    },
+    "volume_m3": 15.61,
+    "hull_skin_m": 6.4,
+    "fitting_outside_m": 2.5,
+    "existing_fitting_outside_m": 2.2
+   },
+   "operator_reach": {
+    "instructor": {
+     "side": "r",
+     "handle_rho_m": 0.199,
+     "distance_m": 0.573,
+     "reach_m": 0.616,
+     "elevation_deg": 180.0,
+     "ok": true,
+     "pitch_needed_deg": 60.0
+    }
+   },
+   "rescue": {
+    "status": "FAIL",
+    "note": "an unresponsive crew member cannot cycle a single-person lock alone; a rescuer must share the chamber (or a ship-side remote cycle, OPEN): the sequential layout serves routine egress only (EVA-044, EVA-054)"
+   },
+   "cycles_per_pair": 2,
+   "occupants": [
+    {
+     "variant": "instructor",
+     "pose": "chamber",
+     "theta_deg": 0.0,
+     "shift_m": [
+      -0.0,
+      -0.0327
+     ],
+     "a_top_m": 4.66,
+     "zmax_m": 1.893
+    }
+   ],
+   "fitting": {
+    "x": 101.8494,
+    "theta_deg": 50.0,
+    "port_face_a_m": 6.8,
+    "wall_m": 0.05
+   },
+   "conditions": [
+    "instructor: unlatching needs the body pitched 60.0 deg toward the hatch (or an extension handle, OPEN)"
+   ],
+   "geometry_fail": [
+    "radial budget -0.39 m: the inner leaf's swing (with its 0.05 m clearance) reaches below the SP-12 floor",
+    "rescue: an incapacitated crew member cannot be cycled"
+   ],
+   "status": "STUDY FAIL"
+  }
+ ],
+ "recommendation": {
+  "id": "SP11_TWO_PERSON_110",
+  "aperture_m": 1.1,
+  "status": "EVA-002 ranking, SUPERSEDED by the owner (43 EVA-056: 1.10 m is the MARGINAL benchmark, 1.20 m the lead study; see eva_sp11.py / p1_eva_sp11.json)",
+  "clean": false,
+  "open_conditions": [
+   "door: instructor.hatch_pass MARGINAL (margin 0.026 m)",
+   "instructor: unlatching needs the body pitched 60.0 deg toward the hatch (or an extension handle, OPEN)",
+   "newcomer: unlatching needs the body pitched 60.0 deg toward the hatch (or an extension handle, OPEN)"
+  ],
+  "ranking": [
+   {
+    "id": "SP11_TWO_PERSON_110",
+    "fails": [
+     "door: instructor.hatch_pass MARGINAL (margin 0.026 m)"
+    ]
+   },
+   {
+    "id": "SP11_TWO_PERSON_120",
+    "fails": [
+     "radial budget -0.09 m: the inner leaf's swing (with its 0.05 m clearance) reaches below the SP-12 floor"
+    ]
+   },
+   {
+    "id": "SP11_TWO_PERSON_135",
+    "fails": [
+     "radial budget -0.44 m: the inner leaf's swing (with its 0.05 m clearance) reaches below the SP-12 floor"
+    ]
+   },
+   {
+    "id": "SP11_SEQUENTIAL_110",
+    "fails": [
+     "door: instructor.hatch_pass MARGINAL (margin 0.026 m)",
+     "rescue: an incapacitated crew member cannot be cycled"
+    ]
+   },
+   {
+    "id": "SP11_TWO_PERSON_100",
+    "fails": [
+     "door: instructor.hatch_pass FAIL (margin -0.074 m)",
+     "door: newcomer.hatch_pass FAIL (margin -0.026 m)"
+    ]
+   },
+   {
+    "id": "SP11_SEQUENTIAL_120",
+    "fails": [
+     "radial budget -0.09 m: the inner leaf's swing (with its 0.05 m clearance) reaches below the SP-12 floor",
+     "rescue: an incapacitated crew member cannot be cycled"
+    ]
+   },
+   {
+    "id": "SP11_SEQUENTIAL_135",
+    "fails": [
+     "radial budget -0.39 m: the inner leaf's swing (with its 0.05 m clearance) reaches below the SP-12 floor",
+     "rescue: an incapacitated crew member cannot be cycled"
+    ]
+   },
+   {
+    "id": "SP11_SEQUENTIAL_100",
+    "fails": [
+     "door: instructor.hatch_pass FAIL (margin -0.074 m)",
+     "door: newcomer.hatch_pass FAIL (margin -0.026 m)",
+     "rescue: an incapacitated crew member cannot be cycled"
+    ]
+   }
+  ],
+  "basis": "two-person chamber first (EVA-044), fewest hard failures, then the smallest aperture; the sequential layouts cannot cycle a casualty"
+ },
+ "sp12": {
+  "id": "SP12",
+  "status": "PROTOTYPE STUDY (12A PROPOSED / PROGRAM)",
+  "x_m": [
+   100.75,
+   104.85
+  ],
+  "az_deg": [
+   5.0,
+   75.0
+  ],
+  "r_m": [
+   1.25,
+   4.6
+  ],
+  "clear_height_m": 3.35,
+  "clear_volume_m3": 49.1,
+  "floor_arc_m": 1.53,
+  "fixtures": [
+   {
+    "id": "SP12_DON_STAND_A",
+    "job": "suit donning stand A: suit hung on its PLSS docking frame, entered through the rear-entry hatch",
+    "kind": "stand",
+    "x": 103.4,
+    "az": 20.0,
+    "size": [
+     0.95,
+     1.0,
+     2.05
+    ],
+    "r0": 1.25,
+    "r1": 3.3,
+    "fits": true
+   },
+   {
+    "id": "SP12_DON_STAND_B",
+    "job": "suit donning stand B",
+    "kind": "stand",
+    "x": 104.3,
+    "az": 20.0,
+    "size": [
+     0.95,
+     1.0,
+     2.05
+    ],
+    "r0": 1.25,
+    "r1": 3.3,
+    "fits": true
+   },
+   {
+    "id": "SP12_PRESSURE_CHECK",
+    "job": "leak / pressure-check panel and umbilical (no setpoint or leak limit released)",
+    "kind": "panel",
+    "x": 103.85,
+    "az": 8.0,
+    "size": [
+     0.7,
+     0.12,
+     0.6
+    ],
+    "r0": 2.15,
+    "r1": 2.75,
+    "fits": true
+   },
+   {
+    "id": "SP12_O2_INTERFACE",
+    "job": "oxygen preparation interface (prebreathe supply; no duration, no flow budget)",
+    "kind": "panel",
+    "x": 104.7,
+    "az": 40.0,
+    "size": [
+     0.1,
+     0.6,
+     0.6
+    ],
+    "r0": 2.15,
+    "r1": 2.75,
+    "fits": true
+   },
+   {
+    "id": "SP12_TOOL_CHECKOUT",
+    "job": "tool and tether checkout board with a tether tug-test fixture (EVA-003: on the aft wall, clear of the SP-11 inner plug's parking pocket)",
+    "kind": "board",
+    "x": 100.85,
+    "az": 14.0,
+    "size": [
+     0.12,
+     1.2,
+     1.0
+    ],
+    "r0": 2.15,
+    "r1": 3.15,
+    "fits": true
+   },
+   {
+    "id": "SP12_BUDDY_ZONE",
+    "job": "buddy-check zone: two suited bodies, foot restraints",
+    "kind": "zone",
+    "x": 103.85,
+    "az": 55.0,
+    "size": [
+     1.6,
+     1.5,
+     2.05
+    ],
+    "r0": 1.25,
+    "r1": 3.3,
+    "fits": true
+   }
+  ]
+ },
+ "sp13": {
+  "id": "SP13",
+  "status": "PROTOTYPE STUDY (12A PROPOSED / PROGRAM)",
+  "x_m": [
+   104.95,
+   107.1
+  ],
+  "az_deg": [
+   5.0,
+   75.0
+  ],
+  "r_m": [
+   1.25,
+   4.6
+  ],
+  "clear_height_m": 3.35,
+  "clear_volume_m3": 25.7,
+  "floor_arc_m": 1.53,
+  "fixtures": [
+   {
+    "id": "SP13_DRY_RACK",
+    "job": "suit drying and storage rack (two suits)",
+    "kind": "rack",
+    "x": 105.6,
+    "az": 25.0,
+    "size": [
+     0.95,
+     1.8,
+     2.05
+    ],
+    "r0": 1.25,
+    "r1": 3.3,
+    "fits": true
+   },
+   {
+    "id": "SP13_CHARGE_PANEL",
+    "job": "battery charging, O2 recharge and water/consumables exchange interfaces (capacities OPEN)",
+    "kind": "panel",
+    "x": 107.0,
+    "az": 30.0,
+    "size": [
+     0.1,
+     0.9,
+     0.8
+    ],
+    "r0": 2.15,
+    "r1": 2.95,
+    "fits": true
+   },
+   {
+    "id": "SP13_BENCH",
+    "job": "pressure-shell inspection and component-replacement bench",
+    "kind": "bench",
+    "x": 106.4,
+    "az": 58.0,
+    "size": [
+     1.0,
+     0.9,
+     0.9
+    ],
+    "r0": 1.25,
+    "r1": 2.15,
+    "fits": true
+   },
+   {
+    "id": "SP13_SPARES",
+    "job": "spares lockers: gloves, visors, bearings, seals, PLSS modules",
+    "kind": "locker",
+    "x": 105.3,
+    "az": 62.0,
+    "size": [
+     0.7,
+     0.6,
+     1.6
+    ],
+    "r0": 1.25,
+    "r1": 2.85,
+    "fits": true
+   }
+  ]
+ }
+}

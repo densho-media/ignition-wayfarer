@@ -1,0 +1,2728 @@
+{
+ "study": "SIM-027 thrust hatch step B3S (B3R + deck band / ladder re-profile, anchor layout, single-hand sequence, carrier and leaf sweeps) (ids tsb.*); owner 2026-10-13 (15!A171) thrust hatch step B3H (B3S with the grab post replaced by one relocated low-profile handgrip) (ids tsh.*); owner 2026-10-13b (15!A180) thrust hatch step B3H2 (B3H with the dog-legged transfer rail T5 and the handgrip brackets at the deck-side end; arrest link <= 0.206 m hard limit) (ids tsh2.*), NONCANON disposable studies",
+ "source": [
+  "references/p1_char_step2.json (options.B3S)",
+  "references/p1_char_step2.json (options.B3H)",
+  "references/p1_char_step2.json (options.B3H2)",
+  "references/CHAR_STEP2_HATCH_STEP.md",
+  "references/p1_hum003.json (carriers)"
+ ],
+ "segments": [
+  {
+   "id": "tsb.instructor.body.both_hands",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "both",
+   "case": "instructor, K0..K4, both hands (left stiles, right grab post)",
+   "least_m": 0.035,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe (hip stand-off, drop, trunk lean, +-0.06 m along the rungs)",
+    "all body parts vs all vehicle and study objects"
+   ],
+   "seed_spread_m": null,
+   "nearest": "thigh -> STUDY_Transfer_Rail_1 at K4_foot_on_sill",
+   "note": "tightest keyframe K4_foot_on_sill. Grips: K0 l:Sector_Ladder_Stile_2 (wrist 0.0 cm)/r:STUDY_Grab_Post_right (wrist 0.0 cm); K1 l:Sector_Ladder_Stile_2 (wrist 0.0 cm)/r:Sector_Ladder_Stile_2 (wrist 0.2 cm); K2 l:Sector_Ladder_Stile_2 (wrist 0.0 cm)/r:STUDY_Grab_Post_right (wrist 0.0 cm); K3 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K4 l:Crew_Tube_1_1_Ladder_Stile_1 (wrist 0.0 cm)/r:STUDY_Grab_Post_right (wrist 0.0 cm). Geometry only; no suit, harness or load."
+  },
+  {
+   "id": "tsb.instructor.part.boot",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "both",
+   "case": "instructor, boot, both hands (left stiles, right grab post)",
+   "least_m": 0.064,
+   "status": "PASS",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe"
+   ],
+   "seed_spread_m": null,
+   "nearest": "boot -> STUDY_Transfer_Rail_1 at K1",
+   "note": "lead boot / boots (deck band, sill, frame); K4 boot values per owner item 2 (3.6-4.4 cm in B3R)."
+  },
+  {
+   "id": "tsb.instructor.part.hand",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "both",
+   "case": "instructor, hand, both hands (left stiles, right grab post)",
+   "least_m": 0.057,
+   "status": "PASS",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe"
+   ],
+   "seed_spread_m": null,
+   "nearest": "hand -> STUDY_Grab_Post_right at K3",
+   "note": "hands"
+  },
+  {
+   "id": "tsb.instructor.part.arm",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "both",
+   "case": "instructor, arm, both hands (left stiles, right grab post)",
+   "least_m": 0.054,
+   "status": "PASS",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe"
+   ],
+   "seed_spread_m": null,
+   "nearest": "arm -> STUDY_Sector_Ladder_Brackets_cut at K1",
+   "note": "arms"
+  },
+  {
+   "id": "tsb.instructor.part.thigh",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "both",
+   "case": "instructor, thigh, both hands (left stiles, right grab post)",
+   "least_m": 0.035,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe"
+   ],
+   "seed_spread_m": null,
+   "nearest": "thigh -> STUDY_Transfer_Rail_1 at K4",
+   "note": "thighs"
+  },
+  {
+   "id": "tsb.instructor.sequence.one",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "one",
+   "case": "instructor, single-hand transition K0..K4, restraint attached throughout (single hand (left only), grab post allowed)",
+   "least_m": 0.035,
+   "status": "OPEN",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe",
+    "every grip reach (hand holds within 3 cm of the grip, solver arm shortfall)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "thigh -> STUDY_Transfer_Rail_1 at K4_foot_on_sill",
+   "note": "a hand holds in every keyframe; geometric status MARGINAL. Hand schedule: K0 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K1 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K2 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K3 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K4 l:Crew_Tube_1_1_Ladder_Stile_1 (wrist 0.0 cm). Regrips (K3->K4: Sector_Ladder_Stile_2 -> Crew_Tube_1_1_Ladder_Stile_1) pass through a moment with no hand holding, restrained by the arrester link (0.166..0.201 m needed vs 0.206 m PROTOTYPE) and both feet (that moment is not checked between static keyframes); OPEN until the restraint load / arrest-distance / injury-load analysis exists (not invented here)."
+  },
+  {
+   "id": "tsb.instructor.sequence.one_np",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "one_np",
+   "case": "instructor, single-hand transition K0..K4, restraint attached throughout (single hand (left only), no grab post)",
+   "least_m": 0.035,
+   "status": "OPEN",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe",
+    "every grip reach (hand holds within 3 cm of the grip, solver arm shortfall)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "thigh -> STUDY_Transfer_Rail_1 at K4_foot_on_sill",
+   "note": "a hand holds in every keyframe; geometric status MARGINAL. Hand schedule: K0 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K1 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K2 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K3 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K4 l:Crew_Tube_1_1_Ladder_Stile_1 (wrist 0.0 cm). Regrips (K3->K4: Sector_Ladder_Stile_2 -> Crew_Tube_1_1_Ladder_Stile_1) pass through a moment with no hand holding, restrained by the arrester link (0.166..0.201 m needed vs 0.206 m PROTOTYPE) and both feet (that moment is not checked between static keyframes); OPEN until the restraint load / arrest-distance / injury-load analysis exists (not invented here)."
+  },
+  {
+   "id": "tsb.instructor.arrest_link",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "all",
+   "case": "instructor, chest ring to the nearest anchor (tube rail or transfer rail(s)), K0..K4",
+   "least_m": null,
+   "status": "OPEN",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "variants both/one/one_np"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "link needed (m) per variant: both 0.166..0.201; one 0.166..0.201; one_np 0.166..0.201 vs PROTOTYPE link 0.206. at or below the PROTOTYPE link in every keyframe (continuity by overlapping anchors)."
+  },
+  {
+   "id": "tsb.newcomer.body.both_hands",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "both",
+   "case": "newcomer, K0..K4, both hands (left stiles, right grab post)",
+   "least_m": 0.049,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe (hip stand-off, drop, trunk lean, +-0.06 m along the rungs)",
+    "all body parts vs all vehicle and study objects"
+   ],
+   "seed_spread_m": null,
+   "nearest": "arm -> STUDY_Sector_Ladder_Rungs_cut at K0_lower_rung",
+   "note": "tightest keyframe K0_lower_rung. Grips: K0 l:Sector_Ladder_Stile_2 (wrist 0.0 cm)/r:STUDY_Grab_Post_right (wrist 0.0 cm); K1 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K2 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K3 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K4 l:Crew_Tube_1_1_Ladder_Stile_1 (wrist 0.0 cm). Geometry only; no suit, harness or load."
+  },
+  {
+   "id": "tsb.newcomer.part.boot",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "both",
+   "case": "newcomer, boot, both hands (left stiles, right grab post)",
+   "least_m": 0.066,
+   "status": "PASS",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe"
+   ],
+   "seed_spread_m": null,
+   "nearest": "boot -> STUDY_Transfer_Rail_1 at K4",
+   "note": "lead boot / boots (deck band, sill, frame); K4 boot values per owner item 2 (3.6-4.4 cm in B3R)."
+  },
+  {
+   "id": "tsb.newcomer.part.hand",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "both",
+   "case": "newcomer, hand, both hands (left stiles, right grab post)",
+   "least_m": 0.061,
+   "status": "PASS",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe"
+   ],
+   "seed_spread_m": null,
+   "nearest": "hand -> Sector_Hatch_Frame at K4",
+   "note": "hands"
+  },
+  {
+   "id": "tsb.newcomer.part.arm",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "both",
+   "case": "newcomer, arm, both hands (left stiles, right grab post)",
+   "least_m": 0.049,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe"
+   ],
+   "seed_spread_m": null,
+   "nearest": "arm -> STUDY_Sector_Ladder_Rungs_cut at K0",
+   "note": "arms"
+  },
+  {
+   "id": "tsb.newcomer.part.thigh",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "both",
+   "case": "newcomer, thigh, both hands (left stiles, right grab post)",
+   "least_m": 0.069,
+   "status": "PASS",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe"
+   ],
+   "seed_spread_m": null,
+   "nearest": "thigh -> STUDY_Transfer_Rail_1 at K2",
+   "note": "thighs"
+  },
+  {
+   "id": "tsb.newcomer.sequence.one",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "one",
+   "case": "newcomer, single-hand transition K0..K4, restraint attached throughout (single hand (left only), grab post allowed)",
+   "least_m": 0.049,
+   "status": "OPEN",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe",
+    "every grip reach (hand holds within 3 cm of the grip, solver arm shortfall)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "arm -> STUDY_Sector_Ladder_Rungs_cut at K0_lower_rung",
+   "note": "a hand holds in every keyframe; geometric status MARGINAL. Hand schedule: K0 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K1 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K2 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K3 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K4 l:Crew_Tube_1_1_Ladder_Stile_1 (wrist 0.0 cm). Regrips (K3->K4: Sector_Ladder_Stile_2 -> Crew_Tube_1_1_Ladder_Stile_1) pass through a moment with no hand holding, restrained by the arrester link (0.167..0.204 m needed vs 0.206 m PROTOTYPE) and both feet (that moment is not checked between static keyframes); OPEN until the restraint load / arrest-distance / injury-load analysis exists (not invented here)."
+  },
+  {
+   "id": "tsb.newcomer.sequence.one_np",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "one_np",
+   "case": "newcomer, single-hand transition K0..K4, restraint attached throughout (single hand (left only), no grab post)",
+   "least_m": 0.049,
+   "status": "OPEN",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe",
+    "every grip reach (hand holds within 3 cm of the grip, solver arm shortfall)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "arm -> STUDY_Sector_Ladder_Rungs_cut at K0_lower_rung",
+   "note": "a hand holds in every keyframe; geometric status MARGINAL. Hand schedule: K0 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K1 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K2 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K3 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K4 l:Crew_Tube_1_1_Ladder_Stile_1 (wrist 0.0 cm). Regrips (K3->K4: Sector_Ladder_Stile_2 -> Crew_Tube_1_1_Ladder_Stile_1) pass through a moment with no hand holding, restrained by the arrester link (0.167..0.204 m needed vs 0.206 m PROTOTYPE) and both feet (that moment is not checked between static keyframes); OPEN until the restraint load / arrest-distance / injury-load analysis exists (not invented here)."
+  },
+  {
+   "id": "tsb.newcomer.arrest_link",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "all",
+   "case": "newcomer, chest ring to the nearest anchor (tube rail or transfer rail(s)), K0..K4",
+   "least_m": null,
+   "status": "OPEN",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "variants both/one/one_np"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "link needed (m) per variant: both 0.167..0.204; one 0.167..0.204; one_np 0.167..0.204 vs PROTOTYPE link 0.206. at or below the PROTOTYPE link in every keyframe (continuity by overlapping anchors)."
+  },
+  {
+   "id": "tsb.test_a.body.both_hands",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "both",
+   "case": "test_a, K0..K4, both hands (left stiles, right grab post)",
+   "least_m": 0.039,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe (hip stand-off, drop, trunk lean, +-0.06 m along the rungs)",
+    "all body parts vs all vehicle and study objects"
+   ],
+   "seed_spread_m": null,
+   "nearest": "thigh -> STUDY_Transfer_Rail_1 at K4_foot_on_sill",
+   "note": "tightest keyframe K4_foot_on_sill. Grips: K0 l:Sector_Ladder_Stile_2 (wrist 0.0 cm)/r:STUDY_Grab_Post_right (wrist 0.0 cm); K1 l:Sector_Ladder_Stile_2 (wrist 0.0 cm)/r:Sector_Ladder_Stile_2 (wrist 0.5 cm); K2 l:Sector_Ladder_Stile_2 (wrist 0.0 cm)/r:STUDY_Grab_Post_right (wrist 0.4 cm); K3 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K4 l:Crew_Tube_1_1_Ladder_Stile_1 (wrist 0.0 cm)/r:STUDY_Grab_Post_right (wrist 0.0 cm). Geometry only; no suit, harness or load."
+  },
+  {
+   "id": "tsb.test_a.part.boot",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "both",
+   "case": "test_a, boot, both hands (left stiles, right grab post)",
+   "least_m": 0.065,
+   "status": "PASS",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe"
+   ],
+   "seed_spread_m": null,
+   "nearest": "boot -> STUDY_Transfer_Rail_1 at K1",
+   "note": "lead boot / boots (deck band, sill, frame); K4 boot values per owner item 2 (3.6-4.4 cm in B3R)."
+  },
+  {
+   "id": "tsb.test_a.part.hand",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "both",
+   "case": "test_a, hand, both hands (left stiles, right grab post)",
+   "least_m": 0.068,
+   "status": "PASS",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe"
+   ],
+   "seed_spread_m": null,
+   "nearest": "hand -> STUDY_Sector_Ladder_Brackets_cut at K3",
+   "note": "hands"
+  },
+  {
+   "id": "tsb.test_a.part.arm",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "both",
+   "case": "test_a, arm, both hands (left stiles, right grab post)",
+   "least_m": 0.05,
+   "status": "PASS",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe"
+   ],
+   "seed_spread_m": null,
+   "nearest": "arm -> STUDY_Transfer_Rail_1 at K0",
+   "note": "arms"
+  },
+  {
+   "id": "tsb.test_a.part.thigh",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "both",
+   "case": "test_a, thigh, both hands (left stiles, right grab post)",
+   "least_m": 0.039,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe"
+   ],
+   "seed_spread_m": null,
+   "nearest": "thigh -> STUDY_Transfer_Rail_1 at K4",
+   "note": "thighs"
+  },
+  {
+   "id": "tsb.test_a.sequence.one",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "one",
+   "case": "test_a, single-hand transition K0..K4, restraint attached throughout (single hand (left only), grab post allowed)",
+   "least_m": 0.039,
+   "status": "OPEN",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe",
+    "every grip reach (hand holds within 3 cm of the grip, solver arm shortfall)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "thigh -> STUDY_Transfer_Rail_1 at K4_foot_on_sill",
+   "note": "a hand holds in every keyframe; geometric status MARGINAL. Hand schedule: K0 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K1 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K2 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K3 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K4 l:Crew_Tube_1_1_Ladder_Stile_1 (wrist 0.0 cm). Regrips (K3->K4: Sector_Ladder_Stile_2 -> Crew_Tube_1_1_Ladder_Stile_1) pass through a moment with no hand holding, restrained by the arrester link (0.167..0.194 m needed vs 0.206 m PROTOTYPE) and both feet (that moment is not checked between static keyframes); OPEN until the restraint load / arrest-distance / injury-load analysis exists (not invented here)."
+  },
+  {
+   "id": "tsb.test_a.sequence.one_np",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "one_np",
+   "case": "test_a, single-hand transition K0..K4, restraint attached throughout (single hand (left only), no grab post)",
+   "least_m": 0.039,
+   "status": "OPEN",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe",
+    "every grip reach (hand holds within 3 cm of the grip, solver arm shortfall)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "thigh -> STUDY_Transfer_Rail_1 at K4_foot_on_sill",
+   "note": "a hand holds in every keyframe; geometric status MARGINAL. Hand schedule: K0 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K1 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K2 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K3 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K4 l:Crew_Tube_1_1_Ladder_Stile_1 (wrist 0.0 cm). Regrips (K3->K4: Sector_Ladder_Stile_2 -> Crew_Tube_1_1_Ladder_Stile_1) pass through a moment with no hand holding, restrained by the arrester link (0.167..0.194 m needed vs 0.206 m PROTOTYPE) and both feet (that moment is not checked between static keyframes); OPEN until the restraint load / arrest-distance / injury-load analysis exists (not invented here)."
+  },
+  {
+   "id": "tsb.test_a.arrest_link",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "all",
+   "case": "test_a, chest ring to the nearest anchor (tube rail or transfer rail(s)), K0..K4",
+   "least_m": null,
+   "status": "OPEN",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "variants both/one/one_np"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "link needed (m) per variant: both 0.167..0.194; one 0.167..0.194; one_np 0.167..0.194 vs PROTOTYPE link 0.206. at or below the PROTOTYPE link in every keyframe (continuity by overlapping anchors)."
+  },
+  {
+   "id": "tsb.test_b.body.both_hands",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "both",
+   "case": "test_b, K0..K4, both hands (left stiles, right grab post)",
+   "least_m": 0.056,
+   "status": "PASS",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe (hip stand-off, drop, trunk lean, +-0.06 m along the rungs)",
+    "all body parts vs all vehicle and study objects"
+   ],
+   "seed_spread_m": null,
+   "nearest": "arm -> STUDY_Sector_Ladder_Rungs_cut at K0_lower_rung",
+   "note": "tightest keyframe K0_lower_rung. Grips: K0 l:Sector_Ladder_Stile_2 (wrist 0.0 cm)/r:STUDY_Grab_Post_right (wrist 0.0 cm); K1 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K2 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K3 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K4 l:Crew_Tube_1_1_Ladder_Stile_1 (wrist 0.0 cm). Geometry only; no suit, harness or load."
+  },
+  {
+   "id": "tsb.test_b.part.boot",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "both",
+   "case": "test_b, boot, both hands (left stiles, right grab post)",
+   "least_m": 0.07,
+   "status": "PASS",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe"
+   ],
+   "seed_spread_m": null,
+   "nearest": "boot -> STUDY_Transfer_Rail_1 at K4",
+   "note": "lead boot / boots (deck band, sill, frame); K4 boot values per owner item 2 (3.6-4.4 cm in B3R)."
+  },
+  {
+   "id": "tsb.test_b.part.hand",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "both",
+   "case": "test_b, hand, both hands (left stiles, right grab post)",
+   "least_m": 0.071,
+   "status": "PASS",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe"
+   ],
+   "seed_spread_m": null,
+   "nearest": "hand -> Crew_Tube_1_1 at K4",
+   "note": "hands"
+  },
+  {
+   "id": "tsb.test_b.part.arm",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "both",
+   "case": "test_b, arm, both hands (left stiles, right grab post)",
+   "least_m": 0.056,
+   "status": "PASS",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe"
+   ],
+   "seed_spread_m": null,
+   "nearest": "arm -> STUDY_Sector_Ladder_Rungs_cut at K0",
+   "note": "arms"
+  },
+  {
+   "id": "tsb.test_b.part.thigh",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "both",
+   "case": "test_b, thigh, both hands (left stiles, right grab post)",
+   "least_m": 0.091,
+   "status": "PASS",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe"
+   ],
+   "seed_spread_m": null,
+   "nearest": "thigh -> STUDY_Transfer_Rail_1 at K4",
+   "note": "thighs"
+  },
+  {
+   "id": "tsb.test_b.sequence.one",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "one",
+   "case": "test_b, single-hand transition K0..K4, restraint attached throughout (single hand (left only), grab post allowed)",
+   "least_m": 0.056,
+   "status": "OPEN",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe",
+    "every grip reach (hand holds within 3 cm of the grip, solver arm shortfall)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "arm -> STUDY_Sector_Ladder_Rungs_cut at K0_lower_rung",
+   "note": "a hand holds in every keyframe; geometric status PASS. Hand schedule: K0 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K1 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K2 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K3 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K4 l:Crew_Tube_1_1_Ladder_Stile_1 (wrist 0.0 cm). Regrips (K3->K4: Sector_Ladder_Stile_2 -> Crew_Tube_1_1_Ladder_Stile_1) pass through a moment with no hand holding, restrained by the arrester link (0.165..0.189 m needed vs 0.206 m PROTOTYPE) and both feet (that moment is not checked between static keyframes); OPEN until the restraint load / arrest-distance / injury-load analysis exists (not invented here)."
+  },
+  {
+   "id": "tsb.test_b.sequence.one_np",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "one_np",
+   "case": "test_b, single-hand transition K0..K4, restraint attached throughout (single hand (left only), no grab post)",
+   "least_m": 0.056,
+   "status": "OPEN",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe",
+    "every grip reach (hand holds within 3 cm of the grip, solver arm shortfall)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "arm -> STUDY_Sector_Ladder_Rungs_cut at K0_lower_rung",
+   "note": "a hand holds in every keyframe; geometric status PASS. Hand schedule: K0 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K1 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K2 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K3 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K4 l:Crew_Tube_1_1_Ladder_Stile_1 (wrist 0.0 cm). Regrips (K3->K4: Sector_Ladder_Stile_2 -> Crew_Tube_1_1_Ladder_Stile_1) pass through a moment with no hand holding, restrained by the arrester link (0.165..0.189 m needed vs 0.206 m PROTOTYPE) and both feet (that moment is not checked between static keyframes); OPEN until the restraint load / arrest-distance / injury-load analysis exists (not invented here)."
+  },
+  {
+   "id": "tsb.test_b.arrest_link",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "all",
+   "case": "test_b, chest ring to the nearest anchor (tube rail or transfer rail(s)), K0..K4",
+   "least_m": null,
+   "status": "OPEN",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "variants both/one/one_np"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "link needed (m) per variant: both 0.165..0.189; one 0.165..0.189; one_np 0.165..0.189 vs PROTOTYPE link 0.206. at or below the PROTOTYPE link in every keyframe (continuity by overlapping anchors)."
+  },
+  {
+   "id": "tsb.carrier.A.all_study_hardware",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "carrier_A",
+   "case": "rigid full-length litter, box 0.55 x 0.3 m, long axis along the hatch axis (2.0 m), passing the aperture along the hatch axis (all study hardware)",
+   "least_m": 0.25,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier translation along the hatch axis over y [-3.04, -2.0]",
+    "cross-section shift and roll chosen to MAXIMISE the least clearance (best placement, not a worst placement)",
+    "all vehicle and study objects in the passage; bore wall"
+   ],
+   "seed_spread_m": null,
+   "nearest": "STUDY_Grab_Post_right",
+   "note": "best roll 90 deg, centre sector (x, z) [0.2, -1.07], bore wall clearance 0.271 m. Approach up the sector wall and the turn into the tube are not swept here (HUM-003 routes)."
+  },
+  {
+   "id": "tsb.carrier.A.without_grab_post",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "carrier_A_without_grab_post",
+   "case": "rigid full-length litter, box 0.55 x 0.3 m, long axis along the hatch axis (2.0 m), passing the aperture along the hatch axis (without grab post)",
+   "least_m": 0.345,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier translation along the hatch axis over y [-3.04, -2.0]",
+    "cross-section shift and roll chosen to MAXIMISE the least clearance (best placement, not a worst placement)",
+    "all vehicle and study objects in the passage; bore wall"
+   ],
+   "seed_spread_m": null,
+   "nearest": "Seraph_Niche_Partition",
+   "note": "best roll 20 deg, centre sector (x, z) [-0.06, -0.97], bore wall clearance 0.297 m. Approach up the sector wall and the turn into the tube are not swept here (HUM-003 routes)."
+  },
+  {
+   "id": "tsb.carrier.A.without_transfer_rail",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "carrier_A_without_transfer_rail",
+   "case": "rigid full-length litter, box 0.55 x 0.3 m, long axis along the hatch axis (2.0 m), passing the aperture along the hatch axis (without transfer rail)",
+   "least_m": 0.25,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier translation along the hatch axis over y [-3.04, -2.0]",
+    "cross-section shift and roll chosen to MAXIMISE the least clearance (best placement, not a worst placement)",
+    "all vehicle and study objects in the passage; bore wall"
+   ],
+   "seed_spread_m": null,
+   "nearest": "STUDY_Grab_Post_right",
+   "note": "best roll 90 deg, centre sector (x, z) [0.2, -1.17], bore wall clearance 0.286 m. Approach up the sector wall and the turn into the tube are not swept here (HUM-003 routes)."
+  },
+  {
+   "id": "tsb.carrier.A.without_post_and_rail",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "carrier_A_without_post_and_rail",
+   "case": "rigid full-length litter, box 0.55 x 0.3 m, long axis along the hatch axis (2.0 m), passing the aperture along the hatch axis (without post and rail)",
+   "least_m": 0.377,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier translation along the hatch axis over y [-3.04, -2.0]",
+    "cross-section shift and roll chosen to MAXIMISE the least clearance (best placement, not a worst placement)",
+    "all vehicle and study objects in the passage; bore wall"
+   ],
+   "seed_spread_m": null,
+   "nearest": "STUDY_Crew_Tube_1_1_Arrest_Rail_cut",
+   "note": "best roll 90 deg, centre sector (x, z) [-0.04, -1.05], bore wall clearance 0.379 m. Approach up the sector wall and the turn into the tube are not swept here (HUM-003 routes)."
+  },
+  {
+   "id": "tsb.carrier.S.all_study_hardware",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "carrier_S",
+   "case": "suited casualty on a full-length litter frame (EVA-003), disc r 0.4285 m, passing the aperture along the hatch axis (all study hardware)",
+   "least_m": -0.009,
+   "status": "FAIL",
+   "worst_case_over": [
+    "carrier translation along the hatch axis over y [-3.04, -2.0]",
+    "cross-section shift and roll chosen to MAXIMISE the least clearance (best placement, not a worst placement)",
+    "all vehicle and study objects in the passage; bore wall"
+   ],
+   "seed_spread_m": null,
+   "nearest": "Hygiene",
+   "note": "best roll 0 deg, centre sector (x, z) [0.18, -0.83], bore wall clearance 0.004 m. Approach up the sector wall and the turn into the tube are not swept here (HUM-003 routes)."
+  },
+  {
+   "id": "tsb.carrier.S.without_grab_post",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "carrier_S_without_grab_post",
+   "case": "suited casualty on a full-length litter frame (EVA-003), disc r 0.4285 m, passing the aperture along the hatch axis (without grab post)",
+   "least_m": 0.19,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier translation along the hatch axis over y [-3.04, -2.0]",
+    "cross-section shift and roll chosen to MAXIMISE the least clearance (best placement, not a worst placement)",
+    "all vehicle and study objects in the passage; bore wall"
+   ],
+   "seed_spread_m": null,
+   "nearest": "Sector_Pressure_Envelope",
+   "note": "best roll 0 deg, centre sector (x, z) [-0.02, -0.97], bore wall clearance 0.19 m. Approach up the sector wall and the turn into the tube are not swept here (HUM-003 routes)."
+  },
+  {
+   "id": "tsb.carrier.S.without_transfer_rail",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "carrier_S_without_transfer_rail",
+   "case": "suited casualty on a full-length litter frame (EVA-003), disc r 0.4285 m, passing the aperture along the hatch axis (without transfer rail)",
+   "least_m": 0.006,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "carrier translation along the hatch axis over y [-3.04, -2.0]",
+    "cross-section shift and roll chosen to MAXIMISE the least clearance (best placement, not a worst placement)",
+    "all vehicle and study objects in the passage; bore wall"
+   ],
+   "seed_spread_m": null,
+   "nearest": "STUDY_Grab_Post_right",
+   "note": "best roll 0 deg, centre sector (x, z) [0.16, -1.29], bore wall clearance 0.159 m. Approach up the sector wall and the turn into the tube are not swept here (HUM-003 routes)."
+  },
+  {
+   "id": "tsb.carrier.S.without_post_and_rail",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "carrier_S_without_post_and_rail",
+   "case": "suited casualty on a full-length litter frame (EVA-003), disc r 0.4285 m, passing the aperture along the hatch axis (without post and rail)",
+   "least_m": 0.206,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier translation along the hatch axis over y [-3.04, -2.0]",
+    "cross-section shift and roll chosen to MAXIMISE the least clearance (best placement, not a worst placement)",
+    "all vehicle and study objects in the passage; bore wall"
+   ],
+   "seed_spread_m": null,
+   "nearest": "Sector_Pressure_Envelope",
+   "note": "best roll 0 deg, centre sector (x, z) [-0.04, -0.99], bore wall clearance 0.207 m. Approach up the sector wall and the turn into the tube are not swept here (HUM-003 routes)."
+  },
+  {
+   "id": "tsb.leaf.sweep.hardware",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "leaf",
+   "case": "sliding leaf swept volume (closed over the bore to fully open) vs grab post, transfer rail(s) and brackets",
+   "least_m": 0.063,
+   "status": "PASS",
+   "worst_case_over": [
+    "leaf travel closed->open (swept volume)",
+    "all study hardware"
+   ],
+   "seed_spread_m": null,
+   "nearest": "STUDY_Transfer_Rail_1",
+   "note": "analytic swept box: |x| < leaf radius, y over the leaf slab, z from the closed leaf to the open end"
+  },
+  {
+   "id": "tsb.leaf.sweep.stowage",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "leaf",
+   "case": "sliding leaf swept volume vs recessed Crew_Stowage_Upper",
+   "least_m": 0.09,
+   "status": "PASS",
+   "worst_case_over": [
+    "leaf travel closed->open"
+   ],
+   "seed_spread_m": null,
+   "nearest": "STUDY_Stowage_Upper_recessed",
+   "note": "recessed stowage copy"
+  },
+  {
+   "id": "tsb.leaf.guide_overlap",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "leaf",
+   "case": "recessed leaf guide Sector_Hatch_Rail_1 vs leaf engagement",
+   "least_m": null,
+   "status": "OPEN",
+   "worst_case_over": [
+    "leaf slab y vs recessed guide y"
+   ],
+   "seed_spread_m": null,
+   "nearest": "Sector_Hatch_Rail_1 (study copy)",
+   "note": "leaf engagement in the recessed guide is 0.014 m (unreleased); not a clearance; engagement and guide load path need an engineering check."
+  },
+  {
+   "id": "tsb.all.0g_feet_free",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g"
+   ],
+   "variant": "0g",
+   "case": "hand-over-hand with the feet off the rungs (0 g)",
+   "least_m": null,
+   "status": "OPEN",
+   "worst_case_over": [
+    "not modelled"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "The 0 g rerun uses the same postures as 1.5 g (the posture search is geometric, gravity enters only the body envelope, so the 0 g clearances equal the 1.5 g ones); a feet-free hand-over-hand 0 g pose model does not exist and is not invented. OPEN."
+  },
+  {
+   "id": "tsh.instructor.body.both_hands",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "both",
+   "case": "instructor, K0..K4, both hands (left stiles, right handgrip)",
+   "least_m": 0.017,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe (hip stand-off, drop, trunk lean, +-0.06 m along the rungs)",
+    "all body parts vs all vehicle and study objects"
+   ],
+   "seed_spread_m": null,
+   "nearest": "hand -> Sector_Hatch_Frame at K4_foot_on_sill",
+   "note": "tightest keyframe K4_foot_on_sill. Grips: K0 l:Sector_Ladder_Stile_2 (wrist 0.0 cm)/r:STUDY_Grab_Handgrip (wrist 0.0 cm); K1 l:Sector_Ladder_Stile_2 (wrist 0.0 cm)/r:STUDY_Grab_Handgrip (wrist 0.0 cm); K2 l:Sector_Ladder_Stile_2 (wrist 0.0 cm)/r:STUDY_Grab_Handgrip (wrist 0.0 cm); K3 l:Sector_Ladder_Stile_2 (wrist 0.0 cm)/r:STUDY_Grab_Handgrip (wrist 0.0 cm); K4 l:Crew_Tube_1_1_Ladder_Stile_2 (wrist 0.0 cm). Geometry only; no suit, harness or load."
+  },
+  {
+   "id": "tsh.instructor.part.boot",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "both",
+   "case": "instructor, boot, both hands (left stiles, right handgrip)",
+   "least_m": 0.064,
+   "status": "PASS",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe"
+   ],
+   "seed_spread_m": null,
+   "nearest": "boot -> STUDY_Transfer_Rail_1 at K1",
+   "note": "lead boot / boots (deck band, sill, frame); K4 boot values per owner item 2 (3.6-4.4 cm in B3R)."
+  },
+  {
+   "id": "tsh.instructor.part.hand",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "both",
+   "case": "instructor, hand, both hands (left stiles, right handgrip)",
+   "least_m": 0.017,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe"
+   ],
+   "seed_spread_m": null,
+   "nearest": "hand -> Sector_Hatch_Frame at K4",
+   "note": "hands"
+  },
+  {
+   "id": "tsh.instructor.part.arm",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "both",
+   "case": "instructor, arm, both hands (left stiles, right handgrip)",
+   "least_m": 0.043,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe"
+   ],
+   "seed_spread_m": null,
+   "nearest": "arm -> STUDY_Sector_Ladder_Rungs_cut at K0",
+   "note": "arms"
+  },
+  {
+   "id": "tsh.instructor.part.thigh",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "both",
+   "case": "instructor, thigh, both hands (left stiles, right handgrip)",
+   "least_m": 0.022,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe"
+   ],
+   "seed_spread_m": null,
+   "nearest": "thigh -> STUDY_Transfer_Rail_1 at K4",
+   "note": "thighs"
+  },
+  {
+   "id": "tsh.instructor.sequence.one",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "one",
+   "case": "instructor, single-hand transition K0..K4, restraint attached throughout (single hand (left only), handgrip allowed)",
+   "least_m": 0.035,
+   "status": "OPEN",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe",
+    "every grip reach (hand holds within 3 cm of the grip, solver arm shortfall)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "thigh -> STUDY_Transfer_Rail_1 at K4_foot_on_sill",
+   "note": "a hand holds in every keyframe; geometric status MARGINAL. Hand schedule: K0 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K1 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K2 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K3 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K4 l:Crew_Tube_1_1_Ladder_Stile_1 (wrist 0.0 cm). Regrips (K3->K4: Sector_Ladder_Stile_2 -> Crew_Tube_1_1_Ladder_Stile_1) pass through a moment with no hand holding, restrained by the arrester link (0.166..0.199 m needed vs 0.206 m PROTOTYPE) and both feet (that moment is not checked between static keyframes); OPEN until the restraint load / arrest-distance / injury-load analysis exists (not invented here)."
+  },
+  {
+   "id": "tsh.instructor.sequence.one_np",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "one_np",
+   "case": "instructor, single-hand transition K0..K4, restraint attached throughout (single hand (left only), no handgrip)",
+   "least_m": 0.035,
+   "status": "OPEN",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe",
+    "every grip reach (hand holds within 3 cm of the grip, solver arm shortfall)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "thigh -> STUDY_Transfer_Rail_1 at K4_foot_on_sill",
+   "note": "a hand holds in every keyframe; geometric status MARGINAL. Hand schedule: K0 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K1 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K2 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K3 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K4 l:Crew_Tube_1_1_Ladder_Stile_1 (wrist 0.0 cm). Regrips (K3->K4: Sector_Ladder_Stile_2 -> Crew_Tube_1_1_Ladder_Stile_1) pass through a moment with no hand holding, restrained by the arrester link (0.166..0.199 m needed vs 0.206 m PROTOTYPE) and both feet (that moment is not checked between static keyframes); OPEN until the restraint load / arrest-distance / injury-load analysis exists (not invented here)."
+  },
+  {
+   "id": "tsh.instructor.body.both_hands_optional",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "both_opt",
+   "case": "instructor, K0..K4, both hands, right handgrip OPTIONAL (the right hand may stay free where a grip costs clearance)",
+   "least_m": 0.035,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe, each posture with and without the right-hand grip",
+    "all body parts vs all vehicle and study objects"
+   ],
+   "seed_spread_m": null,
+   "nearest": "thigh -> STUDY_Transfer_Rail_1 at K4_foot_on_sill",
+   "note": "tightest keyframe K4_foot_on_sill. Grips: K0 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K1 l:Sector_Ladder_Stile_2 (wrist 0.0 cm)/r:STUDY_Grab_Handgrip (wrist 0.0 cm); K2 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K3 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K4 l:Crew_Tube_1_1_Ladder_Stile_1 (wrist 0.0 cm). Geometry only; no suit, harness or load."
+  },
+  {
+   "id": "tsh.instructor.arrest_link",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "all",
+   "case": "instructor, chest ring to the nearest anchor (tube rail or transfer rail(s)), K0..K4",
+   "least_m": null,
+   "status": "OPEN",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "variants both/one/one_np"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "link needed (m) per variant: both 0.190..0.201; both_opt 0.166..0.199; one 0.166..0.199; one_np 0.166..0.199 vs PROTOTYPE link 0.206. at or below the PROTOTYPE link in every keyframe (continuity by overlapping anchors)."
+  },
+  {
+   "id": "tsh.newcomer.body.both_hands",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "both",
+   "case": "newcomer, K0..K4, both hands (left stiles, right handgrip)",
+   "least_m": 0.049,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe (hip stand-off, drop, trunk lean, +-0.06 m along the rungs)",
+    "all body parts vs all vehicle and study objects"
+   ],
+   "seed_spread_m": null,
+   "nearest": "arm -> STUDY_Sector_Ladder_Rungs_cut at K0_lower_rung",
+   "note": "tightest keyframe K0_lower_rung. Grips: K0 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K1 l:Sector_Ladder_Stile_2 (wrist 0.0 cm)/r:STUDY_Grab_Handgrip (wrist 0.0 cm); K2 l:Crew_Tube_1_1_Ladder_Stile_1 (wrist 0.0 cm); K3 l:Crew_Tube_1_1_Ladder_Stile_1 (wrist 0.0 cm); K4 l:Crew_Tube_1_1_Ladder_Stile_1 (wrist 0.0 cm). Geometry only; no suit, harness or load."
+  },
+  {
+   "id": "tsh.newcomer.part.boot",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "both",
+   "case": "newcomer, boot, both hands (left stiles, right handgrip)",
+   "least_m": 0.066,
+   "status": "PASS",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe"
+   ],
+   "seed_spread_m": null,
+   "nearest": "boot -> STUDY_Transfer_Rail_1 at K4",
+   "note": "lead boot / boots (deck band, sill, frame); K4 boot values per owner item 2 (3.6-4.4 cm in B3R)."
+  },
+  {
+   "id": "tsh.newcomer.part.hand",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "both",
+   "case": "newcomer, hand, both hands (left stiles, right handgrip)",
+   "least_m": 0.061,
+   "status": "PASS",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe"
+   ],
+   "seed_spread_m": null,
+   "nearest": "hand -> Sector_Hatch_Frame at K4",
+   "note": "hands"
+  },
+  {
+   "id": "tsh.newcomer.part.arm",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "both",
+   "case": "newcomer, arm, both hands (left stiles, right handgrip)",
+   "least_m": 0.049,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe"
+   ],
+   "seed_spread_m": null,
+   "nearest": "arm -> STUDY_Sector_Ladder_Rungs_cut at K0",
+   "note": "arms"
+  },
+  {
+   "id": "tsh.newcomer.part.thigh",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "both",
+   "case": "newcomer, thigh, both hands (left stiles, right handgrip)",
+   "least_m": 0.076,
+   "status": "PASS",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe"
+   ],
+   "seed_spread_m": null,
+   "nearest": "thigh -> STUDY_Transfer_Rail_1 at K2",
+   "note": "thighs"
+  },
+  {
+   "id": "tsh.newcomer.sequence.one",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "one",
+   "case": "newcomer, single-hand transition K0..K4, restraint attached throughout (single hand (left only), handgrip allowed)",
+   "least_m": 0.049,
+   "status": "OPEN",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe",
+    "every grip reach (hand holds within 3 cm of the grip, solver arm shortfall)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "arm -> STUDY_Sector_Ladder_Rungs_cut at K0_lower_rung",
+   "note": "a hand holds in every keyframe; geometric status MARGINAL. Hand schedule: K0 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K1 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K2 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K3 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K4 l:Crew_Tube_1_1_Ladder_Stile_1 (wrist 0.0 cm). Regrips (K3->K4: Sector_Ladder_Stile_2 -> Crew_Tube_1_1_Ladder_Stile_1) pass through a moment with no hand holding, restrained by the arrester link (0.158..0.204 m needed vs 0.206 m PROTOTYPE) and both feet (that moment is not checked between static keyframes); OPEN until the restraint load / arrest-distance / injury-load analysis exists (not invented here)."
+  },
+  {
+   "id": "tsh.newcomer.sequence.one_np",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "one_np",
+   "case": "newcomer, single-hand transition K0..K4, restraint attached throughout (single hand (left only), no handgrip)",
+   "least_m": 0.049,
+   "status": "OPEN",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe",
+    "every grip reach (hand holds within 3 cm of the grip, solver arm shortfall)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "arm -> STUDY_Sector_Ladder_Rungs_cut at K0_lower_rung",
+   "note": "a hand holds in every keyframe; geometric status MARGINAL. Hand schedule: K0 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K1 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K2 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K3 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K4 l:Crew_Tube_1_1_Ladder_Stile_1 (wrist 0.0 cm). Regrips (K3->K4: Sector_Ladder_Stile_2 -> Crew_Tube_1_1_Ladder_Stile_1) pass through a moment with no hand holding, restrained by the arrester link (0.158..0.204 m needed vs 0.206 m PROTOTYPE) and both feet (that moment is not checked between static keyframes); OPEN until the restraint load / arrest-distance / injury-load analysis exists (not invented here)."
+  },
+  {
+   "id": "tsh.newcomer.body.both_hands_optional",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "both_opt",
+   "case": "newcomer, K0..K4, both hands, right handgrip OPTIONAL (the right hand may stay free where a grip costs clearance)",
+   "least_m": 0.049,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe, each posture with and without the right-hand grip",
+    "all body parts vs all vehicle and study objects"
+   ],
+   "seed_spread_m": null,
+   "nearest": "arm -> STUDY_Sector_Ladder_Rungs_cut at K0_lower_rung",
+   "note": "tightest keyframe K0_lower_rung. Grips: K0 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K1 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K2 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K3 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K4 l:Crew_Tube_1_1_Ladder_Stile_1 (wrist 0.0 cm). Geometry only; no suit, harness or load."
+  },
+  {
+   "id": "tsh.newcomer.arrest_link",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "all",
+   "case": "newcomer, chest ring to the nearest anchor (tube rail or transfer rail(s)), K0..K4",
+   "least_m": null,
+   "status": "OPEN",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "variants both/one/one_np"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "link needed (m) per variant: both 0.167..0.204; both_opt 0.158..0.204; one 0.158..0.204; one_np 0.158..0.204 vs PROTOTYPE link 0.206. at or below the PROTOTYPE link in every keyframe (continuity by overlapping anchors)."
+  },
+  {
+   "id": "tsh.test_a.body.both_hands",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "both",
+   "case": "test_a, K0..K4, both hands (left stiles, right handgrip)",
+   "least_m": 0.013,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe (hip stand-off, drop, trunk lean, +-0.06 m along the rungs)",
+    "all body parts vs all vehicle and study objects"
+   ],
+   "seed_spread_m": null,
+   "nearest": "head -> Sector_Hatch_Frame at K4_foot_on_sill",
+   "note": "tightest keyframe K4_foot_on_sill. Grips: K0 l:Sector_Ladder_Stile_2 (wrist 0.0 cm)/r:STUDY_Grab_Handgrip (wrist 0.0 cm); K1 l:Sector_Ladder_Stile_2 (wrist 0.0 cm)/r:STUDY_Grab_Handgrip (wrist 0.0 cm); K2 l:Sector_Ladder_Stile_2 (wrist 0.0 cm)/r:STUDY_Grab_Handgrip (wrist 0.0 cm); K3 l:Sector_Ladder_Stile_2 (wrist 0.0 cm)/r:STUDY_Grab_Handgrip (wrist 0.0 cm); K4 l:Sector_Ladder_Stile_2 (wrist 0.0 cm)/r:STUDY_Grab_Handgrip (wrist 0.0 cm). Geometry only; no suit, harness or load."
+  },
+  {
+   "id": "tsh.test_a.part.boot",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "both",
+   "case": "test_a, boot, both hands (left stiles, right handgrip)",
+   "least_m": 0.063,
+   "status": "PASS",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe"
+   ],
+   "seed_spread_m": null,
+   "nearest": "boot -> STUDY_Transfer_Rail_1 at K4",
+   "note": "lead boot / boots (deck band, sill, frame); K4 boot values per owner item 2 (3.6-4.4 cm in B3R)."
+  },
+  {
+   "id": "tsh.test_a.part.hand",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "both",
+   "case": "test_a, hand, both hands (left stiles, right handgrip)",
+   "least_m": 0.044,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe"
+   ],
+   "seed_spread_m": null,
+   "nearest": "hand -> Sector_Hatch_Frame at K4",
+   "note": "hands"
+  },
+  {
+   "id": "tsh.test_a.part.arm",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "both",
+   "case": "test_a, arm, both hands (left stiles, right handgrip)",
+   "least_m": 0.014,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe"
+   ],
+   "seed_spread_m": null,
+   "nearest": "arm -> STUDY_Grab_Handgrip_bracket_1 at K4",
+   "note": "arms"
+  },
+  {
+   "id": "tsh.test_a.part.thigh",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "both",
+   "case": "test_a, thigh, both hands (left stiles, right handgrip)",
+   "least_m": 0.062,
+   "status": "PASS",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe"
+   ],
+   "seed_spread_m": null,
+   "nearest": "thigh -> STUDY_Transfer_Rail_1 at K1",
+   "note": "thighs"
+  },
+  {
+   "id": "tsh.test_a.sequence.one",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "one",
+   "case": "test_a, single-hand transition K0..K4, restraint attached throughout (single hand (left only), handgrip allowed)",
+   "least_m": 0.039,
+   "status": "OPEN",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe",
+    "every grip reach (hand holds within 3 cm of the grip, solver arm shortfall)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "thigh -> STUDY_Transfer_Rail_1 at K4_foot_on_sill",
+   "note": "a hand holds in every keyframe; geometric status MARGINAL. Hand schedule: K0 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K1 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K2 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K3 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K4 l:Crew_Tube_1_1_Ladder_Stile_1 (wrist 0.0 cm). Regrips (K3->K4: Sector_Ladder_Stile_2 -> Crew_Tube_1_1_Ladder_Stile_1) pass through a moment with no hand holding, restrained by the arrester link (0.167..0.191 m needed vs 0.206 m PROTOTYPE) and both feet (that moment is not checked between static keyframes); OPEN until the restraint load / arrest-distance / injury-load analysis exists (not invented here)."
+  },
+  {
+   "id": "tsh.test_a.sequence.one_np",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "one_np",
+   "case": "test_a, single-hand transition K0..K4, restraint attached throughout (single hand (left only), no handgrip)",
+   "least_m": 0.039,
+   "status": "OPEN",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe",
+    "every grip reach (hand holds within 3 cm of the grip, solver arm shortfall)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "thigh -> STUDY_Transfer_Rail_1 at K4_foot_on_sill",
+   "note": "a hand holds in every keyframe; geometric status MARGINAL. Hand schedule: K0 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K1 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K2 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K3 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K4 l:Crew_Tube_1_1_Ladder_Stile_1 (wrist 0.0 cm). Regrips (K3->K4: Sector_Ladder_Stile_2 -> Crew_Tube_1_1_Ladder_Stile_1) pass through a moment with no hand holding, restrained by the arrester link (0.167..0.191 m needed vs 0.206 m PROTOTYPE) and both feet (that moment is not checked between static keyframes); OPEN until the restraint load / arrest-distance / injury-load analysis exists (not invented here)."
+  },
+  {
+   "id": "tsh.test_a.body.both_hands_optional",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "both_opt",
+   "case": "test_a, K0..K4, both hands, right handgrip OPTIONAL (the right hand may stay free where a grip costs clearance)",
+   "least_m": 0.039,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe, each posture with and without the right-hand grip",
+    "all body parts vs all vehicle and study objects"
+   ],
+   "seed_spread_m": null,
+   "nearest": "thigh -> STUDY_Transfer_Rail_1 at K4_foot_on_sill",
+   "note": "tightest keyframe K4_foot_on_sill. Grips: K0 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K1 l:Sector_Ladder_Stile_2 (wrist 0.0 cm)/r:STUDY_Grab_Handgrip (wrist 0.0 cm); K2 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K3 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K4 l:Crew_Tube_1_1_Ladder_Stile_1 (wrist 0.0 cm). Geometry only; no suit, harness or load."
+  },
+  {
+   "id": "tsh.test_a.arrest_link",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "all",
+   "case": "test_a, chest ring to the nearest anchor (tube rail or transfer rail(s)), K0..K4",
+   "least_m": null,
+   "status": "OPEN",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "variants both/one/one_np"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "link needed (m) per variant: both 0.164..0.194; both_opt 0.167..0.191; one 0.167..0.191; one_np 0.167..0.191 vs PROTOTYPE link 0.206. at or below the PROTOTYPE link in every keyframe (continuity by overlapping anchors)."
+  },
+  {
+   "id": "tsh.test_b.body.both_hands",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "both",
+   "case": "test_b, K0..K4, both hands (left stiles, right handgrip)",
+   "least_m": 0.05,
+   "status": "PASS",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe (hip stand-off, drop, trunk lean, +-0.06 m along the rungs)",
+    "all body parts vs all vehicle and study objects"
+   ],
+   "seed_spread_m": null,
+   "nearest": "arm -> STUDY_Sector_Ladder_Brackets_cut at K1_top_rung",
+   "note": "tightest keyframe K1_top_rung. Grips: K0 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K1 l:Sector_Ladder_Stile_2 (wrist 0.0 cm)/r:STUDY_Grab_Handgrip (wrist 0.0 cm); K2 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K3 l:Crew_Tube_1_1_Ladder_Stile_1 (wrist 0.0 cm); K4 l:Crew_Tube_1_1_Ladder_Stile_1 (wrist 0.0 cm). Geometry only; no suit, harness or load."
+  },
+  {
+   "id": "tsh.test_b.part.boot",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "both",
+   "case": "test_b, boot, both hands (left stiles, right handgrip)",
+   "least_m": 0.07,
+   "status": "PASS",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe"
+   ],
+   "seed_spread_m": null,
+   "nearest": "boot -> STUDY_Transfer_Rail_1 at K4",
+   "note": "lead boot / boots (deck band, sill, frame); K4 boot values per owner item 2 (3.6-4.4 cm in B3R)."
+  },
+  {
+   "id": "tsh.test_b.part.hand",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "both",
+   "case": "test_b, hand, both hands (left stiles, right handgrip)",
+   "least_m": 0.071,
+   "status": "PASS",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe"
+   ],
+   "seed_spread_m": null,
+   "nearest": "hand -> Crew_Tube_1_1 at K4",
+   "note": "hands"
+  },
+  {
+   "id": "tsh.test_b.part.arm",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "both",
+   "case": "test_b, arm, both hands (left stiles, right handgrip)",
+   "least_m": 0.05,
+   "status": "PASS",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe"
+   ],
+   "seed_spread_m": null,
+   "nearest": "arm -> STUDY_Sector_Ladder_Brackets_cut at K1",
+   "note": "arms"
+  },
+  {
+   "id": "tsh.test_b.part.thigh",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "both",
+   "case": "test_b, thigh, both hands (left stiles, right handgrip)",
+   "least_m": 0.088,
+   "status": "PASS",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe"
+   ],
+   "seed_spread_m": null,
+   "nearest": "thigh -> STUDY_Transfer_Rail_1 at K3",
+   "note": "thighs"
+  },
+  {
+   "id": "tsh.test_b.sequence.one",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "one",
+   "case": "test_b, single-hand transition K0..K4, restraint attached throughout (single hand (left only), handgrip allowed)",
+   "least_m": 0.056,
+   "status": "OPEN",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe",
+    "every grip reach (hand holds within 3 cm of the grip, solver arm shortfall)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "arm -> STUDY_Sector_Ladder_Rungs_cut at K0_lower_rung",
+   "note": "a hand holds in every keyframe; geometric status PASS. Hand schedule: K0 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K1 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K2 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K3 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K4 l:Crew_Tube_1_1_Ladder_Stile_1 (wrist 0.0 cm). Regrips (K3->K4: Sector_Ladder_Stile_2 -> Crew_Tube_1_1_Ladder_Stile_1) pass through a moment with no hand holding, restrained by the arrester link (0.165..0.189 m needed vs 0.206 m PROTOTYPE) and both feet (that moment is not checked between static keyframes); OPEN until the restraint load / arrest-distance / injury-load analysis exists (not invented here)."
+  },
+  {
+   "id": "tsh.test_b.sequence.one_np",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "one_np",
+   "case": "test_b, single-hand transition K0..K4, restraint attached throughout (single hand (left only), no handgrip)",
+   "least_m": 0.056,
+   "status": "OPEN",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe",
+    "every grip reach (hand holds within 3 cm of the grip, solver arm shortfall)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "arm -> STUDY_Sector_Ladder_Rungs_cut at K0_lower_rung",
+   "note": "a hand holds in every keyframe; geometric status PASS. Hand schedule: K0 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K1 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K2 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K3 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K4 l:Crew_Tube_1_1_Ladder_Stile_1 (wrist 0.0 cm). Regrips (K3->K4: Sector_Ladder_Stile_2 -> Crew_Tube_1_1_Ladder_Stile_1) pass through a moment with no hand holding, restrained by the arrester link (0.165..0.189 m needed vs 0.206 m PROTOTYPE) and both feet (that moment is not checked between static keyframes); OPEN until the restraint load / arrest-distance / injury-load analysis exists (not invented here)."
+  },
+  {
+   "id": "tsh.test_b.body.both_hands_optional",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "both_opt",
+   "case": "test_b, K0..K4, both hands, right handgrip OPTIONAL (the right hand may stay free where a grip costs clearance)",
+   "least_m": 0.056,
+   "status": "PASS",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe, each posture with and without the right-hand grip",
+    "all body parts vs all vehicle and study objects"
+   ],
+   "seed_spread_m": null,
+   "nearest": "arm -> STUDY_Sector_Ladder_Rungs_cut at K0_lower_rung",
+   "note": "tightest keyframe K0_lower_rung. Grips: K0 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K1 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K2 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K3 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K4 l:Crew_Tube_1_1_Ladder_Stile_1 (wrist 0.0 cm). Geometry only; no suit, harness or load."
+  },
+  {
+   "id": "tsh.test_b.arrest_link",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "all",
+   "case": "test_b, chest ring to the nearest anchor (tube rail or transfer rail(s)), K0..K4",
+   "least_m": null,
+   "status": "OPEN",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "variants both/one/one_np"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "link needed (m) per variant: both 0.165..0.189; both_opt 0.165..0.189; one 0.165..0.189; one_np 0.165..0.189 vs PROTOTYPE link 0.206. at or below the PROTOTYPE link in every keyframe (continuity by overlapping anchors)."
+  },
+  {
+   "id": "tsh.carrier.A.all_study_hardware",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "carrier_A",
+   "case": "rigid full-length litter, box 0.55 x 0.3 m, long axis along the hatch axis (2.0 m), passing the aperture along the hatch axis (all study hardware)",
+   "least_m": 0.345,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier translation along the hatch axis over y [-3.04, -2.0]",
+    "cross-section shift and roll chosen to MAXIMISE the least clearance (best placement, not a worst placement)",
+    "all vehicle and study objects in the passage; bore wall"
+   ],
+   "seed_spread_m": null,
+   "nearest": "Seraph_Niche_Partition",
+   "note": "best roll 20 deg, centre sector (x, z) [-0.06, -0.97], bore wall clearance 0.297 m. Approach up the sector wall and the turn into the tube are not swept here (HUM-003 routes)."
+  },
+  {
+   "id": "tsh.carrier.A.without_handgrip",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "carrier_A_without_handgrip",
+   "case": "rigid full-length litter, box 0.55 x 0.3 m, long axis along the hatch axis (2.0 m), passing the aperture along the hatch axis (without handgrip)",
+   "least_m": 0.345,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier translation along the hatch axis over y [-3.04, -2.0]",
+    "cross-section shift and roll chosen to MAXIMISE the least clearance (best placement, not a worst placement)",
+    "all vehicle and study objects in the passage; bore wall"
+   ],
+   "seed_spread_m": null,
+   "nearest": "Seraph_Niche_Partition",
+   "note": "best roll 20 deg, centre sector (x, z) [-0.06, -0.97], bore wall clearance 0.297 m. Approach up the sector wall and the turn into the tube are not swept here (HUM-003 routes)."
+  },
+  {
+   "id": "tsh.carrier.A.without_transfer_rail",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "carrier_A_without_transfer_rail",
+   "case": "rigid full-length litter, box 0.55 x 0.3 m, long axis along the hatch axis (2.0 m), passing the aperture along the hatch axis (without transfer rail)",
+   "least_m": 0.377,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier translation along the hatch axis over y [-3.04, -2.0]",
+    "cross-section shift and roll chosen to MAXIMISE the least clearance (best placement, not a worst placement)",
+    "all vehicle and study objects in the passage; bore wall"
+   ],
+   "seed_spread_m": null,
+   "nearest": "STUDY_Crew_Tube_1_1_Arrest_Rail_cut",
+   "note": "best roll 90 deg, centre sector (x, z) [-0.04, -1.05], bore wall clearance 0.379 m. Approach up the sector wall and the turn into the tube are not swept here (HUM-003 routes)."
+  },
+  {
+   "id": "tsh.carrier.A.without_handgrip_and_rail",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "carrier_A_without_handgrip_and_rail",
+   "case": "rigid full-length litter, box 0.55 x 0.3 m, long axis along the hatch axis (2.0 m), passing the aperture along the hatch axis (without handgrip and rail)",
+   "least_m": 0.377,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier translation along the hatch axis over y [-3.04, -2.0]",
+    "cross-section shift and roll chosen to MAXIMISE the least clearance (best placement, not a worst placement)",
+    "all vehicle and study objects in the passage; bore wall"
+   ],
+   "seed_spread_m": null,
+   "nearest": "STUDY_Crew_Tube_1_1_Arrest_Rail_cut",
+   "note": "best roll 90 deg, centre sector (x, z) [-0.04, -1.05], bore wall clearance 0.379 m. Approach up the sector wall and the turn into the tube are not swept here (HUM-003 routes)."
+  },
+  {
+   "id": "tsh.carrier.S.all_study_hardware",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "carrier_S",
+   "case": "suited casualty on a full-length litter frame (EVA-003), disc r 0.4285 m, passing the aperture along the hatch axis (all study hardware)",
+   "least_m": 0.19,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier translation along the hatch axis over y [-3.04, -2.0]",
+    "cross-section shift and roll chosen to MAXIMISE the least clearance (best placement, not a worst placement)",
+    "all vehicle and study objects in the passage; bore wall"
+   ],
+   "seed_spread_m": null,
+   "nearest": "Sector_Pressure_Envelope",
+   "note": "best roll 0 deg, centre sector (x, z) [-0.02, -0.97], bore wall clearance 0.19 m. Approach up the sector wall and the turn into the tube are not swept here (HUM-003 routes)."
+  },
+  {
+   "id": "tsh.carrier.S.without_handgrip",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "carrier_S_without_handgrip",
+   "case": "suited casualty on a full-length litter frame (EVA-003), disc r 0.4285 m, passing the aperture along the hatch axis (without handgrip)",
+   "least_m": 0.19,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier translation along the hatch axis over y [-3.04, -2.0]",
+    "cross-section shift and roll chosen to MAXIMISE the least clearance (best placement, not a worst placement)",
+    "all vehicle and study objects in the passage; bore wall"
+   ],
+   "seed_spread_m": null,
+   "nearest": "Sector_Pressure_Envelope",
+   "note": "best roll 0 deg, centre sector (x, z) [-0.02, -0.97], bore wall clearance 0.19 m. Approach up the sector wall and the turn into the tube are not swept here (HUM-003 routes)."
+  },
+  {
+   "id": "tsh.carrier.S.without_transfer_rail",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "carrier_S_without_transfer_rail",
+   "case": "suited casualty on a full-length litter frame (EVA-003), disc r 0.4285 m, passing the aperture along the hatch axis (without transfer rail)",
+   "least_m": 0.206,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier translation along the hatch axis over y [-3.04, -2.0]",
+    "cross-section shift and roll chosen to MAXIMISE the least clearance (best placement, not a worst placement)",
+    "all vehicle and study objects in the passage; bore wall"
+   ],
+   "seed_spread_m": null,
+   "nearest": "Sector_Pressure_Envelope",
+   "note": "best roll 0 deg, centre sector (x, z) [-0.04, -0.99], bore wall clearance 0.207 m. Approach up the sector wall and the turn into the tube are not swept here (HUM-003 routes)."
+  },
+  {
+   "id": "tsh.carrier.S.without_handgrip_and_rail",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "carrier_S_without_handgrip_and_rail",
+   "case": "suited casualty on a full-length litter frame (EVA-003), disc r 0.4285 m, passing the aperture along the hatch axis (without handgrip and rail)",
+   "least_m": 0.206,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier translation along the hatch axis over y [-3.04, -2.0]",
+    "cross-section shift and roll chosen to MAXIMISE the least clearance (best placement, not a worst placement)",
+    "all vehicle and study objects in the passage; bore wall"
+   ],
+   "seed_spread_m": null,
+   "nearest": "Sector_Pressure_Envelope",
+   "note": "best roll 0 deg, centre sector (x, z) [-0.04, -0.99], bore wall clearance 0.207 m. Approach up the sector wall and the turn into the tube are not swept here (HUM-003 routes)."
+  },
+  {
+   "id": "tsh.leaf.sweep.hardware",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "leaf",
+   "case": "sliding leaf swept volume (closed over the bore to fully open) vs handgrip, transfer rail(s) and brackets",
+   "least_m": 0.063,
+   "status": "PASS",
+   "worst_case_over": [
+    "leaf travel closed->open (swept volume)",
+    "all study hardware"
+   ],
+   "seed_spread_m": null,
+   "nearest": "STUDY_Transfer_Rail_1",
+   "note": "analytic swept box: |x| < leaf radius, y over the leaf slab, z from the closed leaf to the open end"
+  },
+  {
+   "id": "tsh.leaf.sweep.stowage",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "leaf",
+   "case": "sliding leaf swept volume vs recessed Crew_Stowage_Upper",
+   "least_m": 0.09,
+   "status": "PASS",
+   "worst_case_over": [
+    "leaf travel closed->open"
+   ],
+   "seed_spread_m": null,
+   "nearest": "STUDY_Stowage_Upper_recessed",
+   "note": "recessed stowage copy"
+  },
+  {
+   "id": "tsh.leaf.guide_overlap",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "leaf",
+   "case": "recessed leaf guide Sector_Hatch_Rail_1 vs leaf engagement",
+   "least_m": null,
+   "status": "OPEN",
+   "worst_case_over": [
+    "leaf slab y vs recessed guide y"
+   ],
+   "seed_spread_m": null,
+   "nearest": "Sector_Hatch_Rail_1 (study copy)",
+   "note": "leaf engagement in the recessed guide is 0.014 m (unreleased); not a clearance; engagement and guide load path need an engineering check."
+  },
+  {
+   "id": "tsh.all.0g_feet_free",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g"
+   ],
+   "variant": "0g",
+   "case": "hand-over-hand with the feet off the rungs (0 g)",
+   "least_m": null,
+   "status": "OPEN",
+   "worst_case_over": [
+    "not modelled"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "The 0 g rerun uses the same postures as 1.5 g (the posture search is geometric, gravity enters only the body envelope, so the 0 g clearances equal the 1.5 g ones); a feet-free hand-over-hand 0 g pose model does not exist and is not invented. OPEN."
+  },
+  {
+   "id": "tsh2.instructor.body.both_hands",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "both",
+   "case": "instructor, K0..K4, both hands (left stiles, right handgrip)",
+   "least_m": 0.033,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe (hip stand-off, drop, trunk lean, +-0.06 m along the rungs)",
+    "all body parts vs all vehicle and study objects"
+   ],
+   "seed_spread_m": null,
+   "nearest": "head -> Sector_Hatch_Frame at K4_foot_on_sill",
+   "note": "tightest keyframe K4_foot_on_sill. Grips: K0 l:Sector_Ladder_Stile_2 (wrist 0.0 cm)/r:STUDY_Grab_Handgrip (wrist 0.0 cm); K1 l:Sector_Ladder_Stile_2 (wrist 0.0 cm)/r:STUDY_Grab_Handgrip (wrist 0.0 cm); K2 l:Sector_Ladder_Stile_2 (wrist 0.0 cm)/r:STUDY_Grab_Handgrip (wrist 0.0 cm); K3 l:Sector_Ladder_Stile_2 (wrist 0.0 cm)/r:STUDY_Grab_Handgrip (wrist 0.0 cm); K4 l:Sector_Ladder_Stile_2 (wrist 0.0 cm)/r:STUDY_Grab_Handgrip (wrist 0.0 cm). Geometry only; no suit, harness or load."
+  },
+  {
+   "id": "tsh2.instructor.part.boot",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "both",
+   "case": "instructor, boot, both hands (left stiles, right handgrip)",
+   "least_m": 0.066,
+   "status": "PASS",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe"
+   ],
+   "seed_spread_m": null,
+   "nearest": "boot -> Sector_Hatch_Frame at K3",
+   "note": "lead boot / boots (deck band, sill, frame); K4 boot values per owner item 2 (3.6-4.4 cm in B3R)."
+  },
+  {
+   "id": "tsh2.instructor.part.hand",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "both",
+   "case": "instructor, hand, both hands (left stiles, right handgrip)",
+   "least_m": 0.036,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe"
+   ],
+   "seed_spread_m": null,
+   "nearest": "hand -> Sector_Hatch_Frame at K4",
+   "note": "hands"
+  },
+  {
+   "id": "tsh2.instructor.part.arm",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "both",
+   "case": "instructor, arm, both hands (left stiles, right handgrip)",
+   "least_m": 0.042,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe"
+   ],
+   "seed_spread_m": null,
+   "nearest": "arm -> STUDY_Transfer_Rail_1_s2 at K4",
+   "note": "arms"
+  },
+  {
+   "id": "tsh2.instructor.part.thigh",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "both",
+   "case": "instructor, thigh, both hands (left stiles, right handgrip)",
+   "least_m": 0.081,
+   "status": "PASS",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe"
+   ],
+   "seed_spread_m": null,
+   "nearest": "thigh -> STUDY_Transfer_Rail_1 at K1",
+   "note": "thighs"
+  },
+  {
+   "id": "tsh2.instructor.sequence.one",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "one",
+   "case": "instructor, single-hand transition K0..K4, restraint attached throughout (single hand (left only), handgrip allowed)",
+   "least_m": 0.064,
+   "status": "OPEN",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe",
+    "every grip reach (hand holds within 3 cm of the grip, solver arm shortfall)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "torso -> STUDY_Transfer_Rail_1_s1 at K4_foot_on_sill",
+   "note": "a hand holds in every keyframe; geometric status PASS. Hand schedule: K0 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K1 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K2 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K3 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K4 l:Crew_Tube_1_1_Ladder_Stile_1 (wrist 0.0 cm). Regrips (K3->K4: Sector_Ladder_Stile_2 -> Crew_Tube_1_1_Ladder_Stile_1) pass through a moment with no hand holding, restrained by the arrester link (0.170..0.199 m needed vs 0.206 m PROTOTYPE) and both feet (that moment is not checked between static keyframes); OPEN until the restraint load / arrest-distance / injury-load analysis exists (not invented here)."
+  },
+  {
+   "id": "tsh2.instructor.sequence.one_np",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "one_np",
+   "case": "instructor, single-hand transition K0..K4, restraint attached throughout (single hand (left only), no handgrip)",
+   "least_m": 0.064,
+   "status": "OPEN",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe",
+    "every grip reach (hand holds within 3 cm of the grip, solver arm shortfall)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "torso -> STUDY_Transfer_Rail_1_s1 at K4_foot_on_sill",
+   "note": "a hand holds in every keyframe; geometric status PASS. Hand schedule: K0 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K1 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K2 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K3 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K4 l:Crew_Tube_1_1_Ladder_Stile_1 (wrist 0.0 cm). Regrips (K3->K4: Sector_Ladder_Stile_2 -> Crew_Tube_1_1_Ladder_Stile_1) pass through a moment with no hand holding, restrained by the arrester link (0.170..0.199 m needed vs 0.206 m PROTOTYPE) and both feet (that moment is not checked between static keyframes); OPEN until the restraint load / arrest-distance / injury-load analysis exists (not invented here)."
+  },
+  {
+   "id": "tsh2.instructor.body.both_hands_optional",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "both_opt",
+   "case": "instructor, K0..K4, both hands, right handgrip OPTIONAL (the right hand may stay free where a grip costs clearance)",
+   "least_m": 0.064,
+   "status": "PASS",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe, each posture with and without the right-hand grip",
+    "all body parts vs all vehicle and study objects"
+   ],
+   "seed_spread_m": null,
+   "nearest": "torso -> STUDY_Transfer_Rail_1_s1 at K4_foot_on_sill",
+   "note": "tightest keyframe K4_foot_on_sill. Grips: K0 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K1 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K2 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K3 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K4 l:Crew_Tube_1_1_Ladder_Stile_1 (wrist 0.0 cm). Geometry only; no suit, harness or load."
+  },
+  {
+   "id": "tsh2.instructor.arrest_link",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "all",
+   "case": "instructor, chest ring to the nearest anchor (tube rail or transfer rail(s)), K0..K4",
+   "least_m": null,
+   "status": "OPEN",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "variants both/one/one_np"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "link needed (m) per variant: both 0.170..0.191; both_opt 0.170..0.199; one 0.170..0.199; one_np 0.170..0.199 vs PROTOTYPE link 0.206. at or below the PROTOTYPE link in every keyframe (continuity by overlapping anchors)."
+  },
+  {
+   "id": "tsh2.newcomer.body.both_hands",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "both",
+   "case": "newcomer, K0..K4, both hands (left stiles, right handgrip)",
+   "least_m": 0.049,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe (hip stand-off, drop, trunk lean, +-0.06 m along the rungs)",
+    "all body parts vs all vehicle and study objects"
+   ],
+   "seed_spread_m": null,
+   "nearest": "arm -> STUDY_Sector_Ladder_Rungs_cut at K0_lower_rung",
+   "note": "tightest keyframe K0_lower_rung. Grips: K0 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K1 l:Sector_Ladder_Stile_2 (wrist 0.0 cm)/r:STUDY_Grab_Handgrip (wrist 0.0 cm); K2 l:Crew_Tube_1_1_Ladder_Stile_1 (wrist 0.0 cm); K3 l:Sector_Ladder_Stile_2 (wrist 0.0 cm)/r:STUDY_Grab_Handgrip (wrist 0.0 cm); K4 l:Crew_Tube_1_1_Ladder_Stile_1 (wrist 0.0 cm). Geometry only; no suit, harness or load."
+  },
+  {
+   "id": "tsh2.newcomer.part.boot",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "both",
+   "case": "newcomer, boot, both hands (left stiles, right handgrip)",
+   "least_m": 0.067,
+   "status": "PASS",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe"
+   ],
+   "seed_spread_m": null,
+   "nearest": "boot -> Sector_Hatch_Frame at K3",
+   "note": "lead boot / boots (deck band, sill, frame); K4 boot values per owner item 2 (3.6-4.4 cm in B3R)."
+  },
+  {
+   "id": "tsh2.newcomer.part.hand",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "both",
+   "case": "newcomer, hand, both hands (left stiles, right handgrip)",
+   "least_m": 0.093,
+   "status": "PASS",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe"
+   ],
+   "seed_spread_m": null,
+   "nearest": "hand -> Sector_Hatch_Frame at K4",
+   "note": "hands"
+  },
+  {
+   "id": "tsh2.newcomer.part.arm",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "both",
+   "case": "newcomer, arm, both hands (left stiles, right handgrip)",
+   "least_m": 0.049,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe"
+   ],
+   "seed_spread_m": null,
+   "nearest": "arm -> STUDY_Sector_Ladder_Rungs_cut at K0",
+   "note": "arms"
+  },
+  {
+   "id": "tsh2.newcomer.part.thigh",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "both",
+   "case": "newcomer, thigh, both hands (left stiles, right handgrip)",
+   "least_m": 0.078,
+   "status": "PASS",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe"
+   ],
+   "seed_spread_m": null,
+   "nearest": "thigh -> STUDY_Transfer_Rail_1 at K2",
+   "note": "thighs"
+  },
+  {
+   "id": "tsh2.newcomer.sequence.one",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "one",
+   "case": "newcomer, single-hand transition K0..K4, restraint attached throughout (single hand (left only), handgrip allowed)",
+   "least_m": 0.049,
+   "status": "OPEN",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe",
+    "every grip reach (hand holds within 3 cm of the grip, solver arm shortfall)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "arm -> STUDY_Sector_Ladder_Rungs_cut at K0_lower_rung",
+   "note": "a hand holds in every keyframe; geometric status MARGINAL. Hand schedule: K0 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K1 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K2 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K3 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K4 l:Crew_Tube_1_1_Ladder_Stile_1 (wrist 0.0 cm). Regrips (K3->K4: Sector_Ladder_Stile_2 -> Crew_Tube_1_1_Ladder_Stile_1) pass through a moment with no hand holding, restrained by the arrester link (0.158..0.206 m needed vs 0.206 m PROTOTYPE) and both feet (that moment is not checked between static keyframes); OPEN until the restraint load / arrest-distance / injury-load analysis exists (not invented here)."
+  },
+  {
+   "id": "tsh2.newcomer.sequence.one_np",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "one_np",
+   "case": "newcomer, single-hand transition K0..K4, restraint attached throughout (single hand (left only), no handgrip)",
+   "least_m": 0.049,
+   "status": "OPEN",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe",
+    "every grip reach (hand holds within 3 cm of the grip, solver arm shortfall)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "arm -> STUDY_Sector_Ladder_Rungs_cut at K0_lower_rung",
+   "note": "a hand holds in every keyframe; geometric status MARGINAL. Hand schedule: K0 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K1 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K2 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K3 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K4 l:Crew_Tube_1_1_Ladder_Stile_1 (wrist 0.0 cm). Regrips (K3->K4: Sector_Ladder_Stile_2 -> Crew_Tube_1_1_Ladder_Stile_1) pass through a moment with no hand holding, restrained by the arrester link (0.158..0.206 m needed vs 0.206 m PROTOTYPE) and both feet (that moment is not checked between static keyframes); OPEN until the restraint load / arrest-distance / injury-load analysis exists (not invented here)."
+  },
+  {
+   "id": "tsh2.newcomer.body.both_hands_optional",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "both_opt",
+   "case": "newcomer, K0..K4, both hands, right handgrip OPTIONAL (the right hand may stay free where a grip costs clearance)",
+   "least_m": 0.049,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe, each posture with and without the right-hand grip",
+    "all body parts vs all vehicle and study objects"
+   ],
+   "seed_spread_m": null,
+   "nearest": "arm -> STUDY_Sector_Ladder_Rungs_cut at K0_lower_rung",
+   "note": "tightest keyframe K0_lower_rung. Grips: K0 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K1 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K2 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K3 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K4 l:Crew_Tube_1_1_Ladder_Stile_1 (wrist 0.0 cm). Geometry only; no suit, harness or load."
+  },
+  {
+   "id": "tsh2.newcomer.arrest_link",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "all",
+   "case": "newcomer, chest ring to the nearest anchor (tube rail or transfer rail(s)), K0..K4",
+   "least_m": null,
+   "status": "OPEN",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "variants both/one/one_np"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "link needed (m) per variant: both 0.167..0.206; both_opt 0.158..0.206; one 0.158..0.206; one_np 0.158..0.206 vs PROTOTYPE link 0.206. at or below the PROTOTYPE link in every keyframe (continuity by overlapping anchors)."
+  },
+  {
+   "id": "tsh2.test_a.body.both_hands",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "both",
+   "case": "test_a, K0..K4, both hands (left stiles, right handgrip)",
+   "least_m": 0.03,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe (hip stand-off, drop, trunk lean, +-0.06 m along the rungs)",
+    "all body parts vs all vehicle and study objects"
+   ],
+   "seed_spread_m": null,
+   "nearest": "arm -> STUDY_Transfer_Rail_1_s2 at K4_foot_on_sill",
+   "note": "tightest keyframe K4_foot_on_sill. Grips: K0 l:Sector_Ladder_Stile_2 (wrist 0.0 cm)/r:STUDY_Grab_Handgrip (wrist 0.0 cm); K1 l:Sector_Ladder_Stile_2 (wrist 0.0 cm)/r:STUDY_Grab_Handgrip (wrist 0.0 cm); K2 l:Sector_Ladder_Stile_2 (wrist 0.0 cm)/r:STUDY_Grab_Handgrip (wrist 0.0 cm); K3 l:Sector_Ladder_Stile_2 (wrist 0.0 cm)/r:STUDY_Grab_Handgrip (wrist 0.0 cm); K4 l:Crew_Tube_1_1_Ladder_Stile_1 (wrist 0.0 cm)/r:STUDY_Grab_Handgrip (wrist 0.0 cm). Geometry only; no suit, harness or load."
+  },
+  {
+   "id": "tsh2.test_a.part.boot",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "both",
+   "case": "test_a, boot, both hands (left stiles, right handgrip)",
+   "least_m": 0.068,
+   "status": "PASS",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe"
+   ],
+   "seed_spread_m": null,
+   "nearest": "boot -> Sector_Hatch_Frame at K3",
+   "note": "lead boot / boots (deck band, sill, frame); K4 boot values per owner item 2 (3.6-4.4 cm in B3R)."
+  },
+  {
+   "id": "tsh2.test_a.part.hand",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "both",
+   "case": "test_a, hand, both hands (left stiles, right handgrip)",
+   "least_m": 0.056,
+   "status": "PASS",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe"
+   ],
+   "seed_spread_m": null,
+   "nearest": "hand -> Crew_Tube_1_1 at K4",
+   "note": "hands"
+  },
+  {
+   "id": "tsh2.test_a.part.arm",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "both",
+   "case": "test_a, arm, both hands (left stiles, right handgrip)",
+   "least_m": 0.03,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe"
+   ],
+   "seed_spread_m": null,
+   "nearest": "arm -> STUDY_Transfer_Rail_1_s2 at K4",
+   "note": "arms"
+  },
+  {
+   "id": "tsh2.test_a.part.thigh",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "both",
+   "case": "test_a, thigh, both hands (left stiles, right handgrip)",
+   "least_m": 0.075,
+   "status": "PASS",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe"
+   ],
+   "seed_spread_m": null,
+   "nearest": "thigh -> STUDY_Transfer_Rail_1 at K1",
+   "note": "thighs"
+  },
+  {
+   "id": "tsh2.test_a.sequence.one",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "one",
+   "case": "test_a, single-hand transition K0..K4, restraint attached throughout (single hand (left only), handgrip allowed)",
+   "least_m": 0.05,
+   "status": "OPEN",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe",
+    "every grip reach (hand holds within 3 cm of the grip, solver arm shortfall)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "arm -> STUDY_Transfer_Rail_1_s2 at K0_lower_rung",
+   "note": "a hand holds in every keyframe; geometric status PASS. Hand schedule: K0 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K1 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K2 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K3 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K4 l:Crew_Tube_1_1_Ladder_Stile_1 (wrist 0.0 cm). Regrips (K3->K4: Sector_Ladder_Stile_2 -> Crew_Tube_1_1_Ladder_Stile_1) pass through a moment with no hand holding, restrained by the arrester link (0.167..0.198 m needed vs 0.206 m PROTOTYPE) and both feet (that moment is not checked between static keyframes); OPEN until the restraint load / arrest-distance / injury-load analysis exists (not invented here)."
+  },
+  {
+   "id": "tsh2.test_a.sequence.one_np",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "one_np",
+   "case": "test_a, single-hand transition K0..K4, restraint attached throughout (single hand (left only), no handgrip)",
+   "least_m": 0.05,
+   "status": "OPEN",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe",
+    "every grip reach (hand holds within 3 cm of the grip, solver arm shortfall)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "arm -> STUDY_Transfer_Rail_1_s2 at K0_lower_rung",
+   "note": "a hand holds in every keyframe; geometric status PASS. Hand schedule: K0 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K1 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K2 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K3 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K4 l:Crew_Tube_1_1_Ladder_Stile_1 (wrist 0.0 cm). Regrips (K3->K4: Sector_Ladder_Stile_2 -> Crew_Tube_1_1_Ladder_Stile_1) pass through a moment with no hand holding, restrained by the arrester link (0.167..0.198 m needed vs 0.206 m PROTOTYPE) and both feet (that moment is not checked between static keyframes); OPEN until the restraint load / arrest-distance / injury-load analysis exists (not invented here)."
+  },
+  {
+   "id": "tsh2.test_a.body.both_hands_optional",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "both_opt",
+   "case": "test_a, K0..K4, both hands, right handgrip OPTIONAL (the right hand may stay free where a grip costs clearance)",
+   "least_m": 0.05,
+   "status": "PASS",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe, each posture with and without the right-hand grip",
+    "all body parts vs all vehicle and study objects"
+   ],
+   "seed_spread_m": null,
+   "nearest": "arm -> STUDY_Transfer_Rail_1_s2 at K0_lower_rung",
+   "note": "tightest keyframe K0_lower_rung. Grips: K0 l:Sector_Ladder_Stile_2 (wrist 0.0 cm)/r:STUDY_Grab_Handgrip (wrist 0.0 cm); K1 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K2 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K3 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K4 l:Crew_Tube_1_1_Ladder_Stile_1 (wrist 0.0 cm). Geometry only; no suit, harness or load."
+  },
+  {
+   "id": "tsh2.test_a.arrest_link",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "all",
+   "case": "test_a, chest ring to the nearest anchor (tube rail or transfer rail(s)), K0..K4",
+   "least_m": null,
+   "status": "OPEN",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "variants both/one/one_np"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "link needed (m) per variant: both 0.167..0.196; both_opt 0.167..0.198; one 0.167..0.198; one_np 0.167..0.198 vs PROTOTYPE link 0.206. at or below the PROTOTYPE link in every keyframe (continuity by overlapping anchors)."
+  },
+  {
+   "id": "tsh2.test_b.body.both_hands",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "both",
+   "case": "test_b, K0..K4, both hands (left stiles, right handgrip)",
+   "least_m": 0.056,
+   "status": "PASS",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe (hip stand-off, drop, trunk lean, +-0.06 m along the rungs)",
+    "all body parts vs all vehicle and study objects"
+   ],
+   "seed_spread_m": null,
+   "nearest": "arm -> STUDY_Sector_Ladder_Rungs_cut at K0_lower_rung",
+   "note": "tightest keyframe K0_lower_rung. Grips: K0 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K1 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K2 l:Crew_Tube_1_1_Ladder_Stile_1 (wrist 0.0 cm); K3 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K4 l:Crew_Tube_1_1_Ladder_Stile_1 (wrist 0.0 cm). Geometry only; no suit, harness or load."
+  },
+  {
+   "id": "tsh2.test_b.part.boot",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "both",
+   "case": "test_b, boot, both hands (left stiles, right handgrip)",
+   "least_m": 0.071,
+   "status": "PASS",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe"
+   ],
+   "seed_spread_m": null,
+   "nearest": "boot -> Sector_Hatch_Frame at K3",
+   "note": "lead boot / boots (deck band, sill, frame); K4 boot values per owner item 2 (3.6-4.4 cm in B3R)."
+  },
+  {
+   "id": "tsh2.test_b.part.hand",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "both",
+   "case": "test_b, hand, both hands (left stiles, right handgrip)",
+   "least_m": 0.096,
+   "status": "PASS",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe"
+   ],
+   "seed_spread_m": null,
+   "nearest": "hand -> Sector_Hatch_Frame at K4",
+   "note": "hands"
+  },
+  {
+   "id": "tsh2.test_b.part.arm",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "both",
+   "case": "test_b, arm, both hands (left stiles, right handgrip)",
+   "least_m": 0.056,
+   "status": "PASS",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe"
+   ],
+   "seed_spread_m": null,
+   "nearest": "arm -> STUDY_Sector_Ladder_Rungs_cut at K0",
+   "note": "arms"
+  },
+  {
+   "id": "tsh2.test_b.part.thigh",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "both",
+   "case": "test_b, thigh, both hands (left stiles, right handgrip)",
+   "least_m": 0.079,
+   "status": "PASS",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe"
+   ],
+   "seed_spread_m": null,
+   "nearest": "thigh -> STUDY_Transfer_Rail_1 at K2",
+   "note": "thighs"
+  },
+  {
+   "id": "tsh2.test_b.sequence.one",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "one",
+   "case": "test_b, single-hand transition K0..K4, restraint attached throughout (single hand (left only), handgrip allowed)",
+   "least_m": 0.056,
+   "status": "OPEN",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe",
+    "every grip reach (hand holds within 3 cm of the grip, solver arm shortfall)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "arm -> STUDY_Sector_Ladder_Rungs_cut at K0_lower_rung",
+   "note": "a hand holds in every keyframe; geometric status PASS. Hand schedule: K0 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K1 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K2 l:Crew_Tube_1_1_Ladder_Stile_1 (wrist 0.0 cm); K3 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K4 l:Crew_Tube_1_1_Ladder_Stile_1 (wrist 0.0 cm). Regrips (K1->K2: Sector_Ladder_Stile_2 -> Crew_Tube_1_1_Ladder_Stile_1, K2->K3: Crew_Tube_1_1_Ladder_Stile_1 -> Sector_Ladder_Stile_2, K3->K4: Sector_Ladder_Stile_2 -> Crew_Tube_1_1_Ladder_Stile_1) pass through a moment with no hand holding, restrained by the arrester link (0.165..0.204 m needed vs 0.206 m PROTOTYPE) and both feet (that moment is not checked between static keyframes); OPEN until the restraint load / arrest-distance / injury-load analysis exists (not invented here)."
+  },
+  {
+   "id": "tsh2.test_b.sequence.one_np",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "one_np",
+   "case": "test_b, single-hand transition K0..K4, restraint attached throughout (single hand (left only), no handgrip)",
+   "least_m": 0.056,
+   "status": "OPEN",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe",
+    "every grip reach (hand holds within 3 cm of the grip, solver arm shortfall)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "arm -> STUDY_Sector_Ladder_Rungs_cut at K0_lower_rung",
+   "note": "a hand holds in every keyframe; geometric status PASS. Hand schedule: K0 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K1 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K2 l:Crew_Tube_1_1_Ladder_Stile_1 (wrist 0.0 cm); K3 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K4 l:Crew_Tube_1_1_Ladder_Stile_1 (wrist 0.0 cm). Regrips (K1->K2: Sector_Ladder_Stile_2 -> Crew_Tube_1_1_Ladder_Stile_1, K2->K3: Crew_Tube_1_1_Ladder_Stile_1 -> Sector_Ladder_Stile_2, K3->K4: Sector_Ladder_Stile_2 -> Crew_Tube_1_1_Ladder_Stile_1) pass through a moment with no hand holding, restrained by the arrester link (0.165..0.204 m needed vs 0.206 m PROTOTYPE) and both feet (that moment is not checked between static keyframes); OPEN until the restraint load / arrest-distance / injury-load analysis exists (not invented here)."
+  },
+  {
+   "id": "tsh2.test_b.body.both_hands_optional",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "both_opt",
+   "case": "test_b, K0..K4, both hands, right handgrip OPTIONAL (the right hand may stay free where a grip costs clearance)",
+   "least_m": 0.056,
+   "status": "PASS",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "posture grid per keyframe, each posture with and without the right-hand grip",
+    "all body parts vs all vehicle and study objects"
+   ],
+   "seed_spread_m": null,
+   "nearest": "arm -> STUDY_Sector_Ladder_Rungs_cut at K0_lower_rung",
+   "note": "tightest keyframe K0_lower_rung. Grips: K0 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K1 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K2 l:Crew_Tube_1_1_Ladder_Stile_1 (wrist 0.0 cm); K3 l:Sector_Ladder_Stile_2 (wrist 0.0 cm); K4 l:Crew_Tube_1_1_Ladder_Stile_1 (wrist 0.0 cm). Geometry only; no suit, harness or load."
+  },
+  {
+   "id": "tsh2.test_b.arrest_link",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "all",
+   "case": "test_b, chest ring to the nearest anchor (tube rail or transfer rail(s)), K0..K4",
+   "least_m": null,
+   "status": "OPEN",
+   "worst_case_over": [
+    "keyframes K0..K4",
+    "variants both/one/one_np"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "link needed (m) per variant: both 0.165..0.204; both_opt 0.165..0.204; one 0.165..0.204; one_np 0.165..0.204 vs PROTOTYPE link 0.206. at or below the PROTOTYPE link in every keyframe (continuity by overlapping anchors)."
+  },
+  {
+   "id": "tsh2.carrier.A.all_study_hardware",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "carrier_A",
+   "case": "rigid full-length litter, box 0.55 x 0.3 m, long axis along the hatch axis (2.0 m), passing the aperture along the hatch axis (all study hardware)",
+   "least_m": 0.347,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier translation along the hatch axis over y [-3.04, -2.0]",
+    "cross-section shift and roll chosen to MAXIMISE the least clearance (best placement, not a worst placement)",
+    "all vehicle and study objects in the passage; bore wall"
+   ],
+   "seed_spread_m": null,
+   "nearest": "Hygiene",
+   "note": "best roll 30 deg, centre sector (x, z) [-0.06, -0.99], bore wall clearance 0.316 m. Approach up the sector wall and the turn into the tube are not swept here (HUM-003 routes)."
+  },
+  {
+   "id": "tsh2.carrier.A.without_handgrip",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "carrier_A_without_handgrip",
+   "case": "rigid full-length litter, box 0.55 x 0.3 m, long axis along the hatch axis (2.0 m), passing the aperture along the hatch axis (without handgrip)",
+   "least_m": 0.347,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier translation along the hatch axis over y [-3.04, -2.0]",
+    "cross-section shift and roll chosen to MAXIMISE the least clearance (best placement, not a worst placement)",
+    "all vehicle and study objects in the passage; bore wall"
+   ],
+   "seed_spread_m": null,
+   "nearest": "Hygiene",
+   "note": "best roll 30 deg, centre sector (x, z) [-0.06, -0.99], bore wall clearance 0.316 m. Approach up the sector wall and the turn into the tube are not swept here (HUM-003 routes)."
+  },
+  {
+   "id": "tsh2.carrier.A.without_transfer_rail",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "carrier_A_without_transfer_rail",
+   "case": "rigid full-length litter, box 0.55 x 0.3 m, long axis along the hatch axis (2.0 m), passing the aperture along the hatch axis (without transfer rail)",
+   "least_m": 0.377,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier translation along the hatch axis over y [-3.04, -2.0]",
+    "cross-section shift and roll chosen to MAXIMISE the least clearance (best placement, not a worst placement)",
+    "all vehicle and study objects in the passage; bore wall"
+   ],
+   "seed_spread_m": null,
+   "nearest": "STUDY_Crew_Tube_1_1_Arrest_Rail_cut",
+   "note": "best roll 90 deg, centre sector (x, z) [-0.04, -1.05], bore wall clearance 0.379 m. Approach up the sector wall and the turn into the tube are not swept here (HUM-003 routes)."
+  },
+  {
+   "id": "tsh2.carrier.A.without_handgrip_and_rail",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "carrier_A_without_handgrip_and_rail",
+   "case": "rigid full-length litter, box 0.55 x 0.3 m, long axis along the hatch axis (2.0 m), passing the aperture along the hatch axis (without handgrip and rail)",
+   "least_m": 0.377,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier translation along the hatch axis over y [-3.04, -2.0]",
+    "cross-section shift and roll chosen to MAXIMISE the least clearance (best placement, not a worst placement)",
+    "all vehicle and study objects in the passage; bore wall"
+   ],
+   "seed_spread_m": null,
+   "nearest": "STUDY_Crew_Tube_1_1_Arrest_Rail_cut",
+   "note": "best roll 90 deg, centre sector (x, z) [-0.04, -1.05], bore wall clearance 0.379 m. Approach up the sector wall and the turn into the tube are not swept here (HUM-003 routes)."
+  },
+  {
+   "id": "tsh2.carrier.S.all_study_hardware",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "carrier_S",
+   "case": "suited casualty on a full-length litter frame (EVA-003), disc r 0.4285 m, passing the aperture along the hatch axis (all study hardware)",
+   "least_m": 0.19,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier translation along the hatch axis over y [-3.04, -2.0]",
+    "cross-section shift and roll chosen to MAXIMISE the least clearance (best placement, not a worst placement)",
+    "all vehicle and study objects in the passage; bore wall"
+   ],
+   "seed_spread_m": null,
+   "nearest": "Sector_Pressure_Envelope",
+   "note": "best roll 0 deg, centre sector (x, z) [-0.02, -0.97], bore wall clearance 0.19 m. Approach up the sector wall and the turn into the tube are not swept here (HUM-003 routes)."
+  },
+  {
+   "id": "tsh2.carrier.S.without_handgrip",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "carrier_S_without_handgrip",
+   "case": "suited casualty on a full-length litter frame (EVA-003), disc r 0.4285 m, passing the aperture along the hatch axis (without handgrip)",
+   "least_m": 0.19,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier translation along the hatch axis over y [-3.04, -2.0]",
+    "cross-section shift and roll chosen to MAXIMISE the least clearance (best placement, not a worst placement)",
+    "all vehicle and study objects in the passage; bore wall"
+   ],
+   "seed_spread_m": null,
+   "nearest": "Sector_Pressure_Envelope",
+   "note": "best roll 0 deg, centre sector (x, z) [-0.02, -0.97], bore wall clearance 0.19 m. Approach up the sector wall and the turn into the tube are not swept here (HUM-003 routes)."
+  },
+  {
+   "id": "tsh2.carrier.S.without_transfer_rail",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "carrier_S_without_transfer_rail",
+   "case": "suited casualty on a full-length litter frame (EVA-003), disc r 0.4285 m, passing the aperture along the hatch axis (without transfer rail)",
+   "least_m": 0.206,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier translation along the hatch axis over y [-3.04, -2.0]",
+    "cross-section shift and roll chosen to MAXIMISE the least clearance (best placement, not a worst placement)",
+    "all vehicle and study objects in the passage; bore wall"
+   ],
+   "seed_spread_m": null,
+   "nearest": "Sector_Pressure_Envelope",
+   "note": "best roll 0 deg, centre sector (x, z) [-0.04, -0.99], bore wall clearance 0.207 m. Approach up the sector wall and the turn into the tube are not swept here (HUM-003 routes)."
+  },
+  {
+   "id": "tsh2.carrier.S.without_handgrip_and_rail",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "carrier_S_without_handgrip_and_rail",
+   "case": "suited casualty on a full-length litter frame (EVA-003), disc r 0.4285 m, passing the aperture along the hatch axis (without handgrip and rail)",
+   "least_m": 0.206,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier translation along the hatch axis over y [-3.04, -2.0]",
+    "cross-section shift and roll chosen to MAXIMISE the least clearance (best placement, not a worst placement)",
+    "all vehicle and study objects in the passage; bore wall"
+   ],
+   "seed_spread_m": null,
+   "nearest": "Sector_Pressure_Envelope",
+   "note": "best roll 0 deg, centre sector (x, z) [-0.04, -0.99], bore wall clearance 0.207 m. Approach up the sector wall and the turn into the tube are not swept here (HUM-003 routes)."
+  },
+  {
+   "id": "tsh2.leaf.sweep.hardware",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "leaf",
+   "case": "sliding leaf swept volume (closed over the bore to fully open) vs handgrip, transfer rail(s) and brackets",
+   "least_m": 0.063,
+   "status": "PASS",
+   "worst_case_over": [
+    "leaf travel closed->open (swept volume)",
+    "all study hardware"
+   ],
+   "seed_spread_m": null,
+   "nearest": "STUDY_Transfer_Rail_1",
+   "note": "analytic swept box: |x| < leaf radius, y over the leaf slab, z from the closed leaf to the open end"
+  },
+  {
+   "id": "tsh2.leaf.sweep.stowage",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "leaf",
+   "case": "sliding leaf swept volume vs recessed Crew_Stowage_Upper",
+   "least_m": 0.09,
+   "status": "PASS",
+   "worst_case_over": [
+    "leaf travel closed->open"
+   ],
+   "seed_spread_m": null,
+   "nearest": "STUDY_Stowage_Upper_recessed",
+   "note": "recessed stowage copy"
+  },
+  {
+   "id": "tsh2.leaf.guide_overlap",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g",
+    "locked_1.5g"
+   ],
+   "variant": "leaf",
+   "case": "recessed leaf guide Sector_Hatch_Rail_1 vs leaf engagement",
+   "least_m": null,
+   "status": "OPEN",
+   "worst_case_over": [
+    "leaf slab y vs recessed guide y"
+   ],
+   "seed_spread_m": null,
+   "nearest": "Sector_Hatch_Rail_1 (study copy)",
+   "note": "leaf engagement in the recessed guide is 0.014 m (unreleased); not a clearance; engagement and guide load path need an engineering check."
+  },
+  {
+   "id": "tsh2.all.0g_feet_free",
+   "route": "thrust_hatch_step",
+   "states": [
+    "0g"
+   ],
+   "variant": "0g",
+   "case": "hand-over-hand with the feet off the rungs (0 g)",
+   "least_m": null,
+   "status": "OPEN",
+   "worst_case_over": [
+    "not modelled"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "The 0 g rerun uses the same postures as 1.5 g (the posture search is geometric, gravity enters only the body envelope, so the 0 g clearances equal the 1.5 g ones); a feet-free hand-over-hand 0 g pose model does not exist and is not invented. OPEN."
+  }
+ ]
+}

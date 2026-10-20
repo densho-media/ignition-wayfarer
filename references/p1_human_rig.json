@@ -1,0 +1,382 @@
+{
+ "flags": {
+  "stretch": 1.6,
+  "shrink": 0.5,
+  "share": 0.002,
+  "volume": 0.06
+ },
+ "characters": {
+  "test_a": {
+   "fingerprint_matches_build": true,
+   "postures": {
+    "rest_stand": {
+     "volume_change": -0.005,
+     "stretched_share": 0.0003,
+     "shrunk_share": 7e-05,
+     "max_ratio": 1.896,
+     "min_ratio": 0.476,
+     "flag": false
+    },
+    "arms_overhead": {
+     "volume_change": -0.0126,
+     "stretched_share": 0.00437,
+     "shrunk_share": 0.00194,
+     "max_ratio": 3.148,
+     "min_ratio": 0.248,
+     "flag": true
+    },
+    "arms_forward_elbows_140": {
+     "volume_change": -0.0269,
+     "stretched_share": 0.00254,
+     "shrunk_share": 0.00097,
+     "max_ratio": 2.663,
+     "min_ratio": 0.301,
+     "flag": true
+    },
+    "arms_side_90": {
+     "volume_change": -0.0016,
+     "stretched_share": 0.00202,
+     "shrunk_share": 0.00022,
+     "max_ratio": 3.04,
+     "min_ratio": 0.416,
+     "flag": true
+    },
+    "trunk_forward_45_head_down": {
+     "volume_change": -0.0303,
+     "stretched_share": 0.00232,
+     "shrunk_share": 0.00105,
+     "max_ratio": 2.463,
+     "min_ratio": 0.288,
+     "flag": true
+    },
+    "deep_squat": {
+     "volume_change": -0.0979,
+     "stretched_share": 0.00628,
+     "shrunk_share": 0.00224,
+     "max_ratio": 3.547,
+     "min_ratio": 0.197,
+     "flag": true
+    },
+    "high_step_knee_120": {
+     "volume_change": -0.0401,
+     "stretched_share": 0.00161,
+     "shrunk_share": 0.0006,
+     "max_ratio": 5.154,
+     "min_ratio": 0.182,
+     "flag": false
+    }
+   },
+   "actions": {
+    "idle": {
+     "frames": 120,
+     "max_edge_ratio": 1.911
+    },
+    "walk": {
+     "frames": 33,
+     "max_edge_ratio": 2.395
+    },
+    "sit": {
+     "frames": 75,
+     "max_edge_ratio": 2.791
+    },
+    "crawl": {
+     "frames": 48,
+     "max_edge_ratio": 3.591
+    },
+    "climb": {
+     "frames": 50,
+     "max_edge_ratio": 4.058
+    }
+   },
+   "rest_extent_m": {
+    "width_x": 1.136,
+    "depth_y": 0.465,
+    "height_z": 1.8
+   },
+   "shoulder_breadth_m": 0.522,
+   "sheet": "renders/p1/human_system/test_a_sheet.png"
+  },
+  "test_b": {
+   "fingerprint_matches_build": true,
+   "postures": {
+    "rest_stand": {
+     "volume_change": -0.0027,
+     "stretched_share": 0.00015,
+     "shrunk_share": 0.00022,
+     "max_ratio": 1.654,
+     "min_ratio": 0.324,
+     "flag": false
+    },
+    "arms_overhead": {
+     "volume_change": -0.0117,
+     "stretched_share": 0.00336,
+     "shrunk_share": 0.00209,
+     "max_ratio": 2.839,
+     "min_ratio": 0.099,
+     "flag": true
+    },
+    "arms_forward_elbows_140": {
+     "volume_change": -0.0188,
+     "stretched_share": 0.00224,
+     "shrunk_share": 0.0009,
+     "max_ratio": 2.569,
+     "min_ratio": 0.302,
+     "flag": true
+    },
+    "arms_side_90": {
+     "volume_change": -0.0028,
+     "stretched_share": 0.00112,
+     "shrunk_share": 0.00045,
+     "max_ratio": 2.905,
+     "min_ratio": 0.341,
+     "flag": false
+    },
+    "trunk_forward_45_head_down": {
+     "volume_change": -0.0229,
+     "stretched_share": 0.00161,
+     "shrunk_share": 0.00082,
+     "max_ratio": 2.31,
+     "min_ratio": 0.273,
+     "flag": false
+    },
+    "deep_squat": {
+     "volume_change": -0.0938,
+     "stretched_share": 0.00501,
+     "shrunk_share": 0.00213,
+     "max_ratio": 2.547,
+     "min_ratio": 0.266,
+     "flag": true
+    },
+    "high_step_knee_120": {
+     "volume_change": -0.0407,
+     "stretched_share": 0.00149,
+     "shrunk_share": 0.00067,
+     "max_ratio": 3.218,
+     "min_ratio": 0.265,
+     "flag": false
+    }
+   },
+   "actions": {
+    "idle": {
+     "frames": 120,
+     "max_edge_ratio": 1.838
+    },
+    "walk": {
+     "frames": 33,
+     "max_edge_ratio": 1.872
+    },
+    "sit": {
+     "frames": 75,
+     "max_edge_ratio": 2.061
+    },
+    "crawl": {
+     "frames": 48,
+     "max_edge_ratio": 2.753
+    },
+    "climb": {
+     "frames": 50,
+     "max_edge_ratio": 3.652
+    }
+   },
+   "rest_extent_m": {
+    "width_x": 0.994,
+    "depth_y": 0.429,
+    "height_z": 1.618
+   },
+   "shoulder_breadth_m": 0.468,
+   "sheet": "renders/p1/human_system/test_b_sheet.png"
+  },
+  "instructor": {
+   "fingerprint_matches_build": true,
+   "postures": {
+    "rest_stand": {
+     "volume_change": -0.0065,
+     "stretched_share": 0.00052,
+     "shrunk_share": 0.00011,
+     "max_ratio": 2.017,
+     "min_ratio": 0.271,
+     "flag": false
+    },
+    "arms_overhead": {
+     "volume_change": -0.009,
+     "stretched_share": 0.00486,
+     "shrunk_share": 0.00161,
+     "max_ratio": 3.187,
+     "min_ratio": 0.25,
+     "flag": true
+    },
+    "arms_forward_elbows_140": {
+     "volume_change": -0.0322,
+     "stretched_share": 0.00262,
+     "shrunk_share": 0.00135,
+     "max_ratio": 2.948,
+     "min_ratio": 0.163,
+     "flag": true
+    },
+    "arms_side_90": {
+     "volume_change": 0.0013,
+     "stretched_share": 0.00187,
+     "shrunk_share": 4e-05,
+     "max_ratio": 2.492,
+     "min_ratio": 0.49,
+     "flag": false
+    },
+    "trunk_forward_45_head_down": {
+     "volume_change": -0.0356,
+     "stretched_share": 0.00239,
+     "shrunk_share": 0.00138,
+     "max_ratio": 3.387,
+     "min_ratio": 0.247,
+     "flag": true
+    },
+    "deep_squat": {
+     "volume_change": -0.0982,
+     "stretched_share": 0.00688,
+     "shrunk_share": 0.00217,
+     "max_ratio": 4.943,
+     "min_ratio": 0.153,
+     "flag": true
+    },
+    "high_step_knee_120": {
+     "volume_change": -0.0408,
+     "stretched_share": 0.00198,
+     "shrunk_share": 0.00082,
+     "max_ratio": 6.143,
+     "min_ratio": 0.19,
+     "flag": false
+    }
+   },
+   "actions": {
+    "idle": {
+     "frames": 120,
+     "max_edge_ratio": 2.058
+    },
+    "walk": {
+     "frames": 33,
+     "max_edge_ratio": 3.423
+    },
+    "sit": {
+     "frames": 75,
+     "max_edge_ratio": 3.688
+    },
+    "crawl": {
+     "frames": 48,
+     "max_edge_ratio": 4.669
+    },
+    "climb": {
+     "frames": 50,
+     "max_edge_ratio": 4.443
+    },
+    "stage_S004A": {
+     "frames": 10,
+     "max_edge_ratio": 3.077
+    }
+   },
+   "rest_extent_m": {
+    "width_x": 1.161,
+    "depth_y": 0.487,
+    "height_z": 1.78
+   },
+   "shoulder_breadth_m": 0.541,
+   "sheet": "renders/p1/human_system/instructor_sheet.png"
+  },
+  "newcomer": {
+   "fingerprint_matches_build": true,
+   "postures": {
+    "rest_stand": {
+     "volume_change": -0.0052,
+     "stretched_share": 0.0003,
+     "shrunk_share": 7e-05,
+     "max_ratio": 1.904,
+     "min_ratio": 0.461,
+     "flag": false
+    },
+    "arms_overhead": {
+     "volume_change": -0.013,
+     "stretched_share": 0.00448,
+     "shrunk_share": 0.00194,
+     "max_ratio": 3.137,
+     "min_ratio": 0.254,
+     "flag": true
+    },
+    "arms_forward_elbows_140": {
+     "volume_change": -0.0274,
+     "stretched_share": 0.00254,
+     "shrunk_share": 0.00097,
+     "max_ratio": 2.691,
+     "min_ratio": 0.298,
+     "flag": true
+    },
+    "arms_side_90": {
+     "volume_change": -0.0019,
+     "stretched_share": 0.00202,
+     "shrunk_share": 0.00026,
+     "max_ratio": 3.028,
+     "min_ratio": 0.411,
+     "flag": true
+    },
+    "trunk_forward_45_head_down": {
+     "volume_change": -0.031,
+     "stretched_share": 0.00224,
+     "shrunk_share": 0.00105,
+     "max_ratio": 2.475,
+     "min_ratio": 0.286,
+     "flag": true
+    },
+    "deep_squat": {
+     "volume_change": -0.097,
+     "stretched_share": 0.0062,
+     "shrunk_share": 0.00217,
+     "max_ratio": 3.481,
+     "min_ratio": 0.225,
+     "flag": true
+    },
+    "high_step_knee_120": {
+     "volume_change": -0.0401,
+     "stretched_share": 0.00164,
+     "shrunk_share": 0.00045,
+     "max_ratio": 5.196,
+     "min_ratio": 0.244,
+     "flag": false
+    }
+   },
+   "actions": {
+    "idle": {
+     "frames": 120,
+     "max_edge_ratio": 1.919
+    },
+    "walk": {
+     "frames": 33,
+     "max_edge_ratio": 2.595
+    },
+    "sit": {
+     "frames": 75,
+     "max_edge_ratio": 2.693
+    },
+    "crawl": {
+     "frames": 48,
+     "max_edge_ratio": 3.665
+    },
+    "climb": {
+     "frames": 50,
+     "max_edge_ratio": 3.81
+    },
+    "stage_S004A": {
+     "frames": 10,
+     "max_edge_ratio": 3.335
+    },
+    "stage_S004B": {
+     "frames": 10,
+     "max_edge_ratio": 2.176
+    }
+   },
+   "rest_extent_m": {
+    "width_x": 1.076,
+    "depth_y": 0.44,
+    "height_z": 1.7
+   },
+   "shoulder_breadth_m": 0.514,
+   "sheet": "renders/p1/human_system/newcomer_sheet.png"
+  }
+ }
+}

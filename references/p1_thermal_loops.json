@@ -1,0 +1,4361 @@
+{
+ "note": "Candidate-zone screen; thermal.loops.warm.area and cold.area stay OPEN (Q38). Every value is DIAGNOSTIC; the zones are PROTOTYPE.",
+ "status": "DIAGNOSTIC",
+ "capture": "references/drive_capture_2026-10-03b",
+ "spec_digest": "25ec30d38645172c6fe8c754ef9c4cc0a28ac184dcdd291691670121cafbd61a",
+ "inputs": {
+  "blade_aft_x_m": -101.0,
+  "blade_front_x_m": 81.14936247723134,
+  "blade_cant_deg": 0.0,
+  "blade_ribbons": 1,
+  "blade_length_m": 182.14936247723134,
+  "blade_phase_deg": 30.0,
+  "blade_count": 3,
+  "radiator_front_x_m": 81.14936247723134,
+  "ring_a_x_m": 85.04936247723134,
+  "ring_centers_x_m": [
+   85.04936247723134,
+   91.04936247723134
+  ],
+  "ring_inner_radius_m": 24.5,
+  "ring_outer_radius_m": 30.0,
+  "casing_radius_m": 6.0,
+  "casing_span_x_m": [
+   -101.0,
+   81.14936247723134
+  ],
+  "collar_span_x_m": [
+   93.34936247723135,
+   105.9
+  ],
+  "shield_truss_aft_x_m": 105.9,
+  "shield_radius_m": 45.0,
+  "panel_envelope": {
+   "r_lo": 30.15,
+   "r_hi": 37.0,
+   "x_lo": 81.54936247723134,
+   "x_hi": 105.75
+  },
+  "dock_corridors": [
+   {
+    "name": "Dock_Primary",
+    "x": 99.4,
+    "theta": 3.4033920413889427,
+    "r0": 6.8,
+    "r1": 45.0,
+    "radius": 3.0
+   },
+   {
+    "name": "Dock_Service",
+    "x": 99.4,
+    "theta": 5.497787143782138,
+    "r0": 6.8,
+    "r1": 45.0,
+    "radius": 3.0
+   }
+  ],
+  "regimes": {
+   "hot": {
+    "T_K": 1800.0,
+    "emissivity": 0.9,
+    "absorptance": 0.9
+   },
+   "warm": {
+    "T_K": 450.0,
+    "emissivity": 0.9,
+    "absorptance": 0.9
+   },
+   "cold": {
+    "T_K": 320.0,
+    "emissivity": 0.9,
+    "absorptance": 0.9
+   }
+  },
+  "defense_routing": {
+   "normal_W": [
+    15000000.0,
+    30000000.0
+   ],
+   "limited_duty_W": [
+    30000000.0,
+    50000000.0
+   ],
+   "short_burst_W": [
+    50000000.0,
+    80000000.0
+   ],
+   "normal_loop": "warm",
+   "short_burst_rule": "load shedding / Heat Debt",
+   "rule": "hot drive blades are not the direct sink; do not spend the diagnostic root margin",
+   "canon_status": "WORKING",
+   "source_ref": "defense_heat_routing"
+  },
+  "root_band_width_m": 3.8125,
+  "study": {
+   "status": "PROTOTYPE",
+   "evidence_ref": "thermal_warm_regime",
+   "rationale": "Q38 screen: candidate warm (casing, collar, shadow panels) and cold (ring surfaces) zones against the 1800 K blade faces, to show where a gray surface rejects heat and where it absorbs more than it emits. It selects no warm or cold area.",
+   "panel_families": [
+    "BLADE_PLANE",
+    "BISECTOR"
+   ],
+   "panel_double_sided": true,
+   "absorptance_rule": "GRAY_EQUALS_EMISSIVITY",
+   "hot_root_band_rule": "HOT",
+   "cases": [
+    "HIGH_POWER",
+    "BLADES_NOT_RADIATING"
+   ],
+   "excluded": [
+    "sunlight",
+    "planetary IR and albedo",
+    "drive hot section and plume",
+    "multiple reflections",
+    "spectral selectivity",
+    "conduction and attachments",
+    "shield aft-face temperature"
+   ],
+   "sampling": {
+    "kind": "IMPLEMENTATION",
+    "casing_azimuth_bands": 6,
+    "casing_axial_bands": 10,
+    "collar_azimuth_bands": 6,
+    "panel_axial_bands": 4,
+    "points_per_zone": [
+     4,
+     4
+    ],
+    "rays_per_point": 2304,
+    "seed": 20261004,
+    "sigma_multiple": 3
+   }
+  }
+ },
+ "sampling": {
+  "kind": "IMPLEMENTATION",
+  "casing_azimuth_bands": 6,
+  "casing_axial_bands": 10,
+  "collar_azimuth_bands": 6,
+  "panel_axial_bands": 4,
+  "points_per_zone": [
+   4,
+   4
+  ],
+  "rays_per_point": 2304,
+  "seed": 20261004,
+  "sigma_multiple": 3
+ },
+ "cases": [
+  "HIGH_POWER",
+  "BLADES_NOT_RADIATING"
+ ],
+ "assumptions": [
+  "thin blade planes, both faces emitting, spar and truss ignored",
+  "root band treated as hot (temperature map OPEN)",
+  "gray surfaces, alpha = emissivity (owner illustration emissivity)",
+  "non-hot blockers (hull, rings, shield) exchange net zero with the receiver",
+  "open rotor bay filled at the hull radius_at; shield modelled as an aft-most disc",
+  "panels are receivers only, not blockers",
+  "ring results are averaged over azimuth (rotation average); spokes ignored",
+  "BLADES_NOT_RADIATING bounds the case only under the stated blade assumption (dark blades adiabatic); it is not a strict best case, and real COAST hot-loop duty is OPEN (Q41)",
+  "the zero-exchange assumption errs in a known direction per loop and case (zero_exchange_assumption); classes that depend on it are flagged"
+ ],
+ "excluded": [
+  "sunlight",
+  "planetary IR and albedo",
+  "drive hot section and plume",
+  "multiple reflections",
+  "spectral selectivity",
+  "conduction and attachments",
+  "shield aft-face temperature"
+ ],
+ "zero_exchange_assumption": {
+  "statement": "Non-hot blockers (hull, casing, rings, shield) and dark blades exchange net zero with the receiver. DIAGNOSTIC: the direction of the error is stated, not simulated.",
+  "direction": {
+   "cold": {
+    "HIGH_POWER": "OPTIMISTIC: the hull/casing is a >=450 K warm surface (and HP-heated) under the study's own premise, not a 320 K neighbour, so zero exchange overstates ring capacity; q_if_blockers_at_warm_W_m2 bounds it",
+    "BLADES_NOT_RADIATING": "OPTIMISTIC: same, the warm hull/casing seen by the rings would reduce or reverse ring capacity (q_if_blockers_at_warm_W_m2); dark blades can act either way (sink or source) depending on their temperature, and blade duty outside burns is OPEN (Q41)"
+   },
+   "warm": {
+    "HIGH_POWER": "NEUTRAL TO PESSIMISTIC: the casing, collar and panels are net-heated by the blades regardless; hot-neighbour blockers are already hot-class",
+    "BLADES_NOT_RADIATING": "PESSIMISTIC: dark blades treated as adiabatic; if colder than the receiver they are sinks, which would add capacity (reviewer estimate about +2.6 MW at the casing, enough to erase the 1.15 MW shortfall; not simulated here)"
+   }
+  },
+  "dependent_findings": [
+   "COLD_EXAMPLE_COVERAGE",
+   "BNR_CLASSES_ASSUMPTION_DEPENDENT",
+   "WARM_LOOP_AREA_SHORTFALL (BLADES_NOT_RADIATING)"
+  ]
+ },
+ "regimes": {
+  "temperatures_emissivity": {
+   "hot": {
+    "T_K": 1800.0,
+    "emissivity": 0.9,
+    "absorptance": 0.9
+   },
+   "warm": {
+    "T_K": 450.0,
+    "emissivity": 0.9,
+    "absorptance": 0.9
+   },
+   "cold": {
+    "T_K": 320.0,
+    "emissivity": 0.9,
+    "absorptance": 0.9
+   }
+  },
+  "owner_examples": {
+   "warm": {
+    "load_W": 5000000.0,
+    "T_K": 450.0,
+    "emissivity": 0.9,
+    "ideal_area_m2": 2389.2726027664153,
+    "stored_ideal_area_m2": 2389.2726027664153
+   },
+   "cold": {
+    "load_W": 100000.0,
+    "T_K": 320.0,
+    "emissivity": 0.9,
+    "ideal_area_m2": 186.8726914733702,
+    "stored_ideal_area_m2": 186.8726914733702
+   }
+  },
+  "defense_band_areas": [
+   {
+    "load_W": 15000000.0,
+    "ideal_area_m2": 7167.817808299245
+   },
+   {
+    "load_W": 30000000.0,
+    "ideal_area_m2": 14335.63561659849
+   },
+   {
+    "load_W": 50000000.0,
+    "ideal_area_m2": 23892.72602766415
+   },
+   {
+    "load_W": 80000000.0,
+    "ideal_area_m2": 38228.361644262644
+   }
+  ],
+  "break_even_F": {
+   "warm": 0.004340277777777777,
+   "cold": 0.0011098579146132871
+  }
+ },
+ "deterministic_bound": {
+  "casing_area_m2": 6866.869188174412,
+  "casing_ideal_W": 14370208.699132152,
+  "all_warm_zones_ideal_W": 19605838.320856728,
+  "flux_W_m2": 2092.687119172069
+ },
+ "zones": [
+  {
+   "name": "CASING_1_1",
+   "loop": "warm",
+   "surface": "CASING",
+   "area_m2": 114.44781980290686,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.2976345486111111,
+   "F_hot_bound": 0.007144029960956883,
+   "F_root_band": 0.22355143229166666,
+   "F_root_band_bound": 0.006509761851878051,
+   "F_blocker": 0.001220703125,
+   "F_blocker_bound": 0.0005455817317288436,
+   "F_space": 0.7011447482638888,
+   "F_space_bound": 0.007152441505780902,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "F_hot_exact_unoccluded": 0.2971907892124319,
+   "F_root_band_exact_unoccluded": 0.22331040778520814,
+   "exact_refinement_delta": 0.007252719020793552,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -142038.74261385767,
+     "q_low_W_m2": -145498.24100386165,
+     "q_high_W_m2": -138579.24422385357,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 16256024.41970225
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1467.276583366983,
+     "q_low_W_m2": 1452.3087611572037,
+     "q_high_W_m2": 1482.2444055767623,
+     "cls": "USABLE",
+     "capacity_W": 167926.60601420933,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "CASING_1_2",
+   "loop": "warm",
+   "surface": "CASING",
+   "area_m2": 114.44781980290686,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.3146430121527778,
+   "F_hot_bound": 0.0072558366029455024,
+   "F_root_band": 0.22840711805555555,
+   "F_root_band_bound": 0.00655947300868282,
+   "F_blocker": 0.001437717013888889,
+   "F_blocker_bound": 0.0005920308136373555,
+   "F_space": 0.6839192708333334,
+   "F_space_bound": 0.007264763084227511,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "F_hot_exact_unoccluded": 0.31463294390491126,
+   "F_root_band_exact_unoccluded": 0.22898675276921027,
+   "exact_refinement_delta": 0.00516889177355051,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -150275.5077968537,
+     "q_low_W_m2": -153789.14938479732,
+     "q_high_W_m2": -146761.86620891007,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 17198704.237124637
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1431.2290486264703,
+     "q_low_W_m2": 1416.0261724962706,
+     "q_high_W_m2": 1446.43192475667,
+     "cls": "USABLE",
+     "capacity_W": 163801.0442538881,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "CASING_1_3",
+   "loop": "warm",
+   "surface": "CASING",
+   "area_m2": 114.44781980290686,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.3146430121527778,
+   "F_hot_bound": 0.0072558366029455024,
+   "F_root_band": 0.2282986111111111,
+   "F_root_band_bound": 0.006558375848372657,
+   "F_blocker": 0.0021158854166666665,
+   "F_blocker_bound": 0.0007179697608756152,
+   "F_space": 0.6832411024305556,
+   "F_space_bound": 0.007268945786473314,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "F_hot_exact_unoccluded": 0.31579665522244116,
+   "F_root_band_exact_unoccluded": 0.2290300659684495,
+   "exact_refinement_delta": 0.00516180479006928,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -150276.92699113482,
+     "q_low_W_m2": -153790.57733216556,
+     "q_high_W_m2": -146763.2766501041,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 17198866.660815988
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1429.8098543453477,
+     "q_low_W_m2": 1414.598225128035,
+     "q_high_W_m2": 1445.0214835626605,
+     "cls": "USABLE",
+     "capacity_W": 163638.62056253687,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "CASING_1_4",
+   "loop": "warm",
+   "surface": "CASING",
+   "area_m2": 114.44781980290686,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.3162163628472222,
+   "F_hot_bound": 0.0072656010536382275,
+   "F_root_band": 0.22935655381944445,
+   "F_root_band_bound": 0.006569046679482859,
+   "F_blocker": 0.0028211805555555555,
+   "F_blocker_bound": 0.0008287470387609282,
+   "F_space": 0.6809624565972222,
+   "F_space_bound": 0.007282869141700368,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "F_hot_exact_unoccluded": 0.3160551715432221,
+   "F_root_band_exact_unoccluded": 0.2290365234785421,
+   "exact_refinement_delta": 0.005161176288330072,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -151040.29456461928,
+     "q_low_W_m2": -154558.682022696,
+     "q_high_W_m2": -147521.9071065425,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 17286232.415309522
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1425.0413615607758,
+     "q_low_W_m2": 1409.8005951173238,
+     "q_high_W_m2": 1440.282128004228,
+     "cls": "USABLE",
+     "capacity_W": 163092.87695959673,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "CASING_1_5",
+   "loop": "warm",
+   "surface": "CASING",
+   "area_m2": 114.44781980290686,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.3167588975694444,
+   "F_hot_bound": 0.007268945786473314,
+   "F_root_band": 0.22984483506944445,
+   "F_root_band_bound": 0.006573951817243977,
+   "F_blocker": 0.004448784722222222,
+   "F_blocker_bound": 0.0010398543783169203,
+   "F_space": 0.6787923177083334,
+   "F_space_bound": 0.0072959432476661056,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "F_hot_exact_unoccluded": 0.3161269183573821,
+   "F_root_band_exact_unoccluded": 0.22903810124993498,
+   "exact_refinement_delta": 0.005161090813333102,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -151306.42187621538,
+     "q_low_W_m2": -154826.44937434082,
+     "q_high_W_m2": -147786.39437808993,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 17316690.105911702
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1420.4999398611837,
+     "q_low_W_m2": 1405.2318134045825,
+     "q_high_W_m2": 1435.7680663177853,
+     "cls": "USABLE",
+     "capacity_W": 162573.1211472728,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "CASING_1_6",
+   "loop": "warm",
+   "surface": "CASING",
+   "area_m2": 114.44781980290686,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.3162434895833333,
+   "F_hot_bound": 0.007265768561745146,
+   "F_root_band": 0.22886827256944445,
+   "F_root_band_bound": 0.006564129008762881,
+   "F_blocker": 0.006618923611111111,
+   "F_blocker_bound": 0.0012669855207924831,
+   "F_space": 0.6771375868055556,
+   "F_space_bound": 0.00730579078133241,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "F_hot_exact_unoccluded": 0.31612691835738205,
+   "F_root_band_exact_unoccluded": 0.22903810124993498,
+   "exact_refinement_delta": 0.005161090813333102,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -151061.3781148596,
+     "q_low_W_m2": -154579.8943056465,
+     "q_high_W_m2": -147542.86192407276,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 17288645.38166823
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1417.0371058152448,
+     "q_low_W_m2": 1401.7483715517844,
+     "q_high_W_m2": 1432.3258400787051,
+     "cls": "USABLE",
+     "capacity_W": 162176.8073403758,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "CASING_1_7",
+   "loop": "warm",
+   "surface": "CASING",
+   "area_m2": 114.44781980290686,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.3156467013888889,
+   "F_hot_bound": 0.007262076776260182,
+   "F_root_band": 0.22862413194444445,
+   "F_root_band_bound": 0.0065616654647402935,
+   "F_blocker": 0.010687934027777778,
+   "F_blocker_bound": 0.001606695440272333,
+   "F_space": 0.6736653645833334,
+   "F_space_bound": 0.0073261148153126185,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "F_hot_exact_unoccluded": 0.31605517154322216,
+   "F_root_band_exact_unoccluded": 0.22903652347854211,
+   "exact_refinement_delta": 0.005161176288330016,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -150780.89991069282,
+     "q_low_W_m2": -154297.67862007883,
+     "q_high_W_m2": -147264.12120130676,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 17256545.26269911
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1409.7708310958974,
+     "q_low_W_m2": 1394.439564988317,
+     "q_high_W_m2": 1425.1020972034778,
+     "cls": "USABLE",
+     "capacity_W": 161345.1980406575,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "CASING_1_8",
+   "loop": "warm",
+   "surface": "CASING",
+   "area_m2": 114.44781980290686,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.3153754340277778,
+   "F_hot_bound": 0.0072603941122992965,
+   "F_root_band": 0.2290581597222222,
+   "F_root_band_bound": 0.006566042927316429,
+   "F_blocker": 0.020263671875,
+   "F_blocker_bound": 0.002201576110959874,
+   "F_space": 0.6643608940972222,
+   "F_space_bound": 0.007378334397368094,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "F_hot_exact_unoccluded": 0.31579665522244116,
+   "F_root_band_exact_unoccluded": 0.22903006596844958,
+   "exact_refinement_delta": 0.005161804790069224,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -150669.57831128157,
+     "q_low_W_m2": -154185.65499488337,
+     "q_high_W_m2": -147153.50162767974,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 17243804.748349518
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1390.2994855588959,
+     "q_low_W_m2": 1374.8589402045793,
+     "q_high_W_m2": 1405.7400309132124,
+     "cls": "USABLE",
+     "capacity_W": 159116.74499531862,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "CASING_1_9",
+   "loop": "warm",
+   "surface": "CASING",
+   "area_m2": 114.44781980290686,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.3142361111111111,
+   "F_hot_bound": 0.007253295613852557,
+   "F_root_band": 0.22859700520833334,
+   "F_root_band_bound": 0.00656139154362834,
+   "F_blocker": 0.052164713541666664,
+   "F_blocker_bound": 0.0034743604754788977,
+   "F_space": 0.6335991753472222,
+   "F_space_bound": 0.0075284496276154045,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "F_hot_exact_unoccluded": 0.3146329439049112,
+   "F_root_band_exact_unoccluded": 0.2289867527692103,
+   "exact_refinement_delta": 0.00516889177355051,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -150184.62259509062,
+     "q_low_W_m2": -153697.5908455857,
+     "q_high_W_m2": -146671.65434459544,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 17188302.623930506
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1325.924832967177,
+     "q_low_W_m2": 1310.1701434041304,
+     "q_high_W_m2": 1341.6795225302235,
+     "cls": "USABLE",
+     "capacity_W": 151749.20635562687,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "CASING_1_10",
+   "loop": "warm",
+   "surface": "CASING",
+   "area_m2": 114.44781980290686,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.297607421875,
+   "F_hot_bound": 0.007143842346842625,
+   "F_root_band": 0.22355143229166666,
+   "F_root_band_bound": 0.006509761851878051,
+   "F_blocker": 0.1987847222222222,
+   "F_blocker_bound": 0.006235713289028204,
+   "F_space": 0.5036078559027778,
+   "F_space_bound": 0.007812296612599185,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "F_hot_exact_unoccluded": 0.29719078921243197,
+   "F_root_band_exact_unoccluded": 0.22331040778520814,
+   "exact_refinement_delta": 0.007252719020793663,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -142439.0462295682,
+     "q_low_W_m2": -145899.8350307505,
+     "q_high_W_m2": -138978.25742838587,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 16301838.295779541
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1053.8936731616063,
+     "q_low_W_m2": 1037.5449806692684,
+     "q_high_W_m2": 1070.2423656539443,
+     "cls": "USABLE",
+     "capacity_W": 120615.83319742314,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "CASING_2_1",
+   "loop": "warm",
+   "surface": "CASING",
+   "area_m2": 114.44781980290686,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.1820746527777778,
+   "F_hot_bound": 0.006029781913163999,
+   "F_root_band": 0.06694878472222222,
+   "F_root_band_bound": 0.0039052075154691708,
+   "F_blocker": 0.0013563368055555555,
+   "F_blocker_bound": 0.0005750545906544665,
+   "F_space": 0.8165690104166666,
+   "F_space_bound": 0.006047179046858038,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "F_hot_exact_unoccluded": 0.1822942210329382,
+   "F_root_band_exact_unoccluded": 0.06725379033548241,
+   "exact_refinement_delta": 0.0006446909563848358,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -86079.40119925425,
+     "q_low_W_m2": -88999.34622818124,
+     "q_high_W_m2": -83159.45617032726,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 9851599.797194375
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1708.823450014041,
+     "q_low_W_m2": 1696.168596315354,
+     "q_high_W_m2": 1721.4783037127281,
+     "cls": "USABLE",
+     "capacity_W": 195571.1182821886,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "CASING_2_2",
+   "loop": "warm",
+   "surface": "CASING",
+   "area_m2": 114.44781980290686,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.20912000868055555,
+   "F_hot_bound": 0.0063543790005719785,
+   "F_root_band": 0.07164171006944445,
+   "F_root_band_bound": 0.004029589515329477,
+   "F_blocker": 0.0018174913194444445,
+   "F_blocker_bound": 0.0006655200997057495,
+   "F_space": 0.7890625,
+   "F_space_bound": 0.00637459540485689,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "F_hot_exact_unoccluded": 0.20883828634706295,
+   "F_root_band_exact_unoccluded": 0.0719732485244226,
+   "exact_refinement_delta": 6.922697185030025e-05,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -99177.02033063752,
+     "q_low_W_m2": -102254.15668467706,
+     "q_high_W_m2": -96099.883976598,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 11350593.751390032
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1651.2609299717105,
+     "q_low_W_m2": 1637.920896278033,
+     "q_high_W_m2": 1664.600963665388,
+     "cls": "USABLE",
+     "capacity_W": 188983.21336098274,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "CASING_2_3",
+   "loop": "warm",
+   "surface": "CASING",
+   "area_m2": 114.44781980290686,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.2116970486111111,
+   "F_hot_bound": 0.006382987647161968,
+   "F_root_band": 0.0719943576388889,
+   "F_root_band_bound": 0.004038727624749799,
+   "F_blocker": 0.0023328993055555555,
+   "F_blocker_bound": 0.000753808184422773,
+   "F_space": 0.7859700520833334,
+   "F_space_bound": 0.006408557688614857,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "F_hot_exact_unoccluded": 0.21144956606015172,
+   "F_root_band_exact_unoccluded": 0.07204180467240065,
+   "exact_refinement_delta": 8.370372945634696e-05,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -100426.02483356785,
+     "q_low_W_m2": -103517.02606524927,
+     "q_high_W_m2": -97335.02360188644,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 11493539.593674423
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1644.7894040497918,
+     "q_low_W_m2": 1631.3782979223565,
+     "q_high_W_m2": 1658.2005101772272,
+     "cls": "USABLE",
+     "capacity_W": 188242.56132842114,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "CASING_2_4",
+   "loop": "warm",
+   "surface": "CASING",
+   "area_m2": 114.44781980290686,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.2124294704861111,
+   "F_hot_bound": 0.00639104885809963,
+   "F_root_band": 0.0722927517361111,
+   "F_root_band_bound": 0.004046437892131301,
+   "F_blocker": 0.003228081597222222,
+   "F_blocker_bound": 0.0008863192363238595,
+   "F_space": 0.7843424479166666,
+   "F_space_bound": 0.006426214552502458,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "F_hot_exact_unoccluded": 0.21205010194483317,
+   "F_root_band_exact_unoccluded": 0.0720522375012043,
+   "exact_refinement_delta": 8.509302242754035e-05,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -100782.57185120284,
+     "q_low_W_m2": -103877.49678724047,
+     "q_high_W_m2": -97687.64691516521,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 11534345.622499976
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1641.3833377750975,
+     "q_low_W_m2": 1627.9352813560395,
+     "q_high_W_m2": 1654.8313941941556,
+     "cls": "USABLE",
+     "capacity_W": 187852.74446917817,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "CASING_2_5",
+   "loop": "warm",
+   "surface": "CASING",
+   "area_m2": 114.44781980290686,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.212158203125,
+   "F_hot_bound": 0.0063880668010005736,
+   "F_root_band": 0.0718044704861111,
+   "F_root_band_bound": 0.004033810611916799,
+   "F_blocker": 0.005072699652777778,
+   "F_blocker_bound": 0.001110031426723184,
+   "F_space": 0.7827690972222222,
+   "F_space_bound": 0.0064431414460176945,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "F_hot_exact_unoccluded": 0.21221865839702092,
+   "F_root_band_exact_unoccluded": 0.07205479840402365,
+   "exact_refinement_delta": 8.528427874146538e-05,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -100655.0714369868,
+     "q_low_W_m2": -103748.5939816411,
+     "q_high_W_m2": -97561.54889233249,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 11519753.478068981
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1638.0908070428932,
+     "q_low_W_m2": 1624.6073279318084,
+     "q_high_W_m2": 1651.5742861539782,
+     "cls": "USABLE",
+     "capacity_W": 187475.9215052433,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "CASING_2_6",
+   "loop": "warm",
+   "surface": "CASING",
+   "area_m2": 114.44781980290686,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.2124294704861111,
+   "F_hot_bound": 0.00639104885809963,
+   "F_root_band": 0.072021484375,
+   "F_root_band_bound": 0.004039429388662663,
+   "F_blocker": 0.007703993055555556,
+   "F_blocker_bound": 0.00136615063776914,
+   "F_space": 0.7798665364583334,
+   "F_space_bound": 0.006474007558678644,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "F_hot_exact_unoccluded": 0.21221865839702092,
+   "F_root_band_exact_unoccluded": 0.07205479840402365,
+   "exact_refinement_delta": 8.528427874149314e-05,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -100791.93853345825,
+     "q_low_W_m2": -103886.96348530428,
+     "q_high_W_m2": -97696.91358161221,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 11535417.618862893
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1632.0166555196888,
+     "q_low_W_m2": 1618.4685832922194,
+     "q_high_W_m2": 1645.5647277471583,
+     "cls": "USABLE",
+     "capacity_W": 186780.74810626006,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "CASING_2_7",
+   "loop": "warm",
+   "surface": "CASING",
+   "area_m2": 114.44781980290686,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.21180555555555555,
+   "F_hot_bound": 0.00638418383737299,
+   "F_root_band": 0.07169596354166667,
+   "F_root_band_bound": 0.0040309972169260905,
+   "F_blocker": 0.012830946180555556,
+   "F_blocker_bound": 0.0017585111806379071,
+   "F_space": 0.7753634982638888,
+   "F_space_bound": 0.006520979960443086,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "F_hot_exact_unoccluded": 0.21205010194483323,
+   "F_root_band_exact_unoccluded": 0.07205223750120435,
+   "exact_refinement_delta": 8.509302242740158e-05,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -100500.53821010391,
+     "q_low_W_m2": -103592.35145565098,
+     "q_high_W_m2": -97408.72496455687,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 11502067.487165129
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1622.593205493035,
+     "q_low_W_m2": 1608.9468347254365,
+     "q_high_W_m2": 1636.2395762606334,
+     "cls": "USABLE",
+     "capacity_W": 185702.25479568788,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "CASING_2_8",
+   "loop": "warm",
+   "surface": "CASING",
+   "area_m2": 114.44781980290686,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.21142578125,
+   "F_hot_bound": 0.0063799942193142455,
+   "F_root_band": 0.072021484375,
+   "F_root_band_bound": 0.004039429388662663,
+   "F_blocker": 0.023383246527777776,
+   "F_blocker_bound": 0.002361209464274491,
+   "F_space": 0.7651909722222222,
+   "F_space_bound": 0.0066231156712151015,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "F_hot_exact_unoccluded": 0.21144956606015175,
+   "F_root_band_exact_unoccluded": 0.07204180467240065,
+   "exact_refinement_delta": 8.37037294562637e-05,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -100338.7160013932,
+     "q_low_W_m2": -103428.72293926116,
+     "q_high_W_m2": -97248.70906352524,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 11483547.288182497
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1601.3052912761968,
+     "q_low_W_m2": 1587.4451824222583,
+     "q_high_W_m2": 1615.1654001301351,
+     "cls": "USABLE",
+     "capacity_W": 183265.89942541945,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "CASING_2_9",
+   "loop": "warm",
+   "surface": "CASING",
+   "area_m2": 114.44781980290686,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.20792643229166666,
+   "F_hot_bound": 0.006340998307265625,
+   "F_root_band": 0.07210286458333333,
+   "F_root_band_bound": 0.004041533682573447,
+   "F_blocker": 0.060112847222222224,
+   "F_blocker_bound": 0.0037139968580212346,
+   "F_space": 0.7319607204861112,
+   "F_space_bound": 0.006920908936386389,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "F_hot_exact_unoccluded": 0.20883828634706295,
+   "F_root_band_exact_unoccluded": 0.0719732485244226,
+   "exact_refinement_delta": 6.922697185030025e-05,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -98721.02753133573,
+     "q_low_W_m2": -101792.85557898252,
+     "q_high_W_m2": -95649.19948368894,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 11298406.36966412
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1531.764771501192,
+     "q_low_W_m2": 1517.281474517053,
+     "q_high_W_m2": 1546.2480684853306,
+     "cls": "USABLE",
+     "capacity_W": 175307.13854920922,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "CASING_2_10",
+   "loop": "warm",
+   "surface": "CASING",
+   "area_m2": 114.44781980290686,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.181884765625,
+   "F_hot_bound": 0.006027336360950972,
+   "F_root_band": 0.06768120659722222,
+   "F_root_band_bound": 0.0039249695482611,
+   "F_blocker": 0.2361111111111111,
+   "F_blocker_bound": 0.006635800716762437,
+   "F_space": 0.5820041232638888,
+   "F_space_bound": 0.007706710685612166,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "F_hot_exact_unoccluded": 0.18229422103293816,
+   "F_root_band_exact_unoccluded": 0.0672537903354824,
+   "exact_refinement_delta": 0.0006446909563848358,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -86478.71705574515,
+     "q_low_W_m2": -89400.95582965459,
+     "q_high_W_m2": -83556.47828183568,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 9897300.626382489
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1217.9525320593732,
+     "q_low_W_m2": 1201.824797876407,
+     "q_high_W_m2": 1234.0802662423393,
+     "cls": "USABLE",
+     "capacity_W": 139392.0119176253,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "CASING_3_1",
+   "loop": "warm",
+   "surface": "CASING",
+   "area_m2": 114.44781980290686,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.07001410590277778,
+   "F_hot_bound": 0.0039870435572606,
+   "F_root_band": 0.0038248697916666665,
+   "F_root_band_bound": 0.0009644866068185139,
+   "F_blocker": 0.0015190972222222222,
+   "F_blocker_bound": 0.000608530979162526,
+   "F_space": 0.928466796875,
+   "F_space_bound": 0.004026772100423537,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "F_hot_exact_unoccluded": 0.07004329290541722,
+   "F_root_band_exact_unoccluded": 0.0037978726820192686,
+   "exact_refinement_delta": 0.0001036961398090952,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -31814.668584745174,
+     "q_low_W_m2": -33745.46879277708,
+     "q_high_W_m2": -29883.868376713268,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 3641119.4572761175
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1942.9905063992621,
+     "q_low_W_m2": 1934.5637322928642,
+     "q_high_W_m2": 1951.41728050566,
+     "cls": "USABLE",
+     "capacity_W": 222371.0273551415,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "CASING_3_2",
+   "loop": "warm",
+   "surface": "CASING",
+   "area_m2": 114.44781980290686,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.08680555555555555,
+   "F_hot_bound": 0.004399217323195219,
+   "F_root_band": 0.004286024305555556,
+   "F_root_band_bound": 0.0010207388443577508,
+   "F_blocker": 0.0020616319444444445,
+   "F_blocker_bound": 0.0007087245121509184,
+   "F_space": 0.9111328125,
+   "F_space_bound": 0.004446124170347078,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "F_hot_exact_unoccluded": 0.08649940088056539,
+   "F_root_band_exact_unoccluded": 0.004239093554819706,
+   "exact_refinement_delta": 0.0002401025078230118,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -39947.02648286761,
+     "q_low_W_m2": -42077.43595195833,
+     "q_high_W_m2": -37816.61701377688,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 4571850.08857318
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1906.7159005737697,
+     "q_low_W_m2": 1897.4115537922448,
+     "q_high_W_m2": 1916.0202473552947,
+     "cls": "USABLE",
+     "capacity_W": 218219.47780420407,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "CASING_3_3",
+   "loop": "warm",
+   "surface": "CASING",
+   "area_m2": 114.44781980290686,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.08905707465277778,
+   "F_hot_bound": 0.0044504079459656825,
+   "F_root_band": 0.004313151041666667,
+   "F_root_band_bound": 0.0010239499873534747,
+   "F_blocker": 0.0027669270833333335,
+   "F_blocker_bound": 0.0008207619598807665,
+   "F_space": 0.9081759982638888,
+   "F_space_bound": 0.004512146000908558,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "F_hot_exact_unoccluded": 0.08926787019504104,
+   "F_root_band_exact_unoccluded": 0.004251268434073916,
+   "exact_refinement_delta": 0.00025584260759961563,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -41038.79561300381,
+     "q_low_W_m2": -43194.02506559735,
+     "q_high_W_m2": -38883.56616041027,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 4696800.685245384
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1900.5282135080754,
+     "q_low_W_m2": 1891.0857036921502,
+     "q_high_W_m2": 1909.9707233240003,
+     "cls": "USABLE",
+     "capacity_W": 217511.31050991273,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "CASING_3_4",
+   "loop": "warm",
+   "surface": "CASING",
+   "area_m2": 114.44781980290686,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.08992513020833333,
+   "F_hot_bound": 0.004469913560420794,
+   "F_root_band": 0.004123263888888889,
+   "F_root_band_bound": 0.0010012519730921707,
+   "F_blocker": 0.004041883680555556,
+   "F_blocker_bound": 0.0009913624592461832,
+   "F_space": 0.9060329861111112,
+   "F_space_bound": 0.004559106566316564,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "F_hot_exact_unoccluded": 0.0899714499971735,
+   "F_root_band_exact_unoccluded": 0.004253183974564338,
+   "exact_refinement_delta": 0.00025817453425276693,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -41461.81769076656,
+     "q_low_W_m2": -43626.55014885771,
+     "q_high_W_m2": -39297.08523267544,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 4745214.639773827
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1896.0435595797283,
+     "q_low_W_m2": 1886.5027759934649,
+     "q_high_W_m2": 1905.5843431659916,
+     "cls": "USABLE",
+     "capacity_W": 216998.05164524284,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "CASING_3_5",
+   "loop": "warm",
+   "surface": "CASING",
+   "area_m2": 114.44781980290686,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.09003363715277778,
+   "F_hot_bound": 0.004472342888417332,
+   "F_root_band": 0.004286024305555556,
+   "F_root_band_bound": 0.0010207388443577508,
+   "F_blocker": 0.005832248263888889,
+   "F_blocker_bound": 0.0011897832843382596,
+   "F_space": 0.9041341145833334,
+   "F_space_bound": 0.00460011297813518,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "F_hot_exact_unoccluded": 0.09017576023625572,
+   "F_root_band_exact_unoccluded": 0.004253657800366296,
+   "exact_refinement_delta": 0.00025863272045782704,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -41518.10861273301,
+     "q_low_W_m2": -43684.09819732684,
+     "q_high_W_m2": -39352.11902813919,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 4751657.013067584
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1892.0698155925852,
+     "q_low_W_m2": 1882.4432184165053,
+     "q_high_W_m2": 1901.696412768665,
+     "cls": "USABLE",
+     "capacity_W": 216543.2653094594,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "CASING_3_6",
+   "loop": "warm",
+   "surface": "CASING",
+   "area_m2": 114.44781980290686,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.090087890625,
+   "F_hot_bound": 0.004473556816752133,
+   "F_root_band": 0.004475911458333333,
+   "F_root_band_bound": 0.0010430056378016182,
+   "F_blocker": 0.009087456597222222,
+   "F_blocker_bound": 0.0014827190376412993,
+   "F_space": 0.9008246527777778,
+   "F_space_bound": 0.004670270358980322,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "F_hot_exact_unoccluded": 0.09017576023625572,
+   "F_root_band_exact_unoccluded": 0.0042536578003662855,
+   "exact_refinement_delta": 0.0002586327204578409,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -41551.19286981455,
+     "q_low_W_m2": -43717.91457360813,
+     "q_high_W_m2": -39384.47116602097,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 4755443.434160364
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1885.144147500707,
+     "q_low_W_m2": 1875.3707328774176,
+     "q_high_W_m2": 1894.9175621239963,
+     "cls": "USABLE",
+     "capacity_W": 215750.63769566538,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "CASING_3_7",
+   "loop": "warm",
+   "surface": "CASING",
+   "area_m2": 114.44781980290686,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.09027777777777778,
+   "F_hot_bound": 0.004477801710495518,
+   "F_root_band": 0.004258897569444444,
+   "F_root_band_bound": 0.0010175173909343581,
+   "F_blocker": 0.014621310763888888,
+   "F_blocker_bound": 0.0018754900424358548,
+   "F_space": 0.8951009114583334,
+   "F_space_bound": 0.004787864852407643,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "F_hot_exact_unoccluded": 0.08997144999717353,
+   "F_root_band_exact_unoccluded": 0.00425318397456436,
+   "exact_refinement_delta": 0.0002581745342527392,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -41654.725931011,
+     "q_low_W_m2": -43823.74042050561,
+     "q_high_W_m2": -39485.71144151638,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 4767292.567291819
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1873.1661477680327,
+     "q_low_W_m2": 1863.1466446630625,
+     "q_high_W_m2": 1883.185650873003,
+     "cls": "USABLE",
+     "capacity_W": 214379.781740661,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "CASING_3_8",
+   "loop": "warm",
+   "surface": "CASING",
+   "area_m2": 114.44781980290686,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.08873155381944445,
+   "F_hot_bound": 0.00444306058888925,
+   "F_root_band": 0.004313151041666667,
+   "F_root_band_bound": 0.0010239499873534747,
+   "F_blocker": 0.026719835069444444,
+   "F_blocker_bound": 0.0025197406881607453,
+   "F_space": 0.8845486111111112,
+   "F_space_bound": 0.004993217218051831,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "F_hot_exact_unoccluded": 0.089267870195041,
+   "F_root_band_exact_unoccluded": 0.004251268434073916,
+   "exact_refinement_delta": 0.0002558426075997128,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -40931.288807820216,
+     "q_low_W_m2": -43083.9824261773,
+     "q_high_W_m2": -38778.595189463136,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 4684496.765778147
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1851.0834847537658,
+     "q_low_W_m2": 1840.6342433983207,
+     "q_high_W_m2": 1861.5327261092111,
+     "cls": "USABLE",
+     "capacity_W": 211852.46910323587,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "CASING_3_9",
+   "loop": "warm",
+   "surface": "CASING",
+   "area_m2": 114.44781980290686,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.08658854166666667,
+   "F_hot_bound": 0.004394236896217004,
+   "F_root_band": 0.004286024305555556,
+   "F_root_band_bound": 0.0010207388443577508,
+   "F_blocker": 0.06901041666666667,
+   "F_blocker_bound": 0.003960497665981641,
+   "F_space": 0.8444010416666666,
+   "F_space_bound": 0.0056636674969790255,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "F_hot_exact_unoccluded": 0.0864994008805654,
+   "F_root_band_exact_unoccluded": 0.00423909355481971,
+   "exact_refinement_delta": 0.0002401025078229979,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -39982.040844171475,
+     "q_low_W_m2": -42112.5969121701,
+     "q_high_W_m2": -37851.48477617284,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 4575857.405886199
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1767.0671833113106,
+     "q_low_W_m2": 1755.2148992931093,
+     "q_high_W_m2": 1778.9194673295121,
+     "cls": "USABLE",
+     "capacity_W": 202236.98657524306,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "CASING_3_10",
+   "loop": "warm",
+   "surface": "CASING",
+   "area_m2": 114.44781980290686,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.0700954861111111,
+   "F_hot_bound": 0.00398918548264319,
+   "F_root_band": 0.003716362847222222,
+   "F_root_band_bound": 0.0009507592944273241,
+   "F_blocker": 0.2576226128472222,
+   "F_blocker_bound": 0.006833203956975462,
+   "F_space": 0.6722819010416666,
+   "F_space_bound": 0.007334085172384381,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "F_hot_exact_unoccluded": 0.07004329290541722,
+   "F_root_band_exact_unoccluded": 0.0037978726820192686,
+   "exact_refinement_delta": 0.0001036961398090952,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -32390.0212998665,
+     "q_low_W_m2": -34328.77541963646,
+     "q_high_W_m2": -30451.26718009654,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 3706967.3211394367
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1406.8756747624072,
+     "q_low_W_m2": 1391.5277291912475,
+     "q_high_W_m2": 1422.223620333567,
+     "cls": "USABLE",
+     "capacity_W": 161013.853710301,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "CASING_4_1",
+   "loop": "warm",
+   "surface": "CASING",
+   "area_m2": 114.44781980290686,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.06974283854166667,
+   "F_hot_bound": 0.003979892546427332,
+   "F_root_band": 0.003960503472222222,
+   "F_root_band_bound": 0.0009813716440907469,
+   "F_blocker": 0.001491970486111111,
+   "F_blocker_bound": 0.0006030813840648599,
+   "F_space": 0.9287651909722222,
+   "F_space_bound": 0.0040190103376793514,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "F_hot_exact_unoccluded": 0.0700432929054172,
+   "F_root_band_exact_unoccluded": 0.003797872682019298,
+   "exact_refinement_delta": 0.0001036961398090952,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -31683.251194313227,
+     "q_low_W_m2": -33610.58726297315,
+     "q_high_W_m2": -29755.9151256533,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 3626079.023456994
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1943.6149518829561,
+     "q_low_W_m2": 1935.204420717475,
+     "q_high_W_m2": 1952.025483048437,
+     "cls": "USABLE",
+     "capacity_W": 222442.49377933604,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "CASING_4_2",
+   "loop": "warm",
+   "surface": "CASING",
+   "area_m2": 114.44781980290686,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.08658854166666667,
+   "F_hot_bound": 0.004394236896217004,
+   "F_root_band": 0.003960503472222222,
+   "F_root_band_bound": 0.0009813716440907469,
+   "F_blocker": 0.0021158854166666665,
+   "F_blocker_bound": 0.0007179697608756152,
+   "F_space": 0.9112955729166666,
+   "F_space_bound": 0.004442447497753972,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "F_hot_exact_unoccluded": 0.0864994008805654,
+   "F_root_band_exact_unoccluded": 0.004239093554819701,
+   "exact_refinement_delta": 0.0002401025078229424,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -39842.051520281544,
+     "q_low_W_m2": -41970.05195691812,
+     "q_high_W_m2": -37714.05108364496,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 4559835.932971314
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1907.0565072012391,
+     "q_low_W_m2": 1897.759854545091,
+     "q_high_W_m2": 1916.353159857387,
+     "cls": "USABLE",
+     "capacity_W": 218258.45949012839,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "CASING_4_3",
+   "loop": "warm",
+   "surface": "CASING",
+   "area_m2": 114.44781980290686,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.08916558159722222,
+   "F_hot_bound": 0.004452853079846238,
+   "F_root_band": 0.004421657986111111,
+   "F_root_band_bound": 0.0010366933666312468,
+   "F_blocker": 0.002902560763888889,
+   "F_blocker_bound": 0.0008405808400489671,
+   "F_space": 0.9079318576388888,
+   "F_space_bound": 0.004517533104733664,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "F_hot_exact_unoccluded": 0.08926787019504102,
+   "F_root_band_exact_unoccluded": 0.004251268434073926,
+   "exact_refinement_delta": 0.0002558426075996295,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -41091.62370092432,
+     "q_low_W_m2": -43248.04336084131,
+     "q_high_W_m2": -38935.20404100734,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 4702846.744732243
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1900.0173035668713,
+     "q_low_W_m2": 1890.5635202281617,
+     "q_high_W_m2": 1909.4710869055807,
+     "cls": "USABLE",
+     "capacity_W": 217452.83798102627,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "CASING_4_4",
+   "loop": "warm",
+   "surface": "CASING",
+   "area_m2": 114.44781980290686,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.09046766493055555,
+   "F_hot_bound": 0.004482040619885412,
+   "F_root_band": 0.004150390625,
+   "F_root_band_bound": 0.001004526484310216,
+   "F_blocker": 0.003933376736111111,
+   "F_blocker_bound": 0.0009780183252985888,
+   "F_space": 0.9055989583333334,
+   "F_space_bound": 0.004568528898733509,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "F_hot_exact_unoccluded": 0.08997144999717346,
+   "F_root_band_exact_unoccluded": 0.004253183974564341,
+   "exact_refinement_delta": 0.00025817453425276693,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -41724.311865003,
+     "q_low_W_m2": -43894.91116480532,
+     "q_high_W_m2": -39553.71256520068,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 4775256.525726153
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1895.1352752398097,
+     "q_low_W_m2": 1885.5747736598648,
+     "q_high_W_m2": 1904.6957768197547,
+     "cls": "USABLE",
+     "capacity_W": 216894.10048277804,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "CASING_4_5",
+   "loop": "warm",
+   "surface": "CASING",
+   "area_m2": 114.44781980290686,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.09027777777777778,
+   "F_hot_bound": 0.004477801710495518,
+   "F_root_band": 0.004177517361111111,
+   "F_root_band_bound": 0.0010077901777819482,
+   "F_blocker": 0.005995008680555556,
+   "F_blocker_bound": 0.0012061719282818277,
+   "F_space": 0.9037272135416666,
+   "F_space_bound": 0.004608827749449112,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "F_hot_exact_unoccluded": 0.09017576023625568,
+   "F_root_band_exact_unoccluded": 0.004253657800366243,
+   "exact_refinement_delta": 0.00025863272045786867,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -41636.673779755125,
+     "q_low_W_m2": -43805.31360061052,
+     "q_high_W_m2": -39468.03395889972,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 4765226.537937831
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1891.2182990239114,
+     "q_low_W_m2": 1881.5734645581563,
+     "q_high_W_m2": 1900.8631334896666,
+     "cls": "USABLE",
+     "capacity_W": 216445.81109464864,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "CASING_4_6",
+   "loop": "warm",
+   "surface": "CASING",
+   "area_m2": 114.44781980290686,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.09044053819444445,
+   "F_hot_bound": 0.004481435427146257,
+   "F_root_band": 0.003879123263888889,
+   "F_root_band_bound": 0.0009712764015918287,
+   "F_blocker": 0.009060329861111112,
+   "F_blocker_bound": 0.0014805246348224522,
+   "F_space": 0.9004991319444444,
+   "F_space_bound": 0.004677083355969627,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "F_hot_exact_unoccluded": 0.09017576023625565,
+   "F_root_band_exact_unoccluded": 0.004253657800366225,
+   "exact_refinement_delta": 0.0002586327204578964,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -41721.90491150221,
+     "q_low_W_m2": -43892.43958504584,
+     "q_high_W_m2": -39551.37023795859,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 4774981.05514562
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1884.462934245768,
+     "q_low_W_m2": 1874.6752621514363,
+     "q_high_W_m2": 1894.2506063400997,
+     "cls": "USABLE",
+     "capacity_W": 215672.67432381678,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "CASING_4_7",
+   "loop": "warm",
+   "surface": "CASING",
+   "area_m2": 114.44781980290686,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.08984375,
+   "F_hot_bound": 0.004468090275437303,
+   "F_root_band": 0.004421657986111111,
+   "F_root_band_bound": 0.0010366933666312468,
+   "F_blocker": 0.015163845486111112,
+   "F_blocker_bound": 0.0019094429762465338,
+   "F_space": 0.8949924045138888,
+   "F_space_bound": 0.004790050121867621,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "F_hot_exact_unoccluded": 0.08997144999717349,
+   "F_root_band_exact_unoccluded": 0.004253183974564364,
+   "exact_refinement_delta": 0.00025817453425276693,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -41445.684290178775,
+     "q_low_W_m2": -43610.020934697975,
+     "q_high_W_m2": -39281.347645659574,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 4743368.2072505485
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1872.939076683053,
+     "q_low_W_m2": 1862.915000492832,
+     "q_high_W_m2": 1882.9631528732739,
+     "cls": "USABLE",
+     "capacity_W": 214353.7939500448,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "CASING_4_8",
+   "loop": "warm",
+   "surface": "CASING",
+   "area_m2": 114.44781980290686,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.08949110243055555,
+   "F_hot_bound": 0.004460176571932141,
+   "F_root_band": 0.00390625,
+   "F_root_band_bound": 0.0009746532850751532,
+   "F_blocker": 0.026529947916666668,
+   "F_blocker_bound": 0.002511016245080468,
+   "F_space": 0.8839789496527778,
+   "F_space_bound": 0.005003908780335756,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "F_hot_exact_unoccluded": 0.089267870195041,
+   "F_root_band_exact_unoccluded": 0.004251268434073925,
+   "exact_refinement_delta": 0.00025584260759965727,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -41298.701176871466,
+     "q_low_W_m2": -43459.66972804866,
+     "q_high_W_m2": -39137.73262569428,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 4726546.310384683
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1849.8913615576228,
+     "q_low_W_m2": 1839.4197461075023,
+     "q_high_W_m2": 1860.3629770077434,
+     "cls": "USABLE",
+     "capacity_W": 211716.03320250084,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "CASING_4_9",
+   "loop": "warm",
+   "surface": "CASING",
+   "area_m2": 114.44781980290686,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.0866427951388889,
+   "F_hot_bound": 0.004395482777246507,
+   "F_root_band": 0.004204644097222222,
+   "F_root_band_bound": 0.0010110431582679104,
+   "F_blocker": 0.06903754340277778,
+   "F_blocker_bound": 0.003961218277883821,
+   "F_space": 0.8443196614583334,
+   "F_space_bound": 0.005664875388505004,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "F_hot_exact_unoccluded": 0.08649940088056542,
+   "F_root_band_exact_unoccluded": 0.004239093554819701,
+   "exact_refinement_delta": 0.00024010250782292852,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -40008.36973647485,
+     "q_low_W_m2": -42139.529040120164,
+     "q_high_W_m2": -37877.21043282954,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 4578870.690208146
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1766.8968799975762,
+     "q_low_W_m2": 1755.0420682403367,
+     "q_high_W_m2": 1778.7516917548155,
+     "cls": "USABLE",
+     "capacity_W": 202217.49573228095,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "CASING_4_10",
+   "loop": "warm",
+   "surface": "CASING",
+   "area_m2": 114.44781980290686,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.07023111979166667,
+   "F_hot_bound": 0.003992751904956041,
+   "F_root_band": 0.003987630208333333,
+   "F_root_band_bound": 0.000984713361199261,
+   "F_blocker": 0.2585720486111111,
+   "F_blocker_bound": 0.006841404854476353,
+   "F_space": 0.6711968315972222,
+   "F_space_bound": 0.007340285832732867,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "F_hot_exact_unoccluded": 0.0700432929054172,
+   "F_root_band_exact_unoccluded": 0.0037978726820192986,
+   "exact_refinement_delta": 0.00010369613980908132,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -32457.688483190435,
+     "q_low_W_m2": -34398.17514775304,
+     "q_high_W_m2": -30517.20181862782,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 3714711.682743064
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1404.604963912611,
+     "q_low_W_m2": 1389.24404229941,
+     "q_high_W_m2": 1419.9658855258124,
+     "cls": "USABLE",
+     "capacity_W": 160753.97580413902,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "CASING_5_1",
+   "loop": "warm",
+   "surface": "CASING",
+   "area_m2": 114.44781980290686,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.1819118923611111,
+   "F_hot_bound": 0.006027685875714391,
+   "F_root_band": 0.06705729166666667,
+   "F_root_band_bound": 0.003908143644162505,
+   "F_blocker": 0.0014105902777777778,
+   "F_blocker_bound": 0.000586426985720769,
+   "F_space": 0.8166775173611112,
+   "F_space_bound": 0.0060457918522395585,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "F_hot_exact_unoccluded": 0.1822942210329381,
+   "F_root_band_exact_unoccluded": 0.06725379033548237,
+   "exact_refinement_delta": 0.0006446909563848913,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -86000.69836120031,
+     "q_low_W_m2": -88919.62987199116,
+     "q_high_W_m2": -83081.76685040945,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 9842592.4289668
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1709.050521099021,
+     "q_low_W_m2": 1696.3985703646438,
+     "q_high_W_m2": 1721.702471833398,
+     "cls": "USABLE",
+     "capacity_W": 195597.10607280483,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "CASING_5_2",
+   "loop": "warm",
+   "surface": "CASING",
+   "area_m2": 114.44781980290686,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.2086859809027778,
+   "F_hot_bound": 0.00634952289433616,
+   "F_root_band": 0.07185872395833333,
+   "F_root_band_bound": 0.004035216306711033,
+   "F_blocker": 0.0017632378472222222,
+   "F_blocker_bound": 0.0006555295225693846,
+   "F_space": 0.78955078125,
+   "F_space_bound": 0.006369182875176384,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "F_hot_exact_unoccluded": 0.2088382863470629,
+   "F_root_band_exact_unoccluded": 0.07197324852442254,
+   "exact_refinement_delta": 6.922697185027249e-05,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -98966.72979883793,
+     "q_low_W_m2": -102041.51342969906,
+     "q_high_W_m2": -95891.9461679768,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 11326526.458500376
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1652.2827498541187,
+     "q_low_W_m2": 1638.954042891586,
+     "q_high_W_m2": 1665.6114568166518,
+     "cls": "USABLE",
+     "capacity_W": 189100.15841875563,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "CASING_5_3",
+   "loop": "warm",
+   "surface": "CASING",
+   "area_m2": 114.44781980290686,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.21175130208333334,
+   "F_hot_bound": 0.006383585826572044,
+   "F_root_band": 0.07215711805555555,
+   "F_root_band_bound": 0.004042935714523009,
+   "F_blocker": 0.0023600260416666665,
+   "F_blocker_bound": 0.0007581678159844683,
+   "F_space": 0.785888671875,
+   "F_space_bound": 0.006409444083564426,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "F_hot_exact_unoccluded": 0.21144956606015164,
+   "F_root_band_exact_unoccluded": 0.0720418046724006,
+   "exact_refinement_delta": 8.370372945634696e-05,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -100452.35372587125,
+     "q_low_W_m2": -103543.64522776057,
+     "q_high_W_m2": -97361.06222398193,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 11496552.877996372
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1644.6191007360571,
+     "q_low_W_m2": 1631.206139661328,
+     "q_high_W_m2": 1658.032061810786,
+     "cls": "USABLE",
+     "capacity_W": 188223.070485459,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "CASING_5_4",
+   "loop": "warm",
+   "surface": "CASING",
+   "area_m2": 114.44781980290686,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.2114529079861111,
+   "F_hot_bound": 0.0063802937520067654,
+   "F_root_band": 0.072265625,
+   "F_root_band_bound": 0.00404573778795253,
+   "F_blocker": 0.0035264756944444445,
+   "F_blocker_bound": 0.0009262396232893546,
+   "F_space": 0.7850206163194444,
+   "F_space_bound": 0.006418875673384871,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "F_hot_exact_unoccluded": 0.2120501019448332,
+   "F_root_band_exact_unoccluded": 0.07205223750120426,
+   "exact_refinement_delta": 8.509302242742933e-05,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -100310.29805510801,
+     "q_low_W_m2": -103400.02200378229,
+     "q_high_W_m2": -97220.57410643373,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 11480294.91618688
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1642.8025320562201,
+     "q_low_W_m2": 1629.3698336149607,
+     "q_high_W_m2": 1656.2352304974795,
+     "cls": "USABLE",
+     "capacity_W": 188015.1681605294,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "CASING_5_5",
+   "loop": "warm",
+   "surface": "CASING",
+   "area_m2": 114.44781980290686,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.21299913194444445,
+   "F_hot_bound": 0.0063972975124449065,
+   "F_root_band": 0.07212999131944445,
+   "F_root_band_bound": 0.004042234781556356,
+   "F_blocker": 0.004909939236111111,
+   "F_blocker_bound": 0.0010921675754630216,
+   "F_space": 0.7820909288194444,
+   "F_space_bound": 0.006450394925640165,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "F_hot_exact_unoccluded": 0.21221865839702084,
+   "F_root_band_exact_unoccluded": 0.07205479840402364,
+   "exact_refinement_delta": 8.528427874146538e-05,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -101061.94876060751,
+     "q_low_W_m2": -104159.93711923783,
+     "q_high_W_m2": -97963.96040197717,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 11566319.700684614
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1636.6716127617706,
+     "q_low_W_m2": 1623.1729543873107,
+     "q_high_W_m2": 1650.1702711362307,
+     "cls": "USABLE",
+     "capacity_W": 187313.49781389209,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "CASING_5_6",
+   "loop": "warm",
+   "surface": "CASING",
+   "area_m2": 114.44781980290686,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.2121853298611111,
+   "F_hot_bound": 0.006388365195899673,
+   "F_root_band": 0.07188585069444445,
+   "F_root_band_bound": 0.004035918903738507,
+   "F_blocker": 0.007839626736111112,
+   "F_blocker_bound": 0.001378029952500194,
+   "F_space": 0.7799750434027778,
+   "F_space_bound": 0.00647286205111139,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "F_hot_exact_unoccluded": 0.2122186583970208,
+   "F_root_band_exact_unoccluded": 0.07205479840402362,
+   "exact_refinement_delta": 8.528427874146538e-05,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -100673.99781191986,
+     "q_low_W_m2": -103767.72642512765,
+     "q_high_W_m2": -97580.26919871202,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 11521919.560416844
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1632.2437266046684,
+     "q_low_W_m2": 1618.6980515661298,
+     "q_high_W_m2": 1645.789401643207,
+     "cls": "USABLE",
+     "capacity_W": 186806.73589687626,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "CASING_5_7",
+   "loop": "warm",
+   "surface": "CASING",
+   "area_m2": 114.44781980290686,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.2124294704861111,
+   "F_hot_bound": 0.00639104885809963,
+   "F_root_band": 0.07237413194444445,
+   "F_root_band_bound": 0.004048537212014189,
+   "F_blocker": 0.013102213541666666,
+   "F_blocker_bound": 0.001776758697800238,
+   "F_space": 0.7744683159722222,
+   "F_space_bound": 0.006530187255181692,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "F_hot_exact_unoccluded": 0.21205010194483312,
+   "F_root_band_exact_unoccluded": 0.07205223750120426,
+   "exact_refinement_delta": 8.509302242745709e-05,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -100803.235319936,
+     "q_low_W_m2": -103898.37783830926,
+     "q_high_W_m2": -97708.09280156271,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 11536710.511446051
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1620.7198690419532,
+     "q_low_W_m2": 1607.0542302872527,
+     "q_high_W_m2": 1634.3855077966537,
+     "cls": "USABLE",
+     "capacity_W": 185487.85552310426,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "CASING_5_8",
+   "loop": "warm",
+   "surface": "CASING",
+   "area_m2": 114.44781980290686,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.2119140625,
+   "F_hot_bound": 0.006385379353336966,
+   "F_root_band": 0.07215711805555555,
+   "F_root_band_bound": 0.004042935714523009,
+   "F_blocker": 0.022922092013888888,
+   "F_blocker_bound": 0.0023383620210111916,
+   "F_space": 0.7651638454861112,
+   "F_space_bound": 0.0066233808282072475,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "F_hot_exact_unoccluded": 0.21144956606015167,
+   "F_root_band_exact_unoccluded": 0.0720418046724006,
+   "exact_refinement_delta": 8.370372945629145e-05,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -100574.2000700713,
+     "q_low_W_m2": -103666.80403272915,
+     "q_high_W_m2": -97481.59610741345,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 11510497.926441023
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1601.248523504952,
+     "q_low_W_m2": 1587.3878597603914,
+     "q_high_W_m2": 1615.1091872495124,
+     "cls": "USABLE",
+     "capacity_W": 183259.4024777654,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "CASING_5_9",
+   "loop": "warm",
+   "surface": "CASING",
+   "area_m2": 114.44781980290686,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.208984375,
+   "F_hot_bound": 0.006352862643797815,
+   "F_root_band": 0.07196723090277778,
+   "F_root_band_bound": 0.004038025694387808,
+   "F_blocker": 0.059624565972222224,
+   "F_blocker_bound": 0.0036998428593388094,
+   "F_space": 0.7313910590277778,
+   "F_space_bound": 0.0069255629601457135,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "F_hot_exact_unoccluded": 0.20883828634706292,
+   "F_root_band_exact_unoccluded": 0.07197324852442256,
+   "exact_refinement_delta": 6.922697185010596e-05,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -99232.31213983006,
+     "q_low_W_m2": -102309.87037740496,
+     "q_high_W_m2": -96154.75390225516,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 11356921.778405078
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1530.572648305049,
+     "q_low_W_m2": 1516.0796119053368,
+     "q_high_W_m2": 1545.065684704761,
+     "cls": "USABLE",
+     "capacity_W": 175170.70264847417,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "CASING_5_10",
+   "loop": "warm",
+   "surface": "CASING",
+   "area_m2": 114.44781980290686,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.1821560329861111,
+   "F_hot_bound": 0.006030829256553176,
+   "F_root_band": 0.0671657986111111,
+   "F_root_band_bound": 0.003911076833690932,
+   "F_blocker": 0.23597547743055555,
+   "F_blocker_bound": 0.006634483400440235,
+   "F_space": 0.5818684895833334,
+   "F_space_bound": 0.007707062736145511,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "F_hot_exact_unoccluded": 0.18229422103293813,
+   "F_root_band_exact_unoccluded": 0.06725379033548236,
+   "exact_refinement_delta": 0.000644690956384919,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -86609.79383954962,
+     "q_low_W_m2": -89533.71746766187,
+     "q_high_W_m2": -83685.87021143734,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 9912302.078515688
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1217.668693203149,
+     "q_low_W_m2": 1201.5402222885662,
+     "q_high_W_m2": 1233.7971641177317,
+     "cls": "USABLE",
+     "capacity_W": 139359.52717935506,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "CASING_6_1",
+   "loop": "warm",
+   "surface": "CASING",
+   "area_m2": 114.44781980290686,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.29736328125,
+   "F_hot_bound": 0.007142152466111185,
+   "F_root_band": 0.223876953125,
+   "F_root_band_bound": 0.006513133947230552,
+   "F_blocker": 0.001193576388888889,
+   "F_blocker_bound": 0.0005394929812604525,
+   "F_space": 0.7014431423611112,
+   "F_space_bound": 0.007150390962521863,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "F_hot_exact_unoccluded": 0.29719078921243236,
+   "F_root_band_exact_unoccluded": 0.22331040778520841,
+   "exact_refinement_delta": 0.007252719020793663,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -141907.32522342572,
+     "q_low_W_m2": -145365.9140785462,
+     "q_high_W_m2": -138448.7363683052,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 16240983.985883128
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1467.901028850677,
+     "q_low_W_m2": 1452.937497786363,
+     "q_high_W_m2": 1482.864559914991,
+     "cls": "USABLE",
+     "capacity_W": 167998.07243840388,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "CASING_6_2",
+   "loop": "warm",
+   "surface": "CASING",
+   "area_m2": 114.44781980290686,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.3152669270833333,
+   "F_hot_bound": 0.007259720244608057,
+   "F_root_band": 0.22913953993055555,
+   "F_root_band_bound": 0.006566862597002645,
+   "F_blocker": 0.0015462239583333333,
+   "F_blocker_bound": 0.0006139319099777022,
+   "F_space": 0.6831868489583334,
+   "F_space_bound": 0.007269279631404337,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "F_hot_exact_unoccluded": 0.3146329439049117,
+   "F_root_band_exact_unoccluded": 0.22898675276921054,
+   "exact_refinement_delta": 0.005168891773550621,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -150577.86430005828,
+     "q_low_W_m2": -154093.38785740378,
+     "q_high_W_m2": -147062.3407427128,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 17233308.279719632
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1429.696318802858,
+     "q_low_W_m2": 1414.4839909525583,
+     "q_high_W_m2": 1444.9086466531578,
+     "cls": "USABLE",
+     "capacity_W": 163625.6266672288,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "CASING_6_3",
+   "loop": "warm",
+   "surface": "CASING",
+   "area_m2": 114.44781980290686,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.3152940538194444,
+   "F_hot_bound": 0.007259888754513834,
+   "F_root_band": 0.228759765625,
+   "F_root_band_bound": 0.006563034488207951,
+   "F_blocker": 0.0020616319444444445,
+   "F_blocker_bound": 0.0007087245121509184,
+   "F_space": 0.6826443142361112,
+   "F_space_bound": 0.007272611803247009,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "F_hot_exact_unoccluded": 0.31579665522244166,
+   "F_root_band_exact_unoccluded": 0.2290300659684498,
+   "exact_refinement_delta": 0.005161804790069391,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -150592.078949978,
+     "q_low_W_m2": -154107.6907284291,
+     "q_high_W_m2": -147076.46717152686,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 17234935.115412205
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1428.56096337796,
+     "q_low_W_m2": 1413.341662334566,
+     "q_high_W_m2": 1443.7802644213536,
+     "cls": "USABLE",
+     "capacity_W": 163495.6877141478,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "CASING_6_4",
+   "loop": "warm",
+   "surface": "CASING",
+   "area_m2": 114.44781980290686,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.3159993489583333,
+   "F_hot_bound": 0.007264259959408927,
+   "F_root_band": 0.22984483506944445,
+   "F_root_band_bound": 0.006573951817243977,
+   "F_blocker": 0.002875434027777778,
+   "F_blocker_bound": 0.0008366550522745338,
+   "F_space": 0.6811252170138888,
+   "F_space_bound": 0.00728188127228736,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "F_hot_exact_unoccluded": 0.3160551715432226,
+   "F_root_band_exact_unoccluded": 0.22903652347854242,
+   "exact_refinement_delta": 0.005161176288330072,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -150935.31960203318,
+     "q_low_W_m2": -154453.05837736966,
+     "q_high_W_m2": -147417.58082669668,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 17274218.25970765
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1425.3819681882453,
+     "q_low_W_m2": 1410.1432690463892,
+     "q_high_W_m2": 1440.6206673301012,
+     "cls": "USABLE",
+     "capacity_W": 163131.85864552102,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "CASING_6_5",
+   "loop": "warm",
+   "surface": "CASING",
+   "area_m2": 114.44781980290686,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.3155110677083333,
+   "F_hot_bound": 0.007261235802288461,
+   "F_root_band": 0.22984483506944445,
+   "F_root_band_bound": 0.006573951817243977,
+   "F_blocker": 0.004150390625,
+   "F_blocker_bound": 0.001004526484310216,
+   "F_space": 0.6803385416666666,
+   "F_space_bound": 0.007286646511273809,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "F_hot_exact_unoccluded": 0.3161269183573825,
+   "F_root_band_exact_unoccluded": 0.22903810124993526,
+   "exact_refinement_delta": 0.005161090813332991,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -150701.53856649244,
+     "q_low_W_m2": -154217.82920116722,
+     "q_high_W_m2": -147185.2479318176,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 17247462.529878747
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1423.7357028221431,
+     "q_low_W_m2": 1408.4870315260403,
+     "q_high_W_m2": 1438.984374118246,
+     "cls": "USABLE",
+     "capacity_W": 162943.4471635536,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "CASING_6_6",
+   "loop": "warm",
+   "surface": "CASING",
+   "area_m2": 114.44781980290686,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.3160807291666667,
+   "F_hot_bound": 0.007264763084227511,
+   "F_root_band": 0.22840711805555555,
+   "F_root_band_bound": 0.00655947300868282,
+   "F_blocker": 0.006591796875,
+   "F_blocker_bound": 0.0012644038368868024,
+   "F_space": 0.6773274739583334,
+   "F_space_bound": 0.007304666059118877,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "F_hot_exact_unoccluded": 0.3161269183573825,
+   "F_root_band_exact_unoccluded": 0.22903810124993523,
+   "exact_refinement_delta": 0.005161090813332936,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -150982.50497349194,
+     "q_low_W_m2": -154500.5340144617,
+     "q_high_W_m2": -147464.4759325222,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 17279618.522597697
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1417.4344802139592,
+     "q_low_W_m2": 1402.1480996421878,
+     "q_high_W_m2": 1432.7208607857306,
+     "cls": "USABLE",
+     "capacity_W": 162222.28597395416,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "CASING_6_7",
+   "loop": "warm",
+   "surface": "CASING",
+   "area_m2": 114.44781980290686,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.3156195746527778,
+   "F_hot_bound": 0.007261908638735291,
+   "F_root_band": 0.2290310329861111,
+   "F_root_band_bound": 0.00656576962662405,
+   "F_blocker": 0.011474609375,
+   "F_blocker_bound": 0.0016641133145624118,
+   "F_space": 0.6729058159722222,
+   "F_space_bound": 0.00733049966193958,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "F_hot_exact_unoccluded": 0.31605517154322266,
+   "F_root_band_exact_unoccluded": 0.22903652347854242,
+   "exact_refinement_delta": 0.005161176288330127,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -150769.41011379287,
+     "q_low_W_m2": -154286.11693092374,
+     "q_high_W_m2": -147252.70329666196,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 17255230.28049393
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1408.18133350104,
+     "q_low_W_m2": 1392.8408912814039,
+     "q_high_W_m2": 1423.521775720676,
+     "cls": "USABLE",
+     "capacity_W": 161163.2835063441,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "CASING_6_8",
+   "loop": "warm",
+   "surface": "CASING",
+   "area_m2": 114.44781980290686,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.3151584201388889,
+   "F_hot_bound": 0.007259045918378601,
+   "F_root_band": 0.22884114583333334,
+   "F_root_band_bound": 0.0065638554367896725,
+   "F_blocker": 0.020073784722222224,
+   "F_blocker_bound": 0.0021914488848987666,
+   "F_space": 0.6647677951388888,
+   "F_space_bound": 0.0073761183885365025,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "F_hot_exact_unoccluded": 0.3157966552224416,
+   "F_root_band_exact_unoccluded": 0.22903006596844985,
+   "exact_refinement_delta": 0.005161804790069335,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -150564.09243875428,
+     "q_low_W_m2": -154079.51444635176,
+     "q_high_W_m2": -147048.67043115676,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 17231732.12021876
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1391.1510021275692,
+     "q_low_W_m2": 1375.7150941863908,
+     "q_high_W_m2": 1406.5869100687478,
+     "cls": "USABLE",
+     "capacity_W": 159214.19921012933,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "CASING_6_9",
+   "loop": "warm",
+   "surface": "CASING",
+   "area_m2": 114.44781980290686,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.3153483072916667,
+   "F_hot_bound": 0.007260225688357459,
+   "F_root_band": 0.228515625,
+   "F_root_band_bound": 0.00656056954736815,
+   "F_blocker": 0.05078125,
+   "F_blocker_bound": 0.003430479857518651,
+   "F_space": 0.6338704427083334,
+   "F_space_bound": 0.007527273077462002,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "F_hot_exact_unoccluded": 0.3146329439049117,
+   "F_root_band_exact_unoccluded": 0.22898675276921054,
+   "exact_refinement_delta": 0.005168891773550677,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -150720.305991666,
+     "q_low_W_m2": -154236.61315086065,
+     "q_high_W_m2": -147203.99883247144,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 17249610.420773175
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1326.492510679626,
+     "q_low_W_m2": 1310.7402832679306,
+     "q_high_W_m2": 1342.2447380913216,
+     "cls": "USABLE",
+     "capacity_W": 151814.17583216736,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "CASING_6_10",
+   "loop": "warm",
+   "surface": "CASING",
+   "area_m2": 114.44781980290686,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.2970106336805556,
+   "F_hot_bound": 0.007139707222905993,
+   "F_root_band": 0.22420247395833334,
+   "F_root_band_bound": 0.006516500327693098,
+   "F_blocker": 0.19932725694444445,
+   "F_blocker_bound": 0.0062421024631146085,
+   "F_space": 0.503662109375,
+   "F_space_bound": 0.007812290449610383,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "F_hot_exact_unoccluded": 0.29719078921243236,
+   "F_root_band_exact_unoccluded": 0.2233104077852084,
+   "exact_refinement_delta": 0.007252719020793663,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -142151.18821513953,
+     "q_low_W_m2": -145609.98323227876,
+     "q_high_W_m2": -138692.39319800035,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 16268893.573615387
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1054.0072087040962,
+     "q_low_W_m2": 1037.6585291089655,
+     "q_high_W_m2": 1070.3558882992268,
+     "cls": "USABLE",
+     "capacity_W": 120628.82709273126,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "COLLAR_1",
+   "loop": "warm",
+   "surface": "COLLAR",
+   "area_m2": 85.42947971869653,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.003607855902777778,
+   "F_hot_bound": 0.0009368277900675315,
+   "F_root_band": 0.00016276041666666666,
+   "F_root_band_bound": 0.00019932376258836063,
+   "F_blocker": 0.6213107638888888,
+   "F_blocker_bound": 0.007579070472023337,
+   "F_space": 0.3750813802083333,
+   "F_space_bound": 0.0075647488009336315,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "F_hot_exact_unoccluded": 0.003744585426768943,
+   "F_root_band_exact_unoccluded": 0.00014293914980626,
+   "exact_refinement_delta": 1.179154724881672e-05,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -954.6181948085217,
+     "q_low_W_m2": -1422.145155469725,
+     "q_high_W_m2": -487.0912341473187,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 81552.53571249329
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 784.9279730032605,
+     "q_low_W_m2": 769.0973206277744,
+     "q_high_W_m2": 800.7586253787466,
+     "cls": "USABLE",
+     "capacity_W": 67055.98835031962,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "COLLAR_2",
+   "loop": "warm",
+   "surface": "COLLAR",
+   "area_m2": 85.42947971869653,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.007297092013888889,
+   "F_hot_bound": 0.0013298558998488244,
+   "F_root_band": 0.00021701388888888888,
+   "F_root_band_bound": 0.00023015301140209035,
+   "F_blocker": 0.6217990451388888,
+   "F_blocker_bound": 0.007577158324350827,
+   "F_space": 0.3709038628472222,
+   "F_space_bound": 0.0075476058680169315,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "F_hot_exact_unoccluded": 0.00811329267489373,
+   "F_root_band_exact_unoccluded": 0.00019437155454446342,
+   "exact_refinement_delta": 2.0963909907642866e-05,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -2742.1444828764957,
+     "q_low_W_m2": -3399.1360811346503,
+     "q_high_W_m2": -2085.15288461834,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 234259.97648563317
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 776.1857362315455,
+     "q_low_W_m2": 760.390958650959,
+     "q_high_W_m2": 791.9805138121321,
+     "cls": "USABLE",
+     "capacity_W": 66309.14361133435,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "COLLAR_3",
+   "loop": "warm",
+   "surface": "COLLAR",
+   "area_m2": 85.42947971869653,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.007405598958333333,
+   "F_hot_bound": 0.0013396335988983261,
+   "F_root_band": 0.0,
+   "F_root_band_bound": 0.0,
+   "F_blocker": 0.621826171875,
+   "F_blocker_bound": 0.007577051854529004,
+   "F_space": 0.3707682291666667,
+   "F_space_bound": 0.007547039164351933,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "F_hot_exact_unoccluded": 0.007789390646746637,
+   "F_root_band_exact_unoccluded": 1.8890576042874995e-05,
+   "exact_refinement_delta": 2.557726049044924e-05,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -2794.7454997120212,
+     "q_low_W_m2": -3456.4502796195466,
+     "q_high_W_m2": -2133.040719804495,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 238753.6539865665
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 775.9018973753211,
+     "q_low_W_m2": 760.1083057281946,
+     "q_high_W_m2": 791.6954890224476,
+     "cls": "USABLE",
+     "capacity_W": 66284.89540552314,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "COLLAR_4",
+   "loop": "warm",
+   "surface": "COLLAR",
+   "area_m2": 85.42947971869653,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.006971571180555556,
+   "F_hot_bound": 0.001300068392866457,
+   "F_root_band": 2.712673611111111e-05,
+   "F_root_band_bound": 8.137910453612961e-05,
+   "F_blocker": 0.622802734375,
+   "F_blocker_bound": 0.007573202145062954,
+   "F_space": 0.3702256944444444,
+   "F_space_bound": 0.0075447659711205,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "F_hot_exact_unoccluded": 0.007789390646746638,
+   "F_root_band_exact_unoccluded": 1.8890576042877756e-05,
+   "exact_refinement_delta": 2.557726049044664e-05,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -2586.612143219713,
+     "q_low_W_m2": -3229.2355996892657,
+     "q_high_W_m2": -1943.9886867501596,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 220972.9296293226
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 774.766541950423,
+     "q_low_W_m2": 758.9777073854914,
+     "q_high_W_m2": 790.5553765153546,
+     "cls": "USABLE",
+     "capacity_W": 66187.9025822783,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "COLLAR_5",
+   "loop": "warm",
+   "surface": "COLLAR",
+   "area_m2": 85.42947971869653,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.007595486111111111,
+   "F_hot_bound": 0.0013565699059136693,
+   "F_root_band": 0.00021701388888888888,
+   "F_root_band_bound": 0.00023015301140209035,
+   "F_blocker": 0.6215549045138888,
+   "F_blocker_bound": 0.007578115418625053,
+   "F_space": 0.370849609375,
+   "F_space_bound": 0.0075473792630673196,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "F_hot_exact_unoccluded": 0.00811329267489372,
+   "F_root_band_exact_unoccluded": 0.0001943715545444643,
+   "exact_refinement_delta": 2.0963909907653275e-05,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -2886.1302578620644,
+     "q_low_W_m2": -3556.0016764999973,
+     "q_high_W_m2": -2216.258839224132,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 246560.6063295436
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 776.0722006890558,
+     "q_low_W_m2": 760.2778973217285,
+     "q_high_W_m2": 791.8665040563832,
+     "cls": "USABLE",
+     "capacity_W": 66299.44432900987,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "COLLAR_6",
+   "loop": "warm",
+   "surface": "COLLAR",
+   "area_m2": 85.42947971869653,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.003662109375,
+   "F_hot_bound": 0.0009438196282682814,
+   "F_root_band": 0.00021701388888888888,
+   "F_root_band_bound": 0.00023015301140209035,
+   "F_blocker": 0.6223687065972222,
+   "F_blocker_bound": 0.007574917163289252,
+   "F_space": 0.3739691840277778,
+   "F_space_bound": 0.007560243617180412,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "F_hot_exact_unoccluded": 0.0037445854267689504,
+   "F_root_band_exact_unoccluded": 0.00014293914980626092,
+   "exact_refinement_delta": 1.1791547248817154e-05,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -983.1042624192133,
+     "q_low_W_m2": -1453.9929456729742,
+     "q_high_W_m2": -512.215579165453,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 83986.08564770629
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 782.6004943822196,
+     "q_low_W_m2": 766.7792699467432,
+     "q_high_W_m2": 798.4217188176959,
+     "cls": "USABLE",
+     "capacity_W": 66857.15306266771,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "RING_1_OUTER_RIM",
+   "loop": "cold",
+   "surface": "RING_OUTER_RIM",
+   "area_m2": 753.9822368615503,
+   "T_K": 320.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.009711371527777778,
+   "F_hot_bound": 0.0015322908444990323,
+   "F_root_band": 0.0,
+   "F_root_band_bound": 0.0,
+   "F_blocker": 0.0686306423611111,
+   "F_blocker_bound": 0.003950390521952323,
+   "F_space": 0.9216579861111112,
+   "F_space_bound": 0.004198578592156184,
+   "rays": 36864,
+   "break_even_F": 0.0011098579146132871,
+   "F_hot_exact_unoccluded": 0.009647781081339702,
+   "F_root_band_exact_unoccluded": 0.0,
+   "exact_refinement_delta": 0.0008342088406207079,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -4189.186427522048,
+     "q_low_W_m2": -4930.23505043637,
+     "q_high_W_m2": -3448.137804607725,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 3158572.1532531204,
+     "q_if_blockers_at_warm_W_m2": -4318.44664264669
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 493.2010016254566,
+     "q_low_W_m2": 490.95424285131304,
+     "q_high_W_m2": 495.4477603996002,
+     "cls": "USABLE",
+     "capacity_W": 371864.7944279189,
+     "absorbed_W": 0.0,
+     "q_if_blockers_at_warm_W_m2": 363.9407865008147
+    }
+   }
+  },
+  {
+   "name": "RING_1_INNER_RIM",
+   "loop": "cold",
+   "surface": "RING_INNER_RIM",
+   "area_m2": 615.7521601035994,
+   "T_K": 320.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.2544759114583333,
+   "F_hot_bound": 0.006805722007072055,
+   "F_root_band": 0.04787868923611111,
+   "F_root_band_bound": 0.003336086441096297,
+   "F_blocker": 0.5808376736111112,
+   "F_blocker_bound": 0.007709718756984759,
+   "F_space": 0.16468641493055555,
+   "F_space_bound": 0.005795270154955259,
+   "rays": 36864,
+   "break_even_F": 0.0011098579146132871,
+   "F_hot_exact_unoccluded": 0.2932571331996892,
+   "F_root_band_exact_unoccluded": 0.059194970176803405,
+   "exact_refinement_delta": 0.005736366597849485,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -122608.7340576271,
+     "q_low_W_m2": -125893.2489021575,
+     "q_high_W_m2": -119324.21921309673,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 75496592.84355164,
+     "q_if_blockers_at_warm_W_m2": -123702.69442373335
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 88.12759833023743,
+     "q_low_W_m2": 85.02641211128628,
+     "q_high_W_m2": 91.22878454918859,
+     "cls": "USABLE",
+     "capacity_W": 54264.75903658606,
+     "absorbed_W": 0.0,
+     "q_if_blockers_at_warm_W_m2": -1005.8327677760209
+    }
+   }
+  },
+  {
+   "name": "RING_1_AFT_FACE",
+   "loop": "cold",
+   "surface": "RING_AFT_FACE",
+   "area_m2": 941.6923979135405,
+   "T_K": 320.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.3799099392361111,
+   "F_hot_bound": 0.0075838151528044,
+   "F_root_band": 0.03721788194444445,
+   "F_root_band_bound": 0.0029577390875073824,
+   "F_blocker": 0.055745442708333336,
+   "F_blocker_bound": 0.0035848356942109064,
+   "F_space": 0.5643446180555556,
+   "F_space_bound": 0.0077475388312180545,
+   "rays": 36864,
+   "break_even_F": 0.0011098579146132871,
+   "F_hot_exact_unoccluded": 0.41023619543883444,
+   "F_root_band_exact_unoccluded": 0.043488632129306135,
+   "exact_refinement_delta": 0.0024904309039707195,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -182873.52523833318,
+     "q_low_W_m2": -186534.2463760645,
+     "q_high_W_m2": -179212.80410060185,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 172210608.49658835,
+     "q_if_blockers_at_warm_W_m2": -182978.51723125062
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 301.9941616969626,
+     "q_low_W_m2": 297.84827030420007,
+     "q_high_W_m2": 306.14005308972503,
+     "cls": "USABLE",
+     "capacity_W": 284385.6062843022,
+     "absorbed_W": 0.0,
+     "q_if_blockers_at_warm_W_m2": 197.00216877951624
+    }
+   }
+  },
+  {
+   "name": "RING_1_FORE_FACE",
+   "loop": "cold",
+   "surface": "RING_FORE_FACE",
+   "area_m2": 941.6923979135405,
+   "T_K": 320.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.0,
+   "F_hot_bound": 0.0,
+   "F_root_band": 0.0,
+   "F_root_band_bound": 0.0,
+   "F_blocker": 0.8550618489583334,
+   "F_blocker_bound": 0.005500601072763941,
+   "F_space": 0.14493815104166666,
+   "F_space_bound": 0.0055006010727639415,
+   "rays": 36864,
+   "break_even_F": 0.0011098579146132871,
+   "F_hot_exact_unoccluded": 0.0,
+   "F_root_band_exact_unoccluded": 0.0,
+   "exact_refinement_delta": 0.0,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": 77.55983493303552,
+     "q_low_W_m2": 74.61633311401891,
+     "q_high_W_m2": 80.5033367520521,
+     "cls": "USABLE",
+     "capacity_W": 73037.5069398686,
+     "absorbed_W": 0.0,
+     "q_if_blockers_at_warm_W_m2": -1532.8793907364661
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 77.55983493303552,
+     "q_low_W_m2": 74.61633311401891,
+     "q_high_W_m2": 80.5033367520521,
+     "cls": "USABLE",
+     "capacity_W": 73037.5069398686,
+     "absorbed_W": 0.0,
+     "q_if_blockers_at_warm_W_m2": -1532.8793907364661
+    }
+   }
+  },
+  {
+   "name": "RING_2_OUTER_RIM",
+   "loop": "cold",
+   "surface": "RING_OUTER_RIM",
+   "area_m2": 753.9822368615503,
+   "T_K": 320.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.0032823350694444445,
+   "F_hot_bound": 0.0008937119400135253,
+   "F_root_band": 0.0,
+   "F_root_band_bound": 0.0,
+   "F_blocker": 0.12152777777777778,
+   "F_blocker_bound": 0.005105306508185641,
+   "F_space": 0.8751898871527778,
+   "F_space_bound": 0.005164116834488311,
+   "rays": 36864,
+   "break_even_F": 0.0011098579146132871,
+   "F_hot_exact_unoccluded": 0.0031835301674474304,
+   "F_root_band_exact_unoccluded": 0.0,
+   "exact_refinement_delta": 0.0007533009810289687,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -1114.2598117805728,
+     "q_low_W_m2": -1547.9310336828385,
+     "q_high_W_m2": -680.5885898783065,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 840132.1053312463,
+     "q_if_blockers_at_warm_W_m2": -1343.1474654400179
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 468.3348220933043,
+     "q_low_W_m2": 465.5713809538994,
+     "q_high_W_m2": 471.09826323270926,
+     "cls": "USABLE",
+     "capacity_W": 353116.13676206575,
+     "absorbed_W": 0.0,
+     "q_if_blockers_at_warm_W_m2": 239.44716843385925
+    }
+   }
+  },
+  {
+   "name": "RING_2_INNER_RIM",
+   "loop": "cold",
+   "surface": "RING_INNER_RIM",
+   "area_m2": 615.7521601035994,
+   "T_K": 320.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.15584309895833334,
+   "F_hot_bound": 0.005667289543328367,
+   "F_root_band": 0.030110677083333332,
+   "F_root_band_bound": 0.002670185147677969,
+   "F_blocker": 0.6363389756944444,
+   "F_blocker_bound": 0.007516448170008832,
+   "F_space": 0.2078179253472222,
+   "F_space_bound": 0.00633977775981519,
+   "rays": 36864,
+   "break_even_F": 0.0011098579146132871,
+   "F_hot_exact_unoccluded": 0.18115201705088668,
+   "F_root_band_exact_unoccluded": 0.03822523444111457,
+   "exact_refinement_delta": 0.0019314829643703735,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -75029.33858240675,
+     "q_low_W_m2": -77765.24377348996,
+     "q_high_W_m2": -72293.43339132358,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 46199477.30326129,
+     "q_if_blockers_at_warm_W_m2": -76227.83112248337
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 111.20829036533503,
+     "q_low_W_m2": 107.81572523993862,
+     "q_high_W_m2": 114.60085549073145,
+     "cls": "USABLE",
+     "capacity_W": 68476.74501388335,
+     "absorbed_W": 0.0,
+     "q_if_blockers_at_warm_W_m2": -1087.284249711286
+    }
+   }
+  },
+  {
+   "name": "RING_2_AFT_FACE",
+   "loop": "cold",
+   "surface": "RING_AFT_FACE",
+   "area_m2": 941.6923979135405,
+   "T_K": 320.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.06336805555555555,
+   "F_hot_bound": 0.003806621527519552,
+   "F_root_band": 0.012613932291666666,
+   "F_root_band_bound": 0.0017437682713402009,
+   "F_blocker": 0.7449001736111112,
+   "F_blocker_bound": 0.006811208036989926,
+   "F_space": 0.19173177083333334,
+   "F_space_bound": 0.006150987179536638,
+   "rays": 36864,
+   "break_even_F": 0.0011098579146132871,
+   "F_hot_exact_unoccluded": 0.32227002758720463,
+   "F_root_band_exact_unoccluded": 0.03972447827442788,
+   "exact_refinement_delta": 0.011794688325336589,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -30450.63173154486,
+     "q_low_W_m2": -32289.305300284603,
+     "q_high_W_m2": -28611.958162805124,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 28675128.413260628,
+     "q_if_blockers_at_warm_W_m2": -31853.59043009137
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 102.60020836733952,
+     "q_low_W_m2": 99.30866954963423,
+     "q_high_W_m2": 105.89174718504482,
+     "cls": "USABLE",
+     "capacity_W": 96617.83624386885,
+     "absorbed_W": 0.0,
+     "q_if_blockers_at_warm_W_m2": -1300.3584901791698
+    }
+   }
+  },
+  {
+   "name": "RING_2_FORE_FACE",
+   "loop": "cold",
+   "surface": "RING_FORE_FACE",
+   "area_m2": 941.6923979135405,
+   "T_K": 320.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.0,
+   "F_hot_bound": 0.0,
+   "F_root_band": 0.0,
+   "F_root_band_bound": 0.0,
+   "F_blocker": 0.8475748697916666,
+   "F_blocker_bound": 0.005616132548043524,
+   "F_space": 0.15242513020833334,
+   "F_space_bound": 0.005616132548043524,
+   "rays": 36864,
+   "break_even_F": 0.0011098579146132871,
+   "F_hot_exact_unoccluded": 0.0,
+   "F_root_band_exact_unoccluded": 0.0,
+   "exact_refinement_delta": 0.0,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": 81.56629468252416,
+     "q_low_W_m2": 78.56096923675466,
+     "q_high_W_m2": 84.57162012829366,
+     "cls": "USABLE",
+     "capacity_W": 76810.35962850864,
+     "absorbed_W": 0.0,
+     "q_if_blockers_at_warm_W_m2": -1514.7718166097438
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 81.56629468252416,
+     "q_low_W_m2": 78.56096923675466,
+     "q_high_W_m2": 84.57162012829366,
+     "cls": "USABLE",
+     "capacity_W": 76810.35962850864,
+     "absorbed_W": 0.0,
+     "q_if_blockers_at_warm_W_m2": -1514.7718166097438
+    }
+   }
+  },
+  {
+   "name": "PANEL_BLADE_PLANE_1_+",
+   "loop": "warm",
+   "surface": "PANEL_BLADE_PLANE",
+   "area_m2": 124.330775273224,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.017740885416666668,
+   "F_hot_bound": 0.002062627032149712,
+   "F_root_band": 0.001193576388888889,
+   "F_root_band_bound": 0.0005394929812604525,
+   "F_blocker": 0.2788899739583333,
+   "F_blocker_bound": 0.007007082709767792,
+   "F_space": 0.703369140625,
+   "F_space_bound": 0.00713706818967731,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "dock_corridor_conflict": false,
+   "F_hot_exact_unoccluded": 0.030897351289976237,
+   "F_root_band_exact_unoccluded": 0.003129569368196484,
+   "exact_refinement_delta": 2.6820803844494756e-06,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -7081.927059006766,
+     "q_low_W_m2": -8091.368877906928,
+     "q_high_W_m2": -6072.4852401066055,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 880501.4816747345
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1471.931540609065,
+     "q_low_W_m2": 1456.9958899398746,
+     "q_high_W_m2": 1486.8671912782554,
+     "cls": "USABLE",
+     "capacity_W": 183006.38959303606,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "PANEL_BLADE_PLANE_1_-",
+   "loop": "warm",
+   "surface": "PANEL_BLADE_PLANE",
+   "area_m2": 124.330775273224,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.017903645833333332,
+   "F_hot_bound": 0.00207189534416906,
+   "F_root_band": 0.001220703125,
+   "F_root_band_bound": 0.0005455817317288436,
+   "F_blocker": 0.2782931857638889,
+   "F_blocker_bound": 0.007002477388781009,
+   "F_space": 0.7038031684027778,
+   "F_space_bound": 0.007134044912510575,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "dock_corridor_conflict": false,
+   "F_hot_exact_unoccluded": 0.030897351289976185,
+   "F_root_band_exact_unoccluded": 0.0031295693681964716,
+   "exact_refinement_delta": 2.6820803844494756e-06,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -7159.4945416358005,
+     "q_low_W_m2": -8173.3987977849,
+     "q_high_W_m2": -6145.5902854867,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 890145.5069259946
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1472.8398249489835,
+     "q_low_W_m2": 1457.9105010529777,
+     "q_high_W_m2": 1487.7691488449893,
+     "cls": "USABLE",
+     "capacity_W": 183119.31728918664,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "PANEL_BLADE_PLANE_2_+",
+   "loop": "warm",
+   "surface": "PANEL_BLADE_PLANE",
+   "area_m2": 124.330775273224,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.002197265625,
+   "F_hot_bound": 0.0007316167697948277,
+   "F_root_band": 2.712673611111111e-05,
+   "F_root_band_bound": 8.137910453612961e-05,
+   "F_blocker": 0.3774142795138889,
+   "F_blocker_bound": 0.007574060461743732,
+   "F_space": 0.6203884548611112,
+   "F_space_bound": 0.0075826600466360194,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "dock_corridor_conflict": false,
+   "F_hot_exact_unoccluded": 0.025606111076796594,
+   "F_root_band_exact_unoccluded": 0.002461120836086561,
+   "exact_refinement_delta": 1.8812762411883621e-06,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": 238.85607429004995,
+     "q_low_W_m2": -129.76482648831393,
+     "q_high_W_m2": 607.4769750684138,
+     "cls": "MARGINAL",
+     "capacity_W": 29697.160895200697,
+     "absorbed_W": 0.0
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1298.2789283709099,
+     "q_low_W_m2": 1282.410793362254,
+     "q_high_W_m2": 1314.1470633795657,
+     "cls": "USABLE",
+     "capacity_W": 161416.02568524567,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "PANEL_BLADE_PLANE_2_-",
+   "loop": "warm",
+   "surface": "PANEL_BLADE_PLANE",
+   "area_m2": 124.330775273224,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.0025227864583333335,
+   "F_hot_bound": 0.0007838117385626097,
+   "F_root_band": 0.00016276041666666666,
+   "F_root_band_bound": 0.00019932376258836063,
+   "F_blocker": 0.3778483072916667,
+   "F_blocker_bound": 0.0075757722502474536,
+   "F_space": 0.61962890625,
+   "F_space_bound": 0.007585594334240998,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "dock_corridor_conflict": false,
+   "F_hot_exact_unoccluded": 0.025606111076796532,
+   "F_root_band_exact_unoccluded": 0.0024611208360865123,
+   "exact_refinement_delta": 1.8812762412161177e-06,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": 80.31504275728753,
+     "q_low_W_m2": -313.4780695924446,
+     "q_high_W_m2": 474.10815510701946,
+     "cls": "MARGINAL",
+     "capacity_W": 9985.631532115693,
+     "absorbed_W": 0.0
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1296.6894307760524,
+     "q_low_W_m2": 1280.8151552215218,
+     "q_high_W_m2": 1312.5637063305833,
+     "cls": "USABLE",
+     "capacity_W": 161218.40221698213,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "PANEL_BLADE_PLANE_3_+",
+   "loop": "warm",
+   "surface": "PANEL_BLADE_PLANE",
+   "area_m2": 124.330775273224,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.002875434027777778,
+   "F_hot_bound": 0.0008366550522745338,
+   "F_root_band": 0.00013563368055555556,
+   "F_root_band_bound": 0.00018195933669373242,
+   "F_blocker": 0.4149576822916667,
+   "F_blocker_bound": 0.007698667641025387,
+   "F_space": 0.5821668836805556,
+   "F_space_bound": 0.007706287434428322,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "dock_corridor_conflict": false,
+   "F_hot_exact_unoccluded": 0.020819192401110714,
+   "F_root_band_exact_unoccluded": 0.001882426692128179,
+   "exact_refinement_delta": 1.2425516227668187e-06,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -168.11207776465312,
+     "q_low_W_m2": -587.6364368653376,
+     "q_high_W_m2": 251.4122813360317,
+     "cls": "MARGINAL",
+     "capacity_W": 0.0,
+     "absorbed_W": 20901.504961271847
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1218.2931386868427,
+     "q_low_W_m2": 1202.166290236177,
+     "q_high_W_m2": 1234.4199871375085,
+     "cls": "USABLE",
+     "capacity_W": 151471.33044298456,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "PANEL_BLADE_PLANE_3_-",
+   "loop": "warm",
+   "surface": "PANEL_BLADE_PLANE",
+   "area_m2": 124.330775273224,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.0028483072916666665,
+   "F_hot_bound": 0.0008327105409618817,
+   "F_root_band": 0.00010850694444444444,
+   "F_root_band_bound": 0.00016275158610937147,
+   "F_blocker": 0.4164225260416667,
+   "F_blocker_bound": 0.007702583111117838,
+   "F_space": 0.5807291666666666,
+   "F_space_bound": 0.007709996327587483,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "dock_corridor_conflict": false,
+   "F_hot_exact_unoccluded": 0.02081919240111069,
+   "F_root_band_exact_unoccluded": 0.0018824266921281644,
+   "exact_refinement_delta": 1.2425516227494715e-06,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -158.04147514580723,
+     "q_low_W_m2": -575.6717295046806,
+     "q_high_W_m2": 259.588779213066,
+     "cls": "MARGINAL",
+     "capacity_W": 0.0,
+     "absorbed_W": 19649.419130202175
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1215.2844468108628,
+     "q_low_W_m2": 1199.1498368072564,
+     "q_high_W_m2": 1231.419056814469,
+     "cls": "USABLE",
+     "capacity_W": 151097.25744948574,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "PANEL_BLADE_PLANE_4_+",
+   "loop": "warm",
+   "surface": "PANEL_BLADE_PLANE",
+   "area_m2": 124.330775273224,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.009114583333333334,
+   "F_hot_bound": 0.001484910076585508,
+   "F_root_band": 0.00035264756944444444,
+   "F_root_band_bound": 0.00029336877237620207,
+   "F_blocker": 0.5027126736111112,
+   "F_blocker_bound": 0.007812385021058278,
+   "F_space": 0.4881727430555556,
+   "F_space_bound": 0.007810314006564975,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "dock_corridor_conflict": false,
+   "F_hot_exact_unoccluded": 0.016709751825453926,
+   "F_root_band_exact_unoccluded": 0.0014162633221113231,
+   "exact_refinement_delta": 7.87791571806723e-07,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -3373.0501389380875,
+     "q_low_W_m2": -4105.351667124315,
+     "q_high_W_m2": -2640.7486107518607,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 419373.93880962837
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1021.5928113232571,
+     "q_low_W_m2": 1005.2482678050295,
+     "q_high_W_m2": 1037.9373548414849,
+     "cls": "USABLE",
+     "capacity_W": 127015.42624537302,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "PANEL_BLADE_PLANE_4_-",
+   "loop": "warm",
+   "surface": "PANEL_BLADE_PLANE",
+   "area_m2": 124.330775273224,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.009087456597222222,
+   "F_hot_bound": 0.0014827190376412993,
+   "F_root_band": 0.00043402777777777775,
+   "F_root_band_bound": 0.000325450183124507,
+   "F_blocker": 0.5027669270833334,
+   "F_blocker_bound": 0.007812380375873469,
+   "F_space": 0.4881456163194444,
+   "F_space_bound": 0.0078103039661613985,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "dock_corridor_conflict": false,
+   "F_hot_exact_unoccluded": 0.01670975182545388,
+   "F_root_band_exact_unoccluded": 0.0014162633221112993,
+   "exact_refinement_delta": 7.877915718240702e-07,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -3360.027612214506,
+     "q_low_W_m2": -4091.2726987612054,
+     "q_high_W_m2": -2628.782525667808,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 417754.83796606923
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1021.5360435520122,
+     "q_low_W_m2": 1005.1915210452077,
+     "q_high_W_m2": 1037.8805660588166,
+     "cls": "USABLE",
+     "capacity_W": 127008.3682643636,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "PANEL_BISECTOR_1_+",
+   "loop": "warm",
+   "surface": "PANEL_BISECTOR",
+   "area_m2": 124.330775273224,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.08452690972222222,
+   "F_hot_bound": 0.004346506298813269,
+   "F_root_band": 0.0037706163194444445,
+   "F_root_band_bound": 0.0009576479227509527,
+   "F_blocker": 0.2788899739583333,
+   "F_blocker_bound": 0.007007082709767792,
+   "F_space": 0.6365831163194444,
+   "F_space_bound": 0.0075153659703359275,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "dock_corridor_conflict": false,
+   "F_hot_exact_unoccluded": 0.11986241165139055,
+   "F_root_band_exact_unoccluded": 0.006312221843105723,
+   "exact_refinement_delta": 1.4751271814009148e-05,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -39422.91235807193,
+     "q_low_W_m2": -41534.329900065044,
+     "q_high_W_m2": -37311.494816078804,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 4901481.257007447
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1332.169287804116,
+     "q_low_W_m2": 1316.44197824213,
+     "q_high_W_m2": 1347.8965973661022,
+     "cls": "USABLE",
+     "capacity_W": 165629.64034786442,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "PANEL_BISECTOR_1_-",
+   "loop": "warm",
+   "surface": "PANEL_BISECTOR",
+   "area_m2": 124.330775273224,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.0849609375,
+   "F_hot_bound": 0.004356618096645584,
+   "F_root_band": 0.0038248697916666665,
+   "F_root_band_bound": 0.0009644866068185139,
+   "F_blocker": 0.2787814670138889,
+   "F_blocker_bound": 0.007006246526946912,
+   "F_space": 0.6362575954861112,
+   "F_space_bound": 0.007516808438406102,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "dock_corridor_conflict": false,
+   "F_hot_exact_unoccluded": 0.11986241165139055,
+   "F_root_band_exact_unoccluded": 0.0063122218431057005,
+   "exact_refinement_delta": 1.475127181399527e-05,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -39632.86228324407,
+     "q_low_W_m2": -41749.1582988905,
+     "q_high_W_m2": -37516.56626759763,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 4927584.4939726535
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1331.4880745491776,
+     "q_low_W_m2": 1315.7577463528412,
+     "q_high_W_m2": 1347.2184027455137,
+     "cls": "USABLE",
+     "capacity_W": 165544.94457575152,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "PANEL_BISECTOR_2_+",
+   "loop": "warm",
+   "surface": "PANEL_BISECTOR",
+   "area_m2": 124.330775273224,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.020480685763888888,
+   "F_hot_bound": 0.002213088467520161,
+   "F_root_band": 0.00037977430555555556,
+   "F_root_band_bound": 0.0003044390321156063,
+   "F_blocker": 0.3777669270833333,
+   "F_blocker_bound": 0.007575451781812851,
+   "F_space": 0.6017523871527778,
+   "F_space_bound": 0.007649015263365414,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "dock_corridor_conflict": false,
+   "F_hot_exact_unoccluded": 0.08804109317457348,
+   "F_root_band_exact_unoccluded": 0.0045924513973368926,
+   "exact_refinement_delta": 1.1697635337190593e-05,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -8615.587874067536,
+     "q_low_W_m2": -9698.646788275928,
+     "q_high_W_m2": -7532.528959859146,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 1071182.7198174046
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1259.279469525662,
+     "q_low_W_m2": 1243.2724738096667,
+     "q_high_W_m2": 1275.2864652416572,
+     "cls": "USABLE",
+     "capacity_W": 156567.19273177983,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "PANEL_BISECTOR_2_-",
+   "loop": "warm",
+   "surface": "PANEL_BISECTOR",
+   "area_m2": 124.330775273224,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.020724826388888888,
+   "F_hot_bound": 0.002225962526623364,
+   "F_root_band": 0.0004069010416666667,
+   "F_root_band_bound": 0.0003151200606735559,
+   "F_blocker": 0.3772786458333333,
+   "F_blocker_bound": 0.0075735242031267445,
+   "F_space": 0.6019965277777778,
+   "F_space_bound": 0.007648221369540716,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "dock_corridor_conflict": false,
+   "F_hot_exact_unoccluded": 0.08804109317457348,
+   "F_root_band_exact_unoccluded": 0.004592451397336876,
+   "exact_refinement_delta": 1.1697635337176715e-05,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -8732.790614579764,
+     "q_low_W_m2": -9822.055160828886,
+     "q_high_W_m2": -7643.52606833064,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 1085754.6274094365
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1259.7903794668662,
+     "q_low_W_m2": 1243.7850451222519,
+     "q_high_W_m2": 1275.7957138114805,
+     "cls": "USABLE",
+     "capacity_W": 156630.71456086452,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "PANEL_BISECTOR_3_+",
+   "loop": "warm",
+   "surface": "PANEL_BISECTOR",
+   "area_m2": 124.330775273224,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.008870442708333334,
+   "F_hot_bound": 0.0014650683539883995,
+   "F_root_band": 0.00016276041666666666,
+   "F_root_band_bound": 0.00019932376258836063,
+   "F_blocker": 0.4145779079861111,
+   "F_blocker_bound": 0.007697641084806478,
+   "F_space": 0.5765516493055556,
+   "F_space_bound": 0.00772039211069747,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "dock_corridor_conflict": false,
+   "F_hot_exact_unoccluded": 0.062390302413490535,
+   "F_root_band_exact_unoccluded": 0.0032191692075571863,
+   "exact_refinement_delta": 8.614538527976223e-06,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -3070.3870897687675,
+     "q_low_W_m2": -3792.9336515755954,
+     "q_high_W_m2": -2347.84052796194,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 381743.6072598489
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1206.5422100391481,
+     "q_low_W_m2": 1190.385844914134,
+     "q_high_W_m2": 1222.698575164162,
+     "cls": "USABLE",
+     "capacity_W": 150010.32837403635,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "PANEL_BISECTOR_3_-",
+   "loop": "warm",
+   "surface": "PANEL_BISECTOR",
+   "area_m2": 124.330775273224,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.008517795138888888,
+   "F_hot_bound": 0.0014359062415719064,
+   "F_root_band": 0.0002712673611111111,
+   "F_root_band_bound": 0.0002573119075292182,
+   "F_blocker": 0.4150933159722222,
+   "F_blocker_bound": 0.007699033126684983,
+   "F_space": 0.5763888888888888,
+   "F_space_bound": 0.007720785688897664,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "dock_corridor_conflict": false,
+   "F_hot_exact_unoccluded": 0.06239030241349053,
+   "F_root_band_exact_unoccluded": 0.003219169207557167,
+   "exact_refinement_delta": 8.614538527955407e-06,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -2900.6968679635056,
+     "q_low_W_m2": -3609.1835918205306,
+     "q_high_W_m2": -2192.2101441064806,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 360645.89042651537
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1206.2016034116784,
+     "q_low_W_m2": 1190.0444146506343,
+     "q_high_W_m2": 1222.3587921727226,
+     "cls": "USABLE",
+     "capacity_W": 149967.98048797986,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "PANEL_BISECTOR_4_+",
+   "loop": "warm",
+   "surface": "PANEL_BISECTOR",
+   "area_m2": 124.330775273224,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.008273654513888888,
+   "F_hot_bound": 0.0014153525844119498,
+   "F_root_band": 0.0007595486111111111,
+   "F_root_band_bound": 0.0004304600149461039,
+   "F_blocker": 0.5025499131944444,
+   "F_blocker_bound": 0.007812398404694117,
+   "F_space": 0.4891764322916667,
+   "F_space_bound": 0.007810669322731463,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "dock_corridor_conflict": false,
+   "F_hot_exact_unoccluded": 0.04357620313925672,
+   "F_root_band_exact_unoccluded": 0.002224480673239843,
+   "exact_refinement_delta": 5.929986196133441e-06,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -2965.491602062437,
+     "q_low_W_m2": -3664.2563733669554,
+     "q_high_W_m2": -2266.72683075792,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 368701.8699506579
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1023.6932188593186,
+     "q_low_W_m2": 1007.347931775526,
+     "q_high_W_m2": 1040.038505943111,
+     "cls": "USABLE",
+     "capacity_W": 127276.57154272126,
+     "absorbed_W": 0.0
+    }
+   }
+  },
+  {
+   "name": "PANEL_BISECTOR_4_-",
+   "loop": "warm",
+   "surface": "PANEL_BISECTOR",
+   "area_m2": 124.330775273224,
+   "T_K": 450.0,
+   "emissivity": 0.9,
+   "absorptance": 0.9,
+   "F_hot": 0.009060329861111112,
+   "F_hot_bound": 0.0014805246348224522,
+   "F_root_band": 0.0009494357638888889,
+   "F_root_band_bound": 0.0004812231972089625,
+   "F_blocker": 0.5021430121527778,
+   "F_blocker_bound": 0.007812428241840966,
+   "F_space": 0.4887966579861111,
+   "F_space_bound": 0.007810538583902824,
+   "rays": 36864,
+   "break_even_F": 0.004340277777777777,
+   "dock_corridor_conflict": false,
+   "F_hot_exact_unoccluded": 0.0435762031392567,
+   "F_root_band_exact_unoccluded": 0.0022244806732398246,
+   "exact_refinement_delta": 5.929986196119563e-06,
+   "cases": {
+    "HIGH_POWER": {
+     "q_W_m2": -3345.5858912098042,
+     "q_low_W_m2": -4075.7734262005697,
+     "q_high_W_m2": -2615.3983562190388,
+     "cls": "NET_HEATED",
+     "capacity_W": 0.0,
+     "absorbed_W": 415959.28759727505
+    },
+    "BLADES_NOT_RADIATING": {
+     "q_W_m2": 1022.8984700618898,
+     "q_low_W_m2": 1006.55345657356,
+     "q_high_W_m2": 1039.2434835502197,
+     "cls": "USABLE",
+     "capacity_W": 127177.75980858949,
+     "absorbed_W": 0.0
+    }
+   }
+  }
+ ],
+ "surfaces": {
+  "CASING": {
+   "HIGH_POWER": {
+    "screened_area_m2": 6866.869188174403,
+    "usable_area_m2": 0.0,
+    "marginal_area_m2": 0.0,
+    "net_heated_area_m2": 6866.869188174403,
+    "capacity_W": 0.0,
+    "capacity_with_marginal_W": 0.0,
+    "absorbed_W": 653933279.1989846,
+    "capacity_MW": 0.0,
+    "capacity_with_marginal_MW": 0.0
+   },
+   "BLADES_NOT_RADIATING": {
+    "screened_area_m2": 6866.869188174403,
+    "usable_area_m2": 6866.869188174403,
+    "marginal_area_m2": 0.0,
+    "net_heated_area_m2": 0.0,
+    "capacity_W": 10982264.896818088,
+    "capacity_with_marginal_W": 10982264.896818088,
+    "absorbed_W": 0.0,
+    "capacity_MW": 10.982264896818089,
+    "capacity_with_marginal_MW": 10.982264896818089
+   }
+  },
+  "COLLAR": {
+   "HIGH_POWER": {
+    "screened_area_m2": 512.5768783121791,
+    "usable_area_m2": 0.0,
+    "marginal_area_m2": 0.0,
+    "net_heated_area_m2": 512.5768783121791,
+    "capacity_W": 0.0,
+    "capacity_with_marginal_W": 0.0,
+    "absorbed_W": 1106085.7877912656,
+    "capacity_MW": 0.0,
+    "capacity_with_marginal_MW": 0.0
+   },
+   "BLADES_NOT_RADIATING": {
+    "screened_area_m2": 512.5768783121791,
+    "usable_area_m2": 512.5768783121791,
+    "marginal_area_m2": 0.0,
+    "net_heated_area_m2": 0.0,
+    "capacity_W": 398994.527341133,
+    "capacity_with_marginal_W": 398994.527341133,
+    "absorbed_W": 0.0,
+    "capacity_MW": 0.398994527341133,
+    "capacity_with_marginal_MW": 0.398994527341133
+   }
+  },
+  "RING_OUTER_RIM": {
+   "HIGH_POWER": {
+    "screened_area_m2": 1507.9644737231006,
+    "usable_area_m2": 0.0,
+    "marginal_area_m2": 0.0,
+    "net_heated_area_m2": 1507.9644737231006,
+    "capacity_W": 0.0,
+    "capacity_with_marginal_W": 0.0,
+    "absorbed_W": 3998704.2585843666,
+    "capacity_MW": 0.0,
+    "capacity_with_marginal_MW": 0.0
+   },
+   "BLADES_NOT_RADIATING": {
+    "screened_area_m2": 1507.9644737231006,
+    "usable_area_m2": 1507.9644737231006,
+    "marginal_area_m2": 0.0,
+    "net_heated_area_m2": 0.0,
+    "capacity_W": 724980.9311899847,
+    "capacity_with_marginal_W": 724980.9311899847,
+    "absorbed_W": 0.0,
+    "capacity_MW": 0.7249809311899846,
+    "capacity_with_marginal_MW": 0.7249809311899846
+   }
+  },
+  "RING_INNER_RIM": {
+   "HIGH_POWER": {
+    "screened_area_m2": 1231.5043202071988,
+    "usable_area_m2": 0.0,
+    "marginal_area_m2": 0.0,
+    "net_heated_area_m2": 1231.5043202071988,
+    "capacity_W": 0.0,
+    "capacity_with_marginal_W": 0.0,
+    "absorbed_W": 121696070.14681292,
+    "capacity_MW": 0.0,
+    "capacity_with_marginal_MW": 0.0
+   },
+   "BLADES_NOT_RADIATING": {
+    "screened_area_m2": 1231.5043202071988,
+    "usable_area_m2": 1231.5043202071988,
+    "marginal_area_m2": 0.0,
+    "net_heated_area_m2": 0.0,
+    "capacity_W": 122741.5040504694,
+    "capacity_with_marginal_W": 122741.5040504694,
+    "absorbed_W": 0.0,
+    "capacity_MW": 0.12274150405046941,
+    "capacity_with_marginal_MW": 0.12274150405046941
+   }
+  },
+  "RING_AFT_FACE": {
+   "HIGH_POWER": {
+    "screened_area_m2": 1883.384795827081,
+    "usable_area_m2": 0.0,
+    "marginal_area_m2": 0.0,
+    "net_heated_area_m2": 1883.384795827081,
+    "capacity_W": 0.0,
+    "capacity_with_marginal_W": 0.0,
+    "absorbed_W": 200885736.909849,
+    "capacity_MW": 0.0,
+    "capacity_with_marginal_MW": 0.0
+   },
+   "BLADES_NOT_RADIATING": {
+    "screened_area_m2": 1883.384795827081,
+    "usable_area_m2": 1883.384795827081,
+    "marginal_area_m2": 0.0,
+    "net_heated_area_m2": 0.0,
+    "capacity_W": 381003.44252817106,
+    "capacity_with_marginal_W": 381003.44252817106,
+    "absorbed_W": 0.0,
+    "capacity_MW": 0.38100344252817103,
+    "capacity_with_marginal_MW": 0.38100344252817103
+   }
+  },
+  "RING_FORE_FACE": {
+   "HIGH_POWER": {
+    "screened_area_m2": 1883.384795827081,
+    "usable_area_m2": 1883.384795827081,
+    "marginal_area_m2": 0.0,
+    "net_heated_area_m2": 0.0,
+    "capacity_W": 149847.86656837724,
+    "capacity_with_marginal_W": 149847.86656837724,
+    "absorbed_W": 0.0,
+    "capacity_MW": 0.14984786656837723,
+    "capacity_with_marginal_MW": 0.14984786656837723
+   },
+   "BLADES_NOT_RADIATING": {
+    "screened_area_m2": 1883.384795827081,
+    "usable_area_m2": 1883.384795827081,
+    "marginal_area_m2": 0.0,
+    "net_heated_area_m2": 0.0,
+    "capacity_W": 149847.86656837724,
+    "capacity_with_marginal_W": 149847.86656837724,
+    "absorbed_W": 0.0,
+    "capacity_MW": 0.14984786656837723,
+    "capacity_with_marginal_MW": 0.14984786656837723
+   }
+  },
+  "PANEL_BLADE_PLANE": {
+   "HIGH_POWER": {
+    "screened_area_m2": 994.6462021857922,
+    "usable_area_m2": 0.0,
+    "marginal_area_m2": 497.323101092896,
+    "net_heated_area_m2": 497.323101092896,
+    "capacity_W": 0.0,
+    "capacity_with_marginal_W": 39682.79242731639,
+    "absorbed_W": 2648326.6894679004,
+    "capacity_MW": 0.0,
+    "capacity_with_marginal_MW": 0.039682792427316385
+   },
+   "BLADES_NOT_RADIATING": {
+    "screened_area_m2": 994.6462021857922,
+    "usable_area_m2": 994.6462021857922,
+    "marginal_area_m2": 0.0,
+    "net_heated_area_m2": 0.0,
+    "capacity_W": 1245352.5171866573,
+    "capacity_with_marginal_W": 1245352.5171866573,
+    "absorbed_W": 0.0,
+    "capacity_MW": 1.2453525171866573,
+    "capacity_with_marginal_MW": 1.2453525171866573
+   }
+  },
+  "PANEL_BISECTOR": {
+   "HIGH_POWER": {
+    "screened_area_m2": 994.6462021857922,
+    "usable_area_m2": 0.0,
+    "marginal_area_m2": 0.0,
+    "net_heated_area_m2": 994.6462021857922,
+    "capacity_W": 0.0,
+    "capacity_with_marginal_W": 0.0,
+    "absorbed_W": 13513053.753441237,
+    "capacity_MW": 0.0,
+    "capacity_with_marginal_MW": 0.0
+   },
+   "BLADES_NOT_RADIATING": {
+    "screened_area_m2": 994.6462021857922,
+    "usable_area_m2": 994.6462021857922,
+    "marginal_area_m2": 0.0,
+    "net_heated_area_m2": 0.0,
+    "capacity_W": 1198805.1324295872,
+    "capacity_with_marginal_W": 1198805.1324295872,
+    "absorbed_W": 0.0,
+    "capacity_MW": 1.1988051324295872,
+    "capacity_with_marginal_MW": 1.1988051324295872
+   }
+  }
+ },
+ "loops": {
+  "warm": {
+   "HIGH_POWER": {
+    "screened_area_m2": 9368.738470858165,
+    "usable_area_m2": 0.0,
+    "marginal_area_m2": 497.323101092896,
+    "net_heated_area_m2": 8871.415369765271,
+    "capacity_W": 0.0,
+    "capacity_with_marginal_W": 39682.79242731639,
+    "absorbed_W": 671200745.4296851,
+    "capacity_MW": 0.0,
+    "capacity_with_marginal_MW": 0.039682792427316385
+   },
+   "BLADES_NOT_RADIATING": {
+    "screened_area_m2": 9368.738470858165,
+    "usable_area_m2": 9368.738470858165,
+    "marginal_area_m2": 0.0,
+    "net_heated_area_m2": 0.0,
+    "capacity_W": 13825417.073775463,
+    "capacity_with_marginal_W": 13825417.073775463,
+    "absorbed_W": 0.0,
+    "capacity_MW": 13.825417073775462,
+    "capacity_with_marginal_MW": 13.825417073775462
+   }
+  },
+  "cold": {
+   "HIGH_POWER": {
+    "screened_area_m2": 6506.238385584462,
+    "usable_area_m2": 1883.384795827081,
+    "marginal_area_m2": 0.0,
+    "net_heated_area_m2": 4622.853589757381,
+    "capacity_W": 149847.86656837724,
+    "capacity_with_marginal_W": 149847.86656837724,
+    "absorbed_W": 326580511.3152463,
+    "capacity_MW": 0.14984786656837723,
+    "capacity_with_marginal_MW": 0.14984786656837723
+   },
+   "BLADES_NOT_RADIATING": {
+    "screened_area_m2": 6506.238385584462,
+    "usable_area_m2": 6506.238385584462,
+    "marginal_area_m2": 0.0,
+    "net_heated_area_m2": 0.0,
+    "capacity_W": 1378573.744337002,
+    "capacity_with_marginal_W": 1378573.744337002,
+    "absorbed_W": 0.0,
+    "capacity_MW": 1.378573744337002,
+    "capacity_with_marginal_MW": 1.378573744337002
+   }
+  }
+ },
+ "findings": [
+  {
+   "code": "WARM_CASING_IDEAL_BOUND_BELOW_NORMAL",
+   "casing_area_m2": 6866.869188174412,
+   "casing_ideal_MW": 14.370208699132151,
+   "all_warm_zones_ideal_MW": 19.605838320856726,
+   "normal_low_MW": 15.0,
+   "ref": "Q38"
+  },
+  {
+   "code": "WARM_LOOP_AREA_SHORTFALL",
+   "case": "HIGH_POWER",
+   "depends_on_zero_exchange": false,
+   "assumption_direction": "NEUTRAL TO PESSIMISTIC: the casing, collar and panels are net-heated by the blades regardless; hot-neighbour blockers are already hot-class",
+   "usable_capacity_MW": 0.0,
+   "with_marginal_MW": 0.039682792427316385,
+   "normal_low_MW": 15.0,
+   "shortfall_MW": 15.0,
+   "ref": "Q38"
+  },
+  {
+   "code": "WARM_LOOP_AREA_SHORTFALL",
+   "case": "BLADES_NOT_RADIATING",
+   "depends_on_zero_exchange": true,
+   "assumption_direction": "PESSIMISTIC: dark blades treated as adiabatic; if colder than the receiver they are sinks, which would add capacity (reviewer estimate about +2.6 MW at the casing, enough to erase the 1.15 MW shortfall; not simulated here)",
+   "usable_capacity_MW": 13.825417073775462,
+   "with_marginal_MW": 13.825417073775462,
+   "normal_low_MW": 15.0,
+   "shortfall_MW": 1.174582926224537,
+   "ref": "Q38"
+  },
+  {
+   "code": "SURFACES_NET_HEATED_HIGH_POWER",
+   "count": 84,
+   "zones": [
+    "CASING_1_1",
+    "CASING_1_2",
+    "CASING_1_3",
+    "CASING_1_4",
+    "CASING_1_5",
+    "CASING_1_6",
+    "CASING_1_7",
+    "CASING_1_8",
+    "CASING_1_9",
+    "CASING_1_10",
+    "CASING_2_1",
+    "CASING_2_2",
+    "CASING_2_3",
+    "CASING_2_4",
+    "CASING_2_5",
+    "CASING_2_6",
+    "CASING_2_7",
+    "CASING_2_8",
+    "CASING_2_9",
+    "CASING_2_10",
+    "CASING_3_1",
+    "CASING_3_2",
+    "CASING_3_3",
+    "CASING_3_4",
+    "CASING_3_5",
+    "CASING_3_6",
+    "CASING_3_7",
+    "CASING_3_8",
+    "CASING_3_9",
+    "CASING_3_10",
+    "CASING_4_1",
+    "CASING_4_2",
+    "CASING_4_3",
+    "CASING_4_4",
+    "CASING_4_5",
+    "CASING_4_6",
+    "CASING_4_7",
+    "CASING_4_8",
+    "CASING_4_9",
+    "CASING_4_10",
+    "CASING_5_1",
+    "CASING_5_2",
+    "CASING_5_3",
+    "CASING_5_4",
+    "CASING_5_5",
+    "CASING_5_6",
+    "CASING_5_7",
+    "CASING_5_8",
+    "CASING_5_9",
+    "CASING_5_10",
+    "CASING_6_1",
+    "CASING_6_2",
+    "CASING_6_3",
+    "CASING_6_4",
+    "CASING_6_5",
+    "CASING_6_6",
+    "CASING_6_7",
+    "CASING_6_8",
+    "CASING_6_9",
+    "CASING_6_10",
+    "COLLAR_1",
+    "COLLAR_2",
+    "COLLAR_3",
+    "COLLAR_4",
+    "COLLAR_5",
+    "COLLAR_6",
+    "RING_1_OUTER_RIM",
+    "RING_1_INNER_RIM",
+    "RING_1_AFT_FACE",
+    "RING_2_OUTER_RIM",
+    "RING_2_INNER_RIM",
+    "RING_2_AFT_FACE",
+    "PANEL_BLADE_PLANE_1_+",
+    "PANEL_BLADE_PLANE_1_-",
+    "PANEL_BLADE_PLANE_4_+",
+    "PANEL_BLADE_PLANE_4_-",
+    "PANEL_BISECTOR_1_+",
+    "PANEL_BISECTOR_1_-",
+    "PANEL_BISECTOR_2_+",
+    "PANEL_BISECTOR_2_-",
+    "PANEL_BISECTOR_3_+",
+    "PANEL_BISECTOR_3_-",
+    "PANEL_BISECTOR_4_+",
+    "PANEL_BISECTOR_4_-"
+   ],
+   "ref": "Q38"
+  },
+  {
+   "code": "CASING_ABSORBS_BLADE_HEAT",
+   "case": "HIGH_POWER",
+   "absorbed_gross_W": 664915544.0958027,
+   "net_absorbed_W": 653933279.1989846,
+   "ref": "Q38"
+  },
+  {
+   "code": "COLD_RING_SURFACES_NET_HEATED",
+   "case": "HIGH_POWER",
+   "zones": [
+    "RING_1_OUTER_RIM",
+    "RING_1_INNER_RIM",
+    "RING_1_AFT_FACE",
+    "RING_2_OUTER_RIM",
+    "RING_2_INNER_RIM",
+    "RING_2_AFT_FACE"
+   ],
+   "ref": "Q38"
+  },
+  {
+   "code": "COLD_EXAMPLE_COVERAGE",
+   "depends_on_zero_exchange": true,
+   "assumption_direction": {
+    "HIGH_POWER": "OPTIMISTIC: the hull/casing is a >=450 K warm surface (and HP-heated) under the study's own premise, not a 320 K neighbour, so zero exchange overstates ring capacity; q_if_blockers_at_warm_W_m2 bounds it",
+    "BLADES_NOT_RADIATING": "OPTIMISTIC: same, the warm hull/casing seen by the rings would reduce or reverse ring capacity (q_if_blockers_at_warm_W_m2); dark blades can act either way (sink or source) depending on their temperature, and blade duty outside burns is OPEN (Q41)"
+   },
+   "fore_face_capacity_kW_if_blockers_at_warm": {
+    "HIGH_POWER": 0.0,
+    "BLADES_NOT_RADIATING": 0.0
+   },
+   "label": "DIAGNOSTIC pessimistic extreme, not a simulation: the whole blocked fraction (incl. the shield) at 450 K, and it omits the receiver's own emission toward the blocked fraction. The reviewer estimate of about 76 kW for the fore faces is HIGH_POWER with only the hull at 450 K and the shield excluded",
+   "example_load_kW": 100.0,
+   "example_ideal_area_m2": 186.8726914733702,
+   "usable_area_m2": {
+    "HIGH_POWER": 1883.384795827081,
+    "BLADES_NOT_RADIATING": 6506.238385584462
+   },
+   "capacity_MW": {
+    "HIGH_POWER": 0.14984786656837723,
+    "BLADES_NOT_RADIATING": 1.378573744337002
+   },
+   "note": "the actual cold load is OPEN; only the 100 kW illustration exists (40!F62)",
+   "ref": "Q38"
+  },
+  {
+   "code": "BNR_CLASSES_ASSUMPTION_DEPENDENT",
+   "case": "BLADES_NOT_RADIATING",
+   "zones_usable_only_under_zero_exchange": [
+    "RING_1_INNER_RIM",
+    "RING_1_FORE_FACE",
+    "RING_2_INNER_RIM",
+    "RING_2_AFT_FACE",
+    "RING_2_FORE_FACE"
+   ],
+   "depends_on_zero_exchange": true,
+   "assumption_direction": "OPTIMISTIC: same, the warm hull/casing seen by the rings would reduce or reverse ring capacity (q_if_blockers_at_warm_W_m2); dark blades can act either way (sink or source) depending on their temperature, and blade duty outside burns is OPEN (Q41)",
+   "ref": "Q38"
+  },
+  {
+   "code": "COLD_RIM_PLAN_CONTRADICTION",
+   "case": "HIGH_POWER",
+   "zones": [
+    "RING_1_OUTER_RIM",
+    "RING_2_OUTER_RIM"
+   ],
+   "rings_absorbed_W": 326580511.3152463,
+   "note": "the plan's cold radiators on the ring rims are net-heated in HIGH_POWER; the rings absorb the stated power from the blades",
+   "ref": "Q38"
+  },
+  {
+   "code": "MARGINAL_SURFACES",
+   "zones": {
+    "HIGH_POWER": [
+     "PANEL_BLADE_PLANE_2_+",
+     "PANEL_BLADE_PLANE_2_-",
+     "PANEL_BLADE_PLANE_3_+",
+     "PANEL_BLADE_PLANE_3_-"
+    ],
+    "BLADES_NOT_RADIATING": []
+   },
+   "ref": "Q38"
+  },
+  {
+   "code": "BLADE_HULL_SELF_VIEW",
+   "casing_mean_F_to_blades": 0.20082646122685185,
+   "blade_to_casing_F": 0.04137147116306316,
+   "hot_face_area_m2": 33333.333333333336,
+   "note": "context for 40!A23 (view factor 0.9 must be revalidated for hull self-view); radiators.view_factor is never written",
+   "ref": "40!A23"
+  }
+ ],
+ "comparison_loads_W": {
+  "warm_example": 5000000.0,
+  "normal": [
+   15000000.0,
+   30000000.0
+  ],
+  "limited_duty": [
+   30000000.0,
+   50000000.0
+  ],
+  "short_burst": [
+   50000000.0,
+   80000000.0
+  ],
+  "cold_example": 100000.0
+ }
+}

@@ -1,0 +1,140 @@
+{
+ "status": "MEASUREMENT on the EXP-02 reference GPU (44!35); software performance only, not a certification",
+ "measured": "2026-10-11 (EVA-003): godot/scenes/eva.tscn --perf [--no-suits] after runtime-export PASS with the EVA-003 lead chamber, sliding plug and latch stations (runs/20261011T092203713725Z-runtime); window 1280x800, VSync off, 120 warm-up + 600 sampled frames per view",
+ "adapter": "NVIDIA GeForce RTX 3070",
+ "api": "3.3.0 NVIDIA 595.91.07",
+ "method": "gl_compatibility",
+ "load_ms": 361,
+ "video_mem_mb": 93.1,
+ "with_suits": {
+  "aft": {
+   "draw_calls_max": 533,
+   "fps_mean": 362.5,
+   "mean_ms": 2.76,
+   "p50_ms": 2.69,
+   "p95_ms": 3.19,
+   "p99_ms": 4.0,
+   "primitives_max": 126652
+  },
+  "cutaway": {
+   "draw_calls_max": 2075,
+   "fps_mean": 148.7,
+   "mean_ms": 6.72,
+   "p50_ms": 6.65,
+   "p95_ms": 7.97,
+   "p99_ms": 8.63,
+   "primitives_max": 167417
+  },
+  "exterior": {
+   "draw_calls_max": 471,
+   "fps_mean": 363.4,
+   "mean_ms": 2.75,
+   "p50_ms": 2.71,
+   "p95_ms": 3.17,
+   "p99_ms": 3.92,
+   "primitives_max": 123367
+  },
+  "eye": {
+   "draw_calls_max": 2063,
+   "fps_mean": 152.7,
+   "mean_ms": 6.55,
+   "p50_ms": 6.44,
+   "p95_ms": 7.81,
+   "p99_ms": 9.3,
+   "primitives_max": 167075
+  },
+  "prep": {
+   "draw_calls_max": 2544,
+   "fps_mean": 177.0,
+   "mean_ms": 5.65,
+   "p50_ms": 5.57,
+   "p95_ms": 6.39,
+   "p99_ms": 7.22,
+   "primitives_max": 239553
+  },
+  "radiator": {
+   "draw_calls_max": 1213,
+   "fps_mean": 327.9,
+   "mean_ms": 3.05,
+   "p50_ms": 2.98,
+   "p95_ms": 3.62,
+   "p99_ms": 3.99,
+   "primitives_max": 89280
+  }
+ },
+ "baseline_no_suits": {
+  "aft": {
+   "draw_calls_max": 454,
+   "fps_mean": 469.6,
+   "mean_ms": 2.13,
+   "p50_ms": 2.08,
+   "p95_ms": 2.46,
+   "p99_ms": 2.69,
+   "primitives_max": 81928
+  },
+  "cutaway": {
+   "draw_calls_max": 1947,
+   "fps_mean": 181.4,
+   "mean_ms": 5.51,
+   "p50_ms": 5.32,
+   "p95_ms": 7.09,
+   "p99_ms": 8.09,
+   "primitives_max": 153963
+  },
+  "exterior": {
+   "draw_calls_max": 286,
+   "fps_mean": 539.1,
+   "mean_ms": 1.85,
+   "p50_ms": 1.78,
+   "p95_ms": 2.27,
+   "p99_ms": 2.55,
+   "primitives_max": 69806
+  },
+  "eye": {
+   "draw_calls_max": 1956,
+   "fps_mean": 173.4,
+   "mean_ms": 5.77,
+   "p50_ms": 5.67,
+   "p95_ms": 7.0,
+   "p99_ms": 7.67,
+   "primitives_max": 155505
+  },
+  "prep": {
+   "draw_calls_max": 2427,
+   "fps_mean": 192.5,
+   "mean_ms": 5.19,
+   "p50_ms": 5.12,
+   "p95_ms": 5.97,
+   "p99_ms": 6.48,
+   "primitives_max": 178635
+  },
+  "radiator": {
+   "draw_calls_max": 1213,
+   "fps_mean": 314.8,
+   "mean_ms": 3.18,
+   "p50_ms": 3.08,
+   "p95_ms": 3.75,
+   "p99_ms": 4.12,
+   "primitives_max": 89280
+  }
+ },
+ "suit_cost_ms": {
+  "aft": 0.63,
+  "cutaway": 1.21,
+  "exterior": 0.9,
+  "eye": 0.78,
+  "prep": 0.46,
+  "radiator": -0.13
+ },
+ "previous_eva002": {
+  "with_suits": {
+   "aft": 2.76,
+   "cutaway": 6.24,
+   "exterior": 2.59,
+   "eye": 6.24,
+   "prep": 5.52,
+   "radiator": 2.95
+  },
+  "note": "EVA-002 measurement (mean ms) for comparison"
+ }
+}

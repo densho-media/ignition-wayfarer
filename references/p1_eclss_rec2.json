@@ -1,0 +1,1772 @@
+{
+ "contract": "ECLSS-REC2-2026-10-11",
+ "status": "NONCANON COMPARATIVE STUDY (PREFERRED STUDY / GAS MARGINS OPEN, 15!A127); no geometry, hatch, latch, seal or gas release",
+ "source": "S&E 15!A127 (ECLSS-REC2), 15!A124, 16!A7 MEC-006, MEC-019; previous study references/ECLSS_RECOVERY.md",
+ "cabin_pressure_kpa": 80.0,
+ "load_basis": "cabin 80 kPa (BASELINE) x seated leaf area; DERIVED, not a structural release",
+ "survey": [
+  {
+   "name": "Dock outer hatch",
+   "family": "F4 primary dock",
+   "a": "OUTSIDE",
+   "b": "Dock_Primary_Entry_Chamber",
+   "seats_from": "Dock_Primary_Entry_Chamber",
+   "leaf_r_m": 0.85,
+   "kind": "plug leaf hinged inboard",
+   "status": "BUILT PROTOTYPE",
+   "source": "[human_entry] both dock hatches seat from the ship side",
+   "normal_case": "Dock_Primary_Entry_Chamber pressurized against space: pressure seats it",
+   "reverse_case": "a docked vehicle at pressure while the entry chamber is vented (docking leak check, chamber loss)",
+   "reverse_load_kN": 181.6,
+   "held_today": "latches only (conditional: docked and pressurized)",
+   "load_basis": "cabin 80 kPa (BASELINE) x seated leaf area; DERIVED, not a structural release"
+  },
+  {
+   "name": "Dock inner hatch",
+   "family": "F4 primary dock",
+   "a": "Dock_Primary_Entry_Chamber",
+   "b": "Dock_Primary_Trunk_Node",
+   "seats_from": "Dock_Primary_Trunk_Node",
+   "leaf_r_m": 0.85,
+   "kind": "plug leaf hinged inboard",
+   "status": "BUILT PROTOTYPE",
+   "source": "[human_entry] both dock hatches seat from the ship side",
+   "normal_case": "Dock_Primary_Entry_Chamber loses pressure: Dock_Primary_Trunk_Node pressure seats the leaf",
+   "reverse_case": "Dock_Primary_Trunk_Node loses pressure while Dock_Primary_Entry_Chamber is at cabin pressure",
+   "reverse_load_kN": 181.6,
+   "held_today": "latches only",
+   "load_basis": "cabin 80 kPa (BASELINE) x seated leaf area; DERIVED, not a structural release"
+  },
+  {
+   "name": "Storeroom hatch",
+   "family": "F3 spine-shell branch (trunk side)",
+   "a": "Crew_Trunk",
+   "b": "Storeroom_Shell",
+   "seats_from": "Storeroom_Shell",
+   "leaf_r_m": 0.5,
+   "kind": "leaf hinged on the room side, folds 180 deg flat",
+   "status": "BUILT PROTOTYPE",
+   "source": "SP-45 leaf on the room side (storeroom)",
+   "normal_case": "Crew_Trunk loses pressure: Storeroom_Shell pressure seats the leaf",
+   "reverse_case": "Storeroom_Shell loses pressure while Crew_Trunk is at cabin pressure",
+   "reverse_load_kN": 62.8,
+   "held_today": "latches only",
+   "load_basis": "cabin 80 kPa (BASELINE) x seated leaf area; DERIVED, not a structural release"
+  },
+  {
+   "name": "Refuge port closure",
+   "family": "F3 spine-shell branch (trunk side)",
+   "a": "Crew_Trunk",
+   "b": "Refuge_Storm_Shelter",
+   "seats_from": null,
+   "leaf_r_m": null,
+   "kind": "no closure modelled",
+   "status": "BUILT PROTOTYPE",
+   "source": "not modelled: refuge hatch and second egress OPEN (OD-011, Q46(d))",
+   "normal_case": "OPEN: seat side not set",
+   "reverse_case": "whichever side is chosen, a loss of that side (Crew_Trunk or Refuge_Storm_Shelter)",
+   "reverse_load_kN": null,
+   "held_today": "OPEN (one direction will be latch-only)",
+   "load_basis": "cabin 80 kPa (BASELINE) x seated leaf area; DERIVED, not a structural release"
+  },
+  {
+   "name": "Spine port gate A",
+   "family": "F3 spine-shell branch (trunk side)",
+   "a": "Crew_Trunk",
+   "b": "Crew_Vestibule_1",
+   "seats_from": null,
+   "leaf_r_m": 0.85,
+   "kind": "gate sliding +X in the spine-shell slot (r 0.88-0.92 m)",
+   "status": "BUILT PROTOTYPE, seat side OPEN",
+   "source": "stationary gate slides forward in the spine shell; seat side not modelled (MEC-019 hatch_actuation OPEN)",
+   "normal_case": "OPEN: seat side not set",
+   "reverse_case": "whichever side is chosen, a loss of that side (Crew_Trunk or Crew_Vestibule_1)",
+   "reverse_load_kN": 181.6,
+   "held_today": "OPEN (one direction will be latch-only)",
+   "load_basis": "cabin 80 kPa (BASELINE) x seated leaf area; DERIVED, not a structural release"
+  },
+  {
+   "name": "Drum door A1",
+   "family": "F2 transfer pair (drum door + tube hatch)",
+   "a": "Crew_Vestibule_1",
+   "b": "Crew_Tube_1_1",
+   "seats_from": "Crew_Tube_1_1",
+   "leaf_r_m": 0.85,
+   "kind": "curved plate sliding round the drum wall (door) / ring face (hatch), tube side",
+   "status": "BUILT PROTOTYPE",
+   "source": "crew_transfer.transfer_stack: door slides round the outside of the drum wall",
+   "normal_case": "Crew_Vestibule_1 loses pressure: Crew_Tube_1_1 pressure seats the leaf",
+   "reverse_case": "Crew_Tube_1_1 loses pressure while Crew_Vestibule_1 is at cabin pressure",
+   "reverse_load_kN": 181.6,
+   "held_today": "latches only",
+   "load_basis": "cabin 80 kPa (BASELINE) x seated leaf area; DERIVED, not a structural release"
+  },
+  {
+   "name": "Tube hatch A1",
+   "family": "F2 transfer pair (drum door + tube hatch)",
+   "a": "Crew_Vestibule_1",
+   "b": "Crew_Tube_1_1",
+   "seats_from": "Crew_Tube_1_1",
+   "leaf_r_m": 0.85,
+   "kind": "curved plate sliding round the drum wall (door) / ring face (hatch), tube side",
+   "status": "BUILT PROTOTYPE",
+   "source": "crew_transfer.transfer_stack: hatch on the ring-side face, tube side",
+   "normal_case": "Crew_Vestibule_1 loses pressure: Crew_Tube_1_1 pressure seats the leaf",
+   "reverse_case": "Crew_Tube_1_1 loses pressure while Crew_Vestibule_1 is at cabin pressure",
+   "reverse_load_kN": 181.6,
+   "held_today": "latches only",
+   "load_basis": "cabin 80 kPa (BASELINE) x seated leaf area; DERIVED, not a structural release"
+  },
+  {
+   "name": "Sector hatch A1",
+   "family": "F1 sector hatch",
+   "a": "Crew_Tube_1_1",
+   "b": "Sector_1_1",
+   "seats_from": "Sector_1_1",
+   "leaf_r_m": 0.85,
+   "kind": "sliding plug: leaf on the sector side, drops 0.02 m and slides 1.75 m toward the aisle",
+   "status": "BUILT PROTOTYPE",
+   "source": "[human_entry] landing leaf seats from the sector side",
+   "normal_case": "Crew_Tube_1_1 loses pressure: Sector_1_1 pressure seats the leaf",
+   "reverse_case": "Sector_1_1 loses pressure while Crew_Tube_1_1 is at cabin pressure",
+   "reverse_load_kN": 181.6,
+   "held_today": "latches only",
+   "load_basis": "cabin 80 kPa (BASELINE) x seated leaf area; DERIVED, not a structural release"
+  },
+  {
+   "name": "Drum door A2",
+   "family": "F2 transfer pair (drum door + tube hatch)",
+   "a": "Crew_Vestibule_1",
+   "b": "Crew_Tube_1_2",
+   "seats_from": "Crew_Tube_1_2",
+   "leaf_r_m": 0.85,
+   "kind": "curved plate sliding round the drum wall (door) / ring face (hatch), tube side",
+   "status": "BUILT PROTOTYPE",
+   "source": "crew_transfer.transfer_stack: door slides round the outside of the drum wall",
+   "normal_case": "Crew_Vestibule_1 loses pressure: Crew_Tube_1_2 pressure seats the leaf",
+   "reverse_case": "Crew_Tube_1_2 loses pressure while Crew_Vestibule_1 is at cabin pressure",
+   "reverse_load_kN": 181.6,
+   "held_today": "latches only",
+   "load_basis": "cabin 80 kPa (BASELINE) x seated leaf area; DERIVED, not a structural release"
+  },
+  {
+   "name": "Tube hatch A2",
+   "family": "F2 transfer pair (drum door + tube hatch)",
+   "a": "Crew_Vestibule_1",
+   "b": "Crew_Tube_1_2",
+   "seats_from": "Crew_Tube_1_2",
+   "leaf_r_m": 0.85,
+   "kind": "curved plate sliding round the drum wall (door) / ring face (hatch), tube side",
+   "status": "BUILT PROTOTYPE",
+   "source": "crew_transfer.transfer_stack: hatch on the ring-side face, tube side",
+   "normal_case": "Crew_Vestibule_1 loses pressure: Crew_Tube_1_2 pressure seats the leaf",
+   "reverse_case": "Crew_Tube_1_2 loses pressure while Crew_Vestibule_1 is at cabin pressure",
+   "reverse_load_kN": 181.6,
+   "held_today": "latches only",
+   "load_basis": "cabin 80 kPa (BASELINE) x seated leaf area; DERIVED, not a structural release"
+  },
+  {
+   "name": "Sector hatch A2",
+   "family": "F1 sector hatch",
+   "a": "Crew_Tube_1_2",
+   "b": "Sector_1_2",
+   "seats_from": "Sector_1_2",
+   "leaf_r_m": 0.85,
+   "kind": "sliding plug: leaf on the sector side, drops 0.02 m and slides 1.75 m toward the aisle",
+   "status": "BUILT PROTOTYPE",
+   "source": "[human_entry] landing leaf seats from the sector side",
+   "normal_case": "Crew_Tube_1_2 loses pressure: Sector_1_2 pressure seats the leaf",
+   "reverse_case": "Sector_1_2 loses pressure while Crew_Tube_1_2 is at cabin pressure",
+   "reverse_load_kN": 181.6,
+   "held_today": "latches only",
+   "load_basis": "cabin 80 kPa (BASELINE) x seated leaf area; DERIVED, not a structural release"
+  },
+  {
+   "name": "Drum door A3",
+   "family": "F2 transfer pair (drum door + tube hatch)",
+   "a": "Crew_Vestibule_1",
+   "b": "Crew_Tube_1_3",
+   "seats_from": "Crew_Tube_1_3",
+   "leaf_r_m": 0.85,
+   "kind": "curved plate sliding round the drum wall (door) / ring face (hatch), tube side",
+   "status": "BUILT PROTOTYPE",
+   "source": "crew_transfer.transfer_stack: door slides round the outside of the drum wall",
+   "normal_case": "Crew_Vestibule_1 loses pressure: Crew_Tube_1_3 pressure seats the leaf",
+   "reverse_case": "Crew_Tube_1_3 loses pressure while Crew_Vestibule_1 is at cabin pressure",
+   "reverse_load_kN": 181.6,
+   "held_today": "latches only",
+   "load_basis": "cabin 80 kPa (BASELINE) x seated leaf area; DERIVED, not a structural release"
+  },
+  {
+   "name": "Tube hatch A3",
+   "family": "F2 transfer pair (drum door + tube hatch)",
+   "a": "Crew_Vestibule_1",
+   "b": "Crew_Tube_1_3",
+   "seats_from": "Crew_Tube_1_3",
+   "leaf_r_m": 0.85,
+   "kind": "curved plate sliding round the drum wall (door) / ring face (hatch), tube side",
+   "status": "BUILT PROTOTYPE",
+   "source": "crew_transfer.transfer_stack: hatch on the ring-side face, tube side",
+   "normal_case": "Crew_Vestibule_1 loses pressure: Crew_Tube_1_3 pressure seats the leaf",
+   "reverse_case": "Crew_Tube_1_3 loses pressure while Crew_Vestibule_1 is at cabin pressure",
+   "reverse_load_kN": 181.6,
+   "held_today": "latches only",
+   "load_basis": "cabin 80 kPa (BASELINE) x seated leaf area; DERIVED, not a structural release"
+  },
+  {
+   "name": "Sector hatch A3",
+   "family": "F1 sector hatch",
+   "a": "Crew_Tube_1_3",
+   "b": "Sector_1_3",
+   "seats_from": "Sector_1_3",
+   "leaf_r_m": 0.85,
+   "kind": "sliding plug: leaf on the sector side, drops 0.02 m and slides 1.75 m toward the aisle",
+   "status": "BUILT PROTOTYPE",
+   "source": "[human_entry] landing leaf seats from the sector side",
+   "normal_case": "Crew_Tube_1_3 loses pressure: Sector_1_3 pressure seats the leaf",
+   "reverse_case": "Sector_1_3 loses pressure while Crew_Tube_1_3 is at cabin pressure",
+   "reverse_load_kN": 181.6,
+   "held_today": "latches only",
+   "load_basis": "cabin 80 kPa (BASELINE) x seated leaf area; DERIVED, not a structural release"
+  },
+  {
+   "name": "Spine port gate B",
+   "family": "F3 spine-shell branch (trunk side)",
+   "a": "Crew_Trunk",
+   "b": "Crew_Vestibule_2",
+   "seats_from": null,
+   "leaf_r_m": 0.5,
+   "kind": "gate sliding +X in the spine-shell slot (r 0.88-0.92 m)",
+   "status": "BUILT PROTOTYPE, seat side OPEN",
+   "source": "stationary gate slides forward in the spine shell; seat side not modelled (MEC-019 hatch_actuation OPEN)",
+   "normal_case": "OPEN: seat side not set",
+   "reverse_case": "whichever side is chosen, a loss of that side (Crew_Trunk or Crew_Vestibule_2)",
+   "reverse_load_kN": 62.8,
+   "held_today": "OPEN (one direction will be latch-only)",
+   "load_basis": "cabin 80 kPa (BASELINE) x seated leaf area; DERIVED, not a structural release"
+  },
+  {
+   "name": "Drum door B1",
+   "family": "F2 transfer pair (drum door + tube hatch)",
+   "a": "Crew_Vestibule_2",
+   "b": "Crew_Tube_2_1",
+   "seats_from": "Crew_Tube_2_1",
+   "leaf_r_m": 0.5,
+   "kind": "curved plate sliding round the drum wall (door) / ring face (hatch), tube side",
+   "status": "BUILT PROTOTYPE",
+   "source": "crew_transfer.transfer_stack: door slides round the outside of the drum wall",
+   "normal_case": "Crew_Vestibule_2 loses pressure: Crew_Tube_2_1 pressure seats the leaf",
+   "reverse_case": "Crew_Tube_2_1 loses pressure while Crew_Vestibule_2 is at cabin pressure",
+   "reverse_load_kN": 62.8,
+   "held_today": "latches only",
+   "load_basis": "cabin 80 kPa (BASELINE) x seated leaf area; DERIVED, not a structural release"
+  },
+  {
+   "name": "Tube hatch B1",
+   "family": "F2 transfer pair (drum door + tube hatch)",
+   "a": "Crew_Vestibule_2",
+   "b": "Crew_Tube_2_1",
+   "seats_from": "Crew_Tube_2_1",
+   "leaf_r_m": 0.5,
+   "kind": "curved plate sliding round the drum wall (door) / ring face (hatch), tube side",
+   "status": "BUILT PROTOTYPE",
+   "source": "crew_transfer.transfer_stack: hatch on the ring-side face, tube side",
+   "normal_case": "Crew_Vestibule_2 loses pressure: Crew_Tube_2_1 pressure seats the leaf",
+   "reverse_case": "Crew_Tube_2_1 loses pressure while Crew_Vestibule_2 is at cabin pressure",
+   "reverse_load_kN": 62.8,
+   "held_today": "latches only",
+   "load_basis": "cabin 80 kPa (BASELINE) x seated leaf area; DERIVED, not a structural release"
+  },
+  {
+   "name": "Sector hatch B1",
+   "family": "F1 sector hatch",
+   "a": "Crew_Tube_2_1",
+   "b": "Sector_2_1",
+   "seats_from": "Sector_2_1",
+   "leaf_r_m": 0.85,
+   "kind": "sliding plug: leaf on the sector side, drops 0.02 m and slides 1.75 m toward the aisle",
+   "status": "BUILT PROTOTYPE",
+   "source": "[human_entry] landing leaf seats from the sector side",
+   "normal_case": "Crew_Tube_2_1 loses pressure: Sector_2_1 pressure seats the leaf",
+   "reverse_case": "Sector_2_1 loses pressure while Crew_Tube_2_1 is at cabin pressure",
+   "reverse_load_kN": 181.6,
+   "held_today": "latches only",
+   "load_basis": "cabin 80 kPa (BASELINE) x seated leaf area; DERIVED, not a structural release"
+  },
+  {
+   "name": "Drum door B2",
+   "family": "F2 transfer pair (drum door + tube hatch)",
+   "a": "Crew_Vestibule_2",
+   "b": "Crew_Tube_2_2",
+   "seats_from": "Crew_Tube_2_2",
+   "leaf_r_m": 0.5,
+   "kind": "curved plate sliding round the drum wall (door) / ring face (hatch), tube side",
+   "status": "BUILT PROTOTYPE",
+   "source": "crew_transfer.transfer_stack: door slides round the outside of the drum wall",
+   "normal_case": "Crew_Vestibule_2 loses pressure: Crew_Tube_2_2 pressure seats the leaf",
+   "reverse_case": "Crew_Tube_2_2 loses pressure while Crew_Vestibule_2 is at cabin pressure",
+   "reverse_load_kN": 62.8,
+   "held_today": "latches only",
+   "load_basis": "cabin 80 kPa (BASELINE) x seated leaf area; DERIVED, not a structural release"
+  },
+  {
+   "name": "Tube hatch B2",
+   "family": "F2 transfer pair (drum door + tube hatch)",
+   "a": "Crew_Vestibule_2",
+   "b": "Crew_Tube_2_2",
+   "seats_from": "Crew_Tube_2_2",
+   "leaf_r_m": 0.5,
+   "kind": "curved plate sliding round the drum wall (door) / ring face (hatch), tube side",
+   "status": "BUILT PROTOTYPE",
+   "source": "crew_transfer.transfer_stack: hatch on the ring-side face, tube side",
+   "normal_case": "Crew_Vestibule_2 loses pressure: Crew_Tube_2_2 pressure seats the leaf",
+   "reverse_case": "Crew_Tube_2_2 loses pressure while Crew_Vestibule_2 is at cabin pressure",
+   "reverse_load_kN": 62.8,
+   "held_today": "latches only",
+   "load_basis": "cabin 80 kPa (BASELINE) x seated leaf area; DERIVED, not a structural release"
+  },
+  {
+   "name": "Sector hatch B2",
+   "family": "F1 sector hatch",
+   "a": "Crew_Tube_2_2",
+   "b": "Sector_2_2",
+   "seats_from": "Sector_2_2",
+   "leaf_r_m": 0.85,
+   "kind": "sliding plug: leaf on the sector side, drops 0.02 m and slides 1.75 m toward the aisle",
+   "status": "BUILT PROTOTYPE",
+   "source": "[human_entry] landing leaf seats from the sector side",
+   "normal_case": "Crew_Tube_2_2 loses pressure: Sector_2_2 pressure seats the leaf",
+   "reverse_case": "Sector_2_2 loses pressure while Crew_Tube_2_2 is at cabin pressure",
+   "reverse_load_kN": 181.6,
+   "held_today": "latches only",
+   "load_basis": "cabin 80 kPa (BASELINE) x seated leaf area; DERIVED, not a structural release"
+  },
+  {
+   "name": "Drum door B3",
+   "family": "F2 transfer pair (drum door + tube hatch)",
+   "a": "Crew_Vestibule_2",
+   "b": "Crew_Tube_2_3",
+   "seats_from": "Crew_Tube_2_3",
+   "leaf_r_m": 0.5,
+   "kind": "curved plate sliding round the drum wall (door) / ring face (hatch), tube side",
+   "status": "BUILT PROTOTYPE",
+   "source": "crew_transfer.transfer_stack: door slides round the outside of the drum wall",
+   "normal_case": "Crew_Vestibule_2 loses pressure: Crew_Tube_2_3 pressure seats the leaf",
+   "reverse_case": "Crew_Tube_2_3 loses pressure while Crew_Vestibule_2 is at cabin pressure",
+   "reverse_load_kN": 62.8,
+   "held_today": "latches only",
+   "load_basis": "cabin 80 kPa (BASELINE) x seated leaf area; DERIVED, not a structural release"
+  },
+  {
+   "name": "Tube hatch B3",
+   "family": "F2 transfer pair (drum door + tube hatch)",
+   "a": "Crew_Vestibule_2",
+   "b": "Crew_Tube_2_3",
+   "seats_from": "Crew_Tube_2_3",
+   "leaf_r_m": 0.5,
+   "kind": "curved plate sliding round the drum wall (door) / ring face (hatch), tube side",
+   "status": "BUILT PROTOTYPE",
+   "source": "crew_transfer.transfer_stack: hatch on the ring-side face, tube side",
+   "normal_case": "Crew_Vestibule_2 loses pressure: Crew_Tube_2_3 pressure seats the leaf",
+   "reverse_case": "Crew_Tube_2_3 loses pressure while Crew_Vestibule_2 is at cabin pressure",
+   "reverse_load_kN": 62.8,
+   "held_today": "latches only",
+   "load_basis": "cabin 80 kPa (BASELINE) x seated leaf area; DERIVED, not a structural release"
+  },
+  {
+   "name": "Sector hatch B3",
+   "family": "F1 sector hatch",
+   "a": "Crew_Tube_2_3",
+   "b": "Sector_2_3",
+   "seats_from": "Sector_2_3",
+   "leaf_r_m": 0.85,
+   "kind": "sliding plug: leaf on the sector side, drops 0.02 m and slides 1.75 m toward the aisle",
+   "status": "BUILT PROTOTYPE",
+   "source": "[human_entry] landing leaf seats from the sector side",
+   "normal_case": "Crew_Tube_2_3 loses pressure: Sector_2_3 pressure seats the leaf",
+   "reverse_case": "Sector_2_3 loses pressure while Crew_Tube_2_3 is at cabin pressure",
+   "reverse_load_kN": 181.6,
+   "held_today": "latches only",
+   "load_basis": "cabin 80 kPa (BASELINE) x seated leaf area; DERIVED, not a structural release"
+  },
+  {
+   "name": "Crew_Connector_Airlock_EVA hatch",
+   "family": "F3 spine-shell branch (trunk side)",
+   "a": "Crew_Trunk",
+   "b": "Airlock_EVA",
+   "seats_from": null,
+   "leaf_r_m": null,
+   "kind": "proxy connector; hatch and isolation not designed",
+   "status": "BUILT PROXY, hatch OPEN (D1/E4)",
+   "source": "crew_transfer.interfaces FITTING_CONNECTOR",
+   "normal_case": "OPEN: seat side not set",
+   "reverse_case": "whichever side is chosen, a loss of that side (Crew_Trunk or Airlock_EVA)",
+   "reverse_load_kN": null,
+   "held_today": "OPEN (one direction will be latch-only)",
+   "load_basis": "cabin 80 kPa (BASELINE) x seated leaf area; DERIVED, not a structural release"
+  },
+  {
+   "name": "Crew_Connector_Dock_Service hatch",
+   "family": "F3 spine-shell branch (trunk side)",
+   "a": "Crew_Trunk",
+   "b": "Dock_Service",
+   "seats_from": null,
+   "leaf_r_m": null,
+   "kind": "proxy connector; hatch and isolation not designed",
+   "status": "BUILT PROXY, hatch OPEN (D1/E4)",
+   "source": "crew_transfer.interfaces FITTING_CONNECTOR",
+   "normal_case": "OPEN: seat side not set",
+   "reverse_case": "whichever side is chosen, a loss of that side (Crew_Trunk or Dock_Service)",
+   "reverse_load_kN": null,
+   "held_today": "OPEN (one direction will be latch-only)",
+   "load_basis": "cabin 80 kPa (BASELINE) x seated leaf area; DERIVED, not a structural release"
+  },
+  {
+   "name": "SP-12 branch hatch (STUDY)",
+   "family": "F5 EVA district (STUDY)",
+   "a": "Crew_Trunk",
+   "b": "SP12",
+   "seats_from": "Crew_Trunk",
+   "leaf_r_m": 0.5,
+   "kind": "leaf at the trunk end of the 0.90 m branch; seat side from the district study",
+   "status": "STUDY",
+   "source": "p1_eva_district.json topology SP12; 0.90 m branch clear",
+   "normal_case": "SP12 loses pressure: Crew_Trunk pressure seats the leaf",
+   "reverse_case": "Crew_Trunk loses pressure while SP12 is at cabin pressure",
+   "reverse_load_kN": 62.8,
+   "held_today": "latches only",
+   "load_basis": "cabin 80 kPa (BASELINE) x seated leaf area; DERIVED, not a structural release"
+  },
+  {
+   "name": "SP-11 inner hatch (STUDY, 1.20 m lead)",
+   "family": "F5 EVA district (STUDY)",
+   "a": "SP12",
+   "b": "SP11",
+   "seats_from": "SP12",
+   "leaf_r_m": 0.65,
+   "kind": "parallel-linkage plug, drops 0.08 m and slides -az in the bulkhead plane",
+   "status": "STUDY",
+   "source": "p1_eva_sp11.json EVA3_SP11_120 parallel_plug_slide (the study lists reverse_load 0 for the EVA cycle; the SP-12-loss case below is the one it does not cover); 1.10 / 1.35 m: 90.5 / 132.1 kN",
+   "normal_case": "SP11 loses pressure: SP12 pressure seats the leaf",
+   "reverse_case": "SP12 loses pressure while SP11 is at cabin pressure",
+   "reverse_load_kN": 106.2,
+   "held_today": "latches only",
+   "load_basis": "cabin 80 kPa (BASELINE) x seated leaf area; DERIVED, not a structural release"
+  },
+  {
+   "name": "SP-11 outer hatch (STUDY, 1.20 m lead)",
+   "family": "F5 EVA district (STUDY)",
+   "a": "OUTSIDE",
+   "b": "SP11",
+   "seats_from": "SP11",
+   "leaf_r_m": 0.65,
+   "kind": "plug opening into the chamber",
+   "status": "STUDY",
+   "source": "p1_eva_sp11.json EVA3_SP11_120 door",
+   "normal_case": "SP11 pressurized against space: pressure seats it",
+   "reverse_case": "none: the exterior is vacuum",
+   "reverse_load_kN": null,
+   "held_today": "n/a",
+   "load_basis": "cabin 80 kPa (BASELINE) x seated leaf area; DERIVED, not a structural release"
+  },
+  {
+   "name": "SP-12/13 door (STUDY)",
+   "family": "F5 EVA district (STUDY)",
+   "a": "SP12",
+   "b": "SP13",
+   "seats_from": "SP12",
+   "leaf_r_m": null,
+   "kind": "door in SP-12's forward wall; size not set by the study",
+   "status": "STUDY",
+   "source": "p1_eva_district.json topology SP12/SP13",
+   "normal_case": "SP13 loses pressure: SP12 pressure seats the leaf",
+   "reverse_case": "SP12 loses pressure while SP13 is at cabin pressure",
+   "reverse_load_kN": null,
+   "held_today": "latches only",
+   "load_basis": "cabin 80 kPa (BASELINE) x seated leaf area; DERIVED, not a structural release"
+  },
+  {
+   "name": "District hatch (STUDY, L1-A)",
+   "family": "F5 EVA district (STUDY)",
+   "a": "Crew_Trunk",
+   "b": "DISTRICT",
+   "seats_from": "Crew_Trunk",
+   "leaf_r_m": 0.85,
+   "kind": "across the 1.6 m trunk extension at the trunk end (X 102.45 m)",
+   "status": "STUDY",
+   "source": "p1_eva_district.json L1-A access extension 1.6 m",
+   "normal_case": "DISTRICT loses pressure: Crew_Trunk pressure seats the leaf",
+   "reverse_case": "Crew_Trunk loses pressure while DISTRICT is at cabin pressure",
+   "reverse_load_kN": 181.6,
+   "held_today": "latches only",
+   "load_basis": "cabin 80 kPa (BASELINE) x seated leaf area; DERIVED, not a structural release"
+  },
+  {
+   "name": "Workshop port hatch (STUDY, L1-A)",
+   "family": "F5 EVA district (STUDY)",
+   "a": "DISTRICT",
+   "b": "WORKSHOP",
+   "seats_from": null,
+   "leaf_r_m": 0.5,
+   "kind": "0.90 m port off the district passage; seat side not set",
+   "status": "STUDY",
+   "source": "p1_eva_district.json L1-A access port 0.90 m",
+   "normal_case": "OPEN: seat side not set",
+   "reverse_case": "whichever side is chosen, a loss of that side (DISTRICT or WORKSHOP)",
+   "reverse_load_kN": 62.8,
+   "held_today": "OPEN (one direction will be latch-only)",
+   "load_basis": "cabin 80 kPa (BASELINE) x seated leaf area; DERIVED, not a structural release"
+  }
+ ],
+ "latch_only_reverse": {
+  "count": 24,
+  "built": [
+   "Dock inner hatch",
+   "Storeroom hatch",
+   "Drum door A1",
+   "Tube hatch A1",
+   "Sector hatch A1",
+   "Drum door A2",
+   "Tube hatch A2",
+   "Sector hatch A2",
+   "Drum door A3",
+   "Tube hatch A3",
+   "Sector hatch A3",
+   "Drum door B1",
+   "Tube hatch B1",
+   "Sector hatch B1",
+   "Drum door B2",
+   "Tube hatch B2",
+   "Sector hatch B2",
+   "Drum door B3",
+   "Tube hatch B3",
+   "Sector hatch B3"
+  ],
+  "study": [
+   "SP-12 branch hatch (STUDY)",
+   "SP-11 inner hatch (STUDY, 1.20 m lead)",
+   "SP-12/13 door (STUDY)",
+   "District hatch (STUDY, L1-A)"
+  ],
+  "conditional": [
+   "Dock outer hatch"
+  ],
+  "seat_side_open": [
+   "Refuge port closure",
+   "Spine port gate A",
+   "Spine port gate B",
+   "Crew_Connector_Airlock_EVA hatch",
+   "Crew_Connector_Dock_Service hatch",
+   "Workshop port hatch (STUDY, L1-A)"
+  ]
+ },
+ "options": {
+  "F1_sector_hatch": {
+   "option_1": {
+    "meaning": "one leaf, seal and dogs rated for the full Delta-p from either side: a dog ring on the frame engaging the leaf's deck face besides the seat it already has on the tube side, a seal that is pressure-energized both ways, leaf structure checked for both load directions; the dogs retract before the 0.02 m drop and the 1.75 m slide",
+    "frame_depth_m": 0.219,
+    "leaf_lap_on_seat_m": 0.05,
+    "frame_beyond_leaf_rim_m": 0.05,
+    "band_rim_to_guide_rail_m": 0.05,
+    "leaf_open_to_stile_top_m": 0.067,
+    "geometry": "reverse dogs sit in the 0.05 m band between the leaf rim (r 0.85 m) and the guide rails (r 0.92 m) and must retract out of the leaf's slide path; the frame (0.22 m deep, skin to seat) carries them; no headroom or route change",
+    "reverse_load_kN": 181.6,
+    "mass_complexity": "moderate: one more dog set and drive per hatch (x6); no new seal plane or pocket"
+   },
+   "option_2a_hinged_in_tube": {
+    "leaf_diameter_m": 1.7,
+    "tube_clear_diameter_m": 1.6,
+    "result": "FAIL: a 1.70 m leaf cannot stand edge-on in a 1.60 m bore"
+   },
+   "option_2b_tube_end_slide_gate": {
+    "plate": "r 0.85 m x 0.06 m at 24.43-24.49 m from the ring axis (seat on the inner hoop's inner face), travel 1.75 m",
+    "pockets": {
+     "A": {
+      "+X (fwd)": {
+       "min_gap_m": 0.45,
+       "nearest": "Crew_Tube_2_1",
+       "check": "swept",
+       "need_m": 0.15,
+       "mount_gap_m": 0.0,
+       "mount": "Ring_1_Hoop_Inner",
+       "result": "CLEAR"
+      },
+      "-X (aft)": {
+       "min_gap_m": 0.428,
+       "nearest": "Sector_1_1",
+       "check": "same rotor",
+       "need_m": 0.05,
+       "mount_gap_m": 0.0,
+       "mount": "Ring_1_Hoop_Inner",
+       "result": "CLEAR"
+      },
+      "toward spoke (+z)": {
+       "min_gap_m": -0.12,
+       "nearest": "Ring_Spoke_1_1_-1",
+       "check": "same rotor",
+       "need_m": 0.05,
+       "mount_gap_m": 0.0,
+       "mount": "Ring_1_Hoop_Inner",
+       "result": "BLOCKED"
+      },
+      "away from spoke (-z)": {
+       "min_gap_m": 0.225,
+       "nearest": "Ring_1_Fill_3",
+       "check": "same rotor",
+       "need_m": 0.05,
+       "mount_gap_m": 0.0,
+       "mount": "Ring_1_Hoop_Inner",
+       "result": "CLEAR"
+      }
+     },
+     "B": {
+      "+X (fwd)": {
+       "min_gap_m": 0.428,
+       "nearest": "Sector_2_1",
+       "check": "same rotor",
+       "need_m": 0.05,
+       "mount_gap_m": 0.0,
+       "mount": "Ring_2_Hoop_Inner",
+       "result": "CLEAR"
+      },
+      "-X (aft)": {
+       "min_gap_m": 0.428,
+       "nearest": "Sector_2_1",
+       "check": "same rotor",
+       "need_m": 0.05,
+       "mount_gap_m": 0.0,
+       "mount": "Ring_2_Hoop_Inner",
+       "result": "CLEAR"
+      },
+      "toward spoke (+z)": {
+       "min_gap_m": -0.12,
+       "nearest": "Ring_Spoke_2_1_-1",
+       "check": "same rotor",
+       "need_m": 0.05,
+       "mount_gap_m": 0.0,
+       "mount": "Ring_2_Hoop_Inner",
+       "result": "BLOCKED"
+      },
+      "away from spoke (-z)": {
+       "min_gap_m": 0.225,
+       "nearest": "Ring_2_Fill_3",
+       "check": "same rotor",
+       "need_m": 0.05,
+       "mount_gap_m": 0.0,
+       "mount": "Ring_2_Hoop_Inner",
+       "result": "CLEAR"
+      }
+     }
+    },
+    "note": "the tube ladder breaks for the closed plate; the plate carries the tube-side seal; same-rotor need = leaf swing clearance, swept need = mechanical clearance"
+   },
+   "option_2c_sector_side_plate": {
+    "stack_needed_m": 0.08,
+    "leaf_open_to_stile_top_m": 0.067,
+    "margin_m": -0.013,
+    "result": "FAIL without lowering the ladder top and the landing light: the plate stack below the open leaf does not fit",
+    "note": "also puts the secondary inside the compartment it isolates (operated remotely only)"
+   }
+  },
+  "F2_transfer_pair": {
+   "A": {
+    "stack": {
+     "drum_wall_outer": 1.975,
+     "door": [
+      1.985,
+      2.025
+     ],
+     "ring_face": 2.055,
+     "hatch": [
+      2.065,
+      2.105
+     ],
+     "running_gap_m": 0.03
+    },
+    "reverse_load_kN_each": 181.6,
+    "option_1": {
+     "meaning": "rate the tube hatch (or the drum door) for the full Delta-p from the vestibule side: dogs on its slide edges or a cam that clamps it to the face, a seal energized both ways; plate stiffness for the reverse load",
+     "geometry": "inside the existing 0.04 m plate and 0.01 m track gap; the clamp/dog hardware sits in the track ends, outside the bore; no stack change measured",
+     "mass_complexity": "moderate: x6 per ring, one of each pair"
+    },
+    "option_2a_door_on_inner_face": {
+     "chamber_depth_m": 0.95,
+     "required_depth_m": 0.91,
+     "plate_band_m": 0.05,
+     "margin_m": -0.01,
+     "park_turn_deg": 58.9,
+     "handrail_at_deg": 60.0,
+     "result": "FAIL: the chamber holds the suited envelope between handrails with only 0.04 m spare, and the parked plate crosses the handrail between hatches"
+    },
+    "option_2b_hatch_in_running_gap": {
+     "running_gap_m": 0.03,
+     "needed_m": 0.08,
+     "ring_face_shift_m": 0.05,
+     "result": "needs the ring face 0.05 m further out (tube root, collar and, on ring B, the neck base move); one plate then seats each way across the running gap"
+    },
+    "option_2c_collar_slide_gate": {
+     "plate": "r 0.85 m x 0.04 m at r 2.44 m in the 0.77 m radial collar, travel 1.75 m",
+     "pockets": {
+      "+u (toward spokes)": {
+       "min_gap_m": -0.12,
+       "nearest": "Ring_Spoke_1_1_-1",
+       "check": "same rotor",
+       "need_m": 0.05,
+       "mount_gap_m": 0.05,
+       "mount": "Crew_Tube_1_1",
+       "result": "BLOCKED"
+      },
+      "-u (aft)": {
+       "min_gap_m": 0.445,
+       "nearest": "Crew_Vestibule_1",
+       "check": "same rotor",
+       "need_m": 0.05,
+       "mount_gap_m": 0.05,
+       "mount": "Crew_Tube_1_1",
+       "result": "CLEAR"
+      },
+      "+tangent": {
+       "min_gap_m": 0.607,
+       "nearest": "Crew_Vestibule_1",
+       "check": "same rotor",
+       "need_m": 0.05,
+       "mount_gap_m": 0.05,
+       "mount": "Crew_Tube_1_1",
+       "result": "CLEAR"
+      },
+      "-tangent": {
+       "min_gap_m": 0.607,
+       "nearest": "Crew_Vestibule_1",
+       "check": "same rotor",
+       "need_m": 0.05,
+       "mount_gap_m": 0.05,
+       "mount": "Crew_Tube_1_1",
+       "result": "CLEAR"
+      }
+     },
+     "note": "a third closure per tube; seats from the vestibule side; needs a pocket enclosure on the collar"
+    }
+   },
+   "B": {
+    "stack": {
+     "drum_wall_outer": 1.975,
+     "door": [
+      1.985,
+      2.025
+     ],
+     "ring_face": 2.055,
+     "hatch": [
+      2.065,
+      2.105
+     ],
+     "running_gap_m": 0.03
+    },
+    "reverse_load_kN_each": 62.8,
+    "option_1": {
+     "meaning": "rate the tube hatch (or the drum door) for the full Delta-p from the vestibule side: dogs on its slide edges or a cam that clamps it to the face, a seal energized both ways; plate stiffness for the reverse load",
+     "geometry": "inside the existing 0.04 m plate and 0.01 m track gap; the clamp/dog hardware sits in the track ends, outside the bore; no stack change measured",
+     "mass_complexity": "moderate: x6 per ring, one of each pair"
+    },
+    "option_2a_door_on_inner_face": {
+     "chamber_depth_m": 0.95,
+     "required_depth_m": 0.91,
+     "plate_band_m": 0.05,
+     "margin_m": -0.01,
+     "park_turn_deg": 35.9,
+     "handrail_at_deg": 60.0,
+     "result": "FAIL: the chamber holds the suited envelope between handrails with only 0.04 m spare, and the parked plate crosses the handrail between hatches"
+    },
+    "option_2b_hatch_in_running_gap": {
+     "running_gap_m": 0.03,
+     "needed_m": 0.08,
+     "ring_face_shift_m": 0.05,
+     "result": "needs the ring face 0.05 m further out (tube root, collar and, on ring B, the neck base move); one plate then seats each way across the running gap"
+    },
+    "option_2c_collar_slide_gate": {
+     "plate": "r 0.85 m x 0.04 m at r 2.625 m in the 0.85 m radial collar, travel 1.75 m",
+     "pockets": {
+      "+u (toward spokes)": {
+       "min_gap_m": -0.12,
+       "nearest": "Ring_Spoke_2_1_-1",
+       "check": "same rotor",
+       "need_m": 0.05,
+       "mount_gap_m": 0.05,
+       "mount": "Crew_Tube_2_1",
+       "result": "BLOCKED"
+      },
+      "-u (aft)": {
+       "min_gap_m": 0.45,
+       "nearest": "Crew_Tube_1_1",
+       "check": "swept",
+       "need_m": 0.15,
+       "mount_gap_m": 0.05,
+       "mount": "Crew_Tube_2_1",
+       "result": "CLEAR"
+      },
+      "+tangent": {
+       "min_gap_m": 0.781,
+       "nearest": "Crew_Vestibule_2",
+       "check": "same rotor",
+       "need_m": 0.05,
+       "mount_gap_m": 0.05,
+       "mount": "Crew_Tube_2_1",
+       "result": "CLEAR"
+      },
+      "-tangent": {
+       "min_gap_m": 0.781,
+       "nearest": "Crew_Vestibule_2",
+       "check": "same rotor",
+       "need_m": 0.05,
+       "mount_gap_m": 0.05,
+       "mount": "Crew_Tube_2_1",
+       "result": "CLEAR"
+      }
+     },
+     "note": "a third closure per tube; seats from the vestibule side; needs a pocket enclosure on the collar"
+    }
+   }
+  },
+  "F3_slot": {
+   "stack": {
+    "trunk_outer_r_m": 0.85,
+    "spine_core_r_m": 0.95,
+    "slot_m": 0.1,
+    "gate_m": 0.04,
+    "track_gap_m": 0.01,
+    "option_1_free_per_face_m": 0.02,
+    "option_2_needed_m": 0.11,
+    "option_2_margin_m": -0.01,
+    "option_2_result": "FAIL in the slot: two plates with their track gaps and no seat land between them exceed the 0.10 m slot",
+    "option_1_result": "fits: 0.02 m per face for a seat land and seal after the track gap"
+   },
+   "parks": {
+    "Crew_Connector_Airlock_EVA": {
+     "x_m": 101.85,
+     "azimuth_deg": 50.0,
+     "gate_half_m": 0.5,
+     "slide_m": 1.1,
+     "+X": {
+      "span_x_m": [
+       102.45,
+       103.45
+      ],
+      "blocked_by": [
+       "trunk end"
+      ],
+      "result": "BLOCKED"
+     },
+     "-X": {
+      "span_x_m": [
+       100.25,
+       101.25
+      ],
+      "blocked_by": [],
+      "result": "CLEAR"
+     }
+    },
+    "Crew_Connector_Dock_Primary": {
+     "x_m": 99.4,
+     "azimuth_deg": 195.0,
+     "gate_half_m": 0.85,
+     "slide_m": 1.8,
+     "+X": {
+      "span_x_m": [
+       100.35,
+       102.05
+      ],
+      "blocked_by": [],
+      "result": "CLEAR"
+     },
+     "-X": {
+      "span_x_m": [
+       96.75,
+       98.45
+      ],
+      "blocked_by": [],
+      "result": "CLEAR"
+     }
+    },
+    "Crew_Connector_Dock_Service": {
+     "x_m": 99.4,
+     "azimuth_deg": 315.0,
+     "gate_half_m": 0.45,
+     "slide_m": 1.0,
+     "+X": {
+      "span_x_m": [
+       99.95,
+       100.85
+      ],
+      "blocked_by": [],
+      "result": "CLEAR"
+     },
+     "-X": {
+      "span_x_m": [
+       97.95,
+       98.85
+      ],
+      "blocked_by": [],
+      "result": "CLEAR"
+     }
+    },
+    "Crew_Refuge_Port": {
+     "x_m": 95.55,
+     "azimuth_deg": 0.0,
+     "gate_half_m": 0.5,
+     "slide_m": 1.1,
+     "+X": {
+      "span_x_m": [
+       96.15,
+       97.15
+      ],
+      "blocked_by": [],
+      "result": "CLEAR"
+     },
+     "-X": {
+      "span_x_m": [
+       93.95,
+       94.95
+      ],
+      "blocked_by": [],
+      "result": "CLEAR"
+     }
+    },
+    "Crew_Store_Port": {
+     "x_m": 98.1,
+     "azimuth_deg": 35.0,
+     "gate_half_m": 0.5,
+     "slide_m": 1.1,
+     "+X": {
+      "span_x_m": [
+       98.7,
+       99.7
+      ],
+      "blocked_by": [],
+      "result": "CLEAR"
+     },
+     "-X": {
+      "span_x_m": [
+       96.5,
+       97.5
+      ],
+      "blocked_by": [],
+      "result": "CLEAR"
+     }
+    },
+    "Crew_Port_1_1": {
+     "x_m": 82.6,
+     "azimuth_deg": 90.0,
+     "gate_half_m": 0.85,
+     "slide_m": 1.8,
+     "+X": {
+      "span_x_m": [
+       83.55,
+       85.25
+      ],
+      "blocked_by": [],
+      "result": "CLEAR"
+     },
+     "-X": {
+      "span_x_m": [
+       79.95,
+       81.65
+      ],
+      "blocked_by": [
+       "trunk end"
+      ],
+      "result": "BLOCKED"
+     }
+    },
+    "Crew_Port_2_2": {
+     "x_m": 88.95,
+     "azimuth_deg": 210.0,
+     "gate_half_m": 0.5,
+     "slide_m": 1.1,
+     "+X": {
+      "span_x_m": [
+       89.55,
+       90.55
+      ],
+      "blocked_by": [],
+      "result": "CLEAR"
+     },
+     "-X": {
+      "span_x_m": [
+       87.35,
+       88.35
+      ],
+      "blocked_by": [],
+      "result": "CLEAR"
+     }
+    }
+   }
+  },
+  "spine_gates": {
+   "recommended_seat": "from the trunk side",
+   "why": "a vestibule or tube loss is then held by trunk pressure (the trunk serves the refuge, the other ring, docking, EVA and the storeroom); after a trunk loss the vestibule is reverse-loaded, but beyond it the drum doors and tube hatches seat from the tube side, so tubes and sectors stay pressure-held: the vestibule is an unoccupied transfer volume in that case",
+   "reverse_case": "trunk loss with the vestibule at pressure",
+   "reverse_load_kN": {
+    "A": 181.6,
+    "B": 62.8
+   },
+   "recommended_option": "option 1 (bidirectional gate): option 2 does not fit the slot; a crew member in the drum during a trunk loss is the case that needs it"
+  },
+  "refuge": {
+   "recommended_seat": "from the refuge side (refuge pressure holds it when the trunk is lost: the haven case)",
+   "reverse_case": "refuge breach while the trunk is at pressure",
+   "reverse_load_kN": 62.8,
+   "option_1": "one bidirectional gate in the spine-shell slot (fits, see slot stack) or one hinged leaf with reverse dogs",
+   "option_2": {
+    "primary": "leaf hinged into the refuge, seats from the refuge side",
+    "secondary": "slot gate seating from the trunk side",
+    "hinged_leaf_reach_m": 1.1,
+    "refuge_annulus_depth_m": 1.79,
+    "radial_margin_m": 0.69,
+    "result": "fits radially; the hoop and anchor rails beside the port are not checked against the swing (Blender)"
+   }
+  }
+ },
+ "reserve": {
+  "A": {
+   "rotor_x_m": 85.04936247723134,
+   "u_m": [
+    0.8,
+    2.0
+   ],
+   "x_m": [
+    85.85,
+    87.05
+   ],
+   "r_m": [
+    1.62,
+    5.5
+   ],
+   "axial_limit": {
+    "u_m": 2.0,
+    "next_step_blocked_by": "Hub1_FLUID_COUPLING_Stator"
+   },
+   "radial_limit": {
+    "study_cap_r_m": 5.5,
+    "cap_basis": "PROTOTYPE: kept inside the crew tubes' bend radius (hub zone)",
+    "free_to_r_m": 5.53,
+    "next_step_blocked_by": null
+   },
+   "segments_deg_ring_local": [
+    60,
+    180,
+    300
+   ],
+   "segment_width_deg": 40,
+   "envelope_m3": 34.69,
+   "distance_to_sector_floor_m": 22.5,
+   "distance_to_sector_overhead_m": 19.5,
+   "note": "envelope available on the rotating drum (three segments, 120 deg symmetric: no static imbalance before draw-down); tank size, gas, pressure and mass are Sheets items",
+   "paths": {
+    "A1": {
+     "hub_leg_m": 5.0,
+     "tube_leg_m": 24.4,
+     "valves": [
+      "V-RES (reserve isolation, remote, fail-closed)",
+      "V-BR-A1 (branch isolation at the hub manifold, remote, fail-closed)",
+      "LC-A1 (branch line pressure-decay check between V-BR and V-EQ)",
+      "V-EQ-A1 (controlled equalization, tube-side hatch panel, remote + manual, flow-limited)",
+      "V-REL-A1 (sector relief/vent to space, remote + tube-side manual)",
+      "PT-A1 (sector and tube pressure, ppO2, decay; remote and at the panel)",
+      "V-TB-A1 (tube tap off the same branch, for a tube recovery)"
+     ]
+    },
+    "A2": {
+     "hub_leg_m": 5.0,
+     "tube_leg_m": 24.4,
+     "valves": [
+      "V-RES (reserve isolation, remote, fail-closed)",
+      "V-BR-A2 (branch isolation at the hub manifold, remote, fail-closed)",
+      "LC-A2 (branch line pressure-decay check between V-BR and V-EQ)",
+      "V-EQ-A2 (controlled equalization, tube-side hatch panel, remote + manual, flow-limited)",
+      "V-REL-A2 (sector relief/vent to space, remote + tube-side manual)",
+      "PT-A2 (sector and tube pressure, ppO2, decay; remote and at the panel)",
+      "V-TB-A2 (tube tap off the same branch, for a tube recovery)"
+     ]
+    },
+    "A3": {
+     "hub_leg_m": 5.0,
+     "tube_leg_m": 24.4,
+     "valves": [
+      "V-RES (reserve isolation, remote, fail-closed)",
+      "V-BR-A3 (branch isolation at the hub manifold, remote, fail-closed)",
+      "LC-A3 (branch line pressure-decay check between V-BR and V-EQ)",
+      "V-EQ-A3 (controlled equalization, tube-side hatch panel, remote + manual, flow-limited)",
+      "V-REL-A3 (sector relief/vent to space, remote + tube-side manual)",
+      "PT-A3 (sector and tube pressure, ppO2, decay; remote and at the panel)",
+      "V-TB-A3 (tube tap off the same branch, for a tube recovery)"
+     ]
+    }
+   }
+  },
+  "B": {
+   "rotor_x_m": 91.04936247723134,
+   "u_m": [
+    0.8,
+    2.0
+   ],
+   "x_m": [
+    91.85,
+    93.05
+   ],
+   "r_m": [
+    1.62,
+    5.5
+   ],
+   "axial_limit": {
+    "u_m": 2.0,
+    "next_step_blocked_by": "Hub2_FLUID_COUPLING_Stator"
+   },
+   "radial_limit": {
+    "study_cap_r_m": 5.5,
+    "cap_basis": "PROTOTYPE: kept inside the crew tubes' bend radius (hub zone)",
+    "free_to_r_m": 5.53,
+    "next_step_blocked_by": null
+   },
+   "segments_deg_ring_local": [
+    60,
+    180,
+    300
+   ],
+   "segment_width_deg": 40,
+   "envelope_m3": 34.69,
+   "distance_to_sector_floor_m": 22.5,
+   "distance_to_sector_overhead_m": 19.5,
+   "note": "envelope available on the rotating drum (three segments, 120 deg symmetric: no static imbalance before draw-down); tank size, gas, pressure and mass are Sheets items",
+   "paths": {
+    "B1": {
+     "hub_leg_m": 4.8,
+     "tube_leg_m": 24.1,
+     "valves": [
+      "V-RES (reserve isolation, remote, fail-closed)",
+      "V-BR-B1 (branch isolation at the hub manifold, remote, fail-closed)",
+      "LC-B1 (branch line pressure-decay check between V-BR and V-EQ)",
+      "V-EQ-B1 (controlled equalization, tube-side hatch panel, remote + manual, flow-limited)",
+      "V-REL-B1 (sector relief/vent to space, remote + tube-side manual)",
+      "PT-B1 (sector and tube pressure, ppO2, decay; remote and at the panel)",
+      "V-TB-B1 (tube tap off the same branch, for a tube recovery)"
+     ]
+    },
+    "B2": {
+     "hub_leg_m": 4.8,
+     "tube_leg_m": 24.1,
+     "valves": [
+      "V-RES (reserve isolation, remote, fail-closed)",
+      "V-BR-B2 (branch isolation at the hub manifold, remote, fail-closed)",
+      "LC-B2 (branch line pressure-decay check between V-BR and V-EQ)",
+      "V-EQ-B2 (controlled equalization, tube-side hatch panel, remote + manual, flow-limited)",
+      "V-REL-B2 (sector relief/vent to space, remote + tube-side manual)",
+      "PT-B2 (sector and tube pressure, ppO2, decay; remote and at the panel)",
+      "V-TB-B2 (tube tap off the same branch, for a tube recovery)"
+     ]
+    },
+    "B3": {
+     "hub_leg_m": 4.8,
+     "tube_leg_m": 24.1,
+     "valves": [
+      "V-RES (reserve isolation, remote, fail-closed)",
+      "V-BR-B3 (branch isolation at the hub manifold, remote, fail-closed)",
+      "LC-B3 (branch line pressure-decay check between V-BR and V-EQ)",
+      "V-EQ-B3 (controlled equalization, tube-side hatch panel, remote + manual, flow-limited)",
+      "V-REL-B3 (sector relief/vent to space, remote + tube-side manual)",
+      "PT-B3 (sector and tube pressure, ppO2, decay; remote and at the panel)",
+      "V-TB-B3 (tube tap off the same branch, for a tube recovery)"
+     ]
+    }
+   }
+  }
+ },
+ "gas_paths": {
+  "R1 ring-local reserve (PREFERRED, spinning emergency)": {
+   "where": "on each rotor drum forward of its spoke plane, three segments between the crew tubes (ring A x [85.85, 87.05] m, ring B x [91.85, 93.05] m, r [1.62, 5.5] m)",
+   "protected_by": "about 22.5 m radially from every sector, outside every pressure compartment, behind the remote fail-closed branch valve of each sector; a leaking sector or tube cannot reach it",
+   "path": "reserve -> V-RES -> hub manifold -> V-BR-k -> line along crew tube k (in the tube wall chase) -> V-EQ-k at the tube-side hatch panel -> sector k; tube recovery via V-TB-k",
+   "works_while_spinning": true,
+   "new_rotary_fluid_interface": false,
+   "source": "S&E 16!A7 MEC-006: store/condition most fluids on the rotating side; bypass/isolation and local reserve"
+  },
+  "R4 stop and index (PREFERRED, recharge and backup)": {
+   "where": "a recharge stab coupling beside the ring-stop lock housings (u -1.0 m, r 1.165 m outer pin), engaged only in STOPPED_LOCKED; stationary supply to the rotor manifold",
+   "path": "stationary supply (source OPEN) -> stationary isolation + leak check -> stab coupling (engaged at index) -> V-RES fill valve -> reserve; backup: the same coupling feeds the hub manifold directly",
+   "works_while_spinning": false,
+   "new_rotary_fluid_interface": false,
+   "limits": "the ring's gravity is lost while stopped; the coupling geometry and mechanism belong with MEC-011 (OPEN)"
+  },
+  "R2 drum batch transfer (compared)": {
+   "path": "pressurize the despun drum from the stationary side, synchronize, open drum door + tube hatch to the tube, repeat",
+   "works_while_spinning": "per cycle",
+   "new_rotary_fluid_interface": false,
+   "limits": "opens the transfer pair into the tube, so it cannot serve a leaking tube; each batch is bounded by the drum volume and the MEC-019 cycle (OPEN); the closures cycle under Delta-p; slower than R1, no hardware beyond the drum: kept as a tertiary path"
+  },
+  "R3 rotary gas union (NOT ADOPTED)": {
+   "why_not_needed": "R1 covers the spinning emergency from rotating-side storage and R4 recharges at index, so no stationary-to-ring gas flow is needed while spinning; the hub keeps its one existing fluid coupling cartridge (Hub_FLUID_COUPLING, MEC-006) and adds no essential rotary gas interface (MEC-019)"
+  }
+ },
+ "prohibitions": {
+  "rules": [
+   "no untested reverse-load latch-only closure",
+   "no gas into an actively leaking sector",
+   "no access through evacuated strips"
+  ],
+  "rows": [
+   {
+    "path": "R1 sector recovery",
+    "crosses": [
+     "sector hatch (closed; tube at 80 kPa, sector low: REVERSE-loaded)"
+    ],
+    "P1": "BLOCKED until F1 has its rated reverse closure (option 1 dogs or option 2b gate) and it is tested: the repressurization itself holds the tube against the low sector on that hatch",
+    "P2": "interlock: V-EQ enables only after LC passes and the sector decay test shows the leak is stopped (threshold OPEN, Sheets); V-BR fail-closed",
+    "P3": "PASS: every valve on the tube side, at the hub or remote; no entry before the sector is at pressure"
+   },
+   {
+    "path": "R1 tube recovery",
+    "crosses": [
+     "drum door + tube hatch (vestibule at pressure, tube low: REVERSE-loaded)",
+     "sector hatch (pressure-seated)"
+    ],
+    "P1": "BLOCKED until F2 has one closure per pair rated or re-handed (option 1, or option 2b)",
+    "P2": "same interlock on V-TB",
+    "P3": "PASS: no strip is involved; the tube is entered only at pressure"
+   },
+   {
+    "path": "R4 recharge at index",
+    "crosses": [
+     "stab coupling (stationary <-> rotor), no hatch"
+    ],
+    "P1": "PASS: no closure under reverse load",
+    "P2": "PASS: fills the reserve, never a sector directly",
+    "P3": "PASS: mechanism-engaged; no crew passage"
+   },
+   {
+    "path": "R4 backup feed",
+    "crosses": [
+     "stab coupling -> hub manifold -> V-BR-k"
+    ],
+    "P1": "as R1 (sector hatch reverse-loaded)",
+    "P2": "as R1",
+    "P3": "PASS"
+   },
+   {
+    "path": "R2 batch transfer",
+    "crosses": [
+     "spine gate",
+     "drum door + tube hatch (opened under equal pressure, cycled)"
+    ],
+    "P1": "conditional: each cycle closes the pair with the drum at higher pressure than the tube unless equalized first (procedure, OPEN)",
+    "P2": "cannot serve a leaking tube; a sector only through V-EQ after LC",
+    "P3": "PASS: drum and tube are pressurized; never into a strip"
+   },
+   {
+    "path": "R3 rotary union",
+    "crosses": [
+     "continuous rotary gas seal"
+    ],
+    "P1": "n/a",
+    "P2": "n/a",
+    "P3": "n/a",
+    "note": "NOT ADOPTED"
+   }
+  ]
+ },
+ "compartments": {
+  "Sector_1_1": {
+   "gross_m3": 72.4,
+   "net_m3": 37.7,
+   "zone": "ROTATING",
+   "category": "ring sector (HABITATION)"
+  },
+  "Sector_1_2": {
+   "gross_m3": 72.4,
+   "net_m3": 42.7,
+   "zone": "ROTATING",
+   "category": "ring sector (WORK_MEDICAL_OPS)"
+  },
+  "Sector_1_3": {
+   "gross_m3": 72.4,
+   "net_m3": 44.2,
+   "zone": "ROTATING",
+   "category": "ring sector (LIFE_SUPPORT_GARDEN_COMMON)"
+  },
+  "Sector_2_1": {
+   "gross_m3": 72.4,
+   "net_m3": 37.7,
+   "zone": "ROTATING",
+   "category": "ring sector (HABITATION)"
+  },
+  "Sector_2_2": {
+   "gross_m3": 72.4,
+   "net_m3": 42.7,
+   "zone": "ROTATING",
+   "category": "ring sector (WORK_MEDICAL_OPS)"
+  },
+  "Sector_2_3": {
+   "gross_m3": 72.4,
+   "net_m3": 44.2,
+   "zone": "ROTATING",
+   "category": "ring sector (LIFE_SUPPORT_GARDEN_COMMON)"
+  },
+  "Refuge_Storm_Shelter": {
+   "gross_m3": 53.9,
+   "net_m3": 53.4,
+   "zone": "STATIONARY",
+   "category": "storm refuge"
+  },
+  "Storeroom_Shell": {
+   "gross_m3": 30.0,
+   "net_m3": 18.9,
+   "zone": "STATIONARY",
+   "category": "general storeroom (SP-45)"
+  },
+  "Crew_Trunk": {
+   "gross_m3": 42.7,
+   "net_m3": null,
+   "zone": "STATIONARY",
+   "category": "crew passage (TRUNK)"
+  },
+  "Dock_Primary_Trunk_Node": {
+   "gross_m3": 12.4,
+   "net_m3": null,
+   "zone": "STATIONARY",
+   "category": "trunk node"
+  },
+  "Crew_Vestibule_1": {
+   "gross_m3": 16.2,
+   "net_m3": null,
+   "zone": "DESPUN",
+   "category": "transfer drum chamber (VESTIBULE)"
+  },
+  "Crew_Vestibule_2": {
+   "gross_m3": 10.1,
+   "net_m3": null,
+   "zone": "DESPUN",
+   "category": "transfer drum chamber (VESTIBULE)"
+  },
+  "Crew_Tube_1_1": {
+   "gross_m3": 49.0,
+   "net_m3": null,
+   "zone": "ROTATING",
+   "category": "crew passage (COAST_TUBE)"
+  },
+  "Crew_Tube_1_2": {
+   "gross_m3": 49.0,
+   "net_m3": null,
+   "zone": "ROTATING",
+   "category": "crew passage (COAST_TUBE)"
+  },
+  "Crew_Tube_1_3": {
+   "gross_m3": 49.0,
+   "net_m3": null,
+   "zone": "ROTATING",
+   "category": "crew passage (COAST_TUBE)"
+  },
+  "Crew_Tube_2_1": {
+   "gross_m3": 48.5,
+   "net_m3": null,
+   "zone": "ROTATING",
+   "category": "crew passage (COAST_TUBE)"
+  },
+  "Crew_Tube_2_2": {
+   "gross_m3": 48.5,
+   "net_m3": null,
+   "zone": "ROTATING",
+   "category": "crew passage (COAST_TUBE)"
+  },
+  "Crew_Tube_2_3": {
+   "gross_m3": 48.5,
+   "net_m3": null,
+   "zone": "ROTATING",
+   "category": "crew passage (COAST_TUBE)"
+  },
+  "Dock_Primary_Entry_Chamber": {
+   "gross_m3": 13.1,
+   "net_m3": null,
+   "zone": "STATIONARY",
+   "category": "entry chamber"
+  }
+ },
+ "owner_disposition": {
+  "source": "15!A137 PRESS-004, 43 EVA-064 (owner 2026-10-11)",
+  "architecture": "positive mechanically supported bidirectional load paths on every life-critical closure, two-side manual equalization and indication; a second independent closure only where the fault matrix needs it (refuge, SP-12 branch studies); R1 protected ring-local reserve preferred, R4 coupling only with the rotor stopped/locked, R2 tertiary, R3 not needed",
+  "closures": [
+   {
+    "closure": "Dock outer hatch",
+    "family": "F4 primary dock",
+    "reverse_load_kN": 181.6,
+    "held_today": "latches only (conditional: docked and pressurized)",
+    "requirement": "positive bidirectional load path + two-side equalization/indication (PRESS-004)",
+    "second_closure": "only if the fault matrix requires",
+    "compliant_today": false
+   },
+   {
+    "closure": "Dock inner hatch",
+    "family": "F4 primary dock",
+    "reverse_load_kN": 181.6,
+    "held_today": "latches only",
+    "requirement": "positive bidirectional load path + two-side equalization/indication (PRESS-004)",
+    "second_closure": "only if the fault matrix requires",
+    "compliant_today": false
+   },
+   {
+    "closure": "Storeroom hatch",
+    "family": "F3 spine-shell branch (trunk side)",
+    "reverse_load_kN": 62.8,
+    "held_today": "latches only",
+    "requirement": "positive bidirectional load path + two-side equalization/indication (PRESS-004)",
+    "second_closure": "only if the fault matrix requires",
+    "compliant_today": false
+   },
+   {
+    "closure": "Refuge port closure",
+    "family": "F3 spine-shell branch (trunk side)",
+    "reverse_load_kN": null,
+    "held_today": "OPEN (one direction will be latch-only)",
+    "requirement": "positive bidirectional load path + two-side equalization/indication (PRESS-004)",
+    "second_closure": "study (fault matrix)",
+    "compliant_today": false
+   },
+   {
+    "closure": "Spine port gate A",
+    "family": "F3 spine-shell branch (trunk side)",
+    "reverse_load_kN": 181.6,
+    "held_today": "OPEN (one direction will be latch-only)",
+    "requirement": "positive bidirectional load path + two-side equalization/indication (PRESS-004)",
+    "second_closure": "only if the fault matrix requires",
+    "compliant_today": false
+   },
+   {
+    "closure": "Drum door A1",
+    "family": "F2 transfer pair (drum door + tube hatch)",
+    "reverse_load_kN": 181.6,
+    "held_today": "latches only",
+    "requirement": "positive bidirectional load path + two-side equalization/indication (PRESS-004)",
+    "second_closure": "only if the fault matrix requires",
+    "compliant_today": false
+   },
+   {
+    "closure": "Tube hatch A1",
+    "family": "F2 transfer pair (drum door + tube hatch)",
+    "reverse_load_kN": 181.6,
+    "held_today": "latches only",
+    "requirement": "positive bidirectional load path + two-side equalization/indication (PRESS-004)",
+    "second_closure": "only if the fault matrix requires",
+    "compliant_today": false
+   },
+   {
+    "closure": "Sector hatch A1",
+    "family": "F1 sector hatch",
+    "reverse_load_kN": 181.6,
+    "held_today": "latches only",
+    "requirement": "positive bidirectional load path + two-side equalization/indication (PRESS-004)",
+    "second_closure": "only if the fault matrix requires",
+    "compliant_today": false
+   },
+   {
+    "closure": "Drum door A2",
+    "family": "F2 transfer pair (drum door + tube hatch)",
+    "reverse_load_kN": 181.6,
+    "held_today": "latches only",
+    "requirement": "positive bidirectional load path + two-side equalization/indication (PRESS-004)",
+    "second_closure": "only if the fault matrix requires",
+    "compliant_today": false
+   },
+   {
+    "closure": "Tube hatch A2",
+    "family": "F2 transfer pair (drum door + tube hatch)",
+    "reverse_load_kN": 181.6,
+    "held_today": "latches only",
+    "requirement": "positive bidirectional load path + two-side equalization/indication (PRESS-004)",
+    "second_closure": "only if the fault matrix requires",
+    "compliant_today": false
+   },
+   {
+    "closure": "Sector hatch A2",
+    "family": "F1 sector hatch",
+    "reverse_load_kN": 181.6,
+    "held_today": "latches only",
+    "requirement": "positive bidirectional load path + two-side equalization/indication (PRESS-004)",
+    "second_closure": "only if the fault matrix requires",
+    "compliant_today": false
+   },
+   {
+    "closure": "Drum door A3",
+    "family": "F2 transfer pair (drum door + tube hatch)",
+    "reverse_load_kN": 181.6,
+    "held_today": "latches only",
+    "requirement": "positive bidirectional load path + two-side equalization/indication (PRESS-004)",
+    "second_closure": "only if the fault matrix requires",
+    "compliant_today": false
+   },
+   {
+    "closure": "Tube hatch A3",
+    "family": "F2 transfer pair (drum door + tube hatch)",
+    "reverse_load_kN": 181.6,
+    "held_today": "latches only",
+    "requirement": "positive bidirectional load path + two-side equalization/indication (PRESS-004)",
+    "second_closure": "only if the fault matrix requires",
+    "compliant_today": false
+   },
+   {
+    "closure": "Sector hatch A3",
+    "family": "F1 sector hatch",
+    "reverse_load_kN": 181.6,
+    "held_today": "latches only",
+    "requirement": "positive bidirectional load path + two-side equalization/indication (PRESS-004)",
+    "second_closure": "only if the fault matrix requires",
+    "compliant_today": false
+   },
+   {
+    "closure": "Spine port gate B",
+    "family": "F3 spine-shell branch (trunk side)",
+    "reverse_load_kN": 62.8,
+    "held_today": "OPEN (one direction will be latch-only)",
+    "requirement": "positive bidirectional load path + two-side equalization/indication (PRESS-004)",
+    "second_closure": "only if the fault matrix requires",
+    "compliant_today": false
+   },
+   {
+    "closure": "Drum door B1",
+    "family": "F2 transfer pair (drum door + tube hatch)",
+    "reverse_load_kN": 62.8,
+    "held_today": "latches only",
+    "requirement": "positive bidirectional load path + two-side equalization/indication (PRESS-004)",
+    "second_closure": "only if the fault matrix requires",
+    "compliant_today": false
+   },
+   {
+    "closure": "Tube hatch B1",
+    "family": "F2 transfer pair (drum door + tube hatch)",
+    "reverse_load_kN": 62.8,
+    "held_today": "latches only",
+    "requirement": "positive bidirectional load path + two-side equalization/indication (PRESS-004)",
+    "second_closure": "only if the fault matrix requires",
+    "compliant_today": false
+   },
+   {
+    "closure": "Sector hatch B1",
+    "family": "F1 sector hatch",
+    "reverse_load_kN": 181.6,
+    "held_today": "latches only",
+    "requirement": "positive bidirectional load path + two-side equalization/indication (PRESS-004)",
+    "second_closure": "only if the fault matrix requires",
+    "compliant_today": false
+   },
+   {
+    "closure": "Drum door B2",
+    "family": "F2 transfer pair (drum door + tube hatch)",
+    "reverse_load_kN": 62.8,
+    "held_today": "latches only",
+    "requirement": "positive bidirectional load path + two-side equalization/indication (PRESS-004)",
+    "second_closure": "only if the fault matrix requires",
+    "compliant_today": false
+   },
+   {
+    "closure": "Tube hatch B2",
+    "family": "F2 transfer pair (drum door + tube hatch)",
+    "reverse_load_kN": 62.8,
+    "held_today": "latches only",
+    "requirement": "positive bidirectional load path + two-side equalization/indication (PRESS-004)",
+    "second_closure": "only if the fault matrix requires",
+    "compliant_today": false
+   },
+   {
+    "closure": "Sector hatch B2",
+    "family": "F1 sector hatch",
+    "reverse_load_kN": 181.6,
+    "held_today": "latches only",
+    "requirement": "positive bidirectional load path + two-side equalization/indication (PRESS-004)",
+    "second_closure": "only if the fault matrix requires",
+    "compliant_today": false
+   },
+   {
+    "closure": "Drum door B3",
+    "family": "F2 transfer pair (drum door + tube hatch)",
+    "reverse_load_kN": 62.8,
+    "held_today": "latches only",
+    "requirement": "positive bidirectional load path + two-side equalization/indication (PRESS-004)",
+    "second_closure": "only if the fault matrix requires",
+    "compliant_today": false
+   },
+   {
+    "closure": "Tube hatch B3",
+    "family": "F2 transfer pair (drum door + tube hatch)",
+    "reverse_load_kN": 62.8,
+    "held_today": "latches only",
+    "requirement": "positive bidirectional load path + two-side equalization/indication (PRESS-004)",
+    "second_closure": "only if the fault matrix requires",
+    "compliant_today": false
+   },
+   {
+    "closure": "Sector hatch B3",
+    "family": "F1 sector hatch",
+    "reverse_load_kN": 181.6,
+    "held_today": "latches only",
+    "requirement": "positive bidirectional load path + two-side equalization/indication (PRESS-004)",
+    "second_closure": "only if the fault matrix requires",
+    "compliant_today": false
+   },
+   {
+    "closure": "Crew_Connector_Airlock_EVA hatch",
+    "family": "F3 spine-shell branch (trunk side)",
+    "reverse_load_kN": null,
+    "held_today": "OPEN (one direction will be latch-only)",
+    "requirement": "positive bidirectional load path + two-side equalization/indication (PRESS-004)",
+    "second_closure": "only if the fault matrix requires",
+    "compliant_today": false
+   },
+   {
+    "closure": "Crew_Connector_Dock_Service hatch",
+    "family": "F3 spine-shell branch (trunk side)",
+    "reverse_load_kN": null,
+    "held_today": "OPEN (one direction will be latch-only)",
+    "requirement": "positive bidirectional load path + two-side equalization/indication (PRESS-004)",
+    "second_closure": "only if the fault matrix requires",
+    "compliant_today": false
+   },
+   {
+    "closure": "SP-12 branch hatch (STUDY)",
+    "family": "F5 EVA district (STUDY)",
+    "reverse_load_kN": 62.8,
+    "held_today": "latches only",
+    "requirement": "positive bidirectional load path + two-side equalization/indication (PRESS-004)",
+    "second_closure": "study (fault matrix)",
+    "compliant_today": false
+   },
+   {
+    "closure": "SP-11 inner hatch (STUDY, 1.20 m lead)",
+    "family": "F5 EVA district (STUDY)",
+    "reverse_load_kN": 106.2,
+    "held_today": "latches only",
+    "requirement": "positive bidirectional load path + two-side equalization/indication (PRESS-004)",
+    "second_closure": "only if the fault matrix requires",
+    "compliant_today": false
+   },
+   {
+    "closure": "SP-11 outer hatch (STUDY, 1.20 m lead)",
+    "family": "F5 EVA district (STUDY)",
+    "reverse_load_kN": null,
+    "held_today": "n/a",
+    "requirement": "positive bidirectional load path + two-side equalization/indication (PRESS-004)",
+    "second_closure": "only if the fault matrix requires",
+    "compliant_today": true
+   },
+   {
+    "closure": "SP-12/13 door (STUDY)",
+    "family": "F5 EVA district (STUDY)",
+    "reverse_load_kN": null,
+    "held_today": "latches only",
+    "requirement": "positive bidirectional load path + two-side equalization/indication (PRESS-004)",
+    "second_closure": "study (fault matrix)",
+    "compliant_today": false
+   },
+   {
+    "closure": "District hatch (STUDY, L1-A)",
+    "family": "F5 EVA district (STUDY)",
+    "reverse_load_kN": 181.6,
+    "held_today": "latches only",
+    "requirement": "positive bidirectional load path + two-side equalization/indication (PRESS-004)",
+    "second_closure": "only if the fault matrix requires",
+    "compliant_today": false
+   },
+   {
+    "closure": "Workshop port hatch (STUDY, L1-A)",
+    "family": "F5 EVA district (STUDY)",
+    "reverse_load_kN": 62.8,
+    "held_today": "OPEN (one direction will be latch-only)",
+    "requirement": "positive bidirectional load path + two-side equalization/indication (PRESS-004)",
+    "second_closure": "only if the fault matrix requires",
+    "compliant_today": false
+   }
+  ],
+  "non_compliant_today": 31,
+  "occupancy": {
+   "SP-11 chamber": "TRANSIENTLY OCCUPIED",
+   "district passage": "TRANSIENTLY OCCUPIED",
+   "vestibule / drum": "TRANSIENTLY OCCUPIED",
+   "trunk": "OCCUPIED ROUTE",
+   "refuge": "HAVEN",
+   "sectors": "INHABITED"
+  },
+  "seat_sides": {
+   "spine gates": "trunk side (study choice; verify both ways)",
+   "refuge": "refuge side (study choice; verify both ways)"
+  },
+  "reserve": {
+   "R1": "preferred, protected ring-local, fail-closed isolation and leak test",
+   "R4": "coupling only with the rotor stopped/locked",
+   "R2": "tertiary",
+   "R3": "not needed"
+  },
+  "open_quantities": [
+   {
+    "id": "r1_gas_species",
+    "unit": "-",
+    "known": false,
+    "owner": "Sheets / 15!A137"
+   },
+   {
+    "id": "r1_reserve_mass",
+    "unit": "kg",
+    "known": false,
+    "owner": "45 I-05"
+   },
+   {
+    "id": "r1_tank_pressure",
+    "unit": "kPa",
+    "known": false,
+    "owner": "15!A137"
+   },
+   {
+    "id": "allowable_pressure_imbalance",
+    "unit": "kPa",
+    "known": false,
+    "owner": "15!A137"
+   },
+   {
+    "id": "equalization_flow",
+    "unit": "kg/s",
+    "known": false,
+    "owner": "15!A137"
+   },
+   {
+    "id": "leak_test_threshold",
+    "unit": "kPa/h",
+    "known": false,
+    "owner": "15!A137"
+   },
+   {
+    "id": "relief_set_point",
+    "unit": "kPa",
+    "known": false,
+    "owner": "15!A137"
+   },
+   {
+    "id": "recovery_time",
+    "unit": "s",
+    "known": false,
+    "owner": "15!A137"
+   },
+   {
+    "id": "r4_supply_capability",
+    "unit": "kg/s",
+    "known": false,
+    "owner": "15!A137"
+   },
+   {
+    "id": "unlatch_dp_threshold",
+    "unit": "kPa",
+    "known": false,
+    "owner": "45 I-01 (0.05 kPa is a simulator test point only)"
+   },
+   {
+    "id": "lever_force_requirement",
+    "unit": "N",
+    "known": false,
+    "owner": "45 I-03 (50 N is a human-factors target only)"
+   }
+  ],
+  "released": []
+ }
+}

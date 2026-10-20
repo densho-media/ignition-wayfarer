@@ -1,0 +1,475 @@
+{
+ "status": "WORKING STUDY CHOICE / FUEL QUANTITY OPEN / NO REBUDGET RELEASE (S&E 15!A207:A209, 98!A115)",
+ "need_m3": {
+  "HE3": 2811.8,
+  "D2": 628.4,
+  "H2_FIRST": 2049.4,
+  "H2_RESERVE": 2542.4,
+  "H2": 4591.8,
+  "total": 8032.0,
+  "first_ignition": 5489.7
+ },
+ "slot_capacity_m3": {
+  "HE3": 128.6,
+  "D2": 150.8,
+  "H2": 150.8
+ },
+ "c1": {
+  "layout": "BODY-C module rule (He-3 first, then D2; H2 none)",
+  "capacity_m3": {
+   "HE3": 3086,
+   "D2": 452,
+   "H2": 0
+  },
+  "first_ignition_fraction": {
+   "HE3": 1.0,
+   "D2": 0.719,
+   "H2": 0.0
+  },
+  "housed_first_ignition_m3": 3264,
+  "first_ignition_deficit_m3": -2226,
+  "full_load_deficit_m3": -4494,
+  "housed_mass_t": {
+   "HE3": 180.9,
+   "D2": 79.2,
+   "H2": 0.0
+  },
+  "housed_mass_total_t": 260.1,
+  "aggregate_t": 600.0,
+  "aggregate_fraction": 0.433,
+  "certified_capacity": null,
+  "note": "certified capacity propagates null (15!A208 G); every figure is a PROTOTYPE envelope"
+ },
+ "c2": {
+  "layout": "BODY-C2 balanced lobes (separate jacketed vessels, every species housed at about the same fraction)",
+  "capacity_m3": {
+   "HE3": 1929,
+   "D2": 452,
+   "H2": 1357
+  },
+  "first_ignition_fraction": {
+   "HE3": 0.686,
+   "D2": 0.719,
+   "H2": 0.662
+  },
+  "housed_first_ignition_m3": 3738,
+  "first_ignition_deficit_m3": -1752,
+  "full_load_deficit_m3": -4294,
+  "housed_mass_t": {
+   "HE3": 113.1,
+   "D2": 79.2,
+   "H2": 96.1
+  },
+  "housed_mass_total_t": 288.3,
+  "aggregate_t": 600.0,
+  "aggregate_fraction": 0.481,
+  "certified_capacity": null,
+  "note": "certified capacity propagates null (15!A208 G); every figure is a PROTOTYPE envelope",
+  "assignment": {
+   "0_30": "H2",
+   "0_150": "HE3",
+   "0_270": "HE3",
+   "1_30": "HE3",
+   "1_150": "H2",
+   "1_270": "HE3",
+   "2_30": "H2",
+   "2_150": "HE3",
+   "2_270": "D2",
+   "3_30": "HE3",
+   "3_150": "H2",
+   "3_270": "HE3",
+   "4_30": "HE3",
+   "4_150": "H2",
+   "4_270": "HE3",
+   "5_30": "H2",
+   "5_150": "HE3",
+   "5_270": "D2",
+   "6_30": "HE3",
+   "6_150": "H2",
+   "6_270": "HE3",
+   "7_30": "HE3",
+   "7_150": "H2",
+   "7_270": "HE3",
+   "8_30": "HE3",
+   "8_150": "D2",
+   "8_270": "H2"
+  }
+ },
+ "free_volume": {
+  "c2": {
+   "bay": {
+    "x0": -57.5,
+    "x1": 81.25,
+    "r_in": 1.025,
+    "r_out": 4.721,
+    "gross_m3": 9257
+   },
+   "by_category_m3": {
+    "equipment_envelope": 1013,
+    "insulation_envelope": 1528,
+    "liquid_net": 3738,
+    "refrigeration_frame": 74,
+    "service_lane": 796,
+    "service_workshop": 732,
+    "spine_tunnel": 0,
+    "tank_support": 18,
+    "transfer_manifold": 273,
+    "transfer_pump_frame": 74,
+    "ullage": 197,
+    "vent_frame": 74
+   },
+   "claimed_m3": 8516,
+   "free_m3": 742,
+   "free_fraction": 0.08,
+   "where_free": "r 1.025-1.10 m round the spine tunnel, the 1 m module gaps outside lanes and utility frames, and the equipment-bay unallocated slice is counted as claimed"
+  }
+ },
+ "interfaces": {
+  "per_family": {
+   "HE3": {
+    "vessels": 15,
+    "modules": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "feed_run_in_bay_m": 111.0,
+    "lanes": [
+     30.0,
+     150.0,
+     270.0
+    ],
+    "max_distance_to_refrigeration_frame_m": 32.0
+   },
+   "D2": {
+    "vessels": 3,
+    "modules": [
+     2,
+     5,
+     8
+    ],
+    "feed_run_in_bay_m": 111.0,
+    "lanes": [
+     30.0,
+     150.0,
+     270.0
+    ],
+    "max_distance_to_refrigeration_frame_m": 32.0
+   },
+   "H2": {
+    "vessels": 9,
+    "modules": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "feed_run_in_bay_m": 111.0,
+    "lanes": [
+     30.0,
+     150.0,
+     270.0
+    ],
+    "max_distance_to_refrigeration_frame_m": 32.0
+   }
+  },
+  "lines_per_lane": {
+   "30": [
+    "D2",
+    "H2",
+    "HE3"
+   ],
+   "150": [
+    "D2",
+    "H2",
+    "HE3"
+   ],
+   "270": [
+    "D2",
+    "H2",
+    "HE3"
+   ]
+  },
+  "species_boundaries": {
+   "D2-HE3": 7,
+   "D2-H2": 4,
+   "H2-HE3": 26
+  },
+  "refrigeration_frames_x": [
+   -22.0,
+   16.0
+  ],
+  "aft_run_to_drive_m": 43.0,
+  "note": "each lane carries a separate line set per species bordering it (no shared lines between He-3, D2 and H2); a species boundary is a jacket-to-jacket face across a lane or a module gap (thermal break, separate relief); aft run from the bay end to the manifold aft face X -100.5"
+ },
+ "ledger": {
+  "rows": [
+   {
+    "id": "TK-MS-01",
+    "item": "inner vessel pressure shells (He-3 / D2 / H2)",
+    "bucket": "main_structure",
+    "count": 27,
+    "area_m2": {
+     "HE3": 2656,
+     "D2": 581,
+     "H2": 1744
+    },
+    "volume_m3": null,
+    "screen_t": 53.8,
+    "mass_t": null,
+    "status": "UNKNOWN"
+   },
+   {
+    "id": "TK-MS-02",
+    "item": "outer skin / debris barrier of each jacket (no vacuum shell needed in space)",
+    "bucket": "main_structure",
+    "count": 27,
+    "area_m2": 4981,
+    "volume_m3": null,
+    "screen_t": 13.4,
+    "mass_t": null,
+    "status": "UNKNOWN"
+   },
+   {
+    "id": "TK-MS-03",
+    "item": "mounting frames: support bulkheads to the keel rails (lobe saddles)",
+    "bucket": "main_structure",
+    "count": 24,
+    "volume_m3": 16.8,
+    "screen_t": null,
+    "mass_t": null,
+    "status": "UNKNOWN"
+   },
+   {
+    "id": "TK-MS-04",
+    "item": "MLI / aerogel in the jacket allowance",
+    "bucket": "main_structure",
+    "count": 27,
+    "area_m2": 4981,
+    "volume_m3": 1529.4,
+    "screen_t": 3.7,
+    "mass_t": null,
+    "status": "UNKNOWN"
+   },
+   {
+    "id": "TK-MS-05",
+    "item": "structural heat barrier (thermal standoffs in supports and saddles)",
+    "bucket": "main_structure",
+    "count": null,
+    "volume_m3": null,
+    "screen_t": null,
+    "mass_t": null,
+    "status": "UNKNOWN"
+   },
+   {
+    "id": "TK-TH-01",
+    "item": "active refrigeration: cryocooler cold heads, He-3 and H2 refrigeration",
+    "bucket": "radiator_thermal",
+    "count": 2,
+    "volume_m3": 73.6,
+    "screen_t": null,
+    "mass_t": null,
+    "status": "UNKNOWN"
+   },
+   {
+    "id": "TK-TH-02",
+    "item": "heat intercept: He-3 20 K shields",
+    "bucket": "radiator_thermal",
+    "count": 15,
+    "area_m2": 2656,
+    "volume_m3": null,
+    "screen_t": 7.2,
+    "mass_t": null,
+    "status": "UNKNOWN"
+   },
+   {
+    "id": "TK-TH-03",
+    "item": "cryogenic exchangers (inside the refrigeration frames: volume counted in TK-TH-01)",
+    "bucket": "radiator_thermal",
+    "count": null,
+    "volume_m3": null,
+    "screen_t": null,
+    "mass_t": null,
+    "status": "UNKNOWN"
+   },
+   {
+    "id": "TK-TH-04",
+    "item": "relief vents, boil-off recovery, purge",
+    "bucket": "radiator_thermal",
+    "count": 2,
+    "volume_m3": 73.6,
+    "screen_t": null,
+    "function": "boil-off and pressure management (thermal)",
+    "mass_t": null,
+    "status": "UNKNOWN"
+   },
+   {
+    "id": "TK-PW-01",
+    "item": "electrical converters and cables for the cryo plant, pumps and valves",
+    "bucket": "power_comms",
+    "count": null,
+    "volume_m3": null,
+    "screen_t": null,
+    "note": "no geometry: the 34 power-conversion envelope is the ship's, not tankage",
+    "mass_t": null,
+    "status": "UNKNOWN"
+   },
+   {
+    "id": "TK-MS-06",
+    "item": "structural line supports and manifold brackets in the keel lanes",
+    "bucket": "main_structure",
+    "count": null,
+    "volume_m3": null,
+    "screen_t": null,
+    "note": "15!A219 C: structural line supports stay main structure; no separate geometry",
+    "mass_t": null,
+    "status": "UNKNOWN"
+   },
+   {
+    "id": "TK-FN-01",
+    "item": "main-engine D / He-3 / H2 feed pumps, metering / regulating / isolation valves, filters",
+    "bucket": "drive_package",
+    "count": 2,
+    "volume_m3": 73.6,
+    "screen_t": null,
+    "function": "owner 2026-10-18 (15!A219, 98!A120, 10_WAYFARER_MASS G9): inside the 250 t drive package once, unsized",
+    "mass_t": null,
+    "status": "UNKNOWN"
+   },
+   {
+    "id": "TK-FN-02",
+    "item": "powered propulsion feed lines (one set per species per lane) and injector / manifold feed interfaces",
+    "bucket": "drive_package",
+    "count": 3,
+    "volume_m3": 273.3,
+    "screen_t": null,
+    "function": "as TK-FN-01; the lane manifold envelope also routes vent (TK-TH-04) and cold-head (TK-TH-01) lines: its volume is reported here once, mass is booked by function",
+    "mass_t": null,
+    "status": "UNKNOWN"
+   },
+   {
+    "id": "TK-MARGIN",
+    "item": "design margin",
+    "bucket": "design_margin",
+    "count": null,
+    "volume_m3": null,
+    "screen_t": 0.0,
+    "note": "untouched (15!A209)",
+    "mass_t": null,
+    "status": "UNTOUCHED"
+   }
+  ],
+  "per_bucket": {
+   "main_structure": {
+    "bucket_t": 150.0,
+    "ledger_t": null,
+    "ids": [
+     "TK-MS-01",
+     "TK-MS-02",
+     "TK-MS-03",
+     "TK-MS-04",
+     "TK-MS-05",
+     "TK-MS-06"
+    ],
+    "screen_known_t": 70.9
+   },
+   "radiator_thermal": {
+    "bucket_t": 100.0,
+    "ledger_t": null,
+    "ids": [
+     "TK-TH-01",
+     "TK-TH-02",
+     "TK-TH-03",
+     "TK-TH-04"
+    ],
+    "screen_known_t": 7.2
+   },
+   "power_comms": {
+    "bucket_t": 50.0,
+    "ledger_t": null,
+    "ids": [
+     "TK-PW-01"
+    ],
+    "screen_known_t": 0.0
+   },
+   "drive_package": {
+    "bucket_t": 250.0,
+    "ledger_t": null,
+    "ids": [
+     "TK-FN-01",
+     "TK-FN-02"
+    ],
+    "screen_known_t": 0.0
+   },
+   "design_margin": {
+    "bucket_t": 30.0,
+    "ledger_t": null,
+    "ids": [
+     "TK-MARGIN"
+    ],
+    "screen_known_t": 0.0
+   }
+  },
+  "screen": {
+   "shell_kg_m2": 10.8,
+   "skin_kg_m2": 2.7,
+   "mli_kg_m2": 0.75,
+   "he3_shield_kg_m2": 2.7
+  },
+  "rule": "mass_t null = UNKNOWN (15!A209 G). screen_t is an order-of-magnitude orientation from measured areas and the SCREEN densities only: it is not a ledger value, not a PASS and not a budget claim; each bucket already carries the rest of the ship, so even a partial screen near a bucket total means the owner must rebalance wet mass before CAD release."
+ },
+ "shortfall_bars": [
+  {
+   "id": "first_burn_H2",
+   "volume_m3": 692,
+   "equivalent_C_length_m": 20.6,
+   "x0": 32.95,
+   "x1": 53.5
+  },
+  {
+   "id": "reserve_H2",
+   "volume_m3": 2542,
+   "equivalent_C_length_m": 75.5,
+   "x0": -44.55,
+   "x1": 30.95
+  },
+  {
+   "id": "HE3",
+   "volume_m3": 883,
+   "equivalent_C_length_m": 26.2,
+   "x0": -72.78,
+   "x1": -46.55
+  },
+  {
+   "id": "D2",
+   "volume_m3": 176,
+   "equivalent_C_length_m": 5.2,
+   "x0": -80.0,
+   "x1": -74.78
+  }
+ ],
+ "asset_objects": 262,
+ "overlap": {
+  "study_parts": 258,
+  "built_near": 765,
+  "conflicts": [
+   {
+    "study": "Study_Spine_Tunnel",
+    "other": "Structural_Spine",
+    "other_kind": "geometry",
+    "faces": 102
+   }
+  ]
+ }
+}

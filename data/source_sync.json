@@ -1,0 +1,425 @@
+{
+  "schema": 1,
+  "purpose": "Drive source state incorporated into data/wayfarer_3d.toml + data/source_map.toml. Written only by `tools/workflow.py sync commit`; see docs/WORKFLOW.md \"Orchestrated update\".",
+  "roles": {
+    "owner": "canonical workbook routed by the TOC; changes can drive the model",
+    "routing": "IGNITION Table of Contents; decides which workbook owns a fact",
+    "reference": "WORKING/non-canon or narrative/visual reference; changes are reported, never implemented automatically",
+    "correspondence": "owner request Doc; not canon"
+  },
+  "seeded": {
+    "at": "2026-09-30",
+    "from": [
+      "references/drive_capture_2026-09-29/metadata_after.json (reviewed modifiedTime, stable before/after)",
+      "references/drive_capture_2026-09-29/ranges.json + additional_cells.json (reviewed_ranges)",
+      "newest full exports in references/drive_capture_2026-09-27, 27b, 27c (baseline)"
+    ],
+    "note": "A baseline older than reviewed_modified_utc is stale: the next run re-exports it, and changed cells inside reviewed_ranges are marked covered_by_review. IGNITION files modified before reviewed_at_utc were visible to that review and are not reported as new.",
+    "reviewed_at_utc": "2026-09-29T10:51:16.529Z"
+  },
+  "last_successful_sync_utc": "2026-10-17T07:27:25.833Z",
+  "workbooks": {
+    "engineering": {
+      "title": "IGNITION — Wayfarer Science & Engineering Model",
+      "id": "18BQQEMXxu3qEw1jKN68VwC3rkOiVmafiWeoQORYgI0A",
+      "role": "owner",
+      "kind": "sheet",
+      "reviewed_modified_utc": "2026-10-17T06:34:04.623Z",
+      "reviewed_in": "references/drive_capture_2026-10-17/",
+      "reviewed_ranges": [],
+      "baseline": {
+        "kind": "xlsx",
+        "path": "references/drive_capture_2026-10-17/engineering.xlsx",
+        "modified_utc": "2026-10-17T06:34:04.623Z"
+      }
+    },
+    "eye": {
+      "title": "IGNITION — Wayfarer Eye",
+      "id": "1G18kH_seufSBQ7oDA_Hw6C3bA8O2oVNS1omUbLjvxtA",
+      "role": "owner",
+      "kind": "sheet",
+      "reviewed_modified_utc": "2026-10-13T18:50:35.140Z",
+      "reviewed_in": "references/drive_capture_2026-10-16/",
+      "reviewed_ranges": [],
+      "baseline": {
+        "kind": "xlsx",
+        "path": "references/drive_capture_2026-10-16/eye.xlsx",
+        "modified_utc": "2026-10-13T18:50:35.140Z"
+      }
+    },
+    "fiji": {
+      "title": "IGNITION — Fiji / Lattice Drive Science Model",
+      "id": "13j9_XBmJvaeV3ac5bobf908dfrQqooQvxdzufSufcGI",
+      "role": "owner",
+      "kind": "sheet",
+      "reviewed_modified_utc": "2026-10-14T20:22:32.252Z",
+      "reviewed_in": "references/drive_capture_2026-10-16/",
+      "reviewed_ranges": [],
+      "baseline": {
+        "kind": "xlsx",
+        "path": "references/drive_capture_2026-10-16/fiji.xlsx",
+        "modified_utc": "2026-10-14T20:22:32.252Z"
+      }
+    },
+    "nonfiji": {
+      "title": "IGNITION — Non-Fiji Baseline Fusion Drive",
+      "id": "1RQgu9kqLDEFlMM3VR1siVY-_KRoXe2bNMroVBucfUuc",
+      "role": "owner",
+      "kind": "sheet",
+      "reviewed_modified_utc": "2026-09-27T09:52:06.278Z",
+      "reviewed_in": "references/drive_capture_2026-09-27b/",
+      "reviewed_ranges": [],
+      "baseline": {
+        "kind": "xlsx",
+        "path": "references/drive_capture_2026-09-27b/non_fiji_baseline_drive.xlsx",
+        "modified_utc": "2026-09-27T09:52:06.278Z"
+      }
+    },
+    "technology": {
+      "title": "IGNITION — Technology",
+      "id": "1TidF56oR_AcIy_fX_VVIkkQnl173pXOxxIiXh_-aeTs",
+      "role": "owner",
+      "kind": "sheet",
+      "reviewed_modified_utc": "2026-10-17T06:34:41.021Z",
+      "reviewed_in": "references/drive_capture_2026-10-17/",
+      "reviewed_ranges": [],
+      "baseline": {
+        "kind": "xlsx",
+        "path": "references/drive_capture_2026-10-17/technology.xlsx",
+        "modified_utc": "2026-10-17T06:34:41.021Z"
+      }
+    },
+    "toc": {
+      "title": "IGNITION — Table of Contents",
+      "id": "10l9oBcVaD2_Wp9N8Lqni5t6tXb5Hzz2ivkfy81Fk5O8",
+      "role": "routing",
+      "kind": "sheet",
+      "reviewed_modified_utc": "2026-10-14T20:27:56.648Z",
+      "reviewed_in": "references/drive_capture_2026-10-16/",
+      "reviewed_ranges": [],
+      "baseline": {
+        "kind": "xlsx",
+        "path": "references/drive_capture_2026-10-16/toc.xlsx",
+        "modified_utc": "2026-10-14T20:27:56.648Z"
+      }
+    },
+    "sanity": {
+      "title": "IGNITION — Wayfarer Sanity Check",
+      "id": "1_0Q5Ty7XvTLgukTArCyyVcMBB0GWm1eik2UFCBnW4n0",
+      "role": "reference",
+      "kind": "sheet",
+      "reviewed_modified_utc": "2026-10-03T13:38:17.100Z",
+      "reviewed_in": "references/drive_capture_2026-10-03b/",
+      "reviewed_ranges": [],
+      "baseline": {
+        "kind": "xlsx",
+        "path": "references/drive_capture_2026-10-03b/sanity.xlsx",
+        "modified_utc": "2026-10-03T13:38:17.100Z"
+      }
+    },
+    "tale": {
+      "title": "IGNITION — Tale of Wayfarer",
+      "id": "1HTNQ7shV2A6Pj78HXFi9gf6gMkQy5p65kRC1sebkFbw",
+      "role": "reference",
+      "kind": "sheet",
+      "reviewed_modified_utc": "2026-10-13T15:01:50.057Z",
+      "reviewed_in": "references/drive_capture_2026-10-13c/",
+      "reviewed_ranges": [],
+      "baseline": {
+        "kind": "xlsx",
+        "path": "references/drive_capture_2026-10-13c/tale.xlsx",
+        "modified_utc": "2026-10-13T15:01:50.057Z"
+      }
+    },
+    "timeline": {
+      "title": "IGNITION — Timeline.xlsx",
+      "id": "1e7gjilGfkcOLkTKrlIPRrjjk3AMW3v7h",
+      "role": "reference",
+      "kind": "xlsx_file",
+      "reviewed_modified_utc": "2026-10-03T15:59:24.249Z",
+      "reviewed_in": "references/drive_capture_2026-10-05/",
+      "reviewed_ranges": [],
+      "baseline": {
+        "kind": "xlsx",
+        "path": "references/drive_capture_2026-10-05/timeline.xlsx",
+        "modified_utc": "2026-10-03T15:59:24.249Z"
+      }
+    },
+    "art_style": {
+      "title": "IGNITION — Art Style Bible",
+      "id": "1M7k3xqH7lrYtCu7UiozYvYYbIhQx3xsxzv7iV-exg-g",
+      "role": "reference",
+      "kind": "sheet",
+      "reviewed_modified_utc": "2026-10-17T06:34:38.602Z",
+      "reviewed_in": "references/drive_capture_2026-10-17/",
+      "reviewed_ranges": [],
+      "baseline": {
+        "kind": "xlsx",
+        "path": "references/drive_capture_2026-10-17/art_style.xlsx",
+        "modified_utc": "2026-10-17T06:34:38.602Z"
+      }
+    },
+    "owner_request": {
+      "title": "IGNITION — Wayfarer Claude Request",
+      "id": "1-WWG5rFovcVdB6gCctVDbeNGusaaWwV_ibCZtiX-7OQ",
+      "role": "correspondence",
+      "kind": "doc",
+      "reviewed_modified_utc": "2026-09-27T13:26:12.870Z",
+      "reviewed_in": "references/drive_capture_2026-09-27c/",
+      "reviewed_ranges": [],
+      "baseline": null
+    },
+    "owner_questions": {
+      "title": "IGNITION — Wayfarer Claude Questions & Status",
+      "id": "1OJi6HIfc0ZEqn_FtOJNcpkVLlM-7wkzC5AhglJZt51E",
+      "role": "correspondence",
+      "kind": "sheet",
+      "reviewed_modified_utc": "2026-10-14T20:28:31.117Z",
+      "reviewed_in": "references/drive_capture_2026-10-16/",
+      "reviewed_ranges": [],
+      "baseline": {
+        "kind": "xlsx",
+        "path": "references/drive_capture_2026-10-16/owner_questions.xlsx",
+        "modified_utc": "2026-10-14T20:28:31.117Z"
+      }
+    },
+    "culture": {
+      "title": "IGNITION — Culture",
+      "id": "17ZHc6GdC8Vio2HdxUSmp_qWTdkg4W8sUsvtYatTYFgI",
+      "role": "reference",
+      "kind": "sheet",
+      "reviewed_modified_utc": "2026-10-04T12:25:35.298Z",
+      "reviewed_in": "references/drive_capture_2026-10-06c/",
+      "reviewed_ranges": [],
+      "baseline": {
+        "kind": "xlsx",
+        "path": "references/drive_capture_2026-10-06c/culture.xlsx",
+        "modified_utc": "2026-10-04T12:25:35.298Z"
+      }
+    },
+    "fashion": {
+      "title": "IGNITION — Fashion Bible.xlsx",
+      "id": "1rKdTLHnceI93VyV0wisN5Yw9VfqpUoaA",
+      "role": "reference",
+      "kind": "xlsx_file",
+      "reviewed_modified_utc": "2026-09-19T14:57:04.698Z",
+      "reviewed_in": "references/drive_capture_2026-10-06c/",
+      "reviewed_ranges": [],
+      "baseline": {
+        "kind": "xlsx",
+        "path": "references/drive_capture_2026-10-06c/fashion.xlsx",
+        "modified_utc": "2026-09-19T14:57:04.698Z"
+      }
+    }
+  },
+  "history": [
+    {
+      "at": "2026-10-04T09:46:22.543Z",
+      "capture": "references/drive_capture_2026-10-04",
+      "workbooks": [
+        "engineering"
+      ],
+      "suggested_class": "C",
+      "validated_by": "runs/20261004T062314Z-update/production/summary.json",
+      "no_model_change": null
+    },
+    {
+      "at": "2026-10-05T07:40:24.244Z",
+      "capture": "references/drive_capture_2026-10-05",
+      "workbooks": [
+        "toc",
+        "engineering",
+        "tale",
+        "art_style",
+        "technology",
+        "timeline"
+      ],
+      "note": "HUM-001 zone 1 cites S&E 15!A86 (human_entry_workflow) and 14!A32 (human_scale_entry_anchor); burn-go chain and the Technology, Tale, Art Style, TOC and Timeline changes carry no Wayfarer geometry."
+    },
+    {
+      "at": "2026-10-06T05:51:42.819Z",
+      "capture": "references/drive_capture_2026-10-06",
+      "workbooks": [
+        "engineering",
+        "tale"
+      ],
+      "note": "12A life-supported space program recorded (life_supported_space_program, rotary_transfer_spaces); Tale domestic sets are reference only; no parameter change"
+    },
+    {
+      "at": "2026-10-06T19:23:20.865Z",
+      "capture": "references/drive_capture_2026-10-06b",
+      "workbooks": [
+        "engineering",
+        "tale"
+      ],
+      "note": "induction_route source record (98!A36, WORKING); Tale S004A-D reference only; 98!A36 overwrote the thermal-debt row (facts kept via 15!A26, 40!A38); no parameter change"
+    },
+    {
+      "at": "2026-10-06T19:25:09.626Z",
+      "capture": "references/drive_capture_2026-10-06c",
+      "workbooks": [
+        "culture",
+        "fashion"
+      ],
+      "note": "first capture of Culture and Fashion Bible (request Doc section 13); records cultural_architecture, architecture_depiction, character_design, spacer_fashion; no parameter change"
+    },
+    {
+      "at": "2026-10-07T21:50:00.487Z",
+      "capture": "references/drive_capture_2026-10-07b",
+      "workbooks": [
+        "engineering",
+        "toc",
+        "tale"
+      ],
+      "note": "Q46-Q48 answers built: despun transfer drum with port gates, drum doors and tube hatches (0761382), aft-down routes (b1e17bc), the induction sequence (5b90dd9), drum and tube-end fit-out (f801f01); questions moved to the request Doc (1ba8e08). Not applied: the radiator reduction rows (07!D55 and related, also in drive_capture_2026-10-07) wait on Q52 (TODO AFT-012)."
+    },
+    {
+      "at": "2026-10-08T13:43:18.990Z",
+      "capture": "references/drive_capture_2026-10-08",
+      "workbooks": [
+        "engineering",
+        "eye",
+        "fiji",
+        "toc",
+        "tale"
+      ],
+      "note": "Recorded all 2026-10-08 answers in the source map; Q52 applied (29eb218), Q53/Q41/Q42 built; Q45, Q40, Q44, Q50, Q51, Q38, Q43, P4-P6, NAV still being built"
+    },
+    {
+      "at": "2026-10-08T13:43:19.074Z",
+      "capture": "references/drive_capture_2026-10-08b",
+      "workbooks": [
+        "engineering",
+        "tale",
+        "fiji"
+      ],
+      "note": "Q52 option D applied (as-built net area, effective area, root margin); Q49 casting caveat and Q39/OD-029 audit recorded, no model change"
+    },
+    {
+      "at": "2026-10-09T07:07:23.900Z",
+      "capture": "references/drive_capture_2026-10-09",
+      "workbooks": [
+        "engineering",
+        "toc",
+        "tale",
+        "fiji",
+        "eye"
+      ],
+      "note": "Captured the 2026-10-09 workbooks (S&E sheets 22-41, NAV-027..031, 12A SP-45..54, Eye 50!A25:A30, Fiji 36/37); source notes and new records; no spec value or geometry change. Readback, NAV import and SP-45 queued in TODO."
+    },
+    {
+      "at": "2026-10-10T11:30:10.565Z",
+      "capture": "references/drive_capture_2026-10-10",
+      "workbooks": [
+        "engineering",
+        "toc",
+        "tale",
+        "technology"
+      ],
+      "note": "Owner answers 2026-10-10 (15!A104, A112:A120; 98!A80:A86; 12A SP-35/36/46/49/52; OD-022/030; new 42_FABRICATION_STUDY) applied: flight-frame importer (UNKNOWN channels), radiator growth rig, casualty acceptance study, ring ladder study, SP-46 collection point / SP-49 clean stock relabels and machine-bay / SP-52 host survey, suited_access tags and strip inventory, surface brief, Q39 proposed classification. Kuiper Anchorage (S&E 50/25, Tale 15A, OD-031), Technology 43 and Tale sitcom sheets recorded only: no model change."
+    },
+    {
+      "at": "2026-10-10T16:20:03.116Z",
+      "capture": "references/drive_capture_2026-10-10b",
+      "workbooks": [
+        "engineering",
+        "technology"
+      ],
+      "note": "Owner research responses 2026-10-10b recorded (HUM-002, RAD-002, SERV-002, ECLSS-REC, FRM-002; 15!A121:A125, 98!A87:A91, OD-032/033, C-017/C-018, 40!A74:A85); studies queued in TODO"
+    },
+    {
+      "at": "2026-10-11T08:16:55.220Z",
+      "capture": "references/drive_capture_2026-10-11",
+      "workbooks": [
+        "engineering",
+        "technology",
+        "tale",
+        "toc"
+      ],
+      "note": "No model change: formal capture of the EVA tabs (S&E 43/44/45, Technology 53, Tale 26) behind EVA-001/EVA-002; data/eva_suit.toml values match; new decision rows S&E 98!A92:A94 and Tale 98!A30 restate the built EVA-002 rules; TOC rows route the EVA tabs."
+    },
+    {
+      "at": "2026-10-11T09:32:31.376Z",
+      "capture": "references/drive_capture_2026-10-11b",
+      "workbooks": [
+        "engineering",
+        "toc"
+      ],
+      "note": "EVA-003: 43 EVA-056..061, 44 EVA3-001..005, 45 G-11..G-15/H-14/H-15, 15!A126:A131, 98!A95:A97 consumed as study tasks (eva_sp11, eva3_district); no canon parameter change; TOC routing rows."
+    },
+    {
+      "at": "2026-10-11T10:27:58.387Z",
+      "capture": "references/drive_capture_2026-10-11c",
+      "workbooks": [
+        "engineering",
+        "technology",
+        "tale",
+        "toc"
+      ],
+      "note": "PHYS-001: captured the new crew-physics owner sheets (S&E 46_CREW_DYNAMICS, 47_SIM_PRODUCTION, 15!A132:A133; Technology 54_SPACE_MOTION_SIM; Tale 27_CREW_PHYSICS_STAGING; TOC routing). No mapped parameter changed; four source records added; crew_dynamics.py reproduces the 08/11 numbers they quote."
+    },
+    {
+      "at": "2026-10-11T18:00:44.294Z",
+      "capture": "references/drive_capture_2026-10-11d",
+      "workbooks": [
+        "engineering"
+      ],
+      "note": "Second owner release 2026-10-11 16:45 (15!A145:I165, 45 I-07..27, 08 A63:H72, 40 A87:F95, 09 OD-034..040, 47 SIM-024..029, 16 D12, 98 A100) recorded as source owner_release_2026_10_11b + [owner_diagnostics]; SP-11 governing load to 1.30 m leaf; no geometry change"
+    },
+    {
+      "at": "2026-10-13T06:08:19.679Z",
+      "capture": "references/drive_capture_2026-10-13",
+      "workbooks": [
+        "engineering",
+        "toc",
+        "art_style",
+        "tale"
+      ],
+      "note": "Tabs 48/49 formally captured for SNAV-001; delta = navigator/production-focus rows already read live 2026-10-12, no parameter change"
+    },
+    {
+      "at": "2026-10-13T14:54:00.234Z",
+      "capture": "references/drive_capture_2026-10-13b",
+      "workbooks": [
+        "engineering",
+        "eye",
+        "tale",
+        "toc"
+      ],
+      "note": "formal capture of Eye 45/46, S&E 50-54, Tale 28/29 (already consumed by FWD-V2 and DRONE-001); new owner rows S&E 15!A169:A172 answer Doc 2026-10-11T21:40 (a)-(f), consumption in TODO; Eye 40!E35:F35 port wording matches the built 2.25 m port and eyelids; TOC routing rows only"
+    },
+    {
+      "at": "2026-10-13T18:49:03.187Z",
+      "capture": "references/drive_capture_2026-10-13c",
+      "workbooks": [
+        "engineering",
+        "toc",
+        "tale",
+        "art_style"
+      ],
+      "note": "S&E 15!A173:A188 owner answers (rescue A1-F1, drone DR-A..F, Q39), 98!A105:A106, tab 55_SPACE_NAVIGATOR, 47 SIM-038/039, 48 WF-029, 49 NAV status; TOC space_navigator routing; Tale 26 NAV-TOUR-09..12; Art Style Objects & Tech 18-19. Captured only; no parameter change yet"
+    },
+    {
+      "at": "2026-10-16T08:30:04.491Z",
+      "capture": "references/drive_capture_2026-10-16",
+      "workbooks": [
+        "engineering",
+        "eye",
+        "fiji",
+        "toc",
+        "owner_questions"
+      ],
+      "note": "A01: no parameter change. HR-001 rows (Fiji 15/30, S&E 06/40/15 A193:196/26 C-019..021/09 OD-041) recorded as hr001_heat_recovery for TODO E; EYE OWN-EYE-H1..H4 + Eye 45 FD-B07..B11 + 46 EYS-DR-11..14 recorded as eye_cartridge_handoff (already built: eye_release_evidence.handoff, FD-B10 lap seam); 52 DS-01/09/11/13 statuses and 56_DRONE_TECH_ANCESTRY reference; TOC routing rows only; Model Status HR-P00..19 handoff read as correspondence."
+    },
+    {
+      "at": "2026-10-17T07:27:25.833Z",
+      "capture": "references/drive_capture_2026-10-17",
+      "workbooks": [
+        "engineering",
+        "technology",
+        "art_style"
+      ],
+      "note": "OWNER RESOLUTION 2026-10-17 consumed: Y155 scenario (40!A110:F123), rescue/SP-13 dispositions, Ring A whitebox, HR-F09..F11 replays, DGT-019 gap matrix, M4 legend-only colours; no existing owner value changed"
+    }
+  ]
+}

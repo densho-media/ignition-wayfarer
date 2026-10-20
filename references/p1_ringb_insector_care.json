@@ -1,0 +1,2878 @@
+{
+ "study": "Ring B in-sector care + refuge in place (owner 15!A169, 98!A104), NONCANON DISPOSABLE STUDY",
+ "status": "PREFERRED STUDY / MEDICAL, PRESSURE, RADIATION CERTIFICATION OPEN; nothing released; mass, shield and closure budgets OPEN",
+ "owner": {
+  "source": "S&E 15_MODEL_INTERFACES!A169 (2026-10-13), decision log 98!A104",
+  "prohibited_credits": [
+   "80 t water distribution",
+   "4.1 t shelter",
+   "25.1 g/cm2 from an idealized shell",
+   "one-ring stop"
+  ],
+  "working_constraint": "both-ring stop",
+  "gcr": "NOT implied"
+ },
+ "couch": {
+  "length_m": 2.0,
+  "width_m": 0.7,
+  "top_m": 0.8,
+  "stowed_depth_m": 0.3,
+  "stowed_top_m": 1.5,
+  "attendant_w_m": 0.6,
+  "head_end_m": 0.6,
+  "stand_h_m": 1.9,
+  "kneel_h_m": 1.2,
+  "walk_w_m": 0.6,
+  "kit_m": [
+   0.6,
+   0.55,
+   0.15
+  ],
+  "patient_t_m": 0.3,
+  "provenance": {
+   "length_m, width_m": "ringb_unified.CARE couch 2.00 x 0.70 (PROTOTYPE care envelope)",
+   "top_m": "sector_whitebox.medical_table_m (the built treatment couch height; = CARE thick_deck 0.80)",
+   "stowed_depth_m": "PROTOTYPE stand-in: hum003 carrier A litter depth 0.30 m (no couch mechanism is sourced)",
+   "stowed_top_m": "top_m + width_m: the top panel folded up about its wall-side hinge at couch height",
+   "attendant_w_m, head_end_m, stand_h_m, kneel_h_m, walk_w_m": "ringb_unified.CARE (PROTOTYPE)",
+   "kit_m": "hum003 carrier K kit box (monitor, oxygen, suction) 0.60 x 0.55 x 0.15 (PROTOTYPE)",
+   "patient_t_m": "hum003 carrier A depth (the patient + litter under the kit)"
+  }
+ },
+ "garden_couch": {
+  "side": -1,
+  "head_end": -1,
+  "head_shift_m": 0.0,
+  "stance": "standing",
+  "care": {
+   "clearance_m": 0.3,
+   "nearest": null,
+   "part": null
+  },
+  "transfer": {
+   "A x1.00": {
+    "clearance_m": 0.3,
+    "nearest": null,
+    "part": null,
+    "offset_m": -0.6,
+    "rescuers": "beside"
+   },
+   "A x1.08": {
+    "clearance_m": 0.3,
+    "nearest": null,
+    "part": null,
+    "offset_m": -0.5,
+    "rescuers": "beside"
+   },
+   "C x1.00": {
+    "clearance_m": 0.3,
+    "nearest": null,
+    "part": null,
+    "offset_m": -0.6,
+    "rescuers": "beside"
+   },
+   "C x1.08": {
+    "clearance_m": 0.3,
+    "nearest": null,
+    "part": null,
+    "offset_m": -0.6,
+    "rescuers": "beside"
+   },
+   "K x1.00": {
+    "clearance_m": 0.3,
+    "nearest": null,
+    "part": null,
+    "offset_m": -0.6,
+    "rescuers": "beside"
+   },
+   "K x1.08": {
+    "clearance_m": 0.3,
+    "nearest": null,
+    "part": null,
+    "offset_m": -0.5,
+    "rescuers": "beside"
+   },
+   "S x1.00": {
+    "clearance_m": 0.3,
+    "nearest": null,
+    "part": null,
+    "offset_m": -0.55,
+    "rescuers": "beside"
+   },
+   "S x1.08": {
+    "clearance_m": 0.3,
+    "nearest": null,
+    "part": null,
+    "offset_m": -0.45,
+    "rescuers": "beside"
+   }
+  },
+  "transfer_worst": {
+   "carrier": "A x1.00",
+   "clearance_m": 0.3,
+   "nearest": null,
+   "part": null,
+   "offset_m": -0.6,
+   "rescuers": "beside"
+  },
+  "env": [
+   [
+    0.975,
+    1.525,
+    1.85,
+    2.45,
+    1.1,
+    1.25,
+    "kit"
+   ],
+   [
+    0.3,
+    0.9,
+    0.45,
+    2.45,
+    0.0,
+    1.9,
+    "attendant_1_strip"
+   ],
+   [
+    0.9,
+    1.6,
+    -0.15,
+    0.45,
+    0.0,
+    1.9,
+    "attendant_2_head_end"
+   ]
+  ],
+  "reach": {
+   "attendant_1_strip": 0.3,
+   "attendant_2_head_end": 0.156
+  },
+  "start_uv": [
+   -0.04,
+   -0.48
+  ],
+  "egress": {
+   "Burn_Couch_1": {
+    "care_m": 0.15,
+    "as_built_m": 0.02
+   },
+   "Couch_Lockers_1": {
+    "care_m": 0.15,
+    "as_built_m": -0.15
+   },
+   "Burn_Couch_2": {
+    "care_m": 0.1,
+    "as_built_m": 0.1
+   },
+   "Couch_Lockers_2": {
+    "care_m": -0.238,
+    "as_built_m": -0.238
+   },
+   "ECLSS_Bay": {
+    "care_m": 0.075,
+    "as_built_m": 0.075
+   }
+  },
+  "egress_preexisting": {
+   "Burn_Couch_1": {
+    "care_m": 0.15,
+    "as_built_m": 0.02
+   },
+   "Couch_Lockers_1": {
+    "care_m": 0.15,
+    "as_built_m": -0.15
+   },
+   "Couch_Lockers_2": {
+    "care_m": -0.238,
+    "as_built_m": -0.238
+   }
+  },
+  "egress_preexisting_made_worse": {},
+  "egress_worst": {
+   "target": "ECLSS_Bay",
+   "clearance_m": 0.075
+  },
+  "governing_m": 0.075,
+  "axis": "v",
+  "footprint_uv": [
+   0.9,
+   1.6,
+   0.45,
+   2.45
+  ],
+  "stowed_uvh": [
+   1.3,
+   1.6,
+   0.45,
+   2.45,
+   0.0,
+   1.5,
+   "care_couch_stowed"
+  ],
+  "stowed_clearance": {
+   "clearance_m": 0.3,
+   "nearest": null,
+   "part": null
+  },
+  "stowed_egress": {
+   "egress": {
+    "Burn_Couch_1": {
+     "care_m": 0.15,
+     "as_built_m": 0.02
+    },
+    "Couch_Lockers_1": {
+     "care_m": 0.15,
+     "as_built_m": -0.15
+    },
+    "Burn_Couch_2": {
+     "care_m": 0.1,
+     "as_built_m": 0.1
+    },
+    "Couch_Lockers_2": {
+     "care_m": -0.238,
+     "as_built_m": -0.238
+    },
+    "ECLSS_Bay": {
+     "care_m": 0.075,
+     "as_built_m": 0.075
+    }
+   },
+   "egress_preexisting": {
+    "Burn_Couch_1": {
+     "care_m": 0.15,
+     "as_built_m": 0.02
+    },
+    "Couch_Lockers_1": {
+     "care_m": 0.15,
+     "as_built_m": -0.15
+    },
+    "Couch_Lockers_2": {
+     "care_m": -0.238,
+     "as_built_m": -0.238
+    }
+   },
+   "egress_preexisting_made_worse": {},
+   "egress_worst": {
+    "target": "ECLSS_Bay",
+    "clearance_m": 0.075
+   },
+   "worst": {
+    "target": "ECLSS_Bay",
+    "clearance_m": 0.075
+   }
+  },
+  "freed_footprint_uv": [
+   -0.55,
+   1.6,
+   0.45,
+   2.629
+  ],
+  "deployed_local_min": [
+   0.9,
+   -0.8,
+   0.45
+  ],
+  "deployed_local_max": [
+   1.6,
+   -0.0,
+   2.45
+  ],
+  "stowed_local_min": [
+   1.3,
+   -1.5,
+   0.45
+  ],
+  "stowed_local_max": [
+   1.6,
+   -0.0,
+   2.45
+  ]
+ },
+ "sector_state_count": {
+  "repo": 24,
+  "sectors": 6,
+  "states": [
+   "0g",
+   "spin",
+   "stopped",
+   "locked_1.5g"
+  ],
+  "note": "6 occupied sectors x 4 ship states (access_integrated / ringb_unified); lost ring is not one of them: added as a 5th condition column"
+ },
+ "matrix": {
+  "A1": {
+   "function": "HABITATION",
+   "0g": {
+    "status": "FAIL",
+    "least_m": -0.439,
+    "status_unsuited": "FAIL",
+    "least_unsuited_m": -0.142,
+    "care_point": "Bunk_1",
+    "frame": "deck"
+   },
+   "spin": {
+    "status": "FAIL",
+    "least_m": -0.439,
+    "status_unsuited": "FAIL",
+    "least_unsuited_m": -0.142,
+    "care_point": "Bunk_1",
+    "frame": "deck"
+   },
+   "stopped": {
+    "status": "FAIL",
+    "least_m": -0.439,
+    "status_unsuited": "FAIL",
+    "least_unsuited_m": -0.142,
+    "care_point": "Bunk_1",
+    "frame": "deck"
+   },
+   "_deck": {
+    "parts": {
+     "screen care station (care point + kit + two attendants)": 0.15,
+     "screen transfer station (worst carrier beside + rescuers)": -0.03,
+     "screen attendant reach (0.60 m)": 0.091,
+     "screen egress past the deployed station (0.60 m)": -0.142,
+     "mesh attendants (capsules, built meshes)": 0.043,
+     "mesh kit (no overlap)": 0.0,
+     "carrier sweep hatch -> care point + slide (worst class)": -0.439
+    },
+    "sweep": {
+     "Bunk_1": {
+      "least_m": -0.439,
+      "carrier": "S",
+      "nearest": "Bunk_1",
+      "case": "S x1.08 doors 1.00 seed 201 slide 0.8",
+      "route_least_m": -0.116,
+      "slide_least_m": -0.439,
+      "slide_nearest": "Bunk_1",
+      "zone_C_sweeps_m": 0.019,
+      "zone_5_sweeps_m": 0.1,
+      "unadapted_family_m": -0.451,
+      "per_class": {
+       "A": -0.14,
+       "C": -0.14,
+       "K": -0.14,
+       "S": -0.439
+      },
+      "per_class_unsuited": -0.14
+     }
+    },
+    "station_mesh": {
+     "kit": {
+      "overlap": "Bunk_1",
+      "centre_to_surface_m": 0.27,
+      "nearest": "Bunk_1"
+     },
+     "attendant_1_strip": {
+      "least_m": 0.05,
+      "nearest": "Bunk_2"
+     },
+     "attendant_2_head_end": {
+      "least_m": 0.043,
+      "nearest": "Sector_Fit_Room_Bunk_2"
+     }
+    },
+    "screen_care_point": "Bunk_1",
+    "screen": {
+     "care": {
+      "clearance_m": 0.15,
+      "nearest": "Burn_Couch_1",
+      "part": "attendant_2_head_end"
+     },
+     "transfer_worst": {
+      "carrier": "S x1.08",
+      "clearance_m": -0.03,
+      "nearest": "end_wall",
+      "part": "rescuer_end_1",
+      "offset_m": -0.6,
+      "rescuers": "ends"
+     },
+     "transfer": {
+      "A x1.00": {
+       "clearance_m": 0.1,
+       "nearest": "Burn_Couch_1",
+       "part": "rescuer_end_1",
+       "offset_m": -0.6,
+       "rescuers": "ends"
+      },
+      "A x1.08": {
+       "clearance_m": 0.1,
+       "nearest": "Burn_Couch_1",
+       "part": "rescuer_end_1",
+       "offset_m": -0.6,
+       "rescuers": "ends"
+      },
+      "C x1.00": {
+       "clearance_m": 0.1,
+       "nearest": "Burn_Couch_1",
+       "part": "rescuer_end_1",
+       "offset_m": -0.6,
+       "rescuers": "ends"
+      },
+      "C x1.08": {
+       "clearance_m": 0.1,
+       "nearest": "Burn_Couch_1",
+       "part": "rescuer_end_1",
+       "offset_m": -0.6,
+       "rescuers": "ends"
+      },
+      "K x1.00": {
+       "clearance_m": 0.1,
+       "nearest": "Burn_Couch_1",
+       "part": "rescuer_end_1",
+       "offset_m": -0.6,
+       "rescuers": "ends"
+      },
+      "K x1.08": {
+       "clearance_m": 0.1,
+       "nearest": "Burn_Couch_1",
+       "part": "rescuer_end_1",
+       "offset_m": -0.6,
+       "rescuers": "ends"
+      },
+      "S x1.00": {
+       "clearance_m": 0.043,
+       "nearest": "Hygiene",
+       "part": "carrier",
+       "offset_m": -0.6,
+       "rescuers": "ends"
+      },
+      "S x1.08": {
+       "clearance_m": -0.03,
+       "nearest": "end_wall",
+       "part": "rescuer_end_1",
+       "offset_m": -0.6,
+       "rescuers": "ends"
+      }
+     },
+     "reach": {
+      "attendant_1_strip": 0.31,
+      "attendant_2_head_end": 0.091
+     },
+     "egress_worst": {
+      "target": "Hygiene",
+      "clearance_m": -0.142
+     },
+     "governing_m": -0.142
+    }
+   },
+   "locked_1.5g": {
+    "status": "FAIL",
+    "least_m": -0.28,
+    "status_unsuited": "FAIL",
+    "least_unsuited_m": -0.25,
+    "care_point": "Burn_Couch_2",
+    "frame": "aft"
+   },
+   "_aft": {
+    "parts": {
+     "screen care station (care point + kit + two attendants)": 0.108,
+     "screen transfer station (worst carrier beside + rescuers)": -0.28,
+     "screen attendant reach (0.60 m)": 0.08,
+     "screen egress past the deployed station (0.60 m)": -0.25,
+     "mesh attendants (capsules, built meshes)": 0.1,
+     "mesh kit (no overlap)": 0.3,
+     "carrier sweep hatch -> care point + slide (worst class)": 0.06
+    },
+    "sweep": {
+     "Burn_Couch_1": {
+      "least_m": -0.461,
+      "carrier": "S",
+      "nearest": "Bunk_2",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "route_least_m": -0.461,
+      "slide_least_m": -0.442,
+      "slide_nearest": "Bunk_1",
+      "zone_C_sweeps_m": -0.35,
+      "zone_5_sweeps_m": null,
+      "unadapted_family_m": -0.463,
+      "per_class": {
+       "A": -0.25,
+       "C": -0.249,
+       "K": -0.25,
+       "S": -0.461
+      },
+      "per_class_unsuited": -0.25
+     },
+     "Burn_Couch_2": {
+      "least_m": 0.06,
+      "carrier": "S",
+      "nearest": "Seraph_Niche_Partition",
+      "case": "S x1.08 doors 1.00 seed 202 lower 1.0",
+      "route_least_m": 0.1,
+      "slide_least_m": 0.06,
+      "slide_nearest": "Seraph_Niche_Partition",
+      "zone_C_sweeps_m": 0.1,
+      "zone_5_sweeps_m": null,
+      "unadapted_family_m": 0.1,
+      "per_class": {
+       "A": 0.1,
+       "C": 0.093,
+       "K": 0.1,
+       "S": 0.06
+      },
+      "per_class_unsuited": 0.093
+     }
+    },
+    "station_mesh": {
+     "kit": {
+      "overlap": null,
+      "centre_to_surface_m": 0.412,
+      "nearest": "Seraph_Niche_Privacy_Panel"
+     },
+     "attendant_1_strip": {
+      "least_m": 0.1,
+      "nearest": "Sector_Pressure_Envelope"
+     },
+     "attendant_2_head_end": {
+      "least_m": 0.1,
+      "nearest": "Sector_Pressure_Envelope"
+     }
+    },
+    "screen_care_point": "Burn_Couch_2",
+    "screen": {
+     "care": {
+      "clearance_m": 0.108,
+      "nearest": "thrust_step_ladder",
+      "part": "attendant_2_head_end"
+     },
+     "transfer_worst": {
+      "carrier": "S x1.08",
+      "clearance_m": -0.28,
+      "nearest": "end_wall",
+      "part": "rescuer_end_2",
+      "offset_m": -0.45,
+      "rescuers": "ends"
+     },
+     "transfer": {
+      "A x1.00": {
+       "clearance_m": -0.15,
+       "nearest": "Bunk_1",
+       "part": "rescuers_strip",
+       "offset_m": -0.6,
+       "rescuers": "beside"
+      },
+      "A x1.08": {
+       "clearance_m": -0.194,
+       "nearest": "Bunk_1",
+       "part": "rescuers_strip",
+       "offset_m": -0.6,
+       "rescuers": "beside"
+      },
+      "C x1.00": {
+       "clearance_m": -0.075,
+       "nearest": "end_wall",
+       "part": "rescuer_end_2",
+       "offset_m": -0.45,
+       "rescuers": "ends"
+      },
+      "C x1.08": {
+       "clearance_m": -0.14,
+       "nearest": "Bunk_1",
+       "part": "rescuers_strip",
+       "offset_m": -0.6,
+       "rescuers": "beside"
+      },
+      "K x1.00": {
+       "clearance_m": -0.15,
+       "nearest": "Bunk_1",
+       "part": "rescuers_strip",
+       "offset_m": -0.6,
+       "rescuers": "beside"
+      },
+      "K x1.08": {
+       "clearance_m": -0.194,
+       "nearest": "Bunk_1",
+       "part": "rescuers_strip",
+       "offset_m": -0.6,
+       "rescuers": "beside"
+      },
+      "S x1.00": {
+       "clearance_m": -0.197,
+       "nearest": "end_wall",
+       "part": "rescuer_end_2",
+       "offset_m": -0.45,
+       "rescuers": "ends"
+      },
+      "S x1.08": {
+       "clearance_m": -0.28,
+       "nearest": "end_wall",
+       "part": "rescuer_end_2",
+       "offset_m": -0.45,
+       "rescuers": "ends"
+      }
+     },
+     "reach": {
+      "attendant_1_strip": 0.08,
+      "attendant_2_head_end": 0.08
+     },
+     "egress_worst": {
+      "target": "Burn_Couch_1",
+      "clearance_m": -0.25
+     },
+     "governing_m": -0.28
+    }
+   },
+   "lost_ring": {
+    "status": "FAIL",
+    "least_m": -0.439,
+    "status_unsuited": "FAIL",
+    "least_unsuited_m": -0.142,
+    "care_point": "Bunk_1",
+    "frame": "deck",
+    "represented": "dependency + geometry only (= stopped, deck frame); lost-ring dynamics (residual momentum, uncommanded spin-down, attitude) NOT represented"
+   }
+  },
+  "A2": {
+   "function": "WORK_MEDICAL_OPS",
+   "0g": {
+    "status": "FAIL",
+    "least_m": -0.14,
+    "status_unsuited": "FAIL",
+    "least_unsuited_m": -0.14,
+    "care_point": "Medical_Couch",
+    "frame": "deck"
+   },
+   "spin": {
+    "status": "FAIL",
+    "least_m": -0.14,
+    "status_unsuited": "FAIL",
+    "least_unsuited_m": -0.14,
+    "care_point": "Medical_Couch",
+    "frame": "deck"
+   },
+   "stopped": {
+    "status": "FAIL",
+    "least_m": -0.14,
+    "status_unsuited": "FAIL",
+    "least_unsuited_m": -0.14,
+    "care_point": "Medical_Couch",
+    "frame": "deck"
+   },
+   "_deck": {
+    "parts": {
+     "screen care station (care point + kit + two attendants)": 0.125,
+     "screen transfer station (worst carrier beside + rescuers)": -0.03,
+     "screen attendant reach (0.60 m)": 0.091,
+     "screen egress past the deployed station (0.60 m)": 0.1,
+     "mesh attendants (capsules, built meshes)": 0.036,
+     "mesh kit (no overlap)": 0.3,
+     "carrier sweep hatch -> care point + slide (worst class)": -0.14
+    },
+    "sweep": {
+     "Medical_Couch": {
+      "least_m": -0.14,
+      "carrier": "A",
+      "nearest": "Medical_Couch",
+      "case": "A x1.00 doors 1.00 seed 17 slide 0.8",
+      "route_least_m": 0.089,
+      "slide_least_m": -0.14,
+      "slide_nearest": "Medical_Couch",
+      "zone_C_sweeps_m": 0.1,
+      "zone_5_sweeps_m": 0.1,
+      "unadapted_family_m": -0.091,
+      "per_class": {
+       "A": -0.14,
+       "C": -0.14,
+       "K": -0.14,
+       "S": -0.082
+      },
+      "per_class_unsuited": -0.14
+     }
+    },
+    "station_mesh": {
+     "kit": {
+      "overlap": null,
+      "centre_to_surface_m": 0.295,
+      "nearest": "Medical_Couch"
+     },
+     "attendant_1_strip": {
+      "least_m": 0.35,
+      "nearest": "Lab_Bench"
+     },
+     "attendant_2_head_end": {
+      "least_m": 0.036,
+      "nearest": "Sector_Fit_Room_Medical_Couch_Text"
+     }
+    },
+    "screen_care_point": "Medical_Couch",
+    "screen": {
+     "care": {
+      "clearance_m": 0.125,
+      "nearest": "Ops_Stations",
+      "part": "kit"
+     },
+     "transfer_worst": {
+      "carrier": "S x1.08",
+      "clearance_m": -0.03,
+      "nearest": "end_wall",
+      "part": "rescuer_end_1",
+      "offset_m": -0.6,
+      "rescuers": "ends"
+     },
+     "transfer": {
+      "A x1.00": {
+       "clearance_m": 0.1,
+       "nearest": "Burn_Couch_1",
+       "part": "rescuer_end_1",
+       "offset_m": -0.6,
+       "rescuers": "ends"
+      },
+      "A x1.08": {
+       "clearance_m": 0.1,
+       "nearest": "Burn_Couch_1",
+       "part": "rescuer_end_1",
+       "offset_m": -0.6,
+       "rescuers": "ends"
+      },
+      "C x1.00": {
+       "clearance_m": 0.1,
+       "nearest": "Burn_Couch_1",
+       "part": "rescuer_end_1",
+       "offset_m": -0.6,
+       "rescuers": "ends"
+      },
+      "C x1.08": {
+       "clearance_m": 0.1,
+       "nearest": "Burn_Couch_1",
+       "part": "rescuer_end_1",
+       "offset_m": -0.6,
+       "rescuers": "ends"
+      },
+      "K x1.00": {
+       "clearance_m": 0.1,
+       "nearest": "Burn_Couch_1",
+       "part": "rescuer_end_1",
+       "offset_m": -0.6,
+       "rescuers": "ends"
+      },
+      "K x1.08": {
+       "clearance_m": 0.1,
+       "nearest": "Burn_Couch_1",
+       "part": "rescuer_end_1",
+       "offset_m": -0.6,
+       "rescuers": "ends"
+      },
+      "S x1.00": {
+       "clearance_m": 0.043,
+       "nearest": "Lab_Bench",
+       "part": "carrier",
+       "offset_m": -0.6,
+       "rescuers": "ends"
+      },
+      "S x1.08": {
+       "clearance_m": -0.03,
+       "nearest": "end_wall",
+       "part": "rescuer_end_1",
+       "offset_m": -0.6,
+       "rescuers": "ends"
+      }
+     },
+     "reach": {
+      "attendant_1_strip": 0.31,
+      "attendant_2_head_end": 0.091
+     },
+     "egress_worst": {
+      "target": "Burn_Couch_2",
+      "clearance_m": 0.1
+     },
+     "governing_m": -0.03
+    }
+   },
+   "locked_1.5g": {
+    "status": "FAIL",
+    "least_m": -0.45,
+    "status_unsuited": "FAIL",
+    "least_unsuited_m": -0.249,
+    "care_point": "Burn_Couch_1",
+    "frame": "aft"
+   },
+   "_aft": {
+    "parts": {
+     "screen care station (care point + kit + two attendants)": 0.1,
+     "screen transfer station (worst carrier beside + rescuers)": -0.28,
+     "screen attendant reach (0.60 m)": 0.08,
+     "screen egress past the deployed station (0.60 m)": -0.066,
+     "mesh attendants (capsules, built meshes)": -0.199,
+     "mesh kit (no overlap)": 0.3,
+     "carrier sweep hatch -> care point + slide (worst class)": -0.45
+    },
+    "sweep": {
+     "Burn_Couch_1": {
+      "least_m": -0.45,
+      "carrier": "S",
+      "nearest": "Medical_Couch",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "route_least_m": -0.45,
+      "slide_least_m": -0.434,
+      "slide_nearest": "Medical_Couch",
+      "zone_C_sweeps_m": -0.316,
+      "zone_5_sweeps_m": null,
+      "unadapted_family_m": -0.459,
+      "per_class": {
+       "A": -0.249,
+       "C": -0.236,
+       "K": -0.249,
+       "S": -0.45
+      },
+      "per_class_unsuited": -0.249
+     },
+     "Burn_Couch_2": {
+      "least_m": 0.1,
+      "carrier": "A",
+      "nearest": null,
+      "case": "A x1.00 doors 1.00 seed 17 carrier",
+      "route_least_m": 0.1,
+      "slide_least_m": 0.1,
+      "slide_nearest": null,
+      "zone_C_sweeps_m": 0.1,
+      "zone_5_sweeps_m": null,
+      "unadapted_family_m": 0.012,
+      "per_class": {
+       "A": 0.1,
+       "C": 0.1,
+       "K": 0.1,
+       "S": 0.1
+      },
+      "per_class_unsuited": 0.1
+     }
+    },
+    "station_mesh": {
+     "kit": {
+      "overlap": null,
+      "centre_to_surface_m": 0.375,
+      "nearest": "Medical_Couch"
+     },
+     "attendant_1_strip": {
+      "least_m": -0.049,
+      "nearest": "Medical_Couch"
+     },
+     "attendant_2_head_end": {
+      "least_m": -0.199,
+      "nearest": "Survival_Medical_Overhead_Unit"
+     }
+    },
+    "screen_care_point": "Burn_Couch_1",
+    "screen": {
+     "care": {
+      "clearance_m": 0.1,
+      "nearest": "Medical_Couch",
+      "part": "attendant_1_strip"
+     },
+     "transfer_worst": {
+      "carrier": "S x1.08",
+      "clearance_m": -0.28,
+      "nearest": "end_wall",
+      "part": "rescuer_end_2",
+      "offset_m": -0.45,
+      "rescuers": "ends"
+     },
+     "transfer": {
+      "A x1.00": {
+       "clearance_m": -0.05,
+       "nearest": "Burn_Couch_2",
+       "part": "rescuers_strip",
+       "offset_m": -0.6,
+       "rescuers": "beside"
+      },
+      "A x1.08": {
+       "clearance_m": -0.094,
+       "nearest": "Burn_Couch_2",
+       "part": "rescuers_strip",
+       "offset_m": -0.6,
+       "rescuers": "beside"
+      },
+      "C x1.00": {
+       "clearance_m": 0.0,
+       "nearest": "Burn_Couch_2",
+       "part": "rescuers_strip",
+       "offset_m": -0.6,
+       "rescuers": "beside"
+      },
+      "C x1.08": {
+       "clearance_m": -0.04,
+       "nearest": "Burn_Couch_2",
+       "part": "rescuers_strip",
+       "offset_m": -0.6,
+       "rescuers": "beside"
+      },
+      "K x1.00": {
+       "clearance_m": -0.05,
+       "nearest": "Burn_Couch_2",
+       "part": "rescuers_strip",
+       "offset_m": -0.6,
+       "rescuers": "beside"
+      },
+      "K x1.08": {
+       "clearance_m": -0.094,
+       "nearest": "Burn_Couch_2",
+       "part": "rescuers_strip",
+       "offset_m": -0.6,
+       "rescuers": "beside"
+      },
+      "S x1.00": {
+       "clearance_m": -0.197,
+       "nearest": "end_wall",
+       "part": "rescuer_end_2",
+       "offset_m": -0.45,
+       "rescuers": "ends"
+      },
+      "S x1.08": {
+       "clearance_m": -0.28,
+       "nearest": "end_wall",
+       "part": "rescuer_end_2",
+       "offset_m": -0.45,
+       "rescuers": "ends"
+      }
+     },
+     "reach": {
+      "attendant_1_strip": 0.08,
+      "attendant_2_head_end": 0.08
+     },
+     "egress_worst": {
+      "target": "Burn_Couch_2",
+      "clearance_m": -0.066
+     },
+     "governing_m": -0.28
+    }
+   },
+   "lost_ring": {
+    "status": "FAIL",
+    "least_m": -0.14,
+    "status_unsuited": "FAIL",
+    "least_unsuited_m": -0.14,
+    "care_point": "Medical_Couch",
+    "frame": "deck",
+    "represented": "dependency + geometry only (= stopped, deck frame); lost-ring dynamics (residual momentum, uncommanded spin-down, attitude) NOT represented"
+   }
+  },
+  "A3": {
+   "function": "LIFE_SUPPORT_GARDEN_COMMON",
+   "0g": {
+    "status": "PASS",
+    "least_m": 0.075,
+    "status_unsuited": "PASS",
+    "least_unsuited_m": 0.075,
+    "care_point": "Care_Couch",
+    "frame": "deck"
+   },
+   "spin": {
+    "status": "PASS",
+    "least_m": 0.075,
+    "status_unsuited": "PASS",
+    "least_unsuited_m": 0.075,
+    "care_point": "Care_Couch",
+    "frame": "deck"
+   },
+   "stopped": {
+    "status": "PASS",
+    "least_m": 0.075,
+    "status_unsuited": "PASS",
+    "least_unsuited_m": 0.075,
+    "care_point": "Care_Couch",
+    "frame": "deck"
+   },
+   "_deck": {
+    "parts": {
+     "screen care station (care point + kit + two attendants)": 0.3,
+     "screen transfer station (worst carrier beside + rescuers)": 0.3,
+     "screen attendant reach (0.60 m)": 0.156,
+     "screen egress past the deployed station (0.60 m)": 0.075,
+     "mesh attendants (capsules, built meshes)": 0.2,
+     "mesh kit (no overlap)": 0.3,
+     "carrier sweep hatch -> care point + slide (worst class)": 0.1,
+     "screen stowed-couch egress (0.60 m)": 0.075
+    },
+    "sweep": {
+     "Care_Couch": {
+      "least_m": 0.1,
+      "carrier": "A",
+      "nearest": null,
+      "case": "A x1.00 doors 1.00 seed 17 carrier",
+      "route_least_m": 0.1,
+      "slide_least_m": 0.1,
+      "slide_nearest": null,
+      "zone_C_sweeps_m": 0.1,
+      "zone_5_sweeps_m": 0.1,
+      "unadapted_family_m": -0.073,
+      "per_class": {
+       "A": 0.1,
+       "C": 0.1,
+       "K": 0.1,
+       "S": 0.1
+      },
+      "per_class_unsuited": 0.1
+     }
+    },
+    "station_mesh": {
+     "kit": {
+      "overlap": null,
+      "centre_to_surface_m": 0.375,
+      "nearest": "Care_Couch_deployed_1"
+     },
+     "attendant_1_strip": {
+      "least_m": 0.712,
+      "nearest": "Sector_Pressure_Envelope"
+     },
+     "attendant_2_head_end": {
+      "least_m": 0.2,
+      "nearest": "Sector_Pressure_Envelope"
+     }
+    },
+    "screen_care_point": "fold-down care couch (PROTOTYPE, garden swap)",
+    "screen": {
+     "care": {
+      "clearance_m": 0.3,
+      "nearest": null,
+      "part": null
+     },
+     "transfer_worst": {
+      "carrier": "A x1.00",
+      "clearance_m": 0.3,
+      "nearest": null,
+      "part": null,
+      "offset_m": -0.6,
+      "rescuers": "beside"
+     },
+     "transfer": {
+      "A x1.00": {
+       "clearance_m": 0.3,
+       "nearest": null,
+       "part": null,
+       "offset_m": -0.6,
+       "rescuers": "beside"
+      },
+      "A x1.08": {
+       "clearance_m": 0.3,
+       "nearest": null,
+       "part": null,
+       "offset_m": -0.5,
+       "rescuers": "beside"
+      },
+      "C x1.00": {
+       "clearance_m": 0.3,
+       "nearest": null,
+       "part": null,
+       "offset_m": -0.6,
+       "rescuers": "beside"
+      },
+      "C x1.08": {
+       "clearance_m": 0.3,
+       "nearest": null,
+       "part": null,
+       "offset_m": -0.6,
+       "rescuers": "beside"
+      },
+      "K x1.00": {
+       "clearance_m": 0.3,
+       "nearest": null,
+       "part": null,
+       "offset_m": -0.6,
+       "rescuers": "beside"
+      },
+      "K x1.08": {
+       "clearance_m": 0.3,
+       "nearest": null,
+       "part": null,
+       "offset_m": -0.5,
+       "rescuers": "beside"
+      },
+      "S x1.00": {
+       "clearance_m": 0.3,
+       "nearest": null,
+       "part": null,
+       "offset_m": -0.55,
+       "rescuers": "beside"
+      },
+      "S x1.08": {
+       "clearance_m": 0.3,
+       "nearest": null,
+       "part": null,
+       "offset_m": -0.45,
+       "rescuers": "beside"
+      }
+     },
+     "reach": {
+      "attendant_1_strip": 0.3,
+      "attendant_2_head_end": 0.156
+     },
+     "egress_worst": {
+      "target": "ECLSS_Bay",
+      "clearance_m": 0.075
+     },
+     "governing_m": 0.075
+    }
+   },
+   "locked_1.5g": {
+    "status": "FAIL",
+    "least_m": -0.311,
+    "status_unsuited": "FAIL",
+    "least_unsuited_m": -0.201,
+    "care_point": "Burn_Couch_1",
+    "frame": "aft"
+   },
+   "_aft": {
+    "parts": {
+     "screen care station (care point + kit + two attendants)": 0.3,
+     "screen transfer station (worst carrier beside + rescuers)": -0.28,
+     "screen attendant reach (0.60 m)": 0.08,
+     "screen egress past the deployed station (0.60 m)": -0.066,
+     "mesh attendants (capsules, built meshes)": 0.057,
+     "mesh kit (no overlap)": 0.3,
+     "carrier sweep hatch -> care point + slide (worst class)": -0.311
+    },
+    "sweep": {
+     "Burn_Couch_1": {
+      "least_m": -0.311,
+      "carrier": "S",
+      "nearest": "Sector_Hatch_Leaf",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "route_least_m": -0.311,
+      "slide_least_m": 0.1,
+      "slide_nearest": "Burn_Couch_1",
+      "zone_C_sweeps_m": 0.036,
+      "zone_5_sweeps_m": null,
+      "unadapted_family_m": -0.463,
+      "per_class": {
+       "A": -0.201,
+       "C": -0.141,
+       "K": -0.201,
+       "S": -0.311
+      },
+      "per_class_unsuited": -0.201
+     },
+     "Burn_Couch_2": {
+      "least_m": 0.089,
+      "carrier": "S",
+      "nearest": "Couch_Lockers_2",
+      "case": "S x1.08 doors 1.00 seed 202 lower 1.0",
+      "route_least_m": 0.1,
+      "slide_least_m": 0.089,
+      "slide_nearest": "Couch_Lockers_2",
+      "zone_C_sweeps_m": 0.1,
+      "zone_5_sweeps_m": null,
+      "unadapted_family_m": 0.1,
+      "per_class": {
+       "A": 0.1,
+       "C": 0.1,
+       "K": 0.1,
+       "S": 0.089
+      },
+      "per_class_unsuited": 0.1
+     }
+    },
+    "station_mesh": {
+     "kit": {
+      "overlap": null,
+      "centre_to_surface_m": 0.462,
+      "nearest": "Burn_Couch_1"
+     },
+     "attendant_1_strip": {
+      "least_m": 0.1,
+      "nearest": "Sector_Pressure_Envelope"
+     },
+     "attendant_2_head_end": {
+      "least_m": 0.057,
+      "nearest": "Survival_Sector_Alarm_Panel"
+     }
+    },
+    "screen_care_point": "Burn_Couch_1",
+    "screen": {
+     "care": {
+      "clearance_m": 0.3,
+      "nearest": null,
+      "part": null
+     },
+     "transfer_worst": {
+      "carrier": "S x1.08",
+      "clearance_m": -0.28,
+      "nearest": "end_wall",
+      "part": "rescuer_end_2",
+      "offset_m": -0.45,
+      "rescuers": "ends"
+     },
+     "transfer": {
+      "A x1.00": {
+       "clearance_m": -0.05,
+       "nearest": "Burn_Couch_2",
+       "part": "rescuers_strip",
+       "offset_m": -0.6,
+       "rescuers": "beside"
+      },
+      "A x1.08": {
+       "clearance_m": -0.094,
+       "nearest": "Burn_Couch_2",
+       "part": "rescuers_strip",
+       "offset_m": -0.6,
+       "rescuers": "beside"
+      },
+      "C x1.00": {
+       "clearance_m": 0.0,
+       "nearest": "Burn_Couch_2",
+       "part": "rescuers_strip",
+       "offset_m": -0.6,
+       "rescuers": "beside"
+      },
+      "C x1.08": {
+       "clearance_m": -0.04,
+       "nearest": "Burn_Couch_2",
+       "part": "rescuers_strip",
+       "offset_m": -0.6,
+       "rescuers": "beside"
+      },
+      "K x1.00": {
+       "clearance_m": -0.05,
+       "nearest": "Burn_Couch_2",
+       "part": "rescuers_strip",
+       "offset_m": -0.6,
+       "rescuers": "beside"
+      },
+      "K x1.08": {
+       "clearance_m": -0.094,
+       "nearest": "Burn_Couch_2",
+       "part": "rescuers_strip",
+       "offset_m": -0.6,
+       "rescuers": "beside"
+      },
+      "S x1.00": {
+       "clearance_m": -0.197,
+       "nearest": "end_wall",
+       "part": "rescuer_end_2",
+       "offset_m": -0.45,
+       "rescuers": "ends"
+      },
+      "S x1.08": {
+       "clearance_m": -0.28,
+       "nearest": "end_wall",
+       "part": "rescuer_end_2",
+       "offset_m": -0.45,
+       "rescuers": "ends"
+      }
+     },
+     "reach": {
+      "attendant_1_strip": 0.08,
+      "attendant_2_head_end": 0.08
+     },
+     "egress_worst": {
+      "target": "Burn_Couch_2",
+      "clearance_m": -0.066
+     },
+     "governing_m": -0.28
+    }
+   },
+   "lost_ring": {
+    "status": "PASS",
+    "least_m": 0.075,
+    "status_unsuited": "PASS",
+    "least_unsuited_m": 0.075,
+    "care_point": "Care_Couch",
+    "frame": "deck",
+    "represented": "dependency + geometry only (= stopped, deck frame); lost-ring dynamics (residual momentum, uncommanded spin-down, attitude) NOT represented"
+   }
+  },
+  "B1": {
+   "function": "HABITATION",
+   "0g": {
+    "status": "FAIL",
+    "least_m": -0.439,
+    "status_unsuited": "FAIL",
+    "least_unsuited_m": -0.142,
+    "care_point": "Bunk_1",
+    "frame": "deck"
+   },
+   "spin": {
+    "status": "FAIL",
+    "least_m": -0.439,
+    "status_unsuited": "FAIL",
+    "least_unsuited_m": -0.142,
+    "care_point": "Bunk_1",
+    "frame": "deck"
+   },
+   "stopped": {
+    "status": "FAIL",
+    "least_m": -0.439,
+    "status_unsuited": "FAIL",
+    "least_unsuited_m": -0.142,
+    "care_point": "Bunk_1",
+    "frame": "deck"
+   },
+   "_deck": {
+    "parts": {
+     "screen care station (care point + kit + two attendants)": 0.15,
+     "screen transfer station (worst carrier beside + rescuers)": -0.03,
+     "screen attendant reach (0.60 m)": 0.091,
+     "screen egress past the deployed station (0.60 m)": -0.142,
+     "mesh attendants (capsules, built meshes)": 0.043,
+     "mesh kit (no overlap)": 0.0,
+     "carrier sweep hatch -> care point + slide (worst class)": -0.439
+    },
+    "sweep": {
+     "Bunk_1": {
+      "least_m": -0.439,
+      "carrier": "S",
+      "nearest": "Bunk_1",
+      "case": "S x1.08 doors 1.00 seed 201 slide 0.8",
+      "route_least_m": -0.116,
+      "slide_least_m": -0.439,
+      "slide_nearest": "Bunk_1",
+      "zone_C_sweeps_m": 0.019,
+      "zone_5_sweeps_m": 0.1,
+      "unadapted_family_m": -0.451,
+      "per_class": {
+       "A": -0.14,
+       "C": -0.14,
+       "K": -0.14,
+       "S": -0.439
+      },
+      "per_class_unsuited": -0.14
+     }
+    },
+    "station_mesh": {
+     "kit": {
+      "overlap": "Bunk_1",
+      "centre_to_surface_m": 0.27,
+      "nearest": "Bunk_1"
+     },
+     "attendant_1_strip": {
+      "least_m": 0.05,
+      "nearest": "Bunk_2"
+     },
+     "attendant_2_head_end": {
+      "least_m": 0.043,
+      "nearest": "Sector_Fit_Room_Bunk_2"
+     }
+    },
+    "screen_care_point": "Bunk_1",
+    "screen": {
+     "care": {
+      "clearance_m": 0.15,
+      "nearest": "Burn_Couch_1",
+      "part": "attendant_2_head_end"
+     },
+     "transfer_worst": {
+      "carrier": "S x1.08",
+      "clearance_m": -0.03,
+      "nearest": "end_wall",
+      "part": "rescuer_end_1",
+      "offset_m": -0.6,
+      "rescuers": "ends"
+     },
+     "transfer": {
+      "A x1.00": {
+       "clearance_m": 0.1,
+       "nearest": "Burn_Couch_1",
+       "part": "rescuer_end_1",
+       "offset_m": -0.6,
+       "rescuers": "ends"
+      },
+      "A x1.08": {
+       "clearance_m": 0.1,
+       "nearest": "Burn_Couch_1",
+       "part": "rescuer_end_1",
+       "offset_m": -0.6,
+       "rescuers": "ends"
+      },
+      "C x1.00": {
+       "clearance_m": 0.1,
+       "nearest": "Burn_Couch_1",
+       "part": "rescuer_end_1",
+       "offset_m": -0.6,
+       "rescuers": "ends"
+      },
+      "C x1.08": {
+       "clearance_m": 0.1,
+       "nearest": "Burn_Couch_1",
+       "part": "rescuer_end_1",
+       "offset_m": -0.6,
+       "rescuers": "ends"
+      },
+      "K x1.00": {
+       "clearance_m": 0.1,
+       "nearest": "Burn_Couch_1",
+       "part": "rescuer_end_1",
+       "offset_m": -0.6,
+       "rescuers": "ends"
+      },
+      "K x1.08": {
+       "clearance_m": 0.1,
+       "nearest": "Burn_Couch_1",
+       "part": "rescuer_end_1",
+       "offset_m": -0.6,
+       "rescuers": "ends"
+      },
+      "S x1.00": {
+       "clearance_m": 0.043,
+       "nearest": "Hygiene",
+       "part": "carrier",
+       "offset_m": -0.6,
+       "rescuers": "ends"
+      },
+      "S x1.08": {
+       "clearance_m": -0.03,
+       "nearest": "end_wall",
+       "part": "rescuer_end_1",
+       "offset_m": -0.6,
+       "rescuers": "ends"
+      }
+     },
+     "reach": {
+      "attendant_1_strip": 0.31,
+      "attendant_2_head_end": 0.091
+     },
+     "egress_worst": {
+      "target": "Hygiene",
+      "clearance_m": -0.142
+     },
+     "governing_m": -0.142
+    }
+   },
+   "locked_1.5g": {
+    "status": "FAIL",
+    "least_m": -0.28,
+    "status_unsuited": "FAIL",
+    "least_unsuited_m": -0.25,
+    "care_point": "Burn_Couch_2",
+    "frame": "aft"
+   },
+   "_aft": {
+    "parts": {
+     "screen care station (care point + kit + two attendants)": 0.108,
+     "screen transfer station (worst carrier beside + rescuers)": -0.28,
+     "screen attendant reach (0.60 m)": 0.08,
+     "screen egress past the deployed station (0.60 m)": -0.25,
+     "mesh attendants (capsules, built meshes)": 0.1,
+     "mesh kit (no overlap)": 0.3,
+     "carrier sweep hatch -> care point + slide (worst class)": 0.06
+    },
+    "sweep": {
+     "Burn_Couch_1": {
+      "least_m": -0.461,
+      "carrier": "S",
+      "nearest": "Bunk_2",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "route_least_m": -0.461,
+      "slide_least_m": -0.442,
+      "slide_nearest": "Bunk_1",
+      "zone_C_sweeps_m": -0.35,
+      "zone_5_sweeps_m": null,
+      "unadapted_family_m": -0.463,
+      "per_class": {
+       "A": -0.25,
+       "C": -0.249,
+       "K": -0.25,
+       "S": -0.461
+      },
+      "per_class_unsuited": -0.25
+     },
+     "Burn_Couch_2": {
+      "least_m": 0.06,
+      "carrier": "S",
+      "nearest": "Seraph_Niche_Partition",
+      "case": "S x1.08 doors 1.00 seed 202 lower 1.0",
+      "route_least_m": 0.1,
+      "slide_least_m": 0.06,
+      "slide_nearest": "Seraph_Niche_Partition",
+      "zone_C_sweeps_m": 0.1,
+      "zone_5_sweeps_m": null,
+      "unadapted_family_m": 0.1,
+      "per_class": {
+       "A": 0.1,
+       "C": 0.093,
+       "K": 0.1,
+       "S": 0.06
+      },
+      "per_class_unsuited": 0.093
+     }
+    },
+    "station_mesh": {
+     "kit": {
+      "overlap": null,
+      "centre_to_surface_m": 0.412,
+      "nearest": "Seraph_Niche_Privacy_Panel"
+     },
+     "attendant_1_strip": {
+      "least_m": 0.1,
+      "nearest": "Sector_Pressure_Envelope"
+     },
+     "attendant_2_head_end": {
+      "least_m": 0.1,
+      "nearest": "Sector_Pressure_Envelope"
+     }
+    },
+    "screen_care_point": "Burn_Couch_2",
+    "screen": {
+     "care": {
+      "clearance_m": 0.108,
+      "nearest": "thrust_step_ladder",
+      "part": "attendant_2_head_end"
+     },
+     "transfer_worst": {
+      "carrier": "S x1.08",
+      "clearance_m": -0.28,
+      "nearest": "end_wall",
+      "part": "rescuer_end_2",
+      "offset_m": -0.45,
+      "rescuers": "ends"
+     },
+     "transfer": {
+      "A x1.00": {
+       "clearance_m": -0.15,
+       "nearest": "Bunk_1",
+       "part": "rescuers_strip",
+       "offset_m": -0.6,
+       "rescuers": "beside"
+      },
+      "A x1.08": {
+       "clearance_m": -0.194,
+       "nearest": "Bunk_1",
+       "part": "rescuers_strip",
+       "offset_m": -0.6,
+       "rescuers": "beside"
+      },
+      "C x1.00": {
+       "clearance_m": -0.075,
+       "nearest": "end_wall",
+       "part": "rescuer_end_2",
+       "offset_m": -0.45,
+       "rescuers": "ends"
+      },
+      "C x1.08": {
+       "clearance_m": -0.14,
+       "nearest": "Bunk_1",
+       "part": "rescuers_strip",
+       "offset_m": -0.6,
+       "rescuers": "beside"
+      },
+      "K x1.00": {
+       "clearance_m": -0.15,
+       "nearest": "Bunk_1",
+       "part": "rescuers_strip",
+       "offset_m": -0.6,
+       "rescuers": "beside"
+      },
+      "K x1.08": {
+       "clearance_m": -0.194,
+       "nearest": "Bunk_1",
+       "part": "rescuers_strip",
+       "offset_m": -0.6,
+       "rescuers": "beside"
+      },
+      "S x1.00": {
+       "clearance_m": -0.197,
+       "nearest": "end_wall",
+       "part": "rescuer_end_2",
+       "offset_m": -0.45,
+       "rescuers": "ends"
+      },
+      "S x1.08": {
+       "clearance_m": -0.28,
+       "nearest": "end_wall",
+       "part": "rescuer_end_2",
+       "offset_m": -0.45,
+       "rescuers": "ends"
+      }
+     },
+     "reach": {
+      "attendant_1_strip": 0.08,
+      "attendant_2_head_end": 0.08
+     },
+     "egress_worst": {
+      "target": "Burn_Couch_1",
+      "clearance_m": -0.25
+     },
+     "governing_m": -0.28
+    }
+   },
+   "lost_ring": {
+    "status": "FAIL",
+    "least_m": -0.439,
+    "status_unsuited": "FAIL",
+    "least_unsuited_m": -0.142,
+    "care_point": "Bunk_1",
+    "frame": "deck",
+    "represented": "dependency + geometry only (= stopped, deck frame); lost-ring dynamics (residual momentum, uncommanded spin-down, attitude) NOT represented"
+   }
+  },
+  "B2": {
+   "function": "WORK_MEDICAL_OPS",
+   "0g": {
+    "status": "FAIL",
+    "least_m": -0.14,
+    "status_unsuited": "FAIL",
+    "least_unsuited_m": -0.14,
+    "care_point": "Medical_Couch",
+    "frame": "deck"
+   },
+   "spin": {
+    "status": "FAIL",
+    "least_m": -0.14,
+    "status_unsuited": "FAIL",
+    "least_unsuited_m": -0.14,
+    "care_point": "Medical_Couch",
+    "frame": "deck"
+   },
+   "stopped": {
+    "status": "FAIL",
+    "least_m": -0.14,
+    "status_unsuited": "FAIL",
+    "least_unsuited_m": -0.14,
+    "care_point": "Medical_Couch",
+    "frame": "deck"
+   },
+   "_deck": {
+    "parts": {
+     "screen care station (care point + kit + two attendants)": 0.125,
+     "screen transfer station (worst carrier beside + rescuers)": -0.03,
+     "screen attendant reach (0.60 m)": 0.091,
+     "screen egress past the deployed station (0.60 m)": 0.1,
+     "mesh attendants (capsules, built meshes)": 0.036,
+     "mesh kit (no overlap)": 0.3,
+     "carrier sweep hatch -> care point + slide (worst class)": -0.14
+    },
+    "sweep": {
+     "Medical_Couch": {
+      "least_m": -0.14,
+      "carrier": "A",
+      "nearest": "Medical_Couch",
+      "case": "A x1.00 doors 1.00 seed 17 slide 0.8",
+      "route_least_m": 0.089,
+      "slide_least_m": -0.14,
+      "slide_nearest": "Medical_Couch",
+      "zone_C_sweeps_m": 0.1,
+      "zone_5_sweeps_m": 0.1,
+      "unadapted_family_m": -0.091,
+      "per_class": {
+       "A": -0.14,
+       "C": -0.14,
+       "K": -0.14,
+       "S": -0.082
+      },
+      "per_class_unsuited": -0.14
+     }
+    },
+    "station_mesh": {
+     "kit": {
+      "overlap": null,
+      "centre_to_surface_m": 0.295,
+      "nearest": "Medical_Couch"
+     },
+     "attendant_1_strip": {
+      "least_m": 0.35,
+      "nearest": "Lab_Bench"
+     },
+     "attendant_2_head_end": {
+      "least_m": 0.036,
+      "nearest": "Sector_Fit_Room_Medical_Couch_Text"
+     }
+    },
+    "screen_care_point": "Medical_Couch",
+    "screen": {
+     "care": {
+      "clearance_m": 0.125,
+      "nearest": "Ops_Stations",
+      "part": "kit"
+     },
+     "transfer_worst": {
+      "carrier": "S x1.08",
+      "clearance_m": -0.03,
+      "nearest": "end_wall",
+      "part": "rescuer_end_1",
+      "offset_m": -0.6,
+      "rescuers": "ends"
+     },
+     "transfer": {
+      "A x1.00": {
+       "clearance_m": 0.1,
+       "nearest": "Burn_Couch_1",
+       "part": "rescuer_end_1",
+       "offset_m": -0.6,
+       "rescuers": "ends"
+      },
+      "A x1.08": {
+       "clearance_m": 0.1,
+       "nearest": "Burn_Couch_1",
+       "part": "rescuer_end_1",
+       "offset_m": -0.6,
+       "rescuers": "ends"
+      },
+      "C x1.00": {
+       "clearance_m": 0.1,
+       "nearest": "Burn_Couch_1",
+       "part": "rescuer_end_1",
+       "offset_m": -0.6,
+       "rescuers": "ends"
+      },
+      "C x1.08": {
+       "clearance_m": 0.1,
+       "nearest": "Burn_Couch_1",
+       "part": "rescuer_end_1",
+       "offset_m": -0.6,
+       "rescuers": "ends"
+      },
+      "K x1.00": {
+       "clearance_m": 0.1,
+       "nearest": "Burn_Couch_1",
+       "part": "rescuer_end_1",
+       "offset_m": -0.6,
+       "rescuers": "ends"
+      },
+      "K x1.08": {
+       "clearance_m": 0.1,
+       "nearest": "Burn_Couch_1",
+       "part": "rescuer_end_1",
+       "offset_m": -0.6,
+       "rescuers": "ends"
+      },
+      "S x1.00": {
+       "clearance_m": 0.043,
+       "nearest": "Lab_Bench",
+       "part": "carrier",
+       "offset_m": -0.6,
+       "rescuers": "ends"
+      },
+      "S x1.08": {
+       "clearance_m": -0.03,
+       "nearest": "end_wall",
+       "part": "rescuer_end_1",
+       "offset_m": -0.6,
+       "rescuers": "ends"
+      }
+     },
+     "reach": {
+      "attendant_1_strip": 0.31,
+      "attendant_2_head_end": 0.091
+     },
+     "egress_worst": {
+      "target": "Burn_Couch_2",
+      "clearance_m": 0.1
+     },
+     "governing_m": -0.03
+    }
+   },
+   "locked_1.5g": {
+    "status": "FAIL",
+    "least_m": -0.45,
+    "status_unsuited": "FAIL",
+    "least_unsuited_m": -0.249,
+    "care_point": "Burn_Couch_1",
+    "frame": "aft"
+   },
+   "_aft": {
+    "parts": {
+     "screen care station (care point + kit + two attendants)": 0.1,
+     "screen transfer station (worst carrier beside + rescuers)": -0.28,
+     "screen attendant reach (0.60 m)": 0.08,
+     "screen egress past the deployed station (0.60 m)": -0.066,
+     "mesh attendants (capsules, built meshes)": -0.199,
+     "mesh kit (no overlap)": 0.3,
+     "carrier sweep hatch -> care point + slide (worst class)": -0.45
+    },
+    "sweep": {
+     "Burn_Couch_1": {
+      "least_m": -0.45,
+      "carrier": "S",
+      "nearest": "Medical_Couch",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "route_least_m": -0.45,
+      "slide_least_m": -0.434,
+      "slide_nearest": "Medical_Couch",
+      "zone_C_sweeps_m": -0.316,
+      "zone_5_sweeps_m": null,
+      "unadapted_family_m": -0.459,
+      "per_class": {
+       "A": -0.249,
+       "C": -0.236,
+       "K": -0.249,
+       "S": -0.45
+      },
+      "per_class_unsuited": -0.249
+     },
+     "Burn_Couch_2": {
+      "least_m": 0.1,
+      "carrier": "A",
+      "nearest": null,
+      "case": "A x1.00 doors 1.00 seed 17 carrier",
+      "route_least_m": 0.1,
+      "slide_least_m": 0.1,
+      "slide_nearest": null,
+      "zone_C_sweeps_m": 0.1,
+      "zone_5_sweeps_m": null,
+      "unadapted_family_m": 0.012,
+      "per_class": {
+       "A": 0.1,
+       "C": 0.1,
+       "K": 0.1,
+       "S": 0.1
+      },
+      "per_class_unsuited": 0.1
+     }
+    },
+    "station_mesh": {
+     "kit": {
+      "overlap": null,
+      "centre_to_surface_m": 0.375,
+      "nearest": "Medical_Couch"
+     },
+     "attendant_1_strip": {
+      "least_m": -0.049,
+      "nearest": "Medical_Couch"
+     },
+     "attendant_2_head_end": {
+      "least_m": -0.199,
+      "nearest": "Survival_Medical_Overhead_Unit"
+     }
+    },
+    "screen_care_point": "Burn_Couch_1",
+    "screen": {
+     "care": {
+      "clearance_m": 0.1,
+      "nearest": "Medical_Couch",
+      "part": "attendant_1_strip"
+     },
+     "transfer_worst": {
+      "carrier": "S x1.08",
+      "clearance_m": -0.28,
+      "nearest": "end_wall",
+      "part": "rescuer_end_2",
+      "offset_m": -0.45,
+      "rescuers": "ends"
+     },
+     "transfer": {
+      "A x1.00": {
+       "clearance_m": -0.05,
+       "nearest": "Burn_Couch_2",
+       "part": "rescuers_strip",
+       "offset_m": -0.6,
+       "rescuers": "beside"
+      },
+      "A x1.08": {
+       "clearance_m": -0.094,
+       "nearest": "Burn_Couch_2",
+       "part": "rescuers_strip",
+       "offset_m": -0.6,
+       "rescuers": "beside"
+      },
+      "C x1.00": {
+       "clearance_m": 0.0,
+       "nearest": "Burn_Couch_2",
+       "part": "rescuers_strip",
+       "offset_m": -0.6,
+       "rescuers": "beside"
+      },
+      "C x1.08": {
+       "clearance_m": -0.04,
+       "nearest": "Burn_Couch_2",
+       "part": "rescuers_strip",
+       "offset_m": -0.6,
+       "rescuers": "beside"
+      },
+      "K x1.00": {
+       "clearance_m": -0.05,
+       "nearest": "Burn_Couch_2",
+       "part": "rescuers_strip",
+       "offset_m": -0.6,
+       "rescuers": "beside"
+      },
+      "K x1.08": {
+       "clearance_m": -0.094,
+       "nearest": "Burn_Couch_2",
+       "part": "rescuers_strip",
+       "offset_m": -0.6,
+       "rescuers": "beside"
+      },
+      "S x1.00": {
+       "clearance_m": -0.197,
+       "nearest": "end_wall",
+       "part": "rescuer_end_2",
+       "offset_m": -0.45,
+       "rescuers": "ends"
+      },
+      "S x1.08": {
+       "clearance_m": -0.28,
+       "nearest": "end_wall",
+       "part": "rescuer_end_2",
+       "offset_m": -0.45,
+       "rescuers": "ends"
+      }
+     },
+     "reach": {
+      "attendant_1_strip": 0.08,
+      "attendant_2_head_end": 0.08
+     },
+     "egress_worst": {
+      "target": "Burn_Couch_2",
+      "clearance_m": -0.066
+     },
+     "governing_m": -0.28
+    }
+   },
+   "lost_ring": {
+    "status": "FAIL",
+    "least_m": -0.14,
+    "status_unsuited": "FAIL",
+    "least_unsuited_m": -0.14,
+    "care_point": "Medical_Couch",
+    "frame": "deck",
+    "represented": "dependency + geometry only (= stopped, deck frame); lost-ring dynamics (residual momentum, uncommanded spin-down, attitude) NOT represented"
+   }
+  },
+  "B3": {
+   "function": "LIFE_SUPPORT_GARDEN_COMMON",
+   "0g": {
+    "status": "PASS",
+    "least_m": 0.075,
+    "status_unsuited": "PASS",
+    "least_unsuited_m": 0.075,
+    "care_point": "Care_Couch",
+    "frame": "deck"
+   },
+   "spin": {
+    "status": "PASS",
+    "least_m": 0.075,
+    "status_unsuited": "PASS",
+    "least_unsuited_m": 0.075,
+    "care_point": "Care_Couch",
+    "frame": "deck"
+   },
+   "stopped": {
+    "status": "PASS",
+    "least_m": 0.075,
+    "status_unsuited": "PASS",
+    "least_unsuited_m": 0.075,
+    "care_point": "Care_Couch",
+    "frame": "deck"
+   },
+   "_deck": {
+    "parts": {
+     "screen care station (care point + kit + two attendants)": 0.3,
+     "screen transfer station (worst carrier beside + rescuers)": 0.3,
+     "screen attendant reach (0.60 m)": 0.156,
+     "screen egress past the deployed station (0.60 m)": 0.075,
+     "mesh attendants (capsules, built meshes)": 0.2,
+     "mesh kit (no overlap)": 0.3,
+     "carrier sweep hatch -> care point + slide (worst class)": 0.1,
+     "screen stowed-couch egress (0.60 m)": 0.075
+    },
+    "sweep": {
+     "Care_Couch": {
+      "least_m": 0.1,
+      "carrier": "A",
+      "nearest": null,
+      "case": "A x1.00 doors 1.00 seed 17 carrier",
+      "route_least_m": 0.1,
+      "slide_least_m": 0.1,
+      "slide_nearest": null,
+      "zone_C_sweeps_m": 0.1,
+      "zone_5_sweeps_m": 0.1,
+      "unadapted_family_m": -0.073,
+      "per_class": {
+       "A": 0.1,
+       "C": 0.1,
+       "K": 0.1,
+       "S": 0.1
+      },
+      "per_class_unsuited": 0.1
+     }
+    },
+    "station_mesh": {
+     "kit": {
+      "overlap": null,
+      "centre_to_surface_m": 0.375,
+      "nearest": "Care_Couch_deployed_2"
+     },
+     "attendant_1_strip": {
+      "least_m": 0.712,
+      "nearest": "Sector_Pressure_Envelope"
+     },
+     "attendant_2_head_end": {
+      "least_m": 0.2,
+      "nearest": "Sector_Pressure_Envelope"
+     }
+    },
+    "screen_care_point": "fold-down care couch (PROTOTYPE, garden swap)",
+    "screen": {
+     "care": {
+      "clearance_m": 0.3,
+      "nearest": null,
+      "part": null
+     },
+     "transfer_worst": {
+      "carrier": "A x1.00",
+      "clearance_m": 0.3,
+      "nearest": null,
+      "part": null,
+      "offset_m": -0.6,
+      "rescuers": "beside"
+     },
+     "transfer": {
+      "A x1.00": {
+       "clearance_m": 0.3,
+       "nearest": null,
+       "part": null,
+       "offset_m": -0.6,
+       "rescuers": "beside"
+      },
+      "A x1.08": {
+       "clearance_m": 0.3,
+       "nearest": null,
+       "part": null,
+       "offset_m": -0.5,
+       "rescuers": "beside"
+      },
+      "C x1.00": {
+       "clearance_m": 0.3,
+       "nearest": null,
+       "part": null,
+       "offset_m": -0.6,
+       "rescuers": "beside"
+      },
+      "C x1.08": {
+       "clearance_m": 0.3,
+       "nearest": null,
+       "part": null,
+       "offset_m": -0.6,
+       "rescuers": "beside"
+      },
+      "K x1.00": {
+       "clearance_m": 0.3,
+       "nearest": null,
+       "part": null,
+       "offset_m": -0.6,
+       "rescuers": "beside"
+      },
+      "K x1.08": {
+       "clearance_m": 0.3,
+       "nearest": null,
+       "part": null,
+       "offset_m": -0.5,
+       "rescuers": "beside"
+      },
+      "S x1.00": {
+       "clearance_m": 0.3,
+       "nearest": null,
+       "part": null,
+       "offset_m": -0.55,
+       "rescuers": "beside"
+      },
+      "S x1.08": {
+       "clearance_m": 0.3,
+       "nearest": null,
+       "part": null,
+       "offset_m": -0.45,
+       "rescuers": "beside"
+      }
+     },
+     "reach": {
+      "attendant_1_strip": 0.3,
+      "attendant_2_head_end": 0.156
+     },
+     "egress_worst": {
+      "target": "ECLSS_Bay",
+      "clearance_m": 0.075
+     },
+     "governing_m": 0.075
+    }
+   },
+   "locked_1.5g": {
+    "status": "FAIL",
+    "least_m": -0.311,
+    "status_unsuited": "FAIL",
+    "least_unsuited_m": -0.201,
+    "care_point": "Burn_Couch_1",
+    "frame": "aft"
+   },
+   "_aft": {
+    "parts": {
+     "screen care station (care point + kit + two attendants)": 0.3,
+     "screen transfer station (worst carrier beside + rescuers)": -0.28,
+     "screen attendant reach (0.60 m)": 0.08,
+     "screen egress past the deployed station (0.60 m)": -0.066,
+     "mesh attendants (capsules, built meshes)": 0.057,
+     "mesh kit (no overlap)": 0.3,
+     "carrier sweep hatch -> care point + slide (worst class)": -0.311
+    },
+    "sweep": {
+     "Burn_Couch_1": {
+      "least_m": -0.311,
+      "carrier": "S",
+      "nearest": "Sector_Hatch_Leaf",
+      "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+      "route_least_m": -0.311,
+      "slide_least_m": 0.1,
+      "slide_nearest": "Burn_Couch_1",
+      "zone_C_sweeps_m": 0.036,
+      "zone_5_sweeps_m": null,
+      "unadapted_family_m": -0.463,
+      "per_class": {
+       "A": -0.201,
+       "C": -0.141,
+       "K": -0.201,
+       "S": -0.311
+      },
+      "per_class_unsuited": -0.201
+     },
+     "Burn_Couch_2": {
+      "least_m": 0.089,
+      "carrier": "S",
+      "nearest": "Couch_Lockers_2",
+      "case": "S x1.08 doors 1.00 seed 202 lower 1.0",
+      "route_least_m": 0.1,
+      "slide_least_m": 0.089,
+      "slide_nearest": "Couch_Lockers_2",
+      "zone_C_sweeps_m": 0.1,
+      "zone_5_sweeps_m": null,
+      "unadapted_family_m": 0.1,
+      "per_class": {
+       "A": 0.1,
+       "C": 0.1,
+       "K": 0.1,
+       "S": 0.089
+      },
+      "per_class_unsuited": 0.1
+     }
+    },
+    "station_mesh": {
+     "kit": {
+      "overlap": null,
+      "centre_to_surface_m": 0.462,
+      "nearest": "Burn_Couch_1"
+     },
+     "attendant_1_strip": {
+      "least_m": 0.1,
+      "nearest": "Sector_Pressure_Envelope"
+     },
+     "attendant_2_head_end": {
+      "least_m": 0.057,
+      "nearest": "Survival_Sector_Alarm_Panel"
+     }
+    },
+    "screen_care_point": "Burn_Couch_1",
+    "screen": {
+     "care": {
+      "clearance_m": 0.3,
+      "nearest": null,
+      "part": null
+     },
+     "transfer_worst": {
+      "carrier": "S x1.08",
+      "clearance_m": -0.28,
+      "nearest": "end_wall",
+      "part": "rescuer_end_2",
+      "offset_m": -0.45,
+      "rescuers": "ends"
+     },
+     "transfer": {
+      "A x1.00": {
+       "clearance_m": -0.05,
+       "nearest": "Burn_Couch_2",
+       "part": "rescuers_strip",
+       "offset_m": -0.6,
+       "rescuers": "beside"
+      },
+      "A x1.08": {
+       "clearance_m": -0.094,
+       "nearest": "Burn_Couch_2",
+       "part": "rescuers_strip",
+       "offset_m": -0.6,
+       "rescuers": "beside"
+      },
+      "C x1.00": {
+       "clearance_m": 0.0,
+       "nearest": "Burn_Couch_2",
+       "part": "rescuers_strip",
+       "offset_m": -0.6,
+       "rescuers": "beside"
+      },
+      "C x1.08": {
+       "clearance_m": -0.04,
+       "nearest": "Burn_Couch_2",
+       "part": "rescuers_strip",
+       "offset_m": -0.6,
+       "rescuers": "beside"
+      },
+      "K x1.00": {
+       "clearance_m": -0.05,
+       "nearest": "Burn_Couch_2",
+       "part": "rescuers_strip",
+       "offset_m": -0.6,
+       "rescuers": "beside"
+      },
+      "K x1.08": {
+       "clearance_m": -0.094,
+       "nearest": "Burn_Couch_2",
+       "part": "rescuers_strip",
+       "offset_m": -0.6,
+       "rescuers": "beside"
+      },
+      "S x1.00": {
+       "clearance_m": -0.197,
+       "nearest": "end_wall",
+       "part": "rescuer_end_2",
+       "offset_m": -0.45,
+       "rescuers": "ends"
+      },
+      "S x1.08": {
+       "clearance_m": -0.28,
+       "nearest": "end_wall",
+       "part": "rescuer_end_2",
+       "offset_m": -0.45,
+       "rescuers": "ends"
+      }
+     },
+     "reach": {
+      "attendant_1_strip": 0.08,
+      "attendant_2_head_end": 0.08
+     },
+     "egress_worst": {
+      "target": "Burn_Couch_2",
+      "clearance_m": -0.066
+     },
+     "governing_m": -0.28
+    }
+   },
+   "lost_ring": {
+    "status": "PASS",
+    "least_m": 0.075,
+    "status_unsuited": "PASS",
+    "least_unsuited_m": 0.075,
+    "care_point": "Care_Couch",
+    "frame": "deck",
+    "represented": "dependency + geometry only (= stopped, deck frame); lost-ring dynamics (residual momentum, uncommanded spin-down, attitude) NOT represented"
+   }
+  }
+ },
+ "tally_24": {
+  "FAIL": 18,
+  "OPEN": 0,
+  "MARGINAL": 0,
+  "PASS": 6
+ },
+ "tally_24_unsuited": {
+  "FAIL": 18,
+  "OPEN": 0,
+  "MARGINAL": 0,
+  "PASS": 6
+ },
+ "tally_ringB_12": {
+  "FAIL": 9,
+  "OPEN": 0,
+  "MARGINAL": 0,
+  "PASS": 3
+ },
+ "ringA_comparator": {
+  "routes": {
+   "A1": {
+    "states": [
+     "0g",
+     "stopped",
+     "locked_1.5g"
+    ],
+    "quoted_single_seed": [
+     0.1,
+     "Crew_Trunk_Arrest_Rail",
+     "A"
+    ],
+    "U": {
+     "least_m": -0.103,
+     "nearest": "Crew_Trunk",
+     "case": "A x1.08 doors 1.00 best family (+-0.02 m wobble)",
+     "spread": [
+      0.016,
+      0.1
+     ],
+     "per_class": {
+      "A": {
+       "least_m": -0.103,
+       "nearest": "Crew_Trunk",
+       "case": "A x1.08 doors 1.00 best family (+-0.02 m wobble)"
+      },
+      "C": {
+       "least_m": 0.018,
+       "nearest": "Crew_Trunk_Arrest_Rail",
+       "case": "C x1.08 doors 1.00 best family (+-0.02 m wobble)"
+      },
+      "K": {
+       "least_m": -0.103,
+       "nearest": "Crew_Trunk",
+       "case": "K x1.08 doors 1.00 best family (+-0.02 m wobble)"
+      }
+     },
+     "search_min": 0.011,
+     "unadapted": -0.14
+    },
+    "S": {
+     "least_m": -0.171,
+     "nearest": "Crew_Trunk_Arrest_Rail",
+     "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+     "spread": [
+      -0.009,
+      0.069
+     ],
+     "per_class": {
+      "S": {
+       "least_m": -0.171,
+       "nearest": "Crew_Trunk_Arrest_Rail",
+       "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)"
+      }
+     },
+     "search_min": -0.049,
+     "unadapted": -0.392
+    }
+   },
+   "A2": {
+    "states": [
+     "spin"
+    ],
+    "quoted_single_seed": [
+     -0.044,
+     "Crew_Port_1_1",
+     "K"
+    ],
+    "U": {
+     "least_m": -0.14,
+     "nearest": "Structural_Spine",
+     "case": "A x1.00 doors 1.00 best family (+-0.02 m wobble)",
+     "spread": [
+      -0.063,
+      0.003
+     ],
+     "per_class": {
+      "A": {
+       "least_m": -0.14,
+       "nearest": "Structural_Spine",
+       "case": "A x1.00 doors 1.00 best family (+-0.02 m wobble)"
+      },
+      "C": {
+       "least_m": -0.14,
+       "nearest": "Structural_Spine",
+       "case": "C x1.08 doors 1.00 best family (+-0.02 m wobble)"
+      },
+      "K": {
+       "least_m": -0.14,
+       "nearest": "Structural_Spine",
+       "case": "K x1.00 doors 1.00 best family (+-0.02 m wobble)"
+      }
+     },
+     "search_min": -0.089,
+     "unadapted": -0.14
+    },
+    "S": {
+     "least_m": -0.455,
+     "nearest": "Crew_Trunk",
+     "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+     "spread": [
+      -0.218,
+      -0.15
+     ],
+     "per_class": {
+      "S": {
+       "least_m": -0.455,
+       "nearest": "Crew_Trunk",
+       "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)"
+      }
+     },
+     "search_min": -0.23,
+     "unadapted": -0.46
+    }
+   },
+   "A3": {
+    "states": [
+     "spin"
+    ],
+    "quoted_single_seed": [
+     -0.049,
+     "Crew_Port_1_1",
+     "A"
+    ],
+    "U": {
+     "least_m": -0.14,
+     "nearest": "Structural_Spine",
+     "case": "A x1.00 doors 1.00 best family (+-0.02 m wobble)",
+     "spread": [
+      -0.104,
+      -0.001
+     ],
+     "per_class": {
+      "A": {
+       "least_m": -0.14,
+       "nearest": "Structural_Spine",
+       "case": "A x1.00 doors 1.00 best family (+-0.02 m wobble)"
+      },
+      "C": {
+       "least_m": -0.14,
+       "nearest": "Structural_Spine",
+       "case": "C x1.08 doors 1.00 best family (+-0.02 m wobble)"
+      },
+      "K": {
+       "least_m": -0.14,
+       "nearest": "Structural_Spine",
+       "case": "K x1.00 doors 1.00 best family (+-0.02 m wobble)"
+      }
+     },
+     "search_min": -0.104,
+     "unadapted": -0.14
+    },
+    "S": {
+     "least_m": -0.452,
+     "nearest": "Crew_Trunk",
+     "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+     "spread": [
+      -0.217,
+      -0.16
+     ],
+     "per_class": {
+      "S": {
+       "least_m": -0.452,
+       "nearest": "Crew_Trunk",
+       "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)"
+      }
+     },
+     "search_min": -0.217,
+     "unadapted": -0.462
+    }
+   },
+   "A2-M": {
+    "states": [
+     "spin"
+    ],
+    "quoted_single_seed": null,
+    "U": {
+     "least_m": -0.14,
+     "nearest": "Structural_Spine",
+     "case": "A x1.00 doors 1.00 best family (+-0.02 m wobble)",
+     "spread": [
+      -0.063,
+      0.003
+     ],
+     "per_class": {
+      "A": {
+       "least_m": -0.14,
+       "nearest": "Structural_Spine",
+       "case": "A x1.00 doors 1.00 best family (+-0.02 m wobble)"
+      },
+      "C": {
+       "least_m": -0.14,
+       "nearest": "Structural_Spine",
+       "case": "C x1.08 doors 1.00 best family (+-0.02 m wobble)"
+      },
+      "K": {
+       "least_m": -0.14,
+       "nearest": "Structural_Spine",
+       "case": "K x1.00 doors 1.00 best family (+-0.02 m wobble)"
+      }
+     },
+     "search_min": -0.089,
+     "unadapted": -0.14
+    },
+    "S": {
+     "least_m": -0.455,
+     "nearest": "Crew_Trunk",
+     "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+     "spread": [
+      -0.218,
+      -0.15
+     ],
+     "per_class": {
+      "S": {
+       "least_m": -0.455,
+       "nearest": "Crew_Trunk",
+       "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)"
+      }
+     },
+     "search_min": -0.23,
+     "unadapted": -0.46
+    }
+   },
+   "A1-A2": {
+    "states": [
+     "stopped",
+     "locked_1.5g"
+    ],
+    "quoted_single_seed": [
+     0.062,
+     "Crew_Port_1_1",
+     "A"
+    ],
+    "U": {
+     "least_m": -0.065,
+     "nearest": "Crew_Vestibule_1",
+     "case": "K x1.08 doors 1.00 best family (+-0.02 m wobble)",
+     "spread": [
+      -0.005,
+      0.086
+     ],
+     "per_class": {
+      "A": {
+       "least_m": -0.052,
+       "nearest": "Crew_Vestibule_1",
+       "case": "A x1.08 doors 1.00 best family (+-0.02 m wobble)"
+      },
+      "C": {
+       "least_m": 0.014,
+       "nearest": "Crew_Vestibule_1",
+       "case": "C x1.08 doors 1.00 best family (+-0.02 m wobble)"
+      },
+      "K": {
+       "least_m": -0.065,
+       "nearest": "Crew_Vestibule_1",
+       "case": "K x1.08 doors 1.00 best family (+-0.02 m wobble)"
+      }
+     },
+     "search_min": -0.005,
+     "unadapted": -0.14
+    },
+    "S": {
+     "least_m": -0.243,
+     "nearest": "Structural_Spine",
+     "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+     "spread": [
+      -0.035,
+      -0.026
+     ],
+     "per_class": {
+      "S": {
+       "least_m": -0.243,
+       "nearest": "Structural_Spine",
+       "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)"
+      }
+     },
+     "search_min": -0.094,
+     "unadapted": -0.463
+    }
+   },
+   "A3-A2": {
+    "states": [
+     "stopped",
+     "locked_1.5g"
+    ],
+    "quoted_single_seed": [
+     0.081,
+     "Structural_Spine",
+     "K"
+    ],
+    "U": {
+     "least_m": -0.073,
+     "nearest": "Crew_Vestibule_1_Fit_Frame_4",
+     "case": "A x1.08 doors 1.00 best family (+-0.02 m wobble)",
+     "spread": [
+      0.036,
+      0.081
+     ],
+     "per_class": {
+      "A": {
+       "least_m": -0.073,
+       "nearest": "Crew_Vestibule_1_Fit_Frame_4",
+       "case": "A x1.08 doors 1.00 best family (+-0.02 m wobble)"
+      },
+      "C": {
+       "least_m": 0.021,
+       "nearest": "Crew_Vestibule_1",
+       "case": "C x1.08 doors 1.00 best family (+-0.02 m wobble)"
+      },
+      "K": {
+       "least_m": -0.067,
+       "nearest": "Crew_Vestibule_1",
+       "case": "K x1.08 doors 1.00 best family (+-0.02 m wobble)"
+      }
+     },
+     "search_min": 0.036,
+     "unadapted": -0.14
+    },
+    "S": {
+     "least_m": -0.251,
+     "nearest": "Structural_Spine",
+     "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+     "spread": [
+      -0.077,
+      -0.022
+     ],
+     "per_class": {
+      "S": {
+       "least_m": -0.251,
+       "nearest": "Structural_Spine",
+       "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)"
+      }
+     },
+     "search_min": -0.111,
+     "unadapted": -0.457
+    }
+   },
+   "A1-A2-M": {
+    "states": [
+     "stopped",
+     "locked_1.5g"
+    ],
+    "quoted_single_seed": [
+     0.031,
+     "Crew_Vestibule_1",
+     "K"
+    ],
+    "U": {
+     "least_m": -0.065,
+     "nearest": "Crew_Vestibule_1",
+     "case": "K x1.08 doors 1.00 best family (+-0.02 m wobble)",
+     "spread": [
+      -0.005,
+      0.086
+     ],
+     "per_class": {
+      "A": {
+       "least_m": -0.052,
+       "nearest": "Crew_Vestibule_1",
+       "case": "A x1.08 doors 1.00 best family (+-0.02 m wobble)"
+      },
+      "C": {
+       "least_m": 0.014,
+       "nearest": "Crew_Vestibule_1",
+       "case": "C x1.08 doors 1.00 best family (+-0.02 m wobble)"
+      },
+      "K": {
+       "least_m": -0.065,
+       "nearest": "Crew_Vestibule_1",
+       "case": "K x1.08 doors 1.00 best family (+-0.02 m wobble)"
+      }
+     },
+     "search_min": -0.005,
+     "unadapted": -0.14
+    },
+    "S": {
+     "least_m": -0.243,
+     "nearest": "Structural_Spine",
+     "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+     "spread": [
+      -0.035,
+      -0.026
+     ],
+     "per_class": {
+      "S": {
+       "least_m": -0.243,
+       "nearest": "Structural_Spine",
+       "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)"
+      }
+     },
+     "search_min": -0.094,
+     "unadapted": -0.463
+    }
+   },
+   "A3-A2-M": {
+    "states": [
+     "stopped",
+     "locked_1.5g"
+    ],
+    "quoted_single_seed": [
+     0.062,
+     "Structural_Spine",
+     "K"
+    ],
+    "U": {
+     "least_m": -0.073,
+     "nearest": "Crew_Vestibule_1_Fit_Frame_4",
+     "case": "A x1.08 doors 1.00 best family (+-0.02 m wobble)",
+     "spread": [
+      0.036,
+      0.081
+     ],
+     "per_class": {
+      "A": {
+       "least_m": -0.073,
+       "nearest": "Crew_Vestibule_1_Fit_Frame_4",
+       "case": "A x1.08 doors 1.00 best family (+-0.02 m wobble)"
+      },
+      "C": {
+       "least_m": 0.021,
+       "nearest": "Crew_Vestibule_1",
+       "case": "C x1.08 doors 1.00 best family (+-0.02 m wobble)"
+      },
+      "K": {
+       "least_m": -0.067,
+       "nearest": "Crew_Vestibule_1",
+       "case": "K x1.08 doors 1.00 best family (+-0.02 m wobble)"
+      }
+     },
+     "search_min": 0.036,
+     "unadapted": -0.14
+    },
+    "S": {
+     "least_m": -0.251,
+     "nearest": "Structural_Spine",
+     "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)",
+     "spread": [
+      -0.077,
+      -0.022
+     ],
+     "per_class": {
+      "S": {
+       "least_m": -0.251,
+       "nearest": "Structural_Spine",
+       "case": "S x1.08 doors 1.00 best family (+-0.02 m wobble)"
+      }
+     },
+     "search_min": -0.111,
+     "unadapted": -0.457
+    }
+   }
+  },
+  "chain": {
+   "0g": {
+    "all_classes": {
+     "least_m": -0.171,
+     "governing": "A1|S",
+     "status": "FAIL"
+    },
+    "unsuited": {
+     "least_m": -0.103,
+     "governing": "A1",
+     "status": "FAIL"
+    }
+   },
+   "spin": {
+    "all_classes": {
+     "least_m": -0.455,
+     "governing": "A2-M|S",
+     "status": "FAIL"
+    },
+    "unsuited": {
+     "least_m": -0.14,
+     "governing": "A2",
+     "status": "FAIL"
+    }
+   },
+   "stopped": {
+    "all_classes": {
+     "least_m": -0.251,
+     "governing": "A3-A2-M|S",
+     "status": "FAIL"
+    },
+    "unsuited": {
+     "least_m": -0.103,
+     "governing": "A1",
+     "status": "FAIL"
+    }
+   },
+   "locked_1.5g": {
+    "all_classes": {
+     "least_m": -0.251,
+     "governing": "A3-A2-M|S",
+     "status": "FAIL"
+    },
+    "unsuited": {
+     "least_m": -0.103,
+     "governing": "A1",
+     "status": "FAIL"
+    }
+   }
+  }
+ },
+ "measured": {
+  "sector_deck_to_overhead_m3": 57.92,
+  "sector_usable_m3_owner": 40.0,
+  "sector_length_m": 3.5,
+  "deck_width_m": 5.55,
+  "headroom_m": 2.9,
+  "garden_blocks_m3_as_built": 13.67,
+  "garden_blocks_m3_swap": 7.29,
+  "swapped_blocks_m3": 6.38,
+  "couch_stowed_m3": 0.9,
+  "care_station_bbox_uvh": [
+   0.3,
+   1.6,
+   -0.15,
+   2.45,
+   0.0,
+   1.9
+  ],
+  "care_station_bbox_m3": 6.42,
+  "care_station_bbox_surface_m2": 21.58,
+  "note": "zone-block volumes (overlaps not removed); the care-station box is the couch + two attendants' envelope, a measurement, not a shelter"
+ },
+ "open": [
+  {
+   "item": "Sustained local atmosphere at the care couch",
+   "must_specify": [
+    "local free volume served (the sector, or a curtained care zone)",
+    "O2 supply rate and source for patient + 2 attendants",
+    "CO2 removal and trace-contaminant control rate",
+    "ventilation flow at the couch and air change rate",
+    "smoke / contaminant isolation from the rest of the sector",
+    "pressure hold time if the sector leaks; isolation valves; who closes the sector hatch",
+    "medical gas (O2 / suction) outlets at the couch",
+    "power and thermal load of the care kit",
+    "duration the care must be sustained (stabilisation vs definitive care)"
+   ],
+   "known": false,
+   "owner": "S&E / ECLSS (Sheets)"
+  },
+  {
+   "item": "Shelter access (refuge in place)",
+   "must_specify": [
+    "which casualties shelter in place and which go to the storm refuge",
+    "time from SPE warning to sheltered",
+    "access path and its width with the couch deployed (measured here)",
+    "shelter boundary around the couch (the sector, or a local box)",
+    "how a non-movable casualty and the attendants are covered",
+    "communications and monitoring inside the shelter"
+   ],
+   "known": false,
+   "owner": "S&E / Medical"
+  },
+  {
+   "item": "SPE protection of the in-sector care station",
+   "must_specify": [
+    "the 20 g/cm2 water-equivalent target is STUDY ONLY",
+    "water placement round each ring (80 t distribution not credited)",
+    "local shelter mass (4.1 t not credited)",
+    "areal density actually achieved (25.1 g/cm2 not credited)",
+    "GCR protection: NOT implied"
+   ],
+   "known": false,
+   "owner": "Shielding / mass budget"
+  },
+  {
+   "item": "Mass, shield and closure budget of the swap",
+   "must_specify": [
+    "couch mass and mounting loads",
+    "displaced Garden_Rack_1 / Mess function: where the growing and common space go",
+    "any local closure or curtain"
+   ],
+   "known": false,
+   "owner": "owner (15!A169 Claude task: budget OPEN)"
+  },
+  {
+   "item": "Couch mechanism",
+   "must_specify": [
+    "hinge, legs, latch, stowed depth (0.30 m is a PROTOTYPE stand-in)",
+    "patient restraint in 0 g, spin and 1.5 g",
+    "rating"
+   ],
+   "known": false,
+   "owner": "PROTOTYPE"
+  },
+  {
+   "item": "Medical qualification",
+   "must_specify": [
+    "what stabilisation is done at the couch and for how long",
+    "kit list (the 0.60 x 0.55 x 0.15 m box is the HUM-003 PROTOTYPE kit)",
+    "attendant count and skills"
+   ],
+   "known": false,
+   "owner": "Medical"
+  },
+  {
+   "item": "Lost-ring and 1.5 g handling",
+   "must_specify": [
+    "lost-ring dynamics: residual momentum, uncommanded spin-down, attitude (not represented)",
+    "in-sector casualty handling under 1.5 g (lowering onto the burn couch: hoist/handling concept and line loads)",
+    "one-ring stop stays uncredited; both-ring stop is the working constraint"
+   ],
+   "known": false,
+   "owner": "S&E DYN / Medical"
+  }
+ ],
+ "screen_status": "PROTOTYPE fit screen of the zone blocks; no medical, atmosphere, pressure or radiation qualification",
+ "method": {
+  "screen": "zone blocks (habitat_interior.zones) + keep-outs, analytic box gaps capped at 0.30 m; widest-path bottleneck on a 0.02 m grid for reach/egress",
+  "sweep": "hum003_routes.sweep_route + family_sweep + sweep_poses on the evaluated built meshes (swap and couch in memory)",
+  "ringa": "ringb_unified.survey on the built model (all four ship states use the same stationary geometry; spin routes A2/A3 swept with the full 3 door/scale states)"
+ }
+}

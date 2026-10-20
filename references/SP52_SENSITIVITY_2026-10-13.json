@@ -1,0 +1,576 @@
+{
+ "study": "SP-52 bounded radiative sensitivity (owner 2026-10-13, S&E 15!A172)",
+ "status": "SENSITIVITY ONLY; canon values stay known=false",
+ "geometry_source": "references/p1_eva_sp13_l1a.json sp52 (standoff 0.30 m owner case)",
+ "measured": {
+  "module_face_m2": 3.36,
+  "wall_face_m2": 10.66,
+  "overlap_m2": 2.787,
+  "view_factor": {
+   "0.20": 0.788,
+   "0.30": 0.756,
+   "0.40": 0.723,
+   "0.60": 0.658
+  },
+  "containment_max_t_m_at_030": 0.2,
+  "air_gap_m": 0.09999999999999998
+ },
+ "owner_value": {
+  "warm_module_k": 450.0,
+  "source": "15!C123, G123"
+ },
+ "sensitivity_ranges": {
+  "wall_k": [
+   273.0,
+   295.0,
+   320.0
+  ],
+  "emissivity": {
+   "polished metal / low-e foil": 0.05,
+   "oxidised or treated metal": 0.3,
+   "paint / anodise / fabric": 0.9
+  },
+  "shields": [
+   0,
+   1,
+   2,
+   3
+  ],
+  "shield_emissivity": 0.05,
+  "conductivity_classes": {
+   "aerogel blanket class": [
+    0.015,
+    0.025
+   ],
+   "mineral / glass wool class": [
+    0.035,
+    0.045
+   ],
+   "polyimide foam class": [
+    0.04,
+    0.06
+   ]
+  },
+  "label": "Claude SENSITIVITY ranges (typical material classes), not owner data"
+ },
+ "radiation_grid": [
+  {
+   "surfaces": "polished metal / low-e foil",
+   "emissivity": 0.05,
+   "shields": 0,
+   "wall_k": 273.0,
+   "flux_w_m2": 76.4,
+   "power_w": 257.0
+  },
+  {
+   "surfaces": "polished metal / low-e foil",
+   "emissivity": 0.05,
+   "shields": 0,
+   "wall_k": 295.0,
+   "flux_w_m2": 72.1,
+   "power_w": 242.0
+  },
+  {
+   "surfaces": "polished metal / low-e foil",
+   "emissivity": 0.05,
+   "shields": 0,
+   "wall_k": 320.0,
+   "flux_w_m2": 65.8,
+   "power_w": 221.0
+  },
+  {
+   "surfaces": "polished metal / low-e foil",
+   "emissivity": 0.05,
+   "shields": 1,
+   "wall_k": 273.0,
+   "flux_w_m2": 30.8,
+   "power_w": 103.0
+  },
+  {
+   "surfaces": "polished metal / low-e foil",
+   "emissivity": 0.05,
+   "shields": 1,
+   "wall_k": 295.0,
+   "flux_w_m2": 29.0,
+   "power_w": 98.0
+  },
+  {
+   "surfaces": "polished metal / low-e foil",
+   "emissivity": 0.05,
+   "shields": 1,
+   "wall_k": 320.0,
+   "flux_w_m2": 26.5,
+   "power_w": 89.0
+  },
+  {
+   "surfaces": "polished metal / low-e foil",
+   "emissivity": 0.05,
+   "shields": 2,
+   "wall_k": 273.0,
+   "flux_w_m2": 19.3,
+   "power_w": 65.0
+  },
+  {
+   "surfaces": "polished metal / low-e foil",
+   "emissivity": 0.05,
+   "shields": 2,
+   "wall_k": 295.0,
+   "flux_w_m2": 18.2,
+   "power_w": 61.0
+  },
+  {
+   "surfaces": "polished metal / low-e foil",
+   "emissivity": 0.05,
+   "shields": 2,
+   "wall_k": 320.0,
+   "flux_w_m2": 16.6,
+   "power_w": 56.0
+  },
+  {
+   "surfaces": "polished metal / low-e foil",
+   "emissivity": 0.05,
+   "shields": 3,
+   "wall_k": 273.0,
+   "flux_w_m2": 14.0,
+   "power_w": 47.0
+  },
+  {
+   "surfaces": "polished metal / low-e foil",
+   "emissivity": 0.05,
+   "shields": 3,
+   "wall_k": 295.0,
+   "flux_w_m2": 13.2,
+   "power_w": 44.0
+  },
+  {
+   "surfaces": "polished metal / low-e foil",
+   "emissivity": 0.05,
+   "shields": 3,
+   "wall_k": 320.0,
+   "flux_w_m2": 12.1,
+   "power_w": 41.0
+  },
+  {
+   "surfaces": "oxidised or treated metal",
+   "emissivity": 0.3,
+   "shields": 0,
+   "wall_k": 273.0,
+   "flux_w_m2": 457.8,
+   "power_w": 1538.0
+  },
+  {
+   "surfaces": "oxidised or treated metal",
+   "emissivity": 0.3,
+   "shields": 0,
+   "wall_k": 295.0,
+   "flux_w_m2": 431.7,
+   "power_w": 1450.0
+  },
+  {
+   "surfaces": "oxidised or treated metal",
+   "emissivity": 0.3,
+   "shields": 0,
+   "wall_k": 320.0,
+   "flux_w_m2": 394.1,
+   "power_w": 1324.0
+  },
+  {
+   "surfaces": "oxidised or treated metal",
+   "emissivity": 0.3,
+   "shields": 1,
+   "wall_k": 273.0,
+   "flux_w_m2": 46.3,
+   "power_w": 156.0
+  },
+  {
+   "surfaces": "oxidised or treated metal",
+   "emissivity": 0.3,
+   "shields": 1,
+   "wall_k": 295.0,
+   "flux_w_m2": 43.7,
+   "power_w": 147.0
+  },
+  {
+   "surfaces": "oxidised or treated metal",
+   "emissivity": 0.3,
+   "shields": 1,
+   "wall_k": 320.0,
+   "flux_w_m2": 39.9,
+   "power_w": 134.0
+  },
+  {
+   "surfaces": "oxidised or treated metal",
+   "emissivity": 0.3,
+   "shields": 2,
+   "wall_k": 273.0,
+   "flux_w_m2": 24.4,
+   "power_w": 82.0
+  },
+  {
+   "surfaces": "oxidised or treated metal",
+   "emissivity": 0.3,
+   "shields": 2,
+   "wall_k": 295.0,
+   "flux_w_m2": 23.0,
+   "power_w": 77.0
+  },
+  {
+   "surfaces": "oxidised or treated metal",
+   "emissivity": 0.3,
+   "shields": 2,
+   "wall_k": 320.0,
+   "flux_w_m2": 21.0,
+   "power_w": 71.0
+  },
+  {
+   "surfaces": "oxidised or treated metal",
+   "emissivity": 0.3,
+   "shields": 3,
+   "wall_k": 273.0,
+   "flux_w_m2": 16.6,
+   "power_w": 56.0
+  },
+  {
+   "surfaces": "oxidised or treated metal",
+   "emissivity": 0.3,
+   "shields": 3,
+   "wall_k": 295.0,
+   "flux_w_m2": 15.6,
+   "power_w": 52.0
+  },
+  {
+   "surfaces": "oxidised or treated metal",
+   "emissivity": 0.3,
+   "shields": 3,
+   "wall_k": 320.0,
+   "flux_w_m2": 14.3,
+   "power_w": 48.0
+  },
+  {
+   "surfaces": "paint / anodise / fabric",
+   "emissivity": 0.9,
+   "shields": 0,
+   "wall_k": 273.0,
+   "flux_w_m2": 1368.6,
+   "power_w": 4598.0
+  },
+  {
+   "surfaces": "paint / anodise / fabric",
+   "emissivity": 0.9,
+   "shields": 0,
+   "wall_k": 295.0,
+   "flux_w_m2": 1290.6,
+   "power_w": 4336.0
+  },
+  {
+   "surfaces": "paint / anodise / fabric",
+   "emissivity": 0.9,
+   "shields": 0,
+   "wall_k": 320.0,
+   "flux_w_m2": 1178.2,
+   "power_w": 3959.0
+  },
+  {
+   "surfaces": "paint / anodise / fabric",
+   "emissivity": 0.9,
+   "shields": 1,
+   "wall_k": 273.0,
+   "flux_w_m2": 49.7,
+   "power_w": 167.0
+  },
+  {
+   "surfaces": "paint / anodise / fabric",
+   "emissivity": 0.9,
+   "shields": 1,
+   "wall_k": 295.0,
+   "flux_w_m2": 46.8,
+   "power_w": 157.0
+  },
+  {
+   "surfaces": "paint / anodise / fabric",
+   "emissivity": 0.9,
+   "shields": 1,
+   "wall_k": 320.0,
+   "flux_w_m2": 42.8,
+   "power_w": 144.0
+  },
+  {
+   "surfaces": "paint / anodise / fabric",
+   "emissivity": 0.9,
+   "shields": 2,
+   "wall_k": 273.0,
+   "flux_w_m2": 25.3,
+   "power_w": 85.0
+  },
+  {
+   "surfaces": "paint / anodise / fabric",
+   "emissivity": 0.9,
+   "shields": 2,
+   "wall_k": 295.0,
+   "flux_w_m2": 23.9,
+   "power_w": 80.0
+  },
+  {
+   "surfaces": "paint / anodise / fabric",
+   "emissivity": 0.9,
+   "shields": 2,
+   "wall_k": 320.0,
+   "flux_w_m2": 21.8,
+   "power_w": 73.0
+  },
+  {
+   "surfaces": "paint / anodise / fabric",
+   "emissivity": 0.9,
+   "shields": 3,
+   "wall_k": 273.0,
+   "flux_w_m2": 17.0,
+   "power_w": 57.0
+  },
+  {
+   "surfaces": "paint / anodise / fabric",
+   "emissivity": 0.9,
+   "shields": 3,
+   "wall_k": 295.0,
+   "flux_w_m2": 16.0,
+   "power_w": 54.0
+  },
+  {
+   "surfaces": "paint / anodise / fabric",
+   "emissivity": 0.9,
+   "shields": 3,
+   "wall_k": 320.0,
+   "flux_w_m2": 14.6,
+   "power_w": 49.0
+  }
+ ],
+ "owner_trade_15_a181": [
+  {
+   "module_face": "low-e",
+   "wall": "polished metal / low-e foil",
+   "wall_e": 0.05,
+   "shields": 0,
+   "favoured": false,
+   "flux_w_m2": 72.1,
+   "power_w": 242.0,
+   "vs_reference": 0.0558
+  },
+  {
+   "module_face": "low-e",
+   "wall": "polished metal / low-e foil",
+   "wall_e": 0.05,
+   "shields": 1,
+   "favoured": true,
+   "flux_w_m2": 29.0,
+   "power_w": 98.0,
+   "vs_reference": 0.0225
+  },
+  {
+   "module_face": "low-e",
+   "wall": "polished metal / low-e foil",
+   "wall_e": 0.05,
+   "shields": 2,
+   "favoured": false,
+   "flux_w_m2": 18.2,
+   "power_w": 61.0,
+   "vs_reference": 0.0141
+  },
+  {
+   "module_face": "low-e",
+   "wall": "polished metal / low-e foil",
+   "wall_e": 0.05,
+   "shields": 3,
+   "favoured": false,
+   "flux_w_m2": 13.2,
+   "power_w": 44.0,
+   "vs_reference": 0.0102
+  },
+  {
+   "module_face": "low-e",
+   "wall": "oxidised or treated metal",
+   "wall_e": 0.3,
+   "shields": 0,
+   "favoured": false,
+   "flux_w_m2": 90.0,
+   "power_w": 302.0,
+   "vs_reference": 0.0698
+  },
+  {
+   "module_face": "low-e",
+   "wall": "oxidised or treated metal",
+   "wall_e": 0.3,
+   "shields": 1,
+   "favoured": true,
+   "flux_w_m2": 31.6,
+   "power_w": 106.0,
+   "vs_reference": 0.0245
+  },
+  {
+   "module_face": "low-e",
+   "wall": "oxidised or treated metal",
+   "wall_e": 0.3,
+   "shields": 2,
+   "favoured": false,
+   "flux_w_m2": 19.1,
+   "power_w": 64.0,
+   "vs_reference": 0.0148
+  },
+  {
+   "module_face": "low-e",
+   "wall": "oxidised or treated metal",
+   "wall_e": 0.3,
+   "shields": 3,
+   "favoured": false,
+   "flux_w_m2": 13.7,
+   "power_w": 46.0,
+   "vs_reference": 0.0106
+  },
+  {
+   "module_face": "low-e",
+   "wall": "paint / anodise / fabric",
+   "wall_e": 0.9,
+   "shields": 0,
+   "favoured": false,
+   "flux_w_m2": 93.1,
+   "power_w": 313.0,
+   "vs_reference": 0.0722
+  },
+  {
+   "module_face": "low-e",
+   "wall": "paint / anodise / fabric",
+   "wall_e": 0.9,
+   "shields": 1,
+   "favoured": true,
+   "flux_w_m2": 31.9,
+   "power_w": 107.0,
+   "vs_reference": 0.0247
+  },
+  {
+   "module_face": "low-e",
+   "wall": "paint / anodise / fabric",
+   "wall_e": 0.9,
+   "shields": 2,
+   "favoured": false,
+   "flux_w_m2": 19.3,
+   "power_w": 65.0,
+   "vs_reference": 0.0149
+  },
+  {
+   "module_face": "low-e",
+   "wall": "paint / anodise / fabric",
+   "wall_e": 0.9,
+   "shields": 3,
+   "favoured": false,
+   "flux_w_m2": 13.8,
+   "power_w": 46.0,
+   "vs_reference": 0.0107
+  }
+ ],
+ "standoff_relative_flux_e09_295k": {
+  "0.20": 1.038,
+  "0.30": 1.0,
+  "0.40": 0.961,
+  "0.60": 0.882
+ },
+ "conduction_scale": {
+  "aerogel blanket class": {
+   "k_w_mk": [
+    0.015,
+    0.025
+   ],
+   "t_m": [
+    0.05,
+    0.1,
+    0.2
+   ],
+   "flux_w_m2": [
+    [
+     46.0,
+     23.0,
+     12.0
+    ],
+    [
+     78.0,
+     39.0,
+     19.0
+    ]
+   ]
+  },
+  "mineral / glass wool class": {
+   "k_w_mk": [
+    0.035,
+    0.045
+   ],
+   "t_m": [
+    0.05,
+    0.1,
+    0.2
+   ],
+   "flux_w_m2": [
+    [
+     109.0,
+     54.0,
+     27.0
+    ],
+    [
+     139.0,
+     70.0,
+     35.0
+    ]
+   ]
+  },
+  "polyimide foam class": {
+   "k_w_mk": [
+    0.04,
+    0.06
+   ],
+   "t_m": [
+    0.05,
+    0.1,
+    0.2
+   ],
+   "flux_w_m2": [
+    [
+     124.0,
+     62.0,
+     31.0
+    ],
+    [
+     186.0,
+     93.0,
+     46.0
+    ]
+   ]
+  }
+ },
+ "loops": [
+  [
+   "cold",
+   "crew cabin, workshop wall and occupied surfaces",
+   "never a heat sink for the warm or hot loop"
+  ],
+  [
+   "warm",
+   "SP-52 module (~450 K owner value)",
+   "rejects its heat through its own coolant loop (routing OPEN); the wall coupling below is leakage to minimise, not a rejection path"
+  ],
+  [
+   "hot",
+   "radiator blades (1800 K class)",
+   "not a sink for SP-52 (owner: do not treat the hot-blade loop as sink)"
+  ]
+ ],
+ "open": {
+  "heat_transfer_w": null,
+  "wall_temperature_k": null,
+  "emissivity": null,
+  "insulation_conductivity": null,
+  "insulation_thickness_m": null,
+  "fire_barrier_rating": null,
+  "allowable_wall_flux_w_m2": null,
+  "crew_touch_limit": null,
+  "component_dissipation_w": null,
+  "coolant_routing": null,
+  "convection_path": null,
+  "conduction_path": null
+ }
+}

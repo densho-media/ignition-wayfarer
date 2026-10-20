@@ -1,0 +1,199 @@
+# WAYFARER Space Navigator, Stage 2 (S&E 55 SPACE-015/017/019/030, 47 SIM-039, Tale 26 NAV-TOUR-11, Art Style Objects & Tech row 19):
+# the Solar System chart's reference bodies. These are educational astronomy from published references, not IGNITION canon and not
+# Wayfarer data. The registry holds sizes and orbit shapes only: no epoch, longitude, anomaly or any other value that would place a body at a
+# date. The chart's arrangement is SCHEMATIC until the owner releases an epoch and ephemerides (SPACE-010/016, 25!F14:F15).
+# Values are copied as the references print them; src/wayfarer/space_navigator.py derives AU with the IAU 2012 exact astronomical unit.
+
+[space]
+id = "WF.SPACENAV"
+version = 1
+status = "PROTOTYPE"
+schematic_notice = "SCHEMATIC — EPOCH / SHIP POSITION UNRESOLVED"
+au_km = 149597870.7                   # IAU 2012 Resolution B2 (exact)
+au_ref = "IAU_2012_B2"
+
+[reference.NASA_PLANETARY_FACT_SHEET]
+title = "NASA GSFC Planetary Fact Sheet - Metric"
+url = "https://nssdc.gsfc.nasa.gov/planetary/factsheet/"
+updated = "2025-03-18"
+retrieved = "2026-10-13"
+status = "REFERENCE"
+
+[reference.NASA_SUN_FACT_SHEET]
+title = "NASA GSFC Sun Fact Sheet"
+url = "https://nssdc.gsfc.nasa.gov/planetary/factsheet/sunfact.html"
+updated = "2024-05-09"
+retrieved = "2026-10-13"
+status = "REFERENCE"
+
+[reference.NASA_KUIPER_BELT_FACTS]
+title = "NASA Science, Kuiper Belt: Facts"
+url = "https://science.nasa.gov/solar-system/kuiper-belt/facts/"
+updated = "2025-03-13"
+retrieved = "2026-10-13"
+status = "REFERENCE"
+
+[reference.IAU_2012_B2]
+title = "IAU 2012 Resolution B2: the astronomical unit is 149,597,870,700 m exactly"
+url = "https://www.iau.org/static/resolutions/IAU2012_English.pdf"
+updated = "2012-08-31"
+retrieved = "2026-10-13"
+status = "REFERENCE"
+
+# The Sun: radius only (it is the chart's origin, a schematic choice, not a released frame).
+[[body]]
+id = "SUN"
+name = "Sun"
+kind = "star"
+ref = "NASA_SUN_FACT_SHEET"
+radius_km = 695700.0
+why = "Every orbit on this chart is drawn around it. Wayfarer's distance from it at any moment is not released, so the chart cannot say how far away the ship is."
+
+# Planets: diameter, mean distance, perihelion and aphelion (10^6 km), period (days), eccentricity and inclination as the fact sheet lists them.
+[[body]]
+id = "MERCURY"
+name = "Mercury"
+kind = "planet"
+ref = "NASA_PLANETARY_FACT_SHEET"
+diameter_km = 4879.0
+distance_1e6km = 57.9
+perihelion_1e6km = 46.0
+aphelion_1e6km = 69.8
+period_days = 88.0
+eccentricity = 0.206
+inclination_deg = 7.0
+why = "The most eccentric planetary orbit: its distance from the Sun changes by about half between perihelion and aphelion, so one orbit guide circle hides a wide band."
+
+[[body]]
+id = "VENUS"
+name = "Venus"
+kind = "planet"
+ref = "NASA_PLANETARY_FACT_SHEET"
+diameter_km = 12104.0
+distance_1e6km = 108.2
+perihelion_1e6km = 107.5
+aphelion_1e6km = 108.9
+period_days = 224.7
+eccentricity = 0.007
+inclination_deg = 3.4
+why = "The most nearly circular orbit of the planets: here the guide circle and the real path almost coincide."
+
+[[body]]
+id = "EARTH"
+name = "Earth"
+kind = "planet"
+ref = "NASA_PLANETARY_FACT_SHEET"
+diameter_km = 12756.0
+distance_1e6km = 149.6
+perihelion_1e6km = 147.1
+aphelion_1e6km = 152.1
+period_days = 365.2
+eccentricity = 0.017
+inclination_deg = 0.0
+why = "Its mean distance is close to the astronomical unit the chart is measured in. Its inclination is zero because the ecliptic, the reference plane, is defined by Earth's orbit."
+
+[[body]]
+id = "MARS"
+name = "Mars"
+kind = "planet"
+ref = "NASA_PLANETARY_FACT_SHEET"
+diameter_km = 6792.0
+distance_1e6km = 228.0
+perihelion_1e6km = 206.7
+aphelion_1e6km = 249.3
+period_days = 687.0
+eccentricity = 0.094
+inclination_deg = 1.8
+why = "The outermost rocky planet; beyond it lies the asteroid belt and then the giants."
+
+[[body]]
+id = "JUPITER"
+name = "Jupiter"
+kind = "planet"
+ref = "NASA_PLANETARY_FACT_SHEET"
+diameter_km = 142984.0
+distance_1e6km = 778.5
+perihelion_1e6km = 740.6
+aphelion_1e6km = 816.4
+period_days = 4331.0
+eccentricity = 0.049
+inclination_deg = 1.3
+why = "The largest planet, about eleven Earth diameters across. It takes almost twelve Earth years to go round the Sun once."
+
+[[body]]
+id = "SATURN"
+name = "Saturn"
+kind = "planet"
+ref = "NASA_PLANETARY_FACT_SHEET"
+diameter_km = 120536.0
+distance_1e6km = 1432.0
+perihelion_1e6km = 1357.6
+aphelion_1e6km = 1506.5
+period_days = 10747.0
+eccentricity = 0.052
+inclination_deg = 2.5
+why = "About twice Jupiter's distance from the Sun; one orbit takes nearly thirty Earth years."
+
+[[body]]
+id = "URANUS"
+name = "Uranus"
+kind = "planet"
+ref = "NASA_PLANETARY_FACT_SHEET"
+diameter_km = 51118.0
+distance_1e6km = 2867.0
+perihelion_1e6km = 2732.7
+aphelion_1e6km = 3001.4
+period_days = 30589.0
+eccentricity = 0.047
+inclination_deg = 0.8
+why = "An ice giant about twice Saturn's distance; an orbit takes about 84 Earth years."
+
+[[body]]
+id = "NEPTUNE"
+name = "Neptune"
+kind = "planet"
+ref = "NASA_PLANETARY_FACT_SHEET"
+diameter_km = 49528.0
+distance_1e6km = 4515.0
+perihelion_1e6km = 4471.1
+aphelion_1e6km = 4558.9
+period_days = 59800.0
+eccentricity = 0.010
+inclination_deg = 1.8
+why = "The outermost planet. The Kuiper Belt begins at about its orbit."
+
+# Regional guides: drawn as bands, selectable for a card, never an event position (SPACE-017; 24_ROUTE_EVENTS KUIPER_BRAKE_DEADLINE is OPEN).
+[[region]]
+id = "KUIPER_BELT_MAIN"
+name = "Kuiper Belt (main region)"
+ref = "NASA_KUIPER_BELT_FACTS"
+inner_au = 30.0
+outer_au = 50.0
+note = "Inner edge at about Neptune's orbit, about 30 AU; the main region ends around 50 AU. The scattered disk continues outward to nearly 1,000 AU and is not drawn."
+why = "A doughnut-shaped region of icy bodies, not a wall. The Tale's Kuiper events (brake deadline, anchorage) have no released time or position (24_ROUTE_EVENTS, 25!F17, F19), so the chart marks the region only."
+
+# Display transforms (C-004, C-012, SPACE-007): named, reversible, applied only to the drawing, never to a source value.
+[transform.ANALYTICAL]
+distance = "LINEAR"                   # r_px = scale * a_AU
+size = "TRUE"                         # radius at the same scale; a body under 1.5 px is drawn as a fixed glyph, labelled so
+disclosure = "ANALYTICAL · distances to scale · bodies far smaller than their glyphs"
+
+[transform.PRESENTATION]
+distance = "SQRT"                     # r_px = R * sqrt(a_AU / a_ref); inverse a_AU = a_ref * (r_px / R)^2
+size = "LOG"                          # glyph px = 3 + 2.4 * log10(radius_km / 1000)
+disclosure = "PRESENTATION · distances compressed (square root) · planets enlarged · not to scale"
+
+[[zoom]]
+id = "INNER"
+title = "inner planets"
+extent_au = 1.8
+
+[[zoom]]
+id = "OUTER"
+title = "outer planets"
+extent_au = 32.0
+
+[[zoom]]
+id = "KUIPER"
+title = "Kuiper region"
+extent_au = 55.0

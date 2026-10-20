@@ -1,0 +1,143 @@
+{
+  "checks": {
+    "SH_ENGINE_HOLOGRAM": {
+      "preset": null,
+      "objects": 114,
+      "groups": 18,
+      "sources": [
+        "WF_PROPULSION",
+        "WF_DEBUG_MAGNETICS",
+        "WF_DEBUG_OPTICS"
+      ],
+      "libraries": [
+        "//../assets/wayfarer/components/WF_NOZZLE.blend",
+        "//../assets/wayfarer/subsystems/WF_DEBUG_MAGNETICS.blend",
+        "//../assets/wayfarer/subsystems/WF_DEBUG_OPTICS.blend",
+        "//../assets/wayfarer/subsystems/WF_PROPULSION.blend"
+      ],
+      "frames_checked": 36,
+      "operations": [
+        "conceal",
+        "explode",
+        "highlight",
+        "recombine",
+        "reveal"
+      ],
+      "never_shown": 0,
+      "worst": {
+        "alpha": 3.9736429924275285e-08,
+        "highlight": 0.0,
+        "explode": 0.0,
+        "position": 0.0
+      },
+      "labels": 5
+    },
+    "SH_SHIP_CUTAWAY": {
+      "preset": null,
+      "objects": 1584,
+      "groups": 32,
+      "sources": [
+        "WF_WAYFARER_001"
+      ],
+      "libraries": [
+        "//../assets/wayfarer/WF_WAYFARER_001.blend",
+        "//../assets/wayfarer/components/WF_INTERIOR_GARDEN.blend",
+        "//../assets/wayfarer/components/WF_INTERIOR_HABITATION.blend",
+        "//../assets/wayfarer/components/WF_INTERIOR_WORK.blend",
+        "//../assets/wayfarer/components/WF_NOZZLE.blend",
+        "//../assets/wayfarer/components/WF_RADIATOR.blend",
+        "//../assets/wayfarer/components/WF_RING_SECTOR.blend",
+        "//../assets/wayfarer/subsystems/WF_CREW_TRANSFER.blend",
+        "//../assets/wayfarer/subsystems/WF_EYE.blend",
+        "//../assets/wayfarer/subsystems/WF_HABITAT.blend",
+        "//../assets/wayfarer/subsystems/WF_HULL.blend",
+        "//../assets/wayfarer/subsystems/WF_POWER_STORAGE.blend",
+        "//../assets/wayfarer/subsystems/WF_PROPULSION.blend",
+        "//../assets/wayfarer/subsystems/WF_ROTOR_INTERFACE.blend",
+        "//../assets/wayfarer/subsystems/WF_SERVICE.blend",
+        "//../assets/wayfarer/subsystems/WF_SHIELDING.blend",
+        "//../assets/wayfarer/subsystems/WF_STORAGE.blend",
+        "//../assets/wayfarer/subsystems/WF_STRUCTURE.blend",
+        "//../assets/wayfarer/subsystems/WF_THERMAL.blend"
+      ],
+      "frames_checked": 16,
+      "operations": [
+        "conceal",
+        "explode",
+        "highlight",
+        "recombine"
+      ],
+      "never_shown": 855,
+      "worst": {
+        "alpha": 0.0,
+        "highlight": 0.0,
+        "explode": 0.0,
+        "position": 0.0
+      },
+      "labels": 0
+    },
+    "SH_SHIP_STANDARD": {
+      "preset": "HIGH_POWER",
+      "objects": 1584,
+      "groups": 13,
+      "sources": [
+        "WF_WAYFARER_001"
+      ],
+      "libraries": [
+        "//../assets/wayfarer/WF_WAYFARER_001.blend",
+        "//../assets/wayfarer/components/WF_INTERIOR_GARDEN.blend",
+        "//../assets/wayfarer/components/WF_INTERIOR_HABITATION.blend",
+        "//../assets/wayfarer/components/WF_INTERIOR_WORK.blend",
+        "//../assets/wayfarer/components/WF_NOZZLE.blend",
+        "//../assets/wayfarer/components/WF_RADIATOR.blend",
+        "//../assets/wayfarer/components/WF_RING_SECTOR.blend",
+        "//../assets/wayfarer/subsystems/WF_CREW_TRANSFER.blend",
+        "//../assets/wayfarer/subsystems/WF_EYE.blend",
+        "//../assets/wayfarer/subsystems/WF_HABITAT.blend",
+        "//../assets/wayfarer/subsystems/WF_HULL.blend",
+        "//../assets/wayfarer/subsystems/WF_POWER_STORAGE.blend",
+        "//../assets/wayfarer/subsystems/WF_PROPULSION.blend",
+        "//../assets/wayfarer/subsystems/WF_ROTOR_INTERFACE.blend",
+        "//../assets/wayfarer/subsystems/WF_SERVICE.blend",
+        "//../assets/wayfarer/subsystems/WF_SHIELDING.blend",
+        "//../assets/wayfarer/subsystems/WF_STORAGE.blend",
+        "//../assets/wayfarer/subsystems/WF_STRUCTURE.blend",
+        "//../assets/wayfarer/subsystems/WF_THERMAL.blend"
+      ],
+      "frames_checked": 19,
+      "operations": [
+        "conceal",
+        "highlight",
+        "isolate",
+        "reveal"
+      ],
+      "never_shown": 0,
+      "worst": {
+        "alpha": 0.0,
+        "highlight": 0.0,
+        "explode": 0.0,
+        "position": 0.0
+      },
+      "labels": 0
+    },
+    "identity": {
+      "representations": [
+        "REP_STANDARD",
+        "REP_HOLOGRAM",
+        "REP_CUTAWAY"
+      ],
+      "shared_keys": 76,
+      "reused_components": true
+    }
+  },
+  "assets_byte_identical": 460,
+  "source_edit_propagates": {
+    "object": "WF_PROPULSION/Nozzle_01/MagneticNozzle_FieldEnvelope",
+    "shift_m": 0.5,
+    "before_z": 1.75,
+    "after_z": 2.25
+  },
+  "relocated": true,
+  "foreign_shot_refused": true,
+  "result": "PASS"
+}

@@ -1,0 +1,1784 @@
+{
+ "status": "L2 PREFERRED STUDY / AS-BUILT UNCHANGED / OD-024 OD-025 HOLD (S&E 15!A214, 15!A215, 98!A118)",
+ "proof_load_N_per_nozzle": 7354988,
+ "proof_note": "7.355 MN per nozzle is a STRUCTURAL PROOF value, not operating thrust (15!A214)",
+ "frames": [
+  {
+   "nozzle": 0,
+   "azimuth_deg": 45.0,
+   "moment_point": [
+    -108.5,
+    2.6,
+    2.6
+   ],
+   "F4": {
+    "cases_MN": {
+     "proof_axial": [
+      -5.106,
+      1.473,
+      -5.106,
+      1.473
+     ],
+     "vector_radial+": [
+      -3.117,
+      -0.582,
+      -3.117,
+      -0.582
+     ],
+     "vector_radial-": [
+      -7.056,
+      3.516,
+      -7.056,
+      3.516
+     ],
+     "vector_tangential+": [
+      -4.633,
+      3.038,
+      -5.54,
+      -0.104
+     ],
+     "vector_tangential-": [
+      -5.54,
+      -0.104,
+      -4.633,
+      3.038
+     ]
+    },
+    "members": [
+     {
+      "name": "Study_Thrust_Strut_0_01_1",
+      "to": 1,
+      "yoke": 1,
+      "length_m": 5.72,
+      "angle_from_axis_deg": 4.7,
+      "max_compression_MN": 7.06,
+      "max_tension_MN": 0.0,
+      "ti_tube_od_m": 0.374,
+      "mass_kg": 371
+     },
+     {
+      "name": "Study_Thrust_Strut_0_01_2",
+      "to": 1,
+      "yoke": 2,
+      "length_m": 3.445,
+      "angle_from_axis_deg": 16.7,
+      "max_compression_MN": 0.58,
+      "max_tension_MN": 3.52,
+      "ti_tube_od_m": 0.239,
+      "mass_kg": 91
+     },
+     {
+      "name": "Study_Thrust_Strut_0_02_1",
+      "to": 2,
+      "yoke": 1,
+      "length_m": 5.72,
+      "angle_from_axis_deg": 4.7,
+      "max_compression_MN": 7.06,
+      "max_tension_MN": 0.0,
+      "ti_tube_od_m": 0.374,
+      "mass_kg": 371
+     },
+     {
+      "name": "Study_Thrust_Strut_0_02_2",
+      "to": 2,
+      "yoke": 2,
+      "length_m": 3.445,
+      "angle_from_axis_deg": 16.7,
+      "max_compression_MN": 0.58,
+      "max_tension_MN": 3.52,
+      "ti_tube_od_m": 0.239,
+      "mass_kg": 91
+     }
+    ],
+    "mass_kg": 924,
+    "node_loads_MN": {
+     "1": [
+      3.677,
+      -0.0,
+      -0.0
+     ],
+     "2": [
+      3.677,
+      -0.0,
+      -0.0
+     ]
+    },
+    "unbalanced_moment_MN_m": {
+     "proof_axial": 12.03,
+     "vector_radial+": 9.1,
+     "vector_radial-": 14.87,
+     "vector_tangential+": 12.28,
+     "vector_tangential-": 12.28
+    }
+   },
+   "F8": {
+    "cases_MN": {
+     "proof_axial": [
+      -1.831,
+      -1.157,
+      -1.399,
+      -0.131,
+      -0.349,
+      0.907,
+      -2.399,
+      -1.106
+     ],
+     "vector_radial+": [
+      -1.887,
+      -1.653,
+      -1.343,
+      -0.363,
+      -0.487,
+      1.986,
+      -3.066,
+      -0.546
+     ],
+     "vector_radial-": [
+      -1.762,
+      -0.652,
+      -1.445,
+      0.101,
+      -0.209,
+      -0.179,
+      -1.714,
+      -1.657
+     ],
+     "vector_tangential+": [
+      -2.247,
+      0.436,
+      -0.457,
+      -2.251,
+      -0.713,
+      1.045,
+      -1.691,
+      -1.603
+     ],
+     "vector_tangential-": [
+      -1.402,
+      -2.741,
+      -2.331,
+      1.989,
+      0.018,
+      0.761,
+      -3.089,
+      -0.6
+     ],
+     "member_0_lost": [
+      0.0,
+      -3.851,
+      -0.046,
+      -0.724,
+      0.512,
+      2.284,
+      -1.199,
+      -4.708
+     ],
+     "member_1_lost": [
+      -2.575,
+      0.0,
+      -2.138,
+      0.242,
+      -1.055,
+      0.55,
+      -2.653,
+      0.286
+     ],
+     "member_2_lost": [
+      -1.212,
+      -2.383,
+      0.0,
+      -0.989,
+      1.711,
+      0.366,
+      -3.153,
+      -1.976
+     ],
+     "member_3_lost": [
+      -1.897,
+      -1.009,
+      -1.605,
+      0.0,
+      -0.676,
+      1.026,
+      -2.248,
+      -1.036
+     ],
+     "member_4_lost": [
+      -1.792,
+      -1.274,
+      -1.194,
+      -0.267,
+      0.0,
+      0.748,
+      -2.59,
+      -1.118
+     ],
+     "member_5_lost": [
+      -2.2,
+      -0.811,
+      -1.083,
+      -0.423,
+      0.584,
+      0.0,
+      -3.366,
+      -0.162
+     ],
+     "member_6_lost": [
+      -1.094,
+      -1.722,
+      -2.41,
+      0.716,
+      -2.925,
+      3.124,
+      0.0,
+      -3.132
+     ],
+     "member_7_lost": [
+      -2.372,
+      -0.4,
+      -1.684,
+      -0.036,
+      -0.388,
+      0.378,
+      -2.894,
+      0.0
+     ]
+    },
+    "members": [
+     {
+      "name": "Study_Thrust_Strut_0_01_1",
+      "to": 1,
+      "yoke": 1,
+      "length_m": 5.72,
+      "angle_from_axis_deg": 4.7,
+      "max_compression_MN": 2.58,
+      "max_tension_MN": 0.0,
+      "ti_tube_od_m": 0.291,
+      "mass_kg": 225
+     },
+     {
+      "name": "Study_Thrust_Strut_0_01_2",
+      "to": 1,
+      "yoke": 2,
+      "length_m": 3.445,
+      "angle_from_axis_deg": 16.7,
+      "max_compression_MN": 3.85,
+      "max_tension_MN": 0.44,
+      "ti_tube_od_m": 0.25,
+      "mass_kg": 100
+     },
+     {
+      "name": "Study_Thrust_Strut_0_02_1",
+      "to": 2,
+      "yoke": 1,
+      "length_m": 5.72,
+      "angle_from_axis_deg": 4.7,
+      "max_compression_MN": 2.41,
+      "max_tension_MN": 0.0,
+      "ti_tube_od_m": 0.286,
+      "mass_kg": 217
+     },
+     {
+      "name": "Study_Thrust_Strut_0_02_2",
+      "to": 2,
+      "yoke": 2,
+      "length_m": 3.445,
+      "angle_from_axis_deg": 16.7,
+      "max_compression_MN": 2.25,
+      "max_tension_MN": 1.99,
+      "ti_tube_od_m": 0.218,
+      "mass_kg": 76
+     },
+     {
+      "name": "Study_Thrust_Strut_In_0_A_1",
+      "to": "hub_A",
+      "yoke": 1,
+      "length_m": 5.969,
+      "angle_from_axis_deg": 8.7,
+      "max_compression_MN": 2.92,
+      "max_tension_MN": 1.71,
+      "ti_tube_od_m": 0.307,
+      "mass_kg": 261
+     },
+     {
+      "name": "Study_Thrust_Strut_In_0_A_2",
+      "to": "hub_A",
+      "yoke": 2,
+      "length_m": 3.776,
+      "angle_from_axis_deg": 22.1,
+      "max_compression_MN": 0.18,
+      "max_tension_MN": 3.12,
+      "ti_tube_od_m": 0.225,
+      "mass_kg": 89
+     },
+     {
+      "name": "Study_Thrust_Strut_In_0_B_1",
+      "to": "hub_B",
+      "yoke": 1,
+      "length_m": 5.969,
+      "angle_from_axis_deg": 8.7,
+      "max_compression_MN": 3.37,
+      "max_tension_MN": 0.0,
+      "ti_tube_od_m": 0.318,
+      "mass_kg": 280
+     },
+     {
+      "name": "Study_Thrust_Strut_In_0_B_2",
+      "to": "hub_B",
+      "yoke": 2,
+      "length_m": 3.776,
+      "angle_from_axis_deg": 22.1,
+      "max_compression_MN": 4.71,
+      "max_tension_MN": 0.29,
+      "ti_tube_od_m": 0.276,
+      "mass_kg": 133
+     }
+    ],
+    "mass_kg": 1381,
+    "node_loads_MN": {
+     "1": [
+      2.933,
+      0.482,
+      0.033
+     ],
+     "2": [
+      1.52,
+      0.011,
+      0.153
+     ],
+     "hub_A": [
+      -0.496,
+      0.158,
+      0.241
+     ],
+     "hub_B": [
+      3.396,
+      -0.651,
+      -0.427
+     ]
+    }
+   }
+  },
+  {
+   "nozzle": 1,
+   "azimuth_deg": 135.0,
+   "moment_point": [
+    -108.5,
+    -2.6,
+    2.6
+   ],
+   "F4": {
+    "cases_MN": {
+     "proof_axial": [
+      -5.106,
+      1.473,
+      -5.106,
+      1.473
+     ],
+     "vector_radial+": [
+      -3.117,
+      -0.582,
+      -3.117,
+      -0.582
+     ],
+     "vector_radial-": [
+      -7.056,
+      3.516,
+      -7.056,
+      3.516
+     ],
+     "vector_tangential+": [
+      -4.633,
+      3.038,
+      -5.54,
+      -0.104
+     ],
+     "vector_tangential-": [
+      -5.54,
+      -0.104,
+      -4.633,
+      3.038
+     ]
+    },
+    "members": [
+     {
+      "name": "Study_Thrust_Strut_1_04_1",
+      "to": 4,
+      "yoke": 1,
+      "length_m": 5.72,
+      "angle_from_axis_deg": 4.7,
+      "max_compression_MN": 7.06,
+      "max_tension_MN": 0.0,
+      "ti_tube_od_m": 0.374,
+      "mass_kg": 371
+     },
+     {
+      "name": "Study_Thrust_Strut_1_04_2",
+      "to": 4,
+      "yoke": 2,
+      "length_m": 3.445,
+      "angle_from_axis_deg": 16.7,
+      "max_compression_MN": 0.58,
+      "max_tension_MN": 3.52,
+      "ti_tube_od_m": 0.239,
+      "mass_kg": 91
+     },
+     {
+      "name": "Study_Thrust_Strut_1_05_1",
+      "to": 5,
+      "yoke": 1,
+      "length_m": 5.72,
+      "angle_from_axis_deg": 4.7,
+      "max_compression_MN": 7.06,
+      "max_tension_MN": 0.0,
+      "ti_tube_od_m": 0.374,
+      "mass_kg": 371
+     },
+     {
+      "name": "Study_Thrust_Strut_1_05_2",
+      "to": 5,
+      "yoke": 2,
+      "length_m": 3.445,
+      "angle_from_axis_deg": 16.7,
+      "max_compression_MN": 0.58,
+      "max_tension_MN": 3.52,
+      "ti_tube_od_m": 0.239,
+      "mass_kg": 91
+     }
+    ],
+    "mass_kg": 924,
+    "node_loads_MN": {
+     "4": [
+      3.677,
+      0.0,
+      -0.0
+     ],
+     "5": [
+      3.677,
+      0.0,
+      -0.0
+     ]
+    },
+    "unbalanced_moment_MN_m": {
+     "proof_axial": 12.03,
+     "vector_radial+": 9.1,
+     "vector_radial-": 14.87,
+     "vector_tangential+": 12.28,
+     "vector_tangential-": 12.28
+    }
+   },
+   "F8": {
+    "cases_MN": {
+     "proof_axial": [
+      -0.538,
+      -2.331,
+      -0.031,
+      -1.704,
+      0.518,
+      -0.49,
+      -1.544,
+      -1.568
+     ],
+     "vector_radial+": [
+      -0.585,
+      -2.408,
+      -0.289,
+      -2.041,
+      -0.412,
+      0.212,
+      -1.616,
+      -0.418
+     ],
+     "vector_radial-": [
+      -0.488,
+      -2.237,
+      0.226,
+      -1.353,
+      1.443,
+      -1.188,
+      -1.46,
+      -2.706
+     ],
+     "vector_tangential+": [
+      -2.905,
+      2.865,
+      -2.535,
+      -1.855,
+      -4.568,
+      0.184,
+      0.392,
+      1.17
+     ],
+     "vector_tangential-": [
+      1.832,
+      -7.51,
+      2.473,
+      -1.54,
+      5.599,
+      -1.16,
+      -3.468,
+      -4.294
+     ],
+     "member_0_lost": [
+      0.0,
+      -2.629,
+      0.131,
+      -2.13,
+      0.08,
+      -0.76,
+      -0.653,
+      -1.788
+     ],
+     "member_1_lost": [
+      -3.498,
+      0.0,
+      -0.035,
+      -0.976,
+      3.999,
+      -2.171,
+      -6.943,
+      2.183
+     ],
+     "member_2_lost": [
+      -0.507,
+      -2.331,
+      0.0,
+      -1.768,
+      0.519,
+      -0.584,
+      -1.505,
+      -1.518
+     ],
+     "member_3_lost": [
+      -1.556,
+      -2.157,
+      -0.833,
+      0.0,
+      0.743,
+      1.78,
+      -2.947,
+      -2.567
+     ],
+     "member_4_lost": [
+      -0.106,
+      -2.678,
+      -0.038,
+      -1.797,
+      0.0,
+      -0.219,
+      -0.751,
+      -2.136
+     ],
+     "member_5_lost": [
+      -0.622,
+      -2.384,
+      -0.183,
+      -1.409,
+      0.433,
+      0.0,
+      -1.611,
+      -1.894
+     ],
+     "member_6_lost": [
+      0.372,
+      -2.886,
+      0.177,
+      -2.305,
+      -0.302,
+      -0.711,
+      0.0,
+      -2.129
+     ],
+     "member_7_lost": [
+      -0.876,
+      -1.753,
+      0.367,
+      -2.345,
+      1.398,
+      -2.101,
+      -2.385,
+      0.0
+     ]
+    },
+    "members": [
+     {
+      "name": "Study_Thrust_Strut_1_04_1",
+      "to": 4,
+      "yoke": 1,
+      "length_m": 5.72,
+      "angle_from_axis_deg": 4.7,
+      "max_compression_MN": 3.5,
+      "max_tension_MN": 1.83,
+      "ti_tube_od_m": 0.314,
+      "mass_kg": 262
+     },
+     {
+      "name": "Study_Thrust_Strut_1_04_2",
+      "to": 4,
+      "yoke": 2,
+      "length_m": 3.445,
+      "angle_from_axis_deg": 16.7,
+      "max_compression_MN": 7.51,
+      "max_tension_MN": 2.87,
+      "ti_tube_od_m": 0.349,
+      "mass_kg": 195
+     },
+     {
+      "name": "Study_Thrust_Strut_1_05_1",
+      "to": 5,
+      "yoke": 1,
+      "length_m": 5.72,
+      "angle_from_axis_deg": 4.7,
+      "max_compression_MN": 2.54,
+      "max_tension_MN": 2.47,
+      "ti_tube_od_m": 0.29,
+      "mass_kg": 223
+     },
+     {
+      "name": "Study_Thrust_Strut_1_05_2",
+      "to": 5,
+      "yoke": 2,
+      "length_m": 3.445,
+      "angle_from_axis_deg": 16.7,
+      "max_compression_MN": 2.35,
+      "max_tension_MN": 0.0,
+      "ti_tube_od_m": 0.22,
+      "mass_kg": 77
+     },
+     {
+      "name": "Study_Thrust_Strut_In_1_A_1",
+      "to": "hub_A",
+      "yoke": 1,
+      "length_m": 5.969,
+      "angle_from_axis_deg": 8.7,
+      "max_compression_MN": 4.57,
+      "max_tension_MN": 5.6,
+      "ti_tube_od_m": 0.343,
+      "mass_kg": 326
+     },
+     {
+      "name": "Study_Thrust_Strut_In_1_A_2",
+      "to": "hub_A",
+      "yoke": 2,
+      "length_m": 3.776,
+      "angle_from_axis_deg": 22.1,
+      "max_compression_MN": 2.17,
+      "max_tension_MN": 1.78,
+      "ti_tube_od_m": 0.226,
+      "mass_kg": 89
+     },
+     {
+      "name": "Study_Thrust_Strut_In_1_B_1",
+      "to": "hub_B",
+      "yoke": 1,
+      "length_m": 5.969,
+      "angle_from_axis_deg": 8.7,
+      "max_compression_MN": 6.94,
+      "max_tension_MN": 0.39,
+      "ti_tube_od_m": 0.381,
+      "mass_kg": 402
+     },
+     {
+      "name": "Study_Thrust_Strut_In_1_B_2",
+      "to": "hub_B",
+      "yoke": 2,
+      "length_m": 3.776,
+      "angle_from_axis_deg": 22.1,
+      "max_compression_MN": 4.29,
+      "max_tension_MN": 2.18,
+      "ti_tube_od_m": 0.269,
+      "mass_kg": 127
+     }
+    ],
+    "mass_kg": 1701,
+    "node_loads_MN": {
+     "4": [
+      2.769,
+      -0.049,
+      0.712
+     ],
+     "5": [
+      1.663,
+      -0.49,
+      0.034
+     ],
+     "hub_A": [
+      -0.058,
+      0.088,
+      -0.058
+     ],
+     "hub_B": [
+      2.979,
+      0.451,
+      -0.688
+     ]
+    }
+   }
+  },
+  {
+   "nozzle": 2,
+   "azimuth_deg": 315.0,
+   "moment_point": [
+    -108.5,
+    2.6,
+    -2.6
+   ],
+   "F4": {
+    "cases_MN": {
+     "proof_axial": [
+      -5.106,
+      1.473,
+      -5.106,
+      1.473
+     ],
+     "vector_radial+": [
+      -3.117,
+      -0.582,
+      -3.117,
+      -0.582
+     ],
+     "vector_radial-": [
+      -7.056,
+      3.516,
+      -7.056,
+      3.516
+     ],
+     "vector_tangential+": [
+      -4.633,
+      3.038,
+      -5.54,
+      -0.104
+     ],
+     "vector_tangential-": [
+      -5.54,
+      -0.104,
+      -4.633,
+      3.038
+     ]
+    },
+    "members": [
+     {
+      "name": "Study_Thrust_Strut_2_10_1",
+      "to": 10,
+      "yoke": 1,
+      "length_m": 5.72,
+      "angle_from_axis_deg": 4.7,
+      "max_compression_MN": 7.06,
+      "max_tension_MN": 0.0,
+      "ti_tube_od_m": 0.374,
+      "mass_kg": 371
+     },
+     {
+      "name": "Study_Thrust_Strut_2_10_2",
+      "to": 10,
+      "yoke": 2,
+      "length_m": 3.445,
+      "angle_from_axis_deg": 16.7,
+      "max_compression_MN": 0.58,
+      "max_tension_MN": 3.52,
+      "ti_tube_od_m": 0.239,
+      "mass_kg": 91
+     },
+     {
+      "name": "Study_Thrust_Strut_2_11_1",
+      "to": 11,
+      "yoke": 1,
+      "length_m": 5.72,
+      "angle_from_axis_deg": 4.7,
+      "max_compression_MN": 7.06,
+      "max_tension_MN": 0.0,
+      "ti_tube_od_m": 0.374,
+      "mass_kg": 371
+     },
+     {
+      "name": "Study_Thrust_Strut_2_11_2",
+      "to": 11,
+      "yoke": 2,
+      "length_m": 3.445,
+      "angle_from_axis_deg": 16.7,
+      "max_compression_MN": 0.58,
+      "max_tension_MN": 3.52,
+      "ti_tube_od_m": 0.239,
+      "mass_kg": 91
+     }
+    ],
+    "mass_kg": 924,
+    "node_loads_MN": {
+     "10": [
+      3.677,
+      -0.0,
+      0.0
+     ],
+     "11": [
+      3.677,
+      -0.0,
+      0.0
+     ]
+    },
+    "unbalanced_moment_MN_m": {
+     "proof_axial": 12.03,
+     "vector_radial+": 9.1,
+     "vector_radial-": 14.87,
+     "vector_tangential+": 12.28,
+     "vector_tangential-": 12.28
+    }
+   },
+   "F8": {
+    "cases_MN": {
+     "proof_axial": [
+      -1.574,
+      0.129,
+      -2.11,
+      -0.949,
+      -2.733,
+      -0.973,
+      -0.308,
+      1.091
+     ],
+     "vector_radial+": [
+      -1.564,
+      -0.032,
+      -2.239,
+      -1.391,
+      -3.49,
+      -0.38,
+      -0.434,
+      2.221
+     ],
+     "vector_radial-": [
+      -1.572,
+      0.29,
+      -1.964,
+      -0.5,
+      -1.956,
+      -1.559,
+      -0.18,
+      -0.047
+     ],
+     "vector_tangential+": [
+      -2.575,
+      2.345,
+      -1.788,
+      -2.448,
+      -3.547,
+      -0.405,
+      0.068,
+      1.006
+     ],
+     "vector_tangential-": [
+      -0.562,
+      -2.088,
+      -2.416,
+      0.556,
+      -1.899,
+      -1.534,
+      -0.683,
+      1.167
+     ],
+     "member_0_lost": [
+      0.0,
+      -0.75,
+      -1.52,
+      -2.304,
+      -3.813,
+      -1.949,
+      2.172,
+      0.555
+     ],
+     "member_1_lost": [
+      -1.37,
+      0.0,
+      -2.077,
+      -1.065,
+      -2.939,
+      -0.987,
+      0.05,
+      0.939
+     ],
+     "member_2_lost": [
+      0.027,
+      -0.252,
+      0.0,
+      -4.4,
+      -1.601,
+      -5.847,
+      0.961,
+      3.372
+     ],
+     "member_3_lost": [
+      -2.155,
+      0.342,
+      -2.655,
+      0.0,
+      -2.818,
+      0.228,
+      -0.952,
+      0.676
+     ],
+     "member_4_lost": [
+      -3.085,
+      1.364,
+      -1.526,
+      -1.227,
+      0.0,
+      -2.992,
+      -3.642,
+      3.757
+     ],
+     "member_5_lost": [
+      -1.796,
+      0.142,
+      -2.518,
+      -0.312,
+      -3.062,
+      0.0,
+      -0.388,
+      0.558
+     ],
+     "member_6_lost": [
+      -1.396,
+      0.018,
+      -2.076,
+      -1.057,
+      -2.905,
+      -0.999,
+      0.0,
+      0.968
+     ],
+     "member_7_lost": [
+      -1.3,
+      -0.205,
+      -2.54,
+      -0.454,
+      -3.709,
+      0.226,
+      0.566,
+      0.0
+     ]
+    },
+    "members": [
+     {
+      "name": "Study_Thrust_Strut_2_10_1",
+      "to": 10,
+      "yoke": 1,
+      "length_m": 5.72,
+      "angle_from_axis_deg": 4.7,
+      "max_compression_MN": 3.08,
+      "max_tension_MN": 0.03,
+      "ti_tube_od_m": 0.304,
+      "mass_kg": 245
+     },
+     {
+      "name": "Study_Thrust_Strut_2_10_2",
+      "to": 10,
+      "yoke": 2,
+      "length_m": 3.445,
+      "angle_from_axis_deg": 16.7,
+      "max_compression_MN": 2.09,
+      "max_tension_MN": 2.35,
+      "ti_tube_od_m": 0.214,
+      "mass_kg": 73
+     },
+     {
+      "name": "Study_Thrust_Strut_2_11_1",
+      "to": 11,
+      "yoke": 1,
+      "length_m": 5.72,
+      "angle_from_axis_deg": 4.7,
+      "max_compression_MN": 2.65,
+      "max_tension_MN": 0.0,
+      "ti_tube_od_m": 0.293,
+      "mass_kg": 228
+     },
+     {
+      "name": "Study_Thrust_Strut_2_11_2",
+      "to": 11,
+      "yoke": 2,
+      "length_m": 3.445,
+      "angle_from_axis_deg": 16.7,
+      "max_compression_MN": 4.4,
+      "max_tension_MN": 0.56,
+      "ti_tube_od_m": 0.267,
+      "mass_kg": 114
+     },
+     {
+      "name": "Study_Thrust_Strut_In_2_A_1",
+      "to": "hub_A",
+      "yoke": 1,
+      "length_m": 5.969,
+      "angle_from_axis_deg": 8.7,
+      "max_compression_MN": 3.81,
+      "max_tension_MN": 0.0,
+      "ti_tube_od_m": 0.328,
+      "mass_kg": 298
+     },
+     {
+      "name": "Study_Thrust_Strut_In_2_A_2",
+      "to": "hub_A",
+      "yoke": 2,
+      "length_m": 3.776,
+      "angle_from_axis_deg": 22.1,
+      "max_compression_MN": 5.85,
+      "max_tension_MN": 0.23,
+      "ti_tube_od_m": 0.308,
+      "mass_kg": 166
+     },
+     {
+      "name": "Study_Thrust_Strut_In_2_B_1",
+      "to": "hub_B",
+      "yoke": 1,
+      "length_m": 5.969,
+      "angle_from_axis_deg": 8.7,
+      "max_compression_MN": 3.64,
+      "max_tension_MN": 2.17,
+      "ti_tube_od_m": 0.324,
+      "mass_kg": 291
+     },
+     {
+      "name": "Study_Thrust_Strut_In_2_B_2",
+      "to": "hub_B",
+      "yoke": 2,
+      "length_m": 3.776,
+      "angle_from_axis_deg": 22.1,
+      "max_compression_MN": 0.05,
+      "max_tension_MN": 3.76,
+      "ti_tube_od_m": 0.247,
+      "mass_kg": 107
+     }
+    ],
+    "mass_kg": 1522,
+    "node_loads_MN": {
+     "10": [
+      1.445,
+      0.006,
+      -0.093
+     ],
+     "11": [
+      3.012,
+      0.446,
+      -0.031
+     ],
+     "hub_A": [
+      3.603,
+      -0.651,
+      0.427
+     ],
+     "hub_B": [
+      -0.707,
+      0.199,
+      -0.304
+     ]
+    }
+   }
+  },
+  {
+   "nozzle": 3,
+   "azimuth_deg": 225.0,
+   "moment_point": [
+    -108.5,
+    -2.6,
+    -2.6
+   ],
+   "F4": {
+    "cases_MN": {
+     "proof_axial": [
+      -5.106,
+      1.473,
+      -5.106,
+      1.473
+     ],
+     "vector_radial+": [
+      -3.117,
+      -0.582,
+      -3.117,
+      -0.582
+     ],
+     "vector_radial-": [
+      -7.056,
+      3.516,
+      -7.056,
+      3.516
+     ],
+     "vector_tangential+": [
+      -4.633,
+      3.038,
+      -5.54,
+      -0.104
+     ],
+     "vector_tangential-": [
+      -5.54,
+      -0.104,
+      -4.633,
+      3.038
+     ]
+    },
+    "members": [
+     {
+      "name": "Study_Thrust_Strut_3_07_1",
+      "to": 7,
+      "yoke": 1,
+      "length_m": 5.72,
+      "angle_from_axis_deg": 4.7,
+      "max_compression_MN": 7.06,
+      "max_tension_MN": 0.0,
+      "ti_tube_od_m": 0.374,
+      "mass_kg": 371
+     },
+     {
+      "name": "Study_Thrust_Strut_3_07_2",
+      "to": 7,
+      "yoke": 2,
+      "length_m": 3.445,
+      "angle_from_axis_deg": 16.7,
+      "max_compression_MN": 0.58,
+      "max_tension_MN": 3.52,
+      "ti_tube_od_m": 0.239,
+      "mass_kg": 91
+     },
+     {
+      "name": "Study_Thrust_Strut_3_08_1",
+      "to": 8,
+      "yoke": 1,
+      "length_m": 5.72,
+      "angle_from_axis_deg": 4.7,
+      "max_compression_MN": 7.06,
+      "max_tension_MN": 0.0,
+      "ti_tube_od_m": 0.374,
+      "mass_kg": 371
+     },
+     {
+      "name": "Study_Thrust_Strut_3_08_2",
+      "to": 8,
+      "yoke": 2,
+      "length_m": 3.445,
+      "angle_from_axis_deg": 16.7,
+      "max_compression_MN": 0.58,
+      "max_tension_MN": 3.52,
+      "ti_tube_od_m": 0.239,
+      "mass_kg": 91
+     }
+    ],
+    "mass_kg": 924,
+    "node_loads_MN": {
+     "7": [
+      3.677,
+      0.0,
+      0.0
+     ],
+     "8": [
+      3.677,
+      0.0,
+      0.0
+     ]
+    },
+    "unbalanced_moment_MN_m": {
+     "proof_axial": 12.03,
+     "vector_radial+": 9.1,
+     "vector_radial-": 14.87,
+     "vector_tangential+": 12.28,
+     "vector_tangential-": 12.28
+    }
+   },
+   "F8": {
+    "cases_MN": {
+     "proof_axial": [
+      -0.972,
+      -1.465,
+      -0.863,
+      -1.263,
+      -0.682,
+      -0.396,
+      -1.164,
+      -0.778
+     ],
+     "vector_radial+": [
+      -0.81,
+      -2.021,
+      -0.684,
+      -1.786,
+      -0.935,
+      0.335,
+      -1.494,
+      -0.107
+     ],
+     "vector_radial-": [
+      -1.126,
+      -0.899,
+      -1.036,
+      -0.731,
+      -0.423,
+      -1.125,
+      -0.824,
+      -1.442
+     ],
+     "vector_tangential+": [
+      -2.033,
+      1.43,
+      -1.04,
+      -2.864,
+      -2.639,
+      -0.365,
+      -0.005,
+      0.065
+     ],
+     "vector_tangential-": [
+      0.096,
+      -4.35,
+      -0.68,
+      0.347,
+      1.281,
+      -0.425,
+      -2.314,
+      -1.614
+     ],
+     "member_0_lost": [
+      0.0,
+      -2.154,
+      -0.373,
+      -2.084,
+      -1.05,
+      -0.903,
+      0.151,
+      -1.292
+     ],
+     "member_1_lost": [
+      -2.949,
+      0.0,
+      -1.608,
+      0.081,
+      0.452,
+      0.032,
+      -4.058,
+      0.695
+     ],
+     "member_2_lost": [
+      -0.247,
+      -1.849,
+      0.0,
+      -2.52,
+      -0.198,
+      -1.966,
+      -0.619,
+      -0.318
+     ],
+     "member_3_lost": [
+      -1.798,
+      -0.995,
+      -1.717,
+      0.0,
+      -1.035,
+      1.082,
+      -1.897,
+      -1.082
+     ],
+     "member_4_lost": [
+      -1.245,
+      -1.173,
+      -0.621,
+      -1.524,
+      0.0,
+      -1.162,
+      -1.865,
+      0.01
+     ],
+     "member_5_lost": [
+      -1.064,
+      -1.438,
+      -1.055,
+      -0.998,
+      -0.869,
+      0.0,
+      -1.16,
+      -0.976
+     ],
+     "member_6_lost": [
+      -0.221,
+      -2.041,
+      -0.653,
+      -1.68,
+      -1.223,
+      -0.385,
+      0.0,
+      -1.461
+     ],
+     "member_7_lost": [
+      -1.295,
+      -1.143,
+      -0.668,
+      -1.453,
+      -0.014,
+      -1.085,
+      -1.914,
+      0.0
+     ]
+    },
+    "members": [
+     {
+      "name": "Study_Thrust_Strut_3_07_1",
+      "to": 7,
+      "yoke": 1,
+      "length_m": 5.72,
+      "angle_from_axis_deg": 4.7,
+      "max_compression_MN": 2.95,
+      "max_tension_MN": 0.1,
+      "ti_tube_od_m": 0.301,
+      "mass_kg": 240
+     },
+     {
+      "name": "Study_Thrust_Strut_3_07_2",
+      "to": 7,
+      "yoke": 2,
+      "length_m": 3.445,
+      "angle_from_axis_deg": 16.7,
+      "max_compression_MN": 4.35,
+      "max_tension_MN": 1.43,
+      "ti_tube_od_m": 0.265,
+      "mass_kg": 112
+     },
+     {
+      "name": "Study_Thrust_Strut_3_08_1",
+      "to": 8,
+      "yoke": 1,
+      "length_m": 5.72,
+      "angle_from_axis_deg": 4.7,
+      "max_compression_MN": 1.72,
+      "max_tension_MN": 0.0,
+      "ti_tube_od_m": 0.263,
+      "mass_kg": 184
+     },
+     {
+      "name": "Study_Thrust_Strut_3_08_2",
+      "to": 8,
+      "yoke": 2,
+      "length_m": 3.445,
+      "angle_from_axis_deg": 16.7,
+      "max_compression_MN": 2.86,
+      "max_tension_MN": 0.35,
+      "ti_tube_od_m": 0.232,
+      "mass_kg": 86
+     },
+     {
+      "name": "Study_Thrust_Strut_In_3_A_1",
+      "to": "hub_A",
+      "yoke": 1,
+      "length_m": 5.969,
+      "angle_from_axis_deg": 8.7,
+      "max_compression_MN": 2.64,
+      "max_tension_MN": 1.28,
+      "ti_tube_od_m": 0.299,
+      "mass_kg": 248
+     },
+     {
+      "name": "Study_Thrust_Strut_In_3_A_2",
+      "to": "hub_A",
+      "yoke": 2,
+      "length_m": 3.776,
+      "angle_from_axis_deg": 22.1,
+      "max_compression_MN": 1.97,
+      "max_tension_MN": 1.08,
+      "ti_tube_od_m": 0.221,
+      "mass_kg": 86
+     },
+     {
+      "name": "Study_Thrust_Strut_In_3_B_1",
+      "to": "hub_B",
+      "yoke": 1,
+      "length_m": 5.969,
+      "angle_from_axis_deg": 8.7,
+      "max_compression_MN": 4.06,
+      "max_tension_MN": 0.15,
+      "ti_tube_od_m": 0.333,
+      "mass_kg": 307
+     },
+     {
+      "name": "Study_Thrust_Strut_In_3_B_2",
+      "to": "hub_B",
+      "yoke": 2,
+      "length_m": 3.776,
+      "angle_from_axis_deg": 22.1,
+      "max_compression_MN": 1.61,
+      "max_tension_MN": 0.69,
+      "ti_tube_od_m": 0.21,
+      "mass_kg": 77
+     }
+    ],
+    "mass_kg": 1340,
+    "node_loads_MN": {
+     "7": [
+      2.372,
+      -0.5,
+      -0.035
+     ],
+     "8": [
+      2.07,
+      -0.03,
+      -0.433
+     ],
+     "hub_A": [
+      1.041,
+      0.138,
+      0.211
+     ],
+     "hub_B": [
+      1.872,
+      0.392,
+      0.257
+     ]
+    }
+   }
+  }
+ ],
+ "frame_mass_kg": {
+  "F4": 3696,
+  "F8": 5944
+ },
+ "as_built_pickups": [
+  {
+   "name": "Nozzle_Pickup_0",
+   "force_MN": 37.7,
+   "solid_rod_r_needed_m": 0.143,
+   "built_r_m": 0.16,
+   "mass_kg_at_needed": 842
+  },
+  {
+   "name": "Nozzle_Pickup_1",
+   "force_MN": 37.7,
+   "solid_rod_r_needed_m": 0.143,
+   "built_r_m": 0.16,
+   "mass_kg_at_needed": 842
+  },
+  {
+   "name": "Nozzle_Pickup_2",
+   "force_MN": 37.7,
+   "solid_rod_r_needed_m": 0.143,
+   "built_r_m": 0.16,
+   "mass_kg_at_needed": 842
+  },
+  {
+   "name": "Nozzle_Pickup_3",
+   "force_MN": 37.7,
+   "solid_rod_r_needed_m": 0.143,
+   "built_r_m": 0.16,
+   "mass_kg_at_needed": 842
+  }
+ ],
+ "as_built_pickup_mass_kg_at_needed": 3368,
+ "nozzle_out": {
+  "nozzle_axis_offset_m": 3.68,
+  "moment_MN_m": 27.0,
+  "note": "the remaining three nozzles push off-axis; the RCS couples are ~2e-5 of this, so a nozzle-out case means shutting the opposite nozzle (two-nozzle thrust) or vectoring within the +-5 deg rig limit (authority OPEN). Applies to either frame."
+ },
+ "ring": {
+  "as_built": {
+   "in_plane": {
+    "loaded_nodes": 4,
+    "max_node_load_MN": 36.96,
+    "hoop_force_MN": 18.48,
+    "bending_MN_m": 14.33,
+    "chord_stress_MPa": 432,
+    "buckling_ratio_q_over_qcr": 0.104,
+    "chord_load_MN": 4.62,
+    "chord_euler_between_nodes_MN": 10.7
+   },
+   "out_of_plane": {
+    "supports": [
+     1,
+     5,
+     9
+    ],
+    "max_span_moment_MN_m": 21.2,
+    "chord_stress_MPa": 187
+   },
+   "allowable_MPa": 590,
+   "section": {
+    "chord_r_m": 0.1,
+    "chords": 4,
+    "A_chord_m2": 0.03142,
+    "I_in_plane_m4": 0.020106,
+    "I_out_of_plane_m4": 0.101788,
+    "c_in_m": 0.40000000000000036,
+    "c_out_m": 0.9,
+    "R_m": 5.5,
+    "nodes": 12
+   },
+   "note": "Ring-only screening bound (Ti-6Al-4V assumed, ring material OPEN): the diagonals, node diaphragms, hub webs and keels share these loads; FEA and ring buckling with the real section stay OPEN (15!A214)."
+  },
+  "F4": {
+   "in_plane": {
+    "loaded_nodes": 8,
+    "max_node_load_MN": 0.0,
+    "hoop_force_MN": 0.0,
+    "bending_MN_m": 0.0,
+    "chord_stress_MPa": 0,
+    "buckling_ratio_q_over_qcr": 0.0,
+    "chord_load_MN": 0.0,
+    "chord_euler_between_nodes_MN": 10.7
+   },
+   "out_of_plane": {
+    "supports": [
+     1,
+     5,
+     9
+    ],
+    "max_span_moment_MN_m": 15.9,
+    "chord_stress_MPa": 140
+   },
+   "allowable_MPa": 590,
+   "section": {
+    "chord_r_m": 0.1,
+    "chords": 4,
+    "A_chord_m2": 0.03142,
+    "I_in_plane_m4": 0.020106,
+    "I_out_of_plane_m4": 0.101788,
+    "c_in_m": 0.40000000000000036,
+    "c_out_m": 0.9,
+    "R_m": 5.5,
+    "nodes": 12
+   },
+   "note": "Ring-only screening bound (Ti-6Al-4V assumed, ring material OPEN): the diagonals, node diaphragms, hub webs and keels share these loads; FEA and ring buckling with the real section stay OPEN (15!A214).",
+   "hub_abs_sum_MN": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "F8": {
+   "in_plane": {
+    "loaded_nodes": 8,
+    "max_node_load_MN": 0.71,
+    "hoop_force_MN": 0.86,
+    "bending_MN_m": 0.13,
+    "chord_stress_MPa": 9,
+    "buckling_ratio_q_over_qcr": 0.004,
+    "chord_load_MN": 0.22,
+    "chord_euler_between_nodes_MN": 10.7
+   },
+   "out_of_plane": {
+    "supports": [
+     1,
+     5,
+     9
+    ],
+    "max_span_moment_MN_m": 10.8,
+    "chord_stress_MPa": 95
+   },
+   "allowable_MPa": 590,
+   "section": {
+    "chord_r_m": 0.1,
+    "chords": 4,
+    "A_chord_m2": 0.03142,
+    "I_in_plane_m4": 0.020106,
+    "I_out_of_plane_m4": 0.101788,
+    "c_in_m": 0.40000000000000036,
+    "c_out_m": 0.9,
+    "R_m": 5.5,
+    "nodes": 12
+   },
+   "note": "Ring-only screening bound (Ti-6Al-4V assumed, ring material OPEN): the diagonals, node diaphragms, hub webs and keels share these loads; FEA and ring buckling with the real section stay OPEN (15!A214).",
+   "hub_abs_sum_MN": [
+    14.15,
+    2.73,
+    2.61
+   ]
+  }
+ },
+ "branch_clearance": {
+  "min_gap_to_branch_envelope_m": 1.55,
+  "strut": "Study_Thrust_Strut_In_0_A_2",
+  "needed_m": 0.05,
+  "passes": true,
+  "basis": "branch centrelines, radius 0.6 m everywhere (conservative); strut centreline (its radius <= 0.16 m not subtracted)"
+ },
+ "cryo": {
+  "area_m2_per_nozzle": 0.0368,
+  "intercept_K": 80.0,
+  "by_temperature": {
+   "20K": {
+    "per_nozzle": {
+     "direct": {
+      "cold_W": 110.3,
+      "cooler_input_kW": 10.3
+     },
+     "reentrant": {
+      "cold_W": 13.8,
+      "cooler_input_kW": 1.29
+     },
+     "reentrant_80K_intercept": {
+      "cold_W": 2.6,
+      "intercept_W": 22.3,
+      "cooler_input_kW": 0.66
+     }
+    },
+    "ship_cooler_input_kW": {
+     "direct": 41.2,
+     "reentrant": 5.2,
+     "reentrant_80K_intercept": 2.6
+    },
+    "specific_power_W_per_W": 93.3
+   },
+   "25K": {
+    "per_nozzle": {
+     "direct": {
+      "cold_W": 109.7,
+      "cooler_input_kW": 8.05
+     },
+     "reentrant": {
+      "cold_W": 13.7,
+      "cooler_input_kW": 1.01
+     },
+     "reentrant_80K_intercept": {
+      "cold_W": 2.5,
+      "intercept_W": 22.5,
+      "cooler_input_kW": 0.59
+     }
+    },
+    "ship_cooler_input_kW": {
+     "direct": 32.2,
+     "reentrant": 4.0,
+     "reentrant_80K_intercept": 2.4
+    },
+    "specific_power_W_per_W": 73.3
+   },
+   "30K": {
+    "per_nozzle": {
+     "direct": {
+      "cold_W": 109.1,
+      "cooler_input_kW": 6.54
+     },
+     "reentrant": {
+      "cold_W": 13.6,
+      "cooler_input_kW": 0.82
+     },
+     "reentrant_80K_intercept": {
+      "cold_W": 2.3,
+      "intercept_W": 22.6,
+      "cooler_input_kW": 0.55
+     }
+    },
+    "ship_cooler_input_kW": {
+     "direct": 26.2,
+     "reentrant": 3.3,
+     "reentrant_80K_intercept": 2.2
+    },
+    "specific_power_W_per_W": 60.0
+   }
+  },
+  "basis": "G-10 class supports at 200 MPa working sized for the 7.355 MN PROOF load (15!A214), k(T) ~ linear scaled to the slice 4 20-300 K integral; cooler 15 % of Carnot. Support term only: nuclear, radiative and plasma heat on the coils OPEN; none of these is a qualified cooler load (15!A215 H)."
+ },
+ "bore": {
+  "clearance_needed_m": 0.05,
+  "coils": [
+   {
+    "coil": "Nozzle_Coil_00",
+    "gap_now_m": 0.32,
+    "bore_add_m": 0.0,
+    "inner_r_now_m": 1.59,
+    "inner_r_variant_m": 1.59,
+    "current_increase_pct": 0.0,
+    "passes": true
+   },
+   {
+    "coil": "Nozzle_Coil_01",
+    "gap_now_m": 0.263,
+    "bore_add_m": 0.0,
+    "inner_r_now_m": 1.205,
+    "inner_r_variant_m": 1.205,
+    "current_increase_pct": 0.0,
+    "passes": true
+   },
+   {
+    "coil": "Nozzle_Coil_02",
+    "gap_now_m": 0.021,
+    "bore_add_m": 0.029,
+    "inner_r_now_m": 0.69,
+    "inner_r_variant_m": 0.719,
+    "current_increase_pct": 3.8,
+    "passes": false
+   },
+   {
+    "coil": "Nozzle_Coil_03",
+    "gap_now_m": 0.035,
+    "bore_add_m": 0.015,
+    "inner_r_now_m": 0.69,
+    "inner_r_variant_m": 0.705,
+    "current_increase_pct": 1.9,
+    "passes": false
+   }
+  ]
+ },
+ "yoke": {
+  "standoff_now_m": 0.05,
+  "standoff_variant_m": 0.25,
+  "yoke_r_out_max_now_m": 1.88,
+  "yoke_r_out_max_variant_m": 2.08,
+  "neighbour_axis_spacing_m": 5.2,
+  "neighbour_gap_now_m": 1.44,
+  "neighbour_gap_variant_m": 1.04,
+  "note": "an outer-geometry change of the nozzle hardware (15!A214 H): study only; the vehicle keeps the 0.05 m standoff"
+ },
+ "prototype": {
+  "vector_deg": 5.0,
+  "standoff_add_m": 0.2,
+  "intercept_K": 80.0,
+  "temps_K": [
+   20.0,
+   25.0,
+   30.0
+  ],
+  "rho_ti": 4430.0
+ },
+ "measured": {
+  "overlaps": {
+   "Study_Thrust_Strut_In_0_A_1": [
+    "Central_Thrust_Hub"
+   ],
+   "Study_Thrust_Strut_In_0_A_2": [
+    "Central_Thrust_Hub"
+   ],
+   "Study_Thrust_Strut_In_0_B_1": [
+    "Central_Thrust_Hub"
+   ],
+   "Study_Thrust_Strut_In_0_B_2": [
+    "Central_Thrust_Hub"
+   ],
+   "Study_Thrust_Strut_In_1_A_1": [
+    "Central_Thrust_Hub"
+   ],
+   "Study_Thrust_Strut_In_1_A_2": [
+    "Central_Thrust_Hub"
+   ],
+   "Study_Thrust_Strut_In_1_B_1": [
+    "Central_Thrust_Hub"
+   ],
+   "Study_Thrust_Strut_In_1_B_2": [
+    "Central_Thrust_Hub"
+   ],
+   "Study_Thrust_Strut_In_2_A_1": [
+    "Central_Thrust_Hub"
+   ],
+   "Study_Thrust_Strut_In_2_A_2": [
+    "Central_Thrust_Hub"
+   ],
+   "Study_Thrust_Strut_In_2_B_1": [
+    "Central_Thrust_Hub"
+   ],
+   "Study_Thrust_Strut_In_2_B_2": [
+    "Central_Thrust_Hub"
+   ],
+   "Study_Thrust_Strut_In_3_A_1": [
+    "Central_Thrust_Hub"
+   ],
+   "Study_Thrust_Strut_In_3_A_2": [
+    "Central_Thrust_Hub"
+   ],
+   "Study_Thrust_Strut_In_3_B_1": [
+    "Central_Thrust_Hub"
+   ],
+   "Study_Thrust_Strut_In_3_B_2": [
+    "Central_Thrust_Hub"
+   ]
+  },
+  "plasma_or_manifold": {},
+  "parts": 312
+ }
+}

@@ -1,0 +1,161 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="1030" font-family="sans-serif" font-size="11">
+<rect width="100%" height="100%" fill="#fff"/>
+<text x="10" y="18" font-size="13" font-weight="bold">SIM-027 worst case per leg (dot) and seed spread of the best-found poses (bar), m</text>
+<text x="10" y="34" fill="#555">status colour from the worst case; dashed 0.05 m target, solid 0; values below -0.16 clipped at the left edge</text>
+<line x1="351.8" y1="44" x2="351.8" y2="1022" stroke="#ddd" />
+<text x="351.8" y="1030" text-anchor="middle" fill="#555">-0.15</text>
+<line x1="460.7" y1="44" x2="460.7" y2="1022" stroke="#ddd" />
+<text x="460.7" y="1030" text-anchor="middle" fill="#555">-0.1</text>
+<line x1="569.6" y1="44" x2="569.6" y2="1022" stroke="#ddd" />
+<text x="569.6" y="1030" text-anchor="middle" fill="#555">-0.05</text>
+<line x1="678.6" y1="44" x2="678.6" y2="1022" stroke="#000" />
+<text x="678.6" y="1030" text-anchor="middle" fill="#555">0</text>
+<line x1="787.5" y1="44" x2="787.5" y2="1022" stroke="#c62828" stroke-dasharray="4 3"/>
+<text x="787.5" y="1030" text-anchor="middle" fill="#555">0.05</text>
+<line x1="896.4" y1="44" x2="896.4" y2="1022" stroke="#ddd" />
+<text x="896.4" y="1030" text-anchor="middle" fill="#555">0.1</text>
+<text x="8" y="60">V0 B1->B2 A/C/K</text>
+<rect x="674.2" y="52" width="106.8" height="8" fill="#c62828" opacity="0.28"/>
+<circle cx="425.9" cy="56" r="4.5" fill="#c62828"/><text x="324" y="60" text-anchor="end" fill="#c62828">-0.116</text>
+<text x="8" y="80">V0 B1->B2 S</text>
+<rect x="486.9" y="72" width="28.3" height="8" fill="#c62828" opacity="0.28"/>
+<circle cx="330.0" cy="76" r="4.5" fill="#c62828"/><text x="324" y="80" text-anchor="end" fill="#c62828">-0.258</text>
+<text x="8" y="100">V0 B1->B2->couch A/C/K</text>
+<rect x="674.2" y="92" width="106.8" height="8" fill="#c62828" opacity="0.28"/>
+<circle cx="425.9" cy="96" r="4.5" fill="#c62828"/><text x="324" y="100" text-anchor="end" fill="#c62828">-0.116</text>
+<text x="8" y="120">V0 B1->B2->couch S</text>
+<rect x="486.9" y="112" width="28.3" height="8" fill="#c62828" opacity="0.28"/>
+<circle cx="330.0" cy="116" r="4.5" fill="#c62828"/><text x="324" y="120" text-anchor="end" fill="#c62828">-0.258</text>
+<text x="8" y="140">V0 B3->B2 A/C/K</text>
+<rect x="648.1" y="132" width="89.3" height="8" fill="#c62828" opacity="0.28"/>
+<circle cx="443.3" cy="136" r="4.5" fill="#c62828"/><text x="324" y="140" text-anchor="end" fill="#c62828">-0.108</text>
+<text x="8" y="160">V0 B3->B2 S</text>
+<rect x="336.5" y="152" width="154.7" height="8" fill="#c62828" opacity="0.28"/>
+<circle cx="330.0" cy="156" r="4.5" fill="#c62828"/><text x="324" y="160" text-anchor="end" fill="#c62828">-0.257</text>
+<text x="8" y="180">V0 B3->B2->couch A/C/K</text>
+<rect x="648.1" y="172" width="89.3" height="8" fill="#c62828" opacity="0.28"/>
+<circle cx="443.3" cy="176" r="4.5" fill="#c62828"/><text x="324" y="180" text-anchor="end" fill="#c62828">-0.108</text>
+<text x="8" y="200">V0 B3->B2->couch S</text>
+<rect x="336.5" y="192" width="154.7" height="8" fill="#c62828" opacity="0.28"/>
+<circle cx="330.0" cy="196" r="4.5" fill="#c62828"/><text x="324" y="200" text-anchor="end" fill="#c62828">-0.257</text>
+<text x="8" y="220">V0 ringB_B2->couch A/C/K</text>
+<rect x="578.4" y="212" width="261.4" height="8" fill="#c62828" opacity="0.28"/>
+<circle cx="578.4" cy="216" r="4.5" fill="#c62828"/><text x="324" y="220" text-anchor="end" fill="#c62828">-0.046</text>
+<text x="8" y="240">V0 ringB_B2->couch S</text>
+<rect x="388.8" y="232" width="296.3" height="8" fill="#c62828" opacity="0.28"/>
+<circle cx="345.2" cy="236" r="4.5" fill="#c62828"/><text x="324" y="240" text-anchor="end" fill="#c62828">-0.153</text>
+<text x="8" y="260">V0 ringB_B2->trunk A/C/K</text>
+<rect x="578.4" y="252" width="261.4" height="8" fill="#c62828" opacity="0.28"/>
+<circle cx="578.4" cy="256" r="4.5" fill="#c62828"/><text x="324" y="260" text-anchor="end" fill="#c62828">-0.046</text>
+<text x="8" y="280">V0 ringB_B2->trunk S</text>
+<rect x="388.8" y="272" width="296.3" height="8" fill="#c62828" opacity="0.28"/>
+<circle cx="345.2" cy="276" r="4.5" fill="#c62828"/><text x="324" y="280" text-anchor="end" fill="#c62828">-0.153</text>
+<text x="8" y="300">V0 ringB_spin_port_turn A/C/K</text>
+<rect x="358.3" y="292" width="98.0" height="8" fill="#c62828" opacity="0.28"/>
+<circle cx="358.3" cy="296" r="4.5" fill="#c62828"/><text x="324" y="300" text-anchor="end" fill="#c62828">-0.147</text>
+<text x="8" y="320">V0 ringB_spin_port_turn S</text>
+<rect x="330.0" y="312" width="2.0" height="8" fill="#c62828" opacity="0.28"/>
+<circle cx="330.0" cy="316" r="4.5" fill="#c62828"/><text x="324" y="320" text-anchor="end" fill="#c62828">-0.422</text>
+<text x="8" y="340">V0 trunk->refuge A/C/K</text>
+<rect x="896.4" y="332" width="2.0" height="8" fill="#e0a800" opacity="0.28"/>
+<circle cx="770.1" cy="336" r="4.5" fill="#e0a800"/><text x="324" y="340" text-anchor="end" fill="#e0a800">+0.042</text>
+<text x="8" y="360">V0 trunk->refuge S</text>
+<rect x="702.5" y="352" width="47.9" height="8" fill="#c62828" opacity="0.28"/>
+<circle cx="552.2" cy="356" r="4.5" fill="#c62828"/><text x="324" y="360" text-anchor="end" fill="#c62828">-0.058</text>
+<text x="8" y="380">V1 B1->B2 A/C/K</text>
+<rect x="663.3" y="372" width="148.1" height="8" fill="#c62828" opacity="0.28"/>
+<circle cx="462.9" cy="376" r="4.5" fill="#c62828"/><text x="324" y="380" text-anchor="end" fill="#c62828">-0.099</text>
+<text x="8" y="400">V1 B1->B2 S</text>
+<rect x="471.6" y="392" width="74.1" height="8" fill="#c62828" opacity="0.28"/>
+<circle cx="330.0" cy="396" r="4.5" fill="#c62828"/><text x="324" y="400" text-anchor="end" fill="#c62828">-0.243</text>
+<text x="8" y="420">V1 B1->B2->couch A/C/K</text>
+<rect x="663.3" y="412" width="148.1" height="8" fill="#c62828" opacity="0.28"/>
+<circle cx="462.9" cy="416" r="4.5" fill="#c62828"/><text x="324" y="420" text-anchor="end" fill="#c62828">-0.099</text>
+<text x="8" y="440">V1 B1->B2->couch S</text>
+<rect x="471.6" y="432" width="74.1" height="8" fill="#c62828" opacity="0.28"/>
+<circle cx="330.0" cy="436" r="4.5" fill="#c62828"/><text x="324" y="440" text-anchor="end" fill="#c62828">-0.243</text>
+<text x="8" y="460">V1 B3->B2 A/C/K</text>
+<rect x="691.6" y="452" width="74.1" height="8" fill="#c62828" opacity="0.28"/>
+<circle cx="467.2" cy="456" r="4.5" fill="#c62828"/><text x="324" y="460" text-anchor="end" fill="#c62828">-0.097</text>
+<text x="8" y="480">V1 B3->B2 S</text>
+<rect x="406.2" y="472" width="122.0" height="8" fill="#c62828" opacity="0.28"/>
+<circle cx="330.0" cy="476" r="4.5" fill="#c62828"/><text x="324" y="480" text-anchor="end" fill="#c62828">-0.245</text>
+<text x="8" y="500">V1 B3->B2->couch A/C/K</text>
+<rect x="691.6" y="492" width="74.1" height="8" fill="#c62828" opacity="0.28"/>
+<circle cx="467.2" cy="496" r="4.5" fill="#c62828"/><text x="324" y="500" text-anchor="end" fill="#c62828">-0.097</text>
+<text x="8" y="520">V1 B3->B2->couch S</text>
+<rect x="406.2" y="512" width="122.0" height="8" fill="#c62828" opacity="0.28"/>
+<circle cx="330.0" cy="516" r="4.5" fill="#c62828"/><text x="324" y="520" text-anchor="end" fill="#c62828">-0.245</text>
+<text x="8" y="540">V1 ringB_B2->couch A/C/K</text>
+<rect x="737.4" y="532" width="124.2" height="8" fill="#c62828" opacity="0.28"/>
+<circle cx="639.4" cy="536" r="4.5" fill="#c62828"/><text x="324" y="540" text-anchor="end" fill="#c62828">-0.018</text>
+<text x="8" y="560">V1 ringB_B2->couch S</text>
+<rect x="648.1" y="552" width="98.0" height="8" fill="#c62828" opacity="0.28"/>
+<circle cx="380.1" cy="556" r="4.5" fill="#c62828"/><text x="324" y="560" text-anchor="end" fill="#c62828">-0.137</text>
+<text x="8" y="580">V1 ringB_B2->trunk A/C/K</text>
+<rect x="737.4" y="572" width="124.2" height="8" fill="#c62828" opacity="0.28"/>
+<circle cx="639.4" cy="576" r="4.5" fill="#c62828"/><text x="324" y="580" text-anchor="end" fill="#c62828">-0.018</text>
+<text x="8" y="600">V1 ringB_B2->trunk S</text>
+<rect x="648.1" y="592" width="98.0" height="8" fill="#c62828" opacity="0.28"/>
+<circle cx="380.1" cy="596" r="4.5" fill="#c62828"/><text x="324" y="600" text-anchor="end" fill="#c62828">-0.137</text>
+<text x="8" y="620">V1 ringB_spin_port_turn A/C/K</text>
+<rect x="373.6" y="612" width="2.0" height="8" fill="#c62828" opacity="0.28"/>
+<circle cx="373.6" cy="616" r="4.5" fill="#c62828"/><text x="324" y="620" text-anchor="end" fill="#c62828">-0.140</text>
+<text x="8" y="640">V1 ringB_spin_port_turn S</text>
+<rect x="330.0" y="632" width="2.0" height="8" fill="#c62828" opacity="0.28"/>
+<circle cx="330.0" cy="636" r="4.5" fill="#c62828"/><text x="324" y="640" text-anchor="end" fill="#c62828">-0.423</text>
+<text x="8" y="660">V1 trunk->refuge A/C/K</text>
+<rect x="896.4" y="652" width="2.0" height="8" fill="#e0a800" opacity="0.28"/>
+<circle cx="770.1" cy="656" r="4.5" fill="#e0a800"/><text x="324" y="660" text-anchor="end" fill="#e0a800">+0.042</text>
+<text x="8" y="680">V1 trunk->refuge S</text>
+<rect x="702.5" y="672" width="47.9" height="8" fill="#c62828" opacity="0.28"/>
+<circle cx="552.2" cy="676" r="4.5" fill="#c62828"/><text x="324" y="680" text-anchor="end" fill="#c62828">-0.058</text>
+<text x="8" y="700">G1 B1->B2 A/C/K</text>
+<rect x="643.7" y="692" width="95.9" height="8" fill="#c62828" opacity="0.28"/>
+<circle cx="452.0" cy="696" r="4.5" fill="#c62828"/><text x="324" y="700" text-anchor="end" fill="#c62828">-0.104</text>
+<text x="8" y="720">G1 B1->B2 S</text>
+<rect x="441.1" y="712" width="85.0" height="8" fill="#c62828" opacity="0.28"/>
+<circle cx="330.0" cy="716" r="4.5" fill="#c62828"/><text x="324" y="720" text-anchor="end" fill="#c62828">-0.236</text>
+<text x="8" y="740">G1 B1->B2->couch A/C/K</text>
+<rect x="643.7" y="732" width="95.9" height="8" fill="#c62828" opacity="0.28"/>
+<circle cx="452.0" cy="736" r="4.5" fill="#c62828"/><text x="324" y="740" text-anchor="end" fill="#c62828">-0.104</text>
+<text x="8" y="760">G1 B1->B2->couch S</text>
+<rect x="441.1" y="752" width="85.0" height="8" fill="#c62828" opacity="0.28"/>
+<circle cx="330.0" cy="756" r="4.5" fill="#c62828"/><text x="324" y="760" text-anchor="end" fill="#c62828">-0.236</text>
+<text x="8" y="780">G1 B3->B2 A/C/K</text>
+<rect x="645.9" y="772" width="124.2" height="8" fill="#c62828" opacity="0.28"/>
+<circle cx="471.6" cy="776" r="4.5" fill="#c62828"/><text x="324" y="780" text-anchor="end" fill="#c62828">-0.095</text>
+<text x="8" y="800">G1 B3->B2 S</text>
+<rect x="393.2" y="792" width="135.1" height="8" fill="#c62828" opacity="0.28"/>
+<circle cx="330.0" cy="796" r="4.5" fill="#c62828"/><text x="324" y="800" text-anchor="end" fill="#c62828">-0.248</text>
+<text x="8" y="820">G1 B3->B2->couch A/C/K</text>
+<rect x="645.9" y="812" width="124.2" height="8" fill="#c62828" opacity="0.28"/>
+<circle cx="471.6" cy="816" r="4.5" fill="#c62828"/><text x="324" y="820" text-anchor="end" fill="#c62828">-0.095</text>
+<text x="8" y="840">G1 B3->B2->couch S</text>
+<rect x="393.2" y="832" width="135.1" height="8" fill="#c62828" opacity="0.28"/>
+<circle cx="330.0" cy="836" r="4.5" fill="#c62828"/><text x="324" y="840" text-anchor="end" fill="#c62828">-0.248</text>
+<text x="8" y="860">G1 ringB_B2->couch A/C/K</text>
+<rect x="767.9" y="852" width="95.9" height="8" fill="#c62828" opacity="0.28"/>
+<circle cx="648.1" cy="856" r="4.5" fill="#c62828"/><text x="324" y="860" text-anchor="end" fill="#c62828">-0.014</text>
+<text x="8" y="880">G1 ringB_B2->couch S</text>
+<rect x="672.0" y="872" width="32.7" height="8" fill="#c62828" opacity="0.28"/>
+<circle cx="384.5" cy="876" r="4.5" fill="#c62828"/><text x="324" y="880" text-anchor="end" fill="#c62828">-0.135</text>
+<text x="8" y="900">G1 ringB_B2->trunk A/C/K</text>
+<rect x="767.9" y="892" width="95.9" height="8" fill="#c62828" opacity="0.28"/>
+<circle cx="648.1" cy="896" r="4.5" fill="#c62828"/><text x="324" y="900" text-anchor="end" fill="#c62828">-0.014</text>
+<text x="8" y="920">G1 ringB_B2->trunk S</text>
+<rect x="672.0" y="912" width="32.7" height="8" fill="#c62828" opacity="0.28"/>
+<circle cx="384.5" cy="916" r="4.5" fill="#c62828"/><text x="324" y="920" text-anchor="end" fill="#c62828">-0.135</text>
+<text x="8" y="940">G1 ringB_spin_port_turn A/C/K</text>
+<rect x="373.6" y="932" width="2.0" height="8" fill="#c62828" opacity="0.28"/>
+<circle cx="373.6" cy="936" r="4.5" fill="#c62828"/><text x="324" y="940" text-anchor="end" fill="#c62828">-0.140</text>
+<text x="8" y="960">G1 ringB_spin_port_turn S</text>
+<rect x="330.0" y="952" width="2.0" height="8" fill="#c62828" opacity="0.28"/>
+<circle cx="330.0" cy="956" r="4.5" fill="#c62828"/><text x="324" y="960" text-anchor="end" fill="#c62828">-0.422</text>
+<text x="8" y="980">G1 trunk->refuge A/C/K</text>
+<rect x="896.4" y="972" width="2.0" height="8" fill="#e0a800" opacity="0.28"/>
+<circle cx="770.1" cy="976" r="4.5" fill="#e0a800"/><text x="324" y="980" text-anchor="end" fill="#e0a800">+0.042</text>
+<text x="8" y="1000">G1 trunk->refuge S</text>
+<rect x="720.0" y="992" width="43.6" height="8" fill="#c62828" opacity="0.28"/>
+<circle cx="574.0" cy="996" r="4.5" fill="#c62828"/><text x="324" y="1000" text-anchor="end" fill="#c62828">-0.048</text>
+</svg>

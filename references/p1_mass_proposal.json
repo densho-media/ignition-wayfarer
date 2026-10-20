@@ -1,0 +1,86 @@
+{
+ "status": "PROTOTYPE_PROPOSAL_NOT_CANON",
+ "scope": "Burnout (dry) 1,100 t budget only; reaction mass and fusion fuel are OPEN. Positions are local placement rules for owner review (15_MODEL_INTERFACES S1); spec and rig keep centre of mass and inertia unknown.",
+ "placement_rules": {
+  "main_structure": [
+   "rotating 25 t volume-uniform over the inner and outer hoops of both ring frames; spokes, hubs, bearings and locks are not separated (OD-016)",
+   "stationary 125 t on the primary-cage shell"
+  ],
+  "forward_impact_shielding": [
+   "forward shield disc (r 45 m, area-uniform samples at the skin mid-plane); the 100 t Brow mass is PROVISIONAL and not validated for 90 m"
+  ],
+  "habitat_pressure_structure": [
+   "volume-uniform over the six pressurized sector envelopes"
+  ],
+  "eye_sensors": [
+   "four facet modules, module depth aft of each well floor on the well axes (r 4.0 m)"
+  ],
+  "life_support_garden_medical": [
+   "volume-uniform over the six occupied sectors (12!A4,A6)"
+  ],
+  "water_radiation_shielding": [
+   "rotating, volume-uniform over the frame fills between the sectors (12!A13; 13!A7 keeps all 180 t rotating); the refuge shell is not placed separately (P1B-011)"
+  ],
+  "workshop_spares_cargo": [
+   "midship service volume between the STORAGE station and the radiator front (aft of the rings), r 3 m"
+  ],
+  "drive_package": [
+   "uniform from the nozzle exits to the core front"
+  ],
+  "radiators_thermal": [
+   "uniform over the three blade planforms (upper bound; exchangers and buffers sit inboard)"
+  ],
+  "power_computers_steering_comms": [
+   "uniform along the Momentum Spine"
+  ],
+  "food_consumables": [
+   "stationary stores around the refuge (usable as refuge shielding)"
+  ],
+  "design_margin": [
+   "uniform along the body axis"
+  ]
+ },
+ "pose": {
+  "mass_kg": 1100000.0,
+  "com_m": [
+   17.55823149528068,
+   -6.302357285198403e-16,
+   -7.815092333818245e-16
+  ],
+  "inertia_about_com_kg_m2": {
+   "Ixx_roll": 415772221.1821934,
+   "Iyy_pitch": 7659865260.221673,
+   "Izz_yaw": 7659865260.221674
+  },
+  "com_x_if_drive_package_at": {
+   "core": 20.171867858917043,
+   "nozzles": 15.058231495280682
+  },
+  "pitch_inertia_share": {
+   "drive_package": 0.43451372753334117,
+   "forward_impact_shielding": 0.12416272880598947,
+   "water_radiation_shielding": 0.12255602548487847,
+   "main_structure": 0.07660356329576677,
+   "habitat_pressure_structure": 0.06127457049031018,
+   "radiators_thermal": 0.04947994750583135,
+   "life_support_garden_medical": 0.03744557085518958,
+   "eye_sensors": 0.027886716200076597,
+   "power_computers_steering_comms": 0.02621615804415065,
+   "design_margin": 0.017701553960602186,
+   "workshop_spares_cargo": 0.014189996061314655,
+   "food_consumables": 0.007969441762549037
+  }
+ },
+ "refuge_shield": {
+  "shield_thickness_m": 0.2,
+  "mass_kg": 29467.353692508874,
+  "pressure_volume_m3": 114.87901126289952,
+  "per_person_m3": 9.57325093857496,
+  "note": "Outer cylinder plus end annuli at water density; the spine side is left open. 13_MASS_POSITIONS assigns all 180 t of water to the rotating ring frames, and the stationary budget holds only 10 t food/consumables and 60 t workshop/spares/cargo."
+ },
+ "observations": [
+  "Dry COM sits about 17.6 m forward of the body midpoint (range 15.1-20.2 m with the drive package at the nozzles or the core); the thrust line passes through it only because the layout is axisymmetric.",
+  "Largest pitch-inertia shares: drive_package 43%, forward_impact_shielding 12%, water_radiation_shielding 12%, main_structure 8%.",
+  "Where the propellant tanks go (unsourced) will move the departure COM more than any dry-mass placement choice."
+ ]
+}

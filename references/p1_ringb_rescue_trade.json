@@ -1,0 +1,439 @@
+{
+ "study": "M3 ring B rescue architecture trade (SIM-033, WF-012/017/024)",
+ "status": "NONCANON DISPOSABLE STUDY, L2; nothing released",
+ "inputs": [
+  "references/p1_access_seg_ringb.json",
+  "references/p1_access_integrated.json",
+  "crew_transfer.vestibule",
+  "rotor_interface",
+  "habitat_ring",
+  "ringb_unified.distributed"
+ ],
+ "root_cause": {
+  "ring_a_port_clear_m": 1.6,
+  "ring_b_port_clear_m": 0.9,
+  "ring_a_chamber_m": 1.9000000000000004,
+  "ring_b_chamber_m": 1.2000000000000002,
+  "ring_b_window_u_m": [
+   -2.8999999999999915,
+   -1.3
+  ],
+  "hub1_withdrawal_x_m": [
+   83.91936247723132,
+   87.99936247723134
+  ],
+  "ring_b_x_m": 91.04936247723134,
+  "mechanical_clearance_m": 0.15,
+  "ring_b_u0_for_1_6_m_port": -3.6000000000000005,
+  "intrusion_m": 0.7000000000000091,
+  "closure_load_kn": {
+   "ring_a_port": 160.8495438637974,
+   "ring_b_port": 50.89380098815465,
+   "ring_b_at_1_6_m": 160.8495438637974
+  },
+  "basis": "crew_transfer.vestibule (window from rotor_interface.withdrawal_extent of hub 1 plus mechanical_clearance_m)"
+ },
+ "momentum": {
+  "each_n_m_s": 50384862.9782731,
+  "allowed_residual_n_m_s": 50384.8629782731,
+  "one_ring_stopped_ratio": 1000.0,
+  "spin_ramp_s": 1800.0,
+  "note": "both rings stop together (DYN-026 sequence); the ship inertia is unknown (physics.mass_distribution), so a one-ring stop is not quantified"
+ },
+ "shielding": {
+  "water_per_ring_kg": 80000.0,
+  "refuge_g_cm2": 20.0,
+  "sector_shells": {
+   "area_m2": 319.1629806949807,
+   "g_cm2": 25.065563627021895
+  },
+  "whole_frame": {
+   "area_m2": 2429.330767167915,
+   "g_cm2": 3.293088001073771
+  },
+  "casualty_shelter": {
+   "size_m": [
+    2.2,
+    1.5,
+    1.9
+   ],
+   "area_m2": 20.66,
+   "water_kg_at_refuge_density": 4132.0,
+   "status": "PROTOTYPE box round the care couch and one attendant; redistributed from the ring water, not added"
+  },
+  "placement_status": "WORKING"
+ },
+ "care": {
+  "as_built": {
+   "deck": {
+    "clearance_m": -0.2,
+    "reachable": false,
+    "care_point": "new couch standing"
+   },
+   "aft": {
+    "clearance_m": 0.0,
+    "reachable": true,
+    "care_point": "Burn_Couch_2"
+   }
+  },
+  "garden_swap": {
+   "deck": {
+    "clearance_m": 0.3,
+    "reachable": true,
+    "care_point": "new couch standing"
+   },
+   "aft": {
+    "clearance_m": 0.3,
+    "reachable": true,
+    "care_point": "Burn_Couch_1"
+   }
+  }
+ },
+ "coverage": {
+  "as_built": {
+   "sectors": {
+    "Sector_1_1": {
+     "function": "HABITATION",
+     "0g": "PASS",
+     "spin": "PASS",
+     "stopped": "PASS",
+     "locked_1.5g": "PASS"
+    },
+    "Sector_1_2": {
+     "function": "WORK_MEDICAL_OPS",
+     "0g": "PASS",
+     "spin": "PASS",
+     "stopped": "PASS",
+     "locked_1.5g": "PASS"
+    },
+    "Sector_1_3": {
+     "function": "LIFE_SUPPORT_GARDEN_COMMON",
+     "0g": "FAIL",
+     "spin": "FAIL",
+     "stopped": "FAIL",
+     "locked_1.5g": "MARGINAL"
+    },
+    "Sector_2_1": {
+     "function": "HABITATION",
+     "0g": "PASS",
+     "spin": "PASS",
+     "stopped": "PASS",
+     "locked_1.5g": "PASS"
+    },
+    "Sector_2_2": {
+     "function": "WORK_MEDICAL_OPS",
+     "0g": "PASS",
+     "spin": "PASS",
+     "stopped": "PASS",
+     "locked_1.5g": "PASS"
+    },
+    "Sector_2_3": {
+     "function": "LIFE_SUPPORT_GARDEN_COMMON",
+     "0g": "FAIL",
+     "spin": "FAIL",
+     "stopped": "FAIL",
+     "locked_1.5g": "MARGINAL"
+    }
+   },
+   "tally": {
+    "PASS": 16,
+    "MARGINAL": 2,
+    "FAIL": 6
+   }
+  },
+  "garden_swap": {
+   "sectors": {
+    "Sector_1_1": {
+     "function": "HABITATION",
+     "0g": "PASS",
+     "spin": "PASS",
+     "stopped": "PASS",
+     "locked_1.5g": "PASS"
+    },
+    "Sector_1_2": {
+     "function": "WORK_MEDICAL_OPS",
+     "0g": "PASS",
+     "spin": "PASS",
+     "stopped": "PASS",
+     "locked_1.5g": "PASS"
+    },
+    "Sector_1_3": {
+     "function": "LIFE_SUPPORT_GARDEN_COMMON",
+     "0g": "PASS",
+     "spin": "PASS",
+     "stopped": "PASS",
+     "locked_1.5g": "PASS"
+    },
+    "Sector_2_1": {
+     "function": "HABITATION",
+     "0g": "PASS",
+     "spin": "PASS",
+     "stopped": "PASS",
+     "locked_1.5g": "PASS"
+    },
+    "Sector_2_2": {
+     "function": "WORK_MEDICAL_OPS",
+     "0g": "PASS",
+     "spin": "PASS",
+     "stopped": "PASS",
+     "locked_1.5g": "PASS"
+    },
+    "Sector_2_3": {
+     "function": "LIFE_SUPPORT_GARDEN_COMMON",
+     "0g": "PASS",
+     "spin": "PASS",
+     "stopped": "PASS",
+     "locked_1.5g": "PASS"
+    }
+   },
+   "tally": {
+    "PASS": 24,
+    "MARGINAL": 0,
+    "FAIL": 0
+   }
+  }
+ },
+ "chains": {
+  "ringB_to_refuge": {
+   "title": "ring B sector -> port -> trunk -> hoist -> refuge slot 1.00 x 2.30 m",
+   "0g": {
+    "status": "FAIL",
+    "least_m": -0.135
+   },
+   "spin": {
+    "status": "FAIL",
+    "least_m": -0.422
+   },
+   "stopped": {
+    "status": "FAIL",
+    "least_m": -0.135
+   },
+   "locked_1.5g": {
+    "status": "FAIL",
+    "least_m": -0.135
+   }
+  },
+  "ringB_care": {
+   "title": "ring B sector -> B2 medical couch",
+   "0g": {
+    "status": "FAIL",
+    "least_m": -0.135
+   },
+   "spin": {
+    "status": "FAIL",
+    "least_m": -0.245
+   },
+   "stopped": {
+    "status": "FAIL",
+    "least_m": -0.245
+   },
+   "locked_1.5g": {
+    "status": "FAIL",
+    "least_m": -0.245
+   }
+  },
+  "ringA": {
+   "title": "ring A sector -> A2 couch / trunk (stop/index, quoted built_A)",
+   "0g": {
+    "status": "PASS",
+    "least_m": 0.1
+   },
+   "spin": {
+    "status": "FAIL",
+    "least_m": -0.049
+   },
+   "stopped": {
+    "status": "MARGINAL",
+    "least_m": 0.031
+   },
+   "locked_1.5g": {
+    "status": "MARGINAL",
+    "least_m": 0.031
+   }
+  },
+  "eva_sp11_sp12": {
+   "title": "SP-11 1.20 m plug -> SP-12 -> trunk (casualty)",
+   "0g": {
+    "status": "FAIL",
+    "least_m": -0.099
+   },
+   "spin": {
+    "status": "OPEN",
+    "least_m": 0.088
+   },
+   "stopped": {
+    "status": "FAIL",
+    "least_m": -0.099
+   },
+   "locked_1.5g": {
+    "status": "OPEN",
+    "least_m": 0.088
+   }
+  },
+  "eva_sp13": {
+   "title": "SP-13 independent second exit (fit-out kept; the 1.20 m and bare-room rows are comparisons)",
+   "0g": {
+    "status": "FAIL",
+    "least_m": -0.877
+   },
+   "spin": {
+    "status": "FAIL",
+    "least_m": -0.877
+   },
+   "stopped": {
+    "status": "FAIL",
+    "least_m": -0.877
+   },
+   "locked_1.5g": {
+    "status": "FAIL",
+    "least_m": -0.877
+   }
+  },
+  "district_l1a": {
+   "title": "L1-A district / Dock_Primary protected 1.5 g route",
+   "0g": {
+    "status": "OPEN",
+    "least_m": 0.154
+   },
+   "spin": {
+    "status": "OPEN",
+    "least_m": 0.154
+   },
+   "stopped": {
+    "status": "OPEN",
+    "least_m": 0.154
+   },
+   "locked_1.5g": {
+    "status": "OPEN",
+    "least_m": 0.018
+   }
+  },
+  "thrust_hatch_step": {
+   "title": "thrust hatch step B3S (tube -> sector under thrust)",
+   "0g": {
+    "status": "OPEN",
+    "least_m": 0.035
+   },
+   "spin": {
+    "status": "OPEN",
+    "least_m": null
+   },
+   "stopped": {
+    "status": "OPEN",
+    "least_m": null
+   },
+   "locked_1.5g": {
+    "status": "OPEN",
+    "least_m": 0.035
+   }
+  }
+ },
+ "concepts": {
+  "1_dedicated_transfer": {
+   "what": "a ring-A-class 1.6 m spine port and 1.9 m chamber on ring B; casualties ride ring A's measured chain",
+   "human_sweep": {
+    "0g": {
+     "status": "PASS",
+     "least_m": 0.1
+    },
+    "spin": {
+     "status": "FAIL",
+     "least_m": -0.049
+    },
+    "stopped": {
+     "status": "MARGINAL",
+     "least_m": 0.031
+    },
+    "locked_1.5g": {
+     "status": "MARGINAL",
+     "least_m": 0.031
+    }
+   },
+   "human_sweep_note": "ring A as built is the only measured 1.6 m chain (single-seed built_A, not the worst-case method): it FAILs while spinning, so concept 1 also needs concept 3's stop",
+   "refuge": "through the trunk to the storm refuge (ring A's chain PASS in 0 g, MARGINAL stopped)",
+   "pressure": "port closures 161 kN each way against 51 kN today (CALC-R02 diagnostic)",
+   "mass": "a longer drum and larger closures (not estimated: no closure or drum mass is sourced)",
+   "ring_stop": "needed for transport (ring A pattern: FAIL spinning)",
+   "reversibility": "IRREVERSIBLE: the vestibule reaches 0.70 m into hub 1's forward cartridge withdrawal path; hub 1's service direction, ring B's station or in-situ cartridge service must change (rotor interface, owner architecture)",
+   "story": "a hospital lock between the rings"
+  },
+  "2_distributed_care_refuge_in_place": {
+   "what": "care at an in-sector care point (bunk, medical couch, aft burn couch; in the garden sectors a fold-down couch where Garden_Rack_1 and Mess stand); a casualty who cannot be moved shelters in the sector, the others go to the storm refuge",
+   "human_sweep": {
+    "care_tally_as_built": {
+     "PASS": 16,
+     "MARGINAL": 2,
+     "FAIL": 6
+    },
+    "care_tally_garden_swap": {
+     "PASS": 24,
+     "MARGINAL": 0,
+     "FAIL": 0
+    },
+    "garden_as_built": {
+     "deck": {
+      "clearance_m": -0.2,
+      "reachable": false,
+      "care_point": "new couch standing"
+     },
+     "aft": {
+      "clearance_m": 0.0,
+      "reachable": true,
+      "care_point": "Burn_Couch_2"
+     }
+    },
+    "garden_swap": {
+     "deck": {
+      "clearance_m": 0.3,
+      "reachable": true,
+      "care_point": "new couch standing"
+     },
+     "aft": {
+      "clearance_m": 0.3,
+      "reachable": true,
+      "care_point": "Burn_Couch_1"
+     }
+    }
+   },
+   "refuge": "in place: 25.1 g/cm2 if each ring's 80 t of water sits on its three sector shells, 3.3 g/cm2 if it is spread round the whole frame (storm refuge 20); a casualty shelter at the refuge's density takes 4.1 t, redistributed",
+   "pressure": "no new closure; the sector hatch stays the boundary",
+   "mass": "net zero if the shelter water is redistributed from the 160 t rotating allowance (placement WORKING)",
+   "ring_stop": "none",
+   "reversibility": "REVERSIBLE: furniture, a garden fit-out swap and water placement; no pressure boundary, port or rotor change",
+   "story": "care comes to the casualty: the sector is where the crew lives and heals"
+  },
+  "3_stopped_indexed_ring_b": {
+   "what": "stop both rings (one ring alone leaves its momentum on the ship), index ring B and carry the casualty through today's 0.9 m port",
+   "human_sweep": {
+    "0g": {
+     "status": "FAIL",
+     "least_m": -0.135
+    },
+    "stopped": {
+     "status": "FAIL",
+     "least_m": -0.135
+    },
+    "locked_1.5g": {
+     "status": "FAIL",
+     "least_m": -0.135
+    }
+   },
+   "human_sweep_note": "stopping does not change the port: ring B stays FAIL (best G1 -0.135 m to the trunk)",
+   "refuge": "the same failing transfer chain",
+   "pressure": "no change",
+   "mass": "no change",
+   "ring_stop": "both rings, 1800 s down and up each (one ring stopped = 1000 x the allowed residual momentum); the whole ship at 0 g; re-index at 1.5 g NOT ALLOWED (CALC-R05)",
+   "reversibility": "an operating mode, not an architecture; it closes no geometry on ring B",
+   "story": "the ship stops for one person"
+  }
+ },
+ "recommendation": {
+  "direction": "2_distributed_care_refuge_in_place",
+  "why": [
+   "the only concept that passes care in every ring B sector-state with reversible changes",
+   "concept 1 is irreversible (hub 1 service path) and still needs a stop; concept 3 closes no geometry"
+  ],
+  "owner_decision": "Doc 2026-10-11T21:40 (a): adopt distributed care + refuge in place for ring B, and place each ring's water so a sector shelter reaches the storm refuge's 20 g/cm2 (Sheets: water placement, P0 shield stack)",
+  "keeps": "the care and refuge requirements; no hull cutout; ring A's chain unchanged"
+ }
+}

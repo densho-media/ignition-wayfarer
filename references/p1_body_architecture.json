@@ -1,0 +1,704 @@
+{
+ "study": "BODY-001 whole-body internal architecture (NONCANON; PROTOTYPE envelopes; nothing saved)",
+ "bay": {
+  "x0": -57.5,
+  "x1": 81.25,
+  "r_in": 1.025,
+  "r_out": 4.721
+ },
+ "assumptions": {
+  "wall_insulation_m": 0.15,
+  "ullage": 0.05,
+  "module_pitch_m": 12.0,
+  "gap_m": 1.0,
+  "utility_frame_m": 2.0,
+  "lane_deg": 20.0,
+  "density_kg_m3": {
+   "LH2": 70.85,
+   "LD2": 163.0,
+   "LHE3": 58.9,
+   "SLUSH_H2_50": 81.5,
+   "WATER": 1000.0
+  },
+  "status": "PROTOTYPE / REFERENCE PHYSICS"
+ },
+ "owner_proxy": {
+  "length_m": 60,
+  "envelope_m3": 3732.2,
+  "status": "NOT CAD-verified (30, 34)"
+ },
+ "requirement": {
+  "per_100t_m3": {
+   "LH2": 1411,
+   "LD2": 613,
+   "LHE3": 1698,
+   "SLUSH_H2_50": 1227,
+   "WATER": 100
+  },
+  "inventory_all_LH2_m3": {
+   "300t": 4457,
+   "600t": 8914
+  },
+  "inventory_all_slush_m3": {
+   "300t": 3875,
+   "600t": 7749
+  }
+ },
+ "options": {
+  "A": {
+   "key": "A",
+   "modules": [
+    {
+     "x0": -57.5,
+     "x1": -46.5
+    },
+    {
+     "x0": -45.5,
+     "x1": -34.5
+    },
+    {
+     "x0": -33.5,
+     "x1": -22.5
+    },
+    {
+     "x0": -21.5,
+     "x1": -10.5
+    },
+    {
+     "x0": -9.5,
+     "x1": 1.5
+    }
+   ],
+   "tanks": [
+    {
+     "m": 0,
+     "shape": "cyl",
+     "R": 1.848,
+     "deg": 45,
+     "rc": 2.873
+    },
+    {
+     "m": 0,
+     "shape": "cyl",
+     "R": 1.848,
+     "deg": 135,
+     "rc": 2.873
+    },
+    {
+     "m": 0,
+     "shape": "cyl",
+     "R": 1.848,
+     "deg": 225,
+     "rc": 2.873
+    },
+    {
+     "m": 0,
+     "shape": "cyl",
+     "R": 1.848,
+     "deg": 315,
+     "rc": 2.873
+    },
+    {
+     "m": 1,
+     "shape": "cyl",
+     "R": 1.848,
+     "deg": 45,
+     "rc": 2.873
+    },
+    {
+     "m": 1,
+     "shape": "cyl",
+     "R": 1.848,
+     "deg": 135,
+     "rc": 2.873
+    },
+    {
+     "m": 1,
+     "shape": "cyl",
+     "R": 1.848,
+     "deg": 225,
+     "rc": 2.873
+    },
+    {
+     "m": 1,
+     "shape": "cyl",
+     "R": 1.848,
+     "deg": 315,
+     "rc": 2.873
+    },
+    {
+     "m": 2,
+     "shape": "cyl",
+     "R": 1.848,
+     "deg": 45,
+     "rc": 2.873
+    },
+    {
+     "m": 2,
+     "shape": "cyl",
+     "R": 1.848,
+     "deg": 135,
+     "rc": 2.873
+    },
+    {
+     "m": 2,
+     "shape": "cyl",
+     "R": 1.848,
+     "deg": 225,
+     "rc": 2.873
+    },
+    {
+     "m": 2,
+     "shape": "cyl",
+     "R": 1.848,
+     "deg": 315,
+     "rc": 2.873
+    },
+    {
+     "m": 3,
+     "shape": "cyl",
+     "R": 1.848,
+     "deg": 45,
+     "rc": 2.873
+    },
+    {
+     "m": 3,
+     "shape": "cyl",
+     "R": 1.848,
+     "deg": 135,
+     "rc": 2.873
+    },
+    {
+     "m": 3,
+     "shape": "cyl",
+     "R": 1.848,
+     "deg": 225,
+     "rc": 2.873
+    },
+    {
+     "m": 3,
+     "shape": "cyl",
+     "R": 1.848,
+     "deg": 315,
+     "rc": 2.873
+    },
+    {
+     "m": 4,
+     "shape": "cyl",
+     "R": 1.848,
+     "deg": 45,
+     "rc": 2.873
+    },
+    {
+     "m": 4,
+     "shape": "cyl",
+     "R": 1.848,
+     "deg": 135,
+     "rc": 2.873
+    },
+    {
+     "m": 4,
+     "shape": "cyl",
+     "R": 1.848,
+     "deg": 225,
+     "rc": 2.873
+    },
+    {
+     "m": 4,
+     "shape": "cyl",
+     "R": 1.848,
+     "deg": 315,
+     "rc": 2.873
+    }
+   ],
+   "r_in": 1.025,
+   "r_out": 4.721,
+   "tank_count": 20,
+   "per_tank_m3": 91.8,
+   "usable_m3": 1744,
+   "tank_x0": -57.5,
+   "tank_x1": 1.5,
+   "tank_length_m": 59.0,
+   "centroid_x": -28.0,
+   "zones": [
+    {
+     "id": "aft_equipment",
+     "x0": -72.0,
+     "x1": -57.5,
+     "use": "existing: engineering bay face, Brayton A/B, main battery, pulse bank, 4 schematic feed tanks",
+     "status": "BUILT (PROTOTYPE)",
+     "gross_m3": 967
+    },
+    {
+     "id": "tank_train",
+     "x0": -57.5,
+     "x1": 1.5,
+     "use": "hydrogen reaction mass (C: forward two modules = separated D and He-3 cryostats)",
+     "status": "PROTOTYPE envelope",
+     "gross_m3": 3936
+    },
+    {
+     "id": "equipment_bay",
+     "x0": 2.5,
+     "x1": 14.5,
+     "use": "34 fore envelopes: power conversion 70, nav/radio/lasercom 40, RCS prop 45, coolant HX 75, trunks 50 m3",
+     "gross_m3": 801,
+     "status": "PROTOTYPE"
+    },
+    {
+     "id": "unallocated",
+     "x0": 14.5,
+     "x1": 70.0,
+     "use": "reserve; no qualified use (15!A114)",
+     "gross_m3": 3703,
+     "status": "PROTOTYPE"
+    },
+    {
+     "id": "workshop_fallback",
+     "x0": 70.0,
+     "x1": 81.25,
+     "use": "SERV-002 aft fallback X 70-81.2 (forward X 100.4-108.9 preferred)",
+     "gross_m3": 751,
+     "status": "PROTOTYPE"
+    }
+   ],
+   "lh2_t": 124,
+   "slush_t": 142,
+   "he3_t_per_lobe": null,
+   "fits_all_LH2": {
+    "300t": false,
+    "600t": false
+   },
+   "share_of_600t_LH2": 0.2,
+   "assessment": {
+    "service": "tanks open to the cage on four sides; forward 79 m free for equipment and access; no aft crew route (OPEN)",
+    "thermal": "short H2 feed (aft); tanks far from the radiator-root band only in their aft 60 m (same as all)",
+    "radiation": "first module 23.5 m forward of the shadow-shield slab; He-3 placement OPEN",
+    "structure": "propellant centroid aft (X -27.5): shortest load path to the thrust ring",
+    "reversibility": "high: forward half untouched",
+    "conflicts": "none with built assemblies; capacity below every owner inventory bound"
+   }
+  },
+  "B": {
+   "key": "B",
+   "modules": [
+    {
+     "x0": -57.5,
+     "x1": -46.5
+    },
+    {
+     "x0": -45.5,
+     "x1": -34.5
+    },
+    {
+     "x0": -33.5,
+     "x1": -22.5
+    },
+    {
+     "x0": -19.5,
+     "x1": -8.5
+    },
+    {
+     "x0": -7.5,
+     "x1": 3.5
+    },
+    {
+     "x0": 4.5,
+     "x1": 15.5
+    },
+    {
+     "x0": 18.5,
+     "x1": 29.5
+    },
+    {
+     "x0": 30.5,
+     "x1": 41.5
+    },
+    {
+     "x0": 42.5,
+     "x1": 53.5
+    }
+   ],
+   "tanks": [
+    {
+     "m": 0,
+     "shape": "sector",
+     "span": 360.0,
+     "mid": 0.0
+    },
+    {
+     "m": 1,
+     "shape": "sector",
+     "span": 360.0,
+     "mid": 0.0
+    },
+    {
+     "m": 2,
+     "shape": "sector",
+     "span": 360.0,
+     "mid": 0.0
+    },
+    {
+     "m": 3,
+     "shape": "sector",
+     "span": 360.0,
+     "mid": 0.0
+    },
+    {
+     "m": 4,
+     "shape": "sector",
+     "span": 360.0,
+     "mid": 0.0
+    },
+    {
+     "m": 5,
+     "shape": "sector",
+     "span": 360.0,
+     "mid": 0.0
+    },
+    {
+     "m": 6,
+     "shape": "sector",
+     "span": 360.0,
+     "mid": 0.0
+    },
+    {
+     "m": 7,
+     "shape": "sector",
+     "span": 360.0,
+     "mid": 0.0
+    },
+    {
+     "m": 8,
+     "shape": "sector",
+     "span": 360.0,
+     "mid": 0.0
+    }
+   ],
+   "r_in": 1.025,
+   "r_out": 4.721,
+   "tank_count": 9,
+   "per_tank_m3": 613.0,
+   "usable_m3": 5241,
+   "tank_x0": -57.5,
+   "tank_x1": 53.5,
+   "tank_length_m": 111.0,
+   "centroid_x": -2.0,
+   "zones": [
+    {
+     "id": "aft_equipment",
+     "x0": -72.0,
+     "x1": -57.5,
+     "use": "existing: engineering bay face, Brayton A/B, main battery, pulse bank, 4 schematic feed tanks",
+     "status": "BUILT (PROTOTYPE)",
+     "gross_m3": 967
+    },
+    {
+     "id": "tank_train",
+     "x0": -57.5,
+     "x1": 53.5,
+     "use": "hydrogen reaction mass (C: forward two modules = separated D and He-3 cryostats)",
+     "status": "PROTOTYPE envelope",
+     "gross_m3": 7406
+    },
+    {
+     "id": "equipment_bay",
+     "x0": 54.5,
+     "x1": 70.0,
+     "use": "34 fore envelopes (280 m3) + tank-bay overhead not in the utility frames",
+     "gross_m3": 1034,
+     "status": "PROTOTYPE"
+    },
+    {
+     "id": "workshop_fallback",
+     "x0": 70.0,
+     "x1": 81.25,
+     "use": "SERV-002 aft fallback X 70-81.2 (forward X 100.4-108.9 preferred)",
+     "gross_m3": 751,
+     "status": "PROTOTYPE"
+    }
+   ],
+   "lh2_t": 371,
+   "slush_t": 427,
+   "he3_t_per_lobe": null,
+   "fits_all_LH2": {
+    "300t": true,
+    "600t": false
+   },
+   "share_of_600t_LH2": 0.59,
+   "assessment": {
+    "service": "no interior access past the spine; inspection only from the cage-to-skin corridor or externally (DS-13 casing rail)",
+    "thermal": "feed lines run 126 m in the corridor; one tank skin faces the hot-facing casing over the whole body",
+    "radiation": "as A for the aft module; He-3 placement OPEN",
+    "structure": "annular tanks carry pressure in a poor shape: heavy end bulkheads and inner walls (mass OPEN)",
+    "reversibility": "low: fills the only axial path aft of the crew trunk; HR-001 and any internal route must cross it",
+    "conflicts": "blocks an internal service route (aft corridor OPEN, 15!A114); SERV-002 aft fallback kept forward"
+   }
+  },
+  "C": {
+   "key": "C",
+   "modules": [
+    {
+     "x0": -57.5,
+     "x1": -46.5
+    },
+    {
+     "x0": -45.5,
+     "x1": -34.5
+    },
+    {
+     "x0": -33.5,
+     "x1": -22.5
+    },
+    {
+     "x0": -19.5,
+     "x1": -8.5
+    },
+    {
+     "x0": -7.5,
+     "x1": 3.5
+    },
+    {
+     "x0": 4.5,
+     "x1": 15.5
+    },
+    {
+     "x0": 18.5,
+     "x1": 29.5
+    },
+    {
+     "x0": 30.5,
+     "x1": 41.5
+    },
+    {
+     "x0": 42.5,
+     "x1": 53.5
+    }
+   ],
+   "tanks": [
+    {
+     "m": 0,
+     "shape": "sector",
+     "span": 100.0,
+     "mid": 90.0
+    },
+    {
+     "m": 0,
+     "shape": "sector",
+     "span": 100.0,
+     "mid": 210.0
+    },
+    {
+     "m": 0,
+     "shape": "sector",
+     "span": 100.0,
+     "mid": 330.0
+    },
+    {
+     "m": 1,
+     "shape": "sector",
+     "span": 100.0,
+     "mid": 90.0
+    },
+    {
+     "m": 1,
+     "shape": "sector",
+     "span": 100.0,
+     "mid": 210.0
+    },
+    {
+     "m": 1,
+     "shape": "sector",
+     "span": 100.0,
+     "mid": 330.0
+    },
+    {
+     "m": 2,
+     "shape": "sector",
+     "span": 100.0,
+     "mid": 90.0
+    },
+    {
+     "m": 2,
+     "shape": "sector",
+     "span": 100.0,
+     "mid": 210.0
+    },
+    {
+     "m": 2,
+     "shape": "sector",
+     "span": 100.0,
+     "mid": 330.0
+    },
+    {
+     "m": 3,
+     "shape": "sector",
+     "span": 100.0,
+     "mid": 90.0
+    },
+    {
+     "m": 3,
+     "shape": "sector",
+     "span": 100.0,
+     "mid": 210.0
+    },
+    {
+     "m": 3,
+     "shape": "sector",
+     "span": 100.0,
+     "mid": 330.0
+    },
+    {
+     "m": 4,
+     "shape": "sector",
+     "span": 100.0,
+     "mid": 90.0
+    },
+    {
+     "m": 4,
+     "shape": "sector",
+     "span": 100.0,
+     "mid": 210.0
+    },
+    {
+     "m": 4,
+     "shape": "sector",
+     "span": 100.0,
+     "mid": 330.0
+    },
+    {
+     "m": 5,
+     "shape": "sector",
+     "span": 100.0,
+     "mid": 90.0
+    },
+    {
+     "m": 5,
+     "shape": "sector",
+     "span": 100.0,
+     "mid": 210.0
+    },
+    {
+     "m": 5,
+     "shape": "sector",
+     "span": 100.0,
+     "mid": 330.0
+    },
+    {
+     "m": 6,
+     "shape": "sector",
+     "span": 100.0,
+     "mid": 90.0
+    },
+    {
+     "m": 6,
+     "shape": "sector",
+     "span": 100.0,
+     "mid": 210.0
+    },
+    {
+     "m": 6,
+     "shape": "sector",
+     "span": 100.0,
+     "mid": 330.0
+    },
+    {
+     "m": 7,
+     "shape": "sector",
+     "span": 100.0,
+     "mid": 90.0
+    },
+    {
+     "m": 7,
+     "shape": "sector",
+     "span": 100.0,
+     "mid": 210.0
+    },
+    {
+     "m": 7,
+     "shape": "sector",
+     "span": 100.0,
+     "mid": 330.0
+    },
+    {
+     "m": 8,
+     "shape": "sector",
+     "span": 100.0,
+     "mid": 90.0
+    },
+    {
+     "m": 8,
+     "shape": "sector",
+     "span": 100.0,
+     "mid": 210.0
+    },
+    {
+     "m": 8,
+     "shape": "sector",
+     "span": 100.0,
+     "mid": 330.0
+    }
+   ],
+   "r_in": 1.0999999999999999,
+   "r_out": 4.721,
+   "tank_count": 27,
+   "per_tank_m3": 158.7,
+   "usable_m3": 4072,
+   "tank_x0": -57.5,
+   "tank_x1": 53.5,
+   "tank_length_m": 111.0,
+   "centroid_x": -2.0,
+   "zones": [
+    {
+     "id": "aft_equipment",
+     "x0": -72.0,
+     "x1": -57.5,
+     "use": "existing: engineering bay face, Brayton A/B, main battery, pulse bank, 4 schematic feed tanks",
+     "status": "BUILT (PROTOTYPE)",
+     "gross_m3": 967
+    },
+    {
+     "id": "tank_train",
+     "x0": -57.5,
+     "x1": 53.5,
+     "use": "hydrogen reaction mass (C: forward two modules = separated D and He-3 cryostats)",
+     "status": "PROTOTYPE envelope",
+     "gross_m3": 7406
+    },
+    {
+     "id": "equipment_bay",
+     "x0": 54.5,
+     "x1": 70.0,
+     "use": "34 fore envelopes (280 m3) + tank-bay overhead not in the utility frames",
+     "gross_m3": 1034,
+     "status": "PROTOTYPE"
+    },
+    {
+     "id": "workshop_fallback",
+     "x0": 70.0,
+     "x1": 81.25,
+     "use": "SERV-002 aft fallback X 70-81.2 (forward X 100.4-108.9 preferred)",
+     "gross_m3": 751,
+     "status": "PROTOTYPE"
+    }
+   ],
+   "lh2_t": 288,
+   "slush_t": 332,
+   "he3_t_per_lobe": 8.9,
+   "fits_all_LH2": {
+    "300t": false,
+    "600t": false
+   },
+   "share_of_600t_LH2": 0.46,
+   "assessment": {
+    "service": "spine tunnel = continuous 0.80 m crew/robot route from the trunk to the engineering bay; three keel lanes reach every module",
+    "thermal": "lobes stand off the keel rails; lanes carry feed manifolds and cold-head lines; cage-to-skin corridor reserved for a thermal barrier",
+    "radiation": "H2 modules aft shield the forward fuel cryostats from core neutrons (He-3 absorbs thermal neutrons); dose OPEN",
+    "structure": "lobes hang from the three keels at frame stations (the load path 07 already builds); multi-cell lobes need tie-rods (mass OPEN)",
+    "reversibility": "high: module pattern and fuel/H2 split are per-module parameters; zones and stations stay",
+    "conflicts": "spine radius 0.875 -> 0.95 m over the bay (inside the WORKING envelope); trunk aft hatch at X 81.3"
+   }
+  }
+ },
+ "recommended": "C"
+}

@@ -1,0 +1,4088 @@
+{
+ "study": "EVA-003 / SERV-003 integrated forward district (NONCANON packaging study)",
+ "step_m": 0.1,
+ "layouts": {
+  "L0": {
+   "title": "as proposed: SP-12/13 and SERV-002 A (workshop + cell 60 deg, warm 240 deg) independently",
+   "status": "FAIL",
+   "double_booked_m3": {
+    "SP12 x workshop": 8.18,
+    "SP12 x cell": 1.79,
+    "SP13 x workshop": 7.5,
+    "SP13 x cell": 0.15
+   },
+   "volumes_m3": {
+    "SP12": 47.9,
+    "SP13": 25.2,
+    "SP11_chamber": 13.7,
+    "SP12_branch": 0.4,
+    "workshop": 26.6,
+    "cell": 3.3,
+    "warm_SP52": 5.0,
+    "passage_0": 0.3
+   },
+   "map": [
+    {
+     "name": "SP12",
+     "x": [
+      100.75,
+      104.85
+     ],
+     "az": [
+      5.0,
+      75.0
+     ],
+     "r": [
+      1.25,
+      4.6
+     ]
+    },
+    {
+     "name": "SP13",
+     "x": [
+      104.95,
+      107.1
+     ],
+     "az": [
+      5.0,
+      75.0
+     ],
+     "r": [
+      1.25,
+      4.6
+     ]
+    },
+    {
+     "name": "SP11_chamber",
+     "x": [
+      100.749,
+      102.949
+     ],
+     "az": [
+      23.9,
+      76.1
+     ],
+     "r": [
+      2.5,
+      6.15
+     ]
+    },
+    {
+     "name": "SP12_branch",
+     "x": [
+      101.349,
+      102.349
+     ],
+     "az": [
+      11.3,
+      88.7
+     ],
+     "r": [
+      0.8,
+      1.25
+     ]
+    },
+    {
+     "name": "workshop",
+     "x": [
+      103.6,
+      106.1
+     ],
+     "az": [
+      -1.8,
+      121.8
+     ],
+     "r": [
+      1.1,
+      4.23
+     ]
+    },
+    {
+     "name": "cell",
+     "x": [
+      103.6,
+      105.1
+     ],
+     "az": [
+      47.1,
+      72.9
+     ],
+     "r": [
+      3.7,
+      5.072
+     ]
+    },
+    {
+     "name": "warm_SP52",
+     "x": [
+      104.0,
+      105.6
+     ],
+     "az": [
+      196.3,
+      283.7
+     ],
+     "r": [
+      1.1,
+      2.897
+     ]
+    },
+    {
+     "name": "passage_0",
+     "x": [
+      103.6,
+      104.6
+     ],
+     "az": [
+      28.0,
+      92.0
+     ],
+     "r": [
+      0.8,
+      1.208
+     ]
+    }
+   ]
+  },
+  "L1-A": {
+   "title": "EVA first: SP-11/12/13 kept; workshop + cell at 240 deg (A trunk extension), SP-52 warm module at 210 deg from X 106.3 m",
+   "status": "PASS",
+   "service_angles_deg": [
+    240,
+    250,
+    290,
+    300
+   ],
+   "workshop_deg": 240,
+   "warm_deg": 210,
+   "warm_x0": 106.3,
+   "warm_options": [
+    [
+     240,
+     210,
+     106.3
+    ],
+    [
+     250,
+     210,
+     106.3
+    ],
+    [
+     290,
+     210,
+     106.3
+    ],
+    [
+     300,
+     210,
+     106.3
+    ]
+   ],
+   "warm_feed": {
+    "length_m": 30.22,
+    "panel": "Warm_Panel_3M_3"
+   },
+   "elements": {
+    "workshop": {
+     "hits": [],
+     "inside_hull": true,
+     "eva_overlap": []
+    },
+    "cell": {
+     "hits": [],
+     "inside_hull": true,
+     "eva_overlap": []
+    },
+    "warm_SP52": {
+     "hits": [],
+     "inside_hull": true,
+     "eva_overlap": []
+    },
+    "passage_0": {
+     "hits": [],
+     "inside_hull": true,
+     "eva_overlap": []
+    }
+   },
+   "double_booked_m3": {},
+   "volumes_m3": {
+    "SP12": 47.9,
+    "SP13": 25.2,
+    "SP11_chamber": 13.7,
+    "SP12_branch": 0.4,
+    "workshop": 26.6,
+    "cell": 3.3,
+    "warm_SP52": 5.0,
+    "passage_0": 0.3
+   },
+   "shell_m2": {
+    "SP12": 80.7,
+    "SP13": 53.7,
+    "SP11_chamber": 32.8,
+    "SP12_branch": 3.0,
+    "workshop": 54.8,
+    "cell": 13.4,
+    "warm_SP52": 18.6,
+    "passage_0": 3.2,
+    "trunk_extension": 13.1
+   },
+   "new_shell_m2": 270.3,
+   "new_shell_mass_t": 5.41,
+   "access": {
+    "option": "A trunk extension",
+    "phi_deg": 240,
+    "workshop_floor_x": 103.6,
+    "inner_face_d": 1.1,
+    "extension": {
+     "x0": 102.449,
+     "x1": 104.9,
+     "clear_m": 1.6,
+     "length_m": 2.451,
+     "spine_clear": true,
+     "note": "inside the spine bore; the bore forward of the trunk is assumed hollow to the shield column (108.5 m)"
+    },
+    "port": {
+     "x": 104.1,
+     "clear_m": 0.9,
+     "run": {
+      "hits": [],
+      "inside_hull": true
+     }
+    },
+    "new_pressure_interfaces": [
+     "district hatch at the trunk end (seats from the trunk side)",
+     "workshop port hatch",
+     "cell pass-through (sealed)",
+     "warm-module service hatch (non-habitable)"
+    ]
+   },
+   "map": [
+    {
+     "name": "SP12",
+     "x": [
+      100.75,
+      104.85
+     ],
+     "az": [
+      5.0,
+      75.0
+     ],
+     "r": [
+      1.25,
+      4.6
+     ]
+    },
+    {
+     "name": "SP13",
+     "x": [
+      104.95,
+      107.1
+     ],
+     "az": [
+      5.0,
+      75.0
+     ],
+     "r": [
+      1.25,
+      4.6
+     ]
+    },
+    {
+     "name": "SP11_chamber",
+     "x": [
+      100.749,
+      102.949
+     ],
+     "az": [
+      23.9,
+      76.1
+     ],
+     "r": [
+      2.5,
+      6.15
+     ]
+    },
+    {
+     "name": "SP12_branch",
+     "x": [
+      101.349,
+      102.349
+     ],
+     "az": [
+      11.3,
+      88.7
+     ],
+     "r": [
+      0.8,
+      1.25
+     ]
+    },
+    {
+     "name": "workshop",
+     "x": [
+      103.6,
+      106.1
+     ],
+     "az": [
+      178.2,
+      301.8
+     ],
+     "r": [
+      1.1,
+      4.23
+     ]
+    },
+    {
+     "name": "cell",
+     "x": [
+      103.6,
+      105.1
+     ],
+     "az": [
+      227.1,
+      252.9
+     ],
+     "r": [
+      3.7,
+      5.072
+     ]
+    },
+    {
+     "name": "warm_SP52",
+     "x": [
+      106.3,
+      107.9
+     ],
+     "az": [
+      166.3,
+      253.7
+     ],
+     "r": [
+      1.1,
+      2.897
+     ]
+    },
+    {
+     "name": "passage_0",
+     "x": [
+      103.6,
+      104.6
+     ],
+     "az": [
+      208.0,
+      272.0
+     ],
+     "r": [
+      0.8,
+      1.208
+     ]
+    }
+   ]
+  },
+  "L1-B": {
+   "title": "EVA first: SP-11/12/13 kept; workshop + cell at 240 deg (B external corridor), SP-52 warm module at 210 deg from X 106.3 m",
+   "status": "PASS",
+   "service_angles_deg": [
+    240,
+    250,
+    290,
+    300
+   ],
+   "workshop_deg": 240,
+   "warm_deg": 210,
+   "warm_x0": 106.3,
+   "warm_options": [
+    [
+     240,
+     210,
+     106.3
+    ],
+    [
+     250,
+     210,
+     106.3
+    ],
+    [
+     290,
+     210,
+     106.3
+    ],
+    [
+     300,
+     210,
+     106.3
+    ]
+   ],
+   "warm_feed": {
+    "length_m": 30.22,
+    "panel": "Warm_Panel_3M_3"
+   },
+   "elements": {
+    "workshop": {
+     "hits": [],
+     "inside_hull": true,
+     "eva_overlap": []
+    },
+    "cell": {
+     "hits": [],
+     "inside_hull": true,
+     "eva_overlap": []
+    },
+    "warm_SP52": {
+     "hits": [],
+     "inside_hull": true,
+     "eva_overlap": []
+    },
+    "passage_0": {
+     "hits": [],
+     "inside_hull": true,
+     "eva_overlap": []
+    },
+    "passage_1": {
+     "hits": [],
+     "inside_hull": true,
+     "eva_overlap": []
+    }
+   },
+   "double_booked_m3": {},
+   "volumes_m3": {
+    "SP12": 47.9,
+    "SP13": 25.2,
+    "SP11_chamber": 13.7,
+    "SP12_branch": 0.4,
+    "workshop": 26.6,
+    "cell": 3.3,
+    "warm_SP52": 5.0,
+    "passage_0": 1.6,
+    "passage_1": 4.1
+   },
+   "shell_m2": {
+    "SP12": 80.7,
+    "SP13": 53.7,
+    "SP11_chamber": 32.8,
+    "SP12_branch": 3.0,
+    "workshop": 54.8,
+    "cell": 13.4,
+    "warm_SP52": 18.6,
+    "passage_0": 8.4,
+    "passage_1": 15.9
+   },
+   "new_shell_m2": 278.3,
+   "new_shell_mass_t": 5.57,
+   "access": {
+    "option": "B external corridor",
+    "phi_deg": 240,
+    "workshop_floor_x": 103.6,
+    "inner_face_d": 1.1,
+    "trunk_port": {
+     "x": 101.849,
+     "clear_m": 0.9,
+     "opening_conflicts": [],
+     "run": {
+      "hits": [],
+      "inside_hull": true
+     }
+    },
+    "corridor": {
+     "clear_m": 1.2,
+     "axis_r": 1.75,
+     "x": [
+      101.199,
+      103.6
+     ],
+     "length_m": 2.401,
+     "screen": {
+      "hits": [],
+      "inside_hull": true
+     },
+     "shell_m2": 9.8
+    },
+    "new_pressure_interfaces": [
+     "trunk port hatch (seats from the trunk side)",
+     "workshop end hatch",
+     "cell pass-through (sealed)",
+     "warm-module service hatch (non-habitable)"
+    ]
+   },
+   "map": [
+    {
+     "name": "SP12",
+     "x": [
+      100.75,
+      104.85
+     ],
+     "az": [
+      5.0,
+      75.0
+     ],
+     "r": [
+      1.25,
+      4.6
+     ]
+    },
+    {
+     "name": "SP13",
+     "x": [
+      104.95,
+      107.1
+     ],
+     "az": [
+      5.0,
+      75.0
+     ],
+     "r": [
+      1.25,
+      4.6
+     ]
+    },
+    {
+     "name": "SP11_chamber",
+     "x": [
+      100.749,
+      102.949
+     ],
+     "az": [
+      23.9,
+      76.1
+     ],
+     "r": [
+      2.5,
+      6.15
+     ]
+    },
+    {
+     "name": "SP12_branch",
+     "x": [
+      101.349,
+      102.349
+     ],
+     "az": [
+      11.3,
+      88.7
+     ],
+     "r": [
+      0.8,
+      1.25
+     ]
+    },
+    {
+     "name": "workshop",
+     "x": [
+      103.6,
+      106.1
+     ],
+     "az": [
+      178.2,
+      301.8
+     ],
+     "r": [
+      1.1,
+      4.23
+     ]
+    },
+    {
+     "name": "cell",
+     "x": [
+      103.6,
+      105.1
+     ],
+     "az": [
+      227.1,
+      252.9
+     ],
+     "r": [
+      3.7,
+      5.072
+     ]
+    },
+    {
+     "name": "warm_SP52",
+     "x": [
+      106.3,
+      107.9
+     ],
+     "az": [
+      166.3,
+      253.7
+     ],
+     "r": [
+      1.1,
+      2.897
+     ]
+    },
+    {
+     "name": "passage_0",
+     "x": [
+      101.349,
+      102.349
+     ],
+     "az": [
+      208.0,
+      272.0
+     ],
+     "r": [
+      0.8,
+      2.452
+     ]
+    },
+    {
+     "name": "passage_1",
+     "x": [
+      101.199,
+      103.6
+     ],
+     "az": [
+      209.4,
+      270.6
+     ],
+     "r": [
+      1.1,
+      2.486
+     ]
+    }
+   ]
+  }
+ },
+ "eva_elements": {
+  "SP12": {
+   "hits": [],
+   "inside_hull": true,
+   "shell_m2": 80.7
+  },
+  "SP13": {
+   "hits": [],
+   "inside_hull": true,
+   "shell_m2": 53.7
+  },
+  "SP12_branch": {
+   "hits": [],
+   "inside_hull": true,
+   "shell_m2": 3.0
+  },
+  "SP11_chamber": {
+   "screen": "exact mesh check in references/p1_eva_sp11_vehicle.json (a box round a cylinder is too coarse here)",
+   "shell_m2": 32.8
+  }
+ },
+ "sp13_second_egress": {
+  "station_x": 106.025,
+  "extension_to_x": 106.875,
+  "extension_spine_clear": true,
+  "candidates": [
+   {
+    "az_deg": 15,
+    "hits": [],
+    "inside_hull": true,
+    "overlaps": []
+   },
+   {
+    "az_deg": 25,
+    "hits": [],
+    "inside_hull": true,
+    "overlaps": []
+   },
+   {
+    "az_deg": 35,
+    "hits": [],
+    "inside_hull": true,
+    "overlaps": []
+   },
+   {
+    "az_deg": 45,
+    "hits": [],
+    "inside_hull": true,
+    "overlaps": []
+   },
+   {
+    "az_deg": 55,
+    "hits": [],
+    "inside_hull": true,
+    "overlaps": []
+   },
+   {
+    "az_deg": 65,
+    "hits": [],
+    "inside_hull": true,
+    "overlaps": []
+   }
+  ],
+  "status": "CANDIDATE",
+  "note": "needs the spine bore hollow to X 106.88 m (the bore contents and the structural cut are OPEN)"
+ },
+ "ladder_extension": {
+  "ladder_deg": 285.0,
+  "present_top_x": 98.606,
+  "to_x": 104.9,
+  "extension_m": 6.29,
+  "stile_gaps": [
+   [
+    98.54,
+    100.26
+   ],
+   [
+    98.76,
+    100.04
+   ]
+  ],
+  "openings_on_the_way": [
+   {
+    "name": "Crew_Connector_Airlock_EVA",
+    "x": 101.85,
+    "deg": 50.0,
+    "r": 0.45
+   },
+   {
+    "name": "Crew_Connector_Dock_Primary",
+    "x": 99.4,
+    "deg": 195.0,
+    "r": 0.85
+   },
+   {
+    "name": "Crew_Connector_Dock_Service",
+    "x": 99.4,
+    "deg": 315.0,
+    "r": 0.45
+   },
+   {
+    "name": "Crew_Store_Port",
+    "x": 98.1,
+    "deg": 35.0,
+    "r": 0.5
+   }
+  ],
+  "clear_angles_above_dock_deg": [
+   160,
+   165,
+   170,
+   175,
+   180,
+   185,
+   190,
+   195,
+   200,
+   205,
+   210,
+   215,
+   220,
+   225,
+   230,
+   235,
+   240,
+   245,
+   250,
+   255,
+   260,
+   265,
+   270,
+   275,
+   280,
+   285,
+   290,
+   295,
+   300
+  ],
+  "status": "NOT CONTINUOUS",
+  "note": "Crew_Connector_Dock_Primary (r 0.85 m, wider than the 0.80 m trunk) opens the whole trunk circumference at X ~98.4-100.4 m, so no stile line runs past it at any angle: the extension needs a folding/removable section across the dock mouth (it must not block the docking passage) or the trunk hoist; above it the 285 deg station runs clear to the district passage."
+ },
+ "topology": {
+  "compartments": [
+   {
+    "id": "TRUNK",
+    "role": "crew passage (existing)",
+    "isolation": "existing"
+   },
+   {
+    "id": "SP12",
+    "role": "EVA prep / donning / buddy check (49 m3 gross)",
+    "hatches": [
+     "branch hatch to the trunk (seats from the trunk side, so a SP-12 leak holds it shut)",
+     "SP-11 inner hatch (parallel plug, seats from SP-12)",
+     "SP-12/13 door (seats from SP-12)"
+    ]
+   },
+   {
+    "id": "SP11",
+    "role": "two-person airlock",
+    "hatches": [
+     "inner (parallel plug into SP-12)",
+     "outer (plug, seats from the chamber)"
+    ],
+    "note": "manual depress/equalization valves at both bulkheads; the cycle gas budget is a Sheets item"
+   },
+   {
+    "id": "SP13",
+    "role": "suit service: drying, charging, inspection, spares (26 m3 gross)",
+    "hatches": [
+     "door to SP-12 (only access in L1)"
+    ]
+   },
+   {
+    "id": "DISTRICT",
+    "role": "service passage (A: trunk extension in the spine bore; B: corridor)",
+    "hatches": [
+     "district hatch at the trunk end (seats from the trunk side)"
+    ]
+   },
+   {
+    "id": "WORKSHOP",
+    "role": "clean crewed workshop",
+    "hatches": [
+     "port hatch to the district passage"
+    ]
+   },
+   {
+    "id": "CELL",
+    "role": "sealed hot/dirty cell, no crew entry while running",
+    "hatches": [
+     "pass-through and glove ports from the workshop; own vent to space"
+    ]
+   },
+   {
+    "id": "SP52",
+    "role": "~450 K warm module, non-habitable",
+    "hatches": [
+     "own service hatch, robot first (crew only after cooldown)"
+    ]
+   }
+  ],
+  "openings": {
+   "branch_port": {
+    "clear_m": 0.9,
+    "unsuited": {
+     "instructor.unsuited": 0.242,
+     "newcomer.unsuited": 0.298
+    },
+    "supported_casualty": {
+     "instructor.supported_frame": 0.043,
+     "newcomer.supported_frame": 0.068
+    },
+    "free_limp": {
+     "instructor.casualty": -0.399,
+     "newcomer.casualty": -0.321
+    },
+    "robot_cube_diag": 0.051,
+    "note": "the 0.90 m branch is the shirt-sleeve way in; a suited casualty on its frame goes this way to the trunk and the rescue routes"
+   },
+   "sp11": {
+    "clear_m": 1.2,
+    "note": "see p1_eva_sp11.json"
+   }
+  },
+  "egress": {
+   "zero_g": [
+    "SP-12 -> branch -> trunk (primary)",
+    "SP-12 -> SP-11 -> exterior (EVA only, not a cabin egress)",
+    "SP-13 -> SP-12 -> branch (single way out of SP-13 in L1: OPEN)"
+   ],
+   "thrust_1_5g": {
+    "trunk_ladder_top_x": 98.606,
+    "branch_sill_x": 101.399,
+    "ladder_extension_to_branch_m": 2.79,
+    "sp12_floor_x": 100.75,
+    "sp13_floor_x": 104.95,
+    "sp12_to_sp13_climb_m": 4.2,
+    "trunk_end_x": 102.449,
+    "note": "under 1.5 g aft-down X is vertical: the branch is a horizontal crawl 0.65 m above the SP-12 floor; SP-13 is a 4.2 m climb up an internal ladder through a door in SP-12's forward wall; EVA itself is drive-off (drive gate), so the chamber is not used under thrust"
+   }
+  },
+  "service_connections": {
+   "SP12": [
+    "power and data",
+    "ventilation loop (own, isolatable)",
+    "O2 preparation interface (no flow budget)",
+    "suit umbilical/pressure-check panel",
+    "depress/repress lines to SP-11 (manual valves)",
+    "fire detection and suppression"
+   ],
+   "SP13": [
+    "power (battery charging)",
+    "water/coolant for suit loop service and drying air",
+    "spares stowage",
+    "ventilation (own)"
+   ],
+   "SP11": [
+    "vent line to space (depress), repress from SP-12 or the cabin loop",
+    "manual valves at both bulkheads",
+    "mechanical door interlock",
+    "lights, comms"
+   ],
+   "district": "as SERV-002: workshop loop, cell exhaust to space, SP-52 warm loop to a candidate warm panel (routing OPEN, OD-022)"
+  }
+ },
+ "owner_2026_10_11": {
+  "study": "EVA-003 follow-up: SP-12 near-axial exit, SP-13 second exit, L1-A guarded ladder bypass, L1-A vs corridor B (owner direction 2026-10-11)",
+  "status": "NONCANON PROTOTYPE STUDY; no hull, port, closure, seal, load path, mass or budget is approved; sampled-pose sweeps, not motion proofs",
+  "source": {
+   "owner": [
+    "15!A135 RESCUE-004",
+    "15!A136 DIST-004",
+    "43 EVA-063"
+   ],
+   "margin_m": 0.05,
+   "patient_and_equipment": "carrier S: suited casualty on the full-length frame (capsule d 0.857 m, 2.093 m, hum003_routes.CARRIERS); K: litter 2.00 x 0.55 x 0.30 m + kit 0.60 x 0.55 x 0.15 m; a rescuer capsule r 0.25 m at each end (HUM-001/002)"
+  },
+  "code": "src/wayfarer/studies/eva3_exits.py",
+  "rig": {
+   "fit": "SP-12/SP-13 PROTOTYPE fit-out (donning stands, rack, bench, panels; the buddy zone is people, not solid) as obstacles",
+   "bare": "the same rooms with the fit-out removed (geometry limit of the room itself)",
+   "common": "saved vehicle opened, never saved; free space = trunk (to X 107.4, the L1-A extension plus the SP-13 port station) U refuge annulus U rooms U SP-11 chamber interior, minus chamber wall, bulkhead, the SP-11 plug leaf (parked 1.30 m toward -az) and rails; hum003_routes sampled-pose sweep with trunk fixtures from the saved vehicle; control = the built 0.90 m and a 1.10 m radial branch on this rig (not the hum003 rig: values differ by 0.03-0.05 m)"
+  },
+  "sp12_exits": {
+   "fit": {
+    "N0_branch_0.90": {
+     "desc": "radial branch 0.90 m on the airlock axis (X 101.849, 50 deg); the carrier turns aft in the trunk (control)",
+     "kind": "control",
+     "psi_deg": 90.0,
+     "clear_m": 0.9,
+     "legs": {
+      "S": {
+       "least_m": -0.119,
+       "status": "FAIL",
+       "nearest": "FREE_SPACE_WALL",
+       "zone": "T",
+       "head": [
+        101.249,
+        -0.396,
+        -0.029
+       ],
+       "axis": [
+        0.439,
+        0.717,
+        0.541
+       ],
+       "roll": 0.002,
+       "by_zone": {
+        "B": {
+         "least_m": 0.021,
+         "status": "MARGINAL",
+         "nearest": "FREE_SPACE_WALL",
+         "at_m": 5.09
+        },
+        "T": {
+         "least_m": -0.119,
+         "status": "FAIL",
+         "nearest": "FREE_SPACE_WALL",
+         "at_m": 6.49
+        }
+       },
+       "rescuers": {
+        "least_m": -0.127,
+        "status": "FAIL",
+        "nearest": "FREE_SPACE_WALL",
+        "zone": "T"
+       }
+      },
+      "K": {
+       "least_m": -0.005,
+       "status": "FAIL",
+       "nearest": "FREE_SPACE_WALL",
+       "zone": "T",
+       "head": [
+        101.12,
+        -0.346,
+        -0.218
+       ],
+       "axis": [
+        0.454,
+        0.636,
+        0.624
+       ],
+       "roll": 1.893,
+       "by_zone": {
+        "B": {
+         "least_m": 0.079,
+         "status": "PASS",
+         "nearest": "FREE_SPACE_WALL",
+         "at_m": 5.1
+        },
+        "T": {
+         "least_m": -0.005,
+         "status": "FAIL",
+         "nearest": "FREE_SPACE_WALL",
+         "at_m": 6.7
+        }
+       },
+       "rescuers": {
+        "least_m": 0.056,
+        "status": "PASS",
+        "nearest": "FREE_SPACE_WALL",
+        "zone": "T"
+       }
+      }
+     },
+     "closures": {
+      "closures_on_route": [
+       "SP-11 inner plug 1.20 m (existing study)",
+       "SP-12 exit closure"
+      ],
+      "closure_count": 2,
+      "exit_aperture": "0.90 m round",
+      "clear_area_m2": 0.636,
+      "ideal_load_kn_80kpa": 50.9,
+      "ideal_basis": "80 kPa BASELINE x clear aperture area, DIAGNOSTIC (not a seat load, not a rating)",
+      "pocket": "sliding plug leaf radius 0.50 m parked 1.05 m toward +az beside the aperture",
+      "pocket_to_fixtures_m": 0.94,
+      "pocket_nearest": "SP12_DON_STAND_A",
+      "pocket_status": "PASS"
+     },
+     "vehicle": {
+      "hits": [],
+      "inside_hull": true,
+      "status": "CLEAR"
+     },
+     "spine_core_cut_x_m": 0.9,
+     "exit_shell_m2": 0.0,
+     "exit_shell_mass_kg": 0.0
+    },
+    "N0_branch_1.10": {
+     "desc": "radial branch 1.10 m on the airlock axis (X 101.849, 50 deg); the carrier turns aft in the trunk (control)",
+     "kind": "control",
+     "psi_deg": 90.0,
+     "clear_m": 1.1,
+     "legs": {
+      "S": {
+       "least_m": -0.041,
+       "status": "FAIL",
+       "nearest": "FREE_SPACE_WALL",
+       "zone": "T",
+       "head": [
+        101.329,
+        -0.058,
+        -0.072
+       ],
+       "axis": [
+        0.406,
+        0.602,
+        0.688
+       ],
+       "roll": -2.229,
+       "by_zone": {
+        "B": {
+         "least_m": 0.1,
+         "status": "PASS",
+         "nearest": "FREE_SPACE_WALL",
+         "at_m": 2.09
+        },
+        "T": {
+         "least_m": -0.041,
+         "status": "FAIL",
+         "nearest": "FREE_SPACE_WALL",
+         "at_m": 6.69
+        }
+       },
+       "rescuers": {
+        "least_m": -0.022,
+        "status": "FAIL",
+        "nearest": "FREE_SPACE_WALL",
+        "zone": "T"
+       }
+      },
+      "K": {
+       "least_m": 0.044,
+       "status": "MARGINAL",
+       "nearest": "FREE_SPACE_WALL",
+       "zone": "T",
+       "head": [
+        101.178,
+        0.129,
+        -0.32
+       ],
+       "axis": [
+        0.475,
+        0.372,
+        0.797
+       ],
+       "roll": 1.825,
+       "by_zone": {
+        "B": {
+         "least_m": 0.1,
+         "status": "PASS",
+         "nearest": null,
+         "at_m": 2.0
+        },
+        "T": {
+         "least_m": 0.044,
+         "status": "MARGINAL",
+         "nearest": "FREE_SPACE_WALL",
+         "at_m": 6.8
+        }
+       },
+       "rescuers": {
+        "least_m": 0.067,
+        "status": "PASS",
+        "nearest": "FREE_SPACE_WALL",
+        "zone": "T"
+       }
+      }
+     },
+     "closures": {
+      "closures_on_route": [
+       "SP-11 inner plug 1.20 m (existing study)",
+       "SP-12 exit closure"
+      ],
+      "closure_count": 2,
+      "exit_aperture": "1.10 m round",
+      "clear_area_m2": 0.95,
+      "ideal_load_kn_80kpa": 76.0,
+      "ideal_basis": "80 kPa BASELINE x clear aperture area, DIAGNOSTIC (not a seat load, not a rating)",
+      "pocket": "sliding plug leaf radius 0.60 m parked 1.25 m toward +az beside the aperture",
+      "pocket_to_fixtures_m": 0.968,
+      "pocket_nearest": "SP12_DON_STAND_A",
+      "pocket_status": "PASS"
+     },
+     "vehicle": {
+      "hits": [],
+      "inside_hull": true,
+      "status": "CLEAR"
+     },
+     "spine_core_cut_x_m": 1.1,
+     "exit_shell_m2": 0.0,
+     "exit_shell_mass_kg": 0.0
+    },
+    "N1_axial_slot": {
+     "desc": "axial slot hatch 1.10 x 2.50 m in the SP-12 floor over the trunk extension (X 102.40-104.90); the carrier lies along X and is lowered radially, no turn",
+     "kind": "axial",
+     "psi_deg": 0.0,
+     "clear_m": 1.1,
+     "legs": {
+      "S": {
+       "turn-in under the SP-11 bulkhead and the SP-12 floor run": {
+        "least_m": -0.02,
+        "status": "FAIL",
+        "nearest": "FREE_SPACE_WALL",
+        "by_zone": {
+         "H": {
+          "least_m": 0.1,
+          "status": "PASS",
+          "nearest": "FREE_SPACE_WALL",
+          "at_m": 2.09
+         },
+         "F": {
+          "least_m": -0.02,
+          "status": "FAIL",
+          "nearest": "FREE_SPACE_WALL",
+          "at_m": 4.99
+         }
+        },
+        "head": [
+         103.108,
+         0.908,
+         1.123
+        ],
+        "axis": [
+         -0.84,
+         0.332,
+         0.429
+        ],
+        "roll": -1.484
+       },
+       "lowering through the slot (no turn)": {
+        "least_m": -0.07,
+        "status": "FAIL",
+        "nearest": "FREE_SPACE_WALL",
+        "at": "lower r 1.29",
+        "head": [
+         104.63,
+         0.739,
+         1.124
+        ],
+        "axis": [
+         -1.0,
+         -0.02,
+         0.016
+        ],
+        "roll": -3.116
+       },
+       "run aft in the L1-A extension": {
+        "least_m": 0.1,
+        "status": "PASS",
+        "nearest": "FREE_SPACE_WALL",
+        "at": "extension x 104.70",
+        "head": [
+         104.697,
+         0.238,
+         0.283
+        ],
+        "axis": [
+         -1.0,
+         0.0,
+         0.0
+        ],
+        "roll": -2.443
+       },
+       "run aft in the built trunk (HUM-003 fixtures)": {
+        "least_m": 0.1,
+        "status": "PASS",
+        "nearest": "FREE_SPACE_WALL",
+        "at": "built trunk x 104.54",
+        "head": [
+         104.543,
+         0.129,
+         0.153
+        ],
+        "axis": [
+         -1.0,
+         0.0,
+         0.0
+        ],
+        "roll": -2.443
+       },
+       "rescuers: SP-12 floor run": {
+        "least_m": 0.031,
+        "status": "MARGINAL",
+        "nearest": "FREE_SPACE_WALL"
+       },
+       "rescuers: lowering": {
+        "least_m": -0.122,
+        "status": "FAIL",
+        "nearest": "FREE_SPACE_WALL",
+        "at": "lower r 1.80"
+       },
+       "rescuers: aft runs": {
+        "least_m": 0.18,
+        "status": "PASS",
+        "nearest": "FREE_SPACE_WALL",
+        "at": "extension x 104.70"
+       }
+      },
+      "K": {
+       "turn-in under the SP-11 bulkhead and the SP-12 floor run": {
+        "least_m": 0.048,
+        "status": "MARGINAL",
+        "nearest": "FREE_SPACE_WALL",
+        "by_zone": {
+         "H": {
+          "least_m": 0.1,
+          "status": "PASS",
+          "nearest": null,
+          "at_m": 2.0
+         },
+         "F": {
+          "least_m": 0.048,
+          "status": "MARGINAL",
+          "nearest": "FREE_SPACE_WALL",
+          "at_m": 4.9
+         }
+        },
+        "head": [
+         102.598,
+         0.957,
+         1.137
+        ],
+        "axis": [
+         -0.565,
+         0.467,
+         0.68
+        ],
+        "roll": 1.689
+       },
+       "lowering through the slot (no turn)": {
+        "least_m": 0.1,
+        "status": "PASS",
+        "nearest": null,
+        "at": "lower r 1.80",
+        "head": [
+         104.545,
+         1.068,
+         1.478
+        ],
+        "axis": [
+         -1.0,
+         -0.006,
+         0.021
+        ],
+        "roll": -0.301
+       },
+       "run aft in the L1-A extension": {
+        "least_m": 0.1,
+        "status": "PASS",
+        "nearest": null,
+        "at": "extension x 104.65",
+        "head": [
+         104.65,
+         0.238,
+         0.283
+        ],
+        "axis": [
+         -1.0,
+         0.0,
+         0.0
+        ],
+        "roll": -2.443
+       },
+       "run aft in the built trunk (HUM-003 fixtures)": {
+        "least_m": 0.1,
+        "status": "PASS",
+        "nearest": null,
+        "at": "built trunk x 104.45",
+        "head": [
+         104.45,
+         0.129,
+         0.153
+        ],
+        "axis": [
+         -1.0,
+         0.0,
+         0.0
+        ],
+        "roll": -2.443
+       },
+       "rescuers: SP-12 floor run": {
+        "least_m": 0.069,
+        "status": "PASS",
+        "nearest": "FREE_SPACE_WALL"
+       },
+       "rescuers: lowering": {
+        "least_m": -0.069,
+        "status": "FAIL",
+        "nearest": "FREE_SPACE_WALL",
+        "at": "lower r 1.39"
+       },
+       "rescuers: aft runs": {
+        "least_m": 0.18,
+        "status": "PASS",
+        "nearest": "FREE_SPACE_WALL",
+        "at": "extension x 104.65"
+       }
+      }
+     },
+     "closures": {
+      "closures_on_route": [
+       "SP-11 inner plug 1.20 m (existing study)",
+       "SP-12 exit closure"
+      ],
+      "closure_count": 2,
+      "exit_aperture": "1.10 m x 2.50 m",
+      "clear_area_m2": 2.75,
+      "ideal_load_kn_80kpa": 220.0,
+      "ideal_basis": "80 kPa BASELINE x clear aperture area, DIAGNOSTIC (not a seat load, not a rating)",
+      "pocket": "rectangular sliding cover 2.80 x 1.40 m parked 1.50 m toward +az on the SP-12 floor",
+      "pocket_to_fixtures_m": 0.993,
+      "pocket_nearest": "SP12_DON_STAND_A",
+      "pocket_status": "PASS"
+     },
+     "vehicle": {
+      "hits": [],
+      "inside_hull": true,
+      "status": "CLEAR"
+     },
+     "spine_core_cut_x_m": 2.5,
+     "exit_shell_m2": 8.6,
+     "exit_shell_mass_kg": 172.0
+    },
+    "N2_oblique15_1.10": {
+     "desc": "1.10 m round duct at 15 deg to the trunk axis, axis from (X 102.45, r 1.80) to (X 97.11, r 0.37); sunk below the SP-12 floor, landing in the trunk",
+     "kind": "oblique",
+     "psi_deg": 15.0,
+     "clear_m": 1.1,
+     "legs": {
+      "S": {
+       "least_m": -0.089,
+       "status": "FAIL",
+       "nearest": "Trunk_Fit_Frame_12_2",
+       "zone": "D",
+       "head": [
+        98.721,
+        0.625,
+        0.865
+       ],
+       "axis": [
+        0.994,
+        0.069,
+        0.083
+       ],
+       "roll": 1.732,
+       "by_zone": {
+        "H": {
+         "least_m": 0.1,
+         "status": "PASS",
+         "nearest": "FREE_SPACE_WALL",
+         "at_m": 2.09
+        },
+        "D": {
+         "least_m": -0.089,
+         "status": "FAIL",
+         "nearest": "Trunk_Fit_Frame_12_2",
+         "at_m": 7.49
+        },
+        "T": {
+         "least_m": 0.042,
+         "status": "MARGINAL",
+         "nearest": "Trunk_Fit_Frame_11_1",
+         "at_m": 8.79
+        }
+       },
+       "rescuers": {
+        "least_m": -0.082,
+        "status": "FAIL",
+        "nearest": "FREE_SPACE_WALL",
+        "zone": "D"
+       }
+      },
+      "K": {
+       "least_m": -0.011,
+       "status": "FAIL",
+       "nearest": "FREE_SPACE_WALL",
+       "zone": "D",
+       "head": [
+        98.349,
+        0.605,
+        0.783
+       ],
+       "axis": [
+        0.996,
+        0.068,
+        -0.056
+       ],
+       "roll": 2.314,
+       "by_zone": {
+        "H": {
+         "least_m": 0.1,
+         "status": "PASS",
+         "nearest": null,
+         "at_m": 2.0
+        },
+        "D": {
+         "least_m": -0.011,
+         "status": "FAIL",
+         "nearest": "FREE_SPACE_WALL",
+         "at_m": 8.0
+        },
+        "T": {
+         "least_m": 0.091,
+         "status": "PASS",
+         "nearest": "FREE_SPACE_WALL",
+         "at_m": 8.8
+        }
+       },
+       "rescuers": {
+        "least_m": -0.012,
+        "status": "FAIL",
+        "nearest": "FREE_SPACE_WALL",
+        "zone": "D"
+       }
+      }
+     },
+     "closures": {
+      "closures_on_route": [
+       "SP-11 inner plug 1.20 m (existing study)",
+       "SP-12 exit closure"
+      ],
+      "closure_count": 2,
+      "exit_aperture": "1.10 m round",
+      "clear_area_m2": 0.95,
+      "ideal_load_kn_80kpa": 76.0,
+      "ideal_basis": "80 kPa BASELINE x clear aperture area, DIAGNOSTIC (not a seat load, not a rating)",
+      "pocket": "sliding plug leaf radius 0.60 m parked 1.25 m toward +az beside the aperture",
+      "pocket_to_fixtures_m": 0.861,
+      "pocket_nearest": "SP12_DON_STAND_A",
+      "pocket_status": "PASS"
+     },
+     "vehicle": {
+      "hits": [
+       "Crew_Connector_Dock_Primary",
+       "Crew_Store_Port",
+       "Refuge_Inner_Wall",
+       "Refuge_Storm_Shelter",
+       "Storeroom_Hatch_Leaf",
+       "Storeroom_Panel",
+       "Storeroom_Shell"
+      ],
+      "inside_hull": true,
+      "status": "BLOCKED"
+     },
+     "spine_core_cut_x_m": 4.3,
+     "exit_shell_m2": 19.1,
+     "exit_shell_mass_kg": 382.0
+    },
+    "N3_oblique15_1.20": {
+     "desc": "1.20 m round duct at 15 deg to the trunk axis, axis from (X 102.45, r 1.80) to (X 97.11, r 0.37); sunk below the SP-12 floor, landing in the trunk",
+     "kind": "oblique",
+     "psi_deg": 15.0,
+     "clear_m": 1.2,
+     "legs": {
+      "S": {
+       "least_m": -0.062,
+       "status": "FAIL",
+       "nearest": "Trunk_Fit_Frame_12_2",
+       "zone": "D",
+       "head": [
+        98.425,
+        0.625,
+        0.766
+       ],
+       "axis": [
+        0.98,
+        0.045,
+        0.194
+       ],
+       "roll": -0.489,
+       "by_zone": {
+        "H": {
+         "least_m": 0.1,
+         "status": "PASS",
+         "nearest": "FREE_SPACE_WALL",
+         "at_m": 2.09
+        },
+        "D": {
+         "least_m": -0.062,
+         "status": "FAIL",
+         "nearest": "Trunk_Fit_Frame_12_2",
+         "at_m": 7.59
+        },
+        "T": {
+         "least_m": -0.02,
+         "status": "FAIL",
+         "nearest": "Trunk_Fit_Frame_11_1",
+         "at_m": 8.89
+        }
+       },
+       "rescuers": {
+        "least_m": 0.009,
+        "status": "MARGINAL",
+        "nearest": "FREE_SPACE_WALL",
+        "zone": "D"
+       }
+      },
+      "K": {
+       "least_m": 0.038,
+       "status": "MARGINAL",
+       "nearest": "Crew_Trunk_Store_Rail_2_Bracket_2",
+       "zone": "D",
+       "head": [
+        97.803,
+        0.434,
+        0.645
+       ],
+       "axis": [
+        0.974,
+        0.144,
+        0.174
+       ],
+       "roll": 0.755,
+       "by_zone": {
+        "H": {
+         "least_m": 0.1,
+         "status": "PASS",
+         "nearest": null,
+         "at_m": 2.0
+        },
+        "D": {
+         "least_m": 0.038,
+         "status": "MARGINAL",
+         "nearest": "Crew_Trunk_Store_Rail_2_Bracket_2",
+         "at_m": 8.1
+        },
+        "T": {
+         "least_m": 0.091,
+         "status": "PASS",
+         "nearest": "Crew_Trunk_Store_Rail_2",
+         "at_m": 8.8
+        }
+       },
+       "rescuers": {
+        "least_m": 0.03,
+        "status": "MARGINAL",
+        "nearest": "Trunk_Fit_Frame_12_2",
+        "zone": "D"
+       }
+      }
+     },
+     "closures": {
+      "closures_on_route": [
+       "SP-11 inner plug 1.20 m (existing study)",
+       "SP-12 exit closure"
+      ],
+      "closure_count": 2,
+      "exit_aperture": "1.20 m round",
+      "clear_area_m2": 1.131,
+      "ideal_load_kn_80kpa": 90.5,
+      "ideal_basis": "80 kPa BASELINE x clear aperture area, DIAGNOSTIC (not a seat load, not a rating)",
+      "pocket": "sliding plug leaf radius 0.65 m parked 1.35 m toward +az beside the aperture",
+      "pocket_to_fixtures_m": 0.901,
+      "pocket_nearest": "SP12_DON_STAND_A",
+      "pocket_status": "PASS"
+     },
+     "vehicle": {
+      "hits": [
+       "Crew_Connector_Dock_Primary",
+       "Crew_Store_Port",
+       "Refuge_Inner_Wall",
+       "Refuge_Storm_Shelter",
+       "Storeroom_Hatch_Leaf",
+       "Storeroom_Panel",
+       "Storeroom_Shell",
+       "Survival_Reserve_1"
+      ],
+      "inside_hull": true,
+      "status": "BLOCKED"
+     },
+     "spine_core_cut_x_m": 4.48,
+     "exit_shell_m2": 20.8,
+     "exit_shell_mass_kg": 416.0
+    },
+    "_oblique_angle_scan_D1.10": {
+     "10": {
+      "length_m": 8.24,
+      "lands_at_x": 94.34,
+      "vehicle": {
+       "hits": [
+        "Crew_Connector_Dock_Primary",
+        "Crew_Refuge_Port",
+        "Crew_Store_Port",
+        "Refuge_Hoop_Rail_Aft",
+        "Refuge_Hoop_Rail_Aft_Brackets",
+        "Refuge_Hoop_Rail_Fwd",
+        "Refuge_Hoop_Rail_Fwd_Brackets",
+        "Refuge_Inner_Wall",
+        "Refuge_Storm_Shelter",
+        "Storeroom_Hatch_Leaf",
+        "Storeroom_Panel",
+        "Storeroom_Shell",
+        "Survival_Refuge_Triage_Kit"
+       ],
+       "inside_hull": true,
+       "status": "BLOCKED"
+      },
+      "spine_core_cut_x_m": 5.86
+     },
+     "12": {
+      "length_m": 6.88,
+      "lands_at_x": 95.72,
+      "vehicle": {
+       "hits": [
+        "Crew_Connector_Dock_Primary",
+        "Crew_Refuge_Port",
+        "Crew_Store_Port",
+        "Refuge_Hoop_Rail_Fwd",
+        "Refuge_Hoop_Rail_Fwd_Brackets",
+        "Refuge_Inner_Wall",
+        "Refuge_Storm_Shelter",
+        "Storeroom_Hatch_Leaf",
+        "Storeroom_Panel",
+        "Storeroom_Shell"
+       ],
+       "inside_hull": true,
+       "status": "BLOCKED"
+      },
+      "spine_core_cut_x_m": 5.4
+     },
+     "15": {
+      "length_m": 5.53,
+      "lands_at_x": 97.11,
+      "vehicle": {
+       "hits": [
+        "Crew_Connector_Dock_Primary",
+        "Crew_Store_Port",
+        "Refuge_Inner_Wall",
+        "Refuge_Storm_Shelter",
+        "Storeroom_Hatch_Leaf",
+        "Storeroom_Panel",
+        "Storeroom_Shell"
+       ],
+       "inside_hull": true,
+       "status": "BLOCKED"
+      },
+      "spine_core_cut_x_m": 4.3
+     },
+     "20": {
+      "length_m": 4.18,
+      "lands_at_x": 98.52,
+      "vehicle": {
+       "hits": [
+        "Crew_Connector_Dock_Primary",
+        "Crew_Store_Port",
+        "Storeroom_Shell"
+       ],
+       "inside_hull": true,
+       "status": "BLOCKED"
+      },
+      "spine_core_cut_x_m": 3.14
+     },
+     "25": {
+      "length_m": 3.38,
+      "lands_at_x": 99.38,
+      "vehicle": {
+       "hits": [
+        "Crew_Connector_Dock_Primary",
+        "Storeroom_Shell"
+       ],
+       "inside_hull": true,
+       "status": "BLOCKED"
+      },
+      "spine_core_cut_x_m": 2.46
+     },
+     "30": {
+      "length_m": 2.86,
+      "lands_at_x": 99.97,
+      "vehicle": {
+       "hits": [],
+       "inside_hull": true,
+       "status": "CLEAR"
+      },
+      "spine_core_cut_x_m": 2.0
+     },
+     "35": {
+      "length_m": 2.49,
+      "lands_at_x": 100.41,
+      "vehicle": {
+       "hits": [],
+       "inside_hull": true,
+       "status": "CLEAR"
+      },
+      "spine_core_cut_x_m": 1.64
+     },
+     "40": {
+      "length_m": 2.22,
+      "lands_at_x": 100.75,
+      "vehicle": {
+       "hits": [],
+       "inside_hull": true,
+       "status": "CLEAR"
+      },
+      "spine_core_cut_x_m": 1.36
+     }
+    }
+   },
+   "bare": {
+    "N0_branch_0.90": {
+     "desc": "radial branch 0.90 m on the airlock axis (X 101.849, 50 deg); the carrier turns aft in the trunk (control)",
+     "kind": "control",
+     "psi_deg": 90.0,
+     "clear_m": 0.9,
+     "legs": {
+      "S": {
+       "least_m": -0.116,
+       "status": "FAIL",
+       "nearest": "FREE_SPACE_WALL",
+       "zone": "T",
+       "head": [
+        101.566,
+        -0.071,
+        -0.082
+       ],
+       "axis": [
+        0.169,
+        0.664,
+        0.728
+       ],
+       "roll": 1.819,
+       "by_zone": {
+        "B": {
+         "least_m": 0.021,
+         "status": "MARGINAL",
+         "nearest": "FREE_SPACE_WALL",
+         "at_m": 5.09
+        },
+        "T": {
+         "least_m": -0.116,
+         "status": "FAIL",
+         "nearest": "FREE_SPACE_WALL",
+         "at_m": 6.49
+        }
+       },
+       "rescuers": {
+        "least_m": -0.079,
+        "status": "FAIL",
+        "nearest": "FREE_SPACE_WALL",
+        "zone": "T"
+       }
+      },
+      "K": {
+       "least_m": -0.005,
+       "status": "FAIL",
+       "nearest": "FREE_SPACE_WALL",
+       "zone": "T",
+       "head": [
+        101.12,
+        -0.346,
+        -0.218
+       ],
+       "axis": [
+        0.454,
+        0.636,
+        0.624
+       ],
+       "roll": 1.893,
+       "by_zone": {
+        "B": {
+         "least_m": 0.079,
+         "status": "PASS",
+         "nearest": "FREE_SPACE_WALL",
+         "at_m": 5.1
+        },
+        "T": {
+         "least_m": -0.005,
+         "status": "FAIL",
+         "nearest": "FREE_SPACE_WALL",
+         "at_m": 6.7
+        }
+       },
+       "rescuers": {
+        "least_m": 0.056,
+        "status": "PASS",
+        "nearest": "FREE_SPACE_WALL",
+        "zone": "T"
+       }
+      }
+     },
+     "closures": {
+      "closures_on_route": [
+       "SP-11 inner plug 1.20 m (existing study)",
+       "SP-12 exit closure"
+      ],
+      "closure_count": 2,
+      "exit_aperture": "0.90 m round",
+      "clear_area_m2": 0.636,
+      "ideal_load_kn_80kpa": 50.9,
+      "ideal_basis": "80 kPa BASELINE x clear aperture area, DIAGNOSTIC (not a seat load, not a rating)",
+      "pocket": "sliding plug leaf radius 0.50 m parked 1.05 m toward +az beside the aperture",
+      "pocket_to_fixtures_m": 0.94,
+      "pocket_nearest": "SP12_DON_STAND_A",
+      "pocket_status": "PASS"
+     },
+     "vehicle": {
+      "hits": [],
+      "inside_hull": true,
+      "status": "CLEAR"
+     },
+     "spine_core_cut_x_m": 0.9,
+     "exit_shell_m2": 0.0,
+     "exit_shell_mass_kg": 0.0
+    },
+    "N0_branch_1.10": {
+     "desc": "radial branch 1.10 m on the airlock axis (X 101.849, 50 deg); the carrier turns aft in the trunk (control)",
+     "kind": "control",
+     "psi_deg": 90.0,
+     "clear_m": 1.1,
+     "legs": {
+      "S": {
+       "least_m": -0.008,
+       "status": "FAIL",
+       "nearest": "FREE_SPACE_WALL",
+       "zone": "T",
+       "head": [
+        101.288,
+        -0.201,
+        -0.208
+       ],
+       "axis": [
+        0.409,
+        0.618,
+        0.671
+       ],
+       "roll": -0.296,
+       "by_zone": {
+        "B": {
+         "least_m": 0.1,
+         "status": "PASS",
+         "nearest": "FREE_SPACE_WALL",
+         "at_m": 2.09
+        },
+        "T": {
+         "least_m": -0.008,
+         "status": "FAIL",
+         "nearest": "FREE_SPACE_WALL",
+         "at_m": 6.49
+        }
+       },
+       "rescuers": {
+        "least_m": -0.028,
+        "status": "FAIL",
+        "nearest": "FREE_SPACE_WALL",
+        "zone": "T"
+       }
+      },
+      "K": {
+       "least_m": 0.053,
+       "status": "PASS",
+       "nearest": "FREE_SPACE_WALL",
+       "zone": "T",
+       "head": [
+        101.108,
+        -0.228,
+        -0.343
+       ],
+       "axis": [
+        0.484,
+        0.54,
+        0.689
+       ],
+       "roll": 2.324,
+       "by_zone": {
+        "B": {
+         "least_m": 0.1,
+         "status": "PASS",
+         "nearest": null,
+         "at_m": 2.0
+        },
+        "T": {
+         "least_m": 0.053,
+         "status": "PASS",
+         "nearest": "FREE_SPACE_WALL",
+         "at_m": 6.7
+        }
+       },
+       "rescuers": {
+        "least_m": 0.077,
+        "status": "PASS",
+        "nearest": "FREE_SPACE_WALL",
+        "zone": "T"
+       }
+      }
+     },
+     "closures": {
+      "closures_on_route": [
+       "SP-11 inner plug 1.20 m (existing study)",
+       "SP-12 exit closure"
+      ],
+      "closure_count": 2,
+      "exit_aperture": "1.10 m round",
+      "clear_area_m2": 0.95,
+      "ideal_load_kn_80kpa": 76.0,
+      "ideal_basis": "80 kPa BASELINE x clear aperture area, DIAGNOSTIC (not a seat load, not a rating)",
+      "pocket": "sliding plug leaf radius 0.60 m parked 1.25 m toward +az beside the aperture",
+      "pocket_to_fixtures_m": 0.968,
+      "pocket_nearest": "SP12_DON_STAND_A",
+      "pocket_status": "PASS"
+     },
+     "vehicle": {
+      "hits": [],
+      "inside_hull": true,
+      "status": "CLEAR"
+     },
+     "spine_core_cut_x_m": 1.1,
+     "exit_shell_m2": 0.0,
+     "exit_shell_mass_kg": 0.0
+    },
+    "N1_axial_slot": {
+     "desc": "axial slot hatch 1.10 x 2.50 m in the SP-12 floor over the trunk extension (X 102.40-104.90); the carrier lies along X and is lowered radially, no turn",
+     "kind": "axial",
+     "psi_deg": 0.0,
+     "clear_m": 1.1,
+     "legs": {
+      "S": {
+       "turn-in under the SP-11 bulkhead and the SP-12 floor run": {
+        "least_m": -0.003,
+        "status": "FAIL",
+        "nearest": "FREE_SPACE_WALL",
+        "by_zone": {
+         "H": {
+          "least_m": 0.1,
+          "status": "PASS",
+          "nearest": "FREE_SPACE_WALL",
+          "at_m": 2.09
+         },
+         "F": {
+          "least_m": -0.003,
+          "status": "FAIL",
+          "nearest": "FREE_SPACE_WALL",
+          "at_m": 4.99
+         }
+        },
+        "head": [
+         102.886,
+         0.96,
+         0.975
+        ],
+        "axis": [
+         -0.718,
+         0.43,
+         0.546
+        ],
+        "roll": -2.755
+       },
+       "lowering through the slot (no turn)": {
+        "least_m": 0.1,
+        "status": "PASS",
+        "nearest": "FREE_SPACE_WALL",
+        "at": "lower r 1.80",
+        "head": [
+         104.697,
+         1.157,
+         1.379
+        ],
+        "axis": [
+         -1.0,
+         0.0,
+         0.0
+        ],
+        "roll": -2.443
+       },
+       "run aft in the L1-A extension": {
+        "least_m": 0.1,
+        "status": "PASS",
+        "nearest": "FREE_SPACE_WALL",
+        "at": "extension x 104.70",
+        "head": [
+         104.697,
+         0.238,
+         0.283
+        ],
+        "axis": [
+         -1.0,
+         0.0,
+         0.0
+        ],
+        "roll": -2.443
+       },
+       "run aft in the built trunk (HUM-003 fixtures)": {
+        "least_m": 0.1,
+        "status": "PASS",
+        "nearest": "FREE_SPACE_WALL",
+        "at": "built trunk x 104.54",
+        "head": [
+         104.543,
+         0.129,
+         0.153
+        ],
+        "axis": [
+         -1.0,
+         0.0,
+         0.0
+        ],
+        "roll": -2.443
+       },
+       "rescuers: SP-12 floor run": {
+        "least_m": 0.061,
+        "status": "PASS",
+        "nearest": "FREE_SPACE_WALL"
+       },
+       "rescuers: lowering": {
+        "least_m": -0.02,
+        "status": "FAIL",
+        "nearest": "FREE_SPACE_WALL",
+        "at": "lower r 1.80"
+       },
+       "rescuers: aft runs": {
+        "least_m": 0.18,
+        "status": "PASS",
+        "nearest": "FREE_SPACE_WALL",
+        "at": "extension x 104.70"
+       }
+      },
+      "K": {
+       "turn-in under the SP-11 bulkhead and the SP-12 floor run": {
+        "least_m": 0.078,
+        "status": "PASS",
+        "nearest": "FREE_SPACE_WALL",
+        "by_zone": {
+         "H": {
+          "least_m": 0.1,
+          "status": "PASS",
+          "nearest": null,
+          "at_m": 2.0
+         },
+         "F": {
+          "least_m": 0.078,
+          "status": "PASS",
+          "nearest": "FREE_SPACE_WALL",
+          "at_m": 4.9
+         }
+        },
+        "head": [
+         102.974,
+         0.833,
+         1.321
+        ],
+        "axis": [
+         -0.755,
+         0.532,
+         0.384
+        ],
+        "roll": -2.119
+       },
+       "lowering through the slot (no turn)": {
+        "least_m": 0.1,
+        "status": "PASS",
+        "nearest": null,
+        "at": "lower r 1.80",
+        "head": [
+         104.65,
+         1.157,
+         1.379
+        ],
+        "axis": [
+         -1.0,
+         0.0,
+         0.0
+        ],
+        "roll": -2.443
+       },
+       "run aft in the L1-A extension": {
+        "least_m": 0.1,
+        "status": "PASS",
+        "nearest": null,
+        "at": "extension x 104.65",
+        "head": [
+         104.65,
+         0.238,
+         0.283
+        ],
+        "axis": [
+         -1.0,
+         0.0,
+         0.0
+        ],
+        "roll": -2.443
+       },
+       "run aft in the built trunk (HUM-003 fixtures)": {
+        "least_m": 0.1,
+        "status": "PASS",
+        "nearest": null,
+        "at": "built trunk x 104.45",
+        "head": [
+         104.45,
+         0.129,
+         0.153
+        ],
+        "axis": [
+         -1.0,
+         0.0,
+         0.0
+        ],
+        "roll": -2.443
+       },
+       "rescuers: SP-12 floor run": {
+        "least_m": 0.077,
+        "status": "PASS",
+        "nearest": "FREE_SPACE_WALL"
+       },
+       "rescuers: lowering": {
+        "least_m": 0.003,
+        "status": "MARGINAL",
+        "nearest": "FREE_SPACE_WALL",
+        "at": "lower r 1.60"
+       },
+       "rescuers: aft runs": {
+        "least_m": 0.18,
+        "status": "PASS",
+        "nearest": "FREE_SPACE_WALL",
+        "at": "extension x 104.65"
+       }
+      }
+     },
+     "closures": {
+      "closures_on_route": [
+       "SP-11 inner plug 1.20 m (existing study)",
+       "SP-12 exit closure"
+      ],
+      "closure_count": 2,
+      "exit_aperture": "1.10 m x 2.50 m",
+      "clear_area_m2": 2.75,
+      "ideal_load_kn_80kpa": 220.0,
+      "ideal_basis": "80 kPa BASELINE x clear aperture area, DIAGNOSTIC (not a seat load, not a rating)",
+      "pocket": "rectangular sliding cover 2.80 x 1.40 m parked 1.50 m toward +az on the SP-12 floor",
+      "pocket_to_fixtures_m": 0.993,
+      "pocket_nearest": "SP12_DON_STAND_A",
+      "pocket_status": "PASS"
+     },
+     "vehicle": {
+      "hits": [],
+      "inside_hull": true,
+      "status": "CLEAR"
+     },
+     "spine_core_cut_x_m": 2.5,
+     "exit_shell_m2": 8.6,
+     "exit_shell_mass_kg": 172.0
+    },
+    "N2_oblique15_1.10": {
+     "desc": "1.10 m round duct at 15 deg to the trunk axis, axis from (X 102.45, r 1.80) to (X 97.11, r 0.37); sunk below the SP-12 floor, landing in the trunk",
+     "kind": "oblique",
+     "psi_deg": 15.0,
+     "clear_m": 1.1,
+     "legs": {
+      "S": {
+       "least_m": -0.082,
+       "status": "FAIL",
+       "nearest": "FREE_SPACE_WALL",
+       "zone": "D",
+       "head": [
+        98.763,
+        0.534,
+        0.89
+       ],
+       "axis": [
+        0.962,
+        0.269,
+        0.042
+       ],
+       "roll": -1.06,
+       "by_zone": {
+        "H": {
+         "least_m": 0.1,
+         "status": "PASS",
+         "nearest": "FREE_SPACE_WALL",
+         "at_m": 2.09
+        },
+        "D": {
+         "least_m": -0.082,
+         "status": "FAIL",
+         "nearest": "FREE_SPACE_WALL",
+         "at_m": 7.39
+        },
+        "T": {
+         "least_m": 0.038,
+         "status": "MARGINAL",
+         "nearest": "Crew_Trunk_Store_Rail_1",
+         "at_m": 8.79
+        }
+       },
+       "rescuers": {
+        "least_m": 0.018,
+        "status": "MARGINAL",
+        "nearest": "Trunk_Fit_Frame_12_2",
+        "zone": "D"
+       }
+      },
+      "K": {
+       "least_m": 0.014,
+       "status": "MARGINAL",
+       "nearest": "Trunk_Fit_Frame_12_2",
+       "zone": "D",
+       "head": [
+        97.944,
+        0.369,
+        0.716
+       ],
+       "axis": [
+        0.964,
+        0.186,
+        0.191
+       ],
+       "roll": -0.217,
+       "by_zone": {
+        "H": {
+         "least_m": 0.1,
+         "status": "PASS",
+         "nearest": null,
+         "at_m": 2.0
+        },
+        "D": {
+         "least_m": 0.014,
+         "status": "MARGINAL",
+         "nearest": "Trunk_Fit_Frame_12_2",
+         "at_m": 8.0
+        },
+        "T": {
+         "least_m": 0.1,
+         "status": "PASS",
+         "nearest": null,
+         "at_m": 8.8
+        }
+       },
+       "rescuers": {
+        "least_m": -0.009,
+        "status": "FAIL",
+        "nearest": "FREE_SPACE_WALL",
+        "zone": "D"
+       }
+      }
+     },
+     "closures": {
+      "closures_on_route": [
+       "SP-11 inner plug 1.20 m (existing study)",
+       "SP-12 exit closure"
+      ],
+      "closure_count": 2,
+      "exit_aperture": "1.10 m round",
+      "clear_area_m2": 0.95,
+      "ideal_load_kn_80kpa": 76.0,
+      "ideal_basis": "80 kPa BASELINE x clear aperture area, DIAGNOSTIC (not a seat load, not a rating)",
+      "pocket": "sliding plug leaf radius 0.60 m parked 1.25 m toward +az beside the aperture",
+      "pocket_to_fixtures_m": 0.861,
+      "pocket_nearest": "SP12_DON_STAND_A",
+      "pocket_status": "PASS"
+     },
+     "vehicle": {
+      "hits": [
+       "Crew_Connector_Dock_Primary",
+       "Crew_Store_Port",
+       "Refuge_Inner_Wall",
+       "Refuge_Storm_Shelter",
+       "Storeroom_Hatch_Leaf",
+       "Storeroom_Panel",
+       "Storeroom_Shell"
+      ],
+      "inside_hull": true,
+      "status": "BLOCKED"
+     },
+     "spine_core_cut_x_m": 4.3,
+     "exit_shell_m2": 19.1,
+     "exit_shell_mass_kg": 382.0
+    },
+    "N3_oblique15_1.20": {
+     "desc": "1.20 m round duct at 15 deg to the trunk axis, axis from (X 102.45, r 1.80) to (X 97.11, r 0.37); sunk below the SP-12 floor, landing in the trunk",
+     "kind": "oblique",
+     "psi_deg": 15.0,
+     "clear_m": 1.2,
+     "legs": {
+      "S": {
+       "least_m": -0.065,
+       "status": "FAIL",
+       "nearest": "FREE_SPACE_WALL",
+       "zone": "D",
+       "head": [
+        98.028,
+        0.383,
+        0.639
+       ],
+       "axis": [
+        0.953,
+        0.189,
+        0.239
+       ],
+       "roll": 1.914,
+       "by_zone": {
+        "H": {
+         "least_m": 0.1,
+         "status": "PASS",
+         "nearest": "FREE_SPACE_WALL",
+         "at_m": 2.09
+        },
+        "D": {
+         "least_m": -0.065,
+         "status": "FAIL",
+         "nearest": "FREE_SPACE_WALL",
+         "at_m": 7.99
+        },
+        "T": {
+         "least_m": 0.027,
+         "status": "MARGINAL",
+         "nearest": "Trunk_Fit_Frame_11_1",
+         "at_m": 8.79
+        }
+       },
+       "rescuers": {
+        "least_m": -0.003,
+        "status": "FAIL",
+        "nearest": "FREE_SPACE_WALL",
+        "zone": "D"
+       }
+      },
+      "K": {
+       "least_m": 0.046,
+       "status": "MARGINAL",
+       "nearest": "Trunk_Fit_Frame_12_2",
+       "zone": "D",
+       "head": [
+        98.277,
+        0.492,
+        0.764
+       ],
+       "axis": [
+        0.972,
+        0.214,
+        0.1
+       ],
+       "roll": -0.046,
+       "by_zone": {
+        "H": {
+         "least_m": 0.1,
+         "status": "PASS",
+         "nearest": null,
+         "at_m": 2.0
+        },
+        "D": {
+         "least_m": 0.046,
+         "status": "MARGINAL",
+         "nearest": "Trunk_Fit_Frame_12_2",
+         "at_m": 8.0
+        },
+        "T": {
+         "least_m": 0.1,
+         "status": "PASS",
+         "nearest": null,
+         "at_m": 8.8
+        }
+       },
+       "rescuers": {
+        "least_m": -0.02,
+        "status": "FAIL",
+        "nearest": "Crew_Trunk_Store_Rail_2",
+        "zone": "D"
+       }
+      }
+     },
+     "closures": {
+      "closures_on_route": [
+       "SP-11 inner plug 1.20 m (existing study)",
+       "SP-12 exit closure"
+      ],
+      "closure_count": 2,
+      "exit_aperture": "1.20 m round",
+      "clear_area_m2": 1.131,
+      "ideal_load_kn_80kpa": 90.5,
+      "ideal_basis": "80 kPa BASELINE x clear aperture area, DIAGNOSTIC (not a seat load, not a rating)",
+      "pocket": "sliding plug leaf radius 0.65 m parked 1.35 m toward +az beside the aperture",
+      "pocket_to_fixtures_m": 0.901,
+      "pocket_nearest": "SP12_DON_STAND_A",
+      "pocket_status": "PASS"
+     },
+     "vehicle": {
+      "hits": [
+       "Crew_Connector_Dock_Primary",
+       "Crew_Store_Port",
+       "Refuge_Inner_Wall",
+       "Refuge_Storm_Shelter",
+       "Storeroom_Hatch_Leaf",
+       "Storeroom_Panel",
+       "Storeroom_Shell",
+       "Survival_Reserve_1"
+      ],
+      "inside_hull": true,
+      "status": "BLOCKED"
+     },
+     "spine_core_cut_x_m": 4.48,
+     "exit_shell_m2": 20.8,
+     "exit_shell_mass_kg": 416.0
+    },
+    "_oblique_angle_scan_D1.10": {
+     "10": {
+      "length_m": 8.24,
+      "lands_at_x": 94.34,
+      "vehicle": {
+       "hits": [
+        "Crew_Connector_Dock_Primary",
+        "Crew_Refuge_Port",
+        "Crew_Store_Port",
+        "Refuge_Hoop_Rail_Aft",
+        "Refuge_Hoop_Rail_Aft_Brackets",
+        "Refuge_Hoop_Rail_Fwd",
+        "Refuge_Hoop_Rail_Fwd_Brackets",
+        "Refuge_Inner_Wall",
+        "Refuge_Storm_Shelter",
+        "Storeroom_Hatch_Leaf",
+        "Storeroom_Panel",
+        "Storeroom_Shell",
+        "Survival_Refuge_Triage_Kit"
+       ],
+       "inside_hull": true,
+       "status": "BLOCKED"
+      },
+      "spine_core_cut_x_m": 5.86
+     },
+     "12": {
+      "length_m": 6.88,
+      "lands_at_x": 95.72,
+      "vehicle": {
+       "hits": [
+        "Crew_Connector_Dock_Primary",
+        "Crew_Refuge_Port",
+        "Crew_Store_Port",
+        "Refuge_Hoop_Rail_Fwd",
+        "Refuge_Hoop_Rail_Fwd_Brackets",
+        "Refuge_Inner_Wall",
+        "Refuge_Storm_Shelter",
+        "Storeroom_Hatch_Leaf",
+        "Storeroom_Panel",
+        "Storeroom_Shell"
+       ],
+       "inside_hull": true,
+       "status": "BLOCKED"
+      },
+      "spine_core_cut_x_m": 5.4
+     },
+     "15": {
+      "length_m": 5.53,
+      "lands_at_x": 97.11,
+      "vehicle": {
+       "hits": [
+        "Crew_Connector_Dock_Primary",
+        "Crew_Store_Port",
+        "Refuge_Inner_Wall",
+        "Refuge_Storm_Shelter",
+        "Storeroom_Hatch_Leaf",
+        "Storeroom_Panel",
+        "Storeroom_Shell"
+       ],
+       "inside_hull": true,
+       "status": "BLOCKED"
+      },
+      "spine_core_cut_x_m": 4.3
+     },
+     "20": {
+      "length_m": 4.18,
+      "lands_at_x": 98.52,
+      "vehicle": {
+       "hits": [
+        "Crew_Connector_Dock_Primary",
+        "Crew_Store_Port",
+        "Storeroom_Shell"
+       ],
+       "inside_hull": true,
+       "status": "BLOCKED"
+      },
+      "spine_core_cut_x_m": 3.14
+     },
+     "25": {
+      "length_m": 3.38,
+      "lands_at_x": 99.38,
+      "vehicle": {
+       "hits": [
+        "Crew_Connector_Dock_Primary",
+        "Storeroom_Shell"
+       ],
+       "inside_hull": true,
+       "status": "BLOCKED"
+      },
+      "spine_core_cut_x_m": 2.46
+     },
+     "30": {
+      "length_m": 2.86,
+      "lands_at_x": 99.97,
+      "vehicle": {
+       "hits": [],
+       "inside_hull": true,
+       "status": "CLEAR"
+      },
+      "spine_core_cut_x_m": 2.0
+     },
+     "35": {
+      "length_m": 2.49,
+      "lands_at_x": 100.41,
+      "vehicle": {
+       "hits": [],
+       "inside_hull": true,
+       "status": "CLEAR"
+      },
+      "spine_core_cut_x_m": 1.64
+     },
+     "40": {
+      "length_m": 2.22,
+      "lands_at_x": 100.75,
+      "vehicle": {
+       "hits": [],
+       "inside_hull": true,
+       "status": "CLEAR"
+      },
+      "spine_core_cut_x_m": 1.36
+     }
+    }
+   }
+  },
+  "sp13_exit": {
+   "fit": {
+    "D0.90_az35": {
+     "clear_m": 0.9,
+     "az_deg": 35,
+     "x": 106.025,
+     "S": {
+      "least_m": -0.259,
+      "status": "FAIL",
+      "nearest": "FREE_SPACE_WALL",
+      "zone": "B",
+      "by_zone": {
+       "B": {
+        "least_m": -0.259,
+        "status": "FAIL",
+        "nearest": "FREE_SPACE_WALL",
+        "at_m": 3.09
+       },
+       "T": {
+        "least_m": -0.25,
+        "status": "FAIL",
+        "nearest": "FREE_SPACE_WALL",
+        "at_m": 3.59
+       }
+      },
+      "rescuers": {
+       "least_m": -0.198,
+       "status": "FAIL"
+      }
+     },
+     "K": {
+      "least_m": -0.103,
+      "status": "FAIL",
+      "nearest": "FREE_SPACE_WALL",
+      "zone": "T",
+      "by_zone": {
+       "B": {
+        "least_m": -0.091,
+        "status": "FAIL",
+        "nearest": "FREE_SPACE_WALL",
+        "at_m": 2.6
+       },
+       "T": {
+        "least_m": -0.103,
+        "status": "FAIL",
+        "nearest": "FREE_SPACE_WALL",
+        "at_m": 3.9
+       }
+      },
+      "rescuers": {
+       "least_m": -0.156,
+       "status": "FAIL"
+      }
+     },
+     "unsuited": {
+      "least_m": -0.157,
+      "status": "FAIL",
+      "nearest": "FREE_SPACE_WALL",
+      "by_zone": {
+       "B": {
+        "least_m": -0.157,
+        "status": "FAIL",
+        "nearest": "FREE_SPACE_WALL",
+        "at_m": 2.95
+       },
+       "T": {
+        "least_m": 0.079,
+        "status": "PASS",
+        "nearest": "FREE_SPACE_WALL",
+        "at_m": 3.45
+       }
+      },
+      "envelope": "capsule r 0.35 m (the 0.70 m route-control key), 1.25 m long"
+     },
+     "port_margin_to_0.70_m": 0.2
+    },
+    "D0.90_az45": {
+     "clear_m": 0.9,
+     "az_deg": 45,
+     "x": 106.025,
+     "S": {
+      "least_m": -0.325,
+      "status": "FAIL",
+      "nearest": "FREE_SPACE_WALL",
+      "zone": "B",
+      "by_zone": {
+       "B": {
+        "least_m": -0.325,
+        "status": "FAIL",
+        "nearest": "FREE_SPACE_WALL",
+        "at_m": 3.09
+       },
+       "T": {
+        "least_m": -0.32,
+        "status": "FAIL",
+        "nearest": "FREE_SPACE_WALL",
+        "at_m": 3.49
+       }
+      },
+      "rescuers": {
+       "least_m": -0.192,
+       "status": "FAIL"
+      }
+     },
+     "K": {
+      "least_m": -0.14,
+      "status": "FAIL",
+      "nearest": "FREE_SPACE_WALL",
+      "zone": "B",
+      "by_zone": {
+       "B": {
+        "least_m": -0.14,
+        "status": "FAIL",
+        "nearest": "FREE_SPACE_WALL",
+        "at_m": 2.7
+       },
+       "T": {
+        "least_m": -0.14,
+        "status": "FAIL",
+        "nearest": "FREE_SPACE_WALL",
+        "at_m": 3.4
+       }
+      },
+      "rescuers": {
+       "least_m": -0.139,
+       "status": "FAIL"
+      }
+     },
+     "unsuited": {
+      "least_m": -0.226,
+      "status": "FAIL",
+      "nearest": "FREE_SPACE_WALL",
+      "by_zone": {
+       "B": {
+        "least_m": -0.226,
+        "status": "FAIL",
+        "nearest": "FREE_SPACE_WALL",
+        "at_m": 2.75
+       },
+       "T": {
+        "least_m": 0.088,
+        "status": "PASS",
+        "nearest": "FREE_SPACE_WALL",
+        "at_m": 3.45
+       }
+      },
+      "envelope": "capsule r 0.35 m (the 0.70 m route-control key), 1.25 m long"
+     },
+     "port_margin_to_0.70_m": 0.2
+    },
+    "D0.90_az55": {
+     "clear_m": 0.9,
+     "az_deg": 55,
+     "x": 106.025,
+     "S": {
+      "least_m": -0.345,
+      "status": "FAIL",
+      "nearest": "FREE_SPACE_WALL",
+      "zone": "B",
+      "by_zone": {
+       "B": {
+        "least_m": -0.345,
+        "status": "FAIL",
+        "nearest": "FREE_SPACE_WALL",
+        "at_m": 2.99
+       },
+       "T": {
+        "least_m": -0.341,
+        "status": "FAIL",
+        "nearest": "FREE_SPACE_WALL",
+        "at_m": 3.39
+       }
+      },
+      "rescuers": {
+       "least_m": -0.322,
+       "status": "FAIL"
+      }
+     },
+     "K": {
+      "least_m": -0.14,
+      "status": "FAIL",
+      "nearest": "FREE_SPACE_WALL",
+      "zone": "B",
+      "by_zone": {
+       "B": {
+        "least_m": -0.14,
+        "status": "FAIL",
+        "nearest": "FREE_SPACE_WALL",
+        "at_m": 2.4
+       },
+       "T": {
+        "least_m": -0.14,
+        "status": "FAIL",
+        "nearest": "FREE_SPACE_WALL",
+        "at_m": 3.4
+       }
+      },
+      "rescuers": {
+       "least_m": -0.191,
+       "status": "FAIL"
+      }
+     },
+     "unsuited": {
+      "least_m": -0.247,
+      "status": "FAIL",
+      "nearest": "FREE_SPACE_WALL",
+      "by_zone": {
+       "B": {
+        "least_m": -0.247,
+        "status": "FAIL",
+        "nearest": "FREE_SPACE_WALL",
+        "at_m": 2.45
+       },
+       "T": {
+        "least_m": 0.1,
+        "status": "PASS",
+        "nearest": "FREE_SPACE_WALL",
+        "at_m": 3.45
+       }
+      },
+      "envelope": "capsule r 0.35 m (the 0.70 m route-control key), 1.25 m long"
+     },
+     "port_margin_to_0.70_m": 0.2
+    },
+    "D1.10_az35": {
+     "clear_m": 1.1,
+     "az_deg": 35,
+     "x": 106.025,
+     "S": {
+      "least_m": -0.235,
+      "status": "FAIL",
+      "nearest": "FREE_SPACE_WALL",
+      "zone": "B",
+      "by_zone": {
+       "B": {
+        "least_m": -0.235,
+        "status": "FAIL",
+        "nearest": "FREE_SPACE_WALL",
+        "at_m": 2.79
+       },
+       "T": {
+        "least_m": -0.231,
+        "status": "FAIL",
+        "nearest": "FREE_SPACE_WALL",
+        "at_m": 3.49
+       }
+      },
+      "rescuers": {
+       "least_m": -0.193,
+       "status": "FAIL"
+      }
+     },
+     "K": {
+      "least_m": -0.082,
+      "status": "FAIL",
+      "nearest": "FREE_SPACE_WALL",
+      "zone": "T",
+      "by_zone": {
+       "B": {
+        "least_m": -0.056,
+        "status": "FAIL",
+        "nearest": "FREE_SPACE_WALL",
+        "at_m": 3.1
+       },
+       "T": {
+        "least_m": -0.082,
+        "status": "FAIL",
+        "nearest": "FREE_SPACE_WALL",
+        "at_m": 4.1
+       }
+      },
+      "rescuers": {
+       "least_m": -0.065,
+       "status": "FAIL"
+      }
+     },
+     "unsuited": {
+      "least_m": -0.119,
+      "status": "FAIL",
+      "nearest": "FREE_SPACE_WALL",
+      "by_zone": {
+       "B": {
+        "least_m": -0.119,
+        "status": "FAIL",
+        "nearest": "FREE_SPACE_WALL",
+        "at_m": 2.75
+       },
+       "T": {
+        "least_m": 0.1,
+        "status": "PASS",
+        "nearest": "FREE_SPACE_WALL",
+        "at_m": 3.45
+       }
+      },
+      "envelope": "capsule r 0.35 m (the 0.70 m route-control key), 1.25 m long"
+     },
+     "port_margin_to_0.70_m": 0.4
+    },
+    "D1.10_az45": {
+     "clear_m": 1.1,
+     "az_deg": 45,
+     "x": 106.025,
+     "S": {
+      "least_m": -0.329,
+      "status": "FAIL",
+      "nearest": "FREE_SPACE_WALL",
+      "zone": "B",
+      "by_zone": {
+       "B": {
+        "least_m": -0.329,
+        "status": "FAIL",
+        "nearest": "FREE_SPACE_WALL",
+        "at_m": 2.99
+       },
+       "T": {
+        "least_m": -0.271,
+        "status": "FAIL",
+        "nearest": "FREE_SPACE_WALL",
+        "at_m": 3.39
+       }
+      },
+      "rescuers": {
+       "least_m": -0.291,
+       "status": "FAIL"
+      }
+     },
+     "K": {
+      "least_m": -0.14,
+      "status": "FAIL",
+      "nearest": "FREE_SPACE_WALL",
+      "zone": "B",
+      "by_zone": {
+       "B": {
+        "least_m": -0.14,
+        "status": "FAIL",
+        "nearest": "FREE_SPACE_WALL",
+        "at_m": 2.5
+       },
+       "T": {
+        "least_m": -0.14,
+        "status": "FAIL",
+        "nearest": "FREE_SPACE_WALL",
+        "at_m": 3.5
+       }
+      },
+      "rescuers": {
+       "least_m": -0.124,
+       "status": "FAIL"
+      }
+     },
+     "unsuited": {
+      "least_m": -0.175,
+      "status": "FAIL",
+      "nearest": "FREE_SPACE_WALL",
+      "by_zone": {
+       "B": {
+        "least_m": -0.175,
+        "status": "FAIL",
+        "nearest": "FREE_SPACE_WALL",
+        "at_m": 2.85
+       },
+       "T": {
+        "least_m": 0.1,
+        "status": "PASS",
+        "nearest": "FREE_SPACE_WALL",
+        "at_m": 3.45
+       }
+      },
+      "envelope": "capsule r 0.35 m (the 0.70 m route-control key), 1.25 m long"
+     },
+     "port_margin_to_0.70_m": 0.4
+    },
+    "D1.10_az55": {
+     "clear_m": 1.1,
+     "az_deg": 55,
+     "x": 106.025,
+     "S": {
+      "least_m": -0.332,
+      "status": "FAIL",
+      "nearest": "FREE_SPACE_WALL",
+      "zone": "B",
+      "by_zone": {
+       "B": {
+        "least_m": -0.332,
+        "status": "FAIL",
+        "nearest": "FREE_SPACE_WALL",
+        "at_m": 3.29
+       },
+       "T": {
+        "least_m": -0.314,
+        "status": "FAIL",
+        "nearest": "FREE_SPACE_WALL",
+        "at_m": 3.49
+       }
+      },
+      "rescuers": {
+       "least_m": -0.312,
+       "status": "FAIL"
+      }
+     },
+     "K": {
+      "least_m": -0.14,
+      "status": "FAIL",
+      "nearest": "FREE_SPACE_WALL",
+      "zone": "B",
+      "by_zone": {
+       "B": {
+        "least_m": -0.14,
+        "status": "FAIL",
+        "nearest": "FREE_SPACE_WALL",
+        "at_m": 2.4
+       },
+       "T": {
+        "least_m": -0.14,
+        "status": "FAIL",
+        "nearest": "FREE_SPACE_WALL",
+        "at_m": 3.4
+       }
+      },
+      "rescuers": {
+       "least_m": -0.179,
+       "status": "FAIL"
+      }
+     },
+     "unsuited": {
+      "least_m": -0.24,
+      "status": "FAIL",
+      "nearest": "FREE_SPACE_WALL",
+      "by_zone": {
+       "B": {
+        "least_m": -0.24,
+        "status": "FAIL",
+        "nearest": "FREE_SPACE_WALL",
+        "at_m": 2.35
+       },
+       "T": {
+        "least_m": 0.1,
+        "status": "PASS",
+        "nearest": "FREE_SPACE_WALL",
+        "at_m": 3.45
+       }
+      },
+      "envelope": "capsule r 0.35 m (the 0.70 m route-control key), 1.25 m long"
+     },
+     "port_margin_to_0.70_m": 0.4
+    },
+    "_closure": {
+     "count_on_route": 1,
+     "closure": "SP-13 port hatch from the trunk extension, seats from the trunk side (a SP-13 fire/leak holds it shut)",
+     "ideal_load_kn_80kpa": {
+      "0.90": 50.9,
+      "1.10": 76.0
+     },
+     "seat_load_kn_leaf_1_10": 90.5
+    },
+    "_independence": {
+     "exits": {
+      "SP12": [
+       "SP-11 inner plug 1.20 m (chamber side only)",
+       "SP-12 exit closure (N1 slot / N2-N3 duct / N0 branch) between SP-12 and the trunk extension"
+      ],
+      "SP13": [
+       "SP-13 port hatch between SP-13 and the trunk extension"
+      ]
+     },
+     "shared_closures": [],
+     "shared_volumes": [
+      "trunk extension X 102.45-107.4 (destination of both exits; a shirt-sleeve volume, not a SP-12 or SP-13 volume)"
+     ],
+     "not_shared": [
+      "SP-12/SP-13 door (stays closed on the SP-13 exit; neither exit needs it)",
+      "SP-12 ventilation loop and SP-13 ventilation loop (own, isolatable per topology)"
+     ],
+     "pressure_isolation_points": [
+      "SP-13 port hatch (seats from the trunk side)",
+      "SP-12 exit closure (seats from the trunk side in the study; N1 slot cover is a large sliding cover, side OPEN)",
+      "SP-12/SP-13 door (seats from SP-12)",
+      "district hatch at the trunk end (seats from the trunk side)"
+     ],
+     "fire_heat_points": [
+      "SP-13 hosts battery charging and drying (the thermal/fire load of the pair); its port hatch and the SP-12/13 door isolate it from both the trunk and SP-12",
+      "SP-12 hosts O2 preparation (oxidizer-rich); its closure and the SP-11 inner plug isolate it",
+      "no common closure: a fire or leak in one room leaves the other exit available, provided the trunk extension itself stays habitable (shared volume, OPEN)"
+     ],
+     "status": "PROTOTYPE: independence holds for closures; the destination volume is shared, so a trunk-extension event takes both"
+    }
+   },
+   "bare": {
+    "D0.90_az35": {
+     "clear_m": 0.9,
+     "az_deg": 35,
+     "x": 106.025,
+     "S": {
+      "least_m": -0.082,
+      "status": "FAIL",
+      "nearest": "FREE_SPACE_WALL",
+      "zone": "T",
+      "by_zone": {
+       "B": {
+        "least_m": 0.011,
+        "status": "MARGINAL",
+        "nearest": "FREE_SPACE_WALL",
+        "at_m": 3.29
+       },
+       "T": {
+        "least_m": -0.082,
+        "status": "FAIL",
+        "nearest": "FREE_SPACE_WALL",
+        "at_m": 4.19
+       }
+      },
+      "rescuers": {
+       "least_m": -0.195,
+       "status": "FAIL"
+      }
+     },
+     "K": {
+      "least_m": -0.024,
+      "status": "FAIL",
+      "nearest": "FREE_SPACE_WALL",
+      "zone": "T",
+      "by_zone": {
+       "B": {
+        "least_m": 0.094,
+        "status": "PASS",
+        "nearest": "FREE_SPACE_WALL",
+        "at_m": 3.3
+       },
+       "T": {
+        "least_m": -0.024,
+        "status": "FAIL",
+        "nearest": "FREE_SPACE_WALL",
+        "at_m": 4.4
+       }
+      },
+      "rescuers": {
+       "least_m": -0.007,
+       "status": "FAIL"
+      }
+     },
+     "unsuited": {
+      "least_m": 0.083,
+      "status": "PASS",
+      "nearest": "FREE_SPACE_WALL",
+      "by_zone": {
+       "B": {
+        "least_m": 0.083,
+        "status": "PASS",
+        "nearest": "FREE_SPACE_WALL",
+        "at_m": 3.35
+       },
+       "T": {
+        "least_m": 0.093,
+        "status": "PASS",
+        "nearest": "FREE_SPACE_WALL",
+        "at_m": 3.45
+       }
+      },
+      "envelope": "capsule r 0.35 m (the 0.70 m route-control key), 1.25 m long"
+     },
+     "port_margin_to_0.70_m": 0.2
+    },
+    "D0.90_az45": {
+     "clear_m": 0.9,
+     "az_deg": 45,
+     "x": 106.025,
+     "S": {
+      "least_m": -0.11,
+      "status": "FAIL",
+      "nearest": "FREE_SPACE_WALL",
+      "zone": "T",
+      "by_zone": {
+       "B": {
+        "least_m": 0.009,
+        "status": "MARGINAL",
+        "nearest": "FREE_SPACE_WALL",
+        "at_m": 3.29
+       },
+       "T": {
+        "least_m": -0.11,
+        "status": "FAIL",
+        "nearest": "FREE_SPACE_WALL",
+        "at_m": 4.19
+       }
+      },
+      "rescuers": {
+       "least_m": -0.19,
+       "status": "FAIL"
+      }
+     },
+     "K": {
+      "least_m": -0.026,
+      "status": "FAIL",
+      "nearest": "FREE_SPACE_WALL",
+      "zone": "T",
+      "by_zone": {
+       "B": {
+        "least_m": 0.091,
+        "status": "PASS",
+        "nearest": "FREE_SPACE_WALL",
+        "at_m": 3.3
+       },
+       "T": {
+        "least_m": -0.026,
+        "status": "FAIL",
+        "nearest": "FREE_SPACE_WALL",
+        "at_m": 4.3
+       }
+      },
+      "rescuers": {
+       "least_m": -0.041,
+       "status": "FAIL"
+      }
+     },
+     "unsuited": {
+      "least_m": 0.084,
+      "status": "PASS",
+      "nearest": "FREE_SPACE_WALL",
+      "by_zone": {
+       "B": {
+        "least_m": 0.089,
+        "status": "PASS",
+        "nearest": "FREE_SPACE_WALL",
+        "at_m": 3.35
+       },
+       "T": {
+        "least_m": 0.084,
+        "status": "PASS",
+        "nearest": "FREE_SPACE_WALL",
+        "at_m": 3.45
+       }
+      },
+      "envelope": "capsule r 0.35 m (the 0.70 m route-control key), 1.25 m long"
+     },
+     "port_margin_to_0.70_m": 0.2
+    },
+    "D0.90_az55": {
+     "clear_m": 0.9,
+     "az_deg": 55,
+     "x": 106.025,
+     "S": {
+      "least_m": -0.112,
+      "status": "FAIL",
+      "nearest": "FREE_SPACE_WALL",
+      "zone": "T",
+      "by_zone": {
+       "B": {
+        "least_m": 0.011,
+        "status": "MARGINAL",
+        "nearest": "FREE_SPACE_WALL",
+        "at_m": 3.29
+       },
+       "T": {
+        "least_m": -0.112,
+        "status": "FAIL",
+        "nearest": "FREE_SPACE_WALL",
+        "at_m": 4.39
+       }
+      },
+      "rescuers": {
+       "least_m": -0.068,
+       "status": "FAIL"
+      }
+     },
+     "K": {
+      "least_m": -0.013,
+      "status": "FAIL",
+      "nearest": "FREE_SPACE_WALL",
+      "zone": "T",
+      "by_zone": {
+       "B": {
+        "least_m": 0.083,
+        "status": "PASS",
+        "nearest": "FREE_SPACE_WALL",
+        "at_m": 3.1
+       },
+       "T": {
+        "least_m": -0.013,
+        "status": "FAIL",
+        "nearest": "FREE_SPACE_WALL",
+        "at_m": 4.4
+       }
+      },
+      "rescuers": {
+       "least_m": -0.052,
+       "status": "FAIL"
+      }
+     },
+     "unsuited": {
+      "least_m": 0.083,
+      "status": "PASS",
+      "nearest": "FREE_SPACE_WALL",
+      "by_zone": {
+       "B": {
+        "least_m": 0.083,
+        "status": "PASS",
+        "nearest": "FREE_SPACE_WALL",
+        "at_m": 3.35
+       },
+       "T": {
+        "least_m": 0.095,
+        "status": "PASS",
+        "nearest": "FREE_SPACE_WALL",
+        "at_m": 3.45
+       }
+      },
+      "envelope": "capsule r 0.35 m (the 0.70 m route-control key), 1.25 m long"
+     },
+     "port_margin_to_0.70_m": 0.2
+    },
+    "D1.10_az35": {
+     "clear_m": 1.1,
+     "az_deg": 35,
+     "x": 106.025,
+     "S": {
+      "least_m": 0.007,
+      "status": "MARGINAL",
+      "nearest": "FREE_SPACE_WALL",
+      "zone": "T",
+      "by_zone": {
+       "B": {
+        "least_m": 0.1,
+        "status": "PASS",
+        "nearest": "FREE_SPACE_WALL",
+        "at_m": 2.09
+       },
+       "T": {
+        "least_m": 0.007,
+        "status": "MARGINAL",
+        "nearest": "FREE_SPACE_WALL",
+        "at_m": 4.29
+       }
+      },
+      "rescuers": {
+       "least_m": 0.006,
+       "status": "MARGINAL"
+      }
+     },
+     "K": {
+      "least_m": 0.034,
+      "status": "MARGINAL",
+      "nearest": "FREE_SPACE_WALL",
+      "zone": "T",
+      "by_zone": {
+       "B": {
+        "least_m": 0.1,
+        "status": "PASS",
+        "nearest": null,
+        "at_m": 2.0
+       },
+       "T": {
+        "least_m": 0.034,
+        "status": "MARGINAL",
+        "nearest": "FREE_SPACE_WALL",
+        "at_m": 4.4
+       }
+      },
+      "rescuers": {
+       "least_m": -0.037,
+       "status": "FAIL"
+      }
+     },
+     "unsuited": {
+      "least_m": 0.1,
+      "status": "PASS",
+      "nearest": "FREE_SPACE_WALL",
+      "by_zone": {
+       "B": {
+        "least_m": 0.1,
+        "status": "PASS",
+        "nearest": "FREE_SPACE_WALL",
+        "at_m": 1.25
+       },
+       "T": {
+        "least_m": 0.1,
+        "status": "PASS",
+        "nearest": "FREE_SPACE_WALL",
+        "at_m": 3.45
+       }
+      },
+      "envelope": "capsule r 0.35 m (the 0.70 m route-control key), 1.25 m long"
+     },
+     "port_margin_to_0.70_m": 0.4
+    },
+    "D1.10_az45": {
+     "clear_m": 1.1,
+     "az_deg": 45,
+     "x": 106.025,
+     "S": {
+      "least_m": 0.01,
+      "status": "MARGINAL",
+      "nearest": "FREE_SPACE_WALL",
+      "zone": "T",
+      "by_zone": {
+       "B": {
+        "least_m": 0.1,
+        "status": "PASS",
+        "nearest": "FREE_SPACE_WALL",
+        "at_m": 2.09
+       },
+       "T": {
+        "least_m": 0.01,
+        "status": "MARGINAL",
+        "nearest": "FREE_SPACE_WALL",
+        "at_m": 4.09
+       }
+      },
+      "rescuers": {
+       "least_m": -0.024,
+       "status": "FAIL"
+      }
+     },
+     "K": {
+      "least_m": 0.062,
+      "status": "PASS",
+      "nearest": "FREE_SPACE_WALL",
+      "zone": "T",
+      "by_zone": {
+       "B": {
+        "least_m": 0.1,
+        "status": "PASS",
+        "nearest": null,
+        "at_m": 2.0
+       },
+       "T": {
+        "least_m": 0.062,
+        "status": "PASS",
+        "nearest": "FREE_SPACE_WALL",
+        "at_m": 4.4
+       }
+      },
+      "rescuers": {
+       "least_m": 0.014,
+       "status": "MARGINAL"
+      }
+     },
+     "unsuited": {
+      "least_m": 0.1,
+      "status": "PASS",
+      "nearest": "FREE_SPACE_WALL",
+      "by_zone": {
+       "B": {
+        "least_m": 0.1,
+        "status": "PASS",
+        "nearest": "FREE_SPACE_WALL",
+        "at_m": 1.25
+       },
+       "T": {
+        "least_m": 0.1,
+        "status": "PASS",
+        "nearest": "FREE_SPACE_WALL",
+        "at_m": 3.45
+       }
+      },
+      "envelope": "capsule r 0.35 m (the 0.70 m route-control key), 1.25 m long"
+     },
+     "port_margin_to_0.70_m": 0.4
+    },
+    "D1.10_az55": {
+     "clear_m": 1.1,
+     "az_deg": 55,
+     "x": 106.025,
+     "S": {
+      "least_m": -0.0,
+      "status": "MARGINAL",
+      "nearest": "FREE_SPACE_WALL",
+      "zone": "T",
+      "by_zone": {
+       "B": {
+        "least_m": 0.1,
+        "status": "PASS",
+        "nearest": "FREE_SPACE_WALL",
+        "at_m": 2.09
+       },
+       "T": {
+        "least_m": -0.0,
+        "status": "MARGINAL",
+        "nearest": "FREE_SPACE_WALL",
+        "at_m": 4.39
+       }
+      },
+      "rescuers": {
+       "least_m": -0.011,
+       "status": "FAIL"
+      }
+     },
+     "K": {
+      "least_m": 0.059,
+      "status": "PASS",
+      "nearest": "FREE_SPACE_WALL",
+      "zone": "T",
+      "by_zone": {
+       "B": {
+        "least_m": 0.1,
+        "status": "PASS",
+        "nearest": null,
+        "at_m": 2.0
+       },
+       "T": {
+        "least_m": 0.059,
+        "status": "PASS",
+        "nearest": "FREE_SPACE_WALL",
+        "at_m": 4.4
+       }
+      },
+      "rescuers": {
+       "least_m": 0.1,
+       "status": "PASS"
+      }
+     },
+     "unsuited": {
+      "least_m": 0.1,
+      "status": "PASS",
+      "nearest": "FREE_SPACE_WALL",
+      "by_zone": {
+       "B": {
+        "least_m": 0.1,
+        "status": "PASS",
+        "nearest": "FREE_SPACE_WALL",
+        "at_m": 1.25
+       },
+       "T": {
+        "least_m": 0.1,
+        "status": "PASS",
+        "nearest": "FREE_SPACE_WALL",
+        "at_m": 3.45
+       }
+      },
+      "envelope": "capsule r 0.35 m (the 0.70 m route-control key), 1.25 m long"
+     },
+     "port_margin_to_0.70_m": 0.4
+    },
+    "_closure": {
+     "count_on_route": 1,
+     "closure": "SP-13 port hatch from the trunk extension, seats from the trunk side (a SP-13 fire/leak holds it shut)",
+     "ideal_load_kn_80kpa": {
+      "0.90": 50.9,
+      "1.10": 76.0
+     },
+     "seat_load_kn_leaf_1_10": 90.5
+    },
+    "_independence": {
+     "exits": {
+      "SP12": [
+       "SP-11 inner plug 1.20 m (chamber side only)",
+       "SP-12 exit closure (N1 slot / N2-N3 duct / N0 branch) between SP-12 and the trunk extension"
+      ],
+      "SP13": [
+       "SP-13 port hatch between SP-13 and the trunk extension"
+      ]
+     },
+     "shared_closures": [],
+     "shared_volumes": [
+      "trunk extension X 102.45-107.4 (destination of both exits; a shirt-sleeve volume, not a SP-12 or SP-13 volume)"
+     ],
+     "not_shared": [
+      "SP-12/SP-13 door (stays closed on the SP-13 exit; neither exit needs it)",
+      "SP-12 ventilation loop and SP-13 ventilation loop (own, isolatable per topology)"
+     ],
+     "pressure_isolation_points": [
+      "SP-13 port hatch (seats from the trunk side)",
+      "SP-12 exit closure (seats from the trunk side in the study; N1 slot cover is a large sliding cover, side OPEN)",
+      "SP-12/SP-13 door (seats from SP-12)",
+      "district hatch at the trunk end (seats from the trunk side)"
+     ],
+     "fire_heat_points": [
+      "SP-13 hosts battery charging and drying (the thermal/fire load of the pair); its port hatch and the SP-12/13 door isolate it from both the trunk and SP-12",
+      "SP-12 hosts O2 preparation (oxidizer-rich); its closure and the SP-11 inner plug isolate it",
+      "no common closure: a fire or leak in one room leaves the other exit available, provided the trunk extension itself stays habitable (shared volume, OPEN)"
+     ],
+     "status": "PROTOTYPE: independence holds for closures; the destination volume is shared, so a trunk-extension event takes both"
+    }
+   }
+  },
+  "bypass": {
+   "ladder": {
+    "angle_deg": 285.0,
+    "stile_radius_m": 0.64,
+    "stile_half_angle_deg": 18.21,
+    "width_m": 0.4,
+    "present_floor_x": 81.649,
+    "present_top_x": 98.606,
+    "rung_pitch_m": 0.3,
+    "first_rung_m": 0.25
+   },
+   "dock": {
+    "x": 99.4,
+    "angle_deg": 195.0,
+    "radius_m": 0.85,
+    "trunk_clear_radius_m": 0.8,
+    "opening_margin_m": 0.2
+   },
+   "gaps_at_ladder_angle": {
+    "opening_only": {
+     "stile_a": {
+      "clear_spans": [
+       [
+        96.0,
+        98.806
+       ],
+       [
+        99.994,
+        104.9
+       ]
+      ],
+      "gaps": [
+       [
+        98.806,
+        99.994
+       ]
+      ],
+      "dock_gap_length_m": 1.188
+     },
+     "stile_b": {
+      "clear_spans": [
+       [
+        96.0,
+        98.969
+       ],
+       [
+        99.831,
+        104.9
+       ]
+      ],
+      "gaps": [
+       [
+        98.969,
+        99.831
+       ]
+      ],
+      "dock_gap_length_m": 0.862
+     },
+     "arrest_rail": {
+      "clear_spans": [
+       [
+        96.0,
+        98.77
+       ],
+       [
+        100.03,
+        104.9
+       ]
+      ],
+      "gaps": [
+       [
+        98.77,
+        100.03
+       ]
+      ],
+      "dock_gap_length_m": 1.26
+     },
+     "hoist_guide_105": {
+      "clear_spans": [
+       [
+        96.0,
+        98.948
+       ],
+       [
+        99.852,
+        104.9
+       ]
+      ],
+      "gaps": [
+       [
+        98.948,
+        99.852
+       ]
+      ],
+      "dock_gap_length_m": 0.904
+     }
+    },
+    "with_0.20_margin": {
+     "stile_a": {
+      "clear_spans": [
+       [
+        96.0,
+        98.544
+       ],
+       [
+        100.256,
+        104.9
+       ]
+      ],
+      "gaps": [
+       [
+        98.544,
+        100.256
+       ]
+      ],
+      "dock_gap_length_m": 1.712
+     },
+     "stile_b": {
+      "clear_spans": [
+       [
+        96.0,
+        98.763
+       ],
+       [
+        100.037,
+        104.9
+       ]
+      ],
+      "gaps": [
+       [
+        98.763,
+        100.037
+       ]
+      ],
+      "dock_gap_length_m": 1.274
+     },
+     "arrest_rail": {
+      "clear_spans": [
+       [
+        96.0,
+        98.518
+       ],
+       [
+        100.282,
+        104.9
+       ]
+      ],
+      "gaps": [
+       [
+        98.518,
+        100.282
+       ]
+      ],
+      "dock_gap_length_m": 1.764
+     },
+     "hoist_guide_105": {
+      "clear_spans": [
+       [
+        96.0,
+        97.92
+       ],
+       [
+        98.279,
+        98.636
+       ],
+       [
+        100.164,
+        101.576
+       ],
+       [
+        102.123,
+        104.9
+       ]
+      ],
+      "gaps": [
+       [
+        97.92,
+        98.279
+       ],
+       [
+        98.636,
+        100.164
+       ],
+       [
+        101.576,
+        102.123
+       ]
+      ],
+      "dock_gap_length_m": 1.528
+     }
+    }
+   },
+   "stile_pair_dock_gap_by_angle_deg_m": {
+    "255": 1.471,
+    "260": 1.421,
+    "265": 1.371,
+    "270": 1.32,
+    "275": 1.272,
+    "280": 1.227,
+    "285": 1.188,
+    "290": 1.156,
+    "295": 1.134,
+    "300": 1.121,
+    "305": 0.881,
+    "310": 0.851,
+    "315": 0.806
+   },
+   "bridge": {
+    "span_m": 1.712,
+    "anchored_from_to_x": [
+     98.544,
+     100.256
+    ],
+    "rungs_continue_at_pitch_m": 0.3,
+    "rungs_in_span": 5,
+    "arrest_rail": "continuous: the rail rests on the climber side of the rungs, which the bridge carries; no break over the mouth",
+    "guard": "cheek plate between the stiles and the trunk wall over the span (curved, 0.04 m off the wall), so a foot or hand cannot go into the connector gap",
+    "structure": "OPEN (unsized): a 1.0-1.7 m two-stile beam carrying a climber at 1.5 g (14.7 N/kg of climber, suit and tool, masses OPEN)"
+   },
+   "climber_vs_connector_rim": {
+    "least_m": 0.106,
+    "status": "PASS",
+    "body_part": "Human_Trunk_Climber_Arm_1",
+    "feet_x": 98.2,
+    "sampled": [
+     [
+      97.0,
+      0.338,
+      "Human_Trunk_Climber_Arm_1"
+     ],
+     [
+      97.5,
+      0.11,
+      "Human_Trunk_Climber_Arm_1"
+     ],
+     [
+      98.0,
+      0.189,
+      "Human_Trunk_Climber_Arm_1"
+     ],
+     [
+      98.5,
+      0.202,
+      "Human_Trunk_Climber_Arrester"
+     ],
+     [
+      99.0,
+      0.177,
+      "Human_Trunk_Climber_Leg_-1"
+     ],
+     [
+      99.5,
+      0.214,
+      "Human_Trunk_Climber_Leg_-1"
+     ],
+     [
+      100.0,
+      0.287,
+      "Human_Trunk_Climber_Leg_-1"
+     ],
+     [
+      100.5,
+      0.62,
+      "Human_Trunk_Climber_Leg_-1"
+     ],
+     [
+      101.0,
+      1.017,
+      "Human_Trunk_Climber_Leg_-1"
+     ]
+    ],
+    "note": "the rim is the intersection curve of the r 0.85 connector with the trunk; the climber is 0.65 m off the axis at the 285 deg station, so the rim is where the wall is, not a trap"
+   },
+   "dock_passage_vs_bridge": {
+    "envelope_radius_m": 0.35,
+    "bridge_stile_radius_m": 0.64,
+    "gap_m": 0.273,
+    "status": "PASS",
+    "note": "the bridge sits 90 deg round from the connector axis; a 0.70 m envelope on the trunk axis clears the stiles (the ladder is already there above and below)"
+   },
+   "climber_figure": {
+    "arm_reach_m": {
+     "Human_Trunk_Climber_Arm_1": 0.385,
+     "Human_Trunk_Climber_Arm_2": 0.385
+    },
+    "feet_x": 93.917,
+    "head_x": 95.717,
+    "grips_x": [
+     95.483,
+     95.483
+    ],
+    "note": "the figure of he.trunk_climber (hands on the stiles above the shoulder, soles on the rung, arrester on the rail); on the bridge the same pose repeats rung for rung since the bridge carries the same stiles, rungs and rail"
+   },
+   "hoist_line_105deg": {
+    "offsets_m": [
+     0.2,
+     0.25
+    ],
+    "source": "references/p1_hum003.json local.hoist (HUM-003; not re-run)",
+    "rows": {
+     "K": {
+      "e_0.20_thin side to the ladder": {
+       "carrier_least_m": 0.1,
+       "attendant_gap_m": 0.13
+      },
+      "e_0.20_flat to the ladder": {
+       "carrier_least_m": 0.1,
+       "attendant_gap_m": 0.155
+      },
+      "e_0.25_thin side to the ladder": {
+       "carrier_least_m": 0.1,
+       "attendant_gap_m": 0.18
+      },
+      "e_0.25_flat to the ladder": {
+       "carrier_least_m": 0.1,
+       "attendant_gap_m": 0.205
+      }
+     },
+     "S": {
+      "e_0.20_thin side to the ladder": {
+       "carrier_least_m": 0.1,
+       "attendant_gap_m": 0.002
+      },
+      "e_0.20_flat to the ladder": {
+       "carrier_least_m": 0.1,
+       "attendant_gap_m": 0.002
+      },
+      "e_0.25_thin side to the ladder": {
+       "carrier_least_m": 0.085,
+       "attendant_gap_m": 0.051
+      },
+      "e_0.25_flat to the ladder": {
+       "carrier_least_m": 0.085,
+       "attendant_gap_m": 0.051
+      }
+     }
+    },
+    "guide_rail_clear_spans_x": [
+     [
+      83.63,
+      97.92
+     ],
+     [
+      98.28,
+      98.64
+     ],
+     [
+      100.16,
+      101.58
+     ],
+     [
+      102.12,
+      102.4
+     ]
+    ]
+   },
+   "upper_run_to_104.9": {
+    "angles_clear_deg": {
+     "margin_0.20": [],
+     "margin_0": [
+      130,
+      135,
+      140,
+      145,
+      150,
+      155,
+      160,
+      165,
+      170,
+      175,
+      305,
+      310,
+      315,
+      320,
+      325,
+      330
+     ]
+    },
+    "built_285_clear": {
+     "margin_0.20": false,
+     "margin_0": false
+    },
+    "openings_added": [
+     [
+      "District_Port_240",
+      104.1,
+      240.0,
+      0.45
+     ],
+     [
+      "SP12_Exit_N1_slot",
+      103.65,
+      50.0,
+      0.55
+     ],
+     [
+      "SP13_Port",
+      106.025,
+      45.0,
+      0.45
+     ]
+    ],
+    "note": "stile pair clear over [dock bridge end, 104.9] against the built openings (minus the bridged dock mouth) plus the three added ones; the run below the bridge is the built ladder"
+   },
+   "extension_m": {
+    "present_top": 98.606,
+    "to": 104.9,
+    "total_m": 6.29,
+    "bridge_m": 1.71,
+    "above_bridge_m": 4.64
+   },
+   "status": "CANDIDATE (PROTOTYPE): continuous by a bridge over the dock mouth; structure, arrester lock and bridge-versus-docking-passage swing are OPEN"
+  },
+  "compare": {
+   "L1-A": {
+    "title": "EVA first: SP-11/12/13 kept; workshop + cell at 240 deg (A trunk extension), SP-52 warm module at 210 deg from X 106.3 m",
+    "new_shell_m2": 270.3,
+    "new_shell_mass_t": 5.41,
+    "shell_by_element_m2": {
+     "SP12": 80.7,
+     "SP13": 53.7,
+     "SP11_chamber": 32.8,
+     "SP12_branch": 3.0,
+     "workshop": 54.8,
+     "cell": 13.4,
+     "warm_SP52": 18.6,
+     "passage_0": 3.2,
+     "trunk_extension": 13.1
+    },
+    "coolant_run_m": 30.22,
+    "coolant_panel": "Warm_Panel_3M_3",
+    "sp52_separation_m": {
+     "SP12": 2.64,
+     "SP13": 2.06,
+     "SP11_chamber": 4.9,
+     "workshop": 0.3,
+     "cell": 1.63
+    },
+    "reserve_refuge_distance_m": {
+     "Survival_Reserve_1 -> workshop": 3.47,
+     "Survival_Reserve_1 -> cell": 5.3,
+     "Survival_Reserve_1 -> warm_SP52": 5.88,
+     "Survival_Reserve_1 -> SP12": 0.28,
+     "Survival_Reserve_1 -> SP13": 4.4,
+     "Survival_Reserve_2 -> workshop": 0.51,
+     "Survival_Reserve_2 -> cell": 3.18,
+     "Survival_Reserve_2 -> warm_SP52": 1.71,
+     "Survival_Reserve_2 -> SP12": 1.18,
+     "Survival_Reserve_2 -> SP13": 1.23,
+     "Refuge_Storm_Shelter -> workshop": 6.7,
+     "Refuge_Storm_Shelter -> cell": 6.73,
+     "Refuge_Storm_Shelter -> warm_SP52": 9.4,
+     "Refuge_Storm_Shelter -> SP12": 3.85,
+     "Refuge_Storm_Shelter -> SP13": 8.05
+    },
+    "interfaces": [
+     "district hatch at the trunk end (seats from the trunk side)",
+     "workshop port hatch",
+     "cell pass-through (sealed)",
+     "warm-module service hatch (non-habitable)"
+    ],
+    "trunk_connection": {
+     "x": 104.1,
+     "clear_m": 0.9,
+     "run": {
+      "hits": [],
+      "inside_hull": true
+     }
+    },
+    "volumes_m3": {
+     "SP12": 47.9,
+     "SP13": 25.2,
+     "SP11_chamber": 13.7,
+     "SP12_branch": 0.4,
+     "workshop": 26.6,
+     "cell": 3.3,
+     "warm_SP52": 5.0,
+     "passage_0": 0.3
+    }
+   },
+   "L1-B": {
+    "title": "EVA first: SP-11/12/13 kept; workshop + cell at 240 deg (B external corridor), SP-52 warm module at 210 deg from X 106.3 m",
+    "new_shell_m2": 278.3,
+    "new_shell_mass_t": 5.57,
+    "shell_by_element_m2": {
+     "SP12": 80.7,
+     "SP13": 53.7,
+     "SP11_chamber": 32.8,
+     "SP12_branch": 3.0,
+     "workshop": 54.8,
+     "cell": 13.4,
+     "warm_SP52": 18.6,
+     "passage_0": 8.4,
+     "passage_1": 15.9
+    },
+    "coolant_run_m": 30.22,
+    "coolant_panel": "Warm_Panel_3M_3",
+    "sp52_separation_m": {
+     "SP12": 2.64,
+     "SP13": 2.06,
+     "SP11_chamber": 4.9,
+     "workshop": 0.3,
+     "cell": 1.63
+    },
+    "reserve_refuge_distance_m": {
+     "Survival_Reserve_1 -> workshop": 3.47,
+     "Survival_Reserve_1 -> cell": 5.3,
+     "Survival_Reserve_1 -> warm_SP52": 5.88,
+     "Survival_Reserve_1 -> SP12": 0.28,
+     "Survival_Reserve_1 -> SP13": 4.4,
+     "Survival_Reserve_2 -> workshop": 0.51,
+     "Survival_Reserve_2 -> cell": 3.18,
+     "Survival_Reserve_2 -> warm_SP52": 1.71,
+     "Survival_Reserve_2 -> SP12": 1.18,
+     "Survival_Reserve_2 -> SP13": 1.23,
+     "Refuge_Storm_Shelter -> workshop": 6.7,
+     "Refuge_Storm_Shelter -> cell": 6.73,
+     "Refuge_Storm_Shelter -> warm_SP52": 9.4,
+     "Refuge_Storm_Shelter -> SP12": 3.85,
+     "Refuge_Storm_Shelter -> SP13": 8.05
+    },
+    "interfaces": [
+     "trunk port hatch (seats from the trunk side)",
+     "workshop end hatch",
+     "cell pass-through (sealed)",
+     "warm-module service hatch (non-habitable)"
+    ],
+    "trunk_connection": {
+     "x": 101.849,
+     "clear_m": 0.9,
+     "opening_conflicts": [],
+     "run": {
+      "hits": [],
+      "inside_hull": true
+     }
+    },
+    "volumes_m3": {
+     "SP12": 47.9,
+     "SP13": 25.2,
+     "SP11_chamber": 13.7,
+     "SP12_branch": 0.4,
+     "workshop": 26.6,
+     "cell": 3.3,
+     "warm_SP52": 5.0,
+     "passage_0": 1.6,
+     "passage_1": 4.1
+    }
+   }
+  }
+ }
+}

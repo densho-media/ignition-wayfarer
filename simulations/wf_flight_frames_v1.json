@@ -1,0 +1,275 @@
+{
+ "schema": "WF_FLIGHT_FRAMES",
+ "contract": "FRM-002-2026-10-10",
+ "source": "15_MODEL_INTERFACES!A125:I125 FRM-002 (WORKFLOW LOCKED / CHANNEL NUMERICS OPEN; 98_DECISION_LOG!A91; 26_BLENDER_CONTRACT C-017/C-018), refining 15!A117:I117 FLIGHT-FRAMES (98!A85)",
+ "rules": "Sheets owns the numbers, states, units, sample times and validation flags; Claude imports, stages and replays only. UNKNOWN channels and streams carry null, never a number; no interpolation, resampling onto the 30 fps frames, smoothing or derived physics; untimed phases and events stay unplaced (15!G125, H125; C-017/C-018). Mission time is independent of the 24/30 fps presentation. The 1D route frames stay DIAGNOSTIC and not heliocentric (15!I117).",
+ "table": "A released continuous table (C-017): row 1 the field names, row 2 the units, then one row per owner sample. Columns: mission_t_s, the channel column, scenario_id, scenario_version, status, source, validation, and optionally frame. One scenario_id and one scenario_version; mission_t_s strictly increasing; a frame, where given, is the 23_ROUTE_FRAMES frame at that mission_t_s; status one of WORKING / DERIVED / DIAGNOSTIC; validation PASS (the owner's test result) on every row. Refused otherwise, never fixed.",
+ "stream_table": "A released phase or event table (C-018): row 1 the field names, row 2 the units. Phases: phase_id, start_mission_t_s, end_mission_t_s; events: event_id, mission_t_s; both with scenario_id, scenario_version, status, source, validation. A time may be empty (an unknown onset or duration): the row stays untimed and unplaced, never interpolated. Refused otherwise.",
+ "statuses": [
+  "UNKNOWN",
+  "DIAGNOSTIC",
+  "WORKING",
+  "DERIVED"
+ ],
+ "route_version": "12decf73bd5228b1",
+ "channels": {
+  "ship_mass": {
+   "quantity": "Ship mass history (S1, S2)",
+   "unit": "kg",
+   "owner_range": "to be released by Sheets from the chosen physical scenario (15!C117); 15!A22:A26 S1-S4; the 28_BURN_ENVELOPE / 29_BURN_FRAMES 33-point study is PROVISIONAL and not a release (29!A2); 10_WAYFARER_MASS; 02_SHIP_INPUTS!H21:H22",
+   "presented_by": [],
+   "sheet": null,
+   "source_ref": null,
+   "sample_basis": "time-tagged owner samples at mission_t_s (C-017); a sample carries a frame only where its time is a 23_ROUTE_FRAMES frame time, and only those are shown on the timeline (C-010 direct lookup, nothing between samples)",
+   "mission_t_s": null,
+   "frame": null,
+   "status": "UNKNOWN",
+   "scenario_id": null,
+   "scenario_version": null,
+   "validation": null,
+   "values": null,
+   "placeholder": "UNKNOWN: awaiting Sheets release"
+  },
+  "propellant_remaining": {
+   "quantity": "Reaction mass and fusion fuel remaining (S2)",
+   "unit": "kg",
+   "owner_range": "to be released by Sheets from the chosen physical scenario (15!C117); 15!A22:A26 S1-S4; the 28_BURN_ENVELOPE / 29_BURN_FRAMES 33-point study is PROVISIONAL and not a release (29!A2); 02_SHIP_INPUTS!H21:H22; Fiji 02_DRIVE_INPUTS",
+   "presented_by": [],
+   "sheet": null,
+   "source_ref": null,
+   "sample_basis": "time-tagged owner samples at mission_t_s (C-017); a sample carries a frame only where its time is a 23_ROUTE_FRAMES frame time, and only those are shown on the timeline (C-010 direct lookup, nothing between samples)",
+   "mission_t_s": null,
+   "frame": null,
+   "status": "UNKNOWN",
+   "scenario_id": null,
+   "scenario_version": null,
+   "validation": null,
+   "values": null,
+   "placeholder": "UNKNOWN: awaiting Sheets release"
+  },
+  "mass_flow": {
+   "quantity": "Exhaust mass flow (S3)",
+   "unit": "kg/s",
+   "owner_range": "to be released by Sheets from the chosen physical scenario (15!C117); 15!A22:A26 S1-S4; the 28_BURN_ENVELOPE / 29_BURN_FRAMES 33-point study is PROVISIONAL and not a release (29!A2); Fiji 20_PROPULSION!A3:F12",
+   "presented_by": [
+    "drive.plasma_visibility"
+   ],
+   "sheet": null,
+   "source_ref": null,
+   "sample_basis": "time-tagged owner samples at mission_t_s (C-017); a sample carries a frame only where its time is a 23_ROUTE_FRAMES frame time, and only those are shown on the timeline (C-010 direct lookup, nothing between samples)",
+   "mission_t_s": null,
+   "frame": null,
+   "status": "UNKNOWN",
+   "scenario_id": null,
+   "scenario_version": null,
+   "validation": null,
+   "values": null,
+   "placeholder": "UNKNOWN: awaiting Sheets release"
+  },
+  "thrust": {
+   "quantity": "Total flight thrust over time (S3, S3a: from the mass history)",
+   "unit": "N",
+   "owner_range": "to be released by Sheets from the chosen physical scenario (15!C117); 15!A22:A26 S1-S4; the 28_BURN_ENVELOPE / 29_BURN_FRAMES 33-point study is PROVISIONAL and not a release (29!A2); Fiji 20_PROPULSION!A3:F12; 35_SCALING_LIMITS!A33:F34",
+   "presented_by": [
+    "drive.thrust_level"
+   ],
+   "sheet": null,
+   "source_ref": null,
+   "sample_basis": "time-tagged owner samples at mission_t_s (C-017); a sample carries a frame only where its time is a 23_ROUTE_FRAMES frame time, and only those are shown on the timeline (C-010 direct lookup, nothing between samples)",
+   "mission_t_s": null,
+   "frame": null,
+   "status": "UNKNOWN",
+   "scenario_id": null,
+   "scenario_version": null,
+   "validation": null,
+   "values": null,
+   "placeholder": "UNKNOWN: awaiting Sheets release"
+  },
+  "reactor_power": {
+   "quantity": "Reactor (fusion) power",
+   "unit": "W",
+   "owner_range": "to be released by Sheets (15!C117); 40_THERMAL; Fiji 30_DRIVE_THERMAL",
+   "presented_by": [
+    "drive.drive_active"
+   ],
+   "sheet": null,
+   "source_ref": null,
+   "sample_basis": "time-tagged owner samples at mission_t_s (C-017); a sample carries a frame only where its time is a 23_ROUTE_FRAMES frame time, and only those are shown on the timeline (C-010 direct lookup, nothing between samples)",
+   "mission_t_s": null,
+   "frame": null,
+   "status": "UNKNOWN",
+   "scenario_id": null,
+   "scenario_version": null,
+   "validation": null,
+   "values": null,
+   "placeholder": "UNKNOWN: awaiting Sheets release"
+  },
+  "nozzle_power": {
+   "quantity": "Magnetic-nozzle power",
+   "unit": "W",
+   "owner_range": "to be released by Sheets (15!C117); Fiji 25_MAGNETIC_MANIFOLD",
+   "presented_by": [
+    "drive.nozzle_field_strength"
+   ],
+   "sheet": null,
+   "source_ref": null,
+   "sample_basis": "time-tagged owner samples at mission_t_s (C-017); a sample carries a frame only where its time is a 23_ROUTE_FRAMES frame time, and only those are shown on the timeline (C-010 direct lookup, nothing between samples)",
+   "mission_t_s": null,
+   "frame": null,
+   "status": "UNKNOWN",
+   "scenario_id": null,
+   "scenario_version": null,
+   "validation": null,
+   "values": null,
+   "placeholder": "UNKNOWN: awaiting Sheets release"
+  },
+  "heat_hot_loop": {
+   "quantity": "Hot-loop heat to reject",
+   "unit": "W",
+   "owner_range": "to be released by Sheets (15!C117); 15!A26 S4; 40_THERMAL",
+   "presented_by": [
+    "radiator.thermal_state"
+   ],
+   "sheet": null,
+   "source_ref": null,
+   "sample_basis": "time-tagged owner samples at mission_t_s (C-017); a sample carries a frame only where its time is a 23_ROUTE_FRAMES frame time, and only those are shown on the timeline (C-010 direct lookup, nothing between samples)",
+   "mission_t_s": null,
+   "frame": null,
+   "status": "UNKNOWN",
+   "scenario_id": null,
+   "scenario_version": null,
+   "validation": null,
+   "values": null,
+   "placeholder": "UNKNOWN: awaiting Sheets release"
+  },
+  "heat_warm_loop": {
+   "quantity": "Warm-loop heat to reject",
+   "unit": "W",
+   "owner_range": "to be released by Sheets (15!C117); 15!A26 S4; 40_THERMAL",
+   "presented_by": [
+    "radiator.thermal_state"
+   ],
+   "sheet": null,
+   "source_ref": null,
+   "sample_basis": "time-tagged owner samples at mission_t_s (C-017); a sample carries a frame only where its time is a 23_ROUTE_FRAMES frame time, and only those are shown on the timeline (C-010 direct lookup, nothing between samples)",
+   "mission_t_s": null,
+   "frame": null,
+   "status": "UNKNOWN",
+   "scenario_id": null,
+   "scenario_version": null,
+   "validation": null,
+   "values": null,
+   "placeholder": "UNKNOWN: awaiting Sheets release"
+  },
+  "heat_cold_loop": {
+   "quantity": "Cold-loop heat to reject",
+   "unit": "W",
+   "owner_range": "to be released by Sheets (15!C117); 15!A26 S4; 40_THERMAL",
+   "presented_by": [
+    "radiator.thermal_state"
+   ],
+   "sheet": null,
+   "source_ref": null,
+   "sample_basis": "time-tagged owner samples at mission_t_s (C-017); a sample carries a frame only where its time is a 23_ROUTE_FRAMES frame time, and only those are shown on the timeline (C-010 direct lookup, nothing between samples)",
+   "mission_t_s": null,
+   "frame": null,
+   "status": "UNKNOWN",
+   "scenario_id": null,
+   "scenario_version": null,
+   "validation": null,
+   "values": null,
+   "placeholder": "UNKNOWN: awaiting Sheets release"
+  },
+  "rotor_spin_ring_a": {
+   "quantity": "Ring A spin rate (S6: spin-down and spin-up timing)",
+   "unit": "rpm",
+   "owner_range": "to be released by Sheets; 15!A28 S6; 16_SPACE_MECHANISMS!A2:I11; OD-003/004/013",
+   "presented_by": [
+    "rotor.spin_fraction",
+    "rotor.spin_turned"
+   ],
+   "sheet": null,
+   "source_ref": null,
+   "sample_basis": "time-tagged owner samples at mission_t_s (C-017); a sample carries a frame only where its time is a 23_ROUTE_FRAMES frame time, and only those are shown on the timeline (C-010 direct lookup, nothing between samples)",
+   "mission_t_s": null,
+   "frame": null,
+   "status": "UNKNOWN",
+   "scenario_id": null,
+   "scenario_version": null,
+   "validation": null,
+   "values": null,
+   "placeholder": "UNKNOWN: awaiting Sheets release"
+  },
+  "rotor_spin_ring_b": {
+   "quantity": "Ring B spin rate (S6: spin-down and spin-up timing)",
+   "unit": "rpm",
+   "owner_range": "to be released by Sheets; 15!A28 S6; 16_SPACE_MECHANISMS!A2:I11; OD-003/004/013",
+   "presented_by": [
+    "rotor.spin_fraction",
+    "rotor.spin_turned"
+   ],
+   "sheet": null,
+   "source_ref": null,
+   "sample_basis": "time-tagged owner samples at mission_t_s (C-017); a sample carries a frame only where its time is a 23_ROUTE_FRAMES frame time, and only those are shown on the timeline (C-010 direct lookup, nothing between samples)",
+   "mission_t_s": null,
+   "frame": null,
+   "status": "UNKNOWN",
+   "scenario_id": null,
+   "scenario_version": null,
+   "validation": null,
+   "values": null,
+   "placeholder": "UNKNOWN: awaiting Sheets release"
+  },
+  "bus_power": {
+   "quantity": "A/B bus power per configuration (S5, S7)",
+   "unit": "W",
+   "owner_range": "to be released by Sheets; 15!A27:A29 S5/S7; 08_ROTATING_HABITAT!A49:H52; OD-009",
+   "presented_by": [],
+   "sheet": null,
+   "source_ref": null,
+   "sample_basis": "time-tagged owner samples at mission_t_s (C-017); a sample carries a frame only where its time is a 23_ROUTE_FRAMES frame time, and only those are shown on the timeline (C-010 direct lookup, nothing between samples)",
+   "mission_t_s": null,
+   "frame": null,
+   "status": "UNKNOWN",
+   "scenario_id": null,
+   "scenario_version": null,
+   "validation": null,
+   "values": null,
+   "placeholder": "UNKNOWN: awaiting Sheets release"
+  }
+ },
+ "streams": {
+  "degraded_mode": {
+   "quantity": "Degraded-mode phases (radiator, ring, generator, coolant loop, nozzle)",
+   "kind": "phase",
+   "owner_range": "to be released by Sheets; 09_OPEN_DESIGN_ITEMS!A11:J11 OD-010; 15!A29 S7; 26 C-018",
+   "presented_by": [],
+   "sheet": null,
+   "source_ref": null,
+   "rows": null,
+   "status": "UNKNOWN",
+   "scenario_id": null,
+   "scenario_version": null,
+   "validation": null,
+   "values": null,
+   "placeholder": "UNKNOWN: awaiting Sheets release"
+  },
+  "radiator_failure": {
+   "quantity": "Radiator-failure events (cell-loss onset, isolation, fraction)",
+   "kind": "event",
+   "owner_range": "to be released by Sheets; 09_OPEN_DESIGN_ITEMS!A29 OD-028; 20_FIRST_IGNITION!A27; 40_THERMAL!A71 (Q53); 26 C-018",
+   "presented_by": [
+    "radiator.cell_isolation"
+   ],
+   "sheet": null,
+   "source_ref": null,
+   "rows": null,
+   "status": "UNKNOWN",
+   "scenario_id": null,
+   "scenario_version": null,
+   "validation": null,
+   "values": null,
+   "placeholder": "UNKNOWN: awaiting Sheets release"
+  }
+ }
+}

@@ -1,0 +1,128 @@
+# External dependencies of the Wayfarer character system (S&E 15_MODEL_INTERFACES C1-C3, sources in 99_SOURCES).
+# The one dependency manifest of this repository: `python3 tools/workflow.py deps` reads it (tools/external.py).
+#
+# Every entry is pinned: an exact archive (version or, for an unversioned file, its retrieval date and checksum) and its SHA-256.
+# Archives are cached outside the repository (the cache below; WAYFARER_EXTERNAL overrides it) and never committed; Git keeps only
+# this file and what is generated from it. `acquisition = "auto"` entries download by script; "manual" entries sit behind a page
+# that refuses scripted download (a bot challenge) and are placed in the cache's downloads/ folder by hand, then verified here.
+# Optional entries never block the build (C3).
+#
+# License fields record the license of the material as distributed; `incorporated` says whether any of it ends up in Wayfarer's
+# generated assets (only CC0 material may, without separate review).
+
+[cache]
+root = "~/.cache/wayfarer/external"          # downloads/, blender/user/ (an isolated BLENDER_USER_RESOURCES tree)
+
+[[dependency]]
+name = "mpfb"
+role = "REQUIRED human-production foundation: base mesh, morph targets, rigs and weights, skin/eye materials, the generator code (C1)"
+version = "2.0.17"
+note = "Latest stable release (GitHub release v2.0.17 of 2026-07-22, tag commit 80919fa4682335c41847f761a4d79dcad4124732; the Blender extensions platform serves the same version). Repository master reads 2.0.18, which is unreleased and not used."
+url = "https://extensions.blender.org/download/sha256:4f0a879d64a39bf646fbf5f53601ac678855da329d650617dca5737548239a87/add-on-mpfb-v2.0.17.zip"
+source_page = "https://extensions.blender.org/add-ons/mpfb/"
+file = "add-on-mpfb-v2.0.17.zip"
+size = 45031536
+sha256 = "4f0a879d64a39bf646fbf5f53601ac678855da329d650617dca5737548239a87"
+retrieved = "2026-10-07"
+license = "Code GPL-3.0-or-later; bundled assets (base mesh, proxies, targets, rigs, weights, textures, JSON mesh data) CC0-1.0; output unrestricted (LICENSE.md sections B-D at tag v2.0.17)"
+license_url = "https://github.com/makehumancommunity/mpfb2/blob/v2.0.17/LICENSE.md"
+redistribution = "Code under GPL terms: run as a Blender extension, never vendored into this repository. Generated characters carry no MPFB code."
+incorporated = "generated characters derive from the CC0 base mesh, targets, game_engine rig and weights"
+required = true
+acquisition = "auto"
+install = "blender_extension"                 # unpacked to <cache>/blender/user/extensions/user_default/mpfb
+blender_min = "4.2.0"
+
+[[dependency]]
+name = "makehuman_system_assets"
+role = "REQUIRED MPFB system-asset pack: skins, eyes, eyebrows, eyelashes, teeth, tongue, hair, proxies, clothes (C1). Only the pack the MakeHuman team publishes as CC0."
+version = "unversioned file, Last-Modified 2024-04-14T13:28:46Z, ETag 10bbb7ea-6160e7c0d7996"
+url = "https://files2.makehumancommunity.org/asset_packs/makehuman_system_assets/makehuman_system_assets_cc0.zip"
+mirror = "https://files.makehumancommunity.org/asset_packs/makehuman_system_assets/makehuman_system_assets_cc0.zip"
+source_page = "https://static.makehumancommunity.org/assets/assetpacks/makehuman_system_assets.html"
+file = "makehuman_system_assets_cc0.zip"
+size = 280737770
+sha256 = "b542127a8e25547c7c29c19f2d1d2adb9a664c80396ecd694095dbc8028a0107"
+retrieved = "2026-10-07"
+license = "CC0-1.0 (every one of its 140 .mhclo/.mhmat files carries the CC0 release header; packs/makehuman_system_assets.json lists license CC0, author makehuman_system, for each entry)"
+license_url = "https://static.makehumancommunity.org/assets/assetpacks/makehuman_system_assets.html"
+redistribution = "none (CC0)"
+incorporated = "skin, eye, eyebrow and eyelash assets named in data/characters.toml"
+required = true
+acquisition = "auto"
+install = "mpfb_user_data"                   # unpacked to MPFB's user data folder inside the isolated tree
+
+[[dependency]]
+name = "blender_human_base_meshes"
+role = "OPTIONAL reference: topology, anatomy, sculpt and deformation comparison; never a crew mesh (C1)"
+version = "1.4.1"
+url = "https://download.blender.org/demo/asset-bundles/human-base-meshes/human-base-meshes-bundle-v1.4.1.zip"
+source_page = "https://download.blender.org/demo/asset-bundles/human-base-meshes/"
+file = "human-base-meshes-bundle-v1.4.1.zip"
+size = 50643039
+sha256 = "811f43accbb31a88266d932f8f5563b2d13586fca0ba2693aad1f5fe582b3515"
+retrieved = "2026-10-07"
+license = "CC0-1.0 (Blender Studio asset bundle; S&E 99_SOURCES SRC-BLENDER-HUMAN-BASE)"
+license_url = "https://www.blender.org/download/demo-files/#assets"
+redistribution = "none (CC0)"
+incorporated = "nothing (reference only)"
+required = false
+acquisition = "auto"
+install = "none"
+
+[[dependency]]
+name = "quaternius_ual1_standard"
+role = "OPTIONAL CC0 animation source for retarget tests: locomotion, sitting, crawling, generic interactions (C2); the free Standard tier only"
+version = "Standard (free) tier; exact archive pinned on first acquisition"
+url = ""
+source_page = "https://quaternius.com/packs/universalanimationlibrary.html"
+download_page = "https://quaternius.itch.io/universal-animation-library"
+file = ""
+size = 0
+sha256 = ""
+retrieved = ""
+license = "CC0-1.0 per the pack page (\"Free to use in personal, educational and commercial projects. (CC0 License)\"); confirm the archive is the Standard pack before use"
+license_url = "https://quaternius.com/packs/universalanimationlibrary.html"
+redistribution = "none (CC0)"
+incorporated = "nothing yet"
+required = false
+acquisition = "manual"
+manual_reason = "itch.io serves the free download behind a Cloudflare bot challenge (checked 2026-10-07); paid Source/Pro tiers (Blend files) are not used"
+install = "none"
+
+[[dependency]]
+name = "quaternius_ual2_standard"
+role = "OPTIONAL CC0 animation source (130+ more actions), as above"
+version = "Standard (free) tier; exact archive pinned on first acquisition"
+url = ""
+source_page = "https://quaternius.com/packs/universalanimationlibrary2.html"
+download_page = "https://quaternius.itch.io/universal-animation-library-2"
+file = ""
+size = 0
+sha256 = ""
+retrieved = ""
+license = "CC0-1.0 per the pack page; confirm the archive is the Standard pack before use"
+license_url = "https://quaternius.com/packs/universalanimationlibrary2.html"
+redistribution = "none (CC0)"
+incorporated = "nothing yet"
+required = false
+acquisition = "manual"
+manual_reason = "as UAL1"
+install = "none"
+
+[[reference]]
+# Studied, never downloaded by the build; nothing from it is incorporated. If Storm material is ever reused, its CC-BY attribution
+# goes into this entry and into docs/CHARACTERS.md "Licenses" before the change is committed.
+name = "blender_studio_storm"
+role = "OPTIONAL study reference: production body rig, facial controls, correctives, IK/FK (C2)"
+source_page = "https://studio.blender.org/characters/storm/v1/"
+license = "CC-BY (Blender Studio)"
+incorporated = "nothing"
+
+[[reference]]
+name = "mpfb_mcp"
+role = "Evaluated MCP bridge for MPFB (C3); not adopted"
+source_page = "https://github.com/makehumancommunity/mpfb-mcp"
+license = "GPL-3.0"
+evaluated = "2026-10-07 at master fccd20bd18 (no release or tag; early beta, 34 tools)"
+incorporated = "nothing"

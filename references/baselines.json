@@ -1,0 +1,4 @@
+{
+  "purpose": "Current production geometry baseline for tools/pipeline.py fingerprint diffs. Written only by `tools/workflow.py baseline`.",
+  "current": "references/baseline_m8_exterior"
+}

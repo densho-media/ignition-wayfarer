@@ -1,0 +1,831 @@
+# FUT-002 example shots. Shot-local presentation data: timing, framing, colours and labels live here,
+# never in data/wayfarer_3d.toml or the assets. Each shot links saved assets and builds shot-local representation
+# objects that reuse the linked geometry (src/wayfarer/representation.py, src/wayfarer/shots/shot_tools.py).
+#
+# Sources: asset = path under assets/<library> (library = "wayfarer", the default, or "characters"); collection = the asset's root collection;
+#   group = explode grouping: "drive_node" (nearest drive hierarchy node), "assembly" (top-level subsystem instance),
+#   "subassembly" (the instance inside it, e.g. one radiator or ring sector) or "fixed" (never exploded).
+# Selectors: "field:pattern" (fnmatch) on key, id (component_id), kind, group, source or name.
+# Operations: isolate | reveal | conceal | highlight (value) | explode (value) | recombine, each at frame over duration.
+# Camera: either `camera` (direction, fov, margin: fitted to the sources) or `cuts`, a list of { frame, camera } where camera names a saved
+#   camera of a source (copied at its saved pose) or "stop" (the eye-level view of the cut's induction `stop`, characters.stop_views); a cut
+#   with a `stop` is captioned from [induction] (sequence, scenes, operating state). materials = "source" keeps the saved look (linked
+#   materials, so lit fixtures glow; no bevel), and conceal/reveal then only hide and show. controls = { <control object> = { <property> =
+#   value } } poses display controls in memory and the drivers that read them (shot_tools.pose_controls).
+schema = 1
+fps = 24
+highlight_color = [1.0, 0.72, 0.28]
+
+[shot.SH_ENGINE_HOLOGRAM]
+description = "Engine exposition: the real propulsion assembly as a hologram, revealed along the causal chain core -> common plasma -> throat -> manifold -> four flux channels and nozzles, then the field lines, the optical gate layer, an explosion and a recombination."
+representation = "REP_HOLOGRAM"
+frame_end = 300
+review_frames = [1, 60, 112, 168, 228, 290]
+camera = { direction = [0.55, -1.0, 0.42], fov_deg = 30.0, margin = 1.04 }
+initial = ["group:DRIVE_FUSION_CORE"]
+explode = { axial = 0.8, radial = 1.6 }
+sources = [
+    { asset = "subsystems/WF_PROPULSION.blend", collection = "WF_PROPULSION", group = "drive_node" },
+    { asset = "subsystems/WF_DEBUG_MAGNETICS.blend", collection = "WF_DEBUG_MAGNETICS", group = "fixed" },
+    { asset = "subsystems/WF_DEBUG_OPTICS.blend", collection = "WF_DEBUG_OPTICS", group = "fixed" },
+]
+ops = [
+    { op = "reveal", frame = 24, duration = 24, select = ["group:DRIVE_COMMON_PLASMA", "group:DRIVE_CONVERGENCE_THROAT"] },
+    { op = "reveal", frame = 48, duration = 24, select = ["group:DRIVE_MANIFOLD"] },
+    { op = "reveal", frame = 72, duration = 24, select = ["group:DRIVE_FLUX_CHANNEL_*", "group:DRIVE_NOZZLE_*"] },
+    { op = "reveal", frame = 96, duration = 18, select = ["source:WF_DEBUG_MAGNETICS"] },
+    { op = "highlight", frame = 96, duration = 12, select = ["kind:magnetic_field"] },
+    { op = "conceal", frame = 132, duration = 18, select = ["source:WF_DEBUG_MAGNETICS"] },
+    { op = "highlight", frame = 132, duration = 12, value = 0.0, select = ["kind:magnetic_field"] },
+    { op = "reveal", frame = 132, duration = 24, select = ["group:DRIVE_OPTICAL_CONTROL", "group:DRIVE_GATE_L*", "source:WF_DEBUG_OPTICS"] },
+    { op = "highlight", frame = 156, duration = 12, select = ["kind:optical_source", "kind:optical_gate"] },
+    { op = "conceal", frame = 180, duration = 12, select = ["source:WF_DEBUG_OPTICS"] },
+    { op = "highlight", frame = 180, duration = 12, value = 0.0, select = ["kind:optical_source", "kind:optical_gate"] },
+    { op = "explode", frame = 192, duration = 36 },
+    { op = "recombine", frame = 252, duration = 36 },
+]
+labels = [
+    { text = "FUSION CORE", select = ["group:DRIVE_FUSION_CORE"], show = [1, 300], offset = [0.0, 0.0, 10.6], size = 0.9 },
+    { text = "COMMON PLASMA + THROAT", select = ["group:DRIVE_COMMON_PLASMA"], show = [24, 300], offset = [0.0, 0.0, 7.8], size = 0.9 },
+    { text = "MAGNETIC MANIFOLD / FIJI LATTICE", select = ["group:DRIVE_MANIFOLD"], show = [48, 300], offset = [0.0, 0.0, -5.2], size = 0.9 },
+    { text = "4 FLUX CHANNELS -> 4 NOZZLES", select = ["group:DRIVE_NOZZLE_*"], show = [72, 300], offset = [-3.0, 0.0, -8.8], size = 0.9 },
+    { text = "A/B LASERS -> GATES L1-L4", select = ["group:DRIVE_OPTICAL_CONTROL"], show = [132, 300], offset = [0.0, 0.0, 4.5], size = 0.9 },
+]
+[shot.SH_ENGINE_HOLOGRAM.colors]
+default = [0.30, 0.78, 1.0]
+"kind:plasma" = [0.85, 0.55, 1.0]
+"kind:magnetic_field" = [0.25, 0.95, 1.0]
+"source:WF_DEBUG_MAGNETICS" = [0.25, 0.95, 1.0]
+"kind:lattice_*" = [1.0, 0.62, 0.25]
+"kind:seed_coil" = [1.0, 0.62, 0.25]
+"kind:optical_*" = [0.35, 1.0, 0.55]
+"kind:shield_plug" = [0.35, 1.0, 0.55]
+"source:WF_DEBUG_OPTICS" = [0.35, 1.0, 0.55]
+
+[shot.SH_SHIP_CUTAWAY]
+description = "Internal engineering view of the coast ship: the radiators set aside; skins, ring frames, sectors and drive envelopes cut by a section plane on the camera side; the sector interiors highlighted; the subassemblies (each sector, the EYE, the drive) exploded apart and recombined."
+representation = "REP_CUTAWAY"
+frame_end = 216
+review_frames = [1, 60, 132, 216]
+camera = { direction = [0.3, -1.0, 0.3], fov_deg = 30.0, margin = 1.0 }
+explode = { axial = 0.3, radial = 0.12 }
+# The section plane: a point and the normal of the removed half-space (the camera side, -Y). "cut" objects lose that
+# half; "cap" (solid volumes among them) show flat caps where cut, thin shells keep their shaded inner surface.
+section = { point = [0.0, 0.0, 0.0], normal = [0.0, -1.0, 0.0] }
+cut = ["kind:hull_shell", "kind:sector_pressure", "kind:ring_frame", "kind:ring_fill", "kind:sector_interior_overhead", "name:Fusion_Core", "name:Common_Plasma_Region", "name:Magnetic_Manifold", "name:Engineering*", "name:Crew_Refuge*"]
+cap = ["name:Fusion_Core", "name:Common_Plasma_Region", "name:Magnetic_Manifold", "name:Crew_Refuge*"]
+sources = [
+    { asset = "WF_WAYFARER_001.blend", collection = "WF_WAYFARER_001", group = "subassembly" },
+]
+ops = [
+    { op = "conceal", frame = 1, select = ["group:Assembly_THERMAL*"] },
+    { op = "highlight", frame = 30, duration = 18, select = ["kind:sector_interior_*"] },
+    { op = "highlight", frame = 78, duration = 18, value = 0.0, select = ["kind:sector_interior_*"] },
+    { op = "explode", frame = 96, duration = 36 },
+    { op = "recombine", frame = 168, duration = 36 },
+]
+labels = []
+
+[shot.SH_SHIP_STANDARD]
+description = "Exterior of the ship in HIGH_POWER, rings stopped and locked at full diameter, in the standard look; the hull fades away to reveal the structure and the rings, the habitat is highlighted, the hull returns, and finally the propulsion assembly is isolated."
+representation = "REP_STANDARD"
+# Shot-local preset: the shot poses the linked rotor controls of this buildable configuration before it gathers the source. The drive
+# plasma is not posed in shots (a static representation of the saved data); only the ring state follows the preset.
+preset = "HIGH_POWER"
+frame_end = 168
+review_frames = [1, 60, 120, 168]
+camera = { direction = [0.9, -1.1, 0.55], fov_deg = 34.0, margin = 1.02 }
+explode = { axial = 0.0, radial = 0.0 }
+sources = [
+    { asset = "WF_WAYFARER_001.blend", collection = "WF_WAYFARER_001", group = "assembly" },
+]
+ops = [
+    { op = "conceal", frame = 24, duration = 24, select = ["kind:hull_shell"] },
+    { op = "highlight", frame = 48, duration = 12, select = ["group:Assembly_HABITAT"] },
+    { op = "highlight", frame = 84, duration = 12, value = 0.0, select = ["group:Assembly_HABITAT"] },
+    { op = "reveal", frame = 96, duration = 24, select = ["kind:hull_shell"] },
+    { op = "isolate", frame = 132, duration = 24, select = ["group:Assembly_PROPULSION"] },
+]
+labels = []
+
+[shot.SH_INDUCTION]
+description = "IND-001 induction (S004A-C): the eight stops in order, each held on its eye-level view, with the crew staged for its scenes. Captions give the stop, its scenes and its operating state ([induction].sequence, Q48: board docked, spin up, a COAST tour through the despun transfer drum). The ring stops are drawn at the index angle; the departure is Tale-owned."
+representation = "REP_STANDARD"
+preset = "DOCKED"
+materials = "source"
+# Shot-local display controls, posed in memory: the entry hatches and ring A's transfer closures (Q46: spine-port gate, drum doors, tube hatches)
+# open, as in the eye-level previews.
+controls = { DOCK_ENTRY_CTRL = { Dock_Primary_outer_open = 1.0, Dock_Primary_inner_open = 1.0 }, CREW_PORT_GATE_CTRL = { Crew_Port_1_1_Gate_open = 1.0 }, TRANSFER_1_CTRL = { door_open_1 = 1.0, door_open_2 = 1.0, door_open_3 = 1.0, hatch_open_1 = 1.0, hatch_open_2 = 1.0, hatch_open_3 = 1.0 } }
+frame_end = 384
+review_frames = [24, 72, 120, 168, 216, 264, 312, 360]
+# Each stop's view ([induction].stops `view`), as in entry_preview's ind_<stop> stills.
+cuts = [
+    { frame = 1, stop = "arrival", camera = "stop" },
+    { frame = 49, stop = "spine", camera = "stop" },
+    { frame = 97, stop = "transfer", camera = "stop" },
+    { frame = 145, stop = "habitat", camera = "stop" },
+    { frame = 193, stop = "garden", camera = "stop" },
+    { frame = 241, stop = "burn_readiness", camera = "stop" },
+    { frame = 289, stop = "specialists", camera = "stop" },
+    { frame = 337, stop = "burn_station", camera = "stop" },
+]
+sources = [
+    { asset = "WF_WAYFARER_001.blend", collection = "WF_WAYFARER_001", group = "fixed" },
+    { asset = "WF_CHAR_INDUCTION.blend", library = "characters", collection = "WF_CHAR_INDUCTION", group = "fixed" },
+]
+# The review figures and mannequins are scale guides, not crew; each cut shows only the characters of its scenes (S004B on the couch, S004C
+# at the stations and the workbench, both at the burn station).
+ops = [
+    { op = "conceal", frame = 1, select = ["name:Human_*"] },
+    { op = "conceal", frame = 241, select = ["name:S004C_*"] },
+    { op = "reveal", frame = 289, select = ["name:S004C_*"] },
+    { op = "conceal", frame = 289, select = ["name:S004B_*"] },
+    { op = "reveal", frame = 337, select = ["name:S004B_*"] },
+]
+labels = []
+
+# M5 functional cutaway (owner directive 2026-10-18): the twelve subsystems of shots/m5_subsystems.toml as an explanatory overlay
+# (colours are never ship materials) over the unchanged COAST vehicle, plus the reversible BODY-C storage study asset
+# (studies/m5_cutaway.py --asset, NONCANON PROTOTYPE envelopes). The section removes the camera side (-Y) of the skins, rings, blades,
+# drive envelopes and the study tanks; the bars under the ship are the volumes no body packaging holds, at C-train scale, not locations.
+[shot.SH_M5_FUNCTIONAL_CUTAWAY]
+description = "M5: the whole ship as a functional cutaway; each of the twelve subsystems in its overlay colour with its label; the BODY-C storage study (He-3 and D2 cryostats, insulation envelopes, supports, lanes, utility frames, equipment bay, spine tunnel) in the body; the unhoused First Ignition and reserve volumes to scale below."
+representation = "REP_CUTAWAY"
+subsystems = "m5_subsystems.toml"
+frame_end = 24
+review_frames = [1]
+camera = { direction = [0.20, -1.0, 0.12], fov_deg = 24.0, margin = 1.0 }
+explode = { axial = 0.0, radial = 0.0 }
+section = { point = [0.0, 0.0, 0.0], normal = [0.0, -1.0, 0.0] }
+cut = ["kind:hull_shell", "kind:sector_pressure", "kind:ring_frame", "kind:ring_fill", "kind:ring_sector", "kind:sector_interior_overhead", "kind:casing_detail", "name:Casing_*", "name:Fusion_Core", "name:Common_Plasma_Region", "name:Magnetic_Manifold", "name:Engineering*", "name:Crew_Refuge*", "name:Refuge_*", "name:Structural_Spine*", "name:Crew_Trunk", "group:Assembly_THERMAL*", "kind:he3_cryostat", "kind:d2_cryostat", "kind:h2_tank", "kind:insulation_envelope", "kind:refrigeration_frame", "kind:transfer_pump_frame", "kind:vent_frame", "kind:equipment_envelope", "kind:service_workshop", "kind:spine_tunnel", "kind:service_lane", "kind:transfer_manifold", "kind:tank_support", "name:Tank_Volume*"]
+cap = ["name:Fusion_Core", "name:Common_Plasma_Region", "name:Magnetic_Manifold", "name:Crew_Refuge*", "kind:he3_cryostat", "kind:d2_cryostat", "kind:h2_tank", "kind:equipment_envelope", "name:Tank_Volume*"]
+sources = [
+    { asset = "WF_WAYFARER_001.blend", collection = "WF_WAYFARER_001", group = "assembly" },
+    { asset = "studies/WF_STUDY_BODY_C.blend", collection = "WF_STUDY_BODY_C", group = "fixed" },
+]
+ops = []
+labels = [
+    { text = "UNHOUSED AT SCALE (C-train length, NOT a tank location): first-burn H2 2,049 m3", select = ["name:Study_Shortfall_first_burn_H2"], show = [1, 24], offset = [0.0, 0.0, -8.0], size = 2.6 },
+    { text = "reserve H2 2,542 m3 + D2 176 m3", select = ["name:Study_Shortfall_reserve_H2"], show = [1, 24], offset = [0.0, 0.0, -8.0], size = 2.6 },
+]
+
+[shot.SH_M5_BODY_C_CUTAWAY]
+description = "M5 close-up: the BODY-C storage study in the stationary body, cut on the camera side: He-3 cryostats (3.2 K) and the D2 cryostat (20 K) in their insulation envelopes, keel lanes with supports and manifolds, the refrigeration / pump / vent utility frames, the equipment bay, the workshop fallback and the spine tunnel, with the cage, spine and aft equipment around them."
+representation = "REP_CUTAWAY"
+subsystems = "m5_subsystems.toml"
+subsystem_labels = false
+frame_end = 24
+review_frames = [1]
+camera = { direction = [0.30, -1.0, 0.32], fov_deg = 30.0, focus = [-22.0, 0.0, 0.0], radius = 40.0, margin = 1.0 }
+explode = { axial = 0.0, radial = 0.0 }
+section = { point = [0.0, 0.0, 0.0], normal = [0.0, -1.0, 0.0] }
+cut = ["kind:hull_shell", "kind:casing_detail", "name:Casing_*", "name:Structural_Spine*", "name:Crew_Trunk", "name:Engineering*", "group:Assembly_THERMAL*", "kind:he3_cryostat", "kind:d2_cryostat", "kind:h2_tank", "kind:insulation_envelope", "kind:refrigeration_frame", "kind:transfer_pump_frame", "kind:vent_frame", "kind:equipment_envelope", "kind:service_workshop", "kind:spine_tunnel", "kind:service_lane", "kind:transfer_manifold", "kind:tank_support", "name:Tank_Volume*"]
+cap = ["kind:he3_cryostat", "kind:d2_cryostat", "kind:h2_tank", "kind:equipment_envelope", "name:Tank_Volume*"]
+sources = [
+    { asset = "WF_WAYFARER_001.blend", collection = "WF_WAYFARER_001", group = "assembly" },
+    { asset = "studies/WF_STUDY_BODY_C.blend", collection = "WF_STUDY_BODY_C", group = "fixed" },
+]
+ops = [
+    { op = "conceal", frame = 1, select = ["group:Assembly_HABITAT*", "group:Assembly_ROTOR_INTERFACE*", "group:Assembly_FORWARD_SHIELD*", "group:Assembly_THERMAL*", "kind:shortfall_scale"] },
+]
+labels = [
+    { text = "He-3 CRYOSTATS 3.2 K: 8 of 9 modules", select = ["kind:he3_cryostat"], show = [1, 24], offset = [0.0, 0.0, 9.0], size = 2.2 },
+    { text = "D2 20 K", select = ["name:Study_D2_Vessel_00_90"], show = [1, 24], offset = [0.0, 0.0, 7.0], size = 2.0 },
+    { text = "EQUIPMENT BAY (34 envelopes + CMG reserve)", select = ["kind:equipment_envelope"], show = [1, 24], offset = [0.0, 0.0, 8.0], size = 2.0 },
+    { text = "REFRIGERATION / PUMPS / VENTS", select = ["kind:refrigeration_frame"], show = [1, 24], offset = [0.0, 0.0, 9.5], size = 2.0 },
+]
+
+# M5 slice 4: magnetic-nozzle support assemblies (studies/m5_drive_support.py --asset; STUDY / NONCANON, the vehicle is unchanged).
+# The field envelope is hidden, so the nozzle reads as what it is: coils in their cryostats, cold-mass supports to the warm yokes, the strike
+# modules on the throat-side coils; cryocooler / quench units on the thrust-ring aft face; the comparison thrust frame next to the built pickup.
+[shot.SH_M5_DRIVE_SUPPORT]
+description = "M5 close-up: the magnetic-nozzle support assemblies (no exhaust tubes): coil cryostats, cold-mass supports to the warm yokes, helium lines and current leads to every coil, cryocooler and quench-dump units on the thrust ring, and the comparison thrust frame beside the built pickup, over the unchanged vehicle; the field-envelope display surface and the blades hidden, so only hardware shows."
+representation = "REP_STANDARD"
+subsystems = "m5_subsystems.toml"
+subsystem_labels = false
+frame_end = 24
+review_frames = [1]
+camera = { direction = [-0.70, 0.55, 0.45], fov_deg = 34.0, focus = [-107.0, 0.8, 0.8], radius = 10.0, margin = 1.0 }
+explode = { axial = 0.0, radial = 0.0 }
+sources = [
+    { asset = "WF_WAYFARER_001.blend", collection = "WF_WAYFARER_001", group = "assembly" },
+    { asset = "studies/WF_STUDY_DRIVE_SUPPORT.blend", collection = "WF_STUDY_DRIVE_SUPPORT", group = "fixed" },
+]
+ops = [
+    { op = "conceal", frame = 1, select = ["group:Assembly_HABITAT*", "group:Assembly_ROTOR_INTERFACE*", "group:Assembly_FORWARD_SHIELD*", "group:Assembly_THERMAL*", "name:MagneticNozzle_FieldEnvelope*", "kind:scale_reference"] },
+]
+labels = []   # findings go in the legend strip (studies/m5_drive_support.py --legend): scene text hides behind the coils
+
+[shot.SH_M5_DRIVE_SUPPORT_SIDE]
+description = "M5 side view of the magnetic-nozzle support assemblies, for the load paths: the built pickups lie almost in the thrust-ring plane, the comparison thrust-frame bipods run near the nozzle axis; field envelope and blades hidden, vehicle unchanged."
+representation = "REP_STANDARD"
+subsystems = "m5_subsystems.toml"
+subsystem_labels = false
+frame_end = 24
+review_frames = [1]
+camera = { direction = [0.0, 1.0, 0.12], fov_deg = 30.0, focus = [-107.0, 0.0, 0.0], radius = 9.0, margin = 1.0 }
+explode = { axial = 0.0, radial = 0.0 }
+sources = [
+    { asset = "WF_WAYFARER_001.blend", collection = "WF_WAYFARER_001", group = "assembly" },
+    { asset = "studies/WF_STUDY_DRIVE_SUPPORT.blend", collection = "WF_STUDY_DRIVE_SUPPORT", group = "fixed" },
+]
+ops = [
+    { op = "conceal", frame = 1, select = ["group:Assembly_HABITAT*", "group:Assembly_ROTOR_INTERFACE*", "group:Assembly_FORWARD_SHIELD*", "group:Assembly_THERMAL*", "name:MagneticNozzle_FieldEnvelope*", "kind:scale_reference"] },
+]
+labels = []   # findings go in the legend strip (studies/m5_drive_support.py --legend): scene text hides behind the coils
+
+# M5 slice 5: restrained lettering and identification variants (studies/m5_lettering.py; REVIEW VARIANTS / NONCANON, 15!H120).
+# Only the two existing M4 colours (off-white, dark joint); no GU prefix, emblem or heraldry. L1 name band, L2 registry stencil, L3 service IDs.
+[shot.SH_M5_LETTERING_L1]
+description = "M5 Y155 lettering L1 (15!A216; REGISTRY NONCANON): GU WAYFARER 001 in 2.0 m off-white letters once on each face between the blade roots, over the unchanged proxy-grey vehicle."
+representation = "REP_STANDARD"
+frame_end = 24
+review_frames = [1]
+camera = { direction = [0.35, 0.6, 1.0], fov_deg = 30.0, margin = 1.02 }
+explode = { axial = 0.0, radial = 0.0 }
+sources = [
+    { asset = "WF_WAYFARER_001.blend", collection = "WF_WAYFARER_001", group = "assembly" },
+    { asset = "studies/WF_STUDY_LETTERING.blend", collection = "WF_STUDY_LETTERING", group = "fixed" },
+]
+ops = [
+    { op = "conceal", frame = 1, select = ["kind:lettering_l2", "kind:lettering_l3", "kind:lettering_r1", "kind:scale_reference"] },
+]
+labels = []
+
+[shot.SH_M5_LETTERING_L2]
+description = "M5 Y155 lettering L2 (15!A216; REGISTRY NONCANON): a charcoal stacked GU / WAYFARER stencil (0.6 / 0.9 m) at the forward end of each face and a 2.5 m dark 001 at the aft end."
+representation = "REP_STANDARD"
+frame_end = 24
+review_frames = [1]
+camera = { direction = [0.35, 0.6, 1.0], fov_deg = 30.0, margin = 1.02 }
+explode = { axial = 0.0, radial = 0.0 }
+sources = [
+    { asset = "WF_WAYFARER_001.blend", collection = "WF_WAYFARER_001", group = "assembly" },
+    { asset = "studies/WF_STUDY_LETTERING.blend", collection = "WF_STUDY_LETTERING", group = "fixed" },
+]
+ops = [
+    { op = "conceal", frame = 1, select = ["kind:lettering_l1", "kind:lettering_l3", "kind:lettering_r1", "kind:scale_reference"] },
+]
+labels = []
+
+[shot.SH_M5_LETTERING_L1_MID]
+description = "M5 Y155 lettering L1 at mid range (15!A216): the dorsal name band against the casing straps, access panels and blade roots."
+representation = "REP_STANDARD"
+frame_end = 24
+review_frames = [1]
+camera = { direction = [0.25, 0.35, 1.0], fov_deg = 30.0, focus = [20.0, 0.0, 6.0], radius = 70.0, margin = 1.0 }
+explode = { axial = 0.0, radial = 0.0 }
+sources = [
+    { asset = "WF_WAYFARER_001.blend", collection = "WF_WAYFARER_001", group = "assembly" },
+    { asset = "studies/WF_STUDY_LETTERING.blend", collection = "WF_STUDY_LETTERING", group = "fixed" },
+]
+ops = [
+    { op = "conceal", frame = 1, select = ["kind:lettering_l2", "kind:lettering_l3", "kind:lettering_r1", "kind:scale_reference"] },
+]
+labels = []
+
+[shot.SH_M5_LETTERING_L2_MID]
+description = "M5 Y155 lettering L2 at mid range (15!A216): the stacked GU / WAYFARER charcoal stencil at the forward end of the dorsal face."
+representation = "REP_STANDARD"
+frame_end = 24
+review_frames = [1]
+camera = { direction = [0.25, 0.35, 1.0], fov_deg = 30.0, focus = [62.0, 0.0, 6.0], radius = 32.0, margin = 1.0 }
+explode = { axial = 0.0, radial = 0.0 }
+sources = [
+    { asset = "WF_WAYFARER_001.blend", collection = "WF_WAYFARER_001", group = "assembly" },
+    { asset = "studies/WF_STUDY_LETTERING.blend", collection = "WF_STUDY_LETTERING", group = "fixed" },
+]
+ops = [
+    { op = "conceal", frame = 1, select = ["kind:lettering_l1", "kind:lettering_l3", "kind:lettering_r1", "kind:scale_reference"] },
+]
+labels = []
+
+[shot.SH_M5_LETTERING_L3]
+description = "M5 lettering review L3 (NONCANON): service identification only: the dark 0.3 m EVA AIRLOCK stencil forward of the SP-11 hatch on the collar."
+representation = "REP_STANDARD"
+frame_end = 24
+review_frames = [1]
+camera = { direction = [-0.35, 0.64, 0.77], fov_deg = 32.0, focus = [103.2, 4.2, 5.0], radius = 7.0, margin = 1.0 }
+explode = { axial = 0.0, radial = 0.0 }
+sources = [
+    { asset = "WF_WAYFARER_001.blend", collection = "WF_WAYFARER_001", group = "assembly" },
+    { asset = "studies/WF_STUDY_LETTERING.blend", collection = "WF_STUDY_LETTERING", group = "fixed" },
+]
+ops = [
+    { op = "conceal", frame = 1, select = ["kind:lettering_l1", "kind:lettering_l2", "kind:scale_reference", "group:Assembly_HABITAT*", "group:Assembly_ROTOR_INTERFACE*"] },
+]
+labels = []
+
+[shot.SH_M5_LETTERING_L3_AFT]
+description = "M5 lettering review L3 (NONCANON): access-panel IDs beside the ochre casing covers at the aft body, with the R1 GU-WF-001 registry-format decal (ARTISTIC PROTOTYPE, not an issued registry)."
+representation = "REP_STANDARD"
+frame_end = 24
+review_frames = [1]
+camera = { direction = [-0.25, 1.0, 0.35], fov_deg = 30.0, focus = [-95.4, 6.0, 0.0], radius = 5.0, margin = 1.0 }
+explode = { axial = 0.0, radial = 0.0 }
+sources = [
+    { asset = "WF_WAYFARER_001.blend", collection = "WF_WAYFARER_001", group = "assembly" },
+    { asset = "studies/WF_STUDY_LETTERING.blend", collection = "WF_STUDY_LETTERING", group = "fixed" },
+]
+ops = [
+    { op = "conceal", frame = 1, select = ["kind:lettering_l1", "kind:lettering_l2", "kind:scale_reference", "group:Assembly_HABITAT*", "group:Assembly_ROTOR_INTERFACE*"] },
+]
+labels = []
+
+[shot.SH_M5_LETTERING_R1_DOCK]
+description = "M5 registry-format proposal R1 (15!A216: ARTISTIC PROTOTYPE, not an issued registry): the 0.15 m charcoal GU-WF-001 production decal beside the primary dock, under its DOCK P stencil; human-scale inspection only."
+representation = "REP_STANDARD"
+frame_end = 24
+review_frames = [1]
+camera = { direction = [-0.15, -0.95, -0.30], fov_deg = 32.0, focus = [95.4, -6.1, -1.6], radius = 6.0, margin = 1.0 }
+explode = { axial = 0.0, radial = 0.0 }
+sources = [
+    { asset = "WF_WAYFARER_001.blend", collection = "WF_WAYFARER_001", group = "assembly" },
+    { asset = "studies/WF_STUDY_LETTERING.blend", collection = "WF_STUDY_LETTERING", group = "fixed" },
+]
+ops = [
+    { op = "conceal", frame = 1, select = ["kind:lettering_l1", "kind:lettering_l2", "kind:scale_reference", "group:Assembly_HABITAT*", "group:Assembly_ROTOR_INTERFACE*"] },
+]
+labels = []
+
+# M5 subsystem holograms: each of the twelve functional subsystems isolated in turn as a technical hologram in its overlay colour
+# (`subsystem:Sxx` selectors from shots/m5_subsystems.toml), over the vehicle plus the BODY-C and nozzle-support study assets (NONCANON).
+[shot.SH_M5_SUBSYSTEM_HOLOGRAMS]
+description = "M5 isolated technical holograms: the twelve functional subsystems one after another (30 frames each), each in its explanatory overlay colour with its label; the BODY-C storage and nozzle-support study envelopes are included as STUDY / NONCANON parts of S05-S08 and S02."
+representation = "REP_HOLOGRAM"
+subsystems = "m5_subsystems.toml"
+subsystem_labels = false
+frame_end = 360
+review_frames = [16, 46, 76, 106, 136, 166, 196, 226, 256, 286, 316, 346]
+camera = { direction = [0.55, -1.0, 0.42], fov_deg = 30.0, margin = 1.04 }
+explode = { axial = 0.0, radial = 0.0 }
+sources = [
+    { asset = "WF_WAYFARER_001.blend", collection = "WF_WAYFARER_001", group = "assembly" },
+    { asset = "studies/WF_STUDY_BODY_C.blend", collection = "WF_STUDY_BODY_C", group = "fixed" },
+    { asset = "studies/WF_STUDY_DRIVE_SUPPORT.blend", collection = "WF_STUDY_DRIVE_SUPPORT", group = "fixed" },
+]
+ops = [
+    { op = "isolate", frame = 1, select = ["subsystem:S01"] },
+    { op = "isolate", frame = 31, select = ["subsystem:S02"] },
+    { op = "isolate", frame = 61, select = ["subsystem:S03"] },
+    { op = "isolate", frame = 91, select = ["subsystem:S04"] },
+    { op = "isolate", frame = 121, select = ["subsystem:S05"] },
+    { op = "isolate", frame = 151, select = ["subsystem:S06"] },
+    { op = "isolate", frame = 181, select = ["subsystem:S07"] },
+    { op = "isolate", frame = 211, select = ["subsystem:S08"] },
+    { op = "isolate", frame = 241, select = ["subsystem:S09"] },
+    { op = "isolate", frame = 271, select = ["subsystem:S10"] },
+    { op = "isolate", frame = 301, select = ["subsystem:S11"] },
+    { op = "isolate", frame = 331, select = ["subsystem:S12"] },
+]
+labels = [
+    { text = "S01 FORWARD PROTECTION, EYE AND DUST LANCE", select = ["kind:shield_skin"], show = [1, 30], offset = [0.0, 0.0, 52.0], size = 3.0 },
+    { text = "S02 CENTRAL SPINE AND PRIMARY LOAD PATHS", select = ["name:Structural_Spine*"], show = [31, 60], offset = [-20.0, 0.0, -30.0], size = 3.0 },
+    { text = "S03 COUNTER-ROTATING HABITAT RINGS AND TRANSFER MECHANISMS", select = ["kind:ring_frame"], show = [61, 90], offset = [0.0, 0.0, 40.0], size = 3.0 },
+    { text = "S04 PRESSURIZED CREW AND SURVIVAL SPACES", select = ["kind:crew_refuge"], show = [91, 120], offset = [-25.0, 0.0, 26.0], size = 3.0 },
+    { text = "S05 D-3HE FUSION-FUEL CRYOSTATS", select = ["kind:he3_cryostat"], show = [121, 150], offset = [15.0, 0.0, -14.0], size = 3.0 },
+    { text = "S06 HYDROGEN REACTION-MASS STORAGE", select = ["name:Tank_Volume*"], show = [151, 180], offset = [10.0, 0.0, -14.0], size = 3.0 },
+    { text = "S07 REFRIGERATION, ISOLATION AND TRANSFER", select = ["kind:refrigeration_frame"], show = [181, 210], offset = [0.0, 0.0, 14.0], size = 3.0 },
+    { text = "S08 POWER DISTRIBUTION AND AUXILIARY EQUIPMENT", select = ["kind:equipment_envelope"], show = [211, 240], offset = [0.0, 0.0, -30.0], size = 3.0 },
+    { text = "S09 HEAT REJECTION, COOLANT ROUTING AND RADIATOR INTERFACES", select = ["kind:root_boom"], show = [241, 270], offset = [-20.0, 0.0, 44.0], size = 3.0 },
+    { text = "S10 REACTOR, MAGNETIC MANIFOLD AND FOUR-NOZZLE PROPULSION", select = ["name:Fusion_Core*"], show = [271, 300], offset = [0.0, 0.0, -30.0], size = 3.0 },
+    { text = "S11 COMMUNICATIONS, NAVIGATION AND ATTITUDE", select = ["name:Ext_HGA_1_Dish*"], show = [301, 330], offset = [0.0, 0.0, -14.0], size = 3.0 },
+    { text = "S12 ACCESS CORRIDORS, SERVICE INTERFACES AND MAINTENANCE", select = ["kind:crew_trunk"], show = [331, 360], offset = [-40.0, 0.0, 14.0], size = 3.0 },
+]
+
+# M5 isolated subsystem holograms: one shot per subsystem, the camera fitted to that subsystem alone (`camera.fit`).
+[shot.SH_M5_HOLO_S01]
+description = "M5 isolated technical hologram of S01: Forward protection, EYE and Dust Lance (WORKING envelope (90 m shield, 12 m Lance); truss, Crown, EYE wells PROTOTYPE). Explanatory overlay colour, not a material; study parts are NONCANON."
+representation = "REP_HOLOGRAM"
+subsystems = "m5_subsystems.toml"
+subsystem_labels = false
+frame_end = 24
+review_frames = [1]
+camera = { direction = [0.55, -1.0, 0.42], fov_deg = 30.0, margin = 1.08, fit = ["subsystem:S01"] }
+explode = { axial = 0.0, radial = 0.0 }
+sources = [
+    { asset = "WF_WAYFARER_001.blend", collection = "WF_WAYFARER_001", group = "assembly" },
+    { asset = "studies/WF_STUDY_BODY_C.blend", collection = "WF_STUDY_BODY_C", group = "fixed" },
+    { asset = "studies/WF_STUDY_DRIVE_SUPPORT.blend", collection = "WF_STUDY_DRIVE_SUPPORT", group = "fixed" },
+]
+ops = [
+    { op = "isolate", frame = 1, select = ["subsystem:S01"] },
+]
+labels = []
+
+[shot.SH_M5_HOLO_S02]
+description = "M5 isolated technical hologram of S02: Central spine and primary load paths (WORKING layout; member sizing OPEN; lobe supports PROTOTYPE). Explanatory overlay colour, not a material; study parts are NONCANON."
+representation = "REP_HOLOGRAM"
+subsystems = "m5_subsystems.toml"
+subsystem_labels = false
+frame_end = 24
+review_frames = [1]
+camera = { direction = [0.55, -1.0, 0.42], fov_deg = 30.0, margin = 1.08, fit = ["subsystem:S02"] }
+explode = { axial = 0.0, radial = 0.0 }
+sources = [
+    { asset = "WF_WAYFARER_001.blend", collection = "WF_WAYFARER_001", group = "assembly" },
+    { asset = "studies/WF_STUDY_BODY_C.blend", collection = "WF_STUDY_BODY_C", group = "fixed" },
+    { asset = "studies/WF_STUDY_DRIVE_SUPPORT.blend", collection = "WF_STUDY_DRIVE_SUPPORT", group = "fixed" },
+]
+ops = [
+    { op = "isolate", frame = 1, select = ["subsystem:S02"] },
+]
+labels = []
+
+[shot.SH_M5_HOLO_S03]
+description = "M5 isolated technical hologram of S03: Counter-rotating habitat rings and transfer mechanisms (BASELINE ring envelope; frames and mechanisms PROTOTYPE). Explanatory overlay colour, not a material; study parts are NONCANON."
+representation = "REP_HOLOGRAM"
+subsystems = "m5_subsystems.toml"
+subsystem_labels = false
+frame_end = 24
+review_frames = [1]
+camera = { direction = [0.55, -1.0, 0.42], fov_deg = 30.0, margin = 1.08, fit = ["subsystem:S03"] }
+explode = { axial = 0.0, radial = 0.0 }
+sources = [
+    { asset = "WF_WAYFARER_001.blend", collection = "WF_WAYFARER_001", group = "assembly" },
+    { asset = "studies/WF_STUDY_BODY_C.blend", collection = "WF_STUDY_BODY_C", group = "fixed" },
+    { asset = "studies/WF_STUDY_DRIVE_SUPPORT.blend", collection = "WF_STUDY_DRIVE_SUPPORT", group = "fixed" },
+]
+ops = [
+    { op = "isolate", frame = 1, select = ["subsystem:S03"] },
+]
+labels = []
+
+[shot.SH_M5_HOLO_S04]
+description = "M5 isolated technical hologram of S04: Pressurized crew and survival spaces (PROTOTYPE whitebox (human-scale reviewed); room fit-out STUDY). Explanatory overlay colour, not a material; study parts are NONCANON."
+representation = "REP_HOLOGRAM"
+subsystems = "m5_subsystems.toml"
+subsystem_labels = false
+frame_end = 24
+review_frames = [1]
+camera = { direction = [0.55, -1.0, 0.42], fov_deg = 30.0, margin = 1.08, fit = ["subsystem:S04"] }
+explode = { axial = 0.0, radial = 0.0 }
+sources = [
+    { asset = "WF_WAYFARER_001.blend", collection = "WF_WAYFARER_001", group = "assembly" },
+    { asset = "studies/WF_STUDY_BODY_C.blend", collection = "WF_STUDY_BODY_C", group = "fixed" },
+    { asset = "studies/WF_STUDY_DRIVE_SUPPORT.blend", collection = "WF_STUDY_DRIVE_SUPPORT", group = "fixed" },
+]
+ops = [
+    { op = "isolate", frame = 1, select = ["subsystem:S04"] },
+]
+labels = []
+
+[shot.SH_M5_HOLO_S05]
+description = "M5 isolated technical hologram of S05: D-3He fusion-fuel cryostats (STUDY / P0 PHYSICS HOLD (15!A200); BODY-Q2 OPEN). Explanatory overlay colour, not a material; study parts are NONCANON."
+representation = "REP_HOLOGRAM"
+subsystems = "m5_subsystems.toml"
+subsystem_labels = false
+frame_end = 24
+review_frames = [1]
+camera = { direction = [0.55, -1.0, 0.42], fov_deg = 30.0, margin = 1.08, fit = ["subsystem:S05"] }
+explode = { axial = 0.0, radial = 0.0 }
+sources = [
+    { asset = "WF_WAYFARER_001.blend", collection = "WF_WAYFARER_001", group = "assembly" },
+    { asset = "studies/WF_STUDY_BODY_C.blend", collection = "WF_STUDY_BODY_C", group = "fixed" },
+    { asset = "studies/WF_STUDY_DRIVE_SUPPORT.blend", collection = "WF_STUDY_DRIVE_SUPPORT", group = "fixed" },
+]
+ops = [
+    { op = "isolate", frame = 1, select = ["subsystem:S05"] },
+]
+labels = []
+
+[shot.SH_M5_HOLO_S06]
+description = "M5 isolated technical hologram of S06: Hydrogen reaction-mass storage (STUDY / HOLD; inventory, species split and storage state OPEN (BODY-Q1)). Explanatory overlay colour, not a material; study parts are NONCANON."
+representation = "REP_HOLOGRAM"
+subsystems = "m5_subsystems.toml"
+subsystem_labels = false
+frame_end = 24
+review_frames = [1]
+camera = { direction = [0.55, -1.0, 0.42], fov_deg = 30.0, margin = 1.08, fit = ["subsystem:S06"] }
+explode = { axial = 0.0, radial = 0.0 }
+sources = [
+    { asset = "WF_WAYFARER_001.blend", collection = "WF_WAYFARER_001", group = "assembly" },
+    { asset = "studies/WF_STUDY_BODY_C.blend", collection = "WF_STUDY_BODY_C", group = "fixed" },
+    { asset = "studies/WF_STUDY_DRIVE_SUPPORT.blend", collection = "WF_STUDY_DRIVE_SUPPORT", group = "fixed" },
+]
+ops = [
+    { op = "isolate", frame = 1, select = ["subsystem:S06"] },
+]
+labels = []
+
+[shot.SH_M5_HOLO_S07]
+description = "M5 isolated technical hologram of S07: Refrigeration, isolation and transfer (PROTOTYPE envelopes; heat leak, cooler power and boil-off OPEN). Explanatory overlay colour, not a material; study parts are NONCANON."
+representation = "REP_HOLOGRAM"
+subsystems = "m5_subsystems.toml"
+subsystem_labels = false
+frame_end = 24
+review_frames = [1]
+camera = { direction = [0.55, -1.0, 0.42], fov_deg = 30.0, margin = 1.08, fit = ["subsystem:S07"] }
+explode = { axial = 0.0, radial = 0.0 }
+sources = [
+    { asset = "WF_WAYFARER_001.blend", collection = "WF_WAYFARER_001", group = "assembly" },
+    { asset = "studies/WF_STUDY_BODY_C.blend", collection = "WF_STUDY_BODY_C", group = "fixed" },
+    { asset = "studies/WF_STUDY_DRIVE_SUPPORT.blend", collection = "WF_STUDY_DRIVE_SUPPORT", group = "fixed" },
+]
+ops = [
+    { op = "isolate", frame = 1, select = ["subsystem:S07"] },
+]
+labels = []
+
+[shot.SH_M5_HOLO_S08]
+description = "M5 isolated technical hologram of S08: Power distribution and auxiliary equipment (PROTOTYPE; power budget and conversion OPEN). Explanatory overlay colour, not a material; study parts are NONCANON."
+representation = "REP_HOLOGRAM"
+subsystems = "m5_subsystems.toml"
+subsystem_labels = false
+frame_end = 24
+review_frames = [1]
+camera = { direction = [0.55, -1.0, 0.42], fov_deg = 30.0, margin = 1.08, fit = ["subsystem:S08"] }
+explode = { axial = 0.0, radial = 0.0 }
+sources = [
+    { asset = "WF_WAYFARER_001.blend", collection = "WF_WAYFARER_001", group = "assembly" },
+    { asset = "studies/WF_STUDY_BODY_C.blend", collection = "WF_STUDY_BODY_C", group = "fixed" },
+    { asset = "studies/WF_STUDY_DRIVE_SUPPORT.blend", collection = "WF_STUDY_DRIVE_SUPPORT", group = "fixed" },
+]
+ops = [
+    { op = "isolate", frame = 1, select = ["subsystem:S08"] },
+]
+labels = []
+
+[shot.SH_M5_HOLO_S09]
+description = "M5 isolated technical hologram of S09: Heat rejection, coolant routing and radiator interfaces (BASELINE blades; thermal balance FAIL DIAGNOSTIC at First Ignition (28 col E)). Explanatory overlay colour, not a material; study parts are NONCANON."
+representation = "REP_HOLOGRAM"
+subsystems = "m5_subsystems.toml"
+subsystem_labels = false
+frame_end = 24
+review_frames = [1]
+camera = { direction = [0.55, -1.0, 0.42], fov_deg = 30.0, margin = 1.08, fit = ["subsystem:S09"] }
+explode = { axial = 0.0, radial = 0.0 }
+sources = [
+    { asset = "WF_WAYFARER_001.blend", collection = "WF_WAYFARER_001", group = "assembly" },
+    { asset = "studies/WF_STUDY_BODY_C.blend", collection = "WF_STUDY_BODY_C", group = "fixed" },
+    { asset = "studies/WF_STUDY_DRIVE_SUPPORT.blend", collection = "WF_STUDY_DRIVE_SUPPORT", group = "fixed" },
+]
+ops = [
+    { op = "isolate", frame = 1, select = ["subsystem:S09"] },
+]
+labels = []
+
+[shot.SH_M5_HOLO_S10]
+description = "M5 isolated technical hologram of S10: Reactor, magnetic manifold and four-nozzle propulsion (P0 PHYSICS HOLD (15!A200); rigged PROTOTYPE geometry). Explanatory overlay colour, not a material; study parts are NONCANON."
+representation = "REP_HOLOGRAM"
+subsystems = "m5_subsystems.toml"
+subsystem_labels = false
+frame_end = 24
+review_frames = [1]
+camera = { direction = [0.55, -1.0, 0.42], fov_deg = 30.0, margin = 1.08, fit = ["subsystem:S10"] }
+explode = { axial = 0.0, radial = 0.0 }
+sources = [
+    { asset = "WF_WAYFARER_001.blend", collection = "WF_WAYFARER_001", group = "assembly" },
+    { asset = "studies/WF_STUDY_BODY_C.blend", collection = "WF_STUDY_BODY_C", group = "fixed" },
+    { asset = "studies/WF_STUDY_DRIVE_SUPPORT.blend", collection = "WF_STUDY_DRIVE_SUPPORT", group = "fixed" },
+]
+ops = [
+    { op = "isolate", frame = 1, select = ["subsystem:S10"] },
+]
+labels = []
+
+[shot.SH_M5_HOLO_S11]
+description = "M5 isolated technical hologram of S11: Communications, navigation and attitude (PROTOTYPE bounding case; S02-Q1..Q3 OPEN; no high-speed flip authorized (63 HOLD)). Explanatory overlay colour, not a material; study parts are NONCANON."
+representation = "REP_HOLOGRAM"
+subsystems = "m5_subsystems.toml"
+subsystem_labels = false
+frame_end = 24
+review_frames = [1]
+camera = { direction = [0.55, -1.0, 0.42], fov_deg = 30.0, margin = 1.08, fit = ["subsystem:S11"] }
+explode = { axial = 0.0, radial = 0.0 }
+sources = [
+    { asset = "WF_WAYFARER_001.blend", collection = "WF_WAYFARER_001", group = "assembly" },
+    { asset = "studies/WF_STUDY_BODY_C.blend", collection = "WF_STUDY_BODY_C", group = "fixed" },
+    { asset = "studies/WF_STUDY_DRIVE_SUPPORT.blend", collection = "WF_STUDY_DRIVE_SUPPORT", group = "fixed" },
+]
+ops = [
+    { op = "isolate", frame = 1, select = ["subsystem:S11"] },
+]
+labels = []
+
+[shot.SH_M5_HOLO_S12]
+description = "M5 isolated technical hologram of S12: Access corridors, service interfaces and maintenance (PROTOTYPE route (built, inspected); service tunnel and lanes STUDY). Explanatory overlay colour, not a material; study parts are NONCANON."
+representation = "REP_HOLOGRAM"
+subsystems = "m5_subsystems.toml"
+subsystem_labels = false
+frame_end = 24
+review_frames = [1]
+camera = { direction = [0.55, -1.0, 0.42], fov_deg = 30.0, margin = 1.08, fit = ["subsystem:S12"] }
+explode = { axial = 0.0, radial = 0.0 }
+sources = [
+    { asset = "WF_WAYFARER_001.blend", collection = "WF_WAYFARER_001", group = "assembly" },
+    { asset = "studies/WF_STUDY_BODY_C.blend", collection = "WF_STUDY_BODY_C", group = "fixed" },
+    { asset = "studies/WF_STUDY_DRIVE_SUPPORT.blend", collection = "WF_STUDY_DRIVE_SUPPORT", group = "fixed" },
+]
+ops = [
+    { op = "isolate", frame = 1, select = ["subsystem:S12"] },
+]
+labels = []
+
+# M5 slice 3: EVA L2 comparison rails (studies/m5_eva_l2.py --asset; COMPARISON MODELS, no exterior rail released, FLIGHT_EVA HOLD).
+# Green: forward district (A), yellow: spine crossing (B, measured blocked), orange: aft casing rails (B/C), magenta: service targets.
+[shot.SH_M5_EVA_FORWARD]
+description = "M5 EVA L2: the forward district comparison rails (collar hoops and longitudinals from the SP-11 airlock, shield-rear radials and the rim hoop to the rim RCS pods and strobes) and the blocked spine crossing of the rotor bay, over the unchanged vehicle in the subsystem overlay."
+representation = "REP_STANDARD"
+subsystems = "m5_subsystems.toml"
+subsystem_labels = false
+frame_end = 24
+review_frames = [1]
+camera = { direction = [-0.8, -0.65, 0.5], fov_deg = 32.0, focus = [98.0, 0.0, 4.0], radius = 48.0, margin = 1.0 }
+explode = { axial = 0.0, radial = 0.0 }
+sources = [
+    { asset = "WF_WAYFARER_001.blend", collection = "WF_WAYFARER_001", group = "assembly" },
+    { asset = "studies/WF_STUDY_EVA_L2.blend", collection = "WF_STUDY_EVA_L2", group = "fixed" },
+]
+ops = [
+    { op = "conceal", frame = 1, select = ["name:EVA_*_B", "name:EVA_*_C", "name:EVA_*_B_*", "name:EVA_*_C_*", "name:EVA_Aft_Hatch*", "group:Assembly_THERMAL*", "group:Assembly_HABITAT*", "group:Assembly_ROTOR_INTERFACE*", "kind:scale_reference"] },
+]
+labels = [
+    { text = "SP-11 AIRLOCK + COLLAR RAILS (A)", select = ["name:EVA_Collar_Long_50"], show = [1, 24], offset = [0.0, 0.0, 9.0], size = 1.6 },
+    { text = "SHIELD-REAR RADIALS + RIM HOOP (A)", select = ["name:EVA_Shield_Radial_75"], show = [1, 24], offset = [-6.0, 0.0, 10.0], size = 1.6 },
+    { text = "SPINE CROSSING (B): BLOCKED, 0.015 m free (rings hidden)", select = ["name:EVA_Spine_Crossing"], show = [1, 24], offset = [-6.0, 0.0, -12.0], size = 1.6 },
+]
+
+[shot.SH_M5_EVA_AFT]
+description = "M5 EVA L2: the aft casing comparison rails (access-panel longitudinals, aft hoop arcs broken at the blade roots, spurs to the RCS pods and up the comms booms) and the hypothetical aft hatch of option C, in the blade-root band, over the unchanged vehicle."
+representation = "REP_STANDARD"
+subsystems = "m5_subsystems.toml"
+subsystem_labels = false
+frame_end = 24
+review_frames = [1]
+camera = { direction = [-0.85, -0.55, 0.45], fov_deg = 32.0, focus = [-92.0, 0.0, 0.0], radius = 24.0, margin = 1.0 }
+explode = { axial = 0.0, radial = 0.0 }
+sources = [
+    { asset = "WF_WAYFARER_001.blend", collection = "WF_WAYFARER_001", group = "assembly" },
+    { asset = "studies/WF_STUDY_EVA_L2.blend", collection = "WF_STUDY_EVA_L2", group = "fixed" },
+]
+ops = [
+    { op = "conceal", frame = 1, select = ["name:EVA_*_B", "name:EVA_*_B_*", "kind:scale_reference"] },
+]
+labels = [
+    { text = "AFT CASING RAILS (B/C): blade view factor 0.30, 4.6 m from a blade face", select = ["name:EVA_Casing_Long_0_C"], show = [1, 24], offset = [-80.0, 0.0, 10.0], size = 0.9 },
+    { text = "SPURS TO RCS PODS + COMMS BOOMS", select = ["name:EVA_Ring_Spur_270_C"], show = [1, 24], offset = [-4.0, 0.0, -4.0], size = 0.9 },
+]
+
+# M5 RCS-B (owner 15!A212): the alternate balanced opposed-jet RCS (STUDY, amber pods; cyan 15 deg plume cores) beside the as-built
+# S02 jets (red plume cores), over the unchanged vehicle (studies/m5_rcs_balanced.py, WF_STUDY_RCS_BALANCED).
+[shot.SH_M5_RCS_BALANCED]
+description = "M5 RCS-B whole ship (15!A212 LOW POWER CANDIDATE / PERFORMANCE OPEN): three balanced rim pods and three aft hull pods between the blades (amber, cyan plume cores) against the as-built S02 jets (red plume cores); no retrofit."
+representation = "REP_STANDARD"
+frame_end = 24
+review_frames = [1]
+camera = { direction = [0.45, -1.0, 0.55], fov_deg = 30.0, margin = 1.02 }
+explode = { axial = 0.0, radial = 0.0 }
+sources = [
+    { asset = "WF_WAYFARER_001.blend", collection = "WF_WAYFARER_001", group = "assembly" },
+    { asset = "studies/WF_STUDY_RCS_BALANCED.blend", collection = "WF_STUDY_RCS_BALANCED", group = "fixed" },
+]
+ops = [
+    { op = "conceal", frame = 1, select = ["kind:scale_reference", "name:MagneticNozzle_FieldEnvelope*"] },
+]
+labels = []
+
+[shot.SH_M5_RCS_BALANCED_RIM]
+description = "M5 RCS-B rim pod at 105 deg (STUDY): radial nozzle with no cant and two roll nozzles canted 40 deg outward, plume cores clear of the rim; the as-built rim pods' cores canted 20 deg aft."
+representation = "REP_STANDARD"
+frame_end = 24
+review_frames = [1]
+camera = { direction = [-0.9, -0.35, 0.45], fov_deg = 32.0, focus = [104.0, -11.0, 41.0], radius = 26.0, margin = 1.0 }
+explode = { axial = 0.0, radial = 0.0 }
+sources = [
+    { asset = "WF_WAYFARER_001.blend", collection = "WF_WAYFARER_001", group = "assembly" },
+    { asset = "studies/WF_STUDY_RCS_BALANCED.blend", collection = "WF_STUDY_RCS_BALANCED", group = "fixed" },
+]
+ops = [
+    { op = "conceal", frame = 1, select = ["kind:scale_reference", "name:MagneticNozzle_FieldEnvelope*"] },
+]
+labels = []
+
+[shot.SH_M5_RCS_BALANCED_AFT]
+description = "M5 RCS-B aft hull pods at X -92 between the blades (STUDY, radial cores 60 deg from each blade plane) against the as-built aft pods on the thrust ring, canted 20 deg aft; the B1F fan nozzles (+-30 deg tangential) stand beside each B1 radial nozzle."
+representation = "REP_STANDARD"
+frame_end = 24
+review_frames = [1]
+camera = { direction = [-0.75, 0.25, 0.6], fov_deg = 34.0, focus = [-97.0, 0.0, 4.0], radius = 34.0, margin = 1.0 }
+explode = { axial = 0.0, radial = 0.0 }
+sources = [
+    { asset = "WF_WAYFARER_001.blend", collection = "WF_WAYFARER_001", group = "assembly" },
+    { asset = "studies/WF_STUDY_RCS_BALANCED.blend", collection = "WF_STUDY_RCS_BALANCED", group = "fixed" },
+]
+ops = [
+    { op = "conceal", frame = 1, select = ["kind:scale_reference", "name:MagneticNozzle_FieldEnvelope*", "group:Assembly_HABITAT*", "group:Assembly_ROTOR_INTERFACE*"] },
+]
+labels = []
+
+# M5 NOZ-2 (owner 15!A214/A215): the symmetric axial frame F8 (slice 4 outboard bipods + inboard bipods to the central thrust hub,
+# amber) and the variant re-entrant coil mounts (WF_STUDY_NOZZLE_MOUNTS) over the unchanged vehicle; studies/m5_nozzle_mounts.py.
+[shot.SH_M5_NOZZLE_FRAME]
+description = "M5 NOZ-2 symmetric axial thrust frame F8 (15!A214 PREFERRED STUDY / AS-BUILT UNCHANGED): outboard bipods to the flanking ring nodes and inboard bipods to the central thrust hub on every nozzle, beside the as-built pickups; the slice 4 cryogenic parts, the variant mounts, the field-envelope surface and the blades hidden."
+representation = "REP_STANDARD"
+frame_end = 24
+review_frames = [1]
+camera = { direction = [-0.70, 0.55, 0.45], fov_deg = 34.0, focus = [-106.5, 0.0, 0.0], radius = 15.0, margin = 1.0 }
+explode = { axial = 0.0, radial = 0.0 }
+sources = [
+    { asset = "WF_WAYFARER_001.blend", collection = "WF_WAYFARER_001", group = "assembly" },
+    { asset = "studies/WF_STUDY_DRIVE_SUPPORT.blend", collection = "WF_STUDY_DRIVE_SUPPORT", group = "fixed" },
+    { asset = "studies/WF_STUDY_NOZZLE_MOUNTS.blend", collection = "WF_STUDY_NOZZLE_MOUNTS", group = "fixed" },
+]
+ops = [
+    { op = "conceal", frame = 1, select = ["group:Assembly_HABITAT*", "group:Assembly_ROTOR_INTERFACE*", "group:Assembly_FORWARD_SHIELD*", "group:Assembly_THERMAL*", "name:MagneticNozzle_FieldEnvelope*", "kind:scale_reference", "kind:cryo_*", "kind:drive_power_lead", "kind:drive_quench_dump", "kind:nozzle_mount_yoke"] },
+]
+labels = []
+
+[shot.SH_M5_NOZZLE_MOUNT]
+description = "M5 NOZ-2 variant coil mount on one nozzle (15!A215 RESEARCH ENVELOPE / OD-024 OD-025 HOLD): warm yokes moved out to a 0.25 m standoff, folded re-entrant supports with an 80 K intercept ring, and the throat-coil cryostats on a bore enlarged for >= 0.05 m plasma clearance; the as-built yokes and the slice 4 cryostats hidden."
+representation = "REP_STANDARD"
+frame_end = 24
+review_frames = [1]
+camera = { direction = [-0.45, 0.55, 0.70], fov_deg = 32.0, focus = [-107.3, 2.9, 3.4], radius = 2.6, margin = 1.0 }
+explode = { axial = 0.0, radial = 0.0 }
+sources = [
+    { asset = "WF_WAYFARER_001.blend", collection = "WF_WAYFARER_001", group = "assembly" },
+    { asset = "studies/WF_STUDY_NOZZLE_MOUNTS.blend", collection = "WF_STUDY_NOZZLE_MOUNTS", group = "fixed" },
+]
+ops = [
+    { op = "conceal", frame = 1, select = ["group:Assembly_HABITAT*", "group:Assembly_ROTOR_INTERFACE*", "group:Assembly_FORWARD_SHIELD*", "group:Assembly_THERMAL*", "name:MagneticNozzle_FieldEnvelope*", "name:Nozzle_Yoke*", "kind:scale_reference", "kind:drive_thrust_strut_inboard"] },
+]
+labels = []
+
+# M5 AFT-R (owner 15!A213): robotic-only aft service: the robot track network (cyan), targets in robot reach (green) and the two HGA
+# gimbals out of reach (magenta, with the reach gap), the boom-spur fallback (orange); studies/m5_aft_robotic.py, WF_STUDY_AFT_ROBOTIC.
+[shot.SH_M5_AFT_ROBOTIC]
+description = "M5 AFT-R robotic-only aft service (15!A213 WORKING DIRECTION / DGT-009 HOLD): robot tracks on the aft casing joined to the DS-13 track and DS-14 cradles; 55 of 57 aft targets within robot reach; no new hull opening."
+representation = "REP_STANDARD"
+frame_end = 24
+review_frames = [1]
+camera = { direction = [0.35, -0.80, 0.55], fov_deg = 32.0, focus = [-82.0, 0.0, 0.0], radius = 42.0, margin = 1.0 }
+explode = { axial = 0.0, radial = 0.0 }
+sources = [
+    { asset = "WF_WAYFARER_001.blend", collection = "WF_WAYFARER_001", group = "assembly" },
+    { asset = "studies/WF_STUDY_AFT_ROBOTIC.blend", collection = "WF_STUDY_AFT_ROBOTIC", group = "fixed" },
+]
+ops = [
+    { op = "conceal", frame = 1, select = ["kind:scale_reference", "group:Assembly_THERMAL*", "group:Assembly_HABITAT*", "group:Assembly_ROTOR_INTERFACE*", "group:Assembly_FORWARD_SHIELD*", "name:MagneticNozzle_FieldEnvelope*"] },
+]
+labels = []
+
+[shot.SH_M5_AFT_ROBOTIC_RING]
+description = "M5 AFT-R at the thrust ring: the robot spurs to the aft RCS pods and comms booms; the two HGA gimbals 2.24 m from the nearest track (magenta gap) and the 0.64 m boom-spur fallback (orange)."
+representation = "REP_STANDARD"
+frame_end = 24
+review_frames = [1]
+camera = { direction = [-0.75, 0.45, 0.50], fov_deg = 34.0, focus = [-103.5, 0.0, 3.0], radius = 16.0, margin = 1.0 }
+explode = { axial = 0.0, radial = 0.0 }
+sources = [
+    { asset = "WF_WAYFARER_001.blend", collection = "WF_WAYFARER_001", group = "assembly" },
+    { asset = "studies/WF_STUDY_AFT_ROBOTIC.blend", collection = "WF_STUDY_AFT_ROBOTIC", group = "fixed" },
+]
+ops = [
+    { op = "conceal", frame = 1, select = ["kind:scale_reference", "group:Assembly_THERMAL*", "group:Assembly_HABITAT*", "group:Assembly_ROTOR_INTERFACE*", "name:MagneticNozzle_FieldEnvelope*"] },
+]
+labels = []
+
+# M5 BODY-C2 (owner 15!A207:A209): the separate D / He-3 / H2 layout (studies/m5_body_c2.py, WF_STUDY_BODY_C2) beside BODY-C.
+[shot.SH_M5_BODY_C2_CUTAWAY]
+description = "M5 BODY-C2 (15!A207:A209 WORKING STUDY CHOICE / FUEL QUANTITY OPEN): the separate-species alternative in the same installation, cut on the camera side: He-3 (3.2 K), D2 (20 K) and H2 (20 K) each in its own jacketed lobe vessel, assigned so every species is housed at about the same fraction of its first-ignition need; lanes, manifolds, utility frames and the equipment bay as in BODY-C."
+representation = "REP_CUTAWAY"
+subsystems = "m5_subsystems.toml"
+subsystem_labels = false
+frame_end = 24
+review_frames = [1]
+camera = { direction = [0.30, -1.0, 0.32], fov_deg = 30.0, focus = [-22.0, 0.0, 0.0], radius = 40.0, margin = 1.0 }
+explode = { axial = 0.0, radial = 0.0 }
+section = { point = [0.0, 0.0, 0.0], normal = [0.0, -1.0, 0.0] }
+cut = ["kind:hull_shell", "kind:casing_detail", "name:Casing_*", "name:Structural_Spine*", "name:Crew_Trunk", "name:Engineering*", "group:Assembly_THERMAL*", "kind:he3_cryostat", "kind:d2_cryostat", "kind:h2_tank", "kind:insulation_envelope", "kind:refrigeration_frame", "kind:transfer_pump_frame", "kind:vent_frame", "kind:equipment_envelope", "kind:service_workshop", "kind:spine_tunnel", "kind:service_lane", "kind:transfer_manifold", "kind:tank_support", "name:Tank_Volume*"]
+cap = ["kind:he3_cryostat", "kind:d2_cryostat", "kind:h2_tank", "kind:equipment_envelope", "name:Tank_Volume*"]
+sources = [
+    { asset = "WF_WAYFARER_001.blend", collection = "WF_WAYFARER_001", group = "assembly" },
+    { asset = "studies/WF_STUDY_BODY_C2.blend", collection = "WF_STUDY_BODY_C2", group = "fixed" },
+]
+ops = [
+    { op = "conceal", frame = 1, select = ["group:Assembly_HABITAT*", "group:Assembly_ROTOR_INTERFACE*", "group:Assembly_FORWARD_SHIELD*", "group:Assembly_THERMAL*", "kind:shortfall_scale"] },
+]
+labels = []
+
+# M5 BODY-C3 (owner 15!A218): the grouped optimization of BODY-C2 (studies/m5_body_c3.py, WF_STUDY_BODY_C3) beside C2 and BODY-C.
+[shot.SH_M5_BODY_C3_CUTAWAY]
+description = "M5 BODY-C3 (15!A218 WORKING STUDY CHOICE / FUEL QUANTITY OPEN): C2's 27 separate jacketed vessels regrouped into whole ring modules, aft to forward D2, H2, five He-3 modules straddling both refrigeration frames, H2: the same capacity and deficits as C2, with 6 instead of 33 He-3 / 20 K jacket faces and a 19 m instead of 31 m longest He-3 cold line."
+representation = "REP_CUTAWAY"
+subsystems = "m5_subsystems.toml"
+subsystem_labels = false
+frame_end = 24
+review_frames = [1]
+camera = { direction = [0.30, -1.0, 0.32], fov_deg = 30.0, focus = [-22.0, 0.0, 0.0], radius = 40.0, margin = 1.0 }
+explode = { axial = 0.0, radial = 0.0 }
+section = { point = [0.0, 0.0, 0.0], normal = [0.0, -1.0, 0.0] }
+cut = ["kind:hull_shell", "kind:casing_detail", "name:Casing_*", "name:Structural_Spine*", "name:Crew_Trunk", "name:Engineering*", "group:Assembly_THERMAL*", "kind:he3_cryostat", "kind:d2_cryostat", "kind:h2_tank", "kind:insulation_envelope", "kind:refrigeration_frame", "kind:transfer_pump_frame", "kind:vent_frame", "kind:equipment_envelope", "kind:service_workshop", "kind:spine_tunnel", "kind:service_lane", "kind:transfer_manifold", "kind:tank_support", "name:Tank_Volume*"]
+cap = ["kind:he3_cryostat", "kind:d2_cryostat", "kind:h2_tank", "kind:equipment_envelope", "name:Tank_Volume*"]
+sources = [
+    { asset = "WF_WAYFARER_001.blend", collection = "WF_WAYFARER_001", group = "assembly" },
+    { asset = "studies/WF_STUDY_BODY_C3.blend", collection = "WF_STUDY_BODY_C3", group = "fixed" },
+]
+ops = [
+    { op = "conceal", frame = 1, select = ["group:Assembly_HABITAT*", "group:Assembly_ROTOR_INTERFACE*", "group:Assembly_FORWARD_SHIELD*", "group:Assembly_THERMAL*", "kind:shortfall_scale"] },
+]
+labels = []

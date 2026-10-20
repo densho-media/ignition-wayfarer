@@ -1,0 +1,82 @@
+{
+  "status": "PROTOTYPE_LAYOUT_NOT_CANON",
+  "pass": true,
+  "failures": [],
+  "section": {
+    "radius_m": 28.0,
+    "length_m": 3.5,
+    "deck_y_m": 0.0,
+    "ceiling_y_m": -2.9000000000000004,
+    "headroom_m": 2.9000000000000004,
+    "arc_deg": 11.92738266645223,
+    "deck_width_m": 5.549960008739488,
+    "overhead_width_m": 4.944071293548612,
+    "half_width_deck_m": 2.774980004369744,
+    "half_width_ceiling_m": 2.472035646774306,
+    "deck_to_overhead_m3": 57.92388645628871,
+    "usable_m3": 40.0,
+    "target_usable_m3": 40.0,
+    "subfloor_m3": 14.459113543711283
+  },
+  "aisle_m": 0.9,
+  "bunks": 12,
+  "burn_couches": 12,
+  "rated_occupancy": 12,
+  "story_manifest": 6,
+  "garden_sectors": 2,
+  "garden_zone_volume_m3": 4.3,
+  "garden_allocation_m3": 80.0,
+  "functions": {
+    "HABITATION": {
+      "component": "WF_INTERIOR_HABITATION",
+      "sectors": 2,
+      "zones": 14,
+      "zone_volume_m3": 21.642298140023215,
+      "free_volume_m3": 18.357701859976785,
+      "by_zone_m3": {
+        "bunk": 10.122247778698528,
+        "burn_couch": 1.2600000000000005,
+        "hygiene": 4.4217736584882275,
+        "stowage": 5.838276702836457
+      }
+    },
+    "WORK_MEDICAL_OPS": {
+      "component": "WF_INTERIOR_WORK",
+      "sectors": 2,
+      "zones": 9,
+      "zone_volume_m3": 14.741900160471658,
+      "free_volume_m3": 25.25809983952834,
+      "by_zone_m3": {
+        "burn_couch": 1.2600000000000005,
+        "laboratory": 1.2000000000000002,
+        "medical": 1.68,
+        "operations": 4.505082527469856,
+        "stowage": 4.696817633001801,
+        "workshop": 1.4000000000000004
+      }
+    },
+    "LIFE_SUPPORT_GARDEN_COMMON": {
+      "component": "WF_INTERIOR_GARDEN",
+      "sectors": 2,
+      "zones": 7,
+      "zone_volume_m3": 13.674610764513211,
+      "free_volume_m3": 26.32538923548679,
+      "by_zone_m3": {
+        "burn_couch": 1.2600000000000005,
+        "common": 4.230402130461167,
+        "garden": 2.15,
+        "life_support": 2.2108868292441137,
+        "stowage": 3.82332180480793
+      }
+    }
+  },
+  "coast_gravity": {
+    "owner_floor_radius_m": 28.0,
+    "owner_floor_g": 0.5009732932571302,
+    "deck_radius_m": 28.0,
+    "deck_g": 0.5009732932571302,
+    "head_radius_m": 26.2,
+    "head_g": 0.46876786726202896
+  },
+  "burn_orientation": "No room turn; with rings stopped and locked thrust acts along -X onto the aft-bulkhead couches (habitat.interior_orientation)."
+}

@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1520" height="640" font-family="sans-serif" font-size="11">
+<rect width="100%" height="100%" fill="#1b1e24"/>
+<text x="60" y="22" fill="#eee" font-size="14">L0 as proposed: SP-12/13 + SERV-002 A independently  (FAIL)</text>
+<line x1="93.68421052631578" y1="40" x2="93.68421052631578" y2="520" stroke="#333"/><text x="85.68421052631578" y="536" fill="#aaa">100</text>
+<line x1="161.05263157894737" y1="40" x2="161.05263157894737" y2="520" stroke="#333"/><text x="153.05263157894737" y="536" fill="#aaa">101</text>
+<line x1="228.42105263157893" y1="40" x2="228.42105263157893" y2="520" stroke="#333"/><text x="220.42105263157893" y="536" fill="#aaa">102</text>
+<line x1="295.7894736842105" y1="40" x2="295.7894736842105" y2="520" stroke="#333"/><text x="287.7894736842105" y="536" fill="#aaa">103</text>
+<line x1="363.1578947368421" y1="40" x2="363.1578947368421" y2="520" stroke="#333"/><text x="355.1578947368421" y="536" fill="#aaa">104</text>
+<line x1="430.5263157894737" y1="40" x2="430.5263157894737" y2="520" stroke="#333"/><text x="422.5263157894737" y="536" fill="#aaa">105</text>
+<line x1="497.89473684210526" y1="40" x2="497.89473684210526" y2="520" stroke="#333"/><text x="489.89473684210526" y="536" fill="#aaa">106</text>
+<line x1="565.2631578947369" y1="40" x2="565.2631578947369" y2="520" stroke="#333"/><text x="557.2631578947369" y="536" fill="#aaa">107</text>
+<line x1="632.6315789473684" y1="40" x2="632.6315789473684" y2="520" stroke="#333"/><text x="624.6315789473684" y="536" fill="#aaa">108</text>
+<line x1="700.0" y1="40" x2="700.0" y2="520" stroke="#333"/><text x="692.0" y="536" fill="#aaa">109</text>
+<line x1="60" y1="40.0" x2="700" y2="40.0" stroke="#333"/><text x="16" y="44.0" fill="#aaa">0°</text>
+<line x1="60" y1="100.0" x2="700" y2="100.0" stroke="#333"/><text x="16" y="104.0" fill="#aaa">45°</text>
+<line x1="60" y1="160.0" x2="700" y2="160.0" stroke="#333"/><text x="16" y="164.0" fill="#aaa">90°</text>
+<line x1="60" y1="220.0" x2="700" y2="220.0" stroke="#333"/><text x="16" y="224.0" fill="#aaa">135°</text>
+<line x1="60" y1="280.0" x2="700" y2="280.0" stroke="#333"/><text x="16" y="284.0" fill="#aaa">180°</text>
+<line x1="60" y1="340.0" x2="700" y2="340.0" stroke="#333"/><text x="16" y="344.0" fill="#aaa">225°</text>
+<line x1="60" y1="400.0" x2="700" y2="400.0" stroke="#333"/><text x="16" y="404.0" fill="#aaa">270°</text>
+<line x1="60" y1="460.0" x2="700" y2="460.0" stroke="#333"/><text x="16" y="464.0" fill="#aaa">315°</text>
+<line x1="60" y1="520.0" x2="700" y2="520.0" stroke="#333"/><text x="16" y="524.0" fill="#aaa">360°</text>
+<text x="340.0" y="554" fill="#aaa">ship X (m)</text>
+<rect x="144.21052631578948" y="46.666666666666664" width="276.2105263157891" height="93.33333333333334" fill="#4aa3df" fill-opacity="0.55" stroke="#4aa3df"/>
+<text x="147.21052631578948" y="97.33333333333333" fill="#fff">SP12 r 1.25–4.60</text>
+<rect x="427.1578947368423" y="46.666666666666664" width="144.84210526315724" height="93.33333333333334" fill="#6c7fe0" fill-opacity="0.55" stroke="#6c7fe0"/>
+<text x="430.1578947368423" y="97.33333333333333" fill="#fff">SP13 r 1.25–4.60</text>
+<rect x="144.14315789473653" y="71.86666666666667" width="148.21052631578965" height="69.59999999999997" fill="#e8c547" fill-opacity="0.55" stroke="#e8c547"/>
+<text x="147.14315789473653" y="85.86666666666667" fill="#fff">SP11_chamber r 2.50–6.15</text>
+<rect x="184.56421052631606" y="55.06666666666666" width="67.36842105263156" height="103.20000000000002" fill="#dddddd" fill-opacity="0.55" stroke="#dddddd"/>
+<text x="187.56421052631606" y="152.26666666666668" fill="#fff">SP12_branch r 0.80–1.25</text>
+<rect x="336.2105263157891" y="517.6" width="168.42105263157896" height="2.3999999999999773" fill="#46c07a" fill-opacity="0.55" stroke="#46c07a"/>
+<rect x="336.2105263157891" y="40.0" width="168.42105263157896" height="162.4" fill="#46c07a" fill-opacity="0.55" stroke="#46c07a"/>
+<text x="339.2105263157891" y="124.0" fill="#fff">workshop r 1.10–4.23</text>
+<rect x="336.2105263157891" y="102.8" width="101.05263157894734" height="34.39999999999999" fill="#e8574a" fill-opacity="0.55" stroke="#e8574a"/>
+<text x="339.2105263157891" y="149.2" fill="#fff">cell r 3.70–5.07</text>
+<rect x="363.1578947368421" y="301.73333333333335" width="107.78947368421018" height="116.5333333333333" fill="#f39c27" fill-opacity="0.55" stroke="#f39c27"/>
+<text x="366.1578947368421" y="364.0" fill="#fff">warm_SP52 r 1.10–2.90</text>
+<rect x="336.2105263157891" y="77.33333333333334" width="67.36842105263162" height="85.33333333333331" fill="#9fd89f" fill-opacity="0.55" stroke="#9fd89f"/>
+<text x="60" y="572" fill="#ff8a80">double-booked: SP12 x workshop 8.18 m³</text>
+<text x="60" y="586" fill="#ff8a80">double-booked: SP12 x cell 1.79 m³</text>
+<text x="60" y="600" fill="#ff8a80">double-booked: SP13 x workshop 7.5 m³</text>
+<text x="60" y="614" fill="#ff8a80">double-booked: SP13 x cell 0.15 m³</text>
+<text x="820" y="22" fill="#eee" font-size="14">L1-A EVA first: service district turned  (PASS)</text>
+<line x1="853.6842105263158" y1="40" x2="853.6842105263158" y2="520" stroke="#333"/><text x="845.6842105263158" y="536" fill="#aaa">100</text>
+<line x1="921.0526315789474" y1="40" x2="921.0526315789474" y2="520" stroke="#333"/><text x="913.0526315789474" y="536" fill="#aaa">101</text>
+<line x1="988.421052631579" y1="40" x2="988.421052631579" y2="520" stroke="#333"/><text x="980.421052631579" y="536" fill="#aaa">102</text>
+<line x1="1055.7894736842104" y1="40" x2="1055.7894736842104" y2="520" stroke="#333"/><text x="1047.7894736842104" y="536" fill="#aaa">103</text>
+<line x1="1123.157894736842" y1="40" x2="1123.157894736842" y2="520" stroke="#333"/><text x="1115.157894736842" y="536" fill="#aaa">104</text>
+<line x1="1190.5263157894738" y1="40" x2="1190.5263157894738" y2="520" stroke="#333"/><text x="1182.5263157894738" y="536" fill="#aaa">105</text>
+<line x1="1257.8947368421052" y1="40" x2="1257.8947368421052" y2="520" stroke="#333"/><text x="1249.8947368421052" y="536" fill="#aaa">106</text>
+<line x1="1325.2631578947369" y1="40" x2="1325.2631578947369" y2="520" stroke="#333"/><text x="1317.2631578947369" y="536" fill="#aaa">107</text>
+<line x1="1392.6315789473683" y1="40" x2="1392.6315789473683" y2="520" stroke="#333"/><text x="1384.6315789473683" y="536" fill="#aaa">108</text>
+<line x1="1460.0" y1="40" x2="1460.0" y2="520" stroke="#333"/><text x="1452.0" y="536" fill="#aaa">109</text>
+<line x1="820" y1="40.0" x2="1460" y2="40.0" stroke="#333"/><text x="776" y="44.0" fill="#aaa">0°</text>
+<line x1="820" y1="100.0" x2="1460" y2="100.0" stroke="#333"/><text x="776" y="104.0" fill="#aaa">45°</text>
+<line x1="820" y1="160.0" x2="1460" y2="160.0" stroke="#333"/><text x="776" y="164.0" fill="#aaa">90°</text>
+<line x1="820" y1="220.0" x2="1460" y2="220.0" stroke="#333"/><text x="776" y="224.0" fill="#aaa">135°</text>
+<line x1="820" y1="280.0" x2="1460" y2="280.0" stroke="#333"/><text x="776" y="284.0" fill="#aaa">180°</text>
+<line x1="820" y1="340.0" x2="1460" y2="340.0" stroke="#333"/><text x="776" y="344.0" fill="#aaa">225°</text>
+<line x1="820" y1="400.0" x2="1460" y2="400.0" stroke="#333"/><text x="776" y="404.0" fill="#aaa">270°</text>
+<line x1="820" y1="460.0" x2="1460" y2="460.0" stroke="#333"/><text x="776" y="464.0" fill="#aaa">315°</text>
+<line x1="820" y1="520.0" x2="1460" y2="520.0" stroke="#333"/><text x="776" y="524.0" fill="#aaa">360°</text>
+<text x="1100.0" y="554" fill="#aaa">ship X (m)</text>
+<rect x="904.2105263157895" y="46.666666666666664" width="276.2105263157891" height="93.33333333333334" fill="#4aa3df" fill-opacity="0.55" stroke="#4aa3df"/>
+<text x="907.2105263157895" y="97.33333333333333" fill="#fff">SP12 r 1.25–4.60</text>
+<rect x="1187.1578947368423" y="46.666666666666664" width="144.84210526315724" height="93.33333333333334" fill="#6c7fe0" fill-opacity="0.55" stroke="#6c7fe0"/>
+<text x="1190.1578947368423" y="97.33333333333333" fill="#fff">SP13 r 1.25–4.60</text>
+<rect x="904.1431578947365" y="71.86666666666667" width="148.21052631578965" height="69.59999999999997" fill="#e8c547" fill-opacity="0.55" stroke="#e8c547"/>
+<text x="907.1431578947365" y="85.86666666666667" fill="#fff">SP11_chamber r 2.50–6.15</text>
+<rect x="944.5642105263161" y="55.06666666666666" width="67.36842105263156" height="103.20000000000002" fill="#dddddd" fill-opacity="0.55" stroke="#dddddd"/>
+<text x="947.5642105263161" y="152.26666666666668" fill="#fff">SP12_branch r 0.80–1.25</text>
+<rect x="1096.2105263157891" y="277.6" width="168.42105263157896" height="164.8" fill="#46c07a" fill-opacity="0.55" stroke="#46c07a"/>
+<text x="1099.2105263157891" y="364.0" fill="#fff">workshop r 1.10–4.23</text>
+<rect x="1096.2105263157891" y="342.8" width="101.05263157894734" height="34.39999999999998" fill="#e8574a" fill-opacity="0.55" stroke="#e8574a"/>
+<text x="1099.2105263157891" y="389.2" fill="#fff">cell r 3.70–5.07</text>
+<rect x="1278.1052631578946" y="261.73333333333335" width="107.78947368421109" height="116.5333333333333" fill="#f39c27" fill-opacity="0.55" stroke="#f39c27"/>
+<text x="1281.1052631578946" y="324.0" fill="#fff">warm_SP52 r 1.10–2.90</text>
+<rect x="1096.2105263157891" y="317.3333333333333" width="67.36842105263162" height="85.33333333333331" fill="#9fd89f" fill-opacity="0.55" stroke="#9fd89f"/>
+</svg>

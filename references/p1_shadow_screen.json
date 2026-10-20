@@ -1,0 +1,80 @@
+{
+ "status": "GEOMETRIC_SCREEN_ONLY",
+ "scope": "Line of sight on PROTOTYPE proxies (shield disk, fusion-core envelope, coast pod shields, blade planform). No emission spectrum, drive power, dose or heat load; drive waste heat stays OPEN.",
+ "inputs": {
+  "shield_x_m": [
+   -11.500000000000002,
+   -10.500000000000002
+  ],
+  "shield_radius_m": 5.7,
+  "core_center_x_m": -16.0,
+  "core_radius_m": 4.6,
+  "core_length_m": 7.0,
+  "rotor_centers_m": [
+   28.7,
+   34.4
+  ],
+  "pod_center_radius_m": 27.6,
+  "pod_shield_radius_m": 2.6
+ },
+ "point_source": {
+  "full_shadow_half_angle_deg": 46.023030188667846,
+  "edge_shadow_half_angle_deg": 51.70983680775694,
+  "shield_intercept_fraction_full": 0.15281541308345342,
+  "shield_intercept_fraction_edge": 0.19017785571048973
+ },
+ "rotating_pods_low_thrust": {
+  "max_off_axis_deg": 35.2702399987798,
+  "inside_point_source_full_shadow": true,
+  "pods": [
+   {
+    "pod": "1.1",
+    "max_off_axis_deg": 35.2702399987798,
+    "max_core_samples_unshielded": 0.3466666666666667,
+    "mean_core_samples_unshielded": 0.25037037037037035
+   },
+   {
+    "pod": "1.2",
+    "max_off_axis_deg": 35.27023999877979,
+    "max_core_samples_unshielded": 0.3466666666666667,
+    "mean_core_samples_unshielded": 0.25037037037037035
+   },
+   {
+    "pod": "1.3",
+    "max_off_axis_deg": 35.2702399987798,
+    "max_core_samples_unshielded": 0.3466666666666667,
+    "mean_core_samples_unshielded": 0.25037037037037035
+   },
+   {
+    "pod": "2.1",
+    "max_off_axis_deg": 31.96279995355839,
+    "max_core_samples_unshielded": 0.24,
+    "mean_core_samples_unshielded": 0.21
+   },
+   {
+    "pod": "2.2",
+    "max_off_axis_deg": 31.962799953558385,
+    "max_core_samples_unshielded": 0.24,
+    "mean_core_samples_unshielded": 0.21
+   },
+   {
+    "pod": "2.3",
+    "max_off_axis_deg": 31.962799953558385,
+    "max_core_samples_unshielded": 0.24,
+    "mean_core_samples_unshielded": 0.21
+   }
+  ],
+  "note": "LOW_THRUST keeps the pods deployed while the drive runs. A point source at the core centre shadows them, but rim points of the 4.6 m core envelope see past the 5.7 m disk."
+ },
+ "minimum_cone_for_pods": {
+  "half_angle_deg": 35.2702399987798,
+  "intercept_fraction": 0.09178118749617115,
+  "note": "A shield sized only to cover the rotating pods from the core centre (no margin) would intercept this share of isotropic emission."
+ },
+ "radiator_cells_outside_full_shadow": 0.96875,
+ "owner_questions": [
+  "Is the shadow shield meant to cover the rotating pods during LOW_THRUST, and with what cone margin?",
+  "What share of core emission is radiated isotropically (bremsstrahlung, synchrotron, neutrons from D-D side reactions)? The shield intercepts that share times the fractions above, all of which must be rejected as heat.",
+  "Radiator blades lie almost entirely outside the shadow and see the core directly; is that acceptable for neutron activation and heating?"
+ ]
+}

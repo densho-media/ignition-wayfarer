@@ -1,0 +1,746 @@
+{
+ "task": "P1-001",
+ "scope": "PROTOTYPE crew transfer route (stationary trunk, rotary vestibules, crew tubes) with clearances, hatch fit and refuge reachability with the rings ROTATING and STOPPED_LOCKED. No seal, hatch, pressure or structural sizing.",
+ "passed": true,
+ "failures": [],
+ "fit": {
+  "trunk_inside_spine": {
+   "value_m": 0.09999999999999987,
+   "need_m": 0.05,
+   "passed": true
+  },
+  "vestibule_seals_on_spine": {
+   "value_m": 0.025000000000000022,
+   "need_m": 1e-09,
+   "passed": true
+  },
+  "spine_core_under_trunk_and_vestibules": {
+   "value_m": 0.10000000000000853,
+   "need_m": -1e-09,
+   "passed": true
+  },
+  "spine_port_inside_vestibule_seals": {
+   "value_m": 0.0,
+   "need_m": -1e-09,
+   "passed": true
+  },
+  "vestibule_hatch_inside_outer_wall": {
+   "value_m": 0.050000000000000044,
+   "need_m": -1e-09,
+   "passed": true
+  },
+  "straight_port_to_hatch_overlap_m": {
+   "value_m": 0.6,
+   "need_m": -1e-09,
+   "passed": true
+  },
+  "human_vestibule_depth_holds_suited_envelope": {
+   "value_m": 0.74,
+   "need_m": 0.699999999,
+   "passed": true
+  },
+  "primary_vestibule_port_clear_radius": {
+   "value_m": 0.8,
+   "need_m": 0.7999999990000001,
+   "passed": true
+  },
+  "human_vestibule_port_holds_suited_envelope": {
+   "value_m": 0.45,
+   "need_m": 0.34999999899999995,
+   "passed": true
+  },
+  "human_tube_clear_radius": {
+   "value_m": 0.8,
+   "need_m": 0.7999999990000001,
+   "passed": true
+  },
+  "overhead_hatch_inside_sector_ends": {
+   "value_m": 0.75,
+   "need_m": -1e-09,
+   "passed": true
+  },
+  "crew_tube_clear_of_spoke_plane": {
+   "value_m": 0.17999999999999983,
+   "need_m": 0.149999999,
+   "passed": true
+  },
+  "overhead_hatch_inside_sector_arc": {
+   "value_m": 0.4220356467743063,
+   "need_m": -1e-09,
+   "passed": true
+  },
+  "guard_cavity_m": {
+   "value_m": 0.2,
+   "need_m": 0.199999999,
+   "passed": true
+  },
+  "seal_planes": {
+   "value_m": 2,
+   "need_m": 2,
+   "passed": true
+  },
+  "strut_no_closer_to_stationary_band_than_drum": {
+   "value_m": 0.014999999999999902,
+   "need_m": -1e-09,
+   "passed": true
+  },
+  "strut_to_index_lock_angle_m": {
+   "value_m": 0.6399999999999999,
+   "need_m": 0.15,
+   "passed": true
+  },
+  "coast_tube_bend_inside_body": {
+   "value_m": 0.03105881860292037,
+   "need_m": -1e-09,
+   "passed": true
+  },
+  "coast_tube_inside_ring_sweep": {
+   "value_m": 1.2999999999999998,
+   "need_m": -1e-09,
+   "passed": true
+  },
+  "crew_tube_on_crew_spoke": {
+   "value_m": -0.0,
+   "need_m": -1e-09,
+   "passed": true
+  },
+  "port_gate_inside_spine_shell": {
+   "value_m": 0.019999999999999907,
+   "need_m": -1e-09,
+   "passed": true
+  },
+  "port_gate_parked_clear_of_spine_bores": {
+   "value_m": 0.09999999999999432,
+   "need_m": -1e-09,
+   "passed": true
+  },
+  "drum_door_parked_clear_of_next_opening": {
+   "value_m": 0.5255743605694488,
+   "need_m": -1e-09,
+   "passed": true
+  },
+  "tube_hatch_parked_clear_of_next_opening": {
+   "value_m": 0.6405525970650588,
+   "need_m": -1e-09,
+   "passed": true
+  },
+  "tube_hatch_clear_of_spoke_rails": {
+   "value_m": 0.9500000000000001,
+   "need_m": 0.149999999,
+   "passed": true
+  },
+  "tube_hatch_below_collar_miter_or_bulkhead": {
+   "value_m": 0.035000000000000586,
+   "need_m": -1e-09,
+   "passed": true
+  }
+ },
+ "tightest_clearances": [
+  {
+   "part": "Crew_Vestibule_2_Guard_Aft",
+   "state": "STOPPED_LOCKED",
+   "min_gap_m": 0.14999999999999147,
+   "nearest": "Path:Hub1_MOTOR_S1",
+   "need_m": 0.15,
+   "failures": [],
+   "passed": true
+  },
+  {
+   "part": "Crew_Vestibule_2_Guard_Aft",
+   "state": "ROTATING",
+   "min_gap_m": 0.15063752276866182,
+   "nearest": "Path:Hub1_MOTOR_S1",
+   "need_m": 0.15,
+   "failures": [],
+   "passed": true
+  },
+  {
+   "part": "Crew_Vestibule_1_Guard_Fwd",
+   "state": "STOPPED_LOCKED",
+   "min_gap_m": 0.1599999999999966,
+   "nearest": "Ring_Stop_Lock_1_1",
+   "need_m": 0.15,
+   "failures": [],
+   "passed": true
+  },
+  {
+   "part": "Crew_Vestibule_2_Guard_Fwd",
+   "state": "STOPPED_LOCKED",
+   "min_gap_m": 0.1599999999999966,
+   "nearest": "Ring_Stop_Lock_2_1",
+   "need_m": 0.15,
+   "failures": [],
+   "passed": true
+  },
+  {
+   "part": "Crew_Vestibule_1_Guard_Fwd",
+   "state": "ROTATING",
+   "min_gap_m": 0.16063752276865273,
+   "nearest": "Ring_Stop_Lock_1_1",
+   "need_m": 0.15,
+   "failures": [],
+   "passed": true
+  },
+  {
+   "part": "Crew_Vestibule_2_Guard_Fwd",
+   "state": "ROTATING",
+   "min_gap_m": 0.16063752276865273,
+   "nearest": "Ring_Stop_Lock_2_1",
+   "need_m": 0.15,
+   "failures": [],
+   "passed": true
+  },
+  {
+   "part": "Crew_Trunk",
+   "state": "ROTATING",
+   "min_gap_m": 0.07499999999999989,
+   "nearest": "Hub1_FLUID_Spoke_1",
+   "need_m": 0.05,
+   "failures": [],
+   "passed": true
+  },
+  {
+   "part": "Crew_Trunk",
+   "state": "STOPPED_LOCKED",
+   "min_gap_m": 0.07499999999999989,
+   "nearest": "Hub1_FLUID_Spoke_1",
+   "need_m": 0.05,
+   "failures": [],
+   "passed": true
+  },
+  {
+   "part": "Crew_Tube_2_3",
+   "state": "ROTATING",
+   "min_gap_m": 0.18007129738955874,
+   "nearest": "Ring_Spoke_2_5_-1",
+   "need_m": 0.15,
+   "failures": [],
+   "passed": true
+  },
+  {
+   "part": "Crew_Tube_2_3",
+   "state": "STOPPED_LOCKED",
+   "min_gap_m": 0.18007129738955874,
+   "nearest": "Ring_Spoke_2_5_-1",
+   "need_m": 0.15,
+   "failures": [],
+   "passed": true
+  },
+  {
+   "part": "Crew_Tube_2_1",
+   "state": "ROTATING",
+   "min_gap_m": 0.1800712973895594,
+   "nearest": "Ring_Spoke_2_1_-1",
+   "need_m": 0.15,
+   "failures": [],
+   "passed": true
+  },
+  {
+   "part": "Crew_Tube_2_1",
+   "state": "STOPPED_LOCKED",
+   "min_gap_m": 0.1800712973895594,
+   "nearest": "Ring_Spoke_2_1_-1",
+   "need_m": 0.15,
+   "failures": [],
+   "passed": true
+  }
+ ],
+ "routes": {
+  "ROTATING": {
+   "edges": [
+    [
+     "TRUNK",
+     "AIRLOCK_EVA"
+    ],
+    [
+     "TRUNK",
+     "DOCK_PRIMARY"
+    ],
+    [
+     "TRUNK",
+     "DOCK_SERVICE"
+    ],
+    [
+     "TRUNK",
+     "REFUGE"
+    ],
+    [
+     "TRUNK",
+     "VESTIBULE_1"
+    ],
+    [
+     "TRUNK",
+     "VESTIBULE_2"
+    ],
+    [
+     "VESTIBULE_1",
+     "SECTOR_1_1"
+    ],
+    [
+     "VESTIBULE_1",
+     "SECTOR_1_2"
+    ],
+    [
+     "VESTIBULE_1",
+     "SECTOR_1_3"
+    ],
+    [
+     "VESTIBULE_2",
+     "SECTOR_2_1"
+    ],
+    [
+     "VESTIBULE_2",
+     "SECTOR_2_2"
+    ],
+    [
+     "VESTIBULE_2",
+     "SECTOR_2_3"
+    ]
+   ],
+   "sectors": {
+    "SECTOR_1_1": {
+     "reaches": [
+      "AIRLOCK_EVA",
+      "DOCK_PRIMARY",
+      "DOCK_SERVICE",
+      "REFUGE"
+     ],
+     "route_to_refuge_m": 38.815565771201975,
+     "passed": true
+    },
+    "SECTOR_1_2": {
+     "reaches": [
+      "AIRLOCK_EVA",
+      "DOCK_PRIMARY",
+      "DOCK_SERVICE",
+      "REFUGE"
+     ],
+     "route_to_refuge_m": 41.904798547231934,
+     "passed": true
+    },
+    "SECTOR_1_3": {
+     "reaches": [
+      "AIRLOCK_EVA",
+      "DOCK_PRIMARY",
+      "DOCK_SERVICE",
+      "REFUGE"
+     ],
+     "route_to_refuge_m": 41.904798547231934,
+     "passed": true
+    },
+    "SECTOR_2_1": {
+     "reaches": [
+      "AIRLOCK_EVA",
+      "DOCK_PRIMARY",
+      "DOCK_SERVICE",
+      "REFUGE"
+     ],
+     "route_to_refuge_m": 35.27009640034624,
+     "passed": true
+    },
+    "SECTOR_2_2": {
+     "reaches": [
+      "AIRLOCK_EVA",
+      "DOCK_PRIMARY",
+      "DOCK_SERVICE",
+      "REFUGE"
+     ],
+     "route_to_refuge_m": 32.18086362431628,
+     "passed": true
+    },
+    "SECTOR_2_3": {
+     "reaches": [
+      "AIRLOCK_EVA",
+      "DOCK_PRIMARY",
+      "DOCK_SERVICE",
+      "REFUGE"
+     ],
+     "route_to_refuge_m": 35.27009640034625,
+     "passed": true
+    }
+   },
+   "passed": true
+  },
+  "STOPPED_LOCKED": {
+   "edges": [
+    [
+     "TRUNK",
+     "AIRLOCK_EVA"
+    ],
+    [
+     "TRUNK",
+     "DOCK_PRIMARY"
+    ],
+    [
+     "TRUNK",
+     "DOCK_SERVICE"
+    ],
+    [
+     "TRUNK",
+     "REFUGE"
+    ],
+    [
+     "TRUNK",
+     "VESTIBULE_1"
+    ],
+    [
+     "TRUNK",
+     "VESTIBULE_2"
+    ],
+    [
+     "VESTIBULE_1",
+     "SECTOR_1_1"
+    ],
+    [
+     "VESTIBULE_1",
+     "SECTOR_1_2"
+    ],
+    [
+     "VESTIBULE_1",
+     "SECTOR_1_3"
+    ],
+    [
+     "VESTIBULE_2",
+     "SECTOR_2_1"
+    ],
+    [
+     "VESTIBULE_2",
+     "SECTOR_2_2"
+    ],
+    [
+     "VESTIBULE_2",
+     "SECTOR_2_3"
+    ]
+   ],
+   "sectors": {
+    "SECTOR_1_1": {
+     "reaches": [
+      "AIRLOCK_EVA",
+      "DOCK_PRIMARY",
+      "DOCK_SERVICE",
+      "REFUGE"
+     ],
+     "route_to_refuge_m": 38.815565771201975,
+     "passed": true
+    },
+    "SECTOR_1_2": {
+     "reaches": [
+      "AIRLOCK_EVA",
+      "DOCK_PRIMARY",
+      "DOCK_SERVICE",
+      "REFUGE"
+     ],
+     "route_to_refuge_m": 41.904798547231934,
+     "passed": true
+    },
+    "SECTOR_1_3": {
+     "reaches": [
+      "AIRLOCK_EVA",
+      "DOCK_PRIMARY",
+      "DOCK_SERVICE",
+      "REFUGE"
+     ],
+     "route_to_refuge_m": 41.904798547231934,
+     "passed": true
+    },
+    "SECTOR_2_1": {
+     "reaches": [
+      "AIRLOCK_EVA",
+      "DOCK_PRIMARY",
+      "DOCK_SERVICE",
+      "REFUGE"
+     ],
+     "route_to_refuge_m": 35.27009640034624,
+     "passed": true
+    },
+    "SECTOR_2_2": {
+     "reaches": [
+      "AIRLOCK_EVA",
+      "DOCK_PRIMARY",
+      "DOCK_SERVICE",
+      "REFUGE"
+     ],
+     "route_to_refuge_m": 32.18086362431628,
+     "passed": true
+    },
+    "SECTOR_2_3": {
+     "reaches": [
+      "AIRLOCK_EVA",
+      "DOCK_PRIMARY",
+      "DOCK_SERVICE",
+      "REFUGE"
+     ],
+     "route_to_refuge_m": 35.27009640034625,
+     "passed": true
+    }
+   },
+   "passed": true
+  }
+ },
+ "alignment_m": {
+  "Crew_Tube_1_1": 0.0,
+  "Crew_Tube_1_2": 0.0,
+  "Crew_Tube_1_3": 0.0,
+  "Crew_Tube_2_1": 0.0,
+  "Crew_Tube_2_2": 0.0,
+  "Crew_Tube_2_3": 0.0
+ },
+ "placement": {
+  "refuge_inside_body_m": 3.4099999999999997,
+  "refuge_forward_of_shadow_shield_m": 174.64936247723134,
+  "refuge_areal_density_g_cm2": 20.0,
+  "crew_tube_length_outside_body_m": 18.525,
+  "note": "The rings stay at full size, so the pressurized sectors sit outside the 13 m body in every state; water, storage and structure fill the rest of the frame as distributed shielding (BASELINE ring_shielding, 12_HABITAT_LAYOUT A13). The crew tube is unshielded transit between the body and a sector. The refuge is inside the body."
+ },
+ "derived_constraints": {
+  "retracted_lock_outer_radius_max_m": {
+   "value": 1.19,
+   "unit": "m",
+   "canon_status": "DERIVED",
+   "selection_status": "PROTOTYPE",
+   "applies_to": "ring-stop lock pins and the hub index-lock pin while the rotor spins",
+   "basis": "The vestibule struts sweep the lock plane while the rings rotate; retracted locks and the index pin must stay inside this radius."
+  },
+  "spine_port_circumference_share": {
+   "value": 0.3526369332410574,
+   "canon_status": "DERIVED",
+   "selection_status": "PROTOTYPE",
+   "basis": "Largest share of the spine core circumference that the spine ports at one vestibule station open (arc spanned by each port); the framed opening is OPEN."
+  }
+ },
+ "contract": {
+  "generation": "P1-001",
+  "selection_status": "PROTOTYPE",
+  "owner_question": "P1-008 question 1 (crew vestibule vs hub)",
+  "canon": {
+   "architecture": "Stationary pressure trunk -> independently closable stationary-side hatch -> double-boundary despun/spin-transfer vestibule per ring (an isolated intermediate volume that synchronizes between the stationary and ring motion) -> independently closable rotating-side hatch at each crew spoke/tube -> pressurized spoke -> occupied sector (Q46, 12!C11). Electrical/data transfer plus only essential rotary fluid interfaces. The rotary seal is never the sole pressure boundary.",
+   "canon_status": "BASELINE",
+   "source_ref": "rotary_transfer",
+   "refuge_rule": "One concentrated stationary refuge rated for 12 adjacent to the stationary transfer-hub region; reachable with rings rotating or stopped (I4).",
+   "refuge_source_ref": "storm_refuge"
+  },
+  "open": {
+   "crew_path": {
+    "known": false,
+    "canon_status": "OPEN",
+    "reason": "The crew transfer path from the stationary structure to the ring sectors is OPEN (OD-002). [crew_transfer] is a PROTOTYPE proposal for owner review (P1-008 question 1), not a design."
+   },
+   "bearing_seal": {
+    "known": false,
+    "canon_status": "OPEN"
+   }
+  },
+  "sector_hatches": {
+   "OVERHEAD": {
+    "sector_frame_m": [
+     0.0,
+     -3.0,
+     -1.15
+    ],
+    "used_in": [
+     "ROTATING",
+     "STOPPED_LOCKED"
+    ],
+    "interface": "IF_SECTOR_OVERHEAD_HATCH"
+   }
+  },
+  "seal_planes": {
+   "built_min_per_side": 2,
+   "required": 2,
+   "chamber_u_m": {
+    "ROTOR_1": [
+     -3.4000000000000004,
+     -1.5
+    ],
+    "ROTOR_2": [
+     -2.7,
+     -1.5
+    ]
+   },
+   "guard_m": 0.2
+  },
+  "seal_fault": {
+   "rule": "ISOLATE_VESTIBULE_AND_CONTROLLED_RING_STOP",
+   "rig_action": "WF_VESTIBULE_SEAL_FAULT",
+   "source_ref": "rotary_transfer"
+  },
+  "vestibule": {
+   "per_rotor": {
+    "ROTOR_1": {
+     "u_m": [
+      -3.6000000000000005,
+      -1.3
+     ],
+     "radii_m": [
+      0.975,
+      1.975
+     ],
+     "spine_ports": [
+      1
+     ],
+     "hollow": true,
+     "spine_port_clear_m": 1.6
+    },
+    "ROTOR_2": {
+     "u_m": [
+      -2.9000000000000004,
+      -1.3
+     ],
+     "radii_m": [
+      0.975,
+      1.975
+     ],
+     "spine_ports": [
+      2
+     ],
+     "hollow": true,
+     "spine_port_clear_m": 0.9
+    }
+   },
+   "pressurization": "hatch-isolated; pressurized only for transit (PROTOTYPE rule)"
+  },
+  "routes": {
+   "ROTATING": {
+    "edges": [
+     [
+      "TRUNK",
+      "AIRLOCK_EVA"
+     ],
+     [
+      "TRUNK",
+      "DOCK_PRIMARY"
+     ],
+     [
+      "TRUNK",
+      "DOCK_SERVICE"
+     ],
+     [
+      "TRUNK",
+      "REFUGE"
+     ],
+     [
+      "TRUNK",
+      "VESTIBULE_1"
+     ],
+     [
+      "TRUNK",
+      "VESTIBULE_2"
+     ],
+     [
+      "VESTIBULE_1",
+      "SECTOR_1_1"
+     ],
+     [
+      "VESTIBULE_1",
+      "SECTOR_1_2"
+     ],
+     [
+      "VESTIBULE_1",
+      "SECTOR_1_3"
+     ],
+     [
+      "VESTIBULE_2",
+      "SECTOR_2_1"
+     ],
+     [
+      "VESTIBULE_2",
+      "SECTOR_2_2"
+     ],
+     [
+      "VESTIBULE_2",
+      "SECTOR_2_3"
+     ]
+    ],
+    "route_to_refuge_m": {
+     "SECTOR_1_1": 38.815565771201975,
+     "SECTOR_1_2": 41.904798547231934,
+     "SECTOR_1_3": 41.904798547231934,
+     "SECTOR_2_1": 35.27009640034624,
+     "SECTOR_2_2": 32.18086362431628,
+     "SECTOR_2_3": 35.27009640034625
+    }
+   },
+   "STOPPED_LOCKED": {
+    "edges": [
+     [
+      "TRUNK",
+      "AIRLOCK_EVA"
+     ],
+     [
+      "TRUNK",
+      "DOCK_PRIMARY"
+     ],
+     [
+      "TRUNK",
+      "DOCK_SERVICE"
+     ],
+     [
+      "TRUNK",
+      "REFUGE"
+     ],
+     [
+      "TRUNK",
+      "VESTIBULE_1"
+     ],
+     [
+      "TRUNK",
+      "VESTIBULE_2"
+     ],
+     [
+      "VESTIBULE_1",
+      "SECTOR_1_1"
+     ],
+     [
+      "VESTIBULE_1",
+      "SECTOR_1_2"
+     ],
+     [
+      "VESTIBULE_1",
+      "SECTOR_1_3"
+     ],
+     [
+      "VESTIBULE_2",
+      "SECTOR_2_1"
+     ],
+     [
+      "VESTIBULE_2",
+      "SECTOR_2_2"
+     ],
+     [
+      "VESTIBULE_2",
+      "SECTOR_2_3"
+     ]
+    ],
+    "route_to_refuge_m": {
+     "SECTOR_1_1": 38.815565771201975,
+     "SECTOR_1_2": 41.904798547231934,
+     "SECTOR_1_3": 41.904798547231934,
+     "SECTOR_2_1": 35.27009640034624,
+     "SECTOR_2_2": 32.18086362431628,
+     "SECTOR_2_3": 35.27009640034625
+    }
+   }
+  },
+  "derived_constraints": {
+   "retracted_lock_outer_radius_max_m": {
+    "value": 1.19,
+    "unit": "m",
+    "canon_status": "DERIVED",
+    "selection_status": "PROTOTYPE",
+    "applies_to": "ring-stop lock pins and the hub index-lock pin while the rotor spins",
+    "basis": "The vestibule struts sweep the lock plane while the rings rotate; retracted locks and the index pin must stay inside this radius."
+   },
+   "spine_port_circumference_share": {
+    "value": 0.3526369332410574,
+    "canon_status": "DERIVED",
+    "selection_status": "PROTOTYPE",
+    "basis": "Largest share of the spine core circumference that the spine ports at one vestibule station open (arc spanned by each port); the framed opening is OPEN."
+   }
+  },
+  "passage_clear_diameter_m": 0.8,
+  "crew_tube_clear_diameter_m": {
+   "ROTOR_1": 1.6,
+   "ROTOR_2": 1.6
+  }
+ }
+}

@@ -1,0 +1,55 @@
+{
+  "status": "GEOMETRIC_SCREEN_ONLY",
+  "configuration": "EVA",
+  "radiator_cant_deg": 10.0,
+  "radiator_cant_hinge": "ROOT_EDGE",
+  "method": "Deterministic cosine-weighted rays from 12 points per face per ribbon, 96 rays/point, saved coast frame 1; any mesh hit blocks sky. No emissivity, scattering, temperature or re-radiation solution.",
+  "faces": [
+    {
+      "sector": 1,
+      "face": -1,
+      "escape_fraction": 0.90625,
+      "rays": 1152
+    },
+    {
+      "sector": 1,
+      "face": 1,
+      "escape_fraction": 0.9036458333333334,
+      "rays": 1152
+    },
+    {
+      "sector": 2,
+      "face": -1,
+      "escape_fraction": 0.90625,
+      "rays": 1152
+    },
+    {
+      "sector": 2,
+      "face": 1,
+      "escape_fraction": 0.9036458333333334,
+      "rays": 1152
+    },
+    {
+      "sector": 3,
+      "face": -1,
+      "escape_fraction": 0.90625,
+      "rays": 1152
+    },
+    {
+      "sector": 3,
+      "face": 1,
+      "escape_fraction": 0.9036458333333334,
+      "rays": 1152
+    }
+  ],
+  "mean_sky_escape_fraction": 0.9049479166666666,
+  "effective_area_if_escape_used_as_factor_m2": 30164.930555555555,
+  "working_view_factor": 0.9,
+  "sensitivity_effective_area_m2": {
+    "0.6": 20000.0,
+    "0.75": 25000.0,
+    "0.9": 30000.000000000004
+  },
+  "physical_area_unchanged_m2": 16666.666666666668,
+  "limitations": "Finite samples, proxy hardware and one rotor phase; directional visibility is not proof of 0.9 thermal view factor. Physical geometry is not resized to compensate."
+}

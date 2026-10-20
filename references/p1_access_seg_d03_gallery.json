@@ -1,0 +1,100 @@
+{
+ "study": "D03: SP-13 gallery to the storm refuge, an exit outside the single trunk (S&E 15!A177/A178; NONCANON PROTOTYPE)",
+ "source": [
+  "src/wayfarer/studies/d03_sp13_gallery.py",
+  "runs/20261016T1300Z-d03"
+ ],
+ "segments": [
+  {
+   "id": "D03-GAL-U",
+   "route": "SP-13 gallery -> refuge",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "D03 gallery az 125 deg, r 3.8 m, D 1.20 m (transverse leg 1.40 m), vestibule D 2.10 m, incline X 99.3-97.3 to the refuge door r 2.0 m",
+   "case": "suited crew (self-propelled)",
+   "least_m": 0.069,
+   "status": "PASS",
+   "worst_case_over": [
+    "suited crew (self-propelled)",
+    "seeds [17, 23, 41]"
+   ],
+   "seed_spread_m": [
+    0.069,
+    0.09
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "limit in zone A (room -> transverse leg); independent of the trunk and the SP-12 corridor; 1.5 g aft-down needs a ladder/arrest/hoist in the gallery (not modelled)"
+  },
+  {
+   "id": "D03-GAL-A",
+   "route": "SP-13 gallery -> refuge",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "D03 gallery az 125 deg, r 3.8 m, D 1.20 m (transverse leg 1.40 m), vestibule D 2.10 m, incline X 99.3-97.3 to the refuge door r 2.0 m",
+   "case": "carrier A (rigid litter) with two rescuers",
+   "least_m": 0.091,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier A (rigid litter)",
+    "rescuers",
+    "seeds [17, 23, 41]"
+   ],
+   "seed_spread_m": [
+    0.091,
+    0.105
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "limit in zone A (room -> transverse leg); independent of the trunk and the SP-12 corridor; 1.5 g aft-down needs a ladder/arrest/hoist in the gallery (not modelled)"
+  },
+  {
+   "id": "D03-GAL-S",
+   "route": "SP-13 gallery -> refuge",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "D03 gallery az 125 deg, r 3.8 m, D 1.20 m (transverse leg 1.40 m), vestibule D 2.10 m, incline X 99.3-97.3 to the refuge door r 2.0 m",
+   "case": "carrier S (suited casualty on frame) with two rescuers",
+   "least_m": 0.021,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "carrier S (suited casualty on frame)",
+    "rescuers",
+    "seeds [17, 23, 41]"
+   ],
+   "seed_spread_m": [
+    0.021,
+    0.101
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "limit in zone A (room -> transverse leg); independent of the trunk and the SP-12 corridor; 1.5 g aft-down needs a ladder/arrest/hoist in the gallery (not modelled)"
+  },
+  {
+   "id": "D03-GAL-K",
+   "route": "SP-13 gallery -> refuge",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "D03 gallery az 125 deg, r 3.8 m, D 1.20 m (transverse leg 1.40 m), vestibule D 2.10 m, incline X 99.3-97.3 to the refuge door r 2.0 m",
+   "case": "carrier K (litter + kit) with two rescuers",
+   "least_m": 0.072,
+   "status": "PASS",
+   "worst_case_over": [
+    "carrier K (litter + kit)",
+    "rescuers",
+    "seeds [17, 23, 41]"
+   ],
+   "seed_spread_m": [
+    0.072,
+    0.105
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "limit in zone A (room -> transverse leg); independent of the trunk and the SP-12 corridor; 1.5 g aft-down needs a ladder/arrest/hoist in the gallery (not modelled)"
+  }
+ ]
+}

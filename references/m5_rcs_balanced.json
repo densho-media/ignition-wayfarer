@@ -1,0 +1,1924 @@
+{
+ "status": "LOW POWER CANDIDATE / PERFORMANCE OPEN (S&E 15!A212, 98!A116): alternates beside the as-built S02 jets; no retrofit",
+ "reference": {
+  "force_N": 100.0,
+  "isp_s": 300.0,
+  "note": "REFERENCE units only (15!A212 H: no assumed 100 N class, no assumed Isp); torque and propellant scale with force and 1/Isp; inertia from references/m5_attitude.json (CAD screen, OPEN)"
+ },
+ "layout": {
+  "B1": {
+   "forward_deg": [
+    105.0,
+    225.0,
+    345.0
+   ],
+   "note": "three new rim pods between Crown bays (asset)"
+  },
+  "B2": {
+   "forward_deg": [
+    75.0,
+    165.0,
+    255.0,
+    345.0
+   ],
+   "note": "the four as-built rim pod bays, roll nozzles recanted outward"
+  },
+  "B1F": {
+   "forward_deg": [
+    105.0,
+    225.0,
+    345.0
+   ],
+   "aft_fan_deg": 30.0,
+   "note": "B1 with a two-nozzle fan per aft pod in place of the radial nozzle (asset: fan nozzles beside the B1 radial ones)"
+  },
+  "aft_deg": [
+   90.0,
+   210.0,
+   330.0
+  ],
+  "aft_x_m": -92.0,
+  "roll_cant_outward_deg": 40.0,
+  "nozzles": {
+   "B1": 12,
+   "B2": 15,
+   "B1F": 15
+  },
+  "as_built_nozzles": 21
+ },
+ "conditioning": {
+  "J_per_kg": 4400000.0,
+  "note": "LH2 at 20 K to warm gas at ~300 K (order of magnitude); a buffer conditioned off-line from waste heat avoids the live load"
+ },
+ "variants": {
+  "B1": {
+   "roll+": {
+    "torque_N_m": 10128,
+    "efficient": {
+     "lever_m": 33.8,
+     "jets": {
+      "Study_RCSB_Fwd_1_Roll_Neg": 1.0,
+      "Study_RCSB_Fwd_2_Roll_Neg": 1.0,
+      "Study_RCSB_Fwd_3_Roll_Neg": 1.0
+     }
+    },
+    "jets_firing": 3,
+    "sum_duty": 3.0,
+    "lever_efficiency_m": 33.8,
+    "parasitic_force_N": 0.0,
+    "parasitic_dv_m_s_per_slew": 0.0,
+    "slew_start_stop": {
+     "rate_deg_s": 0.05,
+     "burn_s": 31.2,
+     "h2_kg": 3.18,
+     "conditioning_MJ": 14.0
+    },
+    "firing": {
+     "h2_kg_s": 0.102,
+     "conditioning_kW_if_live": 448.7,
+     "valve_W": 90
+    },
+    "sensitivity_only_180": {
+     "minutes": 7.9,
+     "h2_kg": 48.3
+    },
+    "duty": {
+     "Study_RCSB_Fwd_1_Roll_Neg": 1.0,
+     "Study_RCSB_Fwd_2_Roll_Neg": 1.0,
+     "Study_RCSB_Fwd_3_Roll_Neg": 1.0
+    },
+    "cross_torque_N_m": 0.0
+   },
+   "roll-": {
+    "torque_N_m": 10128,
+    "efficient": {
+     "lever_m": 33.8,
+     "jets": {
+      "Study_RCSB_Fwd_1_Roll_Pos": 1.0,
+      "Study_RCSB_Fwd_2_Roll_Pos": 1.0,
+      "Study_RCSB_Fwd_3_Roll_Pos": 1.0
+     }
+    },
+    "jets_firing": 3,
+    "sum_duty": 3.0,
+    "lever_efficiency_m": 33.8,
+    "parasitic_force_N": 0.0,
+    "parasitic_dv_m_s_per_slew": 0.0,
+    "slew_start_stop": {
+     "rate_deg_s": 0.05,
+     "burn_s": 31.2,
+     "h2_kg": 3.18,
+     "conditioning_MJ": 14.0
+    },
+    "firing": {
+     "h2_kg_s": 0.102,
+     "conditioning_kW_if_live": 448.7,
+     "valve_W": 90
+    },
+    "sensitivity_only_180": {
+     "minutes": 7.9,
+     "h2_kg": 48.3
+    },
+    "duty": {
+     "Study_RCSB_Fwd_1_Roll_Pos": 1.0,
+     "Study_RCSB_Fwd_2_Roll_Pos": 1.0,
+     "Study_RCSB_Fwd_3_Roll_Pos": 1.0
+    },
+    "cross_torque_N_m": 0.0
+   },
+   "pitch+": {
+    "torque_N_m": 19736,
+    "efficient": {
+     "lever_m": 63.2,
+     "jets": {
+      "Study_RCSB_Fwd_1_Radial": 0.816,
+      "Study_RCSB_Fwd_1_Roll_Neg": 0.152,
+      "Study_RCSB_Fwd_3_Roll_Pos": 0.152,
+      "Study_RCSB_Aft_2_Radial": 1.0,
+      "Study_RCSB_Aft_3_Radial": 1.0
+     }
+    },
+    "jets_firing": 9,
+    "sum_duty": 6.268,
+    "lever_efficiency_m": 31.5,
+    "parasitic_force_N": 0.0,
+    "parasitic_dv_m_s_per_slew": 0.0,
+    "slew_start_stop": {
+     "rate_deg_s": 0.05,
+     "burn_s": 664.5,
+     "h2_kg": 70.54,
+     "conditioning_MJ": 310.4
+    },
+    "firing": {
+     "h2_kg_s": 0.2131,
+     "conditioning_kW_if_live": 937.4,
+     "valve_W": 270
+    },
+    "sensitivity_only_180": {
+     "minutes": 36.5,
+     "h2_kg": 466.0
+    },
+    "duty": {
+     "Study_RCSB_Fwd_1_Radial": 1.0,
+     "Study_RCSB_Fwd_1_Roll_Pos": 0.332,
+     "Study_RCSB_Fwd_1_Roll_Neg": 1.0,
+     "Study_RCSB_Fwd_2_Roll_Pos": 1.0,
+     "Study_RCSB_Fwd_2_Roll_Neg": 0.5,
+     "Study_RCSB_Fwd_3_Radial": 0.268,
+     "Study_RCSB_Fwd_3_Roll_Pos": 0.169,
+     "Study_RCSB_Aft_2_Radial": 1.0,
+     "Study_RCSB_Aft_3_Radial": 1.0
+    },
+    "cross_torque_N_m": 0.0
+   },
+   "pitch-": {
+    "torque_N_m": 19736,
+    "efficient": {
+     "lever_m": 92.6,
+     "jets": {
+      "Study_RCSB_Fwd_2_Radial": 0.298,
+      "Study_RCSB_Fwd_2_Roll_Pos": 0.415,
+      "Study_RCSB_Fwd_3_Roll_Neg": 0.415,
+      "Study_RCSB_Aft_1_Radial": 1.0,
+      "Study_RCSB_Aft_2_Radial": 0.0
+     }
+    },
+    "jets_firing": 8,
+    "sum_duty": 5.678,
+    "lever_efficiency_m": 34.8,
+    "parasitic_force_N": 0.0,
+    "parasitic_dv_m_s_per_slew": 0.0,
+    "slew_start_stop": {
+     "rate_deg_s": 0.05,
+     "burn_s": 664.5,
+     "h2_kg": 48.14,
+     "conditioning_MJ": 211.8
+    },
+    "firing": {
+     "h2_kg_s": 0.193,
+     "conditioning_kW_if_live": 849.2,
+     "valve_W": 240
+    },
+    "sensitivity_only_180": {
+     "minutes": 36.5,
+     "h2_kg": 422.2
+    },
+    "duty": {
+     "Study_RCSB_Fwd_1_Roll_Pos": 0.473,
+     "Study_RCSB_Fwd_1_Roll_Neg": 1.0,
+     "Study_RCSB_Fwd_2_Radial": 1.0,
+     "Study_RCSB_Fwd_2_Roll_Pos": 1.0,
+     "Study_RCSB_Fwd_2_Roll_Neg": 0.304,
+     "Study_RCSB_Fwd_3_Radial": 0.732,
+     "Study_RCSB_Fwd_3_Roll_Neg": 0.169,
+     "Study_RCSB_Aft_1_Radial": 1.0
+    },
+    "cross_torque_N_m": 0.0
+   },
+   "yaw+": {
+    "torque_N_m": 17099,
+    "efficient": {
+     "lever_m": 68.9,
+     "jets": {
+      "Study_RCSB_Fwd_1_Roll_Pos": 0.359,
+      "Study_RCSB_Fwd_2_Radial": 0.258,
+      "Study_RCSB_Fwd_2_Roll_Neg": 0.359,
+      "Study_RCSB_Aft_1_Radial": 0.5,
+      "Study_RCSB_Aft_3_Radial": 1.0
+     }
+    },
+    "jets_firing": 9,
+    "sum_duty": 6.655,
+    "lever_efficiency_m": 25.7,
+    "parasitic_force_N": 0.0,
+    "parasitic_dv_m_s_per_slew": 0.0,
+    "slew_start_stop": {
+     "rate_deg_s": 0.05,
+     "burn_s": 766.5,
+     "h2_kg": 64.66,
+     "conditioning_MJ": 284.5
+    },
+    "firing": {
+     "h2_kg_s": 0.2262,
+     "conditioning_kW_if_live": 995.3,
+     "valve_W": 270
+    },
+    "sensitivity_only_180": {
+     "minutes": 39.2,
+     "h2_kg": 531.4
+    },
+    "duty": {
+     "Study_RCSB_Fwd_1_Radial": 1.0,
+     "Study_RCSB_Fwd_1_Roll_Pos": 0.578,
+     "Study_RCSB_Fwd_1_Roll_Neg": 1.0,
+     "Study_RCSB_Fwd_2_Radial": 1.0,
+     "Study_RCSB_Fwd_2_Roll_Pos": 1.0,
+     "Study_RCSB_Fwd_2_Roll_Neg": 0.198,
+     "Study_RCSB_Fwd_3_Roll_Neg": 0.379,
+     "Study_RCSB_Aft_1_Radial": 0.5,
+     "Study_RCSB_Aft_3_Radial": 1.0
+    },
+    "cross_torque_N_m": 0.0
+   },
+   "yaw-": {
+    "torque_N_m": 17099,
+    "efficient": {
+     "lever_m": 69.2,
+     "jets": {
+      "Study_RCSB_Fwd_1_Roll_Neg": 0.132,
+      "Study_RCSB_Fwd_3_Radial": 0.707,
+      "Study_RCSB_Fwd_3_Roll_Pos": 0.132,
+      "Study_RCSB_Aft_1_Radial": 0.5,
+      "Study_RCSB_Aft_2_Radial": 1.0
+     }
+    },
+    "jets_firing": 7,
+    "sum_duty": 5.088,
+    "lever_efficiency_m": 33.6,
+    "parasitic_force_N": 0.0,
+    "parasitic_dv_m_s_per_slew": 0.0,
+    "slew_start_stop": {
+     "rate_deg_s": 0.05,
+     "burn_s": 766.5,
+     "h2_kg": 64.38,
+     "conditioning_MJ": 283.3
+    },
+    "firing": {
+     "h2_kg_s": 0.1729,
+     "conditioning_kW_if_live": 761.0,
+     "valve_W": 210
+    },
+    "sensitivity_only_180": {
+     "minutes": 39.2,
+     "h2_kg": 406.3
+    },
+    "duty": {
+     "Study_RCSB_Fwd_1_Roll_Pos": 0.496,
+     "Study_RCSB_Fwd_1_Roll_Neg": 1.0,
+     "Study_RCSB_Fwd_2_Roll_Pos": 0.798,
+     "Study_RCSB_Fwd_2_Roll_Neg": 0.294,
+     "Study_RCSB_Fwd_3_Radial": 1.0,
+     "Study_RCSB_Aft_1_Radial": 0.5,
+     "Study_RCSB_Aft_2_Radial": 1.0
+    },
+    "cross_torque_N_m": 0.0
+   }
+  },
+  "B2": {
+   "roll+": {
+    "torque_N_m": 13505,
+    "efficient": {
+     "lever_m": 33.8,
+     "jets": {
+      "Study_RCSB2_Fwd_1_Roll_Neg": 1.0,
+      "Study_RCSB2_Fwd_3_Roll_Neg": 1.0
+     }
+    },
+    "jets_firing": 6,
+    "sum_duty": 6.0,
+    "lever_efficiency_m": 22.5,
+    "parasitic_force_N": 0.0,
+    "parasitic_dv_m_s_per_slew": 0.0,
+    "slew_start_stop": {
+     "rate_deg_s": 0.05,
+     "burn_s": 23.4,
+     "h2_kg": 3.18,
+     "conditioning_MJ": 14.0
+    },
+    "firing": {
+     "h2_kg_s": 0.2039,
+     "conditioning_kW_if_live": 897.4,
+     "valve_W": 180
+    },
+    "sensitivity_only_180": {
+     "minutes": 6.8,
+     "h2_kg": 83.7
+    },
+    "duty": {
+     "Study_RCSB2_Fwd_1_Radial": 1.0,
+     "Study_RCSB2_Fwd_1_Roll_Neg": 1.0,
+     "Study_RCSB2_Fwd_2_Roll_Neg": 1.0,
+     "Study_RCSB2_Fwd_3_Radial": 1.0,
+     "Study_RCSB2_Fwd_3_Roll_Neg": 1.0,
+     "Study_RCSB2_Fwd_4_Roll_Neg": 1.0
+    },
+    "cross_torque_N_m": 0.0
+   },
+   "roll-": {
+    "torque_N_m": 13505,
+    "efficient": {
+     "lever_m": 33.8,
+     "jets": {
+      "Study_RCSB2_Fwd_1_Roll_Pos": 1.0,
+      "Study_RCSB2_Fwd_3_Roll_Pos": 1.0
+     }
+    },
+    "jets_firing": 6,
+    "sum_duty": 6.0,
+    "lever_efficiency_m": 22.5,
+    "parasitic_force_N": 0.0,
+    "parasitic_dv_m_s_per_slew": 0.0,
+    "slew_start_stop": {
+     "rate_deg_s": 0.05,
+     "burn_s": 23.4,
+     "h2_kg": 3.18,
+     "conditioning_MJ": 14.0
+    },
+    "firing": {
+     "h2_kg_s": 0.2039,
+     "conditioning_kW_if_live": 897.4,
+     "valve_W": 180
+    },
+    "sensitivity_only_180": {
+     "minutes": 6.8,
+     "h2_kg": 83.7
+    },
+    "duty": {
+     "Study_RCSB2_Fwd_1_Radial": 1.0,
+     "Study_RCSB2_Fwd_1_Roll_Pos": 1.0,
+     "Study_RCSB2_Fwd_2_Roll_Pos": 1.0,
+     "Study_RCSB2_Fwd_3_Radial": 1.0,
+     "Study_RCSB2_Fwd_3_Roll_Pos": 1.0,
+     "Study_RCSB2_Fwd_4_Roll_Pos": 1.0
+    },
+    "cross_torque_N_m": 0.0
+   },
+   "pitch+": {
+    "torque_N_m": 19741,
+    "efficient": {
+     "lever_m": 64.2,
+     "jets": {
+      "Study_RCSB2_Fwd_1_Radial": 0.707,
+      "Study_RCSB2_Fwd_1_Roll_Pos": 0.184,
+      "Study_RCSB2_Fwd_2_Roll_Neg": 0.184,
+      "Study_RCSB2_Aft_2_Radial": 1.0,
+      "Study_RCSB2_Aft_3_Radial": 1.0
+     }
+    },
+    "jets_firing": 12,
+    "sum_duty": 9.55,
+    "lever_efficiency_m": 20.7,
+    "parasitic_force_N": 0.0,
+    "parasitic_dv_m_s_per_slew": 0.0,
+    "slew_start_stop": {
+     "rate_deg_s": 0.05,
+     "burn_s": 664.3,
+     "h2_kg": 69.44,
+     "conditioning_MJ": 305.5
+    },
+    "firing": {
+     "h2_kg_s": 0.3246,
+     "conditioning_kW_if_live": 1428.3,
+     "valve_W": 360
+    },
+    "sensitivity_only_180": {
+     "minutes": 36.5,
+     "h2_kg": 709.9
+    },
+    "duty": {
+     "Study_RCSB2_Fwd_1_Radial": 1.0,
+     "Study_RCSB2_Fwd_1_Roll_Pos": 0.409,
+     "Study_RCSB2_Fwd_1_Roll_Neg": 1.0,
+     "Study_RCSB2_Fwd_2_Radial": 1.0,
+     "Study_RCSB2_Fwd_2_Roll_Pos": 1.0,
+     "Study_RCSB2_Fwd_2_Roll_Neg": 1.0,
+     "Study_RCSB2_Fwd_3_Roll_Pos": 1.0,
+     "Study_RCSB2_Fwd_3_Roll_Neg": 0.133,
+     "Study_RCSB2_Fwd_4_Radial": 0.732,
+     "Study_RCSB2_Fwd_4_Roll_Neg": 0.276,
+     "Study_RCSB2_Aft_2_Radial": 1.0,
+     "Study_RCSB2_Aft_3_Radial": 1.0
+    },
+    "cross_torque_N_m": 0.0
+   },
+   "pitch-": {
+    "torque_N_m": 19741,
+    "efficient": {
+     "lever_m": 95.1,
+     "jets": {
+      "Study_RCSB2_Fwd_3_Radial": 0.707,
+      "Study_RCSB2_Fwd_3_Roll_Pos": 0.184,
+      "Study_RCSB2_Fwd_4_Roll_Neg": 0.184,
+      "Study_RCSB2_Aft_1_Radial": 1.0,
+      "Study_RCSB2_Aft_2_Radial": 0.0
+     }
+    },
+    "jets_firing": 6,
+    "sum_duty": 2.32,
+    "lever_efficiency_m": 85.1,
+    "parasitic_force_N": 0.0,
+    "parasitic_dv_m_s_per_slew": 0.0,
+    "slew_start_stop": {
+     "rate_deg_s": 0.05,
+     "burn_s": 664.3,
+     "h2_kg": 46.88,
+     "conditioning_MJ": 206.3
+    },
+    "firing": {
+     "h2_kg_s": 0.0789,
+     "conditioning_kW_if_live": 347.0,
+     "valve_W": 180
+    },
+    "sensitivity_only_180": {
+     "minutes": 36.5,
+     "h2_kg": 172.5
+    },
+    "duty": {
+     "Study_RCSB2_Fwd_1_Roll_Pos": 0.026,
+     "Study_RCSB2_Fwd_1_Roll_Neg": 0.019,
+     "Study_RCSB2_Fwd_2_Roll_Neg": 0.006,
+     "Study_RCSB2_Fwd_3_Radial": 1.0,
+     "Study_RCSB2_Fwd_4_Radial": 0.268,
+     "Study_RCSB2_Aft_1_Radial": 1.0
+    },
+    "cross_torque_N_m": 0.0
+   },
+   "yaw+": {
+    "torque_N_m": 17108,
+    "efficient": {
+     "lever_m": 70.3,
+     "jets": {
+      "Study_RCSB2_Fwd_2_Radial": 0.612,
+      "Study_RCSB2_Fwd_2_Roll_Pos": 0.159,
+      "Study_RCSB2_Fwd_3_Roll_Neg": 0.159,
+      "Study_RCSB2_Aft_1_Radial": 0.5,
+      "Study_RCSB2_Aft_3_Radial": 1.0
+     }
+    },
+    "jets_firing": 10,
+    "sum_duty": 7.519,
+    "lever_efficiency_m": 22.8,
+    "parasitic_force_N": 0.0,
+    "parasitic_dv_m_s_per_slew": 0.0,
+    "slew_start_stop": {
+     "rate_deg_s": 0.05,
+     "burn_s": 766.1,
+     "h2_kg": 63.37,
+     "conditioning_MJ": 278.8
+    },
+    "firing": {
+     "h2_kg_s": 0.2556,
+     "conditioning_kW_if_live": 1124.5,
+     "valve_W": 300
+    },
+    "sensitivity_only_180": {
+     "minutes": 39.1,
+     "h2_kg": 600.2
+    },
+    "duty": {
+     "Study_RCSB2_Fwd_1_Roll_Pos": 0.562,
+     "Study_RCSB2_Fwd_1_Roll_Neg": 1.0,
+     "Study_RCSB2_Fwd_2_Radial": 1.0,
+     "Study_RCSB2_Fwd_2_Roll_Pos": 0.448,
+     "Study_RCSB2_Fwd_2_Roll_Neg": 1.0,
+     "Study_RCSB2_Fwd_3_Radial": 1.0,
+     "Study_RCSB2_Fwd_3_Roll_Pos": 1.0,
+     "Study_RCSB2_Fwd_3_Roll_Neg": 0.01,
+     "Study_RCSB2_Aft_1_Radial": 0.499,
+     "Study_RCSB2_Aft_3_Radial": 1.0
+    },
+    "cross_torque_N_m": 0.0
+   },
+   "yaw-": {
+    "torque_N_m": 17108,
+    "efficient": {
+     "lever_m": 70.3,
+     "jets": {
+      "Study_RCSB2_Fwd_1_Roll_Neg": 0.159,
+      "Study_RCSB2_Fwd_4_Radial": 0.612,
+      "Study_RCSB2_Fwd_4_Roll_Pos": 0.159,
+      "Study_RCSB2_Aft_1_Radial": 0.5,
+      "Study_RCSB2_Aft_2_Radial": 1.0
+     }
+    },
+    "jets_firing": 8,
+    "sum_duty": 6.145,
+    "lever_efficiency_m": 27.8,
+    "parasitic_force_N": 0.0,
+    "parasitic_dv_m_s_per_slew": 0.0,
+    "slew_start_stop": {
+     "rate_deg_s": 0.05,
+     "burn_s": 766.1,
+     "h2_kg": 63.37,
+     "conditioning_MJ": 278.8
+    },
+    "firing": {
+     "h2_kg_s": 0.2089,
+     "conditioning_kW_if_live": 919.0,
+     "valve_W": 240
+    },
+    "sensitivity_only_180": {
+     "minutes": 39.1,
+     "h2_kg": 490.6
+    },
+    "duty": {
+     "Study_RCSB2_Fwd_1_Radial": 1.0,
+     "Study_RCSB2_Fwd_1_Roll_Neg": 0.813,
+     "Study_RCSB2_Fwd_2_Roll_Pos": 1.0,
+     "Study_RCSB2_Fwd_3_Roll_Pos": 0.322,
+     "Study_RCSB2_Fwd_3_Roll_Neg": 0.509,
+     "Study_RCSB2_Fwd_4_Radial": 1.0,
+     "Study_RCSB2_Aft_1_Radial": 0.501,
+     "Study_RCSB2_Aft_2_Radial": 1.0
+    },
+    "cross_torque_N_m": 0.0
+   }
+  },
+  "B1F": {
+   "roll+": {
+    "torque_N_m": 11045,
+    "efficient": {
+     "lever_m": 33.8,
+     "jets": {
+      "Study_RCSBF_Fwd_1_Roll_Neg": 1.0,
+      "Study_RCSBF_Fwd_2_Roll_Neg": 1.0,
+      "Study_RCSBF_Fwd_3_Roll_Neg": 1.0
+     }
+    },
+    "jets_firing": 6,
+    "sum_duty": 6.0,
+    "lever_efficiency_m": 18.4,
+    "parasitic_force_N": 0.0,
+    "parasitic_dv_m_s_per_slew": 0.0,
+    "slew_start_stop": {
+     "rate_deg_s": 0.05,
+     "burn_s": 28.6,
+     "h2_kg": 3.18,
+     "conditioning_MJ": 14.0
+    },
+    "firing": {
+     "h2_kg_s": 0.2039,
+     "conditioning_kW_if_live": 897.4,
+     "valve_W": 180
+    },
+    "sensitivity_only_180": {
+     "minutes": 7.6,
+     "h2_kg": 92.6
+    },
+    "duty": {
+     "Study_RCSBF_Fwd_1_Roll_Neg": 1.0,
+     "Study_RCSBF_Fwd_2_Roll_Neg": 1.0,
+     "Study_RCSBF_Fwd_3_Roll_Neg": 1.0,
+     "Study_RCSBF_Aft_1_Fan_Neg": 1.0,
+     "Study_RCSBF_Aft_2_Fan_Neg": 1.0,
+     "Study_RCSBF_Aft_3_Fan_Neg": 1.0
+    },
+    "cross_torque_N_m": 0.0
+   },
+   "roll-": {
+    "torque_N_m": 11045,
+    "efficient": {
+     "lever_m": 33.8,
+     "jets": {
+      "Study_RCSBF_Fwd_1_Roll_Pos": 1.0,
+      "Study_RCSBF_Fwd_2_Roll_Pos": 1.0,
+      "Study_RCSBF_Fwd_3_Roll_Pos": 1.0
+     }
+    },
+    "jets_firing": 6,
+    "sum_duty": 6.0,
+    "lever_efficiency_m": 18.4,
+    "parasitic_force_N": 0.0,
+    "parasitic_dv_m_s_per_slew": 0.0,
+    "slew_start_stop": {
+     "rate_deg_s": 0.05,
+     "burn_s": 28.6,
+     "h2_kg": 3.18,
+     "conditioning_MJ": 14.0
+    },
+    "firing": {
+     "h2_kg_s": 0.2039,
+     "conditioning_kW_if_live": 897.4,
+     "valve_W": 180
+    },
+    "sensitivity_only_180": {
+     "minutes": 7.6,
+     "h2_kg": 92.6
+    },
+    "duty": {
+     "Study_RCSBF_Fwd_1_Roll_Pos": 1.0,
+     "Study_RCSBF_Fwd_2_Roll_Pos": 1.0,
+     "Study_RCSBF_Fwd_3_Roll_Pos": 1.0,
+     "Study_RCSBF_Aft_1_Fan_Pos": 1.0,
+     "Study_RCSBF_Aft_2_Fan_Pos": 1.0,
+     "Study_RCSBF_Aft_3_Fan_Pos": 1.0
+    },
+    "cross_torque_N_m": 0.0
+   },
+   "pitch+": {
+    "torque_N_m": 34164,
+    "efficient": {
+     "lever_m": 86.7,
+     "jets": {
+      "Study_RCSBF_Fwd_1_Radial": 1.0,
+      "Study_RCSBF_Fwd_1_Roll_Neg": 0.186,
+      "Study_RCSBF_Fwd_3_Roll_Pos": 0.186,
+      "Study_RCSBF_Aft_2_Fan_Pos": 0.708,
+      "Study_RCSBF_Aft_3_Fan_Neg": 0.707
+     }
+    },
+    "jets_firing": 9,
+    "sum_duty": 7.065,
+    "lever_efficiency_m": 48.4,
+    "parasitic_force_N": 0.0,
+    "parasitic_dv_m_s_per_slew": 0.0,
+    "slew_start_stop": {
+     "rate_deg_s": 0.05,
+     "burn_s": 383.9,
+     "h2_kg": 51.42,
+     "conditioning_MJ": 226.2
+    },
+    "firing": {
+     "h2_kg_s": 0.2401,
+     "conditioning_kW_if_live": 1056.6,
+     "valve_W": 270
+    },
+    "sensitivity_only_180": {
+     "minutes": 27.7,
+     "h2_kg": 399.2
+    },
+    "duty": {
+     "Study_RCSBF_Fwd_1_Radial": 1.0,
+     "Study_RCSBF_Fwd_1_Roll_Pos": 0.243,
+     "Study_RCSBF_Fwd_1_Roll_Neg": 1.0,
+     "Study_RCSBF_Fwd_2_Roll_Pos": 0.79,
+     "Study_RCSBF_Fwd_2_Roll_Neg": 1.0,
+     "Study_RCSBF_Fwd_3_Roll_Pos": 1.0,
+     "Study_RCSBF_Fwd_3_Roll_Neg": 0.032,
+     "Study_RCSBF_Aft_2_Fan_Pos": 1.0,
+     "Study_RCSBF_Aft_2_Fan_Neg": 0.0,
+     "Study_RCSBF_Aft_3_Fan_Neg": 1.0
+    },
+    "cross_torque_N_m": 0.0
+   },
+   "pitch-": {
+    "torque_N_m": 34164,
+    "efficient": {
+     "lever_m": 86.4,
+     "jets": {
+      "Study_RCSBF_Fwd_2_Radial": 0.517,
+      "Study_RCSBF_Fwd_2_Roll_Pos": 0.718,
+      "Study_RCSBF_Fwd_3_Roll_Neg": 0.718,
+      "Study_RCSBF_Aft_1_Fan_Pos": 1.0,
+      "Study_RCSBF_Aft_1_Fan_Neg": 0.999
+     }
+    },
+    "jets_firing": 10,
+    "sum_duty": 8.264,
+    "lever_efficiency_m": 41.3,
+    "parasitic_force_N": 0.0,
+    "parasitic_dv_m_s_per_slew": 0.0,
+    "slew_start_stop": {
+     "rate_deg_s": 0.05,
+     "burn_s": 383.9,
+     "h2_kg": 51.6,
+     "conditioning_MJ": 227.0
+    },
+    "firing": {
+     "h2_kg_s": 0.2809,
+     "conditioning_kW_if_live": 1236.0,
+     "valve_W": 300
+    },
+    "sensitivity_only_180": {
+     "minutes": 27.7,
+     "h2_kg": 467.0
+    },
+    "duty": {
+     "Study_RCSBF_Fwd_1_Roll_Pos": 1.0,
+     "Study_RCSBF_Fwd_1_Roll_Neg": 0.737,
+     "Study_RCSBF_Fwd_2_Radial": 1.0,
+     "Study_RCSBF_Fwd_2_Roll_Pos": 1.0,
+     "Study_RCSBF_Fwd_2_Roll_Neg": 0.395,
+     "Study_RCSBF_Fwd_3_Radial": 1.0,
+     "Study_RCSBF_Fwd_3_Roll_Pos": 0.132,
+     "Study_RCSBF_Fwd_3_Roll_Neg": 1.0,
+     "Study_RCSBF_Aft_1_Fan_Pos": 1.0,
+     "Study_RCSBF_Aft_1_Fan_Neg": 1.0,
+     "Study_RCSBF_Aft_3_Fan_Pos": 0.0
+    },
+    "cross_torque_N_m": 0.0
+   },
+   "yaw+": {
+    "torque_N_m": 39441,
+    "efficient": {
+     "lever_m": 93.0,
+     "jets": {
+      "Study_RCSBF_Fwd_1_Roll_Pos": 0.374,
+      "Study_RCSBF_Fwd_2_Radial": 0.28,
+      "Study_RCSBF_Fwd_2_Roll_Neg": 0.465,
+      "Study_RCSBF_Aft_3_Fan_Pos": 1.0,
+      "Study_RCSBF_Aft_3_Fan_Neg": 0.0
+     }
+    },
+    "jets_firing": 10,
+    "sum_duty": 8.642,
+    "lever_efficiency_m": 45.6,
+    "parasitic_force_N": 0.0,
+    "parasitic_dv_m_s_per_slew": 0.0,
+    "slew_start_stop": {
+     "rate_deg_s": 0.05,
+     "burn_s": 332.3,
+     "h2_kg": 47.9,
+     "conditioning_MJ": 210.8
+    },
+    "firing": {
+     "h2_kg_s": 0.2937,
+     "conditioning_kW_if_live": 1292.5,
+     "valve_W": 300
+    },
+    "sensitivity_only_180": {
+     "minutes": 25.8,
+     "h2_kg": 454.4
+    },
+    "duty": {
+     "Study_RCSBF_Fwd_1_Radial": 0.732,
+     "Study_RCSBF_Fwd_1_Roll_Pos": 1.0,
+     "Study_RCSBF_Fwd_1_Roll_Neg": 0.841,
+     "Study_RCSBF_Fwd_2_Radial": 1.0,
+     "Study_RCSBF_Fwd_2_Roll_Pos": 1.0,
+     "Study_RCSBF_Fwd_2_Roll_Neg": 0.859,
+     "Study_RCSBF_Fwd_3_Roll_Neg": 0.21,
+     "Study_RCSBF_Aft_1_Fan_Neg": 1.0,
+     "Study_RCSBF_Aft_3_Fan_Pos": 1.0,
+     "Study_RCSBF_Aft_3_Fan_Neg": 1.0
+    },
+    "cross_torque_N_m": 0.0
+   },
+   "yaw-": {
+    "torque_N_m": 39441,
+    "efficient": {
+     "lever_m": 93.5,
+     "jets": {
+      "Study_RCSBF_Fwd_1_Roll_Neg": 0.111,
+      "Study_RCSBF_Fwd_3_Radial": 0.798,
+      "Study_RCSBF_Fwd_3_Roll_Pos": 0.202,
+      "Study_RCSBF_Aft_2_Fan_Pos": 0.0,
+      "Study_RCSBF_Aft_2_Fan_Neg": 1.0
+     }
+    },
+    "jets_firing": 11,
+    "sum_duty": 8.821,
+    "lever_efficiency_m": 44.7,
+    "parasitic_force_N": 0.0,
+    "parasitic_dv_m_s_per_slew": 0.0,
+    "slew_start_stop": {
+     "rate_deg_s": 0.05,
+     "burn_s": 332.3,
+     "h2_kg": 47.65,
+     "conditioning_MJ": 209.6
+    },
+    "firing": {
+     "h2_kg_s": 0.2998,
+     "conditioning_kW_if_live": 1319.3,
+     "valve_W": 330
+    },
+    "sensitivity_only_180": {
+     "minutes": 25.8,
+     "h2_kg": 463.8
+    },
+    "duty": {
+     "Study_RCSBF_Fwd_1_Radial": 0.268,
+     "Study_RCSBF_Fwd_1_Roll_Pos": 0.502,
+     "Study_RCSBF_Fwd_1_Roll_Neg": 1.0,
+     "Study_RCSBF_Fwd_2_Roll_Pos": 0.729,
+     "Study_RCSBF_Fwd_2_Roll_Neg": 0.322,
+     "Study_RCSBF_Fwd_3_Radial": 1.0,
+     "Study_RCSBF_Fwd_3_Roll_Pos": 1.0,
+     "Study_RCSBF_Fwd_3_Roll_Neg": 1.0,
+     "Study_RCSBF_Aft_1_Fan_Pos": 1.0,
+     "Study_RCSBF_Aft_2_Fan_Pos": 1.0,
+     "Study_RCSBF_Aft_2_Fan_Neg": 1.0
+    },
+    "cross_torque_N_m": 0.0
+   }
+  }
+ },
+ "as_built": {
+  "roll+": {
+   "torque_N_m": 18234,
+   "efficient": {
+    "lever_m": 41.8,
+    "jets": {
+     "Ext_RCS_Aft_3_Radial": 0.001,
+     "Ext_RCS_Aft_3_Tan_Neg": 0.0,
+     "Ext_RCS_Rim_1_Tan_Neg": 1.0,
+     "Ext_RCS_Rim_2_Tan_Neg": 0.001,
+     "Ext_RCS_Rim_3_Tan_Neg": 1.0
+    }
+   },
+   "jets_firing": 10,
+   "sum_duty": 9.0,
+   "lever_efficiency_m": 20.3,
+   "parasitic_force_N": 239.5,
+   "parasitic_dv_m_s_per_slew": 0.00378,
+   "slew_start_stop": {
+    "rate_deg_s": 0.05,
+    "burn_s": 17.3,
+    "h2_kg": 2.57,
+    "conditioning_MJ": 11.3
+   },
+   "firing": {
+    "h2_kg_s": 0.3059,
+    "conditioning_kW_if_live": 1346.0,
+    "valve_W": 300
+   },
+   "sensitivity_only_180": {
+    "minutes": 5.9,
+    "h2_kg": 108.1
+   },
+   "duty": {
+    "Ext_RCS_Aft_1_Tan_Neg": 1.0,
+    "Ext_RCS_Aft_2_Tan_Neg": 1.0,
+    "Ext_RCS_Aft_3_Radial": 0.002,
+    "Ext_RCS_Aft_3_Tan_Neg": 1.0,
+    "Ext_RCS_Rim_1_Radial": 1.0,
+    "Ext_RCS_Rim_1_Tan_Neg": 1.0,
+    "Ext_RCS_Rim_2_Radial": 0.001,
+    "Ext_RCS_Rim_2_Tan_Neg": 1.0,
+    "Ext_RCS_Rim_3_Radial": 0.998,
+    "Ext_RCS_Rim_3_Tan_Neg": 1.0,
+    "Ext_RCS_Rim_4_Tan_Neg": 1.0
+   },
+   "cross_torque_N_m": 0.0
+  },
+  "roll-": {
+   "torque_N_m": 18234,
+   "efficient": {
+    "lever_m": 41.8,
+    "jets": {
+     "Ext_RCS_Aft_3_Radial": 0.001,
+     "Ext_RCS_Aft_3_Tan_Pos": 0.0,
+     "Ext_RCS_Rim_1_Tan_Pos": 1.0,
+     "Ext_RCS_Rim_3_Tan_Pos": 1.0,
+     "Ext_RCS_Rim_4_Tan_Pos": 0.001
+    }
+   },
+   "jets_firing": 11,
+   "sum_duty": 10.0,
+   "lever_efficiency_m": 18.2,
+   "parasitic_force_N": 341.8,
+   "parasitic_dv_m_s_per_slew": 0.00539,
+   "slew_start_stop": {
+    "rate_deg_s": 0.05,
+    "burn_s": 17.3,
+    "h2_kg": 2.57,
+    "conditioning_MJ": 11.3
+   },
+   "firing": {
+    "h2_kg_s": 0.3399,
+    "conditioning_kW_if_live": 1495.6,
+    "valve_W": 330
+   },
+   "sensitivity_only_180": {
+    "minutes": 5.9,
+    "h2_kg": 120.1
+   },
+   "duty": {
+    "Ext_RCS_Aft_1_Radial": 0.997,
+    "Ext_RCS_Aft_1_Tan_Pos": 1.0,
+    "Ext_RCS_Aft_2_Radial": 0.997,
+    "Ext_RCS_Aft_2_Tan_Pos": 1.0,
+    "Ext_RCS_Aft_3_Radial": 1.0,
+    "Ext_RCS_Aft_3_Tan_Pos": 1.0,
+    "Ext_RCS_Rim_1_Radial": 0.003,
+    "Ext_RCS_Rim_1_Tan_Pos": 1.0,
+    "Ext_RCS_Rim_2_Radial": 0.001,
+    "Ext_RCS_Rim_2_Tan_Pos": 1.0,
+    "Ext_RCS_Rim_3_Tan_Pos": 1.0,
+    "Ext_RCS_Rim_4_Tan_Pos": 1.0
+   },
+   "cross_torque_N_m": 0.0
+  },
+  "pitch+": {
+   "torque_N_m": 60880,
+   "efficient": {
+    "lever_m": 90.9,
+    "jets": {
+     "Ext_RCS_Aft_2_Tan_Pos": 0.017,
+     "Ext_RCS_Aft_3_Radial": 1.0,
+     "Ext_RCS_Rim_1_Radial": 0.685,
+     "Ext_RCS_Rim_1_Tan_Pos": 0.248,
+     "Ext_RCS_Rim_2_Tan_Neg": 0.25
+    }
+   },
+   "jets_firing": 12,
+   "sum_duty": 10.72,
+   "lever_efficiency_m": 56.8,
+   "parasitic_force_N": 306.7,
+   "parasitic_dv_m_s_per_slew": 0.06006,
+   "slew_start_stop": {
+    "rate_deg_s": 0.05,
+    "burn_s": 215.4,
+    "h2_kg": 49.04,
+    "conditioning_MJ": 215.8
+   },
+   "firing": {
+    "h2_kg_s": 0.3644,
+    "conditioning_kW_if_live": 1603.3,
+    "valve_W": 360
+   },
+   "sensitivity_only_180": {
+    "minutes": 20.8,
+    "h2_kg": 453.8
+   },
+   "duty": {
+    "Ext_RCS_Aft_1_Tan_Neg": 1.0,
+    "Ext_RCS_Aft_2_Tan_Pos": 1.0,
+    "Ext_RCS_Aft_3_Radial": 1.0,
+    "Ext_RCS_Aft_3_Tan_Pos": 1.0,
+    "Ext_RCS_Aft_3_Tan_Neg": 0.971,
+    "Ext_RCS_Rim_1_Radial": 1.0,
+    "Ext_RCS_Rim_1_Tan_Pos": 1.0,
+    "Ext_RCS_Rim_1_Tan_Neg": 1.0,
+    "Ext_RCS_Rim_2_Radial": 0.749,
+    "Ext_RCS_Rim_2_Tan_Pos": 0.094,
+    "Ext_RCS_Rim_2_Tan_Neg": 1.0,
+    "Ext_RCS_Rim_4_Tan_Pos": 0.902
+   },
+   "cross_torque_N_m": 0.0
+  },
+  "pitch-": {
+   "torque_N_m": 60990,
+   "efficient": {
+    "lever_m": 91.6,
+    "jets": {
+     "Ext_RCS_Aft_1_Tan_Pos": 0.63,
+     "Ext_RCS_Aft_2_Tan_Neg": 0.819,
+     "Ext_RCS_Rim_3_Radial": 1.0,
+     "Ext_RCS_Rim_3_Tan_Pos": 0.358,
+     "Ext_RCS_Rim_4_Tan_Neg": 0.335
+    }
+   },
+   "jets_firing": 13,
+   "sum_duty": 10.28,
+   "lever_efficiency_m": 59.3,
+   "parasitic_force_N": 274.7,
+   "parasitic_dv_m_s_per_slew": 0.0537,
+   "slew_start_stop": {
+    "rate_deg_s": 0.05,
+    "burn_s": 215.0,
+    "h2_kg": 48.67,
+    "conditioning_MJ": 214.1
+   },
+   "firing": {
+    "h2_kg_s": 0.3494,
+    "conditioning_kW_if_live": 1537.5,
+    "valve_W": 390
+   },
+   "sensitivity_only_180": {
+    "minutes": 20.7,
+    "h2_kg": 434.8
+   },
+   "duty": {
+    "Ext_RCS_Aft_1_Radial": 1.0,
+    "Ext_RCS_Aft_1_Tan_Pos": 1.0,
+    "Ext_RCS_Aft_2_Radial": 1.0,
+    "Ext_RCS_Aft_2_Tan_Neg": 1.0,
+    "Ext_RCS_Aft_3_Tan_Neg": 0.029,
+    "Ext_RCS_Rim_2_Radial": 0.251,
+    "Ext_RCS_Rim_2_Tan_Pos": 0.906,
+    "Ext_RCS_Rim_3_Radial": 1.0,
+    "Ext_RCS_Rim_3_Tan_Pos": 1.0,
+    "Ext_RCS_Rim_3_Tan_Neg": 1.0,
+    "Ext_RCS_Rim_4_Radial": 1.0,
+    "Ext_RCS_Rim_4_Tan_Pos": 0.098,
+    "Ext_RCS_Rim_4_Tan_Neg": 1.0
+   },
+   "cross_torque_N_m": 0.0
+  },
+  "yaw+": {
+   "torque_N_m": 55373,
+   "efficient": {
+    "lever_m": 87.0,
+    "jets": {
+     "Ext_RCS_Aft_1_Radial": 0.772,
+     "Ext_RCS_Aft_3_Tan_Pos": 1.0,
+     "Ext_RCS_Rim_2_Radial": 0.974,
+     "Ext_RCS_Rim_2_Tan_Pos": 0.372,
+     "Ext_RCS_Rim_3_Tan_Neg": 0.494
+    }
+   },
+   "jets_firing": 13,
+   "sum_duty": 10.97,
+   "lever_efficiency_m": 50.5,
+   "parasitic_force_N": 294.8,
+   "parasitic_dv_m_s_per_slew": 0.06343,
+   "slew_start_stop": {
+    "rate_deg_s": 0.05,
+    "burn_s": 236.7,
+    "h2_kg": 51.21,
+    "conditioning_MJ": 225.3
+   },
+   "firing": {
+    "h2_kg_s": 0.3729,
+    "conditioning_kW_if_live": 1640.7,
+    "valve_W": 390
+   },
+   "sensitivity_only_180": {
+    "minutes": 21.8,
+    "h2_kg": 486.8
+   },
+   "duty": {
+    "Ext_RCS_Aft_1_Radial": 1.0,
+    "Ext_RCS_Aft_1_Tan_Neg": 1.0,
+    "Ext_RCS_Aft_2_Tan_Neg": 1.0,
+    "Ext_RCS_Aft_3_Radial": 0.498,
+    "Ext_RCS_Aft_3_Tan_Pos": 1.0,
+    "Ext_RCS_Rim_1_Radial": 0.347,
+    "Ext_RCS_Rim_1_Tan_Pos": 0.822,
+    "Ext_RCS_Rim_2_Radial": 1.0,
+    "Ext_RCS_Rim_2_Tan_Pos": 1.0,
+    "Ext_RCS_Rim_2_Tan_Neg": 1.0,
+    "Ext_RCS_Rim_3_Radial": 1.0,
+    "Ext_RCS_Rim_3_Tan_Pos": 0.3,
+    "Ext_RCS_Rim_3_Tan_Neg": 1.0
+   },
+   "cross_torque_N_m": 0.0
+  },
+  "yaw-": {
+   "torque_N_m": 55374,
+   "efficient": {
+    "lever_m": 86.6,
+    "jets": {
+     "Ext_RCS_Aft_2_Radial": 0.705,
+     "Ext_RCS_Aft_3_Tan_Neg": 0.819,
+     "Ext_RCS_Rim_1_Tan_Neg": 0.244,
+     "Ext_RCS_Rim_4_Radial": 1.0,
+     "Ext_RCS_Rim_4_Tan_Pos": 0.344
+    }
+   },
+   "jets_firing": 12,
+   "sum_duty": 10.04,
+   "lever_efficiency_m": 55.2,
+   "parasitic_force_N": 286.8,
+   "parasitic_dv_m_s_per_slew": 0.06171,
+   "slew_start_stop": {
+    "rate_deg_s": 0.05,
+    "burn_s": 236.7,
+    "h2_kg": 51.44,
+    "conditioning_MJ": 226.4
+   },
+   "firing": {
+    "h2_kg_s": 0.3413,
+    "conditioning_kW_if_live": 1501.6,
+    "valve_W": 360
+   },
+   "sensitivity_only_180": {
+    "minutes": 21.8,
+    "h2_kg": 445.5
+   },
+   "duty": {
+    "Ext_RCS_Aft_1_Tan_Pos": 1.0,
+    "Ext_RCS_Aft_2_Radial": 1.0,
+    "Ext_RCS_Aft_2_Tan_Pos": 1.0,
+    "Ext_RCS_Aft_3_Radial": 0.507,
+    "Ext_RCS_Aft_3_Tan_Neg": 1.0,
+    "Ext_RCS_Rim_1_Radial": 0.658,
+    "Ext_RCS_Rim_1_Tan_Pos": 0.178,
+    "Ext_RCS_Rim_1_Tan_Neg": 1.0,
+    "Ext_RCS_Rim_3_Tan_Pos": 0.7,
+    "Ext_RCS_Rim_4_Radial": 1.0,
+    "Ext_RCS_Rim_4_Tan_Pos": 1.0,
+    "Ext_RCS_Rim_4_Tan_Neg": 1.0
+   },
+   "cross_torque_N_m": 0.0
+  }
+ },
+ "as_built_force_free": {
+  "roll+": {
+   "couple": null
+  },
+  "roll-": {
+   "couple": null
+  },
+  "pitch+": {
+   "couple": null
+  },
+  "pitch-": {
+   "couple": null
+  },
+  "yaw+": {
+   "couple": null
+  },
+  "yaw-": {
+   "couple": null
+  }
+ },
+ "com_shift": {
+  "B1": {
+   "roll+": {
+    "best_burnout": 10128,
+    "best_fuelled": 10128,
+    "same_table_fuelled_axis": 10128,
+    "same_table_fuelled_cross": 0.0
+   },
+   "roll-": {
+    "best_burnout": 10128,
+    "best_fuelled": 10128,
+    "same_table_fuelled_axis": 10128,
+    "same_table_fuelled_cross": 0.0
+   },
+   "pitch+": {
+    "best_burnout": 19736,
+    "best_fuelled": 19736,
+    "same_table_fuelled_axis": 19739,
+    "same_table_fuelled_cross": 3.9
+   },
+   "pitch-": {
+    "best_burnout": 19736,
+    "best_fuelled": 19736,
+    "same_table_fuelled_axis": 19740,
+    "same_table_fuelled_cross": 5.0
+   },
+   "yaw+": {
+    "best_burnout": 17099,
+    "best_fuelled": 17099,
+    "same_table_fuelled_axis": 17100,
+    "same_table_fuelled_cross": 8.2
+   },
+   "yaw-": {
+    "best_burnout": 17099,
+    "best_fuelled": 17099,
+    "same_table_fuelled_axis": 17104,
+    "same_table_fuelled_cross": 3.7
+   }
+  },
+  "B2": {
+   "roll+": {
+    "best_burnout": 13505,
+    "best_fuelled": 13505,
+    "same_table_fuelled_axis": 13505,
+    "same_table_fuelled_cross": 0.0
+   },
+   "roll-": {
+    "best_burnout": 13505,
+    "best_fuelled": 13505,
+    "same_table_fuelled_axis": 13505,
+    "same_table_fuelled_cross": 0.0
+   },
+   "pitch+": {
+    "best_burnout": 19741,
+    "best_fuelled": 19741,
+    "same_table_fuelled_axis": 19743,
+    "same_table_fuelled_cross": 3.7
+   },
+   "pitch-": {
+    "best_burnout": 19741,
+    "best_fuelled": 19741,
+    "same_table_fuelled_axis": 19746,
+    "same_table_fuelled_cross": 3.7
+   },
+   "yaw+": {
+    "best_burnout": 17108,
+    "best_fuelled": 17108,
+    "same_table_fuelled_axis": 17107,
+    "same_table_fuelled_cross": 2.3
+   },
+   "yaw-": {
+    "best_burnout": 17108,
+    "best_fuelled": 17108,
+    "same_table_fuelled_axis": 17106,
+    "same_table_fuelled_cross": 1.6
+   }
+  },
+  "B1F": {
+   "roll+": {
+    "best_burnout": 11045,
+    "best_fuelled": 11045,
+    "same_table_fuelled_axis": 11045,
+    "same_table_fuelled_cross": 0.0
+   },
+   "roll-": {
+    "best_burnout": 11045,
+    "best_fuelled": 11045,
+    "same_table_fuelled_axis": 11045,
+    "same_table_fuelled_cross": 0.0
+   },
+   "pitch+": {
+    "best_burnout": 34164,
+    "best_fuelled": 34164,
+    "same_table_fuelled_axis": 34168,
+    "same_table_fuelled_cross": 10.8
+   },
+   "pitch-": {
+    "best_burnout": 34164,
+    "best_fuelled": 34164,
+    "same_table_fuelled_axis": 34163,
+    "same_table_fuelled_cross": 6.0
+   },
+   "yaw+": {
+    "best_burnout": 39441,
+    "best_fuelled": 39441,
+    "same_table_fuelled_axis": 39444,
+    "same_table_fuelled_cross": 2.3
+   },
+   "yaw-": {
+    "best_burnout": 39441,
+    "best_fuelled": 39441,
+    "same_table_fuelled_axis": 39439,
+    "same_table_fuelled_cross": 4.4
+   }
+  },
+  "as_built": {
+   "roll+": {
+    "best_burnout": 18234,
+    "best_fuelled": 18234,
+    "same_table_fuelled_axis": 18234,
+    "same_table_fuelled_cross": 5.0
+   },
+   "roll-": {
+    "best_burnout": 18234,
+    "best_fuelled": 18234,
+    "same_table_fuelled_axis": 18234,
+    "same_table_fuelled_cross": 6.5
+   },
+   "pitch+": {
+    "best_burnout": 60880,
+    "best_fuelled": 60889,
+    "same_table_fuelled_axis": 60892,
+    "same_table_fuelled_cross": 4.6
+   },
+   "pitch-": {
+    "best_burnout": 60990,
+    "best_fuelled": 60982,
+    "same_table_fuelled_axis": 60985,
+    "same_table_fuelled_cross": 4.6
+   },
+   "yaw+": {
+    "best_burnout": 55373,
+    "best_fuelled": 55373,
+    "same_table_fuelled_axis": 55367,
+    "same_table_fuelled_cross": 6.3
+   },
+   "yaw-": {
+    "best_burnout": 55374,
+    "best_fuelled": 55374,
+    "same_table_fuelled_axis": 55379,
+    "same_table_fuelled_cross": 1.7
+   }
+  }
+ },
+ "plume_screen": {
+  "cones_deg": [
+   15.0,
+   30.0
+  ],
+  "range_m": 80.0,
+  "as_built": {
+   "Ext_RCS_Aft_1_Radial": {
+    "0deg": null,
+    "15deg": null,
+    "30deg": null
+   },
+   "Ext_RCS_Aft_1_Tan_Pos": {
+    "0deg": null,
+    "15deg": null,
+    "30deg": {
+     "distance_m": 7.73,
+     "object": "Ext_HGA_1_Dish"
+    }
+   },
+   "Ext_RCS_Aft_1_Tan_Neg": {
+    "0deg": null,
+    "15deg": null,
+    "30deg": null
+   },
+   "Ext_RCS_Aft_2_Radial": {
+    "0deg": null,
+    "15deg": null,
+    "30deg": null
+   },
+   "Ext_RCS_Aft_2_Tan_Pos": {
+    "0deg": null,
+    "15deg": null,
+    "30deg": {
+     "distance_m": 6.64,
+     "object": "Ext_HGA_2_Dish"
+    }
+   },
+   "Ext_RCS_Aft_2_Tan_Neg": {
+    "0deg": null,
+    "15deg": null,
+    "30deg": {
+     "distance_m": 7.73,
+     "object": "Ext_HGA_1_Dish"
+    }
+   },
+   "Ext_RCS_Aft_3_Radial": {
+    "0deg": null,
+    "15deg": null,
+    "30deg": null
+   },
+   "Ext_RCS_Aft_3_Tan_Pos": {
+    "0deg": null,
+    "15deg": null,
+    "30deg": null
+   },
+   "Ext_RCS_Aft_3_Tan_Neg": {
+    "0deg": null,
+    "15deg": null,
+    "30deg": {
+     "distance_m": 6.63,
+     "object": "Ext_HGA_2_Dish"
+    }
+   },
+   "Ext_RCS_Rim_1_Radial": {
+    "0deg": null,
+    "15deg": null,
+    "30deg": null
+   },
+   "Ext_RCS_Rim_1_Tan_Pos": {
+    "0deg": null,
+    "15deg": null,
+    "30deg": {
+     "distance_m": 3.6,
+     "object": "Shield_Rim"
+    }
+   },
+   "Ext_RCS_Rim_1_Tan_Neg": {
+    "0deg": null,
+    "15deg": null,
+    "30deg": {
+     "distance_m": 3.46,
+     "object": "Shield_Rim"
+    }
+   },
+   "Ext_RCS_Rim_2_Radial": {
+    "0deg": null,
+    "15deg": null,
+    "30deg": null
+   },
+   "Ext_RCS_Rim_2_Tan_Pos": {
+    "0deg": null,
+    "15deg": null,
+    "30deg": {
+     "distance_m": 3.49,
+     "object": "Shield_Rim"
+    }
+   },
+   "Ext_RCS_Rim_2_Tan_Neg": {
+    "0deg": null,
+    "15deg": null,
+    "30deg": {
+     "distance_m": 3.49,
+     "object": "Shield_Rim"
+    }
+   },
+   "Ext_RCS_Rim_3_Radial": {
+    "0deg": null,
+    "15deg": null,
+    "30deg": null
+   },
+   "Ext_RCS_Rim_3_Tan_Pos": {
+    "0deg": null,
+    "15deg": null,
+    "30deg": {
+     "distance_m": 3.6,
+     "object": "Shield_Rim"
+    }
+   },
+   "Ext_RCS_Rim_3_Tan_Neg": {
+    "0deg": null,
+    "15deg": null,
+    "30deg": {
+     "distance_m": 3.46,
+     "object": "Shield_Rim"
+    }
+   },
+   "Ext_RCS_Rim_4_Radial": {
+    "0deg": null,
+    "15deg": null,
+    "30deg": null
+   },
+   "Ext_RCS_Rim_4_Tan_Pos": {
+    "0deg": null,
+    "15deg": null,
+    "30deg": {
+     "distance_m": 3.49,
+     "object": "Shield_Rim"
+    }
+   },
+   "Ext_RCS_Rim_4_Tan_Neg": {
+    "0deg": null,
+    "15deg": null,
+    "30deg": {
+     "distance_m": 3.49,
+     "object": "Shield_Rim"
+    }
+   }
+  },
+  "B1": {
+   "Study_RCSB_Fwd_1_Radial": {
+    "0deg": null,
+    "15deg": null,
+    "30deg": null
+   },
+   "Study_RCSB_Fwd_1_Roll_Pos": {
+    "0deg": null,
+    "15deg": null,
+    "30deg": null
+   },
+   "Study_RCSB_Fwd_1_Roll_Neg": {
+    "0deg": null,
+    "15deg": null,
+    "30deg": null
+   },
+   "Study_RCSB_Fwd_2_Radial": {
+    "0deg": null,
+    "15deg": null,
+    "30deg": null
+   },
+   "Study_RCSB_Fwd_2_Roll_Pos": {
+    "0deg": null,
+    "15deg": null,
+    "30deg": null
+   },
+   "Study_RCSB_Fwd_2_Roll_Neg": {
+    "0deg": null,
+    "15deg": null,
+    "30deg": null
+   },
+   "Study_RCSB_Fwd_3_Radial": {
+    "0deg": null,
+    "15deg": null,
+    "30deg": null
+   },
+   "Study_RCSB_Fwd_3_Roll_Pos": {
+    "0deg": null,
+    "15deg": null,
+    "30deg": null
+   },
+   "Study_RCSB_Fwd_3_Roll_Neg": {
+    "0deg": null,
+    "15deg": null,
+    "30deg": null
+   },
+   "Study_RCSB_Aft_1_Radial": {
+    "0deg": null,
+    "15deg": null,
+    "30deg": null
+   },
+   "Study_RCSB_Aft_2_Radial": {
+    "0deg": null,
+    "15deg": null,
+    "30deg": null
+   },
+   "Study_RCSB_Aft_3_Radial": {
+    "0deg": null,
+    "15deg": null,
+    "30deg": null
+   }
+  },
+  "B2": {
+   "Study_RCSB2_Fwd_1_Radial": {
+    "0deg": null,
+    "15deg": null,
+    "30deg": null
+   },
+   "Study_RCSB2_Fwd_1_Roll_Pos": {
+    "0deg": null,
+    "15deg": null,
+    "30deg": null
+   },
+   "Study_RCSB2_Fwd_1_Roll_Neg": {
+    "0deg": null,
+    "15deg": null,
+    "30deg": null
+   },
+   "Study_RCSB2_Fwd_2_Radial": {
+    "0deg": null,
+    "15deg": null,
+    "30deg": null
+   },
+   "Study_RCSB2_Fwd_2_Roll_Pos": {
+    "0deg": null,
+    "15deg": null,
+    "30deg": null
+   },
+   "Study_RCSB2_Fwd_2_Roll_Neg": {
+    "0deg": null,
+    "15deg": null,
+    "30deg": null
+   },
+   "Study_RCSB2_Fwd_3_Radial": {
+    "0deg": null,
+    "15deg": null,
+    "30deg": null
+   },
+   "Study_RCSB2_Fwd_3_Roll_Pos": {
+    "0deg": null,
+    "15deg": null,
+    "30deg": null
+   },
+   "Study_RCSB2_Fwd_3_Roll_Neg": {
+    "0deg": null,
+    "15deg": null,
+    "30deg": null
+   },
+   "Study_RCSB2_Fwd_4_Radial": {
+    "0deg": null,
+    "15deg": null,
+    "30deg": null
+   },
+   "Study_RCSB2_Fwd_4_Roll_Pos": {
+    "0deg": null,
+    "15deg": null,
+    "30deg": null
+   },
+   "Study_RCSB2_Fwd_4_Roll_Neg": {
+    "0deg": null,
+    "15deg": null,
+    "30deg": null
+   },
+   "Study_RCSB2_Aft_1_Radial": {
+    "0deg": null,
+    "15deg": null,
+    "30deg": null
+   },
+   "Study_RCSB2_Aft_2_Radial": {
+    "0deg": null,
+    "15deg": null,
+    "30deg": null
+   },
+   "Study_RCSB2_Aft_3_Radial": {
+    "0deg": null,
+    "15deg": null,
+    "30deg": null
+   }
+  },
+  "B1F": {
+   "Study_RCSBF_Fwd_1_Radial": {
+    "0deg": null,
+    "15deg": null,
+    "30deg": null
+   },
+   "Study_RCSBF_Fwd_1_Roll_Pos": {
+    "0deg": null,
+    "15deg": null,
+    "30deg": null
+   },
+   "Study_RCSBF_Fwd_1_Roll_Neg": {
+    "0deg": null,
+    "15deg": null,
+    "30deg": null
+   },
+   "Study_RCSBF_Fwd_2_Radial": {
+    "0deg": null,
+    "15deg": null,
+    "30deg": null
+   },
+   "Study_RCSBF_Fwd_2_Roll_Pos": {
+    "0deg": null,
+    "15deg": null,
+    "30deg": null
+   },
+   "Study_RCSBF_Fwd_2_Roll_Neg": {
+    "0deg": null,
+    "15deg": null,
+    "30deg": null
+   },
+   "Study_RCSBF_Fwd_3_Radial": {
+    "0deg": null,
+    "15deg": null,
+    "30deg": null
+   },
+   "Study_RCSBF_Fwd_3_Roll_Pos": {
+    "0deg": null,
+    "15deg": null,
+    "30deg": null
+   },
+   "Study_RCSBF_Fwd_3_Roll_Neg": {
+    "0deg": null,
+    "15deg": null,
+    "30deg": null
+   },
+   "Study_RCSBF_Aft_1_Fan_Pos": {
+    "0deg": null,
+    "15deg": null,
+    "30deg": null
+   },
+   "Study_RCSBF_Aft_1_Fan_Neg": {
+    "0deg": null,
+    "15deg": null,
+    "30deg": null
+   },
+   "Study_RCSBF_Aft_2_Fan_Pos": {
+    "0deg": null,
+    "15deg": null,
+    "30deg": null
+   },
+   "Study_RCSBF_Aft_2_Fan_Neg": {
+    "0deg": null,
+    "15deg": null,
+    "30deg": null
+   },
+   "Study_RCSBF_Aft_3_Fan_Pos": {
+    "0deg": null,
+    "15deg": null,
+    "30deg": null
+   },
+   "Study_RCSBF_Aft_3_Fan_Neg": {
+    "0deg": null,
+    "15deg": null,
+    "30deg": null
+   }
+  }
+ },
+ "clearance": {
+  "B1": {
+   "Study_RCSB_Fwd_1": [],
+   "Study_RCSB_Fwd_1_Radial": [],
+   "Study_RCSB_Fwd_1_Roll_Pos": [],
+   "Study_RCSB_Fwd_1_Roll_Neg": [],
+   "Study_RCSB_Fwd_2": [],
+   "Study_RCSB_Fwd_2_Radial": [],
+   "Study_RCSB_Fwd_2_Roll_Pos": [],
+   "Study_RCSB_Fwd_2_Roll_Neg": [],
+   "Study_RCSB_Fwd_3": [
+    "Ext_RCS_Rim_4_Radial",
+    "Ext_RCS_Rim_4_Tan_Neg",
+    "Ext_RCS_Rim_4_Tan_Pos"
+   ],
+   "Study_RCSB_Fwd_3_Radial": [
+    "Ext_RCS_Rim_4",
+    "Ext_RCS_Rim_4_Radial"
+   ],
+   "Study_RCSB_Fwd_3_Roll_Pos": [
+    "Ext_RCS_Rim_4"
+   ],
+   "Study_RCSB_Fwd_3_Roll_Neg": [
+    "Ext_RCS_Rim_4"
+   ],
+   "Study_RCSB_Aft_1": [],
+   "Study_RCSB_Aft_1_Radial": [],
+   "Study_RCSB_Aft_2": [],
+   "Study_RCSB_Aft_2_Radial": [],
+   "Study_RCSB_Aft_3": [],
+   "Study_RCSB_Aft_3_Radial": []
+  },
+  "B2": {
+   "Study_RCSB2_Fwd_1": [
+    "Ext_RCS_Rim_1_Radial",
+    "Ext_RCS_Rim_1_Tan_Neg",
+    "Ext_RCS_Rim_1_Tan_Pos"
+   ],
+   "Study_RCSB2_Fwd_1_Radial": [
+    "Ext_RCS_Rim_1",
+    "Ext_RCS_Rim_1_Radial"
+   ],
+   "Study_RCSB2_Fwd_1_Roll_Pos": [
+    "Ext_RCS_Rim_1"
+   ],
+   "Study_RCSB2_Fwd_1_Roll_Neg": [
+    "Ext_RCS_Rim_1"
+   ],
+   "Study_RCSB2_Fwd_2": [
+    "Ext_RCS_Rim_2_Radial",
+    "Ext_RCS_Rim_2_Tan_Neg",
+    "Ext_RCS_Rim_2_Tan_Pos"
+   ],
+   "Study_RCSB2_Fwd_2_Radial": [
+    "Ext_RCS_Rim_2",
+    "Ext_RCS_Rim_2_Radial"
+   ],
+   "Study_RCSB2_Fwd_2_Roll_Pos": [
+    "Ext_RCS_Rim_2"
+   ],
+   "Study_RCSB2_Fwd_2_Roll_Neg": [
+    "Ext_RCS_Rim_2"
+   ],
+   "Study_RCSB2_Fwd_3": [
+    "Ext_RCS_Rim_3_Radial",
+    "Ext_RCS_Rim_3_Tan_Neg",
+    "Ext_RCS_Rim_3_Tan_Pos"
+   ],
+   "Study_RCSB2_Fwd_3_Radial": [
+    "Ext_RCS_Rim_3",
+    "Ext_RCS_Rim_3_Radial"
+   ],
+   "Study_RCSB2_Fwd_3_Roll_Pos": [
+    "Ext_RCS_Rim_3"
+   ],
+   "Study_RCSB2_Fwd_3_Roll_Neg": [
+    "Ext_RCS_Rim_3"
+   ],
+   "Study_RCSB2_Fwd_4": [
+    "Ext_RCS_Rim_4_Radial",
+    "Ext_RCS_Rim_4_Tan_Neg",
+    "Ext_RCS_Rim_4_Tan_Pos"
+   ],
+   "Study_RCSB2_Fwd_4_Radial": [
+    "Ext_RCS_Rim_4",
+    "Ext_RCS_Rim_4_Radial"
+   ],
+   "Study_RCSB2_Fwd_4_Roll_Pos": [
+    "Ext_RCS_Rim_4"
+   ],
+   "Study_RCSB2_Fwd_4_Roll_Neg": [
+    "Ext_RCS_Rim_4"
+   ],
+   "Study_RCSB2_Aft_1": [],
+   "Study_RCSB2_Aft_1_Radial": [],
+   "Study_RCSB2_Aft_2": [],
+   "Study_RCSB2_Aft_2_Radial": [],
+   "Study_RCSB2_Aft_3": [],
+   "Study_RCSB2_Aft_3_Radial": []
+  },
+  "B1F": {
+   "Study_RCSBF_Fwd_1": [],
+   "Study_RCSBF_Fwd_1_Radial": [],
+   "Study_RCSBF_Fwd_1_Roll_Pos": [],
+   "Study_RCSBF_Fwd_1_Roll_Neg": [],
+   "Study_RCSBF_Fwd_2": [],
+   "Study_RCSBF_Fwd_2_Radial": [],
+   "Study_RCSBF_Fwd_2_Roll_Pos": [],
+   "Study_RCSBF_Fwd_2_Roll_Neg": [],
+   "Study_RCSBF_Fwd_3": [
+    "Ext_RCS_Rim_4_Radial",
+    "Ext_RCS_Rim_4_Tan_Neg",
+    "Ext_RCS_Rim_4_Tan_Pos"
+   ],
+   "Study_RCSBF_Fwd_3_Radial": [
+    "Ext_RCS_Rim_4",
+    "Ext_RCS_Rim_4_Radial"
+   ],
+   "Study_RCSBF_Fwd_3_Roll_Pos": [
+    "Ext_RCS_Rim_4"
+   ],
+   "Study_RCSBF_Fwd_3_Roll_Neg": [
+    "Ext_RCS_Rim_4"
+   ],
+   "Study_RCSBF_Aft_1": [],
+   "Study_RCSBF_Aft_1_Fan_Pos": [],
+   "Study_RCSBF_Aft_1_Fan_Neg": [],
+   "Study_RCSBF_Aft_2": [],
+   "Study_RCSBF_Aft_2_Fan_Pos": [],
+   "Study_RCSBF_Aft_2_Fan_Neg": [],
+   "Study_RCSBF_Aft_3": [],
+   "Study_RCSBF_Aft_3_Fan_Pos": [],
+   "Study_RCSBF_Aft_3_Fan_Neg": []
+  }
+ },
+ "swept_volume": {
+  "B1": {
+   "Study_RCSB_Fwd_1": {
+    "r_out_m": 44.9,
+    "shield_r_m": 45.0,
+    "inside_shadow": true,
+    "axial_gap_to_ring_sweep_m": 11.7
+   },
+   "Study_RCSB_Fwd_2": {
+    "r_out_m": 44.9,
+    "shield_r_m": 45.0,
+    "inside_shadow": true,
+    "axial_gap_to_ring_sweep_m": 11.7
+   },
+   "Study_RCSB_Fwd_3": {
+    "r_out_m": 44.9,
+    "shield_r_m": 45.0,
+    "inside_shadow": true,
+    "axial_gap_to_ring_sweep_m": 11.7
+   },
+   "Study_RCSB_Aft_1": {
+    "r_out_m": 6.7,
+    "shield_r_m": 45.0,
+    "inside_shadow": true,
+    "axial_gap_to_ring_sweep_m": 174.4
+   },
+   "Study_RCSB_Aft_2": {
+    "r_out_m": 6.7,
+    "shield_r_m": 45.0,
+    "inside_shadow": true,
+    "axial_gap_to_ring_sweep_m": 174.4
+   },
+   "Study_RCSB_Aft_3": {
+    "r_out_m": 6.7,
+    "shield_r_m": 45.0,
+    "inside_shadow": true,
+    "axial_gap_to_ring_sweep_m": 174.4
+   }
+  },
+  "B2": {
+   "Study_RCSB2_Fwd_1": {
+    "r_out_m": 44.9,
+    "shield_r_m": 45.0,
+    "inside_shadow": true,
+    "axial_gap_to_ring_sweep_m": 11.7
+   },
+   "Study_RCSB2_Fwd_2": {
+    "r_out_m": 44.9,
+    "shield_r_m": 45.0,
+    "inside_shadow": true,
+    "axial_gap_to_ring_sweep_m": 11.7
+   },
+   "Study_RCSB2_Fwd_3": {
+    "r_out_m": 44.9,
+    "shield_r_m": 45.0,
+    "inside_shadow": true,
+    "axial_gap_to_ring_sweep_m": 11.7
+   },
+   "Study_RCSB2_Fwd_4": {
+    "r_out_m": 44.9,
+    "shield_r_m": 45.0,
+    "inside_shadow": true,
+    "axial_gap_to_ring_sweep_m": 11.7
+   },
+   "Study_RCSB2_Aft_1": {
+    "r_out_m": 6.7,
+    "shield_r_m": 45.0,
+    "inside_shadow": true,
+    "axial_gap_to_ring_sweep_m": 174.4
+   },
+   "Study_RCSB2_Aft_2": {
+    "r_out_m": 6.7,
+    "shield_r_m": 45.0,
+    "inside_shadow": true,
+    "axial_gap_to_ring_sweep_m": 174.4
+   },
+   "Study_RCSB2_Aft_3": {
+    "r_out_m": 6.7,
+    "shield_r_m": 45.0,
+    "inside_shadow": true,
+    "axial_gap_to_ring_sweep_m": 174.4
+   }
+  },
+  "B1F": {
+   "Study_RCSBF_Fwd_1": {
+    "r_out_m": 44.9,
+    "shield_r_m": 45.0,
+    "inside_shadow": true,
+    "axial_gap_to_ring_sweep_m": 11.7
+   },
+   "Study_RCSBF_Fwd_2": {
+    "r_out_m": 44.9,
+    "shield_r_m": 45.0,
+    "inside_shadow": true,
+    "axial_gap_to_ring_sweep_m": 11.7
+   },
+   "Study_RCSBF_Fwd_3": {
+    "r_out_m": 44.9,
+    "shield_r_m": 45.0,
+    "inside_shadow": true,
+    "axial_gap_to_ring_sweep_m": 11.7
+   },
+   "Study_RCSBF_Aft_1": {
+    "r_out_m": 6.7,
+    "shield_r_m": 45.0,
+    "inside_shadow": true,
+    "axial_gap_to_ring_sweep_m": 174.4
+   },
+   "Study_RCSBF_Aft_2": {
+    "r_out_m": 6.7,
+    "shield_r_m": 45.0,
+    "inside_shadow": true,
+    "axial_gap_to_ring_sweep_m": 174.4
+   },
+   "Study_RCSBF_Aft_3": {
+    "r_out_m": 6.7,
+    "shield_r_m": 45.0,
+    "inside_shadow": true,
+    "axial_gap_to_ring_sweep_m": 174.4
+   }
+  }
+ }
+}

@@ -1,0 +1,2864 @@
+{
+ "status": "STUDY / NONCANON: PROTOTYPE support assemblies over the unchanged vehicle",
+ "loads": {
+  "design_N_per_nozzle": 7354988,
+  "flight_N_per_nozzle": 4045243,
+  "note": "design = structural proof load 29.42 MN / 4 (DERIVED, not flight thrust); equal share between nozzles"
+ },
+ "built_pickup": [
+  {
+   "name": "Nozzle_Pickup_0",
+   "length_m": 2.972,
+   "angle_from_axis_deg": 78.7,
+   "axial_cosine": 0.195,
+   "strut_force_MN": 37.7,
+   "in_plane_ring_load_MN": 37.0,
+   "rod_stress_MPa": 469,
+   "rod_radius_m": 0.16
+  },
+  {
+   "name": "Nozzle_Pickup_1",
+   "length_m": 2.972,
+   "angle_from_axis_deg": 78.7,
+   "axial_cosine": 0.195,
+   "strut_force_MN": 37.7,
+   "in_plane_ring_load_MN": 37.0,
+   "rod_stress_MPa": 469,
+   "rod_radius_m": 0.16
+  },
+  {
+   "name": "Nozzle_Pickup_2",
+   "length_m": 2.972,
+   "angle_from_axis_deg": 78.7,
+   "axial_cosine": 0.195,
+   "strut_force_MN": 37.7,
+   "in_plane_ring_load_MN": 37.0,
+   "rod_stress_MPa": 469,
+   "rod_radius_m": 0.16
+  },
+  {
+   "name": "Nozzle_Pickup_3",
+   "length_m": 2.972,
+   "angle_from_axis_deg": 78.7,
+   "axial_cosine": 0.195,
+   "strut_force_MN": 37.7,
+   "in_plane_ring_load_MN": 37.0,
+   "rod_stress_MPa": 469,
+   "rod_radius_m": 0.16
+  }
+ ],
+ "yoke_straps": {
+  "count": 4,
+  "radius_m": 0.05,
+  "stress_at_full_design_load_MPa": 234,
+  "note": "upper bound: the force split between coil stations is OPEN; whatever coils 0-2 carry crosses these straps"
+ },
+ "thrust_frame": [
+  {
+   "name": "Study_Thrust_Strut_0_01_1",
+   "nozzle": 0,
+   "node": 1,
+   "yoke": 1,
+   "length_m": 5.72,
+   "angle_from_axis_deg": 4.7,
+   "force_equal_share_MN": 1.88,
+   "in_plane_ring_load_MN": 0.16,
+   "ti_tube": {
+    "od_m": 0.269,
+    "wall_m": 0.009,
+    "governs": "buckling",
+    "area_m2": 0.00757
+   }
+  },
+  {
+   "name": "Study_Thrust_Strut_0_01_2",
+   "nozzle": 0,
+   "node": 1,
+   "yoke": 2,
+   "length_m": 3.445,
+   "angle_from_axis_deg": 16.7,
+   "force_equal_share_MN": 1.88,
+   "in_plane_ring_load_MN": 0.54,
+   "ti_tube": {
+    "od_m": 0.209,
+    "wall_m": 0.007,
+    "governs": "buckling",
+    "area_m2": 0.00456
+   }
+  },
+  {
+   "name": "Study_Thrust_Strut_0_02_1",
+   "nozzle": 0,
+   "node": 2,
+   "yoke": 1,
+   "length_m": 5.72,
+   "angle_from_axis_deg": 4.7,
+   "force_equal_share_MN": 1.88,
+   "in_plane_ring_load_MN": 0.16,
+   "ti_tube": {
+    "od_m": 0.269,
+    "wall_m": 0.009,
+    "governs": "buckling",
+    "area_m2": 0.00757
+   }
+  },
+  {
+   "name": "Study_Thrust_Strut_0_02_2",
+   "nozzle": 0,
+   "node": 2,
+   "yoke": 2,
+   "length_m": 3.445,
+   "angle_from_axis_deg": 16.7,
+   "force_equal_share_MN": 1.88,
+   "in_plane_ring_load_MN": 0.54,
+   "ti_tube": {
+    "od_m": 0.209,
+    "wall_m": 0.007,
+    "governs": "buckling",
+    "area_m2": 0.00456
+   }
+  },
+  {
+   "name": "Study_Thrust_Strut_1_04_1",
+   "nozzle": 1,
+   "node": 4,
+   "yoke": 1,
+   "length_m": 5.72,
+   "angle_from_axis_deg": 4.7,
+   "force_equal_share_MN": 1.88,
+   "in_plane_ring_load_MN": 0.16,
+   "ti_tube": {
+    "od_m": 0.269,
+    "wall_m": 0.009,
+    "governs": "buckling",
+    "area_m2": 0.00757
+   }
+  },
+  {
+   "name": "Study_Thrust_Strut_1_04_2",
+   "nozzle": 1,
+   "node": 4,
+   "yoke": 2,
+   "length_m": 3.445,
+   "angle_from_axis_deg": 16.7,
+   "force_equal_share_MN": 1.88,
+   "in_plane_ring_load_MN": 0.54,
+   "ti_tube": {
+    "od_m": 0.209,
+    "wall_m": 0.007,
+    "governs": "buckling",
+    "area_m2": 0.00456
+   }
+  },
+  {
+   "name": "Study_Thrust_Strut_1_05_1",
+   "nozzle": 1,
+   "node": 5,
+   "yoke": 1,
+   "length_m": 5.72,
+   "angle_from_axis_deg": 4.7,
+   "force_equal_share_MN": 1.88,
+   "in_plane_ring_load_MN": 0.16,
+   "ti_tube": {
+    "od_m": 0.269,
+    "wall_m": 0.009,
+    "governs": "buckling",
+    "area_m2": 0.00757
+   }
+  },
+  {
+   "name": "Study_Thrust_Strut_1_05_2",
+   "nozzle": 1,
+   "node": 5,
+   "yoke": 2,
+   "length_m": 3.445,
+   "angle_from_axis_deg": 16.7,
+   "force_equal_share_MN": 1.88,
+   "in_plane_ring_load_MN": 0.54,
+   "ti_tube": {
+    "od_m": 0.209,
+    "wall_m": 0.007,
+    "governs": "buckling",
+    "area_m2": 0.00456
+   }
+  },
+  {
+   "name": "Study_Thrust_Strut_2_10_1",
+   "nozzle": 2,
+   "node": 10,
+   "yoke": 1,
+   "length_m": 5.72,
+   "angle_from_axis_deg": 4.7,
+   "force_equal_share_MN": 1.88,
+   "in_plane_ring_load_MN": 0.16,
+   "ti_tube": {
+    "od_m": 0.269,
+    "wall_m": 0.009,
+    "governs": "buckling",
+    "area_m2": 0.00757
+   }
+  },
+  {
+   "name": "Study_Thrust_Strut_2_10_2",
+   "nozzle": 2,
+   "node": 10,
+   "yoke": 2,
+   "length_m": 3.445,
+   "angle_from_axis_deg": 16.7,
+   "force_equal_share_MN": 1.88,
+   "in_plane_ring_load_MN": 0.54,
+   "ti_tube": {
+    "od_m": 0.209,
+    "wall_m": 0.007,
+    "governs": "buckling",
+    "area_m2": 0.00456
+   }
+  },
+  {
+   "name": "Study_Thrust_Strut_2_11_1",
+   "nozzle": 2,
+   "node": 11,
+   "yoke": 1,
+   "length_m": 5.72,
+   "angle_from_axis_deg": 4.7,
+   "force_equal_share_MN": 1.88,
+   "in_plane_ring_load_MN": 0.16,
+   "ti_tube": {
+    "od_m": 0.269,
+    "wall_m": 0.009,
+    "governs": "buckling",
+    "area_m2": 0.00757
+   }
+  },
+  {
+   "name": "Study_Thrust_Strut_2_11_2",
+   "nozzle": 2,
+   "node": 11,
+   "yoke": 2,
+   "length_m": 3.445,
+   "angle_from_axis_deg": 16.7,
+   "force_equal_share_MN": 1.88,
+   "in_plane_ring_load_MN": 0.54,
+   "ti_tube": {
+    "od_m": 0.209,
+    "wall_m": 0.007,
+    "governs": "buckling",
+    "area_m2": 0.00456
+   }
+  },
+  {
+   "name": "Study_Thrust_Strut_3_07_1",
+   "nozzle": 3,
+   "node": 7,
+   "yoke": 1,
+   "length_m": 5.72,
+   "angle_from_axis_deg": 4.7,
+   "force_equal_share_MN": 1.88,
+   "in_plane_ring_load_MN": 0.16,
+   "ti_tube": {
+    "od_m": 0.269,
+    "wall_m": 0.009,
+    "governs": "buckling",
+    "area_m2": 0.00757
+   }
+  },
+  {
+   "name": "Study_Thrust_Strut_3_07_2",
+   "nozzle": 3,
+   "node": 7,
+   "yoke": 2,
+   "length_m": 3.445,
+   "angle_from_axis_deg": 16.7,
+   "force_equal_share_MN": 1.88,
+   "in_plane_ring_load_MN": 0.54,
+   "ti_tube": {
+    "od_m": 0.209,
+    "wall_m": 0.007,
+    "governs": "buckling",
+    "area_m2": 0.00456
+   }
+  },
+  {
+   "name": "Study_Thrust_Strut_3_08_1",
+   "nozzle": 3,
+   "node": 8,
+   "yoke": 1,
+   "length_m": 5.72,
+   "angle_from_axis_deg": 4.7,
+   "force_equal_share_MN": 1.88,
+   "in_plane_ring_load_MN": 0.16,
+   "ti_tube": {
+    "od_m": 0.269,
+    "wall_m": 0.009,
+    "governs": "buckling",
+    "area_m2": 0.00757
+   }
+  },
+  {
+   "name": "Study_Thrust_Strut_3_08_2",
+   "nozzle": 3,
+   "node": 8,
+   "yoke": 2,
+   "length_m": 3.445,
+   "angle_from_axis_deg": 16.7,
+   "force_equal_share_MN": 1.88,
+   "in_plane_ring_load_MN": 0.54,
+   "ti_tube": {
+    "od_m": 0.209,
+    "wall_m": 0.007,
+    "governs": "buckling",
+    "area_m2": 0.00456
+   }
+  }
+ ],
+ "cold_mass_supports": {
+  "load_N_per_nozzle": 7354988,
+  "support_area_m2_per_nozzle": 0.0368,
+  "per_support_area_cm2": 11.5,
+  "direct": {
+   "conduction_length_m": 0.05,
+   "heat_leak_W_per_nozzle": 110.3,
+   "heat_leak_W_ship": 441.3,
+   "cooler_input_kW_per_nozzle": 10.3,
+   "cooler_input_kW_ship": 41.2
+  },
+  "reentrant": {
+   "conduction_length_m": 0.4,
+   "heat_leak_W_per_nozzle": 13.8,
+   "heat_leak_W_ship": 55.2,
+   "cooler_input_kW_per_nozzle": 1.29,
+   "cooler_input_kW_ship": 5.1
+  },
+  "specific_power_W_per_W": 93.3,
+  "basis": "G-10 class supports at 200 MPa working, conductivity integral 150 W/m (20-300 K), coil 20 K, cooler 15% of Carnot; support term only (nuclear, radiative and plasma loads on the coils OPEN)"
+ },
+ "cryostat": {
+  "build_up_m": 0.035,
+  "yoke_gap_before_m": 0.05,
+  "yoke_gap_after_m": 0.015,
+  "plasma_clearance_needed_m": 0.05,
+  "bore": [
+   {
+    "coil": "Nozzle_Coil_00",
+    "plasma_r_m": 1.235,
+    "coil_gap_m": 0.355,
+    "jacket_gap_m": 0.32,
+    "strike_module": false,
+    "strike_on_jacket_gap_m": null
+   },
+   {
+    "coil": "Nozzle_Coil_01",
+    "plasma_r_m": 0.907,
+    "coil_gap_m": 0.298,
+    "jacket_gap_m": 0.263,
+    "strike_module": false,
+    "strike_on_jacket_gap_m": null
+   },
+   {
+    "coil": "Nozzle_Coil_02",
+    "plasma_r_m": 0.614,
+    "coil_gap_m": 0.076,
+    "jacket_gap_m": 0.041,
+    "strike_module": true,
+    "strike_on_jacket_gap_m": 0.021
+   },
+   {
+    "coil": "Nozzle_Coil_03",
+    "plasma_r_m": 0.6,
+    "coil_gap_m": 0.09,
+    "jacket_gap_m": 0.055,
+    "strike_module": true,
+    "strike_on_jacket_gap_m": 0.035
+   }
+  ],
+  "note": "the 0.05 m warm-yoke standoff leaves 0.015 m outside a minimal cryostat: room for direct supports only. The built strike modules (coils 2-3) sit on the coil inner face, i.e. inside where the cryostat wall must be"
+ },
+ "nozzles": [
+  {
+   "nozzle": 0,
+   "azimuth_deg": 45.0,
+   "flank_nodes": [
+    1,
+    2
+   ]
+  },
+  {
+   "nozzle": 1,
+   "azimuth_deg": 135.0,
+   "flank_nodes": [
+    4,
+    5
+   ]
+  },
+  {
+   "nozzle": 2,
+   "azimuth_deg": 315.0,
+   "flank_nodes": [
+    10,
+    11
+   ]
+  },
+  {
+   "nozzle": 3,
+   "azimuth_deg": 225.0,
+   "flank_nodes": [
+    7,
+    8
+   ]
+  }
+ ],
+ "prototype": {
+  "jacket_m": 0.035,
+  "supports_per_coil": 8,
+  "reentrant_length_m": 0.4,
+  "coil_K": 20.0,
+  "carnot_fraction": 0.15,
+  "g10_allowable_Pa": 200000000.0,
+  "g10_k_integral_W_m": 150.0,
+  "ti_yield_Pa": 880000000.0,
+  "ti_E_Pa": 114000000000.0,
+  "stress_fraction": 0.67,
+  "buckling_knockdown": 0.8,
+  "d_over_t": 30.0
+ },
+ "measured": {
+  "summary": {
+   "by_kind": {
+    "cryo_coil_jacket": {
+     "parts": 16,
+     "min_nearest_m": 0.007,
+     "min_plasma_m": null
+    },
+    "cryo_coil_support": {
+     "parts": 128,
+     "min_nearest_m": 0.0,
+     "min_plasma_m": null
+    },
+    "cryo_cooler": {
+     "parts": 8,
+     "min_nearest_m": 0.02,
+     "min_plasma_m": null
+    },
+    "cryo_coolant_line": {
+     "parts": 20,
+     "min_nearest_m": 0.0,
+     "min_plasma_m": null
+    },
+    "drive_quench_dump": {
+     "parts": 8,
+     "min_nearest_m": 0.02,
+     "min_plasma_m": null
+    },
+    "drive_power_lead": {
+     "parts": 20,
+     "min_nearest_m": 0.0,
+     "min_plasma_m": null
+    },
+    "drive_thrust_strut": {
+     "parts": 16,
+     "min_nearest_m": 0.0,
+     "min_plasma_m": null
+    }
+   },
+   "contacts": {
+    "Study_Coil_Support_0_0_0": [
+     "Nozzle_Yoke_0_0"
+    ],
+    "Study_Coil_Support_0_0_1": [
+     "Nozzle_Yoke_0_0"
+    ],
+    "Study_Coil_Support_0_0_2": [
+     "Nozzle_Yoke_0_0"
+    ],
+    "Study_Coil_Support_0_0_3": [
+     "Nozzle_Yoke_0_0"
+    ],
+    "Study_Coil_Support_0_0_4": [
+     "Nozzle_Yoke_0_0"
+    ],
+    "Study_Coil_Support_0_0_5": [
+     "Nozzle_Yoke_0_0"
+    ],
+    "Study_Coil_Support_0_0_6": [
+     "Nozzle_Yoke_0_0"
+    ],
+    "Study_Coil_Support_0_0_7": [
+     "Nozzle_Yoke_0_0"
+    ],
+    "Study_Coil_Support_0_1_0": [
+     "Nozzle_Yoke_0_1"
+    ],
+    "Study_Coil_Support_0_1_1": [
+     "Nozzle_Yoke_0_1"
+    ],
+    "Study_Coil_Support_0_1_2": [
+     "Nozzle_Yoke_0_1"
+    ],
+    "Study_Coil_Support_0_1_3": [
+     "Nozzle_Yoke_0_1"
+    ],
+    "Study_Coil_Support_0_1_4": [
+     "Nozzle_Yoke_0_1"
+    ],
+    "Study_Coil_Support_0_1_5": [
+     "Nozzle_Yoke_0_1"
+    ],
+    "Study_Coil_Support_0_1_6": [
+     "Nozzle_Yoke_0_1"
+    ],
+    "Study_Coil_Support_0_1_7": [
+     "Nozzle_Yoke_0_1"
+    ],
+    "Study_Coil_Support_0_2_0": [
+     "Nozzle_Yoke_0_2"
+    ],
+    "Study_Coil_Support_0_2_1": [
+     "Nozzle_Yoke_0_2"
+    ],
+    "Study_Coil_Support_0_2_2": [
+     "Nozzle_Yoke_0_2"
+    ],
+    "Study_Coil_Support_0_2_3": [
+     "Nozzle_Yoke_0_2"
+    ],
+    "Study_Coil_Support_0_2_4": [
+     "Nozzle_Yoke_0_2"
+    ],
+    "Study_Coil_Support_0_2_5": [
+     "Nozzle_Yoke_0_2"
+    ],
+    "Study_Coil_Support_0_2_6": [
+     "Nozzle_Yoke_0_2"
+    ],
+    "Study_Coil_Support_0_2_7": [
+     "Nozzle_Yoke_0_2"
+    ],
+    "Study_Coil_Support_0_3_0": [
+     "Nozzle_Yoke_0_3"
+    ],
+    "Study_Coil_Support_0_3_1": [
+     "Nozzle_Yoke_0_3"
+    ],
+    "Study_Coil_Support_0_3_2": [
+     "Nozzle_Yoke_0_3"
+    ],
+    "Study_Coil_Support_0_3_3": [
+     "Nozzle_Yoke_0_3"
+    ],
+    "Study_Coil_Support_0_3_4": [
+     "Nozzle_Yoke_0_3"
+    ],
+    "Study_Coil_Support_0_3_5": [
+     "Nozzle_Yoke_0_3"
+    ],
+    "Study_Coil_Support_0_3_6": [
+     "Nozzle_Yoke_0_3"
+    ],
+    "Study_Coil_Support_0_3_7": [
+     "Nozzle_Yoke_0_3"
+    ],
+    "Study_Cryocooler_Bracket_0": [
+     "Thrust_Node_01"
+    ],
+    "Study_Quench_Dump_Bracket_0": [
+     "Thrust_Node_02"
+    ],
+    "Study_Thrust_Strut_0_01_1": [
+     "Thrust_Node_01"
+    ],
+    "Study_Thrust_Strut_0_01_2": [
+     "Thrust_Node_01"
+    ],
+    "Study_Thrust_Strut_0_02_1": [
+     "Thrust_Node_02"
+    ],
+    "Study_Thrust_Strut_0_02_2": [
+     "Thrust_Node_02"
+    ],
+    "Study_Coil_Support_1_0_0": [
+     "Nozzle_Yoke_1_0"
+    ],
+    "Study_Coil_Support_1_0_1": [
+     "Nozzle_Yoke_1_0"
+    ],
+    "Study_Coil_Support_1_0_2": [
+     "Nozzle_Yoke_1_0"
+    ],
+    "Study_Coil_Support_1_0_3": [
+     "Nozzle_Yoke_1_0"
+    ],
+    "Study_Coil_Support_1_0_4": [
+     "Nozzle_Yoke_1_0"
+    ],
+    "Study_Coil_Support_1_0_5": [
+     "Nozzle_Yoke_1_0"
+    ],
+    "Study_Coil_Support_1_0_6": [
+     "Nozzle_Yoke_1_0"
+    ],
+    "Study_Coil_Support_1_0_7": [
+     "Nozzle_Yoke_1_0"
+    ],
+    "Study_Coil_Support_1_1_0": [
+     "Nozzle_Yoke_1_1"
+    ],
+    "Study_Coil_Support_1_1_1": [
+     "Nozzle_Yoke_1_1"
+    ],
+    "Study_Coil_Support_1_1_2": [
+     "Nozzle_Yoke_1_1"
+    ],
+    "Study_Coil_Support_1_1_3": [
+     "Nozzle_Yoke_1_1"
+    ],
+    "Study_Coil_Support_1_1_4": [
+     "Nozzle_Yoke_1_1"
+    ],
+    "Study_Coil_Support_1_1_5": [
+     "Nozzle_Yoke_1_1"
+    ],
+    "Study_Coil_Support_1_1_6": [
+     "Nozzle_Yoke_1_1"
+    ],
+    "Study_Coil_Support_1_1_7": [
+     "Nozzle_Yoke_1_1"
+    ],
+    "Study_Coil_Support_1_2_0": [
+     "Nozzle_Yoke_1_2"
+    ],
+    "Study_Coil_Support_1_2_1": [
+     "Nozzle_Yoke_1_2"
+    ],
+    "Study_Coil_Support_1_2_2": [
+     "Nozzle_Yoke_1_2"
+    ],
+    "Study_Coil_Support_1_2_3": [
+     "Nozzle_Yoke_1_2"
+    ],
+    "Study_Coil_Support_1_2_4": [
+     "Nozzle_Yoke_1_2"
+    ],
+    "Study_Coil_Support_1_2_5": [
+     "Nozzle_Yoke_1_2"
+    ],
+    "Study_Coil_Support_1_2_6": [
+     "Nozzle_Yoke_1_2"
+    ],
+    "Study_Coil_Support_1_2_7": [
+     "Nozzle_Yoke_1_2"
+    ],
+    "Study_Coil_Support_1_3_0": [
+     "Nozzle_Yoke_1_3"
+    ],
+    "Study_Coil_Support_1_3_1": [
+     "Nozzle_Yoke_1_3"
+    ],
+    "Study_Coil_Support_1_3_2": [
+     "Nozzle_Yoke_1_3"
+    ],
+    "Study_Coil_Support_1_3_3": [
+     "Nozzle_Yoke_1_3"
+    ],
+    "Study_Coil_Support_1_3_4": [
+     "Nozzle_Yoke_1_3"
+    ],
+    "Study_Coil_Support_1_3_5": [
+     "Nozzle_Yoke_1_3"
+    ],
+    "Study_Coil_Support_1_3_6": [
+     "Nozzle_Yoke_1_3"
+    ],
+    "Study_Coil_Support_1_3_7": [
+     "Nozzle_Yoke_1_3"
+    ],
+    "Study_Cryocooler_Bracket_1": [
+     "Thrust_Node_04"
+    ],
+    "Study_Quench_Dump_Bracket_1": [
+     "Thrust_Node_05"
+    ],
+    "Study_Thrust_Strut_1_04_1": [
+     "Thrust_Node_04"
+    ],
+    "Study_Thrust_Strut_1_04_2": [
+     "Thrust_Node_04"
+    ],
+    "Study_Thrust_Strut_1_05_1": [
+     "Thrust_Node_05"
+    ],
+    "Study_Thrust_Strut_1_05_2": [
+     "Thrust_Node_05"
+    ],
+    "Study_Coil_Support_2_0_0": [
+     "Nozzle_Yoke_2_0"
+    ],
+    "Study_Coil_Support_2_0_1": [
+     "Nozzle_Yoke_2_0"
+    ],
+    "Study_Coil_Support_2_0_2": [
+     "Nozzle_Yoke_2_0"
+    ],
+    "Study_Coil_Support_2_0_3": [
+     "Nozzle_Yoke_2_0"
+    ],
+    "Study_Coil_Support_2_0_4": [
+     "Nozzle_Yoke_2_0"
+    ],
+    "Study_Coil_Support_2_0_5": [
+     "Nozzle_Yoke_2_0"
+    ],
+    "Study_Coil_Support_2_0_6": [
+     "Nozzle_Yoke_2_0"
+    ],
+    "Study_Coil_Support_2_0_7": [
+     "Nozzle_Yoke_2_0"
+    ],
+    "Study_Coil_Support_2_1_0": [
+     "Nozzle_Yoke_2_1"
+    ],
+    "Study_Coil_Support_2_1_1": [
+     "Nozzle_Yoke_2_1"
+    ],
+    "Study_Coil_Support_2_1_2": [
+     "Nozzle_Yoke_2_1"
+    ],
+    "Study_Coil_Support_2_1_3": [
+     "Nozzle_Yoke_2_1"
+    ],
+    "Study_Coil_Support_2_1_4": [
+     "Nozzle_Yoke_2_1"
+    ],
+    "Study_Coil_Support_2_1_5": [
+     "Nozzle_Yoke_2_1"
+    ],
+    "Study_Coil_Support_2_1_6": [
+     "Nozzle_Yoke_2_1"
+    ],
+    "Study_Coil_Support_2_1_7": [
+     "Nozzle_Yoke_2_1"
+    ],
+    "Study_Coil_Support_2_2_0": [
+     "Nozzle_Yoke_2_2"
+    ],
+    "Study_Coil_Support_2_2_1": [
+     "Nozzle_Yoke_2_2"
+    ],
+    "Study_Coil_Support_2_2_2": [
+     "Nozzle_Yoke_2_2"
+    ],
+    "Study_Coil_Support_2_2_3": [
+     "Nozzle_Yoke_2_2"
+    ],
+    "Study_Coil_Support_2_2_4": [
+     "Nozzle_Yoke_2_2"
+    ],
+    "Study_Coil_Support_2_2_5": [
+     "Nozzle_Yoke_2_2"
+    ],
+    "Study_Coil_Support_2_2_6": [
+     "Nozzle_Yoke_2_2"
+    ],
+    "Study_Coil_Support_2_2_7": [
+     "Nozzle_Yoke_2_2"
+    ],
+    "Study_Coil_Support_2_3_0": [
+     "Nozzle_Yoke_2_3"
+    ],
+    "Study_Coil_Support_2_3_1": [
+     "Nozzle_Yoke_2_3"
+    ],
+    "Study_Coil_Support_2_3_2": [
+     "Nozzle_Yoke_2_3"
+    ],
+    "Study_Coil_Support_2_3_3": [
+     "Nozzle_Yoke_2_3"
+    ],
+    "Study_Coil_Support_2_3_4": [
+     "Nozzle_Yoke_2_3"
+    ],
+    "Study_Coil_Support_2_3_5": [
+     "Nozzle_Yoke_2_3"
+    ],
+    "Study_Coil_Support_2_3_6": [
+     "Nozzle_Yoke_2_3"
+    ],
+    "Study_Coil_Support_2_3_7": [
+     "Nozzle_Yoke_2_3"
+    ],
+    "Study_Cryocooler_Bracket_2": [
+     "Thrust_Node_11"
+    ],
+    "Study_Quench_Dump_Bracket_2": [
+     "Thrust_Node_11"
+    ],
+    "Study_Thrust_Strut_2_10_1": [
+     "Thrust_Node_10"
+    ],
+    "Study_Thrust_Strut_2_10_2": [
+     "Thrust_Node_10"
+    ],
+    "Study_Thrust_Strut_2_11_1": [
+     "Thrust_Node_11"
+    ],
+    "Study_Thrust_Strut_2_11_2": [
+     "Thrust_Node_11"
+    ],
+    "Study_Coil_Support_3_0_0": [
+     "Nozzle_Yoke_3_0"
+    ],
+    "Study_Coil_Support_3_0_1": [
+     "Nozzle_Yoke_3_0"
+    ],
+    "Study_Coil_Support_3_0_2": [
+     "Nozzle_Yoke_3_0"
+    ],
+    "Study_Coil_Support_3_0_3": [
+     "Nozzle_Yoke_3_0"
+    ],
+    "Study_Coil_Support_3_0_4": [
+     "Nozzle_Yoke_3_0"
+    ],
+    "Study_Coil_Support_3_0_5": [
+     "Nozzle_Yoke_3_0"
+    ],
+    "Study_Coil_Support_3_0_6": [
+     "Nozzle_Yoke_3_0"
+    ],
+    "Study_Coil_Support_3_0_7": [
+     "Nozzle_Yoke_3_0"
+    ],
+    "Study_Coil_Support_3_1_0": [
+     "Nozzle_Yoke_3_1"
+    ],
+    "Study_Coil_Support_3_1_1": [
+     "Nozzle_Yoke_3_1"
+    ],
+    "Study_Coil_Support_3_1_2": [
+     "Nozzle_Yoke_3_1"
+    ],
+    "Study_Coil_Support_3_1_3": [
+     "Nozzle_Yoke_3_1"
+    ],
+    "Study_Coil_Support_3_1_4": [
+     "Nozzle_Yoke_3_1"
+    ],
+    "Study_Coil_Support_3_1_5": [
+     "Nozzle_Yoke_3_1"
+    ],
+    "Study_Coil_Support_3_1_6": [
+     "Nozzle_Yoke_3_1"
+    ],
+    "Study_Coil_Support_3_1_7": [
+     "Nozzle_Yoke_3_1"
+    ],
+    "Study_Coil_Support_3_2_0": [
+     "Nozzle_Yoke_3_2"
+    ],
+    "Study_Coil_Support_3_2_1": [
+     "Nozzle_Yoke_3_2"
+    ],
+    "Study_Coil_Support_3_2_2": [
+     "Nozzle_Yoke_3_2"
+    ],
+    "Study_Coil_Support_3_2_3": [
+     "Nozzle_Yoke_3_2"
+    ],
+    "Study_Coil_Support_3_2_4": [
+     "Nozzle_Yoke_3_2"
+    ],
+    "Study_Coil_Support_3_2_5": [
+     "Nozzle_Yoke_3_2"
+    ],
+    "Study_Coil_Support_3_2_6": [
+     "Nozzle_Yoke_3_2"
+    ],
+    "Study_Coil_Support_3_2_7": [
+     "Nozzle_Yoke_3_2"
+    ],
+    "Study_Coil_Support_3_3_0": [
+     "Nozzle_Yoke_3_3"
+    ],
+    "Study_Coil_Support_3_3_1": [
+     "Nozzle_Yoke_3_3"
+    ],
+    "Study_Coil_Support_3_3_2": [
+     "Nozzle_Yoke_3_3"
+    ],
+    "Study_Coil_Support_3_3_3": [
+     "Nozzle_Yoke_3_3"
+    ],
+    "Study_Coil_Support_3_3_4": [
+     "Nozzle_Yoke_3_3"
+    ],
+    "Study_Coil_Support_3_3_5": [
+     "Nozzle_Yoke_3_3"
+    ],
+    "Study_Coil_Support_3_3_6": [
+     "Nozzle_Yoke_3_3"
+    ],
+    "Study_Coil_Support_3_3_7": [
+     "Nozzle_Yoke_3_3"
+    ],
+    "Study_Cryocooler_Bracket_3": [
+     "Thrust_Node_08"
+    ],
+    "Study_Quench_Dump_Bracket_3": [
+     "Thrust_Node_08"
+    ],
+    "Study_Thrust_Strut_3_07_1": [
+     "Thrust_Node_07"
+    ],
+    "Study_Thrust_Strut_3_07_2": [
+     "Thrust_Node_07"
+    ],
+    "Study_Thrust_Strut_3_08_1": [
+     "Thrust_Node_08"
+    ],
+    "Study_Thrust_Strut_3_08_2": [
+     "Thrust_Node_08"
+    ]
+   },
+   "conflicts": {},
+   "field_envelope_crossings": [
+    "Study_Coil_Cryostat_0_0",
+    "Study_Coil_Cryostat_0_1",
+    "Study_Coil_Cryostat_0_2",
+    "Study_Coil_Cryostat_0_3",
+    "Study_Coil_Cryostat_1_0",
+    "Study_Coil_Cryostat_1_1",
+    "Study_Coil_Cryostat_1_2",
+    "Study_Coil_Cryostat_1_3",
+    "Study_Coil_Cryostat_2_0",
+    "Study_Coil_Cryostat_2_1",
+    "Study_Coil_Cryostat_2_2",
+    "Study_Coil_Cryostat_2_3",
+    "Study_Coil_Cryostat_3_0",
+    "Study_Coil_Cryostat_3_1",
+    "Study_Coil_Cryostat_3_2",
+    "Study_Coil_Cryostat_3_3",
+    "Study_Cryo_Stub_0_0",
+    "Study_Cryo_Stub_0_2",
+    "Study_Cryo_Stub_0_3",
+    "Study_Cryo_Stub_1_0",
+    "Study_Cryo_Stub_1_2",
+    "Study_Cryo_Stub_1_3",
+    "Study_Cryo_Stub_2_0",
+    "Study_Cryo_Stub_2_2",
+    "Study_Cryo_Stub_2_3",
+    "Study_Cryo_Stub_3_0",
+    "Study_Cryo_Stub_3_2",
+    "Study_Cryo_Stub_3_3",
+    "Study_Lead_Stub_0_0",
+    "Study_Lead_Stub_0_2",
+    "Study_Lead_Stub_0_3",
+    "Study_Lead_Stub_1_0",
+    "Study_Lead_Stub_1_2",
+    "Study_Lead_Stub_1_3",
+    "Study_Lead_Stub_2_0",
+    "Study_Lead_Stub_2_2",
+    "Study_Lead_Stub_2_3",
+    "Study_Lead_Stub_3_0",
+    "Study_Lead_Stub_3_2",
+    "Study_Lead_Stub_3_3"
+   ]
+  },
+  "parts": {
+   "Study_Coil_Cryostat_0_0": {
+    "kind": "cryo_coil_jacket",
+    "intersects": [
+     "MagneticNozzle_FieldEnvelope"
+    ],
+    "nearest_m": 0.007,
+    "nearest": "Nozzle_Yoke_0_0",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_0_0_0": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_0_0"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_0_0",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_0_0_1": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_0_0"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_0_0",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_0_0_2": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_0_0"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_0_0",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_0_0_3": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_0_0"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_0_0",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_0_0_4": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_0_0"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_0_0",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_0_0_5": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_0_0"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_0_0",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_0_0_6": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_0_0"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_0_0",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_0_0_7": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_0_0"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_0_0",
+    "plasma_m": null
+   },
+   "Study_Coil_Cryostat_0_1": {
+    "kind": "cryo_coil_jacket",
+    "intersects": [
+     "MagneticNozzle_FieldEnvelope"
+    ],
+    "nearest_m": 0.009,
+    "nearest": "Nozzle_Yoke_0_1",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_0_1_0": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_0_1"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_0_1",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_0_1_1": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_0_1"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_0_1",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_0_1_2": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_0_1"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_0_1",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_0_1_3": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_0_1"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_0_1",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_0_1_4": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_0_1"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_0_1",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_0_1_5": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_0_1"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_0_1",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_0_1_6": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_0_1"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_0_1",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_0_1_7": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_0_1"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_0_1",
+    "plasma_m": null
+   },
+   "Study_Coil_Cryostat_0_2": {
+    "kind": "cryo_coil_jacket",
+    "intersects": [
+     "MagneticNozzle_FieldEnvelope"
+    ],
+    "nearest_m": 0.011,
+    "nearest": "Nozzle_Yoke_0_2",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_0_2_0": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_0_2"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_0_2",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_0_2_1": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_0_2"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_0_2",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_0_2_2": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_0_2"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_0_2",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_0_2_3": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_0_2"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_0_2",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_0_2_4": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_0_2"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_0_2",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_0_2_5": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_0_2"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_0_2",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_0_2_6": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_0_2"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_0_2",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_0_2_7": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_0_2"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_0_2",
+    "plasma_m": null
+   },
+   "Study_Coil_Cryostat_0_3": {
+    "kind": "cryo_coil_jacket",
+    "intersects": [
+     "MagneticNozzle_FieldEnvelope"
+    ],
+    "nearest_m": 0.015,
+    "nearest": "Nozzle_Yoke_0_3",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_0_3_0": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_0_3"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_0_3",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_0_3_1": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_0_3"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_0_3",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_0_3_2": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_0_3"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_0_3",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_0_3_3": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_0_3"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_0_3",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_0_3_4": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_0_3"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_0_3",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_0_3_5": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_0_3"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_0_3",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_0_3_6": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_0_3"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_0_3",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_0_3_7": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_0_3"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_0_3",
+    "plasma_m": null
+   },
+   "Study_Cryocooler_0": {
+    "kind": "cryo_cooler",
+    "intersects": [],
+    "nearest_m": 0.475,
+    "nearest": "Nozzle_Yoke_0_3",
+    "plasma_m": null
+   },
+   "Study_Cryocooler_Bracket_0": {
+    "kind": "cryo_cooler",
+    "intersects": [
+     "Thrust_Node_01"
+    ],
+    "nearest_m": 0.02,
+    "nearest": "Thrust_Node_01",
+    "plasma_m": null
+   },
+   "Study_Cryo_Line_0": {
+    "kind": "cryo_coolant_line",
+    "intersects": [],
+    "nearest_m": 0.104,
+    "nearest": "Nozzle_Yoke_0_2",
+    "plasma_m": null
+   },
+   "Study_Cryo_Stub_0_0": {
+    "kind": "cryo_coolant_line",
+    "intersects": [
+     "MagneticNozzle_FieldEnvelope"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "MagneticNozzle_FieldEnvelope",
+    "plasma_m": null
+   },
+   "Study_Cryo_Stub_0_1": {
+    "kind": "cryo_coolant_line",
+    "intersects": [],
+    "nearest_m": 0.015,
+    "nearest": "MagneticNozzle_FieldEnvelope",
+    "plasma_m": null
+   },
+   "Study_Cryo_Stub_0_2": {
+    "kind": "cryo_coolant_line",
+    "intersects": [
+     "MagneticNozzle_FieldEnvelope"
+    ],
+    "nearest_m": 0.068,
+    "nearest": "MagneticNozzle_FieldEnvelope",
+    "plasma_m": null
+   },
+   "Study_Cryo_Stub_0_3": {
+    "kind": "cryo_coolant_line",
+    "intersects": [
+     "MagneticNozzle_FieldEnvelope"
+    ],
+    "nearest_m": 0.048,
+    "nearest": "MagneticNozzle_FieldEnvelope",
+    "plasma_m": null
+   },
+   "Study_Quench_Dump_0": {
+    "kind": "drive_quench_dump",
+    "intersects": [],
+    "nearest_m": 0.52,
+    "nearest": "Thrust_Node_02",
+    "plasma_m": null
+   },
+   "Study_Quench_Dump_Bracket_0": {
+    "kind": "drive_quench_dump",
+    "intersects": [
+     "Thrust_Node_02"
+    ],
+    "nearest_m": 0.02,
+    "nearest": "Thrust_Node_02",
+    "plasma_m": null
+   },
+   "Study_Current_Lead_0": {
+    "kind": "drive_power_lead",
+    "intersects": [],
+    "nearest_m": 0.104,
+    "nearest": "Nozzle_Yoke_0_2",
+    "plasma_m": null
+   },
+   "Study_Lead_Stub_0_0": {
+    "kind": "drive_power_lead",
+    "intersects": [
+     "MagneticNozzle_FieldEnvelope"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "MagneticNozzle_FieldEnvelope",
+    "plasma_m": null
+   },
+   "Study_Lead_Stub_0_1": {
+    "kind": "drive_power_lead",
+    "intersects": [],
+    "nearest_m": 0.015,
+    "nearest": "MagneticNozzle_FieldEnvelope",
+    "plasma_m": null
+   },
+   "Study_Lead_Stub_0_2": {
+    "kind": "drive_power_lead",
+    "intersects": [
+     "MagneticNozzle_FieldEnvelope"
+    ],
+    "nearest_m": 0.068,
+    "nearest": "MagneticNozzle_FieldEnvelope",
+    "plasma_m": null
+   },
+   "Study_Lead_Stub_0_3": {
+    "kind": "drive_power_lead",
+    "intersects": [
+     "MagneticNozzle_FieldEnvelope"
+    ],
+    "nearest_m": 0.048,
+    "nearest": "MagneticNozzle_FieldEnvelope",
+    "plasma_m": null
+   },
+   "Study_Thrust_Strut_0_01_1": {
+    "kind": "drive_thrust_strut",
+    "intersects": [
+     "Thrust_Node_01"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Thrust_Node_01",
+    "plasma_m": null
+   },
+   "Study_Thrust_Strut_0_01_2": {
+    "kind": "drive_thrust_strut",
+    "intersects": [
+     "Thrust_Node_01"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Thrust_Node_01",
+    "plasma_m": null
+   },
+   "Study_Thrust_Strut_0_02_1": {
+    "kind": "drive_thrust_strut",
+    "intersects": [
+     "Thrust_Node_02"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Thrust_Node_02",
+    "plasma_m": null
+   },
+   "Study_Thrust_Strut_0_02_2": {
+    "kind": "drive_thrust_strut",
+    "intersects": [
+     "Thrust_Node_02"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Thrust_Node_02",
+    "plasma_m": null
+   },
+   "Study_Coil_Cryostat_1_0": {
+    "kind": "cryo_coil_jacket",
+    "intersects": [
+     "MagneticNozzle_FieldEnvelope"
+    ],
+    "nearest_m": 0.007,
+    "nearest": "Nozzle_Yoke_1_0",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_1_0_0": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_1_0"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_1_0",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_1_0_1": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_1_0"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_1_0",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_1_0_2": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_1_0"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_1_0",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_1_0_3": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_1_0"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_1_0",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_1_0_4": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_1_0"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_1_0",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_1_0_5": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_1_0"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_1_0",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_1_0_6": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_1_0"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_1_0",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_1_0_7": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_1_0"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_1_0",
+    "plasma_m": null
+   },
+   "Study_Coil_Cryostat_1_1": {
+    "kind": "cryo_coil_jacket",
+    "intersects": [
+     "MagneticNozzle_FieldEnvelope"
+    ],
+    "nearest_m": 0.009,
+    "nearest": "Nozzle_Yoke_1_1",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_1_1_0": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_1_1"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_1_1",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_1_1_1": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_1_1"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_1_1",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_1_1_2": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_1_1"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_1_1",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_1_1_3": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_1_1"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_1_1",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_1_1_4": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_1_1"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_1_1",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_1_1_5": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_1_1"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_1_1",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_1_1_6": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_1_1"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_1_1",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_1_1_7": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_1_1"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_1_1",
+    "plasma_m": null
+   },
+   "Study_Coil_Cryostat_1_2": {
+    "kind": "cryo_coil_jacket",
+    "intersects": [
+     "MagneticNozzle_FieldEnvelope"
+    ],
+    "nearest_m": 0.011,
+    "nearest": "Nozzle_Yoke_1_2",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_1_2_0": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_1_2"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_1_2",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_1_2_1": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_1_2"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_1_2",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_1_2_2": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_1_2"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_1_2",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_1_2_3": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_1_2"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_1_2",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_1_2_4": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_1_2"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_1_2",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_1_2_5": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_1_2"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_1_2",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_1_2_6": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_1_2"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_1_2",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_1_2_7": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_1_2"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_1_2",
+    "plasma_m": null
+   },
+   "Study_Coil_Cryostat_1_3": {
+    "kind": "cryo_coil_jacket",
+    "intersects": [
+     "MagneticNozzle_FieldEnvelope"
+    ],
+    "nearest_m": 0.015,
+    "nearest": "Nozzle_Yoke_1_3",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_1_3_0": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_1_3"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_1_3",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_1_3_1": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_1_3"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_1_3",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_1_3_2": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_1_3"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_1_3",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_1_3_3": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_1_3"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_1_3",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_1_3_4": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_1_3"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_1_3",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_1_3_5": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_1_3"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_1_3",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_1_3_6": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_1_3"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_1_3",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_1_3_7": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_1_3"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_1_3",
+    "plasma_m": null
+   },
+   "Study_Cryocooler_1": {
+    "kind": "cryo_cooler",
+    "intersects": [],
+    "nearest_m": 0.475,
+    "nearest": "Nozzle_Yoke_1_3",
+    "plasma_m": null
+   },
+   "Study_Cryocooler_Bracket_1": {
+    "kind": "cryo_cooler",
+    "intersects": [
+     "Thrust_Node_04"
+    ],
+    "nearest_m": 0.02,
+    "nearest": "Thrust_Node_04",
+    "plasma_m": null
+   },
+   "Study_Cryo_Line_1": {
+    "kind": "cryo_coolant_line",
+    "intersects": [],
+    "nearest_m": 0.104,
+    "nearest": "Nozzle_Yoke_1_2",
+    "plasma_m": null
+   },
+   "Study_Cryo_Stub_1_0": {
+    "kind": "cryo_coolant_line",
+    "intersects": [
+     "MagneticNozzle_FieldEnvelope"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "MagneticNozzle_FieldEnvelope",
+    "plasma_m": null
+   },
+   "Study_Cryo_Stub_1_1": {
+    "kind": "cryo_coolant_line",
+    "intersects": [],
+    "nearest_m": 0.015,
+    "nearest": "MagneticNozzle_FieldEnvelope",
+    "plasma_m": null
+   },
+   "Study_Cryo_Stub_1_2": {
+    "kind": "cryo_coolant_line",
+    "intersects": [
+     "MagneticNozzle_FieldEnvelope"
+    ],
+    "nearest_m": 0.068,
+    "nearest": "MagneticNozzle_FieldEnvelope",
+    "plasma_m": null
+   },
+   "Study_Cryo_Stub_1_3": {
+    "kind": "cryo_coolant_line",
+    "intersects": [
+     "MagneticNozzle_FieldEnvelope"
+    ],
+    "nearest_m": 0.048,
+    "nearest": "MagneticNozzle_FieldEnvelope",
+    "plasma_m": null
+   },
+   "Study_Quench_Dump_1": {
+    "kind": "drive_quench_dump",
+    "intersects": [],
+    "nearest_m": 0.52,
+    "nearest": "Thrust_Node_05",
+    "plasma_m": null
+   },
+   "Study_Quench_Dump_Bracket_1": {
+    "kind": "drive_quench_dump",
+    "intersects": [
+     "Thrust_Node_05"
+    ],
+    "nearest_m": 0.02,
+    "nearest": "Thrust_Node_05",
+    "plasma_m": null
+   },
+   "Study_Current_Lead_1": {
+    "kind": "drive_power_lead",
+    "intersects": [],
+    "nearest_m": 0.104,
+    "nearest": "Nozzle_Yoke_1_2",
+    "plasma_m": null
+   },
+   "Study_Lead_Stub_1_0": {
+    "kind": "drive_power_lead",
+    "intersects": [
+     "MagneticNozzle_FieldEnvelope"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "MagneticNozzle_FieldEnvelope",
+    "plasma_m": null
+   },
+   "Study_Lead_Stub_1_1": {
+    "kind": "drive_power_lead",
+    "intersects": [],
+    "nearest_m": 0.015,
+    "nearest": "MagneticNozzle_FieldEnvelope",
+    "plasma_m": null
+   },
+   "Study_Lead_Stub_1_2": {
+    "kind": "drive_power_lead",
+    "intersects": [
+     "MagneticNozzle_FieldEnvelope"
+    ],
+    "nearest_m": 0.068,
+    "nearest": "MagneticNozzle_FieldEnvelope",
+    "plasma_m": null
+   },
+   "Study_Lead_Stub_1_3": {
+    "kind": "drive_power_lead",
+    "intersects": [
+     "MagneticNozzle_FieldEnvelope"
+    ],
+    "nearest_m": 0.048,
+    "nearest": "MagneticNozzle_FieldEnvelope",
+    "plasma_m": null
+   },
+   "Study_Thrust_Strut_1_04_1": {
+    "kind": "drive_thrust_strut",
+    "intersects": [
+     "Thrust_Node_04"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Thrust_Node_04",
+    "plasma_m": null
+   },
+   "Study_Thrust_Strut_1_04_2": {
+    "kind": "drive_thrust_strut",
+    "intersects": [
+     "Thrust_Node_04"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Thrust_Node_04",
+    "plasma_m": null
+   },
+   "Study_Thrust_Strut_1_05_1": {
+    "kind": "drive_thrust_strut",
+    "intersects": [
+     "Thrust_Node_05"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Thrust_Node_05",
+    "plasma_m": null
+   },
+   "Study_Thrust_Strut_1_05_2": {
+    "kind": "drive_thrust_strut",
+    "intersects": [
+     "Thrust_Node_05"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Thrust_Node_05",
+    "plasma_m": null
+   },
+   "Study_Coil_Cryostat_2_0": {
+    "kind": "cryo_coil_jacket",
+    "intersects": [
+     "MagneticNozzle_FieldEnvelope"
+    ],
+    "nearest_m": 0.007,
+    "nearest": "Nozzle_Yoke_2_0",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_2_0_0": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_2_0"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_2_0",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_2_0_1": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_2_0"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_2_0",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_2_0_2": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_2_0"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_2_0",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_2_0_3": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_2_0"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_2_0",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_2_0_4": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_2_0"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_2_0",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_2_0_5": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_2_0"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_2_0",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_2_0_6": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_2_0"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_2_0",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_2_0_7": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_2_0"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_2_0",
+    "plasma_m": null
+   },
+   "Study_Coil_Cryostat_2_1": {
+    "kind": "cryo_coil_jacket",
+    "intersects": [
+     "MagneticNozzle_FieldEnvelope"
+    ],
+    "nearest_m": 0.009,
+    "nearest": "Nozzle_Yoke_2_1",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_2_1_0": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_2_1"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_2_1",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_2_1_1": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_2_1"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_2_1",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_2_1_2": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_2_1"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_2_1",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_2_1_3": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_2_1"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_2_1",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_2_1_4": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_2_1"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_2_1",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_2_1_5": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_2_1"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_2_1",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_2_1_6": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_2_1"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_2_1",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_2_1_7": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_2_1"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_2_1",
+    "plasma_m": null
+   },
+   "Study_Coil_Cryostat_2_2": {
+    "kind": "cryo_coil_jacket",
+    "intersects": [
+     "MagneticNozzle_FieldEnvelope"
+    ],
+    "nearest_m": 0.011,
+    "nearest": "Nozzle_Yoke_2_2",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_2_2_0": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_2_2"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_2_2",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_2_2_1": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_2_2"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_2_2",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_2_2_2": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_2_2"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_2_2",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_2_2_3": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_2_2"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_2_2",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_2_2_4": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_2_2"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_2_2",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_2_2_5": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_2_2"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_2_2",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_2_2_6": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_2_2"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_2_2",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_2_2_7": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_2_2"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_2_2",
+    "plasma_m": null
+   },
+   "Study_Coil_Cryostat_2_3": {
+    "kind": "cryo_coil_jacket",
+    "intersects": [
+     "MagneticNozzle_FieldEnvelope"
+    ],
+    "nearest_m": 0.015,
+    "nearest": "Nozzle_Yoke_2_3",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_2_3_0": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_2_3"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_2_3",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_2_3_1": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_2_3"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_2_3",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_2_3_2": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_2_3"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_2_3",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_2_3_3": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_2_3"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_2_3",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_2_3_4": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_2_3"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_2_3",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_2_3_5": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_2_3"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_2_3",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_2_3_6": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_2_3"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_2_3",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_2_3_7": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_2_3"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_2_3",
+    "plasma_m": null
+   },
+   "Study_Cryocooler_2": {
+    "kind": "cryo_cooler",
+    "intersects": [],
+    "nearest_m": 0.475,
+    "nearest": "Nozzle_Yoke_2_3",
+    "plasma_m": null
+   },
+   "Study_Cryocooler_Bracket_2": {
+    "kind": "cryo_cooler",
+    "intersects": [
+     "Thrust_Node_11"
+    ],
+    "nearest_m": 0.02,
+    "nearest": "Thrust_Node_11",
+    "plasma_m": null
+   },
+   "Study_Cryo_Line_2": {
+    "kind": "cryo_coolant_line",
+    "intersects": [],
+    "nearest_m": 0.104,
+    "nearest": "Nozzle_Yoke_2_2",
+    "plasma_m": null
+   },
+   "Study_Cryo_Stub_2_0": {
+    "kind": "cryo_coolant_line",
+    "intersects": [
+     "MagneticNozzle_FieldEnvelope"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "MagneticNozzle_FieldEnvelope",
+    "plasma_m": null
+   },
+   "Study_Cryo_Stub_2_1": {
+    "kind": "cryo_coolant_line",
+    "intersects": [],
+    "nearest_m": 0.015,
+    "nearest": "MagneticNozzle_FieldEnvelope",
+    "plasma_m": null
+   },
+   "Study_Cryo_Stub_2_2": {
+    "kind": "cryo_coolant_line",
+    "intersects": [
+     "MagneticNozzle_FieldEnvelope"
+    ],
+    "nearest_m": 0.068,
+    "nearest": "MagneticNozzle_FieldEnvelope",
+    "plasma_m": null
+   },
+   "Study_Cryo_Stub_2_3": {
+    "kind": "cryo_coolant_line",
+    "intersects": [
+     "MagneticNozzle_FieldEnvelope"
+    ],
+    "nearest_m": 0.048,
+    "nearest": "MagneticNozzle_FieldEnvelope",
+    "plasma_m": null
+   },
+   "Study_Quench_Dump_2": {
+    "kind": "drive_quench_dump",
+    "intersects": [],
+    "nearest_m": 0.52,
+    "nearest": "Thrust_Node_11",
+    "plasma_m": null
+   },
+   "Study_Quench_Dump_Bracket_2": {
+    "kind": "drive_quench_dump",
+    "intersects": [
+     "Thrust_Node_11"
+    ],
+    "nearest_m": 0.02,
+    "nearest": "Thrust_Node_11",
+    "plasma_m": null
+   },
+   "Study_Current_Lead_2": {
+    "kind": "drive_power_lead",
+    "intersects": [],
+    "nearest_m": 0.104,
+    "nearest": "Nozzle_Yoke_2_2",
+    "plasma_m": null
+   },
+   "Study_Lead_Stub_2_0": {
+    "kind": "drive_power_lead",
+    "intersects": [
+     "MagneticNozzle_FieldEnvelope"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "MagneticNozzle_FieldEnvelope",
+    "plasma_m": null
+   },
+   "Study_Lead_Stub_2_1": {
+    "kind": "drive_power_lead",
+    "intersects": [],
+    "nearest_m": 0.015,
+    "nearest": "MagneticNozzle_FieldEnvelope",
+    "plasma_m": null
+   },
+   "Study_Lead_Stub_2_2": {
+    "kind": "drive_power_lead",
+    "intersects": [
+     "MagneticNozzle_FieldEnvelope"
+    ],
+    "nearest_m": 0.068,
+    "nearest": "MagneticNozzle_FieldEnvelope",
+    "plasma_m": null
+   },
+   "Study_Lead_Stub_2_3": {
+    "kind": "drive_power_lead",
+    "intersects": [
+     "MagneticNozzle_FieldEnvelope"
+    ],
+    "nearest_m": 0.048,
+    "nearest": "MagneticNozzle_FieldEnvelope",
+    "plasma_m": null
+   },
+   "Study_Thrust_Strut_2_10_1": {
+    "kind": "drive_thrust_strut",
+    "intersects": [
+     "Thrust_Node_10"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Thrust_Node_10",
+    "plasma_m": null
+   },
+   "Study_Thrust_Strut_2_10_2": {
+    "kind": "drive_thrust_strut",
+    "intersects": [
+     "Thrust_Node_10"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Thrust_Node_10",
+    "plasma_m": null
+   },
+   "Study_Thrust_Strut_2_11_1": {
+    "kind": "drive_thrust_strut",
+    "intersects": [
+     "Thrust_Node_11"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Thrust_Node_11",
+    "plasma_m": null
+   },
+   "Study_Thrust_Strut_2_11_2": {
+    "kind": "drive_thrust_strut",
+    "intersects": [
+     "Thrust_Node_11"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Thrust_Node_11",
+    "plasma_m": null
+   },
+   "Study_Coil_Cryostat_3_0": {
+    "kind": "cryo_coil_jacket",
+    "intersects": [
+     "MagneticNozzle_FieldEnvelope"
+    ],
+    "nearest_m": 0.007,
+    "nearest": "Nozzle_Yoke_3_0",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_3_0_0": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_3_0"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_3_0",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_3_0_1": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_3_0"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_3_0",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_3_0_2": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_3_0"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_3_0",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_3_0_3": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_3_0"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_3_0",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_3_0_4": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_3_0"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_3_0",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_3_0_5": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_3_0"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_3_0",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_3_0_6": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_3_0"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_3_0",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_3_0_7": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_3_0"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_3_0",
+    "plasma_m": null
+   },
+   "Study_Coil_Cryostat_3_1": {
+    "kind": "cryo_coil_jacket",
+    "intersects": [
+     "MagneticNozzle_FieldEnvelope"
+    ],
+    "nearest_m": 0.009,
+    "nearest": "Nozzle_Yoke_3_1",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_3_1_0": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_3_1"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_3_1",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_3_1_1": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_3_1"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_3_1",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_3_1_2": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_3_1"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_3_1",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_3_1_3": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_3_1"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_3_1",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_3_1_4": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_3_1"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_3_1",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_3_1_5": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_3_1"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_3_1",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_3_1_6": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_3_1"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_3_1",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_3_1_7": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_3_1"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_3_1",
+    "plasma_m": null
+   },
+   "Study_Coil_Cryostat_3_2": {
+    "kind": "cryo_coil_jacket",
+    "intersects": [
+     "MagneticNozzle_FieldEnvelope"
+    ],
+    "nearest_m": 0.011,
+    "nearest": "Nozzle_Yoke_3_2",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_3_2_0": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_3_2"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_3_2",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_3_2_1": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_3_2"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_3_2",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_3_2_2": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_3_2"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_3_2",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_3_2_3": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_3_2"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_3_2",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_3_2_4": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_3_2"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_3_2",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_3_2_5": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_3_2"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_3_2",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_3_2_6": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_3_2"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_3_2",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_3_2_7": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_3_2"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_3_2",
+    "plasma_m": null
+   },
+   "Study_Coil_Cryostat_3_3": {
+    "kind": "cryo_coil_jacket",
+    "intersects": [
+     "MagneticNozzle_FieldEnvelope"
+    ],
+    "nearest_m": 0.015,
+    "nearest": "Nozzle_Yoke_3_3",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_3_3_0": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_3_3"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_3_3",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_3_3_1": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_3_3"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_3_3",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_3_3_2": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_3_3"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_3_3",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_3_3_3": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_3_3"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_3_3",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_3_3_4": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_3_3"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_3_3",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_3_3_5": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_3_3"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_3_3",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_3_3_6": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_3_3"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_3_3",
+    "plasma_m": null
+   },
+   "Study_Coil_Support_3_3_7": {
+    "kind": "cryo_coil_support",
+    "intersects": [
+     "Nozzle_Yoke_3_3"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Nozzle_Yoke_3_3",
+    "plasma_m": null
+   },
+   "Study_Cryocooler_3": {
+    "kind": "cryo_cooler",
+    "intersects": [],
+    "nearest_m": 0.475,
+    "nearest": "Nozzle_Yoke_3_3",
+    "plasma_m": null
+   },
+   "Study_Cryocooler_Bracket_3": {
+    "kind": "cryo_cooler",
+    "intersects": [
+     "Thrust_Node_08"
+    ],
+    "nearest_m": 0.02,
+    "nearest": "Thrust_Node_08",
+    "plasma_m": null
+   },
+   "Study_Cryo_Line_3": {
+    "kind": "cryo_coolant_line",
+    "intersects": [],
+    "nearest_m": 0.104,
+    "nearest": "Nozzle_Yoke_3_2",
+    "plasma_m": null
+   },
+   "Study_Cryo_Stub_3_0": {
+    "kind": "cryo_coolant_line",
+    "intersects": [
+     "MagneticNozzle_FieldEnvelope"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "MagneticNozzle_FieldEnvelope",
+    "plasma_m": null
+   },
+   "Study_Cryo_Stub_3_1": {
+    "kind": "cryo_coolant_line",
+    "intersects": [],
+    "nearest_m": 0.015,
+    "nearest": "MagneticNozzle_FieldEnvelope",
+    "plasma_m": null
+   },
+   "Study_Cryo_Stub_3_2": {
+    "kind": "cryo_coolant_line",
+    "intersects": [
+     "MagneticNozzle_FieldEnvelope"
+    ],
+    "nearest_m": 0.068,
+    "nearest": "MagneticNozzle_FieldEnvelope",
+    "plasma_m": null
+   },
+   "Study_Cryo_Stub_3_3": {
+    "kind": "cryo_coolant_line",
+    "intersects": [
+     "MagneticNozzle_FieldEnvelope"
+    ],
+    "nearest_m": 0.048,
+    "nearest": "MagneticNozzle_FieldEnvelope",
+    "plasma_m": null
+   },
+   "Study_Quench_Dump_3": {
+    "kind": "drive_quench_dump",
+    "intersects": [],
+    "nearest_m": 0.52,
+    "nearest": "Thrust_Node_08",
+    "plasma_m": null
+   },
+   "Study_Quench_Dump_Bracket_3": {
+    "kind": "drive_quench_dump",
+    "intersects": [
+     "Thrust_Node_08"
+    ],
+    "nearest_m": 0.02,
+    "nearest": "Thrust_Node_08",
+    "plasma_m": null
+   },
+   "Study_Current_Lead_3": {
+    "kind": "drive_power_lead",
+    "intersects": [],
+    "nearest_m": 0.104,
+    "nearest": "Nozzle_Yoke_3_2",
+    "plasma_m": null
+   },
+   "Study_Lead_Stub_3_0": {
+    "kind": "drive_power_lead",
+    "intersects": [
+     "MagneticNozzle_FieldEnvelope"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "MagneticNozzle_FieldEnvelope",
+    "plasma_m": null
+   },
+   "Study_Lead_Stub_3_1": {
+    "kind": "drive_power_lead",
+    "intersects": [],
+    "nearest_m": 0.015,
+    "nearest": "MagneticNozzle_FieldEnvelope",
+    "plasma_m": null
+   },
+   "Study_Lead_Stub_3_2": {
+    "kind": "drive_power_lead",
+    "intersects": [
+     "MagneticNozzle_FieldEnvelope"
+    ],
+    "nearest_m": 0.068,
+    "nearest": "MagneticNozzle_FieldEnvelope",
+    "plasma_m": null
+   },
+   "Study_Lead_Stub_3_3": {
+    "kind": "drive_power_lead",
+    "intersects": [
+     "MagneticNozzle_FieldEnvelope"
+    ],
+    "nearest_m": 0.048,
+    "nearest": "MagneticNozzle_FieldEnvelope",
+    "plasma_m": null
+   },
+   "Study_Thrust_Strut_3_07_1": {
+    "kind": "drive_thrust_strut",
+    "intersects": [
+     "Thrust_Node_07"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Thrust_Node_07",
+    "plasma_m": null
+   },
+   "Study_Thrust_Strut_3_07_2": {
+    "kind": "drive_thrust_strut",
+    "intersects": [
+     "Thrust_Node_07"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Thrust_Node_07",
+    "plasma_m": null
+   },
+   "Study_Thrust_Strut_3_08_1": {
+    "kind": "drive_thrust_strut",
+    "intersects": [
+     "Thrust_Node_08"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Thrust_Node_08",
+    "plasma_m": null
+   },
+   "Study_Thrust_Strut_3_08_2": {
+    "kind": "drive_thrust_strut",
+    "intersects": [
+     "Thrust_Node_08"
+    ],
+    "nearest_m": 0.0,
+    "nearest": "Thrust_Node_08",
+    "plasma_m": null
+   }
+  }
+ }
+}

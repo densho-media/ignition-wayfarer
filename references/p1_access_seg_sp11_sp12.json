@@ -1,0 +1,2480 @@
+{
+ "study": "SIM-027 SP-11 keeper / SP-12 controls / SP-12 litter turn segments (owner 2026-10-11 16:45: 15!A152:A154 SP11-005..007, 15!A157 DIST-005)",
+ "source": [
+  "references/p1_eva_sp11.json",
+  "references/p1_eva_sp11_vehicle.json",
+  "references/p1_eva_exits.json"
+ ],
+ "segments": [
+  {
+   "id": "SP11.keeper_drop.KP0_baseline",
+   "route": "SP-11",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "KP0_baseline",
+   "case": "leaf drop vs the keeper lugs under the frame seat",
+   "least_m": 0.04,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "stroke minus lug hang (dog + ledge - recess): a dimension chain; tolerance stack, thermal growth and wear are OPEN"
+   ],
+   "seed_spread_m": null,
+   "nearest": "keeper lug underside",
+   "note": "published model: 0.08 m drop, 0.02 + 0.02 m lugs, carriage 0.10 m; stroke 0.08 m, lug hang 0.040 m. PROTOTYPE study value, no keeper change to the model before FEA and clearance pass (owner 15!A153)."
+  },
+  {
+   "id": "SP11.plug_envelope_bodies.KP0_baseline",
+   "route": "SP-11",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "KP0_baseline",
+   "case": "swept envelope to bodies, all six cases (least: casualty on the litter frame (strapped))",
+   "least_m": 0.272,
+   "status": "PASS",
+   "worst_case_over": [
+    "6 cases (routine pair incl. lever and strap poses, limp, limbs secured, litter frame, vacuum mattress, kit frame)",
+    "swept states: seated, dropped, 8 lateral samples to the park",
+    "both body sizes, both pairings",
+    "stowed strap tails"
+   ],
+   "seed_spread_m": null,
+   "nearest": "plug swept envelope vs hull planes (lower bound)",
+   "note": "hull-plane model; loose 0.25 m tails (sensitivity only) give 0.272 m. Envelope depth 2.180..2.420 m; SP-12 room margin +0.094 m, fixtures 0.239 m."
+  },
+  {
+   "id": "SP11.plug_envelope_meshes.KP0_baseline",
+   "route": "SP-11",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "KP0_baseline",
+   "case": "real suit / litter / strap meshes to the plug envelope, parked leaf and carriage",
+   "least_m": 0.33,
+   "status": "PASS",
+   "worst_case_over": [
+    "routine standing, lever and strap poses (first 6 frames each)",
+    "both rescue pairings on the litter with stowed straps",
+    "casualty centred in the aperture at depths 0-1.2 m",
+    "SP-12 suited operators"
+   ],
+   "seed_spread_m": null,
+   "nearest": "newcomer+instructor.casualty_litter_straps_to_plug_envelope",
+   "note": "Blender meshes; envelope least 0.330, parked leaf/carriage least 0.428. Vehicle intersections: none."
+  },
+  {
+   "id": "SP11.keeper_drop.KP1_stroke_0.10",
+   "route": "SP-11",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "KP1_stroke_0.10",
+   "case": "leaf drop vs the keeper lugs under the frame seat",
+   "least_m": 0.06,
+   "status": "PASS",
+   "worst_case_over": [
+    "stroke minus lug hang (dog + ledge - recess): a dimension chain; tolerance stack, thermal growth and wear are OPEN"
+   ],
+   "seed_spread_m": null,
+   "nearest": "keeper lug underside",
+   "note": "longer stroke 0.10 m; stroke 0.10 m, lug hang 0.040 m. PROTOTYPE study value, no keeper change to the model before FEA and clearance pass (owner 15!A153)."
+  },
+  {
+   "id": "SP11.plug_envelope_bodies.KP1_stroke_0.10",
+   "route": "SP-11",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "KP1_stroke_0.10",
+   "case": "swept envelope to bodies, all six cases (least: casualty on the litter frame (strapped))",
+   "least_m": 0.272,
+   "status": "PASS",
+   "worst_case_over": [
+    "6 cases (routine pair incl. lever and strap poses, limp, limbs secured, litter frame, vacuum mattress, kit frame)",
+    "swept states: seated, dropped, 8 lateral samples to the park",
+    "both body sizes, both pairings",
+    "stowed strap tails"
+   ],
+   "seed_spread_m": null,
+   "nearest": "plug swept envelope vs hull planes (lower bound)",
+   "note": "hull-plane model; loose 0.25 m tails (sensitivity only) give 0.272 m. Envelope depth 2.160..2.420 m; SP-12 room margin +0.083 m, fixtures 0.239 m."
+  },
+  {
+   "id": "SP11.plug_envelope_meshes.KP1_stroke_0.10",
+   "route": "SP-11",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "KP1_stroke_0.10",
+   "case": "real suit / litter / strap meshes to the plug envelope, parked leaf and carriage",
+   "least_m": 0.35,
+   "status": "PASS",
+   "worst_case_over": [
+    "routine standing, lever and strap poses (first 6 frames each)",
+    "both rescue pairings on the litter with stowed straps",
+    "casualty centred in the aperture at depths 0-1.2 m",
+    "SP-12 suited operators"
+   ],
+   "seed_spread_m": null,
+   "nearest": "newcomer+instructor.casualty_litter_straps_to_plug_envelope",
+   "note": "Blender meshes; envelope least 0.350, parked leaf/carriage least 0.445. Vehicle intersections: none."
+  },
+  {
+   "id": "SP11.keeper_drop.KP2_stroke_0.12",
+   "route": "SP-11",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "KP2_stroke_0.12",
+   "case": "leaf drop vs the keeper lugs under the frame seat",
+   "least_m": 0.08,
+   "status": "PASS",
+   "worst_case_over": [
+    "stroke minus lug hang (dog + ledge - recess): a dimension chain; tolerance stack, thermal growth and wear are OPEN"
+   ],
+   "seed_spread_m": null,
+   "nearest": "keeper lug underside",
+   "note": "longer stroke 0.12 m; stroke 0.12 m, lug hang 0.040 m. PROTOTYPE study value, no keeper change to the model before FEA and clearance pass (owner 15!A153)."
+  },
+  {
+   "id": "SP11.plug_envelope_bodies.KP2_stroke_0.12",
+   "route": "SP-11",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "KP2_stroke_0.12",
+   "case": "swept envelope to bodies, all six cases (least: casualty on the litter frame (strapped))",
+   "least_m": 0.272,
+   "status": "PASS",
+   "worst_case_over": [
+    "6 cases (routine pair incl. lever and strap poses, limp, limbs secured, litter frame, vacuum mattress, kit frame)",
+    "swept states: seated, dropped, 8 lateral samples to the park",
+    "both body sizes, both pairings",
+    "stowed strap tails"
+   ],
+   "seed_spread_m": null,
+   "nearest": "plug swept envelope vs hull planes (lower bound)",
+   "note": "hull-plane model; loose 0.25 m tails (sensitivity only) give 0.272 m. Envelope depth 2.140..2.420 m; SP-12 room margin +0.072 m, fixtures 0.239 m."
+  },
+  {
+   "id": "SP11.plug_envelope_meshes.KP2_stroke_0.12",
+   "route": "SP-11",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "KP2_stroke_0.12",
+   "case": "real suit / litter / strap meshes to the plug envelope, parked leaf and carriage",
+   "least_m": 0.37,
+   "status": "PASS",
+   "worst_case_over": [
+    "routine standing, lever and strap poses (first 6 frames each)",
+    "both rescue pairings on the litter with stowed straps",
+    "casualty centred in the aperture at depths 0-1.2 m",
+    "SP-12 suited operators"
+   ],
+   "seed_spread_m": null,
+   "nearest": "newcomer+instructor.casualty_litter_straps_to_plug_envelope",
+   "note": "Blender meshes; envelope least 0.370, parked leaf/carriage least 0.460. Vehicle intersections: none."
+  },
+  {
+   "id": "SP11.keeper_drop.KP3_thin_lugs",
+   "route": "SP-11",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "KP3_thin_lugs",
+   "case": "leaf drop vs the keeper lugs under the frame seat",
+   "least_m": 0.056,
+   "status": "PASS",
+   "worst_case_over": [
+    "stroke minus lug hang (dog + ledge - recess): a dimension chain; tolerance stack, thermal growth and wear are OPEN"
+   ],
+   "seed_spread_m": null,
+   "nearest": "keeper lug underside",
+   "note": "thinner dogs and ledges 0.012 + 0.012 m (bearing face area unchanged; dog bending and shear are FEA items, OPEN); stroke 0.08 m, lug hang 0.024 m. PROTOTYPE study value, no keeper change to the model before FEA and clearance pass (owner 15!A153)."
+  },
+  {
+   "id": "SP11.plug_envelope_bodies.KP3_thin_lugs",
+   "route": "SP-11",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "KP3_thin_lugs",
+   "case": "swept envelope to bodies, all six cases (least: casualty on the litter frame (strapped))",
+   "least_m": 0.272,
+   "status": "PASS",
+   "worst_case_over": [
+    "6 cases (routine pair incl. lever and strap poses, limp, limbs secured, litter frame, vacuum mattress, kit frame)",
+    "swept states: seated, dropped, 8 lateral samples to the park",
+    "both body sizes, both pairings",
+    "stowed strap tails"
+   ],
+   "seed_spread_m": null,
+   "nearest": "plug swept envelope vs hull planes (lower bound)",
+   "note": "hull-plane model; loose 0.25 m tails (sensitivity only) give 0.272 m. Envelope depth 2.180..2.420 m; SP-12 room margin +0.094 m, fixtures 0.239 m."
+  },
+  {
+   "id": "SP11.plug_envelope_meshes.KP3_thin_lugs",
+   "route": "SP-11",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "KP3_thin_lugs",
+   "case": "real suit / litter / strap meshes to the plug envelope, parked leaf and carriage",
+   "least_m": 0.33,
+   "status": "PASS",
+   "worst_case_over": [
+    "routine standing, lever and strap poses (first 6 frames each)",
+    "both rescue pairings on the litter with stowed straps",
+    "casualty centred in the aperture at depths 0-1.2 m",
+    "SP-12 suited operators"
+   ],
+   "seed_spread_m": null,
+   "nearest": "newcomer+instructor.casualty_litter_straps_to_plug_envelope",
+   "note": "Blender meshes; envelope least 0.330, parked leaf/carriage least 0.428. Vehicle intersections: none."
+  },
+  {
+   "id": "SP11.keeper_drop.KP4_recessed_ledge",
+   "route": "SP-11",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "KP4_recessed_ledge",
+   "case": "leaf drop vs the keeper lugs under the frame seat",
+   "least_m": 0.06,
+   "status": "PASS",
+   "worst_case_over": [
+    "stroke minus lug hang (dog + ledge - recess): a dimension chain; tolerance stack, thermal growth and wear are OPEN"
+   ],
+   "seed_spread_m": null,
+   "nearest": "keeper lug underside",
+   "note": "ledge recessed into a pocket of the frame ring: lug hangs only the dog height 0.02 m; stroke 0.08 m, lug hang 0.020 m. PROTOTYPE study value, no keeper change to the model before FEA and clearance pass (owner 15!A153)."
+  },
+  {
+   "id": "SP11.plug_envelope_bodies.KP4_recessed_ledge",
+   "route": "SP-11",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "KP4_recessed_ledge",
+   "case": "swept envelope to bodies, all six cases (least: casualty on the litter frame (strapped))",
+   "least_m": 0.272,
+   "status": "PASS",
+   "worst_case_over": [
+    "6 cases (routine pair incl. lever and strap poses, limp, limbs secured, litter frame, vacuum mattress, kit frame)",
+    "swept states: seated, dropped, 8 lateral samples to the park",
+    "both body sizes, both pairings",
+    "stowed strap tails"
+   ],
+   "seed_spread_m": null,
+   "nearest": "plug swept envelope vs hull planes (lower bound)",
+   "note": "hull-plane model; loose 0.25 m tails (sensitivity only) give 0.272 m. Envelope depth 2.180..2.420 m; SP-12 room margin +0.094 m, fixtures 0.239 m."
+  },
+  {
+   "id": "SP11.plug_envelope_meshes.KP4_recessed_ledge",
+   "route": "SP-11",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "KP4_recessed_ledge",
+   "case": "real suit / litter / strap meshes to the plug envelope, parked leaf and carriage",
+   "least_m": 0.33,
+   "status": "PASS",
+   "worst_case_over": [
+    "routine standing, lever and strap poses (first 6 frames each)",
+    "both rescue pairings on the litter with stowed straps",
+    "casualty centred in the aperture at depths 0-1.2 m",
+    "SP-12 suited operators"
+   ],
+   "seed_spread_m": null,
+   "nearest": "newcomer+instructor.casualty_litter_straps_to_plug_envelope",
+   "note": "Blender meshes; envelope least 0.330, parked leaf/carriage least 0.428. Vehicle intersections: none."
+  },
+  {
+   "id": "SP11.keeper_drop.KP5_guide_moved",
+   "route": "SP-11",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "KP5_guide_moved",
+   "case": "leaf drop vs the keeper lugs under the frame seat",
+   "least_m": 0.04,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "stroke minus lug hang (dog + ledge - recess): a dimension chain; tolerance stack, thermal growth and wear are OPEN"
+   ],
+   "seed_spread_m": null,
+   "nearest": "keeper lug underside",
+   "note": "guide moved from under the carriage to pins at the leaf rim: carriage depth 0.06 m; stroke 0.08 m, lug hang 0.040 m. PROTOTYPE study value, no keeper change to the model before FEA and clearance pass (owner 15!A153)."
+  },
+  {
+   "id": "SP11.plug_envelope_bodies.KP5_guide_moved",
+   "route": "SP-11",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "KP5_guide_moved",
+   "case": "swept envelope to bodies, all six cases (least: casualty on the litter frame (strapped))",
+   "least_m": 0.272,
+   "status": "PASS",
+   "worst_case_over": [
+    "6 cases (routine pair incl. lever and strap poses, limp, limbs secured, litter frame, vacuum mattress, kit frame)",
+    "swept states: seated, dropped, 8 lateral samples to the park",
+    "both body sizes, both pairings",
+    "stowed strap tails"
+   ],
+   "seed_spread_m": null,
+   "nearest": "plug swept envelope vs hull planes (lower bound)",
+   "note": "hull-plane model; loose 0.25 m tails (sensitivity only) give 0.272 m. Envelope depth 2.220..2.420 m; SP-12 room margin +0.116 m, fixtures 0.239 m."
+  },
+  {
+   "id": "SP11.plug_envelope_meshes.KP5_guide_moved",
+   "route": "SP-11",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "KP5_guide_moved",
+   "case": "real suit / litter / strap meshes to the plug envelope, parked leaf and carriage",
+   "least_m": 0.33,
+   "status": "PASS",
+   "worst_case_over": [
+    "routine standing, lever and strap poses (first 6 frames each)",
+    "both rescue pairings on the litter with stowed straps",
+    "casualty centred in the aperture at depths 0-1.2 m",
+    "SP-12 suited operators"
+   ],
+   "seed_spread_m": null,
+   "nearest": "newcomer+instructor.casualty_litter_straps_to_plug_envelope",
+   "note": "Blender meshes; envelope least 0.330, parked leaf/carriage least 0.428. Vehicle intersections: none."
+  },
+  {
+   "id": "SP11.keeper_drop.KP6_stroke_0.10_guide_moved",
+   "route": "SP-11",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "KP6_stroke_0.10_guide_moved",
+   "case": "leaf drop vs the keeper lugs under the frame seat",
+   "least_m": 0.06,
+   "status": "PASS",
+   "worst_case_over": [
+    "stroke minus lug hang (dog + ledge - recess): a dimension chain; tolerance stack, thermal growth and wear are OPEN"
+   ],
+   "seed_spread_m": null,
+   "nearest": "keeper lug underside",
+   "note": "0.10 m stroke with the moved guide; stroke 0.10 m, lug hang 0.040 m. PROTOTYPE study value, no keeper change to the model before FEA and clearance pass (owner 15!A153)."
+  },
+  {
+   "id": "SP11.plug_envelope_bodies.KP6_stroke_0.10_guide_moved",
+   "route": "SP-11",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "KP6_stroke_0.10_guide_moved",
+   "case": "swept envelope to bodies, all six cases (least: casualty on the litter frame (strapped))",
+   "least_m": 0.272,
+   "status": "PASS",
+   "worst_case_over": [
+    "6 cases (routine pair incl. lever and strap poses, limp, limbs secured, litter frame, vacuum mattress, kit frame)",
+    "swept states: seated, dropped, 8 lateral samples to the park",
+    "both body sizes, both pairings",
+    "stowed strap tails"
+   ],
+   "seed_spread_m": null,
+   "nearest": "plug swept envelope vs hull planes (lower bound)",
+   "note": "hull-plane model; loose 0.25 m tails (sensitivity only) give 0.272 m. Envelope depth 2.200..2.420 m; SP-12 room margin +0.105 m, fixtures 0.239 m."
+  },
+  {
+   "id": "SP11.plug_envelope_meshes.KP6_stroke_0.10_guide_moved",
+   "route": "SP-11",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "KP6_stroke_0.10_guide_moved",
+   "case": "real suit / litter / strap meshes to the plug envelope, parked leaf and carriage",
+   "least_m": 0.35,
+   "status": "PASS",
+   "worst_case_over": [
+    "routine standing, lever and strap poses (first 6 frames each)",
+    "both rescue pairings on the litter with stowed straps",
+    "casualty centred in the aperture at depths 0-1.2 m",
+    "SP-12 suited operators"
+   ],
+   "seed_spread_m": null,
+   "nearest": "newcomer+instructor.casualty_litter_straps_to_plug_envelope",
+   "note": "Blender meshes; envelope least 0.350, parked leaf/carriage least 0.445. Vehicle intersections: none."
+  },
+  {
+   "id": "SP11.keeper_drop.KP7_stroke_0.10_thin_recessed",
+   "route": "SP-11",
+   "states": [
+    "0g",
+    "spin",
+    "stopped",
+    "locked_1.5g"
+   ],
+   "variant": "KP7_stroke_0.10_thin_recessed",
+   "case": "leaf drop vs the keeper lugs under the frame seat",
+   "least_m": 0.088,
+   "status": "PASS",
+   "worst_case_over": [
+    "stroke minus lug hang (dog + ledge - recess): a dimension chain; tolerance stack, thermal growth and wear are OPEN"
+   ],
+   "seed_spread_m": null,
+   "nearest": "keeper lug underside",
+   "note": "0.10 m stroke, thin lugs with the ledge recessed, moved guide; stroke 0.10 m, lug hang 0.012 m. PROTOTYPE study value, no keeper change to the model before FEA and clearance pass (owner 15!A153)."
+  },
+  {
+   "id": "SP11.plug_envelope_bodies.KP7_stroke_0.10_thin_recessed",
+   "route": "SP-11",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "KP7_stroke_0.10_thin_recessed",
+   "case": "swept envelope to bodies, all six cases (least: casualty on the litter frame (strapped))",
+   "least_m": 0.272,
+   "status": "PASS",
+   "worst_case_over": [
+    "6 cases (routine pair incl. lever and strap poses, limp, limbs secured, litter frame, vacuum mattress, kit frame)",
+    "swept states: seated, dropped, 8 lateral samples to the park",
+    "both body sizes, both pairings",
+    "stowed strap tails"
+   ],
+   "seed_spread_m": null,
+   "nearest": "plug swept envelope vs hull planes (lower bound)",
+   "note": "hull-plane model; loose 0.25 m tails (sensitivity only) give 0.272 m. Envelope depth 2.200..2.420 m; SP-12 room margin +0.105 m, fixtures 0.239 m."
+  },
+  {
+   "id": "SP11.plug_envelope_meshes.KP7_stroke_0.10_thin_recessed",
+   "route": "SP-11",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "KP7_stroke_0.10_thin_recessed",
+   "case": "real suit / litter / strap meshes to the plug envelope, parked leaf and carriage",
+   "least_m": 0.35,
+   "status": "PASS",
+   "worst_case_over": [
+    "routine standing, lever and strap poses (first 6 frames each)",
+    "both rescue pairings on the litter with stowed straps",
+    "casualty centred in the aperture at depths 0-1.2 m",
+    "SP-12 suited operators"
+   ],
+   "seed_spread_m": null,
+   "nearest": "newcomer+instructor.casualty_litter_straps_to_plug_envelope",
+   "note": "Blender meshes; envelope least 0.350, parked leaf/carriage least 0.445. Vehicle intersections: none."
+  },
+  {
+   "id": "SP11.aperture_passage.routine_pair",
+   "route": "SP-11",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "all keeper variants (aperture geometry unchanged)",
+   "case": "routine pair",
+   "least_m": 0.126,
+   "status": "PASS",
+   "worst_case_over": [
+    "door passage poses",
+    "both body sizes",
+    "casualty tilts",
+    "stowed strap tails (0.05 m beyond the rail)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "door_passage",
+   "note": "Unchanged by the redline variants; never widened. "
+  },
+  {
+   "id": "SP11.aperture_passage.limp_casualty",
+   "route": "SP-11",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "all keeper variants (aperture geometry unchanged)",
+   "case": "unrestrained limp casualty",
+   "least_m": -0.099,
+   "status": "FAIL",
+   "worst_case_over": [
+    "door passage poses",
+    "both body sizes",
+    "casualty tilts",
+    "stowed strap tails (0.05 m beyond the rail)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "door_passage",
+   "note": "Unchanged by the redline variants; never widened. "
+  },
+  {
+   "id": "SP11.aperture_passage.limbs_secured",
+   "route": "SP-11",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "all keeper variants (aperture geometry unchanged)",
+   "case": "limbs secured, no support",
+   "least_m": 0.343,
+   "status": "PASS",
+   "worst_case_over": [
+    "door passage poses",
+    "both body sizes",
+    "casualty tilts",
+    "stowed strap tails (0.05 m beyond the rail)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "door_passage",
+   "note": "Unchanged by the redline variants; never widened. "
+  },
+  {
+   "id": "SP11.aperture_passage.litter_frame",
+   "route": "SP-11",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "all keeper variants (aperture geometry unchanged)",
+   "case": "casualty on the litter frame (strapped)",
+   "least_m": 0.15,
+   "status": "PASS",
+   "worst_case_over": [
+    "door passage poses",
+    "both body sizes",
+    "casualty tilts",
+    "stowed strap tails (0.05 m beyond the rail)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "instructor.stowed",
+   "note": "Unchanged by the redline variants; never widened. Loose 0.25 m tails would give +0.064 m (sensitivity; tails stow positively)."
+  },
+  {
+   "id": "SP11.aperture_passage.vacuum_mattress",
+   "route": "SP-11",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "all keeper variants (aperture geometry unchanged)",
+   "case": "vacuum mattress (strapped)",
+   "least_m": 0.092,
+   "status": "PASS",
+   "worst_case_over": [
+    "door passage poses",
+    "both body sizes",
+    "casualty tilts",
+    "stowed strap tails (0.05 m beyond the rail)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "instructor.stowed",
+   "note": "Unchanged by the redline variants; never widened. Loose 0.25 m tails would give +0.053 m (sensitivity; tails stow positively)."
+  },
+  {
+   "id": "SP11.aperture_passage.frame_with_kit",
+   "route": "SP-11",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "all keeper variants (aperture geometry unchanged)",
+   "case": "litter frame with med/O2 kit (strapped)",
+   "least_m": 0.036,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "door passage poses",
+    "both body sizes",
+    "casualty tilts",
+    "stowed strap tails (0.05 m beyond the rail)"
+   ],
+   "seed_spread_m": null,
+   "nearest": "instructor.stowed",
+   "note": "Unchanged by the redline variants; never widened. Loose 0.25 m tails would give +0.007 m (sensitivity; tails stow positively)."
+  },
+  {
+   "id": "SP11.aperture_passage.limp_casualty_1.35m",
+   "route": "SP-11",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "1.35 m comparator",
+   "case": "unrestrained limp casualty",
+   "least_m": 0.026,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "door passage and aperture bore at 1.35 m"
+   ],
+   "seed_spread_m": null,
+   "nearest": "aperture bore (EVA3_REPORT section 11 table: +0.026 / +0.065; the JSON door margin is +0.051)",
+   "note": "Comparator only, recorded value from EVA3_REPORT section 11; the 1.20 m limp case stays FAIL."
+  },
+  {
+   "id": "SP11.controls_chamber.reach",
+   "route": "SP-11",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "published (unchanged by SIM-027)",
+   "case": "chamber-side clusters, suited and unsuited, rescuers",
+   "least_m": 0.089,
+   "status": "PASS",
+   "worst_case_over": [
+    "3 controls",
+    "suited, unsuited and rescuer users",
+    "nearest cluster"
+   ],
+   "seed_spread_m": null,
+   "nearest": "reach margin = reach minus nearest-shoulder distance",
+   "note": "body gap 0.103 m; head to gauge limit 1.0 m"
+  },
+  {
+   "id": "SP12.control_reach.CT0_baseline",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "CT0_baseline",
+   "case": "suited and unsuited, both bodies, release / valve / gauge",
+   "least_m": 0.007,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "2 bodies x suited/unsuited",
+    "3 controls",
+    "station search"
+   ],
+   "seed_spread_m": null,
+   "nearest": "suited_newcomer.gauge",
+   "note": "published layout (release / valve / gauge stacked), 15 deg station search, stand A at az 20. Station a 2.8 m, angle 0 deg; layout vertical. Stand A at X 103.40 az 20 (its box edge reaches az -1.8 against the room wall at az 5: the prototype stands already overhang it), stand A to stand B 0.000 m (touching), stand A to buddy zone 0.000 m. Buddy zone X 103.85 az 55: operator station overlaps ['SP12_BUDDY_ZONE']. Suited least +0.007, unsuited least +0.092; head to gauge max 0.40 m."
+  },
+  {
+   "id": "SP12.operator_clearance.CT0_baseline",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "CT0_baseline",
+   "case": "suited operator on the SP-12 floor at the cluster",
+   "least_m": 0.0,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "2 suited bodies (hull model: also unsuited)",
+    "room, chamber outer wall, plug envelope, fixtures (solid), panel plate",
+    "hull vertices and Blender meshes"
+   ],
+   "seed_spread_m": null,
+   "nearest": "mesh:to_fixtures_m",
+   "note": "Least of the hull model and the real meshes over room, wall, plug envelope, fixtures and panel plate. published layout (release / valve / gauge stacked), 15 deg station search, stand A at az 20. Station a 2.8 m, angle 0 deg; layout vertical. Stand A at X 103.40 az 20 (its box edge reaches az -1.8 against the room wall at az 5: the prototype stands already overhang it), stand A to stand B 0.000 m (touching), stand A to buddy zone 0.000 m. Buddy zone X 103.85 az 55: operator station overlaps ['SP12_BUDDY_ZONE']."
+  },
+  {
+   "id": "SP12.control_reach.CT1_vertical_fine_angle",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "CT1_vertical_fine_angle",
+   "case": "suited and unsuited, both bodies, release / valve / gauge",
+   "least_m": 0.007,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "2 bodies x suited/unsuited",
+    "3 controls",
+    "station search"
+   ],
+   "seed_spread_m": null,
+   "nearest": "suited_newcomer.gauge",
+   "note": "stacked cluster, station angle searched in 5 deg steps (cluster moved around the chamber wall away from stand A). Station a 2.8 m, angle 0 deg; layout vertical. Stand A at X 103.40 az 20 (its box edge reaches az -1.8 against the room wall at az 5: the prototype stands already overhang it), stand A to stand B 0.000 m (touching), stand A to buddy zone 0.000 m. Buddy zone X 103.85 az 55: operator station overlaps ['SP12_BUDDY_ZONE']. Suited least +0.007, unsuited least +0.092; head to gauge max 0.40 m."
+  },
+  {
+   "id": "SP12.operator_clearance.CT1_vertical_fine_angle",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "CT1_vertical_fine_angle",
+   "case": "suited operator on the SP-12 floor at the cluster",
+   "least_m": 0.0,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "2 suited bodies (hull model: also unsuited)",
+    "room, chamber outer wall, plug envelope, fixtures (solid), panel plate",
+    "hull vertices and Blender meshes"
+   ],
+   "seed_spread_m": null,
+   "nearest": "mesh:to_fixtures_m",
+   "note": "Least of the hull model and the real meshes over room, wall, plug envelope, fixtures and panel plate. stacked cluster, station angle searched in 5 deg steps (cluster moved around the chamber wall away from stand A). Station a 2.8 m, angle 0 deg; layout vertical. Stand A at X 103.40 az 20 (its box edge reaches az -1.8 against the room wall at az 5: the prototype stands already overhang it), stand A to stand B 0.000 m (touching), stand A to buddy zone 0.000 m. Buddy zone X 103.85 az 55: operator station overlaps ['SP12_BUDDY_ZONE']."
+  },
+  {
+   "id": "SP12.control_reach.CT2_row_fine_angle",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "CT2_row_fine_angle",
+   "case": "suited and unsuited, both bodies, release / valve / gauge",
+   "least_m": 0.141,
+   "status": "PASS",
+   "worst_case_over": [
+    "2 bodies x suited/unsuited",
+    "3 controls",
+    "station search"
+   ],
+   "seed_spread_m": null,
+   "nearest": "suited_newcomer.valve",
+   "note": "horizontal row at one height, 5 deg station search, stand A not moved. Station a 2.7 m, angle 5 deg; layout row. Stand A at X 103.40 az 20 (its box edge reaches az -1.8 against the room wall at az 5: the prototype stands already overhang it), stand A to stand B 0.000 m (touching), stand A to buddy zone 0.000 m. Buddy zone X 103.85 az 55: operator station overlaps ['SP12_BUDDY_ZONE']. Suited least +0.141, unsuited least +0.284; head to gauge max 0.47 m."
+  },
+  {
+   "id": "SP12.operator_clearance.CT2_row_fine_angle",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "CT2_row_fine_angle",
+   "case": "suited operator on the SP-12 floor at the cluster",
+   "least_m": 0.042,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "2 suited bodies (hull model: also unsuited)",
+    "room, chamber outer wall, plug envelope, fixtures (solid), panel plate",
+    "hull vertices and Blender meshes"
+   ],
+   "seed_spread_m": null,
+   "nearest": "mesh:to_panel_plate_m",
+   "note": "Least of the hull model and the real meshes over room, wall, plug envelope, fixtures and panel plate. horizontal row at one height, 5 deg station search, stand A not moved. Station a 2.7 m, angle 5 deg; layout row. Stand A at X 103.40 az 20 (its box edge reaches az -1.8 against the room wall at az 5: the prototype stands already overhang it), stand A to stand B 0.000 m (touching), stand A to buddy zone 0.000 m. Buddy zone X 103.85 az 55: operator station overlaps ['SP12_BUDDY_ZONE']."
+  },
+  {
+   "id": "SP12.control_reach.CT3_row_fine_angle_standoff_0.13",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "CT3_row_fine_angle_standoff_0.13",
+   "case": "suited and unsuited, both bodies, release / valve / gauge",
+   "least_m": 0.113,
+   "status": "PASS",
+   "worst_case_over": [
+    "2 bodies x suited/unsuited",
+    "3 controls",
+    "station search"
+   ],
+   "seed_spread_m": null,
+   "nearest": "suited_newcomer.valve",
+   "note": "row, operator 0.13 m off the wall (more room for the body, less reach). Station a 2.7 m, angle 5 deg; layout row. Stand A at X 103.40 az 20 (its box edge reaches az -1.8 against the room wall at az 5: the prototype stands already overhang it), stand A to stand B 0.000 m (touching), stand A to buddy zone 0.000 m. Buddy zone X 103.85 az 55: operator station overlaps ['SP12_BUDDY_ZONE']. Suited least +0.113, unsuited least +0.261; head to gauge max 0.50 m."
+  },
+  {
+   "id": "SP12.operator_clearance.CT3_row_fine_angle_standoff_0.13",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "CT3_row_fine_angle_standoff_0.13",
+   "case": "suited operator on the SP-12 floor at the cluster",
+   "least_m": 0.07,
+   "status": "PASS",
+   "worst_case_over": [
+    "2 suited bodies (hull model: also unsuited)",
+    "room, chamber outer wall, plug envelope, fixtures (solid), panel plate",
+    "hull vertices and Blender meshes"
+   ],
+   "seed_spread_m": null,
+   "nearest": "mesh:to_panel_plate_m",
+   "note": "Least of the hull model and the real meshes over room, wall, plug envelope, fixtures and panel plate. row, operator 0.13 m off the wall (more room for the body, less reach). Station a 2.7 m, angle 5 deg; layout row. Stand A at X 103.40 az 20 (its box edge reaches az -1.8 against the room wall at az 5: the prototype stands already overhang it), stand A to stand B 0.000 m (touching), stand A to buddy zone 0.000 m. Buddy zone X 103.85 az 55: operator station overlaps ['SP12_BUDDY_ZONE']."
+  },
+  {
+   "id": "SP12.control_reach.CT4_row_fine_angle_zone_moved",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "CT4_row_fine_angle_zone_moved",
+   "case": "suited and unsuited, both bodies, release / valve / gauge",
+   "least_m": 0.141,
+   "status": "PASS",
+   "worst_case_over": [
+    "2 bodies x suited/unsuited",
+    "3 controls",
+    "station search"
+   ],
+   "seed_spread_m": null,
+   "nearest": "suited_newcomer.valve",
+   "note": "row, buddy zone moved to az 66 / X 104.05 (its limit in the room). Station a 2.7 m, angle 5 deg; layout row. Stand A at X 103.40 az 20 (its box edge reaches az -1.8 against the room wall at az 5: the prototype stands already overhang it), stand A to stand B 0.000 m (touching), stand A to buddy zone 0.022 m. Buddy zone X 104.05 az 66: operator station overlaps ['SP12_BUDDY_ZONE']. Suited least +0.141, unsuited least +0.284; head to gauge max 0.47 m."
+  },
+  {
+   "id": "SP12.operator_clearance.CT4_row_fine_angle_zone_moved",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "CT4_row_fine_angle_zone_moved",
+   "case": "suited operator on the SP-12 floor at the cluster",
+   "least_m": 0.042,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "2 suited bodies (hull model: also unsuited)",
+    "room, chamber outer wall, plug envelope, fixtures (solid), panel plate",
+    "hull vertices and Blender meshes"
+   ],
+   "seed_spread_m": null,
+   "nearest": "mesh:to_panel_plate_m",
+   "note": "Least of the hull model and the real meshes over room, wall, plug envelope, fixtures and panel plate. row, buddy zone moved to az 66 / X 104.05 (its limit in the room). Station a 2.7 m, angle 5 deg; layout row. Stand A at X 103.40 az 20 (its box edge reaches az -1.8 against the room wall at az 5: the prototype stands already overhang it), stand A to stand B 0.000 m (touching), stand A to buddy zone 0.022 m. Buddy zone X 104.05 az 66: operator station overlaps ['SP12_BUDDY_ZONE']."
+  },
+  {
+   "id": "SP12.control_reach.CT5_row_standA_az12",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "CT5_row_standA_az12",
+   "case": "suited and unsuited, both bodies, release / valve / gauge",
+   "least_m": 0.141,
+   "status": "PASS",
+   "worst_case_over": [
+    "2 bodies x suited/unsuited",
+    "3 controls",
+    "station search"
+   ],
+   "seed_spread_m": null,
+   "nearest": "suited_newcomer.valve",
+   "note": "row, donning stand A moved to az 12 (its 1.00 m width then leaves the room's az 5 wall by more: reported). Station a 2.7 m, angle 0 deg; layout row. Stand A at X 103.40 az 12 (its box edge reaches az -9.8 against the room wall at az 5: the prototype stands already overhang it), stand A to stand B 0.000 m (touching), stand A to buddy zone 0.000 m. Buddy zone X 103.85 az 55: operator station overlaps ['SP12_BUDDY_ZONE']. Suited least +0.141, unsuited least +0.284; head to gauge max 0.47 m."
+  },
+  {
+   "id": "SP12.operator_clearance.CT5_row_standA_az12",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "CT5_row_standA_az12",
+   "case": "suited operator on the SP-12 floor at the cluster",
+   "least_m": 0.042,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "2 suited bodies (hull model: also unsuited)",
+    "room, chamber outer wall, plug envelope, fixtures (solid), panel plate",
+    "hull vertices and Blender meshes"
+   ],
+   "seed_spread_m": null,
+   "nearest": "mesh:to_panel_plate_m",
+   "note": "Least of the hull model and the real meshes over room, wall, plug envelope, fixtures and panel plate. row, donning stand A moved to az 12 (its 1.00 m width then leaves the room's az 5 wall by more: reported). Station a 2.7 m, angle 0 deg; layout row. Stand A at X 103.40 az 12 (its box edge reaches az -9.8 against the room wall at az 5: the prototype stands already overhang it), stand A to stand B 0.000 m (touching), stand A to buddy zone 0.000 m. Buddy zone X 103.85 az 55: operator station overlaps ['SP12_BUDDY_ZONE']."
+  },
+  {
+   "id": "SP12.litter_turn.LT0_N1_comparator.S.turn",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "LT0_N1_comparator",
+   "case": "S suited casualty on the full-length frame; turn: SP-11 chamber, aperture, corner, floor run to the lowering station",
+   "least_m": -0.034,
+   "status": "FAIL",
+   "worst_case_over": [
+    "seeds [17, 23, 41] (sampled-pose search, cap 0.10 m = at least)",
+    "poses along the route",
+    "carrier and rescuer capsules",
+    "trunk fixtures from the saved vehicle"
+   ],
+   "seed_spread_m": [
+    -0.034,
+    0.015
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "N1 as run in RESCUE-004 (comparator); fit-out built, staff two, route corner. Vehicle screen of the slot: CLEAR ; ideal closure load 220.0 kN (DIAGNOSTIC); spine-core cut 2.5 m (OPEN). Sampled poses, not a motion proof."
+  },
+  {
+   "id": "SP12.litter_turn.LT0_N1_comparator.S.lowering",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "LT0_N1_comparator",
+   "case": "S suited casualty on the full-length frame; lowering through the SP-12 slot",
+   "least_m": -0.088,
+   "status": "FAIL",
+   "worst_case_over": [
+    "seeds [17, 23, 41] (sampled-pose search, cap 0.10 m = at least)",
+    "poses along the route",
+    "carrier and rescuer capsules",
+    "trunk fixtures from the saved vehicle"
+   ],
+   "seed_spread_m": [
+    -0.088,
+    -0.054
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "N1 as run in RESCUE-004 (comparator); fit-out built, staff two, route corner. Vehicle screen of the slot: CLEAR ; ideal closure load 220.0 kN (DIAGNOSTIC); spine-core cut 2.5 m (OPEN). Sampled poses, not a motion proof."
+  },
+  {
+   "id": "SP12.litter_turn.LT0_N1_comparator.S.aft",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "LT0_N1_comparator",
+   "case": "S suited casualty on the full-length frame; aft runs in the extension and the built trunk",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "seeds [17, 23, 41] (sampled-pose search, cap 0.10 m = at least)",
+    "poses along the route",
+    "carrier and rescuer capsules",
+    "trunk fixtures from the saved vehicle"
+   ],
+   "seed_spread_m": [
+    0.1,
+    0.1
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "N1 as run in RESCUE-004 (comparator); fit-out built, staff two, route corner. Vehicle screen of the slot: CLEAR ; ideal closure load 220.0 kN (DIAGNOSTIC); spine-core cut 2.5 m (OPEN). Sampled poses, not a motion proof."
+  },
+  {
+   "id": "SP12.litter_turn.LT0_N1_comparator.S.rescuers",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "LT0_N1_comparator",
+   "case": "S suited casualty on the full-length frame; rescuers (companion route, whole route)",
+   "least_m": -0.094,
+   "status": "FAIL",
+   "worst_case_over": [
+    "seeds [17, 23, 41] (sampled-pose search, cap 0.10 m = at least)",
+    "poses along the route",
+    "carrier and rescuer capsules",
+    "trunk fixtures from the saved vehicle"
+   ],
+   "seed_spread_m": [
+    -0.094,
+    -0.073
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "N1 as run in RESCUE-004 (comparator); fit-out built, staff two, route corner. Vehicle screen of the slot: CLEAR ; ideal closure load 220.0 kN (DIAGNOSTIC); spine-core cut 2.5 m (OPEN). Sampled poses, not a motion proof."
+  },
+  {
+   "id": "SP12.litter_turn.LT0_N1_comparator.A.turn",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "LT0_N1_comparator",
+   "case": "A rigid litter 2.00 x 0.55 x 0.30 m; turn: SP-11 chamber, aperture, corner, floor run to the lowering station",
+   "least_m": 0.07,
+   "status": "PASS",
+   "worst_case_over": [
+    "seeds [17, 23, 41] (sampled-pose search, cap 0.10 m = at least)",
+    "poses along the route",
+    "carrier and rescuer capsules",
+    "trunk fixtures from the saved vehicle"
+   ],
+   "seed_spread_m": [
+    0.07,
+    0.098
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "N1 as run in RESCUE-004 (comparator); fit-out built, staff two, route corner. Vehicle screen of the slot: CLEAR ; ideal closure load 220.0 kN (DIAGNOSTIC); spine-core cut 2.5 m (OPEN). Sampled poses, not a motion proof."
+  },
+  {
+   "id": "SP12.litter_turn.LT0_N1_comparator.A.lowering",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "LT0_N1_comparator",
+   "case": "A rigid litter 2.00 x 0.55 x 0.30 m; lowering through the SP-12 slot",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "seeds [17, 23, 41] (sampled-pose search, cap 0.10 m = at least)",
+    "poses along the route",
+    "carrier and rescuer capsules",
+    "trunk fixtures from the saved vehicle"
+   ],
+   "seed_spread_m": [
+    0.1,
+    0.1
+   ],
+   "nearest": null,
+   "note": "N1 as run in RESCUE-004 (comparator); fit-out built, staff two, route corner. Vehicle screen of the slot: CLEAR ; ideal closure load 220.0 kN (DIAGNOSTIC); spine-core cut 2.5 m (OPEN). Sampled poses, not a motion proof."
+  },
+  {
+   "id": "SP12.litter_turn.LT0_N1_comparator.A.aft",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "LT0_N1_comparator",
+   "case": "A rigid litter 2.00 x 0.55 x 0.30 m; aft runs in the extension and the built trunk",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "seeds [17, 23, 41] (sampled-pose search, cap 0.10 m = at least)",
+    "poses along the route",
+    "carrier and rescuer capsules",
+    "trunk fixtures from the saved vehicle"
+   ],
+   "seed_spread_m": [
+    0.1,
+    0.1
+   ],
+   "nearest": null,
+   "note": "N1 as run in RESCUE-004 (comparator); fit-out built, staff two, route corner. Vehicle screen of the slot: CLEAR ; ideal closure load 220.0 kN (DIAGNOSTIC); spine-core cut 2.5 m (OPEN). Sampled poses, not a motion proof."
+  },
+  {
+   "id": "SP12.litter_turn.LT0_N1_comparator.A.rescuers",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "LT0_N1_comparator",
+   "case": "A rigid litter 2.00 x 0.55 x 0.30 m; rescuers (companion route, whole route)",
+   "least_m": -0.086,
+   "status": "FAIL",
+   "worst_case_over": [
+    "seeds [17, 23, 41] (sampled-pose search, cap 0.10 m = at least)",
+    "poses along the route",
+    "carrier and rescuer capsules",
+    "trunk fixtures from the saved vehicle"
+   ],
+   "seed_spread_m": [
+    -0.086,
+    -0.063
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "N1 as run in RESCUE-004 (comparator); fit-out built, staff two, route corner. Vehicle screen of the slot: CLEAR ; ideal closure load 220.0 kN (DIAGNOSTIC); spine-core cut 2.5 m (OPEN). Sampled poses, not a motion proof."
+  },
+  {
+   "id": "SP12.litter_turn.LT1_N1_stop_at_lowering.S.turn",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "LT1_N1_stop_at_lowering",
+   "case": "S suited casualty on the full-length frame; turn: SP-11 chamber, aperture, corner, floor run to the lowering station",
+   "least_m": -0.034,
+   "status": "FAIL",
+   "worst_case_over": [
+    "seeds [17, 23, 41] (sampled-pose search, cap 0.10 m = at least)",
+    "poses along the route",
+    "carrier and rescuer capsules",
+    "trunk fixtures from the saved vehicle"
+   ],
+   "seed_spread_m": [
+    -0.034,
+    0.015
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "N1, the floor run ends at the lowering station; fit-out built, staff two, route corner. Vehicle screen of the slot: CLEAR ; ideal closure load 220.0 kN (DIAGNOSTIC); spine-core cut 2.5 m (OPEN). Sampled poses, not a motion proof."
+  },
+  {
+   "id": "SP12.litter_turn.LT1_N1_stop_at_lowering.S.lowering",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "LT1_N1_stop_at_lowering",
+   "case": "S suited casualty on the full-length frame; lowering through the SP-12 slot",
+   "least_m": -0.065,
+   "status": "FAIL",
+   "worst_case_over": [
+    "seeds [17, 23, 41] (sampled-pose search, cap 0.10 m = at least)",
+    "poses along the route",
+    "carrier and rescuer capsules",
+    "trunk fixtures from the saved vehicle"
+   ],
+   "seed_spread_m": [
+    -0.065,
+    -0.05
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "N1, the floor run ends at the lowering station; fit-out built, staff two, route corner. Vehicle screen of the slot: CLEAR ; ideal closure load 220.0 kN (DIAGNOSTIC); spine-core cut 2.5 m (OPEN). Sampled poses, not a motion proof."
+  },
+  {
+   "id": "SP12.litter_turn.LT1_N1_stop_at_lowering.S.aft",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "LT1_N1_stop_at_lowering",
+   "case": "S suited casualty on the full-length frame; aft runs in the extension and the built trunk",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "seeds [17, 23, 41] (sampled-pose search, cap 0.10 m = at least)",
+    "poses along the route",
+    "carrier and rescuer capsules",
+    "trunk fixtures from the saved vehicle"
+   ],
+   "seed_spread_m": [
+    0.1,
+    0.1
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "N1, the floor run ends at the lowering station; fit-out built, staff two, route corner. Vehicle screen of the slot: CLEAR ; ideal closure load 220.0 kN (DIAGNOSTIC); spine-core cut 2.5 m (OPEN). Sampled poses, not a motion proof."
+  },
+  {
+   "id": "SP12.litter_turn.LT1_N1_stop_at_lowering.S.rescuers",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "LT1_N1_stop_at_lowering",
+   "case": "S suited casualty on the full-length frame; rescuers (companion route, whole route)",
+   "least_m": -0.1,
+   "status": "FAIL",
+   "worst_case_over": [
+    "seeds [17, 23, 41] (sampled-pose search, cap 0.10 m = at least)",
+    "poses along the route",
+    "carrier and rescuer capsules",
+    "trunk fixtures from the saved vehicle"
+   ],
+   "seed_spread_m": [
+    -0.1,
+    -0.074
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "N1, the floor run ends at the lowering station; fit-out built, staff two, route corner. Vehicle screen of the slot: CLEAR ; ideal closure load 220.0 kN (DIAGNOSTIC); spine-core cut 2.5 m (OPEN). Sampled poses, not a motion proof."
+  },
+  {
+   "id": "SP12.litter_turn.LT1_N1_stop_at_lowering.A.turn",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "LT1_N1_stop_at_lowering",
+   "case": "A rigid litter 2.00 x 0.55 x 0.30 m; turn: SP-11 chamber, aperture, corner, floor run to the lowering station",
+   "least_m": 0.07,
+   "status": "PASS",
+   "worst_case_over": [
+    "seeds [17, 23, 41] (sampled-pose search, cap 0.10 m = at least)",
+    "poses along the route",
+    "carrier and rescuer capsules",
+    "trunk fixtures from the saved vehicle"
+   ],
+   "seed_spread_m": [
+    0.07,
+    0.098
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "N1, the floor run ends at the lowering station; fit-out built, staff two, route corner. Vehicle screen of the slot: CLEAR ; ideal closure load 220.0 kN (DIAGNOSTIC); spine-core cut 2.5 m (OPEN). Sampled poses, not a motion proof."
+  },
+  {
+   "id": "SP12.litter_turn.LT1_N1_stop_at_lowering.A.lowering",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "LT1_N1_stop_at_lowering",
+   "case": "A rigid litter 2.00 x 0.55 x 0.30 m; lowering through the SP-12 slot",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "seeds [17, 23, 41] (sampled-pose search, cap 0.10 m = at least)",
+    "poses along the route",
+    "carrier and rescuer capsules",
+    "trunk fixtures from the saved vehicle"
+   ],
+   "seed_spread_m": [
+    0.1,
+    0.1
+   ],
+   "nearest": null,
+   "note": "N1, the floor run ends at the lowering station; fit-out built, staff two, route corner. Vehicle screen of the slot: CLEAR ; ideal closure load 220.0 kN (DIAGNOSTIC); spine-core cut 2.5 m (OPEN). Sampled poses, not a motion proof."
+  },
+  {
+   "id": "SP12.litter_turn.LT1_N1_stop_at_lowering.A.aft",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "LT1_N1_stop_at_lowering",
+   "case": "A rigid litter 2.00 x 0.55 x 0.30 m; aft runs in the extension and the built trunk",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "seeds [17, 23, 41] (sampled-pose search, cap 0.10 m = at least)",
+    "poses along the route",
+    "carrier and rescuer capsules",
+    "trunk fixtures from the saved vehicle"
+   ],
+   "seed_spread_m": [
+    0.1,
+    0.1
+   ],
+   "nearest": null,
+   "note": "N1, the floor run ends at the lowering station; fit-out built, staff two, route corner. Vehicle screen of the slot: CLEAR ; ideal closure load 220.0 kN (DIAGNOSTIC); spine-core cut 2.5 m (OPEN). Sampled poses, not a motion proof."
+  },
+  {
+   "id": "SP12.litter_turn.LT1_N1_stop_at_lowering.A.rescuers",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "LT1_N1_stop_at_lowering",
+   "case": "A rigid litter 2.00 x 0.55 x 0.30 m; rescuers (companion route, whole route)",
+   "least_m": -0.104,
+   "status": "FAIL",
+   "worst_case_over": [
+    "seeds [17, 23, 41] (sampled-pose search, cap 0.10 m = at least)",
+    "poses along the route",
+    "carrier and rescuer capsules",
+    "trunk fixtures from the saved vehicle"
+   ],
+   "seed_spread_m": [
+    -0.104,
+    -0.063
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "N1, the floor run ends at the lowering station; fit-out built, staff two, route corner. Vehicle screen of the slot: CLEAR ; ideal closure load 220.0 kN (DIAGNOSTIC); spine-core cut 2.5 m (OPEN). Sampled poses, not a motion proof."
+  },
+  {
+   "id": "SP12.litter_turn.LT2_N1_stands_rearranged.S.turn",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "LT2_N1_stands_rearranged",
+   "case": "S suited casualty on the full-length frame; turn: SP-11 chamber, aperture, corner, floor run to the lowering station",
+   "least_m": -0.013,
+   "status": "FAIL",
+   "worst_case_over": [
+    "seeds [17, 23, 41] (sampled-pose search, cap 0.10 m = at least)",
+    "poses along the route",
+    "carrier and rescuer capsules",
+    "trunk fixtures from the saved vehicle"
+   ],
+   "seed_spread_m": [
+    -0.013,
+    0.02
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "N1, donning stands A and B moved to az 8; fit-out rearranged, staff two, route corner. Vehicle screen of the slot: CLEAR ; ideal closure load 220.0 kN (DIAGNOSTIC); spine-core cut 2.5 m (OPEN). Sampled poses, not a motion proof."
+  },
+  {
+   "id": "SP12.litter_turn.LT2_N1_stands_rearranged.S.lowering",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "LT2_N1_stands_rearranged",
+   "case": "S suited casualty on the full-length frame; lowering through the SP-12 slot",
+   "least_m": 0.079,
+   "status": "PASS",
+   "worst_case_over": [
+    "seeds [17, 23, 41] (sampled-pose search, cap 0.10 m = at least)",
+    "poses along the route",
+    "carrier and rescuer capsules",
+    "trunk fixtures from the saved vehicle"
+   ],
+   "seed_spread_m": [
+    0.079,
+    0.085
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "N1, donning stands A and B moved to az 8; fit-out rearranged, staff two, route corner. Vehicle screen of the slot: CLEAR ; ideal closure load 220.0 kN (DIAGNOSTIC); spine-core cut 2.5 m (OPEN). Sampled poses, not a motion proof."
+  },
+  {
+   "id": "SP12.litter_turn.LT2_N1_stands_rearranged.S.aft",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "LT2_N1_stands_rearranged",
+   "case": "S suited casualty on the full-length frame; aft runs in the extension and the built trunk",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "seeds [17, 23, 41] (sampled-pose search, cap 0.10 m = at least)",
+    "poses along the route",
+    "carrier and rescuer capsules",
+    "trunk fixtures from the saved vehicle"
+   ],
+   "seed_spread_m": [
+    0.1,
+    0.1
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "N1, donning stands A and B moved to az 8; fit-out rearranged, staff two, route corner. Vehicle screen of the slot: CLEAR ; ideal closure load 220.0 kN (DIAGNOSTIC); spine-core cut 2.5 m (OPEN). Sampled poses, not a motion proof."
+  },
+  {
+   "id": "SP12.litter_turn.LT2_N1_stands_rearranged.S.rescuers",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "LT2_N1_stands_rearranged",
+   "case": "S suited casualty on the full-length frame; rescuers (companion route, whole route)",
+   "least_m": -0.27,
+   "status": "FAIL",
+   "worst_case_over": [
+    "seeds [17, 23, 41] (sampled-pose search, cap 0.10 m = at least)",
+    "poses along the route",
+    "carrier and rescuer capsules",
+    "trunk fixtures from the saved vehicle"
+   ],
+   "seed_spread_m": [
+    -0.27,
+    -0.015
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "N1, donning stands A and B moved to az 8; fit-out rearranged, staff two, route corner. Vehicle screen of the slot: CLEAR ; ideal closure load 220.0 kN (DIAGNOSTIC); spine-core cut 2.5 m (OPEN). Sampled poses, not a motion proof."
+  },
+  {
+   "id": "SP12.litter_turn.LT2_N1_stands_rearranged.A.turn",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "LT2_N1_stands_rearranged",
+   "case": "A rigid litter 2.00 x 0.55 x 0.30 m; turn: SP-11 chamber, aperture, corner, floor run to the lowering station",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "seeds [17, 23, 41] (sampled-pose search, cap 0.10 m = at least)",
+    "poses along the route",
+    "carrier and rescuer capsules",
+    "trunk fixtures from the saved vehicle"
+   ],
+   "seed_spread_m": [
+    0.1,
+    0.1
+   ],
+   "nearest": null,
+   "note": "N1, donning stands A and B moved to az 8; fit-out rearranged, staff two, route corner. Vehicle screen of the slot: CLEAR ; ideal closure load 220.0 kN (DIAGNOSTIC); spine-core cut 2.5 m (OPEN). Sampled poses, not a motion proof."
+  },
+  {
+   "id": "SP12.litter_turn.LT2_N1_stands_rearranged.A.lowering",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "LT2_N1_stands_rearranged",
+   "case": "A rigid litter 2.00 x 0.55 x 0.30 m; lowering through the SP-12 slot",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "seeds [17, 23, 41] (sampled-pose search, cap 0.10 m = at least)",
+    "poses along the route",
+    "carrier and rescuer capsules",
+    "trunk fixtures from the saved vehicle"
+   ],
+   "seed_spread_m": [
+    0.1,
+    0.1
+   ],
+   "nearest": null,
+   "note": "N1, donning stands A and B moved to az 8; fit-out rearranged, staff two, route corner. Vehicle screen of the slot: CLEAR ; ideal closure load 220.0 kN (DIAGNOSTIC); spine-core cut 2.5 m (OPEN). Sampled poses, not a motion proof."
+  },
+  {
+   "id": "SP12.litter_turn.LT2_N1_stands_rearranged.A.aft",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "LT2_N1_stands_rearranged",
+   "case": "A rigid litter 2.00 x 0.55 x 0.30 m; aft runs in the extension and the built trunk",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "seeds [17, 23, 41] (sampled-pose search, cap 0.10 m = at least)",
+    "poses along the route",
+    "carrier and rescuer capsules",
+    "trunk fixtures from the saved vehicle"
+   ],
+   "seed_spread_m": [
+    0.1,
+    0.1
+   ],
+   "nearest": null,
+   "note": "N1, donning stands A and B moved to az 8; fit-out rearranged, staff two, route corner. Vehicle screen of the slot: CLEAR ; ideal closure load 220.0 kN (DIAGNOSTIC); spine-core cut 2.5 m (OPEN). Sampled poses, not a motion proof."
+  },
+  {
+   "id": "SP12.litter_turn.LT2_N1_stands_rearranged.A.rescuers",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "LT2_N1_stands_rearranged",
+   "case": "A rigid litter 2.00 x 0.55 x 0.30 m; rescuers (companion route, whole route)",
+   "least_m": -0.116,
+   "status": "FAIL",
+   "worst_case_over": [
+    "seeds [17, 23, 41] (sampled-pose search, cap 0.10 m = at least)",
+    "poses along the route",
+    "carrier and rescuer capsules",
+    "trunk fixtures from the saved vehicle"
+   ],
+   "seed_spread_m": [
+    -0.116,
+    0.002
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "N1, donning stands A and B moved to az 8; fit-out rearranged, staff two, route corner. Vehicle screen of the slot: CLEAR ; ideal closure load 220.0 kN (DIAGNOSTIC); spine-core cut 2.5 m (OPEN). Sampled poses, not a motion proof."
+  },
+  {
+   "id": "SP12.litter_turn.LT3_diagonal_rearranged.S.turn",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "LT3_diagonal_rearranged",
+   "case": "S suited casualty on the full-length frame; turn: SP-11 chamber, aperture, corner, floor run to the lowering station",
+   "least_m": -0.075,
+   "status": "FAIL",
+   "worst_case_over": [
+    "seeds [17, 23, 41] (sampled-pose search, cap 0.10 m = at least)",
+    "poses along the route",
+    "carrier and rescuer capsules",
+    "trunk fixtures from the saved vehicle"
+   ],
+   "seed_spread_m": [
+    -0.075,
+    -0.007
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "diagonal leaving the aperture, stands at az 8; fit-out rearranged, staff two, route diagonal. Vehicle screen of the slot: CLEAR ; ideal closure load 220.0 kN (DIAGNOSTIC); spine-core cut 2.5 m (OPEN). Sampled poses, not a motion proof."
+  },
+  {
+   "id": "SP12.litter_turn.LT3_diagonal_rearranged.S.lowering",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "LT3_diagonal_rearranged",
+   "case": "S suited casualty on the full-length frame; lowering through the SP-12 slot",
+   "least_m": 0.08,
+   "status": "PASS",
+   "worst_case_over": [
+    "seeds [17, 23, 41] (sampled-pose search, cap 0.10 m = at least)",
+    "poses along the route",
+    "carrier and rescuer capsules",
+    "trunk fixtures from the saved vehicle"
+   ],
+   "seed_spread_m": [
+    0.08,
+    0.1
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "diagonal leaving the aperture, stands at az 8; fit-out rearranged, staff two, route diagonal. Vehicle screen of the slot: CLEAR ; ideal closure load 220.0 kN (DIAGNOSTIC); spine-core cut 2.5 m (OPEN). Sampled poses, not a motion proof."
+  },
+  {
+   "id": "SP12.litter_turn.LT3_diagonal_rearranged.S.aft",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "LT3_diagonal_rearranged",
+   "case": "S suited casualty on the full-length frame; aft runs in the extension and the built trunk",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "seeds [17, 23, 41] (sampled-pose search, cap 0.10 m = at least)",
+    "poses along the route",
+    "carrier and rescuer capsules",
+    "trunk fixtures from the saved vehicle"
+   ],
+   "seed_spread_m": [
+    0.1,
+    0.1
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "diagonal leaving the aperture, stands at az 8; fit-out rearranged, staff two, route diagonal. Vehicle screen of the slot: CLEAR ; ideal closure load 220.0 kN (DIAGNOSTIC); spine-core cut 2.5 m (OPEN). Sampled poses, not a motion proof."
+  },
+  {
+   "id": "SP12.litter_turn.LT3_diagonal_rearranged.S.rescuers",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "LT3_diagonal_rearranged",
+   "case": "S suited casualty on the full-length frame; rescuers (companion route, whole route)",
+   "least_m": -0.1,
+   "status": "FAIL",
+   "worst_case_over": [
+    "seeds [17, 23, 41] (sampled-pose search, cap 0.10 m = at least)",
+    "poses along the route",
+    "carrier and rescuer capsules",
+    "trunk fixtures from the saved vehicle"
+   ],
+   "seed_spread_m": [
+    -0.1,
+    -0.04
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "diagonal leaving the aperture, stands at az 8; fit-out rearranged, staff two, route diagonal. Vehicle screen of the slot: CLEAR ; ideal closure load 220.0 kN (DIAGNOSTIC); spine-core cut 2.5 m (OPEN). Sampled poses, not a motion proof."
+  },
+  {
+   "id": "SP12.litter_turn.LT3_diagonal_rearranged.A.turn",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "LT3_diagonal_rearranged",
+   "case": "A rigid litter 2.00 x 0.55 x 0.30 m; turn: SP-11 chamber, aperture, corner, floor run to the lowering station",
+   "least_m": 0.046,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "seeds [17, 23, 41] (sampled-pose search, cap 0.10 m = at least)",
+    "poses along the route",
+    "carrier and rescuer capsules",
+    "trunk fixtures from the saved vehicle"
+   ],
+   "seed_spread_m": [
+    0.046,
+    0.057
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "diagonal leaving the aperture, stands at az 8; fit-out rearranged, staff two, route diagonal. Vehicle screen of the slot: CLEAR ; ideal closure load 220.0 kN (DIAGNOSTIC); spine-core cut 2.5 m (OPEN). Sampled poses, not a motion proof."
+  },
+  {
+   "id": "SP12.litter_turn.LT3_diagonal_rearranged.A.lowering",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "LT3_diagonal_rearranged",
+   "case": "A rigid litter 2.00 x 0.55 x 0.30 m; lowering through the SP-12 slot",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "seeds [17, 23, 41] (sampled-pose search, cap 0.10 m = at least)",
+    "poses along the route",
+    "carrier and rescuer capsules",
+    "trunk fixtures from the saved vehicle"
+   ],
+   "seed_spread_m": [
+    0.1,
+    0.1
+   ],
+   "nearest": null,
+   "note": "diagonal leaving the aperture, stands at az 8; fit-out rearranged, staff two, route diagonal. Vehicle screen of the slot: CLEAR ; ideal closure load 220.0 kN (DIAGNOSTIC); spine-core cut 2.5 m (OPEN). Sampled poses, not a motion proof."
+  },
+  {
+   "id": "SP12.litter_turn.LT3_diagonal_rearranged.A.aft",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "LT3_diagonal_rearranged",
+   "case": "A rigid litter 2.00 x 0.55 x 0.30 m; aft runs in the extension and the built trunk",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "seeds [17, 23, 41] (sampled-pose search, cap 0.10 m = at least)",
+    "poses along the route",
+    "carrier and rescuer capsules",
+    "trunk fixtures from the saved vehicle"
+   ],
+   "seed_spread_m": [
+    0.1,
+    0.1
+   ],
+   "nearest": null,
+   "note": "diagonal leaving the aperture, stands at az 8; fit-out rearranged, staff two, route diagonal. Vehicle screen of the slot: CLEAR ; ideal closure load 220.0 kN (DIAGNOSTIC); spine-core cut 2.5 m (OPEN). Sampled poses, not a motion proof."
+  },
+  {
+   "id": "SP12.litter_turn.LT3_diagonal_rearranged.A.rescuers",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "LT3_diagonal_rearranged",
+   "case": "A rigid litter 2.00 x 0.55 x 0.30 m; rescuers (companion route, whole route)",
+   "least_m": -0.085,
+   "status": "FAIL",
+   "worst_case_over": [
+    "seeds [17, 23, 41] (sampled-pose search, cap 0.10 m = at least)",
+    "poses along the route",
+    "carrier and rescuer capsules",
+    "trunk fixtures from the saved vehicle"
+   ],
+   "seed_spread_m": [
+    -0.085,
+    0.043
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "diagonal leaving the aperture, stands at az 8; fit-out rearranged, staff two, route diagonal. Vehicle screen of the slot: CLEAR ; ideal closure load 220.0 kN (DIAGNOSTIC); spine-core cut 2.5 m (OPEN). Sampled poses, not a motion proof."
+  },
+  {
+   "id": "SP12.litter_turn.LT4_diagonal_slot_aft.S.turn",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "LT4_diagonal_slot_aft",
+   "case": "S suited casualty on the full-length frame; turn: SP-11 chamber, aperture, corner, floor run to the lowering station",
+   "least_m": -0.093,
+   "status": "FAIL",
+   "worst_case_over": [
+    "seeds [17, 23, 41] (sampled-pose search, cap 0.10 m = at least)",
+    "poses along the route",
+    "carrier and rescuer capsules",
+    "trunk fixtures from the saved vehicle"
+   ],
+   "seed_spread_m": [
+    -0.093,
+    -0.036
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "diagonal with the slot shifted aft under the aperture (slot X 101.75-104.25; spine-core cut OPEN); fit-out rearranged, staff two, route diagonal. Vehicle screen of the slot: CLEAR ; ideal closure load 220.0 kN (DIAGNOSTIC); spine-core cut 2.5 m (OPEN). Sampled poses, not a motion proof."
+  },
+  {
+   "id": "SP12.litter_turn.LT4_diagonal_slot_aft.S.lowering",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "LT4_diagonal_slot_aft",
+   "case": "S suited casualty on the full-length frame; lowering through the SP-12 slot",
+   "least_m": 0.079,
+   "status": "PASS",
+   "worst_case_over": [
+    "seeds [17, 23, 41] (sampled-pose search, cap 0.10 m = at least)",
+    "poses along the route",
+    "carrier and rescuer capsules",
+    "trunk fixtures from the saved vehicle"
+   ],
+   "seed_spread_m": [
+    0.079,
+    0.09
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "diagonal with the slot shifted aft under the aperture (slot X 101.75-104.25; spine-core cut OPEN); fit-out rearranged, staff two, route diagonal. Vehicle screen of the slot: CLEAR ; ideal closure load 220.0 kN (DIAGNOSTIC); spine-core cut 2.5 m (OPEN). Sampled poses, not a motion proof."
+  },
+  {
+   "id": "SP12.litter_turn.LT4_diagonal_slot_aft.S.aft",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "LT4_diagonal_slot_aft",
+   "case": "S suited casualty on the full-length frame; aft runs in the extension and the built trunk",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "seeds [17, 23, 41] (sampled-pose search, cap 0.10 m = at least)",
+    "poses along the route",
+    "carrier and rescuer capsules",
+    "trunk fixtures from the saved vehicle"
+   ],
+   "seed_spread_m": [
+    0.1,
+    0.1
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "diagonal with the slot shifted aft under the aperture (slot X 101.75-104.25; spine-core cut OPEN); fit-out rearranged, staff two, route diagonal. Vehicle screen of the slot: CLEAR ; ideal closure load 220.0 kN (DIAGNOSTIC); spine-core cut 2.5 m (OPEN). Sampled poses, not a motion proof."
+  },
+  {
+   "id": "SP12.litter_turn.LT4_diagonal_slot_aft.S.rescuers",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "LT4_diagonal_slot_aft",
+   "case": "S suited casualty on the full-length frame; rescuers (companion route, whole route)",
+   "least_m": -0.1,
+   "status": "FAIL",
+   "worst_case_over": [
+    "seeds [17, 23, 41] (sampled-pose search, cap 0.10 m = at least)",
+    "poses along the route",
+    "carrier and rescuer capsules",
+    "trunk fixtures from the saved vehicle"
+   ],
+   "seed_spread_m": [
+    -0.1,
+    -0.054
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "diagonal with the slot shifted aft under the aperture (slot X 101.75-104.25; spine-core cut OPEN); fit-out rearranged, staff two, route diagonal. Vehicle screen of the slot: CLEAR ; ideal closure load 220.0 kN (DIAGNOSTIC); spine-core cut 2.5 m (OPEN). Sampled poses, not a motion proof."
+  },
+  {
+   "id": "SP12.litter_turn.LT4_diagonal_slot_aft.A.turn",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "LT4_diagonal_slot_aft",
+   "case": "A rigid litter 2.00 x 0.55 x 0.30 m; turn: SP-11 chamber, aperture, corner, floor run to the lowering station",
+   "least_m": 0.051,
+   "status": "PASS",
+   "worst_case_over": [
+    "seeds [17, 23, 41] (sampled-pose search, cap 0.10 m = at least)",
+    "poses along the route",
+    "carrier and rescuer capsules",
+    "trunk fixtures from the saved vehicle"
+   ],
+   "seed_spread_m": [
+    0.051,
+    0.064
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "diagonal with the slot shifted aft under the aperture (slot X 101.75-104.25; spine-core cut OPEN); fit-out rearranged, staff two, route diagonal. Vehicle screen of the slot: CLEAR ; ideal closure load 220.0 kN (DIAGNOSTIC); spine-core cut 2.5 m (OPEN). Sampled poses, not a motion proof."
+  },
+  {
+   "id": "SP12.litter_turn.LT4_diagonal_slot_aft.A.lowering",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "LT4_diagonal_slot_aft",
+   "case": "A rigid litter 2.00 x 0.55 x 0.30 m; lowering through the SP-12 slot",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "seeds [17, 23, 41] (sampled-pose search, cap 0.10 m = at least)",
+    "poses along the route",
+    "carrier and rescuer capsules",
+    "trunk fixtures from the saved vehicle"
+   ],
+   "seed_spread_m": [
+    0.1,
+    0.1
+   ],
+   "nearest": null,
+   "note": "diagonal with the slot shifted aft under the aperture (slot X 101.75-104.25; spine-core cut OPEN); fit-out rearranged, staff two, route diagonal. Vehicle screen of the slot: CLEAR ; ideal closure load 220.0 kN (DIAGNOSTIC); spine-core cut 2.5 m (OPEN). Sampled poses, not a motion proof."
+  },
+  {
+   "id": "SP12.litter_turn.LT4_diagonal_slot_aft.A.aft",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "LT4_diagonal_slot_aft",
+   "case": "A rigid litter 2.00 x 0.55 x 0.30 m; aft runs in the extension and the built trunk",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "seeds [17, 23, 41] (sampled-pose search, cap 0.10 m = at least)",
+    "poses along the route",
+    "carrier and rescuer capsules",
+    "trunk fixtures from the saved vehicle"
+   ],
+   "seed_spread_m": [
+    0.1,
+    0.1
+   ],
+   "nearest": null,
+   "note": "diagonal with the slot shifted aft under the aperture (slot X 101.75-104.25; spine-core cut OPEN); fit-out rearranged, staff two, route diagonal. Vehicle screen of the slot: CLEAR ; ideal closure load 220.0 kN (DIAGNOSTIC); spine-core cut 2.5 m (OPEN). Sampled poses, not a motion proof."
+  },
+  {
+   "id": "SP12.litter_turn.LT4_diagonal_slot_aft.A.rescuers",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "LT4_diagonal_slot_aft",
+   "case": "A rigid litter 2.00 x 0.55 x 0.30 m; rescuers (companion route, whole route)",
+   "least_m": -0.062,
+   "status": "FAIL",
+   "worst_case_over": [
+    "seeds [17, 23, 41] (sampled-pose search, cap 0.10 m = at least)",
+    "poses along the route",
+    "carrier and rescuer capsules",
+    "trunk fixtures from the saved vehicle"
+   ],
+   "seed_spread_m": [
+    -0.062,
+    -0.022
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "diagonal with the slot shifted aft under the aperture (slot X 101.75-104.25; spine-core cut OPEN); fit-out rearranged, staff two, route diagonal. Vehicle screen of the slot: CLEAR ; ideal closure load 220.0 kN (DIAGNOSTIC); spine-core cut 2.5 m (OPEN). Sampled poses, not a motion proof."
+  },
+  {
+   "id": "SP12.litter_turn.LT5_diagonal_hoist_one_rescuer.S.turn",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "LT5_diagonal_hoist_one_rescuer",
+   "case": "S suited casualty on the full-length frame; turn: SP-11 chamber, aperture, corner, floor run to the lowering station",
+   "least_m": -0.091,
+   "status": "FAIL",
+   "worst_case_over": [
+    "seeds [17, 23, 41] (sampled-pose search, cap 0.10 m = at least)",
+    "poses along the route",
+    "carrier and rescuer capsules",
+    "trunk fixtures from the saved vehicle"
+   ],
+   "seed_spread_m": [
+    -0.091,
+    -0.054
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "LT3 with a hoist on the head end: one rescuer at the foot end; fit-out rearranged, staff foot, route diagonal. Vehicle screen of the slot: CLEAR ; ideal closure load 220.0 kN (DIAGNOSTIC); spine-core cut 2.5 m (OPEN). Sampled poses, not a motion proof."
+  },
+  {
+   "id": "SP12.litter_turn.LT5_diagonal_hoist_one_rescuer.S.lowering",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "LT5_diagonal_hoist_one_rescuer",
+   "case": "S suited casualty on the full-length frame; lowering through the SP-12 slot",
+   "least_m": 0.078,
+   "status": "PASS",
+   "worst_case_over": [
+    "seeds [17, 23, 41] (sampled-pose search, cap 0.10 m = at least)",
+    "poses along the route",
+    "carrier and rescuer capsules",
+    "trunk fixtures from the saved vehicle"
+   ],
+   "seed_spread_m": [
+    0.078,
+    0.088
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "LT3 with a hoist on the head end: one rescuer at the foot end; fit-out rearranged, staff foot, route diagonal. Vehicle screen of the slot: CLEAR ; ideal closure load 220.0 kN (DIAGNOSTIC); spine-core cut 2.5 m (OPEN). Sampled poses, not a motion proof."
+  },
+  {
+   "id": "SP12.litter_turn.LT5_diagonal_hoist_one_rescuer.S.aft",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "LT5_diagonal_hoist_one_rescuer",
+   "case": "S suited casualty on the full-length frame; aft runs in the extension and the built trunk",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "seeds [17, 23, 41] (sampled-pose search, cap 0.10 m = at least)",
+    "poses along the route",
+    "carrier and rescuer capsules",
+    "trunk fixtures from the saved vehicle"
+   ],
+   "seed_spread_m": [
+    0.1,
+    0.1
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "LT3 with a hoist on the head end: one rescuer at the foot end; fit-out rearranged, staff foot, route diagonal. Vehicle screen of the slot: CLEAR ; ideal closure load 220.0 kN (DIAGNOSTIC); spine-core cut 2.5 m (OPEN). Sampled poses, not a motion proof."
+  },
+  {
+   "id": "SP12.litter_turn.LT5_diagonal_hoist_one_rescuer.S.rescuers",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "LT5_diagonal_hoist_one_rescuer",
+   "case": "S suited casualty on the full-length frame; rescuers (companion route, whole route)",
+   "least_m": -0.042,
+   "status": "FAIL",
+   "worst_case_over": [
+    "seeds [17, 23, 41] (sampled-pose search, cap 0.10 m = at least)",
+    "poses along the route",
+    "carrier and rescuer capsules",
+    "trunk fixtures from the saved vehicle"
+   ],
+   "seed_spread_m": [
+    -0.042,
+    0.013
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "LT3 with a hoist on the head end: one rescuer at the foot end; fit-out rearranged, staff foot, route diagonal. Vehicle screen of the slot: CLEAR ; ideal closure load 220.0 kN (DIAGNOSTIC); spine-core cut 2.5 m (OPEN). Sampled poses, not a motion proof."
+  },
+  {
+   "id": "SP12.litter_turn.LT5_diagonal_hoist_one_rescuer.A.turn",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "LT5_diagonal_hoist_one_rescuer",
+   "case": "A rigid litter 2.00 x 0.55 x 0.30 m; turn: SP-11 chamber, aperture, corner, floor run to the lowering station",
+   "least_m": 0.048,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "seeds [17, 23, 41] (sampled-pose search, cap 0.10 m = at least)",
+    "poses along the route",
+    "carrier and rescuer capsules",
+    "trunk fixtures from the saved vehicle"
+   ],
+   "seed_spread_m": [
+    0.048,
+    0.053
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "LT3 with a hoist on the head end: one rescuer at the foot end; fit-out rearranged, staff foot, route diagonal. Vehicle screen of the slot: CLEAR ; ideal closure load 220.0 kN (DIAGNOSTIC); spine-core cut 2.5 m (OPEN). Sampled poses, not a motion proof."
+  },
+  {
+   "id": "SP12.litter_turn.LT5_diagonal_hoist_one_rescuer.A.lowering",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "LT5_diagonal_hoist_one_rescuer",
+   "case": "A rigid litter 2.00 x 0.55 x 0.30 m; lowering through the SP-12 slot",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "seeds [17, 23, 41] (sampled-pose search, cap 0.10 m = at least)",
+    "poses along the route",
+    "carrier and rescuer capsules",
+    "trunk fixtures from the saved vehicle"
+   ],
+   "seed_spread_m": [
+    0.1,
+    0.1
+   ],
+   "nearest": null,
+   "note": "LT3 with a hoist on the head end: one rescuer at the foot end; fit-out rearranged, staff foot, route diagonal. Vehicle screen of the slot: CLEAR ; ideal closure load 220.0 kN (DIAGNOSTIC); spine-core cut 2.5 m (OPEN). Sampled poses, not a motion proof."
+  },
+  {
+   "id": "SP12.litter_turn.LT5_diagonal_hoist_one_rescuer.A.aft",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "LT5_diagonal_hoist_one_rescuer",
+   "case": "A rigid litter 2.00 x 0.55 x 0.30 m; aft runs in the extension and the built trunk",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "seeds [17, 23, 41] (sampled-pose search, cap 0.10 m = at least)",
+    "poses along the route",
+    "carrier and rescuer capsules",
+    "trunk fixtures from the saved vehicle"
+   ],
+   "seed_spread_m": [
+    0.1,
+    0.1
+   ],
+   "nearest": null,
+   "note": "LT3 with a hoist on the head end: one rescuer at the foot end; fit-out rearranged, staff foot, route diagonal. Vehicle screen of the slot: CLEAR ; ideal closure load 220.0 kN (DIAGNOSTIC); spine-core cut 2.5 m (OPEN). Sampled poses, not a motion proof."
+  },
+  {
+   "id": "SP12.litter_turn.LT5_diagonal_hoist_one_rescuer.A.rescuers",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "LT5_diagonal_hoist_one_rescuer",
+   "case": "A rigid litter 2.00 x 0.55 x 0.30 m; rescuers (companion route, whole route)",
+   "least_m": -0.06,
+   "status": "FAIL",
+   "worst_case_over": [
+    "seeds [17, 23, 41] (sampled-pose search, cap 0.10 m = at least)",
+    "poses along the route",
+    "carrier and rescuer capsules",
+    "trunk fixtures from the saved vehicle"
+   ],
+   "seed_spread_m": [
+    -0.06,
+    0.043
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "LT3 with a hoist on the head end: one rescuer at the foot end; fit-out rearranged, staff foot, route diagonal. Vehicle screen of the slot: CLEAR ; ideal closure load 220.0 kN (DIAGNOSTIC); spine-core cut 2.5 m (OPEN). Sampled poses, not a motion proof."
+  },
+  {
+   "id": "SP12.litter_turn.LT6_bare_geometry_limit.S.turn",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "LT6_bare_geometry_limit",
+   "case": "S suited casualty on the full-length frame; turn: SP-11 chamber, aperture, corner, floor run to the lowering station",
+   "least_m": -0.013,
+   "status": "FAIL",
+   "worst_case_over": [
+    "seeds [17, 23, 41] (sampled-pose search, cap 0.10 m = at least)",
+    "poses along the route",
+    "carrier and rescuer capsules",
+    "trunk fixtures from the saved vehicle"
+   ],
+   "seed_spread_m": [
+    -0.013,
+    0.02
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "N1 with the fit-out removed (geometry limit of the room); fit-out bare, staff two, route corner. Vehicle screen of the slot: CLEAR ; ideal closure load 220.0 kN (DIAGNOSTIC); spine-core cut 2.5 m (OPEN). Sampled poses, not a motion proof."
+  },
+  {
+   "id": "SP12.litter_turn.LT6_bare_geometry_limit.S.lowering",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "LT6_bare_geometry_limit",
+   "case": "S suited casualty on the full-length frame; lowering through the SP-12 slot",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "seeds [17, 23, 41] (sampled-pose search, cap 0.10 m = at least)",
+    "poses along the route",
+    "carrier and rescuer capsules",
+    "trunk fixtures from the saved vehicle"
+   ],
+   "seed_spread_m": [
+    0.1,
+    0.1
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "N1 with the fit-out removed (geometry limit of the room); fit-out bare, staff two, route corner. Vehicle screen of the slot: CLEAR ; ideal closure load 220.0 kN (DIAGNOSTIC); spine-core cut 2.5 m (OPEN). Sampled poses, not a motion proof."
+  },
+  {
+   "id": "SP12.litter_turn.LT6_bare_geometry_limit.S.aft",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "LT6_bare_geometry_limit",
+   "case": "S suited casualty on the full-length frame; aft runs in the extension and the built trunk",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "seeds [17, 23, 41] (sampled-pose search, cap 0.10 m = at least)",
+    "poses along the route",
+    "carrier and rescuer capsules",
+    "trunk fixtures from the saved vehicle"
+   ],
+   "seed_spread_m": [
+    0.1,
+    0.1
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "N1 with the fit-out removed (geometry limit of the room); fit-out bare, staff two, route corner. Vehicle screen of the slot: CLEAR ; ideal closure load 220.0 kN (DIAGNOSTIC); spine-core cut 2.5 m (OPEN). Sampled poses, not a motion proof."
+  },
+  {
+   "id": "SP12.litter_turn.LT6_bare_geometry_limit.S.rescuers",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "LT6_bare_geometry_limit",
+   "case": "S suited casualty on the full-length frame; rescuers (companion route, whole route)",
+   "least_m": -0.118,
+   "status": "FAIL",
+   "worst_case_over": [
+    "seeds [17, 23, 41] (sampled-pose search, cap 0.10 m = at least)",
+    "poses along the route",
+    "carrier and rescuer capsules",
+    "trunk fixtures from the saved vehicle"
+   ],
+   "seed_spread_m": [
+    -0.118,
+    -0.097
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "N1 with the fit-out removed (geometry limit of the room); fit-out bare, staff two, route corner. Vehicle screen of the slot: CLEAR ; ideal closure load 220.0 kN (DIAGNOSTIC); spine-core cut 2.5 m (OPEN). Sampled poses, not a motion proof."
+  },
+  {
+   "id": "SP12.litter_turn.LT6_bare_geometry_limit.A.turn",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "LT6_bare_geometry_limit",
+   "case": "A rigid litter 2.00 x 0.55 x 0.30 m; turn: SP-11 chamber, aperture, corner, floor run to the lowering station",
+   "least_m": 0.07,
+   "status": "PASS",
+   "worst_case_over": [
+    "seeds [17, 23, 41] (sampled-pose search, cap 0.10 m = at least)",
+    "poses along the route",
+    "carrier and rescuer capsules",
+    "trunk fixtures from the saved vehicle"
+   ],
+   "seed_spread_m": [
+    0.07,
+    0.1
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "N1 with the fit-out removed (geometry limit of the room); fit-out bare, staff two, route corner. Vehicle screen of the slot: CLEAR ; ideal closure load 220.0 kN (DIAGNOSTIC); spine-core cut 2.5 m (OPEN). Sampled poses, not a motion proof."
+  },
+  {
+   "id": "SP12.litter_turn.LT6_bare_geometry_limit.A.lowering",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "LT6_bare_geometry_limit",
+   "case": "A rigid litter 2.00 x 0.55 x 0.30 m; lowering through the SP-12 slot",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "seeds [17, 23, 41] (sampled-pose search, cap 0.10 m = at least)",
+    "poses along the route",
+    "carrier and rescuer capsules",
+    "trunk fixtures from the saved vehicle"
+   ],
+   "seed_spread_m": [
+    0.1,
+    0.1
+   ],
+   "nearest": null,
+   "note": "N1 with the fit-out removed (geometry limit of the room); fit-out bare, staff two, route corner. Vehicle screen of the slot: CLEAR ; ideal closure load 220.0 kN (DIAGNOSTIC); spine-core cut 2.5 m (OPEN). Sampled poses, not a motion proof."
+  },
+  {
+   "id": "SP12.litter_turn.LT6_bare_geometry_limit.A.aft",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "LT6_bare_geometry_limit",
+   "case": "A rigid litter 2.00 x 0.55 x 0.30 m; aft runs in the extension and the built trunk",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "seeds [17, 23, 41] (sampled-pose search, cap 0.10 m = at least)",
+    "poses along the route",
+    "carrier and rescuer capsules",
+    "trunk fixtures from the saved vehicle"
+   ],
+   "seed_spread_m": [
+    0.1,
+    0.1
+   ],
+   "nearest": null,
+   "note": "N1 with the fit-out removed (geometry limit of the room); fit-out bare, staff two, route corner. Vehicle screen of the slot: CLEAR ; ideal closure load 220.0 kN (DIAGNOSTIC); spine-core cut 2.5 m (OPEN). Sampled poses, not a motion proof."
+  },
+  {
+   "id": "SP12.litter_turn.LT6_bare_geometry_limit.A.rescuers",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "LT6_bare_geometry_limit",
+   "case": "A rigid litter 2.00 x 0.55 x 0.30 m; rescuers (companion route, whole route)",
+   "least_m": -0.081,
+   "status": "FAIL",
+   "worst_case_over": [
+    "seeds [17, 23, 41] (sampled-pose search, cap 0.10 m = at least)",
+    "poses along the route",
+    "carrier and rescuer capsules",
+    "trunk fixtures from the saved vehicle"
+   ],
+   "seed_spread_m": [
+    -0.081,
+    -0.011
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "N1 with the fit-out removed (geometry limit of the room); fit-out bare, staff two, route corner. Vehicle screen of the slot: CLEAR ; ideal closure load 220.0 kN (DIAGNOSTIC); spine-core cut 2.5 m (OPEN). Sampled poses, not a motion proof."
+  },
+  {
+   "id": "SP12.litter_turn.LT7_N1_aperture_1.35_comparator.S.turn",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "LT7_N1_aperture_1.35_comparator",
+   "case": "S suited casualty on the full-length frame; turn: SP-11 chamber, aperture, corner, floor run to the lowering station",
+   "least_m": 0.003,
+   "status": "MARGINAL",
+   "worst_case_over": [
+    "seeds [17, 23, 41] (sampled-pose search, cap 0.10 m = at least)",
+    "poses along the route",
+    "carrier and rescuer capsules",
+    "trunk fixtures from the saved vehicle"
+   ],
+   "seed_spread_m": [
+    0.003,
+    0.015
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "LT2 with the SP-11 aperture at the 1.35 m comparator (45 G-14): is the 1.20 m aperture the limit of the turn? (the plug parking pocket is left as built); fit-out rearranged, staff two, route corner. Vehicle screen of the slot: CLEAR ; ideal closure load 220.0 kN (DIAGNOSTIC); spine-core cut 2.5 m (OPEN). Sampled poses, not a motion proof."
+  },
+  {
+   "id": "SP12.litter_turn.LT7_N1_aperture_1.35_comparator.S.lowering",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "LT7_N1_aperture_1.35_comparator",
+   "case": "S suited casualty on the full-length frame; lowering through the SP-12 slot",
+   "least_m": 0.072,
+   "status": "PASS",
+   "worst_case_over": [
+    "seeds [17, 23, 41] (sampled-pose search, cap 0.10 m = at least)",
+    "poses along the route",
+    "carrier and rescuer capsules",
+    "trunk fixtures from the saved vehicle"
+   ],
+   "seed_spread_m": [
+    0.072,
+    0.088
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "LT2 with the SP-11 aperture at the 1.35 m comparator (45 G-14): is the 1.20 m aperture the limit of the turn? (the plug parking pocket is left as built); fit-out rearranged, staff two, route corner. Vehicle screen of the slot: CLEAR ; ideal closure load 220.0 kN (DIAGNOSTIC); spine-core cut 2.5 m (OPEN). Sampled poses, not a motion proof."
+  },
+  {
+   "id": "SP12.litter_turn.LT7_N1_aperture_1.35_comparator.S.aft",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "LT7_N1_aperture_1.35_comparator",
+   "case": "S suited casualty on the full-length frame; aft runs in the extension and the built trunk",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "seeds [17, 23, 41] (sampled-pose search, cap 0.10 m = at least)",
+    "poses along the route",
+    "carrier and rescuer capsules",
+    "trunk fixtures from the saved vehicle"
+   ],
+   "seed_spread_m": [
+    0.1,
+    0.1
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "LT2 with the SP-11 aperture at the 1.35 m comparator (45 G-14): is the 1.20 m aperture the limit of the turn? (the plug parking pocket is left as built); fit-out rearranged, staff two, route corner. Vehicle screen of the slot: CLEAR ; ideal closure load 220.0 kN (DIAGNOSTIC); spine-core cut 2.5 m (OPEN). Sampled poses, not a motion proof."
+  },
+  {
+   "id": "SP12.litter_turn.LT7_N1_aperture_1.35_comparator.S.rescuers",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "LT7_N1_aperture_1.35_comparator",
+   "case": "S suited casualty on the full-length frame; rescuers (companion route, whole route)",
+   "least_m": -0.118,
+   "status": "FAIL",
+   "worst_case_over": [
+    "seeds [17, 23, 41] (sampled-pose search, cap 0.10 m = at least)",
+    "poses along the route",
+    "carrier and rescuer capsules",
+    "trunk fixtures from the saved vehicle"
+   ],
+   "seed_spread_m": [
+    -0.118,
+    -0.028
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "LT2 with the SP-11 aperture at the 1.35 m comparator (45 G-14): is the 1.20 m aperture the limit of the turn? (the plug parking pocket is left as built); fit-out rearranged, staff two, route corner. Vehicle screen of the slot: CLEAR ; ideal closure load 220.0 kN (DIAGNOSTIC); spine-core cut 2.5 m (OPEN). Sampled poses, not a motion proof."
+  },
+  {
+   "id": "SP12.litter_turn.LT7_N1_aperture_1.35_comparator.A.turn",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "LT7_N1_aperture_1.35_comparator",
+   "case": "A rigid litter 2.00 x 0.55 x 0.30 m; turn: SP-11 chamber, aperture, corner, floor run to the lowering station",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "seeds [17, 23, 41] (sampled-pose search, cap 0.10 m = at least)",
+    "poses along the route",
+    "carrier and rescuer capsules",
+    "trunk fixtures from the saved vehicle"
+   ],
+   "seed_spread_m": [
+    0.1,
+    0.1
+   ],
+   "nearest": null,
+   "note": "LT2 with the SP-11 aperture at the 1.35 m comparator (45 G-14): is the 1.20 m aperture the limit of the turn? (the plug parking pocket is left as built); fit-out rearranged, staff two, route corner. Vehicle screen of the slot: CLEAR ; ideal closure load 220.0 kN (DIAGNOSTIC); spine-core cut 2.5 m (OPEN). Sampled poses, not a motion proof."
+  },
+  {
+   "id": "SP12.litter_turn.LT7_N1_aperture_1.35_comparator.A.lowering",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "LT7_N1_aperture_1.35_comparator",
+   "case": "A rigid litter 2.00 x 0.55 x 0.30 m; lowering through the SP-12 slot",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "seeds [17, 23, 41] (sampled-pose search, cap 0.10 m = at least)",
+    "poses along the route",
+    "carrier and rescuer capsules",
+    "trunk fixtures from the saved vehicle"
+   ],
+   "seed_spread_m": [
+    0.1,
+    0.1
+   ],
+   "nearest": null,
+   "note": "LT2 with the SP-11 aperture at the 1.35 m comparator (45 G-14): is the 1.20 m aperture the limit of the turn? (the plug parking pocket is left as built); fit-out rearranged, staff two, route corner. Vehicle screen of the slot: CLEAR ; ideal closure load 220.0 kN (DIAGNOSTIC); spine-core cut 2.5 m (OPEN). Sampled poses, not a motion proof."
+  },
+  {
+   "id": "SP12.litter_turn.LT7_N1_aperture_1.35_comparator.A.aft",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "LT7_N1_aperture_1.35_comparator",
+   "case": "A rigid litter 2.00 x 0.55 x 0.30 m; aft runs in the extension and the built trunk",
+   "least_m": 0.1,
+   "status": "PASS",
+   "worst_case_over": [
+    "seeds [17, 23, 41] (sampled-pose search, cap 0.10 m = at least)",
+    "poses along the route",
+    "carrier and rescuer capsules",
+    "trunk fixtures from the saved vehicle"
+   ],
+   "seed_spread_m": [
+    0.1,
+    0.1
+   ],
+   "nearest": null,
+   "note": "LT2 with the SP-11 aperture at the 1.35 m comparator (45 G-14): is the 1.20 m aperture the limit of the turn? (the plug parking pocket is left as built); fit-out rearranged, staff two, route corner. Vehicle screen of the slot: CLEAR ; ideal closure load 220.0 kN (DIAGNOSTIC); spine-core cut 2.5 m (OPEN). Sampled poses, not a motion proof."
+  },
+  {
+   "id": "SP12.litter_turn.LT7_N1_aperture_1.35_comparator.A.rescuers",
+   "route": "SP-12",
+   "states": [
+    "0g",
+    "stopped"
+   ],
+   "variant": "LT7_N1_aperture_1.35_comparator",
+   "case": "A rigid litter 2.00 x 0.55 x 0.30 m; rescuers (companion route, whole route)",
+   "least_m": -0.048,
+   "status": "FAIL",
+   "worst_case_over": [
+    "seeds [17, 23, 41] (sampled-pose search, cap 0.10 m = at least)",
+    "poses along the route",
+    "carrier and rescuer capsules",
+    "trunk fixtures from the saved vehicle"
+   ],
+   "seed_spread_m": [
+    -0.048,
+    0.035
+   ],
+   "nearest": "FREE_SPACE_WALL",
+   "note": "LT2 with the SP-11 aperture at the 1.35 m comparator (45 G-14): is the 1.20 m aperture the limit of the turn? (the plug parking pocket is left as built); fit-out rearranged, staff two, route corner. Vehicle screen of the slot: CLEAR ; ideal closure load 220.0 kN (DIAGNOSTIC); spine-core cut 2.5 m (OPEN). Sampled poses, not a motion proof."
+  },
+  {
+   "id": "SP12.litter_turn.spin",
+   "route": "SP-12",
+   "states": [
+    "spin"
+   ],
+   "variant": "all",
+   "case": "S and A carriers, SP-11 to SP-12 turn",
+   "least_m": null,
+   "status": "OPEN",
+   "worst_case_over": [
+    "not evaluated"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "OPEN: no spin or 1.5 g geometry (the SP-12 floor direction, hoist line and X-vertical attitude are not modelled); release needs the owner state rules (15!A126)."
+  },
+  {
+   "id": "SP12.litter_turn.locked_1.5g",
+   "route": "SP-12",
+   "states": [
+    "locked_1.5g"
+   ],
+   "variant": "all",
+   "case": "S and A carriers, SP-11 to SP-12 turn",
+   "least_m": null,
+   "status": "OPEN",
+   "worst_case_over": [
+    "not evaluated"
+   ],
+   "seed_spread_m": null,
+   "nearest": null,
+   "note": "OPEN: no spin or 1.5 g geometry (the SP-12 floor direction, hoist line and X-vertical attitude are not modelled); release needs the owner state rules (15!A126)."
+  }
+ ]
+}
