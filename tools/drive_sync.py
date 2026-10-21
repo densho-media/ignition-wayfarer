@@ -661,11 +661,19 @@ def inbox_exports(root, since=None):
     return newest
 
 
+def _is_file(text):
+    """Path.is_file() that treats an over-long name as "not a file" (Python 3.13 raises ENAMETOOLONG)."""
+    try:
+        return Path(text).is_file()
+    except OSError:
+        return False
+
+
 def export_bytes(response):
     """Decode a download_file_content response (dict, JSON text, content blocks or a
     persisted tool-results file) into (bytes, metadata)."""
     if isinstance(response, Path) or (isinstance(response, str) and len(response) < 4096
-                                      and '\n' not in response and Path(response).is_file()):
+                                      and '\n' not in response and _is_file(response)):
         path = Path(response)
         if path.read_bytes()[:2] == b'PK':
             return path.read_bytes(), {}
