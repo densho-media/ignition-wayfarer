@@ -1,0 +1,131 @@
+{
+ "assemblies": {
+  "RA2.EQP": {
+   "anchor": "WF-RING-A.SECTOR.1.2",
+   "anchor_hash": "6ac93396b4a0563f",
+   "asset": "WF_DETAIL_RA2_EQP",
+   "detail_class": "PRODUCTION",
+   "enabled": true,
+   "maturity": "L4_VISUAL_CANDIDATE"
+  }
+ },
+ "contract": "WF_MODULE_PUBLICATION",
+ "contract_hash": "95e5c1545de7976f",
+ "fingerprint": {
+  "detail/WF_DETAIL_RA2_EQP.blend": {
+   "direct_links": [],
+   "objects": {
+    "Prod_RA2_EQP_Boxes": {
+     "centroid": [
+      0.0444444434510337,
+      -2.8830000162124634,
+      0.3933806004071677
+     ],
+     "component_id": "RA2.EQP.BOXES",
+     "faces": 468,
+     "instance": null,
+     "kind": "production_detail",
+     "matrix_world": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "max": [
+      1.25,
+      -2.865999937057495,
+      2.380000114440918
+     ],
+     "min": [
+      -1.25,
+      -2.9000000953674316,
+      -2.380000114440918
+     ],
+     "parent": null,
+     "type": "MESH",
+     "vertices": 432
+    },
+    "Prod_RA2_EQP_Trays": {
+     "centroid": [
+      0.04444444510671827,
+      -2.8883333603541055,
+      0.39338061213493347
+     ],
+     "component_id": "RA2.EQP.TRAYS",
+     "faces": 702,
+     "instance": null,
+     "kind": "production_detail",
+     "matrix_world": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "max": [
+      1.2599999904632568,
+      -2.871999979019165,
+      2.4000000953674316
+     ],
+     "min": [
+      -1.2599999904632568,
+      -2.9000000953674316,
+      -2.4000000953674316
+     ],
+     "parent": null,
+     "type": "MESH",
+     "vertices": 648
+    }
+   }
+  }
+ },
+ "git_dirty": false,
+ "git_revision": "1a0db770910828ad4942533d5e4cd7ffeade3a3d",
+ "inputs_hash": "3f4ea25ce452d946",
+ "module": "WF-RING-A",
+ "note": "A publication makes the pack eligible for integration; it is not an owner acceptance and changes no maturity or canon.",
+ "pack": "ra2_equip",
+ "pack_version": 1,
+ "published_utc": "2026-10-22T15:13:22Z",
+ "spec_sha256": "4bd7bb763a25ad8034f7c036f6809d6d46e626629b30bb5b8043c63a7f3a2cf8",
+ "version": 1
+}
