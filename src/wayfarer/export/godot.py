@@ -398,7 +398,8 @@ def mechanism_frames(s, closures=False):
     return frames, rotors, drums, plates, members
 
 
-def export(root, preset='COAST'):
+def export(root, preset='COAST', out=None, identity=None, draco=False):
+    """out/identity default to the Godot package (runtime-export); web_export.py passes its own and draco for the browser copy."""
     s, _, spec_text, source_text = load(root)
     bpy.ops.wm.open_mainfile(filepath=str(root / 'assets/wayfarer' / (s['vehicle']['asset'] + '.blend')))
     # FUT-003: the runtime shows the S004 look ([look]); the saved assets keep their review colours.
@@ -564,12 +565,13 @@ def export(root, preset='COAST'):
         obj.matrix_world = matrix
         obj['wf_runtime_id'] = name
         records.append(record)
-    out = root / 'godot/generated'
+    out = Path(out) if out else root / 'godot/generated'
     out.mkdir(parents=True, exist_ok=True)
     filename = 'wayfarer.glb' if preset == 'COAST' else 'wayfarer_docked.glb'
     bpy.ops.export_scene.gltf(filepath=str(out / filename), export_format='GLB',
         use_active_scene=True, export_animations=False, export_extras=True,
-        export_cameras=False, export_lights=False, export_yup=True)
+        export_cameras=False, export_lights=False, export_yup=True,
+        export_draco_mesh_compression_enable=draco)
     sim_rig.write(root, out / 'wf_sim_rig.json')
     rig = json.loads((out / 'wf_sim_rig.json').read_text())
     packaged = [filename, 'wf_sim_rig.json']
@@ -595,7 +597,7 @@ def export(root, preset='COAST'):
         'coordinates': {'unit': 'm', 'from_blender': '(x,z,-y)', 'bow': '+X', 'dorsal': '+Y'},
         'bounds_runtime_m': {'min': list(low), 'max': list(high), 'size': list(high-low)},
         'triangles': triangles, 'groups': sorted(groups), 'excluded': dict(excluded),
-        'nodes': records, 'identity': json.loads((root / 'build_identity.json').read_text()),
+        'nodes': records, 'identity': json.loads(Path(identity or root / 'build_identity.json').read_text()),
         'production': dict(production_detail.standard(s), nodes=sum(r.get('layer') == 'PRODUCTION' for r in records)),
         'look': {'name': 'S004', 'status': s['look']['status'], 'source_ref': s['look']['evidence_ref'], 'materials': dict(sorted(looked.items())),
                  'lights': sum('light' in r for r in records),
@@ -654,5 +656,8 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--root', type=Path, required=True)
     parser.add_argument('--preset', choices=['COAST', 'DOCKED'], default='COAST')
+    parser.add_argument('--out', type=Path, help='package directory (default <root>/godot/generated)')
+    parser.add_argument('--identity', type=Path, help='build identity JSON (default <root>/build_identity.json)')
+    parser.add_argument('--draco', action='store_true', help='Draco mesh compression (browser copy only; Godot reads the plain GLB)')
     args = parser.parse_args(sys.argv[sys.argv.index('--') + 1:])
-    export(args.root.resolve(), args.preset)
+    export(args.root.resolve(), args.preset, args.out, args.identity, args.draco)

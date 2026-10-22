@@ -130,6 +130,10 @@ def main(argv=None):
                                                                   'whole-ship inspection added); a plain runtime-export restores canon')
     rc_parser = commands.add_parser('runtime-check', help='run Godot checks against the published package if its inputs are current')
     rc_parser.add_argument('names', nargs='*', help="check names (runtime_export.CHECKS), 'auto' for the change selection; default all")
+    web_parser = commands.add_parser('web', help='WEB-001: export the saved COAST vehicle as a Draco GLB into the static browser explorer')
+    web_parser.add_argument('--out', type=Path, help='site directory (default runs/<stamp>-web/site)')
+    web_parser.add_argument('--pipeline-run', type=Path, help='the PASS pipeline run that built the assets; recorded in build.json')
+    web_parser.add_argument('--no-draco', action='store_true', help='plain GLB (about 5x larger)')
     prune_parser = commands.add_parser('prune', help='list run directories AGENTS.md step 6 would allow deleting (sizes); deletes nothing '
                                                      'unless --delete names approved candidates')
     prune_parser.add_argument('--delete', nargs='+', metavar='RUN', help='delete these listed candidates (only after the user approved them)')
@@ -214,6 +218,11 @@ def main(argv=None):
         elif args.action == 'runtime-export':
             import runtime_export
             result = runtime_export.run(root, eye_layout=args.eye_layout)
+            emit(result)
+            return {'PASS': 0, 'BUSY': 75}.get(result['result'], 1)
+        elif args.action == 'web':
+            import web_export
+            result = web_export.run(root, args.out, args.pipeline_run, draco=not args.no_draco)
             emit(result)
             return {'PASS': 0, 'BUSY': 75}.get(result['result'], 1)
         elif args.action == 'runtime-check':

@@ -143,6 +143,8 @@ python3 tools/workflow.py sync commit references/drive_capture_<date> --note "<w
 python3 tools/workflow.py deps [status|fetch|install] [--optional]   # character dependencies: assets/external/manifest.toml, cache outside the repo
 python3 tools/workflow.py characters [--only <ids>] [--no-fit] [--stages build rig export fit]   # MPFB humans: build, rig review, glTF + Godot check, in-ship fit (docs/CHARACTERS.md, ~2 min)
 python3 tools/workflow.py runtime-check [names|auto]  # Godot checks in godot/ against the published package, refused (STALE) unless its inputs and tool versions match build_identity.json
+python3 tools/workflow.py web [--pipeline-run runs/<quick run>] [--out DIR]   # WEB-001 browser explorer from the saved assets: Draco COAST GLB + static Three.js site (web/README.md, ~1 min)
+python3 tools/web_check.py <site> --out <dir>      # headless Chrome check of that site under /ignition-wayfarer/: framing, orbit, zoom, pan, reset, presets, picking, phone touch
 python3 tools/workflow.py prune [--delete RUN...]     # AGENTS.md step 6 candidates in runs/ with sizes; deletes only named, approved candidates
 python3 tools/workflow.py eva [--no-renders] [--no-route] [--only <stages>]   # EVA suit: build on the saved pair, coverage/envelope/hold checks, access-pose hulls, SP-11/12/13 study (eva_access.py, then measured and rendered in the vehicle), EVA-003 comparison (eva_sp11.py + validation/eva_sp11_study.py, rigs posed in the chambers), renders, glTF, route (docs/EVA.md, ~9 min; --only <stages> reruns part of it)
 /snap/bin/blender -b --python src/wayfarer/studies/eva3_district.py -- --out runs/<stamp>-eva3-district   # EVA-003 / SERV-003 integrated forward district (references/p1_eva_district.json, EVA3_DISTRICT_MAP.svg)

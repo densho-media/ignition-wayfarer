@@ -471,6 +471,8 @@ all 54 engineering gates currently HOLD. No detailed robot art before the L2 lay
 - [ ] **P01 — FUT-006 PlayCanvas / Densho Expo. PARKED, separate scope decision.** If selected, resolve hosting, IP/public-source
   exposure, embed/CSP permissions and browser performance/accessibility before a prototype. Reuse the GLB pipeline and stable IDs;
   keep Godot. Acceptance would include publication, desktop/mobile interaction, iframe/new-tab fallback, credits and update procedure.
+- [ ] **P05 — WEB-001 browser explorer on GitHub Pages.** Every passing `main` push deploys (web/README.md). Left: confirm
+  https://densho-media.github.io/ignition-wayfarer/ on a real phone and a second desktop (Safari/Firefox unverified).
 - [ ] **P03 — Optional compliant-tether stress study. PARKED, owner-led.** Do only when OD-038/required interaction needs it; do not
   confuse a timestep-dependent impulse diagnostic with rated human loads. Required operational tether releases remain in D/K.
 - [ ] **P04 — Full-gate policy relaxation. PARKED, optional process change.** Retain the existing full pre-commit geometry gate. Consider
