@@ -247,6 +247,7 @@ ACCEPTANCE CRITERIA:     validate PASS; only expected prefixes in the diff; prev
   - **RA1 in the package.** Same nodes, names, `L4_VISUAL_ACCEPTED` maturity and runtime frame (`WF.ROTOR.1`, so it still turns with ring A). Only its lineage shortened (`Assembly_HABITAT`), so its node IDs changed. Godot binds through the manifest.
   - **Radiator instancing.** Each RAD.FRAME family is 3 nodes sharing 1 GLB mesh.
   - **RA1 stills.** `m7_section.py --views ra1_aisle` before and after are pixel-identical, with the layer shown and hidden.
+- **Rebuild regression** (`tests/verify_rebuild.py`, 2,199 s): all 10 steps PASS on a disposable copy of 27 assets. They cover the full rebuild, preserved ART content, the targeted radiator, hull and Garden builds (unrelated assets byte-identical), the detail-only build (every other asset byte-identical), a relocated project loading every nested detail link, and the retirement rules.
 - **Timing** (measured on an idle machine unless marked):
 
   | Operation | Before | After |
