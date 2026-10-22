@@ -1,8 +1,8 @@
 # Wayfarer web explorer (WEB-001)
 
 A static browser viewer of the generated G.U.C. WAYFARER 001 (IGNITION), built by GitHub Actions from a clean
-checkout and intended for GitHub Pages at <https://densho-media.github.io/ignition-wayfarer/>. It is a REP_PROXY
-engineering view, not the Godot experience.
+checkout and published on GitHub Pages at <https://densho-media.github.io/ignition-wayfarer/>. It works with a mouse
+on desktop and with touch on phones. It is a REP_PROXY engineering view, not the Godot experience.
 
 ## How it is built
 
@@ -67,11 +67,10 @@ To look at it yourself, serve a directory that contains the site as `ignition-wa
   `id-token: write` and needs both other jobs to pass, so a failed test, geometry diff, export or browser check never
   deploys. `main` is the approved public version: every push to it updates the site. A feature-branch push never does.
 
-## GitHub Pages setting (owner, once)
+## GitHub Pages setting
 
-Settings → Pages → Build and deployment → Source: **GitHub Actions**. Until then the deploy job fails on `main`
-and the site stays unpublished. After that, every `main` push that passes deploys. The deploy job prints the URL.
-Settings → Pages → Unpublish takes the site down.
+Settings → Pages → Build and deployment → Source: **GitHub Actions** (set 2026-10-22). Nothing else is configured:
+no variables, secrets or manual approval. Settings → Pages → Unpublish takes the site down.
 
 ## Results
 
@@ -87,15 +86,19 @@ Settings → Pages → Unpublish takes the site down.
   - On a 390 × 844 phone emulation, the ship is framed, one-finger orbit and pinch zoom work, and there is no horizontal overflow.
   - Every request is served from `/ignition-wayfarer/`; there are no script errors.
 
-**GitHub Actions, 2026-10-22, run 39736387702 on `7cd4c58`.** ubuntu-24.04 runner, Blender tarball from the cache:
-- Unit tests: PASS in 68 s.
-- Blender install: 32 s. Pipeline: 50 s; it passed with geometry diff PASS, which `web` requires before it builds.
-- Export and site: 46 s.
-- Browser check: 20/20 PASS on Chrome 155 (SwiftShader). The model loads in 25 s.
-- The whole check takes 12 min, because software rendering on the runner is slow. That is CI time, not visitor load time.
-- Build job: 14.5 min in total. Artifacts: `wayfarer-web-site` is 3.3 MB zipped and `wayfarer-web-check` is 1.2 MB.
+**GitHub Actions, 2026-10-22, run 39742779848 on `main` at `2a80fc6`, the first deployment.** ubuntu-24.04 runner,
+Blender tarball from the cache:
+- Unit tests: PASS in 66 s.
+- Blender install: 23 s. Pipeline: 33 s; it passed with geometry diff PASS, which `web` requires before it builds.
+- Export and site: 34 s.
+- Browser check: 20/20 PASS on Chrome (SwiftShader) in 3.8 min. Software rendering on the runner is slow; that is CI
+  time, not visitor load time.
+- Build job: 5.6 min; deploy: 9 s; the whole run took 6 min from push to live site.
 
 Each run's summary (visible when signed in) gives that run's timings and sizes; failed checks also appear as public annotations.
 
-**Not verified.** Real phones and tablets, Safari/iOS and Firefox, and frame rate on real GPUs. The check uses emulated touch
-in Chrome. The built-in Claude browser pane has WebGL disabled; the viewer then shows a clear message instead of the model.
+**Live site, 2026-10-22.** All files are served with HTTP 200 and `build.json` reports `2a80fc6`, not dirty, geometry diff 0.
+A headless load of the live URL frames the ship in 3.6 s. The owner confirmed the model on their desktop browser and their phone.
+
+**Not verified.** Tablets, a browser matrix (Safari/iOS, Firefox), and frame rate on real GPUs. The automated check uses
+emulated touch in Chrome. A browser without WebGL (such as the built-in Claude browser pane) shows a clear message instead of the model.

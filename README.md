@@ -38,6 +38,10 @@ one reproducible, AI-assisted production pipeline.
   (`references/baseline_*`), inspects clearances and interfaces, and renders previews.
 - Godot (`godot/`) loads the exported model for walkthroughs, flight timelines, crew physics
   and guided reviews.
+- GitHub Actions rebuilds the ship from a clean checkout on every push to `main` or a task branch
+  and checks a browser version of it. Each passing push to `main` publishes that version to the
+  **[web explorer](https://densho-media.github.io/ignition-wayfarer/)**, which runs on desktop
+  and phone browsers ([web/README.md](web/README.md)).
 - Geometry is proxy-level. Passing checks and previews are not engineering proof.
 
 ## Build and explore
@@ -73,6 +77,7 @@ The `.blend` files, renders, runs and Godot imports are generated and are not in
 | `tests/` | Unit tests for owner numbers and physical invariants, with their own synthetic fixtures |
 | `references/` | Current geometry baseline and generated validation reports |
 | `godot/` | Interactive scenes and scripts |
+| `web/`, `.github/workflows/` | Browser explorer and the workflow that builds, checks and publishes it |
 | `docs/` | [Model](docs/MODEL.md), [implementation](docs/IMPLEMENTATION.md) and subsystem notes |
 
 [AGENTS.md](AGENTS.md) describes the development loop that human and AI contributors follow.
