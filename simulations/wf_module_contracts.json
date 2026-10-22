@@ -1031,8 +1031,28 @@
      "parent": null
     }
    },
-   "assemblies": {},
-   "hash": "da352a0cd1b23bc9"
+   "assemblies": {
+    "RAD.FRAME": {
+     "anchor": "WF-THERMAL.RADIATOR.ORIGIN",
+     "asset": "WF_DETAIL_RAD_FRAME",
+     "envelope": [
+      [
+       -91.3,
+       0.0,
+       -1.7
+      ],
+      [
+       91.3,
+       30.5,
+       1.7
+      ]
+     ],
+     "host": "RADIATOR",
+     "pack": "rad_frame",
+     "scope": "pack"
+    }
+   },
+   "hash": "4fc3518e1d9fb7e4"
   },
   "WF-UTILITY": {
    "anchors": {
