@@ -2,8 +2,8 @@
 OWN-M5-LETTER, 98!A119, Art Style Bible Spacecraft!A17, 2026-10-18): on-hull working label "GU WAYFARER 001" (GU, Y12-310, is the
 Y155 institution; no G.U.C. on the hull), two monochrome off-white / charcoal treatments with no crest, and one annotated registry
 proposal "GU-WF-001" that is strictly an ARTISTIC PROTOTYPE graphic test string, not an issued registry. Y155 LOOK DIRECTION /
-REGISTRY NONCANON: nothing enters the vehicle, the exterior stays proxy grey with the M4 functional marks (15!H120). The legacy
-project title "G.U.C. Wayfarer 001" is not changed here (pending the owner's naming review).
+REGISTRY NONCANON: nothing enters the vehicle, the exterior stays proxy grey with the M4 functional marks (15!H120). The project
+title is "G.U. WAYFARER 001" (the Y155 Great Union; the Great Union of Concord, G.U.C., is founded in Y310 and never names this ship).
 
 Function: let the owner compare how much identification the hull can carry before it stops reading as a working machine. Fixed: the
 built hull (aft casing, forward collar), its seam lines (long seams every 30 deg from 15 deg), the blade roots at 30/150/270 deg, the

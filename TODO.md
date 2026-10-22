@@ -67,8 +67,8 @@ close-up, regression check, MODEL/TODO and Model Status update.
       preferred studies. No HGA tool rating, no cradle build.
     - **BODY-C3 (15!A224):** the preferred L2 storage study. Deficits -1,752 / -4,294 m3 kept. No WF_STORAGE install, no wet-mass
       rebalance.
-    - **Lettering (15!A225):** L1 GU WAYFARER 001 preferred, L2 the comparator. The "G.U.C. Wayfarer 001" project alias stays in file
-      names until a deliberate batch rename.
+    - **Lettering (15!A225):** L1 GU WAYFARER 001 preferred, L2 the comparator. The project title is "G.U. WAYFARER 001" (the
+      Y155 Great Union; the G.U.C. is founded in Y310, so it never names this ship).
 - [ ] **S01 — Whole-body internal architecture (BODY-001). HOLD: fuel quantity and WF_STORAGE release (15!A218 H).** Study done 2026-10-18
   (`studies/body_architecture.py`, [references/BODY_ARCHITECTURE_2026-10-18.md](references/BODY_ARCHITECTURE_2026-10-18.md), renders
   `runs/20261018T1200Z-body-arch`): occupancy map, three packagings (A compact 60 m 1,744 m³, B annulus 5,241 m³, C keel-lane tank

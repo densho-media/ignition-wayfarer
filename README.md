@@ -1,11 +1,11 @@
-# G.U.C. Wayfarer 001
+# G.U. Wayfarer 001
 
 A parametric, physics-first spacecraft from the **IGNITION** universe, built procedurally in Blender
 and explored interactively in Godot. A **[Densho](https://densho.media)** production.
 
 | | |
 | --- | --- |
-| Asset | G.U.C. WAYFARER 001 |
+| Asset | G.U. WAYFARER 001 |
 | Universe | IGNITION |
 | Canonical identity | `wayfarer.ignition.densho` |
 | Publisher | Densho — https://densho.media |
@@ -94,4 +94,4 @@ The `.blend` files, renders, runs and Godot imports are generated and are not in
 - **Code** (`src/`, `tools/`, `tests/`, `godot/` scripts and scenes, `.claude/`): [Apache-2.0](LICENSE).
 - **IGNITION content** (lore, names, story, ship design, parameters and data, documentation,
   generated models and images): © Densho, all rights reserved. See [NOTICE](NOTICE).
-- "IGNITION", "Wayfarer", "G.U.C." and "Densho" are not licensed for reuse.
+- "IGNITION", "Wayfarer", "G.U.", "G.U.C." and "Densho" are not licensed for reuse.

@@ -146,7 +146,7 @@ def run(root, out=None, pipeline_run=None, draco=True):
         # The pick labels: node -> component, kind and statuses (the manifest's records without placements and lights).
         nodes = {r['node']: [r['component_id'], r['kind'], r['canon_status'], r['geometry_status']] for r in manifest['nodes']}
         (site / 'model/nodes.json').write_text(json.dumps(nodes, separators=(',', ':')))
-        build = {'contract': 'WF_WEB_EXPLORER', 'version': 1, 'vessel': 'G.U.C. WAYFARER 001', 'project': 'IGNITION',
+        build = {'contract': 'WF_WEB_EXPLORER', 'version': 1, 'vessel': 'G.U. WAYFARER 001', 'project': 'IGNITION',
                  'git_revision': revision, 'git_dirty': dirty, 'built_utc': pipeline.utc_now(),
                  'representation': manifest['representation'], 'preset': manifest['preset'], 'blender': manifest['blender'],
                  'three': THREE['version'], 'draco': draco, 'spec_hash': manifest['spec_hash'], 'source_map_hash': manifest['source_map_hash'],

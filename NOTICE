@@ -1,4 +1,4 @@
-G.U.C. Wayfarer 001 — IGNITION universe — Densho (https://densho.media)
+G.U. Wayfarer 001 — IGNITION universe — Densho (https://densho.media)
 
 This repository contains two kinds of material under different terms.
 
@@ -8,7 +8,7 @@ This repository contains two kinds of material under different terms.
 
 2. IGNITION content: Copyright (c) 2026 Densho. All rights reserved.
    This covers the IGNITION universe and its lore, names, characters, story, factions and
-   terminology; the design of G.U.C. Wayfarer 001; the parameter and scenario data in data/ and
+   terminology; the design of G.U. Wayfarer 001; the parameter and scenario data in data/ and
    simulations/; the documentation (README.md, AGENTS.md, CLAUDE.md, TODO.md, docs/); the
    reports and baselines in references/; the shot definitions in shots/; and every model, image,
    render or export generated from them.
@@ -18,7 +18,7 @@ This repository contains two kinds of material under different terms.
    generated from it, publish derivative works, or use it commercially without written
    permission from Densho.
 
-"IGNITION", "Wayfarer", "G.U.C." and "Densho" are names of Densho and are not licensed under
+"IGNITION", "Wayfarer", "G.U.", "G.U.C." and "Densho" are names of Densho and are not licensed under
 the Apache License (see its section 6).
 
 Third-party components are not part of this repository. They are fetched at build time under

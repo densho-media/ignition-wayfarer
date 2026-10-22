@@ -1,6 +1,6 @@
 # Wayfarer web explorer (WEB-001)
 
-A static browser viewer of the generated G.U.C. WAYFARER 001 (IGNITION), built by GitHub Actions from a clean
+A static browser viewer of the generated G.U. WAYFARER 001 (IGNITION), built by GitHub Actions from a clean
 checkout and published on GitHub Pages at <https://densho-media.github.io/ignition-wayfarer/>. It works with a mouse
 on desktop and with touch on phones. It is a REP_PROXY engineering view, not the Godot experience.
 
