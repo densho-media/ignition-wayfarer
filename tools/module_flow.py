@@ -106,6 +106,17 @@ def preview(root, ident, views=None, quality='draft', run_dir=None, lock=None):
     views = ['side', *[v for v in views if v != 'side']]
     run_dir = run_dir or root/'runs'/f'{pipeline.stamp()}-module-{ident}'
     out = run_dir/'previews'
+    from spec import load
+    s = load(root)[0]; anc = modules.anchors(s)
+    sector = sorted({anc[t['anchor']]['function'] for t in asm.values() if anc[t['anchor']]['family'] == 'ring_sector'})
+    inner = [v for v in views if v in ('plan', 'section', 'cutaway', 'overhead')]
+    if sector and inner:
+        # A ring-sector pack: its sector and interior with the detail linked, in the sector frame (presentation/interior_preview.py).
+        code, secs = blender_step(run_dir, 'interior-preview', root/'src/wayfarer/presentation/interior_preview.py', '--root', root,
+                                  '--functions', *sector, '--views', *inner, '--details', '--size', '768', '--out-dir', out, lock=lock)
+        if code:
+            return dict(result='FAIL', views=inner, log=log_tail(run_dir, 'interior-preview'), run_dir=str(run_dir))
+        views = [v for v in views if v not in inner]
     code, secs = blender_step(run_dir, 'preview', root/'src/wayfarer/presentation/preview.py', '--root', root, '--views', *views,
                               '--quality', quality, '--out-dir', out, lock=lock)
     return dict(result='PASS' if code == 0 else 'FAIL', views=views, seconds=secs,
