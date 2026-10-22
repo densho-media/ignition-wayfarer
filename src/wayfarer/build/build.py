@@ -12,6 +12,8 @@ from recipes import build_component, build_subsystem, entry_guides, human_refere
 from rig import rig
 import sim_rig
 import flight_timeline
+import modules
+import detail
 
 COMPONENTS=['NOZZLE','RADIATOR','RING_SECTOR','INTERIOR_HABITATION','INTERIOR_WORK','INTERIOR_GARDEN']
 SUBSYSTEMS=['STRUCTURE','HABITAT','STORAGE','SHIELDING','SERVICE','POWER_STORAGE','ROTOR_INTERFACE','CREW_TRANSFER','EYE','FORWARD_SHIELD','DEBUG_MAGNETICS','DEBUG_SEPARATRICES','DEBUG_OPTICS','PROPULSION','THERMAL','HULL','DRONES']
@@ -80,13 +82,33 @@ def build_characters(root,s,spec_text,source_text):
     coll,c=begin(path,name);characters(c,s);save(path,coll,spec_text,source_text)
 
 
-def build(root=ROOT, target='all'):
+def detail_targets(s):
+    """{DETAIL_<assembly> target: assembly} of every registered detail pack assembly (docs/MODULES.md)."""
+    return {modules.target(a):a for a in modules.assemblies(s['detail_packs'])}
+
+
+def build_detail(root,assets,s,assembly,spec_text,source_text,rebind=False):
+    """One detail asset, assets/wayfarer/detail/WF_DETAIL_<assembly>.blend: the assembly in its anchor frame plus its contract stamps; hand-authored
+    meshes in its ART_ collection are kept and adopted (detail.adopt)."""
+    name=modules.asset_name(assembly);path=assets/modules.ASSET_DIR/f'{name}.blend'
+    coll,c=begin(path,name);detail.build(c,s,assembly);detail.stamp(coll,s,root,assembly)
+    authored=detail.adopt(name,s,root,assembly,rebind)
+    save(path,coll,spec_text,source_text)
+    print('WF_DETAIL',name,len(c.objects),'generated',len(authored),'authored',flush=True)
+
+
+def build(root=ROOT, target='all', rebind=False):
     s,_,spec_text,source_text=load(root)
     assets=root/'assets/wayfarer'
-    valid=['all','vehicle',*COMPONENTS,*SUBSYSTEMS,'CHARACTERS']
+    details=detail_targets(s)
+    valid=['all','vehicle',*COMPONENTS,*SUBSYSTEMS,'CHARACTERS',*details]
     if target not in valid:raise ValueError(f'target must be one of {valid}')
     if target=='CHARACTERS':
         build_characters(root,s,spec_text,source_text);return
+    if target in details:
+        # A detail-only change rewrites its own file: the host links it, and the vehicle sees it through that nested link.
+        build_detail(root,assets,s,details[target],spec_text,source_text,rebind)
+        modules.write(s,root);return
     if set(s['interior']['components'].values())!={c for c in COMPONENTS if c.startswith('INTERIOR_')}:raise ValueError('interior.components must match the INTERIOR_ components')
     if target in COMPONENTS:
         dependencies={'NOZZLE':['PROPULSION'],'RADIATOR':['THERMAL'],'RING_SECTOR':['HABITAT']}
@@ -97,15 +119,22 @@ def build(root=ROOT, target='all'):
     elif target in DEBUG_FAMILY:parts=[];systems=[target,'PROPULSION']
     elif target in SUBSYSTEMS:parts=[];systems=[target]
     else:parts=[];systems=[]
+    # Detail assets first: their hosts link them. A host rebuild also rebuilds its own details (they read the host's pure geometry).
+    hosts=set(parts)|set(systems)
+    for a in details.values():
+        if modules.anchor_host(modules.assemblies(s['detail_packs'])[a]['anchor']) in hosts:
+            build_detail(root,assets,s,a,spec_text,source_text)
     for name in parts:
         path=assets/f'components/WF_{name}.blend'
         coll,c=begin(path,f'WF_{name}')
         build_component(name,c,s)
+        detail.attach(c,s,assets,name,root)
         save(path,coll,spec_text,source_text)
     for name in systems:
         path=assets/f'subsystems/WF_{name}.blend'
         coll,c=begin(path,f'WF_{name}')
         build_subsystem(name,c,s,assets)
+        detail.attach(c,s,assets,name,root)
         save(path,coll,spec_text,source_text)
     # One vehicle file: every non-debug subsystem is linked once; configurations are presets posed on its linked controls.
     asset_name=s['vehicle']['asset']
@@ -135,6 +164,7 @@ def build(root=ROOT, target='all'):
     if target in ('all','SERVICE'):build_characters(root,s,spec_text,source_text)
     # The rig contract travels with the vehicle so fixtures stay self-consistent.
     print('WF_SIM_RIG',sim_rig.write(root),flush=True)
+    print('WF_MODULE_CONTRACTS',modules.write(s,root),flush=True)
     print('WF_FLIGHT_TIMELINE',flight_timeline.write(root),flush=True)
 
 
@@ -142,5 +172,6 @@ if __name__=='__main__':
     parser=argparse.ArgumentParser()
     parser.add_argument('--root',type=Path,default=ROOT)
     parser.add_argument('--target',default='all')
+    parser.add_argument('--rebind',action='store_true',help='DETAIL_* target only: accept hand-authored detail reviewed against a changed anchor')
     args=parser.parse_args(sys.argv[sys.argv.index('--')+1:] if '--' in sys.argv else [])
-    build(args.root.resolve(),args.target)
+    build(args.root.resolve(),args.target,args.rebind)

@@ -1,7 +1,7 @@
 {
   "result": "PASS",
   "blender": "5.2.2 LTS",
-  "spec_hash": "7144c42893522bc04cd7eb758c6961e7b71a06342b60987fcd811a96ea5d49f8",
+  "spec_hash": "4bd7bb763a25ad8034f7c036f6809d6d46e626629b30bb5b8043c63a7f3a2cf8",
   "source_map_hash": "99cd812784b9ce8dc35eff1ed107627617c8e72fa9de55fedee6268f939f0ee1",
   "configurations": {
     "COAST": {
@@ -1797,6 +1797,19 @@
     "proxies": 9,
     "center_of_mass_placed": false
   },
+  "detail": {
+    "WF_DETAIL_M7_RA1.blend": {
+      "assembly": "M7.RA1",
+      "objects": 4,
+      "authored": 0,
+      "enabled": true
+    },
+    "WF_HABITAT.blend": {
+      "instances": [
+        "M7.RA1"
+      ]
+    }
+  },
   "interiors": {
     "components": {
       "WF_INTERIOR_GARDEN.blend": {
@@ -3560,6 +3573,16 @@
       ],
       "direct_links": []
     },
+    "detail/WF_DETAIL_M7_RA1.blend": {
+      "generated_objects": 4,
+      "ids": [
+        "M7.RA1.FASTENERS",
+        "M7.RA1.HOUSINGS",
+        "M7.RA1.PANELS",
+        "M7.RA1.TRAYS"
+      ],
+      "direct_links": []
+    },
     "subsystems/WF_CREW_TRANSFER.blend": {
       "generated_objects": 195,
       "ids": [
@@ -4593,7 +4616,7 @@
       "direct_links": []
     },
     "subsystems/WF_HABITAT.blend": {
-      "generated_objects": 515,
+      "generated_objects": 512,
       "ids": [
         "Crew_Tube_1_1",
         "Crew_Tube_1_1_Arrest_Rail",
@@ -5018,10 +5041,6 @@
         "IF_VESTIBULE_2_SEAL_AFT_PRIMARY",
         "IF_VESTIBULE_2_SEAL_FWD",
         "IF_VESTIBULE_2_SEAL_FWD_PRIMARY",
-        "M7.RA1.FASTENERS",
-        "M7.RA1.HOUSINGS",
-        "M7.RA1.PANELS",
-        "M7.RA1.TRAYS",
         "M7.SPK.FASTENERS",
         "M7.SPK.FRAMES",
         "M7.SPK.PANELS",
@@ -5074,6 +5093,7 @@
         "WF.CREW.2.VESTIBULE",
         "WF.CREW.2.VESTIBULE_GUARD_AFT",
         "WF.CREW.2.VESTIBULE_GUARD_FWD",
+        "WF.DETAIL.M7.RA1",
         "WF.HUB.1.DATA_Rotor",
         "WF.HUB.1.Drum",
         "WF.HUB.1.EMERGENCY_POWER_Rotor",
@@ -5115,7 +5135,8 @@
         "components/WF_INTERIOR_GARDEN.blend",
         "components/WF_INTERIOR_HABITATION.blend",
         "components/WF_INTERIOR_WORK.blend",
-        "components/WF_RING_SECTOR.blend"
+        "components/WF_RING_SECTOR.blend",
+        "detail/WF_DETAIL_M7_RA1.blend"
       ]
     },
     "subsystems/WF_HULL.blend": {

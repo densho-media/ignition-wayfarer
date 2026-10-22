@@ -3682,8 +3682,9 @@ enabled = true
 # their PROTOTYPE labels.
 maturity = "L4_VISUAL_ACCEPTED"
 representation = "REP_HERO"
-# Assemblies built (stable IDs, production_detail.ASSEMBLIES); the slices add them entrance-first (15!A86).
-assemblies = ["M7.EXT.PORT", "M7.ENT", "M7.TRK", "M7.XFR", "M7.SPK", "M7.RA1"]
+# Assemblies built (stable IDs, production_detail.ASSEMBLIES); the slices add them entrance-first (15!A86). M7.RA1 is the detail pack
+# data/detail/m7_ra1.toml (docs/MODULES.md): same scope, switch and maturity, its own asset and parameters.
+assemblies = ["M7.EXT.PORT", "M7.ENT", "M7.TRK", "M7.XFR", "M7.SPK"]
 
 # M7.EXT.PORT (slice 1): flush service covers beside the primary port in the accepted M4 grammar (ochre, 15!A202), each with its
 # fasteners and stencil, and the port identification. Offsets (axial, tangential arc) from the port axis on the hull, off the port's hull
@@ -3734,20 +3735,6 @@ frame_pitch_m = 1.50
 frame_width_m = 0.05
 frame_depth_m = 0.030
 end_inset_m = 0.30
-
-# M7.RA1 (slice 4): ring A sector 1, the overhead. Panels in the fit-out frame bays across span_z_m, off every overhead item by margin_m,
-# off the hatch opening (plus hatch_margin_m) and the landing well's column; nothing below overhead_floor_y_m (the overhead is at -2.90 m).
-[production.sector]
-item_floor_y_m = -2.55
-span_z_m = 2.45
-margin_m = 0.04
-hatch_margin_m = 0.10
-panel_min_m = 0.12
-panel_max_m = 0.62
-housing_depth_m = 0.035
-overhead_floor_y_m = -2.85
-# items whose top is below touch_y_m reach the overhead and are kept off; the hatch leaf and its rails hang 0.09-0.11 m clear below
-touch_y_m = -2.86
 
 # Production materials, [r, g, b, roughness, metallic] (Blender linear), by zone treatment over the surface classes (docs/SURFACE_BRIEF.md:
 # quiet greys and off-whites, saturated colour only for wayfinding, safety and service lines, M4 ochre for service covers 15!A202, polish

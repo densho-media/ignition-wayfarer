@@ -55,6 +55,7 @@ the selected tests. The quick pipeline uses the same selection.
 | What changed | Check while working |
 | --- | --- |
 | Docs, TODO, `docs/MODEL.md` | nothing |
+| A detail pack (`data/detail/<pack>.toml`, `src/wayfarer/detail/pack_<pack>.py`) | `module validate <pack>`, `module build <pack>` (`--integrate` for a new pack), `pipeline --quick --target auto --expect Prod_ Detail_ WF_DETAIL`; `module publish <pack>` when done (docs/MODULES.md) |
 | A generator in `src/wayfarer/components/` | `pipeline --quick --target auto --expect <prefixes>`; no unit tests (none import Blender code); add `--inspect auto` when it moves a clearance, pressure boundary, mechanism or interface |
 | A pure module `src/wayfarer/<m>.py` | `pipeline --quick` (selects its tests and its consumers' tests), or `checks --run` and its fit screen first |
 | Values in `data/wayfarer_3d.toml` | `pipeline --quick` (tests of the modules naming the changed keys, plus spec and owner targets; a full build); `--inspect auto` for interfaces |
@@ -72,6 +73,13 @@ finding doesn't become a test. Fit screens of PROTOTYPE parts run on demand
 (`python3 src/wayfarer/<module>.py` for `crew_transfer`, `drive_manifold`,
 `power_storage`, `rotor_interface`, `habitat_interior`, `human_entry`, `sector_whitebox`, `storeroom`, `survival_fit`, `drone_fleet`, `drone_demo`, `drone_routes`); `inspect` checks the
 built geometry. Passing checks and previews are not engineering proof.
+
+## Modular detail
+
+Production detail is added in detail packs, one writable owner per pack (docs/MODULES.md). `module show <pack>` names the owned files,
+the read-only dependencies and the anchor; a session edits only its owned files. `data/modules.toml`, the detail core
+`production_detail.py`, the anchors and the generators are integration changes. A published pack is eligible for integration, not
+owner-accepted; new detail stays `L4_VISUAL_CANDIDATE` until review.
 
 ## Development-flow controls
 

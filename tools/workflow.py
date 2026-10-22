@@ -190,6 +190,17 @@ def main(argv=None):
     checks_parser.add_argument('--run', action='store_true', help='run the selected unit tests')
     report_parser = commands.add_parser('report', help='compact scene report of a saved inspect JSON (no Blender)')
     report_parser.add_argument('--validation', type=Path, help='default references/p1_validation.json')
+    module_parser = commands.add_parser('module', help='modular detail (docs/MODULES.md): list, show, contracts, build, validate, preview, '
+                                                       'publish or rebind a module, detail pack or assembly')
+    module_parser.add_argument('op', choices=['list', 'show', 'contracts', 'build', 'validate', 'preview', 'publish', 'rebind'])
+    module_parser.add_argument('ident', nargs='?', help='a module ID (WF-RING-A), a pack name (m7_ra1) or an assembly ID (M7.RA1)')
+    module_parser.add_argument('--integrate', action='store_true', help='build: also rebuild the hosts that link the detail, and the vehicle')
+    module_parser.add_argument('--write', action='store_true', help='contracts: rewrite simulations/wf_module_contracts.json')
+    module_parser.add_argument('--no-blender', action='store_true', help='validate: the pure screens only')
+    module_parser.add_argument('--views', nargs='+', help="preview: views (default: the pack's declared views)")
+    module_parser.add_argument('--quality', default='draft', choices=['draft', 'material', 'review', 'look'])
+    assembly_parser = commands.add_parser('assembly', help='the assembled ship against the module publication records (docs/MODULES.md)')
+    assembly_parser.add_argument('op', choices=['validate'])
     accept_parser = commands.add_parser('accept', help='make a PASS full production run the new geometry baseline')
     accept_parser.add_argument('run_dir', type=Path)
     accept_parser.add_argument('name')
@@ -292,6 +303,17 @@ def main(argv=None):
             if args.run:
                 sys.stdout.flush()
                 return checks.run_tests(root, result['tests'])
+        elif args.action in ('module', 'assembly'):
+            import module_flow
+            if args.action == 'assembly':
+                result = module_flow.run(root, 'assembly-validate')
+            else:
+                if args.op not in ('list', 'contracts') and not args.ident:
+                    raise ValueError(f'module {args.op} needs a module, pack or assembly (module list)')
+                result = module_flow.run(root, args.op, args.ident, integrate=args.integrate, write=args.write, views=args.views,
+                                         quality=args.quality, blender=not args.no_blender)
+            emit(result)
+            return {'PASS': 0, 'BUSY': 75}.get(result['result'], 1)
         elif args.action in ('drift', 'capture', 'delta', 'sync'):
             import drive_sync
             if args.action == 'drift':

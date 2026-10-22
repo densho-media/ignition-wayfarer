@@ -30,6 +30,28 @@ REPRESENTATIONS = {
                      note='Highest detail: the M7 production layer (production_detail.py, kind production_detail, layer PRODUCTION) over the '
                           'unchanged proxy geometry of the assemblies [production] builds; elsewhere the ship stays REP_PROXY.'),
 }
+# Geometry-detail classes (docs/MODULES.md): how much an object depicts, orthogonal to the L0-L5 engineering maturity (S&E 48 WF-018..023)
+# and to the PROTOTYPE/WORKING/BASELINE/OPEN/HOLD statuses, which they never replace. Production detail carries its pack's class; the
+# engineering geometry is FUNCTIONAL where it is a mechanism, interface, closure, route or access part and BLOCKOUT otherwise.
+DETAIL_CLASSES = ('BLOCKOUT', 'FUNCTIONAL', 'PRODUCTION', 'HERO')
+FUNCTIONAL_KINDS = {'interface', 'rotor', 'rotor_mechanism', 'rotor_mount', 'rotor_hub_drum', 'ring_stop_lock', 'transfer_drum',
+                    'transfer_closure', 'hatch_hinge', 'crew_vestibule', 'crew_passage', 'crew_refuge', 'crew_bracket', 'vestibule_strut',
+                    'entry_fixture', 'entry_control', 'route_fitout', 'landing', 'aisle', 'berth', 'storeroom_fixture', 'storeroom_stowage',
+                    'eye_shutter_frame', 'crown_carriage_frame', 'crown_service_hatch', 'crown_launcher', 'deployed_lock', 'slide_stop',
+                    'expansion_joint', 'joint_shoe', 'datum_lug', 'root_saddle', 'thermal_mount', 'cryo_feed_line', 'seed_coil',
+                    'optical_channel', 'nozzle_yoke', 'hull_opening', 'service_fitting', 'refuge_wall'}
+
+
+def detail_class(record):
+    """The detail class of an exported object record (or object custom properties): its own, PRODUCTION for the production layer,
+    FUNCTIONAL by kind, else BLOCKOUT."""
+    if record.get('detail_class') in DETAIL_CLASSES:
+        return record['detail_class']
+    if record.get('layer') == 'PRODUCTION':
+        return 'PRODUCTION'
+    return 'FUNCTIONAL' if record.get('kind') in FUNCTIONAL_KINDS else 'BLOCKOUT'
+
+
 SHOT_REPRESENTATIONS = ('REP_STANDARD', 'REP_HOLOGRAM', 'REP_CUTAWAY')
 OPERATIONS = ('isolate', 'reveal', 'conceal', 'highlight', 'explode', 'recombine')
 # Object kinds never represented: saved-hidden or non-geometric helpers.

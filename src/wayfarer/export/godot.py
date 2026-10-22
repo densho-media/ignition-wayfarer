@@ -24,6 +24,7 @@ import flight_timeline
 import human_entry
 import look
 import production_detail
+import representation
 import drive_manifold
 import forward_shield
 import radiator_health
@@ -452,7 +453,8 @@ def export(root, preset='COAST', out=None, identity=None, draco=False):
         if obj.original in displays and display is None:
             excluded['timeline_display'] += 1
             return
-        if (obj.get('wf_owner') != OWNER or (kind in EXCLUDED and display is None) or obj.hide_render
+        # Hand-authored detail adopted into a detail asset (wf_adopted, docs/MODULES.md) exports like generated detail.
+        if ((obj.get('wf_owner') != OWNER and not obj.get('wf_adopted')) or (kind in EXCLUDED and display is None) or obj.hide_render
                 or (instance.parent and instance.parent.hide_render)):
             excluded[kind or 'unowned'] += 1
             return
@@ -519,6 +521,9 @@ def export(root, preset='COAST', out=None, identity=None, draco=False):
             'source_ref': obj.get('source_ref', 'prototype'),
             'canon_status': obj.get('canon_status', 'PROTOTYPE'),
             'geometry_status': obj.get('geometry_status', 'PROTOTYPE'),
+            # Geometry-detail class (docs/MODULES.md), orthogonal to maturity and canon status; production detail names its pack.
+            'detail_class': representation.detail_class({'detail_class': obj.get('detail_class'), 'layer': obj.get('layer'), 'kind': kind}),
+            **({'pack': obj['detail_pack']} if 'detail_pack' in obj else {}),
             **({'layer': 'CHARACTER', 'scene': obj.get('scene', '')} if obj.get('layer') == 'CHARACTER' else {}),
             # M7 (manifest v2): the presentation layer, representation, assembly and maturity of production-layer nodes.
             **({'layer': 'PRODUCTION', 'representation': obj.get('representation', 'REP_HERO'), 'assembly': obj.get('m7_assembly', ''),

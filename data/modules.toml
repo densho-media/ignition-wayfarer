@@ -1,0 +1,111 @@
+# Wayfarer module registry (docs/MODULES.md). The one authoritative table of subsystem modules: which build targets (existing assets,
+# never renamed) and source files each owns, what it depends on, which inspection groups guard its interfaces and which attachment
+# anchors it exposes. Integration-owned: a module session reads it and never edits it; detail packs are discovered from data/detail/*.toml,
+# so adding detail edits no shared file. Module IDs are new names; they are not the S&E 48 workflow-gate IDs (WF-001...).
+# Engineering values stay in data/wayfarer_3d.toml; nothing here is canon.
+schema_version = 1
+# Bump when an anchor's meaning (frame convention, host object) changes: every contract hash changes with it.
+interface_version = 1
+
+[module.WF-CORE]
+title = "Root assembly, ship frame, primary structure, shielding, the rig contract and the shared build and detail core"
+targets = ["vehicle", "STRUCTURE", "SHIELDING"]
+owns = ["data/wayfarer_3d.toml", "data/source_map.toml", "data/modules.toml", "src/wayfarer/spec.py", "src/wayfarer/layout.py",
+        "src/wayfarer/sim_rig.py", "src/wayfarer/representation.py", "src/wayfarer/modules.py", "src/wayfarer/production_detail.py",
+        "src/wayfarer/build/*.py", "src/wayfarer/components/recipes.py", "src/wayfarer/components/revision.py",
+        "src/wayfarer/components/production.py", "src/wayfarer/components/detail.py", "src/wayfarer/export/godot.py",
+        "src/wayfarer/validation/inspect.py", "simulations/wf_sim_rig.json", "simulations/wf_module_contracts.json"]
+depends = []
+inspect = []
+
+[module.WF-FWD]
+title = "Brow, forward shielding, Dust Lance and Aegis Crown"
+targets = ["FORWARD_SHIELD"]
+owns = ["src/wayfarer/forward_shield.py", "src/wayfarer/components/forward.py", "src/wayfarer/components/exterior.py",
+        "src/wayfarer/exterior_hardware.py", "src/wayfarer/validation/forward_inspect.py", "src/wayfarer/validation/m8_readback.py",
+        "src/wayfarer/presentation/m8_exterior.py"]
+depends = ["WF-CORE", "WF-EYE"]
+inspect = ["forward"]
+
+[module.WF-EYE]
+title = "EYE facets, sensors, mounts, windows and mechanisms"
+targets = ["EYE"]
+owns = ["src/wayfarer/eye_placement.py", "src/wayfarer/eye_release_evidence.py"]
+depends = ["WF-CORE"]
+inspect = ["forward"]
+
+[module.WF-SPINE]
+title = "Stationary body: hull and casing, service fittings, crew transfer trunk, rotor interface, power storage"
+targets = ["HULL", "SERVICE", "CREW_TRANSFER", "ROTOR_INTERFACE", "POWER_STORAGE"]
+owns = ["src/wayfarer/hull_geometry.py", "src/wayfarer/casing_panels.py", "src/wayfarer/human_entry.py", "src/wayfarer/crew_transfer.py",
+        "src/wayfarer/rotor_interface.py", "src/wayfarer/power_storage.py", "src/wayfarer/route_fitout.py",
+        "src/wayfarer/components/hull.py", "src/wayfarer/components/crew.py", "src/wayfarer/components/rotor.py",
+        "src/wayfarer/components/power.py", "src/wayfarer/components/fitout.py"]
+depends = ["WF-CORE"]
+inspect = ["hull", "route"]
+
+[module.WF-RING-A]
+title = "Ring A (rotor 1, the induction ring): rotating habitat, sectors, interiors and fittings"
+targets = ["HABITAT", "RING_SECTOR", "INTERIOR_HABITATION", "INTERIOR_WORK", "INTERIOR_GARDEN"]
+# HABITAT, the sector skin and the interior components are one engineering asset set shared by both rings (one HABITAT file, the
+# components instanced in every sector). Ring A holds their engineering ownership until HABITAT is split; ring B owns detail packs only.
+owns = ["src/wayfarer/habitat_ring.py", "src/wayfarer/habitat_interior.py", "src/wayfarer/sector_whitebox.py",
+        "src/wayfarer/components/interior.py"]
+shared_with = ["WF-RING-B"]
+ring = 1
+depends = ["WF-CORE", "WF-SPINE"]
+inspect = ["rotation", "route"]
+
+[module.WF-RING-B]
+title = "Ring B (rotor 2): rotating habitat, sectors, interiors and fittings"
+targets = []
+owns = []
+ring = 2
+depends = ["WF-CORE", "WF-SPINE", "WF-RING-A"]
+inspect = ["rotation", "route"]
+
+[module.WF-DRIVE]
+title = "Fusion core, lattice, optically gated magnetic manifold and the four nozzles"
+targets = ["PROPULSION", "NOZZLE", "DEBUG_MAGNETICS", "DEBUG_SEPARATRICES", "DEBUG_OPTICS"]
+owns = ["src/wayfarer/drive_manifold.py", "src/wayfarer/drive_hot_section.py", "src/wayfarer/first_ignition.py",
+        "src/wayfarer/components/drive.py", "src/wayfarer/presentation/drive_preview.py"]
+depends = ["WF-CORE"]
+inspect = ["drive"]
+
+[module.WF-THERMAL]
+title = "Three fixed radiator blades, their supports, coolant feeds and the thermal infrastructure"
+targets = ["THERMAL", "RADIATOR"]
+owns = ["src/wayfarer/thermal_geometry.py", "src/wayfarer/radiator_health.py", "src/wayfarer/radiator_net_area.py",
+        "src/wayfarer/thermal_budget.py", "src/wayfarer/thermal_loops.py", "src/wayfarer/warm_panels.py",
+        "src/wayfarer/validation/radiator_inspect.py"]
+depends = ["WF-CORE"]
+inspect = ["thermal"]
+
+[module.WF-FUEL]
+title = "Cryogenic storage and feed (the approved tank architecture is OPEN)"
+targets = ["STORAGE"]
+owns = []
+depends = ["WF-CORE"]
+inspect = ["drive"]
+
+[module.WF-UTILITY]
+title = "Maintenance drones, detachable equipment and the induction figures"
+targets = ["DRONES", "CHARACTERS"]
+owns = ["src/wayfarer/drone_fleet.py", "src/wayfarer/drone_demo.py", "src/wayfarer/drone_routes.py", "src/wayfarer/components/drones.py",
+        "src/wayfarer/components/figures.py", "src/wayfarer/characters.py"]
+depends = ["WF-CORE"]
+inspect = ["forward"]
+
+# Anchor families: stable attachment frames computed from the pure engineering formulas (src/wayfarer/modules.py anchors()), never read
+# back from a built file. Each expands to concrete anchor IDs, a host asset, the host object a detail instance is parented to (none: the
+# host collection's origin) and that object's local matrix. inspect checks the built host object against it.
+[anchor_family.ring_sector]
+# <ring module>.SECTOR.<ring>.<sector>: the sector frame (origin on the centreline at the deck, +X axial, +Y radially outward = down
+# in spin, +Z tangential), parented to Rotor_<ring>; habitat_ring.sectors.
+host = "HABITAT"
+note = "sector frame of habitat_ring.sectors; follows the ring's rotation"
+
+[anchor_family.asset_origin]
+# <module>.<TARGET>.ORIGIN: the origin of a module's own component or subsystem collection (identity). A detail file linked there is
+# instanced wherever the host is (a component linked per blade carries it on every blade).
+note = "host collection origin, identity frame"

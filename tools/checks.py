@@ -19,7 +19,10 @@ CODE_DIRS = ('src/wayfarer', 'tools', 'tests')
 # Modules whose change reaches every check: the spec loader and validation, the shared layout datums, the Blender build plumbing,
 # the rig contract and the inspection itself. (Direct imports alone would under-select these.)
 SHARED = {'spec', 'layout', 'common', 'recipes', 'build', 'rig', 'sim_rig', 'inspect', 'representation', 'geometry_fingerprint',
-          'compare_fingerprint'}
+          'compare_fingerprint', 'modules', 'detail'}
+# Detail packs (docs/MODULES.md): data/detail/<pack>.toml and src/wayfarer/detail/pack_<pack>.py select the pack's own detail targets, its
+# screens' tests and its declared inspection groups; the pack code is loaded by path, so the import graph alone would not see it.
+PACK_TESTS = ('test_production', 'test_modules')
 # Build targets by the generator modules each recipe enters (src/wayfarer/components/recipes.py); a module reaching more than one
 # target, or the dispatcher itself, needs the full build.
 TARGET_ENTRIES = {
@@ -143,6 +146,38 @@ def godot_checks(root, changed):
     return out
 
 
+def pack_name(rel):
+    """The detail pack a path belongs to (data/detail/<pack>.toml, src/wayfarer/detail/pack_<pack>.py), else None."""
+    p = Path(rel)
+    if p.parent == Path('data/detail') and p.suffix == '.toml':
+        return p.stem
+    if p.parent == Path('src/wayfarer/detail') and p.suffix == '.py' and p.stem.startswith('pack_'):
+        return p.stem[len('pack_'):]
+    return None
+
+
+def detail_selection(root, names, base='HEAD'):
+    """Build targets and inspection groups of the named packs: DETAIL_<assembly> for an edited pack, its anchor's host for a new pack or a
+    changed anchor (the host must link it); a pack removed from the tree selects the hosts it was on."""
+    sys.path.insert(0, str(root/'src/wayfarer'))
+    import modules
+    targets, groups = set(), set()
+    for name in sorted(names):
+        rel = f'{modules.PACK_DIR}/{name}.toml'
+        try:
+            old = tomllib.loads(subprocess.check_output(['git', '-C', str(root), 'show', f'{base}:{rel}'], text=True, stderr=subprocess.DEVNULL))
+        except subprocess.CalledProcessError:
+            old = None
+        new = tomllib.loads((root/rel).read_text()) if (root/rel).is_file() else None
+        cur = (new or old or {})
+        groups.update(cur.get('pack', {}).get('inspect', []))
+        for a, t in (cur.get('assembly') or {}).items():
+            was = (old or {}).get('assembly', {}).get(a)
+            moved = new is None or was is None or was.get('anchor') != t.get('anchor')
+            targets.add(modules.anchor_host(t['anchor']) if moved else modules.target(a))
+    return targets, groups & set(INSPECT_GROUPS)
+
+
 def plan(root=ROOT, paths=None, base='HEAD'):
     root = Path(root).resolve(); paths = changed_paths(root, base) if paths is None else list(paths)
     g = graph(root); reverse = defaultdict(set)
@@ -151,10 +186,15 @@ def plan(root=ROOT, paths=None, base='HEAD'):
             reverse[d].add(p)
     tests = sorted(p for p in g if p.parent == Path('tests') and p.name.startswith('test_'))
     widen = {}                      # reason -> True: run everything of that kind
-    touched = set(); reasons = {}; godot_changed = []; data_files = []; data_values = False
+    touched = set(); reasons = {}; godot_changed = []; data_files = []; data_values = False; packs_touched = set()
     for rel in paths:
         p = Path(rel)
-        if p.suffix in DOC_SUFFIXES or p.parts[0] in ('references', 'renders', 'runs') or rel in ('TODO.md', 'README.md'):
+        pack = pack_name(rel)
+        if pack:
+            packs_touched.add(pack); reasons[rel] = f'detail pack {pack}: its detail assets, {", ".join(PACK_TESTS)} and its inspection groups'
+            if p in g:
+                touched.add(p)
+        elif p.suffix in DOC_SUFFIXES or p.parts[0] in ('references', 'renders', 'runs') or rel in ('TODO.md', 'README.md'):
             reasons[rel] = 'documentation or evidence: no check'
         elif p.parts[0] == 'godot':
             godot_changed.append(rel); reasons[rel] = 'Godot runtime: affected scene checks'
@@ -216,6 +256,17 @@ def plan(root=ROOT, paths=None, base='HEAD'):
     used_by_build = touched & closure(g, build_paths)
     reach = {k: {q.stem for q in closure(g, [q for q in g if q.stem in v and q.parts[:2] == ('src', 'wayfarer')])} for k, v in TARGET_ENTRIES.items()}
     targets = sorted(k for k, v in reach.items() if stems & v)
+    # Packs: the edited ones and those whose code imports a touched module. An edit rebuilds only the pack's detail assets; a new pack or a
+    # moved anchor rebuilds its host, which links it.
+    reached = {pack_name(str(q)) for q in closure(reverse, touched)} - {None}
+    pack_targets, pack_groups = detail_selection(root, packs_touched | reached, base)
+    selected.update(t for t in tests if t.stem in PACK_TESTS and (packs_touched | reached))
+    targets = sorted(set(targets) | pack_targets)
+    groups |= pack_groups
+    for k in list(groups):
+        groups |= NEIGHBOURS[k]
+    if (packs_touched | reached) and not used_by_build:
+        used_by_build = {True}
     if everything or data_values:
         target = 'all'                  # a changed input value reaches every asset (AGENTS: shared input -> full build)
     elif not used_by_build:
