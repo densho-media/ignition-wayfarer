@@ -1387,7 +1387,16 @@ geometry and carries no load. It changes no pressure boundary, interface, volume
 
 Production detail is organised in subsystem modules (`data/modules.toml`) and detail packs (`data/detail/*.toml`), each assembly in its
 own linked asset at a declared anchor with a contract hash (`simulations/wf_module_contracts.json`); docs/MODULES.md. Built packs:
-`m7_ra1` (M7.RA1, WF-RING-A, L4_VISUAL_ACCEPTED). Every other production assembly is still built inside its host.
+- `m7_ra1` (M7.RA1, WF-RING-A, L4_VISUAL_ACCEPTED): migrated unchanged from the M7 section.
+- `rad_frame` (RAD.FRAME, WF-THERMAL, L4_VISUAL_CANDIDATE): band clamps on the blade's 11 transverse frames (both truss faces, five
+  across), gusset plates at the truss nodes on both edges and an aft edge guard, 155 elements in one detail asset linked once into the
+  blade component, so all three blades share it. Every footprint lies inside a 0.125 m non-emitting bay joint or beyond the blade's ends:
+  the cells, their planform (radiator area) and the health overlays are unchanged. Subtle at ship scale; it reads in the blade close-ups.
+- `ra2_equip` (RA2.EQP, WF-RING-A, L4_VISUAL_CANDIDATE): a transverse cable tray down the centre of each of the four fit-out frame bays of
+  ring A sector 2 (WORK_MEDICAL_OPS), broken round every item within 2 cm of the overhead, the hatch opening and the landing well, with
+  a junction box at each run's ends (45 elements), all in the overhead band (-2.90 to -2.85 m), on sector instance (1, 2) only.
+Both candidates were built in parallel on separate branches that touched only their own packs, then merged without conflict.
+Every other production assembly is still built inside its host.
 
 ## Exterior production layer (M8.1)
 

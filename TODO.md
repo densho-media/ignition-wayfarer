@@ -29,7 +29,11 @@ unresolved science blocks only irreversible steps. Each slice: validate the chan
 close-up, regression check, MODEL/TODO and Model Status update.
 
 - [ ] **MOD — Modular detail migration (docs/MODULES.md, 2026-10-22).** The registry, contracts, detail assets, module commands and
-  authored-detail adoption are built; M7.RA1 is the first pack. Remaining, by value, dependency and risk:
+  authored-detail adoption are built; M7.RA1 is the first pack. The parallel pilot added two candidates (`rad_frame`, `ra2_equip`).
+  - **Owner review:** accept, correct or reject the two `L4_VISUAL_CANDIDATE` packs (radiator frame fittings, ring A sector 2 overhead
+    trays). Self-review: the radiator fittings are hard to see at ship scale; the sector 2 trays read but sit close to the fit-out items.
+
+  Remaining, by value, dependency and risk:
   1. M7.XFR and M7.SPK → pack `ring_a_transfer`: needs `Drum_1`/`Rotor_1` anchors (animated frames; the instance inherits the spin).
   2. M7.ENT, M7.EXT.PORT and M7.TRK → pack `m7_spine` on the SERVICE and CREW_TRANSFER origins; [production.port/entry/drum/tube]
      move with them (`[production.entry]` is shared with RA1, so it moves last).

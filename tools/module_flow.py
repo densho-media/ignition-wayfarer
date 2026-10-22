@@ -169,7 +169,7 @@ def assembly_validate(root, lock=None):
     """Every pack against its publication record: unpublished, stale inputs, a changed contract or anchor, or saved geometry that differs from
     the published fingerprint fail. Packs switched off are still checked (their files are empty but linked)."""
     from spec import load
-    from compare_fingerprint import compare
+    compare = pipeline.load_module(ROOT/'tests/compare_fingerprint.py', 'compare_fingerprint').compare
     s = load(root)[0]; reg = modules.registry(root); anc = modules.anchors(s, reg); packs_ = modules.packs(root)
     run_dir = root/'runs'/f'{pipeline.stamp()}-assembly'
     allasm = modules.assemblies(packs_)
