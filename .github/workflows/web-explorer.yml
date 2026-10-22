@@ -1,6 +1,8 @@
-# WEB-001: build the Wayfarer browser explorer from a clean checkout.
-# Every push to main or a claude/* or local/* branch builds, validates and uploads the site as an artifact.
-# Only main deploys to GitHub Pages, and only after the tests and the build/export/browser-check job pass.
+# WEB-001/002: build the Wayfarer website (start page, Explore Ship, Enter Wayfarer, review) from a clean checkout.
+# Every push to main or a claude/* or local/* branch builds, validates and uploads the site as an artifact (the preview build).
+# Only main deploys to GitHub Pages, and only after the tests and the build/export/browser-check job pass; a failed run never
+# replaces the live site. After a deploy, the release job keeps the exact site and the native Linux build as a GitHub Release
+# (web-<release>), which web-rollback.yml can redeploy without rebuilding.
 # No pull_request trigger: forks never run this workflow or reach the deploy job.
 name: Web explorer
 
@@ -34,7 +36,7 @@ jobs:
   build:
     name: Build, export and browser-check
     runs-on: ubuntu-24.04
-    timeout-minutes: 45
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
 
@@ -56,6 +58,12 @@ jobs:
           tar -xf "$tarball" -C ~
           echo "WAYFARER_BLENDER=$HOME/blender-$BLENDER_VERSION-linux-x64/blender" >> "$GITHUB_ENV"
 
+      - name: Godot 4.7.2 editor and templates (cached; SHA-512 checked by web_play.py)
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9  # v6.1.0
+        with:
+          path: ~/.cache/wayfarer/godot-4.7.2
+          key: godot-4.7.2-ca4d71c4-web-linux   # the pinned template archive (web_play.GODOT); change with the pin
+
       - name: Three.js package (cached; integrity checked by web_export.py)
         uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9  # v6.1.0
         with:
@@ -71,18 +79,19 @@ jobs:
           echo "PIPELINE_SECONDS=$SECONDS" >> "$GITHUB_ENV"
           echo "PIPELINE_RUN=$(python3 -c 'import json; print(json.load(open("pipeline.json"))["run_dir"])')" >> "$GITHUB_ENV"
 
-      - name: Export the browser GLB and assemble the site
+      - name: Export the viewer GLB and the Godot Web build, assemble the site
         run: |
           set -euo pipefail
           SECONDS=0
-          python3 tools/workflow.py web --pipeline-run "$PIPELINE_RUN" --out _site | tee web.json
+          python3 tools/workflow.py web --pipeline-run "$PIPELINE_RUN" --out _site --native | tee web.json
           echo "WEB_SECONDS=$SECONDS" >> "$GITHUB_ENV"
+          echo "WEB_RUN=$(python3 -c 'import json; print(json.load(open("web.json"))["run_dir"])')" >> "$GITHUB_ENV"
 
       - name: Browser check (headless Chrome, served under /ignition-wayfarer/)
         run: |
           set -euo pipefail
           SECONDS=0
-          python3 tools/web_check.py _site --out web-check --chrome google-chrome --no-sandbox   # ubuntu-24.04 AppArmor blocks Chrome's sandbox; local content only
+          python3 tools/web_check.py _site --out web-check --chrome google-chrome --no-sandbox --record   # ubuntu-24.04 AppArmor blocks Chrome's sandbox; local content only
           echo "CHECK_SECONDS=$SECONDS" >> "$GITHUB_ENV"
 
       - name: Report
@@ -94,20 +103,26 @@ jobs:
           def read(p):
               try: return json.loads(Path(p).read_text())
               except Exception: return {}
-          pipe, web, build, check = read('pipeline.json'), read('web.json'), read('_site/build.json'), read('web-check/check.json')
+          pipe, web, build, check = read('pipeline.json'), read('web.json'), read('_site/viewer/build.json'), read('web-check/check.json')
           diff = pipe.get('geometry_diff', {})
           print('## Wayfarer web explorer')
           print(f"- Commit `{build.get('git_revision', os.environ.get('GITHUB_SHA'))}`, {build.get('blender', '')}, three {build.get('three', '')}")
           print(f"- Pipeline: **{pipe.get('result', 'not run')}** ({pipe.get('steps', '')}); geometry diff vs `{os.path.basename(diff.get('baseline', ''))}`: "
                 f"{diff.get('result', '-')}, changed {diff.get('changed', '-')}, added {diff.get('added', '-')}, removed {diff.get('removed', '-')}")
-          print(f"- Web export: **{web.get('result', 'not run')}**; GLB {web.get('glb_mb', '-')} MB, site {web.get('site_mb', '-')} MB, "
-                f"{web.get('mesh_nodes', '-')} mesh nodes, {web.get('assemblies', '-')} assemblies, {web.get('triangles', '-')} triangles")
+          print(f"- Web export: **{web.get('result', 'not run')}** release `{web.get('release', '-')}`; start page {web.get('start_page_bytes', '-')} B, "
+                f"viewer {web.get('viewer_mb', '-')} MB (GLB {web.get('glb_mb', '-')} MB, {web.get('mesh_nodes', '-')} mesh nodes, "
+                f"{web.get('triangles', '-')} triangles), play {(web.get('play') or {}).get('mb', '-')} MB, site {web.get('site_mb', '-')} MB")
+          native = (web.get('play') or {}).get('native_reference') or {}
+          print(f"- Native Demonstrator 01 check on the web package: **{native.get('result', 'not run')}** ({native.get('checks', '-')} checks), "
+                f"recording {json.dumps(native.get('recording'))}")
+          for k, m in (check.get('metrics') or {}).items():
+              print(f"- Browser {k}: `{json.dumps(m)}`")
           checks = check.get('checks', [])
           print(f"- Browser check: **{check.get('result', 'not run')}** ({sum(c['ok'] for c in checks)}/{len(checks)}), {check.get('browser', '')}, {check.get('renderer', '')}")
           for c in checks:
               if not c['ok']:
                   print(f"  - FAIL {c['check']}: {json.dumps({k: v for k, v in c.items() if k not in ('check', 'ok')})}")
-          print(f"- Wall time: pipeline {os.environ.get('PIPELINE_SECONDS', '-')} s, export {os.environ.get('WEB_SECONDS', '-')} s, "
+          print(f"- Wall time: pipeline {os.environ.get('PIPELINE_SECONDS', '-')} s, export and Godot {os.environ.get('WEB_SECONDS', '-')} s, "
                 f"browser check {os.environ.get('CHECK_SECONDS', '-')} s")
           EOF
 
@@ -129,9 +144,17 @@ jobs:
             pipeline.json
             web.json
             runs/*/logs
-            runs/*/export.log
+            runs/*/*.log
             runs/*/web.json
           if-no-files-found: ignore
+          retention-days: 14
+
+      - name: Upload the native Linux build of Demonstrator 01
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9  # v7.0.2
+        with:
+          name: wayfarer-demo01-linux-x86_64
+          path: ${{ env.WEB_RUN }}/wayfarer-demo01-linux-x86_64.zip
+          if-no-files-found: error
           retention-days: 14
 
       - name: Package for GitHub Pages (main only)
@@ -152,6 +175,87 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+    concurrency:
+      group: pages-deploy
+      cancel-in-progress: false
     steps:
       - id: deployment
         uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346  # v5.0.1
+
+  verify:
+    name: Verify the live site
+    needs: [deploy]
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+      - name: Wait for this commit on the live site, record its headers
+        env:
+          LIVE: https://densho-media.github.io/ignition-wayfarer/
+        run: |
+          set -euo pipefail
+          for i in $(seq 1 40); do
+            rev=$(curl -sSf -H 'Cache-Control: no-cache' "${LIVE}release.json?t=$(date +%s)" | python3 -c 'import json,sys; print(json.load(sys.stdin)["git_revision"])' || true)
+            [ "$rev" = "$GITHUB_SHA" ] && break
+            echo "live release.json shows ${rev:-nothing}; waiting"; sleep 15
+          done
+          [ "$rev" = "$GITHUB_SHA" ] || { echo "::error::the live site never showed $GITHUB_SHA"; exit 1; }
+          python3 - <<'EOF2' | tee -a "$GITHUB_STEP_SUMMARY"
+          import json, os, urllib.request
+          live = os.environ['LIVE']
+          rel = json.loads(urllib.request.urlopen(live + 'release.json').read())
+          paths = ['', 'site.css', 'viewer/', rel['experiences']['viewer']['glb_file'], 'viewer/vendor/three/draco/draco_decoder.wasm', 'play/']
+          paths += [f"play/{f}" for k, f in rel['experiences'].get('play', {}).get('files', {}).items() if k in ('html', 'js', 'wasm', 'pck')]
+          print(f"## Live site {live} — release {rel['release']}\n\n| path | status | type | encoding | wire bytes | file bytes | cache |\n|---|---|---|---|---|---|---|")
+          bad = 0
+          for p in paths:
+              req = urllib.request.Request(live + p, headers={'Accept-Encoding': 'gzip, br'})
+              with urllib.request.urlopen(req) as r:
+                  body = r.read(); h = r.headers
+              size = rel['files'].get(p, {}).get('bytes') or rel['files'].get(p + 'index.html', {}).get('bytes')
+              print(f"| {p or '/'} | {r.status} | {h.get('Content-Type')} | {h.get('Content-Encoding', '-')} | {len(body)} | {size} | {h.get('Cache-Control')} |")
+              bad += r.status != 200 or (p.endswith('.wasm') and 'wasm' not in h.get('Content-Type', ''))
+          raise SystemExit(bad)
+          EOF2
+      - name: Browser check against the live site
+        run: python3 tools/web_check.py --live https://densho-media.github.io/ignition-wayfarer/ --out live-check --chrome google-chrome --no-sandbox --no-recording
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9  # v7.0.2
+        if: always()
+        with:
+          name: wayfarer-live-check
+          path: live-check
+          retention-days: 30
+
+  release:
+    name: Keep the deployed site and native build as a GitHub Release
+    needs: [verify]
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c  # v8.0.1
+        with:
+          name: wayfarer-web-site
+          path: _site
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c  # v8.0.1
+        with:
+          name: wayfarer-demo01-linux-x86_64
+          path: native
+      - name: Create release web-<release>
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          tag="web-$(python3 -c 'import json; print(json.load(open("_site/release.json"))["release"])')"
+          tar -czf "wayfarer-site-$tag.tar.gz" -C _site .
+          cp _site/release.json "release-$tag.json"
+          if gh release view "$tag" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo "::notice::release $tag already exists (a rerun of this commit); kept as it is"; exit 0
+          fi
+          url="https://densho-media.github.io/ignition-wayfarer/"
+          gh release create "$tag" --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" --title "Wayfarer web $tag" \
+            --notes "Deployed to $url from $GITHUB_SHA (run $GITHUB_RUN_ID). Assets: the exact site (redeploy with the Web rollback workflow), its release.json, and the native Linux build of Integrated Demonstrator 01 (same package as the browser build). SIMULATION_ONLY, REP_PROXY geometry." \
+            "wayfarer-site-$tag.tar.gz" "release-$tag.json" native/wayfarer-demo01-linux-x86_64.zip

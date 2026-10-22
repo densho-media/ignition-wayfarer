@@ -40,8 +40,9 @@ one reproducible, AI-assisted production pipeline.
   and guided reviews.
 - GitHub Actions rebuilds the ship from a clean checkout on every push to `main` or a task branch
   and checks a browser version of it. Each passing push to `main` publishes that version to the
-  **[web explorer](https://densho-media.github.io/ignition-wayfarer/)**, which runs on desktop
-  and phone browsers ([web/README.md](web/README.md)).
+  **[Wayfarer website](https://densho-media.github.io/ignition-wayfarer/)**: Explore Ship (a 3D
+  engineering viewer for desktop and phone) or Enter Wayfarer (Integrated Demonstrator 01 in the
+  browser), each loaded only when chosen ([web/README.md](web/README.md)).
 - Geometry is proxy-level. Passing checks and previews are not engineering proof.
 
 ## Build and explore
@@ -77,7 +78,7 @@ The `.blend` files, renders, runs and Godot imports are generated and are not in
 | `tests/` | Unit tests for owner numbers and physical invariants, with their own synthetic fixtures |
 | `references/` | Current geometry baseline and generated validation reports |
 | `godot/` | Interactive scenes and scripts |
-| `web/`, `.github/workflows/` | Browser explorer and the workflow that builds, checks and publishes it |
+| `web/`, `.github/workflows/` | Website (start page, viewer, Godot launcher and shell, review page) and the workflows that build, check, publish and roll it back |
 | `docs/` | [Model](docs/MODEL.md), [implementation](docs/IMPLEMENTATION.md) and subsystem notes |
 
 [AGENTS.md](AGENTS.md) describes the development loop that human and AI contributors follow.

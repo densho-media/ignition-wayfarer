@@ -471,6 +471,12 @@ all 54 engineering gates currently HOLD. No detailed robot art before the L2 lay
 - [ ] **P01 — FUT-006 PlayCanvas / Densho Expo. PARKED, separate scope decision.** If selected, resolve hosting, IP/public-source
   exposure, embed/CSP permissions and browser performance/accessibility before a prototype. Reuse the GLB pipeline and stable IDs;
   keep Godot. Acceptance would include publication, desktop/mobile interaction, iframe/new-tab fallback, credits and update procedure.
+- [ ] **P05 — Website follow-ups (WEB-002). Optional, outside WF-R1.** The site, play build, checks, deploy, verify, release and
+  rollback exist (docs/wayfarer-web-experience-plan.md). Open:
+  - Verify the first `main` deploy of WEB-002 live: the verify job, then a manual look on desktop and phone.
+  - Test Firefox and Safari (macOS, iOS) by hand and measure frame rates on real GPUs; record the results in the plan §5–6.
+  - Decide whether the Godot build should support touch or stay keyboard-only on phones.
+  - Extend browser-vs-native equivalence past GRAVITY→INSPECT only if a shorter recorded path through the earlier chapters exists.
 - [ ] **P03 — Optional compliant-tether stress study. PARKED, owner-led.** Do only when OD-038/required interaction needs it; do not
   confuse a timestep-dependent impulse diagnostic with rated human loads. Required operational tether releases remain in D/K.
 - [ ] **P04 — Full-gate policy relaxation. PARKED, optional process change.** Retain the existing full pre-commit geometry gate. Consider

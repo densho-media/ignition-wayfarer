@@ -1,104 +1,125 @@
-# Wayfarer web explorer (WEB-001)
+# Wayfarer website (WEB-001, WEB-002)
 
-A static browser viewer of the generated G.U. WAYFARER 001 (IGNITION), built by GitHub Actions from a clean
-checkout and published on GitHub Pages at <https://densho-media.github.io/ignition-wayfarer/>. It works with a mouse
-on desktop and with touch on phones. It is a REP_PROXY engineering view, not the Godot experience.
+The public site of G.U. WAYFARER 001 (IGNITION). GitHub Actions builds it from a clean checkout and publishes it on GitHub Pages
+at <https://densho-media.github.io/ignition-wayfarer/>. Its four entry points each load their own files only when chosen:
 
-## How it is built
+| Path | Page | Loads |
+| --- | --- | --- |
+| `/` | start page: Explore Ship or Enter Wayfarer | `index.html`, `site.css`, `release.json` (about 7 kB plus the manifest); no engine, model or library |
+| `/viewer/` | **Explore Ship**: three.js 0.170.0 engineering viewer | the viewer, three.js with the Draco decoder, `model/wayfarer-<hash>.glb` (5.9 MB) and its labels |
+| `/play/` | **Enter Wayfarer**: launcher; Start opens `demo01-<hash>.html` | Godot 4.7.2 `engine-<hash>.{js,wasm}` and the Demonstrator 01 pack `demo01-<hash>.pck` |
+| `/review/` | technical review: release, model, checks, limitations, this browser | `release.json` |
 
-```
-pipeline --quick --previews none     full Blender build + geometry diff against references/baselines.json (must be 0)
-workflow.py web --pipeline-run <run> export/godot.py --out --draco on the saved assets -> GLB check -> site
-tools/web_check.py <site>            headless Chrome, served under /ignition-wayfarer/
-```
+Both experiences are REP_PROXY, SIMULATION_ONLY representations. The pages compute no spacecraft facts: geometry, labels and
+behaviour come from the exporter, the manifests, the rig and the unchanged Godot scenes. Why it is built this way, the
+measurements and the open items are in [docs/wayfarer-web-experience-plan.md](../docs/wayfarer-web-experience-plan.md).
 
-- **Export.** The browser GLB comes from the same exporter as the Godot package (`src/wayfarer/export/godot.py`, COAST, S004
-  look), called with `--out`, `--identity` and `--draco`. It needs no Godot, MPFB characters or EVA suits, which
-  `runtime-export` requires. It reads the saved assets and does not build geometry of its own. The Godot package is unchanged.
-- **Identity kept.** Fourteen `Assembly_*` group nodes contain 3,936 `WF_<id>` mesh nodes, the same IDs as `manifest.json`.
-  `model/nodes.json` maps each ID to its component, kind and canon/geometry status for picking. Axes: metres, bow +X,
-  dorsal +Y (glTF Y-up from Blender `(x,z,-y)`).
-- **Checked before publication.** `web_export.check_glb` checks the glTF header and chunk and the required extensions.
-  It requires the mesh nodes to equal the manifest's records and the 14 assemblies to be present, and it checks the bounds
-  and the 100 MB Pages file limit. `build.json` records the commit, dirty flag, Blender and three.js versions, input hashes,
-  GLB SHA-256, bounds, triangle count and the pipeline run's geometry diff.
-- **Draco.** It cuts the GLB from 32.5 MB to 5.9 MB. Positions are quantized to about 1.5 cm at the ship's 237 m length,
-  which is acceptable for display and not a measurement source.
+## Sources here
 
-**Viewer technology: three.js 0.170.0** with no build step and no framework. It has a mature glTF/Draco loader, `OrbitControls`
-with mouse and touch input, and supports node extras. Babylon.js is heavier. PlayCanvas Engine is tied to its editor and
-was parked as FUT-006. The npm tarball is downloaded once, checked against its registry SHA-512 and copied into
-`vendor/three/`. The site makes no CDN or other off-site requests. All paths are relative, so the site serves from any subpath.
+- `index.html`, `site.css`: the start page and the stylesheet the launcher and review pages share.
+- `viewer/`: the viewer (its own stylesheet).
+- `play/index.html`: the click-to-load launcher.
+- `play/shell.html`: the Godot HTML shell. It is an export input, not a site file.
+- `review/`: the review page.
 
-## Use
+`tools/web_export.py` copies these pages and adds the generated files (`vendor/`, `model/`, the Godot export, `build.json`,
+`play.json`, `release.json`). Every path is relative, so the site serves from any subpath on any static host.
 
-Left-drag (one finger) orbits, the wheel (pinch) zooms, right-drag (two fingers) pans. Click a part to see its component.
-Presets: 1 side, 2 top, 3 three-quarter, 4 bow, 5 aft; Home or Reset gives the whole-ship view. Esc clears the selection.
-The Assemblies panel hides and shows each assembly. The footer links the source commit, Densho and the repository.
+## Build
 
-## Local test
+The pipeline builds the assets; `web` exports the viewer GLB and the Godot Web build and assembles the site; `web_check`
+walks it in headless Chrome.
 
 ```bash
 python3 tools/workflow.py pipeline --quick --previews none
+python3 tools/workflow.py web --pipeline-run runs/<that run> --out runs/web-site [--native] [--no-play]
+python3 tools/web_check.py runs/web-site --out runs/web-check --chrome <chrome or chromium> [--record]
 ```
+
+- **Toolchain.** `web` needs Blender (`WAYFARER_BLENDER`).
+  - Enter Wayfarer also needs the official Godot 4.7.2 standard build. `tools/web_play.py` downloads it once into
+    `~/.cache/wayfarer/godot-4.7.2` (`WAYFARER_GODOT_CACHE`), checks it against the release SHA-512 sums, and keeps only the Web
+    and Linux templates from the 1.3 GB archive.
+  - `--no-play` builds the site without Godot.
+- **The play build** runs in `runs/<stamp>-web/play/`, a copy of `godot/`.
+  - It exports DOCKED from the saved assets and adds the COAST manifest, the route and the EVA data.
+  - It sets the main scene to `demo01.tscn` in that copy only, imports, and runs Demonstrator 01's own check (68 checks) plus a
+    fixed-30-fps recording natively.
+  - It then exports Web (single-threaded, no COOP/COEP needed) and, with `--native`, a Linux build of the same package.
+  - The project's `godot/` and `godot/generated/` are never written.
+- **Before PASS,** `web` checks that every local reference in the site resolves, that no file exceeds 95 MB, that the site
+  stays under 900 MB, and that the start page names no engine or model.
+
+**Local preview.** Serve a directory that contains the site as `ignition-wayfarer/`, then open
+`http://localhost:8000/ignition-wayfarer/`:
 
 ```bash
-python3 tools/workflow.py web --pipeline-run runs/<that run> --out runs/web-site
+mkdir -p runs/preview && ln -sfn ../web-site runs/preview/ignition-wayfarer && python3 -m http.server -d runs/preview
 ```
 
-```bash
-python3 tools/web_check.py runs/web-site --out runs/web-check
-```
+`file://` does not work, because ES modules and the engine need HTTP.
 
-To look at it yourself, serve a directory that contains the site as `ignition-wayfarer/` (for example
-`python3 -m http.server -d <dir>`) and open `http://localhost:8000/ignition-wayfarer/`. Opening `index.html` as a
-`file://` page does not work, because ES modules need HTTP.
+## What the browser check covers (`tools/web_check.py`)
 
-## GitHub Actions (`.github/workflows/web-explorer.yml`)
+- **Start page:** it requests only `index.html`, `site.css` and `release.json`, has no canvas or engine, and stays under its
+  transfer budget.
+- **Explore Ship,** opened from its link:
+  - framing, orbit, zoom, pan, Reset and the presets
+  - picking and hiding assemblies
+  - the `#cam=` bookmark after a reload
+  - no request to `play/`, and no script errors
+- **Enter Wayfarer:**
+  - The launcher requests no engine before Start.
+  - Start boots Godot and Demonstrator 01 with no request to `viewer/` and no engine or script error.
+  - The ACI first-launch prompt takes Enter.
+- **Switching:**
+  - Exit and Back return to the start page with no canvas left.
+  - Explore Ship starts again.
+  - Browser memory (the summed RSS of all Chrome processes) returns to the start-page level.
+- **Recording:** Demonstrator 01 autoplays GRAVITY to INSPECT at a fixed 30 fps and must match the native run of the same
+  package: chapters, frame count and production-layer flips.
+- **Phone, review page:**
+  - At 390 × 844 with touch, the start page has no overflow and the viewer frames the ship, orbits with one finger and zooms
+    with a pinch.
+  - The review page renders the release.
 
-- **Triggers.** Pushes to `main`, `claude/**` and `local/**`, plus a manual run. There is no `pull_request` trigger, so
-  fork PRs never run it.
-- **Jobs and permissions.** `tests` (all unit tests) and `build` are read-only (`contents: read`). `build` installs
-  Blender 5.2.2 from download.blender.org with a pinned SHA-256 and caches the tarball. It then runs the quick pipeline
-  (whose geometry diff must be 0), the web export and the browser check. Every action is pinned to a commit SHA.
-- **Outputs on every branch.** Artifacts `wayfarer-web-site` (the site) and `wayfarer-web-check` (screenshots,
-  `check.json`, logs). The run summary reports durations, sizes, the geometry diff and the browser checks.
-- **Deployment.** On `main` only, `build` also packages the Pages artifact. The `deploy` job has `pages: write` and
-  `id-token: write` and needs both other jobs to pass, so a failed test, geometry diff, export or browser check never
-  deploys. `main` is the approved public version: every push to it updates the site. A feature-branch push never does.
+`--record` writes the summary and metrics into the site's `release.json`. `--live <url>` repeats the checks against a deployed
+site, and `--no-recording` skips the recording.
 
-## GitHub Pages setting
+## GitHub Actions
 
-Settings → Pages → Build and deployment → Source: **GitHub Actions** (set 2026-10-22). Nothing else is configured:
-no variables, secrets or manual approval. Settings → Pages → Unpublish takes the site down.
+`.github/workflows/web-explorer.yml`:
+- **Triggers.** Pushes to `main`, `claude/**` and `local/**`, plus a manual run. There is no `pull_request` trigger.
+- **Every branch.** Unit tests, the Blender build with geometry diff 0, `web --native`, and `web_check --record`. Artifacts:
+  - the site (`wayfarer-web-site`, the preview build)
+  - the check screenshots and logs
+  - the native Linux zip
+- **`main` only:**
+  - `deploy` publishes to Pages, only after every check passes.
+  - `verify` waits until the live `release.json` names the commit, records each file type's status, type, encoding and cache
+    headers, and runs the browser check against the live URL.
+  - `release` keeps the verified site, its `release.json` and the native Linux zip as GitHub Release `web-<release>`.
+- **Permissions.**
+  - Build jobs are read-only.
+  - `deploy` has `pages: write` and `id-token: write`; `release` has `contents: write`.
+  - Every action is pinned to a commit SHA, and toolchains are checksum-pinned.
 
-## Results
+**Rollback.** In *Actions → Web rollback → Run workflow*, enter a `web-<release>` tag (`.github/workflows/web-rollback.yml`).
+The workflow downloads that release's site, checks every file against its `release.json`, and deploys it. The next push to
+`main` deploys the current build again; revert on `main` to make the rollback permanent. *Settings → Pages → Unpublish*
+takes the site down. The WEB-001 viewer that preceded this site is kept as release `web-20261022-a5ceda2`
+(the exact files Pages served from `a5ceda2`, compared with the live site before it was replaced); redeploying that tag
+restores it.
 
-**Workstation, 2026-10-21.** Blender 5.2.2, from the saved assets of a quick pipeline run:
-- Pipeline: PASS; geometry diff vs `baseline_m8_exterior` was 0 changed, 0 added, 0 removed. It took 72 s.
-- Web export: 56 s. GLB 5.86 MB; site 7.35 MB, of which three.js and the Draco decoder take 1.1 MB.
-- Model: 3,936 mesh nodes, 2,704 distinct meshes, 718,984 triangles, 14 assemblies.
-- Browser check: Google Chrome 156, headless with software WebGL (SwiftShader). 20/20 PASS:
-  - The page loads and the whole ship is framed (9 s).
-  - Every mesh node and assembly is present.
-  - Orbit, zoom, pan, Reset and the side, top and bow presets work.
-  - Clicking a part shows its label; hiding an assembly and Show all work.
-  - On a 390 × 844 phone emulation, the ship is framed, one-finger orbit and pinch zoom work, and there is no horizontal overflow.
-  - Every request is served from `/ignition-wayfarer/`; there are no script errors.
+**Pages setting.** *Settings → Pages → Source: GitHub Actions* (set 2026-10-22). No secrets, variables or approval rules are
+configured.
 
-**GitHub Actions, 2026-10-22, run 39742779848 on `main` at `2a80fc6`, the first deployment.** ubuntu-24.04 runner,
-Blender tarball from the cache:
-- Unit tests: PASS in 66 s.
-- Blender install: 23 s. Pipeline: 33 s; it passed with geometry diff PASS, which `web` requires before it builds.
-- Export and site: 34 s.
-- Browser check: 20/20 PASS on Chrome (SwiftShader) in 3.8 min. Software rendering on the runner is slow; that is CI
-  time, not visitor load time.
-- Build job: 5.6 min; deploy: 9 s; the whole run took 6 min from push to live site.
+## Viewer use
 
-Each run's summary (visible when signed in) gives that run's timings and sizes; failed checks also appear as public annotations.
-
-**Live site, 2026-10-22.** All files are served with HTTP 200 and `build.json` reports `2a80fc6`, not dirty, geometry diff 0.
-A headless load of the live URL frames the ship in 3.6 s. The owner confirmed the model on their desktop browser and their phone.
-
-**Not verified.** Tablets, a browser matrix (Safari/iOS, Firefox), and frame rate on real GPUs. The automated check uses
-emulated touch in Chrome. A browser without WebGL (such as the built-in Claude browser pane) shows a clear message instead of the model.
+- **Mouse:** left-drag (or one finger) orbits, the wheel (or a pinch) zooms, right-drag (or two fingers) pans.
+- **Picking:** click a part to see its component, kind and canon or geometry status. Esc clears the selection.
+- **Presets:** 1 side, 2 top, 3 three-quarter, 4 bow, 5 aft; Home or Reset returns to the whole ship. The Assemblies panel
+  hides and shows each assembly.
+- **Bookmarks:** the address bar keeps the view as `#view=<preset>` or, after a drag, `#cam=<x,y,z,tx,ty,tz>` (metres, runtime
+  axes: bow +X, dorsal +Y). Reopen the link to get the same camera.
+- **Diagnostics:** `?diag` shows frame time, draw calls, GPU objects and transferred bytes.

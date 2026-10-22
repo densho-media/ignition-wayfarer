@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Enter Wayfarer — G.U. Wayfarer 001</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%2307090c'/%3E%3Cpath d='M2 8h12M8 3v10' stroke='%23e0a040' stroke-width='2'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../site.css">
+</head>
+<body>
+<main class="wrap">
+  <header>
+    <p class="eyebrow"><a href="../">← Wayfarer</a> · Interactive</p>
+    <h1>ENTER WAYFARER</h1>
+    <p class="lead">Integrated Demonstrator 01: one continuous run from the docked exterior through the airlock, the microgravity
+      service spine and the transfer drum, down the ladder into ring A's spin gravity. The camera guides each chapter; you can take
+      over the crew body in the physics chapters.</p>
+  </header>
+  <section class="panel">
+    <p id="size">The engine and the ship package download when you press Start.</p>
+    <p><button id="start" type="button">Start</button></p>
+    <p id="cap" class="note"></p>
+  </section>
+  <section class="grid2">
+    <div class="panel">
+      <h2>Controls</h2>
+      <ul class="plain">
+        <li>First launch asks for your Confirm key (Enter is suggested); Esc is always Back.</li>
+        <li>Enter: next chapter · P: pause the guided camera · A: autoplay the body actions</li>
+        <li>The on-screen guide shows the keys that work in each chapter. ← Exit (top left) leaves and unloads the engine.</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h2>About this build</h2>
+      <ul class="plain">
+        <li>Browser build of the native Godot project: same scenes, scripts, physics (Jolt) and DOCKED package; single-threaded WebGL 2.</li>
+        <li>The induction pair appears as proxy figures; the native development runtime carries the full characters.</li>
+        <li>SIMULATION_ONLY: chapters, camera paths and the ring-ramp time-lapse are display choices; no transfer timing, procedure or interlock is released.</li>
+        <li>Chromium-based desktop browsers with a keyboard are tested; Firefox, Safari and phones are not yet verified.</li>
+        <li>Built with the Godot Engine, MIT licence: <a href="GODOT_LICENSE.txt">licence</a>, <a href="GODOT_COPYRIGHT.txt">third-party notices</a>.</li>
+      </ul>
+    </div>
+  </section>
+</main>
+<script>
+// Click-to-load: this page fetches only play.json (past the browser cache) and opens the content-named Godot page on Start.
+const start = document.getElementById('start'), size = document.getElementById('size'), cap = document.getElementById('cap');
+let play = null;
+fetch('play.json', { cache: 'no-store' }).then(r => r.ok ? r.json() : Promise.reject(new Error(`play.json ${r.status}`))).then(p => {
+  play = p;
+  const mb = Object.values(p.bytes).reduce((a, b) => a + b, 0) / 1e6;
+  size.textContent = `Pressing Start downloads the Godot ${p.godot_short} engine and the Demonstrator 01 package: ${mb.toFixed(0)} MB, `
+    + `less over the wire when the server compresses it, and cached for later visits.`;
+}).catch(err => { size.textContent = `This release has no interactive build (${err.message}).`; start.disabled = true; });
+// Capability probe without starting anything heavy: a throwaway WebGL 2 context, released at once.
+(() => {
+  const gl = document.createElement('canvas').getContext('webgl2');
+  const touchOnly = matchMedia('(pointer: coarse)').matches && !matchMedia('(pointer: fine)').matches;
+  const notes = [];
+  if (!gl) { notes.push('This browser did not provide WebGL 2, which the engine needs. Explore Ship may still work.'); start.disabled = true; }
+  else gl.getExtension('WEBGL_lose_context')?.loseContext();
+  if (!WebAssembly?.validate) notes.push('WebAssembly is unavailable.');
+  if (touchOnly) notes.push('This looks like a touch-only device: the demonstrator expects a keyboard; Explore Ship is the better choice here.');
+  cap.textContent = notes.join(' ');
+})();
+start.addEventListener('click', () => { if (play) location.assign(play.entry); });
+</script>
+</body>
+</html>

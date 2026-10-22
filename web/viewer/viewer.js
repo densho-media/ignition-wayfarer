@@ -1,6 +1,8 @@
 // WEB-001 browser explorer: the exported COAST snapshot (model/wayfarer.glb), its pick labels (model/nodes.json)
 // and its build identity (build.json). Runtime axes: metres, bow +X, dorsal +Y (Blender (x,y,z) -> (x,z,-y)).
 // All paths are relative so the site works under any subpath. The viewer computes no spacecraft facts.
+// WEB-002: build.json is fetched past the browser cache and names the content-addressed GLB; #view=<preset> or #cam=<x,y,z,tx,ty,tz>
+// reopens a camera; ?diag shows frame time, draw calls and transfer sizes; leaving the page releases the WebGL context.
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
@@ -95,7 +97,31 @@ function frame(viewName = 'threequarter') {
   controls.update();
   controls.enableDamping = damping;
   for (const b of document.querySelectorAll('[data-view]')) b.setAttribute('aria-pressed', String(b.dataset.view === viewName));
+  history.replaceState(null, '', `#view=${viewName}`);
 }
+
+// Camera bookmarks: the preset name, or the exact camera position and target (metres, runtime axes) written after each drag.
+function bookmark() {
+  const r = v => v.toArray().map(x => +x.toFixed(2)).join(',');
+  history.replaceState(null, '', `#cam=${r(camera.position)},${r(controls.target)}`);
+  for (const b of document.querySelectorAll('[data-view]')) b.setAttribute('aria-pressed', 'false');
+}
+function openBookmark() {
+  const view = /view=(\w+)/.exec(location.hash);
+  const cam = /cam=([-\d.,e]+)/.exec(location.hash);
+  const v = cam && cam[1].split(',').map(Number);
+  if (v && v.length === 6 && v.every(Number.isFinite)) {
+    frame('threequarter');
+    camera.position.set(v[0], v[1], v[2]);
+    controls.target.set(v[3], v[4], v[5]);
+    const damping = controls.enableDamping;
+    controls.enableDamping = false; controls.update(); controls.enableDamping = damping;
+    history.replaceState(null, '', `#cam=${cam[1]}`);
+  } else {
+    frame(view && VIEWS[view[1]] ? view[1] : 'threequarter');
+  }
+}
+controls.addEventListener('end', bookmark);
 
 function resize() {
   const w = window.innerWidth, h = window.innerHeight;
@@ -204,17 +230,15 @@ function showBuild(build) {
 }
 
 async function load() {
-  const [build, nodes] = await Promise.all([
-    fetch('build.json').then(r => r.ok ? r.json() : null).catch(() => null),
-    fetch('model/nodes.json').then(r => r.ok ? r.json() : {}).catch(() => ({})),
-  ]);
+  const build = await fetch('build.json', { cache: 'no-store' }).then(r => r.ok ? r.json() : null).catch(() => null);
+  const nodes = await fetch(build?.nodes_file || 'model/nodes.json').then(r => r.ok ? r.json() : {}).catch(() => ({}));
   labels = nodes;
   showBuild(build);
   const draco = new DRACOLoader().setDecoderPath('vendor/three/draco/');
   const loader = new GLTFLoader().setDRACOLoader(draco);
   // Pages serves the GLB gzip-compressed: e.total is the compressed size, e.loaded counts unpacked bytes.
   const total = build?.glb?.bytes;
-  const gltf = await loader.loadAsync('model/wayfarer.glb', e => {
+  const gltf = await loader.loadAsync(build?.glb_file || 'model/wayfarer.glb', e => {
     if (total) status.textContent = `Loading model… ${Math.min(100, Math.round(100 * e.loaded / total))} %`;
     else status.textContent = `Loading model… ${(e.loaded / 1e6).toFixed(1)} MB`;
   });
@@ -230,13 +254,41 @@ async function load() {
   box = new THREE.Box3().setFromObject(model);
   radius = box.getSize(new THREE.Vector3()).length() / 2;
   buildPanel();
-  frame('threequarter');
+  openBookmark();
   status.hidden = true;
-  window.wayfarer = { model, groups, camera, controls, frame, select, build, box };   // for inspection from the console
+  stats.ready_ms = Math.round(performance.now());
+  window.wayfarer = { model, groups, camera, controls, frame, select, build, box, renderer, stats };   // for inspection and the checks
 }
 
+// Diagnostics (always measured, shown with ?diag): frame time over the last 120 frames, draw calls, GPU objects and transfer sizes.
+const stats = { ready_ms: null, frame_ms: [], calls: 0, triangles: 0 };
+const diag = document.getElementById('diag');
+if (new URLSearchParams(location.search).has('diag')) diag.hidden = false;
+let last = performance.now(), shown = 0;
+function measure() {
+  const now = performance.now();
+  stats.frame_ms.push(now - last); last = now;
+  if (stats.frame_ms.length > 120) stats.frame_ms.shift();
+  stats.calls = renderer.info.render.calls; stats.triangles = renderer.info.render.triangles;
+  if (diag.hidden || now - shown < 500) return;
+  shown = now;
+  const f = [...stats.frame_ms].sort((a, b) => a - b);
+  const mean = f.reduce((a, b) => a + b, 0) / f.length;
+  const transfer = performance.getEntriesByType('resource').reduce((a, e) => a + (e.transferSize || 0), 0)
+    + (performance.getEntriesByType('navigation')[0]?.transferSize || 0);
+  const heap = performance.memory ? `${(performance.memory.usedJSHeapSize / 1e6).toFixed(0)} MB JS heap\n` : '';
+  diag.textContent = `${(1000 / mean).toFixed(0)} fps · ${mean.toFixed(1)} ms mean · ${f[Math.floor(f.length * 0.95)].toFixed(1)} ms p95\n`
+    + `${stats.calls} draw calls · ${(stats.triangles / 1e6).toFixed(2)} M tris\n`
+    + `${renderer.info.memory.geometries} geometries · ${renderer.info.memory.textures} textures\n`
+    + heap + `${(transfer / 1e6).toFixed(1)} MB transferred · ready ${stats.ready_ms ?? '–'} ms`;
+}
+
+// Leaving releases the GPU context at once instead of waiting for garbage collection; a page restored from the back-forward cache reloads.
+window.addEventListener('pagehide', () => { renderer.setAnimationLoop(null); renderer.dispose(); renderer.forceContextLoss(); });
+window.addEventListener('pageshow', e => { if (e.persisted) location.reload(); });
+
 resize();
-renderer.setAnimationLoop(() => { controls.update(); renderer.render(scene, camera); });
+renderer.setAnimationLoop(() => { controls.update(); renderer.render(scene, camera); measure(); });
 load().catch(err => {
   console.error(err);
   status.textContent = `The model could not be loaded: ${err.message || err}`;

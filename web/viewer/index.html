@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>G.U. Wayfarer 001 — Engineering Explorer</title>
+<meta name="description" content="Interactive 3D engineering explorer of the G.U. Wayfarer 001 spacecraft from IGNITION, generated from the procedural Blender model.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%2307090c'/%3E%3Cpath d='M2 8h12M8 3v10' stroke='%23e0a040' stroke-width='2'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="viewer.css">
+<script type="importmap">
+{ "imports": { "three": "./vendor/three/three.module.min.js", "three/addons/": "./vendor/three/addons/" } }
+</script>
+</head>
+<body>
+<canvas id="view" aria-label="3D view of the Wayfarer spacecraft"></canvas>
+<header class="title">
+  <p class="eyebrow"><a href="../" class="back" title="Back to the Wayfarer start page">← Wayfarer</a> · IGNITION</p>
+  <h1>G.U. WAYFARER 001</h1>
+  <p class="sub">Engineering explorer · REP_PROXY geometry</p>
+</header>
+<div class="views" role="toolbar" aria-label="Camera">
+  <button data-view="threequarter" title="Three-quarter view (3)">3/4</button>
+  <button data-view="side" title="Side view (1)">Side</button>
+  <button data-view="top" title="Top view (2)">Top</button>
+  <button data-view="front" title="Bow view (4)">Bow</button>
+  <button data-view="aft" title="Aft view (5)">Aft</button>
+  <button data-view="reset" title="Reset camera (Home)">Reset</button>
+  <button id="panel-toggle" aria-expanded="false" aria-controls="panel" title="Assemblies">Assemblies</button>
+</div>
+<aside id="panel" class="panel" hidden>
+  <div class="panel-head"><span>Assemblies</span><button id="show-all" title="Show every assembly">Show all</button></div>
+  <ul id="assemblies"></ul>
+</aside>
+<div id="pick" class="pick" hidden></div>
+<div id="status" class="status" role="status">Loading model…</div>
+<pre id="diag" class="diag" hidden></pre>
+<footer class="foot">
+  <span id="build"></span>
+  <a href="../review/">Review</a>
+  <a href="https://densho.media" target="_blank" rel="noopener">Densho</a>
+  <a href="https://github.com/densho-media/ignition-wayfarer" target="_blank" rel="noopener">Source</a>
+</footer>
+<script type="module" src="viewer.js"></script>
+</body>
+</html>

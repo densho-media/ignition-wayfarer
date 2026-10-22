@@ -412,9 +412,10 @@ func capture_of(e: InputEvent, layout := "logical") -> Dictionary:
 static func logical_key(d: Dictionary) -> int:
 	return from_physical(int(d.k)) if d.get("p", false) else int(d.k)
 
-## The current layout's key at a physical position (the headless display server has no layout: the US position is returned).
+## The current layout's key at a physical position (the headless display server has no layout and the Web one cannot map keys:
+## the US position is returned).
 static func from_physical(pk: int) -> int:
-	if DisplayServer.get_name() == "headless":
+	if DisplayServer.get_name() == "headless" or OS.has_feature("web"):
 		return pk
 	var k := DisplayServer.keyboard_get_keycode_from_physical(pk)
 	return k if k != KEY_NONE else pk

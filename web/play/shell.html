@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+<title>Enter Wayfarer · G.U. WAYFARER 001</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%2307090c'/%3E%3Cpath d='M2 8h12M8 3v10' stroke='%23e0a040' stroke-width='2'/%3E%3C/svg%3E">
+<style>
+html, body, #canvas { margin: 0; padding: 0; border: 0; }
+body { color: #d9e0e6; background: #07090c; overflow: hidden; touch-action: none; font: 14px/1.4 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+#canvas { display: block; }
+#canvas:focus { outline: none; }
+#status[hidden] { display: none; }
+#status { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 12px; background: #07090c; padding: 16px; text-align: center; }
+#status h1 { margin: 0; font-size: 18px; letter-spacing: 0.12em; font-weight: 600; }
+#status p { margin: 0; color: #7d8a96; max-width: 520px; }
+#bar { width: min(420px, 100%); height: 6px; background: #26303a; border-radius: 3px; overflow: hidden; }
+#bar span { display: block; height: 100%; width: 0; background: #e0a040; transition: width 0.2s; }
+#status.error #bar { display: none; }
+#status.error #detail { color: #ff8070; white-space: pre-line; }
+#exit { position: fixed; bottom: 8px; left: 8px; z-index: 2; color: #d9e0e6; background: rgba(12, 16, 21, 0.86); border: 1px solid #26303a;
+  border-radius: 4px; padding: 4px 10px; text-decoration: none; font-size: 12px; }
+#exit:hover, #exit:focus-visible { border-color: #e0a040; outline: none; }
+a { color: #e0a040; }
+</style>
+$GODOT_HEAD_INCLUDE
+</head>
+<body>
+<canvas id="canvas">Your browser does not support the canvas element.</canvas>
+<noscript>Enter Wayfarer needs JavaScript and WebGL 2.</noscript>
+<a id="exit" href="./" title="Leave the experience (unloads the engine)">← Exit</a>
+<div id="status" role="status">
+  <h1>ENTER WAYFARER</h1>
+  <p id="detail">Loading the engine and the Demonstrator 01 package…</p>
+  <div id="bar"><span></span></div>
+</div>
+<script src="$GODOT_URL"></script>
+<script>
+// WEB-002 Godot shell: starts Integrated Demonstrator 01 at once (the launcher page play/index.html is the click-to-load step).
+// Checks may pass Godot arguments through ?arg= only from the allowed list below; ordinary visitors pass none. Leaving releases the
+// WebGL context at once (the back-forward cache may still keep the page until the browser evicts it).
+const GODOT_CONFIG = $GODOT_CONFIG;
+const GODOT_THREADS_ENABLED = $GODOT_THREADS_ENABLED;
+(function () {
+  const status = document.getElementById('status');
+  const detail = document.getElementById('detail');
+  const bar = document.querySelector('#bar span');
+  const ALLOWED = ['--disable-render-loop', '--fixed-fps', '30', '60', '--', '--check-demo', '--autoplay', '--record-exit', '--no-navigator'];
+  const asked = new URLSearchParams(location.search).getAll('arg');
+  const args = asked.filter(a => ALLOWED.includes(a) || /^--from-chapter=[A-Z]+$/.test(a));
+  function fail(err) {
+    console.error(err);
+    status.classList.add('error');
+    status.hidden = false;
+    detail.textContent = (err && err.message ? err.message : String(err)) +
+      '\n\nReload to try again, or go back and open Explore Ship, which needs only WebGL.';
+    window.wayfarerPlay = { state: 'failed', error: String(err && err.message || err) };
+  }
+  const missing = Engine.getMissingFeatures({ threads: GODOT_THREADS_ENABLED });
+  if (missing.length) {
+    fail(new Error('This browser lacks features the Godot engine needs:\n' + missing.join('\n')));
+    return;
+  }
+  const engine = new Engine(GODOT_CONFIG);
+  window.addEventListener('pagehide', () => {
+    const gl = document.getElementById('canvas').getContext('webgl2');
+    if (gl) gl.getExtension('WEBGL_lose_context')?.loseContext();
+  });
+  window.addEventListener('pageshow', e => { if (e.persisted && window.wayfarerPlay?.state === 'running') location.reload(); });
+  const started = performance.now();
+  window.wayfarerPlay = { state: 'loading', args };
+  engine.startGame({
+    args,
+    onProgress(current, total) {
+      if (total > 0) {
+        const pct = Math.min(100, Math.round(100 * current / total));
+        bar.style.width = pct + '%';
+        detail.textContent = `Loading the engine and the Demonstrator 01 package… ${pct} % of ${(total / 1e6).toFixed(0)} MB`;
+      } else {
+        detail.textContent = `Loading… ${(current / 1e6).toFixed(1)} MB`;
+      }
+    },
+  }).then(() => {
+    status.hidden = true;
+    window.wayfarerPlay = { state: 'running', args, start_ms: Math.round(performance.now() - started) };
+  }, fail);
+}());
+</script>
+</body>
+</html>

@@ -3,41 +3,56 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>G.U. Wayfarer 001 — Engineering Explorer</title>
-<meta name="description" content="Interactive 3D engineering explorer of the G.U. Wayfarer 001 spacecraft from IGNITION, generated from the procedural Blender model.">
+<title>G.U. Wayfarer 001 — IGNITION</title>
+<meta name="description" content="The G.U. Wayfarer 001 spacecraft from IGNITION: explore the generated engineering model in 3D, or enter the ship in the interactive Godot demonstrator.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%2307090c'/%3E%3Cpath d='M2 8h12M8 3v10' stroke='%23e0a040' stroke-width='2'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="viewer.css">
-<script type="importmap">
-{ "imports": { "three": "./vendor/three/three.module.min.js", "three/addons/": "./vendor/three/addons/" } }
-</script>
+<link rel="stylesheet" href="site.css">
 </head>
 <body>
-<canvas id="view" aria-label="3D view of the Wayfarer spacecraft"></canvas>
-<header class="title">
-  <p class="eyebrow">IGNITION</p>
-  <h1>G.U. WAYFARER 001</h1>
-  <p class="sub">Engineering explorer · REP_PROXY geometry</p>
-</header>
-<div class="views" role="toolbar" aria-label="Camera">
-  <button data-view="threequarter" title="Three-quarter view (3)">3/4</button>
-  <button data-view="side" title="Side view (1)">Side</button>
-  <button data-view="top" title="Top view (2)">Top</button>
-  <button data-view="front" title="Bow view (4)">Bow</button>
-  <button data-view="aft" title="Aft view (5)">Aft</button>
-  <button data-view="reset" title="Reset camera (Home)">Reset</button>
-  <button id="panel-toggle" aria-expanded="false" aria-controls="panel" title="Assemblies">Assemblies</button>
-</div>
-<aside id="panel" class="panel" hidden>
-  <div class="panel-head"><span>Assemblies</span><button id="show-all" title="Show every assembly">Show all</button></div>
-  <ul id="assemblies"></ul>
-</aside>
-<div id="pick" class="pick" hidden></div>
-<div id="status" class="status" role="status">Loading model…</div>
-<footer class="foot">
-  <span id="build"></span>
-  <a href="https://densho.media" target="_blank" rel="noopener">Densho</a>
-  <a href="https://github.com/densho-media/ignition-wayfarer" target="_blank" rel="noopener">Source</a>
-</footer>
-<script type="module" src="viewer.js"></script>
+<main class="wrap">
+  <header>
+    <p class="eyebrow">IGNITION · Densho</p>
+    <h1>G.U. WAYFARER 001</h1>
+    <p class="lead">A fusion-drive spacecraft built from its engineering workbooks: every shape here is generated from sourced or
+      labelled parameters. Choose how to see it. Nothing heavy loads until you choose.</p>
+  </header>
+  <section class="choices" aria-label="Experiences">
+    <a class="choice" href="viewer/" id="go-viewer">
+      <span class="kicker">Inspect</span>
+      <strong>Explore Ship</strong>
+      <span>The whole vehicle in a 3D engineering viewer: orbit, zoom, camera presets, assemblies and each part's source status.
+        Works on phones.</span>
+      <span class="meta" id="viewer-meta">three.js · WebGL</span>
+    </a>
+    <a class="choice" href="play/" id="go-play">
+      <span class="kicker">Interactive</span>
+      <strong>Enter Wayfarer</strong>
+      <span>Integrated Demonstrator 01 in the Godot engine: from the docked exterior through the airlock, the microgravity spine and the
+        transfer drum to walking in ring A's spin gravity.</span>
+      <span class="meta" id="play-meta">Godot · WebGL 2 · keyboard and mouse · desktop browser</span>
+    </a>
+  </section>
+  <p class="note">Both are SIMULATION_ONLY representations (REP_PROXY geometry). Labels on screen keep CANON, DERIVED, WORKING,
+    PROTOTYPE, DIAGNOSTIC and HOLD values apart; nothing here is flight data or a certified procedure.</p>
+  <footer>
+    <span id="release">Release —</span>
+    <a href="review/">Technical review</a>
+    <a href="https://github.com/densho-media/ignition-wayfarer" rel="noopener">Source</a>
+    <a href="https://densho.media" rel="noopener">Densho</a>
+  </footer>
+</main>
+<script>
+// The release record only (a few kB, past the browser cache): version line and the download each choice costs.
+fetch('release.json', { cache: 'no-store' }).then(r => r.ok ? r.json() : null).then(rel => {
+  if (!rel) return;
+  const mb = b => (b / 1e6).toFixed(b < 1e7 ? 1 : 0) + ' MB';
+  document.getElementById('release').textContent = `Release ${rel.release} · ${rel.git_revision.slice(0, 7)} · ${rel.built_utc.slice(0, 10)}`;
+  const v = rel.experiences?.viewer, p = rel.experiences?.play;
+  if (v?.download_bytes) document.getElementById('viewer-meta').textContent = `three.js · WebGL · about ${mb(v.download_bytes)}`;
+  if (p?.download_bytes) document.getElementById('play-meta').textContent =
+    `Godot ${p.godot_short} · WebGL 2 · about ${mb(p.download_bytes)} · keyboard and mouse · desktop browser`;
+  if (!p) document.getElementById('go-play').classList.add('off');
+}).catch(() => {});
+</script>
 </body>
 </html>
