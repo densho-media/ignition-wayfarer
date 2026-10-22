@@ -219,6 +219,51 @@ ACCEPTANCE CRITERIA:     validate PASS; only expected prefixes in the diff; prev
   - **Git LFS.** Deferred, since no authored binary is committed yet.
   - **Moving every engineering asset into packs.** Rejected: no demonstrated need. Engineering targets keep their files and get registry ownership instead.
 
+## Evidence (2026-10-22, cloud: 4 vCPU, Blender 5.2.2)
+
+- **Pilot 1, M7.RA1 migrated** (commit `c8df4aa`):
+  - All 8 assemblies' `production_detail.elements()` digests are identical before and after.
+  - `compare_fingerprint.py --relocate Prod_RA1_ subsystems/WF_HABITAT.blend detail/WF_DETAIL_M7_RA1.blend Detail_M7_RA1` against `baseline_m8_exterior` gives PASS. All 4,770 objects are unchanged; the four RA1 objects moved with their world placement intact.
+  - Full pipeline PASS, accepted as `baseline_modules_pilot1`.
+  - `tests/verify_detail_authoring.py`: all six steps PASS (adopted, survives regeneration, contract change stops the build, rebind, exported as a production node of the pack).
+- **Pilot 2, parallel packs:**
+  - `rad_frame` (WF-THERMAL) and `ra2_equip` (WF-RING-A) were built in two worktrees from the same commit, at the same time.
+  - Each branch changed only its pack, its publication record and the generated contract file. That file is the only one both touched, and git merged it without conflict.
+  - Each branch passed `module validate`, `pipeline --quick --target auto` (selection: its host, `test_modules` and `test_production`, its declared groups) and `module publish`.
+  - After the merge: full pipeline PASS, with a diff of 2 instances, 2 files and 2 links and 0 unexpected. Accepted as `baseline_modules_pilot2`.
+  - `assembly validate` PASS: the records published in the separate worktrees match the integrated ship exactly, and an unpublished pack edit fails it.
+  - One hazard found and fixed in the rules: `git stash` is shared across worktrees.
+- **Runtime** (runtime-export, fresh build in a workspace, 31 Godot checks):
+
+  | | Before (`b1db258`) | After (`004d0e2`) |
+  | --- | --- | --- |
+  | Result | PASS, 31/31 checks | PASS, 31/31 checks |
+  | Nodes | 3,936 | 3,947 (+11: RAD.FRAME 3 families × 3 blades, RA2.EQP 2) |
+  | Triangles | 718,984 | 741,424 |
+  | Bounds | unchanged | unchanged |
+  | GLB | 32.50 MB | 33.02 MB |
+  | Wall time | 514 s | 485 s |
+
+  - **RA1 in the package.** Same nodes, names, `L4_VISUAL_ACCEPTED` maturity and runtime frame (`WF.ROTOR.1`, so it still turns with ring A). Only its lineage shortened (`Assembly_HABITAT`), so its node IDs changed. Godot binds through the manifest.
+  - **Radiator instancing.** Each RAD.FRAME family is 3 nodes sharing 1 GLB mesh.
+  - **RA1 stills.** `m7_section.py --views ra1_aisle` before and after are pixel-identical, with the layer shown and hidden.
+- **Timing** (measured on an idle machine unless marked):
+
+  | Operation | Before | After |
+  | --- | --- | --- |
+  | Change RA1's detail and rebuild | `--target HABITAT`: 29.9 / 31.0 s, rewrites WF_HABITAT (1.54 MB) and the vehicle | `module build m7_ra1`: 4.9–5.0 s, rewrites only `WF_DETAIL_M7_RA1` (0.36 MB); every other asset byte-identical. The host target now takes 29.0–29.8 s and also rebuilds the sector's two detail assets |
+  | Add a new pack (`module build <pack> --integrate`, under load) | n/a | 30–32 s (detail + host + vehicle) |
+  | `module validate` / `module publish` | n/a | 9 s / 10 s (Blender readback 5.0 s) |
+  | Quick loop for a pack change (`--target auto`, scoped inspection, under load) | n/a | 225–232 s (2 test modules, scoped inspection, draft previews) |
+  | Full pipeline | 366.5 s (`b1db258`, idle) | 409–433 s (under load) |
+
+  The pack edit selection runs 2 test modules instead of the whole suite. A pack-parameter edit no longer forces target `all`: pack TOMLs are outside the spec hash.
+- **Sizes:**
+  - Detail assets are 0.35–0.37 MB each; most of that is the per-file spec snapshot texts.
+  - WF_HABITAT went from 1.538 to 1.499 MB with RA1 moved out.
+  - Each accepted baseline adds a 3.3 MB fingerprint JSON to Git (existing practice).
+  - Instancing: one `WF_DETAIL_RAD_FRAME` mesh set is carried by all three blades through the linked component.
+
 ## Limitations and next migrations
 
 - Only M7.RA1 (and the Pilot 2 packs) run as packs. M7.XFR/SPK, M7.ENT/EXT.PORT/TRK and M8 are still built inside their hosts; TODO ranks their migration.
