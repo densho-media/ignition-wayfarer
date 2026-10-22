@@ -68,6 +68,7 @@ const VIEWS = {
 function frame(viewName = 'threequarter') {
   if (!box) return;
   // Drop the damping's leftover motion so the view lands exactly.
+  const damping = controls.enableDamping;
   controls.enableDamping = false;
   controls.update();
   const view = VIEWS[viewName] || VIEWS.threequarter;
@@ -92,7 +93,7 @@ function frame(viewName = 'threequarter') {
   camera.far = dist + radius * 4;
   camera.updateProjectionMatrix();
   controls.update();
-  controls.enableDamping = true;
+  controls.enableDamping = damping;
   for (const b of document.querySelectorAll('[data-view]')) b.setAttribute('aria-pressed', String(b.dataset.view === viewName));
 }
 

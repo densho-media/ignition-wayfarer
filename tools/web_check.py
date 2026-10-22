@@ -3,7 +3,8 @@
 Serves the site under /ignition-wayfarer/ (the GitHub Pages project path), loads it with software WebGL (SwiftShader),
 and drives the real pointer, wheel and touch input: whole-ship framing, orbit, zoom, pan, reset, camera presets, picking,
 assembly hiding, a phone viewport with one-finger orbit and pinch zoom, and no failed or off-site request. Screenshots
-and check.json go to --out. It checks the viewer's behaviour, not rendering speed on real hardware.
+and check.json go to --out. It checks the viewer's behaviour, not rendering speed on real hardware. The camera's
+damping (presentation easing) is switched off before input so that each check needs only a few frames of slow software rendering.
 
     python3 tools/web_check.py <site dir> --out <dir> [--chrome google-chrome]
 """
@@ -119,9 +120,9 @@ class Page:
             time.sleep(0.25)
         return False
 
-    def frames(self, n=6):
-        """Let the render loop (and the controls' damping) run."""
-        self.js(f'new Promise(r => {{ let k = {n}; const f = () => --k ? requestAnimationFrame(f) : r(1); requestAnimationFrame(f); }})')
+    def frames(self, n=3):
+        """Let the render loop run (software WebGL on a CI runner can take seconds per frame)."""
+        self.js(f'new Promise(r => {{ let k = {n}; const f = () => --k ? requestAnimationFrame(f) : r(1); requestAnimationFrame(f); }})', timeout=180)
 
     def mouse(self, kind, x, y, button='none', buttons=0, **extra):
         self.send('Input.dispatchMouseEvent', {'type': kind, 'x': x, 'y': y, 'button': button, 'buttons': buttons, **extra})
@@ -201,7 +202,9 @@ def check(site, out, binary, sandbox=True):
             t0 = time.monotonic()
             page.send('Page.navigate', {'url': url})
             ready = page.wait('!!(window.wayfarer && window.wayfarer.model)', 240)
-            page.frames(10)
+            if ready:
+                page.js('window.wayfarer.controls.enableDamping = false')
+            page.frames()
             record(f'{label}: model loaded', ready, seconds=round(time.monotonic() - t0, 1),
                    status=page.js("document.getElementById('status').textContent"))
             return ready
@@ -220,36 +223,36 @@ def check(site, out, binary, sandbox=True):
         home = page.js(CAMERA)
 
         page.drag((640, 400), (900, 330))
-        page.frames(30)
+        page.frames()
         orbit = page.js(CAMERA)
         record('left drag orbits', moved(home, orbit, 'p') > 1 and moved(home, orbit, 't') < 1e-3 and moved(home, orbit, 'd') < 0.01 * home['d'],
                moved_m=round(moved(home, orbit, 'p'), 2))
         page.mouse('mouseWheel', 640, 400, deltaX=0, deltaY=-600)
-        page.frames(30)
+        page.frames()
         zoom = page.js(CAMERA)
         record('wheel zooms in', zoom['d'] < 0.9 * orbit['d'], distance=[round(orbit['d'], 1), round(zoom['d'], 1)])
         page.drag((640, 400), (520, 470), button='right')
-        page.frames(30)
+        page.frames()
         pan = page.js(CAMERA)
         record('right drag pans', moved(zoom, pan, 't') > 0.5, target_moved_m=round(moved(zoom, pan, 't'), 2))
         page.click(*page.centre_of('[data-view=reset]'))
-        page.frames(30)
+        page.frames()
         reset = page.js(CAMERA)
         record('Reset restores the whole-ship view', moved(home, reset, 'p') < 0.05 and moved(home, reset, 't') < 0.05)
 
         for view in ('side', 'top', 'front'):
             page.click(*page.centre_of(f'[data-view={view}]'))
-            page.frames(10)
+            page.frames()
             x, y = page.js(FRAMING)
             record(f'{view} preset frames the ship', max(x, y) <= 1.0 and max(x, y) >= 0.6, ndc_extent=[round(x, 3), round(y, 3)])
             page.screenshot(out / f'desktop_{view}.png')
         page.click(*page.centre_of('[data-view=reset]'))
-        page.frames(10)
+        page.frames()
 
         picked = None
         for px, py in ((640, 400), (600, 400), (700, 410), (560, 380), (740, 380)):
             page.click(px, py)
-            page.frames(4)
+            page.frames()
             if page.js("!document.getElementById('pick').hidden"):
                 picked = page.js("document.getElementById('pick').innerText")
                 break
@@ -261,11 +264,11 @@ def check(site, out, binary, sandbox=True):
         page.click(*page.centre_of('#panel-toggle'))
         first = page.js("document.querySelector('#assemblies li span').textContent")
         page.click(*page.centre_of('#assemblies li input'))
-        page.frames(4)
+        page.frames()
         hidden = page.js('[...window.wayfarer.groups.values()].filter(g => !g.visible).length')
         page.screenshot(out / 'desktop_assembly_hidden.png')
         page.click(*page.centre_of('#show-all'))
-        page.frames(4)
+        page.frames()
         shown = page.js('[...window.wayfarer.groups.values()].every(g => g.visible)')
         record('assembly hide and Show all', hidden == 1 and shown, hidden_assembly=first)
 
@@ -281,7 +284,7 @@ def check(site, out, binary, sandbox=True):
             for i in range(1, 11):
                 page.touch('touchMove', [(195 + 12 * i, 420)])
             page.touch('touchEnd', [])
-            page.frames(30)
+            page.frames()
             spun = page.js(CAMERA)
             record('phone: one-finger drag orbits', moved(start, spun, 'p') > 1 and moved(start, spun, 't') < 1e-3,
                    moved_m=round(moved(start, spun, 'p'), 2))
@@ -289,7 +292,7 @@ def check(site, out, binary, sandbox=True):
             for i in range(1, 11):
                 page.touch('touchMove', [(165 - 8 * i, 420), (225 + 8 * i, 420)])
             page.touch('touchEnd', [])
-            page.frames(30)
+            page.frames()
             pinch = page.js(CAMERA)
             record('phone: pinch zooms in', pinch['d'] < 0.9 * spun['d'], distance=[round(spun['d'], 1), round(pinch['d'], 1)])
             overflow = page.js('document.documentElement.scrollWidth > window.innerWidth')
