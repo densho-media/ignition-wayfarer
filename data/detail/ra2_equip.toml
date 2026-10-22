@@ -1,0 +1,48 @@
+# Detail pack ra2_equip (docs/MODULES.md): overhead services equipment of ring A sector 2 (WORK_MEDICAL_OPS), module WF-RING-A.
+# Owned by a WF-RING-A detail session: this manifest, src/wayfarer/detail/pack_ra2_equip.py and the generated
+# assets/wayfarer/detail/WF_DETAIL_RA2_EQP.blend, linked by WF_HABITAT at the sector instance (1, 2) only (the interior components are
+# shared with ring B). Modular pilot 2b (2026-10-22). Every value is a PROTOTYPE depiction choice: a transverse cable tray down the centre
+# of each fit-out frame bay, broken round every item that reaches the overhead, with a junction box at each run's ends. Nothing comes
+# below the overhead band (-2.85 m), so the aisle, the work stations, the medical couch and every route body keep their clearances; no
+# load, power, pressure or mass claim.
+[pack]
+module = "WF-RING-A"
+version = 1
+scope = "pack"
+enabled = true
+maturity = "L4_VISUAL_CANDIDATE"
+status = "PROTOTYPE"
+evidence_ref = "l4_production_gate"
+detail_class = "PRODUCTION"
+inspect = ["rotation", "route"]
+views = ["overhead", "cutaway"]   # presentation/interior_preview.py views (the sector with its detail)
+summary = "Transverse overhead cable trays and junction boxes in the four fit-out bays of ring A sector 2."
+
+[assembly."RA2.EQP"]
+anchor = "WF-RING-A.SECTOR.1.2"
+function = "WORK_MEDICAL_OPS"
+zone = "ring-A sector 2 WORK_MEDICAL_OPS overhead (sector frame: +X axial, +Y down in spin, +Z tangential; deck at y 0)"
+classes = ["ENGINEERING_FLEXIBLE"]
+# Claimed space in the sector frame (m): the sector's axial length, the overhead band (-2.90 to -2.85) and the panel span.
+envelope_min = [-1.75, -2.90, -2.45]
+envelope_max = [1.75, -2.85, 2.45]
+
+[params]
+overhead_y_m = -2.90      # the overhead panel's face (habitat_interior Interior_Overhead)
+span_z_m = 2.40           # trays run within +-span_z_m
+tray_width_m = 0.12       # along x
+tray_depth_m = 0.028      # hanging below the overhead
+tray_lip_m = 0.012        # side lips' width
+min_run_m = 0.25          # shorter free runs get no tray
+box_size_m = 0.10         # junction boxes: square in x and z
+box_depth_m = 0.034
+box_inset_m = 0.07        # box centre from a run's end
+margin_m = 0.04           # clearance to every overhead item, the hatch opening and the landing well
+hatch_margin_m = 0.10
+item_floor_y_m = -2.55    # items whose top is above this reach the overhead zone
+bevel_m = 0.003
+
+[materials]
+# [r, g, b, roughness, metallic] (Blender linear), M7.1 value hierarchy: trays as machinery (~0.26), junction covers as service panels (~0.45).
+ra2_tray = [0.25, 0.26, 0.28, 0.55, 0.50]
+ra2_box = [0.44, 0.45, 0.47, 0.50, 0.15]
