@@ -89,7 +89,9 @@ site, and `--no-recording` skips the recording.
 ## GitHub Actions
 
 `.github/workflows/web-explorer.yml`:
-- **Triggers.** Pushes to `main`, `claude/**` and `local/**`, plus a manual run. There is no `pull_request` trigger.
+- **Triggers.** Pushes to `main`, `claude/**` and `local/**`, plus a manual run. There is no `pull_request` trigger. A push
+  that changes only `docs/`, `TODO.md`, `README.md`, `AGENTS.md` or `CLAUDE.md` runs nothing (none of it is in the site or
+  read by a test); the live site stays at the last built commit.
 - **Every branch.** Unit tests, the Blender build with geometry diff 0, `web --native`, and `web_check --record`. Artifacts:
   - the site (`wayfarer-web-site`, the preview build)
   - the check screenshots and logs

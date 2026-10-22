@@ -3,12 +3,14 @@
 # Only main deploys to GitHub Pages, and only after the tests and the build/export/browser-check job pass; a failed run never
 # replaces the live site. After a deploy, the release job keeps the exact site and the native Linux build as a GitHub Release
 # (web-<release>), which web-rollback.yml can redeploy without rebuilding.
-# No pull_request trigger: forks never run this workflow or reach the deploy job.
+# No pull_request trigger: forks never run this workflow or reach the deploy job. A push that changes only project documentation
+# (none of it is in the site or read by a test) runs nothing; the live site then stays at the last built commit.
 name: Web explorer
 
 on:
   push:
     branches: [main, 'claude/**', 'local/**']
+    paths-ignore: ['docs/**', 'TODO.md', 'README.md', 'AGENTS.md', 'CLAUDE.md']
   workflow_dispatch:
 
 permissions:
@@ -40,22 +42,26 @@ jobs:
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
 
-      - name: Blender tarball (cached)
+      - name: Blender (cached unpacked; the tarball is SHA-256 checked when the cache is filled)
+        id: blender
         uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9  # v6.1.0
         with:
-          path: ~/blender-dl
-          key: blender-${{ env.BLENDER_VERSION }}-${{ env.BLENDER_SHA256 }}
+          path: ~/blender-${{ env.BLENDER_VERSION }}-linux-x64
+          key: blender-dir-${{ env.BLENDER_VERSION }}-${{ env.BLENDER_SHA256 }}
 
       - name: Install Blender ${{ env.BLENDER_VERSION }} (SHA-256 pinned)
+        env:
+          CACHED: ${{ steps.blender.outputs.cache-hit }}
         run: |
           set -euo pipefail
-          sudo apt-get update -qq
-          sudo apt-get install -y -qq --no-install-recommends libegl1 libgl1 libxi6 libxkbcommon0 libxxf86vm1 libxfixes3 libxrender1 libsm6
-          mkdir -p ~/blender-dl
-          tarball=~/blender-dl/blender-$BLENDER_VERSION-linux-x64.tar.xz
-          [ -f "$tarball" ] || curl -sSfL -o "$tarball" "https://download.blender.org/release/Blender$BLENDER_SERIES/blender-$BLENDER_VERSION-linux-x64.tar.xz"
-          echo "$BLENDER_SHA256  $tarball" | sha256sum -c -
-          tar -xf "$tarball" -C ~
+          sudo apt-get install -y -qq --no-install-recommends libegl1 libgl1 libxi6 libxkbcommon0 libxxf86vm1 libxfixes3 libxrender1 libsm6 \
+            || { sudo apt-get update -qq && sudo apt-get install -y -qq --no-install-recommends libegl1 libgl1 libxi6 libxkbcommon0 libxxf86vm1 libxfixes3 libxrender1 libsm6; }
+          if [ "$CACHED" != true ]; then
+            tarball=$RUNNER_TEMP/blender-$BLENDER_VERSION-linux-x64.tar.xz
+            curl -sSfL -o "$tarball" "https://download.blender.org/release/Blender$BLENDER_SERIES/blender-$BLENDER_VERSION-linux-x64.tar.xz"
+            echo "$BLENDER_SHA256  $tarball" | sha256sum -c -
+            tar -xf "$tarball" -C ~
+          fi
           echo "WAYFARER_BLENDER=$HOME/blender-$BLENDER_VERSION-linux-x64/blender" >> "$GITHUB_ENV"
 
       - name: Godot 4.7.2 editor and templates (cached; SHA-512 checked by web_play.py)

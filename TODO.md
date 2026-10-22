@@ -472,9 +472,14 @@ all 54 engineering gates currently HOLD. No detailed robot art before the L2 lay
   exposure, embed/CSP permissions and browser performance/accessibility before a prototype. Reuse the GLB pipeline and stable IDs;
   keep Godot. Acceptance would include publication, desktop/mobile interaction, iframe/new-tab fallback, credits and update procedure.
 - [ ] **P05 — Website follow-ups (WEB-002). Optional, outside WF-R1.** The site, play build, checks, deploy, verify, release and
-  rollback exist (docs/wayfarer-web-experience-plan.md). Open:
-  - Verify the first `main` deploy of WEB-002 live: the verify job, then a manual look on desktop and phone.
-  - Test Firefox and Safari (macOS, iOS) by hand and measure frame rates on real GPUs; record the results in the plan §5–6.
+  rollback exist (docs/wayfarer-web-experience-plan.md); the first deploy (`b1db258`) passed the live verify job. Owner's order:
+  - Measure on real hardware: frame rates on real GPUs (viewer and Godot, desktop and phone); all numbers so far are software
+    rendering. Record them in the plan §5–6.
+  - Firefox (then Safari on macOS and iOS): test by hand, then add to the browser check where a headless build exists.
+  - Navigator glyphs ▶ ◆ ○ render as boxes on Web: ship a font with them or use drawn markers (Godot presentation only).
+  - Build time: the build job is down to 8.8 min (browser check 5.3 min, with the equivalence runs alongside the walk; docs-only
+    pushes run nothing). Open: reuse an unchanged Enter Wayfarer (key: the staged Godot project's files, shell, Godot pins) from
+    the last verified release, skipping the native check, recording and browser equivalence; about 1.5 min per viewer-only change.
   - Decide whether the Godot build should support touch or stay keyboard-only on phones.
   - Extend browser-vs-native equivalence past GRAVITY→INSPECT only if a shorter recorded path through the earlier chapters exists.
 - [ ] **P03 — Optional compliant-tether stress study. PARKED, owner-led.** Do only when OD-038/required interaction needs it; do not

@@ -56,7 +56,7 @@ LIMITATIONS = [
     'A few navigator markers (geometric symbols such as ▶ ◆ ○) show as empty boxes in the browser: Godot\'s default font lacks them and '
     'the browser build has no system fonts to fall back on (presentation only).',
     'Tested automatically in headless Chromium with software WebGL; Firefox, Safari, phones and real-GPU frame rates are not verified '
-    'by CI (see docs/WEB.md).',
+    'by CI (see docs/wayfarer-web-experience-plan.md).',
     'GitHub Pages caches each file for 10 minutes; engine, pack and model files are content-named so a new release never mixes files.',
 ]
 SKIP = {'README.md', 'play/shell.html'}      # in the repository, not the site (the shell is a Godot export input)
