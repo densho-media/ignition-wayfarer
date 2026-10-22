@@ -212,8 +212,10 @@ async function load() {
   showBuild(build);
   const draco = new DRACOLoader().setDecoderPath('vendor/three/draco/');
   const loader = new GLTFLoader().setDRACOLoader(draco);
+  // Pages serves the GLB gzip-compressed: e.total is the compressed size, e.loaded counts unpacked bytes.
+  const total = build?.glb?.bytes;
   const gltf = await loader.loadAsync('model/wayfarer.glb', e => {
-    if (e.total) status.textContent = `Loading model… ${Math.round(100 * e.loaded / e.total)} %`;
+    if (total) status.textContent = `Loading model… ${Math.min(100, Math.round(100 * e.loaded / total))} %`;
     else status.textContent = `Loading model… ${(e.loaded / 1e6).toFixed(1)} MB`;
   });
   draco.dispose();
