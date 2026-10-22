@@ -150,7 +150,10 @@ Measured 2026-10-22 in Claude Code cloud (4 vCPU, no GPU):
   cached unpacked directory: 22 s for the install step on the first (cache-filling) run, against 68 s and 146 s.
 - Two builds from the same inputs give byte-identical files (viewer GLB and labels, three.js, Godot engine, shell, staged
   Godot project), except the Godot `.pck` and the files that name it. Skipping an unchanged Enter Wayfarer therefore has to be
-  keyed on the staged project's inputs, not on the pack.
+  keyed on the staged project's inputs, not on the pack. With that reuse (`--reuse-play`), a rebuild from unchanged play
+  inputs took 128 s instead of 261 s locally, and the check 423 s instead of 449 s (36/36, with the equivalence result carried;
+  play files byte-identical). A wrong key, a changed byte in the pack, a failed equivalence test or another native zip each
+  refuse reuse.
 - The first CI run also downloads the 1.28 GB Godot template archive once per cache key.
 
 **Live site** (first WEB-002 deploy, `b1db258`, release `20261022-b1db258`, run 39780238848; Google Chrome 156 headless,

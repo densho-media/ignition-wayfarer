@@ -327,8 +327,14 @@ def check(site, out, binary, sandbox=True, record=False, play_seconds=900, live=
         if os.environ.get('GITHUB_ACTIONS') and not ok:
             print(f'::error title=web check::{name} {json.dumps(detail)}'.replace('\n', ' '), flush=True)     # public run annotation
 
-    side = None
-    if play_release and recording:
+    side, carried = None, (play_release or {}).get('reused_from')
+    if play_release and recording and carried:
+        # The play files are byte-identical to a verified release with the same inputs (web_play.reusable): its browser-vs-native
+        # result holds for them. The walk below still boots and plays them.
+        record_check(f"play: browser-vs-native equivalence carried from release {carried['release']} (same play files)",
+                     carried['equivalence'].get('result') == 'PASS', release=carried['release'], git_revision=carried['git_revision'],
+                     note=carried['equivalence'].get('note'))
+    elif play_release and recording:
         side = threading.Thread(target=run_equivalence, args=(url, play_release, binary, sandbox, out, play_seconds, record_check, metrics))
         side.start()
     profile = tempfile.mkdtemp(prefix='wf-web-check-')
@@ -597,7 +603,9 @@ def check(site, out, binary, sandbox=True, record=False, play_seconds=900, live=
         release['tests'] = {'viewer': summary(group(('viewer', 'phone'))), 'isolation': summary(group(('start', 'play launcher', 'switching'))),
                             'play': summary(group(('play',))), 'all': summary(results), 'metrics': metrics}
         equivalence = [r for r in results if r['check'].startswith(('play: Demonstrator 01 check suite', 'play: whole-journey'))]
-        if equivalence:
+        if carried and recording:
+            release['tests']['equivalence'] = {**carried['equivalence'], 'carried_from': carried['release']}
+        elif equivalence:
             eq, suite = metrics.get('equivalence') or {}, metrics.get('check_suite') or {}
             release['tests']['equivalence'] = {
                 'result': 'PASS' if all(r['ok'] for r in equivalence) else 'FAIL',

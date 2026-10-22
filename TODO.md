@@ -477,9 +477,8 @@ all 54 engineering gates currently HOLD. No detailed robot art before the L2 lay
     rendering. Record them in the plan §5–6.
   - Firefox (then Safari on macOS and iOS): test by hand, then add to the browser check where a headless build exists.
   - Navigator glyphs ▶ ◆ ○ render as boxes on Web: ship a font with them or use drawn markers (Godot presentation only).
-  - Build time: the build job is down to 8.8 min (browser check 5.3 min, with the equivalence runs alongside the walk; docs-only
-    pushes run nothing). Open: reuse an unchanged Enter Wayfarer (key: the staged Godot project's files, shell, Godot pins) from
-    the last verified release, skipping the native check, recording and browser equivalence; about 1.5 min per viewer-only change.
+  - Build time: confirm the first CI build that reuses Enter Wayfarer (it needs a release made by the reuse code, so the second
+    main build after it). The site walk (5-8 min under software WebGL) is now the longest step.
   - Decide whether the Godot build should support touch or stay keyboard-only on phones.
   - Extend browser-vs-native equivalence past GRAVITY→INSPECT only if a shorter recorded path through the earlier chapters exists.
 - [ ] **P03 — Optional compliant-tether stress study. PARKED, owner-led.** Do only when OD-038/required interaction needs it; do not

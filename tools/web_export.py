@@ -135,7 +135,7 @@ def pipeline_record(root, run_dir):
     return record
 
 
-def run(root, out=None, pipeline_run=None, draco=True, with_play=True, native=False, native_check=True):
+def run(root, out=None, pipeline_run=None, draco=True, with_play=True, native=False, native_check=True, reuse=None, reuse_native=None):
     started = time.monotonic()
     with write_lock(root) as lock:
         if lock is None:
@@ -194,7 +194,7 @@ def run(root, out=None, pipeline_run=None, draco=True, with_play=True, native=Fa
         if with_play:
             try:
                 play = web_play.build(root, run_dir, site / 'play', work / 'manifest.json', work / 'build_identity.json',
-                                      native=native, native_check=native_check)
+                                      native=native, native_check=native_check, reuse=reuse, reuse_native=reuse_native)
             except (RuntimeError, ValueError, OSError) as error:
                 return {'result': 'FAIL', 'step': 'play', 'reason': str(error)[-2000:], 'run_dir': str(run_dir)}
             (site / 'play/play.json').write_text(json.dumps({
@@ -214,6 +214,8 @@ def run(root, out=None, pipeline_run=None, draco=True, with_play=True, native=Fa
                   'viewer_mb': round(release['experiences']['viewer']['download_bytes'] / 1e6, 2),
                   'play': play and {'mb': round(release['experiences']['play']['download_bytes'] / 1e6, 2), 'entry': play['entry'],
                                     'native_reference': play['native_reference'], 'native_zip': play['native_zip'],
+                                    'input_key': play['input_key'], 'reused_from': play['reused_from'] and play['reused_from']['release'],
+                                    'reuse_note': play['reuse_note'],
                                     'seconds': play['seconds'], 'step_seconds': play['step_seconds']},
                   'mesh_nodes': glb['mesh_nodes'], 'assemblies': len(glb['assemblies']), 'triangles': manifest['triangles'],
                   'pipeline': built and {'run': built['run'], 'geometry_diff': built['geometry_diff']}}
@@ -258,7 +260,9 @@ def release_record(root, site, build, play, revision, dirty, built):
             **({'play': {'entry': 'play/', 'page': f"play/{play['entry']}", 'godot': play['godot'], 'godot_short': web_play.GODOT['version'],
                          'download_bytes': size([f'play/{f}' for f in play['files'].values()]), 'files': play['files'],
                          'variant': play['variant'], 'scene': play['scene'], 'package': play['package'],
-                         'reduced_fidelity': play['reduced_fidelity'], 'native_reference': play['native_reference']}} if play else {}),
+                         'reduced_fidelity': play['reduced_fidelity'], 'native_reference': play['native_reference'],
+                         'native_zip_sha256': play['native_zip_sha256'], 'input_key': play['input_key'],
+                         'reused_from': play['reused_from']}} if play else {}),
             'review': {'entry': 'review/'},
         },
         'status_labels': ['CANON', 'DERIVED', 'WORKING', 'PROTOTYPE', 'DIAGNOSTIC', 'HOLD'],

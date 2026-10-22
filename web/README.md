@@ -32,10 +32,17 @@ walks it in headless Chrome.
 
 ```bash
 python3 tools/workflow.py pipeline --quick --previews none
-python3 tools/workflow.py web --pipeline-run runs/<that run> --out runs/web-site [--native] [--no-play]
+python3 tools/workflow.py web --pipeline-run runs/<that run> --out runs/web-site [--native] [--no-play] \
+    [--reuse-play <previous site> [--reuse-native <its native zip>]]
 python3 tools/web_check.py runs/web-site --out runs/web-check --chrome <chrome or chromium> [--record]
 ```
 
+- **Reuse.** With `--reuse-play`, an Enter Wayfarer whose inputs are unchanged is copied from that previous site instead of
+  rebuilt. The inputs are the staged Godot project (the commit fields in its manifests left out), the shell, `web_play.py`
+  and the pinned Godot. The previous site must carry the same `input_key`, passing play and equivalence tests, and play files
+  (and native zip) matching its `release.json`. The import, native check, recording and exports are skipped, and the browser
+  check carries that release's browser-vs-native result. Godot's `.pck` differs between two exports of the same inputs, so
+  the key is computed from the inputs, not the pack. CI passes the latest `web-*` release.
 - **Toolchain.** `web` needs Blender (`WAYFARER_BLENDER`).
   - Enter Wayfarer also needs the official Godot 4.7.2 standard build. `tools/web_play.py` downloads it once into
     `~/.cache/wayfarer/godot-4.7.2` (`WAYFARER_GODOT_CACHE`), checks it against the release SHA-512 sums, and keeps only the Web

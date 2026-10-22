@@ -85,11 +85,29 @@ jobs:
           echo "PIPELINE_SECONDS=$SECONDS" >> "$GITHUB_ENV"
           echo "PIPELINE_RUN=$(python3 -c 'import json; print(json.load(open("pipeline.json"))["run_dir"])')" >> "$GITHUB_ENV"
 
+      - name: Previous verified release (its Enter Wayfarer files are reused when the play inputs are unchanged)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -uo pipefail
+          # Releases exist only for main deploys that passed live verification; any failure here just means a full play build.
+          tag=$(gh release list --repo "$GITHUB_REPOSITORY" --limit 30 --json tagName \
+                --jq '[.[].tagName | select(test("^web-[0-9]{8}-[0-9a-f]{7}$"))][0] // empty' 2>/dev/null)
+          if [ -n "$tag" ] && gh release download "$tag" --repo "$GITHUB_REPOSITORY" --dir ~/previous \
+               --pattern "wayfarer-site-$tag.tar.gz" --pattern wayfarer-demo01-linux-x86_64.zip 2>/dev/null; then
+            mkdir -p ~/previous/site && tar -xzf ~/previous/wayfarer-site-$tag.tar.gz -C ~/previous/site \
+              && echo "REUSE=--reuse-play $HOME/previous/site --reuse-native $HOME/previous/wayfarer-demo01-linux-x86_64.zip" >> "$GITHUB_ENV" \
+              && echo "::notice title=play reuse::comparing with release $tag"
+          else
+            echo "::notice title=play reuse::no previous release with a native build (${tag:-none}); full play build"
+          fi
+
       - name: Export the viewer GLB and the Godot Web build, assemble the site
         run: |
           set -euo pipefail
           SECONDS=0
-          python3 tools/workflow.py web --pipeline-run "$PIPELINE_RUN" --out _site --native | tee web.json
+          python3 tools/workflow.py web --pipeline-run "$PIPELINE_RUN" --out _site --native ${REUSE:-} | tee web.json
+          python3 -c "import json; p = json.load(open('web.json')).get('play') or {}; print('::notice title=play reuse::' + str(p.get('reuse_note')))"
           echo "WEB_SECONDS=$SECONDS" >> "$GITHUB_ENV"
           echo "WEB_RUN=$(python3 -c 'import json; print(json.load(open("web.json"))["run_dir"])')" >> "$GITHUB_ENV"
 
