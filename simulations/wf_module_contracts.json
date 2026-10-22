@@ -669,9 +669,28 @@
      "host": "HABITAT",
      "pack": "m7_ra1",
      "scope": "M7"
+    },
+    "RA2.EQP": {
+     "anchor": "WF-RING-A.SECTOR.1.2",
+     "asset": "WF_DETAIL_RA2_EQP",
+     "envelope": [
+      [
+       -1.75,
+       -2.9,
+       -2.45
+      ],
+      [
+       1.75,
+       -2.85,
+       2.45
+      ]
+     ],
+     "host": "HABITAT",
+     "pack": "ra2_equip",
+     "scope": "pack"
     }
    },
-   "hash": "6607b6ac91595909"
+   "hash": "95e5c1545de7976f"
   },
   "WF-RING-B": {
    "anchors": {
