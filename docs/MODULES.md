@@ -145,6 +145,7 @@ change to an engineering module that a pack's code imports also selects that pac
   - Physics-locked parts stay proxy grey: radiator hot faces, drive and nozzles, EYE apertures, closures and seals.
   - Physical radiator area never shrinks: radiator detail stays off the emitting cells (`thermal_geometry.cell_span`), only on non-emitting structure, joints and edges.
 - **Worktrees.** Each needs its own full build (assets are not tracked). The build lock is per checkout.
+- **Never `git stash` in parallel sessions.** The stash is shared by every worktree of a repository. In the Pilot 2 trial, two sessions stashed their packs at the same time and each popped the other's. Move work aside to a session-private folder, or commit it on the session's branch.
 
 ## How to
 
