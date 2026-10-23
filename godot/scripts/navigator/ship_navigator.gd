@@ -118,6 +118,8 @@ func setup(h, d = null) -> void:
 	space = WfSpaceNavigator.new()
 	add_child(space)
 	space.setup(self)
+	if WfInput.compact():
+		level = 0                                # MOB-001: a phone's view first; the Map button shows the locator
 	setup_ms = (Time.get_ticks_usec() - t0) / 1000.0
 	update_now()
 
@@ -176,6 +178,9 @@ func _build_ui() -> void:
 
 func layout() -> void:
 	var size: Vector2 = get_viewport().get_visible_rect().size
+	if WfInput.compact():
+		_layout_compact(size)
+		return
 	panel.visible = level > 0 and not space_shown()
 	if level != 1:
 		for c in host.stop_list.get_parent().get_children():
@@ -213,6 +218,39 @@ func layout() -> void:
 		card.visible = false
 	else:
 		card.visible = card_page >= 0
+
+## MOB-001 phone / tablet: the corner locator small under the touch utility row (top right), the overview top left (a finger on it
+## stays the map's: drag turns, tap picks), the systems card in place of the chapter text; the key line is left out (Map and Systems
+## are touch buttons). The map starts hidden: Map shows it.
+func _layout_compact(size: Vector2) -> void:
+	var safe: Array = WfInput.touch.safe
+	var top := float(safe[1]) + 76.0
+	panel.visible = level > 0 and not space_shown()
+	keys_label.visible = false
+	hint_label.visible = level == 2
+	route_label.visible = level == 2
+	if level == 2:
+		var w := minf(size.x * 0.58, 640.0)
+		view_box.custom_minimum_size = Vector2(w, minf(size.y * 0.5, w * 0.62))
+		for l in [loc_label, state_label, route_label, hint_label]:
+			l.custom_minimum_size.x = w
+		view_box.mouse_filter = Control.MOUSE_FILTER_STOP
+		panel.size = Vector2.ZERO
+		panel.position = Vector2(float(safe[0]) + 12.0, float(safe[1]) + 12.0)
+	else:
+		view_box.custom_minimum_size = Vector2(220, 104)
+		for l in [loc_label, state_label]:
+			l.custom_minimum_size.x = 220
+		view_box.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		panel.size = Vector2.ZERO
+		panel.position = Vector2(size.x - float(safe[2]) - 12.0 - panel.get_combined_minimum_size().x, top)
+	panel.size = panel.get_combined_minimum_size()
+	var cw := clampf(size.x * 0.56 - float(safe[0]), 240.0, 520.0)
+	card_label.custom_minimum_size.x = cw
+	card.size = Vector2.ZERO
+	card.size = card.get_combined_minimum_size()
+	card.position = Vector2(float(safe[0]) + 12.0, float(safe[1]) + 12.0) if level != 2 else Vector2(size.x - float(safe[2]) - 12.0 - card.size.x, top)
+	card.visible = card_page >= 0 and not space_shown()
 
 # ------------------------------------------------------------------------------------------------------------------------- world
 
@@ -900,7 +938,7 @@ func card_text() -> String:
 func _unhandled_input(e: InputEvent) -> void:
 	# ACI-09: the ship-map keys are WfInput actions (ship.*, context nav); the forward explorer and drone demo still read raw keys
 	# (WfInput.RESERVED["nav"]) and see them first, as before.
-	if e.is_echo() or not e.is_pressed() or not (e is InputEventKey or e is InputEventJoypadButton):
+	if e.is_echo() or not e.is_pressed() or not (e is InputEventKey or e is InputEventJoypadButton or e is InputEventAction):
 		return
 	if space_shown():
 		if e.is_action_pressed("ship.mode"):        # the guidance mode is shared by both views (SPACE-020)

@@ -43,6 +43,7 @@ var toast_label := Label.new()
 var toast_box := PanelContainer.new()
 var toast_t := 0.0
 var card_done_t := 0.0
+var stack := VBoxContainer.new()
 
 func _ready() -> void:
 	I = get_parent()
@@ -101,7 +102,6 @@ func _ready() -> void:
 		cc.add_child(c)
 	# Lesson card and toast share one stack at the bottom centre, just above the review guide's key bar: the keys are explained
 	# where the keys are shown, and the guide's step card (top left) and the scene's panels (top right) stay clear.
-	var stack := VBoxContainer.new()
 	stack.set_anchors_and_offsets_preset(Control.PRESET_CENTER_BOTTOM)
 	stack.offset_bottom = -150
 	stack.grow_horizontal = Control.GROW_DIRECTION_BOTH
@@ -211,7 +211,27 @@ func _next_capture() -> void:
 	armed = false
 	_show()
 
+## MOB-001 phone / tablet: the lesson card and toast at the top centre (the bottom belongs to the thumbs), every panel within the screen.
+func _compact_layout() -> void:
+	var vs := get_viewport().get_visible_rect().size
+	var narrow := vs.x < 640.0
+	var w := minf(400.0, vs.x - 32.0) if narrow else minf(400.0, vs.x * 0.40)
+	card.custom_minimum_size.x = w
+	card_body.custom_minimum_size.x = w - 30.0
+	toast_label.custom_minimum_size.x = w - 20.0
+	# beside the chapter text (top left) under the touch utility row (top right); centred on a narrow (upright) phone
+	stack.set_anchors_and_offsets_preset(Control.PRESET_CENTER if narrow else Control.PRESET_TOP_RIGHT)
+	stack.grow_horizontal = Control.GROW_DIRECTION_BOTH if narrow else Control.GROW_DIRECTION_BEGIN
+	stack.grow_vertical = Control.GROW_DIRECTION_BOTH if narrow else Control.GROW_DIRECTION_END
+	if not narrow:
+		stack.offset_top = float(I.touch.safe[1]) + 76.0
+		stack.offset_right = -(float(I.touch.safe[2]) + 12.0)
+	panel.custom_minimum_size.x = minf(720.0, vs.x - 24.0)
+	scroll.custom_minimum_size.x = minf(680.0, vs.x - 64.0)
+
 func _process(dt: float) -> void:
+	if I.compact():
+		_compact_layout()
 	if state in ["listen", "validate"] and not armed and not Input.is_anything_pressed():
 		armed = true
 	if toast_t > 0.0:
@@ -721,7 +741,7 @@ func _show_card() -> void:
 		card_head.text = "✓  LEARNED · %s" % l.title
 		card_head.add_theme_color_override("font_color", WfReviewGuide.C_OK)
 		card_body.visible = false
-		card_chips.add_child(WfReviewGuide.chip(I.label("ui.codex"), "change keys any time", "exit"))
+		card_chips.add_child(WfReviewGuide.chip(I.label("ui.codex"), "controls and settings" if I.device == "touch" else "change keys any time", "exit"))
 		return
 	card_head.text = "NEW ACTION · %s" % l.title
 	card_head.add_theme_color_override("font_color", WfReviewGuide.C_NEXT)
@@ -731,4 +751,4 @@ func _show_card() -> void:
 	for st in l.steps:
 		var ids: Array = st[0]
 		card_chips.add_child(WfReviewGuide.chip(" ".join(I.labels(ids)), st[1], "next" if ids.any(func(i): return i in l.proof) else "now"))
-	card_chips.add_child(WfReviewGuide.chip(I.label("ui.codex"), "change keys", "exit"))
+	card_chips.add_child(WfReviewGuide.chip(I.label("ui.codex"), "controls and settings" if I.device == "touch" else "change keys", "exit"))

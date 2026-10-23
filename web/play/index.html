@@ -25,9 +25,11 @@
     <div class="panel">
       <h2>Controls</h2>
       <ul class="plain">
-        <li>First launch asks for your Confirm key (Enter is suggested); Esc is always Back.</li>
-        <li>Enter: next chapter · P: pause the guided camera · A: autoplay the body actions</li>
-        <li>The on-screen guide shows the keys that work in each chapter. ← Exit (top left) leaves and unloads the engine.</li>
+        <li>Keyboard: Enter next chapter · P pause the guided camera · F2 autoplay the body actions · Esc back. The chapter text shows
+          the keys that work now; F10 opens the controls.</li>
+        <li>Touch: left thumb moves where the body can walk or climb, right thumb drags to look, buttons appear when their action
+          can be used (Grab, Push off, Next …); ? explains them. Landscape works best.</li>
+        <li>← Exit leaves and unloads the engine.</li>
       </ul>
     </div>
     <div class="panel">
@@ -36,7 +38,8 @@
         <li>Browser build of the native Godot project: same scenes, scripts, physics (Jolt) and DOCKED package; single-threaded WebGL 2.</li>
         <li>The induction pair appears as proxy figures; the native development runtime carries the full characters.</li>
         <li>SIMULATION_ONLY: chapters, camera paths and the ring-ramp time-lapse are display choices; no transfer timing, procedure or interlock is released.</li>
-        <li>Chromium-based desktop browsers with a keyboard are tested; Firefox, Safari and phones are not yet verified.</li>
+        <li>Tested in Chromium-based desktop browsers and in Chrome's phone and tablet emulation with touch; real phones, Firefox and
+          Safari are not yet verified. On phones the 3-D view renders at a reduced, frame-rate-adaptive resolution.</li>
         <li>Built with the Godot Engine, MIT licence: <a href="GODOT_LICENSE.txt">licence</a>, <a href="GODOT_COPYRIGHT.txt">third-party notices</a>.</li>
       </ul>
     </div>
@@ -60,7 +63,8 @@ fetch('play.json', { cache: 'no-store' }).then(r => r.ok ? r.json() : Promise.re
   if (!gl) { notes.push('This browser did not provide WebGL 2, which the engine needs. Explore Ship may still work.'); start.disabled = true; }
   else gl.getExtension('WEBGL_lose_context')?.loseContext();
   if (!WebAssembly?.validate) notes.push('WebAssembly is unavailable.');
-  if (touchOnly) notes.push('This looks like a touch-only device: the demonstrator expects a keyboard; Explore Ship is the better choice here.');
+  if (touchOnly) notes.push('Touch device: the game shows touch controls. It needs a recent phone and the download above; '
+    + 'Explore Ship is the lighter choice.');
   cap.textContent = notes.join(' ');
 })();
 start.addEventListener('click', () => { if (play) location.assign(play.entry); });

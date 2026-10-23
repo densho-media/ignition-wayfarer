@@ -375,6 +375,7 @@ launch again.
 rm -f ~/snap/godot-4/current/.local/share/godot/app_userdata/"Wayfarer Inspector"/wayfarer_controls.cfg    # first launch again (snap path)
 timeout -s KILL 120 /snap/bin/godot-4 --headless --path godot --quit-after 600 -- --check-controls      # WF_GODOT_CONTROLS (61 checks)
 timeout -s KILL 300 /snap/bin/godot-4 --headless --fixed-fps 60 --path godot res://scenes/boarding.tscn --quit-after 3000 -- --check-controls-body   # WF_GODOT_CONTROLS_BODY
+timeout -s KILL 600 /snap/bin/godot-4 --headless --fixed-fps 60 --path godot res://scenes/demo01.tscn --quit-after 30000 -- --check-touch --touch   # WF_GODOT_TOUCH (MOB-001 touch controls)
 /snap/bin/godot-4 --path godot --resolution 1280x800 -- --capture-controls=/abs/dir                # stills: first launch, conflict, Codex, lesson card
 /snap/bin/godot-4 --path godot --resolution 1280x800 res://scenes/boarding.tscn -- --review=walk --capture-lesson=/abs/walk.png   # the MOVE card beside the guide
 ```

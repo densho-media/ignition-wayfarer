@@ -170,6 +170,8 @@ func _ready() -> void:
 			check_body()
 		elif arg == "--check-controls-body":
 			check_controls_body()
+		elif arg == "--check-touch":
+			check_touch()
 		elif arg.begins_with("--capture-lesson="):
 			capture_lesson(arg.trim_prefix("--capture-lesson="))
 		elif arg.begins_with("--capture-body="):
@@ -385,6 +387,11 @@ func build_ui(canvas: CanvasLayer) -> void:
 	var sources := label("Sources: %s · %s, sequence %s · %s" % [", ".join(route.sources), route.geometry_status, route.sequence_status, route.limits], 12)
 	sources.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	body.add_child(sources)
+	if WfInput.compact():
+		# MOB-001 phone / tablet: the desktop columns (title and help, stop list, stop card) would cover most of a phone's view; the
+		# demonstrator's chapter text, the touch controls and the navigator's Map carry the journey instead.
+		for c in [top, side, panel]:
+			c.visible = false
 
 func go_to_stop(index: int) -> void:
 	progress = float(route.stops[index].rail_m)
@@ -581,7 +588,15 @@ func _process(delta: float) -> void:
 	lamp_t += delta
 	if lamp_t > 0.25:
 		update_lamps()
-	if not get_window().has_focus() or (body_tour != null and body_tour.active):
+	# MOB-001: the touch look turns the route camera like a right-drag, while the camera is the visitor's (not an orbiting chapter's).
+	if not (body_tour != null and body_tour.active) and not free_flight and (demo == null or demo.camera_free()):
+		var lk := WfInput.take_look()
+		if lk != Vector2.ZERO:
+			look_offset.x -= lk.x
+			look_offset.y = clampf(look_offset.y - lk.y, -1.4, 1.4)
+			update_camera()
+	# A touch device's canvas may not hold the keyboard focus; its stick is released on focus loss by WfInput instead.
+	if (not get_window().has_focus() and WfInput.device != "touch") or (body_tour != null and body_tour.active):
 		return
 	if free_flight:
 		fly(delta)
@@ -1244,6 +1259,12 @@ func check_body() -> void:
 	# PHYS-001 phase 8, headless: the S004 spine push-off in the real trunk, the A1 aisle walk and the Coriolis drop (body_tour.gd); needs physics frames (--fixed-fps 60).
 	var out: Dictionary = await ensure_body_tour().run_check()
 	print("WF_GODOT_BODY " + JSON.stringify(out))
+	get_tree().quit(0 if out.result == "PASS" else 1)
+
+func check_touch() -> void:
+	# MOB-001, headless (needs --fixed-fps 60, demo01.tscn): the touch controls through real touch events (check_touch.gd).
+	var out: Dictionary = await load("res://scripts/controls/check_touch.gd").new().run(self)
+	print("WF_GODOT_TOUCH " + JSON.stringify(out))
 	get_tree().quit(0 if out.result == "PASS" else 1)
 
 func check_controls_body() -> void:

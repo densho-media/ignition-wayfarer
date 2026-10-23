@@ -4,8 +4,11 @@ extends Node
 ## user://wayfarer_controls.cfg (never in data/ or generated/). Gameplay asks Input/InputEvent for the action, prompts ask label().
 ## Bindings change which input triggers an action, never forces, speeds or permissions (S&E 46 DYN-007, 47 SIM-010, 49 NAV-003).
 ## Scenes not yet migrated read raw keys; those keys are RESERVED per context so a rebind cannot collide with them.
+## MOB-001 (docs/wayfarer-mobile-controls-plan.md): touch is a fourth device of the same registry. The touch layer (wf_touch.gd) feeds
+## hold actions through set_virtual() (read by strength()), press actions through trigger() (an InputEventAction that reaches the same
+## scene handlers as the key) and looking through add_look() / take_look(); it never calls physics or bypasses a scene's own checks.
 
-const SCHEMA := 2                       # 2: ACI-10 scene actions and the [access] settings
+const SCHEMA := 3                       # 2: ACI-10 scene actions and the [access] settings; 3: MOB-001 [touch] settings
 const PROFILE := "user://wayfarer_controls.cfg"
 const PREFS := ["PERSONAL", "SUGGESTED", "EXPERIENCED"]
 const DEADZONE := 0.5
@@ -265,7 +268,7 @@ var discovered := {}                 # action id -> true
 var shown := {}                      # lesson id -> true (prompted once; never asked again in unrelated scenes)
 var learned := {}                    # lesson id -> true
 var first_launch_done := false
-var device := "keyboard"             # last used: keyboard / joypad
+var device := "keyboard"             # last used: keyboard / joypad / touch
 var context := "ui":                 # the scene's context; changing it drops latched toggles and the hazard flag
 	set(v):
 		if v != context:
@@ -287,12 +290,26 @@ var force_prompts := false           # headless checks only
 var performed_now := {}              # lesson id -> {action: true}, this session
 var had_profile := false
 var overlay: CanvasLayer
+# MOB-001 touch: the touch layer, its settings (saved in [touch]) and the semantic channels it feeds.
+var touch: CanvasLayer
+var touch_look := 1.0                # look speed factor (drag across the short screen side turns LOOK_RAD radians at 1.0)
+var touch_stick := "floating"        # floating: the stick centres where the thumb lands; fixed: a fixed base in the lower left
+var touch_controls := "auto"         # auto: shown while touch is the device in use; on: always; off: never
+var touch_intro_done := false
+const TOUCH_LOOKS := [0.5, 0.75, 1.0, 1.5, 2.0]
+var virtual := {}                    # hold action id -> 0..1 from the touch stick (strength() takes the larger of it and the device's)
+var look_acc := Vector2.ZERO         # touch look not yet taken, radians (x yaw, y pitch; the sign of a mouse drag)
+var look_frame := -100               # the process frame a scene last took the look (a look owner exists while it keeps taking it)
+var triggered: Array = []            # action ids sent by trigger() (headless checks)
+var touch_provider := Callable()     # the scene's touch controls now: {} or {move, actions, utility, look} (wf_touch.gd)
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	load_profile()
 	overlay = load("res://scripts/controls/control_overlay.gd").new()
 	add_child(overlay)
+	touch = load("res://scripts/controls/wf_touch.gd").new()
+	add_child(touch)
 	Input.joy_connection_changed.connect(_on_joy)
 
 # ---- registry -----------------------------------------------------------------------------------------------------------------------
@@ -362,15 +379,16 @@ func apply() -> void:
 			if e != null:
 				InputMap.action_add_event(a.id, e)
 	if is_inside_tree():
-		get_tree().root.content_scale_factor = ui_scale
+		get_tree().root.content_scale_factor = ui_scale * (touch.ui_density() if touch != null else 1.0)
 	bindings_changed.emit()
 
 ## How strongly a hold action is held now (0..1): a latched toggle reads 1; a stick reads past the dead zone, scaled by the
 ## sensitivity. Gameplay uses this instead of Input.get_action_strength so the accessibility settings apply everywhere.
 func strength(id: String) -> float:
+	var v: float = virtual.get(id, 0.0)
 	if toggles.has(id):
-		return 1.0 if latched.has(id) else 0.0
-	return clampf(Input.get_action_strength(id) * stick_sensitivity, 0.0, 1.0)
+		return maxf(1.0 if latched.has(id) else 0.0, v)
+	return maxf(clampf(Input.get_action_strength(id) * stick_sensitivity, 0.0, 1.0), v)
 
 func held(id: String) -> bool:
 	return strength(id) > 0.0
@@ -549,6 +567,12 @@ const KEY_GLYPHS := {KEY_PERIOD: ".", KEY_COMMA: ",", KEY_MINUS: "-", KEY_EQUAL:
 	KEY_SEMICOLON: ";", KEY_APOSTROPHE: "'", KEY_SLASH: "/", KEY_BACKSLASH: "\\", KEY_QUOTELEFT: "`",
 	KEY_UP: "↑", KEY_DOWN: "↓", KEY_LEFT: "←", KEY_RIGHT: "→", KEY_ESCAPE: "Esc"}
 
+# MOB-001: what the on-screen control of an action is called, for prompts while the player uses touch (the keyboard label otherwise).
+const TOUCH_LABELS := {"ui.confirm": "Next", "ui.codex": "Help", "player.move_forward": "stick up", "player.move_back": "stick down",
+	"player.move_left": "stick left", "player.move_right": "stick right", "player.grab": "Grab", "player.release": "Release",
+	"player.push": "Push off", "ship.map": "Map", "ship.card": "Systems", "demo.pause": "Pause", "demo.autoplay": "Auto",
+	"demo.occupants": "Occupant", "body.view": "View", "body.drop_tool": "Drop"}
+
 static func describe(d: Dictionary) -> String:
 	match str(d.t):
 		"key":
@@ -566,8 +590,10 @@ static func describe(d: Dictionary) -> String:
 
 ## The input that triggers id now, for the device in use (keyboard or joypad); falls back to the other family; "unassigned".
 func label(id: String, all := false) -> String:
+	if device == "touch" and TOUCH_LABELS.has(id):
+		return TOUCH_LABELS[id]
 	var mine: Array = bindings.get(id, [])
-	var fam: Array = mine.filter(func(x): return _kind(x) == device)
+	var fam: Array = mine.filter(func(x): return _kind(x) == ("keyboard" if device == "touch" else device))
 	if fam.is_empty():
 		fam = mine
 	if fam.is_empty():
@@ -609,9 +635,10 @@ func key_of(e: InputEvent, ctxs: Array) -> int:
 			return a["keys"][0]
 	return KEY_NONE
 
-## A press (not a release; repeats only when allowed) of a key, controller button or bindable mouse button.
+## A press (not a release; repeats only when allowed) of a key, controller button, bindable mouse button or a trigger() action.
 static func pressed(e: InputEvent, repeat := false) -> bool:
-	var device: bool = e is InputEventKey or e is InputEventJoypadButton or (e is InputEventMouseButton and e.button_index in [MOUSE_BUTTON_XBUTTON1, MOUSE_BUTTON_XBUTTON2])
+	var device: bool = e is InputEventKey or e is InputEventJoypadButton or e is InputEventAction \
+		or (e is InputEventMouseButton and e.button_index in [MOUSE_BUTTON_XBUTTON1, MOUSE_BUTTON_XBUTTON2])
 	return device and e.is_pressed() and (repeat or not e.is_echo())
 
 ## Shift as a step multiplier (×24 frames, ×30 days, ×30 rows): a modifier, not an action.
@@ -627,16 +654,17 @@ func available(id: String) -> bool:
 	return action(id).ctx.any(func(c): return c in cs)
 
 func _input(e: InputEvent) -> void:
-	if e is InputEventJoypadButton or (e is InputEventJoypadMotion and absf(e.axis_value) > DEADZONE):
-		if device != "joypad":
-			device = "joypad"
-			bindings_changed.emit()
+	if e.device == InputEvent.DEVICE_ID_EMULATION:
+		pass                                    # a mouse event Godot made from a touch: still the touch device
+	elif e is InputEventScreenTouch or e is InputEventScreenDrag:
+		set_device("touch")
+	elif e is InputEventJoypadButton or (e is InputEventJoypadMotion and absf(e.axis_value) > DEADZONE):
+		set_device("joypad")
 	elif (e is InputEventKey and e.pressed) or e is InputEventMouseButton:
-		if device != "keyboard":
-			device = "keyboard"
-			bindings_changed.emit()
-	if overlay.is_modal():
+		set_device("keyboard")
+	if modal():
 		latched = {}
+		release_touch()
 		return
 	for id in toggles:                       # a latched hold flips on each fresh press of its input
 		if e.is_action_pressed(id) and not e.is_echo():
@@ -647,6 +675,70 @@ func _input(e: InputEvent) -> void:
 	if e.is_action_pressed("ui.codex") and not e.is_echo():
 		overlay.open_codex()
 		get_viewport().set_input_as_handled()
+
+func set_device(d: String) -> void:
+	if device != d:
+		device = d
+		bindings_changed.emit()
+
+## A modal control panel is open (first launch, capture, Codex, the touch welcome or help): the scene tree is paused meanwhile.
+func modal() -> bool:
+	return overlay.is_modal() or (touch != null and touch.is_modal())
+
+# ---- touch channels (MOB-001) -------------------------------------------------------------------------------------------------------
+
+## The touch stick holds a hold action at strength v (0 releases it). Only hold actions; a press needs trigger().
+func set_virtual(id: String, v: float) -> void:
+	if v > 0.0 and action(id).get("kind", "") == "hold" and not modal():
+		virtual[id] = clampf(v, 0.0, 1.0)
+	else:
+		virtual.erase(id)
+
+## Releases everything touch holds: the stick, the look not yet taken (finger up, cancel, modal, focus loss, resize, scene change).
+func release_touch() -> void:
+	virtual = {}
+	look_acc = Vector2.ZERO
+	if touch != null:
+		touch.release_all()
+
+## A touch button's press of a press action: the same InputEventAction a key bound to it is matched as, so it reaches the same
+## handler with the same checks (a refused grab stays refused). The press and its release go through Input like device events.
+func trigger(id: String) -> bool:
+	var a := action(id)
+	if a.is_empty() or a.get("kind", "press") != "press" or modal():
+		return false
+	for down in [true, false]:
+		var e := InputEventAction.new()
+		e.action = id
+		e.pressed = down
+		e.strength = 1.0 if down else 0.0
+		Input.parse_input_event(e)
+	triggered.append(id)
+	return true
+
+func add_look(rad: Vector2) -> void:
+	if not modal():
+		look_acc += rad
+
+## The look owner (the body or the rail camera) takes the touch look once per frame; while a scene keeps taking it, the touch layer
+## offers look dragging (a guided camera that takes none gets none).
+func take_look() -> Vector2:
+	look_frame = Engine.get_process_frames()
+	var out := look_acc
+	look_acc = Vector2.ZERO
+	return out
+
+func look_wanted() -> bool:
+	return Engine.get_process_frames() - look_frame <= 3
+
+## MOB-001: the compact (phone and tablet) layout: decided once from the device, never from the window size alone, so a desktop window
+## keeps the desktop layout.
+func compact() -> bool:
+	return touch != null and touch.primary
+
+func _notification(what: int) -> void:
+	if what in [NOTIFICATION_APPLICATION_FOCUS_OUT, NOTIFICATION_WM_WINDOW_FOCUS_OUT, NOTIFICATION_APPLICATION_PAUSED]:
+		release_touch()                     # never a stuck stick after the page loses focus or goes to the background
 
 func _on_joy(_id: int, connected: bool) -> void:
 	if not connected and device == "joypad":
@@ -727,6 +819,10 @@ func load_profile() -> void:
 		stick_deadzone = DEADZONE
 		stick_sensitivity = 1.0
 		ui_scale = 1.0
+		touch_look = 1.0
+		touch_stick = "floating"
+		touch_controls = "auto"
+		touch_intro_done = false
 		apply()
 		return
 	migrate(cf)
@@ -766,6 +862,15 @@ func migrate(cf: ConfigFile) -> void:
 	stick_deadzone = clampf(float(cf.get_value("access", "stick_deadzone", DEADZONE)), 0.05, 0.9)
 	stick_sensitivity = clampf(float(cf.get_value("access", "stick_sensitivity", 1.0)), 0.25, 4.0)
 	ui_scale = clampf(float(cf.get_value("access", "ui_scale", 1.0)), 0.75, 2.0)
+	# schema 3 (MOB-001): touch settings; an older profile keeps everything above and starts with the touch defaults.
+	touch_look = clampf(float(cf.get_value("touch", "look", 1.0)), 0.25, 4.0)
+	touch_stick = str(cf.get_value("touch", "stick", "floating"))
+	if not touch_stick in ["floating", "fixed"]:
+		touch_stick = "floating"
+	touch_controls = str(cf.get_value("touch", "controls", "auto"))
+	if not touch_controls in ["auto", "on", "off"]:
+		touch_controls = "auto"
+	touch_intro_done = bool(cf.get_value("touch", "intro_done", false))
 
 static func _set_of(a) -> Dictionary:
 	var out := {}
@@ -789,6 +894,10 @@ func save_profile() -> void:
 	cf.set_value("access", "stick_deadzone", stick_deadzone)
 	cf.set_value("access", "stick_sensitivity", stick_sensitivity)
 	cf.set_value("access", "ui_scale", ui_scale)
+	cf.set_value("touch", "look", touch_look)
+	cf.set_value("touch", "stick", touch_stick)
+	cf.set_value("touch", "controls", touch_controls)
+	cf.set_value("touch", "intro_done", touch_intro_done)
 	cf.save(profile_path)
 	had_profile = true
 
