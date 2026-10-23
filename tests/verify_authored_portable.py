@@ -118,16 +118,21 @@ def b_vehicle(root):
     bpy.ops.wm.open_mainfile(filepath=str(root/'assets/wayfarer'/(s['vehicle']['asset']+'.blend')))
 
     def sample():
-        bpy.context.scene.frame_set(1); deps = bpy.context.evaluated_depsgraph_get()
-        rotor = next(i.matrix_world.copy() for i in deps.object_instances if i.object.original.name == 'Rotor_1')
-        inst = [i for i in deps.object_instances if i.object.original.name == OBJ]
-        if len(inst) != 1:
-            return dict(count=len(inst))
-        i = inst[0]; me = i.object.to_mesh(); world = [i.matrix_world@v.co for v in me.vertices]
-        local = sorted(tuple(round(c, 4) for c in rotor.inverted()@w) for w in world); i.object.to_mesh_clear()
-        frame_err = max(abs(a-b) for ra, rb in zip(i.matrix_world, rotor) for a, b in zip(ra, rb))
+        # Instances are only valid while the depsgraph iterates: copy what is needed inside the loop.
+        bpy.context.scene.frame_set(1); deps = bpy.context.evaluated_depsgraph_get(); rotor, found = None, []
+        for i in deps.object_instances:
+            if i.object.original.name == 'Rotor_1':
+                rotor = i.matrix_world.copy()
+            elif i.object.original.name == OBJ:
+                me = i.object.to_mesh(); found.append((i.matrix_world.copy(), [i.matrix_world@v.co for v in me.vertices],
+                                                       [m.name for m in i.object.data.materials])); i.object.to_mesh_clear()
+        if len(found) != 1 or rotor is None:
+            return dict(count=len(found))
+        matrix, world, materials = found[0]
+        local = sorted(tuple(round(c, 4) for c in rotor.inverted()@w) for w in world)
+        frame_err = max(abs(a-b) for ra, rb in zip(matrix, rotor) for a, b in zip(ra, rb))
         return dict(count=1, frame_err=frame_err, vertex_err=max((max(abs(a-b) for a, b in zip(p, q)) for p, q in zip(local, ref)), default=1.0)
-                    if len(local) == len(ref) else 'count differs', rotor_x=rotor.to_euler().x, materials=[m.name for m in i.object.data.materials])
+                    if len(local) == len(ref) else 'count differs', rotor_x=rotor.to_euler().x, materials=materials)
     out['saved'] = sample()
     c = bpy.data.objects[rotor_interface.control(1)]; c['spin_integrated'], c['spin_turned'] = 1.0, 37.0; c.update_tag()
     bpy.data.objects['Rotor_1'].update_tag()
@@ -212,7 +217,7 @@ def main(work, skip_runtime):
     r.step(3, 'the pack manifest references the .glb; the pack is committed in A', code == 0, tail=out.splitlines()[-3:])
     # Clone B: a fresh checkout of A, no assets and no ignored or local files.
     r.sh(['git', 'clone', '-q', '--no-hardlinks', A, B], work)
-    clean = not (B/'assets').exists() and (B/'data/detail'/PACK/'probe_bracket.glb').is_file()
+    clean = not any((B/'assets').rglob('*.blend')) and (B/'data/detail'/PACK/'probe_bracket.glb').is_file()
     code, out = build_all(r, B)
     r.step(4, 'clone B (no assets/, the .glb only as committed data): a full build imports it', clean and code == 0 and 'WF_DETAIL WF_DETAIL_PROBE_AUTH 0 generated 1 imported' in out,
            clean_checkout=clean, tail=tail(out))
@@ -236,7 +241,8 @@ def main(work, skip_runtime):
             node = next((n for n in json.loads(man.read_text())['nodes'] if n['component_id'] == f'{ASM}.AUTHORED.{ID}'), None)
         r.step(8, 'runtime-export (fresh workspace build) carries the node on the ring frame and passes its checks',
                code == 0 and res and res.get('result') == 'PASS' and node is not None and node.get('frame') == 'WF.ROTOR.1',
-               node=node, result=(res or {}).get('result'), failed=(res or {}).get('step'), tail=(res or {}).get('tail'))
+               node=node, runtime=(res or {}).get('result'), nodes=(res or {}).get('objects'), triangles=(res or {}).get('triangles'),
+               checks=(res or {}).get('checks'), failed=(res or {}).get('step'), tail=(res or {}).get('tail'))
     # 9: a changed source asset and a changed attachment contract.
     code, res, out = r.workflow(B, 'module', 'publish', PACK)
     published = code == 0 and res and res['result'] == 'PASS'
