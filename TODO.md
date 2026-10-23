@@ -34,7 +34,8 @@ close-up, regression check, MODEL/TODO and Model Status update.
   - **Owner review:** accept, correct or reject the two `L4_VISUAL_CANDIDATE` packs (`rad_frame` radiator frame fittings, `ra2_equip` ring A
     sector 2 overhead trays). Self-review: the radiator fittings are hard to see at ship scale; the sector 2 trays read but sit close to the
     fit-out items. M8.1 is reviewed under its own entry below.
-  - **Phase 3, BUILT on branch `claude/habitat-ring-split`, awaiting owner approval to promote:** independent ring engineering assets
+  - **Phase 3, BUILT and gated on branch `claude/habitat-ring-split`, awaiting owner approval to promote** (full pipeline, runtime-export
+    31/31, verify_detail_authoring and verify_rebuild PASS; baseline `modules_phase3`): independent ring engineering assets
     `WF_HABITAT_A` (WF-RING-A) and `WF_HABITAT_B` (WF-RING-B); `WF_HABITAT` is the assembly linking both, with the whole-habitat
     rotor actions; a neutral WF-HABITAT owns it and the shared sector and interior components (docs/MODULES.md, Evidence, phase 3).
     *Rollback:* revert the commit, run a full build, and move the two then unlinked ring files into `subsystems/milestones/` by hand;

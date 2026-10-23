@@ -431,7 +431,17 @@ Build times (idle, measured), and what each target rewrites:
 | `HABITAT_B` | — | 6.32 s; only `WF_HABITAT_B`; ring A, the assembly and the vehicle byte-identical |
 | `HABITAT_A` | — | 8.27 s; `WF_HABITAT_A` and its four detail files |
 
-Gates: running (full pipeline, runtime-export, verify_detail_authoring, verify_rebuild); results follow.
+Gates (all at code commit `cc154ba`, logs in `runs/20261023-phase3-after/gates`):
+
+| Gate | Result |
+| --- | --- |
+| Full pipeline `--expect WF_HABITAT Habitat_Ring_` (`runs/20261023T110910Z-pipeline`, 482.6 s) | PASS: 150 unit tests OK (1 skipped), whole-ship inspection PASS, fingerprint diff against `modules_phase2`: 0 changed, 2 added (`Habitat_Ring_1/2`), 507 removed from `WF_HABITAT` (moved, proven above), 2 files added, 0 unexpected; Cycles COAST and HIGH_POWER previews. Accepted as baseline `modules_phase3` (`modules_phase2` stays in history) |
+| `runtime-export` (`runs/20261023T111712967262Z-runtime`, 9 min 13 s) | PASS: 31/31 Godot checks, 3,947 nodes, 741,424 triangles |
+| `tests/verify_detail_authoring.py` | PASS: probe adopted, adopted on build, survives regeneration, a contract change stops the build, rebind after review, exported as production |
+| `tests/verify_rebuild.py` (51 min 27 s) | PASS, 15 cases, among them: full rebuild with stable IDs; ART and unowned GEN preserved; radiator, hull, Garden interior, detail-only and moving-anchor detail rebuilds leave every other asset byte-identical; **`HABITAT_B` then `HABITAT_A` each leave the other ring, the habitat assembly, the vehicle and the other ring's detail byte-identical**; relocated nested links; retirement to `milestones/` |
+
+Visual maturity is unchanged by the split: `m7_ra1`, `m7_spine` and `ring_a_transfer` stay `L4_VISUAL_ACCEPTED`; `m8_forward`,
+`ra2_equip` and `rad_frame` stay `L4_VISUAL_CANDIDATE`. Republishing a record on its new host is not an art review.
 
 ## Storage of authored binaries (owner decision 2026-10-23)
 
