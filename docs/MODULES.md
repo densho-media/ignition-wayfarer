@@ -364,7 +364,8 @@ Before-state recorded on `main` `80a6cb2`, whose saved assets matched `baseline_
   modifiers). Node IDs hash the instance lineage; Godot binds through the manifest's component IDs.
 - **Integrated gate:** full pipeline PASS (`runs/20261023T081840Z-pipeline`: 150 unit tests, whole-ship inspection with every group,
   0 unexpected geometry changes), the 7 relocations PASS again on its fingerprint, accepted as `baseline_modules_phase2`; `assembly validate`
-  PASS for all six packs; `tests/verify_detail_authoring.py` PASS.
+  PASS for all six packs; `tests/verify_detail_authoring.py` PASS; `tests/verify_rebuild.py` all 11 steps PASS (2,570 s, partly beside
+  the clone test), including the joined `DETAIL_M7_SPK+DETAIL_M7_XFR` rebuild with every other asset byte-identical.
 - **Runtime:** `runtime-export` PASS, 31/31 Godot checks (`runs/20261023T083141145535Z-runtime`): 3,947 nodes, 741,424 triangles, bounds,
   GLB 33.02 MB and every node record, frame and the `production` block identical to the before-state export; only the 8 M7.XFR/M7.SPK node
   IDs changed (lineage).
