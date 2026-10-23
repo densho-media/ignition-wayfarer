@@ -121,6 +121,13 @@ for name in ['Manual_Art_Sentinel','Unowned_GEN_Sentinel']:
         assert all(checksum(p)==h for p,h in unchanged.items()),'Detail build modified other assets'
         assert inspect(fixture,Path(temp)/'detail.json')['assets']==targeted['assets']
         print('PASS detail-only rebuild; every other asset byte-identical',flush=True)
+        # A pack with two assemblies on moving anchors (the despun drum and the rotor): one joined target, its two files only.
+        excluded={'WF_DETAIL_M7_XFR.blend','WF_DETAIL_M7_SPK.blend'}
+        unchanged={p:checksum(p) for p in assets.rglob('*.blend') if 'milestones' not in p.parts and p.name not in excluded}
+        build(fixture,'DETAIL_M7_SPK+DETAIL_M7_XFR')
+        assert all(checksum(p)==h for p,h in unchanged.items()),'Joined detail build modified other assets'
+        assert inspect(fixture,Path(temp)/'detail_ring.json')['assets']==targeted['assets']
+        print('PASS joined detail rebuild on moving anchors; every other asset byte-identical',flush=True)
         relocated=Path(temp)/'relocated'
         shutil.copytree(fixture,relocated,ignore=shutil.ignore_patterns('milestones'))
         moved=inspect(relocated,Path(temp)/'moved.json')

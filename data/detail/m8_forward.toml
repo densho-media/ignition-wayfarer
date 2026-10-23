@@ -1,0 +1,84 @@
+# Detail pack m8_forward (docs/MODULES.md): the M8.1 exterior production identity on the forward structure, module WF-FWD. M8.BROW.AFT on
+# the Brow's aft face and M8.CROWN.RIM on the Aegis Crown housing's aft plate and rim girder, both at WF-FWD.FORWARD_SHIELD.ORIGIN (ship
+# frame: +X bow). Owned by a WF-FWD detail session: this manifest, src/wayfarer/detail/pack_m8_forward.py and the generated
+# assets/wayfarer/detail/WF_DETAIL_M8_BROW_AFT.blend and WF_DETAIL_M8_CROWN_RIM.blend. Migrated unchanged from [production.m8.brow],
+# [production.m8.crown] and production_detail.py (MOD phase 2). The scope table [production.m8] keeps the switch, the maturity
+# (L4_VISUAL_CANDIDATE until the owner reviews M8.1), crown_sectors, the exterior materials and the draw ranges: the runtime manifest reads
+# them. Owner evidence and the physics locks are in [production.m8]'s comment and source l4/m8_exterior_identity. Every value is a
+# PROTOTYPE depiction choice: no load, mass, access or service commitment, no protection or thickness claim.
+[pack]
+module = "WF-FWD"
+version = 1
+# M8: [production.m8]'s switch, maturity and draw ranges (fasteners and lettering only close) apply as before. No pack-level
+# detail_range_m: it would replace the per-family ranges.
+scope = "M8"
+enabled = true
+detail_class = "PRODUCTION"
+inspect = ["forward"]
+views = ["crown_detail", "crown_bay_detail"]
+summary = "Brow aft-face panel modules, caps, fasteners and stencils; Crown rim sector modules, closeouts and markings in all twelve bays."
+
+[assembly."M8.BROW.AFT"]
+anchor = "WF-FWD.FORWARD_SHIELD.ORIGIN"
+zone = "Brow aft face: panel modules between the existing joints, inside the truss envelope"
+classes = ["ENGINEERING_FLEXIBLE", "ARTISTIC"]
+# Claimed space in the ship frame (m): the aft-face panels, caps and stencils plus 0.05 m (inside the 90 m Brow, aft of its skin).
+envelope_min = [109.62, -40.65, -40.65]
+envelope_max = [112.39, 40.65, 40.65]
+
+[assembly."M8.CROWN.RIM"]
+anchor = "WF-FWD.FORWARD_SHIELD.ORIGIN"
+zone = "Aegis Crown rim: the sector module on the housing aft plate and the rim girder (mechanisms, shutters and optics unchanged)"
+classes = ["ENGINEERING_FLEXIBLE", "ARTISTIC"]
+# Claimed space in the ship frame (m): the twelve sector modules and the rim markings (r <= 45.005 m) plus 0.05 m.
+envelope_min = [105.9, -45.06, -45.06]
+envelope_max = [109.4, 45.06, 45.06]
+
+# M8.BROW.AFT: panel modules on the skin's aft face between the existing joints (forward_shield.brow_panel_joints), off the truss's forward
+# chords by member radius + the shared clearance, in three treatments by what lies behind: structural cladding on the spoke columns
+# (off-white), service lanes on the 10 deg column in line with each Crown bay and its carriage-service hatch (cool grey, the crawler side,
+# 50!AG-A02), protected-equipment cladding in the innermost band over the hub, the EYE mounts and the Lance root (graphite) with an amber
+# boundary line. Inspection caps at the forward-chord nodes (ochre, the M4 maintenance-cover grammar), fasteners at panel corners,
+# lane stencils near the hub.
+[params.brow]
+standoff_m = 0.03
+thickness_m = 0.04
+seam_m = 0.08
+bevel_m = 0.012
+r_m = [7.8, 40.6]
+panel_max_m = 2.6
+panel_max_width_m = 4.6
+lane_half_deg = 5.0
+protected_r_m = 11.2
+boundary_line_m = 0.12
+fastener_m = 0.07
+fastener_inset_m = 0.16
+fastener_proud_m = 0.015
+cap_radius_m = 0.32
+cap_thickness_m = 0.035
+cap_offset_m = 0.75
+stencil_r_m = 9.4
+stencil_m = 0.55
+
+# M8.CROWN.RIM: the sector module on the Crown housing's aft plate and the rim girder: a graphite doubler frame round the existing ochre
+# carriage-service hatch (rear_construction hatch), replaceable access panels either side of it (service grey), thermal-break closeouts where
+# the plate meets the rim girder and the inner wall (dark gasket), and markings on the rim's outer face: the sector boundary as a charcoal
+# half-stripe on each side of the module (two modules make one stripe) and the sector number, plus the hatch stencil.
+[params.crown]
+standoff_m = 0.004
+frame_width_m = 0.16
+frame_gap_m = 0.04
+frame_thickness_m = 0.03
+rib_keep_m = 0.45
+panel_r_m = [41.3, 44.2]
+panel_thickness_m = 0.025
+panel_seam_m = 0.08
+panels_per_side = 3
+closeout_m = 0.14
+closeout_thickness_m = 0.02
+film_m = 0.003
+stripe_half_m = 0.16
+beacon_keep_m = 0.25
+numeral_m = 1.1
+hatch_stencil_m = 0.20
+

@@ -1,0 +1,648 @@
+{
+ "assemblies": {
+  "M8.BROW.AFT": {
+   "anchor": "WF-FWD.FORWARD_SHIELD.ORIGIN",
+   "anchor_hash": "6aa57fefd284ff20",
+   "asset": "WF_DETAIL_M8_BROW_AFT",
+   "detail_class": "PRODUCTION",
+   "enabled": true,
+   "maturity": "L4_VISUAL_CANDIDATE"
+  },
+  "M8.CROWN.RIM": {
+   "anchor": "WF-FWD.FORWARD_SHIELD.ORIGIN",
+   "anchor_hash": "6aa57fefd284ff20",
+   "asset": "WF_DETAIL_M8_CROWN_RIM",
+   "detail_class": "PRODUCTION",
+   "enabled": true,
+   "maturity": "L4_VISUAL_CANDIDATE"
+  }
+ },
+ "contract": "WF_MODULE_PUBLICATION",
+ "contract_hash": "de4972885714e301",
+ "contract_terms": {
+  "M8.BROW.AFT": {
+   "anchor": "WF-FWD.FORWARD_SHIELD.ORIGIN",
+   "asset": "WF_DETAIL_M8_BROW_AFT",
+   "envelope": [
+    [
+     109.62,
+     -40.65,
+     -40.65
+    ],
+    [
+     112.39,
+     40.65,
+     40.65
+    ]
+   ],
+   "frame": {
+    "family": "asset_origin",
+    "host": "FORWARD_SHIELD",
+    "matrix": [
+     [
+      1.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      1.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      1.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ]
+    ],
+    "module": "WF-FWD",
+    "object": null,
+    "parent": null
+   },
+   "host": "FORWARD_SHIELD",
+   "scope": "M8"
+  },
+  "M8.CROWN.RIM": {
+   "anchor": "WF-FWD.FORWARD_SHIELD.ORIGIN",
+   "asset": "WF_DETAIL_M8_CROWN_RIM",
+   "envelope": [
+    [
+     105.9,
+     -45.06,
+     -45.06
+    ],
+    [
+     109.4,
+     45.06,
+     45.06
+    ]
+   ],
+   "frame": {
+    "family": "asset_origin",
+    "host": "FORWARD_SHIELD",
+    "matrix": [
+     [
+      1.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      1.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      1.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ]
+    ],
+    "module": "WF-FWD",
+    "object": null,
+    "parent": null
+   },
+   "host": "FORWARD_SHIELD",
+   "scope": "M8"
+  }
+ },
+ "fingerprint": {
+  "detail/WF_DETAIL_M8_BROW_AFT.blend": {
+   "direct_links": [],
+   "objects": {
+    "Prod_BROW_AFT_boundary": {
+     "centroid": [
+      112.1269941329956,
+      -8.003380841575551e-18,
+      8.003380841575551e-18
+     ],
+     "component_id": "M8.BROW.AFT.BOUNDARY",
+     "faces": 1104,
+     "instance": null,
+     "kind": "production_detail",
+     "matrix_world": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "max": [
+      112.21920013427734,
+      11.100000381469727,
+      11.100000381469727
+     ],
+     "min": [
+      112.0347900390625,
+      -11.100000381469727,
+      -11.100000381469727
+     ],
+     "parent": null,
+     "type": "MESH",
+     "vertices": 1248
+    },
+    "Prod_BROW_AFT_caps": {
+     "centroid": [
+      110.85045337677002,
+      0.0,
+      0.0
+     ],
+     "component_id": "M8.BROW.AFT.CAPS",
+     "faces": 648,
+     "instance": null,
+     "kind": "production_detail",
+     "matrix_world": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "max": [
+      111.69318389892578,
+      35.05432891845703,
+      35.05432891845703
+     ],
+     "min": [
+      110.00769805908203,
+      -35.05432891845703,
+      -35.05432891845703
+     ],
+     "parent": null,
+     "type": "MESH",
+     "vertices": 1152
+    },
+    "Prod_BROW_AFT_fasteners": {
+     "centroid": [
+      110.85363432456707,
+      0.0,
+      0.0
+     ],
+     "component_id": "M8.BROW.AFT.FASTENERS",
+     "faces": 16704,
+     "instance": null,
+     "kind": "production_detail",
+     "matrix_world": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "max": [
+      112.28810119628906,
+      40.47455596923828,
+      40.47455596923828
+     ],
+     "min": [
+      109.67609405517578,
+      -40.47455596923828,
+      -40.47455596923828
+     ],
+     "parent": null,
+     "type": "MESH",
+     "vertices": 22272
+    },
+    "Prod_BROW_AFT_markings": {
+     "centroid": [
+      110.45871914391432,
+      -1.2188562325830545,
+      0.8119700000383889
+     ],
+     "component_id": "M8.BROW.AFT.MARKINGS",
+     "faces": 32388,
+     "instance": null,
+     "kind": "production_detail",
+     "matrix_world": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "max": [
+      112.1827392578125,
+      40.15140151977539,
+      40.15140151977539
+     ],
+     "min": [
+      109.71406555175781,
+      -40.15140151977539,
+      -40.15140151977539
+     ],
+     "parent": null,
+     "type": "MESH",
+     "vertices": 43984
+    },
+    "Prod_BROW_AFT_panels": {
+     "centroid": [
+      111.00147370383853,
+      -4.543949947265433e-18,
+      4.5439498645473714e-18
+     ],
+     "component_id": "M8.BROW.AFT.PANELS",
+     "faces": 28272,
+     "instance": null,
+     "kind": "production_detail",
+     "matrix_world": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "max": [
+      112.33712768554688,
+      40.59971618652344,
+      40.59971618652344
+     ],
+     "min": [
+      109.68201446533203,
+      -40.59971618652344,
+      -40.59971618652344
+     ],
+     "parent": null,
+     "type": "MESH",
+     "vertices": 26880
+    }
+   }
+  },
+  "detail/WF_DETAIL_M8_CROWN_RIM.blend": {
+   "direct_links": [],
+   "objects": {
+    "Prod_CROWN_RIM_closeouts": {
+     "centroid": [
+      106.4258918762207,
+      0.0,
+      0.0
+     ],
+     "component_id": "M8.CROWN.RIM.CLOSEOUTS",
+     "faces": 2832,
+     "instance": null,
+     "kind": "production_detail",
+     "matrix_world": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "max": [
+      106.4358901977539,
+      44.448387145996094,
+      44.448387145996094
+     ],
+     "min": [
+      106.4158935546875,
+      -44.448387145996094,
+      -44.448387145996094
+     ],
+     "parent": null,
+     "type": "MESH",
+     "vertices": 2880
+    },
+    "Prod_CROWN_RIM_fasteners": {
+     "centroid": [
+      106.40389480590821,
+      0.0,
+      0.0
+     ],
+     "component_id": "M8.CROWN.RIM.FASTENERS",
+     "faces": 2160,
+     "instance": null,
+     "kind": "production_detail",
+     "matrix_world": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "max": [
+      106.41089630126953,
+      44.074195861816406,
+      44.074195861816406
+     ],
+     "min": [
+      106.39389038085938,
+      -44.074195861816406,
+      -44.074195861816406
+     ],
+     "parent": null,
+     "type": "MESH",
+     "vertices": 2880
+    },
+    "Prod_CROWN_RIM_frames": {
+     "centroid": [
+      106.42089080810547,
+      0.0,
+      0.0
+     ],
+     "component_id": "M8.CROWN.RIM.FRAMES",
+     "faces": 1248,
+     "instance": null,
+     "kind": "production_detail",
+     "matrix_world": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "max": [
+      106.4358901977539,
+      44.0,
+      44.0
+     ],
+     "min": [
+      106.40589141845703,
+      -44.0,
+      -44.0
+     ],
+     "parent": null,
+     "type": "MESH",
+     "vertices": 1152
+    },
+    "Prod_CROWN_RIM_markings": {
+     "centroid": [
+      106.68932156486254,
+      -1.574284071120704,
+      1.0305917294255151
+     ],
+     "component_id": "M8.CROWN.RIM.MARKINGS",
+     "faces": 45728,
+     "instance": null,
+     "kind": "production_detail",
+     "matrix_world": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "max": [
+      109.3499984741211,
+      45.00429916381836,
+      45.00429916381836
+     ],
+     "min": [
+      105.94999694824219,
+      -45.00429916381836,
+      -45.00425720214844
+     ],
+     "parent": null,
+     "type": "MESH",
+     "vertices": 61792
+    },
+    "Prod_CROWN_RIM_panels": {
+     "centroid": [
+      106.42339324951172,
+      0.0,
+      0.0
+     ],
+     "component_id": "M8.CROWN.RIM.PANELS",
+     "faces": 3600,
+     "instance": null,
+     "kind": "production_detail",
+     "matrix_world": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "max": [
+      106.4358901977539,
+      44.16728591918945,
+      44.16728591918945
+     ],
+     "min": [
+      106.41089630126953,
+      -44.16728591918945,
+      -44.16728591918945
+     ],
+     "parent": null,
+     "type": "MESH",
+     "vertices": 3456
+    }
+   }
+  }
+ },
+ "git_dirty": false,
+ "git_revision": "98f6a5a21dcad6c945252328720f7bae42d71be1",
+ "inputs_hash": "effece336b1ed371",
+ "module": "WF-FWD",
+ "note": "A publication makes the pack eligible for integration; it is not an owner acceptance and changes no maturity or canon.",
+ "pack": "m8_forward",
+ "pack_version": 1,
+ "published_utc": "2026-10-23T07:54:56Z",
+ "spec_sha256": "861a969c7da0bf441ad5c4c2fb50a90ec9a959051cf3c2310ceb9a44f8a27360",
+ "version": 2
+}

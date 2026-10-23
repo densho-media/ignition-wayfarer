@@ -72,8 +72,6 @@ def build_subsystem(kind, c, s, asset_dir):
     elif kind=='FORWARD_SHIELD':
         import exterior
         r=forward.forward_shield(c,s);exterior.forward(c,s)     # S02 slice 1: rim beacons with the forward structure
-        import production
-        for a in ('M8.BROW.AFT','M8.CROWN.RIM'):production.build(c,s,a)   # M8.1: the exterior production layer (L4_VISUAL_CANDIDATE)
         return r
     elif kind=='PROPULSION':return drive.propulsion(c,s,asset_dir)
     elif kind=='DEBUG_MAGNETICS':return drive.debug_magnetics(c,s)

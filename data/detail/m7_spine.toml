@@ -1,0 +1,64 @@
+# Detail pack m7_spine (docs/MODULES.md): the boarding path through the stationary body, module WF-SPINE. M7.EXT.PORT and M7.ENT on the
+# SERVICE asset's origin, M7.TRK on the CREW_TRANSFER asset's origin (vehicle frame: +X bow, +Z dorsal). Owned by a WF-SPINE detail session:
+# this manifest, src/wayfarer/detail/pack_m7_spine.py and the generated assets/wayfarer/detail/WF_DETAIL_M7_EXT_PORT.blend,
+# WF_DETAIL_M7_ENT.blend and WF_DETAIL_M7_TRK.blend. Accepted by the owner on 2026-10-20 with the M7 section; migrated unchanged from
+# [production.port], the M7.ENT-only [production.entry].bulkhead and production_detail.py (MOD phase 2). The rest of [production.entry] is
+# the shared M7 panel grammar (also read by m7_ra1 and ring_a_transfer) and stays in the spec. Every value is a PROTOTYPE depiction choice:
+# no load, pressure boundary, interface, docking, rescue, volume or mass.
+[pack]
+module = "WF-SPINE"
+version = 1
+# M7: the M7 section's switch ([production].enabled) and maturity (L4_VISUAL_ACCEPTED) apply as before.
+scope = "M7"
+enabled = true
+detail_class = "PRODUCTION"
+inspect = ["hull", "route"]
+views = ["service_detail", "hub_section_detail"]
+summary = "Port service covers and ID on the hull; entry-chamber wall panels, bulkhead faces and light housings; trunk panels and trays."
+
+[assembly."M7.EXT.PORT"]
+anchor = "WF-SPINE.SERVICE.ORIGIN"
+zone = "primary boarding port, exterior"
+classes = ["ENGINEERING_FLEXIBLE"]
+# Claimed space in the vehicle frame (m): the covers, fasteners and stencils on the hull beside the port and the port ID plus 0.05 m.
+envelope_min = [97.38, -6.58, -3.07]
+envelope_max = [101.48, -5.72, -0.45]
+
+[assembly."M7.ENT"]
+anchor = "WF-SPINE.SERVICE.ORIGIN"
+zone = "entry chamber and trunk node (HUM-001 zones 1-2)"
+classes = ["ENGINEERING_FLEXIBLE", "ARTISTIC"]
+# Claimed space in the vehicle frame (m): the chamber and node wall skins plus 0.05 m.
+envelope_min = [98.1, -6.23, -2.87]
+envelope_max = [100.75, -1.4, 0.83]
+
+[assembly."M7.TRK"]
+anchor = "WF-SPINE.CREW_TRANSFER.ORIGIN"
+zone = "stationary crew trunk (zone 2)"
+classes = ["ENGINEERING_FLEXIBLE", "ARTISTIC"]
+# Claimed space in the vehicle frame (m): the trunk wall cladding plus 0.05 m.
+envelope_min = [81.6, -0.85, -0.8]
+envelope_max = [102.45, 0.85, 0.85]
+
+[params]
+# Bulkhead faces: radial panel segments from inner_m to the wall, clear of the hinge and parked leaf, the placards (0 and 180 deg) and
+# the equalization valves.
+bulkhead = { inner_m = 1.02, segment_max_deg = 30.0, hinge_keep_deg = 52.0, placard_keep_deg = 16.0, valve_keep_deg = 9.0 }
+
+# M7.EXT.PORT (slice 1): flush service covers beside the primary port in the accepted M4 grammar (ochre, 15!A202), each with its
+# fasteners and stencil, and the port identification. Offsets (axial, tangential arc) from the port axis on the hull, off the port's hull
+# opening, inside the strap-free window round the approach aids and clear of them. Identification only: no livery, no registry lettering (S03 parked;
+# the GU WAYFARER 001 direction, 15!A225, stays for a later integration).
+[params.port]
+standoff_m = 0.004
+aid_margin_m = 0.15
+fastener_m = 0.03
+fastener_inset_m = 0.05
+port_id = "D1"
+port_id_at_m = [-1.0, 1.2]
+port_id_m = 0.32
+covers = [
+  { at_m = [1.75, -1.0], size_m = [0.55, 0.40, 0.025], label = "D1 EXT RELEASE", label_m = 0.035, function = "external hatch-release and equalization access cover (crew rescue from outside)" },
+  { at_m = [-1.62, -0.9], size_m = [0.70, 0.45, 0.025], label = "D1 UMBILICAL", label_m = 0.035, function = "docking umbilical service cover (power, data, air)" },
+]
+

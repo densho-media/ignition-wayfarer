@@ -3,7 +3,8 @@
 - Tags: every M8 object is a production_detail of an M8 assembly with layer PRODUCTION, the [production.m8] maturity, a unique component ID,
   its evidence reference and a draw range; M7 objects keep the M7 maturity.
 - Clashes: no M8 mesh overlaps (BVH triangle overlap) any engineering mesh of the forward assets (WF_FORWARD_SHIELD and WF_EYE), M8 meshes
-  included against each other's assemblies only.
+  included against each other's assemblies only. The M8 meshes live in the detail assets linked into WF_FORWARD_SHIELD at its origin (pack
+  m8_forward, docs/MODULES.md), so they are read in the same ship frame.
 - Silhouette: largest radius of the forward assets with and without the M8 objects (the 90 m Brow), and the forward-most M8 vertex against
   the skin's aft face at its radius (nothing on the sunward side).
 - Cost: objects, triangles and unique mesh data of the M8 layer.
@@ -22,8 +23,15 @@ ROOT = Path(__file__).resolve().parents[3]
 sys.path[:0] = [str(ROOT/'src/wayfarer')]
 from spec import load
 import forward_shield as fsh
+import modules
 
 ASSETS = ('subsystems/WF_FORWARD_SHIELD.blend', 'subsystems/WF_EYE.blend')
+
+
+def assets():
+    """The forward assets plus every detail asset linked into them (at the host origin, so in the same frame)."""
+    hosts = {Path(a).stem for a in ASSETS}
+    return [*ASSETS, *(f'{modules.ASSET_DIR}/{d}.blend' for d, h in sorted(modules.detail_hosts(ROOT).items()) if h in hosts)]
 
 
 def world_tris(o):
@@ -36,7 +44,7 @@ def world_tris(o):
 def main(out):
     s = load(ROOT)[0]; m8 = s['production']['m8']; st = fsh.stations(s)
     objs = []
-    for rel in ASSETS:
+    for rel in assets():
         with bpy.data.libraries.load(str(ROOT/'assets/wayfarer'/rel), link=False) as (src, dst):
             dst.objects = list(src.objects)
         for o in dst.objects:

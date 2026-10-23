@@ -1,0 +1,47 @@
+# Detail pack ring_a_transfer (docs/MODULES.md): ring A's spin transfer, module WF-RING-A. M7.XFR lines the despun transfer drum (anchor
+# WF-RING-A.DRUM.1: Drum_1 stays at the index angle while drum_sync is 0 and turns with the ring while it is 1); M7.SPK clads the sector-1
+# crew tube's radial run (anchor WF-RING-A.ROTOR.1: Rotor_1, turns with the ring). Owned by a WF-RING-A detail session: this manifest,
+# src/wayfarer/detail/pack_ring_a_transfer.py and the generated assets/wayfarer/detail/WF_DETAIL_M7_XFR.blend and WF_DETAIL_M7_SPK.blend.
+# Accepted by the owner on 2026-10-20 with the M7 section; migrated unchanged from [production.drum], [production.tube] and
+# production_detail.py (MOD phase 2). Reads the shared M7 panel grammar [production.entry]. Every value is a PROTOTYPE depiction choice:
+# no load, pressure boundary, interface, closure, seal, bearing, volume or mass.
+[pack]
+module = "WF-RING-A"
+version = 1
+# M7: the M7 section's switch ([production].enabled) and maturity (L4_VISUAL_ACCEPTED) apply as before.
+scope = "M7"
+enabled = true
+detail_class = "PRODUCTION"
+inspect = ["rotation", "route"]
+views = ["hub_section_detail", "crew_detail"]
+summary = "Machinery lining and light housings in the despun drum; ring frames and inhabited cladding in ring A's sector-1 crew tube."
+
+[assembly."M7.XFR"]
+anchor = "WF-RING-A.DRUM.1"
+zone = "ring-A spin transfer surroundings (zone 3); closures physics-locked"
+classes = ["ENGINEERING_FLEXIBLE"]
+# Claimed space in the drum frame (m; x along the ship axis from the ring centre): the lining on the drum wall plus 0.05 m.
+envelope_min = [-3.32, -1.97, -1.6]
+envelope_max = [-1.52, 1.75, 1.98]
+
+[assembly."M7.SPK"]
+anchor = "WF-RING-A.ROTOR.1"
+zone = "ring-A crew tube to sector 1 (zone 4)"
+classes = ["ENGINEERING_FLEXIBLE"]
+# Claimed space in the rotor frame (m): the tube's radial run cladding plus 0.05 m.
+envelope_min = [-0.82, 5.82, -1.95]
+envelope_max = [0.85, 24.89, -0.3]
+
+# M7.XFR (slice 3): the drum lining. Panels on the drum's outer wall above the crawl rail, opening_margin_m beyond each crew-tube opening's
+# frame; the closures stay physics-locked (proxy grey, PROTOTYPE). Machinery treatment: darker panels in the rotating machinery space.
+[params.drum]
+opening_margin_m = 0.08
+panel_max_deg = 14.0
+panel_min_deg = 4.0
+
+# M7.SPK (slice 3): ring A's sector-1 crew tube, radial run: ring frames every frame_pitch_m, cladding between them.
+[params.tube]
+frame_pitch_m = 1.50
+frame_width_m = 0.05
+frame_depth_m = 0.030
+end_inset_m = 0.30

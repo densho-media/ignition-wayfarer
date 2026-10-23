@@ -1,7 +1,7 @@
 {
   "result": "PASS",
   "blender": "5.2.2 LTS",
-  "spec_hash": "4bd7bb763a25ad8034f7c036f6809d6d46e626629b30bb5b8043c63a7f3a2cf8",
+  "spec_hash": "861a969c7da0bf441ad5c4c2fb50a90ec9a959051cf3c2310ceb9a44f8a27360",
   "source_map_hash": "99cd812784b9ce8dc35eff1ed107627617c8e72fa9de55fedee6268f939f0ee1",
   "configurations": {
     "COAST": {
@@ -117,7 +117,6 @@
         "crew_bracket": 120,
         "entry_fixture": 750,
         "route_fitout": 660,
-        "production_detail": 45,
         "transfer_closure": 14,
         "ring_frame": 4,
         "ring_fill": 6,
@@ -126,6 +125,7 @@
         "sector_interior_deck": 6,
         "sector_interior_overhead": 6,
         "sector_interior_zone": 60,
+        "production_detail": 45,
         "cryo_feed_line": 8,
         "service_fitting": 8,
         "dock_capture_ring": 2,
@@ -406,7 +406,6 @@
         "crew_bracket": 120,
         "entry_fixture": 750,
         "route_fitout": 660,
-        "production_detail": 45,
         "transfer_closure": 14,
         "ring_frame": 4,
         "ring_fill": 6,
@@ -415,6 +414,7 @@
         "sector_interior_deck": 6,
         "sector_interior_overhead": 6,
         "sector_interior_zone": 60,
+        "production_detail": 45,
         "cryo_feed_line": 8,
         "service_fitting": 8,
         "dock_capture_ring": 2,
@@ -695,7 +695,6 @@
         "crew_bracket": 120,
         "entry_fixture": 750,
         "route_fitout": 660,
-        "production_detail": 45,
         "transfer_closure": 14,
         "ring_frame": 4,
         "ring_fill": 6,
@@ -704,6 +703,7 @@
         "sector_interior_deck": 6,
         "sector_interior_overhead": 6,
         "sector_interior_zone": 60,
+        "production_detail": 45,
         "cryo_feed_line": 8,
         "service_fitting": 8,
         "dock_capture_ring": 2,
@@ -981,7 +981,6 @@
         "crew_bracket": 120,
         "entry_fixture": 750,
         "route_fitout": 660,
-        "production_detail": 45,
         "transfer_closure": 14,
         "ring_frame": 4,
         "ring_fill": 6,
@@ -990,6 +989,7 @@
         "sector_interior_deck": 6,
         "sector_interior_overhead": 6,
         "sector_interior_zone": 60,
+        "production_detail": 45,
         "cryo_feed_line": 8,
         "service_fitting": 8,
         "dock_capture_ring": 2,
@@ -1267,7 +1267,6 @@
         "crew_bracket": 120,
         "entry_fixture": 750,
         "route_fitout": 660,
-        "production_detail": 45,
         "transfer_closure": 14,
         "ring_frame": 4,
         "ring_fill": 6,
@@ -1276,6 +1275,7 @@
         "sector_interior_deck": 6,
         "sector_interior_overhead": 6,
         "sector_interior_zone": 60,
+        "production_detail": 45,
         "cryo_feed_line": 8,
         "service_fitting": 8,
         "dock_capture_ring": 2,
@@ -1553,7 +1553,6 @@
         "crew_bracket": 120,
         "entry_fixture": 750,
         "route_fitout": 660,
-        "production_detail": 45,
         "transfer_closure": 14,
         "ring_frame": 4,
         "ring_fill": 6,
@@ -1562,6 +1561,7 @@
         "sector_interior_deck": 6,
         "sector_interior_overhead": 6,
         "sector_interior_zone": 60,
+        "production_detail": 45,
         "cryo_feed_line": 8,
         "service_fitting": 8,
         "dock_capture_ring": 2,
@@ -1803,9 +1803,51 @@
         "RAD.FRAME"
       ]
     },
+    "WF_DETAIL_M7_ENT.blend": {
+      "assembly": "M7.ENT",
+      "objects": 5,
+      "authored": 0,
+      "enabled": true
+    },
+    "WF_DETAIL_M7_EXT_PORT.blend": {
+      "assembly": "M7.EXT.PORT",
+      "objects": 3,
+      "authored": 0,
+      "enabled": true
+    },
     "WF_DETAIL_M7_RA1.blend": {
       "assembly": "M7.RA1",
       "objects": 4,
+      "authored": 0,
+      "enabled": true
+    },
+    "WF_DETAIL_M7_SPK.blend": {
+      "assembly": "M7.SPK",
+      "objects": 4,
+      "authored": 0,
+      "enabled": true
+    },
+    "WF_DETAIL_M7_TRK.blend": {
+      "assembly": "M7.TRK",
+      "objects": 4,
+      "authored": 0,
+      "enabled": true
+    },
+    "WF_DETAIL_M7_XFR.blend": {
+      "assembly": "M7.XFR",
+      "objects": 4,
+      "authored": 0,
+      "enabled": true
+    },
+    "WF_DETAIL_M8_BROW_AFT.blend": {
+      "assembly": "M8.BROW.AFT",
+      "objects": 5,
+      "authored": 0,
+      "enabled": true
+    },
+    "WF_DETAIL_M8_CROWN_RIM.blend": {
+      "assembly": "M8.CROWN.RIM",
+      "objects": 5,
       "authored": 0,
       "enabled": true
     },
@@ -1821,10 +1863,29 @@
       "authored": 0,
       "enabled": true
     },
+    "WF_CREW_TRANSFER.blend": {
+      "instances": [
+        "M7.TRK"
+      ]
+    },
+    "WF_FORWARD_SHIELD.blend": {
+      "instances": [
+        "M8.BROW.AFT",
+        "M8.CROWN.RIM"
+      ]
+    },
     "WF_HABITAT.blend": {
       "instances": [
         "M7.RA1",
+        "M7.SPK",
+        "M7.XFR",
         "RA2.EQP"
+      ]
+    },
+    "WF_SERVICE.blend": {
+      "instances": [
+        "M7.ENT",
+        "M7.EXT.PORT"
       ]
     }
   },
@@ -3594,6 +3655,26 @@
       ],
       "direct_links": []
     },
+    "detail/WF_DETAIL_M7_ENT.blend": {
+      "generated_objects": 5,
+      "ids": [
+        "M7.ENT.BULKHEAD",
+        "M7.ENT.FASTENERS",
+        "M7.ENT.HOUSINGS",
+        "M7.ENT.PANELS",
+        "M7.ENT.TRAYS"
+      ],
+      "direct_links": []
+    },
+    "detail/WF_DETAIL_M7_EXT_PORT.blend": {
+      "generated_objects": 3,
+      "ids": [
+        "M7.EXT.PORT.COVERS",
+        "M7.EXT.PORT.FASTENERS",
+        "M7.EXT.PORT.LETTERING"
+      ],
+      "direct_links": []
+    },
     "detail/WF_DETAIL_M7_RA1.blend": {
       "generated_objects": 4,
       "ids": [
@@ -3601,6 +3682,58 @@
         "M7.RA1.HOUSINGS",
         "M7.RA1.PANELS",
         "M7.RA1.TRAYS"
+      ],
+      "direct_links": []
+    },
+    "detail/WF_DETAIL_M7_SPK.blend": {
+      "generated_objects": 4,
+      "ids": [
+        "M7.SPK.FASTENERS",
+        "M7.SPK.FRAMES",
+        "M7.SPK.PANELS",
+        "M7.SPK.TRAYS"
+      ],
+      "direct_links": []
+    },
+    "detail/WF_DETAIL_M7_TRK.blend": {
+      "generated_objects": 4,
+      "ids": [
+        "M7.TRK.FASTENERS",
+        "M7.TRK.HOUSINGS",
+        "M7.TRK.PANELS",
+        "M7.TRK.TRAYS"
+      ],
+      "direct_links": []
+    },
+    "detail/WF_DETAIL_M7_XFR.blend": {
+      "generated_objects": 4,
+      "ids": [
+        "M7.XFR.FASTENERS",
+        "M7.XFR.HOUSINGS",
+        "M7.XFR.PANELS",
+        "M7.XFR.TRAYS"
+      ],
+      "direct_links": []
+    },
+    "detail/WF_DETAIL_M8_BROW_AFT.blend": {
+      "generated_objects": 5,
+      "ids": [
+        "M8.BROW.AFT.BOUNDARY",
+        "M8.BROW.AFT.CAPS",
+        "M8.BROW.AFT.FASTENERS",
+        "M8.BROW.AFT.MARKINGS",
+        "M8.BROW.AFT.PANELS"
+      ],
+      "direct_links": []
+    },
+    "detail/WF_DETAIL_M8_CROWN_RIM.blend": {
+      "generated_objects": 5,
+      "ids": [
+        "M8.CROWN.RIM.CLOSEOUTS",
+        "M8.CROWN.RIM.FASTENERS",
+        "M8.CROWN.RIM.FRAMES",
+        "M8.CROWN.RIM.MARKINGS",
+        "M8.CROWN.RIM.PANELS"
       ],
       "direct_links": []
     },
@@ -3622,7 +3755,7 @@
       "direct_links": []
     },
     "subsystems/WF_CREW_TRANSFER.blend": {
-      "generated_objects": 195,
+      "generated_objects": 192,
       "ids": [
         "CREW_PORT_GATE_CTRL",
         "Crew_Connector_Airlock_EVA",
@@ -3712,10 +3845,6 @@
         "IF_CREW_STORE_PORT",
         "IF_CREW_TRUNK_AFT",
         "IF_CREW_TRUNK_FWD",
-        "M7.TRK.FASTENERS",
-        "M7.TRK.HOUSINGS",
-        "M7.TRK.PANELS",
-        "M7.TRK.TRAYS",
         "Refuge_Anchor_Rail_1",
         "Refuge_Anchor_Rail_10",
         "Refuge_Anchor_Rail_10_Brackets",
@@ -3818,9 +3947,12 @@
         "Trunk_Fit_Route_Stripe_1",
         "Trunk_Fit_Route_Stripe_2",
         "Trunk_Fit_Route_Stripe_3",
-        "Trunk_Fit_Supply_Diffuser"
+        "Trunk_Fit_Supply_Diffuser",
+        "WF.DETAIL.M7.TRK"
       ],
-      "direct_links": []
+      "direct_links": [
+        "detail/WF_DETAIL_M7_TRK.blend"
+      ]
     },
     "subsystems/WF_DEBUG_MAGNETICS.blend": {
       "generated_objects": 18,
@@ -3975,7 +4107,7 @@
       "direct_links": []
     },
     "subsystems/WF_FORWARD_SHIELD.blend": {
-      "generated_objects": 673,
+      "generated_objects": 665,
       "ids": [
         "Brow_Joint_Hoop_11.2_00",
         "Brow_Joint_Hoop_11.2_01",
@@ -4314,16 +4446,6 @@
         "IF_SHIELD_SECTOR_AFT_2",
         "IF_SHIELD_SECTOR_AFT_3",
         "IF_SHIELD_SPINE_JOINT",
-        "M8.BROW.AFT.BOUNDARY",
-        "M8.BROW.AFT.CAPS",
-        "M8.BROW.AFT.FASTENERS",
-        "M8.BROW.AFT.MARKINGS",
-        "M8.BROW.AFT.PANELS",
-        "M8.CROWN.RIM.CLOSEOUTS",
-        "M8.CROWN.RIM.FASTENERS",
-        "M8.CROWN.RIM.FRAMES",
-        "M8.CROWN.RIM.MARKINGS",
-        "M8.CROWN.RIM.PANELS",
         "Shield_Damage_Cell_01_01",
         "Shield_Damage_Cell_01_02",
         "Shield_Damage_Cell_01_03",
@@ -4605,6 +4727,8 @@
         "Truss_Spoke_12_aft",
         "Truss_Spoke_12_diagonal",
         "Truss_Spoke_12_fwd",
+        "WF.DETAIL.M8.BROW.AFT",
+        "WF.DETAIL.M8.CROWN.RIM",
         "WF.FORWARD.CROWN.BAY.01",
         "WF.FORWARD.CROWN.BAY.02",
         "WF.FORWARD.CROWN.BAY.03",
@@ -4651,10 +4775,13 @@
         "WF.FORWARD.WELL.03",
         "WF.FORWARD.WELL.04"
       ],
-      "direct_links": []
+      "direct_links": [
+        "detail/WF_DETAIL_M8_BROW_AFT.blend",
+        "detail/WF_DETAIL_M8_CROWN_RIM.blend"
+      ]
     },
     "subsystems/WF_HABITAT.blend": {
-      "generated_objects": 513,
+      "generated_objects": 507,
       "ids": [
         "Crew_Tube_1_1",
         "Crew_Tube_1_1_Arrest_Rail",
@@ -5079,14 +5206,6 @@
         "IF_VESTIBULE_2_SEAL_AFT_PRIMARY",
         "IF_VESTIBULE_2_SEAL_FWD",
         "IF_VESTIBULE_2_SEAL_FWD_PRIMARY",
-        "M7.SPK.FASTENERS",
-        "M7.SPK.FRAMES",
-        "M7.SPK.PANELS",
-        "M7.SPK.TRAYS",
-        "M7.XFR.FASTENERS",
-        "M7.XFR.HOUSINGS",
-        "M7.XFR.PANELS",
-        "M7.XFR.TRAYS",
         "Ring_1_Fill_1",
         "Ring_1_Fill_2",
         "Ring_1_Fill_3",
@@ -5132,6 +5251,8 @@
         "WF.CREW.2.VESTIBULE_GUARD_AFT",
         "WF.CREW.2.VESTIBULE_GUARD_FWD",
         "WF.DETAIL.M7.RA1",
+        "WF.DETAIL.M7.SPK",
+        "WF.DETAIL.M7.XFR",
         "WF.DETAIL.RA2.EQP",
         "WF.HUB.1.DATA_Rotor",
         "WF.HUB.1.Drum",
@@ -5176,6 +5297,8 @@
         "components/WF_INTERIOR_WORK.blend",
         "components/WF_RING_SECTOR.blend",
         "detail/WF_DETAIL_M7_RA1.blend",
+        "detail/WF_DETAIL_M7_SPK.blend",
+        "detail/WF_DETAIL_M7_XFR.blend",
         "detail/WF_DETAIL_RA2_EQP.blend"
       ]
     },
@@ -5553,7 +5676,7 @@
       "direct_links": []
     },
     "subsystems/WF_SERVICE.blend": {
-      "generated_objects": 294,
+      "generated_objects": 288,
       "ids": [
         "Airlock_EVA",
         "Casing_Access_01_000",
@@ -5754,14 +5877,6 @@
         "IF_DOCK_SERVICE",
         "IF_DOCK_SERVICE_CAPTURE_RING",
         "IF_STOREROOM",
-        "M7.ENT.BULKHEAD",
-        "M7.ENT.FASTENERS",
-        "M7.ENT.HOUSINGS",
-        "M7.ENT.PANELS",
-        "M7.ENT.TRAYS",
-        "M7.EXT.PORT.COVERS",
-        "M7.EXT.PORT.FASTENERS",
-        "M7.EXT.PORT.LETTERING",
         "Refuge_Inner_Wall",
         "Refuge_Storm_Shelter",
         "STOREROOM_CTRL",
@@ -5848,9 +5963,14 @@
         "Survival_RF_Dish",
         "Survival_RF_Mast",
         "Survival_Star_Tracker_1",
-        "Survival_Star_Tracker_2"
+        "Survival_Star_Tracker_2",
+        "WF.DETAIL.M7.ENT",
+        "WF.DETAIL.M7.EXT.PORT"
       ],
-      "direct_links": []
+      "direct_links": [
+        "detail/WF_DETAIL_M7_ENT.blend",
+        "detail/WF_DETAIL_M7_EXT_PORT.blend"
+      ]
     },
     "subsystems/WF_SHIELDING.blend": {
       "generated_objects": 1,

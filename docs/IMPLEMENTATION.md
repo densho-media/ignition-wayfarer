@@ -149,6 +149,8 @@ python3 tools/web_check.py <site> --out <dir>      # headless Chrome check of th
 python3 tools/workflow.py prune [--delete RUN...]     # AGENTS.md step 6 candidates in runs/ with sizes; deletes only named, approved candidates
 python3 tools/workflow.py module list|show|contracts|build|validate|preview|publish|rebind <module|pack|assembly> [--integrate]
                                                      # modular detail (docs/MODULES.md): a pack's own detail assets, screens, readback and publication
+python3 tools/workflow.py module export-authored <assembly> --id <ID> --objects <names>
+                                                     # ART meshes of a detail asset -> data/detail/<pack>/<id>.glb + its manifest entry
 python3 tools/workflow.py assembly validate           # every detail pack's saved assets and contract against its publication record
 python3 tools/workflow.py eva [--no-renders] [--no-route] [--only <stages>]   # EVA suit: build on the saved pair, coverage/envelope/hold checks, access-pose hulls, SP-11/12/13 study (eva_access.py, then measured and rendered in the vehicle), EVA-003 comparison (eva_sp11.py + validation/eva_sp11_study.py, rigs posed in the chambers), renders, glTF, route (docs/EVA.md, ~9 min; --only <stages> reruns part of it)
 /snap/bin/blender -b --python src/wayfarer/studies/eva3_district.py -- --out runs/<stamp>-eva3-district   # EVA-003 / SERV-003 integrated forward district (references/p1_eva_district.json, EVA3_DISTRICT_MAP.svg)
@@ -232,8 +234,9 @@ All of these are imported by both system Python and Blender's Python 3.13, so th
 
 **Build layer (Blender).** `build/build.py` orchestrates the dependency chain:
 0. Detail assets (`assets/wayfarer/detail/WF_DETAIL_<assembly>.blend`, one per detail-pack assembly, docs/MODULES.md), each linked into its
-   host by `components/detail.attach()` at its anchor before the host is saved. A `DETAIL_<assembly>` target rebuilds only that file; a host
-   target also rebuilds the details anchored on it.
+   host by `components/detail.attach()` at its anchor before the host is saved. A `DETAIL_<assembly>` target rebuilds only that file
+   (several joined with `+`); a host target also rebuilds the details anchored on it. Committed authored meshes (`data/detail/<pack>/*.glb`)
+   are imported into their detail asset here (`components/detail.import_authored`).
 1. Components (`assets/wayfarer/components/WF_{NOZZLE,RADIATOR,RING_SECTOR,INTERIOR_HABITATION,INTERIOR_WORK,INTERIOR_GARDEN}.blend`). The interior components map to the pod functions through `interior.components`; the habitat recipe parents the matching one to each pod as `Interior_r_j` with an identity local transform.
 2. Subsystems (`subsystems/WF_{STRUCTURE,HABITAT,STORAGE,SHIELDING,SERVICE,POWER_STORAGE,ROTOR_INTERFACE,CREW_TRANSFER,EYE,DEBUG_MAGNETICS,DEBUG_SEPARATRICES,DEBUG_OPTICS,PROPULSION,THERMAL,HULL}.blend`).
    - The three DEBUG libraries are built before PROPULSION, which links them as `DRIVE_DEBUG_*` instances. Their hide flags are driven by the drive control's toggles, saved off. Vehicles never link them directly. `--target PROPULSION` rebuilds all three first, and a `DEBUG_*` target also rebuilds PROPULSION.
@@ -306,10 +309,10 @@ standard for later sections. A new section follows the same steps, and its eleme
 - value steps from `[production.materials]`;
 - clearance screens, before/after stills (`m7_section.py` modes), a measured Godot view and an owner review.
 
-- **Geometry:** a pure module (`src/wayfarer/production_detail.py`, the shared detail core) builds closed meshes from the engineering
-  pure modules, and the parameters live in `[production.*]`. New detail goes into a detail pack (docs/MODULES.md): its own manifest
-  `data/detail/<pack>.toml` with `[params]`, its builders and screen in `src/wayfarer/detail/pack_<pack>.py` (`@pd.builder('<ID>')`,
-  `pd.CHECKS`) and its own linked asset. M7.RA1 is the first migrated assembly; the others are still built inside their hosts.
+- **Geometry:** every assembly is a detail pack (docs/MODULES.md): its manifest `data/detail/<pack>.toml` with `[params]`, its builders
+  and screen in `src/wayfarer/detail/pack_<pack>.py` (`@pd.builder('<ID>')`, `pd.CHECKS`) building closed meshes from the engineering
+  pure modules, and its own linked asset. `src/wayfarer/production_detail.py` is the shared core (registration, helpers, scopes,
+  `standard()`); the shared tables stay in `[production]`, `[production.entry]` (the M7 panel grammar) and `[production.m8]`.
 - **Objects:** `components/production.py` joins one family per assembly into one object (`Prod_<assembly>_<family>`), so
   the runtime gets a few batched meshes. A family with a bevel width gets an angle-limited chamfer, which the export
   evaluates.
@@ -324,13 +327,14 @@ standard for later sections. A new section follows the same steps, and its eleme
   clearance screens. `tests/test_production.py` keeps every assembly outside the route clearances.
 - **Performance:** run `profile_views.gd --view=demo_entry|demo_spine|demo_ring|exterior`, three runs per view, on the same
   machine before and after. The baseline is `references/M7_PERF_2026-10-19.md`.
-- **Scopes (M8):** `production_detail.scope()` returns the table that switches and labels an assembly: `[production]` for `M7.*`,
-  `[production.m8]` for `M8.*`, each with its own `enabled`, `assemblies` and `maturity`. The manifest's `production.assemblies`
+- **Scopes (M8):** `production_detail.scope()` returns the table that switches and labels an assembly, as its pack's `scope` names it:
+  `[production]` (M7), `[production.m8]` (M8), each with its own `enabled` and `maturity`, or the pack's own `[pack]`. The manifest's `production.assemblies`
   gives every built assembly its scope and maturity, and `check_export.gd` fails a node whose maturity differs from its assembly's.
   Demonstrator 01's INSPECT flips the M7 section only. Exterior families carry `detail_range_m` (Godot `visibility_range_end`).
 - **Exterior gates (M8):** an off-diff; `pipeline --quick --expect Prod_ --inspect forward hull`; the pure screens; then
   `/snap/bin/blender -b --python src/wayfarer/validation/m8_readback.py -- --out <run>/m8_readback.json` (tags, BVH clashes against
-  every forward engineering mesh, largest radius, nothing ahead of the skin's aft face). A repeated module (the Crown sector) is gated
+  every forward engineering mesh, largest radius, nothing ahead of the skin's aft face; it reads the forward assets and the detail assets
+  linked into them). A repeated module (the Crown sector) is gated
   on one instance first (`[production.m8].crown_sectors`). Stills: `presentation/m8_exterior.py -- [--mode xray]`.
 
 ## Godot runtime inspector

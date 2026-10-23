@@ -51,7 +51,7 @@ def build(root, ident, integrate=False, rebind=False, run_dir=None, lock=None):
     run_dir = run_dir or root/'runs'/f'{pipeline.stamp()}-module-{ident}'
     steps = []
     script = root/'src/wayfarer/build/build.py'
-    targets = sorted({modules.anchor_host(t['anchor']) for t in asm.values()}) if integrate else [modules.target(a) for a in sorted(asm)]
+    targets = ['+'.join(sorted({modules.anchor_host(t['anchor']) for t in asm.values()}))] if integrate else ['+'.join(modules.target(a) for a in sorted(asm))]
     for target in targets:
         code, secs = blender_step(run_dir, f'build-{target}', script, '--root', root, '--target', target, *(['--rebind'] if rebind else []), lock=lock)
         steps.append(dict(target=target, result='PASS' if code == 0 else 'FAIL', seconds=secs,
@@ -69,7 +69,7 @@ def validate_pure(root, ident):
     from spec import load
     import production_detail as pd
     s = load(root)[0]; mid, names, asm = selection(root, ident)
-    fails = [f for f in modules.validate(s, root, legacy=pd.ASSEMBLIES) if any(n in f for n in [mid, *names, *asm]) or 'cycle' in f]
+    fails = [f for f in modules.validate(s, root) if any(n in f for n in [mid, *names, *asm]) or 'cycle' in f]
     out = {}
     for a in sorted(asm):
         screens = pd.check(s, a); env = modules.envelope_fails(s, a)
@@ -138,10 +138,11 @@ def record(root, pack, s, fp):
     git = lambda *a: subprocess.check_output(['git', '-C', str(root), *a], text=True).strip()
     mine = {a: t for a, t in modules.assemblies(modules.packs(root)).items() if t['pack'] == pack}
     import production_detail as pd
-    return {'contract': 'WF_MODULE_PUBLICATION', 'version': 1, 'pack': pack, 'module': q['pack']['module'], 'pack_version': q['pack']['version'],
-            'published_utc': pipeline.utc_now(), 'git_revision': git('rev-parse', 'HEAD'), 'git_dirty': bool(git('status', '--porcelain')),
+    return {'contract': 'WF_MODULE_PUBLICATION', 'version': 2, 'pack': pack, 'module': q['pack']['module'], 'pack_version': q['pack']['version'],
+            'published_utc': pipeline.utc_now(), 'git_revision': git('rev-parse', 'HEAD'), 'git_dirty': bool(git('status', '--porcelain', '--', '.', f':!{RECORDS}')),   # other records written by the same publish do not count
             'inputs_hash': modules.inputs_hash(root, pack), 'spec_sha256': pipeline.sha256(root/'data/wayfarer_3d.toml'),
-            'contract_hash': modules.contracts(s, root, reg)['modules'][q['pack']['module']]['hash'],
+            'contract_hash': modules.pack_contract(s, reg, modules.packs(root), pack),
+            'contract_terms': modules.pack_terms(s, reg, modules.packs(root), pack),
             'assemblies': {a: dict(anchor=t['anchor'], anchor_hash=modules.anchor_hash(reg, anc[t['anchor']]), asset=modules.asset_name(a),
                                    enabled=pd.enabled(s, a), maturity=pd.scope(s, a)['maturity'], detail_class=q['pack']['detail_class'])
                            for a, t in sorted(mine.items())},
@@ -182,8 +183,8 @@ def assembly_validate(root, lock=None):
         rec = json.loads(path.read_text())
         if rec['inputs_hash'] != modules.inputs_hash(root, pack):
             fails.append('pack inputs changed since publication: module validate, then module publish')
-        if rec['contract_hash'] != modules.contracts(s, root, reg)['modules'][q['pack']['module']]['hash']:
-            fails.append(f"module {q['pack']['module']} contract changed since publication: review the pack against it, then publish")
+        if rec['contract_hash'] != modules.pack_contract(s, reg, packs_, pack, anc):
+            fails.append(f"the pack's contract (anchor frames, envelopes, scope) changed since publication: review the pack against it, then publish")
         for a, t in rec['assemblies'].items():
             if a not in allasm:
                 fails.append(f'{a}: published but no longer in the pack')
@@ -214,7 +215,24 @@ def listing(root):
     return out
 
 
-def run(root, op, ident=None, integrate=False, write=False, rebind=False, views=None, quality='draft', blender=True):
+def export_authored(root, assembly, ident, objects, lock=None):
+    """ART meshes of an assembly's detail asset -> data/detail/<pack>/<id>.glb (src/wayfarer/build/authored_export.py); prints the manifest
+    entry to record. The sources stay in the local .blend (SRC_<asset>)."""
+    if assembly not in modules.assemblies(modules.packs(root)):
+        raise ValueError(f'export-authored needs an assembly ID (module list), not {assembly!r}')
+    if not ident or not objects:
+        raise ValueError('export-authored needs --id and --objects')
+    run_dir = root/'runs'/f'{pipeline.stamp()}-module-export-{ident.lower()}'
+    code, secs = blender_step(run_dir, 'export-authored', root/'src/wayfarer/build/authored_export.py', '--root', root, '--assembly', assembly,
+                              '--id', ident, '--objects', *objects, lock=lock)
+    line = next((l for l in (run_dir/'logs'/'export-authored.log').read_text(errors='replace').splitlines() if l.startswith('WF_AUTHORED_EXPORT {')), None)
+    if code or line is None:
+        return dict(result='FAIL', seconds=secs, log=log_tail(run_dir, 'export-authored'), run_dir=str(run_dir))
+    return dict(json.loads(line.split(' ', 1)[1]), seconds=secs, run_dir=str(run_dir),
+                next='record manifest_entry in the pack manifest (fill in license, author, provenance), then module build and module validate')
+
+
+def run(root, op, ident=None, integrate=False, write=False, rebind=False, views=None, quality='draft', blender=True, authored_id=None, objects=None):
     from workflow import write_lock
     from spec import load
     if op == 'list':
@@ -227,7 +245,9 @@ def run(root, op, ident=None, integrate=False, write=False, rebind=False, views=
             return dict(result='PASS', written=modules.write(s, root))
         current = json.loads((root/modules.CONTRACTS).read_text()) if (root/modules.CONTRACTS).is_file() else None
         fresh = json.loads(json.dumps(modules.contracts(s, root), sort_keys=True))
+        both = modules.combined(s, root)
         return dict(result='PASS' if current == fresh else 'STALE', hashes={k: v['hash'] for k, v in fresh['modules'].items()},
+                    packs={k: v['hash'] for k, v in both['packs'].items()},
                     note=None if current == fresh else 'regenerate with --write (a build also rewrites it)')
     if op == 'validate' and not blender:
         return validate(root, ident, blender=False)
@@ -238,6 +258,8 @@ def run(root, op, ident=None, integrate=False, write=False, rebind=False, views=
             return build(root, ident, integrate, lock=lock)
         if op == 'rebind':
             return build(root, ident, rebind=True, lock=lock)
+        if op == 'export-authored':
+            return export_authored(root, ident, authored_id, objects, lock=lock)
         if op == 'validate':
             return validate(root, ident, lock=lock)
         if op == 'preview':

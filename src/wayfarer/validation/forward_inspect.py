@@ -15,6 +15,12 @@ import layout
 from common import pose_forward_state
 
 LIBRARY = fsh.SUBSYSTEM+'.blend'
+
+
+def libraries():
+    """The forward-shield library and the detail assets linked into it at its origin (docs/MODULES.md): read as one asset, in its frame."""
+    import modules
+    return {LIBRARY, *(f'{d}.blend' for d, h in modules.detail_hosts().items() if h == fsh.SUBSYSTEM)}
 CUT_FLAT = math.cos(math.pi/64)      # common.cut cylinders are 64-gons: a cone well or port edge lies on its flats, r cos(pi/64)
 SHIELD_KINDS = {'shield_skin', 'shield_hub', 'shield_rim', 'shield_truss', 'disruptor_layer', 'disruptor_post'}
 SECTOR_KINDS = {'sector_keel', 'sector_frame', 'sector_tie'}
@@ -24,13 +30,13 @@ HARDWARE_KINDS = {'crown_carriage', 'crown_emitter', 'crown_launcher'}
 
 def records():
     """World-space evaluated vertices of every visible object of the forward-shield library: name, kind, vertices, face count."""
-    out = []
+    out = []; libs = libraries()
     for instance in bpy.context.evaluated_depsgraph_get().object_instances:
         obj = instance.object
         if obj.type not in {'MESH', 'CURVE'}:
             continue
         lib = obj.original.library
-        if lib is None or Path(bpy.path.abspath(lib.filepath)).name != LIBRARY:
+        if lib is None or Path(bpy.path.abspath(lib.filepath)).name not in libs:
             continue
         data = obj.to_mesh(); vs = [instance.matrix_world@v.co for v in data.vertices]; faces = len(data.polygons); obj.to_mesh_clear()
         if faces:      # collapsed displays (a bevel of 0) evaluate without faces and are not geometry
@@ -121,9 +127,10 @@ def check_saved(s, ctx):
         assert len(kinds.get(kind, [])) == n, f'{kind}: {len(kinds.get(kind, []))} evaluated objects, expected {n}'
     pts = lambda *ks: [v for k in ks for r in kinds.get(k, []) for v in r['vs']]
     # HSFP: every forward object kind carries its design class from forward_shield.design_classes (98!A58).
-    classes = fsh.design_classes(s)
+    classes = fsh.design_classes(s); libs = libraries()
     for o in ob:
-        if o.library is not None and Path(bpy.path.abspath(o.library.filepath)).name == LIBRARY and o.get('kind') not in (None, 'interface'):
+        # A detail_instance only links a detail asset; the production objects inside it are checked here with the rest.
+        if o.library is not None and Path(bpy.path.abspath(o.library.filepath)).name in libs and o.get('kind') not in (None, 'interface', 'detail_instance'):
             assert o.get('kind') in classes, f"{o.name}: kind {o.get('kind')} has no design class"
             assert o.get('design_class') == classes[o['kind']], f"{o.name}: design_class {o.get('design_class')} != {classes[o['kind']]}"
     # Shield: measured radius, conical profile, face and Lance tip against the stations. Every skin vertex lies on the face or its 0.10 m aft sheet.

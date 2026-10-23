@@ -83,14 +83,15 @@ def render(views=VIEWS, size=1600, samples=64, out_dir=None, mode='beforeafter',
     bpy.ops.wm.open_mainfile(filepath=str(ROOT/'assets/wayfarer'/(s['vehicle']['asset']+'.blend')))
     scene = bpy.context.scene; pose_configuration(s, 'COAST')
     # hero exterior look, then the production materials back to their own values (dress greys every WF_MAT_ material)
+    # Keyed by datablock: each detail asset carries its own copy of a shared production material (same name, another library).
     keep = {}
     for m in bpy.data.materials:
         if m.name.startswith('WF_MAT_Prod_') and m.use_nodes:
             n = next(q for q in m.node_tree.nodes if q.type == 'BSDF_PRINCIPLED')
-            keep[m.name] = {k: (tuple(n.inputs[k].default_value) if k == 'Base Color' else n.inputs[k].default_value) for k in ('Base Color', 'Roughness', 'Metallic')}
+            keep[m] = {k: (tuple(n.inputs[k].default_value) if k == 'Base Color' else n.inputs[k].default_value) for k in ('Base Color', 'Roughness', 'Metallic')}
     hp.dress(s, functional=True, emit=False); x = s['look']['exterior']
-    for name, vals in keep.items():
-        n = next(q for q in bpy.data.materials[name].node_tree.nodes if q.type == 'BSDF_PRINCIPLED')
+    for m, vals in keep.items():
+        n = next(q for q in m.node_tree.nodes if q.type == 'BSDF_PRINCIPLED')
         for k, v in vals.items():
             n.inputs[k].default_value = v
     scene.render.engine = 'CYCLES'; scene.cycles.samples = samples; scene.cycles.use_denoising = True; scene.cycles.seed = 0

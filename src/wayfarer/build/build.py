@@ -91,10 +91,10 @@ def build_detail(root,assets,s,assembly,spec_text,source_text,rebind=False):
     """One detail asset, assets/wayfarer/detail/WF_DETAIL_<assembly>.blend: the assembly in its anchor frame plus its contract stamps; hand-authored
     meshes in its ART_ collection are kept and adopted (detail.adopt)."""
     name=modules.asset_name(assembly);path=assets/modules.ASSET_DIR/f'{name}.blend'
-    coll,c=begin(path,name);detail.build(c,s,assembly);detail.stamp(coll,s,root,assembly)
+    coll,c=begin(path,name);detail.build(c,s,assembly);imported=detail.import_authored(c,s,root,assembly);detail.stamp(coll,s,root,assembly)
     authored=detail.adopt(name,s,root,assembly,rebind)
     save(path,coll,spec_text,source_text)
-    print('WF_DETAIL',name,len(c.objects),'generated',len(authored),'authored',flush=True)
+    print('WF_DETAIL',name,len(c.objects)-len(imported),'generated',len(imported),'imported',len(authored),'adopted',flush=True)
 
 
 def build(root=ROOT, target='all', rebind=False):
@@ -102,23 +102,30 @@ def build(root=ROOT, target='all', rebind=False):
     assets=root/'assets/wayfarer'
     details=detail_targets(s)
     valid=['all','vehicle',*COMPONENTS,*SUBSYSTEMS,'CHARACTERS',*details]
-    if target not in valid:raise ValueError(f'target must be one of {valid}')
+    # Several detail targets, or several component/subsystem targets, may be joined with '+' (a pack with several assemblies, or a new
+    # pack on two hosts): one build of exactly those files instead of a full one.
+    names=target.split('+')
+    if any(n not in valid for n in names) or (len(names)>1 and not (set(names)<=set(details) or set(names)<=set(COMPONENTS)|set(SUBSYSTEMS))):
+        raise ValueError(f'target must be one of {valid}, or several DETAIL_* or several component/subsystem targets joined with +')
     if target=='CHARACTERS':
         build_characters(root,s,spec_text,source_text);return
-    if target in details:
-        # A detail-only change rewrites its own file: the host links it, and the vehicle sees it through that nested link.
-        build_detail(root,assets,s,details[target],spec_text,source_text,rebind)
+    if set(names)<=set(details):
+        # A detail-only change rewrites its own files: the host links them, and the vehicle sees them through that nested link.
+        for n in names:build_detail(root,assets,s,details[n],spec_text,source_text,rebind)
         modules.write(s,root);return
     if set(s['interior']['components'].values())!={c for c in COMPONENTS if c.startswith('INTERIOR_')}:raise ValueError('interior.components must match the INTERIOR_ components')
-    if target in COMPONENTS:
-        dependencies={'NOZZLE':['PROPULSION'],'RADIATOR':['THERMAL'],'RING_SECTOR':['HABITAT']}
-        dependencies|={c:['HABITAT'] for c in COMPONENTS if c.startswith('INTERIOR_')}
-        parts=[target];systems=dependencies[target]
-    elif target=='all':parts=COMPONENTS;systems=SUBSYSTEMS
-    elif target=='PROPULSION':parts=[];systems=[*DEBUG_FAMILY,'PROPULSION']
-    elif target in DEBUG_FAMILY:parts=[];systems=[target,'PROPULSION']
-    elif target in SUBSYSTEMS:parts=[];systems=[target]
-    else:parts=[];systems=[]
+    dependencies={'NOZZLE':['PROPULSION'],'RADIATOR':['THERMAL'],'RING_SECTOR':['HABITAT']}
+    dependencies|={c:['HABITAT'] for c in COMPONENTS if c.startswith('INTERIOR_')}
+    parts,systems=[],[]
+    for n in names:
+        if n in COMPONENTS:p,q=[n],dependencies[n]
+        elif n=='all':p,q=COMPONENTS,SUBSYSTEMS
+        elif n=='PROPULSION':p,q=[],[*DEBUG_FAMILY,'PROPULSION']
+        elif n in DEBUG_FAMILY:p,q=[],[n,'PROPULSION']
+        elif n in SUBSYSTEMS:p,q=[],[n]
+        else:p,q=[],[]
+        parts+=[x for x in p if x not in parts];systems+=[x for x in q if x not in systems]
+    parts=[x for x in COMPONENTS if x in parts];systems=[x for x in SUBSYSTEMS if x in systems]     # build order
     # Detail assets first: their hosts link them. A host rebuild also rebuilds its own details (they read the host's pure geometry).
     hosts=set(parts)|set(systems)
     for a in details.values():
@@ -159,9 +166,9 @@ def build(root=ROOT, target='all', rebind=False):
     bpy.context.scene.frame_end=361
     bpy.context.scene.frame_set(1)
     save(path,coll,spec_text,source_text)
-    if target=='all':retire(assets)
+    if names==['all']:retire(assets)
     # The greeting staging follows the entry stations (SERVICE).
-    if target in ('all','SERVICE'):build_characters(root,s,spec_text,source_text)
+    if 'all' in names or 'SERVICE' in names:build_characters(root,s,spec_text,source_text)
     # The rig contract travels with the vehicle so fixtures stay self-consistent.
     print('WF_SIM_RIG',sim_rig.write(root),flush=True)
     print('WF_MODULE_CONTRACTS',modules.write(s,root),flush=True)
