@@ -1364,8 +1364,10 @@ geometry and carries no load. It changes no pressure boundary, interface, volume
   - `M7.SPK`: ring A's sector-1 crew tube, radial run. Ring frames every 1.5 m and cladding between them, off the ladder, arrest rail,
     lights, hatch panel and fit-out. Parented to `Rotor_1`. The collar, elbows and sector hatch are unchanged.
   - `M7.RA1`: ring A sector 1's overhead. Removable service panels on trays in the bays of the route fit-out's overhead frame grid, off
-    every item that reaches the overhead, the hatch opening and the landing well's column. Housings round the aisle lights. Parented
-    to sector instance `(1, 1)` only. Nothing comes below -2.85 m.
+    every item that reaches the overhead, the hatch opening and the landing well's column. Housings round the aisle lights. Nothing
+    comes below -2.85 m. Since 2026-10-22 it is the detail pack `m7_ra1` (docs/MODULES.md): its own asset
+    `detail/WF_DETAIL_M7_RA1.blend`, linked by WF_HABITAT at the anchor `WF-RING-A.SECTOR.1.1` (sector instance `(1, 1)`), with the
+    same scope, switch and maturity. The migration changed no geometry (fingerprint relocation proof against `baseline_m8_exterior`).
 - **Runtime:** the production nodes (manifest v2: `layer`, `representation`, `assembly`, `maturity`, `surface_class`) are drawn
   within 28 m of the camera and fade out beyond (`godot/scripts/production_layer.gd`, in the boarding, inspector, flight and
   hologram scenes). Demonstrator 01 ends with ARRIVAL (the ring A sector 1 habitat stop) and INSPECT (the layer off and on over
@@ -1380,6 +1382,21 @@ geometry and carries no load. It changes no pressure boundary, interface, volume
 - **Evidence (2026-10-19):** all 49 route-sweep zones keep their pre-M7 least margins (`runs/20261019T120301Z-pipeline`).
 - **Ring A safety:** ring A remains a FAIL comparator for casualty transfer (15!A221). The production layer depicts the
   healthy-crew training route and claims no rescue or pressure qualification.
+
+## Modular detail (2026-10-22)
+
+Production detail is organised in subsystem modules (`data/modules.toml`) and detail packs (`data/detail/*.toml`), each assembly in its
+own linked asset at a declared anchor with a contract hash (`simulations/wf_module_contracts.json`); docs/MODULES.md. Built packs:
+- `m7_ra1` (M7.RA1, WF-RING-A, L4_VISUAL_ACCEPTED): migrated unchanged from the M7 section.
+- `rad_frame` (RAD.FRAME, WF-THERMAL, L4_VISUAL_CANDIDATE): band clamps on the blade's 11 transverse frames (both truss faces, five
+  across), gusset plates at the truss nodes on both edges and an aft edge guard, 155 elements in one detail asset linked once into the
+  blade component, so all three blades share it. Every footprint lies inside a 0.125 m non-emitting bay joint or beyond the blade's ends:
+  the cells, their planform (radiator area) and the health overlays are unchanged. Subtle at ship scale; it reads in the blade close-ups.
+- `ra2_equip` (RA2.EQP, WF-RING-A, L4_VISUAL_CANDIDATE): a transverse cable tray down the centre of each of the four fit-out frame bays of
+  ring A sector 2 (WORK_MEDICAL_OPS), broken round every item within 2 cm of the overhead, the hatch opening and the landing well, with
+  a junction box at each run's ends (45 elements), all in the overhead band (-2.90 to -2.85 m), on sector instance (1, 2) only.
+Both candidates were built in parallel on separate branches that touched only their own packs, then merged without conflict.
+Every other production assembly is still built inside its host.
 
 ## Exterior production layer (M8.1)
 

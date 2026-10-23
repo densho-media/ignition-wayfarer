@@ -25,6 +25,7 @@ import layout
 import habitat_interior
 import route_fitout
 import production_detail
+import modules
 import habitat_ring
 import drive_manifold
 import drive_hot_section
@@ -46,6 +47,42 @@ _STAGE=[time.monotonic()]
 def stage(name):
     """Print the seconds spent since the previous stage (WF_INSPECT_STAGE), for profiling the inspection."""
     now=time.monotonic();print(f'WF_INSPECT_STAGE {name} {now-_STAGE[0]:.2f}',flush=True);_STAGE[0]=now
+
+
+def detail_checks(s,root,path,objects,detail_assets):
+    """Modular detail (docs/MODULES.md). In a detail asset: only production detail, its contract stamps current (anchor frame, pack inputs).
+    In any host: exactly one detail instance per pack assembly anchored there, the registered asset, parented to its anchor object with an
+    identity local transform, and the anchor object at its pure frame. Returns a short report."""
+    reg=modules.registry(root);anchors=modules.anchors(s,reg);asm=modules.assemblies(s['detail_packs']);out={}
+    stem=path.stem
+    if stem in detail_assets:
+        a=detail_assets[stem];t=asm[a];coll=bpy.data.collections[stem]
+        assert coll.get('detail_assembly')==a and coll.get('anchor')==t['anchor'],f'{stem}: built for {coll.get("detail_assembly")} at {coll.get("anchor")}'
+        assert coll.get('anchor_hash')==modules.anchor_hash(reg,anchors[t['anchor']]),f'{stem}: built against another frame of {t["anchor"]}: rebuild it (module build)'
+        assert coll.get('inputs_hash')==modules.inputs_hash(root,t['pack']),f'{stem}: pack {t["pack"]} changed since it was built: rebuild it (module build)'
+        assert all(o.get('kind')=='production_detail' and o.get('detail_pack')==t['pack'] for o in objects),f'{stem}: only the pack\'s production detail'
+        assert all(o.parent is None for o in objects),f'{stem}: detail sits in the anchor frame, unparented'
+        art=bpy.data.collections.get(f'ART_{stem}');authored=[o for o in (art.all_objects if art else []) if o.library is None and o.type=='MESH']
+        anchor_now=modules.anchor_hash(reg,anchors[t['anchor']])
+        assert all(o.get('wf_adopted') and o.get('wf_authored_against')==anchor_now for o in authored),f'{stem}: hand-authored detail not adopted or authored against another anchor frame: module build, then review and module rebind'
+        out=dict(assembly=a,objects=len(objects),authored=len(authored),enabled=production_detail.enabled(s,a))
+    host=stem[3:] if stem.startswith('WF_') else stem
+    want={a:t for a,t in asm.items() if anchors[t['anchor']]['host']==host}
+    have={o['detail_assembly']:o for o in objects if o.get('kind')=='detail_instance'}
+    assert set(have)==set(want),f'{stem}: detail instances {sorted(have)}, registered {sorted(want)}'
+    for a,o in have.items():
+        q=anchors[want[a]['anchor']]
+        assert o.instance_collection is not None and o.instance_collection.name==modules.asset_name(a),f'{o.name}: links {o.instance_collection}'
+        assert (o.parent.name if o.parent else None)==q['object'],f'{o.name}: parent {o.parent} is not the anchor object {q["object"]}'
+        assert all(abs(o.matrix_basis[i][j]-(1.0 if i==j else 0.0))<1e-9 for i in range(4) for j in range(4)),f'{o.name}: local transform not identity'
+        assert all(abs(o.matrix_parent_inverse[i][j]-(1.0 if i==j else 0.0))<1e-9 for i in range(4) for j in range(4)),f'{o.name}: parent inverse not identity'
+        assert o.get('anchor_hash')==modules.anchor_hash(reg,q),f'{o.name}: linked against another frame of {want[a]["anchor"]}'
+        if q['object']:
+            m=o.parent.matrix_basis
+            assert all(abs(m[i][j]-q['matrix'][i][j])<1e-6 for i in range(4) for j in range(4)),f'{q["object"]}: not at the anchor frame of {want[a]["anchor"]}'
+            assert (o.parent.parent.name if o.parent.parent else None)==q['parent'],f'{q["object"]}: parent is not {q["parent"]}'
+        out.setdefault('instances',[]).append(a)
+    return out
 
 
 def mesh_volume(data):
@@ -586,12 +623,15 @@ def inspect(root=ROOT, output=None, scope=None):
     parts=lambda p:set(p.relative_to(assets).parts)
     files=sorted(p for p in assets.rglob('*.blend') if not {'milestones','studies'}&parts(p))
     # FGR-002: exactly the components, the subsystems and the one vehicle. Retired files (build.RETIRED) are moved to milestones/ by a full build.
-    expected={*(f'components/WF_{n}.blend' for n in COMPONENTS),*(f'subsystems/WF_{n}.blend' for n in SUBSYSTEMS),s['vehicle']['asset']+'.blend'}
+    # Modular detail (docs/MODULES.md): plus one detail asset per registered pack assembly, under detail/.
+    detail_assets={modules.asset_name(a):a for a in modules.assemblies(s['detail_packs'])}
+    expected={*(f'components/WF_{n}.blend' for n in COMPONENTS),*(f'subsystems/WF_{n}.blend' for n in SUBSYSTEMS),s['vehicle']['asset']+'.blend',
+              *(f'{modules.ASSET_DIR}/{n}.blend' for n in detail_assets)}
     found={str(p.relative_to(assets)) for p in files}
-    assert found==expected,f'Production file set differs from components + subsystems + vehicle: unexpected {sorted(found-expected)} (retired files are listed in RETIRED and moved by a full build: {sorted(RETIRED)}), missing {sorted(expected-found)}'
+    assert found==expected,f'Production file set differs from components + subsystems + vehicle + detail assets: unexpected {sorted(found-expected)} (retired files are listed in RETIRED and moved by a full build: {sorted(RETIRED)}), missing {sorted(expected-found)}'
     studies={}
     blade_registry={}
-    hot_report={};summaries={};graph={};area=0;interfaces={};interior_report={};drive_report=None;power_report=None;rotor_report={};crew_report={}
+    hot_report={};summaries={};graph={};area=0;detail_report={};interfaces={};interior_report={};drive_report=None;power_report=None;rotor_report={};crew_report={}
     interior_files={f'WF_{v}.blend':k for k,v in s['interior']['components'].items()}
     prev=None
     for path in files:
@@ -616,6 +656,7 @@ def inspect(root=ROOT, output=None, scope=None):
         graph[str(path.relative_to(assets))]=links
         summaries[str(path.relative_to(assets))]={'generated_objects':len(objects),'ids':sorted(identifiers),'direct_links':sorted(links)}
         interfaces[path.name]={o.name:o.matrix_world.translation.copy() for o in objects if o.name.startswith('IF_')}
+        detail_report[path.name]=detail_checks(s,root,path,objects,detail_assets)
         for o in objects:
             if o.name.startswith(('IF_ROTOR_TRANSFER_','IF_HULL_OPENING_','IF_HULL_ROTOR_BAY_','IF_AIRLOCK_','IF_DOCK_','IF_CREW_REFUGE','IF_SECTOR_OVERHEAD_HATCH','IF_CONVERGENCE_THROAT','IF_OPTICAL_','IF_LASER_','IF_CRYO_FEED_','IF_NOZZLE_YOKE_','IF_SPINE_','IF_H2_')):
                 assert str(o.get('engineering_status','')).startswith('OPEN'),f'{o.name} must be flagged OPEN'
@@ -902,6 +943,9 @@ def inspect(root=ROOT, output=None, scope=None):
         assert all(abs(a-b)<1e-4 for a,b in zip(lo+hi,want[0]+want[1])),(item['name'],lo,hi,want)
     stage('vehicle_open_rig')
     rotor_libraries={'WF_HABITAT.blend','WF_RING_SECTOR.blend',*interior_files}
+    # A detail asset belongs to the asset it is linked into (its anchor's host): ring-sector detail spins with WF_HABITAT, blade detail is thermal.
+    host_of={f'{k}.blend':f'{v}.blend' for k,v in modules.detail_hosts(root,s['detail_packs']).items()}
+    library_of=lambda lib:host_of.get(Path(bpy.path.abspath(lib.filepath)).name,Path(bpy.path.abspath(lib.filepath)).name) if lib else ''
     excluded={'WF_RADIATOR.blend','WF_THERMAL.blend',*rotor_libraries}
     def spinning_points():
         """Evaluated vertices of everything that rotates with the rings (hub rotating side, frame, spokes, crew parts, sectors, interiors)."""
@@ -909,8 +953,7 @@ def inspect(root=ROOT, output=None, scope=None):
         for instance in bpy.context.evaluated_depsgraph_get().object_instances:
             obj=instance.object
             if obj.type not in {'MESH','CURVE'} or obj.get('kind')=='scale_reference':continue
-            lib=obj.original.library
-            if (Path(bpy.path.abspath(lib.filepath)).name if lib else '') not in rotor_libraries:continue
+            if library_of(obj.original.library) not in rotor_libraries:continue
             data=obj.to_mesh();vs=[instance.matrix_world@v.co for v in data.vertices];faces=len(data.polygons);obj.to_mesh_clear()
             if faces:out.extend(vs)
         return out
@@ -928,8 +971,7 @@ def inspect(root=ROOT, output=None, scope=None):
         if obj.get('kind')=='sector_pressure':sector_centers.append(sum(transformed,Vector())/len(transformed));sector_volume+=volume
         if obj.get('kind')=='crew_refuge':refuge_mesh.append((abs(volume),min(v.x for v in transformed),max(v.x for v in transformed)))
         if obj.get('kind')=='dock_capture_ring':capture_centres[obj.name]=list(transformed)
-        lib=obj.original.library
-        library=Path(bpy.path.abspath(lib.filepath)).name if lib else ''
+        library=library_of(obj.original.library)
         if library not in excluded:
             # Service fittings are radial tubes on the stationary structure (collar to r ~6.8 m); the body zone excludes them and they are
             # bounded separately by the 14 m BASELINE maximum body diameter.
@@ -1178,6 +1220,7 @@ def inspect(root=ROOT, output=None, scope=None):
                                                                'measured_total_planform_m2':measured_total,'blade_stays':len(stay_names)},
             'clearance_scope':'Conservative thermal-envelope/rotor screening; sampled ring motion with the rings rotating and stopped; 15-degree hypothetical plume screen, not validated plume/field clearance or general collision certification.',
             'simulation_rig':{'contract':str(contract_path.relative_to(root)),'contract_version':sim_rig.CONTRACT_VERSION,'anchors':len(rig_anchors),'proxies':len(sim_rig.proxies(s)),'center_of_mass_placed':False},
+            'detail':{k:v for k,v in detail_report.items() if v},
             'interiors':{'components':interior_report,**habitat_interior.check(s,derived(s))},
             'rotor_interface':{'assets':rotor_report,'check_pass':rotor_interface.check(s)['passed'],'report':'references/p1_rotor_interface.json'},
             'crew_transfer':{'assets':crew_report,'check_pass':crew_transfer.check(s)['passed'],'report':'references/p1_crew_transfer.json'},

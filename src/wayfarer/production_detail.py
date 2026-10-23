@@ -24,8 +24,6 @@ ASSEMBLIES = {
     'M7.TRK': dict(host='CREW_TRANSFER', zone='stationary crew trunk (zone 2)', classes=('ENGINEERING_FLEXIBLE', 'ARTISTIC')),
     'M7.XFR': dict(host='HABITAT', zone='ring-A spin transfer surroundings (zone 3); closures physics-locked', classes=('ENGINEERING_FLEXIBLE',)),
     'M7.SPK': dict(host='HABITAT', zone='ring-A crew tube to sector 1 (zone 4)', classes=('ENGINEERING_FLEXIBLE',)),
-    'M7.RA1': dict(host='HABITAT', zone='ring-A sector 1 HABITATION (zone 5; placed on that sector only, shared definitions)',
-                   classes=('ENGINEERING_FLEXIBLE', 'ARTISTIC')),
     # M8.1 exterior production identity ([production.m8], its own switch and maturity; same layer, same generator).
     'M8.BROW.AFT': dict(host='FORWARD_SHIELD', zone='Brow aft face: panel modules between the existing joints, inside the truss envelope',
                         classes=('ENGINEERING_FLEXIBLE', 'ARTISTIC')),
@@ -43,30 +41,67 @@ def builder(assembly):
     return wrap
 
 
-def RA1_SECTOR(s):
-    """(ring, sector) of M7.RA1: the induction ring's sector 1, the arrival sector of the boarding route."""
-    return (s['induction']['ring'], 1)
+def pack_assemblies(s):
+    """{assembly: manifest table} of the detail packs loaded with the spec (data/detail/*.toml, modules.py); empty without them."""
+    out = {}
+    for name, q in s.get('detail_packs', {}).items():
+        for a, t in q.get('assembly', {}).items():
+            out[a] = dict(t, pack=name)
+    return out
+
+
+def pack_of(s, assembly):
+    t = pack_assemblies(s).get(assembly)
+    return s['detail_packs'][t['pack']] if t else None
+
+
+def params(s, pack):
+    """A pack's own [params] (its manifest), the parameters that used to live in [production.*]."""
+    return s['detail_packs'][pack]['params']
+
+
+def meta(s, assembly):
+    """Zone, host and classes of an assembly: the legacy table, or its pack manifest (host from its anchor)."""
+    if assembly in ASSEMBLIES:
+        return ASSEMBLIES[assembly]
+    import modules
+    t = pack_assemblies(s)[assembly]
+    return dict(host=modules.anchor_host(t['anchor']), zone=t['zone'], classes=tuple(t['classes']))
 
 
 def scope(s, assembly):
-    """The table that switches and labels an assembly: [production] for M7, [production.m8] for M8 (independently switchable)."""
+    """The table that switches and labels an assembly: [production] for M7, [production.m8] for M8 (independently switchable); a pack
+    assembly takes the scope its manifest names (M7, M8, or its own [pack] table)."""
+    q = pack_of(s, assembly)
+    if q is not None:
+        sc = q['pack']['scope']
+        return s['production'] if sc == 'M7' else s['production']['m8'] if sc == 'M8' else q['pack']
     return s['production']['m8'] if assembly.startswith('M8.') else s['production']
 
 
+def scope_label(s, assembly):
+    q = pack_of(s, assembly)
+    return q['pack']['scope'].replace('pack', 'PACK') if q is not None else 'M8' if assembly.startswith('M8.') else 'M7'
+
+
 def built(s):
-    """Assemblies the build makes, M7 then M8, each scope by its own switch."""
+    """Assemblies the build makes, M7 then M8, each scope by its own switch, then the enabled detail packs (each also behind its scope's)."""
     p = s['production']; m8 = p.get('m8', {})
-    return (list(p['assemblies']) if p['enabled'] else [])+(list(m8['assemblies']) if m8.get('enabled') else [])
+    legacy = (list(p['assemblies']) if p['enabled'] else [])+(list(m8['assemblies']) if m8.get('enabled') else [])
+    return legacy+[a for a in pack_assemblies(s) if enabled(s, a)]
 
 
 def listed(s):
     p = s['production']
-    return list(p['assemblies'])+list(p.get('m8', {}).get('assemblies', []))
+    return list(p['assemblies'])+list(p.get('m8', {}).get('assemblies', []))+list(pack_assemblies(s))
 
 
 def enabled(s, assembly=None):
     if assembly is None:
         return bool(built(s))
+    q = pack_of(s, assembly)
+    if q is not None:
+        return bool(q['pack']['enabled']) and bool(scope(s, assembly)['enabled'])
     q = scope(s, assembly)
     return bool(q['enabled']) and assembly in q['assemblies']
 
@@ -74,11 +109,19 @@ def enabled(s, assembly=None):
 def material_value(s, key):
     """[r, g, b, roughness, metallic] of a production material: [production.materials] or the exterior [production.m8.materials]."""
     p = s['production']
-    return p['materials'][key] if key in p['materials'] else p['m8']['materials'][key]
+    if key in p['materials']:
+        return p['materials'][key]
+    if key in p['m8']['materials']:
+        return p['m8']['materials'][key]
+    # A pack's own finishes ([materials] in its manifest); the key must be unique across the shared tables and the packs.
+    found = [q['materials'][key] for q in s.get('detail_packs', {}).values() if key in q.get('materials', {})]
+    if len(found) != 1:
+        raise KeyError(f'production material {key}: {len(found)} definitions')
+    return found[0]
 
 
 def element(assembly, family, name, material, cls, function, vs, fs, bevel=0.0):
-    if assembly not in ASSEMBLIES:
+    if assembly not in ASSEMBLIES and assembly not in BUILDERS:
         raise ValueError(f'Unknown assembly {assembly}')
     return dict(assembly=assembly, family=family, name=name, material=material, surface_class=cls, function=function,
                 vs=[tuple(map(float, v)) for v in vs], fs=[tuple(q) for q in fs], bevel=bevel)
@@ -665,109 +708,6 @@ def tube_check(s, els):
 CHECKS['M7.SPK'] = tube_check
 
 
-# M7.RA1: ring A sector 1 (HABITATION), sector frame (+X axial, +Y radially outward = down in spin, +Z tangential; deck at y 0),
-# parented to that sector's instance only. The overhead is the zone the layer details: removable service panels on trays in the bays of
-# the route fit-out's overhead frame grid, off the aisle lights, route bands and chevrons, diffuser, landing chase, thrust step, hatch frame
-# and its rails, and the hatch opening plus the landing well's column the route descends through; housings round the aisle lights.
-# Nothing comes below overhead_floor_y_m, so the aisle, the berths' access strips and every route body stay as they were.
-def sector_overhead_items(s):
-    import human_entry as he
-    import route_fitout as rf
-    els = rf.sector_elements(s, 'HABITATION')+rf.sector_sign(s, 'HABITATION')+rf.seraph_elements(s, 'HABITATION')[0]+rf.landing_elements(s)+he.landing_fixtures(s)
-    out = []
-    for q in els:
-        pts = [q['min'], q['max']] if q['shape'] == 'box' and 'min' in q else fixture_points(q)
-        if pts and min(p[1] for p in pts) < s['production']['sector']['item_floor_y_m']:
-            out.append((q['name'], [min(p[k] for p in pts) for k in range(3)], [max(p[k] for p in pts) for k in range(3)], q))
-    return out
-
-
-def sector_keepouts(s, x0, x1):
-    """z intervals of the overhead a bay x0..x1 leaves: overhead items (frames excluded: they bound the bays), the hatch opening and the
-    landing well, each widened by the margin."""
-    import habitat_interior as hi
-    import human_entry as he
-    q = s['production']['sector']; m = q['margin_m']; out = []
-    for name, lo, hi_, el in sector_overhead_items(s):
-        if '_Frame_' in name or lo[1] > q['touch_y_m']:
-            continue                                     # frames bound the bays; items hanging clear below the panels pass under them
-        if el['shape'] == 'tube':
-            r = el.get('r1', .9); c = el['a']; lo, hi_ = [c[0]-r, lo[1], c[2]-r], [c[0]+r, hi_[1], c[2]+r]
-        if lo[0]-m < x1 and x0 < hi_[0]+m:
-            out.append((lo[2]-m, hi_[2]+m))
-    hx, hz, hr = hi.hatch_opening(s); hr += q['hatch_margin_m']
-    if abs((x0+x1)/2-hx) < hr or (x0 < hx < x1):
-        dx = max(0.0, min(abs(x0-hx), abs(x1-hx))) if not (x0 < hx < x1) else 0.0
-        half = math.sqrt(max(0.0, hr*hr-dx*dx)); out.append((hz-half, hz+half))
-    L = he.landing(s)
-    if L['well_x'][0]-m < x1 and x0 < L['well_x'][1]+m:
-        out.append((L['well_z'][0]-m, L['well_z'][1]+m))
-    return out
-
-
-def sector_bays(s):
-    xs = sorted({(round(lo[0], 4), round(hi_[0], 4)) for name, lo, hi_, _ in sector_overhead_items(s) if '_Frame_' in name})
-    edges = [x for c in xs for x in c]
-    return [(edges[2*i+1], edges[2*i+2]) for i in range(len(edges)//2-1) if edges[2*i+2]-edges[2*i+1] > .2]
-
-
-@builder('M7.RA1')
-def sector_elements(s):
-    import habitat_interior as hi
-    q = s['production']['entry']; sq = s['production']['sector']; out = []
-    oh = next(b for b in hi.plates(s) if b['name'] == 'Interior_Overhead'); Y = oh['max'][1]; Z0, Z1 = -sq['span_z_m'], sq['span_z_m']
-    seam, th, st, ins = q['seam_m'], q['panel_thickness_m'], q['fastener_m'], q['fastener_inset_m']
-    down = (0.0, 1.0, 0.0); X, Zv = (1.0, 0.0, 0.0), (0.0, 0.0, 1.0)
-    for b, (x0, x1) in enumerate(sector_bays(s), 1):
-        free = windows_free(sector_keepouts(s, x0, x1), Z0, Z1, 0.0)
-        for k, (z0, z1) in enumerate(free, 1):
-            if z1-z0 < sq['panel_min_m']:
-                continue
-            vs, fs = box(((x0+x1)/2, Y+.0015, (z0+z1)/2), (X, down, Zv), (x1-x0-seam, .003, z1-z0-seam/2))
-            out.append(element('M7.RA1', 'Trays', f'RA1_B{b}_T{k}', 'gasket', 'ENGINEERING_FLEXIBLE', 'overhead panel carrier and seam gasket', vs, fs))
-            n = max(1, math.ceil((z1-z0)/sq['panel_max_m']))
-            for i in range(n):
-                a, c = z0+(z1-z0)*i/n+seam/2, z0+(z1-z0)*(i+1)/n-seam/2
-                vs, fs = box(((x0+x1)/2, Y+.003+th/2, (a+c)/2), (X, down, Zv), (x1-x0-2*seam, th, c-a))
-                out.append(element('M7.RA1', 'Panels', f'RA1_B{b}_P{k}_{i+1}', 'panel_inhabited', 'ENGINEERING_FLEXIBLE',
-                                   'removable overhead service panel (ducts, power and data above)', vs, fs, bevel=q['panel_bevel_m']))
-                for sx in (x0+seam+ins, x1-seam-ins):
-                    for sz in (a+ins, c-ins):
-                        vs, fs = box((sx, Y+.003+th+q['fastener_proud_m']/2, sz), (X, down, Zv), (st, q['fastener_proud_m'], st))
-                        out.append(element('M7.RA1', 'Fasteners', f'RA1_B{b}_P{k}_{i+1}_F{len(out)}', 'fastener', 'ENGINEERING_FLEXIBLE', 'quarter-turn panel fastener', vs, fs))
-    lip, hd = q['housing_lip_m'], sq['housing_depth_m']
-    for name, lo, hi_, el in sector_overhead_items(s):
-        if 'Aisle_Light' not in name:
-            continue
-        for side, z in enumerate((lo[2]-lip/2, hi_[2]+lip/2), 1):
-            vs, fs = box(((lo[0]+hi_[0])/2, Y+hd/2, z), (X, down, Zv), (hi_[0]-lo[0]+2*lip, hd, lip))
-        for side, x in enumerate((lo[0]-lip/2, hi_[0]+lip/2), 1):
-            vs, fs = box((x, Y+hd/2, (lo[2]+hi_[2])/2), (X, down, Zv), (lip, hd, hi_[2]-lo[2]+2*lip))
-            out.append(element('M7.RA1', 'Housings', f'{name}_Housing_{side}', 'housing', 'ENGINEERING_FLEXIBLE', 'aisle light housing (long sides)', vs, fs, bevel=.002))
-        for side, z in enumerate((lo[2]-lip/2, hi_[2]+lip/2), 1):
-            vs, fs = box(((lo[0]+hi_[0])/2, Y+hd/2, z), (X, down, Zv), (hi_[0]-lo[0], hd, lip))
-            out.append(element('M7.RA1', 'Housings', f'{name}_Cap_{side}', 'housing', 'ENGINEERING_FLEXIBLE', 'aisle light housing (end caps)', vs, fs, bevel=.002))
-    return out
-
-
-def sector_check(s, els):
-    import habitat_interior as hi
-    import human_entry as he
-    sq = s['production']['sector']; hx, hz, hr = hi.hatch_opening(s); L = he.landing(s); fails = []
-    for q in els:
-        ys = [p[1] for p in q['vs']]
-        if max(ys) > sq['overhead_floor_y_m']:
-            fails.append(f"{q['name']}: reaches {max(ys):.3f} m, below the overhead zone ({sq['overhead_floor_y_m']} m)")
-        for p in q['vs']:
-            if math.hypot(p[0]-hx, p[2]-hz) < hr-1e-6 or (L['well_x'][0] < p[0] < L['well_x'][1] and L['well_z'][0] < p[2] < L['well_z'][1]):
-                fails.append(f"{q['name']}: inside the hatch opening or the landing well's column"); break
-    return fails
-
-
-CHECKS['M7.RA1'] = sector_check
-
-
-
 # M8.1: the exterior production identity (ship frame, built in the FORWARD_SHIELD asset). Everything sits aft of the skin's aft face
 # inside the truss envelope, on the Crown housing's aft plate, or as a marking film on the rim girder's outer face; nothing reaches the
 # sunward face, the EYE wells, the Crown windows, shutters, covers, carriages or their travel, the Lance, the truss chords or the rim hardware.
@@ -1035,8 +975,10 @@ def standard(s):
     p = s['production']; m8 = p['m8']
     out = {'status': p['status'], 'source_ref': p['evidence_ref'], 'enabled': bool(p['enabled']), 'maturity': p['maturity'],
            'representation': p['representation'],
-           'assemblies': {a: dict(zone=ASSEMBLIES[a]['zone'], host=ASSEMBLIES[a]['host'], classes=list(ASSEMBLIES[a]['classes']),
-                                  scope='M8' if a.startswith('M8.') else 'M7', maturity=scope(s, a)['maturity'])
+           'assemblies': {a: dict(zone=meta(s, a)['zone'], host=meta(s, a)['host'], classes=list(meta(s, a)['classes']),
+                                  scope=scope_label(s, a), maturity=scope(s, a)['maturity'],
+                                  **({'pack': pack_assemblies(s)[a]['pack'], 'detail_class': pack_of(s, a)['pack']['detail_class']}
+                                     if pack_of(s, a) is not None else {}))
                           for a in built(s)},
            'rule': 'M7 L4 visual layer (S&E 48!A23 WF-022): generated detail over unchanged engineering geometry; nodes with '
                    'layer PRODUCTION carry their assembly and maturity. Not engineering GO: no pressure, rescue, load or flight '
@@ -1048,12 +990,32 @@ def standard(s):
     return out
 
 
-if __name__ == '__main__':
+def load_packs():
+    """Import every detail pack's code (src/wayfarer/detail/pack_*.py) once; each registers its builders and screens here."""
+    import importlib.util
     import sys
     from pathlib import Path
-    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    for path in sorted((Path(__file__).resolve().parent/'detail').glob('pack_*.py')):
+        if path.stem not in sys.modules:
+            spec = importlib.util.spec_from_file_location(path.stem, path)
+            module = importlib.util.module_from_spec(spec); sys.modules[path.stem] = module
+            spec.loader.exec_module(module)
+
+
+def main():
     from spec import load
     s = load()[0]
     print(json.dumps({'enabled': s['production']['enabled'],
                       'assemblies': {a: dict(elements=len(elements(s, a)), objects=len(families(elements(s, a))), failures=check(s, a))
                                      for a in listed(s)}}, indent=1))
+
+
+if __name__ == '__main__':
+    # Run through the imported module so the packs register into the same tables the build and the tests use.
+    import sys
+    from pathlib import Path
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    import production_detail
+    production_detail.main()
+else:
+    load_packs()

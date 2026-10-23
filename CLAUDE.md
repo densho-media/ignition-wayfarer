@@ -52,7 +52,8 @@ status, provenance and omissions; record elapsed time, usage and any retries.
 Use existing captures for mechanical processing rather than asking a model to
 transcribe whole workbooks. Do not claim cost or speed gains without measurements.
 
-Commands and architecture are in `docs/IMPLEMENTATION.md`; read only the section
+Parallel detail work follows `docs/MODULES.md`: start with `python3 tools/workflow.py module show <pack>` and edit only the files it
+lists as owned. Commands and architecture are in `docs/IMPLEMENTATION.md`; read only the section
 you need. Run everything from the project root. System `python3` runs the pure
 modules and tests; anything that imports `bpy` runs under `/snap/bin/blender`.
 A single test runs by name substring:

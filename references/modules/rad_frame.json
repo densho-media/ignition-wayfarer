@@ -1,0 +1,181 @@
+{
+ "assemblies": {
+  "RAD.FRAME": {
+   "anchor": "WF-THERMAL.RADIATOR.ORIGIN",
+   "anchor_hash": "f6ad8b307dc641bc",
+   "asset": "WF_DETAIL_RAD_FRAME",
+   "detail_class": "PRODUCTION",
+   "enabled": true,
+   "maturity": "L4_VISUAL_CANDIDATE"
+  }
+ },
+ "contract": "WF_MODULE_PUBLICATION",
+ "contract_hash": "4fc3518e1d9fb7e4",
+ "fingerprint": {
+  "detail/WF_DETAIL_RAD_FRAME.blend": {
+   "direct_links": [],
+   "objects": {
+    "Prod_RAD_FRAME_Clamps": {
+     "centroid": [
+      0.0,
+      15.249999952316283,
+      0.0
+     ],
+     "component_id": "RAD.FRAME.CLAMPS",
+     "faces": 2860,
+     "instance": null,
+     "kind": "production_detail",
+     "matrix_world": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "max": [
+      91.16477966308594,
+      25.566667556762695,
+      1.649999976158142
+     ],
+     "min": [
+      -91.16477966308594,
+      4.933333396911621,
+      -1.649999976158142
+     ],
+     "parent": null,
+     "type": "MESH",
+     "vertices": 2640
+    },
+    "Prod_RAD_FRAME_EdgeGuard": {
+     "centroid": [
+      -91.13468170166016,
+      15.250000576178232,
+      0.0
+     ],
+     "component_id": "RAD.FRAME.EDGEGUARD",
+     "faces": 26,
+     "instance": null,
+     "kind": "production_detail",
+     "matrix_world": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "max": [
+      -91.09468078613281,
+      30.200000762939453,
+      0.05000000074505806
+     ],
+     "min": [
+      -91.1746826171875,
+      0.30000001192092896,
+      -0.05000000074505806
+     ],
+     "parent": null,
+     "type": "MESH",
+     "vertices": 24
+    },
+    "Prod_RAD_FRAME_Gussets": {
+     "centroid": [
+      0.0,
+      15.249999907957813,
+      0.0
+     ],
+     "component_id": "RAD.FRAME.GUSSETS",
+     "faces": 1144,
+     "instance": null,
+     "kind": "production_detail",
+     "matrix_world": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "max": [
+      91.1747817993164,
+      30.5,
+      1.5
+     ],
+     "min": [
+      -91.1747817993164,
+      0.0,
+      -1.5
+     ],
+     "parent": null,
+     "type": "MESH",
+     "vertices": 1056
+    }
+   }
+  }
+ },
+ "git_dirty": false,
+ "git_revision": "0dde080e3c870ea94711491fc65a417ced8307ec",
+ "inputs_hash": "4c83fdab15caef51",
+ "module": "WF-THERMAL",
+ "note": "A publication makes the pack eligible for integration; it is not an owner acceptance and changes no maturity or canon.",
+ "pack": "rad_frame",
+ "pack_version": 1,
+ "published_utc": "2026-10-22T15:13:04Z",
+ "spec_sha256": "4bd7bb763a25ad8034f7c036f6809d6d46e626629b30bb5b8043c63a7f3a2cf8",
+ "version": 1
+}

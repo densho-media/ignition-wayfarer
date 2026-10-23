@@ -1,7 +1,7 @@
 {
   "result": "PASS",
   "tests": [
-    "save/reopen all 25 production assets; both geometry realizations",
+    "save/reopen all 27 production assets; the one vehicle file",
     "simulation rig contract regenerated and checked",
     "two identical-input builds",
     "unique stable generated IDs",
@@ -12,7 +12,9 @@
     "targeted Garden interior rebuild leaves unrelated assets byte-identical",
     "relocated nested relative links",
     "snapshot and source-map hashes",
-    "invalid spec fails CLI before asset writes"
+    "invalid spec fails CLI before asset writes",
+    "retired file (generated, empty ART) is moved to milestones by a full build",
+    "retired file holding an ART object aborts the build and stays byte-identical"
   ],
   "production_assets_modified_by_tests": false
 }

@@ -1,0 +1,39 @@
+# Detail pack m7_ra1 (docs/MODULES.md): M7.RA1, the overhead production layer of ring A sector 1 (HABITATION). Owned by a WF-RING-A
+# detail session: this manifest, src/wayfarer/detail/pack_m7_ra1.py and the generated assets/wayfarer/detail/WF_DETAIL_M7_RA1.blend.
+# Accepted by the owner on 2026-10-20 with the M7 section; migrated unchanged from [production.sector] and production_detail.py
+# (modular pilot 1). Every value is a PROTOTYPE depiction choice: no load, pressure boundary, interface, volume or mass.
+[pack]
+module = "WF-RING-A"
+version = 1
+# M7: the M7 section's switch ([production].enabled) and maturity (L4_VISUAL_ACCEPTED) apply as before.
+scope = "M7"
+enabled = true
+detail_class = "PRODUCTION"
+inspect = ["rotation", "route"]
+views = ["crew_detail"]
+summary = "Removable overhead service panels on trays in the fit-out frame bays, quarter-turn fasteners and aisle-light housings."
+
+[assembly."M7.RA1"]
+anchor = "WF-RING-A.SECTOR.1.1"
+# The anchor's sector must carry this function (the layer is HABITATION-specific); modules.validate refuses another.
+function = "HABITATION"
+zone = "ring-A sector 1 HABITATION (zone 5; placed on that sector only, shared definitions)"
+classes = ["ENGINEERING_FLEXIBLE", "ARTISTIC"]
+# Claimed space in the sector frame (m): the sector's axial length (+-1.75), the overhead band from the overhead's face (y -2.90) down to
+# overhead_floor_y_m (-2.85), and the panel span (+-span_z_m). modules.envelope_fails screens every element against it.
+envelope_min = [-1.75, -2.90, -2.45]
+envelope_max = [1.75, -2.85, 2.45]
+
+# [params] (formerly [production.sector]). Panels in the fit-out frame bays across span_z_m, off every overhead item by margin_m,
+# off the hatch opening (plus hatch_margin_m) and the landing well's column; nothing below overhead_floor_y_m (the overhead is at -2.90 m).
+[params]
+item_floor_y_m = -2.55
+span_z_m = 2.45
+margin_m = 0.04
+hatch_margin_m = 0.10
+panel_min_m = 0.12
+panel_max_m = 0.62
+housing_depth_m = 0.035
+overhead_floor_y_m = -2.85
+# items whose top is below touch_y_m reach the overhead and are kept off; the hatch leaf and its rails hang 0.09-0.11 m clear below
+touch_y_m = -2.86

@@ -1,0 +1,49 @@
+# Detail pack rad_frame (docs/MODULES.md): production fittings on the radiator blade's truss frames and aft edge, module WF-THERMAL.
+# Owned by a WF-THERMAL detail session: this manifest, src/wayfarer/detail/pack_rad_frame.py and the generated
+# assets/wayfarer/detail/WF_DETAIL_RAD_FRAME.blend, linked once into WF_RADIATOR (the blade component) and so carried by all three blades.
+# Modular pilot 2a (2026-10-22). Every value is a PROTOTYPE depiction choice: band clamps on the transverse frames, gusset plates at the
+# truss nodes and an aft edge guard. Nothing lies over an emitting cell (each footprint stays inside a 0.125 m non-emitting bay joint or
+# beyond the blade's ends), so the physical radiator area, the cells and the health overlays are unchanged; no load, mass or thermal claim.
+[pack]
+module = "WF-THERMAL"
+version = 1
+scope = "pack"
+enabled = true
+maturity = "L4_VISUAL_CANDIDATE"
+status = "PROTOTYPE"
+evidence_ref = "l4_production_gate"
+detail_class = "PRODUCTION"
+inspect = ["thermal"]
+views = ["root_detail", "joint_detail"]
+summary = "Band clamps on the blade's transverse frames, gusset plates at the truss nodes and an aft edge guard, on all three blades."
+
+[assembly."RAD.FRAME"]
+anchor = "WF-THERMAL.RADIATOR.ORIGIN"
+zone = "radiator blade truss frames and aft edge (blade-local: u along the blade, v from the root edge, z normal to the sheet)"
+classes = ["ENGINEERING_FLEXIBLE"]
+# Claimed space in the blade frame (m): the blade's length plus 0.2 m at each end, its width from the root edge, the truss depth plus 0.2 m.
+envelope_min = [-91.3, 0.0, -1.7]
+envelope_max = [91.3, 30.5, 1.7]
+
+[params]
+# Band clamps round each transverse frame tube (r 0.10 m at z = +-truss_depth/2), clamps_per_frame evenly across the width.
+clamp_u_m = 0.09          # along the blade: inside the 0.125 m bay joint at every interior station
+clamp_v_m = 0.30
+clamp_z_m = 0.30
+clamps_per_frame = 5
+# Gusset plates where the frame, the edge chords and the depth posts meet (both blade edges, both truss faces).
+gusset_u_m = 0.10
+gusset_v_m = 0.60
+gusset_z_m = 0.50
+# Aft edge guard: a strip just aft of the first cell column, off the root and outer edges by edge_inset_m.
+edge_u_m = 0.08
+edge_gap_m = 0.02
+edge_z_m = 0.10
+edge_inset_m = 0.30
+bevel_m = 0.008
+
+[materials]
+# [r, g, b, roughness, metallic] (Blender linear): structural greys a step apart (M7.1 value hierarchy, Art Style Bible structure).
+rad_clamp = [0.20, 0.21, 0.23, 0.55, 0.55]
+rad_gusset = [0.13, 0.14, 0.16, 0.50, 0.40]
+rad_edge = [0.26, 0.27, 0.29, 0.60, 0.30]

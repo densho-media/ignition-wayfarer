@@ -36,10 +36,39 @@ def compare(before,after,allow_added=(),allow_new_files=(),tol=1e-6):
     return report
 
 
+IDENTITY=[[1.0,0.0,0.0,0.0],[0.0,1.0,0.0,0.0],[0.0,0.0,1.0,0.0],[0.0,0.0,0.0,1.0]]
+
+
+def relocate(before,after,prefix,old_file,new_file,instance,tol=1e-6):
+    """A baseline rewritten for a detail migration (docs/MODULES.md): the objects named prefix* move from old_file to new_file, where they sit
+    unparented at identity, and old_file gains the collection instance that links new_file. It is accepted only if the move kept every object's
+    world placement: the instance (in the host, after) sits exactly where each moved object sat (before) and under the same parent. Comparing
+    the result with `after` then proves the migration changed nothing else. Raises ValueError otherwise."""
+    import copy
+    out=copy.deepcopy(before);old=out[old_file]['objects']
+    moved={n:old.pop(n) for n in sorted(old) if n.startswith(prefix)}
+    if not moved:raise ValueError(f'no {prefix}* objects in {old_file}')
+    inst=after[old_file]['objects'].get(instance)
+    if inst is None:raise ValueError(f'{instance} missing from {old_file}')
+    for n,q in moved.items():
+        if q['parent']!=inst['parent'] or not same(q['matrix_world'],inst['matrix_world'],tol):
+            raise ValueError(f'{n}: was under {q["parent"]} at {q["matrix_world"]}, the instance is under {inst["parent"]} at {inst["matrix_world"]}')
+        q['parent']=None;q['matrix_world']=IDENTITY
+    old[instance]=inst
+    out[new_file]={'objects':moved,'direct_links':[]}
+    link=[x for x in after[old_file]['direct_links'] if new_file.split('/')[-1] in x]
+    out[old_file]['direct_links']=sorted(out[old_file]['direct_links']+link)
+    return out
+
+
 if __name__=='__main__':
     p=argparse.ArgumentParser();p.add_argument('before',type=Path);p.add_argument('after',type=Path)
     p.add_argument('--allow-added',nargs='*',default=[]);p.add_argument('--allow-new-files',nargs='*',default=[])
+    p.add_argument('--relocate',nargs=4,action='append',default=[],metavar=('PREFIX','OLD_FILE','NEW_FILE','INSTANCE'),
+                   help='a detail migration: rewrite the baseline for it (see relocate) before the strict comparison')
     a=p.parse_args()
-    r=compare(json.loads(a.before.read_text()),json.loads(a.after.read_text()),a.allow_added,a.allow_new_files)
+    before,after=json.loads(a.before.read_text()),json.loads(a.after.read_text())
+    for prefix,old_file,new_file,instance in a.relocate:before=relocate(before,after,prefix,old_file,new_file,instance)
+    r=compare(before,after,a.allow_added,a.allow_new_files)
     print(json.dumps({k:(v if len(v)<=40 else v[:40]+[f'... {len(v)-40} more']) if isinstance(v,list) else v for k,v in r.items()},indent=1))
     sys.exit(r['result']!='PASS')

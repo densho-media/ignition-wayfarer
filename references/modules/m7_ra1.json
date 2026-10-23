@@ -1,0 +1,231 @@
+{
+ "assemblies": {
+  "M7.RA1": {
+   "anchor": "WF-RING-A.SECTOR.1.1",
+   "anchor_hash": "fe36ef7023096caa",
+   "asset": "WF_DETAIL_M7_RA1",
+   "detail_class": "PRODUCTION",
+   "enabled": true,
+   "maturity": "L4_VISUAL_ACCEPTED"
+  }
+ },
+ "contract": "WF_MODULE_PUBLICATION",
+ "contract_hash": "95e5c1545de7976f",
+ "fingerprint": {
+  "detail/WF_DETAIL_M7_RA1.blend": {
+   "direct_links": [],
+   "objects": {
+    "Prod_RA1_Fasteners": {
+     "centroid": [
+      -0.02352941145791727,
+      -2.8855000734329224,
+      0.8807764531058424
+     ],
+     "component_id": "M7.RA1.FASTENERS",
+     "faces": 408,
+     "instance": null,
+     "kind": "production_detail",
+     "matrix_world": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "max": [
+      1.531000018119812,
+      -2.884000062942505,
+      2.4170000553131104
+     ],
+     "min": [
+      -1.531000018119812,
+      -2.88700008392334,
+      -2.4170000553131104
+     ],
+     "parent": null,
+     "type": "MESH",
+     "vertices": 544
+    },
+    "Prod_RA1_Housings": {
+     "centroid": [
+      0.0,
+      -2.8825000524520874,
+      0.0
+     ],
+     "component_id": "M7.RA1.HOUSINGS",
+     "faces": 208,
+     "instance": null,
+     "kind": "production_detail",
+     "matrix_world": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "max": [
+      1.3519999980926514,
+      -2.865000009536743,
+      0.8119999766349792
+     ],
+     "min": [
+      -1.3519999980926514,
+      -2.9000000953674316,
+      -0.8119999766349792
+     ],
+     "parent": null,
+     "type": "MESH",
+     "vertices": 192
+    },
+    "Prod_RA1_Panels": {
+     "centroid": [
+      -0.023529411786619353,
+      -2.8920000791549683,
+      0.8807764538362914
+     ],
+     "component_id": "M7.RA1.PANELS",
+     "faces": 442,
+     "instance": null,
+     "kind": "production_detail",
+     "matrix_world": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "max": [
+      1.5579999685287476,
+      -2.88700008392334,
+      2.444000005722046
+     ],
+     "min": [
+      -1.5579999685287476,
+      -2.8970000743865967,
+      -2.444000005722046
+     ],
+     "parent": null,
+     "type": "MESH",
+     "vertices": 408
+    },
+    "Prod_RA1_Trays": {
+     "centroid": [
+      0.20000000204890966,
+      -2.898500084877014,
+      0.5686937477439642
+     ],
+     "component_id": "M7.RA1.TRAYS",
+     "faces": 48,
+     "instance": null,
+     "kind": "production_detail",
+     "matrix_world": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "max": [
+      1.5640000104904175,
+      -2.8970000743865967,
+      2.447000026702881
+     ],
+     "min": [
+      -1.5640000104904175,
+      -2.9000000953674316,
+      -2.447000026702881
+     ],
+     "parent": null,
+     "type": "MESH",
+     "vertices": 64
+    }
+   }
+  }
+ },
+ "git_dirty": true,
+ "git_revision": "bdd3778371b2d77812d5cd33ae57f055c6e04a9e",
+ "inputs_hash": "2bb27c4644d819b9",
+ "module": "WF-RING-A",
+ "note": "A publication makes the pack eligible for integration; it is not an owner acceptance and changes no maturity or canon.",
+ "pack": "m7_ra1",
+ "pack_version": 1,
+ "published_utc": "2026-10-22T15:24:34Z",
+ "spec_sha256": "4bd7bb763a25ad8034f7c036f6809d6d46e626629b30bb5b8043c63a7f3a2cf8",
+ "version": 1
+}

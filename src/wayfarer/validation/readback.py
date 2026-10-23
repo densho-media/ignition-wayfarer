@@ -46,6 +46,14 @@ def closed(data):
     return bool(uses) and all(n==2 for n in uses.values())
 
 
+def detail_hosts(root=ROOT):
+    import modules
+    return modules.detail_hosts(root)
+
+
+DETAIL_HOSTS={}
+
+
 def measure():
     """One record per evaluated mesh instance at the saved pose."""
     records=[]
@@ -58,6 +66,7 @@ def measure():
         is_closed=closed(data);solid=wf_inspect.mesh_volume(data)*abs(m.to_3x3().determinant()) if is_closed else None
         obj.to_mesh_clear()
         lib=obj.original.library;sub=Path(lib.filepath).stem if lib else 'WF_WAYFARER_001'
+        sub=DETAIL_HOSTS.get(sub,sub)     # a detail asset is measured as part of its host (docs/MODULES.md)
         rs=[math.hypot(v.y,v.z) for v in vs]
         records.append(dict(name=obj.name,kind=obj.get('kind') or 'geometry',subsystem=sub,stem=STEM.split(obj.name)[0],
                             lo=[min(v[i] for v in vs) for i in range(3)],hi=[max(v[i] for v in vs) for i in range(3)],
@@ -150,6 +159,7 @@ def main():
     vehicle=s['vehicle']
     bpy.ops.wm.open_mainfile(filepath=str(args.root/'assets/wayfarer'/(vehicle['asset']+'.blend')))
     bpy.context.scene.frame_set(1)
+    DETAIL_HOSTS.update(detail_hosts(args.root))
     records=measure();rooms=pressure_volumes.rooms(s);names=sector_names(s,records)
     for r in records:r['room']=names.get(id(r),r['name'])
     rows=[]

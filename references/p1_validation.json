@@ -1,7 +1,7 @@
 {
   "result": "PASS",
   "blender": "5.2.2 LTS",
-  "spec_hash": "7144c42893522bc04cd7eb758c6961e7b71a06342b60987fcd811a96ea5d49f8",
+  "spec_hash": "4bd7bb763a25ad8034f7c036f6809d6d46e626629b30bb5b8043c63a7f3a2cf8",
   "source_map_hash": "99cd812784b9ce8dc35eff1ed107627617c8e72fa9de55fedee6268f939f0ee1",
   "configurations": {
     "COAST": {
@@ -117,7 +117,7 @@
         "crew_bracket": 120,
         "entry_fixture": 750,
         "route_fitout": 660,
-        "production_detail": 34,
+        "production_detail": 45,
         "transfer_closure": 14,
         "ring_frame": 4,
         "ring_fill": 6,
@@ -287,10 +287,10 @@
       "rotation_quarter_period_verified": true,
       "rotation_locked_at_index_angle": false,
       "hypothetical_plume_vertex_margins_m": {
-        "5": 11.400001525878906,
-        "10": 11.400001525878906,
-        "15": 11.400001525878906,
-        "20": 11.400001525878906
+        "5": 11.39990234375,
+        "10": 11.39990234375,
+        "15": 11.39990234375,
+        "20": 11.39990234375
       }
     },
     "LOW_THRUST": {
@@ -406,7 +406,7 @@
         "crew_bracket": 120,
         "entry_fixture": 750,
         "route_fitout": 660,
-        "production_detail": 34,
+        "production_detail": 45,
         "transfer_closure": 14,
         "ring_frame": 4,
         "ring_fill": 6,
@@ -576,10 +576,10 @@
       "rotation_quarter_period_verified": true,
       "rotation_locked_at_index_angle": false,
       "hypothetical_plume_vertex_margins_m": {
-        "5": 11.400001525878906,
-        "10": 11.400001525878906,
-        "15": 11.400001525878906,
-        "20": 11.400001525878906
+        "5": 11.39990234375,
+        "10": 11.39990234375,
+        "15": 11.39990234375,
+        "20": 11.39990234375
       }
     },
     "EVA": {
@@ -695,7 +695,7 @@
         "crew_bracket": 120,
         "entry_fixture": 750,
         "route_fitout": 660,
-        "production_detail": 34,
+        "production_detail": 45,
         "transfer_closure": 14,
         "ring_frame": 4,
         "ring_fill": 6,
@@ -865,10 +865,10 @@
       "rotation_quarter_period_verified": true,
       "rotation_locked_at_index_angle": false,
       "hypothetical_plume_vertex_margins_m": {
-        "5": 11.400001525878906,
-        "10": 11.400001525878906,
-        "15": 11.400001525878906,
-        "20": 11.400001525878906
+        "5": 11.39990234375,
+        "10": 11.39990234375,
+        "15": 11.39990234375,
+        "20": 11.39990234375
       }
     },
     "HIGH_POWER": {
@@ -981,7 +981,7 @@
         "crew_bracket": 120,
         "entry_fixture": 750,
         "route_fitout": 660,
-        "production_detail": 34,
+        "production_detail": 45,
         "transfer_closure": 14,
         "ring_frame": 4,
         "ring_fill": 6,
@@ -1151,10 +1151,10 @@
       "rotation_quarter_period_verified": false,
       "rotation_locked_at_index_angle": true,
       "hypothetical_plume_vertex_margins_m": {
-        "5": 11.400001525878906,
-        "10": 11.400001525878906,
-        "15": 11.400001525878906,
-        "20": 11.400001525878906
+        "5": 11.39990234375,
+        "10": 11.39990234375,
+        "15": 11.39990234375,
+        "20": 11.39990234375
       }
     },
     "FIRST_IGNITION": {
@@ -1267,7 +1267,7 @@
         "crew_bracket": 120,
         "entry_fixture": 750,
         "route_fitout": 660,
-        "production_detail": 34,
+        "production_detail": 45,
         "transfer_closure": 14,
         "ring_frame": 4,
         "ring_fill": 6,
@@ -1437,10 +1437,10 @@
       "rotation_quarter_period_verified": false,
       "rotation_locked_at_index_angle": true,
       "hypothetical_plume_vertex_margins_m": {
-        "5": 11.400001525878906,
-        "10": 11.400001525878906,
-        "15": 11.400001525878906,
-        "20": 11.400001525878906
+        "5": 11.39990234375,
+        "10": 11.39990234375,
+        "15": 11.39990234375,
+        "20": 11.39990234375
       }
     },
     "DOCKED": {
@@ -1553,7 +1553,7 @@
         "crew_bracket": 120,
         "entry_fixture": 750,
         "route_fitout": 660,
-        "production_detail": 34,
+        "production_detail": 45,
         "transfer_closure": 14,
         "ring_frame": 4,
         "ring_fill": 6,
@@ -1723,10 +1723,10 @@
       "rotation_quarter_period_verified": false,
       "rotation_locked_at_index_angle": true,
       "hypothetical_plume_vertex_margins_m": {
-        "5": 11.400001525878906,
-        "10": 11.400001525878906,
-        "15": 11.400001525878906,
-        "20": 11.400001525878906
+        "5": 11.39990234375,
+        "10": 11.39990234375,
+        "15": 11.39990234375,
+        "20": 11.39990234375
       }
     }
   },
@@ -1796,6 +1796,37 @@
     "anchors": 42,
     "proxies": 9,
     "center_of_mass_placed": false
+  },
+  "detail": {
+    "WF_RADIATOR.blend": {
+      "instances": [
+        "RAD.FRAME"
+      ]
+    },
+    "WF_DETAIL_M7_RA1.blend": {
+      "assembly": "M7.RA1",
+      "objects": 4,
+      "authored": 0,
+      "enabled": true
+    },
+    "WF_DETAIL_RA2_EQP.blend": {
+      "assembly": "RA2.EQP",
+      "objects": 2,
+      "authored": 0,
+      "enabled": true
+    },
+    "WF_DETAIL_RAD_FRAME.blend": {
+      "assembly": "RAD.FRAME",
+      "objects": 3,
+      "authored": 0,
+      "enabled": true
+    },
+    "WF_HABITAT.blend": {
+      "instances": [
+        "M7.RA1",
+        "RA2.EQP"
+      ]
+    }
   },
   "interiors": {
     "components": {
@@ -3167,7 +3198,7 @@
       "direct_links": []
     },
     "components/WF_RADIATOR.blend": {
-      "generated_objects": 353,
+      "generated_objects": 354,
       "ids": [
         "Blade_Cell_0_00_00",
         "Blade_Cell_0_00_01",
@@ -3521,9 +3552,12 @@
         "IF_BLADE_FIXED_DATUM",
         "IF_PETAL_ROOT",
         "IF_PETAL_ROOT_-1",
-        "IF_PETAL_ROOT_1"
+        "IF_PETAL_ROOT_1",
+        "WF.DETAIL.RAD.FRAME"
       ],
-      "direct_links": []
+      "direct_links": [
+        "detail/WF_DETAIL_RAD_FRAME.blend"
+      ]
     },
     "components/WF_RING_SECTOR.blend": {
       "generated_objects": 29,
@@ -3557,6 +3591,33 @@
         "Sector_Thrust_Step_Rungs",
         "Sector_Thrust_Step_Stile_1",
         "Sector_Thrust_Step_Stile_2"
+      ],
+      "direct_links": []
+    },
+    "detail/WF_DETAIL_M7_RA1.blend": {
+      "generated_objects": 4,
+      "ids": [
+        "M7.RA1.FASTENERS",
+        "M7.RA1.HOUSINGS",
+        "M7.RA1.PANELS",
+        "M7.RA1.TRAYS"
+      ],
+      "direct_links": []
+    },
+    "detail/WF_DETAIL_RA2_EQP.blend": {
+      "generated_objects": 2,
+      "ids": [
+        "RA2.EQP.BOXES",
+        "RA2.EQP.TRAYS"
+      ],
+      "direct_links": []
+    },
+    "detail/WF_DETAIL_RAD_FRAME.blend": {
+      "generated_objects": 3,
+      "ids": [
+        "RAD.FRAME.CLAMPS",
+        "RAD.FRAME.EDGEGUARD",
+        "RAD.FRAME.GUSSETS"
       ],
       "direct_links": []
     },
@@ -4593,7 +4654,7 @@
       "direct_links": []
     },
     "subsystems/WF_HABITAT.blend": {
-      "generated_objects": 515,
+      "generated_objects": 513,
       "ids": [
         "Crew_Tube_1_1",
         "Crew_Tube_1_1_Arrest_Rail",
@@ -5018,10 +5079,6 @@
         "IF_VESTIBULE_2_SEAL_AFT_PRIMARY",
         "IF_VESTIBULE_2_SEAL_FWD",
         "IF_VESTIBULE_2_SEAL_FWD_PRIMARY",
-        "M7.RA1.FASTENERS",
-        "M7.RA1.HOUSINGS",
-        "M7.RA1.PANELS",
-        "M7.RA1.TRAYS",
         "M7.SPK.FASTENERS",
         "M7.SPK.FRAMES",
         "M7.SPK.PANELS",
@@ -5074,6 +5131,8 @@
         "WF.CREW.2.VESTIBULE",
         "WF.CREW.2.VESTIBULE_GUARD_AFT",
         "WF.CREW.2.VESTIBULE_GUARD_FWD",
+        "WF.DETAIL.M7.RA1",
+        "WF.DETAIL.RA2.EQP",
         "WF.HUB.1.DATA_Rotor",
         "WF.HUB.1.Drum",
         "WF.HUB.1.EMERGENCY_POWER_Rotor",
@@ -5115,7 +5174,9 @@
         "components/WF_INTERIOR_GARDEN.blend",
         "components/WF_INTERIOR_HABITATION.blend",
         "components/WF_INTERIOR_WORK.blend",
-        "components/WF_RING_SECTOR.blend"
+        "components/WF_RING_SECTOR.blend",
+        "detail/WF_DETAIL_M7_RA1.blend",
+        "detail/WF_DETAIL_RA2_EQP.blend"
       ]
     },
     "subsystems/WF_HULL.blend": {

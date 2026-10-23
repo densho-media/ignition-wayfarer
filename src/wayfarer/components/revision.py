@@ -7,7 +7,6 @@ from thermal_geometry import root_construction, local_to_ship, supports, station
 import rotor as rotor_parts
 import rotor_interface
 import habitat_ring
-import production_detail
 import layout
 import drive_manifold
 import radiator_health as rh
@@ -285,12 +284,8 @@ def habitat(c,s,assets):
             room=link_instance(c,assets/f'components/{component}.blend',component,f'Interior_{j}_{k}',ident=f"{q['ident']}.INTERIOR")
             room.parent=obj;room['kind']='sector_interior';room['function']=obj['function'];room['rooms_status']='OPEN (habitat.layout.rooms)'
             mount=empty(c,f'IF_SECTOR_{j}_{k}',radial(0,q['r0'],q['angle']));mount.parent=parent
-            if (j,k)==production_detail.RA1_SECTOR(s):
-                # M7: the production layer of the selected sector only (sector frame, parented to its instance); the shared component
-                # definitions live in production_detail, so ring B and the other sectors stay untouched until they are reviewed.
-                if obj['function']!='HABITATION':raise ValueError(f'M7.RA1 expects a HABITATION sector, got {obj["function"]}')
-                import production
-                production.build(c,s,'M7.RA1',obj)
+            # Production detail on a sector (M7.RA1 and later packs) is its own detail asset, linked here by build.detail.attach at the
+            # anchor WF-RING-<A|B>.SECTOR.<ring>.<sector> (docs/MODULES.md); the shared components stay without it.
     bpy.context.scene['configuration']=s['vehicle']['saved_preset']
     bpy.context.scene.frame_set(1)
 

@@ -4,18 +4,27 @@ import hashlib
 import json
 import shutil
 import argparse
+import os
 import subprocess
 import tempfile
 
 ROOT=Path(__file__).resolve().parents[1]
-BLENDER='/snap/bin/blender'
+
+
+def details_on(*hosts):
+    """Detail asset files anchored on these hosts (docs/MODULES.md): a host target rebuilds them with the host."""
+    import sys
+    sys.path.insert(0,str(ROOT/'src/wayfarer'))
+    import modules
+    return {f'{asset}.blend' for asset,host in modules.detail_hosts(ROOT).items() if host in hosts}
+BLENDER=os.environ.get('WAYFARER_BLENDER','/snap/bin/blender')
 BUILD=ROOT/'src/wayfarer/build/build.py'
 INSPECT=ROOT/'src/wayfarer/validation/inspect.py'
 
 
 def run(*args, success=True):
     command=[BLENDER,'--background','--factory-startup','--python-exit-code','1',*map(str,args)]
-    result=subprocess.run(command,cwd=ROOT,capture_output=True,text=True,timeout=180)
+    result=subprocess.run(command,cwd=ROOT,capture_output=True,text=True,timeout=int(os.environ.get('WAYFARER_STEP_TIMEOUT',900)))
     if (result.returncode==0)!=success:
         raise RuntimeError(result.stdout[-3000:]+result.stderr[-3000:])
     return result
@@ -86,25 +95,32 @@ for name in ['Manual_Art_Sentinel','Unowned_GEN_Sentinel']:
 '''
         run('--python-expr',expression)
         print('PASS repeated build and preserved ART/unowned GEN content',flush=True)
-        excluded={'WF_RADIATOR.blend','WF_THERMAL.blend','WF_WAYFARER_001.blend'}
+        excluded={'WF_RADIATOR.blend','WF_THERMAL.blend','WF_WAYFARER_001.blend',*details_on('WF_RADIATOR','WF_THERMAL')}
         unchanged={p:checksum(p) for p in assets.rglob('*.blend') if 'milestones' not in p.parts and p.name not in excluded}
         build(fixture,'RADIATOR')
         assert all(checksum(p)==h for p,h in unchanged.items()),'Targeted build modified unrelated assets'
         targeted=inspect(fixture,Path(temp)/'targeted.json')
         assert second['assets']==targeted['assets']
         print('PASS targeted radiator rebuild; unrelated assets byte-identical',flush=True)
-        excluded={'WF_HULL.blend','WF_WAYFARER_001.blend'}
+        excluded={'WF_HULL.blend','WF_WAYFARER_001.blend',*details_on('WF_HULL')}
         unchanged={p:checksum(p) for p in assets.rglob('*.blend') if 'milestones' not in p.parts and p.name not in excluded}
         build(fixture,'HULL')
         assert all(checksum(p)==h for p,h in unchanged.items()),'Targeted hull build modified unrelated assets'
         assert inspect(fixture,Path(temp)/'hull.json')['assets']==targeted['assets']
         print('PASS targeted hull rebuild; unrelated assets byte-identical',flush=True)
-        excluded={'WF_INTERIOR_GARDEN.blend','WF_HABITAT.blend','WF_WAYFARER_001.blend'}
+        excluded={'WF_INTERIOR_GARDEN.blend','WF_HABITAT.blend','WF_WAYFARER_001.blend',*details_on('WF_INTERIOR_GARDEN','WF_HABITAT')}
         unchanged={p:checksum(p) for p in assets.rglob('*.blend') if 'milestones' not in p.parts and p.name not in excluded}
         build(fixture,'INTERIOR_GARDEN')
         assert all(checksum(p)==h for p,h in unchanged.items()),'Targeted interior build modified unrelated assets'
         assert inspect(fixture,Path(temp)/'interior.json')['assets']==targeted['assets']
         print('PASS targeted Garden interior rebuild; unrelated assets byte-identical',flush=True)
+        # Modular detail (docs/MODULES.md): a detail target rewrites only its own file; the host and vehicle see it through their links.
+        excluded={'WF_DETAIL_M7_RA1.blend'}
+        unchanged={p:checksum(p) for p in assets.rglob('*.blend') if 'milestones' not in p.parts and p.name not in excluded}
+        build(fixture,'DETAIL_M7_RA1')
+        assert all(checksum(p)==h for p,h in unchanged.items()),'Detail build modified other assets'
+        assert inspect(fixture,Path(temp)/'detail.json')['assets']==targeted['assets']
+        print('PASS detail-only rebuild; every other asset byte-identical',flush=True)
         relocated=Path(temp)/'relocated'
         shutil.copytree(fixture,relocated,ignore=shutil.ignore_patterns('milestones'))
         moved=inspect(relocated,Path(temp)/'moved.json')

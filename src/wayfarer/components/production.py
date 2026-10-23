@@ -75,6 +75,11 @@ def build(c, s, assembly, parent=None):
             obj['production_scope'] = 'M8'
             obj['design_class'] = 'ARTISTIC'   # forward_shield.design_classes: presentation layer over the shield (HSFP, 98!A58)
             obj['detail_range_m'] = float(sc['fine_range_m'] if family in ('fasteners', 'markings') else sc['detail_range_m'])
+        pack = pd.pack_of(s, a)
+        if pack is not None:          # a detail pack's assembly (docs/MODULES.md): its pack and geometry-detail class travel with it
+            obj['detail_pack'] = pack['name']; obj['detail_class'] = pack['pack']['detail_class']; obj['module'] = pack['pack']['module']
+            if 'detail_range_m' in pack['pack']:     # exterior packs: the Godot draw range (production_layer.gd; default 28 m)
+                obj['detail_range_m'] = float(pack['pack']['detail_range_m'])
         obj['surface_class'] = '/'.join(sorted({q['surface_class'] for q in els}))
         obj['function'] = '; '.join(OrderedDict.fromkeys(q['function'] for q in els))
         obj['elements'] = len(els); obj['geometry_basis'] = GEOMETRY_BASIS; obj['evidence_ref'] = sc['evidence_ref']

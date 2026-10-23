@@ -1,0 +1,1119 @@
+{
+ "contract": "WF_MODULE_CONTRACTS",
+ "interface_version": 1,
+ "modules": {
+  "WF-CORE": {
+   "anchors": {
+    "WF-CORE.SHIELDING.ORIGIN": {
+     "family": "asset_origin",
+     "hash": "46ebb7518d51f9ef",
+     "host": "SHIELDING",
+     "matrix": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "module": "WF-CORE",
+     "object": null,
+     "parent": null
+    },
+    "WF-CORE.STRUCTURE.ORIGIN": {
+     "family": "asset_origin",
+     "hash": "8a306e4167d11f8b",
+     "host": "STRUCTURE",
+     "matrix": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "module": "WF-CORE",
+     "object": null,
+     "parent": null
+    }
+   },
+   "assemblies": {},
+   "hash": "7e6d635af60ca632"
+  },
+  "WF-DRIVE": {
+   "anchors": {
+    "WF-DRIVE.DEBUG_MAGNETICS.ORIGIN": {
+     "family": "asset_origin",
+     "hash": "4e6ad01caba3bf5d",
+     "host": "DEBUG_MAGNETICS",
+     "matrix": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "module": "WF-DRIVE",
+     "object": null,
+     "parent": null
+    },
+    "WF-DRIVE.DEBUG_OPTICS.ORIGIN": {
+     "family": "asset_origin",
+     "hash": "f03a59b86349baa3",
+     "host": "DEBUG_OPTICS",
+     "matrix": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "module": "WF-DRIVE",
+     "object": null,
+     "parent": null
+    },
+    "WF-DRIVE.DEBUG_SEPARATRICES.ORIGIN": {
+     "family": "asset_origin",
+     "hash": "daf1d582150676b5",
+     "host": "DEBUG_SEPARATRICES",
+     "matrix": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "module": "WF-DRIVE",
+     "object": null,
+     "parent": null
+    },
+    "WF-DRIVE.NOZZLE.ORIGIN": {
+     "family": "asset_origin",
+     "hash": "7b8ae4a983593c04",
+     "host": "NOZZLE",
+     "matrix": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "module": "WF-DRIVE",
+     "object": null,
+     "parent": null
+    },
+    "WF-DRIVE.PROPULSION.ORIGIN": {
+     "family": "asset_origin",
+     "hash": "e1c7f895bd7ae0b5",
+     "host": "PROPULSION",
+     "matrix": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "module": "WF-DRIVE",
+     "object": null,
+     "parent": null
+    }
+   },
+   "assemblies": {},
+   "hash": "8dadbe7002bac49c"
+  },
+  "WF-EYE": {
+   "anchors": {
+    "WF-EYE.EYE.ORIGIN": {
+     "family": "asset_origin",
+     "hash": "9ac659507346f56c",
+     "host": "EYE",
+     "matrix": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "module": "WF-EYE",
+     "object": null,
+     "parent": null
+    }
+   },
+   "assemblies": {},
+   "hash": "45f921c5110cb70c"
+  },
+  "WF-FUEL": {
+   "anchors": {
+    "WF-FUEL.STORAGE.ORIGIN": {
+     "family": "asset_origin",
+     "hash": "c44cdca51fa2816b",
+     "host": "STORAGE",
+     "matrix": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "module": "WF-FUEL",
+     "object": null,
+     "parent": null
+    }
+   },
+   "assemblies": {},
+   "hash": "496d048521c56d44"
+  },
+  "WF-FWD": {
+   "anchors": {
+    "WF-FWD.FORWARD_SHIELD.ORIGIN": {
+     "family": "asset_origin",
+     "hash": "6aa57fefd284ff20",
+     "host": "FORWARD_SHIELD",
+     "matrix": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "module": "WF-FWD",
+     "object": null,
+     "parent": null
+    }
+   },
+   "assemblies": {},
+   "hash": "fbdcc777ff027203"
+  },
+  "WF-RING-A": {
+   "anchors": {
+    "WF-RING-A.HABITAT.ORIGIN": {
+     "family": "asset_origin",
+     "hash": "b7f24708b6a28ecf",
+     "host": "HABITAT",
+     "matrix": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "module": "WF-RING-A",
+     "object": null,
+     "parent": null
+    },
+    "WF-RING-A.INTERIOR_GARDEN.ORIGIN": {
+     "family": "asset_origin",
+     "hash": "eea5ddc5d13b57fd",
+     "host": "INTERIOR_GARDEN",
+     "matrix": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "module": "WF-RING-A",
+     "object": null,
+     "parent": null
+    },
+    "WF-RING-A.INTERIOR_HABITATION.ORIGIN": {
+     "family": "asset_origin",
+     "hash": "83930d160bf938c3",
+     "host": "INTERIOR_HABITATION",
+     "matrix": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "module": "WF-RING-A",
+     "object": null,
+     "parent": null
+    },
+    "WF-RING-A.INTERIOR_WORK.ORIGIN": {
+     "family": "asset_origin",
+     "hash": "d966c7afffd1a5af",
+     "host": "INTERIOR_WORK",
+     "matrix": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "module": "WF-RING-A",
+     "object": null,
+     "parent": null
+    },
+    "WF-RING-A.RING_SECTOR.ORIGIN": {
+     "family": "asset_origin",
+     "hash": "e66964caa17fcd55",
+     "host": "RING_SECTOR",
+     "matrix": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "module": "WF-RING-A",
+     "object": null,
+     "parent": null
+    },
+    "WF-RING-A.SECTOR.1.1": {
+     "family": "ring_sector",
+     "function": "HABITATION",
+     "hash": "fe36ef7023096caa",
+     "host": "HABITAT",
+     "matrix": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       28.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "module": "WF-RING-A",
+     "object": "Sector_1_1",
+     "parent": "Rotor_1"
+    },
+    "WF-RING-A.SECTOR.1.2": {
+     "family": "ring_sector",
+     "function": "WORK_MEDICAL_OPS",
+     "hash": "6ac93396b4a0563f",
+     "host": "HABITAT",
+     "matrix": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       -0.5,
+       -0.866025403784,
+       -14.0
+      ],
+      [
+       0.0,
+       0.866025403784,
+       -0.5,
+       24.248711305964
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "module": "WF-RING-A",
+     "object": "Sector_1_2",
+     "parent": "Rotor_1"
+    },
+    "WF-RING-A.SECTOR.1.3": {
+     "family": "ring_sector",
+     "function": "LIFE_SUPPORT_GARDEN_COMMON",
+     "hash": "d0215d63a5171e26",
+     "host": "HABITAT",
+     "matrix": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       -0.5,
+       0.866025403784,
+       -14.0
+      ],
+      [
+       0.0,
+       -0.866025403784,
+       -0.5,
+       -24.248711305964
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "module": "WF-RING-A",
+     "object": "Sector_1_3",
+     "parent": "Rotor_1"
+    }
+   },
+   "assemblies": {
+    "M7.RA1": {
+     "anchor": "WF-RING-A.SECTOR.1.1",
+     "asset": "WF_DETAIL_M7_RA1",
+     "envelope": [
+      [
+       -1.75,
+       -2.9,
+       -2.45
+      ],
+      [
+       1.75,
+       -2.85,
+       2.45
+      ]
+     ],
+     "host": "HABITAT",
+     "pack": "m7_ra1",
+     "scope": "M7"
+    },
+    "RA2.EQP": {
+     "anchor": "WF-RING-A.SECTOR.1.2",
+     "asset": "WF_DETAIL_RA2_EQP",
+     "envelope": [
+      [
+       -1.75,
+       -2.9,
+       -2.45
+      ],
+      [
+       1.75,
+       -2.85,
+       2.45
+      ]
+     ],
+     "host": "HABITAT",
+     "pack": "ra2_equip",
+     "scope": "pack"
+    }
+   },
+   "hash": "95e5c1545de7976f"
+  },
+  "WF-RING-B": {
+   "anchors": {
+    "WF-RING-B.SECTOR.2.1": {
+     "family": "ring_sector",
+     "function": "HABITATION",
+     "hash": "949470cf7595796a",
+     "host": "HABITAT",
+     "matrix": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       28.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "module": "WF-RING-B",
+     "object": "Sector_2_1",
+     "parent": "Rotor_2"
+    },
+    "WF-RING-B.SECTOR.2.2": {
+     "family": "ring_sector",
+     "function": "WORK_MEDICAL_OPS",
+     "hash": "58f2f44c0864999e",
+     "host": "HABITAT",
+     "matrix": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       -0.5,
+       -0.866025403784,
+       -14.0
+      ],
+      [
+       0.0,
+       0.866025403784,
+       -0.5,
+       24.248711305964
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "module": "WF-RING-B",
+     "object": "Sector_2_2",
+     "parent": "Rotor_2"
+    },
+    "WF-RING-B.SECTOR.2.3": {
+     "family": "ring_sector",
+     "function": "LIFE_SUPPORT_GARDEN_COMMON",
+     "hash": "349917a2a5a20d1b",
+     "host": "HABITAT",
+     "matrix": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       -0.5,
+       0.866025403784,
+       -14.0
+      ],
+      [
+       0.0,
+       -0.866025403784,
+       -0.5,
+       -24.248711305964
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "module": "WF-RING-B",
+     "object": "Sector_2_3",
+     "parent": "Rotor_2"
+    }
+   },
+   "assemblies": {},
+   "hash": "d82548b2530cc2db"
+  },
+  "WF-SPINE": {
+   "anchors": {
+    "WF-SPINE.CREW_TRANSFER.ORIGIN": {
+     "family": "asset_origin",
+     "hash": "d50188f5f99113e8",
+     "host": "CREW_TRANSFER",
+     "matrix": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "module": "WF-SPINE",
+     "object": null,
+     "parent": null
+    },
+    "WF-SPINE.HULL.ORIGIN": {
+     "family": "asset_origin",
+     "hash": "95f16cce9e9a6633",
+     "host": "HULL",
+     "matrix": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "module": "WF-SPINE",
+     "object": null,
+     "parent": null
+    },
+    "WF-SPINE.POWER_STORAGE.ORIGIN": {
+     "family": "asset_origin",
+     "hash": "7005d16c07ec4a72",
+     "host": "POWER_STORAGE",
+     "matrix": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "module": "WF-SPINE",
+     "object": null,
+     "parent": null
+    },
+    "WF-SPINE.ROTOR_INTERFACE.ORIGIN": {
+     "family": "asset_origin",
+     "hash": "397eca6044c2e201",
+     "host": "ROTOR_INTERFACE",
+     "matrix": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "module": "WF-SPINE",
+     "object": null,
+     "parent": null
+    },
+    "WF-SPINE.SERVICE.ORIGIN": {
+     "family": "asset_origin",
+     "hash": "63d546dca99b636f",
+     "host": "SERVICE",
+     "matrix": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "module": "WF-SPINE",
+     "object": null,
+     "parent": null
+    }
+   },
+   "assemblies": {},
+   "hash": "751f9ca8c67bdc6c"
+  },
+  "WF-THERMAL": {
+   "anchors": {
+    "WF-THERMAL.RADIATOR.ORIGIN": {
+     "family": "asset_origin",
+     "hash": "f6ad8b307dc641bc",
+     "host": "RADIATOR",
+     "matrix": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "module": "WF-THERMAL",
+     "object": null,
+     "parent": null
+    },
+    "WF-THERMAL.THERMAL.ORIGIN": {
+     "family": "asset_origin",
+     "hash": "8b84c83bf4b16188",
+     "host": "THERMAL",
+     "matrix": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "module": "WF-THERMAL",
+     "object": null,
+     "parent": null
+    }
+   },
+   "assemblies": {
+    "RAD.FRAME": {
+     "anchor": "WF-THERMAL.RADIATOR.ORIGIN",
+     "asset": "WF_DETAIL_RAD_FRAME",
+     "envelope": [
+      [
+       -91.3,
+       0.0,
+       -1.7
+      ],
+      [
+       91.3,
+       30.5,
+       1.7
+      ]
+     ],
+     "host": "RADIATOR",
+     "pack": "rad_frame",
+     "scope": "pack"
+    }
+   },
+   "hash": "4fc3518e1d9fb7e4"
+  },
+  "WF-UTILITY": {
+   "anchors": {
+    "WF-UTILITY.DRONES.ORIGIN": {
+     "family": "asset_origin",
+     "hash": "3fbb8e754afc6c40",
+     "host": "DRONES",
+     "matrix": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "module": "WF-UTILITY",
+     "object": null,
+     "parent": null
+    }
+   },
+   "assemblies": {},
+   "hash": "f104dd796afdf75c"
+  }
+ },
+ "note": "Generated by src/wayfarer/modules.py from the pure formulas and data/modules.toml + data/detail/*.toml; never edit by hand.",
+ "version": 1
+}

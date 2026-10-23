@@ -40,7 +40,9 @@ def fixed_snapshot():
         if str(obj.get('component_id', '')).startswith('WF.RADIATOR.0'):
             rows.append((obj.original.name, 'blade', tuple(round(x, 9) for r in m for x in r), (), (), ()))
             continue
-        if kind not in FIXED_KINDS or obj.type not in {'MESH', 'CURVE'}:
+        # Thermal production detail (detail packs of module WF-THERMAL, docs/MODULES.md) is held to the same rule: fixed with its blade.
+        thermal_detail = kind == 'production_detail' and obj.get('module') == 'WF-THERMAL'
+        if (kind not in FIXED_KINDS and not thermal_detail) or obj.type not in {'MESH', 'CURVE'}:
             continue
         data = obj.to_mesh(); vs = [m@v.co for v in data.vertices]; obj.to_mesh_clear()
         if not vs:

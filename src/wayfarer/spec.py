@@ -42,7 +42,15 @@ def load(root=ROOT):
         _VALIDATED.clear()
         _VALIDATED[key] = (spec, sources)
     spec, sources = _VALIDATED[key]
-    return copy.deepcopy(spec), copy.deepcopy(sources), spec_text, source_text
+    spec = copy.deepcopy(spec)
+    # Detail packs (data/detail/*.toml, docs/MODULES.md) travel with the spec but outside its hash: a pack edit stales only its own detail
+    # assets. Malformed packs are refused here like a bad spec.
+    import modules
+    spec['detail_packs'] = modules.packs(root)
+    fails = modules.check_packs(spec['detail_packs'], sources)
+    if fails:
+        raise ValueError('Detail packs: '+'; '.join(fails))
+    return spec, copy.deepcopy(sources), spec_text, source_text
 
 
 def apply_eye_layout(s):
