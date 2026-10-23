@@ -39,6 +39,9 @@ CHECKS = [
          marker='"result":"PASS"'),
     dict(name='controls-body', args=['--fixed-fps', '60', 'res://scenes/boarding.tscn', '--quit-after', '3000', '--', '--check-controls-body'],
          scene='scenes/boarding.tscn', marker='"result":"PASS"'),
+    # MOB-001: the touch controls of Demonstrator 01 through real touch events at a phone-sized layout (WF_GODOT_TOUCH).
+    dict(name='controls-touch', args=['--fixed-fps', '60', 'res://scenes/demo01.tscn', '--quit-after', '30000', '--', '--check-touch', '--touch'],
+         scene='scenes/demo01.tscn', script='scripts/controls/check_touch.gd', marker='"result":"PASS"'),
     dict(name='review-ring-b', args=['--fixed-fps', '60', 'res://scenes/boarding.tscn', '--quit-after', '6000', '--', '--check-review'],
          scene='scenes/boarding.tscn', marker='"result":"PASS"'),
     # U03: the guided vestibule drill in the physics lab, V only, with a refused V during the drum ramp (WF_GODOT_REVIEW).

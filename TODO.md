@@ -495,7 +495,13 @@ all 54 engineering gates currently HOLD. No detailed robot art before the L2 lay
   - Navigator glyphs ▶ ◆ ○ render as boxes on Web: ship a font with them or use drawn markers (Godot presentation only).
   - Build time: confirm the first CI build that reuses Enter Wayfarer (it needs a release made by the reuse code, so the second
     main build after it). The site walk (5-8 min under software WebGL) is now the longest step.
-  - Decide whether the Godot build should support touch or stay keyboard-only on phones.
+  - Touch (MOB-001, branch `claude/mobile-touch-controls`, docs/wayfarer-mobile-controls-plan.md): test on a real Android phone
+    and an iPhone (plan §9 procedure), agree the reference phone and its 30 fps budget, then tune RENDER_DENSITY and the
+    adaptive band from those measurements. Before promotion: Android Chrome and iOS Safari (iPhone; iPad if available) each
+    complete the journey by touch, with real-GPU frame rate, input latency and thermal behaviour recorded in plan §11.
+  - CI cost: split the browser check into independent jobs (desktop walk and equivalence; mobile touch journey) so each
+    runs, fails and reruns alone and they no longer share one runner's four cores. Run 39926690587 spent 31 of its 35 minutes
+    in the single browser-check step.
   - Extend browser-vs-native equivalence past GRAVITY→INSPECT only if a shorter recorded path through the earlier chapters exists.
 - [ ] **P03 — Optional compliant-tether stress study. PARKED, owner-led.** Do only when OD-038/required interaction needs it; do not
   confuse a timestep-dependent impulse diagnostic with rated human loads. Required operational tether releases remain in D/K.
