@@ -1,7 +1,7 @@
 {
   "result": "PASS",
   "tests": [
-    "save/reopen all 27 production assets; the one vehicle file",
+    "save/reopen all 34 production assets; the one vehicle file",
     "simulation rig contract regenerated and checked",
     "two identical-input builds",
     "unique stable generated IDs",
