@@ -225,10 +225,6 @@ def hub(c, s, parent, j):
         fitout.drum(c, s, j, body)
     if j in h['tube_rotors']:
         fitout.tube_ends(c, s, j, parent)
-    if j == s['induction']['ring']:     # M7: ring A's transfer surroundings (drum frame) and crew tube (rotor frame), L4 visual, PROTOTYPE
-        import production
-        production.build(c, s, 'M7.XFR', body)
-        production.build(c, s, 'M7.SPK', parent)
     if ctrl is not None:
         for q in ct.closures(s, j):
             if q['kind'] != 'PORT_GATE':

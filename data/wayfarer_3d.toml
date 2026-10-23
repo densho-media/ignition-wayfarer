@@ -3682,9 +3682,10 @@ enabled = true
 # their PROTOTYPE labels.
 maturity = "L4_VISUAL_ACCEPTED"
 representation = "REP_HERO"
-# Assemblies built (stable IDs, production_detail.ASSEMBLIES); the slices add them entrance-first (15!A86). M7.RA1 is the detail pack
-# data/detail/m7_ra1.toml (docs/MODULES.md): same scope, switch and maturity, its own asset and parameters.
-assemblies = ["M7.EXT.PORT", "M7.ENT", "M7.TRK", "M7.XFR", "M7.SPK"]
+# Assemblies built (stable IDs, production_detail.ASSEMBLIES); the slices add them entrance-first (15!A86). M7.RA1 (data/detail/m7_ra1.toml)
+# and M7.XFR/M7.SPK (data/detail/ring_a_transfer.toml) are detail packs (docs/MODULES.md): same scope, switch and maturity, their own
+# assets and parameters. [production.entry] stays here: it is the shared M7 panel grammar those packs read.
+assemblies = ["M7.EXT.PORT", "M7.ENT", "M7.TRK"]
 
 # M7.EXT.PORT (slice 1): flush service covers beside the primary port in the accepted M4 grammar (ochre, 15!A202), each with its
 # fasteners and stencil, and the port identification. Offsets (axial, tangential arc) from the port axis on the hull, off the port's hull
@@ -3721,20 +3722,6 @@ housing_depth_m = 0.028
 # Bulkhead faces: radial panel segments from inner_m to the wall, clear of the hinge and parked leaf, the placards (0 and 180 deg) and
 # the equalization valves.
 bulkhead = { inner_m = 1.02, segment_max_deg = 30.0, hinge_keep_deg = 52.0, placard_keep_deg = 16.0, valve_keep_deg = 9.0 }
-
-# M7.XFR (slice 3): the drum lining. Panels on the drum's outer wall above the crawl rail, opening_margin_m beyond each crew-tube opening's
-# frame; the closures stay physics-locked (proxy grey, PROTOTYPE). Machinery treatment: darker panels in the rotating machinery space.
-[production.drum]
-opening_margin_m = 0.08
-panel_max_deg = 14.0
-panel_min_deg = 4.0
-
-# M7.SPK (slice 3): ring A's sector-1 crew tube, radial run: ring frames every frame_pitch_m, cladding between them.
-[production.tube]
-frame_pitch_m = 1.50
-frame_width_m = 0.05
-frame_depth_m = 0.030
-end_inset_m = 0.30
 
 # Production materials, [r, g, b, roughness, metallic] (Blender linear), by zone treatment over the surface classes (docs/SURFACE_BRIEF.md:
 # quiet greys and off-whites, saturated colour only for wayfinding, safety and service lines, M4 ochre for service covers 15!A202, polish

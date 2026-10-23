@@ -139,7 +139,7 @@ def record(root, pack, s, fp):
     mine = {a: t for a, t in modules.assemblies(modules.packs(root)).items() if t['pack'] == pack}
     import production_detail as pd
     return {'contract': 'WF_MODULE_PUBLICATION', 'version': 2, 'pack': pack, 'module': q['pack']['module'], 'pack_version': q['pack']['version'],
-            'published_utc': pipeline.utc_now(), 'git_revision': git('rev-parse', 'HEAD'), 'git_dirty': bool(git('status', '--porcelain')),
+            'published_utc': pipeline.utc_now(), 'git_revision': git('rev-parse', 'HEAD'), 'git_dirty': bool(git('status', '--porcelain', '--', '.', f':!{RECORDS}')),   # other records written by the same publish do not count
             'inputs_hash': modules.inputs_hash(root, pack), 'spec_sha256': pipeline.sha256(root/'data/wayfarer_3d.toml'),
             'contract_hash': modules.pack_contract(s, reg, modules.packs(root), pack),
             'contract_terms': modules.pack_terms(s, reg, modules.packs(root), pack),

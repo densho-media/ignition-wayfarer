@@ -151,9 +151,17 @@ def geometry_diff(root, baseline_dir, fingerprint, expect=()):
         return any(obj.startswith(p) or file_name.startswith(p) or Path(file_name).stem.startswith(p)
                    for p in expect)
 
+    def expected_links(name):
+        # A host whose link list changed is expected when it lost no link and every link it gained is to an expected file (a new detail
+        # asset linked at its anchor), not because the host's own name is listed.
+        gone = [x for x in before[name]['direct_links'] if x not in after[name]['direct_links']]
+        new = [x for x in after[name]['direct_links'] if x not in before[name]['direct_links']]
+        return not gone and new and all(any(Path(x).stem.startswith(p) for p in expect) for x in new)
+
     unexpected = [f'{kind}: {item}' for kind, item in entries if not expected(item)]
     unexpected += [f'{kind}: {name}' for kind in ('files_added', 'files_removed', 'links_changed') for name in diff[kind]
-                   if not any(name.startswith(p) or Path(name).stem.startswith(p) for p in expect)]
+                   if not any(name.startswith(p) or Path(name).stem.startswith(p) for p in expect)
+                   and not (kind == 'links_changed' and expected_links(name))]
     return {'baseline': str(baseline_dir), 'result': diff['result'],
             **{k: len(diff[k]) for k in ('changed', 'added', 'removed', 'files_added', 'files_removed', 'links_changed')},
             'expected_prefixes': list(expect), 'unexpected_count': len(unexpected),
