@@ -59,7 +59,9 @@ def check(root, assemblies):
                 fails.append(f'{name}: pack {t["pack"]} changed since it was built: module build')
         owned = [o for o in bpy.data.objects if o.library is None and o.get('wf_owner') == 'wayfarer.p0']
         authored = [o for o in bpy.data.objects if o.library is None and o.get('wf_adopted')]
-        loose = [o.name for o in bpy.data.objects if o.library is None and o.type == 'MESH' and o not in owned and o not in authored]
+        # The local editable sources of exported authored meshes (module export-authored) stay in SRC_<asset>: never built or exported.
+        sources = [o for o in bpy.data.objects if o.library is None and o.get('wf_authored_source')]
+        loose = [o.name for o in bpy.data.objects if o.library is None and o.type == 'MESH' and o not in owned+authored+sources]
         if loose:
             fails.append(f'{name}: meshes neither generated nor adopted {loose[:6]}: module build adopts ART_ content')
         for o in owned:
@@ -69,11 +71,19 @@ def check(root, assemblies):
                 fails.append(f'{o.name}: parented; detail sits unparented in the anchor frame')
             if o.type == 'MESH':
                 fails += mesh_fails(o)
+        # Committed authored meshes (imported from data/detail/<pack>/): one per manifest entry, inside the assembly's envelope.
+        imported = [o for o in owned if o.get('family') == 'authored']; lo, hi = t['envelope_min'], t['envelope_max']
+        if sorted(o.get('component_id') for o in imported) != sorted(f"{a}.AUTHORED.{e['id']}" for e in t.get('authored', [])):
+            fails.append(f'{name}: imported authored meshes {[o.name for o in imported]} do not match the manifest entries: module build')
+        for o in imported:
+            out = [v.co for v in o.data.vertices if any(v.co[i] < lo[i]-1e-6 or v.co[i] > hi[i]+1e-6 for i in range(3))]
+            if out:
+                fails.append(f'{o.name}: {len(out)} vertices outside the envelope {lo}..{hi}, e.g. {[round(c, 4) for c in out[0]]}')
         for o in authored:
             fails += mesh_fails(o)
             if o.get('wf_authored_against') != modules.anchor_hash(reg, q):
                 fails.append(f'{o.name}: authored against another frame of {t["anchor"]}: review it, then module rebind {t["pack"]}')
-        info.update(generated=len(owned), authored=len(authored), faces=sum(len(o.data.polygons) for o in owned+authored if o.type == 'MESH'),
+        info.update(generated=len(owned)-len(imported), imported=len(imported), authored=len(authored), faces=sum(len(o.data.polygons) for o in owned+authored if o.type == 'MESH'),
                     materials=sorted({m.name for o in owned+authored if o.type == 'MESH' for m in o.data.materials if m}))
         # The host links it at the anchor.
         host = f"WF_{q['host']}"

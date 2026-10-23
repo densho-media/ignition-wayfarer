@@ -31,6 +31,10 @@ SCOPES = ('M7', 'M8', 'pack')          # which switch and maturity a pack's asse
 DETAIL_CLASSES = ('BLOCKOUT', 'FUNCTIONAL', 'PRODUCTION', 'HERO')
 FORBIDDEN = {'mass', 'mass_kg', 'mass_t', 'density', 'density_kg_m3', 'com', 'com_m', 'centre_of_mass', 'center_of_mass'}
 IDENTITY = [[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]
+# Authored meshes committed as data (docs/MODULES.md): self-contained glTF binaries under data/detail/<pack>/, imported by the detail build.
+# The cap keeps the public repository small; a larger file waits for the storage decision (Git LFS or another store).
+AUTHORED_KEYS = ('id', 'file', 'sha256', 'authored_against', 'license', 'author', 'provenance')
+AUTHORED_MAX_BYTES = 2*1024*1024
 
 
 def registry(root=ROOT):
@@ -202,13 +206,61 @@ def detail_hosts(root=ROOT, packs_=None):
 
 
 def inputs_hash(root, pack):
-    """The pack's own inputs (manifest and code): stamped on its detail assets so an edit is seen as stale without the spec hash."""
-    # The manifest comes from the build root (a disposable --root copies data/ only); the code always runs from this source tree.
+    """The pack's own inputs (manifest, code and committed authored meshes): stamped on its detail assets so an edit is seen as stale
+    without the spec hash."""
+    # The manifest and the authored files come from the build root (a disposable --root copies data/); the code runs from this source tree.
     h = hashlib.sha256()
-    for rel, base in ((f'{PACK_DIR}/{pack}.toml', Path(root)), (f'{CODE_DIR}/pack_{pack}.py', ROOT)):
+    authored = sorted(str(q.relative_to(root)) for q in (Path(root)/PACK_DIR/pack).rglob('*') if q.is_file()) if (Path(root)/PACK_DIR/pack).is_dir() else []
+    for rel, base in ((f'{PACK_DIR}/{pack}.toml', Path(root)), (f'{CODE_DIR}/pack_{pack}.py', ROOT), *((r, Path(root)) for r in authored)):
         p = base/rel
         h.update(rel.encode()); h.update(p.read_bytes() if p.is_file() else b'')
     return h.hexdigest()[:16]
+
+
+def authored_path(root, pack, entry):
+    return Path(root)/PACK_DIR/pack/entry['file']
+
+
+def sha256_file(path):
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def authored_entry_fails(name, a, e):
+    """Structural problems of one [[assembly.<A>.authored]] entry (no file access)."""
+    fails = [f'{name}: {a} authored entry lacks {k}' for k in AUTHORED_KEYS if not e.get(k)]
+    f = str(e.get('file', ''))
+    if f and (f.startswith('/') or '..' in Path(f).parts or not f.endswith('.glb')):
+        fails.append(f'{name}: {a} authored file {f!r} must be a .glb path inside data/detail/{name}/')
+    if e.get('sha256') and not (len(e['sha256']) == 64 and all(c in '0123456789abcdef' for c in e['sha256'])):
+        fails.append(f'{name}: {a} authored sha256 must be 64 lowercase hex digits')
+    if e.get('id') and not all(c.isupper() or c.isdigit() or c == '_' for c in e['id']):
+        fails.append(f"{name}: {a} authored id {e['id']!r} must be A-Z, 0-9 and _")
+    if 'detail_class' in e and e['detail_class'] not in DETAIL_CLASSES:
+        fails.append(f"{name}: {a} authored detail_class {e['detail_class']!r} not in {DETAIL_CLASSES}")
+    return fails
+
+
+def authored_fails(s, root, reg=None, packs_=None):
+    """Committed authored meshes against their manifests: present, within the size cap, the recorded checksum, and authored against the
+    anchor frame the assembly has now. Each failure names the remedy."""
+    root = Path(root); reg = reg or registry(root); packs_ = packs(root) if packs_ is None else packs_; anc = anchors(s, reg); fails = []
+    for a, t in assemblies(packs_).items():
+        for e in t.get('authored', []):
+            if not all(e.get(k) for k in ('id', 'file', 'sha256', 'authored_against')):
+                continue
+            p = authored_path(root, t['pack'], e)
+            if not p.is_file():
+                fails.append(f"WF_DETAIL_MISSING {t['pack']}: {a} {e['id']}: {p.relative_to(root)} is not in the checkout (commit it, or remove the entry)")
+                continue
+            if p.stat().st_size > AUTHORED_MAX_BYTES:
+                fails.append(f"{t['pack']}: {a} {e['id']}: {p.stat().st_size} bytes exceeds the {AUTHORED_MAX_BYTES} byte cap (needs the storage decision)")
+            if sha256_file(p) != e['sha256']:
+                fails.append(f"WF_DETAIL_STALE {t['pack']}: {a} {e['id']}: {p.relative_to(root)} changed since its manifest entry; review it, then set "
+                             f"sha256 = \"{sha256_file(p)}\"")
+            if t.get('anchor') in anc and e['authored_against'] != anchor_hash(reg, anc[t['anchor']]):
+                fails.append(f"WF_DETAIL_REVIEW {t['pack']}: {a} {e['id']} was authored against another frame of {t['anchor']}; review it against "
+                             f"the current anchor, then set authored_against = \"{anchor_hash(reg, anc[t['anchor']])}\"")
+    return fails
 
 
 def forbidden_keys(node, path=''):
@@ -250,6 +302,11 @@ def check_packs(packs_, sources=None):
             lo, hi = t.get('envelope_min'), t.get('envelope_max')
             if not (isinstance(lo, list) and isinstance(hi, list) and len(lo) == len(hi) == 3 and all(x < y for x, y in zip(lo, hi))):
                 fails.append(f'{name}: {a} needs envelope_min < envelope_max (three values, metres, anchor frame)')
+            ids = [e.get('id') for e in t.get('authored', [])]
+            if len(set(ids)) != len(ids):
+                fails.append(f'{name}: {a} has duplicate authored ids')
+            for e in t.get('authored', []):
+                fails += authored_entry_fails(name, a, e)
         fails += [f'{name}: production detail carries no {k[1:]} (engineering budgets come from the owner workbooks)'
                   for k in forbidden_keys(q)]
         if sources is not None:
@@ -335,6 +392,7 @@ def validate(s, root=ROOT):
         if not (root/q['code']).is_file():
             fails.append(f"{name}: missing {q['code']}")
         fails += [f'{name}: material {k} is already a shared [production] material: rename it' for k in q.get('materials', {}) if k in shared]
+    fails += authored_fails(s, root, reg, packs_)
     return fails
 
 

@@ -153,6 +153,8 @@ def pack_name(rel):
         return p.stem
     if p.parent == Path('src/wayfarer/detail') and p.suffix == '.py' and p.stem.startswith('pack_'):
         return p.stem[len('pack_'):]
+    if len(p.parts) >= 4 and p.parts[:2] == ('data', 'detail'):      # a committed authored mesh, data/detail/<pack>/...
+        return p.parts[2]
     return None
 
 

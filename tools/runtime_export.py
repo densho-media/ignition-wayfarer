@@ -131,7 +131,7 @@ def package_inputs(root):
     scripts and scenes are not package inputs: runtime-check runs the current ones against the package."""
     src = root/'src/wayfarer'
     paths = [*sorted(p for p in src.rglob('*.py') if 'studies' not in p.relative_to(src).parts and '__pycache__' not in p.parts),
-             root/'tools/runtime_export.py', *sorted((root/'data').glob('*.toml')), *sorted((root/'data/detail').glob('*.toml')),
+             root/'tools/runtime_export.py', *sorted((root/'data').glob('*.toml')), *sorted(p for p in (root/'data/detail').rglob('*') if p.is_file()),
              root/'godot/project.godot',
              *(p for p in (root/'simulations/wf_route_v1.json', root/'references/p1_eva_fit.json', root/'references/p1_eva_access.json',
                            root/'references/p1_eva_sp11.json') if p.exists()),
@@ -183,7 +183,7 @@ def run(root, eye_layout=None):
                    *sorted((root / 'godot').rglob('*.gd')),
                    root / 'godot/project.godot', *sorted((root / 'godot/scenes').glob('*.tscn'))]
         identity = {str(p.relative_to(root)): pipeline.sha256(p) for p in sources}
-        identity.update({str(p.relative_to(root)): pipeline.sha256(p) for p in [*(root / 'data').glob('*.toml'), *(root / 'data/detail').glob('*.toml')]})
+        identity.update({str(p.relative_to(root)): pipeline.sha256(p) for p in [*(root / 'data').glob('*.toml'), *(p for p in (root / 'data/detail').rglob('*') if p.is_file())]})
         def git(*args):
             return subprocess.check_output(['git', '-C', str(root), *args], text=True).strip()
         package = {'package_inputs': package_inputs(root), 'versions': versions(), 'git_revision': git('rev-parse', 'HEAD'),

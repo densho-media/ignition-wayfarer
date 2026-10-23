@@ -91,10 +91,10 @@ def build_detail(root,assets,s,assembly,spec_text,source_text,rebind=False):
     """One detail asset, assets/wayfarer/detail/WF_DETAIL_<assembly>.blend: the assembly in its anchor frame plus its contract stamps; hand-authored
     meshes in its ART_ collection are kept and adopted (detail.adopt)."""
     name=modules.asset_name(assembly);path=assets/modules.ASSET_DIR/f'{name}.blend'
-    coll,c=begin(path,name);detail.build(c,s,assembly);detail.stamp(coll,s,root,assembly)
+    coll,c=begin(path,name);detail.build(c,s,assembly);imported=detail.import_authored(c,s,root,assembly);detail.stamp(coll,s,root,assembly)
     authored=detail.adopt(name,s,root,assembly,rebind)
     save(path,coll,spec_text,source_text)
-    print('WF_DETAIL',name,len(c.objects),'generated',len(authored),'authored',flush=True)
+    print('WF_DETAIL',name,len(c.objects)-len(imported),'generated',len(imported),'imported',len(authored),'adopted',flush=True)
 
 
 def build(root=ROOT, target='all', rebind=False):

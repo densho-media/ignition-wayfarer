@@ -48,7 +48,7 @@ def sha256(path):
 def input_hashes(root):
     """The spec pair plus the module registry and every detail pack manifest (docs/MODULES.md): a run is accepted only on unchanged inputs."""
     out = {Path(name).name: sha256(root / name) for name in INPUTS}
-    out.update({str(p.relative_to(root)): sha256(p) for p in [root / 'data/modules.toml', *sorted((root / 'data/detail').glob('*.toml'))]
+    out.update({str(p.relative_to(root)): sha256(p) for p in [root / 'data/modules.toml', *sorted(p for p in (root / 'data/detail').rglob('*') if p.is_file())]
                 if p.is_file()})
     return out
 

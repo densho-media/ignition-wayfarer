@@ -83,6 +83,33 @@ class RegistryTests(unittest.TestCase):
         self.assertIn('overlapping space on WF-RING-A.SECTOR.1.3', fails)
         self.assertIn('material k is already defined by pack a', fails)
 
+    def test_authored_meshes_are_checked_against_their_manifest(self):
+        # Committed glTF detail (docs/MODULES.md): structure, then the file against its checksum, its anchor frame and the size cap.
+        import hashlib
+        import tempfile
+        reg = modules.registry(ROOT); anchor = 'WF-RING-A.SECTOR.1.3'
+        now = modules.anchor_hash(reg, modules.anchors(self.s, reg)[anchor])
+        bad = dict(id='lower', file='../x.glb', sha256='XYZ', authored_against=now, license='CC0-1.0', author='a', provenance='p')
+        fails = ' | '.join(modules.authored_entry_fails('p', 'P.1', bad))
+        for word in ('A-Z', '.glb path inside', '64 lowercase hex'):
+            self.assertIn(word, fails)
+        self.assertIn('lacks license', ' '.join(modules.authored_entry_fails('p', 'P.1', dict(bad, license=''))))
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp); (root/'data/detail/p').mkdir(parents=True); f = root/'data/detail/p/a.glb'; f.write_bytes(b'glTF test')
+            sha = hashlib.sha256(b'glTF test').hexdigest()
+            entry = dict(id='A', file='a.glb', sha256=sha, authored_against=now, license='CC0-1.0', author='a', provenance='p')
+            pack = {'pack': {'module': 'WF-RING-A', 'version': 1, 'scope': 'M7', 'enabled': True, 'detail_class': 'PRODUCTION'},
+                    'assembly': {'P.1': dict(anchor=anchor, envelope_min=[-1, -1, -1], envelope_max=[1, 1, 1], authored=[entry])}}
+            fails = lambda e: ' | '.join(modules.authored_fails(self.s, root, reg, {'p': dict(pack, assembly={'P.1': dict(pack['assembly']['P.1'], authored=[e])})}))
+            self.assertEqual(fails(entry), '')
+            self.assertIn('WF_DETAIL_STALE', fails(dict(entry, sha256='0'*64)))
+            self.assertIn('WF_DETAIL_REVIEW', fails(dict(entry, authored_against='0'*16)))
+            self.assertIn('WF_DETAIL_MISSING', fails(dict(entry, file='b.glb')))
+            before = modules.inputs_hash(root, 'p'); f.write_bytes(b'glTF test, edited')
+            self.assertNotEqual(modules.inputs_hash(root, 'p'), before)        # an edited mesh stales the pack's publication
+            f.write_bytes(b'0'*(modules.AUTHORED_MAX_BYTES+1))
+            self.assertIn('byte cap', fails(dict(entry, sha256=hashlib.sha256(f.read_bytes()).hexdigest())))
+
 
 class SelectionTests(unittest.TestCase):
     def test_pack_edit_selects_its_detail_target(self):
