@@ -28,21 +28,36 @@ Development effort moves from new Godot features to the ship itself; keep the de
 unresolved science blocks only irreversible steps. Each slice: validate the changed assembly and interfaces, whole-ship view plus a
 close-up, regression check, MODEL/TODO and Model Status update.
 
-- [ ] **MOD — Modular detail migration (docs/MODULES.md, 2026-10-22).** The registry, contracts, detail assets, module commands and
-  authored-detail adoption are built; M7.RA1 is the first pack. The parallel pilot added two candidates (`rad_frame`, `ra2_equip`).
-  - **Owner review:** accept, correct or reject the two `L4_VISUAL_CANDIDATE` packs (radiator frame fittings, ring A sector 2 overhead
-    trays). Self-review: the radiator fittings are hard to see at ship scale; the sector 2 trays read but sit close to the fit-out items.
-
-  Remaining, by value, dependency and risk:
-  1. M7.XFR and M7.SPK → pack `ring_a_transfer`: needs `Drum_1`/`Rotor_1` anchors (animated frames; the instance inherits the spin).
-  2. M7.ENT, M7.EXT.PORT and M7.TRK → pack `m7_spine` on the SERVICE and CREW_TRANSFER origins; [production.port/entry/drum/tube]
-     move with them (`[production.entry]` is shared with RA1, so it moves last).
-  3. M8.BROW.AFT and M8.CROWN.RIM → pack `m8_forward` (WF-FWD); `validation/m8_readback.py` then reads the detail file.
-  4. A committed path for hand-authored meshes (glTF as data under `data/detail/<pack>/`, imported by the builder) so the runtime package
-     carries them; decide Git LFS only when the first authored binary is needed.
-  5. Split WF_HABITAT per ring, so WF-RING-B owns its engineering (high risk: rotors, crew transfer, rig contract).
-  6. A linked part library for repeated fittings where measured sharing pays (the export already shares identical meshes).
-  **Done when:** every production assembly is a pack and `assembly validate` passes on the integrated ship.
+- [ ] **MOD — Modular detail (docs/MODULES.md).** Every production assembly is a detail pack (phase 2, 2026-10-23: `m7_spine`,
+  `ring_a_transfer`, `m8_forward` migrated with geometry, motion, runtime and pixel equivalence), packs carry their own contracts, and
+  approved authored meshes travel as committed glTF data. `assembly validate` passes for all six packs.
+  - **Owner review:** accept, correct or reject the two `L4_VISUAL_CANDIDATE` packs (`rad_frame` radiator frame fittings, `ra2_equip` ring A
+    sector 2 overhead trays). Self-review: the radiator fittings are hard to see at ship scale; the sector 2 trays read but sit close to the
+    fit-out items. M8.1 is reviewed under its own entry below.
+  - **Owner decision (storage of authored source binaries):** keep editable `.blend` sources local (current), or approve a store. The
+    committed path holds exported `.glb` files up to 2 MiB each (an opaque binary per revision in a public repository). Before the first real
+    authored mesh: confirm its licence and provenance can be public; for larger or many files choose Git LFS (public-repo bandwidth and
+    storage quotas; the web-explorer workflow's checkout would need `lfs: true`; forks and clones without LFS get pointer files and fail the
+    checksum, visibly) or a private store referenced by checksum. Evaluation in docs/MODULES.md.
+  - **Next phase, proposed: split WF_HABITAT per ring (WF-RING-B owns its engineering).** Not started; needs a go-ahead.
+    - *Change:* `components/revision.py` `habitat()` builds one ring per asset (`WF_HABITAT_A`/`WF_HABITAT_B`, targets `HABITAT_A`/`HABITAT_B`),
+      each with its `Rotor_j`, rotor control, sectors, crew hub (`components/crew.py` `hub`, `drum`) and closures; `build/build.py`
+      SUBSYSTEMS, the component dependencies (`RING_SECTOR`, the `INTERIOR_*` components stay shared and are linked by both) and `RETIRED`
+      for the old file; `data/modules.toml` (WF-RING-B gets its target, `shared_with` goes) and `modules.anchor_host` (SECTOR/ROTOR/DRUM
+      anchors resolve to the ring's own asset); `inspect.py` and `readback.py` ROTATING and `rotor_libraries`; `tools/checks.py` targets.
+    - *Consumers that name the asset or its group:* `export/godot.py` lineage (runtime node IDs of every ring node change; bindings go through
+      the manifest), `godot/scripts/inspector.gd` group labels, `data/ship_navigator.toml` groups, `shots/shots.toml` and
+      `shots/m5_subsystems.toml` selectors (`group:Assembly_HABITAT*` keeps matching both), `presentation/drive_preview.py`, the detail packs'
+      host (their anchors keep their IDs and frames, so pack contracts are unchanged), `tests/verify_rebuild.py`, `tests/verify_detail_authoring.py`.
+    - *Risks:* rotor drivers and the drum's driver read the rotor controls across files; the sim rig contract (`simulations/wf_sim_rig.json`,
+      WF.ROTOR.j identities) and the flight timeline must stay byte-identical except hashes; the crew route crosses both rings
+      (`human_entry.route_bodies`, BVH sweep); the export's mechanism frames are found by posing, so a missing control link shows as a frame loss.
+    - *Gates:* the migration proof in docs/MODULES.md (relocation of every ring object from WF_HABITAT into its ring file, `detail_equivalence`
+      at all poses, runtime manifest frames and counts, stills), full pipeline with rotation and route, runtime-export 31/31, verify_rebuild.
+    - *Rollback:* one commit; `git revert`, a full build (retirement moves the ring files to `milestones/`) and the previous baseline.
+  - Deferred: a linked part library for repeated fittings, until a detail pack repeats one detailed form often enough that measured sharing
+    pays (the export already shares identical meshes; RAD.FRAME's three blades share one mesh).
+  **Done when:** the owner has reviewed the candidates and decided the storage question; the HABITAT split is its own entry once approved.
 
 - [ ] **M8 — Exterior production identity. M8.1 BUILT 2026-10-20, awaiting owner art review.** The accepted M7 standard on the
   exterior as `[production.m8]` (its own switch and maturity). M8.1: the Brow aft face (`M8.BROW.AFT`) and the Aegis Crown rim

@@ -50,11 +50,36 @@ The manifest declares:
 
 A pack carrying a mass, density or centre-of-mass key is refused. Production detail never feeds an engineering budget.
 
+**The packs.** Every production assembly is a pack (MOD phase 2, 2026-10-23):
+
+| Pack | Module | Assemblies on anchors | Scope, maturity |
+| --- | --- | --- | --- |
+| `m7_spine` | WF-SPINE | M7.EXT.PORT, M7.ENT on `WF-SPINE.SERVICE.ORIGIN`; M7.TRK on `WF-SPINE.CREW_TRANSFER.ORIGIN` | M7, `L4_VISUAL_ACCEPTED` |
+| `ring_a_transfer` | WF-RING-A | M7.XFR on `WF-RING-A.DRUM.1` (despun drum); M7.SPK on `WF-RING-A.ROTOR.1` | M7, `L4_VISUAL_ACCEPTED` |
+| `m7_ra1` | WF-RING-A | M7.RA1 on `WF-RING-A.SECTOR.1.1` | M7, `L4_VISUAL_ACCEPTED` |
+| `ra2_equip` | WF-RING-A | RA2.EQP on `WF-RING-A.SECTOR.1.2` | pack, `L4_VISUAL_CANDIDATE` |
+| `m8_forward` | WF-FWD | M8.BROW.AFT, M8.CROWN.RIM on `WF-FWD.FORWARD_SHIELD.ORIGIN` | M8, `L4_VISUAL_CANDIDATE` |
+| `rad_frame` | WF-THERMAL | RAD.FRAME on `WF-THERMAL.RADIATOR.ORIGIN` (all three blades) | pack, `L4_VISUAL_CANDIDATE` |
+
+**Shared parameters.** A pack owns the parameters only it reads. What several packs read stays in the spec as a read-only dependency,
+owned by WF-CORE: `[production]` and `[production.m8]` are the M7 and M8 scopes (switch, maturity, materials; M8 also `crown_sectors` and
+the draw ranges, which the runtime manifest reads), and `[production.entry]` is the shared M7 panel grammar. Its consumers (2026-10-23):
+
+| `[production.entry]` key | Read by |
+| --- | --- |
+| `panel_max_deg`, `panel_min_deg`, `panel_back_gap_m`, `seam_m` | `clad_bay` (M7.XFR, M7.SPK, M7.TRK), M7.ENT, M7.TRK, M7.XFR (merged with its own `[params.drum]` angles), M7.SPK |
+| `panel_thickness_m`, `panel_bevel_m`, `fastener_m`, `fastener_inset_m`, `fastener_proud_m` | `clad_bay`, M7.ENT, M7.RA1 |
+| `housing_lip_m`, `housing_depth_m` | M7.ENT, M7.TRK, M7.XFR, M7.RA1 |
+
+The one M7.ENT-only key, `bulkhead`, moved to `m7_spine`. Changing a shared key is an integration change: it rebuilds every pack that reads it.
+
 `production_detail.py` stays the shared detail core, owned by WF-CORE. It holds:
-- the mesh helpers (`box`, `bent`, `rod`, `clad_bay`, `windows_free`, …);
-- the materials, scopes and switches (`built`, `enabled`, `scope`);
-- the runtime `standard()`;
-- the not-yet-migrated assemblies.
+- the registration (`@builder`, `CHECKS`) the pack modules use;
+- the mesh helpers several packs use (`box`, `bent`, `rod`, `clad_bay`, `windows_free`, `fixture_points`, `windows_of`, `patch_free`, `outward`, …);
+- the materials, scopes and switches (`built`, `enabled`, `scope`) and `crown_sectors`;
+- the runtime `standard()`.
+
+It builds no assembly itself any more: the legacy `ASSEMBLIES` table and the `[production].assemblies` lists are gone.
 
 **Anchor: a stable attachment frame.** `modules.anchors()` computes each anchor from the pure engineering formulas. No anchor is ever read back from a built file. Each anchor has:
 - an ID;
@@ -65,42 +90,88 @@ A pack carrying a mass, density or centre-of-mass key is refused. Production det
 | Family | ID | Host object | Frame |
 | --- | --- | --- | --- |
 | `ring_sector` | `WF-RING-<A\|B>.SECTOR.<ring>.<sector>` | `Sector_<ring>_<sector>` in WF_HABITAT, under `Rotor_<ring>` | the sector frame: origin on the centreline at the deck, +X axial, +Y radially outward (down in spin), +Z tangential; turns with the ring |
+| `rotor_frame` | `WF-RING-<A\|B>.ROTOR.<ring>` | `Rotor_<ring>` in WF_HABITAT | the ring centre (`rotor_interface.rotors` x), rest angle the index phase; motion `ROTOR_SPIN_X`: the driver turns it about +X, so detail on it spins, spins down and stops with the ring |
+| `drum_frame` | `WF-RING-<A\|B>.DRUM.<ring>` | `Drum_<ring>`, the despun transfer drum (human-entry rotors only) | same centre and rest angle; motion `DRUM_DESPUN_X`: it stays at the index angle while `drum_sync` is 0 and turns with its ring while it is 1 |
 | `asset_origin` | `<module>.<TARGET>.ORIGIN` | none (the collection origin) | identity. A component linked several times (the radiator blade) carries its detail on every copy |
 
 Units are metres. The ship axes stay +X bow, +Z dorsal, +Y left.
 
-**Contract.** A module's contract is its anchors plus the envelopes its packs claim. It is written to the tracked
-`simulations/wf_module_contracts.json` by every build and by `module contracts --write`; `tests/test_modules.py` keeps it current. Its
-hashes change whenever an anchor frame, an envelope or `interface_version` changes. Each anchor also has its own hash (`anchor_hash`),
-which is what detail is pinned to.
+A moving anchor's matrix is its rest frame at the saved pose. `inspect` and `module validate` check its host object at the anchor's
+centre and turning about +X only; the instance inherits the motion, and the runtime export finds the frame by posing the rings and drums.
+
+**Contracts.** Two levels, so that packs never share a generated file:
+- **Module contract** (integration-owned): a module's anchors, with one hash per module, in the tracked `simulations/wf_module_contracts.json`
+  (contract v2). Every build and `module contracts --write` rewrite it; `tests/test_modules.py` keeps it current. It changes only when an
+  anchor frame, the registry or `interface_version` changes, never when a pack is added or edited.
+- **Pack contract** (pack-owned): `modules.pack_contract()` hashes `interface_version` plus the pack's own terms: each assembly's anchor with
+  its frame, its envelope and its scope (`pack_terms`). Detail assets are stamped with it, and the publication record keeps it and its
+  terms. Another pack, in the same module or not, never changes it.
+- `module contracts` prints the combined view (module anchors plus every pack's contract), computed in a fixed order, so it does not depend
+  on the order in which packs were developed or merged.
+- Each anchor also has its own hash (`anchor_hash`), which is what hand-authored detail is pinned to.
+- **Compatibility diagnostics** (`modules.check_packs`, `modules.validate`): an unknown module or anchor, an assembly in two packs, two
+  packs' envelopes overlapping on the same anchor, a material key defined twice, an authored mesh that is missing, changed or authored
+  against another frame. Each message names the remedy.
 
 **Attachment and build order.** `build.py` builds detail assets first, then components, subsystems and the vehicle:
 - **Linking.** Before each host is saved, `components/detail.attach()` links every pack assembly anchored on that host. The link is a collection instance, `Detail_<assembly>`, of kind `detail_instance`, parented to the anchor object with an identity local transform and parent inverse.
 - **Disabled packs.** A disabled pack is still built (empty) and linked, so switching it never rewrites the host.
 - **`DETAIL_<assembly>` targets.** Such a target rewrites only its own file and returns. The host and the vehicle pick the change up through the nested link.
 - **Host targets.** A host target also rebuilds the details anchored on it.
-- **Stamps.** Detail assets carry the spec hash, `anchor_hash`, `inputs_hash` (the pack's manifest and code) and `contract_hash`. Pack TOMLs are outside the spec hash, so a pack edit stales only its own files.
+- **Joined targets.** Several `DETAIL_*` targets, or several component and subsystem targets, may be joined with `+` (`DETAIL_M7_SPK+DETAIL_M7_XFR`, `CREW_TRANSFER+SERVICE`). `build.py` builds exactly those; `checks` selects that instead of a full build, so an edit to a pack with several assemblies rebuilds only its detail assets.
+- **Stamps.** Detail assets carry the spec hash, `anchor_hash`, `inputs_hash` (the pack's manifest, code and committed authored meshes) and `contract_hash` (the pack contract). Pack files are outside the spec hash, so a pack edit stales only its own files.
 
 **Geometry-detail classes.** `representation.DETAIL_CLASSES` defines `BLOCKOUT`, `FUNCTIONAL`, `PRODUCTION` and `HERO`. These classes are separate from the L0–L5 maturity (S&E 48 WF-018…023) and from PROTOTYPE/WORKING/BASELINE/OPEN/HOLD, and replace neither.
 - Production detail carries its pack's class.
 - Engineering geometry is `FUNCTIONAL` when it is a mechanism, interface, closure, route or access part (`FUNCTIONAL_KINDS`), and `BLOCKOUT` otherwise.
 - The runtime manifest gives every node its `detail_class`, plus `pack` for pack detail.
 
-**Hand-authored detail (local for now).** A mesh modelled by hand goes into the `ART_WF_DETAIL_<assembly>` collection of its detail asset.
+**Hand-authored detail, local.** A mesh modelled by hand goes into the `ART_WF_DETAIL_<assembly>` collection of its detail asset.
 - **Adoption.** The next `module build` adopts it: it gets `wf_adopted`, the pack's labels and `wf_authored_against = <anchor hash>`. It never gets `wf_owner`, so regeneration keeps it.
 - **Contract change.** If the anchor frame changes, the build stops with `WF_DETAIL_REVIEW` until someone has reviewed the mesh and run `module rebind <pack>`.
 - **Where it shows up.** The export carries adopted meshes like generated detail. The fingerprint lists them under `authored`, outside the canonical `objects`, so baselines stay machine-independent.
-- **Not in the runtime package.** Authored `.blend` files are not committed (user decision 2026-10-22). The runtime-export fresh build therefore cannot carry authored detail; `web_export`, which reads the saved assets, does.
-- **Evidence.** `tests/verify_detail_authoring.py` proves the whole path on a disposable copy.
+- **Not in the runtime package.** Authored `.blend` files are not committed (user decision 2026-10-22). The runtime-export fresh build therefore cannot carry local ART detail; `web_export`, which reads the saved assets, does. To make a mesh reproducible, export it to the committed path below.
+- **Evidence.** `tests/verify_detail_authoring.py` proves the local path on a disposable copy.
+
+**Hand-authored detail, committed (portable).** An approved authored mesh travels as data: a self-contained glTF binary under the pack's own
+folder, `data/detail/<pack>/<id>.glb`, listed in the manifest:
+
+```toml
+[[assembly."M7.RA1".authored]]
+id = "SHELF_A"                      # A-Z, 0-9, _; the object becomes Auth_<ASSEMBLY>_<id>, component <assembly>.AUTHORED.<id>
+file = "shelf_a.glb"                # under data/detail/<pack>/
+sha256 = "…"                        # of the file; a changed file stops the build until this is updated after review
+authored_against = "…"              # the anchor_hash it was modelled in; a moved anchor stops the build until reviewed
+license = "CC0-1.0"
+author = "…"
+provenance = "…"                    # how and from what it was made; nothing restricted, the repository is public
+# optional: detail_class, surface_class, function
+```
+
+- **Export.** `module export-authored <assembly> --id <ID> --objects <names>` writes the ART meshes of the local detail asset (anchor
+  frame; +Y-up conversion, transforms and modifiers applied; glTF PBR materials; no animation, camera, light or custom property) and
+  prints the manifest entry. The editable sources move to `SRC_<asset>`, a collection outside the instanced root collection: they stay in
+  the local `.blend`, are never adopted, linked into the ship, exported or fingerprinted, and the build imports the committed file instead.
+- **Import.** The detail build checks each entry (`WF_DETAIL_MISSING`, `WF_DETAIL_STALE`, `WF_DETAIL_REVIEW`), imports it with fixed glTF
+  options and makes it one generated object in the anchor frame (several meshes are joined in name order on one material list; a single
+  mesh keeps its custom normals), tagged like generated detail with the file, checksum, licence, author and provenance. It is therefore in
+  the export, the fingerprint and the baseline, and a fresh checkout rebuilds it exactly.
+- **Checks.** `module validate` checks the files (present, checksum, frame, 2 MiB cap) and the saved asset (one object per entry, inside
+  the envelope). The authored files are in `inputs_hash`, the `checks` selection, the pipeline's input hashes and the runtime package
+  inputs, so an edited mesh stales the pack's publication and the package.
+- **Why `.glb`.** One self-contained file per mesh: no sidecar `.bin` or texture to lose, one checksum. The costs: Git sees an opaque
+  binary (no line diff; every revision is stored whole), and procedural, modifier, driver, constraint and custom-property data does not
+  survive (modifiers are applied at export). The `.blend` stays the editable source, locally, until a storage policy is approved.
+- **Evidence.** `tests/verify_authored_portable.py` proves the path from two disposable clean clones (see Evidence, phase 2).
 
 **Publication.** `module publish` refuses unless `module validate` passes. It then writes `references/modules/<pack>.json` with:
 - the pack and module;
-- the pack version, `inputs_hash`, spec hash, contract and anchor hashes;
+- the pack version, `inputs_hash`, spec hash, the pack contract hash and its terms, the anchor hashes (record version 2);
 - the git revision;
 - the switches and maturity;
 - the fingerprint of the pack's detail assets.
 
-`assembly validate` compares every pack's saved assets and current contract with its record. An unpublished pack, changed inputs, a moved anchor or different geometry all fail.
+`assembly validate` compares every pack's saved assets and current pack contract with its record. An unpublished pack, changed inputs (authored meshes included), a moved anchor, a changed envelope or different geometry all fail; another pack's arrival does not.
 
 A publication makes a pack eligible for integration. It is not an owner acceptance and changes no maturity or canon.
 
@@ -114,16 +185,19 @@ python3 tools/workflow.py module build <id> [--integrate]       # detail assets 
 python3 tools/workflow.py module validate <id> [--no-blender]   # registry, envelope and clearance screens, then the saved-asset readback
 python3 tools/workflow.py module preview <id> [--views ...] [--quality draft|material|review|look]   # side view + the pack's views
 python3 tools/workflow.py module publish <id>                   # validate, then the publication record
-python3 tools/workflow.py module rebind <pack>                  # after reviewing authored detail against a changed anchor
+python3 tools/workflow.py module rebind <pack>                  # after reviewing local ART detail against a changed anchor
+python3 tools/workflow.py module export-authored <assembly> --id <ID> --objects <names>   # ART meshes -> data/detail/<pack>/<id>.glb
 python3 tools/workflow.py assembly validate                     # every pack against its record
-/snap/bin/blender -b --python src/wayfarer/build/build.py -- --target DETAIL_<assembly> [--rebind]
-python3 tests/verify_detail_authoring.py [--keep]               # authored-detail end-to-end check on a disposable copy (~2 min)
+/snap/bin/blender -b --python src/wayfarer/build/build.py -- --target DETAIL_<assembly>[+DETAIL_<other>] [--rebind]
+python3 tests/verify_detail_authoring.py [--keep]               # local authored-detail check on a disposable copy (~2 min)
+python3 tests/verify_authored_portable.py [--skip-runtime]      # committed authored detail from two clean clones (~35 min with runtime-export)
 python3 tests/compare_fingerprint.py <before> <after> --relocate <prefix> <old file> <new file> <instance>   # a migration's proof
+blender -b --python tests/detail_equivalence.py -- --out <json>; python3 tests/detail_equivalence.py --compare <before> <after>
 ```
 
-`checks` and `pipeline --quick --target auto` select, for an edited pack, its `DETAIL_<assembly>` target, `test_production` and
-`test_modules`, and its declared inspection groups. A new pack, or a pack whose anchor moved, selects its host, which must link it. A
-change to an engineering module that a pack's code imports also selects that pack.
+`checks` and `pipeline --quick --target auto` select, for an edited pack (manifest, code or authored mesh), its `DETAIL_*` targets joined
+with `+`, `test_production` and `test_modules`, and its declared inspection groups. A new pack, or a pack whose anchor moved, selects its
+hosts, which must link it. A change to an engineering module that a pack's code imports also selects that pack.
 
 ## Rules for parallel sessions
 
@@ -132,10 +206,9 @@ change to an engineering module that a pack's code imports also selects that pac
   - A session edits only the files `module show` lists as owned.
   - The registry, the detail core, the generators, `data/wayfarer_3d.toml` and the anchors are integration-owned (WF-CORE or the engineering module).
   - Two sessions never edit the same `.blend`; detail assets are generated and local, so they never merge.
-- **Branches.** Work on `claude/<task>` (cloud) or `local/<task>` (workstation), one branch per pack. Each branch carries:
-  - its pack files;
-  - its publication record;
-  - the contract file a build rewrites. This file names every pack, so two new packs add neighbouring lines to it; regenerate it after merging.
+- **Branches.** Work on `claude/<task>` (cloud) or `local/<task>` (workstation), one branch per pack. Each branch carries only its pack
+  files (manifest, code, authored meshes) and its publication record. The module contract file names anchors only, so a pack branch leaves
+  it unchanged; packs merge in any order without conflicts (measured below).
 
   Integration merges the branches, then runs the full pipeline, `accept` and `runtime-export`. Accepting a new baseline happens only after the merge, because `references/baselines.json` is shared.
 - **Gates.**
@@ -160,17 +233,19 @@ change to an engineering module that a pack's code imports also selects that pac
 
 **Update after an engineering-source change.**
 1. A spec change rebuilds everything (`all`), including the detail assets.
-2. If the change moves an anchor, the contract hash changes and `assembly validate` reports the pack stale.
+2. If the change moves an anchor, the pack contract of every pack on it changes and `assembly validate` reports those packs stale.
 3. Generated detail recomputes from the same formulas. Rerun `module validate` (the envelope and screens show any incompatibility) and republish.
-4. Hand-authored detail stops the build with `WF_DETAIL_REVIEW` until it is reviewed and rebound.
+4. Hand-authored detail stops the build with `WF_DETAIL_REVIEW` until it is reviewed and rebound (local) or its `authored_against` is updated (committed).
 5. Never reshape engineering geometry to keep cosmetic detail attached.
 
-**Migrate a legacy assembly into a pack.** Follow the M7.RA1 pilot:
-1. Move the builder, its screen and its exclusive parameters into a pack, leaving shared parameters as read-only spec dependencies.
-2. Remove the assembly from `ASSEMBLIES`, `[production].assemblies` and the host recipe's hard-coded call.
-3. Compare a digest of `production_detail.elements()` before and after; it must be identical.
-4. Run the full pipeline, then prove the move with `compare_fingerprint.py --relocate` against the accepted baseline, which must give PASS.
-5. `accept` the run.
+**Move detail between files (a migration).** Every legacy assembly is migrated; a later move (another anchor, a split pack, the HABITAT
+split) follows the same proof, recorded before the change:
+1. Move the builder, its screen and its exclusive parameters, leaving shared parameters as read-only spec dependencies (map the consumers first).
+2. Compare a digest of `production_detail.elements()` before and after; it must be identical.
+3. Run the full pipeline with the exact prefixes the move touches, then `compare_fingerprint.py --relocate` against the accepted baseline (PASS).
+4. `tests/detail_equivalence.py` before and after: the evaluated geometry at the motion and configuration poses, properties and materials.
+5. Compare the runtime manifests (nodes, triangles, bounds, frames; node IDs may change with the lineage) and the relevant stills pixel by pixel.
+6. `accept` the run.
 
 **Roll back.**
 - `git revert` the pack's commit, or set `enabled = false` in its manifest. A disabled pack builds empty, so the geometry diff shows the layer gone.
@@ -182,8 +257,9 @@ change to an engineering module that a pack's code imports also selects that pac
 ```text
 MODULE:                  <module ID>: <title> (pack <name>)
 TASK:                    <the one visible result this session delivers>
-SOURCE CONTRACT:         simulations/wf_module_contracts.json, module hash <h>; anchors <ID: host object, frame>
-OWNED FILES:             data/detail/<pack>.toml, src/wayfarer/detail/pack_<pack>.py, assets/wayfarer/detail/WF_DETAIL_<asm>.blend (local)
+SOURCE CONTRACT:         references/modules/<pack>.json, pack contract <h>; anchors <ID: host object, frame, motion>
+OWNED FILES:             data/detail/<pack>.toml, data/detail/<pack>/*.glb, src/wayfarer/detail/pack_<pack>.py,
+                         assets/wayfarer/detail/WF_DETAIL_<asm>.blend (local)
 READ-ONLY DEPENDENCIES:  data/modules.toml, data/wayfarer_3d.toml, src/wayfarer/production_detail.py, the anchor's engineering modules
 PERMITTED CHANGES:       the owned files; PROTOTYPE visual choices inside each envelope; new families and pack materials
 FORBIDDEN CHANGES:       engineering geometry, anchors, registry, canon values, other modules' files, budgets, OPEN/HOLD statuses
@@ -265,10 +341,53 @@ ACCEPTANCE CRITERIA:     validate PASS; only expected prefixes in the diff; prev
   - Each accepted baseline adds a 3.3 MB fingerprint JSON to Git (existing practice).
   - Instancing: one `WF_DETAIL_RAD_FRAME` mesh set is carried by all three blades through the linked component.
 
-## Limitations and next migrations
+## Evidence, phase 2 (2026-10-23, cloud: 4 vCPU, Blender 5.2.2)
 
-- Only M7.RA1 (and the Pilot 2 packs) run as packs. M7.XFR/SPK, M7.ENT/EXT.PORT/TRK and M8 are still built inside their hosts; TODO ranks their migration.
-- Drum and rotor anchors (needed for XFR/SPK) are not defined yet.
-- HABITAT still serves both rings, so ring-B engineering cannot be owned separately.
-- Authored meshes are local. A committed path (glTF as data under `data/detail/<pack>/`, imported by the builder) is backlog.
+Before-state recorded on `main` `80a6cb2`, whose saved assets matched `baseline_modules_pilot2` exactly (fingerprint diff empty).
+
+- **Per-pack contracts.** Merge experiment, two sessions each adding a pack to WF-RING-A from one commit, each regenerating the contract
+  file as the build does:
+  - old model (`80a6cb2`): `simulations/wf_module_contracts.json` conflicts in both merge orders, and `m7_ra1`'s record hash changes with each
+    new pack (`95e5c154…` → `a2cbcc47…` / `f5b072bf…`), so its publication goes stale;
+  - new model: clean merges in both orders, identical trees, the contract file current after the merge, `m7_ra1`'s pack contract unchanged.
+  - In practice: `ring_a_transfer` joined WF-RING-A next to `m7_ra1` and `ra2_equip`, whose records stayed valid (`assembly validate` PASS).
+- **Migrations** (each: `elements()` digests of all ten assemblies identical; full pipeline PASS with only the named prefixes; then):
+
+  | Pack | Relocation proof | Equivalence probe (8 poses) | Runtime manifest | Stills |
+  | --- | --- | --- | --- | --- |
+  | `ring_a_transfer` (M7.XFR on the drum, M7.SPK on the rotor) | PASS, 8 objects | PASS: SPK turns with ring A, XFR only while the drum is synchronized, as before | 3,947 nodes, 741,424 triangles, bounds and frames identical (`WF.CREW.1.DRUM`, `WF.ROTOR.1`); the 8 node IDs changed with the lineage | xfr_vestibule, spk_tube pixel-identical |
+  | `m7_spine` (M7.EXT.PORT, M7.ENT, M7.TRK) | PASS, 20 objects cumulative | PASS (DOCKED with the port leaves, drum doors, tube hatches and gates open) | identical; the spine nodes keep their IDs | all 9 `m7_section` views pixel-identical |
+  | `m8_forward` (M8.BROW.AFT, M8.CROWN.RIM) | PASS, 30 objects cumulative | PASS; static with the Crown prepared and engaged at two azimuths | identical | brow_aft and crown_sector off/on and the cutaway pixel-identical |
+
+  `m8_readback` is identical in every field (PASS, 10 objects, 212,256 triangles, r 45.0043 m, 0 clashes against 440 engineering meshes,
+  forward-most 0.03 m aft of the skin). Equivalence probe: `tests/detail_equivalence.py` (evaluated world vertices, properties, materials,
+  modifiers). Node IDs hash the instance lineage; Godot binds through the manifest's component IDs.
+- **Two faults found and fixed on the way:** the forward inspection read only the forward-shield file, so it now reads the detail assets
+  linked into it (and skips the link carriers); `m8_exterior.py` restored the production materials by name, which reached only one of
+  the per-file copies (the "on" stills differed until it addressed them per datablock).
+## Storage of authored source binaries (evaluation, 2026-10-23; owner decision pending)
+
+The committed path carries exported `.glb` files; the editable `.blend` sources stay local (user decision 2026-10-22, unchanged). Options
+for real authored binaries, by what they cost this public repository:
+
+| Option | Size and history | Exposure | Reproducibility | Permissions and CI |
+| --- | --- | --- | --- | --- |
+| `.glb` in Git (current, ≤ 2 MiB each) | every revision stored whole; fine for a few small meshes | public with the repository | full: a clean clone rebuilds it (proven) | none; the web-explorer checkout needs nothing |
+| Git LFS for `.glb` (and `.blend`) | history outside the Git objects; GitHub's public-repo LFS storage and bandwidth quotas apply | public (LFS objects of a public repository are downloadable) | full when LFS is fetched; without it the pointer file fails the checksum, visibly | the CI checkout needs `lfs: true`; forks need LFS |
+| Private store referenced by checksum | none in Git | private | only with credentials; a public clone cannot rebuild | a secret in CI; a fetch step |
+| `.blend` sources in Git | large binaries, no diff, every save whole | public | the editable source travels | none |
+
+Recommendation: keep `.glb` in Git under the cap until the first real authored mesh; then decide by its size, licence and whether it may be
+public. Nothing restricted (owner material, Drive captures, unlicensed assets) may enter the committed path in any case.
+
+## Limitations and next steps
+
+- HABITAT still serves both rings, so ring-B engineering cannot be owned separately; the split is proposed in TODO (MOD) as its own phase.
+- The committed authored path keeps PBR base colour, roughness and metallic, UVs and normals; procedural, modifier, driver and constraint
+  data does not travel, and joined multi-mesh imports keep face smooth flags but not custom normals. Textures embedded in the `.glb` are
+  imported but not checked by any gate yet.
+- Each detail asset carries its own copy of a shared production material (same name, another library). The runtime export merges them by
+  name; presentation code must address materials by datablock, not by name.
 - `assembly validate` is a separate integration command, not part of `inspect`. A pack is expected to be unpublished while it is being edited.
+- A new pack anchored on two hosts selects both hosts (`CREW_TRANSFER+SERVICE`); a pack and a host target are never joined, so a change
+  touching both selects a full build.

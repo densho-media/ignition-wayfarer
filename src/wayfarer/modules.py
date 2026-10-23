@@ -444,7 +444,7 @@ def handoff(s, root, ident):
     root = Path(root); reg = registry(root); mid, names = module_of(root, ident); m = reg['module'][mid]; packs_ = packs(root)
     con = contracts(s, root, reg)['modules'][mid]
     deps = sorted({f for d in m.get('depends', []) for f in owned_files(root, reg['module'][d])})
-    owned = [f for n in names for f in (packs_[n]['manifest'], packs_[n]['code'])]
+    owned = [f for n in names for f in (packs_[n]['manifest'], packs_[n]['code'], f'{PACK_DIR}/{n}/*.glb (committed authored meshes)')]
     asm = {a: t for a, t in assemblies(packs_).items() if t['pack'] in names}
     pack_only = ident != mid
     return {
