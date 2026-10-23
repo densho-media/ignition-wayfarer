@@ -307,13 +307,18 @@ def run_equivalence(url, play_release, binary, sandbox, out, play_seconds, recor
         log.close()
 
 
-def run_touch(url, play_release, binary, sandbox, out, record_check, metrics, timeout=300):
+class JourneyStop(Exception):
+    pass
+
+
+def run_touch(url, play_release, binary, sandbox, out, record_check, metrics, timeout=150):
     """MOB-001: Enter Wayfarer played by touch on an emulated phone (844 x 390 CSS px, DPR 3, touch, landscape), in its own browser
     alongside the walk. CDP touch events go through the browser into Godot as a phone's would; the game publishes its touch state
     (window.wayfarerTouch, -- --touch-probe) and the check reads it. Covers the touch welcome, Skip, Pause, the rail stick with the
     look finger at once, release, weightless (no stick, no force; look; Push off), Map and the systems card, the transfer line,
     walking on ring A with Drop by a second finger, Help as a modal, portrait and a tablet size keeping the same run. Emulation,
-    not a phone: it says nothing about a phone's frame rate."""
+    not a phone: it says nothing about a phone's frame rate. A step the rest depends on stops the journey when it fails (one failed
+    check, no cascade of waits); it runs after the equivalence session, so at most two browsers share the runner."""
     profile = tempfile.mkdtemp(prefix='wf-web-touch-')
     log = open(out / 'chrome-touch.log', 'w')
     chrome = Chrome(binary, profile, log, sandbox)
@@ -356,6 +361,27 @@ def run_touch(url, play_release, binary, sandbox, out, record_check, metrics, ti
             touch('touchEnd', fid)
             page.frames(2)
 
+        def need(name, ok, **detail):
+            record_check(name, ok, **detail)
+            if not ok:
+                raise JourneyStop(name)
+
+        def tap_panel(prefix, done):
+            """A modal panel's button: wait until its place is settled (the panel lays out over a few frames), tap, confirm."""
+            for _ in range(3):
+                a = until(lambda s: any(t.startswith(prefix) for t, r in s['panel']), 60)
+                time.sleep(1.0)
+                b = state()
+                ra = next((r for t, r in (a or {}).get('panel', []) if t.startswith(prefix)), None)
+                rb = next((r for t, r in (b or {}).get('panel', []) if t.startswith(prefix)), None)
+                if not rb or ra != rb:
+                    continue
+                tap_at(centre(rb))
+                s = until(done, 60)
+                if s:
+                    return s
+            return None
+
         def tap(bid):
             s = until(lambda s: button(s, bid) is not None)
             if s:
@@ -385,13 +411,12 @@ def run_touch(url, play_release, binary, sandbox, out, record_check, metrics, ti
         page.send('Emulation.setTouchEmulationEnabled', {'enabled': True, 'maxTouchPoints': 5})
         t0 = time.monotonic()
         page.send('Page.navigate', {'url': url + play_release['page'] + '?arg=--&arg=--touch-probe'})
-        s = until(lambda s: s['mode'] == 'welcome' and s['panel'])
-        record_check('touch: phone detected, CSS-pixel interface, welcome without a key', s and s['primary'] and s['density'] == 3
-                     and abs(s['ui'][0] - 844) < 2 and abs(s['ui'][1] - 390) < 2, seconds=round(time.monotonic() - t0, 1), scale_3d=s and s['scale_3d'])
+        s = until(lambda s: s['mode'] == 'welcome' and s['panel'], 300)
+        need('touch: phone detected, CSS-pixel interface, welcome without a key', s and s['primary'] and s['density'] == 3
+             and abs(s['ui'][0] - 844) < 2 and abs(s['ui'][1] - 390) < 2, seconds=round(time.monotonic() - t0, 1), scale_3d=s and s['scale_3d'])
         page.screenshot(out / 'touch_1_welcome.png')
-        tap_at(next((centre(r) for t, r in (s or {}).get('panel', []) if t.startswith('Start with tips')), (422, 300)))
-        s = until(lambda s: s['mode'] == '' and s['intro_done'])
-        record_check('touch: welcome completed by a tap (tips on)', s and s['preference'] == 'SUGGESTED')
+        s = tap_panel('Start with tips', lambda s: s['mode'] == '' and s['intro_done'])
+        need('touch: welcome completed by a tap (tips on)', s and s['preference'] == 'SUGGESTED')
         page.frames(2)
         page.screenshot(out / 'touch_2_exterior.png')
         record_check('touch: guided chapter offers Pause and Skip, no stick', s and s['move'] == '' and {'demo.pause', 'ui.confirm'} <= set(buttons(s)),
@@ -399,6 +424,7 @@ def run_touch(url, play_release, binary, sandbox, out, record_check, metrics, ti
         tap('ui.confirm')
         tap('demo.pause')
         s = until(lambda s: scene(s)['chapter'] == 'ENTRY' and scene(s)['paused'])
+        need('touch: Skip and Pause by touch reach a paused ENTRY', s)
         p0, lo0 = scene(s).get('progress', 0), scene(s).get('look_offset', [0, 0])
         touch('touchStart', 1, (110, 300))
         touch('touchMove', 1, (110, 250))
@@ -421,6 +447,7 @@ def run_touch(url, play_release, binary, sandbox, out, record_check, metrics, ti
         tap('demo.pause')
         ok = skip_to('MICROGRAVITY')
         s = until(lambda s: body(s).get('grip'))
+        need('touch: Skip by touch reaches MICROGRAVITY, holding the start rail', ok and s)
         page.frames(2)
         page.screenshot(out / 'touch_4_microgravity.png')
         record_check('touch: weightless: Push off and Release, no stick', ok and s and s['move'] == '' and {'player.push', 'player.release'} <= set(buttons(s)),
@@ -475,9 +502,8 @@ def run_touch(url, play_release, binary, sandbox, out, record_check, metrics, ti
         page.frames(2)
         page.screenshot(out / 'touch_7_help.png')
         record_check('touch: Help is a modal (game paused, stick released)', s and s['paused'] and not s['virtual'])
-        tap_at(next((centre(r) for t, r in (s or {}).get('panel', []) if t == 'Close'), (422, 300)))
-        s = until(lambda s: s['mode'] == '' and not s['paused'])
-        record_check('touch: Help closes by touch', s)
+        s = tap_panel('Close', lambda s: s['mode'] == '' and not s['paused'])
+        need('touch: Help closes by touch', s)
         chapter = scene(state()).get('chapter')
         page.send('Emulation.setDeviceMetricsOverride', {'width': 390, 'height': 844, 'deviceScaleFactor': 3, 'mobile': True,
                                                           'screenOrientation': {'type': 'portraitPrimary', 'angle': 0}})
@@ -500,6 +526,12 @@ def run_touch(url, play_release, binary, sandbox, out, record_check, metrics, ti
         record_check('touch: no engine or script errors', not errors and not traffic.crashed, errors=errors[:5])
         metrics['touch'] = {'seconds': round(time.monotonic() - t_start, 1), 'scale_3d': s and s['scale_3d'], 'godot_fps': s and s['fps'],
                             'renderer': 'SwiftShader software WebGL, emulated phone 844x390 DPR 3: behaviour only, not a phone frame rate'}
+    except JourneyStop as stop:
+        try:
+            page.screenshot(out / 'touch_stopped.png')
+            print(f'touch journey stopped at: {stop}; state {json.dumps(state())[:600]}', flush=True)
+        except (RuntimeError, TimeoutError):
+            print(f'touch journey stopped at: {stop}', flush=True)
     except Exception as error:
         log.flush()
         record_check('touch: phone session', False, error=repr(error),
@@ -539,13 +571,15 @@ def check(site, out, binary, sandbox=True, record=False, play_seconds=900, live=
         record_check(f"play: browser-vs-native equivalence carried from release {carried['release']} (same play files)",
                      carried['equivalence'].get('result') == 'PASS', release=carried['release'], git_revision=carried['git_revision'],
                      note=carried['equivalence'].get('note'))
-    elif play_release and recording:
-        side = threading.Thread(target=run_equivalence, args=(url, play_release, binary, sandbox, out, play_seconds, record_check, metrics))
+    # The side browser runs the equivalence session and then the touch journey (at most two browsers share the runner with the walk).
+    def side_work(equivalence):
+        if equivalence:
+            run_equivalence(url, play_release, binary, sandbox, out, play_seconds, record_check, metrics)
+        if touch:
+            run_touch(url, play_release, binary, sandbox, out, record_check, metrics)
+    if play_release and ((recording and not carried) or touch):
+        side = threading.Thread(target=side_work, args=(recording and not carried,))
         side.start()
-    touch_side = None
-    if play_release and touch:
-        touch_side = threading.Thread(target=run_touch, args=(url, play_release, binary, sandbox, out, record_check, metrics))
-        touch_side.start()
     profile = tempfile.mkdtemp(prefix='wf-web-check-')
     log = open(out / 'chrome.log', 'w')
     # The back-forward cache stays off so the memory check measures what the pages release, not what Chrome chooses to keep.
@@ -796,8 +830,6 @@ def check(site, out, binary, sandbox=True, record=False, play_seconds=900, live=
         chrome.close()
         if side:
             side.join()
-        if touch_side:
-            touch_side.join()
         if server:
             server.shutdown()
         shutil.rmtree(profile, ignore_errors=True)
