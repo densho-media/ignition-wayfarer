@@ -233,12 +233,15 @@ func _layout_compact(size: Vector2) -> void:
 	route_label.visible = level == 2
 	if level == 2:
 		var w := minf(size.x * 0.58, 640.0)
-		view_box.custom_minimum_size = Vector2(w, minf(size.y * 0.5, w * 0.62))
+		# under the page's Exit row (shell, top left); the view gives up height so that the text under it stays on screen
+		var text_h := panel.get_combined_minimum_size().y - view_box.custom_minimum_size.y
+		var room := size.y - float(safe[1]) - 62.0 - float(safe[3]) - 12.0 - text_h
+		view_box.custom_minimum_size = Vector2(w, maxf(80.0, minf(minf(size.y * 0.5, w * 0.62), room)))
 		for l in [loc_label, state_label, route_label, hint_label]:
 			l.custom_minimum_size.x = w
 		view_box.mouse_filter = Control.MOUSE_FILTER_STOP
 		panel.size = Vector2.ZERO
-		panel.position = Vector2(float(safe[0]) + 12.0, float(safe[1]) + 12.0)
+		panel.position = Vector2(float(safe[0]) + 12.0, float(safe[1]) + 62.0)
 	else:
 		view_box.custom_minimum_size = Vector2(220, 104)
 		for l in [loc_label, state_label]:

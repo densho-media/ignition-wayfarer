@@ -249,6 +249,56 @@ func run(h: Node) -> Dictionary:
 	_ok("key_switches_device", I.device == "keyboard" and not T.shown and demo.paused and I.label("demo.pause") == "P", [I.device, I.label("demo.pause")])
 	I.set_device("touch")
 	_ok("touch_labels", I.label("player.grab") == "Grab" and I.label("ship.map") == "Map", I.label("player.grab"))
+
+	# ---- the lesson card never covers a panel or a touch control; short touch wording (phone sideways, upright, tablet) ------------------
+	await frames(3)                                       # the touch buttons return a frame after the device does
+	var nav: WfShipNavigator = demo.navigator
+	if nav.level == 0:
+		await tap_button("ship.map")
+	if nav.card_page < 0:
+		await tap_button("ship.card")
+	var covered := []
+	var waited := []
+	for size in [[Vector2i(1280, 592), 1280.0 / 844.0], [Vector2i(780, 1688), 2.0], [Vector2i(1180, 820), 1.0]]:
+		T.dpr = size[1]
+		host.get_window().size = size[0]
+		I.apply()
+		for l in [I.LESSONS[1], I.LESSONS[0]]:
+			I.overlay.show_lesson(l)
+			await frames(6)
+			var r: Rect2 = I.overlay.stack.get_global_rect()
+			var ui := host.get_viewport().get_visible_rect().size
+			var hits: Array = T.occupied().filter(func(o): return r.intersects(o))
+			if nav.card_page < 0 or I.overlay.card_shown() and (not Rect2(Vector2.ZERO, ui).encloses(r) or not hits.is_empty()):
+				covered.append([ui, l.id, r, hits, nav.card_page])
+			elif not I.overlay.card_shown():
+				waited.append([ui, l.id])
+	T.dpr = 1280.0 / 844.0                                # sideways phone: the card waits while the systems card fills the screen,
+	host.get_window().size = Vector2i(1280, 592)          # then appears clear of the rest once it closes
+	I.apply()
+	while nav.card_page >= 0:
+		await tap_button("ship.card")
+	await frames(3)
+	var full_map: Rect2 = nav.panel.get_global_rect() if nav.level == 2 else Rect2()
+	var page_row := Rect2(Vector2(T.safe[0], T.safe[1]), T.PAGE_ROW)
+	if nav.level == 2 and (full_map.intersects(page_row) or not Rect2(Vector2.ZERO, host.get_viewport().get_visible_rect().size).encloses(full_map)):
+		covered.append(["full map under the page buttons or off screen", full_map])
+	while nav.level != 1:
+		await tap_button("ship.map")
+	await frames(6)
+	var r2: Rect2 = I.overlay.stack.get_global_rect()
+	if not I.overlay.card_shown() or T.occupied().any(func(o): return r2.intersects(o)):
+		covered.append(["after the systems card closed", r2, I.overlay.card_shown(), T.occupied().filter(func(o): return r2.intersects(o))])
+	I.overlay.lesson_now = {}
+	I.overlay._show()
+	_ok("lesson_card_clear_of_panels", covered.is_empty() and waited.size() <= 2, [covered, waited])
+	var verbose := []
+	for name in ["MICROGRAVITY", "MODE", "TRANSFER", "DESCENT", "GRAVITY", "INSPECT"]:
+		var hint: String = demo.touch_hint(name)
+		if hint == "" or "stick up" in hint or "{" in hint or hint.length() > 110:
+			verbose.append(name)
+	var gravity_text: String = demo.hud.text
+	_ok("touch_chapter_text_short", verbose.is_empty() and not "stick up" in gravity_text and "stick to walk" in gravity_text, [verbose, gravity_text])
 	DirAccess.remove_absolute(ProjectSettings.globalize_path(I.profile_path))
 	var fail := out.filter(func(c): return not c.ok).map(func(c): return c.id)
 	return {"result": "PASS" if fail.is_empty() else "FAIL", "checks": out, "fail": fail, "log": T.log.slice(-20)}

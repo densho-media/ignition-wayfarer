@@ -174,7 +174,8 @@ func touch_state() -> Dictionary:
 		util.append(["ship.card", ["Systems", "Why", "Show me", "Close"][navigator.card_page + 1]])
 	util.append(["touch.info", "Details" if not details else "Less"])
 	return {"move": move, "look": camera_free() or body, "actions": acts, "utility": util,
-		"local": {"touch.info": func(): details = not details}, "probe": touch_probe}
+		"local": {"touch.info": func(): details = not details}, "probe": touch_probe,
+		"panels": [hud, host.body_tour.hud if host.body_tour != null else null] + ([navigator.panel, navigator.card] if navigator != null else [])}
 
 ## The chapter state a browser check reads (-- --touch-probe).
 func touch_probe() -> Dictionary:
@@ -561,35 +562,47 @@ func tour_last() -> Dictionary:
 
 func hud_text(done: bool) -> String:
 	var name: String = CHAPTERS[chapter]
+	var touch := WfInput.device == "touch"
 	var s := ("DEMONSTRATOR 01 · SIMULATION_ONLY · %d/%d %s%s%s\n" if WfInput.compact() else "WAYFARER INTEGRATED DEMONSTRATOR 01 · SIMULATION_ONLY · chapter %d/%d %s%s%s\n") % [chapter + 1, CHAPTERS.size(), name,
 		"  [paused]" if paused else "", "  [autoplay]" if autoplay else ""]
 	match name:
 		"EXTERIOR": s += "The DOCKED ship, static REP_PROXY export; inspection light, not a sourced sun or attitude."
 		"ENTRY": s += "Outer hatch, airlock and the stationary spine on the review rail; the closures cycle as the camera passes (display timing)."
-		"MICROGRAVITY": s += WfInput.keys("Crew physics in the real trunk: {player.grab} grab, look aft (%s) and {player.push} push, {player.grab} at the next rail to catch. No thrust, no braking." % look_label())
+		"MICROGRAVITY": s += "Crew physics in the real trunk: " + (touch_hint(name) if touch else WfInput.keys("{player.grab} grab, look aft (%s) and {player.push} push, {player.grab} at the next rail to catch." % look_label())) + " No thrust, no braking."
 		"MODE":
 			s += "DOCKED -> COAST in the owner's step order (46 DYN-026): %s.\n" % " -> ".join(ctl.steps_all)
 			s += "%s · ring speed %.0f %% · ramp shown x%d of the %.0f s study value (WORKING); transition timing HOLD, no First Ignition time.%s" % [
 				ctl.ring_state, ctl.spin_frac * 100.0, int(TIMELAPSE), ctl.ramp_s(), ("\nHELD: " + ctl.hold_reason) if ctl.hold_reason != "" else ""]
-			s += "\nO: mark an occupant not secured (the sequence holds before the ramp, fail closed)."
+			s += "\n" + (touch_hint(name) if touch else "O: mark an occupant not secured (the sequence holds before the ramp, fail closed).")
 		"TRANSFER":
-			s += "The body in physics: trunk -> spine port -> despun drum (restrained on a chord while it syncs with ring A) -> feet first through the door and elbows to the run top. " + WfInput.keys("{player.move_back}/{player.move_forward} move, {demo.autoplay} autoplay") + "; drum sync time OPEN (MEC-019).\n"
+			s += "The body in physics: trunk -> spine port -> despun drum (restrained on a chord while it syncs with ring A) -> feet first through the door and elbows to the run top. " + (touch_hint(name) if touch else WfInput.keys("{player.move_back}/{player.move_forward} move, {demo.autoplay} autoplay")) + "; drum sync time OPEN (MEC-019).\n"
 			s += "Interlock (46 DYN-027): " + _vest().hud_text(ring_w()).strip_edges() + "  [pressure shown equalized: PROTOTYPE input, threshold OPEN]"
 		"DESCENT":
 			var tl := tour_last()
-			s += "Crew tube A1, hand over hand on the real rungs at the review pace (LADDER technique, PROTOTYPE); " + WfInput.keys("{player.move_back} down, {player.move_forward} up, let go to stop.\n")
+			s += "Crew tube A1, hand over hand on the real rungs at the review pace (LADDER technique, PROTOTYPE); " + (touch_hint(name) + "\n" if touch else WfInput.keys("{player.move_back} down, {player.move_forward} up, let go to stop.\n"))
 			s += "r %.2f m  hand load %.0f N (measured, no limit sourced)  rungs in reach %d  %s" % [tl.get("r", 0.0), (tl.get("hand_n", Vector3.ZERO) as Vector3).length(),
 				tl.get("reach", 0), "standing on the landing-well deck" if host.body_tour.arrived else ""]
-		"GRAVITY": s += WfInput.keys("Ring A deck in spin gravity: {player.move_forward} {player.move_left} {player.move_back} {player.move_right} walk, {body.drop_tool} drop the object (Coriolis). Display of the sourced spin, not a comfort limit.")
+		"GRAVITY": s += "Ring A deck in spin gravity: " + (touch_hint(name) if touch else WfInput.keys("{player.move_forward} {player.move_left} {player.move_back} {player.move_right} walk, {body.drop_tool} drop the object (Coriolis).")) + " Display of the sourced spin, not a comfort limit."
 		"ARRIVAL": s += "Ring A sector 1, HABITATION: the end of the M7 production reference section (port, entry, trunk, drum, tube, sector).\nTRAINING ROUTE: ring A is no certified rescue route (15!A221); transfer closures PROTOTYPE (I5/Q46 OPEN)."
 		"INSPECT":
 			var on: bool = production_nodes.size() > 0 and production_nodes[0].visible
-			s += ("Production layer %s (" + str(host.manifest.production.maturity) + ", S&E 48!A23; visual acceptance, not engineering GO) over the same engineering geometry, seen from the entry chamber stop (M7.ENT; its stop card shows the boarding configuration, DOCKED). %d meshes: %s.\n" + WfInput.keys("{demo.pause} holds it on") + ("." if WfInput.compact() else WfInput.keys("; {ui.cancel} inspector for picking."))) % [
+			s += ("Production layer %s (" + str(host.manifest.production.maturity) + ", S&E 48!A23; visual acceptance, not engineering GO) over the same engineering geometry, seen from the entry chamber stop (M7.ENT; its stop card shows the boarding configuration, DOCKED). %d meshes: %s.\n" + (touch_hint(name) if touch else WfInput.keys("{demo.pause} holds it on")) + ("." if WfInput.compact() else WfInput.keys("; {ui.cancel} inspector for picking."))) % [
 				"ON" if on else "OFF (engineering + route fit-out)", production_nodes.size(), production_summary()]
-	s += "\n" + (WfInput.keys("Done: {ui.confirm} for the next chapter.") if done and chapter < CHAPTERS.size() - 1 else ("End of the demonstrator." if done else ""))
+	s += "\n" + (("Done: tap Next." if touch else WfInput.keys("Done: {ui.confirm} for the next chapter.")) if done and chapter < CHAPTERS.size() - 1 else ("End of the demonstrator." if done else ""))
 	if not WfInput.compact():
 		s += WfInput.keys("   {ui.confirm} next · {demo.pause} pause · {demo.autoplay} autoplay · {body.view} body / first person · {ui.cancel} inspector")
 	return s.strip_edges(false, true)
+
+## MOB-001: the chapter's instruction on a touch screen, in the words of its on-screen controls (touch_state).
+func touch_hint(name: String) -> String:
+	match name:
+		"MICROGRAVITY": return "Grab a rail, drag on the right to aim, Push off; Grab the next rail to stop."
+		"MODE": return "Fault: occupant marks one not secured; the sequence holds before the ramp (fail closed)."
+		"TRANSFER": return "Stick: move along the line; Auto plays it"
+		"DESCENT": return "Stick up or down to climb; let go to stop."
+		"GRAVITY": return "stick to walk, Drop object to see Coriolis."
+		"INSPECT": return "Hold layer on keeps it"
+	return ""
 
 func look_label() -> String:
 	return "drag on the right" if WfInput.device == "touch" else "right-drag"

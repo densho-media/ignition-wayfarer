@@ -219,15 +219,40 @@ func _compact_layout() -> void:
 	card.custom_minimum_size.x = w
 	card_body.custom_minimum_size.x = w - 30.0
 	toast_label.custom_minimum_size.x = w - 20.0
-	# beside the chapter text (top left) under the touch utility row (top right); centred on a narrow (upright) phone
-	stack.set_anchors_and_offsets_preset(Control.PRESET_CENTER if narrow else Control.PRESET_TOP_RIGHT)
-	stack.grow_horizontal = Control.GROW_DIRECTION_BOTH if narrow else Control.GROW_DIRECTION_BEGIN
-	stack.grow_vertical = Control.GROW_DIRECTION_BOTH if narrow else Control.GROW_DIRECTION_END
-	if not narrow:
-		stack.offset_top = float(I.touch.safe[1]) + 76.0
-		stack.offset_right = -(float(I.touch.safe[2]) + 12.0)
+	# the first free place: the right column, then the centre, then the left; never over a panel or a touch control. With no
+	# room (a phone held sideways with the systems card and the map open) the card waits, hidden, until a panel closes.
+	stack.set_anchors_preset(Control.PRESET_TOP_LEFT)
+	stack.size = Vector2.ZERO
+	var at := _free_spot(stack.get_combined_minimum_size(), vs, narrow)
+	stack.modulate.a = 0.0 if at == Vector2.INF else 1.0
+	if at != Vector2.INF:
+		stack.position = at
 	panel.custom_minimum_size.x = minf(720.0, vs.x - 24.0)
 	scroll.custom_minimum_size.x = minf(680.0, vs.x - 64.0)
+
+## Slides a box of size down each column from the top until it clears every occupied rect; INF if no place is free.
+func _free_spot(size: Vector2, vs: Vector2, narrow: bool) -> Vector2:
+	var safe: Array = I.touch.safe
+	var taken: Array = I.touch.occupied()
+	var bottom := vs.y - float(safe[3]) - 8.0
+	var right := vs.x - float(safe[2]) - 12.0 - size.x
+	var xs := [(vs.x - size.x) * 0.5] if narrow else [right, (vs.x - size.x) * 0.5, float(safe[0]) + 12.0]
+	for x in xs:
+		var y := float(safe[1]) + 12.0
+		while y + size.y <= bottom:
+			var r := Rect2(Vector2(x, y), size).grow(4.0)
+			var hit := -1.0
+			for o in taken:
+				if r.intersects(o):
+					hit = maxf(hit, (o as Rect2).end.y)
+			if hit < 0.0:
+				return Vector2(x, y)
+			y = hit + 8.0
+	return Vector2.INF
+
+## The lesson card is on screen (not waiting for room).
+func card_shown() -> bool:
+	return card.visible and stack.modulate.a > 0.0
 
 func _process(dt: float) -> void:
 	if I.compact():

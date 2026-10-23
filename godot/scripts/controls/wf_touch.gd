@@ -25,6 +25,7 @@ const HELP := {"demo.autoplay": "Let the chapter's body actions run by themselve
 const MOUSE_AFTER_TOUCH_MS := 700   # a real mouse click this soon after a touch at the same place is the browser's echo of it
 # Mobile 3-D resolution (PROTOTYPE display budget, docs/wayfarer-mobile-controls-plan.md §8): rendered pixels per CSS pixel, the
 # bounds of the adaptive scale and the frame-rate band it keeps. Rendering only: no geometry, material or simulation input changes.
+const PAGE_ROW := Vector2(232.0, 58.0)    # the web page's Exit and Full screen buttons over the canvas (shell.html, top left)
 const RENDER_DENSITY := 1.25
 const SCALE_MIN := 0.35
 const FPS_LOW := 24.0
@@ -317,6 +318,19 @@ func _button_at(p: Vector2) -> Dictionary:
 		if (b.node as Control).is_visible_in_tree() and _rect(b).has_point(p):
 			return b
 	return {}
+
+## Screen rects (UI px) already taken: the page's buttons, the touch buttons and the panels the scene names (state.panels).
+## Transient cards (the lesson card) place themselves clear of these.
+func occupied() -> Array:
+	var out := [Rect2(Vector2(safe[0], safe[1]), PAGE_ROW)] if I.compact() else []
+	if shown:
+		for b in buttons:
+			if (b.node as Control).is_visible_in_tree():
+				out.append(_rect(b))
+	for n in state.get("panels", []):
+		if n is Control and (n as Control).is_visible_in_tree():
+			out.append((n as Control).get_global_rect())
+	return out
 
 func _rect(b: Dictionary) -> Rect2:
 	return (b.node as Control).get_global_rect()
