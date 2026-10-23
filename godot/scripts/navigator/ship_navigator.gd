@@ -247,11 +247,12 @@ func _layout_compact(size: Vector2) -> void:
 		panel.size = Vector2.ZERO
 		panel.position = Vector2(size.x - float(safe[2]) - 12.0 - panel.get_combined_minimum_size().x, top)
 	panel.size = panel.get_combined_minimum_size()
-	var cw := clampf(size.x * 0.56 - float(safe[0]), 240.0, 520.0)
+	var cw := clampf(size.x * 0.56 - float(safe[0]), 240.0, 520.0) if size.x >= 640.0 else size.x - float(safe[0]) - float(safe[2]) - 48.0
 	card_label.custom_minimum_size.x = cw
 	card.size = Vector2.ZERO
 	card.size = card.get_combined_minimum_size()
-	card.position = Vector2(float(safe[0]) + 12.0, float(safe[1]) + 12.0) if level != 2 else Vector2(size.x - float(safe[2]) - 12.0 - card.size.x, top)
+	# under the page's Exit and Full screen buttons (shell, top left), where the chapter text it replaces sits
+	card.position = Vector2(float(safe[0]) + 12.0, float(safe[1]) + 62.0) if level != 2 else Vector2(size.x - float(safe[2]) - 12.0 - card.size.x, top)
 	card.visible = card_page >= 0 and not space_shown()
 
 # ------------------------------------------------------------------------------------------------------------------------- world
