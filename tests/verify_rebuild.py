@@ -131,15 +131,15 @@ for name in ['Manual_Art_Sentinel','Unowned_GEN_Sentinel']:
         assert inspect(fixture,Path(temp)/'detail_ring.json')['assets']==targeted['assets']
         print('PASS joined detail rebuild on moving anchors; every other asset byte-identical',flush=True)
         # Independent ring assets (docs/MODULES.md, phase 3): a ring target rewrites its own ring and the detail on it, never the other ring,
-        # the habitat assembly or the other ring's detail.
+        # the habitat assembly, the vehicle (it sees the ring through the assembly's link) or the other ring's detail.
         for ring,other in (('HABITAT_B','HABITAT_A'),('HABITAT_A','HABITAT_B')):
-            excluded={f'WF_{ring}.blend','WF_WAYFARER_001.blend',*details_on(f'WF_{ring}')}
+            excluded={f'WF_{ring}.blend',*details_on(f'WF_{ring}')}
             unchanged={p:checksum(p) for p in assets.rglob('*.blend') if 'milestones' not in p.parts and p.name not in excluded}
             assert assets/f'subsystems/WF_{other}.blend' in unchanged and assets/'subsystems/WF_HABITAT.blend' in unchanged
             build(fixture,ring)
-            assert all(checksum(p)==h for p,h in unchanged.items()),f'{ring} build modified the other ring, the assembly or other assets'
+            assert all(checksum(p)==h for p,h in unchanged.items()),f'{ring} build modified the other ring, the assembly, the vehicle or other assets'
             assert inspect(fixture,Path(temp)/f'{ring}.json')['assets']==targeted['assets']
-        print('PASS ring A and ring B rebuild independently; the other ring, the assembly and their detail byte-identical',flush=True)
+        print('PASS ring A and ring B rebuild independently; the other ring, the assembly, the vehicle and their detail byte-identical',flush=True)
         relocated=Path(temp)/'relocated'
         shutil.copytree(fixture,relocated,ignore=shutil.ignore_patterns('milestones'))
         moved=inspect(relocated,Path(temp)/'moved.json')
@@ -171,7 +171,7 @@ for name in ['Manual_Art_Sentinel','Unowned_GEN_Sentinel']:
         run('--python',BUILD,'--','--root',fixture,success=False)
         assert all(checksum(p)==h for p,h in asset_hashes.items()),'Invalid inputs wrote asset files'
         print('PASS invalid input propagates nonzero exit before any asset mutation',flush=True)
-    report={'result':'PASS','tests':[f'save/reopen all {len(targeted["assets"])} production assets; the one vehicle file','simulation rig contract regenerated and checked','two identical-input builds','unique stable generated IDs','preserve ART and unowned GEN sentinels','exact backup of overwritten asset','targeted radiator rebuild leaves unrelated assets byte-identical','targeted hull rebuild leaves unrelated assets byte-identical','targeted Garden interior rebuild leaves unrelated assets byte-identical','ring A and ring B targets each leave the other ring, the habitat assembly and the other ring\'s detail byte-identical','relocated nested relative links','snapshot and source-map hashes','invalid spec fails CLI before asset writes','retired file (generated, empty ART) is moved to milestones by a full build','retired file holding an ART object aborts the build and stays byte-identical'],'production_assets_modified_by_tests':False}
+    report={'result':'PASS','tests':[f'save/reopen all {len(targeted["assets"])} production assets; the one vehicle file','simulation rig contract regenerated and checked','two identical-input builds','unique stable generated IDs','preserve ART and unowned GEN sentinels','exact backup of overwritten asset','targeted radiator rebuild leaves unrelated assets byte-identical','targeted hull rebuild leaves unrelated assets byte-identical','targeted Garden interior rebuild leaves unrelated assets byte-identical','ring A and ring B targets each leave the other ring, the habitat assembly, the vehicle and the other ring\'s detail byte-identical','relocated nested relative links','snapshot and source-map hashes','invalid spec fails CLI before asset writes','retired file (generated, empty ART) is moved to milestones by a full build','retired file holding an ART object aborts the build and stays byte-identical'],'production_assets_modified_by_tests':False}
     report_path.write_text(json.dumps(report,indent=2)+'\n')
     print(json.dumps(report,indent=2))
 

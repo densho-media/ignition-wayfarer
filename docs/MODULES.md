@@ -42,7 +42,8 @@ neither ring. The ring geometry comes from one parameterised generator (`revisio
 its own asset, rebuild, anchors and packs, but no second source of engineering values.
 
 Builds:
-- `--target HABITAT_A` rewrites ring A and the detail on it, never ring B or the assembly.
+- `--target HABITAT_A` rewrites ring A and the detail on it, never ring B, the assembly or the vehicle (it sees the ring through the
+  assembly's link, as with a detail target).
 - `HABITAT` rebuilds both rings and the assembly.
 - A sector-skin or interior change rebuilds both rings.
 

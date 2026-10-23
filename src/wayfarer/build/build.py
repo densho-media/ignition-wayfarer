@@ -22,7 +22,8 @@ HULL_FAMILY={'HULL'}
 # the drive control's toggles (saved off). Vehicles never link them directly.
 DEBUG_FAMILY=['DEBUG_MAGNETICS','DEBUG_SEPARATRICES','DEBUG_OPTICS']
 # One engineering asset per ring (docs/MODULES.md, WF-RING-A / WF-RING-B): built before HABITAT, the habitat assembly that links both
-# (and holds the whole-habitat rotor actions). A ring target rewrites only its own ring and the detail on it; HABITAT rebuilds all three.
+# (and holds the whole-habitat rotor actions). A ring target rewrites only its own ring and the detail on it (not the vehicle, which sees
+# the ring through the assembly's link); HABITAT rebuilds all three and the vehicle.
 RING_FAMILY=['HABITAT_A','HABITAT_B']
 # Production files that no longer exist (path under assets/wayfarer -> why). A full build moves each one that is still on disk
 # into its own milestones/ folder as <stem>_RETIRED_<UTC>.blend, after checking that nothing hand-made would be lost. Never deleted.
@@ -100,6 +101,14 @@ def build_detail(root,assets,s,assembly,spec_text,source_text,rebind=False):
     print('WF_DETAIL',name,len(c.objects)-len(imported),'generated',len(imported),'imported',len(authored),'adopted',flush=True)
 
 
+def build_one_subsystem(assets,name,s,spec_text,source_text,root):
+    path=assets/f'subsystems/WF_{name}.blend'
+    coll,c=begin(path,f'WF_{name}')
+    build_subsystem(name,c,s,assets)
+    detail.attach(c,s,assets,name,root)
+    save(path,coll,spec_text,source_text)
+
+
 def build(root=ROOT, target='all', rebind=False):
     s,_,spec_text,source_text=load(root)
     assets=root/'assets/wayfarer'
@@ -115,6 +124,15 @@ def build(root=ROOT, target='all', rebind=False):
     if set(names)<=set(details):
         # A detail-only change rewrites its own files: the host links them, and the vehicle sees them through that nested link.
         for n in names:build_detail(root,assets,s,details[n],spec_text,source_text,rebind)
+        modules.write(s,root);return
+    if set(names)<=set(RING_FAMILY):
+        # A ring target likewise rewrites its own ring asset and the detail on it: the habitat assembly links the ring, and the vehicle
+        # sees it through that nested link, so neither the other ring, the assembly nor the vehicle is rewritten.
+        rings=[x for x in RING_FAMILY if x in names]
+        for a in details.values():
+            if modules.anchor_host(modules.assemblies(s['detail_packs'])[a]['anchor']) in rings:
+                build_detail(root,assets,s,a,spec_text,source_text)
+        for name in rings:build_one_subsystem(assets,name,s,spec_text,source_text,root)
         modules.write(s,root);return
     if set(s['interior']['components'].values())!={c for c in COMPONENTS if c.startswith('INTERIOR_')}:raise ValueError('interior.components must match the INTERIOR_ components')
     dependencies={'NOZZLE':['PROPULSION'],'RADIATOR':['THERMAL'],'RING_SECTOR':RING_FAMILY}
@@ -141,12 +159,7 @@ def build(root=ROOT, target='all', rebind=False):
         build_component(name,c,s)
         detail.attach(c,s,assets,name,root)
         save(path,coll,spec_text,source_text)
-    for name in systems:
-        path=assets/f'subsystems/WF_{name}.blend'
-        coll,c=begin(path,f'WF_{name}')
-        build_subsystem(name,c,s,assets)
-        detail.attach(c,s,assets,name,root)
-        save(path,coll,spec_text,source_text)
+    for name in systems:build_one_subsystem(assets,name,s,spec_text,source_text,root)
     # One vehicle file: every non-debug subsystem is linked once; configurations are presets posed on its linked controls.
     asset_name=s['vehicle']['asset']
     path=assets/(asset_name+'.blend')

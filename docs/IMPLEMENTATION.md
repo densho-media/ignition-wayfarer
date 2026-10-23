@@ -17,7 +17,7 @@ python3 -m unittest discover -s tests -k view_factor   # single test by name sub
 # Full build: components → subsystems → the vehicle (then retires listed files, see RETIRED in build.py)
 /snap/bin/blender --background --factory-startup --python-exit-code 1 --python src/wayfarer/build/build.py
 # Targeted: --target NOZZLE|RADIATOR|RING_SECTOR|INTERIOR_HABITATION|INTERIOR_WORK|INTERIOR_GARDEN (rebuilds dependents + the vehicle), a subsystem name (e.g. HULL), or vehicle
-#   --target HABITAT_A|HABITAT_B rebuilds one ring asset and its detail (never the other ring); HABITAT rebuilds both rings and the assembly
+#   --target HABITAT_A|HABITAT_B rebuilds one ring asset and its detail only (not the other ring, the assembly or the vehicle); HABITAT rebuilds both rings, the assembly and the vehicle
 #   --target CHARACTERS rebuilds only assets/characters/WF_CHAR_INDUCTION.blend (IND-001; also rebuilt by all and SERVICE)
 /snap/bin/blender --background --factory-startup --python-exit-code 1 --python src/wayfarer/build/build.py -- --target RADIATOR
 
