@@ -362,6 +362,21 @@ Before-state recorded on `main` `80a6cb2`, whose saved assets matched `baseline_
   `m8_readback` is identical in every field (PASS, 10 objects, 212,256 triangles, r 45.0043 m, 0 clashes against 440 engineering meshes,
   forward-most 0.03 m aft of the skin). Equivalence probe: `tests/detail_equivalence.py` (evaluated world vertices, properties, materials,
   modifiers). Node IDs hash the instance lineage; Godot binds through the manifest's component IDs.
+- **Integrated gate:** full pipeline PASS (`runs/20261023T081840Z-pipeline`: 150 unit tests, whole-ship inspection with every group,
+  0 unexpected geometry changes), the 7 relocations PASS again on its fingerprint, accepted as `baseline_modules_phase2`; `assembly validate`
+  PASS for all six packs; `tests/verify_detail_authoring.py` PASS.
+- **Timing** (idle, one Blender process each, 2026-10-23):
+
+  | Edit | Before (host target, assembly inside the host) | After |
+  | --- | --- | --- |
+  | M7.XFR / M7.SPK | `--target HABITAT` 32.5 s | `DETAIL_M7_SPK+DETAIL_M7_XFR` 5.1 s |
+  | M7.EXT.PORT / M7.ENT / M7.TRK | `SERVICE` 37.1 s, `CREW_TRANSFER` 35.7 s | `DETAIL_M7_ENT+DETAIL_M7_EXT_PORT+DETAIL_M7_TRK` 11.1 s |
+  | M8.BROW.AFT / M8.CROWN.RIM | `FORWARD_SHIELD` 30.6 s | `DETAIL_M8_BROW_AFT+DETAIL_M8_CROWN_RIM` 6.8 s, rewriting exactly its two files |
+  | M7.RA1 (phase 1) | `HABITAT` | `DETAIL_M7_RA1` 5.5 s |
+
+  The host targets cost what they did (HABITAT 31.2 s, SERVICE 37.1 s, CREW_TRANSFER 36.3 s, FORWARD_SHIELD 32.5 s) because they also
+  rebuild their details; a full `build.py` is 61.4 s. A cosmetic edit of any pack now selects only its detail targets (`checks`), where an
+  edit of a multi-assembly pack fell back to a full build until the joined targets.
 - **Two faults found and fixed on the way:** the forward inspection read only the forward-shield file, so it now reads the detail assets
   linked into it (and skips the link carriers); `m8_exterior.py` restored the production materials by name, which reached only one of
   the per-file copies (the "on" stills differed until it addressed them per datablock).
