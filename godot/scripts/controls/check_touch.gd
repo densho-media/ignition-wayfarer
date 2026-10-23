@@ -85,7 +85,7 @@ func run(h: Node) -> Dictionary:
 	DirAccess.remove_absolute(ProjectSettings.globalize_path(I.profile_path))
 	I.force_prompts = true
 	I.load_profile()
-	host.get_window().size = Vector2i(1280, 800)          # the headless window starts at 64 x 64
+	host.get_window().size = Vector2i(1280, 592)          # the headless window starts at 64 x 64; 844 x 390 UI px, a phone held sideways
 	T.primary = true                                     # a touch-first device; the UI density gives a phone-sized layout
 	T.dpr = 1280.0 / 844.0
 	I.set_device("touch")
@@ -213,6 +213,10 @@ func run(h: Node) -> Dictionary:
 	_ok("button_while_stick_held", host.body_tour.drops == drops + 1 and I.strength("player.move_forward") > 0.5, host.body_tour.drops)
 	await tap_button("touch.help")
 	_ok("help_modal_releases_stick", T.mode == "help" and host.get_tree().paused and I.virtual.is_empty() and T.claims.size() <= 1, [T.mode, I.virtual])
+	await frames(2)
+	var screen := Rect2(Vector2.ZERO, host.get_viewport().get_visible_rect().size)
+	var off: Array = T.panel_buttons.get_children().filter(func(b): return b is Button and not screen.encloses(b.get_global_rect())).map(func(b): return b.text)
+	_ok("help_buttons_on_screen", off.is_empty(), off)
 	var close := panel_button("Close")
 	at = close.get_global_rect().get_center() if close else Vector2.ZERO
 	touch(4, at, true)

@@ -355,6 +355,8 @@ func _process(dt: float) -> void:
 		_stick_release()
 	if str(state.get("move", "")) == "" and stick_touch >= 0:
 		_stick_release()                             # the scene can no longer move the body: release at once
+	if mode != "":
+		_layout_panel()                              # flow rows settle a frame after the width; a rotation re-fits the panel
 	if welcome_due() and not state.is_empty():
 		open_welcome()                               # once the scene's controls exist, before the visitor needs them
 	_refresh(false)
@@ -455,16 +457,17 @@ func _build_panel() -> void:
 	add_child(dim)
 	panel.add_theme_stylebox_override("panel", WfReviewGuide._box(Color("17181a"), WfReviewGuide.C_NEXT, 12, 18))
 	add_child(panel)
+	# title, the text (scrolls on a short screen) and the buttons (always on screen: Close never scrolls away)
+	panel_col.add_theme_constant_override("separation", 10)
+	panel.add_child(panel_col)
+	panel_col.add_child(panel_title)
 	var scroll := ScrollContainer.new()
 	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	scroll.name = "scroll"
-	panel.add_child(scroll)
-	panel_col.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	panel_col.add_theme_constant_override("separation", 10)
-	scroll.add_child(panel_col)
+	panel_col.add_child(scroll)
+	scroll.add_child(panel_body)
 	for l in [panel_title, panel_body]:
 		l.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-		panel_col.add_child(l)
 	panel_title.add_theme_font_size_override("font_size", 20)
 	panel_title.add_theme_color_override("font_color", WfReviewGuide.C_TITLE)
 	panel_body.add_theme_font_size_override("font_size", 15)
@@ -477,26 +480,23 @@ func _build_panel() -> void:
 
 func _layout_panel() -> void:
 	var vs := _size()
-	var w := minf(620.0, vs.x - safe[0] - safe[2] - 2.0 * EDGE)
-	panel_title.custom_minimum_size.x = w - 40.0
-	panel_body.custom_minimum_size.x = w - 40.0
-	panel_buttons.custom_minimum_size.x = w - 40.0
-	var scroll: ScrollContainer = panel.get_node("scroll")
-	scroll.custom_minimum_size = Vector2(w - 36.0, minf(panel_col.get_combined_minimum_size().y, vs.y - safe[1] - safe[3] - 2.0 * EDGE - 40.0))
+	var w := minf(640.0, vs.x - safe[0] - safe[2] - 2.0 * EDGE)
+	for c in [panel_title, panel_body, panel_buttons]:
+		c.custom_minimum_size.x = w - 40.0
+	var scroll: ScrollContainer = panel_col.get_node("scroll")
+	var top: float = safe[1] + (60.0 if primary else EDGE)      # under the page's Exit and Full screen buttons
+	var room: float = vs.y - top - safe[3] - EDGE - 36.0 - 20.0 - panel_title.get_combined_minimum_size().y - panel_buttons.get_combined_minimum_size().y
+	scroll.custom_minimum_size = Vector2(w - 36.0, clampf(panel_body.get_combined_minimum_size().y, 0.0, maxf(room, 40.0)))
 	panel.size = Vector2(w, 0)
 	panel.size = panel.get_combined_minimum_size()
-	var top: float = safe[1] + (60.0 if primary else EDGE)      # under the page's Exit and Full screen buttons
-	if panel.size.y > vs.y - top - safe[3] - EDGE:
-		scroll.custom_minimum_size.y = maxf(120.0, vs.y - top - safe[3] - EDGE - 40.0)
-		panel.size = panel.get_combined_minimum_size()
-	panel.position = Vector2((vs.x - panel.size.x) / 2.0, maxf(top, (vs.y - panel.size.y) / 2.0))
+	panel.position = Vector2((vs.x - panel.size.x) / 2.0, maxf(top, (vs.y - panel.size.y - safe[3]) / 2.0))
 
 func _panel_button(text: String, f: Callable, primary_role := false) -> void:
 	var b := Button.new()
 	b.text = text
 	b.focus_mode = Control.FOCUS_NONE
-	b.custom_minimum_size = Vector2(0, TARGET)
-	b.add_theme_font_size_override("font_size", 16)
+	b.custom_minimum_size = Vector2(0, 46.0)                  # ≥ 44 pt
+	b.add_theme_font_size_override("font_size", 15)
 	var c := WfReviewGuide.C_NEXT if primary_role else Color("5F5E5A")
 	for st in ["normal", "hover", "pressed"]:
 		b.add_theme_stylebox_override(st, WfReviewGuide._box(Color("2C2D31") if st != "normal" else Color("232427"), c, 8, 12))
