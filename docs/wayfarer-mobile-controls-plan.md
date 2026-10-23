@@ -263,6 +263,15 @@ claimed for every device. The after-measurements are in §11.
   screenshot. The journey now runs after the equivalence session. Run 39926690587 on `84c43a8` passed: the vehicle
   build (geometry diff empty), the unit tests, all 57 browser checks, the 68-check equivalence and the touch journey. The
   browser check took 31 minutes; splitting it into separate desktop and touch jobs is a follow-up (TODO P05).
+- **Review fixes and integration.**
+  - The lesson card takes the first free place clear of the systems card, the map, the chapter text, the page buttons and
+    the touch controls. On a sideways phone with the systems card and the map both open, it waits until one closes.
+  - The full map sits under the page buttons.
+  - The chapter text uses short touch wording.
+  - `--check-touch` adds both at phone sideways, upright and tablet sizes (32 checks).
+  - Merged with `main` `f1e892b` (MOD-003..008). Run 39937720204 on `894e013` passed: geometry diff against
+    `baseline_modules_phase2` empty, the native 68 checks and the 5,438-frame recording identical in the browser, and 57 of
+    57 browser checks including the touch journey.
 
 **Screenshots** (local, `runs/touch-only/`, `runs/journey/`):
 - welcome;
