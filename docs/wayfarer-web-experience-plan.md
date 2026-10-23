@@ -142,8 +142,37 @@ Measured 2026-10-22 in Claude Code cloud (4 vCPU, no GPU):
 - Viewer export: 59 s.
 - Play build: 168 s, of which DOCKED export 46 s, EVA route 10 s, import 9 s, native check suite 65 s, native recording
   about 22 s, Web export 7 s and Linux export 4 s.
-- `web_check.py`: 13.9 min, most of it the two equivalence runs and software rendering.
+- `web_check.py`: 13.3 min with the previous sequential walk, 7.4 min now (same site, 37/37 both times). Under software WebGL every
+  synthetic input event waits for a frame of seconds, so drags and touches now send 3 moves instead of 12 and 10, and each
+  step waits 2 frames instead of 3: viewer 221 → 202 s, phone 134 → 66 s. The two equivalence runs (277 s) now run in a
+  second Chrome alongside the walk and finish before it does. In CI (run 39788317599, `e1230a9`) the check took 319 s, against
+  792 s and 998 s on the two runs before; the build job took 8.8 min, against 18.7 and 23.8 min. Blender now comes from a
+  cached unpacked directory: 22 s for the install step on the first (cache-filling) run, against 68 s and 146 s.
+- Two builds from the same inputs give byte-identical files (viewer GLB and labels, three.js, Godot engine, shell, staged
+  Godot project), except the Godot `.pck` and the files that name it. Skipping an unchanged Enter Wayfarer therefore has to be
+  keyed on the staged project's inputs, not on the pack. With that reuse (`--reuse-play`), a rebuild from unchanged play
+  inputs took 128 s instead of 261 s locally, and the check 423 s instead of 449 s (36/36, with the equivalence result carried;
+  play files byte-identical). A wrong key, a changed byte in the pack, a failed equivalence test or another native zip each
+  refuse reuse.
 - The first CI run also downloads the 1.28 GB Godot template archive once per cache key.
+
+**Live site** (first WEB-002 deploy, `b1db258`, release `20261022-b1db258`, run 39780238848; Google Chrome 156 headless,
+SwiftShader, on the GitHub runner). The live browser check passed 35/35: everything except the two equivalence runs, which ran
+in the build job (68/68, 5,438 frames). Start page 9.3 kB transferred; viewer ready 2.6 s; Godot running 7.4 s after Start.
+Pages sends gzip for every file below; there are no custom headers, and every file has `Cache-Control: max-age=600`:
+
+| File | Content-Type | On the wire | File |
+| --- | --- | --- | --- |
+| `/`, `site.css` | text/html, text/css | 1.7 kB, 1.2 kB | 3.3 kB, 3.3 kB |
+| viewer GLB | model/gltf-binary | 2.91 MB | 5.85 MB |
+| `draco_decoder.wasm` | application/wasm | 64 kB | 192 kB |
+| engine `.wasm` | application/wasm | 10.25 MB | 39.51 MB |
+| engine `.js` | application/javascript | 69 kB | 280 kB |
+| Demonstrator 01 `.pck` | application/octet-stream | 18.79 MB | 23.11 MB |
+
+Enter Wayfarer is therefore about 29.1 MB on the wire, and Explore Ship about 3.2 MB. CI wall time on main with cached
+toolchains: 18.7 min for the build job (pipeline 51 s, export and Godot 183 s, browser check 792 s), then 0.5 min deploy,
+6.5 min live verification and 0.2 min release.
 
 **Optimization record.**
 - *Measured bottleneck:* the Enter Wayfarer download. 63% of it is the stock engine (`.wasm`, identical for every project).

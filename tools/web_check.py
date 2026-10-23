@@ -9,7 +9,7 @@ and walks it as a visitor does, recording every request:
   switching  Exit back to the start page, Explore Ship again; page-renderer memory returns to the start-page level (Chrome runs
              with the back-forward cache off, so this measures what the pages release)
   equivalence  Demonstrator 01's 68-check suite and its whole-journey autoplay recording, drawing off, must match the native build
-             of the same package check by check and frame by frame
+             of the same package check by check and frame by frame (a second browser, alongside the walk)
   phone      the start page and the viewer at 390 x 844 with one-finger orbit and pinch zoom; the review page renders
 Screenshots, metrics and check.json go to --out; --record writes the summary into the site's release.json. It checks behaviour,
 loading isolation and transfer sizes, not frame rates on real hardware. The viewer's camera damping is switched off before input.
@@ -132,14 +132,14 @@ class Page:
             time.sleep(0.25)
         return False
 
-    def frames(self, n=3):
+    def frames(self, n=2):
         """Let the render loop run (software WebGL on a CI runner can take seconds per frame)."""
         self.js(f'new Promise(r => {{ let k = {n}; const f = () => --k ? requestAnimationFrame(f) : r(1); requestAnimationFrame(f); }})', timeout=180)
 
     def mouse(self, kind, x, y, button='none', buttons=0, **extra):
         self.send('Input.dispatchMouseEvent', {'type': kind, 'x': x, 'y': y, 'button': button, 'buttons': buttons, **extra})
 
-    def drag(self, start, end, button='left', steps=12):
+    def drag(self, start, end, button='left', steps=3):
         mask = {'left': 1, 'right': 2, 'middle': 4}[button]
         self.mouse('mouseMoved', *start)
         self.mouse('mousePressed', *start, button=button, buttons=mask, clickCount=1)
@@ -256,6 +256,55 @@ RAF_FPS = ('new Promise(r => { const t0 = performance.now(); let n = 0; const ts
            'requestAnimationFrame(f); })')
 
 
+def run_equivalence(url, play_release, binary, sandbox, out, play_seconds, record_check, metrics):
+    """Demonstrator 01 in the Web build against the native build of the same package (web_play.build): the 68-check suite and the
+    whole journey in autoplay, both at a fixed frame rate with drawing off (--disable-render-loop: logic, physics and input step
+    exactly as when drawn; the walk covers rendering). Runs in its own browser, alongside the walk: it is CPU-bound Godot logic,
+    the walk mostly waits on software-rendered frames."""
+    native = play_release.get('native_reference') or {}
+    profile = tempfile.mkdtemp(prefix='wf-web-equivalence-')
+    log = open(out / 'chrome-equivalence.log', 'w')
+    chrome = Chrome(binary, profile, log, sandbox)
+    try:
+        page, traffic = Page(chrome), Traffic(chrome)
+        page.send('Emulation.setDeviceMetricsOverride', {'width': 640, 'height': 400, 'deviceScaleFactor': 1, 'mobile': False})
+
+        def browser_run(args, prefix):
+            mark = traffic.mark()
+            t0 = time.monotonic()
+            query = '&'.join(f'arg={a}' for a in ('--disable-render-loop', *args))
+            page.send('Page.navigate', {'url': url + play_release['page'] + '?' + query})
+            line = traffic.wait_console(prefix, mark, play_seconds)
+            lines = traffic.since(mark)[1]
+            errors = [text for kind, text in lines if text.startswith('ERROR')]
+            return (json.loads(line.split(' ', 1)[1]) if line else None), errors, round(time.monotonic() - t0, 1)
+
+        demo, errors, seconds = browser_run(['--fixed-fps', '60', '--', '--check-demo'], 'WF_GODOT_DEMO ')
+        web_ok = {c['id']: c['ok'] for c in (demo or {}).get('checks', [])}
+        differ = sorted(k for k in set(web_ok) | set(native.get('ok_by_check', {})) if web_ok.get(k) != native.get('ok_by_check', {}).get(k))
+        record_check('play: Demonstrator 01 check suite passes in the browser as natively', demo and demo.get('result') == 'PASS'
+                     and not differ and not errors, checks=len(web_ok), native_checks=native.get('checks'), differ=differ[:8],
+                     errors=errors[:3], seconds=seconds)
+        metrics['check_suite'] = {'web': demo and {'result': demo.get('result'), 'checks': len(web_ok),
+                                                    'failed': [k for k, ok in web_ok.items() if not ok]},
+                                  'native': {k: native.get(k) for k in ('result', 'checks', 'failed')}, 'differ': differ, 'seconds': seconds}
+        web, errors, seconds = browser_run(['--fixed-fps', '30', '--', '--autoplay', '--record-exit'], 'WF_DEMO_RECORDING ')
+        rec = native.get('recording')
+        keys = ('result', 'chapters', 'frames', 'flips', 'display_s')
+        same = bool(web and rec) and all(web.get(k) == rec.get(k) for k in keys)
+        record_check('play: whole-journey autoplay recording matches the native build', same and web['result'] == 'PASS' and not errors,
+                     web=web, native=rec, errors=errors[:3], seconds=seconds)
+        metrics['equivalence'] = {'web': web, 'native': rec, 'seconds': seconds}
+    except Exception as error:
+        log.flush()
+        record_check('play: equivalence browser session', False, error=repr(error),
+                     chrome_log=(out / 'chrome-equivalence.log').read_text(errors='replace').splitlines()[-8:])
+    finally:
+        chrome.close()
+        shutil.rmtree(profile, ignore_errors=True)
+        log.close()
+
+
 def check(site, out, binary, sandbox=True, record=False, play_seconds=900, live=None, recording=True):
     """site: the local site directory, or None with live=<deployed URL ending in />, which reads release.json from there."""
     out.mkdir(parents=True, exist_ok=True)
@@ -278,6 +327,16 @@ def check(site, out, binary, sandbox=True, record=False, play_seconds=900, live=
         if os.environ.get('GITHUB_ACTIONS') and not ok:
             print(f'::error title=web check::{name} {json.dumps(detail)}'.replace('\n', ' '), flush=True)     # public run annotation
 
+    side, carried = None, (play_release or {}).get('reused_from')
+    if play_release and recording and carried:
+        # The play files are byte-identical to a verified release with the same inputs (web_play.reusable): its browser-vs-native
+        # result holds for them. The walk below still boots and plays them.
+        record_check(f"play: browser-vs-native equivalence carried from release {carried['release']} (same play files)",
+                     carried['equivalence'].get('result') == 'PASS', release=carried['release'], git_revision=carried['git_revision'],
+                     note=carried['equivalence'].get('note'))
+    elif play_release and recording:
+        side = threading.Thread(target=run_equivalence, args=(url, play_release, binary, sandbox, out, play_seconds, record_check, metrics))
+        side.start()
     profile = tempfile.mkdtemp(prefix='wf-web-check-')
     log = open(out / 'chrome.log', 'w')
     # The back-forward cache stays off so the memory check measures what the pages release, not what Chrome chooses to keep.
@@ -481,43 +540,6 @@ def check(site, out, binary, sandbox=True, record=False, play_seconds=900, live=
                                  'note': 'page-renderer RSS on the start page after each experience, settled up to 30 s; Chrome runs with '
                                          'the back-forward cache off (with it on, Chrome keeps left pages until it evicts them)'}
 
-            # The deterministic recording: autoplay from GRAVITY (spin gravity walk and Coriolis drop, Jolt) to INSPECT at a fixed
-            # 30 fps, compared with the same run of the native build on the same package (web_play.build).
-        if play_release and recording:
-            # Demonstrator 01 in the Web build against the native build of the same package (web_play.build): the 68-check suite and the
-            # whole journey in autoplay, both at a fixed frame rate with drawing off (--disable-render-loop: logic, physics and input
-            # step exactly as when drawn; the interactive run above covers rendering).
-            native = play_release.get('native_reference') or {}
-            page.send('Emulation.setDeviceMetricsOverride', {'width': 640, 'height': 400, 'deviceScaleFactor': 1, 'mobile': False})
-
-            def browser_run(args, prefix):
-                mark = traffic.mark()
-                t0 = time.monotonic()
-                query = '&'.join(f'arg={a}' for a in ('--disable-render-loop', *args))
-                page.send('Page.navigate', {'url': url + play_release['page'] + '?' + query})
-                line = traffic.wait_console(prefix, mark, play_seconds)
-                lines = traffic.since(mark)[1]
-                errors = [text for kind, text in lines if text.startswith('ERROR')]
-                return (json.loads(line.split(' ', 1)[1]) if line else None), errors, round(time.monotonic() - t0, 1)
-
-            demo, errors, seconds = browser_run(['--fixed-fps', '60', '--', '--check-demo'], 'WF_GODOT_DEMO ')
-            web_ok = {c['id']: c['ok'] for c in (demo or {}).get('checks', [])}
-            differ = sorted(k for k in set(web_ok) | set(native.get('ok_by_check', {})) if web_ok.get(k) != native.get('ok_by_check', {}).get(k))
-            record_check('play: Demonstrator 01 check suite passes in the browser as natively', demo and demo.get('result') == 'PASS'
-                         and not differ and not errors, checks=len(web_ok), native_checks=native.get('checks'), differ=differ[:8],
-                         errors=errors[:3], seconds=seconds)
-            metrics['check_suite'] = {'web': demo and {'result': demo.get('result'), 'checks': len(web_ok),
-                                                        'failed': [k for k, ok in web_ok.items() if not ok]},
-                                      'native': {k: native.get(k) for k in ('result', 'checks', 'failed')}, 'differ': differ, 'seconds': seconds}
-            web, errors, seconds = browser_run(['--fixed-fps', '30', '--', '--autoplay', '--record-exit'], 'WF_DEMO_RECORDING ')
-            rec = native.get('recording')
-            keys = ('result', 'chapters', 'frames', 'flips', 'display_s')
-            same = bool(web and rec) and all(web.get(k) == rec.get(k) for k in keys)
-            record_check('play: whole-journey autoplay recording matches the native build', same and web['result'] == 'PASS' and not errors,
-                         web=web, native=rec, errors=errors[:3], seconds=seconds)
-            metrics['equivalence'] = {'web': web, 'native': rec, 'seconds': seconds}
-            page.send('Emulation.clearDeviceMetricsOverride')
-
         # Phone: the start page and the viewer at 390 x 844 with touch.
         page.send('Emulation.setDeviceMetricsOverride', {'width': 390, 'height': 844, 'deviceScaleFactor': 2, 'mobile': True})
         page.send('Emulation.setTouchEmulationEnabled', {'enabled': True, 'maxTouchPoints': 5})
@@ -534,16 +556,16 @@ def check(site, out, binary, sandbox=True, record=False, play_seconds=900, live=
             page.screenshot(out / 'phone_threequarter.png')
             start = page.js(CAMERA)
             page.touch('touchStart', [(195, 420)])
-            for i in range(1, 11):
-                page.touch('touchMove', [(195 + 12 * i, 420)])
+            for i in range(1, 4):
+                page.touch('touchMove', [(195 + 40 * i, 420)])
             page.touch('touchEnd', [])
             page.frames()
             spun = page.js(CAMERA)
             record_check('phone: one-finger drag orbits', moved(start, spun, 'p') > 1 and moved(start, spun, 't') < 1e-3,
                          moved_m=round(moved(start, spun, 'p'), 2))
             page.touch('touchStart', [(165, 420), (225, 420)])
-            for i in range(1, 11):
-                page.touch('touchMove', [(165 - 8 * i, 420), (225 + 8 * i, 420)])
+            for i in range(1, 4):
+                page.touch('touchMove', [(165 - 27 * i, 420), (225 + 27 * i, 420)])
             page.touch('touchEnd', [])
             page.frames()
             pinch = page.js(CAMERA)
@@ -563,6 +585,8 @@ def check(site, out, binary, sandbox=True, record=False, play_seconds=900, live=
         record_check('browser session', False, error=repr(error), chrome_log=(out / 'chrome.log').read_text(errors='replace').splitlines()[-8:])
     finally:
         chrome.close()
+        if side:
+            side.join()
         if server:
             server.shutdown()
         shutil.rmtree(profile, ignore_errors=True)
@@ -579,7 +603,9 @@ def check(site, out, binary, sandbox=True, record=False, play_seconds=900, live=
         release['tests'] = {'viewer': summary(group(('viewer', 'phone'))), 'isolation': summary(group(('start', 'play launcher', 'switching'))),
                             'play': summary(group(('play',))), 'all': summary(results), 'metrics': metrics}
         equivalence = [r for r in results if r['check'].startswith(('play: Demonstrator 01 check suite', 'play: whole-journey'))]
-        if equivalence:
+        if carried and recording:
+            release['tests']['equivalence'] = {**carried['equivalence'], 'carried_from': carried['release']}
+        elif equivalence:
             eq, suite = metrics.get('equivalence') or {}, metrics.get('check_suite') or {}
             release['tests']['equivalence'] = {
                 'result': 'PASS' if all(r['ok'] for r in equivalence) else 'FAIL',
