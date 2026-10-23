@@ -260,7 +260,9 @@ claimed for every device. The after-measurements are in §11.
   - devicePixelRatio was not followed on resize.
 - **Branch CI.** Run 39915535792 confirmed the browser-versus-native equivalence on the changed scripts: 68 of 68 checks and
   the 5,438-frame recording, identical to native. It also exposed contention: three browsers on the runner timed out a walk
-  screenshot. The journey now runs after the equivalence session. The latest run's result is in the session report.
+  screenshot. The journey now runs after the equivalence session. Run 39926690587 on `84c43a8` passed: the vehicle
+  build (geometry diff empty), the unit tests, all 57 browser checks, the 68-check equivalence and the touch journey. The
+  browser check took 31 minutes; splitting it into separate desktop and touch jobs is a follow-up (TODO P05).
 
 **Screenshots** (local, `runs/touch-only/`, `runs/journey/`):
 - welcome;
