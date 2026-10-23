@@ -161,7 +161,7 @@ provenance = "…"                    # how and from what it was made; nothing r
   inputs, so an edited mesh stales the pack's publication and the package.
 - **Why `.glb`.** One self-contained file per mesh: no sidecar `.bin` or texture to lose, one checksum. The costs: Git sees an opaque
   binary (no line diff; every revision is stored whole), and procedural, modifier, driver, constraint and custom-property data does not
-  survive (modifiers are applied at export). The `.blend` stays the editable source, locally, until a storage policy is approved.
+  survive (modifiers are applied at export). The `.blend` stays the editable source, locally (storage policy below).
 - **Evidence.** `tests/verify_authored_portable.py` proves the path from two disposable clean clones (see Evidence, phase 2).
 
 **Publication.** `module publish` refuses unless `module validate` passes. It then writes `references/modules/<pack>.json` with:
@@ -292,7 +292,7 @@ ACCEPTANCE CRITERIA:     validate PASS; only expected prefixes in the diff; prev
   - **Library overrides.** Rejected: they are fragile across rebuilds; the shots already document the nested-override pitfalls.
   - **Geometry Nodes.** Not needed for this layer: the joined, batched families already suit the runtime. They remain an option for artistic scatter where the inspection contract allows.
   - **One project per module.** Rejected: it would break the one-ship assembly and the shared formulas.
-  - **Git LFS.** Deferred, since no authored binary is committed yet.
+  - **Git LFS.** Not adopted (owner decision 2026-10-23) until a concrete production requirement justifies it.
   - **Moving every engineering asset into packs.** Rejected: no demonstrated need. Engineering targets keep their files and get registry ownership instead.
 
 ## Evidence (2026-10-22, cloud: 4 vCPU, Blender 5.2.2)
@@ -392,10 +392,14 @@ Before-state recorded on `main` `80a6cb2`, whose saved assets matched `baseline_
 - **Two faults found and fixed on the way:** the forward inspection read only the forward-shield file, so it now reads the detail assets
   linked into it (and skips the link carriers); `m8_exterior.py` restored the production materials by name, which reached only one of
   the per-file copies (the "on" stills differed until it addressed them per datablock).
-## Storage of authored source binaries (evaluation, 2026-10-23; owner decision pending)
+## Storage of authored binaries (owner decision 2026-10-23)
 
-The committed path carries exported `.glb` files; the editable `.blend` sources stay local (user decision 2026-10-22, unchanged). Options
-for real authored binaries, by what they cost this public repository:
+**Policy.** Approved authored meshes are committed as `.glb` files in ordinary Git, up to 2 MiB each, with the checksum, anchor hash,
+licence, author and provenance the manifest requires. Editable `.blend` sources stay local. No Git LFS and no external asset store until a
+concrete production requirement justifies one. Before a real authored asset is committed, its contents and licence must be checked to
+permit publication in this public repository; owner material, Drive captures and unlicensed assets never enter the committed path.
+
+The options evaluated, by what they cost this public repository:
 
 | Option | Size and history | Exposure | Reproducibility | Permissions and CI |
 | --- | --- | --- | --- | --- |
@@ -404,8 +408,7 @@ for real authored binaries, by what they cost this public repository:
 | Private store referenced by checksum | none in Git | private | only with credentials; a public clone cannot rebuild | a secret in CI; a fetch step |
 | `.blend` sources in Git | large binaries, no diff, every save whole | public | the editable source travels | none |
 
-Recommendation: keep `.glb` in Git under the cap until the first real authored mesh; then decide by its size, licence and whether it may be
-public. Nothing restricted (owner material, Drive captures, unlicensed assets) may enter the committed path in any case.
+Revisit the policy when a real asset exceeds the cap, many assets accumulate, or one may not be public.
 
 ## Limitations and next steps
 

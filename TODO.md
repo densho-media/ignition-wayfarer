@@ -34,11 +34,6 @@ close-up, regression check, MODEL/TODO and Model Status update.
   - **Owner review:** accept, correct or reject the two `L4_VISUAL_CANDIDATE` packs (`rad_frame` radiator frame fittings, `ra2_equip` ring A
     sector 2 overhead trays). Self-review: the radiator fittings are hard to see at ship scale; the sector 2 trays read but sit close to the
     fit-out items. M8.1 is reviewed under its own entry below.
-  - **Owner decision (storage of authored source binaries):** keep editable `.blend` sources local (current), or approve a store. The
-    committed path holds exported `.glb` files up to 2 MiB each (an opaque binary per revision in a public repository). Before the first real
-    authored mesh: confirm its licence and provenance can be public; for larger or many files choose Git LFS (public-repo bandwidth and
-    storage quotas; the web-explorer workflow's checkout would need `lfs: true`; forks and clones without LFS get pointer files and fail the
-    checksum, visibly) or a private store referenced by checksum. Evaluation in docs/MODULES.md.
   - **Next phase, proposed: split WF_HABITAT per ring (WF-RING-B owns its engineering).** Not started; needs a go-ahead.
     - *Change:* `components/revision.py` `habitat()` builds one ring per asset (`WF_HABITAT_A`/`WF_HABITAT_B`, targets `HABITAT_A`/`HABITAT_B`),
       each with its `Rotor_j`, rotor control, sectors, crew hub (`components/crew.py` `hub`, `drum`) and closures; `build/build.py`
@@ -57,7 +52,7 @@ close-up, regression check, MODEL/TODO and Model Status update.
     - *Rollback:* one commit; `git revert`, a full build (retirement moves the ring files to `milestones/`) and the previous baseline.
   - Deferred: a linked part library for repeated fittings, until a detail pack repeats one detailed form often enough that measured sharing
     pays (the export already shares identical meshes; RAD.FRAME's three blades share one mesh).
-  **Done when:** the owner has reviewed the candidates and decided the storage question; the HABITAT split is its own entry once approved.
+  **Done when:** the owner has reviewed the candidates; the HABITAT split is its own entry once approved.
 
 - [ ] **M8 — Exterior production identity. M8.1 BUILT 2026-10-20, awaiting owner art review.** The accepted M7 standard on the
   exterior as `[production.m8]` (its own switch and maturity). M8.1: the Brow aft face (`M8.BROW.AFT`) and the Aegis Crown rim
