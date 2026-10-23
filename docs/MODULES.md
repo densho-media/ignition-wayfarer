@@ -407,6 +407,32 @@ Before-state recorded on `main` `80a6cb2`, whose saved assets matched `baseline_
 - **Two faults found and fixed on the way:** the forward inspection read only the forward-shield file, so it now reads the detail assets
   linked into it (and skips the link carriers); `m8_exterior.py` restored the production materials by name, which reached only one of
   the per-file copies (the "on" stills differed until it addressed them per datablock).
+## Evidence, phase 3: independent ring assets (2026-10-23, cloud: 4 vCPU, Blender 5.2.2)
+
+The split of `WF_HABITAT` into `WF_HABITAT_A`, `WF_HABITAT_B` and the assembly `WF_HABITAT`. Before-evidence is in
+`runs/20261023-phase3-before` (the before fingerprint equals the accepted `modules_phase2` baseline) and after-evidence in
+`runs/20261023-phase3-after`. All proofs ran on the same machine.
+
+| Proof | Result |
+| --- | --- |
+| Fingerprint, `compare_fingerprint.py --split subsystems/WF_HABITAT.blend …_A.blend …_B.blend` | PASS: all 507 objects moved verbatim (254 to ring A, 253 to ring B), keeping their records, parents and in-file matrices; the assembly gained exactly the two identity instances; links conserved; every other file and object in the ship unchanged |
+| Evaluated geometry, `detail_equivalence.py --habitat` at the 8 poses (saved; COAST with the rings turned; drum sync; HIGH_POWER; DOCKED with every closure open; Crown prepared and engaged at two azimuths) | all 1,443 evaluated instances under `Assembly_HABITAT` (rings, hubs, crew route, sectors, interiors, detail) identical in every pose. The only differences: the two new `Habitat_Ring_j` instance empties, and the `anchor_hash` label of the four ring-A detail instances, whose anchors now name their ring's asset as host |
+| Runtime manifest (COAST export against the published package) | 3,947 nodes, 741,424 triangles, bounds, groups, and every node record **including its node ID** identical: the ID hashes the outer `Assembly_HABITAT` group and each object's own parent chain, which the nested link does not change. Only the `host` label of the four ring-A production assemblies changed (`HABITAT` → `HABITAT_A`); no runtime script reads it |
+| Sim rig, readback, station map | `wf_sim_rig.json`, `p1_readback` and the station map are byte-identical. The ring files are measured as part of `WF_HABITAT`, so the row IDs are unchanged |
+| Stills | all 9 M7 section stills are pixel-identical. The Workbench draft previews are not deterministic: rendering the unchanged after-state twice differs in the same places (a hull-edge band, isolated pixels, up to 13/255). The before/after differences are of that kind and size (≤ 0.1 % of pixels, mostly 1–3/255); geometry is proven by the vertex-level proof above |
+| Pack contracts | the anchors of `m7_ra1`, `ra2_equip` and `ring_a_transfer` keep their IDs, objects and frames. Their hash changed with the host, so `assembly validate` reported exactly those three stale; they were republished; 6/6 PASS |
+| Inspection | per ring file: its own rotor, control and sectors, and no actions. The assembly: two ring instances at identity, the three actions, and no geometry. The habitat, rotor-interface and crew-transfer checks run unchanged over both linked rings |
+
+Build times (idle, measured), and what each target rewrites:
+
+| Target | Before | After |
+| --- | --- | --- |
+| `HABITAT` | 34.05 s; one 1.22 MB file + the vehicle | 37.68 s; both rings (0.88 + 0.90 MB), the assembly (0.35 MB) and the vehicle |
+| `HABITAT_B` | — | 6.32 s; only `WF_HABITAT_B`; ring A, the assembly and the vehicle byte-identical |
+| `HABITAT_A` | — | 8.27 s; `WF_HABITAT_A` and its four detail files |
+
+Gates: running (full pipeline, runtime-export, verify_detail_authoring, verify_rebuild); results follow.
+
 ## Storage of authored binaries (owner decision 2026-10-23)
 
 **Policy.** Approved authored meshes are committed as `.glb` files in ordinary Git, up to 2 MiB each, with the checksum, anchor hash,
