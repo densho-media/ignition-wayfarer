@@ -359,6 +359,8 @@ ACCEPTANCE CRITERIA:     validate PASS; only expected prefixes in the diff; prev
 ## Evidence, phase 2 (2026-10-23, cloud: 4 vCPU, Blender 5.2.2)
 
 Before-state recorded on `main` `80a6cb2`, whose saved assets matched `baseline_modules_pilot2` exactly (fingerprint diff empty).
+Evidence folders (local, kept by owner decision): `runs/20261023-phase2-before`, `runs/20261023-phase2-s2`, `runs/20261023-phase2-s3`,
+`runs/20261023-phase2-s4`, `runs/20261023-phase2-portable`, `runs/20261023-phase2-timings`.
 
 - **Per-pack contracts.** Merge experiment, two sessions each adding a pack to WF-RING-A from one commit, each regenerating the contract
   file as the build does:
