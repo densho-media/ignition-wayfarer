@@ -40,12 +40,48 @@ class RegistryTests(unittest.TestCase):
         for word in ('scope', 'detail_class', 'envelope', 'mass_kg'):
             self.assertIn(word, fails)
 
+    def test_rotor_and_drum_anchors_follow_the_rotor_formulas(self):
+        # Rotor_j and the despun Drum_j sit at the ring centre at the index angle (components/revision.py, components/crew.py).
+        import crew_transfer
+        import rotor_interface
+        anc = modules.anchors(self.s); reg = modules.registry(ROOT)
+        for r in rotor_interface.rotors(self.s):
+            mid = modules.ring_module(reg, r['index'])
+            for kind in ('ROTOR', 'DRUM'):
+                q = anc.get(f"{mid}.{kind}.{r['index']}")
+                if kind == 'DRUM' and not crew_transfer.vestibule(self.s, r['index'])['human']:
+                    self.assertIsNone(q); continue
+                self.assertEqual(modules.anchor_host(f"{mid}.{kind}.{r['index']}"), 'HABITAT')
+                self.assertAlmostEqual(q['matrix'][0][3], r['x'], places=9)
+                self.assertAlmostEqual(q['matrix'][1][1], __import__('math').cos(r['phase']), places=9)
+
     def test_a_contract_change_changes_the_hash(self):
         s2 = load()[0]; s2['habitat_ring']['sector_outer_radius_m'] += 0.0     # same input, same hash
         self.assertEqual(modules.contracts(s2, ROOT)['modules']['WF-RING-A']['hash'], modules.contracts(self.s, ROOT)['modules']['WF-RING-A']['hash'])
         reg = modules.registry(ROOT); reg['interface_version'] += 1
         self.assertNotEqual(modules.contracts(self.s, ROOT, reg)['modules']['WF-RING-A']['hash'],
                             modules.contracts(self.s, ROOT)['modules']['WF-RING-A']['hash'])
+        self.assertNotEqual(modules.pack_contract(self.s, reg, modules.packs(ROOT), 'm7_ra1'),
+                            modules.pack_contract(self.s, modules.registry(ROOT), modules.packs(ROOT), 'm7_ra1'))
+
+    def test_a_new_pack_leaves_the_other_packs_contracts(self):
+        # Parallel sessions: a pack added to the same module changes no other pack's contract and not the module's contract file.
+        reg = modules.registry(ROOT); packs_ = modules.packs(ROOT)
+        before = {n: modules.pack_contract(self.s, reg, packs_, n) for n in packs_}
+        more = dict(packs_, probe={'pack': dict(packs_['ra2_equip']['pack']), 'assembly': {'PROBE.X': dict(
+            anchor='WF-RING-A.SECTOR.1.3', envelope_min=[-1.0, -1.0, -1.0], envelope_max=[1.0, 1.0, 1.0])}})
+        self.assertEqual({n: modules.pack_contract(self.s, reg, more, n) for n in packs_}, before)
+        self.assertEqual(modules.check_packs(more), [])
+
+    def test_incompatible_packs_fail_with_a_remedy(self):
+        p = {'pack': {'module': 'WF-RING-A', 'version': 1, 'scope': 'M7', 'enabled': True, 'detail_class': 'PRODUCTION'}}
+        two = {'a': dict(p, assembly={'A.1': dict(anchor='WF-RING-A.SECTOR.1.3', envelope_min=[0, 0, 0], envelope_max=[2, 2, 2])},
+                         materials={'k': [0, 0, 0, 0, 0]}),
+               'b': dict(p, assembly={'B.1': dict(anchor='WF-RING-A.SECTOR.1.3', envelope_min=[1, 1, 1], envelope_max=[3, 3, 3])},
+                         materials={'k': [0, 0, 0, 0, 0]})}
+        fails = ' | '.join(modules.check_packs(two))
+        self.assertIn('overlapping space on WF-RING-A.SECTOR.1.3', fails)
+        self.assertIn('material k is already defined by pack a', fails)
 
 
 class SelectionTests(unittest.TestCase):

@@ -22,7 +22,7 @@ def stamp(coll, s, root, assembly):
     reg = modules.registry(root); t = modules.assemblies(s['detail_packs'])[assembly]; anchor = modules.anchors(s, reg)[t['anchor']]
     coll['detail_assembly'] = assembly; coll['detail_pack'] = t['pack']; coll['module'] = t['module']; coll['anchor'] = t['anchor']
     coll['anchor_hash'] = modules.anchor_hash(reg, anchor); coll['inputs_hash'] = modules.inputs_hash(root, t['pack'])
-    coll['contract_hash'] = modules.contracts(s, root, reg, s['detail_packs'])['modules'][t['module']]['hash']
+    coll['contract_hash'] = modules.pack_contract(s, reg, s['detail_packs'], t['pack'])
 
 
 def adopt(name, s, root, assembly, rebind=False):

@@ -7,10 +7,11 @@ assembly, `assets/wayfarer/detail/WF_DETAIL_<assembly>.blend`, linked into its h
 adding one edits no shared file.
 
 Anchors are computed from the pure engineering formulas (never read back from a built file): an ID, the host asset, the host object a detail
-instance is parented to (None: the host collection's origin) and that object's local matrix. A module's contract is its anchors plus the
-envelopes its packs claim; its hash changes whenever either does, so a detail asset built (or hand-authored) against an older contract is
-detected instead of silently entering the ship. Production detail never feeds engineering budgets: a pack carrying a mass, density or
-centre-of-mass key is refused.
+instance is parented to (None: the host collection's origin) and that object's local matrix (for a moving anchor, a rotor or a despun drum,
+its rest frame at the saved pose and its motion). A module's contract is its anchors; a pack's contract is the anchors its assemblies attach
+to plus the envelopes and scope it claims. Each pack is stamped and published against its own contract, so a detail asset built (or
+hand-authored) against an older frame is detected instead of silently entering the ship, while another pack joining the same module changes
+nothing for it. Production detail never feeds engineering budgets: a pack carrying a mass, density or centre-of-mass key is refused.
 """
 from fnmatch import fnmatch
 import hashlib
@@ -25,7 +26,7 @@ PACK_DIR = 'data/detail'
 CODE_DIR = 'src/wayfarer/detail'
 ASSET_DIR = 'detail'                   # under assets/wayfarer
 CONTRACTS = 'simulations/wf_module_contracts.json'
-CONTRACT, VERSION = 'WF_MODULE_CONTRACTS', 1
+CONTRACT, VERSION = 'WF_MODULE_CONTRACTS', 2
 SCOPES = ('M7', 'M8', 'pack')          # which switch and maturity a pack's assemblies take: [production], [production.m8] or its own
 DETAIL_CLASSES = ('BLOCKOUT', 'FUNCTIONAL', 'PRODUCTION', 'HERO')
 FORBIDDEN = {'mass', 'mass_kg', 'mass_t', 'density', 'density_kg_m3', 'com', 'com_m', 'centre_of_mass', 'center_of_mass'}
@@ -75,11 +76,14 @@ def instance_name(assembly):
 
 
 def anchor_host(anchor):
-    """Host build target of an anchor ID: <module>.<TARGET>.ORIGIN or <ring module>.SECTOR.<ring>.<sector> (HABITAT)."""
+    """Host build target of an anchor ID: <module>.<TARGET>.ORIGIN, or one of ring module's HABITAT anchors <module>.SECTOR.<ring>.<sector>,
+    <module>.ROTOR.<ring> and <module>.DRUM.<ring>."""
     parts = anchor.split('.')
     if parts[-1] == 'ORIGIN':
         return parts[-2]
     if len(parts) >= 3 and parts[-3] == 'SECTOR':
+        return 'HABITAT'
+    if len(parts) >= 2 and parts[-2] in ('ROTOR', 'DRUM'):
         return 'HABITAT'
     raise ValueError(f'Unknown anchor form {anchor}')
 
@@ -101,6 +105,8 @@ def matrix(location, rotation=None):
 def anchors(s, reg=None, root=ROOT):
     """{anchor ID: dict(module, family, host, object, parent, matrix, ...)} from the pure formulas."""
     import habitat_ring
+    import rotor_interface
+    import crew_transfer
     reg = reg or registry(root); out = {}
     for mid, m in reg['module'].items():
         for t in m['targets']:
@@ -113,6 +119,16 @@ def anchors(s, reg=None, root=ROOT):
         out[f"{mid}.SECTOR.{q['ring']}.{q['index']}"] = dict(module=mid, family='ring_sector', host='HABITAT', object=q['name'],
                                                              parent=f"Rotor_{q['ring']}", function=q['function'],
                                                              matrix=rounded(matrix((0.0, d*math.cos(a), d*math.sin(a)), rx(a)), 12))
+    for r in rotor_interface.rotors(s):
+        # Rotor_j (components/revision.py habitat()) at the ring centre, turned about +X by its driver; the rest frame is the saved index
+        # angle (phase). Drum_j (components/crew.py drum()), the despun transfer drum of a human-entry rotor, sits at the same centre and phase
+        # and turns with its ring only while drum_sync is 1. Detail on either inherits that motion through its instance.
+        j = r['index']; mid = ring_module(reg, j); m = rounded(matrix((r['x'], 0.0, 0.0), rx(r['phase'])), 12)
+        out[f'{mid}.ROTOR.{j}'] = dict(module=mid, family='rotor_frame', host='HABITAT', object=f'Rotor_{j}', parent=None, matrix=m,
+                                       motion='ROTOR_SPIN_X', rest_deg=round(math.degrees(r['phase']), 9))
+        if crew_transfer.vestibule(s, j)['human']:
+            out[f'{mid}.DRUM.{j}'] = dict(module=mid, family='drum_frame', host='HABITAT', object=f'Drum_{j}', parent=None, matrix=m,
+                                          motion='DRUM_DESPUN_X', rest_deg=round(math.degrees(r['phase']), 9))
     return out
 
 
@@ -135,19 +151,41 @@ def anchor_hash(reg, anchor):
     return digest([reg['interface_version'], anchor])
 
 
-def contracts(s, root=ROOT, reg=None, packs_=None):
-    """Every module's external interface: its anchors and the assemblies attached to them, with a hash per module."""
-    reg = reg or registry(root); packs_ = packs(root) if packs_ is None else packs_
-    anc = anchors(s, reg); asm = assemblies(packs_); out = {}
+def contracts(s, root=ROOT, reg=None):
+    """Every module's external interface, its anchors, with a hash per module. Integration-owned (simulations/wf_module_contracts.json): it
+    changes only when an anchor or the registry does, never when a pack is added or edited, so pack sessions never touch it."""
+    reg = reg or registry(root); anc = anchors(s, reg); out = {}
     for mid in reg['module']:
         mine = {k: dict(v, hash=anchor_hash(reg, v)) for k, v in anc.items() if v['module'] == mid}
-        used = {a: dict(anchor=t['anchor'], host=anchor_host(t['anchor']), pack=t['pack'], scope=t['scope'],
-                        envelope=[t['envelope_min'], t['envelope_max']], asset=asset_name(a))
-                for a, t in asm.items() if t['module'] == mid}
-        out[mid] = dict(anchors=mine, assemblies=used, hash=digest([reg['interface_version'], mine, used]))
+        out[mid] = dict(anchors=mine, hash=digest([reg['interface_version'], mine]))
     return {'contract': CONTRACT, 'version': VERSION, 'interface_version': reg['interface_version'],
-            'note': 'Generated by src/wayfarer/modules.py from the pure formulas and data/modules.toml + data/detail/*.toml; never edit by hand.',
+            'note': 'Generated by src/wayfarer/modules.py from the pure formulas and data/modules.toml; never edit by hand. Each pack\'s own '
+                    'contract (its anchors, envelopes and scope) is in its publication record, references/modules/<pack>.json.',
             'modules': out}
+
+
+def pack_terms(s, reg, packs_, pack, anc=None):
+    """What a pack's assemblies are attached against: each one's anchor with its frame, its envelope and its scope."""
+    anc = anchors(s, reg) if anc is None else anc
+    return {a: dict(anchor=t['anchor'], frame=anc.get(t['anchor']), envelope=[t['envelope_min'], t['envelope_max']], scope=t['scope'],
+                    host=anchor_host(t['anchor']), asset=asset_name(a))
+            for a, t in sorted(assemblies(packs_).items()) if t['pack'] == pack}
+
+
+def pack_contract(s, reg, packs_, pack, anc=None):
+    """Hash of one pack's contract (pack_terms): stamped on its detail assets and kept in its publication record. It changes when one of its
+    anchors moves, its envelopes or scope change, or the interface version is bumped; another pack, in the same module or not, never changes it."""
+    return digest([reg['interface_version'], pack_terms(s, reg, packs_, pack, anc)])
+
+
+def combined(s, root=ROOT, reg=None, packs_=None):
+    """The integrated view (module contracts): every module's anchors plus every pack's contract, computed in a fixed order from the current
+    inputs, so the result does not depend on the order in which packs were developed or merged."""
+    reg = reg or registry(root); packs_ = packs(root) if packs_ is None else packs_; anc = anchors(s, reg)
+    out = contracts(s, root, reg)
+    out['packs'] = {n: dict(module=q['pack']['module'], hash=pack_contract(s, reg, packs_, n, anc), assemblies=pack_terms(s, reg, packs_, n, anc))
+                    for n, q in sorted(packs_.items())}
+    return out
 
 
 def write(s, root=ROOT):
@@ -218,6 +256,34 @@ def check_packs(packs_, sources=None):
             for k in ('evidence_ref', 'source_ref'):
                 if k in p and p[k] not in sources.get('sources', {}):
                     fails.append(f'{name}: [pack].{k} {p[k]} does not resolve in data/source_map.toml')
+    fails += compatibility(packs_)
+    return fails
+
+
+def compatibility(packs_):
+    """Problems between packs, whatever order they were developed or merged in: two assemblies claiming overlapping space on the same
+    anchor, and a material key defined by two packs (the shared [production] tables are checked in validate)."""
+    fails, asm, mats = [], assemblies(packs_), {}
+    on = {}
+    for a, t in sorted(asm.items()):
+        on.setdefault(t.get('anchor'), []).append(a)
+    for anchor, names in sorted(on.items()):
+        for i, a in enumerate(names):
+            for b in names[i+1:]:
+                ta, tb = asm[a], asm[b]
+                try:
+                    lo = [max(x, y) for x, y in zip(ta['envelope_min'], tb['envelope_min'])]
+                    hi = [min(x, y) for x, y in zip(ta['envelope_max'], tb['envelope_max'])]
+                except (KeyError, TypeError):
+                    continue
+                if all(x < y for x, y in zip(lo, hi)):
+                    fails.append(f"{ta['pack']} {a} and {tb['pack']} {b} claim overlapping space on {anchor} ({[round(v, 3) for v in lo]}.."
+                                 f"{[round(v, 3) for v in hi]} m, anchor frame): shrink one envelope, or move both into one pack")
+    for name, q in sorted(packs_.items()):
+        for k in q.get('materials', {}):
+            if k in mats:
+                fails.append(f'{name}: material {k} is already defined by pack {mats[k]}: rename it (material keys are global)')
+            mats.setdefault(k, name)
     return fails
 
 
@@ -229,6 +295,7 @@ def validate(s, root=ROOT, legacy=()):
     """Registry and pack problems needing the spec: unknown or cyclic dependencies, a target or file owned twice, an owned glob matching
     nothing, a pack on an unknown module or anchor, its function guard, its code file and an assembly ID already used by the legacy table."""
     root = Path(root); reg = registry(root); mods = reg['module']; fails = []
+    shared = {*s.get('production', {}).get('materials', {}), *s.get('production', {}).get('m8', {}).get('materials', {})}
     owner = {}
     for mid, m in mods.items():
         for d in m.get('depends', []):
@@ -267,6 +334,7 @@ def validate(s, root=ROOT, legacy=()):
     for name, q in packs_.items():
         if not (root/q['code']).is_file():
             fails.append(f"{name}: missing {q['code']}")
+        fails += [f'{name}: material {k} is already a shared [production] material: rename it' for k in q.get('materials', {}) if k in shared]
     return fails
 
 
@@ -316,7 +384,7 @@ def module_of(root, ident):
 def handoff(s, root, ident):
     """The session handoff for a module or pack (docs/MODULES.md template), filled from the registry and the manifests."""
     root = Path(root); reg = registry(root); mid, names = module_of(root, ident); m = reg['module'][mid]; packs_ = packs(root)
-    con = contracts(s, root, reg, packs_)['modules'][mid]
+    con = contracts(s, root, reg)['modules'][mid]
     deps = sorted({f for d in m.get('depends', []) for f in owned_files(root, reg['module'][d])})
     owned = [f for n in names for f in (packs_[n]['manifest'], packs_[n]['code'])]
     asm = {a: t for a, t in assemblies(packs_).items() if t['pack'] in names}
@@ -324,8 +392,9 @@ def handoff(s, root, ident):
     return {
         'MODULE': f"{mid}: {m['title']}" + (f" (pack {', '.join(names)})" if pack_only else ''),
         'TASK': '<fill in: the one visible result this session delivers>',
-        'SOURCE CONTRACT': dict(file=CONTRACTS, hash=con['hash'], anchors={k: con['anchors'][k] for k in sorted({t['anchor'] for t in asm.values()})}
-                                if pack_only else sorted(con['anchors'])),
+        'SOURCE CONTRACT': dict(file=f'references/modules/{names[0]}.json', hash=pack_contract(s, reg, packs_, names[0]),
+                                anchors={k: con['anchors'][k] for k in sorted({t['anchor'] for t in asm.values()})})
+                           if pack_only and len(names) == 1 else dict(file=CONTRACTS, hash=con['hash'], anchors=sorted(con['anchors'])),
         'OWNED FILES': owned+([] if pack_only else owned_files(root, m))+[f'assets/wayfarer/{ASSET_DIR}/{asset_name(a)}.blend (local, generated)' for a in asm],
         'READ-ONLY DEPENDENCIES': ['data/modules.toml', 'data/wayfarer_3d.toml', 'src/wayfarer/production_detail.py (shared detail core)',
                                    *(owned_files(root, m) if pack_only else []), *deps],

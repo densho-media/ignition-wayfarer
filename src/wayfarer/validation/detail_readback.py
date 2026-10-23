@@ -95,7 +95,13 @@ def check(root, assemblies):
                     fails.append(f'{o.name}: not at the anchor (local transform or parent inverse not identity)')
                 if o.get('anchor_hash') != modules.anchor_hash(reg, q):
                     fails.append(f'{o.name}: linked against another anchor frame: module build {t["pack"]} --integrate')
-                if q['object'] and o.parent is not None and not all(abs(o.parent.matrix_basis[i][j]-q['matrix'][i][j]) < 1e-6 for i in range(4) for j in range(4)):
+                # A moving anchor (rotor, despun drum) is checked at its centre and for a pure +X turn; a fixed one at its whole frame.
+                m = o.parent.matrix_basis if q['object'] and o.parent is not None else None
+                if m is not None and q.get('motion'):
+                    if not (all(abs(m[i][3]-q['matrix'][i][3]) < 1e-6 for i in range(3)) and abs(m[0][0]-1) < 1e-9
+                            and all(abs(m[0][k]) < 1e-9 and abs(m[k][0]) < 1e-9 for k in (1, 2))):
+                        fails.append(f'{q["object"]}: not at the centre of {t["anchor"]} or not turning about +X')
+                elif m is not None and not all(abs(m[i][j]-q['matrix'][i][j]) < 1e-6 for i in range(4) for j in range(4)):
                     fails.append(f'{q["object"]}: not at the anchor frame of {t["anchor"]}')
         report[a] = dict(result='FAIL' if fails else 'PASS', asset=str(path.relative_to(root)), host=host, anchor=t['anchor'], fails=fails, **info)
     return report

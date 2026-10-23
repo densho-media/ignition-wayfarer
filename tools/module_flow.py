@@ -138,10 +138,11 @@ def record(root, pack, s, fp):
     git = lambda *a: subprocess.check_output(['git', '-C', str(root), *a], text=True).strip()
     mine = {a: t for a, t in modules.assemblies(modules.packs(root)).items() if t['pack'] == pack}
     import production_detail as pd
-    return {'contract': 'WF_MODULE_PUBLICATION', 'version': 1, 'pack': pack, 'module': q['pack']['module'], 'pack_version': q['pack']['version'],
+    return {'contract': 'WF_MODULE_PUBLICATION', 'version': 2, 'pack': pack, 'module': q['pack']['module'], 'pack_version': q['pack']['version'],
             'published_utc': pipeline.utc_now(), 'git_revision': git('rev-parse', 'HEAD'), 'git_dirty': bool(git('status', '--porcelain')),
             'inputs_hash': modules.inputs_hash(root, pack), 'spec_sha256': pipeline.sha256(root/'data/wayfarer_3d.toml'),
-            'contract_hash': modules.contracts(s, root, reg)['modules'][q['pack']['module']]['hash'],
+            'contract_hash': modules.pack_contract(s, reg, modules.packs(root), pack),
+            'contract_terms': modules.pack_terms(s, reg, modules.packs(root), pack),
             'assemblies': {a: dict(anchor=t['anchor'], anchor_hash=modules.anchor_hash(reg, anc[t['anchor']]), asset=modules.asset_name(a),
                                    enabled=pd.enabled(s, a), maturity=pd.scope(s, a)['maturity'], detail_class=q['pack']['detail_class'])
                            for a, t in sorted(mine.items())},
@@ -182,8 +183,8 @@ def assembly_validate(root, lock=None):
         rec = json.loads(path.read_text())
         if rec['inputs_hash'] != modules.inputs_hash(root, pack):
             fails.append('pack inputs changed since publication: module validate, then module publish')
-        if rec['contract_hash'] != modules.contracts(s, root, reg)['modules'][q['pack']['module']]['hash']:
-            fails.append(f"module {q['pack']['module']} contract changed since publication: review the pack against it, then publish")
+        if rec['contract_hash'] != modules.pack_contract(s, reg, packs_, pack, anc):
+            fails.append(f"the pack's contract (anchor frames, envelopes, scope) changed since publication: review the pack against it, then publish")
         for a, t in rec['assemblies'].items():
             if a not in allasm:
                 fails.append(f'{a}: published but no longer in the pack')
@@ -227,7 +228,9 @@ def run(root, op, ident=None, integrate=False, write=False, rebind=False, views=
             return dict(result='PASS', written=modules.write(s, root))
         current = json.loads((root/modules.CONTRACTS).read_text()) if (root/modules.CONTRACTS).is_file() else None
         fresh = json.loads(json.dumps(modules.contracts(s, root), sort_keys=True))
+        both = modules.combined(s, root)
         return dict(result='PASS' if current == fresh else 'STALE', hashes={k: v['hash'] for k, v in fresh['modules'].items()},
+                    packs={k: v['hash'] for k, v in both['packs'].items()},
                     note=None if current == fresh else 'regenerate with --write (a build also rewrites it)')
     if op == 'validate' and not blender:
         return validate(root, ident, blender=False)

@@ -73,8 +73,7 @@
      "parent": null
     }
    },
-   "assemblies": {},
-   "hash": "7e6d635af60ca632"
+   "hash": "1cfbab4e40972f6b"
   },
   "WF-DRIVE": {
    "anchors": {
@@ -249,8 +248,7 @@
      "parent": null
     }
    },
-   "assemblies": {},
-   "hash": "8dadbe7002bac49c"
+   "hash": "0555b2c7c185723b"
   },
   "WF-EYE": {
    "anchors": {
@@ -289,8 +287,7 @@
      "parent": null
     }
    },
-   "assemblies": {},
-   "hash": "45f921c5110cb70c"
+   "hash": "432b9c1ba0e0bcd6"
   },
   "WF-FUEL": {
    "anchors": {
@@ -329,8 +326,7 @@
      "parent": null
     }
    },
-   "assemblies": {},
-   "hash": "496d048521c56d44"
+   "hash": "e7627e369e7227b9"
   },
   "WF-FWD": {
    "anchors": {
@@ -369,11 +365,46 @@
      "parent": null
     }
    },
-   "assemblies": {},
-   "hash": "fbdcc777ff027203"
+   "hash": "2102551ab5c22a6e"
   },
   "WF-RING-A": {
    "anchors": {
+    "WF-RING-A.DRUM.1": {
+     "family": "drum_frame",
+     "hash": "9bb5f995c24d5295",
+     "host": "HABITAT",
+     "matrix": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       85.049362477231
+      ],
+      [
+       0.0,
+       0.0,
+       -1.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "module": "WF-RING-A",
+     "motion": "DRUM_DESPUN_X",
+     "object": "Drum_1",
+     "parent": null,
+     "rest_deg": 90.0
+    },
     "WF-RING-A.HABITAT.ORIGIN": {
      "family": "asset_origin",
      "hash": "b7f24708b6a28ecf",
@@ -544,6 +575,42 @@
      "object": null,
      "parent": null
     },
+    "WF-RING-A.ROTOR.1": {
+     "family": "rotor_frame",
+     "hash": "2ae4b0fa48fdf488",
+     "host": "HABITAT",
+     "matrix": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       85.049362477231
+      ],
+      [
+       0.0,
+       0.0,
+       -1.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "module": "WF-RING-A",
+     "motion": "ROTOR_SPIN_X",
+     "object": "Rotor_1",
+     "parent": null,
+     "rest_deg": 90.0
+    },
     "WF-RING-A.SECTOR.1.1": {
      "family": "ring_sector",
      "function": "HABITATION",
@@ -650,50 +717,82 @@
      "parent": "Rotor_1"
     }
    },
-   "assemblies": {
-    "M7.RA1": {
-     "anchor": "WF-RING-A.SECTOR.1.1",
-     "asset": "WF_DETAIL_M7_RA1",
-     "envelope": [
-      [
-       -1.75,
-       -2.9,
-       -2.45
-      ],
-      [
-       1.75,
-       -2.85,
-       2.45
-      ]
-     ],
-     "host": "HABITAT",
-     "pack": "m7_ra1",
-     "scope": "M7"
-    },
-    "RA2.EQP": {
-     "anchor": "WF-RING-A.SECTOR.1.2",
-     "asset": "WF_DETAIL_RA2_EQP",
-     "envelope": [
-      [
-       -1.75,
-       -2.9,
-       -2.45
-      ],
-      [
-       1.75,
-       -2.85,
-       2.45
-      ]
-     ],
-     "host": "HABITAT",
-     "pack": "ra2_equip",
-     "scope": "pack"
-    }
-   },
-   "hash": "95e5c1545de7976f"
+   "hash": "d7891115564e0d87"
   },
   "WF-RING-B": {
    "anchors": {
+    "WF-RING-B.DRUM.2": {
+     "family": "drum_frame",
+     "hash": "9943482457b00fed",
+     "host": "HABITAT",
+     "matrix": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       91.049362477231
+      ],
+      [
+       0.0,
+       0.0,
+       -1.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "module": "WF-RING-B",
+     "motion": "DRUM_DESPUN_X",
+     "object": "Drum_2",
+     "parent": null,
+     "rest_deg": 90.0
+    },
+    "WF-RING-B.ROTOR.2": {
+     "family": "rotor_frame",
+     "hash": "1ecdb82122af0a21",
+     "host": "HABITAT",
+     "matrix": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       91.049362477231
+      ],
+      [
+       0.0,
+       0.0,
+       -1.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "module": "WF-RING-B",
+     "motion": "ROTOR_SPIN_X",
+     "object": "Rotor_2",
+     "parent": null,
+     "rest_deg": 90.0
+    },
     "WF-RING-B.SECTOR.2.1": {
      "family": "ring_sector",
      "function": "HABITATION",
@@ -800,8 +899,7 @@
      "parent": "Rotor_2"
     }
    },
-   "assemblies": {},
-   "hash": "d82548b2530cc2db"
+   "hash": "25e1dfe008a58424"
   },
   "WF-SPINE": {
    "anchors": {
@@ -976,8 +1074,7 @@
      "parent": null
     }
    },
-   "assemblies": {},
-   "hash": "751f9ca8c67bdc6c"
+   "hash": "2e66ee5555f8ffea"
   },
   "WF-THERMAL": {
    "anchors": {
@@ -1050,28 +1147,7 @@
      "parent": null
     }
    },
-   "assemblies": {
-    "RAD.FRAME": {
-     "anchor": "WF-THERMAL.RADIATOR.ORIGIN",
-     "asset": "WF_DETAIL_RAD_FRAME",
-     "envelope": [
-      [
-       -91.3,
-       0.0,
-       -1.7
-      ],
-      [
-       91.3,
-       30.5,
-       1.7
-      ]
-     ],
-     "host": "RADIATOR",
-     "pack": "rad_frame",
-     "scope": "pack"
-    }
-   },
-   "hash": "4fc3518e1d9fb7e4"
+   "hash": "b300eee93890d7e8"
   },
   "WF-UTILITY": {
    "anchors": {
@@ -1110,10 +1186,9 @@
      "parent": null
     }
    },
-   "assemblies": {},
-   "hash": "f104dd796afdf75c"
+   "hash": "3faba4619ab5e65a"
   }
  },
- "note": "Generated by src/wayfarer/modules.py from the pure formulas and data/modules.toml + data/detail/*.toml; never edit by hand.",
- "version": 1
+ "note": "Generated by src/wayfarer/modules.py from the pure formulas and data/modules.toml; never edit by hand. Each pack's own contract (its anchors, envelopes and scope) is in its publication record, references/modules/<pack>.json.",
+ "version": 2
 }
