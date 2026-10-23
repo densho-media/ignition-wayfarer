@@ -133,8 +133,6 @@ def service(c,s):
     survival.hull(c,s)     # SP-49 placard, SP-53 / Eye A25-A26 terminals, A29 trackers, SP-51 crawler track (PROTOTYPE envelopes)
     import exterior
     exterior.service(c,s)  # S02 slice 1: docking guidance, airlock floods, aft beacons (PROTOTYPE)
-    import production
-    for a in ('M7.EXT.PORT','M7.ENT'):production.build(c,s,a)   # M7: the port's and entry's production layer (L4 visual, PROTOTYPE)
 
 
 def storeroom(c,s):

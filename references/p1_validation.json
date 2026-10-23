@@ -1,7 +1,7 @@
 {
   "result": "PASS",
   "blender": "5.2.2 LTS",
-  "spec_hash": "c4c5aa25a1861c62cc710a36800ad88aa164d7f728b25572bb90d6ad2469c9bb",
+  "spec_hash": "0a0f8bd7964453ae21b17a8a963c6cf224d624492abd82a57cfb123482e3eba4",
   "source_map_hash": "99cd812784b9ce8dc35eff1ed107627617c8e72fa9de55fedee6268f939f0ee1",
   "configurations": {
     "COAST": {
@@ -1803,6 +1803,18 @@
         "RAD.FRAME"
       ]
     },
+    "WF_DETAIL_M7_ENT.blend": {
+      "assembly": "M7.ENT",
+      "objects": 5,
+      "authored": 0,
+      "enabled": true
+    },
+    "WF_DETAIL_M7_EXT_PORT.blend": {
+      "assembly": "M7.EXT.PORT",
+      "objects": 3,
+      "authored": 0,
+      "enabled": true
+    },
     "WF_DETAIL_M7_RA1.blend": {
       "assembly": "M7.RA1",
       "objects": 4,
@@ -1811,6 +1823,12 @@
     },
     "WF_DETAIL_M7_SPK.blend": {
       "assembly": "M7.SPK",
+      "objects": 4,
+      "authored": 0,
+      "enabled": true
+    },
+    "WF_DETAIL_M7_TRK.blend": {
+      "assembly": "M7.TRK",
       "objects": 4,
       "authored": 0,
       "enabled": true
@@ -1833,12 +1851,23 @@
       "authored": 0,
       "enabled": true
     },
+    "WF_CREW_TRANSFER.blend": {
+      "instances": [
+        "M7.TRK"
+      ]
+    },
     "WF_HABITAT.blend": {
       "instances": [
         "M7.RA1",
         "M7.SPK",
         "M7.XFR",
         "RA2.EQP"
+      ]
+    },
+    "WF_SERVICE.blend": {
+      "instances": [
+        "M7.ENT",
+        "M7.EXT.PORT"
       ]
     }
   },
@@ -3608,6 +3637,26 @@
       ],
       "direct_links": []
     },
+    "detail/WF_DETAIL_M7_ENT.blend": {
+      "generated_objects": 5,
+      "ids": [
+        "M7.ENT.BULKHEAD",
+        "M7.ENT.FASTENERS",
+        "M7.ENT.HOUSINGS",
+        "M7.ENT.PANELS",
+        "M7.ENT.TRAYS"
+      ],
+      "direct_links": []
+    },
+    "detail/WF_DETAIL_M7_EXT_PORT.blend": {
+      "generated_objects": 3,
+      "ids": [
+        "M7.EXT.PORT.COVERS",
+        "M7.EXT.PORT.FASTENERS",
+        "M7.EXT.PORT.LETTERING"
+      ],
+      "direct_links": []
+    },
     "detail/WF_DETAIL_M7_RA1.blend": {
       "generated_objects": 4,
       "ids": [
@@ -3625,6 +3674,16 @@
         "M7.SPK.FRAMES",
         "M7.SPK.PANELS",
         "M7.SPK.TRAYS"
+      ],
+      "direct_links": []
+    },
+    "detail/WF_DETAIL_M7_TRK.blend": {
+      "generated_objects": 4,
+      "ids": [
+        "M7.TRK.FASTENERS",
+        "M7.TRK.HOUSINGS",
+        "M7.TRK.PANELS",
+        "M7.TRK.TRAYS"
       ],
       "direct_links": []
     },
@@ -3656,7 +3715,7 @@
       "direct_links": []
     },
     "subsystems/WF_CREW_TRANSFER.blend": {
-      "generated_objects": 195,
+      "generated_objects": 192,
       "ids": [
         "CREW_PORT_GATE_CTRL",
         "Crew_Connector_Airlock_EVA",
@@ -3746,10 +3805,6 @@
         "IF_CREW_STORE_PORT",
         "IF_CREW_TRUNK_AFT",
         "IF_CREW_TRUNK_FWD",
-        "M7.TRK.FASTENERS",
-        "M7.TRK.HOUSINGS",
-        "M7.TRK.PANELS",
-        "M7.TRK.TRAYS",
         "Refuge_Anchor_Rail_1",
         "Refuge_Anchor_Rail_10",
         "Refuge_Anchor_Rail_10_Brackets",
@@ -3852,9 +3907,12 @@
         "Trunk_Fit_Route_Stripe_1",
         "Trunk_Fit_Route_Stripe_2",
         "Trunk_Fit_Route_Stripe_3",
-        "Trunk_Fit_Supply_Diffuser"
+        "Trunk_Fit_Supply_Diffuser",
+        "WF.DETAIL.M7.TRK"
       ],
-      "direct_links": []
+      "direct_links": [
+        "detail/WF_DETAIL_M7_TRK.blend"
+      ]
     },
     "subsystems/WF_DEBUG_MAGNETICS.blend": {
       "generated_objects": 18,
@@ -5583,7 +5641,7 @@
       "direct_links": []
     },
     "subsystems/WF_SERVICE.blend": {
-      "generated_objects": 294,
+      "generated_objects": 288,
       "ids": [
         "Airlock_EVA",
         "Casing_Access_01_000",
@@ -5784,14 +5842,6 @@
         "IF_DOCK_SERVICE",
         "IF_DOCK_SERVICE_CAPTURE_RING",
         "IF_STOREROOM",
-        "M7.ENT.BULKHEAD",
-        "M7.ENT.FASTENERS",
-        "M7.ENT.HOUSINGS",
-        "M7.ENT.PANELS",
-        "M7.ENT.TRAYS",
-        "M7.EXT.PORT.COVERS",
-        "M7.EXT.PORT.FASTENERS",
-        "M7.EXT.PORT.LETTERING",
         "Refuge_Inner_Wall",
         "Refuge_Storm_Shelter",
         "STOREROOM_CTRL",
@@ -5878,9 +5928,14 @@
         "Survival_RF_Dish",
         "Survival_RF_Mast",
         "Survival_Star_Tracker_1",
-        "Survival_Star_Tracker_2"
+        "Survival_Star_Tracker_2",
+        "WF.DETAIL.M7.ENT",
+        "WF.DETAIL.M7.EXT.PORT"
       ],
-      "direct_links": []
+      "direct_links": [
+        "detail/WF_DETAIL_M7_ENT.blend",
+        "detail/WF_DETAIL_M7_EXT_PORT.blend"
+      ]
     },
     "subsystems/WF_SHIELDING.blend": {
       "generated_objects": 1,

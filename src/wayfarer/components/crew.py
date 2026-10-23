@@ -150,8 +150,6 @@ def crew_transfer(c, s):
     survival.refuge(c, s)              # SP-48 / SP-50 / SP-54 envelopes in the refuge's end zones (PROTOTYPE)
     import fitout
     fitout.trunk(c, s)                 # IND-001 3.1: the trunk's fit-out (ARCHITECTURE layer, kind route_fitout)
-    import production
-    production.build(c, s, 'M7.TRK')  # M7: the trunk's production layer (L4 visual, PROTOTYPE)
     # Q46: the spine-port gates (stationary-side closures), saved closed; previews and the route sweep open them in memory.
     gates = [q for j in s['human_entry']['vestibule_rotors'] for q in ct.closures(s, j) if q['kind'] == 'PORT_GATE']
     if gates:

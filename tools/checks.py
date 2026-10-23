@@ -271,7 +271,11 @@ def plan(root=ROOT, paths=None, base='HEAD'):
         target = 'all'                  # a changed input value reaches every asset (AGENTS: shared input -> full build)
     elif not used_by_build:
         target = None
-    elif stems & SHARED or len(targets) > 1:
+    elif stems & SHARED:
+        target = 'all'
+    elif len(targets) > 1 and (all(x.startswith('DETAIL_') for x in targets) or not any(x.startswith('DETAIL_') for x in targets)):
+        target = '+'.join(targets)      # build.py builds exactly these (several detail assets, or several hosts), not the whole ship
+    elif len(targets) > 1:
         target = 'all'
     else:
         target = targets[0] if targets else 'vehicle'

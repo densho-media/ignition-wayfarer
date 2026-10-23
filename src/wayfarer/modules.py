@@ -271,6 +271,8 @@ def compatibility(packs_):
         for i, a in enumerate(names):
             for b in names[i+1:]:
                 ta, tb = asm[a], asm[b]
+                if ta['pack'] == tb['pack']:
+                    continue                     # one pack arranges its own assemblies
                 try:
                     lo = [max(x, y) for x, y in zip(ta['envelope_min'], tb['envelope_min'])]
                     hi = [min(x, y) for x, y in zip(ta['envelope_max'], tb['envelope_max'])]

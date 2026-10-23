@@ -90,7 +90,7 @@ class SelectionTests(unittest.TestCase):
         for name, q in modules.packs(ROOT).items():
             plan = checks.plan(ROOT, [q['manifest']])
             hosts = {modules.anchor_host(t['anchor']) for t in q['assembly'].values()}
-            self.assertIn(plan['build_target'], {*(modules.target(a) for a in q['assembly']), *hosts}, name)
+            self.assertTrue(set(plan['build_target'].split('+')) <= {*(modules.target(a) for a in q['assembly']), *hosts}, (name, plan['build_target']))
             self.assertIn('test_production', plan['tests'])
             self.assertTrue(set(q['pack'].get('inspect', [])) <= set(plan['inspect_groups']), name)
 

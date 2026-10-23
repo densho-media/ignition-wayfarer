@@ -51,7 +51,7 @@ def build(root, ident, integrate=False, rebind=False, run_dir=None, lock=None):
     run_dir = run_dir or root/'runs'/f'{pipeline.stamp()}-module-{ident}'
     steps = []
     script = root/'src/wayfarer/build/build.py'
-    targets = sorted({modules.anchor_host(t['anchor']) for t in asm.values()}) if integrate else [modules.target(a) for a in sorted(asm)]
+    targets = ['+'.join(sorted({modules.anchor_host(t['anchor']) for t in asm.values()}))] if integrate else ['+'.join(modules.target(a) for a in sorted(asm))]
     for target in targets:
         code, secs = blender_step(run_dir, f'build-{target}', script, '--root', root, '--target', target, *(['--rebind'] if rebind else []), lock=lock)
         steps.append(dict(target=target, result='PASS' if code == 0 else 'FAIL', seconds=secs,

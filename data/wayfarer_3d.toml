@@ -3682,27 +3682,10 @@ enabled = true
 # their PROTOTYPE labels.
 maturity = "L4_VISUAL_ACCEPTED"
 representation = "REP_HERO"
-# Assemblies built (stable IDs, production_detail.ASSEMBLIES); the slices add them entrance-first (15!A86). M7.RA1 (data/detail/m7_ra1.toml)
-# and M7.XFR/M7.SPK (data/detail/ring_a_transfer.toml) are detail packs (docs/MODULES.md): same scope, switch and maturity, their own
-# assets and parameters. [production.entry] stays here: it is the shared M7 panel grammar those packs read.
-assemblies = ["M7.EXT.PORT", "M7.ENT", "M7.TRK"]
-
-# M7.EXT.PORT (slice 1): flush service covers beside the primary port in the accepted M4 grammar (ochre, 15!A202), each with its
-# fasteners and stencil, and the port identification. Offsets (axial, tangential arc) from the port axis on the hull, off the port's hull
-# opening, inside the strap-free window round the approach aids and clear of them. Identification only: no livery, no registry lettering (S03 parked;
-# the GU WAYFARER 001 direction, 15!A225, stays for a later integration).
-[production.port]
-standoff_m = 0.004
-aid_margin_m = 0.15
-fastener_m = 0.03
-fastener_inset_m = 0.05
-port_id = "D1"
-port_id_at_m = [-1.0, 1.2]
-port_id_m = 0.32
-covers = [
-  { at_m = [1.75, -1.0], size_m = [0.55, 0.40, 0.025], label = "D1 EXT RELEASE", label_m = 0.035, function = "external hatch-release and equalization access cover (crew rescue from outside)" },
-  { at_m = [-1.62, -0.9], size_m = [0.70, 0.45, 0.025], label = "D1 UMBILICAL", label_m = 0.035, function = "docking umbilical service cover (power, data, air)" },
-]
+# The section's six assemblies are detail packs (docs/MODULES.md), each with its own asset and parameters under this scope's switch and
+# maturity: M7.EXT.PORT, M7.ENT and M7.TRK (data/detail/m7_spine.toml), M7.XFR and M7.SPK (ring_a_transfer.toml), M7.RA1 (m7_ra1.toml).
+# Nothing is built from this list any more. [production.entry] stays here: it is the shared M7 panel grammar those packs read.
+assemblies = []
 
 # M7.ENT, the entry chamber and trunk node (slice 1): replaceable wall-panel modules in the bays between the fit-out frames, off every
 # fixture, rail, light, panel and parked leaf; quarter-turn fasteners; housings round the light strips. Thin skins on the shell's inner face
@@ -3719,9 +3702,6 @@ fastener_inset_m = 0.035
 fastener_proud_m = 0.003
 housing_lip_m = 0.012
 housing_depth_m = 0.028
-# Bulkhead faces: radial panel segments from inner_m to the wall, clear of the hinge and parked leaf, the placards (0 and 180 deg) and
-# the equalization valves.
-bulkhead = { inner_m = 1.02, segment_max_deg = 30.0, hinge_keep_deg = 52.0, placard_keep_deg = 16.0, valve_keep_deg = 9.0 }
 
 # Production materials, [r, g, b, roughness, metallic] (Blender linear), by zone treatment over the surface classes (docs/SURFACE_BRIEF.md:
 # quiet greys and off-whites, saturated colour only for wayfinding, safety and service lines, M4 ochre for service covers 15!A202, polish
