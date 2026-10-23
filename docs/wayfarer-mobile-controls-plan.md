@@ -200,7 +200,7 @@ claimed for every device. The after-measurements are in §11.
 
 | Area | Automated here | Real device |
 | --- | --- | --- |
-| Registry: virtual holds, trigger, look, device switch, profile v3 | `check_touch.gd` (native headless, real touch events) | — |
+| Registry: virtual holds, trigger, look, device switch, profile v3 | `check_touch.gd` (native headless, real touch events, 30 checks) | — |
 | Journey by touch, multi-finger, modal, focus loss, release | `check_touch.gd`; browser journey (Chrome, touch emulation, DPR 3) | **pending** |
 | Desktop regression | `--check-demo` 68 checks, `--check-controls`, `--check-controls-body`, `review-demo01`; web_check desktop walk and equivalence | — |
 | Android Chrome (phone) | emulated only | **pending**: no device in this environment |
@@ -234,20 +234,73 @@ claimed for every device. The after-measurements are in §11.
 - **Landscape lock.** iPhone cannot go full screen or lock landscape. The portrait suggestion and the upright layout cover it.
 - **Hybrid devices.** A touchscreen laptop gets desktop-scale touch controls when touched. This is usable but not tuned.
 
-## 11. Results
+## 11. Results (2026-10-23, branch `claude/mobile-touch-controls`)
 
-Filled in after the run on this branch: commit, CI run, preview artifact, check results, before and after measurements and
-screenshots (`runs/mobile-after/`, the journey screenshots).
+**Automated, passing.**
+
+- **`--check-touch`.** 30 checks, native headless Godot 4.7.2, at 844 × 390 UI px. The events are real InputEventScreenTouch
+  and ScreenDrag with Godot's mouse emulation. Covered:
+  - welcome by tapping, then Pause and Skip;
+  - the rail stick with a second finger looking, and release stopping the stick;
+  - no emulated mouse reaching the scene;
+  - weightless: no stick and no force, look, Push off, Grab refused out of reach;
+  - transfer 1-D, deck walk 2-D, Drop by a second finger while walking;
+  - Help as a modal (stick released, buttons on screen), then closed;
+  - focus loss releasing the stick, a key handing back to the keyboard, the touch labels.
+- **Desktop regression on the changed scripts.** All pass:
+  - `--check-demo`: 68 checks;
+  - `--check-controls`;
+  - `--check-controls-body`;
+  - `--review=demo01 --check-review`;
+  - 146 Python tests.
+- **Browser touch journey (`tools/web_check.py`, `run_touch`).** 20 checks in headless Chrome: an emulated phone
+  (844 × 390 CSS px, DPR 3, touch), then upright (390 × 844) and tablet (1180 × 820, DPR 2). All 20 passed locally (1234 s
+  under SwiftShader) after two fixes it found:
+  - Help's Close was below the fold on a 390 px tall screen;
+  - devicePixelRatio was not followed on resize.
+- **Branch CI.** Run 39915535792 confirmed the browser-versus-native equivalence on the changed scripts: 68 of 68 checks and
+  the 5,438-frame recording, identical to native. It also exposed contention: three browsers on the runner timed out a walk
+  screenshot. The journey now runs after the equivalence session. The latest run's result is in the session report.
+
+**Screenshots** (local, `runs/touch-only/`, `runs/journey/`):
+- welcome;
+- exterior (guided);
+- entry with stick and look;
+- microgravity (Push off / Release, one-line lesson);
+- systems card;
+- gravity walk with Drop;
+- Help;
+- upright hint and upright layout;
+- tablet.
+
+**Performance** (software rendering; behaviour, not phone speed).
+
+| Viewport | Before: canvas px · 3-D px | After: 3-D px (scale) | rAF fps before → after |
+| --- | --- | --- | --- |
+| Phone 844 × 390, DPR 3 | 2532 × 1170 · 2.96 M | 1063 × 491 · 0.52 M (0.42) | 0.4 → 0.6 |
+| Phone 390 × 844, DPR 3 | 1170 × 2532 · 2.96 M | 0.52 M (0.42) | 0.7 → 0.5 |
+| Tablet 1180 × 820, DPR 2 | 2360 × 1640 · 3.87 M | 1.51 M (0.625) | 0.4 → 0.3 |
+| Desktop 1280 × 800, DPR 1 | unchanged (no touch-first) | 1.02 M (1.0) | 0.7 → 0.6 |
+
+- **Pixels.** The phone renders 18 % of the 3-D pixels it did before.
+- **fps.** At under 1 fps the software renderer gives 4 to 7 frames per 10 s, so these fps differences are noise.
+- **Adaptive step.** In the browser journey it lowered the scale to its 0.35 floor (at 1 fps), as designed.
+- **Start-up.** Start to running took 7 to 21 s locally; the welcome showed 7 to 15 s after navigation.
+- **Not measured: real-device frame rate, input latency, memory and thermal behaviour.** They need a phone (§9 procedure).
+
+**Real devices: none tested.** Android Chrome, iOS Safari (iPhone and iPad) and a real tablet are **pending**. iOS full screen
+and the landscape lock are unsupported by design; the upright layout covers that case.
 
 ## 12. Definition of done
 
-- [ ] A separate branch (`claude/mobile-touch-controls`), pushed. `main` and the deployed site are unchanged.
-- [ ] Touch extends `WfInput`: virtual holds, `trigger()` actions with no synthetic keys, and a semantic look.
-- [ ] A touch welcome with no keyboard; Help is always available; profile schema 3 migrates schema 2.
-- [ ] Multitouch claims by finger: stick with look, and stick with a button, both at once. Release, cancel, modal, focus loss and
-      resize all release.
-- [ ] The controls follow the chapter (guided, weightless, line or ladder, deck, inspect). A weightless stick adds no force.
-- [ ] Compact HUD on phone and tablet viewports; desktop layout unchanged.
-- [ ] The whole demonstrator can be completed by touch in the tested environment (native check and browser journey).
-- [ ] Desktop regression checks pass; physics and geometry unchanged.
-- [ ] Performance measured before and after, with its limits stated. Real-phone validation listed as pending.
+- [x] A separate branch (`claude/mobile-touch-controls`), pushed. `main` and the deployed site are unchanged.
+- [x] Touch extends `WfInput`: virtual holds, `trigger()` actions with no synthetic keys, and a semantic look.
+- [x] A touch welcome with no keyboard; Help is always available; profile schema 3 migrates schema 2.
+- [x] Multitouch claims by finger: stick with look, and stick with a button, both at once. Release, modal, focus loss and resize
+      all release. (Web delivers `touchcancel` as a plain release.)
+- [x] The controls follow the chapter (guided, weightless, line or ladder, deck, inspect). A weightless stick adds no force.
+- [x] Compact HUD on phone and tablet viewports; desktop layout unchanged.
+- [x] The whole demonstrator can be completed by touch in the tested environment. Every chapter is reached by Skip or Next; the
+      physics chapters are operated by touch.
+- [x] Desktop regression checks pass; physics and geometry unchanged (CI geometry diff: 0 changed).
+- [x] Performance measured before and after, with its limits stated. Real-phone validation listed as **pending**.
