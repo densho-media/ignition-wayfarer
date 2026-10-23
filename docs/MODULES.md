@@ -440,6 +440,10 @@ Gates (all at code commit `cc154ba`, logs in `runs/20261023-phase3-after/gates`)
 | `tests/verify_detail_authoring.py` | PASS: probe adopted, adopted on build, survives regeneration, a contract change stops the build, rebind after review, exported as production |
 | `tests/verify_rebuild.py` (51 min 27 s) | PASS, 15 cases, among them: full rebuild with stable IDs; ART and unowned GEN preserved; radiator, hull, Garden interior, detail-only and moving-anchor detail rebuilds leave every other asset byte-identical; **`HABITAT_B` then `HABITAT_A` each leave the other ring, the habitat assembly, the vehicle and the other ring's detail byte-identical**; relocated nested links; retirement to `milestones/` |
 
+Combined with `main` (MOB-001 touch controls, `b95fb7b`; clean merge `4b6a7eb`, logs in `runs/20261023-phase3-after/combined`): the CI
+pipeline (`--quick --previews none --tests none`) gives PASS, with an empty geometry diff against `modules_phase3`; 150 unit tests OK (1 skipped);
+`runtime-export` 32/32 PASS (`controls-touch` and `review-ring-b` included; same 3,947 nodes and 741,424 triangles).
+
 Visual maturity is unchanged by the split: `m7_ra1`, `m7_spine` and `ring_a_transfer` stay `L4_VISUAL_ACCEPTED`; `m8_forward`,
 `ra2_equip` and `rad_frame` stay `L4_VISUAL_CANDIDATE`. Republishing a record on its new host is not an art review.
 
@@ -465,6 +469,19 @@ Revisit the policy when a real asset exceeds the cap, many assets accumulate, or
 
 - The two rings share one generator and one spec by design: a ring session owns its asset, anchors and detail packs, and an engineering
   value change still goes through `data/wayfarer_3d.toml` (WF-CORE) and rebuilds both rings when the value is shared.
+- Remaining couplings between the rings, all deliberate:
+  - **Owned no source file.** The ring modules own targets, anchors and packs; the ring generator (`revision.py`, WF-CORE), the rotor and
+    crew-route builders (`rotor.py`, `crew.py`, WF-SPINE) and the sector skin and interiors (WF-HABITAT) are shared code. A change there
+    is an integration change, built with target `HABITAT`.
+  - **Shared components.** `WF_RING_SECTOR` and `WF_INTERIOR_*` serve all twelve sectors; changing them rebuilds both rings.
+  - **One procedure for both rotors.** The stop-lock, touchdown and seal-fault actions live in the assembly, because a matched spin-down
+    keeps the counter-rotating momenta cancelled.
+  - **One formula couples B to A.** Ring B's vestibule port is sized clear of hub 1's forward cartridge-withdrawal paths
+    (`crew_transfer.vestibule`), so a ring-A rotor or cartridge value can move ring B's vestibule. Rebuild both rings (`HABITAT`) after one.
+  - **Serial integration.** The build lock, the whole-ship baseline (`accept`) and the published runtime package are single. Two ring
+    sessions build in seconds each but serialise on one machine, and their branches integrate one after the other.
+  - **Ring B has no detail pack yet.** Its anchors (`WF-RING-B.*`) exist; the first ring-B pack will be the first test of a parallel
+    ring-B session.
 - The committed authored path keeps PBR base colour, roughness and metallic, UVs and normals; procedural, modifier, driver and constraint
   data does not travel, and joined multi-mesh imports keep face smooth flags but not custom normals. Textures embedded in the `.glb` are
   imported but not checked by any gate yet.
