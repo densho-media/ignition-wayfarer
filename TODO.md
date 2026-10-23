@@ -34,25 +34,14 @@ close-up, regression check, MODEL/TODO and Model Status update.
   - **Owner review:** accept, correct or reject the two `L4_VISUAL_CANDIDATE` packs (`rad_frame` radiator frame fittings, `ra2_equip` ring A
     sector 2 overhead trays). Self-review: the radiator fittings are hard to see at ship scale; the sector 2 trays read but sit close to the
     fit-out items. M8.1 is reviewed under its own entry below.
-  - **Next phase, proposed: split WF_HABITAT per ring (WF-RING-B owns its engineering).** Not started; needs a go-ahead.
-    - *Change:* `components/revision.py` `habitat()` builds one ring per asset (`WF_HABITAT_A`/`WF_HABITAT_B`, targets `HABITAT_A`/`HABITAT_B`),
-      each with its `Rotor_j`, rotor control, sectors, crew hub (`components/crew.py` `hub`, `drum`) and closures; `build/build.py`
-      SUBSYSTEMS, the component dependencies (`RING_SECTOR`, the `INTERIOR_*` components stay shared and are linked by both) and `RETIRED`
-      for the old file; `data/modules.toml` (WF-RING-B gets its target, `shared_with` goes) and `modules.anchor_host` (SECTOR/ROTOR/DRUM
-      anchors resolve to the ring's own asset); `inspect.py` and `readback.py` ROTATING and `rotor_libraries`; `tools/checks.py` targets.
-    - *Consumers that name the asset or its group:* `export/godot.py` lineage (runtime node IDs of every ring node change; bindings go through
-      the manifest), `godot/scripts/inspector.gd` group labels, `data/ship_navigator.toml` groups, `shots/shots.toml` and
-      `shots/m5_subsystems.toml` selectors (`group:Assembly_HABITAT*` keeps matching both), `presentation/drive_preview.py`, the detail packs'
-      host (their anchors keep their IDs and frames, so pack contracts are unchanged), `tests/verify_rebuild.py`, `tests/verify_detail_authoring.py`.
-    - *Risks:* rotor drivers and the drum's driver read the rotor controls across files; the sim rig contract (`simulations/wf_sim_rig.json`,
-      WF.ROTOR.j identities) and the flight timeline must stay byte-identical except hashes; the crew route crosses both rings
-      (`human_entry.route_bodies`, BVH sweep); the export's mechanism frames are found by posing, so a missing control link shows as a frame loss.
-    - *Gates:* the migration proof in docs/MODULES.md (relocation of every ring object from WF_HABITAT into its ring file, `detail_equivalence`
-      at all poses, runtime manifest frames and counts, stills), full pipeline with rotation and route, runtime-export 31/31, verify_rebuild.
-    - *Rollback:* one commit; `git revert`, a full build (retirement moves the ring files to `milestones/`) and the previous baseline.
+  - **Phase 3, BUILT on branch `claude/habitat-ring-split`, awaiting owner approval to promote:** independent ring engineering assets
+    `WF_HABITAT_A` (WF-RING-A) and `WF_HABITAT_B` (WF-RING-B); `WF_HABITAT` is the assembly linking both, with the whole-habitat
+    rotor actions; a neutral WF-HABITAT owns it and the shared sector and interior components (docs/MODULES.md, Evidence, phase 3).
+    *Rollback:* revert the commit, run a full build, and move the two then unlinked ring files into `subsystems/milestones/` by hand;
+    the previous baseline is `modules_phase2`.
   - Deferred: a linked part library for repeated fittings, until a detail pack repeats one detailed form often enough that measured sharing
     pays (the export already shares identical meshes; RAD.FRAME's three blades share one mesh).
-  **Done when:** the owner has reviewed the candidates; the HABITAT split is its own entry once approved.
+  **Done when:** the owner has reviewed the candidates and phase 3 is promoted.
 
 - [ ] **M8 — Exterior production identity. M8.1 BUILT 2026-10-20, awaiting owner art review.** The accepted M7 standard on the
   exterior as `[production.m8]` (its own switch and maturity). M8.1: the Brow aft face (`M8.BROW.AFT`) and the Aegis Crown rim
