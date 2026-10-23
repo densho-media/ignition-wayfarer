@@ -20,6 +20,8 @@ const TARGET := 52.0           # button height, UI px (Apple HIG 44 pt, Material
 const GAP := 10.0
 const EDGE := 12.0             # margin inside the safe area
 const TAP_SLOP := 14.0         # a button press slid farther than this off the button is cancelled (navigation buttons)
+const HELP := {"demo.autoplay": "Let the chapter's body actions run by themselves (a review aid).",
+	"ui.confirm": "The next chapter (Skip before its goal is reached).", "demo.pause": "Pause or resume the guided camera or chapter."}
 const MOUSE_AFTER_TOUCH_MS := 700   # a real mouse click this soon after a touch at the same place is the browser's echo of it
 # Mobile 3-D resolution (PROTOTYPE display budget, docs/wayfarer-mobile-controls-plan.md §8): rendered pixels per CSS pixel, the
 # bounds of the adaptive scale and the frame-rate band it keeps. Rendering only: no geometry, material or simulation input changes.
@@ -388,11 +390,12 @@ func _refresh(force: bool) -> void:
 		var vs := _size()
 		# utility row: top right, right to left (Help always last on the right)
 		var x: float = vs.x - safe[2] - EDGE
+		var util_y: float = safe[1] + EDGE + (56.0 if primary and vs.x < 640.0 else 0.0)    # upright phone: under the page's Exit row
 		var util: Array = state.get("utility", []) + [["touch.help", "?", "util"]]
 		util.reverse()
 		for u in util:
 			var bn := _make_button(str(u[1]), "util")
-			bn.position = Vector2(x - bn.size.x, safe[1] + EDGE)
+			bn.position = Vector2(x - bn.size.x, util_y)
 			x -= bn.size.x + GAP
 			buttons.append({"node": bn, "id": u[0], "role": "util", "label": u[1]})
 		# actions: bottom right, a column of rows from the bottom up; the primary action largest and nearest the thumb
@@ -572,7 +575,7 @@ func _show_panel() -> void:
 			if I.look_wanted():
 				lines.append("Right thumb: drag to look; your view also aims a push-off.")
 			for a in state.get("actions", []):
-				var what: String = I.action(str(a[0])).get("what", "")
+				var what: String = HELP.get(str(a[0]), I.action(str(a[0])).get("what", ""))
 				lines.append("%s — %s" % [a[1], what])
 			for u in state.get("utility", []):
 				lines.append("%s — %s" % [u[1], I.action(str(u[0])).get("what", "")])

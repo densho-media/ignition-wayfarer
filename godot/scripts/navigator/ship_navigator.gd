@@ -225,6 +225,8 @@ func layout() -> void:
 func _layout_compact(size: Vector2) -> void:
 	var safe: Array = WfInput.touch.safe
 	var top := float(safe[1]) + 76.0
+	if size.x < 640.0 and demo != null:
+		top = demo.hud.position.y + (demo.hud.size.y + 8.0 if demo.hud.visible else 0.0)    # upright: under the chapter text
 	panel.visible = level > 0 and not space_shown()
 	keys_label.visible = false
 	hint_label.visible = level == 2

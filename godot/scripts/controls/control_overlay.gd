@@ -737,8 +737,10 @@ func _show_card() -> void:
 		return
 	for c in card_chips.get_children():
 		c.queue_free()
+	var compact: bool = I.compact()
+	card_chips.visible = not compact
 	if card_done_t > 0.0:
-		card_head.text = "✓  LEARNED · %s" % l.title
+		card_head.text = ("LEARNED · %s" if compact else "✓  LEARNED · %s") % l.title      # the web font has no ✓ (P05)
 		card_head.add_theme_color_override("font_color", WfReviewGuide.C_OK)
 		card_body.visible = false
 		card_chips.add_child(WfReviewGuide.chip(I.label("ui.codex"), "controls and settings" if I.device == "touch" else "change keys any time", "exit"))
@@ -747,6 +749,9 @@ func _show_card() -> void:
 	card_head.add_theme_color_override("font_color", WfReviewGuide.C_NEXT)
 	card_body.visible = true
 	card_body.text = l.text
+	if compact:
+		card_body.text = I.lesson_try(l)              # MOB-001: one short line on a phone; the buttons it names are on screen
+		return
 	# one chip per step: amber for the inputs that complete the lesson, blue for the rest, grey for the Codex
 	for st in l.steps:
 		var ids: Array = st[0]

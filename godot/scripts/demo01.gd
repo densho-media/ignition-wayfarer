@@ -542,7 +542,7 @@ func _layout_compact() -> void:
 	var vs := get_viewport().get_visible_rect().size
 	var safe: Array = WfInput.touch.safe
 	var narrow := vs.x < 640.0
-	var top := float(safe[1]) + 62.0 + (8.0 if narrow else 0.0)      # under the page's Exit and full-screen buttons (shell, top left)
+	var top := float(safe[1]) + 62.0 + (64.0 if narrow else 0.0)      # under the page's Exit and full-screen buttons (shell, top left)
 	var w := (vs.x - float(safe[0]) - float(safe[2]) - 24.0) if narrow else clampf(vs.x * 0.56 - float(safe[0]), 260.0, 640.0)
 	hud.position = Vector2(float(safe[0]) + 12.0, top)
 	hud.custom_minimum_size.x = w
