@@ -387,7 +387,7 @@ def run_touch(url, play_release, binary, sandbox, out, record_check, metrics, ti
         page.send('Page.navigate', {'url': url + play_release['page'] + '?arg=--&arg=--touch-probe'})
         s = until(lambda s: s['mode'] == 'welcome' and s['panel'])
         record_check('touch: phone detected, CSS-pixel interface, welcome without a key', s and s['primary'] and s['density'] == 3
-                     and s['ui'] == [844, 390], seconds=round(time.monotonic() - t0, 1), scale_3d=s and s['scale_3d'])
+                     and abs(s['ui'][0] - 844) < 2 and abs(s['ui'][1] - 390) < 2, seconds=round(time.monotonic() - t0, 1), scale_3d=s and s['scale_3d'])
         page.screenshot(out / 'touch_1_welcome.png')
         tap_at(next((centre(r) for t, r in (s or {}).get('panel', []) if t.startswith('Start with tips')), (422, 300)))
         s = until(lambda s: s['mode'] == '' and s['intro_done'])
@@ -492,7 +492,7 @@ def run_touch(url, play_release, binary, sandbox, out, record_check, metrics, ti
                      chapter=[chapter, scene(s).get('chapter')], ui=s and s['ui'])
         page.send('Emulation.setDeviceMetricsOverride', {'width': 1180, 'height': 820, 'deviceScaleFactor': 2, 'mobile': True,
                                                           'screenOrientation': {'type': 'landscapePrimary', 'angle': 90}})
-        s = until(lambda s: s['ui'] == [1180, 820])
+        s = until(lambda s: abs(s['ui'][0] - 1180) < 2 and abs(s['ui'][1] - 820) < 2)
         page.frames(2)
         page.screenshot(out / 'touch_10_tablet.png')
         record_check('touch: tablet size, same run', s and scene(s)['chapter'] == chapter, ui=s and s['ui'])

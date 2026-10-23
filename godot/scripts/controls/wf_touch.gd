@@ -125,6 +125,12 @@ func _read_safe() -> void:
 
 func _on_resize() -> void:
 	release_all()                                # rotation or a browser bar: every finger starts again (no stuck stick)
+	if primary and OS.has_feature("web"):
+		var d := clampf(float(_js("window.devicePixelRatio || 1", dpr)), 1.0, 4.0)
+		if absf(d - dpr) > 0.01:                 # moved to another screen or zoomed: keep 1 UI px = 1 CSS px
+			dpr = d
+			I.apply()
+			_start_quality()
 	_read_safe()
 	signature = ""
 
