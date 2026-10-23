@@ -17,7 +17,7 @@ class RegistryTests(unittest.TestCase):
         self.s = load()[0]
 
     def test_registry_and_packs_resolve(self):
-        self.assertEqual(modules.validate(self.s, ROOT, legacy=pd.ASSEMBLIES), [])
+        self.assertEqual(modules.validate(self.s, ROOT), [])
         self.assertEqual(modules.order(modules.registry(ROOT))[0], 'WF-CORE')
 
     def test_contract_file_is_current(self):

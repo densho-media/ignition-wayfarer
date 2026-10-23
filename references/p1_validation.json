@@ -1,7 +1,7 @@
 {
   "result": "PASS",
   "blender": "5.2.2 LTS",
-  "spec_hash": "0a0f8bd7964453ae21b17a8a963c6cf224d624492abd82a57cfb123482e3eba4",
+  "spec_hash": "861a969c7da0bf441ad5c4c2fb50a90ec9a959051cf3c2310ceb9a44f8a27360",
   "source_map_hash": "99cd812784b9ce8dc35eff1ed107627617c8e72fa9de55fedee6268f939f0ee1",
   "configurations": {
     "COAST": {
@@ -1839,6 +1839,18 @@
       "authored": 0,
       "enabled": true
     },
+    "WF_DETAIL_M8_BROW_AFT.blend": {
+      "assembly": "M8.BROW.AFT",
+      "objects": 5,
+      "authored": 0,
+      "enabled": true
+    },
+    "WF_DETAIL_M8_CROWN_RIM.blend": {
+      "assembly": "M8.CROWN.RIM",
+      "objects": 5,
+      "authored": 0,
+      "enabled": true
+    },
     "WF_DETAIL_RA2_EQP.blend": {
       "assembly": "RA2.EQP",
       "objects": 2,
@@ -1854,6 +1866,12 @@
     "WF_CREW_TRANSFER.blend": {
       "instances": [
         "M7.TRK"
+      ]
+    },
+    "WF_FORWARD_SHIELD.blend": {
+      "instances": [
+        "M8.BROW.AFT",
+        "M8.CROWN.RIM"
       ]
     },
     "WF_HABITAT.blend": {
@@ -3697,6 +3715,28 @@
       ],
       "direct_links": []
     },
+    "detail/WF_DETAIL_M8_BROW_AFT.blend": {
+      "generated_objects": 5,
+      "ids": [
+        "M8.BROW.AFT.BOUNDARY",
+        "M8.BROW.AFT.CAPS",
+        "M8.BROW.AFT.FASTENERS",
+        "M8.BROW.AFT.MARKINGS",
+        "M8.BROW.AFT.PANELS"
+      ],
+      "direct_links": []
+    },
+    "detail/WF_DETAIL_M8_CROWN_RIM.blend": {
+      "generated_objects": 5,
+      "ids": [
+        "M8.CROWN.RIM.CLOSEOUTS",
+        "M8.CROWN.RIM.FASTENERS",
+        "M8.CROWN.RIM.FRAMES",
+        "M8.CROWN.RIM.MARKINGS",
+        "M8.CROWN.RIM.PANELS"
+      ],
+      "direct_links": []
+    },
     "detail/WF_DETAIL_RA2_EQP.blend": {
       "generated_objects": 2,
       "ids": [
@@ -4067,7 +4107,7 @@
       "direct_links": []
     },
     "subsystems/WF_FORWARD_SHIELD.blend": {
-      "generated_objects": 673,
+      "generated_objects": 665,
       "ids": [
         "Brow_Joint_Hoop_11.2_00",
         "Brow_Joint_Hoop_11.2_01",
@@ -4406,16 +4446,6 @@
         "IF_SHIELD_SECTOR_AFT_2",
         "IF_SHIELD_SECTOR_AFT_3",
         "IF_SHIELD_SPINE_JOINT",
-        "M8.BROW.AFT.BOUNDARY",
-        "M8.BROW.AFT.CAPS",
-        "M8.BROW.AFT.FASTENERS",
-        "M8.BROW.AFT.MARKINGS",
-        "M8.BROW.AFT.PANELS",
-        "M8.CROWN.RIM.CLOSEOUTS",
-        "M8.CROWN.RIM.FASTENERS",
-        "M8.CROWN.RIM.FRAMES",
-        "M8.CROWN.RIM.MARKINGS",
-        "M8.CROWN.RIM.PANELS",
         "Shield_Damage_Cell_01_01",
         "Shield_Damage_Cell_01_02",
         "Shield_Damage_Cell_01_03",
@@ -4697,6 +4727,8 @@
         "Truss_Spoke_12_aft",
         "Truss_Spoke_12_diagonal",
         "Truss_Spoke_12_fwd",
+        "WF.DETAIL.M8.BROW.AFT",
+        "WF.DETAIL.M8.CROWN.RIM",
         "WF.FORWARD.CROWN.BAY.01",
         "WF.FORWARD.CROWN.BAY.02",
         "WF.FORWARD.CROWN.BAY.03",
@@ -4743,7 +4775,10 @@
         "WF.FORWARD.WELL.03",
         "WF.FORWARD.WELL.04"
       ],
-      "direct_links": []
+      "direct_links": [
+        "detail/WF_DETAIL_M8_BROW_AFT.blend",
+        "detail/WF_DETAIL_M8_CROWN_RIM.blend"
+      ]
     },
     "subsystems/WF_HABITAT.blend": {
       "generated_objects": 507,

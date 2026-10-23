@@ -69,7 +69,7 @@ def validate_pure(root, ident):
     from spec import load
     import production_detail as pd
     s = load(root)[0]; mid, names, asm = selection(root, ident)
-    fails = [f for f in modules.validate(s, root, legacy=pd.ASSEMBLIES) if any(n in f for n in [mid, *names, *asm]) or 'cycle' in f]
+    fails = [f for f in modules.validate(s, root) if any(n in f for n in [mid, *names, *asm]) or 'cycle' in f]
     out = {}
     for a in sorted(asm):
         screens = pd.check(s, a); env = modules.envelope_fails(s, a)

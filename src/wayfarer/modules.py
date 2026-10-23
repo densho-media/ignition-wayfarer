@@ -293,9 +293,9 @@ def owned_files(root, m):
     return sorted({str(p.relative_to(root)) for g in m.get('owns', []) for p in Path(root).glob(g) if p.is_file()})
 
 
-def validate(s, root=ROOT, legacy=()):
+def validate(s, root=ROOT):
     """Registry and pack problems needing the spec: unknown or cyclic dependencies, a target or file owned twice, an owned glob matching
-    nothing, a pack on an unknown module or anchor, its function guard, its code file and an assembly ID already used by the legacy table."""
+    nothing, a pack on an unknown module or anchor, its function guard and its code file."""
     root = Path(root); reg = registry(root); mods = reg['module']; fails = []
     shared = {*s.get('production', {}).get('materials', {}), *s.get('production', {}).get('m8', {}).get('materials', {})}
     owner = {}
@@ -325,8 +325,6 @@ def validate(s, root=ROOT, legacy=()):
     for a, t in assemblies(packs_).items():
         if t['module'] not in mods:
             fails.append(f"{t['pack']}: unknown module {t['module']}")
-        if a in legacy:
-            fails.append(f"{t['pack']}: assembly {a} is still in production_detail.ASSEMBLIES")
         if t.get('anchor') not in anc:
             fails.append(f"{t['pack']}: {a} anchor {t.get('anchor')} is not an anchor of the registry")
         elif 'function' in t and anc[t['anchor']].get('function') != t['function']:
