@@ -10,7 +10,60 @@
   }
  },
  "contract": "WF_MODULE_PUBLICATION",
- "contract_hash": "4fc3518e1d9fb7e4",
+ "contract_hash": "0fec3252adb051cb",
+ "contract_terms": {
+  "RAD.FRAME": {
+   "anchor": "WF-THERMAL.RADIATOR.ORIGIN",
+   "asset": "WF_DETAIL_RAD_FRAME",
+   "envelope": [
+    [
+     -91.3,
+     0.0,
+     -1.7
+    ],
+    [
+     91.3,
+     30.5,
+     1.7
+    ]
+   ],
+   "frame": {
+    "family": "asset_origin",
+    "host": "RADIATOR",
+    "matrix": [
+     [
+      1.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      1.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      1.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ]
+    ],
+    "module": "WF-THERMAL",
+    "object": null,
+    "parent": null
+   },
+   "host": "RADIATOR",
+   "scope": "pack"
+  }
+ },
  "fingerprint": {
   "detail/WF_DETAIL_RAD_FRAME.blend": {
    "direct_links": [],
@@ -169,13 +222,13 @@
   }
  },
  "git_dirty": false,
- "git_revision": "0dde080e3c870ea94711491fc65a417ced8307ec",
+ "git_revision": "71bcc78febe88bad3f06c1a41abecc93eefa9205",
  "inputs_hash": "4c83fdab15caef51",
  "module": "WF-THERMAL",
  "note": "A publication makes the pack eligible for integration; it is not an owner acceptance and changes no maturity or canon.",
  "pack": "rad_frame",
  "pack_version": 1,
- "published_utc": "2026-10-22T15:13:04Z",
- "spec_sha256": "4bd7bb763a25ad8034f7c036f6809d6d46e626629b30bb5b8043c63a7f3a2cf8",
- "version": 1
+ "published_utc": "2026-10-23T07:20:37Z",
+ "spec_sha256": "c4c5aa25a1861c62cc710a36800ad88aa164d7f728b25572bb90d6ad2469c9bb",
+ "version": 2
 }

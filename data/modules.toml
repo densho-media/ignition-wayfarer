@@ -105,6 +105,18 @@ inspect = ["forward"]
 host = "HABITAT"
 note = "sector frame of habitat_ring.sectors; follows the ring's rotation"
 
+[anchor_family.rotor_frame]
+# <ring module>.ROTOR.<ring>: Rotor_<ring> in WF_HABITAT, at the ring centre (rotor_interface.rotors x), turned about +X by its driver; the
+# frame is the rest pose at the index angle (phase, the saved frame 1). Detail on it turns with the ring (spin, spin-down, locked index).
+host = "HABITAT"
+note = "rotor frame; motion ROTOR_SPIN_X; rest at the index angle"
+
+[anchor_family.drum_frame]
+# <ring module>.DRUM.<ring>: Drum_<ring>, the despun transfer drum of a human-entry rotor (Q46, MEC-019), at the same centre and rest angle;
+# it stays at the index angle (despun) while drum_sync is 0 and turns with its ring while it is 1. Only rotors with a human-entry vestibule.
+host = "HABITAT"
+note = "despun drum frame; motion DRUM_DESPUN_X; rest at the index angle"
+
 [anchor_family.asset_origin]
 # <module>.<TARGET>.ORIGIN: the origin of a module's own component or subsystem collection (identity). A detail file linked there is
 # instanced wherever the host is (a component linked per blade carries it on every blade).

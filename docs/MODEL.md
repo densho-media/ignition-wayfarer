@@ -1331,12 +1331,12 @@ route clearance: the route sweep is unchanged.
 ## Production layer (M7)
 
 M7 adds a generated L4 visual layer to one contiguous path: the primary port, the entry chamber and trunk node, the stationary
-trunk, ring A's spin transfer, ring A's crew tube and ring A sector 1 (`[production]`, `production_detail.py`,
-`components/production.py`). Its source is the L4 definition in S&E 48!A23 (WF-022). It sits over the unchanged engineering
+trunk, ring A's spin transfer, ring A's crew tube and ring A sector 1 (`[production]`, the detail packs `m7_spine`,
+`ring_a_transfer` and `m7_ra1`, `production_detail.py`, `components/production.py`). Its source is the L4 definition in S&E 48!A23 (WF-022). It sits over the unchanged engineering
 geometry and carries no load. It changes no pressure boundary, interface, volume or clearance.
 
-- **Assemblies (stable IDs):** `M7.EXT.PORT`, `M7.ENT`, `M7.TRK`, `M7.XFR`, `M7.SPK` and `M7.RA1`. `[production].assemblies`
-  lists the ones that are built. Each assembly family becomes one joined object, `Prod_<assembly>_<family>`, of
+- **Assemblies (stable IDs):** `M7.EXT.PORT`, `M7.ENT`, `M7.TRK`, `M7.XFR`, `M7.SPK` and `M7.RA1`, each a detail pack assembly in its
+  own linked asset (see Modular detail). Each assembly family becomes one joined object, `Prod_<assembly>_<family>`, of
   `kind = production_detail` and `layer = PRODUCTION`, with `representation = REP_HERO`, its `m7_assembly`, its
   `surface_class` and `maturity = L4_VISUAL_ACCEPTED`. The owner accepted the six assemblies on 2026-10-20, after the M7.1 correction
   pass. The acceptance is visual and asset-level for this section only, not engineering GO. They are the production standard for later
@@ -1359,15 +1359,14 @@ geometry and carries no load. It changes no pressure boundary, interface, volume
     openings (with `opening_margin_m`), handrails, lights, ladder, route stripe, placards and chevrons, plus housings round the
     light strips.
   - `M7.XFR`: ring A's drum lining, darker machinery panels on the outer wall above the crawl rail, beyond each tube opening's frame
-    by `opening_margin_m` and off the rails, lights, transfer panel and placards. Parented to `Drum_1`. The closures, door seal lands
-    and guard rings stay physics-locked grey.
+    by `opening_margin_m` and off the rails, lights, transfer panel and placards. On the despun drum (anchor `WF-RING-A.DRUM.1`,
+    `Drum_1`). The closures, door seal lands and guard rings stay physics-locked grey.
   - `M7.SPK`: ring A's sector-1 crew tube, radial run. Ring frames every 1.5 m and cladding between them, off the ladder, arrest rail,
-    lights, hatch panel and fit-out. Parented to `Rotor_1`. The collar, elbows and sector hatch are unchanged.
+    lights, hatch panel and fit-out. On ring A's rotor (anchor `WF-RING-A.ROTOR.1`, `Rotor_1`). The collar, elbows and sector hatch
+    are unchanged.
   - `M7.RA1`: ring A sector 1's overhead. Removable service panels on trays in the bays of the route fit-out's overhead frame grid, off
     every item that reaches the overhead, the hatch opening and the landing well's column. Housings round the aisle lights. Nothing
-    comes below -2.85 m. Since 2026-10-22 it is the detail pack `m7_ra1` (docs/MODULES.md): its own asset
-    `detail/WF_DETAIL_M7_RA1.blend`, linked by WF_HABITAT at the anchor `WF-RING-A.SECTOR.1.1` (sector instance `(1, 1)`), with the
-    same scope, switch and maturity. The migration changed no geometry (fingerprint relocation proof against `baseline_m8_exterior`).
+    comes below -2.85 m. On sector instance `(1, 1)` (anchor `WF-RING-A.SECTOR.1.1`).
 - **Runtime:** the production nodes (manifest v2: `layer`, `representation`, `assembly`, `maturity`, `surface_class`) are drawn
   within 28 m of the camera and fade out beyond (`godot/scripts/production_layer.gd`, in the boarding, inspector, flight and
   hologram scenes). Demonstrator 01 ends with ARRIVAL (the ring A sector 1 habitat stop) and INSPECT (the layer off and on over
@@ -1383,11 +1382,18 @@ geometry and carries no load. It changes no pressure boundary, interface, volume
 - **Ring A safety:** ring A remains a FAIL comparator for casualty transfer (15!A221). The production layer depicts the
   healthy-crew training route and claims no rescue or pressure qualification.
 
-## Modular detail (2026-10-22)
+## Modular detail
 
 Production detail is organised in subsystem modules (`data/modules.toml`) and detail packs (`data/detail/*.toml`), each assembly in its
-own linked asset at a declared anchor with a contract hash (`simulations/wf_module_contracts.json`); docs/MODULES.md. Built packs:
-- `m7_ra1` (M7.RA1, WF-RING-A, L4_VISUAL_ACCEPTED): migrated unchanged from the M7 section.
+own linked asset (`assets/wayfarer/detail/WF_DETAIL_<assembly>.blend`) at a declared anchor, with its pack's own contract and publication
+record (`references/modules/<pack>.json`); docs/MODULES.md. Every production assembly is a pack; the hosts build none themselves.
+- `m7_spine` (M7.EXT.PORT and M7.ENT on the SERVICE origin, M7.TRK on the CREW_TRANSFER origin), `ring_a_transfer` (M7.XFR on the
+  despun drum `Drum_1`, M7.SPK on `Rotor_1`) and `m7_ra1` (M7.RA1 on sector `(1, 1)`): the M7 section, `L4_VISUAL_ACCEPTED`, scope M7.
+  Migrated without change (2026-10-22 and 2026-10-23): identical generated elements, a fingerprint relocation proof, identical evaluated
+  geometry with the rings turned, the drum synchronized, HIGH_POWER and DOCKED with every closure open, an identical runtime manifest
+  (frames included; the XFR/SPK node IDs changed with the lineage) and pixel-identical stills.
+- `m8_forward` (M8.BROW.AFT, M8.CROWN.RIM on the FORWARD_SHIELD origin): M8.1, `L4_VISUAL_CANDIDATE`, scope M8, static with the Crown
+  in every state; migrated with the same proofs and an unchanged `m8_readback`.
 - `rad_frame` (RAD.FRAME, WF-THERMAL, L4_VISUAL_CANDIDATE): band clamps on the blade's 11 transverse frames (both truss faces, five
   across), gusset plates at the truss nodes on both edges and an aft edge guard, 155 elements in one detail asset linked once into the
   blade component, so all three blades share it. Every footprint lies inside a 0.125 m non-emitting bay joint or beyond the blade's ends:
@@ -1396,7 +1402,8 @@ own linked asset at a declared anchor with a contract hash (`simulations/wf_modu
   ring A sector 2 (WORK_MEDICAL_OPS), broken round every item within 2 cm of the overhead, the hatch opening and the landing well, with
   a junction box at each run's ends (45 elements), all in the overhead band (-2.90 to -2.85 m), on sector instance (1, 2) only.
 Both candidates were built in parallel on separate branches that touched only their own packs, then merged without conflict.
-Every other production assembly is still built inside its host.
+Approved hand-authored meshes can be committed as glTF data under their pack (`data/detail/<pack>/*.glb`) and are then rebuilt from a
+clean checkout; none is committed yet.
 
 ## Exterior production layer (M8.1)
 
@@ -1407,7 +1414,7 @@ thickness, protection performance and structural mass stay unqualified (S&E 36, 
 
 - **Switch:** `[production.m8].enabled` is independent of `[production].enabled`. Off rebuilds the assets with an empty geometry diff
   against the accepted M7 baseline (verified 2026-10-20, `runs/20261020T1300Z-m8-off-quick`: 0 changed, added or removed).
-- **Assemblies:** `M8.BROW.AFT` and `M8.CROWN.RIM`, built in `WF_FORWARD_SHIELD`. Objects `Prod_BROW_AFT_<family>` and
+- **Assemblies:** `M8.BROW.AFT` and `M8.CROWN.RIM`, the detail pack `m8_forward`, linked into `WF_FORWARD_SHIELD` at its origin. Objects `Prod_BROW_AFT_<family>` and
   `Prod_CROWN_RIM_<family>` (panels, frames, closeouts, caps, boundary, fasteners, markings): one joined mesh per family, 10 objects,
   `kind = production_detail`, `design_class = ARTISTIC` (the layer over the shield), `production_scope = M8`, their own maturity and a
   Godot draw range (`detail_range_m`: 1500 m for panels and frames, 160 m for fasteners and lettering).

@@ -10,7 +10,61 @@
   }
  },
  "contract": "WF_MODULE_PUBLICATION",
- "contract_hash": "95e5c1545de7976f",
+ "contract_hash": "f53ecd2b6dce7f4c",
+ "contract_terms": {
+  "RA2.EQP": {
+   "anchor": "WF-RING-A.SECTOR.1.2",
+   "asset": "WF_DETAIL_RA2_EQP",
+   "envelope": [
+    [
+     -1.75,
+     -2.9,
+     -2.45
+    ],
+    [
+     1.75,
+     -2.85,
+     2.45
+    ]
+   ],
+   "frame": {
+    "family": "ring_sector",
+    "function": "WORK_MEDICAL_OPS",
+    "host": "HABITAT",
+    "matrix": [
+     [
+      1.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      -0.5,
+      -0.866025403784,
+      -14.0
+     ],
+     [
+      0.0,
+      0.866025403784,
+      -0.5,
+      24.248711305964
+     ],
+     [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ]
+    ],
+    "module": "WF-RING-A",
+    "object": "Sector_1_2",
+    "parent": "Rotor_1"
+   },
+   "host": "HABITAT",
+   "scope": "pack"
+  }
+ },
  "fingerprint": {
   "detail/WF_DETAIL_RA2_EQP.blend": {
    "direct_links": [],
@@ -119,13 +173,13 @@
   }
  },
  "git_dirty": false,
- "git_revision": "1a0db770910828ad4942533d5e4cd7ffeade3a3d",
+ "git_revision": "71bcc78febe88bad3f06c1a41abecc93eefa9205",
  "inputs_hash": "3f4ea25ce452d946",
  "module": "WF-RING-A",
  "note": "A publication makes the pack eligible for integration; it is not an owner acceptance and changes no maturity or canon.",
  "pack": "ra2_equip",
  "pack_version": 1,
- "published_utc": "2026-10-22T15:13:22Z",
- "spec_sha256": "4bd7bb763a25ad8034f7c036f6809d6d46e626629b30bb5b8043c63a7f3a2cf8",
- "version": 1
+ "published_utc": "2026-10-23T07:20:26Z",
+ "spec_sha256": "c4c5aa25a1861c62cc710a36800ad88aa164d7f728b25572bb90d6ad2469c9bb",
+ "version": 2
 }

@@ -150,8 +150,6 @@ def crew_transfer(c, s):
     survival.refuge(c, s)              # SP-48 / SP-50 / SP-54 envelopes in the refuge's end zones (PROTOTYPE)
     import fitout
     fitout.trunk(c, s)                 # IND-001 3.1: the trunk's fit-out (ARCHITECTURE layer, kind route_fitout)
-    import production
-    production.build(c, s, 'M7.TRK')  # M7: the trunk's production layer (L4 visual, PROTOTYPE)
     # Q46: the spine-port gates (stationary-side closures), saved closed; previews and the route sweep open them in memory.
     gates = [q for j in s['human_entry']['vestibule_rotors'] for q in ct.closures(s, j) if q['kind'] == 'PORT_GATE']
     if gates:
@@ -225,10 +223,6 @@ def hub(c, s, parent, j):
         fitout.drum(c, s, j, body)
     if j in h['tube_rotors']:
         fitout.tube_ends(c, s, j, parent)
-    if j == s['induction']['ring']:     # M7: ring A's transfer surroundings (drum frame) and crew tube (rotor frame), L4 visual, PROTOTYPE
-        import production
-        production.build(c, s, 'M7.XFR', body)
-        production.build(c, s, 'M7.SPK', parent)
     if ctrl is not None:
         for q in ct.closures(s, j):
             if q['kind'] != 'PORT_GATE':

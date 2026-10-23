@@ -77,7 +77,13 @@ def detail_checks(s,root,path,objects,detail_assets):
         assert all(abs(o.matrix_basis[i][j]-(1.0 if i==j else 0.0))<1e-9 for i in range(4) for j in range(4)),f'{o.name}: local transform not identity'
         assert all(abs(o.matrix_parent_inverse[i][j]-(1.0 if i==j else 0.0))<1e-9 for i in range(4) for j in range(4)),f'{o.name}: parent inverse not identity'
         assert o.get('anchor_hash')==modules.anchor_hash(reg,q),f'{o.name}: linked against another frame of {want[a]["anchor"]}'
-        if q['object']:
+        if q['object'] and q.get('motion'):
+            # A rotor or despun drum: at its anchor's centre, turning only about +X (its driver sets the angle; the rest angle is checked
+            # where the presets pose it, shot_tools.pose_preset).
+            m=o.parent.matrix_basis
+            assert all(abs(m[i][3]-q['matrix'][i][3])<1e-6 for i in range(3)),f'{q["object"]}: not at the centre of {want[a]["anchor"]}'
+            assert abs(m[0][0]-1)<1e-9 and all(abs(m[0][k])<1e-9 and abs(m[k][0])<1e-9 for k in (1,2)),f'{q["object"]}: turns about another axis than +X'
+        elif q['object']:
             m=o.parent.matrix_basis
             assert all(abs(m[i][j]-q['matrix'][i][j])<1e-6 for i in range(4) for j in range(4)),f'{q["object"]}: not at the anchor frame of {want[a]["anchor"]}'
             assert (o.parent.parent.name if o.parent.parent else None)==q['parent'],f'{q["object"]}: parent is not {q["parent"]}'

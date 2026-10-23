@@ -13,7 +13,7 @@ class ProductionTests(unittest.TestCase):
         self.s = load()[0]
 
     def test_every_assembly_keeps_the_route_clearances(self):
-        # The legacy assemblies and every detail pack's (docs/MODULES.md).
+        # Every detail pack's assemblies (docs/MODULES.md).
         for a in pd.listed(self.s):
             self.assertEqual(pd.check(self.s, a), [], a)
 

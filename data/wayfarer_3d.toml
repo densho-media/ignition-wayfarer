@@ -3682,26 +3682,9 @@ enabled = true
 # their PROTOTYPE labels.
 maturity = "L4_VISUAL_ACCEPTED"
 representation = "REP_HERO"
-# Assemblies built (stable IDs, production_detail.ASSEMBLIES); the slices add them entrance-first (15!A86). M7.RA1 is the detail pack
-# data/detail/m7_ra1.toml (docs/MODULES.md): same scope, switch and maturity, its own asset and parameters.
-assemblies = ["M7.EXT.PORT", "M7.ENT", "M7.TRK", "M7.XFR", "M7.SPK"]
-
-# M7.EXT.PORT (slice 1): flush service covers beside the primary port in the accepted M4 grammar (ochre, 15!A202), each with its
-# fasteners and stencil, and the port identification. Offsets (axial, tangential arc) from the port axis on the hull, off the port's hull
-# opening, inside the strap-free window round the approach aids and clear of them. Identification only: no livery, no registry lettering (S03 parked;
-# the GU WAYFARER 001 direction, 15!A225, stays for a later integration).
-[production.port]
-standoff_m = 0.004
-aid_margin_m = 0.15
-fastener_m = 0.03
-fastener_inset_m = 0.05
-port_id = "D1"
-port_id_at_m = [-1.0, 1.2]
-port_id_m = 0.32
-covers = [
-  { at_m = [1.75, -1.0], size_m = [0.55, 0.40, 0.025], label = "D1 EXT RELEASE", label_m = 0.035, function = "external hatch-release and equalization access cover (crew rescue from outside)" },
-  { at_m = [-1.62, -0.9], size_m = [0.70, 0.45, 0.025], label = "D1 UMBILICAL", label_m = 0.035, function = "docking umbilical service cover (power, data, air)" },
-]
+# The section's six assemblies are detail packs (docs/MODULES.md), each with its own asset and parameters under this scope's switch and
+# maturity: M7.EXT.PORT, M7.ENT and M7.TRK (data/detail/m7_spine.toml), M7.XFR and M7.SPK (ring_a_transfer.toml), M7.RA1 (m7_ra1.toml).
+# [production.entry] stays here: it is the shared M7 panel grammar those packs read.
 
 # M7.ENT, the entry chamber and trunk node (slice 1): replaceable wall-panel modules in the bays between the fit-out frames, off every
 # fixture, rail, light, panel and parked leaf; quarter-turn fasteners; housings round the light strips. Thin skins on the shell's inner face
@@ -3718,23 +3701,6 @@ fastener_inset_m = 0.035
 fastener_proud_m = 0.003
 housing_lip_m = 0.012
 housing_depth_m = 0.028
-# Bulkhead faces: radial panel segments from inner_m to the wall, clear of the hinge and parked leaf, the placards (0 and 180 deg) and
-# the equalization valves.
-bulkhead = { inner_m = 1.02, segment_max_deg = 30.0, hinge_keep_deg = 52.0, placard_keep_deg = 16.0, valve_keep_deg = 9.0 }
-
-# M7.XFR (slice 3): the drum lining. Panels on the drum's outer wall above the crawl rail, opening_margin_m beyond each crew-tube opening's
-# frame; the closures stay physics-locked (proxy grey, PROTOTYPE). Machinery treatment: darker panels in the rotating machinery space.
-[production.drum]
-opening_margin_m = 0.08
-panel_max_deg = 14.0
-panel_min_deg = 4.0
-
-# M7.SPK (slice 3): ring A's sector-1 crew tube, radial run: ring frames every frame_pitch_m, cladding between them.
-[production.tube]
-frame_pitch_m = 1.50
-frame_width_m = 0.05
-frame_depth_m = 0.030
-end_inset_m = 0.30
 
 # Production materials, [r, g, b, roughness, metallic] (Blender linear), by zone treatment over the surface classes (docs/SURFACE_BRIEF.md:
 # quiet greys and off-whites, saturated colour only for wayfinding, safety and service lines, M4 ochre for service covers 15!A202, polish
@@ -3774,7 +3740,8 @@ status = "PROTOTYPE"
 evidence_ref = "m8_exterior_identity"
 enabled = true
 maturity = "L4_VISUAL_CANDIDATE"
-assemblies = ["M8.BROW.AFT", "M8.CROWN.RIM"]
+# The two assemblies, M8.BROW.AFT and M8.CROWN.RIM, are the detail pack data/detail/m8_forward.toml (docs/MODULES.md), with their own
+# assets and the brow and crown parameters; this table stays their scope (switch, maturity, bays, materials, draw ranges).
 # Crown bays (1-based, production_detail.crown_sectors) that carry the sector module. Bay 1 was the representative sector: it passed the
 # clearance screen, the forward/hull inspection, the BVH clash readback and an empty off-diff first (runs/20261020T1330Z-m8-on1-quick),
 # then the same module went to all twelve bays. Repeating it qualifies no sector mechanism or performance.
@@ -3782,54 +3749,6 @@ crown_sectors = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
 # Godot draw ranges of the exterior detail (WfProductionLayer): panels and frames from far, fasteners and lettering only close.
 detail_range_m = 1500.0
 fine_range_m = 160.0
-
-# M8.BROW.AFT: panel modules on the skin's aft face between the existing joints (forward_shield.brow_panel_joints), off the truss's forward
-# chords by member radius + the shared clearance, in three treatments by what lies behind: structural cladding on the spoke columns
-# (off-white), service lanes on the 10 deg column in line with each Crown bay and its carriage-service hatch (cool grey, the crawler side,
-# 50!AG-A02), protected-equipment cladding in the innermost band over the hub, the EYE mounts and the Lance root (graphite) with an amber
-# boundary line. Inspection caps at the forward-chord nodes (ochre, the M4 maintenance-cover grammar), fasteners at panel corners,
-# lane stencils near the hub.
-[production.m8.brow]
-standoff_m = 0.03
-thickness_m = 0.04
-seam_m = 0.08
-bevel_m = 0.012
-r_m = [7.8, 40.6]
-panel_max_m = 2.6
-panel_max_width_m = 4.6
-lane_half_deg = 5.0
-protected_r_m = 11.2
-boundary_line_m = 0.12
-fastener_m = 0.07
-fastener_inset_m = 0.16
-fastener_proud_m = 0.015
-cap_radius_m = 0.32
-cap_thickness_m = 0.035
-cap_offset_m = 0.75
-stencil_r_m = 9.4
-stencil_m = 0.55
-
-# M8.CROWN.RIM: the sector module on the Crown housing's aft plate and the rim girder: a graphite doubler frame round the existing ochre
-# carriage-service hatch (rear_construction hatch), replaceable access panels either side of it (service grey), thermal-break closeouts where
-# the plate meets the rim girder and the inner wall (dark gasket), and markings on the rim's outer face: the sector boundary as a charcoal
-# half-stripe on each side of the module (two modules make one stripe) and the sector number, plus the hatch stencil.
-[production.m8.crown]
-standoff_m = 0.004
-frame_width_m = 0.16
-frame_gap_m = 0.04
-frame_thickness_m = 0.03
-rib_keep_m = 0.45
-panel_r_m = [41.3, 44.2]
-panel_thickness_m = 0.025
-panel_seam_m = 0.08
-panels_per_side = 3
-closeout_m = 0.14
-closeout_thickness_m = 0.02
-film_m = 0.003
-stripe_half_m = 0.16
-beacon_keep_m = 0.25
-numeral_m = 1.1
-hatch_stencil_m = 0.20
 
 # Exterior materials, [r, g, b, roughness, metallic] (Blender linear): exposure, temperature and job, not interior wall panels outside. Off-white
 # structural cladding (the high-albedo shade side of the Brow), cool service grey, graphite for protected equipment and doublers, charcoal

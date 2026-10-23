@@ -1,0 +1,812 @@
+{
+ "assemblies": {
+  "M7.ENT": {
+   "anchor": "WF-SPINE.SERVICE.ORIGIN",
+   "anchor_hash": "63d546dca99b636f",
+   "asset": "WF_DETAIL_M7_ENT",
+   "detail_class": "PRODUCTION",
+   "enabled": true,
+   "maturity": "L4_VISUAL_ACCEPTED"
+  },
+  "M7.EXT.PORT": {
+   "anchor": "WF-SPINE.SERVICE.ORIGIN",
+   "anchor_hash": "63d546dca99b636f",
+   "asset": "WF_DETAIL_M7_EXT_PORT",
+   "detail_class": "PRODUCTION",
+   "enabled": true,
+   "maturity": "L4_VISUAL_ACCEPTED"
+  },
+  "M7.TRK": {
+   "anchor": "WF-SPINE.CREW_TRANSFER.ORIGIN",
+   "anchor_hash": "d50188f5f99113e8",
+   "asset": "WF_DETAIL_M7_TRK",
+   "detail_class": "PRODUCTION",
+   "enabled": true,
+   "maturity": "L4_VISUAL_ACCEPTED"
+  }
+ },
+ "contract": "WF_MODULE_PUBLICATION",
+ "contract_hash": "91366d5e277957a3",
+ "contract_terms": {
+  "M7.ENT": {
+   "anchor": "WF-SPINE.SERVICE.ORIGIN",
+   "asset": "WF_DETAIL_M7_ENT",
+   "envelope": [
+    [
+     98.1,
+     -6.23,
+     -2.87
+    ],
+    [
+     100.75,
+     -1.4,
+     0.83
+    ]
+   ],
+   "frame": {
+    "family": "asset_origin",
+    "host": "SERVICE",
+    "matrix": [
+     [
+      1.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      1.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      1.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ]
+    ],
+    "module": "WF-SPINE",
+    "object": null,
+    "parent": null
+   },
+   "host": "SERVICE",
+   "scope": "M7"
+  },
+  "M7.EXT.PORT": {
+   "anchor": "WF-SPINE.SERVICE.ORIGIN",
+   "asset": "WF_DETAIL_M7_EXT_PORT",
+   "envelope": [
+    [
+     97.38,
+     -6.58,
+     -3.07
+    ],
+    [
+     101.48,
+     -5.72,
+     -0.45
+    ]
+   ],
+   "frame": {
+    "family": "asset_origin",
+    "host": "SERVICE",
+    "matrix": [
+     [
+      1.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      1.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      1.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ]
+    ],
+    "module": "WF-SPINE",
+    "object": null,
+    "parent": null
+   },
+   "host": "SERVICE",
+   "scope": "M7"
+  },
+  "M7.TRK": {
+   "anchor": "WF-SPINE.CREW_TRANSFER.ORIGIN",
+   "asset": "WF_DETAIL_M7_TRK",
+   "envelope": [
+    [
+     81.6,
+     -0.85,
+     -0.8
+    ],
+    [
+     102.45,
+     0.85,
+     0.85
+    ]
+   ],
+   "frame": {
+    "family": "asset_origin",
+    "host": "CREW_TRANSFER",
+    "matrix": [
+     [
+      1.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      1.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      1.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ]
+    ],
+    "module": "WF-SPINE",
+    "object": null,
+    "parent": null
+   },
+   "host": "CREW_TRANSFER",
+   "scope": "M7"
+  }
+ },
+ "fingerprint": {
+  "detail/WF_DETAIL_M7_ENT.blend": {
+   "direct_links": [],
+   "objects": {
+    "Prod_ENT_Bulkhead": {
+     "centroid": [
+      99.39999987065107,
+      -3.7790737665076364,
+      -1.0125997592497686
+     ],
+     "component_id": "M7.ENT.BULKHEAD",
+     "faces": 1444,
+     "instance": null,
+     "kind": "production_detail",
+     "matrix_world": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "max": [
+      100.63973236083984,
+      -1.4537878036499023,
+      0.7714800834655762
+     ],
+     "min": [
+      98.16027069091797,
+      -6.177026271820068,
+      -2.816150426864624
+     ],
+     "parent": null,
+     "type": "MESH",
+     "vertices": 1392
+    },
+    "Prod_ENT_Fasteners": {
+     "centroid": [
+      99.64866327417307,
+      -3.732951105732856,
+      -0.9470253207221597
+     ],
+     "component_id": "M7.ENT.FASTENERS",
+     "faces": 1392,
+     "instance": null,
+     "kind": "production_detail",
+     "matrix_world": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "max": [
+      100.6711654663086,
+      -1.4918168783187866,
+      0.7531808614730835
+     ],
+     "min": [
+      98.20518493652344,
+      -6.1389970779418945,
+      -2.797851324081421
+     ],
+     "parent": null,
+     "type": "MESH",
+     "vertices": 1856
+    },
+    "Prod_ENT_Housings": {
+     "centroid": [
+      99.4000015258789,
+      -3.755036659538746,
+      -1.0061590371963878
+     ],
+     "component_id": "M7.ENT.HOUSINGS",
+     "faces": 416,
+     "instance": null,
+     "kind": "production_detail",
+     "matrix_world": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "max": [
+      100.42646026611328,
+      -1.7189061641693115,
+      0.3215015232563019
+     ],
+     "min": [
+      98.37354278564453,
+      -5.791167259216309,
+      -2.3338193893432617
+     ],
+     "parent": null,
+     "type": "MESH",
+     "vertices": 384
+    },
+    "Prod_ENT_Panels": {
+     "centroid": [
+      99.66709661324288,
+      -3.673515675857314,
+      -0.9396971609211715
+     ],
+     "component_id": "M7.ENT.PANELS",
+     "faces": 2508,
+     "instance": null,
+     "kind": "production_detail",
+     "matrix_world": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "max": [
+      100.69850158691406,
+      -1.4636156558990479,
+      0.7701800465583801
+     ],
+     "min": [
+      98.18724822998047,
+      -6.1671929359436035,
+      -2.814857006072998
+     ],
+     "parent": null,
+     "type": "MESH",
+     "vertices": 2392
+    },
+    "Prod_ENT_Trays": {
+     "centroid": [
+      99.66352681526075,
+      -3.629425187105251,
+      -0.9350818210008911
+     ],
+     "component_id": "M7.ENT.TRAYS",
+     "faces": 770,
+     "instance": null,
+     "kind": "production_detail",
+     "matrix_world": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "max": [
+      100.69969940185547,
+      -1.4566454887390137,
+      0.7740220427513123
+     ],
+     "min": [
+      98.18389129638672,
+      -6.174168586730957,
+      -2.818692445755005
+     ],
+     "parent": null,
+     "type": "MESH",
+     "vertices": 844
+    }
+   }
+  },
+  "detail/WF_DETAIL_M7_EXT_PORT.blend": {
+   "direct_links": [],
+   "objects": {
+    "Prod_EXT_PORT_Covers": {
+     "centroid": [
+      99.46500015258789,
+      -6.472781538963318,
+      -0.7519032830993334
+     ],
+     "component_id": "M7.EXT.PORT.COVERS",
+     "faces": 52,
+     "instance": null,
+     "kind": "production_detail",
+     "matrix_world": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "max": [
+      101.42500305175781,
+      -6.427649974822998,
+      -0.5025755763053894
+     ],
+     "min": [
+      97.43000030517578,
+      -6.511894702911377,
+      -1.0257853269577026
+     ],
+     "parent": null,
+     "type": "MESH",
+     "vertices": 48
+    },
+    "Prod_EXT_PORT_Fasteners": {
+     "centroid": [
+      99.46500078837077,
+      -6.492647439241409,
+      -0.7542109787464142
+     ],
+     "component_id": "M7.EXT.PORT.FASTENERS",
+     "faces": 72,
+     "instance": null,
+     "kind": "production_detail",
+     "matrix_world": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "max": [
+      101.38999938964844,
+      -6.456027984619141,
+      -0.5394189953804016
+     ],
+     "min": [
+      97.46499633789062,
+      -6.523683071136475,
+      -0.9936347603797913
+     ],
+     "parent": null,
+     "type": "MESH",
+     "vertices": 96
+    },
+    "Prod_EXT_PORT_Lettering": {
+     "centroid": [
+      99.33320643328788,
+      -6.442161469501101,
+      -0.894405436285703
+     ],
+     "component_id": "M7.EXT.PORT.LETTERING",
+     "faces": 2341,
+     "instance": null,
+     "kind": "production_detail",
+     "matrix_world": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "max": [
+      101.16368865966797,
+      -5.791397571563721,
+      -0.5768929123878479
+     ],
+     "min": [
+      97.76918029785156,
+      -6.507004261016846,
+      -2.9674572944641113
+     ],
+     "parent": null,
+     "type": "MESH",
+     "vertices": 3212
+    }
+   }
+  },
+  "detail/WF_DETAIL_M7_TRK.blend": {
+   "direct_links": [],
+   "objects": {
+    "Prod_TRK_Fasteners": {
+     "centroid": [
+      91.31383944039393,
+      -0.09410450325789627,
+      0.11736433736443745
+     ],
+     "component_id": "M7.TRK.FASTENERS",
+     "faces": 2376,
+     "instance": null,
+     "kind": "production_detail",
+     "matrix_world": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "max": [
+      102.36035919189453,
+      0.7884514927864075,
+      0.7869105339050293
+     ],
+     "min": [
+      81.68836212158203,
+      -0.7878292798995972,
+      -0.7214241623878479
+     ],
+     "parent": null,
+     "type": "MESH",
+     "vertices": 3168
+    },
+    "Prod_TRK_Housings": {
+     "centroid": [
+      90.81603113810222,
+      0.37875973526388407,
+      0.10148836140121732
+     ],
+     "component_id": "M7.TRK.HOUSINGS",
+     "faces": 1440,
+     "instance": null,
+     "kind": "production_detail",
+     "matrix_world": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "max": [
+      101.21136474609375,
+      0.5991523265838623,
+      0.7831714749336243
+     ],
+     "min": [
+      82.08736419677734,
+      0.15134139358997345,
+      -0.5991523265838623
+     ],
+     "parent": null,
+     "type": "MESH",
+     "vertices": 1344
+    },
+    "Prod_TRK_Panels": {
+     "centroid": [
+      91.29173546037825,
+      -0.09171990512571772,
+      0.09840635974885775
+     ],
+     "component_id": "M7.TRK.PANELS",
+     "faces": 4766,
+     "instance": null,
+     "kind": "production_detail",
+     "matrix_world": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "max": [
+      102.38735961914062,
+      0.7982272505760193,
+      0.7982152700424194
+     ],
+     "min": [
+      81.66136169433594,
+      -0.798334538936615,
+      -0.7397985458374023
+     ],
+     "parent": null,
+     "type": "MESH",
+     "vertices": 4568
+    },
+    "Prod_TRK_Trays": {
+     "centroid": [
+      91.28709869869685,
+      -0.0917689696909323,
+      0.094950663703257
+     ],
+     "component_id": "M7.TRK.TRAYS",
+     "faces": 1690,
+     "instance": null,
+     "kind": "production_detail",
+     "matrix_world": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "max": [
+      102.39336395263672,
+      0.7994646430015564,
+      0.799387514591217
+     ],
+     "min": [
+      81.65536499023438,
+      -0.7996943593025208,
+      -0.7432578802108765
+     ],
+     "parent": null,
+     "type": "MESH",
+     "vertices": 1888
+    }
+   }
+  }
+ },
+ "git_dirty": false,
+ "git_revision": "c0b66a240d59cb1d97fc7f6d0a8a8acebe9d89ef",
+ "inputs_hash": "e123c5316f902210",
+ "module": "WF-SPINE",
+ "note": "A publication makes the pack eligible for integration; it is not an owner acceptance and changes no maturity or canon.",
+ "pack": "m7_spine",
+ "pack_version": 1,
+ "published_utc": "2026-10-23T07:36:43Z",
+ "spec_sha256": "0a0f8bd7964453ae21b17a8a963c6cf224d624492abd82a57cfb123482e3eba4",
+ "version": 2
+}

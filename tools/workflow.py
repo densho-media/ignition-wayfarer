@@ -194,14 +194,17 @@ def main(argv=None):
     report_parser = commands.add_parser('report', help='compact scene report of a saved inspect JSON (no Blender)')
     report_parser.add_argument('--validation', type=Path, help='default references/p1_validation.json')
     module_parser = commands.add_parser('module', help='modular detail (docs/MODULES.md): list, show, contracts, build, validate, preview, '
-                                                       'publish or rebind a module, detail pack or assembly')
-    module_parser.add_argument('op', choices=['list', 'show', 'contracts', 'build', 'validate', 'preview', 'publish', 'rebind'])
+                                                       'publish or rebind a module, detail pack or assembly; export-authored ART meshes of an '
+                                                       'assembly to its committed glTF path')
+    module_parser.add_argument('op', choices=['list', 'show', 'contracts', 'build', 'validate', 'preview', 'publish', 'rebind', 'export-authored'])
     module_parser.add_argument('ident', nargs='?', help='a module ID (WF-RING-A), a pack name (m7_ra1) or an assembly ID (M7.RA1)')
     module_parser.add_argument('--integrate', action='store_true', help='build: also rebuild the hosts that link the detail, and the vehicle')
     module_parser.add_argument('--write', action='store_true', help='contracts: rewrite simulations/wf_module_contracts.json')
     module_parser.add_argument('--no-blender', action='store_true', help='validate: the pure screens only')
     module_parser.add_argument('--views', nargs='+', help="preview: views (default: the pack's declared views)")
     module_parser.add_argument('--quality', default='draft', choices=['draft', 'material', 'review', 'look'])
+    module_parser.add_argument('--id', help='export-authored: the authored entry ID (A-Z, 0-9, _); the file is data/detail/<pack>/<id>.glb')
+    module_parser.add_argument('--objects', nargs='+', help="export-authored: mesh names in the assembly's ART_ collection")
     assembly_parser = commands.add_parser('assembly', help='the assembled ship against the module publication records (docs/MODULES.md)')
     assembly_parser.add_argument('op', choices=['validate'])
     accept_parser = commands.add_parser('accept', help='make a PASS full production run the new geometry baseline')
@@ -315,7 +318,7 @@ def main(argv=None):
                 if args.op not in ('list', 'contracts') and not args.ident:
                     raise ValueError(f'module {args.op} needs a module, pack or assembly (module list)')
                 result = module_flow.run(root, args.op, args.ident, integrate=args.integrate, write=args.write, views=args.views,
-                                         quality=args.quality, blender=not args.no_blender)
+                                         quality=args.quality, blender=not args.no_blender, authored_id=args.id, objects=args.objects)
             emit(result)
             return {'PASS': 0, 'BUSY': 75}.get(result['result'], 1)
         elif args.action in ('drift', 'capture', 'delta', 'sync'):
