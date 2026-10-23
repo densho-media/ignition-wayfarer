@@ -153,10 +153,14 @@ def geometry_diff(root, baseline_dir, fingerprint, expect=()):
 
     def expected_links(name):
         # A host whose link list changed is expected when it lost no link and every link it gained is to an expected file (a new detail
-        # asset linked at its anchor), not because the host's own name is listed.
+        # asset linked at its anchor), not because the host's own name is listed. A lost link is expected only if it moved down one level,
+        # into a file the host newly links (an engineering-asset split: the ring files take over the habitat's links).
         gone = [x for x in before[name]['direct_links'] if x not in after[name]['direct_links']]
         new = [x for x in after[name]['direct_links'] if x not in before[name]['direct_links']]
-        return not gone and new and all(any(Path(x).stem.startswith(p) for p in expect) for x in new)
+        stems = {Path(x).stem for x in new}
+        below = {x for f, q in after.items() if Path(f).stem in stems for x in q['direct_links']}
+        return (new and all(any(Path(x).stem.startswith(p) for p in expect) for x in new)
+                and all(x in below for x in gone))
 
     unexpected = [f'{kind}: {item}' for kind, item in entries if not expected(item)]
     unexpected += [f'{kind}: {name}' for kind in ('files_added', 'files_removed', 'links_changed') for name in diff[kind]
