@@ -89,9 +89,20 @@ mkdir -p runs/preview && ln -sfn ../web-site runs/preview/ignition-wayfarer && p
   - At 390 × 844 with touch, the start page has no overflow and the viewer frames the ship, orbits with one finger and zooms
     with a pinch.
   - The review page renders the release.
+- **Touch (MOB-001):** Enter Wayfarer on an emulated phone (844 × 390 CSS px, DPR 3, touch, landscape), in a third browser
+  alongside the walk. The game publishes its touch state (`?arg=--&arg=--touch-probe`, `window.wayfarerTouch`).
+  - The touch welcome is completed by a tap, and Skip and Pause work by touch.
+  - The rail stick works together with a look finger, and lifting the fingers stops at once.
+  - Weightless: no stick and no force, a look drag, then Push off.
+  - Map and the systems card open and close.
+  - The transfer line takes the 1-D stick.
+  - Walking on ring A, with Drop by a second finger.
+  - Help is a modal.
+  - Upright and tablet sizes keep the same run.
+  This is emulation: it checks behaviour, not a phone's frame rate (docs/wayfarer-mobile-controls-plan.md).
 
 `--record` writes the summary and metrics into the site's `release.json`. `--live <url>` repeats the checks against a deployed
-site, and `--no-recording` skips the recording.
+site, `--no-recording` skips the recording and `--no-touch` the touch journey.
 
 ## GitHub Actions
 

@@ -1053,6 +1053,9 @@ func _process(_dt: float) -> void:
 	if not active:
 		return
 	WfInput.context = "body"
+	var lk := WfInput.take_look()                   # MOB-001: the touch look turns the body's view as a right-drag does
+	yaw -= lk.x
+	pitch = clampf(pitch - lk.y, -1.5, 1.5)
 	if beat == "SPINE" and actor.grip != null:
 		WfInput.discover("grab")                    # ACI-05: weightless, holding a rail: the safe moment (Tale 27 STG-001)
 	elif actor.standing and field.ring_zone():
