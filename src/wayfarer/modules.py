@@ -122,7 +122,7 @@ def anchors(s, reg=None, root=ROOT):
             if t not in ('vehicle', 'CHARACTERS'):
                 out[f'{mid}.{t}.ORIGIN'] = dict(module=mid, family='asset_origin', host=t, object=None, parent=None, matrix=IDENTITY)
     for q in habitat_ring.sectors(s):
-        # The sector instance in its ring's asset (components/revision.py habitat_ring()): radial(0, deck, angle), rotated by angle about +X,
+        # The sector instance in its ring's asset (components/revision.py ring_asset()): radial(0, deck, angle), rotated by angle about +X,
         # under Rotor_j.
         a, d = q['angle'], q['deck_radius']
         mid = ring_module(reg, q['ring'])
@@ -130,7 +130,7 @@ def anchors(s, reg=None, root=ROOT):
                                                              parent=f"Rotor_{q['ring']}", function=q['function'],
                                                              matrix=rounded(matrix((0.0, d*math.cos(a), d*math.sin(a)), rx(a)), 12))
     for r in rotor_interface.rotors(s):
-        # Rotor_j (components/revision.py habitat_ring()) at the ring centre, turned about +X by its driver; the rest frame is the saved index
+        # Rotor_j (components/revision.py ring_asset()) at the ring centre, turned about +X by its driver; the rest frame is the saved index
         # angle (phase). Drum_j (components/crew.py drum()), the despun transfer drum of a human-entry rotor, sits at the same centre and phase
         # and turns with its ring only while drum_sync is 1. Detail on either inherits that motion through its instance.
         j = r['index']; mid = ring_module(reg, j); m = rounded(matrix((r['x'], 0.0, 0.0), rx(r['phase'])), 12)

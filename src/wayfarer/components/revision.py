@@ -237,7 +237,7 @@ def habitat(c,s,assets):
     bpy.context.scene.frame_set(1)
 
 
-def habitat_ring(c,s,assets,j):
+def ring_asset(c,s,assets,j):
     """WF_HABITAT_<A|B>: rigid ring j at full size with its frame, fills, spokes, pressurized sectors, hub, crew parts and its rotor's
     mechanism control. The rotation driver reads ROTOR_j_MECH_CTRL['spin_fraction'], so a preset (ring_spin) decides whether the ring
     turns or sits at its index angle."""

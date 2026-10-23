@@ -48,7 +48,7 @@ def build_subsystem(kind, c, s, asset_dir):
     shield=material('Shield',(.48,.43,.28))
     if kind=='STRUCTURE':return revision.structure(c,s)
     elif kind=='HABITAT':return revision.habitat(c,s,asset_dir)
-    elif kind in revision.RINGS:return revision.habitat_ring(c,s,asset_dir,revision.RINGS.index(kind)+1)
+    elif kind in revision.RINGS:return revision.ring_asset(c,s,asset_dir,revision.RINGS.index(kind)+1)
     elif kind=='STORAGE':
         for j,(y,z) in enumerate([(1,1),(-1,1),(-1,-1),(1,-1)],1):
             tank=cylinder(c,f'Tank_Volume_{j:02}',x('tank_center_x'),p['tank_length_m'],p['tank_radius_m'],material('Tank',(.39,.48,.56)),y*p['tank_offset_m'],z*p['tank_offset_m'])

@@ -38,7 +38,7 @@ holds the whole-habitat rotor actions, whose slots name both controls, because m
 once as `Assembly_HABITAT`, so runtime groups, node IDs and selectors are unchanged.
 
 WF-HABITAT also owns the sector skin and the interior components. All twelve sectors of both rings instance them, so they belong to
-neither ring. The ring geometry comes from one parameterised generator (`revision.habitat_ring`) and one spec, so a ring session gets
+neither ring. The ring geometry comes from one parameterised generator (`revision.ring_asset`) and one spec, so a ring session gets
 its own asset, rebuild, anchors and packs, but no second source of engineering values.
 
 Builds:
