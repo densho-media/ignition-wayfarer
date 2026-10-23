@@ -172,14 +172,14 @@
    }
   }
  },
- "git_dirty": true,
- "git_revision": "c5a8e904db46b8dab72701ab6cf509f73bce4a93",
+ "git_dirty": false,
+ "git_revision": "71bcc78febe88bad3f06c1a41abecc93eefa9205",
  "inputs_hash": "3f4ea25ce452d946",
  "module": "WF-RING-A",
  "note": "A publication makes the pack eligible for integration; it is not an owner acceptance and changes no maturity or canon.",
  "pack": "ra2_equip",
  "pack_version": 1,
- "published_utc": "2026-10-23T07:07:28Z",
- "spec_sha256": "4bd7bb763a25ad8034f7c036f6809d6d46e626629b30bb5b8043c63a7f3a2cf8",
+ "published_utc": "2026-10-23T07:20:26Z",
+ "spec_sha256": "c4c5aa25a1861c62cc710a36800ad88aa164d7f728b25572bb90d6ad2469c9bb",
  "version": 2
 }
