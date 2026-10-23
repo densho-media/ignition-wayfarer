@@ -44,24 +44,31 @@ owns = ["src/wayfarer/hull_geometry.py", "src/wayfarer/casing_panels.py", "src/w
 depends = ["WF-CORE"]
 inspect = ["hull", "route"]
 
-[module.WF-RING-A]
-title = "Ring A (rotor 1, the induction ring): rotating habitat, sectors, interiors and fittings"
+[module.WF-HABITAT]
+title = "Habitat assembly: the two ring assets linked together, the whole-habitat rotor actions, and the sector skin and interior components both rings instance"
 targets = ["HABITAT", "RING_SECTOR", "INTERIOR_HABITATION", "INTERIOR_WORK", "INTERIOR_GARDEN"]
-# HABITAT, the sector skin and the interior components are one engineering asset set shared by both rings (one HABITAT file, the
-# components instanced in every sector). Ring A holds their engineering ownership until HABITAT is split; ring B owns detail packs only.
+# One sector skin and one interior per function serve all twelve sectors (both rings), so they belong to neither ring. The ring geometry
+# itself is one parameterised generator (components/revision.py habitat_ring, WF-CORE) and one spec: the split gives each ring its own
+# asset, build target, anchors and detail packs, not a second source of engineering values.
 owns = ["src/wayfarer/habitat_ring.py", "src/wayfarer/habitat_interior.py", "src/wayfarer/sector_whitebox.py",
         "src/wayfarer/components/interior.py"]
-shared_with = ["WF-RING-B"]
-ring = 1
 depends = ["WF-CORE", "WF-SPINE"]
 inspect = ["rotation", "route"]
 
+[module.WF-RING-A]
+title = "Ring A (rotor 1, the induction ring): its engineering asset WF_HABITAT_A (rotor, hub, crew route, frame, sectors) and its detail"
+targets = ["HABITAT_A"]
+owns = []
+ring = 1
+depends = ["WF-CORE", "WF-SPINE", "WF-HABITAT"]
+inspect = ["rotation", "route"]
+
 [module.WF-RING-B]
-title = "Ring B (rotor 2): rotating habitat, sectors, interiors and fittings"
-targets = []
+title = "Ring B (rotor 2): its engineering asset WF_HABITAT_B (rotor, hub, crew route, frame, sectors) and its detail"
+targets = ["HABITAT_B"]
 owns = []
 ring = 2
-depends = ["WF-CORE", "WF-SPINE", "WF-RING-A"]
+depends = ["WF-CORE", "WF-SPINE", "WF-HABITAT"]
 inspect = ["rotation", "route"]
 
 [module.WF-DRIVE]
@@ -101,20 +108,20 @@ inspect = ["forward"]
 # host collection's origin) and that object's local matrix. inspect checks the built host object against it.
 [anchor_family.ring_sector]
 # <ring module>.SECTOR.<ring>.<sector>: the sector frame (origin on the centreline at the deck, +X axial, +Y radially outward = down
-# in spin, +Z tangential), parented to Rotor_<ring>; habitat_ring.sectors.
-host = "HABITAT"
+# in spin, +Z tangential), parented to Rotor_<ring> in the ring's own asset; habitat_ring.sectors.
+host = "HABITAT_<A|B>"
 note = "sector frame of habitat_ring.sectors; follows the ring's rotation"
 
 [anchor_family.rotor_frame]
-# <ring module>.ROTOR.<ring>: Rotor_<ring> in WF_HABITAT, at the ring centre (rotor_interface.rotors x), turned about +X by its driver; the
+# <ring module>.ROTOR.<ring>: Rotor_<ring> in WF_HABITAT_<A|B>, at the ring centre (rotor_interface.rotors x), turned about +X by its driver; the
 # frame is the rest pose at the index angle (phase, the saved frame 1). Detail on it turns with the ring (spin, spin-down, locked index).
-host = "HABITAT"
+host = "HABITAT_<A|B>"
 note = "rotor frame; motion ROTOR_SPIN_X; rest at the index angle"
 
 [anchor_family.drum_frame]
 # <ring module>.DRUM.<ring>: Drum_<ring>, the despun transfer drum of a human-entry rotor (Q46, MEC-019), at the same centre and rest angle;
 # it stays at the index angle (despun) while drum_sync is 0 and turns with its ring while it is 1. Only rotors with a human-entry vestibule.
-host = "HABITAT"
+host = "HABITAT_<A|B>"
 note = "despun drum frame; motion DRUM_DESPUN_X; rest at the index angle"
 
 [anchor_family.asset_origin]

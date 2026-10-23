@@ -354,7 +354,7 @@ def shadow(s, fingerprint, n_phi=72, half=None):
     for f, v in fingerprint.items():
         if f.startswith('components/') or 'objects' not in v or f.endswith(('WF_FORWARD_SHIELD.blend', 'WF_EYE.blend')):
             continue                                           # the shield and its EYE cast the shadow
-        swept = f.endswith(('WF_HABITAT.blend', 'WF_ROTOR_INTERFACE.blend'))   # rotating: the full swept circle
+        swept = f.endswith(('WF_HABITAT_A.blend', 'WF_HABITAT_B.blend', 'WF_ROTOR_INTERFACE.blend'))   # rotating: the full swept circle
         for n, o in v['objects'].items():
             if 'min' not in o or o.get('kind') in ('scale_reference', 'debug_magnetics', 'debug_optics', 'debug_separatrix', 'magnetic_field', 'plasma',
                                                    'optical_beam', 'hull_envelope', 'sim_proxy') or o['max'][0] > xs-0.5:

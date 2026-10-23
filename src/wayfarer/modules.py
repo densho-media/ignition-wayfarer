@@ -79,16 +79,21 @@ def instance_name(assembly):
     return 'Detail_'+safe(assembly)
 
 
+def ring_target(j):
+    """Build target of ring j's own engineering asset (WF_HABITAT_A, WF_HABITAT_B; components/revision.py RINGS)."""
+    return f'HABITAT_{chr(64+j)}'
+
+
 def anchor_host(anchor):
-    """Host build target of an anchor ID: <module>.<TARGET>.ORIGIN, or one of ring module's HABITAT anchors <module>.SECTOR.<ring>.<sector>,
-    <module>.ROTOR.<ring> and <module>.DRUM.<ring>."""
+    """Host build target of an anchor ID: <module>.<TARGET>.ORIGIN, or one of a ring module's anchors <module>.SECTOR.<ring>.<sector>,
+    <module>.ROTOR.<ring> and <module>.DRUM.<ring>, hosted by that ring's own asset."""
     parts = anchor.split('.')
     if parts[-1] == 'ORIGIN':
         return parts[-2]
     if len(parts) >= 3 and parts[-3] == 'SECTOR':
-        return 'HABITAT'
+        return ring_target(int(parts[-2]))
     if len(parts) >= 2 and parts[-2] in ('ROTOR', 'DRUM'):
-        return 'HABITAT'
+        return ring_target(int(parts[-1]))
     raise ValueError(f'Unknown anchor form {anchor}')
 
 
@@ -117,21 +122,22 @@ def anchors(s, reg=None, root=ROOT):
             if t not in ('vehicle', 'CHARACTERS'):
                 out[f'{mid}.{t}.ORIGIN'] = dict(module=mid, family='asset_origin', host=t, object=None, parent=None, matrix=IDENTITY)
     for q in habitat_ring.sectors(s):
-        # The sector instance in WF_HABITAT (components/revision.py habitat()): radial(0, deck, angle), rotated by angle about +X, under Rotor_j.
+        # The sector instance in its ring's asset (components/revision.py habitat_ring()): radial(0, deck, angle), rotated by angle about +X,
+        # under Rotor_j.
         a, d = q['angle'], q['deck_radius']
         mid = ring_module(reg, q['ring'])
-        out[f"{mid}.SECTOR.{q['ring']}.{q['index']}"] = dict(module=mid, family='ring_sector', host='HABITAT', object=q['name'],
+        out[f"{mid}.SECTOR.{q['ring']}.{q['index']}"] = dict(module=mid, family='ring_sector', host=ring_target(q['ring']), object=q['name'],
                                                              parent=f"Rotor_{q['ring']}", function=q['function'],
                                                              matrix=rounded(matrix((0.0, d*math.cos(a), d*math.sin(a)), rx(a)), 12))
     for r in rotor_interface.rotors(s):
-        # Rotor_j (components/revision.py habitat()) at the ring centre, turned about +X by its driver; the rest frame is the saved index
+        # Rotor_j (components/revision.py habitat_ring()) at the ring centre, turned about +X by its driver; the rest frame is the saved index
         # angle (phase). Drum_j (components/crew.py drum()), the despun transfer drum of a human-entry rotor, sits at the same centre and phase
         # and turns with its ring only while drum_sync is 1. Detail on either inherits that motion through its instance.
         j = r['index']; mid = ring_module(reg, j); m = rounded(matrix((r['x'], 0.0, 0.0), rx(r['phase'])), 12)
-        out[f'{mid}.ROTOR.{j}'] = dict(module=mid, family='rotor_frame', host='HABITAT', object=f'Rotor_{j}', parent=None, matrix=m,
+        out[f'{mid}.ROTOR.{j}'] = dict(module=mid, family='rotor_frame', host=ring_target(j), object=f'Rotor_{j}', parent=None, matrix=m,
                                        motion='ROTOR_SPIN_X', rest_deg=round(math.degrees(r['phase']), 9))
         if crew_transfer.vestibule(s, j)['human']:
-            out[f'{mid}.DRUM.{j}'] = dict(module=mid, family='drum_frame', host='HABITAT', object=f'Drum_{j}', parent=None, matrix=m,
+            out[f'{mid}.DRUM.{j}'] = dict(module=mid, family='drum_frame', host=ring_target(j), object=f'Drum_{j}', parent=None, matrix=m,
                                           motion='DRUM_DESPUN_X', rest_deg=round(math.degrees(r['phase']), 9))
     return out
 

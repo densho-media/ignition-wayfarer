@@ -18,7 +18,7 @@ sys.path[:0]=[str(ROOT/'src/wayfarer'),str(ROOT/'src/wayfarer/build')]
 import spec as spec_module
 from spec import load,digest,derived,buildable_configurations
 from common import pose_drive_state, pose_configuration, pose_timeline, pose_transfer
-from build import COMPONENTS, SUBSYSTEMS, RETIRED
+from build import COMPONENTS, SUBSYSTEMS, RETIRED, RING_FAMILY
 import sim_rig
 import hull_geometry
 import layout
@@ -753,7 +753,22 @@ def inspect(root=ROOT, output=None, scope=None):
             assert not BVHTree.FromPolygons([v.co for v in ov.data.vertices],[tuple(q.vertices) for q in ov.data.polygons]).ray_cast(Vector((x,0,z)),Vector((0,-1,0)),5)[0],'Overhead panel not opened'
             assert 'IF_SECTOR_END_HATCH' not in bpy.data.objects,'No room turns: no end hatch'
             interior_report[path.name]={'function':function,'blocks':len(blocks)}
+        ring_files={f'WF_{n}.blend':j for j,n in enumerate(RING_FAMILY,1)}
+        if path.name in ring_files:
+            # One engineering asset per ring (docs/MODULES.md): ring j's rotor, control, sectors and nothing of the other ring; the
+            # whole-habitat actions live in the assembly.
+            j=ring_files[path.name]
+            assert {o.name for o in objects if o.get('kind')=='rotor'}=={f'Rotor_{j}'},path.name
+            assert {o.name for o in objects if o.get('kind')=='state_control'}=={rotor_interface.control(j)},path.name
+            assert {o.name for o in objects if o.get('kind')=='ring_sector'}=={q['name'] for q in habitat_ring.sectors(s) if q['ring']==j},path.name
+            assert not [a for a in bpy.data.actions if a.library is None and a.get('wf_owner')=='wayfarer.p0'],f'{path.name}: rotor actions belong to WF_HABITAT'
         if path.name=='WF_HABITAT.blend':
+            # The habitat assembly: both ring assets linked once, unparented at the ship origin, and no geometry of its own. The ring checks
+            # below then run on the linked rings exactly as on the one file they replaced.
+            rings=[o for o in objects if o.get('kind')=='ring_assembly']
+            assert sorted((o['ring'],o.instance_collection.name) for o in rings)==sorted((j,n[:-len('.blend')]) for n,j in ring_files.items()),'Habitat rings'
+            assert len(rings)==len(objects) and all(o.parent is None and o.matrix_world==Matrix.Identity(4) for o in rings),'Habitat assembly'
+            objects=objects+[o for o in bpy.data.objects if o.library and Path(o.library.filepath).name in ring_files and o.get('wf_owner')=='wayfarer.p0']
             assert len([o for o in objects if o.get('kind')=='rotor'])==habitat_ring.ring_count(s)
             sector_objs=[o for o in objects if o.get('kind')=='ring_sector']
             assert len(sector_objs)==habitat_ring.ring_count(s)*s['habitat_ring']['sectors_per_ring']==len(habitat_ring.sectors(s))
@@ -948,8 +963,8 @@ def inspect(root=ROOT, output=None, scope=None):
             want=([min(item['x0_m'],item['x1_m']),-r,-r],[max(item['x0_m'],item['x1_m']),r,r])
         assert all(abs(a-b)<1e-4 for a,b in zip(lo+hi,want[0]+want[1])),(item['name'],lo,hi,want)
     stage('vehicle_open_rig')
-    rotor_libraries={'WF_HABITAT.blend','WF_RING_SECTOR.blend',*interior_files}
-    # A detail asset belongs to the asset it is linked into (its anchor's host): ring-sector detail spins with WF_HABITAT, blade detail is thermal.
+    rotor_libraries={'WF_HABITAT.blend',*(f'WF_{n}.blend' for n in RING_FAMILY),'WF_RING_SECTOR.blend',*interior_files}
+    # A detail asset belongs to the asset it is linked into (its anchor's host): ring-sector detail spins with its ring, blade detail is thermal.
     host_of={f'{k}.blend':f'{v}.blend' for k,v in modules.detail_hosts(root,s['detail_packs']).items()}
     library_of=lambda lib:host_of.get(Path(bpy.path.abspath(lib.filepath)).name,Path(bpy.path.abspath(lib.filepath)).name) if lib else ''
     excluded={'WF_RADIATOR.blend','WF_THERMAL.blend',*rotor_libraries}

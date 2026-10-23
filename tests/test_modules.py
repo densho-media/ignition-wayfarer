@@ -51,7 +51,9 @@ class RegistryTests(unittest.TestCase):
                 q = anc.get(f"{mid}.{kind}.{r['index']}")
                 if kind == 'DRUM' and not crew_transfer.vestibule(self.s, r['index'])['human']:
                     self.assertIsNone(q); continue
-                self.assertEqual(modules.anchor_host(f"{mid}.{kind}.{r['index']}"), 'HABITAT')
+                self.assertEqual(modules.anchor_host(f"{mid}.{kind}.{r['index']}"), f"HABITAT_{'AB'[r['index']-1]}")
+                self.assertEqual(q['host'], f"HABITAT_{'AB'[r['index']-1]}")
+                self.assertIn(q['host'], modules.registry(ROOT)['module'][mid]['targets'])     # each ring module owns its ring's asset
                 self.assertAlmostEqual(q['matrix'][0][3], r['x'], places=9)
                 self.assertAlmostEqual(q['matrix'][1][1], __import__('math').cos(r['phase']), places=9)
 

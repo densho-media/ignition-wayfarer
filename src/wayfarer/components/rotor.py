@@ -68,10 +68,10 @@ def hub(c, s, parent, j):
         obj = empty(c, f['name'], f['at']); obj.parent = parent; obj['engineering_status'] = f['status']
 
 
-def controls(c, s):
-    """Per-rotor mechanism controls saved at the vehicle's saved preset, plus the unassigned stop-lock and touchdown actions."""
+def controls(c, s, j):
+    """Rotor j's mechanism control (its ring asset, WF_HABITAT_<A|B>), saved at the vehicle's saved preset."""
     preset = s['vehicle']['saved_preset']; saved = ri.configuration_state(s, preset); objs = {}
-    for rot in ri.rotors(s):
+    for rot in (r for r in ri.rotors(s) if r['index'] == j):
         ctrl = empty(c, ri.control(rot['index']), (rot['x'], 0.0, 0.0), ident=f"WF.HUB.{rot['index']}.STATE_CONTROL", kind='state_control')
         ctrl.empty_display_type = 'CUBE'; ctrl.empty_display_size = .3
         for key, value in saved.items():
@@ -86,6 +86,12 @@ def controls(c, s):
         ctrl['state'] = f"{preset} (rings {s['configuration'][preset]['habitat']}): PROTOTYPE display state, not a control law"
         ctrl['engineering_status'] = 'OPEN: spin-down duration, braking torque, touchdown thermal case and control law (MEC-010, OD-013)'
         objs[ctrl.name] = ctrl
+    return objs
+
+
+def actions(s):
+    """The unassigned whole-habitat stop-lock, touchdown and seal-fault actions (WF_HABITAT), one slot per rotor control by name: matched
+    spin-down of both rings keeps the counter-rotating momenta cancelled, so each action spans both ring assets."""
     drop_stale_actions(set(ri.ACTIONS))
     for name, spec in ri.actions(s).items():
         action = owned_action(name); strip = action.layers.new('Mechanism').strips.new(type='KEYFRAME')
@@ -108,4 +114,3 @@ def controls(c, s):
         action.use_frame_range = True; action.frame_start, action.frame_end = spec['frame_range']
         action['description'] = spec['description']; action['status'] = 'PROTOTYPE timing; spin-down duration OPEN'
         action['targets'] = ', '.join(spec['slots'])
-    return objs

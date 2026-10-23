@@ -22,7 +22,7 @@ workbooks.
 ## Architecture
 
 **Registry: `data/modules.toml`.** This is the one authoritative table. Integration owns it and module sessions only read it. For each module (`WF-CORE`, `WF-FWD`,
-`WF-EYE`, `WF-SPINE`, `WF-RING-A`, `WF-RING-B`, `WF-DRIVE`, `WF-THERMAL`, `WF-FUEL`, `WF-UTILITY`) it lists:
+`WF-EYE`, `WF-SPINE`, `WF-HABITAT`, `WF-RING-A`, `WF-RING-B`, `WF-DRIVE`, `WF-THERMAL`, `WF-FUEL`, `WF-UTILITY`) it lists:
 - the existing build targets it owns (no renames);
 - the source files it owns (globs; a file belongs to one module at most);
 - its dependencies (acyclic);
@@ -30,8 +30,21 @@ workbooks.
 
 It also defines the anchor families. These module IDs are new names. They are not the S&E 48 workflow-gate IDs (WF-001…).
 
-HABITAT, the ring-sector skin and the interior components are one engineering asset set shared by both rings. WF-RING-A owns their
-engineering until HABITAT is split. Until then WF-RING-B owns detail packs only.
+**Habitat: one assembly, one asset per ring (phase 3).** Each ring is its own engineering asset and build target: `WF_HABITAT_A`
+(`HABITAT_A`, owned by WF-RING-A) and `WF_HABITAT_B` (`HABITAT_B`, WF-RING-B). Each holds its rotor, its mechanism control
+`ROTOR_j_MECH_CTRL`, hub, despun drum and `TRANSFER_j_CTRL`, crew tubes, frame, spokes and sectors, and hosts its own anchors and
+detail. `WF_HABITAT` (`HABITAT`, owned by WF-HABITAT) is the habitat assembly. It links both rings at the ship origin (`Habitat_Ring_j`) and
+holds the whole-habitat rotor actions, whose slots name both controls, because matched spin-down cancels the momenta. The vehicle links it
+once as `Assembly_HABITAT`, so runtime groups, node IDs and selectors are unchanged.
+
+WF-HABITAT also owns the sector skin and the interior components. All twelve sectors of both rings instance them, so they belong to
+neither ring. The ring geometry comes from one parameterised generator (`revision.habitat_ring`) and one spec, so a ring session gets
+its own asset, rebuild, anchors and packs, but no second source of engineering values.
+
+Builds:
+- `--target HABITAT_A` rewrites ring A and the detail on it, never ring B or the assembly.
+- `HABITAT` rebuilds both rings and the assembly.
+- A sector-skin or interior change rebuilds both rings.
 
 **Detail pack: the unit a session owns.** A pack is discovered by glob, so adding one edits no shared file. It consists of:
 - `data/detail/<pack>.toml`: the manifest and its `[params]` (and optional `[materials]`);
@@ -89,9 +102,9 @@ It builds no assembly itself any more: the legacy `ASSEMBLIES` table and the `[p
 
 | Family | ID | Host object | Frame |
 | --- | --- | --- | --- |
-| `ring_sector` | `WF-RING-<A\|B>.SECTOR.<ring>.<sector>` | `Sector_<ring>_<sector>` in WF_HABITAT, under `Rotor_<ring>` | the sector frame: origin on the centreline at the deck, +X axial, +Y radially outward (down in spin), +Z tangential; turns with the ring |
-| `rotor_frame` | `WF-RING-<A\|B>.ROTOR.<ring>` | `Rotor_<ring>` in WF_HABITAT | the ring centre (`rotor_interface.rotors` x), rest angle the index phase; motion `ROTOR_SPIN_X`: the driver turns it about +X, so detail on it spins, spins down and stops with the ring |
-| `drum_frame` | `WF-RING-<A\|B>.DRUM.<ring>` | `Drum_<ring>`, the despun transfer drum (human-entry rotors only) | same centre and rest angle; motion `DRUM_DESPUN_X`: it stays at the index angle while `drum_sync` is 0 and turns with its ring while it is 1 |
+| `ring_sector` | `WF-RING-<A\|B>.SECTOR.<ring>.<sector>` | `Sector_<ring>_<sector>` in the ring's asset `WF_HABITAT_<A\|B>`, under `Rotor_<ring>` | the sector frame: origin on the centreline at the deck, +X axial, +Y radially outward (down in spin), +Z tangential; turns with the ring |
+| `rotor_frame` | `WF-RING-<A\|B>.ROTOR.<ring>` | `Rotor_<ring>` in `WF_HABITAT_<A\|B>` | the ring centre (`rotor_interface.rotors` x), rest angle the index phase; motion `ROTOR_SPIN_X`: the driver turns it about +X, so detail on it spins, spins down and stops with the ring |
+| `drum_frame` | `WF-RING-<A\|B>.DRUM.<ring>` | `Drum_<ring>` in `WF_HABITAT_<A\|B>`, the despun transfer drum (human-entry rotors only) | same centre and rest angle; motion `DRUM_DESPUN_X`: it stays at the index angle while `drum_sync` is 0 and turns with its ring while it is 1 |
 | `asset_origin` | `<module>.<TARGET>.ORIGIN` | none (the collection origin) | identity. A component linked several times (the radiator blade) carries its detail on every copy |
 
 Units are metres. The ship axes stay +X bow, +Z dorsal, +Y left.
@@ -238,8 +251,9 @@ hosts, which must link it. A change to an engineering module that a pack's code 
 4. Hand-authored detail stops the build with `WF_DETAIL_REVIEW` until it is reviewed and rebound (local) or its `authored_against` is updated (committed).
 5. Never reshape engineering geometry to keep cosmetic detail attached.
 
-**Move detail between files (a migration).** Every legacy assembly is migrated; a later move (another anchor, a split pack, the HABITAT
-split) follows the same proof, recorded before the change:
+**Move detail between files (a migration).** Every legacy assembly is migrated; a later move (another anchor, a split pack, an engineering
+asset split) follows the same proof, recorded before the change. An engineering split moves whole objects between files instead (step 3 is
+`compare_fingerprint.py --split OLD NEW...`, step 4 `detail_equivalence.py --habitat`; see Evidence, phase 3):
 1. Move the builder, its screen and its exclusive parameters, leaving shared parameters as read-only spec dependencies (map the consumers first).
 2. Compare a digest of `production_detail.elements()` before and after; it must be identical.
 3. Run the full pipeline with the exact prefixes the move touches, then `compare_fingerprint.py --relocate` against the accepted baseline (PASS).
@@ -412,7 +426,8 @@ Revisit the policy when a real asset exceeds the cap, many assets accumulate, or
 
 ## Limitations and next steps
 
-- HABITAT still serves both rings, so ring-B engineering cannot be owned separately; the split is proposed in TODO (MOD) as its own phase.
+- The two rings share one generator and one spec by design: a ring session owns its asset, anchors and detail packs, and an engineering
+  value change still goes through `data/wayfarer_3d.toml` (WF-CORE) and rebuilds both rings when the value is shared.
 - The committed authored path keeps PBR base colour, roughness and metallic, UVs and normals; procedural, modifier, driver and constraint
   data does not travel, and joined multi-mesh imports keep face smooth flags but not custom normals. Textures embedded in the `.glb` are
   imported but not checked by any gate yet.

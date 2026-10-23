@@ -17,6 +17,7 @@ python3 -m unittest discover -s tests -k view_factor   # single test by name sub
 # Full build: components → subsystems → the vehicle (then retires listed files, see RETIRED in build.py)
 /snap/bin/blender --background --factory-startup --python-exit-code 1 --python src/wayfarer/build/build.py
 # Targeted: --target NOZZLE|RADIATOR|RING_SECTOR|INTERIOR_HABITATION|INTERIOR_WORK|INTERIOR_GARDEN (rebuilds dependents + the vehicle), a subsystem name (e.g. HULL), or vehicle
+#   --target HABITAT_A|HABITAT_B rebuilds one ring asset and its detail (never the other ring); HABITAT rebuilds both rings and the assembly
 #   --target CHARACTERS rebuilds only assets/characters/WF_CHAR_INDUCTION.blend (IND-001; also rebuilt by all and SERVICE)
 /snap/bin/blender --background --factory-startup --python-exit-code 1 --python src/wayfarer/build/build.py -- --target RADIATOR
 
@@ -238,7 +239,7 @@ All of these are imported by both system Python and Blender's Python 3.13, so th
    (several joined with `+`); a host target also rebuilds the details anchored on it. Committed authored meshes (`data/detail/<pack>/*.glb`)
    are imported into their detail asset here (`components/detail.import_authored`).
 1. Components (`assets/wayfarer/components/WF_{NOZZLE,RADIATOR,RING_SECTOR,INTERIOR_HABITATION,INTERIOR_WORK,INTERIOR_GARDEN}.blend`). The interior components map to the pod functions through `interior.components`; the habitat recipe parents the matching one to each pod as `Interior_r_j` with an identity local transform.
-2. Subsystems (`subsystems/WF_{STRUCTURE,HABITAT,STORAGE,SHIELDING,SERVICE,POWER_STORAGE,ROTOR_INTERFACE,CREW_TRANSFER,EYE,DEBUG_MAGNETICS,DEBUG_SEPARATRICES,DEBUG_OPTICS,PROPULSION,THERMAL,HULL}.blend`).
+2. Subsystems (`subsystems/WF_{STRUCTURE,HABITAT_A,HABITAT_B,HABITAT,STORAGE,SHIELDING,SERVICE,POWER_STORAGE,ROTOR_INTERFACE,CREW_TRANSFER,EYE,DEBUG_MAGNETICS,DEBUG_SEPARATRICES,DEBUG_OPTICS,PROPULSION,THERMAL,HULL}.blend`). The ring assets `HABITAT_A`/`HABITAT_B` are built first and linked by the habitat assembly `HABITAT`, not by the vehicle (as the `DEBUG_*` overlays are by `PROPULSION`).
    - The three DEBUG libraries are built before PROPULSION, which links them as `DRIVE_DEBUG_*` instances. Their hide flags are driven by the drive control's toggles, saved off. Vehicles never link them directly. `--target PROPULSION` rebuilds all three first, and a `DEBUG_*` target also rebuilds PROPULSION.
    - SERVICE holds the airlock, docking ports and refuge.
    - POWER_STORAGE (P1-007) holds the storage packs, their OPEN interfaces, the ride-through markers, `POWER_STORAGE_CTRL` and `WF_BLACK_START`.
