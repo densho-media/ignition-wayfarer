@@ -27,9 +27,45 @@
   <button data-view="reset" title="Reset camera (Home)">Reset</button>
   <button id="panel-toggle" aria-expanded="false" aria-controls="panel" title="Assemblies">Assemblies</button>
 </div>
+<div class="styles" role="toolbar" aria-label="Display style">
+  <button data-style="standard" aria-pressed="true" title="Exported materials (S)">Standard</button>
+  <button data-style="subsystem" aria-pressed="false" title="Subsystem hologram: overlay colour per functional subsystem (H)">Subsystems</button>
+  <button data-style="engine" aria-pressed="false" title="Engine exposition hologram: one colour, rim glow and wire edges (E)">Engine holo</button>
+  <button data-style="hybrid" aria-pressed="false" title="Hybrid / X-ray: a click focuses the part, the rest becomes a faint ghost (X)">Hybrid</button>
+  <button id="appearance-toggle" aria-expanded="false" aria-controls="appearance" title="Ghost, context and reset">Appearance</button>
+</div>
+<div id="focusbar" class="focusbar" role="group" aria-label="Focus" hidden>
+  <span class="label">Focus</span><b id="focus-name"></b>
+  <span class="chips">
+    <button data-look="solid" title="The subject in its exported materials">Solid</button>
+    <button data-look="subsystem" title="The subject as the subsystem-colour hologram">Subsystem</button>
+    <button data-look="cyan" title="The subject as the cyan engine hologram">Cyan</button>
+  </span>
+  <button id="focus-frame" title="Frame the focus (F)">Frame</button>
+  <button id="whole-ship" title="Clear the focus: the whole ship again (Esc)">Whole ship</button>
+</div>
+<aside id="legend" class="panel legend" hidden>
+  <div class="panel-head"><button id="legend-toggle" class="head-toggle" aria-expanded="true" title="Show or hide the list">Subsystems</button><button id="legend-all" title="Clear the subsystem focus">All</button></div>
+  <ul></ul>
+  <p class="note">PROTOTYPE display: overlay colours explain function, never materials (shots/m5_subsystems.toml).</p>
+</aside>
 <aside id="panel" class="panel" hidden>
-  <div class="panel-head"><span>Assemblies</span><button id="show-all" title="Show every assembly">Show all</button></div>
+  <div class="panel-head"><span>Assemblies</span><button id="show-all" title="Lift every Hidden state">Show all</button></div>
   <ul id="assemblies"></ul>
+  <p class="note">Auto follows the style and the focus; a chosen state stays until changed, Show all or Reset appearance.</p>
+</aside>
+<aside id="appearance" class="panel appearance" hidden>
+  <div class="panel-head"><span>Appearance</span></div>
+  <div class="row"><span>Focus look</span><span class="chips">
+    <button data-look="solid">Solid</button><button data-look="subsystem">Subsystem</button><button data-look="cyan">Cyan</button></span></div>
+  <div class="row"><span>Context</span><span class="chips">
+    <button data-ctx="ghost" title="Everything outside the focus as a faint ghost">Ghost</button>
+    <button data-ctx="hologram" title="Everything outside the focus as a hologram">Hologram</button></span></div>
+  <label class="row"><span>Ghost strength</span><input id="ghost" type="range" min="0" max="20" step="1" value="6"><span id="ghost-value" class="count">6 %</span></label>
+  <label class="row"><span>Ghost outlines</span><input id="outlines" type="checkbox" checked></label>
+  <div class="row buttons"><button id="show-all-2" title="Lift every Hidden state">Show all</button>
+    <button id="reset-appearance" title="Standard style, no focus, no assembly or part states, default ghost">Reset appearance</button></div>
+  <p class="note">PROTOTYPE display settings: presentation only, no geometry or engineering value changes.</p>
 </aside>
 <div id="pick" class="pick" hidden></div>
 <div id="status" class="status" role="status">Loading model…</div>

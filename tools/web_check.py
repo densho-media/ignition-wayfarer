@@ -3,8 +3,8 @@
 Serves the site under /ignition-wayfarer/ (the GitHub Pages project path) with software WebGL (SwiftShader) and the cache off,
 and walks it as a visitor does, recording every request:
   start      the start page loads only index.html, site.css and release.json: no model, engine or library, no canvas
-  viewer     Explore Ship from its link: whole-ship framing, orbit, zoom, pan, reset, presets, picking, assembly hiding, the
-             #cam bookmark, no Enter Wayfarer file requested
+  viewer     Explore Ship from its link: whole-ship framing, orbit, zoom, pan, reset, presets, picking, the four styles, assembly states,
+             Hybrid focus, the picking policy, exported colours, Reset appearance, the #cam and appearance bookmarks, no Enter Wayfarer file
   play       the launcher requests no engine before Start; Start boots Godot and Demonstrator 01 with no viewer file, no error
   switching  Exit back to the start page, Explore Ship again; page-renderer memory returns to the start-page level (Chrome runs
              with the back-forward cache off, so this measures what the pages release)
@@ -166,6 +166,49 @@ class Page:
                        f'return [r.x + r.width / 2, r.y + r.height / 2]; }})()')
 
 
+# WEB-004 viewer checks (window.wayfarer exposes the records, the resolved states and the state).
+details = lambda result: {k: v for k, v in result.items() if k != 'ok'}
+SNAPSHOT = ('(() => { const w = window.wayfarer; let h = 0, mats = 0, vis = 0, n = 0, lines = 0; w.model.traverse(o => { '
+            'if (o.isLineSegments) lines++; if (!o.isMesh) return; n++; o.updateMatrixWorld(); '
+            'h += o.matrixWorld.elements.reduce((a, x, i) => a + x * (i + 1), 0); if (o.material === o.userData.material) mats++; '
+            'if (o.visible === o.userData.visible) vis++; }); return {style: w.style(), meshes: n, transform_sum: +h.toFixed(2), '
+            'original_materials: mats, original_visibility: vis, added_lines: lines}; })()')
+STYLED = ('(() => { const w = window.wayfarer; let wrong = 0, n = 0; for (const r of w.records) for (const m of r.meshes) { if (!m.visible) continue; n++; '
+          "const solid = m.material === m.userData.material; const want = ['standard', 'hybrid'].includes('{style}') ? solid : m.material.isShaderMaterial; "
+          'if (!want) wrong++; } return {meshes: n, wrong}; })()')
+TINTS = ('(() => { const w = window.wayfarer, h = w.holo(); let checked = 0, wrong = 0; for (const r of w.records) { if (r.res.state !== "HOLOGRAM") continue; '
+         'const c = h.nodes[r.id] ?? "CTX"; const sid = Array.isArray(c) ? c[0] : c; const rgb = Array.isArray(c) ? c[1] : h.subsystems.find(s => s.id === sid).color; '
+         'const want = w.srgb(rgb), got = r.meshes[0].material.uniforms.tint.value; checked++; '
+         'if (Math.abs(want.r - got.r) + Math.abs(want.g - got.g) + Math.abs(want.b - got.b) > 1e-6 || sid !== r.sid) wrong++; } return {checked, wrong}; })()')
+HYBRID_FOCUS = ('(() => { const w = window.wayfarer, r = w.selected(), f = w.state.focus; if (!r) return {selected: false, ok: false}; '
+                'const ctx = w.records.filter(x => x !== r && x.res.state !== "HIDDEN"); '
+                'return {selected: r.id, focus: f, ok: !!f && f.kind === "node" && f.id === r.id && r.res.state === "SOLID" '
+                '&& r.meshes.every(m => m.material === m.userData.material) && ctx.every(x => x.res.state === "GHOST")}; })()')
+KEEPS_OVERRIDES = ('(async () => { const w = window.wayfarer, other = [...w.groups.keys()].find(a => a !== w.selected().assembly); '
+                   'await w.update(s => { s.overrides.set("a:" + other, "HOLOGRAM"); }); '
+                   'for (const r of [w.records[10], w.records[200], w.records[1000]]) w.select(r.node || r.id); '
+                   'await new Promise(res => setTimeout(res, 300)); '
+                   'const ok = w.state.overrides.get("a:" + other) === "HOLOGRAM" && w.records.filter(r => r.assembly === other).every(r => r.res.state === "HOLOGRAM"); '
+                   'await w.update(s => { s.overrides.delete("a:" + other); }); return {assembly: other, ok}; })()')
+HIDDEN_PICK = ('(async () => { const w = window.wayfarer; await w.update(s => { s.focus = null; }); const before = w.pickAt({x}, {y}); if (!before) return {ok: false}; '
+               'await w.update(s => { s.overrides.set("a:" + before.assembly, "HIDDEN"); }); const after = w.pickAt({x}, {y}); '
+               'await w.update(s => { s.overrides.delete("a:" + before.assembly); }); '
+               'return {hidden_assembly: before.assembly, picked_after: after && after.id, ok: !after || after.assembly !== before.assembly}; })()')
+GHOST_PICK = ('(async () => { const w = window.wayfarer, T = w.THREE; '
+              'await w.update(s => { s.focus = {kind: "assembly", id: "Assembly_PROPULSION001"}; }); w.frameSelection(); '
+              'const subject = w.records.filter(r => r.assembly === "Assembly_PROPULSION001"); const box = new T.Box3(); '
+              'for (const r of subject) for (const m of r.meshes) box.expandByObject(m); '
+              'const sx = [], sy = []; for (let i = 0; i < 8; i++) { const v = new T.Vector3(i & 1 ? box.max.x : box.min.x, i & 2 ? box.max.y : box.min.y, '
+              'i & 4 ? box.max.z : box.min.z).project(w.camera); sx.push((v.x + 1) / 2 * innerWidth); sy.push((1 - v.y) / 2 * innerHeight); } '
+              'const rc = new T.Raycaster(); let tested = 0, bad = 0; '
+              'for (let i = 1; i < 14; i++) for (let j = 1; j < 14; j++) { '
+              'const x = Math.min(...sx) + (Math.max(...sx) - Math.min(...sx)) * i / 14, y = Math.min(...sy) + (Math.max(...sy) - Math.min(...sy)) * j / 14; '
+              'rc.setFromCamera(new T.Vector2(x / innerWidth * 2 - 1, -(y / innerHeight) * 2 + 1), w.camera); '
+              'const hits = rc.intersectObject(w.model, true).filter(h => h.object.isMesh && h.object.visible); const rec = h => w.recordOf(h.object); '
+              'if (!hits.length || rec(hits[0])?.res.state !== "GHOST" || !hits.some(h => rec(h)?.res.state !== "GHOST")) continue; '
+              'tested++; const p = w.pickAt(x, y); if (!p || p.res.state === "GHOST") bad++; } '
+              'await w.update(s => { s.focus = null; }); w.frame("threequarter"); '
+              'return {points_with_ghost_in_front: tested, wrong: bad, ok: tested > 0 && bad === 0}; })()')
 CAMERA = ('(() => { const w = window.wayfarer, c = w.camera, t = w.controls.target; '
           'return {p: c.position.toArray(), t: t.toArray(), d: c.position.distanceTo(t)}; })()')
 # The whole ship's bounding box corners in normalized device coordinates: framed when all are on screen and one axis is mostly filled.
@@ -688,24 +731,69 @@ def check(site, out, binary, sandbox=True, record=False, play_seconds=900, live=
         page.screenshot(out / 'desktop_pick.png')
         page.send('Input.dispatchKeyEvent', {'type': 'keyDown', 'key': 'Escape', 'code': 'Escape', 'windowsVirtualKeyCode': 27})
         page.send('Input.dispatchKeyEvent', {'type': 'keyUp', 'key': 'Escape', 'code': 'Escape', 'windowsVirtualKeyCode': 27})
+        # WEB-004 appearance: styles, per-assembly states, Hybrid focus, picking policy, colours from the export, reset (web/README.md).
+        snap0 = page.js(SNAPSHOT)
+        for name in ('subsystem', 'engine', 'hybrid', 'standard'):
+            page.click(*page.centre_of(f'[data-style={name}]'))
+            ok = page.wait(f"window.wayfarer.style() === '{name}' && window.wayfarer.records.every(r => r.res)", 120)
+            page.frames()
+            styled = page.js(STYLED.replace('{style}', name))
+            record_check(f'viewer: {name} style draws every mesh in its look', ok and styled['wrong'] == 0, **styled)
+            if name in ('subsystem', 'engine'):
+                page.screenshot(out / f'desktop_holo_{name}.png')
+            if name == 'subsystem':
+                tints = page.js(TINTS)
+                record_check('viewer: subsystem colours are the exported classification', tints['checked'] > 0 and tints['wrong'] == 0, **tints)
         page.click(*page.centre_of('#panel-toggle'))
-        first = page.js("document.querySelector('#assemblies li span').textContent")
-        page.click(*page.centre_of('#assemblies li input'))
+        first = page.js("document.querySelector('#assemblies li select').dataset.assembly")
+        states = {}
+        for st in ('SOLID', 'HOLOGRAM', 'GHOST', 'HIDDEN'):
+            page.js(f"(() => {{ const s = document.querySelector('#assemblies li select'); s.value = '{st}'; s.dispatchEvent(new Event('change')); }})()")
+            states[st] = page.wait(f"window.wayfarer.records.filter(r => r.assembly === '{first}').every(r => r.res.state === '{st}' "
+                                   f"&& r.meshes.every(m => m.visible === ('{st}' !== 'HIDDEN')))", 60)
         page.frames()
-        hidden = page.js('[...window.wayfarer.groups.values()].filter(g => !g.visible).length')
         page.screenshot(out / 'desktop_assembly_hidden.png')
         page.click(*page.centre_of('#show-all'))
+        shown = page.wait(f"window.wayfarer.records.filter(r => r.assembly === '{first}').every(r => r.res.state !== 'HIDDEN')", 60)
+        record_check('viewer: an assembly takes Solid, Hologram, Ghost and Hidden; Show all lifts Hidden', all(states.values()) and shown,
+                     assembly=first, states=states)
+        page.js("document.querySelector('#assemblies li select').value = ''; document.querySelector('#assemblies li select').dispatchEvent(new Event('change'))")
+        page.click(*page.centre_of('#panel-toggle'))
+        page.click(*page.centre_of('[data-style=hybrid]'))
+        page.wait("window.wayfarer.style() === 'hybrid'", 60)
+        hybrid = None
+        for px, py in ((640, 400), (600, 400), (700, 410), (560, 380), (740, 380)):
+            page.click(px, py)
+            page.frames()
+            hybrid = page.js(HYBRID_FOCUS)
+            if hybrid['selected']:
+                hit = (px, py)
+                break
+        record_check('viewer: Hybrid click focuses the picked part solid, the rest ghost', hybrid['ok'], **details(hybrid))
+        page.screenshot(out / 'desktop_hybrid_focus.png')
+        kept = page.js(KEEPS_OVERRIDES)
+        record_check('viewer: changing the selection keeps unrelated assembly states', kept['ok'], **details(kept))
+        hidden_pick = page.js(HIDDEN_PICK.replace('{x}', str(hit[0])).replace('{y}', str(hit[1]))) if hybrid['selected'] else {'ok': False}
+        record_check('viewer: hidden parts never take a pick', hidden_pick['ok'], **details(hidden_pick))
+        ghost_pick = page.js(GHOST_PICK, timeout=180)
+        record_check('viewer: ghosts never take a pick from a visible subject behind them', ghost_pick['ok'], **details(ghost_pick))
+        page.click(*page.centre_of('#appearance-toggle'))
+        page.click(*page.centre_of('#reset-appearance'))
+        page.click(*page.centre_of('#appearance-toggle'))
         page.frames()
-        shown = page.js('[...window.wayfarer.groups.values()].every(g => g.visible)')
-        record_check('viewer: assembly hide and Show all', hidden == 1 and shown, hidden_assembly=first)
+        snap1 = page.js(SNAPSHOT)
+        record_check('viewer: Reset appearance restores materials, visibility and transforms', snap1 == {**snap0, 'style': 'standard'} and
+                     snap1['original_materials'] == snap1['meshes'] == snap1['original_visibility'] and not snap1['added_lines'],
+                     before=snap0, after=snap1)
         fps = page.js(RAF_FPS.replace('{ms}', '4000'), timeout=120)
         stats = page.js('(() => { const s = window.wayfarer.stats; return {calls: s.calls, triangles: s.triangles, ready_ms: s.ready_ms}; })()')
         reqs, lines = traffic.since(mark)
         engine = [u for u, *_ in reqs if '/play/' in u]
         record_check('viewer: no Enter Wayfarer file requested', not engine, play_requests=engine[:3])
         requests_ok('viewer: every request served from the project subpath', reqs)
-        errors = [text for kind, text in lines if kind in ('error', 'assert', 'exception')]
-        record_check('viewer: no script errors', not errors, errors=errors[:5])
+        errors = [text for kind, text in lines if kind in ('error', 'assert', 'exception')
+                  or (kind == 'warning' and any(w in text for w in ('WebGL', 'THREE', 'shader', 'Shader')))]
+        record_check('viewer: no script errors or WebGL warnings', not errors, errors=errors[:5])
         metrics['viewer'] = {'ready_s': viewer_s, 'transferred_bytes': sum(b for _, _, b, _ in reqs), 'requests': len(reqs),
                              'raf': fps, **stats, 'renderer_rss_mb': rss(chrome.process.pid, 'renderer'),
                              'renderer': 'SwiftShader software WebGL, 1280x800'}
@@ -717,6 +805,16 @@ def check(site, out, binary, sandbox=True, record=False, play_seconds=900, live=
         again = page.js(CAMERA)
         record_check('viewer: #cam bookmark reopens the camera', bookmark.startswith('#cam=') and moved(pan, again, 'p') < 0.05
                      and moved(pan, again, 't') < 0.05, bookmark=bookmark)
+        # WEB-004: style, focus, focus look, ghost strength and an assembly state come back from the link; a missing target is dropped.
+        mark_state = ('#view=side&style=hybrid&focus=a:{a}&look=cyan&ghost=12&ov=a:{b}.x,n:WF_NO_SUCH_NODE.g'
+                      .format(a=first, b=page.js("[...window.wayfarer.groups.keys()].sort().at(-1)")))
+        page.send('Page.navigate', {'url': url + 'viewer/?appearance' + mark_state})
+        page.wait("!!(window.wayfarer && window.wayfarer.model && window.wayfarer.records.every(r => r.res))", 240)
+        restored_state = page.js("(() => { const s = window.wayfarer.state; return {style: s.style, focus: s.focus, look: s.focusLook, ghost: s.ghost, "
+                                 "overrides: [...s.overrides]}; })()")
+        record_check('viewer: the bookmark restores style, focus and states', restored_state['style'] == 'hybrid' and restored_state['look'] == 'cyan'
+                     and restored_state['focus'] == {'kind': 'assembly', 'id': first} and abs(restored_state['ghost'] - 0.12) < 1e-9
+                     and len(restored_state['overrides']) == 1 and restored_state['overrides'][0][1] == 'HIDDEN', bookmark=mark_state, state=restored_state)
 
         # Back to the start page: the viewer's context is released (pagehide) and nothing of it stays loaded.
         page.click(*page.centre_of('a.back'))

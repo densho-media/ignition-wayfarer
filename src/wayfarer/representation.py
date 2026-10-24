@@ -286,3 +286,44 @@ def hidden_at(keys, frame):
 def fit_distance(radius, fov_deg):
     """Perspective camera distance that keeps a sphere of `radius` inside the vertical field of view."""
     return radius/math.sin(math.radians(fov_deg)/2)
+
+
+def holo_style(root, records):
+    """The hologram styles of the web viewer and Enter Wayfarer (WEB-003): every runtime manifest record classified into the M5
+    subsystems (shots/m5_subsystems.toml, as the M5 holograms classify it) and the engine hologram's single colour
+    (SH_ENGINE_HOLOGRAM default). nodes: node -> subsystem id, or [id, [r, g, b]] where a selector gives it its own colour; groups: node ->
+    its manifest lineage below the assembly, where it has one (the viewer's Group scope). Overlay colours explain function; they are never ship materials."""
+    subs = load_subsystems(root, 'm5_subsystems.toml')
+    engine = load_shots(root)['shot']['SH_ENGINE_HOLOGRAM']['colors']['default']
+    nodes, groups = {}, {}
+    for r in records:
+        if r.get('kind') in SKIP_KINDS:
+            continue
+        if len(r['lineage']) > 1:
+            groups[r['node']] = r['lineage'][1]   # WEB-004: the exported component below the assembly (a nozzle, a radiator mechanism)
+        item = dict(key=r['node'], component_id=r['component_id'], name=r['source_name'], kind=r['kind'], group=r['lineage'][0],
+                    source=r.get('source_ref', ''))
+        sub = classify(item, subs)
+        item['subsystem'] = sub['id']
+        color = [round(v, 3) for v in subsystem_color(item, subs)]
+        nodes[r['node']] = sub['id'] if color == [round(v, 3) for v in sub['color']] else [sub['id'], color]   # own colour only if it differs
+    table = [dict(id=s['id'], name=s['name'], color=list(s['color']), maturity=s.get('maturity', '')) for s in [*subs, CONTEXT]]
+    return dict(contract='WF_HOLO_STYLE', version=1, source='shots/m5_subsystems.toml, shots/shots.toml SH_ENGINE_HOLOGRAM',
+                styles=dict(subsystem='M5 subsystem hologram: overlay colour per functional subsystem',
+                            engine='engine exposition hologram: one colour'),
+                engine_color=list(engine), subsystems=table, nodes=nodes, groups=groups)
+
+
+if __name__ == '__main__':
+    # runtime-export and the web play build: python3 representation.py holo-style --manifest <manifest.json> --out <wf_holo.json>
+    import argparse
+    import json
+    parser = argparse.ArgumentParser()
+    parser.add_argument('command', choices=['holo-style'])
+    parser.add_argument('--root', default=str(ROOT))
+    parser.add_argument('--manifest', required=True)
+    parser.add_argument('--out', required=True)
+    args = parser.parse_args()
+    style = holo_style(args.root, json.loads(Path(args.manifest).read_text())['nodes'])
+    Path(args.out).write_text(json.dumps(style, separators=(',', ':')) + '\n')
+    print(f"{args.out}: {len(style['nodes'])} nodes")

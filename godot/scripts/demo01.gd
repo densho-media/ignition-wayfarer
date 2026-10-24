@@ -19,7 +19,8 @@ extends Node
 ## The chapters, camera paths, auto actions and the ramp time-lapse are display choices (PROTOTYPE); no transfer timing, procedure or
 ## interlock is released (transition timing HOLD, FLIGHT_EVA HOLD). Godot holds no spacecraft facts: everything comes from the rig/manifest.
 ## Keys: Enter next chapter · P pause/resume the auto camera · A autoplay of the body actions · O mark an occupant not secured (MODE) ·
-## the body keys of the body tour in MICROGRAVITY and GRAVITY · Esc inspector.
+## the body keys of the body tour in MICROGRAVITY and GRAVITY · F3 hologram style (WEB-003: standard, subsystem, engine; presentation
+## only, WfHoloStyle) · Esc inspector.
 
 const CHAPTERS := ["EXTERIOR", "ENTRY", "MICROGRAVITY", "MODE", "TRANSFER", "DESCENT", "GRAVITY", "ARRIVAL", "INSPECT"]
 const ARRIVAL_S := 6.0          # PROTOTYPE display: seconds at the habitat stop
@@ -53,6 +54,7 @@ const CHAPTER_STOP := {"MICROGRAVITY": "spine", "MODE": "spine", "TRANSFER": "tr
 	"ARRIVAL": "habitat", "INSPECT": "entry"}
 var production_nodes: Array = []          # M7: imported meshes of the production layer (WfProductionLayer metadata)
 var production_flips := 0
+var holo := WfHoloStyle.new()             # WEB-003: the hologram styles over the ship (instance overrides only)
 var layer := CanvasLayer.new()
 var sun := DirectionalLight3D.new()
 var centre := Vector3.ZERO
@@ -104,6 +106,7 @@ func setup(h) -> void:
 		first = false
 	centre = aabb.get_center()
 	host.help_label.visible = false
+	holo.setup(host.ship, host.world.environment)
 	var bt: WfBodyTour = host.ensure_body_tour()
 	bt.hud.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	# Readable over the bright interiors: a translucent backing behind both left texts (display only).
@@ -173,6 +176,8 @@ func touch_state() -> Dictionary:
 		util.append(["ship.map", "Map"])
 		util.append(["ship.card", ["Systems", "Why", "Show me", "Close"][navigator.card_page + 1]])
 	util.append(["touch.info", "Details" if not details else "Less"])
+	if holo.available():
+		util.append(["demo.holo", {"standard": "Holo", "subsystem": "Engine", "engine": "Solid"}[holo.style]])
 	return {"move": move, "look": camera_free() or body, "actions": acts, "utility": util,
 		"local": {"touch.info": func(): details = not details}, "probe": touch_probe,
 		"panels": [hud, host.body_tour.hud if host.body_tour != null else null] + ([navigator.panel, navigator.card] if navigator != null else [])}
@@ -429,6 +434,8 @@ func _unhandled_input(e: InputEvent) -> void:
 			autoplay = not autoplay
 			if host.body_tour != null:
 				host.body_tour.auto_descend = autoplay and CHAPTERS[chapter] in ["TRANSFER", "DESCENT"]
+		KEY_F3:
+			holo.apply(holo.next_style())
 		KEY_O:
 			if ctl != null:
 				ctl.occupants_securable = not ctl.occupants_securable
@@ -588,9 +595,11 @@ func hud_text(done: bool) -> String:
 			var on: bool = production_nodes.size() > 0 and production_nodes[0].visible
 			s += ("Production layer %s (" + str(host.manifest.production.maturity) + ", S&E 48!A23; visual acceptance, not engineering GO) over the same engineering geometry, seen from the entry chamber stop (M7.ENT; its stop card shows the boarding configuration, DOCKED). %d meshes: %s.\n" + (touch_hint(name) if touch else WfInput.keys("{demo.pause} holds it on")) + ("." if WfInput.compact() else WfInput.keys("; {ui.cancel} inspector for picking."))) % [
 				"ON" if on else "OFF (engineering + route fit-out)", production_nodes.size(), production_summary()]
+	if holo.style != "standard":
+		s += "\n" + holo.legend()
 	s += "\n" + (("Done: tap Next." if touch else WfInput.keys("Done: {ui.confirm} for the next chapter.")) if done and chapter < CHAPTERS.size() - 1 else ("End of the demonstrator." if done else ""))
 	if not WfInput.compact():
-		s += WfInput.keys("   {ui.confirm} next · {demo.pause} pause · {demo.autoplay} autoplay · {body.view} body / first person · {ui.cancel} inspector")
+		s += WfInput.keys("   {ui.confirm} next · {demo.pause} pause · {demo.autoplay} autoplay · {body.view} body / first person" + (" · {demo.holo} hologram" if holo.available() else "") + " · {ui.cancel} inspector")
 	return s.strip_edges(false, true)
 
 ## MOB-001: the chapter's instruction on a touch screen, in the words of its on-screen controls (touch_state).
@@ -860,6 +869,12 @@ func capture(dir: String) -> void:
 			if done and t > 2.5:
 				break
 		await _shot(dir, "demo_%d_%s_b" % [i + 1, CHAPTERS[i].to_lower()])
+		if "--holo-stills" in OS.get_cmdline_user_args() and holo.available():
+			for s in ["subsystem", "engine"]:                       # WEB-003: the same frame in each hologram style
+				holo.apply(s)
+				hud.text = hud_text(true)
+				await _shot(dir, "demo_%d_%s_holo_%s" % [i + 1, CHAPTERS[i].to_lower(), s])
+			holo.apply("standard")
 		if navigator != null and "--navigator-stills" in OS.get_cmdline_user_args():
 			await navigator.stills(dir, "demo_%d_%s" % [i + 1, CHAPTERS[i].to_lower()], _shot)
 		if navigator != null and "--space-stills" in OS.get_cmdline_user_args() and CHAPTERS[i] in ["ENTRY", "GRAVITY"]:

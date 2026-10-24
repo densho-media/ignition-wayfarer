@@ -498,6 +498,12 @@ all 54 engineering gates currently HOLD. No detailed robot art before the L2 lay
     runs, fails and reruns alone and they no longer share one runner's four cores. Run 39926690587 spent 31 of its 35 minutes
     in the single browser-check step.
   - Extend browser-vs-native equivalence past GRAVITY→INSPECT only if a shorter recorded path through the earlier chapters exists.
+  - Hologram and hybrid appearance (WEB-003/004, branch `claude/affectionate-goodall-orfxcx`, web/README.md): owner review of the
+    Subsystems, Engine holo and Hybrid looks, ghost strength default (6 %) and two-layer hologram cap, on real hardware (desktop GPU
+    and phone frame times; all numbers so far are SwiftShader). Enter Wayfarer keeps only the F3 style cycle (no hybrid focus).
+    Radiator blades cannot be isolated one by one: their cells carry no lineage below Assembly_THERMAL in the export (the viewer's
+    Group scope reads the manifest lineage); a blade-level lineage in export/godot.py would add it. Later (P3): exploded views,
+    section planes, cutaways, hybrid focus in the Godot demonstrator.
 - [ ] **P03 — Optional compliant-tether stress study. PARKED, owner-led.** Do only when OD-038/required interaction needs it; do not
   confuse a timestep-dependent impulse diagnostic with rated human loads. Required operational tether releases remain in D/K.
 - [ ] **P04 — Full-gate policy relaxation. PARKED, optional process change.** Retain the existing full pre-commit geometry gate. Consider

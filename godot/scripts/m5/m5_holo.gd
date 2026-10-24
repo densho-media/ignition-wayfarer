@@ -7,24 +7,6 @@ extends Node3D
 ## Selection, isolation, the dorsal cutaway and the study layers change visibility only: no ship, physics, route or mechanism state.
 
 const DATA := "res://generated/m5/wf_m5_holo.json"
-const HOLO_SHADER := """
-shader_type spatial;
-render_mode unshaded, blend_add, depth_draw_never, cull_disabled, shadows_disabled;
-uniform vec4 tint : source_color = vec4(1.0);
-uniform float energy = 0.6;
-uniform bool cut = false;
-uniform float cut_y = 0.0;
-uniform float flow = 0.0;
-varying vec3 wpos;
-void vertex() { wpos = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz; }
-void fragment() {
-	if (cut && wpos.y > cut_y) { discard; }
-	float rim = pow(1.0 - abs(dot(NORMAL, VIEW)), 2.0);
-	float scan = 0.88 + 0.12 * step(0.5, fract(wpos.y * 1.5));
-	float pulse = flow * 1.2 * pow(0.5 + 0.5 * sin(wpos.x * 0.22 + TIME * 3.0), 6.0);
-	ALBEDO = tint.rgb * energy * (0.3 + 1.7 * rim) * scan * (1.0 + pulse);
-}
-"""
 const GHOST_ENERGY := 0.05
 const SUBJECT_ENERGY := 0.55
 const SLEW_PROBE_S := 600.0                    # gnc_check: 600 s at 0.05 deg/s = 30 deg
@@ -92,7 +74,7 @@ func _ready() -> void:
 		title_label.text = "M5 SUBSYSTEM HOLOGRAM\n\nGenerate the package from the repository root:\npython3 tools/workflow.py runtime-export"
 		return
 	data = JSON.parse_string(FileAccess.get_file_as_string(DATA))
-	shader.code = HOLO_SHADER
+	shader.code = WfHoloStyle.SUBSYSTEM_SHADER          # WEB-003: one shader for this scene and the hologram toggles
 	highlight.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	highlight.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	highlight.albedo_color = Color(1.0, 1.0, 1.0, 0.55)

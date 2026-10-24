@@ -1371,6 +1371,10 @@ geometry and carries no load. It changes no pressure boundary, interface, volume
   within 28 m of the camera and fade out beyond (`godot/scripts/production_layer.gd`, in the boarding, inspector, flight and
   hologram scenes). Demonstrator 01 ends with ARRIVAL (the ring A sector 1 habitat stop) and INSPECT (the layer off and on over
   the same geometry, at the entry-chamber stop where `M7.ENT` fills the view). Measured cost: `references/M7_PERF_2026-10-19.md`.
+- **Hologram styles (WEB-003):** Demonstrator 01 (F3) and the web viewer redraw the same meshes as the M5 subsystem hologram (overlay
+  colour per subsystem, additive rim and scan) or the engine exposition hologram (one colour, rim glow), from `wf_holo.json`
+  (`representation.py holo-style`: `shots/m5_subsystems.toml` and the SH_ENGINE_HOLOGRAM colour). Instance overrides only; the M5
+  scene shares the shader (`godot/scripts/holo_style.gd`).
 - **Value hierarchy (M7.1, owner 2026-10-20):** `[production.materials]` steps from inhabited panels (warm off-white, ~0.69 linear)
   through service panels (~0.45), machinery (~0.26) and structure and housings (~0.15) to trays and seams (0.05). Fasteners are dulled.
   No texture maps.

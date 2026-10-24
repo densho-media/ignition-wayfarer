@@ -146,6 +146,7 @@ python3 tools/workflow.py characters [--only <ids>] [--no-fit] [--stages build r
 python3 tools/workflow.py runtime-check [names|auto]  # Godot checks in godot/ against the published package, refused (STALE) unless its inputs and tool versions match build_identity.json
 python3 tools/workflow.py web [--pipeline-run runs/<quick run>] [--out DIR] [--native] [--no-play] [--reuse-play SITE [--reuse-native ZIP]]   # WEB-001/002 website from the saved assets: start page, Explore Ship (Draco COAST GLB, three.js), Enter Wayfarer (Demonstrator 01 Godot Web build, tools/web_play.py), review, release.json (web/README.md, ~4 min)
 python3 tools/web_check.py <site> --out DIR --chrome <binary> [--record] [--live URL]   # headless-Chrome walk: loading isolation, viewer, play, switching, browser-vs-native recording, phone
+python3 src/wayfarer/representation.py holo-style --manifest <manifest.json> --out <wf_holo.json>   # WEB-003 hologram colours per node (runtime-export, web play build; the viewer's holo-<hash>.json)
 python3 tools/web_check.py <site> --out <dir>      # headless Chrome check of that site under /ignition-wayfarer/: framing, orbit, zoom, pan, reset, presets, picking, phone touch
 python3 tools/workflow.py prune [--delete RUN...]     # AGENTS.md step 6 candidates in runs/ with sizes; deletes only named, approved candidates
 python3 tools/workflow.py module list|show|contracts|build|validate|preview|publish|rebind <module|pack|assembly> [--integrate]
