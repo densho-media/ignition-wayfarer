@@ -201,7 +201,7 @@ the generators and this plan. One build lock: sessions queue for builds.
 - **Parallel:** with S4, S5, S6.
 - **Done when:** the Brow and Crown hierarchy reads at whole-ship distance and at human scale.
 
-#### S4 — Habitat ring exteriors · High · class 2 + 4 · WF-RING-A, then WF-RING-B
+#### S4 — Habitat ring exteriors · High · class 2 + 4 · WF-RING-A, then WF-RING-B · BUILT, owner review (section 4.5)
 - **Direction:** the rings as visibly distinct, assembled, maintainable pressure structures: shell over the pressure faces and fill,
   exposed segment joints and spoke nodes, amber occupancy, text-only sector IDs; legibility from value contrast and construction
   rhythm, never from size.
@@ -425,6 +425,23 @@ VC+ ladder); (3) GU deep blue as a standard wayfinding accent or not; (4) the th
 - **Not done here:** the ram-face tile-and-repair appearance (OWN-P4-LOCKED (b)) is a shader/texture effect and moves to S9, where the
   Godot parity check lives.
 - **Maturity:** `L4_VISUAL_CANDIDATE`; the owner reviews M8.2 (request Doc remainder).
+
+### 4.5 S4 — habitat ring exteriors (2026-10-24)
+
+- **Implemented:** packs `ring_a_exterior` and `ring_b_exterior` with the shared segment module `ring_exterior.py` (WF-HABITAT): per 15°
+  segment and flank, light shell cassettes, mid-value joint caps over dark joint gaps (the frame rhythm), graphite spoke-node housings
+  with ochre covers, calm pressure-face panels in the recess, amber occupancy bands, text-only sector IDs (1.06 m) with a GU deep-blue
+  identifier bar. Ring A segment gated first (`runs/20261024T-p4-s4a`), then both rings. 246 elements per ring; accents blue 0.06 %,
+  amber 1.3 %, ochre 0.6 %. Each ring's detail is two flank assemblies (+u, −u) so its claimed envelope stays off ring A's crew-tube pack
+  (an annulus does not fit one box).
+- **Preserved:** no size, position or motion change; every element inside r 24.5–30.0 m and |u| ≤ 2.15 m (sweep), outside the frame
+  body and the sector pressure envelopes; full pipeline PASS including the rotation inspection (`runs/20261024T-p4-s4-pipeline`; the
+  fingerprint adds only the four detail instances); baseline `baseline_p4_s4_rings`.
+- **Evidence:** `runs/20261024T-p4-s4` (whole ship three-quarter and side, rings view, ring segment, human scale; COAST/IGNITION pair)
+  with sheets against S3 (`pairs_vs_s3`) and against the pre-Phase-4 look (`pairs_vs_pre`). At segment and human scale the rings read as
+  assembled modules; in the rings view the joint rhythm and IDs read on the flank; in the side silhouette the rings stay edge-on (owner:
+  accepted geometric reality), separated from the dark blades by value.
+- **Maturity:** `L4_VISUAL_CANDIDATE` (both packs). The hub read from outside (HERO tier) is not detailed in this pass.
 
 ## 5. Risks
 

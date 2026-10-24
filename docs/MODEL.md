@@ -1456,6 +1456,24 @@ thickness, protection performance and structural mass stay unqualified (S&E 36, 
   from the aft hemisphere (direction a labelled presentation choice) and the COAST editorial +2 EV of 15!A222, plus an x-ray cutaway
   (engineering clay, M8 amber).
 
+## Habitat ring exteriors (Phase 4 S4)
+
+The detail packs `ring_a_exterior` (WF-RING-A) and `ring_b_exterior` (WF-RING-B) put the selected exterior grammar on both rings so they
+read as assembled, maintained, inhabited pressure structures by value and rhythm, never by size or position. One shared pure module,
+`ring_exterior.py` (WF-HABITAT), builds the 15° segment module in the rotor frame (anchors `WF-RING-A.ROTOR.1`, `WF-RING-B.ROTOR.2`), so
+the detail turns with its ring; each ring has a forward (+u) and an aft (−u) flank assembly (`R<A|B>.EXT.FWD`, `.AFT`), each claiming
+only the slab between the frame flank and the 2.15 m sweep. All `L4_VISUAL_CANDIDATE`, PROTOTYPE: no load, shielding, mass, balance,
+pressure boundary or mechanism.
+
+- **Segment module (24 per ring, both flanks):** light shell cassettes 20–60 mm off the flank between the joints; a mid-value joint cap
+  either side of every 15° joint over a dark 80 mm joint gap (the frame rhythm); at each structural spoke a graphite node housing with
+  an ochre service cover; over each pressurized segment a calm shell panel on the pressure face in its 0.25 m recess (10 mm off the
+  sector skin), a muted amber occupancy band, the text-only sector ID (`A1..A3`, `B1..B3`, 1.06 m) and a GU deep-blue identifier bar.
+  246 elements per ring; accents blue 0.06 %, amber 1.3 %, ochre 0.6 % of the detail area.
+- **Screens** (`ring_exterior.check`): every vertex inside r 24.5–30.0 m and |u| ≤ 2.15 m, outside the frame body except the recess
+  panels, and no part in a sector pressure envelope; the envelope screen keeps each flank assembly off ring A's crew-tube pack. The
+  M4 construction inside the frame (joints, webs, cassettes, covers, nodes, rim band), the spokes, crew tubes and hub are unchanged.
+
 ## Phase 4 grammar study (S1)
 
 `studies/p4_s1_grammar.py` is the NONCANON S1 experiment of [PHASE4_PLAN.md](PHASE4_PLAN.md) (owner P4-EXP, 2026-10-24): it builds

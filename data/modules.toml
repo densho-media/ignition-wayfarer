@@ -51,7 +51,7 @@ targets = ["HABITAT", "RING_SECTOR", "INTERIOR_HABITATION", "INTERIOR_WORK", "IN
 # itself is one parameterised generator (components/revision.py ring_asset, WF-CORE) and one spec: the split gives each ring its own
 # asset, build target, anchors and detail packs, not a second source of engineering values.
 owns = ["src/wayfarer/habitat_ring.py", "src/wayfarer/habitat_interior.py", "src/wayfarer/sector_whitebox.py",
-        "src/wayfarer/components/interior.py"]
+        "src/wayfarer/components/interior.py", "src/wayfarer/ring_exterior.py"]
 depends = ["WF-CORE", "WF-SPINE"]
 inspect = ["rotation", "route"]
 

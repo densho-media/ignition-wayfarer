@@ -125,7 +125,7 @@
         "sector_interior_deck": 6,
         "sector_interior_overhead": 6,
         "sector_interior_zone": 60,
-        "production_detail": 47,
+        "production_detail": 71,
         "cryo_feed_line": 8,
         "service_fitting": 8,
         "dock_capture_ring": 2,
@@ -414,7 +414,7 @@
         "sector_interior_deck": 6,
         "sector_interior_overhead": 6,
         "sector_interior_zone": 60,
-        "production_detail": 47,
+        "production_detail": 71,
         "cryo_feed_line": 8,
         "service_fitting": 8,
         "dock_capture_ring": 2,
@@ -703,7 +703,7 @@
         "sector_interior_deck": 6,
         "sector_interior_overhead": 6,
         "sector_interior_zone": 60,
-        "production_detail": 47,
+        "production_detail": 71,
         "cryo_feed_line": 8,
         "service_fitting": 8,
         "dock_capture_ring": 2,
@@ -989,7 +989,7 @@
         "sector_interior_deck": 6,
         "sector_interior_overhead": 6,
         "sector_interior_zone": 60,
-        "production_detail": 47,
+        "production_detail": 71,
         "cryo_feed_line": 8,
         "service_fitting": 8,
         "dock_capture_ring": 2,
@@ -1275,7 +1275,7 @@
         "sector_interior_deck": 6,
         "sector_interior_overhead": 6,
         "sector_interior_zone": 60,
-        "production_detail": 47,
+        "production_detail": 71,
         "cryo_feed_line": 8,
         "service_fitting": 8,
         "dock_capture_ring": 2,
@@ -1561,7 +1561,7 @@
         "sector_interior_deck": 6,
         "sector_interior_overhead": 6,
         "sector_interior_zone": 60,
-        "production_detail": 47,
+        "production_detail": 71,
         "cryo_feed_line": 8,
         "service_fitting": 8,
         "dock_capture_ring": 2,
@@ -1863,6 +1863,30 @@
       "authored": 0,
       "enabled": true
     },
+    "WF_DETAIL_RA_EXT_AFT.blend": {
+      "assembly": "RA.EXT.AFT",
+      "objects": 6,
+      "authored": 0,
+      "enabled": true
+    },
+    "WF_DETAIL_RA_EXT_FWD.blend": {
+      "assembly": "RA.EXT.FWD",
+      "objects": 6,
+      "authored": 0,
+      "enabled": true
+    },
+    "WF_DETAIL_RB_EXT_AFT.blend": {
+      "assembly": "RB.EXT.AFT",
+      "objects": 6,
+      "authored": 0,
+      "enabled": true
+    },
+    "WF_DETAIL_RB_EXT_FWD.blend": {
+      "assembly": "RB.EXT.FWD",
+      "objects": 6,
+      "authored": 0,
+      "enabled": true
+    },
     "WF_CREW_TRANSFER.blend": {
       "instances": [
         "M7.TRK"
@@ -1879,7 +1903,15 @@
         "M7.RA1",
         "M7.SPK",
         "M7.XFR",
-        "RA2.EQP"
+        "RA2.EQP",
+        "RA.EXT.AFT",
+        "RA.EXT.FWD"
+      ]
+    },
+    "WF_HABITAT_B.blend": {
+      "instances": [
+        "RB.EXT.AFT",
+        "RB.EXT.FWD"
       ]
     },
     "WF_SERVICE.blend": {
@@ -2321,7 +2353,7 @@
       "shield face": 112.5,
       "EYE facet faces": 110.5,
       "truss aft (rim girder)": 105.9,
-      "ring B sweep front": 93.099
+      "ring B sweep front": 93.184
     },
     "wells": 4,
     "crown_bays": 12,
@@ -3756,6 +3788,54 @@
       ],
       "direct_links": []
     },
+    "detail/WF_DETAIL_RA_EXT_AFT.blend": {
+      "generated_objects": 6,
+      "ids": [
+        "RA.EXT.AFT.CASSETTES",
+        "RA.EXT.AFT.JOINTS",
+        "RA.EXT.AFT.MARKINGS",
+        "RA.EXT.AFT.NODES",
+        "RA.EXT.AFT.OCCUPANCY",
+        "RA.EXT.AFT.WAYFINDING"
+      ],
+      "direct_links": []
+    },
+    "detail/WF_DETAIL_RA_EXT_FWD.blend": {
+      "generated_objects": 6,
+      "ids": [
+        "RA.EXT.FWD.CASSETTES",
+        "RA.EXT.FWD.JOINTS",
+        "RA.EXT.FWD.MARKINGS",
+        "RA.EXT.FWD.NODES",
+        "RA.EXT.FWD.OCCUPANCY",
+        "RA.EXT.FWD.WAYFINDING"
+      ],
+      "direct_links": []
+    },
+    "detail/WF_DETAIL_RB_EXT_AFT.blend": {
+      "generated_objects": 6,
+      "ids": [
+        "RB.EXT.AFT.CASSETTES",
+        "RB.EXT.AFT.JOINTS",
+        "RB.EXT.AFT.MARKINGS",
+        "RB.EXT.AFT.NODES",
+        "RB.EXT.AFT.OCCUPANCY",
+        "RB.EXT.AFT.WAYFINDING"
+      ],
+      "direct_links": []
+    },
+    "detail/WF_DETAIL_RB_EXT_FWD.blend": {
+      "generated_objects": 6,
+      "ids": [
+        "RB.EXT.FWD.CASSETTES",
+        "RB.EXT.FWD.JOINTS",
+        "RB.EXT.FWD.MARKINGS",
+        "RB.EXT.FWD.NODES",
+        "RB.EXT.FWD.OCCUPANCY",
+        "RB.EXT.FWD.WAYFINDING"
+      ],
+      "direct_links": []
+    },
     "subsystems/WF_CREW_TRANSFER.blend": {
       "generated_objects": 192,
       "ids": [
@@ -4794,7 +4874,7 @@
       ]
     },
     "subsystems/WF_HABITAT_A.blend": {
-      "generated_objects": 254,
+      "generated_objects": 256,
       "ids": [
         "Crew_Tube_1_1",
         "Crew_Tube_1_1_Arrest_Rail",
@@ -5031,6 +5111,8 @@
         "WF.DETAIL.M7.RA1",
         "WF.DETAIL.M7.SPK",
         "WF.DETAIL.M7.XFR",
+        "WF.DETAIL.RA.EXT.AFT",
+        "WF.DETAIL.RA.EXT.FWD",
         "WF.DETAIL.RA2.EQP",
         "WF.HUB.1.DATA_Rotor",
         "WF.HUB.1.Drum",
@@ -5059,11 +5141,13 @@
         "detail/WF_DETAIL_M7_RA1.blend",
         "detail/WF_DETAIL_M7_SPK.blend",
         "detail/WF_DETAIL_M7_XFR.blend",
-        "detail/WF_DETAIL_RA2_EQP.blend"
+        "detail/WF_DETAIL_RA2_EQP.blend",
+        "detail/WF_DETAIL_RA_EXT_AFT.blend",
+        "detail/WF_DETAIL_RA_EXT_FWD.blend"
       ]
     },
     "subsystems/WF_HABITAT_B.blend": {
-      "generated_objects": 253,
+      "generated_objects": 255,
       "ids": [
         "Crew_Tube_2_1",
         "Crew_Tube_2_1_Arrest_Rail",
@@ -5300,6 +5384,8 @@
         "WF.CREW.2.VESTIBULE",
         "WF.CREW.2.VESTIBULE_GUARD_AFT",
         "WF.CREW.2.VESTIBULE_GUARD_FWD",
+        "WF.DETAIL.RB.EXT.AFT",
+        "WF.DETAIL.RB.EXT.FWD",
         "WF.HUB.2.DATA_Rotor",
         "WF.HUB.2.Drum",
         "WF.HUB.2.EMERGENCY_POWER_Rotor",
@@ -5323,7 +5409,9 @@
         "components/WF_INTERIOR_GARDEN.blend",
         "components/WF_INTERIOR_HABITATION.blend",
         "components/WF_INTERIOR_WORK.blend",
-        "components/WF_RING_SECTOR.blend"
+        "components/WF_RING_SECTOR.blend",
+        "detail/WF_DETAIL_RB_EXT_AFT.blend",
+        "detail/WF_DETAIL_RB_EXT_FWD.blend"
       ]
     },
     "subsystems/WF_HULL.blend": {
