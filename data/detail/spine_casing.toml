@@ -19,7 +19,10 @@ evidence_ref = "p4_exterior_grammar"
 detail_class = "PRODUCTION"
 inspect = ["hull", "route"]
 views = ["side", "three_quarter"]
-summary = "Casing module frame bands at the radiator-stay frames, SP-51 crawler rail beds, stop markers and IDs, module numbers K1-K5."
+summary = "Casing module frame bands at the radiator-stay frames, SP-51 crawler rail beds, stop markers and IDs, module numbers K1-K5, ship name."
+# Godot draw range per family by scale tier ([production.exterior] tier_range_m): the module rhythm, the route and the numbers read
+# at whole-ship distance; the stop markers at subsystem distance.
+detail_tiers = { default = "meso", modules = "macro", route = "macro", markings = "macro", wayfinding = "meso" }
 
 [assembly."SP.CASING"]
 anchor = "WF-SPINE.HULL.ORIGIN"
@@ -44,9 +47,18 @@ opening_margin_m = 0.25
 stop_marker_m = [1.20, 0.12]
 stop_marker_gap_m = 0.10
 film_m = 0.004
-# Text offsets: the stop ID beside the outer marker; the module number at the sector bisectors between the blades.
+# Text offsets: the stop ID beside the outer marker; the module number at the sector bisectors between the blades, module_id_inset_m
+# forward of the module's aft band; lettering bent onto the casing at text_lift_m above it.
 stop_id_gap_m = 0.25
 module_id_deg = [90.0, 210.0, 330.0]
+module_id_inset_m = 1.0
 text_lift_m = 0.06
+# Bent lettering is split into edges no longer than this before bending (a 0.25 m chord sags 1.3 mm at r 6 m), so it stays on its radius.
+text_max_edge_m = 0.25
+# S9 marking (owner 2026-10-24, Y155): the ship name, text only, along module K3 on the three bisectors, forward of the module number,
+# ship_name_gap_m clear of the number and the forward band; its cap height is the ship-name class (300 m) unless the module is too short.
+ship_name = "G.U. WAYFARER 001"
+ship_name_module = 3
+ship_name_gap_m = 1.0
 # Every element clears the fixed exterior parts (survival masts, trackers, rails, docks; drone rails and docks; service fittings) by this.
 static_gap_m = 0.05

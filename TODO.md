@@ -30,11 +30,12 @@ close-up, regression check, MODEL/TODO and Model Status update.
 
 - [ ] **P4 — Phase 4 visual production and art direction ([docs/PHASE4_PLAN.md](docs/PHASE4_PLAN.md)). PRODUCTION 2026-10-24:
   S1 art gate passed (owner selected VC+ Expressive Hybrid, moderated values; Art Style Spacecraft row 19); S2 done; S3 (M8.2), S4
-  (ring exteriors), S5 (radiator frames) and S6 (spine casing, `spine_casing`) BUILT, owner review.** The grammar is
+  (ring exteriors), S5 (radiator frames), S6 (spine casing, `spine_casing`) and S9 (library coverage, ram face, wear layer, ship name,
+  runtime grammar) BUILT, owner review.** The grammar is
   `[production.exterior]` (families, tiers, marking scale, accent budget, ship-material mapping) with the grammar look
-  (`hero_preview.dress(grammar=True)`) and the review set `presentation/p4_review.py`. **Next:** S9 (runtime family mapping and Godot
-  parity, ram-face tile-and-repair look, switchable wear layer, ship name), S8a, S10, S11 in the plan's order; S7 waits on engineering
-  releases. Every new asset
+  (`hero_preview.dress(grammar=True, wear=)`), the runtime exterior (`look.exterior.grammar`) and the review set
+  `presentation/p4_review.py`. **Next:** S8a (ring B transfer and first sector in the M7 grammar), S10, S11 in the plan's order; S7 waits
+  on engineering releases. **Owner review:** the ram-face look and the wear layer (P4-LOCKED (b), P4-STATE) with the other candidates. Every new asset
   stays `L4_VISUAL_CANDIDATE` until the owner reviews it; nothing reaches `main` without the owner's squash approval.
   **Done when:** the plan's S11 whole-ship review is accepted by the owner.
 - [ ] **MOD — Modular detail (docs/MODULES.md).** Every production assembly is a detail pack (phase 2, 2026-10-23: `m7_spine`,
@@ -114,8 +115,9 @@ close-up, regression check, MODEL/TODO and Model Status update.
   joints and nozzles, off-white dishes and target (`look.exterior.functional_materials`). PARKED on the owner: the exterior stays proxy grey
   (15!H120) and the Drive gave no spacecraft palette, finish, GU marking, registry lettering or nav-light colour (reader 2026-10-18).
   Unparked 2026-10-24 into Phase 4 S9: the owner released a depiction-only PROTOTYPE family library and text-only markings (Art Style
-  Spacecraft row 18, S&E 15 OWN-P4-LOCKED); its balance was selected at the S1 art gate 2026-10-24 (row 19) and codified in S2
-  (`[production.exterior]`). The COAST exposure stays the owner's call (C01).
+  Spacecraft row 18, S&E 15 OWN-P4-LOCKED); its balance was selected at the S1 art gate 2026-10-24 (row 19), codified in S2
+  (`[production.exterior]`) and completed in Phase 4 S9 (coverage, ram face, wear layer, ship name, runtime parity). Remaining: the hero
+  renders (Phase 4 S10) and the owner's review. The COAST exposure stays the owner's call (C01).
 - [ ] **S04 — Construction detail across the remaining ship (M4 method).** Casing and access panels, drive section, thrust ring and
   nozzles, shield assemblies, internal framing and equipment mounts; L2 → L3 → L4 per assembly.
   Slice 1 built 2026-10-18 (`casing_panels.py`, `[casing_panels]`): aft body casing joint straps at the frame stations, longitudinal

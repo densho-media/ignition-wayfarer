@@ -133,12 +133,19 @@ def accent_report(s, els):
     return share, [f'{k}: {v:.1%} of the detail area exceeds {cap[k]:.0%}' for k, v in share.items() if v > cap[k]]
 
 
-def ship_family(s, material_name):
-    """Exterior family (xf_* key, or None to keep its own look) of a generated engineering material (WF_MAT_<name> without the prefix)."""
+def ship_rule(s, material_name):
+    """The first matching [[production.exterior.ship_families]] rule's family ('xf_*' or 'none') of a generated engineering material
+    (WF_MAT_<name> without the prefix), or None when no rule matches (the hero proxy grey)."""
     for rule in s['production']['exterior']['ship_families']:
         if material_name.startswith(tuple(rule['prefixes'])):
-            return None if rule['family'] == 'none' else rule['family']
+            return rule['family']
     return None
+
+
+def ship_family(s, material_name):
+    """Exterior family (xf_* key) of a generated engineering material, or None ('none' keeps its own colour, unmatched stays grey)."""
+    f = ship_rule(s, material_name)
+    return None if f == 'none' else f
 
 
 def element(assembly, family, name, material, cls, function, vs, fs, bevel=0.0):

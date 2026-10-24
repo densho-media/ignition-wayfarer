@@ -253,7 +253,7 @@ are not modeled; the ring sectors carry only rough PROTOTYPE interior blocking.
   bear on the frames, broken across the blade-root band at each keel. Longitudinal straps run on the 15° + 30°
   lines, which miss the keels, masts and trackers. An access panel (1.6 × 1.1 m) sits in every third frame bay
   beside each keel lane (0°, 120°, 240°), opening onto the cage-to-skin corridor. Fixed exterior parts clear
-  every strap and panel by at least 0.05 m (screened).
+  every strap and panel by at least 0.05 m (screened). Strap and panel faces are wound outward (the runtime draws them double-sided).
   The forward collar (S04 slice 3, `casing_panels.collar_straps`) carries hoop straps every 3 m and
   longitudinal straps on the same lines. They break round every hull opening on it (the airlock, both docking
   ports, the bypass and sector ties, the shield-mount struts) and round each fitting's docking or airlock aids,
@@ -1490,13 +1490,42 @@ opening, interface or mechanism.
 - **Followable route:** each blade's SP-51 crawler track (graphite rails and stops in the grammar) runs on a 0.70 m mid-value rail bed
   from the thrust ring to the blade front; each of its seven stops has a GU deep-blue approach marker either side of the bed and a
   text ID (`C<track>-<stop>`, 0.48 m). The DS-13 track (operations HOLD) and its docks are unchanged and undressed.
-- **Module numbers:** `K1`–`K5` (1.38 m) mid-module on the three bisectors between the blades.
+- **Module numbers:** `K1`–`K5` (1.38 m) at each module's aft end on the three bisectors between the blades; the ship name runs
+  along K3 (S9, next section).
 - **Screens** (`pack_spine_casing.check`): every element inside the casing x range and within 0.12 m of the casing, off every hull
   opening (plus 0.25 m) and access panel, and at least 0.05 m from every fixed exterior part (survival masts, terminals, trackers,
   crawler rails and stops; drone rails, docks and units; service fittings, docking corridors and the shield spokes' aft members).
-  99 elements; blue 1.1 % of the detail area.
+  102 elements; blue 1.1 % of the detail area.
 - **Exterior hardware in the families:** the SP-51 crawler hardware, the SP-53 survival terminals and the A29 star trackers map to
   graphite machinery, like the S02 RCS pods, antennas and sensors.
+
+## Phase 4 materials, markings and wear (S9)
+
+The grammar look (`hero_preview.dress(grammar=True)`) and the runtime exterior (Godot `flight.gd`, manifest `look.exterior.grammar`
+from `look.runtime_grammar`) apply the same `[production.exterior]` data. Depiction only: no geometry, coating, capacity or canon change.
+
+- **Library coverage:** every exterior-visible generated material has a family or keeps its own look (probe of the saved vehicle):
+  the 450 K warm panels take the dark thermal depiction (no capacity credit), the coolant trunks, bellows and the hub's rotor-interface
+  parts graphite, the crew tubes, transfer drums and the port neck light shell; `none` now keeps the material's own colour (the
+  exterior lights' lenses). Hatches and closures stay proxy grey (physics-locked), as do the SIMPLIFIED/HOLD drive core, tanks and EYE
+  optics.
+- **Ram face** (`[production.exterior.ram_face]`, ILLUSTRATIVE, OWN-P4-LOCKED (b)): on the forward-facing faces of the disruptor layer and
+  the Brow skin ahead of X 100 m, a running-bond tile pattern (1.6 × 0.8 m, dark 30 mm seams), each tile's value varied by ±4.5 % and 3 %
+  of the tiles a fresh repair; no tile size, layer or repair-rate claim.
+- **Wear layer** (`[production.exterior.wear]`, off for the Y155 launch baseline): handling grime on service covers, heat staining on the
+  root boots and blade frames, load marks on structure and machinery, faint weathering on shells; on the ram face denser repairs, more
+  tile variation and pitting. A world-space noise with a soft threshold per family; Blender and Godot use their own noise, so the
+  pattern differs in detail but not in where or how strongly it appears.
+- **Ship name:** `G.U. WAYFARER 001` (text only, no G.U.C. or crest; the provisional casing stencil of 15!A216/A225) along casing module
+  K3 on the three bisectors, 3.06 m cap height (the 300 m class, capped by the module length), bent onto the casing like the module
+  numbers and stop IDs (`spine_casing`).
+- **Runtime:** X in the timeline cycles the exterior looks: the grammar (Y155 baseline), the grammar with wear, the FUT-003 proxy grey,
+  off. `godot/shaders/p4_exterior.gdshader` carries the ram face and the wear; plain families are standard materials; pack (`Prod_`)
+  materials keep their exported finishes. Exterior packs draw each family to its scale tier (`detail_tiers`: segment rhythm, module
+  bands, routes and numbers to 6 km, covers and markers to 1.5 km, clamps to 160 m); interior detail keeps 28 m.
+  `flight.gd --capture-p4=<p4_review.json>,<dir>` renders the Blender review cameras in the runtime for the parity check (under
+  Xvfb with the Compatibility renderer: same families and markings; more tile contrast and no bounce light than Cycles). The look
+  materials draw both sides, like the exported materials they replace. The headless runtime check `flight-grammar` binds every look.
 
 ## Phase 4 grammar study (S1)
 
@@ -1541,7 +1570,7 @@ interior standard).
   (`production_detail.ship_family`; `none` keeps the material's own display look); production materials keep their pack finishes;
   unmatched materials (interiors, display layers, the SIMPLIFIED/HOLD drive core, tanks and EYE optics) keep the hero proxy grey. The
   grammar look `hero_preview.dress(grammar=True)` applies it in memory for stills, including the dark COAST blade depiction; the 1800 K
-  IGNITION emission is unchanged. The runtime exterior takes the same mapping in S9.
+  IGNITION emission is unchanged. The runtime exterior applies the same mapping (S9).
 - **Review set:** `presentation/p4_review.py` renders the matched cameras from the saved assets in the grammar look (or the pre-Phase-4
   hero look): whole ship (three-quarter, side, rings), forward (Brow sector, Crown bay, human scale), ring A (segment, human scale),
   radiator 1 (clamp, aft edge, 35 m, root) and the spine (between the blades, a module boundary, a crawler stop at human scale),

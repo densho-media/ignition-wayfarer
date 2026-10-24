@@ -16,6 +16,9 @@ detail_class = "PRODUCTION"
 inspect = ["rotation"]
 views = ["ring_detail", "habitat_detail"]
 summary = "Shell cassettes, joint caps, spoke node housings, occupancy bands, sector IDs and blue identifier bars on ring A's 24 segments."
+# Godot draw range per family by scale tier ([production.exterior] tier_range_m): the segment rhythm (cassettes, joints, bands, IDs)
+# reads at whole-ship distance; node housings and identifier bars at subsystem distance.
+detail_tiers = { default = "meso", cassettes = "macro", joints = "macro", occupancy = "macro", markings = "macro" }
 
 [assembly."RA.EXT.FWD"]
 anchor = "WF-RING-A.ROTOR.1"

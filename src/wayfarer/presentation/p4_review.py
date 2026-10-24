@@ -5,12 +5,13 @@ compares against the same images. Presentation only: the vehicle is posed and dr
 Views (shared stations, never fixed numbers): ship_34, ship_side, rings_34 (whole ship); brow_sector, crown_bay, human_crown (forward);
 ring_segment, human_ring (ring A, the pressure segment farthest from the blades in the posed frame); blade_clamp, blade_edge, blade_35m,
 blade_root (radiator 1); spine (the casing between two blades), spine_module (a casing module boundary at the third radiator stay, with
-its module numbers), human_spine (the SP-51 crawler stop there, nearest the sun-side bisector). Light: one sun 40 deg from aft, azimuth -20 deg (presentation choice,
+its module numbers), human_spine (the SP-51 crawler stop there, nearest the sun-side bisector); ram_face, ram_close (the Brow's
+forward face and its ILLUSTRATIVE tile-and-repair shading, S9, under a forward sun). --wear adds the post-voyage wear layer. Light: one sun 40 deg from aft, azimuth -20 deg (presentation choice,
 departure pointing OPEN), no fill; COAST at +2 EV editorial, the matched COAST/IGNITION pair (15!A222) with --pair. The orange figures are
 1.8 m scale references, not EVA positions.
 
     /snap/bin/blender -b --python src/wayfarer/presentation/p4_review.py -- --out runs/<stamp>-p4-review [--look grammar|hero]
-        [--views ...] [--size 1600] [--samples 48] [--pair] [--label "S2"]
+        [--views ...] [--size 1600] [--samples 48] [--pair] [--label "S2"] [--wear]
     python3 src/wayfarer/presentation/p4_review.py --pairs <before_dir> <after_dir> <out_dir>    (side-by-side sheets, system Python + PIL)
 """
 from pathlib import Path
@@ -23,9 +24,11 @@ ROOT = Path(__file__).resolve().parents[3]
 sys.path[:0] = [str(ROOT/'src/wayfarer'), str(ROOT/'src/wayfarer/build'), str(ROOT/'src/wayfarer/presentation')]
 
 VIEWS = ('ship_34', 'ship_side', 'rings_34', 'brow_sector', 'crown_bay', 'human_crown', 'ring_segment', 'human_ring', 'blade_clamp',
-         'blade_edge', 'blade_35m', 'blade_root', 'spine', 'spine_module', 'human_spine')
+         'blade_edge', 'blade_35m', 'blade_root', 'spine', 'spine_module', 'human_spine', 'ram_face', 'ram_close')
 PAIR_VIEWS = ('ship_34', 'rings_34')
 SUN = (40.0, -20.0)          # degrees from aft, azimuth about +X from +Y (the m8_exterior / S1 convention)
+# The ram face looks forward and lies in its own shadow under the review sun; its views take a sun 50 deg off the bow (presentation choice).
+VIEW_SUN = {'ram_face': (130.0, -20.0), 'ram_close': (130.0, -20.0)}
 
 
 def ring_frame(s):
@@ -92,6 +95,11 @@ def frames(s):
     out['spine_module'] = (rr(xs, 6.0, beta), rr(xs-26, 6.0, beta)+rr(0, 30, beta+math.radians(12)), None, 30.0)
     ta = spine_track(s, beta)
     out['human_spine'] = (rr(xs, 6.1, ta), rr(xs-6.5, 6.0, ta)+rr(0, 4.5, ta+math.radians(25)), None, 26.0)
+    # S9: the ram face from ahead and to the sun side, whole disc and a few tiles (both off the Lance and the wells).
+    face = st['face']
+    out['ram_face'] = (Vector((face, 0, 0))+u*14.0, Vector((face+95, 0, 0))+u*30.0-t*60.0, None, 35.0)
+    tgt = Vector((fsh.face_x_at(s, 30.0), 0, 0))+u*30.0+t*6.0
+    out['ram_close'] = (tgt, tgt+Vector((9.0, 0, 0))+u*2.0-t*4.0, None, 35.0)
     return out
 
 
@@ -150,7 +158,7 @@ def material(name, rgba):
     return m
 
 
-def render(out, views=VIEWS, look='grammar', size=1600, samples=48, pair=False, label=''):
+def render(out, views=VIEWS, look='grammar', size=1600, samples=48, pair=False, label='', wear=False):
     import bpy
     from mathutils import Vector
     from common import pose_configuration
@@ -159,13 +167,13 @@ def render(out, views=VIEWS, look='grammar', size=1600, samples=48, pair=False, 
     import hero_preview as hp
     import production_detail as pd
     from m8_exterior import sun_vector
-    s = load(ROOT)[0]; out.mkdir(parents=True, exist_ok=True); report = dict(look=look, label=label, views={})
+    s = load(ROOT)[0]; out.mkdir(parents=True, exist_ok=True); report = dict(look=look, label=label, wear=wear, views={})
     pd.load_packs()
     states = ['COAST', 'IGNITION'] if pair else ['COAST']
     for state in states:
         bpy.ops.wm.open_mainfile(filepath=str(ROOT/'assets/wayfarer'/(s['vehicle']['asset']+'.blend'))); scene = bpy.context.scene
         pose_configuration(s, 'COAST' if state == 'COAST' else 'HIGH_POWER'); scene.frame_set(scene.frame_current)
-        hp.dress(s, functional=True, emit=(state == 'IGNITION'), grammar=(look == 'grammar')); x = s['look']['exterior']
+        hp.dress(s, functional=True, emit=(state == 'IGNITION'), grammar=(look == 'grammar'), wear=wear); x = s['look']['exterior']
         if state == 'COAST':
             inventory = {m.name[7:].split('.')[0]: pd.ship_family(s, m.name[7:].split('.')[0]) for m in bpy.data.materials if m.name.startswith('WF_MAT_')}
             (out/'materials.json').write_text(json.dumps(dict(sorted(inventory.items())), indent=1))
@@ -195,6 +203,7 @@ def render(out, views=VIEWS, look='grammar', size=1600, samples=48, pair=False, 
         for vw in todo:
             for ex_name, ev in ([('editorial', 2.0)] if state == 'COAST' else [])+([('matched', 0.0)] if pair and vw in PAIR_VIEWS else []):
                 scene.view_settings.exposure = x['exposure_ev']+ev
+                so.rotation_euler = (-sun_vector(*VIEW_SUN.get(vw, SUN))).to_track_quat('-Z', 'Y').to_euler()
                 if vw in fr:
                     a, b2, corners, lens = fr[vw]; quat, dist = hp.place(cam, a, b2, corners, lens, aspect); cd.clip_start = .1 if corners is None else .5
                 elif vw in rc:
@@ -209,14 +218,20 @@ def render(out, views=VIEWS, look='grammar', size=1600, samples=48, pair=False, 
                           'S&E 15 OWN-P4-LOCKED' if look == 'grammar' else 'look: pre-Phase-4 hero look (proxy grey + M4 functional marks)'),
                          'production layers at their maturity (M7 L4_VISUAL_ACCEPTED; Phase 4 work L4_VISUAL_CANDIDATE until owner review); '
                          'orange figure = 1.8 m scale reference, not an EVA position',
-                         'physical light: one sun 40 deg from aft, azimuth -20 deg (presentation choice; pointing OPEN); no fill']
+                         ('post-voyage wear layer ON ([production.exterior.wear], depiction only) / ' if wear else 'Y155 launch baseline (wear layer off) / ')
+                         + (f'physical light: one sun {VIEW_SUN.get(vw, SUN)[0]:g} deg from aft, azimuth {VIEW_SUN.get(vw, SUN)[1]:g} deg '
+                            '(presentation choice; pointing OPEN); no fill')
+                         + ('; ram-face tiles ILLUSTRATIVE (no tile size claim)' if vw.startswith('ram') else '')]
                 labels = hp.caption(scene, cam, quat, dist, lines, aspect)
                 tag = vw + ('' if state == 'COAST' and ex_name == 'editorial' else f'_{state.lower()}_{ex_name}')
                 scene.render.filepath = str(out/f'{tag}.png'); bpy.ops.render.render(write_still=True)
                 for o in labels:
                     bpy.data.objects.remove(o, do_unlink=True)
                 report['views'][tag] = dict(view=vw, state=state, ev=scene.view_settings.exposure, lens=cd.lens,
-                                            camera=[round(c, 3) for c in cam.location], size=size, samples=samples)
+                                            camera=[round(c, 3) for c in cam.location], size=size, samples=samples, sun=VIEW_SUN.get(vw, SUN),
+                                            # for the Godot parity capture (flight.gd --capture-p4): the full camera and the sun direction
+                                            matrix=[list(r) for r in cam.matrix_world], sensor=cd.sensor_width,
+                                            sun_vector=list(sun_vector(*VIEW_SUN.get(vw, SUN))))
                 (out/'p4_review.json').write_text(json.dumps(report, indent=1))
                 print('WF_P4_REVIEW', tag, flush=True)
     return report
@@ -253,5 +268,6 @@ if __name__ == '__main__':
         ap = argparse.ArgumentParser(); ap.add_argument('--out', type=Path, required=True); ap.add_argument('--look', choices=['grammar', 'hero'], default='grammar')
         ap.add_argument('--views', nargs='+', default=list(VIEWS), choices=VIEWS); ap.add_argument('--size', type=int, default=1600)
         ap.add_argument('--samples', type=int, default=48); ap.add_argument('--pair', action='store_true'); ap.add_argument('--label', default='')
+        ap.add_argument('--wear', action='store_true')
         a = ap.parse_args(argv)
-        render(a.out if a.out.is_absolute() else ROOT/a.out, a.views, a.look, a.size, a.samples, a.pair, a.label)
+        render(a.out if a.out.is_absolute() else ROOT/a.out, a.views, a.look, a.size, a.samples, a.pair, a.label, a.wear)

@@ -62,7 +62,7 @@ func keys(i: int) -> Array:
 		0: return [[WfInput.label("flight.play"), "play", "next"], look, exit]
 		1, 2: return [[WfInput.label("flight.play"), "pause" if host.playing else "play", "next"], ["Shift+" + WfInput.label("flight.frame_next"), "24 frames on", "now"], [WfInput.label("flight.frame_prev"), "back", "now"], exit]
 		3: return [[WfInput.label("flight.look"), "First Ignition look", "next"], look, exit]
-		4: return [[WfInput.label("flight.scenario"), "next radiator scenario", "next"], [WfInput.label("flight.look"), "look off" if host.look_on else "look on", "now"], exit]
+		4: return [[WfInput.label("flight.scenario"), "next radiator scenario", "next"], [WfInput.label("flight.look"), "next look (grammar, wear, proxy grey, off)", "now"], exit]
 		5: return [["Click", "a state in the STATES list", "next"], look, exit]
 	return [exit]
 

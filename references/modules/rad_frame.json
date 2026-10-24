@@ -221,14 +221,14 @@
    }
   }
  },
- "git_dirty": false,
- "git_revision": "71bcc78febe88bad3f06c1a41abecc93eefa9205",
- "inputs_hash": "4c83fdab15caef51",
+ "git_dirty": true,
+ "git_revision": "5c849c94d68576abfa91c109072fe6cebbcfb275",
+ "inputs_hash": "60eda8b904e6c789",
  "module": "WF-THERMAL",
  "note": "A publication makes the pack eligible for integration; it is not an owner acceptance and changes no maturity or canon.",
  "pack": "rad_frame",
  "pack_version": 1,
- "published_utc": "2026-10-23T07:20:37Z",
- "spec_sha256": "c4c5aa25a1861c62cc710a36800ad88aa164d7f728b25572bb90d6ad2469c9bb",
+ "published_utc": "2026-10-24T16:09:48Z",
+ "spec_sha256": "bb0a5529f0d33090c3e86760a700810bc97918e0da39ac7052244377f238beb7",
  "version": 2
 }

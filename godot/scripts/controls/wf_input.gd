@@ -187,7 +187,7 @@ const SCENE_ACTIONS := [
 		["flight.frame_prev", "Frame back", [KEY_LEFT], "Timeline: one frame back (Shift: 24)."],
 		["flight.view_1", "Camera 1", [KEY_1], "Timeline camera 1."], ["flight.view_2", "Camera 2", [KEY_2], "Timeline camera 2."], ["flight.view_3", "Camera 3", [KEY_3], "Timeline camera 3."],
 		["flight.view_4", "Camera 4", [KEY_4, KEY_HOME], "Timeline camera 4 (whole ship)."], ["flight.view_5", "Camera 5", [KEY_5], "Timeline camera 5."],
-		["flight.view_6", "Camera 6", [KEY_6], "Timeline camera 6."], ["flight.look", "Ignition look", [KEY_X], "Timeline: the physically lit ignition look on or off."],
+		["flight.view_6", "Camera 6", [KEY_6], "Timeline camera 6."], ["flight.look", "Exterior look", [KEY_X], "Timeline: cycle the physically lit exterior looks (grammar, grammar with wear, proxy grey, off)."],
 		["flight.scenario", "Radiator scenario", [KEY_Y], "Timeline: the next Y155 radiator scenario (DIAGNOSTIC)."],
 		["thermal.toggle", "Heat balance", [KEY_T], "Open or close the heat balance explorer (HYPOTHETICAL inputs)."]]],
 	[["thermal"], [["thermal.row_prev", "Previous input", [KEY_UP], "Heat balance: the previous input row."], ["thermal.row_next", "Next input", [KEY_DOWN], "Heat balance: the next input row."],

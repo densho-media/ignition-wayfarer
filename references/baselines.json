@@ -1,6 +1,6 @@
 {
   "purpose": "Current production geometry baseline for tools/pipeline.py fingerprint diffs. Written only by `tools/workflow.py baseline`.",
-  "current": "references/baseline_p4_s6_spine",
+  "current": "references/baseline_p4_s9_materials",
   "history": [
     {
       "baseline": "references/baseline_m8_exterior",
@@ -29,6 +29,10 @@
     {
       "baseline": "references/baseline_p4_s4_rings",
       "replaced_utc": "2026-10-24T14:41:39Z"
+    },
+    {
+      "baseline": "references/baseline_p4_s6_spine",
+      "replaced_utc": "2026-10-24T16:09:20Z"
     }
   ]
 }

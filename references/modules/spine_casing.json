@@ -70,12 +70,12 @@
    "objects": {
     "Prod_SP_CASING_markings": {
      "centroid": [
-      1.7190962281573168,
-      -0.06450171243066412,
-      -0.832274309858654
+      -6.053645294641655,
+      -0.02637538914023557,
+      -0.39051752084880753
      ],
      "component_id": "SP.CASING.MARKINGS",
-     "faces": 18678,
+     "faces": 64912,
      "instance": null,
      "kind": "production_detail",
      "matrix_world": [
@@ -106,17 +106,17 @@
      ],
      "max": [
       79.61182403564453,
-      5.51859712600708,
+      5.740798473358154,
       6.060800075531006
      ],
      "min": [
-      -83.30670166015625,
-      -6.062580108642578,
-      -5.242710590362549
+      -99.39363861083984,
+      -6.060781002044678,
+      -5.2411789894104
      ],
      "parent": null,
      "type": "MESH",
-     "vertices": 25464
+     "vertices": 53112
     },
     "Prod_SP_CASING_modules": {
      "centroid": [
@@ -272,13 +272,13 @@
   }
  },
  "git_dirty": true,
- "git_revision": "fe31f802d4f72b6d630cbc32dc5f6825a6980d7e",
- "inputs_hash": "10342c424a496eac",
+ "git_revision": "5c849c94d68576abfa91c109072fe6cebbcfb275",
+ "inputs_hash": "985b11954c066afd",
  "module": "WF-SPINE",
  "note": "A publication makes the pack eligible for integration; it is not an owner acceptance and changes no maturity or canon.",
  "pack": "spine_casing",
  "pack_version": 1,
- "published_utc": "2026-10-24T14:41:52Z",
- "spec_sha256": "987e8e127c544b203eca8dc74e3ea096247f1f23ee0a1413b47ba2d53cfbde1d",
+ "published_utc": "2026-10-24T16:09:29Z",
+ "spec_sha256": "bb0a5529f0d33090c3e86760a700810bc97918e0da39ac7052244377f238beb7",
  "version": 2
 }

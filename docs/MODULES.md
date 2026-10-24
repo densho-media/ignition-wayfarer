@@ -58,6 +58,8 @@ The manifest declares:
 - `scope`: `M7` or `M8` to take that section's switch and maturity, or `pack` with its own `enabled`, `maturity`, `status` and `evidence_ref`;
 - `detail_class`;
 - an optional `detail_range_m`: the Godot draw distance of its nodes, for exterior detail; interior detail keeps the 28 m default;
+- an optional `detail_tiers` (Phase 4 exterior packs): a scale tier per family (`macro`, `meso`, `micro`, with a `default`), each
+  family drawn to its tier's `[production.exterior] tier_range_m`;
 - the inspection groups;
 - the preview views;
 - per assembly: its anchor, an optional `function` guard, zone and surface classes, and an envelope (`envelope_min`/`envelope_max`, metres, anchor frame).

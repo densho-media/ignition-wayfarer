@@ -258,7 +258,7 @@ the generators and this plan. One build lock: sessions queue for builds.
 - **Review gate:** `--inspect route`, the route sweep, the Godot walk; human-scale whitebox review before each cultural pass.
 - **Done when:** each zone passes human-scale and cultural review.
 
-#### S9 — Material, livery and condition system · Medium–High · class 2 · integration-owned
+#### S9 — Material, livery and condition system · Medium–High · class 2 · integration-owned · BUILT, owner review (section 4.9)
 - **Direction:** the depiction-only PROTOTYPE family library (Art Style row 18); Y155 launch baseline; switchable post-voyage
   wear/repair layer; text-only markings (GU WAYFARER 001, Crown/ring sector IDs, handling, hazard, service).
 - **Boundaries:** no G.U.C., crest, registry, paint standard or phrase plate; wear only at plausible touch, heat, load, impact, repair
@@ -497,6 +497,41 @@ Generated simulation and validation snapshots compared field by field between 88
   The side view now shows five casing modules instead of a uniform tile grid; at module scale the frame band, numbers and dark crawler
   track read; at human scale the stop marker and ID read beside the rail bed.
 - **Maturity:** `L4_VISUAL_CANDIDATE`; owner review.
+
+### 4.9 S9 — materials, markings, ram face and wear (2026-10-24)
+
+- **Implemented:** library coverage from a probe of every exterior-visible material (warm panels as dark thermal depiction without a
+  capacity claim; coolant trunks, bellows and the hub's rotor-interface parts graphite; crew tubes, transfer drums and the port neck light
+  shell; `none` now keeps its own colour, the exterior lights' lenses; hatches and closures stay proxy grey); the ILLUSTRATIVE ram-face
+  tile-and-repair shading on the forward faces of the disruptor layer and Brow skin (OWN-P4-LOCKED (b), shading only); the switchable
+  post-voyage wear layer at its causes (touch and maintenance on service covers, heat at root boots and blade frames, load on structure
+  and machinery, faint weathering on shells, impact and repair on the ram face; off for the Y155 baseline); the ship name
+  `G.U. WAYFARER 001` on casing module K3 (3.06 m, text only, bent onto the casing); per-family Godot draw ranges for every exterior pack
+  by scale tier (`detail_tiers`), so ring, spine and radiator detail no longer vanish beyond 28 m; the runtime exterior applies the same
+  grammar (manifest `look.exterior.grammar`, `godot/shaders/p4_exterior.gdshader`; X cycles grammar, grammar + wear, proxy grey, off) and a
+  headless `flight-grammar` check binds every look and compiles the shader.
+- **Tuned on evidence:** the first wear pass read as camouflage blotches (hard mask edges, grime twice too strong); softened and halved.
+  The first ram pass showed nothing from ahead: the disruptor layer, not the skin, is the surface seen there, so both take the shading.
+- **Preserved:** geometry diff only in the spine markings (ship name added, module numbers moved to the module ends;
+  `runs/20261024T150459Z-pipeline`, full PASS with every inspection group); no other mesh, no M7 or M8 value; IGNITION emission unchanged
+  (matched pair in `runs/20261024T-p4-s9`); wear never saved into an asset.
+- **Runtime parity:** `flight.gd --capture-p4` renders the Blender review cameras in the runtime package under Xvfb (Mesa llvmpipe,
+  Compatibility renderer) in the same look, sun and exposure (`runs/20261024T-p4-s9-godot/{baseline,wear}`). The families, ship name,
+  module bands, Crown lane blue, ram tiles and wear zones match at the same framing. Renderer differences, not material ones: Godot's AgX
+  shows more tile contrast; the Compatibility renderer has no bounce light, so Cycles' shadowed areas lit by the sunlit Brow read black in
+  Godot. The first capture exposed two runtime defects, both fixed: the look materials culled back faces (the exported glTF materials
+  are double-sided), and the S04 casing straps and access panels were wound inward (now outward; vertex positions unchanged, fingerprint
+  unchanged).
+- **Readback finding (study only):** the refreshed M5 balanced-RCS study readback (`references/m5_rcs_balanced.json`, a LOW POWER
+  CANDIDATE beside the unchanged S02 jets) finds its 30° cant option for jet Aft_3 radial reaching the `rad_frame` aft edge guard at
+  9.95 m; the 0° and 15° options stay clear. No built jet is affected; whoever selects that study option must clear the edge guard.
+- **Fixed in passing (own commit):** the Godot controls check used F3 as its rebind probe; WEB-003/004 (on `main`) bound F3 to
+  `demo.holo`, so runtime-export failed on the committed project. The probe now uses F6.
+- **Evidence:** `runs/20261024T-p4-s9` (Y155 baseline: whole ship, side, rings, ram face, ram close-up, Crown bay, ring segment, blade root,
+  spine module, crawler stop; COAST/IGNITION pair), `runs/20261024T-p4-s9-wear` (the same with the wear layer), sheets in
+  `runs/20261024T-p4-s9/pairs_vs_s6` and `pairs_wear`.
+- **Maturity:** the families and markings follow the approved grammar; the ram look and the wear layer are new candidates for owner
+  review (P4-LOCKED (b), P4-STATE).
 
 ## 5. Risks
 

@@ -92,16 +92,28 @@ def casing(s):
                 out.append(strip(f"SP_StopMarker_{t['j']}_{n}_{'LR'[side > 0]}", 'wayfinding', 'xf_wayfinding', 'ARTISTIC',
                                  'crawler stop approach marker (functional wayfinding)', x0, x1, rb, rb+q['film_m'], min(e0, e1), max(e0, e1)))
             h = pd.marking_height(s, 'lane_label'); ta = t['a']+hb+(g+W+q['stop_id_gap_m']+h/2)/R
-            out.append(pd.lettering(A, 'markings', f"SP_StopID_{t['j']}_{n}", 'xf_mark', 'crawler stop ID (text only)', f"C{t['j']+1}-{n}",
-                                    rad(x, R+q['text_lift_m'], ta), (-1.0, 0.0, 0.0), (0.0, -math.sin(ta), math.cos(ta)), h))
-    # Module numbers between the blades, mid-module.
-    h = pd.marking_height(s, 'bay_numeral')
+            out.append(text(s, q, f"SP_StopID_{t['j']}_{n}", 'crawler stop ID (text only)', f"C{t['j']+1}-{n}", x, ta, h))
+    # Module numbers between the blades at each module's aft end; the ship name (S9) along its module, forward of the number.
+    h = pd.marking_height(s, 'bay_numeral'); w = q['module_band_m']/2
     for i, (a, b) in enumerate(zip(xs, xs[1:]), 1):
+        xn = a+w+q['module_id_inset_m']+.6*h
         for deg in q['module_id_deg']:
-            t = math.radians(deg)
-            out.append(pd.lettering(A, 'markings', f'SP_ModuleID_K{i}_{int(deg):03d}', 'xf_mark', 'casing module number (text only)', f'K{i}',
-                                    rad((a+b)/2, R+q['text_lift_m'], t), (-1.0, 0.0, 0.0), (0.0, -math.sin(t), math.cos(t)), h))
+            out.append(text(s, q, f'SP_ModuleID_K{i}_{int(deg):03d}', 'casing module number (text only)', f'K{i}', xn, math.radians(deg), h))
+        if i == q['ship_name_module']:
+            x0, x1 = xn+.6*h+q['ship_name_gap_m'], b-w-q['ship_name_gap_m']; name = q['ship_name']
+            hn = min(pd.marking_height(s, 'ship_name'), (x1-x0)/(.6*len(name)))
+            for deg in q['module_id_deg']:
+                out.append(text(s, q, f'SP_ShipName_{int(deg):03d}', 'ship name (text only; Y155, no G.U.C., no crest)', name, (x0+x1)/2,
+                                math.radians(deg), hn))
     return out
+
+
+def text(s, q, name, function, body, x, t, h):
+    """Charcoal lettering on the casing at (x, angle t), reading aft along the axis from outside, bent onto the casing (wrap_r)."""
+    r = hg.radius_at(s, 0.0)+q['text_lift_m']
+    e = pd.lettering(A, 'markings', name, 'xf_mark', function, body, rad(x, r, t), (-1.0, 0.0, 0.0), (0.0, -math.sin(t), math.cos(t)), h)
+    e['wrap_r'] = r; e['wrap_max_edge_m'] = q['text_max_edge_m']
+    return e
 
 
 def obstacles(s):
@@ -142,9 +154,9 @@ def xspan(o):
 
 def samples(q, step=0.25):
     """Points on an element: a strip's patch on a grid of about step m (both radii), or a lettering's cap-height box."""
-    if 'text' in q:
-        c, r, u, h = q['centre'], q['right'], q['up'], q['height']; w = .6*h*len(q['text'])
-        return [tuple(c[i]+sx*w/2*r[i]+sy*h/2*u[i] for i in range(3)) for sx in (-1, 0, 1) for sy in (-1, 0, 1)]
+    if 'text' in q:      # the cap-height box, bent onto the casing like the generator bends it (wrap_r)
+        c, r, h = q['centre'], q['right'], q['height']; w = .6*h*len(q['text']); a0 = math.atan2(c[2], c[1])
+        return [rad(c[0]+sx*w/2*r[0], q['wrap_r'], a0+sy*h/2/q['wrap_r']) for sx in (-1, 0, 1) for sy in (-1, 0, 1)]
     x0, x1, t0, t1 = q['patch']; rs = [math.hypot(v[1], v[2]) for v in q['vs']]; R = max(rs)
     nx = max(1, math.ceil((x1-x0)/step)); nt = max(1, math.ceil((t1-t0)*R/step))
     return [rad(x0+(x1-x0)*i/nx, r, t0+(t1-t0)*j/nt) for i in range(nx+1) for j in range(nt+1) for r in (min(rs), R)]

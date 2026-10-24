@@ -76,6 +76,16 @@ def runtime_exterior(s, hot_state):
                 hidden_prefixes=x['hidden_prefixes'], hidden_kinds=x['hidden_kinds'])
 
 
+def runtime_grammar(s):
+    """Phase 4 S9: the selected exterior grammar for the Godot runtime exterior (manifest look.exterior.grammar), the same data the
+    Blender grammar look reads (hero_preview.dress(grammar=True)): families, the material-prefix rules (first match wins; 'none' keeps the
+    material's own colour; unmatched stays proxy grey; Prod_ materials keep their exported pack finishes), the ILLUSTRATIVE ram-face
+    tile-and-repair shading and the switchable post-voyage wear layer. Colours are linear. Presentation only."""
+    X = s['production']['exterior']
+    return dict(status=X['status'], source_ref=X['evidence_ref'], grammar=X['grammar'], families=X['families'],
+                rules=[[list(r['prefixes']), r['family']] for r in X['ship_families']], ram_face=X['ram_face'], wear=X['wear'])
+
+
 if __name__ == '__main__':
     import json
     import sys

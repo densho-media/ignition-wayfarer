@@ -32,6 +32,16 @@ def text_geometry(c, q):
     data.size = q['height']; data.extrude = .0008
     tmp = bpy.data.objects.new(data.name, data); c.objects.link(tmp)
     me = bpy.data.meshes.new_from_object(tmp.evaluated_get(bpy.context.evaluated_depsgraph_get()))
+    if 'wrap_max_edge_m' in q:     # S9: on a tight cylinder, triangulate and split long edges first, so no chord sags into the surface below
+        import bmesh
+        bm = bmesh.new(); bm.from_mesh(me); bmesh.ops.triangulate(bm, faces=bm.faces[:])
+        for _ in range(12):
+            long = [e for e in bm.edges if e.calc_length() > q['wrap_max_edge_m']]
+            if not long:
+                break
+            bmesh.ops.subdivide_edges(bm, edges=long, cuts=1, use_grid_fill=False)
+            bmesh.ops.triangulate(bm, faces=bm.faces[:])
+        bm.to_mesh(me); bm.free()
     vs = [tuple(m@v.co) for v in me.vertices]; fs = [tuple(poly.vertices) for poly in me.polygons]
     if 'wrap_r' in q:     # M8: lettering on a cylinder about +X (the rim girder): bend the plane onto radius wrap_r, arc length kept
         import math
@@ -80,6 +90,10 @@ def build(c, s, assembly, parent=None):
             obj['detail_pack'] = pack['name']; obj['detail_class'] = pack['pack']['detail_class']; obj['module'] = pack['pack']['module']
             if 'detail_range_m' in pack['pack']:     # exterior packs: the Godot draw range (production_layer.gd; default 28 m)
                 obj['detail_range_m'] = float(pack['pack']['detail_range_m'])
+            tiers = pack['pack'].get('detail_tiers')   # Phase 4 exterior packs: each family drawn to its scale tier's range
+            if tiers:
+                obj['detail_tier'] = tiers.get(family, tiers['default'])
+                obj['detail_range_m'] = float(s['production']['exterior']['tier_range_m'][obj['detail_tier']])
         obj['surface_class'] = '/'.join(sorted({q['surface_class'] for q in els}))
         obj['function'] = '; '.join(OrderedDict.fromkeys(q['function'] for q in els))
         obj['elements'] = len(els); obj['geometry_basis'] = GEOMETRY_BASIS; obj['evidence_ref'] = sc['evidence_ref']

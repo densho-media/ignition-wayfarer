@@ -19,6 +19,9 @@ detail_class = "PRODUCTION"
 inspect = ["thermal"]
 views = ["root_detail", "joint_detail"]
 summary = "Band clamps on the blade's transverse frames, gusset plates at the truss nodes and an aft edge guard, on all three blades."
+# Godot draw range per family by scale tier ([production.exterior] tier_range_m): gussets and the edge guard at subsystem distance,
+# the clamps near a person only.
+detail_tiers = { default = "meso", Clamps = "micro" }
 
 [assembly."RAD.FRAME"]
 anchor = "WF-THERMAL.RADIATOR.ORIGIN"

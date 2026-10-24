@@ -3807,11 +3807,14 @@ xf_fastener = [0.30, 0.31, 0.33, 0.45, 0.60]      # micro tier only
 xf_frame = [0.58, 0.58, 0.55, 0.55, 0.10]         # radiator blade frames, edge chords and joint beads (S5); the raised casing straps (S6): light-mid frames, calm fields
 
 # Generated engineering materials (WF_MAT_<name>) to family for the grammar look (hero_preview.dress(grammar=True), the review set and,
-# from S9, the runtime exterior): the first rule whose prefixes match wins; None keeps the material's own display look. Production
-# materials (WF_MAT_Prod_*) keep their pack finishes. Unmatched materials keep the hero proxy grey: interiors, display layers, and the
-# SIMPLIFIED/HOLD drive core, tanks and EYE optics (P4-SCOPE). Readback of the saved vehicle: <review run>/materials.json.
+# from S9, the runtime exterior): the first rule whose prefixes match wins; "none" keeps the material's own display colour (the exterior
+# lights' lenses; display layers keep their own handling). Production materials (WF_MAT_Prod_*) keep their pack finishes. Unmatched
+# materials keep the hero proxy grey: interiors, hatches and closures (physics-locked), and the SIMPLIFIED/HOLD drive core, tanks and EYE
+# optics (P4-SCOPE). S9 coverage (probe of every exterior-visible material): the warm panels are radiators (dark thermal depiction, no
+# capacity claim), coolant trunks, bellows and the hub's rotor-interface parts graphite, crew tubes, transfer drums and the port neck light
+# shell. Readback of the saved vehicle: <review run>/materials.json.
 [[production.exterior.ship_families]]
-prefixes = ["RadiatorA", "RadiatorB"]
+prefixes = ["RadiatorA", "RadiatorB", "WarmPanel"]
 family = "xf_thermal"
 [[production.exterior.ship_families]]
 prefixes = ["RadiatorRoot", "RootBoot", "CasingBoot"]
@@ -3829,7 +3832,7 @@ family = "xf_service"
 prefixes = ["RingJoint", "BrowPanelJoint", "CrownRib"]
 family = "xf_joint"
 [[production.exterior.ship_families]]
-prefixes = ["Drive_Plasma", "Plasma", "Debug", "Radiator", "Prod_"]
+prefixes = ["Drive_Plasma", "Plasma", "Debug", "Radiator", "Prod_", "Ext_Light"]
 family = "none"
 [[production.exterior.ship_families]]
 prefixes = ["RootSteel", "Structure", "SectorKeel", "MountSlide", "MountDatum", "Truss", "Spoke", "Frame", "Gusset", "Keel", "Tie",
@@ -3838,12 +3841,52 @@ family = "xf_structure"
 [[production.exterior.ship_families]]
 prefixes = ["Crown", "Carriage", "Shutter", "Emitter", "Launcher", "Drive", "Nozzle", "Thrust", "Coil", "Manifold", "Rotor", "Hub", "Bearing",
             "Ext_RCS", "Ext_Antenna", "Ext_Sensor", "Antenna", "Mast", "Drone", "EyeHousing", "EyeShutter", "OpticsHardware", "ServiceFitting",
-            "CoolantChase", "Locks", "EyeWell", "MagneticBearing", "Survival_SP51", "Survival_SP53", "Survival_A29"]
+            "Coolant", "Locks", "EyeWell", "MagneticBearing", "Survival_SP51", "Survival_SP53", "Survival_A29", "TrunkBellows",
+            "TouchdownBearing", "Contactless", "EmergencyPower", "FluidCoupling", "SealGuard"]
 family = "xf_machinery"
 [[production.exterior.ship_families]]
 prefixes = ["Shield", "Brow", "Forward", "Lance", "Habitat", "Ring", "Hull", "Casing", "Spine", "Body", "Collar", "Dock", "Ext_Dock",
-            "DisruptorLayer"]
+            "DisruptorLayer", "CrewPassage", "CrewVestibule", "EntryShell"]
 family = "xf_shell"
+
+# S9: the regenerative ram face (OWN-P4-LOCKED (b), S&E 15 row 228): a subtle tile-and-repair look on the Brow's forward face by shading
+# only, in Blender (hero_preview.dress) and Godot (the runtime exterior) alike. ILLUSTRATIVE: no tile size, layer, shielding or repair-rate
+# claim (14 regenerative_brow; 50!AG-012 stays the owner's). Applies to the forward-facing faces (world normal x > normal_x_min) ahead of
+# x_min_m of the ram materials: the Brow skin and the disruptor layer ahead of it, the first surface the flow meets and the one seen from
+# ahead (the Shield material also skins the aft reactor shadow shield, hence x_min_m). A running-bond tile pattern: tile_m wide,
+# half as high, seam_m dark seams at seam_value x the shell colour, each tile's value varied by up to +-jitter, and repair_share of the
+# tiles a fresh repair at repair_value x.
+[production.exterior.ram_face]
+status = "ILLUSTRATIVE"
+evidence_ref = "p4_exterior_grammar"
+ram_materials = ["Shield", "DisruptorLayer"]
+x_min_m = 100.0
+normal_x_min = 0.5
+tile_m = 1.6
+seam_m = 0.03
+seam_value = 0.55
+jitter = 0.045
+repair_share = 0.03
+repair_value = 1.10
+
+# S9: the switchable post-voyage wear and repair layer (P4-STATE, Art Style row 18): off for the Y155 launch/departure baseline (clean,
+# serviced, institutional), on for the post-voyage state; depiction only, no geometry or canon change, never baked into the saved assets.
+# Wear only where it has a cause: handling at service covers (touch, maintenance), heat staining at the radiator root boots and blade
+# frames (heat), load marks on structure where it meets something (load), replaced and weathered shell panels (repair), and the ram face's
+# impact pitting and denser repairs (impact, repair). Per family: grime darkens up to `grime` (fraction of the value) where a world-space
+# noise of feature size scale_m passes its threshold (coverage; a soft 0.3-wide edge), roughness rises by `rough`, and `tint` (linear RGB multiplier) colours
+# the stained areas. The ram face overrides: jitter, repair_share, and pitting (dark speckle fraction).
+[production.exterior.wear]
+status = "PROTOTYPE"
+evidence_ref = "p4_exterior_grammar"
+enabled = false
+ram_face = { jitter = 0.08, repair_share = 0.12, pitting = 0.05 }
+xf_service = { cause = "touch, maintenance", grime = 0.12, scale_m = 0.20, coverage = 0.40, rough = 0.12, tint = [1.0, 0.97, 0.93] }
+xf_root = { cause = "heat", grime = 0.10, scale_m = 1.5, coverage = 0.35, rough = 0.05, tint = [1.0, 0.96, 0.89] }
+xf_frame = { cause = "heat", grime = 0.08, scale_m = 3.0, coverage = 0.40, rough = 0.05, tint = [1.0, 0.97, 0.92] }
+xf_structure = { cause = "load", grime = 0.06, scale_m = 0.6, coverage = 0.50, rough = 0.08, tint = [1.0, 1.0, 1.0] }
+xf_shell = { cause = "repair, weathering", grime = 0.04, scale_m = 4.0, coverage = 0.50, rough = 0.05, tint = [1.0, 0.99, 0.97] }
+xf_machinery = { cause = "load, maintenance", grime = 0.08, scale_m = 0.4, coverage = 0.50, rough = 0.10, tint = [1.0, 1.0, 1.0] }
 
 [look]
 # FUT-003 step 1, the S004 look (ART-S004-2026-10-10, 15!A120; local brief docs/SURFACE_BRIEF.md): a presentation layer the induction stills

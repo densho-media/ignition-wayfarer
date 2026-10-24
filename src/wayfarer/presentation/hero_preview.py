@@ -24,13 +24,72 @@ STATE = 'FIRST_IGNITION'
 VIEWS = ('establishing', 'brow', 'drive', 'radiator', 'silhouette_side', 'silhouette_threequarter')
 
 
-def dress(s, functional=False, emit=True, grammar=False):
+def surface(m, node, base, rough, wear=None, ram=None):
+    """S9 shading on a Principled material (Blender linear colours; the Godot runtime exterior runs the same formulas with its own noise and
+    hash): wear darkens and tints the base colour where a world-space noise of feature size scale_m passes its coverage threshold and raises
+    the roughness; ram tiles the forward-facing ram face (running bond, dark seams, per-tile value jitter, repaired tiles, wear pitting)."""
+    nt = m.node_tree; N, L = nt.nodes, nt.links
+
+    def put(v, sock):
+        if isinstance(v, (int, float)):
+            sock.default_value = v
+        else:
+            L.new(v, sock)
+
+    def op(kind, a, b=0.0):
+        n = N.new('ShaderNodeMath'); n.operation = kind; put(a, n.inputs[0]); put(b, n.inputs[1]); return n.outputs[0]
+
+    geo = N.new('ShaderNodeNewGeometry')
+    pos = N.new('ShaderNodeSeparateXYZ'); L.new(geo.outputs['Position'], pos.inputs[0])
+    nrm = N.new('ShaderNodeSeparateXYZ'); L.new(geo.outputs['Normal'], nrm.inputs[0])
+    value, rgh, tint = 1.0, rough, None
+    if wear:
+        nz = N.new('ShaderNodeTexNoise'); L.new(geo.outputs['Position'], nz.inputs['Vector'])
+        nz.inputs['Scale'].default_value = 1.0/wear['scale_m']; nz.inputs['Detail'].default_value = 3.0
+        th = 0.55-0.3*wear['coverage']
+        mask = op('MINIMUM', op('MAXIMUM', op('DIVIDE', op('SUBTRACT', nz.outputs['Fac'], th), 0.3), 0.0), 1.0)
+        value = op('SUBTRACT', 1.0, op('MULTIPLY', mask, wear['grime']))
+        rgh = op('ADD', rough, op('MULTIPLY', mask, wear['rough']))
+        tint = N.new('ShaderNodeMix'); tint.data_type = 'RGBA'; put(mask, tint.inputs[0])      # sockets 6/7/2: the colour A, B, Result
+        tint.inputs[6].default_value = (1, 1, 1, 1); tint.inputs[7].default_value = (*wear['tint'], 1)
+    if ram:
+        tw, th_ = ram['tile_m'], ram['tile_m']/2
+        u = op('DIVIDE', pos.outputs['Y'], tw); v = op('DIVIDE', pos.outputs['Z'], th_)
+        row = op('FLOOR', v); uu = op('ADD', u, op('MULTIPLY', op('MODULO', row, 2.0), 0.5))
+        col = op('FLOOR', uu); fu = op('SUBTRACT', uu, col); fv = op('SUBTRACT', v, row)
+        du = op('MULTIPLY', op('MINIMUM', fu, op('SUBTRACT', 1.0, fu)), tw); dv = op('MULTIPLY', op('MINIMUM', fv, op('SUBTRACT', 1.0, fv)), th_)
+        seam = op('LESS_THAN', op('MINIMUM', du, dv), ram['seam_m']/2)
+        cell = N.new('ShaderNodeCombineXYZ'); put(col, cell.inputs[0]); put(row, cell.inputs[1])
+        wn = N.new('ShaderNodeTexWhiteNoise'); wn.noise_dimensions = '3D'; L.new(cell.outputs[0], wn.inputs['Vector'])
+        h2 = N.new('ShaderNodeSeparateColor'); L.new(wn.outputs['Color'], h2.inputs[0])
+        tile = op('ADD', op('ADD', 1.0, op('MULTIPLY', op('SUBTRACT', wn.outputs['Value'], 0.5), 2*ram['jitter'])),
+                  op('MULTIPLY', op('LESS_THAN', h2.outputs[1], ram['repair_share']), ram['repair_value']-1.0))
+        if ram.get('pitting'):
+            pit = N.new('ShaderNodeTexWhiteNoise'); pit.noise_dimensions = '3D'
+            sc = N.new('ShaderNodeVectorMath'); sc.operation = 'SCALE'; L.new(geo.outputs['Position'], sc.inputs[0]); sc.inputs['Scale'].default_value = 25.0
+            L.new(sc.outputs[0], pit.inputs['Vector'])
+            tile = op('MULTIPLY', tile, op('SUBTRACT', 1.0, op('MULTIPLY', op('LESS_THAN', pit.outputs['Value'], ram['pitting']), 0.45)))
+        rv = op('ADD', tile, op('MULTIPLY', seam, op('SUBTRACT', ram['seam_value'], tile)))
+        on = op('MULTIPLY', op('GREATER_THAN', nrm.outputs['X'], ram['normal_x_min']), op('GREATER_THAN', pos.outputs['X'], ram['x_min_m']))
+        value = op('MULTIPLY', value, op('ADD', 1.0, op('MULTIPLY', on, op('SUBTRACT', rv, 1.0))))
+    col = N.new('ShaderNodeVectorMath'); col.operation = 'SCALE'; col.inputs[0].default_value = base; put(value, col.inputs['Scale'])
+    out = col.outputs[0]
+    if tint is not None:
+        mul = N.new('ShaderNodeVectorMath'); mul.operation = 'MULTIPLY'; L.new(out, mul.inputs[0]); L.new(tint.outputs[2], mul.inputs[1])
+        out = mul.outputs[0]
+    L.new(out, node.inputs['Base Color'])
+    put(rgh, node.inputs['Roughness'])
+
+
+def dress(s, functional=False, emit=True, grammar=False, wear=False):
     """Hide the display-only layers and put the exterior look on every WF_MAT_ material copy (linked copies included). functional: the
     look.exterior.functional_materials keep their own base colour (the LOOK-005 functional-mark variant); the light is unchanged.
     grammar: the Phase 4 exterior grammar ([production.exterior], owner S1 selection 2026-10-24): each generated material takes its family
-    (production_detail.ship_family; the dark COAST blade depiction included) and the production layers keep their pack finishes."""
+    (production_detail.ship_family; the dark COAST blade depiction included), 'none' keeps its own colour, the production layers keep their
+    pack finishes, and the ram face takes its tile-and-repair shading (S9). wear (grammar only): the post-voyage wear layer
+    ([production.exterior.wear]) on the families it names, the exterior production materials (Prod_xf_*) included."""
     import production_detail as pd
-    x = s['look']['exterior']; e = look.exterior(s); fam = s['production']['exterior']['families']
+    x = s['look']['exterior']; e = look.exterior(s); X = s['production']['exterior']; fam = X['families']
     # Some display layers are shown by hide drivers (the glow steps), so their materials also go fully transparent.
     clear = set()
     for o in bpy.data.objects:
@@ -49,17 +108,28 @@ def dress(s, functional=False, emit=True, grammar=False):
                 node.inputs[key].default_value = 0.0
             continue
         node = next((n for n in m.node_tree.nodes if n.type == 'BSDF_PRINCIPLED'), None)
-        if node is None or grammar and name.startswith('Prod_'):
+        if node is None:
+            continue
+        if grammar and name.startswith('Prod_'):
+            if wear and name[5:] in X['wear'] and name[5:] in fam:      # an exterior pack material in a worn family
+                r, g, b, rough, metal = fam[name[5:]]
+                surface(m, node, (r, g, b), rough, X['wear'][name[5:]])
             continue
         for key in ('Base Color', 'Roughness', 'Metallic', 'Emission Color', 'Emission Strength', 'Alpha'):
             for link in list(node.inputs[key].links):
                 m.node_tree.links.remove(link)
-        f = pd.ship_family(s, name) if grammar else None
-        if f:
-            r, g, b, rough, metal = fam[f]
+        rule = pd.ship_rule(s, name) if grammar else None
+        if rule in fam:
+            r, g, b, rough, metal = fam[rule]
             node.inputs['Base Color'].default_value = (r, g, b, 1)
             node.inputs['Roughness'].default_value = rough
             node.inputs['Metallic'].default_value = metal
+            ram = X['ram_face'] if name in X['ram_face']['ram_materials'] else None
+            if ram or wear and rule in X['wear']:
+                surface(m, node, (r, g, b), rough, X['wear'].get(rule) if wear else None,
+                        ram and dict(ram, **(X['wear']['ram_face'] if wear else {})))
+        elif rule == 'none':
+            pass                                        # keeps its own display colour and finish (the exterior lights' lenses)
         else:
             if not (functional and name in x['functional_materials']):
                 node.inputs['Base Color'].default_value = (*x['grey'], 1)
