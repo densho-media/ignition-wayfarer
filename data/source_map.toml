@@ -3940,6 +3940,18 @@ capture = "references/drive_capture_2026-10-17/engineering.xlsx"
 notes = "Maturity definition (I23 DEFINITION), read live 2026-10-19: L4 PRODUCTION = linked models, rigs, materials, lighting, cinematics, narrative and performance quality ready for a publishing pipeline; evidence rendered shot(s), reusable assets, art-style review, stable exports; go deeper only when the visual fiction contradicts science or story canon; do not reopen unaffected hidden clearances. WF-006 (A7): local materials, light, props, framing and authentic wear may advance before small mechanisms are qualified; final art sign-off OPEN. 15!A120 (ART-S004): no hero finish on thermally or structurally unqualified interfaces. 15!A221 (D02): ring A is no suited casualty route (in-place stabilization), no trunk flare; ring A stays a FAIL comparator. 15!A86 (Q37): entrance-first. The M7 section itself is the user's brief of 2026-10-19 (no owner row yet). Plan: M7. 2026-10-20: the owner, in conversation, approved the M7.1 correction pass and then promoted the six assemblies to L4_VISUAL_ACCEPTED for this section (visual and asset acceptance; not engineering GO), as the standard going forward. Review packet private review artifact."
 
 
+[sources.p4_exterior_grammar]
+workbook = "IGNITION — Art Style Bible"
+workbook_id = "1M7k3xqH7lrYtCu7UiozYvYYbIhQx3xsxzv7iV-exg-g"
+url = "https://docs.google.com/spreadsheets/d/1M7k3xqH7lrYtCu7UiozYvYYbIhQx3xsxzv7iV-exg-g/edit"
+sheet = "Spacecraft"
+range = "A19:F19"
+canon_status = "REFERENCE"
+cross_ranges = ["Spacecraft!A18:F18", "Spacecraft!A16:F17"]
+inspected_on = "2026-10-24"
+notes = "Phase 4 S1 art gate, owner selection 2026-10-24 (written by Claude on the owner's instruction and read back): VC+ Expressive Hybrid with moderated values; Civic Monumentalism + Open Machine + Thermal Leviathan; allocation light shells / mid structure / graphite machinery / dark thermal, ochre service, muted amber occupancy, GU deep blue only as functional wayfinding (service-lane boundaries, pressure-segment identifiers, navigation references); provisional linear base-colour starting ranges shell 0.70-0.78, structure 0.22-0.30, machinery 0.03-0.08, thermal 0.02-0.035 for material tests, not a reflectance specification; dark COAST blade depiction per S&E 15 row 228 OWN-P4-LOCKED-2026-10-24 (material appearance qualifies nothing); rings legible by segmentation, joint rhythm and value, never by size or position; no greebles, fins, fictional vents, broad blue panels or enlarged parts. Candidates M8.1 REVISE (S3), rad_frame REVISE (S5), ra2_equip RETAINED pending acceptance (Model Status rows 30, 32, 33)."
+
+
 [sources.m8_exterior_identity]
 workbook = "IGNITION — Wayfarer Science & Engineering Model"
 workbook_id = "18BQQEMXxu3qEw1jKN68VwC3rkOiVmafiWeoQORYgI0A"

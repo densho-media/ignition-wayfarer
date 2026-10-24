@@ -24,10 +24,13 @@ STATE = 'FIRST_IGNITION'
 VIEWS = ('establishing', 'brow', 'drive', 'radiator', 'silhouette_side', 'silhouette_threequarter')
 
 
-def dress(s, functional=False, emit=True):
+def dress(s, functional=False, emit=True, grammar=False):
     """Hide the display-only layers and put the exterior look on every WF_MAT_ material copy (linked copies included). functional: the
-    look.exterior.functional_materials keep their own base colour (the LOOK-005 functional-mark variant); the light is unchanged."""
-    x = s['look']['exterior']; e = look.exterior(s)
+    look.exterior.functional_materials keep their own base colour (the LOOK-005 functional-mark variant); the light is unchanged.
+    grammar: the Phase 4 exterior grammar ([production.exterior], owner S1 selection 2026-10-24): each generated material takes its family
+    (production_detail.ship_family; the dark COAST blade depiction included) and the production layers keep their pack finishes."""
+    import production_detail as pd
+    x = s['look']['exterior']; e = look.exterior(s); fam = s['production']['exterior']['families']
     # Some display layers are shown by hide drivers (the glow steps), so their materials also go fully transparent.
     clear = set()
     for o in bpy.data.objects:
@@ -46,15 +49,22 @@ def dress(s, functional=False, emit=True):
                 node.inputs[key].default_value = 0.0
             continue
         node = next((n for n in m.node_tree.nodes if n.type == 'BSDF_PRINCIPLED'), None)
-        if node is None:
+        if node is None or grammar and name.startswith('Prod_'):
             continue
         for key in ('Base Color', 'Roughness', 'Metallic', 'Emission Color', 'Emission Strength', 'Alpha'):
             for link in list(node.inputs[key].links):
                 m.node_tree.links.remove(link)
-        if not (functional and name in x['functional_materials']):
-            node.inputs['Base Color'].default_value = (*x['grey'], 1)
-        node.inputs['Roughness'].default_value = x['roughness']
-        node.inputs['Metallic'].default_value = 0.0
+        f = pd.ship_family(s, name) if grammar else None
+        if f:
+            r, g, b, rough, metal = fam[f]
+            node.inputs['Base Color'].default_value = (r, g, b, 1)
+            node.inputs['Roughness'].default_value = rough
+            node.inputs['Metallic'].default_value = metal
+        else:
+            if not (functional and name in x['functional_materials']):
+                node.inputs['Base Color'].default_value = (*x['grey'], 1)
+            node.inputs['Roughness'].default_value = x['roughness']
+            node.inputs['Metallic'].default_value = 0.0
         node.inputs['Alpha'].default_value = 1.0
         hot = emit and name in x['hot_face']            # emit False: off-burn COAST, the blade temperature there is OPEN
         node.inputs['Emission Color'].default_value = (*e['color'], 1) if hot else (0, 0, 0, 1)

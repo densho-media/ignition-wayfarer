@@ -1,9 +1,10 @@
 # Phase 4 plan: visual production, art direction and modular detailing
 
-**Status: STAGE B (2026-10-24).** The owner answered all eight Stage A questions on 2026-10-24 (request Doc packet
-`2026-10-24T10:55+02:00 — P4`). S0 and S1 are authorized and executed on this branch; S2–S11 are approved in principle and wait on the
-**S1 art gate**: the owner reviews the S1 comparison and selects the grammar. This file is the single Phase 4 plan. Commands and contracts
-are in AGENTS.md, docs/MODULES.md and docs/IMPLEMENTATION.md. Nothing here is canon; the canonical records are named in section 0.
+**Status: PRODUCTION (2026-10-24).** The owner answered the eight Stage A questions and, at the **S1 art gate** (2026-10-24), selected
+the exterior grammar **VC+ Expressive Hybrid with moderated material values** and disposed of the three candidates (section 0). S0, S1
+and S2 are done on this branch; S3–S11 proceed in dependency order (section 3.4) without another general authorization, inside the
+engineering HOLDs, the candidate gates and the promotion rule. This file is the single Phase 4 plan. Commands and contracts are in
+AGENTS.md, docs/MODULES.md and docs/IMPLEMENTATION.md. Nothing here is canon; the canonical records are named in section 0.
 
 Program authorization does not promote a branch to `main` (owner approval per squash, AGENTS.md step 5) and does not accept any visual
 candidate (each stays `L4_VISUAL_CANDIDATE` until the owner's own review).
@@ -24,9 +25,22 @@ recommendations where they differ.
 | P4-STATE | S2 + M1: Y155 launch/departure baseline (clean, serviced, institutional, never sterile) plus a separately switchable post-voyage wear/repair layer at plausible touch, heat, load, impact, repair or maintenance points, no geometry or canon change. Text-only markings: GU WAYFARER 001, Crown/ring sector IDs, handling, hazard, service stencils; no G.U.C., crest or registry; civic phrase plate not a standard. | Art Style Spacecraft row 18 | S9 layers; S1 markings text-only |
 | P4-INT | Order Z4 (ring B transfer + first sector, accepted M7 grammar), Z1 (ring A Garden/mess), Z2 (ring A work/medical/ops), Z3 (berths/private niches), adjusted only for real dependencies. K2 at launch (GU Order + Spacer Contain, restrained Bolt-Sworn/Robocrat-humanized serviceable details where people live); K3 only in the post-voyage layer, grounded in story and crew roles. Ergonomics, pressure/route envelopes and M7 acceptance protected; workshop excluded while OD-030 is OPEN. | Art Style Spacecraft row 18 (character); this plan (order) | S8 order |
 
-**Doc disposition (protocol POST → RESOLVE → CANONICALIZE → CONSUME/APPLY → VERIFY → DELETE):** items whose answer is in its canonical
-owner and consumed here are deleted from the Doc; the unresolved remainder (the S1 art gate: grammar selection and the three candidate
-dispositions) stays under the original timestamp with a pointer to the S1 review packet.
+**S1 art gate (owner, 2026-10-24, instruction "Phase 4 S1 Art Direction Resolution & S2–S11 Production Instructions"):**
+
+| Item | Owner decision | Canonical destination | Plan effect |
+| --- | --- | --- | --- |
+| Grammar (P4-ART remainder) | **VC+ Expressive Hybrid, moderated values**: Civic Monumentalism + Open Machine + Thermal Leviathan; institutional order outside, experimental engineering within, human ingenuity throughout. VC+ is the starting grammar, not a requirement to copy every S1 value or detail; moderate the brightest shells, keep calm fields. Adopt the dark COAST blade depiction. | Art Style Bible Spacecraft row 19 (written 2026-10-24, read back) | S2 codifies it (`[production.exterior]`); S3–S11 apply it |
+| Values | Starting linear ranges for material tests, not a reflectance specification: shell 0.70–0.78, structure 0.22–0.30, machinery 0.03–0.08, thermal 0.02–0.035; tuned under matched COAST/IGNITION; no blown-out whites at human scale | Art Style Spacecraft row 19 | `[production.exterior.families]` |
+| GU deep blue | Approved as a restrained functional wayfinding accent only: service-lane boundaries, selected pressure-segment identifiers, navigation references; no flag, crest or paint standard | Art Style Spacecraft row 19 | `accent_area_max`, `wayfinding_uses` |
+| M8.1 (`m8_forward`) | **REVISE in S3**: keep the bay/module construction; improve mechanical readability, shell/structure/equipment separation, lane values, access-panel contrast, stencil scale and placement; no wholesale rebuild | Model Status row 30 | S3 (M8.2); stays `L4_VISUAL_CANDIDATE` until reviewed |
+| `rad_frame` | **REVISE in S5**: larger structural rhythm, load paths, root interfaces and band placement before enlarging fittings; thermal area and expansion clearance preserved | Model Status row 32 | S5; stays a candidate until reviewed |
+| `ra2_equip` | **RETAIN as designed** as a candidate; no redesign without a demonstrated reason; before/after close-ups for owner acceptance | Model Status row 32; request Doc remainder | acceptance pending; S8b Z2 builds on it |
+| Caption overlap | correct the overlapping interior-preview captions in the presentation tooling (not an asset defect) | — | done in S2 (interior_preview.py) |
+
+**Doc disposition (protocol POST → RESOLVE → CANONICALIZE → CONSUME/APPLY → VERIFY → DELETE):** the Stage A items were deleted after
+canonicalization. The S1 art gate was recorded in the Doc (owner answer, 2026-10-24), canonicalized in Art Style Spacecraft row 19 and
+Model Status rows 30, 32 and 33 (all read back), and its resolved part deleted; the unresolved remainder **candidate acceptance**
+(`ra2_equip` now; M8.2 and the `rad_frame` revision when presented) stays under the original timestamp `2026-10-24T10:55+02:00`.
 
 ## 1. Baseline
 
@@ -70,11 +84,18 @@ See section 4.1 (filled by the S0 run on this branch).
 | Artistically flexible | cladding modules, panel rhythm, fasteners, closeouts, text-only markings, value and material families, interior fit-out, lighting, camera, wear placement (switchable layer) | design freely within HSFP, the Anti-Rules and Art Style row 18 | greebles, fins, neon, decorative glow, panoramic windows, random grime, crest, registry, G.U.C. |
 | Blocked by HOLD | WF_STORAGE tanks (OD-026, 15!A224); aft robotic cradle and HGA ORU (15!A225); workshop (OD-030); r16 EYE geometry; flight EVA rails | nothing beyond the existing study layers | production detail on them |
 | Accepted production assets | M7 (six assemblies, three packs) | extend the M7 language; correct only on owner request | restyle them |
-| Candidates awaiting review | M8.1 (`m8_forward`), `rad_frame`, `ra2_equip` | review stills; M8.1 as S1 V0 | accept, remove or silently replace them |
+| Candidates awaiting review | M8.1 (`m8_forward`, REVISE in S3), `rad_frame` (REVISE in S5), `ra2_equip` (RETAINED, acceptance pending) | revise in their slice, keeping the candidate label | accept, remove or silently replace them |
 
 ## 2. Design direction
 
-**Leading hypothesis (owner P4-ART, provisional): expressive functional hybrid.**
+**Selected grammar (owner S1 art gate, 2026-10-24): VC+ Expressive Hybrid with moderated values** (Art Style Spacecraft row 19), the
+expressive functional hybrid below with the owner's corrections: calm institutional shells with negative space, mid-value structure only
+at real interfaces, graphite machinery with readable assembly logic, dark functional thermal surfaces, ochre service, selective muted
+amber occupancy, GU deep blue only for wayfinding. Detail at distance comes from large-scale structural rhythm, value contrast and
+composition, never from enlarged small parts; hero assemblies withstand close-up inspection through interfaces and layered construction.
+The S2 codification is section 4.3.
+
+**The hypothesis the S1 study tested (owner P4-ART):**
 - **Civic shell** on pressure volumes and the Brow protection: calm, modular, institutional GU fields with negative space.
 - **Exposed construction** where parts articulate, attach, carry load or need service: Crown hatch and doubler, service lanes and
   their utilities, ring segment joints and spoke nodes, blade roots and saddles, spine truss nodes, docking.
@@ -83,8 +104,7 @@ See section 4.1 (filled by the S0 run on this branch).
 - **Value hierarchy:** light shells, middle structure, graphite machinery, dark thermal; colour for function only (ochre service,
   amber occupancy, GU deep blue wayfinding as a tested accent).
 
-It becomes the grammar only when the owner selects it at the S1 review. S1 tests it against civic and open-machine controls, in a
-restrained and an expressive version.
+The owner selected its expressive version (VC+) with moderated values on 2026-10-24.
 
 **Research lessons** (methods, not shapes; no proprietary asset or distinctive design reused):
 
@@ -103,10 +123,10 @@ restrained and an expressive version.
 
 | Class | Slices | Starts when |
 | --- | --- | --- |
-| 1. Authorized for immediate production | **S0**, **S1** | now (done on this branch, section 4) |
-| 2. Approved in principle, dependent on the S1 art decision | **S2**, then S3, S4, S5, S6, S9, S10, S11 | the owner selects the grammar at the S1 review; then each continues without another general authorization |
+| 1. Authorized for immediate production | **S0**, **S1** | done (section 4) |
+| 2. Approved, dependent on the S1 art decision | **S2**, then S3, S4, S5, S6, S9, S10, S11 | **released 2026-10-24** (grammar selected); each continues without another general authorization |
 | 3. Dependent on engineering releases | **S7** (drive/nozzle, aft features); ring B rescue/closures inside S8a (15!A197, OD-032/034/040); tanks (OD-026); EYE r16; aft cradle/HGA ORU (15!A225); workshop (OD-030) | the owning workbook releases them |
-| 4. Awaiting specific visual-asset acceptance | S3 rollout (M8.1 disposition), S5 frame revision (`rad_frame` disposition), S8b Z2 (`ra2_equip` disposition), S4 rollout (the gated ring A segment) | the owner's keep/revise/reject at the S1 review, or the slice's own segment/bay gate |
+| 4. Awaiting specific visual-asset acceptance | acceptance of M8.2 (S3) and of the `rad_frame` revision (S5) as assets; `ra2_equip` acceptance (evidence delivered); S4 rollout (the gated ring A segment) | the dispositions are made (M8.1 and `rad_frame` REVISE, `ra2_equip` RETAIN); the work proceeds, the assets stay `L4_VISUAL_CANDIDATE` until the owner reviews them |
 
 S8a (ring B transfer and first sector, Z4) uses the already accepted M7 interior grammar, not the S1 exterior grammar; it is approved in
 principle and is the first slice to start after the S1 gate.
@@ -145,17 +165,18 @@ the generators and this plan. One build lock: sessions queue for builds.
   `ra2_equip` review stills with contract evidence; livery readback.
 - **Done when:** the above exist and are recorded (section 4.1).
 
-#### S1 — Grammar experiment: Crown bay 1, Brow aft sector, ring A segment · Medium–High · class 1 · BUILT, awaiting the art gate
+#### S1 — Grammar experiment: Crown bay 1, Brow aft sector, ring A segment · Medium–High · class 1 · DONE (owner selection 2026-10-24)
 - **Direction:** V0 (M8.1 control), V0T (thermal depiction only), VA civic, VB open machine, VC restrained hybrid, VC+ expressive hybrid
   (section 4.2).
 - **Boundaries:** in-memory ART_P4 study only; M8.1 unchanged; all pack screens and the ring frame/sweep/sector screens pass.
 - **Outputs:** labelled comparison set, candidate review, recommended grammar (a recommendation), owner review packet.
-- **Review gate:** **S1 art gate** — the owner selects the grammar and disposes of the three candidates. STOP before S2.
-- **Done when:** the owner has selected.
+- **Review gate:** **S1 art gate** — passed 2026-10-24: VC+ moderated selected; M8.1 and `rad_frame` REVISE, `ra2_equip` RETAIN.
+- **Done when:** the owner has selected (done).
 
-#### S2 — Codify the selected grammar · Medium · class 2 · integration-owned (WF-CORE)
-- **Direction:** the grammar the owner selects at S1; the default expectation is the expressive functional hybrid with the
-  owner's corrections.
+#### S2 — Codify the selected grammar · Medium · class 2 · integration-owned (WF-CORE) · DONE (section 4.3)
+- **Direction:** the selected VC+ moderated grammar as a reusable production system: material families, macro/meso/micro tiers,
+  panel, joint and service-interface rules, marking scale, accent allocation, reusable component families (only where two packs need
+  them), the Blender/Godot material mapping, review cameras and the negative-space rule.
 - **Boundaries:** shared keys only (`[production]` exterior grammar keys, `[production.materials]` families, `production_detail.py`
   helpers only if two packs need them); accepted M7 stays pixel-equivalent or the change is reported; no mass key.
 - **Sources:** S1 review; Art Style rows 16–18; S&E 15 OWN-P4-LOCKED, I120/H120.
@@ -173,7 +194,7 @@ the generators and this plan. One build lock: sessions queue for builds.
 - **Boundaries:** r ≤ 45.0 m; nothing sunward of the skin; shutters, carriages, emitters, launchers, ports, windows, EYE wells untouched;
   crawler lane clear; OD-021 open (no mechanism finalized); ram-face appearance implies no tile size or shielding.
 - **Sources:** Eye 45, S&E 50 (AG-A02), OD-020/021, Art Style row 10 (repaired shield patches).
-- **Dependencies:** S2; M8.1 disposition (keep/revise/reject) at the S1 review.
+- **Dependencies:** S2; M8.1 disposition: REVISE (owner 2026-10-24) — keep the bay/module construction, no wholesale rebuild.
 - **Candidates:** M8.1 stays a candidate until replaced by M8.2 with the owner's approval; never silently removed.
 - **Outputs:** M8.2 in `m8_forward`; one HERO bay (bay 1) and eleven PRODUCTION bays from the same module with stable per-bay seeds.
 - **Review gate:** `--inspect forward`, `m8_readback`, BVH; review set.
@@ -200,7 +221,8 @@ the generators and this plan. One build lock: sessions queue for builds.
 - **Boundaries:** footprints only in non-emitting joints or beyond the blade ends (net area unchanged); root expansion travel clear;
   IGNITION emission unchanged; no coating claim.
 - **Sources:** 40_THERMAL, OD-007/012/023/039, 15!A204.
-- **Dependencies:** S2; `rad_frame` disposition at the S1 review.
+- **Dependencies:** S2; `rad_frame` disposition: REVISE (owner 2026-10-24) — structural rhythm, load paths, root interfaces and band
+  placement before enlarging fittings.
 - **Candidates:** `rad_frame` revised only through this slice, keeping its maturity until the owner reviews the revision.
 - **Outputs:** `rad_frame` revision; new `rad_root` pack.
 - **Review gate:** `--inspect thermal`, `radiator_net_area` unchanged, HIGH_POWER preview, Godot/web emission parity.
@@ -226,8 +248,8 @@ the generators and this plan. One build lock: sessions queue for builds.
 - **Done when:** the aft end matches the grammar without implying a solved drive.
 
 #### S8 — Interiors in the owner's order · Medium each · S8a class 2 (M7 grammar), S8b class 2 + 4
-- **Order (P4-INT):** Z4 ring B transfer and first sector (S8a) → Z1 ring A Garden and mess → Z2 ring A work/medical/ops (needs the
-  `ra2_equip` disposition) → Z3 berths and private niches. Workshop excluded while OD-030 is OPEN.
+- **Order (P4-INT):** Z4 ring B transfer and first sector (S8a) → Z1 ring A Garden and mess → Z2 ring A work/medical/ops (`ra2_equip`
+  retained as designed; its acceptance is pending) → Z3 berths and private niches. Workshop excluded while OD-030 is OPEN.
 - **Direction:** S8a in the accepted M7 grammar (packs `ring_b_transfer`, `m7_rb1`); S8b cultural pass K2 at launch: Spacer *Contain*,
   GU *Order* wayfinding and standardized interfaces, restrained Bolt-Sworn/Robocrat *Humanize* where people live; K3 only in the
   post-voyage layer (S9).
@@ -261,8 +283,13 @@ the generators and this plan. One build lock: sessions queue for builds.
 
 ### 3.4 Dependencies
 
-S0 → S1 → **S1 art gate** → S2 → {S3, S4, S5, S6, S9} → S10 → S11. S8a after the gate (M7 grammar); S8b zones in order, Z2 after the
-`ra2_equip` disposition. S7 on engineering release.
+S0 → S1 → **S1 art gate (passed 2026-10-24)** → S2 → {S3, S4, S5, S6, S9} → S10 → S11. S8a after the gate (M7 grammar); S8b zones in
+order. S7 on engineering release. One build lock: in a single session the slices run in the order S3, S4 (ring A segment gate, then
+the rings), S5, S6, S9, S8a, S10, S11, each committed on its own.
+
+**Progress model (measurable):** Phase 4 has twelve slices (S0–S11). A slice counts as complete when its "Done when" holds and its commit
+is on the branch; a slice that ends at an owner review counts when the evidence is delivered, and the owner's acceptance is tracked
+separately in the decision register. Percentages in reports are completed slices / 12, nothing else.
 
 **Critical technical dependencies:** a Blender-equipped session (this cloud session installs the pinned Blender 5.2.2 and Godot 4.7.2,
 section 4.1); the S2 shared-key rebuild of accepted M7; ring rotation and sweep checks (S4); radiator net area (S5); runtime draw ranges
@@ -357,6 +384,28 @@ ladder (linear base colour): shell 0.70–0.78, structure 0.22–0.30, machinery
 **Unresolved artistic decisions blocking rollout:** (1) the grammar (VC, VC+ or the recommended blend); (2) value strength (VC vs
 VC+ ladder); (3) GU deep blue as a standard wayfinding accent or not; (4) the three candidate dispositions above.
 
+### 4.3 S2 — grammar codification (2026-10-24)
+
+- **Implemented:** `[production.exterior]` in `data/wayfarer_3d.toml` (source `p4_exterior_grammar` → Art Style Spacecraft row 19):
+  material families `xf_*` inside the owner's ranges (shell 0.73, structure 0.25, machinery 0.05, thermal 0.028), scale tiers with
+  draw ranges, minimum feature sizes and bevels, shell panel/seam/joint rules, the calm-field rule, the marking scale (cap height for
+  20 px at each class's reading distance), the accent budget and the wayfinding uses, and the ship-material → family mapping.
+  `production_detail.py`: `marking_height`, `tier_of`, `area`, `accent_report`, `ship_family`; `material_value` resolves the families.
+  `hero_preview.dress(grammar=True)`: the grammar look (dark COAST blade depiction included; production layers keep their finishes).
+  `presentation/p4_review.py`: the review set (13 matched views + the COAST/IGNITION pair) and before/after sheets. Interior preview
+  captions moved in front of the scene on a dark band (they overlapped the geometry in the overhead view).
+- **Reusable component families (only those two or more packs need):** marking sizing, accent measurement and the family materials
+  (every exterior pack); the 15° ring segment module (both ring packs, S4) goes into a shared pure module when S4 builds it. No universal
+  kitbash library.
+- **Preserved:** geometry diff 0 changed / 0 added / 0 removed against `baseline_modules_phase3` (`runs/20261024T-p4-s2-gate`, PASS);
+  accepted M7 unchanged by construction (`[production.materials]`, `[look.surfaces]` and the M7 stills' code untouched; the grammar look
+  is opt-in, so every existing still renders as before); 1800 K IGNITION emission unchanged (matched pair).
+- **Evidence:** `runs/20261024T-p4-s2-before` (pre-Phase-4 hero look) and `runs/20261024T-p4-s2` (grammar look), 1600×900 Cycles 48
+  samples, with before/after sheets in `runs/20261024T-p4-s2/pairs`. Whole ship: the dark blades now separate the light spine, rings and
+  Brow; the Brow aft face reads as a 12-spoke wheel; the rings read light against the dark blades in the rings view; IGNITION keeps its
+  emission and the hull reads darker against it.
+- **Maturity:** the grammar is canon in Art Style row 19; the code is PROTOTYPE presentation; no asset changed maturity.
+
 ## 5. Risks
 
 - **Visual drift across parallel sessions:** S2 codifies the grammar before the fan-out; the coordinator reviews every pack against the
@@ -376,5 +425,6 @@ VC+ ladder); (3) GU deep blue as a standard wayfinding accent or not; (4) the th
 | ID | State | Remaining |
 | --- | --- | --- |
 | P4-EXP, P4-MAT, P4-LOCKED, P4-SCOPE, P4-STATE, P4-INT | answered 2026-10-24, canonicalized (section 0) | none |
-| P4-ART | answered: leading hypothesis | **S1 art gate:** select the grammar |
-| P4-CAND | answered: defer to the S1 comparison | **S1 art gate:** keep/revise/reject per candidate |
+| P4-ART | answered; **S1 art gate 2026-10-24: VC+ moderated selected** (Art Style Spacecraft row 19) | none |
+| P4-CAND | answered; **S1 art gate 2026-10-24: M8.1 REVISE (S3), `rad_frame` REVISE (S5), `ra2_equip` RETAIN** | owner acceptance: `ra2_equip` now (request Doc remainder); M8.2 and the `rad_frame` revision when presented |
+| Promotion | every squash to `main` needs the owner's approval | open for this branch |

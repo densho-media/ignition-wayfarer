@@ -29,6 +29,11 @@ def label(scene, camera, lines, field_width, aspect, depth):
         data.materials.append(material('Label',(.70,.85,.93),1))
         obj=bpy.data.objects.new(data.name,data);scene.collection.objects.link(obj);obj.parent=camera
         obj.location=(-field_width*.47,field_width/aspect*(.44-i*.05),-depth)
+    # A dark band behind the text (just behind it, still in front of the scene), so the caption never mixes with the geometry.
+    w,h=field_width*1.02,field_width/aspect*(.05*len(lines)+.03)
+    me=bpy.data.meshes.new('Preview_Label_Panel');me.from_pydata([(0,0,0),(w,0,0),(w,-h,0),(0,-h,0)],[],[(0,1,2,3)]);me.materials.append(material('LabelPanel',(.02,.03,.05)))
+    obj=bpy.data.objects.new(me.name,me);scene.collection.objects.link(obj);obj.parent=camera
+    obj.location=(-field_width*.51,field_width/aspect*.5,-depth*1.001);obj.visible_shadow=False
 
 
 def render(root=ROOT, functions=None, views=None, size=768, out_dir=None, details=False):
@@ -85,10 +90,12 @@ def render(root=ROOT, functions=None, views=None, size=768, out_dir=None, detail
             # Plan cuts just below the overhead; section cuts the +X end cap. The cutaway relies on the hidden shell.
             cam_data.clip_start={'plan':distance+sec['ceiling_y_m']-target.y+.02,'section':distance-sec['length_m']/2+.08}.get(view,.1);cam_data.clip_end=200
             # Ortho labels sit just past the clip plane (their size does not depend on depth).
-            width=cam_data.ortho_scale if cam_data.type=='ORTHO' else 2*2*math.tan(cam_data.angle_x/2)
+            # Perspective labels sit just past the near plane, in front of every surface (the overhead camera is 2 m from the ceiling).
+            depth=cam_data.clip_start+.05 if cam_data.type=='ORTHO' else 1.5*cam_data.clip_start
+            width=cam_data.ortho_scale if cam_data.type=='ORTHO' else 2*depth*math.tan(cam_data.angle_x/2)
             label(scene,camera,[f'WAYFARER 001 / P1 INTERIOR / {function.replace("_"," ")} / {view.upper()}',
                                 f'PROTOTYPE blocking, rooms OPEN | {sec["usable_m3"]:.0f} m3 usable of {sec["deck_to_overhead_m3"]:.0f} m3 deck-to-overhead | headroom {sec["headroom_m"]:.2f} m | aisle {s["interior"]["aisle_m"]:g} m',
-                                f'coast deck r {fit["coast_gravity"]["deck_radius_m"]:.1f} m ({fit["coast_gravity"]["deck_g"]:.3f} g) | orange human {h:g} m | shell and overhead hidden'],width,aspect,cam_data.clip_start+.05 if cam_data.type=='ORTHO' else 2)
+                                f'coast deck r {fit["coast_gravity"]["deck_radius_m"]:.1f} m ({fit["coast_gravity"]["deck_g"]:.3f} g) | orange human {h:g} m | shell and overhead hidden'],width,aspect,depth)
             scene.render.filepath=str(out/f'{component[3:].lower()}_{view}{"_detail" if details else ""}.png')
             bpy.ops.render.render(write_still=True)
             print(f'WF_INTERIOR_PREVIEW {function} {view}',flush=True)

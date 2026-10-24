@@ -28,33 +28,31 @@ Development effort moves from new Godot features to the ship itself; keep the de
 unresolved science blocks only irreversible steps. Each slice: validate the changed assembly and interfaces, whole-ship view plus a
 close-up, regression check, MODEL/TODO and Model Status update.
 
-- [ ] **P4 — Phase 4 visual production and art direction ([docs/PHASE4_PLAN.md](docs/PHASE4_PLAN.md)). STAGE B 2026-10-24: S0 and
-  S1 done; waits on the owner's S1 art gate.** The eight owner answers (request Doc `2026-10-24T10:55+02:00 — P4`) are consumed:
-  S&E 15 row 228 `OWN-P4-LOCKED-2026-10-24` and Art Style Spacecraft row 18 hold the approved rules; the expressive functional hybrid
-  is the leading hypothesis only. S1 (`studies/p4_s1_grammar.py`, six variants on Crown bay 1, its Brow aft sector and a ring A
-  segment) and the candidate review are in the owner review packet (plan section 4). **Next:** the owner selects the grammar and
-  disposes of M8.1, `rad_frame` and `ra2_equip`; then S2, and S3–S6, S8a and S9 in parallel sessions as the plan orders them.
+- [ ] **P4 — Phase 4 visual production and art direction ([docs/PHASE4_PLAN.md](docs/PHASE4_PLAN.md)). PRODUCTION 2026-10-24:
+  S1 art gate passed (owner selected VC+ Expressive Hybrid, moderated values; Art Style Spacecraft row 19); S2 done.** The grammar is
+  `[production.exterior]` (families, tiers, marking scale, accent budget, ship-material mapping) with the grammar look
+  (`hero_preview.dress(grammar=True)`) and the review set `presentation/p4_review.py`. **Next:** S3 (M8.2), S4 (ring exteriors), S5
+  (radiator frames and roots), S6 (spine), S9, S8a, S10, S11 in the plan's order; S7 waits on engineering releases. Every new asset
+  stays `L4_VISUAL_CANDIDATE` until the owner reviews it; nothing reaches `main` without the owner's squash approval.
   **Done when:** the plan's S11 whole-ship review is accepted by the owner.
 - [ ] **MOD — Modular detail (docs/MODULES.md).** Every production assembly is a detail pack (phase 2, 2026-10-23: `m7_spine`,
   `ring_a_transfer`, `m8_forward` migrated with geometry, motion, runtime and pixel equivalence), packs carry their own contracts, and
   approved authored meshes travel as committed glTF data; each ring is its own engineering asset (phase 3, `WF_HABITAT_A`/`_B`).
   `assembly validate` passes for all six packs.
-  - **Owner review (Phase 4 S1 art gate, owner P4-CAND: deferred to the S1 comparison):** accept, correct or reject the two `L4_VISUAL_CANDIDATE` packs (`rad_frame` radiator frame fittings, `ra2_equip` ring A
-    sector 2 overhead trays). Self-review: the radiator fittings are hard to see at ship scale; the sector 2 trays read but sit close to the
-    fit-out items. M8.1 is reviewed under its own entry below.
+  - **Candidates (owner S1 art gate 2026-10-24):** `rad_frame` REVISE in Phase 4 S5 (structural rhythm, load paths, root interfaces
+    and band placement before enlarging fittings); `ra2_equip` RETAINED as designed, owner acceptance pending (before/after close-ups
+    delivered 2026-10-24); both stay `L4_VISUAL_CANDIDATE` until accepted. M8.1 is under its own entry below.
   - Deferred: a linked part library for repeated fittings, until a detail pack repeats one detailed form often enough that measured sharing
     pays (the export already shares identical meshes; RAD.FRAME's three blades share one mesh).
-  **Done when:** the owner has reviewed the candidates.
+  **Done when:** the owner has accepted or replaced the candidates.
 
 - [ ] **M8 — Exterior production identity. M8.1 BUILT 2026-10-20, awaiting owner art review.** The accepted M7 standard on the
   exterior as `[production.m8]` (its own switch and maturity). M8.1: the Brow aft face (`M8.BROW.AFT`) and the Aegis Crown rim
   (`M8.CROWN.RIM`, all 12 bays after bay 1 passed its gates), all `L4_VISUAL_CANDIDATE`. Report and evidence:
   [M8_EXTERIOR_2026-10-20](references/M8_EXTERIOR_2026-10-20.md) (off-diff empty, 0 BVH clashes, r 45.0043 m, runtime-export 31/31,
   exterior +0.22 ms within noise; stills `runs/20261020T1445Z-m8-stills`).
-  - **Owner review (Phase 4 S1 art gate; M8.1 is the S1 control V0):** accept, correct or reject M8.1. Open visual points from the self-review: the 12-spoke wheel read at distance
-    (lane grey one step lighter?), the 0.20 m hatch stencil too small, the cladding close to the truss grey.
-  - **Next (not started, waits on the review):** M8.2, the habitat ring outer shells (proposal in the report); alternative: casing
-    straps and panels.
+  - **Owner S1 art gate 2026-10-24: M8.1 REVISE** in Phase 4 S3 (M8.2) in the selected grammar, keeping the bay/module construction;
+    the revised result goes to the owner for review. The ring shells are Phase 4 S4.
   - Physics-locked: radiator hot faces, drive and nozzles (Q40), EYE apertures, the Dust Lance field, docking (Q33), EVA rails (RUN-011),
     livery (GU WAYFARER 001 stays provisional, 15!A216/A225). No access, rescue or pressure-boundary geometry.
   - Left over from M7: disposal of the original 869 MB capture `runs/20261019T1245Z-m7-walkthrough` waits on the owner.
@@ -113,7 +111,8 @@ close-up, regression check, MODEL/TODO and Model Status update.
   joints and nozzles, off-white dishes and target (`look.exterior.functional_materials`). PARKED on the owner: the exterior stays proxy grey
   (15!H120) and the Drive gave no spacecraft palette, finish, GU marking, registry lettering or nav-light colour (reader 2026-10-18).
   Unparked 2026-10-24 into Phase 4 S9: the owner released a depiction-only PROTOTYPE family library and text-only markings (Art Style
-  Spacecraft row 18, S&E 15 OWN-P4-LOCKED); its balance is selected at the S1 art gate. The COAST exposure stays the owner's call (C01).
+  Spacecraft row 18, S&E 15 OWN-P4-LOCKED); its balance was selected at the S1 art gate 2026-10-24 (row 19) and codified in S2
+  (`[production.exterior]`). The COAST exposure stays the owner's call (C01).
 - [ ] **S04 — Construction detail across the remaining ship (M4 method).** Casing and access panels, drive section, thrust ring and
   nozzles, shield assemblies, internal framing and equipment mounts; L2 → L3 → L4 per assembly.
   Slice 1 built 2026-10-18 (`casing_panels.py`, `[casing_panels]`): aft body casing joint straps at the frame stations, longitudinal
@@ -523,9 +522,9 @@ Canonical route: IGNITION TOC → owner workbook → S&E `15_MODEL_INTERFACES`. 
 Implementation/Readback are correspondence. Owner question IDs use ISO local timestamps; legacy Q39 stays as named. S&E A86's Q37
 is the entrance workflow, not the retired local radiator-planform question.
 
-Known queue items (2026-10-24, Stage B):
-- `2026-10-24T10:55+02:00 — P4`: the remainder of the Phase 4 packet, the S1 art gate (grammar selection, P4-ART; candidate
-  dispositions, P4-CAND). The other six items are canonicalized and deleted (PHASE4_PLAN section 0).
+Known queue items (2026-10-24, Phase 4 production):
+- `2026-10-24T10:55+02:00 — P4`: the remainder of the Phase 4 packet, candidate acceptance (`ra2_equip` now; M8.2 and the
+  `rad_frame` revision when presented). The S1 art gate is answered, canonicalized (Art Style Spacecraft row 19) and deleted.
 
 Before that (2026-10-19), none. Q39 closed 2026-10-19 (12A!H5/H22 and 40!A18 repaired and read back on the owner's approval,
 15!A223; references/Q39_PROVENANCE.md); 14:31 (D02) and 14:32 (C01) consumed and deleted (references/OWNER_RESOLUTION_2026-10-19.md).

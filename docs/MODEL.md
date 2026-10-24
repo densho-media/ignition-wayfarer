@@ -1457,7 +1457,45 @@ bay 1 with its 30° Brow aft sector and on one ring A 15° segment, each repeate
 read: V0 (M8.1 as built), V0T (V0 plus the dark COAST blade depiction alone), VA civic, VB open machine, VC restrained hybrid, VC+
 expressive hybrid. Material families are depiction-only PROTOTYPE (S&E 15 `OWN-P4-LOCKED-2026-10-24`, Art Style Spacecraft row 18);
 the IGNITION views keep the 1800 K emission. Its screens reuse the `m8_forward` pack checks and the ring frame, sweep and sector
-envelopes. Nothing in it is selected: the owner chooses the grammar at the S1 review.
+envelopes. The owner selected VC+ with moderated values on 2026-10-24 (next section); the study itself stays NONCANON and reproduces
+the S1 images exactly at 88ab15a.
+
+## Phase 4 exterior grammar (S2)
+
+The owner's S1 selection, **VC+ Expressive Hybrid with moderated values** (Art Style Bible Spacecraft row 19, source
+`p4_exterior_grammar`; depiction only, S&E 15 `OWN-P4-LOCKED-2026-10-24`), is the shared production system `[production.exterior]`
+that every exterior pack and the grammar look read. It changes no geometry and no accepted M7 value (`[production.materials]` stays the
+interior standard).
+
+- **Material families** (`[production.exterior.families]`, keys `xf_*`, linear base colour, roughness, metallic; glTF-safe, so Godot gets
+  the same finish): light shell 0.73, structure 0.25, graphite machinery 0.05, dark thermal depiction 0.028, off-white root boots 0.68,
+  ochre service, muted amber occupancy, GU deep-blue wayfinding, dark joints, charcoal and off-white marks, metallic fasteners. Starting
+  points inside the owner's ranges, tuned under matched COAST/IGNITION; no reflectance or coating claim. `production_detail.material_value`
+  resolves them like the M7 and pack materials.
+- **Allocation:** pressure and protected volumes in calm light shells; load-bearing members mid value where they meet something;
+  machinery and articulated interfaces graphite with readable assembly; ochre only for maintenance access; amber only over occupied
+  sectors; blue only for service-lane boundaries, pressure-segment identifiers and navigation references; thermal surfaces dark with the
+  frame and joint hierarchy visible.
+- **Scale tiers** (`tier_range_m`, `tier_min_feature_m`, `tier_bevel_m`, `production_detail.tier_of`): MACRO assembly rhythm (bays, 15°
+  segments, blade frames, casing modules; drawn to 6 km), MESO panels, caps, trays and covers (1.5 km), MICRO fasteners, small stencils and
+  placards (160 m). Below 3 cm a feature is a value change or a seam, not geometry. Detail at distance comes from rhythm and value, never
+  from enlarged small parts.
+- **Panels, joints, negative space:** shell modules 2.0–6.5 m between joints, 30 mm dark seams, exposed mid-value joint caps over an
+  80 mm dark gap; a shell zone keeps at least 35 % of its area free of meso and micro detail (`calm_field_min`, a review rule); fasteners
+  only where a panel is serviced.
+- **Markings** (text only): `production_detail.marking_height(s, class)` sizes the cap height so it spans 20 px in the reference camera
+  (54° horizontal field, 1920 px) at the class's reading distance: ship name 3.2 m (300 m), bay numeral 1.38 m (130 m), sector ID 1.06 m
+  (100 m), lane label 0.48 m (45 m), service stencil 0.32 m (30 m), handling 0.13 m (12 m), placard 0.03 m (3 m).
+- **Accent budget:** `production_detail.accent_report` measures each accent's share of a pack's detail area against `accent_area_max`
+  (blue ≤ 3 %, amber ≤ 10 %, ochre ≤ 8 %).
+- **Blender/Godot mapping:** `[[production.exterior.ship_families]]` maps generated engineering materials by name prefix to a family
+  (`production_detail.ship_family`; `none` keeps the material's own display look); production materials keep their pack finishes;
+  unmatched materials (interiors, display layers, the SIMPLIFIED/HOLD drive core, tanks and EYE optics) keep the hero proxy grey. The
+  grammar look `hero_preview.dress(grammar=True)` applies it in memory for stills, including the dark COAST blade depiction; the 1800 K
+  IGNITION emission is unchanged. The runtime exterior takes the same mapping in S9.
+- **Review set:** `presentation/p4_review.py` renders the matched cameras from the saved assets in the grammar look (or the pre-Phase-4
+  hero look): whole ship (three-quarter, side, rings), forward (Brow sector, Crown bay, human scale), ring A (segment, human scale),
+  radiator 1 (clamp, aft edge, 35 m, root) and the spine, with the matched COAST/IGNITION pair; `--pairs` makes before/after sheets.
 
 ## Characters
 
