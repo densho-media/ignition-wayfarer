@@ -379,6 +379,7 @@ candidates of all nine classes are separate accessory assets (docs/ACCESSORIES.m
 - [ ] **I04 — Review and integrate the accessory drone bodies. OWNER REVIEW; AFTER DGT-017.** Owner review of the GU-SIF interface
   proposal (DGT-012) and the class forms (owner 2026-10-24: continue as a separate accessory prototype, not integration or canon); then
   the ship session runs the placement and keep-out study for the taller exterior bodies (interface requests 1–4 in docs/ACCESSORIES.md;
+  the owner review and handoff register is accessories/review/HANDOFF.md;
   no automatic proxy resizing), and the ship viewer uses the GLBs for the drones card and the crawler demo (the standalone accessory
   viewer already plays them). **Done when:** the bodies replace the proxies in the review views with every dock, keep-out and route check
   unchanged or re-run, and nothing implies a released capability.

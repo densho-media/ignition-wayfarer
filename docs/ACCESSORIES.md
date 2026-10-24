@@ -199,7 +199,7 @@ wearer's unsuited character rig and are not suited EVA operations, so they can n
 - `eva_fit` marks every coverage row `use = EVA` or `NOT_SUITED_EVA` and reports `eva_coverage_pass` and `not_suited_eva_failures` beside
   the unchanged overall `coverage_pass` (still false: nothing was relaxed to hide the failures).
 - The accessory viewer shows the suit with its 15 EVA actions playable and the five inherited ones listed `LOCKED_NOT_SUITED_EVA`,
-  disabled, with the reason; its check fails if a locked action can play.
+  refused with the reason when picked; its check fails if a locked action can play.
 
 Climb investigation (instructor, every frame of the action rather than every 6th): 2-3 vertices per arm at the top of the upper arm,
 45-62 mm below the shoulder joint and just outside the scye bearing, exposed by up to 3.8 mm (2.5 mm at the check's 6-frame step) in the
@@ -246,8 +246,15 @@ capacities and energy, and until a qualified route needs the smaller section. No
 loads the GLBs from `generated/` at run time (no editor import), lists the nine designs, the rigged suited instructor and the two scenes
 (EVA tool handoff, interior drones), plays every action, and labels each motion SIMULATION_ONLY and each interface as unverified (DGT-017,
 DGT-012, FLIGHT_EVA HOLD). The suit's 15 EVA actions play; its five inherited unsuited actions are listed `LOCKED_NOT_SUITED_EVA`,
-disabled and refused (the check fails if one can play). The suit GLB comes from the ship's EVA exporter run into the stage's run folder
+refused when picked, with the reason in the status card (the check fails if one can play). The suit GLB comes from the ship's EVA exporter run into the stage's run folder
 (`export/eva_gltf.py --out <run>/suit`), never into `godot/generated/`.
+
+Layout (usability pass after c3cb062; presentation only, the manifest and actions unchanged): the gate bar runs across the top; the left
+column lists the designs grouped by family (interior drones, exterior crawlers, fixed arms, suit, scenes) with the readable class name
+first and a short ID beside it, then an action / status table (readable action names; `SIMULATION_ONLY` or `LOCKED`, the reason in the
+tooltip); the right column holds a status card (class name, full ID, what the model is doing — PLAYING, PAUSED or at rest — and the last
+REFUSED locked action with its reason) above the class facts and gates. Long names wrap instead of being cut, the panels are containers
+that never overlap, and the camera centres the model and the scale post in the free view between the columns.
 
 ```bash
 python3 tools/accessory_viewer.py stage            # builds the drone GLBs and scene GLBs (Blender), fills accessories/viewer/generated/
