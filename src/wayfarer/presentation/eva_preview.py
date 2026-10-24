@@ -1,7 +1,7 @@
 """Renders of WAYFARER_EVA_Y155 (EVA-001; S&E 44 EXP-04, RUN-008): assembled, cutaway, exploded and pose sheets of the suit variants.
 
   blender --background --factory-startup --python-exit-code 1 --python src/wayfarer/presentation/eva_preview.py -- \
-      [--views lineup cutaway exploded poses back] [--out renders/p1/eva] [--size 1280 960] [--samples 32]
+      [--views lineup turnaround cutaway exploded poses back] [--out renders/p1/eva] [--size 1280 960] [--samples 32]
 
 Every view opens the saved assets/characters/WF_EVA_<ID>.blend files (build/eva_suit.py) in memory and never saves them. The cutaway
 removes the front-left quadrant of the outer layers and the PLSS covers by a boolean at render time only and shows the parts marked
@@ -104,6 +104,17 @@ def back(out, size, samples):
     camera(sc, (-2.4, 3.6, 1.7), (0, 0, 1.15), 55); render(sc, out/'eva_back.png')
 
 
+def turnaround(out, size, samples):
+    """The instructor suit from the front, side, back and three-quarter, side by side at one scale (accessory review, A5)."""
+    reset(); sc = scene_setup(size, samples)
+    for k, (yaw, name) in enumerate(((0, 'front'), (90, 'side'), (180, 'back'), (35, 'three-quarter'))):
+        rig, _ = append('instructor', ((k-1.5)*1.05, 0, 0)); rig.rotation_euler[2] = math.radians(yaw); pose(rig, None, 0)
+        label(sc, name, ((k-1.5)*1.05-.25, -.6, -.0), .05)
+    label(sc, 'WAYFARER_EVA_Y155  ·  PROTOTYPE, NOT CERTIFIED', (-2.1, -.6, 2.15), .07)
+    cam = camera(sc, (0, -9.0, 1.05), (0, 0, 1.0), 50); cam.data.type = 'ORTHO'; cam.data.ortho_scale = 4.6
+    render(sc, out/'eva_turnaround.png')
+
+
 def cutaway(out, size, samples):
     """Front-left quadrant removed from the outer layers, HUT, helmet and PLSS covers; internals shown; labels name functions."""
     reset(); sc = scene_setup(size, samples); rig, objs = append('newcomer'); pose(rig, None, 0)
@@ -116,7 +127,7 @@ def cutaway(out, size, samples):
         if o.type != 'MESH' or o.get('eva_role') == 'validation_body' or (o.get('eva_show') == 'cutaway' and o.get('assembly') == 'PLSS'):
             continue
         part = o.get('part_id', '').split('/')[-1]
-        if part not in step or (part == 'PLSS_PRIMARY' and not o.name.endswith(('_PLSS', 'Cover_Upper', 'Cover_Lower'))):
+        if part not in step or (part == 'PLSS_PRIMARY' and not o.name.endswith(('_PLSS', '_PLSS_Lower', 'Cover_Upper', 'Cover_Lower'))):
             continue
         d = step[part]; x0, y0, z0, z1 = .0+d, .05-d, .55+d*2, 2.2
         if part == 'PLSS_PRIMARY':
@@ -149,7 +160,7 @@ def exploded(out, size, samples):
         elif o.get('assembly') == 'PLSS':
             o.matrix_world.translation += Vector(d)
     for o in objs:                                             # the PLSS covers come off further, to open the pack
-        if o.name.endswith(('_PLSS', 'Cover_Upper', 'Cover_Lower')):
+        if o.name.endswith(('_PLSS', '_PLSS_Lower', 'Cover_Upper', 'Cover_Lower')):
             o.matrix_world.translation += Vector((0, .35, 0))
     camera(sc, (3.2, -2.8, 1.9), (0, .35, 1.1), 50)
     label(sc, 'EXPLODED: helmet · torso & bearings · PLSS (covers off) · tethers · tool', (-1.2, -.5, 2.2), .04)

@@ -77,11 +77,15 @@ rig, the corrective shape keys and the five shared actions (RIG-02, RUN-006). Th
   - Helmet: a sealed shell fixed to the torso (the head turns inside it), with a clear pressure visor window, a raised glare visor and an
     identification band.
   - PLSS: a 0.50 × 0.22 × 0.62 m packaging envelope (45 G-08…G-10 MODEL DISPLAY ONLY, EVA-050: no capacity, mass or duration follows
-    from it) with two access panels, umbilical and cooling ports and an orange emergency actuator. Its cutaway internals are two primary
+    from it), drawn as two replaceable modules (upper: O₂ storage and regulation; lower: CO₂, fan/pump/separator, battery, radio) with
+    an interface band, keyed latches, a heat-rejection vent, side rescue handles, two fastened access panels, umbilical and cooling
+    ports and an orange emergency actuator. Its outer form is the old box's, so the measured envelopes are unchanged.
+  - Helmet details: visor pivots and two light / camera pods. Its cutaway internals are two primary
     O₂ bottles, the separate emergency reserve, the regulator, the CO₂ cartridge, the fan/pump/separator, the heat exchanger, the battery
     and the radio/telemetry unit.
   - Displays: the chest display and control module, and the left forearm display.
-  - Joints: scye, upper-arm, hip, thigh and ankle bearings; elbow and knee convolutes; wrist disconnects; gauntlets.
+  - Joints: scye, upper-arm, hip, thigh and ankle bearings (flat machined bands with edge races); elbow and knee convolutes (three-rib
+    bellows, the outer layer charcoal over the elbow and knee, RUN-017); wrist disconnects; gauntlets.
   - Feet: rigid soles with toe hooks for foot restraints.
   - Tethers and tools: two orange waist tether reels with captive hooks, and an inspection scanner with a lanyard ring.
 - **Sockets** (RIG-03/04) are bone-parented empties with stable ids. Hands: `SOCKET_HAND_L_GRIP`, `_R_GRIP`, `_R_TOOL`. Feet:

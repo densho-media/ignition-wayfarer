@@ -110,14 +110,15 @@ def frame_from(z, hint=Vector((0, 0, 1))):
     x.normalize(); y = z.cross(x); return x, y, z
 
 
-def torus(name, centre, axis, R, r, material, n=40, m=10, scale=(1.0, 1.0)):
-    """A ring of major radius R (scaled per axis in its plane: an elliptic bearing or seal ring) and section radius r."""
+def torus(name, centre, axis, R, r, material, n=40, m=10, scale=(1.0, 1.0), section=(1.0, 1.0)):
+    """A ring of major radius R (scaled per axis in its plane: an elliptic bearing or seal ring) and section radius r; `section` scales the
+    section radially and axially (a flat bearing band is radially thin and axially long)."""
     x, y, z = frame_from(axis); verts = []; faces = []
     for i in range(n):
         a = 2*math.pi*i/n; c = (x*math.cos(a)*scale[0]+y*math.sin(a)*scale[1])
         d = c.normalized()
         for k in range(m):
-            b = 2*math.pi*k/m; verts.append(centre+c*R+(d*math.cos(b)+z*math.sin(b))*r)
+            b = 2*math.pi*k/m; verts.append(centre+c*R+(d*math.cos(b)*section[0]+z*math.sin(b)*section[1])*r)
     for i in range(n):
         for k in range(m):
             faces.append((i*m+k, i*m+(k+1) % m, ((i+1) % n)*m+(k+1) % m, ((i+1) % n)*m+k))
@@ -275,6 +276,11 @@ def dress(rig, body, data, variant, key):
         asm = {'LCVG_INNER': 'COOLING', 'SUIT_PRESSURE_BLADDER': 'PRESSURE', 'MMOD_OUTER_SHELL': 'PROTECTION'}[name]
         layers[name] = S.put(o, asm, name, q['job'], q['show'])
     outer = layers['MMOD_OUTER_SHELL']; odom = dominant(outer)
+    outer.data.materials.append(M['joint']); ji = len(outer.data.materials)-1
+    zones = [(bone(rig, f'{b_}_{s_}')[0], r_) for b_, r_ in (('lowerarm', .085), ('calf', .105)) for s_ in 'lr']
+    for poly in outer.data.polygons:                     # restraint convolute zones in charcoal (RUN-017), the rest stays off-white
+        if poly.material_index == 0 and any((poly.center-c_).length < r_ for c_, r_ in zones):
+            poly.material_index = ji
     pts = lambda bones: outer_points(outer, odom, bones)
     W = lambda b: bone(rig, b)
     # ---- hard upper torso (rigid, spine_03) from the outer layer's chest sections
@@ -318,17 +324,58 @@ def dress(rig, body, data, variant, key):
     S.put(sphere_cap(f'EVA_{key}_Glare_Visor', hc, hR+.012, fwd, up, 18.0, 62.0, M['visor'],
                      hole=lambda d, x, y, z: abs(math.atan2(d.dot(x), d.dot(y))) > hx*1.05),
           'HELMET', 'SUIT_HELMET_VISOR', 'retractable glare visor, shown raised: shutter for sunlit work (EVA-023)', bone='spine_03')
+    side = Vector((1, 0, 0))
+    for sg in (1, -1):
+        S.put(tube(f'EVA_{key}_Visor_Pivot_{"lr"[sg < 0]}', hc+side*sg*(hR-.004), hc+side*sg*(hR+.014), .024, M['metal'], n=20), 'HELMET', 'SUIT_HELMET_VISOR',
+              'visor assembly pivot: the glare visor and the protective shell rotate about it (EVA-023)', bone='spine_03')
+        pod = hc+side*sg*(hR+.026)+up*(hR*.32)+fwd*(hR*.18)
+        S.put(box(f'EVA_{key}_Helmet_Light_{"lr"[sg < 0]}', pod, (side, fwd, up), (.016, .045, .020), M['grey'], bevel=.006), 'HELMET', 'SUIT_HELMET_VISOR',
+              'helmet light and camera pod: work lights and the helmet camera for the remote supervisor (ASSET-06, Tale 26 remote views)', bone='spine_03')
+        S.put(box(f'EVA_{key}_Helmet_Light_{"lr"[sg < 0]}_Lens', pod+fwd*.046, (side, fwd, up), (.012, .002, .010), M['display']), 'HELMET', 'SUIT_HELMET_VISOR',
+              'work light lens', bone='spine_03')
+        S.put(tube(f'EVA_{key}_Helmet_Cam_{"lr"[sg < 0]}', pod+up*.026+fwd*.02, pod+up*.026+fwd*.05, .007, M['visor'], n=12), 'HELMET', 'SUIT_HELMET_VISOR',
+              'helmet camera', bone='spine_03')
     S.put(torus(f'EVA_{key}_Helmet_Band', hc+up*(hR*.25), up, hR*math.cos(math.asin(.25))+.004, .010, M['band'], n=48, m=6),
           'MARKINGS', 'SAFETY_MARKINGS', 'helmet identification band: ' + variant['markings'], bone='spine_03')
     # ---- PLSS on the back (+Y) of the hard torso
     w, dpt, h = R['plss_size_m']; back = max(p.y for p in torso)+R['hut_margin_m']+R['hut_shell_m']
     pc = Vector((0, back+dpt/2+.01, (z0+z1)/2+.02))
-    plss = box(f'EVA_{key}_PLSS', pc, ((1, 0, 0), (0, 1, 0), (0, 0, 1)), (w/2, dpt/2, h/2), M['shell'], bevel=.025)
-    S.put(plss, 'PLSS', 'PLSS_PRIMARY', 'detachable primary life-support pack: display envelope, packaging and mass OPEN (ASSET-09, EVA-024, EVA-028)', bone='spine_03')
+    # Two stacked replaceable modules (upper: oxygen storage and regulation; lower: CO2 removal, fan / pump / separator, battery, radio) with
+    # the old pack's outer form (same width, depth and bevel), so the convex hulls the access study measures are unchanged (RUN-010); a
+    # recessed interface band between them, keyed latches, side rescue handles (the pack handle a rescuer holds, eva_rescue_hold) placed
+    # inside the shoulder-to-pack hull, a heat-rejection vent and the access covers within the old covers' 8 mm.
+    A3 = ((1, 0, 0), (0, 1, 0), (0, 0, 1)); split = .012
+    hu = (h-split)*.52; hl = h-split-hu; zb = pc.z-h/2; zl = zb+hl/2; zu = zb+hl+split+hu/2
+    S.put(box(f'EVA_{key}_PLSS', Vector((0, pc.y, zu)), A3, (w/2, dpt/2, hu/2), M['shell'], bevel=.025), 'PLSS', 'PLSS_PRIMARY',
+          'upper PLSS module: primary oxygen storage and regulation; packaging and mass OPEN (ASSET-09, EVA-024, EVA-028)', bone='spine_03')
+    S.put(box(f'EVA_{key}_PLSS_Lower', Vector((0, pc.y, zl)), A3, (w/2, dpt/2, hl/2), M['shell'], bevel=.025), 'PLSS', 'PLSS_PRIMARY',
+          'lower PLSS module: CO2 removal, fan / pump / separator, battery and radio; a separately replaceable unit (ASSET-09)', bone='spine_03')
+    S.put(box(f'EVA_{key}_PLSS_Split', Vector((0, pc.y, zb+hl+split/2)), A3, (w/2-.012, dpt/2-.012, split/2+.002), M['joint']), 'PLSS', 'PLSS_PRIMARY',
+          'module interface: seal and connector plane between the two PLSS modules', bone='spine_03')
+    for sg in (1, -1):
+        for zz in (zb+hl-.016, zb+hl+split+.016):
+            S.put(box(f'EVA_{key}_PLSS_Latch_{"lr"[sg < 0]}_{int(zz*1000)}', Vector((sg*(w/2-.05), pc.y+dpt/2+.003, zz)), A3, (.014, .003, .008), M['metal']),
+                  'PLSS', 'PLSS_PRIMARY', 'module latch (tool-operated, keyed)', bone='spine_03')
+        hx = sg*(w/2+.022); hy = pc.y-dpt*.30
+        for zz in (zu-hu*.30, zu+hu*.22):
+            S.put(tube(f'EVA_{key}_PLSS_Handle_Post_{"lr"[sg < 0]}_{int(zz*1000)}', Vector((sg*w/2, hy, zz)), Vector((hx, hy, zz)), .007, M['grey'], n=12),
+                  'PLSS', 'PLSS_PRIMARY', 'rescue handle standoff', bone='spine_03')
+        S.put(tube(f'EVA_{key}_PLSS_Handle_{"lr"[sg < 0]}', Vector((hx, hy, zu-hu*.30)), Vector((hx, hy, zu+hu*.22)), .010, M['grey'], n=16),
+              'PLSS', 'PLSS_PRIMARY', 'side rescue / handling handle (eva_rescue_hold); inside the shoulder-to-pack hull', bone='spine_03')
     face = pc.y+dpt/2
-    for nm, cz, hz in (('Cover_Upper', pc.z+h*.22, h*.20), ('Cover_Lower', pc.z-h*.20, h*.18)):
-        S.put(box(f'EVA_{key}_PLSS_{nm}', Vector((0, face+.004, cz)), ((1, 0, 0), (0, 1, 0), (0, 0, 1)), (w*.40, .004, hz), M['grey']),
+    for nm, cx, cz, hx_, hz in (('Cover_Upper', -w*.10, zu, w*.26, hu*.34), ('Cover_Lower', 0.0, zl, w*.38, hl*.32)):
+        S.put(box(f'EVA_{key}_PLSS_{nm}', Vector((cx, face+.003, cz)), A3, (hx_, .003, hz), M['grey']),
               'PLSS', 'PLSS_PRIMARY', 'PLSS access panel: replaceable module boundary (ASSET-09 "distinct access hatches")', bone='spine_03')
+        for sx in (-1, 1):
+            for sz in (-1, 1):
+                q = Vector((cx+sx*(hx_-.012), face+.005, cz+sz*(hz-.012)))     # heads end at the old cover face (face + 0.008)
+                S.put(tube(f'EVA_{key}_PLSS_{nm}_Fastener_{sx}{sz}', q, q+Vector((0, .003, 0)), .005, M['metal'], n=8), 'PLSS', 'PLSS_PRIMARY',
+                      'captive panel fastener', bone='spine_03')
+    for k in range(6):
+        S.put(box(f'EVA_{key}_PLSS_Vent_{k}', Vector((w*.29, face+.003, zu-hu*.30+k*hu*.12)), A3, (w*.09, .003, .004), M['joint']), 'PLSS', 'PLSS_PRIMARY',
+              'heat-rejection vent louvre (evaporator / radiator exhaust; heat rejection OPEN, EVA-009)', bone='spine_03')
+    S.put(box(f'EVA_{key}_PLSS_ID', Vector((w*.29, face+.002, zl+hl*.25)), A3, (w*.08, .002, .018), M['gu'] if variant['role_band'] == 'gu_blue' else M['band']),
+          'MARKINGS', 'SAFETY_MARKINGS', 'PLSS identification plate: ' + variant['markings'], bone='spine_03')
     inner = [  # internals, shown in the cutaway (RUN-008, EXP-04); placement is a display layout, not packaging
         ('O2_Primary_1', 'tube', Vector((-w*.30, pc.y, pc.z+h*.05)), (.045, h*.70), M['tank'], 'primary oxygen storage (EVA-008)'),
         ('O2_Primary_2', 'tube', Vector((-w*.12, pc.y, pc.z+h*.05)), (.045, h*.70), M['tank'], 'primary oxygen storage (EVA-008)'),
@@ -363,8 +410,21 @@ def dress(rig, body, data, variant, key):
     # ---- bearings and convolutes (ASSET-05): ring radius = the outer layer's local radius plus clearance
     def bearing(nm, bone_axis, t, parent, minor=None, mat_=None, part='SUIT_JOINTS', job='rotary bearing: low-torque pressure-compatible rotation (53!14)'):
         a, b = W(bone_axis); src = pts({bone_axis}); c, rr = section(src, a, b, max(0, t-.05), min(1, t+.05)); rr = rr or .06
-        mn = minor or R['bearing_minor_m']; S.put(torus(f'EVA_{key}_{nm}', c, b-a, rr+R['bearing_clearance_m']-mn*.2, mn,
-                                      mat_ or M['joint']), 'JOINTS', part, job, bone=parent)
+        mn = minor or R['bearing_minor_m']; ax = (b-a).normalized()
+        if 'Convolute' in nm:                       # bellows: three restraint ribs a rib-pitch apart
+            for k, off in enumerate((-1.6, 0.0, 1.6)):
+                S.put(torus(f'EVA_{key}_{nm}_{k}', c+ax*off*mn, b-a, rr+R['bearing_clearance_m']-mn*.1, mn*.8, mat_ or M['joint'], m=8),
+                      'JOINTS', part, job, bone=parent)
+            return rr
+        if nm.startswith('Scye'):                    # the scye ring sets the torso width the owner quotes (45 G-01/G-02): unchanged
+            S.put(torus(f'EVA_{key}_{nm}', c, b-a, rr+R['bearing_clearance_m']-mn*.2, mn, mat_ or M['joint']), 'JOINTS', part, job, bone=parent)
+            return rr
+        # a rotary bearing: a flat machined band with a race at each edge, inside the old ring's envelope (axial +-mn, radial rr + .8 mn);
+        # the access-study hull classes were re-measured unchanged (docs/ACCESSORIES.md)
+        S.put(torus(f'EVA_{key}_{nm}', c, b-a, rr+R['bearing_clearance_m'], mn, mat_ or M['joint'], m=12, section=(.55, 1.0)), 'JOINTS', part, job, bone=parent)
+        for k, sg in enumerate((-1, 1)):
+            S.put(torus(f'EVA_{key}_{nm}_Race{k}', c+ax*sg*mn*.72, b-a, rr+R['bearing_clearance_m']+mn*.2, mn*.28, M['metal'], m=6),
+                  'JOINTS', part, 'bearing race / disconnect ring', bone=parent)
         return rr
     for s in 'lr':
         bearing(f'Scye_Bearing_{s}', f'upperarm_{s}', .10, 'spine_03', .020, job='scye (shoulder) bearing on the hard torso (EVA-022, 53!14)')
