@@ -23,6 +23,7 @@ as-built prototype, never ratings.
 | `23_viewer_suit.jpg` | the accessory viewer's suit entry: 15 EVA actions playable, the five inherited unsuited actions LOCKED | `tools/accessory_viewer.py shots` |
 | `25_compare_viewer.jpg` | the viewer before (c3cb062) and after its usability pass: suit and DR-EVA-02 entries | `tools/accessory_viewer.py shots`, composed |
 | `HANDOFF.md` | owner review and handoff register: visual decisions approvable now, engineering decisions for the canonical Drive sheets, ship-session items | written |
+| `review.pdf` | printable review (A4, 12 pages): register, before / after, suit, readbacks, validation, compact PLSS, drone family, HOLD / OPEN list | the review page printed with Chromium; regenerate from `HANDOFF.md` and the images when they change |
 | `24_dock_cradles.jpg` | DR-EVA-01 / 02 / 03 docked on their review stands: the PROTOTYPE docking cradles (review fixtures, not ship geometry) | `drone_preview.py --views cradles` |
 | `rail_section.svg` | crawler rail cross-section for the ship-session interface request: wheel capture, support web corridor, swept envelope | `presentation/rail_section.py` |
 
