@@ -6,6 +6,7 @@ package Demonstrator 01 reads, all from the saved assets and tracked inputs:
   manifest.json                                                the COAST manifest of the viewer export (forward explorer)
   wf_route_v1.json                                             simulations/ (NAV-001 import, unchanged)
   wf_eva.json                                                  eva_route.py with the tracked EVA references (remote view only)
+  wf_holo.json                                                 representation.py holo-style: the hologram styles' overlay colours (WEB-003)
 The MPFB characters and EVA suits are not built here: boarding.gd keeps the exported proxies (a presentation-only difference).
 In the workspace copy only, the main scene becomes demo01.tscn (60 UX-002/UX-017: one visitor journey, the review menu stays a
 developer tool) and export_presets.cfg is written; the project's godot/ and godot/generated/ are never touched.
@@ -254,6 +255,8 @@ def build(root, run_dir, out, coast_manifest, identity, native=False, native_che
 
     step('export-docked', pipeline.blender(root / 'src/wayfarer/export/godot.py', '--root', root, '--preset', 'DOCKED',
                                            '--out', generated, '--identity', identity))
+    step('holo-style', ['python3', str(root / 'src/wayfarer/representation.py'), 'holo-style', '--root', str(root),
+                        '--manifest', str(generated / 'manifest_docked.json'), '--out', str(generated / 'wf_holo.json')])
     shutil.copy2(coast_manifest, generated / 'manifest.json')
     shutil.copy2(root / 'simulations/wf_route_v1.json', generated / 'wf_route_v1.json')
     step('eva-route', ['python3', str(root / 'src/wayfarer/eva_route.py'), '--root', str(root), '--out', str(generated),

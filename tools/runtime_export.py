@@ -204,6 +204,9 @@ def run(root, eye_layout=None):
             *([('inspect', pipeline.blender(root / 'src/wayfarer/validation/inspect.py', '--root', work, '--output', run_dir / 'validation.json'))] if eye_layout else []),
             ('export', pipeline.blender(root / 'src/wayfarer/export/godot.py', '--root', work)),
             ('export-docked', pipeline.blender(root / 'src/wayfarer/export/godot.py', '--root', work, '--preset', 'DOCKED')),
+            # WEB-003: the hologram styles' overlay colours over the DOCKED nodes (Demonstrator 01's hologram toggle).
+            ('holo-style', ['python3', str(root / 'src/wayfarer/representation.py'), 'holo-style', '--root', str(root),
+                            '--manifest', str(work / 'godot/generated/manifest_docked.json'), '--out', str(work / 'godot/generated/wf_holo.json')]),
             # M5: the subsystem hologram data over the COAST manifest and the saved study assets (built above when missing).
             ('export-m5', pipeline.blender(root / 'src/wayfarer/export/m5_hologram.py', '--root', root, '--out', work / 'godot/generated')),
             # Milestone C (MECH-003): the 41_SURVIVAL_RESOURCES study as generated/wf_life_support.json for the life-support simulator.

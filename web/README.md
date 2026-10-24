@@ -10,6 +10,59 @@ at <https://densho-media.github.io/ignition-wayfarer/>. Its four entry points ea
 | `/play/` | **Enter Wayfarer**: launcher; Start opens `demo01-<hash>.html` | Godot 4.7.2 `engine-<hash>.{js,wasm}` and the Demonstrator 01 pack `demo01-<hash>.pck` |
 | `/review/` | technical review: release, model, checks, limitations, this browser | `release.json` |
 
+**Hologram styles (WEB-003).** Both experiences can show the ship as the two hologram looks of the Blender shots and the Godot
+M5 scene, as presentation only: **Subsystems** (unshaded, additive rim and scan bands in each functional subsystem's overlay colour,
+the M5 subsystem hologram) and **Engine holo** (one colour, rim glow and, in the viewer, wire edges: the SH_ENGINE_HOLOGRAM look).
+The colours and node classification come from `representation.py holo-style` over the export manifest (shots/m5_subsystems.toml,
+the SH_ENGINE_HOLOGRAM colour, and the manifest lineage for groups); the viewer loads them (`model/holo-<hash>.json`) only when
+something other than the standard look is first asked for. In Enter Wayfarer, F3 or the Holo touch button cycles standard,
+subsystem and engine (`generated/wf_holo.json`). Overlay colours explain function and are never materials.
+
+**Hybrid appearance (WEB-004, Explore Ship).** Three separate parts of the viewer state, resolved per node by `viewer/appearance.js`
+(pure logic) and drawn by `viewer/viewer.js`:
+
+- **Style**, the global look: Standard, Subsystems, Engine holo, **Hybrid** (keys S, H, E, X). Hybrid looks like Standard until a
+  part is clicked; a click then focuses it.
+- **States** the visitor sets on a part, a group (the manifest lineage below the assembly: a drive nozzle, a radiator mechanism), an
+  assembly or a subsystem: **Solid** (imported materials), **Hologram**, **Ghost**, **Hidden**. Assemblies have a state menu in the
+  Assemblies panel (Auto = no state); the pick box sets states on the selected part, group, assembly or subsystem (Part / Group /
+  Assembly / Subsystem chips) and Restore removes one.
+- **Focus**, the subject: a part, group, assembly or subsystem (pick box Focus, the legend, or a click in Hybrid). The subject takes the
+  focus look (Solid, Subsystem colour or Cyan; the focus bar and the Appearance panel); everything else takes the context look
+  (Ghost by default, or Hologram). Frame (F) frames the focus from the current direction; the camera never moves by itself.
+  Whole ship (Esc) clears the focus.
+
+Precedence, first match wins: (1) Hidden by any state that covers the node; (2) the node's own state, then its group's, assembly's,
+subsystem's; (3) the focus (subject: focus look; others: context look); (4) the style default (Standard and Hybrid solid; Subsystems a
+hologram per subsystem colour with the unclassified casing as a ghost; Engine holo a cyan hologram). A state stays when the selection,
+the focus or the camera changes. **Show all** lifts every Hidden state and nothing else. **Reset appearance** returns to the initial
+state: Standard, no focus, no states, ghost 6 % with outlines, no selection; every mesh gets its imported material (kept in
+`userData.material`) and its exported visibility back, the added edge lines are removed and their geometry disposed. The camera
+stays where it is.
+
+Rendering. Ghosts use one low-opacity, normal-blended material per tint (grey; cyan in Engine holo) with an optional rim term
+(**Ghost outlines**); a stencil bit lets each pixel take only one ghost layer, nearest first, so the thousand stacked radiator cells
+show as one faint layer instead of adding up. **Ghost strength** (0-20 %, default 6 %) is one shared uniform. Holograms keep the
+additive M5 look but a stencil count lets a pixel add at most two hologram layers. Solid subjects are opaque, so a ghost in front
+of one only tints it by the ghost strength. The shaders carry the logarithmic depth chunks of the renderer, so they test depth
+against the solid meshes. Engine wire edges are made only for meshes drawn in the engine hologram, once per geometry; the
+selection is marked by its feature edges, not by replacing its material (except the plain WEB-001 highlight in Standard).
+
+Cost, measured 2026-10-24 on SwiftShader software WebGL at 1280 × 800, three-quarter view, median of 30 frames (software timing
+only; real-GPU numbers are still to be taken): Standard 2,397 → 2,337 ms (WEB-003 → WEB-004), Subsystems 937 → 930 ms, Engine holo
+1,482 → 1,553 ms, Hybrid with the propulsion focused 974 ms, the radiators as a subsystem hologram 960 ms. Draw calls are unchanged
+(3,987 Standard; 3,947 holograms and ghosts; 7,894 Engine holo with its edges): the stencil limits add no pass. Shader programs
+grow by one (the ghost). Edge geometry doubles the geometry count only while Engine holo edges exist; Reset appearance returns it
+to 2,721.
+
+Picking. Hidden meshes are never hit. With a focus, the nearest Solid or Hologram hit wins over ghosts in front of it; a ghost is
+picked only where the ray meets nothing else. A click on empty space clears the selection, not the focus.
+
+Bookmarks keep the camera part first (`#view=` or `#cam=`, as before) and add only non-default state:
+`style=hybrid&focus=a:Assembly_PROPULSION001&look=cyan&ctx=hologram&ghost=12&outl=0&ov=a:Assembly_HULL001.x,n:WF_….g`
+(`n`/`g`/`a`/`s` = part, group, assembly, subsystem; `s`/`h`/`g`/`x` = solid, hologram, ghost, hidden). A target that a later
+build no longer has is dropped. WEB-003 links (`&style=subsystem`) still open.
+
 Both experiences are REP_PROXY, SIMULATION_ONLY representations. The pages compute no spacecraft facts: geometry, labels and
 behaviour come from the exporter, the manifests, the rig and the unchanged Godot scenes. Why it is built this way, the
 measurements and the open items are in [docs/wayfarer-web-experience-plan.md](../docs/wayfarer-web-experience-plan.md).
@@ -73,6 +126,11 @@ mkdir -p runs/preview && ln -sfn ../web-site runs/preview/ignition-wayfarer && p
 - **Explore Ship,** opened from its link:
   - framing, orbit, zoom, pan, Reset and the presets
   - picking and hiding assemblies
+  - WEB-004: each of the four styles draws every mesh in its look; subsystem colours equal the exported classification; an
+    assembly takes Solid, Hologram, Ghost and Hidden and Show all lifts Hidden; a Hybrid click focuses the picked part solid with
+    the rest ghosted; changing the selection keeps other states; hidden parts never take a pick and ghosts never take one from a
+    visible subject behind them; Reset appearance restores materials, visibility and transforms (no lines left); the appearance
+    bookmark restores style, focus, look, ghost strength and states and drops a missing part
   - the `#cam=` bookmark after a reload
   - no request to `play/`, and no script errors
 - **Enter Wayfarer:**
