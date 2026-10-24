@@ -158,8 +158,10 @@ class Page:
     def touch(self, kind, points):
         self.send('Input.dispatchTouchEvent', {'type': kind, 'touchPoints': [{'x': x, 'y': y, 'id': i} for i, (x, y) in enumerate(points)]})
 
-    def screenshot(self, path):
-        Path(path).write_bytes(base64.b64decode(self.send('Page.captureScreenshot', {'format': 'png'})['data']))
+    def screenshot(self, path, timeout=240):
+        # A capture waits for the next compositor frame; a software-rendered Godot frame on a runner that also runs the touch
+        # journey's browser can take minutes (main run 66 timed out twice at 60 s). Screenshots are evidence, not checks.
+        Path(path).write_bytes(base64.b64decode(self.send('Page.captureScreenshot', {'format': 'png'}, timeout)['data']))
 
     def centre_of(self, selector):
         return self.js(f'(() => {{ const r = document.querySelector({json.dumps(selector)}).getBoundingClientRect(); '
