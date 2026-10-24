@@ -31,11 +31,12 @@ close-up, regression check, MODEL/TODO and Model Status update.
 - [ ] **P4 — Phase 4 visual production and art direction ([docs/PHASE4_PLAN.md](docs/PHASE4_PLAN.md)). PRODUCTION 2026-10-24:
   S1 art gate passed (owner selected VC+ Expressive Hybrid, moderated values; Art Style Spacecraft row 19); S2 done; S3 (M8.2), S4
   (ring exteriors), S5 (radiator frames), S6 (spine casing, `spine_casing`) and S9 (library coverage, ram face, wear layer, ship name,
-  runtime grammar) BUILT, owner review.** The grammar is
+  runtime grammar) and S8a (ring B transfer, crew tube and sector 2 in the M7 grammar, `ring_b_transfer`) BUILT, owner review.**
+  The grammar is
   `[production.exterior]` (families, tiers, marking scale, accent budget, ship-material mapping) with the grammar look
   (`hero_preview.dress(grammar=True, wear=)`), the runtime exterior (`look.exterior.grammar`) and the review set
-  `presentation/p4_review.py`. **Next:** S8a (ring B transfer and first sector in the M7 grammar), S10, S11 in the plan's order; S7 waits
-  on engineering releases. **Owner review:** the ram-face look and the wear layer (P4-LOCKED (b), P4-STATE) with the other candidates. Every new asset
+  `presentation/p4_review.py`. **Next:** S10 (hero renders), S11 (runtime measurement, whole-ship review); S8b zones after their
+  whitebox and cultural reviews; S7 waits on engineering releases. **Owner review:** the ram-face look and the wear layer (P4-LOCKED (b), P4-STATE) with the other candidates. Every new asset
   stays `L4_VISUAL_CANDIDATE` until the owner reviews it; nothing reaches `main` without the owner's squash approval.
   **Done when:** the plan's S11 whole-ship review is accepted by the owner.
 - [ ] **MOD — Modular detail (docs/MODULES.md).** Every production assembly is a detail pack (phase 2, 2026-10-23: `m7_spine`,

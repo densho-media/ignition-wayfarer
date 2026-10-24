@@ -1477,6 +1477,18 @@ pressure boundary or mechanism.
   panels, and no part in a sector pressure envelope; the envelope screen keeps each flank assembly off ring A's crew-tube pack. The
   M4 construction inside the frame (joints, webs, cassettes, covers, nodes, rim band), the spokes, crew tubes and hub are unchanged.
 
+## Ring B route in the M7 grammar (Phase 4 S8a)
+
+The detail pack `ring_b_transfer` (WF-RING-B) gives ring B's route the accepted M7 standard (owner P4-INT zone Z4: ring B transfer and
+first sector): `RB.XFR` lines ring B's despun transfer drum (`WF-RING-B.DRUM.2`), `RB.SPK` clads the radial run of the crew tube to
+sector 2, the sector of ring B's spine port (`WF-RING-B.ROTOR.2`), and `RB.SEC` is sector 2's overhead service layer
+(`WF-RING-B.SECTOR.2.2`, WORK_MEDICAL_OPS: its fit-out sets the keep-outs). One definition serves both rings: the shared pure module
+`m7_route.py` (WF-HABITAT) holds the drum, tube and sector layers parameterised by ring, sector and function, moved unchanged from ring A's
+packs, whose output is identical (fingerprint: no object changed). Drum 66 elements (the 0.90 m openings leave more lining than ring A's
+1.6 m), tube 841, overhead 88; every M7 screen passes. `L4_VISUAL_CANDIDATE`: the M7 acceptance does not extend to these assets. Ring
+B's closures and rescue path stay HOLD (15!A197, OD-032/034/040) and physics-locked proxies; the 0.90 m port, necks and bulkheads are
+unchanged.
+
 ## Spine casing (Phase 4 S6)
 
 The detail pack `spine_casing` (WF-SPINE, assembly `SP.CASING` on `WF-SPINE.HULL.ORIGIN`, vehicle frame) makes the aft body casing

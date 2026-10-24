@@ -247,7 +247,7 @@ the generators and this plan. One build lock: sessions queue for builds.
 - **Dependencies:** engineering release; S2.
 - **Done when:** the aft end matches the grammar without implying a solved drive.
 
-#### S8 — Interiors in the owner's order · Medium each · S8a class 2 (M7 grammar), S8b class 2 + 4
+#### S8 — Interiors in the owner's order · Medium each · S8a class 2 (M7 grammar), S8b class 2 + 4 · S8a BUILT, owner review (section 4.10)
 - **Order (P4-INT):** Z4 ring B transfer and first sector (S8a) → Z1 ring A Garden and mess → Z2 ring A work/medical/ops (`ra2_equip`
   retained as designed; its acceptance is pending) → Z3 berths and private niches. Workshop excluded while OD-030 is OPEN.
 - **Direction:** S8a in the accepted M7 grammar (packs `ring_b_transfer`, `m7_rb1`); S8b cultural pass K2 at launch: Spacer *Contain*,
@@ -532,6 +532,22 @@ Generated simulation and validation snapshots compared field by field between 88
   `runs/20261024T-p4-s9/pairs_vs_s6` and `pairs_wear`.
 - **Maturity:** the families and markings follow the approved grammar; the ram look and the wear layer are new candidates for owner
   review (P4-LOCKED (b), P4-STATE).
+
+### 4.10 S8a — ring B transfer and first sector, M7 grammar (2026-10-24)
+
+- **Implemented:** pack `ring_b_transfer` (WF-RING-B): the despun drum lining (`RB.XFR`), the sector-2 crew tube's frames and cladding
+  (`RB.SPK`) and sector 2's overhead panels, trays, fasteners and light housings (`RB.SEC`, WORK_MEDICAL_OPS). Sector 2 is ring B's
+  "first sector": its spine port lands there. The ring A definitions moved into the shared `m7_route.py`, so both rings use one
+  standard; ring A's accepted output is unchanged.
+- **Preserved:** full pipeline PASS with the rotation and route inspections (`runs/20261024T161109Z-pipeline`; fingerprint: 0 changed,
+  3 added); every drum, tube and overhead screen (off openings, door seal lands, ladders, rails, panels, hatch opening, landing well,
+  overhead band); ring B closures and rescue HOLD untouched, no new pressure boundary, interface or clearance; M7 acceptance unchanged.
+- **Evidence:** `runs/20261024T-p4-s8a/WF001_P4_S8a_ringA_vs_ringB.png`: ring A (accepted) beside ring B at the drum eye, in the
+  tube run and looking up at the sector overhead. The drum and run read as the same accepted standard; the overhead follows sector 2's
+  work fit-out.
+- **Not done:** S8b zones (Z1 Garden/mess, Z2 work/medical/ops with `ra2_equip`, Z3 berths) wait for the human-scale whitebox review and
+  cultural pass the plan requires; the workshop stays excluded (OD-030).
+- **Maturity:** `L4_VISUAL_CANDIDATE`; owner review.
 
 ## 5. Risks
 

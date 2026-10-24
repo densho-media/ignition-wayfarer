@@ -272,14 +272,14 @@
    }
   }
  },
- "git_dirty": false,
- "git_revision": "e87f0bfd28d00f6393adbadfa4e2288dcbe21663",
- "inputs_hash": "2bb27c4644d819b9",
+ "git_dirty": true,
+ "git_revision": "0a2f6697a523a1d51fb8606de4e6df3ddc044514",
+ "inputs_hash": "77ddc03e1b7439dd",
  "module": "WF-RING-A",
  "note": "A publication makes the pack eligible for integration; it is not an owner acceptance and changes no maturity or canon.",
  "pack": "m7_ra1",
  "pack_version": 1,
- "published_utc": "2026-10-23T11:06:53Z",
- "spec_sha256": "861a969c7da0bf441ad5c4c2fb50a90ec9a959051cf3c2310ceb9a44f8a27360",
+ "published_utc": "2026-10-24T16:32:50Z",
+ "spec_sha256": "bb0a5529f0d33090c3e86760a700810bc97918e0da39ac7052244377f238beb7",
  "version": 2
 }

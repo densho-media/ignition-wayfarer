@@ -1,0 +1,74 @@
+# Detail pack ring_b_transfer (docs/MODULES.md): ring B's M7-equivalent route in the accepted M7 grammar (Phase 4 S8a, owner P4-INT zone Z4:
+# ring B transfer and first sector), module WF-RING-B. RB.XFR lines ring B's despun transfer drum (anchor WF-RING-B.DRUM.2), RB.SPK clads the
+# radial run of the crew tube to sector 2 (the sector of ring B's spine port; anchor WF-RING-B.ROTOR.2), RB.SEC is sector 2's overhead
+# service layer (WORK_MEDICAL_OPS; anchor WF-RING-B.SECTOR.2.2). One definition with ring A's accepted packs: the shared m7_route module
+# (WF-HABITAT), with ring A's M7 values copied here. Owned by a WF-RING-B detail session: this manifest,
+# src/wayfarer/detail/pack_ring_b_transfer.py and the generated assets/wayfarer/detail/WF_DETAIL_RB_XFR.blend, WF_DETAIL_RB_SPK.blend and
+# WF_DETAIL_RB_SEC.blend. Every value is a PROTOTYPE depiction choice: no load, pressure boundary, interface, closure, seal, bearing, rescue
+# path, volume or mass; ring B's closures and rescue path stay HOLD (15!A197, OD-032/034/040) and physics-locked proxies, the 0.90 m port
+# and necks unchanged. L4_VISUAL_CANDIDATE: the M7 acceptance does not extend to these new assets.
+[pack]
+module = "WF-RING-B"
+version = 1
+scope = "pack"
+enabled = true
+maturity = "L4_VISUAL_CANDIDATE"
+status = "PROTOTYPE"
+evidence_ref = "l4_production_gate"
+detail_class = "PRODUCTION"
+inspect = ["rotation", "route"]
+views = ["hub_section_detail", "crew_detail"]
+summary = "Ring B in the M7 grammar: machinery lining in the despun drum, the sector-2 crew tube's frames and cladding, sector 2's overhead panels."
+
+[assembly."RB.XFR"]
+anchor = "WF-RING-B.DRUM.2"
+zone = "ring-B spin transfer surroundings (zone 3); closures physics-locked, ring B closures and rescue HOLD"
+classes = ["ENGINEERING_FLEXIBLE"]
+# Claimed space in the drum frame (m): the lining on the drum wall plus 0.05 m.
+envelope_min = [-2.62, -1.98, -1.98]
+envelope_max = [-1.52, 1.98, 1.98]
+
+[assembly."RB.SPK"]
+anchor = "WF-RING-B.ROTOR.2"
+zone = "ring-B crew tube to sector 2 (zone 4), its radial run"
+classes = ["ENGINEERING_FLEXIBLE"]
+# Claimed space in the rotor frame (m): the tube's radial run cladding plus 0.05 m.
+envelope_min = [-0.82, -12.18, 5.2]
+envelope_max = [0.86, -1.24, 22.52]
+
+[assembly."RB.SEC"]
+anchor = "WF-RING-B.SECTOR.2.2"
+function = "WORK_MEDICAL_OPS"
+zone = "ring-B sector 2 WORK_MEDICAL_OPS overhead (zone 5; placed on that sector only)"
+classes = ["ENGINEERING_FLEXIBLE", "ARTISTIC"]
+# Claimed space in the sector frame (m): the sector's axial length, the overhead band down to overhead_floor_y_m, the panel span.
+envelope_min = [-1.75, -2.90, -2.50]
+envelope_max = [1.75, -2.85, 2.50]
+
+# The ring and sector this pack details, and ring A's accepted M7 values (ring_a_transfer [params.drum]/[params.tube], m7_ra1 [params]).
+[params]
+ring = 2
+route_sector = 2
+function = "WORK_MEDICAL_OPS"
+
+[params.drum]
+opening_margin_m = 0.08
+panel_max_deg = 14.0
+panel_min_deg = 4.0
+
+[params.tube]
+frame_pitch_m = 1.50
+frame_width_m = 0.05
+frame_depth_m = 0.030
+end_inset_m = 0.30
+
+[params.overhead]
+item_floor_y_m = -2.55
+span_z_m = 2.45
+margin_m = 0.04
+hatch_margin_m = 0.10
+panel_min_m = 0.12
+panel_max_m = 0.62
+housing_depth_m = 0.035
+overhead_floor_y_m = -2.85
+touch_y_m = -2.86

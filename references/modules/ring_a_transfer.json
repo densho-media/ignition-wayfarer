@@ -539,14 +539,14 @@
    }
   }
  },
- "git_dirty": false,
- "git_revision": "e87f0bfd28d00f6393adbadfa4e2288dcbe21663",
- "inputs_hash": "06c9ac609c20045a",
+ "git_dirty": true,
+ "git_revision": "0a2f6697a523a1d51fb8606de4e6df3ddc044514",
+ "inputs_hash": "3c4d4a2fc4cc86f0",
  "module": "WF-RING-A",
  "note": "A publication makes the pack eligible for integration; it is not an owner acceptance and changes no maturity or canon.",
  "pack": "ring_a_transfer",
  "pack_version": 1,
- "published_utc": "2026-10-23T11:07:15Z",
- "spec_sha256": "861a969c7da0bf441ad5c4c2fb50a90ec9a959051cf3c2310ceb9a44f8a27360",
+ "published_utc": "2026-10-24T16:32:44Z",
+ "spec_sha256": "bb0a5529f0d33090c3e86760a700810bc97918e0da39ac7052244377f238beb7",
  "version": 2
 }
