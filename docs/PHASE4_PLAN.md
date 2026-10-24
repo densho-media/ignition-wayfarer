@@ -188,7 +188,7 @@ the generators and this plan. One build lock: sessions queue for builds.
 - **Parallel:** precedes S3–S6 and S9.
 - **Done when:** keys exist, M7 unchanged or explained, MODEL documents the grammar.
 
-#### S3 — Forward production: Brow and twelve Crown bays (M8.2) · Medium · class 2 + 4 · WF-FWD
+#### S3 — Forward production: Brow and twelve Crown bays (M8.2) · Medium · class 2 + 4 · WF-FWD · BUILT, owner review (section 4.4)
 - **Direction:** the selected grammar on the Brow aft face and all twelve bays; the ram face tile-and-repair appearance by
   shader/normal/texture only (OWN-P4-LOCKED (b)).
 - **Boundaries:** r ≤ 45.0 m; nothing sunward of the skin; shutters, carriages, emitters, launchers, ports, windows, EYE wells untouched;
@@ -405,6 +405,26 @@ VC+ ladder); (3) GU deep blue as a standard wayfinding accent or not; (4) the th
   Brow; the Brow aft face reads as a 12-spoke wheel; the rings read light against the dark blades in the rings view; IGNITION keeps its
   emission and the hull reads darker against it.
 - **Maturity:** the grammar is canon in Art Style row 19; the code is PROTOTYPE presentation; no asset changed maturity.
+
+### 4.4 S3 — forward production: M8.2 (2026-10-24)
+
+- **Implemented** (`m8_forward`, revision M8.2; M8.1's bay/module construction kept): materials moved to the shared families
+  (`[production.m8.materials]` retired); the service lane became a mid-value deck with GU deep-blue boundary lines and exposed graphite
+  utility trays on brackets; fasteners only on the serviced lane deck and the Crown panels/doubler (Brow cladding fields calm, 864 + 360
+  fasteners instead of 3,072); Crown access panels light against the graphite housing; protected-band edge a dark closeout instead of
+  amber (amber is reserved for occupancy); markings sized by `marking_height`: Brow sector IDs 1.06 m, lane label 0.48 m, bay numeral
+  1.38 m, hatch stencil 0.28 m (band-capped), boundary half-stripes 0.24 m. 2,924 elements (M8.1: 4,172); accent shares blue 1.7 %,
+  ochre 0.3 %.
+- **Preserved:** pack screens (aft-face zone between skin and truss, chord keep-outs, Crown plate, ribs, hatch, rim, beacons) and the
+  envelope PASS (the Brow envelope widened 0.18 m aft for the trays, 3.5 m short of the truss); `module validate` readback PASS; full
+  pipeline PASS (`runs/20261024T-p4-s3-pipeline`: all tests, whole-ship and forward inspection, fingerprint changes only in the M8
+  detail assets: fasteners, markings, new lane lines and trays); the 90 m silhouette, EYE wells, Crown mechanisms, sunward face and Lance
+  untouched. New baseline `baseline_p4_s3_m8_2`.
+- **Evidence:** `runs/20261024T-p4-s3` (whole ship, rings view, Brow sector, Crown bay, human scale) with before/after sheets against
+  the S2 grammar look in `runs/20261024T-p4-s3/pairs`.
+- **Not done here:** the ram-face tile-and-repair appearance (OWN-P4-LOCKED (b)) is a shader/texture effect and moves to S9, where the
+  Godot parity check lives.
+- **Maturity:** `L4_VISUAL_CANDIDATE`; the owner reviews M8.2 (request Doc remainder).
 
 ## 5. Risks
 

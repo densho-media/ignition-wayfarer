@@ -1413,37 +1413,44 @@ Both candidates were built in parallel on separate branches that touched only th
 Approved hand-authored meshes can be committed as glTF data under their pack (`data/detail/<pack>/*.glb`) and are then rebuilt from a
 clean checkout; none is committed yet.
 
-## Exterior production layer (M8.1)
+## Exterior production layer (M8.2)
 
-M8.1 applies the accepted M7 production system to the exterior, starting with the Brow's aft face and the Aegis Crown rim
+M8 applies the accepted M7 production system to the exterior, starting with the Brow's aft face and the Aegis Crown rim
 (`[production.m8]`, same pure module and generator as M7, user brief 2026-10-20). Owner evidence and its limits are in source
-`m8_exterior_identity`. Every M8 object is `L4_VISUAL_CANDIDATE` until the owner's art review; nothing is engineering GO, and the shield's
+`m8_exterior_identity`. M8.2 (Phase 4 S3, 2026-10-24) is the owner-requested revision of M8.1 in the selected exterior grammar
+(`[production.exterior]`), keeping its bay/module construction. Every M8 object is `L4_VISUAL_CANDIDATE` until the owner's art review; nothing is engineering GO, and the shield's
 thickness, protection performance and structural mass stay unqualified (S&E 36, Eye 40).
 
 - **Switch:** `[production.m8].enabled` is independent of `[production].enabled`. Off rebuilds the assets with an empty geometry diff
   against the accepted M7 baseline (verified 2026-10-20, `runs/20261020T1300Z-m8-off-quick`: 0 changed, added or removed).
 - **Assemblies:** `M8.BROW.AFT` and `M8.CROWN.RIM`, the detail pack `m8_forward`, linked into `WF_FORWARD_SHIELD` at its origin. Objects `Prod_BROW_AFT_<family>` and
-  `Prod_CROWN_RIM_<family>` (panels, frames, closeouts, caps, boundary, fasteners, markings): one joined mesh per family, 10 objects,
+  `Prod_CROWN_RIM_<family>` (panels, frames, closeouts, caps, boundary, fasteners, markings, lane_lines, trays): one joined mesh per
+  family, 12 objects,
   `kind = production_detail`, `design_class = ARTISTIC` (the layer over the shield), `production_scope = M8`, their own maturity and a
   Godot draw range (`detail_range_m`: 1500 m for panels and frames, 160 m for fasteners and lettering).
 - **Brow aft face:** panel modules on the skin's aft face between the existing joints (`brow_panel_joints`), 30 mm aft of it, inside the
   truss envelope and off the forward chords by member radius plus the shared clearance. Each Crown bay's 30 deg of Brow is one module:
-  a 10 deg service lane on the bay azimuth (cool grey, the crawler side, 50!AG-A02) between two structural columns (off-white cladding),
-  and a graphite protected-equipment band over the hub, EYE mounts and Lance root inside r 11.2 m with an amber boundary line. Ochre
-  inspection caps at the forward-chord nodes, quarter-turn fasteners at the panel corners, stencils `S01..S12` and `Cnn SERVICE LANE`.
+  a 10 deg service lane on the bay azimuth (the crawler side, 50!AG-A02) between two structural columns of light shell cladding, and a
+  graphite protected-equipment band over the hub, EYE mounts and Lance root inside r 11.2 m with a dark closeout groove at its edge.
+  The lane is a mid-value deck with a GU deep-blue boundary line along each edge (functional wayfinding) and an exposed graphite utility
+  tray (0.30 × 0.14 m, power and data to the Crown bay, routing PROTOTYPE) on brackets inside each line, broken at the ring-chord
+  keep-outs. Ochre inspection caps at the forward-chord nodes; quarter-turn fasteners only on the lane deck (the cladding fields stay
+  calm); stencils `S01..S12` (1.06 m, off-white on the graphite band) and `Cnn SERVICE LANE` (0.48 m, off-white on the deck).
   The panels depict the existing aft-face panelization; they add no plate, mass or access commitment.
 - **Crown rim:** a sector module per bay on the housing's aft plate and the rim girder. A graphite doubler frame round the existing ochre
-  carriage-service hatch, three replaceable access panels on each side off the partition ribs, thermal-break closeouts at the plate's
-  joints with the inner wall and the rim girder, and markings: a charcoal boundary half-stripe at each partition (two modules make one
-  stripe, split round the rim beacons), the sector number `Cnn` wrapped on the rim girder and the hatch stencil. Bay 1 was built and
+  carriage-service hatch, three replaceable access panels on each side in light shell value against the graphite housing, off the
+  partition ribs, with fasteners; thermal-break closeouts at the plate's joints with the inner wall and the rim girder; and markings: a
+  charcoal boundary half-stripe (0.24 m) at each partition (two modules make one stripe, split round the rim beacons), the sector number
+  `Cnn` (1.38 m) wrapped on the rim girder and the hatch stencil (off-white, 0.28 m: the service-stencil height capped by the band above
+  the doubler). Bay 1 was built and
   gated first; then all twelve. The shutters, port covers, carriages, emitters, launchers and their travel, the windows and the Crown
   ports are unchanged; repeating the module qualifies no sector mechanism.
 - **Silhouette and clearances:** M8 reaches r 45.0043 m (marking film on the rim girder; the engineering rim is 45.0002 m), so the 90 m
   silhouette is unchanged. Nothing lies on the sunward side of the skin's aft face (closest 30 mm aft). The BVH readback finds no overlap
   with any of the 440 forward engineering meshes (`validation/m8_readback.py`). The EYE wells, ports and shutters, the Dust Lance, the
   disruptor layer and the Crown housing volume are untouched.
-- **Exterior materials:** `[production.m8.materials]`, matte by exposure and job: off-white cladding (0.59 linear), service grey (0.32),
-  graphite protected equipment and doublers (0.08 to 0.12), charcoal stencils, M4 ochre caps, muted amber line, dark gasket closeouts.
+- **Exterior materials:** the shared families `[production.exterior.families]`: shell cladding and access panels, structure lane deck and
+  tray brackets, graphite protected band, doubler and trays, ochre caps, blue lane lines, dark closeouts, charcoal and off-white marks.
   No livery and no registry; GU WAYFARER 001 stays a provisional casing and dock stencil (15!A216, A225), not used here.
 - **Stills:** `presentation/m8_exterior.py` renders each view with the layer off and on under the same camera, one 1 AU-class sun
   from the aft hemisphere (direction a labelled presentation choice) and the COAST editorial +2 EV of 15!A222, plus an x-ray cutaway

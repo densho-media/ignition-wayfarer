@@ -46,13 +46,14 @@ close-up, regression check, MODEL/TODO and Model Status update.
     pays (the export already shares identical meshes; RAD.FRAME's three blades share one mesh).
   **Done when:** the owner has accepted or replaced the candidates.
 
-- [ ] **M8 — Exterior production identity. M8.1 BUILT 2026-10-20, awaiting owner art review.** The accepted M7 standard on the
+- [ ] **M8 — Exterior production identity. M8.2 BUILT 2026-10-24 (Phase 4 S3, the owner's REVISE of M8.1), awaiting owner review.** The accepted M7 standard on the
   exterior as `[production.m8]` (its own switch and maturity). M8.1: the Brow aft face (`M8.BROW.AFT`) and the Aegis Crown rim
   (`M8.CROWN.RIM`, all 12 bays after bay 1 passed its gates), all `L4_VISUAL_CANDIDATE`. Report and evidence:
   [M8_EXTERIOR_2026-10-20](references/M8_EXTERIOR_2026-10-20.md) (off-diff empty, 0 BVH clashes, r 45.0043 m, runtime-export 31/31,
   exterior +0.22 ms within noise; stills `runs/20261020T1445Z-m8-stills`).
-  - **Owner S1 art gate 2026-10-24: M8.1 REVISE** in Phase 4 S3 (M8.2) in the selected grammar, keeping the bay/module construction;
-    the revised result goes to the owner for review. The ring shells are Phase 4 S4.
+  - **M8.2 (S3, PHASE4_PLAN section 4.4):** lane deck with blue boundary lines and graphite trays, calm cladding fields, light Crown
+    panels on the graphite housing, markings sized for their distance; evidence `runs/20261024T-p4-s3`. **Owner review:** accept, correct
+    or reject M8.2. The ram-face tile-and-repair look moves to S9.
   - Physics-locked: radiator hot faces, drive and nozzles (Q40), EYE apertures, the Dust Lance field, docking (Q33), EVA rails (RUN-011),
     livery (GU WAYFARER 001 stays provisional, 15!A216/A225). No access, rescue or pressure-boundary geometry.
   - Left over from M7: disposal of the original 869 MB capture `runs/20261019T1245Z-m7-walkthrough` waits on the owner.

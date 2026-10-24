@@ -1,8 +1,8 @@
 {
   "result": "PASS",
   "blender": "5.2.2 LTS",
-  "spec_hash": "861a969c7da0bf441ad5c4c2fb50a90ec9a959051cf3c2310ceb9a44f8a27360",
-  "source_map_hash": "99cd812784b9ce8dc35eff1ed107627617c8e72fa9de55fedee6268f939f0ee1",
+  "spec_hash": "294876cce243578edbf0d50cbada2b8688f8b90a6ae3760481e7f0eee723d212",
+  "source_map_hash": "11c6a58d4c9bd6f0317b0ddbbbf96859e0bfdc4839ca64a9abfca8015bd3fb32",
   "configurations": {
     "COAST": {
       "realizes": [
@@ -90,7 +90,7 @@
         "min_m": [
           -112.5,
           -45.00429916381836,
-          -45.00425720214844
+          -45.004234313964844
         ],
         "max_m": [
           124.5,
@@ -100,7 +100,7 @@
         "size_m": [
           237.0,
           90.00859832763672,
-          90.0085563659668
+          90.0085334777832
         ]
       },
       "clear_eye_rays": 20,
@@ -125,7 +125,7 @@
         "sector_interior_deck": 6,
         "sector_interior_overhead": 6,
         "sector_interior_zone": 60,
-        "production_detail": 45,
+        "production_detail": 47,
         "cryo_feed_line": 8,
         "service_fitting": 8,
         "dock_capture_ring": 2,
@@ -379,7 +379,7 @@
         "min_m": [
           -112.5,
           -45.00429916381836,
-          -45.00425720214844
+          -45.004234313964844
         ],
         "max_m": [
           124.5,
@@ -389,7 +389,7 @@
         "size_m": [
           237.0,
           90.00859832763672,
-          90.0085563659668
+          90.0085334777832
         ]
       },
       "clear_eye_rays": 20,
@@ -414,7 +414,7 @@
         "sector_interior_deck": 6,
         "sector_interior_overhead": 6,
         "sector_interior_zone": 60,
-        "production_detail": 45,
+        "production_detail": 47,
         "cryo_feed_line": 8,
         "service_fitting": 8,
         "dock_capture_ring": 2,
@@ -668,7 +668,7 @@
         "min_m": [
           -112.5,
           -45.00429916381836,
-          -45.00425720214844
+          -45.004234313964844
         ],
         "max_m": [
           124.5,
@@ -678,7 +678,7 @@
         "size_m": [
           237.0,
           90.00859832763672,
-          90.0085563659668
+          90.0085334777832
         ]
       },
       "clear_eye_rays": 20,
@@ -703,7 +703,7 @@
         "sector_interior_deck": 6,
         "sector_interior_overhead": 6,
         "sector_interior_zone": 60,
-        "production_detail": 45,
+        "production_detail": 47,
         "cryo_feed_line": 8,
         "service_fitting": 8,
         "dock_capture_ring": 2,
@@ -954,7 +954,7 @@
         "min_m": [
           -112.5,
           -45.00429916381836,
-          -45.00425720214844
+          -45.004234313964844
         ],
         "max_m": [
           124.5,
@@ -964,7 +964,7 @@
         "size_m": [
           237.0,
           90.00859832763672,
-          90.0085563659668
+          90.0085334777832
         ]
       },
       "clear_eye_rays": 20,
@@ -989,7 +989,7 @@
         "sector_interior_deck": 6,
         "sector_interior_overhead": 6,
         "sector_interior_zone": 60,
-        "production_detail": 45,
+        "production_detail": 47,
         "cryo_feed_line": 8,
         "service_fitting": 8,
         "dock_capture_ring": 2,
@@ -1240,7 +1240,7 @@
         "min_m": [
           -112.5,
           -45.00429916381836,
-          -45.00425720214844
+          -45.004234313964844
         ],
         "max_m": [
           124.5,
@@ -1250,7 +1250,7 @@
         "size_m": [
           237.0,
           90.00859832763672,
-          90.0085563659668
+          90.0085334777832
         ]
       },
       "clear_eye_rays": 20,
@@ -1275,7 +1275,7 @@
         "sector_interior_deck": 6,
         "sector_interior_overhead": 6,
         "sector_interior_zone": 60,
-        "production_detail": 45,
+        "production_detail": 47,
         "cryo_feed_line": 8,
         "service_fitting": 8,
         "dock_capture_ring": 2,
@@ -1526,7 +1526,7 @@
         "min_m": [
           -112.5,
           -45.00429916381836,
-          -45.00425720214844
+          -45.004234313964844
         ],
         "max_m": [
           124.5,
@@ -1536,7 +1536,7 @@
         "size_m": [
           237.0,
           90.00859832763672,
-          90.0085563659668
+          90.0085334777832
         ]
       },
       "clear_eye_rays": 20,
@@ -1561,7 +1561,7 @@
         "sector_interior_deck": 6,
         "sector_interior_overhead": 6,
         "sector_interior_zone": 60,
-        "production_detail": 45,
+        "production_detail": 47,
         "cryo_feed_line": 8,
         "service_fitting": 8,
         "dock_capture_ring": 2,
@@ -1841,7 +1841,7 @@
     },
     "WF_DETAIL_M8_BROW_AFT.blend": {
       "assembly": "M8.BROW.AFT",
-      "objects": 5,
+      "objects": 7,
       "authored": 0,
       "enabled": true
     },
@@ -3716,13 +3716,15 @@
       "direct_links": []
     },
     "detail/WF_DETAIL_M8_BROW_AFT.blend": {
-      "generated_objects": 5,
+      "generated_objects": 7,
       "ids": [
         "M8.BROW.AFT.BOUNDARY",
         "M8.BROW.AFT.CAPS",
         "M8.BROW.AFT.FASTENERS",
+        "M8.BROW.AFT.LANE_LINES",
         "M8.BROW.AFT.MARKINGS",
-        "M8.BROW.AFT.PANELS"
+        "M8.BROW.AFT.PANELS",
+        "M8.BROW.AFT.TRAYS"
       ],
       "direct_links": []
     },

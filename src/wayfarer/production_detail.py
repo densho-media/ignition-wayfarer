@@ -82,13 +82,11 @@ def enabled(s, assembly=None):
 
 
 def material_value(s, key):
-    """[r, g, b, roughness, metallic] of a production material: [production.materials] (M7 interior standard), [production.m8.materials],
-    the Phase 4 exterior families [production.exterior.families] (xf_*) or a pack's own [materials]."""
+    """[r, g, b, roughness, metallic] of a production material: [production.materials] (M7 interior standard), the Phase 4 exterior
+    families [production.exterior.families] (xf_*) or a pack's own [materials]."""
     p = s['production']
     if key in p['materials']:
         return p['materials'][key]
-    if key in p['m8']['materials']:
-        return p['m8']['materials'][key]
     if key in p['exterior']['families']:
         return p['exterior']['families'][key]
     # A pack's own finishes ([materials] in its manifest); the key must be unique across the shared tables and the packs.

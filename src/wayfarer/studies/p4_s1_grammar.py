@@ -123,7 +123,10 @@ def m8_crown(s, **crown):
 
 
 M8_FAMILY = {'ext_cladding': 'shell', 'ext_service': 'structure', 'ext_protected': 'machinery', 'ext_doubler': 'machinery', 'ext_fastener': 'structure',
-             'ext_cap': 'service', 'ext_amber': 'amber', 'ext_stencil': 'mark', 'ext_stencil_light': 'mark_light', 'ext_gasket': 'joint'}
+             'ext_cap': 'service', 'ext_amber': 'amber', 'ext_stencil': 'mark', 'ext_stencil_light': 'mark_light', 'ext_gasket': 'joint',
+             # M8.2 (S3) emits the shared exterior families; the study reproduces S1 exactly only at 88ab15a (M8.1)
+             'xf_shell': 'shell', 'xf_structure': 'structure', 'xf_machinery': 'machinery', 'xf_fastener': 'structure', 'xf_service': 'service',
+             'xf_amber': 'amber', 'xf_mark': 'mark', 'xf_mark_light': 'mark_light', 'xf_joint': 'joint', 'xf_wayfinding': 'blue'}
 
 
 def from_m8(q, fam=None, **meta):

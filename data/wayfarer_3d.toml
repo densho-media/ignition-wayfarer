@@ -3750,20 +3750,8 @@ crown_sectors = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
 detail_range_m = 1500.0
 fine_range_m = 160.0
 
-# Exterior materials, [r, g, b, roughness, metallic] (Blender linear): exposure, temperature and job, not interior wall panels outside. Off-white
-# structural cladding (the high-albedo shade side of the Brow), cool service grey, graphite for protected equipment and doublers, charcoal
-# stencils, ochre caps as the M4 maintenance covers, a muted amber boundary line; matte throughout (no specular glints near the EYE's field).
-[production.m8.materials]
-ext_cladding = [0.60, 0.59, 0.55, 0.62, 0.0]
-ext_service = [0.30, 0.32, 0.34, 0.58, 0.0]
-ext_protected = [0.075, 0.08, 0.085, 0.55, 0.15]
-ext_doubler = [0.11, 0.12, 0.13, 0.50, 0.30]
-ext_fastener = [0.30, 0.31, 0.33, 0.45, 0.60]
-ext_cap = [0.78, 0.60, 0.24, 0.58, 0.0]
-ext_amber = [0.80, 0.42, 0.08, 0.60, 0.0]
-ext_stencil = [0.035, 0.037, 0.04, 0.70, 0.0]
-ext_stencil_light = [0.80, 0.80, 0.77, 0.65, 0.0]
-ext_gasket = [0.04, 0.04, 0.045, 0.85, 0.0]
+# M8.2 (Phase 4 S3): the former [production.m8.materials] (ext_*) are replaced by the shared exterior families
+# [production.exterior.families] (xf_*); M8.1's values stay in Git history (88ab15a).
 
 # Phase 4 S2: the selected exterior grammar, VC+ Expressive Hybrid with moderated values (owner S1 art gate 2026-10-24; Art Style Bible
 # Spacecraft row 19; S&E 15 OWN-P4-LOCKED: depiction only, material appearance qualifies nothing). Civic Monumentalism + Open Machine +
