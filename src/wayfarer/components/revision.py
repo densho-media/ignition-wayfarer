@@ -54,6 +54,9 @@ def radiator(c,s):
     length=d['blade_length_m'];width=d['ribbon_width_m'];n=d['ribbons']
     nx=p['radiator_longitudinal_cells'];ny=p['radiator_transverse_cells']//n
     metal=material('Structure',(.30,.40,.48));lock=material('Locks',(.69,.45,.16))
+    # Phase 4 S5: the transverse frames and edge chords carry their own display material (same review colour), so the exterior grammar
+    # can give the blade's frame rhythm a light value over the dark sheet ([production.exterior] ship_families); no geometry change.
+    frame=material('BladeFrame',(.30,.40,.48))
     half=g['truss_depth_m']/2
     band=root_band(s);blade=blade_of(s);joints=bay_joints(s,blade)
     seam=material('ExpansionJoint',(.93,.93,.80));bellows=material('TrunkBellows',(.55,.95,.15))
@@ -76,14 +79,14 @@ def radiator(c,s):
         for j in range(g['major_bays']+1):
             x=-length/2+length*j/g['major_bays']
             for z in [-half,half]:
-                line(c,f'Blade_Frame_{ribbon}_{j}_{z}',[(x,v0,z),(x,v1,z)],FRAME_R,metal)
+                line(c,f'Blade_Frame_{ribbon}_{j}_{z}',[(x,v0,z),(x,v1,z)],FRAME_R,frame)
             for edge,v in enumerate([v0,v1]):
                 line(c,f'Blade_Depth_{ribbon}_{j}_{edge}',[(x,v,-half),(x,v,half)],FRAME_R,metal)
             if j==g['major_bays']:continue
             x2=-length/2+length*(j+1)/g['major_bays']
             for edge,v in enumerate([v0,v1]):
                 for z in [-half,half]:
-                    line(c,f'Blade_Chord_{ribbon}_{j}_{edge}_{z}',[(x,v,z),(x2,v,z)],CHORD_R,metal)
+                    line(c,f'Blade_Chord_{ribbon}_{j}_{edge}_{z}',[(x,v,z),(x2,v,z)],CHORD_R,frame)
                 line(c,f'Blade_Diagonal_{ribbon}_{j}_{edge}',[(x,v,-half),(x2,v,half)],DIAG_R,metal)
             line(c,f'Blade_PlaneBrace_{ribbon}_{j}',[(x,v0,-half),(x2,v1,-half)],.075,metal)
         line(c,f'Forward_Leading_Spar_{ribbon}',[(length/2,v0,0),(length/2,v1,0)],p['radiator_leading_spar_radius_m'],lock,kind='leading_edge_proxy')

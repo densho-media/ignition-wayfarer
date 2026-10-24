@@ -1,4 +1,7 @@
 # Detail pack rad_frame (docs/MODULES.md): production fittings on the radiator blade's truss frames and aft edge, module WF-THERMAL.
+# Revised in Phase 4 S5 (owner S1 art gate 2026-10-24: REVISE): the ship-scale frame rhythm is carried by value (the blade frames, edge
+# chords and joint beads take the light xf_frame family over the dark thermal sheet, [production.exterior]); the fittings stay the
+# close-up tier in the shared families. Still L4_VISUAL_CANDIDATE until the owner reviews it.
 # Owned by a WF-THERMAL detail session: this manifest, src/wayfarer/detail/pack_rad_frame.py and the generated
 # assets/wayfarer/detail/WF_DETAIL_RAD_FRAME.blend, linked once into WF_RADIATOR (the blade component) and so carried by all three blades.
 # Modular pilot 2a (2026-10-22). Every value is a PROTOTYPE depiction choice: band clamps on the transverse frames, gusset plates at the
@@ -41,9 +44,5 @@ edge_gap_m = 0.02
 edge_z_m = 0.10
 edge_inset_m = 0.30
 bevel_m = 0.008
-
-[materials]
-# [r, g, b, roughness, metallic] (Blender linear): structural greys a step apart (M7.1 value hierarchy, Art Style Bible structure).
-rad_clamp = [0.20, 0.21, 0.23, 0.55, 0.55]
-rad_gusset = [0.13, 0.14, 0.16, 0.50, 0.40]
-rad_edge = [0.26, 0.27, 0.29, 0.60, 0.30]
+# Materials: the shared exterior families [production.exterior.families] (Phase 4 S5): clamps graphite machinery, gussets and edge
+# guard mid-value structure.

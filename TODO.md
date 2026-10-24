@@ -39,9 +39,9 @@ close-up, regression check, MODEL/TODO and Model Status update.
   `ring_a_transfer`, `m8_forward` migrated with geometry, motion, runtime and pixel equivalence), packs carry their own contracts, and
   approved authored meshes travel as committed glTF data; each ring is its own engineering asset (phase 3, `WF_HABITAT_A`/`_B`).
   `assembly validate` passes for all six packs.
-  - **Candidates (owner S1 art gate 2026-10-24):** `rad_frame` REVISE in Phase 4 S5 (structural rhythm, load paths, root interfaces
-    and band placement before enlarging fittings); `ra2_equip` RETAINED as designed, owner acceptance pending (before/after close-ups
-    delivered 2026-10-24); both stay `L4_VISUAL_CANDIDATE` until accepted. M8.1 is under its own entry below.
+  - **Candidates (owner S1 art gate 2026-10-24):** `rad_frame` revised in Phase 4 S5 (frame rhythm by value: `BladeFrame` → `xf_frame`;
+    PHASE4_PLAN section 4.6), awaiting owner review; `ra2_equip` RETAINED as designed, owner acceptance pending (before/after close-ups
+    delivered 2026-10-24); both stay `L4_VISUAL_CANDIDATE` until accepted. M8 is under its own entry below.
   - Deferred: a linked part library for repeated fittings, until a detail pack repeats one detailed form often enough that measured sharing
     pays (the export already shares identical meshes; RAD.FRAME's three blades share one mesh).
   **Done when:** the owner has accepted or replaced the candidates.

@@ -1405,7 +1405,10 @@ record (`references/modules/<pack>.json`); docs/MODULES.md. Every production ass
 - `rad_frame` (RAD.FRAME, WF-THERMAL, L4_VISUAL_CANDIDATE): band clamps on the blade's 11 transverse frames (both truss faces, five
   across), gusset plates at the truss nodes on both edges and an aft edge guard, 155 elements in one detail asset linked once into the
   blade component, so all three blades share it. Every footprint lies inside a 0.125 m non-emitting bay joint or beyond the blade's ends:
-  the cells, their planform (radiator area) and the health overlays are unchanged. Subtle at ship scale; it reads in the blade close-ups.
+  the cells, their planform (radiator area) and the health overlays are unchanged. Revised in Phase 4 S5 (owner: REVISE): the fittings
+  stay the close-up tier in the shared families (clamps graphite, gussets and edge guard structure); the ship-scale frame rhythm is
+  carried by value: the blade frames and edge chords have their own display material `BladeFrame` (same review colour as `Structure`)
+  and, with the joint beads (`ExpansionJoint`), take the light `xf_frame` family over the dark COAST sheet in the grammar look.
 - `ra2_equip` (RA2.EQP, WF-RING-A, L4_VISUAL_CANDIDATE): a transverse cable tray down the centre of each of the four fit-out frame bays of
   ring A sector 2 (WORK_MEDICAL_OPS), broken round every item within 2 cm of the overhead, the hatch opening and the landing well, with
   a junction box at each run's ends (45 elements), all in the overhead band (-2.90 to -2.85 m), on sector instance (1, 2) only.

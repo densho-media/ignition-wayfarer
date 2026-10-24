@@ -40,17 +40,17 @@ def frame_elements(s):
                 for k in range(1, q['clamps_per_frame']+1):
                     v = v0+b['w']*k/(q['clamps_per_frame']+1)
                     vs, fs = pd.box((uc, v, z), (X, Y, Z), (q['clamp_u_m'], q['clamp_v_m'], q['clamp_z_m']))
-                    out.append(pd.element(ASM, 'Clamps', f'RAD_R{r}_S{j:02}_{side}_C{k}', 'rad_clamp', 'ENGINEERING_FLEXIBLE',
+                    out.append(pd.element(ASM, 'Clamps', f'RAD_R{r}_S{j:02}_{side}_C{k}', 'xf_machinery', 'ENGINEERING_FLEXIBLE',
                                           'band clamp on the transverse frame tube', vs, fs, bevel=bev))
                 ug = outward(u, q['gusset_u_m'], b)
                 for edge, v in (('R', v0+q['gusset_v_m']/2), ('O', v1-q['gusset_v_m']/2)):
                     zc = z-q['gusset_z_m']/2 if z > 0 else z+q['gusset_z_m']/2
                     vs, fs = pd.box((ug, v, zc), (X, Y, Z), (q['gusset_u_m'], q['gusset_v_m'], q['gusset_z_m']))
-                    out.append(pd.element(ASM, 'Gussets', f'RAD_R{r}_S{j:02}_{side}_{edge}', 'rad_gusset', 'ENGINEERING_FLEXIBLE',
+                    out.append(pd.element(ASM, 'Gussets', f'RAD_R{r}_S{j:02}_{side}_{edge}', 'xf_structure', 'ENGINEERING_FLEXIBLE',
                                           'gusset plate at the truss node (frame, edge chord and depth post)', vs, fs, bevel=bev))
         u_edge = -b['L']/2-q['edge_gap_m']-q['edge_u_m']/2
         vs, fs = pd.box((u_edge, (v0+v1)/2, 0.0), (X, Y, Z), (q['edge_u_m'], b['w']-2*q['edge_inset_m'], q['edge_z_m']))
-        out.append(pd.element(ASM, 'EdgeGuard', f'RAD_R{r}_Aft_Edge', 'rad_edge', 'ENGINEERING_FLEXIBLE', 'aft edge guard strip', vs, fs, bevel=bev))
+        out.append(pd.element(ASM, 'EdgeGuard', f'RAD_R{r}_Aft_Edge', 'xf_structure', 'ENGINEERING_FLEXIBLE', 'aft edge guard strip', vs, fs, bevel=bev))
     return out
 
 

@@ -215,7 +215,7 @@ the generators and this plan. One build lock: sessions queue for builds.
 - **Parallel:** ring A and ring B in separate sessions after segment 1 passes.
 - **Done when:** both rings read as distinct assembled structures in the side, three-quarter and rings views; motion checks pass.
 
-#### S5 — Radiator roots and blade frames · Medium · class 2 + 4 · WF-THERMAL
+#### S5 — Radiator roots and blade frames · Medium · class 2 + 4 · WF-THERMAL · BUILT, owner review (section 4.6)
 - **Direction:** framed thermal machines: root saddles, boots and manifolds (HERO: one root); frame rhythm readable from whole-ship
   distance; the dark high-ε COAST depiction (OWN-P4-LOCKED (a)).
 - **Boundaries:** footprints only in non-emitting joints or beyond the blade ends (net area unchanged); root expansion travel clear;
@@ -442,6 +442,29 @@ VC+ ladder); (3) GU deep blue as a standard wayfinding accent or not; (4) the th
   assembled modules; in the rings view the joint rhythm and IDs read on the flank; in the side silhouette the rings stay edge-on (owner:
   accepted geometric reality), separated from the dark blades by value.
 - **Maturity:** `L4_VISUAL_CANDIDATE` (both packs). The hub read from outside (HERO tier) is not detailed in this pass.
+
+### 4.6 S5 — radiator frames and roots (2026-10-24)
+
+- **Tried first and withdrawn:** mid-value seam bands over the 0.125 m bay joints. They duplicated the generated joint bead
+  (`Blade_Expansion_Joint`) and added nothing at 35 m or ship scale (`runs/20261024T-p4-s5-pipeline`, superseded).
+- **Implemented:** the larger structural rhythm by value, not by size. The radiator generator gives the transverse frames and edge chords
+  their own display material `BladeFrame` (same review colour as `Structure`; no geometry change); the grammar maps `BladeFrame` and the
+  joint beads to the new light family `xf_frame` (0.58) over the dark thermal sheet (0.028), so every frame station reads as a line
+  across the blade and the chords outline it. `rad_frame` keeps its clamps, gussets and aft edge guard as the close-up tier, now in the
+  shared families (clamps graphite, the rest structure).
+- **Root interfaces:** the M4 root construction (boots, flanges, chase plate, saddles, stops) already shows the load path and the
+  thermal break; in the grammar the boots read off-white (`xf_root`) against the structure-value booms and the light casing. No new
+  `rad_root` pack: nothing purposeful to add without implying an unqualified mechanism (H120). Revisit with the owner if wanted.
+- **Preserved:** geometry diff empty (`runs/20261024T-p4-s5b-pipeline`, full PASS with the thermal inspection: net hot area
+  4,978.17 m² per face per blade, unchanged); cells, emissivity assumption, expansion joints and travel untouched; IGNITION 1800 K
+  emission unchanged (matched pair).
+- **Evidence:** `runs/20261024T-p4-s5` (whole ship, rings view, blade clamp, aft edge, 35 m, root; COAST/IGNITION pair), sheets against S4
+  (`pairs_vs_s4`) and S2 (`pairs_vs_s2`). The frame lines read clearly at 35 m and as a fine rhythm at ship scale; the 0.2 m tubes stay
+  thin at whole-ship distance.
+- **Escalation (art/engineering trade, owner's call):** a stronger ship-scale frame read would need geometry in front of the radiating
+  sheet (for example off-white thermal wraps on the transverse frames). That changes the blade's physical view factor, so it is not done
+  without the owner and the thermal owner.
+- **Maturity:** `rad_frame` stays `L4_VISUAL_CANDIDATE`; the revision goes to the owner for review.
 
 ## 5. Risks
 
