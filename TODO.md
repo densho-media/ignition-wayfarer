@@ -28,6 +28,13 @@ Development effort moves from new Godot features to the ship itself; keep the de
 unresolved science blocks only irreversible steps. Each slice: validate the changed assembly and interfaces, whole-ship view plus a
 close-up, regression check, MODEL/TODO and Model Status update.
 
+- [ ] **P4 — Phase 4 visual production and art direction ([docs/PHASE4_PLAN.md](docs/PHASE4_PLAN.md)). STAGE A done 2026-10-24;
+  waits on the owner.** The plan covers the baseline, the Visual Design Freedom Map, slices S0–S11, the first experiment (Crown bay and
+  Brow aft sector plus a ring A segment probe) and the decision register. The owner packet is posted as request Doc
+  `2026-10-24T10:55+02:00 — P4` (P4-EXP, -ART and -CAND block now; -MAT, -LOCKED, -SCOPE, -STATE and -INT block later). The plan
+  absorbs MOD's candidate review, M8.2, S03, S04's remaining exterior, K04's exterior art and S05's cultural pass as Phase 4 slices.
+  Stage B needs a Blender-equipped session. **Done when:** the owner has answered, Stage B is authorized and the plan is revised; the
+  slices then track their own state in the plan.
 - [ ] **MOD — Modular detail (docs/MODULES.md).** Every production assembly is a detail pack (phase 2, 2026-10-23: `m7_spine`,
   `ring_a_transfer`, `m8_forward` migrated with geometry, motion, runtime and pixel equivalence), packs carry their own contracts, and
   approved authored meshes travel as committed glTF data; each ring is its own engineering asset (phase 3, `WF_HABITAT_A`/`_B`).
@@ -509,7 +516,11 @@ Canonical route: IGNITION TOC → owner workbook → S&E `15_MODEL_INTERFACES`. 
 Implementation/Readback are correspondence. Owner question IDs use ISO local timestamps; legacy Q39 stays as named. S&E A86's Q37
 is the entrance workflow, not the retired local radiator-planform question.
 
-Known queue items (2026-10-19): none. Q39 closed 2026-10-19 (12A!H5/H22 and 40!A18 repaired and read back on the owner's approval,
+Known queue items (2026-10-24):
+- `2026-10-21T08:55+02:00`, livery consistency: applied in a5ceda2; the rendered readback is pending (Phase 4 S0).
+- `2026-10-24T10:55+02:00 — P4`: the Phase 4 decision packet.
+
+Before that (2026-10-19), none. Q39 closed 2026-10-19 (12A!H5/H22 and 40!A18 repaired and read back on the owner's approval,
 15!A223; references/Q39_PROVENANCE.md); 14:31 (D02) and 14:32 (C01) consumed and deleted (references/OWNER_RESOLUTION_2026-10-19.md).
 The H02 crawler count is decided locally (same-track second crawler, payload-gated; 15!C191).
 HR-001 is a new canonical study handoff, not an assumed numeric release. Maintain POST → RESOLVE → CANONICALIZE → CONSUME/APPLY →
