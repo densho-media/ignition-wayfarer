@@ -263,7 +263,7 @@ def outer_points(outer, dom, bones):
 
 
 # ---------------------------------------------------------------------------------------------------------------------- build
-def dress(rig, body, data, variant, key):
+def dress(rig, body, data, variant, key, plss='baseline'):
     S = Part(bpy.data.collections['WAYFARER_EVA_Y155'], data, rig); M = materials(data['palette'], variant); L = data['layers']; R = data['rigid']
     rig.data.pose_position = 'REST'; bpy.context.view_layer.update(); dom = dominant(body)
     reg_o, reg_s, unc = L['region_offset_m'], L['region_smooth'], L['uncovered_groups']
@@ -338,13 +338,17 @@ def dress(rig, body, data, variant, key):
     S.put(torus(f'EVA_{key}_Helmet_Band', hc+up*(hR*.25), up, hR*math.cos(math.asin(.25))+.004, .010, M['band'], n=48, m=6),
           'MARKINGS', 'SAFETY_MARKINGS', 'helmet identification band: ' + variant['markings'], bone='spine_03')
     # ---- PLSS on the back (+Y) of the hard torso
-    w, dpt, h = R['plss_size_m']; back = max(p.y for p in torso)+R['hut_margin_m']+R['hut_shell_m']
+    w, dpt, h = R['plss_compact_size_m' if plss == 'compact' else 'plss_size_m']; back = max(p.y for p in torso)+R['hut_margin_m']+R['hut_shell_m']
     pc = Vector((0, back+dpt/2+.01, (z0+z1)/2+.02))
     # Two stacked replaceable modules (upper: oxygen storage and regulation; lower: CO2 removal, fan / pump / separator, battery, radio) with
     # the old pack's outer form (same width, depth and bevel), so the convex hulls the access study measures are unchanged (RUN-010); a
     # recessed interface band between them, keyed latches, side rescue handles (the pack handle a rescuer holds, eva_rescue_hold) placed
     # inside the shoulder-to-pack hull, a heat-rejection vent and the access covers within the old covers' 8 mm.
     A3 = ((1, 0, 0), (0, 1, 0), (0, 0, 1)); split = .012
+    mb = back-.05; mf = pc.y-dpt/2+.004                                      # mount: from inside the HUT's back curve to the pack's front face
+    S.put(box(f'EVA_{key}_PLSS_Mount', Vector((0, (mb+mf)/2, pc.z+h*.04)), A3, (w*.40, (mf-mb)/2, h*.44), M['grey'], bevel=.01), 'PLSS', 'PLSS_PRIMARY',
+          'PLSS mounting interface on the hard upper torso: structural attachment, gas, water and power pass-throughs (ASSET-09); quick-release OPEN',
+          bone='spine_03')
     hu = (h-split)*.52; hl = h-split-hu; zb = pc.z-h/2; zl = zb+hl/2; zu = zb+hl+split+hu/2
     S.put(box(f'EVA_{key}_PLSS', Vector((0, pc.y, zu)), A3, (w/2, dpt/2, hu/2), M['shell'], bevel=.025), 'PLSS', 'PLSS_PRIMARY',
           'upper PLSS module: primary oxygen storage and regulation; packaging and mass OPEN (ASSET-09, EVA-024, EVA-028)', bone='spine_03')
@@ -408,8 +412,8 @@ def dress(rig, body, data, variant, key):
     S.put(box(f'EVA_{key}_Wrist_Display', wd+Vector((0, -1, 0))*(armr+.012), (lb-la, Vector((0, -1, 0)), (lb-la).cross(Vector((0, -1, 0)))), (.045, .012, .030), M['display']),
           'PLSS', 'PLSS_PRIMARY', 'forearm status display and checklist (EVA-018)', bone='lowerarm_l')
     # ---- bearings and convolutes (ASSET-05): ring radius = the outer layer's local radius plus clearance
-    def bearing(nm, bone_axis, t, parent, minor=None, mat_=None, part='SUIT_JOINTS', job='rotary bearing: low-torque pressure-compatible rotation (53!14)'):
-        a, b = W(bone_axis); src = pts({bone_axis}); c, rr = section(src, a, b, max(0, t-.05), min(1, t+.05)); rr = rr or .06
+    def bearing(nm, bone_axis, t, parent, minor=None, mat_=None, part='SUIT_JOINTS', job='rotary bearing: low-torque pressure-compatible rotation (53!14)', q=.80):
+        a, b = W(bone_axis); src = pts({bone_axis}); c, rr = section(src, a, b, max(0, t-.05), min(1, t+.05), q); rr = rr or .06
         mn = minor or R['bearing_minor_m']; ax = (b-a).normalized()
         if 'Convolute' in nm:                       # bellows: three restraint ribs a rib-pitch apart
             for k, off in enumerate((-1.6, 0.0, 1.6)):
@@ -422,6 +426,9 @@ def dress(rig, body, data, variant, key):
         # a rotary bearing: a flat machined band with a race at each edge, inside the old ring's envelope (axial +-mn, radial rr + .8 mn);
         # the access-study hull classes were re-measured unchanged (docs/ACCESSORIES.md)
         S.put(torus(f'EVA_{key}_{nm}', c, b-a, rr+R['bearing_clearance_m'], mn, mat_ or M['joint'], m=12, section=(.55, 1.0)), 'JOINTS', part, job, bone=parent)
+        # the soft goods close onto the ring: a short sleeve inside the band hides the gap a round ring leaves around an oval limb section
+        S.put(tube(f'EVA_{key}_{nm}_Sleeve', c-ax*mn*.95, c+ax*mn*.95, rr+R['bearing_clearance_m']-mn*.15, mat_ or M['joint'], n=32), 'JOINTS', part,
+              'restraint attachment: the soft goods clamp onto the bearing ring', bone=parent)
         for k, sg in enumerate((-1, 1)):
             S.put(torus(f'EVA_{key}_{nm}_Race{k}', c+ax*sg*mn*.72, b-a, rr+R['bearing_clearance_m']+mn*.2, mn*.28, M['metal'], m=6),
                   'JOINTS', part, 'bearing race / disconnect ring', bone=parent)
@@ -432,7 +439,8 @@ def dress(rig, body, data, variant, key):
         bearing(f'Elbow_Convolute_{s}_dn', f'lowerarm_{s}', .12, f'lowerarm_{s}', .009, job='elbow convolute: restraint-held flexible pressure section (ASSET-05)')
         bearing(f'Elbow_Convolute_{s}_up', f'upperarm_{s}', .88, f'upperarm_{s}', .009, job='elbow convolute (ASSET-05)')
         bearing(f'Wrist_Bearing_{s}', f'lowerarm_{s}', .96, f'lowerarm_{s}', .016, M['metal'], 'SUIT_GLOVES', 'glove wrist disconnect and bearing: sealed cuff (ASSET-07)')
-        bearing(f'Hip_Bearing_{s}', f'thigh_{s}', .10, 'pelvis', .020, job='hip bearing (53!14)')
+        # hip bearing below the crotch line, on the thigh: at the thigh root the section takes in the buttock and the ring stood off as a hoop
+        bearing(f'Hip_Bearing_{s}', f'thigh_{s}', .20, f'thigh_{s}', .018, job='hip bearing (53!14)', q=.70)
         bearing(f'Thigh_Bearing_{s}', f'thigh_{s}', .55, f'thigh_{s}')
         bearing(f'Knee_Convolute_{s}_dn', f'calf_{s}', .10, f'calf_{s}', .010, job='knee convolute (ASSET-05)')
         bearing(f'Knee_Convolute_{s}_up', f'thigh_{s}', .90, f'thigh_{s}', .010, job='knee convolute (ASSET-05)')
@@ -440,7 +448,7 @@ def dress(rig, body, data, variant, key):
         # gauntlet cuff
         a, b = W(f'lowerarm_{s}'); hr_ = radius_about(pts({f'lowerarm_{s}'}), a, b, .85, 1.0) or .05; d = (b-a).normalized()
         S.put(tube(f'EVA_{key}_Gauntlet_{s}', b-d*.02, b+d*.05, hr_+.020, M['grey'], r_b=hr_+.028), 'JOINTS', 'SUIT_GLOVES',
-              'glove gauntlet: thermal/MMOD cuff over the wrist disconnect (ASSET-07)', bone=f'hand_{s}')
+              'glove gauntlet: thermal/MMOD cuff over the wrist disconnect, carried by the forearm so wrist flexion clears it (ASSET-07)', bone=f'lowerarm_{s}')
         # boots: heel/arch sole on the foot, toe sole and toe hook on the ball (foot-restraint compatible)
         fa, fb = W(f'foot_{s}'); ba, bb = W(f'ball_{s}'); sw, sl, st = R['boot_sole_m']
         fd = Vector((fb.x-fa.x, fb.y-fa.y, 0)).normalized(); side = fd.cross(Vector((0, 0, 1)))
@@ -488,7 +496,7 @@ def dress(rig, body, data, variant, key):
         S.put(e, 'RIG', 'SOCKETS', job, bone=bn)
     rig.data.pose_position = 'POSE'
     return S, dict(hut_rings=[[round(x, 4) for x in r_] for r_ in rings], helmet_centre=[round(x, 4) for x in hc], helmet_radius_m=round(hR, 4),
-                   plss_centre=[round(x, 4) for x in pc], plss_size_m=R['plss_size_m'])
+                   plss_centre=[round(x, 4) for x in pc], plss_size_m=[w, dpt, h], plss=plss)
 
 
 def runtime_head(body, unc, key, S):
@@ -516,11 +524,15 @@ def main():
     argv = sys.argv[sys.argv.index('--')+1:] if '--' in sys.argv else []
     ap = argparse.ArgumentParser(); ap.add_argument('--only', nargs='*'); ap.add_argument('--root', type=Path, default=ROOT)
     ap.add_argument('--report', type=Path); ap.add_argument('--no-save', action='store_true')
+    ap.add_argument('--plss', choices=('baseline', 'compact'), default='baseline')     # compact: the ASSET-10 study, saved beside, never over, the baseline
+    ap.add_argument('--out-dir', type=Path)
     args = ap.parse_args(argv); root = args.root
     data = es.load(root); hsd = hs.load(root); _, _, spec_text, source_text = load(root); fps = hsd['human_system']['fps']
     report = dict(suit=data['suit']['id'], status=data['suit']['status'], certification=data['suit']['certification'], variants={})
     for key in args.only or list(data['variant']):
         v = data['variant'][key]; who = v['wearer']; ident = f'WF_EVA_{who.upper()}'; path = root/'assets/characters'/f'{ident}.blend'
+        if args.plss == 'compact':
+            path = (args.out_dir or root/'assets/characters/studies')/f'{ident}.blend'
         src = root/'assets/characters'/f'WF_CHAR_HUMAN_{who.upper()}.blend'
         assert src.exists(), f'{src.name} missing: run `python3 tools/workflow.py characters` first'
         begin(path, ident); bpy.context.scene.render.fps = fps
@@ -542,7 +554,7 @@ def main():
         for o in dst.objects:
             bpy.context.scene.collection.objects.link(o)
         body = next(o for o in rig.children if o.name.endswith('_Body'))
-        S, info = dress(rig, body, data, v, who.upper())
+        S, info = dress(rig, body, data, v, who.upper(), args.plss); rig['eva_plss'] = 'PLSS_COMPACT_STUDY (ASSET-10)' if args.plss == 'compact' else 'PLSS_PRIMARY'
         S.put(rig, 'RIG', 'SOCKETS', 'the wearer\'s unchanged MPFB game_engine rig (RIG-02): 53 bones')
         rig['eva_helmet'] = json.dumps(dict(centre=info['helmet_centre'], radius=info['helmet_radius_m'], bone='spine_03'))
         for o in rig.children:

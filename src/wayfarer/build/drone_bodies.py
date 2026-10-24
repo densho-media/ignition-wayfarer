@@ -174,7 +174,8 @@ def export_glb(path, gen):
     for o in gen.all_objects:
         o.select_set(True)
     bpy.ops.export_scene.gltf(filepath=str(path), export_format='GLB', use_selection=True, export_animations=True,
-                              export_animation_mode='NLA_TRACKS', export_optimize_animation_size=False, export_extras=True, export_apply=False, export_yup=True)
+                              export_animation_mode='NLA_TRACKS', export_optimize_animation_size=False,
+                              export_optimize_animation_keep_anim_object=True, export_extras=True, export_apply=False, export_yup=True)
 
 
 def main():
@@ -209,7 +210,7 @@ def main():
         glb = None
         if out and not args.no_glb:
             glb = out/'glb'/f'{ident}.glb'; export_glb(glb, gen)
-        index[cid] = dict(asset=str(path.relative_to(ROOT)), glb=str(glb.relative_to(ROOT)) if glb else None, objects=len(made), nla_actions=sorted(acts),
+        index[cid] = dict(asset=str(path.relative_to(ROOT)), glb=(str(glb.relative_to(ROOT)) if glb.is_relative_to(ROOT) else str(glb)) if glb else None, objects=len(made), nla_actions=sorted(acts),
                           faces=sum(len(o.data.polygons) for o in made if not o['review_fixture']), **rows[cid])
         print(f'WF_DRONE {cid} objects={len(made)} actions={len(acts)}', flush=True)
     if out:

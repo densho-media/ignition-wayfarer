@@ -21,9 +21,7 @@ sys.path[:0] = [str(ROOT/'src/wayfarer'), str(ROOT/'src/wayfarer/build')]
 import drone_bodies as db
 from drone_bodies_render import apply_pose, camera, label, note, render_setup, shoot   # noqa: E402  (shared render helpers)
 
-MAIN = {'DR-IVA-01': ('perch', 4), 'DR-IVA-02': ('arm_pick', 3), 'DR-IVA-03': ('probe_inspect', 1.5), 'DR-EVA-01': ('oru_exchange', 5),
-        'DR-EVA-02': ('leak_scan', 4), 'DR-EVA-03': ('tool_present', 4.5), 'DR-EVA-04': ('boom_survey', 5), 'DR-FIX-01': ('unstow', 6),
-        'DR-FIX-02': ('unstow', 6)}
+MAIN = db.MAIN
 
 
 def ident(cid):
@@ -121,6 +119,34 @@ def main():
             act, t = MAIN[cid]; apply_pose(b, E, key_values(b, act, t))
             camera(sc_, sext*2.5, 32, 22, lens=55); shoot(out/f'{ident(cid)}_{act}.png')
             camera(c, ext*2.2, -90, 2, lens=55); apply_pose(b, E, {}); shoot(out/f'{ident(cid)}_side.png')
+    if 'review' in args.views:                                   # the persistent review package: one lineup, one labelled 3/4 view per class
+        import drone_fleet as df
+        C = df.classes(s); rows, _ = db.check(s, d)
+        dims = lambda cid: ' x '.join(f'{v:.2f}' for v in rows[cid]['stowed_m'])
+        clear(); render_setup((2400, 1000), args.quality); floor(size=40, z=-.001); x = 0.0; tags = []
+        for cid in order:
+            lo, hi = db.envelope(B[cid], {}, include=body(B[cid])); w = hi[0]-lo[0]; gap = .30 if not cid.startswith('DR-FIX') else .45
+            x += w/2+gap; append(cid, (x-(lo[0]+hi[0])/2, 0, -lo[2]), fixture=False)
+            tags.append((f'{cid}\n{dims(cid)} m', x)); x += w/2
+        who = suit_reference((x+.6, 0, 0)); tags.append(('suited instructor\n1.78 m (scale)' if 'instructor' in who else who, x+.6))
+        for i, (text, tx) in enumerate(tags):                     # standing labels under the floor line (front view), staggered
+            label(text, (tx, -.6, -.14-.22*(i % 2)), .075)
+        note('WF_DRONE_FAMILY_Y155 · 7 mobile classes (24 units incl. 4 reserves) + 2 fixed arms (S&E 51) · stowed sizes from the fit screen · '
+             'PROTOTYPE L4 visual candidates, NOT INTEGRATED (DGT-017 HOLD) · GU-SIF proposed (DGT-012 HOLD) · mass, power, speed, reach, payload OPEN')
+        span = x+1.0
+        camera((span/2, 0, .62), 30, -90, 0, ortho=span+.2); shoot(out/'review_drone_lineup.png')
+        render_setup(args.size, args.quality)
+        for cid in order:
+            b = B[cid]; c = C[cid]; clear(); render_setup(args.size, args.quality); E = append(cid)
+            act, t = MAIN[cid]; apply_pose(b, E, key_values(b, act, t))
+            slo, shi = db.swept(b); sc_ = [(slo[i]+shi[i])/2 for i in range(3)]; sext = max(shi[i]-slo[i] for i in range(3))
+            fixed = cid.startswith('DR-FIX'); lo, hi = db.envelope(b, {}, include=body(b))
+            floor(z=-.17 if 'travel' in b.nodes else (lo[2]-.01 if not fixed else -.002))
+            size = (f"stowed {dims(cid)} m in envelope class {rows[cid]['envelope_class_m']} m" if not fixed
+                    else f"base {' x '.join(f'{v:.2f}' for v in rows[cid]['base_m'])} m, boom display only")
+            note(f"{cid} {b.title} · {c['active']} active + {c['reserve']} reserve · {act} (SIMULATION_ONLY) · {size} · "
+                 'PROTOTYPE L4, NOT INTEGRATED (DGT-017 HOLD) · GU-SIF proposed (DGT-012 HOLD) · performance OPEN')
+            camera(sc_, sext*2.4, -52, 24, lens=50); shoot(out/f'review_{ident(cid)}.png')
     if 'closeups' in args.views:
         for cid in [c for c in order if c in ('DR-EVA-03', 'DR-IVA-01', 'DR-FIX-01', 'DR-IVA-03')]:
             b = B[cid]; clear(); render_setup(args.size, args.quality); E = append(cid); apply_pose(b, E, {})

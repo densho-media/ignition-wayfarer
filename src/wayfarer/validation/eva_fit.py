@@ -37,8 +37,11 @@ SHARED = ('idle', 'walk', 'sit', 'crawl', 'climb')
 NEAR = 3.0
 
 
+ASSETS = ROOT/'assets/characters'
+
+
 def append(key, scene=None):
-    path = ROOT/'assets/characters'/f'WF_EVA_{key.upper()}.blend'
+    path = ASSETS/f'WF_EVA_{key.upper()}.blend'
     with bpy.data.libraries.load(str(path), link=False) as (src, dst):
         dst.collections = [c for c in src.collections if c == 'WAYFARER_EVA_Y155']
     c = dst.collections[0]; c.name = f'EVA_{key}'; (scene or bpy.context.scene).collection.children.link(c)
@@ -369,7 +372,12 @@ def main():
     ap.add_argument('--renders', type=Path, default=ROOT/'renders/p1/eva/fit'); ap.add_argument('--size', type=int, default=800)
     ap.add_argument('--vehicle', type=Path, default=ROOT/'assets/wayfarer/WF_WAYFARER_001.blend'); ap.add_argument('--no-route', action='store_true')
     ap.add_argument('--step', type=int, default=6); ap.add_argument('--route-only', action='store_true')
-    args = ap.parse_args(argv); s = load(ROOT)[0]; data = es.load(ROOT); keys = list(data['variant'])
+    ap.add_argument('--assets', type=Path, help='suit asset folder (a study build such as the compact PLSS, ASSET-10); default assets/characters')
+    args = ap.parse_args(argv)
+    if args.assets:
+        global ASSETS
+        ASSETS = args.assets.resolve()
+    s = load(ROOT)[0]; data = es.load(ROOT); keys = list(data['variant'])
     report = dict(suit=data['suit']['id'], certification=data['suit']['certification'], reach_m=REACH, variants={}); hulls = {}
     if args.route_only and args.report.exists():
         report = json.loads(args.report.read_text()); keys = list(report['variants'])

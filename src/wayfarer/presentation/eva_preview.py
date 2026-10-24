@@ -1,7 +1,7 @@
 """Renders of WAYFARER_EVA_Y155 (EVA-001; S&E 44 EXP-04, RUN-008): assembled, cutaway, exploded and pose sheets of the suit variants.
 
   blender --background --factory-startup --python-exit-code 1 --python src/wayfarer/presentation/eva_preview.py -- \
-      [--views lineup turnaround cutaway exploded poses back] [--out renders/p1/eva] [--size 1280 960] [--samples 32]
+      [--views lineup turnaround cutaway exploded poses back plss_compare] [--out renders/p1/eva] [--size 1280 960] [--samples 32] [--compact <dir> --numbers <json>]
 
 Every view opens the saved assets/characters/WF_EVA_<ID>.blend files (build/eva_suit.py) in memory and never saves them. The cutaway
 removes the front-left quadrant of the outer layers and the PLSS covers by a boolean at render time only and shows the parts marked
@@ -23,9 +23,10 @@ EXPLODE = dict(HELMET=(0, -.05, .35), PLSS=(0, .45, .05), PROTECTION=(0, -.0, 0)
                TOOLS=(-.35, -.25, 0), MARKINGS=(0, 0, 0), COOLING=(0, 0, 0), RIG=(0, 0, 0))
 
 
-def append(key, offset=(0, 0, 0)):
-    """Append the variant's WAYFARER_EVA_Y155 tree into the current scene, shifted by offset; returns (rig, objects)."""
-    path = ROOT/'assets/characters'/f'WF_EVA_{key.upper()}.blend'
+def append(key, offset=(0, 0, 0), folder=None):
+    """Append the variant's WAYFARER_EVA_Y155 tree into the current scene, shifted by offset; returns (rig, objects). folder: a study build
+    (the compact PLSS, ASSET-10) instead of assets/characters."""
+    path = (folder or ROOT/'assets/characters')/f'WF_EVA_{key.upper()}.blend'
     with bpy.data.libraries.load(str(path), link=False) as (src, dst):
         dst.collections = [c for c in src.collections if c == 'WAYFARER_EVA_Y155']
     c = dst.collections[0]; c.name = f'EVA_{key}'; bpy.context.scene.collection.children.link(c)
@@ -167,6 +168,48 @@ def exploded(out, size, samples):
     render(sc, out/'eva_exploded.png')
 
 
+def open_pack(objs, x0=0.0):
+    """Remove, in memory, the pack shell faces right of x0 (seen from behind) and show the internals: a PLSS cutaway."""
+    import bmesh
+    for o in objs:
+        if o.type != 'MESH' or o.get('assembly') != 'PLSS':
+            continue
+        if o.get('eva_show') == 'cutaway':
+            o.hide_render = False; o.hide_viewport = False; continue
+        n = o.name.split('.')[0]                                        # a second appended copy carries a .001 suffix
+        if n.endswith(('_PLSS', '_PLSS_Lower', '_PLSS_Split', '_PLSS_Mount')) or 'Cover' in n:
+            mw = o.matrix_world; me = o.data.copy(); o.data = me; bm = bmesh.new(); bm.from_mesh(me); inv = mw.inverted()
+            no = (inv.to_3x3() @ Vector((1, 0, 0))).normalized()          # cut at world x = x0, drop the +x side
+            bmesh.ops.bisect_plane(bm, geom=bm.verts[:]+bm.edges[:]+bm.faces[:], plane_co=inv @ Vector((x0, 0, 0)), plane_no=no, clear_outer=True)
+            bm.to_mesh(me); bm.free()
+        elif '_PLSS_' in o.name and (o.matrix_world @ Vector(o.bound_box[0])).x > x0 and 'Handle' not in o.name and 'Port' not in o.name:
+            o.hide_render = True
+
+
+def plss_compare(out, size, samples, compact=None, numbers=None):
+    """ASSET-10: the baseline two-module PLSS against the compact study, side profiles and back cutaways of the instructor at one scale."""
+    reset(); sc = scene_setup(size, samples); nums = json.loads(Path(numbers).read_text()) if numbers else {}
+    rows = (('baseline', None, 'BASELINE two-module PLSS (display envelope 0.50 x 0.22 x 0.62 m)'),
+            ('compact', Path(compact), 'COMPACT STUDY ASSET-10 (display envelope 0.58 x 0.14 x 0.56 m)'))
+    for k, (name, folder, title) in enumerate(rows):
+        x = -1.55+k*3.0
+        rig, _ = append('instructor', (x, 0, 0), folder); rig.rotation_euler[2] = math.radians(90); pose(rig, None, 0)
+        rig, objs = append('instructor', (x+1.05, 0, 0), folder); rig.rotation_euler[2] = math.radians(180); pose(rig, None, 0)
+        bpy.context.view_layer.update(); open_pack(objs, x+1.05)
+        label(sc, title, (x-.45, -.6, 2.12), .06)
+        e = nums.get(name, {})
+        if e:
+            label(sc, f"torso depth with PLSS {e['torso_depth_with_plss_m']:.3f} m  ·  torso width {e['torso_width_m']:.3f} m", (x-.45, -.6, -.10), .05)
+            label(sc, f"suited circle {e['torso_circle_diameter_m']:.3f} m  ·  0.90 m ring-B port: {e['ring_b_port']}", (x-.45, -.6, -.20), .05)
+        label(sc, 'side', (x-.1, -.6, .02), .045); label(sc, 'back, pack opened', (x+.75, -.6, .02), .045)
+    label(sc, 'PLSS COMPARISON  ·  instructor  ·  PROTOTYPE  ·  same contents shown in both; whether they fit the compact envelope (33% less volume) is OPEN',
+          (-2.1, -.6, 2.32), .05)
+    label(sc, 'measured readbacks of the as-built prototype (eva_fit), not engineering approval; mass, power, consumables and heat rejection OPEN',
+          (-2.1, -.6, -.34), .045, (.75, .62, .35))
+    cam = camera(sc, (.5, -9.0, 1.0), (.5, 0, 1.0), 50); cam.data.type = 'ORTHO'; cam.data.ortho_scale = 6.0
+    render(sc, out/'eva_plss_compare.png')
+
+
 def poses(out, size, samples):
     """Four EVA actions side by side at a representative frame (the newcomer)."""
     reset(); sc = scene_setup(size, samples)
@@ -182,9 +225,14 @@ def main():
     ap = argparse.ArgumentParser(); ap.add_argument('--views', nargs='*', default=['lineup', 'back', 'cutaway', 'exploded', 'poses'])
     ap.add_argument('--out', type=Path, default=ROOT/'renders/p1/eva'); ap.add_argument('--size', nargs=2, type=int, default=[1280, 960])
     ap.add_argument('--samples', type=int, default=32)
+    ap.add_argument('--compact', type=Path, help='plss_compare: folder of the compact PLSS study build (eva_suit.py --plss compact --out-dir)')
+    ap.add_argument('--numbers', type=Path, help='plss_compare: {baseline|compact: envelope readbacks} JSON to label')
     a = ap.parse_args(argv)
     for v in a.views:
-        globals()[v](a.out, a.size, a.samples)
+        if v == 'plss_compare':
+            plss_compare(a.out, a.size, a.samples, a.compact, a.numbers)
+        else:
+            globals()[v](a.out, a.size, a.samples)
 
 
 if __name__ == '__main__':

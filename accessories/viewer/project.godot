@@ -1,0 +1,18 @@
+; Standalone accessory review viewer (docs/ACCESSORIES.md): drone bodies and the EVA handoff scene, loaded at run time from generated/.
+; Independent of the ship viewer in godot/; `python3 tools/accessory_viewer.py stage` fills generated/ (ignored by Git).
+config_version=5
+
+[application]
+config/name="Wayfarer Accessory Review"
+run/main_scene="res://viewer.tscn"
+config/features=PackedStringArray("4.7", "GL Compatibility")
+
+[display]
+window/size/viewport_width=1440
+window/size/viewport_height=900
+
+[rendering]
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0.025, 0.035, 0.05, 1)
+anti_aliasing/quality/msaa_3d=2

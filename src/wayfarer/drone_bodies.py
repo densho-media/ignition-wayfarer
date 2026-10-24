@@ -531,18 +531,35 @@ def _arm(b, parent, at, links, d, prefix='arm', stow_z=0.0, white='beta_white', 
     b.cyl(y, 'ARM', (0, 0, 0), (0, 0, .02), .034, 'graphite', n=20)
     p = b.node(f'{prefix}_sh', y, (0, 0, .034), joint='revolute', axis='y', limits=(-150, 10), job='shoulder pitch')
     b.cyl(p, 'ARM', (0, -.03, 0), (0, .03, 0), .026, 'graphite', n=20)
+    drive(b, p, (0, -.03, 0), -1, .024, job='shoulder drive: motor, harmonic gear and power-off brake (torque OPEN)')
     b.box(p, 'ARM', (a1/2, 0, 0), (a1, .042, .036), white, bevel=.01, job='arm boom 1')
+    b.box(p, 'ARM_HARNESS', (a1/2, -.023, .006), (a1*.8, .006, .012), 'graphite', job='joint harness run (power / data / heater)')
     e = b.node(f'{prefix}_el', p, (a1, .045, 0), joint='revolute', axis='y', limits=(-175, 175), job='elbow (offset links: folds either way)')
     b.cyl(e, 'ARM', (0, -.026, 0), (0, .026, 0), .022, 'graphite', n=20)
+    drive(b, e, (0, .026, 0), 1, .020, job='elbow drive with power-off brake')
     b.box(e, 'ARM', (-a2/2, 0, 0), (a2, .036, .032), white, bevel=.008, job='arm boom 2')
+    b.box(e, 'ARM_HARNESS', (-a2/2, .020, .005), (a2*.75, .005, .010), 'graphite', job='joint harness run')
     camera(b, e, 'ARM_CAMERA', (-a2*.3, 0, .016), '+z', .009, .012, job='elbow camera')
     w = b.node(f'{prefix}_wp', e, (-a2, 0, 0), joint='revolute', axis='y', limits=(-150, 150), job='wrist pitch')
     b.cyl(w, 'ARM', (0, -.02, 0), (0, .02, 0), .019, 'graphite', n=16)
+    drive(b, w, (0, -.02, 0), -1, .016, job='wrist drive with power-off brake')
     r = b.node(f'{prefix}_wr', w, (-.03, 0, 0), joint='revolute' if roll else None, axis='x', job='wrist roll')
     b.cyl(r, 'ARM', (0, 0, 0), (-.02, 0, 0), .02, 'graphite', n=16)
     sif(b, r, f'{prefix}_tool', (-.02, 0, 0), '-x', tool, d, active=True, release=False, job='tool changer: active GU-SIF accepts any GU cartridge of its size (DOP-11)')
     b.mark('tool', r, 'tool changer')
+    # stow saddle under the folded booms at the elbow end: the arm rests and latches here for thrust (1.5 g) and power loss (DOP-03, DOP-13)
+    sx, sy, sz = at[0]+a1*.82, at[1]+.0225, at[2]+stow_z
+    b.box(parent, 'ARM_STOW', (sx, sy, sz+.008), (.05, .10, .016), 'graphite', bevel=.003, job='arm stow saddle with launch latch (latch rating OPEN)')
+    b.box(parent, 'ARM_STOW', (sx, sy-.054, sz+.018), (.016, .008, .02), 'safety_orange', job='stow latch manual release (crew / recovery robot)')
     return y
+
+
+def drive(b, node, at, side, r, job):
+    """A joint drive housing on the outer face of a pitch joint: motor can, brake ring and a connector."""
+    x, y, z = at; y2 = y+side*.022
+    b.cyl(node, 'ARM_DRIVE', (x, y, z), (x, y2, z), r, 'grey', n=20, job=job)
+    b.cyl(node, 'ARM_DRIVE', (x, y2, z), (x, y2+side*.003, z), r*.82, 'metal', n=20)
+    b.box(node, 'ARM_DRIVE', (x+r*.7, y+side*.011, z+r*.5), (.010, .012, .010), 'graphite')
 
 
 def eva01(d, s):
@@ -634,6 +651,13 @@ def eva02(d, s):
     return b
 
 
+# The review action and time (s) each class is shown at (previews, the accessory viewer)
+MAIN = {'DR-IVA-01': ('perch', 4), 'DR-IVA-02': ('arm_pick', 3), 'DR-IVA-03': ('probe_inspect', 1.5), 'DR-EVA-01': ('oru_exchange', 5),
+        'DR-EVA-02': ('leak_scan', 4), 'DR-EVA-03': ('tool_present', 4.5), 'DR-EVA-04': ('boom_survey', 5), 'DR-FIX-01': ('unstow', 6),
+        'DR-FIX-02': ('unstow', 6)}
+CREW_HANDLE = ((-.062, -.05, .035), (-.062, .05, .035), .011)      # DR-EVA-03 cartridge crew handle: end, end (node frame), radius
+
+
 def eva03(d, s):
     q = d['class']['DR-EVA-03']; L, W, H = q['body_m']; g = d['interface']['rail_gauge_m']; rr = d['interface']['rail_radius_m']
     b = Body('DR-EVA-03', 'Spine utility crawler', 'twin rail on the stationary casing (z = 0 at the rails)')
@@ -661,7 +685,11 @@ def eva03(d, s):
     b.box(tc, 'TOOL_CARTRIDGE', (0, .026, .04), (.002, .002, .002), 'graphite')
     b.box(tc, 'TOOL_CARTRIDGE', (.026, 0, .035), (.002, .03, .012), 'gu_blue')
     b.cyl(tc, 'TOOL_BIT', (0, 0, .07), (0, 0, .095), .008, 'metal', r2=.005, n=12, job='hex drive bit')
-    handle(b, tc, 'TOOL_CARTRIDGE', (-.026, -.015, .02), (-.026, -.015, .055), 0.0, .004)
+    # crew D-handle on the -x face: a gloved hand closes on a 22 mm bar 0.10 m long (EVA glove clearance, ASSET-07); the arm keeps the
+    # cartridge latched until the crew member's grip is confirmed (DOP-04 supervised handoff; latch and grip ratings OPEN)
+    for y in (-.038, .038):
+        b.cyl(tc, 'TOOL_CARTRIDGE', (-.025, y, .035), (-.062, y, .035), .006, 'grey', n=10)
+    b.cyl(tc, 'CREW_HANDLE', CREW_HANDLE[0], CREW_HANDLE[1], CREW_HANDLE[2], 'rubber', n=16, job='crew handle (handoff grip), rubber-sleeved')
     p0 = at(b, 'cartridge', (0, 0, .035)); cz = top+.008
     b.box(c, 'TOOL_CRADLE', (p0[0], p0[1], (cz+p0[2]-.026)/2), (.08, .05, p0[2]-.026-cz), 'grey', bevel=.004, job='tool cradle: holds the parked cartridge under 1.5 g (latch rating OPEN)')
     cd = b.node('caddy', c, (-L*.02, W*.26, top+.008))
@@ -713,16 +741,20 @@ def eva04(d, s):
     bt = b.node('boom_tilt', bb, (0, 0, .03), joint='revolute', axis='y', limits=(-80, 10))
     r0, r1 = q['boom_m']
     b.cyl(bt, 'SENSOR_BOOM', (-r0*.85, 0, 0), (.02, 0, 0), .016, 'metal', n=16, job='telescoping boom (stowed aft along the body)')
-    ex = b.node('boom_ext', bt, (0, 0, 0), joint='prismatic', axis='x', limits=(0, r1-r0))
-    b.cyl(ex, 'SENSOR_BOOM', (-r0*.80, 0, 0), (.06, 0, 0), .011, 'metal', n=12)
-    hd = b.node('sensor_head', ex, (.06, 0, 0), joint='revolute', axis='x')
+    # two telescoping stages, each overlapping the one outside it at full extension (one stage could not span the stroke)
+    ex = b.node('boom_ext', bt, (0, 0, 0), joint='prismatic', axis='x', limits=(0, (r1-r0)/2), job='boom stage 1')
+    b.cyl(ex, 'SENSOR_BOOM', (-r0*.80, 0, 0), (.03, 0, 0), .012, 'metal', n=12)
+    ex2 = b.node('boom_ext2', ex, (0, 0, 0), joint='prismatic', axis='x', limits=(0, (r1-r0)/2), job='boom stage 2')
+    b.cyl(ex2, 'SENSOR_BOOM', (-r0*.75, 0, 0), (.06, 0, 0), .008, 'metal', n=12)
+    hd = b.node('sensor_head', ex2, (.06, 0, 0), joint='revolute', axis='x')
     b.box(hd, 'SENSOR_HEAD', (.03, 0, 0), (.06, .05, .05), 'grey', bevel=.008, job='non-contact sensor head: thermal IR, gas, magnetometer, camera; never touches hazard hardware (DOP-09)')
     camera(b, hd, 'CAMERA', (.06, .012, 0), '+x', .010, .006); camera(b, hd, 'CAMERA', (.06, -.014, .012), '+x', .007, .006, job='thermal IR')
     b.mark('tool', hd, 'non-contact sensor head')
     b.act('traverse', [(0, {'travel': 0}), (5, {'travel': .6})], 'traverse the retained aft path with the drive isolated (DOP-09 HOLD)')
-    b.act('boom_survey', [(0, {}), (1.5, {'boom_tilt': -35}), (3.5, {'boom_tilt': -35, 'boom_ext': .40}), (5, {'boom_tilt': -35, 'boom_ext': .40, 'sensor_head': 60}),
-                          (6.5, {'boom_tilt': -35, 'boom_ext': .40, 'sensor_head': -60}), (8, {})], 'extend the boom and survey from standoff')
-    b.act('fault_hold', [(0, {'boom_ext': .4, 'boom_tilt': -35}), (2, {}), (3, {})], 'retract the boom, brake, hold; DR-FIX-02 retrieves if stranded (DOP-14)')
+    out = {'boom_tilt': -35, 'boom_ext': .20, 'boom_ext2': .20}
+    b.act('boom_survey', [(0, {}), (1.5, {'boom_tilt': -35}), (3.5, out), (5, dict(out, sensor_head=60)), (6.5, dict(out, sensor_head=-60)), (8, {})],
+          'extend the boom and survey from standoff')
+    b.act('fault_hold', [(0, out), (2, {}), (3, {})], 'retract the boom, brake, hold; DR-FIX-02 retrieves if stranded (DOP-14)')
     rail_fixture(b, d, (0.0,), d['interface']['fixture_rail_len_m'], dock=None)
     return b
 
@@ -820,7 +852,7 @@ def check(s, d):
                 fails.append(f'{cid} stowed {row["stowed_m"]} exceeds the owner envelope class {c["envelope_m"]} m')
             # Dock compatibility with the ship's L2 proxy box (a Claude PROTOTYPE size, not owner canon): reported, never forced.
             row['proxy_fit'] = 'FITS' if all(size[i] <= box[i]+1e-9 for i in range(3)) else \
-                f'EXCEEDS proxy on {"".join("xyz"[i] for i in range(3) if size[i] > box[i]+1e-9)} (integration: resize the proxy / dock, not the body)'
+                f'EXCEEDS proxy on {"".join("xyz"[i] for i in range(3) if size[i] > box[i]+1e-9)} (ship session: placement and keep-out study; no automatic proxy change)'
         else:
             base = [q for q in b.shapes if q['part'] == 'BASE' and q['kind'] == 'cyl']
             dia = max(2*q['r'] for q in base); h = max(q['b'][2] for q in base)

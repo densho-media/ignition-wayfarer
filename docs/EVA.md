@@ -84,8 +84,9 @@ rig, the corrective shape keys and the five shared actions (RIG-02, RUN-006). Th
     O₂ bottles, the separate emergency reserve, the regulator, the CO₂ cartridge, the fan/pump/separator, the heat exchanger, the battery
     and the radio/telemetry unit.
   - Displays: the chest display and control module, and the left forearm display.
-  - Joints: scye, upper-arm, hip, thigh and ankle bearings (flat machined bands with edge races); elbow and knee convolutes (three-rib
-    bellows, the outer layer charcoal over the elbow and knee, RUN-017); wrist disconnects; gauntlets.
+  - Joints: scye, upper-arm, hip, thigh and ankle bearings (flat machined bands with edge races and an inner sleeve; the hip bearing sits
+    on the thigh below the crotch line); elbow and knee convolutes (three-rib bellows, the outer layer charcoal over the elbow and knee,
+    RUN-017); wrist disconnects; gauntlets carried by the forearm. The PLSS stands on a mounting interface on the hard torso.
   - Feet: rigid soles with toe hooks for foot restraints.
   - Tethers and tools: two orange waist tether reels with captive hooks, and an inspection scanner with a lanyard ring.
 - **Sockets** (RIG-03/04) are bone-parented empties with stable ids. Hands: `SOCKET_HAND_L_GRIP`, `_R_GRIP`, `_R_TOOL`. Feet:
@@ -510,4 +511,5 @@ on the frame) and K (litter + kit) with a rescuer at each end, sampled found pos
   the stroke against the keeper lugs, the SP-12-side control station against donning stand A, and the turn of a litter in SP-12.
 - **Anchors.** A released exterior rail and anchor plan (SP-51) and alternate stationary, shaded paths (EVA-048).
 - **Character and look.** Final markings and the instructor's identity (Tale WTF-16, Art Style, Fashion); face and hair under the helmet.
-- **Not built yet.** The compact PLSS study (ASSET-10) and a contact-aware glove grasp.
+- **Compact PLSS and grasp.** The compact PLSS (ASSET-10) is built as a study beside the baseline and measured (docs/ACCESSORIES.md):
+  its packaging closure is OPEN. The glove grasp is a display pose (`build/eva_grasp.py`); grip force and glove torque are OPEN.

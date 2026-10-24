@@ -22,6 +22,7 @@ sys.path[:0] = [str(ROOT/'src/wayfarer'), str(ROOT/'src/wayfarer/build'), str(RO
 import drone_bodies as db
 from drone_bodies_render import apply_pose, camera, note, render_setup, shoot
 from drone_preview import append as append_drone, key_values
+from eva_grasp import grasp
 from eva_preview import append as append_suit, pose as pose_suit
 
 
@@ -50,30 +51,46 @@ def place(objs, M):
 def eva(args, out, B):
     bpy.ops.wm.read_factory_settings(use_empty=True); render_setup(args.size, args.quality)
     b = B['DR-EVA-03']; E = append_drone('DR-EVA-03'); vals = key_values(b, 'handoff', 4.5); apply_pose(b, E, vals)
-    tool = Vector(db.at(b, 'cartridge', (-.026, -.015, .037), vals))          # the cartridge handle the glove takes
+    ha, hb, hr = db.CREW_HANDLE; ha = Vector(db.at(b, 'cartridge', ha, vals)); hb = Vector(db.at(b, 'cartridge', hb, vals))
+    tool = (ha+hb)/2                                                          # the cartridge crew handle the glove closes on
     rig, objs = append_suit('instructor'); pose_suit(rig, args.action, int(args.frame*bpy.data.actions[args.action].frame_range[1]))
     rig.rotation_euler[2] = math.radians(180); bpy.context.view_layer.update()   # face +Y, toward the track
-    grip = (rig.matrix_world @ rig.pose.bones['hand_r'].tail)
-    rig.location += tool-grip+Vector((0, -.03, 0)); bpy.context.view_layer.update()
+    sh = rig.matrix_world @ rig.pose.bones['upperarm_r'].head
+    rig.location += tool+Vector((0, -.36, .30))-sh; bpy.context.view_layer.update()   # shoulder above and behind the handle
+    res, rep = grasp(rig, 'r', ha, hb, hr, reach=True); print('WF_GRASP', rep, flush=True)
     feet = min((rig.matrix_world @ rig.pose.bones[f'foot_{s}'].head).z for s in 'lr')-.09
-    hull = -.17; grey = mat('Fixture_Grey', (.36, .37, .38), .55, .3); orange = mat('Fixture_Orange', (.92, .36, .06), .5)
+    grey = mat('Fixture_Grey', (.36, .37, .38), .55, .3); orange = mat('Fixture_Orange', (.92, .36, .06), .5); hull_m = mat('Hull_Patch', (.78, .78, .75), .7)
     fx, fy = (rig.matrix_world @ rig.pose.bones['pelvis'].head).xy
+    # a curved casing patch under the review rails (display radius, not the ship's casing): the crew stands lower on its flank, so the
+    # presented handle comes at elbow height; the portable foot restraint stands on a short vertical post
+    Rc = 1.0; zc = -.17-Rc; bpy.ops.mesh.primitive_cylinder_add(radius=Rc, depth=2.4, location=(tool.x-.1, 0, zc), rotation=(0, math.pi/2, 0), vertices=96)
+    cas = bpy.context.object; cas.name = 'Casing_Patch_Display'; cas.data.materials.append(hull_m)
+    surf = zc+math.sqrt(max(0.0, Rc*Rc-fy*fy))
     block('FootRestraint_Plate', (fx, fy, feet-.02), (.42, .32, .03), grey)
-    rod('FootRestraint_Post', (fx, fy, hull), (fx, fy, feet-.035), .03, grey)
-    block('FootRestraint_Hull', (fx, fy, hull+.01), (.6, .6, .02), mat('Hull_Patch', (.78, .78, .75), .7))
+    rod('FootRestraint_Post', (fx, fy, surf-.02), (fx, fy, feet-.035), .03, grey)
     for s in 'lr':
         p = rig.matrix_world @ rig.pose.bones[f'ball_{s}'].head
         block(f'FootRestraint_Toe_{s}', (p.x, p.y, feet+.03), (.11, .05, .04), grey)
     sock = [o for o in objs if o.name == 'SOCKET_TETHER_A']
-    if sock:                                                                  # tether A clipped to the track's anchor post (training fixture)
-        a = sock[0].matrix_world.translation; anchor = Vector((tool.x-.5, .15, .02))
-        rod('Tether_A', a, anchor, .006, orange); rod('Tether_Anchor', (anchor.x, anchor.y, hull), anchor, .015, grey)
+    if sock:                                                                  # tether A clipped to an anchor post on the casing (training fixture)
+        a = sock[0].matrix_world.translation; ay = fy+.25; anchor = Vector((fx-.55, ay, zc+math.sqrt(max(0.0, Rc*Rc-ay*ay))+.12))
+        rod('Tether_A', a, anchor, .006, orange); rod('Tether_Anchor', (anchor.x, anchor.y, anchor.z-.13), anchor, .015, grey)
     note('TRAINING SIMULATION · FLIGHT_EVA HOLD · PROTOTYPE, NOT CERTIFIED — DR-EVA-03 presents a tool cartridge to a suited crew member '
          '(DOP-04 supervised handoff); foot restraint and tether anchor are training fixtures; no anchor, thermal or debris release')
     c = Vector(((tool.x+fx)/2, (tool.y+fy)/2, .62))
-    camera(c, 4.6, 62, 12, lens=40); shoot(out/'accessory_eva_handoff.png')
-    camera(c, 4.4, 18, 24, lens=40); shoot(out/'accessory_eva_handoff_3q.png')
-    camera(tool, 1.1, 75, 18, lens=50); shoot(out/'accessory_eva_handoff_closeup.png')
+    camera(c, 5.0, 8, 8, lens=40); shoot(out/'accessory_eva_handoff.png')                     # profile: crew, handle and crawler in one line
+    camera(c, 5.2, -38, 20, lens=40); shoot(out/'accessory_eva_handoff_3q.png')
+    camera(tool, .9, 0, 15, lens=50); shoot(out/'accessory_eva_grasp_closeup.png')
+    if args.glb:                                                              # the composed scene for the standalone review viewer
+        export_static(out/'accessory_eva_handoff.glb')
+
+
+def export_static(path):
+    """The posed scene as static meshes (deformation applied, no skins or actions) for the accessory viewer."""
+    for o in bpy.context.scene.objects:
+        o.select_set(o.type == 'MESH' and not o.hide_render and o.visible_get())
+    bpy.ops.export_scene.gltf(filepath=str(path), export_format='GLB', use_selection=True, export_apply=True, export_skins=False,
+                              export_animations=False, export_extras=True)
 
 
 def iva(args, out, B):
@@ -96,13 +113,16 @@ def iva(args, out, B):
     note('PROTOTYPE · L4 visual candidates — DR-IVA-02 picks its cargo cartridge on a deck guide (guide channel: interface request) · '
          'DR-IVA-01 perched on a handrail, fans off · DR-IVA-03 probing a sensor port in a designed raceway (conduits: DS-09 HOLD)')
     camera((.0, .15, .5), 3.6, -112, 16, lens=36); shoot(out/'accessory_iva_tasks.png')
+    if args.glb:
+        export_static(out/'accessory_iva_tasks.glb')
 
 
 def main():
     argv = sys.argv[sys.argv.index('--')+1:] if '--' in sys.argv else []
     ap = argparse.ArgumentParser(); ap.add_argument('--out', type=Path, required=True); ap.add_argument('--scenes', nargs='*', default=['eva', 'iva'])
     ap.add_argument('--quality', default='draft'); ap.add_argument('--size', nargs=2, type=int, default=[1600, 1000])
-    ap.add_argument('--action', default='eva_tool_inspect'); ap.add_argument('--frame', type=float, default=.5)
+    ap.add_argument('--action', default='eva_suit_check'); ap.add_argument('--frame', type=float, default=0.0)
+    ap.add_argument('--glb', action='store_true', help='also export the scenes as static GLBs (accessory viewer)')
     args = ap.parse_args(argv); out = args.out.resolve(); out.mkdir(parents=True, exist_ok=True)
     s, d = db.load(ROOT); B = db.bodies(s, d)
     if 'eva' in args.scenes:
