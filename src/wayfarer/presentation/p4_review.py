@@ -4,7 +4,8 @@ compares against the same images. Presentation only: the vehicle is posed and dr
 
 Views (shared stations, never fixed numbers): ship_34, ship_side, rings_34 (whole ship); brow_sector, crown_bay, human_crown (forward);
 ring_segment, human_ring (ring A, the pressure segment farthest from the blades in the posed frame); blade_clamp, blade_edge, blade_35m,
-blade_root (radiator 1); spine (the casing between two blades). Light: one sun 40 deg from aft, azimuth -20 deg (presentation choice,
+blade_root (radiator 1); spine (the casing between two blades), spine_module (a casing module boundary at the third radiator stay, with
+its module numbers), human_spine (the SP-51 crawler stop there, nearest the sun-side bisector). Light: one sun 40 deg from aft, azimuth -20 deg (presentation choice,
 departure pointing OPEN), no fill; COAST at +2 EV editorial, the matched COAST/IGNITION pair (15!A222) with --pair. The orange figures are
 1.8 m scale references, not EVA positions.
 
@@ -22,7 +23,7 @@ ROOT = Path(__file__).resolve().parents[3]
 sys.path[:0] = [str(ROOT/'src/wayfarer'), str(ROOT/'src/wayfarer/build'), str(ROOT/'src/wayfarer/presentation')]
 
 VIEWS = ('ship_34', 'ship_side', 'rings_34', 'brow_sector', 'crown_bay', 'human_crown', 'ring_segment', 'human_ring', 'blade_clamp',
-         'blade_edge', 'blade_35m', 'blade_root', 'spine')
+         'blade_edge', 'blade_35m', 'blade_root', 'spine', 'spine_module', 'human_spine')
 PAIR_VIEWS = ('ship_34', 'rings_34')
 SUN = (40.0, -20.0)          # degrees from aft, azimuth about +X from +Y (the m8_exterior / S1 convention)
 
@@ -85,7 +86,19 @@ def frames(s):
     out['human_crown'] = (tgt, tgt+Vector((-6.5, 0, 0))+u*2.6-t*4.2, None, 28.0)
     # Spine: the casing between two blades on the sun side, from outboard and aft of the rings.
     out['spine'] = (Vector((xa-40, 6.5*math.cos(beta), 6.5*math.sin(beta))), Vector((xa-70, 34*math.cos(beta), 34*math.sin(beta))), None, 28.0)
+    # S6: a casing module boundary (the third radiator stay frame) between the blades, and the crawler stop there at human scale.
+    import thermal_geometry as tg
+    xs = sorted(tg.stations(s, tg.blade_of(s))['stays'])[2]; rr = lambda x, r, a_: Vector((x, r*math.cos(a_), r*math.sin(a_)))
+    out['spine_module'] = (rr(xs, 6.0, beta), rr(xs-26, 6.0, beta)+rr(0, 30, beta+math.radians(12)), None, 30.0)
+    ta = spine_track(s, beta)
+    out['human_spine'] = (rr(xs, 6.1, ta), rr(xs-6.5, 6.0, ta)+rr(0, 4.5, ta+math.radians(25)), None, 26.0)
     return out
+
+
+def spine_track(s, beta):
+    """Angle (rad) of the SP-51 crawler track nearest the bisector beta."""
+    import pack_spine_casing as psc
+    return min((t['a'] for t in psc.tracks(s)), key=lambda a_: abs(math.remainder(a_-beta, math.tau)))
 
 
 def ring_cameras(s, tc):
@@ -170,6 +183,10 @@ def render(out, views=VIEWS, look='grammar', size=1600, samples=48, pair=False, 
         red = material('P4_Figure', [1.0, .45, .10, .6, 0])
         cr = fsh.crown(s); b = cr['bays'][0]['azimuth']; uu = Vector((0, math.cos(b), math.sin(b))); tt = Vector((0, -math.sin(b), math.cos(b)))
         figure(s, red, Vector((cr['x0']-.35, 0, 0))+uu*41.9+tt*1.9, uu, Vector((-1, 0, 0)), col)
+        ph = s['prototype']['radiator_phase_deg']; xs = sorted(__import__('thermal_geometry').stations(s, __import__('thermal_geometry').blade_of(s))['stays'])[2]
+        beta = min((math.radians(ph+60+120*k) for k in range(3)), key=lambda a_: abs(math.remainder(a_-math.radians(SUN[1]), math.tau)))
+        ta = spine_track(s, beta); fa = ta+math.copysign(1.3/6.0, math.remainder(beta-ta, math.tau)); rd = Vector((0, math.cos(fa), math.sin(fa)))
+        figure(s, red, Vector((xs-1.6, 0, 0))+rd*6.0, rd, Vector((1, 0, 0)), col)
         w = rotor_world(1); sg = ring_aft_sign(); g = ring_frame(s); tc = clear_sector(s, w); ft = math.radians(tc+4)
         figure(s, red, w @ Vector((sg*(g['H']+.55), 26.4*math.cos(ft), 26.4*math.sin(ft))), w.to_3x3() @ Vector((0, math.cos(ft), math.sin(ft))),
                w.to_3x3() @ Vector((sg, 0, 0)), col)

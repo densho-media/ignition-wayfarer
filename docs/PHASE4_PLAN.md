@@ -229,7 +229,7 @@ the generators and this plan. One build lock: sessions queue for builds.
 - **Parallel:** with S3, S4, S6.
 - **Done when:** the blades read as framed thermal machines in COAST and the IGNITION read is unchanged.
 
-#### S6 — Spine casing, service routes, exterior equipment · Medium · class 2 · WF-SPINE
+#### S6 — Spine casing, service routes, exterior equipment · Medium · class 2 · WF-SPINE · BUILT, owner review (section 4.8)
 - **Direction:** a serviced keel between the blades: casing modules between frame stations, utility routes the eye can follow, the S02
   hardware in the selected families.
 - **Boundaries:** no new opening, rail (RUN-011), cradle or HGA ORU (HOLD); EVA handrails parked; docking Q33 unchanged; plume and
@@ -465,6 +465,38 @@ VC+ ladder); (3) GU deep blue as a standard wayfinding accent or not; (4) the th
   sheet (for example off-white thermal wraps on the transverse frames). That changes the blade's physical view factor, so it is not done
   without the owner and the thermal owner.
 - **Maturity:** `rad_frame` stays `L4_VISUAL_CANDIDATE`; the revision goes to the owner for review.
+
+### 4.7 Engineering protection check of the S2–S5 commits (owner request 2026-10-24)
+
+Generated simulation and validation snapshots compared field by field between 88ab15a (S1) and fe31f80 (S5):
+- `simulations/wf_first_ignition_timeline.json`: only `spec_hash` and `source_map_hash` differ (13,204 values each).
+- `simulations/wf_sim_rig.json`: only `spec_hash`, `source_map_hash` and the timeline file's `sha256` differ (the timeline embeds the
+  spec hash). No rig, mechanism, mass, rate or timing value changed.
+- `data/wayfarer_3d.toml`: only `[production.exterior]` (new) and `[production.m8]` (materials table retired) differ.
+- `references/p1_validation.json`: hashes; the production-detail counts and the new ring and M8 detail assets (S3, S4); and two measured
+  values from built geometry. The deployed bounds' −Z minimum moved 23 µm (−45.004257 → −45.004234 m) when the M8.2 Brow detail was
+  rebuilt (S3): float tessellation at the r 45 m shield rim, inside the 1 mm inspection tolerance. The forward-inspection
+  "ring B sweep front" moved from 93.099 to 93.184 m (S4) because the measurement takes the forward-most spinning vertex and ring B's
+  forward flank now carries its exterior detail: the node covers end at u = 2.135 m from ring B's centre (X 91.049 m), 0.015 m inside the
+  2.15 m sweep; the +X order and every clearance still pass. **The S5 commit itself changed only hashes.** No engineering input or
+  owner value changed in S2–S5.
+
+### 4.8 S6 — spine casing, routes and exterior equipment (2026-10-24)
+
+- **Implemented:** pack `spine_casing` (WF-SPINE, `SP.CASING`): five casing modules K1–K5 bounded by the primary-cage frames at the
+  radiator stay stations (the blade frame rhythm carried round the body), each boundary a 0.60 m mid-value frame band; a 0.70 m rail
+  bed under each SP-51 crawler track, so the route runs visibly from the thrust ring to the blade front; at each of the seven stops per
+  track a blue approach marker either side and a text ID (`C1-1`…`C3-7`, 0.48 m); module numbers (1.38 m) mid-module on the three
+  bisectors. Grammar mapping: the raised casing straps take the light-mid frame value (calm fields; the module bands lead); the SP-51
+  crawler hardware, SP-53 terminals and A29 trackers take graphite machinery. 99 elements; blue 1.1 % of the detail area.
+- **Preserved:** no new opening, rail, cradle, HGA ORU or handrail; DS-13 (operations HOLD) untouched; docking Q33 and the M7 primary
+  port unchanged (its HERO detail is the accepted M7 standard, left as accepted); every element off the hull openings (+0.25 m) and
+  access panels and ≥ 0.05 m from every fixed exterior part (pack screen); casing, straps and panels unchanged.
+- **Evidence:** `runs/20261024T-p4-s6` (whole ship three-quarter and side, spine, module boundary, crawler stop with figure) against the
+  same cameras in the S5 state (`runs/20261024T-p4-s6-before`, the pack hidden and the S5 mapping), sheets in `runs/20261024T-p4-s6/pairs`.
+  The side view now shows five casing modules instead of a uniform tile grid; at module scale the frame band, numbers and dark crawler
+  track read; at human scale the stop marker and ID read beside the rail bed.
+- **Maturity:** `L4_VISUAL_CANDIDATE`; owner review.
 
 ## 5. Risks
 

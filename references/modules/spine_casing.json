@@ -1,0 +1,284 @@
+{
+ "assemblies": {
+  "SP.CASING": {
+   "anchor": "WF-SPINE.HULL.ORIGIN",
+   "anchor_hash": "95f16cce9e9a6633",
+   "asset": "WF_DETAIL_SP_CASING",
+   "detail_class": "PRODUCTION",
+   "enabled": true,
+   "maturity": "L4_VISUAL_CANDIDATE"
+  }
+ },
+ "contract": "WF_MODULE_PUBLICATION",
+ "contract_hash": "9bc60d2ef037a0b5",
+ "contract_terms": {
+  "SP.CASING": {
+   "anchor": "WF-SPINE.HULL.ORIGIN",
+   "asset": "WF_DETAIL_SP_CASING",
+   "envelope": [
+    [
+     -101.05,
+     -6.12,
+     -6.12
+    ],
+    [
+     80.05,
+     6.12,
+     6.12
+    ]
+   ],
+   "frame": {
+    "family": "asset_origin",
+    "host": "HULL",
+    "matrix": [
+     [
+      1.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      1.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      1.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ]
+    ],
+    "module": "WF-SPINE",
+    "object": null,
+    "parent": null
+   },
+   "host": "HULL",
+   "scope": "pack"
+  }
+ },
+ "fingerprint": {
+  "detail/WF_DETAIL_SP_CASING.blend": {
+   "direct_links": [],
+   "objects": {
+    "Prod_SP_CASING_markings": {
+     "centroid": [
+      1.7190962281573168,
+      -0.06450171243066412,
+      -0.832274309858654
+     ],
+     "component_id": "SP.CASING.MARKINGS",
+     "faces": 18678,
+     "instance": null,
+     "kind": "production_detail",
+     "matrix_world": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "max": [
+      79.61182403564453,
+      5.51859712600708,
+      6.060800075531006
+     ],
+     "min": [
+      -83.30670166015625,
+      -6.062580108642578,
+      -5.242710590362549
+     ],
+     "parent": null,
+     "type": "MESH",
+     "vertices": 25464
+    },
+    "Prod_SP_CASING_modules": {
+     "centroid": [
+      -10.116878827412924,
+      0.0,
+      1.0943040251731873e-08
+     ],
+     "component_id": "SP.CASING.MODULES",
+     "faces": 2268,
+     "instance": null,
+     "kind": "production_detail",
+     "matrix_world": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "max": [
+      80.0,
+      6.054756164550781,
+      6.053969383239746
+     ],
+     "min": [
+      -101.0,
+      -6.054756164550781,
+      -5.876111030578613
+     ],
+     "parent": null,
+     "type": "MESH",
+     "vertices": 2304
+    },
+    "Prod_SP_CASING_route": {
+     "centroid": [
+      -9.92531967163086,
+      4.967053731282552e-09,
+      1.9868214925130207e-08
+     ],
+     "component_id": "SP.CASING.ROUTE",
+     "faces": 42,
+     "instance": null,
+     "kind": "production_detail",
+     "matrix_world": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "max": [
+      79.14936065673828,
+      4.0388593673706055,
+      4.938629150390625
+     ],
+     "min": [
+      -99.0,
+      -6.020828723907471,
+      -5.747295379638672
+     ],
+     "parent": null,
+     "type": "MESH",
+     "vertices": 48
+    },
+    "Prod_SP_CASING_wayfinding": {
+     "centroid": [
+      2.7567785467420305,
+      -1.655684577094184e-08,
+      5.794896019829644e-09
+     ],
+     "component_id": "SP.CASING.WAYFINDING",
+     "faces": 420,
+     "instance": null,
+     "kind": "production_detail",
+     "matrix_world": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "max": [
+      79.14936065673828,
+      4.186481952667236,
+      5.045577049255371
+     ],
+     "min": [
+      -65.17012786865234,
+      -6.016016483306885,
+      -5.79204797744751
+     ],
+     "parent": null,
+     "type": "MESH",
+     "vertices": 504
+    }
+   }
+  }
+ },
+ "git_dirty": true,
+ "git_revision": "fe31f802d4f72b6d630cbc32dc5f6825a6980d7e",
+ "inputs_hash": "10342c424a496eac",
+ "module": "WF-SPINE",
+ "note": "A publication makes the pack eligible for integration; it is not an owner acceptance and changes no maturity or canon.",
+ "pack": "spine_casing",
+ "pack_version": 1,
+ "published_utc": "2026-10-24T14:41:52Z",
+ "spec_sha256": "987e8e127c544b203eca8dc74e3ea096247f1f23ee0a1413b47ba2d53cfbde1d",
+ "version": 2
+}

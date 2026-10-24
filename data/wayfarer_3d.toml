@@ -3804,7 +3804,7 @@ xf_joint = [0.030, 0.030, 0.035, 0.85, 0.0]       # dark seams, joint gaps, clos
 xf_mark = [0.030, 0.032, 0.035, 0.70, 0.0]        # charcoal stencils on light shells
 xf_mark_light = [0.84, 0.84, 0.81, 0.62, 0.0]     # off-white stencils on dark machinery and structure
 xf_fastener = [0.30, 0.31, 0.33, 0.45, 0.60]      # micro tier only
-xf_frame = [0.58, 0.58, 0.55, 0.55, 0.10]         # radiator blade frames, edge chords and joint beads: the thermal frame hierarchy (S5)
+xf_frame = [0.58, 0.58, 0.55, 0.55, 0.10]         # radiator blade frames, edge chords and joint beads (S5); the raised casing straps (S6): light-mid frames, calm fields
 
 # Generated engineering materials (WF_MAT_<name>) to family for the grammar look (hero_preview.dress(grammar=True), the review set and,
 # from S9, the runtime exterior): the first rule whose prefixes match wins; None keeps the material's own display look. Production
@@ -3817,7 +3817,7 @@ family = "xf_thermal"
 prefixes = ["RadiatorRoot", "RootBoot", "CasingBoot"]
 family = "xf_root"
 [[production.exterior.ship_families]]
-prefixes = ["BladeFrame", "ExpansionJoint"]
+prefixes = ["BladeFrame", "ExpansionJoint", "Casing_Strap"]
 family = "xf_frame"
 [[production.exterior.ship_families]]
 prefixes = ["RingPressureBand"]
@@ -3826,7 +3826,7 @@ family = "xf_amber"
 prefixes = ["RingServiceCover", "CrownServiceHatch", "Casing_Access_Panel"]
 family = "xf_service"
 [[production.exterior.ship_families]]
-prefixes = ["RingJoint", "BrowPanelJoint", "Casing_Strap", "CrownRib"]
+prefixes = ["RingJoint", "BrowPanelJoint", "CrownRib"]
 family = "xf_joint"
 [[production.exterior.ship_families]]
 prefixes = ["Drive_Plasma", "Plasma", "Debug", "Radiator", "Prod_"]
@@ -3838,7 +3838,7 @@ family = "xf_structure"
 [[production.exterior.ship_families]]
 prefixes = ["Crown", "Carriage", "Shutter", "Emitter", "Launcher", "Drive", "Nozzle", "Thrust", "Coil", "Manifold", "Rotor", "Hub", "Bearing",
             "Ext_RCS", "Ext_Antenna", "Ext_Sensor", "Antenna", "Mast", "Drone", "EyeHousing", "EyeShutter", "OpticsHardware", "ServiceFitting",
-            "CoolantChase", "Locks", "EyeWell", "MagneticBearing"]
+            "CoolantChase", "Locks", "EyeWell", "MagneticBearing", "Survival_SP51", "Survival_SP53", "Survival_A29"]
 family = "xf_machinery"
 [[production.exterior.ship_families]]
 prefixes = ["Shield", "Brow", "Forward", "Lance", "Habitat", "Ring", "Hull", "Casing", "Spine", "Body", "Collar", "Dock", "Ext_Dock",

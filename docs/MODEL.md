@@ -1477,6 +1477,27 @@ pressure boundary or mechanism.
   panels, and no part in a sector pressure envelope; the envelope screen keeps each flank assembly off ring A's crew-tube pack. The
   M4 construction inside the frame (joints, webs, cassettes, covers, nodes, rim band), the spokes, crew tubes and hub are unchanged.
 
+## Spine casing (Phase 4 S6)
+
+The detail pack `spine_casing` (WF-SPINE, assembly `SP.CASING` on `WF-SPINE.HULL.ORIGIN`, vehicle frame) makes the aft body casing
+read as a serviced keel in the selected grammar. `L4_VISUAL_CANDIDATE`, PROTOTYPE: no load, mass, shielding, pressure boundary,
+opening, interface or mechanism.
+
+- **Casing modules:** five modules (K1–K5, aft to forward, about 36 m each) between the casing ends and the four primary-cage frames
+  the radiator bay stays bear on (bays 2, 4, 6, 8), so the blade frame rhythm continues round the body. Each boundary carries a 0.60 m
+  mid-value frame band, broken across the keel lanes like the hoop straps. In the grammar the raised casing straps take the light-mid
+  frame value (`xf_frame`), so the panel fields stay calm and the module bands lead.
+- **Followable route:** each blade's SP-51 crawler track (graphite rails and stops in the grammar) runs on a 0.70 m mid-value rail bed
+  from the thrust ring to the blade front; each of its seven stops has a GU deep-blue approach marker either side of the bed and a
+  text ID (`C<track>-<stop>`, 0.48 m). The DS-13 track (operations HOLD) and its docks are unchanged and undressed.
+- **Module numbers:** `K1`–`K5` (1.38 m) mid-module on the three bisectors between the blades.
+- **Screens** (`pack_spine_casing.check`): every element inside the casing x range and within 0.12 m of the casing, off every hull
+  opening (plus 0.25 m) and access panel, and at least 0.05 m from every fixed exterior part (survival masts, terminals, trackers,
+  crawler rails and stops; drone rails, docks and units; service fittings, docking corridors and the shield spokes' aft members).
+  99 elements; blue 1.1 % of the detail area.
+- **Exterior hardware in the families:** the SP-51 crawler hardware, the SP-53 survival terminals and the A29 star trackers map to
+  graphite machinery, like the S02 RCS pods, antennas and sensors.
+
 ## Phase 4 grammar study (S1)
 
 `studies/p4_s1_grammar.py` is the NONCANON S1 experiment of [PHASE4_PLAN.md](PHASE4_PLAN.md) (owner P4-EXP, 2026-10-24): it builds
@@ -1523,7 +1544,8 @@ interior standard).
   IGNITION emission is unchanged. The runtime exterior takes the same mapping in S9.
 - **Review set:** `presentation/p4_review.py` renders the matched cameras from the saved assets in the grammar look (or the pre-Phase-4
   hero look): whole ship (three-quarter, side, rings), forward (Brow sector, Crown bay, human scale), ring A (segment, human scale),
-  radiator 1 (clamp, aft edge, 35 m, root) and the spine, with the matched COAST/IGNITION pair; `--pairs` makes before/after sheets.
+  radiator 1 (clamp, aft edge, 35 m, root) and the spine (between the blades, a module boundary, a crawler stop at human scale),
+  with the matched COAST/IGNITION pair; `--pairs` makes before/after sheets.
 
 ## Characters
 

@@ -1,7 +1,7 @@
 {
   "result": "PASS",
   "blender": "5.2.2 LTS",
-  "spec_hash": "135a70a7e46e3d8e0f07a18e248e1a37bfe4f180d9dfabd962eb7dd2bcb03f5a",
+  "spec_hash": "987e8e127c544b203eca8dc74e3ea096247f1f23ee0a1413b47ba2d53cfbde1d",
   "source_map_hash": "11c6a58d4c9bd6f0317b0ddbbbf96859e0bfdc4839ca64a9abfca8015bd3fb32",
   "configurations": {
     "COAST": {
@@ -125,7 +125,7 @@
         "sector_interior_deck": 6,
         "sector_interior_overhead": 6,
         "sector_interior_zone": 60,
-        "production_detail": 71,
+        "production_detail": 75,
         "cryo_feed_line": 8,
         "service_fitting": 8,
         "dock_capture_ring": 2,
@@ -414,7 +414,7 @@
         "sector_interior_deck": 6,
         "sector_interior_overhead": 6,
         "sector_interior_zone": 60,
-        "production_detail": 71,
+        "production_detail": 75,
         "cryo_feed_line": 8,
         "service_fitting": 8,
         "dock_capture_ring": 2,
@@ -703,7 +703,7 @@
         "sector_interior_deck": 6,
         "sector_interior_overhead": 6,
         "sector_interior_zone": 60,
-        "production_detail": 71,
+        "production_detail": 75,
         "cryo_feed_line": 8,
         "service_fitting": 8,
         "dock_capture_ring": 2,
@@ -989,7 +989,7 @@
         "sector_interior_deck": 6,
         "sector_interior_overhead": 6,
         "sector_interior_zone": 60,
-        "production_detail": 71,
+        "production_detail": 75,
         "cryo_feed_line": 8,
         "service_fitting": 8,
         "dock_capture_ring": 2,
@@ -1275,7 +1275,7 @@
         "sector_interior_deck": 6,
         "sector_interior_overhead": 6,
         "sector_interior_zone": 60,
-        "production_detail": 71,
+        "production_detail": 75,
         "cryo_feed_line": 8,
         "service_fitting": 8,
         "dock_capture_ring": 2,
@@ -1561,7 +1561,7 @@
         "sector_interior_deck": 6,
         "sector_interior_overhead": 6,
         "sector_interior_zone": 60,
-        "production_detail": 71,
+        "production_detail": 75,
         "cryo_feed_line": 8,
         "service_fitting": 8,
         "dock_capture_ring": 2,
@@ -1887,6 +1887,12 @@
       "authored": 0,
       "enabled": true
     },
+    "WF_DETAIL_SP_CASING.blend": {
+      "assembly": "SP.CASING",
+      "objects": 4,
+      "authored": 0,
+      "enabled": true
+    },
     "WF_CREW_TRANSFER.blend": {
       "instances": [
         "M7.TRK"
@@ -1912,6 +1918,11 @@
       "instances": [
         "RB.EXT.AFT",
         "RB.EXT.FWD"
+      ]
+    },
+    "WF_HULL.blend": {
+      "instances": [
+        "SP.CASING"
       ]
     },
     "WF_SERVICE.blend": {
@@ -3836,6 +3847,16 @@
       ],
       "direct_links": []
     },
+    "detail/WF_DETAIL_SP_CASING.blend": {
+      "generated_objects": 4,
+      "ids": [
+        "SP.CASING.MARKINGS",
+        "SP.CASING.MODULES",
+        "SP.CASING.ROUTE",
+        "SP.CASING.WAYFINDING"
+      ],
+      "direct_links": []
+    },
     "subsystems/WF_CREW_TRANSFER.blend": {
       "generated_objects": 192,
       "ids": [
@@ -5415,7 +5436,7 @@
       ]
     },
     "subsystems/WF_HULL.blend": {
-      "generated_objects": 58,
+      "generated_objects": 59,
       "ids": [
         "Hull_Aft_Body",
         "Hull_Forward_Collar",
@@ -5474,9 +5495,12 @@
         "IF_HULL_STATION_ROTOR_A",
         "IF_HULL_STATION_ROTOR_B",
         "IF_HULL_STATION_SERVICES",
-        "IF_HULL_STATION_STORAGE"
+        "IF_HULL_STATION_STORAGE",
+        "WF.DETAIL.SP.CASING"
       ],
-      "direct_links": []
+      "direct_links": [
+        "detail/WF_DETAIL_SP_CASING.blend"
+      ]
     },
     "subsystems/WF_POWER_STORAGE.blend": {
       "generated_objects": 21,

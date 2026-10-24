@@ -29,10 +29,12 @@ unresolved science blocks only irreversible steps. Each slice: validate the chan
 close-up, regression check, MODEL/TODO and Model Status update.
 
 - [ ] **P4 — Phase 4 visual production and art direction ([docs/PHASE4_PLAN.md](docs/PHASE4_PLAN.md)). PRODUCTION 2026-10-24:
-  S1 art gate passed (owner selected VC+ Expressive Hybrid, moderated values; Art Style Spacecraft row 19); S2 done.** The grammar is
+  S1 art gate passed (owner selected VC+ Expressive Hybrid, moderated values; Art Style Spacecraft row 19); S2 done; S3 (M8.2), S4
+  (ring exteriors), S5 (radiator frames) and S6 (spine casing, `spine_casing`) BUILT, owner review.** The grammar is
   `[production.exterior]` (families, tiers, marking scale, accent budget, ship-material mapping) with the grammar look
-  (`hero_preview.dress(grammar=True)`) and the review set `presentation/p4_review.py`. **Next:** S3 (M8.2), S4 (ring exteriors), S5
-  (radiator frames and roots), S6 (spine), S9, S8a, S10, S11 in the plan's order; S7 waits on engineering releases. Every new asset
+  (`hero_preview.dress(grammar=True)`) and the review set `presentation/p4_review.py`. **Next:** S9 (runtime family mapping and Godot
+  parity, ram-face tile-and-repair look, switchable wear layer, ship name), S8a, S10, S11 in the plan's order; S7 waits on engineering
+  releases. Every new asset
   stays `L4_VISUAL_CANDIDATE` until the owner reviews it; nothing reaches `main` without the owner's squash approval.
   **Done when:** the plan's S11 whole-ship review is accepted by the owner.
 - [ ] **MOD — Modular detail (docs/MODULES.md).** Every production assembly is a detail pack (phase 2, 2026-10-23: `m7_spine`,
