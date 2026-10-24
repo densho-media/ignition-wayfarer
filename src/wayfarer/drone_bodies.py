@@ -338,9 +338,28 @@ def rail_fixture(b, d, rails, length, standoff=.15, dock=None):
     w = max(abs(y) for y in rails)*2+.5
     b.box(n, 'FIXTURE_HULL', (0, 0, -standoff-.01), (length+.2, w, .02), 'shell_white', job='hull skin patch (review only)')
     if dock:
-        x, size = dock
-        b.box(n, 'FIXTURE_DOCK', (x, 0, -standoff+.03), (.20, .16, .06), 'graphite', bevel=.008, job='dock latch cradle (review only)')
-        sif(b, n, 'fixture_dock_sif', (x, 0, -standoff+.06), '+z', size, d, active=True, release=True, job='dock cradle active fitting: latch, charge, data')
+        x, size, top = (*dock, None)[:3] if len(dock) == 2 else dock
+        if top is None:
+            b.box(n, 'FIXTURE_DOCK', (x, 0, -standoff+.03), (.20, .16, .06), 'graphite', bevel=.008, job='dock latch cradle (review only)')
+            sif(b, n, 'fixture_dock_sif', (x, 0, -standoff+.06), '+z', size, d, active=True, release=True, job='dock cradle active fitting: latch, charge, data')
+        else:
+            # PROTOTYPE docking cradle on the review stand (not on the ship; DS-10/11/13 dock design OPEN): a pedestal between the rails
+            # rises to the crawler's underside GU-SIF-M; two V-guides take the chassis beam so the fitting meets square; charge / data
+            # umbilical, docked lamp and a manual undock release. Latch, charge and alignment ratings OPEN (DGT-012 HOLD).
+            seat = top-.03; base = -standoff
+            b.box(n, 'FIXTURE_DOCK_CRADLE', (x, 0, base+.012), (.26, .20, .024), 'graphite', bevel=.006, job='PROTOTYPE dock cradle base plate (review stand only)')
+            b.box(n, 'FIXTURE_DOCK_CRADLE', (x, 0, (base+.024+seat-.02)/2), (.09, .09, seat-.02-base-.024), 'grey', bevel=.008, job='cradle pedestal')
+            b.box(n, 'FIXTURE_DOCK_CRADLE', (x, 0, seat-.01), (.16, .12, .02), 'graphite', bevel=.005, job='cradle head')
+            sif(b, n, 'fixture_dock_sif', (x, 0, seat), '+z', size, d, active=True, release=True, job='cradle active fitting: latch, charge, data (ratings OPEN)')
+            for sx in (1, -1):
+                gx = x+sx*.17
+                b.box(n, 'FIXTURE_DOCK_GUIDE', (gx, 0, (base+.024+top+.03)/2), (.02, .05, top+.03-base-.024), 'grey', bevel=.004, job='V-guide post: centres the chassis beam')
+                for sy in (1, -1):
+                    b.box(n, 'FIXTURE_DOCK_GUIDE', (gx, sy*.062, top+.02), (.02, .022, .05), 'graphite', bevel=.004, job='guide jaw (chassis beam lead-in)')
+            b.cyl(n, 'FIXTURE_DOCK_UMBILICAL', (x-.05, .05, base+.024), (x-.05, .05, seat-.03), .010, 'graphite', n=10, job='charge / data umbilical')
+            b.box(n, 'FIXTURE_DOCK_UMBILICAL', (x+.10, .085, base+.04), (.05, .03, .03), 'grey', bevel=.004, job='cradle power / data junction')
+            b.box(n, 'FIXTURE_DOCK_RELEASE', (x+.10, .102, base+.045), (.018, .006, .018), 'safety_orange', job='manual undock release (recovery robot / crew)')
+            b.cyl(n, 'FIXTURE_DOCK_LAMP', (x+.10, .085, base+.055), (x+.10, .085, base+.062), .006, 'lamp_green', n=12, job='docked / charging lamp')
     b.fixtures.append(n); return n
 
 
@@ -585,6 +604,12 @@ def eva01(d, s):
     target(b, om, 'oru_target', (o[0]*.25, 0, o[2]), '+z', .045)
     sif(b, om, 'oru_sif', (-o[0]*.2, 0, o[2]), '+z', 'S', d, release=False, job='ORU grapple fitting')
     b.box(om, 'ORU_MODULE', (0, o[1]/2+.001, o[2]*.6), (o[0]*.7, .002, .02), 'gu_blue')
+    for sx in (1, -1):                                       # guide frame: four corner posts lead a module into the clamshell
+        for sy in (1, -1):
+            gx, gy = sx*(o[0]/2+.004), sy*(o[1]/2+.004)
+            b.box(ob, 'ORU_GUIDE', (gx, gy, o[2]*.32), (.014, .014, o[2]*.64), 'graphite', bevel=.003, job='ORU guide post (module alignment)')
+            b.cyl(ob, 'ORU_GUIDE', (gx, gy, o[2]*.64), (gx, gy, o[2]*.72), .009, 'metal', r2=.004, n=10, job='guide lead-in cone')
+    b.box(ob, 'ORU_GUIDE', (0, 0, -.004), (o[0]+.03, o[1]+.03, .008), 'graphite', job='ORU bay seat with module data / power connector')
     # short 4-axis arm on the forward deck, periscope camera aft
     _arm(b, c, (-L*.32, -W*.28, top), q['arm_links_m'], d, roll=False)
     pm = b.node('peri_base', c, (L*.38, -W*.05, top))
@@ -592,8 +617,10 @@ def eva01(d, s):
     pe = b.node('peri', pm, (0, 0, 0), joint='prismatic', axis='z', limits=(0, q['periscope_m'][1]-q['periscope_m'][0]), job='telescoping periscope')
     b.cyl(pe, 'PERISCOPE', (0, 0, .02), (0, 0, q['periscope_m'][0]+.01), .015, 'metal', n=16)
     ph = b.node('peri_pan', pe, (0, 0, q['periscope_m'][0]+.01), joint='revolute', axis='z')
-    b.box(ph, 'PERISCOPE', (0, 0, .02), (.05, .04, .04), 'grey', bevel=.006)
-    camera(b, ph, 'CAMERA', (.025, 0, .02), '+x', .012, .006, job='periscope camera: looks round truss members and into EYE apertures from the safe side')
+    b.box(ph, 'PERISCOPE', (0, 0, .02), (.07, .07, .04), 'grey', bevel=.008, job='Brow inspection head: stereo cameras, ranging and lights on the periscope')
+    camera(b, ph, 'CAMERA', (.035, .018, .018), '+x', .011, .006, job='periscope stereo camera: looks round truss members and into EYE apertures from the safe side')
+    camera(b, ph, 'CAMERA', (.035, -.018, .018), '+x', .011, .006)
+    b.box(ph, 'SURVEY_LIGHT', (.036, 0, .034), (.004, .05, .007), 'target_white', job='inspection light bar')
     b.act('traverse', [(0, {'travel': 0}), (5, {'travel': .8})], 'traverse along the protected aft-face rail (display time; speed OPEN)')
     J = ['arm_yaw', 'arm_sh', 'arm_el', 'arm_wp']; op = {'clam_f': 50, 'clam_a': -50}
     g0 = at(b, 'oru_sif', (0, 0, .03)); g1 = (g0[0], g0[1], g0[2]+.10)
@@ -603,7 +630,7 @@ def eva01(d, s):
           'open the clamshell latches and seat the tool changer on the carried module\'s grapple fitting (module transfer to its worksite not animated; interface PROTOTYPE)')
     b.act('periscope', [(0, {}), (2, {'peri': .12}), (4, {'peri': .12, 'peri_pan': 120}), (6, {'peri': .12, 'peri_pan': -120}), (8, {})], 'raise the periscope and pan')
     b.act('fault_hold', [(0, {'arm_sh': -60, 'arm_el': 120}), (2, {'arm_sh': 0, 'arm_el': 0}), (3, {})], 'stow arm, brakes on the trucks, report (DOP-06/13)')
-    rail_fixture(b, d, (g/2, -g/2), d['interface']['fixture_rail_len_m'], dock=(0.0, 'M'))
+    rail_fixture(b, d, (g/2, -g/2), d['interface']['fixture_rail_len_m'], dock=(0.0, 'M', zc))
     return b
 
 
@@ -627,6 +654,16 @@ def eva02(d, s):
               job='specular heat-shield layer: reflects blade radiation; no rating, view factor or cooldown released (DGT-007 HOLD)')
     for x in (-sl*.4, 0, sl*.4):
         b.box(hs, 'HEAT_SHIELD', (x, -.012, sh*.45), (.016, .03, sh*.85), 'graphite')
+    for x in (-L*.2, L*.2):                                  # blade-side vault faces silvered (low absorptance toward the root)
+        b.box(c, 'THERMAL_FACE', (x, W/2+.004, vz), (L*.30, .003, H*.70), 'radiator', job='silvered hot-side face (optical properties OPEN)')
+    dfl = b.node('deflector', c, (0, W*.10, top+.022))
+    b.box(dfl, 'DEFLECTOR', (0, 0, 0), (L*.80, W*.60, .006), 'metal', job='upper deflector: shades the deck from the blade root (view factor OPEN, DGT-007 HOLD)')
+    for x in (-L*.32, L*.32):
+        for y in (-W*.22, W*.22):
+            b.cyl(dfl, 'DEFLECTOR', (x, y, -.003), (x, y, -.018), .006, 'graphite', n=8, job='deflector standoff (low-conductance)')
+    irp = b.node('ir_pan', dfl, (L*.30, W*.12, .003), joint='revolute', axis='z', limits=(-170, 170), job='radiometer pan')
+    b.box(irp, 'IR_TURRET', (0, 0, .02), (.06, .05, .04), 'grey', bevel=.006, job='IR radiometer / thermal imager: maps root and blade temperature before any approach (DOP-08)')
+    b.cyl(irp, 'IR_TURRET', (0, .025, .02), (0, .055, .02), .016, 'graphite', r2=.022, n=16, job='radiometer sunshade cone')
     # leak-locator boom (RELL-type mass spectrometer) forward, valve-drive arm aft
     l1, l2 = q['boom_links_m']
     by = b.node('boom_yaw', c, (L*.30, -W*.20, top), joint='revolute', axis='z')
@@ -644,10 +681,11 @@ def eva02(d, s):
     b.act('traverse', [(0, {'travel': 0}), (5, {'travel': .8})], 'traverse the root track, shield toward the blade (cold state only)')
     b.act('leak_scan', [(0, {}), (2, {'boom_yaw': 170, 'boom_p': -70, 'boom_p2': -140}), (4, {'boom_yaw': 130, 'boom_p': -60, 'boom_p2': -150}),
                         (6, {'boom_yaw': -150, 'boom_p': -60, 'boom_p2': -150}), (8, {})], 'sweep the leak-sensor head along a root joint')
+    b.act('thermal_survey', [(0, {}), (2, {'ir_pan': 90}), (4, {'ir_pan': -90}), (6, {})], 'pan the IR radiometer across the root and blade before an approach (cold-state check, DOP-08)')
     b.act('valve_service', [(0, {}), (2, {'arm_yaw': -90, 'arm_sh': -70, 'arm_el': 130}), (3.5, {'arm_yaw': -90, 'arm_sh': -60, 'arm_el': 140, 'arm_wp': -60}),
                             (5, {'arm_yaw': -90, 'arm_sh': -60, 'arm_el': 140, 'arm_wp': -60, 'arm_wr': 270}), (7, {})], 'engage an accessible valve drive and turn it (torque OPEN)')
     b.act('fault_hold', [(0, {'boom_p': -70}), (2, {}), (3, {})], 'thermal or link fault: stow, retreat to the HOME dock or hold braked (DOP-08/13)')
-    rail_fixture(b, d, (g/2, -g/2), d['interface']['fixture_rail_len_m'], dock=(0.0, 'M'))
+    rail_fixture(b, d, (g/2, -g/2), d['interface']['fixture_rail_len_m'], dock=(0.0, 'M', zc))
     return b
 
 
@@ -689,14 +727,30 @@ def eva03(d, s):
     # cartridge latched until the crew member's grip is confirmed (DOP-04 supervised handoff; latch and grip ratings OPEN)
     for y in (-.038, .038):
         b.cyl(tc, 'TOOL_CARTRIDGE', (-.025, y, .035), (-.062, y, .035), .006, 'grey', n=10)
-    b.cyl(tc, 'CREW_HANDLE', CREW_HANDLE[0], CREW_HANDLE[1], CREW_HANDLE[2], 'rubber', n=16, job='crew handle (handoff grip), rubber-sleeved')
+    b.cyl(tc, 'CREW_HANDLE', CREW_HANDLE[0], CREW_HANDLE[1], CREW_HANDLE[2], 'metal', n=16, job='crew handle (handoff grip), knurled metal: reads against the glove grip pads')
     p0 = at(b, 'cartridge', (0, 0, .035)); cz = top+.008
     b.box(c, 'TOOL_CRADLE', (p0[0], p0[1], (cz+p0[2]-.026)/2), (.08, .05, p0[2]-.026-cz), 'grey', bevel=.004, job='tool cradle: holds the parked cartridge under 1.5 g (latch rating OPEN)')
     cd = b.node('caddy', c, (-L*.02, W*.26, top+.008))
-    b.box(cd, 'TOOL_CADDY', (0, 0, .012), (.09, .07, .024), 'grey', bevel=.006, job='spare cartridge caddy (DGT-012 standard HOLD)')
-    b.box(cd, 'TOOL_CARTRIDGE', (0, 0, .059), (.05, .05, .07), 'graphite', bevel=.005, job='spare inspection-probe cartridge')
-    b.box(cd, 'TOOL_CARTRIDGE', (0, -.026, .065), (.03, .002, .012), 'gu_blue')
+    # tool magazine: three cartridge slots on keyed GU-SIF-S seats (torque spare, inspection probe, gripper); DGT-012 standard HOLD
+    b.box(cd, 'TOOL_CADDY', (0, 0, .012), (.21, .075, .024), 'grey', bevel=.006, job='tool magazine: three keyed cartridge seats (DGT-012 standard HOLD)')
+    b.box(cd, 'TOOL_CADDY', (0, -.04, .04), (.21, .006, .05), 'graphite', job='magazine retaining wall')
+    for k, (x, tip, job) in enumerate(((-.07, 'bit', 'spare torque cartridge'), (0.0, 'probe', 'inspection-probe cartridge'), (.07, 'jaw', 'gripper cartridge'))):
+        b.box(cd, 'TOOL_CARTRIDGE', (x, 0, .059), (.05, .05, .07), 'graphite', bevel=.005, job=job)
+        b.box(cd, 'TOOL_CARTRIDGE', (x, -.026, .065), (.03, .002, .012), 'gu_blue')
+        if tip == 'bit':
+            b.cyl(cd, 'TOOL_BIT', (x, 0, .094), (x, 0, .104), .007, 'metal', r2=.004, n=10)
+        elif tip == 'probe':
+            b.cyl(cd, 'TOOL_BIT', (x, 0, .094), (x, 0, .106), .005, 'metal', n=10)
+        else:
+            for sy in (-1, 1):
+                b.box(cd, 'TOOL_BIT', (x, sy*.012, .1), (.02, .006, .012), 'metal')
     sif(b, cd, 'spare_sif', (0, 0, .094), '+z', 'S', d, release=False)
+    # crew assistance on the -Y (crew) side: a handrail a suited hand can close on, and a tether anchor ring (ratings OPEN)
+    for x in (L*.30, -L*.30):
+        b.cyl(c, 'CREW_RAIL', (x, -W/2-.01, vz+H*.25), (x, -W/2-.05, vz+H*.25), .008, 'grey', n=10, job='crew handrail standoff')
+    b.cyl(c, 'CREW_RAIL', (L*.33, -W/2-.05, vz+H*.25), (-L*.33, -W/2-.05, vz+H*.25), .0125, 'metal', n=14, job='crew handrail: 25 mm bar, a suited crew member steadies on the crawler (handhold rating OPEN)')
+    b.box(c, 'TETHER_ANCHOR', (-L*.44, -W/2+.01, vz+H*.35), (.03, .02, .03), 'graphite', bevel=.004, job='crew tether anchor (rating OPEN; never a primary anchor, DOP-04)')
+    b.cyl(c, 'TETHER_ANCHOR', (-L*.44, -W/2-.012, vz+H*.35+.004), (-L*.44, -W/2-.016, vz+H*.35+.004), .014, 'safety_orange', n=14, job='tether anchor ring tag')
     J = ['arm_yaw', 'arm_sh', 'arm_el', 'arm_wp']
     up = {'arm_sh': -55, 'arm_el': 70}
     work = (L*.45, -W*.85, zc)                                                # a worksite beside the track, inside the arm's display reach
@@ -712,7 +766,7 @@ def eva03(d, s):
     b.act('handoff', [(0, {}), (2, {'arm_sh': -60, 'arm_el': 60}), (4, ho), (7, ho), (9, {})],
           'present a tool to a suited crew member beside the track (supervised handoff, DOP-04; FLIGHT_EVA HOLD)')
     b.act('fault_hold', [(0, {'arm_sh': -50, 'arm_el': 80}), (1.5, {'arm_sh': 0, 'arm_el': 0}), (3, {})], 'power loss / jam / lost link: stow, brake, hold and report; wait for retrieval (DOP-13/14)')
-    rail_fixture(b, d, (g/2, -g/2), d['interface']['fixture_rail_len_m'], dock=(0.0, 'M'))
+    rail_fixture(b, d, (g/2, -g/2), d['interface']['fixture_rail_len_m'], dock=(0.0, 'M', zc))
     return b
 
 

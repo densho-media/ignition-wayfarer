@@ -7,6 +7,7 @@ extends Node3D
 ##   godot --path accessories/viewer -- --shots <dir>     one screenshot per entry at its main action (needs a display, e.g. xvfb-run)
 
 const GEN := "res://generated/"
+const LOCKED := "LOCKED_NOT_SUITED_EVA"
 const BANNER := "WAYFARER ACCESSORY REVIEW  ·  PROTOTYPE design candidates, NOT INTEGRATED (DGT-017 HOLD)  ·  motions SIMULATION_ONLY  ·  GU-SIF proposed, not approved (DGT-012 HOLD)  ·  FLIGHT_EVA HOLD"
 
 var manifest := {}
@@ -196,7 +197,10 @@ func _select(i: int) -> void:
 	var players := current.find_children("*", "AnimationPlayer", true, false)
 	anim = players[0] if players.size() > 0 else null
 	for a in e.get("actions", []):
-		ui_actions.add_item("%s   [%s]" % [a["name"], a["status"]])
+		var k := ui_actions.add_item("%s   [%s]" % [a["name"], a["status"]])
+		if a["status"] == LOCKED:
+			ui_actions.set_item_disabled(k, true)          # inherited unsuited actions never play as suited EVA operations
+			ui_actions.set_item_custom_fg_color(k, Color(0.6, 0.45, 0.4))
 	_info(e, null)
 	_frame()
 
@@ -210,16 +214,20 @@ func _anim_name(action: String) -> String:
 	return ""
 
 
-func _play(k: int) -> void:
+func _play(k: int) -> bool:
 	var e: Dictionary = entries[selected]
 	var a: Dictionary = e["actions"][k]
+	if a["status"] == LOCKED:
+		ui_info.text += "\n[color=#ff8060]%s is LOCKED: %s. Not a suited EVA operation; it does not play.[/color]" % [a["name"], a["job"]]
+		return false
 	var n := _anim_name(a["name"])
 	if n == "":
 		ui_info.text += "\n[color=#ff8060]animation %s not in the GLB[/color]" % a["name"]
-		return
+		return false
 	anim.get_animation(n).loop_mode = Animation.LOOP_LINEAR if ui_loop.button_pressed else Animation.LOOP_NONE
 	anim.play(n)
 	_info(e, a)
+	return true
 
 
 func _stow() -> void:
@@ -311,7 +319,16 @@ func _check() -> void:
 			if not (w in e.get("gates", "")):
 				fails.append("%s: status label lacks %s" % [e["id"], w])
 		var played := 0
-		for a in e.get("actions", []):
+		var locked := 0
+		for j in e.get("actions", []).size():
+			var a: Dictionary = e["actions"][j]
+			if a["status"] == LOCKED:                          # listed, disabled and refused: never played as a suited operation
+				locked += 1
+				if anim:
+					anim.stop()
+				if not ui_actions.is_item_disabled(j) or _play(j) or (anim and anim.is_playing()):
+					fails.append("%s/%s: LOCKED action is playable" % [e["id"], a["name"]])
+				continue
 			if a["status"] != "SIMULATION_ONLY":
 				fails.append("%s/%s: action not labelled SIMULATION_ONLY" % [e["id"], a["name"]])
 			var n := _anim_name(a["name"])
@@ -321,7 +338,7 @@ func _check() -> void:
 			anim.play(n)
 			anim.seek(anim.get_animation(n).length * 0.5, true)
 			played += 1
-		print("WF_ACC_VIEWER %s meshes=%d actions=%d/%d" % [e["id"], meshes, played, e.get("actions", []).size()])
+		print("WF_ACC_VIEWER %s meshes=%d actions=%d/%d locked=%d" % [e["id"], meshes, played, e.get("actions", []).size() - locked, locked])
 	for f in fails:
 		printerr("ERROR: ", f)
 	if fails.is_empty():
@@ -345,7 +362,16 @@ func _shots(dir: String) -> void:
 			_play(k)
 			anim.seek(float(e["main"][1]), true)
 			anim.pause()
+		var shows_locked := false
+		for j in range(e.get("actions", []).size() - 1, -1, -1):   # an entry with locked actions: show the list end and the refusal
+			if e["actions"][j]["status"] == LOCKED:
+				_play(j)
+				shows_locked = true
+				break
 		await get_tree().process_frame
+		if shows_locked:
+			ui_actions.get_v_scroll_bar().value = ui_actions.get_v_scroll_bar().max_value
+			ui_info.scroll_to_line(ui_info.get_line_count() - 1)
 		_frame()                                             # frame the working pose, not the stowed one
 		for _f in 3:
 			await get_tree().process_frame

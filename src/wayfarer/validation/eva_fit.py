@@ -3,7 +3,7 @@
   blender --background --factory-startup --python-exit-code 1 --python src/wayfarer/validation/eva_fit.py -- \
       [--report references/p1_eva_fit.json] [--renders renders/p1/eva/fit] [--no-route] [--step 6]
 
-1. Pressure continuity: in sampled frames of every action (the eight EVA actions and the five shared ones), each covered body vertex
+1. Pressure continuity: in sampled frames of every action (the EVA actions and the five shared unsuited ones), each covered body vertex
    must lie behind the outer layer (the nearest outer-layer surface faces away from it) or inside the torso-fixed helmet; the head must
    stay inside the helmet. Reports exposed vertices and how far outside (ASSET-03 "no gaps exposing skin in ANY animated pose").
 2. Suited envelope at rest and its largest extent over the EVA actions: width, depth with the PLSS, height and the diameter of the
@@ -33,7 +33,7 @@ import hull_geometry
 from spec import load
 
 REACH = .12                      # the outer layer must lie above the skin within this distance along the skin normal
-SHARED = ('idle', 'walk', 'sit', 'crawl', 'climb')
+SHARED = tuple(es.SHARED_ACTIONS)               # the wearer's unsuited actions: checked and reported, never suited EVA operations
 NEAR = 3.0
 
 
@@ -128,6 +128,7 @@ def coverage(rig, objs, data, step):
                     worst['exposed'] += 1; worst['max_out_mm'] = max(worst['max_out_mm'], round(depth*1000, 1))
                     worst['bones'][dom[i]] = worst['bones'].get(dom[i], 0)+1
         worst['status'] = 'PASS' if worst['exposed'] == 0 and worst['head_out'] == 0 else 'FAIL'
+        worst['use'] = 'EVA' if name in es.EVA_ACTIONS else 'NOT_SUITED_EVA'
         worst['bones'] = dict(sorted(worst['bones'].items(), key=lambda x: -x[1])[:4]); out[name] = worst
     return out
 
@@ -397,6 +398,9 @@ def main():
         report['route'], report['route_status'] = route_holds(s, data, keys, args, report['sweep_radius_m'])
         print('WF_EVA_FIT route', [(r['case'], r['status'], r['least_clearance_m'], r['intersections']) for r in report['route']], flush=True)
     report['coverage_pass'] = all(c['status'] == 'PASS' for v in report['variants'].values() for c in v['coverage'].values())
+    report['eva_coverage_pass'] = all(c['status'] == 'PASS' for v in report['variants'].values() for c in v['coverage'].values() if c['use'] == 'EVA')
+    report['not_suited_eva_failures'] = sorted({f'{k}:{n}' for k, v in report['variants'].items() for n, c in v['coverage'].items()
+                                                if c['use'] != 'EVA' and c['status'] != 'PASS'})
     args.report.write_text(json.dumps(report, indent=1)+'\n')
     if hulls:                                                  # the EVA-002 access study input (eva_access.py)
         (args.report.parent/'p1_eva_envelopes.json').write_text(json.dumps(dict(

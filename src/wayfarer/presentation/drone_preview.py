@@ -1,7 +1,7 @@
 """Review renders of the maintenance-drone body family (docs/ACCESSORIES.md; build/drone_bodies.py first).
 
   blender --background --factory-startup --python-exit-code 1 --python src/wayfarer/presentation/drone_preview.py -- \
-      --out <dir> [--views lineup classes closeups] [--only DR-EVA-03 ...] [--quality draft|material|review] [--size 1280 800]
+      --out <dir> [--views lineup classes closeups review cradles] [--only DR-EVA-03 ...] [--quality draft|material|review] [--size 1280 800]
 
 Opens the saved assets/drones/WF_DRONE_<ID>.blend files in memory (never saves): `lineup` puts every class at one scale beside a 1.80 m
 scale post (the suited instructor if assets/characters/WF_EVA_INSTRUCTOR.blend exists); `classes` renders each class stowed on its
@@ -147,6 +147,13 @@ def main():
             note(f"{cid} {b.title} · {c['active']} active + {c['reserve']} reserve · {act} (SIMULATION_ONLY) · {size} · "
                  'PROTOTYPE L4, NOT INTEGRATED (DGT-017 HOLD) · GU-SIF proposed (DGT-012 HOLD) · performance OPEN')
             camera(sc_, sext*2.4, -52, 24, lens=50); shoot(out/f'review_{ident(cid)}.png')
+    if 'cradles' in args.views:                                  # the PROTOTYPE docking cradles on the review stands, seen low from the crew side
+        for cid in [c for c in order if c in ('DR-EVA-01', 'DR-EVA-02', 'DR-EVA-03')]:
+            b = B[cid]; clear(); render_setup(args.size, args.quality); E = append(cid); apply_pose(b, E, {})
+            floor(z=-.17)
+            note(f'{cid} docked on its review stand: PROTOTYPE dock cradle (pedestal to the underside GU-SIF-M, V-guides, umbilical, '
+                 'docked lamp, orange manual release) · review fixture, NOT ship geometry · latch, charge and alignment ratings OPEN (DGT-012 HOLD)')
+            camera((0, 0, .02), 1.25, -112, 8, lens=45); shoot(out/f'cradle_{ident(cid)}.png')
     if 'closeups' in args.views:
         for cid in [c for c in order if c in ('DR-EVA-03', 'DR-IVA-01', 'DR-FIX-01', 'DR-IVA-03')]:
             b = B[cid]; clear(); render_setup(args.size, args.quality); E = append(cid); apply_pose(b, E, {})

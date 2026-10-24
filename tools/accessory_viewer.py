@@ -5,8 +5,9 @@
   python3 tools/accessory_viewer.py shots --out <dir>         one screenshot per entry (needs a display; uses xvfb-run when present)
   python3 tools/accessory_viewer.py open                      the interactive viewer (stages first when generated/ is empty)
 
-`stage` without --from runs the Blender drone builder (build/drone_bodies.py) and the accessory scenes (presentation/accessory_scene.py
---glb; the suits must be built) into runs/<stamp>-accessory-viewer and copies the GLBs. The manifest names each design's class facts,
+`stage` without --from runs the Blender drone builder (build/drone_bodies.py), the accessory scenes (presentation/accessory_scene.py
+--glb) and the suited instructor (export/eva_gltf.py --out <run>/suit; the suits must be built) into runs/<stamp>-accessory-viewer and
+copies the GLBs. The suit's EVA actions play; its inherited unsuited actions are listed LOCKED and never play. The manifest names each design's class facts,
 its actions (SIMULATION_ONLY) and the gates it stays under; none of it is a ship input. The ship viewer in godot/, the runtime export
 and the module registry are never touched.
 """
@@ -23,6 +24,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT/'src/wayfarer'))
 import drone_bodies as db       # noqa: E402
 import drone_fleet as df        # noqa: E402
+import eva_suit as es           # noqa: E402
 
 PROJECT = ROOT/'accessories/viewer'
 GEN = PROJECT/'generated'
@@ -40,6 +42,25 @@ SCENES = [dict(id='SCENE-EVA-HANDOFF', title='EVA tool handoff (training simulat
                facts=['DR-IVA-02 picks a cargo cartridge on a deck guide (the guide channel is an interface request, not in the ship)',
                       'DR-IVA-01 perched on a handrail, fans off', 'DR-IVA-03 probing a sensor port in a raceway (conduits DS-09 HOLD)'],
                gates='PROTOTYPE · L4 visual candidates · NOT INTEGRATED (DGT-017 HOLD)')]
+
+
+SUIT_GATES = ('TRAINING SIMULATION · FLIGHT_EVA HOLD · PROTOTYPE, NOT CERTIFIED (QA-03) · suit pressure, life support, mass, glove torque '
+              'and grip OPEN · EVA actions are display motions inside the PROTOTYPE mobility limits, not certified suit mobility')
+LOCKED = 'LOCKED_NOT_SUITED_EVA'
+
+
+def suit_entry(key='instructor'):
+    """The suited instructor: the EVA library plays (SIMULATION_ONLY, pressure-coverage display check PASS); the wearer's inherited unsuited
+    actions are listed LOCKED with the reason and never play as suited EVA operations (docs/ACCESSORIES.md, validation semantics)."""
+    acts = [dict(name=n, job=n.replace('eva_', '').replace('_', ' ') + ' (EVA library; coverage display check PASS)', status='SIMULATION_ONLY')
+            for n in es.EVA_ACTIONS]
+    acts += [dict(name=n, job=why, status=LOCKED) for n, why in es.SHARED_ACTIONS.items()]
+    return dict(id='WAYFARER_EVA_Y155', title=f'EVA suit, {key} (rigged, MPFB)', glb=f'eva_{key}.glb', main=['eva_suit_check', 1.0],
+                facts=['soft layers skinned to the unchanged MPFB game_engine rig; rigid hard torso, helmet, PLSS, bearings, boots on bones',
+                       f'{len(es.EVA_ACTIONS)} EVA actions play; the {len(es.SHARED_ACTIONS)} inherited unsuited actions are locked: they are '
+                       'not suited EVA operations (crawl and climb fail the suited pressure-coverage check)',
+                       'baseline PLSS; the compact ASSET-10 pack is a separate study, not shown here'],
+                actions=acts, gates=SUIT_GATES)
 
 
 def run(cmd, **kw):
@@ -79,6 +100,7 @@ def stage(args):
         blender('src/wayfarer/build/drone_bodies.py', '--out', src, log=src/'drones.log')
         if (ROOT/'assets/characters/WF_EVA_INSTRUCTOR.blend').exists():
             blender('src/wayfarer/presentation/accessory_scene.py', '--out', src/'scenes', '--glb', '--size', 640, 400, log=src/'scenes.log')
+            blender('src/wayfarer/export/eva_gltf.py', '--out', src/'suit', '--only', 'instructor', log=src/'suit.log')
         else:
             print('note: no suit assets (tools/workflow.py characters, then eva): the scenes are left out')
     if GEN.exists():
@@ -87,6 +109,9 @@ def stage(args):
     entries = manifest(s, d)
     for e in entries:
         shutil.copy2(src/'glb'/e['glb'], GEN/e['glb'])
+    p = next((q for q in (src/'suit'/'eva_instructor.glb',) if q.exists()), None)
+    if p:                                                  # the suit GLB from the ship's EVA exporter, run into this run folder only
+        shutil.copy2(p, GEN/p.name); entries.append(suit_entry())
     for sc in SCENES:
         p = next((q for q in (src/'scenes'/sc['glb'], src/sc['glb']) if q.exists()), None)
         if p:

@@ -75,7 +75,7 @@ bearing_clearance_m = 0.0          # bearing ring seated into the outer layer (i
 # PLSS display envelope: width, depth, height (m). PROTOTYPE, of the order of the operational EMU's pack; packaging, mass and volume are
 # OPEN (44!10 ASSET-09, EVA-024, EVA-028). The fit check reports the largest depth each bottleneck admits instead of shrinking it (RUN-010).
 plss_size_m = [0.50, 0.22, 0.62]
-plss_compact_size_m = [0.58, 0.14, 0.56]   # ASSET-10 PLSS_COMPACT_STUDY: distributed alternative, same contents, shown only as a study
+plss_compact_size_m = [0.58, 0.14, 0.56]   # ASSET-10 PLSS_COMPACT_STUDY: distributed alternative, shown only as a study; contents not shown to fit (docs/ACCESSORIES.md matrix)
 dcm_size_m = [0.22, 0.08, 0.12]    # chest display and control module
 boot_sole_m = [0.12, 0.30, 0.025]  # rigid service sole with toe hook (foot-restraint compatible, 44!9)
 

@@ -461,6 +461,16 @@ def casualty_supported(H, mob, fps):
 EVA_ACTIONS = ('eva_suit_check', 'eva_airlock', 'eva_translate', 'eva_body_rotate', 'eva_tether_transfer', 'eva_tool_inspect',
                'eva_guide_point', 'eva_abort_translate', 'eva_hatch_pass', 'eva_buddy_check', 'eva_casualty', 'eva_rescue_hold',
                'eva_latch_extension', 'eva_latch_pitch', 'eva_casualty_supported')
+# Actions every suit asset inherits from the wearer's unsuited character rig (build/human.py, human_system.py). They are never suited EVA operations,
+# whatever their coverage readback: not in eva_actions, not played as EVA, tagged NOT_SUITED_EVA in the asset (docs/ACCESSORIES.md).
+SHARED_ACTIONS = {
+    'idle': 'unsuited standing idle',
+    'walk': 'unsuited walk in ring gravity',
+    'sit': 'unsuited seated pose',
+    'crawl': 'unsuited floor crawl: the head leaves the torso-fixed helmet (coverage FAIL)',
+    'climb': 'unsuited ladder climb: overhead reach far past the 120 deg suit shoulder display limit; the outer layer thins under '
+             'the scye bearing (instructor coverage FAIL)',
+}
 
 
 def actions(H, data, fps, P=None):

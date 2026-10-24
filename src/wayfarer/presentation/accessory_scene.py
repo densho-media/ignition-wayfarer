@@ -68,9 +68,18 @@ def eva(args, out, B):
     surf = zc+math.sqrt(max(0.0, Rc*Rc-fy*fy))
     block('FootRestraint_Plate', (fx, fy, feet-.02), (.42, .32, .03), grey)
     rod('FootRestraint_Post', (fx, fy, surf-.02), (fx, fy, feet-.035), .03, grey)
-    for s in 'lr':
-        p = rig.matrix_world @ rig.pose.bones[f'ball_{s}'].head
-        block(f'FootRestraint_Toe_{s}', (p.x, p.y, feet+.03), (.11, .05, .04), grey)
+    for s in 'lr':                                                            # per boot: a toe bail over the toe hook and a heel clip
+        ball = rig.matrix_world @ rig.pose.bones[f'ball_{s}'].head; heel = rig.matrix_world @ rig.pose.bones[f'foot_{s}'].head
+        fd = Vector((ball.x-heel.x, ball.y-heel.y, 0)).normalized(); sd = fd.cross(Vector((0, 0, 1))); z0 = feet-.005
+        toe = Vector((ball.x, ball.y, z0))+fd*.035; hk = next((o for o in objs if o.name.endswith(f'Toe_Hook_{s}')), None)
+        top = (hk.matrix_world @ Vector(hk.data.vertices[0].co)).z+.012 if hk else z0+.075
+        arch = [toe+sd*.07*math.cos(math.radians(a))+Vector((0, 0, (top-z0)*math.sin(math.radians(a))))
+                for a in range(0, 181, 15)]
+        for k in range(len(arch)-1):
+            rod(f'FootRestraint_Toe_Bail_{s}', arch[k], arch[k+1], .007, grey)
+        hc = Vector((heel.x, heel.y, z0))-fd*.075
+        block(f'FootRestraint_Heel_Clip_{s}', hc+Vector((0, 0, .028)), (.06, .018, .056), grey)
+        rod(f'FootRestraint_Heel_Release_{s}', hc+Vector((0, 0, .06))-fd*.01, hc+Vector((0, 0, .06))-fd*.04, .006, orange)
     sock = [o for o in objs if o.name == 'SOCKET_TETHER_A']
     if sock:                                                                  # tether A clipped to an anchor post on the casing (training fixture)
         a = sock[0].matrix_world.translation; ay = fy+.25; anchor = Vector((fx-.55, ay, zc+math.sqrt(max(0.0, Rc*Rc-ay*ay))+.12))
@@ -80,7 +89,10 @@ def eva(args, out, B):
     c = Vector(((tool.x+fx)/2, (tool.y+fy)/2, .62))
     camera(c, 5.0, 8, 8, lens=40); shoot(out/'accessory_eva_handoff.png')                     # profile: crew, handle and crawler in one line
     camera(c, 5.2, -38, 20, lens=40); shoot(out/'accessory_eva_handoff_3q.png')
-    camera(tool, .9, 0, 15, lens=50); shoot(out/'accessory_eva_grasp_closeup.png')
+    ki, kp = (rig.matrix_world @ rig.pose.bones[f'{f}_01_r'].head for f in ('index', 'pinky')); wr = rig.matrix_world @ rig.pose.bones['hand_r'].head
+    side = (ki-kp).normalized(); back = (wr-tool); back = (back-side*back.dot(side)).normalized()
+    v = (side-back*.5+Vector((0, 0, .5))).normalized()                        # from the thumb / index end: the handle leaves the closed fist
+    camera(tool, .50, math.degrees(math.atan2(v.y, v.x)), math.degrees(math.asin(v.z)), lens=50); shoot(out/'accessory_eva_grasp_closeup.png')
     if args.glb:                                                              # the composed scene for the standalone review viewer
         export_static(out/'accessory_eva_handoff.glb')
 

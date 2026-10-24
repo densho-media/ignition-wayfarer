@@ -18,6 +18,7 @@ import bpy
 from mathutils import Vector
 
 ROOT = Path(__file__).resolve().parents[3]
+ASSETS = ROOT/'assets/characters'       # --assets: another build of the suits (a before/after comparison)
 
 EXPLODE = dict(HELMET=(0, -.05, .35), PLSS=(0, .45, .05), PROTECTION=(0, -.0, 0), PRESSURE=(0, 0, 0), JOINTS=(0, 0, 0), TETHERS=(.35, 0, -.1),
                TOOLS=(-.35, -.25, 0), MARKINGS=(0, 0, 0), COOLING=(0, 0, 0), RIG=(0, 0, 0))
@@ -26,7 +27,7 @@ EXPLODE = dict(HELMET=(0, -.05, .35), PLSS=(0, .45, .05), PROTECTION=(0, -.0, 0)
 def append(key, offset=(0, 0, 0), folder=None):
     """Append the variant's WAYFARER_EVA_Y155 tree into the current scene, shifted by offset; returns (rig, objects). folder: a study build
     (the compact PLSS, ASSET-10) instead of assets/characters."""
-    path = (folder or ROOT/'assets/characters')/f'WF_EVA_{key.upper()}.blend'
+    path = (folder or ASSETS)/f'WF_EVA_{key.upper()}.blend'
     with bpy.data.libraries.load(str(path), link=False) as (src, dst):
         dst.collections = [c for c in src.collections if c == 'WAYFARER_EVA_Y155']
     c = dst.collections[0]; c.name = f'EVA_{key}'; bpy.context.scene.collection.children.link(c)
@@ -57,7 +58,7 @@ def scene_setup(size, samples, engine='CYCLES'):
     sc.render.film_transparent = False
     w = bpy.data.worlds.new('EVA_World'); sc.world = w; w.use_nodes = True
     bg = w.node_tree.nodes['Background']; bg.inputs['Color'].default_value = (.018, .02, .026, 1); bg.inputs['Strength'].default_value = 1.0
-    sc.view_settings.view_transform = 'AgX'
+    sc.view_settings.view_transform = 'AgX'; sc.view_settings.exposure = -.7     # keep the off-white textile and its zones out of the shoulder
     for name, rot, energy, ang in (('Sun_Key', (math.radians(52), 0, math.radians(-38)), 4.2, 2.0), ('Sun_Fill', (math.radians(70), 0, math.radians(140)), 1.0, 10.0),
                                    ('Sun_Rim', (math.radians(100), 0, math.radians(200)), 2.2, 4.0)):
         L = bpy.data.lights.new(name, 'SUN'); L.energy = energy; L.angle = math.radians(ang); o = bpy.data.objects.new(name, L)
@@ -202,10 +203,12 @@ def plss_compare(out, size, samples, compact=None, numbers=None):
             label(sc, f"torso depth with PLSS {e['torso_depth_with_plss_m']:.3f} m  ·  torso width {e['torso_width_m']:.3f} m", (x-.45, -.6, -.10), .05)
             label(sc, f"suited circle {e['torso_circle_diameter_m']:.3f} m  ·  0.90 m ring-B port: {e['ring_b_port']}", (x-.45, -.6, -.20), .05)
         label(sc, 'side', (x-.1, -.6, .02), .045); label(sc, 'back, pack opened', (x+.75, -.6, .02), .045)
-    label(sc, 'PLSS COMPARISON  ·  instructor  ·  PROTOTYPE  ·  same contents shown in both; whether they fit the compact envelope (33% less volume) is OPEN',
+    label(sc, 'PLSS COMPARISON  ·  instructor  ·  PROTOTYPE  ·  baseline kept; compact = separate study, choice DEFERRED: no subsystem sizing released (EVA-051)',
           (-2.1, -.6, 2.32), .05)
-    label(sc, 'measured readbacks of the as-built prototype (eva_fit), not engineering approval; mass, power, consumables and heat rejection OPEN',
+    label(sc, 'measured readbacks of the as-built prototype (eva_fit), not engineering approval; the compact envelope holds 33% less volume and its contents',
           (-2.1, -.6, -.34), .045, (.75, .62, .35))
+    label(sc, 'are not shown to fit; the 0.90 m ring-B port is not an owner-required suited route (EVA-040); 10 mm nominal margin is not access approval',
+          (-2.1, -.6, -.42), .045, (.75, .62, .35))
     cam = camera(sc, (.5, -9.0, 1.0), (.5, 0, 1.0), 50); cam.data.type = 'ORTHO'; cam.data.ortho_scale = 6.0
     render(sc, out/'eva_plss_compare.png')
 
@@ -227,7 +230,11 @@ def main():
     ap.add_argument('--samples', type=int, default=32)
     ap.add_argument('--compact', type=Path, help='plss_compare: folder of the compact PLSS study build (eva_suit.py --plss compact --out-dir)')
     ap.add_argument('--numbers', type=Path, help='plss_compare: {baseline|compact: envelope readbacks} JSON to label')
+    ap.add_argument('--assets', type=Path, help='folder of another suit build to render instead of assets/characters (a before/after comparison)')
     a = ap.parse_args(argv)
+    if a.assets:
+        global ASSETS
+        ASSETS = a.assets.resolve()
     for v in a.views:
         if v == 'plss_compare':
             plss_compare(a.out, a.size, a.samples, a.compact, a.numbers)

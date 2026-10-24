@@ -444,9 +444,10 @@ candidates of all nine classes are separate accessory assets (docs/ACCESSORIES.m
   Godot rig checks agree. Stepped material-zone outfits alone do not close garment production. See `docs/CHARACTERS.md`.
 
 - [ ] **K03 — Complete the selected suit/PLSS and EVA training pass. (Look passes 2026-10-24: banded bearings with sleeves, hip bearings
-  on the thigh, charcoal joint zones, two-module PLSS on a mount with rescue handles, helmet lights, display glove grasp; compact PLSS
-  ASSET-10 built as a study beside the baseline — docs/ACCESSORIES.md.) AFTER K02/D04 and affected owner gate inputs.** Owner choice
-  between the baseline and compact PLSS (packaging closure OPEN), apply Art/Fashion markings and suit finish, refresh the eva references
+  on the thigh, charcoal joint zones, two-module PLSS on a mount with rescue handles, helmet lights, display glove grasp, boot shells,
+  knee/elbow covers, layered materials, service lettering; compact PLSS ASSET-10 kept as a study beside the baseline with a packaging
+  feasibility matrix — docs/ACCESSORIES.md.) AFTER K02/D04 and affected owner gate inputs.** Owner choice between the baseline and
+  compact PLSS (deferred: every subsystem's sizing OPEN, EVA-051), owner Art/Fashion markings, refresh the eva references
   (`workflow.py eva`), then re-gate the two actors and seven-station training/abort experience.
   **Done when:** suited envelopes, airlock, tether/anchor behavior and training review pass; actual H-05..H-11/O-01..O-06 releases
   are required for any operational claim. Missing flight gates remain visible and locked; no training PASS becomes FLIGHT_EVA GO.

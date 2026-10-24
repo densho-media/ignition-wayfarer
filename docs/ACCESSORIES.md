@@ -72,9 +72,9 @@ envelope classes, OPEN values).
 | DR-IVA-01 free-flyer | chamfered cube, two fan modules, sensor band, perching arm, rear GU-SIF-S | undock_survey, perch, fault_hold | 0.34 × 0.33 × 0.35 |
 | DR-IVA-02 rover | four wheels + captive guide shoe, cartridge cradle, 4-axis arm, sensor mast | drive, arm_pick, fault_hold | 0.46 × 0.35 × 0.38 |
 | DR-IVA-03 micro crawler | two tracked segments, articulated waist, probe, tether eye | crawl, probe_inspect, jam_recover | 0.20 × 0.07 × 0.06 |
-| DR-EVA-01 Brow crawler | twin-rail trucks, ORU bay with clamshell latches, 4-axis arm, periscope | traverse, oru_exchange, periscope, fault_hold | 0.53 × 0.51 × 0.51 |
-| DR-EVA-02 radiator crawler | twin-rail trucks, three-layer heat-shield wall, RELL-type boom, valve arm, IR camera | traverse, leak_scan, valve_service, fault_hold | 0.54 × 0.51 × 0.42 |
-| DR-EVA-03 spine crawler | twin-rail trucks, radiator lid, 5-axis tool-changer arm parking a cartridge (with a crew D-handle) in a cradle, spare caddy, pan-tilt head, tow fittings both ends | traverse, inspect, tool_present, handoff, fault_hold | 0.61 × 0.51 × 0.49 |
+| DR-EVA-01 Brow crawler | twin-rail trucks, ORU bay with clamshell latches, guide posts and seat, 4-axis arm, periscope with a Brow inspection head (stereo cameras, light bar) | traverse, oru_exchange, periscope, fault_hold | 0.53 × 0.51 × 0.48 |
+| DR-EVA-02 radiator crawler | twin-rail trucks, three-layer heat-shield wall, upper deflector, silvered blade-side faces, IR radiometer turret, RELL-type boom, valve arm, IR camera | traverse, leak_scan, thermal_survey, valve_service, fault_hold | 0.54 × 0.51 × 0.39 |
+| DR-EVA-03 spine crawler | twin-rail trucks, radiator lid, 5-axis tool-changer arm parking a cartridge (with a crew handle) in a cradle, three-slot tool magazine, crew handrail and tether anchor, pan-tilt head, tow fittings both ends | traverse, inspect, tool_present, handoff, fault_hold | 0.61 × 0.51 × 0.46 |
 | DR-EVA-04 aft crawler | mono-rail C-trucks, shielded vault in gold MLI, two-stage telescoping non-contact sensor boom, no manipulator | traverse, boom_survey, fault_hold | 0.39 × 0.24 × 0.35 |
 | DR-FIX-01 / 02 arms | 0.80 × 0.60 m owner base drum, 7-axis arm with GU-SIF-L end effector, stow cradle; 02 adds a heat hood and a tool holster | unstow, capture, fault_hold | base 0.80 × 0.60; booms display-only |
 
@@ -86,6 +86,27 @@ harness run along each boom and a latched stow saddle with an orange manual rele
 loss, DOP-13); DR-EVA-03's tool cartridge carries a 22 mm crew D-handle for the supervised handoff (DOP-04); DR-EVA-04's boom became two
 overlapping telescoping stages (one stage left the head floating at full extension). The fit screen still passes and every stowed body
 stays inside its owner envelope class.
+
+Functional identity pass (2026-10-24, third slice; same classes, envelopes and GU family: white vault, captive trucks, GU-SIF ends, GU
+stripe and plate). DR-EVA-01, -02 and -03 read as one body with different tools; each now carries equipment for its own job:
+
+- **DR-EVA-01 (Brow inspection, module handling)**: four guide posts with lead-in cones and a connector seat frame the ORU bay, so a
+  module is led into the clamshell latches; the periscope ends in a Brow inspection head with stereo cameras and a light bar that looks
+  round truss members and into EYE apertures from the safe side.
+- **DR-EVA-02 (radiator shielding, thermal monitoring, leak investigation)**: an upper deflector on low-conductance standoffs shades the
+  deck from the blade root, the blade-side vault faces are silvered, and an IR radiometer turret with a sunshade cone pans across root
+  and blade before any approach (`thermal_survey`, DOP-08 cold-state check) beside the RELL-type leak boom. Optical properties, view
+  factor and cooldown stay OPEN (DGT-007 HOLD).
+- **DR-EVA-03 (tool logistics, cartridge handling, crew assistance)**: a three-slot tool magazine (spare torque, inspection probe,
+  gripper cartridges on keyed GU-SIF-S seats) replaces the single caddy, and the crew side carries a 25 mm handrail and an orange-tagged
+  tether anchor ring (never a primary anchor; ratings OPEN).
+- **Docking cradles on the review stands** (DR-EVA-01..03; not on the ship, DS-10/11/13 dock design OPEN): a pedestal between the rails
+  rises to the crawler's underside GU-SIF-M, two V-guide posts with jaws centre the chassis beam, a charge / data umbilical and junction,
+  a docked lamp and an orange manual undock release. Latch, charge and alignment ratings OPEN (DGT-012 HOLD).
+
+The additions sit below each body's arm and mast tops, so no stowed height grew. **Correction:** the stowed heights reported for 042ee65
+(0.51 / 0.42 / 0.49 m) counted the review stand's dock fitting as body (its part name lacked the `FIXTURE` prefix the fit screen excludes);
+the bodies were and are 0.48 / 0.39 / 0.46 m. The proxy table under request 2 is corrected accordingly.
 
 ### GU-SIF: what approval needs (DGT-012 HOLD)
 
@@ -120,29 +141,113 @@ Second slice (2026-10-24):
 - **Compact PLSS study (ASSET-10)**: `eva_suit.py --plss compact --out-dir <dir>` builds the suits with the toml `plss_compact_size_m`
   (0.58 × 0.14 × 0.56 m) beside, never over, the baseline assets; `eva_fit.py --assets <dir>` measures it.
 
+Third slice (2026-10-24, visual fidelity; the MPFB rig, its actions, the baseline PLSS and every measured envelope kept):
+
+- **Boots (ASSET-08)**: a rigid heel-and-arch shell and a separate toe cap, each the convex hull of the outer layer's own foot set 2.5 mm
+  outside it (dark grey composite; the toe cap in a worn grey), on the existing service sole now in black rubber; a heel fitting for the
+  restraint's heel clip, an instep restraint strap, and the toe hook rebuilt as a bar on two posts that slides under a toe bail.
+- **Foot restraint (review scene)**: per boot a toe bail arched over the toe hook and a heel clip with an orange release on the PROTOTYPE
+  plate and post (training fixture; restraint loads OPEN).
+- **Joint covers (ASSET-05/12)**: replaceable knee covers and elbow covers, curved plates over the convolute gaps on the calf and forearm,
+  sized inside the convolute rings so they add no extent.
+- **Layer distinction**: matte woven outer textile (a fine weave on the normal only), smoother hard composite for the pressure shells
+  (hard torso, helmet), warm light-grey removable equipment (the two PLSS modules), dark elastomer joints and seals, grey textile gloves
+  with black rubber palm and fingertip grip faces, worn grey on the PLSS rescue handles and the boot toe caps.
+- **Wear**: restrained touch-point wear as a soft per-vertex colour on knee and shin fronts, elbow backs and the seat (`wf_zone`, exported
+  as COLOR_0 and used only by the outer textile).
+- **Markings (ASSET-15)**: text only, no emblem (Y155 era): "GREAT UNION" on the instructor's deep-blue chest plate, the role
+  designation ("GUIDED EVA · INSTRUCTOR" / "VISITOR") on the chest display module, a serial field "WF-Y155-EVA PROTOTYPE" (no
+  certified serial, QA-03) and "CO2 · SERVICE", "O2" and "COOL" service labels on the PLSS.
+- **Grasp close-up**: the crew handle is now light knurled metal against the black grip faces, and the close-up looks from the thumb /
+  index end of the fist, where the handle leaves the closed glove between thumb and index finger; the middle of the handle is hidden
+  inside the closed glove (a render-time section and a glove-alone view were tried and dropped as unreadable). The grasp itself is unchanged (fingertips and thumb within contact
+  distance of the 22 mm handle, wrist residual 1.4 mm); grip force and glove torque OPEN.
+- Review renders of the suit use exposure -0.7 under the same lights, so the off-white textile and its zones do not clip; the before
+  image in the comparison is rendered the same way from a 042ee65 build.
+
 Fit readbacks (`eva_fit.py`, instructor / newcomer; references = `references/p1_eva_fit.json`, `p1_eva_envelopes.json`):
 
-| Readback | Committed | Baseline after this slice | Compact study |
+| Readback | Committed reference | Baseline after this slice | Compact study |
 | --- | --- | --- | --- |
-| pressure coverage | 15 EVA actions PASS; shared `crawl` (head out of the helmet) and the instructor's `climb` (8 vertices, 2.5 mm) FAIL | identical | identical |
+| pressure coverage, 15 EVA actions | PASS | PASS (`eva_coverage_pass`) | PASS |
+| pressure coverage, inherited unsuited actions | `crawl` FAIL (head out of the helmet, 208 / 264 vertices); instructor `climb` FAIL (8 vertices, 2.5 mm) | identical (`use = NOT_SUITED_EVA`) | identical |
 | torso width (m) | 0.640 / 0.598 | 0.640 / 0.598 | 0.664 / 0.664 |
 | torso depth with PLSS (m) | 0.798 / 0.769 | 0.798 / 0.769 | 0.718 / 0.689 |
 | suited circle (m) | 0.909 / 0.885 | 0.909 / 0.885 | 0.890 / 0.867 |
 | 0.90 m ring-B spine port (instructor) | BLOCKED −9 mm | BLOCKED −9 mm | CLEAR +10 mm |
-| EVA_SUITED access class (m) | 0.857 / 0.832 | 0.857 / 0.832 | 0.815 / 0.792 |
-| EVA_SUITED minimum projected area (m²) | 0.467 / 0.432 | 0.473 / 0.439 | 0.445 / 0.410 |
+| access classes EVA_SUITED / EVA_OPERATIONAL / UNSUITED (m) | 0.857 / 1.074 / 0.658 and 0.832 / 1.026 / 0.602 | identical | 0.815 / 1.020 / 0.658 and 0.792 / 0.974 / 0.602 |
+| action sweep radius (m) | 1.099 / 1.039 | 1.099 / 1.039 | 1.099 / 1.039 |
+| height (m) | 1.918 / 1.833 | 1.921 / 1.835 (boot shell standoff) | 1.921 / 1.835 |
+| EVA_SUITED projected area min / max (m²) | 0.467 / 1.278 and 0.432 / 1.183 | 0.473 / 1.280 and 0.439 / 1.182 | 0.445 / 1.248 and 0.410 / 1.149 |
 
-The baseline suit's envelopes, coverage results and access classes are identical to the committed references (the two shared-action coverage failures predate this work). The projected-area minimum moved
-with the side rescue handles: a **thermal readback** for the owner's model (45 H-06), not a gate input and not engineering approval; the
-references refresh at the next `workflow.py eva`. The compact study shows the same contents in a 33 % smaller display envelope: whether they
-fit (oxygen, CO₂ removal, fan/pump/separator, heat rejection, battery, radio) is the ASSET-10 question and stays OPEN; its 10 mm margin at
-the 0.90 m port is a prototype readback, not a reason to adopt it.
+The baseline suit's torso envelope, coverage results, access classes and sweep radius are identical to the committed references (the
+shared-action coverage failures predate this work). Three readbacks moved: the projected-area minimum with the side rescue handles
+(042ee65), and, this slice, the height (+3 / +2 mm) and the projected-area maximum (+0.002 / −0.001 m²) with the boot shells' 2.5 mm
+standoff. They are **readbacks** for the owner's thermal model (45 H-06), not gate inputs and not engineering approval; the committed
+references were not refreshed (that is the owner `workflow.py eva` step). The compact envelope is 33 % smaller than the baseline one; whether the baseline contents
+fit in it is not shown (matrix below). Its 10 mm diameter margin at the 0.90 m port is a nominal prototype readback, not operational access.
+
+### Validation semantics: EVA actions vs inherited unsuited actions
+
+The precise finding stands: all 15 EVA actions pass the existing pressure-coverage check for both suits; the inherited shared `crawl`
+fails for both (head out of the torso-fixed helmet) and the shared `climb` fails for the instructor. These shared actions come with the
+wearer's unsuited character rig and are not suited EVA operations, so they can no longer be read or played as one:
+
+- `eva_suit.SHARED_ACTIONS` names them with the reason; a test keeps them disjoint from `EVA_ACTIONS` (the list the runtime plays).
+- The suit build tags each inherited action `eva = False`, `suited_use = NOT_SUITED_EVA` with the reason, and the rig lists them in
+  `eva_not_suited_actions` (the actions themselves and the MPFB rig are unchanged).
+- `eva_fit` marks every coverage row `use = EVA` or `NOT_SUITED_EVA` and reports `eva_coverage_pass` and `not_suited_eva_failures` beside
+  the unchanged overall `coverage_pass` (still false: nothing was relaxed to hide the failures).
+- The accessory viewer shows the suit with its 15 EVA actions playable and the five inherited ones listed `LOCKED_NOT_SUITED_EVA`,
+  disabled, with the reason; its check fails if a locked action can play.
+
+Climb investigation (instructor, every frame of the action rather than every 6th): 2-3 vertices per arm at the top of the upper arm,
+45-62 mm below the shoulder joint and just outside the scye bearing, exposed by up to 3.8 mm (2.5 mm at the check's 6-frame step) in the
+overhead-reach phase of each hand (frames 0-7 and 22-32). The climb lifts the arm to about 176° from the trunk; the suit's display limit
+is 120° and the EVA actions reach at most 116-121° on the same bone measure. The offset outer layer thins under the scye bearing at that
+elevation. Cause: an unsuited ladder motion far outside suit mobility, not a defect in the suit geometry; the newcomer's slimmer arm
+passes. No geometry, threshold or reference was changed to suppress it, and the accepted references were not refreshed.
+
+### Compact PLSS (ASSET-10): packaging-feasibility matrix
+
+Retained as a separate, reversible study; the baseline pack is unchanged. Live Drive read 2026-10-24: S&E `43_EVA_SUIT_REQUIREMENTS`
+rows EVA-008/009/016/018/019/024/026/027/028/040/050/051, `44_EVA_SUIT_BLENDER` ASSET-02/09/10/11, Technology `53_EVA_SUIT_SYSTEMS`
+rows 6-10 and 17. No owner row gives a dimension, volume or mass for any PLSS subsystem. The only owner-retained size is the whole baseline
+envelope, 0.50 W × 0.22 D × 0.62 H m, and only as a "labeled 3D PROTOTYPE packaging case" (EVA-050) with "no automatic inference of
+capacity/pressure/duration from dimensions". The quantities that would size the subsystems are a commissioned owner calculation (EVA-051,
+"CALCULATION COMMISSIONED / VALUES OPEN").
+
+| Subsystem | Owner function (row) | Owner-specified dimensions | Missing sizing data | What the compact envelope (0.58 × 0.14 × 0.56 m) changes |
+| --- | --- | --- | --- | --- |
+| Oxygen storage | modular O₂ storage and regulator, primary breathing loop (EVA-008, 53 row 6, ASSET-09) | none | primary O₂ mass (`o2_primary_reserve` OPEN), storage pressure, vessel type and count, EVA duration (EVA-028 OPEN), suit pressure (30-40 kPa trade only, EVA-004), reserve gas kg (45 I-05 OPEN) | 140 mm depth less shell and mount caps a dorsal vessel at roughly 0.11 m diameter; whether enough vessel volume fits is unknowable without the mass and pressure |
+| Emergency oxygen | separate emergency reserve; partial-leak alert, emergency O₂, tethered return (EVA-008, EVA-026) | none | reserve time (`o2_emergency_reserve` OPEN), abort windows (EVA-026 OPEN), return-time geometry | must stay independent of the primary vessel and regulator; a distributed pack does not remove it |
+| CO₂ removal | replaceable or rechargeable cartridge, redundant sensors (EVA-008, 53 row 7) | none | capacity (`co2_removal_capacity` OPEN), sorbent type (LiOH, METOX or regenerable not chosen), pressure drop | cartridge must stay removable through an access hatch (ASSET-09); its envelope is unknown |
+| Ventilation | fan circulating the breathing loop (ASSET-09, 53 row 6) | none | flow rate, loop pressure drop, fan power | a side/waist layout lengthens the gas path; pressure-drop effect OPEN |
+| Cooling and heat rejection | LCVG, PLSS pump, primary heat rejector, emergency cooling branch (EVA-009); consumable evaporator or qualified hybrid (53 row 9) | none | heat rejection (`heat_rejection_w` OPEN), incident-heat allowance and water consumption (EVA-009 OPEN), evaporator or radiator area | evaporator or radiator needs a vacuum-facing vent; relocating it to the sides changes exposure and view, OPEN |
+| Battery | power for fan, pump, telemetry, comms (ASSET-09); passive mobility on power loss (EVA-027) | none | energy (Wh), peak power, duration (EVA-028 OPEN) | battery volume follows the energy budget, unknown |
+| Communications | crew audio, ship telemetry, emergency beacon, antenna protected in the shell (EVA-019); suit status displays (EVA-018) | none | antenna size and placement for signal shadow, electronics volume | antenna placement is part of the shell layout in either pack; no compact advantage known |
+| Plumbing | O₂ lines, removable heat-loop ports to the LCVG (ASSET-11, 53 row 8) | none | line sizes, connector count, umbilical interface | a distributed pack adds cross-body connections and seals (pressure-integrity risk, EVA-005) |
+| Structural mounting | detachable backpack on the hard upper torso (ASSET-02, ASSET-09); donning on the SP-12 stand by its PLSS docking frame (EVA-040) | none (torso ingress concept OPEN, ASSET-02) | mount loads, latch design, docking-frame interface | wrapping the pack round the torso sides changes the docking frame and any rear-entry closure; both OPEN |
+| Maintenance access | distinct access hatches (ASSET-09); service, charging, pressure check and reserves in SP-13 (EVA-040) | none | cartridge and module exchange envelopes, tool access | side modules need side access while docked; not studied |
+
+Access context: EVA-016 is the hard geometry gate ("do not resize crew envelope secretly"). The owner's operational direction EVA-040
+(OWNER-APPROVED) is that suits are donned in the stationary SP-12 beside SP-11 and that full suited transit through rotating ring B is "not
+required and currently blocked". The compact study's only measured access gain is at the 0.90 m ring-B port, so it serves no route the owner
+requires today; the baseline pack already clears the SP-11 leading 1.20 m aperture with margin. EVA-050 allows the distributed alternative
+only "if it improves qualified access without hiding volume", and ASSET-10 requires "no mass disappear".
+
+**Decision: deferred (OPEN).** The owner data do not support a packaging choice: every subsystem lacks sizing values and the compact
+envelope holds a third less volume than the prototype case. No further compact geometry until EVA-051's calculation releases masses,
+capacities and energy, and until a qualified route needs the smaller section. Nothing here reduces a mission requirement to make it fit.
 
 ## Standalone accessory viewer (Godot 4.7.2)
 
 `accessories/viewer/` is its own Godot project (GL Compatibility), independent of `godot/`, the runtime export and the module registry. It
-loads the GLBs from `generated/` at run time (no editor import), lists the nine designs and the two scenes (EVA tool handoff, interior
-drones), plays every action, and labels each motion SIMULATION_ONLY and each interface as unverified (DGT-017, DGT-012, FLIGHT_EVA HOLD).
+loads the GLBs from `generated/` at run time (no editor import), lists the nine designs, the rigged suited instructor and the two scenes
+(EVA tool handoff, interior drones), plays every action, and labels each motion SIMULATION_ONLY and each interface as unverified (DGT-017,
+DGT-012, FLIGHT_EVA HOLD). The suit's 15 EVA actions play; its five inherited unsuited actions are listed `LOCKED_NOT_SUITED_EVA`,
+disabled and refused (the check fails if one can play). The suit GLB comes from the ship's EVA exporter run into the stage's run folder
+(`export/eva_gltf.py --out <run>/suit`), never into `godot/generated/`.
 
 ```bash
 python3 tools/accessory_viewer.py stage            # builds the drone GLBs and scene GLBs (Blender), fills accessories/viewer/generated/
@@ -160,7 +265,7 @@ SHA-512); set `WAYFARER_GODOT` and `WAYFARER_BLENDER` when they are not at `/sna
 B=${WAYFARER_BLENDER:-/snap/bin/blender}; OUT=runs/$(date -u +%Y%m%dT%H%M%SZ)-accessories
 python3 src/wayfarer/drone_bodies.py                     # fit screen (pure)
 $B -b --factory-startup --python-exit-code 1 --python src/wayfarer/build/drone_bodies.py -- --out $OUT
-$B -b --factory-startup --python-exit-code 1 --python src/wayfarer/presentation/drone_preview.py -- --out $OUT/review --views review --quality review
+$B -b --factory-startup --python-exit-code 1 --python src/wayfarer/presentation/drone_preview.py -- --out $OUT/review --views review cradles --quality review
 $B -b --factory-startup --python-exit-code 1 --python src/wayfarer/build/eva_suit.py      # needs `workflow.py characters` once
 $B -b --factory-startup --python-exit-code 1 --python src/wayfarer/build/eva_suit.py -- --plss compact --out-dir $OUT/compact
 $B -b --factory-startup --python-exit-code 1 --python src/wayfarer/validation/eva_fit.py -- --assets $OUT/compact --report $OUT/compact/fit.json --renders $OUT/compact/r --no-route
@@ -168,6 +273,8 @@ $B -b --factory-startup --python-exit-code 1 --python src/wayfarer/presentation/
 $B -b --factory-startup --python-exit-code 1 --python src/wayfarer/presentation/eva_preview.py -- --views turnaround cutaway plss_compare \
     --out $OUT/suit --compact $OUT/compact --numbers <json>
 python3 src/wayfarer/presentation/rail_section.py --out $OUT/rail_section.svg
+# before / after: build 042ee65's suit in a git worktree (copy the WF_CHAR_HUMAN_*.blend inputs into it), then render it with this script
+$B -b --factory-startup --python-exit-code 1 --python src/wayfarer/presentation/eva_preview.py -- --views turnaround --assets <worktree>/assets/characters --out $OUT/before
 ```
 
 The drone build takes about 25 s, the suit build about 1 min, the fit check about 2 min per suit set and the review-quality renders a few
@@ -176,11 +283,12 @@ ignored; GLBs and renders go to the run folder.
 
 ## Review package (persistent)
 
-`accessories/review/` holds the curated review images committed with the code that makes them (JPEG, about 3 MB in all; the index is
+`accessories/review/` holds the curated review images committed with the code that makes them (JPEG; the index is
 `accessories/review/README.md`): the family lineup with the suited instructor as scale, a labelled three-quarter view of each of the nine
 designs in its main action, the suit turnaround (front, side, back, three-quarter) and cutaway, the baseline-vs-compact PLSS comparison
 with a pack cutaway, the EVA tool handoff with a grasp close-up, the interior-drones scene, viewer screenshots and the crawler rail
-section (SVG). Large intermediate files and redundant renders stay out of Git.
+section (SVG), and since the third slice the before / after sheets for the suit, the exterior crawlers and the grasp plus the viewer's
+suit entry. Large intermediate files and redundant renders stay out of Git.
 
 ## Open and HOLD
 
@@ -190,8 +298,11 @@ section (SVG). Large intermediate files and redundant renders stay out of Git.
 - DGT-012: GU-SIF and the cartridge standard are proposals (approval needs: table above).
 - FLIGHT_EVA HOLD; exterior work is training simulation; DS-13 operations HOLD while blades are hot; radiator cooldown / view factor
   OPEN; Brow ram face and live drive never.
-- Not done: textures and wear at touch points, the boots' shell form, glove finger mobility limits from owner data, a compact PLSS packaging
-  closure, runtime actions for the suit in the accessory viewer (the handoff scene is static).
+- ASSET-10 compact PLSS: deferred; every subsystem's sizing is OPEN (packaging-feasibility matrix above); the ring-B port it clears is
+  not an owner-required suited route (EVA-040).
+- Not done: glove finger mobility limits from owner data, owner Art / Fashion markings (the lettering here is PROTOTYPE text only),
+  image textures (wear is a soft vertex colour), the handoff scene's suit actions animated in the viewer (the suit entry plays them on
+  its own; the scene stays static).
 
 ## Interface requests for the ship session (not applied)
 
@@ -205,12 +316,13 @@ The ship session owns all ship geometry, stations, anchor positions, structural 
 
    | Class | L2 proxy (m) | Candidate stowed body (m) | Over on |
    | --- | --- | --- | --- |
-   | DR-EVA-01 | 0.60 × 0.60 × 0.36 | 0.53 × 0.51 × 0.51 | height +0.15 |
-   | DR-EVA-02 | 0.60 × 0.60 × 0.36 | 0.54 × 0.51 × 0.42 | height +0.06 |
-   | DR-EVA-03 | 0.70 × 0.70 × 0.42 | 0.61 × 0.51 × 0.49 | height +0.07 |
+   | DR-EVA-01 | 0.60 × 0.60 × 0.36 | 0.53 × 0.51 × 0.48 | height +0.12 |
+   | DR-EVA-02 | 0.60 × 0.60 × 0.36 | 0.54 × 0.51 × 0.39 | height +0.03 |
+   | DR-EVA-03 | 0.70 × 0.70 × 0.42 | 0.61 × 0.51 × 0.46 | height +0.04 |
    | DR-EVA-04 | 0.40 × 0.40 × 0.24 | 0.39 × 0.24 × 0.35 | height +0.11 |
 
    All four stay inside their owner envelope classes (S&E 51 col G); the proxy depth is `drone_fleet.unit_size` (0.6 × the class for EVA).
+   The 042ee65 figures (+0.15 / +0.06 / +0.07) over-counted by 29 mm (the review stand's dock fitting); these are the corrected values.
    The interior classes fit their proxies.
 3. **Crawler rail cross-section**: `accessories/review/rail_section.svg` shows the captive three-wheel truck on one rail (Ø60 mm rail,
    Ø48 × 20 mm wheels at 0° / ±120°, C-clamp R93 mm open 108° below with a 130 mm gap), the support web and the clearance a passing truck
