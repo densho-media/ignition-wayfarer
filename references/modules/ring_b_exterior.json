@@ -1,0 +1,752 @@
+{
+ "assemblies": {
+  "RB.EXT.AFT": {
+   "anchor": "WF-RING-B.ROTOR.2",
+   "anchor_hash": "a3ff314d01ac22b1",
+   "asset": "WF_DETAIL_RB_EXT_AFT",
+   "detail_class": "PRODUCTION",
+   "enabled": true,
+   "maturity": "L4_VISUAL_CANDIDATE"
+  },
+  "RB.EXT.FWD": {
+   "anchor": "WF-RING-B.ROTOR.2",
+   "anchor_hash": "a3ff314d01ac22b1",
+   "asset": "WF_DETAIL_RB_EXT_FWD",
+   "detail_class": "PRODUCTION",
+   "enabled": true,
+   "maturity": "L4_VISUAL_CANDIDATE"
+  }
+ },
+ "contract": "WF_MODULE_PUBLICATION",
+ "contract_hash": "6b72874933b7af7d",
+ "contract_terms": {
+  "RB.EXT.AFT": {
+   "anchor": "WF-RING-B.ROTOR.2",
+   "asset": "WF_DETAIL_RB_EXT_AFT",
+   "envelope": [
+    [
+     -2.15,
+     -30.01,
+     -30.01
+    ],
+    [
+     -1.74,
+     30.01,
+     30.01
+    ]
+   ],
+   "frame": {
+    "family": "rotor_frame",
+    "host": "HABITAT_B",
+    "matrix": [
+     [
+      1.0,
+      0.0,
+      0.0,
+      91.049362477231
+     ],
+     [
+      0.0,
+      0.0,
+      -1.0,
+      0.0
+     ],
+     [
+      0.0,
+      1.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ]
+    ],
+    "module": "WF-RING-B",
+    "motion": "ROTOR_SPIN_X",
+    "object": "Rotor_2",
+    "parent": null,
+    "rest_deg": 90.0
+   },
+   "host": "HABITAT_B",
+   "scope": "pack"
+  },
+  "RB.EXT.FWD": {
+   "anchor": "WF-RING-B.ROTOR.2",
+   "asset": "WF_DETAIL_RB_EXT_FWD",
+   "envelope": [
+    [
+     1.74,
+     -30.01,
+     -30.01
+    ],
+    [
+     2.15,
+     30.01,
+     30.01
+    ]
+   ],
+   "frame": {
+    "family": "rotor_frame",
+    "host": "HABITAT_B",
+    "matrix": [
+     [
+      1.0,
+      0.0,
+      0.0,
+      91.049362477231
+     ],
+     [
+      0.0,
+      0.0,
+      -1.0,
+      0.0
+     ],
+     [
+      0.0,
+      1.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ]
+    ],
+    "module": "WF-RING-B",
+    "motion": "ROTOR_SPIN_X",
+    "object": "Rotor_2",
+    "parent": null,
+    "rest_deg": 90.0
+   },
+   "host": "HABITAT_B",
+   "scope": "pack"
+  }
+ },
+ "fingerprint": {
+  "detail/WF_DETAIL_RB_EXT_AFT.blend": {
+   "direct_links": [],
+   "objects": {
+    "Prod_RB_EXT_AFT_cassettes": {
+     "centroid": [
+      -2.0195974207530587,
+      -1.8857966718025176e-08,
+      8.786533272355107e-18
+     ],
+     "component_id": "RB.EXT.AFT.CASSETTES",
+     "faces": 1344,
+     "instance": null,
+     "kind": "production_detail",
+     "matrix_world": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "max": [
+      -1.7599999904632568,
+      29.950000762939453,
+      29.950000762939453
+     ],
+     "min": [
+      -2.059999942779541,
+      -29.950000762939453,
+      -29.950000762939453
+     ],
+     "parent": null,
+     "type": "MESH",
+     "vertices": 1416
+    },
+    "Prod_RB_EXT_AFT_joints": {
+     "centroid": [
+      -2.040666619936625,
+      0.0,
+      0.0
+     ],
+     "component_id": "RB.EXT.AFT.JOINTS",
+     "faces": 432,
+     "instance": null,
+     "kind": "production_detail",
+     "matrix_world": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "max": [
+      -2.0,
+      29.762605667114258,
+      29.762605667114258
+     ],
+     "min": [
+      -2.109999895095825,
+      -29.762605667114258,
+      -29.762605667114258
+     ],
+     "parent": null,
+     "type": "MESH",
+     "vertices": 576
+    },
+    "Prod_RB_EXT_AFT_markings": {
+     "centroid": [
+      -2.0625,
+      -5.9743954203889365,
+      -2.6887710256223305
+     ],
+     "component_id": "RB.EXT.AFT.MARKINGS",
+     "faces": 1674,
+     "instance": null,
+     "kind": "production_detail",
+     "matrix_world": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "max": [
+      -2.0617001056671143,
+      29.7056827545166,
+      25.968278884887695
+     ],
+     "min": [
+      -2.0632998943328857,
+      -15.272693634033203,
+      -25.89975357055664
+     ],
+     "parent": null,
+     "type": "MESH",
+     "vertices": 2232
+    },
+    "Prod_RB_EXT_AFT_nodes": {
+     "centroid": [
+      -2.089999940660265,
+      7.064254195601851e-08,
+      1.154343010123218e-16
+     ],
+     "component_id": "RB.EXT.AFT.NODES",
+     "faces": 96,
+     "instance": null,
+     "kind": "production_detail",
+     "matrix_world": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "max": [
+      -2.0,
+      14.184709548950195,
+      23.417085647583008
+     ],
+     "min": [
+      -2.134999990463257,
+      -26.399999618530273,
+      -23.417085647583008
+     ],
+     "parent": null,
+     "type": "MESH",
+     "vertices": 108
+    },
+    "Prod_RB_EXT_AFT_occupancy": {
+     "centroid": [
+      -2.0614999532699585,
+      2.8899221709280304e-08,
+      0.0
+     ],
+     "component_id": "RB.EXT.AFT.OCCUPANCY",
+     "faces": 126,
+     "instance": null,
+     "kind": "production_detail",
+     "matrix_world": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "max": [
+      -2.059999942779541,
+      29.549999237060547,
+      27.2322998046875
+     ],
+     "min": [
+      -2.062999963760376,
+      -17.847915649414062,
+      -27.2322998046875
+     ],
+     "parent": null,
+     "type": "MESH",
+     "vertices": 132
+    },
+    "Prod_RB_EXT_AFT_wayfinding": {
+     "centroid": [
+      -2.0614999532699585,
+      0.0,
+      0.0
+     ],
+     "component_id": "RB.EXT.AFT.WAYFINDING",
+     "faces": 30,
+     "instance": null,
+     "kind": "production_detail",
+     "matrix_world": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "max": [
+      -2.059999942779541,
+      28.476600646972656,
+      24.994552612304688
+     ],
+     "min": [
+      -2.062999963760376,
+      -14.823362350463867,
+      -24.994552612304688
+     ],
+     "parent": null,
+     "type": "MESH",
+     "vertices": 36
+    }
+   }
+  },
+  "detail/WF_DETAIL_RB_EXT_FWD.blend": {
+   "direct_links": [],
+   "objects": {
+    "Prod_RB_EXT_FWD_cassettes": {
+     "centroid": [
+      2.0195974207530587,
+      -1.8857966718025176e-08,
+      8.786533272355107e-18
+     ],
+     "component_id": "RB.EXT.FWD.CASSETTES",
+     "faces": 1344,
+     "instance": null,
+     "kind": "production_detail",
+     "matrix_world": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "max": [
+      2.059999942779541,
+      29.950000762939453,
+      29.950000762939453
+     ],
+     "min": [
+      1.7599999904632568,
+      -29.950000762939453,
+      -29.950000762939453
+     ],
+     "parent": null,
+     "type": "MESH",
+     "vertices": 1416
+    },
+    "Prod_RB_EXT_FWD_joints": {
+     "centroid": [
+      2.040666619936625,
+      0.0,
+      0.0
+     ],
+     "component_id": "RB.EXT.FWD.JOINTS",
+     "faces": 432,
+     "instance": null,
+     "kind": "production_detail",
+     "matrix_world": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "max": [
+      2.109999895095825,
+      29.762605667114258,
+      29.762605667114258
+     ],
+     "min": [
+      2.0,
+      -29.762605667114258,
+      -29.762605667114258
+     ],
+     "parent": null,
+     "type": "MESH",
+     "vertices": 576
+    },
+    "Prod_RB_EXT_FWD_markings": {
+     "centroid": [
+      2.0625,
+      -6.035298034708987,
+      -2.5660005761469016
+     ],
+     "component_id": "RB.EXT.FWD.MARKINGS",
+     "faces": 1674,
+     "instance": null,
+     "kind": "production_detail",
+     "matrix_world": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "max": [
+      2.0632998943328857,
+      29.7056827545166,
+      25.894485473632812
+     ],
+     "min": [
+      2.0617001056671143,
+      -15.272693634033203,
+      -25.968278884887695
+     ],
+     "parent": null,
+     "type": "MESH",
+     "vertices": 2232
+    },
+    "Prod_RB_EXT_FWD_nodes": {
+     "centroid": [
+      2.089999940660265,
+      7.064254195601851e-08,
+      1.154343010123218e-16
+     ],
+     "component_id": "RB.EXT.FWD.NODES",
+     "faces": 96,
+     "instance": null,
+     "kind": "production_detail",
+     "matrix_world": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "max": [
+      2.134999990463257,
+      14.184709548950195,
+      23.417085647583008
+     ],
+     "min": [
+      2.0,
+      -26.399999618530273,
+      -23.417085647583008
+     ],
+     "parent": null,
+     "type": "MESH",
+     "vertices": 108
+    },
+    "Prod_RB_EXT_FWD_occupancy": {
+     "centroid": [
+      2.0614999532699585,
+      2.8899221709280304e-08,
+      0.0
+     ],
+     "component_id": "RB.EXT.FWD.OCCUPANCY",
+     "faces": 126,
+     "instance": null,
+     "kind": "production_detail",
+     "matrix_world": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "max": [
+      2.062999963760376,
+      29.549999237060547,
+      27.2322998046875
+     ],
+     "min": [
+      2.059999942779541,
+      -17.847915649414062,
+      -27.2322998046875
+     ],
+     "parent": null,
+     "type": "MESH",
+     "vertices": 132
+    },
+    "Prod_RB_EXT_FWD_wayfinding": {
+     "centroid": [
+      2.0614999532699585,
+      0.0,
+      0.0
+     ],
+     "component_id": "RB.EXT.FWD.WAYFINDING",
+     "faces": 30,
+     "instance": null,
+     "kind": "production_detail",
+     "matrix_world": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "max": [
+      2.062999963760376,
+      28.476600646972656,
+      24.994552612304688
+     ],
+     "min": [
+      2.059999942779541,
+      -14.823362350463867,
+      -24.994552612304688
+     ],
+     "parent": null,
+     "type": "MESH",
+     "vertices": 36
+    }
+   }
+  }
+ },
+ "git_dirty": false,
+ "git_revision": "4edf32800bacd68e1cd01a255c477ed641fefb46",
+ "inputs_hash": "df872edc4eb5790f",
+ "module": "WF-RING-B",
+ "note": "A publication makes the pack eligible for integration; it is not an owner acceptance and changes no maturity or canon.",
+ "pack": "ring_b_exterior",
+ "pack_version": 1,
+ "published_utc": "2026-10-24T14:42:18Z",
+ "spec_sha256": "987e8e127c544b203eca8dc74e3ea096247f1f23ee0a1413b47ba2d53cfbde1d",
+ "version": 2
+}
