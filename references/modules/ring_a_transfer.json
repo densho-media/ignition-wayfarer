@@ -2,7 +2,7 @@
  "assemblies": {
   "M7.SPK": {
    "anchor": "WF-RING-A.ROTOR.1",
-   "anchor_hash": "2ae4b0fa48fdf488",
+   "anchor_hash": "b8992b3a6c566131",
    "asset": "WF_DETAIL_M7_SPK",
    "detail_class": "PRODUCTION",
    "enabled": true,
@@ -10,7 +10,7 @@
   },
   "M7.XFR": {
    "anchor": "WF-RING-A.DRUM.1",
-   "anchor_hash": "9bb5f995c24d5295",
+   "anchor_hash": "68ebfd2457766bc4",
    "asset": "WF_DETAIL_M7_XFR",
    "detail_class": "PRODUCTION",
    "enabled": true,
@@ -18,7 +18,7 @@
   }
  },
  "contract": "WF_MODULE_PUBLICATION",
- "contract_hash": "c40a6587f2d3e742",
+ "contract_hash": "1fbc2257c19d3b1e",
  "contract_terms": {
   "M7.SPK": {
    "anchor": "WF-RING-A.ROTOR.1",
@@ -37,7 +37,7 @@
    ],
    "frame": {
     "family": "rotor_frame",
-    "host": "HABITAT",
+    "host": "HABITAT_A",
     "matrix": [
      [
       1.0,
@@ -70,7 +70,7 @@
     "parent": null,
     "rest_deg": 90.0
    },
-   "host": "HABITAT",
+   "host": "HABITAT_A",
    "scope": "M7"
   },
   "M7.XFR": {
@@ -90,7 +90,7 @@
    ],
    "frame": {
     "family": "drum_frame",
-    "host": "HABITAT",
+    "host": "HABITAT_A",
     "matrix": [
      [
       1.0,
@@ -123,7 +123,7 @@
     "parent": null,
     "rest_deg": 90.0
    },
-   "host": "HABITAT",
+   "host": "HABITAT_A",
    "scope": "M7"
   }
  },
@@ -540,13 +540,13 @@
   }
  },
  "git_dirty": false,
- "git_revision": "71bcc78febe88bad3f06c1a41abecc93eefa9205",
+ "git_revision": "e87f0bfd28d00f6393adbadfa4e2288dcbe21663",
  "inputs_hash": "06c9ac609c20045a",
  "module": "WF-RING-A",
  "note": "A publication makes the pack eligible for integration; it is not an owner acceptance and changes no maturity or canon.",
  "pack": "ring_a_transfer",
  "pack_version": 1,
- "published_utc": "2026-10-23T07:20:17Z",
- "spec_sha256": "c4c5aa25a1861c62cc710a36800ad88aa164d7f728b25572bb90d6ad2469c9bb",
+ "published_utc": "2026-10-23T11:07:15Z",
+ "spec_sha256": "861a969c7da0bf441ad5c4c2fb50a90ec9a959051cf3c2310ceb9a44f8a27360",
  "version": 2
 }

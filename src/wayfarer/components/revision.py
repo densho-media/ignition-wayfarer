@@ -221,9 +221,25 @@ def structure(c,s):
         line(c,f'Forward_Mount_Strut_{j}',[radial(layout.at(s,p['forward_mount_aft_x']),p['forward_mount_inner_radius_m'],a),radial(layout.at(s,p['forward_mount_fwd_x']),p['forward_mount_outer_radius_m'],a)],strut,metal)
 
 
+RINGS=('HABITAT_A','HABITAT_B')      # one engineering asset per ring (docs/MODULES.md): ring j is RINGS[j-1], linked by WF_HABITAT
+
+
 def habitat(c,s,assets):
-    """WF_HABITAT: both rigid rings at full size with their frame, fills, spokes, pressurized sectors, hubs, crew parts and the per-rotor
-    mechanism controls. The rotation driver reads ROTOR_n_MECH_CTRL['spin_fraction'], so a preset (ring_spin) decides whether the ring
+    """WF_HABITAT, the habitat assembly: the two ring assets linked at the ship origin (their own frames are the vehicle frame) and the
+    whole-habitat rotor actions, whose slots name both rings' controls. It holds no geometry of its own; the vehicle links it once."""
+    bpy.context.scene.render.fps=24
+    bpy.context.scene.frame_start=1;bpy.context.scene.frame_end=361
+    for j,name in enumerate(RINGS,1):
+        obj=link_instance(c,assets/f'subsystems/WF_{name}.blend',f'WF_{name}',f'Habitat_Ring_{j}',ident=f'WF.HABITAT.RING.{j}')
+        obj['kind']='ring_assembly';obj['ring']=j
+    rotor_parts.actions(s)
+    bpy.context.scene['configuration']=s['vehicle']['saved_preset']
+    bpy.context.scene.frame_set(1)
+
+
+def ring_asset(c,s,assets,j):
+    """WF_HABITAT_<A|B>: rigid ring j at full size with its frame, fills, spokes, pressurized sectors, hub, crew parts and its rotor's
+    mechanism control. The rotation driver reads ROTOR_j_MECH_CTRL['spin_fraction'], so a preset (ring_spin) decides whether the ring
     turns or sits at its index angle."""
     p=s['prototype'];h=s['habitat'];hr=s['habitat_ring']
     metal=material('HabitatArms',(.46,.57,.63));fill=material('RingFill',(.34,.50,.55));hub=s['rotor_interface']
@@ -231,10 +247,9 @@ def habitat(c,s,assets):
                       cover=material('RingCover',(.44,.56,.60)),service=material('RingService',(.30,.26,.16)),service_cover=material('RingServiceCover',(.78,.60,.24)))
     bpy.context.scene.render.fps=24
     bpy.context.scene.frame_start=1;bpy.context.scene.frame_end=361
-    # The controls come first: the rotation drivers target them. The saved pose is the vehicle's saved preset (spin 1).
-    controls=rotor_parts.controls(c,s)
-    for rotor,xx in enumerate(habitat_ring.centers(s)):
-        j=rotor+1
+    # The control comes first: the rotation driver targets it. The saved pose is the vehicle's saved preset (spin 1).
+    controls=rotor_parts.controls(c,s,j)
+    for rotor,xx in [(j-1,habitat_ring.centers(s)[j-1])]:      # this asset's ring only (it was one loop over both rings)
         parent=empty(c,f'Rotor_{j}',(xx,0,0),ident=f'WF.ROTOR.{j}',kind='rotor')
         phase=math.radians(p['rotor_phase_deg'][rotor]);sign=1 if rotor==0 else -1
         parent['rpm']=sign*h['rpm']

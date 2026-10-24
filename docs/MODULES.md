@@ -22,7 +22,7 @@ workbooks.
 ## Architecture
 
 **Registry: `data/modules.toml`.** This is the one authoritative table. Integration owns it and module sessions only read it. For each module (`WF-CORE`, `WF-FWD`,
-`WF-EYE`, `WF-SPINE`, `WF-RING-A`, `WF-RING-B`, `WF-DRIVE`, `WF-THERMAL`, `WF-FUEL`, `WF-UTILITY`) it lists:
+`WF-EYE`, `WF-SPINE`, `WF-HABITAT`, `WF-RING-A`, `WF-RING-B`, `WF-DRIVE`, `WF-THERMAL`, `WF-FUEL`, `WF-UTILITY`) it lists:
 - the existing build targets it owns (no renames);
 - the source files it owns (globs; a file belongs to one module at most);
 - its dependencies (acyclic);
@@ -30,8 +30,22 @@ workbooks.
 
 It also defines the anchor families. These module IDs are new names. They are not the S&E 48 workflow-gate IDs (WF-001…).
 
-HABITAT, the ring-sector skin and the interior components are one engineering asset set shared by both rings. WF-RING-A owns their
-engineering until HABITAT is split. Until then WF-RING-B owns detail packs only.
+**Habitat: one assembly, one asset per ring (phase 3).** Each ring is its own engineering asset and build target: `WF_HABITAT_A`
+(`HABITAT_A`, owned by WF-RING-A) and `WF_HABITAT_B` (`HABITAT_B`, WF-RING-B). Each holds its rotor, its mechanism control
+`ROTOR_j_MECH_CTRL`, hub, despun drum and `TRANSFER_j_CTRL`, crew tubes, frame, spokes and sectors, and hosts its own anchors and
+detail. `WF_HABITAT` (`HABITAT`, owned by WF-HABITAT) is the habitat assembly. It links both rings at the ship origin (`Habitat_Ring_j`) and
+holds the whole-habitat rotor actions, whose slots name both controls, because matched spin-down cancels the momenta. The vehicle links it
+once as `Assembly_HABITAT`, so runtime groups, node IDs and selectors are unchanged.
+
+WF-HABITAT also owns the sector skin and the interior components. All twelve sectors of both rings instance them, so they belong to
+neither ring. The ring geometry comes from one parameterised generator (`revision.ring_asset`) and one spec, so a ring session gets
+its own asset, rebuild, anchors and packs, but no second source of engineering values.
+
+Builds:
+- `--target HABITAT_A` rewrites ring A and the detail on it, never ring B, the assembly or the vehicle (it sees the ring through the
+  assembly's link, as with a detail target).
+- `HABITAT` rebuilds both rings and the assembly.
+- A sector-skin or interior change rebuilds both rings.
 
 **Detail pack: the unit a session owns.** A pack is discovered by glob, so adding one edits no shared file. It consists of:
 - `data/detail/<pack>.toml`: the manifest and its `[params]` (and optional `[materials]`);
@@ -89,9 +103,9 @@ It builds no assembly itself any more: the legacy `ASSEMBLIES` table and the `[p
 
 | Family | ID | Host object | Frame |
 | --- | --- | --- | --- |
-| `ring_sector` | `WF-RING-<A\|B>.SECTOR.<ring>.<sector>` | `Sector_<ring>_<sector>` in WF_HABITAT, under `Rotor_<ring>` | the sector frame: origin on the centreline at the deck, +X axial, +Y radially outward (down in spin), +Z tangential; turns with the ring |
-| `rotor_frame` | `WF-RING-<A\|B>.ROTOR.<ring>` | `Rotor_<ring>` in WF_HABITAT | the ring centre (`rotor_interface.rotors` x), rest angle the index phase; motion `ROTOR_SPIN_X`: the driver turns it about +X, so detail on it spins, spins down and stops with the ring |
-| `drum_frame` | `WF-RING-<A\|B>.DRUM.<ring>` | `Drum_<ring>`, the despun transfer drum (human-entry rotors only) | same centre and rest angle; motion `DRUM_DESPUN_X`: it stays at the index angle while `drum_sync` is 0 and turns with its ring while it is 1 |
+| `ring_sector` | `WF-RING-<A\|B>.SECTOR.<ring>.<sector>` | `Sector_<ring>_<sector>` in the ring's asset `WF_HABITAT_<A\|B>`, under `Rotor_<ring>` | the sector frame: origin on the centreline at the deck, +X axial, +Y radially outward (down in spin), +Z tangential; turns with the ring |
+| `rotor_frame` | `WF-RING-<A\|B>.ROTOR.<ring>` | `Rotor_<ring>` in `WF_HABITAT_<A\|B>` | the ring centre (`rotor_interface.rotors` x), rest angle the index phase; motion `ROTOR_SPIN_X`: the driver turns it about +X, so detail on it spins, spins down and stops with the ring |
+| `drum_frame` | `WF-RING-<A\|B>.DRUM.<ring>` | `Drum_<ring>` in `WF_HABITAT_<A\|B>`, the despun transfer drum (human-entry rotors only) | same centre and rest angle; motion `DRUM_DESPUN_X`: it stays at the index angle while `drum_sync` is 0 and turns with its ring while it is 1 |
 | `asset_origin` | `<module>.<TARGET>.ORIGIN` | none (the collection origin) | identity. A component linked several times (the radiator blade) carries its detail on every copy |
 
 Units are metres. The ship axes stay +X bow, +Z dorsal, +Y left.
@@ -161,7 +175,7 @@ provenance = "…"                    # how and from what it was made; nothing r
   inputs, so an edited mesh stales the pack's publication and the package.
 - **Why `.glb`.** One self-contained file per mesh: no sidecar `.bin` or texture to lose, one checksum. The costs: Git sees an opaque
   binary (no line diff; every revision is stored whole), and procedural, modifier, driver, constraint and custom-property data does not
-  survive (modifiers are applied at export). The `.blend` stays the editable source, locally, until a storage policy is approved.
+  survive (modifiers are applied at export). The `.blend` stays the editable source, locally (storage policy below).
 - **Evidence.** `tests/verify_authored_portable.py` proves the path from two disposable clean clones (see Evidence, phase 2).
 
 **Publication.** `module publish` refuses unless `module validate` passes. It then writes `references/modules/<pack>.json` with:
@@ -238,8 +252,9 @@ hosts, which must link it. A change to an engineering module that a pack's code 
 4. Hand-authored detail stops the build with `WF_DETAIL_REVIEW` until it is reviewed and rebound (local) or its `authored_against` is updated (committed).
 5. Never reshape engineering geometry to keep cosmetic detail attached.
 
-**Move detail between files (a migration).** Every legacy assembly is migrated; a later move (another anchor, a split pack, the HABITAT
-split) follows the same proof, recorded before the change:
+**Move detail between files (a migration).** Every legacy assembly is migrated; a later move (another anchor, a split pack, an engineering
+asset split) follows the same proof, recorded before the change. An engineering split moves whole objects between files instead (step 3 is
+`compare_fingerprint.py --split OLD NEW...`, step 4 `detail_equivalence.py --habitat`; see Evidence, phase 3):
 1. Move the builder, its screen and its exclusive parameters, leaving shared parameters as read-only spec dependencies (map the consumers first).
 2. Compare a digest of `production_detail.elements()` before and after; it must be identical.
 3. Run the full pipeline with the exact prefixes the move touches, then `compare_fingerprint.py --relocate` against the accepted baseline (PASS).
@@ -292,7 +307,7 @@ ACCEPTANCE CRITERIA:     validate PASS; only expected prefixes in the diff; prev
   - **Library overrides.** Rejected: they are fragile across rebuilds; the shots already document the nested-override pitfalls.
   - **Geometry Nodes.** Not needed for this layer: the joined, batched families already suit the runtime. They remain an option for artistic scatter where the inspection contract allows.
   - **One project per module.** Rejected: it would break the one-ship assembly and the shared formulas.
-  - **Git LFS.** Deferred, since no authored binary is committed yet.
+  - **Git LFS.** Not adopted (owner decision 2026-10-23) until a concrete production requirement justifies it.
   - **Moving every engineering asset into packs.** Rejected: no demonstrated need. Engineering targets keep their files and get registry ownership instead.
 
 ## Evidence (2026-10-22, cloud: 4 vCPU, Blender 5.2.2)
@@ -344,6 +359,8 @@ ACCEPTANCE CRITERIA:     validate PASS; only expected prefixes in the diff; prev
 ## Evidence, phase 2 (2026-10-23, cloud: 4 vCPU, Blender 5.2.2)
 
 Before-state recorded on `main` `80a6cb2`, whose saved assets matched `baseline_modules_pilot2` exactly (fingerprint diff empty).
+Evidence folders (local, kept by owner decision): `runs/20261023-phase2-before`, `runs/20261023-phase2-s2`, `runs/20261023-phase2-s3`,
+`runs/20261023-phase2-s4`, `runs/20261023-phase2-portable`, `runs/20261023-phase2-timings`.
 
 - **Per-pack contracts.** Merge experiment, two sessions each adding a pack to WF-RING-A from one commit, each regenerating the contract
   file as the build does:
@@ -392,10 +409,58 @@ Before-state recorded on `main` `80a6cb2`, whose saved assets matched `baseline_
 - **Two faults found and fixed on the way:** the forward inspection read only the forward-shield file, so it now reads the detail assets
   linked into it (and skips the link carriers); `m8_exterior.py` restored the production materials by name, which reached only one of
   the per-file copies (the "on" stills differed until it addressed them per datablock).
-## Storage of authored source binaries (evaluation, 2026-10-23; owner decision pending)
+## Evidence, phase 3: independent ring assets (2026-10-23, cloud: 4 vCPU, Blender 5.2.2)
 
-The committed path carries exported `.glb` files; the editable `.blend` sources stay local (user decision 2026-10-22, unchanged). Options
-for real authored binaries, by what they cost this public repository:
+The split of `WF_HABITAT` into `WF_HABITAT_A`, `WF_HABITAT_B` and the assembly `WF_HABITAT`. Before-evidence is in
+`runs/20261023-phase3-before` (the before fingerprint equals the accepted `modules_phase2` baseline) and after-evidence in
+`runs/20261023-phase3-after`. All proofs ran on the same machine.
+
+| Proof | Result |
+| --- | --- |
+| Fingerprint, `compare_fingerprint.py --split subsystems/WF_HABITAT.blend …_A.blend …_B.blend` | PASS: all 507 objects moved verbatim (254 to ring A, 253 to ring B), keeping their records, parents and in-file matrices; the assembly gained exactly the two identity instances; links conserved; every other file and object in the ship unchanged |
+| Evaluated geometry, `detail_equivalence.py --habitat` at the 8 poses (saved; COAST with the rings turned; drum sync; HIGH_POWER; DOCKED with every closure open; Crown prepared and engaged at two azimuths) | all 1,443 evaluated instances under `Assembly_HABITAT` (rings, hubs, crew route, sectors, interiors, detail) identical in every pose. The only differences: the two new `Habitat_Ring_j` instance empties, and the `anchor_hash` label of the four ring-A detail instances, whose anchors now name their ring's asset as host |
+| Runtime manifest (COAST export against the published package) | 3,947 nodes, 741,424 triangles, bounds, groups, and every node record **including its node ID** identical: the ID hashes the outer `Assembly_HABITAT` group and each object's own parent chain, which the nested link does not change. Only the `host` label of the four ring-A production assemblies changed (`HABITAT` → `HABITAT_A`); no runtime script reads it |
+| Sim rig, readback, station map | `wf_sim_rig.json`, `p1_readback` and the station map are byte-identical. The ring files are measured as part of `WF_HABITAT`, so the row IDs are unchanged |
+| Stills | all 9 M7 section stills are pixel-identical. The Workbench draft previews are not deterministic: rendering the unchanged after-state twice differs in the same places (a hull-edge band, isolated pixels, up to 13/255). The before/after differences are of that kind and size (≤ 0.1 % of pixels, mostly 1–3/255); geometry is proven by the vertex-level proof above |
+| Pack contracts | the anchors of `m7_ra1`, `ra2_equip` and `ring_a_transfer` keep their IDs, objects and frames. Their hash changed with the host, so `assembly validate` reported exactly those three stale; they were republished; 6/6 PASS |
+| Inspection | per ring file: its own rotor, control and sectors, and no actions. The assembly: two ring instances at identity, the three actions, and no geometry. The habitat, rotor-interface and crew-transfer checks run unchanged over both linked rings |
+
+Build times (idle, measured), and what each target rewrites:
+
+| Target | Before | After |
+| --- | --- | --- |
+| `HABITAT` | 34.05 s; one 1.22 MB file + the vehicle | 37.68 s; both rings (0.88 + 0.90 MB), the assembly (0.35 MB) and the vehicle |
+| `HABITAT_B` | — | 6.32 s; only `WF_HABITAT_B`; ring A, the assembly and the vehicle byte-identical |
+| `HABITAT_A` | — | 8.27 s; `WF_HABITAT_A` and its four detail files |
+
+Gates (all at code commit `cc154ba`, logs in `runs/20261023-phase3-after/gates`):
+
+| Gate | Result |
+| --- | --- |
+| Full pipeline `--expect WF_HABITAT Habitat_Ring_` (`runs/20261023T110910Z-pipeline`, 482.6 s) | PASS: 150 unit tests OK (1 skipped), whole-ship inspection PASS, fingerprint diff against `modules_phase2`: 0 changed, 2 added (`Habitat_Ring_1/2`), 507 removed from `WF_HABITAT` (moved, proven above), 2 files added, 0 unexpected; Cycles COAST and HIGH_POWER previews. Accepted as baseline `modules_phase3` (`modules_phase2` stays in history) |
+| `runtime-export` (`runs/20261023T111712967262Z-runtime`, 9 min 13 s) | PASS: 31/31 Godot checks, 3,947 nodes, 741,424 triangles |
+| `tests/verify_detail_authoring.py` | PASS: probe adopted, adopted on build, survives regeneration, a contract change stops the build, rebind after review, exported as production |
+| `tests/verify_rebuild.py` (51 min 27 s) | PASS, 15 cases, among them: full rebuild with stable IDs; ART and unowned GEN preserved; radiator, hull, Garden interior, detail-only and moving-anchor detail rebuilds leave every other asset byte-identical; **`HABITAT_B` then `HABITAT_A` each leave the other ring, the habitat assembly, the vehicle and the other ring's detail byte-identical**; relocated nested links; retirement to `milestones/` |
+
+Combined with `main` (MOB-001 touch controls, `b95fb7b`; clean merge `4b6a7eb`, logs in `runs/20261023-phase3-after/combined`): the CI
+pipeline (`--quick --previews none --tests none`) gives PASS, with an empty geometry diff against `modules_phase3`; 150 unit tests OK (1 skipped);
+`runtime-export` 32/32 PASS (`controls-touch` and `review-ring-b` included; same 3,947 nodes and 741,424 triangles).
+
+*Rollback:* revert the phase 3 commit on `main`, run a full build, and move the two then unlinked ring files into `subsystems/milestones/`
+by hand; the previous baseline is `modules_phase2`. The publication revisions named in `references/modules/*.json` stay reachable through
+the kept branches `claude/beautiful-edison-aum6tp` (phase 1 and 2) and `claude/habitat-ring-split` (phase 3).
+
+Visual maturity is unchanged by the split: `m7_ra1`, `m7_spine` and `ring_a_transfer` stay `L4_VISUAL_ACCEPTED`; `m8_forward`,
+`ra2_equip` and `rad_frame` stay `L4_VISUAL_CANDIDATE`. Republishing a record on its new host is not an art review.
+
+## Storage of authored binaries (owner decision 2026-10-23)
+
+**Policy.** Approved authored meshes are committed as `.glb` files in ordinary Git, up to 2 MiB each, with the checksum, anchor hash,
+licence, author and provenance the manifest requires. Editable `.blend` sources stay local. No Git LFS and no external asset store until a
+concrete production requirement justifies one. Before a real authored asset is committed, its contents and licence must be checked to
+permit publication in this public repository; owner material, Drive captures and unlicensed assets never enter the committed path.
+
+The options evaluated, by what they cost this public repository:
 
 | Option | Size and history | Exposure | Reproducibility | Permissions and CI |
 | --- | --- | --- | --- | --- |
@@ -404,12 +469,25 @@ for real authored binaries, by what they cost this public repository:
 | Private store referenced by checksum | none in Git | private | only with credentials; a public clone cannot rebuild | a secret in CI; a fetch step |
 | `.blend` sources in Git | large binaries, no diff, every save whole | public | the editable source travels | none |
 
-Recommendation: keep `.glb` in Git under the cap until the first real authored mesh; then decide by its size, licence and whether it may be
-public. Nothing restricted (owner material, Drive captures, unlicensed assets) may enter the committed path in any case.
+Revisit the policy when a real asset exceeds the cap, many assets accumulate, or one may not be public.
 
 ## Limitations and next steps
 
-- HABITAT still serves both rings, so ring-B engineering cannot be owned separately; the split is proposed in TODO (MOD) as its own phase.
+- The two rings share one generator and one spec by design: a ring session owns its asset, anchors and detail packs, and an engineering
+  value change still goes through `data/wayfarer_3d.toml` (WF-CORE) and rebuilds both rings when the value is shared.
+- Remaining couplings between the rings, all deliberate:
+  - **Owned no source file.** The ring modules own targets, anchors and packs; the ring generator (`revision.py`, WF-CORE), the rotor and
+    crew-route builders (`rotor.py`, `crew.py`, WF-SPINE) and the sector skin and interiors (WF-HABITAT) are shared code. A change there
+    is an integration change, built with target `HABITAT`.
+  - **Shared components.** `WF_RING_SECTOR` and `WF_INTERIOR_*` serve all twelve sectors; changing them rebuilds both rings.
+  - **One procedure for both rotors.** The stop-lock, touchdown and seal-fault actions live in the assembly, because a matched spin-down
+    keeps the counter-rotating momenta cancelled.
+  - **One formula couples B to A.** Ring B's vestibule port is sized clear of hub 1's forward cartridge-withdrawal paths
+    (`crew_transfer.vestibule`), so a ring-A rotor or cartridge value can move ring B's vestibule. Rebuild both rings (`HABITAT`) after one.
+  - **Serial integration.** The build lock, the whole-ship baseline (`accept`) and the published runtime package are single. Two ring
+    sessions build in seconds each but serialise on one machine, and their branches integrate one after the other.
+  - **Ring B has no detail pack yet.** Its anchors (`WF-RING-B.*`) exist; the first ring-B pack will be the first test of a parallel
+    ring-B session.
 - The committed authored path keeps PBR base colour, roughness and metallic, UVs and normals; procedural, modifier, driver and constraint
   data does not travel, and joined multi-mesh imports keep face smooth flags but not custom normals. Textures embedded in the `.glb` are
   imported but not checked by any gate yet.

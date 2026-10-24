@@ -16,11 +16,15 @@ import modules
 import detail
 
 COMPONENTS=['NOZZLE','RADIATOR','RING_SECTOR','INTERIOR_HABITATION','INTERIOR_WORK','INTERIOR_GARDEN']
-SUBSYSTEMS=['STRUCTURE','HABITAT','STORAGE','SHIELDING','SERVICE','POWER_STORAGE','ROTOR_INTERFACE','CREW_TRANSFER','EYE','FORWARD_SHIELD','DEBUG_MAGNETICS','DEBUG_SEPARATRICES','DEBUG_OPTICS','PROPULSION','THERMAL','HULL','DRONES']
+SUBSYSTEMS=['STRUCTURE','HABITAT_A','HABITAT_B','HABITAT','STORAGE','SHIELDING','SERVICE','POWER_STORAGE','ROTOR_INTERFACE','CREW_TRANSFER','EYE','FORWARD_SHIELD','DEBUG_MAGNETICS','DEBUG_SEPARATRICES','DEBUG_OPTICS','PROPULSION','THERMAL','HULL','DRONES']
 HULL_FAMILY={'HULL'}
 # P1F engineering overlays: built before PROPULSION, which links them as DRIVE_DEBUG_* instances whose hide flags follow
 # the drive control's toggles (saved off). Vehicles never link them directly.
 DEBUG_FAMILY=['DEBUG_MAGNETICS','DEBUG_SEPARATRICES','DEBUG_OPTICS']
+# One engineering asset per ring (docs/MODULES.md, WF-RING-A / WF-RING-B): built before HABITAT, the habitat assembly that links both
+# (and holds the whole-habitat rotor actions). A ring target rewrites only its own ring and the detail on it (not the vehicle, which sees
+# the ring through the assembly's link); HABITAT rebuilds all three and the vehicle.
+RING_FAMILY=['HABITAT_A','HABITAT_B']
 # Production files that no longer exist (path under assets/wayfarer -> why). A full build moves each one that is still on disk
 # into its own milestones/ folder as <stem>_RETIRED_<UTC>.blend, after checking that nothing hand-made would be lost. Never deleted.
 RETIRED={'WF_WAYFARER_001_BURN.blend':'FGR-002 single vehicle; HIGH_POWER is a preset',
@@ -97,6 +101,14 @@ def build_detail(root,assets,s,assembly,spec_text,source_text,rebind=False):
     print('WF_DETAIL',name,len(c.objects)-len(imported),'generated',len(imported),'imported',len(authored),'adopted',flush=True)
 
 
+def build_one_subsystem(assets,name,s,spec_text,source_text,root):
+    path=assets/f'subsystems/WF_{name}.blend'
+    coll,c=begin(path,f'WF_{name}')
+    build_subsystem(name,c,s,assets)
+    detail.attach(c,s,assets,name,root)
+    save(path,coll,spec_text,source_text)
+
+
 def build(root=ROOT, target='all', rebind=False):
     s,_,spec_text,source_text=load(root)
     assets=root/'assets/wayfarer'
@@ -113,15 +125,25 @@ def build(root=ROOT, target='all', rebind=False):
         # A detail-only change rewrites its own files: the host links them, and the vehicle sees them through that nested link.
         for n in names:build_detail(root,assets,s,details[n],spec_text,source_text,rebind)
         modules.write(s,root);return
+    if set(names)<=set(RING_FAMILY):
+        # A ring target likewise rewrites its own ring asset and the detail on it: the habitat assembly links the ring, and the vehicle
+        # sees it through that nested link, so neither the other ring, the assembly nor the vehicle is rewritten.
+        rings=[x for x in RING_FAMILY if x in names]
+        for a in details.values():
+            if modules.anchor_host(modules.assemblies(s['detail_packs'])[a]['anchor']) in rings:
+                build_detail(root,assets,s,a,spec_text,source_text)
+        for name in rings:build_one_subsystem(assets,name,s,spec_text,source_text,root)
+        modules.write(s,root);return
     if set(s['interior']['components'].values())!={c for c in COMPONENTS if c.startswith('INTERIOR_')}:raise ValueError('interior.components must match the INTERIOR_ components')
-    dependencies={'NOZZLE':['PROPULSION'],'RADIATOR':['THERMAL'],'RING_SECTOR':['HABITAT']}
-    dependencies|={c:['HABITAT'] for c in COMPONENTS if c.startswith('INTERIOR_')}
+    dependencies={'NOZZLE':['PROPULSION'],'RADIATOR':['THERMAL'],'RING_SECTOR':RING_FAMILY}
+    dependencies|={c:RING_FAMILY for c in COMPONENTS if c.startswith('INTERIOR_')}
     parts,systems=[],[]
     for n in names:
         if n in COMPONENTS:p,q=[n],dependencies[n]
         elif n=='all':p,q=COMPONENTS,SUBSYSTEMS
         elif n=='PROPULSION':p,q=[],[*DEBUG_FAMILY,'PROPULSION']
         elif n in DEBUG_FAMILY:p,q=[],[n,'PROPULSION']
+        elif n=='HABITAT':p,q=[],[*RING_FAMILY,'HABITAT']
         elif n in SUBSYSTEMS:p,q=[],[n]
         else:p,q=[],[]
         parts+=[x for x in p if x not in parts];systems+=[x for x in q if x not in systems]
@@ -137,12 +159,7 @@ def build(root=ROOT, target='all', rebind=False):
         build_component(name,c,s)
         detail.attach(c,s,assets,name,root)
         save(path,coll,spec_text,source_text)
-    for name in systems:
-        path=assets/f'subsystems/WF_{name}.blend'
-        coll,c=begin(path,f'WF_{name}')
-        build_subsystem(name,c,s,assets)
-        detail.attach(c,s,assets,name,root)
-        save(path,coll,spec_text,source_text)
+    for name in systems:build_one_subsystem(assets,name,s,spec_text,source_text,root)
     # One vehicle file: every non-debug subsystem is linked once; configurations are presets posed on its linked controls.
     asset_name=s['vehicle']['asset']
     path=assets/(asset_name+'.blend')
@@ -154,7 +171,7 @@ def build(root=ROOT, target='all', rebind=False):
     for name in SUBSYSTEMS:
         # A disabled hull is still built (never stale) but not linked.
         if name in HULL_FAMILY and not s['hull']['enabled']:continue
-        if name in DEBUG_FAMILY:continue
+        if name in DEBUG_FAMILY or name in RING_FAMILY:continue
         obj=link_instance(c,assets/f'subsystems/WF_{name}.blend',f'WF_{name}',f'Assembly_{name}',ident=f'WF.SUBSYSTEM.{name}')
         obj.parent=root_obj
     human_reference(c,s)

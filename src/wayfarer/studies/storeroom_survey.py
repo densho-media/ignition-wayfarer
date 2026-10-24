@@ -33,7 +33,7 @@ import hull_geometry
 import layout
 
 ROOM = (5.0, 2.5, 2.4)                    # 33!C85:C87 compact clear length, width, height (PROTOTYPE, DIMENSIONS PROVISIONAL)
-ROTATING = {'WF_HABITAT', 'WF_RING_SECTOR', 'WF_INTERIOR_HABITATION', 'WF_INTERIOR_WORK', 'WF_INTERIOR_GARDEN'}
+ROTATING = {'WF_HABITAT', 'WF_HABITAT_A', 'WF_HABITAT_B', 'WF_RING_SECTOR', 'WF_INTERIOR_HABITATION', 'WF_INTERIOR_WORK', 'WF_INTERIOR_GARDEN'}
 SKIP_KINDS = {'plasma', 'optical_beam', 'magnetic_field', 'hull_envelope', 'scale_reference', 'entry_camera'}
 SKIP_NAMES = ('MagneticNozzle_FieldEnvelope', 'Body_Envelope_Reference', 'Human_')
 FACES = [(0, 1, 3, 2), (4, 6, 7, 5), (0, 4, 5, 1), (2, 3, 7, 6), (0, 2, 6, 4), (1, 5, 7, 3)]

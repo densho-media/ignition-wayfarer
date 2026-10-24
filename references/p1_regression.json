@@ -1,7 +1,7 @@
 {
   "result": "PASS",
   "tests": [
-    "save/reopen all 34 production assets; the one vehicle file",
+    "save/reopen all 36 production assets; the one vehicle file",
     "simulation rig contract regenerated and checked",
     "two identical-input builds",
     "unique stable generated IDs",
@@ -10,6 +10,7 @@
     "targeted radiator rebuild leaves unrelated assets byte-identical",
     "targeted hull rebuild leaves unrelated assets byte-identical",
     "targeted Garden interior rebuild leaves unrelated assets byte-identical",
+    "ring A and ring B targets each leave the other ring, the habitat assembly, the vehicle and the other ring's detail byte-identical",
     "relocated nested relative links",
     "snapshot and source-map hashes",
     "invalid spec fails CLI before asset writes",

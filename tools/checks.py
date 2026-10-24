@@ -29,6 +29,7 @@ TARGET_ENTRIES = {
     'NOZZLE': ('drive',), 'STORAGE': ('drive',), 'PROPULSION': ('drive',), 'DEBUG_MAGNETICS': ('drive',),
     'DEBUG_SEPARATRICES': ('drive',), 'DEBUG_OPTICS': ('drive',),
     'RADIATOR': ('revision',), 'RING_SECTOR': ('revision',), 'STRUCTURE': ('revision',), 'HABITAT': ('revision',),
+    'HABITAT_A': ('revision',), 'HABITAT_B': ('revision',),
     'SHIELDING': ('revision',), 'THERMAL': ('revision',),
     'INTERIOR_HABITATION': ('interior',), 'INTERIOR_WORK': ('interior',), 'INTERIOR_GARDEN': ('interior',),
     'FORWARD_SHIELD': ('forward',), 'HULL': ('hull',), 'SERVICE': ('hull',), 'POWER_STORAGE': ('power',),

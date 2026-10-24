@@ -8,7 +8,11 @@ and the spine-port gates open; the Crown stowed, prepared and engaged at two azi
 proves a migration moved files and parents without moving, reshaping, retagging or rebinding anything: only the saved-in file, the
 detail-pack labels it adds and the lineage may differ.
 
-    blender -b --factory-startup --python tests/detail_equivalence.py -- --root . --out before.json
+--habitat records instead everything the vehicle evaluates under Assembly_HABITAT (rings, hubs, crew route, sectors, interiors and the
+detail on them: meshes, curves and text as world-space vertex digests, empties as world matrices) and the saved objects of the habitat
+files, for an engineering-asset split (docs/MODULES.md, phase 3).
+
+    blender -b --factory-startup --python tests/detail_equivalence.py -- --root . --out before.json [--habitat]
     python3 tests/detail_equivalence.py --compare before.json after.json
 """
 from pathlib import Path
@@ -26,7 +30,11 @@ def digest(values):
     return hashlib.sha256(json.dumps(values, separators=(',', ':')).encode()).hexdigest()[:16]
 
 
-def record(root):
+GEOMETRY = {'MESH', 'CURVE', 'FONT'}
+HABITAT_FILES = ('WF_HABITAT', 'WF_RING_SECTOR', 'WF_INTERIOR_', 'WF_DETAIL_')
+
+
+def record(root, habitat=False):
     import bpy
     sys.path[:0] = [str(root/'src/wayfarer'), str(root/'src/wayfarer/build')]
     from spec import load
@@ -41,7 +49,15 @@ def record(root):
         scene.frame_set(1); deps = bpy.context.evaluated_depsgraph_get(); out = {}
         for inst in deps.object_instances:
             obj = inst.object
-            if obj.type != 'MESH' or obj.original.get('kind') != 'production_detail':
+            if habitat:
+                if not (inst.parent and inst.parent.original.name == 'Assembly_HABITAT'):
+                    continue
+                if obj.type == 'EMPTY':
+                    out.setdefault(obj.original.name, []).append(digest([round(c, 5)+0.0 for row in inst.matrix_world for c in row]))
+                    continue
+                if obj.type not in GEOMETRY:
+                    continue
+            elif obj.type != 'MESH' or obj.original.get('kind') != 'production_detail':
                 continue
             me = obj.to_mesh(); m = inst.matrix_world
             vs = [[round(c, 5)+0.0 for c in m@v.co] for v in me.vertices]; nf = len(me.polygons); obj.to_mesh_clear()
@@ -85,7 +101,10 @@ def record(root):
 
     objects = {}
     for obj in bpy.data.objects:
-        if obj.type != 'MESH' or obj.get('kind') != 'production_detail':
+        if habitat:
+            if not (obj.library and Path(obj.library.filepath).name.startswith(HABITAT_FILES)):
+                continue
+        elif obj.type != 'MESH' or obj.get('kind') != 'production_detail':
             continue
         props = {k: (v if isinstance(v, (int, float, str, bool)) else str(list(v)) if hasattr(v, '__len__') else str(v)) for k, v in obj.items()}
         mats = []
@@ -94,10 +113,11 @@ def record(root):
             mats.append([m.name if m else None, None if node is None else
                          [round(x, 6) for x in [*node.inputs['Base Color'].default_value, node.inputs['Roughness'].default_value,
                                                  node.inputs['Metallic'].default_value]]])
+        mesh = digest([[round(c, 6) for c in v.co] for v in obj.data.vertices]) if obj.type == 'MESH' else None
         mods = [[md.type, md.name, *([round(md.width, 6), md.segments, md.limit_method, round(md.angle_limit, 6)] if md.type == 'BEVEL' else [])]
                 for md in obj.modifiers]
         objects[obj.name] = dict(file=Path(obj.library.filepath).name if obj.library else None, parent=obj.parent.name if obj.parent else None,
-                                 props=props, materials=mats, modifiers=mods, mesh=digest([[round(c, 6) for c in v.co] for v in obj.data.vertices]))
+                                 props=props, materials=mats, modifiers=mods, mesh=mesh)
     return dict(poses=poses, objects=dict(sorted(objects.items())))
 
 
@@ -130,10 +150,11 @@ if __name__ == '__main__':
     argv = sys.argv[sys.argv.index('--')+1:] if '--' in sys.argv else sys.argv[1:]
     p = argparse.ArgumentParser(); p.add_argument('--root', type=Path, default=ROOT); p.add_argument('--out', type=Path)
     p.add_argument('--compare', nargs=2, type=Path)
+    p.add_argument('--habitat', action='store_true')
     a = p.parse_args(argv)
     if a.compare:
         r = compare(*(json.loads(x.read_text()) for x in a.compare))
         print(json.dumps(r, indent=1)); sys.exit(r['result'] != 'PASS')
-    data = record(a.root.resolve())
+    data = record(a.root.resolve(), a.habitat)
     a.out.write_text(json.dumps(data, indent=1, sort_keys=True)+'\n')
     print('WF_DETAIL_EQUIVALENCE', len(data['objects']), 'objects', {k: len(v) for k, v in data['poses'].items()}, flush=True)

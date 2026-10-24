@@ -367,12 +367,187 @@
    },
    "hash": "2102551ab5c22a6e"
   },
+  "WF-HABITAT": {
+   "anchors": {
+    "WF-HABITAT.HABITAT.ORIGIN": {
+     "family": "asset_origin",
+     "hash": "c93b7f0dacdfd20b",
+     "host": "HABITAT",
+     "matrix": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "module": "WF-HABITAT",
+     "object": null,
+     "parent": null
+    },
+    "WF-HABITAT.INTERIOR_GARDEN.ORIGIN": {
+     "family": "asset_origin",
+     "hash": "2dbc9297ace13988",
+     "host": "INTERIOR_GARDEN",
+     "matrix": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "module": "WF-HABITAT",
+     "object": null,
+     "parent": null
+    },
+    "WF-HABITAT.INTERIOR_HABITATION.ORIGIN": {
+     "family": "asset_origin",
+     "hash": "f0bc53b774fb8a53",
+     "host": "INTERIOR_HABITATION",
+     "matrix": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "module": "WF-HABITAT",
+     "object": null,
+     "parent": null
+    },
+    "WF-HABITAT.INTERIOR_WORK.ORIGIN": {
+     "family": "asset_origin",
+     "hash": "c741d12d8412183a",
+     "host": "INTERIOR_WORK",
+     "matrix": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "module": "WF-HABITAT",
+     "object": null,
+     "parent": null
+    },
+    "WF-HABITAT.RING_SECTOR.ORIGIN": {
+     "family": "asset_origin",
+     "hash": "68c79f1054254596",
+     "host": "RING_SECTOR",
+     "matrix": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "module": "WF-HABITAT",
+     "object": null,
+     "parent": null
+    }
+   },
+   "hash": "61e01037e2c4523e"
+  },
   "WF-RING-A": {
    "anchors": {
     "WF-RING-A.DRUM.1": {
      "family": "drum_frame",
-     "hash": "9bb5f995c24d5295",
-     "host": "HABITAT",
+     "hash": "68ebfd2457766bc4",
+     "host": "HABITAT_A",
      "matrix": [
       [
        1.0,
@@ -405,146 +580,10 @@
      "parent": null,
      "rest_deg": 90.0
     },
-    "WF-RING-A.HABITAT.ORIGIN": {
+    "WF-RING-A.HABITAT_A.ORIGIN": {
      "family": "asset_origin",
-     "hash": "b7f24708b6a28ecf",
-     "host": "HABITAT",
-     "matrix": [
-      [
-       1.0,
-       0.0,
-       0.0,
-       0.0
-      ],
-      [
-       0.0,
-       1.0,
-       0.0,
-       0.0
-      ],
-      [
-       0.0,
-       0.0,
-       1.0,
-       0.0
-      ],
-      [
-       0.0,
-       0.0,
-       0.0,
-       1.0
-      ]
-     ],
-     "module": "WF-RING-A",
-     "object": null,
-     "parent": null
-    },
-    "WF-RING-A.INTERIOR_GARDEN.ORIGIN": {
-     "family": "asset_origin",
-     "hash": "eea5ddc5d13b57fd",
-     "host": "INTERIOR_GARDEN",
-     "matrix": [
-      [
-       1.0,
-       0.0,
-       0.0,
-       0.0
-      ],
-      [
-       0.0,
-       1.0,
-       0.0,
-       0.0
-      ],
-      [
-       0.0,
-       0.0,
-       1.0,
-       0.0
-      ],
-      [
-       0.0,
-       0.0,
-       0.0,
-       1.0
-      ]
-     ],
-     "module": "WF-RING-A",
-     "object": null,
-     "parent": null
-    },
-    "WF-RING-A.INTERIOR_HABITATION.ORIGIN": {
-     "family": "asset_origin",
-     "hash": "83930d160bf938c3",
-     "host": "INTERIOR_HABITATION",
-     "matrix": [
-      [
-       1.0,
-       0.0,
-       0.0,
-       0.0
-      ],
-      [
-       0.0,
-       1.0,
-       0.0,
-       0.0
-      ],
-      [
-       0.0,
-       0.0,
-       1.0,
-       0.0
-      ],
-      [
-       0.0,
-       0.0,
-       0.0,
-       1.0
-      ]
-     ],
-     "module": "WF-RING-A",
-     "object": null,
-     "parent": null
-    },
-    "WF-RING-A.INTERIOR_WORK.ORIGIN": {
-     "family": "asset_origin",
-     "hash": "d966c7afffd1a5af",
-     "host": "INTERIOR_WORK",
-     "matrix": [
-      [
-       1.0,
-       0.0,
-       0.0,
-       0.0
-      ],
-      [
-       0.0,
-       1.0,
-       0.0,
-       0.0
-      ],
-      [
-       0.0,
-       0.0,
-       1.0,
-       0.0
-      ],
-      [
-       0.0,
-       0.0,
-       0.0,
-       1.0
-      ]
-     ],
-     "module": "WF-RING-A",
-     "object": null,
-     "parent": null
-    },
-    "WF-RING-A.RING_SECTOR.ORIGIN": {
-     "family": "asset_origin",
-     "hash": "e66964caa17fcd55",
-     "host": "RING_SECTOR",
+     "hash": "b8d41e6129eb4ca5",
+     "host": "HABITAT_A",
      "matrix": [
       [
        1.0,
@@ -577,8 +616,8 @@
     },
     "WF-RING-A.ROTOR.1": {
      "family": "rotor_frame",
-     "hash": "2ae4b0fa48fdf488",
-     "host": "HABITAT",
+     "hash": "b8992b3a6c566131",
+     "host": "HABITAT_A",
      "matrix": [
       [
        1.0,
@@ -614,8 +653,8 @@
     "WF-RING-A.SECTOR.1.1": {
      "family": "ring_sector",
      "function": "HABITATION",
-     "hash": "fe36ef7023096caa",
-     "host": "HABITAT",
+     "hash": "fd8a4e54cfdc5f54",
+     "host": "HABITAT_A",
      "matrix": [
       [
        1.0,
@@ -649,8 +688,8 @@
     "WF-RING-A.SECTOR.1.2": {
      "family": "ring_sector",
      "function": "WORK_MEDICAL_OPS",
-     "hash": "6ac93396b4a0563f",
-     "host": "HABITAT",
+     "hash": "1f83aa8f08aba375",
+     "host": "HABITAT_A",
      "matrix": [
       [
        1.0,
@@ -684,8 +723,8 @@
     "WF-RING-A.SECTOR.1.3": {
      "family": "ring_sector",
      "function": "LIFE_SUPPORT_GARDEN_COMMON",
-     "hash": "d0215d63a5171e26",
-     "host": "HABITAT",
+     "hash": "c276480682858b21",
+     "host": "HABITAT_A",
      "matrix": [
       [
        1.0,
@@ -717,14 +756,14 @@
      "parent": "Rotor_1"
     }
    },
-   "hash": "d7891115564e0d87"
+   "hash": "2de269194835667c"
   },
   "WF-RING-B": {
    "anchors": {
     "WF-RING-B.DRUM.2": {
      "family": "drum_frame",
-     "hash": "9943482457b00fed",
-     "host": "HABITAT",
+     "hash": "c8b6306987eb0575",
+     "host": "HABITAT_B",
      "matrix": [
       [
        1.0,
@@ -757,10 +796,44 @@
      "parent": null,
      "rest_deg": 90.0
     },
+    "WF-RING-B.HABITAT_B.ORIGIN": {
+     "family": "asset_origin",
+     "hash": "8abf5dae3ec53c57",
+     "host": "HABITAT_B",
+     "matrix": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "module": "WF-RING-B",
+     "object": null,
+     "parent": null
+    },
     "WF-RING-B.ROTOR.2": {
      "family": "rotor_frame",
-     "hash": "1ecdb82122af0a21",
-     "host": "HABITAT",
+     "hash": "a3ff314d01ac22b1",
+     "host": "HABITAT_B",
      "matrix": [
       [
        1.0,
@@ -796,8 +869,8 @@
     "WF-RING-B.SECTOR.2.1": {
      "family": "ring_sector",
      "function": "HABITATION",
-     "hash": "949470cf7595796a",
-     "host": "HABITAT",
+     "hash": "e5cbd90dfb652bc3",
+     "host": "HABITAT_B",
      "matrix": [
       [
        1.0,
@@ -831,8 +904,8 @@
     "WF-RING-B.SECTOR.2.2": {
      "family": "ring_sector",
      "function": "WORK_MEDICAL_OPS",
-     "hash": "58f2f44c0864999e",
-     "host": "HABITAT",
+     "hash": "318994a8ea0a293d",
+     "host": "HABITAT_B",
      "matrix": [
       [
        1.0,
@@ -866,8 +939,8 @@
     "WF-RING-B.SECTOR.2.3": {
      "family": "ring_sector",
      "function": "LIFE_SUPPORT_GARDEN_COMMON",
-     "hash": "349917a2a5a20d1b",
-     "host": "HABITAT",
+     "hash": "81d517505a105514",
+     "host": "HABITAT_B",
      "matrix": [
       [
        1.0,
@@ -899,7 +972,7 @@
      "parent": "Rotor_2"
     }
    },
-   "hash": "25e1dfe008a58424"
+   "hash": "6f3413c36a2daf6a"
   },
   "WF-SPINE": {
    "anchors": {

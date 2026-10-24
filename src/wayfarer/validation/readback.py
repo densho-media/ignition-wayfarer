@@ -52,6 +52,8 @@ def detail_hosts(root=ROOT):
 
 
 DETAIL_HOSTS={}
+# The ring assets (docs/MODULES.md) are measured as part of the habitat assembly, so the row and station IDs stay HABITAT.*.
+RING_PARTS={f'WF_{n}':'WF_HABITAT' for n in wf_inspect.RING_FAMILY}
 
 
 def measure():
@@ -67,6 +69,7 @@ def measure():
         obj.to_mesh_clear()
         lib=obj.original.library;sub=Path(lib.filepath).stem if lib else 'WF_WAYFARER_001'
         sub=DETAIL_HOSTS.get(sub,sub)     # a detail asset is measured as part of its host (docs/MODULES.md)
+        sub=RING_PARTS.get(sub,sub)
         rs=[math.hypot(v.y,v.z) for v in vs]
         records.append(dict(name=obj.name,kind=obj.get('kind') or 'geometry',subsystem=sub,stem=STEM.split(obj.name)[0],
                             lo=[min(v[i] for v in vs) for i in range(3)],hi=[max(v[i] for v in vs) for i in range(3)],
