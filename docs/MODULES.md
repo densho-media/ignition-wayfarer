@@ -446,6 +446,10 @@ Combined with `main` (MOB-001 touch controls, `b95fb7b`; clean merge `4b6a7eb`, 
 pipeline (`--quick --previews none --tests none`) gives PASS, with an empty geometry diff against `modules_phase3`; 150 unit tests OK (1 skipped);
 `runtime-export` 32/32 PASS (`controls-touch` and `review-ring-b` included; same 3,947 nodes and 741,424 triangles).
 
+*Rollback:* revert the phase 3 commit on `main`, run a full build, and move the two then unlinked ring files into `subsystems/milestones/`
+by hand; the previous baseline is `modules_phase2`. The publication revisions named in `references/modules/*.json` stay reachable through
+the kept branches `claude/beautiful-edison-aum6tp` (phase 1 and 2) and `claude/habitat-ring-split` (phase 3).
+
 Visual maturity is unchanged by the split: `m7_ra1`, `m7_spine` and `ring_a_transfer` stay `L4_VISUAL_ACCEPTED`; `m8_forward`,
 `ra2_equip` and `rad_frame` stay `L4_VISUAL_CANDIDATE`. Republishing a record on its new host is not an art review.
 

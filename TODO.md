@@ -30,19 +30,14 @@ close-up, regression check, MODEL/TODO and Model Status update.
 
 - [ ] **MOD — Modular detail (docs/MODULES.md).** Every production assembly is a detail pack (phase 2, 2026-10-23: `m7_spine`,
   `ring_a_transfer`, `m8_forward` migrated with geometry, motion, runtime and pixel equivalence), packs carry their own contracts, and
-  approved authored meshes travel as committed glTF data. `assembly validate` passes for all six packs.
+  approved authored meshes travel as committed glTF data; each ring is its own engineering asset (phase 3, `WF_HABITAT_A`/`_B`).
+  `assembly validate` passes for all six packs.
   - **Owner review:** accept, correct or reject the two `L4_VISUAL_CANDIDATE` packs (`rad_frame` radiator frame fittings, `ra2_equip` ring A
     sector 2 overhead trays). Self-review: the radiator fittings are hard to see at ship scale; the sector 2 trays read but sit close to the
     fit-out items. M8.1 is reviewed under its own entry below.
-  - **Phase 3, BUILT and gated on branch `claude/habitat-ring-split`, awaiting owner approval to promote** (full pipeline, runtime-export
-    31/31, verify_detail_authoring and verify_rebuild PASS; baseline `modules_phase3`): independent ring engineering assets
-    `WF_HABITAT_A` (WF-RING-A) and `WF_HABITAT_B` (WF-RING-B); `WF_HABITAT` is the assembly linking both, with the whole-habitat
-    rotor actions; a neutral WF-HABITAT owns it and the shared sector and interior components (docs/MODULES.md, Evidence, phase 3).
-    *Rollback:* revert the commit, run a full build, and move the two then unlinked ring files into `subsystems/milestones/` by hand;
-    the previous baseline is `modules_phase2`.
   - Deferred: a linked part library for repeated fittings, until a detail pack repeats one detailed form often enough that measured sharing
     pays (the export already shares identical meshes; RAD.FRAME's three blades share one mesh).
-  **Done when:** the owner has reviewed the candidates and phase 3 is promoted.
+  **Done when:** the owner has reviewed the candidates.
 
 - [ ] **M8 — Exterior production identity. M8.1 BUILT 2026-10-20, awaiting owner art review.** The accepted M7 standard on the
   exterior as `[production.m8]` (its own switch and maturity). M8.1: the Brow aft face (`M8.BROW.AFT`) and the Aegis Crown rim
