@@ -134,7 +134,8 @@ func run(host: Node) -> Dictionary:
 	I.context = "body"
 	_ok("navigator_rebind", I.assign("ship.map", {"t": "key", "k": KEY_SEMICOLON, "p": false}).ok and I.label("ship.map") == ";"
 		and I.canonical_key(key(KEY_SEMICOLON)) == KEY_M and I.restore("ship.map").ok and I.label("ship.map") == "M", I.bindings["ship.map"])
-	_ok("navigator_default_back_after_rebind", I.assign("ship.card", {"t": "key", "k": KEY_F3, "p": false}).ok
+	# F6 is free in the navigator's co-active contexts (F3 became demo.holo with WEB-003/004, so assigning it is a refused conflict).
+	_ok("navigator_default_back_after_rebind", I.assign("ship.card", {"t": "key", "k": KEY_F6, "p": false}).ok
 		and I.assign("ship.card", {"t": "key", "k": KEY_I, "p": false}).ok and kb("ship.card") == [KEY_I], kb("ship.card"))
 	I.context = "menu"
 	I.restore_all()
