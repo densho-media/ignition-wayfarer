@@ -689,6 +689,9 @@ manifest `look.exterior.grammar`, `godot/shaders/p4_exterior.gdshader`). `-- --c
 the runtime (needs a display: `xvfb-run -a -s "-screen 0 1600x900x24" godot --path godot --rendering-driver opengl3 --resolution
 1600x900 res://scenes/flight.tscn -- --capture-p4=...`). Blender side: `p4_review.py ... [--wear]`.
 
+**Phase 4 runtime cost:** `godot-4 --path godot --script res://scripts/profile_views.gd -- --view=exterior|flight [--hide-assemblies=RA.EXT,RB.,SP.]
+[--look=0|1|2|3]` measures a view with or without the named production assemblies and in a given exterior look (same machine only).
+
 **Phase 4 stills:** `/snap/bin/blender -b --python src/wayfarer/presentation/p4_review.py -- --out runs/<x> [--look grammar|hero]
 [--views ...] [--pair] [--wear]` (matched review cameras; `--pairs <before> <after> <out>` with system Python for sheets) and
 `/snap/bin/blender -b --python src/wayfarer/presentation/p4_hero.py -- --out runs/<x> [--shots ...] [--size 1920] [--samples 64]` (S10

@@ -32,11 +32,13 @@ close-up, regression check, MODEL/TODO and Model Status update.
   S1 art gate passed (owner selected VC+ Expressive Hybrid, moderated values; Art Style Spacecraft row 19); S2 done; S3 (M8.2), S4
   (ring exteriors), S5 (radiator frames), S6 (spine casing, `spine_casing`) and S9 (library coverage, ram face, wear layer, ship name,
   runtime grammar), S8a (ring B transfer, crew tube and sector 2 in the M7 grammar, `ring_b_transfer`) and S10 (hero set,
-  `presentation/p4_hero.py`) BUILT, owner review.**
+  `presentation/p4_hero.py`) and S11 (runtime package, sharing and llvmpipe frame-time records, whole-ship review sheet) BUILT,
+  owner review.**
   The grammar is
   `[production.exterior]` (families, tiers, marking scale, accent budget, ship-material mapping) with the grammar look
   (`hero_preview.dress(grammar=True, wear=)`), the runtime exterior (`look.exterior.grammar`) and the review set
-  `presentation/p4_review.py`. **Next:** S11 (runtime measurement, whole-ship review); S8b zones after their
+  `presentation/p4_review.py`. **Open:** desktop-GPU and web frame-time measurement on the owner's machine (`profile_views.gd
+  --hide-assemblies RA.EXT,RB.,SP.` and `--look 1/2/3`); S8b zones after their
   whitebox and cultural reviews; S7 waits on engineering releases. **Owner review:** the ram-face look and the wear layer (P4-LOCKED (b), P4-STATE) with the other candidates. Every new asset
   stays `L4_VISUAL_CANDIDATE` until the owner reviews it; nothing reaches `main` without the owner's squash approval.
   **Done when:** the plan's S11 whole-ship review is accepted by the owner.

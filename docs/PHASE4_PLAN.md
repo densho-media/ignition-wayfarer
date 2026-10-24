@@ -275,7 +275,7 @@ the generators and this plan. One build lock: sessions queue for builds.
 - **Dependencies:** first passes of S3–S6 and S9.
 - **Done when:** the agreed hero set renders reproducibly and the owner reviews it.
 
-#### S11 — Runtime integration and whole-ship review · Medium · class 2
+#### S11 — Runtime integration and whole-ship review · Medium · class 2 · BUILT, owner review (section 4.12)
 - **Direction:** Godot/web parity, per-pack draw ranges and LOD, verified mesh sharing; frame time measured on desktop Godot (primary
   budget) in representative views before and after; web/mobile coarser views measured; no invented targets.
 - **Done when:** runtime checks pass, measurements are recorded, and the owner accepts the identity. Phase 4 is complete only when the
@@ -563,6 +563,25 @@ Generated simulation and validation snapshots compared field by field between 88
 - **Evidence:** `runs/20261024T-p4-s10-hero` (`hero_*.png`, `p4_hero.json` with every camera and setting).
 - **Maturity:** presentation; the owner reviews the set (plan: "the agreed hero set" — the five subjects are the plan's; framing is
   the owner's call).
+
+### 4.12 S11 — runtime integration and whole-ship review (2026-10-24)
+
+- **Runtime:** `runtime-export` PASS with every slice in the package (`runs/20261024T164138454216Z-runtime`: 33 Godot checks including
+  `flight-grammar`; 3,989 objects, 866,152 triangles). Exterior packs draw per family to their scale tier (S9 `detail_tiers`);
+  interior detail keeps 28 m.
+- **Mesh sharing (published GLB, `runs/20261024T-p4-s11-profile/mesh_sharing.json`):** 3,989 mesh nodes over 2,740 meshes, 607 shared;
+  866k triangles drawn from 766k stored. `rad_frame` draws its three blades from three shared meshes (20.5k drawn, 6.8k stored). The
+  Phase 4 additions are unique by construction: ring exteriors 22.8k triangles, spine casing 70.4k (most of it the bent lettering),
+  ring B route 40.5k; M8.2 is 203k.
+- **Frame time (this cloud machine only: Mesa llvmpipe software rasterizer under Xvfb, 1600×900, `profile_views.gd`, 600 warm frames;
+  `runs/20261024T-p4-s11-profile/profile.jsonl`):** inspector whole-ship view 189.7 ms median with the Phase 4 ring, spine and ring B
+  detail, 177.5 ms with it hidden (+28 draw calls, +28k primitives); flight view 792.7 ms proxy grey, 783.7 ms grammar, 781.7 ms grammar
+  with wear (shader cost within noise; the scene is vertex-bound here). These are relative numbers on a CPU rasterizer, not the budget.
+  **Not measured here:** desktop Godot on a GPU (the plan's primary budget) and the web/mobile views; `profile_views.gd` now takes
+  `--hide-assemblies` and `--look` so the same before/after runs on the owner's machine.
+- **Whole-ship review:** `WF001_P4_S6-S10_review_sheet.png` (delivered 2026-10-24): approved grammar applied (reference) separate from
+  the candidates (spine casing, ram face, wear layer, ring B route, hero set) and the Blender/Godot parity frame.
+- **Done when (plan):** checks pass and measurements are recorded (done here); the owner accepts the identity (open).
 
 ## 5. Risks
 
