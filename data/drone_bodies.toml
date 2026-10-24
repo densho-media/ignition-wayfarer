@@ -1,0 +1,138 @@
+# WAYFARER maintenance-drone body family: production-candidate bodies for the DRONE-001 study fleet (docs/ACCESSORIES.md).
+# Owners: S&E 51_DRONE_FLEET (classes, counts, envelope classes, mobility, missions), 52 (stations), 53 DOP-01..16 (operating rules),
+# 54 DGT-001..019 (gates, all HOLD), 56_DRONE_TECH_ANCESTRY (demonstrated ancestor per class); Technology 21 (robotics doctrine),
+# Art Style Bible "Objects & Tech" / "Anti-Rules" (GU issue: standardization, service access, qualification markings; no random greebles).
+# Live Drive read 2026-10-24 (S&E modified 2026-10-24T09:24Z): 51 and 53 match data/wayfarer_3d.toml [drones]; 56 exists (not yet in the source map).
+#
+# Rules:
+# - The class list, counts and envelope classes come from data/wayfarer_3d.toml [drones] (read-only here). This file never changes them.
+# - Every dimension below is a PROTOTYPE industrial-design choice inside the owner's envelope class, made here and labelled as such.
+# - Mass, power, speed, reach, payload, torque and latch rating stay OPEN (null). No mechanism here implies a performance figure.
+# - These bodies are accessory assets (assets/drones/, review GLBs). The ship keeps its L2 proxies (WF_DRONES, kind drone_proxy):
+#   54 DGT-017 "L2 interface gate passed before detailed meshes" is HOLD, so nothing here replaces a ship proxy or is integrated.
+# - Each stowed body stays inside the owner's envelope class (largest dimension <= the class's upper bound). Fit against the ship's L2 proxy
+#   box (drone_fleet.unit_size, a PROTOTYPE size) is reported for integration, never forced by shrinking a body.
+
+[family]
+id = "WF_DRONE_FAMILY_Y155"
+title = "Great Union Y155 shipboard service-robot family (PROTOTYPE design candidates)"
+status = "PROTOTYPE"
+maturity = "L4_VISUAL_CANDIDATE"
+integration = "NOT INTEGRATED: ship proxies unchanged (54 DGT-017 HOLD)"
+source_ref = "S&E 51/53/54/56; Technology 21; Art Style Objects & Tech"
+
+# Unknown physics: never a number until an owner row releases it (54 DGT-010/011, 15!A186).
+[open]
+mass_kg = { known = false, status = "OPEN", source = "S&E 51 col H 'OPEN' for every class" }
+power_W = { known = false, status = "OPEN", source = "S&E 53 DOP-12 OPEN" }
+speed_m_s = { known = false, status = "OPEN", source = "no traverse speed in 51-53" }
+arm_reach_m = { known = false, status = "OPEN", source = "S&E 51 DR-FIX-01/02 'Reach and load OPEN'; DGT-019 recovery demand 9.3-12.3 m unmet" }
+payload_kg = { known = false, status = "OPEN", source = "S&E 51 col G; DGT-009" }
+latch_rating_N = { known = false, status = "OPEN", formula = "F_axial = m x 1.5 x 9.80665 m/s2 (15!A186)", source = "DGT-004" }
+endurance_h = { known = false, status = "OPEN", source = "DOP-12" }
+
+# GU shared interface grammar (DGT-012 'tool coupling and fastener standard' is HOLD: these are PROTOTYPE proposals for owner review).
+# GU-SIF: Standard Interface Fitting, one geometry in three sizes for docking, tool cartridges and robot-to-robot recovery: a square
+# base flange, a central guide probe and three kinematic alignment pins (a Maxwell-type three-point seat), a recessed power/data contact
+# pad, a positive mechanical latch with a manual release. Ancestry: ISS PDGF/OTCM grapple fixtures, Astrobee dock (56; reference only).
+[interface]
+sif_plate_m = { S = 0.050, M = 0.090, L = 0.160 }
+sif_plate_t_m = 0.010
+sif_probe = { r = 0.16, h = 0.30 }      # fractions of the plate side
+sif_pins = 3
+rail_gauge_m = 0.30                     # = data/wayfarer_3d.toml survival.crawler_rail_gauge_m (read back at build, never set here)
+rail_radius_m = 0.03                    # = survival.crawler_rail_radius_m (read back)
+# Captive rail truck: load, side and up-stop wheels on every rail (positive retention in any direction; 53 DOP-03 / DGT-004).
+truck_wheel_r_m = 0.024
+truck_wheel_w_m = 0.020
+fixture_rail_len_m = 1.80               # review stand only: a straight rail section, never ship geometry
+
+[palette]
+beta_white = [0.84, 0.83, 0.79]         # beta-cloth / white thermal-control outer (EVA bodies)
+shell_white = [0.80, 0.80, 0.77]        # IVA polymer-composite shells
+graphite = [0.11, 0.115, 0.125]         # chassis, structure, dark joints
+grey = [0.46, 0.47, 0.48]               # brackets, covers
+metal = [0.64, 0.65, 0.66]              # machined fittings, pins, wheels
+radiator = [0.92, 0.93, 0.93]           # silvered-Teflon radiator faces (emit, reflect sun)
+mli_gold = [0.72, 0.50, 0.16]           # aluminised polyimide (cryo-adjacent aft crawler only)
+rubber = [0.06, 0.06, 0.065]            # tracks, tyres, bumpers
+gu_blue = [0.04, 0.10, 0.32]            # GU identity stripe and qualification plate
+safety_orange = [0.92, 0.36, 0.06]      # safety hardware only: manual release, hardware stop, recovery tether points
+target_black = [0.03, 0.03, 0.03]       # docking target / fiducial dark field
+target_white = [0.95, 0.95, 0.95]
+lens = [0.02, 0.03, 0.04]
+lamp_green = [0.20, 0.85, 0.35]
+lamp_amber = [0.95, 0.60, 0.10]
+
+# Class bodies. `body_m` is the principal housing (length X along travel, width Y, height Z), PROTOTYPE inside the owner envelope class.
+# `mobility` restates the owner's S&E 51 col I; `form` is the design answer here. Link lengths of the arms are display geometry only.
+[class.DR-IVA-01]
+form = "chamfered cube free-flyer: two side ducted-fan propulsion modules (intake grilles, vectoring exhaust louvres), front sensor face, folding perching arm, rear dock fitting. Docked whenever the ring spins or the drive is on (53 DOP-01..03)."
+body_m = [0.30, 0.22, 0.30]
+fan_module_m = [0.30, 0.045, 0.30]
+arm_links_m = [0.12, 0.10]
+dock = "S"
+precedent = "NASA Astrobee (flown, ISS) / JAXA Int-Ball2 (flown) - S&E 56"
+
+[class.DR-IVA-02]
+form = "low four-wheel rover with a captive guide shoe (owner: 'wheels / retained surface guide'), cartridge cargo bed with latching cradle, folding 4-axis arm, sensor mast. Ring-local: never crosses the hub or the 0.90 m Ring B restriction (S&E 51)."
+body_m = [0.44, 0.34, 0.11]
+wheel_r_m = 0.065
+wheel_w_m = 0.045
+arm_links_m = [0.20, 0.17]
+dock = "M"
+precedent = "NASA ISAAC demonstrations (software/caretaking, ISS) - no flown ring rover (S&E 56)"
+
+[class.DR-IVA-03]
+form = "two-segment tracked micro crawler with an articulated waist, front camera / light / sniffer probe, rear recovery loop and pull fitting; designed raceways only (S&E 51, DS-09 conduit HOLD)."
+body_m = [0.072, 0.070, 0.045]
+waist_gap_m = 0.012
+dock = "S"
+precedent = "NO DIRECT FLIGHT PRECEDENT (S&E 56; JPL LEMUR as loose ancestry only)"
+
+[class.DR-EVA-01]
+form = "captive twin-rail crawler for the Brow's protected aft face: central service-module (ORU) bay with clamshell latches, short 4-axis arm with tool changer, telescoping periscope camera to see round truss members. Never on the ram face (S&E 51)."
+body_m = [0.50, 0.42, 0.10]
+arm_links_m = [0.24, 0.20]
+periscope_m = [0.10, 0.22]        # retracted / extended mast length
+oru_m = [0.18, 0.18, 0.14]
+dock = "M"
+precedent = "ISS Mobile Transporter / Mobile Base, Dextre (flown); JPL LEMUR (ground test) - S&E 56"
+
+[class.DR-EVA-02]
+form = "captive twin-rail crawler for radiator roots: a stacked specular heat-shield wall on the blade side and a white radiator face on the shaded side (the body must reject its own heat and refuse the blades'), RELL-type leak-sensor boom, valve-drive tool arm, thermal camera. Cold state only (DOP-08)."
+body_m = [0.48, 0.34, 0.10]
+shield_m = [0.54, 0.22]            # heat-shield wall length, height above the deck
+shield_layers = 3
+arm_links_m = [0.20, 0.16]
+boom_links_m = [0.22, 0.16]
+dock = "M"
+precedent = "NASA RELL with Dextre (flown, ISS) - not a radiator-surface crawler (S&E 56)"
+
+[class.DR-EVA-03]
+form = "captive twin-rail spine utility crawler: avionics vault under a radiator lid, 5-axis tool-changer arm folded on the back, two-cartridge tool caddy, pan-tilt camera head, GU-SIF tow fittings at both ends so one crawler can retrieve another (DOP-14)."
+body_m = [0.56, 0.36, 0.12]
+arm_links_m = [0.30, 0.26]
+dock = "M"
+precedent = "ISS Mobile Transporter / Mobile Base (flown); JPL LEMUR (ground test) - S&E 56"
+
+[class.DR-EVA-04]
+form = "compact shielded mono-rail crawler for the aft protected zone: a dense electronics vault wrapped in gold MLI, C-clamp captive truck, long telescoping non-contact sensor boom (thermal IR, gas, field, camera). No manipulator: no contact with live plasma, fields or cryogenic leaks (DOP-09)."
+body_m = [0.30, 0.22, 0.09]
+boom_m = [0.30, 0.75]              # retracted / extended boom length (display)
+dock = "S"
+precedent = "NO DIRECT FLIGHT PRECEDENT (S&E 56; Dextre / LEMUR as analogy)"
+
+[class.DR-FIX-01]
+form = "forward fixed precision service arm: base drum on the Brow truss hub, 7-axis arm with a latching GU-SIF-L end effector, force-torque wrist and elbow / wrist cameras. Stowed folded; reach and load OPEN (S&E 51)."
+base_m = [0.80, 0.60]              # = [drones] DR-FIX-01 base_m (read back)
+boom_m = [1.20, 1.10]              # display link lengths only: reach OPEN, never a capability claim
+dock = "L"
+precedent = "CSA Canadarm2 / Dextre (flown) - no adoption of their reach, mass or loads (S&E 56)"
+
+[class.DR-FIX-02]
+form = "aft fixed service manipulator: the same 7-axis arm family on the aft casing, with a heat hood over the stowed wrist and a two-tool holster on the base; no hot-blade service (S&E 51)."
+base_m = [0.80, 0.60]
+boom_m = [1.20, 1.10]
+dock = "L"
+precedent = "CSA Canadarm2 / Dextre (flown) - S&E 56"

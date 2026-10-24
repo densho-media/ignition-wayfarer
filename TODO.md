@@ -372,8 +372,17 @@ The layout switch is already built. Production remains r4 / B_array 8 m WORKING;
 
 ## I — Finish maintenance drone function at the selected maturity
 
-Sources: S&E 51–54, Eye 46, Tale 29; `references/DRONE_001_2026-10-13.md`. Fleet, crawler demo and route overlay already exist;
-all 54 engineering gates currently HOLD. No detailed robot art before the L2 layout is accepted.
+Sources: S&E 51–54, 56, Eye 46, Tale 29; `references/DRONE_001_2026-10-13.md`. Fleet, crawler demo and route overlay already exist;
+all 54 engineering gates currently HOLD. No detailed robot art in the ship before the L2 layout is accepted (DGT-017): the body
+candidates of all nine classes are separate accessory assets (docs/ACCESSORIES.md).
+
+- [ ] **I04 — Review and integrate the accessory drone bodies. OWNER REVIEW; AFTER DGT-017.** Owner review of the GU-SIF interface
+  proposal (DGT-012) and the class forms (owner 2026-10-24: continue as a separate accessory prototype, not integration or canon); then
+  the ship session runs the placement and keep-out study for the taller exterior bodies (interface requests 1–4 in docs/ACCESSORIES.md;
+  the owner review and handoff register is accessories/review/HANDOFF.md;
+  no automatic proxy resizing), and the ship viewer uses the GLBs for the drones card and the crawler demo (the standalone accessory
+  viewer already plays them). **Done when:** the bodies replace the proxies in the review views with every dock, keep-out and route check
+  unchanged or re-run, and nothing implies a released capability.
 
 - [ ] **I02 — Integrate drone stations, conduits and safe operating envelopes. OWNER thermal/alcove releases.** I01 answered 2026-10-17
   (15!A201, 54!A29 DGT-019, 98!A111): the five route choices are a per-job gap matrix (`drone_routes.dgt019`, 29 jobs, 0 pass; shown
@@ -435,8 +444,10 @@ all 54 engineering gates currently HOLD. No detailed robot art before the L2 lay
   **Done when:** both characters fit every intended stop/action and gravity mode, required assets/licenses are pinned and Blender/
   Godot rig checks agree. Stepped material-zone outfits alone do not close garment production. See `docs/CHARACTERS.md`.
 
-- [ ] **K03 — Complete the selected suit/PLSS and EVA training pass. AFTER K02/D04 and affected owner gate inputs.** Study compact
-  PLSS ASSET-10, apply Art/Fashion markings and suit finish, then re-gate the two actors and seven-station training/abort experience.
+- [ ] **K03 — Complete the selected suit/PLSS and EVA training pass. AFTER K02/D04 and affected owner gate inputs.** The suit look
+  passes and the compact PLSS ASSET-10 study are in docs/ACCESSORIES.md (provisional design candidates). Owner choice between the baseline and
+  compact PLSS (deferred: every subsystem's sizing OPEN, EVA-051), owner Art/Fashion markings, refresh the eva references
+  (`workflow.py eva`), then re-gate the two actors and seven-station training/abort experience.
   **Done when:** suited envelopes, airlock, tether/anchor behavior and training review pass; actual H-05..H-11/O-01..O-06 releases
   are required for any operational claim. Missing flight gates remain visible and locked; no training PASS becomes FLIGHT_EVA GO.
   Sources: `docs/EVA.md`, S&E 43–45, Technology 53, Tale 26.

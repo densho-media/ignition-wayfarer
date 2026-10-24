@@ -26,6 +26,7 @@ python3 -m unittest discover -s tests -k view_factor   # single test by name sub
 #   --scope <groups> (drive rotation hull thermal forward timeline route, or core) limits the posed checks; the core checks always run and the report's `scope` lists what ran
 python3 src/wayfarer/sim_rig.py --check           # simulations/wf_sim_rig.json matches current inputs
 python3 src/wayfarer/flight_timeline.py [--check] # simulations/wf_first_ignition_timeline.json (FUT-004); the build rewrites it too
+# Accessories beside the ship (EVA suit look, drone bodies, compact PLSS study, standalone viewer tools/accessory_viewer.py): docs/ACCESSORIES.md "Run"
 /snap/bin/blender --background --factory-startup --threads 8 --python-exit-code 1 --python src/wayfarer/presentation/preview.py -- --state COAST --size 1024 --views side top bow aft threequarter body_detail habitat_detail ring_detail root_detail hull_detail
 #   --quality draft (default: Workbench, form and fit, no emission) | material (Eevee, 16 samples, GPU) | review (Cycles 16 samples) | look (Cycles 64 samples, explicit look reviews); section views are always Workbench
 #   Eevee uses the graphics GPU automatically; the Cycles compute-device preference does not control it. Material mode uses direct lights without baked indirect lighting; use review/look for lighting and emission review.
@@ -99,6 +100,10 @@ connector tool itself can perform broader edits. Permission mode stays `default`
 If a connector is reconnected under a different ID, verify its live tool names
 before updating these allowlists; do not grant an entire server as a workaround.
 Synced Claude connectors may not appear in `claude mcp list`.
+In Claude Code Cloud sessions the same connectors appear as `mcp__Google_Drive__*`,
+`mcp__Google_Sheets__*` and `mcp__Google_Docs__*`, so a worker allowlisted by
+instance ID has no Drive tool there and returns BLOCKED; until the allowlists
+cover the cloud names, the parent session does the bounded reads itself.
 
 Start a new Claude session to load the new agent directory. For a read check, ask
 for the reader to retrieve a known bounded range with its units, status and source

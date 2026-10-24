@@ -30,6 +30,10 @@ class Contract(unittest.TestCase):
             bad = [(a, j) for a, v in rep.items() for j, x in v.items() if not x['ok']]
             self.assertEqual(bad, [], H)
 
+    def test_unsuited_actions_are_never_eva(self):
+        # the shared crawl / climb fail suited coverage: they must never enter the EVA library the runtime plays
+        self.assertFalse(set(es.SHARED_ACTIONS) & set(es.EVA_ACTIONS))
+
 
 class Tethers(unittest.TestCase):
     def test_protocol(self):

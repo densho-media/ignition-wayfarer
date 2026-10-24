@@ -71,7 +71,7 @@ Tests protect owner numbers and physical invariants only, not wording,
 provenance bookkeeping, display machinery or PROTOTYPE positions. A review
 finding doesn't become a test. Fit screens of PROTOTYPE parts run on demand
 (`python3 src/wayfarer/<module>.py` for `crew_transfer`, `drive_manifold`,
-`power_storage`, `rotor_interface`, `habitat_interior`, `human_entry`, `sector_whitebox`, `storeroom`, `survival_fit`, `drone_fleet`, `drone_demo`, `drone_routes`); `inspect` checks the
+`power_storage`, `rotor_interface`, `habitat_interior`, `human_entry`, `sector_whitebox`, `storeroom`, `survival_fit`, `drone_fleet`, `drone_demo`, `drone_routes`, `drone_bodies`); `inspect` checks the
 built geometry. Passing checks and previews are not engineering proof.
 
 ## Modular detail

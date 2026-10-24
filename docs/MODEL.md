@@ -1834,7 +1834,8 @@ first. 29 jobs, 0 pass: each keeps a reach, payload or route deficit; no rail, s
 with a dashed reach line and its length, the interior classes on the card text (check `nav_drone_routes`). Every 54 gate stays HOLD; the gate register, conflicts and
 the owner answers are in [references/DRONE_001_2026-10-13.md](../references/DRONE_001_2026-10-13.md). Evidence: full pipeline
 `runs/20261013T193251Z-pipeline` (baseline `drones_l2_owner`), close-ups `preview.py --views drone_spine_detail drone_brow_detail drone_root_detail`,
-navigator stills `drone_stills/` in `runs/20261013T142915069047Z-runtime`.
+navigator stills `drone_stills/` in `runs/20261013T142915069047Z-runtime`. Body candidates for every class (mechanisms, GU-SIF fittings,
+actions, GLBs) are accessory assets outside the ship and replace no proxy (DGT-017 HOLD): [docs/ACCESSORIES.md](ACCESSORIES.md).
 
 ## Player controls (ACI)
 

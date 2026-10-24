@@ -77,11 +77,16 @@ rig, the corrective shape keys and the five shared actions (RIG-02, RUN-006). Th
   - Helmet: a sealed shell fixed to the torso (the head turns inside it), with a clear pressure visor window, a raised glare visor and an
     identification band.
   - PLSS: a 0.50 × 0.22 × 0.62 m packaging envelope (45 G-08…G-10 MODEL DISPLAY ONLY, EVA-050: no capacity, mass or duration follows
-    from it) with two access panels, umbilical and cooling ports and an orange emergency actuator. Its cutaway internals are two primary
+    from it), drawn as two replaceable modules (upper: O₂ storage and regulation; lower: CO₂, fan/pump/separator, battery, radio) with
+    an interface band, keyed latches, a heat-rejection vent, side rescue handles, two fastened access panels, umbilical and cooling
+    ports and an orange emergency actuator. Its outer form is the old box's, so the measured envelopes are unchanged.
+  - Helmet details: visor pivots and two light / camera pods. Its cutaway internals are two primary
     O₂ bottles, the separate emergency reserve, the regulator, the CO₂ cartridge, the fan/pump/separator, the heat exchanger, the battery
     and the radio/telemetry unit.
   - Displays: the chest display and control module, and the left forearm display.
-  - Joints: scye, upper-arm, hip, thigh and ankle bearings; elbow and knee convolutes; wrist disconnects; gauntlets.
+  - Joints: scye, upper-arm, hip, thigh and ankle bearings (flat machined bands with edge races and an inner sleeve; the hip bearing sits
+    on the thigh below the crotch line); elbow and knee convolutes (three-rib bellows, the outer layer charcoal over the elbow and knee,
+    RUN-017); wrist disconnects; gauntlets carried by the forearm. The PLSS stands on a mounting interface on the hard torso.
   - Feet: rigid soles with toe hooks for foot restraints.
   - Tethers and tools: two orange waist tether reels with captive hooks, and an inspection scanner with a lanyard ring.
 - **Sockets** (RIG-03/04) are bone-parented empties with stable ids. Hands: `SOCKET_HAND_L_GRIP`, `_R_GRIP`, `_R_TOOL`. Feet:
@@ -119,7 +124,9 @@ its glove (finger flexion keys). The `[mobility]` limits are PROTOTYPE pressuriz
 ≤ 120°, head turn inside the helmet ≤ 20°). They keep the actions inside a suited body's reach: a wrist target that would fold the elbow
 further is stopped short. Joint torque is OPEN (EVA-033).
 
-The interior `crawl` and `climb` are never played on a suit: the crawl takes the head out of the torso-fixed helmet. The hold actions use
+The wearer's inherited unsuited actions (`idle`, `walk`, `sit`, `crawl`, `climb`; `eva_suit.SHARED_ACTIONS`) are never suited EVA
+operations: they are not in `eva_actions`, the suit asset tags them `suited_use = NOT_SUITED_EVA`, and the accessory viewer lists them
+locked. The crawl takes the head out of the torso-fixed helmet; the climb's overhead reach exceeds the suit's shoulder limit. The hold actions use
 a work-site handhold on a short stanchion at hip height beside the rail, a PROTOTYPE training fixture drawn by the runtime.
 
 ## Checks (`references/p1_eva_fit.json`)
@@ -130,7 +137,12 @@ odd number of times. The head must also stay inside the helmet.
 
 - All fifteen EVA actions, and the shared `idle`, `walk` and `sit`, pass for both suits.
 - The shared `crawl` fails: the interior crawl's 35° head lift takes the head out of the torso-fixed helmet (208 and 264 vertices). The
-  instructor's shared `climb` fails for 8 vertices by 2.5 mm. Interior motion is not suit motion (EVA-040/041).
+  instructor's shared `climb` fails for 8 vertices by 2.5 mm (every 6th frame; up to 3.8 mm frame by frame): two vertices per arm at
+  the top of the upper arm, 45-62 mm below the shoulder joint, just outside the scye bearing, in the overhead-reach phase of each hand
+  (frames 0-7 and 22-32). The climb raises the arm to about 176° from the trunk, against 120° for the suit's display limit and at most
+  116-121° in the EVA actions (same bone measure), so the offset outer layer thins under the scye bearing. It is an unsuited ladder
+  motion, outside the suit's mobility, not a suit-geometry defect; the newcomer's slimmer arm passes. Interior motion is not suit motion
+  (EVA-040/041); the report marks each action `use` EVA or NOT_SUITED_EVA and gives `eva_coverage_pass` beside `coverage_pass`.
 
 **Torso envelope** (RUN-010, 45 G-01/G-02). The suited torso cross-section with the PLSS, arms along the body, about its bounding-box
 centre: 0.64 × 0.80 m and a 0.91 m circle for the instructor (1.78 m), 0.60 × 0.77 m and 0.885 m for the newcomer (1.70 m). These are the
@@ -506,4 +518,5 @@ on the frame) and K (litter + kit) with a rescuer at each end, sampled found pos
   the stroke against the keeper lugs, the SP-12-side control station against donning stand A, and the turn of a litter in SP-12.
 - **Anchors.** A released exterior rail and anchor plan (SP-51) and alternate stationary, shaded paths (EVA-048).
 - **Character and look.** Final markings and the instructor's identity (Tale WTF-16, Art Style, Fashion); face and hair under the helmet.
-- **Not built yet.** The compact PLSS study (ASSET-10) and a contact-aware glove grasp.
+- **Compact PLSS and grasp.** The compact PLSS (ASSET-10) is built as a study beside the baseline and measured (docs/ACCESSORIES.md):
+  its packaging is OPEN for every subsystem (feasibility matrix there) and the choice is deferred until EVA-051's calculation. The glove grasp is a display pose (`build/eva_grasp.py`); grip force and glove torque are OPEN.
