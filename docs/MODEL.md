@@ -1449,6 +1449,16 @@ thickness, protection performance and structural mass stay unqualified (S&E 36, 
   from the aft hemisphere (direction a labelled presentation choice) and the COAST editorial +2 EV of 15!A222, plus an x-ray cutaway
   (engineering clay, M8 amber).
 
+## Phase 4 grammar study (S1)
+
+`studies/p4_s1_grammar.py` is the NONCANON S1 experiment of [PHASE4_PLAN.md](PHASE4_PLAN.md) (owner P4-EXP, 2026-10-24): it builds
+ART_P4 objects in memory on the saved vehicle, renders matched views and saves nothing; no generator reads it. Six variants on Crown
+bay 1 with its 30° Brow aft sector and on one ring A 15° segment, each repeated on all bays and ring segments only for the whole-ship
+read: V0 (M8.1 as built), V0T (V0 plus the dark COAST blade depiction alone), VA civic, VB open machine, VC restrained hybrid, VC+
+expressive hybrid. Material families are depiction-only PROTOTYPE (S&E 15 `OWN-P4-LOCKED-2026-10-24`, Art Style Spacecraft row 18);
+the IGNITION views keep the 1800 K emission. Its screens reuse the `m8_forward` pack checks and the ring frame, sweep and sector
+envelopes. Nothing in it is selected: the owner chooses the grammar at the S1 review.
+
 ## Characters
 
 The two induction characters, the instructor (trainer) and the newcomer (trainee) of Tale S004A–D, derive from one MPFB 2.0.17

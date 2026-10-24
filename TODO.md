@@ -28,18 +28,18 @@ Development effort moves from new Godot features to the ship itself; keep the de
 unresolved science blocks only irreversible steps. Each slice: validate the changed assembly and interfaces, whole-ship view plus a
 close-up, regression check, MODEL/TODO and Model Status update.
 
-- [ ] **P4 — Phase 4 visual production and art direction ([docs/PHASE4_PLAN.md](docs/PHASE4_PLAN.md)). STAGE A done 2026-10-24;
-  waits on the owner.** The plan covers the baseline, the Visual Design Freedom Map, slices S0–S11, the first experiment (Crown bay and
-  Brow aft sector plus a ring A segment probe) and the decision register. The owner packet is posted as request Doc
-  `2026-10-24T10:55+02:00 — P4` (P4-EXP, -ART and -CAND block now; -MAT, -LOCKED, -SCOPE, -STATE and -INT block later). The plan
-  absorbs MOD's candidate review, M8.2, S03, S04's remaining exterior, K04's exterior art and S05's cultural pass as Phase 4 slices.
-  Stage B needs a Blender-equipped session. **Done when:** the owner has answered, Stage B is authorized and the plan is revised; the
-  slices then track their own state in the plan.
+- [ ] **P4 — Phase 4 visual production and art direction ([docs/PHASE4_PLAN.md](docs/PHASE4_PLAN.md)). STAGE B 2026-10-24: S0 and
+  S1 done; waits on the owner's S1 art gate.** The eight owner answers (request Doc `2026-10-24T10:55+02:00 — P4`) are consumed:
+  S&E 15 row 228 `OWN-P4-LOCKED-2026-10-24` and Art Style Spacecraft row 18 hold the approved rules; the expressive functional hybrid
+  is the leading hypothesis only. S1 (`studies/p4_s1_grammar.py`, six variants on Crown bay 1, its Brow aft sector and a ring A
+  segment) and the candidate review are in the owner review packet (plan section 4). **Next:** the owner selects the grammar and
+  disposes of M8.1, `rad_frame` and `ra2_equip`; then S2, and S3–S6, S8a and S9 in parallel sessions as the plan orders them.
+  **Done when:** the plan's S11 whole-ship review is accepted by the owner.
 - [ ] **MOD — Modular detail (docs/MODULES.md).** Every production assembly is a detail pack (phase 2, 2026-10-23: `m7_spine`,
   `ring_a_transfer`, `m8_forward` migrated with geometry, motion, runtime and pixel equivalence), packs carry their own contracts, and
   approved authored meshes travel as committed glTF data; each ring is its own engineering asset (phase 3, `WF_HABITAT_A`/`_B`).
   `assembly validate` passes for all six packs.
-  - **Owner review:** accept, correct or reject the two `L4_VISUAL_CANDIDATE` packs (`rad_frame` radiator frame fittings, `ra2_equip` ring A
+  - **Owner review (Phase 4 S1 art gate, owner P4-CAND: deferred to the S1 comparison):** accept, correct or reject the two `L4_VISUAL_CANDIDATE` packs (`rad_frame` radiator frame fittings, `ra2_equip` ring A
     sector 2 overhead trays). Self-review: the radiator fittings are hard to see at ship scale; the sector 2 trays read but sit close to the
     fit-out items. M8.1 is reviewed under its own entry below.
   - Deferred: a linked part library for repeated fittings, until a detail pack repeats one detailed form often enough that measured sharing
@@ -51,7 +51,7 @@ close-up, regression check, MODEL/TODO and Model Status update.
   (`M8.CROWN.RIM`, all 12 bays after bay 1 passed its gates), all `L4_VISUAL_CANDIDATE`. Report and evidence:
   [M8_EXTERIOR_2026-10-20](references/M8_EXTERIOR_2026-10-20.md) (off-diff empty, 0 BVH clashes, r 45.0043 m, runtime-export 31/31,
   exterior +0.22 ms within noise; stills `runs/20261020T1445Z-m8-stills`).
-  - **Owner review:** accept, correct or reject M8.1. Open visual points from the self-review: the 12-spoke wheel read at distance
+  - **Owner review (Phase 4 S1 art gate; M8.1 is the S1 control V0):** accept, correct or reject M8.1. Open visual points from the self-review: the 12-spoke wheel read at distance
     (lane grey one step lighter?), the 0.20 m hatch stencil too small, the cladding close to the truss grey.
   - **Next (not started, waits on the review):** M8.2, the habitat ring outer shells (proposal in the report); alternative: casing
     straps and panels.
@@ -111,8 +111,9 @@ close-up, regression check, MODEL/TODO and Model Status update.
   cryogenic systems, optics, shielding, GU markings, maintenance zones; before/after hero renders.
   Slice 1 2026-10-18: the S02/S04 parts take the accepted M4 grammar (15!A202, 98!A112, Spacecraft!A16): ochre covers, dark
   joints and nozzles, off-white dishes and target (`look.exterior.functional_materials`). PARKED on the owner: the exterior stays proxy grey
-  (15!H120) and the Drive gives no spacecraft palette, finish, GU marking, registry lettering or nav-light colour (reader 2026-10-18);
-  a material library or livery needs an owner release. The COAST exposure stays the owner's call (C01).
+  (15!H120) and the Drive gave no spacecraft palette, finish, GU marking, registry lettering or nav-light colour (reader 2026-10-18).
+  Unparked 2026-10-24 into Phase 4 S9: the owner released a depiction-only PROTOTYPE family library and text-only markings (Art Style
+  Spacecraft row 18, S&E 15 OWN-P4-LOCKED); its balance is selected at the S1 art gate. The COAST exposure stays the owner's call (C01).
 - [ ] **S04 — Construction detail across the remaining ship (M4 method).** Casing and access panels, drive section, thrust ring and
   nozzles, shield assemblies, internal framing and equipment mounts; L2 → L3 → L4 per assembly.
   Slice 1 built 2026-10-18 (`casing_panels.py`, `[casing_panels]`): aft body casing joint straps at the frame stations, longitudinal
@@ -522,9 +523,9 @@ Canonical route: IGNITION TOC → owner workbook → S&E `15_MODEL_INTERFACES`. 
 Implementation/Readback are correspondence. Owner question IDs use ISO local timestamps; legacy Q39 stays as named. S&E A86's Q37
 is the entrance workflow, not the retired local radiator-planform question.
 
-Known queue items (2026-10-24):
-- `2026-10-21T08:55+02:00`, livery consistency: applied in a5ceda2; the rendered readback is pending (Phase 4 S0).
-- `2026-10-24T10:55+02:00 — P4`: the Phase 4 decision packet.
+Known queue items (2026-10-24, Stage B):
+- `2026-10-24T10:55+02:00 — P4`: the remainder of the Phase 4 packet, the S1 art gate (grammar selection, P4-ART; candidate
+  dispositions, P4-CAND). The other six items are canonicalized and deleted (PHASE4_PLAN section 0).
 
 Before that (2026-10-19), none. Q39 closed 2026-10-19 (12A!H5/H22 and 40!A18 repaired and read back on the owner's approval,
 15!A223; references/Q39_PROVENANCE.md); 14:31 (D02) and 14:32 (C01) consumed and deleted (references/OWNER_RESOLUTION_2026-10-19.md).
