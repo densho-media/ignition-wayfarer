@@ -268,7 +268,7 @@ the generators and this plan. One build lock: sessions queue for builds.
 - **Review gate:** `review` and `look` previews; Godot and web material/emission parity.
 - **Done when:** every exterior zone uses a library family, markings read at their distance, wear is switchable.
 
-#### S10 — Cinematic presentation · Medium · class 2
+#### S10 — Cinematic presentation · Medium · class 2 · BUILT, owner review (section 4.11)
 - **Direction:** reproducible hero renders from the same master assets: S004 induction, departure, First Ignition, survival damage
   (wear layer), return.
 - **Boundaries:** no impossible dimming; concept fill labelled ILLUSTRATIVE; no invented attitude, thermal clock or release (K05).
@@ -548,6 +548,21 @@ Generated simulation and validation snapshots compared field by field between 88
 - **Not done:** S8b zones (Z1 Garden/mess, Z2 work/medical/ops with `ra2_equip`, Z3 berths) wait for the human-scale whitebox review and
   cultural pass the plan requires; the workshop stays excluded (OD-030).
 - **Maturity:** `L4_VISUAL_CANDIDATE`; owner review.
+
+### 4.11 S10 — hero set (2026-10-24)
+
+- **Implemented:** `presentation/p4_hero.py`, five reproducible stills from the saved master assets in the grammar look (posed and dressed
+  in memory, nothing saved; Cycles CPU 1920×1080, 64 samples, fixed seed): S004 induction (DOCKED, the primary port between ring B and
+  the Brow), departure (COAST, Y155 baseline, bow quarter), First Ignition (WORKING 1800 K hot faces at matched exposure, plume not
+  drawn), survival (the ram face after the voyage, wear layer, grazing across the tiles to the Lance) and return (wear layer, aft
+  quarter). Every image carries its configuration, look, sun direction (a presentation choice: attitude and pointing OPEN), exposure
+  and maturity line; no fill light, so nothing is concept-lit.
+- **Tuned on drafts:** the first return shot was backlit to near-black and the first survival shot was a flat tiled disc; the sun and
+  cameras moved (draft run `runs/20261024T-p4-s10-draft`).
+- **Preserved:** no geometry, no look value beyond S9; the IGNITION still uses matched exposure, so the 1800 K emission is not dimmed.
+- **Evidence:** `runs/20261024T-p4-s10-hero` (`hero_*.png`, `p4_hero.json` with every camera and setting).
+- **Maturity:** presentation; the owner reviews the set (plan: "the agreed hero set" — the five subjects are the plan's; framing is
+  the owner's call).
 
 ## 5. Risks
 

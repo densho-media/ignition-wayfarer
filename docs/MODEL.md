@@ -1539,6 +1539,13 @@ from `look.runtime_grammar`) apply the same `[production.exterior]` data. Depict
   Xvfb with the Compatibility renderer: same families and markings; more tile contrast and no bounce light than Cycles). The look
   materials draw both sides, like the exported materials they replace. The headless runtime check `flight-grammar` binds every look.
 
+## Phase 4 hero set (S10)
+
+`presentation/p4_hero.py` renders the five hero moments of the plan from the saved master assets in the grammar look: S004 induction
+(DOCKED, primary port), departure (COAST, Y155 baseline), First Ignition (1800 K hot faces at matched exposure, plume not drawn),
+survival (ram face with the wear layer) and return (wear layer). Posed and dressed in memory only; each still is captioned with its
+configuration, look, sun (presentation choice, pointing OPEN) and exposure; `p4_hero.json` records every camera.
+
 ## Phase 4 grammar study (S1)
 
 `studies/p4_s1_grammar.py` is the NONCANON S1 experiment of [PHASE4_PLAN.md](PHASE4_PLAN.md) (owner P4-EXP, 2026-10-24): it builds

@@ -689,6 +689,11 @@ manifest `look.exterior.grammar`, `godot/shaders/p4_exterior.gdshader`). `-- --c
 the runtime (needs a display: `xvfb-run -a -s "-screen 0 1600x900x24" godot --path godot --rendering-driver opengl3 --resolution
 1600x900 res://scenes/flight.tscn -- --capture-p4=...`). Blender side: `p4_review.py ... [--wear]`.
 
+**Phase 4 stills:** `/snap/bin/blender -b --python src/wayfarer/presentation/p4_review.py -- --out runs/<x> [--look grammar|hero]
+[--views ...] [--pair] [--wear]` (matched review cameras; `--pairs <before> <after> <out>` with system Python for sheets) and
+`/snap/bin/blender -b --python src/wayfarer/presentation/p4_hero.py -- --out runs/<x> [--shots ...] [--size 1920] [--samples 64]` (S10
+hero set).
+
 **Life support** (`godot/scenes/life_support.tscn`, Milestone C): ↑ ↓ row, `-` `=` change, Backspace owner defaults, `,` `.` day (Shift
 ×30), P play, Home / End, Esc to the review menu. `python3 src/wayfarer/life_support.py` prints the 41 results and the scenario ends;
 `--out DIR` writes `wf_life_support.json` (a `runtime-export` step). `-- --check-life-support` prints `WF_GODOT_LIFE_SUPPORT`
