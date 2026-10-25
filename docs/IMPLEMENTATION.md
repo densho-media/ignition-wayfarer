@@ -688,6 +688,20 @@ python3 src/wayfarer/ship_navigator.py
 in use / duration, `-` `=` change it, Backspace resets to the rig's values. `-- --check-thermal` prints `WF_GODOT_THERMAL` (runtime
 step `flight-thermal`); `-- --capture-thermal=/abs/dir` saves four stills.
 
+**Exterior looks** (flight scene, key X cycles: Phase 4 grammar (Y155 baseline), grammar with the wear layer, FUT-003 proxy grey, off;
+manifest `look.exterior.grammar`, `godot/shaders/p4_exterior.gdshader`). `-- --check-grammar` prints `WF_GODOT_GRAMMAR` (runtime step
+`flight-grammar`); `-- --capture-p4=<p4_review.json>,<dir>` renders the Blender review cameras of a `presentation/p4_review.py` run in
+the runtime (needs a display: `xvfb-run -a -s "-screen 0 1600x900x24" godot --path godot --rendering-driver opengl3 --resolution
+1600x900 res://scenes/flight.tscn -- --capture-p4=...`). Blender side: `p4_review.py ... [--wear]`.
+
+**Phase 4 runtime cost:** `godot-4 --path godot --script res://scripts/profile_views.gd -- --view=exterior|flight [--hide-assemblies=RA.EXT,RB.,SP.]
+[--look=0|1|2|3]` measures a view with or without the named production assemblies and in a given exterior look (same machine only).
+
+**Phase 4 stills:** `/snap/bin/blender -b --python src/wayfarer/presentation/p4_review.py -- --out runs/<x> [--look grammar|hero]
+[--views ...] [--pair] [--wear]` (matched review cameras; `--pairs <before> <after> <out>` with system Python for sheets) and
+`/snap/bin/blender -b --python src/wayfarer/presentation/p4_hero.py -- --out runs/<x> [--shots ...] [--size 1920] [--samples 64]` (S10
+hero set).
+
 **Life support** (`godot/scenes/life_support.tscn`, Milestone C): ↑ ↓ row, `-` `=` change, Backspace owner defaults, `,` `.` day (Shift
 ×30), P play, Home / End, Esc to the review menu. `python3 src/wayfarer/life_support.py` prints the 41 results and the scenario ends;
 `--out DIR` writes `wf_life_support.json` (a `runtime-export` step). `-- --check-life-support` prints `WF_GODOT_LIFE_SUPPORT`

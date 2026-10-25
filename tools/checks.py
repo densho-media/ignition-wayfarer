@@ -126,7 +126,7 @@ def godot_checks(root, changed):
     """Runtime check names (tools/runtime_export.CHECKS) whose scene or script closure contains a changed Godot file."""
     sys.path.insert(0, str(root/'tools'))
     import runtime_export
-    files = [p for p in (root/'godot').rglob('*') if p.suffix in ('.gd', '.tscn') and '.godot' not in p.parts and 'generated' not in p.parts]
+    files = [p for p in (root/'godot').rglob('*') if p.suffix in ('.gd', '.tscn', '.gdshader') and '.godot' not in p.parts and 'generated' not in p.parts]
     classes = {}
     for p in files:
         m = re.search(r'^class_name\s+(\w+)', p.read_text(errors='replace'), re.M) if p.suffix == '.gd' else None
@@ -135,7 +135,7 @@ def godot_checks(root, changed):
     deps = {}
     for p in files:
         text = p.read_text(errors='replace')
-        d = {root/'godot'/r for r in re.findall(r'res://([\w/.]+\.(?:gd|tscn))', text)}
+        d = {root/'godot'/r for r in re.findall(r'res://([\w/.]+\.(?:gdshader|gd|tscn))', text)}
         d.update(c for name, c in classes.items() if c != p and re.search(rf'\b{name}\b', text))
         deps[p] = d
     hit = {root/c for c in changed}

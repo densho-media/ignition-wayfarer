@@ -5,8 +5,9 @@ extends Node3D
 ## field, radiator thermal steps) replay the opacity and scale tracks the export baked from their Blender drivers.
 ## A named state (each configuration, and the Crown, shield-damage and radiator-cell display poses the timeline never reaches)
 ## shows the values the export baked for it, with the rings spinning at the state's spin fraction.
-## X switches to the First Ignition exterior look (manifest look.exterior, FUT-003 step 2): one hard sun, every surface proxy grey, the
-## radiators' hot face lit while the timeline's radiator thermal state is the hot one. Presentation only; nothing here is computed.
+## X cycles the exterior looks (manifest look.exterior, FUT-003 step 2): one hard sun and the radiators' hot face lit while the timeline's
+## radiator thermal state is the hot one, over the Phase 4 grammar (look.exterior.grammar: families, ILLUSTRATIVE ram-face tiles; Y155
+## launch baseline), the grammar with the post-voyage wear layer, and the FUT-003 proxy grey; then off. Presentation only; nothing here is computed.
 
 var camera := Camera3D.new()
 var focus := Vector3.ZERO
@@ -44,6 +45,10 @@ var aft_focus := Vector3.ZERO
 const SPEEDS = [0.25, 1.0, 4.0, 16.0]
 var exterior: Dictionary = {}
 var look_on := false
+var look_mode := 0          # 0 off, 1 grammar (Y155 launch baseline), 2 grammar + post-voyage wear, 3 FUT-003 proxy grey
+var grammar: Dictionary = {}
+var grammar_materials := {}
+const LOOK_NAMES = ["off", "Phase 4 grammar, Y155 launch baseline", "Phase 4 grammar, post-voyage wear layer", "FUT-003 proxy grey"]
 var surfaces: Array = []
 var look_hidden := {}
 var fills: Array = []
@@ -96,6 +101,7 @@ func _ready() -> void:
 	var frame_of := {}
 	var tracks := {}
 	exterior = manifest.get("look", {}).get("exterior", {})
+	grammar = exterior.get("grammar", {})
 	for record in manifest.nodes:
 		frame_of[record.node] = record.get("frame", "")
 		if not exterior.is_empty() and (record.kind in exterior.hidden_kinds
@@ -160,12 +166,17 @@ func _ready() -> void:
 	if "--exterior" in OS.get_cmdline_user_args():
 		set_look(true)
 	for arg in OS.get_cmdline_user_args():
+		if arg.begins_with("--capture-p4="):
+			capture_p4(arg.trim_prefix("--capture-p4="))
+	for arg in OS.get_cmdline_user_args():
 		if arg.begins_with("--capture="):
 			capture_marks(arg.trim_prefix("--capture="))
 		if arg.begins_with("--capture-states="):
 			capture_states(arg.trim_prefix("--capture-states="))
 	if "--check-y155" in OS.get_cmdline_user_args():
 		check_y155()
+	if "--check-grammar" in OS.get_cmdline_user_args():
+		await check_grammar()
 	if "--check-thermal" in OS.get_cmdline_user_args():
 		check_thermal()
 	for arg in OS.get_cmdline_user_args():
@@ -222,6 +233,29 @@ func check_review() -> void:
 	out.result = "PASS" if review.complete and out.labelled and out.details > 0 else "FAIL"
 	print("WF_GODOT_REVIEW " + JSON.stringify(out))
 	get_tree().quit(0 if out.result == "PASS" else 1)
+
+## Phase 4 S9 headless: each look mode binds every surface (grammar families, ram-face and wear shaders, proxy grey, off) and the shaders
+## compile (a compile error logs ERROR:, which fails the check). One WF_GODOT_GRAMMAR line.
+func check_grammar() -> void:
+	var rows := {}
+	for mode in [1, 2, 3, 0]:
+		set_look_mode(mode)
+		var count := {"family": 0, "shader": 0, "hot": 0, "grey": 0, "own": 0}
+		for item in surfaces:
+			var mesh: MeshInstance3D = item
+			for index in mesh.get_surface_override_material_count():
+				var m: Material = mesh.get_surface_override_material(index)
+				var k := "own" if m == null else "hot" if m == hot_material else "grey" if m == grey_material else "shader" if m is ShaderMaterial else "family"
+				count[k] += 1
+		rows[LOOK_NAMES[mode]] = count
+		for f in 2:
+			await get_tree().process_frame
+	var g: Dictionary = rows[LOOK_NAMES[1]]
+	var w: Dictionary = rows[LOOK_NAMES[2]]
+	var ok: bool = not grammar.is_empty() and g.hot > 0 and g.family > 0 and g.shader > 0 and w.shader > g.shader \
+		and rows[LOOK_NAMES[3]].family == 0 and rows[LOOK_NAMES[3]].shader == 0 and rows[LOOK_NAMES[0]].own == rows[LOOK_NAMES[0]].values().reduce(func(a, b): return a + b)
+	print("WF_GODOT_GRAMMAR ", JSON.stringify({"result": "PASS" if ok else "FAIL", "modes": rows}))
+	get_tree().quit(0 if ok else 1)
 
 func check_y155() -> void:
 	# Headless: every Y155 case shows its id, owner status and DIAGNOSTIC label, the blades stay the root geometry, and the readout's
@@ -284,6 +318,7 @@ func build_look() -> void:
 		return
 	var g: Array = exterior.grey
 	for material in [grey_material, hot_material]:
+		material.cull_mode = BaseMaterial3D.CULL_DISABLED   # like the exported double-sided materials they replace
 		material.albedo_color = Color(g[0], g[1], g[2]).linear_to_srgb()
 		material.roughness = exterior.roughness
 	var c: Array = exterior.hot_color
@@ -301,17 +336,91 @@ func build_look() -> void:
 	sun.visible = false
 
 func set_look(on: bool) -> void:
+	set_look_mode((1 if not grammar.is_empty() else 3) if on else 0)
+
+func next_look() -> void:
+	var m := (look_mode + 1) % 4
+	if grammar.is_empty() and m in [1, 2]:
+		m = 3
+	set_look_mode(m)
+
+## Phase 4 S9: the grammar rule of a generated material (first matching prefix; "" when none matches: proxy grey).
+func grammar_rule(name: String) -> String:
+	for rule in grammar.get("rules", []):
+		for prefix in rule[0]:
+			if name.begins_with(prefix):
+				return rule[1]
+	return ""
+
+## One shared material per (family, ram face, wear): StandardMaterial3D when neither applies, else the p4_exterior shader.
+func grammar_material(family: String, ram: bool, wear: bool) -> Material:
+	var key := "%s|%s|%s" % [family, ram, wear]
+	if grammar_materials.has(key):
+		return grammar_materials[key]
+	var f: Array = grammar.families[family]
+	var w: Dictionary = grammar.wear.get(family, {}) if wear else {}
+	var material: Material
+	if not ram and w.is_empty():
+		var m := StandardMaterial3D.new()
+		m.cull_mode = BaseMaterial3D.CULL_DISABLED      # like the exported double-sided materials it replaces
+		m.albedo_color = Color(f[0], f[1], f[2]).linear_to_srgb()
+		m.roughness = f[3]
+		m.metallic = f[4]
+		material = m
+	else:
+		var m := ShaderMaterial.new()
+		m.shader = preload("res://shaders/p4_exterior.gdshader")
+		m.set_shader_parameter("base", Vector3(f[0], f[1], f[2]))
+		m.set_shader_parameter("rough", f[3])
+		m.set_shader_parameter("metal", f[4])
+		if not w.is_empty():
+			m.set_shader_parameter("wear_on", true)
+			for k in [["grime", "grime"], ["wear_scale", "scale_m"], ["coverage", "coverage"], ["wear_rough", "rough"]]:
+				m.set_shader_parameter(k[0], w[k[1]])
+			m.set_shader_parameter("tint", Vector3(w.tint[0], w.tint[1], w.tint[2]))
+		if ram:
+			var r: Dictionary = grammar.ram_face.duplicate()
+			if wear:
+				r.merge(grammar.wear.ram_face, true)
+			m.set_shader_parameter("ram_on", true)
+			for k in [["tile", "tile_m"], ["seam", "seam_m"], ["seam_value", "seam_value"], ["jitter", "jitter"], ["repair_share", "repair_share"],
+					["repair_value", "repair_value"], ["x_min", "x_min_m"], ["nx_min", "normal_x_min"]]:
+				m.set_shader_parameter(k[0], r[k[1]])
+			m.set_shader_parameter("pitting", r.get("pitting", 0.0))
+		material = m
+	grammar_materials[key] = material
+	return material
+
+func look_material(name: String, mode: int) -> Material:
+	if mode == 0 or name in exterior.display_emitters:
+		return null
+	if mode == 3:
+		return hot_material if name in exterior.hot_face else grey_material
+	if name in exterior.hot_face:
+		return hot_material
+	var wear := mode == 2
+	if name.begins_with("Prod_"):          # pack finishes are exported; only worn exterior families take the wear layer
+		var fam := name.trim_prefix("Prod_")
+		return grammar_material(fam, false, true) if wear and grammar.wear.has(fam) and grammar.families.has(fam) else null
+	var rule := grammar_rule(name)
+	if rule == "none":
+		return null
+	if grammar.families.has(rule):
+		return grammar_material(rule, name in grammar.ram_face.ram_materials, wear and grammar.wear.has(rule))
+	return grey_material
+
+func set_look_mode(mode: int) -> void:
 	if exterior.is_empty():
 		return
-	look_on = on
+	look_mode = mode
+	look_on = mode != 0
+	var on := look_on
+	var g: Array = grammar.families.xf_thermal if mode in [1, 2] else exterior.grey
+	hot_material.albedo_color = Color(g[0], g[1], g[2]).linear_to_srgb()
 	for item in surfaces:
 		var mesh: MeshInstance3D = item
 		for index in mesh.get_surface_override_material_count():
-			var name := material_name(mesh.mesh.surface_get_material(index))
-			var material: Material = null
-			if on and name not in exterior.display_emitters:
-				material = hot_material if name in exterior.hot_face else grey_material
-			mesh.set_surface_override_material(index, material)
+			mesh.set_surface_override_material(index, look_material(material_name(mesh.mesh.surface_get_material(index)), mode))
 		if look_hidden.has(str(mesh.name)):
 			mesh.visible = not on and displays.all(func(d): return d.node != mesh)
 	for light in fills:
@@ -334,8 +443,8 @@ func show_hot(value: float) -> void:
 func look_line() -> String:
 	if not look_on:
 		return ""
-	return "LOOK  First Ignition exterior (%s): one sun, proxy grey; hot face %d K at emissivity %.2f %s (%.1f× a sunlit hull); plume not drawn" % [
-		exterior.status, exterior.kelvin, exterior.emissivity, "lit" if hot_material.emission_enabled else "unlit at this thermal state (temperature OPEN)", exterior.sunlit_ratio]
+	return "LOOK  %s (%s): one sun; hot face %d K at emissivity %.2f %s (%.1f× a sunlit hull); plume not drawn" % [
+		LOOK_NAMES[look_mode], exterior.status if look_mode == 3 else grammar.get("status", exterior.status), exterior.kelvin, exterior.emissivity, "lit" if hot_material.emission_enabled else "unlit at this thermal state (temperature OPEN)", exterior.sunlit_ratio]
 
 func scenario_line() -> String:
 	# OWN-RAD-Y155 (S&E 40!A110:F123): the radiator material/view scenarios, compared on the same three 182.149 m blades at 1800 K. The
@@ -650,7 +759,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			KEY_4: set_view(4)
 			KEY_5: set_view(5)
 			KEY_6: set_view(6)
-			KEY_X: set_look(not look_on)
+			KEY_X: next_look()
 			KEY_Y:
 				scenario_index = (scenario_index + 1) % maxi(1, rig.get("thermal", {}).get("y155_scenario", {}).get("cases", []).size())
 				if state_name != "":
@@ -672,6 +781,38 @@ func capture_marks(directory: String) -> void:
 			await RenderingServer.frame_post_draw
 			await RenderingServer.frame_post_draw
 			get_viewport().get_texture().get_image().save_png(directory.path_join("%s%s.png" % [mark, "" if view == 4 else "_side"]))
+	get_tree().quit()
+
+## Phase 4 S9 parity: the Blender review cameras (p4_review.json written by presentation/p4_review.py) in the runtime, COAST, each in
+## the look it was rendered with, under the same sun and the same +2 EV editorial exposure. --capture-p4=<p4_review.json>,<out dir>.
+func capture_p4(arg: String) -> void:
+	var parts := arg.split(",")
+	var report: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(parts[0]))
+	DirAccess.make_dir_recursive_absolute(parts[1])
+	if states.has("COAST"):
+		set_state("COAST")
+	set_look_mode(2 if report.get("wear", false) else 1)
+	for layer in find_children("*", "CanvasLayer", true, false):
+		layer.visible = false
+	origin_marker.visible = false                    # the ignition-origin guide is not part of the Blender review frames
+	var environment: Environment = world.environment
+	for tag in report.views:
+		var v: Dictionary = report.views[tag]
+		if not v.has("matrix") or v.state != "COAST":
+			continue
+		var m: Array = v.matrix
+		var col := func(i): return Vector3(m[0][i], m[2][i], -m[1][i])    # Blender (x, y, z) -> runtime (x, z, -y)
+		camera.global_transform = Transform3D(Basis(col.call(0), col.call(1), col.call(2)), col.call(3))
+		camera.keep_aspect = Camera3D.KEEP_WIDTH
+		camera.h_offset = 0.0
+		camera.fov = rad_to_deg(2.0 * atan(float(v.sensor) / 2.0 / float(v.lens)))
+		camera.near = 0.1
+		var sv: Array = v.sun_vector
+		sun.look_at_from_position(Vector3.ZERO, -Vector3(sv[0], sv[2], -sv[1]))
+		environment.tonemap_exposure = pow(2.0, float(v.ev))
+		for n in 3:
+			await RenderingServer.frame_post_draw
+		get_viewport().get_texture().get_image().save_png(parts[1].path_join("%s.png" % tag))
 	get_tree().quit()
 
 func capture_states(directory: String) -> void:

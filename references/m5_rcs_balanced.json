@@ -1347,7 +1347,10 @@
    "Ext_RCS_Aft_3_Radial": {
     "0deg": null,
     "15deg": null,
-    "30deg": null
+    "30deg": {
+     "distance_m": 9.95,
+     "object": "Prod_RAD_FRAME_EdgeGuard"
+    }
    },
    "Ext_RCS_Aft_3_Tan_Pos": {
     "0deg": null,

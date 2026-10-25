@@ -7,6 +7,8 @@ extends SceneTree
 ## overview (whole ship, EVA remote view, hazard labels), which also times the first and a repeat click pick (--no-pick skips it), or --space
 ## (--space-solar: on the Solar System chart) for the SPACE view open on First Ignition row 451 (S&E 55 SPACE-024/028: the ship map stops rendering while SPACE shows).
 ## Numbers are machine- and driver-specific; compare runs on the same machine only.
+## Phase 4 S11: --hide-assemblies=<prefix,...> hides the production nodes whose manifest assembly starts with a prefix (the same package
+## without that detail); --look=<0-3> sets the flight scene's exterior look (0 off, 1 grammar, 2 grammar + wear, 3 proxy grey).
 
 const WARM := 120
 const FRAMES := 600
@@ -20,6 +22,20 @@ var count := 0
 var last := 0
 var load_ms := 0.0
 var pick_ms := {}
+var hidden := 0
+
+func hide_assemblies(prefixes: PackedStringArray) -> int:
+	var manifest = JSON.parse_string(FileAccess.get_file_as_string("res://generated/manifest.json"))
+	var ids := {}
+	for record in manifest.get("nodes", []):
+		if record.get("layer", "") == "PRODUCTION" and Array(prefixes).any(func(p): return str(record.get("assembly", "")).begins_with(p)):
+			ids[record.node] = true
+	var n := 0
+	for item in node.find_children("WF_*", "MeshInstance3D", true, false):
+		if ids.has(str(item.name).get_slice(".", 0)):
+			item.visible = false
+			n += 1
+	return n
 
 func _initialize() -> void:
 	for arg in OS.get_cmdline_user_args():
@@ -58,6 +74,12 @@ func _process(_delta: float) -> bool:
 			node.demo.navigator.space.scale = "SOLAR"
 			node.demo.navigator.space.update_now()
 		pick_ms["space_open_ms"] = (Time.get_ticks_usec() - t) / 1000.0
+	if count == 3:
+		for arg in OS.get_cmdline_user_args():
+			if arg.begins_with("--look=") and node.has_method("set_look_mode"):
+				node.set_look_mode(int(arg.trim_prefix("--look=")))
+			if arg.begins_with("--hide-assemblies="):
+				hidden = hide_assemblies(arg.trim_prefix("--hide-assemblies=").split(","))
 	var now := Time.get_ticks_usec()
 	if count > WARM:
 		times.append((now - last) / 1000.0)
@@ -74,7 +96,7 @@ func _process(_delta: float) -> bool:
 			"video_mem_mb": Performance.get_monitor(Performance.RENDER_VIDEO_MEM_USED) / 1048576.0,
 			"static_mem_mb": Performance.get_monitor(Performance.MEMORY_STATIC) / 1048576.0, "scene_load_ms": load_ms,
 			"navigator": ("space_solar" if "--space-solar" in OS.get_cmdline_user_args() else "space" if "--space" in OS.get_cmdline_user_args() else "overview" if "--navigator-overview" in OS.get_cmdline_user_args() else not "--no-navigator" in OS.get_cmdline_user_args()) if view.begins_with("demo_") else null,
-			"pick": pick_ms,
+			"pick": pick_ms, "hidden_nodes": hidden, "args": OS.get_cmdline_user_args(),
 			"renderer": RenderingServer.get_video_adapter_name(), "driver": RenderingServer.get_video_adapter_api_version()}))
 		return true
 	return false

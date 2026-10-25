@@ -1,7 +1,7 @@
 """M8.1 exterior production identity: controlled OFF/ON stills of the [production.m8] layer (Brow aft face, Aegis Crown rim).
 
 The saved vehicle is posed OFF-BURN COAST and dressed in memory with the hero exterior look (proxy grey, M4 functional marks kept,
-hero_preview.dress); the production materials keep their own [production.m8.materials] values. Every view renders twice from one build
+hero_preview.dress); the production materials keep their own values ([production.exterior.families] since M8.2). Every view renders twice from one build
 with the same camera, sun and exposure: the M8 layer hidden (`off`, the engineering geometry as built) and shown (`on`). The M7 interior
 layer is left as it is (not visible from outside). Physical light only: one 1 AU-class sun at the hero strength, its direction a
 labelled presentation choice from the aft hemisphere (the departure pointing is OPEN), no fill; the exposure is the COAST editorial

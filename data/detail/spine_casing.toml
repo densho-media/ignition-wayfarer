@@ -1,0 +1,64 @@
+# Detail pack spine_casing (docs/MODULES.md): the aft body casing (the Momentum Spine's service casing between the blades) in the selected
+# Phase 4 grammar (VC+ moderated, owner S1 art gate 2026-10-24; Art Style Bible Spacecraft row 19), module WF-SPINE, slice S6. Vehicle
+# frame (anchor WF-SPINE.HULL.ORIGIN: +X bow, +Z dorsal). Owned by a WF-SPINE detail session: this manifest,
+# src/wayfarer/detail/pack_spine_casing.py and the generated assets/wayfarer/detail/WF_DETAIL_SP_CASING.blend.
+# Function: make the spine read as a serviced keel. Five casing modules bounded by the primary-cage frames where the radiator bay stays
+# meet the spine (the blade frame rhythm carried round the body) carry a mid-value frame band; each SP-51 crawler track runs on a
+# mid-value rail bed the eye can follow from the thrust ring to the blade front, with a blue approach marker and a text ID at every stop;
+# each module carries its text-only number (K1..K5, aft to forward) between the blades. Every value is a PROTOTYPE depiction choice: no
+# load, mass, shielding, pressure boundary, opening, interface or mechanism; the casing, straps, access panels, openings, rails, docks,
+# masts, trackers and the DS-13 track (operations HOLD) are unchanged and cleared (screen: pack_spine_casing.check).
+[pack]
+module = "WF-SPINE"
+version = 1
+scope = "pack"
+enabled = true
+maturity = "L4_VISUAL_CANDIDATE"
+status = "PROTOTYPE"
+evidence_ref = "p4_exterior_grammar"
+detail_class = "PRODUCTION"
+inspect = ["hull", "route"]
+views = ["side", "three_quarter"]
+summary = "Casing module frame bands at the radiator-stay frames, SP-51 crawler rail beds, stop markers and IDs, module numbers K1-K5, ship name."
+# Godot draw range per family by scale tier ([production.exterior] tier_range_m): the module rhythm, the route and the numbers read
+# at whole-ship distance; the stop markers at subsystem distance.
+detail_tiers = { default = "meso", modules = "macro", route = "macro", markings = "macro", wayfinding = "meso" }
+
+[assembly."SP.CASING"]
+anchor = "WF-SPINE.HULL.ORIGIN"
+zone = "aft body casing X -101 to 80 m, on the casing skin (r 6.0 m) below the crawler rails' standoff"
+classes = ["ENGINEERING_FLEXIBLE", "ARTISTIC"]
+# Claimed space in the vehicle frame (m): the casing x range, the casing radius plus the lettering offset.
+envelope_min = [-101.05, -6.12, -6.12]
+envelope_max = [80.05, 6.12, 6.12]
+
+[params]
+# Every strip seats seat_gap_m above the casing straps (casing_panels seam_height_m), so it never intersects them (3 deg chords sag 2 mm).
+seat_gap_m = 0.006
+# Module frame bands: at the casing ends and every radiator-stay station (thermal_geometry.stations 'stays'), broken across each keel
+# lane like the hoop straps (casing_panels.hoop_arcs); width along X, height above the seat.
+module_band_m = 0.60
+module_band_h_m = 0.035
+# SP-51 rail bed: a strip under each crawler track, centred on the track; broken round every hull opening by opening_margin_m.
+rail_bed_m = 0.70
+rail_bed_h_m = 0.025
+opening_margin_m = 0.25
+# Stop marker: a blue bar either side of the bed at each crawler stop (length along X, width), and its gap from the bed edge.
+stop_marker_m = [1.20, 0.12]
+stop_marker_gap_m = 0.10
+film_m = 0.004
+# Text offsets: the stop ID beside the outer marker; the module number at the sector bisectors between the blades, module_id_inset_m
+# forward of the module's aft band; lettering bent onto the casing at text_lift_m above it.
+stop_id_gap_m = 0.25
+module_id_deg = [90.0, 210.0, 330.0]
+module_id_inset_m = 1.0
+text_lift_m = 0.06
+# Bent lettering is split into edges no longer than this before bending (a 0.25 m chord sags 1.3 mm at r 6 m), so it stays on its radius.
+text_max_edge_m = 0.25
+# S9 marking (owner 2026-10-24, Y155): the ship name, text only, along module K3 on the three bisectors, forward of the module number,
+# ship_name_gap_m clear of the number and the forward band; its cap height is the ship-name class (300 m) unless the module is too short.
+ship_name = "G.U. WAYFARER 001"
+ship_name_module = 3
+ship_name_gap_m = 1.0
+# Every element clears the fixed exterior parts (survival masts, trackers, rails, docks; drone rails and docks; service fittings) by this.
+static_gap_m = 0.05

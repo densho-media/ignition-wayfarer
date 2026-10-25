@@ -1,0 +1,817 @@
+{
+ "assemblies": {
+  "RB.SEC": {
+   "anchor": "WF-RING-B.SECTOR.2.2",
+   "anchor_hash": "318994a8ea0a293d",
+   "asset": "WF_DETAIL_RB_SEC",
+   "detail_class": "PRODUCTION",
+   "enabled": true,
+   "maturity": "L4_VISUAL_CANDIDATE"
+  },
+  "RB.SPK": {
+   "anchor": "WF-RING-B.ROTOR.2",
+   "anchor_hash": "a3ff314d01ac22b1",
+   "asset": "WF_DETAIL_RB_SPK",
+   "detail_class": "PRODUCTION",
+   "enabled": true,
+   "maturity": "L4_VISUAL_CANDIDATE"
+  },
+  "RB.XFR": {
+   "anchor": "WF-RING-B.DRUM.2",
+   "anchor_hash": "c8b6306987eb0575",
+   "asset": "WF_DETAIL_RB_XFR",
+   "detail_class": "PRODUCTION",
+   "enabled": true,
+   "maturity": "L4_VISUAL_CANDIDATE"
+  }
+ },
+ "contract": "WF_MODULE_PUBLICATION",
+ "contract_hash": "e990cf74cb03f7d6",
+ "contract_terms": {
+  "RB.SEC": {
+   "anchor": "WF-RING-B.SECTOR.2.2",
+   "asset": "WF_DETAIL_RB_SEC",
+   "envelope": [
+    [
+     -1.75,
+     -2.9,
+     -2.5
+    ],
+    [
+     1.75,
+     -2.85,
+     2.5
+    ]
+   ],
+   "frame": {
+    "family": "ring_sector",
+    "function": "WORK_MEDICAL_OPS",
+    "host": "HABITAT_B",
+    "matrix": [
+     [
+      1.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      -0.5,
+      -0.866025403784,
+      -14.0
+     ],
+     [
+      0.0,
+      0.866025403784,
+      -0.5,
+      24.248711305964
+     ],
+     [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ]
+    ],
+    "module": "WF-RING-B",
+    "object": "Sector_2_2",
+    "parent": "Rotor_2"
+   },
+   "host": "HABITAT_B",
+   "scope": "pack"
+  },
+  "RB.SPK": {
+   "anchor": "WF-RING-B.ROTOR.2",
+   "asset": "WF_DETAIL_RB_SPK",
+   "envelope": [
+    [
+     -0.82,
+     -12.18,
+     5.2
+    ],
+    [
+     0.86,
+     -1.24,
+     22.52
+    ]
+   ],
+   "frame": {
+    "family": "rotor_frame",
+    "host": "HABITAT_B",
+    "matrix": [
+     [
+      1.0,
+      0.0,
+      0.0,
+      91.049362477231
+     ],
+     [
+      0.0,
+      0.0,
+      -1.0,
+      0.0
+     ],
+     [
+      0.0,
+      1.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ]
+    ],
+    "module": "WF-RING-B",
+    "motion": "ROTOR_SPIN_X",
+    "object": "Rotor_2",
+    "parent": null,
+    "rest_deg": 90.0
+   },
+   "host": "HABITAT_B",
+   "scope": "pack"
+  },
+  "RB.XFR": {
+   "anchor": "WF-RING-B.DRUM.2",
+   "asset": "WF_DETAIL_RB_XFR",
+   "envelope": [
+    [
+     -2.62,
+     -1.98,
+     -1.98
+    ],
+    [
+     -1.52,
+     1.98,
+     1.98
+    ]
+   ],
+   "frame": {
+    "family": "drum_frame",
+    "host": "HABITAT_B",
+    "matrix": [
+     [
+      1.0,
+      0.0,
+      0.0,
+      91.049362477231
+     ],
+     [
+      0.0,
+      0.0,
+      -1.0,
+      0.0
+     ],
+     [
+      0.0,
+      1.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ]
+    ],
+    "module": "WF-RING-B",
+    "motion": "DRUM_DESPUN_X",
+    "object": "Drum_2",
+    "parent": null,
+    "rest_deg": 90.0
+   },
+   "host": "HABITAT_B",
+   "scope": "pack"
+  }
+ },
+ "fingerprint": {
+  "detail/WF_DETAIL_RB_SEC.blend": {
+   "direct_links": [],
+   "objects": {
+    "Prod_RB_SEC_Fasteners": {
+     "centroid": [
+      -0.114285714126059,
+      -2.8855000734329224,
+      0.9413964290704046
+     ],
+     "component_id": "RB.SEC.FASTENERS",
+     "faces": 336,
+     "instance": null,
+     "kind": "production_detail",
+     "matrix_world": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "max": [
+      1.531000018119812,
+      -2.884000062942505,
+      2.4170000553131104
+     ],
+     "min": [
+      -1.531000018119812,
+      -2.88700008392334,
+      -2.4170000553131104
+     ],
+     "parent": null,
+     "type": "MESH",
+     "vertices": 448
+    },
+    "Prod_RB_SEC_Housings": {
+     "centroid": [
+      0.0,
+      -2.8825000524520874,
+      0.0
+     ],
+     "component_id": "RB.SEC.HOUSINGS",
+     "faces": 208,
+     "instance": null,
+     "kind": "production_detail",
+     "matrix_world": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "max": [
+      1.3519999980926514,
+      -2.865000009536743,
+      0.8119999766349792
+     ],
+     "min": [
+      -1.3519999980926514,
+      -2.9000000953674316,
+      -0.8119999766349792
+     ],
+     "parent": null,
+     "type": "MESH",
+     "vertices": 192
+    },
+    "Prod_RB_SEC_Panels": {
+     "centroid": [
+      -0.11428571346082858,
+      -2.8920000791549683,
+      0.941396428715615
+     ],
+     "component_id": "RB.SEC.PANELS",
+     "faces": 364,
+     "instance": null,
+     "kind": "production_detail",
+     "matrix_world": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "max": [
+      1.5579999685287476,
+      -2.88700008392334,
+      2.444000005722046
+     ],
+     "min": [
+      -1.5579999685287476,
+      -2.8970000743865967,
+      -2.444000005722046
+     ],
+     "parent": null,
+     "type": "MESH",
+     "vertices": 336
+    },
+    "Prod_RB_SEC_Trays": {
+     "centroid": [
+      0.16000000163912773,
+      -2.898500084877014,
+      0.6299549981951713
+     ],
+     "component_id": "RB.SEC.TRAYS",
+     "faces": 60,
+     "instance": null,
+     "kind": "production_detail",
+     "matrix_world": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "max": [
+      1.5640000104904175,
+      -2.8970000743865967,
+      2.447000026702881
+     ],
+     "min": [
+      -1.5640000104904175,
+      -2.9000000953674316,
+      -2.447000026702881
+     ],
+     "parent": null,
+     "type": "MESH",
+     "vertices": 80
+    }
+   }
+  },
+  "detail/WF_DETAIL_RB_SPK.blend": {
+   "direct_links": [],
+   "objects": {
+    "Prod_RB_SPK_Fasteners": {
+     "centroid": [
+      0.10450048120296712,
+      -6.76078813282006,
+      13.772324617684276
+     ],
+     "component_id": "RB.SPK.FASTENERS",
+     "faces": 3672,
+     "instance": null,
+     "kind": "production_detail",
+     "matrix_world": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "max": [
+      0.7884851694107056,
+      -1.3632376194000244,
+      22.36677360534668
+     ],
+     "min": [
+      -0.7398928999900818,
+      -12.06116771697998,
+      5.348803997039795
+     ],
+     "parent": null,
+     "type": "MESH",
+     "vertices": 4896
+    },
+    "Prod_RB_SPK_Frames": {
+     "centroid": [
+      0.06244321513557965,
+      -6.754634753732526,
+      13.809424642957536
+     ],
+     "component_id": "RB.SPK.FRAMES",
+     "faces": 5734,
+     "instance": null,
+     "kind": "production_detail",
+     "matrix_world": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "max": [
+      0.7995671629905701,
+      -1.3027448654174805,
+      22.45238494873047
+     ],
+     "min": [
+      -0.7591441869735718,
+      -12.113204002380371,
+      5.2635111808776855
+     ],
+     "parent": null,
+     "type": "MESH",
+     "vertices": 5664
+    },
+    "Prod_RB_SPK_Panels": {
+     "centroid": [
+      0.10363106804684401,
+      -6.758224727095742,
+      13.755021602503563
+     ],
+     "component_id": "RB.SPK.PANELS",
+     "faces": 7602,
+     "instance": null,
+     "kind": "production_detail",
+     "matrix_world": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "max": [
+      0.7983351349830627,
+      -1.335158109664917,
+      22.398052215576172
+     ],
+     "min": [
+      -0.7570933699607849,
+      -12.081260681152344,
+      5.320309638977051
+     ],
+     "parent": null,
+     "type": "MESH",
+     "vertices": 7296
+    },
+    "Prod_RB_SPK_Trays": {
+     "centroid": [
+      0.07552567242385179,
+      -6.75369316153839,
+      13.77899510352338
+     ],
+     "component_id": "RB.SPK.TRAYS",
+     "faces": 2358,
+     "instance": null,
+     "kind": "production_detail",
+     "matrix_world": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "max": [
+      0.7996285557746887,
+      -1.3276102542877197,
+      22.406394958496094
+     ],
+     "min": [
+      -0.7602388262748718,
+      -12.087360382080078,
+      5.312587738037109
+     ],
+     "parent": null,
+     "type": "MESH",
+     "vertices": 2440
+    }
+   }
+  },
+  "detail/WF_DETAIL_RB_XFR.blend": {
+   "direct_links": [],
+   "objects": {
+    "Prod_RB_XFR_Fasteners": {
+     "centroid": [
+      -2.021250009536743,
+      0.3659498993307352,
+      0.10265272334218026
+     ],
+     "component_id": "RB.XFR.FASTENERS",
+     "faces": 240,
+     "instance": null,
+     "kind": "production_detail",
+     "matrix_world": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "max": [
+      -1.6089999675750732,
+      1.7929913997650146,
+      1.906095027923584
+     ],
+     "min": [
+      -2.433500051498413,
+      -1.7133071422576904,
+      -1.912564754486084
+     ],
+     "parent": null,
+     "type": "MESH",
+     "vertices": 320
+    },
+    "Prod_RB_XFR_Housings": {
+     "centroid": [
+      -2.099999984105428,
+      0.0,
+      6.622738308376736e-09
+     ],
+     "component_id": "RB.XFR.HOUSINGS",
+     "faces": 156,
+     "instance": null,
+     "kind": "production_detail",
+     "matrix_world": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "max": [
+      -1.6380000114440918,
+      1.6906499862670898,
+      1.9235368967056274
+     ],
+     "min": [
+      -2.562000036239624,
+      -1.6906499862670898,
+      -1.0056071281433105
+     ],
+     "parent": null,
+     "type": "MESH",
+     "vertices": 144
+    },
+    "Prod_RB_XFR_Panels": {
+     "centroid": [
+      -2.021250009536743,
+      0.3670334027847275,
+      0.10295597650110722
+     ],
+     "component_id": "RB.XFR.PANELS",
+     "faces": 340,
+     "instance": null,
+     "kind": "production_detail",
+     "matrix_world": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "max": [
+      -1.5820000171661377,
+      1.8105236291885376,
+      1.9179373979568481
+     ],
+     "min": [
+      -2.4605000019073486,
+      -1.732719898223877,
+      -1.9233782291412354
+     ],
+     "parent": null,
+     "type": "MESH",
+     "vertices": 320
+    },
+    "Prod_RB_XFR_Trays": {
+     "centroid": [
+      -2.021250009536743,
+      0.36813721529518567,
+      0.10326747596263885
+     ],
+     "component_id": "RB.XFR.TRAYS",
+     "faces": 100,
+     "instance": null,
+     "kind": "production_detail",
+     "matrix_world": [
+      [
+       1.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       1.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "max": [
+      -1.5759999752044678,
+      1.8137431144714355,
+      1.9196550846099854
+     ],
+     "min": [
+      -2.4665000438690186,
+      -1.7364827394485474,
+      -1.9245781898498535
+     ],
+     "parent": null,
+     "type": "MESH",
+     "vertices": 120
+    }
+   }
+  }
+ },
+ "git_dirty": true,
+ "git_revision": "0a2f6697a523a1d51fb8606de4e6df3ddc044514",
+ "inputs_hash": "fbafac8631126a4f",
+ "module": "WF-RING-B",
+ "note": "A publication makes the pack eligible for integration; it is not an owner acceptance and changes no maturity or canon.",
+ "pack": "ring_b_transfer",
+ "pack_version": 1,
+ "published_utc": "2026-10-24T16:32:37Z",
+ "spec_sha256": "bb0a5529f0d33090c3e86760a700810bc97918e0da39ac7052244377f238beb7",
+ "version": 2
+}

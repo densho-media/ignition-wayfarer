@@ -3750,20 +3750,143 @@ crown_sectors = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
 detail_range_m = 1500.0
 fine_range_m = 160.0
 
-# Exterior materials, [r, g, b, roughness, metallic] (Blender linear): exposure, temperature and job, not interior wall panels outside. Off-white
-# structural cladding (the high-albedo shade side of the Brow), cool service grey, graphite for protected equipment and doublers, charcoal
-# stencils, ochre caps as the M4 maintenance covers, a muted amber boundary line; matte throughout (no specular glints near the EYE's field).
-[production.m8.materials]
-ext_cladding = [0.60, 0.59, 0.55, 0.62, 0.0]
-ext_service = [0.30, 0.32, 0.34, 0.58, 0.0]
-ext_protected = [0.075, 0.08, 0.085, 0.55, 0.15]
-ext_doubler = [0.11, 0.12, 0.13, 0.50, 0.30]
-ext_fastener = [0.30, 0.31, 0.33, 0.45, 0.60]
-ext_cap = [0.78, 0.60, 0.24, 0.58, 0.0]
-ext_amber = [0.80, 0.42, 0.08, 0.60, 0.0]
-ext_stencil = [0.035, 0.037, 0.04, 0.70, 0.0]
-ext_stencil_light = [0.80, 0.80, 0.77, 0.65, 0.0]
-ext_gasket = [0.04, 0.04, 0.045, 0.85, 0.0]
+# M8.2 (Phase 4 S3): the former [production.m8.materials] (ext_*) are replaced by the shared exterior families
+# [production.exterior.families] (xf_*); M8.1's values stay in Git history (88ab15a).
+
+# Phase 4 S2: the selected exterior grammar, VC+ Expressive Hybrid with moderated values (owner S1 art gate 2026-10-24; Art Style Bible
+# Spacecraft row 19; S&E 15 OWN-P4-LOCKED: depiction only, material appearance qualifies nothing). Civic Monumentalism + Open Machine +
+# Thermal Leviathan: institutional order outside, experimental engineering within, human ingenuity throughout. This table is the shared
+# production system every exterior pack and the grammar look read (docs/MODEL.md "Phase 4 exterior grammar"); it changes no geometry and
+# no accepted M7 value ([production.materials] stays the interior standard). Every value is a PROTOTYPE depiction choice.
+[production.exterior]
+status = "PROTOTYPE"
+evidence_ref = "p4_exterior_grammar"
+grammar = "VC+ expressive hybrid, moderated values"
+# Scale tiers by reading distance (metres from the camera): MACRO assembly rhythm (bays, 15 deg ring segments, blade frames, casing modules)
+# reads at whole-ship distance and is always drawn; MESO panels, joint caps, trays and covers read at subsystem distance; MICRO fasteners,
+# small stencils and placards only near a person. Godot draws each tier to its range (the M8 detail/fine ranges are the meso/micro ones).
+tier_range_m = { macro = 6000.0, meso = 1500.0, micro = 160.0 }
+# Smallest feature (m) worth modelling per tier: below it the part is a value change, a seam line or nothing.
+tier_min_feature_m = { macro = 1.5, meso = 0.25, micro = 0.03 }
+# Bevels per tier so edges catch the sun at their reading distance without rounding the module away.
+tier_bevel_m = { macro = 0.02, meso = 0.008, micro = 0.003 }
+# Shell panel construction: replaceable modules between joints, edge lengths in this range; seams are dark gaps, joints are exposed
+# mid-value caps over a dark gap. Calm fields: a shell zone keeps at least calm_field_min of its area free of meso and micro detail.
+shell_panel_m = [2.0, 6.5]
+seam_m = 0.03
+joint_gap_m = 0.08
+calm_field_min = 0.35
+# Markings (text only, Art Style rows 17-19): a marking is legible at its reading distance d when its cap height spans marking_px_min
+# pixels in the reference camera (horizontal field ref_hfov_deg at ref_width_px), so h = d * 2 tan(hfov/2) * px / width; see
+# production_detail.marking_height. Reading distances per marking class (m), PROTOTYPE.
+marking_px_min = 20.0
+ref_hfov_deg = 54.0
+ref_width_px = 1920
+marking_read_m = { ship_name = 300.0, bay_numeral = 130.0, sector_id = 100.0, lane_label = 45.0, service_stencil = 30.0, handling = 12.0, placard = 3.0 }
+# Accent allocation: colour only for function. Share of a pack's exterior detail area (production_detail.accent_report) each accent may
+# take; GU deep blue only on service-lane boundaries, selected pressure-segment identifiers and navigation references (owner 2026-10-24).
+accent_area_max = { xf_wayfinding = 0.03, xf_amber = 0.10, xf_service = 0.08 }
+wayfinding_uses = ["service-lane boundary", "pressure-segment identifier", "navigation reference"]
+
+# Material families, [r, g, b, roughness, metallic] (Blender linear base colour; glTF-safe Principled, so Godot gets the same finish).
+# Starting points inside the owner's ranges (shell 0.70-0.78, structure 0.22-0.30, machinery 0.03-0.08, thermal 0.02-0.035), tuned under
+# matched COAST and IGNITION light, no blown-out whites at human scale; not a reflectance specification and no coating claim.
+[production.exterior.families]
+xf_shell = [0.73, 0.72, 0.68, 0.58, 0.0]          # light, calm institutional shells and cladding on protected/pressure volumes
+xf_structure = [0.25, 0.26, 0.27, 0.52, 0.12]     # middle-value load-bearing members at their real interfaces
+xf_machinery = [0.050, 0.053, 0.058, 0.48, 0.35]  # graphite machinery and articulated interfaces, readable assembly logic
+xf_thermal = [0.028, 0.029, 0.033, 0.43, 0.0]     # dark high-emissivity-looking COAST blade depiction (OWN-P4-LOCKED (a))
+xf_root = [0.68, 0.67, 0.63, 0.62, 0.0]           # radiator root boots and thermal-break cloth: off-white (M4 grammar)
+xf_service = [0.80, 0.59, 0.21, 0.56, 0.0]        # restrained ochre: maintenance access and service covers
+xf_amber = [0.83, 0.40, 0.065, 0.58, 0.0]         # muted amber: occupied pressure sectors only
+xf_wayfinding = [0.025, 0.085, 0.33, 0.56, 0.0]   # GU deep blue: functional wayfinding only
+xf_joint = [0.030, 0.030, 0.035, 0.85, 0.0]       # dark seams, joint gaps, closeouts
+xf_mark = [0.030, 0.032, 0.035, 0.70, 0.0]        # charcoal stencils on light shells
+xf_mark_light = [0.84, 0.84, 0.81, 0.62, 0.0]     # off-white stencils on dark machinery and structure
+xf_fastener = [0.30, 0.31, 0.33, 0.45, 0.60]      # micro tier only
+xf_frame = [0.58, 0.58, 0.55, 0.55, 0.10]         # radiator blade frames, edge chords and joint beads (S5); the raised casing straps (S6): light-mid frames, calm fields
+
+# Generated engineering materials (WF_MAT_<name>) to family for the grammar look (hero_preview.dress(grammar=True), the review set and,
+# from S9, the runtime exterior): the first rule whose prefixes match wins; "none" keeps the material's own display colour (the exterior
+# lights' lenses; display layers keep their own handling). Production materials (WF_MAT_Prod_*) keep their pack finishes. Unmatched
+# materials keep the hero proxy grey: interiors, hatches and closures (physics-locked), and the SIMPLIFIED/HOLD drive core, tanks and EYE
+# optics (P4-SCOPE). S9 coverage (probe of every exterior-visible material): the warm panels are radiators (dark thermal depiction, no
+# capacity claim), coolant trunks, bellows and the hub's rotor-interface parts graphite, crew tubes, transfer drums and the port neck light
+# shell. Readback of the saved vehicle: <review run>/materials.json.
+[[production.exterior.ship_families]]
+prefixes = ["RadiatorA", "RadiatorB", "WarmPanel"]
+family = "xf_thermal"
+[[production.exterior.ship_families]]
+prefixes = ["RadiatorRoot", "RootBoot", "CasingBoot"]
+family = "xf_root"
+[[production.exterior.ship_families]]
+prefixes = ["BladeFrame", "ExpansionJoint", "Casing_Strap"]
+family = "xf_frame"
+[[production.exterior.ship_families]]
+prefixes = ["RingPressureBand"]
+family = "xf_amber"
+[[production.exterior.ship_families]]
+prefixes = ["RingServiceCover", "CrownServiceHatch", "Casing_Access_Panel"]
+family = "xf_service"
+[[production.exterior.ship_families]]
+prefixes = ["RingJoint", "BrowPanelJoint", "CrownRib"]
+family = "xf_joint"
+[[production.exterior.ship_families]]
+prefixes = ["Drive_Plasma", "Plasma", "Debug", "Radiator", "Prod_", "Ext_Light"]
+family = "none"
+[[production.exterior.ship_families]]
+prefixes = ["RootSteel", "Structure", "SectorKeel", "MountSlide", "MountDatum", "Truss", "Spoke", "Frame", "Gusset", "Keel", "Tie",
+            "DustLance"]
+family = "xf_structure"
+[[production.exterior.ship_families]]
+prefixes = ["Crown", "Carriage", "Shutter", "Emitter", "Launcher", "Drive", "Nozzle", "Thrust", "Coil", "Manifold", "Rotor", "Hub", "Bearing",
+            "Ext_RCS", "Ext_Antenna", "Ext_Sensor", "Antenna", "Mast", "Drone", "EyeHousing", "EyeShutter", "OpticsHardware", "ServiceFitting",
+            "Coolant", "Locks", "EyeWell", "MagneticBearing", "Survival_SP51", "Survival_SP53", "Survival_A29", "TrunkBellows",
+            "TouchdownBearing", "Contactless", "EmergencyPower", "FluidCoupling", "SealGuard"]
+family = "xf_machinery"
+[[production.exterior.ship_families]]
+prefixes = ["Shield", "Brow", "Forward", "Lance", "Habitat", "Ring", "Hull", "Casing", "Spine", "Body", "Collar", "Dock", "Ext_Dock",
+            "DisruptorLayer", "CrewPassage", "CrewVestibule", "EntryShell"]
+family = "xf_shell"
+
+# S9: the regenerative ram face (OWN-P4-LOCKED (b), S&E 15 row 228): a subtle tile-and-repair look on the Brow's forward face by shading
+# only, in Blender (hero_preview.dress) and Godot (the runtime exterior) alike. ILLUSTRATIVE: no tile size, layer, shielding or repair-rate
+# claim (14 regenerative_brow; 50!AG-012 stays the owner's). Applies to the forward-facing faces (world normal x > normal_x_min) ahead of
+# x_min_m of the ram materials: the Brow skin and the disruptor layer ahead of it, the first surface the flow meets and the one seen from
+# ahead (the Shield material also skins the aft reactor shadow shield, hence x_min_m). A running-bond tile pattern: tile_m wide,
+# half as high, seam_m dark seams at seam_value x the shell colour, each tile's value varied by up to +-jitter, and repair_share of the
+# tiles a fresh repair at repair_value x.
+[production.exterior.ram_face]
+status = "ILLUSTRATIVE"
+evidence_ref = "p4_exterior_grammar"
+ram_materials = ["Shield", "DisruptorLayer"]
+x_min_m = 100.0
+normal_x_min = 0.5
+tile_m = 1.6
+seam_m = 0.03
+seam_value = 0.55
+jitter = 0.045
+repair_share = 0.03
+repair_value = 1.10
+
+# S9: the switchable post-voyage wear and repair layer (P4-STATE, Art Style row 18): off for the Y155 launch/departure baseline (clean,
+# serviced, institutional), on for the post-voyage state; depiction only, no geometry or canon change, never baked into the saved assets.
+# Wear only where it has a cause: handling at service covers (touch, maintenance), heat staining at the radiator root boots and blade
+# frames (heat), load marks on structure where it meets something (load), replaced and weathered shell panels (repair), and the ram face's
+# impact pitting and denser repairs (impact, repair). Per family: grime darkens up to `grime` (fraction of the value) where a world-space
+# noise of feature size scale_m passes its threshold (coverage; a soft 0.3-wide edge), roughness rises by `rough`, and `tint` (linear RGB multiplier) colours
+# the stained areas. The ram face overrides: jitter, repair_share, and pitting (dark speckle fraction).
+[production.exterior.wear]
+status = "PROTOTYPE"
+evidence_ref = "p4_exterior_grammar"
+enabled = false
+ram_face = { jitter = 0.08, repair_share = 0.12, pitting = 0.05 }
+xf_service = { cause = "touch, maintenance", grime = 0.12, scale_m = 0.20, coverage = 0.40, rough = 0.12, tint = [1.0, 0.97, 0.93] }
+xf_root = { cause = "heat", grime = 0.10, scale_m = 1.5, coverage = 0.35, rough = 0.05, tint = [1.0, 0.96, 0.89] }
+xf_frame = { cause = "heat", grime = 0.08, scale_m = 3.0, coverage = 0.40, rough = 0.05, tint = [1.0, 0.97, 0.92] }
+xf_structure = { cause = "load", grime = 0.06, scale_m = 0.6, coverage = 0.50, rough = 0.08, tint = [1.0, 1.0, 1.0] }
+xf_shell = { cause = "repair, weathering", grime = 0.04, scale_m = 4.0, coverage = 0.50, rough = 0.05, tint = [1.0, 0.99, 0.97] }
+xf_machinery = { cause = "load, maintenance", grime = 0.08, scale_m = 0.4, coverage = 0.50, rough = 0.10, tint = [1.0, 1.0, 1.0] }
 
 [look]
 # FUT-003 step 1, the S004 look (ART-S004-2026-10-10, 15!A120; local brief docs/SURFACE_BRIEF.md): a presentation layer the induction stills

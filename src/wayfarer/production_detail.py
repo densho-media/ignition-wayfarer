@@ -82,17 +82,70 @@ def enabled(s, assembly=None):
 
 
 def material_value(s, key):
-    """[r, g, b, roughness, metallic] of a production material: [production.materials] or the exterior [production.m8.materials]."""
+    """[r, g, b, roughness, metallic] of a production material: [production.materials] (M7 interior standard), the Phase 4 exterior
+    families [production.exterior.families] (xf_*) or a pack's own [materials]."""
     p = s['production']
     if key in p['materials']:
         return p['materials'][key]
-    if key in p['m8']['materials']:
-        return p['m8']['materials'][key]
+    if key in p['exterior']['families']:
+        return p['exterior']['families'][key]
     # A pack's own finishes ([materials] in its manifest); the key must be unique across the shared tables and the packs.
     found = [q['materials'][key] for q in s.get('detail_packs', {}).values() if key in q.get('materials', {})]
     if len(found) != 1:
         raise KeyError(f'production material {key}: {len(found)} definitions')
     return found[0]
+
+
+# Phase 4 exterior grammar ([production.exterior], owner S1 selection 2026-10-24): helpers every exterior pack shares.
+def marking_height(s, cls):
+    """Cap height (m) of a text-only marking of class cls legible at its reading distance: marking_px_min pixels in the reference camera."""
+    x = s['production']['exterior']; d = x['marking_read_m'][cls]
+    return round(d*2*math.tan(math.radians(x['ref_hfov_deg'])/2)*x['marking_px_min']/x['ref_width_px'], 3)
+
+
+def tier_of(s, size_m):
+    """Scale tier (macro, meso, micro) of a feature by its largest dimension, or None below the micro floor (model it as value or seam)."""
+    m = s['production']['exterior']['tier_min_feature_m']
+    return next((t for t in ('macro', 'meso', 'micro') if size_m >= m[t]), None)
+
+
+def area(q):
+    """Surface area (m2) of an element's faces (fan triangulation)."""
+    vs = q['vs']; total = 0.0
+    for f in q['fs']:
+        a = vs[f[0]]
+        for i in range(1, len(f)-1):
+            b, c = vs[f[i]], vs[f[i+1]]
+            n = cross([b[k]-a[k] for k in range(3)], [c[k]-a[k] for k in range(3)])
+            total += math.sqrt(sum(x*x for x in n))/2
+    return total
+
+
+def accent_report(s, els):
+    """{material: share of the elements' area} for the accent families, with the fails against [production.exterior] accent_area_max.
+    Lettering counts by its cap-height box. Area is half the closed surface (one visible face of a thin part, roughly)."""
+    cap = s['production']['exterior']['accent_area_max']; by = {}
+    for q in els:
+        a = q['height']**2*len(q['text'])*.6 if 'text' in q else area(q)/2
+        by[q['material']] = by.get(q['material'], 0.0)+a
+    total = sum(by.values()) or 1.0
+    share = {k: by.get(k, 0.0)/total for k in cap}
+    return share, [f'{k}: {v:.1%} of the detail area exceeds {cap[k]:.0%}' for k, v in share.items() if v > cap[k]]
+
+
+def ship_rule(s, material_name):
+    """The first matching [[production.exterior.ship_families]] rule's family ('xf_*' or 'none') of a generated engineering material
+    (WF_MAT_<name> without the prefix), or None when no rule matches (the hero proxy grey)."""
+    for rule in s['production']['exterior']['ship_families']:
+        if material_name.startswith(tuple(rule['prefixes'])):
+            return rule['family']
+    return None
+
+
+def ship_family(s, material_name):
+    """Exterior family (xf_* key) of a generated engineering material, or None ('none' keeps its own colour, unmatched stays grey)."""
+    f = ship_rule(s, material_name)
+    return None if f == 'none' else f
 
 
 def element(assembly, family, name, material, cls, function, vs, fs, bevel=0.0):

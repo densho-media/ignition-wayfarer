@@ -1,4 +1,5 @@
-# Detail pack m8_forward (docs/MODULES.md): the M8.1 exterior production identity on the forward structure, module WF-FWD. M8.BROW.AFT on
+# Detail pack m8_forward (docs/MODULES.md): the forward exterior production identity, module WF-FWD; revision M8.2 (Phase 4 S3: M8.1
+# revised in the selected VC+ moderated grammar, owner S1 art gate 2026-10-24; materials from [production.exterior.families]). M8.BROW.AFT on
 # the Brow's aft face and M8.CROWN.RIM on the Aegis Crown housing's aft plate and rim girder, both at WF-FWD.FORWARD_SHIELD.ORIGIN (ship
 # frame: +X bow). Owned by a WF-FWD detail session: this manifest, src/wayfarer/detail/pack_m8_forward.py and the generated
 # assets/wayfarer/detail/WF_DETAIL_M8_BROW_AFT.blend and WF_DETAIL_M8_CROWN_RIM.blend. Migrated unchanged from [production.m8.brow],
@@ -22,8 +23,9 @@ summary = "Brow aft-face panel modules, caps, fasteners and stencils; Crown rim 
 anchor = "WF-FWD.FORWARD_SHIELD.ORIGIN"
 zone = "Brow aft face: panel modules between the existing joints, inside the truss envelope"
 classes = ["ENGINEERING_FLEXIBLE", "ARTISTIC"]
-# Claimed space in the ship frame (m): the aft-face panels, caps and stencils plus 0.05 m (inside the 90 m Brow, aft of its skin).
-envelope_min = [109.62, -40.65, -40.65]
+# Claimed space in the ship frame (m): the aft-face panels, lane trays, caps and stencils plus 0.05 m (inside the 90 m Brow, aft of its
+# skin; M8.2 trays reach 0.25 m aft of the skin, 3.5 m short of the truss).
+envelope_min = [109.44, -40.65, -40.65]
 envelope_max = [112.39, 40.65, 40.65]
 
 [assembly."M8.CROWN.RIM"]
@@ -58,7 +60,16 @@ cap_radius_m = 0.32
 cap_thickness_m = 0.035
 cap_offset_m = 0.75
 stencil_r_m = 9.4
-stencil_m = 0.55
+# M8.2 (Phase 4 S3): the lane deck in the structure value, with GU deep-blue boundary lines on its edges (functional wayfinding) and an
+# exposed graphite utility tray on brackets inside each line; fasteners only on serviced panels (the lane deck), none on the calm
+# cladding fields. Marking heights come from [production.exterior] marking_read_m (sector_id, lane_label).
+lane_material = "xf_structure"
+fastener_zones = ["lane"]
+lane_line_m = 0.12
+tray_width_m = 0.30
+tray_height_m = 0.14
+tray_bracket_m = 0.06
+tray_bracket_pitch_m = 2.5
 
 # M8.CROWN.RIM: the sector module on the Crown housing's aft plate and the rim girder: a graphite doubler frame round the existing ochre
 # carriage-service hatch (rear_construction hatch), replaceable access panels either side of it (service grey), thermal-break closeouts where
@@ -77,8 +88,8 @@ panels_per_side = 3
 closeout_m = 0.14
 closeout_thickness_m = 0.02
 film_m = 0.003
-stripe_half_m = 0.16
+stripe_half_m = 0.24
 beacon_keep_m = 0.25
-numeral_m = 1.1
-hatch_stencil_m = 0.20
+# M8.2: the sector numeral (bay_numeral) and the hatch stencil (service_stencil, capped by the band above the doubler) are sized by
+# [production.exterior] marking_read_m.
 

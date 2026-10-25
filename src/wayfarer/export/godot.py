@@ -611,6 +611,7 @@ def export(root, preset='COAST', out=None, identity=None, draco=False):
                          'design, power or heat allocation.',
                  # FUT-003 step 2 in the runtime: the flight timeline's First Ignition look (hero_preview.dress), applied at run time.
                  'exterior': dict(look.runtime_exterior(s, radiator_health.configuration_state(s, 'FIRST_IGNITION')['thermal_state']),
+                     grammar=look.runtime_grammar(s),
                      rule='One hard sun from sun_runtime (ship to sun), black sky, every material proxy grey; the hot_face materials emit '
                           'hot_color x hot_energy while radiator.thermal_state equals hot_thermal_state (other steps: temperature OPEN, '
                           'not lit); display_emitters keep their material; hidden_kinds and hidden_prefixes (source_name) are not drawn. '

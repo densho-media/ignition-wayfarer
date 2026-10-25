@@ -65,6 +65,9 @@ CHECKS = [
          marker='WF_TRANSFER_CHECK PASS'),
     dict(name='flight', args=['res://scenes/flight.tscn', '--quit-after', '2'], scene='scenes/flight.tscn'),
     dict(name='flight-y155', args=['res://scenes/flight.tscn', '--quit-after', '600', '--', '--check-y155'], scene='scenes/flight.tscn', marker='"result":"PASS"'),
+    # Phase 4 S9: the exterior looks bind (grammar, wear, proxy grey, off) and the p4_exterior shader compiles (WF_GODOT_GRAMMAR).
+    dict(name='flight-grammar', args=['res://scenes/flight.tscn', '--quit-after', '600', '--', '--check-grammar'], scene='scenes/flight.tscn',
+         marker='"result":"PASS"'),
     # Milestone B (MECH-002): the thermal explorer reproduces the rig's thermal_budget results and changes nothing in the scene.
     dict(name='flight-thermal', args=['res://scenes/flight.tscn', '--quit-after', '600', '--', '--check-thermal'], scene='scenes/flight.tscn',
          marker='"result":"PASS"'),

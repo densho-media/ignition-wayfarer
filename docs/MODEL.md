@@ -253,7 +253,7 @@ are not modeled; the ring sectors carry only rough PROTOTYPE interior blocking.
   bear on the frames, broken across the blade-root band at each keel. Longitudinal straps run on the 15° + 30°
   lines, which miss the keels, masts and trackers. An access panel (1.6 × 1.1 m) sits in every third frame bay
   beside each keel lane (0°, 120°, 240°), opening onto the cage-to-skin corridor. Fixed exterior parts clear
-  every strap and panel by at least 0.05 m (screened).
+  every strap and panel by at least 0.05 m (screened). Strap and panel faces are wound outward (the runtime draws them double-sided).
   The forward collar (S04 slice 3, `casing_panels.collar_straps`) carries hoop straps every 3 m and
   longitudinal straps on the same lines. They break round every hull opening on it (the airlock, both docking
   ports, the bypass and sector ties, the shield-mount struts) and round each fitting's docking or airlock aids,
@@ -1405,7 +1405,10 @@ record (`references/modules/<pack>.json`); docs/MODULES.md. Every production ass
 - `rad_frame` (RAD.FRAME, WF-THERMAL, L4_VISUAL_CANDIDATE): band clamps on the blade's 11 transverse frames (both truss faces, five
   across), gusset plates at the truss nodes on both edges and an aft edge guard, 155 elements in one detail asset linked once into the
   blade component, so all three blades share it. Every footprint lies inside a 0.125 m non-emitting bay joint or beyond the blade's ends:
-  the cells, their planform (radiator area) and the health overlays are unchanged. Subtle at ship scale; it reads in the blade close-ups.
+  the cells, their planform (radiator area) and the health overlays are unchanged. Revised in Phase 4 S5 (owner: REVISE): the fittings
+  stay the close-up tier in the shared families (clamps graphite, gussets and edge guard structure); the ship-scale frame rhythm is
+  carried by value: the blade frames and edge chords have their own display material `BladeFrame` (same review colour as `Structure`)
+  and, with the joint beads (`ExpansionJoint`), take the light `xf_frame` family over the dark COAST sheet in the grammar look.
 - `ra2_equip` (RA2.EQP, WF-RING-A, L4_VISUAL_CANDIDATE): a transverse cable tray down the centre of each of the four fit-out frame bays of
   ring A sector 2 (WORK_MEDICAL_OPS), broken round every item within 2 cm of the overhead, the hatch opening and the landing well, with
   a junction box at each run's ends (45 elements), all in the overhead band (-2.90 to -2.85 m), on sector instance (1, 2) only.
@@ -1413,41 +1416,184 @@ Both candidates were built in parallel on separate branches that touched only th
 Approved hand-authored meshes can be committed as glTF data under their pack (`data/detail/<pack>/*.glb`) and are then rebuilt from a
 clean checkout; none is committed yet.
 
-## Exterior production layer (M8.1)
+## Exterior production layer (M8.2)
 
-M8.1 applies the accepted M7 production system to the exterior, starting with the Brow's aft face and the Aegis Crown rim
+M8 applies the accepted M7 production system to the exterior, starting with the Brow's aft face and the Aegis Crown rim
 (`[production.m8]`, same pure module and generator as M7, user brief 2026-10-20). Owner evidence and its limits are in source
-`m8_exterior_identity`. Every M8 object is `L4_VISUAL_CANDIDATE` until the owner's art review; nothing is engineering GO, and the shield's
+`m8_exterior_identity`. M8.2 (Phase 4 S3, 2026-10-24) is the owner-requested revision of M8.1 in the selected exterior grammar
+(`[production.exterior]`), keeping its bay/module construction. Every M8 object is `L4_VISUAL_CANDIDATE` until the owner's art review; nothing is engineering GO, and the shield's
 thickness, protection performance and structural mass stay unqualified (S&E 36, Eye 40).
 
 - **Switch:** `[production.m8].enabled` is independent of `[production].enabled`. Off rebuilds the assets with an empty geometry diff
   against the accepted M7 baseline (verified 2026-10-20, `runs/20261020T1300Z-m8-off-quick`: 0 changed, added or removed).
 - **Assemblies:** `M8.BROW.AFT` and `M8.CROWN.RIM`, the detail pack `m8_forward`, linked into `WF_FORWARD_SHIELD` at its origin. Objects `Prod_BROW_AFT_<family>` and
-  `Prod_CROWN_RIM_<family>` (panels, frames, closeouts, caps, boundary, fasteners, markings): one joined mesh per family, 10 objects,
+  `Prod_CROWN_RIM_<family>` (panels, frames, closeouts, caps, boundary, fasteners, markings, lane_lines, trays): one joined mesh per
+  family, 12 objects,
   `kind = production_detail`, `design_class = ARTISTIC` (the layer over the shield), `production_scope = M8`, their own maturity and a
   Godot draw range (`detail_range_m`: 1500 m for panels and frames, 160 m for fasteners and lettering).
 - **Brow aft face:** panel modules on the skin's aft face between the existing joints (`brow_panel_joints`), 30 mm aft of it, inside the
   truss envelope and off the forward chords by member radius plus the shared clearance. Each Crown bay's 30 deg of Brow is one module:
-  a 10 deg service lane on the bay azimuth (cool grey, the crawler side, 50!AG-A02) between two structural columns (off-white cladding),
-  and a graphite protected-equipment band over the hub, EYE mounts and Lance root inside r 11.2 m with an amber boundary line. Ochre
-  inspection caps at the forward-chord nodes, quarter-turn fasteners at the panel corners, stencils `S01..S12` and `Cnn SERVICE LANE`.
+  a 10 deg service lane on the bay azimuth (the crawler side, 50!AG-A02) between two structural columns of light shell cladding, and a
+  graphite protected-equipment band over the hub, EYE mounts and Lance root inside r 11.2 m with a dark closeout groove at its edge.
+  The lane is a mid-value deck with a GU deep-blue boundary line along each edge (functional wayfinding) and an exposed graphite utility
+  tray (0.30 × 0.14 m, power and data to the Crown bay, routing PROTOTYPE) on brackets inside each line, broken at the ring-chord
+  keep-outs. Ochre inspection caps at the forward-chord nodes; quarter-turn fasteners only on the lane deck (the cladding fields stay
+  calm); stencils `S01..S12` (1.06 m, off-white on the graphite band) and `Cnn SERVICE LANE` (0.48 m, off-white on the deck).
   The panels depict the existing aft-face panelization; they add no plate, mass or access commitment.
 - **Crown rim:** a sector module per bay on the housing's aft plate and the rim girder. A graphite doubler frame round the existing ochre
-  carriage-service hatch, three replaceable access panels on each side off the partition ribs, thermal-break closeouts at the plate's
-  joints with the inner wall and the rim girder, and markings: a charcoal boundary half-stripe at each partition (two modules make one
-  stripe, split round the rim beacons), the sector number `Cnn` wrapped on the rim girder and the hatch stencil. Bay 1 was built and
+  carriage-service hatch, three replaceable access panels on each side in light shell value against the graphite housing, off the
+  partition ribs, with fasteners; thermal-break closeouts at the plate's joints with the inner wall and the rim girder; and markings: a
+  charcoal boundary half-stripe (0.24 m) at each partition (two modules make one stripe, split round the rim beacons), the sector number
+  `Cnn` (1.38 m) wrapped on the rim girder and the hatch stencil (off-white, 0.28 m: the service-stencil height capped by the band above
+  the doubler). Bay 1 was built and
   gated first; then all twelve. The shutters, port covers, carriages, emitters, launchers and their travel, the windows and the Crown
   ports are unchanged; repeating the module qualifies no sector mechanism.
 - **Silhouette and clearances:** M8 reaches r 45.0043 m (marking film on the rim girder; the engineering rim is 45.0002 m), so the 90 m
   silhouette is unchanged. Nothing lies on the sunward side of the skin's aft face (closest 30 mm aft). The BVH readback finds no overlap
   with any of the 440 forward engineering meshes (`validation/m8_readback.py`). The EYE wells, ports and shutters, the Dust Lance, the
   disruptor layer and the Crown housing volume are untouched.
-- **Exterior materials:** `[production.m8.materials]`, matte by exposure and job: off-white cladding (0.59 linear), service grey (0.32),
-  graphite protected equipment and doublers (0.08 to 0.12), charcoal stencils, M4 ochre caps, muted amber line, dark gasket closeouts.
+- **Exterior materials:** the shared families `[production.exterior.families]`: shell cladding and access panels, structure lane deck and
+  tray brackets, graphite protected band, doubler and trays, ochre caps, blue lane lines, dark closeouts, charcoal and off-white marks.
   No livery and no registry; GU WAYFARER 001 stays a provisional casing and dock stencil (15!A216, A225), not used here.
 - **Stills:** `presentation/m8_exterior.py` renders each view with the layer off and on under the same camera, one 1 AU-class sun
   from the aft hemisphere (direction a labelled presentation choice) and the COAST editorial +2 EV of 15!A222, plus an x-ray cutaway
   (engineering clay, M8 amber).
+
+## Habitat ring exteriors (Phase 4 S4)
+
+The detail packs `ring_a_exterior` (WF-RING-A) and `ring_b_exterior` (WF-RING-B) put the selected exterior grammar on both rings so they
+read as assembled, maintained, inhabited pressure structures by value and rhythm, never by size or position. One shared pure module,
+`ring_exterior.py` (WF-HABITAT), builds the 15° segment module in the rotor frame (anchors `WF-RING-A.ROTOR.1`, `WF-RING-B.ROTOR.2`), so
+the detail turns with its ring; each ring has a forward (+u) and an aft (−u) flank assembly (`R<A|B>.EXT.FWD`, `.AFT`), each claiming
+only the slab between the frame flank and the 2.15 m sweep. All `L4_VISUAL_CANDIDATE`, PROTOTYPE: no load, shielding, mass, balance,
+pressure boundary or mechanism.
+
+- **Segment module (24 per ring, both flanks):** light shell cassettes 20–60 mm off the flank between the joints; a mid-value joint cap
+  either side of every 15° joint over a dark 80 mm joint gap (the frame rhythm); at each structural spoke a graphite node housing with
+  an ochre service cover; over each pressurized segment a calm shell panel on the pressure face in its 0.25 m recess (10 mm off the
+  sector skin), a muted amber occupancy band, the text-only sector ID (`A1..A3`, `B1..B3`, 1.06 m) and a GU deep-blue identifier bar.
+  246 elements per ring; accents blue 0.06 %, amber 1.3 %, ochre 0.6 % of the detail area.
+- **Screens** (`ring_exterior.check`): every vertex inside r 24.5–30.0 m and |u| ≤ 2.15 m, outside the frame body except the recess
+  panels, and no part in a sector pressure envelope; the envelope screen keeps each flank assembly off ring A's crew-tube pack. The
+  M4 construction inside the frame (joints, webs, cassettes, covers, nodes, rim band), the spokes, crew tubes and hub are unchanged.
+
+## Ring B route in the M7 grammar (Phase 4 S8a)
+
+The detail pack `ring_b_transfer` (WF-RING-B) gives ring B's route the accepted M7 standard (owner P4-INT zone Z4: ring B transfer and
+first sector): `RB.XFR` lines ring B's despun transfer drum (`WF-RING-B.DRUM.2`), `RB.SPK` clads the radial run of the crew tube to
+sector 2, the sector of ring B's spine port (`WF-RING-B.ROTOR.2`), and `RB.SEC` is sector 2's overhead service layer
+(`WF-RING-B.SECTOR.2.2`, WORK_MEDICAL_OPS: its fit-out sets the keep-outs). One definition serves both rings: the shared pure module
+`m7_route.py` (WF-HABITAT) holds the drum, tube and sector layers parameterised by ring, sector and function, moved unchanged from ring A's
+packs, whose output is identical (fingerprint: no object changed). Drum 66 elements (the 0.90 m openings leave more lining than ring A's
+1.6 m), tube 841, overhead 88; every M7 screen passes. `L4_VISUAL_CANDIDATE`: the M7 acceptance does not extend to these assets. Ring
+B's closures and rescue path stay HOLD (15!A197, OD-032/034/040) and physics-locked proxies; the 0.90 m port, necks and bulkheads are
+unchanged.
+
+## Spine casing (Phase 4 S6)
+
+The detail pack `spine_casing` (WF-SPINE, assembly `SP.CASING` on `WF-SPINE.HULL.ORIGIN`, vehicle frame) makes the aft body casing
+read as a serviced keel in the selected grammar. `L4_VISUAL_CANDIDATE`, PROTOTYPE: no load, mass, shielding, pressure boundary,
+opening, interface or mechanism.
+
+- **Casing modules:** five modules (K1–K5, aft to forward, about 36 m each) between the casing ends and the four primary-cage frames
+  the radiator bay stays bear on (bays 2, 4, 6, 8), so the blade frame rhythm continues round the body. Each boundary carries a 0.60 m
+  mid-value frame band, broken across the keel lanes like the hoop straps. In the grammar the raised casing straps take the light-mid
+  frame value (`xf_frame`), so the panel fields stay calm and the module bands lead.
+- **Followable route:** each blade's SP-51 crawler track (graphite rails and stops in the grammar) runs on a 0.70 m mid-value rail bed
+  from the thrust ring to the blade front; each of its seven stops has a GU deep-blue approach marker either side of the bed and a
+  text ID (`C<track>-<stop>`, 0.48 m). The DS-13 track (operations HOLD) and its docks are unchanged and undressed.
+- **Module numbers:** `K1`–`K5` (1.38 m) at each module's aft end on the three bisectors between the blades; the ship name runs
+  along K3 (S9, next section).
+- **Screens** (`pack_spine_casing.check`): every element inside the casing x range and within 0.12 m of the casing, off every hull
+  opening (plus 0.25 m) and access panel, and at least 0.05 m from every fixed exterior part (survival masts, terminals, trackers,
+  crawler rails and stops; drone rails, docks and units; service fittings, docking corridors and the shield spokes' aft members).
+  102 elements; blue 1.1 % of the detail area.
+- **Exterior hardware in the families:** the SP-51 crawler hardware, the SP-53 survival terminals and the A29 star trackers map to
+  graphite machinery, like the S02 RCS pods, antennas and sensors.
+
+## Phase 4 materials, markings and wear (S9)
+
+The grammar look (`hero_preview.dress(grammar=True)`) and the runtime exterior (Godot `flight.gd`, manifest `look.exterior.grammar`
+from `look.runtime_grammar`) apply the same `[production.exterior]` data. Depiction only: no geometry, coating, capacity or canon change.
+
+- **Library coverage:** every exterior-visible generated material has a family or keeps its own look (probe of the saved vehicle):
+  the 450 K warm panels take the dark thermal depiction (no capacity credit), the coolant trunks, bellows and the hub's rotor-interface
+  parts graphite, the crew tubes, transfer drums and the port neck light shell; `none` now keeps the material's own colour (the
+  exterior lights' lenses). Hatches and closures stay proxy grey (physics-locked), as do the SIMPLIFIED/HOLD drive core, tanks and EYE
+  optics.
+- **Ram face** (`[production.exterior.ram_face]`, ILLUSTRATIVE, OWN-P4-LOCKED (b)): on the forward-facing faces of the disruptor layer and
+  the Brow skin ahead of X 100 m, a running-bond tile pattern (1.6 × 0.8 m, dark 30 mm seams), each tile's value varied by ±4.5 % and 3 %
+  of the tiles a fresh repair; no tile size, layer or repair-rate claim.
+- **Wear layer** (`[production.exterior.wear]`, off for the Y155 launch baseline): handling grime on service covers, heat staining on the
+  root boots and blade frames, load marks on structure and machinery, faint weathering on shells; on the ram face denser repairs, more
+  tile variation and pitting. A world-space noise with a soft threshold per family; Blender and Godot use their own noise, so the
+  pattern differs in detail but not in where or how strongly it appears.
+- **Ship name:** `G.U. WAYFARER 001` (text only, no G.U.C. or crest; the provisional casing stencil of 15!A216/A225) along casing module
+  K3 on the three bisectors, 3.06 m cap height (the 300 m class, capped by the module length), bent onto the casing like the module
+  numbers and stop IDs (`spine_casing`).
+- **Runtime:** X in the timeline cycles the exterior looks: the grammar (Y155 baseline), the grammar with wear, the FUT-003 proxy grey,
+  off. `godot/shaders/p4_exterior.gdshader` carries the ram face and the wear; plain families are standard materials; pack (`Prod_`)
+  materials keep their exported finishes. Exterior packs draw each family to its scale tier (`detail_tiers`: segment rhythm, module
+  bands, routes and numbers to 6 km, covers and markers to 1.5 km, clamps to 160 m); interior detail keeps 28 m.
+  `flight.gd --capture-p4=<p4_review.json>,<dir>` renders the Blender review cameras in the runtime for the parity check (under
+  Xvfb with the Compatibility renderer: same families and markings; more tile contrast and no bounce light than Cycles). The look
+  materials draw both sides, like the exported materials they replace. The headless runtime check `flight-grammar` binds every look.
+
+## Phase 4 hero set (S10)
+
+`presentation/p4_hero.py` renders the five hero moments of the plan from the saved master assets in the grammar look: S004 induction
+(DOCKED, primary port), departure (COAST, Y155 baseline), First Ignition (1800 K hot faces at matched exposure, plume not drawn),
+survival (ram face with the wear layer) and return (wear layer). Posed and dressed in memory only; each still is captioned with its
+configuration, look, sun (presentation choice, pointing OPEN) and exposure; `p4_hero.json` records every camera.
+
+## Phase 4 grammar study (S1)
+
+`studies/p4_s1_grammar.py` is the NONCANON S1 experiment of [PHASE4_PLAN.md](PHASE4_PLAN.md) (owner P4-EXP, 2026-10-24): it builds
+ART_P4 objects in memory on the saved vehicle, renders matched views and saves nothing; no generator reads it. Six variants on Crown
+bay 1 with its 30° Brow aft sector and on one ring A 15° segment, each repeated on all bays and ring segments only for the whole-ship
+read: V0 (M8.1 as built), V0T (V0 plus the dark COAST blade depiction alone), VA civic, VB open machine, VC restrained hybrid, VC+
+expressive hybrid. Material families are depiction-only PROTOTYPE (S&E 15 `OWN-P4-LOCKED-2026-10-24`, Art Style Spacecraft row 18);
+the IGNITION views keep the 1800 K emission. Its screens reuse the `m8_forward` pack checks and the ring frame, sweep and sector
+envelopes. The owner selected VC+ with moderated values on 2026-10-24 (next section); the study itself stays NONCANON and reproduces
+the S1 images exactly at 88ab15a.
+
+## Phase 4 exterior grammar (S2)
+
+The owner's S1 selection, **VC+ Expressive Hybrid with moderated values** (Art Style Bible Spacecraft row 19, source
+`p4_exterior_grammar`; depiction only, S&E 15 `OWN-P4-LOCKED-2026-10-24`), is the shared production system `[production.exterior]`
+that every exterior pack and the grammar look read. It changes no geometry and no accepted M7 value (`[production.materials]` stays the
+interior standard).
+
+- **Material families** (`[production.exterior.families]`, keys `xf_*`, linear base colour, roughness, metallic; glTF-safe, so Godot gets
+  the same finish): light shell 0.73, structure 0.25, graphite machinery 0.05, dark thermal depiction 0.028, off-white root boots 0.68,
+  ochre service, muted amber occupancy, GU deep-blue wayfinding, dark joints, charcoal and off-white marks, metallic fasteners. Starting
+  points inside the owner's ranges, tuned under matched COAST/IGNITION; no reflectance or coating claim. `production_detail.material_value`
+  resolves them like the M7 and pack materials.
+- **Allocation:** pressure and protected volumes in calm light shells; load-bearing members mid value where they meet something;
+  machinery and articulated interfaces graphite with readable assembly; ochre only for maintenance access; amber only over occupied
+  sectors; blue only for service-lane boundaries, pressure-segment identifiers and navigation references; thermal surfaces dark with the
+  frame and joint hierarchy visible.
+- **Scale tiers** (`tier_range_m`, `tier_min_feature_m`, `tier_bevel_m`, `production_detail.tier_of`): MACRO assembly rhythm (bays, 15°
+  segments, blade frames, casing modules; drawn to 6 km), MESO panels, caps, trays and covers (1.5 km), MICRO fasteners, small stencils and
+  placards (160 m). Below 3 cm a feature is a value change or a seam, not geometry. Detail at distance comes from rhythm and value, never
+  from enlarged small parts.
+- **Panels, joints, negative space:** shell modules 2.0–6.5 m between joints, 30 mm dark seams, exposed mid-value joint caps over an
+  80 mm dark gap; a shell zone keeps at least 35 % of its area free of meso and micro detail (`calm_field_min`, a review rule); fasteners
+  only where a panel is serviced.
+- **Markings** (text only): `production_detail.marking_height(s, class)` sizes the cap height so it spans 20 px in the reference camera
+  (54° horizontal field, 1920 px) at the class's reading distance: ship name 3.2 m (300 m), bay numeral 1.38 m (130 m), sector ID 1.06 m
+  (100 m), lane label 0.48 m (45 m), service stencil 0.32 m (30 m), handling 0.13 m (12 m), placard 0.03 m (3 m).
+- **Accent budget:** `production_detail.accent_report` measures each accent's share of a pack's detail area against `accent_area_max`
+  (blue ≤ 3 %, amber ≤ 10 %, ochre ≤ 8 %).
+- **Blender/Godot mapping:** `[[production.exterior.ship_families]]` maps generated engineering materials by name prefix to a family
+  (`production_detail.ship_family`; `none` keeps the material's own display look); production materials keep their pack finishes;
+  unmatched materials (interiors, display layers, the SIMPLIFIED/HOLD drive core, tanks and EYE optics) keep the hero proxy grey. The
+  grammar look `hero_preview.dress(grammar=True)` applies it in memory for stills, including the dark COAST blade depiction; the 1800 K
+  IGNITION emission is unchanged. The runtime exterior applies the same mapping (S9).
+- **Review set:** `presentation/p4_review.py` renders the matched cameras from the saved assets in the grammar look (or the pre-Phase-4
+  hero look): whole ship (three-quarter, side, rings), forward (Brow sector, Crown bay, human scale), ring A (segment, human scale),
+  radiator 1 (clamp, aft edge, 35 m, root) and the spine (between the blades, a module boundary, a crawler stop at human scale),
+  with the matched COAST/IGNITION pair; `--pairs` makes before/after sheets.
 
 ## Characters
 

@@ -78,8 +78,10 @@ def service(c, s):
 
 
 def casing(c, s):
-    """S04 slice 1 (casing_panels): longitudinal and hoop joint straps as two meshes, one plate per access panel."""
+    """S04 slice 1 (casing_panels): longitudinal and hoop joint straps as two meshes, one plate per access panel. Faces wound outward
+    (Phase 4 S9: the runtime lit their inward faces from the back and self-shadowed them)."""
     import casing_panels as cp
+    from production_detail import outward
     import hull_geometry as hg
     q = cp.table(s); R = hg.radius_at(s, 0.0); r0, r1 = R-.005, R+q['seam_height_m']; w = q['seam_width_m']; x0, x1 = q['x_range_m']
     mat = material('Casing_Strap', (.16, .19, .22)); made = []     # M4 dark joints
@@ -90,7 +92,7 @@ def casing(c, s):
         for x in (x0, x1):
             vs += [rad(x, r0, a-dt), rad(x, r0, a+dt), rad(x, r1, a+dt), rad(x, r1, a-dt)]
         fs += [(b, b+1, b+2, b+3)[::-1], (b+4, b+5, b+6, b+7)]+[(b+i, b+(i+1) % 4, b+4+(i+1) % 4, b+4+i) for i in range(4)]
-    made.append(mesh(c, 'Casing_Seams_Long', vs, fs, mat, kind='casing_detail'))
+    made.append(mesh(c, 'Casing_Seams_Long', vs, outward(vs, fs), mat, kind='casing_detail'))
     vs, fs = [], []
     for x in cp.stations(s):
         for a0, a1 in cp.hoop_arcs(s):
@@ -101,7 +103,7 @@ def casing(c, s):
                 i, j = b+4*k, b+4*(k+1)
                 fs += [(i+m, j+m, j+(m+1) % 4, i+(m+1) % 4) for m in range(4)]
             fs += [(b, b+1, b+2, b+3), tuple(reversed(range(b+4*n, b+4*n+4)))]
-    made.append(mesh(c, 'Casing_Seams_Hoop', vs, fs, mat, kind='casing_detail'))
+    made.append(mesh(c, 'Casing_Seams_Hoop', vs, outward(vs, fs), mat, kind='casing_detail'))
     # S04 slice 3: the forward collar's straps, broken round its openings and fitting aids (casing_panels.collar_straps).
     _, _, Rc = cp.collar(s); c0, c1 = Rc-.005, Rc+q['seam_height_m']
     for kind_, name in (('long', 'Casing_Collar_Seams_Long'), ('hoop', 'Casing_Collar_Seams_Hoop')):
@@ -120,13 +122,14 @@ def casing(c, s):
                 i0, j0 = b+4*i, b+4*(i+1)
                 fs += [(i0+m, j0+m, j0+(m+1) % 4, i0+(m+1) % 4) for m in range(4)]
             fs += [(b, b+1, b+2, b+3), tuple(reversed(range(b+4*n, b+4*n+4)))]
-        made.append(mesh(c, name, vs, fs, mat, kind='casing_detail'))
+        made.append(mesh(c, name, vs, outward(vs, fs), mat, kind='casing_detail'))
     pmat = material('Casing_Access_Panel', (.78, .60, .24))     # M4 ochre service covers (15!A202)
     for p in cp.access_panels(s):
         L, W, D = p['size']; a = p['theta']; dt = W/2/R; vs = []
         for x in (p['x']-L/2, p['x']+L/2):
             vs += [rad(x, r0, a-dt), rad(x, r0, a+dt), rad(x, R+D, a+dt), rad(x, R+D, a-dt)]
-        obj = mesh(c, p['name'], vs, [(0, 1, 2, 3)[::-1], (4, 5, 6, 7)]+[(i, (i+1) % 4, 4+(i+1) % 4, 4+i) for i in range(4)], pmat, kind='casing_detail')
+        obj = mesh(c, p['name'], vs, outward(vs, [(0, 1, 2, 3)[::-1], (4, 5, 6, 7)]+[(i, (i+1) % 4, 4+(i+1) % 4, 4+i) for i in range(4)]), pmat,
+                   kind='casing_detail')
         obj['role'] = 'casing access panel over the cage-to-skin corridor (feed lines, root chases, drone rails) beside the keel lane'
         made.append(obj)
     for obj in made:

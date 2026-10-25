@@ -1,0 +1,55 @@
+# Detail pack ring_a_exterior (docs/MODULES.md): ring A's exterior in the selected Phase 4 grammar (VC+ moderated, owner S1 art gate
+# 2026-10-24; Art Style Bible Spacecraft row 19), module WF-RING-A, slice S4. The 15 deg segment module of src/wayfarer/ring_exterior.py
+# (shared with ring_b_exterior) on all 24 segments of ring A, in the rotor frame (anchor WF-RING-A.ROTOR.1: Rotor_1, turns with the ring).
+# Owned by a WF-RING-A detail session: this manifest, src/wayfarer/detail/pack_ring_a_exterior.py and the generated
+# assets/wayfarer/detail/WF_DETAIL_RA_EXT.blend. Every value is a PROTOTYPE depiction choice: no load, shielding, mass, balance,
+# pressure boundary, interface or mechanism; the frame, sweep, sectors, spokes and crew route are unchanged (screen: ring_exterior.check).
+[pack]
+module = "WF-RING-A"
+version = 1
+scope = "pack"
+enabled = true
+maturity = "L4_VISUAL_CANDIDATE"
+status = "PROTOTYPE"
+evidence_ref = "p4_exterior_grammar"
+detail_class = "PRODUCTION"
+inspect = ["rotation"]
+views = ["ring_detail", "habitat_detail"]
+summary = "Shell cassettes, joint caps, spoke node housings, occupancy bands, sector IDs and blue identifier bars on ring A's 24 segments."
+# Godot draw range per family by scale tier ([production.exterior] tier_range_m): the segment rhythm (cassettes, joints, bands, IDs)
+# reads at whole-ship distance; node housings and identifier bars at subsystem distance.
+detail_tiers = { default = "meso", cassettes = "macro", joints = "macro", occupancy = "macro", markings = "macro" }
+
+[assembly."RA.EXT.FWD"]
+anchor = "WF-RING-A.ROTOR.1"
+zone = "ring A +u (forward) flank, outside the frame body and the sector envelopes (rotor frame: u along the ship axis)"
+classes = ["ENGINEERING_FLEXIBLE", "ARTISTIC"]
+# Claimed space in the rotor frame (m): from the sector face (1.75) to the sweep half-depth (2.15) axially, the frame outer radius.
+envelope_min = [1.74, -30.01, -30.01]
+envelope_max = [2.15, 30.01, 30.01]
+
+[assembly."RA.EXT.AFT"]
+anchor = "WF-RING-A.ROTOR.1"
+zone = "ring A -u (aft) flank, outside the frame body and the sector envelopes"
+classes = ["ENGINEERING_FLEXIBLE", "ARTISTIC"]
+envelope_min = [-2.15, -30.01, -30.01]
+envelope_max = [-1.74, 30.01, 30.01]
+
+# The segment module (ring_exterior.elements). Offsets in m outward from the frame flank (|u| = 2.0 m), radii from the frame's.
+[params]
+cassette_u_m = [0.02, 0.06]
+cassette_joint_gap_m = 0.36
+pressure_panel_gap_m = 0.01
+pressure_panel_m = 0.025
+band_r_m = [0.45, 1.05]
+film_m = 0.003
+joint_cap_u_m = 0.11
+joint_gap_m = 0.08
+joint_cap_m = 0.22
+node_half_deg = 2.5
+node_u_m = 0.12
+node_height_m = 1.4
+node_cover_half_deg = 1.6
+id_bar_width_m = 1.4
+id_bar_m = 0.14
+id_bar_gap_m = 0.08
