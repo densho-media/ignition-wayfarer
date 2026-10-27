@@ -667,10 +667,11 @@ def run_touch_walk(url, play_release, binary, sandbox, out, record_check, metric
         touch('touchStart', 1, (110, 300))
         page.frames(2)
         touch('touchMove', 1, (110, 236))                   # stick up: along the line toward the view (down the tunnel)
-        s = until(lambda s: button(s, 'exc.use') and 'open outer hatch' in scene(s).get('use', ''), 120)
+        # the line pace is in game time: a software-rendered runner at 1 fps steps physics 8 ticks a frame, about 1/8 of real time
+        s = until(lambda s: button(s, 'exc.use') and 'open outer hatch' in scene(s).get('use', ''), 300)
         touch('touchEnd', 1)
         need('touch walk: the stick carries the body down the boarding line to the shut outer hatch', s and scene(s)['s'] > s0 + 3.0,
-             s=[s0, scene(s).get('s') if s else None])
+             s=[s0, scene(s or state()).get('s')])
         page.screenshot(out / 'touch_walk_2_hatch.png')
         tap_at(centre(button(s, 'exc.use')[2]))
         s = until(lambda s: 'close outer hatch' in scene(s).get('use', ''), 30)
