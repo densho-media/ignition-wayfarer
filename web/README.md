@@ -163,7 +163,8 @@ mkdir -p runs/preview && ln -sfn ../web-site runs/preview/ignition-wayfarer && p
   it; a look drag turns the view; Map and View answer; no engine or script error.
 
 `--record` writes the summary and metrics into the site's `release.json`. `--live <url>` repeats the checks against a deployed
-site, `--no-recording` skips the recording and `--no-touch` the touch journey.
+site, `--no-recording` skips the recording and `--no-touch` the touch journey. `--part main|equivalence|touch|walk` (repeatable) runs
+only those parts, and `--merge <part dirs> --out <dir> [--record]` combines their `check.json`; a missing part fails.
 
 ## GitHub Actions
 
@@ -171,14 +172,16 @@ site, `--no-recording` skips the recording and `--no-touch` the touch journey.
 - **Triggers.** Pushes to `main`, `claude/**` and `local/**`, plus a manual run. There is no `pull_request` trigger. A push
   that changes only `docs/`, `TODO.md`, `README.md`, `AGENTS.md` or `CLAUDE.md` runs nothing (none of it is in the site or
   read by a test); the live site stays at the last built commit.
-- **Every branch.** Unit tests, the Blender build with geometry diff 0, `web --native`, and `web_check --record`. Artifacts:
-  - the site (`wayfarer-web-site`, the preview build)
-  - the check screenshots and logs
+- **Every branch.** Unit tests, the Blender build with geometry diff 0 and `web --native` (job `build`), then the browser check in
+  four parallel jobs on their own runners (`browser-check`: main, equivalence, touch, walk; software WebGL is CPU-bound), then
+  `site` merges their results into the site's `release.json` (`web_check --merge --record`; a missing part fails). Artifacts:
+  - the site (`wayfarer-web-site`, the preview build, with the recorded results)
+  - each part's screenshots and results (`wayfarer-web-check-<part>`), the merged result (`wayfarer-web-check`) and the build logs
   - the native Linux zip
 - **`main` only:**
   - `deploy` publishes to Pages, only after every check passes.
   - `verify` waits until the live `release.json` names the commit, records each file type's status, type, encoding and cache
-    headers, and runs the browser check against the live URL.
+    headers; `verify-browser` then runs the browser check against the live URL in parallel parts (main, touch, walk).
   - `release` keeps the verified site, its `release.json` and the native Linux zip as GitHub Release `web-<release>`.
 - **Permissions.**
   - Build jobs are read-only.

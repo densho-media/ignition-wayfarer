@@ -36,9 +36,9 @@ jobs:
       - run: python3 --version && python3 -m unittest discover -s tests
 
   build:
-    name: Build, export and browser-check
+    name: Build and export
     runs-on: ubuntu-24.04
-    timeout-minutes: 60
+    timeout-minutes: 40
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
 
@@ -111,13 +111,6 @@ jobs:
           echo "WEB_SECONDS=$SECONDS" >> "$GITHUB_ENV"
           echo "WEB_RUN=$(python3 -c 'import json; print(json.load(open("web.json"))["run_dir"])')" >> "$GITHUB_ENV"
 
-      - name: Browser check (headless Chrome, served under /ignition-wayfarer/)
-        run: |
-          set -euo pipefail
-          SECONDS=0
-          python3 tools/web_check.py _site --out web-check --chrome google-chrome --no-sandbox --record   # ubuntu-24.04 AppArmor blocks Chrome's sandbox; local content only
-          echo "CHECK_SECONDS=$SECONDS" >> "$GITHUB_ENV"
-
       - name: Report
         if: always()
         run: |
@@ -127,9 +120,9 @@ jobs:
           def read(p):
               try: return json.loads(Path(p).read_text())
               except Exception: return {}
-          pipe, web, build, check = read('pipeline.json'), read('web.json'), read('_site/viewer/build.json'), read('web-check/check.json')
+          pipe, web, build = read('pipeline.json'), read('web.json'), read('_site/viewer/build.json')
           diff = pipe.get('geometry_diff', {})
-          print('## Wayfarer web explorer')
+          print('## Wayfarer web explorer: build')
           print(f"- Commit `{build.get('git_revision', os.environ.get('GITHUB_SHA'))}`, {build.get('blender', '')}, three {build.get('three', '')}")
           print(f"- Pipeline: **{pipe.get('result', 'not run')}** ({pipe.get('steps', '')}); geometry diff vs `{os.path.basename(diff.get('baseline', ''))}`: "
                 f"{diff.get('result', '-')}, changed {diff.get('changed', '-')}, added {diff.get('added', '-')}, removed {diff.get('removed', '-')}")
@@ -139,32 +132,23 @@ jobs:
           native = (web.get('play') or {}).get('native_reference') or {}
           print(f"- Native Demonstrator 01 check on the web package: **{native.get('result', 'not run')}** ({native.get('checks', '-')} checks), "
                 f"recording {json.dumps(native.get('recording'))}")
-          for k, m in (check.get('metrics') or {}).items():
-              print(f"- Browser {k}: `{json.dumps(m)}`")
-          checks = check.get('checks', [])
-          print(f"- Browser check: **{check.get('result', 'not run')}** ({sum(c['ok'] for c in checks)}/{len(checks)}), {check.get('browser', '')}, {check.get('renderer', '')}")
-          for c in checks:
-              if not c['ok']:
-                  print(f"  - FAIL {c['check']}: {json.dumps({k: v for k, v in c.items() if k not in ('check', 'ok')})}")
-          print(f"- Wall time: pipeline {os.environ.get('PIPELINE_SECONDS', '-')} s, export and Godot {os.environ.get('WEB_SECONDS', '-')} s, "
-                f"browser check {os.environ.get('CHECK_SECONDS', '-')} s")
+          print(f"- Wall time: pipeline {os.environ.get('PIPELINE_SECONDS', '-')} s, export and Godot {os.environ.get('WEB_SECONDS', '-')} s")
           EOF
 
-      - name: Upload the site (downloadable, every branch)
+      - name: Upload the site for the browser check (its release.json gets the results in the site job)
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9  # v7.0.2
         with:
-          name: wayfarer-web-site
+          name: wayfarer-web-site-unchecked
           path: _site
           if-no-files-found: error
-          retention-days: 14
+          retention-days: 1
 
-      - name: Upload the browser check and run logs
+      - name: Upload the build logs
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9  # v7.0.2
         with:
-          name: wayfarer-web-check
+          name: wayfarer-web-build-logs
           path: |
-            web-check
             pipeline.json
             web.json
             runs/*/logs
@@ -181,6 +165,91 @@ jobs:
           if-no-files-found: error
           retention-days: 14
 
+  # The browser check in four parts, each on its own runner against the same site (software WebGL is CPU-bound, so the parts no
+  # longer share one runner): the main visitor walk, browser-vs-native equivalence, the touch journey and the touch walk.
+  browser-check:
+    name: Browser check (${{ matrix.part }})
+    needs: [build]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        part: [main, equivalence, touch, walk]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c  # v8.0.1
+        with:
+          name: wayfarer-web-site-unchecked
+          path: _site
+      - name: Browser check, ${{ matrix.part }} (headless Chrome, served under /ignition-wayfarer/)
+        run: python3 tools/web_check.py _site --part ${{ matrix.part }} --out web-check-${{ matrix.part }} --chrome google-chrome --no-sandbox   # ubuntu-24.04 AppArmor blocks Chrome's sandbox; local content only
+      - name: Upload this part's results and screenshots
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9  # v7.0.2
+        with:
+          name: wayfarer-web-check-${{ matrix.part }}
+          path: web-check-${{ matrix.part }}
+          if-no-files-found: ignore
+          retention-days: 14
+
+  site:
+    name: Record the browser check, package the site
+    needs: [build, browser-check]
+    if: always() && needs.build.result == 'success'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c  # v8.0.1
+        with:
+          name: wayfarer-web-site-unchecked
+          path: _site
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c  # v8.0.1
+        with:
+          pattern: wayfarer-web-check-*
+          path: parts
+      - name: Merge the parts into release.json (a missing part fails)
+        run: |
+          python3 tools/web_check.py _site --merge parts/wayfarer-web-check-main parts/wayfarer-web-check-equivalence \
+            parts/wayfarer-web-check-touch parts/wayfarer-web-check-walk --out web-check --record
+
+      - name: Report
+        if: always()
+        run: |
+          python3 - <<'EOF' >> "$GITHUB_STEP_SUMMARY"
+          import json
+          from pathlib import Path
+          try: check = json.loads(Path('web-check/check.json').read_text())
+          except Exception: check = {}
+          print('## Wayfarer web explorer: browser check')
+          for k, m in (check.get('metrics') or {}).items():
+              print(f"- Browser {k}: `{json.dumps(m)}`")
+          checks = check.get('checks', [])
+          print(f"- Browser check: **{check.get('result', 'not run')}** ({sum(c['ok'] for c in checks)}/{len(checks)}), {check.get('browser', '')}, {check.get('renderer', '')}")
+          for c in checks:
+              if not c['ok']:
+                  print(f"  - FAIL {c['check']}: {json.dumps({k: v for k, v in c.items() if k not in ('check', 'ok')})}")
+          print(f"- Wall time per part (s): `{json.dumps(check.get('part_seconds'))}`")
+          EOF
+
+      - name: Upload the site (downloadable, every branch)
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9  # v7.0.2
+        with:
+          name: wayfarer-web-site
+          path: _site
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Upload the merged browser check
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9  # v7.0.2
+        with:
+          name: wayfarer-web-check
+          path: web-check
+          if-no-files-found: ignore
+          retention-days: 14
+
       - name: Package for GitHub Pages (main only)
         if: github.ref == 'refs/heads/main'
         uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9  # v5.0.0
@@ -189,7 +258,7 @@ jobs:
 
   deploy:
     name: Deploy to GitHub Pages
-    needs: [tests, build]
+    needs: [tests, build, browser-check, site]
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04
     timeout-minutes: 10
@@ -211,7 +280,7 @@ jobs:
     needs: [deploy]
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04
-    timeout-minutes: 30
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
       - name: Wait for this commit on the live site, record its headers
@@ -242,18 +311,33 @@ jobs:
               bad += r.status != 200 or (p.endswith('.wasm') and 'wasm' not in h.get('Content-Type', ''))
           raise SystemExit(bad)
           EOF2
-      - name: Browser check against the live site
-        run: python3 tools/web_check.py --live https://densho-media.github.io/ignition-wayfarer/ --out live-check --chrome google-chrome --no-sandbox --no-recording
+
+  # The browser check against the live URL in the same parts as browser-check (equivalence needs the recording, which a live check
+  # leaves out); one runner for every part outgrew its time limit on slow runners.
+  verify-browser:
+    name: Live browser check (${{ matrix.part }})
+    needs: [verify]
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        part: [main, touch, walk]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+      - name: Browser check against the live site, ${{ matrix.part }}
+        run: python3 tools/web_check.py --live https://densho-media.github.io/ignition-wayfarer/ --part ${{ matrix.part }} --out live-check-${{ matrix.part }} --chrome google-chrome --no-sandbox --no-recording
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9  # v7.0.2
         if: always()
         with:
-          name: wayfarer-live-check
-          path: live-check
+          name: wayfarer-live-check-${{ matrix.part }}
+          path: live-check-${{ matrix.part }}
           retention-days: 30
 
   release:
     name: Keep the deployed site and native build as a GitHub Release
-    needs: [verify]
+    needs: [verify, verify-browser]
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04
     timeout-minutes: 10

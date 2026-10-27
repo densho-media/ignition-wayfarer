@@ -18,8 +18,11 @@ and walks it as a visitor does, recording every request:
              it, a look drag, Map and View (after the touch journey, in the same side browser)
 Screenshots, metrics and check.json go to --out; --record writes the summary into the site's release.json. It checks behaviour,
 loading isolation and transfer sizes, not frame rates on real hardware. The viewer's camera damping is switched off before input.
+--part runs one part (main: start, viewer, play, switching, phone, review; equivalence; touch; walk); CI runs the four on their
+own runners and --merge combines their check.json (a missing part fails), recording into release.json with --record.
 
-    python3 tools/web_check.py <site dir> --out <dir> [--chrome google-chrome] [--record]
+    python3 tools/web_check.py <site dir> --out <dir> [--chrome google-chrome] [--record] [--part main|equivalence|touch|walk ...]
+    python3 tools/web_check.py <site dir> --merge <part out dir> ... --out <dir> [--record]
 """
 import argparse
 import base64
@@ -711,45 +714,9 @@ def run_touch_walk(url, play_release, binary, sandbox, out, record_check, metric
         log.close()
 
 
-def check(site, out, binary, sandbox=True, record=False, play_seconds=900, live=None, recording=True, touch=True):
-    """site: the local site directory, or None with live=<deployed URL ending in />, which reads release.json from there."""
-    out.mkdir(parents=True, exist_ok=True)
-    if live:
-        fetch = lambda path: json.loads(urllib.request.urlopen(urllib.request.Request(live + path, headers={'Cache-Control': 'no-cache'}),
-                                                               timeout=60).read())
-        release, build, server, url = fetch('release.json'), fetch('viewer/build.json'), None, live
-    else:
-        release = json.loads((site / 'release.json').read_text())
-        build = json.loads((site / 'viewer/build.json').read_text())
-        server = http.server.ThreadingHTTPServer(('127.0.0.1', 0), functools.partial(Site, directory=str(site)))
-        threading.Thread(target=server.serve_forever, daemon=True).start()
-        url = f'http://127.0.0.1:{server.server_port}' + BASE
+def run_main(url, release, build, binary, sandbox, out, record_check, metrics):
+    """The visitor's walk in one browser: start page, Explore Ship, Enter Wayfarer (the walk), switching and memory, phone, review."""
     play_release = release['experiences'].get('play')
-    results, metrics = [], {}
-
-    def record_check(name, ok, **detail):
-        results.append({'check': name, 'ok': bool(ok), **detail})
-        print(('PASS ' if ok else 'FAIL ') + name, json.dumps(detail) if detail else '', flush=True)
-        if os.environ.get('GITHUB_ACTIONS') and not ok:
-            print(f'::error title=web check::{name} {json.dumps(detail)}'.replace('\n', ' '), flush=True)     # public run annotation
-
-    side, carried = None, (play_release or {}).get('reused_from')
-    if play_release and recording and carried:
-        # The play files are byte-identical to a verified release with the same inputs (web_play.reusable): its browser-vs-native
-        # result holds for them. The walk below still boots and plays them.
-        record_check(f"play: browser-vs-native equivalence carried from release {carried['release']} (same play files)",
-                     carried['equivalence'].get('result') == 'PASS', release=carried['release'], git_revision=carried['git_revision'],
-                     note=carried['equivalence'].get('note'))
-    # The side browser runs the equivalence session and then the touch journey (at most two browsers share the runner with the walk).
-    def side_work(equivalence):
-        if equivalence:
-            run_equivalence(url, play_release, binary, sandbox, out, play_seconds, record_check, metrics)
-        if touch:
-            run_touch(url, play_release, binary, sandbox, out, record_check, metrics)
-            run_touch_walk(url, play_release, binary, sandbox, out, record_check, metrics)
-    if play_release and ((recording and not carried) or touch):
-        side = threading.Thread(target=side_work, args=(recording and not carried,))
-        side.start()
     profile = tempfile.mkdtemp(prefix='wf-web-check-')
     log = open(out / 'chrome.log', 'w')
     # The back-forward cache stays off so the memory check measures what the pages release, not what Chrome chooses to keep.
@@ -1054,34 +1021,122 @@ def check(site, out, binary, sandbox=True, record=False, play_seconds=900, live=
         record_check('browser session', False, error=repr(error), chrome_log=(out / 'chrome.log').read_text(errors='replace').splitlines()[-8:])
     finally:
         chrome.close()
+        shutil.rmtree(profile, ignore_errors=True)
+        log.close()
+
+
+PARTS = ('main', 'equivalence', 'touch', 'walk')     # the main walk, browser-vs-native, the touch journey, the touch walk
+
+
+def record_release(site, release, results, metrics, version):
+    """Writes the summary and metrics into the site's release.json (tests)."""
+    carried = (release['experiences'].get('play') or {}).get('reused_from')
+    group = lambda prefix: [r for r in results if r['check'].split(':')[0] in prefix]
+    summary = lambda rs: rs and {'result': 'PASS' if all(r['ok'] for r in rs) else 'FAIL', 'passed': sum(r['ok'] for r in rs),
+                                 'total': len(rs), 'failed': [r['check'] for r in rs if not r['ok']], 'browser': version}
+    release['tests'] = {'viewer': summary(group(('viewer', 'phone'))), 'isolation': summary(group(('start', 'play launcher', 'switching'))),
+                        'play': summary(group(('play',))), 'touch': summary(group(('touch',))), 'all': summary(results), 'metrics': metrics}
+    equivalence = [r for r in results if r['check'].startswith(('play: Demonstrator 01 check suite', 'play: whole-journey'))]
+    if carried and any(r['check'].startswith('play: browser-vs-native equivalence carried') for r in results):
+        release['tests']['equivalence'] = {**carried['equivalence'], 'carried_from': carried['release']}
+    elif equivalence:
+        eq, suite = metrics.get('equivalence') or {}, metrics.get('check_suite') or {}
+        release['tests']['equivalence'] = {
+            'result': 'PASS' if all(r['ok'] for r in equivalence) else 'FAIL',
+            'note': f"browser vs native on the same package: check suite {(suite.get('web') or {}).get('checks', '-')} checks, "
+                    f"{len(suite.get('differ', []))} differing; whole-journey autoplay at a fixed 30 fps {(eq.get('web') or {}).get('frames', '-')} "
+                    f"frames vs {(eq.get('native') or {}).get('frames', '-')} natively, same chapters and production-layer flips"}
+    (site / 'release.json').write_text(json.dumps(release, indent=1) + '\n')
+
+
+def merge(site, part_dirs, out, record=False):
+    """One report from the parts' check.json (CI runs each part on its own runner against the same site); a part without a report,
+    or with one for another release, fails. record: write it into the site's release.json, as a single run would."""
+    release = json.loads((site / 'release.json').read_text())
+    results, metrics, browsers, seconds, parts = [], {}, [], {}, []
+    for d in part_dirs:
+        try:
+            rep = json.loads((d / 'check.json').read_text())
+        except (OSError, ValueError):
+            rep = {'checks': [{'check': f'browser check part {d.name}: reported', 'ok': False}]}
+        if rep.get('git_revision', release['git_revision']) != release['git_revision']:
+            rep['checks'] = [{'check': f'browser check part {d.name}: same release', 'ok': False, 'git_revision': rep.get('git_revision')}]
+        results += rep['checks']
+        metrics.update(rep.get('metrics') or {})
+        browsers += [rep['browser']] if rep.get('browser') and rep['browser'] not in browsers else []
+        seconds[d.name] = rep.get('seconds')
+        parts += rep.get('parts', [])
+    version = ', '.join(browsers)
+    report = {'result': 'PASS' if results and all(r['ok'] for r in results) else 'FAIL', 'browser': version,
+              'renderer': 'SwiftShader (software WebGL), headless', 'url': BASE, 'git_revision': release['git_revision'],
+              'release': release['release'], 'parts': parts, 'part_seconds': seconds, 'metrics': metrics, 'checks': results}
+    out.mkdir(parents=True, exist_ok=True)
+    (out / 'check.json').write_text(json.dumps(report, indent=2) + '\n')
+    if record:
+        record_release(site, release, results, metrics, version)
+    return report
+
+
+def check(site, out, binary, sandbox=True, record=False, play_seconds=900, live=None, recording=True, touch=True, parts=PARTS):
+    """site: the local site directory, or None with live=<deployed URL ending in />, which reads release.json from there.
+    parts: the sessions to run (PARTS); each part's check.json can be merged later (merge)."""
+    out.mkdir(parents=True, exist_ok=True)
+    if live:
+        fetch = lambda path: json.loads(urllib.request.urlopen(urllib.request.Request(live + path, headers={'Cache-Control': 'no-cache'}),
+                                                               timeout=60).read())
+        release, build, server, url = fetch('release.json'), fetch('viewer/build.json'), None, live
+    else:
+        release = json.loads((site / 'release.json').read_text())
+        build = json.loads((site / 'viewer/build.json').read_text())
+        server = http.server.ThreadingHTTPServer(('127.0.0.1', 0), functools.partial(Site, directory=str(site)))
+        threading.Thread(target=server.serve_forever, daemon=True).start()
+        url = f'http://127.0.0.1:{server.server_port}' + BASE
+    play_release = release['experiences'].get('play')
+    results, metrics = [], {}
+
+    def record_check(name, ok, **detail):
+        results.append({'check': name, 'ok': bool(ok), **detail})
+        print(('PASS ' if ok else 'FAIL ') + name, json.dumps(detail) if detail else '', flush=True)
+        if os.environ.get('GITHUB_ACTIONS') and not ok:
+            print(f'::error title=web check::{name} {json.dumps(detail)}'.replace('\n', ' '), flush=True)     # public run annotation
+
+    carried = (play_release or {}).get('reused_from')
+    if 'equivalence' in parts and play_release and recording and carried:
+        # The play files are byte-identical to a verified release with the same inputs (web_play.reusable): its browser-vs-native
+        # result holds for them. The walk below still boots and plays them.
+        record_check(f"play: browser-vs-native equivalence carried from release {carried['release']} (same play files)",
+                     carried['equivalence'].get('result') == 'PASS', release=carried['release'], git_revision=carried['git_revision'],
+                     note=carried['equivalence'].get('note'))
+    equivalence = 'equivalence' in parts and recording and not carried
+    side_parts = [k for k in ('touch', 'walk') if touch and k in parts]
+    # The side browser runs the equivalence session and then the touch journey and the touch walk (at most two browsers share a
+    # runner with the main walk; CI runs each part on its own runner and merges them, --part and --merge).
+    def side_work():
+        if equivalence:
+            run_equivalence(url, play_release, binary, sandbox, out, play_seconds, record_check, metrics)
+        if 'touch' in side_parts:
+            run_touch(url, play_release, binary, sandbox, out, record_check, metrics)
+        if 'walk' in side_parts:
+            run_touch_walk(url, play_release, binary, sandbox, out, record_check, metrics)
+    side = threading.Thread(target=side_work) if play_release and (equivalence or side_parts) else None
+    t0 = time.monotonic()
+    if side:
+        side.start()
+    try:
+        if 'main' in parts:
+            run_main(url, release, build, binary, sandbox, out, record_check, metrics)
+    finally:
         if side:
             side.join()
         if server:
             server.shutdown()
-        shutil.rmtree(profile, ignore_errors=True)
-        log.close()
     version = subprocess.run([binary, '--version'], capture_output=True, text=True).stdout.strip()
     report = {'result': 'PASS' if results and all(r['ok'] for r in results) else 'FAIL', 'browser': version,
               'renderer': 'SwiftShader (software WebGL), headless', 'url': live or BASE, 'git_revision': release['git_revision'],
-              'release': release['release'], 'metrics': metrics, 'checks': results}
+              'release': release['release'], 'parts': list(parts), 'seconds': round(time.monotonic() - t0), 'metrics': metrics, 'checks': results}
     (out / 'check.json').write_text(json.dumps(report, indent=2) + '\n')
     if record and not live:
-        group = lambda prefix: [r for r in results if r['check'].split(':')[0] in prefix]
-        summary = lambda rs: rs and {'result': 'PASS' if all(r['ok'] for r in rs) else 'FAIL', 'passed': sum(r['ok'] for r in rs),
-                                     'total': len(rs), 'failed': [r['check'] for r in rs if not r['ok']], 'browser': version}
-        release['tests'] = {'viewer': summary(group(('viewer', 'phone'))), 'isolation': summary(group(('start', 'play launcher', 'switching'))),
-                            'play': summary(group(('play',))), 'touch': summary(group(('touch',))), 'all': summary(results), 'metrics': metrics}
-        equivalence = [r for r in results if r['check'].startswith(('play: Demonstrator 01 check suite', 'play: whole-journey'))]
-        if carried and recording:
-            release['tests']['equivalence'] = {**carried['equivalence'], 'carried_from': carried['release']}
-        elif equivalence:
-            eq, suite = metrics.get('equivalence') or {}, metrics.get('check_suite') or {}
-            release['tests']['equivalence'] = {
-                'result': 'PASS' if all(r['ok'] for r in equivalence) else 'FAIL',
-                'note': f"browser vs native on the same package: check suite {(suite.get('web') or {}).get('checks', '-')} checks, "
-                        f"{len(suite.get('differ', []))} differing; whole-journey autoplay at a fixed 30 fps {(eq.get('web') or {}).get('frames', '-')} "
-                        f"frames vs {(eq.get('native') or {}).get('frames', '-')} natively, same chapters and production-layer flips"}
-        (site / 'release.json').write_text(json.dumps(release, indent=1) + '\n')
+        record_release(site, release, results, metrics, version)
     return report
 
 
@@ -1096,9 +1151,15 @@ if __name__ == '__main__':
     parser.add_argument('--no-sandbox', action='store_true', help="disposable CI VMs whose AppArmor blocks Chrome's namespace sandbox")
     parser.add_argument('--record', action='store_true', help="write the results into the site's release.json (tests)")
     parser.add_argument('--play-seconds', type=int, default=900, help='time allowed for the recorded Demonstrator 01 run')
+    parser.add_argument('--part', action='append', choices=PARTS, help='run only this part (repeatable; default all): main, equivalence, touch, walk')
+    parser.add_argument('--merge', type=Path, nargs='+', metavar='DIR', help="merge these parts' check.json into --out (with --record, into the site)")
     args = parser.parse_args()
-    report = check(args.site and args.site.resolve(), args.out.resolve(), args.chrome, sandbox=not args.no_sandbox, record=args.record,
-                   play_seconds=args.play_seconds, live=args.live, recording=not args.no_recording, touch=not args.no_touch)
+    if args.merge:
+        report = merge(args.site.resolve(), [d.resolve() for d in args.merge], args.out.resolve(), record=args.record)
+    else:
+        report = check(args.site and args.site.resolve(), args.out.resolve(), args.chrome, sandbox=not args.no_sandbox, record=args.record,
+                       play_seconds=args.play_seconds, live=args.live, recording=not args.no_recording, touch=not args.no_touch,
+                       parts=tuple(args.part or PARTS))
     print(report['result'], f"{sum(r['ok'] for r in report['checks'])}/{len(report['checks'])} checks")
     if os.environ.get('GITHUB_ACTIONS'):
         loads = {r['check']: r.get('seconds') for r in report['checks'] if 'seconds' in r}
