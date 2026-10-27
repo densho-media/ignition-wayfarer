@@ -12,23 +12,30 @@
   <header>
     <p class="eyebrow"><a href="../">← Wayfarer</a> · Interactive</p>
     <h1>ENTER WAYFARER</h1>
-    <p class="lead">Integrated Demonstrator 01: one continuous run from the docked exterior through the airlock, the microgravity
-      service spine and the transfer drum, down the ladder into ring A's spin gravity. The camera guides each chapter; you can take
-      over the crew body in the physics chapters.</p>
+    <p class="lead">The walk: start in the development station, board Wayfarer as the trainee, cross into a habitat ring and walk its
+      whole circumference through every sector and corridor, then return to the station. One continuous run under your control: you
+      work the airlock, ask the ship to undock and spin its rings up, ride the transfer drum, climb down into spin gravity, open the
+      doors and come back the same way.</p>
   </header>
   <section class="panel">
     <p id="size">The engine and the ship package download when you press Start.</p>
-    <p><button id="start" type="button">Start</button></p>
+    <p><button id="start" type="button">Start the walk</button>
+      <button id="demo" type="button" class="secondary">Guided tour: Demonstrator 01</button></p>
+    <p class="note">Desktop: click to look (Esc frees the cursor) · W/S move, A/D step · E use (hatch, door, drum, ladder, the ring B
+      branch) · O ship operations at a trunk panel · V view · M ring map. Touch: left thumb moves, right thumb drags to look, the Use,
+      Ops, View and Map buttons appear when they apply. The guided tour is Demonstrator 01: the camera leads seven chapters from the
+      docked exterior to ring A and you take over the body in the physics chapters.</p>
     <p id="cap" class="note"></p>
   </section>
   <section class="grid2">
     <div class="panel">
       <h2>Controls</h2>
       <ul class="plain">
-        <li>Keyboard: Enter next chapter · P pause the guided camera · F2 autoplay the body actions · Esc back. The chapter text shows
-          the keys that work now; F10 opens the controls.</li>
+        <li>The walk: the goal at the top left says what to do next and which key or button does it; the ring map shows the
+          stretch walked. A shut hatch or door stops you; open it first. F10 opens the controls.</li>
         <li>Touch: left thumb moves where the body can walk or climb, right thumb drags to look, buttons appear when their action
-          can be used (Grab, Push off, Next …); ? explains them. Landscape works best.</li>
+          can be used (Use, Ops, View, Map; in the guided tour Grab, Push off, Next …); ? explains them. Landscape works best.</li>
+        <li>Guided tour keys: Enter next chapter · P pause the guided camera · F2 autoplay the body actions · Esc back.</li>
         <li>← Exit leaves and unloads the engine.</li>
       </ul>
     </div>
@@ -47,27 +54,29 @@
 </main>
 <script>
 // Click-to-load: this page fetches only play.json (past the browser cache) and opens the content-named Godot page on Start.
-const start = document.getElementById('start'), size = document.getElementById('size'), cap = document.getElementById('cap');
+const start = document.getElementById('start'), demo = document.getElementById('demo'), size = document.getElementById('size'), cap = document.getElementById('cap');
 let play = null;
 fetch('play.json', { cache: 'no-store' }).then(r => r.ok ? r.json() : Promise.reject(new Error(`play.json ${r.status}`))).then(p => {
   play = p;
   const mb = Object.values(p.bytes).reduce((a, b) => a + b, 0) / 1e6;
-  size.textContent = `Pressing Start downloads the Godot ${p.godot_short} engine and the Demonstrator 01 package: ${mb.toFixed(0)} MB, `
+  size.textContent = `Pressing Start downloads the Godot ${p.godot_short} engine and the ship package: ${mb.toFixed(0)} MB, `
     + `less over the wire when the server compresses it, and cached for later visits.`;
-}).catch(err => { size.textContent = `This release has no interactive build (${err.message}).`; start.disabled = true; });
+}).catch(err => { size.textContent = `This release has no interactive build (${err.message}).`; start.disabled = true; demo.disabled = true; });
 // Capability probe without starting anything heavy: a throwaway WebGL 2 context, released at once.
 (() => {
   const gl = document.createElement('canvas').getContext('webgl2');
   const touchOnly = matchMedia('(pointer: coarse)').matches && !matchMedia('(pointer: fine)').matches;
   const notes = [];
-  if (!gl) { notes.push('This browser did not provide WebGL 2, which the engine needs. Explore Ship may still work.'); start.disabled = true; }
+  if (!gl) { notes.push('This browser did not provide WebGL 2, which the engine needs. Explore Ship may still work.'); start.disabled = true; demo.disabled = true; }
   else gl.getExtension('WEBGL_lose_context')?.loseContext();
   if (!WebAssembly?.validate) notes.push('WebAssembly is unavailable.');
   if (touchOnly) notes.push('Touch device: the game shows touch controls. It needs a recent phone and the download above; '
     + 'Explore Ship is the lighter choice.');
   cap.textContent = notes.join(' ');
 })();
-start.addEventListener('click', () => { if (play) location.assign(play.entry); });
+// The walk (EXC-001) is the main experience; the same package opens Demonstrator 01 when no scene switch is given.
+start.addEventListener('click', () => { if (play) location.assign(play.entry + '?arg=--&arg=--excursion'); });
+demo.addEventListener('click', () => { if (play) location.assign(play.entry); });
 </script>
 </body>
 </html>

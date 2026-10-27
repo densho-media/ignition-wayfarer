@@ -23,7 +23,7 @@ const CONTEXTS := {"ui": "Everywhere", "menu": "Review menu", "walk": "Induction
 	"nav": "Ship Navigator (demonstrator)", "space": "Space Navigator (SPACE view)", "explorer": "Navigator SHOW ME views",
 	"demo": "Demonstrator 01 chapters", "inspector": "Ship inspector", "flight": "First Ignition timeline",
 	"thermal": "Heat balance explorer (timeline)", "life": "Life-support simulator", "lab": "Physics lab", "eva": "EVA drift and tethers",
-	"holo": "Subsystem hologram (M5 / M6)"}
+	"holo": "Subsystem hologram (M5 / M6)", "excursion": "Station-to-ring excursion"}
 const LINKED := {"nav": ["body", "demo", "explorer"], "body": ["nav", "demo"], "walk": ["demo"], "demo": ["walk", "body", "nav"],
 	"explorer": ["nav"], "flight": ["thermal"], "thermal": ["flight"]}   # contexts whose scenes read input in the same frame
 
@@ -42,17 +42,17 @@ const BASE_ACTIONS := [
 		"what": "Hide or show the review guide's step card and key bar."},
 	{"id": "ui.details", "name": "Guide details", "ctx": ["ui"], "kind": "press", "layout": "logical", "keys": [KEY_TAB], "joy": [],
 		"what": "Expand or fold the engineering detail line of the review guide."},
-	{"id": "player.move_forward", "name": "Move forward", "ctx": ["walk", "body", "lab", "eva"], "kind": "hold", "layout": "physical",
+	{"id": "player.move_forward", "name": "Move forward", "ctx": ["walk", "body", "lab", "eva", "excursion"], "kind": "hold", "layout": "physical",
 		"keys": [KEY_W], "joy": [{"t": "joya", "a": JOY_AXIS_LEFT_Y, "s": -1}],
 		"what": "Walk on along the route, or forward on a ring deck; climb up a ladder.",
 		"why": "On a ring deck you walk because spin gravity presses you onto it; in the weightless trunk this key adds no force (S&E 46 DYN-007)."},
-	{"id": "player.move_back", "name": "Move back", "ctx": ["walk", "body", "lab", "eva"], "kind": "hold", "layout": "physical",
+	{"id": "player.move_back", "name": "Move back", "ctx": ["walk", "body", "lab", "eva", "excursion"], "kind": "hold", "layout": "physical",
 		"keys": [KEY_S], "joy": [{"t": "joya", "a": JOY_AXIS_LEFT_Y, "s": 1}],
 		"what": "Walk back along the route or the deck; climb down a ladder."},
-	{"id": "player.move_left", "name": "Move left", "ctx": ["walk", "body", "lab"], "kind": "hold", "layout": "physical",
+	{"id": "player.move_left", "name": "Move left", "ctx": ["walk", "body", "lab", "excursion"], "kind": "hold", "layout": "physical",
 		"keys": [KEY_A], "joy": [{"t": "joya", "a": JOY_AXIS_LEFT_X, "s": -1}],
 		"what": "Step left on a ring deck (free flight: slide left)."},
-	{"id": "player.move_right", "name": "Move right", "ctx": ["walk", "body", "lab"], "kind": "hold", "layout": "physical",
+	{"id": "player.move_right", "name": "Move right", "ctx": ["walk", "body", "lab", "excursion"], "kind": "hold", "layout": "physical",
 		"keys": [KEY_D], "joy": [{"t": "joya", "a": JOY_AXIS_LEFT_X, "s": 1}],
 		"what": "Step right on a ring deck (free flight: slide right)."},
 	{"id": "player.grab", "name": "Grab handhold", "ctx": ["body", "lab"], "kind": "press", "layout": "logical",
@@ -125,7 +125,8 @@ const SCENE_ACTIONS := [
 	[["menu"], [["menu.session_1", "Open session 1", [KEY_1], "Open the first review session."], ["menu.session_2", "Open session 2", [KEY_2], "Open the second review session."],
 		["menu.session_3", "Open session 3", [KEY_3], "Open the third review session."], ["menu.session_4", "Open session 4", [KEY_4], "Open the fourth review session."],
 		["menu.session_5", "Open session 5", [KEY_5], "Open the fifth review session."], ["menu.session_6", "Open session 6", [KEY_6], "Open the sixth review session."],
-		["menu.session_7", "Open session 7", [KEY_7], "Open the seventh review session."], ["menu.session_8", "Open session 8", [KEY_8], "Open the eighth review session."]]],
+		["menu.session_7", "Open session 7", [KEY_7], "Open the seventh review session."], ["menu.session_8", "Open session 8", [KEY_8], "Open the eighth review session."],
+		["menu.session_9", "Open session 9", [KEY_9], "Open the ninth review session."]]],
 	[["walk"], [["walk.reset_view", "Reset view", [KEY_R], "Look straight along the route again."],
 		["walk.free_flight", "Free flight", [KEY_F], "Leave the rail: fly the review camera freely (a review tool, not a crew capability)."],
 		["walk.body_pace", "Body pace", [KEY_B], "Switch the review camera between review pace and body pace (rung by rung on ladders)."],
@@ -139,6 +140,11 @@ const SCENE_ACTIONS := [
 		["body.colliders", "Show colliders", [KEY_K], "Show the boxes the physics uses (the rig's rooms)."],
 		["body.drop_tool", "Drop the tool", [KEY_T], "Drop a tool on a ring deck and watch where it lands (Coriolis)."]]],
 	[["body", "demo"], [["body.view", "View from outside", [KEY_V], "Switch between first person and a view of the body from outside."]]],
+	# EXC-001: the station-to-ring excursion (one continuous player-controlled run; the moves are player.move_*).
+	[["excursion"], [["exc.use", "Use / operate", [KEY_E], "Operate what is in reach: a hatch or door, the transfer drum's cycle at its restraint station, the ladder foot, the trunk's ring B branch.", [{"t": "joyb", "b": JOY_BUTTON_X}]],
+		["exc.ops", "Ship operations", [KEY_O], "At a trunk panel: ask Wayfarer to undock and spin up its rings, or to spin down, lock and dock.", [{"t": "joyb", "b": JOY_BUTTON_Y}]],
+		["exc.view", "View from outside", [KEY_V], "Switch between first person and a view of the trainee from outside."],
+		["exc.map", "Ring map", [KEY_M], "Show or hide the ring map (sectors, corridors, doors, the stretch walked)."]]],
 	[["demo"], [["demo.pause", "Pause chapter", [KEY_P], "Pause or resume the demonstrator chapter."],
 		["demo.autoplay", "Autoplay", [KEY_F2], "Let the chapter's body actions run by themselves (review aid; was A, which also walks left)."],
 		["demo.occupants", "Occupant not secured", [KEY_O], "Fault drill: an occupant is not secured, so the ring sequence holds."],
@@ -572,7 +578,8 @@ const KEY_GLYPHS := {KEY_PERIOD: ".", KEY_COMMA: ",", KEY_MINUS: "-", KEY_EQUAL:
 const TOUCH_LABELS := {"ui.confirm": "Next", "ui.codex": "Help", "player.move_forward": "stick up", "player.move_back": "stick down",
 	"player.move_left": "stick left", "player.move_right": "stick right", "player.grab": "Grab", "player.release": "Release",
 	"player.push": "Push off", "ship.map": "Map", "ship.card": "Systems", "demo.pause": "Pause", "demo.autoplay": "Auto",
-	"demo.occupants": "Occupant", "body.view": "View", "body.drop_tool": "Drop"}
+	"demo.occupants": "Occupant", "body.view": "View", "body.drop_tool": "Drop", "exc.use": "Use", "exc.ops": "Ops", "exc.view": "View",
+	"exc.map": "Map"}
 
 static func describe(d: Dictionary) -> String:
 	match str(d.t):

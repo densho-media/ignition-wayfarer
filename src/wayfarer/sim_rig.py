@@ -35,7 +35,7 @@ import drone_routes
 import tomllib
 
 CONTRACT='WF_SIM_RIG'
-CONTRACT_VERSION=42
+CONTRACT_VERSION=43
 GENERATED_BY='WF_PROXY_P1_001'
 OUTPUT='simulations/wf_sim_rig.json'
 
@@ -441,6 +441,7 @@ def contract(s,spec_text,source_text):
             # PHYS-001 (v27): local crew/object dynamics: frames, signed rings, modes, transitions, profiles and fixtures (46/47).
             # PHYS-002 (v28): dynamics.stages, the collision stages on the real route (trunk passage and handrails, ring A's induction rooms).
             # J01 (v41): dynamics.stages.ring_rooms.rings.RING_B, ring B's sector clear volumes for the body mode.
+            # EXC-001 (v43): dynamics.stages.boarding / access_b / tube_b / circuit, the station-to-ring excursion.
             'dynamics':crew_dynamics.contract(s),
             'mission':{k:quantity(v) for k,v in s['mission'].items()},
             'habitat':{'low_thrust_limit':quantity(s['habitat']['low_thrust_limit']),

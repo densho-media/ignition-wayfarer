@@ -2566,6 +2566,11 @@ components = { HABITATION = "INTERIOR_HABITATION", WORK_MEDICAL_OPS = "INTERIOR_
 # personal lockers beside it on the aft bulkhead; the hygiene compartment stands forward of the landing well with a shelf over it.
 # Q51 (15!A106, 12!A29; the user's pick of 2026-10-09): the couch-2 lockers end where couch 1's do (x -1.15 m), and the 0.55 m slot between
 # them and the landing well is Seraph's private dock and maintenance niche (route_fitout.seraph_elements 'niche'); no berth or couch is lost.
+# CIRC-001 (owner design direction 2026-10-26, ring_circulation): every sector carries a tangential through-passage at x -1.15..-0.50 m
+# ([ring_circulation] passage_x_m), forward of the aft couch row and aft of the berths, stations, racks and the landing well, from side wall
+# to side wall, with a pressure door in each side wall. The work and Garden couch-2 lockers therefore end at x -1.15 m like the habitation
+# ones, and the Garden rack and mess start at x -0.50 m. Seraph's habitation niche (Q51) gave up its slot to the passage: it moves to a
+# reserved alcove on the corridor side of that sector's -z door (ring_circulation.alcove), still beside the berths.
 HABITATION = [
   { name = "Burn_Couch_1", zone = "burn_couch", side = 1, x = [-1.60, -1.15], z = [0.55, 1.25], lift_m = 0.0, height_m = 2.0 },
   { name = "Couch_Lockers_1", zone = "stowage", side = 1, x = [-1.60, -1.15], z = [1.30], lift_m = 0.0, height_m = 2.1 },
@@ -2591,7 +2596,7 @@ WORK_MEDICAL_OPS = [
   { name = "Burn_Couch_1", zone = "burn_couch", side = 1, x = [-1.60, -1.15], z = [0.55, 1.25], lift_m = 0.0, height_m = 2.0 },
   { name = "Couch_Lockers_1", zone = "stowage", side = 1, x = [-1.60, -1.15], z = [1.30], lift_m = 0.0, height_m = 2.1 },
   { name = "Burn_Couch_2", zone = "burn_couch", side = -1, x = [-1.60, -1.15], z = [0.55, 1.25], lift_m = 0.0, height_m = 2.0 },
-  { name = "Couch_Lockers_2", zone = "stowage", side = -1, x = [-1.60, -0.60], z = [1.30], lift_m = 0.0, height_m = 2.1 },
+  { name = "Couch_Lockers_2", zone = "stowage", side = -1, x = [-1.60, -1.15], z = [1.30], lift_m = 0.0, height_m = 2.1 },
   { name = "Medical_Couch", zone = "medical", side = 1, x = [-0.40, 1.60], z = [0.45, 1.15], lift_m = 0.0, height_m = 1.20 },
   { name = "Ops_Stations", zone = "operations", side = 1, x = [-0.40, 1.60], z = [1.20], open = "aft", lift_m = 0.0, height_m = 1.60 },
   { name = "Medical_Stowage", zone = "stowage", side = 1, x = [-0.40, 1.60], z = [2.00], lift_m = 1.65, height_m = 0.85 },
@@ -2606,9 +2611,9 @@ LIFE_SUPPORT_GARDEN_COMMON = [
   { name = "Burn_Couch_1", zone = "burn_couch", side = 1, x = [-1.60, -1.15], z = [0.55, 1.25], lift_m = 0.0, height_m = 2.0 },
   { name = "Couch_Lockers_1", zone = "stowage", side = 1, x = [-1.60, -1.15], z = [1.30], lift_m = 0.0, height_m = 2.1 },
   { name = "Burn_Couch_2", zone = "burn_couch", side = -1, x = [-1.60, -1.15], z = [0.55, 1.25], lift_m = 0.0, height_m = 2.0 },
-  { name = "Couch_Lockers_2", zone = "stowage", side = -1, x = [-1.60, -0.60], z = [1.30], lift_m = 0.0, height_m = 2.1 },
-  { name = "Garden_Rack_1", zone = "garden", side = 1, x = [-0.55, 1.60], z = [0.45, 0.95], lift_m = 0.0, height_m = 2.0 },
-  { name = "Mess", zone = "common", side = 1, x = [-0.55, 1.25], z = [0.95], open = "aft", lift_m = 0.0, height_m = 1.40 },
+  { name = "Couch_Lockers_2", zone = "stowage", side = -1, x = [-1.60, -1.15], z = [1.30], lift_m = 0.0, height_m = 2.1 },
+  { name = "Garden_Rack_1", zone = "garden", side = 1, x = [-0.50, 1.60], z = [0.45, 0.95], lift_m = 0.0, height_m = 2.0 },
+  { name = "Mess", zone = "common", side = 1, x = [-0.50, 1.25], z = [0.95], open = "aft", lift_m = 0.0, height_m = 1.40 },
   { name = "ECLSS_Bay", zone = "life_support", side = -1, x = [1.10, 1.60], z = [0.45], open = "aft", lift_m = 0.0, height_m = 2.1 },
 ]
 
@@ -3123,7 +3128,8 @@ trunk_diffuser_deg = [195.0, 215.0]
 # an optional later expansion state (GARDEN_EXPANSION_CTRL, display only, off when saved) shows garden_expansion_tiers tray tiers on the lab
 # bench of the work sector: spare lab space, not common rooms or berths (15!H105, 15!G106). Neither adds credited growing area.
 sector_frame_pitch_m = 0.70
-seraph_spaces = { WORK_MEDICAL_OPS = "post", HABITATION = "niche" }
+# CIRC-001: the habitation niche left the sector for the corridor alcove (ring_circulation.alcove), so only the post is fitted here.
+seraph_spaces = { WORK_MEDICAL_OPS = "post" }
 seraph_station = 1
 seraph_niche_x_m = [-1.15, -0.60]
 seraph_niche_height_m = 2.10
@@ -3297,6 +3303,93 @@ joint_height_m = 0.012
 kind = "IMPLEMENTATION"
 hoop_facets = 120
 sector_arc_segments = 8
+
+# CIRC-001 continuous ring circulation (owner design direction in conversation 2026-10-26; ring_circulation.py): a walking circuit round each
+# ring through all three sectors, keeping each sector and each corridor half an independently closable compartment. PROTOTYPE throughout:
+# it conflicts with the BASELINE rule that pressurized rooms occupy only the sectors (12!A13) and the 400-460 m3 gross envelope
+# (ring_circulation.conflicts); nothing here is canon. The door band is the free axial band of every sector between the aft couch row
+# (x -1.15) and the forward blocks and landing well (x -0.50); the corridor is centred on it, so it runs aft of the ring plane.
+[ring_circulation]
+status = "PROTOTYPE"
+unit = "m"
+evidence_ref = "ring_circulation_direction"
+rationale = "Judgment (AGENTS.md calculate constraints, model form): shirt-sleeve walking passage at 0.5 g. Corridor clear 0.90 m wide (the sector aisle) and 2.10 m high (interior.min_headroom_m); doors 0.65 x 1.95 m clear, the width of the free band beside the landing well (a naval watertight door is ~0.66 m), passing the 0.44 m body with 0.10 m each side but not a stretcher or the 0.70 m suited envelope: suited crew keep the crew tubes. Doors slide axially aft into pockets in the flank frame and the spoke-node bulkhead, seat on their frames and are normally closed. Utility zones 0.15 m over the ceiling and under the deck inside the liner; the tunnel cut in the fill keeps 0.10 m round the liner for frames and insulation."
+passage_x_m = [-1.15, -0.50]
+door_clear_height_m = 1.95
+corridor_clear_width_m = 0.90
+corridor_clear_height_m = 2.10
+deck_m = 0.05
+subfloor_m = 0.15
+overhead_m = 0.15
+liner_m = 0.05
+tunnel_margin_m = 0.10
+door_jamb_m = 0.05
+door_leaf_m = 0.04
+door_pocket_margin_m = 0.05
+node_bulkhead_m = 0.30
+body_margin_m = 0.05
+handrail_height_m = 0.95
+light_pitch_m = 3.0
+# Seraph's niche (Q51) at the corridor side of the habitation sector's -z door: a bay widening the corridor forward (+u) at the start of that
+# corridor half, along t (m of floor arc), across u from the corridor's forward wall, floor to height.
+alcove = { length_m = 0.80, depth_m = 0.55, height_m = 2.10 }
+
+[ring_circulation.budget]
+status = "PROTOTYPE"
+rationale = "Order-of-magnitude consequences only, never fed back into canon. An internal liner shielded by the fill: 15 kg/m2 (about 3 mm Al-Li skin plus stiffeners, frames and insulation), deck 10 kg/m2, 120 kg per sliding pressure door, 10 kg/m of lights, rails, ducts and cabling; cabin gas at 295 K."
+liner_areal_kg_m2 = 15.0
+deck_areal_kg_m2 = 10.0
+door_kg = 120.0
+fitout_kg_per_m = 10.0
+cabin_temperature_k = 295.0
+
+# STN-001 development-station boarding area (owner excursion direction 2026-10-26; station.py): the least of the station the player's
+# excursion needs, docked to Dock_Primary through the common androgynous soft-capture standard (Q33, 1.6 m passage), inside the 3 m docking
+# corridor. Not part of Wayfarer, not canon; every value PROTOTYPE. Docked, the stack is in free fall (SHIP frame, zero field): no floor.
+[station]
+status = "PROTOTYPE"
+unit = "m"
+evidence_ref = "dock_ports"
+rationale = "Judgment: a docking adapter carrying the station's own hatch (seated from the station side, sliding into the adapter collar), a 3 m boarding tunnel of the standard's 1.6 m passage, and a 3.2 m boarding node 4 m long as the trainee's starting area, all coaxial with the port so the passage is straight; two windows in the node's inboard end wall look at Wayfarer's collar; the node's far end holds the closed hatch to the station core (not modelled). Handrails at the trunk's handrail angles; lights; a boarding panel. The station is a stationary microgravity facility (no spin section is needed here). When Wayfarer undocks for a ring walk the station is shown at undock_standoff_m (a display stand-off, not a flight value)."
+adapter_length_m = 0.60
+hatch_frame_m = 0.08
+tunnel_length_m = 3.00
+node_length_m = 4.00
+node_clear_radius_m = 1.60
+wall_m = 0.08
+start_from_end_m = 1.10
+# the body line: the start beside node handrail 1; the stop in the entry chamber on the axis, mouth_gap_m inside its outer frame
+start_rho_m = 1.00
+mouth_gap_m = 0.15
+# the push-off from the start handrail is one straight coast to the axis this far outside the tunnel mouth, where the tunnel rails come in
+# reach (a free-flying body cannot turn: no corner inside a coast)
+entry_catch_m = 0.25
+# Wayfarer's entry chamber and trunk node have rails only at their walls (rho 1.23 m), out of reach from the port axis, so a turn there would
+# fall inside a coast. The station's boarding kit rigs a webbing strap on the axis in each (clipped to the hatch frames, never across a
+# hatch plane); the trainee holds it to stop in the chamber and to turn in the node. PROTOTYPE (the owner may prefer hatch-rim handholds).
+strap_offset_m = 0.30
+strap_deg = 255.0
+strap_frame_gap_m = 0.05
+handrail_deg = [135.0, 255.0]
+handrail_radius_m = 0.0175
+handrail_standoff_m = 0.08
+tunnel_rail_standoff_m = 0.07
+light_deg = [75.0, 315.0]
+panel_deg = 195.0
+window_deg = [40.0, 220.0]
+window_radius_m = 0.22
+core_hatch_radius_m = 0.55
+hatch_gap_m = 0.03
+trunk_settle_m = 1.0
+undock_standoff_m = 25.0
+
+# EXC-001 the player's station-to-ring excursion (owner direction 2026-10-26): technique choices of the runtime lines, PROTOTYPE.
+[excursion]
+status = "PROTOTYPE"
+unit = "m"
+evidence_ref = "ring_circulation_direction"
+rationale = "Ring B's spine port (0.90 m clear, derived down to fit hub 1's withdrawal paths) opens into a drum annulus 0.95 m deep and 1.2 m long. A rigid 1.75 m body proxy turns at most 5 deg there with 0.10 m clearance, so it cannot pass; a person tucks (knees to chest) and turns through it. The access line on ring B is therefore found for a tucked body tuck.RING_B m long (search: 1.0 m passes, 1.1 m does not), which unfolds again at the top of the crew tube's radial run. Ring A's 1.6 m port passes the full body (no tuck)."
+tuck = { RING_B = 1.00 }
 
 # OWN-002 (F1): IMPLEMENTATION registry of the owner's 2026-10-03b targets (Q1-Q33) that the PROTOTYPE geometry does not meet yet. The targets themselves are
 # the sourced WORKING values in their topical tables (habitat.spokes, habitat.ring_plane_spacing, habitat.ring_service_clearance, habitat.transfer,

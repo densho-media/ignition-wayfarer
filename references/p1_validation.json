@@ -1,8 +1,8 @@
 {
   "result": "PASS",
   "blender": "5.2.2 LTS",
-  "spec_hash": "bb0a5529f0d33090c3e86760a700810bc97918e0da39ac7052244377f238beb7",
-  "source_map_hash": "11c6a58d4c9bd6f0317b0ddbbbf96859e0bfdc4839ca64a9abfca8015bd3fb32",
+  "spec_hash": "97214954edccfaef9f8e5143dfd23eea35a3c36d308e30d3d0129d0545f6e996",
+  "source_map_hash": "699026c373f39a39e1bc6e08c02b1cb6db60e39a135d3d28c11543473b559069",
   "configurations": {
     "COAST": {
       "realizes": [
@@ -116,10 +116,15 @@
         "crew_passage": 15,
         "crew_bracket": 120,
         "entry_fixture": 750,
-        "route_fitout": 660,
+        "route_fitout": 628,
         "transfer_closure": 14,
         "ring_frame": 4,
         "ring_fill": 6,
+        "circulation_corridor": 6,
+        "circulation_fitout": 18,
+        "circulation_fixture": 114,
+        "circulation_portal": 72,
+        "circulation_door": 18,
         "ring_spoke": 48,
         "sector_pressure": 6,
         "sector_interior_deck": 6,
@@ -210,34 +215,34 @@
       },
       "sector_centers_frame_1": [
         [
-          85.04934692382812,
-          0.7673016786575317,
-          25.601789474487305
+          84.99140167236328,
+          0.7134559154510498,
+          25.712690353393555
         ],
         [
-          85.04934692382812,
-          -22.555448532104492,
-          -12.136388778686523
+          84.99140167236328,
+          -22.62456703186035,
+          -12.238466262817383
         ],
         [
-          85.04934692382812,
-          21.78815269470215,
-          -13.46539306640625
+          84.99140167236328,
+          21.911117553710938,
+          -13.474207878112793
         ],
         [
-          91.04936981201172,
-          0.7673016786575317,
-          25.601789474487305
+          90.99142456054688,
+          0.7134559154510498,
+          25.712690353393555
         ],
         [
-          91.04936981201172,
-          -22.555448532104492,
-          -12.136388778686523
+          90.99142456054688,
+          -22.62456703186035,
+          -12.238466262817383
         ],
         [
-          91.04936981201172,
-          21.78815269470215,
-          -13.46539306640625
+          90.99142456054688,
+          21.911117553710938,
+          -13.474207878112793
         ]
       ],
       "rotor_sweep_samples": 25,
@@ -405,10 +410,15 @@
         "crew_passage": 15,
         "crew_bracket": 120,
         "entry_fixture": 750,
-        "route_fitout": 660,
+        "route_fitout": 628,
         "transfer_closure": 14,
         "ring_frame": 4,
         "ring_fill": 6,
+        "circulation_corridor": 6,
+        "circulation_fitout": 18,
+        "circulation_fixture": 114,
+        "circulation_portal": 72,
+        "circulation_door": 18,
         "ring_spoke": 48,
         "sector_pressure": 6,
         "sector_interior_deck": 6,
@@ -499,34 +509,34 @@
       },
       "sector_centers_frame_1": [
         [
-          85.04934692382812,
-          0.7673016786575317,
-          25.601789474487305
+          84.99140167236328,
+          0.7134559154510498,
+          25.712690353393555
         ],
         [
-          85.04934692382812,
-          -22.555448532104492,
-          -12.136388778686523
+          84.99140167236328,
+          -22.62456703186035,
+          -12.238466262817383
         ],
         [
-          85.04934692382812,
-          21.78815269470215,
-          -13.46539306640625
+          84.99140167236328,
+          21.911117553710938,
+          -13.474207878112793
         ],
         [
-          91.04936981201172,
-          0.7673016786575317,
-          25.601789474487305
+          90.99142456054688,
+          0.7134559154510498,
+          25.712690353393555
         ],
         [
-          91.04936981201172,
-          -22.555448532104492,
-          -12.136388778686523
+          90.99142456054688,
+          -22.62456703186035,
+          -12.238466262817383
         ],
         [
-          91.04936981201172,
-          21.78815269470215,
-          -13.46539306640625
+          90.99142456054688,
+          21.911117553710938,
+          -13.474207878112793
         ]
       ],
       "rotor_sweep_samples": 25,
@@ -694,10 +704,15 @@
         "crew_passage": 15,
         "crew_bracket": 120,
         "entry_fixture": 750,
-        "route_fitout": 660,
+        "route_fitout": 628,
         "transfer_closure": 14,
         "ring_frame": 4,
         "ring_fill": 6,
+        "circulation_corridor": 6,
+        "circulation_fitout": 18,
+        "circulation_fixture": 114,
+        "circulation_portal": 72,
+        "circulation_door": 18,
         "ring_spoke": 48,
         "sector_pressure": 6,
         "sector_interior_deck": 6,
@@ -788,34 +803,34 @@
       },
       "sector_centers_frame_1": [
         [
-          85.04934692382812,
-          0.7673016786575317,
-          25.601789474487305
+          84.99140167236328,
+          0.7134559154510498,
+          25.712690353393555
         ],
         [
-          85.04934692382812,
-          -22.555448532104492,
-          -12.136388778686523
+          84.99140167236328,
+          -22.62456703186035,
+          -12.238466262817383
         ],
         [
-          85.04934692382812,
-          21.78815269470215,
-          -13.46539306640625
+          84.99140167236328,
+          21.911117553710938,
+          -13.474207878112793
         ],
         [
-          91.04936981201172,
-          0.7673016786575317,
-          25.601789474487305
+          90.99142456054688,
+          0.7134559154510498,
+          25.712690353393555
         ],
         [
-          91.04936981201172,
-          -22.555448532104492,
-          -12.136388778686523
+          90.99142456054688,
+          -22.62456703186035,
+          -12.238466262817383
         ],
         [
-          91.04936981201172,
-          21.78815269470215,
-          -13.46539306640625
+          90.99142456054688,
+          21.911117553710938,
+          -13.474207878112793
         ]
       ],
       "rotor_sweep_samples": 25,
@@ -980,10 +995,15 @@
         "crew_passage": 15,
         "crew_bracket": 120,
         "entry_fixture": 750,
-        "route_fitout": 660,
+        "route_fitout": 628,
         "transfer_closure": 14,
         "ring_frame": 4,
         "ring_fill": 6,
+        "circulation_corridor": 6,
+        "circulation_fitout": 18,
+        "circulation_fixture": 114,
+        "circulation_portal": 72,
+        "circulation_door": 18,
         "ring_spoke": 48,
         "sector_pressure": 6,
         "sector_interior_deck": 6,
@@ -1074,34 +1094,34 @@
       },
       "sector_centers_frame_1": [
         [
-          85.04934692382812,
-          0.7673016786575317,
-          25.601789474487305
+          84.99140167236328,
+          0.7134559154510498,
+          25.712690353393555
         ],
         [
-          85.04934692382812,
-          -22.555448532104492,
-          -12.136388778686523
+          84.99140167236328,
+          -22.62456703186035,
+          -12.238466262817383
         ],
         [
-          85.04934692382812,
-          21.78815269470215,
-          -13.46539306640625
+          84.99140167236328,
+          21.911117553710938,
+          -13.474207878112793
         ],
         [
-          91.04936981201172,
-          0.7673016786575317,
-          25.601789474487305
+          90.99142456054688,
+          0.7134559154510498,
+          25.712690353393555
         ],
         [
-          91.04936981201172,
-          -22.555448532104492,
-          -12.136388778686523
+          90.99142456054688,
+          -22.62456703186035,
+          -12.238466262817383
         ],
         [
-          91.04936981201172,
-          21.78815269470215,
-          -13.46539306640625
+          90.99142456054688,
+          21.911117553710938,
+          -13.474207878112793
         ]
       ],
       "rotor_sweep_samples": 1,
@@ -1266,10 +1286,15 @@
         "crew_passage": 15,
         "crew_bracket": 120,
         "entry_fixture": 750,
-        "route_fitout": 660,
+        "route_fitout": 628,
         "transfer_closure": 14,
         "ring_frame": 4,
         "ring_fill": 6,
+        "circulation_corridor": 6,
+        "circulation_fitout": 18,
+        "circulation_fixture": 114,
+        "circulation_portal": 72,
+        "circulation_door": 18,
         "ring_spoke": 48,
         "sector_pressure": 6,
         "sector_interior_deck": 6,
@@ -1360,34 +1385,34 @@
       },
       "sector_centers_frame_1": [
         [
-          85.04934692382812,
-          0.7673016786575317,
-          25.601789474487305
+          84.99140167236328,
+          0.7134559154510498,
+          25.712690353393555
         ],
         [
-          85.04934692382812,
-          -22.555448532104492,
-          -12.136388778686523
+          84.99140167236328,
+          -22.62456703186035,
+          -12.238466262817383
         ],
         [
-          85.04934692382812,
-          21.78815269470215,
-          -13.46539306640625
+          84.99140167236328,
+          21.911117553710938,
+          -13.474207878112793
         ],
         [
-          91.04936981201172,
-          0.7673016786575317,
-          25.601789474487305
+          90.99142456054688,
+          0.7134559154510498,
+          25.712690353393555
         ],
         [
-          91.04936981201172,
-          -22.555448532104492,
-          -12.136388778686523
+          90.99142456054688,
+          -22.62456703186035,
+          -12.238466262817383
         ],
         [
-          91.04936981201172,
-          21.78815269470215,
-          -13.46539306640625
+          90.99142456054688,
+          21.911117553710938,
+          -13.474207878112793
         ]
       ],
       "rotor_sweep_samples": 1,
@@ -1552,10 +1577,15 @@
         "crew_passage": 15,
         "crew_bracket": 120,
         "entry_fixture": 750,
-        "route_fitout": 660,
+        "route_fitout": 628,
         "transfer_closure": 14,
         "ring_frame": 4,
         "ring_fill": 6,
+        "circulation_corridor": 6,
+        "circulation_fitout": 18,
+        "circulation_fixture": 114,
+        "circulation_portal": 72,
+        "circulation_door": 18,
         "ring_spoke": 48,
         "sector_pressure": 6,
         "sector_interior_deck": 6,
@@ -1646,34 +1676,34 @@
       },
       "sector_centers_frame_1": [
         [
-          85.04934692382812,
-          0.7673016786575317,
-          25.601789474487305
+          84.99140167236328,
+          0.7134559154510498,
+          25.712690353393555
         ],
         [
-          85.04934692382812,
-          -22.555448532104492,
-          -12.136388778686523
+          84.99140167236328,
+          -22.62456703186035,
+          -12.238466262817383
         ],
         [
-          85.04934692382812,
-          21.78815269470215,
-          -13.46539306640625
+          84.99140167236328,
+          21.911117553710938,
+          -13.474207878112793
         ],
         [
-          91.04936981201172,
-          0.7673016786575317,
-          25.601789474487305
+          90.99142456054688,
+          0.7134559154510498,
+          25.712690353393555
         ],
         [
-          91.04936981201172,
-          -22.555448532104492,
-          -12.136388778686523
+          90.99142456054688,
+          -22.62456703186035,
+          -12.238466262817383
         ],
         [
-          91.04936981201172,
-          21.78815269470215,
-          -13.46539306640625
+          90.99142456054688,
+          21.911117553710938,
+          -13.474207878112793
         ]
       ],
       "rotor_sweep_samples": 1,
@@ -1792,7 +1822,7 @@
   "clearance_scope": "Conservative thermal-envelope/rotor screening; sampled ring motion with the rings rotating and stopped; 15-degree hypothetical plume screen, not validated plume/field clearance or general collision certification.",
   "simulation_rig": {
     "contract": "simulations/wf_sim_rig.json",
-    "contract_version": 42,
+    "contract_version": 43,
     "anchors": 42,
     "proxies": 9,
     "center_of_mass_placed": false
@@ -1993,7 +2023,7 @@
     "rated_occupancy": 12,
     "story_manifest": 6,
     "garden_sectors": 2,
-    "garden_zone_volume_m3": 4.3,
+    "garden_zone_volume_m3": 4.199999999999999,
     "garden_allocation_m3": 80.0,
     "functions": {
       "HABITATION": {
@@ -2013,14 +2043,14 @@
         "component": "WF_INTERIOR_WORK",
         "sectors": 2,
         "zones": 9,
-        "zone_volume_m3": 14.741900160471658,
-        "free_volume_m3": 25.25809983952834,
+        "zone_volume_m3": 13.291674648303134,
+        "free_volume_m3": 26.708325351696864,
         "by_zone_m3": {
           "burn_couch": 1.2600000000000005,
           "laboratory": 1.2000000000000002,
           "medical": 1.68,
           "operations": 4.505082527469856,
-          "stowage": 4.696817633001801,
+          "stowage": 3.2465921208332773,
           "workshop": 1.4000000000000004
         }
       },
@@ -2028,14 +2058,14 @@
         "component": "WF_INTERIOR_GARDEN",
         "sectors": 2,
         "zones": 7,
-        "zone_volume_m3": 13.674610764513211,
-        "free_volume_m3": 26.32538923548679,
+        "zone_volume_m3": 12.056874082054097,
+        "free_volume_m3": 27.943125917945903,
         "by_zone_m3": {
           "burn_couch": 1.2600000000000005,
-          "common": 4.230402130461167,
-          "garden": 2.15,
+          "common": 4.112890960170579,
+          "garden": 2.0999999999999996,
           "life_support": 2.2108868292441137,
-          "stowage": 3.82332180480793
+          "stowage": 2.3730962926394055
         }
       }
     },
@@ -3167,7 +3197,7 @@
       "direct_links": []
     },
     "components/WF_INTERIOR_HABITATION.blend": {
-      "generated_objects": 60,
+      "generated_objects": 49,
       "ids": [
         "Bunk_1",
         "Bunk_2",
@@ -3217,17 +3247,6 @@
         "Sector_Fit_Service_Tag_1",
         "Sector_Fit_Service_Tag_2",
         "Sector_Fit_Supply_Diffuser",
-        "Seraph_Niche_Charge_Rail",
-        "Seraph_Niche_Dock_Post_1",
-        "Seraph_Niche_Dock_Post_2",
-        "Seraph_Niche_Dock_Ring",
-        "Seraph_Niche_Dock_Spine",
-        "Seraph_Niche_Lid",
-        "Seraph_Niche_Partition",
-        "Seraph_Niche_Placard",
-        "Seraph_Niche_Placard_Text",
-        "Seraph_Niche_Privacy_Panel",
-        "Seraph_Niche_Service_Shelf",
         "Survival_Sector_Alarm_Panel"
       ],
       "direct_links": []
@@ -4946,7 +4965,7 @@
       ]
     },
     "subsystems/WF_HABITAT_A.blend": {
-      "generated_objects": 256,
+      "generated_objects": 367,
       "ids": [
         "Crew_Tube_1_1",
         "Crew_Tube_1_1_Arrest_Rail",
@@ -5158,6 +5177,117 @@
         "IF_VESTIBULE_1_SEAL_AFT_PRIMARY",
         "IF_VESTIBULE_1_SEAL_FWD",
         "IF_VESTIBULE_1_SEAL_FWD_PRIMARY",
+        "Ring_1_Circ_Corridor_1",
+        "Ring_1_Circ_Corridor_2",
+        "Ring_1_Circ_Corridor_3",
+        "Ring_1_Circ_Door_A1N",
+        "Ring_1_Circ_Door_A1P",
+        "Ring_1_Circ_Door_A2N",
+        "Ring_1_Circ_Door_A2P",
+        "Ring_1_Circ_Door_A3N",
+        "Ring_1_Circ_Door_A3P",
+        "Ring_1_Circ_Door_AC1",
+        "Ring_1_Circ_Door_AC2",
+        "Ring_1_Circ_Door_AC3",
+        "Ring_1_Circ_Fit_Band_1",
+        "Ring_1_Circ_Fit_Band_2",
+        "Ring_1_Circ_Fit_Band_3",
+        "Ring_1_Circ_Fit_Frame_1",
+        "Ring_1_Circ_Fit_Frame_2",
+        "Ring_1_Circ_Fit_Frame_3",
+        "Ring_1_Circ_Fit_Safety_1",
+        "Ring_1_Circ_Fit_Safety_2",
+        "Ring_1_Circ_Fit_Safety_3",
+        "Ring_1_Circ_Handrail_1",
+        "Ring_1_Circ_Handrail_2",
+        "Ring_1_Circ_Handrail_3",
+        "Ring_1_Circ_Light_1_01",
+        "Ring_1_Circ_Light_1_02",
+        "Ring_1_Circ_Light_1_03",
+        "Ring_1_Circ_Light_1_04",
+        "Ring_1_Circ_Light_1_05",
+        "Ring_1_Circ_Light_1_06",
+        "Ring_1_Circ_Light_1_07",
+        "Ring_1_Circ_Light_1_08",
+        "Ring_1_Circ_Light_1_09",
+        "Ring_1_Circ_Light_1_10",
+        "Ring_1_Circ_Light_1_11",
+        "Ring_1_Circ_Light_1_12",
+        "Ring_1_Circ_Light_1_13",
+        "Ring_1_Circ_Light_1_14",
+        "Ring_1_Circ_Light_1_15",
+        "Ring_1_Circ_Light_1_16",
+        "Ring_1_Circ_Light_1_17",
+        "Ring_1_Circ_Light_2_01",
+        "Ring_1_Circ_Light_2_02",
+        "Ring_1_Circ_Light_2_03",
+        "Ring_1_Circ_Light_2_04",
+        "Ring_1_Circ_Light_2_05",
+        "Ring_1_Circ_Light_2_06",
+        "Ring_1_Circ_Light_2_07",
+        "Ring_1_Circ_Light_2_08",
+        "Ring_1_Circ_Light_2_09",
+        "Ring_1_Circ_Light_2_10",
+        "Ring_1_Circ_Light_2_11",
+        "Ring_1_Circ_Light_2_12",
+        "Ring_1_Circ_Light_2_13",
+        "Ring_1_Circ_Light_2_14",
+        "Ring_1_Circ_Light_2_15",
+        "Ring_1_Circ_Light_2_16",
+        "Ring_1_Circ_Light_2_17",
+        "Ring_1_Circ_Light_3_01",
+        "Ring_1_Circ_Light_3_02",
+        "Ring_1_Circ_Light_3_03",
+        "Ring_1_Circ_Light_3_04",
+        "Ring_1_Circ_Light_3_05",
+        "Ring_1_Circ_Light_3_06",
+        "Ring_1_Circ_Light_3_07",
+        "Ring_1_Circ_Light_3_08",
+        "Ring_1_Circ_Light_3_09",
+        "Ring_1_Circ_Light_3_10",
+        "Ring_1_Circ_Light_3_11",
+        "Ring_1_Circ_Light_3_12",
+        "Ring_1_Circ_Light_3_13",
+        "Ring_1_Circ_Light_3_14",
+        "Ring_1_Circ_Light_3_15",
+        "Ring_1_Circ_Light_3_16",
+        "Ring_1_Circ_Light_3_17",
+        "Ring_1_Circ_Portal_1_00",
+        "Ring_1_Circ_Portal_1_01",
+        "Ring_1_Circ_Portal_1_02",
+        "Ring_1_Circ_Portal_1_03",
+        "Ring_1_Circ_Portal_1_04",
+        "Ring_1_Circ_Portal_1_05",
+        "Ring_1_Circ_Portal_1_06",
+        "Ring_1_Circ_Portal_1_07",
+        "Ring_1_Circ_Portal_1_08",
+        "Ring_1_Circ_Portal_1_09",
+        "Ring_1_Circ_Portal_1_10",
+        "Ring_1_Circ_Portal_1_11",
+        "Ring_1_Circ_Portal_2_12",
+        "Ring_1_Circ_Portal_2_13",
+        "Ring_1_Circ_Portal_2_14",
+        "Ring_1_Circ_Portal_2_15",
+        "Ring_1_Circ_Portal_2_16",
+        "Ring_1_Circ_Portal_2_17",
+        "Ring_1_Circ_Portal_2_18",
+        "Ring_1_Circ_Portal_2_19",
+        "Ring_1_Circ_Portal_2_20",
+        "Ring_1_Circ_Portal_2_21",
+        "Ring_1_Circ_Portal_2_22",
+        "Ring_1_Circ_Portal_2_23",
+        "Ring_1_Circ_Portal_3_24",
+        "Ring_1_Circ_Portal_3_25",
+        "Ring_1_Circ_Portal_3_26",
+        "Ring_1_Circ_Portal_3_27",
+        "Ring_1_Circ_Portal_3_28",
+        "Ring_1_Circ_Portal_3_29",
+        "Ring_1_Circ_Portal_3_30",
+        "Ring_1_Circ_Portal_3_31",
+        "Ring_1_Circ_Portal_3_32",
+        "Ring_1_Circ_Portal_3_33",
+        "Ring_1_Circ_Portal_3_34",
+        "Ring_1_Circ_Portal_3_35",
         "Ring_1_Fill_1",
         "Ring_1_Fill_2",
         "Ring_1_Fill_3",
@@ -5219,7 +5349,7 @@
       ]
     },
     "subsystems/WF_HABITAT_B.blend": {
-      "generated_objects": 258,
+      "generated_objects": 369,
       "ids": [
         "Crew_Tube_2_1",
         "Crew_Tube_2_1_Arrest_Rail",
@@ -5434,6 +5564,117 @@
         "IF_VESTIBULE_2_SEAL_AFT_PRIMARY",
         "IF_VESTIBULE_2_SEAL_FWD",
         "IF_VESTIBULE_2_SEAL_FWD_PRIMARY",
+        "Ring_2_Circ_Corridor_1",
+        "Ring_2_Circ_Corridor_2",
+        "Ring_2_Circ_Corridor_3",
+        "Ring_2_Circ_Door_B1N",
+        "Ring_2_Circ_Door_B1P",
+        "Ring_2_Circ_Door_B2N",
+        "Ring_2_Circ_Door_B2P",
+        "Ring_2_Circ_Door_B3N",
+        "Ring_2_Circ_Door_B3P",
+        "Ring_2_Circ_Door_BC1",
+        "Ring_2_Circ_Door_BC2",
+        "Ring_2_Circ_Door_BC3",
+        "Ring_2_Circ_Fit_Band_1",
+        "Ring_2_Circ_Fit_Band_2",
+        "Ring_2_Circ_Fit_Band_3",
+        "Ring_2_Circ_Fit_Frame_1",
+        "Ring_2_Circ_Fit_Frame_2",
+        "Ring_2_Circ_Fit_Frame_3",
+        "Ring_2_Circ_Fit_Safety_1",
+        "Ring_2_Circ_Fit_Safety_2",
+        "Ring_2_Circ_Fit_Safety_3",
+        "Ring_2_Circ_Handrail_1",
+        "Ring_2_Circ_Handrail_2",
+        "Ring_2_Circ_Handrail_3",
+        "Ring_2_Circ_Light_1_01",
+        "Ring_2_Circ_Light_1_02",
+        "Ring_2_Circ_Light_1_03",
+        "Ring_2_Circ_Light_1_04",
+        "Ring_2_Circ_Light_1_05",
+        "Ring_2_Circ_Light_1_06",
+        "Ring_2_Circ_Light_1_07",
+        "Ring_2_Circ_Light_1_08",
+        "Ring_2_Circ_Light_1_09",
+        "Ring_2_Circ_Light_1_10",
+        "Ring_2_Circ_Light_1_11",
+        "Ring_2_Circ_Light_1_12",
+        "Ring_2_Circ_Light_1_13",
+        "Ring_2_Circ_Light_1_14",
+        "Ring_2_Circ_Light_1_15",
+        "Ring_2_Circ_Light_1_16",
+        "Ring_2_Circ_Light_1_17",
+        "Ring_2_Circ_Light_2_01",
+        "Ring_2_Circ_Light_2_02",
+        "Ring_2_Circ_Light_2_03",
+        "Ring_2_Circ_Light_2_04",
+        "Ring_2_Circ_Light_2_05",
+        "Ring_2_Circ_Light_2_06",
+        "Ring_2_Circ_Light_2_07",
+        "Ring_2_Circ_Light_2_08",
+        "Ring_2_Circ_Light_2_09",
+        "Ring_2_Circ_Light_2_10",
+        "Ring_2_Circ_Light_2_11",
+        "Ring_2_Circ_Light_2_12",
+        "Ring_2_Circ_Light_2_13",
+        "Ring_2_Circ_Light_2_14",
+        "Ring_2_Circ_Light_2_15",
+        "Ring_2_Circ_Light_2_16",
+        "Ring_2_Circ_Light_2_17",
+        "Ring_2_Circ_Light_3_01",
+        "Ring_2_Circ_Light_3_02",
+        "Ring_2_Circ_Light_3_03",
+        "Ring_2_Circ_Light_3_04",
+        "Ring_2_Circ_Light_3_05",
+        "Ring_2_Circ_Light_3_06",
+        "Ring_2_Circ_Light_3_07",
+        "Ring_2_Circ_Light_3_08",
+        "Ring_2_Circ_Light_3_09",
+        "Ring_2_Circ_Light_3_10",
+        "Ring_2_Circ_Light_3_11",
+        "Ring_2_Circ_Light_3_12",
+        "Ring_2_Circ_Light_3_13",
+        "Ring_2_Circ_Light_3_14",
+        "Ring_2_Circ_Light_3_15",
+        "Ring_2_Circ_Light_3_16",
+        "Ring_2_Circ_Light_3_17",
+        "Ring_2_Circ_Portal_1_00",
+        "Ring_2_Circ_Portal_1_01",
+        "Ring_2_Circ_Portal_1_02",
+        "Ring_2_Circ_Portal_1_03",
+        "Ring_2_Circ_Portal_1_04",
+        "Ring_2_Circ_Portal_1_05",
+        "Ring_2_Circ_Portal_1_06",
+        "Ring_2_Circ_Portal_1_07",
+        "Ring_2_Circ_Portal_1_08",
+        "Ring_2_Circ_Portal_1_09",
+        "Ring_2_Circ_Portal_1_10",
+        "Ring_2_Circ_Portal_1_11",
+        "Ring_2_Circ_Portal_2_12",
+        "Ring_2_Circ_Portal_2_13",
+        "Ring_2_Circ_Portal_2_14",
+        "Ring_2_Circ_Portal_2_15",
+        "Ring_2_Circ_Portal_2_16",
+        "Ring_2_Circ_Portal_2_17",
+        "Ring_2_Circ_Portal_2_18",
+        "Ring_2_Circ_Portal_2_19",
+        "Ring_2_Circ_Portal_2_20",
+        "Ring_2_Circ_Portal_2_21",
+        "Ring_2_Circ_Portal_2_22",
+        "Ring_2_Circ_Portal_2_23",
+        "Ring_2_Circ_Portal_3_24",
+        "Ring_2_Circ_Portal_3_25",
+        "Ring_2_Circ_Portal_3_26",
+        "Ring_2_Circ_Portal_3_27",
+        "Ring_2_Circ_Portal_3_28",
+        "Ring_2_Circ_Portal_3_29",
+        "Ring_2_Circ_Portal_3_30",
+        "Ring_2_Circ_Portal_3_31",
+        "Ring_2_Circ_Portal_3_32",
+        "Ring_2_Circ_Portal_3_33",
+        "Ring_2_Circ_Portal_3_34",
+        "Ring_2_Circ_Portal_3_35",
         "Ring_2_Fill_1",
         "Ring_2_Fill_2",
         "Ring_2_Fill_3",

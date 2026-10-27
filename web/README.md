@@ -7,7 +7,7 @@ at <https://densho-media.github.io/ignition-wayfarer/>. Its four entry points ea
 | --- | --- | --- |
 | `/` | start page: Explore Ship or Enter Wayfarer | `index.html`, `site.css`, `release.json` (about 7 kB plus the manifest); no engine, model or library |
 | `/viewer/` | **Explore Ship**: three.js 0.170.0 engineering viewer | the viewer, three.js with the Draco decoder, `model/wayfarer-<hash>.glb` (5.9 MB) and its labels |
-| `/play/` | **Enter Wayfarer**: launcher; Start opens `demo01-<hash>.html` | Godot 4.7.2 `engine-<hash>.{js,wasm}` and the Demonstrator 01 pack `demo01-<hash>.pck` |
+| `/play/` | **Enter Wayfarer**: launcher; Start opens the walk (`demo01-<hash>.html?arg=--&arg=--excursion`, EXC-001), the second button the guided Demonstrator 01 tour | Godot 4.7.2 `engine-<hash>.{js,wasm}` and the one ship pack `demo01-<hash>.pck` (both experiences) |
 | `/review/` | technical review: release, model, checks, limitations, this browser | `release.json` |
 
 **Hologram styles (WEB-003).** Both experiences can show the ship as the two hologram looks of the Blender shots and the Godot
@@ -135,7 +135,7 @@ mkdir -p runs/preview && ln -sfn ../web-site runs/preview/ignition-wayfarer && p
   - no request to `play/`, and no script errors
 - **Enter Wayfarer:**
   - The launcher requests no engine before Start.
-  - Start boots Godot and Demonstrator 01 with no request to `viewer/` and no engine or script error.
+  - Start boots Godot and the walk (it prints `WF_EXCURSION ready`) with no request to `viewer/` and no engine or script error.
   - The ACI first-launch prompt takes Enter.
 - **Switching:**
   - Exit and Back return to the start page with no canvas left.
@@ -158,6 +158,9 @@ mkdir -p runs/preview && ln -sfn ../web-site runs/preview/ignition-wayfarer && p
   - Help is a modal.
   - Upright and tablet sizes keep the same run.
   This is emulation: it checks behaviour, not a phone's frame rate (docs/wayfarer-mobile-controls-plan.md).
+- **Touch walk (EXC-001):** the walk on the same emulated phone, after the touch journey in the same browser: the touch welcome by
+  a tap; the 1-D stick down the boarding line to the shut outer hatch (the push-off into the coast across it is refused); Use opens
+  it; a look drag turns the view; Map and View answer; no engine or script error.
 
 `--record` writes the summary and metrics into the site's `release.json`. `--live <url>` repeats the checks against a deployed
 site, `--no-recording` skips the recording and `--no-touch` the touch journey.

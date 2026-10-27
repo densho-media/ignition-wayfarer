@@ -770,6 +770,9 @@ def sector_check(s, function, els=None):
         if b['zone'] == 'burn_couch':
             keep.append((b['name']+' free strip', (b['max'][0], -9, b['min'][2]), (b['max'][0]+w['couch_front_clear_m'], 9, b['max'][2]), .04))
     keep += [('aisle', (-9, -9, -a), (9, 9, a), 1e-4), ('landing well', (L['well_x'][0], -9, L['well_z'][0]), (L['well_x'][1], 9, L['well_z'][1]), 1e-4)]
+    if 'ring_circulation' in s:
+        x0, x1 = s['ring_circulation']['passage_x_m']
+        keep.append(('through-passage', (x0, -9, -9), (x1, 9, 9), .015))     # CIRC-001: walked end to end; a 12 mm placard may face it
     fails = []
     for q in els:
         parts = [list(seg) for seg in zip(q['points'], q['points'][1:])] if q['shape'] == 'rod' else [wbox_corners(q)]

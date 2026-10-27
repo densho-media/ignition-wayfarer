@@ -86,6 +86,9 @@ CHECKS = [
     # Integrated Demonstrator 01: all nine chapters in autoplay (demo01.gd); it quits itself; WF_GODOT_DEMO.
     dict(name='demo01', args=['--fixed-fps', '60', 'res://scenes/demo01.tscn', '--quit-after', '60000', '--', '--check-demo'],
          scene='scenes/demo01.tscn', marker='"result":"PASS"'),
+    # EXC-001: station -> ring A circuit -> station, then ring B, by the player's own actions (excursion check.gd); WF_GODOT_EXCURSION.
+    dict(name='excursion', args=['--fixed-fps', '60', 'res://scenes/excursion.tscn', '--quit-after', '300000', '--', '--check-excursion'],
+         scene='scenes/excursion.tscn', marker='"result":"PASS"'),
     # M7.1: the automated-recording lifecycle (ARRIVAL -> INSPECT completed -> tail -> exit 0); WF_DEMO_RECORDING.
     dict(name='demo01-record', args=['--fixed-fps', '30', 'res://scenes/demo01.tscn', '--quit-after', '3000', '--',
                                      '--autoplay', '--record-exit', '--from-chapter=ARRIVAL'],

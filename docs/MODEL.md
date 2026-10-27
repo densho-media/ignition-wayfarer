@@ -1477,6 +1477,50 @@ pressure boundary or mechanism.
   panels, and no part in a sector pressure envelope; the envelope screen keeps each flank assembly off ring A's crew-tube pack. The
   M4 construction inside the frame (joints, webs, cassettes, covers, nodes, rim band), the spokes, crew tubes and hub are unchanged.
 
+## Continuous ring circulation (CIRC-001)
+
+The owner's design direction of 2026-10-26 (no owner row yet) makes continuous circulation a requirement: every crew member can walk the
+whole circumference of either ring and back. `ring_circulation.py` (`[ring_circulation]`, all PROTOTYPE) joins each ring's three
+pressurized sectors into one walking circuit while every sector stays an independently closable compartment. Plan:
+`references/RING_CIRCULATION_PLAN.svg`; fit screen `python3 src/wayfarer/ring_circulation.py` (`references/p1_ring_circulation.json`);
+renders `presentation/circulation_preview.py` (whole ring with the fill cut away, eye level in a corridor and in the through-passages).
+
+- **Through-passage.** Every sector has a tangential passage at x −1.15..−0.50 m (sector frame), between the aft couch row and the
+  berths, stations, Garden rack and landing well, from side wall to side wall across the aisle. It is the only band free in all three
+  functions; the work and Garden couch-2 lockers now end at x −1.15 m like the habitation ones and the Garden rack and mess start at
+  −0.50 m (0.05 m shorter). Seraph's habitation niche (Q51 slot) lay in that band: it moves to a reserved alcove (0.80 × 0.55 m) on the
+  corridor side of that sector's −z door, still beside the berths but outside the sector boundary, and is not built (owner to confirm).
+- **Doors.** A sliding pressure door in each sector side wall (0.65 × 1.95 m clear, the width beside the landing well; it passes the
+  0.44 m body with 0.10 m each side, not a stretcher or the 0.70 m suited envelope) and one in a pressure bulkhead at each structural
+  spoke node, half way along each fill. Leaves slide aft into pockets in the flank frame and the bulkhead, seat on their frames and are
+  normally closed. Per ring 9 doors and 9 compartments (3 sectors, 6 corridor halves of 56 m³).
+- **Corridors.** One per fill, from the side wall of one sector to the next (about 53 m each, 159 m per ring), 0.90 m clear (the sector
+  aisle) × 2.10 m (interior.min_headroom_m), centred on the door band, so aft of the ring plane. The floor is the cylinder through the
+  sector deck plate's edge (r 28.152 m): the threshold is flush and the corridor is level in spin gravity (0.504 g). Inside the liner
+  0.15 m of utilities over the ceiling and under the deck; the tunnel cut in the fill keeps 0.10 m round the liner. The fill's
+  construction (`habitat_ring.frame_mesh`) is split round the tunnel: the web frames become portals and the spoke-node housing splits
+  round it. Light strips every 3 m (the route's cabin light class) and a handrail on the forward wall. Shirt-sleeve only: suited crew
+  keep the crew tubes.
+- **Interior language.** The corridors take the sectors' scheme A grammar (`ring_circulation.fitout`, depiction only): the sector deck
+  and overhead finishes, flush dark frame strips across walls and ceiling at the sectors' 0.70 m overhead-frame pitch, the blue route
+  band along the floor by the forward wall and safety-orange trim round both faces of every door opening. In the runtime each door
+  carries a sign on both faces, "here > beyond" by compartment (A1, AC1a, ...). The cultural pass (31_ARCHITECTURE) waits for the
+  whitebox review.
+- **Consequences (budget(), PROTOTYPE estimates).** Pressurized volume +338 m³ per ring: both rings 434 → 1,111 m³ gross, 2.4 × the
+  BASELINE 400–460 m³ maximum; atmosphere +641 kg at 80 kPa and 295 K. Mass about 40 t for both rings (liner 15 kg/m², deck, 18
+  doors, fit-out), 12 % of the 330 t rotating allowance and not budgeted; at the sectors' areal mass it would be 301 t. Spoke axial load
+  and spin energy grow with it (+49 kN per spoke at 1.5 g). The tunnel takes 507 m³ of each ring's 2,249 m³ fill, leaving room for the
+  80 m³ of rotating water per ring. Aft down (rings stopped) a corridor is a 0.9 m high tunnel, so it is not one of Q47's essential
+  1.5 g routes: those stay the crew tubes and the spine.
+- **Conflicts (conflicts()):** 12!A13 (BASELINE: pressurized rooms only in sectors), the 400–460 m³ gross envelope (BASELINE), the
+  330 t rotating allowance (PROVISIONAL), Seraph's niche slot (Q51 ACCEPTED, dimensions OPEN), the frame load path (OD-016 OPEN), the
+  re-blocked lockers and Garden rack (PROTOTYPE, Q50 tray area). The docked rule (14!A8) means a ring walk from the station needs
+  undocking first. Nothing here is canon.
+- **Benefits weighed.** Each sector gains two level exits besides its crew tube (egress and fire isolation by door), the crew can move
+  between sectors of a ring without two crew-tube ladder climbs (about 20 m each), and the fill cassettes become reachable in shirt sleeves. Against them:
+  the volume, gas, mass and leak paths above, through-traffic in the habitation sector's sub-aisle (between the other two sectors the
+  shorter way avoids it; a full circuit cannot) and less water beside the crew in a corridor than in a sector.
+
 ## Ring B route in the M7 grammar (Phase 4 S8a)
 
 The detail pack `ring_b_transfer` (WF-RING-B) gives ring B's route the accepted M7 standard (owner P4-INT zone Z4: ring B transfer and
@@ -1695,6 +1739,61 @@ the stop list marks where the body is (spine, then transfer, then habitat), not 
 - the 190 s autoplay replay of all seven chapters at 1280 × 800, 30 fps, with a contact sheet, `runs/20261012T200000Z-m1replay`;
 - the chapter stills at 1280 × 800, `runs/20261012T180000Z-m1ui`.
 - a hands-on windowed run by the user on 2026-10-13, keyboard and mouse, with no findings.
+
+## Station-to-ring excursion (EXC-001)
+
+`godot/scenes/excursion.tscn` (`scripts/excursion/`) is one continuous, player-controlled run from the development station into Wayfarer,
+round a whole habitat ring and back to the station, for either ring and as often as wanted without a reset. It reads the DOCKED
+package and the rig (contract 43: `dynamics.stages.boarding`, `trunk`, `access` / `access_b`, `tube` / `tube_b`, `circuit`); Godot
+computes no spacecraft geometry. It is SIMULATION_ONLY. It is the main interactive experience: the web launcher's Start opens it
+(Demonstrator 01 is the second button, the guided tour) and the native review menu lists it first; `godot --path godot
+res://scenes/excursion.tscn` opens it directly. On a touch device (MOB-001) the left thumb's stick moves along the body line (1-D) or
+on the deck (2-D), the right thumb drags to look, and Use (labelled with what it works, e.g. "Use · open outer hatch"), Ops at a
+trunk panel, View and Map appear when they apply; a phone layout keeps the goal and prompt top left and the ring map under the
+utility row.
+
+- **The station (STN-001, `station.py`, `[station]`, PROTOTYPE, not part of Wayfarer).** A docking adapter mated to Dock_Primary through
+  the common soft-capture standard (Q33, 1.6 m passage) with the station's own hatch, a 3 m boarding tunnel and a 4 m boarding node
+  (3.2 m diameter) inside the 3 m docking corridor: handrails, light strips, a boarding panel, two windows looking at the collar and the
+  closed hatch to the station core (not modelled). Docked, station and ship are one rigid stack in free fall: the SHIP frame, zero field,
+  no floor to stand on (the painted band is an orientation convention). Godot builds its whitebox and colliders from the rig.
+- **Moving.** Weightless (station, airlock, trunk, drums, crew tubes) the trainee moves hand over hand along the rig's body lines (the M2
+  technique): W/S pull toward the view; where no rail is in reach the body coasts at its push-off speed and cannot stop, so a push-off
+  into a stretch with a shut closure is refused. A push-off brings the body to the line's pace before the hands let go; E within 0.8 m
+  of the ring B junction lets the hands carry the body to it and turn in; the ladder taken from the deck draws the body onto it at no
+  more than the line's pace. In a ring the trainee walks the deck (friction-limited foot contact, 1 m/s) with the
+  mouse to look; the crew-tube and landing-well ladders are climbed rung by rung on the same line. E operates what is in reach (a hatch
+  from its panel at the nearest rail stop, a corridor or sector door, the drum's cycle at its restraint station, the ladder, the ring B
+  branch at its spine port); O asks for the operating change at a trunk panel; V outside view; M ring map.
+- **The boarding line** (`station.boarding_line`): a push-off from the node's handrail straight to the port axis at the tunnel mouth,
+  then down the axis through the station hatch, Wayfarer's outer hatch, the entry chamber (the stop for the airlock cycle), the inner
+  hatch and a pivot head-aft into the trunk (least clearance 0.126 m), then aft along the trunk axis to ring B's and ring A's access
+  starts. Every coast is straight: a free-flying body cannot turn, so each turn lies where a grip is in reach. Wayfarer's chamber and
+  trunk node have rails only at their walls (1.23 m off the axis, out of reach), so the station's boarding kit rigs a webbing strap
+  on the axis in each, clipped to the hatch frames and never across a hatch plane (PROTOTYPE; hatch-rim handholds would be the ship's
+  alternative). The station opens its own hatch while docked and shuts
+  it before separating; the airlock's two hatches are never open together.
+- **Operating modes.** Docked, the rings are stopped and locked (14!A8): O at a trunk panel runs DOCKED → COAST in the owner's order
+  (UNDOCK, OCCUPANTS_SECURED, RINGS_UNLOCKED, RINGS_SPIN_UP) and, on the way back, COAST → DOCKED (spin down timed to end at the
+  index, lock, DOCK). The trainee holding still on a rail is the secured occupant; the 1800 s study ramp runs ×90 and the station
+  stands off 25 m while undocked (display choices, PROTOTYPE).
+- **Transfer.** The ring A access line and tube run are Demonstrator 01's; ring B's are new (`crew_dynamics.access_stage(s, 2)`): its
+  0.90 m spine port opens into a drum annulus 0.95 m deep and 1.2 m long, where a rigid 1.75 m body turns at most 5° with 0.10 m
+  clearance, so the trainee tucks to a 1.0 m body there (`[excursion] tuck`, PROTOTYPE technique, 1.1 m does not pass) and is guided
+  on the port's frame into the restraint pose (least clearance 0.101 m), unfolding at the top of the crew tube. At the restraint pose E
+  cycles the drum through the DYN-027 interlock: shut the open side, wait for the ring's phase, the 4 s ramp (MEC-019 OPEN), open the
+  matched side; the same on the way back. Frames change only where they coincide (despun drum at the index, synchronized drum on the
+  ring), so the body never jumps.
+- **The circuit** (`ring_circulation.stage`): the sectors' deck, overhead (open round the hatch), bulkheads, interior blocks, landing
+  chase and side walls with the door openings as boxes; the corridors' clear surfaces as a two-sided trimesh; each door a closed-leaf
+  collider, disabled only when the leaf is fully open (mesh and collider move together). 177 m round each ring. The HUD records the
+  circumference walked (72 bins) and the checklist per ring: boarded, circuit, back aboard the station.
+- **Check** (`-- --check-excursion`, WF_GODOT_EXCURSION, in `runtime-export`): both excursions driven through the player's own actions:
+  the shut outer hatch and spine-port gate stop the body, the inner hatch refuses while the outer is open, a shut corridor door blocks a
+  body walking into it, both circuits are walked completely (72 of 72 bins, out of the landing well onto the passage and back), the
+  rings lock at their index, the station is reached again, and no step moves the body more than 0.05 m beyond its own velocity (0.04 m
+  measured, at spawn). Both excursions take 88,000 physics frames, about 100 s headless natively; the same check passes in the
+  WebAssembly build in headless Chromium with drawing off (about 1,470 s), and the scene draws there without errors.
 
 ## Ship Navigator (SNAV-001)
 

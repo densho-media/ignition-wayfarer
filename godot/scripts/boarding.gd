@@ -96,6 +96,10 @@ func vector(value: Array) -> Vector3:
 	return Vector3(value[0], value[2], -value[1])
 
 func _ready() -> void:
+	if "--excursion" in OS.get_cmdline_user_args():
+		# EXC-001: the station-to-ring excursion is its own scene; the web build's one package starts it through this switch.
+		get_tree().change_scene_to_file.call_deferred("res://scenes/excursion.tscn")
+		return
 	var canvas := CanvasLayer.new()
 	add_child(canvas)
 	if not FileAccess.file_exists("res://generated/manifest_docked.json"):

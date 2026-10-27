@@ -72,7 +72,7 @@ const GODOT_THREADS_ENABLED = $GODOT_THREADS_ENABLED;
   const detail = document.getElementById('detail');
   const bar = document.querySelector('#bar span');
   const ALLOWED = ['--disable-render-loop', '--fixed-fps', '30', '60', '--', '--check-demo', '--autoplay', '--record-exit', '--no-navigator',
-    '--touch', '--no-touch', '--touch-probe'];
+    '--touch', '--no-touch', '--touch-probe', '--excursion', '--check-excursion'];
   const asked = new URLSearchParams(location.search).getAll('arg');
   const args = asked.filter(a => ALLOWED.includes(a) || /^--from-chapter=[A-Z]+$/.test(a));
   function fail(err) {

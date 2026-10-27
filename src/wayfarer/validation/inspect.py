@@ -21,6 +21,7 @@ from common import pose_drive_state, pose_configuration, pose_timeline, pose_tra
 from build import COMPONENTS, SUBSYSTEMS, RETIRED, RING_FAMILY
 import sim_rig
 import hull_geometry
+import ring_circulation
 import layout
 import habitat_interior
 import route_fitout
@@ -715,7 +716,8 @@ def inspect(root=ROOT, output=None, scope=None):
             lo,hi=habitat_ring.sector_frame_extent(s)
             assert all(math.isclose(a,h-l,abs_tol=1e-4) for a,l,h in zip(env.dimensions,lo,hi)),(list(env.dimensions),lo,hi)
             hole=32*L['clear_r']**2*math.sin(math.pi/32)*t_skin
-            assert abs(mesh_volume(env.data)-(habitat_ring.polygon_volume(s)-habitat_ring.cavity_m3(s)-hole))<=.1*hole,mesh_volume(env.data)
+            # CIRC-001: less the two side-wall door openings
+            assert abs(mesh_volume(env.data)-(habitat_ring.polygon_volume(s)-habitat_ring.cavity_m3(s)-hole-ring_circulation.sector_door_opening_m3(s)))<=.1*hole,mesh_volume(env.data)
             # Open along the hatch axis and up to the clear radius, closed just outside the frame.
             tree=BVHTree.FromPolygons([v.co for v in env.data.vertices],[tuple(q.vertices) for q in env.data.polygons]);up=Vector((0,-1,0))
             for dx,dz,closed in ((0,0,False),(.75,0,False),(0,.75,False),(-.75,0,False),(0,-.75,False),(0,L['frame_r']+.05,True)):
@@ -1052,7 +1054,7 @@ def inspect(root=ROOT, output=None, scope=None):
     # Evaluated sector skins (HUM-001 zone 5): each the closed-form envelope less its cavity and the hatch opening; the envelopes (the gross volume,
     # molded to the skin's outer face) stay inside the BASELINE gross range.
     n_sec=len(habitat_ring.sectors(s));hole=32*human_entry.landing(s)['clear_r']**2*math.sin(math.pi/32)*s['habitat_ring']['sector_skin_m']
-    assert abs(sector_volume-n_sec*(habitat_ring.polygon_volume(s)-habitat_ring.cavity_m3(s)-hole))<=n_sec*.1*hole,sector_volume
+    assert abs(sector_volume-n_sec*(habitat_ring.polygon_volume(s)-habitat_ring.cavity_m3(s)-hole-ring_circulation.sector_door_opening_m3(s)))<=n_sec*.1*hole,sector_volume
     assert s['habitat']['volume']['gross_min_m3']<=n_sec*habitat_ring.polygon_volume(s)<=s['habitat']['volume']['gross_max_m3'],n_sec*habitat_ring.polygon_volume(s)
     assert counts['sim_proxy']==0,'Simulation proxies must stay out of evaluated geometry'
     assert not counts['hull_door'],'No rotor-bay doors: the rings stay at full size'

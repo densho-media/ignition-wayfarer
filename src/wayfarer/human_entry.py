@@ -618,9 +618,10 @@ def landing_fixtures(s):
     return out
 
 
-def sector_frame(s):
-    """The human-entry rotor, the landing sector (the spine port's) and maps from its sector frame to the vehicle frame at the index pose."""
-    rot, v, la = vestibule_station(s); k = v['ports'][0]; _, X, Y, Z = crew_transfer.sector_axes(s, la[k])
+def sector_frame(s, j=None):
+    """The human-entry rotor (j, default ring A), the landing sector (the spine port's) and maps from its sector frame to the vehicle frame at
+    the index pose."""
+    rot, v, la = vestibule_station(s, j); k = v['ports'][0]; _, X, Y, Z = crew_transfer.sector_axes(s, la[k])
     point = lambda p: at_index(rot, crew_transfer.sector_point(s, la[k], p))
     vector = lambda d: at_index(rot, tuple(X[i]*d[0]+Y[i]*d[1]+Z[i]*d[2] for i in range(3)), False)
     return rot, k, point, vector

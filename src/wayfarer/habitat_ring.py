@@ -293,6 +293,14 @@ def joints(s, t0, t1):
     return [a for a in out if a > t0+1e-9]
 
 
+def tunnel(s):
+    """CIRC-001: (u0, u1, r0, r1) of the corridor tunnel through every fill (ring_circulation.section), or None without the circuit."""
+    if 'ring_circulation' not in s:
+        return None
+    import ring_circulation
+    return ring_circulation.section(s)['tunnel']
+
+
 def frame_mesh(s, q):
     """Display mesh of one frame part with its construction (habitat_ring.construction, PROTOTYPE): vertices, faces and one class per
     face (frame, joint, band, cassette, cover, service, service_cover). The inner hoop stays frame_solid. Every piece lies inside the part's
@@ -300,8 +308,21 @@ def frame_mesh(s, q):
     r = s['habitat_ring']; c = r['construction']; n = r['display']['hoop_facets']
     vs, fs, cls = [], [], []
 
+    hole = tunnel(s) if q.get('kind') == 'ring_fill' else None
+
     def add(kind, u0, u1, r0, r1, t0, t1, k=None):
-        if t1-t0 < 1e-9:
+        if t1-t0 < 1e-9 or u1-u0 < 1e-9 or r1-r0 < 1e-9:
+            return
+        if hole and u0 < hole[1] and hole[0] < u1 and r0 < hole[3] and hole[2] < r1:
+            # CIRC-001: the corridor's tunnel runs the whole fill; a piece it crosses keeps the four solids round it.
+            tu0, tu1, tr0, tr1 = max(u0, hole[0]), min(u1, hole[1]), max(r0, hole[2]), min(r1, hole[3])
+            for a in ((u0, tu0, r0, r1), (tu1, u1, r0, r1), (tu0, tu1, r0, tr0), (tu0, tu1, tr1, r1)):
+                add_piece(kind, *a, t0, t1, k)
+            return
+        add_piece(kind, u0, u1, r0, r1, t0, t1, k)
+
+    def add_piece(kind, u0, u1, r0, r1, t0, t1, k=None):
+        if u1-u0 < 1e-9 or r1-r0 < 1e-9:
             return
         v, f = ring_solid(u0, u1, r0, r1, t0, t1, k or max(2, math.ceil(n*(t1-t0)/math.tau)))
         base = len(vs); vs.extend(v); fs.extend(tuple(base+i for i in face) for face in f); cls.extend([kind]*len(f))

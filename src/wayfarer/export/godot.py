@@ -395,6 +395,16 @@ def mechanism_frames(s, closures=False):
                     d = rest[k][0].to_3x3() @ local
                     shut = {k: (Matrix.Translation(d) @ rest[k][0], rest[k][1])}
                     bind(name, [k], shut, function='SECTOR_LEAF', basis='human_entry.landing leaf_open -> leaf_closed in its sector frame (no Blender driver)')
+        # EXC-001: the leaf of every human-entry ring's port sector (ring B's landing on the excursion), bound the same way.
+        for j in s['human_entry']['vestibule_rotors']:
+            _, kk, point, _ = human_entry.sector_frame(s, j); name = f'Sector_Hatch_Leaf_{j}_{kk}'
+            if name in plates:
+                continue
+            at = Vector(point((L['x'], L['leaf_open'][0], L['leaf_open_z'])))
+            k = min((k for k in rest if rest[k][1] == 'Sector_Hatch_Leaf'), key=lambda k: (rest[k][0].translation-at).length)
+            d = rest[k][0].to_3x3() @ local
+            shut = {k: (Matrix.Translation(d) @ rest[k][0], rest[k][1])}
+            bind(name, [k], shut, function='SECTOR_LEAF', basis='human_entry.landing leaf_open -> leaf_closed in its sector frame (no Blender driver)')
     sample()
     return frames, rotors, drums, plates, members
 

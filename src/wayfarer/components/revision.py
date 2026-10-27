@@ -29,6 +29,10 @@ def sector(c,s):
     vs,fs=habitat_ring.sector_skin(s);L=human_entry.landing(s)
     obj=mesh(c,'Sector_Pressure_Envelope',vs,fs,material('Habitat',(.68,.77,.73)),kind='sector_pressure')
     obj=cut(obj,[((L['x'],L['tip_y']-.2,L['z']),(L['x'],L['seat']-.05,L['z']),L['clear_r'])])
+    if 'ring_circulation' in s:
+        # CIRC-001: a pressure-door opening in each side wall at the through-passage band (ring_circulation.sector_door_cutters).
+        import ring_circulation
+        obj=cut(obj,ring_circulation.sector_door_cutters(s));obj['circulation_doors']=2
     obj['rule_ref']='pressurized_ring_rule';obj['geometry_status']='PROTOTYPE';obj['gross_m3']=habitat_ring.sector_gross_m3(s)
     obj['cavity_m3']=habitat_ring.cavity_m3(s);obj['skin_m']=s['habitat_ring']['sector_skin_m'];obj['clear_radius_m']=L['clear_r']
     obj['geometry_basis']=('PROTOTYPE sector arc solved from the gross-volume target; the pressure rule (400-460 m3 gross across occupied sectors) is BASELINE. '
@@ -285,6 +289,10 @@ def ring_asset(c,s,assets,j):
             obj.parent=parent
             obj['evidence_ref']='ring_architecture';obj['rule_ref']='ring_shielding'
             obj['geometry_basis']='PROTOTYPE display frame; section, spokes and sizing are OPEN (08!A53, OD-016)';obj['geometry_status']='PROTOTYPE'
+        if 'ring_circulation' in s:
+            # CIRC-001: the walking corridors through the fills, their portals and pressure doors (components/circulation.py).
+            import circulation
+            circulation.ring(c,s,parent,j)
         # Twin spoke rails per spoke join the hub drum to the frame; the three on the sector angles carry the crew tubes.
         for q in (q for q in habitat_ring.spokes(s) if q['ring']==j):
             rail=line(c,q['name'],[radial(q['u'],q['r0'],q['angle']),radial(q['u'],q['r1'],q['angle'])],q['radius'],metal,kind='ring_spoke');rail.parent=parent

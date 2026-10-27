@@ -212,11 +212,16 @@ def cylinder_mesh(a, b, radius, n=64):
 
 
 def cut(obj, cutters, n=64, operation='DIFFERENCE'):
-    """Applies EXACT boolean differences (or, with operation INTERSECT, intersections) of closed cylinders (a, b, radius) to a mesh object; the
-    cutters are temporary (HUM-001 openings and trims)."""
+    """Applies EXACT boolean differences (or, with operation INTERSECT, intersections) of closed cylinders (a, b, radius) or boxes (8 corners) to
+    a mesh object; the cutters are temporary (HUM-001 openings and trims, CIRC-001 door openings)."""
     scene = bpy.context.scene; tools = []
-    for k, (a, b, r) in enumerate(cutters):
-        vs, fs = cylinder_mesh(a, b, r, n)
+    for k, cutter in enumerate(cutters):
+        if len(cutter) == 8:
+            # CIRC-001: a box cutter, 8 corners indexed 4*i + 2*j + k along a right-handed frame (the interior box winding)
+            vs, fs = list(cutter), [(0, 1, 3, 2), (4, 6, 7, 5), (0, 4, 5, 1), (2, 3, 7, 6), (0, 2, 6, 4), (1, 5, 7, 3)]
+        else:
+            a, b, r = cutter
+            vs, fs = cylinder_mesh(a, b, r, n)
         data = bpy.data.meshes.new(f'WF_Cutter_{k}'); data.from_pydata(vs, [], fs); data.update()
         tool = bpy.data.objects.new(data.name, data); scene.collection.objects.link(tool); tools.append(tool)
         mod = obj.modifiers.new(f'Cut_{k}', 'BOOLEAN'); mod.operation = operation; mod.solver = 'EXACT'; mod.object = tool

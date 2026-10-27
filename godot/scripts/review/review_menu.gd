@@ -1,11 +1,13 @@
 extends Control
 ## U01: the review menu, the project's start scene (a development review tool, not the game's menu). It lists the review sessions so
 ## no command line or key has to be remembered: a guided session opens its scene with the step-by-step guide (review_guide.gd);
-## sessions whose guide is not built yet open the scene as it is and say so.
+## sessions whose guide is not built yet open the scene as it is and say so. The walk (EXC-001), the main interactive experience, comes first.
 ##   godot --path godot                      (opens this menu)
 ##   godot --path godot res://scenes/boarding.tscn -- --review=ring_b      (one session directly)
 
 const SESSIONS := [
+	{"key": "excursion", "title": "The walk: station to ring and back", "what": "The main interactive experience. Start in the development station, board Wayfarer as the trainee, cross into ring A or ring B, walk its whole circumference through every sector and corridor and return to the station: one continuous run under your control (EXC-001).",
+		"scene": "res://scenes/excursion.tscn", "guided": false, "main": true, "minutes": 20, "todo": "its own HUD guides each step"},
 	{"key": "ring_b", "title": "Ring B in body mode", "what": "Walk the ring B rooms as a physics body and drop a tool to see the Coriolis effect.",
 		"scene": "res://scenes/boarding.tscn", "guided": true, "minutes": 3},
 	{"key": "vestibule", "title": "Vestibule drill", "what": "The seven-step handoff from the still spine into spinning ring A, one V press per step.",
@@ -128,7 +130,8 @@ func _row(i: int, s: Dictionary) -> Control:
 	b.focus_mode = Control.FOCUS_NONE
 	b.custom_minimum_size = Vector2(760, 64)
 	var guided: bool = s.guided
-	var border := WfReviewGuide.C_NEXT if guided else Color("444441")
+	var main: bool = s.get("main", false)
+	var border := WfReviewGuide.C_NOW if main else (WfReviewGuide.C_NEXT if guided else Color("444441"))
 	for st in ["normal", "hover", "pressed"]:
 		var sb := WfReviewGuide._box(Color("232427") if st == "normal" else Color("2C2D31"), border, 10, 12)
 		b.add_theme_stylebox_override(st, sb)
@@ -143,11 +146,12 @@ func _row(i: int, s: Dictionary) -> Control:
 	# A Button does not size to its children: grow it to the row, whose height follows the wrapped description.
 	row.minimum_size_changed.connect(func(): b.custom_minimum_size.y = maxf(64.0, row.get_combined_minimum_size().y + 20.0))
 	var num := PanelContainer.new()
-	var sbn := WfReviewGuide._box(WfReviewGuide.C_NEXT if guided else WfReviewGuide.C_EXIT, WfReviewGuide.C_NEXT if guided else WfReviewGuide.C_EXIT, 6, 6)
+	var badge: Color = WfReviewGuide.C_NOW if main else (WfReviewGuide.C_NEXT if guided else WfReviewGuide.C_EXIT)
+	var sbn := WfReviewGuide._box(badge, badge, 6, 6)
 	num.add_theme_stylebox_override("panel", sbn)
 	num.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	num.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	var nl := _label(WfInput.label("menu.session_%d" % (i + 1)), 18, WfReviewGuide.C_NEXT_TEXT if guided else WfReviewGuide.C_EXIT_TEXT)
+	var nl := _label(WfInput.label("menu.session_%d" % (i + 1)), 18, WfReviewGuide.C_NOW_TEXT if main else (WfReviewGuide.C_NEXT_TEXT if guided else WfReviewGuide.C_EXIT_TEXT))
 	nl.custom_minimum_size = Vector2(18, 0)
 	nl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	num.add_child(nl)
@@ -159,7 +163,8 @@ func _row(i: int, s: Dictionary) -> Control:
 	text.add_child(_label(s.title, 18, WfReviewGuide.C_TITLE))
 	text.add_child(_label(s.what, 13, WfReviewGuide.C_BODY))
 	row.add_child(text)
-	var tag := _label("GUIDED · about %d min" % s.minutes if guided else "no guide yet (%s)" % s.todo, 13, WfReviewGuide.C_NEXT if guided else WfReviewGuide.C_MUTED)
+	var tag := _label("START HERE · about %d min" % s.minutes if main else ("GUIDED · about %d min" % s.minutes if guided else "no guide yet (%s)" % s.todo), 13,
+		WfReviewGuide.C_NOW if main else (WfReviewGuide.C_NEXT if guided else WfReviewGuide.C_MUTED))
 	tag.autowrap_mode = TextServer.AUTOWRAP_OFF
 	tag.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	row.add_child(tag)

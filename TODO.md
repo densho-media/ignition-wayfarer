@@ -423,7 +423,8 @@ candidates of all nine classes are separate accessory assets (docs/ACCESSORIES.m
   covers it. Transition timing and casualty/flight-EVA HOLDs remain until their own releases. `docs/PHYSICS.md` is the working guide.
 
 - [ ] **J02 — Extend the visitor route into Ring B. AFTER D06/J01 and relevant G02.** Reuse the existing Ship Navigator registry,
-  frame-aware marker, route graph and guidance modes; extend only the accepted transfer/rooms.
+  frame-aware marker, route graph and guidance modes; extend only the accepted transfer/rooms. The excursion (J06) already plays
+  boarding, transfer and return into ring B with closed-boundary gating; the Navigator's registry, marker and guidance are left.
   **Done when:** boarding/transfer/return work end-to-end with closed-boundary gating, correct moving frames and human-scale review;
   the navigator never advertises an unsafe or missing route as GO.
 
@@ -447,6 +448,18 @@ candidates of all nine classes are separate accessory assets (docs/ACCESSORIES.m
   Personal, keyboard/mouse Suggested, controller Personal, with a real controller); a check of the labels on an AZERTY or QWERTZ
   layout; controller glyphs (optional, `godot_input_icons` MIT); the owner's controller/accessibility review (49 NAV-019 OPEN).
   **Done when:** the walkthroughs pass.
+
+- [ ] **J06 — Station-to-ring excursion with continuous ring circulation (user brief 2026-10-26; EXC-001, CIRC-001, STN-001).**
+  Built and checked: the circulation (`ring_circulation.py`, `[ring_circulation]`, both rings' corridors, doors and fit-out; baseline
+  `p4_s9_circulation`), the station boarding area (`station.py`, `[station]`) and the playable excursion (`excursion.tscn`, review-menu
+  session 1, the web launcher's Start: the main interactive experience; touch controls; runtime check `excursion`: both rings round
+  trip, 72/72 bins; web check "touch walk" on an emulated phone). Left: the
+  owner's decision on CIRC-001 against 12!A13, the 400–460 m³ gross envelope and the 330 t rotating allowance (CIRC-C1..C8 in
+  `ring_circulation.conflicts`; draft in `references/OWNER_Q_CIRC_2026-10-26.md`, not posted); the frame load path round the tunnels
+  (CIRC-C7, OPEN); the station's owner workbook and the boarding straps versus ship hatch-rim handholds (STN-001 PROTOTYPE); a
+  hands-on walk of both rings by a person (keyboard and controller, desktop and web, and on a real phone); the corridors' cultural pass (31_ARCHITECTURE)
+  after the whitebox review. **Done when:** the owner accepts or replaces the circulation, the conflicts are canonized or removed and a
+  person completes both excursions in the desktop and web builds.
 
 ## K — Finish the two characters, EVA training and production art
 

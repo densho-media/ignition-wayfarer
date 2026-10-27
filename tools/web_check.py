@@ -5,7 +5,8 @@ and walks it as a visitor does, recording every request:
   start      the start page loads only index.html, site.css and release.json: no model, engine or library, no canvas
   viewer     Explore Ship from its link: whole-ship framing, orbit, zoom, pan, reset, presets, picking, the four styles, assembly states,
              Hybrid focus, the picking policy, exported colours, Reset appearance, the #cam and appearance bookmarks, no Enter Wayfarer file
-  play       the launcher requests no engine before Start; Start boots Godot and Demonstrator 01 with no viewer file, no error
+  play       the launcher requests no engine before Start; Start boots Godot and the walk (EXC-001, the main experience) with no viewer
+             file, no error
   switching  Exit back to the start page, Explore Ship again; page-renderer memory returns to the start-page level (Chrome runs
              with the back-forward cache off, so this measures what the pages release)
   equivalence  Demonstrator 01's 68-check suite and its whole-journey autoplay recording, drawing off, must match the native build
@@ -13,6 +14,8 @@ and walks it as a visitor does, recording every request:
   phone      the start page and the viewer at 390 x 844 with one-finger orbit and pinch zoom; the review page renders
   touch      Enter Wayfarer on an emulated phone (844 x 390, DPR 3) played by touch from the welcome to ring A, upright and tablet
              sizes (a third browser, alongside the walk; emulation, not a phone's frame rate)
+  touch walk the walk on the same emulated phone: welcome, the 1-D stick down the boarding line to the shut outer hatch, Use opens
+             it, a look drag, Map and View (after the touch journey, in the same side browser)
 Screenshots, metrics and check.json go to --out; --record writes the summary into the site's release.json. It checks behaviour,
 loading isolation and transfer sizes, not frame rates on real hardware. The viewer's camera damping is switched off before input.
 
@@ -587,6 +590,126 @@ def run_touch(url, play_release, binary, sandbox, out, record_check, metrics, ti
         log.close()
 
 
+def run_touch_walk(url, play_release, binary, sandbox, out, record_check, metrics, timeout=150):
+    """EXC-001 on the emulated phone of run_touch (844 x 390 CSS px, DPR 3, landscape): the walk starts by the launcher's switch, the
+    touch welcome is tapped through, the 1-D stick carries the trainee down the boarding line to the shut outer hatch (the push-off
+    into the coast across it is refused), Use opens it, a look drag turns the view, Map and View answer. Behaviour only."""
+    profile = tempfile.mkdtemp(prefix='wf-web-touch-walk-')
+    log = open(out / 'chrome-touch-walk.log', 'w')
+    chrome = Chrome(binary, profile, log, sandbox)
+    fingers = {}
+    t_start = time.monotonic()
+    try:
+        page, traffic = Page(chrome), Traffic(chrome)
+
+        def touch(kind, fid, at=None):
+            if at is not None:
+                fingers[fid] = at
+            else:
+                fingers.pop(fid, None)
+            page.send('Input.dispatchTouchEvent', {'type': kind, 'touchPoints': [{'x': x, 'y': y, 'id': i} for i, (x, y) in fingers.items()]})
+
+        def state():
+            return page.js('window.wayfarerTouch || null') or {}
+
+        def until(pred, limit=timeout):
+            end = time.monotonic() + limit
+            while time.monotonic() < end:
+                s = state()
+                try:
+                    if s and pred(s):
+                        return s
+                except (KeyError, TypeError, IndexError):
+                    pass
+                time.sleep(0.5)
+            return None
+
+        def centre(r):
+            return (r[0] + r[2] / 2, r[1] + r[3] / 2)
+
+        def button(s, bid):
+            return next((b for b in (s or {}).get('buttons', []) if b[0] == bid), None)
+
+        def tap_at(at, fid=7):
+            touch('touchStart', fid, at)
+            page.frames(2)
+            touch('touchEnd', fid)
+            page.frames(2)
+
+        def need(name, ok, **detail):
+            record_check(name, ok, **detail)
+            if not ok:
+                raise JourneyStop(name)
+
+        def scene(s):
+            return (s or {}).get('scene') or {}
+
+        page.send('Emulation.setDeviceMetricsOverride', {'width': 844, 'height': 390, 'deviceScaleFactor': 3, 'mobile': True,
+                                                          'screenOrientation': {'type': 'landscapePrimary', 'angle': 90}})
+        page.send('Emulation.setTouchEmulationEnabled', {'enabled': True, 'maxTouchPoints': 5})
+        page.send('Page.navigate', {'url': url + play_release['page'] + '?arg=--&arg=--excursion&arg=--touch-probe'})
+        s = until(lambda s: s['mode'] == 'welcome' and s['panel'] and scene(s).get('scene') == 'excursion', 300)
+        need('touch walk: the walk starts on a phone with the touch welcome', s, seconds=round(time.monotonic() - t_start, 1))
+        for _ in range(3):
+            r = next((r for t_, r in state().get('panel', []) if t_.startswith('Start with tips')), None)
+            if r:
+                time.sleep(1.0)
+                tap_at(centre(r))
+            s = until(lambda s: s['mode'] == '' and s['intro_done'], 30)
+            if s:
+                break
+        need('touch walk: welcome completed by a tap', s)
+        page.frames(2)
+        page.screenshot(out / 'touch_walk_1_station.png')
+        record_check('touch walk: weightless line: 1-D stick, look, View and Map', s['move'] == '1d' and s['look']
+                     and button(s, 'exc.view') and button(s, 'exc.map'), buttons=[b[0] for b in s['buttons']])
+        s0 = scene(s).get('s', 0.0)
+        touch('touchStart', 1, (110, 300))
+        page.frames(2)
+        touch('touchMove', 1, (110, 236))                   # stick up: along the line toward the view (down the tunnel)
+        s = until(lambda s: button(s, 'exc.use') and 'open outer hatch' in scene(s).get('use', ''), 120)
+        touch('touchEnd', 1)
+        need('touch walk: the stick carries the body down the boarding line to the shut outer hatch', s and scene(s)['s'] > s0 + 3.0,
+             s=[s0, scene(s).get('s') if s else None])
+        page.screenshot(out / 'touch_walk_2_hatch.png')
+        tap_at(centre(button(s, 'exc.use')[2]))
+        s = until(lambda s: 'close outer hatch' in scene(s).get('use', ''), 30)
+        record_check('touch walk: Use opens the outer hatch', s, use=scene(s).get('use') if s else None)
+        yaw0 = scene(state()).get('yaw', 0.0)
+        touch('touchStart', 2, (620, 200))
+        for x in (650, 690, 730):
+            touch('touchMove', 2, (x, 200))
+            page.frames(1)
+        touch('touchEnd', 2)
+        s = until(lambda s: abs(scene(s).get('yaw', yaw0) - yaw0) > 0.05, 20)
+        record_check('touch walk: a look drag turns the view', s, yaw=[yaw0, scene(s).get('yaw') if s else None])
+        s = state()
+        for bid in ('exc.map', 'exc.view', 'exc.view', 'exc.map'):
+            b = button(state(), bid)
+            if b:
+                tap_at(centre(b[2]))
+        s = until(lambda s: s['triggered'][-4:] == ['exc.map', 'exc.view', 'exc.view', 'exc.map'], 20)
+        record_check('touch walk: Map and View answer by touch', s, triggered=(s or state()).get('triggered', [])[-4:])
+        page.screenshot(out / 'touch_walk_3_after.png')
+        errors = [t_ for k, t_ in traffic.since((0, 0))[1] if k in ('error', 'exception') and not t_.startswith('   at:')]
+        record_check('touch walk: no engine or script errors', not errors and not traffic.crashed, errors=errors[:5])
+        metrics['touch_walk'] = {'seconds': round(time.monotonic() - t_start, 1)}
+    except JourneyStop as stop:
+        try:
+            page.screenshot(out / 'touch_walk_stopped.png')
+            print(f'touch walk stopped at: {stop}; state {json.dumps(state())[:600]}', flush=True)
+        except (RuntimeError, TimeoutError):
+            print(f'touch walk stopped at: {stop}', flush=True)
+    except Exception as error:
+        log.flush()
+        record_check('touch walk: phone session', False, error=repr(error),
+                     chrome_log=(out / 'chrome-touch-walk.log').read_text(errors='replace').splitlines()[-8:])
+    finally:
+        chrome.close()
+        shutil.rmtree(profile, ignore_errors=True)
+        log.close()
+
+
 def check(site, out, binary, sandbox=True, record=False, play_seconds=900, live=None, recording=True, touch=True):
     """site: the local site directory, or None with live=<deployed URL ending in />, which reads release.json from there."""
     out.mkdir(parents=True, exist_ok=True)
@@ -622,6 +745,7 @@ def check(site, out, binary, sandbox=True, record=False, play_seconds=900, live=
             run_equivalence(url, play_release, binary, sandbox, out, play_seconds, record_check, metrics)
         if touch:
             run_touch(url, play_release, binary, sandbox, out, record_check, metrics)
+            run_touch_walk(url, play_release, binary, sandbox, out, record_check, metrics)
     if play_release and ((recording and not carried) or touch):
         side = threading.Thread(target=side_work, args=(recording and not carried,))
         side.start()
@@ -840,12 +964,13 @@ def check(site, out, binary, sandbox=True, record=False, play_seconds=900, live=
                 page.js("window.wayfarerPlay.state") == 'running'
             play_s = round(time.monotonic() - t0, 1)
             booted = traffic.wait_console('Godot Engine v', mark, 30)
-            record_check('play: engine and Demonstrator 01 start', running and booted, seconds=play_s, engine=booted,
+            walk = traffic.wait_console('WF_EXCURSION ready', mark, 300) if running else None
+            record_check('play: engine and the walk start', running and booted and walk, seconds=play_s, engine=booted, walk=walk,
                          state=page.js('window.wayfarerPlay'))
             if running:
                 time.sleep(5)
                 page.screenshot(out / 'play_first_launch.png')
-                for key, code in (('Enter', 13), ('Enter', 13)):        # ACI first launch: the suggested Confirm; then the next chapter
+                for key, code in (('Enter', 13), ('Enter', 13)):        # ACI first launch: the suggested Confirm (the walk ignores the second)
                     page.send('Input.dispatchKeyEvent', {'type': 'keyDown', 'key': key, 'code': key, 'windowsVirtualKeyCode': code})
                     page.send('Input.dispatchKeyEvent', {'type': 'keyUp', 'key': key, 'code': key, 'windowsVirtualKeyCode': code})
                     time.sleep(3)

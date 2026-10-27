@@ -41,8 +41,9 @@ one reproducible, AI-assisted production pipeline.
 - GitHub Actions rebuilds the ship from a clean checkout on every push to `main` or a task branch
   and checks a browser version of it. Each passing push to `main` publishes that version to the
   **[Wayfarer website](https://densho-media.github.io/ignition-wayfarer/)**: Explore Ship (a 3D
-  engineering viewer for desktop and phone) or Enter Wayfarer (Integrated Demonstrator 01 in the
-  browser), each loaded only when chosen ([web/README.md](web/README.md)).
+  engineering viewer for desktop and phone) or Enter Wayfarer (the walk from the development station
+  round a habitat ring and back, under your own control, with the guided Demonstrator 01 tour beside it),
+  each loaded only when chosen ([web/README.md](web/README.md)).
 - Geometry is proxy-level. Passing checks and previews are not engineering proof.
 
 ## Build and explore

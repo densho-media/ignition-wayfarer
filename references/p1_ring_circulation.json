@@ -1,0 +1,473 @@
+{
+ "section": {
+  "u_centre": -0.825,
+  "clear_u": [
+   -1.275,
+   -0.37499999999999994
+  ],
+  "floor_r": 28.15236238801218,
+  "ceiling_r": 26.052362388012178,
+  "door_u": [
+   -1.15,
+   -0.5
+  ],
+  "door_top_r": 26.20236238801218,
+  "door_width": 0.6499999999999999,
+  "door_height": 1.95,
+  "cavity": [
+   -1.275,
+   -0.37499999999999994,
+   25.90236238801218,
+   28.35236238801218
+  ],
+  "tunnel": [
+   -1.4249999999999998,
+   -0.22499999999999992,
+   25.75236238801218,
+   28.502362388012177
+  ]
+ },
+ "budget": {
+  "rings": 2,
+  "corridor_length_per_ring_m": 159.3049006358476,
+  "corridor_gross_per_ring_m3": 338.47800660320735,
+  "corridor_gross_m3": 676.9560132064147,
+  "sector_gross_m3": 434.298,
+  "total_gross_m3": 1111.2540132064146,
+  "baseline_gross_m3": [
+   400.0,
+   460.0
+  ],
+  "gross_over_baseline_max": 2.415769593926988,
+  "atmosphere_kg": 640.533672155839,
+  "gas_density_kg_m3": 0.9461968867400105,
+  "largest_corridor_compartment_m3": 56.4130011005346,
+  "doors": 18,
+  "compartments_per_ring": 9,
+  "mass_kg": {
+   "liner": 32020.285027805356,
+   "deck": 2867.488211445256,
+   "doors": 2160.0,
+   "fitout": 3186.098012716952,
+   "total": 40233.87125196757
+  },
+  "mass_fraction_of_rotating": 0.1219208219756593,
+  "rotating_budget_kg": 330000.0,
+  "sector_equivalent_areal_kg_m2": 140.99379540199817,
+  "sector_equivalent_mass_kg": 300977.4343949369,
+  "spoke_axial_load_increase_N": 49319.93668913847,
+  "spin_energy_increase_J": 2597491.78627397,
+  "fill_m3_per_ring": 2248.641891652738,
+  "tunnel_m3_per_ring": 506.56572416806506,
+  "fill_remaining_m3_per_ring": 1742.076167484673,
+  "rotating_water_m3_per_ring": 80.0,
+  "basis": "liner = cavity perimeter x centreline length x PROTOTYPE areal mass (an internal shell shielded by the fill: no MMOD or exterior thermal layer); the sector-equivalent figure applies the habitat_pressure_structure allowance per sector skin area as an upper comparison; spin energy and spoke load scale with the added mass at the corridor radius (ring-equivalent dynamics)"
+ },
+ "conflicts": [
+  {
+   "id": "CIRC-C1",
+   "ref": "12_HABITAT_LAYOUT!A13 ring_shielding (BASELINE)",
+   "status": "CONFLICT",
+   "text": "Pressurized rooms occupy only the sectors; the circuit adds 338 m3 of pressurized corridor per ring inside the fills (tunnel 507 m3 of the 2249 m3 fill)."
+  },
+  {
+   "id": "CIRC-C2",
+   "ref": "habitat.volume 400-460 m3 gross (BASELINE, 02/12)",
+   "status": "CONFLICT",
+   "text": "Gross pressurized volume 434 -> 1111 m3 (2.42 x the 460 m3 maximum); atmosphere +641 kg; leak, repressurization gas and ECLSS circulation OPEN."
+  },
+  {
+   "id": "CIRC-C3",
+   "ref": "physics.rotor_sizing 330 t rotating (PROVISIONAL, Q32)",
+   "status": "CONFLICT",
+   "text": "Corridor liner, decks, 18 doors and fit-out ~40.2 t (12.2 % of the rotating allowance, unbudgeted; 301 t at the sectors' areal mass); spoke load and spin energy scale with it."
+  },
+  {
+   "id": "CIRC-C4",
+   "ref": "12_HABITAT_LAYOUT!A5 seraph_volume (BASELINE), A29 Q51 (ACCEPTED, dimensions OPEN)",
+   "status": "CHANGED PROTOTYPE",
+   "text": "The habitation sector's -z aft slot that held Seraph's niche is the only band reaching that side wall; the niche moves to a reserved alcove at the corridor side of that door, still beside the berths (outside the sector boundary). Owner to confirm."
+  },
+  {
+   "id": "CIRC-C5",
+   "ref": "12_HABITAT_LAYOUT!A21 full_thrust_route (BASELINE, Q47)",
+   "status": "NOT AN ESSENTIAL ROUTE",
+   "text": "Aft down (rings stopped) a corridor is a 0.9 m high tunnel; the essential 1.5 g route stays the crew tubes and the spine."
+  },
+  {
+   "id": "CIRC-C6",
+   "ref": "14_HULL_SERVICE!A8 dock_config (BASELINE)",
+   "status": "OPERATIONAL CONSEQUENCE",
+   "text": "Docked, the rings are stopped and locked: a ring walk from the station needs UNDOCK, spin-up, then spin-down, lock and DOCK."
+  },
+  {
+   "id": "CIRC-C7",
+   "ref": "habitat_ring.construction / OD-016 ring section (OPEN)",
+   "status": "OPEN",
+   "text": "Each web frame takes a framed portal round the corridor and the spoke-node housing splits round it; the load path is OPEN (FEA)."
+  },
+  {
+   "id": "CIRC-C8",
+   "ref": "interior.layouts (PROTOTYPE), Q50 Garden trays (12!A28 WORKING)",
+   "status": "CHANGED PROTOTYPE",
+   "text": "Work and Garden couch-2 lockers end at x -1.15 m like the habitation ones; the Garden rack and mess start at x -0.50 m (rack 0.05 m shorter)."
+  }
+ ],
+ "doors": [
+  {
+   "id": "CIRC.A1P",
+   "ring": 1,
+   "kind": "sector",
+   "fill": 1,
+   "sector": 1,
+   "side": 1,
+   "t": 0.10408604933744602,
+   "u": [
+    -1.15,
+    -0.5
+   ],
+   "r": [
+    26.20236238801218,
+    28.15236238801218
+   ],
+   "width": 0.6499999999999999,
+   "height": 1.95,
+   "between": [
+    "A1",
+    "AC1a"
+   ],
+   "name": "Ring_1_Circ_Door_A1P",
+   "slide": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "travel": 0.7,
+   "normally": "CLOSED"
+  },
+  {
+   "id": "CIRC.AC1",
+   "ring": 1,
+   "kind": "node",
+   "fill": 1,
+   "sector": null,
+   "side": 0,
+   "t": 1.0471975511965976,
+   "u": [
+    -1.15,
+    -0.5
+   ],
+   "r": [
+    26.20236238801218,
+    28.15236238801218
+   ],
+   "width": 0.6499999999999999,
+   "height": 1.95,
+   "between": [
+    "AC1a",
+    "AC1b"
+   ],
+   "name": "Ring_1_Circ_Door_AC1",
+   "slide": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "travel": 0.7,
+   "normally": "CLOSED"
+  },
+  {
+   "id": "CIRC.A2N",
+   "ring": 1,
+   "kind": "sector",
+   "fill": 1,
+   "sector": 2,
+   "side": -1,
+   "t": 1.9903090530557492,
+   "u": [
+    -1.15,
+    -0.5
+   ],
+   "r": [
+    26.20236238801218,
+    28.15236238801218
+   ],
+   "width": 0.6499999999999999,
+   "height": 1.95,
+   "between": [
+    "AC1b",
+    "A2"
+   ],
+   "name": "Ring_1_Circ_Door_A2N",
+   "slide": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "travel": 0.7,
+   "normally": "CLOSED"
+  },
+  {
+   "id": "CIRC.A2P",
+   "ring": 1,
+   "kind": "sector",
+   "fill": 2,
+   "sector": 2,
+   "side": 1,
+   "t": 2.198481151730641,
+   "u": [
+    -1.15,
+    -0.5
+   ],
+   "r": [
+    26.20236238801218,
+    28.15236238801218
+   ],
+   "width": 0.6499999999999999,
+   "height": 1.95,
+   "between": [
+    "A2",
+    "AC2a"
+   ],
+   "name": "Ring_1_Circ_Door_A2P",
+   "slide": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "travel": 0.7,
+   "normally": "CLOSED"
+  },
+  {
+   "id": "CIRC.AC2",
+   "ring": 1,
+   "kind": "node",
+   "fill": 2,
+   "sector": null,
+   "side": 0,
+   "t": 3.141592653589793,
+   "u": [
+    -1.15,
+    -0.5
+   ],
+   "r": [
+    26.20236238801218,
+    28.15236238801218
+   ],
+   "width": 0.6499999999999999,
+   "height": 1.95,
+   "between": [
+    "AC2a",
+    "AC2b"
+   ],
+   "name": "Ring_1_Circ_Door_AC2",
+   "slide": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "travel": 0.7,
+   "normally": "CLOSED"
+  },
+  {
+   "id": "CIRC.A3N",
+   "ring": 1,
+   "kind": "sector",
+   "fill": 2,
+   "sector": 3,
+   "side": -1,
+   "t": 4.084704155448945,
+   "u": [
+    -1.15,
+    -0.5
+   ],
+   "r": [
+    26.20236238801218,
+    28.15236238801218
+   ],
+   "width": 0.6499999999999999,
+   "height": 1.95,
+   "between": [
+    "AC2b",
+    "A3"
+   ],
+   "name": "Ring_1_Circ_Door_A3N",
+   "slide": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "travel": 0.7,
+   "normally": "CLOSED"
+  },
+  {
+   "id": "CIRC.A3P",
+   "ring": 1,
+   "kind": "sector",
+   "fill": 3,
+   "sector": 3,
+   "side": 1,
+   "t": 4.292876254123836,
+   "u": [
+    -1.15,
+    -0.5
+   ],
+   "r": [
+    26.20236238801218,
+    28.15236238801218
+   ],
+   "width": 0.6499999999999999,
+   "height": 1.95,
+   "between": [
+    "A3",
+    "AC3a"
+   ],
+   "name": "Ring_1_Circ_Door_A3P",
+   "slide": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "travel": 0.7,
+   "normally": "CLOSED"
+  },
+  {
+   "id": "CIRC.AC3",
+   "ring": 1,
+   "kind": "node",
+   "fill": 3,
+   "sector": null,
+   "side": 0,
+   "t": 5.235987755982988,
+   "u": [
+    -1.15,
+    -0.5
+   ],
+   "r": [
+    26.20236238801218,
+    28.15236238801218
+   ],
+   "width": 0.6499999999999999,
+   "height": 1.95,
+   "between": [
+    "AC3a",
+    "AC3b"
+   ],
+   "name": "Ring_1_Circ_Door_AC3",
+   "slide": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "travel": 0.7,
+   "normally": "CLOSED"
+  },
+  {
+   "id": "CIRC.A1N",
+   "ring": 1,
+   "kind": "sector",
+   "fill": 3,
+   "sector": 1,
+   "side": -1,
+   "t": 6.17909925784214,
+   "u": [
+    -1.15,
+    -0.5
+   ],
+   "r": [
+    26.20236238801218,
+    28.15236238801218
+   ],
+   "width": 0.6499999999999999,
+   "height": 1.95,
+   "between": [
+    "AC3b",
+    "A1"
+   ],
+   "name": "Ring_1_Circ_Door_A1N",
+   "slide": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "travel": 0.7,
+   "normally": "CLOSED"
+  }
+ ],
+ "compartments": [
+  {
+   "id": "A1",
+   "kind": "sector",
+   "name": "Sector_1_1",
+   "function": "HABITATION",
+   "gross_m3": 72.383
+  },
+  {
+   "id": "A2",
+   "kind": "sector",
+   "name": "Sector_1_2",
+   "function": "WORK_MEDICAL_OPS",
+   "gross_m3": 72.383
+  },
+  {
+   "id": "A3",
+   "kind": "sector",
+   "name": "Sector_1_3",
+   "function": "LIFE_SUPPORT_GARDEN_COMMON",
+   "gross_m3": 72.383
+  },
+  {
+   "id": "AC1a",
+   "kind": "corridor",
+   "fill": 1,
+   "t0": 0.10408604933744602,
+   "t1": 1.0471975511965976,
+   "gross_m3": 56.413001100534544
+  },
+  {
+   "id": "AC1b",
+   "kind": "corridor",
+   "fill": 1,
+   "t0": 1.0471975511965976,
+   "t1": 1.9903090530557492,
+   "gross_m3": 56.413001100534544
+  },
+  {
+   "id": "AC2a",
+   "kind": "corridor",
+   "fill": 2,
+   "t0": 2.198481151730641,
+   "t1": 3.141592653589793,
+   "gross_m3": 56.41300110053457
+  },
+  {
+   "id": "AC2b",
+   "kind": "corridor",
+   "fill": 2,
+   "t0": 3.141592653589793,
+   "t1": 4.084704155448945,
+   "gross_m3": 56.413001100534544
+  },
+  {
+   "id": "AC3a",
+   "kind": "corridor",
+   "fill": 3,
+   "t0": 4.292876254123836,
+   "t1": 5.235987755982988,
+   "gross_m3": 56.413001100534544
+  },
+  {
+   "id": "AC3b",
+   "kind": "corridor",
+   "fill": 3,
+   "t0": 5.235987755982988,
+   "t1": 6.17909925784214,
+   "gross_m3": 56.4130011005346
+  }
+ ],
+ "circuit_length_m": {
+  "A": 176.84697387732598,
+  "B": 176.84697387732598
+ },
+ "failures": []
+}

@@ -333,13 +333,13 @@ def fixtures(s):
     return out
 
 
-def tube_stage(s):
+def tube_stage(s, j=None):
     """The induction sector's crew tube on ring A (RING frame, vehicle frame at the index pose = ring-frame coordinates): the radial run's axis
     from the bend to the sector hatch seat, its clear radius, the ladder rungs of the run (human_entry.spoke_fixtures) and of the landing well
     below the hatch (human_entry.landing_fixtures, sector frame mapped by human_entry.sector_frame), all on the one deck-referenced rung grid,
     the direction from the axis toward the ladder and the climber's offset along it (the body axis on the ladder, human_entry mannequin)."""
-    h = s['human_entry']; m = h['mannequin']; j = h['tube_rotors'][0]
-    rot, k, point, _ = human_entry.sector_frame(s)
+    h = s['human_entry']; m = h['mannequin']; j = j or h['tube_rotors'][0]
+    rot, k, point, _ = human_entry.sector_frame(s, j)
     rot_t, _, _, frames = human_entry.spoke_station(s, j)
     fr = frames[k]; R = human_entry.RUN
     p0 = human_entry.at_index(rot_t, fr['points'][R]); d = human_entry.at_index(rot_t, fr['d'][R], False)
@@ -354,12 +354,12 @@ def tube_stage(s):
     mid = [tuple((a[i]+b[i])/2 for i in range(3)) for a, b in rungs[:1]][0]
     off = crew_transfer.sub(mid, crew_transfer.add(p0, d, crew_transfer.dot(crew_transfer.sub(mid, p0), d)))
     n = math.sqrt(crew_transfer.dot(off, off))
-    return {'frame': 'RING', 'ring': 0, 'zone': 'tube', 'sector': k, 'axis_m': [list(p0), list(end)],
+    return {'frame': 'RING', 'ring': j-1, 'zone': 'tube', 'sector': k, 'axis_m': [list(p0), list(end)],
             'clear_radius_m': crew_transfer.tube_radii(s, j)[1], 'toward_ladder': [c/n for c in off], 'ladder_axis_offset_m': n,
             'climber_offset_m': m['spoke_body_offset_m'], 'review_speed_m_s': m['climb_review_speed_m_s'], 'rung_pitch_m': h['spoke_rung_pitch_m'],
             'rungs': [{'anchor_id': f'{name}_Rung_{i+1}' if i < len(tube['segments']) else f'Sector_Ladder_Rung_{i+1-len(tube["segments"])}',
                        'role': 'ladder rung', 'radius_m': tube['radius'], 'rail_start': list(a), 'rail_end': list(b)} for i, (a, b) in enumerate(rungs)],
-            'landing_room': 'WF.ROOM.A1.LANDING_WELL',
+            'landing_room': f"WF.ROOM.{'AB'[j-1]}{k}.LANDING_WELL",
             'source': 'human_entry.spoke_fixtures / landing_fixtures / sector_frame, crew_transfer.tube_radii', 'status': 'PROTOTYPE geometry',
             'note': 'rungs sorted outward along the run (the tube rungs, then the landing-well rungs); the tube is open into the landing well at the '
                     'hatch seat; the bend and elbows above the run are not a stage (the body enters at the run top)'}
@@ -375,13 +375,18 @@ cadd = crew_transfer.add   # (a, b, k) -> a + k b
 TRUNK_GRIPS = ('trunk handrail', 'refuge port handrail', 'storeroom port handrail')
 
 
-def _access_world(s):
+def _access_world(s, j=None):
     """Rotor-local (u, a, b) free-space model of ring A's induction access at the index (the spine port and the sector-1 crew tube both on +a):
     the trunk bore, the spine port's bore (port clear radius about the radial at hatch_u), the drum annulus (r0..clear, cu0..cu1), the drum
     door's bore through the running gap into the crew tube (the same radial and radius) and the mitered tube (crew_transfer.tube_radius_at).
     clear(p, port, door) is a lower bound of the distance from p to the walls with the port gate / drum door open or shut (the largest of the
     region clearances)."""
-    rot, v, la, frames = human_entry.spoke_station(s); fr = frames[s['human_entry']['vestibule_port_sectors'][0]]
+    j = j or s['human_entry']['tube_rotors'][0]
+    rot, v, la, frames = human_entry.spoke_station(s, j); th = la[s['human_entry']['vestibule_port_sectors'][j-1]]
+    # The model is rotor-local with the port's sector on +a (ring A's sector 1 is at angle 0; ring B's port sector is turned there, so its
+    # rotor phase carries the sector angle and its tube frames are the same tube at angle 0, by the ring's symmetry).
+    fr = crew_transfer.tube_frames_of(s, rot['index'], 0.0); rot = dict(rot, phase=rot['phase']+th)
+    neck = crew_transfer.tube_neck(s, j)
     trunk = crew_transfer.stationary(s)[0]; tr = trunk['hollow']; u_tr = sorted(q[0]-rot['x'] for q in trunk['points'])
     hu, pc, r0, R, cu0, cu1 = v['hatch_u'], v['port_clear'], v['r0'], v['clear'], v['cu0'], v['cu1']
     rc = crew_transfer.tube_radii(s, rot['index'])[1]; j1 = fr['points'][1]
@@ -398,9 +403,11 @@ def _access_world(s):
             beyond = dot(sub(p, j1), fr['miter'][1])
             if beyond <= 0.0:
                 best = max(best, min(pc-lat, 9.0 if port else a-r0, rc-beyond))
-            best = max(best, rc-crew_transfer.tube_radius_at(fr, p))
+            # a necked tube (ring B) opens above its bulkhead only: below it the neck's bore (the port's radius) is the way through
+            if neck is None or dot(sub(p, fr['points'][0]), fr['d'][0]) >= neck['wall']:
+                best = max(best, rc-crew_transfer.tube_radius_at(fr, p))
         return best
-    return dict(rot=rot, v=v, fr=fr, clear=clear, u_tr=u_tr, trunk_r=tr, tube_r=rc)
+    return dict(rot=rot, v=v, fr=fr, clear=clear, u_tr=u_tr, trunk_r=tr, tube_r=rc, th=th, neck=neck)
 
 
 def _seg_dist(p, a, b):
@@ -492,17 +499,23 @@ def _pivot(w, base, e1, e2, u0, u1, start, goal, port, door, half, radius, held=
 _ACCESS = {}
 
 
-def access_stage(s):
-    """Cached access_stage_of(s) (the pose search takes seconds; the rig, the tests and the checks ask for it many times)."""
+def tuck_height(s, j):
+    """The body length of the access technique on ring j when the rigid full-height proxy cannot pass (excursion.tuck, PROTOTYPE), else None."""
+    return s.get('excursion', {}).get('tuck', {}).get(f"RING_{'AB'[(j or 1)-1]}")
+
+
+def access_stage(s, j=None):
+    """Cached access_stage_of(s, j) (the pose search takes seconds; the rig, the tests and the checks ask for it many times)."""
     import hashlib, json
-    key = hashlib.sha256(json.dumps(s, sort_keys=True, default=str).encode()).hexdigest()
+    key = hashlib.sha256(json.dumps(s, sort_keys=True, default=str).encode()).hexdigest()+str(j or 1)
     if key not in _ACCESS:
-        _ACCESS.clear()
-        _ACCESS[key] = access_stage_of(s)
+        if len(_ACCESS) > 4:
+            _ACCESS.clear()
+        _ACCESS[key] = access_stage_of(s, j)
     return copy.deepcopy(_ACCESS[key])
 
 
-def access_stage_of(s):
+def access_stage_of(s, j=None):
     """M2 contiguous body path: ring A's induction access from the stationary trunk through the spine port, the despun drum (synchronized while
     the occupant is restrained, DYN-027) and the drum door to the crew tube, through its mitered elbows to the top of the radial run, where
     tube_stage's climber line starts. The body proxy is rigid (the profile's capsule), so the line is derived for it: head aft along the trunk
@@ -513,24 +526,27 @@ def access_stage_of(s):
     tube axis through the elbows (nudged toward a grip where the axis has none in reach), then a step onto the climber line. Each pivot is the fewest straight moves that keep ACCESS_MARGIN_M from the
     walls (a search on the pose grid; a technique choice, PROTOTYPE). Godot gets the collider geometry and the line in the vehicle frame at the
     index (RING frame coordinates; before the sync the drum frame is the SHIP frame at the index)."""
-    w = _access_world(s); rot, v, fr = w['rot'], w['v'], w['fr']; h = s['human_entry']
-    prof = profiles(s)['human_iva']; half, radius = prof['height_m']/2-prof['radius_m'], prof['radius_m']
+    j = j or s['human_entry']['tube_rotors'][0]
+    w = _access_world(s, j); rot, v, fr = w['rot'], w['v'], w['fr']; h = s['human_entry']
+    prof = profiles(s)['human_iva']; Hb = tuck_height(s, j) or prof['height_m']; half, radius = Hb/2-prof['radius_m'], prof['radius_m']
     st = ACCESS_GRID[0]; hu = v['hatch_u']; A = (0.0, 1.0, 0.0); B = (0.0, 0.0, 1.0); X = (1.0, 0.0, 0.0); aft = (-1.0, 0.0, 0.0)
     # the restraint pose: the vestibule figure's (human_entry.vestibule_mannequin: on a chord, a hand on the rail beside the port), on the grid
-    tor = next(r for r in human_entry.vestibule_mannequin(s)['local'] if r[0].endswith('_Torso')); H = s['prototype']['human_height_m']
+    loc = lambda q: rot_x(q, -w['th'])            # rotor-local -> the model's frame (the port sector on +a)
+    tor = next(r for r in human_entry.vestibule_mannequin(s, j)['local'] if r[0].endswith('_Torso')); H = s['prototype']['human_height_m']
+    tor = (tor[0], [loc(q) for q in tor[1]])
     ax = crew_transfer.unit(sub(tor[1][1], tor[1][0])); c = cadd(tor[1][0], ax, 0.12*H)
     hold_pose = (round(c[1]/st), round(c[2]/st), round(math.degrees(math.atan2(ax[2], ax[1]))/ACCESS_GRID[1]))
     # the grips on the way, rotor-local: the trunk's rails and the drum's and tube's rails, stiles and rungs; held(pose): one in reach of the centre
-    tube = tube_stage(s); inv = dict(rot, x=-rot['x'], phase=-rot['phase']); fix = []
+    tube = tube_stage(s, j); inv = dict(rot, x=-rot['x'], phase=-rot['phase']); fix = []
     for q in human_entry.trunk_fixtures(s):
         if q.get('role') in TRUNK_GRIPS:
             fix.append((q, [tuple(human_entry.at_index(inv, a) for a in q['points'])]))
-    for q in human_entry.vestibule_fixtures(s)+human_entry.spoke_fixtures(s):
+    for q in human_entry.vestibule_fixtures(s, j)+human_entry.spoke_fixtures(s, j):
         if q['name'].startswith(f"Crew_Tube_{rot['index']}_{tube['sector']}_") or q['name'].startswith(f"Crew_Vestibule_{rot['index']}_"):
             if q['shape'] == 'rod' and ('handrail' in q['role'] or 'stile' in q['role'] or 'crawl rail' in q['role']) and 'bracket' not in q['role']:
-                fix.append((q, list(zip(q['points'], q['points'][1:]))))
+                pts = [loc(x) for x in q['points']]; fix.append((q, list(zip(pts, pts[1:]))))
             elif q['shape'] == 'rods' and 'floor ladder rungs' in q['role']:
-                fix.append((q, q['segments']))
+                fix.append((q, [(loc(a), loc(b)) for a, b in q['segments']]))
     gl = [g for _, segs in fix for g in segs]; reach = prof['reach_m']-0.01
     held = lambda p: any(_seg_dist(p[0], a, b) <= reach for a, b in gl)      # min(...) <= reach, stopping at the first grip in reach
     # Before the sync (zero field) the hands act only where a grip is in reach (_pivot held); the spine port's bore has none (its mouth spans
@@ -544,19 +560,36 @@ def access_stage_of(s):
     Cs = [(du, ia, ib, kk) for du in range(-6, 11, 2) for ia in range(round(v['r0']/st)+1, round(v['clear']/st)) for ib in range(-4, 25, 2)
           for kk in range(0, 72, 3)]
     pairs = []
-    for du, ia, ib, kk in Cs:
+    for du, ia, ib, kk in (Cs if Hb >= prof['height_m'] else []):     # a tucked body takes the guided pivot below
         C = ((hu+du*st, ia*st, ib*st), add(mul(A, math.cos(math.radians(kk*ACCESS_GRID[1]))), mul(B, math.sin(math.radians(kk*ACCESS_GRID[1])))))
         if not held(C) or not free(C):
             continue
         for k, i in Js:
             J = ((hu+k*st, i*st, 0.0), A)
-            if not (_zone(J, C, False, held, prof['height_m']) and _zone(J, C, True, held, prof['height_m'])):
+            if not (_zone(J, C, False, held, Hb) and _zone(J, C, True, held, Hb)):
                 continue
             c_ = _segment_clear(w, J, C, True, False, half, radius)
             if c_ >= ACCESS_MARGIN_M:
                 pairs.append((-c_, k, i, du, ia, ib, kk))
     turns = {}
-    for _, k, i, du, ia, ib, kk in sorted(pairs):
+    guided = False
+    if not pairs and Hb < prof['height_m']:
+        # A tucked body (excursion.tuck: ring B's 0.90 m port into its shallow drum) crosses no straight coast: the hands guide it on the
+        # port's frame instead, from a junction J straight into the restraint pose by the fewest straight moves that keep the margin
+        # (PROTOTYPE technique; the frame is the grip, so no grip-zone test applies inside the bore).
+        for k, i in sorted(Js, key=lambda q: (q[0], -q[1])):
+            if k:
+                continue
+            try:
+                turn = _pivot(w, (hu, 0.0, 0.0), X, A, aft, A, (round(ACCESS_START_M/st), 0, 0), (k, i, 18), True, False, half, radius, held)
+                into = _pivot(w, (hu, 0.0, 0.0), A, B, A, B, (i, 0, 0), hold_pose, True, False, half, radius)
+            except ValueError:
+                continue
+            du, guided = 0, True
+            break
+        else:
+            raise ValueError('access: no guided pivot through the spine port for the tucked body')
+    for _, k, i, du, ia, ib, kk in ([] if guided else sorted(pairs)):
         try:
             if (k, i) not in turns:
                 turns[k, i] = _pivot(w, (hu, 0.0, 0.0), X, A, aft, A, (round(ACCESS_START_M/st), 0, 0), (k, i, 18), True, False, half, radius, held)
@@ -568,7 +601,8 @@ def access_stage_of(s):
         except ValueError:
             turns.setdefault((k, i), None)
     else:
-        raise ValueError('access: no coast across the spine port with a grip at both ends')
+        if not guided:
+            raise ValueError('access: no coast across the spine port with a grip at both ends')
     shift = []
     if du:
         p0 = into[-1]; shift = [((hu, p0[0][1], p0[0][2]), p0[1])]
@@ -577,7 +611,7 @@ def access_stage_of(s):
     # After the sync the drum carries ring A's field, so a grip stays in reach at every pose out through the door (_pivot always): along the
     # handrail from the restraint pose to the nearest station aft where such a pivot exists (the crawl rail then stays in reach to the door's
     # mouth), the pivot feet-first to radial there, then forward along the door's bore to its axis.
-    a_out = math.ceil((v['r0']+half+radius+ACCESS_MARGIN_M)/st-1e-9); H = prof['height_m']
+    a_out = math.ceil((v['r0']+half+radius+ACCESS_MARGIN_M)/st-1e-9); H = Hb
     for dk in range(0, -round(v['port_clear']/st), -1):
         try:
             out = _pivot(w, (hu+dk*st, 0.0, 0.0), A, B, A, B, hold_pose, (a_out, 0, 36), False, True, half, radius, always=held)
@@ -607,7 +641,7 @@ def access_stage_of(s):
                 return cadd(pts[i], fr['d'][i], t) if t >= 0.0 else cadd(pts[0], fr['d'][0], t)
             t -= L[i]
     t = line[-1]['p'][1]-pts[0][1]+ACCESS_STEP_M; run0 = sum(L[:3])
-    top = run0+prof['height_m']/2+0.05
+    top = run0+Hb/2+0.05
     while t < top+1e-9:
         a, b = on_axis(t-half), on_axis(min(t+half, top+half)); line.append(dict(p=_toward(mul(add(a, b), 0.5)), up=crew_transfer.unit(sub(a, b)), phase='elbow'))
         t = min(t+ACCESS_STEP_M, top) if t < top else top+1.0
@@ -625,7 +659,7 @@ def access_stage_of(s):
     # is reached where the body first leaves the trunk bore (the gate must be open from there).
     sv = [0.0]
     for p, q in zip(local, local[1:]):
-        sv.append(sv[-1]+max(norm(sub(q[0], p[0])), prof['height_m']/2*math.acos(max(-1.0, min(1.0, dot(p[1], q[1]))))))
+        sv.append(sv[-1]+max(norm(sub(q[0], p[0])), Hb/2*math.acos(max(-1.0, min(1.0, dot(p[1], q[1]))))))
     port_s = None
     for i, (p, q) in enumerate(zip(local, local[1:])):
         for k in range(41):
@@ -647,7 +681,7 @@ def access_stage_of(s):
                     coasts[-1][1] = sk
                 else:
                     coasts.append([sk, sk])
-    return {'frame': 'RING', 'ring': 0, 'zone': 'access', 'sector': tube['sector'],
+    return {'frame': 'RING', 'ring': j-1, 'zone': 'access', 'sector': tube['sector'],
             'trunk': {'x_m': [w['u_tr'][0]+rot['x'], port[0]+ACCESS_START_M+prof['height_m']], 'clear_radius_m': w['trunk_r']},
             'port': {'centre_m': list(port), 'radial': list(radial), 'clear_radius_m': v['port_clear']},
             'drum': {'x_m': [v['cu0']+rot['x'], v['cu1']+rot['x']], 'inner_radius_m': v['r0'], 'outer_radius_m': v['clear']},
@@ -657,6 +691,8 @@ def access_stage_of(s):
             'port_s_m': port_s, 'hold_s_m': sv[hold], 'run_s_m': sv[-1],
             'line_basis': 's_m is the larger of the centre travel and the end travel (height/2 x turn angle); the port is reached where the '
                           'body first leaves the trunk bore',
+            'body_height_m': Hb, 'tucked': Hb < prof['height_m'], 'port_technique': 'guided on the port frame' if guided else 'coast',
+            **({'neck': {'clear_radius_m': w['neck']['clear'], 'top_m': w['neck']['base']+w['neck']['wall']}} if w.get('neck') else {}),
             'least_clearance_m': least, 'margin_m': ACCESS_MARGIN_M, 'grips': grips, 'reach_m': prof['reach_m'],
             'coasts_s_m': coasts, 'grip_zone_m': ACCESS_GRIP_ZONE_M,
             'source': 'crew_transfer.vestibule / tube_frames_of / stationary, human_entry.vestibule_fixtures / spoke_fixtures, tube_stage',
@@ -686,7 +722,20 @@ def stages(s):
                                                 'boxes': [{k: ([list(x) for x in v] if k == 'axes' else list(v) if isinstance(v, tuple) else v) for k, v in b.items()}
                                                           for b in human_entry.room_volumes(s, 2)]}}},
             'tube': tube_stage(s), 'access': access_stage(s),
+            # EXC-001 (v43): the station-to-ring excursion: the station boarding line into the trunk (station.stage), ring B's access line (tucked
+            # body, excursion.tuck) and tube, and each ring's continuous circuit (CIRC-001 ring_circulation.stage).
+            **excursion_stages(s),
             'basis': 'colliders from sourced/derived route geometry, not the visual meshes; WAYFARER geometry stays REP_PROXY'}
+
+
+def excursion_stages(s):
+    """EXC-001 stages, when the spec carries the station and the circulation (PROTOTYPE)."""
+    if 'station' not in s or 'ring_circulation' not in s:
+        return {}
+    import station
+    import ring_circulation
+    return {'boarding': station.stage(s), 'access_b': access_stage(s, 2), 'tube_b': tube_stage(s, 2),
+            'circuit': {f"RING_{'AB'[j-1]}": ring_circulation.stage(s, j) for j in range(1, habitat_ring.ring_count(s)+1)}}
 
 
 def contract(s):

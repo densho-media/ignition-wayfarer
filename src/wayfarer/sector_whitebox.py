@@ -76,6 +76,11 @@ def clear_volumes(s, function):
         if b['zone'] == 'bunk':
             p, t = w['platform_m'], w['panel_m']
             out.append(dict(name=f"{b['name']}_Space", kind='berth', min=(b['min'][0]+t, b['min'][1]+t, b['min'][2]+t), max=(b['max'][0]-t, b['max'][1]-p, b['max'][2]-t)))
+    if 'ring_circulation' in s:
+        # CIRC-001: the through-passage from side wall to side wall, as wide as the walls' door openings reach at the door's head.
+        import ring_circulation
+        x0, x1 = s['ring_circulation']['passage_x_m']; zw = ring_circulation.sector_wall_half(s, -s['ring_circulation']['door_clear_height_m'])
+        out.append(dict(name='Through_Passage', kind='passage', min=(x0, y0, -zw), max=(x1, y1, zw)))
     rf = s.get('route_fitout', {})
     if rf.get('seraph_spaces', {}).get(function) == 'niche':
         lk = next(b for b in blocks if b['name'] == 'Couch_Lockers_2'); x0, x1 = rf['seraph_niche_x_m']
