@@ -165,8 +165,8 @@ jobs:
           if-no-files-found: error
           retention-days: 14
 
-  # The browser check in four parts, each on its own runner against the same site (software WebGL is CPU-bound, so the parts no
-  # longer share one runner): the main visitor walk, browser-vs-native equivalence, the touch journey and the touch walk.
+  # The browser check in five parts, each on its own runner against the same site (software WebGL is CPU-bound, so the parts no
+  # longer share one runner): the main visitor walk, browser-vs-native equivalence, the touch journey's two segments, the touch walk.
   browser-check:
     name: Browser check (${{ matrix.part }})
     needs: [build]
@@ -175,7 +175,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        part: [main, equivalence, touch, walk]
+        part: [main, equivalence, touch1, touch2, walk]
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
       - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c  # v8.0.1
@@ -212,7 +212,7 @@ jobs:
       - name: Merge the parts into release.json (a missing part fails)
         run: |
           python3 tools/web_check.py _site --merge parts/wayfarer-web-check-main parts/wayfarer-web-check-equivalence \
-            parts/wayfarer-web-check-touch parts/wayfarer-web-check-walk --out web-check --record
+            parts/wayfarer-web-check-touch1 parts/wayfarer-web-check-touch2 parts/wayfarer-web-check-walk --out web-check --record
 
       - name: Report
         if: always()
@@ -323,7 +323,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        part: [main, touch, walk]
+        part: [main, touch1, touch2, walk]
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
       - name: Browser check against the live site, ${{ matrix.part }}

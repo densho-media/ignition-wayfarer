@@ -157,13 +157,15 @@ mkdir -p runs/preview && ln -sfn ../web-site runs/preview/ignition-wayfarer && p
   - Walking on ring A, with Drop by a second finger.
   - Help is a modal.
   - Upright and tablet sizes keep the same run.
-  This is emulation: it checks behaviour, not a phone's frame rate (docs/wayfarer-mobile-controls-plan.md).
-- **Touch walk (EXC-001):** the walk on the same emulated phone, after the touch journey in the same browser: the touch welcome by
+  It runs in two segments, each in a fresh browser: `touch1` up to Push off, and `touch2`, which starts at MICROGRAVITY
+  (`--from-chapter=MICROGRAVITY`) and covers the rest. This is emulation: it checks behaviour, not a phone's frame rate
+  (docs/wayfarer-mobile-controls-plan.md).
+- **Touch walk (EXC-001):** the walk on the same emulated phone, in its own browser: the touch welcome by
   a tap; the 1-D stick down the boarding line to the shut outer hatch (the push-off into the coast across it is refused); Use opens
   it; a look drag turns the view; Map and View answer; no engine or script error.
 
 `--record` writes the summary and metrics into the site's `release.json`. `--live <url>` repeats the checks against a deployed
-site, `--no-recording` skips the recording and `--no-touch` the touch journey. `--part main|equivalence|touch|walk` (repeatable) runs
+site, `--no-recording` skips the recording and `--no-touch` the touch journey. `--part main|equivalence|touch1|touch2|walk` (repeatable) runs
 only those parts, and `--merge <part dirs> --out <dir> [--record]` combines their `check.json`; a missing part fails.
 
 ## GitHub Actions
@@ -173,7 +175,8 @@ only those parts, and `--merge <part dirs> --out <dir> [--record]` combines thei
   that changes only `docs/`, `TODO.md`, `README.md`, `AGENTS.md` or `CLAUDE.md` runs nothing (none of it is in the site or
   read by a test); the live site stays at the last built commit.
 - **Every branch.** Unit tests, the Blender build with geometry diff 0 and `web --native` (job `build`), then the browser check in
-  four parallel jobs on their own runners (`browser-check`: main, equivalence, touch, walk; software WebGL is CPU-bound), then
+  five parallel jobs on their own runners (`browser-check`: main, equivalence, the touch journey's two segments touch1 and touch2,
+  walk; software WebGL is CPU-bound), then
   `site` merges their results into the site's `release.json` (`web_check --merge --record`; a missing part fails). Artifacts:
   - the site (`wayfarer-web-site`, the preview build, with the recorded results)
   - each part's screenshots and results (`wayfarer-web-check-<part>`), the merged result (`wayfarer-web-check`) and the build logs
@@ -181,7 +184,7 @@ only those parts, and `--merge <part dirs> --out <dir> [--record]` combines thei
 - **`main` only:**
   - `deploy` publishes to Pages, only after every check passes.
   - `verify` waits until the live `release.json` names the commit, records each file type's status, type, encoding and cache
-    headers; `verify-browser` then runs the browser check against the live URL in parallel parts (main, touch, walk).
+    headers; `verify-browser` then runs the browser check against the live URL in parallel parts (main, touch1, touch2, walk).
   - `release` keeps the verified site, its `release.json` and the native Linux zip as GitHub Release `web-<release>`.
 - **Permissions.**
   - Build jobs are read-only.
