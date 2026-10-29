@@ -26,9 +26,9 @@ phenotype defaults are never canon. The generic mannequins (`human_entry`) stay 
 | Shared contract (`_human_system`) | `data/characters.toml` `[human_system]`, `[actions]`; `src/wayfarer/human_system.py` |
 | Per person (`characters/<name>`) | `data/characters.toml` `[human.<id>]` recipes (fixtures `test_a`, `test_b`; induction pair `instructor`, `newcomer`) |
 | Generator (Blender) | `src/wayfarer/build/human.py` → `assets/characters/WF_CHAR_HUMAN_<ID>.blend` (Git-ignored, regenerated) |
-| Checks | `validation/human_rig.py`, `validation/human_fit.py`, `godot/scripts/check_characters.gd`, `godot/scripts/induction_swap.gd` |
+| Checks | `validation/human_rig.py`, `validation/human_fit.py`, `godot/scripts/check_characters.gd` |
 | Export | `src/wayfarer/export/human_gltf.py` → `<out>/<id>.glb` + `characters.json` |
-| Evidence | `references/p1_human_system.json`, `p1_human_rig.json`, `p1_human_fit.json`; renders in `renders/p1/human_system/` |
+| Evidence | `references/p1_human_system.json`, `p1_human_rig.json`, `p1_human_fit.json`; renders in `runs/renders/p1/human_system/` |
 
 The suggested `characters/_human_system/…` tree maps onto the repository's existing split (parameters in `data/`, pure modules in
 `src/wayfarer/`, Blender generators, generated assets in `assets/`) instead of adding a new top-level convention.
@@ -144,7 +144,7 @@ and no unweighted vertex; the fixtures' fingerprints are unchanged from 2026-10-
 postures and samples every action: shoulders, elbows, spine, neck and hips deform without collapse at everyday angles; the extreme
 postures (arms overhead, elbows at 140°, trunk forward 45°, deep squat, knee 120°) are flagged for linear-blend artefacts: volume loss up
 to 9 % in the deep squat and up to 0.8 % of edges stretched beyond 1.6×, at the groin, armpits and knees. Review sheets:
-`renders/p1/human_system/<id>_sheet.png`.
+`runs/renders/p1/human_system/<id>_sheet.png`.
 
 **Corrective shape keys** (`build/correctives.py`, CHAR-001, PROTOTYPE). Each body gets eight, one per side for the knee, hip, elbow and
 shoulder. Each is generated, not sculpted: the body is posed at the joint's flagged angle with the shared solver (knee 120°, hip 100°,
@@ -165,15 +165,13 @@ pressing into the calf); `test_a` and the newcomer cross the stretch flag at arm
 every action is present with the right length, every check bone lands where Blender evaluated it (0.0 mm), each body carries its eight
 corrective blend shapes and every clip drives them as Blender evaluated them (deviation 0.000), and held contacts drift
 ≤ 7.1 mm (the newcomer's crawl hands). The exporter keys every bone in every clip (no channel optimisation), because Godot does not
-reset untracked bones between clips. `induction_swap.gd` loads the DOCKED runtime export, hides the greeting's two proxies (manifest
-`component_id` `Instructor_*`, 38 nodes, and `Newcomer_*`, 27), places both MPFB
-bodies with `stage_S004A` and finds their bones at Blender's vehicle-frame positions (0.0 mm); still in
-`renders/p1/human_system/godot_induction_swap.png`.
+reset untracked bones between clips. The in-ship swap check (`induction_swap.gd`) is retired with the boarding walk
+(tag `archive/pre-cleanup-2026-10-29`).
 
 **Human scale.** `human_fit.py` poses the four bodies at every generic-mannequin station (same feet stations, same rail and rung grips,
 same body axis: floating with the rings stopped, radial-down in ring A, aft-down under thrust), at both greeting poses and on the
 S004B treatment couch, and intersects the posed body with the vehicle meshes nearby. Hands and feet may sit 3 cm in what they hold or
-stand on. Results (`references/p1_human_fit.json`, cutaways in `renders/p1/human_system/fit/`, the proxy at the same camera as
+stand on. Results (`references/p1_human_fit.json`, cutaways in `runs/renders/p1/human_system/fit/`, the proxy at the same camera as
 `<id>_greeting_<id>_proxy.png`):
 
 - FIT for all four bodies: entry chamber, trunk, ring-A despun vestibule, refuge (floating); sector landing (radial-down); the tube
@@ -205,11 +203,9 @@ stand on. Results (`references/p1_human_fit.json`, cutaways in `renders/p1/human
 `human_gltf.py` exports each character with its skeleton, skinned meshes and one glTF animation per NLA track (the five shared actions
 and the `stage_S004A` pose), and writes `characters.json` (contract, actions with loop, root-motion and held-contact data, Blender's
 check-bone positions in Godot axes `(x, z, −y)`, and the stage placement). `runtime-export` exports the characters into its disposable
-package when `assets/characters/WF_CHAR_HUMAN_*.blend` exist and runs `check_characters.gd` and `induction_swap.gd` before publishing.
+package when `assets/characters/WF_CHAR_HUMAN_*.blend` exist and runs `check_characters.gd` before publishing.
 `characters.json` carries every stage (`stages`: S004A for both, S004B for the newcomer, each with its placement, action and check
-bones; `stage` stays S004A). The boarding walk (`boarding.gd swap_characters`) hides each stage's proxy parts for good. It puts the posed
-body under the proxy's parent at the exported placement, so the couch body turns with ring A. The body shows at the stops of its scene
-(`WF_BOARDING_CHARACTERS` lists the swaps). Without a character export the proxies stay.
+bones; `stage` stays S004A). No runtime scene swaps the proxies for the MPFB bodies since the boarding walk was retired; the walk keeps its proxy body.
 
 ## Licenses
 

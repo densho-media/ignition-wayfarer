@@ -197,7 +197,7 @@ def plan(root=ROOT, paths=None, base='HEAD'):
             packs_touched.add(pack); reasons[rel] = f'detail pack {pack}: its detail assets, {", ".join(PACK_TESTS)} and its inspection groups'
             if p in g:
                 touched.add(p)
-        elif p.suffix in DOC_SUFFIXES or p.parts[0] in ('references', 'renders', 'runs') or rel in ('TODO.md', 'README.md'):
+        elif p.suffix in DOC_SUFFIXES or p.parts[0] in ('references', 'renders', 'runs', 'work') or rel in ('TODO.md', 'README.md'):
             reasons[rel] = 'documentation or evidence: no check'
         elif p.parts[0] == 'godot':
             godot_changed.append(rel); reasons[rel] = 'Godot runtime: affected scene checks'
@@ -207,7 +207,7 @@ def plan(root=ROOT, paths=None, base='HEAD'):
                 widen['shared module ' + rel] = True
         elif p.suffix == '.toml' and p.parts[0] == 'data':
             data_files.append(rel)
-        elif p.suffix == '.json' and p.parts[0] == 'simulations':
+        elif p.suffix == '.json' and p.parts[:2] == ('data', 'simulations'):
             reasons[rel] = 'generated contract: tests that read it'; touched.update(t for t in tests if p.name in (root/t).read_text())
         else:
             widen[f'unplaced change {rel}'] = True; reasons[rel] = 'not placed by the dependency map: everything'

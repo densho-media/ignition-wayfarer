@@ -22,93 +22,17 @@ IDENTITY = 'build_identity.json'
 # Godot checks: name, arguments after `--path <project>`, the scene or script it runs (for change selection), what it needs from the
 # package and the PASS marker its log must contain. Godot may return zero for a scene whose attached script failed, so every check
 # also fails on 'ERROR:'.
-# The saved study assets export-m5 reads (m5_hologram.STUDIES) and the study scripts that write them.
-M5_STUDY_ASSETS = (('WF_STUDY_BODY_C', 'm5_cutaway.py', ('--asset',)), ('WF_STUDY_DRIVE_SUPPORT', 'm5_drive_support.py', ('--asset',)),
-                   ('WF_STUDY_RCS_BALANCED', 'm5_rcs_balanced.py', ()))
 CHECKS = [
     dict(name='check', args=['--script', 'res://scripts/check_export.gd'], script='scripts/check_export.gd'),
     dict(name='check-docked', args=['--script', 'res://scripts/check_export.gd', '--', '--docked'], script='scripts/check_export.gd'),
-    dict(name='viewer', args=['res://scenes/inspector.tscn', '--quit-after', '2'], scene='scenes/inspector.tscn'),
-    # OWN-M4 m2: the radiator mount review legend (red datum / yellow slide) is an overlay only; WF_GODOT_LEGEND.
-    dict(name='viewer-legend', args=['res://scenes/inspector.tscn', '--quit-after', '300', '--', '--check-legend'], scene='scenes/inspector.tscn', marker='"result":"PASS"'),
-    # U01: the review menu (the project's start scene) and the guided Ring B session driven step by step (WF_GODOT_REVIEW).
-    dict(name='review-menu', args=['--quit-after', '2'], scene='scenes/review.tscn'),
-    # ACI (references/ACI_PLAN_2026-10-17.md): the control registry, first launch, conflicts, profile and Codex (WF_GODOT_CONTROLS), and the
-    # walk/grab lessons with a rebind driving the unchanged crew physics in the boarding scene (WF_GODOT_CONTROLS_BODY).
-    dict(name='controls', args=['--quit-after', '600', '--', '--check-controls'], scene='scenes/review.tscn', script='scripts/controls/check_controls.gd',
-         marker='"result":"PASS"'),
-    dict(name='controls-body', args=['--fixed-fps', '60', 'res://scenes/boarding.tscn', '--quit-after', '3000', '--', '--check-controls-body'],
-         scene='scenes/boarding.tscn', marker='"result":"PASS"'),
-    # MOB-001: the touch controls of Demonstrator 01 through real touch events at a phone-sized layout (WF_GODOT_TOUCH).
-    dict(name='controls-touch', args=['--fixed-fps', '60', 'res://scenes/demo01.tscn', '--quit-after', '30000', '--', '--check-touch', '--touch'],
-         scene='scenes/demo01.tscn', script='scripts/controls/check_touch.gd', marker='"result":"PASS"'),
-    dict(name='review-ring-b', args=['--fixed-fps', '60', 'res://scenes/boarding.tscn', '--quit-after', '6000', '--', '--check-review'],
-         scene='scenes/boarding.tscn', marker='"result":"PASS"'),
-    # U03: the guided vestibule drill in the physics lab, V only, with a refused V during the drum ramp (WF_GODOT_REVIEW).
-    dict(name='review-vestibule', args=['--fixed-fps', '60', 'res://scenes/physics_lab.tscn', '--quit-after', '9000', '--', '--review=vestibule', '--check-review'],
-         scene='scenes/physics_lab.tscn', marker='"result":"PASS"'),
-    # U04: the guided EVA drift session through real key events, with a refused R before the tug test (WF_GODOT_REVIEW).
-    dict(name='review-eva', args=['--fixed-fps', '60', 'res://scenes/eva.tscn', '--quit-after', '9000', '--', '--review=eva', '--check-review'],
-         scene='scenes/eva.tscn', marker='"result":"PASS"', needs='suits'),
-    # U05: the remaining guided sessions (timeline, induction walk, Demonstrator 01 with Enter per chapter, inspector) (WF_GODOT_REVIEW).
-    dict(name='review-flight', args=['res://scenes/flight.tscn', '--quit-after', '6000', '--', '--review=flight', '--check-review'],
-         scene='scenes/flight.tscn', marker='"result":"PASS"'),
-    dict(name='review-walk', args=['--fixed-fps', '60', 'res://scenes/boarding.tscn', '--quit-after', '40000', '--', '--review=walk', '--check-review'],
-         scene='scenes/boarding.tscn', marker='"result":"PASS"'),
-    dict(name='review-demo01', args=['--fixed-fps', '60', 'res://scenes/demo01.tscn', '--quit-after', '60000', '--', '--review=demo01', '--check-review'],
-         scene='scenes/demo01.tscn', marker='"result":"PASS"'),
-    dict(name='review-inspector', args=['res://scenes/inspector.tscn', '--quit-after', '3000', '--', '--review=inspector', '--check-review'],
-         scene='scenes/inspector.tscn', marker='"result":"PASS"'),
-    dict(name='boarding', args=['res://scenes/boarding.tscn', '--quit-after', '2'], scene='scenes/boarding.tscn'),
-    # RT-004: the whole walk forward and back through the drum cycle and every Q46 closure (boarding.gd check_transfer).
-    dict(name='boarding-transfer', args=['res://scenes/boarding.tscn', '--quit-after', '5', '--', '--check-transfer'], scene='scenes/boarding.tscn',
-         marker='WF_TRANSFER_CHECK PASS'),
-    dict(name='flight', args=['res://scenes/flight.tscn', '--quit-after', '2'], scene='scenes/flight.tscn'),
-    dict(name='flight-y155', args=['res://scenes/flight.tscn', '--quit-after', '600', '--', '--check-y155'], scene='scenes/flight.tscn', marker='"result":"PASS"'),
-    # Phase 4 S9: the exterior looks bind (grammar, wear, proxy grey, off) and the p4_exterior shader compiles (WF_GODOT_GRAMMAR).
-    dict(name='flight-grammar', args=['res://scenes/flight.tscn', '--quit-after', '600', '--', '--check-grammar'], scene='scenes/flight.tscn',
-         marker='"result":"PASS"'),
-    # Milestone B (MECH-002): the thermal explorer reproduces the rig's thermal_budget results and changes nothing in the scene.
-    dict(name='flight-thermal', args=['res://scenes/flight.tscn', '--quit-after', '600', '--', '--check-thermal'], scene='scenes/flight.tscn',
-         marker='"result":"PASS"'),
-    dict(name='life-support', args=['res://scenes/life_support.tscn', '--quit-after', '600', '--', '--check-life-support'], scene='scenes/life_support.tscn',
-         marker='"result":"PASS"'),
-    # PHYS-001: local crew physics (Jolt, rig dynamics block); prints one WF_GODOT_PHYSICS line.
-    dict(name='physics', args=['--fixed-fps', '60', 'res://scenes/physics_lab.tscn', '--', '--check-physics'], scene='scenes/physics_lab.tscn',
-         marker='"result":"PASS"'),
     # PHYS-001 phase 9: the packaged route sampled at every released row reproduces it (C-001/C-010); WF_GODOT_ROUTE.
     dict(name='route', args=['--script', 'res://scripts/check_route.gd'], script='scripts/check_route.gd', marker='"result":"PASS"'),
-    # PHYS-001 phase 6: the state-gated nav graph against crew_dynamics.route answers; WF_GODOT_NAV.
-    dict(name='nav', args=['--script', 'res://scripts/check_nav.gd'], script='scripts/check_nav.gd', marker='"result":"PASS"'),
-    # PHYS-001 phase 8: the boarding body tour (push, catch, ring walk, Coriolis drop); it quits itself; WF_GODOT_BODY.
-    dict(name='boarding-body', args=['--fixed-fps', '60', 'res://scenes/boarding.tscn', '--quit-after', '6000', '--', '--check-body'],
-         scene='scenes/boarding.tscn', marker='"result":"PASS"'),
-    # Integrated Demonstrator 01: all nine chapters in autoplay (demo01.gd); it quits itself; WF_GODOT_DEMO.
-    dict(name='demo01', args=['--fixed-fps', '60', 'res://scenes/demo01.tscn', '--quit-after', '60000', '--', '--check-demo'],
-         scene='scenes/demo01.tscn', marker='"result":"PASS"'),
     # EXC-001: station -> ring A circuit -> station, then ring B, by the player's own actions (excursion check.gd); WF_GODOT_EXCURSION.
     dict(name='excursion', args=['--fixed-fps', '60', 'res://scenes/excursion.tscn', '--quit-after', '300000', '--', '--check-excursion'],
          scene='scenes/excursion.tscn', marker='"result":"PASS"'),
-    # M7.1: the automated-recording lifecycle (ARRIVAL -> INSPECT completed -> tail -> exit 0); WF_DEMO_RECORDING.
-    dict(name='demo01-record', args=['--fixed-fps', '30', 'res://scenes/demo01.tscn', '--quit-after', '3000', '--',
-                                     '--autoplay', '--record-exit', '--from-chapter=ARRIVAL'],
-         scene='scenes/demo01.tscn', marker='"result":"PASS"'),
-    # The MPFB humans (docs/CHARACTERS.md), once `workflow.py characters` has built them; the induction pair swapped for its greeting proxies.
+    # The MPFB humans (docs/CHARACTERS.md), once `workflow.py characters` has built them.
     dict(name='characters', args=['--script', 'res://scripts/check_characters.gd'], script='scripts/check_characters.gd', needs='humans'),
-    dict(name='induction-swap', args=['--script', 'res://scripts/induction_swap.gd'], script='scripts/induction_swap.gd', needs='humans'),
-    # EVA-001: the airlock interlock, the two-tether protocol and an abort in the EVA scene.
-    dict(name='eva', args=['res://scenes/eva.tscn', '--', '--check-eva'], scene='scenes/eva.tscn', needs='suits', marker='"result":"PASS"'),
-    # M5 (S&E 15!A217): the subsystem hologram over the package (classification, chapters, isolation, cutaway, study layer; WF_GODOT_HOLO)
-    # and its guided session (WF_GODOT_REVIEW).
-    dict(name='holo', args=['res://scenes/m5_holo.tscn', '--quit-after', '600', '--', '--check-holo'], scene='scenes/m5_holo.tscn', marker='"result":"PASS"'),
-    dict(name='review-holo', args=['res://scenes/m5_holo.tscn', '--quit-after', '6000', '--', '--review=holo', '--check-review'],
-         scene='scenes/m5_holo.tscn', marker='"result":"PASS"'),
 ]
-
-# M5 hologram inputs beside the code: the subsystem table, the study references its chapters quote and the saved study assets it exports.
-M5_INPUTS = ('shots/m5_subsystems.toml', 'references/m5_body_c.json', 'references/m5_drive_support.json', 'references/m5_nozzle_mounts.json',
-             'references/m5_gnc_comms.json', 'assets/wayfarer/studies/WF_STUDY_BODY_C.blend',
-             'assets/wayfarer/studies/WF_STUDY_DRIVE_SUPPORT.blend', 'assets/wayfarer/studies/WF_STUDY_RCS_BALANCED.blend')
 
 
 def godot_command(project, check):
@@ -135,17 +59,15 @@ def versions():
 
 
 def package_inputs(root):
-    """{path: sha256} of everything the published package is built from: the non-study Python (build, export and the shared formulas),
-    this exporter, every data TOML, the imported route and EVA inputs, the character assets and the Godot project settings. Godot
+    """{path: sha256} of everything the published package is built from: the Python (build, export and the shared formulas),
+    this exporter, every data TOML, the imported route, the character assets and the Godot project settings. Godot
     scripts and scenes are not package inputs: runtime-check runs the current ones against the package."""
     src = root/'src/wayfarer'
-    paths = [*sorted(p for p in src.rglob('*.py') if 'studies' not in p.relative_to(src).parts and '__pycache__' not in p.parts),
+    paths = [*sorted(p for p in src.rglob('*.py') if '__pycache__' not in p.parts),
              root/'tools/runtime_export.py', *sorted((root/'data').glob('*.toml')), *sorted(p for p in (root/'data/detail').rglob('*') if p.is_file()),
              root/'godot/project.godot',
-             *(p for p in (root/'simulations/wf_route_v1.json', root/'references/p1_eva_fit.json', root/'references/p1_eva_access.json',
-                           root/'references/p1_eva_sp11.json') if p.exists()),
-             *sorted((root/'assets/characters').glob('WF_CHAR_HUMAN_*.blend')), *sorted((root/'assets/characters').glob('WF_EVA_*.blend')),
-             *(p for p in (root/q for q in M5_INPUTS) if p.exists())]
+             *(p for p in (root/'data/simulations/wf_route_v1.json',) if p.exists()),
+             *sorted((root/'assets/characters').glob('WF_CHAR_HUMAN_*.blend'))]
     return {str(p.relative_to(root)): pipeline.sha256(p) for p in paths}
 
 
@@ -169,25 +91,16 @@ def run(root, eye_layout=None):
         run_dir = root / 'runs' / (datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%fZ') + '-runtime')
         work = run_dir / 'work'
         work.mkdir(parents=True)
-        # A study asset export-m5 reads that is missing (a fresh clone) is built from its study script before the input snapshot is
-        # taken; existing ones are not rebuilt here.
-        for name, script, flags in M5_STUDY_ASSETS:
-            if not (root / 'assets/wayfarer/studies' / f'{name}.blend').exists():
-                log = run_dir / f'study-{script[:-3]}.log'
-                if pipeline.subprocess_runner(pipeline.blender(root / 'src/wayfarer/studies' / script, *flags), log, root, pipeline.STEP_TIMEOUT):
-                    return {'result': 'FAIL', 'step': f'study-{script[:-3]}', 'log': str(log), 'tail': pipeline.failure_tail(log)}
         shutil.copytree(root / 'data', work / 'data')
         if eye_layout:
             study_layout(work, eye_layout)
         shutil.copytree(root / 'godot', work / 'godot',
                         ignore=shutil.ignore_patterns('.godot', 'generated'))
         # PHYS-001 phase 9: the imported route (NAV-001) travels with the COAST package for the rebased flight playback.
-        if (root / 'simulations/wf_route_v1.json').exists():
-            (work / 'simulations').mkdir(exist_ok=True)
-            shutil.copy2(root / 'simulations/wf_route_v1.json', work / 'simulations/wf_route_v1.json')
-        # Studies are never imported by the build or export (they run in their own workspaces), so another session editing one
-        # must not void a snapshot.
-        sources = [*sorted(p for p in (root / 'src/wayfarer').rglob('*.py') if 'studies' not in p.relative_to(root / 'src/wayfarer').parts),
+        if (root / 'data/simulations/wf_route_v1.json').exists():
+            (work / 'data/simulations').mkdir(parents=True, exist_ok=True)
+            shutil.copy2(root / 'data/simulations/wf_route_v1.json', work / 'data/simulations/wf_route_v1.json')
+        sources = [*sorted(p for p in (root / 'src/wayfarer').rglob('*.py') if '__pycache__' not in p.parts),
                    root / 'tools/runtime_export.py', root / 'tools/workflow.py',
                    *sorted((root / 'godot').rglob('*.gd')),
                    root / 'godot/project.godot', *sorted((root / 'godot/scenes').glob('*.tscn'))]
@@ -210,35 +123,16 @@ def run(root, eye_layout=None):
             *([('inspect', pipeline.blender(root / 'src/wayfarer/validation/inspect.py', '--root', work, '--output', run_dir / 'validation.json'))] if eye_layout else []),
             ('export', pipeline.blender(root / 'src/wayfarer/export/godot.py', '--root', work)),
             ('export-docked', pipeline.blender(root / 'src/wayfarer/export/godot.py', '--root', work, '--preset', 'DOCKED')),
-            # WEB-003: the hologram styles' overlay colours over the DOCKED nodes (Demonstrator 01's hologram toggle).
-            ('holo-style', ['python3', str(root / 'src/wayfarer/representation.py'), 'holo-style', '--root', str(root),
-                            '--manifest', str(work / 'godot/generated/manifest_docked.json'), '--out', str(work / 'godot/generated/wf_holo.json')]),
-            # M5: the subsystem hologram data over the COAST manifest and the saved study assets (built above when missing).
-            ('export-m5', pipeline.blender(root / 'src/wayfarer/export/m5_hologram.py', '--root', root, '--out', work / 'godot/generated')),
-            # Milestone C (MECH-003): the 41_SURVIVAL_RESOURCES study as generated/wf_life_support.json for the life-support simulator.
-            ('life-support', ['python3', str(root / 'src/wayfarer/life_support.py'), '--root', str(work), '--out', str(work / 'godot/generated')]),
             ('import', [GODOT, '--headless', '--path', str(project), '--editor', '--import']),
         ]
         humans = sorted((root / 'assets/characters').glob('WF_CHAR_HUMAN_*.blend'))
-        suits = sorted((root / 'assets/characters').glob('WF_EVA_*.blend')) if humans else []
         if humans:
             identity.update({str(h.relative_to(root)): pipeline.sha256(h) for h in humans})
             commands[3:3] = [('export-characters', pipeline.blender(root / 'src/wayfarer/export/human_gltf.py', '--out', work / 'godot/generated/characters'))]
-        # EVA-001: the suited pair (`workflow.py eva` builds WF_EVA_*.blend) and the guided-EVA training route travel with the package.
-        if suits:
-            identity.update({str(h.relative_to(root)): pipeline.sha256(h) for h in suits})
-            fit = root / 'references/p1_eva_fit.json'
-            radius = json.loads(fit.read_text())['sweep_radius_m'] if fit.exists() else 0.55
-            at = next(i for i, (n, _) in enumerate(commands) if n == 'import')
-            commands[at:at] = [('export-eva', pipeline.blender(root / 'src/wayfarer/export/eva_gltf.py', '--out', work / 'godot/generated/characters')),
-                               ('eva-route', ['python3', str(root / 'src/wayfarer/eva_route.py'), '--root', str(work), '--out', str(work / 'godot/generated'),
-                                             '--suit-radius', str(radius), '--access', str(root / 'references/p1_eva_access.json'),
-                                             '--sp11', str(root / 'references/p1_eva_sp11.json')])]
-        # The MPFB humans and the EVA suits are required package content: a missing asset fails the export instead of skipping its checks.
-        missing = [what for what, found in (('characters (python3 tools/workflow.py characters)', humans),
-                                            ('EVA suits (python3 tools/workflow.py eva)', suits)) if not found]
-        if missing:
-            return {'result': 'FAIL', 'step': 'assets', 'reason': f'required runtime assets missing: {", ".join(missing)}', 'run_dir': str(run_dir)}
+        # The MPFB humans are required package content: a missing asset fails the export instead of skipping its checks.
+        if not humans:
+            return {'result': 'FAIL', 'step': 'assets', 'reason': 'required runtime assets missing: characters (python3 tools/workflow.py characters)',
+                    'run_dir': str(run_dir)}
         checks = list(CHECKS)
         for name, command in commands:
             log = run_dir / f'{name}.log'
@@ -366,7 +260,7 @@ def prune_candidates(root):
     named = '\n'.join(p.read_text(errors='ignore') for p in texts if p.is_file())
     out = []
     for d in sorted(runs.iterdir()):
-        if d.name in keep or d.name == 'drive_inbox' or '-pre-' in d.name or d.name in named:
+        if d.name in keep or d.name in ('drive_inbox', 'renders') or '-pre-' in d.name or d.name in named:
             continue
         size = sum(f.stat().st_size for f in d.rglob('*') if f.is_file()) if d.is_dir() else d.stat().st_size
         out.append({'path': str(d.relative_to(root)), 'bytes': size, 'kind': 'directory' if d.is_dir() else 'file'})

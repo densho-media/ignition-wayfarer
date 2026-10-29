@@ -14,7 +14,7 @@ owns = ["data/wayfarer_3d.toml", "data/source_map.toml", "data/modules.toml", "s
         "src/wayfarer/sim_rig.py", "src/wayfarer/representation.py", "src/wayfarer/modules.py", "src/wayfarer/production_detail.py",
         "src/wayfarer/build/*.py", "src/wayfarer/components/recipes.py", "src/wayfarer/components/revision.py",
         "src/wayfarer/components/production.py", "src/wayfarer/components/detail.py", "src/wayfarer/export/godot.py",
-        "src/wayfarer/validation/inspect.py", "simulations/wf_sim_rig.json", "simulations/wf_module_contracts.json"]
+        "src/wayfarer/validation/inspect.py", "data/simulations/wf_sim_rig.json", "data/simulations/wf_module_contracts.json"]
 depends = []
 inspect = []
 

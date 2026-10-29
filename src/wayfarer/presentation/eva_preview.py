@@ -1,7 +1,7 @@
 """Renders of WAYFARER_EVA_Y155 (EVA-001; S&E 44 EXP-04, RUN-008): assembled, cutaway, exploded and pose sheets of the suit variants.
 
   blender --background --factory-startup --python-exit-code 1 --python src/wayfarer/presentation/eva_preview.py -- \
-      [--views lineup turnaround cutaway exploded poses back plss_compare] [--out renders/p1/eva] [--size 1280 960] [--samples 32] [--compact <dir> --numbers <json>]
+      [--views lineup turnaround cutaway exploded poses back plss_compare] [--out runs/renders/p1/eva] [--size 1280 960] [--samples 32] [--compact <dir> --numbers <json>]
 
 Every view opens the saved assets/characters/WF_EVA_<ID>.blend files (build/eva_suit.py) in memory and never saves them. The cutaway
 removes the front-left quadrant of the outer layers and the PLSS covers by a boolean at render time only and shows the parts marked
@@ -226,7 +226,7 @@ def poses(out, size, samples):
 def main():
     argv = sys.argv[sys.argv.index('--')+1:] if '--' in sys.argv else []
     ap = argparse.ArgumentParser(); ap.add_argument('--views', nargs='*', default=['lineup', 'back', 'cutaway', 'exploded', 'poses'])
-    ap.add_argument('--out', type=Path, default=ROOT/'renders/p1/eva'); ap.add_argument('--size', nargs=2, type=int, default=[1280, 960])
+    ap.add_argument('--out', type=Path, default=ROOT/'runs/renders/p1/eva'); ap.add_argument('--size', nargs=2, type=int, default=[1280, 960])
     ap.add_argument('--samples', type=int, default=32)
     ap.add_argument('--compact', type=Path, help='plss_compare: folder of the compact PLSS study build (eva_suit.py --plss compact --out-dir)')
     ap.add_argument('--numbers', type=Path, help='plss_compare: {baseline|compact: envelope readbacks} JSON to label')

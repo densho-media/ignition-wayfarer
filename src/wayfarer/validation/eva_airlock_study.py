@@ -1,7 +1,7 @@
 """SP-11 / SP-12 / SP-13 study in the saved vehicle (EVA-002; S&E 43 EVA-043/044, 44 EVA2-003/007; docs/EVA.md).
 
   blender --background --factory-startup --python-exit-code 1 --python src/wayfarer/validation/eva_airlock_study.py -- \
-      [--access references/p1_eva_access.json] [--out runs/<stamp>-eva-airlock] [--renders renders/p1/eva/airlock] [--size 1280 960]
+      [--access references/p1_eva_access.json] [--out runs/<stamp>-eva-airlock] [--renders runs/renders/p1/eva/airlock] [--size 1280 960]
 
 Builds each SP-11 candidate of eva_access.py (chamber shell and bulkheads, outer neck through the hull, both plug leaves shut and their
 90 deg swing, the handle) and the SP-12 / SP-13 rooms with their fixtures as disposable STUDY_* collections inside the saved vehicle opened
@@ -368,7 +368,7 @@ def main():
     argv = sys.argv[sys.argv.index('--')+1:] if '--' in sys.argv else []
     ap = argparse.ArgumentParser(); ap.add_argument('--access', type=Path, default=ROOT/'references/p1_eva_access.json')
     ap.add_argument('--vehicle', type=Path, default=ROOT/'assets/wayfarer/WF_WAYFARER_001.blend'); ap.add_argument('--out', type=Path)
-    ap.add_argument('--renders', type=Path, default=ROOT/'renders/p1/eva/airlock'); ap.add_argument('--size', type=int, nargs=2, default=[1280, 960])
+    ap.add_argument('--renders', type=Path, default=ROOT/'runs/renders/p1/eva/airlock'); ap.add_argument('--size', type=int, nargs=2, default=[1280, 960])
     ap.add_argument('--report', type=Path, default=ROOT/'references/p1_eva_airlock.json'); ap.add_argument('--no-renders', action='store_true')
     a = ap.parse_args(argv)
     acc = json.loads(a.access.read_text()); env = json.loads((ROOT/'references/p1_eva_envelopes.json').read_text())

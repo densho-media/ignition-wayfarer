@@ -7,16 +7,15 @@ at <https://densho-media.github.io/ignition-wayfarer/>. Its four entry points ea
 | --- | --- | --- |
 | `/` | start page: Explore Ship or Enter Wayfarer | `index.html`, `site.css`, `release.json` (about 7 kB plus the manifest); no engine, model or library |
 | `/viewer/` | **Explore Ship**: three.js 0.170.0 engineering viewer | the viewer, three.js with the Draco decoder, `model/wayfarer-<hash>.glb` (5.9 MB) and its labels |
-| `/play/` | **Enter Wayfarer**: launcher; Start opens the walk (`demo01-<hash>.html?arg=--&arg=--excursion`, EXC-001), the second button the guided Demonstrator 01 tour | Godot 4.7.2 `engine-<hash>.{js,wasm}` and the one ship pack `demo01-<hash>.pck` (both experiences) |
-| `/review/` | technical review: release, model, checks, limitations, this browser | `release.json` |
+| `/play/` | **Enter Wayfarer**: launcher; Start opens the walk (`walk-<hash>.html`, EXC-001) | Godot 4.7.2 `engine-<hash>.{js,wasm}` and the ship pack `walk-<hash>.pck` |
+| `/status/` | technical status: release, model, checks, limitations, this browser | `release.json` |
 
-**Hologram styles (WEB-003).** Both experiences can show the ship as the two hologram looks of the Blender shots and the Godot
-M5 scene, as presentation only: **Subsystems** (unshaded, additive rim and scan bands in each functional subsystem's overlay colour,
+**Hologram styles (WEB-003).** Explore Ship can show the ship as the two hologram looks of the Blender shots, as presentation
+only: **Subsystems** (unshaded, additive rim and scan bands in each functional subsystem's overlay colour,
 the M5 subsystem hologram) and **Engine holo** (one colour, rim glow and, in the viewer, wire edges: the SH_ENGINE_HOLOGRAM look).
 The colours and node classification come from `representation.py holo-style` over the export manifest (shots/m5_subsystems.toml,
 the SH_ENGINE_HOLOGRAM colour, and the manifest lineage for groups); the viewer loads them (`model/holo-<hash>.json`) only when
-something other than the standard look is first asked for. In Enter Wayfarer, F3 or the Holo touch button cycles standard,
-subsystem and engine (`generated/wf_holo.json`). Overlay colours explain function and are never materials.
+something other than the standard look is first asked for. Overlay colours explain function and are never materials.
 
 **Hybrid appearance (WEB-004, Explore Ship).** Three separate parts of the viewer state, resolved per node by `viewer/appearance.js`
 (pure logic) and drawn by `viewer/viewer.js`:
@@ -69,11 +68,11 @@ measurements and the open items are in [docs/wayfarer-web-experience-plan.md](..
 
 ## Sources here
 
-- `index.html`, `site.css`: the start page and the stylesheet the launcher and review pages share.
+- `index.html`, `site.css`: the start page and the stylesheet the launcher and status pages share.
 - `viewer/`: the viewer (its own stylesheet).
 - `play/index.html`: the click-to-load launcher.
 - `play/shell.html`: the Godot HTML shell. It is an export input, not a site file.
-- `review/`: the review page.
+- `status/`: the status page.
 
 `tools/web_export.py` copies these pages and adds the generated files (`vendor/`, `model/`, the Godot export, `build.json`,
 `play.json`, `release.json`). Every path is relative, so the site serves from any subpath on any static host.
@@ -93,7 +92,7 @@ python3 tools/web_check.py runs/web-site --out runs/web-check --chrome <chrome o
 - **Reuse.** With `--reuse-play`, an Enter Wayfarer whose inputs are unchanged is copied from that previous site instead of
   rebuilt. The inputs are the staged Godot project (the commit fields in its manifests left out), the shell, `web_play.py`
   and the pinned Godot. The previous site must carry the same `input_key`, passing play and equivalence tests, and play files
-  (and native zip) matching its `release.json`. The import, native check, recording and exports are skipped, and the browser
+  (and native zip) matching its `release.json`. The import, native check and exports are skipped, and the browser
   check carries that release's browser-vs-native result. Godot's `.pck` differs between two exports of the same inputs, so
   the key is computed from the inputs, not the pack. CI passes the latest `web-*` release.
 - **Toolchain.** `web` needs Blender (`WAYFARER_BLENDER`).
@@ -102,9 +101,9 @@ python3 tools/web_check.py runs/web-site --out runs/web-check --chrome <chrome o
     and Linux templates from the 1.3 GB archive.
   - `--no-play` builds the site without Godot.
 - **The play build** runs in `runs/<stamp>-web/play/`, a copy of `godot/`.
-  - It exports DOCKED from the saved assets and adds the COAST manifest, the route and the EVA data.
-  - It sets the main scene to `demo01.tscn` in that copy only, imports, and runs Demonstrator 01's own check (68 checks) plus a
-    fixed-30-fps recording natively.
+  - It exports DOCKED from the saved assets and adds the route.
+  - The main scene is the walk (`excursion.tscn`, as in `godot/project.godot`); it imports and runs the walk's own check
+    (`--check-excursion`) natively, the reference for the browser.
   - It then exports Web (single-threaded, no COOP/COEP needed) and, with `--native`, a Linux build of the same package.
   - The project's `godot/` and `godot/generated/` are never written.
 - **Before PASS,** `web` checks that every local reference in the site resolves, that no file exceeds 95 MB, that the site
@@ -136,47 +135,34 @@ mkdir -p runs/preview && ln -sfn ../web-site runs/preview/ignition-wayfarer && p
 - **Enter Wayfarer:**
   - The launcher requests no engine before Start.
   - Start boots Godot and the walk (it prints `WF_EXCURSION ready`) with no request to `viewer/` and no engine or script error.
-  - The ACI first-launch prompt takes Enter.
+  - Two Enter presses reach the running walk without a script error.
 - **Switching:**
   - Exit and Back return to the start page with no canvas left.
   - Explore Ship starts again.
   - Browser memory (the summed RSS of all Chrome processes) returns to the start-page level.
-- **Recording:** Demonstrator 01 autoplays GRAVITY to INSPECT at a fixed 30 fps and must match the native run of the same
-  package: chapters, frame count and production-layer flips.
-- **Phone, review page:**
+- **Equivalence:** the walk's own check (both rings round and back to the station by the player's actions) runs in the Web build
+  at a fixed 60 fps with drawing off and must give the native result and milestones of the same package. It takes about 1,470 s
+  in headless Chromium, so it has its own runner and a 2,700 s wait.
+- **Phone, status page:**
   - At 390 × 844 with touch, the start page has no overflow and the viewer frames the ship, orbits with one finger and zooms
     with a pinch.
-  - The review page renders the release.
-- **Touch (MOB-001):** Enter Wayfarer on an emulated phone (844 × 390 CSS px, DPR 3, touch, landscape), in a third browser
-  alongside the walk. The game publishes its touch state (`?arg=--&arg=--touch-probe`, `window.wayfarerTouch`).
-  - The touch welcome is completed by a tap, and Skip and Pause work by touch.
-  - The rail stick works together with a look finger, and lifting the fingers stops at once.
-  - Weightless: no stick and no force, a look drag, then Push off.
-  - Map and the systems card open and close.
-  - The transfer line takes the 1-D stick.
-  - Walking on ring A, with Drop by a second finger.
-  - Help is a modal.
-  - Upright and tablet sizes keep the same run.
-  It runs in two segments, each in a fresh browser: `touch1` up to Push off, and `touch2`, which starts at MICROGRAVITY
-  (`--from-chapter=MICROGRAVITY`) and covers the rest. This is emulation: it checks behaviour, not a phone's frame rate
-  (docs/wayfarer-mobile-controls-plan.md).
+  - The status page renders the release.
 - **Touch walk (EXC-001):** the walk on the same emulated phone, in its own browser: the touch welcome by
   a tap; the 1-D stick down the boarding line to the shut outer hatch (the push-off into the coast across it is refused); Use opens
   it; a look drag turns the view; Map and View answer; no engine or script error.
 
 `--record` writes the summary and metrics into the site's `release.json`. `--live <url>` repeats the checks against a deployed
-site, `--no-recording` skips the recording and `--no-touch` the touch journey. `--part main|equivalence|touch1|touch2|walk` (repeatable) runs
+site, `--no-recording` skips the equivalence and `--no-touch` the touch walk. `--part main|equivalence|walk` (repeatable) runs
 only those parts, and `--merge <part dirs> --out <dir> [--record]` combines their `check.json`; a missing part fails.
 
 ## GitHub Actions
 
 `.github/workflows/web-explorer.yml`:
 - **Triggers.** Pushes to `main`, `claude/**` and `local/**`, plus a manual run. There is no `pull_request` trigger. A push
-  that changes only `docs/`, `TODO.md`, `README.md`, `AGENTS.md` or `CLAUDE.md` runs nothing (none of it is in the site or
+  that changes only `docs/`, `work/`, `TODO.md`, `README.md`, `AGENTS.md` or `CLAUDE.md` runs nothing (none of it is in the site or
   read by a test); the live site stays at the last built commit.
 - **Every branch.** Unit tests, the Blender build with geometry diff 0 and `web --native` (job `build`), then the browser check in
-  five parallel jobs on their own runners (`browser-check`: main, equivalence, the touch journey's two segments touch1 and touch2,
-  walk; software WebGL is CPU-bound), then
+  three parallel jobs on their own runners (`browser-check`: main, equivalence, walk; software WebGL is CPU-bound), then
   `site` merges their results into the site's `release.json` (`web_check --merge --record`; a missing part fails). Artifacts:
   - the site (`wayfarer-web-site`, the preview build, with the recorded results)
   - each part's screenshots and results (`wayfarer-web-check-<part>`), the merged result (`wayfarer-web-check`) and the build logs
@@ -184,7 +170,7 @@ only those parts, and `--merge <part dirs> --out <dir> [--record]` combines thei
 - **`main` only:**
   - `deploy` publishes to Pages, only after every check passes.
   - `verify` waits until the live `release.json` names the commit, records each file type's status, type, encoding and cache
-    headers; `verify-browser` then runs the browser check against the live URL in parallel parts (main, touch1, touch2, walk).
+    headers; `verify-browser` then runs the browser check against the live URL in parallel parts (main, walk).
   - `release` keeps the verified site, its `release.json` and the native Linux zip as GitHub Release `web-<release>`.
 - **Permissions.**
   - Build jobs are read-only.

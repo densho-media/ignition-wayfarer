@@ -152,7 +152,7 @@ def render(root=ROOT, views=None, size=768, state="COAST", out_dir=None, hull='s
             obj.modifiers.new('Preview_Wire','WIREFRAME').thickness=.12
         bpy.context.scene.frame_set(bpy.context.scene.frame_current)
     directions={'side':(0,-1,0),'top':(0,0,1),'bow':(1,0,0),'aft':(-1,0,0),'threequarter':(1,-1.4,.9),'body_detail':(1,-1.6,.8),'bow_detail':(1,0,0),'aft_detail':(-1,0,0),'habitat_detail':(1,-1.4,.6),'ring_detail':(-1,-1,.8),'root_detail':(.6,-1,.8),'joint_detail':(.6,-1,.8),'hull_detail':(1,-1.3,.45),'service_detail':(.35,1,.3),'sector_keel_detail':(0,-1,0),'bay_detail':(1,-1.3,.6),'power_detail':(.45,-1,.55),'hub_detail':(1,-1.2,.7),'hub_section_detail':(0,-1,0),'refuge_section_detail':(0,-1,0),'ring_spar_detail':(0,-1,0),'dock_ring_detail':(0,1,0),'crew_detail':(-1,-1.1,.5),'gap_detail':(.4,-1,.5),'survival_detail':(.45,-1,.55),'shield_detail':(1,-.8,.5),'shield_rear_detail':(-1,-.9,.45),'shield_profile_detail':(0,-1,0),'eye_well_detail':(1,-.55,.4),'eye_facet_detail':(1,-.55,.4),'crown_detail':(.7,.55,.7),'crown_bay_detail':(1,.35,.55),'drone_spine_detail':(-.45,-.4,1.0),'drone_brow_detail':(-.35,.95,.35),'drone_root_detail':(.7,.1,1.0)}
-    out=out_dir or root/'renders'/'p1'/(state.lower()+('_nohull' if hull=='hide' else '')+('_simproxies' if sim_proxies=='show' else ''));out.mkdir(parents=True,exist_ok=True)
+    out=out_dir or root/'runs'/'renders'/'p1'/(state.lower()+('_nohull' if hull=='hide' else '')+('_simproxies' if sim_proxies=='show' else ''));out.mkdir(parents=True,exist_ok=True)
     labels=[];extras=[]
     views=list(directions) if views==['all'] else views or list(DEFAULT_VIEWS)
     unknown=[v for v in views if v not in directions]

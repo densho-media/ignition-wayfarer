@@ -164,7 +164,7 @@ def render(root=ROOT, names=None, state='HIGH_POWER', size=768, modes=('cinemati
         obj.rotation_euler = (-obj.location).to_track_quat('-Z', 'Y').to_euler()
     cam_data = bpy.data.cameras.new('Preview_Camera'); camera = bpy.data.objects.new(cam_data.name, cam_data); scene.collection.objects.link(camera); scene.camera = camera
     cam_data.type = 'ORTHO'; cam_data.clip_start = .1; cam_data.clip_end = 2000
-    out = out_dir or root/'renders/p1/drive'; out.mkdir(parents=True, exist_ok=True)
+    out = out_dir or root/'runs/renders/p1/drive'; out.mkdir(parents=True, exist_ok=True)
     aspect = scene.render.resolution_x/scene.render.resolution_y
     written = []
     for name, title, source, direction, fx, corners, overlay, options in targets(s):

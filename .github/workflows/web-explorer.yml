@@ -1,4 +1,4 @@
-# WEB-001/002: build the Wayfarer website (start page, Explore Ship, Enter Wayfarer, review) from a clean checkout.
+# WEB-001/002: build the Wayfarer website (start page, Explore Ship, Enter Wayfarer, status) from a clean checkout.
 # Every push to main or a claude/* or local/* branch builds, validates and uploads the site as an artifact (the preview build).
 # Only main deploys to GitHub Pages, and only after the tests and the build/export/browser-check job pass; a failed run never
 # replaces the live site. After a deploy, the release job keeps the exact site and the native Linux build as a GitHub Release
@@ -10,7 +10,7 @@ name: Web explorer
 on:
   push:
     branches: [main, 'claude/**', 'local/**']
-    paths-ignore: ['docs/**', 'TODO.md', 'README.md', 'AGENTS.md', 'CLAUDE.md']
+    paths-ignore: ['docs/**', 'work/**', 'TODO.md', 'README.md', 'AGENTS.md', 'CLAUDE.md']
   workflow_dispatch:
 
 permissions:
@@ -85,19 +85,6 @@ jobs:
           echo "PIPELINE_SECONDS=$SECONDS" >> "$GITHUB_ENV"
           echo "PIPELINE_RUN=$(python3 -c 'import json; print(json.load(open("pipeline.json"))["run_dir"])')" >> "$GITHUB_ENV"
 
-      - name: Review file for the owner (the fractal shielding in Blender, opens in Material Preview on the Brow)
-        run: |
-          "$WAYFARER_BLENDER" -b --python src/wayfarer/presentation/review_fractal_shield.py -- --out review/WF_REVIEW_FRACTAL_SHIELD.blend 2>&1 | tail -20
-          test -s review/WF_REVIEW_FRACTAL_SHIELD.blend
-
-      - name: Upload the review file
-        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9  # v7.0.2
-        with:
-          name: wayfarer-review-fractal-shield
-          path: review/WF_REVIEW_FRACTAL_SHIELD.blend
-          if-no-files-found: error
-          retention-days: 14
-
       - name: Previous verified release (its Enter Wayfarer files are reused when the play inputs are unchanged)
         env:
           GH_TOKEN: ${{ github.token }}
@@ -107,9 +94,9 @@ jobs:
           tag=$(gh release list --repo "$GITHUB_REPOSITORY" --limit 30 --json tagName \
                 --jq '[.[].tagName | select(test("^web-[0-9]{8}-[0-9a-f]{7}$"))][0] // empty' 2>/dev/null)
           if [ -n "$tag" ] && gh release download "$tag" --repo "$GITHUB_REPOSITORY" --dir ~/previous \
-               --pattern "wayfarer-site-$tag.tar.gz" --pattern wayfarer-demo01-linux-x86_64.zip 2>/dev/null; then
+               --pattern "wayfarer-site-$tag.tar.gz" --pattern wayfarer-walk-linux-x86_64.zip 2>/dev/null; then
             mkdir -p ~/previous/site && tar -xzf ~/previous/wayfarer-site-$tag.tar.gz -C ~/previous/site \
-              && echo "REUSE=--reuse-play $HOME/previous/site --reuse-native $HOME/previous/wayfarer-demo01-linux-x86_64.zip" >> "$GITHUB_ENV" \
+              && echo "REUSE=--reuse-play $HOME/previous/site --reuse-native $HOME/previous/wayfarer-walk-linux-x86_64.zip" >> "$GITHUB_ENV" \
               && echo "::notice title=play reuse::comparing with release $tag"
           else
             echo "::notice title=play reuse::no previous release with a native build (${tag:-none}); full play build"
@@ -143,8 +130,8 @@ jobs:
                 f"viewer {web.get('viewer_mb', '-')} MB (GLB {web.get('glb_mb', '-')} MB, {web.get('mesh_nodes', '-')} mesh nodes, "
                 f"{web.get('triangles', '-')} triangles), play {(web.get('play') or {}).get('mb', '-')} MB, site {web.get('site_mb', '-')} MB")
           native = (web.get('play') or {}).get('native_reference') or {}
-          print(f"- Native Demonstrator 01 check on the web package: **{native.get('result', 'not run')}** ({native.get('checks', '-')} checks), "
-                f"recording {json.dumps(native.get('recording'))}")
+          print(f"- Native walk check on the web package: **{native.get('result', 'not run')}** ({native.get('physics_frames', '-')} physics frames, "
+                f"{native.get('seconds', '-')} s)")
           print(f"- Wall time: pipeline {os.environ.get('PIPELINE_SECONDS', '-')} s, export and Godot {os.environ.get('WEB_SECONDS', '-')} s")
           EOF
 
@@ -170,25 +157,25 @@ jobs:
           if-no-files-found: ignore
           retention-days: 14
 
-      - name: Upload the native Linux build of Demonstrator 01
+      - name: Upload the native Linux build of the walk
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9  # v7.0.2
         with:
-          name: wayfarer-demo01-linux-x86_64
-          path: ${{ env.WEB_RUN }}/wayfarer-demo01-linux-x86_64.zip
+          name: wayfarer-walk-linux-x86_64
+          path: ${{ env.WEB_RUN }}/wayfarer-walk-linux-x86_64.zip
           if-no-files-found: error
           retention-days: 14
 
-  # The browser check in five parts, each on its own runner against the same site (software WebGL is CPU-bound, so the parts no
-  # longer share one runner): the main visitor walk, browser-vs-native equivalence, the touch journey's two segments, the touch walk.
+  # The browser check in three parts, each on its own runner against the same site (software WebGL is CPU-bound, so the parts no
+  # longer share one runner): the main visitor walk, browser-vs-native equivalence, the touch walk.
   browser-check:
     name: Browser check (${{ matrix.part }})
     needs: [build]
     runs-on: ubuntu-24.04
-    timeout-minutes: 45
+    timeout-minutes: 60
     strategy:
       fail-fast: false
       matrix:
-        part: [main, equivalence, touch1, touch2, walk]
+        part: [main, equivalence, walk]
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
       - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c  # v8.0.1
@@ -225,7 +212,7 @@ jobs:
       - name: Merge the parts into release.json (a missing part fails)
         run: |
           python3 tools/web_check.py _site --merge parts/wayfarer-web-check-main parts/wayfarer-web-check-equivalence \
-            parts/wayfarer-web-check-touch1 parts/wayfarer-web-check-touch2 parts/wayfarer-web-check-walk --out web-check --record
+            parts/wayfarer-web-check-walk --out web-check --record
 
       - name: Report
         if: always()
@@ -325,7 +312,7 @@ jobs:
           raise SystemExit(bad)
           EOF2
 
-  # The browser check against the live URL in the same parts as browser-check (equivalence needs the recording, which a live check
+  # The browser check against the live URL in the same parts as browser-check (equivalence needs the native reference, which a live check
   # leaves out); one runner for every part outgrew its time limit on slow runners.
   verify-browser:
     name: Live browser check (${{ matrix.part }})
@@ -336,7 +323,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        part: [main, touch1, touch2, walk]
+        part: [main, walk]
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
       - name: Browser check against the live site, ${{ matrix.part }}
@@ -363,7 +350,7 @@ jobs:
           path: _site
       - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c  # v8.0.1
         with:
-          name: wayfarer-demo01-linux-x86_64
+          name: wayfarer-walk-linux-x86_64
           path: native
       - name: Create release web-<release>
         env:
@@ -378,5 +365,5 @@ jobs:
           fi
           url="https://densho-media.github.io/ignition-wayfarer/"
           gh release create "$tag" --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" --title "Wayfarer web $tag" \
-            --notes "Deployed to $url from $GITHUB_SHA (run $GITHUB_RUN_ID). Assets: the exact site (redeploy with the Web rollback workflow), its release.json, and the native Linux build of Integrated Demonstrator 01 (same package as the browser build). SIMULATION_ONLY, REP_PROXY geometry." \
-            "wayfarer-site-$tag.tar.gz" "release-$tag.json" native/wayfarer-demo01-linux-x86_64.zip
+            --notes "Deployed to $url from $GITHUB_SHA (run $GITHUB_RUN_ID). Assets: the exact site (redeploy with the Web rollback workflow), its release.json, and the native Linux build of the walk (same package as the browser build). SIMULATION_ONLY, REP_PROXY geometry." \
+            "wayfarer-site-$tag.tar.gz" "release-$tag.json" native/wayfarer-walk-linux-x86_64.zip

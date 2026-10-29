@@ -16,7 +16,7 @@ def sheet(rows):
 class FramesImportTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.data=fi.frames(ROOT);cls.route=json.loads((ROOT/'simulations/wf_route_v1.json').read_text())
+        cls.data=fi.frames(ROOT);cls.route=json.loads((ROOT/'data/simulations/wf_route_v1.json').read_text())
         t=cls.route['columns'].index('mission_t_s');cls.t=[r[t] for r in cls.route['frames']]
     def table(self,frames=True):
         rows=[['mission_t_s','frame','thrust','scenario_id','scenario_version','status','source','validation'],['s',None,'N',None,None,None,None,None]]

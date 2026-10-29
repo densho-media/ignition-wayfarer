@@ -59,7 +59,7 @@ bpy.ops.wm.save_as_mainfile(filepath={path!r})
 def main(report_path=ROOT/'references/p1_regression.json'):
     with tempfile.TemporaryDirectory(prefix='wayfarer-regression-') as temp:
         fixture=Path(temp)/'fixture'
-        for folder in ['data','assets','simulations']:
+        for folder in ['data','assets']:
             shutil.copytree(ROOT/folder,fixture/folder,ignore=shutil.ignore_patterns('milestones'))
         assets=fixture/'assets/wayfarer'
         baseline=inspect(fixture,Path(temp)/'baseline.json')

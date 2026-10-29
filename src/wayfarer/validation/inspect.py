@@ -580,7 +580,7 @@ def timeline_checks(s,root,blades):
     rotor controls pass their rules and the rings turn only as fast as spin_fraction says, the drive drivers and the exhaust run follow the
     sample, the radiator and forward-defense displays match, and the blades stay fixed."""
     import flight_timeline as ft
-    assert ft.check(root),'Stale simulations/wf_first_ignition_timeline.json'
+    assert ft.check(root),'Stale data/simulations/wf_first_ignition_timeline.json'
     ps=ft.phases(s);ch=ft.channels(s,ps);marks={}
     for name in ft.marks(s,ps):
         values=ft.sample(s,name,ch,ps)['values'];by=ft.control_values(ch,values)

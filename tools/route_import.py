@@ -1,7 +1,7 @@
 """`workflow.py route-import`: import the sheet-computed First Ignition route (NAV-001, 26_BLENDER_CONTRACT C-001..C-017).
 
 Reads 22_ROUTE_MODEL, 23_ROUTE_FRAMES, 24_ROUTE_EVENTS and 25_ROUTE_VALIDATION from the capture the `route_frames` source record names
-and writes [flight_timeline].route (simulations/wf_route_v1.json). Values are copied as the sheet stores them: nothing is computed,
+and writes [flight_timeline].route (data/simulations/wf_route_v1.json). Values are copied as the sheet stores them: nothing is computed,
 interpolated, smoothed or fixed here (NAV-027, C-001, C-017). The import is refused unless 25_ROUTE_VALIDATION rows 2:13 all read PASS
 (C-009); the checks below are import fidelity only (frame count, one row per frame number, the scenario labels)."""
 import hashlib

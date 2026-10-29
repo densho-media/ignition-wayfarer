@@ -2,7 +2,7 @@
 the corridor a passing truck leaves for rail mounts. Standard library only; writes an SVG from the PROTOTYPE truck parameters in
 data/drone_bodies.toml (drone_bodies.truck). Every dimension is a proposal for the owner's rail study, not a rating or an approved section.
 
-  python3 src/wayfarer/presentation/rail_section.py --out accessories/review/rail_section.svg
+  python3 src/wayfarer/presentation/rail_section.py --out runs/rail_section.svg
 """
 import argparse
 import math
@@ -115,7 +115,7 @@ def svg(g):
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument('--out', type=Path, default=ROOT/'accessories/review/rail_section.svg')
+    ap = argparse.ArgumentParser(); ap.add_argument('--out', type=Path, default=ROOT/'runs/rail_section.svg')
     a = ap.parse_args(); _, d = db.load(ROOT); g = geometry(d)
     a.out.parent.mkdir(parents=True, exist_ok=True); a.out.write_text(svg(g))
     print({k: (round(v, 4) if isinstance(v, float) else v) for k, v in g.items() if k != 'wheels'})

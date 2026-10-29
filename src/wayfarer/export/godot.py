@@ -289,6 +289,15 @@ def rotor_bindings(deps, fps):
     return out
 
 
+def library_chain(obj):
+    """The asset file stems an object comes through, innermost first (its own library, then each library that links it)."""
+    out, lib = [], obj.library
+    while lib:
+        out.append(Path(lib.filepath).stem)
+        lib = lib.parent
+    return out
+
+
 def runtime_vector(v):
     return [round(v.x, 6), round(v.z, 6), round(-v.y, 6)]
 
@@ -436,13 +445,16 @@ def export(root, preset='COAST', out=None, identity=None, draco=False):
         bpy.context.scene.collection.children.link(dst.collections[0])
     # RT-004: the ring and drum each placement turns with (node `frame`), and in DOCKED how each Q46 closure closes.
     frames, rotors, drums, plates, members = mechanism_frames(s, closures=preset == 'DOCKED')
+    # The ring a turning node belongs to, for its interior zone (ring 1 is ring A, aft).
+    ring_area = {bpy.data.objects[f'{m}_{j}']['component_id']: ('RING_A' if j == 1 else 'RING_B')
+                 for j in (1, 2) for m in ('Rotor', 'Drum') if bpy.data.objects.get(f'{m}_{j}')}
     bpy.context.scene.frame_set(1)
     deps = bpy.context.evaluated_depsgraph_get()
     mechanisms = rotor_bindings(deps, bpy.context.scene.render.fps) if preset == 'COAST' else {}
     staged, excluded, materials = [], Counter(), {}
     seen = set()
     low, high = Vector((float('inf'),) * 3), Vector((-float('inf'),) * 3)
-    timeline = json.loads((root / 'simulations' / TIMELINE).read_text()) if preset == 'COAST' else None
+    timeline = json.loads((root / 'data' / 'simulations' / TIMELINE).read_text()) if preset == 'COAST' else None
     # RT-003: objects whose visibility, alpha or scale a timeline channel or a named state drives are staged in their own pass below;
     # meshes the Crown's location drivers move carry offsets per state from the static pass.
     states = display_states(s) if timeline else {}
@@ -534,6 +546,7 @@ def export(root, preset='COAST', out=None, identity=None, draco=False):
             # Geometry-detail class (docs/MODULES.md), orthogonal to maturity and canon status; production detail names its pack.
             'detail_class': representation.detail_class({'detail_class': obj.get('detail_class'), 'layer': obj.get('layer'), 'kind': kind}),
             **({'pack': obj['detail_pack']} if 'detail_pack' in obj else {}),
+            'zone': representation.zone(kind, library_chain(obj.original), ring_area.get(frames.get(dupli_key(instance)))),
             **({'layer': 'CHARACTER', 'scene': obj.get('scene', '')} if obj.get('layer') == 'CHARACTER' else {}),
             # M7 (manifest v2): the presentation layer, representation, assembly and maturity of production-layer nodes.
             **({'layer': 'PRODUCTION', 'representation': obj.get('representation', 'REP_HERO'), 'assembly': obj.get('m7_assembly', ''),
@@ -614,6 +627,7 @@ def export(root, preset='COAST', out=None, identity=None, draco=False):
         'triangles': triangles, 'groups': sorted(groups), 'excluded': dict(excluded),
         'nodes': records, 'identity': json.loads(Path(identity or root / 'build_identity.json').read_text()),
         'production': dict(production_detail.standard(s), nodes=sum(r.get('layer') == 'PRODUCTION' for r in records)),
+        'zones': dict(sorted(Counter(r['zone'] for r in records).items())),
         'look': {'name': 'S004', 'status': s['look']['status'], 'source_ref': s['look']['evidence_ref'], 'materials': dict(sorted(looked.items())),
                  'lights': sum('light' in r for r in records),
                  'rule': 'FUT-003 presentation layer: materials carry the [look] surface classes; node records with `light` are emitting '

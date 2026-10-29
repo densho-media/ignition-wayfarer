@@ -10,7 +10,7 @@ import route_import as ri
 
 
 class RouteImportTests(unittest.TestCase):
-    # The committed import (simulations/wf_route_v1.json) is the production route; Drive captures are maintainer-local and not published.
+    # The committed import (data/simulations/wf_route_v1.json) is the production route; Drive captures are maintainer-local and not published.
     @classmethod
     def setUpClass(cls):
         cls.data=json.loads(ri.output(ROOT).read_text())

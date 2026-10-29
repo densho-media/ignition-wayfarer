@@ -1,23 +1,20 @@
-"""Enter Wayfarer (WEB-002): Integrated Demonstrator 01 as a single-threaded Godot Web export, built in a disposable workspace.
+"""Enter Wayfarer (WEB-002): the walk (EXC-001, godot/scenes/excursion.tscn) as a single-threaded Godot Web export, built in a
+disposable workspace.
 
 `build()` (called by web_export.run, `workflow.py web`) copies godot/ into the run directory, fills its generated/ with the
-package Demonstrator 01 reads, all from the saved assets and tracked inputs:
+package the walk reads, all from the saved assets and tracked inputs:
   wayfarer_docked.glb, manifest_docked.json, wf_sim_rig.json   export/godot.py --preset DOCKED (the same exporter as runtime-export)
-  manifest.json                                                the COAST manifest of the viewer export (forward explorer)
-  wf_route_v1.json                                             simulations/ (NAV-001 import, unchanged)
-  wf_eva.json                                                  eva_route.py with the tracked EVA references (remote view only)
-  wf_holo.json                                                 representation.py holo-style: the hologram styles' overlay colours (WEB-003)
-The MPFB characters and EVA suits are not built here: boarding.gd keeps the exported proxies (a presentation-only difference).
-In the workspace copy only, the main scene becomes demo01.tscn (60 UX-002/UX-017: one visitor journey, the review menu stays a
-developer tool) and export_presets.cfg is written; the project's godot/ and godot/generated/ are never touched.
-It then runs Demonstrator 01's own check natively in the same workspace (the native reference for this package), exports Web
-(no threads: no COOP/COEP headers needed) and, optionally, a native Linux build of the same package.
+  wf_route_v1.json                                             data/simulations/ (NAV-001 import, unchanged)
+The MPFB characters are not built here: the walk keeps its proxy body (a presentation-only difference). In the workspace copy
+export_presets.cfg is written; the project's godot/ and godot/generated/ are never touched. It then runs the walk's own check
+natively in the same workspace (the native reference for this package), exports Web (no threads: no COOP/COEP headers needed)
+and, optionally, a native Linux build of the same package.
 
 Reuse: the staged project is reproducible but Godot's .pck is not (two exports of identical inputs differ), so an unchanged Enter
 Wayfarer is recognised by its input key (`input_key`: the staged files with the manifests' commit fields left out, the shell, this
 module and the pinned Godot). Given a previous verified site whose play record carries the same key, passing play and equivalence
-tests and play files matching its release.json, build() copies those files (and its native zip) instead of importing, checking,
-recording and exporting again; the browser check then carries that release's browser-vs-native result.
+tests and play files matching its release.json, build() copies those files (and its native zip) instead of importing, checking
+and exporting again; the browser check then carries that release's browser-vs-native result.
 
 Godot is the official 4.7.2 standard (not Mono) build and templates, SHA-512 checked against the release's SHA512-SUMS and kept
 in a cache; only the templates used are extracted from the 1.3 GB archive.
@@ -48,8 +45,8 @@ LICENSES = {'LICENSE.txt': ('https://raw.githubusercontent.com/godotengine/godot
                               'cb1980c88089573bcacd7221d777c689bb8bbd778799f24c27fca0fe5f774d6d')}
 CACHE = Path(os.environ.get('WAYFARER_GODOT_CACHE') or Path.home() / '.cache/wayfarer/godot-4.7.2')
 PCK_LIMIT = 95_000_000            # GitHub Pages refuses files over 100 MB
-DEMO_CHECK = ['--fixed-fps', '60', 'res://scenes/demo01.tscn', '--quit-after', '60000', '--', '--check-demo']
-RECORDING = ['--fixed-fps', '30', 'res://scenes/demo01.tscn', '--quit-after', '20000', '--', '--autoplay', '--record-exit']
+SCENE = 'res://scenes/excursion.tscn'
+WALK_CHECK = ['--fixed-fps', '60', SCENE, '--quit-after', '300000', '--', '--check-excursion']
 PRESETS = '''[preset.0]
 
 name="Web"
@@ -169,14 +166,14 @@ def toolchain(native=False):
             'version': version, 'templates': {t: known[t] for t in wanted}}
 
 
-def demo_result(log):
-    line = next((l for l in Path(log).read_text(errors='replace').splitlines() if l.startswith('WF_GODOT_DEMO ')), None)
+def walk_result(log):
+    """The walk's check (excursion check.gd) from its log: its result, failures and the route milestones it noted."""
+    line = next((l for l in Path(log).read_text(errors='replace').splitlines() if l.startswith('WF_GODOT_EXCURSION ')), None)
     if line is None:
-        return {'result': 'FAIL', 'reason': 'no WF_GODOT_DEMO line'}
+        return {'result': 'FAIL', 'reason': 'no WF_GODOT_EXCURSION line'}
     data = json.loads(line.split(' ', 1)[1])
-    failed = [c['id'] for c in data['checks'] if not c['ok']]
-    return {'result': data.get('result'), 'checks': len(data['checks']), 'failed': failed,
-            'errors': Path(log).read_text(errors='replace').count('ERROR:'), 'ok_by_check': {c['id']: c['ok'] for c in data['checks']}}
+    return {'result': data.get('result'), 'fails': data.get('fails', []), 'notes': sorted(data.get('notes', {})),
+            'physics_frames': data.get('physics_frames'), 'errors': Path(log).read_text(errors='replace').count('ERROR:')}
 
 
 def input_key(project, tools, shell):
@@ -232,8 +229,8 @@ def run_logged(command, log, root, timeout=pipeline.STEP_TIMEOUT):
     return pipeline.subprocess_runner(command, log, root, timeout)
 
 
-def build(root, run_dir, out, coast_manifest, identity, native=False, native_check=True, reuse=None, reuse_native=None):
-    """Workspace -> package -> import -> native Demonstrator 01 check -> Web export into `out` (the site's play/ directory).
+def build(root, run_dir, out, identity, native=False, native_check=True, reuse=None, reuse_native=None):
+    """Workspace -> package -> import -> native walk check -> Web export into `out` (the site's play/ directory).
     With `reuse` (a previous site directory; `reuse_native` its native Linux zip when native=True), an unchanged package is copied
     from there instead (see the module docstring). Returns the play record for release.json; raises on any failure."""
     t0 = time.monotonic()
@@ -255,17 +252,9 @@ def build(root, run_dir, out, coast_manifest, identity, native=False, native_che
 
     step('export-docked', pipeline.blender(root / 'src/wayfarer/export/godot.py', '--root', root, '--preset', 'DOCKED',
                                            '--out', generated, '--identity', identity))
-    step('holo-style', ['python3', str(root / 'src/wayfarer/representation.py'), 'holo-style', '--root', str(root),
-                        '--manifest', str(generated / 'manifest_docked.json'), '--out', str(generated / 'wf_holo.json')])
-    shutil.copy2(coast_manifest, generated / 'manifest.json')
-    shutil.copy2(root / 'simulations/wf_route_v1.json', generated / 'wf_route_v1.json')
-    step('eva-route', ['python3', str(root / 'src/wayfarer/eva_route.py'), '--root', str(root), '--out', str(generated),
-                       '--access', str(root / 'references/p1_eva_access.json'), '--sp11', str(root / 'references/p1_eva_sp11.json')])
-    settings = project / 'project.godot'
-    text, n = re.subn(r'^run/main_scene=.*$', 'run/main_scene="res://scenes/demo01.tscn"', settings.read_text(), flags=re.M)
-    if n != 1:
-        raise ValueError('project.godot: run/main_scene not found')
-    settings.write_text(text)
+    shutil.copy2(root / 'data/simulations/wf_route_v1.json', generated / 'wf_route_v1.json')
+    if f'run/main_scene="{SCENE}"' not in (project / 'project.godot').read_text():
+        raise ValueError(f'project.godot: run/main_scene is not {SCENE}')
     (project / 'export_presets.cfg').write_text(PRESETS.format(web=tools['web'], linux=tools['linux'],
                                                                shell=root / 'web/play/shell.html'))
     key = input_key(project, tools, root / 'web/play/shell.html')
@@ -282,20 +271,12 @@ def build(root, run_dir, out, coast_manifest, identity, native=False, native_che
     native_ref = None
     if native_check:
         s = time.monotonic()
-        log = run_dir / 'play-native-demo-check.log'
-        run_logged([godot, '--headless', '--fixed-fps', '60', '--path', str(project), *DEMO_CHECK[2:]], log, root)
-        native_ref = {**demo_result(log), 'seconds': round(time.monotonic() - s, 1), 'godot': tools['version'],
+        log = run_dir / 'play-native-walk-check.log'
+        run_logged([godot, '--headless', '--fixed-fps', '60', '--path', str(project), *WALK_CHECK[2:]], log, root)
+        native_ref = {**walk_result(log), 'seconds': round(time.monotonic() - s, 1), 'godot': tools['version'],
                       'note': 'Godot 4.7.2 headless on Linux, --fixed-fps 60, same workspace and package as the Web export'}
         if native_ref['result'] != 'PASS':
-            raise RuntimeError(f'native Demonstrator 01 check failed on the web package: {native_ref}')
-        # The run the browser check repeats in the Web build: the whole journey in autoplay at a fixed 30 fps (web_check.py compares).
-        log = run_dir / 'play-native-recording.log'
-        run_logged([godot, '--headless', '--path', str(project), *RECORDING], log, root)
-        line = next((l for l in log.read_text(errors='replace').splitlines() if l.startswith('WF_DEMO_RECORDING ')), None)
-        native_ref['recording'] = json.loads(line.split(' ', 1)[1]) if line else None
-        native_ref['recording_args'] = RECORDING
-        if not line or native_ref['recording']['result'] != 'PASS':
-            raise RuntimeError(f'native Demonstrator 01 recording failed on the web package: {native_ref["recording"]}')
+            raise RuntimeError(f'native walk check failed on the web package: {native_ref}')
     export = work / 'web'
     export.mkdir()
     step('export-web', [godot, '--headless', '--path', str(project), '--export-release', 'Web', str(export / 'wayfarer.html')])
@@ -306,19 +287,19 @@ def build(root, run_dir, out, coast_manifest, identity, native=False, native_che
     if native:
         linux = work / 'linux'
         linux.mkdir()
-        step('export-linux', [godot, '--headless', '--path', str(project), '--export-release', 'Linux', str(linux / 'wayfarer_demo01.x86_64')])
+        step('export-linux', [godot, '--headless', '--path', str(project), '--export-release', 'Linux', str(linux / 'wayfarer_walk.x86_64')])
         for name in LICENSES:
             shutil.copy2(CACHE / name, linux / f'GODOT_{name}')
         (linux / 'README.txt').write_text(NATIVE_README)
-        native_zip = run_dir / 'wayfarer-demo01-linux-x86_64.zip'
+        native_zip = run_dir / 'wayfarer-walk-linux-x86_64.zip'
         with zipfile.ZipFile(native_zip, 'w', zipfile.ZIP_DEFLATED) as z:
             for p in sorted(linux.iterdir()):
-                z.write(p, f'wayfarer-demo01/{p.name}')
+                z.write(p, f'wayfarer-walk/{p.name}')
     sizes = {k: (out / v).stat().st_size for k, v in files.items()}
     if sizes['pck'] > PCK_LIMIT or sizes['wasm'] > PCK_LIMIT:
         raise ValueError(f'play files over the Pages limit: {sizes}')
     return {'entry': files['html'], 'files': files, 'bytes': sizes, 'godot': tools['version'], 'templates': tools['templates'],
-            'variant': VARIANT, 'scene': 'res://scenes/demo01.tscn',
+            'variant': VARIANT, 'scene': SCENE,
             'package': sorted(p.name for p in generated.iterdir() if not p.name.endswith('.import')),
             'reduced_fidelity': REDUCED_FIDELITY, 'native_reference': native_ref, 'native_zip': str(native_zip) if native_zip else None,
             'native_zip_sha256': sha(native_zip) if native_zip else None, 'input_key': key, 'reused_from': None, 'reuse_note': why,
@@ -326,7 +307,7 @@ def build(root, run_dir, out, coast_manifest, identity, native=False, native_che
 
 
 VARIANT = 'web_nothreads_release (single-threaded, no GDExtension, WebGL 2 / Compatibility)'
-REDUCED_FIDELITY = ['MPFB induction pair and EVA suits not packaged: the exported proxies stand in (presentation only)']
+REDUCED_FIDELITY = ['MPFB characters not packaged: the proxy body stands in (presentation only)']
 
 
 def reused(previous, site, out, run_dir, key, tools, generated, native_zip, seconds, t0):
@@ -337,7 +318,7 @@ def reused(previous, site, out, run_dir, key, tools, generated, native_zip, seco
         shutil.copy2(site / 'play' / f, out / f)
     target = None
     if native_zip:
-        target = run_dir / 'wayfarer-demo01-linux-x86_64.zip'
+        target = run_dir / 'wayfarer-walk-linux-x86_64.zip'
         shutil.copy2(native_zip, target)
     package = sorted(p.name for p in generated.iterdir() if not p.name.endswith('.import'))
     if package != play['package']:
@@ -349,17 +330,17 @@ def reused(previous, site, out, run_dir, key, tools, generated, native_zip, seco
             'native_zip': str(target) if target else None, 'native_zip_sha256': play.get('native_zip_sha256') if target else None,
             'input_key': key, 'reused_from': {'release': previous['release'], 'git_revision': previous['git_revision'],
                                               'play': tests['play'], 'equivalence': tests['equivalence']},
-            'reuse_note': f"same inputs as release {previous['release']}: import, native check, recording and exports skipped",
+            'reuse_note': f"same inputs as release {previous['release']}: import, native check and exports skipped",
             'step_seconds': seconds, 'seconds': round(time.monotonic() - t0, 1)}
 
 
 def content_named(export, out):
     """Give the export content-unique names (Pages caches every file for 10 minutes, and the shell, engine and pack must come from
-    one export): engine-<hash>.{js,wasm,audio*.js} and demo01-<hash>.{pck,html}. Returns {kind: site file name}."""
+    one export): engine-<hash>.{js,wasm,audio*.js} and walk-<hash>.{pck,html}. Returns {kind: site file name}."""
     out.mkdir(parents=True, exist_ok=True)
     html = (export / 'wayfarer.html').read_text()
     engine = 'engine-' + hashlib.sha256((export / 'wayfarer.wasm').read_bytes() + (export / 'wayfarer.js').read_bytes()).hexdigest()[:12]
-    pack = 'demo01-' + sha(export / 'wayfarer.pck')[:12]
+    pack = 'walk-' + sha(export / 'wayfarer.pck')[:12]
     config = re.search(r'const GODOT_CONFIG = (\{.*?\});\n', html)
     if not config:
         raise ValueError('shell: GODOT_CONFIG not found')
@@ -386,10 +367,10 @@ def content_named(export, out):
     return files
 
 
-NATIVE_README = """G.U. WAYFARER 001 - Integrated Demonstrator 01, native Linux x86_64 build (Godot 4.7.2, Compatibility renderer).
+NATIVE_README = """G.U. WAYFARER 001 - the walk (EXC-001), native Linux x86_64 build (Godot 4.7.2, Compatibility renderer).
 
 The same package as the browser build at https://densho-media.github.io/ignition-wayfarer/play/ (DOCKED REP_PROXY export, proxy
-characters). Run ./wayfarer_demo01.x86_64 from this directory. SIMULATION_ONLY: no transfer timing, procedure or interlock is
-released; see the in-game labels. The full development runtime (review menu, characters, EVA) is built from the repository with
+body). Run ./wayfarer_walk.x86_64 from this directory. SIMULATION_ONLY: no transfer timing, procedure or interlock is released;
+see the in-game labels. The development runtime (with the MPFB characters) is built from the repository with
 python3 tools/workflow.py runtime-export. Godot Engine: MIT licence, see GODOT_LICENSE.txt and GODOT_COPYRIGHT.txt.
 """

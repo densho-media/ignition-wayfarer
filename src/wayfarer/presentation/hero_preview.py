@@ -353,7 +353,7 @@ def render(views=VIEWS, size=1024, out_dir=None, samples=64, state=STATE, functi
     sun_obj.rotation_euler = (-Vector(e['sun'])).to_track_quat('-Z', 'Y').to_euler()
     cam_data = bpy.data.cameras.new('Hero_Camera'); camera = bpy.data.objects.new(cam_data.name, cam_data)
     scene.collection.objects.link(camera); scene.camera = camera
-    out = out_dir or ROOT/'renders'/'p1'/'hero_first_ignition'; out.mkdir(parents=True, exist_ok=True)
+    out = out_dir or ROOT/'runs'/'renders'/'p1'/'hero_first_ignition'; out.mkdir(parents=True, exist_ok=True)
     status = (f"PROTOTYPE hero still | REP_PROXY grey, no hero finish (15!H120) | sun 1 AU-class, {x['sun_from_aft_deg']:g} deg from aft "
               f"(outward departure; pointing OPEN)")
     heat = (f"hot face: grey body at {e['kelvin']:g} K, emissivity {e['emissivity']:g} (WORKING), uniform (temperature map OPEN), "

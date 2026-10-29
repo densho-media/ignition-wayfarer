@@ -227,7 +227,7 @@ def material_study(on):
 def render(views=VIEWS, size=1280, samples=64, out_dir=None, mode='beforeafter'):
     s, *_ = load(ROOT); scene, f = setup(s); scene.cycles.samples = samples
     scene.render.resolution_x = size; scene.render.resolution_y = round(size*9/16); scene.render.image_settings.file_format = 'PNG'
-    out = Path(out_dir or ROOT/'renders/m7'); out.mkdir(parents=True, exist_ok=True); report = {}
+    out = Path(out_dir or ROOT/'runs/renders/m7'); out.mkdir(parents=True, exist_ok=True); report = {}
     counts = {o.name: dict(assembly=o.get('m7_assembly'), elements=o.get('elements'), faces=len(o.data.polygons)) for o in bpy.data.objects
               if o.get('kind') == 'production_detail'}
     for view in views:

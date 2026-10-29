@@ -16,7 +16,7 @@ LOOK-005 next pass (M4, 2026-10-14), the same strict physical light, functional-
 - `asm_ring`         ring A's rim over a pressurized crew segment (amber band, joints, service covers), a 1.8 m figure;
 - `asm_roots`        the sun-side blade's datum root: casing boots, chase plate, saddles, a 1.8 m figure.
 
-    /snap/bin/blender -b --python src/wayfarer/presentation/hero_look3.py -- [--size 1280] [--samples 64] [--out-dir renders/p1/hero_look3]
+    /snap/bin/blender -b --python src/wayfarer/presentation/hero_look3.py -- [--size 1280] [--samples 64] [--out-dir runs/renders/p1/hero_look3]
 """
 from pathlib import Path
 import argparse
@@ -147,7 +147,7 @@ def asm_frame(s, name):
 
 def render(views=VIEWS, size=1280, out_dir=None, samples=64):
     s, *_ = load(ROOT); x = s['look']['exterior']
-    out = out_dir or ROOT/'renders'/'p1'/'hero_look3'; out.mkdir(parents=True, exist_ok=True)
+    out = out_dir or ROOT/'runs'/'renders'/'p1'/'hero_look3'; out.mkdir(parents=True, exist_ok=True)
     (best, old) = tq_direction(s)
     report = dict(study='FUT-003-LOOK comparison (15!A131); presentation only, nothing saved, no geometry or canon change',
                   blades_deg=blade_azimuths(s), establishing=dict(azimuth_deg=old[1], blade_score=round(old[0], 3), **old[2]),

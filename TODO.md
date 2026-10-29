@@ -23,8 +23,8 @@ Do not derive completion from the number of checkboxes: steps vary greatly in ef
 
 ## S — Primary focus: complete the spacecraft (user brief 2026-10-18)
 
-Development effort moves from new Godot features to the ship itself; keep the demonstrator, simulations and navigators working
-(maintenance fixes only). Two coordinated tracks: A science/systems through the owner workbooks, B Blender/interactive production;
+Development effort moves from new Godot features to the ship itself; keep the walk and Explore Ship working
+(maintenance fixes only; the other Godot scenes were retired 2026-10-29, tag `archive/pre-cleanup-2026-10-29`). Two coordinated tracks: A science/systems through the owner workbooks, B Blender/interactive production;
 unresolved science blocks only irreversible steps. Each slice: validate the changed assembly and interfaces, whole-ship view plus a
 close-up, regression check, MODEL/TODO and Model Status update.
 
@@ -42,11 +42,10 @@ close-up, regression check, MODEL/TODO and Model Status update.
   whitebox and cultural reviews; S7 waits on engineering releases. **Owner review:** the ram-face look and the wear layer (P4-LOCKED (b), P4-STATE) with the other candidates. Every new asset
   stays `L4_VISUAL_CANDIDATE` until the owner reviews it; nothing reaches `main` without the owner's squash approval.
   **Done when:** the plan's S11 whole-ship review is accepted by the owner.
-- [ ] **FSH — Fractal shielding on the Brow's ram faces (user brief 2026-10-27), BUILT as shading, owner review.** The hexagonal plate and
-  Sierpiński pattern (`[production.exterior.fractal_shield]`, docs/MODEL.md) replaces the S9 running-bond ram tiles by default in the Blender
-  grammar look, the flight look, the walk and Explore Ship. **Open:** the Godot runtime checks (`runtime-check flight-grammar excursion`),
-  the Blender grammar stills (`p4_review.py` ram_face, ram_close) and a desktop-GPU frame-time comparison of the Brow view with
-  `pattern` fractal_hex against running_bond; the owner's choice between the two patterns.
+- [ ] **FSH — Fractal shielding on the Brow's ram faces (user brief 2026-10-27), BUILT as shading, on main (owner squash 2026-10-29).** The
+  hexagonal plate and Sierpiński pattern (`[production.exterior.fractal_shield]`, docs/MODEL.md) replaces the S9 running-bond ram tiles by
+  default in the Blender grammar look, the walk and Explore Ship. **Open:** `runtime-check excursion`, the Blender grammar stills
+  (`p4_review.py` ram_face, ram_close) and a desktop-GPU frame-time comparison of the Brow view with `pattern` fractal_hex against running_bond.
 - [ ] **MOD — Modular detail (docs/MODULES.md).** Every production assembly is a detail pack (phase 2, 2026-10-23: `m7_spine`,
   `ring_a_transfer`, `m8_forward` migrated with geometry, motion, runtime and pixel equivalence), packs carry their own contracts, and
   approved authored meshes travel as committed glTF data; each ring is its own engineering asset (phase 3, `WF_HABITAT_A`/`_B`).
@@ -137,45 +136,18 @@ close-up, regression check, MODEL/TODO and Model Status update.
   (14_HULL_SERVICE; 44 RUN-011 keeps the EVA rail a runtime training simulation).
 - [ ] **S05 — Working interiors.** Workshop and fabrication, medical, operations/navigation, life support, cabins, storage and repair,
   Garden; connected to the traversal system, inside the pressure, rotation, thrust-gravity and evacuation rules.
-
-## U — Guided review UI (user direction 2026-10-16; maintenance only since 2026-10-18)
-
-Hands-on review (C03) stalled because the runtime screens mix instructions, telemetry, sources and engineering notes in one undifferentiated
-text block; a reviewer cannot tell what is pressable now or what should happen. Until WF-R1 review, every interactive Godot scene gets a
-**development review guide**: a structured, step-by-step tutorial layer for testing. It is a dev/review tool, not the final game UI, and
-never changes spacecraft facts, physics or route data. Mockup agreed in conversation 2026-10-16 (step card, checklist, key chips,
-expect/feedback lines, muted details). Owner 2026-10-17 (15!A206): each step also names the source status of what it shows (outlined
-CANON / DERIVED / WORKING / PROTOTYPE / DIAGNOSTIC / OPEN / HOLD badges from the rig), and the menu shows the P0 science gate (built).
-
-- [ ] **U01 — Shared review-guide component and launcher. READY.** One Godot component (`godot/scripts/review/`) used by every scene:
-  a start menu listing review sessions (Ring B body mode, vestibule drill, EVA drift, induction walk, Demonstrator 01) so no command line
-  or key needs remembering; per session an ordered step list (title, one-line goal, progress) that advances on the real event (body mode
-  entered, tool dropped, tether tested), never on a timer. Strict visual roles: active keys as coloured key chips (blue = available now,
-  amber = the key that advances the step, grey = leave/back); teal "Expect:" line; green/red "Last:" feedback with the reason for any
-  refusal ("R refused: tether B not tested — press Y"); only keys valid in the current state are shown. Sources, PROTOTYPE notes, rig
-  IDs and telemetry go to one muted line, expanded with I; F1 hides the guide. **Done when:** the component and launcher exist, a headless
-  check confirms each session's steps advance from their events, and the user confirms the style on the first session. Built 2026-10-16
-  (`godot/scripts/review/`, `scenes/review.tscn` as the start scene, runtime check `review-ring-b`, stills
-  `runs/20261016T2200Z-u01-review`); left: the user's style confirmation.
-- [ ] **U02 — Ring B body-mode session. AFTER U01 style.** Steps: enter body mode (N), go to ring B (3), walk the B1 rooms, drop a tool and
-  read the Coriolis offset, leave. Replace the boarding body-mode text block with the guide. **Done when:** the user completes it unaided. Built 2026-10-16
-  (`ring_b_session.gd`; the walk's panels hide while it runs); left: the user's unaided run.
-- [ ] **U03 — Vestibule drill session (physics lab). AFTER U02.** Seven V steps, each with its expected state and the handoff values
-  (pose radius, ω×r speed); lab mode/profile keys move to the muted line unless a step needs them. **Done when:** user completes it unaided.
-  Built 2026-10-17 (`vestibule_session.gd`; V during a drum ramp is refused and the step kept; check `review-vestibule`); left: the user's run.
-- [ ] **U04 — EVA drift session. AFTER U02.** Reach EXTERIOR, F step out, H grab the rail, T/Y/R two-tether protocol with explicit refusal
-  reasons, push and catch. **Done when:** the user completes it unaided and C03's EVA part is reviewed. Built 2026-10-17
-  (`eva_session.gd`, 10 steps; G aims the profile push at the step's target; check `review-eva`, stills `runs/20261017T1500Z-u04-review`);
-  left: the user's run.
-- [ ] **U05 — Remaining scenes. AFTER U02.** Induction walk stops, free flight, Demonstrator 01 and the navigators adopt the same guide
-  and muting; engineering text stays reachable under I. **Done when:** no scene shows instructions and notes in one undifferentiated block.
-  Built 2026-10-17: `flight_session.gd`, `walk_session.gd`, `demo_session.gd` (Enter per chapter, Tab details: the navigator keeps I),
-  `inspector_session.gd`; checks `review-flight`, `review-walk`, `review-demo01`, `review-inspector`. The Ship / Space Navigator panels keep
-  their own structured cards inside Demonstrator 01 (no separate session). Left: the user's runs and style confirmation.
+- [ ] **S06 — Exterior / interior in Blender and the runtime (structure plan 2026-10-29). READY.** Nodes carry `zone`; next, each
+  subsystem file with crew spaces publishes `WF_<NAME>_INTERIOR` beside `WF_<NAME>`, the vehicle file links them into `50_INTERIOR` with
+  view layers EXTERIOR and INTERIOR (pressure shell in both), and the big subsystem files (`WF_THERMAL`, `WF_FORWARD_SHIELD`,
+  `WF_STRUCTURE`) group geometry by part with `IF_*` hidden. Measure first (`profile_views.gd --hide-zone`, the web viewer's `?diag`,
+  on a desktop GPU and a phone) and let the walk hide the side it cannot see only where it pays. **Done when:** the empty geometry
+  diff holds and the measured views say whether runtime culling is worth it.
 
 ## How to work through this plan
 
-- A01–A03 are done (capture 2026-10-16, full pipeline and runtime export PASS). **Primary focus: U01–U05** (guided review UI); it unblocks C03. Select one step per implementation slice; the plan itself does not start all steps at once.
+- A01–A03 are done (capture 2026-10-16, full pipeline and runtime export PASS). **Primary focus: S** (the spacecraft). Select one step per implementation slice; the plan itself does not start all steps at once.
+- Studies named `studies/<name>.py` below are retired: `git show 038ae90:src/wayfarer/studies/<name>.py` (tag `archive/pre-cleanup-2026-10-29`)
+  restores one into `work/<task>/` when its entry is picked up (AGENTS.md "Where things go").
 - IDs remain stable when entries are removed; do not renumber. Only unfinished work stays here. On completion, put current behavior in
   `docs/MODEL.md`, evidence in the existing relevant review, and remove the entry. Git and `references/` retain history.
 - Dependency IDs refer to acceptance evidence even after a completed entry is removed. A later phase may proceed when its own
@@ -242,8 +214,8 @@ Reversible production work in C can proceed while these wait.
   (Tale NAV-TOUR-11), and AVA PHYSICAL/EXPLAINER wording. **Done when:** reviewed wording and visuals are applied, provenance and
   LIVE/PREVIEW/SCHEMATIC/UNKNOWN/HOLD disclosures remain intact. No extra hotspots without a purpose/source.
 
-- [ ] **C03 — Complete outstanding hands-on reviews. AFTER A03; repeat affected parts after C01/C02.** Review Space toggle/scrub/layers,
-  overview picking and defense explorer; physics lab M/K and E/U/V/O, EVA F/U/H/Space, boarding N. The 13 October M1/M2 user run is
+- [ ] **C03 — Complete outstanding hands-on reviews. AFTER A03; repeat affected parts after C01/C02.** Review the walk (both rings, desktop,
+  web and phone; J06) and Explore Ship's picking and styles. The 13 October M1/M2 user run is
   existing evidence, not a request to repeat unchanged work. **Done when:** remaining interactions have recorded human review,
   reproducible findings are fixed and affected checks pass. Scripted screenshots alone do not establish hands-on acceptance.
 
@@ -401,9 +373,9 @@ candidates of all nine classes are separate accessory assets (docs/ACCESSORIES.m
 - [ ] **I04 — Review and integrate the accessory drone bodies. OWNER REVIEW; AFTER DGT-017.** Owner review of the GU-SIF interface
   proposal (DGT-012) and the class forms (owner 2026-10-24: continue as a separate accessory prototype, not integration or canon); then
   the ship session runs the placement and keep-out study for the taller exterior bodies (interface requests 1–4 in docs/ACCESSORIES.md;
-  the owner review and handoff register is accessories/review/HANDOFF.md;
-  no automatic proxy resizing), and the ship viewer uses the GLBs for the drones card and the crawler demo (the standalone accessory
-  viewer already plays them). **Done when:** the bodies replace the proxies in the review views with every dock, keep-out and route check
+  the owner review and handoff register was accessories/review/HANDOFF.md, now at tag `archive/pre-cleanup-2026-10-29`;
+  no automatic proxy resizing), and the ship viewer uses the GLBs for the drones card and the crawler demo (the retired standalone accessory
+  viewer played them). **Done when:** the bodies replace the proxies in the review views with every dock, keep-out and route check
   unchanged or re-run, and nothing implies a released capability.
 
 - [ ] **I02 — Integrate drone stations, conduits and safe operating envelopes. OWNER thermal/alcove releases.** I01 answered 2026-10-17
@@ -428,37 +400,31 @@ candidates of all nine classes are separate accessory assets (docs/ACCESSORIES.m
   **Done when:** each exposed interaction matches its geometry and source state, targeted runtime checks pass and hands-on review
   covers it. Transition timing and casualty/flight-EVA HOLDs remain until their own releases. `docs/PHYSICS.md` is the working guide.
 
-- [ ] **J02 — Extend the visitor route into Ring B. AFTER D06/J01 and relevant G02.** Reuse the existing Ship Navigator registry,
-  frame-aware marker, route graph and guidance modes; extend only the accepted transfer/rooms. The excursion (J06) already plays
-  boarding, transfer and return into ring B with closed-boundary gating; the Navigator's registry, marker and guidance are left.
-  **Done when:** boarding/transfer/return work end-to-end with closed-boundary gating, correct moving frames and human-scale review;
-  the navigator never advertises an unsafe or missing route as GO.
-
-- [ ] **J03 — Implement Space Navigator Stage 3. AFTER B03/B04.** Replace only the schematic/unknown portions supported by released
-  mission states; retain reference/chart disclosures wherever still applicable. **Done when:** absolute ship/planet positions and
-  accepted timed events reproduce owner data, LIVE versus future preview remains clear, and ship gameplay is unchanged.
+- [ ] **J03 — Implement Space Navigator Stage 3. AFTER B03/B04; needs a runtime view again (retired 2026-10-29).** Replace only the
+  schematic/unknown portions of `space_navigator.py` supported by released mission states. **Done when:** absolute ship/planet
+  positions and accepted timed events reproduce owner data and LIVE versus future preview remains clear.
 
 - [ ] **J04 — Interactive simulation systems (user brief 2026-10-17, S&E 57–59).** Plan and reuse matrix:
-  `references/SIM_INTEGRATION_PLAN_2026-10-17.md`. Milestone A's first slice (replay, MOTION card, display hull) is in the Space
-  Navigator; Milestone B's thermal explorer (key T, flight scene) is built. Left: the owner's MECH approvals (58 all PROPOSAL, 59
+  `references/SIM_INTEGRATION_PLAN_2026-10-17.md`. Milestones A–C had Godot views (Space Navigator replay, thermal
+  explorer, life-support simulator), retired 2026-10-29 with their scenes; the pure modules and data stay. Left: the owner's MECH approvals (58 all PROPOSAL, 59
   POL-015 selection pending), the out-of-date 55/47 SPACE statuses and the thermal owner conflicts in the plan to report; the drive
-  waste heat, loop heat capacity and sunlight inputs for a real thermal clock (40!B11/B13/B15, OPEN); Milestone C's life-support
-  simulator is built (`life_support.tscn`); it waits on the O₂ and water stores, O₂ recovery, Garden yield and ECLSS power (38 S02/S03/
-  S05/S10, OPEN) and a review-menu entry; D one fault chain from 39; F light time and detection uncertainty from the
+  waste heat, loop heat capacity and sunlight inputs for a real thermal clock (40!B11/B13/B15, OPEN); life support waits on the O₂ and water stores, O₂ recovery, Garden yield and ECLSS power (38 S02/S03/
+  S05/S10, OPEN); D one fault chain from 39; F light time and detection uncertainty from the
   Eye workbook. No library is imported; the first import needs `references/THIRD_PARTY.md` (POL-010/011).
   **Done when:** each milestone has its owner rows, a playable view, checks against the owner values and its OPEN list.
 
 - [ ] **J05 — Adaptive Control Induction (user brief 2026-10-17).** Plan, audit and library decision:
-  `references/ACI_PLAN_2026-10-17.md`. ACI-01 to ACI-10 are built: every scene's keys are `WfInput` actions, with five lessons,
-  hold/toggle, stick dead zone and sensitivity, and text size. Left: the three first-run walkthroughs by a person (keyboard
+  `references/ACI_PLAN_2026-10-17.md`. ACI-01 to ACI-10 are built: the walk's keys are `WfInput` actions, with hold/toggle, stick
+  dead zone and sensitivity, and text size. Prune the retired scenes' contexts and actions from `wf_input.gd` and decide whether the
+  walk opens the first-launch flow (nothing opens it since the review menu was retired). Left: the three first-run walkthroughs by a person (keyboard
   Personal, keyboard/mouse Suggested, controller Personal, with a real controller); a check of the labels on an AZERTY or QWERTZ
   layout; controller glyphs (optional, `godot_input_icons` MIT); the owner's controller/accessibility review (49 NAV-019 OPEN).
   **Done when:** the walkthroughs pass.
 
 - [ ] **J06 — Station-to-ring excursion with continuous ring circulation (user brief 2026-10-26; EXC-001, CIRC-001, STN-001).**
   Built and checked: the circulation (`ring_circulation.py`, `[ring_circulation]`, both rings' corridors, doors and fit-out; baseline
-  `p4_s9_circulation`), the station boarding area (`station.py`, `[station]`) and the playable excursion (`excursion.tscn`, review-menu
-  session 1, the web launcher's Start: the main interactive experience; touch controls; runtime check `excursion`: both rings round
+  `p4_s9_circulation`), the station boarding area (`station.py`, `[station]`) and the playable excursion (`excursion.tscn`, the Godot main
+  scene and the web launcher's Start: the main interactive experience; touch controls; runtime check `excursion`: both rings round
   trip, 72/72 bins; web check "touch walk" on an emulated phone). Left: the
   owner's decision on CIRC-001 against 12!A13, the 400–460 m³ gross envelope and the 330 t rotating allowance (CIRC-C1..C8 in
   `ring_circulation.conflicts`; draft in `references/OWNER_Q_CIRC_2026-10-26.md`, not posted); the frame load path round the tunnels
@@ -543,13 +509,12 @@ candidates of all nine classes are separate accessory assets (docs/ACCESSORIES.m
   - CI cost: split the browser check into independent jobs (desktop walk and equivalence; mobile touch journey) so each
     runs, fails and reruns alone and they no longer share one runner's four cores. Run 39926690587 spent 31 of its 35 minutes
     in the single browser-check step.
-  - Extend browser-vs-native equivalence past GRAVITY→INSPECT only if a shorter recorded path through the earlier chapters exists.
   - Hologram and hybrid appearance (WEB-003/004, branch `claude/affectionate-goodall-orfxcx`, web/README.md): owner review of the
     Subsystems, Engine holo and Hybrid looks, ghost strength default (6 %) and two-layer hologram cap, on real hardware (desktop GPU
-    and phone frame times; all numbers so far are SwiftShader). Enter Wayfarer keeps only the F3 style cycle (no hybrid focus).
+    and phone frame times; all numbers so far are SwiftShader).
     Radiator blades cannot be isolated one by one: their cells carry no lineage below Assembly_THERMAL in the export (the viewer's
     Group scope reads the manifest lineage); a blade-level lineage in export/godot.py would add it. Later (P3): exploded views,
-    section planes, cutaways, hybrid focus in the Godot demonstrator.
+    section planes and cutaways.
 - [ ] **P03 — Optional compliant-tether stress study. PARKED, owner-led.** Do only when OD-038/required interaction needs it; do not
   confuse a timestep-dependent impulse diagnostic with rated human loads. Required operational tether releases remain in D/K.
 - [ ] **P04 — Full-gate policy relaxation. PARKED, optional process change.** Retain the existing full pre-commit geometry gate. Consider

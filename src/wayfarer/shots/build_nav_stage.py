@@ -259,7 +259,7 @@ def build(root=ROOT, size=768):
 
 def render(root=ROOT, frames=None, size=768, out_dir=None):
     bpy.ops.wm.open_mainfile(filepath=str(root/'shots'/f'{NAME}.blend'))
-    out = out_dir or root/'renders/shots'/NAME; out.mkdir(parents=True, exist_ok=True)
+    out = out_dir or root/'runs/renders/shots'/NAME; out.mkdir(parents=True, exist_ok=True)
     for mode in SCENES:
         sc = bpy.data.scenes[f'{NAME}_{mode}']
         for frame in frames or [1, (sc.frame_end+1)//2, sc.frame_end]:

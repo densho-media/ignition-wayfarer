@@ -38,7 +38,7 @@ def label(scene, camera, lines, field_width, aspect, depth):
 
 def render(root=ROOT, functions=None, views=None, size=768, out_dir=None, details=False):
     s,*_=load(root);sec=habitat_interior.section(s);fit=habitat_interior.check(s,derived(s))
-    assets=root/'assets/wayfarer';out=out_dir or root/'renders/p1/interior';out.mkdir(parents=True,exist_ok=True)
+    assets=root/'assets/wayfarer';out=out_dir or root/'runs/renders/p1/interior';out.mkdir(parents=True,exist_ok=True)
     for function in functions or list(s['interior']['components']):
         component='WF_'+s['interior']['components'][function]
         bpy.ops.wm.read_factory_settings(use_empty=True);scene=bpy.context.scene

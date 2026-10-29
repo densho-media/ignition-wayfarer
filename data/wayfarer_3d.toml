@@ -1164,15 +1164,15 @@ CROWN_ENGAGED = { base = "COAST", crown_prepare = 1.0, crown_engage = 1.0, crown
 CROWN_RECOVERING = { base = "COAST", crown_prepare = 1.0, crown_engage = 0.4, crown_azimuth = 0.125, field_on = 1.0 }
 CROWN_DEGRADED = { base = "COAST", crown_prepare = 1.0, crown_engage = 1.0, crown_point = 0.7, crown_azimuth = 0.125, crown_fault = 0.16666666666666666, field_on = 1.0 }
 
-# FUT-004 First Ignition timeline (flight_timeline.py -> simulations/wf_first_ignition_timeline.json): the induction, then the First Ignition
+# FUT-004 First Ignition timeline (flight_timeline.py -> data/simulations/wf_first_ignition_timeline.json): the induction, then the First Ignition
 # burn, as one keyed sequence of operating states for the flight animation. Only the burn (DERIVED, first_ignition.result) and the spin-up
 # (SOURCED, 08!C27) have physical durations; every other phase is shown not to scale and carries no seconds.
 [flight_timeline]
 status = "IMPLEMENTATION"
 timeline_version = 2
-output = "simulations/wf_first_ignition_timeline.json"
-route = "simulations/wf_route_v1.json"   # tools/route_import.py: the sheet-computed burn (23_ROUTE_FRAMES, NAV-027)
-frames = "simulations/wf_flight_frames_v1.json"   # tools/frames_import.py: FRM-002-2026-10-10 channels and phase/event streams (15!A125), UNKNOWN until Sheets releases them
+output = "data/simulations/wf_first_ignition_timeline.json"
+route = "data/simulations/wf_route_v1.json"   # tools/route_import.py: the sheet-computed burn (23_ROUTE_FRAMES, NAV-027)
+frames = "data/simulations/wf_flight_frames_v1.json"   # tools/frames_import.py: FRM-002-2026-10-10 channels and phase/event streams (15!A125), UNKNOWN until Sheets releases them
 fps = 24
 reference_frame = "Departure rest frame; Newtonian linear V1 as 20_FIRST_IGNITION (gamma is not applied to the kinematics)"
 

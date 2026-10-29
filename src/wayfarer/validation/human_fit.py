@@ -1,7 +1,7 @@
 """Human-scale fit of the MPFB humans in the real vehicle (docs/CHARACTERS.md "Human scale"; HUM-001 doctrine, 15!A86, Q47).
 
   blender --background --factory-startup --python-exit-code 1 --python src/wayfarer/validation/human_fit.py -- \
-      [--who test_a test_b] [--report references/p1_human_fit.json] [--renders renders/p1/human_system/fit] [--size 640]
+      [--who test_a test_b] [--report references/p1_human_fit.json] [--renders runs/renders/p1/human_system/fit] [--size 640]
 
 Every generic-mannequin station of the crew route (the rod figures human_entry builds into the vehicle as non-canon scale guides) and
 the induction pair's staging (the S004A greeting of both, the newcomer on the S004B treatment couch) become source frames: the same feet stations, the same rail and rung grips, the same body axis (so the same
@@ -210,7 +210,7 @@ def hatches(s, k):
 def main():
     argv = sys.argv[sys.argv.index('--')+1:] if '--' in sys.argv else []
     ap = argparse.ArgumentParser(); ap.add_argument('--who', nargs='*', default=['test_a', 'test_b', 'instructor', 'newcomer'])
-    ap.add_argument('--report', type=Path, default=ROOT/'references/p1_human_fit.json'); ap.add_argument('--renders', type=Path, default=ROOT/'renders/p1/human_system/fit')
+    ap.add_argument('--report', type=Path, default=ROOT/'references/p1_human_fit.json'); ap.add_argument('--renders', type=Path, default=ROOT/'runs/renders/p1/human_system/fit')
     ap.add_argument('--size', type=int, default=640); ap.add_argument('--vehicle', type=Path, default=ROOT/'assets/wayfarer/WF_WAYFARER_001.blend')
     ap.add_argument('--restage', action='store_true', help='search the newcomer greeting offset that clears and reaches (CHAR-001)')
     ap.add_argument('--only-frames', nargs='*', help='assess only these frames (fast iteration)')

@@ -9,21 +9,17 @@ and walks it as a visitor does, recording every request:
              file, no error
   switching  Exit back to the start page, Explore Ship again; page-renderer memory returns to the start-page level (Chrome runs
              with the back-forward cache off, so this measures what the pages release)
-  equivalence  Demonstrator 01's 68-check suite and its whole-journey autoplay recording, drawing off, must match the native build
-             of the same package check by check and frame by frame (a second browser, alongside the walk)
-  phone      the start page and the viewer at 390 x 844 with one-finger orbit and pinch zoom; the review page renders
-  touch      Enter Wayfarer on an emulated phone (844 x 390, DPR 3) played by touch from the welcome to ring A, upright and tablet
-             sizes in two segments (to Push off; from MICROGRAVITY on), each in its own browser after the other (a third browser,
-             alongside the walk; emulation, not a phone's frame rate)
-  touch walk the walk on the same emulated phone: welcome, the 1-D stick down the boarding line to the shut outer hatch, Use opens
-             it, a look drag, Map and View (after the touch journey, in the same side browser)
+  equivalence  the walk's own check (both rings round and back to the station), drawing off, must pass in the browser as in the
+             native build of the same package (a second browser, alongside the main walk)
+  phone      the start page and the viewer at 390 x 844 with one-finger orbit and pinch zoom; the status page renders
+  touch walk the walk on an emulated phone (844 x 390, DPR 3): welcome, the 1-D stick down the boarding line to the shut outer
+             hatch, Use opens it, a look drag, Map and View (a side browser; emulation, not a phone's frame rate)
 Screenshots, metrics and check.json go to --out; --record writes the summary into the site's release.json. It checks behaviour,
 loading isolation and transfer sizes, not frame rates on real hardware. The viewer's camera damping is switched off before input.
---part runs one part (main: start, viewer, play, switching, phone, review; equivalence; touch1 and touch2, the touch journey's
-segments; walk); CI runs each on its own runner and --merge combines their check.json (a missing part fails), recording into
+--part runs one part (main: start, viewer, play, switching, phone, review; equivalence; walk); CI runs each on its own runner and --merge combines their check.json (a missing part fails), recording into
 release.json with --record.
 
-    python3 tools/web_check.py <site dir> --out <dir> [--chrome google-chrome] [--record] [--part main|equivalence|touch1|touch2|walk ...]
+    python3 tools/web_check.py <site dir> --out <dir> [--chrome google-chrome] [--record] [--part main|equivalence|walk ...]
     python3 tools/web_check.py <site dir> --merge <part out dir> ... --out <dir> [--record]
 """
 import argparse
@@ -303,7 +299,10 @@ class Traffic:
         return None
 
 
-HEAVY = ('.glb', '.wasm', '.pck', '/vendor/', 'engine-', 'demo01-', 'viewer.js', 'draco')
+# The walk check in the Web build takes about 1,470 s in headless Chromium with drawing off (docs/MODEL.md EXC-001), so the
+# equivalence part waits longer than the other play sessions.
+EQUIVALENCE_SECONDS = 2700
+HEAVY = ('.glb', '.wasm', '.pck', '/vendor/', 'engine-', 'walk-', 'viewer.js', 'draco')
 # Frames per second of the page's own animation frames (Godot's main loop runs on them too) over a few seconds.
 RAF_FPS = ('new Promise(r => { const t0 = performance.now(); let n = 0; const ts = []; let last = t0; '
            'const f = now => { n++; ts.push(now - last); last = now; if (now - t0 < {ms}) requestAnimationFrame(f); else { ts.sort((a, b) => a - b); '
@@ -312,10 +311,9 @@ RAF_FPS = ('new Promise(r => { const t0 = performance.now(); let n = 0; const ts
 
 
 def run_equivalence(url, play_release, binary, sandbox, out, play_seconds, record_check, metrics):
-    """Demonstrator 01 in the Web build against the native build of the same package (web_play.build): the 68-check suite and the
-    whole journey in autoplay, both at a fixed frame rate with drawing off (--disable-render-loop: logic, physics and input step
-    exactly as when drawn; the walk covers rendering). Runs in its own browser, alongside the walk: it is CPU-bound Godot logic,
-    the walk mostly waits on software-rendered frames."""
+    """The walk's own check (excursion check.gd: both rings round and back to the station by the player's actions) in the Web build
+    against the native build of the same package (web_play.build), at a fixed 60 fps with drawing off (--disable-render-loop: logic,
+    physics and input step exactly as when drawn; the main part covers rendering). Runs in its own browser, alongside the main walk."""
     native = play_release.get('native_reference') or {}
     profile = tempfile.mkdtemp(prefix='wf-web-equivalence-')
     log = open(out / 'chrome-equivalence.log', 'w')
@@ -323,33 +321,21 @@ def run_equivalence(url, play_release, binary, sandbox, out, play_seconds, recor
     try:
         page, traffic = Page(chrome), Traffic(chrome)
         page.send('Emulation.setDeviceMetricsOverride', {'width': 640, 'height': 400, 'deviceScaleFactor': 1, 'mobile': False})
-
-        def browser_run(args, prefix):
-            mark = traffic.mark()
-            t0 = time.monotonic()
-            query = '&'.join(f'arg={a}' for a in ('--disable-render-loop', *args))
-            page.send('Page.navigate', {'url': url + play_release['page'] + '?' + query})
-            line = traffic.wait_console(prefix, mark, play_seconds)
-            lines = traffic.since(mark)[1]
-            errors = [text for kind, text in lines if text.startswith('ERROR')]
-            return (json.loads(line.split(' ', 1)[1]) if line else None), errors, round(time.monotonic() - t0, 1)
-
-        demo, errors, seconds = browser_run(['--fixed-fps', '60', '--', '--check-demo'], 'WF_GODOT_DEMO ')
-        web_ok = {c['id']: c['ok'] for c in (demo or {}).get('checks', [])}
-        differ = sorted(k for k in set(web_ok) | set(native.get('ok_by_check', {})) if web_ok.get(k) != native.get('ok_by_check', {}).get(k))
-        record_check('play: Demonstrator 01 check suite passes in the browser as natively', demo and demo.get('result') == 'PASS'
-                     and not differ and not errors, checks=len(web_ok), native_checks=native.get('checks'), differ=differ[:8],
-                     errors=errors[:3], seconds=seconds)
-        metrics['check_suite'] = {'web': demo and {'result': demo.get('result'), 'checks': len(web_ok),
-                                                    'failed': [k for k, ok in web_ok.items() if not ok]},
-                                  'native': {k: native.get(k) for k in ('result', 'checks', 'failed')}, 'differ': differ, 'seconds': seconds}
-        web, errors, seconds = browser_run(['--fixed-fps', '30', '--', '--autoplay', '--record-exit'], 'WF_DEMO_RECORDING ')
-        rec = native.get('recording')
-        keys = ('result', 'chapters', 'frames', 'flips', 'display_s')
-        same = bool(web and rec) and all(web.get(k) == rec.get(k) for k in keys)
-        record_check('play: whole-journey autoplay recording matches the native build', same and web['result'] == 'PASS' and not errors,
-                     web=web, native=rec, errors=errors[:3], seconds=seconds)
-        metrics['equivalence'] = {'web': web, 'native': rec, 'seconds': seconds}
+        mark = traffic.mark()
+        t0 = time.monotonic()
+        query = '&'.join(f'arg={a}' for a in ('--disable-render-loop', '--fixed-fps', '60', '--', '--check-excursion'))
+        page.send('Page.navigate', {'url': url + play_release['page'] + '?' + query})
+        line = traffic.wait_console('WF_GODOT_EXCURSION ', mark, max(play_seconds, EQUIVALENCE_SECONDS))
+        errors = [text for kind, text in traffic.since(mark)[1] if text.startswith('ERROR')]
+        web = json.loads(line.split(' ', 1)[1]) if line else None
+        seconds = round(time.monotonic() - t0, 1)
+        notes = sorted((web or {}).get('notes', {}))
+        same = bool(web) and web.get('result') == native.get('result') and notes == native.get('notes')
+        record_check('play: the walk check passes in the browser as natively', same and web.get('result') == 'PASS' and not errors,
+                     web={k: (web or {}).get(k) for k in ('result', 'fails', 'physics_frames')}, native={k: native.get(k) for k in ('result', 'fails', 'physics_frames')},
+                     notes_differ=sorted(set(notes) ^ set(native.get('notes') or []))[:8], errors=errors[:3], seconds=seconds)
+        metrics['equivalence'] = {'web': web and {k: web.get(k) for k in ('result', 'physics_frames', 'wall_s')},
+                                  'native': {k: native.get(k) for k in ('result', 'physics_frames', 'seconds')}, 'seconds': seconds}
     except Exception as error:
         log.flush()
         record_check('play: equivalence browser session', False, error=repr(error),
@@ -364,253 +350,8 @@ class JourneyStop(Exception):
     pass
 
 
-def run_touch(url, play_release, binary, sandbox, out, record_check, metrics, timeout=150, segment=1):
-    """MOB-001: Enter Wayfarer played by touch on an emulated phone (844 x 390 CSS px, DPR 3, touch, landscape), in its own browser
-    alongside the walk. CDP touch events go through the browser into Godot as a phone's would; the game publishes its touch state
-    (window.wayfarerTouch, -- --touch-probe) and the check reads it. Covers the touch welcome, Skip, Pause, the rail stick with the
-    look finger at once, release, weightless (no stick, no force; look; Push off), Map and the systems card, the transfer line,
-    walking on ring A with Drop by a second finger, Help as a modal, portrait and a tablet size keeping the same run. Emulation,
-    not a phone: it says nothing about a phone's frame rate. A step the rest depends on stops the journey when it fails (one failed
-    check, no cascade of waits); it runs after the equivalence session, so at most two browsers share the runner.
-    Two segments, each in its own browser (CI runs them on their own runners): 1 from the welcome to Push off; 2 starts at
-    MICROGRAVITY (-- --from-chapter) and covers Map and the card, the transfer line, ring A, Help, portrait and tablet."""
-    tag, pre = ('', 'touch') if segment == 1 else (' (second segment, from MICROGRAVITY)', 'touch2')
-    profile = tempfile.mkdtemp(prefix='wf-web-touch-')
-    log = open(out / f'chrome-{pre}.log', 'w')
-    chrome = Chrome(binary, profile, log, sandbox)
-    fingers = {}
-    t_start = time.monotonic()
-    try:
-        page, traffic = Page(chrome), Traffic(chrome)
-
-        def touch(kind, fid, at=None):
-            if at is not None:
-                fingers[fid] = at
-            else:
-                fingers.pop(fid, None)
-            page.send('Input.dispatchTouchEvent', {'type': kind, 'touchPoints': [{'x': x, 'y': y, 'id': i} for i, (x, y) in fingers.items()]})
-
-        def state():
-            return page.js('window.wayfarerTouch || null') or {}
-
-        def until(pred, limit=timeout):
-            end, s = time.monotonic() + limit, {}
-            while time.monotonic() < end:
-                s = state()
-                try:
-                    if s and pred(s):
-                        return s
-                except (KeyError, TypeError, IndexError):
-                    pass
-                time.sleep(0.5)
-            return None
-
-        def centre(r):
-            return (r[0] + r[2] / 2, r[1] + r[3] / 2)
-
-        def button(s, bid):
-            return next((centre(b[2]) for b in s.get('buttons', []) if b[0] == bid), None)
-
-        def tap_at(at, fid=7):
-            touch('touchStart', fid, at)
-            page.frames(2)
-            touch('touchEnd', fid)
-            page.frames(2)
-
-        def need(name, ok, **detail):
-            record_check(name, ok, **detail)
-            if not ok:
-                raise JourneyStop(name)
-
-        def tap_panel(prefix, done):
-            """A modal panel's button: wait until its place is settled (the panel lays out over a few frames), tap, confirm."""
-            for _ in range(3):
-                a = until(lambda s: any(t.startswith(prefix) for t, r in s['panel']), 60)
-                time.sleep(1.0)
-                b = state()
-                ra = next((r for t, r in (a or {}).get('panel', []) if t.startswith(prefix)), None)
-                rb = next((r for t, r in (b or {}).get('panel', []) if t.startswith(prefix)), None)
-                if not rb or ra != rb:
-                    continue
-                tap_at(centre(rb))
-                s = until(done, 60)
-                if s:
-                    return s
-            return None
-
-        def tap(bid):
-            s = until(lambda s: button(s, bid) is not None)
-            if s:
-                tap_at(button(s, bid))
-            return bool(s)
-
-        def scene(s):
-            return (s or {}).get('scene') or {}
-
-        def body(s):
-            return scene(s).get('body') or {}
-
-        def skip_to(name):
-            for _ in range(10):
-                now = scene(state()).get('chapter')
-                if now == name:
-                    return True
-                tap('ui.confirm')
-                until(lambda s: scene(s).get('chapter') != now, 120)
-            return scene(state()).get('chapter') == name
-
-        def buttons(s):
-            return [b[0] for b in (s or {}).get('buttons', [])]
-
-        def first_segment(s):
-            page.screenshot(out / 'touch_2_exterior.png')
-            record_check('touch: guided chapter offers Pause and Skip, no stick', s and s['move'] == '' and {'demo.pause', 'ui.confirm'} <= set(buttons(s)),
-                         buttons=buttons(s))
-            tap('ui.confirm')
-            tap('demo.pause')
-            s = until(lambda s: scene(s)['chapter'] == 'ENTRY' and scene(s)['paused'])
-            need('touch: Skip and Pause by touch reach a paused ENTRY', s)
-            p0, lo0 = scene(s).get('progress', 0), scene(s).get('look_offset', [0, 0])
-            touch('touchStart', 1, (110, 300))
-            touch('touchMove', 1, (110, 250))
-            touch('touchStart', 2, (600, 200))
-            for k in range(1, 5):
-                touch('touchMove', 2, (600 + 15 * k, 200))
-                page.frames(1)
-            s = until(lambda s: scene(s)['progress'] > p0 + 0.05)
-            page.screenshot(out / 'touch_3_entry_stick_look.png')
-            record_check('touch: stick walks the rail while a second finger looks', s and s['claims'] == 2 and abs(scene(s)['look_offset'][0] - lo0[0]) > 0.02,
-                         progress=[p0, scene(s).get('progress')], look=[lo0, scene(s).get('look_offset')])
-            touch('touchEnd', 1)
-            touch('touchEnd', 2)
-            page.frames(3)
-            a = state()
-            time.sleep(3)
-            b = state()
-            record_check('touch: lifting the fingers stops at once', not b['virtual'] and b['claims'] == 0 and scene(a)['progress'] == scene(b)['progress'],
-                         progress=[scene(a)['progress'], scene(b)['progress']])
-            tap('demo.pause')
-            ok = skip_to('MICROGRAVITY')
-            s = until(lambda s: body(s).get('grip'))
-            need('touch: Skip by touch reaches MICROGRAVITY, holding the start rail', ok and s)
-            page.frames(2)
-            page.screenshot(out / 'touch_4_microgravity.png')
-            record_check('touch: weightless: Push off and Release, no stick', ok and s and s['move'] == '' and {'player.push', 'player.release'} <= set(buttons(s)),
-                         buttons=buttons(s))
-            touch('touchStart', 1, (110, 300))
-            touch('touchMove', 1, (110, 240))
-            page.frames(4)
-            s = state()
-            record_check('touch: weightless: a left drag adds no force', not s['virtual'] and body(s).get('v') == 0, v=body(s).get('v'))
-            touch('touchEnd', 1)
-            y0 = body(s).get('yaw', 0)
-            touch('touchStart', 2, (600, 200))
-            for k in range(1, 4):
-                touch('touchMove', 2, (600 + 20 * k, 200))
-                page.frames(1)
-            touch('touchEnd', 2)
-            s = until(lambda s: abs(body(s)['yaw'] - y0) > 0.05)
-            record_check('touch: a right drag turns the view (the push aim)', s, yaw=[y0, body(s).get('yaw')])
-            tap('player.push')
-            s = until(lambda s: body(s)['v'] > 0.01 and not body(s)['grip'])
-            record_check('touch: Push off by touch moves the body (crew physics)', s, v=body(s).get('v'))
-
-        def second_segment():
-            s = until(lambda s: scene(s).get('chapter') == 'MICROGRAVITY' and body(s).get('grip'), 300)
-            need('touch: the second segment starts at MICROGRAVITY, holding the start rail', s)
-            tap('ship.map')
-            tap('ship.card')
-            s = until(lambda s: scene(s)['card_page'] == 0 and scene(s)['map_level'] == 1)
-            page.frames(2)
-            page.screenshot(out / 'touch_5_systems_card.png')
-            for _ in range(3):
-                tap('ship.card')
-                page.frames(2)
-            closed = until(lambda s: scene(s)['card_page'] == -1)
-            record_check('touch: Map and the systems card open and close by touch', s and closed)
-            tap('ship.map')
-            tap('ship.map')
-            ok = skip_to('TRANSFER')
-            s = until(lambda s: s['move'] == '1d')
-            record_check('touch: the transfer line takes the 1-D stick', ok and s)
-            ok = skip_to('GRAVITY')
-            s = until(lambda s: s['move'] == '2d' and body(s).get('standing'))
-            pos0 = body(s).get('pos', [0, 0, 0])
-            touch('touchStart', 1, (110, 300))
-            touch('touchMove', 1, (110, 245))
-            s = until(lambda s: math.dist(body(s)['pos'], pos0) > 0.2)
-            page.screenshot(out / 'touch_6_gravity_walk.png')
-            record_check('touch: walking on ring A by the stick', ok and s, moved=s and round(math.dist(body(s)['pos'], pos0), 2))
-            d0 = body(state()).get('drops', 0)
-            tap_at(button(state(), 'body.drop_tool') or (0, 0), 8)
-            s = until(lambda s: body(s)['drops'] == d0 + 1)
-            record_check('touch: Drop object with a second finger while walking', s and s['claims'] >= 1)
-            touch('touchEnd', 1)
-            tap('touch.help')
-            s = until(lambda s: s['mode'] == 'help')
-            page.frames(2)
-            page.screenshot(out / 'touch_7_help.png')
-            record_check('touch: Help is a modal (game paused, stick released)', s and s['paused'] and not s['virtual'])
-            s = tap_panel('Close', lambda s: s['mode'] == '' and not s['paused'])
-            need('touch: Help closes by touch', s)
-            chapter = scene(state()).get('chapter')
-            page.send('Emulation.setDeviceMetricsOverride', {'width': 390, 'height': 844, 'deviceScaleFactor': 3, 'mobile': True,
-                                                              'screenOrientation': {'type': 'portraitPrimary', 'angle': 0}})
-            page.frames(3)
-            turn = page.wait("!document.getElementById('turn').hidden", 20)
-            page.screenshot(out / 'touch_8_portrait_hint.png')
-            page.click(*page.centre_of('#turn-stay'))
-            s = until(lambda s: s['ui'][0] < s['ui'][1])
-            page.frames(2)
-            page.screenshot(out / 'touch_9_portrait.png')
-            record_check('touch: upright: a turn suggestion, then the same run continues', turn and s and scene(s)['chapter'] == chapter and s['claims'] == 0,
-                         chapter=[chapter, scene(s).get('chapter')], ui=s and s['ui'])
-            page.send('Emulation.setDeviceMetricsOverride', {'width': 1180, 'height': 820, 'deviceScaleFactor': 2, 'mobile': True,
-                                                              'screenOrientation': {'type': 'landscapePrimary', 'angle': 90}})
-            s = until(lambda s: abs(s['ui'][0] - 1180) < 2 and abs(s['ui'][1] - 820) < 2)
-            page.frames(2)
-            page.screenshot(out / 'touch_10_tablet.png')
-            record_check('touch: tablet size, same run', s and scene(s)['chapter'] == chapter, ui=s and s['ui'])
-
-        page.send('Emulation.setDeviceMetricsOverride', {'width': 844, 'height': 390, 'deviceScaleFactor': 3, 'mobile': True,
-                                                          'screenOrientation': {'type': 'landscapePrimary', 'angle': 90}})
-        page.send('Emulation.setTouchEmulationEnabled', {'enabled': True, 'maxTouchPoints': 5})
-        t0 = time.monotonic()
-        args = '?arg=--&arg=--touch-probe' + ('' if segment == 1 else '&arg=--from-chapter=MICROGRAVITY')
-        page.send('Page.navigate', {'url': url + play_release['page'] + args})
-        s = until(lambda s: s['mode'] == 'welcome' and s['panel'], 300)
-        need(f'touch: phone detected, CSS-pixel interface, welcome without a key{tag}', s and s['primary'] and s['density'] == 3
-             and abs(s['ui'][0] - 844) < 2 and abs(s['ui'][1] - 390) < 2, seconds=round(time.monotonic() - t0, 1), scale_3d=s and s['scale_3d'])
-        page.screenshot(out / f'{pre}_1_welcome.png')
-        s = tap_panel('Start with tips', lambda s: s['mode'] == '' and s['intro_done'])
-        need(f'touch: welcome completed by a tap (tips on){tag}', s and s['preference'] == 'SUGGESTED')
-        page.frames(2)
-        if segment == 1:
-            first_segment(s)
-        else:
-            second_segment()
-        errors = [t for k, t in traffic.since((0, 0))[1] if k in ('error', 'exception') and not t.startswith('   at:')]
-        record_check(f'touch: no engine or script errors{tag}', not errors and not traffic.crashed, errors=errors[:5])
-        s = state()
-        metrics[pre] = {'seconds': round(time.monotonic() - t_start, 1), 'scale_3d': s.get('scale_3d'), 'godot_fps': s.get('fps'),
-                        'renderer': 'SwiftShader software WebGL, emulated phone 844x390 DPR 3: behaviour only, not a phone frame rate'}
-    except JourneyStop as stop:
-        try:
-            page.screenshot(out / f'{pre}_stopped.png')
-            print(f'touch journey{tag} stopped at: {stop}; state {json.dumps(state())[:600]}', flush=True)
-        except (RuntimeError, TimeoutError):
-            print(f'touch journey{tag} stopped at: {stop}', flush=True)
-    except Exception as error:
-        log.flush()
-        record_check(f'touch: phone session{tag}', False, error=repr(error),
-                     chrome_log=(out / f'chrome-{pre}.log').read_text(errors='replace').splitlines()[-8:])
-    finally:
-        chrome.close()
-        shutil.rmtree(profile, ignore_errors=True)
-        log.close()
-
 def run_touch_walk(url, play_release, binary, sandbox, out, record_check, metrics, timeout=150):
-    """EXC-001 on the emulated phone of run_touch (844 x 390 CSS px, DPR 3, landscape): the walk starts by the launcher's switch, the
+    """EXC-001 on an emulated phone (844 x 390 CSS px, DPR 3, landscape): the walk starts as the package's main scene, the
     touch welcome is tapped through, the 1-D stick carries the trainee down the boarding line to the shut outer hatch (the push-off
     into the coast across it is refused), Use opens it, a look drag turns the view, Map and View answer. Behaviour only."""
     profile = tempfile.mkdtemp(prefix='wf-web-touch-walk-')
@@ -666,7 +407,7 @@ def run_touch_walk(url, play_release, binary, sandbox, out, record_check, metric
         page.send('Emulation.setDeviceMetricsOverride', {'width': 844, 'height': 390, 'deviceScaleFactor': 3, 'mobile': True,
                                                           'screenOrientation': {'type': 'landscapePrimary', 'angle': 90}})
         page.send('Emulation.setTouchEmulationEnabled', {'enabled': True, 'maxTouchPoints': 5})
-        page.send('Page.navigate', {'url': url + play_release['page'] + '?arg=--&arg=--excursion&arg=--touch-probe'})
+        page.send('Page.navigate', {'url': url + play_release['page'] + '?arg=--&arg=--touch-probe'})
         s = until(lambda s: s['mode'] == 'welcome' and s['panel'] and scene(s).get('scene') == 'excursion', 300)
         need('touch walk: the walk starts on a phone with the touch welcome', s, seconds=round(time.monotonic() - t_start, 1))
         for _ in range(3):
@@ -954,7 +695,7 @@ def run_main(url, release, build, binary, sandbox, out, record_check, metrics):
             if running:
                 time.sleep(5)
                 page.screenshot(out / 'play_first_launch.png')
-                for key, code in (('Enter', 13), ('Enter', 13)):        # ACI first launch: the suggested Confirm (the walk ignores the second)
+                for key, code in (('Enter', 13), ('Enter', 13)):        # two Confirm presses (the walk opens no first-launch prompt)
                     page.send('Input.dispatchKeyEvent', {'type': 'keyDown', 'key': key, 'code': key, 'windowsVirtualKeyCode': code})
                     page.send('Input.dispatchKeyEvent', {'type': 'keyUp', 'key': key, 'code': key, 'windowsVirtualKeyCode': code})
                     time.sleep(3)
@@ -1026,10 +767,10 @@ def run_main(url, release, build, binary, sandbox, out, record_check, metrics):
             page.screenshot(out / 'phone_zoomed.png')
         else:
             record_check('phone: model loaded', False)
-        page.send('Page.navigate', {'url': url + 'review/'})
+        page.send('Page.navigate', {'url': url + 'status/'})
         rendered = page.wait("document.querySelectorAll('section.panel').length >= 6", 30)
-        record_check('review page renders release.json', rendered and release['release'] in page.js('document.body.innerText'))
-        page.screenshot(out / 'review.png')
+        record_check('status page renders release.json', rendered and release['release'] in page.js('document.body.innerText'))
+        page.screenshot(out / 'status.png')
     except SystemExit:
         pass
     except Exception as error:      # a browser session failure is a failed check with Chrome's own last words
@@ -1041,7 +782,7 @@ def run_main(url, release, build, binary, sandbox, out, record_check, metrics):
         log.close()
 
 
-PARTS = ('main', 'equivalence', 'touch1', 'touch2', 'walk')     # the main walk, browser-vs-native, the touch journey's two segments, the touch walk
+PARTS = ('main', 'equivalence', 'walk')     # the main visitor walk, browser-vs-native, the touch walk
 
 
 def record_release(site, release, results, metrics, version):
@@ -1052,16 +793,15 @@ def record_release(site, release, results, metrics, version):
                                  'total': len(rs), 'failed': [r['check'] for r in rs if not r['ok']], 'browser': version}
     release['tests'] = {'viewer': summary(group(('viewer', 'phone'))), 'isolation': summary(group(('start', 'play launcher', 'switching'))),
                         'play': summary(group(('play',))), 'touch': summary(group(('touch',))), 'all': summary(results), 'metrics': metrics}
-    equivalence = [r for r in results if r['check'].startswith(('play: Demonstrator 01 check suite', 'play: whole-journey'))]
+    equivalence = [r for r in results if r['check'].startswith('play: the walk check')]
     if carried and any(r['check'].startswith('play: browser-vs-native equivalence carried') for r in results):
         release['tests']['equivalence'] = {**carried['equivalence'], 'carried_from': carried['release']}
     elif equivalence:
-        eq, suite = metrics.get('equivalence') or {}, metrics.get('check_suite') or {}
+        eq = metrics.get('equivalence') or {}
         release['tests']['equivalence'] = {
             'result': 'PASS' if all(r['ok'] for r in equivalence) else 'FAIL',
-            'note': f"browser vs native on the same package: check suite {(suite.get('web') or {}).get('checks', '-')} checks, "
-                    f"{len(suite.get('differ', []))} differing; whole-journey autoplay at a fixed 30 fps {(eq.get('web') or {}).get('frames', '-')} "
-                    f"frames vs {(eq.get('native') or {}).get('frames', '-')} natively, same chapters and production-layer flips"}
+            'note': f"browser vs native on the same package: the walk check at a fixed 60 fps, {(eq.get('web') or {}).get('physics_frames', '-')} "
+                    f"physics frames in the browser vs {(eq.get('native') or {}).get('physics_frames', '-')} natively, same result and milestones"}
     (site / 'release.json').write_text(json.dumps(release, indent=1) + '\n')
 
 
@@ -1124,15 +864,12 @@ def check(site, out, binary, sandbox=True, record=False, play_seconds=900, live=
                      carried['equivalence'].get('result') == 'PASS', release=carried['release'], git_revision=carried['git_revision'],
                      note=carried['equivalence'].get('note'))
     equivalence = 'equivalence' in parts and recording and not carried
-    side_parts = [k for k in ('touch1', 'touch2', 'walk') if touch and k in parts]
+    side_parts = [k for k in ('walk',) if touch and k in parts]
     # The side browser runs the equivalence session and then the touch journey and the touch walk (at most two browsers share a
     # runner with the main walk; CI runs each part on its own runner and merges them, --part and --merge).
     def side_work():
         if equivalence:
             run_equivalence(url, play_release, binary, sandbox, out, play_seconds, record_check, metrics)
-        for segment in (1, 2):
-            if f'touch{segment}' in side_parts:
-                run_touch(url, play_release, binary, sandbox, out, record_check, metrics, segment=segment)
         if 'walk' in side_parts:
             run_touch_walk(url, play_release, binary, sandbox, out, record_check, metrics)
     side = threading.Thread(target=side_work) if play_release and (equivalence or side_parts) else None
@@ -1161,14 +898,14 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument('site', type=Path, nargs='?', help='local site directory (omit with --live)')
     parser.add_argument('--live', help='check the deployed site at this URL (ending in /) instead of a local directory')
-    parser.add_argument('--no-recording', action='store_true', help='skip the recorded Demonstrator 01 run')
+    parser.add_argument('--no-recording', action='store_true', help='skip the browser-vs-native walk check')
     parser.add_argument('--no-touch', action='store_true', help='skip the emulated-phone touch journey')
     parser.add_argument('--out', type=Path, required=True)
     parser.add_argument('--chrome', default=os.environ.get('CHROME', 'google-chrome'))
     parser.add_argument('--no-sandbox', action='store_true', help="disposable CI VMs whose AppArmor blocks Chrome's namespace sandbox")
     parser.add_argument('--record', action='store_true', help="write the results into the site's release.json (tests)")
-    parser.add_argument('--play-seconds', type=int, default=900, help='time allowed for the recorded Demonstrator 01 run')
-    parser.add_argument('--part', action='append', choices=PARTS, help='run only this part (repeatable; default all): main, equivalence, touch1, touch2, walk')
+    parser.add_argument('--play-seconds', type=int, default=900, help='time allowed for the browser walk check')
+    parser.add_argument('--part', action='append', choices=PARTS, help='run only this part (repeatable; default all): main, equivalence, walk')
     parser.add_argument('--merge', type=Path, nargs='+', metavar='DIR', help="merge these parts' check.json into --out (with --record, into the site)")
     args = parser.parse_args()
     if args.merge:

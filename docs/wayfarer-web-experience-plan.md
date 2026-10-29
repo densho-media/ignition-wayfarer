@@ -1,5 +1,8 @@
 # Wayfarer web experience and deployment (WEB-002)
 
+**2026-10-29:** Demonstrator 01 and the other review scenes are retired (tag `archive/pre-cleanup-2026-10-29`); Enter Wayfarer
+plays the walk (EXC-001) and its browser-vs-native equivalence is the walk's own check. What follows is the decision record as built.
+
 Working plan and decision record for the public Wayfarer website: a start page, the Explore Ship viewer, the Enter Wayfarer
 Godot experience and a technical review page, each loaded only when chosen, built and deployed by GitHub Actions.
 How to build, check and roll back lives in [web/README.md](../web/README.md); this document records why it is built this way,
@@ -76,7 +79,7 @@ web/index.html, site.css        start page          loads index.html, site.css, 
 web/viewer/                     Explore Ship        three.js + Draco decoder + content-named GLB and labels (viewer/build.json)
 web/play/index.html             launcher            loads play.json only; Start opens the content-named Godot page
 web/play/shell.html             Godot HTML shell    (export input, not published) boots demo01-<hash>.pck on engine-<hash>.wasm
-web/review/                     review page         renders release.json and probes the browser with a throwaway context
+web/status/                     status page         renders release.json and probes the browser with a throwaway context
 release.json                    release manifest    identity, toolchain, inputs, all files (bytes, SHA-256), experiences, checks
 ```
 

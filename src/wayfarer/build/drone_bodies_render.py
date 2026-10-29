@@ -1,4 +1,4 @@
-"""Shared render helpers for the drone review renders and the accessory scenes (presentation/drone_preview.py, accessory_scene.py)."""
+"""Shared render helpers for the drone renders and the accessory scenes (presentation/drone_preview.py, accessory_scene.py)."""
 import math
 
 import bpy

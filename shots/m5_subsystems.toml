@@ -2,8 +2,8 @@
 # An explanatory overlay colour per subsystem (never a ship material), the selectors that assign each shot item to it, its
 # source references and its maturity. Classification: the first subsystem (file order) whose `select` matches wins; an item no `select`
 # matches falls to the first matching `fallback` (whole assemblies); anything else is CTX (context: hull casing, unclassified).
-# Read by representation.load_subsystems() for shots that name this file (`subsystems = "m5_subsystems.toml"`) and by
-# studies/m5_cutaway.py for the subsystem map (references/m5_subsystem_map.json).
+# Read by representation.load_subsystems() for shots that name this file (`subsystems = "m5_subsystems.toml"`) and by the web viewer's
+# hologram style (representation.py holo-style). The last subsystem map is references/evidence/m5_subsystem_map.json.
 schema = 1
 
 [[subsystem]]

@@ -24,64 +24,44 @@ python3 -m unittest discover -s tests -k view_factor   # single test by name sub
 # Saved-asset inspection, rig contract, previews, visibility screen
 /snap/bin/blender --background --factory-startup --python-exit-code 1 --python src/wayfarer/validation/inspect.py -- --output references/p1_validation.json
 #   --scope <groups> (drive rotation hull thermal forward timeline route, or core) limits the posed checks; the core checks always run and the report's `scope` lists what ran
-python3 src/wayfarer/sim_rig.py --check           # simulations/wf_sim_rig.json matches current inputs
-python3 src/wayfarer/flight_timeline.py [--check] # simulations/wf_first_ignition_timeline.json (FUT-004); the build rewrites it too
-# Accessories beside the ship (EVA suit look, drone bodies, compact PLSS study, standalone viewer tools/accessory_viewer.py): docs/ACCESSORIES.md "Run"
+python3 src/wayfarer/sim_rig.py --check           # data/simulations/wf_sim_rig.json matches current inputs
+python3 src/wayfarer/flight_timeline.py [--check] # data/simulations/wf_first_ignition_timeline.json (FUT-004); the build rewrites it too
+# Accessories beside the ship (EVA suit look, drone bodies, compact PLSS study): docs/ACCESSORIES.md "Run"
 /snap/bin/blender --background --factory-startup --threads 8 --python-exit-code 1 --python src/wayfarer/presentation/preview.py -- --state COAST --size 1024 --views side top bow aft threequarter body_detail habitat_detail ring_detail root_detail hull_detail
 #   --quality draft (default: Workbench, form and fit, no emission) | material (Eevee, 16 samples, GPU) | review (Cycles 16 samples) | look (Cycles 64 samples, explicit look reviews); section views are always Workbench
 #   Eevee uses the graphics GPU automatically; the Cycles compute-device preference does not control it. Material mode uses direct lights without baked indirect lighting; use review/look for lighting and emission review.
 #   without --views it renders side top threequarter body_detail; --views all renders every view (35)
 #   --state takes any buildable configuration (COAST, LOW_THRUST, EVA, HIGH_POWER, FIRST_IGNITION, DOCKED on the one vehicle file) or a display pose (DEFENSE_ENGAGED, SHIELD_DAMAGED, RADIATOR_DAMAGED: the base preset plus the pose's control values, in memory) or a timeline mark (TL_*: the configuration its phase shows, posed with the timeline's control values by `common.pose_timeline`, captioned by `flight_timeline.caption`)
-#   extra views: service_detail bay_detail power_detail hub_detail hub_section_detail (the section clips in front of the XZ plane; since P1-001 it spans the vestibule) crew_detail (coast crew route at the hubs); --hull hide also hides the rotor-bay doors; --sim-proxies show renders the hidden WF_SIMPROXY_* cages; output renders/p1/<config>
+#   extra views: service_detail bay_detail power_detail hub_detail hub_section_detail (the section clips in front of the XZ plane; since P1-001 it spans the vestibule) crew_detail (coast crew route at the hubs); --hull hide also hides the rotor-bay doors; --sim-proxies show renders the hidden WF_SIMPROXY_* cages; output runs/renders/p1/<config>
 /snap/bin/blender --background --factory-startup --python-exit-code 1 --python src/wayfarer/validation/visibility.py   # writes references/p1_visibility.json
 
 # On-demand reports (PROTOTYPE fit screens and studies; not part of spec validation)
 python3 tests/verify_rebuild.py                   # in a disposable copy: ART_* preservation, regeneration, relocation, targeted isolation -> references/p1_regression.json
-python3 src/wayfarer/studies/shadow_screen.py     # shadow-shield line of sight -> references/p1_shadow_screen.json
-python3 src/wayfarer/studies/mass_proposal.py     # PROTOTYPE CoM/inertia proposal for the owner -> references/p1_mass_proposal.json
 python3 src/wayfarer/habitat_interior.py          # rough interior fit report -> references/p1_interior.json
-/snap/bin/blender --background --factory-startup --threads 8 --python-exit-code 1 --python src/wayfarer/presentation/interior_preview.py -- --size 768   # plan/section/cutaway per pod function -> renders/p1/interior
+/snap/bin/blender --background --factory-startup --threads 8 --python-exit-code 1 --python src/wayfarer/presentation/interior_preview.py -- --size 768   # plan/section/cutaway per pod function -> runs/renders/p1/interior
 python3 src/wayfarer/drive_manifold.py            # drive-manifold geometry/clearance screen -> references/p1_drive_manifold.json
 python3 src/wayfarer/power_storage.py             # storage/black-start checks -> references/p1_power_storage.json
 python3 src/wayfarer/rotor_interface.py           # hub mechanism, service-path and state checks -> references/p1_rotor_interface.json
 python3 src/wayfarer/crew_transfer.py             # crew route clearances, hatches, refuge reachability -> references/p1_crew_transfer.json
 python3 src/wayfarer/storeroom.py                 # HUM-002 SP-45 storeroom fit screen: clearances, port branches, ladder reach, program volume and aisle
-/snap/bin/blender -b --python src/wayfarer/studies/storeroom_survey.py -- --out runs/<stamp>-sp45   # every placement of the SP-45 cuboid against the saved vehicle, with trunk access
 python3 src/wayfarer/human_entry.py               # HUM-001 route fit screen: passage to the trunk, hull gap, both leaf swings, fixtures, trunk fixtures, neighbours, both rings' vestibules and crew tubes, sector landing, refuge leg, mannequins -> references/p1_human_entry.json
-/snap/bin/blender --background --factory-startup --threads 8 --python-exit-code 1 --python src/wayfarer/presentation/entry_preview.py -- --size 640   # exterior, twenty first-person cameras, the five induction stop views (stop_*) and the eight induction stills (ind_*), port/junction, trunk, both rings' vestibule and spoke cutaways, landing cross-section, refuge cutaway (hatches opened in memory; --views to pick; --look renders with the FUT-003 S004 look applied in memory) -> renders/p1/human_entry
+/snap/bin/blender --background --factory-startup --threads 8 --python-exit-code 1 --python src/wayfarer/presentation/entry_preview.py -- --size 640   # exterior, twenty first-person cameras, the five induction stop views (stop_*) and the eight induction stills (ind_*), port/junction, trunk, both rings' vestibule and spoke cutaways, landing cross-section, refuge cutaway (hatches opened in memory; --views to pick; --look renders with the FUT-003 S004 look applied in memory) -> runs/renders/p1/human_entry
 python3 src/wayfarer/ring_circulation.py         # CIRC-001 fit screen: section, doors, compartments, budget, conflicts, the walked circuit's clearance -> references/p1_ring_circulation.json + RING_CIRCULATION_PLAN.svg
 python3 src/wayfarer/station.py                  # STN-001 fit screen: the station boarding area and the boarding line into the trunk -> references/p1_station.json
 $WAYFARER_BLENDER -b --factory-startup --python-exit-code 1 --python src/wayfarer/presentation/circulation_preview.py -- --out runs/<stamp>-circulation   # CIRC-001: each ring from aft with the fill cut away, eye level in a corridor and in the through-passages (in memory, saves nothing)
 godot --path godot res://scenes/excursion.tscn [-- --check-excursion [--shots=<dir>]]   # EXC-001: the station-to-ring excursion; the check drives both rings through the player's actions (WF_GODOT_EXCURSION; --shots with a display)
-/snap/bin/blender --background --factory-startup --threads 8 --python-exit-code 1 --python src/wayfarer/presentation/hero_preview.py -- --size 1600   # FUT-003 First Ignition exterior stills ([look.exterior]; --views, --samples, --out-dir) -> renders/p1/hero_first_ignition
-/snap/bin/blender --background --factory-startup --threads 8 --python-exit-code 1 --python src/wayfarer/presentation/m4_look.py -- --size 1600   # M4 (WF-006): crew-end exterior and ring A aisle with the MPFB pair, each physical and labelled fill, plus the pair's point of view with its fit (--views, --samples, --out-dir) -> renders/p1/m4_look
-/snap/bin/blender --background --factory-startup --threads 8 --python-exit-code 1 --python src/wayfarer/presentation/drive_preview.py -- --size 1024   # 14 drive review targets x cinematic/engineering -> renders/p1/drive
+/snap/bin/blender --background --factory-startup --threads 8 --python-exit-code 1 --python src/wayfarer/presentation/hero_preview.py -- --size 1600   # FUT-003 First Ignition exterior stills ([look.exterior]; --views, --samples, --out-dir) -> runs/renders/p1/hero_first_ignition
+/snap/bin/blender --background --factory-startup --threads 8 --python-exit-code 1 --python src/wayfarer/presentation/m4_look.py -- --size 1600   # M4 (WF-006): crew-end exterior and ring A aisle with the MPFB pair, each physical and labelled fill, plus the pair's point of view with its fit (--views, --samples, --out-dir) -> runs/renders/p1/m4_look
+/snap/bin/blender --background --factory-startup --threads 8 --python-exit-code 1 --python src/wayfarer/presentation/drive_preview.py -- --size 1024   # 14 drive review targets x cinematic/engineering -> runs/renders/p1/drive
 #   --targets <names> renders a subset; --state picks the configuration (default HIGH_POWER); --modes cinematic|engineering
-/snap/bin/blender --background --factory-startup --threads 8 --python-exit-code 1 --python src/wayfarer/shots/build_shots.py -- --render   # FUT-002 shots from shots/shots.toml -> shots/SH_*.blend + renders/shots/
+/snap/bin/blender --background --factory-startup --threads 8 --python-exit-code 1 --python src/wayfarer/shots/build_shots.py -- --render   # FUT-002 shots from shots/shots.toml -> shots/SH_*.blend + runs/renders/shots/
 /snap/bin/blender --background --factory-startup --python-exit-code 1 --python src/wayfarer/shots/build_flight.py -- --render   # FUT-006 shots/SH_FIRST_IGNITION_FLIGHT.blend from the flight timeline + mark renders
 /snap/bin/blender --background --factory-startup --python-exit-code 1 shots/SH_FIRST_IGNITION_FLIGHT.blend --python tests/verify_flight_shot.py   # mark frames against the timeline
-/snap/bin/blender --background --factory-startup --python-exit-code 1 --python src/wayfarer/shots/build_nav_stage.py -- --render   # NAV-001 shots/SH_NAV_STAGE.blend (ANALYTICAL + PRESENTATION) from simulations/wf_route_v1.json
+/snap/bin/blender --background --factory-startup --python-exit-code 1 --python src/wayfarer/shots/build_nav_stage.py -- --render   # NAV-001 shots/SH_NAV_STAGE.blend (ANALYTICAL + PRESENTATION) from data/simulations/wf_route_v1.json
 /snap/bin/blender --background --factory-startup --python-exit-code 1 shots/SH_NAV_STAGE.blend --python tests/verify_nav_stage.py   # every frame against its route row
 #   --shots <names>; --render-only; --frames <n...>; --size; --root <dir>
-/snap/bin/blender -b --factory-startup --python-exit-code 1 --python src/wayfarer/studies/m5_cutaway.py -- --asset   # M5: BODY-C study asset (assets/wayfarer/studies/) + overlap screen; before building the SH_M5_* shots
-/snap/bin/blender -b --factory-startup --python src/wayfarer/studies/m5_attitude.py -- --masses   # M5 slice 2: mass-region moments (runs/m5_mass_regions.json)
-python3 src/wayfarer/studies/m5_attitude.py --out runs/<stamp>-m5-attitude   # inertia tensor, jet couples, shadow tolerance, LOS maps -> references/m5_attitude.json
-/snap/bin/blender -b --factory-startup --python src/wayfarer/studies/m5_eva_l2.py -- --asset   # M5 slice 3: EVA L2 comparison asset + rotor-bay channel and suit-corridor clearances -> references/m5_eva_l2.json
-/snap/bin/blender -b --factory-startup --python src/wayfarer/studies/m5_drive_support.py -- --asset   # M5 slice 4: nozzle support study asset + pickup/frame loads, support heat leak, bore gaps, measured overlaps -> references/m5_drive_support.json
-python3 src/wayfarer/studies/m5_drive_support.py --legend <render> <png>   # annotate a SH_M5_DRIVE_SUPPORT* render with the legend and findings
-/snap/bin/blender -b --factory-startup --python src/wayfarer/studies/m5_lettering.py   # M5 slice 5: lettering review asset (L1-L3) on the measured skin + obstruction screen -> references/m5_lettering.json
-/snap/bin/blender -b --factory-startup --python-exit-code 1 --python src/wayfarer/export/m5_hologram.py -- --out <package dir>   # M5 Godot hologram data + study GLB (runtime-export step export-m5; needs the COAST manifest.json there)
-/snap/bin/blender -b --factory-startup --python-exit-code 1 --python src/wayfarer/studies/m5_rcs_balanced.py   # M5 RCS-B: balanced RCS couples, plume / clearance / sweep screens -> references/m5_rcs_balanced.json + WF_STUDY_RCS_BALANCED
-/snap/bin/blender -b --factory-startup --python-exit-code 1 --python src/wayfarer/studies/m5_nozzle_mounts.py -- --asset   # M5 NOZ-2: F4/F8 frame statics, ring screen, REBCO mounts, bore -> references/m5_nozzle_mounts.json + WF_STUDY_NOZZLE_MOUNTS (python3 without --asset: screens only)
-/snap/bin/blender -b --factory-startup --python-exit-code 1 --python src/wayfarer/studies/m5_aft_robotic.py -- --asset   # M5 AFT-R: robot reach / paths / gates per aft target -> references/m5_aft_robotic.json + WF_STUDY_AFT_ROBOTIC (python3 without --asset: screen only)
-/snap/bin/blender -b --factory-startup --python-exit-code 1 --python src/wayfarer/studies/m5_body_c2.py -- --asset   # M5 BODY-C2: separate-species layout, free volume, interfaces, tankage ledger -> references/m5_body_c2.json + WF_STUDY_BODY_C2 (python3 without --asset: numbers only)
-/snap/bin/blender -b --factory-startup --python-exit-code 1 --python src/wayfarer/studies/m5_body_c3.py -- --asset   # M5 BODY-C3: grouped C2 layout, comparison C / C2 / C3 -> references/m5_body_c3.json + WF_STUDY_BODY_C3 (python3 without --asset: numbers only)
-python3 src/wayfarer/studies/m5_gnc_comms.py --out runs/<stamp>-m5-gnc-comms   # M5 attitude modes + COAST comms contacts -> references/m5_gnc_comms.json + sheets
-python3 src/wayfarer/studies/m5_cutaway.py --map   # M5 subsystem map references/m5_subsystem_map.json; --legend <src> <dst> <title> annotates a shot render
 python3 -m unittest discover -s tests -k crew_dynamics   # PHYS-001 frames, ring field, modes, push/tether, nav gating (docs/PHYSICS.md)
-timeout -s KILL 180 /snap/bin/godot-4 --headless --fixed-fps 60 --path godot res://scenes/physics_lab.tscn -- --check-physics   # WF_GODOT_PHYSICS (Jolt crew physics checks)
 timeout -s KILL 120 /snap/bin/godot-4 --headless --path godot --script res://scripts/check_route.gd   # WF_GODOT_ROUTE (route playback against all rows)
-/snap/bin/godot-4 --path godot res://scenes/physics_lab.tscn   # interactive lab: G grab, Space push, R release, T tool, 1/2/3 zone, M mode, P profile, WASD walk on a floor
 /snap/bin/blender -b --python src/wayfarer/shots/physics_traces.py -- --out runs/<stamp>-physics-shots runs/physics/<scenario>.json ...   # bake Godot traces onto proxies (+ --character <glb> ARTISTIC layer)
 #   always run headless Godot under `timeout -s KILL`: a script parse error hangs it and the snap process can't be killed otherwise
 ```
@@ -143,8 +123,8 @@ python3 tools/workflow.py pipeline [--target T] [--previews auto|none|<preset>..
 python3 tools/workflow.py accept runs/<pipeline run> <name>   # intended geometry change: new baseline references/baseline_<name>
 python3 tools/workflow.py report                     # compact scene report of references/p1_validation.json (no Blender)
 python3 tools/workflow.py readback [--install]       # owner measurement readback of the saved vehicle (~10 s): runs/<stamp>-readback/{readback,station_map}.csv + readback.md; --install copies to references/p1_*
-python3 tools/workflow.py route-import [--check]       # NAV-001: 23_ROUTE_FRAMES of the route_frames capture -> simulations/wf_route_v1.json, refused unless 25_ROUTE_VALIDATION rows 2:13 PASS
-python3 tools/workflow.py frames-import [--check]      # FRM-002-2026-10-10 (15!A125, C-017/C-018): time-tagged channels and phase/event streams -> simulations/wf_flight_frames_v1.json; UNKNOWN (null) until Sheets releases a table, refused on import-fidelity failures
+python3 tools/workflow.py route-import [--check]       # NAV-001: 23_ROUTE_FRAMES of the route_frames capture -> data/simulations/wf_route_v1.json, refused unless 25_ROUTE_VALIDATION rows 2:13 PASS
+python3 tools/workflow.py frames-import [--check]      # FRM-002-2026-10-10 (15!A125, C-017/C-018): time-tagged channels and phase/event streams -> data/simulations/wf_flight_frames_v1.json; UNKNOWN (null) until Sheets releases a table, refused on import-fidelity failures
 python3 tools/workflow.py sources <term>             # source records and the parameters that cite them
 python3 tools/workflow.py drift --since <UTC>        # hook-saved Drive metadata vs data/source_sync.json
 python3 tools/workflow.py capture references/drive_capture_<date> [--file <key>=<xlsx>]   # exports -> evidence
@@ -154,7 +134,7 @@ python3 tools/workflow.py deps [status|fetch|install] [--optional]   # character
 python3 tools/workflow.py characters [--only <ids>] [--no-fit] [--stages build rig export fit]   # MPFB humans: build, rig review, glTF + Godot check, in-ship fit (docs/CHARACTERS.md, ~2 min)
 python3 tools/workflow.py runtime-check [names|auto]  # Godot checks in godot/ against the published package, refused (STALE) unless its inputs and tool versions match build_identity.json
 python3 tools/workflow.py web [--pipeline-run runs/<quick run>] [--out DIR] [--native] [--no-play] [--reuse-play SITE [--reuse-native ZIP]]   # WEB-001/002 website from the saved assets: start page, Explore Ship (Draco COAST GLB, three.js), Enter Wayfarer (Demonstrator 01 Godot Web build, tools/web_play.py), review, release.json (web/README.md, ~4 min)
-python3 tools/web_check.py <site> --out DIR --chrome <binary> [--record] [--live URL] [--part main|equivalence|touch1|touch2|walk]   # headless-Chrome walk: loading isolation, viewer, play, switching, browser-vs-native recording, phone, touch
+python3 tools/web_check.py <site> --out DIR --chrome <binary> [--record] [--live URL] [--part main|equivalence|walk]   # headless-Chrome walk: loading isolation, viewer, play, switching, browser-vs-native recording, phone, touch
 python3 tools/web_check.py <site> --merge DIR... --out DIR [--record]   # one report (and release.json tests) from the parts' check.json; CI runs each part on its own runner
 python3 src/wayfarer/representation.py holo-style --manifest <manifest.json> --out <wf_holo.json>   # WEB-003 hologram colours per node (runtime-export, web play build; the viewer's holo-<hash>.json)
 python3 tools/web_check.py <site> --out <dir>      # headless Chrome check of that site under /ignition-wayfarer/: framing, orbit, zoom, pan, reset, presets, picking, phone touch
@@ -165,7 +145,6 @@ python3 tools/workflow.py module export-authored <assembly> --id <ID> --objects 
                                                      # ART meshes of a detail asset -> data/detail/<pack>/<id>.glb + its manifest entry
 python3 tools/workflow.py assembly validate           # every detail pack's saved assets and contract against its publication record
 python3 tools/workflow.py eva [--no-renders] [--no-route] [--only <stages>]   # EVA suit: build on the saved pair, coverage/envelope/hold checks, access-pose hulls, SP-11/12/13 study (eva_access.py, then measured and rendered in the vehicle), EVA-003 comparison (eva_sp11.py + validation/eva_sp11_study.py, rigs posed in the chambers), renders, glTF, route (docs/EVA.md, ~9 min; --only <stages> reruns part of it)
-/snap/bin/blender -b --python src/wayfarer/studies/eva3_district.py -- --out runs/<stamp>-eva3-district   # EVA-003 / SERV-003 integrated forward district (references/p1_eva_district.json, EVA3_DISTRICT_MAP.svg)
 ```
 
 Measured on 2026-10-14 on production (before → after the DEV-FLOW changes, same
@@ -225,7 +204,7 @@ A geometry-neutral change shows 0 changed/added/removed objects in the pipeline'
 - `human_entry.py` (HUM-001 zones 1–5, the refuge leg and the thrust review): the primary boarding port, the trunk, the rotary vestibules and crew spokes of both rings, the sector landing and the storm refuge's entry as a hollow, human-scale route (`[human_entry]`, PROTOTYPE; 15!A86, 14!A32). `stations()` derives the chamber and node radius from the hatch hinge and leaf, places the chamber inside the collar by the shared clearance and the node floor one swing clearance below the open inner leaf; `shells()` (revolved pressure shells down to the trunk node and the inboard neck, kind `service_fitting`), `fixtures()` (hatch frames, handrails and brackets, lights, panels, valves of chamber and node; kind `entry_fixture`), `trunk_fixtures()` (trunk handrails, brackets and lights, clipped by `clear_spans()` around every branch in `openings()`, a short rail on each side of the refuge port at its angle, and the thrust ladder: stiles, brackets and rungs as `rods`, the fall-arrest rail and its end brackets), `trunk_ladder()` (the thrust review's ladder at `trunk_ladder_deg`: stile radius and half-angle, floor to top, where `clear_spans(margin=0)` first stops either stile line, rung stations and the rail), `hinge()`/`leaf_local()`/`leaf_points()` (outer leaf into the chamber, inner leaf inboard into the node), `vestibule_station(s, j)` (rotor j, default ring A), `vestibule_fixtures(s, j)` (rotor-local rails, light strips trimmed to the chamber, outer-hatch frames of the port's size as `tube` fixtures and the transfer panel, parented to the rotor), `ring_fixtures(s, j)` (everything that rides on rotor j), `mannequin()`, `trunk_mannequin()`, `vestibule_mannequin(s, j)` (rotor-local, placed at the index pose by `at_index()`; ring B's guides carry `ring_tag()` `_B`), `spoke_fixtures(s, j)` (each tube rotor's crew-tube ladders on the wall away from the spoke, from one end gap above the vestibule wall or bulkhead: polyline stiles through the elbows, rungs on the deck-referenced `rung_heights()` grid and brackets as `rods` segment lists, the fall-arrest rail on the ladder's centre line resting on the rungs (`arrest_rail()`) with its wall brackets where no rung carries it, light strips, the tube-side hatch panel), `spoke_mannequin(s, j)` (on the ladder of rotor j's spine-port sector, `vestibule_port_sectors`: ring A's at about 0.2 g, ring B's near the top of the run, each clipped to the rail by an arrester and link), `ladder_push(s, j)` (the spin lean and the Coriolis push across a tube ladder: which direction pulls the climber off the rungs, the neutral speed, the apparent overhang at `climb_review_speed_m_s` and the unobstructed fall speed), `landing()` (zone 5 stations in the sector frame: hatch frame and seat, closed and slid leaf, stile line and ends, landing well, chase), `landing_fixtures()` (built into the shared `WF_RING_SECTOR`; a `tube` with r0 0 is the leaf disc), `landing_mannequin()`, `landing_aisle_view()`, `refuge_station()` (the refuge leg: the port off the trunk, the inner pressure wall, the hoop-rail stations, one occupant station per rated occupant inboard of its anchor rail and the circulation radius between them and the inner-wall fixtures), `refuge_fixtures()` (hoop and anchor rails with brackets, light strips, the refuge panel; built in `WF_CREW_TRANSFER`; `hull.service()` builds the inner wall, kind `refuge_wall`), `refuge_mannequin()`, `trunk_climber()` (on the trunk ladder with aft down, its eye level with the refuge port, clipped to the rail), `cameras()` (the non-canon guides in the vehicle file), `route()` (the boarding route keyed `A1`…`B3`: to each sector of both rings as a zone-tagged world polyline at the docked pose, through ring B's necks, plus the upright walk to the aisle; `R`, zone `R`, from the trunk up the refuge port and half way round the refuge at the circulation radius; and `E`, the emergency approach, forward along the trunk from the nearest spine port aft of the refuge, up the same port and round the other half; IND-001 adds the induction ring's legs between sectors, `A1-A3` and `A3-A2`, and on the route ending in each induction sector the upright aisle walks to its stops), `induction_stations()` (each sector stop's station: its `pose` figure from `sector_whitebox.figures()`, where it stands on the aisle and its review camera), `induction()` (the `[induction]` stops with a point each and the legs in order, the way back as `-A2`), `induction_graph()` (IND-001 5.1: the rig's `induction_route`, with the rail, stops, sequence, legs, ladders and openings under semantic IDs; a waypoint's zone is that of the segment ending there), `induction_sequence()` (IND-001 4.1: `[induction].sequence` checked against the configurations and the stop order, each stop's operating state, ring rate and spin gravity; stops off the ring need the rings stopped), `induction_figures()` (the induction sectors' review figures in the vehicle frame) and `route_bodies()` (the suited body sampled along it: two chords of the route while floating, upright on the deck; a stop walk's zone is the stop's key). `check()` screens the clear passage to the trunk, the hull gap, both leaf swings, fixture intrusions, neighbours (crew-transfer obstacles, keels, ties), the trunk fixtures against the branch openings, each vestibule chamber and its fixtures against its spine port's passage, the suited envelope through each port and around each annulus, each crew tube's fixtures against its bore, its hatch panel's reach and the suited envelope swept along its axis (ring B: and through its neck), the landing's leaf sweep, well, fixtures and every function's blocks, the suited envelope down the hatch axis and across to the aisle, the refuge port against the suited envelope, the refuge fixtures inside the cavity's walls and out of the port, the occupant stations (inside the cavity, clear of each other and of every fixture but their own anchor rail) and the circulation annulus, the emergency route (the refuge port rails within reach of crew beside the rim, the distance, rungs and time at the review pace from each sector's aisle to the refuge, and the spin-transfer speeds at each spine port), the thrust review (`trunk.thrust`: the ladder from the floor, the rung at each branch sill it passes, the near stile's gap to each mouth and the rail's distance from it, falls from each step-off at the LOW_THRUST limit and the First Ignition peak, and per sector the drop to the spine port, the trunk climb and the legs steeper than `steep_leg_deg` with aft down), the induction legs' lengths and rungs and each sector stop's station and way to the refuge (`induction`), and all nine mannequins' fit and reach; each spoke row carries its `ladder_push` and `arrest_rail` (length, clip-on gravity, the drop to the deck where crew unclip). The climber's fixture gap also measures body samples against each fixture's exact solid, since a long rod's surface samples are metres apart.
 - `layout.spine_core()` / `spine_radius_at()` (HUM-001 zones 2–3): the forward spine core (`prototype.spine_core_*`, r 0.95 m from just aft of the ring-A vestibule to the forward end, a cone to the aft `spine_radius_m`). The hubs, vestibules, trunk, refuge and storage obstacle use the core radius; the drive end keeps `spine_radius_m`.
 - `common.cut()` applies EXACT boolean differences (or, with `operation='INTERSECT'`, intersections) of closed cylinders (`cylinder_mesh()`) to a generated mesh and deletes the temporary cutters; `revolve_mesh()` revolves a closed (t, rho) profile about any axis. Only the HUM-001 openings and trims use them.
-- `sim_rig.py`: the rig anchor frames, the massless simulation proxies (`proxies()`: shapes posed in anchor frames, with realizations and motion) and the `simulations/wf_sim_rig.json` contract.
+- `sim_rig.py`: the rig anchor frames, the massless simulation proxies (`proxies()`: shapes posed in anchor frames, with realizations and motion) and the `data/simulations/wf_sim_rig.json` contract.
 - `flight_timeline.py` (FUT-004): the First Ignition timeline. `phases()` expands `[flight_timeline.phases]` (induction entries from `[induction].sequence`) into frame spans; `rotor_segment()` and `drive_segment()` re-time the rotor and drive key tables; `track()` plays them phase by phase and checks each hold ends at its configuration's state; `channels()` adds the forward-defense, radiator, EYE, configuration and kinematics channels; `sample()` evaluates every channel at a frame or mark; `bind_frames()` gives every channel its authority (presentation / sheet-import), adds the `frames.*` channels of `tools/frames_import.py` (no keys while UNKNOWN) and marks the presentation channels that stand for them; `validate()` (called by `spec.validate`) checks the structure and, at every frame, the rotor rules, locked rings under thrust and the 07!A39 radiator order; `control_values()` maps a sample onto the controls and `caption()` writes a mark's preview header. FUT-005: `sim_rig.flight_timeline_contract()` (rig section, contract 19) and `inspect.timeline_checks()` (every mark on the saved vehicle).
 
 All of these are imported by both system Python and Blender's Python 3.13, so they must stay standard-library only.
@@ -257,18 +236,18 @@ All of these are imported by both system Python and Blender's Python 3.13, so th
    - ROTOR_INTERFACE (P1-008) holds the stationary hub segments, fluid cartridges, spokes and stationary `IF_HUBn_*` interfaces. The rotating drum/rings (parented to `Rotor_n`), the ring-stop locks, `ROTOR_n_MECH_CTRL` (saved at the COAST preset; `spin_fraction` drives the rotor rotation, or, with `spin_integrated` 1, the integrated `spin_turned` from `rotor_interface.spin_turned()`, FUT-007) and the `WF_RING_STOP_LOCK`/`WF_ROTOR_TOUCHDOWN` actions (one slot per rotor control) are built by the habitat recipe via `components/rotor.py`.
    - CREW_TRANSFER (P1-001) holds the stationary crew trunk, spine ports, connectors and their `IF_CREW_*` interfaces. The vestibules, struts and crew tubes with their `IF_VESTIBULE_*`/`IF_CREW_TUBE_*` interfaces are built by the habitat recipe via `components/crew.py`, parented to `Rotor_n`. The interior components carry `IF_POD_OVERHEAD_HATCH` (pod x −1.3).
    - HULL is linked last and only when `hull.enabled`.
-3. The vehicle assembly `WF_WAYFARER_001.blend`: rotors animated at ±4 rpm over frames 1–361, saved at the COAST preset; other presets are posed in memory. It also gets the `WF_SIM_*` rig empties (`build/rig.py`), and the build rewrites `simulations/wf_sim_rig.json` and `simulations/wf_first_ignition_timeline.json`.
+3. The vehicle assembly `WF_WAYFARER_001.blend`: rotors animated at ±4 rpm over frames 1–361, saved at the COAST preset; other presets are posed in memory. It also gets the `WF_SIM_*` rig empties (`build/rig.py`), and the build rewrites `data/simulations/wf_sim_rig.json` and `data/simulations/wf_first_ignition_timeline.json`.
 
 Higher levels reference lower ones as **linked collection instances with relative paths**. `components/recipes.py` builds NOZZLE, STORAGE, EYE and PROPULSION inline and delegates the pod, radiator, structure, habitat, shielding and thermal recipes to `components/revision.py` and the hull to `components/hull.py`. Recipe dimensions come from the TOML; only cosmetic member radii and small offsets remain literals. Scripts make modules importable by prepending `src/wayfarer`, `build/` and `components/` to `sys.path`. There is no installed package.
 
 **Ownership contract (`build/common.py`), which is load-bearing:**
-- `begin()` reopens an existing asset. It refuses when `scene['wf_asset']` doesn't match. It deletes only objects tagged `wf_owner = "wayfarer.p0"` that sit solely in `GEN_<asset>`. Any other object in `GEN_<asset>` moves to `ART_<asset>`. Nested collections in GEN abort the build.
+- `begin()` reopens an existing asset. It refuses when `scene['wf_asset']` doesn't match. It deletes only objects tagged `wf_owner = "wayfarer.p0"` that sit solely in `GEN_<asset>`. Any other object in `GEN_<asset>` moves to `ART_<asset>`. Generator-owned groups inside GEN (`group()`, tagged `wf_owner`) are cleared and rebuilt; any other collection nested in GEN aborts the build. `move()` puts an object into exactly one collection; the vehicle file uses both for its outliner groups (`build.py organize()`).
 - `tag()` stamps each generated object with `component_id`, `canon_status`, `geometry_status`, `source_ref` and `representation = REP_PROXY`.
 - `save()` makes a timestamped backup to `milestones/` and keeps the newest three per asset (`*_RETIRED_*` files stay). It embeds `WF_SOURCE_SNAPSHOT` and `WF_PROVENANCE_SNAPSHOT` texts plus their SHA-256 hashes, and it rewrites direct library paths to relative.
 - Because of these hashes, **any edit to either TOML makes every saved asset stale until a full rebuild**, and `inspect.py` asserts hash equality.
 
 **Validation, presentation and studies:**
-- `validation/inspect.py` reopens the production assets (never `studies/`, which get a separate summary). It checks hashes, unique IDs and relative links, and that subsystem interfaces pair (`IF_RAD_*_HULL*` meets `IF_SECTOR_*`). It also checks:
+- `validation/inspect.py` reopens the production assets (never `work/`). It checks hashes, unique IDs and relative links, and that subsystem interfaces pair (`IF_RAD_*_HULL*` meets `IF_SECTOR_*`). It also checks:
 - the configuration metadata on `WF_ROOT`, the rig contract and anchor/interface coincidence;
 - EYE facet quadrants against `eye.facet_map`, and pod floor direction (outward in coast, aft in burn);
 - rough interiors: component blocks match `habitat_interior`, each pod carries exactly the interior of its function in its own frame, and at every sampled frame each deck follows its pod with "up" toward the spin axis in coast and +X when stowed;
@@ -296,7 +275,7 @@ Higher levels reference lower ones as **linked collection instances with relativ
     - `hide_viewport` objects are not evaluated either.
     - Blender 5 ignores the new-key interpolation preference, so set `keyframe_points[].interpolation`.
     - Simple driver expressions accept `pow()` but not `**`.
-- `studies/` holds reproducible trade studies. Wayfarer 001 radiators are fixed (R1/R8); the former Miura folding study was removed in FGR-001 and its history is in Git and `references/MIURA_STUDY_REVIEW.md`.
+- Studies live in `work/<task>/` while unapproved (AGENTS.md "Where things go"); the retired `src/wayfarer/studies/` scripts are at the tag `archive/pre-cleanup-2026-10-29`, their kept results in `references/evidence/`.
 - The generated JSON reports live in `references/` (current evidence files are `p1_*.json`), alongside the review markdown, the current geometry baseline (`references/baselines.json` names it) and, on a maintainer's machine only, the Drive captures. Captures and review notes are ignored by Git and never published; tests carry their own synthetic fixtures. `drive_capture_*/` hold full Drive workbook exports (`.xlsx` plus greppable `.txt` dumps and a manifest) or bounded range reads (`ranges.json`), which the source records cite as `capture`.
 
 **Conventions:**
@@ -309,8 +288,6 @@ Higher levels reference lower ones as **linked collection instances with relativ
 - has massless proxies `WF_SIMPROXY_*` (`build/rig.py`) parented to their anchors, saved with `hide_viewport` and `hide_render` so no preview, visibility or geometry check sees them. Radiator proxies are static (motion FIXED). Inspect checks their shapes and that all rotating geometry lies inside the body and sweep proxies. Never give a proxy mass, density or a COM;
 - keeps `flight_thrust` (16.18 MN) separate from `structural_design_load` (29.42 MN); never use the latter as flight thrust;
 - exposes the budget, EYE loads, drive-heat calibration and low-thrust tilt without deriving a COM.
-
-`studies/mass_proposal.py` is a PROTOTYPE proposal for the owner (15_MODEL_INTERFACES S1) and must not feed the spec.
 
 
 ## Production layer (M7)
@@ -342,539 +319,60 @@ standard for later sections. A new section follows the same steps, and its eleme
 - **Scopes (M8):** `production_detail.scope()` returns the table that switches and labels an assembly, as its pack's `scope` names it:
   `[production]` (M7), `[production.m8]` (M8), each with its own `enabled` and `maturity`, or the pack's own `[pack]`. The manifest's `production.assemblies`
   gives every built assembly its scope and maturity, and `check_export.gd` fails a node whose maturity differs from its assembly's.
-  Demonstrator 01's INSPECT flips the M7 section only. Exterior families carry `detail_range_m` (Godot `visibility_range_end`).
+  Exterior families carry `detail_range_m` (Godot `visibility_range_end`).
 - **Exterior gates (M8):** an off-diff; `pipeline --quick --expect Prod_ --inspect forward hull`; the pure screens; then
   `/snap/bin/blender -b --python src/wayfarer/validation/m8_readback.py -- --out <run>/m8_readback.json` (tags, BVH clashes against
   every forward engineering mesh, largest radius, nothing ahead of the skin's aft face; it reads the forward assets and the detail assets
   linked into them). A repeated module (the Crown sector) is gated
   on one instance first (`[production.m8].crown_sectors`). Stills: `presentation/m8_exterior.py -- [--mode xray]`.
 
-## Godot runtime inspector
+## Godot runtime
 
-**Review menu (U01).** `godot/scenes/review.tscn` is the project's start scene: it lists the review sessions (number key or
-click; Esc quits). A guided session opens its scene with the development review guide (`godot/scripts/review/`):
-`WfReviewGuide` draws a step card with the checklist, the keys that work now as chips (blue available, amber the key that
-moves the step on, grey leave), an Expect line, a Last line with the result or the reason a key was refused, and the scene's
-engineering text muted on one line (I expands it, F1 hides the guide). A scene's session subclasses `WfReviewSession` and
-answers every step from the scene's real state and names the source status of what it shows (`labels()`, outlined badges);
-the guide changes no ship, physics or route state. Every menu entry is guided (`--review=<key>`): Ring B body mode and the induction walk (`ring_b_session.gd`,
-`walk_session.gd`, boarding), the ring A vestibule drill (`vestibule_session.gd`, physics lab), EVA drift (`eva_session.gd`),
-Demonstrator 01 (`demo_session.gd`, Tab expands), the inspector (`inspector_session.gd`) and the First Ignition timeline
-(`flight_session.gd`). The inspector's
-"Review sessions (guided)" button returns to the menu; Esc in a guided session does too.
+`godot/` holds one experience, the walk (`scenes/excursion.tscn`, `scripts/excursion/`, EXC-001; docs/MODEL.md "Station-to-ring
+excursion"), the controls (`scripts/controls/`: `WfInput` autoload, the Codex overlay, `wf_touch.gd` for MOB-001), the crew physics
+it uses (`scripts/physics/`), the production-detail layer (`production_layer.gd`), the export checks and `profile_views.gd`. The
+scenes and scripts of the review menu, inspector, guided walk, Demonstrator 01, navigators, timeline, life support, physics lab,
+EVA drift and M5/M6 holograms are retired (tag `archive/pre-cleanup-2026-10-29`).
 
 ```bash
-/snap/bin/godot-4 --path godot                                                                  # the review menu
-/snap/bin/godot-4 --path godot res://scenes/boarding.tscn -- --review=ring_b                     # one session directly
-timeout -s KILL 300 /snap/bin/godot-4 --headless --fixed-fps 60 --path godot res://scenes/physics_lab.tscn --quit-after 9000 -- --review=vestibule --check-review
-timeout -s KILL 300 /snap/bin/godot-4 --headless --fixed-fps 60 --path godot res://scenes/boarding.tscn --quit-after 6000 -- --check-review   # WF_GODOT_REVIEW
-/snap/bin/godot-4 --fixed-fps 60 --path godot res://scenes/boarding.tscn -- --review-shots=/abs/dir --check-review   # a still per completed step
-/snap/bin/godot-4 --path godot -- --capture-menu=/abs/menu.png                                   # a still of the menu
-/snap/bin/godot-4 --path godot res://scenes/m5_holo.tscn -- --review=holo                         # M5 subsystem hologram, guided (menu 8)
-timeout -s KILL 300 /snap/bin/godot-4 --headless --path godot res://scenes/m5_holo.tscn --quit-after 600 -- --check-holo   # WF_GODOT_HOLO
-/snap/bin/godot-4 --path godot --resolution 1600x900 res://scenes/m5_holo.tscn -- --capture=/abs/dir   # overview + four chapter stills
+python3 tools/workflow.py runtime-export                  # build in a disposable workspace, export, check, publish godot/generated/
+python3 tools/workflow.py runtime-check [names|auto]      # the checks below against the published package (STALE if inputs changed)
+godot --path godot                                         # the walk (main scene)
+timeout -s KILL 900 godot --headless --fixed-fps 60 --path godot res://scenes/excursion.tscn --quit-after 300000 -- --check-excursion   # WF_GODOT_EXCURSION
+timeout -s KILL 120 godot --headless --path godot --script res://scripts/check_export.gd [-- --docked]   # package integrity
+timeout -s KILL 120 godot --headless --path godot --script res://scripts/check_route.gd    # WF_GODOT_ROUTE (route playback against all rows)
+godot --path godot --script res://scripts/profile_views.gd -- --view=station|ship [--hide-assemblies=RA.EXT,..] [--hide-zone=INTERIOR]
 ```
 
-**Controls (ACI).** `WfInput` (autoload) holds the action registry (`BASE_ACTIONS` plus the compact per-scene `SCENE_ACTIONS`
-table), the profile `user://wayfarer_controls.cfg` and the overlay (`controls/control_overlay.gd`: first launch, capture/validate,
-conflict choice, lesson cards, Control Codex). A modal overlay pauses the tree. A scene sets `WfInput.context` in `_ready`, gates
-its handler with `WfInput.pressed(e)` and matches `WfInput.key_of(e, [its contexts])`, the default key of the action the input
-triggers (KEY_NONE for anything else, including a default key rebound away); Shift step multipliers read `WfInput.shifted(e)`.
-Hold inputs read `WfInput.strength(id)` / `held(id)` so the toggle latch and stick settings apply. Help text uses
-`WfInput.keys("{flight.play}: play")`. A scene reports success with `WfInput.performed(id)`, offers a lesson with
-`WfInput.discover(lesson)` and sets `WfInput.hazard` when no prompt may appear (a context change clears it). The guide passes a
-session the default key of the action (`WfInput.canonical_key`), so sessions written against default keys follow rebinds. A new key
-in a scene is a new row in `SCENE_ACTIONS`; the `defaults_conflict_free` check fails if it clashes. Delete the profile to see first
-launch again.
+`runtime-export` runs `check`, `check-docked`, `route`, `excursion` and `characters` (CHECKS in `tools/runtime_export.py`); the
+characters check needs the MPFB humans (`workflow.py deps`). Always run headless Godot under `timeout -s KILL`: a script parse error
+hangs it otherwise. Godot's version comes from `WAYFARER_GODOT` (default `/snap/bin/godot-4`).
 
-```bash
-rm -f ~/snap/godot-4/current/.local/share/godot/app_userdata/"Wayfarer Inspector"/wayfarer_controls.cfg    # first launch again (snap path)
-timeout -s KILL 120 /snap/bin/godot-4 --headless --path godot --quit-after 600 -- --check-controls      # WF_GODOT_CONTROLS (61 checks)
-timeout -s KILL 300 /snap/bin/godot-4 --headless --fixed-fps 60 --path godot res://scenes/boarding.tscn --quit-after 3000 -- --check-controls-body   # WF_GODOT_CONTROLS_BODY
-timeout -s KILL 600 /snap/bin/godot-4 --headless --fixed-fps 60 --path godot res://scenes/demo01.tscn --quit-after 30000 -- --check-touch --touch   # WF_GODOT_TOUCH (MOB-001 touch controls)
-/snap/bin/godot-4 --path godot --resolution 1280x800 -- --capture-controls=/abs/dir                # stills: first launch, conflict, Codex, lesson card
-/snap/bin/godot-4 --path godot --resolution 1280x800 res://scenes/boarding.tscn -- --review=walk --capture-lesson=/abs/walk.png   # the MOVE card beside the guide
-```
+**Package.** `runtime-export` exports `wayfarer.glb` + `manifest.json` (COAST) and `wayfarer_docked.glb` + `manifest_docked.json`
+(DOCKED, with the characters asset appended in memory: the `Characters` group, records with `layer` and `scene`), the rig
+`wf_sim_rig.json`, the route and `wf_first_ignition_timeline.json`. The manifests record source-code and input hashes, Git
+revision/dirty state, Blender version, node provenance, exclusions, triangle count, measured bounds, package checksums, `look` (changed
+materials, light count) and per emitter `light` (class, colour, energy, range, emitter centre). Geometry uses metres and Blender's glTF
+basis `(x,y,z) -> (x,z,-y)`: bow +X, dorsal +Y. The rig keeps its canonical Blender coordinates and declares them; unknown physics stays
+`known = false`.
 
-The Godot project lives in `godot/`; it consumes a generated static COAST frame-1
-snapshot. It does not generate spacecraft geometry or own physical parameters.
-The current runtime is a subsystem inspector, without physics, moving mechanisms
-or walking. Click a part or select a sidebar item to highlight its subsystem.
-Double-click/F focuses it; H hides/shows it; I isolates/restores the previous
-visibility state; Escape clears selection. The sidebar also has a hull toggle
-and Show all. Focus makes a hidden selected subsystem visible. Choosing a
-different subsystem exits isolation and restores the previous visibility state.
+**Mechanisms (RT-004).** `mechanism_frames()` turns each `Rotor_n` (its control's `spin_turned`) and each `Drum_n` (`drum_sync` 1) in
+memory and records the instances that move; each must match a turn about the mover's pivot and axis, and node records get `frame`. In
+DOCKED, `bind()` records each closure's travel from the staged open pose as a slide or a turn about its own pivot and checks it on
+every placement; the sector leaves slide from `landing()`'s open pose to their seats. The results go to `manifest_docked.json`
+`induction.mechanisms`; `check_export.gd --docked` requires the route, its ring and drum bindings and a binding for every closure.
 
-The wrapper resolves current mesh IDs through `manifest.nodes` and binds UI
-behavior to the semantic `Assembly_*` lineage, independent of Blender/Godot
-suffixes on imported group names. Picking uses cached `TriangleMesh` ray queries
-in each mesh's local frame, only for visible meshes; no physics bodies are added.
-Highlights are instance material overlays and do not edit imported materials.
-Part labels show source and geometry status separately; a PROTOTYPE geometry
-label is never promoted by a sourced reference. Subsystem summaries do not
-invent a single engineering status for their mixed contents.
- `1`, `2`, `3` select side, top and three-quarter views;
-Home resets the camera. Left-drag orbits, Shift-left-drag or middle-drag pans,
-and the wheel zooms. A fresh checkout displays generation instructions until
-its first export.
+**Mesh sharing (RT-005).** `export/godot.py` shares one mesh between placements whose evaluated meshes are equal (`mesh_signature`:
+positions, faces, corner normals, UV and colour layers, face materials and runtime materials); each placement keeps its node,
+transform and record. `WF_EXPORT_SHARE_MESHES=0` turns sharing off, for A/B measurement only.
 
-**Board Wayfarer** opens `godot/scenes/boarding.tscn`, the guided induction walk
-(IND-001 phase 5). `boarding.gd` reads `induction_route` from the generated rig:
-it interpolates the rail by the exported `rail_m` distances and converts
-`(x,y,z)` to `(x,z,-y)` once. It uses the stops' `view` (eye, look, up and
-horizontal field of view) when a stop is chosen, and each aisle waypoint's `up`.
-It lists the legs' ladders and openings when the camera passes them. It shows
-character nodes whose manifest `scene` is one of the current stop's scenes. The
-panel text comes from the graph (titles, steps, sources, limits); the script holds
-no stop names, lessons or spacecraft facts. W/S and the hold buttons move along
-the rail at a review pace; the stop list sets the stop view; right-drag looks
-around; R resets the view; Escape returns to the COAST inspector. F switches to
-free flight from the current view (`enter_free_flight`/`fly`): WASD and Q/E move in
-the camera frame at 1.5 m/s (Shift ×8), right-drag turns it, and any rail control
-(`update_camera`) ends it. `move_free` keeps the camera within
-`induction_route.envelope.radius_m` of the nearest rail segment (or within its
-current distance, when a stop view starts farther out) by projecting the target back
-onto that sphere, so it slides along the envelope; C toggles it.
-`human_entry.induction_graph` writes the envelope (the suited envelope radius) and
-`check_export.gd --docked` requires it.
+**Publication.** Godot imports the staged package and `check_export.gd` checks package hashes, rig/input agreement, mesh identities
+and vertex bounds against the Blender measurements (2 cm tolerance). The source hashes are rechecked before publishing. A failed
+build, import or check keeps the previous package; a successful one moves it to the run's `previous-generated` folder and installs
+the new one, then imports it into the local Godot cache (rolled back on failure). Git tracks the project, scripts, scenes and UID
+sidecars; `godot/generated/` and `godot/.godot/` are ignored and never edited by hand.
 
-RT-004 transfer: `mechanism_frames()` in the exporter turns each `Rotor_n` (its
-control's `spin_turned`, one second at full speed) and then each `Drum_n`
-(`drum_sync` 1) in memory, and records the instances that move. Each moved instance
-must match a turn about the mover's pivot and axis. Node records get `frame` (the
-rotor or drum `component_id`) in both packages; characters in the DOCKED package get
-the frame of the nearest rail waypoint's zone. In DOCKED, `bind()` records each
-closure's travel from the staged open pose as a slide or a turn about its own pivot
-and axis, and checks it on every placement. The Q46 closures are closed by
-`pose_transfer(s, 0)` and the primary port's leaves by `DOCK_ENTRY_CTRL`. The route's
-sector leaves have no driver: each slides from `landing()`'s open pose to its seat,
-carried by its sector's placement, and is the `Sector_Hatch_Leaf` nearest to the
-opening. The closure's nodes get `closure`. The results go to `manifest_docked.json`
-`induction.mechanisms`.
-
-The rig's `induction_route` adds:
-- `frames`: each zone as `STATIONARY`, `DRUM` or `RING`, plus ring A's rotor and drum;
-- `closures` and `kind` on each opening (`AIRLOCK_OUTER`, `AIRLOCK_INNER`,
-  `PORT_GATE`, `DRUM_DOOR_TUBE_HATCH`, `SECTOR_LEAF`);
-- `toward_ladder` on each crew-tube ladder (the run's direction toward its ladder, at
-  the index pose);
-- `body`: review speed, rung pitch, standard gravity, the climber's offset, and ring
-  A's `ladder_push` to check against.
-
-`boarding.gd` reparents the meshes under one pivot per ring and drum and one child
-pivot per closure. It carries the camera in a holder parented to its zone's frame.
-`step_mechanisms()` advances everything each step:
-- `step_rings()` ramps each ring STOPPED → SPIN_UP → RUNNING → WAIT_DOWN →
-  SPIN_DOWN, depending on whether the stop ahead is ROTATING;
-- the drum steps through DESPUN → WAIT_UP → SPIN_UP → SYNCED → WAIT_DOWN →
-  SPIN_DOWN;
-- each closure moves toward its target.
-
-A ramp starts when the angle plus half the ramp's turn passes a whole revolution, so
-it ends at the index or meets the tubes at speed. `safe()` holds the rule a closure
-may never break, and `allowed()` adds the sequence. `move_along()` stops the camera
-short of a closure that is not fully open, and `settle()` sets the steady state after
-a jump. `body_state()` turns the frame's measured spin and the camera's velocity into
-spin gravity, the Coriolis push and their components toward the ladder.
-`shown_progress()` eases the eye from rung to rung in body pace.
-
-`-- --check-transfer` (headless, in `runtime-export`) walks the rail both ways, waits
-for the rings to rest, checks the body line against `ladder_push`, checks every
-exported clear volume (its centre held, no step out through its deck or walls, the
-body's eye at eye height in a standing one), and fails on any breach. `-- --capture-transfer=/absolute/path` saves seven stills: the airlock, the
-drum cycle, body pace on the ladder and the sector leaf. `flight.gd` also binds the
-rings by `frame`, so the sector shells and interiors turn in the timeline player.
-
-RT-005: `export/godot.py` shares one mesh between placements whose evaluated meshes are equal (`mesh_signature`: positions, faces,
-corner normals, UV and colour layers, face materials and the runtime materials); each placement keeps its node, transform and record.
-`WF_EXPORT_SHARE_MESHES=0` turns sharing off, for A/B measurement only. `godot/scripts/profile_views.gd` measures one view per run on the
-current machine, windowed with vsync off: frame time median and p95, draw calls, objects, primitives, memory and load time.
-
-```bash
-/snap/bin/godot-4 --path godot --script res://scripts/profile_views.gd -- --view=exterior
-```
-
-Measured 2026-10-09 on an RTX 3070 (GL Compatibility, NVIDIA 595.91), five alternating runs per package per view
-(references/RT005_PROFILE_2026-10-09.txt):
-
-| View | Draw calls | Unshared median frame | Shared median frame | Change |
-|---|---|---|---|---|
-| Exterior inspector | 3,315 | 8.08 ms | 5.84 ms | −28 % |
-| First Ignition player | 2,380 | 5.30 ms | 3.80 ms | −28 % |
-| Boarding walk at the Garden stop | 239 | 1.61 ms | 1.66 ms | within noise |
-
-- Sharing leaves 2,218 distinct meshes for 3,417 placements.
-- The GLB shrinks from 13.7 to 10.5 MB, video memory falls about 2.8 MB and static memory about 7 MB.
-- Draw calls are unchanged, and the three standard inspector views differ in 2–5 pixels.
-- Batching or MultiMesh is not needed at these frame times.
-- Single runs vary by up to 2 ms, so compare medians of several runs.
-
-**Integrated Demonstrator 01** (`godot/scenes/demo01.tscn`, also a button in the boarding panel) is `boarding.gd` with
-`demo_on_start`. `demo01.gd` runs the chapters EXTERIOR, ENTRY, MICROGRAVITY, MODE, TRANSFER, DESCENT and GRAVITY over the existing rail, the
-body tour (`body_tour.gd`) and `WfModeController`.
-
-TRANSFER and DESCENT are the body tour's TUBE beat (`build_tube(with_tool, access)`), one physics world in the drum frame at the index:
-- `_build_access` builds the rig's `dynamics.stages.access` clear surfaces as slabs outside the free space (`_cyl_x` for the trunk and the
-  drum walls with the port's and the door's holes cut by each slab's inboard face, `_radial_bore` for the port's and the door's bores,
-  `_mitered` for the tube legs and the run, open into the landing well); the pieces across the holes are `port_patch` / `door_patch`,
-  enabled while the gate / door is not fully open (`set_closures`);
-- the rig rungs and the access grips are non-colliding grab anchors;
-- the body follows one line (the rig's `line` poses, then the run down to the well's deck) by `line_s`, centre lerp and axis nlerp
-  (`line_at`). `_step_ladder` takes S/W or autoplay at the review pace and brakes in whole steps (`_brake`) at the line's limits and
-  before each pose to `line_vmax`, the speed at which the turn there changes the velocity by `LADDER_ACCEL` (0.5 m/s² PROTOTYPE) in a
-  step. `line_limits()` stops the body at `s_port` until the port gate is fully open and at `s_hold` (the restraint pose) until the drum
-  door is, and at `s_stop` (the TRANSFER chapter's end, the run top). Inside a coast (`coasts`, the rig's `coasts_s_m`) the speed is
-  frozen and the hands are off; the push-off sets exactly the line's velocity, braking counts only the line outside the coasts
-  (`_held_length`), and a stop is never inside one;
-- `frame_fn` gives the drum's fraction of ring A's spin and its rate; `_apply_frame` sets the field's ω and α from it each step;
-- each step's hand load, grips in reach, contacts, phase, drum fraction and field are logged in `hand_log`.
-
-In TRANSFER the demonstrator maps the body's line parameter onto the rail (`access_rail`): 1:1 along the trunk up to the port band, to
-the point `INSIDE_M` past the port at the restraint pose (the gate closes behind the whole body), the drum door band's edge while
-restrained, then to the run top; `vestibule_sync` takes `restrained` from the body. While it runs, `step_rings()` takes the rings' speed fraction from the controller
-(`demo.ring_frac()`), not from the stop. The drum and its closures go through a `WfVestibule`:
-- `allowed()` asks `demo.vestibule_allows()`;
-- the drum's WAIT_UP/WAIT_DOWN ramps start only when `demo.vestibule_sync()` is accepted;
-- `demo.vestibule_follow()` mirrors the opening state and steps the vestibule's drum ramp with the display. The keys are: Enter for the next chapter, P to pause, A for autoplay, V for body view or first
-person, O to mark an occupant not secured (MODE), plus the body-tour keys in the two body chapters.
-
-```bash
-/snap/bin/godot-4 --path godot res://scenes/demo01.tscn
-/snap/bin/godot-4 --path godot res://scenes/demo01.tscn -- --autoplay
-/snap/bin/godot-4 --headless --fixed-fps 60 --path godot res://scenes/demo01.tscn --quit-after 60000 -- --check-demo
-/snap/bin/godot-4 --fixed-fps 30 --resolution 1280x800 --write-movie /abs/demo.avi --path godot res://scenes/demo01.tscn --quit-after 20000 -- --autoplay --record-exit
-python3 tools/review_video.py runs/<recording> runs/<review>      # FFMPEG=<ffmpeg with libx264>: MP4 with chapter marks, highlight, contact sheet
-```
-
-- The interactive run is plain; `--autoplay` replays it by itself.
-- `--check-demo` prints `WF_GODOT_DEMO` and is the `demo01` step of `runtime-export`. Every chapter must reach its goal, and every
-  chapter keeps the transfer check's rail safety rules. It also requires:
-  - the catch on a real trunk rail;
-  - the owner step order and the rings RUNNING after MODE;
-  - drum SYNCED, the ring frame and both vestibule sides opened through the gate with no refusal after TRANSFER; the run top reached,
-    no wall contact on the access line, the body restrained for the whole drum ramp with the hands' load within 0.5 N of −m·a_field
-    (a step behind), the field zero before the sync and ring A's after the door, a rail in reach in the restraint pose and at every
-    step after it, and no hand load (≤ 1 N, a step behind) and no speed change in the coast;
-  - `findings`: where the hands load the body with no grip within reach (measured, not a gate; empty while the body keeps the rig line);
-  - after DESCENT: arrival standing, a rung in reach at every step, the body inside the bore, the hands' load toward the ladder
-    within 3 % of `ladder_push`, and along the run within 5 N of m·ω²·r at steady pace;
-  - standing at the floor field and the object landed after GRAVITY.
-- `--write-movie` records the replay as MJPEG (about 181 s for the nine chapters). Keep the Godot window visible: hidden, Movie Maker
-  runs at about a tenth of real time.
-- `--record-exit` (with `--autoplay`) ends an automated recording once INSPECT has *completed*: a 1.5 s tail, then `WF_DEMO_RECORDING`
-  and exit 0, so the file is finalized. A skipped chapter, a layer left off or the watchdog (`--record-timeout=<s>`, default 900
-  display seconds) prints FAIL and exits 1. Each chapter start prints `WF_DEMO_CHAPTER <name> <s>`. Without the flag, play continues
-  after the last chapter. `--from-chapter=<NAME>` starts at a later chapter; the `demo01-record` runtime check runs ARRIVAL → INSPECT
-  this way.
-- `--lamp-energy=<f>` scales every emitter lamp in the boarding scenes. The default is 0.65 (M7.1); 1.0 gives the manifest energy.
-
-**Ship Navigator** (SNAV-001, docs/MODEL.md "Ship Navigator") is built into demo01. Its pieces:
-- `data/ship_navigator.toml`, the registry;
-- `src/wayfarer/ship_navigator.py`, which validates it and emits the rig's `navigator` block (sim_rig v33);
-- `godot/scripts/navigator/`:
-  - `ship_navigator.gd`: map world, marker, texts, card, input and checks;
-  - `nav_route.gd`: the two-stage planner;
-  - `nav_policy.gd`: the guidance modes.
-
-`demo01.gd` creates the navigator unless `-- --no-navigator` is given, samples it at every check step, and appends its checks.
-
-Keys:
-
-| Key | Action |
-| --- | --- |
-| M | corner → overview → hidden |
-| J | mode: GUIDED / ASSISTED / FREE |
-| , / . | target stop |
-| I | systems card: WHAT → WHY → SHOW ME → close |
-| H | overview cutaway |
-| U | isolate the next module |
-| Click | overview: isolate the module under the pointer (empty space clears) |
-| Left-drag / wheel / shift-drag | overview orbit / zoom / pan |
-
-```bash
-python3 src/wayfarer/ship_navigator.py
-/snap/bin/godot-4 --path godot --resolution 1280x800 res://scenes/demo01.tscn -- --capture-demo=/abs/dir --navigator-stills
-/snap/bin/godot-4 --path godot --resolution 1280x800 --script res://scripts/profile_views.gd -- --view=demo_spine
-/snap/bin/godot-4 --path godot --resolution 1280x800 --script res://scripts/profile_views.gd -- --view=demo_ring --no-navigator
-/snap/bin/godot-4 --path godot --resolution 1280x800 --script res://scripts/profile_views.gd -- --view=demo_ring --navigator-overview
-```
-
-- The first command is the fit screen: every hotspot's facts with their owner ranges, and the rail's nav nodes.
-- `--navigator-stills` adds key-driven stills to the chapter capture. The keys go through `Input.parse_input_event`, and the run
-  prints `WF_NAV_KEYS` with what each key and click did, including that P still reaches the demonstrator after a click.
-- `--check-demo` adds these checks:
-  - `nav_registry_bound`: every module frame is in the scene; every scene opening is in the registry; the rail nodes match the
-    exported rail (a stale registry fails here); stops and nav nodes are complete.
-  - `nav_route_gated`: 12 fixed cases (DOCKED locked, ring ramp, gate, door and sector hatch shut, the dock in COAST, the airlock, EVA
-    for both actors, ring B), plus a sweep of 18,432 plans over stop pairs × mode × ring state × 48 closure sets. GO never crosses a
-    closure that is not open; HOLD stops at the first such closure; a ramping ring never gives GO through the spine port; the dock is
-    never GO outside DOCKED.
-  - `nav_modes_parity`: the same target and state give the same route in all three modes; a policy returns guidance keys only.
-  - `nav_no_fabricated_values`: for every hotspot, no digits in the WHAT / WHY / SHOW ME wording; every known fact has a value and
-    an owner range; unknown facts read OPEN; every status has a glyph and a text.
-  - `nav_pick_modules`: with each module isolated, clicks on its triangle centres select it and the card follows it; the radiator
-    blade edges are picked with the whole ship shown; empty space selects nothing.
-  - `nav_eva_remote_only`: the hatch label carries the exported FLIGHT_EVA state; no route reaches the exterior for any mode and
-    actor (suited from SP12); no stop sits on an EVA node; the exported hatch lies within 1.5 m of the map's hull.
-  - `nav_drone_demo` (DRONE-001): the drones hotspot's SHOW ME draws every vehicle-frame dock; the spine crawler's service run and
-    three fault replays stay on the DS-13 track and end in a safe state; HIGH_POWER keeps it latched; FREE jogging stops at the track
-    ends; closing restores the ship state and route. Keys on that page: X run, K what-if configuration, Z / Y play, step or jog by mode,
-    C route overlay.
-  - `nav_drone_routes` (DGT-009): C steps OFF, ALL, each EVA class and the arms, back to OFF; the overlay shows exactly the selected classes
-    (routed legs, job targets by status, dashed reach lines); every drawn reach line equals the contract's `reach_needed_m` to 5 cm; the
-    card names DGT-009 HOLD and reach OPEN; closing hides it and changes neither the ship state nor the route.
-  - `nav_marker_matches_body`: the marker, through the map's copied frames, equals the tracked place in ship coordinates within
-    1 mm at every check step.
-  - `nav_frame_switch_continuous`: within a chapter the marker moves exactly as the visitor does, including TRANSFER's drum → ring
-    hand-off.
-  - `nav_ring_full_revolution`: one revolution of ring A with the body standing on the deck, through the phase wrap. The marker's
-    ring-local place follows the body's ring-frame physics position within 1 mm, the sector stays the same, the per-step map motion
-    is no more than 1.5 ω r dt, and the map's ring pivot equals the scene's.
-- Measured costs are in docs/MODEL.md.
-- `-- --capture-demo=/abs/dir` saves two stills per chapter.
-
-**Space Navigator (SPACE Stage 1)** (`godot/scripts/navigator/space_navigator.gd`, S&E 55). B switches SHIP ↔ SPACE in demo01.
-
-| Key (SPACE shown) | Action |
-| --- | --- |
-| B | back to SHIP (from SHIP: open SPACE) |
-| , / . | previous / next released route row (Shift ×30); from LIVE, . previews row 1 |
-| Home / End | LIVE / last released row |
-| [ / ] | scale: LOCAL SPACE / MISSION JOURNEY / SOLAR SYSTEM |
-| I | inspect ship: expanded SHIP map, the selected row kept |
-| J | shared guidance mode |
-| M (Solar System) | ANALYTICAL / PRESENTATION |
-| - / = or wheel (Solar System) | zoom: inner planets / outer planets / Kuiper region |
-| ↑ / ↓ or click (Solar System) | select Wayfarer, the Sun, a planet or the Kuiper region |
-| I (Solar System) | card WHAT → WHY → SHOW ME → close (elsewhere: inspect ship) |
-| 1–8 | layers (SPACE-021): track, motion, events, orbits, Kuiper guide, grid, notes, legend; the LAYERS line lists those of the scale |
-| P (not Solar System) | replay the released rows at the route clock (30 rows/s); pause; from the last row, replay from row 1 |
-| H (not Solar System) | MOTION card WHAT → WHY → HOW → close (POL-008 Prototype A) |
-| R / Shift+R (Local space) | turn the ILLUSTRATIVE display hull 45° / remove it (attitude OPEN, SPACE-014) |
-
-```bash
-/snap/bin/godot-4 --path godot --resolution 1280x800 res://scenes/demo01.tscn -- --capture-demo=/abs/dir --space-stills
-/snap/bin/godot-4 --path godot --resolution 1280x800 --script res://scripts/profile_views.gd -- --view=demo_ring --space
-/snap/bin/godot-4 --path godot --resolution 1280x800 --script res://scripts/profile_views.gd -- --view=demo_ring --space-solar
-```
-
-- `--space-stills` drives the keys at the ENTRY and GRAVITY chapters and prints `WF_SPACE_KEYS`.
-- `--check-demo` adds these checks:
-  - `space_switch_ship_unchanged`: SHIP → SPACE, then every row on every scale (2,700 views), then back to SHIP. Host progress, camera,
-    frames, ring angles and rates, openings, closures, drum mode, body, chapter, controller and ship-navigator state all stay identical.
-  - `space_scrub_owner_rows`: every scrub position shows exactly one released row; the marker is at that row's AU.
-  - `space_frame_units_source`: the frame, scenario, columns and sheet timestamp are as expected.
-  - `space_never_sun_relative`: no view text reads as a Sun-relative place; DIAGNOSTIC 1D and UNKNOWN stay on screen.
-  - `space_solar_unknown`: no body is drawn while 25!F14:F15 are OPEN.
-  - `space_live_vs_preview`: LIVE without route values until a row is selected, then SCENARIO PREVIEW.
-  - `space_no_invented_events`: only events with a released displacement are drawn; the four OPEN events are listed and unplaced.
-  - `space_rejects_unvalidated_route`: a failed row 6, a missing row 9, another route version, another schema and a missing file are all refused.
-  - `space_ship_drilldown`: Inspect ship and back, at the same row.
-  - `space_solar_schematic_static`: across both modes, the three zooms and the LIVE state plus rows 1, 451 and 900, the glyphs do not
-    move; there is no Wayfarer marker; the SCHEMATIC notice and the mode disclosure are always on.
-  - `space_display_transform_reversible`: the LINEAR and SQRT distance transforms invert to 1e-9 for every body; the route rows are
-    unchanged after the toggling.
-  - `space_reference_cards`: one card for each of the 11 objects; every planet number and the reference title and dates appear; the
-    Kuiper card reads "not an event position"; the Wayfarer card reads UNKNOWN.
-  - `space_solar_picking`: a click on every glyph in both modes and all zooms selects that body; a click in the Kuiper band selects the
-    region.
-  - `space_layers_view_only`: on each scale at LIVE and rows 1, 451 and 900, every layer off and back on leaves the shown row, the
-    badge and the readout identical; DIAGNOSTIC 1D and UNKNOWN stay, the OPEN events are still counted, the host state is unchanged and
-    a hidden Kuiper guide cannot be clicked.
-  - `space_replay_owner_rows`: P from LIVE plays every row once, in order, each shown value a released row, stops on row 900 after 30 s
-    of replay, the HOW card there reads "not a shutdown"; host and ship-navigator state unchanged.
-  - `space_motion_card`: HALFWAY_IN_TIME is 1/4 of the speed and 1/8 of the distance; the rows' acceleration integrated reproduces every
-    row within 1e-6; the card pages at LIVE and rows 1, 451, 900 change no row, badge or readout.
-  - `space_attitude_independent`: the display hull in 45° steps at rows 1, 451, 900 leaves the row, marker, velocity arrow and readout;
-    the ILLUSTRATIVE / attitude OPEN label shows.
-- `python3 src/wayfarer/space_navigator.py` prints the chart registry with the derived AU (its fit screen).
-
-**Thermal explorer** (flight scene, key T; `thermal_explorer.gd`): ↑ ↓ pick heat input / surface case / blade temperature / area
-in use / duration, `-` `=` change it, Backspace resets to the rig's values. `-- --check-thermal` prints `WF_GODOT_THERMAL` (runtime
-step `flight-thermal`); `-- --capture-thermal=/abs/dir` saves four stills.
-
-**Exterior looks** (flight scene, key X cycles: Phase 4 grammar (Y155 baseline), grammar with the wear layer, FUT-003 proxy grey, off;
-manifest `look.exterior.grammar`, `godot/shaders/p4_exterior.gdshader`). `-- --check-grammar` prints `WF_GODOT_GRAMMAR` (runtime step
-`flight-grammar`); `-- --capture-p4=<p4_review.json>,<dir>` renders the Blender review cameras of a `presentation/p4_review.py` run in
-the runtime (needs a display: `xvfb-run -a -s "-screen 0 1600x900x24" godot --path godot --rendering-driver opengl3 --resolution
-1600x900 res://scenes/flight.tscn -- --capture-p4=...`). Blender side: `p4_review.py ... [--wear]`.
-
-**Phase 4 runtime cost:** `godot-4 --path godot --script res://scripts/profile_views.gd -- --view=exterior|flight [--hide-assemblies=RA.EXT,RB.,SP.]
-[--look=0|1|2|3]` measures a view with or without the named production assemblies and in a given exterior look (same machine only).
-
-**Phase 4 stills:** `/snap/bin/blender -b --python src/wayfarer/presentation/p4_review.py -- --out runs/<x> [--look grammar|hero]
-[--views ...] [--pair] [--wear]` (matched review cameras; `--pairs <before> <after> <out>` with system Python for sheets) and
-`/snap/bin/blender -b --python src/wayfarer/presentation/p4_hero.py -- --out runs/<x> [--shots ...] [--size 1920] [--samples 64]` (S10
-hero set).
-
-**Life support** (`godot/scenes/life_support.tscn`, Milestone C): ↑ ↓ row, `-` `=` change, Backspace owner defaults, `,` `.` day (Shift
-×30), P play, Home / End, Esc to the review menu. `python3 src/wayfarer/life_support.py` prints the 41 results and the scenario ends;
-`--out DIR` writes `wf_life_support.json` (a `runtime-export` step). `-- --check-life-support` prints `WF_GODOT_LIFE_SUPPORT`
-(runtime step `life-support`); `-- --capture-life-support=/abs/dir` saves three stills.
-
-```bash
-/snap/bin/godot-4 --path godot --resolution 1280x800 res://scenes/life_support.tscn
-```
-
-**First Ignition · timeline** opens `godot/scenes/flight.tscn` (RT-003). The COAST
-export copies `simulations/wf_first_ignition_timeline.json` into the package after
-checking it against the rig's `flight_timeline.sha256`, and records
-`manifest.timeline.mechanisms`: per `Rotor_n` empty its lineage ID, pivot and axis
-(runtime basis), the channel `rotor.spin_turned` and the driver's rate in radians
-per unit (`rpm·2π/60/fps`); the export fails if the driver stops reading
-`spin_turned`. `flight.gd` reparents the meshes whose `frame` is that rotor under one pivot
-each and sets the turn from the channel; it samples every channel with the same
-rule as `flight_timeline.value_at` and maps the radiator value to the rig's
-`radiator_health.steps`. Space plays, arrows step (Shift ×24), the speed button
-cycles ×0.25–×16, the lists jump to a phase or mark, Escape returns to the
-inspector. `-- --capture=/absolute/path` saves one still per mark. `check_export.gd`
-requires the timeline hash and a channel and meshes (by `frame`) for every binding, and the
-scene is loaded headlessly in `runtime-export`.
-
-**X** switches the timeline to the First Ignition exterior look (FUT-003 step 2):
-`manifest.look.exterior` is `look.runtime_exterior` (the stills' `[look.exterior]`
-in runtime axes). `flight.gd` replaces the fill lights and ambient light with one
-shadowing sun, overrides every surface with one proxy grey except the drive's display
-plasma, hides the stills' hidden kinds and the exhaust run, and sets AgX with the
-stills' exposure. The `RadiatorA`/`RadiatorB` hot face emits while
-`radiator.thermal_state` is FIRST_IGNITION's step. Godot's light energy carries
-the π a Cycles sun divides by, so the sun's energy is the Cycles strength over π
-and the emission keeps its Cycles strength, folded into the linear colour with a multiplier of 1
-(Compatibility scales the sRGB colour by the multiplier before linearizing it; measured
-2026-10-10 on Godot 4.7.2). `-- --exterior` starts with the look
-on (combine it with `--capture`/`--capture-states`). `check_export.gd` requires the
-record and finds the hot-face materials among the imported surfaces.
-
-Display tracks (`display_tracks` in the exporter): every owned object with a
-`hide_render`, object-alpha (`color[3]`) or `scale` driver whose variables all read
-timeline-bound control properties is evaluated in Python with its own driver
-expression (math, min, max) at the input channels' keys and at every frame of
-their ramps. Objects whose result never changes stay in the static pass. The
-others skip the static pass and are staged once, posed with `common.pose_timeline`
-at the frame where they show fullest (largest opacity, then scale); this includes
-the `plasma` and `optical_beam` kinds the static export leaves out. Each node record
-then carries `display`: `opacity` and `scale_x/y/z` keys relative to that pose
-(Blender local y and z are runtime local z and y), `static_opacity` for the
-export's own pose (the inspector shows it), and the driver expressions and
-channels. `flight.gd` sets visibility, `GeometryInstance3D.transparency` and a
-local scale from the keys. The capture option saves a ring view and a side view
-per mark.
-
-Named states (`display_states`): every buildable configuration (control values from
-`drive_manifold`, `forward_shield` and `radiator_health.configuration_state`, spin
-fraction from `rotor_interface`), each forward-defence and radiator display pose on
-its base configuration, and each drive action whose last key is neither nominal nor
-neutral, on HIGH_POWER. They go to `manifest.timeline.states`. The same driver
-evaluation gives every display record a `states` map (opacity and scale per state),
-and an object that changes only between states is staged at the state where it shows
-fullest (`staged_state`). `offset_states` handles the location drivers (the Crown
-carriages and shutters): it poses Blender at each state and records the runtime
-offset of every mesh below a location-driven object; a driver that also turns or
-scales is refused. Those meshes stay in the static pass with `display.states.*.offset`.
-`flight.gd` lists the states; selecting one applies its values and spins the rings
-at the state's fraction. `-- --capture-states=/absolute/path` saves views 3, 5
-(shield face) and 6 (nozzles) per state.
-
-`runtime-export` also poses and exports `wayfarer_docked.glb` and
-`manifest_docked.json` in the disposable build. Both packages share the rig and
-input hashes. The DOCKED export appends the characters asset in memory: its nodes
-form the `Characters` group, and their records carry `layer` and `scene`. The
-DOCKED manifest's `induction` entry points to the rig's `induction_route` and
-carries the transfer mechanisms. `check_export.gd --docked` requires that route,
-its frames' ring and drum bindings with meshes, and a binding and meshes for every
-closure it names. Both GLBs receive import, hash and
-bounds checks. The boarding scene is loaded headlessly as well. Its
-`-- --capture=/absolute/path` option saves the nine stop views and the rail
-halfway along each leg, in addition to the inspector's three standard views;
-`-- --inspection-light --capture=...` takes the same views without the S004 look.
-The snap's `/tmp` is private, so capture into the repository (for example
-`runs/`). Both manifests carry `look` (the materials it changed and the light
-count), and each emitter's node record carries `light` (class, colour, energy,
-range, emitter centre in the node frame); `check_export.gd` requires them.
-
-```bash
-python3 tools/workflow.py runtime-export
-/snap/bin/godot-4 --editor --path godot
-/snap/bin/godot-4 --path godot
-```
-
-Installed integration baseline: Blender 5.2.2 LTS and Godot 4.7.2 Mono. The viewer
-uses GDScript and the Compatibility renderer, with no .NET dependency. Override
-executables using `WAYFARER_BLENDER` and `WAYFARER_GODOT`.
-
-`tools/runtime_export.py` holds the existing write lock, copies the parameters
-into `runs/<stamp>-runtime/work`, and performs a fresh full Blender build there
-using the current generators. Production assets and the tracked rig JSON are
-never rewritten. Only generated geometry is included; manual ART content is
-not part of this first export. This fresh build also prevents stale geometry
-when generator code changes without a TOML change.
-
-`runtime-export --eye-layout r24` (H03) publishes a labelled STUDY package
-instead. It sets `forward_defense.eye_layout.selected` in the workspace copy of
-the data only, so the project's TOML (r4 canon) and production assets stay
-unchanged. It also adds whole-ship inspection of that build
-(`validation.json` in the run) and records `study` in `build_identity.json`.
-The review menu shows a STUDY row and every guide card shows the label.
-`runtime-check` refuses a STUDY package; a plain `runtime-export` restores the
-canonical one.
-
-Retention: every run writes to git-ignored `runs/`. Nothing deletes runs
-automatically: after a successful publish `runtime-export` reports how many run
-directories `workflow.py prune` would propose, and the user approves deletions
-(AGENTS.md loop step 6).
-
-The published package carries `godot/generated/build_identity.json`: the hashes
-of its inputs (`runtime_export.package_inputs`: non-study Python, the exporter,
-every data TOML, the imported route, the EVA inputs, the character assets and
-`godot/project.godot`), the Blender and Godot versions, the Git revision and the
-checks it passed. `runtime-check` compares them with the current files before
-running Godot checks in `godot/`; any difference reports STALE and nothing runs.
-Godot scripts and scenes are not package inputs: the check runs the current ones.
-`runtime_export.CHECKS` is the one list of Godot checks for both commands, with
-the scene or script each runs (for `checks`/`runtime-check auto`) and its PASS
-marker.
-
-`src/wayfarer/export/godot.py` resolves evaluated curves, meshes and collection
-instances into a temporary export scene. It preserves evaluated transforms and
-groups by collection instancer, with one mesh per included object. Snapshot IDs
-combine component identity, parent lineage and placement: repeatable for the
-same geometry, but not permanent interaction IDs for moving parts. Reusable
-mesh optimization and mechanism pivots remain later work.
-
-The export omits cameras, mannequins, simulation cages, debug libraries,
-magnetic fields, plasma and optical beams. Basic Principled materials transfer;
-the existing object-alpha-driven emission/transparency is sampled into static
-materials. Unsupported shader links fail explicitly. Display materials are
-presentation choices, not physical measurements.
-
-The output package in `godot/generated/` contains `wayfarer.glb`,
-`wf_sim_rig.json`, `wf_first_ignition_timeline.json` and `manifest.json`. The manifest records source-code and input
-hashes, Git revision/dirty state, Blender version, node provenance, exclusions,
-triangle count, measured bounds and package checksums. Geometry uses metres and
-Blender's glTF basis `(x,y,z) -> (x,z,-y)`: bow +X, dorsal +Y. The rig JSON retains
-its canonical Blender coordinates and explicitly declares them; a future
-runtime consumer must apply the same basis conversion once. Unknown physics
-remains `known = false`.
-
-Before publishing, Godot imports the staged package, loads the viewer headlessly,
-and `check_export.gd` checks
-package hashes, rig/input agreement, mesh identities and vertex bounds against
-the Blender measurements (2 cm tolerance). The source hashes are rechecked
-before publishing. A failed build/import/check retains the previous generated
-package; a successful one moves that package to the run's `previous-generated`
-folder and installs the new directory. It imports the published package into the local
-Godot cache so the viewer can run immediately; a failed local import rolls back
-the package. Logs stay in the run. The Godot editor
-reimports changed assets on focus; authored wrapper scenes remain independent.
-
-Git tracks the runtime project, scripts, scenes and script UID sidecars.
-`godot/generated/` and `godot/.godot/` are ignored. Import settings currently use
-the engine defaults; introduce explicit tracked settings when customizing them.
-No generated file is edited manually. The existing Blender modeling loop and
-baseline rules remain unchanged; runtime-only changes use this export/import
-check, not a production geometry build.
-
-For visual review (requires a display), after import:
-`/snap/bin/godot-4 --path godot -- --capture=/absolute/output/directory`
-saves the three standard views and exits. The headless integrity check is
-`/snap/bin/godot-4 --headless --path godot --script res://scripts/check_export.gd`.
+**Controls (ACI).** `WfInput` holds the action registry (`BASE_ACTIONS`, per-scene `SCENE_ACTIONS`), the profile
+`user://wayfarer_controls.cfg` and the overlay. A scene sets `WfInput.context` in `_ready` and matches `WfInput.key_of(e, [its
+contexts])`; hold inputs read `WfInput.strength(id)` / `held(id)`; help text uses `WfInput.keys("{exc.use}: …")`. A new key is a new
+row in `SCENE_ACTIONS`. The registry still carries the retired scenes' contexts.

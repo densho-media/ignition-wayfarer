@@ -7,7 +7,7 @@ import sys
 ROOT=Path(__file__).resolve().parents[3]
 sys.path[:0]=[str(ROOT/'src/wayfarer'),str(ROOT/'src/wayfarer/build'),str(ROOT/'src/wayfarer/components')]
 from spec import load, buildable_configurations
-from common import begin, empty, save, link_instance
+from common import begin, empty, save, link_instance, group, move
 from recipes import build_component, build_subsystem, entry_guides, human_reference
 from rig import rig
 import sim_rig
@@ -25,6 +25,45 @@ DEBUG_FAMILY=['DEBUG_MAGNETICS','DEBUG_SEPARATRICES','DEBUG_OPTICS']
 # (and holds the whole-habitat rotor actions). A ring target rewrites only its own ring and the detail on it (not the vehicle, which sees
 # the ring through the assembly's link); HABITAT rebuilds all three and the vehicle.
 RING_FAMILY=['HABITAT_A','HABITAT_B']
+# The vehicle file's outliner (AGENTS.md "Where things go"): each linked assembly in its system group under 10_SHIP; the scale
+# figures (one group each), the review cameras and the simulation rig in their own groups. Grouping only: no object, transform or
+# link changes, so the geometry fingerprint is unaffected.
+SYSTEM_GROUPS={'STRUCTURE':['STRUCTURE','HULL'],'DRIVE':['PROPULSION','SHIELDING','POWER_STORAGE','STORAGE'],'THERMAL':['THERMAL'],
+               'HABITAT':['HABITAT','ROTOR_INTERFACE','CREW_TRANSFER'],'FORWARD':['FORWARD_SHIELD','EYE'],'SERVICE':['SERVICE','DRONES']}
+# Outliner colour per system (Blender COLOR_01..08: red, orange, yellow, green, blue, violet, pink, brown); helpers stay uncoloured.
+SYSTEM_COLORS={'STRUCTURE':'COLOR_08','DRIVE':'COLOR_01','THERMAL':'COLOR_02','HABITAT':'COLOR_04','FORWARD':'COLOR_05','SERVICE':'COLOR_03'}
+LIMBS=('Arm','Leg','Head','Torso','Arrester','Hand','Foot','Pelvis','Neck','Body','Spine','Thigh','Shin')
+
+
+def figure(name):
+    """The scale figure a Human_* part belongs to: the name up to its first limb word ('Human_Entry_Leg_1' -> 'Entry')."""
+    words=name.split('_')[1:]
+    i=next((k for k,w in enumerate(words) if w in LIMBS),len(words))
+    return '_'.join(words[:i]) or 'Standing'
+
+
+def organize(c):
+    system={a:g for g,members in SYSTEM_GROUPS.items() for a in members}
+    ship=group(c,'10_SHIP');groups={}
+    present={system.get(o.name[len('Assembly_'):],'OTHER') for o in c.objects if o.get('kind')=='instance' and o.name.startswith('Assembly_')}
+    for g in [g for g in SYSTEM_GROUPS if g in present]+(['OTHER'] if 'OTHER' in present else []):   # outliner order 11..16
+        groups[g]=group(ship,f'{11+list(SYSTEM_GROUPS).index(g) if g in SYSTEM_GROUPS else 19}_{g}',SYSTEM_COLORS.get(g,'NONE'))
+    for obj in list(c.objects):
+        kind=obj.get('kind','')
+        if kind=='instance' and obj.name.startswith('Assembly_'):
+            g=system.get(obj.name[len('Assembly_'):],'OTHER')
+            target=groups[g]
+        elif kind=='asset_root':
+            target=ship
+        elif kind=='scale_reference':
+            target=group(group(c,'20_HUMAN_SCALE'),f'HUMAN_{figure(obj.name)}')
+        elif obj.type=='CAMERA':
+            target=group(c,'30_CAMERAS')
+        elif kind.startswith('sim_'):
+            target=group(c,'40_SIM_RIG')
+        else:
+            continue
+        move(obj,target)
 # Production files that no longer exist (path under assets/wayfarer -> why). A full build moves each one that is still on disk
 # into its own milestones/ folder as <stem>_RETIRED_<UTC>.blend, after checking that nothing hand-made would be lost. Never deleted.
 RETIRED={'WF_WAYFARER_001_BURN.blend':'FGR-002 single vehicle; HIGH_POWER is a preset',
@@ -177,6 +216,7 @@ def build(root=ROOT, target='all', rebind=False):
     human_reference(c,s)
     entry_guides(c,s)
     rig(c,s,root_obj)
+    organize(c)
     import bpy
     bpy.context.scene['configuration']=s['vehicle']['saved_preset']
     bpy.context.scene.render.fps=24

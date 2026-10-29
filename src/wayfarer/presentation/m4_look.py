@@ -11,7 +11,7 @@ physical light and conceptual fill labelled apart. Presentation only: renders in
 - `aisle_pov`  the inhabited-space proof: the newcomer's eye at the instructor in the aisle, physical light, with the pair's measured fit
   (feet on the deck, least clearance of each body to every zone block, headroom) in the caption and in m4_look.json.
 
-    /snap/bin/blender -b --python src/wayfarer/presentation/m4_look.py -- [--views ...] [--size 1600] [--samples 64] [--out-dir renders/p1/m4_look]
+    /snap/bin/blender -b --python src/wayfarer/presentation/m4_look.py -- [--views ...] [--size 1600] [--samples 64] [--out-dir runs/renders/p1/m4_look]
 """
 from pathlib import Path
 import argparse
@@ -195,7 +195,7 @@ def aisle_view(s, name, size, samples, out):
 
 
 def render(views=VIEWS, size=1600, out_dir=None, samples=64):
-    s, *_ = load(ROOT); out = out_dir or ROOT/'renders'/'p1'/'m4_look'; out.mkdir(parents=True, exist_ok=True)
+    s, *_ = load(ROOT); out = out_dir or ROOT/'runs'/'renders'/'p1'/'m4_look'; out.mkdir(parents=True, exist_ok=True)
     path = out/'m4_look.json'
     report = json.loads(path.read_text()) if path.exists() else dict(study='M4 visual identity (WF-006, SIM-035, LOOK-005); presentation only, nothing saved', views={})
     for name in views:

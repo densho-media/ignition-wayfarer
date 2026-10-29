@@ -19,12 +19,10 @@
   </header>
   <section class="panel">
     <p id="size">The engine and the ship package download when you press Start.</p>
-    <p><button id="start" type="button">Start the walk</button>
-      <button id="demo" type="button" class="secondary">Guided tour: Demonstrator 01</button></p>
+    <p><button id="start" type="button">Start the walk</button></p>
     <p class="note">Desktop: click to look (Esc frees the cursor) · W/S move, A/D step · E use (hatch, door, drum, ladder, the ring B
       branch) · O ship operations at a trunk panel · V view · M ring map. Touch: left thumb moves, right thumb drags to look, the Use,
-      Ops, View and Map buttons appear when they apply. The guided tour is Demonstrator 01: the camera leads seven chapters from the
-      docked exterior to ring A and you take over the body in the physics chapters.</p>
+      Ops, View and Map buttons appear when they apply.</p>
     <p id="cap" class="note"></p>
   </section>
   <section class="grid2">
@@ -34,8 +32,7 @@
         <li>The walk: the goal at the top left says what to do next and which key or button does it; the ring map shows the
           stretch walked. A shut hatch or door stops you; open it first. F10 opens the controls.</li>
         <li>Touch: left thumb moves where the body can walk or climb, right thumb drags to look, buttons appear when their action
-          can be used (Use, Ops, View, Map; in the guided tour Grab, Push off, Next …); ? explains them. Landscape works best.</li>
-        <li>Guided tour keys: Enter next chapter · P pause the guided camera · F2 autoplay the body actions · Esc back.</li>
+          can be used (Use, Ops, View, Map); ? explains them. Landscape works best.</li>
         <li>← Exit leaves and unloads the engine.</li>
       </ul>
     </div>
@@ -43,8 +40,8 @@
       <h2>About this build</h2>
       <ul class="plain">
         <li>Browser build of the native Godot project: same scenes, scripts, physics (Jolt) and DOCKED package; single-threaded WebGL 2.</li>
-        <li>The induction pair appears as proxy figures; the native development runtime carries the full characters.</li>
-        <li>SIMULATION_ONLY: chapters, camera paths and the ring-ramp time-lapse are display choices; no transfer timing, procedure or interlock is released.</li>
+        <li>The trainee appears as a proxy body; the native development runtime carries the full characters.</li>
+        <li>SIMULATION_ONLY: the ring-ramp time-lapse and the closure timings are display choices; no transfer timing, procedure or interlock is released.</li>
         <li>Tested in Chromium-based desktop browsers and in Chrome's phone and tablet emulation with touch; real phones, Firefox and
           Safari are not yet verified. On phones the 3-D view renders at a reduced, frame-rate-adaptive resolution.</li>
         <li>Built with the Godot Engine, MIT licence: <a href="GODOT_LICENSE.txt">licence</a>, <a href="GODOT_COPYRIGHT.txt">third-party notices</a>.</li>
@@ -54,29 +51,28 @@
 </main>
 <script>
 // Click-to-load: this page fetches only play.json (past the browser cache) and opens the content-named Godot page on Start.
-const start = document.getElementById('start'), demo = document.getElementById('demo'), size = document.getElementById('size'), cap = document.getElementById('cap');
+const start = document.getElementById('start'), size = document.getElementById('size'), cap = document.getElementById('cap');
 let play = null;
 fetch('play.json', { cache: 'no-store' }).then(r => r.ok ? r.json() : Promise.reject(new Error(`play.json ${r.status}`))).then(p => {
   play = p;
   const mb = Object.values(p.bytes).reduce((a, b) => a + b, 0) / 1e6;
   size.textContent = `Pressing Start downloads the Godot ${p.godot_short} engine and the ship package: ${mb.toFixed(0)} MB, `
     + `less over the wire when the server compresses it, and cached for later visits.`;
-}).catch(err => { size.textContent = `This release has no interactive build (${err.message}).`; start.disabled = true; demo.disabled = true; });
+}).catch(err => { size.textContent = `This release has no interactive build (${err.message}).`; start.disabled = true; });
 // Capability probe without starting anything heavy: a throwaway WebGL 2 context, released at once.
 (() => {
   const gl = document.createElement('canvas').getContext('webgl2');
   const touchOnly = matchMedia('(pointer: coarse)').matches && !matchMedia('(pointer: fine)').matches;
   const notes = [];
-  if (!gl) { notes.push('This browser did not provide WebGL 2, which the engine needs. Explore Ship may still work.'); start.disabled = true; demo.disabled = true; }
+  if (!gl) { notes.push('This browser did not provide WebGL 2, which the engine needs. Explore Ship may still work.'); start.disabled = true; }
   else gl.getExtension('WEBGL_lose_context')?.loseContext();
   if (!WebAssembly?.validate) notes.push('WebAssembly is unavailable.');
   if (touchOnly) notes.push('Touch device: the game shows touch controls. It needs a recent phone and the download above; '
     + 'Explore Ship is the lighter choice.');
   cap.textContent = notes.join(' ');
 })();
-// The walk (EXC-001) is the main experience; the same package opens Demonstrator 01 when no scene switch is given.
-start.addEventListener('click', () => { if (play) location.assign(play.entry + '?arg=--&arg=--excursion'); });
-demo.addEventListener('click', () => { if (play) location.assign(play.entry); });
+// The walk (EXC-001) is the package's main scene.
+start.addEventListener('click', () => { if (play) location.assign(play.entry); });
 </script>
 </body>
 </html>

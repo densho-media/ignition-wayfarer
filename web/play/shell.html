@@ -57,12 +57,12 @@ $GODOT_HEAD_INCLUDE
 </div>
 <div id="status" role="status">
   <h1>ENTER WAYFARER</h1>
-  <p id="detail">Loading the engine and the Demonstrator 01 package…</p>
+  <p id="detail">Loading the engine and the Wayfarer package…</p>
   <div id="bar"><span></span></div>
 </div>
 <script src="$GODOT_URL"></script>
 <script>
-// WEB-002 Godot shell: starts Integrated Demonstrator 01 at once (the launcher page play/index.html is the click-to-load step).
+// WEB-002 Godot shell: starts the walk (EXC-001) at once (the launcher page play/index.html is the click-to-load step).
 // Checks may pass Godot arguments through ?arg= only from the allowed list below; ordinary visitors pass none. Leaving releases the
 // WebGL context at once (the back-forward cache may still keep the page until the browser evicts it).
 const GODOT_CONFIG = $GODOT_CONFIG;
@@ -71,10 +71,9 @@ const GODOT_THREADS_ENABLED = $GODOT_THREADS_ENABLED;
   const status = document.getElementById('status');
   const detail = document.getElementById('detail');
   const bar = document.querySelector('#bar span');
-  const ALLOWED = ['--disable-render-loop', '--fixed-fps', '30', '60', '--', '--check-demo', '--autoplay', '--record-exit', '--no-navigator',
-    '--touch', '--no-touch', '--touch-probe', '--excursion', '--check-excursion'];
+  const ALLOWED = ['--disable-render-loop', '--fixed-fps', '30', '60', '--', '--touch', '--no-touch', '--touch-probe', '--check-excursion'];
   const asked = new URLSearchParams(location.search).getAll('arg');
-  const args = asked.filter(a => ALLOWED.includes(a) || /^--from-chapter=[A-Z]+$/.test(a));
+  const args = asked.filter(a => ALLOWED.includes(a));
   function fail(err) {
     console.error(err);
     status.classList.add('error');
@@ -139,7 +138,7 @@ const GODOT_THREADS_ENABLED = $GODOT_THREADS_ENABLED;
       if (total > 0) {
         const pct = Math.min(100, Math.round(100 * current / total));
         bar.style.width = pct + '%';
-        detail.textContent = `Loading the engine and the Demonstrator 01 package… ${pct} % of ${(total / 1e6).toFixed(0)} MB`;
+        detail.textContent = `Loading the engine and the Wayfarer package… ${pct} % of ${(total / 1e6).toFixed(0)} MB`;
       } else {
         detail.textContent = `Loading… ${(current / 1e6).toFixed(1)} MB`;
       }

@@ -25,7 +25,7 @@ REGISTRY = 'data/modules.toml'
 PACK_DIR = 'data/detail'
 CODE_DIR = 'src/wayfarer/detail'
 ASSET_DIR = 'detail'                   # under assets/wayfarer
-CONTRACTS = 'simulations/wf_module_contracts.json'
+CONTRACTS = 'data/simulations/wf_module_contracts.json'
 CONTRACT, VERSION = 'WF_MODULE_CONTRACTS', 2
 SCOPES = ('M7', 'M8', 'pack')          # which switch and maturity a pack's assemblies take: [production], [production.m8] or its own
 DETAIL_CLASSES = ('BLOCKOUT', 'FUNCTIONAL', 'PRODUCTION', 'HERO')
@@ -162,7 +162,7 @@ def anchor_hash(reg, anchor):
 
 
 def contracts(s, root=ROOT, reg=None):
-    """Every module's external interface, its anchors, with a hash per module. Integration-owned (simulations/wf_module_contracts.json): it
+    """Every module's external interface, its anchors, with a hash per module. Integration-owned (data/simulations/wf_module_contracts.json): it
     changes only when an anchor or the registry does, never when a pack is added or edited, so pack sessions never touch it."""
     reg = reg or registry(root); anc = anchors(s, reg); out = {}
     for mid in reg['module']:

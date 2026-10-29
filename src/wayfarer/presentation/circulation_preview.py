@@ -39,7 +39,7 @@ def figure(scene, at, up, name):
 
 
 def render(root=ROOT, out=None, size=1024, quality='draft'):
-    s, *_ = load(root); out = out or root/'renders/p1/circulation'; out.mkdir(parents=True, exist_ok=True); done = []
+    s, *_ = load(root); out = out or root/'runs/renders/p1/circulation'; out.mkdir(parents=True, exist_ok=True); done = []
     sec = rc.section(s)
     for j, R in ((1, 'A'), (2, 'B')):
         bpy.ops.wm.open_mainfile(filepath=str(root/'assets/wayfarer/subsystems'/f'WF_HABITAT_{R}.blend'))

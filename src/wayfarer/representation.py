@@ -52,6 +52,36 @@ def detail_class(record):
     return 'FUNCTIONAL' if record.get('kind') in FUNCTIONAL_KINDS else 'BLOCKOUT'
 
 
+# Exterior / interior zones (docs/MODEL.md "Runtime representation"): one model, every exported node tagged so a viewer can leave out
+# the side it cannot see. INTERIOR kinds are the crew-side fit-out, fixtures and passages; SHELL is a pressure boundary seen from both
+# sides; everything else is EXTERIOR. The area comes from the asset file chain (outermost last).
+INTERIOR_KINDS = {'entry_fixture', 'route_fitout', 'circulation_corridor', 'circulation_door', 'circulation_fitout', 'circulation_fixture',
+                  'circulation_portal', 'crew_passage', 'crew_vestibule', 'crew_trunk', 'crew_bracket', 'transfer_closure',
+                  'survival_envelope', 'sector_interior_deck', 'sector_interior_overhead', 'sector_interior_zone', 'storeroom_fixture',
+                  'storeroom_stowage', 'crew_refuge', 'refuge_wall', 'scale_reference'}
+SHELL_KINDS = {'sector_pressure', 'storeroom_shell'}
+AREAS = (('WF_HABITAT_A', 'RING_A'), ('WF_HABITAT_B', 'RING_B'), ('WF_CREW_TRANSFER', 'TRUNK'), ('WF_SERVICE', 'SERVICE'))
+EXTERIOR_DETAIL = ('EXT', 'M8_', 'RAD_', 'SP_CASING')
+
+
+def zone(kind, libraries, area=None):
+    """EXTERIOR, SHELL or INTERIOR:<area> of one exported node from its kind and the asset files it comes through (`libraries`,
+    innermost first). Production detail goes by its detail asset (WF_DETAIL_<assembly>: exterior when the assembly names EXT, M8_,
+    RAD_ or SP_CASING); the area is `area` when the caller knows it (the ring frame a node turns with), else the first file that
+    names one (rings, trunk, service), else SPINE."""
+    detail = next((lib[len('WF_DETAIL_'):] for lib in libraries if lib.startswith('WF_DETAIL_')), None)
+    if detail is not None:
+        inside = not any(p in detail for p in EXTERIOR_DETAIL)
+    elif kind in SHELL_KINDS:
+        return 'SHELL'
+    else:
+        inside = kind in INTERIOR_KINDS
+    if not inside:
+        return 'EXTERIOR'
+    area = area or next((a for lib in libraries for stem, a in AREAS if lib.startswith(stem)), 'SPINE')
+    return f'INTERIOR:{area}'
+
+
 SHOT_REPRESENTATIONS = ('REP_STANDARD', 'REP_HOLOGRAM', 'REP_CUTAWAY')
 OPERATIONS = ('isolate', 'reveal', 'conceal', 'highlight', 'explode', 'recombine')
 # Object kinds never represented: saved-hidden or non-geometric helpers.

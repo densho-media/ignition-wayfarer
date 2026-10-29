@@ -2,8 +2,8 @@
 config_version=5
 
 [application]
-config/name="Wayfarer Inspector"
-run/main_scene="res://scenes/review.tscn"
+config/name="Wayfarer"
+run/main_scene="res://scenes/excursion.tscn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 
 [autoload]

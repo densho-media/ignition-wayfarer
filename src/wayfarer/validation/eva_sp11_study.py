@@ -1,7 +1,7 @@
 """EVA-003 SP-11 comparison in the saved vehicle (S&E 43 EVA-056..058, 44 EVA3-001..004; docs/EVA.md "EVA-003").
 
   blender --background --factory-startup --python-exit-code 1 --python src/wayfarer/validation/eva_sp11_study.py -- \
-      [--sp11 references/p1_eva_sp11.json] [--out runs/<stamp>-eva3] [--renders renders/p1/eva/eva3] [--no-renders]
+      [--sp11 references/p1_eva_sp11.json] [--out runs/<stamp>-eva3] [--renders runs/renders/p1/eva/eva3] [--no-renders]
 
 For the 1.10 / 1.20 / 1.35 m two-person chambers of eva_sp11.py: builds the chamber, both leaves and the inner-hatch mechanism envelopes
 (the parallel plug's parking pocket in each slide direction, the floor recess well) as disposable STUDY_* objects in the vehicle opened in
@@ -149,9 +149,9 @@ def main():
     ap = argparse.ArgumentParser(); ap.add_argument('--sp11', type=Path, default=ROOT/'references/p1_eva_sp11.json')
     ap.add_argument('--access', type=Path, default=ROOT/'references/p1_eva_access.json')
     ap.add_argument('--vehicle', type=Path, default=ROOT/'assets/wayfarer/WF_WAYFARER_001.blend'); ap.add_argument('--out', type=Path)
-    ap.add_argument('--renders', type=Path, default=ROOT/'renders/p1/eva/eva3'); ap.add_argument('--size', type=int, nargs=2, default=[1280, 960])
+    ap.add_argument('--renders', type=Path, default=ROOT/'runs/renders/p1/eva/eva3'); ap.add_argument('--size', type=int, nargs=2, default=[1280, 960])
     ap.add_argument('--report', type=Path, default=ROOT/'references/p1_eva_sp11_vehicle.json'); ap.add_argument('--no-renders', action='store_true')
-    ap.add_argument('--plug-renders', type=Path, default=ROOT/'renders/p1/eva/airlock'); ap.add_argument('--plug-only', action='store_true', help='skip the three-aperture comparison'); ap.add_argument('--rl-renders', action='store_true', help='render only the SIM-027 stills'); ap.add_argument('--rl', default='all', choices=('all', 'keeper', 'controls'), help='SIM-027 redline parts to measure')
+    ap.add_argument('--plug-renders', type=Path, default=ROOT/'runs/renders/p1/eva/airlock'); ap.add_argument('--plug-only', action='store_true', help='skip the three-aperture comparison'); ap.add_argument('--rl-renders', action='store_true', help='render only the SIM-027 stills'); ap.add_argument('--rl', default='all', choices=('all', 'keeper', 'controls'), help='SIM-027 redline parts to measure')
     a = ap.parse_args(argv)
     sp = json.loads(a.sp11.read_text()); acc = json.loads(a.access.read_text()); env = json.loads((ROOT/'references/p1_eva_envelopes.json').read_text())
     s = spec.load(ROOT)[0]; clr = s['prototype']['mechanical_clearance_m']; data = es.load(ROOT); q = data['rescue_support']
@@ -561,7 +561,7 @@ def redline_measure(a, sp, env, data, rigs, rigs2, trees, fixtures, clr, s, acc,
 
 
 def redline_renders(a, sp, env, data, rigs, rigs2, s, red_meas):
-    """SIM-027 stills into renders/p1/eva/airlock/: the keeper section of the 0.10 m stroke variant against the published 0.08 m one, and the SP-12 side
+    """SIM-027 stills into runs/renders/p1/eva/airlock/: the keeper section of the 0.10 m stroke variant against the published 0.08 m one, and the SP-12 side
     with the row-layout control cluster (operator posed at its station, donning stand A and the other fixtures in place)."""
     import copy
     sl = sp['sliding_plug']; red = sl['redlines']; pq = data['sp11_plug']; rq = data['sp11_eva3']; out = a.plug_renders
@@ -623,7 +623,7 @@ def redline_renders(a, sp, env, data, rigs, rigs2, s, red_meas):
 
 
 def plug_renders(a, sp, env, data, rigs, rigs2):
-    """Four stills of the 1.20 m sliding plug into renders/p1/eva/airlock/: the plug parked, the casualty transit, the two-side valves and the retention section."""
+    """Four stills of the 1.20 m sliding plug into runs/renders/p1/eva/airlock/: the plug parked, the casualty transit, the two-side valves and the retention section."""
     sl = sp['sliding_plug']; pq = data['sp11_plug']; rq = data['sp11_eva3']; k_ = data['rescue_support']; row = next(r for r in sp['rows'] if abs(r['aperture_m']-pq['aperture_m']) < 1e-9)
     fit = row['fitting']; ch = row['chamber']; u, X, w = st.chamber_frame(fit); pl.configure(pq); out = a.plug_renders; i = row['id']; names = 'sp11_120_slideplug_'
     coll = bpy.data.collections.new('STUDY_PLUG_R'); bpy.context.scene.collection.children.link(coll); base = st.build(row, coll, render=True)

@@ -4,8 +4,8 @@
   index.html, site.css   start page: two choices, the release line; loads no engine, model or library
   viewer/                Explore Ship: the saved COAST vehicle as a Draco GLB (export/godot.py --out --draco, checked against its
                          manifest) in a pinned three.js viewer; build.json names the content-addressed model files
-  play/                  Enter Wayfarer: a launcher, and Integrated Demonstrator 01 as a Godot Web export (tools/web_play.py)
-  review/                technical review page over release.json
+  play/                  Enter Wayfarer: a launcher, and the walk (EXC-001) as a Godot Web export (tools/web_play.py)
+  status/                technical status page over release.json
   release.json           release manifest: identity, toolchain, inputs, every file's size and SHA-256, the experiences, checks
 Every path in the site is relative, so it serves from any subpath (GitHub Pages /ignition-wayfarer/) or another static host.
 It never builds or edits geometry: build first (pipeline), and pass that run with `--pipeline-run` to record its geometry diff.
@@ -51,13 +51,10 @@ PLAY_BUDGET = 90_000_000
 LIMITATIONS = [
     'REP_PROXY geometry throughout: a display model generated from the parameters, not a measurement source (Draco quantizes '
     'viewer positions to about 1.5 cm).',
-    'Enter Wayfarer is Integrated Demonstrator 01 only; the review sessions, EVA, flight timeline and hologram stay in the native '
-    'development runtime (python3 tools/workflow.py runtime-export).',
-    'The MPFB induction pair and EVA suits are not in the browser package: proxy figures stand in (presentation only).',
+    'Enter Wayfarer is the walk (EXC-001): from the development station into Wayfarer and round either habitat ring.',
+    'The MPFB characters are not in the browser package: a proxy body stands in (presentation only).',
     'The browser build is single-threaded WebGL 2 (Godot Compatibility); the native Godot build stays the gameplay and physics reference.',
     'Key labels in the browser show US key positions (the Web display server cannot map physical keys to the layout).',
-    'A few navigator markers (geometric symbols such as ▶ ◆ ○) show as empty boxes in the browser: Godot\'s default font lacks them and '
-    'the browser build has no system fonts to fall back on (presentation only).',
     'Tested automatically in headless Chromium with software WebGL; Firefox, Safari, phones and real-GPU frame rates are not verified '
     'by CI (see docs/wayfarer-web-experience-plan.md).',
     'GitHub Pages caches each file for 10 minutes; engine, pack and model files are content-named so a new release never mixes files.',
@@ -206,7 +203,7 @@ def run(root, out=None, pipeline_run=None, draco=True, with_play=True, native=Fa
         play = None
         if with_play:
             try:
-                play = web_play.build(root, run_dir, site / 'play', work / 'manifest.json', work / 'build_identity.json',
+                play = web_play.build(root, run_dir, site / 'play', work / 'build_identity.json',
                                       native=native, native_check=native_check, reuse=reuse, reuse_native=reuse_native)
             except (RuntimeError, ValueError, OSError) as error:
                 return {'result': 'FAIL', 'step': 'play', 'reason': str(error)[-2000:], 'run_dir': str(run_dir)}
@@ -277,7 +274,7 @@ def release_record(root, site, build, play, revision, dirty, built):
                          'reduced_fidelity': play['reduced_fidelity'], 'native_reference': play['native_reference'],
                          'native_zip_sha256': play['native_zip_sha256'], 'input_key': play['input_key'],
                          'reused_from': play['reused_from']}} if play else {}),
-            'review': {'entry': 'review/'},
+            'status': {'entry': 'status/'},
         },
         'status_labels': ['CANON', 'DERIVED', 'WORKING', 'PROTOTYPE', 'DIAGNOSTIC', 'HOLD'],
         'limitations': LIMITATIONS,

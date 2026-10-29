@@ -42,18 +42,26 @@ def begin(path, name):
     root = collection(name, scene.collection)
     gen = collection(f'GEN_{name}', root)
     art = collection(f'ART_{name}', root)
+    if art.color_tag == 'NONE':                             # violet marks hand work (AGENTS.md "Inside every .blend"); the owner may recolour it
+        art.color_tag = 'COLOR_06'
     if gen.get('wf_owner') not in (None, OWNER):
         raise ValueError(f'Foreign collection owner: {gen.name}')
-    for obj in list(gen.objects):
-        if obj.get('wf_owner') == OWNER and len(obj.users_collection) == 1:
-            bpy.data.objects.remove(obj, do_unlink=True)
-        else:
-            # Preserve unowned or multiply linked content even if placed in GEN.
-            if obj.name not in art.objects:
-                art.objects.link(obj)
-            gen.objects.unlink(obj)
-    if gen.children:
-        raise ValueError('Nested collections in GEN are preserved: move them to ART before rebuilding')
+    def clear(c):
+        for obj in list(c.objects):
+            if obj.get('wf_owner') == OWNER and len(obj.users_collection) == 1:
+                bpy.data.objects.remove(obj, do_unlink=True)
+            else:
+                # Preserve unowned or multiply linked content even if placed in GEN.
+                if obj.name not in art.objects:
+                    art.objects.link(obj)
+                c.objects.unlink(obj)
+        for child in list(c.children):
+            # Generator-owned groups (group()) are rebuilt; anything else nested in GEN is preserved by refusing.
+            if child.get('wf_owner') != OWNER or child.library:
+                raise ValueError(f'Nested collection {child.name} in GEN is not generator-owned: move it to ART before rebuilding')
+            clear(child)
+            bpy.data.collections.remove(child)
+    clear(gen)
     for table in [bpy.data.meshes, bpy.data.curves, bpy.data.materials]:
         for block in list(table):
             if block.users == 0 and block.get('wf_owner') == OWNER:
@@ -61,6 +69,23 @@ def begin(path, name):
     gen['wf_owner'] = OWNER
     root['representation'] = 'REP_PROXY'
     return root, gen
+
+
+def group(parent, name, color='NONE'):
+    """A generator-owned sub-collection of GEN (begin() rebuilds it) with its outliner colour tag; the order follows the numbered names."""
+    c = collection(name, parent)
+    c['wf_owner'] = OWNER
+    c.color_tag = color
+    return c
+
+
+def move(obj, c):
+    """Put an object into exactly one collection."""
+    for old in list(obj.users_collection):
+        if old is not c:
+            old.objects.unlink(obj)
+    if obj.name not in c.objects:
+        c.objects.link(obj)
 
 
 def tag(obj, ident, kind='geometry', status='PROTOTYPE', source='prototype'):

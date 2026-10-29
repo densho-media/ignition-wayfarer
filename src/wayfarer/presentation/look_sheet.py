@@ -1,7 +1,7 @@
 """LOOK-004 comparison sheet (S&E 15!A140): composes the hero_look3 stills with their metadata into one PNG for the owner's review.
-Presentation only; reads renders/p1/hero_look3/look3.json and the stills, writes look3_sheet.png beside them.
+Presentation only; reads runs/renders/p1/hero_look3/look3.json and the stills, writes look3_sheet.png beside them.
 
-    python3 src/wayfarer/presentation/look_sheet.py [--dir renders/p1/hero_look3]
+    python3 src/wayfarer/presentation/look_sheet.py [--dir runs/renders/p1/hero_look3]
 """
 from pathlib import Path
 import argparse
@@ -31,4 +31,4 @@ def sheet(d):
 
 
 if __name__ == '__main__':
-    a = argparse.ArgumentParser(); a.add_argument('--dir', type=Path, default=ROOT/'renders/p1/hero_look3'); print(sheet(a.parse_args().dir))
+    a = argparse.ArgumentParser(); a.add_argument('--dir', type=Path, default=ROOT/'runs/renders/p1/hero_look3'); print(sheet(a.parse_args().dir))

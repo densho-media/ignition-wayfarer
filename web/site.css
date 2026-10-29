@@ -1,4 +1,4 @@
-/* WEB-002 shared style of the start, launcher and review pages (the viewer and the Godot shell carry their own). */
+/* WEB-002 shared style of the start, launcher and status pages (the viewer and the Godot shell carry their own). */
 :root {
   --bg: #07090c; --ink: #d9e0e6; --muted: #7d8a96; --line: #26303a; --panel: #0c1015; --accent: #e0a040; --sel: #4fb3ff;
   --bad: #ff8070; --good: #7fd18b;

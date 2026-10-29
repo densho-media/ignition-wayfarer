@@ -82,7 +82,7 @@ def render(root=ROOT, views=None, size=768, state='DOCKED', hatch='open', out_di
     for i,(direction,energy) in enumerate([((.3,-.8,-.6),2.5),((-.5,.6,-.4),1.2)]):
         data=bpy.data.lights.new(f'Preview_Sun_{i}','SUN');data.energy=energy;data.angle=.15
         obj=bpy.data.objects.new(data.name,data);scene.collection.objects.link(obj);obj.rotation_euler=frame(direction,(1,0,0))
-    out=out_dir or root/'renders/p1/human_entry';out.mkdir(parents=True,exist_ok=True)
+    out=out_dir or root/'runs/renders/p1/human_entry';out.mkdir(parents=True,exist_ok=True)
     people=None
     if any(v.startswith(('greeting','ind_')) for v in views or VIEWS):
         # IND-001: append (not link) the characters asset, so its objects can be hidden per view; nothing is saved.

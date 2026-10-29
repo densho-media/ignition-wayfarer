@@ -116,7 +116,7 @@ A moving anchor's matrix is its rest frame at the saved pose. `inspect` and `mod
 centre and turning about +X only; the instance inherits the motion, and the runtime export finds the frame by posing the rings and drums.
 
 **Contracts.** Two levels, so that packs never share a generated file:
-- **Module contract** (integration-owned): a module's anchors, with one hash per module, in the tracked `simulations/wf_module_contracts.json`
+- **Module contract** (integration-owned): a module's anchors, with one hash per module, in the tracked `data/simulations/wf_module_contracts.json`
   (contract v2). Every build and `module contracts --write` rewrite it; `tests/test_modules.py` keeps it current. It changes only when an
   anchor frame, the registry or `interface_version` changes, never when a pack is added or edited.
 - **Pack contract** (pack-owned): `modules.pack_contract()` hashes `interface_version` plus the pack's own terms: each assembly's anchor with
@@ -366,7 +366,7 @@ Evidence folders (local, kept by owner decision): `runs/20261023-phase2-before`,
 
 - **Per-pack contracts.** Merge experiment, two sessions each adding a pack to WF-RING-A from one commit, each regenerating the contract
   file as the build does:
-  - old model (`80a6cb2`): `simulations/wf_module_contracts.json` conflicts in both merge orders, and `m7_ra1`'s record hash changes with each
+  - old model (`80a6cb2`): `data/simulations/wf_module_contracts.json` conflicts in both merge orders, and `m7_ra1`'s record hash changes with each
     new pack (`95e5c154…` → `a2cbcc47…` / `f5b072bf…`), so its publication goes stale;
   - new model: clean merges in both orders, identical trees, the contract file current after the merge, `m7_ra1`'s pack contract unchanged.
   - In practice: `ring_a_transfer` joined WF-RING-A next to `m7_ra1` and `ra2_equip`, whose records stayed valid (`assembly validate` PASS).

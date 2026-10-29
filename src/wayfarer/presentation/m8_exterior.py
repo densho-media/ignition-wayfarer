@@ -111,7 +111,7 @@ def render(views=VIEWS, size=1600, samples=64, out_dir=None, mode='beforeafter',
     so = bpy.data.objects.new(sun.name, sun); scene.collection.objects.link(so); so.rotation_euler = (-sv).to_track_quat('-Z', 'Y').to_euler()
     scene.view_settings.view_transform = 'AgX'; scene.view_settings.look = 'None'; scene.view_settings.exposure = x['exposure_ev']+EDITORIAL_EV
     cd = bpy.data.cameras.new('M8_Camera'); cam = bpy.data.objects.new(cd.name, cd); scene.collection.objects.link(cam); scene.camera = cam
-    out = Path(out_dir or ROOT/'renders/m8'); out.mkdir(parents=True, exist_ok=True)
+    out = Path(out_dir or ROOT/'runs/renders/m8'); out.mkdir(parents=True, exist_ok=True)
     objs = m8_objects()
     counts = {o.name: dict(assembly=o.get('m7_assembly'), family=o.get('family'), maturity=o.get('maturity'), elements=o.get('elements'),
                            faces=len(o.data.polygons), detail_range_m=o.get('detail_range_m')) for o in objs}

@@ -10,7 +10,7 @@ Google Sheets owns every numeric value, state, assumption, unit, sample time and
 Until its table is released a channel or stream stays UNKNOWN with null values, never a number. A released table is copied as the sheet
 stores it: nothing is computed, interpolated, resampled onto the 30 fps frames, smoothed or filled; an empty time stays untimed (15!G125,
 H125, C-018 G19). The checks are import fidelity only (TABLE, STREAM_TABLE); PASS is the owner's validation, never Claude's. Writes
-[flight_timeline].frames (simulations/wf_flight_frames_v1.json), which flight_timeline binds to the timeline."""
+[flight_timeline].frames (data/simulations/wf_flight_frames_v1.json), which flight_timeline binds to the timeline."""
 import hashlib
 import json
 from pathlib import Path

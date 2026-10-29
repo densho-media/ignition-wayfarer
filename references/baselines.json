@@ -1,54 +1,5 @@
 {
   "purpose": "Current production geometry baseline for tools/pipeline.py fingerprint diffs. Written only by `tools/workflow.py baseline`.",
   "current": "references/baseline_fwd_eye_r30_hex",
-  "history": [
-    {
-      "baseline": "references/baseline_m8_exterior",
-      "replaced_utc": "2026-10-22T15:03:14Z"
-    },
-    {
-      "baseline": "references/baseline_modules_pilot1",
-      "replaced_utc": "2026-10-22T15:25:02Z"
-    },
-    {
-      "baseline": "references/baseline_modules_pilot2",
-      "replaced_utc": "2026-10-23T08:26:20Z"
-    },
-    {
-      "baseline": "references/baseline_modules_phase2",
-      "replaced_utc": "2026-10-23T12:20:21Z"
-    },
-    {
-      "baseline": "references/baseline_modules_phase3",
-      "replaced_utc": "2026-10-24T12:51:47Z"
-    },
-    {
-      "baseline": "references/baseline_p4_s3_m8_2",
-      "replaced_utc": "2026-10-24T13:05:11Z"
-    },
-    {
-      "baseline": "references/baseline_p4_s4_rings",
-      "replaced_utc": "2026-10-24T14:41:39Z"
-    },
-    {
-      "baseline": "references/baseline_p4_s6_spine",
-      "replaced_utc": "2026-10-24T16:09:20Z"
-    },
-    {
-      "baseline": "references/baseline_p4_s9_materials",
-      "replaced_utc": "2026-10-24T16:32:30Z"
-    },
-    {
-      "baseline": "references/baseline_p4_s8a_ring_b",
-      "replaced_utc": "2026-10-26T11:09:41Z"
-    },
-    {
-      "baseline": "references/baseline_p4_s9_circulation",
-      "replaced_utc": "2026-10-28T14:58:11Z"
-    },
-    {
-      "baseline": "references/baseline_fwd_eye_r16",
-      "replaced_utc": "2026-10-29T08:24:16Z"
-    }
-  ]
+  "history": []
 }

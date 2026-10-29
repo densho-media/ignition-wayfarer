@@ -2,7 +2,7 @@
 
 The shot links the saved vehicle (relative path) through a fully editable library-override hierarchy, nested subsystem instances
 included, and keys the overridden controls (both ROTOR_n_MECH_CTRL, DRIVE_MANIFOLD_CTRL, FORWARD_DEFENSE_CTRL, RADIATOR_HEALTH_CTRL) from
-simulations/wf_first_ignition_timeline.json, so the vehicle's own drivers pose it: the rings turn by the integrated spin_turned and never
+data/simulations/wf_first_ignition_timeline.json, so the vehicle's own drivers pose it: the rings turn by the integrated spin_turned and never
 reverse (FUT-007). Camera, lights, world and the labels are shot-local; a phase caption per phase is shown only in its phase, and a
 geometry-nodes readout prints the keyed kinematics. The vehicle assets are only read (their hashes are checked before and after).
 Like the other shots, a rebuild replaces the file wholesale and refuses a file that is not this generated shot.
@@ -118,7 +118,7 @@ def readout_tree():
 def build(root=ROOT, size=768):
     s, _, spec_text, source_text = spec.load(root)
     if not ft.check(root):
-        raise RuntimeError('simulations/wf_first_ignition_timeline.json is stale: rebuild it first (flight_timeline.py)')
+        raise RuntimeError('data/simulations/wf_first_ignition_timeline.json is stale: rebuild it first (flight_timeline.py)')
     tl = json.loads((root/ft.table(s)['output']).read_text())
     path = root/'shots'/f'{NAME}.blend'
     if path.exists():
@@ -200,7 +200,7 @@ def build(root=ROOT, size=768):
 def render(root=ROOT, frames=None, size=512, out_dir=None):
     bpy.ops.wm.open_mainfile(filepath=str(root/'shots'/f'{NAME}.blend'))
     scene = bpy.context.scene; shot_tools.render_settings(scene, 'REP_PROXY', size)
-    out = out_dir or root/'renders/shots'/NAME; out.mkdir(parents=True, exist_ok=True)
+    out = out_dir or root/'runs/renders/shots'/NAME; out.mkdir(parents=True, exist_ok=True)
     for frame in frames or [m.frame for m in sorted(scene.timeline_markers, key=lambda m: m.frame)]:
         scene.frame_set(frame); scene.render.filepath = str(out/f'{NAME}_f{frame:04}.png')
         bpy.ops.render.render(write_still=True)

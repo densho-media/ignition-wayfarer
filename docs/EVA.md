@@ -33,15 +33,15 @@ as 45's WORKING TRADE CASE. Nothing here is canon. The loop and the rules are in
 | Envelope classes, route access, SP-11 door and chamber candidates, SP-12/13 rooms (pure) | `src/wayfarer/eva_access.py` → `references/p1_eva_access.json` |
 | Training route, hazard gates, flight state (pure) | `src/wayfarer/eva_route.py` → `wf_eva.json` |
 | Generator (Blender) | `src/wayfarer/build/eva_suit.py` → `assets/characters/WF_EVA_<WEARER>.blend` |
-| Suit checks and access-pose hulls | `src/wayfarer/validation/eva_fit.py` → `references/p1_eva_fit.json`, `references/p1_eva_envelopes.json`, `renders/p1/eva/fit/` |
-| SP-11/12/13 study in the vehicle | `src/wayfarer/validation/eva_airlock_study.py` → `references/p1_eva_airlock.json`, `renders/p1/eva/airlock/`, `runs/<stamp>-eva/WF_EVA_AIRLOCK_STUDY.blend` |
+| Suit checks and access-pose hulls | `src/wayfarer/validation/eva_fit.py` → `references/p1_eva_fit.json`, `references/p1_eva_envelopes.json`, `runs/renders/p1/eva/fit/` |
+| SP-11/12/13 study in the vehicle | `src/wayfarer/validation/eva_airlock_study.py` → `references/p1_eva_airlock.json`, `runs/renders/p1/eva/airlock/`, `runs/<stamp>-eva/WF_EVA_AIRLOCK_STUDY.blend` |
 | EVA-003 SP-11 comparison (pure): 1.10 / 1.20 / 1.35 m, inner-hatch mechanisms, extension latch, rescue | `src/wayfarer/eva_sp11.py` → `references/p1_eva_sp11.json` |
 | SP-11 1.20 m sliding plug (pure): drop and park, bidirectional retention, two-side valves, interlock table, two-person and casualty re-check | `src/wayfarer/eva_sp11_plug.py` (called by `eva_sp11.study()`, key `sliding_plug` in `references/p1_eva_sp11.json`) |
-| Its check in the vehicle with the posed rigs, renders | `src/wayfarer/validation/eva_sp11_study.py` → `references/p1_eva_sp11_vehicle.json` (key `sliding_plug`: real meshes), `renders/p1/eva/eva3/`, `renders/p1/eva/airlock/sp11_120_slideplug_*.png`, `runs/<stamp>-eva/WF_EVA3_SP11_STUDY.blend`; `--plug-only` runs just the plug part (about 40 s) |
-| Integrated forward district (SP-11/12/13 with the SERV district) | `src/wayfarer/studies/eva3_district.py` → `references/p1_eva_district.json`, `references/EVA3_DISTRICT_MAP.svg` (run by hand) |
-| Renders | `src/wayfarer/presentation/eva_preview.py` → `renders/p1/eva/` |
+| Its check in the vehicle with the posed rigs, renders | `src/wayfarer/validation/eva_sp11_study.py` → `references/p1_eva_sp11_vehicle.json` (key `sliding_plug`: real meshes), `runs/renders/p1/eva/eva3/`, `runs/renders/p1/eva/airlock/sp11_120_slideplug_*.png`, `runs/<stamp>-eva/WF_EVA3_SP11_STUDY.blend`; `--plug-only` runs just the plug part (about 40 s) |
+| Integrated forward district (SP-11/12/13 with the SERV district) | retired study `eva3_district.py` (tag `archive/pre-cleanup-2026-10-29`) → `references/evidence/p1_eva_district.json`, `references/evidence/EVA3_DISTRICT_MAP.svg` |
+| Renders | `src/wayfarer/presentation/eva_preview.py` → `runs/renders/p1/eva/` |
 | Export | `src/wayfarer/export/eva_gltf.py` → `eva_<key>.glb` + `eva_characters.json` |
-| Runtime | `godot/scenes/eva.tscn`, `godot/scripts/eva.gd` (opened from the boarding walk) |
+| Runtime | retired 2026-10-29 (`eva.tscn`, `eva.gd` at the archive tag) |
 | Tests | `tests/test_eva_suit.py`: OPEN stays null, gates fail closed, FLIGHT_EVA locked, Tale stations, no suit on the interior route, leaf clear of every placed body, tether rules, mobility limits, the owner's EVA-003 apertures, no latch-only reverse-load hatch passes |
 
 ```bash
@@ -49,8 +49,7 @@ python3 tools/workflow.py eva
 ```
 
 The command builds the suits, checks them, runs the access study and its vehicle check, the EVA-003 comparison and its vehicle check,
-renders and exports, and prints a summary. It takes about 12 minutes (`--no-renders` about 7) and needs `workflow.py characters` first. The
-district study is run by hand: `/snap/bin/blender -b --python src/wayfarer/studies/eva3_district.py -- --out runs/<stamp>-eva3-district`.
+renders and exports, and prints a summary. It takes about 12 minutes (`--no-renders` about 7) and needs `workflow.py characters` first.
 
 ```bash
 python3 tools/workflow.py runtime-export
@@ -149,7 +148,7 @@ centre: 0.64 × 0.80 m and a 0.91 m circle for the instructor (1.78 m), 0.60 × 
 owner's quoted figures; the access study below measures the smallest circles.
 
 **Holds in the vehicle** (QA-02). The suited bodies posed at the training route's five holds are CLEAR of the vehicle meshes, with
-0.035–0.082 m least clearance. Renders are in `renders/p1/eva/fit/`.
+0.035–0.082 m least clearance. Renders are in `runs/renders/p1/eva/fit/`.
 
 Passing checks are not certification (EVA-033, QA-03, EVA-049).
 
@@ -201,7 +200,7 @@ target) and 1.20 m, each as a two-person chamber and as a sequential single-pers
 - **Structure** (`eva_airlock_study.py`, in the saved vehicle): every candidate's chamber, bulkheads, outer neck and leaves against all
   vehicle meshes within 7 m, at the 0.15 m mechanical clearance.
 
-**Results** (`references/p1_eva_access.json`, `p1_eva_airlock.json`; renders `renders/p1/eva/airlock/`):
+**Results** (`references/p1_eva_access.json`, `p1_eva_airlock.json`; renders `runs/renders/p1/eva/airlock/`):
 
 | Candidate | Chamber clear Ø × length, volume | Door passage (hands ahead) | Radial budget to SP-12 floor | Structure | Status |
 | --- | --- | --- | --- | --- | --- |
@@ -377,9 +376,9 @@ modelled.
 ## Forward district: SP-11/12/13 with the service district (44 EVA3-004, 15!A129 SERV-003, 98!A96)
 
 The owner's rule: one spatial allocation, no double booking of stationary volume, EVA access and protected rescue first (EVA-059 H60).
-`studies/eva3_district.py` puts the SP-11 lead chamber, SP-12, SP-13, the trunk branch and the SERV-002 district (workshop, sealed cell,
-SP-52 warm module, access passages) on one overlay in the vehicle; nothing is saved (`references/p1_eva_district.json`, the X-azimuth map
-[references/EVA3_DISTRICT_MAP.svg](../references/EVA3_DISTRICT_MAP.svg)).
+The retired `eva3_district.py` study put the SP-11 lead chamber, SP-12, SP-13, the trunk branch and the SERV-002 district (workshop, sealed cell,
+SP-52 warm module, access passages) on one overlay in the vehicle; nothing is saved (`references/evidence/p1_eva_district.json`, the X-azimuth map
+[references/evidence/EVA3_DISTRICT_MAP.svg](../references/evidence/EVA3_DISTRICT_MAP.svg)).
 
 | Layout | What | Result |
 | --- | --- | --- |
@@ -437,59 +436,15 @@ view of the drive section, and a camera ahead of the Brow and EYE.
 
 ## Runtime (Godot)
 
-Open it with **Guided EVA (training simulation)** in the boarding walk, or directly as `res://scenes/eva.tscn`.
-
-**Phases.** PREP (suit check and buddy check in the SP-12 study room) → LOCK_CHECK (in the EVA-003 lead study chamber, 1.20 m, standing
-as the study placed the pair; the parallel-plug inner hatch drawn parked or seated, the two wall lever stations in red; OPEN items
-listed) → DEPRESS (the inner hatch seals first; the instructor works the wall lever and the strap, `eva_latch_extension`) → EXTERIOR → REPRESS (the outer hatch seals first) →
-DEBRIEF (back in SP-12). There is no clock for depress or prebreathe.
-
-**Stations.** Seven What / Why / Show me stations carry Tale's SCRIPT-05…11 lines verbatim (WORKING SCRIPT), with Tale's safety rule:
-suit preparation (PREP), airlock operation (LOCK_CHECK, DEPRESS), the rings, heat rejection and the drive (aft hold), the Brow and EYE
-(forward hold), and the return (REPRESS, DEBRIEF). Show me steps the suit cutaway, shows the two-door interlock state, or switches to a
-remote view.
-
-**Banner and HUD.** The banner shows the mode, the hold's training status, FLIGHT_EVA: HOLD and each gate's training status and flight
-state. The HUD lists every telemetry field with its status, OPEN where unreleased, and the 45 trade case labelled as a study case
-(40 kPa absolute, O₂ fraction 1: not a setpoint, no prebreathe, no duration). Nothing is consumed or counted down.
-
-**Controls.** W and S move along the rail at the display pace (Shift: review pace), clamped by the tether reach (2.0 m of gameplay
-tuning; the tether length is OPEN). T clips the free tether, Y tug-tests it, R releases the older one (refused unless the other is clipped
-and tested). X aborts: the body returns anchor by anchor to the hatch and the chamber repressurizes. 1, 2 and 3: What / Why / Show me; N:
-next topic at the hold. K toggles the ring keep-out volume, V the helmet-eye camera.
-
-**Story boundary.** Neither the instructor nor the visitor is one of the six crew; both leave before First Ignition (S004D). The
-instructor's name, gender, face and casting stay OPEN (WTF-16).
-
-**Headless check** (`--check-eva`, run by `runtime-export`): nothing GO, no OPEN-limit gate passes and no gate is VALIDATED; FLIGHT_EVA is
-HOLD and unavailable; OPEN telemetry stays null; seven stations, each with its Tale script; the access study is present, and the EVA-003
-lead is shown with the parallel-plug inner hatch (no rejected mechanism); both suits load
-with every EVA clip and socket; the airlock interlock holds; the tethers never drop to zero from the hatch to the aft hold; an abort from
-the aft hold reaches the airlock on tethers and repressurizes.
-
-**Performance** (EXP-02, `references/p1_eva_perf.json`). Measured on the reference RTX 3070 (Compatibility renderer, OpenGL 3.3, window
-1280 × 800, VSync off, 600 frames per view after a warm-up), the six views with and without the suited pair:
-
-| View | Mean frame with suits | p99 | Without suits | Suits add | Draw calls (max) |
-| --- | --- | --- | --- | --- | --- |
-| prep (SP-12, rooms and ship) | 5.65 ms (177 fps) | 7.22 ms | 5.19 ms | 0.46 ms | 2,544 |
-| exterior (rail) | 2.75 ms (363 fps) | 3.92 ms | 1.85 ms | 0.90 ms | 471 |
-| aft hold | 2.76 ms (363 fps) | 4.00 ms | 2.13 ms | 0.63 ms | 533 |
-| radiator feed | 3.05 ms | 3.99 ms | 3.18 ms | — | 1,213 |
-| forward (Brow/EYE) feed | 6.55 ms (153 fps) | 9.30 ms | 5.77 ms | 0.78 ms | 2,063 |
-| suit cutaway | 6.72 ms (149 fps) | 8.63 ms | 5.51 ms | 1.21 ms | 2,075 |
-
-Measured 2026-10-11 with the EVA-003 lead chamber, plug and lever stations in the scene. Scene load 0.36 s, video memory 93 MB. The suits
-cost up to about 1.2 ms per frame; against EVA-002 the means moved by 0.0–0.5 ms (cutaway 6.24 → 6.72 ms), within run-to-run spread
-plus the few added meshes. The heaviest views are those that see the whole ship, not the suits. Nothing was optimized for this
-measurement. Rerun it with `godot --path godot res://scenes/eva.tscn -- --perf
-[--no-suits]` after `runtime-export`.
+The guided EVA scene (`eva.tscn`: PREP → LOCK_CHECK → DEPRESS → EXTERIOR → REPRESS → DEBRIEF, Tale's seven stations, the two-tether
+protocol and its `--check-eva`) is retired with the boarding walk that opened it; the tag `archive/pre-cleanup-2026-10-29` holds it and
+its performance record (`references/evidence/p1_eva_perf.json`). The suits, their checks, studies and GLB export remain.
 
 ### SP-12 / SP-13 exits and the L1-A bypass (owner direction 2026-10-11: 15!A135 RESCUE-004, 15!A136 DIST-004, 43 EVA-063)
 
 PERFORMANCE REQUIRED / ALL PRESSURE CUTOUTS HOLD; L1-A is the preferred disposable packaging, PRESSURE+MASS OPEN. A NONCANON study
 (`studies/eva3_exits.py`; `references/p1_eva_exits.json`, key `owner_2026_10_11` of `p1_eva_district.json`; report
-[EVA3_REPORT.md](../references/EVA3_REPORT.md) §12; renders `renders/p1/eva/district/`). Patient + rescuer + kit, not litter only: carrier S (suited casualty
+[EVA3_REPORT.md](../references/EVA3_REPORT.md) §12; renders `runs/renders/p1/eva/district/`). Patient + rescuer + kit, not litter only: carrier S (suited casualty
 on the frame) and K (litter + kit) with a rescuer at each end, sampled found poses.
 
 - **SP-12 straight exit.** The 0.90 m branch turn (S −0.12 m) and the 1.10 m widening (S −0.04 / −0.01 m) are not approved. The only variant with no turn

@@ -29,20 +29,20 @@ one reproducible, AI-assisted production pipeline.
 
 - The engineering authority is a set of private IGNITION workbooks. This repository publishes the
   inputs derived from them: `data/*.toml` holds the parameters and their source records, and
-  `simulations/*.json` holds the imported scenario data. Unknown physics stays unknown, and a local
+  `data/simulations/*.json` holds the imported scenario data. Unknown physics stays unknown, and a local
   design choice without a source is marked PROTOTYPE.
 - Pure-Python modules (`src/wayfarer/`) validate the parameters and compute the geometry.
   Blender scripts (`src/wayfarer/components/`) generate linked `.blend` libraries for components,
   subsystems and the whole vehicle.
 - A pipeline rebuilds the ship, diffs its geometry against the committed baseline
   (`references/baseline_*`), inspects clearances and interfaces, and renders previews.
-- Godot (`godot/`) loads the exported model for walkthroughs, flight timelines, crew physics
-  and guided reviews.
+- Godot (`godot/`) loads the exported model for the walk: from the development station into the
+  ship and round a habitat ring, with crew physics in the ship's frames.
 - GitHub Actions rebuilds the ship from a clean checkout on every push to `main` or a task branch
   and checks a browser version of it. Each passing push to `main` publishes that version to the
   **[Wayfarer website](https://densho-media.github.io/ignition-wayfarer/)**: Explore Ship (a 3D
   engineering viewer for desktop and phone) or Enter Wayfarer (the walk from the development station
-  round a habitat ring and back, under your own control, with the guided Demonstrator 01 tour beside it),
+  round a habitat ring and back, under your own control),
   each loaded only when chosen ([web/README.md](web/README.md)).
 - Geometry is proxy-level. Passing checks and previews are not engineering proof.
 
@@ -62,7 +62,7 @@ python3 tools/workflow.py status              # check the inputs
 python3 tools/workflow.py pipeline --quick    # build, selected tests, geometry diff, draft previews
 python3 tools/workflow.py pipeline            # full gate: all tests, whole-ship inspection, Cycles previews
 python3 tools/workflow.py runtime-export      # export the static model and check it in Godot
-godot-4 --path godot                          # explore: drag to orbit, Shift-drag to pan, scroll to zoom
+godot-4 --path godot                          # the walk: WASD and the mouse, E use, O ship operations, M map
 ```
 
 The `.blend` files, renders, runs and Godot imports are generated and are not in Git. Open
@@ -73,13 +73,14 @@ The `.blend` files, renders, runs and Godot imports are generated and are not in
 
 | Path | Contents |
 | --- | --- |
-| `data/`, `simulations/` | Production inputs: parameters, source records, scenario data |
-| `src/wayfarer/` | Validation, pure geometry, Blender generators, inspection, previews, shots, studies |
+| `data/`, `data/simulations/` | Production inputs: parameters, source records, scenario data |
+| `src/wayfarer/` | Validation, pure geometry, Blender generators, inspection, previews, shots, export |
 | `tools/` | Workflow command line, build pipeline, runtime export |
 | `tests/` | Unit tests for owner numbers and physical invariants, with their own synthetic fixtures |
-| `references/` | Current geometry baseline and generated validation reports |
-| `godot/` | Interactive scenes and scripts |
-| `web/`, `.github/workflows/` | Website (start page, viewer, Godot launcher and shell, review page) and the workflows that build, check, publish and roll it back |
+| `references/` | Current geometry baseline, generated validation reports and kept study results (`evidence/`) |
+| `godot/` | The walk and its runtime checks |
+| `web/`, `.github/workflows/` | Website (start page, viewer, Godot launcher and shell, status page) and the workflows that build, check, publish and roll it back |
+| `work/` | Unapproved work, one folder per task branch ([work/README.md](work/README.md)) |
 | `docs/` | [Model](docs/MODEL.md), [implementation](docs/IMPLEMENTATION.md) and subsystem notes |
 
 [AGENTS.md](AGENTS.md) describes the development loop that human and AI contributors follow.

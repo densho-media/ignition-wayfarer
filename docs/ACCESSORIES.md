@@ -66,7 +66,7 @@ S&E (modified 2026-10-24T09:24Z), Technology, Eye, Tale, Art Style Bible (modifi
 `data/drone_bodies.toml` (parameters), `src/wayfarer/drone_bodies.py` (pure: node trees, GU kit, actions, display-pose solver, fit screen),
 `src/wayfarer/build/drone_bodies.py` (Blender assets + GLB), `src/wayfarer/presentation/drone_preview.py` and `accessory_scene.py`
 (review renders and scene GLBs), `src/wayfarer/build/eva_grasp.py` (display grasp), `src/wayfarer/presentation/rail_section.py` (rail
-section SVG), `accessories/viewer/` + `tools/accessory_viewer.py` (standalone Godot viewer), `tests/test_drone_bodies.py` (owner counts,
+section SVG), `tests/test_drone_bodies.py` (owner counts,
 envelope classes, OPEN values).
 
 | Class | Form | Actions (SIMULATION_ONLY) | Stowed (m) |
@@ -235,32 +235,6 @@ only "if it improves qualified access without hiding volume", and ASSET-10 requi
 envelope holds a third less volume than the prototype case. No further compact geometry until EVA-051's calculation releases masses,
 capacities and energy, and until a qualified route needs the smaller section. Nothing here reduces a mission requirement to make it fit.
 
-## Standalone accessory viewer (Godot 4.7.2)
-
-`accessories/viewer/` is its own Godot project (GL Compatibility), independent of `godot/`, the runtime export and the module registry. It
-loads the GLBs from `generated/` at run time (no editor import), lists the nine designs, the rigged suited instructor and the two scenes
-(EVA tool handoff, interior drones), plays every action, and labels each motion SIMULATION_ONLY and each interface as unverified (DGT-017,
-DGT-012, FLIGHT_EVA HOLD). The suit's 15 EVA actions play; its five inherited unsuited actions are listed `LOCKED_NOT_SUITED_EVA`,
-refused when picked, with the reason in the status card (the check fails if one can play). The suit GLB comes from the ship's EVA exporter run into the stage's run folder
-(`export/eva_gltf.py --out <run>/suit`), never into `godot/generated/`.
-
-Layout: the gate bar runs across the top; the left
-column lists the designs grouped by family (interior drones, exterior crawlers, fixed arms, suit, scenes) with the readable class name
-first and a short ID beside it, then an action / status table (readable action names; `SIMULATION_ONLY` or `LOCKED`, the reason in the
-tooltip); the right column holds a status card (class name, full ID, what the model is doing — PLAYING, PAUSED or at rest — and the last
-REFUSED locked action with its reason) above the class facts and gates. Long names wrap instead of being cut, the panels are containers
-that never overlap, and the camera centres the model and the scale post in the free view between the columns.
-
-```bash
-python3 tools/accessory_viewer.py stage            # builds the drone GLBs and scene GLBs (Blender), fills accessories/viewer/generated/
-python3 tools/accessory_viewer.py open             # interactive: pick a design or scene, pick an action; drag to orbit, wheel to zoom, F to frame
-python3 tools/accessory_viewer.py check            # headless: every entry loads, every action plays, every entry carries its gate labels
-python3 tools/accessory_viewer.py shots --out <dir>   # a screenshot per entry (xvfb-run when there is no display)
-```
-
-`stage --from <run>` reuses a run folder that already has `glb/` and `scenes/`. Godot is the repository's pinned 4.7.2 (tools/web_play.py
-SHA-512); set `WAYFARER_GODOT` and `WAYFARER_BLENDER` when they are not at `/snap/bin/`.
-
 ## Run
 
 ```bash
@@ -283,18 +257,15 @@ The drone build takes about 25 s, the suit build about 1 min, the fit check abou
 minutes on 4 CPU cores (cloud session, Blender 5.2.2). Assets (`assets/drones/`, `assets/characters/`, the compact study) are local and
 ignored; GLBs and renders go to the run folder.
 
-## Review package (persistent)
+## Review package
 
-`accessories/review/` holds the curated review images committed with the code that makes them (JPEG; the index is
-`accessories/review/README.md`): the family lineup with the suited instructor as scale, a labelled three-quarter view of each of the nine
-designs in its main action, the suit turnaround (front, side, back, three-quarter) and cutaway, the baseline-vs-compact PLSS comparison
-with a pack cutaway, the EVA tool handoff with a grasp close-up, the interior-drones scene, viewer screenshots and the crawler rail
-section (SVG), the before / after sheets of the 2026-10-24 owner review (suit, exterior crawlers, grasp, viewer), the owner review and
-handoff register `HANDOFF.md` and its printed snapshot `review.pdf`. Large intermediate files and redundant renders stay out of Git.
+The standalone accessory viewer (`accessories/viewer/`, `tools/accessory_viewer.py`) and the committed review images with the owner
+review and handoff register (`accessories/review/`, `HANDOFF.md`, `review.pdf`) are retired; the tag `archive/pre-cleanup-2026-10-29`
+holds them. A new review package goes in `work/<task>/` as one REVIEW file (AGENTS.md "Where things go").
 
 ## Open and HOLD
 
-The owner review and handoff register, `accessories/review/HANDOFF.md`, is the one list of the decisions still open: visual decisions,
+The owner review and handoff register (`accessories/review/HANDOFF.md` at the archive tag) lists the decisions still open: visual decisions,
 the engineering decisions for the canonical Drive sheets (DGT-017, DGT-012, clearances, rail section, docking stations, suit readbacks,
 the deferred compact PLSS, every OPEN physics value, FLIGHT_EVA) and the ship-session requests. Also HOLD: DS-13 operations while blades
 are hot, radiator cooldown and view factor (DGT-007); Brow ram face and live drive never.
@@ -322,7 +293,7 @@ The ship session owns all ship geometry, stations, anchor positions, structural 
 
    All four stay inside their owner envelope classes (S&E 51 col G); the proxy depth is `drone_fleet.unit_size` (0.6 × the class for EVA).
    The interior classes fit their proxies.
-3. **Crawler rail cross-section**: `accessories/review/rail_section.svg` shows the captive three-wheel truck on one rail (Ø60 mm rail,
+3. **Crawler rail cross-section**: `rail_section.py` draws (default `runs/rail_section.svg`) the captive three-wheel truck on one rail (Ø60 mm rail,
    Ø48 × 20 mm wheels at 0° / ±120°, C-clamp R93 mm open 108° below with a 130 mm gap), the support web and the clearance a passing truck
    leaves for rail mounts: support webs within a 32 mm corridor down to 75 mm below the rail centre (5 mm running clearance to the
    under-wheels), wider brackets only below that, and a Ø206 mm swept envelope round the rail axis free of structure and harness. Please

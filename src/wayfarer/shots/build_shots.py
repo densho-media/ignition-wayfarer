@@ -30,7 +30,7 @@ def render(root, name, config, frames, size, out_dir=None):
     bpy.ops.wm.open_mainfile(filepath=str(root/'shots'/f'{name}.blend'))
     scene = bpy.context.scene
     shot_tools.render_settings(scene, scene['representation'], size)
-    out = out_dir or root/'renders/shots'/name; out.mkdir(parents=True, exist_ok=True)
+    out = out_dir or root/'runs/renders/shots'/name; out.mkdir(parents=True, exist_ok=True)
     for frame in frames or config['shot'][name]['review_frames']:
         scene.frame_set(frame); scene.render.filepath = str(out/f'{name}_f{frame:04}.png')
         bpy.ops.render.render(write_still=True)

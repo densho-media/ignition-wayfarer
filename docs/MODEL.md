@@ -10,6 +10,9 @@ The ordered implementation steps and acceptance criteria for Wayfarer Review Rel
 live in [TODO.md](../TODO.md). This document describes implemented behavior; a planned
 feature or a completed prototype study is not an installed or qualified system.
 
+Study scripts named below as `studies/<name>.py` are retired; the tag `archive/pre-cleanup-2026-10-29` (commit 038ae90, also in `main`'s history) holds them under
+`src/wayfarer/studies/`, and their kept results are in `references/evidence/`. New studies live in `work/<task>/` (AGENTS.md).
+
 ## Blender development previews
 
 Whole-ship standalone previews and the quick pipeline use Workbench for form and fit.
@@ -24,137 +27,34 @@ translucent glow overlay (material alpha), and Cycles remains the appearance ref
 
 ## Runtime representation
 
-The Godot project opens on a review menu of guided review sessions (U01). A guided session overlays its scene with a
-development review guide: one step at a time, the keys that work in the current state, what should be seen, and the result
-or the refusal reason of the last key; the scene's engineering text stays one muted line. Steps complete on the scene's
-real state (Ring B: body mode on, standing on the ring B deck, 3 m walked, a dropped tool landed, body mode off). It is a
-review tool, not game UI, and moves nothing. Each step also names the source status of what it shows as outlined badges read
-from the rig (CANON, DERIVED, WORKING, PROTOTYPE, DIAGNOSTIC, OPEN, HOLD; owner 2026-10-17 OWN-PROD), and the menu shows the P0
-science gate (15!A200: mass, reaction mass, fusion fuel and drive heat unreleased; flight playback SIMULATION_ONLY).
-Every interactive scene has a guided session: Ring B body mode (5 steps), the vestibule drill (7), the EVA drift (10: GO check,
-depressurize, step out, G push toward rail anchor ANC_AFT_00 and H grab, T clip tether B, Y tug-test, R release tether A (refused
-before the test, with the reason), G push straight out until tether B catches, F back, repressurize), the First Ignition timeline
-(6: play, spin-down and lock, burn, X look, Y the Y155 scenario, a named state), the induction walk (one step per stop group), the
-ship inspector (6: views, select, focus, isolate, restore, mount legend) and Demonstrator 01 (one step per chapter; A autoplays the
-body actions and Enter moves on, so the reviewer sets the pace). G in the EVA session is a review aid only: the same profile push
-as Space, aimed at the step's target. A scene that already uses I (the inspector's isolate, the Ship Navigator's systems card)
-keeps it; Demonstrator 01's detail line opens with Tab.
+Two experiences consume the generated package; neither computes spacecraft geometry.
 
-The Godot inspector consumes a generated static COAST frame-1 GLB snapshot of
-the same parametric ship. It provides orbit, pan, zoom and side/top/three-quarter
-views. Clicking a visible part or choosing a subsystem selects and highlights its
-assembly. The sidebar provides focus, hide/show, isolate/restore and hull
-visibility. Double-click or F focuses the selected subsystem. A picked part shows
-its source name, geometry status, source status and source reference from the
-export manifest; a subsystem selection summarizes its parts and references.
-Controls bind to semantic assembly names using each current manifest, so changing
-snapshot mesh IDs does not require hand-editing the Godot scene. Picking uses
-visible mesh triangles without creating physical collision bodies.
-Evaluated curves and linked geometry retain their dimensions and poses;
-debug fields, mannequins and simulation cages are excluded. Materials are static
-presentation approximations. There is no runtime physics or walking; the timeline
-player turns the rings and replays the display objects' drivers, and the free
-camera's only collision is the route envelope and, in ring A's sectors, their clear
-volumes (RT-006: the rig's `induction_route.rooms`, from `sector_whitebox.clear_volumes`:
-aisle, landing well, access and couch strips, berth spaces and Seraph's niche, 32 boxes
-with a `suited_access` flag; false is shirt-sleeve-only maintenance access, not suited egress, SERV-STRIPS-2026-10-10,
-15!A119, rig contract 26; the units behind those strips and their depressurized-sector cases are in references/SERVICE_STRIPS.md; the ECLSS-REC-2026-10-10 compartment, closure and repressurization map, 15!A124, is in references/ECLSS_RECOVERY.md). There the eye moves only inside their union, and with B the walking
-body's eye stands at eye height over the deck, with its spin gravity and Coriolis readout. A node record's `frame` names the
-ring or despun drum it turns with; the export finds it by turning each ring and drum
-in Blender, so the sector shells and their linked interiors turn too. The accompanying rig data retains source status and unknown values.
-Generate it with `python3 tools/workflow.py runtime-export`; the export rebuilds
-in a disposable workspace and does not change production Blender assets.
+- **Explore Ship** (`web/explore/`, three.js): the static COAST GLB (Draco) with the export manifest. Orbit, pan and zoom, the side,
+  top and three-quarter views, picking by semantic `Assembly_*` lineage, and the standard, subsystem-hologram and engine-hologram
+  styles (`representation.py holo-style`, `shots/m5_subsystems.toml`). A picked part shows its source name, geometry status, source
+  status and source reference; a PROTOTYPE geometry label is never promoted by a sourced reference.
+- **The walk** (`godot/scenes/excursion.tscn`, "Station-to-ring excursion" below): the Godot project's main scene and the web
+  launcher's Start, on the DOCKED package and the rig.
 
-The inspector's **Board Wayfarer** button opens the guided induction walk (IND-001
-phase 5) in a separate DOCKED snapshot. It reads the route graph in the rig
-(`induction_route`) and computes nothing. W/S or the hold buttons move a
-presentation camera along one rail through the whole induction: the primary
-airlock, the stationary spine, ring A's transfer drum, and sectors 1, 3 and 2, ending
-at the burn station (the departure is Tale-owned, Q48). The camera follows the passage axis while floating and on the
-ladders, and stands at eye height with the deck's up on the aisles. The stop list
-jumps to each of the eight stops' eye-level views, the same views as the Blender
-stills. The stop panel gives the title and scenes, the operating state and its
-step (rings stopped and locked, or rotating at 4 rpm, drawn at the index angle),
-the leg, and the ladders and openings being passed. The characters of the
-current stop's scenes appear as static proxies. Right-drag looks around, R resets
-the view and Escape returns to the inspector. F leaves the rail for free flight
-(RT-004): WASD, Q/E and right-drag move and turn the camera at the rail's review
-pace (Shift ×8) until a stop, the rail or R brings it back. The route envelope
-holds it within 0.35 m of the rail (`induction_route.envelope`, the suited
-envelope radius): floating and on the ladders that is the suited body the route
-sweeps check against every fixture and wall, and on the aisles the eye inside the
-walking body's head sphere. The camera slides along the envelope, passes every
-opening the route passes and seals none; a stop view that starts outside it may
-only move inward. C switches the envelope off for inspection through walls.
+**In Blender** the vehicle file `WF_WAYFARER_001.blend` opens as `GEN_WF_WAYFARER_001` with `10_SHIP` (the linked assemblies by
+system: `11_STRUCTURE` STRUCTURE, HULL; `12_DRIVE` PROPULSION, SHIELDING, POWER_STORAGE, STORAGE; `13_THERMAL`; `14_HABITAT` HABITAT,
+ROTOR_INTERFACE, CREW_TRANSFER; `15_FORWARD` FORWARD_SHIELD, EYE; `16_SERVICE` SERVICE, DRONES), `20_HUMAN_SCALE` (one group per scale
+figure), `30_CAMERAS` (the first-person review views) and `40_SIM_RIG` (anchors and the hidden simulation proxies), beside the empty
+`ART_WF_WAYFARER_001`. Each system group carries its outliner colour (AGENTS.md "Inside every .blend"). The groups change no object, transform or link.
 
-Past the spine stop the walk is in COAST (RT-004). The rings spin up over 20 s to their exported rate
-(ring B the other way). Going back, they spin down, timed to come to rest at their index. The
-camera rides the frame of the zone it is in, as the rig's `induction_route.frames` assigns it:
-the entry and trunk are stationary, the drum chamber turns with the drum, and the tubes, landings
-and sectors turn with the ring. Static characters ride the frame of the route zone nearest to them.
-Every closure on the route works as a display sequence, each by its kind (`kind` on each route
-opening):
-- **Airlock:** the primary port's outer hatch opens from the outer half of the chamber and the
-  inner hatch from the inner half, never both at once.
-- **Spine-port gate:** opens only with the drum despun at rest at the index.
-- **Drum and tube hatch:** once the camera is inside the drum, the gate closes and the drum waits
-  for ring A at full speed and for tube 1 to come round. It then spins up in 4 s, meeting the tube
-  at full speed, and only then do the drum door and the tube hatch open. On the way back the drum
-  despins onto the spine port.
-- **Sector leaf:** slides open as the camera nears it.
+**Zones.** Every exported node record carries `zone` (`representation.zone`): `INTERIOR:<area>` for crew-side fixtures, fit-out,
+passages and interior production detail (areas RING_A and RING_B by the ring frame a node turns with, TRUNK, SERVICE, else SPINE),
+`SHELL` for the sector pressure envelopes and the storeroom shell, `EXTERIOR` for the rest; the manifest's `zones` counts them. One
+model is tagged, never split into copies; inside the subsystem files exterior and interior are still mixed, so Blender cannot yet
+toggle all interior at once (TODO). Whether hiding a zone pays has not been measured (`profile_views.gd --hide-zone`).
 
-The camera stops short of any closure that is not fully open. Each closure opens when the camera is
-within 3 m of its opening and takes 2 s. The pivots, axes, rates and closure travels come from the
-export (`manifest_docked.json` `induction.mechanisms`), which checks each against a Blender pose,
-or for the undriven sector leaves against `human_entry.landing`. The timings are display choices:
-the ring ramps (S4/S6/S7) and the drum's sync cycle (MEC-019) are OPEN. B switches to body pace:
-the review speed of 0.5 m/s, rung by rung on the ladders (0.30 m per step). The body line then
-shows what a body moving with the camera feels in the turning frame: spin gravity ω²r away from the
-axis and the Coriolis push −2ω×v. On a crew-tube ladder it also shows the push across the ladder for
-the climber's body, which stands 0.36 m from the rail toward the ladder: onto the rungs, or off them.
-`runtime-export` walks the whole rail from the outer hatch to the burn station and back headless
-(`boarding.gd --check-transfer`). The check requires that the camera is never inside a closure that
-is not fully open and that no closure opens outside its safe state. The camera may change frame
-only where the frames coincide, and the rings must come to rest at their index. On ring A's first
-tube ladder, the body line must match `human_entry.ladder_push`: lean 0.027 g toward the ladder,
-Coriolis 0.085 g per m/s, a climber pulled off when climbing. The walk takes about 148 s forward,
-with about 24 s of waiting. A stop or slider jump sets every mechanism to its steady state at once.
-The walk is lit by the S004 look (FUT-003, `[look]`, below): a point light hangs on each emitting
-surface of a light class, pushed up to 0.12 m toward the rail when the rail passes within 6 m, and only
-the 16 nearest within 14 m of the camera are on. The ambient is dim and tone mapping is AgX. L
-switches to the flat inspection light.
-This is camera navigation through PROTOTYPE geometry with presentation lighting. It does not
-simulate bodies, collisions, pressure cycling or a closure procedure, and rooms off the route
-(berths, stations) are seen, not entered.
-
-The inspector's **First Ignition · timeline** button opens the timeline player
-(RT-003) on the COAST snapshot. It plays the generated First Ignition timeline
-(`wf_first_ignition_timeline.json`, packaged with the rig hash) from the induction
-to the coast after cooldown: play, pause, step, scrub, a speed choice, the phase
-list and the `TL_*` marks. Both rings turn about the pivots the export records for
-each `Rotor_n` (`manifest.timeline.mechanisms`), by the driver's rate times the
-timeline's `rotor.spin_turned`, so they spin up, slow to rest at their index angle
-and stay locked through the burn exactly as in the Blender shot. The panel shows
-the phase, its time scale, the DERIVED kinematics and the shown states with their
-classes (configuration, rings, drive and display throttle, radiator step, EYE mode).
-The display objects follow the same timeline: the drive's seed coils,
-lasers, optical legs and gates, lattice sectors and plasma cores ramp in at drive
-start and out at shutdown, the radiator thermal-glow steps change with the thermal
-state (white-hot through the burn), and the Dust Lance field zone shows while the
-field is on. Their tracks are baked by the export from each object's own Blender
-driver, so Godot repeats the shot's display logic without a formula of its own.
-Colours and emission are the static materials of each object's fullest pose,
-faded by opacity. The timeline holds the Crown, shield damage and radiator cell
-health at COAST, so the player also lists named states outside it: the six
-buildable configurations, the display poses `DEFENSE_ENGAGED` (the four bays
-around azimuth 0.125 turn move forward 2.949 m and their shutters slide 3.1 m),
-`SHIELD_DAMAGED` and `RADIATOR_DAMAGED`, and the drive actions that settle off
-nominal (idle, laser A/B/both, gate L1 and flux channel F3 failures, PROTOTYPE, on
-HIGH_POWER). A state shows the values the export baked from the same drivers at
-that state's control values (150 driven objects in all, 16 Crown meshes moved by
-location drivers), with the rings turning at the state's spin fraction; picking a
-phase, a mark or the slider returns to the timeline. Views 5 and 6 look at the
-shield face and the nozzles.
+`python3 tools/workflow.py runtime-export` builds in a disposable workspace, exports the COAST and DOCKED snapshots (manifest, rig,
+route, mechanisms, frames, characters) and runs the Godot checks before publishing; it never changes the production Blender assets.
+Evaluated curves and linked geometry keep their dimensions and poses; debug fields, mannequins and simulation cages are excluded,
+and materials are static presentation approximations. A node record's `frame` names the ring or despun drum it turns with; the
+export finds it by turning each ring and drum in Blender, so the sector shells and their linked interiors turn too. The rig keeps
+source status and unknown values. `godot/scripts/profile_views.gd` measures the walk's station view and an outside ship view on the
+current machine (frame time, draw calls, primitives, memory); `--hide-assemblies` and `--hide-zone` hide detail for a comparison.
 
 ## Overview
 
@@ -285,76 +185,8 @@ are not modeled; the ring sectors carry only rough PROTOTYPE interior blocking.
   induction shot `SH_INDUCTION`, camera cuts through the eight induction stops. The animated First Ignition
   flight `SH_FIRST_IGNITION_FLIGHT` (FUT-006) overrides the linked vehicle and keys its controls from the
   flight timeline over 1369 frames (below).
-  The M5 functional cutaway (`SH_M5_FUNCTIONAL_CUTAWAY`, close-up `SH_M5_BODY_C_CUTAWAY`) colours every shot item by one of
-  twelve functional subsystems (`shots/m5_subsystems.toml`: overlay colour, selectors, source references, maturity; explanatory
-  colours, never materials), cuts the camera side and caps cut solids in their subsystem colour. It also links the BODY-C storage
-  study asset `assets/wayfarer/studies/WF_STUDY_BODY_C.blend` (`studies/m5_cutaway.py`, STUDY / NONCANON, outside the vehicle,
-  inspection and runtime export): He-3 (3.2 K) and D2 (20 K) cryostats as separate inner vessels with their insulation allowance,
-  keel-lane supports, manifolds and crawler lanes, refrigeration / pump / vent utility frames, the equipment bay as the 34 fore
-  envelopes, the workshop fallback, the spine tunnel and the unhoused volumes as scale bars under the ship (not locations). Against
-  S&E 62 no packaging holds the stored inventory; the numbers are in the M5 report. `SH_M5_EVA_FORWARD` / `SH_M5_EVA_AFT` link the EVA
-  L2 comparison asset `WF_STUDY_EVA_L2.blend` (`studies/m5_eva_l2.py`, COMPARISON MODELS, no rail released): forward-district collar,
-  shield-rear and rim rails from the SP-11 airlock, the blocked spine crossing of the rotor bay and the aft casing rails of a hypothetical
-  aft hatch, each screened against the built meshes with the measured suit envelope.
-  `SH_M5_DRIVE_SUPPORT` / `_SIDE` link the nozzle support study `WF_STUDY_DRIVE_SUPPORT.blend` (`studies/m5_drive_support.py`,
-  STUDY / NONCANON) with the field-envelope display surface hidden, so the nozzles read as hardware rather than exhaust tubes: a
-  0.035 m cryostat around each Nozzle_Coil, eight cold-mass supports per coil to the warm yoke, helium lines and current leads
-  outside the yokes to every coil, a cryocooler and a quench-dump unit per nozzle on the thrust-ring aft face, and a comparison
-  thrust frame (two bipods per nozzle from yoke rings 1-2 to the flanking ring nodes) beside the built pickups.
-  `SH_M5_LETTERING_*` link the lettering asset `WF_STUDY_LETTERING.blend` (`studies/m5_lettering.py`, Y155 LOOK DIRECTION /
-  REGISTRY NONCANON, 15!A216): L1 `GU WAYFARER 001` off-white name band, L2 stacked charcoal GU / WAYFARER stencil with an aft `001`,
-  L3 service identification and R1 `GU-WF-001` production decals at the docks and the aft casing (`SH_M5_LETTERING_R1_DOCK`), each
-  annotated as an artistic prototype, not an issued registry. Painted onto the measured skin in the two M4 colours; no crest.
-  The isolated technical holograms `SH_M5_HOLO_S01`…`S12` show one subsystem each (camera fitted to it) and `SH_M5_SUBSYSTEM_HOLOGRAMS`
-  steps through all twelve in 30-frame segments, both in the subsystem overlay colours over the vehicle plus the BODY-C and nozzle-support
-  study assets.
-  `SH_M5_RCS_BALANCED` / `_RIM` / `_AFT` link the RCS-B study `WF_STUDY_RCS_BALANCED.blend` (`studies/m5_rcs_balanced.py`, 15!A212
-  LOW POWER CANDIDATE): an alternate balanced RCS beside the unchanged S02 jets, with three rim pods between Crown bays (B1; B2 reuses the
-  four as-built rim bays) and three aft hull pods at X -92 between the blades. The radial nozzles have no cant, and the roll nozzles are
-  canted outward, so every couple is force-free. 15 deg plume cores are drawn for both sets.
-  `SH_M5_NOZZLE_FRAME` / `SH_M5_NOZZLE_MOUNT` link `WF_STUDY_NOZZLE_MOUNTS.blend` (`studies/m5_nozzle_mounts.py`, 15!A214/A215 L2
-  STUDY). It adds two things beside the slice 4 study: inboard bipods from yoke rings 1-2 to the central thrust hub, which with the
-  slice 4 outboard bipods make the symmetric frame F8 (in full force and moment equilibrium), and variant coil mounts. The variant
-  mounts are: yokes at a 0.25 m standoff, folded re-entrant supports with an 80 K intercept ring, and throat-coil cryostats on a bore
-  enlarged for >= 0.05 m plasma clearance.
-  `SH_M5_AFT_ROBOTIC` / `_RING` link `WF_STUDY_AFT_ROBOTIC.blend` (`studies/m5_aft_robotic.py`, 15!A213 WORKING DIRECTION robotic-only
-  aft). The robot-only casing tracks are the slice 3 option C lines without a hatch, joined to the DS-13 track and the DS-14 cradles. The
-  57 aft service targets are coloured by robot reach, and the two HGA gimbals out of reach carry their gap and a boom-spur fallback.
-  The study data also hold the HGA gimbal ORU concept (boom-root flange inside robot reach) and the third aft cradle at 210 deg.
-  `SH_M5_BODY_C2_CUTAWAY` links `WF_STUDY_BODY_C2.blend` (`studies/m5_body_c2.py`, 15!A207:A209). It uses the BODY-C installation with
-  each of the 27 lobe slots holding one species, He-3, D2 or H2, in its own jacketed vessel, assigned so every species is housed at about the
-  same fraction of its first-ignition need. The study also gives the bay's free volume, the interfaces and the tankage dry-mass ledger
-  (masses UNKNOWN; main-engine feed pumps, valves and lines TK-FN-01/02 in the 250 t drive package, 15!A219). It is the owner's
-  reference layout (15!A218), with BODY-C kept as the baseline.
-  `SH_M5_BODY_C3_CUTAWAY` links `WF_STUDY_BODY_C3.blend` (`studies/m5_body_c3.py`, 15!A218). It holds C2's vessels regrouped so each
-  ring module carries one species: aft to forward D2, H2, five He-3 modules round both refrigeration frames, then H2. Capacity and
-  deficits are unchanged.
-  `SH_M5_RCS_BALANCED_AFT` also shows the B1F fan: two aft nozzles per pod canted +-30 deg tangentially. The attitude-mode and COAST
-  comms sheets come from `studies/m5_gnc_comms.py` (15!A210/A211).
-  In Godot, `scenes/m5_holo.tscn` (review menu 8, guided; M5 chapters 1-5 and M6 chapters 6-8) draws the published COAST ship and `generated/m5/m5_studies.glb` (the two study
-  assets as saved) as an additive hologram in the same overlay colours, from `generated/m5/wf_m5_holo.json`
-  (`export/m5_hologram.py`, a runtime-export step): every runtime node classified by `shots/m5_subsystems.toml`, the study part
-  records, and four propulsion/fuel chapters (thrust chain, fuel against BODY-C packaging, coil cryogenics, nozzle load path) with
-  their owner-row badges, emphasis colours and the deficits and loads read from the M5 references. Chapters and single subsystems isolate;
-  the dorsal cutaway clips only the context; the study layer toggles; a clicked part shows its source and geometry status. The field
-  envelope stays hidden and no drive, field or plasma animates (15!A217).
-  Chapter 5 (attitude and comms, `scripts/m5/m5_gnc.gd`, data from `references/m5_gnc_comms.json`) plays a mission clock over the
-  same hologram. The three modes (FORWARD_PROTECTED with the 0.2 deg target inside the built 2.22 deg shadow limit; LOW_HAZARD_SLEW, which
-  turns the ship at the 0.05 deg/s reference with the B1F start / stop cones lit; MAINTENANCE_HOLD with the aft jets inhibited) and burns
-  (FORWARD_PROTECTED only). Earth lines from the three aft gimbals are green or red from the exported built-model sky grids for the current
-  attitude, Earth phase and burn state. Light time is d x 499 s. The backlog is counted in hours of generation and drains in store and
-  forward at an ILLUSTRATIVE display ratio; bytes and kb/s stay null. The RCS-B plume display cones (WF_STUDY_RCS_BALANCED, in the study
-  GLB) show only in this chapter.
-  Chapters 6-8 (M6, 15!A220, `export/m6_holo.py`, `scripts/m6/`) drive the same published nodes:
-  - **Chapter 6:** steps the exported forward-defence display poses (eyelids, a jammed facet, the Crown prepared, engaged and degraded,
-    shield damage) and tests the protected shadow. An ILLUSTRATIVE dust stream meets an alignment error against the built-model limit
-    (2.224 deg worst; the 0.2 deg TARGET).
-  - **Chapter 7:** turns the two rings on the exported rotor pivots at 4 rpm, opposite, and stops and locks them at an index angle
-    (PRESENTATION ramp; duration OPEN). A crew marker walks the induction rail with the spin gravity w^2 r it would feel (DERIVED).
-  - **Chapter 8:** steps the radiators' BASELINE operating sequence and damages cells in the PROTOTYPE fault order. It then isolates or
-    requalifies them and can isolate one blade's PROTOTYPE loop. The in-service share is a measured cell-planform readback; heat
-    rejection, flow and waste heat stay UNKNOWN.
-  - `--chapter=<id>` opens a chapter directly.
+  The M5 study shots and the M5/M6 hologram scene are retired (tag `archive/pre-cleanup-2026-10-29`); their numbers are in
+  `references/evidence/m5_*.json`, and `shots/m5_subsystems.toml` still classifies the web viewer's subsystem hologram.
 
 ## Sources and implementation
 
@@ -394,7 +226,7 @@ The 330 t rotating-system mass (165 t per ring) is a PROVISIONAL reallocation of
 existing allowances, not extra vehicle mass; the 180 t water is ~160 t rotating plus
 ~20 t stationary refuge shell, not additive. Mass items carry the owner's qualitative
 regions (`13_MASS_POSITIONS`). A PROTOTYPE centre-of-mass and inertia proposal for
-owner feedback is in [p1_mass_proposal.json](../references/p1_mass_proposal.json).
+owner feedback is in [p1_mass_proposal.json](../references/evidence/p1_mass_proposal.json).
 The spec and rig keep the centre of mass, inertia, reaction-mass load, fusion-fuel
 load and drive output unknown. The reactor shadow shield and the magnet/cage support (the nozzle yokes) are unsized,
 non-additive suballocations inside the 250 t engine package (P5/P6, 15!A111, 10!A24:A25): their objects carry
@@ -597,7 +429,7 @@ in library overrides inside the shot.
 ## Simulation rig
 
 - 42 `WF_SIM_*` anchor empties in the vehicle, with the same frames and sourced
-  quantities in `simulations/wf_sim_rig.json` (contract version 19), including the
+  quantities in `data/simulations/wf_sim_rig.json` (contract version 19), including the
   shield face, the Dust Lance tip, the field zone and the 12 Crown sectors. Anchors
   reference the `IF_*` interfaces, and inspect verifies they coincide.
 - The contract separates `flight_thrust` (16.18 MN) from `structural_design_load`
@@ -621,7 +453,7 @@ in library overrides inside the shot.
 
 ## First Ignition timeline
 
-`flight_timeline.py` writes `simulations/wf_first_ignition_timeline.json` from `[flight_timeline]` (FUT-004), and the build rewrites it with
+`flight_timeline.py` writes `data/simulations/wf_first_ignition_timeline.json` from `[flight_timeline]` (FUT-004), and the build rewrites it with
 the rig. It is data for the flight animation; it changes no geometry.
 - **Phases** (PROTOTYPE order, 1739 frames at 24 fps): the induction's three steps, taken from `[induction].sequence` (board docked, the
   visiting craft undocks and the rings spin up, the COAST tour), then the conditioned coast with the coolant loop online, spin-down, stop
@@ -638,7 +470,7 @@ the rig. It is data for the flight animation; it changes no geometry.
   kinematics, as imported), DERIVED (the display throttle a / 1.5 g) or PRESENTATION (switching instants and curves).
 - **Kinematics** come from the sheet-computed route, never from a Claude formula (NAV-027, 26_BLENDER_CONTRACT C-001):
   `tools/route_import.py` (`workflow.py route-import`) copies 23_ROUTE_FRAMES with 22, 24 and 25 from the capture the `route_frames`
-  source record names into `simulations/wf_route_v1.json` (scenario WAYFARER_001_IGNITION_V1, DIAGNOSTIC_1D_FIRST_IGNITION), and refuses
+  source record names into `data/simulations/wf_route_v1.json` (scenario WAYFARER_001_IGNITION_V1, DIAGNOSTIC_1D_FIRST_IGNITION), and refuses
   unless 25_ROUTE_VALIDATION rows 2:13 all PASS (C-009). The burn plays one route row per frame, linear between rows (C-010): acceleration,
   speed, traveled distance and mission time are the row's columns. Before ignition they are zero, after it the speed holds; the distance
   after the burn is only a lower bound, because the coast time is OPEN. The timeline stays at the project's 24 fps, so the 900 rows play in
@@ -648,7 +480,7 @@ the rig. It is data for the flight animation; it changes no geometry.
   FLIGHT-FRAMES 15!A117): Sheets alone computes and releases the non-trajectory states, as two products. `tools/frames_import.py`
   (`workflow.py frames-import`) declares 12 time-tagged continuous channels (S1–S4 mass, propellant, mass flow and thrust; reactor and
   nozzle power; hot, warm and cold loop heat; S6 measured spin per ring; S7 bus power) and two phase/event streams (OD-010 degraded-mode
-  phases, OD-028 radiator-failure events) in `simulations/wf_flight_frames_v1.json`. A continuous table has field names in row 1, units in
+  phases, OD-028 radiator-failure events) in `data/simulations/wf_flight_frames_v1.json`. A continuous table has field names in row 1, units in
   row 2, then owner samples with mission_t_s, scenario_id and scenario_version, status, source, the owner's validation and a frame only
   where the sample falls on a 23_ROUTE_FRAMES frame; a phase or event table has its id and start/end (or event) mission_t_s, and an empty
   time stays untimed. Everything is UNKNOWN with null values until Sheets releases its table; a released table is copied as stored and
@@ -691,19 +523,7 @@ the same three 182.149 m blades at 1800 K (40!B7:B10, B23 unchanged). `thermal_b
 calibration. Y155 study (ε 0.96, F 0.92, WORKING SCENARIO / UNQUALIFIED): ×1.09037, 15.703 GW, −8.3 % theoretical area, 0.297 GW deficit;
 optimistic sensitivity (0.98 / 0.93): ×1.12519, 16.204 GW, 0.204 GW ideal spare (not a margin). Every result is DIAGNOSTIC / UNQUALIFIED:
 no blade is shortened or resized, and actual drive heat, other loads and 1800 K material qualification stay OPEN. The rig carries the
-cases (`thermal.y155_scenario`, contract v42); the First Ignition timeline shows them on key Y (check `flight-y155`).
-
-**Thermal explorer** (Milestone B, S&E 58 MECH-002 / 59 POL-008 coupling; `godot/scripts/thermal_explorer.gd`, key T in the First Ignition
-timeline). An educational heat balance of the three fixed hot blades. It starts at the rig's values: the 16 GW root calibration
-(DIAGNOSTIC, 40!B16), the root surface ε 0.90 / F 0.90 or a Y155 case, 1800 K (WORKING, the upper limit) and the as-built
-2 × 14,934.5 m² net hot faces (40!A21). The visitor can vary the heat input (labelled HYPOTHETICAL), the surface case, a lower blade
-temperature, the share of the area in use (isolated cells) and a duration. It shows:
-- gross emission εσAT⁴ and the net to space F × gross. The rest (1 − F) lands on Wayfarer's own hull, rings and shield and is not
-  rejected. At the calibration point the gross emission (16.002 GW) nearly equals the input, so the 1.598 GW deficit is the
-  self-view share;
-- the deficit or the ideal spare (never a margin) and the heat accumulated over the duration, in joules. With no area over the
-  First Ignition ramp this is 1.0435×10^16 J, as 40 row 38 gives it;
-- the steady blade temperature that would close the balance (1848 K at the calibration point, above the WORKING 1800 K).
+cases (`thermal.y155_scenario`, contract v42).
 
 No temperature rise is shown: the loops' heat capacity and the Heat Debt state are OPEN (40!B13, B15). The actual drive waste heat
 (40!B11) stays OPEN. Sunlight and the space background are left out: neither is sourced and the Sun distance is UNKNOWN. The blades are
@@ -777,12 +597,6 @@ exact empty day is recorded. Run through the simulator, the owner's eleven 41 re
 - makeup 4,558.32 kg at 90 % and 911.664 kg at 98 %.
 
 The 10 t category runs out on day 1,092.9 for five consumers (day 455.4 for twelve).
-
-`godot/scenes/life_support.tscn` (`life_support.gd`) runs the same step on `generated/wf_life_support.json`, which `runtime-export`
-writes. The visitor can switch to the 12-person stress case and change the water recovery, the O₂ recovery, the Garden share and
-hypothetical O₂, water and food stores. They can scrub or play the six years, read the per-resource ledger at the cursor and see the
-stores, needs and deficits on a chart. A changed input reads HYPOTHETICAL. A Garden or O₂-recovery share is an UNCLOSED source:
-its water, CO₂, light power and plant mass are not modelled. Machine power, mass and volume are not included (41 OPEN rows).
 
 Checks:
 - `life-support` (4): the module's checkpoints for four scenarios, the 41 results, the daily mass ledger (worst 3e-9 kg) and the labels;
@@ -1370,13 +1184,10 @@ geometry and carries no load. It changes no pressure boundary, interface, volume
     every item that reaches the overhead, the hatch opening and the landing well's column. Housings round the aisle lights. Nothing
     comes below -2.85 m. On sector instance `(1, 1)` (anchor `WF-RING-A.SECTOR.1.1`).
 - **Runtime:** the production nodes (manifest v2: `layer`, `representation`, `assembly`, `maturity`, `surface_class`) are drawn
-  within 28 m of the camera and fade out beyond (`godot/scripts/production_layer.gd`, in the boarding, inspector, flight and
-  hologram scenes). Demonstrator 01 ends with ARRIVAL (the ring A sector 1 habitat stop) and INSPECT (the layer off and on over
-  the same geometry, at the entry-chamber stop where `M7.ENT` fills the view). Measured cost: `references/M7_PERF_2026-10-19.md`.
-- **Hologram styles (WEB-003):** Demonstrator 01 (F3) and the web viewer redraw the same meshes as the M5 subsystem hologram (overlay
+  within 28 m of the camera and fade out beyond (`godot/scripts/production_layer.gd`, in the walk). Measured cost: `references/M7_PERF_2026-10-19.md`.
+- **Hologram styles (WEB-003):** the web viewer redraws the same meshes as the M5 subsystem hologram (overlay
   colour per subsystem, additive rim and scan) or the engine exposition hologram (one colour, rim glow), from `wf_holo.json`
-  (`representation.py holo-style`: `shots/m5_subsystems.toml` and the SH_ENGINE_HOLOGRAM colour). Instance overrides only; the M5
-  scene shares the shader (`godot/scripts/holo_style.gd`).
+  (`representation.py holo-style`: `shots/m5_subsystems.toml` and the SH_ENGINE_HOLOGRAM colour). Instance overrides only.
 - **Value hierarchy (M7.1, owner 2026-10-20):** `[production.materials]` steps from inhabited panels (warm off-white, ~0.69 linear)
   through service panels (~0.45), machinery (~0.26) and structure and housings (~0.15) to trays and seams (0.05). Fasteners are dulled.
   No texture maps.
@@ -1611,14 +1422,9 @@ configuration, look, sun (presentation choice, pointing OPEN) and exposure; `p4_
 
 ## Phase 4 grammar study (S1)
 
-`studies/p4_s1_grammar.py` is the NONCANON S1 experiment of [PHASE4_PLAN.md](PHASE4_PLAN.md) (owner P4-EXP, 2026-10-24): it builds
-ART_P4 objects in memory on the saved vehicle, renders matched views and saves nothing; no generator reads it. Six variants on Crown
-bay 1 with its 30° Brow aft sector and on one ring A 15° segment, each repeated on all bays and ring segments only for the whole-ship
-read: V0 (M8.1 as built), V0T (V0 plus the dark COAST blade depiction alone), VA civic, VB open machine, VC restrained hybrid, VC+
-expressive hybrid. Material families are depiction-only PROTOTYPE (S&E 15 `OWN-P4-LOCKED-2026-10-24`, Art Style Spacecraft row 18);
-the IGNITION views keep the 1800 K emission. Its screens reuse the `m8_forward` pack checks and the ring frame, sweep and sector
-envelopes. The owner selected VC+ with moderated values on 2026-10-24 (next section); the study itself stays NONCANON and reproduces
-the S1 images exactly at 88ab15a.
+The NONCANON S1 experiment of [PHASE4_PLAN.md](PHASE4_PLAN.md) (owner P4-EXP, 2026-10-24) compared six exterior variants on Crown
+bay 1 and one ring A segment; the owner selected VC+ with moderated values (next section). Its script is retired with the other
+studies (tag `archive/pre-cleanup-2026-10-29`, reproduces the S1 images at 88ab15a).
 
 ## Phase 4 exterior grammar (S2)
 
@@ -1680,8 +1486,8 @@ beside SP-11 and serviced in SP-13 (43 EVA-040), and the legacy 0.70 m `suited_e
 (EVA-041). The SP-11 door and chamber candidates (1.00/1.10/1.20 m, two-person and sequential) and the SP-12/13 rooms are a STUDY measured
 against the vehicle, never ship geometry (EVA-043). The exterior route is a TRAINING SIMULATION on the stationary forward collar along the
 SP-11 airlock's azimuth (X 95.6–106.0 m): every hold is SIMULATION_ONLY and FLIGHT_EVA is HOLD (locked, 45 O-07) because the ring,
-thermal, debris, radiation and anchor gates have OPEN inputs; nothing in the vehicle changed. The Godot scene `eva.tscn` runs it from the
-boarding walk.
+thermal, debris, radiation and anchor gates have OPEN inputs; nothing in the vehicle changed. Its Godot drift scene is retired (tag
+`archive/pre-cleanup-2026-10-29`); the suit assets and `eva_*.py` screens remain.
 
 ## Crew physics
 
@@ -1695,69 +1501,10 @@ static in the frame); a body changing frame transforms position and velocity tog
 follow the owner sequence (drive off, occupants secured, spin down, lock, then HIGH_POWER; DYN-026, WORKING scenario, no event time) and
 hold fail-closed; the rotary vestibule opens only the side the drum matches, with the occupant restrained and pressure equalized, and
 hands over position and velocity with ω×r (DYN-027). Mode transitions are SIMULATION_ONLY, the drive's acceleration under thrust is the mode's envelope bound
-(labelled, never a flight value), FLIGHT_EVA and the casualty route stay HOLD, and no key accelerates an unpowered body. The flight scene
-plays the released 1-D route (`wf_route_v1.json`) exactly, ship at the origin. The boarding body tour (key N) floats the newcomer along the real trunk handrails (DOCKED) and walks ring A's A1 aisle or ring B's B1 aisle (COAST; ring B's sector clear volumes since contract 41), and the EVA drift leaves the real SP-11 hatch on the forward collar; their colliders come from the shared route and hull formulas (rig `dynamics.stages`, contract 28; the crew tube stage since contract 30, the access from the trunk through the drum since 31; `wf_eva.json` `collider`), never from the visual meshes. Blender bakes recorded traces onto proxies
+(labelled, never a flight value), FLIGHT_EVA and the casualty route stay HOLD, and no key accelerates an unpowered body. The walk (below)
+moves the trainee through these frames; its colliders come from the shared route and hull formulas (rig `dynamics.stages`), never from
+the visual meshes. Blender bakes recorded traces onto proxies
 (`shots/physics_traces.py`); a character there is an ARTISTIC layer.
-
-## Integrated Demonstrator 01
-
-The owner's next production milestone (S&E 48 WF-005/WF-025, 47 SIM-032, 15 FOCUS-001) is one continuous run that reuses the built
-parts. `godot/scenes/demo01.tscn` (`demo01.gd` over the boarding host) has seven chapters. EXTERIOR shows the DOCKED ship. ENTRY moves along
-the review rail through the airlock to the stationary spine. In MICROGRAVITY the newcomer's crew-physics body grips a real trunk rail,
-pushes off, drifts and catches the next rail. MODE runs DOCKED → COAST in the owner's step order (UNDOCK, OCCUPANTS_SECURED,
-RINGS_UNLOCKED, RINGS_SPIN_UP) through the operating-mode controller, and the rings follow its spin fraction.
-
-TRANSFER puts the body in physics from the trunk to the top of the crew tube's radial run (rig `dynamics.stages.access`). The colliders
-are the clear surfaces of the shared formulas: the trunk round the spine port, the port's bore, the drum annulus with its end walls, the
-drum door's bore and the mitered tube legs. The port gate and the drum door are colliders across their bores while shut. The body proxy
-is rigid, so `crew_dynamics.access_stage` derives its line:
-- head aft along the trunk axis from 2 m forward of the port;
-- a turn head-first, radial, 0.45 m forward of the port's radial, where trunk handrail 1 ends;
-- a push-off there and a 1.33 m coast out through the port's bore to a catch by the drum's aft crawl rail. The port's 0.8 m mouth
-  spans the drum's inner wall, so no grip is within 0.75 m of a body centre in the bore. Before the sync the field is zero, so the
-  hands are off and the body keeps its push-off velocity;
-- a pivot onto the vestibule figure's chord, then along the rail onto its station, a hand on the rail beside the port; this is the
-  restraint pose, with both closures shut;
-- after the sync, along the rail 0.20 m aft of the door's axis, a pivot feet-first to radial there with the aft crawl rail in reach, and
-  forward along the door's bore to its axis;
-- the body's ends on the tube axis through the three elbows (where no grip is within reach of the axis, the centre moves toward the
-  nearest by the shortfall), then a step onto the climber line.
-
-Each pivot is the fewest straight moves that keep 0.10 m (PROTOTYPE) from the walls, found on a 0.05 m / 5° pose grid; the line's least
-clearance is 0.100 m. Before the sync every corner also has a grip within reach for 0.10 m of line either side (PROTOTYPE), where the
-hands catch and push off; the stretches between with no grip are the rig's `coasts_s_m`. After the sync the drum carries ring A's field,
-so a coast there would not be straight: a rail, stile or rung is within reach at every point of the line (at most 0.746 m). The hands move the body along it at the
-review pace. They slow at each turn so its velocity never changes faster
-than 0.5 m/s² (PROTOTYPE), and the run stays contact-free in Godot.
-
-The owner's rotary-vestibule interlock (`WfVestibule`, 46 DYN-027) gates the transfer. The body passes the port only with the gate fully
-open and leaves the restraint only with the door fully open. The rail follows the body, so the closures keep their sequence: the gate
-closes once the whole body is in the drum. The drum syncs only with the body held still in the restraint pose and both boundaries
-closed. During the 4 s PROTOTYPE ramp (MEC-019 OPEN) the hands carry the drum frame's centrifugal and Euler terms, measured to within
-0.001 N of −m·a_field; the load reaches about 22 N. The field is zero before the sync and ring A's once past the door. The pressure is
-shown equalized as a PROTOTYPE input, since the threshold is OPEN (PRESS-004).
-
-DESCENT continues with the same body: it climbs down hand over hand on the 65 tube rungs and 9 landing-well rungs, taken from the shared ladder formulas (rig
-`dynamics.stages.tube`). It moves at the review pace on the climber line and steps onto the landing-well deck. The hands' measured load
-reproduces the rig's `ladder_push`: toward the ladder, −0.0697 g = −(lean + Coriolis at 0.5 m/s), and along the run m·ω²·r within
-5 N. It peaks at about 400 N at the bottom; no hand-load limit is sourced. GRAVITY then continues in the same physics world: the body
-walks out of the well into the aisle. In GRAVITY the body stands and walks on ring A's deck and the dropped
-object shows the Coriolis deflection.
-
-The chapter order, the camera paths, the autoplay actions and the ×90 time-lapse of the 1800 s study ramp are PROTOTYPE display choices.
-The run is SIMULATION_ONLY: transition timing, the drum sync cycle (MEC-019), FLIGHT_EVA and the casualty route stay HOLD/OPEN, and no
-exterior sun, attitude or flight route is claimed.
-
-Maturity (WF-018..023): L3 for the run (reproducible, source-linked, flagged), with an L2 whitebox interior and an L2/L4 exterior
-proxy. From the MICROGRAVITY push-off on, the body leaves physics only between chapters MICROGRAVITY and TRANSFER (it is handed in at rest
-2 m forward of the spine port). The tube rungs and the access grips are grab anchors, not colliders. Ring B, the rescue route and the EVA exits are not in it.
-
-The screen text fits a 1280 × 800 window. The left text wraps short of the stop panel, the body-mode lines stack under the chapter
-text, and both sit on a translucent backing. The stop card shows only in ENTRY, the one chapter on the route rail. In the body chapters
-the stop list marks where the body is (spine, then transfer, then habitat), not the route rail's stop. Evidence:
-- the 190 s autoplay replay of all seven chapters at 1280 × 800, 30 fps, with a contact sheet, `runs/20261012T200000Z-m1replay`;
-- the chapter stills at 1280 × 800, `runs/20261012T180000Z-m1ui`.
-- a hands-on windowed run by the user on 2026-10-13, keyboard and mouse, with no findings.
 
 ## Station-to-ring excursion (EXC-001)
 
@@ -1765,8 +1512,7 @@ the stop list marks where the body is (spine, then transfer, then habitat), not 
 round a whole habitat ring and back to the station, for either ring and as often as wanted without a reset. It reads the DOCKED
 package and the rig (contract 43: `dynamics.stages.boarding`, `trunk`, `access` / `access_b`, `tube` / `tube_b`, `circuit`); Godot
 computes no spacecraft geometry. It is SIMULATION_ONLY. It is the main interactive experience: the web launcher's Start opens it
-(Demonstrator 01 is the second button, the guided tour) and the native review menu lists it first; `godot --path godot
-res://scenes/excursion.tscn` opens it directly. On a touch device (MOB-001) the left thumb's stick moves along the body line (1-D) or
+and it is the Godot project's main scene (`godot --path godot`). On a touch device (MOB-001) the left thumb's stick moves along the body line (1-D) or
 on the deck (2-D), the right thumb drags to look, and Use (labelled with what it works, e.g. "Use · open outer hatch"), Ops at a
 trunk panel, View and Map appear when they apply; a phone layout keeps the goal and prompt top left and the ring map under the
 utility row.
@@ -1796,7 +1542,7 @@ utility row.
   (UNDOCK, OCCUPANTS_SECURED, RINGS_UNLOCKED, RINGS_SPIN_UP) and, on the way back, COAST → DOCKED (spin down timed to end at the
   index, lock, DOCK). The trainee holding still on a rail is the secured occupant; the 1800 s study ramp runs ×90 and the station
   stands off 25 m while undocked (display choices, PROTOTYPE).
-- **Transfer.** The ring A access line and tube run are Demonstrator 01's; ring B's are new (`crew_dynamics.access_stage(s, 2)`): its
+- **Transfer.** Both rings' access lines and tube runs come from the rig; ring B's (`crew_dynamics.access_stage(s, 2)`): its
   0.90 m spine port opens into a drum annulus 0.95 m deep and 1.2 m long, where a rigid 1.75 m body turns at most 5° with 0.10 m
   clearance, so the trainee tucks to a 1.0 m body there (`[excursion] tuck`, PROTOTYPE technique, 1.1 m does not pass) and is guided
   on the port's frame into the restraint pose (least clearance 0.101 m), unfolding at the top of the crew tube. At the restraint pose E
@@ -1814,252 +1560,15 @@ utility row.
   measured, at spawn). Both excursions take 88,000 physics frames, about 100 s headless natively; the same check passes in the
   WebAssembly build in headless Chromium with drawing off (about 1,470 s), and the scene draws there without errors.
 
-## Ship Navigator (SNAV-001)
+## Retired runtime scenes
 
-The Ship Navigator is the GU orientation instrument of S&E `49_SHIP_NAVIGATOR` NAV-001..029, with Tale 26 NAV-TOUR-01..08 and Art
-Style `Objects & Tech` rows 16–17 (live read 2026-10-12, `references/SHIP_NAVIGATOR_SOURCES_2026-10-12.md`; formal capture
-`references/drive_capture_2026-10-13`). It is built as a PROTOTYPE slice inside Demonstrator 01: a corner locator, a state-gated
-route, six systems cards, an overview with picking, and the EVA remote view.
-
-The navigator owns no fact. `data/ship_navigator.toml` holds:
-- nine modules, each with its frame, rail zones, nav nodes and map assemblies;
-- the stop → nav node and opening → nav edge bindings;
-- the NAV-007 status taxonomy, each status with a glyph and a text;
-- the palette, as PROTOTYPE values for the Art Style direction;
-- the silhouette filter;
-- six hotspots, at most one per module;
-- the three guidance modes.
-
-`ship_navigator.py` validates every binding against the induction graph and `dynamics.nav` built from the same spec, and resolves the
-hotspots' facts from `data/wayfarer_3d.toml` with their source_map ranges. A section marked `known = false` stays OPEN with its
-items. The result is the rig's `navigator` block (contract 33), with each rail waypoint's nav node and each opening's nav edge.
-
-The map is a SubViewport with its own world. Its silhouette is the loaded DOCKED GLB's own meshes from the registry's assemblies
-(1.5 m size floor, plus the passages and closures). They are merged into 16 meshes, one per frame and assembly: 231 k triangles, built
-in about 80 ms. Map pivots copy the playable ship's ring and drum transforms at every update, so the map's rings stand still while
-DOCKED and turn exactly as the scene's do. The visitor's marker sits in the frame the visitor is actually in:
-- the physics body in the body chapters;
-- the review camera on the rail;
-- the visitor's rail place in the exterior views.
-
-Its facing arrow is the view direction. In ring A the location line gives the sector and its function, from the nearest induction
-room, and the ring phase.
-
-Routes are planned in two stages, both over the rig's own gates (NAV-010/011/013):
-1. **Topology:** `WfNavGraph` over `dynamics.nav` with the operating mode and the actor. The spine port is allowed only while the drum
-   can match: ring A stopped at its index, or turning steadily.
-2. **Geometry:** the induction rail, the line the body and the camera actually use, from the visitor's place to the target stop.
-   - The route is GO up to the first crossed closure that is not open.
-   - Past that closure it is drawn amber and dashed as HOLD, with the opening's reason.
-   - A dock outside DOCKED, an exterior route or a ring B sector is RESTRICTED or TOPOLOGY_ONLY. The exterior is always HOLD for the
-     suited actor (FLIGHT_EVA, NAV-014).
-   - Every route reads "PROTOTYPE route · SIMULATION ONLY".
-
-The guidance modes (NAV-003, NAV-TOUR-02/07) return guidance only: the target, whether to draw the route, hints and narration.
-- **GUIDED** takes the target from the existing tour order and adds the instructor's stop line.
-- **ASSISTED** (the default) routes to a stop the visitor picks and suggests the systems card.
-- **FREE** shows only the chosen stop's marker.
-
-The hotspots (NAV-006, NAV-TOUR-05) all have DRAFT WHAT / WHY / SHOW ME wording. Every number comes from `data/wayfarer_3d.toml` with
-its owner range; the card rounds for display only (a large value shows as "~26882 m2"). The card follows the module the visitor is in,
-or the module isolated or picked in the overview.
-
-The first hotspot is the despun transfer vestibule:
-- **WHAT / WHY:** DRAFT wording.
-- **Facts:**
-  - ring rate 4 rpm (08!A2:H4 BASELINE);
-  - deck radius 28 m (02!A32 WORKING);
-  - routine and backup transfer modes and two seal planes per side (12!A11:H11 BASELINE);
-  - drum size, seals, bearings, sync cycle, hatch actuation, fluid couplings and emergency ring stop time, all OPEN (16!A20:I20).
-- **SHOW ME:** opens the overview, isolates the spine, the drum and ring A, cuts the hull away and labels the port gate and the drum
-  door with their live state.
-
-The other five:
-- **Storm refuge** (spine): rated 12 persons, 20 g/cm2, 4 m3 per person (12!A8:H9 WORKING); structure and material stack OPEN.
-- **Garden and life support** (ring A): Garden 80 m3 and 120 m3 usable per ring, functions mirrored in both rings (12!A2:H7 WORKING),
-  ring rate 4 rpm.
-- **Radiator blades:** three blades (07!A18:H19 BASELINE), 1800 K (02!A24 WORKING), effective area 26,882 m2 (40!A7 DERIVED), fixed
-  blades with no fold mechanism; drive waste heat at thrust OPEN (40!A11:F13).
-- **Drive and nozzles:** one core and four nozzles (06!A6:E11 LOCKED), the plume exclusion rule (40!A44 BASELINE); reaction mass OPEN.
-- **Forward shield and EYE:** 90 m diameter (02!A44 WORKING), the shadow rule (14!A14 BASELINE), four facets (03!A4:F5 LOCKED),
-  2.5 m aperture and 8 m baseline (02_EYE_INPUTS WORKING); field of view OPEN (50!A19).
-The overview (L2) has these controls:
-- orbit with left-drag, zoom with the wheel, pan with shift-drag;
-- a click isolates the module under the pointer and points the card at it. Inner modules win over the hull they show through; the
-  EVA airlock is picked by its hatch mark; a click on empty space clears;
-- H cuts the hull away;
-- U isolates the next module.
-
-The map view never takes keyboard focus, so a click on it leaves every key to the scene.
-
-It labels ring A's induction-leg openings with their state. It also shows the exterior as a remote view only (NAV-014, NAV-TOUR-06),
-drawn from the EVA scene's own export (`wf_eva.json`):
-- the training rail, dashed;
-- the EVA hatch with the exported FLIGHT_EVA state (HOLD) and its blocking hazards;
-- ring B's sweep as a DANGER keep-out;
-- a RESTRICTED "remote view only" label on the radiators, the drive and the shield.
-
-No stop maps to an EVA node, and no route reaches the exterior.
-
-Layout at 1280 × 800: the locator sits under the stop panel, never over it. While it shows, it takes the place of the panel's three
-demo buttons; M hides it and brings them back. The systems card sits at the bottom left. The overview spans the left side.
-
-Cost, measured on the RTX 3070 on 2026-10-13 against the same view with `--no-navigator` (two runs each; frame times are the mean of
-the two run medians; `runs/20261013T080000Z-snav-profile`). Corner is the locator; overview is the expanded map of the whole ship with the
-EVA remote view and hazard labels:
-
-| View | Resolution | Median frame, off → corner / overview | p95, corner / overview | Draw calls | Video memory |
-| --- | --- | --- | --- | --- | --- |
-| Spine | 1280 × 800 | 5.09 → 5.30 / 5.45 ms | +0.27 / +0.56 ms | +30 / +72 | +12 / +21 MB |
-| Spine | 1920 × 1080 | 5.63 → 5.68 / 5.89 ms | +0.19 / +0.45 ms | +30 / +72 | +12 / +23 MB |
-| Ring A deck | 1280 × 800 | 2.01 → 2.06 / 2.14 ms | +0.28 / +0.49 ms | +23 / +65 | +12 / +21 MB |
-| Ring A deck | 1920 × 1080 | 2.30 → 2.36 / 2.35 ms | +0.35 / +0.46 ms | +23 / +65 | +12 / +23 MB |
-
-The two runs of one view differ by up to 0.27 ms, so the corner's median cost is within the noise; the overview's is about 0.1–0.4 ms.
-A pick builds a mesh's ray-test data only when the ray crosses that mesh's box, on first use. The first click at the middle of the
-overview then takes 43–47 ms and adds about 17 MB of static memory (it was 100 ms and 36 MB when every visible mesh was prepared);
-repeat picks take about 0.11 ms. Clicks elsewhere prepare further meshes as their boxes are crossed, up to the same 36 MB for all of them.
-
-The map re-renders at 30 Hz.
-
-Evidence:
-- 45 demo checks pass in `--check-demo`: the 34 existing ones and 11 navigator checks (including `nav_forward_explorer` and
-  `nav_drone_demo`; runtime run `runs/20261013T142915069047Z-runtime`). The navigator checks are listed in docs/IMPLEMENTATION.md.
-- Key-driven stills at 1280 × 800 and the chapter stills at 1920 × 1080 are in `runs/20261012T140000Z-snav001`.
-- The user ran the keys and clicks by hand in a window on 2026-10-13, with no findings.
-
-### Forward defense explorer (FWD-V2 AVA slice)
-
-The forward hotspot's SHOW ME page opens the forward defense explorer (`godot/scripts/navigator/forward_explorer.gd`; Tale 28 AVA-001..005,
-008, 013; S&E 50 AG-014..AG-016). It reads the rig block `forward_explorer` (`src/wayfarer/forward_explorer.py`) and the COAST manifest's
-baked display tracks; the Crown and eyelid meshes keep their own map nodes so their states can be posed. X cycles three modes:
-- **OBSERVE:** Y switches the Eye placement (r4 WORKING and built; r16 / r24 STUDY rings, labelled "not built") with the study findings and
-  their statuses; Z steps the Crown sector states (STOWED, PREPARED, ENGAGED, RECOVERING, DEGRADED) on the real Crown meshes, and 1–5 pick
-  one directly (the card lists them, the current one in brackets). K, or a click on one of the twelve bay marks (AVA-003 Crown bay hotspot,
-  18 px pick radius), selects a bay and shows its state. The state is per sector; a per-bay state stays OPEN until the AG-009 fixture.
-- **DEFENSE SIM:** Z replays one case, unresolved microdust (SIMULATION_ONLY), on a PROTOTYPE off-axis display path through the Eye 25!A4
-  ladder: statistical warning, Crown not engaged, veil as a hypothesis, disruptor layer, Lance (central axis only), field (charged ejecta only),
-  Brow. Each step shows its owner status and range and what stays OPEN. The card marks TIME EXPANDED with the factor derived from the LOCKED
-  0.016 c and quotes one owner number per kind (1 µg ≈ 11.5 kJ, Eye 40!F4, reproduced by `forward_explorer.impact_energy_j`). The outcome is
-  always UNKNOWN: no dust flux, layer performance or survival evidence exists. K switches the view (Tale 28 AVA-011, Eye 45 FD-E15). PHYSICAL runs in
-  real time (the path passes in ~12.5 µs, one display frame) and draws only what vacuum would show: no grain, path, field or beam, just a
-  display marker for the flash where the grain meets the disruptor layer. EXPLAINER expands time and draws the grain (not to scale), its path
-  and the step labels, tagged as drawn UI. Field extents are drawn in neither (OPEN). Each step also shows its scenario-contract frame (below).
-- **DAMAGE & REPAIR:** Z steps EYE_F1_JAMMED, EYE_SHUTTERS_CLOSED and CROWN_DEGRADED, with what repair can do and that its rates are OPEN.
-
-Closing the card puts every mesh back at rest and hides the overlays; the explorer never changes the ship state, a route or a gate (remote
-view only, NAV-014). The demo check `nav_forward_explorer` drives all three modes and the return; `--navigator-stills` captures them.
-
-**Scenario contract** (`src/wayfarer/forward_scenario.py`, `WF_FORWARD_SCENARIO` v1, S&E 50 AG-014). Every replay is a list of frames with
-time, ship frame, relative velocity, target class, uncertainty, detection state, range, time to impact, energy, permitted response and the
-thermal / pulse-bank / repair state, plus both time scales (PHYSICAL and EXPLAINER, each labelled) and a source snapshot (the Drive modified
-time of each row it reads). Timing and energy are the Eye owner formulas at the LOCKED 0.016 c (15_ACTIVE_LIDAR, 35_SCALING_LIMITS,
-40_BROW_SHIELD); hazard classes, their detection and permitted actions come from 25_HAZARD_RESPONSE (AVOID > DEFLECT > ABLATE > FRAGMENT;
-passive layers always on). The detection-state names are a PROTOTYPE enumeration of that tab's detection column. Mass, size, cross section,
-uncertainty and the vehicle states are OPEN unless a case supplies an owner value; `validate` rejects probabilities, cross sections,
-shield-health or kill fields, a response the hazard row doesn't name, any vehicle-state value and any outcome other than UNKNOWN. The
-rig block `forward_explorer` carries the microdust case as `scenario.state` and the reference tables (`reference`: warning horizon, energy
-orders, hazard classes).
-
-## Space Navigator (SPACE Stage 1)
-
-The SPACE view is the second view of the same navigator (S&E `55_SPACE_NAVIGATOR` SPACE-001..034, Stage 1 SPACE-004/029; 47 SIM-038;
-48 WF-029; Tale 26 NAV-TOUR-09..12; Art Style Objects & Tech rows 18–19). It answers where Wayfarer is in space, when, and relative to
-what (`godot/scripts/navigator/space_navigator.gd`, a child of the Ship Navigator). B switches SHIP ↔ SPACE. The two views share the
-guidance mode, the palette and the selected mission time, not a 3D frame: SHIP stays in metres in the body and ring frames; SPACE draws
-the released route in its own 2D canvas, in the route's `IGNITION_LOCAL_INERTIAL_1D` frame (origin the ignition point, units s, m, AU, c).
-
-- **Source:** only `generated/wf_route_v1.json`, the existing route import (`workflow.py route-import`, 23_ROUTE_FRAMES, 900 rows),
-  through `WfRouteState`. The gate refuses the route unless 25_ROUTE_VALIDATION rows 2–13 are all present and PASS, the schema is
-  `WF_ROUTE_IMPORT` and the route version is the rig's (C-009). A refused or missing route shows NO VALIDATED ROUTE and no number. The importer carries every
-  validation row the owner lists (25!A1:G21 in capture 2026-10-13c); rows 14–21 are OPEN and shown as such, and the Kuiper card's SHOW ME
-  names the OPEN Kuiper rows (17, 19–21) from the route file.
-- **Time:** the scrubber, `,` / `.` (Shift ×30) and End step through the owner's rows. A shown value is always one released row: no
-  interpolation, no new sample, mission time never the 30 fps clip time (C-010/C-011, SPACE-022).
-- **LIVE and SCENARIO PREVIEW** (SPACE-005/006, NAV-TOUR-09): SPACE opens LIVE, with Wayfarer at the induction dock before First Ignition,
-  and shows no route value. Selecting a row switches to SCENARIO PREVIEW. The demonstrator has no live mission clock, so every First
-  Ignition row is a preview. Home returns to LIVE.
-- **Scales** (`[` / `]`, SPACE-002):
-  - MISSION JOURNEY: the 1D track at true linear scale (0–6.970 AU traveled along local +X), with the whole-AU ticks, a speed-over-mission-time
-    inset and the ship marker at the selected row. Only the events with a released displacement are drawn (IGNITION_START, DAY_1_MARKER,
-    HALFWAY_IN_TIME, TARGET_SPEED_REACHED). DRIVE_SHUTDOWN, KUIPER_BRAKE_DEADLINE, FIRST_LOOP and RETURN are listed as OPEN and never placed (C-008).
-  - LOCAL SPACE: the ship at the centre, the ignition origin behind it on the named reversible log transform (C-004, the ticks labelled through the
-    inverse) and the velocity arrow. Attitude is OPEN (C-013). No nearby object has a sourced position.
-  - SOLAR SYSTEM: "SOLAR SYSTEM POSITION UNKNOWN" and the OPEN validation rows. No Sun or planet is drawn while 25!F14:F15 are OPEN (SPACE-010).
-- **Labels:** every view keeps DIAGNOSTIC 1D, the scenario `WAYFARER_001_IGNITION_V1`, "Solar System position UNKNOWN", and a source line
-  with the sheet's modified time, the route version and the gate result. Statuses are text and glyph, not colour alone. Amber marks the
-  diagnostic and unknown states.
-- **Drilldown** (SPACE-020): I ("Inspect ship") opens the expanded SHIP map. B goes back to SPACE at the same selected row.
-- **Isolation:** SPACE reads the host and never writes it. While SPACE shows, the ship map keeps tracking but stops rendering its SubViewport,
-  so only one map renders at a time (SPACE-024).
-- **Solar System chart** (Stage 2, SPACE-015/017/019/030, SIM-039, `solar_chart.gd`): the rig block `space_navigator` (contract 40) comes from
-  `data/space_navigator.toml` through `src/wayfarer/space_navigator.py`. It holds the Sun, Mercury–Neptune and the Kuiper Belt's main region
-  (30–50 AU) as published references (NASA GSFC Planetary and Sun fact sheets, NASA Science Kuiper Belt facts, retrieved 2026-10-13; AU
-  DERIVED with the IAU 2012 exact unit). It carries sizes and orbit shapes only: a field that would place a body at a date (epoch,
-  longitude, anomaly, position) fails the build. The chart draws:
-  - a guide circle at each mean distance and the perihelion–aphelion band;
-  - every body on one layout ray from the Sun, not where it is on any date;
-  - no Wayfarer marker (its Sun-relative position is UNKNOWN; its card says so);
-  - the Kuiper band as a regional guide that never stands for an event position.
-
-  The amber "SCHEMATIC — EPOCH / SHIP POSITION UNRESOLVED" and the mode disclosure stay on in every mode and zoom. Nothing on the chart
-  moves with the selected mission time.
-  - **Modes** (M, SPACE-007/C-012):
-    - ANALYTICAL: distances and sizes to scale. Bodies under 1.5 px are fixed glyphs, as the disclosure says. A detached bar compares
-      the 6.970 AU First Ignition path length, as a length and not a place.
-    - PRESENTATION: distance as a square root of a / extent, sizes 3 + 2.4 log10(r / 1000 km), with the disclosure "distances
-      compressed · planets enlarged · not to scale".
-
-    Both transforms invert exactly and touch only the drawing.
-  - **Zooms** (`-` / `=` or the wheel): inner planets 1.8 AU, outer planets 32 AU, Kuiper region 55 AU. Crowded labels collapse into one
-    "also here" note.
-  - **Cards** (↑ ↓ or a click to select, I for WHAT → WHY → SHOW ME): every number comes from the registry with its reference and dates;
-    the WHY wording is DRAFT for Tale review. SHOW ME zooms to the object; Wayfarer's SHOW ME goes back to the mission journey.
-- **Layers** (1–8, SPACE-021): track, motion (the row's velocity and acceleration arrows, the speed inset), events, reference orbits,
-  Kuiper guide, grid and length bar, notes (narration and the route legend) and the legend itself. The legend line names each shown
-  layer's line style and source; the LAYERS line shows `[x]` / `[ ]` per layer of the current scale. A layer hides a drawing only: the
-  shown row, the LIVE / SCENARIO PREVIEW badge, DIAGNOSTIC 1D, the UNKNOWN Solar System position, the SCHEMATIC notice and the mode
-  disclosure are not layers (SPACE-023). With the events off, their counts stay in the panel; a hidden Kuiper guide cannot be clicked.
-  The panel gives up canvas height before any text leaves the screen at 1280 × 800.
-- **Motion explanation** (S&E 59 POL-008 Prototype A, 58 MECH-001/005 education; user direction 2026-10-17,
-  `references/SIM_INTEGRATION_PLAN_2026-10-17.md`; the 58 rows themselves are still PROPOSAL):
-  - P replays the released rows at the route's own clock (22 fps 30: 900 rows in 30 s). It shows whole rows only, stops on row 900 and
-    is a view state like the scrubber; `,` `.` Home End take the row back.
-  - H opens the MOTION card on the shown row, WHAT → WHY → HOW. WHAT gives the row's acceleration and speed. WHY gives the owner's
-    BASELINE ramp a = j·t and the owner's HALFWAY_IN_TIME event (0.75 g, 1/4 of the speed, 1/8 of the distance). HOW is inertia: the
-    rows' acceleration integrated once and twice, taking a as linear within each step (C-010), gives every row's speed and distance
-    (worst relative difference 7e-16 and 6e-15, DERIVED). Row 900 is the end of the ramp, not a shutdown (22 shutdown_or_coast_start
-    OPEN), so no coast is drawn. Momentum is not shown because the route carries no mass history.
-  - R (LOCAL) shows a display hull and turns it in 45° steps; Shift+R removes it. It is labelled ILLUSTRATIVE, attitude OPEN (C-013).
-    Turning it leaves the row, the marker and the velocity arrow unchanged (SPACE-014).
-- **Stage reuse** (SPACE-003): `shots/SH_NAV_STAGE.blend` and Godot read the same `wf_route_v1.json`, with the same legend and the same placed
-  and unplaced events. Nothing new is exported from the stage: it holds no Sun, planets or ephemerides yet. The Solar System references now live in `data/space_navigator.toml`, which the stage can read when it gets bodies.
-
-Cost (RTX 3070, `profile_views.gd --space`, 600 warm frames; the ship map stops rendering while SPACE shows):
-
-| View | Resolution | Median frame time, map → SPACE | Primitives, map → SPACE | Draw calls, map → SPACE |
-| --- | --- | --- | --- | --- |
-| Ring A deck | 1280 × 800 | 2.81 → 2.48 ms | 244k → 43k | 223 → 228 |
-| Ring A deck | 1920 × 1080 | 2.71 → 2.68 ms | 254k → 53k | 258 → 263 |
-| Spine | 1280 × 800 | 6.00 → 6.07 ms | 379k → 178k | 2,285 → 2,282 |
-
-Medians are within run-to-run noise. Opening SPACE takes about 35 ms, mostly the text layout. Video memory is +0.4–0.8 MB.
-
-The Solar System chart (`--space-solar`, same machine, 2026-10-13):
-
-| View | Resolution | Median frame time, map → chart | Draw calls, map → chart |
-| --- | --- | --- | --- |
-| Ring A deck | 1280 × 800 | 2.05 → 2.14 ms | 223 → 274 |
-| Ring A deck | 1920 × 1080 | 2.38 → 2.40 ms | 258 → 310 |
-
-The chart's 2D arcs add about 50 draw calls. Opening on the chart takes about 50 ms.
-
-Evidence:
-- Motion explanation 2026-10-17: 16 SPACE checks in `--check-demo` (adds replay, card, display hull); all 63 demo checks pass in
-  runtime-export `runs/20261017T183308932786Z-runtime` (24 Godot steps); key-driven stills `runs/20261017T1800Z-sim-motion2`.
-- 13 SPACE checks in `--check-demo`, 9 for Stage 1 and 4 for the chart. All 58 demo checks and 136 physics checks pass in runtime-export
-  (`runs/20261013T181317641391Z-runtime`). The checks are listed in docs/IMPLEMENTATION.md.
-- `WF_SPACE_KEYS` key runs at 1280 × 800 and 1920 × 1080, with the stills of the docked spine and the moving ring A deck, are in `runs/20261013T1900Z-space-stage1`; the chart's stills are in `runs/20261013T2000Z-space-stage2`.
+The Godot review menu, the ship inspector, the guided induction walk, Demonstrator 01 with the Ship Navigator, its SPACE view and the
+forward defense explorer, the First Ignition timeline player and thermal explorer, the life-support simulator, the physics lab, the EVA
+drift and the M5/M6 hologram scenes are retired; the tag `archive/pre-cleanup-2026-10-29` holds them. The pure modules and data they
+read stay as engineering screens with their tests: `ship_navigator.py` and `data/ship_navigator.toml`, `space_navigator.py`,
+`forward_explorer.py` and `forward_scenario.py`, `life_support.py` and `data/life_support.toml`. No runtime scene consumes them now;
+the export still packages the First Ignition timeline (`flight_timeline.py`) in the manifest. The walk's action registry still lists
+the retired scenes' contexts (below) until it is pruned.
 
 ## Maintenance drones (DRONE-001)
 
@@ -2103,49 +1612,29 @@ actions, GLBs) are accessory assets outside the ship and replace no proxy (DGT-0
 
 ## Player controls (ACI)
 
-The Godot runtime has one player-action registry, the autoload `WfInput` (`godot/scripts/controls/wf_input.gd`). About 120 semantic
-actions are bound through Godot's InputMap, one context per scene: `ui` (Confirm, Back, Codex, guide, details), `menu`, `walk`
-(review camera), `body` (crew physics), `demo` (Demonstrator chapters), `nav` (Ship Navigator), `explorer` (its SHOW ME views),
-`space` (SPACE view), `inspector`, `flight` and `thermal` (First Ignition timeline and heat balance), `life` (life support), `lab`
-(physics lab) and `eva`. Movement follows the keyboard position (W/S/A/D on QWERTY, Z/S/Q/D on AZERTY); the others follow the
-printed key. The moves, grab/release/push and the EVA actions have controller defaults; any action can take a controller button
-in the Codex. Each scene's handler asks `WfInput.key_of(event, its contexts)`, which names the triggered action by its default
-key, so a rebind changes the input and not the handler. Guide chips, HUD key lines, cards and lesson cards show the player's
-actual binding for the device last used (`WfInput.label`, `WfInput.keys("{action}: …")`). Keys are drawn as one chip style
-wherever a player reads them (guide bar, lesson cards, control panels, Codex rows, review menu): amber for the key that moves
-things on or completes a lesson, blue for the others, grey for leave and the Codex. Lesson cards and toasts sit just above the
-guide's key bar. Bindings change which input triggers
-an action, never forces, speeds or permissions (S&E 46 DYN-007, 47 SIM-010, 49 NAV-003).
+The Godot runtime has one player-action registry, the autoload `WfInput` (`godot/scripts/controls/wf_input.gd`). Actions are bound
+through Godot's InputMap, one context per scene; the walk sets `excursion` beside the always-active `ui` (Confirm, Back, Codex, details).
+The registry still lists the retired scenes' contexts and actions (`walk`, `body`, `demo`, `nav`, `explorer`, `space`, `inspector`,
+`flight`, `thermal`, `life`, `lab`, `eva`, `holo`); no scene activates them. Movement follows the keyboard position (W/S/A/D on QWERTY,
+Z/S/Q/D on AZERTY); the others follow the printed key. Each handler asks `WfInput.key_of(event, its contexts)`, which names the
+triggered action by its default key, so a rebind changes the input and not the handler. HUD key lines show the player's actual binding
+for the device last used (`WfInput.label`, `WfInput.keys("{action}: …")`). Bindings change which input triggers an action, never
+forces, speeds or permissions (S&E 46 DYN-007, 47 SIM-010, 49 NAV-003). On a touch-first device `controls/wf_touch.gd` (MOB-001) adds
+the stick, the look drag and the contextual buttons.
 
-- **First launch.** The review menu opens WAYFARER — PERSONAL INTERFACE when there is no profile. The player picks a Confirm input,
-  proves it with a fresh press, and then sees the recovery routes: Esc always goes back, F10 or the Controls button opens the Codex.
-  Finally the player chooses Personal Induction, Suggested Controls (default) or Experienced. Nothing is timed, and every step has
-  a mouse route.
-- **Lessons.** Lessons follow the Tale order: MOVE on the induction walk (Tale 26 TOUR-02), GRAB / RELEASE while weightless on a
-  trunk rail (Tale 27 STG-001), WALK THE DECK in spin gravity, INSPECT COMPONENT when the Ship Navigator shows a systems card, and
-  TWO TETHERS inside before the EVA airlock (Tale 26 TOUR-05/06). Personal Induction captures and validates each input of the group
-  on one card. Suggested shows a non-blocking tip; Experienced shows nothing. A lesson is learned when the scene reports its proof:
-  moving forward, a release and a grab, opening the card, or clip, tug-test and release. A lesson is offered once, never during a
-  hazard (the EVA drift and abort set it), and never in checks or autoplay (59 POL-005, Tale 26 NAV-TOUR-07).
-- **Conflicts.** A conflict is the same input on two actions whose contexts can be active together: `ui` with everything; the
-  linked pairs `nav`–`body`, `nav`–`explorer`, `demo` with `walk`, `body` and `nav`, and `flight`–`thermal`; scenes otherwise exclude
-  each other, and `space` takes the inputs it owns while it shows. All clashing actions are listed. One clash offers swap, replace or
-  cancel; several offer replace (all lose the input) or cancel. No two shipped defaults clash. Confirm, Back and Codex always keep a
-  keyboard input, and Esc stays locked on Back. The Demonstrator's autoplay moved from A, which also walked left, to F2.
-- **Accessibility.** In the Codex any hold action (moves, review pace, fly up/down) can latch: one press starts it, the next stops
-  it. The stick dead zone (0.2–0.65) and sensitivity (×0.75–×2, never past full speed) and the size of every 2-D panel (100/125/150 %)
-  are set there too. Prompts never time out; every modal has a mouse route.
-- **Profile.** The profile is `user://wayfarer_controls.cfg` (schema 2): bindings, preference, discovered actions, shown and learned
-  lessons, and the accessibility settings. Unknown actions are dropped; new actions get their defaults except an input the player
-  already gave to an action active with them (the player's choice wins); a required action with no keyboard input is repaired.
-  Nothing is written to `data/` or `generated/`.
-- **Control Codex.** F10, the codex action or the menu's Controls button. It shows this scene's actions (Tab: every context, grouped),
-  each with its inputs, contexts, availability, learned state, function and physics note. From it the player can rebind, restore
-  one or all defaults, switch hold/toggle, set text size, dead zone and sensitivity, change the onboarding preference and replay
-  the lessons.
+- **Conflicts.** A conflict is the same input on two actions whose contexts can be active together (`ui` with everything). No two
+  shipped defaults clash; Confirm, Back and Codex always keep a keyboard input, and Esc stays locked on Back.
+- **Accessibility.** In the Codex any hold action can latch; the stick dead zone (0.2–0.65), sensitivity (×0.75–×2, never past full
+  speed) and the 2-D panel size (100/125/150 %) are set there. Prompts never time out; every modal has a mouse route.
+- **Profile.** `user://wayfarer_controls.cfg` (schema 3): bindings, preference, discovered actions, lessons, accessibility and touch
+  settings. Unknown actions are dropped; a required action with no keyboard input is repaired. Nothing is written to `data/` or
+  `generated/`.
+- **Control Codex.** F10 or the codex action: this scene's actions (Tab: every context), each with its inputs, availability, function
+  and physics note; rebind, restore defaults, switch hold/toggle, set text size, dead zone and sensitivity. The first-launch flow and
+  the lesson cards remain in `control_overlay.gd`, but nothing opens the first-launch flow since the review menu was retired.
 
-Controller prompts are text, not glyphs. The keyboard-layout labels were checked only on a US layout (the headless server has no
-layout). The controller and accessibility review stays OPEN (49 NAV-019). Audit, library decision and stages:
+Controller prompts are text, not glyphs. The keyboard-layout labels were checked only on a US layout. The controller and
+accessibility review stays OPEN (49 NAV-019). Audit, library decision and stages:
 [references/ACI_PLAN_2026-10-17.md](../references/ACI_PLAN_2026-10-17.md).
 
 ## Limits

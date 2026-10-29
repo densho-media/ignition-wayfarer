@@ -1,5 +1,8 @@
 # Wayfarer mobile experience and touch controls (MOB-001)
 
+**2026-10-29:** Demonstrator 01 and the other review scenes are retired (tag `archive/pre-cleanup-2026-10-29`); Enter Wayfarer
+plays the walk (EXC-001) and its browser-vs-native equivalence is the walk's own check. What follows is the decision record as built.
+
 Plan and decision record for playing Enter Wayfarer (Integrated Demonstrator 01, Godot Web) on phones and tablets without a
 keyboard. It covers usability, input, presentation and mobile rendering cost only. No spacecraft geometry, physics, simulation
 data or workbook value changes. Dated 2026-10-23, branch `claude/mobile-touch-controls`. The web deployment record is

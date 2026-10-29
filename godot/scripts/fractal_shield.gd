@@ -1,8 +1,8 @@
 class_name WfFractalShield
 ## Fractal shielding on the Brow's ram faces (manifest look.exterior.grammar.fractal_shield; reference src/wayfarer/fractal_shield.py):
 ## hexagonal facing plates with Sierpinski-subdivided triangles, drawn by shaders/fractal_shield.gdshaderinc. `apply` puts it on a model's
-## exported ram materials, keeping each material's own colour, roughness and alpha, for scenes that show the exported finishes (the walk);
-## the flight timeline's grammar look binds it through p4_exterior. Presentation only: no geometry, collider or spacecraft fact changes.
+## exported ram materials, keeping each material's own colour, roughness and alpha, for scenes that show the exported finishes (the walk).
+## Presentation only: no geometry, collider or spacecraft fact changes.
 
 const OPAQUE := preload("res://shaders/fractal_shield.gdshader")
 const BLENDED := preload("res://shaders/fractal_shield_alpha.gdshader")

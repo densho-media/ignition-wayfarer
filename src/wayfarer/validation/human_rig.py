@@ -3,7 +3,7 @@ after save and reopen), pose it through extreme test postures with the shared so
 and render a review sheet.
 
   blender --background --factory-startup --python-exit-code 1 --python src/wayfarer/validation/human_rig.py -- \
-      [--only test_a ...] [--report references/p1_human_rig.json] [--renders renders/p1/human_system] [--size 512]
+      [--only test_a ...] [--report references/p1_human_rig.json] [--renders runs/renders/p1/human_system] [--size 512]
 
 Deformation metrics, per posture against the rest pose (body mesh only): volume change (closed-mesh signed volume; the MPFB body is
 open at the eyes, so this is a comparison number, not a physical volume), the share of edges stretched beyond 1.6x or shrunk below 0.5x,
@@ -160,7 +160,7 @@ def review(key, args, report):
 def main():
     argv = sys.argv[sys.argv.index('--')+1:] if '--' in sys.argv else []
     ap = argparse.ArgumentParser(); ap.add_argument('--only', nargs='*'); ap.add_argument('--size', type=int, default=512)
-    ap.add_argument('--report', type=Path, default=ROOT/'references/p1_human_rig.json'); ap.add_argument('--renders', type=Path, default=ROOT/'renders/p1/human_system')
+    ap.add_argument('--report', type=Path, default=ROOT/'references/p1_human_rig.json'); ap.add_argument('--renders', type=Path, default=ROOT/'runs/renders/p1/human_system')
     args = ap.parse_args(argv); data = hs.load(ROOT); report = {}
     for key in args.only or list(data['human']):
         review(key, args, report)

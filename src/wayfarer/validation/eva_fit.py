@@ -1,7 +1,7 @@
 """Engineering checks of WAYFARER_EVA_Y155 (TODO EVA-001, docs/EVA.md; S&E 44 ASSET-03, RUN-007, RUN-010, SIM-01, QA-02).
 
   blender --background --factory-startup --python-exit-code 1 --python src/wayfarer/validation/eva_fit.py -- \
-      [--report references/p1_eva_fit.json] [--renders renders/p1/eva/fit] [--no-route] [--step 6]
+      [--report references/p1_eva_fit.json] [--renders runs/renders/p1/eva/fit] [--no-route] [--step 6]
 
 1. Pressure continuity: in sampled frames of every action (the EVA actions and the five shared unsuited ones), each covered body vertex
    must lie behind the outer layer (the nearest outer-layer surface faces away from it) or inside the torso-fixed helmet; the head must
@@ -370,7 +370,7 @@ def render_hold(rig, origin, up, along, path, size):
 def main():
     argv = sys.argv[sys.argv.index('--')+1:] if '--' in sys.argv else []
     ap = argparse.ArgumentParser(); ap.add_argument('--report', type=Path, default=ROOT/'references/p1_eva_fit.json')
-    ap.add_argument('--renders', type=Path, default=ROOT/'renders/p1/eva/fit'); ap.add_argument('--size', type=int, default=800)
+    ap.add_argument('--renders', type=Path, default=ROOT/'runs/renders/p1/eva/fit'); ap.add_argument('--size', type=int, default=800)
     ap.add_argument('--vehicle', type=Path, default=ROOT/'assets/wayfarer/WF_WAYFARER_001.blend'); ap.add_argument('--no-route', action='store_true')
     ap.add_argument('--step', type=int, default=6); ap.add_argument('--route-only', action='store_true')
     ap.add_argument('--assets', type=Path, help='suit asset folder (a study build such as the compact PLSS, ASSET-10); default assets/characters')

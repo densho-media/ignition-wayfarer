@@ -1,5 +1,7 @@
 # Phase 4 plan: visual production, art direction and modular detailing
 
+The `studies/` scripts and M5 shots named here are retired (tag `archive/pre-cleanup-2026-10-29`); kept results are in `references/evidence/`.
+
 **Status: PRODUCTION (2026-10-24).** The owner answered the eight Stage A questions and, at the **S1 art gate** (2026-10-24), selected
 the exterior grammar **VC+ Expressive Hybrid with moderated material values** and disposed of the three candidates (section 0). S0, S1
 and S2 are done on this branch; S3–S11 proceed in dependency order (section 3.4) without another general authorization, inside the
@@ -318,7 +320,7 @@ Run 2026-10-24 on this branch (run folders local, under `runs/`):
   hit is a negation, the legal notice or the annotated GU-WF-001 test string of the NONCANON lettering study); the 51 generated
   production stencils contain none; the 37 saved `.blend` assets carry no retired label in any datablock name; the web pages and both
   web/native release contracts name `G.U. WAYFARER 001`; Godot HUDs read `WAYFARER 001`; the L1 band renders `GU WAYFARER 001`
-  (`SH_M5_LETTERING_L1`, `_MID`, `renders/shots/`). Root invariants: crew 6 (LOCKED), 237.0 m overall (inspection), 0.016 c
+  (`SH_M5_LETTERING_L1`, `_MID`, `runs/renders/shots/`). Root invariants: crew 6 (LOCKED), 237.0 m overall (inspection), 0.016 c
   (source map). Typeface, material, placement and final livery stay visual review items; no physics hold changes.
 
 **Candidate review (owner P4-CAND: deferred to this comparison; all three stay `L4_VISUAL_CANDIDATE`):**
@@ -469,8 +471,8 @@ VC+ ladder); (3) GU deep blue as a standard wayfinding accent or not; (4) the th
 ### 4.7 Engineering protection check of the S2–S5 commits (owner request 2026-10-24)
 
 Generated simulation and validation snapshots compared field by field between 88ab15a (S1) and fe31f80 (S5):
-- `simulations/wf_first_ignition_timeline.json`: only `spec_hash` and `source_map_hash` differ (13,204 values each).
-- `simulations/wf_sim_rig.json`: only `spec_hash`, `source_map_hash` and the timeline file's `sha256` differ (the timeline embeds the
+- `data/simulations/wf_first_ignition_timeline.json`: only `spec_hash` and `source_map_hash` differ (13,204 values each).
+- `data/simulations/wf_sim_rig.json`: only `spec_hash`, `source_map_hash` and the timeline file's `sha256` differ (the timeline embeds the
   spec hash). No rig, mechanism, mass, rate or timing value changed.
 - `data/wayfarer_3d.toml`: only `[production.exterior]` (new) and `[production.m8]` (materials table retired) differ.
 - `references/p1_validation.json`: hashes; the production-detail counts and the new ring and M8 detail assets (S3, S4); and two measured
@@ -522,7 +524,7 @@ Generated simulation and validation snapshots compared field by field between 88
   Godot. The first capture exposed two runtime defects, both fixed: the look materials culled back faces (the exported glTF materials
   are double-sided), and the S04 casing straps and access panels were wound inward (now outward; vertex positions unchanged, fingerprint
   unchanged).
-- **Readback finding (study only):** the refreshed M5 balanced-RCS study readback (`references/m5_rcs_balanced.json`, a LOW POWER
+- **Readback finding (study only):** the refreshed M5 balanced-RCS study readback (`references/evidence/m5_rcs_balanced.json`, a LOW POWER
   CANDIDATE beside the unchanged S02 jets) finds its 30° cant option for jet Aft_3 radial reaching the `rad_frame` aft edge guard at
   9.95 m; the 0° and 15° options stay clear. No built jet is affected; whoever selects that study option must clear the edge guard.
 - **Fixed in passing (own commit):** the Godot controls check used F3 as its rebind probe; WEB-003/004 (on `main`) bound F3 to

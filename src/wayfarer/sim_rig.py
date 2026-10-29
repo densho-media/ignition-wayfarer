@@ -37,7 +37,7 @@ import tomllib
 CONTRACT='WF_SIM_RIG'
 CONTRACT_VERSION=43
 GENERATED_BY='WF_PROXY_P1_001'
-OUTPUT='simulations/wf_sim_rig.json'
+OUTPUT='data/simulations/wf_sim_rig.json'
 
 
 def quantity(field):
