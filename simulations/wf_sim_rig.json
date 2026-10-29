@@ -3,7 +3,7 @@
  "contract_version": 43,
  "asset_id": "WF.WAYFARER.001",
  "spec_schema": 5,
- "spec_hash": "97214954edccfaef9f8e5143dfd23eea35a3c36d308e30d3d0129d0545f6e996",
+ "spec_hash": "ad2a958fdab894fe1225b3ef4b870d0934509ab6ff2ac82590b44bd1e2e8dc0c",
  "source_map_hash": "699026c373f39a39e1bc6e08c02b1cb6db60e39a135d3d28c11543473b559069",
  "generated_by": "WF_PROXY_P1_001",
  "coordinates": {
@@ -1022,9 +1022,9 @@
    "role": "EYE facet F1 upper-left; boresight +X",
    "known": true,
    "position_m": [
-    110.5,
-    2.82842712474619,
-    2.82842712474619
+    108.69680851063829,
+    21.213203435596423,
+    21.213203435596423
    ],
    "axis": [
     1.0,
@@ -1071,9 +1071,9 @@
    "role": "EYE facet F2 upper-right; boresight +X",
    "known": true,
    "position_m": [
-    110.5,
-    -2.82842712474619,
-    2.82842712474619
+    108.69680851063829,
+    -21.213203435596423,
+    21.213203435596423
    ],
    "axis": [
     1.0,
@@ -1120,9 +1120,9 @@
    "role": "EYE facet F3 lower-left; boresight +X",
    "known": true,
    "position_m": [
-    110.5,
-    2.82842712474619,
-    -2.82842712474619
+    108.69680851063829,
+    21.213203435596423,
+    -21.213203435596423
    ],
    "axis": [
     1.0,
@@ -1169,9 +1169,9 @@
    "role": "EYE facet F4 lower-right; boresight +X",
    "known": true,
    "position_m": [
-    110.5,
-    -2.82842712474619,
-    -2.82842712474619
+    108.69680851063829,
+    -21.213203435596423,
+    -21.213203435596423
    ],
    "axis": [
     1.0,
@@ -3977,32 +3977,32 @@
    ],
    "disruptor_open_fraction": {
     "known": true,
-    "value": 0.014179154603157818,
+    "value": 0.015222068182569116,
     "canon_status": "DIAGNOSTIC",
     "basis": "EYE ports, Crown ports and the Lance hole over the projected shield disc; not a performance claim"
    },
-   "eye_port_radius_m": 2.25,
+   "eye_port_radius_m": 2.25166604983954,
    "crown_stroke_m": 2.9494680851063606,
    "eye_outer_port": {
     "radius_m": 2.25,
     "diameter_m": 4.5,
-    "modelled_radius_m": 2.25,
+    "modelled_radius_m": 2.25166604983954,
     "canon_status": "WORKING",
     "evidence_ref": "fwd_eye_optics",
     "basis": "RADIUS 2.25 m, diameter 4.50 m (FD-A04); ray/impact field OPEN"
    },
    "eye_baselines": {
-    "radius_m": 4.0,
+    "radius_m": 30.0,
     "geometric_opposite_m": {
      "known": true,
-     "value": 8.0,
+     "value": 60.0,
      "unit": "m",
      "canon_status": "DERIVED",
      "basis": "opposite facet centres, 2 r"
     },
     "geometric_adjacent_m": {
      "known": true,
-     "value": 5.656854249492381,
+     "value": 42.42640687119285,
      "unit": "m",
      "canon_status": "DERIVED",
      "basis": "adjacent facet centres, sqrt(2) r"
@@ -4259,8 +4259,8 @@
    {
     "radius_m": 4.0,
     "status": "WORKING (14!A28)",
-    "built": true,
-    "label": "r4 m \u00b7 WORKING, built",
+    "built": false,
+    "label": "r4 m \u00b7 STUDY overlay, not built",
     "wells": [
      {
       "label": "F1 upper-left",
@@ -4330,12 +4330,12 @@
      {
       "label": "support",
       "text": "shared EYE mount on the spine column (PROTOTYPE)",
-      "status": "PROTOTYPE"
+      "status": "OPEN"
      },
      {
       "label": "service",
       "text": "from inside the body hub",
-      "status": "PROTOTYPE"
+      "status": "OPEN"
      },
      {
       "label": "field of view",
@@ -19528,7 +19528,7 @@
   "file": "simulations/wf_first_ignition_timeline.json",
   "schema": "WF_FLIGHT_TIMELINE",
   "timeline_version": 2,
-  "sha256": "54bb3148b3e79213c473fa41fe11ec67bf6ffc8462c2443d85fda50a30f83787",
+  "sha256": "18857fc51a123c9676084897c5fe69cf4a26071488a45fa68bdbfefced004c71",
   "status": "PROTOTYPE",
   "fps": 24,
   "frame_range": [

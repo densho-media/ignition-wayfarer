@@ -352,7 +352,8 @@ func grammar_rule(name: String) -> String:
 				return rule[1]
 	return ""
 
-## One shared material per (family, ram face, wear): StandardMaterial3D when neither applies, else the p4_exterior shader.
+## One shared material per (family, ram face, wear): StandardMaterial3D when neither applies, else the p4_exterior shader. The ram face
+## takes the fractal shielding pattern when the grammar selects it (fractal_shield.pattern), else the S9 running-bond tiles.
 func grammar_material(family: String, ram: bool, wear: bool) -> Material:
 	var key := "%s|%s|%s" % [family, ram, wear]
 	if grammar_materials.has(key):
@@ -387,6 +388,10 @@ func grammar_material(family: String, ram: bool, wear: bool) -> Material:
 					["repair_value", "repair_value"], ["x_min", "x_min_m"], ["nx_min", "normal_x_min"]]:
 				m.set_shader_parameter(k[0], r[k[1]])
 			m.set_shader_parameter("pitting", r.get("pitting", 0.0))
+			var fractal: Dictionary = grammar.get("fractal_shield", {})
+			if fractal.get("pattern", "") == "fractal_hex":
+				m.set_shader_parameter("fractal_on", true)
+				WfFractalShield.bind(m, fractal, r)
 		material = m
 	grammar_materials[key] = material
 	return material

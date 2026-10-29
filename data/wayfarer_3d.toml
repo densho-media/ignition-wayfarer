@@ -776,7 +776,7 @@ doctrine_ref = "hsfp_design_doctrine"
 rationale = "Skin = the sourced 90 m diameter and ~3 m crown depth; wells, Lance, spine column, disruptor layer (existence, full diameter, ahead of the Brow), Crown housing band and bays are physics-locked. Hub, rim, truss, struts, the three sector keels (the sector radius and azimuths, 07!A10/A13, are sourced; the keels' existence ahead of ring B and their length are F2 selections), the Q45 bypass collar, the Crown port covers, ties, posts, Crown carriages, shutters, emitters and the control rig are engineering-flexible PROTOTYPE selections. The diversion-field zone and the damage cells are artistic displays over OPEN or DIAGNOSTIC values. M8.1: the production layer on the shield (production_detail: Brow aft-face panels, Crown rim module) is an artistic presentation layer over the unchanged engineering geometry (L4_VISUAL_CANDIDATE); each object also carries its element surface classes."
 PHYSICS_LOCKED = ["shield_skin", "eye_well", "dust_lance", "dust_lance_tip", "shield_spine_column", "disruptor_layer", "crown_housing", "crown_bay"]
 ENGINEERING_FLEXIBLE = ["shield_hub", "shield_rim", "shield_truss", "shield_mount", "sector_keel", "sector_tie", "sector_frame", "bypass_collar", "disruptor_post", "crown_shutter", "crown_port_cover", "eye_shutter_frame", "eye_shutter", "eye_window", "eye_facet_frame", "eye_raceway", "truss_node", "crown_housing_rib", "crown_service_hatch", "crown_carriage_frame", "crown_head_frame", "crown_carriage", "crown_emitter", "crown_launcher", "state_control", "nav_light", "rcs_thruster", "brow_panel_joint"]
-ARTISTIC = ["field_display", "damage_cell", "production_detail"]
+ARTISTIC = ["field_display", "damage_cell", "production_detail", "eye_shell"]
 
 # Forward defence (front systems). Sourced rules and values; every geometry choice is in forward_shield.prototype above.
 [forward_defense.order]
@@ -1016,13 +1016,27 @@ source_ref = "eye_well_geometry"
 evidence_ref = "eye_well_inputs"
 note = "Four wells centred near r ~4 m around the Lance; larger than the 2.5 m clear facet aperture. Window, shutter and baffle stack OPEN."
 
-# FWD-V2 Eye layout switch (user 2026-10-14): r4 is the WORKING source layout and the default; r24 is the outer placement of the Eye study
-# (12c9f64, 06aa53f) with the collar-bifurcated alternate truss. spec.apply_eye_layout moves the well centre radius in memory only.
+# FWD-V2 Eye layout switch (user 2026-10-14): r4 is the WORKING source layout; r16, r24 and r30 are outer placements with the
+# collar-bifurcated alternate truss (eye_truss_study). spec.apply_eye_layout moves the well centre radius in memory only.
+# User 2026-10-28/29: the Eyes go as far apart as the structure allows; after reviewing r16 the user chose 2/3 of the way from the shield
+# centre to its outer edge: 2/3 x 45 m = r30 (opposite Eyes 60 m apart, adjacent 42.4 m). At r30 the collars sit between truss rings 25
+# and 35 and the split spokes land on those ring nodes, so no ring is rerouted.
 [forward_defense.eye_layout]
 status = "STUDY"
-selected = "r4"
-radii_m = { r4 = 4.0, r24 = 24.0 }
-rationale = "The owner rates r24 study only and keeps r4 and B_array 8 m WORKING until a coupled Eye 02 + S&E 14 / mass / optics release (Eye 45 FD-B07, S&E 15!A167). Selecting r24 builds the outer wells on the cone, the alternate truss (eye_truss_study), per-facet frames and raceways instead of the shared hub mount; no mass, FEA, stiffness or optical value comes with it."
+selected = "r30"
+radii_m = { r4 = 4.0, r16 = 16.0, r24 = 24.0, r30 = 30.0 }
+rationale = "User decision 2026-10-29: the main model carries the r30 Eye layout, 2/3 of the 45 m shield radius (opposite Eyes 60 m apart, adjacent 42.4 m; r4 was 8 m). The Drive owner rows still rate the outer layouts a study and keep r4 and B_array 8 m WORKING until a coupled Eye 02 + S&E 14 / mass / optics release (Eye 45 FD-B07, S&E 15!A167), so the r4 owner target is reported as a declared study deviation until those rows are updated. Outer layouts build the wells on the cone, the alternate truss (eye_truss_study), per-facet frames and raceways instead of the shared hub mount; no mass, FEA, stiffness or optical value comes with it."
+
+# EYE shell (user 2026-10-29, PROTOTYPE depiction): each Eye reads as one plate of the fractal facing (production.exterior.fractal_shield):
+# a flat-top hexagonal shell plate, the plate size and orientation of the tiling, set into the skin round the round well, and a hexagonal
+# port of the same size in the disruptor layer. The round well, window and facet aperture stay inside. The port's inscribed circle keeps
+# at least the 2.25 m outer-port radius (FD-A04): the hex side is the larger of the plate side and the side whose apothem is that radius.
+#   proud_m  how far the shell stands ahead of the local skin face (under the eyelid gap); depth_m how far it reaches into the skin.
+[forward_defense.eye_shell]
+status = "PROTOTYPE"
+shape = "hex"
+proud_m = 0.015
+depth_m = 0.08
 
 [forward_defense.eye_wells.outer_port]
 unit = "m"
@@ -3961,6 +3975,45 @@ seam_value = 0.55
 jitter = 0.045
 repair_share = 0.03
 repair_value = 1.10
+
+# Fractal shielding (user brief 2026-10-27): the selected ram-face pattern is a hexagonal facing-plate tiling with Sierpinski-subdivided
+# triangles inside each plate, on the same ram faces as above (the Brow skin and the disruptor layer ahead of it); pattern =
+# "running_bond" restores the S9 tiles. The plates are the replaceable facing of the WORKING segmented Brow laminate
+# (forward_defense.regenerative: panel replacement for major loss), laid over the structural panels whose joints show on the aft face.
+# Shading and procedural normals only (fractal_shield.py is the reference, godot/shaders/fractal_shield.gdshaderinc the runtime and web
+# copy): no geometry, thickness, mass, opening or shielding claim; the stack stays OPEN (forward_shield.stack). PROTOTYPE depiction choices:
+#   plate_side_m      hex side (= circumradius), a shell module edge inside shell_panel_m; flat-top plates, one centred on the axis
+#                     2.6 m (user 2026-10-29, was 2.4): each EYE shell is one plate, and a 2.6 m hex has the 2.25 m outer-port apothem
+#   plate_gap_m       dark gap between plates (the grammar's joint gap): room for thermal growth and plate replacement
+#   fractal_depth     Sierpinski levels inside each of a plate's six triangles; level k's triangles have side plate_side_m / 2^k
+#   density           chance (0-1) that a triangle subdivides further, drawn per triangle from a stable hash; 1 is the full gasket
+#   groove_m          width of the level-0 grooves (the six spokes); level k is groove_m * groove_ratio^k wide
+#   relief_m          depth of the grooves, a surface relief; inset_m the recess of each Sierpinski centre triangle (never a perforation)
+#   fastener_radius_m one tri-clamp at every other plate corner: each clamp holds three plates, each plate hangs on three clamps
+#   closeout_m        plain collar between the pattern and every opening (EYE wells and ports, Lance root, Crown windows and ports, rim)
+#   lod_px            a level draws once its triangles span at least this many pixels and fades in over twice that (distance LOD)
+#   *_value           value multipliers of the shell colour (gap, groove, inset face); jitter and repairs come from ram_face
+#   max_relief_fraction  the relief and inset together stay within this share of the display skin (forward_shield.prototype)
+[production.exterior.fractal_shield]
+status = "PROTOTYPE"
+evidence_ref = "p4_exterior_grammar"
+pattern = "fractal_hex"
+plate_side_m = 2.6
+plate_gap_m = 0.08
+fractal_depth = 4
+density = 0.85
+groove_m = 0.03
+groove_ratio = 0.75
+relief_m = 0.003
+inset_m = 0.0015
+fastener_radius_m = 0.11
+closeout_m = 0.35
+rim_closeout_m = 0.5
+lod_px = 4.0
+gap_value = 0.55
+groove_value = 0.80
+inset_value = 0.93
+max_relief_fraction = 0.10
 
 # S9: the switchable post-voyage wear and repair layer (P4-STATE, Art Style row 18): off for the Y155 launch/departure baseline (clean,
 # serviced, institutional), on for the post-voyage state; depiction only, no geometry or canon change, never baked into the saved assets.

@@ -107,6 +107,7 @@ func _ready() -> void:
 	ship = load("res://generated/wayfarer_docked.glb").instantiate()
 	add_child(ship)
 	WfProductionLayer.apply(ship, manifest)
+	WfFractalShield.apply(ship, manifest.get("look", {}).get("exterior", {}).get("grammar", {}).get("fractal_shield", {}))
 	var by_name := {}
 	_collect(ship, by_name)
 	_mechanisms(by_name)

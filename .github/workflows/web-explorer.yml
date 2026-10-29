@@ -85,6 +85,19 @@ jobs:
           echo "PIPELINE_SECONDS=$SECONDS" >> "$GITHUB_ENV"
           echo "PIPELINE_RUN=$(python3 -c 'import json; print(json.load(open("pipeline.json"))["run_dir"])')" >> "$GITHUB_ENV"
 
+      - name: Review file for the owner (the fractal shielding in Blender, opens in Material Preview on the Brow)
+        run: |
+          "$WAYFARER_BLENDER" -b --python src/wayfarer/presentation/review_fractal_shield.py -- --out review/WF_REVIEW_FRACTAL_SHIELD.blend 2>&1 | tail -20
+          test -s review/WF_REVIEW_FRACTAL_SHIELD.blend
+
+      - name: Upload the review file
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9  # v7.0.2
+        with:
+          name: wayfarer-review-fractal-shield
+          path: review/WF_REVIEW_FRACTAL_SHIELD.blend
+          if-no-files-found: error
+          retention-days: 14
+
       - name: Previous verified release (its Enter Wayfarer files are reused when the play inputs are unchanged)
         env:
           GH_TOKEN: ${{ github.token }}

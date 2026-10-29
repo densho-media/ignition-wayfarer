@@ -462,7 +462,7 @@ def sector_ties(s, base=False):
         moved = {q['name'][len('Alt_'):]: q['pts'][1] for q in alt['members'] if q['role'] == 'sector_tie'}
         for tie in out:
             if tie['name'] in moved:
-                tie['b'] = moved[tie['name']]; tie['target'] = 'collar'
+                tie['b'] = moved[tie['name']]; tie['node'] = tie['target']; tie['target'] = 'collar'
     return out
 
 
@@ -529,9 +529,60 @@ def eye_port_required_radius(s, layer):
     return r_ap+(r_w-r_ap)*(depth+layer['standoff'])/depth
 
 
+def eye_shell(s):
+    """The EYE shell (forward_defense.eye_shell, PROTOTYPE): None for round ports, or the hexagon every Eye wears, one plate of the fractal facing:
+    flat-top (corners on +-Y, as the tiling), side the larger of the facing plate side and the side whose apothem is the round port radius."""
+    e = s['forward_defense'].get('eye_shell')
+    if not e or e['shape'] != 'hex':
+        return None
+    rp = max(prototype(s)['eye_port_scale']*eye_port_required_radius(s, q) for q in disruptor_layers(s))
+    side = max(s['production']['exterior']['fractal_shield']['plate_side_m'], 2*rp/math.sqrt(3))
+    return dict(e, side=side, apothem=side*math.sqrt(3)/2)
+
+
+def hexagon(side, cy=0.0, cz=0.0, per_edge=1):
+    """Flat-top hexagon of the facing (corners on +-Y) round (cy, cz) as (y, z), counter-clockwise from +Y, per_edge points per edge."""
+    out = []
+    for k in range(6):
+        a0, a1 = math.radians(60*k), math.radians(60*(k+1))
+        for i in range(per_edge):
+            u = i/per_edge
+            out.append((cy+side*((1-u)*math.cos(a0)+u*math.cos(a1)), cz+side*((1-u)*math.sin(a0)+u*math.sin(a1))))
+    return out
+
+
+def hex_boundary(side, theta):
+    """Distance from a flat-top hexagon's centre to its boundary along direction theta (radians from +Y)."""
+    a = math.sqrt(3)/2*side; t = (theta-math.pi/6) % (math.pi/3)-math.pi/6       # edge normals at 30 deg + k 60 deg
+    return a/math.cos(t)
+
+
+def eye_shell_mesh(s, w, n=36):
+    """The hexagonal EYE shell round well w (forward_defense.eye_shell): a plate ring from the round well lip out to the flat-top hexagon, its top
+    proud_m ahead of the local skin face and its back depth_m into the skin, following the face (flat hub or cone). Vertices and faces: four rings
+    of n points (top outer, top inner, back inner, back outer); every 60 deg step lands on a hexagon corner."""
+    e = eye_shell(s); rw = w['radius']; vs = []
+    for kind in ('top_out', 'top_in', 'back_in', 'back_out'):
+        for k in range(n):
+            th = 2*math.pi*k/n; rad = hex_boundary(e['side'], th) if kind.endswith('out') else rw
+            y, z = w['y']+rad*math.cos(th), w['z']+rad*math.sin(th)
+            vs.append((face_x_at(s, math.hypot(y, z))+(e['proud_m'] if kind.startswith('top') else -e['depth_m']), y, z))
+    fs = [(a*n+(k+1) % n, a*n+k, ((a+1) % 4)*n+k, ((a+1) % 4)*n+(k+1) % n) for a in range(4) for k in range(n)]
+    return vs, fs
+
+
 def eye_port_radius(s, layer):
-    """Port radius cut in a layer coaxial with each well: the required radius times the PROTOTYPE eye_port_scale (>= 1)."""
-    return prototype(s)['eye_port_scale']*eye_port_required_radius(s, layer)
+    """Port radius cut in a layer coaxial with each well: the required radius times the PROTOTYPE eye_port_scale (>= 1). With the hexagonal EYE
+    shell it is the hexagonal port's apothem (its inscribed circle), never below that radius."""
+    e = eye_shell(s)
+    return e['apothem'] if e else prototype(s)['eye_port_scale']*eye_port_required_radius(s, layer)
+
+
+def eye_port_outer_radius(s, layer):
+    """Largest distance from a port's centre to its edge: the hexagon's corner radius, or the round port's radius. Clearances to the posts, the
+    other ports, the Lance hole and the Crown housing use it."""
+    e = eye_shell(s)
+    return e['side'] if e else eye_port_radius(s, layer)
 
 
 def lance_hole_radius(s, layer):
@@ -576,13 +627,15 @@ def eye_baselines(s, radius=None):
 
 
 def eye_ports(s, layer):
-    return [dict(index=w['index'], y=w['y'], z=w['z'], radius=eye_port_radius(s, layer), well_radius=w['radius']) for w in wells(s)]
+    e = eye_shell(s)
+    return [dict(index=w['index'], y=w['y'], z=w['z'], radius=eye_port_radius(s, layer), outer_radius=eye_port_outer_radius(s, layer),
+                 shape='hex' if e else 'round', side=e['side'] if e else None, well_radius=w['radius']) for w in wells(s)]
 
 
 def disruptor_open_fraction(s, layer=None):
     """DIAGNOSTIC: share of the projected shield disc left open by the EYE ports, the Crown ports and the Lance hole."""
     layer = layer or disruptor_layers(s)[0]
-    area = sum(math.pi*q['radius']**2 for q in eye_ports(s, layer))+sum(q['width']*(q['r1']-q['r0']) for q in crown_ports(s))+math.pi*lance_hole_radius(s, layer)**2
+    area = sum((2*math.sqrt(3) if q['shape'] == 'hex' else math.pi)*q['radius']**2 for q in eye_ports(s, layer))+sum(q['width']*(q['r1']-q['r0']) for q in crown_ports(s))+math.pi*lance_hole_radius(s, layer)**2
     return area/(math.pi*shield_radius(s)**2)
 
 
@@ -666,7 +719,8 @@ def disruptor_flat(s, layer):
     thetas = sheet_angles(s); rc = cone_start_radius(s)
     circle = lambda r, cy=0.0, cz=0.0, n=48: [(cy+r*math.cos(2*math.pi*i/n), cz+r*math.sin(2*math.pi*i/n)) for i in range(n)]
     loops = [[(rc*math.cos(t), rc*math.sin(t)) for t in thetas]]
-    loops += [circle(q['radius'], q['y'], q['z']) for q in eye_ports(s, layer) if math.hypot(q['y'], q['z'])+q['radius'] < rc]
+    loops += [(hexagon(q['side'], q['y'], q['z'], 8) if q['shape'] == 'hex' else circle(q['radius'], q['y'], q['z']))
+              for q in eye_ports(s, layer) if math.hypot(q['y'], q['z'])+q['outer_radius'] < rc]
     loops.append(circle(lance_hole_radius(s, layer)))
     return dict(loops=loops, x_aft=layer['aft_hub'], x_front=layer['front_hub'])
 
@@ -1000,7 +1054,7 @@ def sector_truss_count(s):
     labels = {}
     for t in sector_ties(s):
         if math.isclose(keels[t['sector']]['r'], R, abs_tol=1e-9):
-            labels.setdefault((t['sector'], round(t['theta'], 9)), set()).add(t['target'])
+            labels.setdefault((t['sector'], round(t['theta'], 9)), set()).add(t.get('node', t['target']))      # a tie rerouted to a well collar keeps its truss node
     return sum(1 for v in labels.values() if v == {'hub', 'a', 'b'})      # a sector counts only with its hub tie and both truss-node ties
 
 
@@ -1191,15 +1245,15 @@ def validate(s):
         ports = eye_ports(s, layer)
         need(all(q_['radius'] >= eye_port_required_radius(s, layer)-1e-9 for q_ in ports), f"{layer['name']}: every EYE port at least the no-vignetting radius")
         if not eye_layout_active(s):
-            need(all(math.hypot(q_['y'], q_['z'])+q_['radius']+clr <= st['cone_r'] for q_ in ports), f"{layer['name']}: EYE ports lie in the flat hub disc")
+            need(all(math.hypot(q_['y'], q_['z'])+q_['outer_radius']+clr <= st['cone_r'] for q_ in ports), f"{layer['name']}: EYE ports lie in the flat hub disc")
         else:          # outer layout: the ports open the cone, clear of the Crown ports and inside the Crown housing
-            need(all(math.hypot(q_['y'], q_['z'])+q_['radius']+clr <= prototype(s)['crown_housing_inner_radius_m'] for q_ in ports), f"{layer['name']}: EYE ports stay inside the Crown housing")
-        need(all(math.hypot(q_['y'], q_['z'])-q_['radius']-lance_hole_radius(s, layer) >= clr for q_ in ports), f"{layer['name']}: ports clear the Lance hole")
-        need(all(math.dist((a['y'], a['z']), (b['y'], b['z']))-a['radius']-b['radius'] >= clr for i, a in enumerate(ports) for b in ports[i+1:]), f"{layer['name']}: ports clear each other")
+            need(all(math.hypot(q_['y'], q_['z'])+q_['outer_radius']+clr <= prototype(s)['crown_housing_inner_radius_m'] for q_ in ports), f"{layer['name']}: EYE ports stay inside the Crown housing")
+        need(all(math.hypot(q_['y'], q_['z'])-q_['outer_radius']-lance_hole_radius(s, layer) >= clr for q_ in ports), f"{layer['name']}: ports clear the Lance hole")
+        need(all(math.dist((a['y'], a['z']), (b['y'], b['z']))-a['outer_radius']-b['outer_radius'] >= clr for i, a in enumerate(ports) for b in ports[i+1:]), f"{layer['name']}: ports clear each other")
     for post in disruptor_posts(s):
         for layer in layers[:1]:
             for pt in eye_ports(s, layer):
-                need(math.hypot(post['r']*math.cos(post['azimuth'])-pt['y'], post['r']*math.sin(post['azimuth'])-pt['z']) >= pt['radius']+post['radius']+clr-1e-9, f"{post['name']} stands inside an EYE port")
+                need(math.hypot(post['r']*math.cos(post['azimuth'])-pt['y'], post['r']*math.sin(post['azimuth'])-pt['z']) >= pt['outer_radius']+post['radius']+clr-1e-9, f"{post['name']} stands inside an EYE port")
         for w in crown_ports(s):
             ang = abs(((post['azimuth']-w['azimuth']+math.pi) % (2*math.pi))-math.pi)
             need(not (w['r0']-post['radius'] <= post['r'] <= w['r1']+post['radius'] and ang*post['r'] < w['width']/2+post['radius']), f"{post['name']} stands inside a Crown port")

@@ -42,6 +42,11 @@ close-up, regression check, MODEL/TODO and Model Status update.
   whitebox and cultural reviews; S7 waits on engineering releases. **Owner review:** the ram-face look and the wear layer (P4-LOCKED (b), P4-STATE) with the other candidates. Every new asset
   stays `L4_VISUAL_CANDIDATE` until the owner reviews it; nothing reaches `main` without the owner's squash approval.
   **Done when:** the plan's S11 whole-ship review is accepted by the owner.
+- [ ] **FSH — Fractal shielding on the Brow's ram faces (user brief 2026-10-27), BUILT as shading, owner review.** The hexagonal plate and
+  Sierpiński pattern (`[production.exterior.fractal_shield]`, docs/MODEL.md) replaces the S9 running-bond ram tiles by default in the Blender
+  grammar look, the flight look, the walk and Explore Ship. **Open:** the Godot runtime checks (`runtime-check flight-grammar excursion`),
+  the Blender grammar stills (`p4_review.py` ram_face, ram_close) and a desktop-GPU frame-time comparison of the Brow view with
+  `pattern` fractal_hex against running_bond; the owner's choice between the two patterns.
 - [ ] **MOD — Modular detail (docs/MODULES.md).** Every production assembly is a detail pack (phase 2, 2026-10-23: `m7_spine`,
   `ring_a_transfer`, `m8_forward` migrated with geometry, motion, runtime and pixel equivalence), packs carry their own contracts, and
   approved authored meshes travel as committed glTF data; each ring is its own engineering asset (phase 3, `WF_HABITAT_A`/`_B`).
@@ -362,7 +367,8 @@ physical item once, reuse existing envelopes and do not fund components twice. N
 ## H — Finish forward defense and EYE service integration
 
 Sources: Eye 45, S&E 50 AG-001..020, Tale 28; `references/FWD_V2_EYE_PLACEMENT_2026-10-13.md`.
-The layout switch is already built. Production remains r4 / B_array 8 m WORKING; r16 preferred comparison and r24 study only.
+The layout switch is already built. User 2026-10-29: the saved model carries r30 (2/3 of the shield radius) with hexagonal EYE shells;
+the Drive owner rows still keep r4 / B_array 8 m WORKING (FD-B07) and need updating with the owner's authorization.
 
 - [ ] **H02 — Build selected carrier/station/raceway geometry. AFTER the owner's interface direction.** H01 evidence:
   `runs/20261016T1200Z-fwd-h01`, `references/FWD_V2_EYE_PLACEMENT_2026-10-13.md` (H01 section); stranded-sled recovery needs a

@@ -189,13 +189,19 @@ def run(root, out=None, pipeline_run=None, draco=True, with_play=True, native=Fa
         holo_text = json.dumps(representation.holo_style(root, manifest['nodes']), separators=(',', ':'))
         holo_file = f'model/holo-{hashlib.sha256(holo_text.encode()).hexdigest()[:12]}.json'
         (viewer / holo_file).write_text(holo_text)
+        # The fractal shielding: the shared GLSL (the Godot runtime's include) and its uniforms from the runtime manifest.
+        shield_text = (root / 'godot/shaders/fractal_shield.gdshaderinc').read_text()
+        shield_file = f'model/shield-{hashlib.sha256(shield_text.encode()).hexdigest()[:12]}.glsl'
+        (viewer / shield_file).write_text(shield_text)
+        shield = manifest['look']['exterior']['grammar'].get('fractal_shield')
         build = {'contract': 'WF_WEB_EXPLORER', 'version': 2, 'vessel': 'G.U. WAYFARER 001', 'project': 'IGNITION',
                  'git_revision': revision, 'git_dirty': dirty, 'built_utc': pipeline.utc_now(),
                  'representation': manifest['representation'], 'preset': manifest['preset'], 'blender': manifest['blender'],
                  'three': THREE['version'], 'draco': draco, 'spec_hash': manifest['spec_hash'], 'source_map_hash': manifest['source_map_hash'],
                  'coordinates': manifest['coordinates'], 'bounds_runtime_m': manifest['bounds_runtime_m'], 'triangles': manifest['triangles'],
                  'glb': {k: glb[k] for k in ('bytes', 'nodes', 'mesh_nodes', 'meshes', 'materials', 'extensions_required')},
-                 'glb_sha256': glb_sha, 'glb_file': glb_file, 'nodes_file': nodes_file, 'holo_file': holo_file, 'pipeline': built}
+                 'glb_sha256': glb_sha, 'glb_file': glb_file, 'nodes_file': nodes_file, 'holo_file': holo_file, 'shield_file': shield_file,
+                 'shield': shield, 'pipeline': built}
         (viewer / 'build.json').write_text(json.dumps(build, indent=2) + '\n')
         play = None
         if with_play:
@@ -244,7 +250,8 @@ def release_record(root, site, build, play, revision, dirty, built):
     files = {p.relative_to(site).as_posix(): {'bytes': p.stat().st_size, 'sha256': pipeline.sha256(p)}
              for p in sorted(site.rglob('*')) if p.is_file()}
     size = lambda names: sum(files[n]['bytes'] for n in names)
-    viewer_files = ['viewer/index.html', 'viewer/viewer.css', 'viewer/viewer.js', 'viewer/appearance.js', 'viewer/build.json', f"viewer/{build['nodes_file']}",
+    viewer_files = ['viewer/index.html', 'viewer/viewer.css', 'viewer/viewer.js', 'viewer/appearance.js', 'viewer/shield.js', 'viewer/build.json',
+                    f"viewer/{build['nodes_file']}", f"viewer/{build['shield_file']}",
                     f"viewer/{build['glb_file']}", *[n for n in files if n.startswith('viewer/vendor/') and n.endswith(('.js', '.wasm'))]]
     release = {
         'contract': 'WF_WEB_RELEASE', 'version': 1, 'vessel': 'G.U. WAYFARER 001', 'project': 'IGNITION',

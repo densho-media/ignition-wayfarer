@@ -17,6 +17,7 @@ from common import pose_configuration
 from spec import load, derived
 import drive_manifold
 import forward_shield
+import fractal_shield
 import look
 import thermal_geometry
 
@@ -52,7 +53,19 @@ def surface(m, node, base, rough, wear=None, ram=None):
         rgh = op('ADD', rough, op('MULTIPLY', mask, wear['rough']))
         tint = N.new('ShaderNodeMix'); tint.data_type = 'RGBA'; put(mask, tint.inputs[0])      # sockets 6/7/2: the colour A, B, Result
         tint.inputs[6].default_value = (1, 1, 1, 1); tint.inputs[7].default_value = (*wear['tint'], 1)
-    if ram:
+    if ram and ram.get('fractal'):
+        fv, fh = fractal_nodes(nt, op, pos, ram['fractal'], ram)
+        on = op('MULTIPLY', op('GREATER_THAN', nrm.outputs['X'], ram['normal_x_min']), op('GREATER_THAN', pos.outputs['X'], ram['x_min_m']))
+        if ram.get('pitting'):
+            pit = N.new('ShaderNodeTexWhiteNoise'); pit.noise_dimensions = '3D'
+            sc = N.new('ShaderNodeVectorMath'); sc.operation = 'SCALE'; L.new(geo.outputs['Position'], sc.inputs[0]); sc.inputs['Scale'].default_value = 25.0
+            L.new(sc.outputs[0], pit.inputs['Vector'])
+            fv = op('MULTIPLY', fv, op('SUBTRACT', 1.0, op('MULTIPLY', op('LESS_THAN', pit.outputs['Value'], ram['pitting']), 0.45)))
+        value = op('MULTIPLY', value, op('ADD', 1.0, op('MULTIPLY', on, op('SUBTRACT', fv, 1.0))))
+        bump = N.new('ShaderNodeBump'); bump.inputs['Distance'].default_value = 1.0     # the height is in metres
+        put(op('MULTIPLY', fh, on), bump.inputs['Height'])
+        L.new(bump.outputs['Normal'], node.inputs['Normal'])
+    elif ram:
         tw, th_ = ram['tile_m'], ram['tile_m']/2
         u = op('DIVIDE', pos.outputs['Y'], tw); v = op('DIVIDE', pos.outputs['Z'], th_)
         row = op('FLOOR', v); uu = op('ADD', u, op('MULTIPLY', op('MODULO', row, 2.0), 0.5))
@@ -79,6 +92,91 @@ def surface(m, node, base, rough, wear=None, ram=None):
         out = mul.outputs[0]
     L.new(out, node.inputs['Base Color'])
     put(rgh, node.inputs['Roughness'])
+
+
+def fractal_nodes(nt, op, pos, u, ram, fw=0.003):
+    """The fractal shielding pattern (fractal_shield.sample; the runtime's fractal_shield.gdshaderinc) as Math nodes on the position's
+    Y and Z: (value, height) sockets. Blender's white noise stands in for the integer hash (the same statistics, not the same plates), and
+    the footprint is a fixed fw because shader nodes have no screen derivatives: every level draws and Cycles' samples average it."""
+    N, L = nt.nodes, nt.links
+    S3, PI = math.sqrt(3.0), math.pi
+
+    def mn(a, b): return op('MINIMUM', a, b)
+    def mx(a, b): return op('MAXIMUM', a, b)
+    def add(a, b): return op('ADD', a, b)
+    def sub(a, b): return op('SUBTRACT', a, b)
+    def mul(a, b): return op('MULTIPLY', a, b)
+    def lt(a, b): return op('LESS_THAN', a, b)
+    def clamp01(a): return mn(mx(a, 0.0), 1.0)
+    def mix(a, b, t): return add(a, mul(t, sub(b, a)))
+    def smooth(e0, e1, x):
+        t = clamp01(op('DIVIDE', sub(x, e0), e1-e0)); return mul(mul(t, t), sub(3.0, mul(2.0, t)))
+    def line(d, w):                                   # fs_line with the fixed footprint
+        we = max(w, fw); return mul(clamp01(add(.5, op('DIVIDE', sub(we/2, d), fw))), w/we)
+    def vgroove(d, w):
+        return mul(clamp01(sub(1.0, op('DIVIDE', mul(2.0, d), max(w, 2*fw)))), 1.0 if w >= 3*fw else 0.0)
+    def noise(a, b, c):
+        v = N.new('ShaderNodeCombineXYZ')
+        for i, x in enumerate((a, b, c)):
+            if isinstance(x, (int, float)):
+                v.inputs[i].default_value = x
+            else:
+                L.new(x, v.inputs[i])
+        wn = N.new('ShaderNodeTexWhiteNoise'); wn.noise_dimensions = '3D'; L.new(v.outputs[0], wn.inputs['Vector']); return wn.outputs['Value']
+
+    y, z = pos.outputs['Y'], pos.outputs['Z']; a = u['fs_side']; h0 = a*S3/2
+    # closeouts
+    r = op('SQRT', add(mul(y, y), mul(z, z)))
+    wy = op('ABSOLUTE', sub(op('ABSOLUTE', y), u['fs_well_q'])); wz = op('ABSOLUTE', sub(op('ABSOLUTE', z), u['fs_well_q']))
+    if u['fs_well_hex'] > .5:          # the hexagonal EYE shell keep-out (fs_well_r its apothem)
+        dw = sub(mx(wz, add(mul(wy, S3/2), mul(wz, .5))), u['fs_well_r'])
+    else:
+        dw = sub(op('SQRT', add(mul(wy, wy), mul(wz, wz))), u['fs_well_r'])
+    dl = sub(r, u['fs_lance_r'])
+    step = 2*PI/u['fs_crown_n']; th = sub(op('ARCTAN2', z, y), u['fs_crown_phase'])
+    dth = sub(th, mul(step, op('FLOOR', add(op('DIVIDE', th, step), .5))))
+    dx = sub(op('ABSOLUTE', mul(r, op('SINE', dth))), u['fs_crown_hw']); dr = sub(op('ABSOLUTE', sub(r, u['fs_crown_rm'])), u['fs_crown_hr'])
+    dc = add(op('SQRT', add(mul(mx(dx, 0.0), mx(dx, 0.0)), mul(mx(dr, 0.0), mx(dr, 0.0)))), mn(mx(dx, dr), 0.0))
+    e = mn(mn(dw, dl), mn(dc, sub(u['fs_rim_r'], r)))
+    inside = lt(e, 0.0); ne = op('ABSOLUTE', e)
+    cv = add(1.0, mul(line(ne, u['fs_gap']), u['fs_gap_value']-1.0)); ch = mul(-2*u['fs_relief'], vgroove(ne, u['fs_gap']))
+    # the hexagon (cube rounding)
+    fq = op('DIVIDE', mul(2/3, y), a); fr = op('DIVIDE', add(mul(-1/3, y), mul(S3/3, z)), a); fs_ = sub(mul(-1.0, fq), fr)
+    q0, r0, t0 = (op('FLOOR', add(c, .5)) for c in (fq, fr, fs_))
+    dq, dr_, dt = (op('ABSOLUTE', sub(c0, c)) for c0, c in ((q0, fq), (r0, fr), (t0, fs_)))
+    use_q = mul(op('GREATER_THAN', dq, dr_), op('GREATER_THAN', dq, dt)); use_r = mul(sub(1.0, use_q), op('GREATER_THAN', dr_, dt))
+    q = mix(q0, sub(mul(-1.0, r0), t0), use_q); rr = mix(r0, sub(mul(-1.0, q0), t0), use_r)
+    ly = sub(y, mul(a*1.5, q)); lz = sub(z, mul(a*S3, add(rr, mul(.5, q))))
+    tone = add(add(1.0, mul(sub(noise(q, rr, 7.0), .5), 2*u['fs_jitter'])), mul(lt(noise(add(q, 37.0), sub(rr, 11.0), 3.0), u['fs_repair_share']), u['fs_repair_value']-1.0))
+    k = op('FLOOR', op('DIVIDE', op('ARCTAN2', lz, ly), PI/3)); k = add(k, mul(lt(k, 0.0), 6.0))
+    ang = mul(k, -PI/3); ca, sa = op('COSINE', ang), op('SINE', ang)
+    py = sub(mul(ly, ca), mul(lz, sa)); pz = add(mul(ly, sa), mul(lz, ca))
+    b1 = op('DIVIDE', mul(2.0, pz), a*S3); b0 = sub(op('DIVIDE', py, a), mul(.5, b1)); bc = sub(sub(1.0, b0), b1)
+    odd = op('MODULO', k, 2.0); vy = mix(a, a/2, odd); vz = mul(odd, h0)
+    df = op('SQRT', add(mul(sub(py, vy), sub(py, vy)), mul(sub(pz, vz), sub(pz, vz))))
+    sd = mul(mn(b0, b1), h0)
+    groove = line(sd, u['fs_groove']); h = mul(-u['fs_relief'], vgroove(sd, u['fs_groove'])); v = tone
+    b = [bc, b0, b1]; path = 1.0; alive = 1.0; side = a; w = u['fs_groove']
+    for lv in range(1, int(u['fs_depth'])+1):
+        alive = mul(alive, lt(noise(add(mul(q, 7.0), k), add(mul(rr, 7.0), lv), path), u['fs_density']))
+        hk = side*S3/2; w *= u['fs_ratio']
+        d = mul(mn(op('ABSOLUTE', sub(b[0], .5)), mn(op('ABSOLUTE', sub(b[1], .5)), op('ABSOLUTE', sub(b[2], .5)))), hk)
+        groove = mx(groove, mul(alive, line(d, w)))
+        h = mn(h, mul(alive, mul(-u['fs_relief'], vgroove(d, w))))
+        bm = mx(b[0], mx(b[1], b[2])); centre = mul(alive, lt(bm, .5))
+        v = mul(v, add(1.0, mul(centre, u['fs_inset_value']-1.0)))
+        h = mn(h, mul(centre, -u['fs_inset']))
+        alive = mul(alive, sub(1.0, lt(bm, .5)))
+        j0 = op('GREATER_THAN', b[0], sub(bm, 1e-7)); j1 = mul(sub(1.0, j0), op('GREATER_THAN', b[1], sub(bm, 1e-7))); j2 = sub(sub(1.0, j0), j1)
+        b = [sub(mul(2.0, b[0]), j0), sub(mul(2.0, b[1]), j1), sub(mul(2.0, b[2]), j2)]
+        path = add(add(mul(path, 4.0), add(j1, mul(2.0, j2))), 1.0); side /= 2
+    v = mul(v, add(1.0, mul(groove, u['fs_groove_value']-1.0)))
+    cg = line(mul(bc, h0), u['fs_gap'])
+    pv = add(v, mul(cg, sub(u['fs_gap_value'], v))); ph = mn(h, mul(-2*u['fs_relief'], vgroove(mul(bc, h0), u['fs_gap'])))
+    clamp_ = lt(df, u['fs_fastener']); fd = sub(u['fs_fastener'], df)
+    pv = mix(pv, mul(tone, add(1.0, mul(line(fd, u['fs_groove']), u['fs_groove_value']-1.0))), clamp_)
+    ph = mix(ph, mul(-u['fs_relief'], vgroove(fd, u['fs_groove'])), clamp_)
+    return mix(pv, cv, inside), mix(ph, ch, inside)
 
 
 def dress(s, functional=False, emit=True, grammar=False, wear=False):
@@ -125,6 +223,10 @@ def dress(s, functional=False, emit=True, grammar=False, wear=False):
             node.inputs['Roughness'].default_value = rough
             node.inputs['Metallic'].default_value = metal
             ram = X['ram_face'] if name in X['ram_face']['ram_materials'] else None
+            if ram and X['fractal_shield']['pattern'] == 'fractal_hex':     # the fractal shielding replaces the running-bond tiles
+                ram = dict(ram, fractal=fractal_shield.uniforms(s))
+                if wear:
+                    ram['fractal'].update(fs_jitter=X['wear']['ram_face']['jitter'], fs_repair_share=X['wear']['ram_face']['repair_share'])
             if ram or wear and rule in X['wear']:
                 surface(m, node, (r, g, b), rough, X['wear'].get(rule) if wear else None,
                         ram and dict(ram, **(X['wear']['ram_face'] if wear else {})))

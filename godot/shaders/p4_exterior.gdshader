@@ -1,6 +1,8 @@
 // Phase 4 S9: the selected exterior grammar's family finish with the ILLUSTRATIVE ram-face tile-and-repair shading and the switchable
 // post-voyage wear layer (manifest look.exterior.grammar; the Blender grammar look hero_preview.surface runs the same formulas with
 // Blender's noise and hash). Uniforms come from the manifest; colours are linear. Presentation only, no spacecraft fact.
+// With fractal_on the ram face takes the fractal shielding pattern (fractal_shield.gdshaderinc, manifest look.exterior.grammar.fractal_shield)
+// instead of the running-bond tiles: its value pattern and a procedural normal from the relief, faded per level by the pixel footprint.
 shader_type spatial;
 render_mode cull_disabled;           // the exported glTF materials are double-sided (Blender's default); some generated faces wind inward
 
@@ -23,6 +25,9 @@ uniform float repair_value = 1.1;
 uniform float pitting = 0.0;
 uniform float x_min = 100.0;
 uniform float nx_min = 0.5;
+uniform bool fractal_on = false;
+
+#include "res://shaders/fractal_shield.gdshaderinc"
 
 varying vec3 wpos;
 varying vec3 wnrm;
@@ -73,7 +78,20 @@ void fragment() {
 		r += m * wear_rough;
 		b *= mix(vec3(1.0), tint, m);
 	}
-	if (ram_on && wnrm.x > nx_min && wpos.x > x_min) {
+	if (ram_on && fractal_on) {
+		// Derivatives stay outside the per-pixel face test: the pattern runs on every ram-material pixel, the face mask picks the result.
+		vec2 fp = bp.yz;
+		vec2 fwv = fwidth(fp);
+		float fv;
+		float fh;
+		fs_pattern(fp, max(max(fwv.x, fwv.y), 1e-5), fv, fh);
+		float on = (wnrm.x > nx_min && wpos.x > x_min) ? 1.0 : 0.0;
+		if (pitting > 0.0) {
+			fv *= 1.0 - 0.45 * step(hash3(floor(bp * 25.0)), pitting);
+		}
+		value *= mix(1.0, fv, on);
+		NORMAL = fs_bump(dFdx(VERTEX), dFdy(VERTEX), NORMAL, dFdx(fh * on), dFdy(fh * on));
+	} else if (ram_on && wnrm.x > nx_min && wpos.x > x_min) {
 		float th = tile * 0.5;
 		float u = bp.y / tile;
 		float v = bp.z / th;

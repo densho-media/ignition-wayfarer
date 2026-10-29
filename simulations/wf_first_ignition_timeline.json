@@ -1,7 +1,7 @@
 {
  "schema": "WF_FLIGHT_TIMELINE",
  "timeline_version": 2,
- "spec_hash": "97214954edccfaef9f8e5143dfd23eea35a3c36d308e30d3d0129d0545f6e996",
+ "spec_hash": "ad2a958fdab894fe1225b3ef4b870d0934509ab6ff2ac82590b44bd1e2e8dc0c",
  "source_map_hash": "699026c373f39a39e1bc6e08c02b1cb6db60e39a135d3d28c11543473b559069",
  "reference_frame": "Departure rest frame; Newtonian linear V1 as 20_FIRST_IGNITION (gamma is not applied to the kinematics)",
  "status": "PROTOTYPE",

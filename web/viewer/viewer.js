@@ -6,6 +6,7 @@
 // WEB-003: hologram styles over the same meshes, as presentation only: SUBSYSTEMS (the M5 subsystem hologram: unshaded, additive, rim
 // and scan bands in each functional subsystem's overlay colour) and ENGINE (the Blender engine exposition hologram: one colour, rim glow,
 // wire edges). Colours and classification come from build.json's holo_file (shots/m5_subsystems.toml, SH_ENGINE_HOLOGRAM).
+// Fractal shielding: the Brow's ram faces take the hexagonal plate and Sierpinski pattern (shield.js) over their imported materials.
 // WEB-004: style, per-target visibility states and focus are separate (appearance.js resolves every node from them); HYBRID focuses
 // what is clicked; ghosts are non-additive and drawn once per pixel, holograms add at most HOLO_LAYERS layers (stencil), so dense
 // radiator stacks cannot saturate. Imported materials stay on each mesh as userData.material and are put back by the resolver.
@@ -15,6 +16,7 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import * as A from './appearance.js';
+import { patchShield } from './shield.js';
 
 const canvas = document.getElementById('view');
 const status = document.getElementById('status');
@@ -677,6 +679,9 @@ async function load() {
       byId.get(id).meshes.push(o);
     }
   });
+  // The fractal shielding on the Brow's ram faces (shield.js); a missing pattern file leaves the exported finishes.
+  const glsl = build?.shield_file ? await fetch(build.shield_file).then(r => r.ok ? r.text() : null).catch(() => null) : null;
+  stats.shield_materials = patchShield(model, build?.shield, glsl);
   scene.add(model);
   box = new THREE.Box3().setFromObject(model);
   radius = box.getSize(new THREE.Vector3()).length() / 2;

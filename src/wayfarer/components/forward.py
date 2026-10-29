@@ -10,6 +10,7 @@ over OPEN values. The Crown is a PROTOTYPE proxy of a WORKING / accepted directi
 import math
 import bpy
 from mathutils import Matrix, Vector, geometry
+import bmesh
 from common import empty, material, mesh, loft, line, ring, cut, cylinder
 import forward_shield as fsh
 
@@ -69,6 +70,11 @@ def plate_mesh(loops, x_top, x_aft):
             top = (a, d, b)
         faces.append(top); faces.append((n+top[0], n+top[2], n+top[1]))
     return vertices, faces
+
+
+def fix_normals(obj):
+    """Outward face normals on a closed mesh built from rings."""
+    bm = bmesh.new(); bm.from_mesh(obj.data); bmesh.ops.recalc_face_normals(bm, faces=bm.faces); bm.to_mesh(obj.data); bm.free(); obj.data.update()
 
 
 def hub_plate(c, s, mat):
@@ -215,6 +221,15 @@ def forward_shield(c, s):
         obj = loft(c, f"EYE_Well_{w['index']:02}", [(w['x0'], w['radius']), (w['x1'], w['radius'])], well, center=(0, w['y'], w['z']), caps=False, segments=32, kind='eye_well')
         mark(obj, 'WORKING', 'eye_wells', 'eye_well', '[PHYSICS_LOCKED] Protected aperture well; shutter/window/baffle solution OPEN (OD-020).')
         obj['owner_facet'] = w['label']; obj['component_id'] = f"WF.FORWARD.WELL.{w['index']:02}"
+    # --- EYE shells (forward_defense.eye_shell, PROTOTYPE): each Eye wears one hexagonal plate of the fractal facing round its round well ---
+    if fsh.eye_shell(s):
+        shell_mat = material('EyeShell', (.20, .22, .25))
+        for w in fsh.wells(s):
+            vs, fs_ = fsh.eye_shell_mesh(s, w)
+            obj = mesh(c, f"EYE_Shell_{w['index']:02}", vs, fs_, shell_mat, kind='eye_shell')
+            fix_normals(obj); obj['owner_facet'] = w['label']; obj['component_id'] = f"WF.FORWARD.EYE_SHELL.{w['index']:02}"
+            mark(obj, 'PROTOTYPE', 'eye_wells', 'eye_shell', '[ARTISTIC] Hexagonal EYE shell plate, one plate of the fractal facing (user 2026-10-29): '
+                 'the round well, window and aperture stay inside; the same hexagon is the layer port. Material and fixing OPEN.')
     # --- EYE eyelids (FD-E03, AG-007): two armoured leaves per well on the face under the layer, parting tangentially; window cartridge in the well ---
     lid_mat = material('EyeShutter', (.34, .36, .40)); window_mat = material('EyeWindow', (.55, .80, .86), .1, alpha=.35)
     for e in fsh.eye_shutters(s):
@@ -248,7 +263,8 @@ def forward_shield(c, s):
         obj = disruptor_layer_mesh(c, s, layer, layer_mat)
         outer_ports = [q for q in fsh.eye_ports(s, layer) if math.hypot(q['y'], q['z'])-q['radius'] > st['cone_r']]
         if outer_ports:
-            cut(obj, [((st['face'], q['y'], q['z']), (st['lance_tip'], q['y'], q['z']), q['radius']) for q in outer_ports])
+            cut(obj, [dict(x0=st['face'], x1=st['lance_tip'], polygon=fsh.hexagon(q['side'], q['y'], q['z'])) if q['shape'] == 'hex'
+                      else ((st['face'], q['y'], q['z']), (st['lance_tip'], q['y'], q['z']), q['radius']) for q in outer_ports])
         mark(obj, 'WORKING', 'eye_disruptor_layer', 'disruptor_layer',
              f"[PHYSICS_LOCKED existence, full diameter and ahead of the Brow; standoff {layer['standoff']:g} m, display thickness and ports ENGINEERING_FLEXIBLE for owner review] FWD1 sacrificial layer: material, thickness, count and spacing OPEN (Eye 40!E33). Rendered translucent; checks treat it as opaque.")
         obj['standoff_m'] = layer['standoff']; obj['open_fraction_diagnostic'] = fsh.disruptor_open_fraction(s, layer)

@@ -29,7 +29,7 @@ def collar_radius(s):
     """Collar centreline radius round a well: clear of the well wall by the shared clearance, and large enough that the relocated layer posts on
     its nodes stand outside the 2.25 m outer port (FD-A04) by the post radius and the clearance."""
     p = fsh.prototype(s); clr = fsh.clearance(s); rw = p['well_diameter_m']/2; m = p['truss_member_radius_m']
-    port = max(fsh.eye_port_radius(s, q) for q in fsh.disruptor_layers(s))
+    port = max(fsh.eye_port_outer_radius(s, q) for q in fsh.disruptor_layers(s))       # a hexagonal port's corners
     return max(rw+clr+m, port+p['disruptor_post_radius_m']+clr)
 
 
@@ -139,7 +139,7 @@ def alternate(s):
             add.append(dict(name=f'Study_Ring_{k+1:02}_Arc_{i+1}', role='ring_arc', well=0, radius=m,
                             pts=[(ring['x'], R*math.cos(g1+(h0-g1)*u/seg), R*math.sin(g1+(h0-g1)*u/seg)) for u in range(seg+1)]))
     # Disruptor posts inside a port (plus clearance): replaced by two posts on the collar's radial nodes (clear of the tangential eyelids).
-    layers = fsh.disruptor_layers(s); port = max(fsh.eye_port_radius(s, q) for q in layers); pr_ = p['disruptor_post_radius_m']; clr = fsh.clearance(s)
+    layers = fsh.disruptor_layers(s); port = max(fsh.eye_port_outer_radius(s, q) for q in layers); pr_ = p['disruptor_post_radius_m']; clr = fsh.clearance(s)
     for q in fsh.disruptor_posts(s, base=True):
         y, z = q['r']*math.cos(q['azimuth']), q['r']*math.sin(q['azimuth'])
         if any(math.hypot(y-w['y'], z-w['z']) < port+pr_+clr for w in ws):
@@ -264,7 +264,7 @@ def screen(s, r, access=True):
                 for q0, q1 in _segs(q):
                     race_margin = min(race_margin, fsh.segment_distance(a0, a1, q0, q1)-o['radius']-q['radius'])
     # Posts: outside the outer port, clear of the open eyelid leaves.
-    ports = max(fsh.eye_port_radius(v, q) for q in fsh.disruptor_layers(v))
+    ports = max(fsh.eye_port_outer_radius(v, q) for q in fsh.disruptor_layers(v))
     posts = [o for o in added if o['role'] == 'post']
     port_margin = min(math.hypot(o['pts'][0][1]-w['y'], o['pts'][0][2]-w['z'])-ports-o['radius'] for o in posts for w in ws)
     leaf_margin = math.inf
@@ -289,6 +289,15 @@ def screen(s, r, access=True):
             continue
         for q0, q1 in _segs(o):
             parent[find(key(q0))] = find(key(q1))
+    # Spoke ends on the hub ring, the Crown housing or a kept truss ring land on the production frame, which is itself one structure: they
+    # share one anchor (at r30 no ring crosses a collar, so no ring arcs join the four collars directly).
+    st = fsh.stations(v); r_in, r_out = st['hub_opening_r']+p['truss_hub_ring_width_m'], p['crown_housing_inner_radius_m']
+    anchors = [r_in, r_out]+[rr['radius'] for k, rr in enumerate(fsh.truss(v, base=True)['rings']) if f'Truss_Ring_{k+1:02}' not in alt['removed']]
+    for o in added:
+        if o['role'] == 'spoke':
+            for q in (o['pts'][0], o['pts'][-1]):
+                if any(abs(math.hypot(q[1], q[2])-R) < 1e-6 for R in anchors):
+                    parent[find(key(q))] = find('ANCHOR')
     roots = {find(key(q)) for o in added if o['role'] not in ('facet_frame', 'raceway', 'post') for q in o['pts']}
     names = {o['name'] for o in added}
     def replaced(name):

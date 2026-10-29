@@ -222,7 +222,7 @@ def check_saved(s, ctx):
     for layer in layers:
         lv = [v for r in kinds['disruptor_layer'] if r['name'] == layer['name'] for v in r['vs']]
         assert abs(max(radius(v) for v in lv)-layer['outer_r']) <= 1e-3, ('Layer outer radius', max(radius(v) for v in lv))
-        port_r = fsh.eye_port_radius(s, layer)
+        port_r = fsh.eye_port_outer_radius(s, layer)          # a hexagonal port's cut reaches its corners
         assert all(layer_x_ok(s, layer, v) for v in lv if not at_well(v, port_r-fsh.prototype(s)['well_diameter_m']/2)), f"{layer['name']}: a vertex is off the conical layer surface"
         assert min(v.x-fsh.face_x_at(s, radius(v)) for v in lv) >= layer['standoff']-1e-4-sag, 'Layer lies ahead of the face by its standoff'
         assert max(v.x for v in lv) < tip_x, 'Layer centre lies behind the Lance tip'

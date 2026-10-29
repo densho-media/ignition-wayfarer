@@ -40,7 +40,24 @@ def brow_frame(s):
     rings = sorted({r['radius'] for k, r in enumerate(t['rings']) if f"Truss_Ring_{k+1:02}" not in t['removed']})
     return dict(skin=lambda r: fsh.skin_aft_at(s, r), truss=lambda r: fsh.truss_aft_at(s, r), slope=fsh.skin_aft_at(s, 10.0)-fsh.skin_aft_at(s, 11.0),
                 keep=keep, rings=rings, hoops=list(c['joint_hoop_r_m']), joint_w=c['joint_width_m'], joint_deg=list(c['joint_deg_offsets']),
-                spokes=[sp['azimuth'] for sp in t['spokes']], member=t['member_radius'])
+                spokes=[sp['azimuth'] for sp in t['spokes']], member=t['member_radius'], wells=well_keepouts(s))
+
+
+def well_keepouts(s):
+    """[(y, z, radius)] the aft-face panels stay clear of: none at r4 (the wells sit in the hub, inside the panel zone's inner edge); with an
+    outer Eye layout (forward_defense.eye_layout) each cone well with its alternate-truss collar, the collar's member radius and the clearance."""
+    import forward_shield as fsh
+    if not fsh.eye_layout_active(s):
+        return []
+    import eye_truss_study as ets
+    R = ets.collar_radius(s)+fsh.prototype(s)['truss_member_radius_m']+fsh.clearance(s)
+    return [(w['y'], w['z'], R) for w in fsh.wells(s)]
+
+
+def clear_of_wells(f, q):
+    """True when an element (vertices, or a stencil's centre) keeps out of every outer-Eye well keep-out."""
+    pts = [q['centre']] if 'text' in q else q['vs']
+    return all(math.hypot(y-wy, z-wz) >= R for _, y, z in pts for wy, wz, R in f['wells'])
 
 
 def brow_bands(s, f):
@@ -140,7 +157,7 @@ def brow_aft_elements(s):
             phi = math.radians(b); t_, s_, n_ = brow_axes(f, r, phi); c0 = at(r, off1+.002, phi)
             out.append(pd.lettering(A, 'markings', f'Prod_BrowStencil_{j:02}_{h:g}', mat,
                                  'restrained stencil: sector number and service-lane identification (ASB Spacecraft 17)', text, c0, t_, s_, h))
-    return out
+    return [q for q in out if clear_of_wells(f, q)]      # an outer Eye layout's wells and collars leave a gap in the cladding
 
 
 def lane_elements(s, f, b, j):
@@ -193,6 +210,8 @@ def brow_aft_check(s, els):
                 fails.append(f"{q['name']}: x {x:.3f} at r {r:.2f} leaves the space between the skin's aft face and the truss"); break
             if any(abs(r-R) < f['keep'] for R in f['rings']):
                 fails.append(f"{q['name']}: inside a forward ring chord's keep-out at r {r:.2f}"); break
+            if any(math.hypot(y-wy, z-wz) < R for wy, wz, R in f['wells']):
+                fails.append(f"{q['name']}: inside an EYE well's collar keep-out"); break
             phi = math.atan2(z, y)
             if any(abs(r*math.sin(phi-a)) < f['keep'] and math.cos(phi-a) > 0 for a in f['spokes']):
                 fails.append(f"{q['name']}: inside a spoke chord's keep-out"); break

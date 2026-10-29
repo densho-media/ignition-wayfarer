@@ -212,11 +212,16 @@ def cylinder_mesh(a, b, radius, n=64):
 
 
 def cut(obj, cutters, n=64, operation='DIFFERENCE'):
-    """Applies EXACT boolean differences (or, with operation INTERSECT, intersections) of closed cylinders (a, b, radius) or boxes (8 corners) to
-    a mesh object; the cutters are temporary (HUM-001 openings and trims, CIRC-001 door openings)."""
+    """Applies EXACT boolean differences (or, with operation INTERSECT, intersections) of closed cylinders (a, b, radius), boxes (8 corners) or
+    X-axis prisms (dict x0, x1, polygon) to a mesh object; the cutters are temporary (HUM-001 openings and trims, CIRC-001 door openings)."""
     scene = bpy.context.scene; tools = []
     for k, cutter in enumerate(cutters):
-        if len(cutter) == 8:
+        if isinstance(cutter, dict):
+            # a prism along X from x0 to x1 over a convex (y, z) polygon, counter-clockwise seen from +X (the hexagonal EYE ports)
+            poly = cutter['polygon']; m = len(poly)
+            vs = [(x, y, z) for x in (cutter['x0'], cutter['x1']) for y, z in poly]
+            fs = [tuple(reversed(range(m))), tuple(range(m, 2*m))]+[(i, (i+1) % m, m+(i+1) % m, m+i) for i in range(m)]
+        elif len(cutter) == 8:
             # CIRC-001: a box cutter, 8 corners indexed 4*i + 2*j + k along a right-handed frame (the interior box winding)
             vs, fs = list(cutter), [(0, 1, 3, 2), (4, 6, 7, 5), (0, 4, 5, 1), (2, 3, 7, 6), (0, 2, 6, 4), (1, 5, 7, 3)]
         else:
