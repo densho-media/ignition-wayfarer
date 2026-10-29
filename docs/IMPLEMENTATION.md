@@ -133,7 +133,7 @@ python3 tools/workflow.py sync commit references/drive_capture_<date> --note "<w
 python3 tools/workflow.py deps [status|fetch|install] [--optional]   # character dependencies: assets/external/manifest.toml, cache outside the repo
 python3 tools/workflow.py characters [--only <ids>] [--no-fit] [--stages build rig export fit]   # MPFB humans: build, rig review, glTF + Godot check, in-ship fit (docs/CHARACTERS.md, ~2 min)
 python3 tools/workflow.py runtime-check [names|auto]  # Godot checks in godot/ against the published package, refused (STALE) unless its inputs and tool versions match build_identity.json
-python3 tools/workflow.py web [--pipeline-run runs/<quick run>] [--out DIR] [--native] [--no-play] [--reuse-play SITE [--reuse-native ZIP]]   # WEB-001/002 website from the saved assets: start page, Explore Ship (Draco COAST GLB, three.js), Enter Wayfarer (Demonstrator 01 Godot Web build, tools/web_play.py), review, release.json (web/README.md, ~4 min)
+python3 tools/workflow.py web [--pipeline-run runs/<quick run>] [--out DIR] [--native] [--no-play]   # WEB-001/002 website from the saved assets: start page, Explore Ship (Draco COAST GLB, three.js), Enter Wayfarer (Demonstrator 01 Godot Web build, tools/web_play.py), review, release.json (web/README.md, ~4 min)
 python3 tools/web_check.py <site> --out DIR --chrome <binary> [--record] [--live URL] [--part main|equivalence|walk]   # headless-Chrome walk: loading isolation, viewer, play, switching, browser-vs-native recording, phone, touch
 python3 tools/web_check.py <site> --merge DIR... --out DIR [--record]   # one report (and release.json tests) from the parts' check.json; CI runs each part on its own runner
 python3 src/wayfarer/representation.py holo-style --manifest <manifest.json> --out <wf_holo.json>   # WEB-003 hologram colours per node (runtime-export, web play build; the viewer's holo-<hash>.json)
@@ -275,7 +275,7 @@ Higher levels reference lower ones as **linked collection instances with relativ
     - `hide_viewport` objects are not evaluated either.
     - Blender 5 ignores the new-key interpolation preference, so set `keyframe_points[].interpolation`.
     - Simple driver expressions accept `pow()` but not `**`.
-- Studies live in `work/<task>/` while unapproved (AGENTS.md "Where things go"); the retired `src/wayfarer/studies/` scripts are at the tag `archive/pre-cleanup-2026-10-29`, their kept results in `references/evidence/`.
+- Studies live in `work/<task>/` while unapproved (AGENTS.md "Where things go"); the retired `src/wayfarer/studies/` scripts are at commit 038ae90, their kept results in `references/evidence/`.
 - The generated JSON reports live in `references/` (current evidence files are `p1_*.json`), alongside the review markdown, the current geometry baseline (`references/baselines.json` names it) and, on a maintainer's machine only, the Drive captures. Captures and review notes are ignored by Git and never published; tests carry their own synthetic fixtures. `drive_capture_*/` hold full Drive workbook exports (`.xlsx` plus greppable `.txt` dumps and a manifest) or bounded range reads (`ranges.json`), which the source records cite as `capture`.
 
 **Conventions:**
@@ -332,7 +332,7 @@ standard for later sections. A new section follows the same steps, and its eleme
 excursion"), the controls (`scripts/controls/`: `WfInput` autoload, the Codex overlay, `wf_touch.gd` for MOB-001), the crew physics
 it uses (`scripts/physics/`), the production-detail layer (`production_layer.gd`), the export checks and `profile_views.gd`. The
 scenes and scripts of the review menu, inspector, guided walk, Demonstrator 01, navigators, timeline, life support, physics lab,
-EVA drift and M5/M6 holograms are retired (tag `archive/pre-cleanup-2026-10-29`).
+EVA drift and M5/M6 holograms are retired (commit 038ae90).
 
 ```bash
 python3 tools/workflow.py runtime-export                  # build in a disposable workspace, export, check, publish godot/generated/

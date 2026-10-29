@@ -1,6 +1,6 @@
 # Phase 4 plan: visual production, art direction and modular detailing
 
-The `studies/` scripts and M5 shots named here are retired (tag `archive/pre-cleanup-2026-10-29`); kept results are in `references/evidence/`.
+The `studies/` scripts and M5 shots named here are retired (commit 038ae90); kept results are in `references/evidence/`.
 
 **Status: PRODUCTION (2026-10-24).** The owner answered the eight Stage A questions and, at the **S1 art gate** (2026-10-24), selected
 the exterior grammar **VC+ Expressive Hybrid with moderated material values** and disposed of the three candidates (section 0). S0, S1

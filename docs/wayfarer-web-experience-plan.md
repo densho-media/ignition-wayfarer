@@ -1,6 +1,6 @@
 # Wayfarer web experience and deployment (WEB-002)
 
-**2026-10-29:** Demonstrator 01 and the other review scenes are retired (tag `archive/pre-cleanup-2026-10-29`); Enter Wayfarer
+**2026-10-29:** Demonstrator 01 and the other review scenes are retired (commit 038ae90); Enter Wayfarer
 plays the walk (EXC-001) and its browser-vs-native equivalence is the walk's own check. What follows is the decision record as built.
 
 Working plan and decision record for the public Wayfarer website: a start page, the Explore Ship viewer, the Enter Wayfarer

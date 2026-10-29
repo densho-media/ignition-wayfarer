@@ -10,7 +10,7 @@ Follow the loop in AGENTS.md. The parent Densho application's CLAUDE.md and
 tooling don't apply to this Blender project. There are no project skills or hooks.
 Work on a task branch (AGENTS.md step 5): `local/<task>` on the workstation,
 `claude/<task>` in Claude Code Cloud. Never commit to `main` directly. Open no
-pull requests or issues; after the owner's approval, squash the branch onto `main`.
+pull requests or issues and create no tags; after the owner's approval, squash the branch onto `main`.
 Folders follow AGENTS.md "Where things go": a task's studies, notes and its one REVIEW file live in
 `work/<task>/`, never in `src/` or a new top-level folder.
 

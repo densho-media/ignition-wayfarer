@@ -24,7 +24,7 @@ Do not derive completion from the number of checkboxes: steps vary greatly in ef
 ## S — Primary focus: complete the spacecraft (user brief 2026-10-18)
 
 Development effort moves from new Godot features to the ship itself; keep the walk and Explore Ship working
-(maintenance fixes only; the other Godot scenes were retired 2026-10-29, tag `archive/pre-cleanup-2026-10-29`). Two coordinated tracks: A science/systems through the owner workbooks, B Blender/interactive production;
+(maintenance fixes only; the other Godot scenes were retired 2026-10-29; commit 038ae90 holds them). Two coordinated tracks: A science/systems through the owner workbooks, B Blender/interactive production;
 unresolved science blocks only irreversible steps. Each slice: validate the changed assembly and interfaces, whole-ship view plus a
 close-up, regression check, MODEL/TODO and Model Status update.
 
@@ -146,7 +146,7 @@ close-up, regression check, MODEL/TODO and Model Status update.
 ## How to work through this plan
 
 - A01–A03 are done (capture 2026-10-16, full pipeline and runtime export PASS). **Primary focus: S** (the spacecraft). Select one step per implementation slice; the plan itself does not start all steps at once.
-- Studies named `studies/<name>.py` below are retired: `git show 038ae90:src/wayfarer/studies/<name>.py` (tag `archive/pre-cleanup-2026-10-29`)
+- Studies named `studies/<name>.py` below are retired: `git show 038ae90:src/wayfarer/studies/<name>.py`
   restores one into `work/<task>/` when its entry is picked up (AGENTS.md "Where things go").
 - IDs remain stable when entries are removed; do not renumber. Only unfinished work stays here. On completion, put current behavior in
   `docs/MODEL.md`, evidence in the existing relevant review, and remove the entry. Git and `references/` retain history.
@@ -373,7 +373,7 @@ candidates of all nine classes are separate accessory assets (docs/ACCESSORIES.m
 - [ ] **I04 — Review and integrate the accessory drone bodies. OWNER REVIEW; AFTER DGT-017.** Owner review of the GU-SIF interface
   proposal (DGT-012) and the class forms (owner 2026-10-24: continue as a separate accessory prototype, not integration or canon); then
   the ship session runs the placement and keep-out study for the taller exterior bodies (interface requests 1–4 in docs/ACCESSORIES.md;
-  the owner review and handoff register was accessories/review/HANDOFF.md, now at tag `archive/pre-cleanup-2026-10-29`;
+  the owner review and handoff register was accessories/review/HANDOFF.md, now at commit 038ae90;
   no automatic proxy resizing), and the ship viewer uses the GLBs for the drones card and the crawler demo (the retired standalone accessory
   viewer played them). **Done when:** the bodies replace the proxies in the review views with every dock, keep-out and route check
   unchanged or re-run, and nothing implies a released capability.
@@ -494,14 +494,12 @@ candidates of all nine classes are separate accessory assets (docs/ACCESSORIES.m
 - [ ] **P01 — FUT-006 PlayCanvas / Densho Expo. PARKED, separate scope decision.** If selected, resolve hosting, IP/public-source
   exposure, embed/CSP permissions and browser performance/accessibility before a prototype. Reuse the GLB pipeline and stable IDs;
   keep Godot. Acceptance would include publication, desktop/mobile interaction, iframe/new-tab fallback, credits and update procedure.
-- [ ] **P05 — Website follow-ups (WEB-002). Optional, outside WF-R1.** The site, play build, checks, deploy, verify, release and
-  rollback exist (docs/wayfarer-web-experience-plan.md); the first deploy (`b1db258`) passed the live verify job. Owner's order:
+- [ ] **P05 — Website follow-ups (WEB-002). Optional, outside WF-R1.** The site, play build, checks, deploy and verify exist (rollback = revert on main) (docs/wayfarer-web-experience-plan.md); the first deploy (`b1db258`) passed the live verify job. Owner's order:
   - Measure on real hardware: frame rates on real GPUs (viewer and Godot, desktop and phone); all numbers so far are software
     rendering. Record them in the plan §5–6.
   - Firefox (then Safari on macOS and iOS): test by hand, then add to the browser check where a headless build exists.
   - Navigator glyphs ▶ ◆ ○ render as boxes on Web: ship a font with them or use drawn markers (Godot presentation only).
-  - Build time: confirm the first CI build that reuses Enter Wayfarer (it needs a release made by the reuse code, so the second
-    main build after it). The site walk (5-8 min under software WebGL) is now the longest step.
+  - Build time: the site walk (5-8 min under software WebGL) is the longest step.
   - Touch (MOB-001, branch `claude/mobile-touch-controls`, docs/wayfarer-mobile-controls-plan.md): test on a real Android phone
     and an iPhone (plan §9 procedure), agree the reference phone and its 30 fps budget, then tune RENDER_DENSITY and the
     adaptive band from those measurements. Before promotion: Android Chrome and iOS Safari (iPhone; iPad if available) each

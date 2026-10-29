@@ -38,7 +38,7 @@ as 45's WORKING TRADE CASE. Nothing here is canon. The loop and the rules are in
 | EVA-003 SP-11 comparison (pure): 1.10 / 1.20 / 1.35 m, inner-hatch mechanisms, extension latch, rescue | `src/wayfarer/eva_sp11.py` → `references/p1_eva_sp11.json` |
 | SP-11 1.20 m sliding plug (pure): drop and park, bidirectional retention, two-side valves, interlock table, two-person and casualty re-check | `src/wayfarer/eva_sp11_plug.py` (called by `eva_sp11.study()`, key `sliding_plug` in `references/p1_eva_sp11.json`) |
 | Its check in the vehicle with the posed rigs, renders | `src/wayfarer/validation/eva_sp11_study.py` → `references/p1_eva_sp11_vehicle.json` (key `sliding_plug`: real meshes), `runs/renders/p1/eva/eva3/`, `runs/renders/p1/eva/airlock/sp11_120_slideplug_*.png`, `runs/<stamp>-eva/WF_EVA3_SP11_STUDY.blend`; `--plug-only` runs just the plug part (about 40 s) |
-| Integrated forward district (SP-11/12/13 with the SERV district) | retired study `eva3_district.py` (tag `archive/pre-cleanup-2026-10-29`) → `references/evidence/p1_eva_district.json`, `references/evidence/EVA3_DISTRICT_MAP.svg` |
+| Integrated forward district (SP-11/12/13 with the SERV district) | retired study `eva3_district.py` (commit 038ae90) → `references/evidence/p1_eva_district.json`, `references/evidence/EVA3_DISTRICT_MAP.svg` |
 | Renders | `src/wayfarer/presentation/eva_preview.py` → `runs/renders/p1/eva/` |
 | Export | `src/wayfarer/export/eva_gltf.py` → `eva_<key>.glb` + `eva_characters.json` |
 | Runtime | retired 2026-10-29 (`eva.tscn`, `eva.gd` at the archive tag) |
@@ -437,7 +437,7 @@ view of the drive section, and a camera ahead of the Brow and EYE.
 ## Runtime (Godot)
 
 The guided EVA scene (`eva.tscn`: PREP → LOCK_CHECK → DEPRESS → EXTERIOR → REPRESS → DEBRIEF, Tale's seven stations, the two-tether
-protocol and its `--check-eva`) is retired with the boarding walk that opened it; the tag `archive/pre-cleanup-2026-10-29` holds it and
+protocol and its `--check-eva`) is retired with the boarding walk that opened it; commit 038ae90 holds it and
 its performance record (`references/evidence/p1_eva_perf.json`). The suits, their checks, studies and GLB export remain.
 
 ### SP-12 / SP-13 exits and the L1-A bypass (owner direction 2026-10-11: 15!A135 RESCUE-004, 15!A136 DIST-004, 43 EVA-063)

@@ -15,4 +15,4 @@ work/<task>/
 - Text and code here are committed on the task branch; `.blend` files are ignored by Git and reach the owner as a copied file.
 - On approval: the chosen form goes into the generators and `data/`, kept numbers into `references/evidence/<task>.json`, the
   folder is deleted and the branch squashed onto `main`. On `main` this README is the only file here.
-- Retired studies: `git show 038ae90:src/wayfarer/studies/<name>.py` (tag `archive/pre-cleanup-2026-10-29`) restores one.
+- Retired studies: `git show 038ae90:src/wayfarer/studies/<name>.py` restores one.

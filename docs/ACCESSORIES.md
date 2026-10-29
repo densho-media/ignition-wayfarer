@@ -260,7 +260,7 @@ ignored; GLBs and renders go to the run folder.
 ## Review package
 
 The standalone accessory viewer (`accessories/viewer/`, `tools/accessory_viewer.py`) and the committed review images with the owner
-review and handoff register (`accessories/review/`, `HANDOFF.md`, `review.pdf`) are retired; the tag `archive/pre-cleanup-2026-10-29`
+review and handoff register (`accessories/review/`, `HANDOFF.md`, `review.pdf`) are retired; commit 038ae90
 holds them. A new review package goes in `work/<task>/` as one REVIEW file (AGENTS.md "Where things go").
 
 ## Open and HOLD

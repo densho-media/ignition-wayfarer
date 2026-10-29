@@ -10,11 +10,8 @@ export_presets.cfg is written; the project's godot/ and godot/generated/ are nev
 natively in the same workspace (the native reference for this package), exports Web (no threads: no COOP/COEP headers needed)
 and, optionally, a native Linux build of the same package.
 
-Reuse: the staged project is reproducible but Godot's .pck is not (two exports of identical inputs differ), so an unchanged Enter
-Wayfarer is recognised by its input key (`input_key`: the staged files with the manifests' commit fields left out, the shell, this
-module and the pinned Godot). Given a previous verified site whose play record carries the same key, passing play and equivalence
-tests and play files matching its release.json, build() copies those files (and its native zip) instead of importing, checking
-and exporting again; the browser check then carries that release's browser-vs-native result.
+The play record carries an input key (`input_key`: the staged files with the manifests' commit fields left out, the shell, this
+module and the pinned Godot), shown on the status page.
 
 Godot is the official 4.7.2 standard (not Mono) build and templates, SHA-512 checked against the release's SHA512-SUMS and kept
 in a cache; only the templates used are extracted from the 1.3 GB archive.
@@ -201,38 +198,13 @@ def input_key(project, tools, shell):
     return h.hexdigest()
 
 
-def reusable(previous, key, native_zip=None):
-    """(release.json, None) when the site at `previous` holds a verified play build with this input key, else (None, reason)."""
-    try:
-        release = json.loads((Path(previous) / 'release.json').read_text())
-    except (OSError, ValueError) as error:
-        return None, f'no previous release.json ({error})'
-    play, tests = release.get('experiences', {}).get('play'), release.get('tests') or {}
-    if not play or not play.get('input_key'):
-        return None, f"release {release.get('release')} has no play input key"
-    if play['input_key'] != key:
-        return None, f"play inputs changed since release {release.get('release')}"
-    for name in ('play', 'equivalence'):
-        if (tests.get(name) or {}).get('result') != 'PASS':
-            return None, f"release {release.get('release')}: {name} tests did not pass"
-    for f in [*play['files'].values(), *(f'GODOT_{n}' for n in LICENSES)]:
-        entry, path = release['files'].get(f'play/{f}'), Path(previous) / 'play' / f
-        if not entry or not path.is_file() or sha(path) != entry['sha256']:
-            return None, f"release {release.get('release')}: play/{f} missing or not as recorded"
-    if native_zip is not None and (not play.get('native_zip_sha256') or not Path(native_zip).is_file()
-                                   or sha(native_zip) != play['native_zip_sha256']):
-        return None, f"release {release.get('release')}: no matching native Linux zip"
-    return release, None
-
-
 def run_logged(command, log, root, timeout=pipeline.STEP_TIMEOUT):
     return pipeline.subprocess_runner(command, log, root, timeout)
 
 
-def build(root, run_dir, out, identity, native=False, native_check=True, reuse=None, reuse_native=None):
+def build(root, run_dir, out, identity, native=False, native_check=True):
     """Workspace -> package -> import -> native walk check -> Web export into `out` (the site's play/ directory).
-    With `reuse` (a previous site directory; `reuse_native` its native Linux zip when native=True), an unchanged package is copied
-    from there instead (see the module docstring). Returns the play record for release.json; raises on any failure."""
+    Returns the play record for release.json; raises on any failure."""
     t0 = time.monotonic()
     tools = toolchain(native)
     work = run_dir / 'play'
@@ -258,12 +230,6 @@ def build(root, run_dir, out, identity, native=False, native_check=True, reuse=N
     (project / 'export_presets.cfg').write_text(PRESETS.format(web=tools['web'], linux=tools['linux'],
                                                                shell=root / 'web/play/shell.html'))
     key = input_key(project, tools, root / 'web/play/shell.html')
-    if not reuse or not native_check or (native and not reuse_native):
-        previous, why = None, 'no previous site (and native zip) given'
-    else:
-        previous, why = reusable(reuse, key, reuse_native if native else None)
-    if previous:
-        return reused(previous, Path(reuse), out, run_dir, key, tools, generated, native and reuse_native, seconds, t0)
     godot = str(tools['editor'])
     log = step('import', [godot, '--headless', '--path', str(project), '--editor', '--import'])
     if 'ERROR:' in log.read_text(errors='replace'):
@@ -302,36 +268,12 @@ def build(root, run_dir, out, identity, native=False, native_check=True, reuse=N
             'variant': VARIANT, 'scene': SCENE,
             'package': sorted(p.name for p in generated.iterdir() if not p.name.endswith('.import')),
             'reduced_fidelity': REDUCED_FIDELITY, 'native_reference': native_ref, 'native_zip': str(native_zip) if native_zip else None,
-            'native_zip_sha256': sha(native_zip) if native_zip else None, 'input_key': key, 'reused_from': None, 'reuse_note': why,
+            'native_zip_sha256': sha(native_zip) if native_zip else None, 'input_key': key,
             'step_seconds': seconds, 'seconds': round(time.monotonic() - t0, 1)}
 
 
 VARIANT = 'web_nothreads_release (single-threaded, no GDExtension, WebGL 2 / Compatibility)'
 REDUCED_FIDELITY = ['MPFB characters not packaged: the proxy body stands in (presentation only)']
-
-
-def reused(previous, site, out, run_dir, key, tools, generated, native_zip, seconds, t0):
-    """The play record for files copied from a verified previous site with the same input key (checked by reusable())."""
-    play = previous['experiences']['play']
-    out.mkdir(parents=True, exist_ok=True)
-    for f in [*play['files'].values(), *(f'GODOT_{n}' for n in LICENSES)]:
-        shutil.copy2(site / 'play' / f, out / f)
-    target = None
-    if native_zip:
-        target = run_dir / 'wayfarer-walk-linux-x86_64.zip'
-        shutil.copy2(native_zip, target)
-    package = sorted(p.name for p in generated.iterdir() if not p.name.endswith('.import'))
-    if package != play['package']:
-        raise ValueError(f'reused package lists differ: {package} vs {play["package"]}')
-    tests = previous['tests']
-    return {'entry': play['files']['html'], 'files': play['files'], 'bytes': {k: (out / v).stat().st_size for k, v in play['files'].items()},
-            'godot': tools['version'], 'templates': tools['templates'], 'variant': VARIANT, 'scene': play['scene'], 'package': package,
-            'reduced_fidelity': REDUCED_FIDELITY, 'native_reference': play['native_reference'],
-            'native_zip': str(target) if target else None, 'native_zip_sha256': play.get('native_zip_sha256') if target else None,
-            'input_key': key, 'reused_from': {'release': previous['release'], 'git_revision': previous['git_revision'],
-                                              'play': tests['play'], 'equivalence': tests['equivalence']},
-            'reuse_note': f"same inputs as release {previous['release']}: import, native check and exports skipped",
-            'step_seconds': seconds, 'seconds': round(time.monotonic() - t0, 1)}
 
 
 def content_named(export, out):

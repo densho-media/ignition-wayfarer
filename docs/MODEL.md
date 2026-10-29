@@ -10,7 +10,7 @@ The ordered implementation steps and acceptance criteria for Wayfarer Review Rel
 live in [TODO.md](../TODO.md). This document describes implemented behavior; a planned
 feature or a completed prototype study is not an installed or qualified system.
 
-Study scripts named below as `studies/<name>.py` are retired; the tag `archive/pre-cleanup-2026-10-29` (commit 038ae90, also in `main`'s history) holds them under
+Study scripts named below as `studies/<name>.py` are retired; commit 038ae90 in `main`'s history holds them under
 `src/wayfarer/studies/`, and their kept results are in `references/evidence/`. New studies live in `work/<task>/` (AGENTS.md).
 
 ## Blender development previews
@@ -185,7 +185,7 @@ are not modeled; the ring sectors carry only rough PROTOTYPE interior blocking.
   induction shot `SH_INDUCTION`, camera cuts through the eight induction stops. The animated First Ignition
   flight `SH_FIRST_IGNITION_FLIGHT` (FUT-006) overrides the linked vehicle and keys its controls from the
   flight timeline over 1369 frames (below).
-  The M5 study shots and the M5/M6 hologram scene are retired (tag `archive/pre-cleanup-2026-10-29`); their numbers are in
+  The M5 study shots and the M5/M6 hologram scene are retired (commit 038ae90); their numbers are in
   `references/evidence/m5_*.json`, and `shots/m5_subsystems.toml` still classifies the web viewer's subsystem hologram.
 
 ## Sources and implementation
@@ -1424,7 +1424,7 @@ configuration, look, sun (presentation choice, pointing OPEN) and exposure; `p4_
 
 The NONCANON S1 experiment of [PHASE4_PLAN.md](PHASE4_PLAN.md) (owner P4-EXP, 2026-10-24) compared six exterior variants on Crown
 bay 1 and one ring A segment; the owner selected VC+ with moderated values (next section). Its script is retired with the other
-studies (tag `archive/pre-cleanup-2026-10-29`, reproduces the S1 images at 88ab15a).
+studies (commit 038ae90, reproduces the S1 images at 88ab15a).
 
 ## Phase 4 exterior grammar (S2)
 
@@ -1486,8 +1486,7 @@ beside SP-11 and serviced in SP-13 (43 EVA-040), and the legacy 0.70 m `suited_e
 (EVA-041). The SP-11 door and chamber candidates (1.00/1.10/1.20 m, two-person and sequential) and the SP-12/13 rooms are a STUDY measured
 against the vehicle, never ship geometry (EVA-043). The exterior route is a TRAINING SIMULATION on the stationary forward collar along the
 SP-11 airlock's azimuth (X 95.6–106.0 m): every hold is SIMULATION_ONLY and FLIGHT_EVA is HOLD (locked, 45 O-07) because the ring,
-thermal, debris, radiation and anchor gates have OPEN inputs; nothing in the vehicle changed. Its Godot drift scene is retired (tag
-`archive/pre-cleanup-2026-10-29`); the suit assets and `eva_*.py` screens remain.
+thermal, debris, radiation and anchor gates have OPEN inputs; nothing in the vehicle changed. Its Godot drift scene is retired (commit 038ae90); the suit assets and `eva_*.py` screens remain.
 
 ## Crew physics
 
@@ -1564,7 +1563,7 @@ utility row.
 
 The Godot review menu, the ship inspector, the guided induction walk, Demonstrator 01 with the Ship Navigator, its SPACE view and the
 forward defense explorer, the First Ignition timeline player and thermal explorer, the life-support simulator, the physics lab, the EVA
-drift and the M5/M6 hologram scenes are retired; the tag `archive/pre-cleanup-2026-10-29` holds them. The pure modules and data they
+drift and the M5/M6 hologram scenes are retired; commit 038ae90 holds them. The pure modules and data they
 read stay as engineering screens with their tests: `ship_navigator.py` and `data/ship_navigator.toml`, `space_navigator.py`,
 `forward_explorer.py` and `forward_scenario.py`, `life_support.py` and `data/life_support.toml`. No runtime scene consumes them now;
 the export still packages the First Ignition timeline (`flight_timeline.py`) in the manifest. The walk's action registry still lists

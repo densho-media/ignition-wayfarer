@@ -1,8 +1,7 @@
 # WEB-001/002: build the Wayfarer website (start page, Explore Ship, Enter Wayfarer, status) from a clean checkout.
 # Every push to main or a claude/* or local/* branch builds, validates and uploads the site as an artifact (the preview build).
 # Only main deploys to GitHub Pages, and only after the tests and the build/export/browser-check job pass; a failed run never
-# replaces the live site. After a deploy, the release job keeps the exact site and the native Linux build as a GitHub Release
-# (web-<release>), which web-rollback.yml can redeploy without rebuilding.
+# replaces the live site. To undo a bad site, revert the commit on main. No releases or tags are made.
 # No pull_request trigger: forks never run this workflow or reach the deploy job. A push that changes only project documentation
 # (none of it is in the site or read by a test) runs nothing; the live site then stays at the last built commit.
 name: Web explorer
@@ -85,29 +84,11 @@ jobs:
           echo "PIPELINE_SECONDS=$SECONDS" >> "$GITHUB_ENV"
           echo "PIPELINE_RUN=$(python3 -c 'import json; print(json.load(open("pipeline.json"))["run_dir"])')" >> "$GITHUB_ENV"
 
-      - name: Previous verified release (its Enter Wayfarer files are reused when the play inputs are unchanged)
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          set -uo pipefail
-          # Releases exist only for main deploys that passed live verification; any failure here just means a full play build.
-          tag=$(gh release list --repo "$GITHUB_REPOSITORY" --limit 30 --json tagName \
-                --jq '[.[].tagName | select(test("^web-[0-9]{8}-[0-9a-f]{7}$"))][0] // empty' 2>/dev/null)
-          if [ -n "$tag" ] && gh release download "$tag" --repo "$GITHUB_REPOSITORY" --dir ~/previous \
-               --pattern "wayfarer-site-$tag.tar.gz" --pattern wayfarer-walk-linux-x86_64.zip 2>/dev/null; then
-            mkdir -p ~/previous/site && tar -xzf ~/previous/wayfarer-site-$tag.tar.gz -C ~/previous/site \
-              && echo "REUSE=--reuse-play $HOME/previous/site --reuse-native $HOME/previous/wayfarer-walk-linux-x86_64.zip" >> "$GITHUB_ENV" \
-              && echo "::notice title=play reuse::comparing with release $tag"
-          else
-            echo "::notice title=play reuse::no previous release with a native build (${tag:-none}); full play build"
-          fi
-
       - name: Export the viewer GLB and the Godot Web build, assemble the site
         run: |
           set -euo pipefail
           SECONDS=0
-          python3 tools/workflow.py web --pipeline-run "$PIPELINE_RUN" --out _site --native ${REUSE:-} | tee web.json
-          python3 -c "import json; p = json.load(open('web.json')).get('play') or {}; print('::notice title=play reuse::' + str(p.get('reuse_note')))"
+          python3 tools/workflow.py web --pipeline-run "$PIPELINE_RUN" --out _site --native | tee web.json
           echo "WEB_SECONDS=$SECONDS" >> "$GITHUB_ENV"
           echo "WEB_RUN=$(python3 -c 'import json; print(json.load(open("web.json"))["run_dir"])')" >> "$GITHUB_ENV"
 
@@ -334,36 +315,3 @@ jobs:
           name: wayfarer-live-check-${{ matrix.part }}
           path: live-check-${{ matrix.part }}
           retention-days: 30
-
-  release:
-    name: Keep the deployed site and native build as a GitHub Release
-    needs: [verify, verify-browser]
-    if: github.ref == 'refs/heads/main'
-    runs-on: ubuntu-24.04
-    timeout-minutes: 10
-    permissions:
-      contents: write
-    steps:
-      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c  # v8.0.1
-        with:
-          name: wayfarer-web-site
-          path: _site
-      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c  # v8.0.1
-        with:
-          name: wayfarer-walk-linux-x86_64
-          path: native
-      - name: Create release web-<release>
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          set -euo pipefail
-          tag="web-$(python3 -c 'import json; print(json.load(open("_site/release.json"))["release"])')"
-          tar -czf "wayfarer-site-$tag.tar.gz" -C _site .
-          cp _site/release.json "release-$tag.json"
-          if gh release view "$tag" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
-            echo "::notice::release $tag already exists (a rerun of this commit); kept as it is"; exit 0
-          fi
-          url="https://densho-media.github.io/ignition-wayfarer/"
-          gh release create "$tag" --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" --title "Wayfarer web $tag" \
-            --notes "Deployed to $url from $GITHUB_SHA (run $GITHUB_RUN_ID). Assets: the exact site (redeploy with the Web rollback workflow), its release.json, and the native Linux build of the walk (same package as the browser build). SIMULATION_ONLY, REP_PROXY geometry." \
-            "wayfarer-site-$tag.tar.gz" "release-$tag.json" native/wayfarer-walk-linux-x86_64.zip

@@ -787,16 +787,13 @@ PARTS = ('main', 'equivalence', 'walk')     # the main visitor walk, browser-vs-
 
 def record_release(site, release, results, metrics, version):
     """Writes the summary and metrics into the site's release.json (tests)."""
-    carried = (release['experiences'].get('play') or {}).get('reused_from')
     group = lambda prefix: [r for r in results if r['check'].split(':')[0] in prefix]
     summary = lambda rs: rs and {'result': 'PASS' if all(r['ok'] for r in rs) else 'FAIL', 'passed': sum(r['ok'] for r in rs),
                                  'total': len(rs), 'failed': [r['check'] for r in rs if not r['ok']], 'browser': version}
     release['tests'] = {'viewer': summary(group(('viewer', 'phone'))), 'isolation': summary(group(('start', 'play launcher', 'switching'))),
                         'play': summary(group(('play',))), 'touch': summary(group(('touch',))), 'all': summary(results), 'metrics': metrics}
     equivalence = [r for r in results if r['check'].startswith('play: the walk check')]
-    if carried and any(r['check'].startswith('play: browser-vs-native equivalence carried') for r in results):
-        release['tests']['equivalence'] = {**carried['equivalence'], 'carried_from': carried['release']}
-    elif equivalence:
+    if equivalence:
         eq = metrics.get('equivalence') or {}
         release['tests']['equivalence'] = {
             'result': 'PASS' if all(r['ok'] for r in equivalence) else 'FAIL',
@@ -856,14 +853,7 @@ def check(site, out, binary, sandbox=True, record=False, play_seconds=900, live=
         if os.environ.get('GITHUB_ACTIONS') and not ok:
             print(f'::error title=web check::{name} {json.dumps(detail)}'.replace('\n', ' '), flush=True)     # public run annotation
 
-    carried = (play_release or {}).get('reused_from')
-    if 'equivalence' in parts and play_release and recording and carried:
-        # The play files are byte-identical to a verified release with the same inputs (web_play.reusable): its browser-vs-native
-        # result holds for them. The walk below still boots and plays them.
-        record_check(f"play: browser-vs-native equivalence carried from release {carried['release']} (same play files)",
-                     carried['equivalence'].get('result') == 'PASS', release=carried['release'], git_revision=carried['git_revision'],
-                     note=carried['equivalence'].get('note'))
-    equivalence = 'equivalence' in parts and recording and not carried
+    equivalence = 'equivalence' in parts and recording
     side_parts = [k for k in ('walk',) if touch and k in parts]
     # The side browser runs the equivalence session and then the touch journey and the touch walk (at most two browsers share a
     # runner with the main walk; CI runs each part on its own runner and merges them, --part and --merge).

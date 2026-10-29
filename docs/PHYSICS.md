@@ -80,7 +80,7 @@ Following GEN-003, a body uses one of two frames at a time, never both:
 ## Checks
 
 The Godot physics lab, its `--check-physics` table (DYN-001…027 fixtures on the Jolt bodies), the EVA drift check and the review
-stills are retired with their scenes (tag `archive/pre-cleanup-2026-10-29`; results of 2026-10-11 there). The walk's
+stills are retired with their scenes (commit 038ae90; results of 2026-10-11 there). The walk's
 `--check-excursion` (docs/MODEL.md EXC-001) exercises `WfCrewBody`, `WfFrameField`, `WfModeController` and `WfVestibule` through the
 player's actions; the Python reference and its invariants are in `tests/test_crew_dynamics.py`.
 

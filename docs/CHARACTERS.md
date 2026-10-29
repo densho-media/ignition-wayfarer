@@ -166,7 +166,7 @@ every action is present with the right length, every check bone lands where Blen
 corrective blend shapes and every clip drives them as Blender evaluated them (deviation 0.000), and held contacts drift
 ≤ 7.1 mm (the newcomer's crawl hands). The exporter keys every bone in every clip (no channel optimisation), because Godot does not
 reset untracked bones between clips. The in-ship swap check (`induction_swap.gd`) is retired with the boarding walk
-(tag `archive/pre-cleanup-2026-10-29`).
+(commit 038ae90).
 
 **Human scale.** `human_fit.py` poses the four bodies at every generic-mannequin station (same feet stations, same rail and rung grips,
 same body axis: floating with the rings stopped, radial-down in ring A, aft-down under thrust), at both greeting poses and on the

@@ -138,9 +138,6 @@ def main(argv=None):
     web_parser.add_argument('--no-play', action='store_true', help='leave out Enter Wayfarer (no Godot toolchain needed)')
     web_parser.add_argument('--native', action='store_true', help='also export the same walk package as a native Linux build (zip in the run)')
     web_parser.add_argument('--no-native-check', action='store_true', help="skip the walk's native check on the web package")
-    web_parser.add_argument('--reuse-play', type=Path, help='a previous verified site: reuse its Enter Wayfarer files when the play '
-                                                            'inputs are unchanged (web_play.input_key)')
-    web_parser.add_argument('--reuse-native', type=Path, help='that release\'s native Linux zip (needed with --native to reuse)')
     prune_parser = commands.add_parser('prune', help='list run directories AGENTS.md step 6 would allow deleting (sizes); deletes nothing '
                                                      'unless --delete names approved candidates')
     prune_parser.add_argument('--delete', nargs='+', metavar='RUN', help='delete these listed candidates (only after the user approved them)')
@@ -244,8 +241,7 @@ def main(argv=None):
         elif args.action == 'web':
             import web_export
             result = web_export.run(root, args.out, args.pipeline_run, draco=not args.no_draco, with_play=not args.no_play,
-                                    native=args.native, native_check=not args.no_native_check,
-                                    reuse=args.reuse_play, reuse_native=args.reuse_native)
+                                    native=args.native, native_check=not args.no_native_check)
             emit(result)
             return {'PASS': 0, 'BUSY': 75}.get(result['result'], 1)
         elif args.action == 'runtime-check':

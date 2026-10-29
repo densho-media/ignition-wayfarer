@@ -66,7 +66,8 @@ Each purpose and development stage has one place. Add no top-level folder withou
    asks, one change per commit. Git is the undo.
    Branches: `main` is the approved, validated baseline; nobody commits to it
    directly. Work on `local/<task>` (workstation) or `claude/<task>` (Claude Code
-   Cloud) and validate as above. No pull requests or GitHub issues: once the owner
+   Cloud) and validate as above. Feature branches are the whole Git process: no pull
+   requests, GitHub issues or tags (an old state is a commit hash). Once the owner
    approves in chat or by text, squash the branch onto `main` as one commit
    (`git merge --squash`) and push `main`. Then delete the branch, or restart it
    from the new `main` before reusing it. The repository is public: every pushed

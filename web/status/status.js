@@ -67,8 +67,7 @@ function render(rel) {
       p ? ['Enter Wayfarer', link('../play/', 'play/'), `Godot ${p.godot} · ${mb(p.download_bytes)} to load · ${p.variant}`]
         : ['Enter Wayfarer', '—', 'not in this release'],
       p && ['Play package', p.package.join(', ')],
-      p && ['Play build', p.reused_from ? `reused from release ${p.reused_from.release} (same inputs, key ${(p.input_key || '').slice(0, 12)})`
-        : `built for this release (inputs key ${(p.input_key || '—').slice(0, 12)})`],
+      p && ['Play build', `inputs key ${(p.input_key || '—').slice(0, 12)}`],
       p && ['Reduced fidelity', p.reduced_fidelity.join('; ')],
     ])),
     section('Checks', table([
