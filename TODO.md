@@ -136,12 +136,6 @@ close-up, regression check, MODEL/TODO and Model Status update.
   (14_HULL_SERVICE; 44 RUN-011 keeps the EVA rail a runtime training simulation).
 - [ ] **S05 — Working interiors.** Workshop and fabrication, medical, operations/navigation, life support, cabins, storage and repair,
   Garden; connected to the traversal system, inside the pressure, rotation, thrust-gravity and evacuation rules.
-- [ ] **S06 — Exterior / interior in Blender and the runtime (structure plan 2026-10-29). READY.** Nodes carry `zone`; next, each
-  subsystem file with crew spaces publishes `WF_<NAME>_INTERIOR` beside `WF_<NAME>`, the vehicle file links them into `50_INTERIOR` with
-  view layers EXTERIOR and INTERIOR (pressure shell in both), and the big subsystem files (`WF_THERMAL`, `WF_FORWARD_SHIELD`,
-  `WF_STRUCTURE`) group geometry by part with `IF_*` hidden. Measure first (`profile_views.gd --hide-zone`, the web viewer's `?diag`,
-  on a desktop GPU and a phone) and let the walk hide the side it cannot see only where it pays. **Done when:** the empty geometry
-  diff holds and the measured views say whether runtime culling is worth it.
 
 ## How to work through this plan
 
@@ -340,7 +334,7 @@ physical item once, reuse existing envelopes and do not fund components twice. N
 
 Sources: Eye 45, S&E 50 AG-001..020, Tale 28; `references/FWD_V2_EYE_PLACEMENT_2026-10-13.md`.
 The layout switch is already built. User 2026-10-29: the saved model carries r30 (2/3 of the shield radius) with hexagonal EYE shells;
-the Drive owner rows still keep r4 / B_array 8 m WORKING (FD-B07) and need updating with the owner's authorization.
+the Drive owner rows (FD-B07) keep r4 / B_array 8 m and stay as they are (user 2026-10-29).
 
 - [ ] **H02 — Build selected carrier/station/raceway geometry. AFTER the owner's interface direction.** H01 evidence:
   `runs/20261016T1200Z-fwd-h01`, `references/FWD_V2_EYE_PLACEMENT_2026-10-13.md` (H01 section); stranded-sled recovery needs a
