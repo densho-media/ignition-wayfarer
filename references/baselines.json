@@ -1,5 +1,14 @@
 {
   "purpose": "Current production geometry baseline for tools/pipeline.py fingerprint diffs. Written only by `tools/workflow.py baseline`.",
-  "current": "references/baseline_fwd_eye_r30_hex",
-  "history": []
+  "current": "references/baseline_nav_sensors",
+  "history": [
+    {
+      "baseline": "references/baseline_fwd_eye_r30_hex",
+      "replaced_utc": "2026-10-29T17:35:16Z"
+    },
+    {
+      "baseline": "references/baseline_ra3_garden",
+      "replaced_utc": "2026-10-29T18:20:45Z"
+    }
+  ]
 }

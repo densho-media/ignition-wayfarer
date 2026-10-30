@@ -1,0 +1,82 @@
+# Detail pack ra3_garden (docs/MODULES.md): the first cultural pass (S8b Z1) of ring A sector 3 (LIFE_SUPPORT_GARDEN_COMMON), module
+# WF-RING-A. Owned by a WF-RING-A detail session: this manifest, src/wayfarer/detail/pack_ra3_garden.py and the generated
+# assets/wayfarer/detail/WF_DETAIL_RA3_GDN.blend, linked by WF_HABITAT at the sector instance (1, 3). Garden/mess K2 reading (S8b):
+# Spacer Contain (cushioned benches and a fiddle-railed table for a spinning, burning ship), GU Order (standard service panels and a
+# labelled resource board on the ECLSS bay), restrained Bolt-Sworn / Robocrat Humanize (a mug rail with one colour per booth place, a
+# personal cubby shelf, a maintenance tag). Grow-light bars hang under the Garden rack's lid and trays, daylight panels light the table.
+# Every value is a PROTOTYPE depiction choice: everything stays inside its whitebox block, on the outer wall above the booth back, in
+# the ECLSS bay's service recess or in the overhead band, clear of the aisle, the access strips, the through-passage and the landing
+# well; no pressure boundary, interface, route clearance, load, power, light level or growing area is claimed.
+[pack]
+module = "WF-RING-A"
+version = 1
+scope = "pack"
+enabled = true
+maturity = "L4_VISUAL_CANDIDATE"
+status = "PROTOTYPE"
+evidence_ref = "l4_production_gate"
+detail_class = "PRODUCTION"
+inspect = ["rotation", "route"]
+views = ["overhead", "cutaway"]
+summary = "Garden/mess cultural pass: bench cushions, fiddle-railed table, mug rail and cubbies, daylight and grow lights, ECLSS panels and resource board."
+
+[assembly."RA3.GDN"]
+anchor = "WF-RING-A.SECTOR.1.3"
+function = "LIFE_SUPPORT_GARDEN_COMMON"
+zone = "ring-A sector 3 LIFE_SUPPORT_GARDEN_COMMON (sector frame: +X axial, +Y down in spin, +Z tangential; deck at y 0)"
+classes = ["ENGINEERING_FLEXIBLE", "ARTISTIC"]
+# Claimed space in the sector frame (m): the Garden rack, the mess booth and the outer wall above it, the ECLSS bay's recess and the
+# overhead band above the table.
+envelope_min = [-0.50, -2.90, -2.56]
+envelope_max = [1.60, 0.00, 2.80]
+
+[params]
+overhead_y_m = -2.90
+band_y_m = -2.85          # the overhead band's lower edge
+wall_gap_m = 0.006        # wall-mounted parts stand this far off the sloping outer wall
+cushion_m = 0.05          # seat cushion thickness
+back_cushion_m = 0.04
+back_cushion_y_m = [-1.00, -0.52]
+cushion_inset_m = 0.03
+rail_r_m = 0.008          # table fiddle rail: spill lip for Coriolis and burn transients
+rail_h_m = 0.025
+rail_inset_m = 0.02
+mug_rail_y_m = -1.55
+mug_rail_r_m = 0.010
+mug_r_m = 0.038
+mug_h_m = 0.095
+crew = 6                  # one mug and one cubby per booth place (the booth seats six)
+shelf_y_m = -1.98         # cubby shelf floor
+shelf_h_m = 0.22
+shelf_depth_m = 0.16
+shelf_x_m = [-0.45, 0.60]
+light_bar_m = [0.04, 0.012]   # grow-light bar: width (z), depth (y)
+light_bars = 2                # per tier, across the rack depth
+daylight_z_m = [1.45, 2.15]
+daylight_m = 0.018
+eclss_face_x_m = 1.10     # the bay's open face; the drawn block stops SERVICE_RECESS_M behind it
+panel_t_m = 0.010
+board_z_m = [-2.46, -1.92]
+board_y_m = [-1.95, -1.15]
+access_z_m = [-0.92, -0.52]
+access_y_m = [-1.90, -0.25]
+bevel_m = 0.003
+
+[materials]
+# [r, g, b, roughness, metallic] (Blender linear). Warm textile and wood-tone against the M7 inhabited panels (Humanize), crew mug
+# colours muted, light faces near-white (no emission in the production materials: the review lights the scene).
+ra3_cushion = [0.42, 0.20, 0.10, 0.90, 0.0]
+ra3_table_rail = [0.55, 0.52, 0.47, 0.35, 0.80]
+ra3_shelf = [0.38, 0.27, 0.17, 0.65, 0.0]
+ra3_mug_1 = [0.62, 0.14, 0.10, 0.45, 0.0]
+ra3_mug_2 = [0.10, 0.30, 0.55, 0.45, 0.0]
+ra3_mug_3 = [0.70, 0.55, 0.14, 0.45, 0.0]
+ra3_mug_4 = [0.18, 0.40, 0.22, 0.45, 0.0]
+ra3_mug_5 = [0.80, 0.78, 0.72, 0.45, 0.0]
+ra3_mug_6 = [0.30, 0.18, 0.40, 0.45, 0.0]
+ra3_growlight = [0.95, 0.80, 0.95, 0.30, 0.0]
+ra3_daylight = [0.98, 0.96, 0.90, 0.25, 0.0]
+ra3_gauge_slot = [0.04, 0.045, 0.05, 0.70, 0.0]
+ra3_water = [0.10, 0.35, 0.75, 0.40, 0.0]
+ra3_oxygen = [0.20, 0.60, 0.30, 0.40, 0.0]
+ra3_co2 = [0.85, 0.55, 0.10, 0.40, 0.0]

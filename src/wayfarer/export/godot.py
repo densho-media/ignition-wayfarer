@@ -603,6 +603,10 @@ def export(root, preset='COAST', out=None, identity=None, draco=False):
     sim_rig.write(root, out / 'wf_sim_rig.json')
     rig = json.loads((out / 'wf_sim_rig.json').read_text())
     packaged = [filename, 'wf_sim_rig.json']
+    # UJ-013: the walk's learning stations (WHAT / WHY / SHOW ME) with their sourced numbers, computed here, never in Godot.
+    import learning_stations
+    learning_stations.write(root, out / learning_stations.FILE)
+    packaged.append(learning_stations.FILE)
     if preset == 'COAST':
         # RT-003: the runtime plays the First Ignition timeline from this copy, checked against the rig's hash.
         timeline = root / rig['flight_timeline']['file']

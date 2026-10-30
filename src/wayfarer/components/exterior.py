@@ -60,13 +60,16 @@ def build(c, items):
         else:
             obj = mesh(c, q['name'], he.box_corners(None, q), FACES, mat, kind=q['kind'])
         obj['role'] = q['role']; obj['geometry_status'] = 'PROTOTYPE'; obj['evidence_ref'] = 'dock_ports' if 'fitting' in q else ''
-        obj['owner_status'] = ('OPEN: S&E 37 F14 / F16 name the function; band, rate, aperture, thrust and placement are unsized (S02 slice 2, PROTOTYPE bounding case)'
+        obj['owner_status'] = ('OPEN: S&E 37 F14 names sun avoidance only; star trackers and sun sensors are unsized (S02 slice 3, PROTOTYPE judgment)'
+                               if q.get('tracker') else 'OPEN: S&E 37 F14 / F16 name the function; band, rate, aperture, thrust and placement are unsized (S02 slice 2, PROTOTYPE bounding case)'
                                if q['kind'] in ('comms_antenna', 'rcs_thruster') or q.get('rcs') or q.get('jet') else
                                'OPEN: no owner row sizes or places docking aids, floodlights or beacons (S02 slice 1, PROTOTYPE judgment)')
         if q.get('antenna'):
             obj['antenna'] = q['antenna']; obj['boresight'] = (-1.0, 0.0, 0.0); obj['sweep_radius_m'] = q['sweep']
         if q.get('jet'):
             obj['jet_direction'] = q['jet']
+        if q.get('tracker'):
+            obj['boresight'] = q['css'] if 'css' in q else q['boresight']
         if q.get('fitting'):
             obj['fitting'] = q['fitting']
         made.append(obj)

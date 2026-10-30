@@ -242,8 +242,42 @@ def rcs_rim(s):
     return out
 
 
+def nav_sensors(s):
+    """Slice 3: per bisector azimuth a pedestal on the hull at nav_tracker_x_m, a star-tracker head with its sun baffle on a radial
+    boresight, and a coarse sun sensor on the pedestal's forward face looking forward and out."""
+    q = table(s); x = q['nav_tracker_x_m']; L, W, D = q['nav_pedestal_m']; br, bl = q['nav_baffle_m']; cr, ch = q['nav_css_m']; out = []
+    for k, deg in enumerate(q['nav_tracker_deg'], 1):
+        a = math.radians(deg); rh = hg.radius_at(s, x); u = (0.0, math.cos(a), math.sin(a)); tag = dict(tracker=k, boresight=u)
+        out.append(box(f'Ext_Nav_Tracker_{k}_Pedestal', 'exterior_hardware', 'star-tracker pedestal: thermally stable mount on the hull frame',
+                       radial(x, rh+D/2, a), a, (L, W, D), **tag))
+        out.append(disc(f'Ext_Nav_Tracker_{k}_Head', 'exterior_hardware', f'primary star tracker {k} (attitude to arcseconds) with its sun baffle; radial boresight',
+                        radial(x, rh+D, a), radial(x, rh+D+bl, a), br, **tag))
+        c0 = (x+L/2, (rh+D*.6)*u[1], (rh+D*.6)*u[2]); n = unit((1.0, u[1], u[2]))
+        out.append(disc(f'Ext_Nav_Sun_Sensor_{k}', 'exterior_hardware', 'coarse sun sensor (sun-safe attitude, wide field)', c0,
+                        tuple(c0[i]+n[i]*ch for i in range(3)), cr, css=n, tracker=k))
+    return out
+
+
+def nav_screen(s):
+    """Rows per head: the stray-light keep-out cone and the FOV clear of blades, rings, shield, hull and the plume; and over the whole sky
+    the share of sun directions that leave at least two heads outside their sun exclusion (must be 1)."""
+    q = table(s); o = obstacles(s); rows = []; heads = [p for p in nav_sensors(s) if p['name'].endswith('_Head')]
+    for p in heads:
+        c = p['b']; b = p['boresight']
+        keep = [ray_hit(o, c, r, plume=math.radians(max(q['plume_half_angle_deg']))) for r in cone(b, math.radians(q['nav_keepout_half_deg']), 8)]
+        clear = sum(h is None for h in keep)/len(keep)
+        rows.append(dict(name=p['name'], keepout_clear=round(clear, 3), hits=sorted({h for h in keep if h}), ok=clear == 1.0))
+    sky = cone((1.0, 0.0, 0.0), math.pi, 24); ex = math.cos(math.radians(q['nav_sun_exclusion_deg']))
+    two = sum(sum(sum(d[m]*h['boresight'][m] for m in range(3)) < ex for h in heads) >= 2 for d in sky)/len(sky)
+    sep = min(math.degrees(math.acos(max(-1.0, min(1.0, sum(a['boresight'][m]*b['boresight'][m] for m in range(3))))))
+              for i, a in enumerate(heads) for b in heads[i+1:])
+    rows.append(dict(name='nav_sun_availability', two_heads_unblinded_share=round(two, 4), min_boresight_separation_deg=round(sep, 1),
+                     ok=two == 1.0 and sep > 2*q['nav_sun_exclusion_deg']))
+    return rows
+
+
 def service_parts(s):
-    return docking(s)+airlock(s)+aft_beacons(s)+comms(s)+rcs_aft(s)
+    return docking(s)+airlock(s)+aft_beacons(s)+comms(s)+rcs_aft(s)+nav_sensors(s)
 
 
 def forward_parts(s):
@@ -384,7 +418,7 @@ def screen(s):
         rows.append(dict(name=p['name'], crown_port_gap_m=round(gp, 2), dock_corridor_gap_m=round(gd, 2), rim_beacon_gap_m=round(gb, 2), ok=min(gp, gd, gb) >= clr))
     for r in jets(s):
         rows.append(r)
-    return rows
+    return rows+nav_screen(s)
 
 
 def q_len(s):

@@ -329,7 +329,7 @@ standard for later sections. A new section follows the same steps, and its eleme
 ## Godot runtime
 
 `godot/` holds one experience, the walk (`scenes/excursion.tscn`, `scripts/excursion/`, EXC-001; docs/MODEL.md "Station-to-ring
-excursion"), the controls (`scripts/controls/`: `WfInput` autoload, the Codex overlay, `wf_touch.gd` for MOB-001), the crew physics
+excursion"; `learning.gd`, the UJ-013 learning stations from `wf_learning.json`), the controls (`scripts/controls/`: `WfInput` autoload, the Codex overlay, `wf_touch.gd` for MOB-001), the crew physics
 it uses (`scripts/physics/`), the production-detail layer (`production_layer.gd`), the export checks and `profile_views.gd`. The
 scenes and scripts of the review menu, inspector, guided walk, Demonstrator 01, navigators, timeline, life support, physics lab,
 EVA drift and M5/M6 holograms are retired (commit 038ae90).
@@ -350,7 +350,7 @@ hangs it otherwise. Godot's version comes from `WAYFARER_GODOT` (default `/snap/
 
 **Package.** `runtime-export` exports `wayfarer.glb` + `manifest.json` (COAST) and `wayfarer_docked.glb` + `manifest_docked.json`
 (DOCKED, with the characters asset appended in memory: the `Characters` group, records with `layer` and `scene`), the rig
-`wf_sim_rig.json`, the route and `wf_first_ignition_timeline.json`. The manifests record source-code and input hashes, Git
+`wf_sim_rig.json`, the learning stations `wf_learning.json` (`learning_stations.py`), the route and `wf_first_ignition_timeline.json`. The manifests record source-code and input hashes, Git
 revision/dirty state, Blender version, node provenance, exclusions, triangle count, measured bounds, package checksums, `look` (changed
 materials, light count) and per emitter `light` (class, colour, energy, range, emitter centre). Geometry uses metres and Blender's glTF
 basis `(x,y,z) -> (x,z,-y)`: bow +X, dorsal +Y. The rig keeps its canonical Blender coordinates and declares them; unknown physics stays

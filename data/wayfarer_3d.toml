@@ -4079,9 +4079,15 @@ StoreroomContainer = [0.50, 0.52, 0.54, 0.60, 0.0]
 # Light classes: the colour temperature (K) of the emitting surface, its Blender emission strength (the light Cycles renders from the
 # geometry) and the runtime point light Godot hangs off each emitter (energy, range in m), with the emitter material that carries the class.
 [look.lights]
-emitters = { EntryLight = "cabin", Interior_Berth_Light = "living" }
+# S02 lights' look pass (2026-10-29, PROTOTYPE): the exterior position strobes (white) and the docking alignment lights and airlock
+# floods (amber), and the Garden/mess pack's daylight panels and grow-light bars, emit by class like the route's light strips.
+emitters = { EntryLight = "cabin", Interior_Berth_Light = "living", Prod_ra3_daylight = "daylight", Prod_ra3_growlight = "grow", Ext_Light_White = "beacon", Ext_Light_Amber = "approach" }
 cabin = { kelvin = 6500.0, strength = 14.0, energy = 1.2, range_m = 4.5 }
 living = { kelvin = 2900.0, strength = 10.0, energy = 0.35, range_m = 1.6 }
+daylight = { kelvin = 5000.0, strength = 12.0, energy = 1.0, range_m = 4.0 }   # over the mess table: daylight for the common room
+grow = { kelvin = 4200.0, strength = 8.0, energy = 0.3, range_m = 1.2 }        # full-spectrum grow bars (spectrum and PPFD OPEN)
+beacon = { kelvin = 6500.0, strength = 40.0, energy = 2.0, range_m = 12.0 }    # position strobes, read against the black sky
+approach = { kelvin = 1900.0, strength = 25.0, energy = 0.8, range_m = 6.0 }   # amber approach cues and floods at the ports
 offset_m = 0.12
 # FUT-003 step 2, the First Ignition exterior hero views (15!C120 item 2; presentation/hero_preview.py). The whole exterior is physics-locked
 # (shield, radiators, drive, pressure shells and the structure that carries them): one proxy grey, no hero finish (15!H120). Light is
@@ -4325,6 +4331,19 @@ rcs_aft_cant_deg = 25.0
 rcs_isp_s = [300.0, 800.0]
 flip_case_s = [1800.0, 3600.0]
 momentum_storage_factor = 2.0
+# S02 slice 3 (owner-delegated plan 2026-10-29): the primary navigation sensors beside the independent survival trackers (Eye A29). Owner
+# rows name the function only (S&E 37 F14 "sun avoidance"; star trackers, sun sensors NOT SIZED). Three star-tracker heads stand on the
+# hull at the radiator bisectors (no blade, ring, shield or plume in a radial view), each on a pedestal with a sun baffle and a coarse
+# sun sensor; radial boresights 120 deg apart, so the sun can blind at most one head and two always see stars. Every value is a
+# PROTOTYPE judgment: FOV, exclusion angle and head size are typical of flight trackers, not requirements.
+nav_tracker_deg = [90.0, 210.0, 330.0]
+nav_tracker_x_m = 20.0       # clear of the survival masts and trackers at X 40-48
+nav_pedestal_m = [0.50, 0.50, 0.30]       # along X, tangential, radial
+nav_baffle_m = [0.11, 0.40]               # sun baffle radius, length
+nav_tracker_fov_half_deg = 10.0
+nav_sun_exclusion_deg = 40.0
+nav_keepout_half_deg = 30.0               # no ship structure inside this cone (stray light)
+nav_css_m = [0.04, 0.03]                  # coarse sun sensor radius, height (on the pedestal's forward face)
 # Bounded inertia case for RCS sizing only (physics.inertia stays OPEN): each physics.mass_budget item spread uniformly over a PROTOTYPE X span
 # (from its 13_MASS_POSITIONS region) with a radial model (cyl r: solid cylinder; disc r; ring r: thin hoop; blade r0 r1: radial strip);
 # propellant (the 300-600 t inventory, up to the 2,000 t departure envelope) in the BODY-001 option C train. Not a centre-of-mass claim.

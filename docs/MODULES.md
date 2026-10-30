@@ -74,6 +74,7 @@ A pack carrying a mass, density or centre-of-mass key is refused. Production det
 | `ring_a_transfer` | WF-RING-A | M7.XFR on `WF-RING-A.DRUM.1` (despun drum); M7.SPK on `WF-RING-A.ROTOR.1` | M7, `L4_VISUAL_ACCEPTED` |
 | `m7_ra1` | WF-RING-A | M7.RA1 on `WF-RING-A.SECTOR.1.1` | M7, `L4_VISUAL_ACCEPTED` |
 | `ra2_equip` | WF-RING-A | RA2.EQP on `WF-RING-A.SECTOR.1.2` | pack, `L4_VISUAL_CANDIDATE` |
+| `ra3_garden` | WF-RING-A | RA3.GDN on `WF-RING-A.SECTOR.1.3` | pack, `L4_VISUAL_CANDIDATE` |
 | `m8_forward` | WF-FWD | M8.BROW.AFT, M8.CROWN.RIM on `WF-FWD.FORWARD_SHIELD.ORIGIN` | M8, `L4_VISUAL_CANDIDATE` |
 | `rad_frame` | WF-THERMAL | RAD.FRAME on `WF-THERMAL.RADIATOR.ORIGIN` (all three blades) | pack, `L4_VISUAL_CANDIDATE` |
 

@@ -25,6 +25,11 @@ func run(host: WfExcursion) -> void:
 	await _ticks(10)
 	await _excursion(0)
 	await _excursion(1)
+	if h.learning == null or h.learning.stations.size() != h.learning.doc.get("stations", []).size() or h.learning.stations.is_empty():
+		fail("learning stations: %d of %d found in the package" % [0 if h.learning == null else h.learning.stations.size(),
+			0 if h.learning == null else h.learning.doc.get("stations", []).size()])
+	elif h.learning.done.size() != h.learning.stations.size():
+		fail("learning stations: %d of %d reached and completed on the ring A circuit" % [h.learning.done.size(), h.learning.stations.size()])
 	if h.max_jump > MAX_JUMP_M:
 		fail("the body jumped %.3f m beyond its own motion in one step (%s)" % [h.max_jump, h.max_jump_at])
 	var out := {"result": "PASS" if fails.is_empty() else "FAIL", "fails": fails, "notes": notes, "max_jump_m": snappedf(h.max_jump, 0.0001),
@@ -251,6 +256,7 @@ func _walk_to(target: Vector3, tol: float, limit_s: float, k: int) -> bool:
 			return true
 		h.walk_override = d.normalized()
 		await _doors_ahead(k)
+		await _learn_here()
 		await _ticks(1)
 		n += 1
 		if d.length() < best - 0.05:
@@ -264,6 +270,24 @@ func _walk_to(target: Vector3, tol: float, limit_s: float, k: int) -> bool:
 			return false
 	h.walk_override = Vector3.ZERO
 	return false
+
+## UJ-013: at each learning station first reached, Use steps WHAT, WHY, SHOW ME and closes, and the station counts as learned.
+func _learn_here() -> void:
+	var i := h._learning_in_reach()
+	if i < 0 or h.learning.done.has(h.learning.stations[i]["rec"]["id"]) or h._walk_target() != "":
+		return
+	h.walk_override = Vector3.ZERO
+	var got := []
+	var id := str(h.learning.stations[i]["rec"]["id"])
+	for k in 4:
+		got.append(h.use())
+		await _ticks(2)
+		if k < 3:
+			await shot("A_learn_%s_%d" % [id, k], h.yaw, h.pitch)     # the panel at WHAT, WHY and SHOW ME (with --shots)
+	var want := ["learn WHAT", "learn WHY", "learn SHOW ME", "learn "]
+	notes["learn_" + id] = got
+	if got != want or h.learning.open != -1 or h.view_out:
+		fail("learning station %s: Use gave %s, want %s, then closed" % [h.learning.stations[i]["rec"]["id"], got, want])
 
 var pushed := false
 func _doors_ahead(k: int) -> void:

@@ -88,6 +88,7 @@ var hud_prompt := Label.new()
 var hud_status := Label.new()
 var hud_check := Label.new()
 var ring_map: Control = null
+var learning: WfLearning = null   # UJ-013 learning stations (WHAT / WHY / SHOW ME), from the package
 
 func _ready() -> void:
 	if not FileAccess.file_exists("res://generated/manifest_docked.json"):
@@ -132,6 +133,9 @@ func _ready() -> void:
 		progress[r] = {"boarded": false, "entered": false, "bins": bins, "circuit": false, "back": false, "returned": false}
 	_spawn()
 	_hud()
+	learning = WfLearning.new(by_name, layer, self, manifest)
+	if learning.welcome() != "":
+		say("GU instructor: " + learning.welcome())
 	WfInput.context = "excursion"
 	WfInput.touch_provider = touch_state            # MOB-001: the stick, the look drag and the contextual buttons on a touch device
 	tree_exiting.connect(func(): WfInput.touch_provider = Callable(); WfInput.release_touch())
@@ -825,6 +829,9 @@ func use() -> String:
 		say("Nothing in reach to operate here.")
 		return ""
 	var w := _walk_target()
+	var ls_i := _learning_in_reach()
+	if ls_i >= 0 and (learning.open == ls_i or w == ""):
+		return "learn " + learning.advance(ls_i)
 	if w == "ladder":
 		var L: WfLine = lines["ACCESS_" + "AB"[WfFrames.ring_index(walk_zone)]]
 		enter_line(L.id, L.length(), false)
@@ -1441,6 +1448,9 @@ func use_label() -> String:
 			return "Use · open gate"
 		return ""
 	var w := _walk_target()
+	var ls_i := _learning_in_reach()
+	if ls_i >= 0 and (learning.open == ls_i or w == ""):
+		return "Use · %s" % (learning.next_label() if learning.open == ls_i else "learn")
 	if w == "ladder":
 		return "Use · ladder"
 	if w != "":
@@ -1484,7 +1494,10 @@ func _prompt_text() -> String:
 			out.append("coasting %.2f m/s (no rail in reach)" % absf(lv))
 	else:
 		var d := _walk_target()
-		if d == "ladder":
+		var ls_i := _learning_in_reach()
+		if ls_i >= 0 and (learning.open == ls_i or d == ""):
+			out.append(("%s " + ("learning point: " + learning.title(ls_i) if learning.open != ls_i else learning.next_label())) % key("exc.use"))
+		elif d == "ladder":
 			out.append("%s take the ladder" % key("exc.use"))
 		elif d != "":
 			out.append("%s %s door %s" % [key("exc.use"), "close" if circ_doors[d]["target"] > 0.0 else "open", str(d).trim_prefix("CIRC.")])
@@ -1497,13 +1510,26 @@ func _prompt_text() -> String:
 		t = refusal + "\n" + t
 	return t
 
+## The learning station in reach while walking a ring, -1 none.
+func _learning_in_reach() -> int:
+	if learning == null or move != "WALK":
+		return -1
+	return learning.in_reach(actor.global_position, walk_zone)
+
 func _update_hud() -> void:
 	hud_goal.text = _goal_text()
+	if learning != null:
+		if move == "WALK":
+			learning.update(actor.global_position, walk_zone, get_viewport().get_visible_rect().size)
+		elif learning.open >= 0:
+			learning.close()
 	var lines_out: Array = []
 	for r in ["RING_A", "RING_B"]:
 		var rec: Dictionary = progress[r]
 		lines_out.append("%s  %s board  %s circuit (%d%%)  %s back aboard the station" % [("Ring A" if r == "RING_A" else "Ring B"),
 			"[x]" if rec["boarded"] else "[ ]", "[x]" if rec["circuit"] else "[ ]", int(100.0 * rec["bins"].count(1) / BINS), "[x]" if rec["returned"] else "[ ]"])     # ASCII: the web font has no ballot boxes
+	if learning != null and not learning.stations.is_empty():
+		lines_out.append("Learning points %d/%d (ring A sector 3)" % [learning.done.size(), learning.stations.size()])
 	hud_check.text = "\n".join(lines_out)
 	hud_prompt.text = _prompt_text()
 	if WfInput.compact():

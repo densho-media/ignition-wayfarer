@@ -1,0 +1,76 @@
+{
+ "task": "project-thread-9aqvk6",
+ "approved": "2026-10-30 (owner: squash)",
+ "fuel_split": {
+  "status": "STUDY / PROTOTYPE (owner-delegated 2026-10-29); owner screens S&E 62/64/67 scenario A unchanged",
+  "inventory_t": {
+   "he3": 164.8,
+   "d2": 110.1,
+   "h2_first": 145.1,
+   "reserve": 180.0
+  },
+  "liquid_m3": {
+   "he3": 2811.8,
+   "d2": 628.4,
+   "h2": 4591.8,
+   "total": 8032.0
+  },
+  "body": {
+   "he3_need_m3": 2896.2,
+   "he3_stations": 9,
+   "he3_capacity_m3": 3738.0,
+   "he3_margin_m3": 841.8,
+   "he3_margin_share": 0.291
+  },
+  "torus": {
+   "R": 20.5,
+   "a": 4.5,
+   "a_liquid": 4.2,
+   "x_center": 100.6,
+   "x_range": [
+    96.1,
+    105.1
+   ],
+   "r_range": [
+    16.0,
+    25.0
+   ],
+   "gaps_deg_m": [
+    [
+     195.0,
+     9.0
+    ],
+    [
+     315.0,
+     9.0
+    ],
+    [
+     50.0,
+     9.0
+    ]
+   ],
+   "kept_fraction": 0.79,
+   "liquid_m3": 5641.8,
+   "need_m3": 5376.8,
+   "need_h2_m3": 4729.6,
+   "need_d2_m3": 647.3,
+   "d2_cell_arc_deg": 34.3,
+   "margin_m3": 265.0,
+   "outer_area_m2": 2878.0,
+   "shell_mass_t_est": 50.9,
+   "h2_mass_t": 325.1,
+   "d2_mass_t": 110.1,
+   "checks": {
+    "axial_fit_m": 2.8,
+    "inner_clear_to_hull_collar_m": 6.8,
+    "outer_clear_to_warm_panels_m": 6.5,
+    "corridor_gap_vs_keepout_m": 6.0
+   },
+   "thrust_load_MN_at_1_5g": 7.15,
+   "heat_leak_W_at_1W_m2": 2878.0
+  },
+  "decision": "FUEL-SPLIT (WORKING, owner-delegated 2026-10-29): He-3 in the nine BODY-C3 stations; H2 and D2 in a segmented torus behind the Brow (9 m gaps at 195, 315 and 50 deg; D2 in its own ~34 deg cell; six radial struts from the hull forward collar). Recorded in S&E 15 OWN-FUEL-SPLIT-2026-10-29 and 98 row 128.",
+  "open": "strut/collar FEA, crawler and visiting-craft envelopes, boil-off and cryocoolers, CG/inertia; return braking short by 147 t (S&E 69)",
+  "clash_screen": "no overlap with the built ship; nearest 2.3-2.8 m to bypass keel ties, EYE raceways, DS-10 rail and truss spokes"
+ }
+}

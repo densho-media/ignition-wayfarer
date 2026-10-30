@@ -71,7 +71,7 @@ class RegistryTests(unittest.TestCase):
         reg = modules.registry(ROOT); packs_ = modules.packs(ROOT)
         before = {n: modules.pack_contract(self.s, reg, packs_, n) for n in packs_}
         more = dict(packs_, probe={'pack': dict(packs_['ra2_equip']['pack']), 'assembly': {'PROBE.X': dict(
-            anchor='WF-RING-A.SECTOR.1.3', envelope_min=[-1.0, -1.0, -1.0], envelope_max=[1.0, 1.0, 1.0])}})
+            anchor='WF-RING-A.SECTOR.1.3', envelope_min=[-1.6, -1.0, -1.0], envelope_max=[-0.6, 1.0, 1.0])}})   # aft of ra3_garden's claim
         self.assertEqual({n: modules.pack_contract(self.s, reg, more, n) for n in packs_}, before)
         self.assertEqual(modules.check_packs(more), [])
 

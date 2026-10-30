@@ -132,6 +132,11 @@ are not modeled; the ring sectors carry only rough PROTOTYPE interior blocking.
   corridor and capture-ring interfaces are unchanged. The EVA airlock has two floodlights beside its hatch.
   White position strobes mark the extremities: four sit flush in the shield rim girder at the bisectors
   between Crown bays, inside the 90 m diameter, and three sit on the aft RCS pods.
+  Primary navigation sensors (slice 3, `nav_sensors`): three star-tracker heads on pedestals on the hull at X 20 m, one at each
+  radiator bisector (90°, 210°, 330°), clear of the survival masts and trackers at X 40–48 m. Each has a sun baffle, a radial
+  boresight and a coarse sun sensor on its pedestal's forward face. The boresights are 120° apart, so with a 40° sun exclusion the
+  sun can blind at most one head and two always see stars (`nav_screen`: the whole sky checked); each head's 30° stray-light cone meets
+  no blade, ring, shield, hull or plume. FOV, exclusion and size are typical flight values, not requirements.
   Aft of the skin (which ends at X −101.75 m) the only structure is the thrust ring (X −103 m), so every
   aft part stands on its nodes. Each node carries a 0.06 m diaphragm plate filling the ring section
   (S04 slice 4, `Thrust_Node_Plate_*`, PROTOTYPE judgment). Primary comms sit on booms slanted aft from the ring to gimbals at
@@ -1019,6 +1024,9 @@ route clearance: the route sweep is unchanged.
   - **Light (artistic freedom):** the route's 95 light strips emit a cool 6500 K cabin light.
     Each berth has a warm 2900 K reading light, recessed in its lid 0.25 m from the head end
     (`sector_whitebox.shapes`, `berth_light_m`), the only warm light: where people live.
+    The lights' look pass (2026-10-29) adds four classes: the Garden/mess pack's 5000 K daylight panels over the table and
+    4200 K grow-light bars (spectrum and light level OPEN), the exterior position strobes as 6500 K beacons and the docking
+    alignment lights and airlock floods as 1900 K amber approach lights. The walk hangs a light at each of them like the strips.
 
   Cycles lights the stills from these emitters alone. The export records each emitter's light class
   and emitter centre (`light` on its node record, `look` in the manifest), and the boarding walk
@@ -1225,6 +1233,15 @@ record (`references/modules/<pack>.json`); docs/MODULES.md. Every production ass
 - `ra2_equip` (RA2.EQP, WF-RING-A, L4_VISUAL_CANDIDATE): a transverse cable tray down the centre of each of the four fit-out frame bays of
   ring A sector 2 (WORK_MEDICAL_OPS), broken round every item within 2 cm of the overhead, the hatch opening and the landing well, with
   a junction box at each run's ends (45 elements), all in the overhead band (-2.90 to -2.85 m), on sector instance (1, 2) only.
+- `ra3_garden` (RA3.GDN, WF-RING-A, L4_VISUAL_CANDIDATE): the first cultural pass (S8b Z1) of ring A sector 3
+  (LIFE_SUPPORT_GARDEN_COMMON), 57 elements on sector instance (1, 3) only. Mess: seat and back cushions on both benches and a fiddle
+  rail round the table (a spill lip for Coriolis and burn transients); on the outer wall above the far bench a mug rail with one colour
+  per booth place and a six-cubby personal shelf with matching tabs; two daylight panels over the table in the overhead frame bays,
+  clear of the supply diffuser. Garden rack: two grow-light bars under the lid and under each tray. ECLSS bay, in its 0.06 m service
+  recess: a GU-standard LIFE SUPPORT resource board with WATER, O2 and CO2 gauges (illustrative levels; the hook for the UJ-004
+  learning station), an ochre access panel with quarter-turn fasteners and an orange maintenance tag. Its screen keeps every part off
+  the aisle, the access strips, the through-passage and the landing well (unless in the overhead band), off the leaning outer wall and
+  out of every whitebox part and fit-out item; no clearance, interface, light level or growing area changes.
 Both candidates were built in parallel on separate branches that touched only their own packs, then merged without conflict.
 Approved hand-authored meshes can be committed as glTF data under their pack (`data/detail/<pack>/*.glb`) and are then rebuilt from a
 clean checkout; none is committed yet.
@@ -1552,10 +1569,17 @@ utility row.
   chase and side walls with the door openings as boxes; the corridors' clear surfaces as a two-sided trimesh; each door a closed-leaf
   collider, disabled only when the leaf is fully open (mesh and collider move together). 177 m round each ring. The HUD records the
   circumference walked (72 bins) and the checklist per ring: boarded, circuit, back aboard the station.
+- **Learning stations (UJ-013, `learning_stations.py`, `wf_learning.json` in the package; `scripts/excursion/learning.gd`).** A GU
+  instructor (no identity defined, UJ-001) greets the trainee at spawn. At a learning point Use steps WHAT, WHY and SHOW ME and closes;
+  walking away closes it. Two points in ring A sector 3: spin gravity at the mess table (UJ-003: 4 rpm at 28 m gives 0.50 g; the
+  Coriolis push on a walker and a lifted mug; SHOW ME switches to the outside view) and life support at the ECLSS board (UJ-004: the
+  owner's STUDY daily O2, CO2, water and food flows for the five human consumers, Seraph using none; the Garden credited with no food or
+  O2; the stores' status, O2 and water makeup OPEN; SHOW ME a stock/flow overlay). Each finds its exported node by name and follows its
+  ring; every number comes from the spec or data/life_support.toml with its source and status. The HUD counts the points learned.
 - **Check** (`-- --check-excursion`, WF_GODOT_EXCURSION, in `runtime-export`): both excursions driven through the player's own actions:
   the shut outer hatch and spine-port gate stop the body, the inner hatch refuses while the outer is open, a shut corridor door blocks a
   body walking into it, both circuits are walked completely (72 of 72 bins, out of the landing well onto the passage and back), the
-  rings lock at their index, the station is reached again, and no step moves the body more than 0.05 m beyond its own velocity (0.04 m
+  rings lock at their index, both learning points are found and stepped through on the ring A circuit, the station is reached again, and no step moves the body more than 0.05 m beyond its own velocity (0.04 m
   measured, at spawn). Both excursions take 88,000 physics frames, about 100 s headless natively; the same check passes in the
   WebAssembly build in headless Chromium with drawing off (about 1,470 s), and the scene draws there without errors.
 

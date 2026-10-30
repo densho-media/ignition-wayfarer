@@ -39,7 +39,7 @@ close-up, regression check, MODEL/TODO and Model Status update.
   (`hero_preview.dress(grammar=True, wear=)`), the runtime exterior (`look.exterior.grammar`) and the review set
   `presentation/p4_review.py`. **Open:** desktop-GPU and web frame-time measurement on the owner's machine (`profile_views.gd
   --hide-assemblies RA.EXT,RB.,SP.` and `--look 1/2/3`); S8b zones after their
-  whitebox and cultural reviews; S7 waits on engineering releases. **Owner review:** the ram-face look and the wear layer (P4-LOCKED (b), P4-STATE) with the other candidates. Every new asset
+  whitebox and cultural reviews (Z1 Garden/mess BUILT as `ra3_garden`, owner review; walk export pending Godot); Z2, Z3 open; S7 waits on engineering releases. **Owner review:** the ram-face look and the wear layer (P4-LOCKED (b), P4-STATE) with the other candidates. Every new asset
   stays `L4_VISUAL_CANDIDATE` until the owner reviews it; nothing reaches `main` without the owner's squash approval.
   **Done when:** the plan's S11 whole-ship review is accepted by the owner.
 - [ ] **FSH — Fractal shielding on the Brow's ram faces (user brief 2026-10-27), BUILT as shading, on main (owner squash 2026-10-29).** The
@@ -102,7 +102,9 @@ close-up, regression check, MODEL/TODO and Model Status update.
   `runs/20261018T1200Z-body-arch`): occupancy map, three packagings (A compact 60 m 1,744 m³, B annulus 5,241 m³, C keel-lane tank
   train 4,072 m³ + spine tunnel), recommended C. No serviceable packaging holds 600 t as LH2; He-3 at ~1,700 m³/100 t dominates fuel
   volume. BODY-Q1..Q3 answered (15!A207:A209, A218/A219): the fuel-packaging iteration runs as M5 studies (BODY-C2 reference, C3).
-  Left: after the owner releases a layout and fuel quantity, move the zones into
+  2026-10-29 FUEL-SPLIT (WORKING, owner-delegated): He-3 in the nine BODY-C3 stations, H2 and D2 in a segmented torus behind the Brow
+  (R 20.5 m, minor 4.5 m, X 96.1–105.1 m; numbers and open items in `references/evidence/project-thread-9aqvk6.json`).
+  Left: build that layout and fuel quantity: move the zones into
   `WF_STORAGE` as PROTOTYPE assemblies replacing the schematic tanks, full gate. **Done when:** the chosen architecture is built and
   inspected, and the schematic tanks are gone.
 - [ ] **S02 — Essential external hardware. READY where placement is independent of S01.** High-gain RF and laser comms, RCS clusters
@@ -115,8 +117,10 @@ close-up, regression check, MODEL/TODO and Model Status update.
   the corridor base, outside the capture rings, screened), airlock floods, rim and aft position strobes. Slice 2 built 2026-10-18 (report
   `references/S02_COMMS_RCS_2026-10-18.md`): two 4 m Ka dishes and a 0.5 m optical terminal aft of the blades, three aft and four
   rim RCS pods, all screened; sizing is a PROTOTYPE bounding case (owner rate, band, thrust and flip time NOT FOUND). Left: the owner's
-  answers to the slice-2 questions; momentum storage (CMGs) inside the BODY-001 equipment bay once S01 is built; navigation sensors
-  beyond the survival trackers; EVA handrails and tether anchors along the maintenance routes; service panels; lights' look pass.
+  answers to the slice-2 questions; momentum storage (CMGs) inside the BODY-001 equipment bay once S01 is built; slice 3 (2026-10-29,
+  owner review): three primary star trackers with coarse sun sensors at X 20 m, screened; lights' look pass done 2026-10-29
+  (beacon and approach light classes); the service panels are the S04 casing access covers (ochre, S03). Left: EVA handrails and tether
+  anchors along the maintenance routes (parked, see S04).
 - [ ] **S03 — Whole-ship material library and visual identity (Art Style Bible).** Structure, casing, insulation, hot radiator faces,
   cryogenic systems, optics, shielding, GU markings, maintenance zones; before/after hero renders.
   Slice 1 2026-10-18: the S02/S04 parts take the accepted M4 grammar (15!A202, 98!A112, Spacecraft!A16): ochre covers, dark
@@ -406,6 +410,12 @@ candidates of all nine classes are separate accessory assets (docs/ACCESSORIES.m
   S05/S10, OPEN); D one fault chain from 39; F light time and detection uncertainty from the
   Eye workbook. No library is imported; the first import needs `references/THIRD_PARTY.md` (POL-010/011).
   **Done when:** each milestone has its owner rows, a playable view, checks against the owner values and its OPEN list.
+
+- [ ] **UJ — Learning journey in the walk (Tale 30_UNIFIED_JOURNEY UJ-001..014; owner brief 2026-10-29). FIRST SLICE BUILT.** The GU
+  instructor's greeting and two UJ-013 learning points in ring A sector 3 (spin gravity at the mess table, life support at the ECLSS
+  board; `learning_stations.py`, `learning.gd`). **Open:** the remaining stations (Eye/Aegis UJ-006/007, radiators UJ-008, drive
+  UJ-009, mission preview UJ-010, debrief UJ-011) with their remote-camera SHOW ME views; the UJ-014 coverage matrix; the instructor's
+  appearance (K01). **Done when:** every UJ-014 mandatory component has a station with a sourced objective, view and safe return.
 
 - [ ] **J05 — Adaptive Control Induction (user brief 2026-10-17).** Plan, audit and library decision:
   `references/ACI_PLAN_2026-10-17.md`. ACI-01 to ACI-10 are built: the walk's keys are `WfInput` actions, with hold/toggle, stick
