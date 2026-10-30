@@ -110,6 +110,13 @@ func close() -> void:
 	if host != null:
 		host.set("view_out", false)
 
+## The remote camera of the open station's SHOW ME (ship frame, Blender axes: +X bow, +Z dorsal), {} when none is showing.
+func remote_camera() -> Dictionary:
+	if open < 0 or step != 2:
+		return {}
+	var sm: Dictionary = stations[open]["rec"]["show_me"]
+	return sm.get("camera", {}) if str(sm["kind"]) == "remote" else {}
+
 func showing_outside() -> bool:
 	return open >= 0 and step == 2 and str(stations[open]["rec"]["show_me"]["kind"]) == "outside"
 
@@ -140,7 +147,9 @@ func _render() -> void:
 			out.append("· " + str(l))
 	else:
 		var sm: Dictionary = rec["show_me"]
-		if sm["kind"] == "outside":
+		if sm["kind"] == "remote":
+			out.append(str(sm["text"]))
+		elif sm["kind"] == "outside":
 			out.append(str(sm["text"]))
 			if host != null:
 				host.set("view_out", true)

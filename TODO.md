@@ -39,7 +39,8 @@ close-up, regression check, MODEL/TODO and Model Status update.
   (`hero_preview.dress(grammar=True, wear=)`), the runtime exterior (`look.exterior.grammar`) and the review set
   `presentation/p4_review.py`. **Open:** desktop-GPU and web frame-time measurement on the owner's machine (`profile_views.gd
   --hide-assemblies RA.EXT,RB.,SP.` and `--look 1/2/3`); S8b zones after their
-  whitebox and cultural reviews (Z1 Garden/mess `ra3_garden`, Z2 work/medical/ops `ra2_work`, Z3 berths `ra1_berths` BUILT, owner review); S7 waits on engineering releases. **Owner review:** the ram-face look and the wear layer (P4-LOCKED (b), P4-STATE) with the other candidates. Every new asset
+  whitebox and cultural reviews (Z1 Garden/mess `ra3_garden`, Z2 work/medical/ops `ra2_work`, Z3 berths `ra1_berths`, and ring B's three
+  sectors by one definition `rb_fitout` BUILT, owner review); S7 waits on engineering releases. **Owner review:** the ram-face look and the wear layer (P4-LOCKED (b), P4-STATE) with the other candidates. Every new asset
   stays `L4_VISUAL_CANDIDATE` until the owner reviews it; nothing reaches `main` without the owner's squash approval.
   **Done when:** the plan's S11 whole-ship review is accepted by the owner.
 - [ ] **FSH — Fractal shielding on the Brow's ram faces (user brief 2026-10-27), BUILT as shading, on main (owner squash 2026-10-29).** The
@@ -117,6 +118,8 @@ close-up, regression check, MODEL/TODO and Model Status update.
   owner review): three primary star trackers with coarse sun sensors at X 20 m, screened; lights' look pass done 2026-10-29
   (beacon and approach light classes); the service panels are the S04 casing access covers (ochre, S03). Slice 4 (2026-10-30, owner-accepted): the guided-EVA handrail on standoffs along `eva_route` at the airlock azimuth, tether anchor rings and two
   foot restraints on the forward collar (`exterior_hardware.eva_rails`, ochre); still a training fixture (EVA-048 HOLD, 44 RUN-011).
+  Momentum storage built 2026-10-30: six CMGs on the body utility frames (`body_equipment`, PROTOTYPE sizing). Left: the owner's answers
+  to the slice-2 questions.
 - [ ] **S03 — Whole-ship material library and visual identity (Art Style Bible).** Structure, casing, insulation, hot radiator faces,
   cryogenic systems, optics, shielding, GU markings, maintenance zones; before/after hero renders.
   Slice 1 2026-10-18: the S02/S04 parts take the accepted M4 grammar (15!A202, 98!A112, Spacecraft!A16): ochre covers, dark
@@ -133,7 +136,8 @@ close-up, regression check, MODEL/TODO and Model Status update.
   joints on the skin's aft face (owner allowance 15!G202). Slice 3: forward collar straps broken round its openings and aids. Slice 4: thrust-ring node diaphragm plates. Left: drive section (physics-locked
   magnetic nozzles, Q40: no validated shell to detail), thrust ring and nozzles, further shield
   assemblies, internal framing and equipment mounts. Slice 5 (2026-10-30): cryocoolers on every fuel station and lobe hangers to the
-  frames (S01).
+  frames (S01). Slice 6 (2026-10-30): internal ring frames in the body module gaps, utility-frame beams (equipment mounts) and the
+  thrust ring's bay splice sleeves. Left: drive section (physics-locked), nozzles, further shield assemblies.
 - [ ] **S05 — Working interiors.** Workshop and fabrication, medical, operations/navigation, life support, cabins, storage and repair,
   Garden; connected to the traversal system, inside the pressure, rotation, thrust-gravity and evacuation rules.
 
@@ -235,6 +239,9 @@ The earlier Garden 24/24 was a zone screen only. No pressure cutout, port, guard
   all occupied sectors, gravity/lost-ring states, patient/carrier/attendants/kit variants. Preserve full-length support requirements.
   **Done when:** the integrated coverage matrix meets the owner-selected requirements, including failure contingencies; outstanding
   FAIL/MARGINAL keeps the relevant route open. Current best 1.5-g aid still fails Garden by 0.066 m; furniture alone is not closure.
+  2026-10-30 re-run of the casualty sweep on the current model (`references/evidence/d02_coverage_2026-10-30.md`): ring A sector 1 and
+  sector-to-sector legs MARGINAL, sectors 2/3 and the refuge legs FAIL at the crew port and trunk; ring B only the staged mattress to
+  sector 2's hatch (MARGINAL +0.001 m). Open: the in-sector care screen, bend limits, 1.5 g and lost-ring cases.
 
 - [ ] **D03 — Establish an independent SP-13 exit. OWNER (pressure architecture).** Study done 2026-10-16: refuge gallery outside
   the trunk (`studies/d03_sp13_gallery.py`, `references/D03_SP13_GALLERY_2026-10-16.md`): U/A/K PASS, S MARGINAL +0.021 m; no single
@@ -410,8 +417,8 @@ candidates of all nine classes are separate accessory assets (docs/ACCESSORIES.m
   Eight UJ-013 stations in ring A (`learning_stations.py`, `learning.gd`): spin (UJ-003) and life support (UJ-004) in sector 3; the
   Eyes (UJ-006), Aegis (UJ-007) and mission preview (UJ-010) at the three ops screens, radiators (UJ-008) and drive (UJ-009) at the two
   engineering benches and the debrief (UJ-011) at the medical couch in sector 2, as internal teaching stops (S&E 15 Q48). The UJ-014
-  coverage matrix is in `wf_learning.json`. **Open:** dedicated remote-camera views per station (SHOW ME uses the shared outside view),
-  drones (no station), the SNAV map for UJ-010, physical egress for UJ-011, the instructor's appearance (K01).
+  coverage matrix is in `wf_learning.json`; 2026-10-30 a ninth station (drones, UJ-014) and a remote camera per station. **Open:** the
+  SNAV map for UJ-010, physical egress for UJ-011, the instructor's appearance (K01).
 
 - [ ] **J05 — Adaptive Control Induction (user brief 2026-10-17).** Plan, audit and library decision:
   `references/ACI_PLAN_2026-10-17.md`. ACI-01 to ACI-10 are built: the walk's keys are `WfInput` actions, with hold/toggle, stick

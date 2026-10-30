@@ -3422,6 +3422,7 @@ unit = "m"
 rationale = "Small editable envelope choices for complete P0; not engineering dimensions. Axial positions are offsets from the layout datums (layout.py)."
 thrust_ring_x = { datum = "AFT", offset_m = 9.5 }
 thrust_node_plate_m = 0.06          # S04 slice 4: node diaphragm plate thickness (PROTOTYPE judgment; sizing OPEN)
+thrust_splice_m = [0.40, 0.035]     # S04 slice 6: bolted chord splice sleeve at mid-bay (length, wall over the chord); assembly division, PROTOTYPE
 ring_phase_deg = 0.0
 rail_topology = "three_single_longerons"
 rail_topology_status = "OPEN"
@@ -4451,3 +4452,28 @@ lines = [
   { name = "Fuel_Transfer_H2_A", species = "hydrogen", source = "torus", lane_deg = 270.0, offset_deg = -6.0, tank = "Feed_Run_Tank_03" },
   { name = "Fuel_Transfer_H2_B", species = "hydrogen", source = "torus", lane_deg = 270.0, offset_deg = 6.0, tank = "Feed_Run_Tank_04" },
 ]
+
+# S04/S02 body framing and momentum storage (owner go 2026-10-30, body_equipment.py). Every value PROTOTYPE: internal ring frames in
+# the module gaps between the keel rails and the skin; on the two 3 m utility frames, radial beams at the lobe bisectors carrying six
+# double-gimbal CMGs (S&E 37 F17 "angular momentum of huge rotating rings" names the function only; the momentum case is
+# exterior_hardware.sizing, twice the rings' allowed residual, carried by five of six units).
+[body_equipment]
+status = "PROTOTYPE"
+
+[body_equipment.frames]
+width_m = 0.20
+rail_gap_m = 0.10        # inner edge off the keel-rail circle
+skin_gap_m = 0.05        # outer edge off the skin's inner face
+beam_deg = [90.0, 210.0, 330.0]
+beam_offset_m = -0.90    # beams sit aft in the 3 m utility gap; the CMGs stand forward of them
+beam_r0_m = 1.30         # spine clearance
+beam_depth_m = 0.25
+
+[body_equipment.cmg]
+deg = [90.0, 210.0, 330.0]
+radius_m = 2.90
+offset_m = 0.35
+housing_diameter_m = 1.10
+gimbal_diameter_m = 1.30
+rotor_rpm = 6000.0
+rotor_radius_m = 0.42

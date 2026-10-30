@@ -1,7 +1,7 @@
 """Canon-alignment proxy recipes. Mechanism dimensions remain prototype studies."""
 import math
 import bpy
-from common import empty, material, mesh, cylinder, annulus, line, ring, link_instance, cut, loft
+from common import empty, material, mesh, cylinder, cylinder_mesh, annulus, line, ring, link_instance, cut, loft
 from spec import derived, station_x, RADIATOR_STATES
 from thermal_geometry import root_construction, local_to_ship, supports, stations as blade_stations, blade_of, root_band, bay_joints, mounts, mount_block_box, cell_span, joint_shoes, datum_lugs, seam_width, chase_radius, TRUNK_RADIUS_M, FEED_TRUNK_V, FEED_TRUNK_Z, FRAME_R, CHORD_R, DIAG_R, POST_R
 import rotor as rotor_parts
@@ -175,6 +175,16 @@ def structure(c,s):
                 for w in (-tw,tw):vs.append((xx,rr*cs-w*sn,rr*sn+w*cs))
         plate=mesh(c,f'Thrust_Node_Plate_{j:02}',vs,[(0,2,3,1),(4,5,7,6),(0,1,5,4),(2,6,7,3),(0,4,6,2),(1,3,7,5)],metal,kind='thrust_node_plate')
         plate['geometry_status']='PROTOTYPE';plate['role']='node diaphragm of the thrust ring (load into the node from the aft pods and comms booms); sizing OPEN'
+    # S04 slice 6 (PROTOTYPE judgment): the ring is assembled from twelve bay segments; a bolted splice sleeve on each of the four chords
+    # at mid-bay marks the assembly division (one mesh per bay).
+    sl,sw=p['thrust_splice_m']
+    for j in range(nodes):
+        a=phase+(j+.5)*math.tau/nodes;da=sl/2/node_r;vs,fs=[],[]
+        for xx in (xring-half,xring+half):
+            for rr in (outer-strut,inner+strut):
+                v,f=cylinder_mesh(radial(xx,rr,a-da*node_r/rr),radial(xx,rr,a+da*node_r/rr),strut+sw,16);n=len(vs);vs+=v;fs+=[tuple(i+n for i in q) for q in f]
+        sp=mesh(c,f'Thrust_Ring_Splice_{j:02}',vs,fs,metal,kind='thrust_node_plate')
+        sp['geometry_status']='PROTOTYPE';sp['role']='bolted chord splice: thrust-ring bay segment joint (assembly division); sizing OPEN'
     annulus(c,'Central_Thrust_Hub',xring,1.6,st['hub_diameter_m']/2,p['spine_radius_m']+.03,metal)
     empty(c,'IF_THRUST_RING_CENTER',(xring,0,0))['geometry_basis']='Aft thrust ring plane on the ship axis; load-path reference'
     for j,n in enumerate(st['nozzle_pickup_nodes']):

@@ -125,5 +125,50 @@
   "baseline": "references/baseline_baseline_fuel_storage",
   "runtime_export": "runs/20261030T094627226890Z-runtime PASS, 8 of 8 learning stations"
  },
- "decisions": "# project-thread-1ysr1f: TODO modeling pass (owner brief 2026-10-30)\n\nOwner: \"execute all the modeling steps that are in TODO; make your own decisions for science and development.\"\nEvery choice below that is not sourced is PROTOTYPE. Nothing here changes a pressure boundary of the rings or a canon number.\n\n## S01 / F01 fuel storage (FUEL-SPLIT, WORKING, S&E 15_MODEL_INTERFACES A229:J229)\n\n- Function: hold the 27-lobe He-3 store in the aft body and the H2/D2 cryogenic store in a forward torus, and feed the four\n  feed run tanks (renamed from `Tank_Volume_0n`: they are the drive's short-term run tanks, not the voyage inventory).\n- Fixed: inventories (He-3 164.8 t, D2 110.1 t, H2 145.1 + 180 t), the body radius 6.5 m, ring sweeps (r 30, X 82.9..93.2),\n  bypass collar (r 33\u201335, aft 82.02), the keel lanes 30/150/270.\n- Decisions (PROTOTYPE): 9 body modules \u00d7 3 lobes (100\u00b0 span, r 1.1\u20134.72); torus R 20.5, a 4.5 at X 100.6 split into vessels\n  by three gaps (50/195/315) that keep the EVA azimuth and the keel lanes clear; D2 in vessel 3's 32\u00b0 end cell. Torus lines\n  leave on the outer equator, ride the bypass collar at r 32.5 (clear of both ring sweeps), drop at X 82.02 and enter the\n  hull at X 80.02 (penetration OPEN), then run along the 3.6 m lanes over the pulse bank and battery to the run tanks.\n  Cryocoolers on each module (r 3.9\u20134.6), lobe hangers to the frames, struts from the torus to the collar skin.\n- Fit screen margins: He-3 +1690 m\u00b3, D2 +65 m\u00b3, H2 +416 m\u00b3 at 3 % ullage.\n- Open: hull penetration detail, boil-off and cryocooler power (not budgeted), torus support loads, MLI thickness.\n\n## S02 slice 4: EVA handrail\n\n- Rail on standoffs at az 50 along eva_route's runs (aft 100.6\u219295.6, forward 103.1\u2192106.0), tether anchor rings, foot plates\n  at the two holds seated on the collar straps. Ochre (M4 service colour). Anchors stay an animation/UI fixture (EVA-048 HOLD).\n\n## S8b Z3 / Z2 cultural passes (detail packs ra1_berths, ra2_work, L4_VISUAL_CANDIDATE)\n\n- Z3 berths: mattress, pillow, sleep strap, curtain on a rail, berth number, name tab, photo card; crew colours shared with\n  the ra3 mugs and cubbies; hygiene door and label.\n- Z2 work: ops screens + numbers, keyboards, medical straps, drawer front, red cross, MEDICAL label, tool shadow boards with\n  tethered tools, maintenance tags. ra2_equip trays kept.\n\n## H02 Eye cartridge service hardware (r30)\n\n- Per facet: carrier guide from 0.6 m outside the hatch to the truss aft face, hand-off clamp frame, parked sled (r 1.4 annulus), two\n  captured rails 1.2 m either side of the 19.1 m aft leg, service station at r 8. Margins at r30: carrier 0.33 m, sled 1.50 m.\n- Open: in-well carrier and hatch, rail supports, mass, tow load, latches, safe state.\n\n## UJ learning stations\n\n- Six new stations in ring A sector 2 (Q48: internal teaching stops): Eye OPS 1, Aegis OPS 2, preview OPS 3, radiators lab bench,\n  drive workbench, debrief medical couch. learning.gd now keeps the open station in reach until 1.5 reaches and offers not-yet-learned\n  stations first, so the OPS bank offers its points in turn. Walk check: 8 of 8 learned (runtime-export PASS).\n\n## Gate\n\n- Full pipeline runs/20261030T095445Z-pipeline PASS (0 unexpected), accepted as references/baseline_baseline_fuel_storage.\n\n## Review\n\n`REVIEW_PROJECT_THREAD_1YSR1F.blend` (built by `make_review.py`): whole ship, fuel storage views, EVA rail, the two interiors.\n"
+ "decisions": "# project-thread-1ysr1f: TODO modeling pass (owner brief 2026-10-30)\n\nOwner: \"execute all the modeling steps that are in TODO; make your own decisions for science and development.\"\nEvery choice below that is not sourced is PROTOTYPE. Nothing here changes a pressure boundary of the rings or a canon number.\n\n## S01 / F01 fuel storage (FUEL-SPLIT, WORKING, S&E 15_MODEL_INTERFACES A229:J229)\n\n- Function: hold the 27-lobe He-3 store in the aft body and the H2/D2 cryogenic store in a forward torus, and feed the four\n  feed run tanks (renamed from `Tank_Volume_0n`: they are the drive's short-term run tanks, not the voyage inventory).\n- Fixed: inventories (He-3 164.8 t, D2 110.1 t, H2 145.1 + 180 t), the body radius 6.5 m, ring sweeps (r 30, X 82.9..93.2),\n  bypass collar (r 33\u201335, aft 82.02), the keel lanes 30/150/270.\n- Decisions (PROTOTYPE): 9 body modules \u00d7 3 lobes (100\u00b0 span, r 1.1\u20134.72); torus R 20.5, a 4.5 at X 100.6 split into vessels\n  by three gaps (50/195/315) that keep the EVA azimuth and the keel lanes clear; D2 in vessel 3's 32\u00b0 end cell. Torus lines\n  leave on the outer equator, ride the bypass collar at r 32.5 (clear of both ring sweeps), drop at X 82.02 and enter the\n  hull at X 80.02 (penetration OPEN), then run along the 3.6 m lanes over the pulse bank and battery to the run tanks.\n  Cryocoolers on each module (r 3.9\u20134.6), lobe hangers to the frames, struts from the torus to the collar skin.\n- Fit screen margins: He-3 +1690 m\u00b3, D2 +65 m\u00b3, H2 +416 m\u00b3 at 3 % ullage.\n- Open: hull penetration detail, boil-off and cryocooler power (not budgeted), torus support loads, MLI thickness.\n\n## S02 slice 4: EVA handrail\n\n- Rail on standoffs at az 50 along eva_route's runs (aft 100.6\u219295.6, forward 103.1\u2192106.0), tether anchor rings, foot plates\n  at the two holds seated on the collar straps. Ochre (M4 service colour). Anchors stay an animation/UI fixture (EVA-048 HOLD).\n\n## S8b Z3 / Z2 cultural passes (detail packs ra1_berths, ra2_work, L4_VISUAL_CANDIDATE)\n\n- Z3 berths: mattress, pillow, sleep strap, curtain on a rail, berth number, name tab, photo card; crew colours shared with\n  the ra3 mugs and cubbies; hygiene door and label.\n- Z2 work: ops screens + numbers, keyboards, medical straps, drawer front, red cross, MEDICAL label, tool shadow boards with\n  tethered tools, maintenance tags. ra2_equip trays kept.\n\n## H02 Eye cartridge service hardware (r30)\n\n- Per facet: carrier guide from 0.6 m outside the hatch to the truss aft face, hand-off clamp frame, parked sled (r 1.4 annulus), two\n  captured rails 1.2 m either side of the 19.1 m aft leg, service station at r 8. Margins at r30: carrier 0.33 m, sled 1.50 m.\n- Open: in-well carrier and hatch, rail supports, mass, tow load, latches, safe state.\n\n## UJ learning stations\n\n- Six new stations in ring A sector 2 (Q48: internal teaching stops): Eye OPS 1, Aegis OPS 2, preview OPS 3, radiators lab bench,\n  drive workbench, debrief medical couch. learning.gd now keeps the open station in reach until 1.5 reaches and offers not-yet-learned\n  stations first, so the OPS bank offers its points in turn. Walk check: 8 of 8 learned (runtime-export PASS).\n\n## Gate\n\n- Full pipeline runs/20261030T095445Z-pipeline PASS (0 unexpected), accepted as references/baseline_baseline_fuel_storage.\n\n## Review\n\n`REVIEW_PROJECT_THREAD_1YSR1F.blend` (built by `make_review.py`): whole ship, fuel storage views, EVA rail, the two interiors.\n",
+ "pass_2": {
+  "approved": "2026-10-30 (owner, squash onto main)",
+  "status": "PROTOTYPE",
+  "body_frames": [
+   "Body_Frame_01",
+   "Body_Frame_02",
+   "Body_Frame_03",
+   "Body_Frame_04",
+   "Body_Frame_05",
+   "Body_Frame_06",
+   "Body_Frame_07",
+   "Body_Frame_08"
+  ],
+  "cmg_sizing": {
+   "units": 6,
+   "need_N_m_s": 100770,
+   "per_unit_N_m_s": 20154,
+   "one_failed_N_m_s": 100770,
+   "rotor_rpm": 6000.0,
+   "rotor_inertia_kg_m2": 32.1,
+   "rotor_rim_mass_kg": 182,
+   "status": "PROTOTYPE sizing (momentum case: exterior_hardware.sizing)"
+  },
+  "cmgs": [
+   "Body_CMG_03_1",
+   "Body_CMG_03_2",
+   "Body_CMG_03_3",
+   "Body_CMG_06_1",
+   "Body_CMG_06_2",
+   "Body_CMG_06_3"
+  ],
+  "thrust_ring_splices": 12,
+  "ring_b_fitout_elements": {
+   "RB1.BRT": 51,
+   "RB2.WRK": 56,
+   "RB3.GDN": 57
+  },
+  "learning_stations": 9,
+  "d02_coverage": "references/evidence/d02_coverage_2026-10-30.md",
+  "gates": {
+   "pipeline": "runs/20261030T121326Z-pipeline PASS (35 added, 0 unexpected)",
+   "baseline": "references/baseline_body_equipment",
+   "runtime_export": "PASS 9/9"
+  }
+ }
 }

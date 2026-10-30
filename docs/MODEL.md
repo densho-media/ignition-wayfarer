@@ -139,7 +139,8 @@ are not modeled; the ring sectors carry only rough PROTOTYPE interior blocking.
   no blade, ring, shield, hull or plume. FOV, exclusion and size are typical flight values, not requirements.
   Aft of the skin (which ends at X −101.75 m) the only structure is the thrust ring (X −103 m), so every
   aft part stands on its nodes. Each node carries a 0.06 m diaphragm plate filling the ring section
-  (S04 slice 4, `Thrust_Node_Plate_*`, PROTOTYPE judgment). Primary comms sit on booms slanted aft from the ring to gimbals at
+  (S04 slice 4, `Thrust_Node_Plate_*`, PROTOTYPE judgment); the ring is built from twelve bay segments joined by a
+  0.40 m bolted splice sleeve on each chord at mid-bay (S04 slice 6, `Thrust_Ring_Splice_*`). Primary comms sit on booms slanted aft from the ring to gimbals at
   X −105 m, aft of the blades, where the aft hemisphere (Earth during outbound coast) is free of blades,
   rings and shield: two gimballed 4 m Ka-band dishes at 90° and 210° and a 0.5 m optical terminal at 330°,
   beside the independent survival terminals. In COAST they point aft; their sweeps clear the blades, hull,
@@ -246,7 +247,11 @@ at r 32.5 m clear of both ring sweeps, drop at its aft station and enter the hul
 along the keel lanes at r 3.6 m over the pulse bank and battery to the four feed run tanks (`Feed_Run_Tank_01–04`, the drive's
 short-term run tanks: 4 × r 1.4 × 12 m at X −73…−61 m, `[physics.fuel_tanks]`, no fuel mass; `IF_FUEL_RUN_TANK_*`). Volume margins at
 3 % ullage: ³He +1,690 m³, D2 +65 m³, H2 +416 m³. Boil-off, cryocooler power, support loads and insulation are OPEN; no fuel mass
-enters the rig. No quantitative plume or magnetic exclusion boundary
+enters the rig. **Body framing and momentum storage** (`body_equipment.py`, `[body_equipment]`, PROTOTYPE): an internal ring frame
+(`Body_Frame_01–08`) in every module gap between the keel rails and the skin; on the two 3 m utility frames (X −21, 17 m) three radial
+beams at the lobe bisectors carry six double-gimbal control-moment gyros (`Body_CMG_*`, 1.1 m housings at r 2.9 m), sized so five of
+six hold twice the rings' allowed residual momentum (100,770 N·m·s; 20,154 N·m·s each, 6000 rpm, 32 kg·m² rotor). Mass, power, loads
+and slew rates are OPEN. No quantitative plume or magnetic exclusion boundary
 is sourced. Art Style owns depiction; engineering owns dimensions and operating
 constraints.
 
@@ -1259,6 +1264,9 @@ record (`references/modules/<pack>.json`); docs/MODULES.md. Every production ass
   bezel and an "OPS k" number per chair on the display wall and a keyboard on the desk (one exported node per station, `Ops_1–3`);
   chest and thigh restraint straps over the medical mattress; a drawer-line front, the red cross and a MEDICAL label on the medical
   stowage; on both tool walls a shadow board of outlined tools with each tool on a tether, and a maintenance tag (`Tools_<bench>`).
+- `rb_fitout` (RB1.BRT, RB2.WRK, RB3.GDN, L4_VISUAL_CANDIDATE): ring B's three sectors take ring A's berth, work/medical/ops and
+  Garden/mess passes by one definition (ring A's builders and checks, names RB*, berth numbers B1-k); every crew member keeps a berth,
+  mug and cubby in each ring in the same colour, so a lost ring costs no one their place.
 - `ra1_berths` (RA1.BRT, L4_VISUAL_CANDIDATE, S8b Z3) on sector instance (1, 1): per berth a mattress, a sleep-restraint strap, a
   pillow, a curtain on a rail across the berth mouth drawn back, a stencilled "A1-k" number, a name tab and a photo card; pillows,
   curtains and tabs in the six crew colours shared with the `ra3_garden` mugs and cubbies; the hygiene cubicle's door skin, pull and
@@ -1601,7 +1609,11 @@ utility row.
   apertures, a 1 mg grain at 0.016 c carries 11.5 MJ), Aegis (UJ-007, OPS 2: microdust / cm / metre hazards and their answers), the
   mission preview (UJ-010, OPS 3: 0.016 c, 6 years, the planned state sequence), radiators (UJ-008, lab bench: three blades at 1800 K,
   26,882 m² effective area, drive waste heat OPEN), the drive (UJ-009, workbench: one core, four nozzles, 29.4 MN design load) and the
-  debrief (UJ-011, medical couch). `wf_learning.json` carries the UJ-014 coverage matrix (drones OPEN).
+  debrief (UJ-011, medical couch), and the drones (UJ-014, under the sector-2 cable trays: the interior and exterior drone classes,
+  every route HOLD). `wf_learning.json` carries the UJ-014 coverage matrix. Each SHOW ME except life support and the preview (overlays)
+  is a remote camera: a fixed ship-frame eye and target per station (`show_me.camera`), shown from the stationary ship while the step
+  is open; the walk resumes where the trainee stood. The open station stays in reach until 1.5 reaches; stations not yet learned are
+  offered first.
 - **Check** (`-- --check-excursion`, WF_GODOT_EXCURSION, in `runtime-export`): both excursions driven through the player's own actions:
   the shut outer hatch and spine-port gate stop the body, the inner hatch refuses while the outer is open, a shut corridor door blocks a
   body walking into it, both circuits are walked completely (72 of 72 bins, out of the landing well onto the passage and back), the

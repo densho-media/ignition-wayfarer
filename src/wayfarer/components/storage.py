@@ -3,6 +3,7 @@ transfer lines and the four feed run tanks the drive feed lines start from. Geom
 import math
 
 from common import cylinder, cylinder_mesh, empty, line, material, mesh
+import body_equipment as beq
 import fuel_storage as fst
 
 SPECIES_COLOR = {'helium-3': (.62, .66, .72), 'deuterium': (.50, .60, .74), 'hydrogen': (.70, .74, .78)}
@@ -90,9 +91,47 @@ def build(c, s):
                     vs.append((x, r*ca-w*sa, r*sa+w*ca))
         obj = mesh(c, q['name'], vs, [(0, 2, 3, 1), (4, 5, 7, 6), (0, 1, 5, 4), (2, 6, 7, 3), (0, 4, 6, 2), (1, 3, 7, 5)], cold, kind='fuel_equipment')
         stamp(obj, s, 'helium-3 / 20 K', 'cryocooler cold-box on a utility frame (S04 equipment mount; lift, power and heat rejection OPEN)')
+    body(c, s)
     tank_mat = material('Tank', (.39, .48, .56))
     ft = s['physics']['fuel_tanks']
     for t in fst.run_tanks(s):
         obj = cylinder(c, t['name'], (t['x0']+t['x1'])/2, t['x1']-t['x0'], t['radius'], tank_mat, t['y'], t['z'])
         obj['representation'] = ft['representation']; obj['dimensions_status'] = ft['dimensions_status']; obj['fuel_mass_known'] = False
         obj['storage_role'] = 'feed run tank: transfer buffer and feed conditioning ahead of the shadow shield (volume OPEN)'
+
+
+def box_at(x0, x1, r0, r1, a, w):
+    """Box spanning x0..x1 and r0..r1 along azimuth a, w wide tangentially: vertices and faces."""
+    ca, sa = math.cos(a), math.sin(a); vs = []
+    for x in (x0, x1):
+        for r in (r0, r1):
+            for t in (-w/2, w/2):
+                vs.append((x, r*ca-t*sa, r*sa+t*ca))
+    return vs, [(0, 2, 3, 1), (4, 5, 7, 6), (0, 1, 5, 4), (2, 6, 7, 3), (0, 4, 6, 2), (1, 3, 7, 5)]
+
+
+def body(c, s):
+    """S04 internal ring frames and utility-frame beams round the body stations, and the S02 control-moment gyros on the beams
+    (body_equipment, PROTOTYPE)."""
+    frame_mat = material('Body_Frame', (.36, .30, .24)); cmg_mat = material('Body_CMG', (.72, .72, .70))
+    for f in beq.frames(s):
+        if 'deg' in f:
+            obj = mesh(c, f['name'], *box_at(f['x']-f['depth']/2, f['x']+f['depth']/2, f['r0'], f['r1'], math.radians(f['deg']), f['width']), frame_mat,
+                       kind='body_frame')
+            obj['function'] = 'utility-frame beam: equipment mount for a CMG (PROTOTYPE; sizing and loads OPEN)'
+        else:
+            from common import annulus
+            obj = annulus(c, f['name'], f['x'], f['width'], f['r1'], f['r0'], frame_mat); obj['kind'] = 'body_frame'
+            obj['function'] = 'internal ring frame between body modules, outside the keel rails (PROTOTYPE; sizing OPEN)'
+        obj['engineering_status'] = 'PROTOTYPE'
+    sz = beq.sizing(s)
+    for u in beq.cmgs(s):
+        a = u['a']; ra = (0.0, math.cos(a), math.sin(a)); p = lambda x, r: (x, r*ra[1], r*ra[2])
+        vs, fs = cylinder_mesh(p(u['x'], u['r']-u['housing']/2), p(u['x'], u['r']+u['housing']/2), u['housing']/2, 32)
+        g = u['gimbal']/2; v2, f2 = cylinder_mesh((u['x']-0.04, *p(0, u['r'])[1:]), (u['x']+0.04, *p(0, u['r'])[1:]), g, 32)
+        n = len(vs); vs += v2; fs += [tuple(i+n for i in q) for q in f2]
+        v3, f3 = box_at(u['cradle'][0], u['cradle'][1]+0.02, u['r']-0.25, u['r']+0.25, a, 0.40)
+        n = len(vs); vs += v3; fs += [tuple(i+n for i in q) for q in f3]
+        obj = mesh(c, u['name'], vs, fs, cmg_mat, kind='body_equipment')
+        obj['function'] = 'double-gimbal control-moment gyro on its cradle (S02 momentum storage, S&E 37 F17)'
+        obj['momentum_N_m_s'] = sz['per_unit_N_m_s']; obj['rotor_rpm'] = sz['rotor_rpm']; obj['engineering_status'] = sz['status']+'; mass, power and loads OPEN'

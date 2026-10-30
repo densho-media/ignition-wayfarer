@@ -1029,7 +1029,8 @@ func _frame_pivot() -> Dictionary:
 func _process(dt: float) -> void:
 	if actor == null:
 		return
-	var f := _frame_pivot()
+	var rc: Dictionary = learning.remote_camera() if learning != null else {}
+	var f: Dictionary = _frame_pivot() if rc.is_empty() else frames["STATIONARY"]     # a station's remote camera rides the stationary ship
 	if view_root.get_parent() != f["node"]:
 		view_root.reparent(f["node"], false)
 	view_root.transform = Transform3D(Basis.IDENTITY, -f["rest"])
@@ -1044,6 +1045,11 @@ func _process(dt: float) -> void:
 	if view_out:
 		local = Transform3D(look, eye - look.z * 2.2 + up * 0.25)
 	body_vis.visible = view_out
+	if not rc.is_empty():
+		var ce := Vector3(rc["eye"][0], rc["eye"][2], -rc["eye"][1])
+		var ct := Vector3(rc["target"][0], rc["target"][2], -rc["target"][1])
+		local = Transform3D(Basis.looking_at(ct - ce, Vector3.UP), ce)
+		body_vis.visible = false
 	camera.transform = local
 	refusal_t = maxf(refusal_t - dt, 0.0)
 	_update_lamps()

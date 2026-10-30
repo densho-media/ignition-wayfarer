@@ -1,7 +1,7 @@
 {
   "result": "PASS",
   "blender": "5.2.2 LTS",
-  "spec_hash": "2883fb00f729fe5d89ca79a360dec3dd1694d5d95bb8d52d6727d469203a4aaf",
+  "spec_hash": "11da0ad65866ac366aa11099cfa2002c17156c29f191868a2a970c1b736da84a",
   "source_map_hash": "68275db418651cdb78f29fa01c8c2fea9492bd280c07af23f4d1c80d300828ef",
   "configurations": {
     "COAST": {
@@ -107,15 +107,17 @@
       "evaluated_geometry_counts": {
         "geometry": 1547,
         "thrust_node": 12,
-        "thrust_node_plate": 12,
+        "thrust_node_plate": 24,
         "hull_envelope": 2,
         "generator_proxy": 2,
         "hull_shell": 2,
-        "production_detail": 103,
+        "production_detail": 119,
         "fuel_tank": 31,
         "fuel_support": 33,
         "fuel_transfer_line": 14,
         "fuel_equipment": 6,
+        "body_frame": 14,
+        "body_equipment": 6,
         "cryo_feed_line": 8,
         "power_storage": 4,
         "magnetic_field": 10,
@@ -411,15 +413,17 @@
       "evaluated_geometry_counts": {
         "geometry": 1547,
         "thrust_node": 12,
-        "thrust_node_plate": 12,
+        "thrust_node_plate": 24,
         "hull_envelope": 2,
         "generator_proxy": 2,
         "hull_shell": 2,
-        "production_detail": 103,
+        "production_detail": 119,
         "fuel_tank": 31,
         "fuel_support": 33,
         "fuel_transfer_line": 14,
         "fuel_equipment": 6,
+        "body_frame": 14,
+        "body_equipment": 6,
         "cryo_feed_line": 8,
         "power_storage": 4,
         "magnetic_field": 10,
@@ -715,15 +719,17 @@
       "evaluated_geometry_counts": {
         "geometry": 1547,
         "thrust_node": 12,
-        "thrust_node_plate": 12,
+        "thrust_node_plate": 24,
         "hull_envelope": 2,
         "generator_proxy": 2,
         "hull_shell": 2,
-        "production_detail": 103,
+        "production_detail": 119,
         "fuel_tank": 31,
         "fuel_support": 33,
         "fuel_transfer_line": 14,
         "fuel_equipment": 6,
+        "body_frame": 14,
+        "body_equipment": 6,
         "cryo_feed_line": 8,
         "power_storage": 4,
         "magnetic_field": 10,
@@ -1016,15 +1022,17 @@
       "evaluated_geometry_counts": {
         "geometry": 1547,
         "thrust_node": 12,
-        "thrust_node_plate": 12,
+        "thrust_node_plate": 24,
         "hull_envelope": 2,
         "generator_proxy": 2,
         "hull_shell": 2,
-        "production_detail": 103,
+        "production_detail": 119,
         "fuel_tank": 31,
         "fuel_support": 33,
         "fuel_transfer_line": 14,
         "fuel_equipment": 6,
+        "body_frame": 14,
+        "body_equipment": 6,
         "cryo_feed_line": 8,
         "power_storage": 4,
         "magnetic_field": 10,
@@ -1317,15 +1325,17 @@
       "evaluated_geometry_counts": {
         "geometry": 1547,
         "thrust_node": 12,
-        "thrust_node_plate": 12,
+        "thrust_node_plate": 24,
         "hull_envelope": 2,
         "generator_proxy": 2,
         "hull_shell": 2,
-        "production_detail": 103,
+        "production_detail": 119,
         "fuel_tank": 31,
         "fuel_support": 33,
         "fuel_transfer_line": 14,
         "fuel_equipment": 6,
+        "body_frame": 14,
+        "body_equipment": 6,
         "cryo_feed_line": 8,
         "power_storage": 4,
         "magnetic_field": 10,
@@ -1618,15 +1628,17 @@
       "evaluated_geometry_counts": {
         "geometry": 1547,
         "thrust_node": 12,
-        "thrust_node_plate": 12,
+        "thrust_node_plate": 24,
         "hull_envelope": 2,
         "generator_proxy": 2,
         "hull_shell": 2,
-        "production_detail": 103,
+        "production_detail": 119,
         "fuel_tank": 31,
         "fuel_support": 33,
         "fuel_transfer_line": 14,
         "fuel_equipment": 6,
+        "body_frame": 14,
+        "body_equipment": 6,
         "cryo_feed_line": 8,
         "power_storage": 4,
         "magnetic_field": 10,
@@ -1983,6 +1995,24 @@
       "authored": 0,
       "enabled": true
     },
+    "WF_DETAIL_RB1_BRT.blend": {
+      "assembly": "RB1.BRT",
+      "objects": 7,
+      "authored": 0,
+      "enabled": true
+    },
+    "WF_DETAIL_RB2_WRK.blend": {
+      "assembly": "RB2.WRK",
+      "objects": 6,
+      "authored": 0,
+      "enabled": true
+    },
+    "WF_DETAIL_RB3_GDN.blend": {
+      "assembly": "RB3.GDN",
+      "objects": 3,
+      "authored": 0,
+      "enabled": true
+    },
     "WF_DETAIL_RB_EXT_AFT.blend": {
       "assembly": "RB.EXT.AFT",
       "objects": 6,
@@ -2045,6 +2075,9 @@
     },
     "WF_HABITAT_B.blend": {
       "instances": [
+        "RB1.BRT",
+        "RB2.WRK",
+        "RB3.GDN",
         "RB.EXT.AFT",
         "RB.EXT.FWD",
         "RB.SEC",
@@ -3978,6 +4011,40 @@
       ],
       "direct_links": []
     },
+    "detail/WF_DETAIL_RB1_BRT.blend": {
+      "generated_objects": 7,
+      "ids": [
+        "RB1.BRT.BERTH_1",
+        "RB1.BRT.BERTH_2",
+        "RB1.BRT.BERTH_3",
+        "RB1.BRT.BERTH_4",
+        "RB1.BRT.BERTH_5",
+        "RB1.BRT.BERTH_6",
+        "RB1.BRT.HYGIENE"
+      ],
+      "direct_links": []
+    },
+    "detail/WF_DETAIL_RB2_WRK.blend": {
+      "generated_objects": 6,
+      "ids": [
+        "RB2.WRK.MEDICAL",
+        "RB2.WRK.OPS_1",
+        "RB2.WRK.OPS_2",
+        "RB2.WRK.OPS_3",
+        "RB2.WRK.TOOLS_LAB_BENCH",
+        "RB2.WRK.TOOLS_WORKBENCH"
+      ],
+      "direct_links": []
+    },
+    "detail/WF_DETAIL_RB3_GDN.blend": {
+      "generated_objects": 3,
+      "ids": [
+        "RB3.GDN.ECLSS",
+        "RB3.GDN.LIGHTS",
+        "RB3.GDN.MESS"
+      ],
+      "direct_links": []
+    },
     "detail/WF_DETAIL_RB_EXT_AFT.blend": {
       "generated_objects": 6,
       "ids": [
@@ -5557,7 +5624,7 @@
       ]
     },
     "subsystems/WF_HABITAT_B.blend": {
-      "generated_objects": 369,
+      "generated_objects": 372,
       "ids": [
         "Crew_Tube_2_1",
         "Crew_Tube_2_1_Arrest_Rail",
@@ -5910,6 +5977,9 @@
         "WF.DETAIL.RB.SEC",
         "WF.DETAIL.RB.SPK",
         "WF.DETAIL.RB.XFR",
+        "WF.DETAIL.RB1.BRT",
+        "WF.DETAIL.RB2.WRK",
+        "WF.DETAIL.RB3.GDN",
         "WF.HUB.2.DATA_Rotor",
         "WF.HUB.2.Drum",
         "WF.HUB.2.EMERGENCY_POWER_Rotor",
@@ -5934,6 +6004,9 @@
         "components/WF_INTERIOR_HABITATION.blend",
         "components/WF_INTERIOR_WORK.blend",
         "components/WF_RING_SECTOR.blend",
+        "detail/WF_DETAIL_RB1_BRT.blend",
+        "detail/WF_DETAIL_RB2_WRK.blend",
+        "detail/WF_DETAIL_RB3_GDN.blend",
         "detail/WF_DETAIL_RB_EXT_AFT.blend",
         "detail/WF_DETAIL_RB_EXT_FWD.blend",
         "detail/WF_DETAIL_RB_SEC.blend",
@@ -6647,8 +6720,28 @@
       "direct_links": []
     },
     "subsystems/WF_STORAGE.blend": {
-      "generated_objects": 104,
+      "generated_objects": 124,
       "ids": [
+        "Body_CMG_03_1",
+        "Body_CMG_03_2",
+        "Body_CMG_03_3",
+        "Body_CMG_06_1",
+        "Body_CMG_06_2",
+        "Body_CMG_06_3",
+        "Body_Frame_01",
+        "Body_Frame_02",
+        "Body_Frame_03",
+        "Body_Frame_03_Beam_1",
+        "Body_Frame_03_Beam_2",
+        "Body_Frame_03_Beam_3",
+        "Body_Frame_04",
+        "Body_Frame_05",
+        "Body_Frame_06",
+        "Body_Frame_06_Beam_1",
+        "Body_Frame_06_Beam_2",
+        "Body_Frame_06_Beam_3",
+        "Body_Frame_07",
+        "Body_Frame_08",
         "CRYO_FEED_LINE_01",
         "CRYO_FEED_LINE_02",
         "CRYO_FEED_LINE_03",
@@ -6757,7 +6850,7 @@
       "direct_links": []
     },
     "subsystems/WF_STRUCTURE.blend": {
-      "generated_objects": 620,
+      "generated_objects": 632,
       "ids": [
         "Body_Envelope_Reference",
         "Brayton_Train_1",
@@ -7378,7 +7471,19 @@
         "Thrust_Ring_-1_5.0",
         "Thrust_Ring_-1_6.0",
         "Thrust_Ring_1_5.0",
-        "Thrust_Ring_1_6.0"
+        "Thrust_Ring_1_6.0",
+        "Thrust_Ring_Splice_00",
+        "Thrust_Ring_Splice_01",
+        "Thrust_Ring_Splice_02",
+        "Thrust_Ring_Splice_03",
+        "Thrust_Ring_Splice_04",
+        "Thrust_Ring_Splice_05",
+        "Thrust_Ring_Splice_06",
+        "Thrust_Ring_Splice_07",
+        "Thrust_Ring_Splice_08",
+        "Thrust_Ring_Splice_09",
+        "Thrust_Ring_Splice_10",
+        "Thrust_Ring_Splice_11"
       ],
       "direct_links": []
     },

@@ -168,7 +168,7 @@ def sizing(s):
                          cases=rows),
                 momentum=dict(ring_residual_H_N_m_s=Hres, source='08 allowed residual (0.1 %, WORKING)', storage_N_m_s=round(q['momentum_storage_factor']*Hres),
                               dump_at_rcs_s=round(q['momentum_storage_factor']*Hres/tau_pitch, 1),
-                              note='momentum storage (CMG / wheels) is internal and waits on BODY-001 (equipment bay); not built'))
+                              note='momentum storage: six CMGs on the body utility frames (body_equipment, PROTOTYPE)'))
 
 
 def forward_shield_r(s):

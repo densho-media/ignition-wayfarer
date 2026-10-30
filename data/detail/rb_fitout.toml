@@ -1,0 +1,44 @@
+# Detail pack rb_fitout (docs/MODULES.md): ring B's cultural pass (S5 / P4 S8b, owner go 2026-10-30), module WF-RING-B. Ring B repeats
+# ring A's sector functions (ring_functions MIRRORED), so its three sectors take ring A's accepted cultural passes by one definition:
+# RB1.BRT the berths (ra1_berths), RB2.WRK the work/medical/ops room (ra2_work, below ring B's own RB.SEC overhead layer) and RB3.GDN
+# the Garden and mess (ra3_garden), with ring A's values (read from those manifests) and ring A's checks. Cultural reading: every crew
+# member keeps a berth, a mug and a cubby in each ring in the same colour, so a lost ring (D01) costs no one their place. Owned by a
+# WF-RING-B detail session: this manifest, src/wayfarer/detail/pack_rb_fitout.py and the generated WF_DETAIL_RB1_BRT.blend,
+# WF_DETAIL_RB2_WRK.blend and WF_DETAIL_RB3_GDN.blend. Every value is a PROTOTYPE depiction choice; nothing claims a pressure
+# boundary, interface, route clearance, load, power, light level or growing area.
+[pack]
+module = "WF-RING-B"
+version = 1
+scope = "pack"
+enabled = true
+maturity = "L4_VISUAL_CANDIDATE"
+status = "PROTOTYPE"
+evidence_ref = "l4_production_gate"
+detail_class = "PRODUCTION"
+inspect = ["rotation", "route"]
+views = ["overhead", "cutaway"]
+summary = "Ring B cultural pass: ring A's berth, work/medical/ops and Garden/mess passes repeated in ring B's three sectors."
+
+[assembly."RB1.BRT"]
+anchor = "WF-RING-B.SECTOR.2.1"
+function = "HABITATION"
+zone = "ring-B sector 1 HABITATION (sector frame: +X axial, +Y down in spin, +Z tangential; deck at y 0)"
+classes = ["ENGINEERING_FLEXIBLE", "ARTISTIC"]
+envelope_min = [-0.402, -2.65, -0.46]
+envelope_max = [1.60, 0.00, 2.67]
+
+[assembly."RB2.WRK"]
+anchor = "WF-RING-B.SECTOR.2.2"
+function = "WORK_MEDICAL_OPS"
+zone = "ring-B sector 2 WORK_MEDICAL_OPS below the overhead band (sector frame: +X axial, +Y down in spin, +Z tangential; deck at y 0)"
+classes = ["ENGINEERING_FLEXIBLE", "ARTISTIC"]
+envelope_min = [-0.40, -2.50, -2.35]
+envelope_max = [1.60, -0.70, 2.40]
+
+[assembly."RB3.GDN"]
+anchor = "WF-RING-B.SECTOR.2.3"
+function = "LIFE_SUPPORT_GARDEN_COMMON"
+zone = "ring-B sector 3 LIFE_SUPPORT_GARDEN_COMMON (sector frame: +X axial, +Y down in spin, +Z tangential; deck at y 0)"
+classes = ["ENGINEERING_FLEXIBLE", "ARTISTIC"]
+envelope_min = [-0.50, -2.90, -2.56]
+envelope_max = [1.60, 0.00, 2.80]
