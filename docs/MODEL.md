@@ -236,14 +236,17 @@ The spec and rig keep the centre of mass, inertia, reaction-mass load, fusion-fu
 load and drive output unknown. The reactor shadow shield and the magnet/cage support (the nozzle yokes) are unsized,
 non-additive suballocations inside the 250 t engine package (P5/P6, 15!A111, 10!A24:A25): their objects carry
 `mass_known = false` and an unknown, not zero, centre-of-mass contribution (`[physics.mass_suballocations]`, rig
-`mass_properties.suballocations`). The four fuel tanks are schematic separated volumes with PROTOTYPE dimensions and
-no fuel mass (P4, 15!A110, `[physics.fuel_tanks]`): 4 × r 1.4 × 12 m = 295.6 m³ at X −73…−61 m. Measured as owner feedback
-(15!A200; [TANK_BAY_SURVEY_2026-10-17.md](../references/TANK_BAY_SURVEY_2026-10-17.md), MEASUREMENT only): forward of the
-engineering envelope the hull body has 9,773 m³ of free annulus between the spine (r 1.03 m with clearance) and the cage
-hardware (r 4.72 m), 9,256 m³ of it one continuous bay X −57.5…81.3 m (centroid X 11.9 m); four constant-section cylinders
-there would hold about 5,950 m³. No bay, tank pattern or inventory is selected; the BODY-001 study
-([BODY_ARCHITECTURE_2026-10-18.md](../references/BODY_ARCHITECTURE_2026-10-18.md), NONCANON, nothing built) compares three
-packagings of that bay and recommends a keel-lane tank train with a spine service tunnel, pending the owner's BODY-Q1..Q3. No quantitative plume or magnetic exclusion boundary
+`mass_properties.suballocations`). **Fuel storage** (FUEL-SPLIT, WORKING, owner-delegated 2026-10-29; S&E 15!A229;
+`fuel_storage.py`, `components/storage.py`, `[fuel_storage]`, all geometry PROTOTYPE): ³He (164.8 t) in 27 sector lobes, three per
+station of nine BODY-C3 modules (11 m long, r 1.1–4.72 m, 100° each between the keel lanes at 30/150/270°), each station with a
+cryocooler (r 3.9–4.6 m) and its lobes hung from the frames; H2 (145.1 + 180 t) and D2 (110.1 t) in a torus behind the Brow (R 20.5 m,
+minor 4.5 m, X 96.1–105.1 m) split by three 6 m gaps (50/195/315°, the EVA azimuth and the keel lanes) into vessels with 2:1 heads, D2
+in a 32° end cell of vessel 3, the vessels on struts to the forward collar. Four transfer lines leave the torus, ride the bypass collar
+at r 32.5 m clear of both ring sweeps, drop at its aft station and enter the hull at X 80.02 m (`IF_FUEL_HULL_*`, OPEN), then run
+along the keel lanes at r 3.6 m over the pulse bank and battery to the four feed run tanks (`Feed_Run_Tank_01–04`, the drive's
+short-term run tanks: 4 × r 1.4 × 12 m at X −73…−61 m, `[physics.fuel_tanks]`, no fuel mass; `IF_FUEL_RUN_TANK_*`). Volume margins at
+3 % ullage: ³He +1,690 m³, D2 +65 m³, H2 +416 m³. Boil-off, cryocooler power, support loads and insulation are OPEN; no fuel mass
+enters the rig. No quantitative plume or magnetic exclusion boundary
 is sourced. Art Style owns depiction; engineering owns dimensions and operating
 constraints.
 
@@ -342,6 +345,12 @@ fittings, the crew route's seals, hatches and tube telescoping.
 **FWD-V2 alternate truss for an outer Eye** (owner answers 2026-10-13: Eye 45 FD-A01/A02, S&E 50 AG-A01/A02, 15 FWD-V2-EYE; STUDY, in memory). `eye_truss_study.py` builds the reversible r16 (and r24 comparison) truss the owner selected: each diagonal spoke stops one collar radius before its well and bifurcates into a two-chord collar round the well (centreline radius 2.5 m: the 2.25 m outer port plus the post radius and the shared clearance), with verticals every 90° and the outer spoke resuming beyond it; the truss ring the wells cross (15 m at r16, 25 m at r24) ends on the collars, which carry it through; the four layer posts inside a port move to the collar's radial nodes (clear of the tangential eyelids); the two sector ties that landed on a replaced spoke node move to the collar node of the same ring. The 12-spoke pattern and the Crown bays are untouched. FD-A02: a per-facet backing plate with four struts to collar nodes replaces the shared mount, and a 0.4 m raceway envelope runs from each plate aft out of the truss and inward on the aft face, 1.0 m beside its spoke on the side away from the nearer keel, to the body hull. The screen checks clearances to the wells and facet stacks, the ports, the open eyelids and the structure, one connected structure, no member removed without replacement, member lengths by role (linear mass OPEN), and the window-cartridge service path: a well-wall hatch between two collar verticals, 7.15 m sideways at the window station, then aft out of the truss to the crawler (hatch, seal and latch OPEN; FLIGHT_EVA HOLD). Every size is PROTOTYPE; FEA, stiffness, optical stability, impact rating and frame mass are OPEN. `studies/eye_placement_study.py --alt-truss` renders it, and `studies/eye_truss_plan.py` draws the exact plan sheet (r4 / r16 / r24) with `alternate.md`.
 
 **FWD-V2 Eye geometry-release evidence** (Eye 45 FD-A06 G, S&E 50 AG-A04/A05; STUDY, in memory). `eye_release_evidence.py` (contract `WF_EYE_RELEASE_EVIDENCE` v1) gathers the owner's evidence list for r4 / r16 / r24: one collision table (structure, eyelids through their whole travel against skin, layer, posts and the other wells, Crown, Lance, the cartridge path), a ray trace of the protected field of F1 (43 aperture points, theta 0–60°, through the well, the eyelids in the pose, the layer and its 2.25 m port, the posts, the Lance and all twelve Crown carriages at full engagement; the four facets are equivalent under the layout's 90° symmetry), the window-cartridge service path per facet out of the well wall, aft out of the truss and under the aft face to the body hull, the Brow crawler's approach to that path from its DS-10 track (`crawler_approach`: closest track-to-path gap, the rim gap left after the crawler's half envelope, the cartridge's clearance to the DS-10 hardware, the DS-15 arm base distance), the cartridge hand-off the owner selected (`handoff`, OWN-EYE-H1..H4: well-wall carrier, truss aft-face station, captured raceway sled towed by a crawler; per facet the carrier stroke, the ~95° turn at the station, sled margin, tow and neighbouring-track recovery gaps and the Crown bays to lock; a positive-support sequence in which every hand-over overlaps; r4 as the hub-interior candidate), the mass sensitivity as lengths and break-even linear masses (every linear mass OPEN), and a known/unknown manifest. The field is geometric only (EYE FOV OPEN) and, reversed, the window's directional exposure (impact rating OPEN). On the cone (study wells) the eyelid frame lies on the local face (`eye_shutters` tilt, 0 in the flat hub), so the leaves keep their gap to the skin. `studies/eye_release_sheets.py` draws the section, the field maps, the pose sheet and `evidence.md`.
+
+**Eye cartridge service hardware** (H02, PROTOTYPE, built at r30; `eye_release_evidence.service_hardware`, `WF_FORWARD_SHIELD`
+`Eye_Service_F1–F4_*`, kind `eye_service`): per facet the carrier guide from 0.6 m outside the well-wall hatch aft to the truss aft
+face, the hand-off station (a clamp frame across the path), the raceway sled (r 1.4 m annular frame, 0.15 m deep) parked there, two
+captured sled rails 1.2 m either side of the 19.1 m aft leg and the hull-side service station at r 8 m. The in-well carrier and hatch,
+rail supports, mass, tow load, latches and the swap safe state are not modelled (OPEN).
 
 **Radiators** are fixed: `WF_THERMAL` has no hinge, action or radiator articulation control;
 its only control is the display-only `RADIATOR_HEALTH_CTRL` and its only drivers are the overlay
@@ -876,6 +885,10 @@ Stills: `runs/20261017T2000Z-life-support`.
   - Outside: the SP-53 / Eye A25 lasercom terminal and the A26 RF dish on 0.45 m masts at the 90° and 210° bisectors
     between the blades (X 40 m, heads inside the 14 m maximum body diameter), and two A29 star trackers at 330°. Each has a clear 55° cone about its boresight
     against the blades, rings and shield (sampled screen).
+  - Guided-EVA handrail (S02 slice 4, PROTOTYPE training fixture; EVA-048 HOLD): along `eva_route` at the airlock azimuth (50°) on the
+    forward collar, `Ext_EVA_Rail_Aft` (X 100.6→95.6 m) and `Ext_EVA_Rail_Forward` (X 103.1→106.0 m) on standoffs at every anchor
+    station, a tether anchor ring beside each standoff and a foot-restraint plate on the collar straps at each hold; ochre. No crew
+    rail crosses the rotor bay.
   - SP-51: per blade a two-rail crawler track on the casing, from 2 m inside the blade's aft end
     to 2 m inside its front, 2.3 m off the blade plane outside the root truss (0.45 m clear), with seven docks (each root and stay, and a charging dock forward). It is 1.30 m clear of
     the radiator supports and chases. The crawler's swept box along the three tracks is 128 m³.
@@ -1242,6 +1255,14 @@ record (`references/modules/<pack>.json`); docs/MODULES.md. Every production ass
   learning station), an ochre access panel with quarter-turn fasteners and an orange maintenance tag. Its screen keeps every part off
   the aisle, the access strips, the through-passage and the landing well (unless in the overhead band), off the leaning outer wall and
   out of every whitebox part and fit-out item; no clearance, interface, light level or growing area changes.
+- `ra2_work` (RA2.WRK, L4_VISUAL_CANDIDATE, S8b Z2) on sector instance (1, 2), below the `ra2_equip` trays: an ops screen with a
+  bezel and an "OPS k" number per chair on the display wall and a keyboard on the desk (one exported node per station, `Ops_1–3`);
+  chest and thigh restraint straps over the medical mattress; a drawer-line front, the red cross and a MEDICAL label on the medical
+  stowage; on both tool walls a shadow board of outlined tools with each tool on a tether, and a maintenance tag (`Tools_<bench>`).
+- `ra1_berths` (RA1.BRT, L4_VISUAL_CANDIDATE, S8b Z3) on sector instance (1, 1): per berth a mattress, a sleep-restraint strap, a
+  pillow, a curtain on a rail across the berth mouth drawn back, a stencilled "A1-k" number, a name tab and a photo card; pillows,
+  curtains and tabs in the six crew colours shared with the `ra3_garden` mugs and cubbies; the hygiene cubicle's door skin, pull and
+  label. Soft goods stay within 0.14 m of their berth's walls and platform; every pack keeps the aisle, strips, passage and well clear.
 Both candidates were built in parallel on separate branches that touched only their own packs, then merged without conflict.
 Approved hand-authored meshes can be committed as glTF data under their pack (`data/detail/<pack>/*.glb`) and are then rebuilt from a
 clean checkout; none is committed yet.
@@ -1576,10 +1597,15 @@ utility row.
   owner's STUDY daily O2, CO2, water and food flows for the five human consumers, Seraph using none; the Garden credited with no food or
   O2; the stores' status, O2 and water makeup OPEN; SHOW ME a stock/flow overlay). Each finds its exported node by name and follows its
   ring; every number comes from the spec or data/life_support.toml with its source and status. The HUD counts the points learned.
+  Six more points in sector 2 (internal teaching stops, S&E 15 Q48; placement PROTOTYPE): the Eyes (UJ-006, OPS 1: four facets, 2.5 m
+  apertures, a 1 mg grain at 0.016 c carries 11.5 MJ), Aegis (UJ-007, OPS 2: microdust / cm / metre hazards and their answers), the
+  mission preview (UJ-010, OPS 3: 0.016 c, 6 years, the planned state sequence), radiators (UJ-008, lab bench: three blades at 1800 K,
+  26,882 m² effective area, drive waste heat OPEN), the drive (UJ-009, workbench: one core, four nozzles, 29.4 MN design load) and the
+  debrief (UJ-011, medical couch). `wf_learning.json` carries the UJ-014 coverage matrix (drones OPEN).
 - **Check** (`-- --check-excursion`, WF_GODOT_EXCURSION, in `runtime-export`): both excursions driven through the player's own actions:
   the shut outer hatch and spine-port gate stop the body, the inner hatch refuses while the outer is open, a shut corridor door blocks a
   body walking into it, both circuits are walked completely (72 of 72 bins, out of the landing well onto the passage and back), the
-  rings lock at their index, both learning points are found and stepped through on the ring A circuit, the station is reached again, and no step moves the body more than 0.05 m beyond its own velocity (0.04 m
+  rings lock at their index, every learning point is found and stepped through on the ring A circuit, the station is reached again, and no step moves the body more than 0.05 m beyond its own velocity (0.04 m
   measured, at spawn). Both excursions take 88,000 physics frames, about 100 s headless natively; the same check passes in the
   WebAssembly build in headless Chromium with drawing off (about 1,470 s), and the scene draws there without errors.
 

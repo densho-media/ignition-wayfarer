@@ -1011,6 +1011,9 @@ def inspect(root=ROOT, output=None, scope=None):
             # or inside the body like the survival envelopes (bounded by the 14 m maximum).
             # S02 slice 2: the comms booms and dishes are deployed appendages like the blades, bounded by the shield shadow, not the body.
             elif obj.get('kind')=='comms_antenna':appendage_points.extend(transformed)
+            # S01/F01: the hydrogen/deuterium torus behind the Brow, its struts and the transfer legs outside the hull sit in the shield shadow
+            # like the comms appendages; the helium-3 stations and in-lane lines are body.
+            elif obj.get('kind') in ('fuel_tank','fuel_support','fuel_transfer_line') and max(math.hypot(v.y,v.z) for v in transformed)>s['ship']['body_diameter']['value']/2:appendage_points.extend(transformed)
             elif obj.get('kind')=='drone_proxy':(forward_points if obj.get('station') in ('DS-10','DS-15') else fitting_points).extend(transformed)
             else:body.extend(transformed)
         elif library not in {'WF_RADIATOR.blend','WF_THERMAL.blend'}:spinning.extend(transformed)

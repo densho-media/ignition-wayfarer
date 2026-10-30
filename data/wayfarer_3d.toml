@@ -775,7 +775,7 @@ status = "PROTOTYPE"
 doctrine_ref = "hsfp_design_doctrine"
 rationale = "Skin = the sourced 90 m diameter and ~3 m crown depth; wells, Lance, spine column, disruptor layer (existence, full diameter, ahead of the Brow), Crown housing band and bays are physics-locked. Hub, rim, truss, struts, the three sector keels (the sector radius and azimuths, 07!A10/A13, are sourced; the keels' existence ahead of ring B and their length are F2 selections), the Q45 bypass collar, the Crown port covers, ties, posts, Crown carriages, shutters, emitters and the control rig are engineering-flexible PROTOTYPE selections. The diversion-field zone and the damage cells are artistic displays over OPEN or DIAGNOSTIC values. M8.1: the production layer on the shield (production_detail: Brow aft-face panels, Crown rim module) is an artistic presentation layer over the unchanged engineering geometry (L4_VISUAL_CANDIDATE); each object also carries its element surface classes."
 PHYSICS_LOCKED = ["shield_skin", "eye_well", "dust_lance", "dust_lance_tip", "shield_spine_column", "disruptor_layer", "crown_housing", "crown_bay"]
-ENGINEERING_FLEXIBLE = ["shield_hub", "shield_rim", "shield_truss", "shield_mount", "sector_keel", "sector_tie", "sector_frame", "bypass_collar", "disruptor_post", "crown_shutter", "crown_port_cover", "eye_shutter_frame", "eye_shutter", "eye_window", "eye_facet_frame", "eye_raceway", "truss_node", "crown_housing_rib", "crown_service_hatch", "crown_carriage_frame", "crown_head_frame", "crown_carriage", "crown_emitter", "crown_launcher", "state_control", "nav_light", "rcs_thruster", "brow_panel_joint"]
+ENGINEERING_FLEXIBLE = ["shield_hub", "shield_rim", "shield_truss", "shield_mount", "sector_keel", "sector_tie", "sector_frame", "bypass_collar", "disruptor_post", "crown_shutter", "crown_port_cover", "eye_shutter_frame", "eye_shutter", "eye_window", "eye_facet_frame", "eye_raceway", "eye_service", "truss_node", "crown_housing_rib", "crown_service_hatch", "crown_carriage_frame", "crown_head_frame", "crown_carriage", "crown_emitter", "crown_launcher", "state_control", "nav_light", "rcs_thruster", "brow_panel_joint"]
 ARTISTIC = ["field_display", "damage_cell", "production_detail", "eye_shell"]
 
 # Forward defence (front systems). Sourced rules and values; every geometry choice is in forward_shield.prototype above.
@@ -4338,6 +4338,13 @@ momentum_storage_factor = 2.0
 # PROTOTYPE judgment: FOV, exclusion angle and head size are typical of flight trackers, not requirements.
 nav_tracker_deg = [90.0, 210.0, 330.0]
 nav_tracker_x_m = 20.0       # clear of the survival masts and trackers at X 40-48
+# S02 slice 4 (owner-delegated 2026-10-30, PROTOTYPE): the guided-EVA handrail built on the forward collar along eva_route (rail tube radius,
+# standoff post radius, anchor ring radius and depth, anchor offset from the rail, hold foot-restraint plate L x W x D).
+eva_rail_radius_m = 0.019
+eva_standoff_radius_m = 0.015
+eva_anchor_m = [0.04, 0.03]
+eva_anchor_offset_m = 0.12
+eva_foot_plate_m = [0.45, 0.35, 0.04]
 nav_pedestal_m = [0.50, 0.50, 0.30]       # along X, tangential, radial
 nav_baffle_m = [0.11, 0.40]               # sun baffle radius, length
 nav_tracker_fov_half_deg = 10.0
@@ -4389,3 +4396,58 @@ static_gap_m = 0.05                  # fixed parts (rails, masts, docks) clear t
 collar_hoop_pitch_m = 3.0
 collar_end_inset_m = 0.6
 collar_opening_margin_m = 0.25
+
+# S01/F01 fuel storage (fuel_storage.py): FUEL-SPLIT (WORKING, owner-delegated 2026-10-29, S&E 15 OWN-FUEL-SPLIT-2026-10-29).
+# Helium-3 in the nine BODY-C3 stations (9 modules x 3 lobes between the keel lanes), hydrogen and deuterium in a segmented torus behind
+# the Brow, transfer lines down the bypass collar's aft spoke and aft in the keel lanes to the four feed run tanks (prototype.tank_*).
+# Inventories and densities are the owner screens (S&E 62/64/67 scenario A, RESEARCH); every dimension is PROTOTYPE.
+[fuel_storage]
+status = "PROTOTYPE"
+canon_status = "WORKING"
+source_ref = "fuel_split"
+ullage = 0.03
+inventory_kg = { helium_3 = 164800.0, deuterium = 110100.0, hydrogen_first_ignition = 145100.0, hydrogen_reserve = 180000.0 }
+density_kg_m3 = { helium_3 = 58.61, deuterium = 175.2, hydrogen = 70.8 }
+open = "wall and insulation stack, support and strut loads (FEA), boil-off and cryocoolers, CG and inertia, return braking short by 147 t (S&E 69)"
+
+[fuel_storage.body]
+bay_aft_x = { datum = "AFT", offset_m = 55.0 }
+module_length_m = 11.0
+module_offsets_m = [0.0, 12.0, 24.0, 38.0, 50.0, 62.0, 76.0, 88.0, 100.0]   # two 3 m utility/refrigeration frames at X -22 and +16
+keel_lanes_deg = [30.0, 150.0, 270.0]
+span_deg = 100.0
+r_in_m = 1.1
+r_out_m = 4.721
+wall_m = 0.15
+cryocooler = { r0_m = 3.9, r1_m = 4.6, width_m = 0.8, length_m = 2.0 }   # S04: lane cold-box on each utility frame (capacity OPEN)
+hanger = { inset_m = 0.6, radius_m = 0.05 }                               # S04: lobe-to-keel-rail struts (loads OPEN)
+
+[fuel_storage.torus]
+center_x = { datum = "FWD", offset_m = -11.9 }
+major_radius_m = 20.5
+minor_radius_m = 4.5
+wall_m = 0.3                         # shell + MLI + standoff
+head_ratio = 0.5                     # 2:1 ellipsoidal heads
+gap_m = 6.0                          # clear distance between head apexes at the major radius
+gap_centers_deg = [50.0, 195.0, 315.0]   # EVA airlock, the two docking corridors
+corridor_keepout_m = 3.0
+strut_root_standoff_m = 0.02         # struts stand on the forward collar skin (r 6.5) at a collar frame; foot plate OPEN
+strut_radius_m = 0.2
+deuterium = { vessel = 3, end = "a1", arc_deg = 32.0 }
+
+[fuel_storage.transfer]
+lane_r_m = 3.6                       # above the pulse bank and main battery (r <= 3.3) in the lane
+line_radius_m = 0.12
+slot_offset_m = 0.0                  # the radial leg in the slot between the blade front and ring A, beside the bypass aft spoke
+hull_clearance_m = 0.15              # each leg stops this far off the hull skin; the penetration is an OPEN interface
+bypass_r_m = 32.5                    # outside both rings' 30 m swept radius, inside the bypass collar's 33 m inner chord
+hull_run_m = 0.4                     # the exterior leg runs this far above the skin from the slot to the penetration
+penetration_offset_m = -2.0          # penetration station relative to the slot: aft of ring A's crew tubes (X >= 81.75)
+tank_overlap_m = 1.0                 # the lane leg ends this far aft of the run tank's forward cap, beside the tank
+standoff_m = 0.05
+lines = [
+  { name = "Fuel_Transfer_D2", species = "deuterium", source = "torus", lane_deg = 30.0, offset_deg = 6.0, tank = "Feed_Run_Tank_01" },
+  { name = "Fuel_Header_He3", species = "helium-3", source = "body", lane_deg = 150.0, offset_deg = 0.0, tank = "Feed_Run_Tank_02" },
+  { name = "Fuel_Transfer_H2_A", species = "hydrogen", source = "torus", lane_deg = 270.0, offset_deg = -6.0, tank = "Feed_Run_Tank_03" },
+  { name = "Fuel_Transfer_H2_B", species = "hydrogen", source = "torus", lane_deg = 270.0, offset_deg = 6.0, tank = "Feed_Run_Tank_04" },
+]

@@ -276,8 +276,35 @@ def nav_screen(s):
     return rows
 
 
+def eva_rails(s):
+    """Slice 4 (owner brief 2026-10-30, PROTOTYPE): the guided-EVA route's handrail built as hardware on the stationary forward collar
+    (eva_route.route: the airlock's azimuth, aft to the aft hold and forward to the forward hold). One handrail per run on a standoff at
+    every anchor station, a tether anchor ring beside each standoff, and a foot-restraint plate at each hold. The aft body is crawler
+    territory (DS-10 rail): no crew rail crosses the rotor bay, which the rings sweep."""
+    import eva_route
+    import eva_suit
+    q = table(s); rt = eva_route.route(s, eva_suit.load()); a = math.radians(rt['rail_azimuth_deg']); rr = q['eva_rail_radius_m']
+    u, t = (0.0, math.cos(a), math.sin(a)), (0.0, -math.sin(a), math.cos(a)); out = []
+    for name, (x0, x1) in rt['runs'].items():
+        hull = hg.radius_at(s, (x0+x1)/2)
+        out.append(disc(f'Ext_EVA_Rail_{name.title()}', 'eva_rail', 'EVA handrail (hand-over-hand translation, tether slide)',
+                        radial(x0, rt['rail_radius_m'], a), radial(x1, rt['rail_radius_m'], a), rr, eva=True))
+    for anc in rt['anchors']:
+        x = anc['x']; hull = hg.radius_at(s, x); k = anc['id'][4:].title()
+        out.append(disc(f'Ext_EVA_Standoff_{k}', 'eva_rail', 'handrail standoff on the collar frame', radial(x, hull, a), radial(x, rt['rail_radius_m']-rr, a),
+                        q['eva_standoff_radius_m'], eva=True))
+        c = tuple(radial(x, hull, a)[i]+t[i]*q['eva_anchor_offset_m'] for i in range(3))
+        out.append(disc(f'Ext_EVA_Anchor_{k}', 'eva_anchor', 'tether anchor ring (one of two tethers clipped at all times)', c,
+                        tuple(c[i]+u[i]*q['eva_anchor_m'][1] for i in range(3)), q['eva_anchor_m'][0], eva=True))
+    for name in ('aft_hold', 'forward_hold'):
+        x = rt['holds'][name]['x']; hull = hg.radius_at(s, x); L, W, D = q['eva_foot_plate_m']
+        c = tuple(radial(x, hull+s['casing_panels']['seam_height_m']+.005+D/2, a)[i]-t[i]*q['eva_anchor_offset_m']*2.5 for i in range(3))   # seated on the collar straps
+        out.append(box(f'Ext_EVA_Foot_Restraint_{name.split("_")[0].title()}', 'eva_anchor', 'portable foot-restraint socket at the hold point', c, a, (L, W, D), eva=True))
+    return out
+
+
 def service_parts(s):
-    return docking(s)+airlock(s)+aft_beacons(s)+comms(s)+rcs_aft(s)+nav_sensors(s)
+    return docking(s)+airlock(s)+aft_beacons(s)+comms(s)+rcs_aft(s)+nav_sensors(s)+eva_rails(s)
 
 
 def forward_parts(s):

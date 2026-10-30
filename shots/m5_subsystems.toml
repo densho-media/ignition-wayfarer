@@ -61,11 +61,11 @@ label = { text = "S05 He-3 (3.2 K) + D2 (20 K) CRYOSTATS", select = ["kind:he3_c
 id = "S06"
 name = "Hydrogen reaction-mass storage"
 color = [0.55, 0.78, 0.95]
-select = ["kind:h2_tank", "name:Tank_Volume*", "kind:shortfall_scale"]
+select = ["kind:h2_tank", "name:Feed_Run_Tank*", "name:Fuel_*", "kind:shortfall_scale"]
 fallback = []
 sources = "S&E 62 (H2 HYPOTHESIS), 30/34 PROXY FAIL; BODY-001 option C; schematic feed tanks (WF_STORAGE)"
 maturity = "STUDY; WORKING STUDY CHOICE BODY-C / FUEL QUANTITY OPEN (15!A207); 600 t PROVISIONAL aggregate D+He-3+H2; 5,490 / 8,032 m3 deficits shown"
-label = { text = "S06 H2 REACTION MASS", select = ["name:Tank_Volume*"], offset = [10.0, 0.0, -14.0], size = 2.4 }
+label = { text = "S06 H2 REACTION MASS", select = ["name:Feed_Run_Tank*", "name:Fuel_*"], offset = [10.0, 0.0, -14.0], size = 2.4 }
 
 [[subsystem]]
 id = "S07"

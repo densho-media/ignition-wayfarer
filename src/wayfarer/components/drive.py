@@ -154,7 +154,7 @@ def cryo_feed(c, s):
         tank = bpy.data.objects.get(line_['tank'])
         if tank is not None:
             tank['fuel_family'] = line_['family']; tank['feed_line'] = line_['name']; tank['family_assignment'] = 'PROTOTYPE (15!G69)'
-            tank['volume_status'] = 'equal display envelope; per-family volume OPEN (OD-026, physics.reaction_mass, cryogenic_feed.tank_geometry)'
+            tank['volume_status'] = 'feed run tank (display envelope, volume OPEN); bulk storage in the fuel_storage stations and torus (FUEL-SPLIT)'
 
 
 def patch(c, name, x0, x1, r, a0, a1, mat, kind, nx=4, na=6):

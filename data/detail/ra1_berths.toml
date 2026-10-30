@@ -1,0 +1,64 @@
+# Detail pack ra1_berths (docs/MODULES.md): the cultural pass (S8b Z3) of ring A sector 1 (HABITATION), module WF-RING-A. Owned by a
+# WF-RING-A detail session: this manifest, src/wayfarer/detail/pack_ra1_berths.py and the generated
+# assets/wayfarer/detail/WF_DETAIL_RA1_BRT.blend, linked by WF_HABITAT at the sector instance (1, 1). Berths and private niches K2 reading
+# (S8b): Spacer Contain (a mattress with a sleep-restraint strap for burns and spin, a drawn privacy curtain on a rail across every berth
+# mouth), GU Order (a stencilled berth number and a hygiene-cubicle door with its label) and restrained Humanize (each berth's curtain,
+# name tab and pillow in its crew place's colour, the same six colours as the mess mugs and cubby tabs in ra3_garden, and a photo card
+# on the berth's inner wall). Every value is a PROTOTYPE depiction choice: soft goods lie on the platforms, curtains hang in the berth
+# mouths, decals are thinner than the whitebox tolerance; the aisle, the access strips, the through-passage, the landing well and the
+# berths' own sleeping volume above the mattress stay clear; no pressure boundary, interface, route clearance, load or mass is claimed.
+[pack]
+module = "WF-RING-A"
+version = 1
+scope = "pack"
+enabled = true
+maturity = "L4_VISUAL_CANDIDATE"
+status = "PROTOTYPE"
+evidence_ref = "l4_production_gate"
+detail_class = "PRODUCTION"
+inspect = ["rotation", "route"]
+views = ["overhead", "cutaway"]
+summary = "Berth cultural pass: mattresses with sleep straps, pillows, privacy curtains on rails, berth numbers and name tabs, photo cards, the hygiene door."
+
+[assembly."RA1.BRT"]
+anchor = "WF-RING-A.SECTOR.1.1"
+function = "HABITATION"
+zone = "ring-A sector 1 HABITATION (sector frame: +X axial, +Y down in spin, +Z tangential; deck at y 0)"
+classes = ["ENGINEERING_FLEXIBLE", "ARTISTIC"]
+# Claimed space in the sector frame (m): the six berths and their mouths, the hygiene cubicle's aisle face.
+envelope_min = [-0.402, -2.65, -0.46]
+envelope_max = [1.60, 0.00, 2.67]
+
+[params]
+mattress_m = 0.07          # on each platform, inset from the panels
+mattress_inset_m = 0.015
+pillow_m = [0.32, 0.06, 0.45]   # axial, height, across
+strap_w_m = 0.05           # sleep-restraint strap across the mattress (burn and spin transients)
+strap_t_m = 0.004
+strap_x_m = 0.55           # strap station from the head end
+curtain_t_m = 0.008
+curtain_open = 0.35        # share of the berth mouth the drawn curtain covers
+rail_r_m = 0.007
+rail_drop_m = 0.025        # curtain rail below the lid
+decal_m = 0.0015           # decals lie on part faces, thinner than the whitebox overlap tolerance (2 mm)
+tab_m = [0.08, 0.03]       # name tab: width, height
+number_h_m = 0.045
+photo_m = [0.10, 0.075]
+door_inset_m = 0.05
+door_label_h_m = 0.04
+space_margin_m = 0.14      # soft goods and decals may enter their own berth volume only this far from a wall or platform
+
+[materials]
+# [r, g, b, roughness, metallic] (Blender linear). Textile and paper against the M7 inhabited panels; the six crew colours repeat the
+# mess mugs and cubby tabs (ra3_garden), so a berth, a cup and a cubby read as one person's.
+ra1_mattress = [0.36, 0.38, 0.40, 0.92, 0.0]
+ra1_strap = [0.12, 0.13, 0.14, 0.80, 0.0]
+ra1_rail = [0.55, 0.52, 0.47, 0.35, 0.80]
+ra1_photo = [0.70, 0.62, 0.50, 0.40, 0.0]
+ra1_door = [0.62, 0.63, 0.62, 0.55, 0.0]
+ra1_place_1 = [0.62, 0.14, 0.10, 0.85, 0.0]
+ra1_place_2 = [0.10, 0.30, 0.55, 0.85, 0.0]
+ra1_place_3 = [0.70, 0.55, 0.14, 0.85, 0.0]
+ra1_place_4 = [0.18, 0.40, 0.22, 0.85, 0.0]
+ra1_place_5 = [0.80, 0.78, 0.72, 0.85, 0.0]
+ra1_place_6 = [0.30, 0.18, 0.40, 0.85, 0.0]

@@ -3974,3 +3974,14 @@ cross_ranges = ["12_HABITAT_LAYOUT!A5:H5", "12_HABITAT_LAYOUT!A21:H21", "12_HABI
 inspected_on = "2026-10-26"
 modified_at_utc = "2026-10-24T09:24:34Z"
 notes = "CIRC-001: the owner's design direction in conversation 2026-10-26 (no owner row yet): every crew member can walk the whole circumference of either habitat ring and return; continuous circulation is a new requirement whose engineering consequences are to be evaluated, keeping useful compartment isolation. The row cited is the BASELINE rule it conflicts with, read live 2026-10-26 (unchanged since the 10-17 capture): pressurized rooms occupy only sectors of the rigid annular frames; water/storage/structure fill the non-habitable sectors (preserving 400-460 m3 gross). Also read live: A5 Seraph niche by Rian's domestic space (BASELINE), A21 Q47 full-thrust essential route (BASELINE), A29 Q51 (ACCEPTED, dimensions OPEN), 14!A8 docked rule (rings stopped and locked, BASELINE). S&E modified 2026-10-24 after the 10-17 sync; no recapture was taken for this change."
+
+[sources.fuel_split]
+workbook = "IGNITION — Wayfarer Science & Engineering Model"
+workbook_id = "18BQQEMXxu3qEw1jKN68VwC3rkOiVmafiWeoQORYgI0A"
+url = "https://docs.google.com/spreadsheets/d/18BQQEMXxu3qEw1jKN68VwC3rkOiVmafiWeoQORYgI0A/edit"
+sheet = "15_MODEL_INTERFACES"
+range = "A229:J229"
+canon_status = "WORKING"
+inspected_on = "2026-10-29"
+modified_at_utc = "2026-10-29T17:00:00.000Z"
+note = "OWN-FUEL-SPLIT-2026-10-29 (owner-delegated): He-3 in the nine BODY-C3 stations, H2 and D2 in a segmented torus behind the Brow; inventories from the owner screens S&E 62/64/67 scenario A (RESEARCH). Geometry PROTOTYPE."

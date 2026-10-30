@@ -10,6 +10,7 @@ import drive
 import drive_manifold
 import drive_hot_section
 import power
+import storage
 import rotor
 import crew
 import forward
@@ -50,9 +51,7 @@ def build_subsystem(kind, c, s, asset_dir):
     elif kind=='HABITAT':return revision.habitat(c,s,asset_dir)
     elif kind in revision.RINGS:return revision.ring_asset(c,s,asset_dir,revision.RINGS.index(kind)+1)
     elif kind=='STORAGE':
-        for j,(y,z) in enumerate([(1,1),(-1,1),(-1,-1),(1,-1)],1):
-            tank=cylinder(c,f'Tank_Volume_{j:02}',x('tank_center_x'),p['tank_length_m'],p['tank_radius_m'],material('Tank',(.39,.48,.56)),y*p['tank_offset_m'],z*p['tank_offset_m'])
-            ft=s['physics']['fuel_tanks'];tank['representation']=ft['representation'];tank['dimensions_status']=ft['dimensions_status'];tank['fuel_mass_known']=False
+        storage.build(c,s)
         drive.cryo_feed(c,s)
     elif kind=='SHIELDING':return revision.shielding(c,s)
     elif kind=='EYE':

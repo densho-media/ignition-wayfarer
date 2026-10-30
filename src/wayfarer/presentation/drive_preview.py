@@ -141,7 +141,7 @@ def render(root=ROOT, names=None, state='HIGH_POWER', size=768, modes=('cinemati
     pose_configuration(s, state)
     ghost(GHOSTS)
     cage_ghosts = {c.name[len('Preview_Ghost_'):]: c for c in ghost(cage(), material('Preview_Cage', (.42, .52, .6), .05, alpha=.2))}
-    tank_ghosts = ghost([f'Tank_Volume_{j:02}' for j in range(1, 5)], material('Preview_Tank', (.5, .66, .78), .1, alpha=.12))
+    tank_ghosts = ghost([f'Feed_Run_Tank_{j:02}' for j in range(1, 5)], material('Preview_Tank', (.5, .66, .78), .1, alpha=.12))
     for copy in tank_ghosts:
         copy.hide_render = copy.hide_viewport = True
     # Preview-only legibility: the 0.08 m feed lines are redrawn 3x thick in a bright emissive material (the saved assets are untouched).

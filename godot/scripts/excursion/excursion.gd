@@ -1529,7 +1529,7 @@ func _update_hud() -> void:
 		lines_out.append("%s  %s board  %s circuit (%d%%)  %s back aboard the station" % [("Ring A" if r == "RING_A" else "Ring B"),
 			"[x]" if rec["boarded"] else "[ ]", "[x]" if rec["circuit"] else "[ ]", int(100.0 * rec["bins"].count(1) / BINS), "[x]" if rec["returned"] else "[ ]"])     # ASCII: the web font has no ballot boxes
 	if learning != null and not learning.stations.is_empty():
-		lines_out.append("Learning points %d/%d (ring A sector 3)" % [learning.done.size(), learning.stations.size()])
+		lines_out.append("Learning points %d/%d (ring A)" % [learning.done.size(), learning.stations.size()])
 	hud_check.text = "\n".join(lines_out)
 	hud_prompt.text = _prompt_text()
 	if WfInput.compact():

@@ -1,0 +1,60 @@
+# Detail pack ra2_work (docs/MODULES.md): the cultural pass (S8b Z2) of ring A sector 2 (WORK_MEDICAL_OPS), module WF-RING-A, beside the
+# overhead trays of ra2_equip (retained as designed). Owned by a WF-RING-A detail session: this manifest, src/wayfarer/detail/pack_ra2_work.py
+# and the generated assets/wayfarer/detail/WF_DETAIL_RA2_WRK.blend, linked by WF_HABITAT at the sector instance (1, 2). Work, medical and
+# ops K2 reading (S8b): GU Order (three ops screens on the display wall with their station numbers, keyboards on the desk, a labelled
+# medical stowage front with drawer lines and the red-cross mark), Spacer Contain (restraint straps over the medical mattress, tools held
+# on shadow boards by tethers) and restrained Bolt-Sworn (outlined tool silhouettes so a missing tool shows at a glance, a maintenance tag).
+# Every value is a PROTOTYPE depiction choice: screens, drawer lines and shadow boards are decals thinner than the whitebox tolerance on
+# part faces; keyboards lie on the desk; tools hang in front of the tool walls above the bench tops; the aisle, the access strips, the
+# through-passage and the landing well stay clear; no pressure boundary, interface, route clearance, load, power or mass is claimed.
+[pack]
+module = "WF-RING-A"
+version = 1
+scope = "pack"
+enabled = true
+maturity = "L4_VISUAL_CANDIDATE"
+status = "PROTOTYPE"
+evidence_ref = "l4_production_gate"
+detail_class = "PRODUCTION"
+inspect = ["rotation", "route"]
+views = ["overhead", "cutaway"]
+summary = "Work/medical/ops cultural pass: ops screens and keyboards, medical straps and stowage front, tool shadow boards with tethered tools."
+
+[assembly."RA2.WRK"]
+anchor = "WF-RING-A.SECTOR.1.2"
+function = "WORK_MEDICAL_OPS"
+zone = "ring-A sector 2 WORK_MEDICAL_OPS below the overhead band (sector frame: +X axial, +Y down in spin, +Z tangential; deck at y 0)"
+classes = ["ENGINEERING_FLEXIBLE", "ARTISTIC"]
+envelope_min = [-0.40, -2.50, -2.35]
+envelope_max = [1.60, -0.70, 2.40]
+
+[params]
+decal_m = 0.0015
+screen_m = [0.52, 0.38]        # ops screen: width (x), height (y)
+screen_y_m = -1.20             # screen centre height
+keyboard_m = [0.42, 0.012, 0.16]
+keyboard_z_m = 2.15
+strap_w_m = 0.05
+strap_t_m = 0.004
+strap_x_m = [0.20, 0.95]       # medical restraint straps (chest, thigh) from the couch's aft end
+drawer_rows = 3
+drawer_cols = 4
+drawer_gap_m = 0.012
+cross_m = [0.16, 0.05]         # red cross: arm length, arm width
+tool_d_m = 0.025               # tools stand this far in front of the tool wall
+tools = [["wrench", 0.05, 0.22], ["driver", 0.025, 0.20], ["pliers", 0.06, 0.18], ["hammer", 0.09, 0.26], ["torque", 0.04, 0.32]]
+tool_y_m = -1.35               # tool row centre height on each tool wall
+tether_r_m = 0.004
+label_h_m = 0.04
+
+[materials]
+ra2_screen = [0.02, 0.06, 0.09, 0.15, 0.0]
+ra2_screen_rim = [0.08, 0.09, 0.10, 0.50, 0.0]
+ra2_keyboard = [0.10, 0.11, 0.12, 0.60, 0.0]
+ra2_strap = [0.12, 0.13, 0.14, 0.80, 0.0]
+ra2_drawer_line = [0.06, 0.065, 0.07, 0.70, 0.0]
+ra2_cross_field = [0.85, 0.85, 0.82, 0.50, 0.0]
+ra2_cross = [0.70, 0.06, 0.05, 0.45, 0.0]
+ra2_shadow = [0.08, 0.085, 0.09, 0.80, 0.0]
+ra2_tool = [0.55, 0.56, 0.58, 0.35, 0.85]
+ra2_tether = [0.75, 0.55, 0.12, 0.70, 0.0]

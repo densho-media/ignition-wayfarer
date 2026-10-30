@@ -21,7 +21,7 @@ import layout
 import power_storage
 
 CORE, THROAT, NOZZLE = 'core', 'throat', 'nozzle'
-# Tank (y, z) quadrants of Tank_Volume_01..04 (recipes STORAGE, power_storage.obstacles). An implementation constant, deliberately not
+# Tank (y, z) quadrants of Feed_Run_Tank_01..04 (recipes STORAGE, power_storage.obstacles). An implementation constant, deliberately not
 # dm.quadrants(s): the nozzle order follows the owner nozzle_map (AFT-008) and never moves tanks or lines.
 TANK_QUADRANTS = [(1, 1), (-1, 1), (-1, -1), (1, -1)]
 # Inventory entry of propulsion.inventories.separate -> the tank family that holds it (water is not a drive tank).
@@ -169,7 +169,7 @@ def injection_x(s):
 
 
 def cryo_feed(s):
-    """One jacketed line per Tank_Volume_0n at the tank's (y, z) offset (TANK_QUADRANTS), from the tank aft cap to its terminus.
+    """One jacketed line per Feed_Run_Tank_0n at the tank's (y, z) offset (TANK_QUADRANTS), from the tank aft cap to its terminus.
     Inside the shadow-shield slab every line is a stepped dog-leg between two planes cryo_feed_sleeve_jog_inset_m inside each slab face.
     D and 3He (terminus core) step out by cryo_feed_sleeve_step_m and back to the core forward face. Hydrogen (terminus injection_ring)
     steps out to h2_corridor_radius_m: jog 'aft' first steps by the sleeve step at the forward plane and goes out to the corridor at the aft
@@ -193,7 +193,7 @@ def cryo_feed(s):
             else:
                 points = [(cap, y, z), (xf, y, z), (xf, yc, zc)]; sleeve = (mid, yc, zc)
             points += [(xi, yc, zc), (xi, yr, zr)]
-        out.append(dict(index=j, name=f'CRYO_FEED_LINE_{j:02}', tank=f'Tank_Volume_{j:02}', a=(cap, y, z), b=points[-1], points=points, terminus=terminus,
+        out.append(dict(index=j, name=f'CRYO_FEED_LINE_{j:02}', tank=f'Feed_Run_Tank_{j:02}', a=(cap, y, z), b=points[-1], points=points, terminus=terminus,
                         family=h['tank_families'][j-1], own=('Fusion_Core',) if terminus == 'core' else ('H2_INJECTION_RING',),
                         radius=h['cryo_feed_line_radius_m'], sleeve_radius=h['cryo_feed_line_radius_m']+h['cryo_feed_sleeve_gap_m'],
                         shield_point=sleeve, axis_point=(mid, y, z)))
@@ -438,7 +438,7 @@ def check(s, g, d=None):
     exposed = {k: [l['name'] for l in lines if any(shield_reach(g, l, q, thickness) for q in pts)] for k, pts in cold.items()}
     meas['cryo_feed_cold_optics_exposed'] = {k: v for k, v in exposed.items() if v}
     need(not meas['cryo_feed_cold_optics_exposed'], f'Cold optics within reach of a feed sleeve sight line: {sorted(meas["cryo_feed_cold_optics_exposed"])}')
-    tanks = {l['name']: [f'Tank_Volume_{j:02}' for j in range(1, 5) if any(shield_reach(g, l, q, thickness) for q in tank_points(s, j))] for l in lines}
+    tanks = {l['name']: [f'Feed_Run_Tank_{j:02}' for j in range(1, 5) if any(shield_reach(g, l, q, thickness) for q in tank_points(s, j))] for l in lines}
     findings.append(dict(id='CRYO_FEED_SHIELD_PENETRATION',
                          detail='Each cryogenic feed line crosses the shadow-shield slab through a stepped (dog-leg) sleeve, the convention of the optical bores; the 0.3 m between the 5.7 m shield and the 6.0 m casing cannot carry a line around the rim. The D and 3He lines step by the sleeve step; the two hydrogen lines step out to the cage-to-skin corridor with staggered jog planes (15!G68). The PROTOTYPE steps and jog insets leave no straight core-to-tank line of sight through any sleeve bore and no cold optics or laser within conservative straight-sleeve reach; the cold tanks are within that conservative reach by construction. Thermal intercepts and labyrinth shielding are annotated on the sleeve interfaces, not drawn. The hydrogen run through the hot corridor sees nuclear and radiant heating, and its boil-off cost is OPEN (OD-026, 06!E46). The penetration design, scattering and dose are OPEN (OD-026).',
                          sleeves=[dict(line=l['name'], family=l['family'], terminus=l['terminus'], shield_point=l['shield_point'], sleeve_radius_m=l['sleeve_radius'], open_sight_lines=open_sight[l['name']]) for l in lines],

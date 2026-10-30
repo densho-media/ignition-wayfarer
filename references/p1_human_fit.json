@@ -477,26 +477,29 @@
    "couch_newcomer": {
     "gravity": "radial-down (docked induction pose)",
     "intersection_depth_m": {
-     "torso": 0.011
+     "torso": 0.031,
+     "legs": 0.015
     },
     "surfaces": {
-     "torso": "Medical_Couch"
+     "torso": "Prod_RA2_WRK_Medical",
+     "legs": "Prod_RA2_WRK_Medical"
     },
     "contacts": [],
     "least_clearance_m": {
      "head": 0.053,
      "torso": 0.0,
      "arms": 0.055,
-     "hands": 0.12,
-     "legs": 0.01,
-     "feet": 0.012
+     "hands": 0.119,
+     "legs": 0.006,
+     "feet": 0.01
     },
     "hand_to_grip_m": {},
     "foot_to_footing_m": {},
     "reach_short_m": {},
     "verdict": "CLASH",
     "clashes": {
-     "torso": 0.011
+     "torso": 0.031,
+     "legs": 0.015
     }
    }
   },
@@ -824,7 +827,7 @@
     },
     "surfaces": {
      "hands": "Crew_Tube_1_1_Floor_Ladder_2_Stile_2",
-     "arms": "Crew_Tube_1_1_Floor_Ladder_2_Stile_2",
+     "arms": "Crew_Tube_1_1_Floor_Ladder_2_Stile_1",
      "feet": "Crew_Tube_1_1_Floor_Ladder_2_Rungs"
     },
     "contacts": [
@@ -962,8 +965,12 @@
    },
    "couch_newcomer": {
     "gravity": "radial-down (docked induction pose)",
-    "intersection_depth_m": {},
-    "surfaces": {},
+    "intersection_depth_m": {
+     "torso": 0.007
+    },
+    "surfaces": {
+     "torso": "Medical_Couch"
+    },
     "contacts": [],
     "least_clearance_m": {
      "head": 0.067,
@@ -976,8 +983,10 @@
     "hand_to_grip_m": {},
     "foot_to_footing_m": {},
     "reach_short_m": {},
-    "verdict": "FIT",
-    "clashes": {}
+    "verdict": "CLASH",
+    "clashes": {
+     "torso": 0.007
+    }
    }
   },
   "instructor": {
@@ -1304,13 +1313,13 @@
    "tube_elbow_thrust": {
     "gravity": "aft-down (thrust, rings locked)",
     "intersection_depth_m": {
-     "hands": 0.016,
      "arms": 0.012,
+     "hands": 0.016,
      "feet": 0.025
     },
     "surfaces": {
-     "hands": "Crew_Tube_1_1_Floor_Ladder_2_Stile_1",
      "arms": "Crew_Tube_1_1_Floor_Ladder_2_Stile_2",
+     "hands": "Crew_Tube_1_1_Floor_Ladder_2_Stile_1",
      "feet": "Crew_Tube_1_1_Floor_Ladder_2_Rungs"
     },
     "contacts": [
@@ -1422,7 +1431,7 @@
     "reach_short_m": {},
     "verdict": "FIT",
     "clashes": {},
-    "proxy_render": "renders/p1/human_system/fit/instructor_greeting_instructor_proxy.png"
+    "proxy_render": "runs/renders/p1/human_system/fit/instructor_greeting_instructor_proxy.png"
    },
    "greeting_newcomer": {
     "gravity": "float (docked, rings stopped)",
@@ -1462,7 +1471,7 @@
     "contacts": [],
     "least_clearance_m": {
      "head": 0.062,
-     "torso": 0.012,
+     "torso": 0.008,
      "arms": 0.06,
      "hands": 0.116,
      "legs": 0.008,
@@ -1810,7 +1819,7 @@
     },
     "surfaces": {
      "hands": "Crew_Tube_1_1_Floor_Ladder_2_Stile_2",
-     "arms": "Crew_Tube_1_1_Floor_Ladder_2_Stile_1",
+     "arms": "Crew_Tube_1_1_Floor_Ladder_2_Stile_2",
      "feet": "Crew_Tube_1_1_Floor_Ladder_2_Rungs"
     },
     "contacts": [
@@ -1947,12 +1956,16 @@
     "reach_short_m": {},
     "verdict": "FIT",
     "clashes": {},
-    "proxy_render": "renders/p1/human_system/fit/newcomer_greeting_newcomer_proxy.png"
+    "proxy_render": "runs/renders/p1/human_system/fit/newcomer_greeting_newcomer_proxy.png"
    },
    "couch_newcomer": {
     "gravity": "radial-down (docked induction pose)",
-    "intersection_depth_m": {},
-    "surfaces": {},
+    "intersection_depth_m": {
+     "torso": 0.022
+    },
+    "surfaces": {
+     "torso": "Prod_RA2_WRK_Medical"
+    },
     "contacts": [],
     "least_clearance_m": {
      "head": 0.051,
@@ -1965,8 +1978,10 @@
     "hand_to_grip_m": {},
     "foot_to_footing_m": {},
     "reach_short_m": {},
-    "verdict": "FIT",
-    "clashes": {}
+    "verdict": "CLASH",
+    "clashes": {
+     "torso": 0.022
+    }
    }
   }
  }

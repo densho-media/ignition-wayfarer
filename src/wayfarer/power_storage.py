@@ -182,7 +182,7 @@ def obstacles(s):
     out.append(('Structural_Spine', (aft, 0, 0), (fwd, 0, 0), max(p['spine_radius_m'], layout.spine_core(s)[2])))
     for j, (yy, zz) in enumerate([(1, 1), (-1, 1), (-1, -1), (1, -1)], 1):
         c = x('tank_center_x'); o = p['tank_offset_m']
-        out.append((f'Tank_Volume_{j:02}', (c-p['tank_length_m']/2, yy*o, zz*o), (c+p['tank_length_m']/2, yy*o, zz*o), p['tank_radius_m']))
+        out.append((f'Feed_Run_Tank_{j:02}', (c-p['tank_length_m']/2, yy*o, zz*o), (c+p['tank_length_m']/2, yy*o, zz*o), p['tank_radius_m']))
     for j, yy in enumerate([-p['brayton_offset_y_m'], p['brayton_offset_y_m']], 1):
         c = x('brayton_center_x')
         out.append((f'Brayton_Train_{j}', (c-p['brayton_length_m']/2, yy, 0), (c+p['brayton_length_m']/2, yy, 0), p['brayton_radius_m']))

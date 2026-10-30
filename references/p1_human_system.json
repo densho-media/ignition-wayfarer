@@ -6,7 +6,7 @@
   "test_a": {
    "height_macro": 0.607178,
    "bisection_stature_m": 1.8,
-   "generate_s": 4.81,
+   "generate_s": 4.77,
    "stature_m": 1.8,
    "contract": {
     "bones": 53,
@@ -163,12 +163,12 @@
     "scale": 1.0
    },
    "solver_vs_blender_m": 0.0,
-   "fingerprint": "ad3f185dd0c5242aecb86c56ebadbdb4ec56083965bfae5db53963097a0e1b55"
+   "fingerprint": "4adaa4f937ccb13d5922bf2980713c095775ba2ed5fdca8b37232c8ddcfe60bc"
   },
   "test_b": {
    "height_macro": 0.554016,
    "bisection_stature_m": 1.6181,
-   "generate_s": 6.27,
+   "generate_s": 5.59,
    "stature_m": 1.6181,
    "contract": {
     "bones": 53,
@@ -317,12 +317,12 @@
      0.0744
     ]
    },
-   "fingerprint": "4a3abeb9e93ac797b7f457df4dbf13ec174231d4691fa05c996413a0d6b5bd77"
+   "fingerprint": "c6f97bc5d07dd60e984a4eaae9c45506ec43f821713a9094df83696c8a9d290b"
   },
   "instructor": {
    "height_macro": 0.545044,
    "bisection_stature_m": 1.78,
-   "generate_s": 3.56,
+   "generate_s": 3.42,
    "outfit": {
     "name": "instructor",
     "faces": {
@@ -545,12 +545,12 @@
    "stages": [
     "S004A"
    ],
-   "fingerprint": "bfd229061a5d25561fe553eba914a77cde75b04d97c1f719d844f225e2054bee"
+   "fingerprint": "d48ed7490f8f6340b457a50a2897f627aee9bbfd61a15fb8150de5fff94d6b27"
   },
   "newcomer": {
    "height_macro": 0.538025,
    "bisection_stature_m": 1.6999,
-   "generate_s": 5.02,
+   "generate_s": 4.67,
    "outfit": {
     "name": "newcomer",
     "faces": {
@@ -776,7 +776,7 @@
     "S004A",
     "S004B"
    ],
-   "fingerprint": "c9482f9d7757998d80c11c19dd668508a56c9f66f747bd4c215a01a9c6dab602"
+   "fingerprint": "8204fc128992c675fed2d8c81e9abbf093246459f6994ae26b673231aa2a10b4"
   }
  }
 }

@@ -94,7 +94,7 @@
     "height_z": 1.8
    },
    "shoulder_breadth_m": 0.522,
-   "sheet": "renders/p1/human_system/test_a_sheet.png"
+   "sheet": "runs/renders/p1/human_system/test_a_sheet.png"
   },
   "test_b": {
    "fingerprint_matches_build": true,
@@ -184,7 +184,7 @@
     "height_z": 1.618
    },
    "shoulder_breadth_m": 0.468,
-   "sheet": "renders/p1/human_system/test_b_sheet.png"
+   "sheet": "runs/renders/p1/human_system/test_b_sheet.png"
   },
   "instructor": {
    "fingerprint_matches_build": true,
@@ -278,7 +278,7 @@
     "height_z": 1.78
    },
    "shoulder_breadth_m": 0.541,
-   "sheet": "renders/p1/human_system/instructor_sheet.png"
+   "sheet": "runs/renders/p1/human_system/instructor_sheet.png"
   },
   "newcomer": {
    "fingerprint_matches_build": true,
@@ -376,7 +376,7 @@
     "height_z": 1.7
    },
    "shoulder_breadth_m": 0.514,
-   "sheet": "renders/p1/human_system/newcomer_sheet.png"
+   "sheet": "runs/renders/p1/human_system/newcomer_sheet.png"
   }
  }
 }

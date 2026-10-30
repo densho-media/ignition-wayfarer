@@ -39,7 +39,7 @@ close-up, regression check, MODEL/TODO and Model Status update.
   (`hero_preview.dress(grammar=True, wear=)`), the runtime exterior (`look.exterior.grammar`) and the review set
   `presentation/p4_review.py`. **Open:** desktop-GPU and web frame-time measurement on the owner's machine (`profile_views.gd
   --hide-assemblies RA.EXT,RB.,SP.` and `--look 1/2/3`); S8b zones after their
-  whitebox and cultural reviews (Z1 Garden/mess BUILT as `ra3_garden`, owner review; walk export pending Godot); Z2, Z3 open; S7 waits on engineering releases. **Owner review:** the ram-face look and the wear layer (P4-LOCKED (b), P4-STATE) with the other candidates. Every new asset
+  whitebox and cultural reviews (Z1 Garden/mess `ra3_garden`, Z2 work/medical/ops `ra2_work`, Z3 berths `ra1_berths` BUILT, owner review); S7 waits on engineering releases. **Owner review:** the ram-face look and the wear layer (P4-LOCKED (b), P4-STATE) with the other candidates. Every new asset
   stays `L4_VISUAL_CANDIDATE` until the owner reviews it; nothing reaches `main` without the owner's squash approval.
   **Done when:** the plan's S11 whole-ship review is accepted by the owner.
 - [ ] **FSH — Fractal shielding on the Brow's ram faces (user brief 2026-10-27), BUILT as shading, on main (owner squash 2026-10-29).** The
@@ -97,16 +97,12 @@ close-up, regression check, MODEL/TODO and Model Status update.
       rebalance.
     - **Lettering (15!A225):** L1 GU WAYFARER 001 preferred, L2 the comparator. The project title is "G.U. WAYFARER 001" (the
       Y155 Great Union; the G.U.C. is founded in Y310, so it never names this ship).
-- [ ] **S01 — Whole-body internal architecture (BODY-001). HOLD: fuel quantity and WF_STORAGE release (15!A218 H).** Study done 2026-10-18
-  (`studies/body_architecture.py`, [references/BODY_ARCHITECTURE_2026-10-18.md](references/BODY_ARCHITECTURE_2026-10-18.md), renders
-  `runs/20261018T1200Z-body-arch`): occupancy map, three packagings (A compact 60 m 1,744 m³, B annulus 5,241 m³, C keel-lane tank
-  train 4,072 m³ + spine tunnel), recommended C. No serviceable packaging holds 600 t as LH2; He-3 at ~1,700 m³/100 t dominates fuel
-  volume. BODY-Q1..Q3 answered (15!A207:A209, A218/A219): the fuel-packaging iteration runs as M5 studies (BODY-C2 reference, C3).
-  2026-10-29 FUEL-SPLIT (WORKING, owner-delegated): He-3 in the nine BODY-C3 stations, H2 and D2 in a segmented torus behind the Brow
-  (R 20.5 m, minor 4.5 m, X 96.1–105.1 m; numbers and open items in `references/evidence/project-thread-9aqvk6.json`).
-  Left: build that layout and fuel quantity: move the zones into
-  `WF_STORAGE` as PROTOTYPE assemblies replacing the schematic tanks, full gate. **Done when:** the chosen architecture is built and
-  inspected, and the schematic tanks are gone.
+- [ ] **S01 — Whole-body internal architecture (BODY-001). BUILT 2026-10-30 as PROTOTYPE (FUEL-SPLIT, WORKING), owner-accepted 2026-10-30.**
+  `fuel_storage.py`, `components/storage.py`, `[fuel_storage]`: He-3 in 27 lobes of nine BODY-C3 stations, H2 and D2 in a torus behind the
+  Brow split into three vessels (gaps at 50/195/315 deg keep the EVA azimuth and keel lanes clear), transfer lines over the bypass
+  collar into the hull at X 80.02 and along the keel lanes to the four feed run tanks (the schematic `Tank_Volume_0n`, renamed
+  `Feed_Run_Tank_0n`). Fit-screen margins He-3 +1,690 m³, D2 +65 m³, H2 +416 m³ at 3 % ullage. **Open:** the hull penetration, boil-off
+  and cryocooler power, torus support loads, MLI. **Done when:** those owner inputs are released and applied.
 - [ ] **S02 — Essential external hardware. READY where placement is independent of S01.** High-gain RF and laser comms, RCS clusters
   and tankage, star trackers and navigation sensors, position/warning/service lights, docking guidance and proximity sensors, EVA
   handrails and tether anchors along the maintenance routes, service panels. Size from bounded requirements (link budget, control
@@ -119,8 +115,8 @@ close-up, regression check, MODEL/TODO and Model Status update.
   rim RCS pods, all screened; sizing is a PROTOTYPE bounding case (owner rate, band, thrust and flip time NOT FOUND). Left: the owner's
   answers to the slice-2 questions; momentum storage (CMGs) inside the BODY-001 equipment bay once S01 is built; slice 3 (2026-10-29,
   owner review): three primary star trackers with coarse sun sensors at X 20 m, screened; lights' look pass done 2026-10-29
-  (beacon and approach light classes); the service panels are the S04 casing access covers (ochre, S03). Left: EVA handrails and tether
-  anchors along the maintenance routes (parked, see S04).
+  (beacon and approach light classes); the service panels are the S04 casing access covers (ochre, S03). Slice 4 (2026-10-30, owner-accepted): the guided-EVA handrail on standoffs along `eva_route` at the airlock azimuth, tether anchor rings and two
+  foot restraints on the forward collar (`exterior_hardware.eva_rails`, ochre); still a training fixture (EVA-048 HOLD, 44 RUN-011).
 - [ ] **S03 — Whole-ship material library and visual identity (Art Style Bible).** Structure, casing, insulation, hot radiator faces,
   cryogenic systems, optics, shielding, GU markings, maintenance zones; before/after hero renders.
   Slice 1 2026-10-18: the S02/S04 parts take the accepted M4 grammar (15!A202, 98!A112, Spacecraft!A16): ochre covers, dark
@@ -136,8 +132,8 @@ close-up, regression check, MODEL/TODO and Model Status update.
   straps and access panels beside the keel lanes, screened. Slice 2 (`forward_shield.brow_panel_joints`): the Brow's replaceable-panel
   joints on the skin's aft face (owner allowance 15!G202). Slice 3: forward collar straps broken round its openings and aids. Slice 4: thrust-ring node diaphragm plates. Left: drive section (physics-locked
   magnetic nozzles, Q40: no validated shell to detail), thrust ring and nozzles, further shield
-  assemblies, internal framing and equipment mounts. S02 EVA handrails and tether anchors stay parked: no exterior rail is released
-  (14_HULL_SERVICE; 44 RUN-011 keeps the EVA rail a runtime training simulation).
+  assemblies, internal framing and equipment mounts. Slice 5 (2026-10-30): cryocoolers on every fuel station and lobe hangers to the
+  frames (S01).
 - [ ] **S05 — Working interiors.** Workshop and fabrication, medical, operations/navigation, life support, cabins, storage and repair,
   Garden; connected to the traversal system, inside the pressure, rotation, thrust-gravity and evacuation rules.
 
@@ -288,6 +284,8 @@ packet (Q_src, T_src; H2 mdot, p, T, phase, enthalpy in/out; field/plume/dose ke
   spine, ring, collar and thrust load-path changes through owner-approved designs. **Done when:** installed envelopes and source
   budgets agree, service routes fit, affected interfaces pass, and remaining unsized members are clearly bounded. No speculative
   acceptance of the held linear-engine/size studies; no additional mass hidden in proxy details.
+  2026-10-30: the volume envelopes, feed lines and cryocoolers are built with S01 (PROTOTYPE); masses, loads and the shield/water
+  consequences still wait on B01/B02.
 
 - [ ] **F02 — Close warm/cold cooling and SP-52 packaging. OWNER; AFTER B01/B02 and D04 for service access.** Obtain view factors,
   loads and selected baffles/routing, then build the required warm/cold equipment and rejection surfaces. Re-screen the built warm
@@ -340,14 +338,11 @@ Sources: Eye 45, S&E 50 AG-001..020, Tale 28; `references/FWD_V2_EYE_PLACEMENT_2
 The layout switch is already built. User 2026-10-29: the saved model carries r30 (2/3 of the shield radius) with hexagonal EYE shells;
 the Drive owner rows (FD-B07) keep r4 / B_array 8 m and stay as they are (user 2026-10-29).
 
-- [ ] **H02 — Build selected carrier/station/raceway geometry. AFTER the owner's interface direction.** H01 evidence:
-  `runs/20261016T1200Z-fwd-h01`, `references/FWD_V2_EYE_PLACEMENT_2026-10-13.md` (H01 section); stranded-sled recovery needs a
-  same-track second crawler or a cross track (15!A191). Claude decision 2026-10-17 (small, reversible; 15!C191 "one or two crawlers as
-  needed AFTER payload sizing"): lay out for a second crawler on the same DS-10 track (no cross track); the count stays payload-gated.
-  Integrate the retained
-  window carrier, truss aft-face station and captured sled raceway as PROTOTYPE geometry. A crawler tows/guides the disc; it does not
-  carry an unsized 2.6 m disc unsupported. **Done when:** complete service paths and isolation/display states are reviewed and checked;
-  mass, tow load, latch and flight-time safety remain owner gates where unreleased.
+- [ ] **H02 — Carrier/station/raceway geometry. BUILT 2026-10-30 as PROTOTYPE, owner-accepted 2026-10-30.** Per facet of the r30
+  layout (`eye_release_evidence.service_hardware`, `components/forward.py`): carrier guide out of the well-wall hatch, truss aft-face
+  hand-off station, a parked raceway sled on two captured rails along the aft leg, the hull-side service station; the hand-off margins
+  are positive at r30 (carrier 0.33 m, sled 1.50 m). A second crawler on the same DS-10 track stays the stranded-sled recovery (15!C191).
+  **Open:** the in-well carrier and hatch, rail supports, mass, tow load, latches and the flight-time safe state (owner gates).
 
 - [ ] **H03 — Review/publish the r24 variant and apply any geometry release. AFTER H02.** For a requested r24 showing, run its full
   geometry gate and runtime export as a labelled study. Change the default only after coupled Eye 02 + S&E 14 / mass / optics release.
@@ -411,11 +406,12 @@ candidates of all nine classes are separate accessory assets (docs/ACCESSORIES.m
   Eye workbook. No library is imported; the first import needs `references/THIRD_PARTY.md` (POL-010/011).
   **Done when:** each milestone has its owner rows, a playable view, checks against the owner values and its OPEN list.
 
-- [ ] **UJ — Learning journey in the walk (Tale 30_UNIFIED_JOURNEY UJ-001..014; owner brief 2026-10-29). FIRST SLICE BUILT.** The GU
-  instructor's greeting and two UJ-013 learning points in ring A sector 3 (spin gravity at the mess table, life support at the ECLSS
-  board; `learning_stations.py`, `learning.gd`). **Open:** the remaining stations (Eye/Aegis UJ-006/007, radiators UJ-008, drive
-  UJ-009, mission preview UJ-010, debrief UJ-011) with their remote-camera SHOW ME views; the UJ-014 coverage matrix; the instructor's
-  appearance (K01). **Done when:** every UJ-014 mandatory component has a station with a sourced objective, view and safe return.
+- [ ] **UJ — Learning journey in the walk (Tale 30_UNIFIED_JOURNEY UJ-001..014; owner brief 2026-10-29). STATIONS BUILT 2026-10-30.**
+  Eight UJ-013 stations in ring A (`learning_stations.py`, `learning.gd`): spin (UJ-003) and life support (UJ-004) in sector 3; the
+  Eyes (UJ-006), Aegis (UJ-007) and mission preview (UJ-010) at the three ops screens, radiators (UJ-008) and drive (UJ-009) at the two
+  engineering benches and the debrief (UJ-011) at the medical couch in sector 2, as internal teaching stops (S&E 15 Q48). The UJ-014
+  coverage matrix is in `wf_learning.json`. **Open:** dedicated remote-camera views per station (SHOW ME uses the shared outside view),
+  drones (no station), the SNAV map for UJ-010, physical egress for UJ-011, the instructor's appearance (K01).
 
 - [ ] **J05 — Adaptive Control Induction (user brief 2026-10-17).** Plan, audit and library decision:
   `references/ACI_PLAN_2026-10-17.md`. ACI-01 to ACI-10 are built: the walk's keys are `WfInput` actions, with hold/toggle, stick

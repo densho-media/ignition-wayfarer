@@ -65,18 +65,25 @@ func centre(i: int) -> Vector3:
 	var m: MeshInstance3D = stations[i]["mesh"]
 	return m.global_transform * m.get_aabb().get_center()
 
-## The nearest station within its reach of p in the ring zone, -1 none.
+## The station in reach of p in the ring zone, -1 none. The open station stays in reach until the trainee is 1.5 reaches away (the
+## same rule that closes it); otherwise the nearest station not yet learned wins, then the nearest learned one, so a bank of
+## consoles side by side (OPS 1-3) offers its points in turn.
 func in_reach(p: Vector3, zone: String) -> int:
+	if open >= 0 and stations[open]["rec"]["ring"] == zone and p.distance_to(centre(open)) <= 1.5 * float(stations[open]["rec"]["reach_m"]):
+		return open
 	var best := -1
 	var bd := INF
-	for i in stations.size():
-		var rec: Dictionary = stations[i]["rec"]
-		if rec["ring"] != zone:
-			continue
-		var d := p.distance_to(centre(i))
-		if d < float(rec["reach_m"]) and d < bd:
-			best = i
-			bd = d
+	for pass_ in 2:
+		for i in stations.size():
+			var rec: Dictionary = stations[i]["rec"]
+			if rec["ring"] != zone or (pass_ == 0) == done.has(rec["id"]):
+				continue
+			var d := p.distance_to(centre(i))
+			if d < float(rec["reach_m"]) and d < bd:
+				best = i
+				bd = d
+		if best >= 0:
+			return best
 	return best
 
 func title(i: int) -> String:
@@ -110,7 +117,7 @@ func showing_outside() -> bool:
 func update(p: Vector3, zone: String, size: Vector2) -> void:
 	if open < 0:
 		return
-	if in_reach(p, zone) != open and p.distance_to(centre(open)) > 1.5 * float(stations[open]["rec"]["reach_m"]):
+	if in_reach(p, zone) != open:
 		close()
 		return
 	panel.position = Vector2(size.x - panel.size.x - 18.0, 262.0)

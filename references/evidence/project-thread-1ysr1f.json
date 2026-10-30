@@ -1,0 +1,129 @@
+{
+ "task": "project-thread-1ysr1f",
+ "approved": "2026-10-30 (owner, squash onto main)",
+ "status": "PROTOTYPE geometry; FUEL-SPLIT WORKING",
+ "fuel_storage_screen": {
+  "status": "PROTOTYPE fit screen (FUEL-SPLIT WORKING, owner-delegated 2026-10-29); wall, supports, boil-off and mass OPEN",
+  "need_m3": {
+   "helium_3": 2896.2,
+   "deuterium": 647.3,
+   "hydrogen": 4729.6
+  },
+  "capacity_m3": {
+   "helium_3": 4585.9,
+   "deuterium": 712.1,
+   "hydrogen": 5145.9
+  },
+  "margin_m3": {
+   "helium_3": 1689.7,
+   "deuterium": 64.8,
+   "hydrogen": 416.3
+  },
+  "lobes": 27,
+  "torus_cells": [
+   "Fuel_Torus_H2_1",
+   "Fuel_Torus_H2_2",
+   "Fuel_Torus_H2_3_1",
+   "Fuel_Torus_D2_3"
+  ],
+  "torus": {
+   "x": 100.6,
+   "r": [
+    16.0,
+    25.0
+   ],
+   "x_range": [
+    96.1,
+    105.1
+   ],
+   "gap_apex_clear_m": {
+    "50.0": 6.0,
+    "195.0": 6.0,
+    "315.0": 6.0
+   },
+   "ring_b_sweep_clear_m": 2.9,
+   "collar_clear_m": 9.5
+  },
+  "body": {
+   "hull_radius_m": 6.5,
+   "lobe_r": [
+    1.1,
+    4.721
+   ]
+  },
+  "transfer": [
+   {
+    "name": "Fuel_Transfer_D2_Ext",
+    "length_m": 54.3
+   },
+   {
+    "name": "Fuel_Transfer_D2",
+    "length_m": 145.1
+   },
+   {
+    "name": "Fuel_Header_He3",
+    "length_m": 116.0
+   },
+   {
+    "name": "Fuel_Transfer_H2_A_Ext",
+    "length_m": 54.3
+   },
+   {
+    "name": "Fuel_Transfer_H2_A",
+    "length_m": 145.3
+   },
+   {
+    "name": "Fuel_Transfer_H2_B_Ext",
+    "length_m": 54.3
+   },
+   {
+    "name": "Fuel_Transfer_H2_B",
+    "length_m": 145.3
+   }
+  ]
+ },
+ "eye_service_r30": {
+  "carrier_min_margin_m": 0.332,
+  "sled_min_margin_m": 1.495,
+  "facets": [
+   {
+    "facet": "F1 upper-left",
+    "carrier_stroke_m": 5.0,
+    "sled_run_m": 19.109,
+    "sled_margin_m": 1.495,
+    "tow_gap_to_sled_edge_m": 1.536,
+    "recovery_gap_to_sled_edge_m": 7.55
+   },
+   {
+    "facet": "F2 upper-right",
+    "carrier_stroke_m": 5.0,
+    "sled_run_m": 19.109,
+    "sled_margin_m": 2.336,
+    "tow_gap_to_sled_edge_m": 1.536,
+    "recovery_gap_to_sled_edge_m": 7.55
+   },
+   {
+    "facet": "F3 lower-left",
+    "carrier_stroke_m": 5.0,
+    "sled_run_m": 19.109,
+    "sled_margin_m": 3.082,
+    "tow_gap_to_sled_edge_m": 1.536,
+    "recovery_gap_to_sled_edge_m": 7.55
+   },
+   {
+    "facet": "F4 lower-right",
+    "carrier_stroke_m": 5.0,
+    "sled_run_m": 19.109,
+    "sled_margin_m": 2.556,
+    "tow_gap_to_sled_edge_m": 1.536,
+    "recovery_gap_to_sled_edge_m": 7.55
+   }
+  ]
+ },
+ "gate": {
+  "full_pipeline": "runs/20261030T095445Z-pipeline PASS, 0 unexpected",
+  "baseline": "references/baseline_baseline_fuel_storage",
+  "runtime_export": "runs/20261030T094627226890Z-runtime PASS, 8 of 8 learning stations"
+ },
+ "decisions": "# project-thread-1ysr1f: TODO modeling pass (owner brief 2026-10-30)\n\nOwner: \"execute all the modeling steps that are in TODO; make your own decisions for science and development.\"\nEvery choice below that is not sourced is PROTOTYPE. Nothing here changes a pressure boundary of the rings or a canon number.\n\n## S01 / F01 fuel storage (FUEL-SPLIT, WORKING, S&E 15_MODEL_INTERFACES A229:J229)\n\n- Function: hold the 27-lobe He-3 store in the aft body and the H2/D2 cryogenic store in a forward torus, and feed the four\n  feed run tanks (renamed from `Tank_Volume_0n`: they are the drive's short-term run tanks, not the voyage inventory).\n- Fixed: inventories (He-3 164.8 t, D2 110.1 t, H2 145.1 + 180 t), the body radius 6.5 m, ring sweeps (r 30, X 82.9..93.2),\n  bypass collar (r 33\u201335, aft 82.02), the keel lanes 30/150/270.\n- Decisions (PROTOTYPE): 9 body modules \u00d7 3 lobes (100\u00b0 span, r 1.1\u20134.72); torus R 20.5, a 4.5 at X 100.6 split into vessels\n  by three gaps (50/195/315) that keep the EVA azimuth and the keel lanes clear; D2 in vessel 3's 32\u00b0 end cell. Torus lines\n  leave on the outer equator, ride the bypass collar at r 32.5 (clear of both ring sweeps), drop at X 82.02 and enter the\n  hull at X 80.02 (penetration OPEN), then run along the 3.6 m lanes over the pulse bank and battery to the run tanks.\n  Cryocoolers on each module (r 3.9\u20134.6), lobe hangers to the frames, struts from the torus to the collar skin.\n- Fit screen margins: He-3 +1690 m\u00b3, D2 +65 m\u00b3, H2 +416 m\u00b3 at 3 % ullage.\n- Open: hull penetration detail, boil-off and cryocooler power (not budgeted), torus support loads, MLI thickness.\n\n## S02 slice 4: EVA handrail\n\n- Rail on standoffs at az 50 along eva_route's runs (aft 100.6\u219295.6, forward 103.1\u2192106.0), tether anchor rings, foot plates\n  at the two holds seated on the collar straps. Ochre (M4 service colour). Anchors stay an animation/UI fixture (EVA-048 HOLD).\n\n## S8b Z3 / Z2 cultural passes (detail packs ra1_berths, ra2_work, L4_VISUAL_CANDIDATE)\n\n- Z3 berths: mattress, pillow, sleep strap, curtain on a rail, berth number, name tab, photo card; crew colours shared with\n  the ra3 mugs and cubbies; hygiene door and label.\n- Z2 work: ops screens + numbers, keyboards, medical straps, drawer front, red cross, MEDICAL label, tool shadow boards with\n  tethered tools, maintenance tags. ra2_equip trays kept.\n\n## H02 Eye cartridge service hardware (r30)\n\n- Per facet: carrier guide from 0.6 m outside the hatch to the truss aft face, hand-off clamp frame, parked sled (r 1.4 annulus), two\n  captured rails 1.2 m either side of the 19.1 m aft leg, service station at r 8. Margins at r30: carrier 0.33 m, sled 1.50 m.\n- Open: in-well carrier and hatch, rail supports, mass, tow load, latches, safe state.\n\n## UJ learning stations\n\n- Six new stations in ring A sector 2 (Q48: internal teaching stops): Eye OPS 1, Aegis OPS 2, preview OPS 3, radiators lab bench,\n  drive workbench, debrief medical couch. learning.gd now keeps the open station in reach until 1.5 reaches and offers not-yet-learned\n  stations first, so the OPS bank offers its points in turn. Walk check: 8 of 8 learned (runtime-export PASS).\n\n## Gate\n\n- Full pipeline runs/20261030T095445Z-pipeline PASS (0 unexpected), accepted as references/baseline_baseline_fuel_storage.\n\n## Review\n\n`REVIEW_PROJECT_THREAD_1YSR1F.blend` (built by `make_review.py`): whole ship, fuel storage views, EVA rail, the two interiors.\n"
+}

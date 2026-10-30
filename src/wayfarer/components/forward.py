@@ -196,6 +196,25 @@ def forward_shield(c, s):
             obj = line(c, q['name'], q['pts'], q['radius'], raceway if q['role'] == 'raceway' else structure, kind=kind)
         mark(obj, 'OPEN', 'eye_layout', kind, f"[ENGINEERING_FLEXIBLE] FWD-V2 {q['role']} of the outer-Eye alternate truss (Eye 45 FD-A01/A02, STUDY layout; r4 WORKING, FD-B07); sizing, mass and FEA OPEN.")
         obj['alt_role'] = q['role']; obj['owner_well'] = q['well']
+    # H02 (PROTOTYPE): the window-cartridge service path per facet: carrier guide outside the hatch, aft-face hand-off station, the parked
+    # raceway sled on its two captured rails, the hull-side service station (eye_release_evidence.service_hardware).
+    import eye_release_evidence as ere
+    svc = material('EyeService', (.62, .50, .26))
+    for q in ere.service_hardware(s):
+        if q['kind'] == 'line':
+            obj = line(c, q['name'], q['pts'], q['radius'], svc, kind='eye_service')
+        elif q['kind'] == 'frame':
+            C, U, T = Vector(q['centre']), Vector(q['radial']), Vector(q['tangential']); X_ = Vector((1, 0, 0)); h = q['half_span']; ax, rd = q['section']
+            vs = [tuple(C+T*sx*h+X_*sa*ax/2+U*sr*rd/2) for sx in (-1, 1) for sa in (-1, 1) for sr in (-1, 1)]
+            fs = [(0, 1, 3, 2), (4, 6, 7, 5), (0, 4, 5, 1), (2, 3, 7, 6), (0, 2, 6, 4), (1, 5, 7, 3)]
+            obj = mesh(c, q['name'], vs, fs, svc, kind='eye_service')
+        else:
+            (x, y, z), d = q['centre'], q['depth']
+            obj = loft(c, q['name'], [(x-d/2, q['radius']), (x+d/2, q['radius']), (x+d/2, q['inner']), (x-d/2, q['inner']), (x-d/2, q['radius'])],
+                       svc, (0, y, z), caps=False, kind='eye_service')
+        mark(obj, 'OPEN', 'eye_layout', 'eye_service', f"[ENGINEERING_FLEXIBLE] H02 window-cartridge service {q['role']} (15!A189:A191 hand-off concept; "
+             'PROTOTYPE sizes; support, mass, tow load, latches and the swap safe state OPEN).')
+        obj['owner_well'] = q['name'].split('_')[2]
     # --- sector path: keels at the sourced sector radius and azimuths, end hoops and the nine ties ---
     keels = fsh.sector_keels(s)
     for k in keels:

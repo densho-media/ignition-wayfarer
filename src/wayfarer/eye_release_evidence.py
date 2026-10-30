@@ -560,3 +560,36 @@ if __name__ == '__main__':
     s, *_ = load(Path(__file__).resolve().parents[2])
     radii = [float(x) for x in sys.argv[1:]] or list(ep.RADII)
     print(json.dumps(evidence(s, radii), indent=1, default=str))
+
+
+# ---------- H02 service hardware (PROTOTYPE geometry for the built layout) ------------------------------------------------------
+
+RAIL_OFFSET_M = 1.2       # PROTOTYPE: the sled's two captured rails, either side of the path inside the sled rim (tangential)
+RAIL_RADIUS_M = 0.045
+GUIDE_RADIUS_M = 0.05     # PROTOTYPE: the well-wall carrier's guide spine outside the hatch
+GUIDE_START_M = 0.6       # the guide starts this far outside the hatch (the hatch and the in-well carrier stay unmodelled, OPEN)
+STATION_SIZE_M = (0.30, 0.25)   # PROTOTYPE clamp frame section at the hand-off and the service station (axial, radial)
+
+
+def service_hardware(s):
+    """H02 (TODO; owner hand-off concept 15!A189:A191, Claude decision 2026-10-30 under the owner's delegation): per facet of the built
+    outer layout, the well-wall carrier's guide outside the hatch, the truss aft-face hand-off station, the parked raceway sled, its two
+    captured rails along the aft leg and the hull-side service station, as primitives in the ship frame. None at r4 (hub service).
+    Every size is PROTOTYPE; support, mass, tow load, latches and the safe state stay OPEN (handoff)."""
+    r = s['forward_defense']['eye_wells']['centre_radius_m']; sv = service(s, r)
+    if sv is None:
+        return []
+    wr = sv['cartridge']['radius_m']; out = []
+    for f in sv['facets']:
+        tag = f"Eye_Service_F{f['facet'][1]}"; P = f['aft_path']; pre = f['path'][:len(f['path'])-len(P)+1]
+        az = math.atan2(P[0][2], P[0][1]); t = (0.0, -math.sin(az), math.cos(az)); u = (0.0, math.cos(az), math.sin(az))
+        a, b = pre[1], pre[-1]; d = _unit(_sub(b, a)); a = tuple(a[i]+d[i]*GUIDE_START_M for i in range(3))
+        out.append(dict(name=f'{tag}_Carrier_Guide', role='carrier_guide', kind='line', pts=[a]+list(pre[2:]), radius=GUIDE_RADIUS_M))
+        for side, sg in (('A', 1), ('B', -1)):
+            out.append(dict(name=f'{tag}_Sled_Rail_{side}', role='sled_rail', kind='line', radius=RAIL_RADIUS_M,
+                            pts=[tuple(p[i]+sg*RAIL_OFFSET_M*t[i] for i in range(3)) for p in (P[0], P[-1])]))
+        for name, p in (('Handoff_Station', P[0]), ('Service_Station', P[-1])):
+            out.append(dict(name=f'{tag}_{name}', role=name.lower(), kind='frame', centre=p, radial=u, tangential=t,
+                            half_span=RAIL_OFFSET_M+0.25, section=STATION_SIZE_M))
+        out.append(dict(name=f'{tag}_Sled', role='sled', kind='disc', centre=P[0], radius=wr+SLED_FRAME_M, depth=SLED_DEPTH_M, inner=wr))
+    return out
