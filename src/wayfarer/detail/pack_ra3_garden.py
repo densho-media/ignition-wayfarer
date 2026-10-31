@@ -102,7 +102,16 @@ def garden_elements(s):
     # strip and a label); the unit itself is the envelope behind the drawn block face (eclss_string()).
     import route_fitout as rf
     x0p, x1p = q['eclss_plate_x_m']
-    lines = [e['points'][0][2] for e in rf.sector_elements(s, FUNCTION) if e['name'].startswith('Sector_Fit_Service_Line')]
+    ends = [e['points'][0] for e in rf.sector_elements(s, FUNCTION) if e['name'].startswith('Sector_Fit_Service_Line')]
+    lines = [p[2] for p in ends if p[1] > -1.0]            # lines still running down past the unit fronts (none when they end on the units)
+    for k, (lx, ly, lz) in enumerate(ends, 1):             # each line ends on a unit top: a stub through the front's top band and a flange
+        if ly > -1.0:
+            continue
+        vs, fs = pd.rod((lx, ly, lz), (x0p, ly, lz), .014)
+        out.append(pd.element(ASM, 'ECLSS', f'RA3_ECLSS_Line_Stub_{k}', 'bracket', F,
+                              'service line into the unit (bulkhead fitting)', vs, fs))
+        vs, fs = pd.rod((x0p-.008, ly, lz), (x0p, ly, lz), .026)
+        out.append(pd.element(ASM, 'ECLSS', f'RA3_ECLSS_Line_Flange_{k}', 'fastener', F, 'bulkhead flange', vs, fs))
     for u in q['eclss_units']:
         (z0, z1), (y0, y1) = u['z'], u['y']; n = f"RA3_ECLSS_{u['id']}"
         out.append(slab(f'{n}_Front', 'ECLSS', 'panel_service', F, f"{u['function']} (removable front)", (x0p, y0, z0), (x1p, y1, z1), q['bevel_m']))

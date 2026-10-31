@@ -4,8 +4,8 @@ Function: hold the propulsion inventory of the owner screens (S&E 62/64/67 scena
 reserve) as three separated cryogens and bring each to the drive's feed run tanks.
 - Helium-3 (3 K, the hardest cryogen) fills the nine BODY-C3 stations: 9 modules x 3 lobes between the keel lanes of the 13 m body.
 - Hydrogen reaction mass and deuterium (both 20 K) sit in a segmented torus in the Brow's shadow between ring B and the shield truss,
-  three vessels with ellipsoidal heads, the gaps on the two docking corridors and the EVA airlock; deuterium in its own cell behind an
-  insulated common bulkhead. Two struts per vessel stand on the forward hull collar.
+  three vessels with ellipsoidal heads, the gaps on the two docking corridors and the EVA airlock; deuterium in one cell at the end of
+  each vessel behind an insulated common bulkhead, so both species can be loaded and drawn with no lateral moment (B02, mass_model). Two struts per vessel stand on the forward hull collar.
 - Transfer: the D2 and H2 lines leave the torus aft face, run aft outside the ring sweeps, come down the bypass collar's aft spoke in
   the slot between the radiator blade front and ring A, and run aft in a keel lane to the run tanks. The helium-3 header runs in the
   150 deg lane. The four Feed_Run_Tank_0n ahead of the shadow shield buffer the transfer and condition the feed (the former schematic
@@ -103,10 +103,11 @@ def torus(s):
         a1 = math.radians(nxt)-half[(j+1) % len(gaps)]
         vessels.append(dict(a0=a0, a1=a1))
     out = []
-    d2 = t['deuterium']
+    d2s = {d['vessel']: d for d in (t['deuterium'] if isinstance(t['deuterium'], list) else [t['deuterium']])}
     for j, v in enumerate(vessels, 1):
         cells = [(v['a0'], v['a1'], 'hydrogen')]
-        if j == d2['vessel']:
+        if j in d2s:
+            d2 = d2s[j]
             cut = v['a1']-math.radians(d2['arc_deg']) if d2['end'] == 'a1' else v['a0']+math.radians(d2['arc_deg'])
             cells = [(v['a0'], cut, 'hydrogen'), (cut, v['a1'], 'deuterium')] if d2['end'] == 'a1' else [(v['a0'], cut, 'deuterium'), (cut, v['a1'], 'hydrogen')]
         for k, (c0, c1, sp) in enumerate(cells):

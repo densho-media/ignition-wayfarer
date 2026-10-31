@@ -143,8 +143,9 @@ close-up, regression check, MODEL/TODO and Model Status update.
   Garden; connected to the traversal system, inside the pressure, rotation, thrust-gravity and evacuation rules.
   Built: berths, work/medical/ops, Garden/mess in both rings (ra1_berths, ra2_work, ra3_garden, rb_fitout), the SP-45 storeroom and
   (2026-10-31) a contained fabrication cell on the workbench and one ECLSS string per Garden sector (CO2, O2, water, Sabatier, trace
-  units sized for six from the 41 study rates, PROTOTYPE). Left: the ECLSS units' masses, volumes and powers beyond electrolysis, and
-  the service lines that run in front of the unit fronts (route_fitout), repair stations beyond the benches (G03).
+  units sized for six from the 41 study rates, PROTOTYPE); 2026-10-31 the Garden service lines end on the upper unit tops with a bulkhead
+  flange per unit. Left: the ECLSS units' masses, volumes and powers beyond electrolysis; repair stations beyond the benches wait for G03's
+  equipment release (no machine list is selected, so a station would be a guess).
 
 ## How to work through this plan
 
@@ -174,28 +175,24 @@ These are owner tasks with local measurement/import support (WF-003, SIM-031). R
 [references/P0_SCIENCE_REQUEST_2026-10-14.md](references/P0_SCIENCE_REQUEST_2026-10-14.md), Doc 2026-10-14T12:12.
 Reversible production work in C can proceed while these wait.
 
-- [ ] **B01 — Release a bounded mass/fuel/drive-heat scenario. OWNER; AFTER A01.** Request or consume one WORKING operating point,
-  or explicitly released bounds: reaction mass, fusion fuel/He3 load, operating thrust and actual absorbed drive heat, with compatible
-  assumptions and units. Provide requested geometric measurements only. **Done when:** owning rows supply a consistent scenario
-  usable for packaging; imported values preserve status. The 16 GW calibration / 14.4 GW ideal rejection / −1.60 GW diagnostic margin
-  is not an operating heat release. 2026-10-17 (15!A200 OWN-SCI, 98!A114): still no release; only source-tagged parametric
-  envelopes (default UNKNOWN), model tank-bay volumes and centroids may be measured; flight playback stays SIMULATION_ONLY.
-  Measured 2026-10-17 (`studies/tank_bay_survey.py`, `references/TANK_BAY_SURVEY_2026-10-17.md`): 9,773 m³ free annulus forward of
-  the engineering envelope, 9,256 m³ in one bay X −57.5…81.3 m; the bay allocation question is posted with the B01 thread. 2026-10-18 BODY-001 (S01) compares three packagings; its BODY-Q1..Q3
-  carry the storage-target, fuel-load and tank-mass questions.
+- [ ] **B01 — Return leg of the operating point. AFTER B04.** The First Ignition operating point is WORKING (2026-10-31, S&E 15
+  OWN-B01-OPERATING-POINT-2026-10-31, `physics.operating_point`, docs/MODEL.md "First Ignition operating point"): case E with absorbed
+  fraction 4e-5, hot loop closed. Still open: the absorbed fraction is a drive requirement, not demonstrated; the 180 t reserve cannot
+  stop the ship (147 t short), so whole-mission reaction mass and fuel stay OPEN until B04 sets the return.
 
-- [ ] **B02 — Release mass allocation, power and shielding interfaces. OWNER; AFTER A01; reconcile with B01.** Obtain mass positions/CG,
-  non-additive subsystem budgets, whole-ship electrical loads and coast/survival generation, shield stack and ring-water/storage
-  distribution. Include load-path and protection assumptions that could change the silhouette or occupied spaces.
-  **Done when:** the in-scope packaging interfaces have owner values/bounds, no double counting and an explicit list of still-unsized
-  details. Use `physics.mass_distribution`, `power.rating`, `forward_shield.stack` and S&E 10/13/17/37–41.
+- [ ] **B02 — Release mass allocation, power and shielding interfaces. OWNER.** 2026-10-31 (S&E 15 OWN-B02-MASS-PLACEMENT-2026-10-31,
+  13!A18:I36, `mass_model.py`, docs/MODEL.md "Placed mass model"): a WORKING placed mass model gives CG and inertia per burn state, the
+  balanced torus loading (three D2 cells), ring trim and spoke loads. Still open: owner adoption of positions (the rig keeps
+  `physics.center_of_mass`/`inertia`/`mass_distribution` OPEN until then), whole-ship electrical loads and coast/survival generation,
+  shield stack, torus crossfeed plumbing, spoke strength, rotor-motor and water-trim authority, and the 40.2 t corridor mass outside the
+  330 t rotating allowance.
 
-- [ ] **B03 — Import authoritative flight and thermal histories (FUT-001). OWNER; AFTER B01.** Consume released frames through the
+- [ ] **B03 — Import authoritative flight and thermal histories (FUT-001). OWNER; uses the B01 operating point.** Consume released frames through the
   existing importer: twelve time-tagged channels and two phase/event streams, including acceleration and the First Ignition heat clock.
   **Done when:** applicable released channels drive Blender/Godot consistently and provenance is verified; required missing channels
   keep this step open. Do not replace the 1-D route with an invented solution.
 
-- [ ] **B04 — Release absolute mission/navigation data. OWNER; AFTER B01.** Obtain epoch, heliocentric frame, absolute 3-D states,
+- [ ] **B04 — Release absolute mission/navigation data. OWNER; uses the B01 operating point.** Obtain epoch, heliocentric frame, absolute 3-D states,
   ephemerides and timed Kuiper/return events through S&E 22–26 and 50; 25 rows 14–21 are currently OPEN.
   **Done when:** the owner validation gates support the intended journey, Kuiper maneuver/resource assumptions and six-year return;
   data is ready for J03. This does not authorize a local mission solver.
@@ -229,29 +226,13 @@ Use `studies/access_integrated.py`, `references/ACCESS_INTEGRATED_2026-10-11.md`
 re-run 2026-10-16), Ring A −0.171 to −0.455 m, 31/32 closures unqualified.
 The earlier Garden 24/24 was a zone screen only. No pressure cutout, port, guard, pin, mass or rating is released by these studies.
 
-- [ ] **D02 — Prove Ring A/B care and transport coverage. READY (D01 answered 2026-10-17, 15!A197:A198, 98!A109).** Owner rules:
-  no routine nonambulant transfer under locked 1.5 g (burn-couch stabilization, transfer after a safe thrust reduction; hold time and
-  trigger HOLD); Ring B in-sector care 0/24 with Garden_Rack_1 kept; ring A is a FAIL comparator, its port and spin-port turn a
-  reversible L2 whitebox (`studies/ringa_port_whitebox.py`, 2026-10-17: a deeper chamber gives unsuited annulus legs MARGINAL +0.012 /
-  +0.033 m; with the 0.40 m chamber, the trunk ladder / arrest rail joggled or cut clear of the port bend lift A1 / A2 / A3 from about
-  −0.10 to −0.033…−0.050 m (still FAIL), and a couch-side transfer space (Lab_Bench relocated) removes the Medical_Couch limit, so best
-  RA_D40_CL_CS is unsuited +0.033 m on the annulus legs, −0.046…−0.050 m on the trunk legs, suited FAIL −0.114…−0.169 m; third pass
-  RA_D40_CF100_TR_CS (cut 1.00 m above the port incl. trunk handrail 2, tube floor-ladder-2 arrest rails folded): A1 unsuited MARGINAL
-  +0.012 m, the spin-port turn −0.013 m and suited A2 / A3 −0.165…−0.169 m both set by the 1.60 m port rim; suited needs a port wider than
-  the trunk, i.e. a trunk-side flare). Owner 2026-10-19 (15!A221, 98!A122): no suited ring-A passage in the baseline (in-place
-  stabilization), no flare, fold-away ladder / rails study only until fall-arrest continuity is proven; ring A stays a FAIL comparator.
-  B3H2 links <= 0.206 m, 0.207–0.213 m only as sensitivity. Study selected limiting segments and care arrangements across
-  all occupied sectors, gravity/lost-ring states, patient/carrier/attendants/kit variants. Preserve full-length support requirements.
-  **Done when:** the integrated coverage matrix meets the owner-selected requirements, including failure contingencies; outstanding
-  FAIL/MARGINAL keeps the relevant route open. Current best 1.5-g aid still fails Garden by 0.066 m; furniture alone is not closure.
-  2026-10-30 re-run of the casualty sweep on the current model (`references/evidence/d02_coverage_2026-10-30.md`): ring A sector 1 and
-  sector-to-sector legs MARGINAL, sectors 2/3 and the refuge legs FAIL at the crew port and trunk; ring B only the staged mattress to
-  sector 2's hatch (MARGINAL +0.001 m). 2026-10-31 (same file): care through the ring corridor to the garden care couch (rigid carriers,
-  no bend; lost ring = stopped geometry; 1.5 g = care in place at the burn couch) re-scores the 24 states PASS 10, MARGINAL 12, FAIL 2 (was 6/0/18).
-  2026-10-31 pass 4: the door band and doors widened to 0.75 × 2.00 m (landing well 0.80 m) bring every corridor carrier to PASS
-  (>= +0.05 m), and the 1.5 g station check now uses the screen's kneeling stance (it had stood the attendants up): work/medical
-  +0.057 m PASS. 24/24 PASS. Open: the 1.5 g egress of the other couch's occupant past a deployed care station (Burn_Couch_2 -0.066 m
-  in the work and Garden sectors), medical acceptance of the head-up turn, suited casualties (crew tubes only).
+- [ ] **D02 — Ring A/B care and transport coverage: owner HOLD items only.** Coverage closed by Claude under the owner's delegation
+  (PROTOTYPE, `references/evidence/d02_coverage_2026-10-30.md` passes 4 and 5): 24/24 occupied-sector states PASS through the CIRC-001
+  corridor with 0.75 x 2.00 m doors; the 1.5 g care station kneels at Burn_Couch_1 and leaves a 0.534 m sidestep passage to Burn_Couch_2
+  (+0.077 m against the 0.457 m maintenance walkway; the side attendant yields for a forward-facing pass); the head-up door turn of a
+  spinally immobilised patient is accepted with conditions (rigid support under the mattress, anti-slide strap, under 1 min, not when
+  hypotensive). Still open: the owner's HOLD on burn-couch hold time and the thrust-reduction trigger (15!A197); suited casualties keep the
+  crew tubes (15!A221); ring A port remains a FAIL comparator.
 
 - [ ] **D03 — Establish an independent SP-13 exit. OWNER (pressure architecture).** Study done 2026-10-16: refuge gallery outside
   the trunk (`studies/d03_sp13_gallery.py`, `references/D03_SP13_GALLERY_2026-10-16.md`): U/A/K PASS, S MARGINAL +0.021 m; no single
@@ -296,7 +277,7 @@ packet (Q_src, T_src; H2 mdot, p, T, phase, enthalpy in/out; field/plume/dose ke
 
 ## F — Integrate physical systems from released inputs
 
-- [ ] **F01 — Package fuel/reaction mass and structural/shield consequences. AFTER B01/B02.** Build sourced tank volume envelopes,
+- [ ] **F01 — Package fuel/reaction mass and structural/shield consequences. AFTER B02 (B01 operating point WORKING).** Build sourced tank volume envelopes,
   feed/service/thermal clearances and mass-placement interfaces. Apply released shield layering/water distribution and consequential
   spine, ring, collar and thrust load-path changes through owner-approved designs. **Done when:** installed envelopes and source
   budgets agree, service routes fit, affected interfaces pass, and remaining unsized members are clearly bounded. No speculative
@@ -304,7 +285,7 @@ packet (Q_src, T_src; H2 mdot, p, T, phase, enthalpy in/out; field/plume/dose ke
   2026-10-30: the volume envelopes, feed lines and cryocoolers are built with S01 (PROTOTYPE); masses, loads and the shield/water
   consequences still wait on B01/B02.
 
-- [ ] **F02 — Close warm/cold cooling and SP-52 packaging. OWNER; AFTER B01/B02 and D04 for service access.** Obtain view factors,
+- [ ] **F02 — Close warm/cold cooling and SP-52 packaging. OWNER; AFTER B02 (B01 operating point WORKING) and D04 for service access.** Obtain view factors,
   loads and selected baffles/routing, then build the required warm/cold equipment and rejection surfaces. Re-screen the built warm
   panels; no credited area/capacity from hot-facing casing. Reuse Q38 (40 F68), `SERVICE_HOST_SURVEY.md`,
   `SERV002_FORWARD_DISTRICT.md`, `SP52_SENSITIVITY_2026-10-13.md`; low-e + shield is a study candidate, not installed wall protection.
@@ -316,7 +297,7 @@ packet (Q_src, T_src; H2 mdot, p, T, phase, enthalpy in/out; field/plume/dose ke
   **Done when:** required operating/black-start/failure states consume sourced budgets and endurance, with matching geometry and
   presentation. Finite batteries alone cannot become a six-year energy source.
 
-- [ ] **F04 — Resolve radiator expansion and material-dependent interfaces. OWNER; AFTER B01 and thermal/material release.** Reuse
+- [ ] **F04 — Resolve radiator expansion and material-dependent interfaces. OWNER; B01 operating point WORKING; AFTER thermal/material release.** Reuse
   `RAD004_FRONT_DATUM_COMPARISON.md` (CALC-R07, OD-039, SIM-028); compare wider seams/bellows, shadow/collision and actual net-area
   consequences only when the owner thermal case exists. Include truss temperature, material gradients and root/support interfaces.
   **Done when:** selected owner-released construction passes affected thermal-growth/geometry checks and its real area is retained
@@ -427,8 +408,9 @@ candidates of all nine classes are separate accessory assets (docs/ACCESSORIES.m
   Eight UJ-013 stations in ring A (`learning_stations.py`, `learning.gd`): spin (UJ-003) and life support (UJ-004) in sector 3; the
   Eyes (UJ-006), Aegis (UJ-007) and mission preview (UJ-010) at the three ops screens, radiators (UJ-008) and drive (UJ-009) at the two
   engineering benches and the debrief (UJ-011) at the medical couch in sector 2, as internal teaching stops (S&E 15 Q48). The UJ-014
-  coverage matrix is in `wf_learning.json`; 2026-10-30 a ninth station (drones, UJ-014) and a remote camera per station. **Open:** the
-  SNAV map for UJ-010, physical egress for UJ-011, the instructor's appearance (K01).
+  coverage matrix is in `wf_learning.json`; 2026-10-30 a ninth station (drones, UJ-014) and a remote camera per station; the UJ-010 mission
+  map and the UJ-011 physical egress (goal turns to the way out, `check.gd` asserts the return) are in the walk. **Open:** the
+  instructor's appearance (K01).
 
 - [ ] **J05 — Adaptive Control Induction (user brief 2026-10-17).** Plan, audit and library decision:
   `references/ACI_PLAN_2026-10-17.md`. ACI-01 to ACI-10 are built: the walk's keys are `WfInput` actions, with hold/toggle, stick

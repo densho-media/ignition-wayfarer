@@ -567,12 +567,35 @@ unit = "kg"
 known = false
 canon_status = "OPEN"
 source_ref = "reaction_mass"
+note = "Whole-mission reaction mass stays OPEN (B04 return); the First Ignition hydrogen is physics.operating_point (operating_point.burn)."
 
 [physics.fusion_fuel]
 unit = "kg"
 known = false
 canon_status = "OPEN"
 source_ref = "fusion_fuel"
+note = "Whole-mission fuel load stays OPEN (B04 return); the First Ignition reacted D-3He is physics.operating_point (operating_point.burn)."
+
+# B01 (WORKING, Claude under the owner's delegation of 2026-10-31; S&E 15 OWN-B01-OPERATING-POINT-2026-10-31, 05!B6:B13): the First Ignition
+# operating point. The owner's coupled research case E (64/65/67) unchanged in masses, exhaust velocity and efficiency; the absorbed fraction
+# of gross fusion power is the one value changed, from 1e-4 (case E: 26.1 GW peak against 14.4 GW ideal rejection, 65 FAIL) to 4e-5, the
+# owner's own case-E direction (67 row 7, 5e-5) taken to where the hot loop keeps hot_share of its ideal rejection for the drive and the rest
+# (about 3.9 GW) for EYE, Crown, machinery and margin. It is a requirement on the Fiji/Lattice drive, not a demonstrated property: with D-D
+# side-reaction neutrons at ~1 % of fusion power, the drive structure may intercept only ~0.4 % of the plasma's sky (operating_point.py).
+[physics.operating_point]
+canon_status = "WORKING"
+source_ref = "operating_point"
+departure_mass_kg = 1900000.0             # 64!B6 / 28!E36
+protected_and_operational_kg = 1300000.0  # 69!B3 less the 180 t reserve: the 1.1 kt protected ship + operational inventory
+exhaust_velocity_m_s = 19201172.08        # 64!B9 / 28!E41, uniform effective exhaust
+directed_efficiency = 0.8                 # 05!B9 / 64!B10
+absorbed_fraction = 4.0e-5                # B01 decision (was 1e-4, 05!B10 / 64!B11)
+owner_case_e_absorbed_fraction = 1.0e-4
+hot_share = 0.75                          # share of the ideal hot-loop rejection the drive may use at peak
+dhe3_specific_energy_J_kg = 353136315693351.0   # 64!B12
+he3_mass_share = 0.5996023857             # 64!B23
+burnup = 0.8                              # 64!B25 (hypothetical, kept)
+recovery = 0.95                           # 64!B26 (hypothetical, kept)
 
 [physics.mass_distribution]
 known = false
@@ -583,6 +606,23 @@ reason = "Component masses are sourced (physics.mass_budget) but the workbook gi
 known = false
 canon_status = "OPEN"
 reason = "Requires a supported physical mass model."
+
+# B02 (WORKING, Claude under the owner's delegation of 2026-10-31; S&E 13_MASS_POSITIONS, 15 OWN-B02-MASS-PLACEMENT-2026-10-31): a placed
+# mass model for the operating point (mass_model.py). Positions are PROTOTYPE spans from the 13 regions ([exterior_hardware].inertia_items),
+# the propellant in its FUEL-SPLIT stores. It is a study result: physics.center_of_mass, inertia and mass_distribution stay OPEN for the rig
+# until the owner adopts positions. The torus is the one large asymmetric mass; the three hydrogen vessels trim the deuterium cell's moment.
+[physics.mass_placement]
+canon_status = "WORKING"
+source_ref = "mass_placement"
+include_circulation = true                # CIRC-001 corridors (40.2 t, PROTOTYPE decision 2026-10-31) on the ring planes
+operating_inventory_x = [-80.0, 80.0]     # the 200 t above the 1.1 kt protected ship (B01), unallocated: spread along the body
+operating_inventory_r_m = 4.0
+refuge_r_m = 2.5
+person_kg = 80.0
+crew_shift_cases = [1, 2, 5, 10]
+full_sector_people = 6
+ballast_r_m = [29.5, 25.0]                # ring water moved between the floor and overhead shielding layers (PROTOTYPE radii)
+max_differential_thrust = 0.05            # steering by differential nozzle thrust kept to 5 % of the drive (PROTOTYPE requirement)
 
 [physics.drive_outputs]
 known = false
@@ -3111,6 +3151,10 @@ status = "PROTOTYPE"
 evidence_ref = "cultural_architecture"
 title = "Layered (section 13)"
 lead = "SPACER + GREAT_UNION + BOLT_SWORN"
+# S05 (2026-10-31, PROTOTYPE): where a sector's service lines end on equipment instead of running to the deck. In the Garden the three lines
+# drop from the overhead and end on the tops of the upper ECLSS units (Sabatier, trace control; ra3_garden eclss_units y -1.85) with a
+# bulkhead fitting into each unit front (pack_ra3_garden), so no line crosses a unit front.
+service_line_end_y_m = { LIFE_SUPPORT_GARDEN_COMMON = -1.80 }
 frame_depth_m = 0.035
 frame_width_m = 0.06
 stringer_depth_m = 0.025
@@ -4454,7 +4498,14 @@ gap_centers_deg = [50.0, 195.0, 315.0]   # EVA airlock, the two docking corridor
 corridor_keepout_m = 3.0
 strut_root_standoff_m = 0.02         # struts stand on the forward collar skin (r 6.5) at a collar frame; foot plate OPEN
 strut_radius_m = 0.2
-deuterium = { vessel = 3, end = "a1", arc_deg = 32.0 }
+# B02 (2026-10-31, mass_model.py): deuterium in one cell at the a1 end of each vessel, sized so the balanced load fits (arcs from a
+# search on the departure residual), so neither species moves the centre of mass off the thrust axis as it is drawn down. The one
+# modelled D2 transfer line leaves vessel 3's cell; outlets and crossfeed of vessels 1 and 2 (both species) are an OPEN plumbing interface.
+deuterium = [
+  { vessel = 1, end = "a1", arc_deg = 9.0 },
+  { vessel = 2, end = "a1", arc_deg = 7.0 },
+  { vessel = 3, end = "a1", arc_deg = 8.0 },
+]
 
 [fuel_storage.transfer]
 lane_r_m = 3.6                       # above the pulse bank and main battery (r <= 3.3) in the lane

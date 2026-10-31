@@ -300,5 +300,69 @@
    "baseline": "pass4_door_eclss",
    "runtime_export": "runs/20261031T100810432377Z-runtime PASS"
   }
+ },
+ "pass_5": {
+  "approved": null,
+  "status": "PROTOTYPE",
+  "date": "2026-10-31",
+  "b01_operating_point": {
+   "case": "owner E",
+   "absorbed_fraction": 4e-05,
+   "thrust_peak_MN": 21.77,
+   "mdot_peak_kg_s": 1.134,
+   "fusion_peak_TW": 261.3,
+   "absorbed_peak_GW": 10.45,
+   "drive_share_GW": 10.8,
+   "absorbed_fraction_ceiling": 4.13e-05,
+   "reserve_braking_short_t": 147,
+   "drive": "S&E 15 row 230, 98 row 129"
+  },
+  "b02_mass_placement": {
+   "departure_t": 1940,
+   "departure_cg_x_m": 36.81,
+   "burnout_t": 1520,
+   "burnout_cg_x_m": 30.3,
+   "inertia_kg_m2": {
+    "roll": 586000000.0,
+    "pitch": 11000000000.0,
+    "yaw": 10990000000.0
+   },
+   "d2_cells_arc_deg": [
+    9,
+    7,
+    8
+   ],
+   "lateral_cg_m": {
+    "single_cell": 0.596,
+    "balanced": 0.026
+   },
+   "differential_thrust_worst": 0.01,
+   "allowance": 0.05,
+   "ring_person_rpm_trim": 0.0019,
+   "ring_person_water_kg": 256,
+   "full_sector_ballast_kg": 480,
+   "spoke_axial_kN": {
+    "bare": 404.5,
+    "with_corridors": 453.8
+   },
+   "drive": "S&E 15 row 231, 13_MASS_POSITIONS A18:I36, 98 row 130"
+  },
+  "d02_close": {
+   "egress_best_1g5_m": -0.066,
+   "sidestep_gap_m": 0.534,
+   "osha_walkway_m": 0.457,
+   "sidestep_margin_m": 0.077,
+   "head_attendant_only_m": 0.08,
+   "head_up_turn": "accepted with rigid support, anti-slide strap, head up only, under 1 min upright, BP watched, not below systolic 90",
+   "drive": "S&E 15 row 232, 98 row 131"
+  },
+  "s05_eclss_lines": {
+   "line_end_y_m": -1.8,
+   "elements": "stub + bulkhead flange per line into the upper unit fronts"
+  },
+  "uj011": "physical egress already in the walk (goal turns to the way out; check.gd asserts the return)",
+  "g03": "deferred: waits for the equipment release (G01/D04/F02/F03)",
+  "pipeline": "runs/20261031T115310Z-pipeline FULL PASS; baseline references/baseline_baseline_pass5_torus_eclss",
+  "runtime": "runs/20261031T120334650578Z-runtime PASS"
  }
 }

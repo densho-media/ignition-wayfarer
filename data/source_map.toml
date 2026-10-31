@@ -3985,3 +3985,27 @@ canon_status = "WORKING"
 inspected_on = "2026-10-29"
 modified_at_utc = "2026-10-29T17:00:00.000Z"
 note = "OWN-FUEL-SPLIT-2026-10-29 (owner-delegated): He-3 in the nine BODY-C3 stations, H2 and D2 in a segmented torus behind the Brow; inventories from the owner screens S&E 62/64/67 scenario A (RESEARCH). Geometry PROTOTYPE."
+
+[sources.operating_point]
+workbook = "IGNITION — Wayfarer Science & Engineering Model"
+workbook_id = "18BQQEMXxu3qEw1jKN68VwC3rkOiVmafiWeoQORYgI0A"
+url = "https://docs.google.com/spreadsheets/d/18BQQEMXxu3qEw1jKN68VwC3rkOiVmafiWeoQORYgI0A/edit"
+sheet = "15_MODEL_INTERFACES"
+range = "A230:I230"
+canon_status = "WORKING"
+source_id = "IGN-WAY-B01"
+cross_ranges = ["64_COUPLED_INPUTS!A3:F27", "65_BURN_MASSFLOW!A36:D50", "67_SCENARIO_TRADE!A3:J9", "69_RETURN_BOUNDS!A3:F14", "05_DRIVE_INTERFACE!A7:F14", "98_DECISION_LOG!A129:H129"]
+inspected_on = "2026-10-31"
+notes = "B01 operating point (Claude under the owner's delegation of 2026-10-31): case E with the absorbed fraction 4e-5; read 2026-10-31, written as OWN-B01-OPERATING-POINT-2026-10-31."
+
+[sources.mass_placement]
+workbook = "IGNITION — Wayfarer Science & Engineering Model"
+workbook_id = "18BQQEMXxu3qEw1jKN68VwC3rkOiVmafiWeoQORYgI0A"
+url = "https://docs.google.com/spreadsheets/d/18BQQEMXxu3qEw1jKN68VwC3rkOiVmafiWeoQORYgI0A/edit"
+sheet = "15_MODEL_INTERFACES"
+range = "A231:I231"
+canon_status = "WORKING"
+source_id = "IGN-WAY-B02"
+cross_ranges = ["13_MASS_POSITIONS!A18:I36", "10_WAYFARER_MASS!A1:H20", "08_ROTATING_HABITAT!C10:C40", "98_DECISION_LOG!A130:H130"]
+inspected_on = "2026-10-31"
+notes = "B02 mass placement (Claude under the owner's delegation of 2026-10-31): placed mass model, torus trim, ring balance, spoke loads."

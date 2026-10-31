@@ -580,7 +580,7 @@ def sector_elements(s, function, scheme=None):
         for k, off in enumerate((-.25, 0.0, .25)):
             q = tuple(ctr[j]+al[j]*off*span*.6-n[j]*(SERVICE_RECESS_M-.025) for j in range(3))
             out.append(element(f'Sector_Fit_Service_Line_{k+1}', 'BOLT_SWORN', lines[k], 'ENGINEERING_FLEXIBLE', paints[k], 'rod', radius=.014,
-                               points=[(q[0], -.10, q[2]), (q[0], top, q[2])]))
+                               points=[(q[0], s['route_fitout'].get('service_line_end_y_m', {}).get(function, -.10), q[2]), (q[0], top, q[2])]))
         q = tuple(ctr[j]-n[j]*(SERVICE_RECESS_M-.025) for j in range(3)); drop_at = (q[0], q[2])
         tags = [tuple(ctr[j]+al[j]*.40*span*.6-n[j]*(SERVICE_RECESS_M-.002) for j in range(3)) for _ in (0, 1)]
         tags = [(tags[0][0], -.60, tags[0][2]), (tags[1][0], -1.40, tags[1][2])]

@@ -1,8 +1,8 @@
 {
  "schema": "WF_FLIGHT_TIMELINE",
  "timeline_version": 2,
- "spec_hash": "d1a1a61290a1e222fee5f709449191871edbc160a247a3d837ca67be4e39aab5",
- "source_map_hash": "68275db418651cdb78f29fa01c8c2fea9492bd280c07af23f4d1c80d300828ef",
+ "spec_hash": "21b57b7c68fe3b2dad4fbd69c2ed868ae8d0b5177dfcf02d50a7bdb49a088717",
+ "source_map_hash": "03ac08fd958e325f68c8473f4e905ffe831238a6fb2aa0696f0726f0248be8c4",
  "reference_frame": "Departure rest frame; Newtonian linear V1 as 20_FIRST_IGNITION (gamma is not applied to the kinematics)",
  "status": "PROTOTYPE",
  "rationale": "Ordering from the owner rules: spin down, stop and lock before high thrust (08!A47, MEC-011, 11!J4); the radiators run high-power rejection while the drive runs and post-shutdown cooldown after it (07!A39). Q53 (15!A100, 20!A25:A27, 08!H47): First Ignition starts from conditioned COAST with the coolant loop online (the induction boards docked, spins up and tours in COAST; the newcomer's departure is Tale-owned and not played); once thrust stops, the high-g locks release and isolation is verified, the paired spin-up may run while the hot-blade cooldown continues, with no wait for ambient blade temperature. No radiator cell-loss onset, time or fraction is shown (20!A27, OD-028). Frame budgets are display choices: the burn plays linearly in time, every other phase is a readable length.",

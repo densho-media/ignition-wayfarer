@@ -533,6 +533,35 @@ the rig. It is data for the flight animation; it changes no geometry.
   source, degraded modes and the plume boundary stay `known = false` in the JSON's `unknown` block. The durations and release thresholds
   stay with S4, S6, S7 and 20!E25:E26.
 
+## First Ignition operating point (B01)
+
+**WORKING (Claude under the owner's delegation of 2026-10-31; S&E 15 OWN-B01-OPERATING-POINT-2026-10-31, 98!A129).** One consistent
+burn for the ship (`physics.operating_point`, `operating_point.py`, report `references/p1_operating_point.json`): the owner's coupled case E
+(64/65/67) with 1,900 t at departure, 420 t expelled, 180 t reserve and 1,480 t at burnout, ve 19,201 km/s (0.064 c) and η 0.8 over the
+LOCKED 0 → 1.5 g ramp (7.55 d, 0.016 c). The only change is the absorbed fraction of gross fusion power, 4e-5 instead of 1e-4. At burnout
+the peak is 21.77 MN (under the 29.42 MN design load), 1.134 kg/s, 261.3 TW fusion and 10.45 GW absorbed, against a drive share of 10.80 GW
+(75 % of the 14.40 GW ideal hot-loop rejection; 3.60 GW stays for the other hot loads). Case E at 1e-4 absorbs 26.1 GW and fails. Fuel:
+274.1 t D-³He reacted (164.3 t ³He, 109.7 t D), 3.4 t of unburned feed lost, 142.5 t H2. The fraction is a requirement on the Fiji drive,
+not shown physics. `physics.reaction_mass` and `fusion_fuel` stay OPEN for the whole mission: the reserve cannot stop the ship from
+cruise (needs 327 t, 147 t short; or ve ≈ 37,000 km/s), so the return stays with B04. No geometry changes.
+
+## Placed mass model (B02)
+
+**WORKING (Claude under the owner's delegation of 2026-10-31; S&E 15 OWN-B02-MASS-PLACEMENT-2026-10-31, 13!A18:I36, 98!A130).**
+`mass_model.py` (report `references/p1_mass_model.json`, parameters `physics.mass_placement`) places every budget item on its PROTOTYPE
+span (`exterior_hardware.inertia_items`), the rotating shares on the two ring planes, the 20 t refuge water at the refuge, the 200 t
+operating inventory of B01 along the body, the 40.2 t CIRC-001 corridors on the rings and the 600 t propellant in its FUEL-SPLIT stores.
+Departure 1,940 t with the CG at X 36.8 m (roll 5.86e8, pitch 1.10e10 kg m²); burnout 1,520 t at X 30.3 m, 6.5 m aft. The torus is the
+one large asymmetric mass: a single 110 t deuterium cell put the CG 0.60 m off the thrust axis, which needs 23 % differential thrust from
+the four nozzles at 2.6 m. Deuterium therefore sits in one cell at the a1 end of each vessel (arcs 9, 7 and 8°), and each species is
+loaded with zero lateral moment of its own and drawn in the same proportion: the CG stays within 26 mm of the axis for the first 1.5 days
+and on it after that (1.0 % differential thrust against a 5 % allowance). Vessel 3 runs at its 97 % fill limit at departure. The one
+modelled D2 line leaves vessel 3; crossfeed between the vessels is an OPEN plumbing interface. Rings: one person moving between the rings
+uses the whole 0.1 % momentum tolerance, so the rings run at equal momentum (0.0019 rpm per person) or move 256 kg of ring water per person
+from floor to overhead; a full six-person sector (13.4 t m, 2.4 kN whirl at 4 rpm) is cancelled by 480 kg of water in the other two
+sectors. Spokes carry 404.5 kN axial each at 1.5 g, 453.8 kN with the corridor mass. The simulation rig still reads the centre of mass and
+inertia as OPEN until the owner adopts positions.
+
 ## Heat-loop screen
 
 **Y155 radiator material scenario (owner 2026-10-17, OWN-RAD-Y155; 40!A110:F123, 98!A108, Technology 01!A20 T17).** An opt-in comparison,
@@ -1258,7 +1287,8 @@ record (`references/modules/<pack>.json`); docs/MODULES.md. Every production ass
   clear of the supply diffuser. Garden rack: two grow-light bars under the lid and under each tray. ECLSS bay, in its 0.06 m service
   recess: a GU-standard LIFE SUPPORT resource board with WATER, O2 and CO2 gauges (illustrative levels; the hook for the UJ-004
   learning station) and the bay's ECLSS string as five removable unit fronts (fasteners, a pull handle clear of the service lines, a
-  colour strip and a label): CO2 SCRUB (amine swing beds), O2 GEN (water electrolysis), WATER (distillation, multifiltration,
+  colour strip and a label; the sector's three overhead service lines end on the tops of the upper units at y −1.80 with a stub and a
+  bulkhead flange into each unit front, so no line crosses a unit front): CO2 SCRUB (amine swing beds), O2 GEN (water electrolysis), WATER (distillation, multifiltration,
   catalytic oxidizer), CO2 REDUCE (Sabatier) and TRACE (contaminant control), each a packaging envelope 0.30–0.42 m deep behind the
   face, and an orange maintenance tag. One string per Garden sector (ring B's through rb_fitout), each sized for six people from the
   owner's 41 study rates (`pack_ra3_garden.eclss_string`, PROTOTYPE): 5.0 kg O2 and 6.0 kg CO2 a day, 25 kg of water turnover;
