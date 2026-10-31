@@ -65,7 +65,7 @@ def build(c, s):
     strut_mat = material('Fuel_Torus_Strut', (.30, .40, .48))
     for st in fst.torus_struts(s):
         obj = mesh(c, st['name'], *cylinder_mesh(st['a'], st['b'], st['radius'], 16), strut_mat, kind='fuel_support')
-        stamp(obj, s, 'none', 'torus strut on the forward hull collar')
+        stamp(obj, s, 'none', f"torus bipod leg ({st['side'].lower()}) on the forward hull collar")
     line_mat = material('CryoFeed', (.55, .74, .86))
     for ln in fst.transfer_lines(s):
         obj = line(c, ln['name'], ln['points'], ln['radius'], line_mat, kind='fuel_transfer_line')

@@ -1,0 +1,206 @@
+{
+ "status": "WORKING",
+ "rcs_couple_N_m": 19968,
+ "rcs_lever_m": 212.5,
+ "flips": {
+  "departure": {
+   "flip_min": 43.84136629702719,
+   "peak_rate_deg_s": 0.1368570486455585,
+   "propellant_kg": {
+    "isp_300": 178.823008048731,
+    "isp_800": 67.05862801827412
+   },
+   "I_transverse": 10995003332.232481,
+   "I_roll": 586120520.8481591,
+   "roll_accel_deg_s2": 0.00165341560346994,
+   "ring_bearing_moment_N_m": 120349.59123436321,
+   "net_gyro_torque_N_m": 120.3495912343632
+  },
+  "burnout": {
+   "flip_min": 40.58378611483401,
+   "peak_rate_deg_s": 0.14784229305325722,
+   "propellant_kg": {
+    "isp_300": 165.53577874129908,
+    "isp_800": 62.07591702798716
+   },
+   "I_transverse": 9421766257.701347,
+   "I_roll": 488973955.3047683,
+   "roll_accel_deg_s2": 0.001981906815630399,
+   "ring_bearing_moment_N_m": 130009.81470959025,
+   "net_gyro_torque_N_m": 130.00981470959024
+  }
+ },
+ "burn_trim": {
+  "worst": {
+   "t_h": 36.23149392013091,
+   "thrust_N": 5534212.816977124,
+   "lateral_m": 0.026262105970441145,
+   "torque_N_m": 145340.08346242682,
+   "rcs_share": 7.278650013142369,
+   "cmg_fill_s": 0.6933393569025366,
+   "drive_authority_N_m": 719447.6662070261,
+   "thrust_lever_m": 139.57373997520938,
+   "alignment_limit_deg": 0.04258496197099263
+  },
+  "alignment_limit_deg": 0.04258496197099263,
+  "states": [
+   {
+    "t_h": 0.0,
+    "thrust_N": 0.0,
+    "lateral_m": 0.025774971366246204,
+    "torque_N_m": 0.0,
+    "rcs_share": 0.0,
+    "cmg_fill_s": null,
+    "drive_authority_N_m": 0.0,
+    "thrust_lever_m": 139.80515768683023,
+    "alignment_limit_deg": null
+   },
+   {
+    "t_h": 18.115746960065454,
+    "thrust_N": 2787921.9855586817,
+    "lateral_m": 0.02560080016321396,
+    "torque_N_m": 71373.03362291849,
+    "rcs_share": 3.574370674224684,
+    "cmg_fill_s": 1.4118777763096495,
+    "drive_authority_N_m": 362429.85812262865,
+    "thrust_lever_m": 139.74751085582605,
+    "alignment_limit_deg": 0.04280314107772506
+   },
+   {
+    "t_h": 36.23149392013091,
+    "thrust_N": 5534212.816977124,
+    "lateral_m": 0.026262105970441145,
+    "torque_N_m": 145340.08346242682,
+    "rcs_share": 7.278650013142369,
+    "cmg_fill_s": 0.6933393569025366,
+    "drive_authority_N_m": 719447.6662070261,
+    "thrust_lever_m": 139.57373997520938,
+    "alignment_limit_deg": 0.04258496197099263
+   },
+   {
+    "t_h": 54.347240880196374,
+    "thrust_N": 8198275.727965247,
+    "lateral_m": 1.6308509979263048e-16,
+    "torque_N_m": 1.3370166152227125e-09,
+    "rcs_share": 6.695796350274001e-14,
+    "cmg_fill_s": 75369295229898.33,
+    "drive_authority_N_m": 1065775.8446354822,
+    "thrust_lever_m": 139.2813348126475,
+    "alignment_limit_deg": 0.05347772681655746
+   },
+   {
+    "t_h": 72.46298784026182,
+    "thrust_N": 10741546.806347344,
+    "lateral_m": 9.554735047532827e-17,
+    "torque_N_m": 1.0263263373532126e-09,
+    "rcs_share": 5.139855455494855e-14,
+    "cmg_fill_s": 98185144756077.48,
+    "drive_authority_N_m": 1396401.0848251549,
+    "thrust_lever_m": 138.86604753093178,
+    "alignment_limit_deg": 0.05363765508729529
+   },
+   {
+    "t_h": 90.57873480032728,
+    "thrust_N": 13128423.218377631,
+    "lateral_m": 8.981853861608452e-17,
+    "torque_N_m": 1.1791757878081518e-09,
+    "rcs_share": 5.905327462981529e-14,
+    "cmg_fill_s": 85457996205392.72,
+    "drive_authority_N_m": 1706695.0183890923,
+    "thrust_lever_m": 138.32179456757723,
+    "alignment_limit_deg": 0.0538487023460679
+   },
+   {
+    "t_h": 108.69448176039275,
+    "thrust_N": 15327089.986098703,
+    "lateral_m": 2.3817681354408452e-17,
+    "torque_N_m": 3.650557453792436e-10,
+    "rcs_share": 1.8282038530611158e-14,
+    "cmg_fill_s": 276040032996367.7,
+    "drive_authority_N_m": 1992521.6981928316,
+    "thrust_lever_m": 137.64051532208725,
+    "alignment_limit_deg": 0.05411523710478652
+   },
+   {
+    "t_h": 126.8102287204582,
+    "thrust_N": 17310218.573624622,
+    "lateral_m": 3.641715652255191e-16,
+    "torque_N_m": 6.303889392352731e-09,
+    "rcs_share": 3.156995889599725e-13,
+    "cmg_fill_s": 15985369305851.783,
+    "drive_authority_N_m": 2250328.414571201,
+    "thrust_lever_m": 136.81198358304687,
+    "alignment_limit_deg": 0.05444295813788376
+   },
+   {
+    "t_h": 144.92597568052363,
+    "thrust_N": 19055516.105323073,
+    "lateral_m": 1.3572271903852333e-16,
+    "torque_N_m": 2.5862664584968196e-09,
+    "rcs_share": 1.295205558141436e-13,
+    "cmg_fill_s": 38963502646424.59,
+    "drive_authority_N_m": 2477217.0936919996,
+    "thrust_lever_m": 135.823566290813,
+    "alignment_limit_deg": 0.05483915100770483
+   },
+   {
+    "t_h": 163.04172264058911,
+    "thrust_N": 20546110.41724329,
+    "lateral_m": 1.8765528846739646e-16,
+    "torque_N_m": 3.855586277230769e-09,
+    "rcs_share": 1.9308825506964989e-13,
+    "cmg_fill_s": 26136102982599.293,
+    "drive_authority_N_m": 2670994.3542416277,
+    "thrust_lever_m": 134.65992277031688,
+    "alignment_limit_deg": 0.05531303501081389
+   },
+   {
+    "t_h": 181.15746960065457,
+    "thrust_N": 21770763.00070636,
+    "lateral_m": 8.905835047975264e-17,
+    "torque_N_m": 1.9388682415285383e-09,
+    "rcs_share": 9.709877010860068e-14,
+    "cmg_fill_s": 51973619373205.234,
+    "drive_authority_N_m": 2830199.190091827,
+    "thrust_lever_m": 133.30263596404401,
+    "alignment_limit_deg": 0.0558762317152974
+   }
+  ]
+ },
+ "misalignment": [
+  {
+   "misalignment_deg": 0.01,
+   "torque_N_m": 506512.01622035104,
+   "differential_thrust": 0.008948345720569566
+  },
+  {
+   "misalignment_deg": 0.05,
+   "torque_N_m": 2532559.772516999,
+   "differential_thrust": 0.04474172315120391
+  },
+  {
+   "misalignment_deg": 0.1,
+   "torque_N_m": 5065117.616379562,
+   "differential_thrust": 0.08948341222963929
+  }
+ ],
+ "cmg": {
+  "storage_N_m_s": 100770,
+  "residual_per_person_N_m_s": 52544.184331519995,
+  "people_absorbed": 1.917814526612615,
+  "units": 6
+ },
+ "gravity_gradient": [
+  {
+   "orbit_r_m": 6778000.0,
+   "torque_N_m": 19986.11860423241,
+   "rcs_share": 1.0009073820228571
+  },
+  {
+   "orbit_r_m": 42164000.0,
+   "torque_N_m": 83.024781219678,
+   "rcs_share": 0.004157891687684195
+  }
+ ],
+ "failures": []
+}

@@ -118,8 +118,10 @@ close-up, regression check, MODEL/TODO and Model Status update.
   owner review): three primary star trackers with coarse sun sensors at X 20 m, screened; lights' look pass done 2026-10-29
   (beacon and approach light classes); the service panels are the S04 casing access covers (ochre, S03). Slice 4 (2026-10-30, owner-accepted): the guided-EVA handrail on standoffs along `eva_route` at the airlock azimuth, tether anchor rings and two
   foot restraints on the forward collar (`exterior_hardware.eva_rails`, ochre); still a training fixture (EVA-048 HOLD, 44 RUN-011).
-  Momentum storage built 2026-10-30: six CMGs on the body utility frames (`body_equipment`, PROTOTYPE sizing). Left: the owner's answers
-  to the slice-2 questions.
+  Momentum storage built 2026-10-30: six CMGs on the body utility frames (`body_equipment`, PROTOTYPE sizing). Attitude check 2026-10-31
+  (`attitude.py`, docs/MODEL.md "Attitude control check"): 44 min flips on the RCS (179 kg each at 300 s); the drive trims the burn's CG
+  offset and its thrust axis must hold ±0.043°. Left: the owner's answers to the slice-2 questions; the RCS bottles (not placed); the
+  rotor-bearing gyroscopic moment in a flip (about 130 kN m per ring) as a bearing load case.
 - [ ] **S03 — Whole-ship material library and visual identity (Art Style Bible).** Structure, casing, insulation, hot radiator faces,
   cryogenic systems, optics, shielding, GU markings, maintenance zones; before/after hero renders.
   Slice 1 2026-10-18: the S02/S04 parts take the accepted M4 grammar (15!A202, 98!A112, Spacecraft!A16): ochre covers, dark
@@ -184,7 +186,7 @@ Reversible production work in C can proceed while these wait.
   13!A18:I36, `mass_model.py`, docs/MODEL.md "Placed mass model"): a WORKING placed mass model gives CG and inertia per burn state, the
   balanced torus loading (three D2 cells), ring trim and spoke loads. Still open: owner adoption of positions (the rig keeps
   `physics.center_of_mass`/`inertia`/`mass_distribution` OPEN until then), whole-ship electrical loads and coast/survival generation,
-  shield stack, torus crossfeed plumbing, spoke strength, rotor-motor and water-trim authority, and the 40.2 t corridor mass outside the
+  shield stack, spoke strength, rotor-motor and water-trim authority, and the 40.2 t corridor mass outside the
   330 t rotating allowance.
 
 - [ ] **B03 — Import authoritative flight and thermal histories (FUT-001). OWNER; uses the B01 operating point.** Consume released frames through the
@@ -234,18 +236,13 @@ The earlier Garden 24/24 was a zone screen only. No pressure cutout, port, guard
   hypotensive). Still open: the owner's HOLD on burn-couch hold time and the thrust-reduction trigger (15!A197); suited casualties keep the
   crew tubes (15!A221); ring A port remains a FAIL comparator.
 
-- [ ] **D03 — Establish an independent SP-13 exit. OWNER (pressure architecture).** Study done 2026-10-16: refuge gallery outside
-  the trunk (`studies/d03_sp13_gallery.py`, `references/D03_SP13_GALLERY_2026-10-16.md`): U/A/K PASS, S MARGINAL +0.021 m; no single
-  fault in the studied cases leaves SP-13 without an exit. Owner 2026-10-17 (15!A199, 98!A110): the side gallery is the preferred L2
-  TOPOLOGY STUDY (no cutout, not an installed pressure facility). Next: model the pressure volumes and two distinct closures; compare a
-  shielded stepped/offset dogged refuge closure with an isolation antechamber (storm shielding not weakened); jam and depressurization
-  single faults; carrier and swept-ladder sweeps; 1.5 g steep/shaft portions as ladder + protected fall arrest + hoist-only casualty
-  carrier; positively dogged leaf versus guided parallel plug; 80 kPa both polarities as analysis input. Original scope: Follow S&E 15 A177/A178:
-  compare a destination/bypass outside the shared single trunk, with pressure partition and jam-tolerant dogged closure. Include
-  opposite-side operation, complete carriers, manual recovery and single faults. Reuse `EVA3_SP13_L1A_REDLINES.md` and
-  `studies/eva3_sp13_l1a.py`; SP-12 N2 fwd45 is only MARGINAL +0.044 m and a jam blocks SP-13 by −0.373 m.
-  **Done when:** selected topology gives independent usable egress under the required fault cases and owner approves any changed
-  pressure architecture. Nominal 80 kPa both ways is an analysis input, not an approved door rating.
+- [ ] **D03 — Build the SP-13 second exit. TOPOLOGY DECIDED 2026-10-31; build AFTER D04's trunk sweep.** Pass 6 (Claude under the
+  owner's delegation, S&E 15 OWN-D03-SP13-EXIT-2026-10-31, `work/` study kept in `references/evidence/d03_sp13_exit_2026-10-31.json`):
+  the 1.20 m side gallery (az 125°, r 3.8 m) ends in an isolation antechamber inside the refuge's water envelope, two pressure-seated
+  plugs seating in opposite directions with equalisation valves and manual overrides from both sides; refuge sealed and shielded in 6 of
+  6 single faults (one stepped closure: 2 of 5), +509 kg. At locked 1.5 g the gallery is a ladder shaft with protected fall arrest.
+  Left: leaf/dog ratings and seals (pressure flight HOLD), the water-jacket stack, routing past survival reserve 1, the suited casualty
+  (MARGINAL +0.021 m), then the built gallery and its sweeps. Nominal 80 kPa both ways is an analysis input, not a door rating.
 
 - [ ] **D04 — Close SP-11/SP-12 and forward-district access. AFTER D03 and applicable D01 loads.** Complete the 1.20 m sliding-plug,
   limp-casualty, transfer/hoist, one-handed and fault cases. Carry L1-A 205/210° and CB2J6 stile through the full route and load review;
@@ -282,8 +279,10 @@ packet (Q_src, T_src; H2 mdot, p, T, phase, enthalpy in/out; field/plume/dose ke
   spine, ring, collar and thrust load-path changes through owner-approved designs. **Done when:** installed envelopes and source
   budgets agree, service routes fit, affected interfaces pass, and remaining unsized members are clearly bounded. No speculative
   acceptance of the held linear-engine/size studies; no additional mass hidden in proxy details.
-  2026-10-30: the volume envelopes, feed lines and cryocoolers are built with S01 (PROTOTYPE); masses, loads and the shield/water
-  consequences still wait on B01/B02.
+  2026-10-30: the volume envelopes, feed lines and cryocoolers are built with S01 (PROTOTYPE). 2026-10-31 (pass 6, `fuel_loads.py`,
+  S&E 15 OWN-F01-TORUS-LOADS-2026-10-31): the torus stands on six bipods (radial struts would bend at 4.9 GPa), worst leg +17 % in
+  buckling; the cells only drain (metered outlets per cell, no crossfeed); spine axial loads per station. Left: outlets of vessels 1-2
+  and their header (OPEN plumbing), tank wall and dry mass (15 % allowance), collar frames under the bipod feet, shield/water layering.
 
 - [ ] **F02 — Close warm/cold cooling and SP-52 packaging. OWNER; AFTER B02 (B01 operating point WORKING) and D04 for service access.** Obtain view factors,
   loads and selected baffles/routing, then build the required warm/cold equipment and rejection surfaces. Re-screen the built warm
@@ -308,22 +307,23 @@ packet (Q_src, T_src; H2 mdot, p, T, phase, enthalpy in/out; field/plume/dose ke
 Owner scope: S&E 12A, 33–39, 41–42, existing room/recovery reviews. The 42 equipment groups and 32 survival groups overlap; map each
 physical item once, reuse existing envelopes and do not fund components twice. No automatic factory or mining hardware release.
 
-- [ ] **G01 — Complete the equipment-to-space and resource allocation. AFTER B02; coordinate D/F.** Map owner-required ECLSS,
-  refuge, food/water, waste, medical, comms/attitude, repair and stores to existing spaces, mass owners, utilities and service paths.
-  Use existing source/readback tables, not a new tracking framework. **Done when:** each in-scope requirement has a released installed
-  allocation or a named unresolved owner gate; actual missing hardware is split into bounded steps G02–G04 before modeling it.
-  An unresolved allocation keeps its dependent installation step open.
-
-- [ ] **G02 — Integrate life support and refuge equipment. AFTER G01/D06/F02/F03 and capacity releases.** Complete air/CO2/gas reserves,
+- [ ] **G02 — Integrate life support and refuge equipment. AFTER D06/F02/F03 and capacity releases.** Complete air/CO2/gas reserves,
   water recovery, food preservation/Garden support, waste isolation, medical access, alarm/comms/fire protection and independent
   refuge support. **Done when:** required capacity/endurance is owner-supported, equipment and utility access fit, pressure/fault
   isolation is represented and no protection credit is inferred from a visual envelope.
+  G01 allocation (2026-10-31, `references/evidence/g01_allocation_2026-10-31.json`) splits this into: ECLSS unit masses/powers and 98 %
+  water recovery; an O2/buffer-gas bottle farm beside the refuge (none placed; 41 72 h case O2 30.24 kg for 12); the refuge cartridge
+  loop, water, dosimetry, comms and first-response kit; suppression media and backup breathing; 52 m³ packaged food stowage and cold
+  chain (owner gate: the 10 t food category runs out on day 1,093); medical diagnostics and sample storage; Seraph dock power (with F03);
+  machinery mounts (S24); a black-box rack in the refuge/ops.
 
-- [ ] **G03 — Integrate selected workshop and service district. AFTER G01/D04/F02/F03 and equipment release.** Package approved
+- [ ] **G03 — Integrate selected workshop and service district. AFTER D04/F02/F03 and equipment release.** Package approved
   machine shop, contained process cell, spares/stock, waste and SP-49 support within the existing non-additive budgets. Preserve
   contamination/pressure separation and SP-45's general-storeroom role; verify its aft-down entrance.
   **Done when:** selected equipment, stock, access and utilities fit and their source allocations close. S&E 42 fabrication/mining
   candidates remain studies until actually selected; no full industrial plant implied by the workshop proxy.
+  G01 allocation (2026-10-31): the SP-46 sealed waste point exists; a waste bay with compactor/dryer, quarantine and exhaust is not placed;
+  spares stock and machine bays, shield repair stock (S29, with I/F12) and SP-49 suit support (after D04) wait here.
 
 - [ ] **G04 — Validate survival/failure coverage. AFTER G02/G03 and relevant F/H/I.** Reconcile S&E 38 requirements, 39 failure scenarios
   and 41 resource budgets with installed systems, including repair stocks, communications, safe attitude and drive-off endurance.

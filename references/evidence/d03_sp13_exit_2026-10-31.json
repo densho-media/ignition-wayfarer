@@ -1,0 +1,132 @@
+{
+ "task": "D03 SP-13 second exit",
+ "date": "2026-10-31",
+ "status": "STUDY (L2 topology; decision under the owner's delegation, PROTOTYPE values)",
+ "inputs": {
+  "pressure_Pa": 80000.0,
+  "clear_d_m": 1.2,
+  "seal_d_m": 1.3,
+  "gallery_length_m": 9.0,
+  "antechamber_length_m": 2.6,
+  "volumes_m3": {
+   "SP13": 25.7,
+   "SP12": 49.1,
+   "refuge": 55.0,
+   "gallery": 11.945906065275189
+  }
+ },
+ "closures": {
+  "seal_force_N": 106185.83169133501,
+  "dog_load_N": 13273.228961416877,
+  "A": {
+   "leaf": "one hinged dogged leaf, stepped/offset frame",
+   "pressure_seated": "one polarity only; the other on 8 dogs",
+   "leaves": 1,
+   "extra_kg": 140.0
+  },
+  "B": {
+   "leaf": "two plugs in series seating in opposite directions",
+   "pressure_seated": "both polarities by pressure (one leaf each); dogs only for the open-direction hold",
+   "leaves": 2,
+   "extra_kg": 508.707945181337,
+   "antechamber_m3": 4.002389040673396,
+   "antechamber_shell_m2": 11.435397259066848
+  }
+ },
+ "equalisation": {
+  "antechamber_from_vacuum_s": 80.09999999999759,
+  "gallery_from_vacuum_s": 239.15000000002013,
+  "sp13_from_vacuum_s": 514.5500000000798
+ },
+ "faults": [
+  {
+   "fault": "SP-12 / trunk exit jammed (-0.373 m, D04)",
+   "A": {
+    "exit": "gallery",
+    "refuge_isolated": true,
+    "shielding_kept": true
+   },
+   "B": {
+    "exit": "gallery",
+    "refuge_isolated": true,
+    "shielding_kept": true
+   }
+  },
+  {
+   "fault": "gallery refuge closure jammed shut",
+   "A": {
+    "exit": "trunk",
+    "refuge_isolated": true,
+    "shielding_kept": true
+   },
+   "B": {
+    "exit": "trunk",
+    "refuge_isolated": true,
+    "shielding_kept": true
+   }
+  },
+  {
+   "fault": "one antechamber leaf jammed open",
+   "A": {
+    "exit": "n/a",
+    "refuge_isolated": null,
+    "shielding_kept": null
+   },
+   "B": {
+    "exit": "gallery and trunk",
+    "refuge_isolated": true,
+    "shielding_kept": true
+   }
+  },
+  {
+   "fault": "SP-13 depressurised (suits on), refuge at pressure",
+   "A": {
+    "exit": "trunk only: opening the refuge leaf would vent the refuge into the gallery",
+    "refuge_isolated": false,
+    "shielding_kept": true
+   },
+   "B": {
+    "exit": "gallery: cycle the antechamber, refuge never open to vacuum",
+    "refuge_isolated": true,
+    "shielding_kept": true
+   }
+  },
+  {
+   "fault": "fire / toxic release in SP-13, crew escaping to the refuge",
+   "A": {
+    "exit": "gallery, but smoke enters the refuge while the leaf is open",
+    "refuge_isolated": false,
+    "shielding_kept": true
+   },
+   "B": {
+    "exit": "gallery: the outer leaf closes behind them before the inner opens",
+    "refuge_isolated": true,
+    "shielding_kept": true
+   }
+  },
+  {
+   "fault": "storm (SPE) warning during egress",
+   "A": {
+    "exit": "gallery; an open leaf is a gap in the 20 g/cm2 wall while it stands open",
+    "refuge_isolated": true,
+    "shielding_kept": false
+   },
+   "B": {
+    "exit": "gallery; one leaf and the antechamber water jacket stay closed",
+    "refuge_isolated": true,
+    "shielding_kept": true
+   }
+  }
+ ],
+ "faults_clean": {
+  "A": "2 of 5",
+  "B": "6 of 6"
+ },
+ "decision": "B: isolation antechamber at the refuge end of the gallery. Both closures are pressure-seated in opposite directions, so 80 kPa either way seats a leaf instead of loading dogs; each leaf has an equalisation valve and manual override operable from both sides. It keeps the refuge sealed and its shielding closed in every studied single fault, at 509 kg against 140 kg; a jam of either leaf still leaves the trunk exit.",
+ "rules_1_5g": "At locked 1.5 g the 9 m gallery is a shaft: ladder with protected fall arrest; a casualty is cared for in place (15!A197) and moves only after thrust reduction, by hoist-only carrier.",
+ "open": [
+  "suited casualty clearance MARGINAL +0.021 m in the 1.20 m bore (keep the bore, no smaller fittings)",
+  "leaf and dog ratings, seals and the antechamber water jacket stack (pressure flight HOLD)",
+  "gallery routing past survival reserve 1 (az 78-138 deg) to be re-swept when built"
+ ]
+}

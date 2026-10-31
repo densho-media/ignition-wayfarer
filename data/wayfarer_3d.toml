@@ -624,6 +624,31 @@ full_sector_people = 6
 ballast_r_m = [29.5, 25.0]                # ring water moved between the floor and overhead shielding layers (PROTOTYPE radii)
 max_differential_thrust = 0.05            # steering by differential nozzle thrust kept to 5 % of the drive (PROTOTYPE requirement)
 
+# Attitude control check (pass 6, Claude under the owner's delegation of 2026-10-31; S&E 15 OWN-ATT-CHECK-2026-10-31). attitude.py takes the B02
+# placed inertia and asks who carries each torque: the RCS couples (exterior_hardware), the CMGs (body_equipment) or the drive's
+# differential channel thrust (max_differential_thrust above). Every case value here is PROTOTYPE: misalignment angles bound the drive's
+# thrust-axis error; the two Earth orbits bound gravity gradient at the station (its orbit is not released, B04).
+[physics.attitude]
+canon_status = "WORKING"
+source_ref = "attitude"
+misalignment_cases_deg = [0.01, 0.05, 0.1]
+gravity_gradient_orbit_r_m = [6778000.0, 42164000.0]   # LEO 400 km, GEO
+mu_earth_m3_s2 = 3.986004418e14
+gravity_gradient_angle_deg = 45.0                      # worst-case attitude off the local vertical
+
+# F01 torus load path and drawdown (pass 6, Claude under the owner's delegation of 2026-10-31; S&E 15 OWN-F01-TORUS-LOADS-2026-10-31).
+# fuel_loads.py: each vessel's propellant (B02 balanced loading along the B01 burn) plus a dry tank allowance, accelerated at the burn's
+# instantaneous rate, shared by the vessel's two bipods. Strut material, factors and the dry fraction are PROTOTYPE (titanium alloy
+# Ti-6Al-4V; ultimate factor 1.4 as NASA-STD-5001 for flight structure; Euler buckling with a knockdown of 2 for a long thin tube).
+[physics.fuel_loads]
+canon_status = "WORKING"
+source_ref = "fuel_loads"
+tank_dry_fraction = 0.15                  # tank shell, insulation and supports per kg of capacity (LH2 tankage ~0.1-0.2)
+strut_E_Pa = 114.0e9
+strut_yield_Pa = 880.0e6
+ultimate_factor = 1.4
+buckling_knockdown = 2.0
+
 [physics.drive_outputs]
 known = false
 canon_status = "OPEN"
@@ -4498,6 +4523,12 @@ gap_centers_deg = [50.0, 195.0, 315.0]   # EVA airlock, the two docking corridor
 corridor_keepout_m = 3.0
 strut_root_standoff_m = 0.02         # struts stand on the forward collar skin (r 6.5) at a collar frame; foot plate OPEN
 strut_radius_m = 0.2
+# F01 (2026-10-31, PROTOTYPE, fuel_loads.py): each support is a bipod from the torus inner face to the collar skin, its feet this far aft and
+# forward of the torus centre: the aft foot 1.8 m clear of ring B's sweep (service clearance 1.5 m), the forward foot aft of the shield
+# truss (105.9 m). The radial struts bent under thrust (several GPa); the bipod legs carry it axially.
+strut_aft_dx_m = -5.6
+strut_fwd_dx_m = 4.4
+strut_wall_m = 0.012
 # B02 (2026-10-31, mass_model.py): deuterium in one cell at the a1 end of each vessel, sized so the balanced load fits (arcs from a
 # search on the departure residual), so neither species moves the centre of mass off the thrust axis as it is drawn down. The one
 # modelled D2 transfer line leaves vessel 3's cell; outlets and crossfeed of vessels 1 and 2 (both species) are an OPEN plumbing interface.
