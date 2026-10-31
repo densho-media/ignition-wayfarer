@@ -4,7 +4,8 @@ Built in the sector frame (+X axial, +Y radially outward = down in spin, +Z tang
 WF_DETAIL_RA3_GDN.blend, which WF_HABITAT links at the sector instance (1, 3). The whitebox blocks stay as they are; this pack dresses them:
 cushions on the mess benches, a fiddle rail round the table, a mug rail and a cubby shelf on the outer wall above the far bench, daylight
 panels over the table between the overhead frames, grow-light bars under the Garden rack's lid and trays, and on the ECLSS bay's face (in
-its service recess) a labelled WATER / O2 / CO2 resource board, an access panel with quarter-turn fasteners and a maintenance tag.
+its service recess) a labelled WATER / O2 / CO2 resource board and the five removable unit fronts of the bay's ECLSS string (CO2 removal,
+O2 generation, water processing, Sabatier CO2 reduction, trace contaminant control; eclss_string() sizes them) with a maintenance tag.
 Owned with data/detail/ra3_garden.toml.
 """
 import production_detail as pd
@@ -97,14 +98,51 @@ def garden_elements(s):
                                 (0.0, -1.0, 0.0), .035))
     out.append(pd.lettering(ASM, 'ECLSS', 'RA3_Board_Title', 'xf_mark', 'board title', 'LIFE SUPPORT', (fx-pt-.002, by0-.0, (bz0+bz1)/2), (0.0, 0.0, -1.0),
                             (0.0, -1.0, 0.0), .03))
-    (az0, az1), (ay0, ay1) = q['access_z_m'], q['access_y_m']
-    out.append(slab('RA3_Access_Panel', 'ECLSS', 'service_ochre', F, 'ECLSS access panel (removable)', (fx-pt, ay0, az0), (fx, ay1, az1), q['bevel_m']))
-    for k, (yy, zz) in enumerate(((ay0+.05, az0+.05), (ay0+.05, az1-.05), (ay1-.05, az0+.05), (ay1-.05, az1-.05)), 1):
-        vs, fs = pd.rod((fx-pt, yy, zz), (fx-pt-.006, yy, zz), .012)
-        out.append(pd.element(ASM, 'ECLSS', f'RA3_Access_Fastener_{k}', 'fastener', F, 'quarter-turn fastener', vs, fs))
-    out.append(slab('RA3_Maint_Tag', 'ECLSS', 'safety_orange', ART, 'Bolt-Sworn maintenance tag (last service card)', (fx-pt-.004, ay0+.12, az0+.12),
-                    (fx-pt, ay0+.24, az0+.20)))
+    # The ECLSS string: one removable front per unit (fasteners at the corners, a pull handle clear of the service lines, a coloured function
+    # strip and a label); the unit itself is the envelope behind the drawn block face (eclss_string()).
+    import route_fitout as rf
+    x0p, x1p = q['eclss_plate_x_m']
+    lines = [e['points'][0][2] for e in rf.sector_elements(s, FUNCTION) if e['name'].startswith('Sector_Fit_Service_Line')]
+    for u in q['eclss_units']:
+        (z0, z1), (y0, y1) = u['z'], u['y']; n = f"RA3_ECLSS_{u['id']}"
+        out.append(slab(f'{n}_Front', 'ECLSS', 'panel_service', F, f"{u['function']} (removable front)", (x0p, y0, z0), (x1p, y1, z1), q['bevel_m']))
+        out.append(slab(f'{n}_Strip', 'ECLSS', u['material'], F, 'function colour strip', (x0p-.003, y0+.03, z0+.03), (x0p, y0+.06, z1-.03)))
+        out.append(pd.lettering(ASM, 'ECLSS', f'{n}_Label', 'xf_mark', f"{u['label']} label", u['label'], (x0p-.004, y0+.11, (z0+z1)/2), (0.0, 0.0, -1.0),
+                                (0.0, -1.0, 0.0), .03))
+        for k, (yy, zz) in enumerate(((y0+.04, z0+.04), (y0+.04, z1-.04), (y1-.04, z0+.04), (y1-.04, z1-.04)), 1):
+            vs, fs = pd.rod((x0p, yy, zz), (x0p-.006, yy, zz), .010)
+            out.append(pd.element(ASM, 'ECLSS', f'{n}_Fastener_{k}', 'fastener', F, 'quarter-turn fastener', vs, fs))
+        cand = [z0+.06+k*.01 for k in range(int((z1-z0-.12)/.01)+1)]
+        zh = max(cand, key=lambda z: min([abs(z-l) for l in lines]+[9.0]))
+        if min([abs(zh-l) for l in lines]+[9.0]) > .035:
+            ym = (y0+y1)/2; hl = min(.12, (y1-y0)/2-.10)
+            for k, yy in enumerate((ym-hl, ym+hl), 1):
+                vs, fs = pd.rod((x0p, yy, zh), (x0p-.035, yy, zh), .008)
+                out.append(pd.element(ASM, 'ECLSS', f'{n}_Handle_Post_{k}', 'fastener', F, 'pull handle post', vs, fs))
+            vs, fs = pd.rod((x0p-.035, ym-hl, zh), (x0p-.035, ym+hl, zh), .009)
+            out.append(pd.element(ASM, 'ECLSS', f'{n}_Handle', 'fastener', F, 'pull handle (unit removal)', vs, fs))
+    h2o = {u['id']: u for u in q['eclss_units']}['H2O']; (tz0, tz1), (ty0, ty1) = h2o['z'], h2o['y']
+    out.append(slab('RA3_Maint_Tag', 'ECLSS', 'safety_orange', ART, 'Bolt-Sworn maintenance tag (last service card)', (x0p-.004, ty1-.40, tz0+.10),
+                    (x0p, ty1-.28, tz0+.18)))
     return out
+
+
+HHV_O2_J_KG = 285.83e3*2/0.031998       # water's higher heating value per kg of O2 released (2 H2O -> 2 H2 + O2)
+M = {'H2': 2.016, 'O2': 31.998, 'H2O': 18.015, 'CO2': 44.009, 'CH4': 16.043}
+
+
+def eclss_string(s):
+    """One life-support string's daily budget (kg/day, kW) from the owner's 41 study rates (data/life_support.toml) at string_crew, and its
+    peak O2 capacity in people. PROTOTYPE sizing: electrolysis (2 H2O -> 2 H2 + O2) at electrolysis_efficiency of the higher heating value,
+    Sabatier (CO2 + 4 H2 -> CH4 + 2 H2O) limited by the electrolysis hydrogen."""
+    import life_support as ls
+    q = pd.params(s, PACK); reg = ls.load(); r = ls.rates(reg); n = q['string_crew']
+    o2 = n*r['O2']; co2 = n*r['CO2_REMOVED']; feed = o2*2*M['H2O']/M['O2']; h2 = o2*2*M['H2']/M['O2']
+    mol_co2 = h2/M['H2']/4*1000; co2_red = min(co2, mol_co2*M['CO2']/1000); back = co2_red/M['CO2']*2*M['H2O']
+    return dict(crew=n, o2_kg_d=o2, co2_kg_d=co2, water_turnover_kg_d=n*r['WATER_TURNOVER'], electrolysis_feed_kg_d=feed, h2_kg_d=h2,
+                co2_reduced_kg_d=co2_red, co2_left_kg_d=co2-co2_red, ch4_vented_kg_d=co2_red/M['CO2']*M['CH4'], sabatier_water_kg_d=back,
+                o2_water_makeup_kg_d=feed-back, electrolysis_kw=o2*HHV_O2_J_KG/q['electrolysis_efficiency']/86400/1000,
+                peak_o2_kg_d=o2*q['string_peak'], peak_people=o2*q['string_peak']/r['O2'], stress=reg['consumers']['stress'])
 
 
 def garden_check(s, els):
@@ -139,6 +177,20 @@ def garden_check(s, els):
         hit = [n for n, a, b in solid if over(lo, hi, a, b, 2e-3)]
         if hit:
             fails.append(f"{e['name']}: inside {hit[:2]}")
+    # The ECLSS units: inside the bay behind its drawn face, apart from each other, served from the face; the strings carry the crew.
+    b = blocks(s)['ECLSS_Bay']; face = rec[2] if rec else b['min'][0]; units = q['eclss_units']
+    for u in units:
+        if not (b['min'][2] <= u['z'][0] < u['z'][1] <= b['max'][2] and b['min'][1] <= u['y'][0] < u['y'][1] <= b['max'][1]):
+            fails.append(f"ECLSS {u['id']}: front outside the bay face")
+        if face+u['depth_m'] > b['max'][0]+1e-9:
+            fails.append(f"ECLSS {u['id']}: {u['depth_m']} m deep, past the bay's back")
+    for i, a in enumerate(units):
+        for c in units[i+1:]:
+            if a['z'][0] < c['z'][1] and c['z'][0] < a['z'][1] and a['y'][0] < c['y'][1] and c['y'][0] < a['y'][1]:
+                fails.append(f"ECLSS {a['id']} and {c['id']} overlap")
+    e = eclss_string(s)
+    if e['peak_people'] < e['stress']/2 or e['crew'] < s['detail_packs'][PACK]['params']['crew']:
+        fails.append(f"ECLSS string carries {e['peak_people']:.1f} people at peak: below half the 41 stress case or the booth crew")
     return fails
 
 

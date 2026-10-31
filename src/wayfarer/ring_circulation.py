@@ -232,14 +232,14 @@ def conflicts(s):
     """Owner rows the circuit touches (reported, never resolved here)."""
     b = budget(s)
     return [
-        dict(id='CIRC-C1', ref='12_HABITAT_LAYOUT!A13 ring_shielding (BASELINE)', status='CONFLICT',
+        dict(id='CIRC-C1', ref='12_HABITAT_LAYOUT!A13 ring_shielding (BASELINE)', status='CONFLICT, PROTOTYPE DECISION KEEP (2026-10-31)',
              text=f"Pressurized rooms occupy only the sectors; the circuit adds {b['corridor_gross_per_ring_m3']:.0f} m3 of pressurized corridor per ring "
                   f"inside the fills (tunnel {b['tunnel_m3_per_ring']:.0f} m3 of the {b['fill_m3_per_ring']:.0f} m3 fill)."),
-        dict(id='CIRC-C2', ref='habitat.volume 400-460 m3 gross (BASELINE, 02/12)', status='CONFLICT',
+        dict(id='CIRC-C2', ref='habitat.volume 400-460 m3 gross (BASELINE, 02/12)', status='CONFLICT, PROTOTYPE DECISION KEEP (2026-10-31)',
              text=f"Gross pressurized volume {b['sector_gross_m3']:.0f} -> {b['total_gross_m3']:.0f} m3 "
                   f"({b['gross_over_baseline_max']:.2f} x the 460 m3 maximum); atmosphere +{b['atmosphere_kg']:.0f} kg; leak, repressurization "
                   "gas and ECLSS circulation OPEN."),
-        dict(id='CIRC-C3', ref='physics.rotor_sizing 330 t rotating (PROVISIONAL, Q32)', status='CONFLICT',
+        dict(id='CIRC-C3', ref='physics.rotor_sizing 330 t rotating (PROVISIONAL, Q32)', status='CONFLICT, PROTOTYPE DECISION KEEP (2026-10-31)',
              text=f"Corridor liner, decks, {b['doors']} doors and fit-out ~{b['mass_kg']['total']/1000:.1f} t "
                   f"({100*b['mass_fraction_of_rotating']:.1f} % of the rotating allowance, unbudgeted; "
                   f"{b['sector_equivalent_mass_kg']/1000:.0f} t at the sectors' areal mass); spoke load and spin energy scale with it."),
@@ -254,8 +254,11 @@ def conflicts(s):
              text='Each flank and web frame and the spoke-node housing becomes a portal with a collar round the tunnel (ring_circulation.portal); '
                   f"the hand check gives {portal_check(s)['collar_stress_mpa']:.0f} MPa in the collar against {p(s)['portal']['allowable_mpa']:.0f} MPa; FEA OPEN."),
         dict(id='CIRC-C8', ref='interior.layouts (PROTOTYPE), Q50 Garden trays (12!A28 WORKING)', status='CHANGED PROTOTYPE',
-             text='Work and Garden couch-2 lockers end at x -1.15 m like the habitation ones; the Garden rack and mess start at x -0.50 m '
-                  '(rack 0.05 m shorter).'),
+             text='Work and Garden couch-2 lockers end at x -1.15 m like the habitation ones; the Garden rack and mess start at x -0.40 m '
+                  '(rack 0.15 m shorter, mess moved 0.10 m forward) and the landing well is 0.80 m (was 1.00 m) for the 0.75 m door band.'),
+        dict(id='CIRC-D1', ref='references/evidence/circ001_tradeoff_2026-10-31.md', status='PROTOTYPE DECISION',
+             text='Kept by Claude under the owner\'s delegation (2026-10-31): two level exits per sector and the D02 care route (24/24 PASS) '
+                  'outweigh the unbudgeted mass and gas above; the owner canonizes or rejects it (TODO J06).'),
     ]
 
 

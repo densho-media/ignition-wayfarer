@@ -142,8 +142,9 @@ close-up, regression check, MODEL/TODO and Model Status update.
 - [ ] **S05 — Working interiors.** Workshop and fabrication, medical, operations/navigation, life support, cabins, storage and repair,
   Garden; connected to the traversal system, inside the pressure, rotation, thrust-gravity and evacuation rules.
   Built: berths, work/medical/ops, Garden/mess in both rings (ra1_berths, ra2_work, ra3_garden, rb_fitout), the SP-45 storeroom and
-  (2026-10-31) a contained fabrication cell on the workbench. Left: life-support equipment inside the ECLSS bay (waits on the O2, CO2 and
-  water rates, 38 S02/S03/S05/S10 OPEN), repair stations beyond the benches (G03).
+  (2026-10-31) a contained fabrication cell on the workbench and one ECLSS string per Garden sector (CO2, O2, water, Sabatier, trace
+  units sized for six from the 41 study rates, PROTOTYPE). Left: the ECLSS units' masses, volumes and powers beyond electrolysis, and
+  the service lines that run in front of the unit fronts (route_fitout), repair stations beyond the benches (G03).
 
 ## How to work through this plan
 
@@ -247,8 +248,10 @@ The earlier Garden 24/24 was a zone screen only. No pressure cutout, port, guard
   sector-to-sector legs MARGINAL, sectors 2/3 and the refuge legs FAIL at the crew port and trunk; ring B only the staged mattress to
   sector 2's hatch (MARGINAL +0.001 m). 2026-10-31 (same file): care through the ring corridor to the garden care couch (rigid carriers,
   no bend; lost ring = stopped geometry; 1.5 g = care in place at the burn couch) re-scores the 24 states PASS 10, MARGINAL 12, FAIL 2 (was 6/0/18).
-  Open: the 0.65 m door band (+0.028 m for the rigid litter; a 0.75 m band would close it), the work/medical sector's 1.5 g burn-couch care
-  (-0.199 m), medical acceptance of the head-up turn, suited casualties (crew tubes only).
+  2026-10-31 pass 4: the door band and doors widened to 0.75 × 2.00 m (landing well 0.80 m) bring every corridor carrier to PASS
+  (>= +0.05 m), and the 1.5 g station check now uses the screen's kneeling stance (it had stood the attendants up): work/medical
+  +0.057 m PASS. 24/24 PASS. Open: the 1.5 g egress of the other couch's occupant past a deployed care station (Burn_Couch_2 -0.066 m
+  in the work and Garden sectors), medical acceptance of the head-up turn, suited casualties (crew tubes only).
 
 - [ ] **D03 — Establish an independent SP-13 exit. OWNER (pressure architecture).** Study done 2026-10-16: refuge gallery outside
   the trunk (`studies/d03_sp13_gallery.py`, `references/D03_SP13_GALLERY_2026-10-16.md`): U/A/K PASS, S MARGINAL +0.021 m; no single
@@ -439,9 +442,9 @@ candidates of all nine classes are separate accessory assets (docs/ACCESSORIES.m
   Built and checked: the circulation (`ring_circulation.py`, `[ring_circulation]`, both rings' corridors, doors and fit-out; baseline
   `p4_s9_circulation`), the station boarding area (`station.py`, `[station]`) and the playable excursion (`excursion.tscn`, the Godot main
   scene and the web launcher's Start: the main interactive experience; touch controls; runtime check `excursion`: both rings round
-  trip, 72/72 bins; web check "touch walk" on an emulated phone). Left: the
-  owner's decision on CIRC-001 against 12!A13, the 400–460 m³ gross envelope and the 330 t rotating allowance (CIRC-C1..C8 in
-  `ring_circulation.conflicts`; draft in `references/OWNER_Q_CIRC_2026-10-26.md`, not posted); the frame load path round the tunnels
+  trip, 72/72 bins; web check "touch walk" on an emulated phone). Kept as a PROTOTYPE decision 2026-10-31 (CIRC-D1,
+  `references/evidence/circ001_tradeoff_2026-10-31.md`). Left: the owner's canonization or rejection of CIRC-001 against 12!A13, the
+  400–460 m³ gross envelope and the 330 t rotating allowance (CIRC-C1..C8 in `ring_circulation.conflicts`); the frame load path round the tunnels
   (CIRC-C7: portal collars built 2026-10-31 on a hand check, 116 of 200 MPa; FEA OPEN); the station's owner workbook and the boarding straps versus ship hatch-rim handholds (STN-001 PROTOTYPE); a
   hands-on walk of both rings by a person (keyboard and controller, desktop and web, and on a real phone); the corridors' cultural pass (31_ARCHITECTURE)
   after the whitebox review. **Done when:** the owner accepts or replaces the circulation, the conflicts are canonized or removed and a

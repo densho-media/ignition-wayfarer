@@ -779,7 +779,7 @@ Stills: `runs/20261017T2000Z-life-support`.
   breaks at the leaf, 0.05 m clear on each side, and continues to the deck on the same
   rung grid: 9 rungs at 0.30 m, the first 0.25 m above the deck. It stands in front of a
   utility chase (leaf drive, equalization valve, power and data) carrying the hatch
-  panel and a light strip, in a 1.0 × 1.62 m landing well that opens onto the aisle. A
+  panel and a light strip, in a 0.80 × 1.62 m landing well that opens onto the aisle. A
   climber faces the ladder and steps back into the aisle. Two light strips sit over the
   aisle ends. The tube ladder faces away from the spoke: antispinward on ring A, so the
   Coriolis push on a descending climber presses them onto the rungs, and spinward on
@@ -1257,7 +1257,15 @@ record (`references/modules/<pack>.json`); docs/MODULES.md. Every production ass
   per booth place and a six-cubby personal shelf with matching tabs; two daylight panels over the table in the overhead frame bays,
   clear of the supply diffuser. Garden rack: two grow-light bars under the lid and under each tray. ECLSS bay, in its 0.06 m service
   recess: a GU-standard LIFE SUPPORT resource board with WATER, O2 and CO2 gauges (illustrative levels; the hook for the UJ-004
-  learning station), an ochre access panel with quarter-turn fasteners and an orange maintenance tag. Its screen keeps every part off
+  learning station) and the bay's ECLSS string as five removable unit fronts (fasteners, a pull handle clear of the service lines, a
+  colour strip and a label): CO2 SCRUB (amine swing beds), O2 GEN (water electrolysis), WATER (distillation, multifiltration,
+  catalytic oxidizer), CO2 REDUCE (Sabatier) and TRACE (contaminant control), each a packaging envelope 0.30–0.42 m deep behind the
+  face, and an orange maintenance tag. One string per Garden sector (ring B's through rb_fitout), each sized for six people from the
+  owner's 41 study rates (`pack_ra3_garden.eclss_string`, PROTOTYPE): 5.0 kg O2 and 6.0 kg CO2 a day, 25 kg of water turnover;
+  electrolysis 5.7 kg water and about 1.7 kW at 60 % of the higher heating value; the Sabatier reactor, limited by the electrolysis
+  hydrogen, reduces 3.5 kg CO2 and returns 2.8 kg water a day, venting 1.3 kg methane, and 2.5 kg CO2 a day goes to the Garden or
+  overboard (OPEN). At 1.7 × nominal, the ISS OGA's ratio, one string carries 10 people, so either ring's string carries the crew and
+  the two carry the 41 stress case of 12. Unit masses, volumes, powers other than electrolysis, and the water processor's recovery stay OPEN. Its screen keeps every part off
   the aisle, the access strips, the through-passage and the landing well (unless in the overhead band), off the leaning outer wall and
   out of every whitebox part and fit-out item; no clearance, interface, light level or growing area changes.
 - `ra2_work` (RA2.WRK, L4_VISUAL_CANDIDATE, S8b Z2) on sector instance (1, 2), below the `ra2_equip` trays: an ops screen with a
@@ -1347,13 +1355,13 @@ pressurized sectors into one walking circuit while every sector stays an indepen
 `references/RING_CIRCULATION_PLAN.svg`; fit screen `python3 src/wayfarer/ring_circulation.py` (`references/p1_ring_circulation.json`);
 renders `presentation/circulation_preview.py` (whole ring with the fill cut away, eye level in a corridor and in the through-passages).
 
-- **Through-passage.** Every sector has a tangential passage at x −1.15..−0.50 m (sector frame), between the aft couch row and the
+- **Through-passage.** Every sector has a tangential passage at x −1.15..−0.40 m (sector frame), between the aft couch row and the
   berths, stations, Garden rack and landing well, from side wall to side wall across the aisle. It is the only band free in all three
-  functions; the work and Garden couch-2 lockers now end at x −1.15 m like the habitation ones and the Garden rack and mess start at
-  −0.50 m (0.05 m shorter). Seraph's habitation niche (Q51 slot) lay in that band: it moves to a reserved alcove (0.80 × 0.55 m) on the
+  functions; the work and Garden couch-2 lockers now end at x −1.15 m like the habitation ones, the Garden rack starts at −0.40 m and
+  the mess runs −0.40..1.35 m, and the landing well is 0.80 m long (x −0.40..0.40), 0.20 m each side of the 0.40 m ladder. Seraph's habitation niche (Q51 slot) lay in that band: it moves to a reserved alcove (0.80 × 0.55 m) on the
   corridor side of that sector's −z door, still beside the berths but outside the sector boundary, and is not built (owner to confirm).
-- **Doors.** A sliding pressure door in each sector side wall (0.65 × 1.95 m clear, the width beside the landing well; it passes the
-  0.44 m body with 0.10 m each side, not a stretcher or the 0.70 m suited envelope) and one in a pressure bulkhead at each structural
+- **Doors.** A sliding pressure door in each sector side wall (0.75 × 2.00 m clear, the width beside the landing well; it passes a
+  rigid litter with its bearers' hands and a 1.90 m bearer upright with 0.05 m, not the 0.86 m suited envelope) and one in a pressure bulkhead at each structural
   spoke node, half way along each fill. Leaves slide aft into pockets in the flank frame and the bulkhead, seat on their frames and are
   normally closed. Per ring 9 doors and 9 compartments (3 sectors, 6 corridor halves of 56 m³).
 - **Corridors.** One per fill, from the side wall of one sector to the next (about 53 m each, 159 m per ring), 0.90 m clear (the sector
@@ -1368,7 +1376,8 @@ renders `presentation/circulation_preview.py` (whole ring with the fill cut away
 - **Casualty route.** The corridor is the ring's inter-sector casualty route (D02 study 2026-10-31,
   `references/evidence/d02_coverage_2026-10-30.md`): a rigid carrier, preferably the vacuum mattress, is stood upright over its foot in
   the door band, turned and lowered along it, carried through the doors and corridor, and slid sideways to the garden sector's fold-down
-  care couch. No bend is needed. Worst point +0.028 m for the rigid litter in the 0.65 m door band (MARGINAL); suited casualties do not fit.
+  care couch. No bend is needed. With the 0.75 × 2.00 m doors every carrier passes with 0.05 m or more (PASS); suited casualties do not
+  fit.
 - **Interior language.** The corridors take the sectors' scheme A grammar (`ring_circulation.fitout`, depiction only): the sector deck
   and overhead finishes, flush dark frame strips across walls and ceiling at the sectors' 0.70 m overhead-frame pitch, the blue route
   band along the floor by the forward wall and safety-orange trim round both faces of every door opening. In the runtime each door
@@ -1388,6 +1397,10 @@ renders `presentation/circulation_preview.py` (whole ring with the fill cut away
   between sectors of a ring without two crew-tube ladder climbs (about 20 m each), and the fill cassettes become reachable in shirt sleeves. Against them:
   the volume, gas, mass and leak paths above, through-traffic in the habitation sector's sub-aisle (between the other two sectors the
   shorter way avoids it; a full circuit cannot) and less water beside the crew in a corridor than in a sector.
+- **Decision (CIRC-D1, 2026-10-31, PROTOTYPE).** Kept, by Claude under the owner's delegation: two level exits per sector and the
+  D02 care route, which passes in all 24 states only through the corridors, outweigh the unbudgeted 40 t and 641 kg; the shell stays
+  an internal liner shielded by the fill. Trade-off and conditions: `references/evidence/circ001_tradeoff_2026-10-31.md`. The owner rows
+  above still report the conflict until the owner canonizes or rejects it.
 
 ## Ring B route in the M7 grammar (Phase 4 S8a)
 

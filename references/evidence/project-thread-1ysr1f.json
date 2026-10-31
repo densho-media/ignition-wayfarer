@@ -240,5 +240,65 @@
    "baseline": "references/baseline_corridor_portals",
    "runtime_export": "PASS"
   }
+ },
+ "pass_4": {
+  "approved": null,
+  "status": "PROTOTYPE",
+  "door_band": {
+   "passage_x_m": [
+    -1.15,
+    -0.4
+   ],
+   "door_m": [
+    0.75,
+    2.0
+   ],
+   "landing_well_width_m": 0.8,
+   "corridor_care_worst_m": 0.05,
+   "corridor_care_status": "24/24 PASS",
+   "suited_door_m": {
+    "S x1.00": -0.054,
+    "S x1.08": -0.088
+   }
+  },
+  "care_1g5_station": {
+   "method": "attendant capsule height from the screen's stance (kneeling 1.20 m), was always standing 1.90 m",
+   "work_medical_m": {
+    "attendant_1_strip": 0.1,
+    "attendant_2_head_end": 0.057
+   },
+   "tally_24": {
+    "PASS": 24
+   },
+   "open": "egress past a deployed care station at 1.5 g, Burn_Couch_2 -0.066 m (work, Garden)"
+  },
+  "eclss_string": {
+   "crew": 6,
+   "o2_kg_d": 5.04,
+   "co2_kg_d": 6.0,
+   "water_turnover_kg_d": 24.96,
+   "electrolysis_feed_kg_d": 5.675,
+   "h2_kg_d": 0.635,
+   "co2_reduced_kg_d": 3.466,
+   "co2_left_kg_d": 2.534,
+   "ch4_vented_kg_d": 1.263,
+   "sabatier_water_kg_d": 2.838,
+   "o2_water_makeup_kg_d": 2.838,
+   "electrolysis_kw": 1.737,
+   "peak_o2_kg_d": 8.568,
+   "peak_people": 10.2,
+   "stress": 12
+  },
+  "screenshot_drift": {
+   "cause": "learning.gd centre() read the station off the spinning ring mesh while the walking body lives at the index pose",
+   "fix": "centre() takes the ring pivot's current turn out",
+   "windowed_run": "PASS, fails []"
+  },
+  "circ001": "references/evidence/circ001_tradeoff_2026-10-31.md (kept, CIRC-D1)",
+  "gate": {
+   "pipeline": "runs/20261031T095733Z-pipeline PASS, 276 changed, 0 unexpected",
+   "baseline": "pass4_door_eclss",
+   "runtime_export": "runs/20261031T100810432377Z-runtime PASS"
+  }
  }
 }

@@ -71,9 +71,19 @@ static func _mesh(n: Node) -> MeshInstance3D:
 func welcome() -> String:
 	return str(doc.get("instructor", {}).get("welcome", ""))
 
+## The station's centre at the index pose, the frame the walking body lives in: a ring's meshes ride its spinning pivot, so the pivot's
+## current turn is taken out (otherwise the centre runs at rim speed between rendered frames and the open station falls out of reach).
 func centre(i: int) -> Vector3:
 	var m: MeshInstance3D = stations[i]["mesh"]
-	return m.global_transform * m.get_aabb().get_center()
+	var g := m.global_transform * m.get_aabb().get_center()
+	var frames = host.get("frames") if host != null else null
+	if frames is Dictionary:
+		for id in frames:
+			var f: Dictionary = frames[id]
+			if id != "STATIONARY" and (f["node"] as Node).is_ancestor_of(m):
+				var piv: Node3D = f["node"]
+				return piv.get_parent().global_transform * (f["rest"] + piv.global_transform.affine_inverse() * g)
+	return g
 
 ## The station in reach of p in the ring zone, -1 none. The open station stays in reach until the trainee is 1.5 reaches away (the
 ## same rule that closes it); otherwise the nearest station not yet learned wins, then the nearest learned one, so a bank of

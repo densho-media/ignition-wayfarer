@@ -2580,10 +2580,11 @@ components = { HABITATION = "INTERIOR_HABITATION", WORK_MEDICAL_OPS = "INTERIOR_
 # personal lockers beside it on the aft bulkhead; the hygiene compartment stands forward of the landing well with a shelf over it.
 # Q51 (15!A106, 12!A29; the user's pick of 2026-10-09): the couch-2 lockers end where couch 1's do (x -1.15 m), and the 0.55 m slot between
 # them and the landing well is Seraph's private dock and maintenance niche (route_fitout.seraph_elements 'niche'); no berth or couch is lost.
-# CIRC-001 (owner design direction 2026-10-26, ring_circulation): every sector carries a tangential through-passage at x -1.15..-0.50 m
+# CIRC-001 (owner design direction 2026-10-26, ring_circulation): every sector carries a tangential through-passage at x -1.15..-0.40 m
 # ([ring_circulation] passage_x_m), forward of the aft couch row and aft of the berths, stations, racks and the landing well, from side wall
 # to side wall, with a pressure door in each side wall. The work and Garden couch-2 lockers therefore end at x -1.15 m like the habitation
-# ones, and the Garden rack and mess start at x -0.50 m. Seraph's habitation niche (Q51) gave up its slot to the passage: it moves to a
+# ones, and the Garden rack and mess start at x -0.40 m (2026-10-31: band widened to 0.75 m for the litter, landing well 0.80 m; the
+# mess keeps its 1.75 m length forward to x 1.35 m). Seraph's habitation niche (Q51) gave up its slot to the passage: it moves to a
 # reserved alcove on the corridor side of that sector's -z door (ring_circulation.alcove), still beside the berths.
 HABITATION = [
   { name = "Burn_Couch_1", zone = "burn_couch", side = 1, x = [-1.60, -1.15], z = [0.55, 1.25], lift_m = 0.0, height_m = 2.0 },
@@ -2626,8 +2627,8 @@ LIFE_SUPPORT_GARDEN_COMMON = [
   { name = "Couch_Lockers_1", zone = "stowage", side = 1, x = [-1.60, -1.15], z = [1.30], lift_m = 0.0, height_m = 2.1 },
   { name = "Burn_Couch_2", zone = "burn_couch", side = -1, x = [-1.60, -1.15], z = [0.55, 1.25], lift_m = 0.0, height_m = 2.0 },
   { name = "Couch_Lockers_2", zone = "stowage", side = -1, x = [-1.60, -1.15], z = [1.30], lift_m = 0.0, height_m = 2.1 },
-  { name = "Garden_Rack_1", zone = "garden", side = 1, x = [-0.50, 1.60], z = [0.45, 0.95], lift_m = 0.0, height_m = 2.0 },
-  { name = "Mess", zone = "common", side = 1, x = [-0.50, 1.25], z = [0.95], open = "aft", lift_m = 0.0, height_m = 1.40 },
+  { name = "Garden_Rack_1", zone = "garden", side = 1, x = [-0.40, 1.60], z = [0.45, 0.95], lift_m = 0.0, height_m = 2.0 },
+  { name = "Mess", zone = "common", side = 1, x = [-0.40, 1.35], z = [0.95], open = "aft", lift_m = 0.0, height_m = 1.40 },
   { name = "ECLSS_Bay", zone = "life_support", side = -1, x = [1.10, 1.60], z = [0.45], open = "aft", lift_m = 0.0, height_m = 2.1 },
 ]
 
@@ -3003,7 +3004,8 @@ spoke_hatch_panel_deg = 50.0
 # (a 1.7 m hinged leaf fits neither the 1.6 m tube nor the 2.9 m sector without blocking the well). The ladder breaks at the leaf
 # (leaf_swing_clearance_m each side) and continues to the deck on the rung grid that starts landing_first_rung_m above it, in front of a
 # utility chase (equalization valve, leaf drive, power and data) in a landing well landing_well_width_m wide that opens onto the aisle.
-landing_well_width_m = 1.00
+# 2026-10-31: 0.80 m (was 1.00) to free the 0.75 m door band aft of it; the ladder (0.40 m) keeps 0.20 m each side.
+landing_well_width_m = 0.80
 landing_first_rung_m = 0.25
 landing_leaf_drop_m = 0.02
 landing_rail_radius_m = 0.02
@@ -3328,14 +3330,16 @@ sector_arc_segments = 8
 # ring through all three sectors, keeping each sector and each corridor half an independently closable compartment. PROTOTYPE throughout:
 # it conflicts with the BASELINE rule that pressurized rooms occupy only the sectors (12!A13) and the 400-460 m3 gross envelope
 # (ring_circulation.conflicts); nothing here is canon. The door band is the free axial band of every sector between the aft couch row
-# (x -1.15) and the forward blocks and landing well (x -0.50); the corridor is centred on it, so it runs aft of the ring plane.
+# (x -1.15) and the forward blocks and landing well (x -0.40); the corridor is centred on it, so it runs aft of the ring plane. D02 (2026-10-31,
+# Claude under the owner's delegation): the band and doors widened from 0.65 to 0.75 m and the doors raised to 2.00 m so the rigid litter
+# and its bearers pass with 0.05 m or more (references/evidence/d02_coverage_2026-10-30.md); the landing well narrowed from 1.00 to 0.80 m.
 [ring_circulation]
 status = "PROTOTYPE"
 unit = "m"
 evidence_ref = "ring_circulation_direction"
-rationale = "Judgment (AGENTS.md calculate constraints, model form): shirt-sleeve walking passage at 0.5 g. Corridor clear 0.90 m wide (the sector aisle) and 2.10 m high (interior.min_headroom_m); doors 0.65 x 1.95 m clear, the width of the free band beside the landing well (a naval watertight door is ~0.66 m), passing the 0.44 m body with 0.10 m each side but not a stretcher or the 0.70 m suited envelope: suited crew keep the crew tubes. Doors slide axially aft into pockets in the flank frame and the spoke-node bulkhead, seat on their frames and are normally closed. Utility zones 0.15 m over the ceiling and under the deck inside the liner; the tunnel cut in the fill keeps 0.10 m round the liner for frames and insulation."
-passage_x_m = [-1.15, -0.50]
-door_clear_height_m = 1.95
+rationale = "Judgment (AGENTS.md calculate constraints, model form): shirt-sleeve walking passage at 0.5 g. Corridor clear 0.90 m wide (the sector aisle) and 2.10 m high (interior.min_headroom_m); doors 0.75 x 2.00 m clear, the width of the free band beside the landing well, sized for a rigid litter (0.55 m) with the bearers' hands and a 1.90 m bearer upright (a naval watertight door is ~0.66 x 1.70 m; a hospital-ship door passes a litter at ~0.76 m); not the 0.86 m suited envelope: suited crew keep the crew tubes. Doors slide axially aft into pockets in the flank frame and the spoke-node bulkhead, seat on their frames and are normally closed. Utility zones 0.15 m over the ceiling and under the deck inside the liner; the tunnel cut in the fill keeps 0.10 m round the liner for frames and insulation."
+passage_x_m = [-1.15, -0.40]
+door_clear_height_m = 2.00
 corridor_clear_width_m = 0.90
 corridor_clear_height_m = 2.10
 deck_m = 0.05

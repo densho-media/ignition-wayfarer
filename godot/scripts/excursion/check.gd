@@ -280,6 +280,9 @@ func _learn_here() -> void:
 	var got := []
 	var id := str(h.learning.stations[i]["rec"]["id"])
 	for k in 4:
+		if OS.has_environment("EXC_DEBUG"):
+			printerr("learn %s k%d: d %.3f reach %.2f open %d v %.3f in_reach %d frame %d" % [id, k, h.actor.global_position.distance_to(h.learning.centre(i)),
+				float(h.learning.stations[i]["rec"]["reach_m"]), h.learning.open, h.actor.linear_velocity.length(), h._learning_in_reach(), Engine.get_physics_frames()])
 		got.append(h.use())
 		await _ticks(2)
 		if k < 3:
