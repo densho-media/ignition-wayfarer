@@ -118,8 +118,10 @@ close-up, regression check, MODEL/TODO and Model Status update.
   owner review): three primary star trackers with coarse sun sensors at X 20 m, screened; lights' look pass done 2026-10-29
   (beacon and approach light classes); the service panels are the S04 casing access covers (ochre, S03). Slice 4 (2026-10-30, owner-accepted): the guided-EVA handrail on standoffs along `eva_route` at the airlock azimuth, tether anchor rings and two
   foot restraints on the forward collar (`exterior_hardware.eva_rails`, ochre); still a training fixture (EVA-048 HOLD, 44 RUN-011).
-  Momentum storage built 2026-10-30: six CMGs on the body utility frames (`body_equipment`, PROTOTYPE sizing). Left: the owner's answers
-  to the slice-2 questions.
+  Momentum storage built 2026-10-30: six CMGs on the body utility frames (`body_equipment`, PROTOTYPE sizing). Attitude check 2026-10-31
+  (`attitude.py`, docs/MODEL.md "Attitude control check"): 44 min flips on the RCS (179 kg each at 300 s); the drive trims the burn's CG
+  offset and its thrust axis must hold ±0.043°. Left: the owner's answers to the slice-2 questions; the RCS bottles (not placed); the
+  rotor-bearing gyroscopic moment in a flip (about 130 kN m per ring) as a bearing load case.
 - [ ] **S03 — Whole-ship material library and visual identity (Art Style Bible).** Structure, casing, insulation, hot radiator faces,
   cryogenic systems, optics, shielding, GU markings, maintenance zones; before/after hero renders.
   Slice 1 2026-10-18: the S02/S04 parts take the accepted M4 grammar (15!A202, 98!A112, Spacecraft!A16): ochre covers, dark
@@ -184,7 +186,7 @@ Reversible production work in C can proceed while these wait.
   13!A18:I36, `mass_model.py`, docs/MODEL.md "Placed mass model"): a WORKING placed mass model gives CG and inertia per burn state, the
   balanced torus loading (three D2 cells), ring trim and spoke loads. Still open: owner adoption of positions (the rig keeps
   `physics.center_of_mass`/`inertia`/`mass_distribution` OPEN until then), whole-ship electrical loads and coast/survival generation,
-  shield stack, torus crossfeed plumbing, spoke strength, rotor-motor and water-trim authority, and the 40.2 t corridor mass outside the
+  shield stack, spoke strength, rotor-motor and water-trim authority, and the 40.2 t corridor mass outside the
   330 t rotating allowance.
 
 - [ ] **B03 — Import authoritative flight and thermal histories (FUT-001). OWNER; uses the B01 operating point.** Consume released frames through the
@@ -282,8 +284,10 @@ packet (Q_src, T_src; H2 mdot, p, T, phase, enthalpy in/out; field/plume/dose ke
   spine, ring, collar and thrust load-path changes through owner-approved designs. **Done when:** installed envelopes and source
   budgets agree, service routes fit, affected interfaces pass, and remaining unsized members are clearly bounded. No speculative
   acceptance of the held linear-engine/size studies; no additional mass hidden in proxy details.
-  2026-10-30: the volume envelopes, feed lines and cryocoolers are built with S01 (PROTOTYPE); masses, loads and the shield/water
-  consequences still wait on B01/B02.
+  2026-10-30: the volume envelopes, feed lines and cryocoolers are built with S01 (PROTOTYPE). 2026-10-31 (pass 6, `fuel_loads.py`,
+  S&E 15 OWN-F01-TORUS-LOADS-2026-10-31): the torus stands on six bipods (radial struts would bend at 4.9 GPa), worst leg +17 % in
+  buckling; the cells only drain (metered outlets per cell, no crossfeed); spine axial loads per station. Left: outlets of vessels 1-2
+  and their header (OPEN plumbing), tank wall and dry mass (15 % allowance), collar frames under the bipod feet, shield/water layering.
 
 - [ ] **F02 — Close warm/cold cooling and SP-52 packaging. OWNER; AFTER B02 (B01 operating point WORKING) and D04 for service access.** Obtain view factors,
   loads and selected baffles/routing, then build the required warm/cold equipment and rejection surfaces. Re-screen the built warm

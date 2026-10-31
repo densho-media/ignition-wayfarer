@@ -4009,3 +4009,28 @@ source_id = "IGN-WAY-B02"
 cross_ranges = ["13_MASS_POSITIONS!A18:I36", "10_WAYFARER_MASS!A1:H20", "08_ROTATING_HABITAT!C10:C40", "98_DECISION_LOG!A130:H130"]
 inspected_on = "2026-10-31"
 notes = "B02 mass placement (Claude under the owner's delegation of 2026-10-31): placed mass model, torus trim, ring balance, spoke loads."
+
+[sources.attitude]
+workbook = "IGNITION — Wayfarer Science & Engineering Model"
+workbook_id = "18BQQEMXxu3qEw1jKN68VwC3rkOiVmafiWeoQORYgI0A"
+url = "https://docs.google.com/spreadsheets/d/18BQQEMXxu3qEw1jKN68VwC3rkOiVmafiWeoQORYgI0A/edit"
+sheet = "15_MODEL_INTERFACES"
+range = "A233:I233"
+canon_status = "WORKING"
+source_id = "IGN-WAY-ATT"
+cross_ranges = ["37_EQUIPMENT_GAP_MATRIX!A5:K58", "08_ROTATING_HABITAT!C10:C40", "98_DECISION_LOG!A132:H132"]
+inspected_on = "2026-10-31"
+notes = "Attitude control check (Claude under the owner's delegation of 2026-10-31): RCS flip, drive trim and alignment, ring gyroscopic moment, CMG crew-shift capacity, gravity gradient bounds."
+
+[sources.fuel_loads]
+workbook = "IGNITION — Wayfarer Science & Engineering Model"
+workbook_id = "18BQQEMXxu3qEw1jKN68VwC3rkOiVmafiWeoQORYgI0A"
+url = "https://docs.google.com/spreadsheets/d/18BQQEMXxu3qEw1jKN68VwC3rkOiVmafiWeoQORYgI0A/edit"
+sheet = "15_MODEL_INTERFACES"
+range = "A234:I234"
+canon_status = "WORKING"
+source_id = "IGN-WAY-F01"
+cross_ranges = ["13_MASS_POSITIONS!A18:I36", "98_DECISION_LOG!A133:H133"]
+inspected_on = "2026-10-31"
+notes = "F01 torus load path and drawdown (Claude under the owner's delegation of 2026-10-31): bipod supports, strut loads and margins, per-cell draw schedule, spine axial load."
+

@@ -47,7 +47,7 @@ def _part(name, m, x0, x1, model, yz=(0.0, 0.0)):
     else:
         rx = rt = 0.0
     ax = m*L**2/12
-    return dict(name=name, m=m, c=((x0+x1)/2, yz[0], yz[1]), I=(rx, rt+ax, rt+ax))
+    return dict(name=name, m=m, c=((x0+x1)/2, yz[0], yz[1]), I=(rx, rt+ax, rt+ax), x=(x0, x1))
 
 
 def dry_parts(s):

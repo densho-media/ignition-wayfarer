@@ -5,7 +5,7 @@ reserve) as three separated cryogens and bring each to the drive's feed run tank
 - Helium-3 (3 K, the hardest cryogen) fills the nine BODY-C3 stations: 9 modules x 3 lobes between the keel lanes of the 13 m body.
 - Hydrogen reaction mass and deuterium (both 20 K) sit in a segmented torus in the Brow's shadow between ring B and the shield truss,
   three vessels with ellipsoidal heads, the gaps on the two docking corridors and the EVA airlock; deuterium in one cell at the end of
-  each vessel behind an insulated common bulkhead, so both species can be loaded and drawn with no lateral moment (B02, mass_model). Two struts per vessel stand on the forward hull collar.
+  each vessel behind an insulated common bulkhead, so both species can be loaded and drawn with no lateral moment (B02, mass_model). Two bipod supports per vessel stand on the forward hull collar (F01).
 - Transfer: the D2 and H2 lines leave the torus aft face, run aft outside the ring sweeps, come down the bypass collar's aft spoke in
   the slot between the radiator blade front and ring A, and run aft in a keel lane to the run tanks. The helium-3 header runs in the
   150 deg lane. The four Feed_Run_Tank_0n ahead of the shadow shield buffer the transfer and condition the feed (the former schematic
@@ -119,15 +119,18 @@ def torus(s):
 
 
 def torus_struts(s):
-    """Two struts per vessel at 1/4 and 3/4 of its arc, radial in the torus mid-plane from the forward hull collar's skin (a frame
-    station under it) to the torus inner face."""
+    """Two supports per vessel at 1/4 and 3/4 of its arc. Each support is a bipod in its azimuth's X-r plane (F01, 2026-10-31): both legs meet
+    at the torus inner face and stand on the forward hull collar skin (frame stations under them), one leg raked aft, one forward, so the
+    torus's inertial load under thrust runs along the legs instead of bending a radial strut."""
     import hull_geometry
-    t = cfg(s)['torus']; tor = torus(s); root = hull_geometry.radius_at(s, tor['x'])+t['strut_root_standoff_m']; out = []
+    t = cfg(s)['torus']; tor = torus(s); out = []
     for j, v in enumerate(tor['vessels'], 1):
         for k, f in enumerate((.25, .75), 1):
-            a = v['a0']+(v['a1']-v['a0'])*f
-            out.append(dict(name=f'Fuel_Torus_Strut_{j}_{k}', a=(tor['x'], root*math.cos(a), root*math.sin(a)),
-                            b=(tor['x'], (tor['R']-tor['a'])*math.cos(a), (tor['R']-tor['a'])*math.sin(a)), radius=t['strut_radius_m'], azimuth=a))
+            a = v['a0']+(v['a1']-v['a0'])*f; apex = (tor['x'], (tor['R']-tor['a'])*math.cos(a), (tor['R']-tor['a'])*math.sin(a))
+            for side, dx in (('Aft', t['strut_aft_dx_m']), ('Fwd', t['strut_fwd_dx_m'])):
+                x = tor['x']+dx; root = hull_geometry.radius_at(s, x)+t['strut_root_standoff_m']
+                out.append(dict(name=f'Fuel_Torus_Strut_{j}_{k}_{side}', a=(x, root*math.cos(a), root*math.sin(a)), b=apex,
+                                radius=t['strut_radius_m'], azimuth=a, vessel=j, side=side))
     return out
 
 
@@ -206,6 +209,9 @@ def check(s):
             errs.append(f'{k}: capacity short by {-m:.0f} m3')
     if r['torus']['ring_b_sweep_clear_m'] < s['habitat']['ring_service_clearance']['min_m']:
         errs.append('torus inside ring B service clearance')
+    aft = min(st['a'][0] for st in torus_struts(s)); import habitat_ring
+    if aft-(max(habitat_ring.centers(s))+habitat_ring.sweep_half(s)) < s['habitat']['ring_service_clearance']['min_m']:
+        errs.append('torus strut foot inside ring B service clearance')
     if t['gap_m'] < t['corridor_keepout_m']:
         errs.append('torus gap narrower than the docking keep-out')
     return errs

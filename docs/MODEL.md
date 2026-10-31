@@ -556,11 +556,35 @@ one large asymmetric mass: a single 110 t deuterium cell put the CG 0.60 m off t
 the four nozzles at 2.6 m. Deuterium therefore sits in one cell at the a1 end of each vessel (arcs 9, 7 and 8°), and each species is
 loaded with zero lateral moment of its own and drawn in the same proportion: the CG stays within 26 mm of the axis for the first 1.5 days
 and on it after that (1.0 % differential thrust against a 5 % allowance). Vessel 3 runs at its 97 % fill limit at departure. The one
-modelled D2 line leaves vessel 3; crossfeed between the vessels is an OPEN plumbing interface. Rings: one person moving between the rings
+modelled D2 line leaves vessel 3; every cell only drains along the burn (F01), so the balance needs a metered outlet per cell, not crossfeed. Rings: one person moving between the rings
 uses the whole 0.1 % momentum tolerance, so the rings run at equal momentum (0.0019 rpm per person) or move 256 kg of ring water per person
 from floor to overhead; a full six-person sector (13.4 t m, 2.4 kN whirl at 4 rpm) is cancelled by 480 kg of water in the other two
 sectors. Spokes carry 404.5 kN axial each at 1.5 g, 453.8 kN with the corridor mass. The simulation rig still reads the centre of mass and
 inertia as OPEN until the owner adopts positions.
+
+## Attitude control check
+
+**WORKING (pass 6, Claude under the owner's delegation of 2026-10-31; S&E 15 OWN-ATT-CHECK-2026-10-31).** `attitude.py` (report
+`references/p1_attitude.json`, `physics.attitude`) puts the B02 inertia under the S02 actuators. A 180° flip on the 20 kN m RCS couple
+(one 100 N jet at each end, 212.5 m apart) takes 44 min at departure and 41 min at burnout, 179 kg of RCS propellant at 300 s (67 kg at
+800 s). During the burn the 26 mm lateral CG offset makes up to 145 kN m (at 36 h): 7 times the RCS couple, and it would fill the CMGs'
+101 kN m s in 0.7 s, so only the drive can hold it, by differential channel thrust (1 % used of the 5 % allowance). What is left of that
+authority bounds the drive's thrust-axis alignment to ±0.043° about the CG line; a 0.1° error alone would need 9 % (a drive requirement,
+not demonstrated). In a flip each ring's 50.4 MN m s turned at 0.14°/s puts about 120–130 kN m on its rotor bearings (internal; the
+counter-rotating pair cancels it, the 0.1 % residual leaves 120 N m on the ship): a bearing load case. The CMGs absorb about two people
+crossing between rings before the rings retrim. Gravity gradient at the station (orbit not released, B04): in LEO at 45° off the local
+vertical it equals the full RCS couple (20 kN m), so a LEO station parks Wayfarer along the local vertical; at GEO it is 83 N m.
+
+## Torus load path (F01)
+
+**WORKING (pass 6, Claude under the owner's delegation of 2026-10-31; S&E 15 OWN-F01-TORUS-LOADS-2026-10-31).** `fuel_loads.py` (report
+`references/p1_fuel_loads.json`, `physics.fuel_loads`). The six radial torus struts would carry the torus's inertial load under thrust in
+bending: 4.9 GPa in a 0.40 m titanium tube against 0.88 GPa yield. Each support is now a bipod in its azimuth's X-r plane: two legs from the
+torus inner face (r 16 m) to the forward collar skin, the aft foot 5.6 m aft of the torus centre (1.8 m outside ring B's sweep), the
+forward foot 4.4 m forward (aft of the shield truss), so the load runs along the legs. Worst support: vessel 1 (134.7 t with a 15 % dry
+tank allowance) at 80 % of the burn, 0.77 MN; its aft leg takes 0.85 MN in compression, a +17 % buckling margin with a 12 mm wall
+(Ti-6Al-4V, ultimate factor 1.4, Euler knockdown 2; all PROTOTYPE). Every torus cell only drains along the balanced burn. The spine carries
+up to 17.7 MN axially at the drive (burnout, 1.46 g), 10.4 MN at ring A and 4.6 MN at the torus.
 
 ## Heat-loop screen
 
