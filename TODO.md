@@ -236,18 +236,13 @@ The earlier Garden 24/24 was a zone screen only. No pressure cutout, port, guard
   hypotensive). Still open: the owner's HOLD on burn-couch hold time and the thrust-reduction trigger (15!A197); suited casualties keep the
   crew tubes (15!A221); ring A port remains a FAIL comparator.
 
-- [ ] **D03 — Establish an independent SP-13 exit. OWNER (pressure architecture).** Study done 2026-10-16: refuge gallery outside
-  the trunk (`studies/d03_sp13_gallery.py`, `references/D03_SP13_GALLERY_2026-10-16.md`): U/A/K PASS, S MARGINAL +0.021 m; no single
-  fault in the studied cases leaves SP-13 without an exit. Owner 2026-10-17 (15!A199, 98!A110): the side gallery is the preferred L2
-  TOPOLOGY STUDY (no cutout, not an installed pressure facility). Next: model the pressure volumes and two distinct closures; compare a
-  shielded stepped/offset dogged refuge closure with an isolation antechamber (storm shielding not weakened); jam and depressurization
-  single faults; carrier and swept-ladder sweeps; 1.5 g steep/shaft portions as ladder + protected fall arrest + hoist-only casualty
-  carrier; positively dogged leaf versus guided parallel plug; 80 kPa both polarities as analysis input. Original scope: Follow S&E 15 A177/A178:
-  compare a destination/bypass outside the shared single trunk, with pressure partition and jam-tolerant dogged closure. Include
-  opposite-side operation, complete carriers, manual recovery and single faults. Reuse `EVA3_SP13_L1A_REDLINES.md` and
-  `studies/eva3_sp13_l1a.py`; SP-12 N2 fwd45 is only MARGINAL +0.044 m and a jam blocks SP-13 by −0.373 m.
-  **Done when:** selected topology gives independent usable egress under the required fault cases and owner approves any changed
-  pressure architecture. Nominal 80 kPa both ways is an analysis input, not an approved door rating.
+- [ ] **D03 — Build the SP-13 second exit. TOPOLOGY DECIDED 2026-10-31; build AFTER D04's trunk sweep.** Pass 6 (Claude under the
+  owner's delegation, S&E 15 OWN-D03-SP13-EXIT-2026-10-31, `work/` study kept in `references/evidence/d03_sp13_exit_2026-10-31.json`):
+  the 1.20 m side gallery (az 125°, r 3.8 m) ends in an isolation antechamber inside the refuge's water envelope, two pressure-seated
+  plugs seating in opposite directions with equalisation valves and manual overrides from both sides; refuge sealed and shielded in 6 of
+  6 single faults (one stepped closure: 2 of 5), +509 kg. At locked 1.5 g the gallery is a ladder shaft with protected fall arrest.
+  Left: leaf/dog ratings and seals (pressure flight HOLD), the water-jacket stack, routing past survival reserve 1, the suited casualty
+  (MARGINAL +0.021 m), then the built gallery and its sweeps. Nominal 80 kPa both ways is an analysis input, not a door rating.
 
 - [ ] **D04 — Close SP-11/SP-12 and forward-district access. AFTER D03 and applicable D01 loads.** Complete the 1.20 m sliding-plug,
   limp-casualty, transfer/hoist, one-handed and fault cases. Carry L1-A 205/210° and CB2J6 stile through the full route and load review;

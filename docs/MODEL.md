@@ -1849,7 +1849,8 @@ accessibility review stays OPEN (49 NAV-019). Audit, library decision and stages
   under the same worst-case sweep: a 0.20 / 0.40 m deeper chamber lifts the unsuited annulus legs to MARGINAL +0.012 / +0.033 m; with the 0.40 m chamber, the trunk ladder and arrest rail joggled 30° or cut above the port window (PROTOTYPE, in-memory) lift the unsuited trunk legs A1 / A2 / A3 to −0.033…−0.050 m, still FAIL, limited by the cut rail end, trunk handrail 2 and the port rim; a couch-side transfer space (litter alongside the couch, Lab_Bench relocated) removes the Medical_Couch limit; the suited casualty fails every leg (−0.113 to −0.344 m; best −0.114…−0.169 m); with the cut 1.00 m above the port, trunk handrail 2 cut and
   the tube floor-ladder-2 arrest rails folded, A1 unsuited reaches MARGINAL +0.012 m and the 1.60 m port rim alone limits the spin-port turn
   (−0.013 m unsuited, −0.165…−0.169 m suited); rail, stile, bracket and couch ratings stay OPEN; a port wider than the 1.6 m trunk is not buildable without a trunk-side flare); B3H2 links stay ≤ 0.206 m;
-  the SP-13 side gallery is the preferred L2 topology study (no cutout, no pressure facility).
+  the SP-13 side gallery is the preferred L2 topology study (no cutout, no pressure facility); pass 6 (2026-10-31) chose its refuge end:
+  an isolation antechamber with two opposite-seating pressure plugs (refuge sealed and shielded in 6 of 6 single faults), not yet built.
   The M3 trade (`studies/ringb_rescue_trade.py`, references/RINGB_RESCUE_TRADE_2026-10-12.md, a study, nothing released) finds:
   - ring B's 0.9 m port is set by hub 1's forward cartridge withdrawal path, and a 1.6 m port needs 0.70 m of it;
   - a ring stop means both rings, since one ring stopped leaves 1000 times the allowed residual momentum;
