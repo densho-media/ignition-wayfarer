@@ -128,7 +128,9 @@ def torus_struts(s):
         for k, f in enumerate((.25, .75), 1):
             a = v['a0']+(v['a1']-v['a0'])*f; apex = (tor['x'], (tor['R']-tor['a'])*math.cos(a), (tor['R']-tor['a'])*math.sin(a))
             for side, dx in (('Aft', t['strut_aft_dx_m']), ('Fwd', t['strut_fwd_dx_m'])):
-                x = tor['x']+dx; root = hull_geometry.radius_at(s, x)+t['strut_root_standoff_m']
+                x = tor['x']+dx; hull = hull_geometry.radius_at(s, x); rise = tor['R']-tor['a']-hull
+                # a raked leg's round end dips toward the skin by radius * sin(rake): lift the foot by that much
+                root = hull+t['strut_root_standoff_m']+t['strut_radius_m']*abs(dx)/math.hypot(dx, rise)
                 out.append(dict(name=f'Fuel_Torus_Strut_{j}_{k}_{side}', a=(x, root*math.cos(a), root*math.sin(a)), b=apex,
                                 radius=t['strut_radius_m'], azimuth=a, vessel=j, side=side))
     return out

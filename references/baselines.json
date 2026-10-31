@@ -1,6 +1,6 @@
 {
   "purpose": "Current production geometry baseline for tools/pipeline.py fingerprint diffs. Written only by `tools/workflow.py baseline`.",
-  "current": "references/baseline_baseline_pass5_torus_eclss",
+  "current": "references/baseline_pass6_torus_bipods",
   "history": [
     {
       "baseline": "references/baseline_fwd_eye_r30_hex",
@@ -29,6 +29,10 @@
     {
       "baseline": "references/baseline_pass4_door_eclss",
       "replaced_utc": "2026-10-31T12:03:27Z"
+    },
+    {
+      "baseline": "references/baseline_baseline_pass5_torus_eclss",
+      "replaced_utc": "2026-10-31T14:16:45Z"
     }
   ]
 }
