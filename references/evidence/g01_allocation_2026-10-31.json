@@ -1,0 +1,258 @@
+{
+ "task": "G01 equipment-to-space allocation",
+ "date": "2026-10-31",
+ "status": "WORKING (Claude under the owner's delegation of 2026-10-31)",
+ "sources": [
+  "S&E 37_EQUIPMENT_GAP_MATRIX!A5:L58",
+  "38_SURVIVAL_REQUIREMENTS!A5:P37",
+  "41_SURVIVAL_RESOURCES (data/life_support.toml)",
+  "mass_model.dry_parts (B02)"
+ ],
+ "legend": {
+  "INSTALLED_PROXY": "a proxy is built in the model in its space",
+  "SPACE_ALLOCATED": "the space is in the model, the hardware is not",
+  "UNALLOCATED": "no space in the model"
+ },
+ "counts": {
+  "INSTALLED_PROXY": 7,
+  "SPACE_ALLOCATED": 8,
+  "UNALLOCATED": 2
+ },
+ "allocations": [
+  {
+   "area": "ECLSS air and water trains",
+   "ids": [
+    "H04",
+    "S02",
+    "S05"
+   ],
+   "model_space": "Garden ECLSS string per Garden sector, both rings (Prod_RA3_GDN_ECLSS, Prod_RB3_GDN_ECLSS; CO2 scrub, O2 gen, water, Sabatier, trace)",
+   "mass_owner": "life_support_garden_medical (ring shares)",
+   "utilities": "Garden overhead service lines ending on the units; 1.7 kW electrolysis per string",
+   "service_path": "unit fronts from the sector aisle (ECLSS bay recess)",
+   "status": "INSTALLED_PROXY",
+   "next": "G02: unit masses, volumes and powers beyond electrolysis; 98 % water recovery not achieved (38 S05)"
+  },
+  {
+   "area": "Stored O2 / buffer gas and pressure control",
+   "ids": [
+    "S03"
+   ],
+   "model_space": "none in the model; candidate: stationary guarded utility beside the refuge in the forward collar",
+   "mass_owner": "life_support_garden_medical",
+   "utilities": "refuge distribution OPEN",
+   "service_path": "from the trunk / refuge port",
+   "status": "UNALLOCATED",
+   "next": "G02: bottle farm from the 41 72 h case (O2 30.24 kg for 12) plus leak-makeup reserve; keep clear of Crown magazines and cryogenic fuel"
+  },
+  {
+   "area": "Storm refuge and its life support",
+   "ids": [
+    "H03",
+    "S01",
+    "S19",
+    "S22"
+   ],
+   "model_space": "Crew_Refuge_Port X 95.55 m off the trunk; stationary refuge rated for 12, 20 t refuge water; survival battery packs forward beside it",
+   "mass_owner": "water_radiation_shielding@refuge; power_computers_steering_comms",
+   "utilities": "survival packs; refuge ECLSS cartridge loop OPEN",
+   "service_path": "trunk tee 3.85 m aft of the junction",
+   "status": "SPACE_ALLOCATED",
+   "next": "G02: refuge cartridge loop, O2, water, dosimetry, comms, first-response kit; D03 second exit"
+  },
+  {
+   "area": "Fire, smoke and decompression isolation",
+   "ids": [
+    "H10",
+    "S04"
+   ],
+   "model_space": "0.75 x 2.00 m sector doors with the CIRC-C7 portal collars; fire and smoke detection panel above each door; drum hatches",
+   "mass_owner": "habitat_pressure_structure; life_support_garden_medical",
+   "utilities": "detection panels on the sector bus; suppression media OPEN",
+   "service_path": "per sector door and drum",
+   "status": "SPACE_ALLOCATED",
+   "next": "G02: suppression media, backup breathing equipment, closing valves in the ducts"
+  },
+  {
+   "area": "Wet and dry waste",
+   "ids": [
+    "S06",
+    "S07"
+   ],
+   "model_space": "SP-46 sealed waste collection point (ring A workbench cabinet, door and filter); no processing bay",
+   "mass_owner": "workshop_spares_cargo; life_support_garden_medical",
+   "utilities": "exhaust and odour filter OPEN",
+   "service_path": "work sector aisle",
+   "status": "SPACE_ALLOCATED",
+   "next": "G03: compactor/dryer and quarantine in an isolated waste bay with its own exhaust; retained-mass ledger (S07)"
+  },
+  {
+   "area": "Food and Garden",
+   "ids": [
+    "H05",
+    "S08",
+    "S09",
+    "S10"
+   ],
+   "model_space": "Garden racks (8 m2 trays) and mess in both rings; incubator on the ring A lab shelf; packaged food stowage not placed",
+   "mass_owner": "food_consumables (ring shares, r 25 m)",
+   "utilities": "grow lights; nutrient water circuits OPEN",
+   "service_path": "Garden aisle",
+   "status": "SPACE_ALLOCATED",
+   "next": "G02: 52 m3 packaged food stowage and the cold chain; owner gate: the 10 t food category runs out on day 1,093 (shortfall 10 t)"
+  },
+  {
+   "area": "Medical",
+   "ids": [
+    "H06",
+    "S23",
+    "S26"
+   ],
+   "model_space": "medical couch and stowage in ring A sector 2 (work/medical), ring B mirror; burn couches; refuge basic kit not placed",
+   "mass_owner": "life_support_garden_medical",
+   "utilities": "sector bus",
+   "service_path": "in-sector care stations (D02 closed)",
+   "status": "INSTALLED_PROXY",
+   "next": "G02: diagnostics, sterilisation and sample storage packaging; refuge first-response kit"
+  },
+  {
+   "area": "Workshop, fabrication and spares",
+   "ids": [
+    "H07",
+    "H11",
+    "S14",
+    "S29"
+   ],
+   "model_space": "engineering benches with tool shadow boards, contained fabrication cell on the workbench (ring A/B work sectors); spares stock not placed",
+   "mass_owner": "workshop_spares_cargo (body X 54.5-81.25 m)",
+   "utilities": "bench power and extraction OPEN",
+   "service_path": "work sector; SP-45 storeroom for tools only",
+   "status": "SPACE_ALLOCATED",
+   "next": "G03: spares stock and machine bays after the equipment release (S&E 42 candidates stay studies); shield repair stock (S29) with I/F12"
+  },
+  {
+   "area": "General storeroom",
+   "ids": [
+    "H12",
+    "S28"
+   ],
+   "model_space": "SP-45 general storeroom (30 m3 net) on the stationary structure",
+   "mass_owner": "workshop_spares_cargo (subset)",
+   "utilities": "lighting, ventilation and fire detection loads OPEN",
+   "service_path": "aft-down entrance (verify in G03)",
+   "status": "INSTALLED_PROXY",
+   "next": "G03: verify its aft-down entrance; utilities"
+  },
+  {
+   "area": "Seraph dock and niche",
+   "ids": [
+    "H08",
+    "S27"
+   ],
+   "model_space": "Seraph console post and reserved niche/alcove in ring A (Q51), dimensions OPEN",
+   "mass_owner": "power_computers_steering_comms; workshop_spares_cargo",
+   "utilities": "charging and data rail; thermal OPEN",
+   "service_path": "ring aisle",
+   "status": "SPACE_ALLOCATED",
+   "next": "G02/F03: dock charger power and thermal"
+  },
+  {
+   "area": "EVA airlock, suits and exterior routes",
+   "ids": [
+    "H09",
+    "S16",
+    "S15"
+   ],
+   "model_space": "EVA airlock and two docking ports on the stationary structure; guided-EVA rail on the forward collar; drone stations and spine crawler rails",
+   "mass_owner": "main_structure; workshop_spares_cargo",
+   "utilities": "suit charging and O2 OPEN",
+   "service_path": "SP-11/12/13 access (D03/D04)",
+   "status": "INSTALLED_PROXY",
+   "next": "G03: SP-49 suit support (charging, O2, pressure test) after D04"
+  },
+  {
+   "area": "Comms and navigation",
+   "ids": [
+    "F14",
+    "F15",
+    "S21",
+    "S32"
+   ],
+   "model_space": "two 4 m Ka dishes and a 0.5 m optical terminal aft of the blades; three star trackers with sun sensors at X 20 m; Eye survival trackers; ops screens",
+   "mass_owner": "power_computers_steering_comms; eye_sensors",
+   "utilities": "independent harness for the RF distress beacon OPEN",
+   "service_path": "exterior service routes",
+   "status": "INSTALLED_PROXY",
+   "next": "S02 owner answers (rate, band, aperture); black-box rack in the refuge/ops (G02)"
+  },
+  {
+   "area": "Attitude control",
+   "ids": [
+    "F16",
+    "F17",
+    "S20"
+   ],
+   "model_space": "three aft and four rim RCS pods; six CMGs on the body utility frames",
+   "mass_owner": "power_computers_steering_comms",
+   "utilities": "RCS feed from internal bottles: bottles not placed",
+   "service_path": "body equipment bay",
+   "status": "SPACE_ALLOCATED",
+   "next": "S02: RCS bottles from the pass 6 attitude check (179 kg per 44 min flip at Isp 300); drive thrust-axis alignment 0.04 deg (B01/F04 drive)"
+  },
+  {
+   "area": "Power, black start and survival battery",
+   "ids": [
+    "S18",
+    "S19",
+    "S30"
+   ],
+   "model_space": "main 2 MWh battery and 200 kWh pulse bank in the keel lanes aft; survival packs forward beside the refuge",
+   "mass_owner": "power_computers_steering_comms",
+   "utilities": "dual buses and load shedding OPEN",
+   "service_path": "keel lanes",
+   "status": "INSTALLED_PROXY",
+   "next": "F03: capacity, endurance and the drive-off energy source (owner gate S30)"
+  },
+  {
+   "area": "Warm/cold rejection and heat buffer",
+   "ids": [
+    "S11",
+    "S12",
+    "A10"
+   ],
+   "model_space": "not placed (hot blades only)",
+   "mass_owner": "radiators_thermal",
+   "utilities": "warm/cold loops OPEN",
+   "service_path": "-",
+   "status": "UNALLOCATED",
+   "next": "F02 owner gate (view factors, loop temperatures)"
+  },
+  {
+   "area": "Cryogenic tank cooling and vents",
+   "ids": [
+    "S17",
+    "A08"
+   ],
+   "model_space": "cryocoolers on the body utility frames; torus and body tanks with transfer lines",
+   "mass_owner": "drive_package; radiators_thermal",
+   "utilities": "vent safe arcs OPEN",
+   "service_path": "keel lanes; torus exterior",
+   "status": "INSTALLED_PROXY",
+   "next": "F01/F02: boil-off and vent arcs"
+  },
+  {
+   "area": "High-thrust protocol, acoustic isolation, casualty extraction",
+   "ids": [
+    "S24",
+    "S25",
+    "S31"
+   ],
+   "model_space": "burn couches, ladders and fall-arrest rails; ring circulation doors; D02 care coverage closed as PROTOTYPE",
+   "mass_owner": "habitat_pressure_structure; main_structure",
+   "utilities": "-",
+   "service_path": "all travel paths",
+   "status": "SPACE_ALLOCATED",
+   "next": "D03-D06 (exits, closures), K02 (hatch step); S24 mounts in G02"
+  }
+ ]
+}

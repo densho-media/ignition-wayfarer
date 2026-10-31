@@ -586,6 +586,15 @@ tank allowance) at 80 % of the burn, 0.77 MN; its aft leg takes 0.85 MN in compr
 (Ti-6Al-4V, ultimate factor 1.4, Euler knockdown 2; all PROTOTYPE). Every torus cell only drains along the balanced burn. The spine carries
 up to 17.7 MN axially at the drive (burnout, 1.46 g), 10.4 MN at ring A and 4.6 MN at the torus.
 
+## Equipment-to-space allocation (G01)
+
+**WORKING (pass 6, Claude under the owner's delegation of 2026-10-31; S&E 15 OWN-G01-ALLOCATION-2026-10-31).** The in-scope rows of S&E 37
+(H04–H12, F14–F17, A08, A10) and 38 (S01–S32) map to 17 allocation areas in `references/evidence/g01_allocation_2026-10-31.json`, each
+with its model space, B02 mass owner, utilities, service path and next step. 7 areas have a proxy installed in their space (ECLSS strings,
+medical, SP-45 storeroom, EVA and exterior routes, comms and navigation, power stores, cryocoolers), 8 have a space without hardware
+(refuge, fire isolation, waste, food, workshop spares, Seraph dock, attitude bottles, high-thrust/casualty paths), and 2 have no space:
+the O2/buffer-gas store (G02) and the warm/cold rejectors (F02, owner). The missing hardware is listed under G02 and G03 in TODO.
+
 ## Heat-loop screen
 
 **Y155 radiator material scenario (owner 2026-10-17, OWN-RAD-Y155; 40!A110:F123, 98!A108, Technology 01!A20 T17).** An opt-in comparison,

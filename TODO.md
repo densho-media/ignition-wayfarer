@@ -312,22 +312,23 @@ packet (Q_src, T_src; H2 mdot, p, T, phase, enthalpy in/out; field/plume/dose ke
 Owner scope: S&E 12A, 33–39, 41–42, existing room/recovery reviews. The 42 equipment groups and 32 survival groups overlap; map each
 physical item once, reuse existing envelopes and do not fund components twice. No automatic factory or mining hardware release.
 
-- [ ] **G01 — Complete the equipment-to-space and resource allocation. AFTER B02; coordinate D/F.** Map owner-required ECLSS,
-  refuge, food/water, waste, medical, comms/attitude, repair and stores to existing spaces, mass owners, utilities and service paths.
-  Use existing source/readback tables, not a new tracking framework. **Done when:** each in-scope requirement has a released installed
-  allocation or a named unresolved owner gate; actual missing hardware is split into bounded steps G02–G04 before modeling it.
-  An unresolved allocation keeps its dependent installation step open.
-
-- [ ] **G02 — Integrate life support and refuge equipment. AFTER G01/D06/F02/F03 and capacity releases.** Complete air/CO2/gas reserves,
+- [ ] **G02 — Integrate life support and refuge equipment. AFTER D06/F02/F03 and capacity releases.** Complete air/CO2/gas reserves,
   water recovery, food preservation/Garden support, waste isolation, medical access, alarm/comms/fire protection and independent
   refuge support. **Done when:** required capacity/endurance is owner-supported, equipment and utility access fit, pressure/fault
   isolation is represented and no protection credit is inferred from a visual envelope.
+  G01 allocation (2026-10-31, `references/evidence/g01_allocation_2026-10-31.json`) splits this into: ECLSS unit masses/powers and 98 %
+  water recovery; an O2/buffer-gas bottle farm beside the refuge (none placed; 41 72 h case O2 30.24 kg for 12); the refuge cartridge
+  loop, water, dosimetry, comms and first-response kit; suppression media and backup breathing; 52 m³ packaged food stowage and cold
+  chain (owner gate: the 10 t food category runs out on day 1,093); medical diagnostics and sample storage; Seraph dock power (with F03);
+  machinery mounts (S24); a black-box rack in the refuge/ops.
 
-- [ ] **G03 — Integrate selected workshop and service district. AFTER G01/D04/F02/F03 and equipment release.** Package approved
+- [ ] **G03 — Integrate selected workshop and service district. AFTER D04/F02/F03 and equipment release.** Package approved
   machine shop, contained process cell, spares/stock, waste and SP-49 support within the existing non-additive budgets. Preserve
   contamination/pressure separation and SP-45's general-storeroom role; verify its aft-down entrance.
   **Done when:** selected equipment, stock, access and utilities fit and their source allocations close. S&E 42 fabrication/mining
   candidates remain studies until actually selected; no full industrial plant implied by the workshop proxy.
+  G01 allocation (2026-10-31): the SP-46 sealed waste point exists; a waste bay with compactor/dryer, quarantine and exhaust is not placed;
+  spares stock and machine bays, shield repair stock (S29, with I/F12) and SP-49 suit support (after D04) wait here.
 
 - [ ] **G04 — Validate survival/failure coverage. AFTER G02/G03 and relevant F/H/I.** Reconcile S&E 38 requirements, 39 failure scenarios
   and 41 resource budgets with installed systems, including repair stocks, communications, safe attitude and drive-off endurance.
