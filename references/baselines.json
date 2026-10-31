@@ -1,6 +1,6 @@
 {
   "purpose": "Current production geometry baseline for tools/pipeline.py fingerprint diffs. Written only by `tools/workflow.py baseline`.",
-  "current": "references/baseline_body_equipment",
+  "current": "references/baseline_corridor_portals",
   "history": [
     {
       "baseline": "references/baseline_fwd_eye_r30_hex",
@@ -17,6 +17,10 @@
     {
       "baseline": "references/baseline_baseline_fuel_storage",
       "replaced_utc": "2026-10-30T12:24:21Z"
+    },
+    {
+      "baseline": "references/baseline_body_equipment",
+      "replaced_utc": "2026-10-31T07:43:38Z"
     }
   ]
 }

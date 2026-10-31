@@ -1,7 +1,7 @@
 {
   "result": "PASS",
   "blender": "5.2.2 LTS",
-  "spec_hash": "11da0ad65866ac366aa11099cfa2002c17156c29f191868a2a970c1b736da84a",
+  "spec_hash": "fd78f80750dbe6d66c25b84a711a822045cf941ac7181ba88e83172b32a0e4e5",
   "source_map_hash": "68275db418651cdb78f29fa01c8c2fea9492bd280c07af23f4d1c80d300828ef",
   "configurations": {
     "COAST": {
@@ -111,7 +111,7 @@
         "hull_envelope": 2,
         "generator_proxy": 2,
         "hull_shell": 2,
-        "production_detail": 119,
+        "production_detail": 121,
         "fuel_tank": 31,
         "fuel_support": 33,
         "fuel_transfer_line": 14,
@@ -204,6 +204,7 @@
         "crown_housing_rib": 12,
         "crown_service_hatch": 12,
         "brow_panel_joint": 72,
+        "brow_panel_fixture": 12,
         "crown_shutter": 12,
         "crown_port_cover": 12,
         "crown_carriage": 12,
@@ -417,7 +418,7 @@
         "hull_envelope": 2,
         "generator_proxy": 2,
         "hull_shell": 2,
-        "production_detail": 119,
+        "production_detail": 121,
         "fuel_tank": 31,
         "fuel_support": 33,
         "fuel_transfer_line": 14,
@@ -510,6 +511,7 @@
         "crown_housing_rib": 12,
         "crown_service_hatch": 12,
         "brow_panel_joint": 72,
+        "brow_panel_fixture": 12,
         "crown_shutter": 12,
         "crown_port_cover": 12,
         "crown_carriage": 12,
@@ -723,7 +725,7 @@
         "hull_envelope": 2,
         "generator_proxy": 2,
         "hull_shell": 2,
-        "production_detail": 119,
+        "production_detail": 121,
         "fuel_tank": 31,
         "fuel_support": 33,
         "fuel_transfer_line": 14,
@@ -816,6 +818,7 @@
         "crown_housing_rib": 12,
         "crown_service_hatch": 12,
         "brow_panel_joint": 72,
+        "brow_panel_fixture": 12,
         "crown_shutter": 12,
         "crown_port_cover": 12,
         "crown_carriage": 12,
@@ -1026,7 +1029,7 @@
         "hull_envelope": 2,
         "generator_proxy": 2,
         "hull_shell": 2,
-        "production_detail": 119,
+        "production_detail": 121,
         "fuel_tank": 31,
         "fuel_support": 33,
         "fuel_transfer_line": 14,
@@ -1119,6 +1122,7 @@
         "crown_housing_rib": 12,
         "crown_service_hatch": 12,
         "brow_panel_joint": 72,
+        "brow_panel_fixture": 12,
         "crown_shutter": 12,
         "crown_port_cover": 12,
         "crown_carriage": 12,
@@ -1329,7 +1333,7 @@
         "hull_envelope": 2,
         "generator_proxy": 2,
         "hull_shell": 2,
-        "production_detail": 119,
+        "production_detail": 121,
         "fuel_tank": 31,
         "fuel_support": 33,
         "fuel_transfer_line": 14,
@@ -1422,6 +1426,7 @@
         "crown_housing_rib": 12,
         "crown_service_hatch": 12,
         "brow_panel_joint": 72,
+        "brow_panel_fixture": 12,
         "crown_shutter": 12,
         "crown_port_cover": 12,
         "crown_carriage": 12,
@@ -1632,7 +1637,7 @@
         "hull_envelope": 2,
         "generator_proxy": 2,
         "hull_shell": 2,
-        "production_detail": 119,
+        "production_detail": 121,
         "fuel_tank": 31,
         "fuel_support": 33,
         "fuel_transfer_line": 14,
@@ -1725,6 +1730,7 @@
         "crown_housing_rib": 12,
         "crown_service_hatch": 12,
         "brow_panel_joint": 72,
+        "brow_panel_fixture": 12,
         "crown_shutter": 12,
         "crown_port_cover": 12,
         "crown_carriage": 12,
@@ -1967,7 +1973,7 @@
     },
     "WF_DETAIL_RA2_WRK.blend": {
       "assembly": "RA2.WRK",
-      "objects": 6,
+      "objects": 7,
       "authored": 0,
       "enabled": true
     },
@@ -2003,7 +2009,7 @@
     },
     "WF_DETAIL_RB2_WRK.blend": {
       "assembly": "RB2.WRK",
-      "objects": 6,
+      "objects": 7,
       "authored": 0,
       "enabled": true
     },
@@ -3958,8 +3964,9 @@
       "direct_links": []
     },
     "detail/WF_DETAIL_RA2_WRK.blend": {
-      "generated_objects": 6,
+      "generated_objects": 7,
       "ids": [
+        "RA2.WRK.FAB",
         "RA2.WRK.MEDICAL",
         "RA2.WRK.OPS_1",
         "RA2.WRK.OPS_2",
@@ -4025,8 +4032,9 @@
       "direct_links": []
     },
     "detail/WF_DETAIL_RB2_WRK.blend": {
-      "generated_objects": 6,
+      "generated_objects": 7,
       "ids": [
+        "RB2.WRK.FAB",
         "RB2.WRK.MEDICAL",
         "RB2.WRK.OPS_1",
         "RB2.WRK.OPS_2",
@@ -4461,7 +4469,7 @@
       "direct_links": []
     },
     "subsystems/WF_FORWARD_SHIELD.blend": {
-      "generated_objects": 753,
+      "generated_objects": 765,
       "ids": [
         "Alt_Eye1_Branch_in_120_aft",
         "Alt_Eye1_Branch_in_120_fwd",
@@ -4647,6 +4655,18 @@
         "Brow_Joint_Radial_11_b",
         "Brow_Joint_Radial_12_a",
         "Brow_Joint_Radial_12_b",
+        "Brow_Panel_Fixtures_01",
+        "Brow_Panel_Fixtures_02",
+        "Brow_Panel_Fixtures_03",
+        "Brow_Panel_Fixtures_04",
+        "Brow_Panel_Fixtures_05",
+        "Brow_Panel_Fixtures_06",
+        "Brow_Panel_Fixtures_07",
+        "Brow_Panel_Fixtures_08",
+        "Brow_Panel_Fixtures_09",
+        "Brow_Panel_Fixtures_10",
+        "Brow_Panel_Fixtures_11",
+        "Brow_Panel_Fixtures_12",
         "Bypass_Aft_Spoke_1",
         "Bypass_Aft_Spoke_2",
         "Bypass_Aft_Spoke_3",

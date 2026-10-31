@@ -40,6 +40,20 @@ def resources(root=ROOT):
                 notice=reg['life_support']['notice'], flows=flows, stores=stores)
 
 
+def space_map(root=ROOT):
+    """UJ-010's map: the Space Navigator chart (space_navigator.contract) in its PRESENTATION transform (square-root distances, log glyphs),
+    bodies on one layout ray because no epoch is released; the ship is not placed (its course is drawn as a schematic arrow only)."""
+    import space_navigator as sn
+    c = sn.contract(sn.load(root)); kb = next(r for r in c['regions'] if r['id'] == 'KUIPER_BELT_MAIN')
+    glyph = lambda r_km: round(max(2.0, 3+2.4*math.log10(max(r_km, 1000.0)/1000)), 2)
+    return dict(notice=c['schematic_notice'], disclosure=c['transforms']['PRESENTATION']['disclosure'], a_ref_au=kb['outer_au'],
+                sun_px=glyph(next(b for b in c['bodies'] if b['kind'] == 'star')['radius_km'])/2,
+                bodies=[dict(name=b['name'], a_au=round(b['a_au'], 3), q_au=round(b['perihelion_au'], 3), Q_au=round(b['aphelion_au'], 3),
+                             glyph_px=glyph(b['radius_km'])) for b in c['bodies'] if b['kind'] == 'planet'],
+                region=dict(name=kb['name'], inner_au=kb['inner_au'], outer_au=kb['outer_au']),
+                course='Planned crossing: outward past the Kuiper Belt. Direction and timing schematic (no epoch released).')
+
+
 def stations(s, root=ROOT):
     sp = spin(s); rs = resources(root)
     flow_lines = [f"{label}: {per:.2f} kg per person-day, {total:.1f} kg/day for {rs['consumers']} ({src})" for _, label, per, total, src in rs['flows']]
@@ -144,9 +158,9 @@ def ops_stations(s):
                    show_me=dict(kind='overlay', title='Planned sequence (preview, not live)',
                                 text=['DOCKED: boarding, rings stopped', 'COAST: rings turning, Eyes watching', 'IGNITION: crew at the burn couches, rings managed',
                                       'BURN: drive on, radiators hot', 'COAST: the long crossing'],
-                                note='Preview only. The First Ignition story starts after the visitor has left.'),
-                   sources=[f"mission.target_speed, mission.duration ({m['target_speed']['canon_status']})", 'operating states: S&E 15 Q48', 'Tale 30 UJ-010'],
-                   status='LOCKED mission figures; sequence WORKING; timeline schematic')
+                                note='Preview only. The First Ignition story starts after the visitor has left.', map=space_map()),
+                   sources=[f"mission.target_speed, mission.duration ({m['target_speed']['canon_status']})", 'operating states: S&E 15 Q48', 'Tale 30 UJ-010', 'map: data/space_navigator.toml (NASA fact sheets; SCHEMATIC arrangement)'],
+                   status='LOCKED mission figures; sequence WORKING; timeline and map schematic')
     debrief = dict(id='LS-UJ011-DEBRIEF', journey='UJ-011', title='Debrief before you leave', ring='RING_A', node='Prod_RA2_WRK_Medical', reach_m=2.2,
                    objective='Recap the induction and leave the ship before First Ignition.',
                    instructor='Check-out, then we leave the way we came. The six who stay are the crew; we are not.',
@@ -181,8 +195,8 @@ COVERAGE = [
     ('Crown 12 bays', 'LS-UJ007-AEGIS', 'remote camera'), ('Dust Lance', 'LS-UJ007-AEGIS', 'remote camera'),
     ('3 radiators', 'LS-UJ008-RADIATORS', 'remote camera'), ('reactor / four nozzles', 'LS-UJ009-DRIVE', 'remote camera'),
     ('rings / spine', 'LS-UJ003-SPIN', 'remote camera; physical walk'), ('Garden', 'LS-UJ004-LIFE', 'physical + overlay'),
-    ('mission map', 'LS-UJ010-PREVIEW', 'overlay (SNAV map OPEN)'), ('habitat safety', 'LS-UJ003-SPIN', 'physical'),
-    ('drones', 'LS-UJ014-DRONES', 'remote camera'), ('debrief / departure', 'LS-UJ011-DEBRIEF', 'remote camera; physical egress OPEN'),
+    ('mission map', 'LS-UJ010-PREVIEW', 'overlay + schematic Space Navigator map'), ('habitat safety', 'LS-UJ003-SPIN', 'physical'),
+    ('drones', 'LS-UJ014-DRONES', 'remote camera'), ('debrief / departure', 'LS-UJ011-DEBRIEF', 'remote camera; physical egress (the walk goal turns to the way out)'),
 ]
 
 

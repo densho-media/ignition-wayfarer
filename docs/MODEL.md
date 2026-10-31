@@ -94,7 +94,7 @@ are not modeled; the ring sectors carry only rough PROTOTYPE interior blocking.
   at the aft end), central body 13 m; the rings (~60 m) and the 90 m forward shield
   are wider. The 220–240 m envelope includes the Dust Lance: with the WORKING 12 m
   Lance the ship is 237.0 m overall (225 m body + 12 m, Q2).
-- **Forward defense:** `WF_FORWARD_SHIELD` holds the fixed 90 m conical shield (flat hub to r 7.4 m at X 112.5 m, then a cone sweeping aft by the ~3 m crown depth to X 109.5 m at r 45 m) on a conical truss, one full-diameter sacrificial disruptor layer 2.0 m ahead of it, the four EYE facets recessed in protected wells in the flat hub, the Dust Lance, an elongated display-only diversion-field zone, damage/repair display cells and the concealed Aegis Dustbreak Crown (12 sector bays in the rim, shuttered in every preset). One normalized control, `FORWARD_DEFENSE_CTRL`, drives the field zone, damage, repair and Crown engagement. Rear construction (M4 slice 3, `forward_shield.rear_construction`, PROTOTYPE judgment): a gusset plate at every truss node in its spoke's plane, a dark rib on each Crown bay partition and one ochre service hatch per bay on the housing aft plate (the ring service-cover ochre), and (S04 slice 2, `brow_panel_joints`) the Brow's replaceable-panel joints as dark grooves on the skin's aft face: radial joints 10° either side of every spoke, splitting each truss bay into thirds, and hoop joints midway between the truss rings at r 11.2, 20, 30 and 38 m, broken round each spoke's forward chord. All of it stays inside the truss envelope (`rear_construction_screen`); joint, rib and hatch sizing and the carriage service path are OPEN.
+- **Forward defense:** `WF_FORWARD_SHIELD` holds the fixed 90 m conical shield (flat hub to r 7.4 m at X 112.5 m, then a cone sweeping aft by the ~3 m crown depth to X 109.5 m at r 45 m) on a conical truss, one full-diameter sacrificial disruptor layer 2.0 m ahead of it, the four EYE facets recessed in protected wells in the flat hub, the Dust Lance, an elongated display-only diversion-field zone, damage/repair display cells and the concealed Aegis Dustbreak Crown (12 sector bays in the rim, shuttered in every preset). One normalized control, `FORWARD_DEFENSE_CTRL`, drives the field zone, damage, repair and Crown engagement. Rear construction (M4 slice 3, `forward_shield.rear_construction`, PROTOTYPE judgment): a gusset plate at every truss node in its spoke's plane, a dark rib on each Crown bay partition and one ochre service hatch per bay on the housing aft plate (the ring service-cover ochre), and (S04 slice 2, `brow_panel_joints`) the Brow's replaceable-panel joints as dark grooves on the skin's aft face: radial joints 10° either side of every spoke, splitting each truss bay into thirds, and hoop joints midway between the truss rings at r 11.2, 20, 30 and 38 m, broken round each spoke's forward chord. Every replaceable panel carries two ochre handling fixtures on its centre line (S04 2026-10-31, `brow_panel_fixtures`: a post and a target flange at a quarter and three quarters of each hoop band, off the truss rings, 0.30 m from every truss member; 216 in all) so the Brow crawler or the crew can lift a panel out and set a new one in; grip interface and loads OPEN. All of it stays inside the truss envelope (`rear_construction_screen`); joint, rib and hatch sizing and the carriage service path are OPEN.
 - **Structure and thermal:** a 12-node thrust ring and three longitudinal trussed
   thermal blades (the BASELINE production direction), each the owner's equivalent
   rectangle 182.149 × 30.5 m between r 6.5 and 37 m with root booms and four bay stays.
@@ -1264,6 +1264,9 @@ record (`references/modules/<pack>.json`); docs/MODULES.md. Every production ass
   bezel and an "OPS k" number per chair on the display wall and a keyboard on the desk (one exported node per station, `Ops_1–3`);
   chest and thigh restraint straps over the medical mattress; a drawer-line front, the red cross and a MEDICAL label on the medical
   stowage; on both tool walls a shadow board of outlined tools with each tool on a tether, and a maintenance tag (`Tools_<bench>`).
+  On the workbench (S05, 2026-10-31) a contained fabrication cell (`Fab`): a sealed cabinet for the printer or mill with a window and two
+  glove ports facing the aisle, ducted to a HEPA / carbon filter box beside it with an ochre cartridge cover, so spares are made without an
+  open process in the cabin. Machine, power and stock OPEN (G03).
 - `rb_fitout` (RB1.BRT, RB2.WRK, RB3.GDN, L4_VISUAL_CANDIDATE): ring B's three sectors take ring A's berth, work/medical/ops and
   Garden/mess passes by one definition (ring A's builders and checks, names RB*, berth numbers B1-k); every crew member keeps a berth,
   mug and cubby in each ring in the same colour, so a lost ring costs no one their place.
@@ -1358,8 +1361,14 @@ renders `presentation/circulation_preview.py` (whole ring with the fill cut away
   sector deck plate's edge (r 28.152 m): the threshold is flush and the corridor is level in spin gravity (0.504 g). Inside the liner
   0.15 m of utilities over the ceiling and under the deck; the tunnel cut in the fill keeps 0.10 m round the liner. The fill's
   construction (`habitat_ring.frame_mesh`) is split round the tunnel: the web frames become portals and the spoke-node housing splits
-  round it. Light strips every 3 m (the route's cabin light class) and a handrail on the forward wall. Shirt-sleeve only: suited crew
+  round it; each cut frame is a portal with a collar lining the opening (0.06 m, 0.08 m at the node; CIRC-C7 hand check:
+  the 1.5 g spoke load's torque on the ring box, 405 kN at 2.75 m, gives 116 MPa in the collar against a 200 MPa PROTOTYPE working stress;
+  `ring_circulation.portal_check`, FEA OPEN). Light strips every 3 m (the route's cabin light class) and a handrail on the forward wall. Shirt-sleeve only: suited crew
   keep the crew tubes.
+- **Casualty route.** The corridor is the ring's inter-sector casualty route (D02 study 2026-10-31,
+  `references/evidence/d02_coverage_2026-10-30.md`): a rigid carrier, preferably the vacuum mattress, is stood upright over its foot in
+  the door band, turned and lowered along it, carried through the doors and corridor, and slid sideways to the garden sector's fold-down
+  care couch. No bend is needed. Worst point +0.028 m for the rigid litter in the 0.65 m door band (MARGINAL); suited casualties do not fit.
 - **Interior language.** The corridors take the sectors' scheme A grammar (`ring_circulation.fitout`, depiction only): the sector deck
   and overhead finishes, flush dark frame strips across walls and ceiling at the sectors' 0.70 m overhead-frame pitch, the blue route
   band along the floor by the forward wall and safety-orange trim round both faces of every door opening. In the runtime each door

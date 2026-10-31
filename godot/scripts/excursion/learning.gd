@@ -13,6 +13,8 @@ var step := 0                     # 0 WHAT, 1 WHY, 2 SHOW ME
 var done := {}                    # station id -> true once its SHOW ME was seen
 var panel := PanelContainer.new()
 var text := RichTextLabel.new()
+var map := Control.new()           # UJ-010's schematic Space Navigator map, drawn under the text while that SHOW ME is open
+var map_doc := {}
 var host: Node = null
 
 func _init(by_name: Dictionary, layer: CanvasLayer, owner: Node, manifest: Dictionary) -> void:
@@ -43,7 +45,15 @@ func _init(by_name: Dictionary, layer: CanvasLayer, owner: Node, manifest: Dicti
 	text.custom_minimum_size = Vector2(520, 0)
 	text.add_theme_font_size_override("normal_font_size", 15)
 	text.add_theme_font_size_override("bold_font_size", 16)
-	panel.add_child(text)
+	var box := VBoxContainer.new()
+	box.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	box.add_child(text)
+	map.custom_minimum_size = Vector2(520, 230)
+	map.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	map.visible = false
+	map.draw.connect(_draw_map)
+	box.add_child(map)
+	panel.add_child(box)
 	panel.visible = false
 	layer.add_child(panel)
 
@@ -127,7 +137,7 @@ func update(p: Vector3, zone: String, size: Vector2) -> void:
 	if in_reach(p, zone) != open:
 		close()
 		return
-	panel.position = Vector2(size.x - panel.size.x - 18.0, 262.0)
+	panel.position = Vector2(size.x - panel.size.x - 18.0, clampf(size.y - panel.size.y - 18.0, 18.0, 262.0))     # a tall panel (the map) moves up
 
 func next_label() -> String:
 	return "close" if step == 2 else STEPS[step + 1]
@@ -158,8 +168,49 @@ func _render() -> void:
 			for l in sm["text"]:
 				out.append("· " + str(l))
 			out.append("[color=#9fb4d0]%s[/color]" % sm["note"])
+	map_doc = rec["show_me"].get("map", {}) if step == 2 else {}
+	map.visible = not map_doc.is_empty()
+	map.queue_redraw()
 	out.append("")
 	out.append("[font_size=12][color=#8090a0]Sources: %s. Status: %s.[/color][/font_size]" % ["; ".join(rec["sources"]), rec["status"]])
 	text.text = "\n".join(out)
 	panel.visible = true
 	panel.reset_size()
+
+## The Sun at the left, orbits as arcs on the PRESENTATION transform (r = R sqrt(a / a_ref)), the planets on one layout ray (no epoch:
+## SCHEMATIC), the Kuiper Belt band and the ship's course as an arrow, with the chart's notice and disclosure.
+func _draw_map() -> void:
+	if map_doc.is_empty():
+		return
+	var sz := map.size
+	var o := Vector2(14.0, sz.y * 0.5)
+	var R := sz.x - 40.0
+	var aref := float(map_doc["a_ref_au"])
+	var font := ThemeDB.fallback_font
+	var r_of := func(a: float) -> float: return R * sqrt(a / aref)
+	var half_h := sz.y * 0.5 - 30.0   # arcs stay between the notice and the course lines
+	var span_of := func(r: float) -> float: return asin(minf(1.0, half_h / maxf(r, 1.0))) if r > half_h else 0.9
+	var kb: Dictionary = map_doc["region"]
+	var k0: float = r_of.call(float(kb["inner_au"]))
+	var k1: float = r_of.call(float(kb["outer_au"]))
+	for k in 12:
+		var rk: float = lerp(k0, k1, (k + 0.5) / 12.0)
+		map.draw_arc(o, rk, -span_of.call(rk), span_of.call(rk), 48, Color(0.55, 0.62, 0.78, 0.10), (k1 - k0) / 12.0)
+	map.draw_string(font, o + Vector2(k0 + 4.0, -half_h + 12.0), str(kb["name"]), HORIZONTAL_ALIGNMENT_LEFT, -1, 11, Color(0.70, 0.76, 0.88))
+	var lane := 0
+	for b in map_doc["bodies"]:
+		var r: float = r_of.call(float(b["a_au"]))
+		map.draw_arc(o, r, -span_of.call(r), span_of.call(r), 48, Color(0.45, 0.55, 0.72, 0.65), 1.0)
+		var p := o + Vector2(r, 0.0)
+		map.draw_circle(p, float(b["glyph_px"]) * 0.5, Color(0.85, 0.88, 0.95))
+		map.draw_string(font, p + Vector2(-14.0, 18.0 + 11.0 * (lane % 2)), str(b["name"]), HORIZONTAL_ALIGNMENT_LEFT, -1, 10, Color(0.75, 0.80, 0.90))
+		lane += 1
+	map.draw_circle(o, float(map_doc["sun_px"]) * 1.6, Color(1.0, 0.85, 0.45))
+	var a0 := o + Vector2(R * 0.18, -half_h * 0.55)
+	var a1 := o + Vector2(R + 22.0, -half_h * 0.80)
+	map.draw_dashed_line(a0, a1, Color(1.0, 0.82, 0.48), 2.0, 8.0)
+	var d := (a1 - a0).normalized()
+	map.draw_colored_polygon(PackedVector2Array([a1 + d * 6.0, a1 - d * 8.0 + d.orthogonal() * 6.0, a1 - d * 8.0 - d.orthogonal() * 6.0]), Color(1.0, 0.82, 0.48))
+	map.draw_string(font, Vector2(6.0, 14.0), str(map_doc["notice"]), HORIZONTAL_ALIGNMENT_LEFT, -1, 12, Color(1.0, 0.70, 0.45))
+	map.draw_string(font, Vector2(6.0, sz.y - 22.0), str(map_doc["course"]), HORIZONTAL_ALIGNMENT_LEFT, sz.x - 12.0, 10, Color(1.0, 0.85, 0.60))
+	map.draw_string(font, Vector2(6.0, sz.y - 8.0), str(map_doc["disclosure"]), HORIZONTAL_ALIGNMENT_LEFT, sz.x - 12.0, 10, Color(0.62, 0.68, 0.80))

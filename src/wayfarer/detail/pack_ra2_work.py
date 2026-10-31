@@ -4,7 +4,8 @@ Built in the sector frame (+X axial, +Y radially outward = down in spin, +Z tang
 WF_HABITAT links at the sector instance (1, 2). The whitebox blocks stay as they are; this pack dresses them below the overhead band (the
 trays of ra2_equip keep the band): one ops screen per chair on the display wall with its station number and a keyboard on the desk;
 restraint straps over the medical mattress; a drawer-front pattern, the red-cross mark and a MEDICAL label on the medical stowage; and on
-both tool walls a shadow board of outlined tool silhouettes with each tool held in front of its outline by a tether. Owned with
+both tool walls a shadow board of outlined tool silhouettes with each tool held in front of its outline by a tether; on the workbench a
+contained fabrication cell with its filter box (S05). Owned with
 data/detail/ra2_work.toml.
 """
 import production_detail as pd
@@ -74,6 +75,21 @@ def work_elements(s):
             a, b = (xc, lo_y-.005, zw+d), (xc, lo_y-.005, zw+td+.01)
             out.append(pd.element(ASM, f'Tools_{bench}', f'RA2_{bench}_Tether_{tool}', 'ra2_tether', F, 'tool tether', *pd.rod(a, b, q['tether_r_m'], 6)))
         out.append(slab(f'RA2_{bench}_Maint_Tag', f'Tools_{bench}', 'safety_orange', ART, 'Bolt-Sworn maintenance tag (last calibration card)', (xs1-.10, -1.95, zw), (xs1-.02, -1.84, zw+d)))
+    # S05 workshop and fabrication (2026-10-31): a contained fabrication cell on the workbench (sealed cabinet, window and glove ports facing
+    # the aisle) recirculating through a HEPA / carbon filter box beside it; spares are made here, never an open process in the cabin.
+    top = P['Workbench.Top']; yb = top['min'][1]; (x0, x1), (z0, z1), h = q['fab_x_m'], q['fab_z_m'], q['fab_h_m']; wt = q['fab_wall_m']
+    out.append(slab('RA2_Fab_Cell', 'Fab', 'ra2_fab_body', F, 'contained fabrication cell (sealed cabinet: printer / mill, PROTOTYPE)', (x0, yb-h, z0), (x1, yb, z1), .01))
+    out.append(slab('RA2_Fab_Window', 'Fab', 'ra2_fab_window', F, 'cell window', (x0+.06, yb-h+.05, z1), (x1-.06, yb-h*.45, z1+d)))
+    for k, xg in enumerate((x0+(x1-x0)*.3, x0+(x1-x0)*.7)):
+        a, b = (xg, yb-h*.25, z1), (xg, yb-h*.25, z1+.02)
+        out.append(pd.element(ASM, 'Fab', f'RA2_Fab_Glove_Port_{k+1}', 'ra2_fab_glove', F, 'glove port', *pd.rod(a, b, q['fab_glove_r_m'], 16)))
+    (f0, f1), fh = q['filter_x_m'], q['filter_h_m']
+    out.append(slab('RA2_Fab_Filter', 'Fab', 'ra2_fab_body', F, 'HEPA / carbon filter box: the cell recirculates through it', (f0, yb-fh, z0+.05), (f1, yb, z1-.05), .01))
+    out.append(slab('RA2_Fab_Filter_Band', 'Fab', 'service_ochre', F, 'filter cartridge access cover', (f0+.03, yb-fh+.04, z1-.05), (f1-.03, yb-.04, z1-.05+d)))
+    duct_y = yb-h*.6
+    out.append(pd.element(ASM, 'Fab', 'RA2_Fab_Duct', 'ra2_fab_glove', F, 'cell to filter duct', *pd.rod((x0, duct_y, (z0+z1)/2), (f1, duct_y, (z0+z1)/2), wt, 12)))
+    out.append(pd.lettering(ASM, 'Fab', 'RA2_Fab_Label', 'xf_mark', 'cell label', 'FAB CELL - CONTAINED', ((x0+x1)/2, yb-h+.025, z1+d), X, (0.0, -1.0, 0.0), q['label_h_m']*.8))
+    out.append(pd.lettering(ASM, 'Fab', 'RA2_Fab_Filter_Label', 'xf_mark', 'filter label', 'HEPA / C', ((f0+f1)/2, yb-fh+.02, z1-.05+d), X, (0.0, -1.0, 0.0), q['label_h_m']*.7))
     return out
 
 

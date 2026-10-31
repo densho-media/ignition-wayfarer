@@ -307,6 +307,7 @@ def rear_construction(s):
                     vs.append((x, r*cs-u*sn, r*sn+u*cs))
         out.append(dict(name=f"Crown_Service_Hatch_{b['index']:02}", kind='crown_service_hatch', vertices=vs, faces=faces))
     out += brow_panel_joints(s)
+    out += brow_panel_fixtures(s)
     return out
 
 
@@ -345,6 +346,51 @@ def brow_panel_joints(s):
                 a = lo+(hi-lo)*i/n; rr = r
                 pts.append((x, rr, a, (math.cos(a)*w/2, math.sin(a)*w/2)))   # half-width along the radius
             strip(f'Brow_Joint_Hoop_{r:g}_{k:02}', pts)
+    return out
+
+
+def _seg_dist(p, a, b):
+    ab = [b[k]-a[k] for k in range(3)]; ap = [p[k]-a[k] for k in range(3)]; L2 = sum(x*x for x in ab) or 1e-12
+    f = max(0.0, min(1.0, sum(ap[k]*ab[k] for k in range(3))/L2))
+    return math.dist(p, [a[k]+ab[k]*f for k in range(3)])
+
+
+def brow_panel_fixtures(s):
+    """S04 (2026-10-31): a handling fixture on the aft face of every replaceable Brow panel, two per panel on its centre line, so the Brow
+    crawler (drone_fleet DR-EVA-01) or the crew can grip a panel to lift it out and set a new one in (14 regenerative_brow 'replaceable
+    panels'). Panels between the radial joints (a 20 deg panel over each spoke, a 10 deg one between) and the hoop joints; fixtures at a
+    quarter and three quarters of each hoop band, so off the truss rings, and dropped where a truss member is nearer than fixture_clear_m.
+    One mesh per spoke bay. A fixture: a post from the skin's aft face and a target flange at its end (PROTOTYPE)."""
+    c = s['forward_shield']['rear_construction']; t = truss(s); m = t['member_radius']
+    rp, hp = c['fixture_radius_m'], c['fixture_height_m']; rf, tf = c['fixture_flange_m']; clear = c['fixture_clear_m']
+    segs = [pts for sp in t['spokes'] for role, pts in sp['members'] if f"Truss_Spoke_{sp['index']:02}_{role}" not in t['removed']]
+    segs += [a['pts'] for a in t['alternate']]
+    segs = [(P[k], P[k+1]) for P in segs for k in range(len(P)-1)]
+    rings = [(r['radius'], r['x']) for k, r in enumerate(t['rings']) if f"Truss_Ring_{k+1:02}" not in t['removed']]
+    bands = list(zip(c['joint_hoop_r_m'], c['joint_hoop_r_m'][1:])); off = [math.radians(x) for x in c['joint_deg_offsets']]
+    half_mid = (math.radians(30.0)+off[0]-off[1])/2
+    out = []
+    for sp in t['spokes']:
+        a0 = sp['azimuth']; panels = [(a0+off[0]/2, 'S'), (a0+off[1]/2, 'S'), (a0+off[1]+half_mid, 'M')]
+        vs, fs = [], []
+        for a, kind in panels:
+            for r0, r1 in bands:
+                for r in (r0+(r1-r0)*.25, r0+(r1-r0)*.75):
+                    x0 = skin_aft_at(s, r); u = (math.cos(a), math.sin(a)); p = (x0-hp/2, r*u[0], r*u[1])
+                    near = min([_seg_dist(p, A, B)-m for A, B in segs]+[math.hypot(x0-hp/2-rx, r-rr)-m for rr, rx in rings])
+                    if near < clear:
+                        continue
+                    for (xa, xb, rad) in ((x0-.01, x0-hp, rp), (x0-hp, x0-hp-tf, rf)):     # the post starts 0.01 m aft of the cone face
+                        n = 12; base = len(vs)
+                        for xx in (xa, xb):
+                            for k in range(n):
+                                q = 2*math.pi*k/n; dy, dz = -math.sin(a), math.cos(a)
+                                rr = rad*math.cos(q); tt = rad*math.sin(q)
+                                vs.append((xx, (r+rr)*u[0]+tt*dy, (r+rr)*u[1]+tt*dz))
+                        fs += [(base+k, base+(k+1) % n, base+n+(k+1) % n, base+n+k) for k in range(n)]
+                        fs += [tuple(base+k for k in reversed(range(n))), tuple(base+n+k for k in range(n))]
+        if vs:
+            out.append(dict(name=f"Brow_Panel_Fixtures_{sp['index']:02}", kind='brow_panel_fixture', vertices=vs, faces=fs))
     return out
 
 

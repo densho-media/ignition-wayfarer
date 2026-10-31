@@ -775,7 +775,7 @@ status = "PROTOTYPE"
 doctrine_ref = "hsfp_design_doctrine"
 rationale = "Skin = the sourced 90 m diameter and ~3 m crown depth; wells, Lance, spine column, disruptor layer (existence, full diameter, ahead of the Brow), Crown housing band and bays are physics-locked. Hub, rim, truss, struts, the three sector keels (the sector radius and azimuths, 07!A10/A13, are sourced; the keels' existence ahead of ring B and their length are F2 selections), the Q45 bypass collar, the Crown port covers, ties, posts, Crown carriages, shutters, emitters and the control rig are engineering-flexible PROTOTYPE selections. The diversion-field zone and the damage cells are artistic displays over OPEN or DIAGNOSTIC values. M8.1: the production layer on the shield (production_detail: Brow aft-face panels, Crown rim module) is an artistic presentation layer over the unchanged engineering geometry (L4_VISUAL_CANDIDATE); each object also carries its element surface classes."
 PHYSICS_LOCKED = ["shield_skin", "eye_well", "dust_lance", "dust_lance_tip", "shield_spine_column", "disruptor_layer", "crown_housing", "crown_bay"]
-ENGINEERING_FLEXIBLE = ["shield_hub", "shield_rim", "shield_truss", "shield_mount", "sector_keel", "sector_tie", "sector_frame", "bypass_collar", "disruptor_post", "crown_shutter", "crown_port_cover", "eye_shutter_frame", "eye_shutter", "eye_window", "eye_facet_frame", "eye_raceway", "eye_service", "truss_node", "crown_housing_rib", "crown_service_hatch", "crown_carriage_frame", "crown_head_frame", "crown_carriage", "crown_emitter", "crown_launcher", "state_control", "nav_light", "rcs_thruster", "brow_panel_joint"]
+ENGINEERING_FLEXIBLE = ["shield_hub", "shield_rim", "shield_truss", "shield_mount", "sector_keel", "sector_tie", "sector_frame", "bypass_collar", "disruptor_post", "crown_shutter", "crown_port_cover", "eye_shutter_frame", "eye_shutter", "eye_window", "eye_facet_frame", "eye_raceway", "eye_service", "truss_node", "crown_housing_rib", "crown_service_hatch", "crown_carriage_frame", "crown_head_frame", "crown_carriage", "crown_emitter", "crown_launcher", "state_control", "nav_light", "rcs_thruster", "brow_panel_joint", "brow_panel_fixture"]
 ARTISTIC = ["field_display", "damage_cell", "production_detail", "eye_shell"]
 
 # Forward defence (front systems). Sourced rules and values; every geometry choice is in forward_shield.prototype above.
@@ -3311,6 +3311,12 @@ joint_hoop_r_m = [11.2, 20.0, 30.0, 38.0]
 joint_r_m = [7.8, 40.6]
 joint_width_m = 0.12
 joint_height_m = 0.012
+# S04 (2026-10-31): two handling fixtures per replaceable panel (forward_shield.brow_panel_fixtures): post and target flange on the aft face,
+# kept fixture_clear_m from every truss member. PROTOTYPE; the grip interface and handling loads are OPEN.
+fixture_radius_m = 0.08
+fixture_height_m = 0.15
+fixture_flange_m = [0.16, 0.025]
+fixture_clear_m = 0.30
 
 # Renderer settings, not physical values.
 [habitat_ring.display]
@@ -3347,6 +3353,16 @@ light_pitch_m = 3.0
 # Seraph's niche (Q51) at the corridor side of the habitation sector's -z door: a bay widening the corridor forward (+u) at the start of that
 # corridor half, along t (m of floor arc), across u from the corridor's forward wall, floor to height.
 alcove = { length_m = 0.80, depth_m = 0.55, height_m = 2.10 }
+
+# CIRC-C7 (2026-10-31, owner-delegated decision): every frame the tunnel cuts (flank and web frames, the spoke-node housing) becomes a
+# portal with a collar round the opening. Hand check only (ring_circulation.portal_check), FEA OPEN (OD-016).
+[ring_circulation.portal]
+status = "PROTOTYPE"
+unit = "m"
+rationale = "Judgment plus a hand check (AGENTS.md calculate constraints, model form): the ring section is a closed box (inner and outer hoops, the frame faces at u = +-2 m) that the tunnel does not cut; it cuts the diaphragms (web and flank frames, node housing) that keep the box's shape and feed the spokes' concentrated loads into it. The 1.5 g spoke load acting at the inner hoop, eccentric to the box centre, is a torque the diaphragm turns into shear flow q = T / 2A; round the opening the diaphragm works as a Vierendeel portal with corner moments about q a b / 4. A collar the frame's width deep enough to keep that bending under the allowable closes the path. Allowable: 200 MPa, a PROTOTYPE working stress for an aluminium-lithium frame (yield ~450 MPa) before fatigue and joint factors; no material is released."
+collar_depth_m = 0.06
+node_collar_depth_m = 0.08
+allowable_mpa = 200.0
 
 [ring_circulation.budget]
 status = "PROTOTYPE"

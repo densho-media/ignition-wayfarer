@@ -303,7 +303,7 @@ def tunnel(s):
 
 def frame_mesh(s, q):
     """Display mesh of one frame part with its construction (habitat_ring.construction, PROTOTYPE): vertices, faces and one class per
-    face (frame, joint, band, cassette, cover, service, service_cover). The inner hoop stays frame_solid. Every piece lies inside the part's
+    face (frame, joint, band, cassette, cover, service, service_cover, portal). The inner hoop stays frame_solid. Every piece lies inside the part's
     band (u0..u1, r0..r1, t0..t1), inset or flush, so the sweep and the volumes of frame_parts are unchanged."""
     r = s['habitat_ring']; c = r['construction']; n = r['display']['hoop_facets']
     vs, fs, cls = [], [], []
@@ -318,6 +318,11 @@ def frame_mesh(s, q):
             tu0, tu1, tr0, tr1 = max(u0, hole[0]), min(u1, hole[1]), max(r0, hole[2]), min(r1, hole[3])
             for a in ((u0, tu0, r0, r1), (tu1, u1, r0, r1), (tu0, tu1, r0, tr0), (tu0, tu1, tr1, r1)):
                 add_piece(kind, *a, t0, t1, k)
+            if kind in ('frame', 'service') and u0 < hole[0] and hole[1] < u1:
+                # CIRC-C7: the cut frame becomes a portal; a collar lines the opening (ring_circulation.portal, PROTOTYPE hand check)
+                pc = s['ring_circulation']['portal']; d = pc['node_collar_depth_m' if kind == 'service' else 'collar_depth_m']
+                for a in ((tu0, tu0+d, tr0, tr1), (tu1-d, tu1, tr0, tr1), (tu0+d, tu1-d, tr0, tr0+d), (tu0+d, tu1-d, tr1-d, tr1)):
+                    add_piece('portal', *a, t0, t1, k)
             return
         add_piece(kind, u0, u1, r0, r1, t0, t1, k)
 

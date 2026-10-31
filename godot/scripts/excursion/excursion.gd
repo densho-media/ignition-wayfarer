@@ -1409,6 +1409,8 @@ func _goal_text() -> String:
 		return "OPERATIONS %s -> %s: %s. Hold still on the rail (you are an occupant to be secured)." % [ctl.mode, ctl.target, ", ".join(ctl.queue)]
 	if move == "WALK":
 		var rec: Dictionary = progress[walk_zone]
+		if learning != null and learning.done.has("LS-UJ011-DEBRIEF"):     # UJ-011: checked out, the trainee leaves the way they came
+			return "DEBRIEF DONE: leave before First Ignition. Walk to the landing well, face the ladder and press %s, climb the crew tube (%s, look up), cross the drum to the trunk, ask the ship to dock (%s) and float back to the station." % [key("exc.use"), mv, key("exc.ops")]
 		if rec["circuit"]:
 			return "CIRCUIT COMPLETE. Walk back to the landing well, face the ladder and press %s, then climb (%s, look up)." % [key("exc.use"), mv]
 		return "RING %s (spin gravity %.2f g). Walk the whole circumference through every sector and corridor: %d %% covered. Doors: %s." % [walk_zone.right(1),

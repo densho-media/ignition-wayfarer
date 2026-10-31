@@ -261,7 +261,7 @@ def ring_asset(c,s,assets,j):
     p=s['prototype'];h=s['habitat'];hr=s['habitat_ring']
     metal=material('HabitatArms',(.46,.57,.63));fill=material('RingFill',(.34,.50,.55));hub=s['rotor_interface']
     construction=dict(frame=metal,joint=material('RingJoint',(.16,.19,.22)),band=material('RingPressureBand',(.72,.52,.22)),cassette=fill,
-                      cover=material('RingCover',(.44,.56,.60)),service=material('RingService',(.30,.26,.16)),service_cover=material('RingServiceCover',(.78,.60,.24)))
+                      cover=material('RingCover',(.44,.56,.60)),service=material('RingService',(.30,.26,.16)),service_cover=material('RingServiceCover',(.78,.60,.24)),portal=material('RingPortalCollar',(.36,.40,.44)))
     bpy.context.scene.render.fps=24
     bpy.context.scene.frame_start=1;bpy.context.scene.frame_end=361
     # The control comes first: the rotation driver targets it. The saved pose is the vehicle's saved preset (spin 1).

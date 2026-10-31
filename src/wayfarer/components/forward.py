@@ -312,13 +312,14 @@ def forward_shield(c, s):
     # M4 slice 3 (forward_shield.rear_construction, PROTOTYPE): gussets at every truss node, a dark rib on each bay partition and an ochre
     # service hatch per bay on the housing aft plate, all inside the truss envelope.
     rear_mats = {'truss_node': structure, 'crown_housing_rib': material('CrownRib', (.16, .19, .22)), 'crown_service_hatch': material('CrownServiceHatch', (.78, .60, .24)),
-                 'brow_panel_joint': material('BrowPanelJoint', (.16, .19, .22))}
+                 'brow_panel_joint': material('BrowPanelJoint', (.16, .19, .22)), 'brow_panel_fixture': material('BrowPanelFixture', (.78, .60, .24))}
     rear_notes = {'truss_node': '[ENGINEERING_FLEXIBLE] Gusset plate at a truss node in its spoke plane; joint design and sizing OPEN (14!G26).',
                   'crown_housing_rib': '[ENGINEERING_FLEXIBLE] Rib on the housing aft plate over a bay partition (where the truss spoke lands); sizing OPEN.',
                   'crown_service_hatch': '[ENGINEERING_FLEXIBLE] Service hatch for carriage maintenance from behind; mechanism and service path OPEN.',
-                  'brow_panel_joint': '[ENGINEERING_FLEXIBLE] Joint between replaceable Brow panels on the skin aft face (14 regenerative_brow); panel size, seal and attachment OPEN (S04 slice 2).'}
+                  'brow_panel_joint': '[ENGINEERING_FLEXIBLE] Joint between replaceable Brow panels on the skin aft face (14 regenerative_brow); panel size, seal and attachment OPEN (S04 slice 2).',
+                  'brow_panel_fixture': '[ENGINEERING_FLEXIBLE] Handling fixtures, two per replaceable Brow panel, for the Brow crawler or the crew to lift a panel out and set a new one in; interface and loads OPEN.'}
     for q in fsh.rear_construction(s):
-        mark(mesh(c, q['name'], q['vertices'], q['faces'], rear_mats[q['kind']], kind=q['kind']), 'OPEN', 'bow_form' if q['kind'] in ('truss_node', 'brow_panel_joint') else 'crown_architecture', q['kind'], rear_notes[q['kind']])
+        mark(mesh(c, q['name'], q['vertices'], q['faces'], rear_mats[q['kind']], kind=q['kind']), 'OPEN', 'bow_form' if q['kind'] in ('truss_node', 'brow_panel_joint', 'brow_panel_fixture') else 'crown_architecture', q['kind'], rear_notes[q['kind']])
     for b in cr['bays']:
         j = b['index']
         bay = empty(c, f'Crown_Bay_{j:02}', ident=f'WF.FORWARD.CROWN.BAY.{j:02}', kind='crown_bay')

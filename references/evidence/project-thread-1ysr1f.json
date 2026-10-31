@@ -170,5 +170,75 @@
    "baseline": "references/baseline_body_equipment",
    "runtime_export": "PASS 9/9"
   }
+ },
+ "pass_3": {
+  "approved": "2026-10-31 (owner, squash onto main)",
+  "status": "PROTOTYPE",
+  "d02_corridor_care": {
+   "evidence": "references/evidence/d02_coverage_2026-10-30.md (2026-10-31 section)",
+   "worst_by_case_m": {
+    "HABITATION A x1.00 door -": 0.05,
+    "HABITATION A x1.00 door +": 0.05,
+    "HABITATION A x1.08 door -": 0.028,
+    "HABITATION A x1.08 door +": 0.028,
+    "HABITATION C x1.00 door -": 0.05,
+    "HABITATION C x1.00 door +": 0.05,
+    "HABITATION C x1.08 door -": 0.05,
+    "HABITATION C x1.08 door +": 0.05,
+    "HABITATION K x1.00 door -": 0.05,
+    "HABITATION K x1.00 door +": 0.05,
+    "HABITATION K x1.08 door -": 0.028,
+    "HABITATION K x1.08 door +": 0.028,
+    "WORK_MEDICAL_OPS A x1.00 door -": 0.05,
+    "WORK_MEDICAL_OPS A x1.00 door +": 0.05,
+    "WORK_MEDICAL_OPS A x1.08 door -": 0.028,
+    "WORK_MEDICAL_OPS A x1.08 door +": 0.028,
+    "WORK_MEDICAL_OPS C x1.00 door -": 0.05,
+    "WORK_MEDICAL_OPS C x1.00 door +": 0.05,
+    "WORK_MEDICAL_OPS C x1.08 door -": 0.05,
+    "WORK_MEDICAL_OPS C x1.08 door +": 0.05,
+    "WORK_MEDICAL_OPS K x1.00 door -": 0.05,
+    "WORK_MEDICAL_OPS K x1.00 door +": 0.05,
+    "WORK_MEDICAL_OPS K x1.08 door -": 0.028,
+    "WORK_MEDICAL_OPS K x1.08 door +": 0.028
+   },
+   "suited_door_m": {
+    "S x1.00": -0.104,
+    "S x1.08": -0.138
+   },
+   "tally_24": {
+    "PASS": 10,
+    "MARGINAL": 12,
+    "FAIL": 2
+   },
+   "was": {
+    "PASS": 6,
+    "MARGINAL": 0,
+    "FAIL": 18
+   }
+  },
+  "circ_c7_portal_check": {
+   "spoke_load_N": 404524,
+   "eccentricity_m": 2.75,
+   "box_area_m2": 22.0,
+   "shear_flow_N_m": 25283,
+   "opening_m": [
+    1.2,
+    2.75
+   ],
+   "corner_moment_N_m": 20858,
+   "collar_stress_mpa": 115.9,
+   "node_collar_stress_mpa": 65.2,
+   "allowable_mpa": 200.0,
+   "status": "PROTOTYPE hand check; FEA OPEN (OD-016)"
+  },
+  "brow_panel_fixtures": 216,
+  "fab_cell": "ra2_work Fab family (ring B by rb_fitout)",
+  "uj010_map": "learning_stations.space_map",
+  "gates": {
+   "pipeline": "runs/20261031T073346Z-pipeline PASS (6 changed, 14 added, 0 unexpected)",
+   "baseline": "references/baseline_corridor_portals",
+   "runtime_export": "PASS"
+  }
  }
 }

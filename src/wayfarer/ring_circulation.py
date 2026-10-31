@@ -250,8 +250,9 @@ def conflicts(s):
              text="Aft down (rings stopped) a corridor is a 0.9 m high tunnel; the essential 1.5 g route stays the crew tubes and the spine."),
         dict(id='CIRC-C6', ref='14_HULL_SERVICE!A8 dock_config (BASELINE)', status='OPERATIONAL CONSEQUENCE',
              text='Docked, the rings are stopped and locked: a ring walk from the station needs UNDOCK, spin-up, then spin-down, lock and DOCK.'),
-        dict(id='CIRC-C7', ref='habitat_ring.construction / OD-016 ring section (OPEN)', status='OPEN',
-             text='Each web frame takes a framed portal round the corridor and the spoke-node housing splits round it; the load path is OPEN (FEA).'),
+        dict(id='CIRC-C7', ref='habitat_ring.construction / OD-016 ring section (OPEN)', status='PROTOTYPE HAND CHECK',
+             text='Each flank and web frame and the spoke-node housing becomes a portal with a collar round the tunnel (ring_circulation.portal); '
+                  f"the hand check gives {portal_check(s)['collar_stress_mpa']:.0f} MPa in the collar against {p(s)['portal']['allowable_mpa']:.0f} MPa; FEA OPEN."),
         dict(id='CIRC-C8', ref='interior.layouts (PROTOTYPE), Q50 Garden trays (12!A28 WORKING)', status='CHANGED PROTOTYPE',
              text='Work and Garden couch-2 lockers end at x -1.15 m like the habitation ones; the Garden rack and mess start at x -0.50 m '
                   '(rack 0.05 m shorter).'),
@@ -505,6 +506,20 @@ def _seg_box(a, b, c, axes, half, n=8):
     return best
 
 
+def portal_check(s):
+    """CIRC-C7 hand check (PROTOTYPE): the 1.5 g spoke load at the inner hoop, eccentric to the ring box's centre, twists the box; a diaphragm
+    with the tunnel opening carries the shear flow q = T / 2A round it as a Vierendeel portal (corner moment ~ q a b / 4) in a collar the
+    frame's width (web_m) and collar_depth_m deep. Static, before dynamic, fatigue and joint factors."""
+    r = s['habitat_ring']; c = p(s)['portal']; tu0, tu1, tr0, tr1 = section(s)['tunnel']
+    F = habitat_ring.spoke_axial_load_N(s); ri, ro = r['frame_inner_radius_m'], r['sector_outer_radius_m']
+    outer = max(q['r1'] for q in habitat_ring.frame_parts(s)); e = (ri+outer)/2-ri; A = r['frame_axial_m']*(outer-ri)
+    q = F*e/(2*A); a, b = tu1-tu0, tr1-tr0; M = q*a*b/4
+    w = r['construction']['web_m']; Z = w*c['collar_depth_m']**2/6; Zn = w*c['node_collar_depth_m']**2/6
+    return dict(spoke_load_N=round(F), eccentricity_m=round(e, 3), box_area_m2=round(A, 2), shear_flow_N_m=round(q), opening_m=[round(a, 3), round(b, 3)],
+                corner_moment_N_m=round(M), collar_stress_mpa=round(M/Z/1e6, 1), node_collar_stress_mpa=round(M/Zn/1e6, 1),
+                allowable_mpa=c['allowable_mpa'], status='PROTOTYPE hand check; FEA OPEN (OD-016)')
+
+
 def check(s):
     """Failure list: the section and doors fit, the passage band is free of every function's blocks, the tunnel stays inside the fill and clear of
     the hoops, and a standing body walks the whole circuit of both rings clear of every collider box."""
@@ -524,6 +539,9 @@ def check(s):
     tu0, tu1, tr0, tr1 = sec['tunnel']
     need(-r['frame_axial_m']/2+r['construction']['inset_m'] < tu0 and tu1 < r['frame_axial_m']/2-r['construction']['inset_m'], 'Tunnel leaves the frame axially')
     need(r['sector_inner_radius_m'] < tr0 and tr1 < r['sector_outer_radius_m'], 'Tunnel leaves the fill band (hoops)')
+    pc = portal_check(s)
+    need(pc['collar_stress_mpa'] <= pc['allowable_mpa'], f"Portal collar over the allowable ({pc['collar_stress_mpa']} MPa)")
+    need(max(p(s)['portal']['collar_depth_m'], p(s)['portal']['node_collar_depth_m']) < c['tunnel_margin_m'], 'Portal collar reaches the corridor liner')
     need(sec['door_top_r'] > r['sector_inner_radius_m']+r['sector_skin_m'], 'Door opening reaches the sector overhead')
     x0, x1 = c['passage_x_m']
     for fn in s['habitat']['layout']['functions']:
