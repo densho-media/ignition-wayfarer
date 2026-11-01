@@ -29,8 +29,8 @@ anchor = "WF-SPINE.HULL.ORIGIN"
 zone = "aft body casing X -101 to 80 m, on the casing skin (r 6.0 m) below the crawler rails' standoff"
 classes = ["ENGINEERING_FLEXIBLE", "ARTISTIC"]
 # Claimed space in the vehicle frame (m): the casing x range, the casing radius plus the lettering offset.
-envelope_min = [-111.05, -6.12, -6.12]
-envelope_max = [70.05, 6.12, 6.12]
+envelope_min = [-133.30, -6.12, -6.12]
+envelope_max = [47.80, 6.12, 6.12]
 
 [params]
 # Every strip seats seat_gap_m above the casing straps (casing_panels seam_height_m), so it never intersects them (3 deg chords sag 2 mm).

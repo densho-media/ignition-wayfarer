@@ -290,7 +290,7 @@ def running(s):
     ref = hull_geometry.refuge(s); c = habitat_ring.centers(s)
     # The largest spine radius under any hub (HUM-001: the hubs sit on the spine core, layout.spine_core) sets the seal-to-spine gap.
     spine = max(layout.spine_radius_at(s, x+u) for x in c for u in (aft, fwd))
-    mount_aft = layout.at(s, p['forward_mount_aft_x']); cage_end = layout.at(s, p['outer_cage_end_x']); front = layout.origin(s, 'RADIATOR_FRONT')
+    mount_aft = layout.at(s, p['forward_mount_aft_x']); cage_end = layout.at(s, p['outer_cage_end_x']); front = layout.origin(s, 'AFT_STORAGE_FRONT')
     rows = {
         'magnetic_display_gap_m': magnetic_gap,
         'touchdown_display_clearance_m': touchdown_gap,

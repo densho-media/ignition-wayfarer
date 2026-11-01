@@ -42,6 +42,8 @@ def envelope(s):
 def panels(s):
     """Per blade plane j, side P/M and axial segment k: the plate box (8 corners, faces), its outward normal, the brackets to the collar chords
     (0.5 m inside each segment end) and the radiating area of its outer face."""
+    if not table(s).get('enabled', True):         # owner pick 2026-11-01: the projecting panels round the habitat rings are removed
+        return []
     q = table(s); e = envelope(s); collar = forward_shield.bypass_collar(s); t = q['thickness_m']; out = []
     chords = (collar['inner_r'], collar['outer_r'])
     for j in range(s['radiators']['count']):
@@ -69,6 +71,8 @@ def _segment_distance(a, b, c, d, steps=64):
 
 def check(s):
     """Fit screen: clearances to the ring rim, the shield truss, the collar members and the dock corridors. Returns (rows, failures)."""
+    if not table(s).get('enabled', True):
+        return {'removed': 'owner pick 2026-11-01 (radiators away from the habitat; RAD-ZONE sections aft of the rings)'}, []
     q = table(s); e = envelope(s); clr = s['prototype']['mechanical_clearance_m']; collar = forward_shield.bypass_collar(s)
     rows = {'ring_rim_gap_m': e['r_lo']-habitat_ring.outer(s), 'truss_gap_m': min(forward_shield.truss_aft_at(s, r) for r in (e['r_lo'], e['r_hi']))-e['x_hi'],
             'collar_member_gap_m': e['offset']-q['thickness_m']/2-collar['member_radius']}

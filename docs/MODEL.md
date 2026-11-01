@@ -90,13 +90,14 @@ are not modeled; the ring sectors carry only rough PROTOTYPE interior blocking.
   hollow and human-scale (HUM-001 zones 1–5). Ring B's route is hollow the same way,
   through a 0.90 m spine port and 0.90 m tube necks (zones 3–4 at ring B); the rooms
   are rough blocks.
-- **Ship:** a 245 m body (PROTOTYPE inside the 220–260 m WORKING envelope, nozzle exit
+- **Ship:** a 289.5 m body (PROTOTYPE inside the 220–360 m WORKING envelope, nozzle exit
   at the aft end), central body 13 m; the rings (~60 m) and the 90 m forward shield
   are wider. The envelope includes the Dust Lance: with the WORKING 12 m Lance the ship
-  is 257.0 m overall (245 m body + 12 m, Q2). The full-return propellant (pass 7) needs a
-  second torus between ring B and the forward collar, so the body is 20 m longer than the
-  earlier 225 m and the envelope's top was raised from 240 to 260 m (S&E 15
-  OWN-B01-FULL-RETURN-2026-10-31).
+  is 301.5 m overall (289.5 m body + 12 m, Q2). The full-return propellant (pass 7) made the
+  body 20 m longer than the earlier 225 m and raised the envelope's top from 240 to 260 m
+  (S&E 15 OWN-B01-FULL-RETURN-2026-10-31); since TANK-AXIAL (2026-11-01) all of it sits in
+  thirteen axial vessels in the same forward zone. The LOW and WARM radiator sections (RAD-ZONE, owner pick 2026-11-01) add
+  44.5 m between the rings and the hot blades, so the 1800 K blades stand 44.5 m further from the rings and the tank farm.
 - **Forward defense:** `WF_FORWARD_SHIELD` holds the fixed 90 m conical shield (flat hub to r 7.4 m at X 122.5 m, then a cone sweeping aft by the ~3 m crown depth to X 119.5 m at r 45 m) on a conical truss, one full-diameter sacrificial disruptor layer 2.0 m ahead of it, the four EYE facets recessed in protected wells in the flat hub, the Dust Lance, an elongated display-only diversion-field zone, damage/repair display cells and the concealed Aegis Dustbreak Crown (12 sector bays in the rim, shuttered in every preset). One normalized control, `FORWARD_DEFENSE_CTRL`, drives the field zone, damage, repair and Crown engagement. Rear construction (M4 slice 3, `forward_shield.rear_construction`, PROTOTYPE judgment): a gusset plate at every truss node in its spoke's plane, a dark rib on each Crown bay partition and one ochre service hatch per bay on the housing aft plate (the ring service-cover ochre), and (S04 slice 2, `brow_panel_joints`) the Brow's replaceable-panel joints as dark grooves on the skin's aft face: radial joints 10° either side of every spoke, splitting each truss bay into thirds, and hoop joints midway between the truss rings at r 11.2, 20, 30 and 38 m, broken round each spoke's forward chord. Every replaceable panel carries two ochre handling fixtures on its centre line (S04 2026-10-31, `brow_panel_fixtures`: a post and a target flange at a quarter and three quarters of each hoop band, off the truss rings, 0.30 m from every truss member; 216 in all) so the Brow crawler or the crew can lift a panel out and set a new one in; grip interface and loads OPEN. All of it stays inside the truss envelope (`rear_construction_screen`); joint, rib and hatch sizing and the carriage service path are OPEN.
 - **Structure and thermal:** a 12-node thrust ring and three longitudinal trussed
   thermal blades (the BASELINE production direction), each the owner's equivalent
@@ -151,7 +152,9 @@ are not modeled; the ring sectors carry only rough PROTOTYPE interior blocking.
   plume (15°/20° study cones) blocks the aft axis. RCS: three aft pods on the ring nodes at the keel
   azimuths (their jets canted 20° aft, which also settles ullage) and four pods on the shield rim's aft face
   between Crown bays, docking corridors and rim beacons. Every nozzle fires outward or tangentially, canted
-  so that its 15° jet cone meets no hull, blade, ring, shield or antenna sweep (screened). The sizing behind these is a stated bounding case in `exterior_hardware.sizing()`:
+  so that its 15° jet cone meets no hull, blade, ring, tank farm, shield or antenna sweep (screened). Owner brief 2026-11-01
+  (OWN-RCS-PODS): each aft pod also has an axial jet (+X, 20° cant) and each rim pod a forward-outboard jet (-X, 50° cant), so the
+  ship has ±X translation for station-keeping (visiting craft close the last metres). The sizing behind these is a stated bounding case in `exterior_hardware.sizing()`:
   a free-space link budget, a mass-budget inertia bound, flip time at 100 N per nozzle and momentum storage
   at twice the ring residual. Momentum storage is internal and not built. The M5 readback (`studies/m5_attitude.py`) spreads the
   burnout mass budget over the built meshes for a full inertia tensor (near-diagonal, transverse ≈ 7.5e9 kg m², stationary roll
@@ -201,7 +204,7 @@ are not modeled; the ring sectors carry only rough PROTOTYPE interior blocking.
 
 | Quantity | Current source | Implemented proxy |
 | --- | --- | --- |
-| Body | 220–260 m overall length including the Dust Lance (raised from 240 m for the full-return tanks, pass 7; 245 m body + 12 m Lance = 257 m), WORKING; 12–14 m central body, BASELINE (not the maximum width); legacy station radii SUPERSEDED | 245 m body (`ship.length.value`, scope BODY_AFT_TO_SHIELD_FACE) / 13 m selections, PROTOTYPE; overall 257.0 m = body + `forward_defense.dust_lance.length`, checked against the envelope; 6.0 m casing under the blades (blade root r 6.5 m less the 0.5 m member clearance; 12 m BASELINE minimum body) |
+| Body | 220–360 m overall length including the Dust Lance (top raised to 360 m in 02_SHIP_INPUTS for the radiator zones, 2026-11-01; 289.5 m body + 12 m Lance = 301.5 m), WORKING; 12–14 m central body, BASELINE (not the maximum width); legacy station radii SUPERSEDED | 289.5 m body (`ship.length.value`, scope BODY_AFT_TO_SHIELD_FACE) / 13 m selections, PROTOTYPE; overall 301.5 m = body + `forward_defense.dust_lance.length`, checked against the envelope; 6.0 m casing under the blades (blade root r 6.5 m less the 0.5 m member clearance; 12 m BASELINE minimum body) |
 | Crew | Story manifest six, LOCKED; rated design occupancy 12, WORKING (separate fields; 20 m³ usable per rated person, 40 m³ per story person, DERIVED) | 1.8 m orange human scale annotation; 12 bunks and 12 aft couches as blocking |
 | Habitat | Two rigid counter-rotating rings, fixed diameter, ±4 rpm, BASELINE; outer radius 30 m, occupied floor radius 28 m, working mass depth 2 m, WORKING; ring-equivalent COM 27 m, 0.501 g at the floor, DERIVED; 330 t rotating mass (165 t per ring; ~20 t of the 180 t water moved to the stationary refuge, Q32), PROVISIONAL; I 120.285e6 kg·m², H 50.38 MN·m·s, 23.45 kW combined peak spin power, 2.427 MN axial load per ring at 1.5 g (~405 kN per spoke), residual-momentum target 50.38 kN·m·s (0.1 %), DERIVED; six spokes per ring at 60° (three crew, three structural/service) of 1.2–1.5 m depth, ring-plane spacing 6 m, ring/radiator-spar clearance ≥ 1.5 m, WORKING; rim axial deflection ≤ 0.05 m is an FEA target | Two `Rotor_n` rings with PROTOTYPE frame r 24.5–30 m × 4 m (its construction relief inset, never proud of it: 24 segments of 15°, 0.08 m rim joints, 0.30 m webs, 0.35 m sector flank frames, cassettes inset 0.04 m with 0.025 m covers, service nodes ±4° to r 27.2 m, a 0.60 × 0.02 m rim band), six spokes (twin rails, 1.30 m deep, PROTOTYPE inside the WORKING 1.2–1.5 m) and three sectors each; ring A's aft sweep is 1.5 m ahead of the leading spar front (nominal, cold); ring rotation at 24 fps; ring section, spoke section, frame and flexible modes OPEN (08!A53, OD-016) |
 | Pressurized sectors | 400–460 m³ gross across the occupied sectors of both rings, BASELINE; the torus is not a pressure vessel, BASELINE; fixed interior orientation (radial floor in coast, aft burn couches), WORKING | Six `WF_RING_SECTOR` instances, r 25.0–28.7 m × 3.5 m, 11.93° arc solved from 72.383 m³ gross each (434.298 m³ total), each a 0.05 m pressure skin inside that envelope (67.18 m³ inside it) opened under its crew tube by the 1.6 m overhead hatch (HUM-001 zone 5); deck at r 28 m, floor radially outward; furniture OPEN |
@@ -240,21 +243,29 @@ The spec and rig keep the centre of mass, inertia, reaction-mass load, fusion-fu
 load and drive output unknown. The reactor shadow shield and the magnet/cage support (the nozzle yokes) are unsized,
 non-additive suballocations inside the 250 t engine package (P5/P6, 15!A111, 10!A24:A25): their objects carry
 `mass_known = false` and an unknown, not zero, centre-of-mass contribution (`[physics.mass_suballocations]`, rig
-`mass_properties.suballocations`). **Fuel storage** (FUEL-SPLIT, WORKING, owner-delegated 2026-10-29; S&E 15!A229;
-`fuel_storage.py`, `components/storage.py`, `[fuel_storage]`, all geometry PROTOTYPE): ³He (164.8 t) in 27 sector lobes, three per
-station of nine BODY-C3 modules (11 m long, r 1.1–4.72 m, 100° each between the keel lanes at 30/150/270°), each station with a
-cryocooler (r 3.9–4.6 m) and its lobes hung from the frames; H2 (145.1 + 180 t) and D2 (110.1 t) in a torus behind the Brow (R 20.5 m,
-minor 4.5 m, X 106.1–115.1 m) split by three 6 m gaps (50/195/315°, the EVA azimuth and the keel lanes) into vessels with 2:1 heads, D2
-in a 32° end cell of vessel 3, the vessels on bipods to the forward collar. The return propellant (³He, D and H2 for the three burns after the first, 2,197 t;
-pass 7) fills a second, larger torus between ring B and the forward torus (R 22.8 m, minor 9.0 m, X 86.1–104.1 m, F01), whose three
-transfer lines join the same route. Four transfer lines leave the forward torus, ride the bypass collar
-at r 32.5 m clear of both ring sweeps, drop at its aft station and enter the hull at X 70.02 m (`IF_FUEL_HULL_*`, OPEN), then run
-along the keel lanes at r 3.6 m over the pulse bank and battery to the four feed run tanks (`Feed_Run_Tank_01–04`, the drive's
-short-term run tanks: 4 × r 1.4 × 12 m at X −83…−71 m, `[physics.fuel_tanks]`, no fuel mass; `IF_FUEL_RUN_TANK_*`). Volume margins at
-3 % ullage: ³He +1,690 m³, D2 +65 m³, H2 +416 m³. Boil-off, cryocooler power, support loads and insulation are OPEN; no fuel mass
-enters the rig. **Body framing and momentum storage** (`body_equipment.py`, `[body_equipment]`, PROTOTYPE): an internal ring frame
+`mass_properties.suballocations`). **Fuel storage** (TANK-AXIAL, owner brief 2026-11-01, architecture WORKING (owner-approved 2026-11-01, S&E 15 row 244), every dimension PROTOTYPE;
+`fuel_storage.py`, `components/storage.py`, `[fuel_storage]`; before/after numbers in `references/evidence/longitudinal_tanks.json`): the full-return
+inventory (³He 1,094 t, D 731 t, H2 972 t) in thirteen straight pressure vessels with axes parallel to X, in one forward farm in the Brow's
+shadow, X 109.25–137.85 m (between ring B's 1.5 m service clearance and the EYE service sleds). Nine class L vessels (13.5 m insulated
+envelope) on an outer ring R 27.75 m and four class M (11.5 m) on an inner ring R 13.5 m, all with 2:1 heads and a 0.30 m wall stack;
+`Fuel_Tank_O1–O9_*`, `Fuel_Tank_I1–I4_*`. ³He in six outer vessels, H2 in three outer and two inner, D2 in the opposite inner pair; no
+vessel holds two species. The EVA lane (50°) and both docking corridors (195/315°, 3.15 m keep-out) stay open the full length, the
+outer vessels keep 0.5 m off the bypass girders' Q38 panels (30/150/270°), and the vessels keep a 1.0 m access gap. Capacity over the
+need with 3 % ullage, 1.5 % residual and 0.5 % boil-off reserve (volume only, the loaded mission is unchanged): ³He +3.4 %, D2 +11.5 %,
+H2 +4.2 %. Each vessel stands aft on 16 insulating CFRP skirt struts (`Fuel_Skirt_*`) from its aft Y-ring to a seat ring on the thrust
+deck (`Fuel_Deck_Truss_*`, one radial two-chord truss per vessel from the collar at FWD −37.6…−35.8 m, 1.70 m clear of ring B's
+sweep; `Fuel_Deck_Hoop_*`); each outer truss's tip is tied (`Fuel_Deck_Collar_Tie_*`) to the bypass collar's forward hoop, and lacing
+between that hoop and the mid hoop (`Fuel_Deck_Ring_Lacing`) makes the two a 5.6 m deep ring girder to the three bypass girders; the forward end slides on two V-links (`Fuel_Fwd_Link_*`, 0.20 m axial travel) to the collar or to a keel
+rail at r 20 m (`Fuel_Keel_Rail_*`, `Fuel_Forward_Hoop`, `Fuel_Forward_Ties`). Each vessel drains from its aft apex (the sump under
+thrust) through an isolation/metering valve (`Fuel_Outlet_*`, `Fuel_Valve_*`) into its species' ring main on the deck
+(`Fuel_Ring_Main_*`); two trunks per species ride out to r 32.5 m, aft along the bypass collar, enter the hull in the slot between the LOW section's front and ring A
+(`IF_FUEL_HULL_*`, OPEN) and run along the keel lanes to the four feed run tanks (`Feed_Run_Tank_01–04`, 4 × r 1.4 × 12 m at
+X −83…−71 m, `[physics.fuel_tanks]`; `IF_FUEL_RUN_TANK_*`). Two cryocooler cold boxes per species sit on the deck's aft face
+(`Fuel_Cryocooler_*`). Viewport colours: ³He amber, D2 violet, H2 pale blue, dry storage olive. The body bay (X −89.75…21.25 m)
+is the dry store: 54 rectangular containers on racks between the keel lanes (`Dry_Store_*`, 2,419 m³; workshop, spares, cargo).
+Loads, sizing and heat leak in "Tank-farm load path (F01)". No fuel mass enters the rig. **Body framing and momentum storage** (`body_equipment.py`, `[body_equipment]`, PROTOTYPE): an internal ring frame
 (`Body_Frame_01–08`) in every module gap between the keel rails and the skin; on the two 3 m utility frames (X −31, 7 m) three radial
-beams at the lobe bisectors carry six double-gimbal control-moment gyros (`Body_CMG_*`, 1.1 m housings at r 2.9 m), sized so five of
+beams at the sector bisectors carry six double-gimbal control-moment gyros (`Body_CMG_*`, 1.1 m housings at r 2.9 m), sized so five of
 six hold twice the rings' allowed residual momentum (100,770 N·m·s; 20,154 N·m·s each, 6000 rpm, 32 kg·m² rotor). Mass, power, loads
 and slew rates are OPEN. No quantitative plume or magnetic exclusion boundary
 is sourced. Art Style owns depiction; engineering owns dimensions and operating
@@ -553,19 +564,45 @@ keeps its 0.35 GW margin. Radiators and structure are unchanged. The LOCKED 0 �
 structure (29.42 MN design thrust, set at a 2.0 kt reference mass): the owner's case E (1,900 t, 420 t expelled, 1,480 t at burnout,
 7.55 d) is still reproduced by `profile = "ramp"`. The absorbed fraction is a requirement on the Fiji drive, not shown physics.
 
+## Functional review colours
+
+Owner brief 2026-11-01. `functional_colors.py`, applied by `build/common.py` `functional_review` on every save: each generator-owned
+object carries its function's viewport colour (`obj.color`, Solid shading with Color = Object) and a `wf_function` property; production
+materials are unchanged. STORAGE objects sit in `STORAGE_FORWARD_BANK_<species>`, `STORAGE_FEED_<species>` and `STORAGE_<function>`
+sub-collections where the generator left them at the top level, THERMAL objects in `THERMAL_HOT_CIRCUIT`, `THERMAL_WARM_CIRCUIT`,
+`THERMAL_LOW_CIRCUIT` and `THERMAL_BREAKS_AND_SUPPORTS`; each asset collection carries the nearest of Blender's eight tag colours. Every
+file holds the legend as the `FUNCTIONAL_COLOR_LEGEND` text.
+
+| Function | Colour | Tag |
+| --- | --- | --- |
+| Structure | neutral grey | brown |
+| Shield / dust | ochre | yellow |
+| EYE, sensors, comms | cyan | blue |
+| Habitat, crew transfer | green | green |
+| H2 | blue | blue |
+| D | teal | blue |
+| He-3 | violet | violet |
+| Hot radiator | red | red |
+| Warm radiator | orange | orange |
+| Low-temperature radiator | pale blue | blue |
+| Main propulsion | magenta | pink |
+| RCS (incl. CMGs) | yellow | yellow |
+| Power | indigo | violet |
+| Docking, EVA, service | cream | yellow |
+
 ## Placed mass model (B02)
 
 **WORKING (Claude under the owner's delegation of 2026-10-31; S&E 15 OWN-B02-MASS-PLACEMENT-2026-10-31, 13!A18:I36, 98!A130).**
 `mass_model.py` (report `references/p1_mass_model.json`, parameters `physics.mass_placement`) places every budget item on its PROTOTYPE
 span (`exterior_hardware.inertia_items`), the rotating shares on the two ring planes, the 20 t refuge water at the refuge, the 200 t operating
-inventory along the body, the 40.2 t CIRC-001 corridors on the rings, the 330 t of return tanks on the return torus and the 2,797 t mission propellant in its stores (each store drains in
-proportion). Departure 4,466 t with the CG at X 69.5 m (roll 1.86e9, pitch 1.59e10 kg m²); end of the first burn 3,488 t at X 63.4 m,
-6.1 m aft. The forward torus is the
-one large asymmetric mass (the return torus has the same cells in every vessel, so it stays balanced at any common fill): a single 110 t deuterium cell put the CG 0.60 m off the thrust axis, which needs 23 % differential thrust from
-the four nozzles at 2.6 m. Deuterium therefore sits in one cell at the a1 end of each vessel (arcs 9, 7 and 8°), and each species is
-loaded with zero lateral moment of its own and drawn in the same proportion: the CG stays within 11 mm of the axis at departure
-and on it later in the burn (0.4 % differential thrust against a 5 % allowance). Vessel 3 runs at its 97 % fill limit at departure. The one
-modelled D2 line leaves vessel 3; every cell only drains along the burn (F01), so the balance needs a metered outlet per cell, not crossfeed. Rings: one person moving between the rings
+inventory along the body, the 40.2 t CIRC-001 corridors on the rings, the 330 t of added full-return tankage on the thirteen farm vessels
+(each vessel's share by its shell area, at its axis) and the 2,797 t mission propellant settled aft in its vessels (each store drains in
+proportion). Departure 4,466 t with the CG at X 89.6 m (roll 2.22e9, pitch 2.55e10 kg m²); end of the first burn 3,488 t at X 78.2 m,
+11.4 m aft (all propellant sits in the forward farm, and the RAD-ZONE sections put 44.5 m between the drive and the rings).
+Each species is loaded with zero lateral moment of its own (`mass_model.balance`: weighted least squares on the vessel fills, active set on
+0 ≤ load ≤ fill limit) and drawn in the same proportion, so every vessel only drains and the balance needs a metered outlet per vessel,
+not crossfeed. The CG stays within 7 mm of the axis at departure and 10 mm at burnout (0.37 % differential thrust against a 5 %
+allowance; 1.47 % with every vessel filled in proportion to its capacity instead); the dry ship's CG is 20 mm off the axis. Rings: one person moving between the rings
 uses the whole 0.1 % momentum tolerance, so the rings run at equal momentum (0.0019 rpm per person) or move 256 kg of ring water per person
 from floor to overhead; a full six-person sector (13.4 t m, 2.4 kN whirl at 4 rpm) is cancelled by 480 kg of water in the other two
 sectors. Spokes carry 404.5 kN axial each at 1.5 g, 453.8 kN with the corridor mass. The simulation rig still reads the centre of mass and
@@ -575,30 +612,38 @@ inertia as OPEN until the owner adopts positions.
 
 **WORKING (pass 6, Claude under the owner's delegation of 2026-10-31; S&E 15 OWN-ATT-CHECK-2026-10-31; rerun for the full-return ship
 in pass 7).** `attitude.py` (report `references/p1_attitude.json`, `physics.attitude`) puts the B02 inertia under the S02 actuators. A
-180° flip on the 21.8 kN m RCS couple (one 100 N jet at each end, 232.5 m apart) takes 53 min at departure and 50 min at the end of the
-first burn, 216 kg of RCS propellant at 300 s (81 kg at 800 s). During the burn the 11 mm lateral CG offset at departure makes 244 kN m:
-11 times the RCS couple, and it would fill the CMGs' 101 kN m s in 0.4 s, so only the drive can hold it, by differential channel thrust
-(0.4 % used of the 5 % allowance). What is left of that authority bounds the drive's thrust-axis alignment to ±0.038° about the CG line;
-a 0.1° error alone would need 12 % (a drive requirement, not demonstrated). In a flip each ring's 50.4 MN m s turned at 0.11–0.12°/s puts
-about 100–105 kN m on its rotor bearings (internal; the counter-rotating pair cancels it, the 0.1 % residual leaves about 100 N m on the
+180° flip on the 26.0 kN m RCS couple (one 100 N jet at each end, 277 m apart on the 289.5 m body) takes 58 min at departure and 56 min at
+the end of the first burn, 239 kg of RCS propellant at 300 s (89 kg at 800 s). During the burn the 7–10 mm lateral CG offset makes
+160–210 kN m: 6–8 times the RCS couple, and it would fill the CMGs' 101 kN m s in 0.5–0.6 s, so only the drive can hold it, by
+differential channel thrust (0.37 % used of the 5 % allowance). What is left of that authority bounds the drive's thrust-axis alignment
+to ±0.031° about the CG line; a 0.1° error alone would need 14 % (a drive requirement, not demonstrated). In a flip each ring's 50.4 MN m s
+turned at 0.10–0.11°/s puts about 90–95 kN m on its rotor bearings (internal; the counter-rotating pair cancels it, the 0.1 % residual
+leaves about 90 N m on the
 ship): a bearing load case. The CMGs absorb about two people crossing between rings before the rings retrim. Gravity gradient at the
 station (orbit not released, B04): in LEO at 45° off the local vertical it is 1.4 times the RCS couple (30 kN m), so a LEO station parks
 Wayfarer along the local vertical; at GEO it is 125 N m.
 
-## Torus load path (F01)
+## Tank-farm load path (F01)
 
-**WORKING (pass 6, Claude under the owner's delegation of 2026-10-31; S&E 15 OWN-F01-TORUS-LOADS-2026-10-31; return torus pass 7).**
-`fuel_loads.py` (report `references/p1_fuel_loads.json`, `physics.fuel_loads`). Radial struts would carry a torus's inertial load under
-thrust in bending (4.9 GPa in a 0.40 m titanium tube against 0.88 GPa yield), so each of the six supports of each torus is a bipod in its
-azimuth's X-r plane, two legs from the torus inner face to the hull collar skin, and the load runs along the legs. The forward torus
-(hydrogen, one deuterium cell per vessel) stands on 0.40 m diameter legs between the return torus and the shield truss; the return torus
-(`fuel_storage.return_torus`: R 22.8 m, minor radius 9.0 m, X 86.1–104.1 m, three vessels each split 0.546 ³He / 0.140 D / 0.314 H2 by
-arc so they stay balanced, gaps at 90/210/330°) stands on 0.90 m diameter legs, 2.9 m clear of ring B's sweep and 2.0 m behind the forward torus;
-its three transfer lines run to the feed run tanks. Every cell drains in proportion along the power-limited burn, so the worst state is
-departure (0.50 g): forward torus vessel 1 (203 t), aft leg 0.54 MN in compression, +88 % in buckling; return torus vessel 3 (849 t),
-aft leg 1.71 MN, +1,280 % (Ti-6Al-4V, ultimate factor 1.4, Euler knockdown 2; all PROTOTYPE). At the 1.5 g design ramp with full tanks
-the forward-torus legs would be about 38 % short, so a drive upgrade to that profile needs heavier forward legs. The spine carries up
-to 20.4 MN axially at the drive (departure), 18.8 MN amidships, 15.2 MN at ring A and 8.2 MN at the forward collar.
+**WORKING (TANK-AXIAL, 2026-11-01, Claude under the owner's delegation; deck tie-in the owner's pick 2026-11-01; first order, PROTOTYPE
+geometry and materials).** `fuel_loads.py` (report `references/p1_fuel_loads.json`, `physics.fuel_loads`). Under thrust the propellant
+settles aft, so each vessel is fixed aft and guided forward. Design case: every vessel full at 1.5 g (DOP-03); flight peak 0.64 g at
+burnout. Shells (Al-Li 2195, MEOP 0.25 MPa plus the 1.5 g liquid head, weld factor 0.85, ultimate factor 1.4): 5.1–6.0 mm, 240 t; MLI
+29 t; unpressurised barrel buckling at 1.5 g +384 % (SP-8007 knockdown). Skirts (CFRP tubes r 0.11 m, 8 mm wall, 16 per vessel): worst
+`Fuel_Tank_I3_D2`, 0.47 MN per strut at 1.5 g, +217 % in strength, +81 % in Euler buckling (knockdown 2), 8 t in all. Thrust deck:
+1.36 m between chord centres (ring B's clearance aft, the vessels forward). The inner trusses cantilever from the collar (worst 43 MN m,
+32 MN per chord at 1.5 g); each outer truss spans from the collar to its tip, which two struts tie to the bypass collar's forward hoop, so
+its peak moment falls to 14 MN m (10 MN per chord, 3 MN in flight) and the tip passes 3.1 MN to the ring girder. That girder (the bypass
+collar's mid and forward hoops at r 35 m, X FWD −66.7…−61.1, laced into a 5.6 m deep truss) spans 120° between the bypass girders: chords
+17.6 MN (0.028 m² Ti each, the requirement on hoops whose size Q45 leaves open), lacing 27 t. Deck 161 t in all (trusses 60, hoops 19,
+ring chords 55, lacing 27, ties 1); the collar takes 23.5 MN axially and the three bypass girders 7.7–8.9 MN each at 1.5 g (2.4–2.8 MN in
+flight): an interface load on the Q45 collar, whose load split stays OPEN. Guides 20 t. First-order tankage 458 t against the 466 t
+budget (`tank_dry_fraction` 0.15 × capacity). Cold contraction: 0.095 m between the aft fixity and the forward links against 0.20 m of
+slide. Heat leak at 0.3 W/m² through MLI plus skirt conduction, uncooled: ³He 2.36 kW (24 t/day at ~3 K), H2 1.85 kW (357 kg/day), D2
+0.66 kW (189 kg/day). Zero boil-off concept (`fuel_loads.cooling`, the RAD-ZONE stage model): a ~20 K cooled shield round every vessel
+(0.15 W/m², 3.6 kW lift at 60 W/W) and a 3 K stage for ³He (0.01 W/m², 0.12 kW at 1,500 W/W), ×1.5 for supports: 0.40 MW rejected into
+the LOW radiator section, which keeps 0.30 MW after 0.3 MW of avionics. Spine axial at departure: 20.4 MN at the drive, 19.4 MN
+amidships, 17.9 MN at ring A, 4.6 MN at the forward collar.
 
 ## Equipment-to-space allocation (G01)
 
@@ -620,6 +665,18 @@ blades are dark, and drain-back warm channels in the blade panels (a separate ci
 51 MW over the 26,882 m² effective area, so the 15–30 MW normal defense band uses 29–58 % of the blades and the 50 MW limited duty fits;
 50–80 MW bursts stay with load shedding and Heat Debt. The cold loop stays on each ring's usable faces: 0.15 MW in HIGH_POWER against the
 owner's 100 kW bound (+50 %), 1.38 MW in the coast. No geometry changes; the Q38 candidate panels keep no credited area.
+
+## Radiator zoning (RAD-ZONE)
+
+**WORKING (owner pick 2026-11-01, ported from the layout-redesign study; S&E 15 row 242; every value PROTOTYPE).** `radiator_zones.py`
+(`[radiators.zones]`). Between the rings and the unchanged 1800 K hot blade, aft to front: a 2 m break, the WARM section (440 K, 5 MW
+machinery base load, 21 m), a 2 m break and the LOW section (300 K, 1 MW: the tank farm's cryocoolers and stationary avionics, 19.5 m),
+each its own plate in each blade plane with its own booms, trunk and valves (`Radiator_Zone_<id>_<k>`). Lengths derive from load /
+(2 faces × 24 m emitting height × 0.9 × σT⁴ × 0.85 view × 0.9 backload × 3 blades). A two-layer baffle annulus (`Radiator_Baffle_<id>`,
+ε 0.08, from 0.10 m off the casing to r 37 m) at each break stops the cooler plates seeing hotter ones. The radiating warm casing stays
+along the hot blades; the casing beside the zones is MLI-wrapped. The rings follow the zone front by the HAB-001 offset (3.9 m), so the
+hot blades now stand 44.5 m further from the rings and the tank farm; the bypass collar's aft frame and the trunks' hull drop sit in the
+slot between the LOW section and ring A. The zone sections' mass is not in the B01 budget (OPEN).
 
 ## Heat-loop screen
 
@@ -651,7 +708,8 @@ area: `thermal.loops.warm.area` and `cold.area` stay `known = false`, and `radia
   ≥450 K warm surface under the study's own premise, and pessimistic for the dark-blade warm shortfall, since cold blades would be
   sinks; the report flags every finding that depends on it.
 - The casing sees the blades at a mean F of 0.20, context for revalidating the 0.9 blade view factor (40!A23).
-- **Candidate warm panels (Q38, built).** The owner accepted the direction (15!A98, 40!A67:F68): no warm or cold capacity from the
+- **Candidate warm panels (Q38, removed 2026-11-01).** The owner moved every radiator away from the habitat and the tanks: `enabled =
+  false`, no panel is built; warm and low-temperature rejection is in the RAD-ZONE sections aft of the rings (below). The record: The owner accepted the direction (15!A98, 40!A67:F68): no warm or cold capacity from the
   hot-facing casing or ring surfaces; dedicated, baffled, cold-space-facing 450 K panels; capacity left unknown, candidates shown
   PROTOTYPE only (15!I98). `warm_panels.py` (`[thermal.loops.candidate_panels]`) places them where the screen's blade-plane family is
   least irradiated: in each blade plane, forward of the blade front and inside the shield shadow, where the blade is seen edge-on. The Q45

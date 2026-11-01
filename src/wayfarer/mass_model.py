@@ -3,15 +3,16 @@
 Function: put every sourced mass at a place, so the ship has a centre of mass and inertia at departure, through the First Ignition burn and
 at burnout, and check the three things those numbers decide:
 - the thrust line: the drive pushes along the X axis, so any lateral centre-of-mass offset e needs a steering torque F e from the four
-  magnetic nozzles (differential thrust e / nozzle_offset); the torus propellant (deuterium in one cell, three uneven hydrogen vessels) is
-  the one large asymmetric mass, so its fill is trimmed between the hydrogen vessels like an aircraft's fuel trim;
+  magnetic nozzles (differential thrust e / nozzle_offset); the tank farm's vessels stand where the lanes leave room, not symmetrically, so
+  each species is loaded across its vessels with zero lateral moment of its own and drawn in the same proportion (metered outlets), like an
+  aircraft's fuel trim, and the vessels' own dry mass is placed with them;
 - the counter-rotating rings: equal angular momentum within the 0.1 % tolerance (08) when people move between them, and static balance
   within a ring when a sector fills, using the ring water as ballast;
 - the spoke axial load at 1.5 g with the CIRC-001 corridor mass added to the 330 t rotating allowance.
 
 Placement: the 13_MASS_POSITIONS regions as X spans and radial models (the [exterior_hardware] inertia_items, PROTOTYPE), split per ring
 where an item rotates; the 20 t refuge water at the refuge; the operating inventory above the 1.1 kt protected ship (B01, 200 t) as an
-unallocated cylinder along the body; propellant in its FUEL-SPLIT stores (fuel_storage). Standard library only.
+unallocated cylinder along the body; propellant in the TANK-AXIAL vessels (fuel_storage), settled aft under thrust. Standard library only.
 
     python3 src/wayfarer/mass_model.py      # prints the cases and writes references/p1_mass_model.json
 """
@@ -74,100 +75,94 @@ def dry_parts(s):
         m = ring_circulation.budget(s)['mass_kg']['total']
         for tag, xc in (('A', xa), ('B', xb)):
             out.append(_part(f'circ001@ring_{tag}', m/2, xc-1.0, xc+1.0, ['ring', r_com]))
-    add = operating_point.mission(s)['added_tank_kg']
-    if add > 0:                                  # pass 7: the return torus's tank shell, insulation and supports (tank_dry_fraction)
-        rt = fuel_storage.torus(s, 'return_torus')
-        out.append(_part('return_torus_tanks', add, rt['x']-rt['a'], rt['x']+rt['a'], ['ring', rt['R']]))
+    out += tankage_parts(s)
     op = s['physics']['operating_point']; extra = op['protected_and_operational_kg']-sum(i['mass_kg'] for i in items.values())
     if extra > 0:
         out.append(_part('operating_inventory', extra, p['operating_inventory_x'][0], p['operating_inventory_x'][1], ['cyl', p['operating_inventory_r_m']]))
     return out
 
 
-def _arc_centroid(a0, a1, R):
-    """Centroid (y, z) of a thin arc a0..a1 at radius R."""
-    da = a1-a0; k = R*2*math.sin(da/2)/da; mid = (a0+a1)/2
-    return k*math.cos(mid), k*math.sin(mid)
+def tankage_parts(s):
+    """The added tankage of the full return (operating_point.mission added_tank_kg: shell, insulation and supports at tank_dry_fraction of
+    the capacity beyond today's inventory) on the tank farm: each vessel's share in proportion to its shell area, at its own axis, so an
+    uneven vessel layout shows in the dry ship's centre of mass."""
+    add = operating_point.mission(s)['added_tank_kg']
+    if add <= 0:
+        return []
+    ts = fuel_storage.tanks(s); A = {t['name']: shell_area(t) for t in ts}; tot = sum(A.values())
+    return [_part(f"tankage_{t['id']}", add*A[t['name']]/tot, t['x0'], t['x1'], ['cyl', t['a']], (t['y'], t['z'])) for t in ts]
 
 
-def torus_capacity(s, key='torus'):
-    """Liquid capacity (kg) of each torus cell at the species density."""
-    rho = fuel_storage.cfg(s)['density_kg_m3']; tor = fuel_storage.torus(s, key)
-    rho = dict(rho, **{'helium-3': rho['helium_3']})
-    return [dict(c, cap_kg=c['liquid_m3']*rho[c['species']]) for c in tor['cells']], tor
+def shell_area(t):
+    """Pressure shell area of a vessel (barrel plus two 2:1 ellipsoidal heads, 1.38 pi a^2 each)."""
+    a = t['a']; return 2*math.pi*a*(t['y_ring'][1]-t['y_ring'][0])+2*1.38*math.pi*a*a
 
 
-def _det3(m):
-    return (m[0][0]*(m[1][1]*m[2][2]-m[1][2]*m[2][1])-m[0][1]*(m[1][0]*m[2][2]-m[1][2]*m[2][0])
-            + m[0][2]*(m[1][0]*m[2][1]-m[1][1]*m[2][0]))
+def tank_capacity(s):
+    """Liquid capacity (kg) of each vessel at its species' density."""
+    rho = fuel_storage.cfg(s)['density_kg_m3']
+    return [dict(t, cap_kg=t['liquid_m3']*rho[fuel_storage.INV_KEY[t['species']]]) for t in fuel_storage.tanks(s)]
+
+
+def _solve(M, b):
+    n = len(b); A = [row[:]+[b[i]] for i, row in enumerate(M)]
+    for c in range(n):
+        piv = max(range(c, n), key=lambda r: abs(A[r][c]))
+        if abs(A[piv][c]) < 1e-12:
+            return None
+        A[c], A[piv] = A[piv], A[c]
+        for r in range(n):
+            if r != c:
+                f = A[r][c]/A[c][c]
+                for k in range(c, n+1):
+                    A[r][k] -= f*A[c][k]
+    return [A[i][n]/A[i][i] for i in range(n)]
 
 
 def balance(s, species, kg):
-    """One species' load per torus cell with no lateral moment of its own (the three cells' total and two moment equations), so the load
-    stays balanced at any fill when drawn in the same proportion. Falls back to the least-moment split within the ullage limit.
-    Returns (rows per cell, residual moment kg m)."""
-    cells, tor = torus_capacity(s); R = tor['R']; cs = [c for c in cells if c['species'] == species]
-    pts = [_arc_centroid(c['a0'], c['a1'], R) for c in cs]; fill_max = 1/(1+fuel_storage.cfg(s)['ullage'])
-    hi = [c['cap_kg']*fill_max for c in cs]; ms = None
-    if len(cs) == 3 and kg > 0:
-        A = [[1, 1, 1], [p[0] for p in pts], [p[1] for p in pts]]; D = _det3(A)
-        if abs(D) > 1e-9:
-            x = []
-            for k in range(3):
-                mk = [row[:] for row in A]
-                for r, b in enumerate((kg, 0.0, 0.0)):
-                    mk[r][k] = b
-                x.append(_det3(mk)/D)
-            if all(0 <= xi <= h for xi, h in zip(x, hi)):
-                ms = x
-    if ms is None and len(cs) == 3 and kg > 0:
-        err = None; N = 240
-        for i in range(N+1):
-            for j in range(N+1):
-                m0, m1 = hi[0]*i/N, hi[1]*j/N; m2 = kg-m0-m1
-                if not 0 <= m2 <= hi[2]:
-                    continue
-                e = math.hypot(sum(m*p[0] for m, p in zip((m0, m1, m2), pts)), sum(m*p[1] for m, p in zip((m0, m1, m2), pts)))
-                if err is None or e < err:
-                    ms, err = [m0, m1, m2], e
+    """One species' load per vessel with no lateral moment of its own: as close to an equal fill as the moment and total allow (weighted
+    least squares, active set on 0 <= load <= capacity x fill_max), so the load stays balanced at any fill when drawn in the same proportion.
+    Returns (rows per vessel, residual moment kg m)."""
+    cs = [c for c in tank_capacity(s) if c['species'] == species]; n = len(cs); umax = [c['cap_kg']*fuel_storage.fill_max(s) for c in cs]
+    caps = [c['cap_kg'] for c in cs]; pts = [(c['y'], c['z']) for c in cs]; t = [kg*c/sum(caps) for c in caps]; fixed = {}; ms = None
+    for _ in range(3*n):
+        free = [i for i in range(n) if i not in fixed]
+        rows = [[1.0]*len(free), [pts[i][0] for i in free], [pts[i][1] for i in free]]
+        b = [kg-sum(fixed.values()), -sum(v*pts[i][0] for i, v in fixed.items()), -sum(v*pts[i][1] for i, v in fixed.items())]
+        if len(free) < 3:
+            rows, b = rows[:len(free)], b[:len(free)]
+        w = [caps[i] for i in free]; tt = [t[i] for i in free]
+        M = [[sum(r1[k]*w[k]*r2[k] for k in range(len(free))) for r2 in rows] for r1 in rows]
+        lam = _solve(M, [bb-sum(r[k]*tt[k] for k in range(len(free))) for r, bb in zip(rows, b)])
+        if lam is None:
+            break
+        m = {i: tt[k]+w[k]*sum(lam[j]*rows[j][k] for j in range(len(rows))) for k, i in enumerate(free)}
+        bad = [(max(-m[i], m[i]-umax[i]), i) for i in free if m[i] < -1e-6 or m[i] > umax[i]+1e-6]
+        if not bad:
+            ms = [fixed.get(i, m.get(i)) for i in range(n)]; break
+        _, i = max(bad); fixed[i] = 0.0 if m[i] < 0 else umax[i]
     if ms is None:
-        tot = sum(c['cap_kg'] for c in cs); ms = [kg*c['cap_kg']/tot for c in cs]
+        ms = [min(u, kg*c/sum(caps)) for c, u in zip(caps, umax)]
     res = math.hypot(sum(m*p[0] for m, p in zip(ms, pts)), sum(m*p[1] for m, p in zip(ms, pts)))
     return [dict(name=c['name'], kg=m, cap_kg=c['cap_kg'], fill=m/c['cap_kg']) for c, m in zip(cs, ms)], res
 
 
-def propellant_parts(s, he3_kg, d2_kg, h2_kg, balanced=True, ret=None):
-    """Propellant as point masses: helium-3 spread over the 27 body lobes by volume (axisymmetric), deuterium and hydrogen in the torus
-    cells, balanced per species or (balanced=False) filled in proportion to each cell's capacity. ret: the return torus's kg per species
-    (pass 7), filled in proportion to each cell's volume; its three vessels are alike, so it adds no lateral moment."""
-    cells, tor = torus_capacity(s); R, a = tor['R'], tor['a_in']; xc = tor['x']; out = []
-    if ret:
-        rc, rt = torus_capacity(s, 'return_torus')
-        for sp, key in fuel_storage.INV_KEY.items():
-            cs = [c for c in rc if c['species'] == sp]; tot = sum(c['liquid_m3'] for c in cs)
-            for c in cs:
-                m = ret[key]*c['liquid_m3']/tot
-                if m > 0:
-                    y, z = _arc_centroid(c['a0'], c['a1'], rt['R'])
-                    out.append(_part(c['name'], m, rt['x']-rt['a_in'], rt['x']+rt['a_in'], ['point'], (y, z)))
-    lobes = fuel_storage.body_lobes(s)
-    if he3_kg > 0:
-        tot = sum(l['liquid_m3'] for l in lobes)
-        for l in lobes:
-            m = he3_kg*l['liquid_m3']/tot; rr = (l['r_in']+l['r_out'])/2
-            y, z = _arc_centroid(l['a0'], l['a1'], rr)
-            out.append(_part(l['name'], m, l['x0'], l['x1'], ['point'], (y, z)))
-    byname = {c['name']: c for c in cells}
-    for sp, kg in (('deuterium', d2_kg), ('hydrogen', h2_kg)):
+def propellant_parts(s, he3_kg, d2_kg, h2_kg, balanced=True):
+    """Propellant as slugs settled aft in each vessel under thrust (the liquid spans the aft fill fraction of the shell length), balanced per
+    species or (balanced=False) filled in proportion to each vessel's capacity."""
+    byname = {c['name']: c for c in tank_capacity(s)}; out = []
+    for sp, kg in (('helium-3', he3_kg), ('deuterium', d2_kg), ('hydrogen', h2_kg)):
+        if kg <= 0:
+            continue
         if balanced:
             rows, _ = balance(s, sp, kg)
         else:
-            cs = [c for c in cells if c['species'] == sp]; tot = sum(c['cap_kg'] for c in cs)
+            cs = [c for c in byname.values() if c['species'] == sp]; tot = sum(c['cap_kg'] for c in cs)
             rows = [dict(name=c['name'], kg=kg*c['cap_kg']/tot) for c in cs]
         for r in rows:
             if r['kg'] > 0:
-                c = byname[r['name']]; y, z = _arc_centroid(c['a0'], c['a1'], R)
-                out.append(_part(c['name'], r['kg'], xc-a, xc+a, ['point'], (y, z)))
+                c = byname[r['name']]; x0, x1 = c['x_shell']; f = r['kg']/c['cap_kg']
+                out.append(_part(c['name'], r['kg'], x0, x0+f*(x1-x0), ['cyl', c['a']], (c['y'], c['z'])))
     return out
 
 
@@ -183,10 +178,9 @@ def totals(parts):
 
 
 def stores_at(s, left):
-    """Propellant in every store with `left` (0..1) of the mission's propellant still aboard: each store drains in proportion (pass 7)."""
-    inv = fuel_storage.cfg(s)['inventory_kg']; ret = fuel_storage.return_inventory(s)
-    return dict(he3=inv['helium_3']*left, d2=inv['deuterium']*left, h2=(inv['hydrogen_first_ignition']+inv['hydrogen_reserve'])*left,
-                ret={k: v*left for k, v in ret.items()})
+    """Propellant aboard with `left` (0..1) of the mission's propellant still aboard: every species drains in proportion."""
+    inv = fuel_storage.inventory(s)
+    return dict(he3=inv['helium_3']*left, d2=inv['deuterium']*left, h2=inv['hydrogen']*left)
 
 
 def burn_states(s, steps=10, balanced=True):
@@ -198,9 +192,9 @@ def burn_states(s, steps=10, balanced=True):
     for i in range(steps+1):
         t = T*i/steps; m = m0-(m0-mf)*i/steps; left = 1-(m0-m)/P
         st = stores_at(s, left)
-        tot = totals(dry+propellant_parts(s, st['he3'], st['d2'], st['h2'], balanced, ret=st['ret']))
+        tot = totals(dry+propellant_parts(s, st['he3'], st['d2'], st['h2'], balanced))
         tot.update(t_s=t, thrust_N=F, steer_torque_N_m=F*tot['lateral_m'], differential_thrust=tot['lateral_m']/r_noz,
-                   propellant_kg=st['he3']+st['d2']+st['h2']+sum(st['ret'].values()), mission_left=left)
+                   propellant_kg=st['he3']+st['d2']+st['h2'], mission_left=left)
         out.append(tot)
     return out
 
@@ -239,24 +233,26 @@ def spokes(s):
 
 
 def report(s):
-    trimmed = burn_states(s); untrimmed = burn_states(s, balanced=False); inv = fuel_storage.cfg(s)['inventory_kg']
+    trimmed = burn_states(s); untrimmed = burn_states(s, balanced=False); inv = fuel_storage.inventory(s)
     lim = q(s)['max_differential_thrust']
     worst = max(trimmed, key=lambda r: r['differential_thrust']); worst_u = max(untrimmed, key=lambda r: r['differential_thrust'])
-    dep_d2, d2_res = balance(s, 'deuterium', inv['deuterium'])
-    dep_trim, dep_res = balance(s, 'hydrogen', inv['hydrogen_first_ignition']+inv['hydrogen_reserve'])
-    left = trimmed[-1]['mission_left']
-    end_trim, end_res = balance(s, 'hydrogen', (inv['hydrogen_first_ignition']+inv['hydrogen_reserve'])*left)
+    loads = {sp: dict(zip(('cells', 'residual_kg_m'), balance(s, sp, inv[k]))) for sp, k in fuel_storage.INV_KEY.items()}
+    dry = totals(dry_parts(s))
     fails = []
     if worst['differential_thrust'] > lim:
         fails.append(f"balanced burn needs {worst['differential_thrust']:.3f} differential thrust (limit {lim})")
+    if dry['lateral_m']/s['prototype']['nozzle_offset_m'] > lim:
+        fails.append(f"dry ship lateral CG {dry['lateral_m']:.3f} m needs more than {lim} differential thrust")
+    for sp, r in loads.items():
+        if r['residual_kg_m'] > 1.0:
+            fails.append(f'{sp} cannot be loaded with zero lateral moment ({r["residual_kg_m"]:.0f} kg m)')
     rb = ring_balance(s)
-    return dict(status=q(s)['canon_status'], departure=trimmed[0], burnout=trimmed[-1],
+    return dict(status=q(s)['canon_status'], departure=trimmed[0], burnout=trimmed[-1], dry_ship=dry,
                 cg_travel_m=trimmed[0]['cg_m'][0]-trimmed[-1]['cg_m'][0],
                 trimmed_worst=dict(t_s=worst['t_s'], lateral_m=worst['lateral_m'], differential_thrust=worst['differential_thrust']),
                 untrimmed_worst=dict(t_s=worst_u['t_s'], lateral_m=worst_u['lateral_m'], differential_thrust=worst_u['differential_thrust'],
                                      steer_torque_N_m=worst_u['steer_torque_N_m']),
-                load_deuterium=dict(cells=dep_d2, residual_kg_m=d2_res), trim_departure=dict(cells=dep_trim, residual_kg_m=dep_res), trim_burnout=dict(cells=end_trim, residual_kg_m=end_res),
-                ring_balance=rb, spokes=spokes(s), burn=trimmed, failures=fails)
+                loads=loads, ring_balance=rb, spokes=spokes(s), burn=trimmed, failures=fails)
 
 
 def check(s):
@@ -274,7 +270,7 @@ if __name__ == '__main__':
         print(f"{k}: {d['mass_kg']/1e3:.0f} t, CG x {d['cg_m'][0]:.2f} m, lateral {d['lateral_m']*1e3:.0f} mm, I roll {d['I_roll']:.3e}, "
               f"pitch {d['I_pitch']:.3e}, yaw {d['I_yaw']:.3e}")
     print('CG travel', round(r['cg_travel_m'], 2), 'm; trimmed worst', r['trimmed_worst'], '; untrimmed worst', r['untrimmed_worst'])
-    print('deuterium', [(c['name'], round(c['kg']/1e3, 1), round(c['fill'], 2)) for c in r['load_deuterium']['cells']], round(r['load_deuterium']['residual_kg_m']))
-    print('hydrogen departure', [(c['name'], round(c['kg']/1e3, 1), round(c['fill'], 2)) for c in r['trim_departure']['cells']], round(r['trim_departure']['residual_kg_m']))
-    print('hydrogen burnout', [(c['name'], round(c['kg']/1e3, 1), round(c['fill'], 2)) for c in r['trim_burnout']['cells']], round(r['trim_burnout']['residual_kg_m']))
+    print('dry ship', round(r['dry_ship']['mass_kg']/1e3), 't, lateral', round(r['dry_ship']['lateral_m']*1e3), 'mm')
+    for sp, l in r['loads'].items():
+        print(sp, [(c['name'], round(c['kg']/1e3, 1), round(c['fill'], 3)) for c in l['cells']], round(l['residual_kg_m']))
     print('rings', json.dumps(r['ring_balance'], default=float)[:600]); print('spokes', r['spokes']); print('failures', r['failures'])

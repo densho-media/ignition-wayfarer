@@ -396,7 +396,7 @@ def spoke_depth_m(s):
 def spar_clearance_m(s):
     """Axial clearance from the ring-A aft sweep face to the front of the radiator leading spar (Q29: >= 1.5 m, was ~0.60 m)."""
     p = s['prototype']
-    return centers(s)[0]-sweep_half(s)-(layout.origin(s, 'RADIATOR_FRONT')+p['radiator_leading_spar_radius_m'])
+    return centers(s)[0]-sweep_half(s)-(layout.origin(s, 'AFT_STORAGE_FRONT')+p['radiator_leading_spar_radius_m'])
 
 
 def plane_spacing_m(s):

@@ -495,7 +495,7 @@
  },
  "placement": {
   "refuge_inside_body_m": 3.4099999999999997,
-  "refuge_forward_of_shadow_shield_m": 174.64936247723134,
+  "refuge_forward_of_shadow_shield_m": 219.14936247723134,
   "refuge_areal_density_g_cm2": 20.0,
   "crew_tube_length_outside_body_m": 18.525,
   "note": "The rings stay at full size, so the pressurized sectors sit outside the 13 m body in every state; water, storage and structure fill the rest of the frame as distributed shielding (BASELINE ring_shielding, 12_HABITAT_LAYOUT A13). The crew tube is unshielded transit between the body and a sector. The refuge is inside the body."

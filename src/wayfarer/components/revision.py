@@ -11,6 +11,7 @@ import layout
 import drive_manifold
 import radiator_health as rh
 import warm_panels
+import radiator_zones
 import crew as crew_parts
 import crew_transfer
 import human_entry
@@ -439,7 +440,10 @@ def thermal(c,s,assets):
             obj['engineering_status']='OPEN: boot material, sealing, MMOD and thermal function; the member slides free inside the sleeve'
     # AFT-005: thermal-state glow and cell-health markers over the fixed blades, driven by RADIATOR_HEALTH_CTRL (display only).
     radiator_health(c,s,instances)
-    # Q38: candidate warm panels flanking the bypass-collar truss in each blade plane (PROTOTYPE geometry; capacity unknown, 15!I98).
+    # RAD-ZONE (owner pick 2026-11-01): LOW and WARM sections and their baffles ahead of the hot blade, aft of the rings.
+    if 'zones' in s['radiators']:
+        radiator_zones_geometry(c,s)
+    # Q38: candidate warm panels flanking the bypass-collar truss in each blade plane (removed 2026-11-01: enabled = false).
     import bmesh
     q=s['thermal']['loops']['candidate_panels'];warm=material('WarmPanel',(.42,.36,.30))
     for pnl in warm_panels.panels(s):
@@ -450,3 +454,36 @@ def thermal(c,s,assets):
         obj['engineering_status']='OPEN: baffles, coolant routing via the collar aft spoke, temperature map and net balance against the blades (Q38, 40!F68)'
         for name,pts in pnl['brackets']:
             line(c,name,pts,q['bracket_radius_m'],mats['thermal_support'],kind='warm_panel_bracket')
+
+
+def radiator_zones_geometry(c,s):
+    """RAD-ZONE (owner brief 2026-11-01): the LOW and WARM radiator sections ahead of the hot blade, one plate per blade plane with its own
+    root booms and feed/return trunk, and a two-layer radiation baffle annulus at each break (radiator_zones, PROTOTYPE)."""
+    z=s['radiators']['zones'];p=s['prototype'];th=p['radiator_thickness_m'];casing=__import__('thermal_geometry').casing_radius(s)
+    sheet={'LOW':(material('RadiatorZoneLowA',(.62,.78,.90)),material('RadiatorZoneLowB',(.56,.72,.86))),
+           'WARM':(material('RadiatorZoneWarmA',(.86,.52,.20)),material('RadiatorZoneWarmB',(.80,.46,.16)))}
+    metal=material('Structure',(.30,.40,.48));coolant=material('Coolant',(.15,.43,.51));baffle=material('RadiatorBaffle',(.82,.82,.80))
+    nx,nr=6,4
+    for pl in radiator_zones.plates(s):
+        a=pl['azimuth'];u=(0.0,math.cos(a),math.sin(a));n=(0.0,-math.sin(a),math.cos(a))
+        P=lambda x,r,w:(x,r*u[1]+w*n[1],r*u[2]+w*n[2])
+        for i in range(nx):
+            x0=pl['x0']+(pl['x1']-pl['x0'])*i/nx;x1=pl['x0']+(pl['x1']-pl['x0'])*(i+1)/nx
+            for k in range(nr):
+                r0=pl['r0']+(pl['r1']-pl['r0'])*k/nr;r1=pl['r0']+(pl['r1']-pl['r0'])*(k+1)/nr
+                vs=[P(x,r,w) for x in (x0,x1) for r in (r0,r1) for w in (-th/2,th/2)]
+                fs=[(0,2,3,1),(4,5,7,6),(0,1,5,4),(2,6,7,3),(0,4,6,2),(1,3,7,5)]
+                obj=mesh(c,f"{pl['name']}_Cell_{i}_{k}",vs,fs,sheet[pl['section']][(i+k)%2],kind='radiator_zone_cell')
+                obj['radiator_section']=pl['section'];obj['temperature_K']=pl['T_K'];obj['circuit']=pl['circuit']
+                obj['thermal_zone']='ROOT_TRANSITION' if k==0 else pl['section']
+                obj['planform_m2']=(x1-x0)*(r1-r0);obj['source_ref']='radiator_zoning';obj['engineering_status']='PROTOTYPE (RAD-ZONE); panel design, coolant and emissivity OPEN'
+        for tag,x in (('Aft',pl['x0']+0.4),('Fwd',pl['x1']-0.4)):
+            line(c,f"{pl['name']}_Root_Boom_{tag}",[P(x,casing+0.02,0),P(x,pl['r1'],0)],0.16,metal,kind='radiator_zone_support')
+        trunk=line(c,f"{pl['name']}_Trunk",[P(pl['x0']+0.4,pl['r0']+0.6,th/2+0.12),P(pl['x1']-0.4,pl['r0']+0.6,th/2+0.12)],0.10,coolant,kind='radiator_zone_trunk')
+        trunk['circuit']=pl['circuit'];trunk['engineering_status']='own feed/return trunk and isolation valves; no coolant crosses the break (OPEN: sizing, joints)'
+    for b in radiator_zones.baffles(s):
+        for k in range(b['layers']):
+            obj=annulus(c,f"{b['name']}_Layer_{k+1}",b['x']+(k-(b['layers']-1)/2)*b['layer_gap_m'],z['baffle_thickness_m'],b['r1'],b['r0'],baffle)
+            obj['kind']='radiator_baffle';obj['emissivity']=b['emissivity'];obj['source_ref']='radiator_zoning'
+            obj['function']='radiation baffle at the thermal break: blocks the line of sight from the cooler section to every hotter one (crawler gate at the casing, open only in the coast)'
+            obj['engineering_status']='PROTOTYPE; material, support and gate mechanism OPEN'

@@ -181,7 +181,7 @@ def render(root=ROOT, views=None, size=768, state="COAST", out_dir=None, hull='s
             focus,direction,local_corners,slab,legend=blade_view(s,d,name)
         elif name=='gap_detail':
             # Blade front against ring A's aft frame face; the whole ring and blade width stays in view.
-            gap=((d['front_x_m']+layout.at(s,s['prototype']['rotor_centers_x'][0])-s['habitat_ring']['frame_axial_m']/2)/2)
+            gap=((o['AFT_STORAGE_FRONT']+layout.at(s,s['prototype']['rotor_centers_x'][0])-s['habitat_ring']['frame_axial_m']/2)/2)
             focus,local_corners=box(gap-6,gap+6,38,38)
         elif name=='service_detail':
             # Forward service zone ahead of ring B: refuge, airlock, both docks and the docking corridors.
@@ -214,7 +214,7 @@ def render(root=ROOT, views=None, size=768, state="COAST", out_dir=None, hull='s
             x0=c[0];xa=x0+s['crew_transfer']['vestibule_u_m'][0]-.3;xb=x0+2.8;focus=Vector(((xa+xb)/2,0,0));local_corners=[Vector(p) for p in itertools.product((xa,xb),(-1,1),(-2.1,2.1))]
         elif name=='ring_spar_detail':
             # HAB-001: ring A against the leading radiator spar from the side: the 1.5 m service gap between the nominal spar front and ring A's aft sweep face.
-            focus,local_corners=box(o['RADIATOR_FRONT']-3,c[0]+3,32,32)
+            focus,local_corners=box(o['AFT_STORAGE_FRONT']-3,c[0]+3,32,32)
         elif name=='refuge_section_detail':
             # HAB-001: the refuge cut on the axial XZ plane (camera clipping, in memory only): the 0.20 m water jacket, end caps and the spine bore.
             focus,local_corners=box(ref['x0']-1.5,ref['x1']+1.5,4,4)

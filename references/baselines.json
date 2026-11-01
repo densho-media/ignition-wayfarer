@@ -1,6 +1,6 @@
 {
   "purpose": "Current production geometry baseline for tools/pipeline.py fingerprint diffs. Written only by `tools/workflow.py baseline`.",
-  "current": "references/baseline_baseline_pass7_full_return",
+  "current": "references/baseline_tank_axial_radzone_rcs",
   "history": [
     {
       "baseline": "references/baseline_fwd_eye_r30_hex",
@@ -37,6 +37,18 @@
     {
       "baseline": "references/baseline_pass6_torus_bipods",
       "replaced_utc": "2026-10-31T22:29:44Z"
+    },
+    {
+      "baseline": "references/baseline_baseline_pass7_full_return",
+      "replaced_utc": "2026-11-01T11:56:31Z"
+    },
+    {
+      "baseline": "references/baseline_tank_axial",
+      "replaced_utc": "2026-11-01T13:31:58Z"
+    },
+    {
+      "baseline": "references/baseline_tank_axial_radzone",
+      "replaced_utc": "2026-11-01T14:14:08Z"
     }
   ]
 }

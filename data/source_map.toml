@@ -3986,6 +3986,16 @@ inspected_on = "2026-10-29"
 modified_at_utc = "2026-10-29T17:00:00.000Z"
 note = "OWN-FUEL-SPLIT-2026-10-29 (owner-delegated): He-3 in the nine BODY-C3 stations, H2 and D2 in a segmented torus behind the Brow; inventories from the owner screens S&E 62/64/67 scenario A (RESEARCH). Geometry PROTOTYPE."
 
+[sources.tank_axial]
+workbook = "IGNITION — Wayfarer Science & Engineering Model"
+workbook_id = "18BQQEMXxu3qEw1jKN68VwC3rkOiVmafiWeoQORYgI0A"
+url = "https://docs.google.com/spreadsheets/d/18BQQEMXxu3qEw1jKN68VwC3rkOiVmafiWeoQORYgI0A/edit"
+sheet = "15_MODEL_INTERFACES"
+range = "A244:I244"
+canon_status = "WORKING"
+inspected_on = "2026-11-01"
+note = "TANK-AXIAL (owner brief 2026-11-01, approved 2026-11-01 14:46Z; S&E 15 OWN-TANK-AXIAL-2026-11-01): the longitudinal tank farm with the tied deck replaces FUEL-SPLIT (row 229) and the pass-7 return torus (row 240); supersedes the unbuilt split banks (row 241). Geometry PROTOTYPE."
+
 [sources.operating_point]
 workbook = "IGNITION — Wayfarer Science & Engineering Model"
 workbook_id = "18BQQEMXxu3qEw1jKN68VwC3rkOiVmafiWeoQORYgI0A"
@@ -4046,3 +4056,15 @@ cross_ranges = ["40_THERMAL!A1:F125", "15_MODEL_INTERFACES!A98:I98", "98_DECISIO
 inspected_on = "2026-10-31"
 notes = "F02 warm/cold loop architecture (Claude under the owner's delegation of 2026-10-31): burn heat pump into the hot loop, coast drain-back warm channels in the blades, cold loop on the ring faces."
 
+
+[sources.radiator_zoning]
+workbook = "IGNITION — Wayfarer Science & Engineering Model"
+workbook_id = "18BQQEMXxu3qEw1jKN68VwC3rkOiVmafiWeoQORYgI0A"
+url = "https://docs.google.com/spreadsheets/d/18BQQEMXxu3qEw1jKN68VwC3rkOiVmafiWeoQORYgI0A/edit"
+sheet = "15_MODEL_INTERFACES"
+range = "A242:I242"
+canon_status = "WORKING"
+source_id = "IGN-WAY-REDESIGN-RADZONE"
+cross_ranges = ["40_THERMAL!A1:F125", "15_MODEL_INTERFACES!A238:I238", "98_DECISION_LOG!A141:H141"]
+inspected_on = "2026-11-01"
+notes = "LOW / WARM / HOT radiator sections with breaks and radiation baffles aft of the habitat rings; the Q38 candidate warm panels round the rings removed (row written by the layout-redesign thread; ported into TANK-AXIAL on the owner's pick 2026-11-01)."

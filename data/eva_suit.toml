@@ -124,8 +124,8 @@ rail_standoff_m = 0.15             # handrail axis above the collar skin, PROTOT
 rail_azimuth_deg = 50.0            # along the airlock's azimuth (prototype.airlock_angle_deg)
 anchor_spacing_m = 1.5             # PROTOTYPE anchor pitch along the rail
 tether_reach_m = 2.0               # gameplay tuning: how far a clipped tether lets the body move (tether_length_m is OPEN)
-aft_hold_x_m = 105.60                # aft hold: the last anchor short of the forward collar's aft edge
-forward_hold_x_m = 116.00           # forward hold under the shield silhouette
+aft_hold_x_m = 127.85                # aft hold: the last anchor short of the forward collar's aft edge
+forward_hold_x_m = 138.25           # forward hold under the shield silhouette
 
 # Stations: Tale 26_GUIDED_EVA SCRIPT-05..11 (WORKING SCRIPT; 26!26 APPROVED STAGING / WORDING WORKING; 43 EVA-052 provisional). `what`, `why`
 # and `safety` are the Tale lines verbatim (the "What:" / "Why:" prefixes dropped); Tale owns them and updates them when releases change.
@@ -274,7 +274,7 @@ unlatch_standoff_m = 0.15          # PROTOTYPE: the operator's helmet top this f
 casualty_restrained = "PROTOTYPE assumption: a rescuer straps the casualty's arms and legs (strap hardware OPEN); its envelope is the passive suited pose"
 
 # SP-11 door and chamber study (43 EVA-043/044, 44 EVA2-003, 45 G-06). Disposable alternatives on the existing PROTOTYPE airlock axis
-# (hull_geometry Airlock_EVA, X 111.85, 50 deg); nothing is cut into the ship. Door hardware is the docking port's hinged plug leaf family
+# (hull_geometry Airlock_EVA, X 134.10, 50 deg); nothing is cut into the ship. Door hardware is the docking port's hinged plug leaf family
 # (human_entry: frame width, overlap, leaf thickness, swing clearance, 90 deg), seated from the high-pressure side.
 [airlock_study]
 apertures_m = [1.00, 1.10, 1.20, 1.35]   # 1.35 added by EVA-003 (45 G-14)
@@ -318,26 +318,26 @@ kit = [0.40, 0.25, 0.20]           # medical / O2 kit strapped to the frame in f
 # keel 1 (r 4.81 m) less the mechanical clearance; azimuth clear of survival reserve 1 (78-138 deg). The SP-11 chamber rises out of SP-12's
 # ceiling zone; its inner hatch opens into SP-12. No room dimension is canon (EVA-044); the Blender study measures them against the ship.
 [sp12]
-x_m = [110.75, 114.85]               # aft: survival reserve 1 (to X 110.60) plus the mechanical clearance
+x_m = [133.00, 137.10]               # aft: survival reserve 1 (to X 132.85) plus the mechanical clearance
 az_deg = [5.0, 75.0]
 r_m = [1.25, 4.60]                 # floor: spine 0.95 + mechanical clearance 0.15 + 0.15 floor/utility depth (PROTOTYPE); ceiling: keel 1 at 4.81 less 0.15 and its radius
 fixtures = [
-  { id = "SP12_DON_STAND_A", job = "suit donning stand A: suit hung on its PLSS docking frame, entered through the rear-entry hatch", kind = "stand", x = 113.40, az = 20.0, size = [0.95, 1.00, 2.05] },
-  { id = "SP12_DON_STAND_B", job = "suit donning stand B", kind = "stand", x = 114.30, az = 20.0, size = [0.95, 1.00, 2.05] },
-  { id = "SP12_PRESSURE_CHECK", job = "leak / pressure-check panel and umbilical (no setpoint or leak limit released)", kind = "panel", x = 113.85, az = 8.0, size = [0.70, 0.12, 0.60] },
-  { id = "SP12_O2_INTERFACE", job = "oxygen preparation interface (prebreathe supply; no duration, no flow budget)", kind = "panel", x = 114.70, az = 40.0, size = [0.10, 0.60, 0.60] },
-  { id = "SP12_TOOL_CHECKOUT", job = "tool and tether checkout board with a tether tug-test fixture (EVA-003: on the aft wall, clear of the SP-11 inner plug's parking pocket)", kind = "board", x = 110.85, az = 14.0, size = [0.12, 1.20, 1.00] },
-  { id = "SP12_BUDDY_ZONE", job = "buddy-check zone: two suited bodies, foot restraints", kind = "zone", x = 113.85, az = 55.0, size = [1.60, 1.50, 2.05] },
+  { id = "SP12_DON_STAND_A", job = "suit donning stand A: suit hung on its PLSS docking frame, entered through the rear-entry hatch", kind = "stand", x = 135.65, az = 20.0, size = [0.95, 1.00, 2.05] },
+  { id = "SP12_DON_STAND_B", job = "suit donning stand B", kind = "stand", x = 136.55, az = 20.0, size = [0.95, 1.00, 2.05] },
+  { id = "SP12_PRESSURE_CHECK", job = "leak / pressure-check panel and umbilical (no setpoint or leak limit released)", kind = "panel", x = 136.10, az = 8.0, size = [0.70, 0.12, 0.60] },
+  { id = "SP12_O2_INTERFACE", job = "oxygen preparation interface (prebreathe supply; no duration, no flow budget)", kind = "panel", x = 136.95, az = 40.0, size = [0.10, 0.60, 0.60] },
+  { id = "SP12_TOOL_CHECKOUT", job = "tool and tether checkout board with a tether tug-test fixture (EVA-003: on the aft wall, clear of the SP-11 inner plug's parking pocket)", kind = "board", x = 133.10, az = 14.0, size = [0.12, 1.20, 1.00] },
+  { id = "SP12_BUDDY_ZONE", job = "buddy-check zone: two suited bodies, foot restraints", kind = "zone", x = 136.10, az = 55.0, size = [1.60, 1.50, 2.05] },
 ]
 [sp13]
-x_m = [114.95, 117.10]
+x_m = [137.20, 139.35]
 az_deg = [5.0, 75.0]
 r_m = [1.25, 4.60]
 fixtures = [
-  { id = "SP13_DRY_RACK", job = "suit drying and storage rack (two suits)", kind = "rack", x = 115.60, az = 25.0, size = [0.95, 1.80, 2.05] },
-  { id = "SP13_CHARGE_PANEL", job = "battery charging, O2 recharge and water/consumables exchange interfaces (capacities OPEN)", kind = "panel", x = 117.00, az = 30.0, size = [0.10, 0.90, 0.80] },
-  { id = "SP13_BENCH", job = "pressure-shell inspection and component-replacement bench", kind = "bench", x = 116.40, az = 58.0, size = [1.00, 0.90, 0.90] },
-  { id = "SP13_SPARES", job = "spares lockers: gloves, visors, bearings, seals, PLSS modules", kind = "locker", x = 115.30, az = 62.0, size = [0.70, 0.60, 1.60] },
+  { id = "SP13_DRY_RACK", job = "suit drying and storage rack (two suits)", kind = "rack", x = 137.85, az = 25.0, size = [0.95, 1.80, 2.05] },
+  { id = "SP13_CHARGE_PANEL", job = "battery charging, O2 recharge and water/consumables exchange interfaces (capacities OPEN)", kind = "panel", x = 139.25, az = 30.0, size = [0.10, 0.90, 0.80] },
+  { id = "SP13_BENCH", job = "pressure-shell inspection and component-replacement bench", kind = "bench", x = 138.65, az = 58.0, size = [1.00, 0.90, 0.90] },
+  { id = "SP13_SPARES", job = "spares lockers: gloves, visors, bearings, seals, PLSS modules", kind = "locker", x = 137.55, az = 62.0, size = [0.70, 0.60, 1.60] },
 ]
 
 # SP-11 1.20 m sliding plug (owner direction 2026-10-11: S&E 15!A134 AIRLOCK-004 STUDY DIRECTION ACCEPTED / STRUCTURAL FLIGHT RELEASE HOLD,
@@ -391,25 +391,25 @@ redline_keeper = [
 # axis in `order` (lowest first), pitch_m apart; row = side by side at one height (a), pitch_m apart along the wall. stand_a_*: donning stand A study
 # position (removable fixture; the SP-11 bulkhead is never moved). zone_*: buddy-check zone study position. standoff_m: body front to the outer wall.
 redline_controls = [
-  { id = "CT0_baseline", layout = "vertical", order = ["release", "valve", "gauge"], a_min_m = 2.8, pitch_m = 0.20, standoff_m = 0.10, phi_step_deg = 15.0, stand_a_x_m = 113.40, stand_a_az_deg = 20.0, zone_x_m = 113.85, zone_az_deg = 55.0, what = "published layout (release / valve / gauge stacked), 15 deg station search, stand A at az 20" },
-  { id = "CT1_vertical_fine_angle", layout = "vertical", order = ["release", "valve", "gauge"], a_min_m = 2.8, pitch_m = 0.20, standoff_m = 0.10, phi_step_deg = 5.0, stand_a_x_m = 113.40, stand_a_az_deg = 20.0, zone_x_m = 113.85, zone_az_deg = 55.0, what = "stacked cluster, station angle searched in 5 deg steps (cluster moved around the chamber wall away from stand A)" },
-  { id = "CT2_row_fine_angle", layout = "row", order = ["release", "valve", "gauge"], a_min_m = 2.7, pitch_m = 0.20, standoff_m = 0.10, phi_step_deg = 5.0, stand_a_x_m = 113.40, stand_a_az_deg = 20.0, zone_x_m = 113.85, zone_az_deg = 55.0, what = "horizontal row at one height, 5 deg station search, stand A not moved" },
-  { id = "CT3_row_fine_angle_standoff_0.13", layout = "row", order = ["release", "valve", "gauge"], a_min_m = 2.7, pitch_m = 0.20, standoff_m = 0.13, phi_step_deg = 5.0, stand_a_x_m = 113.40, stand_a_az_deg = 20.0, zone_x_m = 113.85, zone_az_deg = 55.0, what = "row, operator 0.13 m off the wall (more room for the body, less reach)" },
-  { id = "CT4_row_fine_angle_zone_moved", layout = "row", order = ["release", "valve", "gauge"], a_min_m = 2.7, pitch_m = 0.20, standoff_m = 0.10, phi_step_deg = 5.0, stand_a_x_m = 113.40, stand_a_az_deg = 20.0, zone_x_m = 114.05, zone_az_deg = 66.0, what = "row, buddy zone moved to az 66 / X 104.05 (its limit in the room)" },
-  { id = "CT5_row_standA_az12", layout = "row", order = ["release", "valve", "gauge"], a_min_m = 2.7, pitch_m = 0.20, standoff_m = 0.10, phi_step_deg = 5.0, stand_a_x_m = 113.40, stand_a_az_deg = 12.0, zone_x_m = 113.85, zone_az_deg = 55.0, what = "row, donning stand A moved to az 12 (its 1.00 m width then leaves the room's az 5 wall by more: reported)" },
+  { id = "CT0_baseline", layout = "vertical", order = ["release", "valve", "gauge"], a_min_m = 2.8, pitch_m = 0.20, standoff_m = 0.10, phi_step_deg = 15.0, stand_a_x_m = 135.65, stand_a_az_deg = 20.0, zone_x_m = 136.10, zone_az_deg = 55.0, what = "published layout (release / valve / gauge stacked), 15 deg station search, stand A at az 20" },
+  { id = "CT1_vertical_fine_angle", layout = "vertical", order = ["release", "valve", "gauge"], a_min_m = 2.8, pitch_m = 0.20, standoff_m = 0.10, phi_step_deg = 5.0, stand_a_x_m = 135.65, stand_a_az_deg = 20.0, zone_x_m = 136.10, zone_az_deg = 55.0, what = "stacked cluster, station angle searched in 5 deg steps (cluster moved around the chamber wall away from stand A)" },
+  { id = "CT2_row_fine_angle", layout = "row", order = ["release", "valve", "gauge"], a_min_m = 2.7, pitch_m = 0.20, standoff_m = 0.10, phi_step_deg = 5.0, stand_a_x_m = 135.65, stand_a_az_deg = 20.0, zone_x_m = 136.10, zone_az_deg = 55.0, what = "horizontal row at one height, 5 deg station search, stand A not moved" },
+  { id = "CT3_row_fine_angle_standoff_0.13", layout = "row", order = ["release", "valve", "gauge"], a_min_m = 2.7, pitch_m = 0.20, standoff_m = 0.13, phi_step_deg = 5.0, stand_a_x_m = 135.65, stand_a_az_deg = 20.0, zone_x_m = 136.10, zone_az_deg = 55.0, what = "row, operator 0.13 m off the wall (more room for the body, less reach)" },
+  { id = "CT4_row_fine_angle_zone_moved", layout = "row", order = ["release", "valve", "gauge"], a_min_m = 2.7, pitch_m = 0.20, standoff_m = 0.10, phi_step_deg = 5.0, stand_a_x_m = 135.65, stand_a_az_deg = 20.0, zone_x_m = 136.30, zone_az_deg = 66.0, what = "row, buddy zone moved to az 66 / X 104.05 (its limit in the room)" },
+  { id = "CT5_row_standA_az12", layout = "row", order = ["release", "valve", "gauge"], a_min_m = 2.7, pitch_m = 0.20, standoff_m = 0.10, phi_step_deg = 5.0, stand_a_x_m = 135.65, stand_a_az_deg = 12.0, zone_x_m = 136.10, zone_az_deg = 55.0, what = "row, donning stand A moved to az 12 (its 1.00 m width then leaves the room's az 5 wall by more: reported)" },
 ]
 # SP-12 casualty exit / litter turn variants (DIST-005, owner 2026-10-11 16:45): N1 1.10 x 2.50 m axial slot stays the comparator. fitout: built = the published
 # SP12 fixtures; rearranged = donning stands A and B moved to stand_az_deg (removable, non-structural); bare = no fit-out (geometry limit of the room). route: corner =
 # the N1 route (vertical drop in the chamber, 90 deg corner at the floor, run along X); diagonal = the carrier leaves the aperture on a slant (head toward +X) and
-# lowers into the slot; end: slot_end = the N1 route end (head at slot end, X 114.90) or lowering = the head stops at the lowering station over the slot. slot_x_m =
+# lowers into the slot; end: slot_end = the N1 route end (head at slot end, X 137.15) or lowering = the head stops at the lowering station over the slot. slot_x_m =
 # slot centre X. staff: two = a rescuer at each end; foot = one rescuer at the foot end with a hoist holding the head end (PROTOTYPE hoist, line and head not modelled).
 redline_sp12_path = [
-  { id = "LT0_N1_comparator", fitout = "built", route = "corner", end = "slot_end", slot_x_m = 113.65, staff = "two", stand_az_deg = 20.0, what = "N1 as run in RESCUE-004 (comparator)" },
-  { id = "LT1_N1_stop_at_lowering", fitout = "built", route = "corner", end = "lowering", slot_x_m = 113.65, staff = "two", stand_az_deg = 20.0, what = "N1, the floor run ends at the lowering station" },
-  { id = "LT2_N1_stands_rearranged", fitout = "rearranged", route = "corner", end = "lowering", slot_x_m = 113.65, staff = "two", stand_az_deg = 8.0, what = "N1, donning stands A and B moved to az 8" },
-  { id = "LT3_diagonal_rearranged", fitout = "rearranged", route = "diagonal", end = "lowering", slot_x_m = 113.65, staff = "two", stand_az_deg = 8.0, what = "diagonal leaving the aperture, stands at az 8" },
-  { id = "LT4_diagonal_slot_aft", fitout = "rearranged", route = "diagonal", end = "lowering", slot_x_m = 113.00, staff = "two", stand_az_deg = 8.0, what = "diagonal with the slot shifted aft under the aperture (slot X 101.75-104.25; spine-core cut OPEN)" },
-  { id = "LT5_diagonal_hoist_one_rescuer", fitout = "rearranged", route = "diagonal", end = "lowering", slot_x_m = 113.65, staff = "foot", stand_az_deg = 8.0, what = "LT3 with a hoist on the head end: one rescuer at the foot end" },
-  { id = "LT6_bare_geometry_limit", fitout = "bare", route = "corner", end = "lowering", slot_x_m = 113.65, staff = "two", stand_az_deg = 20.0, what = "N1 with the fit-out removed (geometry limit of the room)" },
-  { id = "LT7_N1_aperture_1.35_comparator", fitout = "rearranged", route = "corner", end = "lowering", slot_x_m = 113.65, staff = "two", stand_az_deg = 8.0, aperture_m = 1.35, what = "LT2 with the SP-11 aperture at the 1.35 m comparator (45 G-14): is the 1.20 m aperture the limit of the turn? (the plug parking pocket is left as built)" },
+  { id = "LT0_N1_comparator", fitout = "built", route = "corner", end = "slot_end", slot_x_m = 135.90, staff = "two", stand_az_deg = 20.0, what = "N1 as run in RESCUE-004 (comparator)" },
+  { id = "LT1_N1_stop_at_lowering", fitout = "built", route = "corner", end = "lowering", slot_x_m = 135.90, staff = "two", stand_az_deg = 20.0, what = "N1, the floor run ends at the lowering station" },
+  { id = "LT2_N1_stands_rearranged", fitout = "rearranged", route = "corner", end = "lowering", slot_x_m = 135.90, staff = "two", stand_az_deg = 8.0, what = "N1, donning stands A and B moved to az 8" },
+  { id = "LT3_diagonal_rearranged", fitout = "rearranged", route = "diagonal", end = "lowering", slot_x_m = 135.90, staff = "two", stand_az_deg = 8.0, what = "diagonal leaving the aperture, stands at az 8" },
+  { id = "LT4_diagonal_slot_aft", fitout = "rearranged", route = "diagonal", end = "lowering", slot_x_m = 135.25, staff = "two", stand_az_deg = 8.0, what = "diagonal with the slot shifted aft under the aperture (slot X 101.75-104.25; spine-core cut OPEN)" },
+  { id = "LT5_diagonal_hoist_one_rescuer", fitout = "rearranged", route = "diagonal", end = "lowering", slot_x_m = 135.90, staff = "foot", stand_az_deg = 8.0, what = "LT3 with a hoist on the head end: one rescuer at the foot end" },
+  { id = "LT6_bare_geometry_limit", fitout = "bare", route = "corner", end = "lowering", slot_x_m = 135.90, staff = "two", stand_az_deg = 20.0, what = "N1 with the fit-out removed (geometry limit of the room)" },
+  { id = "LT7_N1_aperture_1.35_comparator", fitout = "rearranged", route = "corner", end = "lowering", slot_x_m = 135.90, staff = "two", stand_az_deg = 8.0, aperture_m = 1.35, what = "LT2 with the SP-11 aperture at the 1.35 m comparator (45 G-14): is the 1.20 m aperture the limit of the turn? (the plug parking pocket is left as built)" },
 ]

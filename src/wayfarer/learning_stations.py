@@ -140,7 +140,7 @@ def ops_stations(s):
                  objective='Know the drive\'s parts in order, from fuel to the four nozzles, and why it is never visited live.',
                  instructor='Basics only. The propulsion team owns the rest; their notes come later.',
                  what=[f"{p['core_count']} reactor core, {p['manifold_count']} magnetic manifold, {p['channel_count']} channels, {p['nozzle_count']} nozzles at the aft end.",
-                       'The fuel stores (He-3 in the aft body, hydrogen and deuterium in the forward torus) feed four run tanks next to the drive.'],
+                       'The fuel stores (He-3, hydrogen and deuterium in separate long tanks behind the Brow) feed four run tanks next to the drive.'],
                  why=[f"The structure is sized for {_v(p['design_thrust'])} (a proof load at 1.5 g, {p['design_thrust']['canon_status']}), not normal flight thrust.",
                       'Field strengths, exhaust speed and waste heat are not released: no number is shown for them.',
                       'No one enters the core or a nozzle while it can be live. This bench is where the parts are explained, not touched.'],

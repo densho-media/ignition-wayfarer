@@ -1,7 +1,7 @@
-"""S04/S02 body framing and momentum storage around the FUEL-SPLIT body stations (owner go 2026-10-30; every size and position PROTOTYPE).
+"""S04/S02 body framing and momentum storage around the body bay (dry store since TANK-AXIAL) (owner go 2026-10-30; every size and position PROTOTYPE).
 
 - frames(s): an internal ring frame in every gap between the nine BODY-C3 modules, outside the keel rails and inside the skin, so the
-  stations hang inside a framed bay; the two 3 m utility frames add three radial beams at the lobe bisectors from the spine clearance
+  dry-store racks sit inside a framed bay; the two 3 m utility frames add three radial beams at the sector bisectors from the spine clearance
   to the rail circle (the equipment mounts).
 - cmgs(s): six double-gimbal control-moment gyros, one per beam (three per utility frame), cradled forward of the beam. Sizing: the S02
   momentum case (exterior_hardware.sizing: twice the rings' allowed residual) shared by five of six units, so one may fail; each rotor

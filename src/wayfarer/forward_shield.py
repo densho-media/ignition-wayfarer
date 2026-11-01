@@ -440,7 +440,7 @@ def bypass_collar(s):
     Rs = s['structure']['sector_radius_m']; rail = s['prototype']['structural_rail_radius_m']
     cen = habitat_ring.centers(s); half = habitat_ring.sweep_half(s)
     import thermal_geometry
-    blade_front = thermal_geometry.blade_of(s)['front_x_m']
+    blade_front = layout.origin(s, 'AFT_STORAGE_FRONT')     # RAD-ZONE: the slot is between the zone sections' front and ring A
     xa = (blade_front+min(cen)-half)/2; xm = (cen[0]+half+cen[1]-half)/2; xf = sector_keels(s)[0]['x0']
     xt, xti = truss_aft_at(s, R)-m, truss_aft_at(s, Ri)-m
     members = []
@@ -480,7 +480,7 @@ def bypass_clearances(s):
     """Clearances of the bypass collar (m) to the ring sweeps, the blade front, the shield edge and the docking corridors; each must be >= the shared clearance."""
     import hull_geometry, thermal_geometry
     col = bypass_collar(s); m = col['member_radius']; st = col['stations']; cen = habitat_ring.centers(s); half = habitat_ring.sweep_half(s)
-    front = thermal_geometry.blade_of(s)['front_x_m']
+    front = layout.origin(s, 'AFT_STORAGE_FRONT')
     out = {'inner_chord_to_ring_sweep': col['inner_r']-m-habitat_ring.outer(s), 'aft_frame_to_blade_front': st['aft']-m-front,
            'aft_frame_to_ring_A_sweep': min(cen)-half-(st['aft']+m), 'mid_frame_to_ring_sweeps': min(st['mid']-m-(cen[0]+half), cen[1]-half-(st['mid']+m)),
            'keel_tie_to_ring_B_sweep': st['fwd']-m-(max(cen)+half), 'outer_chord_inside_shield_edge': shield_radius(s)-(col['outer_r']+m)}

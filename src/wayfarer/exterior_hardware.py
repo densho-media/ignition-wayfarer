@@ -227,6 +227,11 @@ def rcs_aft(s):
             h = tuple(sg*t[i]*math.cos(cant)+u[i]*math.sin(cant) for i in range(3)); j = (-math.sin(back), h[1]*math.cos(back), h[2]*math.cos(back))
             p0 = tuple(c[i]+sg*t[i]*(W/2-nr)+u[i]*(D/2-nr) for i in range(3)); p1 = tuple(p0[i]+j[i]*nl for i in range(3))
             out.append(disc(f'Ext_RCS_Aft_{k}_Tan_{side}', 'exterior_hardware', 'tangential thruster canted outward (roll)', p0, p1, nr, jet=j, exit=p1))
+        # Owner brief 2026-11-01: an axial jet on the pod's aft face for +X translation (docking, station-keeping, ullage), canted outward so
+        # its cone clears the nozzle cluster.
+        ca = math.radians(q['rcs_axial_cant_deg']); j = (-math.cos(ca), u[1]*math.sin(ca), u[2]*math.sin(ca))
+        p0 = (x-L/2, c[1], c[2]); p1 = tuple(p0[i]+j[i]*nl for i in range(3))
+        out.append(disc(f'Ext_RCS_Aft_{k}_Axial', 'exterior_hardware', 'axial thruster firing aft (+X translation for docking and station-keeping, ullage)', p0, p1, nr, jet=j, exit=p1))
     return out
 
 
@@ -244,6 +249,11 @@ def rcs_rim(s):
         for side, sg in (('Pos', 1), ('Neg', -1)):
             j = (-math.sin(cant), sg*t[1]*math.cos(cant), sg*t[2]*math.cos(cant)); p0 = tuple(c[i]+sg*t[i]*W/2 for i in range(3)); p1 = tuple(p0[i]+j[i]*nl for i in range(3))
             out.append(disc(f'Ext_RCS_Rim_{k}_Tan_{side}', 'rcs_thruster', 'tangential thruster canted aft (roll)', p0, p1, nr, jet=j, exit=p1, deg=deg))
+        # Owner brief 2026-11-01: a forward-outboard jet for -X translation (docking braking); fired past the rim, so canted outward by
+        # rcs_rim_forward_cant_deg from the X axis (its cone clears the rim girder; -X thrust = cos of the cant).
+        cf = math.radians(q['rcs_rim_forward_cant_deg']); j = (math.cos(cf), u[1]*math.sin(cf), u[2]*math.sin(cf))
+        p0 = radial(x-L/2+0.15, rc+D/2, a); p1 = tuple(p0[i]+j[i]*nl for i in range(3))   # on the pod top at its aft end: the cone rises clear of the rim girder
+        out.append(disc(f'Ext_RCS_Rim_{k}_Forward', 'rcs_thruster', 'forward-outboard thruster (-X translation for docking braking)', p0, p1, nr, jet=j, exit=p1, deg=deg))
     return out
 
 
@@ -319,10 +329,13 @@ def forward_parts(s):
 def obstacles(s):
     import habitat_ring
     import thermal_geometry as tg
-    d = tg.blade_of(s)
+    d = dict(tg.blade_of(s))
+    zf = layout.origin(s, 'RADIATOR_ZONE_FRONT'); d['front_x_m'] = max(d['front_x_m'], zf)   # RAD-ZONE sections share the blade planes
+    import fuel_storage   # TANK-AXIAL: the forward farm as a cylinder (its outer envelope) so no jet fires into a vessel
+    f0, f1 = fuel_storage.span(s); farm = ((f0+f1)/2, (f1-f0)/2, max(t['R']+t['a_env'] for t in fuel_storage.tanks(s)))
     return dict(blade=d, blades=[math.radians(s['prototype']['radiator_phase_deg']+j*120) for j in range(s['radiators']['count'])],
-                rings=[(x, habitat_ring.sweep_half(s), habitat_ring.outer(s)) for x in habitat_ring.centers(s)], shield=(fsh_truss_aft(s), forward_shield_r(s)),
-                hull=[(layout.at(s, {'datum': 'AFT', 'offset_m': 0.0}), 80.0, hg.radius_at(s, 0.0)), (70.0, layout.at(s, {'datum': 'FWD', 'offset_m': 0.0}), hg.radius_at(s, 110.0))])
+                rings=[(x, habitat_ring.sweep_half(s), habitat_ring.outer(s)) for x in habitat_ring.centers(s)]+[farm], shield=(fsh_truss_aft(s), forward_shield_r(s)),
+                hull=[(layout.at(s, {'datum': 'AFT', 'offset_m': 0.0}), zf+1.0, tg.casing_radius(s)), (zf-1.0, layout.at(s, {'datum': 'FWD', 'offset_m': 0.0}), s['ship']['body_diameter']['value']/2)])
 
 
 def ray_hit(o, c, r, tmax=1e9, spheres=(), plume=None):

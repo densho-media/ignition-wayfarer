@@ -309,6 +309,7 @@ def save(path, root_collection, spec_text, source_text):
         backups = sorted(directory.glob(f'{path.stem}_[0-9]*T*Z.blend'))
         for old in backups[:-3]:
             old.unlink()
+    functional_review(root_collection)
     for name, content in [('WF_SOURCE_SNAPSHOT', spec_text), ('WF_PROVENANCE_SNAPSHOT', source_text)]:
         text = bpy.data.texts.get(name) or bpy.data.texts.new(name)
         text.clear()
@@ -334,6 +335,35 @@ def save(path, root_collection, spec_text, source_text):
     bpy.context.preferences.filepaths.save_version = 0
     bpy.ops.wm.save_as_mainfile(filepath=str(path), relative_remap=False)
     print(f'WF_SAVED {path.name}', flush=True)
+
+
+def functional_review(root_collection):
+    """Owner brief 2026-11-01: every generator-owned object gets its function's viewport colour (obj.color; production materials untouched),
+    STORAGE and THERMAL objects are grouped into functional sub-collections (forward/aft bank per species, feed lines, hot/warm/low circuits),
+    and the asset collection carries the nearest collection colour tag. The legend travels as the FUNCTIONAL_COLOR_LEGEND text."""
+    import functional_colors as fc
+    asset = fc.asset_key(root_collection.name)
+    gen = bpy.data.collections.get(f'GEN_{root_collection.name}')
+    if gen is None:
+        return
+    counts = {}
+    for obj in list(gen.all_objects):
+        if obj.library is not None or obj.get('wf_owner') != OWNER:
+            continue
+        bank = obj.get('storage_bank') or ('forward' if obj.get('storage_group') == 'FWD_TANK_FARM' else 'aft')   # TANK-AXIAL: every vessel is in the forward farm
+        f = fc.classify(asset, obj.name, obj.get('kind', ''), obj.get('species', ''), bank=bank)
+        if f is None:
+            continue
+        obj.color = fc.PALETTE[f][1]; obj['wf_function'] = f; counts[f] = counts.get(f, 0)+1
+        sub = fc.subgroup(asset, obj.name, f, bank) if obj.name in gen.objects else None
+        if sub:
+            g = group(gen, sub, fc.PALETTE[f][2] if not sub.endswith('BREAKS_AND_SUPPORTS') else 'NONE')
+            g.objects.link(obj); gen.objects.unlink(obj)
+    if counts and asset in fc.ASSET_DEFAULT:               # GEN itself stays uncoloured (AGENTS.md); the asset collection carries the tag
+        root_collection.color_tag = fc.PALETTE[fc.ASSET_DEFAULT[asset]][2]
+    root_collection['functional_counts'] = counts
+    text = bpy.data.texts.get('FUNCTIONAL_COLOR_LEGEND') or bpy.data.texts.new('FUNCTIONAL_COLOR_LEGEND')
+    text.clear(); text.write(fc.legend_text())
 
 
 def owned_action(name):

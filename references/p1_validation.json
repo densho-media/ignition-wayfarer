@@ -1,8 +1,8 @@
 {
   "result": "PASS",
   "blender": "5.2.2 LTS",
-  "spec_hash": "bc6604647d171bc2908e3fefb37cc1ef372664b687ae9d504500615594b169aa",
-  "source_map_hash": "51ae87aca5154950c610b7dfd15fd2fa58d2efdaf1c2f5949e0a3ac2b7b8c254",
+  "spec_hash": "43ce61315999d6be37c7d9082c949c6796765decc6a05035dcc93e1b221081d1",
+  "source_map_hash": "a215e514829380eaaf903b2dd74cd428d3a21dbc10d2c9e29a6d9b7bd45bd1d8",
   "configurations": {
     "COAST": {
       "realizes": [
@@ -25,13 +25,13 @@
         "spans": [
           [
             "Hull_Aft_Body",
-            -111.75,
-            72.749
+            -134.0,
+            94.999
           ],
           [
             "Hull_Forward_Collar",
-            83.349,
-            122.25
+            105.599,
+            144.5
           ]
         ],
         "min_enclosure_margin_m": -25.5,
@@ -49,21 +49,21 @@
         "dock_corridors": {
           "Dock_Primary": {
             "x_m": [
-              106.4,
-              112.4
+              128.65,
+              134.65
             ],
             "min_ring_gap_m": 23.201,
-            "blade_front_gap_m": 35.001,
+            "blade_front_gap_m": 79.501,
             "shield_gap_m": 1.662,
             "pass": true
           },
           "Dock_Service": {
             "x_m": [
-              106.4,
-              112.4
+              128.65,
+              134.65
             ],
             "min_ring_gap_m": 23.201,
-            "blade_front_gap_m": 35.001,
+            "blade_front_gap_m": 79.501,
             "shield_gap_m": 1.662,
             "pass": true
           }
@@ -71,54 +71,55 @@
       },
       "body_bounds": {
         "min_m": [
-          -122.5,
+          -144.75,
           -6.5,
           -6.5
         ],
         "max_m": [
-          122.5,
+          144.75,
           6.5,
           6.5
         ],
         "size_m": [
-          245.0,
+          289.5,
           13.0,
           13.0
         ]
       },
       "deployed_bounds": {
         "min_m": [
-          -122.5,
+          -144.75,
           -45.00429916381836,
           -45.004234313964844
         ],
         "max_m": [
-          134.5,
+          156.75,
           45.00429916381836,
           45.00429916381836
         ],
         "size_m": [
-          257.0,
+          301.5,
           90.00859832763672,
           90.0085334777832
         ]
       },
       "clear_eye_rays": 20,
       "evaluated_geometry_counts": {
-        "geometry": 1547,
+        "geometry": 1701,
         "thrust_node": 12,
         "thrust_node_plate": 24,
         "hull_envelope": 2,
         "generator_proxy": 2,
         "hull_shell": 2,
         "production_detail": 121,
-        "fuel_tank": 42,
-        "fuel_support": 51,
-        "fuel_transfer_line": 26,
-        "fuel_equipment": 6,
+        "fuel_tank": 13,
+        "fuel_transfer_line": 54,
+        "fuel_equipment": 19,
+        "fuel_support": 64,
+        "dry_storage": 54,
         "body_frame": 14,
-        "body_equipment": 6,
         "cryo_feed_line": 8,
+        "body_equipment": 6,
         "power_storage": 4,
         "magnetic_field": 10,
         "plasma": 2,
@@ -151,8 +152,10 @@
         "thermal_support": 24,
         "coolant_chase": 12,
         "casing_boot": 45,
-        "warm_panel_candidate": 18,
-        "warm_panel_bracket": 144,
+        "radiator_baffle": 4,
+        "radiator_zone_cell": 144,
+        "radiator_zone_support": 24,
+        "radiator_zone_trunk": 12,
         "rotor_hub_drum": 2,
         "rotor_mechanism": 64,
         "crew_vestibule": 6,
@@ -211,7 +214,7 @@
         "crown_emitter": 12,
         "crown_launcher": 12,
         "nav_light": 4,
-        "rcs_thruster": 16,
+        "rcs_thruster": 20,
         "service_fitting": 8,
         "dock_capture_ring": 2,
         "crew_refuge": 1,
@@ -219,7 +222,7 @@
         "storeroom_shell": 1,
         "storeroom_fixture": 27,
         "storeroom_stowage": 24,
-        "exterior_hardware": 44,
+        "exterior_hardware": 47,
         "comms_antenna": 11,
         "eva_rail": 8,
         "eva_anchor": 8,
@@ -228,32 +231,32 @@
       },
       "sector_centers_frame_1": [
         [
-          74.99492645263672,
+          97.24491882324219,
           0.7134559154510498,
           25.710941314697266
         ],
         [
-          74.99492645263672,
+          97.24491882324219,
           -22.623056411743164,
           -12.237597465515137
         ],
         [
-          74.99492645263672,
+          97.24491882324219,
           21.90960693359375,
           -13.47333812713623
         ],
         [
-          80.9948959350586,
+          103.24494171142578,
           0.7134559154510498,
           25.710941314697266
         ],
         [
-          80.9948959350586,
+          103.24494171142578,
           -22.623056411743164,
           -12.237597465515137
         ],
         [
-          80.9948959350586,
+          103.24494171142578,
           21.90960693359375,
           -13.47333812713623
         ]
@@ -289,7 +292,7 @@
           "WF_SIMPROXY_PLUME_STUDY"
         ],
         "radiator_proxy_max_offset_m": {
-          "COAST": 0.07500267123392675
+          "COAST": 0.07500267133093606
         }
       },
       "drive_states": {
@@ -332,13 +335,13 @@
         "spans": [
           [
             "Hull_Aft_Body",
-            -111.75,
-            72.749
+            -134.0,
+            94.999
           ],
           [
             "Hull_Forward_Collar",
-            83.349,
-            122.25
+            105.599,
+            144.5
           ]
         ],
         "min_enclosure_margin_m": -25.5,
@@ -356,21 +359,21 @@
         "dock_corridors": {
           "Dock_Primary": {
             "x_m": [
-              106.4,
-              112.4
+              128.65,
+              134.65
             ],
             "min_ring_gap_m": 23.201,
-            "blade_front_gap_m": 35.001,
+            "blade_front_gap_m": 79.501,
             "shield_gap_m": 1.662,
             "pass": true
           },
           "Dock_Service": {
             "x_m": [
-              106.4,
-              112.4
+              128.65,
+              134.65
             ],
             "min_ring_gap_m": 23.201,
-            "blade_front_gap_m": 35.001,
+            "blade_front_gap_m": 79.501,
             "shield_gap_m": 1.662,
             "pass": true
           }
@@ -378,54 +381,55 @@
       },
       "body_bounds": {
         "min_m": [
-          -122.5,
+          -144.75,
           -6.5,
           -6.5
         ],
         "max_m": [
-          122.5,
+          144.75,
           6.5,
           6.5
         ],
         "size_m": [
-          245.0,
+          289.5,
           13.0,
           13.0
         ]
       },
       "deployed_bounds": {
         "min_m": [
-          -122.5,
+          -144.75,
           -45.00429916381836,
           -45.004234313964844
         ],
         "max_m": [
-          134.5,
+          156.75,
           45.00429916381836,
           45.00429916381836
         ],
         "size_m": [
-          257.0,
+          301.5,
           90.00859832763672,
           90.0085334777832
         ]
       },
       "clear_eye_rays": 20,
       "evaluated_geometry_counts": {
-        "geometry": 1547,
+        "geometry": 1701,
         "thrust_node": 12,
         "thrust_node_plate": 24,
         "hull_envelope": 2,
         "generator_proxy": 2,
         "hull_shell": 2,
         "production_detail": 121,
-        "fuel_tank": 42,
-        "fuel_support": 51,
-        "fuel_transfer_line": 26,
-        "fuel_equipment": 6,
+        "fuel_tank": 13,
+        "fuel_transfer_line": 54,
+        "fuel_equipment": 19,
+        "fuel_support": 64,
+        "dry_storage": 54,
         "body_frame": 14,
-        "body_equipment": 6,
         "cryo_feed_line": 8,
+        "body_equipment": 6,
         "power_storage": 4,
         "magnetic_field": 10,
         "plasma": 2,
@@ -458,8 +462,10 @@
         "thermal_support": 24,
         "coolant_chase": 12,
         "casing_boot": 45,
-        "warm_panel_candidate": 18,
-        "warm_panel_bracket": 144,
+        "radiator_baffle": 4,
+        "radiator_zone_cell": 144,
+        "radiator_zone_support": 24,
+        "radiator_zone_trunk": 12,
         "rotor_hub_drum": 2,
         "rotor_mechanism": 64,
         "crew_vestibule": 6,
@@ -518,7 +524,7 @@
         "crown_emitter": 12,
         "crown_launcher": 12,
         "nav_light": 4,
-        "rcs_thruster": 16,
+        "rcs_thruster": 20,
         "service_fitting": 8,
         "dock_capture_ring": 2,
         "crew_refuge": 1,
@@ -526,7 +532,7 @@
         "storeroom_shell": 1,
         "storeroom_fixture": 27,
         "storeroom_stowage": 24,
-        "exterior_hardware": 44,
+        "exterior_hardware": 47,
         "comms_antenna": 11,
         "eva_rail": 8,
         "eva_anchor": 8,
@@ -535,32 +541,32 @@
       },
       "sector_centers_frame_1": [
         [
-          74.99492645263672,
+          97.24491882324219,
           0.7134559154510498,
           25.710941314697266
         ],
         [
-          74.99492645263672,
+          97.24491882324219,
           -22.623056411743164,
           -12.237597465515137
         ],
         [
-          74.99492645263672,
+          97.24491882324219,
           21.90960693359375,
           -13.47333812713623
         ],
         [
-          80.9948959350586,
+          103.24494171142578,
           0.7134559154510498,
           25.710941314697266
         ],
         [
-          80.9948959350586,
+          103.24494171142578,
           -22.623056411743164,
           -12.237597465515137
         ],
         [
-          80.9948959350586,
+          103.24494171142578,
           21.90960693359375,
           -13.47333812713623
         ]
@@ -596,7 +602,7 @@
           "WF_SIMPROXY_PLUME_STUDY"
         ],
         "radiator_proxy_max_offset_m": {
-          "LOW_THRUST": 0.07500267123392675
+          "LOW_THRUST": 0.07500267133093606
         }
       },
       "drive_states": {
@@ -639,13 +645,13 @@
         "spans": [
           [
             "Hull_Aft_Body",
-            -111.75,
-            72.749
+            -134.0,
+            94.999
           ],
           [
             "Hull_Forward_Collar",
-            83.349,
-            122.25
+            105.599,
+            144.5
           ]
         ],
         "min_enclosure_margin_m": -25.5,
@@ -663,21 +669,21 @@
         "dock_corridors": {
           "Dock_Primary": {
             "x_m": [
-              106.4,
-              112.4
+              128.65,
+              134.65
             ],
             "min_ring_gap_m": 23.201,
-            "blade_front_gap_m": 35.001,
+            "blade_front_gap_m": 79.501,
             "shield_gap_m": 1.662,
             "pass": true
           },
           "Dock_Service": {
             "x_m": [
-              106.4,
-              112.4
+              128.65,
+              134.65
             ],
             "min_ring_gap_m": 23.201,
-            "blade_front_gap_m": 35.001,
+            "blade_front_gap_m": 79.501,
             "shield_gap_m": 1.662,
             "pass": true
           }
@@ -685,54 +691,55 @@
       },
       "body_bounds": {
         "min_m": [
-          -122.5,
+          -144.75,
           -6.5,
           -6.5
         ],
         "max_m": [
-          122.5,
+          144.75,
           6.5,
           6.5
         ],
         "size_m": [
-          245.0,
+          289.5,
           13.0,
           13.0
         ]
       },
       "deployed_bounds": {
         "min_m": [
-          -122.5,
+          -144.75,
           -45.00429916381836,
           -45.004234313964844
         ],
         "max_m": [
-          134.5,
+          156.75,
           45.00429916381836,
           45.00429916381836
         ],
         "size_m": [
-          257.0,
+          301.5,
           90.00859832763672,
           90.0085334777832
         ]
       },
       "clear_eye_rays": 20,
       "evaluated_geometry_counts": {
-        "geometry": 1547,
+        "geometry": 1701,
         "thrust_node": 12,
         "thrust_node_plate": 24,
         "hull_envelope": 2,
         "generator_proxy": 2,
         "hull_shell": 2,
         "production_detail": 121,
-        "fuel_tank": 42,
-        "fuel_support": 51,
-        "fuel_transfer_line": 26,
-        "fuel_equipment": 6,
+        "fuel_tank": 13,
+        "fuel_transfer_line": 54,
+        "fuel_equipment": 19,
+        "fuel_support": 64,
+        "dry_storage": 54,
         "body_frame": 14,
-        "body_equipment": 6,
         "cryo_feed_line": 8,
+        "body_equipment": 6,
         "power_storage": 4,
         "magnetic_field": 10,
         "plasma": 2,
@@ -765,8 +772,10 @@
         "thermal_support": 24,
         "coolant_chase": 12,
         "casing_boot": 45,
-        "warm_panel_candidate": 18,
-        "warm_panel_bracket": 144,
+        "radiator_baffle": 4,
+        "radiator_zone_cell": 144,
+        "radiator_zone_support": 24,
+        "radiator_zone_trunk": 12,
         "rotor_hub_drum": 2,
         "rotor_mechanism": 64,
         "crew_vestibule": 6,
@@ -825,7 +834,7 @@
         "crown_emitter": 12,
         "crown_launcher": 12,
         "nav_light": 4,
-        "rcs_thruster": 16,
+        "rcs_thruster": 20,
         "service_fitting": 8,
         "dock_capture_ring": 2,
         "crew_refuge": 1,
@@ -833,7 +842,7 @@
         "storeroom_shell": 1,
         "storeroom_fixture": 27,
         "storeroom_stowage": 24,
-        "exterior_hardware": 44,
+        "exterior_hardware": 47,
         "comms_antenna": 11,
         "eva_rail": 8,
         "eva_anchor": 8,
@@ -842,32 +851,32 @@
       },
       "sector_centers_frame_1": [
         [
-          74.99492645263672,
+          97.24491882324219,
           0.7134559154510498,
           25.710941314697266
         ],
         [
-          74.99492645263672,
+          97.24491882324219,
           -22.623056411743164,
           -12.237597465515137
         ],
         [
-          74.99492645263672,
+          97.24491882324219,
           21.90960693359375,
           -13.47333812713623
         ],
         [
-          80.9948959350586,
+          103.24494171142578,
           0.7134559154510498,
           25.710941314697266
         ],
         [
-          80.9948959350586,
+          103.24494171142578,
           -22.623056411743164,
           -12.237597465515137
         ],
         [
-          80.9948959350586,
+          103.24494171142578,
           21.90960693359375,
           -13.47333812713623
         ]
@@ -903,7 +912,7 @@
           "WF_SIMPROXY_PLUME_STUDY"
         ],
         "radiator_proxy_max_offset_m": {
-          "EVA": 0.07500267123392675
+          "EVA": 0.07500267133093606
         }
       },
       "drive_states": {
@@ -943,13 +952,13 @@
         "spans": [
           [
             "Hull_Aft_Body",
-            -111.75,
-            72.749
+            -134.0,
+            94.999
           ],
           [
             "Hull_Forward_Collar",
-            83.349,
-            122.25
+            105.599,
+            144.5
           ]
         ],
         "min_enclosure_margin_m": -25.5,
@@ -967,21 +976,21 @@
         "dock_corridors": {
           "Dock_Primary": {
             "x_m": [
-              106.4,
-              112.4
+              128.65,
+              134.65
             ],
             "min_ring_gap_m": 23.201,
-            "blade_front_gap_m": 35.001,
+            "blade_front_gap_m": 79.501,
             "shield_gap_m": 1.662,
             "pass": true
           },
           "Dock_Service": {
             "x_m": [
-              106.4,
-              112.4
+              128.65,
+              134.65
             ],
             "min_ring_gap_m": 23.201,
-            "blade_front_gap_m": 35.001,
+            "blade_front_gap_m": 79.501,
             "shield_gap_m": 1.662,
             "pass": true
           }
@@ -989,54 +998,55 @@
       },
       "body_bounds": {
         "min_m": [
-          -122.5,
+          -144.75,
           -6.5,
           -6.5
         ],
         "max_m": [
-          122.5,
+          144.75,
           6.5,
           6.5
         ],
         "size_m": [
-          245.0,
+          289.5,
           13.0,
           13.0
         ]
       },
       "deployed_bounds": {
         "min_m": [
-          -122.5,
+          -144.75,
           -45.00429916381836,
           -45.004234313964844
         ],
         "max_m": [
-          134.5,
+          156.75,
           45.00429916381836,
           45.00429916381836
         ],
         "size_m": [
-          257.0,
+          301.5,
           90.00859832763672,
           90.0085334777832
         ]
       },
       "clear_eye_rays": 20,
       "evaluated_geometry_counts": {
-        "geometry": 1547,
+        "geometry": 1701,
         "thrust_node": 12,
         "thrust_node_plate": 24,
         "hull_envelope": 2,
         "generator_proxy": 2,
         "hull_shell": 2,
         "production_detail": 121,
-        "fuel_tank": 42,
-        "fuel_support": 51,
-        "fuel_transfer_line": 26,
-        "fuel_equipment": 6,
+        "fuel_tank": 13,
+        "fuel_transfer_line": 54,
+        "fuel_equipment": 19,
+        "fuel_support": 64,
+        "dry_storage": 54,
         "body_frame": 14,
-        "body_equipment": 6,
         "cryo_feed_line": 8,
+        "body_equipment": 6,
         "power_storage": 4,
         "magnetic_field": 10,
         "plasma": 2,
@@ -1069,8 +1079,10 @@
         "thermal_support": 24,
         "coolant_chase": 12,
         "casing_boot": 45,
-        "warm_panel_candidate": 18,
-        "warm_panel_bracket": 144,
+        "radiator_baffle": 4,
+        "radiator_zone_cell": 144,
+        "radiator_zone_support": 24,
+        "radiator_zone_trunk": 12,
         "rotor_hub_drum": 2,
         "rotor_mechanism": 64,
         "crew_vestibule": 6,
@@ -1129,7 +1141,7 @@
         "crown_emitter": 12,
         "crown_launcher": 12,
         "nav_light": 4,
-        "rcs_thruster": 16,
+        "rcs_thruster": 20,
         "service_fitting": 8,
         "dock_capture_ring": 2,
         "crew_refuge": 1,
@@ -1137,7 +1149,7 @@
         "storeroom_shell": 1,
         "storeroom_fixture": 27,
         "storeroom_stowage": 24,
-        "exterior_hardware": 44,
+        "exterior_hardware": 47,
         "comms_antenna": 11,
         "eva_rail": 8,
         "eva_anchor": 8,
@@ -1146,32 +1158,32 @@
       },
       "sector_centers_frame_1": [
         [
-          74.99492645263672,
+          97.24491882324219,
           0.7134559154510498,
           25.710941314697266
         ],
         [
-          74.99492645263672,
+          97.24491882324219,
           -22.623056411743164,
           -12.237597465515137
         ],
         [
-          74.99492645263672,
+          97.24491882324219,
           21.90960693359375,
           -13.47333812713623
         ],
         [
-          80.9948959350586,
+          103.24494171142578,
           0.7134559154510498,
           25.710941314697266
         ],
         [
-          80.9948959350586,
+          103.24494171142578,
           -22.623056411743164,
           -12.237597465515137
         ],
         [
-          80.9948959350586,
+          103.24494171142578,
           21.90960693359375,
           -13.47333812713623
         ]
@@ -1207,7 +1219,7 @@
           "WF_SIMPROXY_PLUME_STUDY"
         ],
         "radiator_proxy_max_offset_m": {
-          "HIGH_POWER": 0.07500267123392675
+          "HIGH_POWER": 0.07500267133093606
         }
       },
       "drive_states": {
@@ -1247,13 +1259,13 @@
         "spans": [
           [
             "Hull_Aft_Body",
-            -111.75,
-            72.749
+            -134.0,
+            94.999
           ],
           [
             "Hull_Forward_Collar",
-            83.349,
-            122.25
+            105.599,
+            144.5
           ]
         ],
         "min_enclosure_margin_m": -25.5,
@@ -1271,21 +1283,21 @@
         "dock_corridors": {
           "Dock_Primary": {
             "x_m": [
-              106.4,
-              112.4
+              128.65,
+              134.65
             ],
             "min_ring_gap_m": 23.201,
-            "blade_front_gap_m": 35.001,
+            "blade_front_gap_m": 79.501,
             "shield_gap_m": 1.662,
             "pass": true
           },
           "Dock_Service": {
             "x_m": [
-              106.4,
-              112.4
+              128.65,
+              134.65
             ],
             "min_ring_gap_m": 23.201,
-            "blade_front_gap_m": 35.001,
+            "blade_front_gap_m": 79.501,
             "shield_gap_m": 1.662,
             "pass": true
           }
@@ -1293,54 +1305,55 @@
       },
       "body_bounds": {
         "min_m": [
-          -122.5,
+          -144.75,
           -6.5,
           -6.5
         ],
         "max_m": [
-          122.5,
+          144.75,
           6.5,
           6.5
         ],
         "size_m": [
-          245.0,
+          289.5,
           13.0,
           13.0
         ]
       },
       "deployed_bounds": {
         "min_m": [
-          -122.5,
+          -144.75,
           -45.00429916381836,
           -45.004234313964844
         ],
         "max_m": [
-          134.5,
+          156.75,
           45.00429916381836,
           45.00429916381836
         ],
         "size_m": [
-          257.0,
+          301.5,
           90.00859832763672,
           90.0085334777832
         ]
       },
       "clear_eye_rays": 20,
       "evaluated_geometry_counts": {
-        "geometry": 1547,
+        "geometry": 1701,
         "thrust_node": 12,
         "thrust_node_plate": 24,
         "hull_envelope": 2,
         "generator_proxy": 2,
         "hull_shell": 2,
         "production_detail": 121,
-        "fuel_tank": 42,
-        "fuel_support": 51,
-        "fuel_transfer_line": 26,
-        "fuel_equipment": 6,
+        "fuel_tank": 13,
+        "fuel_transfer_line": 54,
+        "fuel_equipment": 19,
+        "fuel_support": 64,
+        "dry_storage": 54,
         "body_frame": 14,
-        "body_equipment": 6,
         "cryo_feed_line": 8,
+        "body_equipment": 6,
         "power_storage": 4,
         "magnetic_field": 10,
         "plasma": 2,
@@ -1373,8 +1386,10 @@
         "thermal_support": 24,
         "coolant_chase": 12,
         "casing_boot": 45,
-        "warm_panel_candidate": 18,
-        "warm_panel_bracket": 144,
+        "radiator_baffle": 4,
+        "radiator_zone_cell": 144,
+        "radiator_zone_support": 24,
+        "radiator_zone_trunk": 12,
         "rotor_hub_drum": 2,
         "rotor_mechanism": 64,
         "crew_vestibule": 6,
@@ -1433,7 +1448,7 @@
         "crown_emitter": 12,
         "crown_launcher": 12,
         "nav_light": 4,
-        "rcs_thruster": 16,
+        "rcs_thruster": 20,
         "service_fitting": 8,
         "dock_capture_ring": 2,
         "crew_refuge": 1,
@@ -1441,7 +1456,7 @@
         "storeroom_shell": 1,
         "storeroom_fixture": 27,
         "storeroom_stowage": 24,
-        "exterior_hardware": 44,
+        "exterior_hardware": 47,
         "comms_antenna": 11,
         "eva_rail": 8,
         "eva_anchor": 8,
@@ -1450,32 +1465,32 @@
       },
       "sector_centers_frame_1": [
         [
-          74.99492645263672,
+          97.24491882324219,
           0.7134559154510498,
           25.710941314697266
         ],
         [
-          74.99492645263672,
+          97.24491882324219,
           -22.623056411743164,
           -12.237597465515137
         ],
         [
-          74.99492645263672,
+          97.24491882324219,
           21.90960693359375,
           -13.47333812713623
         ],
         [
-          80.9948959350586,
+          103.24494171142578,
           0.7134559154510498,
           25.710941314697266
         ],
         [
-          80.9948959350586,
+          103.24494171142578,
           -22.623056411743164,
           -12.237597465515137
         ],
         [
-          80.9948959350586,
+          103.24494171142578,
           21.90960693359375,
           -13.47333812713623
         ]
@@ -1511,7 +1526,7 @@
           "WF_SIMPROXY_PLUME_STUDY"
         ],
         "radiator_proxy_max_offset_m": {
-          "FIRST_IGNITION": 0.07500267123392675
+          "FIRST_IGNITION": 0.07500267133093606
         }
       },
       "drive_states": {
@@ -1551,13 +1566,13 @@
         "spans": [
           [
             "Hull_Aft_Body",
-            -111.75,
-            72.749
+            -134.0,
+            94.999
           ],
           [
             "Hull_Forward_Collar",
-            83.349,
-            122.25
+            105.599,
+            144.5
           ]
         ],
         "min_enclosure_margin_m": -25.5,
@@ -1575,21 +1590,21 @@
         "dock_corridors": {
           "Dock_Primary": {
             "x_m": [
-              106.4,
-              112.4
+              128.65,
+              134.65
             ],
             "min_ring_gap_m": 23.201,
-            "blade_front_gap_m": 35.001,
+            "blade_front_gap_m": 79.501,
             "shield_gap_m": 1.662,
             "pass": true
           },
           "Dock_Service": {
             "x_m": [
-              106.4,
-              112.4
+              128.65,
+              134.65
             ],
             "min_ring_gap_m": 23.201,
-            "blade_front_gap_m": 35.001,
+            "blade_front_gap_m": 79.501,
             "shield_gap_m": 1.662,
             "pass": true
           }
@@ -1597,54 +1612,55 @@
       },
       "body_bounds": {
         "min_m": [
-          -122.5,
+          -144.75,
           -6.5,
           -6.5
         ],
         "max_m": [
-          122.5,
+          144.75,
           6.5,
           6.5
         ],
         "size_m": [
-          245.0,
+          289.5,
           13.0,
           13.0
         ]
       },
       "deployed_bounds": {
         "min_m": [
-          -122.5,
+          -144.75,
           -45.00429916381836,
           -45.004234313964844
         ],
         "max_m": [
-          134.5,
+          156.75,
           45.00429916381836,
           45.00429916381836
         ],
         "size_m": [
-          257.0,
+          301.5,
           90.00859832763672,
           90.0085334777832
         ]
       },
       "clear_eye_rays": 20,
       "evaluated_geometry_counts": {
-        "geometry": 1547,
+        "geometry": 1701,
         "thrust_node": 12,
         "thrust_node_plate": 24,
         "hull_envelope": 2,
         "generator_proxy": 2,
         "hull_shell": 2,
         "production_detail": 121,
-        "fuel_tank": 42,
-        "fuel_support": 51,
-        "fuel_transfer_line": 26,
-        "fuel_equipment": 6,
+        "fuel_tank": 13,
+        "fuel_transfer_line": 54,
+        "fuel_equipment": 19,
+        "fuel_support": 64,
+        "dry_storage": 54,
         "body_frame": 14,
-        "body_equipment": 6,
         "cryo_feed_line": 8,
+        "body_equipment": 6,
         "power_storage": 4,
         "magnetic_field": 10,
         "plasma": 2,
@@ -1677,8 +1693,10 @@
         "thermal_support": 24,
         "coolant_chase": 12,
         "casing_boot": 45,
-        "warm_panel_candidate": 18,
-        "warm_panel_bracket": 144,
+        "radiator_baffle": 4,
+        "radiator_zone_cell": 144,
+        "radiator_zone_support": 24,
+        "radiator_zone_trunk": 12,
         "rotor_hub_drum": 2,
         "rotor_mechanism": 64,
         "crew_vestibule": 6,
@@ -1737,7 +1755,7 @@
         "crown_emitter": 12,
         "crown_launcher": 12,
         "nav_light": 4,
-        "rcs_thruster": 16,
+        "rcs_thruster": 20,
         "service_fitting": 8,
         "dock_capture_ring": 2,
         "crew_refuge": 1,
@@ -1745,7 +1763,7 @@
         "storeroom_shell": 1,
         "storeroom_fixture": 27,
         "storeroom_stowage": 24,
-        "exterior_hardware": 44,
+        "exterior_hardware": 47,
         "comms_antenna": 11,
         "eva_rail": 8,
         "eva_anchor": 8,
@@ -1754,32 +1772,32 @@
       },
       "sector_centers_frame_1": [
         [
-          74.99492645263672,
+          97.24491882324219,
           0.7134559154510498,
           25.710941314697266
         ],
         [
-          74.99492645263672,
+          97.24491882324219,
           -22.623056411743164,
           -12.237597465515137
         ],
         [
-          74.99492645263672,
+          97.24491882324219,
           21.90960693359375,
           -13.47333812713623
         ],
         [
-          80.9948959350586,
+          103.24494171142578,
           0.7134559154510498,
           25.710941314697266
         ],
         [
-          80.9948959350586,
+          103.24494171142578,
           -22.623056411743164,
           -12.237597465515137
         ],
         [
-          80.9948959350586,
+          103.24494171142578,
           21.90960693359375,
           -13.47333812713623
         ]
@@ -1815,7 +1833,7 @@
           "WF_SIMPROXY_PLUME_STUDY"
         ],
         "radiator_proxy_max_offset_m": {
-          "DOCKED": 0.07500267123392675
+          "DOCKED": 0.07500267133093606
         }
       },
       "drive_states": {
@@ -1856,14 +1874,14 @@
     "radial_pack_width_m": 30.5,
     "ribbon_width_m": 30.5,
     "root_radius_m": 6.5,
-    "front_x_m": 71.14936247723134,
-    "center_x_m": -19.925318761384332,
+    "front_x_m": 48.899362477231335,
+    "center_x_m": -42.17531876138433,
     "center_radius_m": 6.5,
     "cant_deg": 0.0,
     "cos": 1.0,
     "sin": 0.0,
-    "mount_x_m": -19.925318761384332,
-    "aft_x_m": -111.0,
+    "mount_x_m": -42.17531876138433,
+    "aft_x_m": -133.25,
     "inner_radius_min_m": 6.5,
     "outer_radius_m": 37.0,
     "nominal_net_area_m2": 5000.0,
@@ -1886,15 +1904,15 @@
     "root_band_planform_m2": 690.1553819444445,
     "root_calibration_margin_W": -1598499401.101572,
     "bay_length_m": 18.214936247723134,
-    "radiator_aft_x_m": -111.0,
-    "length_m": 245.0,
+    "radiator_aft_x_m": -133.25,
+    "length_m": 289.5,
     "body_diameter_m": 13.0,
     "measured_petal_planform_m2": 5521.243347167969,
-    "measured_blade_length_m": 182.1493682861328,
+    "measured_blade_length_m": 182.14936447143555,
     "measured_blade_width_m": 30.499998955607982,
     "measured_cell_outer_radius_m": 37.00007685876179,
     "measured_member_outer_radius_m": 37.17027834383515,
-    "measured_total_planform_m2": 16666.667165132807,
+    "measured_total_planform_m2": 16666.666816088007,
     "blade_stays": 12
   },
   "clearance_scope": "Conservative thermal-envelope/rotor screening; sampled ring motion with the rings rotating and stopped; 15-degree hypothetical plume screen, not validated plume/field clearance or general collision certification.",
@@ -2242,7 +2260,7 @@
         "A1": {
           "zone_1": {
             "margin_m": 0.4483,
-            "nearest": "Dock_Primary"
+            "nearest": "Dock_Primary_Entry_Chamber"
           },
           "zone_2": {
             "margin_m": 0.2012,
@@ -2268,7 +2286,7 @@
         "A2": {
           "zone_1": {
             "margin_m": 0.4483,
-            "nearest": "Dock_Primary"
+            "nearest": "Dock_Primary_Entry_Chamber"
           },
           "zone_2": {
             "margin_m": 0.2012,
@@ -2290,7 +2308,7 @@
         "A3": {
           "zone_1": {
             "margin_m": 0.4483,
-            "nearest": "Dock_Primary"
+            "nearest": "Dock_Primary_Entry_Chamber"
           },
           "zone_2": {
             "margin_m": 0.2012,
@@ -2370,7 +2388,7 @@
         "B1": {
           "zone_1": {
             "margin_m": 0.4483,
-            "nearest": "Dock_Primary"
+            "nearest": "Dock_Primary_Entry_Chamber"
           },
           "zone_2": {
             "margin_m": 0.2012,
@@ -2392,7 +2410,7 @@
         "B2": {
           "zone_1": {
             "margin_m": 0.4483,
-            "nearest": "Dock_Primary"
+            "nearest": "Dock_Primary_Entry_Chamber"
           },
           "zone_2": {
             "margin_m": 0.2012,
@@ -2414,7 +2432,7 @@
         "B3": {
           "zone_1": {
             "margin_m": 0.4483,
-            "nearest": "Dock_Primary"
+            "nearest": "Dock_Primary_Entry_Chamber"
           },
           "zone_2": {
             "margin_m": 0.2012,
@@ -2436,7 +2454,7 @@
         "R": {
           "zone_1": {
             "margin_m": 0.4483,
-            "nearest": "Dock_Primary"
+            "nearest": "Dock_Primary_Entry_Chamber"
           },
           "zone_2": {
             "margin_m": 0.2012,
@@ -2514,8 +2532,8 @@
       "WF_STRUCTURE.blend": {
         "pickups": 4,
         "spine_x": [
-          -89.8,
-          118.5
+          -112.05,
+          140.75
         ]
       }
     },
@@ -2524,18 +2542,18 @@
   },
   "forward_shield": {
     "measured_shield_radius_m": 45.0,
-    "shield_face_x_m": 122.5,
+    "shield_face_x_m": 144.75,
     "measured_crown_depth_m": 3.0,
-    "lance_tip_x_m": 134.5,
-    "overall_length_m": 257.0,
-    "layer_front_x_m": 124.55,
+    "lance_tip_x_m": 156.75,
+    "overall_length_m": 301.5,
+    "layer_front_x_m": 146.8,
     "x_order": {
-      "Lance tip": 134.5,
-      "layer front": 124.55,
-      "shield face": 122.5,
-      "EYE facet faces": 118.697,
-      "truss aft (rim girder)": 115.9,
-      "ring B sweep front": 83.184
+      "Lance tip": 156.75,
+      "layer front": 146.8,
+      "shield face": 144.75,
+      "EYE facet faces": 140.947,
+      "truss aft (rim girder)": 138.15,
+      "ring B sweep front": 105.434
     },
     "wells": 4,
     "crown_bays": 12,
@@ -2547,7 +2565,7 @@
     "control_saved": "NEUTRAL (all controls 0)",
     "preset_states": {
       "COAST": {
-        "drivers_worst_error": 3.538740429576137e-06,
+        "drivers_worst_error": 4.090654101673863e-06,
         "sector_states": {},
         "eyelids_closed": [],
         "open_bays": [],
@@ -2555,7 +2573,7 @@
         "engaged_envelope_diameter_m": null
       },
       "LOW_THRUST": {
-        "drivers_worst_error": 3.538740429576137e-06,
+        "drivers_worst_error": 4.090654101673863e-06,
         "sector_states": {},
         "eyelids_closed": [],
         "open_bays": [],
@@ -2563,7 +2581,7 @@
         "engaged_envelope_diameter_m": null
       },
       "EVA": {
-        "drivers_worst_error": 3.538740429576137e-06,
+        "drivers_worst_error": 4.090654101673863e-06,
         "sector_states": {},
         "eyelids_closed": [],
         "open_bays": [],
@@ -2571,7 +2589,7 @@
         "engaged_envelope_diameter_m": null
       },
       "HIGH_POWER": {
-        "drivers_worst_error": 3.538740429576137e-06,
+        "drivers_worst_error": 4.090654101673863e-06,
         "sector_states": {},
         "eyelids_closed": [],
         "open_bays": [],
@@ -2579,7 +2597,7 @@
         "engaged_envelope_diameter_m": null
       },
       "FIRST_IGNITION": {
-        "drivers_worst_error": 3.538740429576137e-06,
+        "drivers_worst_error": 4.090654101673863e-06,
         "sector_states": {},
         "eyelids_closed": [],
         "open_bays": [],
@@ -2587,7 +2605,7 @@
         "engaged_envelope_diameter_m": null
       },
       "DOCKED": {
-        "drivers_worst_error": 3.538740429576137e-06,
+        "drivers_worst_error": 4.090654101673863e-06,
         "sector_states": {},
         "eyelids_closed": [],
         "open_bays": [],
@@ -2597,7 +2615,7 @@
     },
     "display_poses": {
       "DEFENSE_ENGAGED": {
-        "drivers_worst_error": 3.538740429576137e-06,
+        "drivers_worst_error": 5.9736535718002415e-06,
         "sector_states": {
           "1": "ENGAGED",
           "2": "ENGAGED",
@@ -2615,7 +2633,7 @@
         "engaged_envelope_diameter_m": 86.706
       },
       "SHIELD_DAMAGED": {
-        "drivers_worst_error": 3.538740429576137e-06,
+        "drivers_worst_error": 4.090654101673863e-06,
         "sector_states": {},
         "eyelids_closed": [],
         "open_bays": [],
@@ -2623,7 +2641,7 @@
         "engaged_envelope_diameter_m": null
       },
       "EYE_SHUTTERS_CLOSED": {
-        "drivers_worst_error": 3.538740429576137e-06,
+        "drivers_worst_error": 4.090654101673863e-06,
         "sector_states": {},
         "eyelids_closed": [
           1,
@@ -2636,7 +2654,7 @@
         "engaged_envelope_diameter_m": null
       },
       "EYE_F1_JAMMED": {
-        "drivers_worst_error": 3.538740429576137e-06,
+        "drivers_worst_error": 4.090654101673863e-06,
         "sector_states": {},
         "eyelids_closed": [],
         "open_bays": [],
@@ -2644,7 +2662,7 @@
         "engaged_envelope_diameter_m": null
       },
       "CROWN_PREPARED": {
-        "drivers_worst_error": 3.538740429576137e-06,
+        "drivers_worst_error": 4.090654101673863e-06,
         "sector_states": {
           "1": "PREPARED",
           "2": "PREPARED",
@@ -2657,7 +2675,7 @@
         "engaged_envelope_diameter_m": null
       },
       "CROWN_ENGAGED": {
-        "drivers_worst_error": 3.538740429576137e-06,
+        "drivers_worst_error": 5.9736535718002415e-06,
         "sector_states": {
           "1": "ENGAGED",
           "2": "ENGAGED",
@@ -2675,7 +2693,7 @@
         "engaged_envelope_diameter_m": 86.706
       },
       "CROWN_RECOVERING": {
-        "drivers_worst_error": 3.538740429576137e-06,
+        "drivers_worst_error": 4.090654101673863e-06,
         "sector_states": {
           "1": "RECOVERING",
           "2": "RECOVERING",
@@ -2693,7 +2711,7 @@
         "engaged_envelope_diameter_m": 86.706
       },
       "CROWN_DEGRADED": {
-        "drivers_worst_error": 3.538740429576137e-06,
+        "drivers_worst_error": 5.9736535718002415e-06,
         "sector_states": {
           "1": "ENGAGED",
           "2": "DEGRADED",
@@ -2908,7 +2926,7 @@
         "ring_locks": 0.0,
         "drive_active": 0.0,
         "thrust_level": 1.0,
-        "exhaust_end_x_m": -128.5,
+        "exhaust_end_x_m": -150.75,
         "radiator_step": "HEAT_ADMITTED",
         "acceleration_g": 0.0,
         "speed_c": 0.0,
@@ -2921,7 +2939,7 @@
         "ring_locks": 0.0,
         "drive_active": 0.0,
         "thrust_level": 1.0,
-        "exhaust_end_x_m": -128.5,
+        "exhaust_end_x_m": -150.75,
         "radiator_step": "HEAT_ADMITTED",
         "acceleration_g": 0.0,
         "speed_c": 0.0,
@@ -2934,7 +2952,7 @@
         "ring_locks": 1.0,
         "drive_active": 0.0,
         "thrust_level": 1.0,
-        "exhaust_end_x_m": -128.5,
+        "exhaust_end_x_m": -150.75,
         "radiator_step": "HEAT_ADMITTED",
         "acceleration_g": 0.0,
         "speed_c": 0.0,
@@ -2947,7 +2965,7 @@
         "ring_locks": 1.0,
         "drive_active": 1.0,
         "thrust_level": 0.499444,
-        "exhaust_end_x_m": -126.74028,
+        "exhaust_end_x_m": -148.99028,
         "radiator_step": "HIGH_POWER_REJECTION",
         "acceleration_g": 0.7491657397107898,
         "speed_c": 0.003991106172845617,
@@ -2960,7 +2978,7 @@
         "ring_locks": 1.0,
         "drive_active": 1.0,
         "thrust_level": 1.0,
-        "exhaust_end_x_m": -128.5,
+        "exhaust_end_x_m": -150.75,
         "radiator_step": "HIGH_POWER_REJECTION",
         "acceleration_g": 1.5000000000000002,
         "speed_c": 0.016000000000000004,
@@ -2973,7 +2991,7 @@
         "ring_locks": 0.0,
         "drive_active": 0.0,
         "thrust_level": 1.0,
-        "exhaust_end_x_m": -128.5,
+        "exhaust_end_x_m": -150.75,
         "radiator_step": "POST_SHUTDOWN_COOLDOWN",
         "acceleration_g": 0.0,
         "speed_c": 0.016000000000000004,
@@ -2986,7 +3004,7 @@
         "ring_locks": 0.0,
         "drive_active": 0.0,
         "thrust_level": 1.0,
-        "exhaust_end_x_m": -128.5,
+        "exhaust_end_x_m": -150.75,
         "radiator_step": "HEAT_ADMITTED",
         "acceleration_g": 0.0,
         "speed_c": 0.016000000000000004,
@@ -4564,7 +4582,7 @@
       "direct_links": []
     },
     "subsystems/WF_FORWARD_SHIELD.blend": {
-      "generated_objects": 795,
+      "generated_objects": 799,
       "ids": [
         "Alt_Eye1_Branch_in_120_aft",
         "Alt_Eye1_Branch_in_120_fwd",
@@ -5018,18 +5036,22 @@
         "Ext_Beacon_Rim_3",
         "Ext_Beacon_Rim_4",
         "Ext_RCS_Rim_1",
+        "Ext_RCS_Rim_1_Forward",
         "Ext_RCS_Rim_1_Radial",
         "Ext_RCS_Rim_1_Tan_Neg",
         "Ext_RCS_Rim_1_Tan_Pos",
         "Ext_RCS_Rim_2",
+        "Ext_RCS_Rim_2_Forward",
         "Ext_RCS_Rim_2_Radial",
         "Ext_RCS_Rim_2_Tan_Neg",
         "Ext_RCS_Rim_2_Tan_Pos",
         "Ext_RCS_Rim_3",
+        "Ext_RCS_Rim_3_Forward",
         "Ext_RCS_Rim_3_Radial",
         "Ext_RCS_Rim_3_Tan_Neg",
         "Ext_RCS_Rim_3_Tan_Pos",
         "Ext_RCS_Rim_4",
+        "Ext_RCS_Rim_4_Forward",
         "Ext_RCS_Rim_4_Radial",
         "Ext_RCS_Rim_4_Tan_Neg",
         "Ext_RCS_Rim_4_Tan_Pos",
@@ -6160,7 +6182,7 @@
       ]
     },
     "subsystems/WF_HULL.blend": {
-      "generated_objects": 59,
+      "generated_objects": 60,
       "ids": [
         "Hull_Aft_Body",
         "Hull_Forward_Collar",
@@ -6215,6 +6237,7 @@
         "IF_HULL_STATION_EYE",
         "IF_HULL_STATION_RADIATOR_AFT",
         "IF_HULL_STATION_RADIATOR_FRONT",
+        "IF_HULL_STATION_RADIATOR_ZONE_FRONT",
         "IF_HULL_STATION_REACTOR",
         "IF_HULL_STATION_ROTOR_A",
         "IF_HULL_STATION_ROTOR_B",
@@ -6536,7 +6559,7 @@
       "direct_links": []
     },
     "subsystems/WF_SERVICE.blend": {
-      "generated_objects": 313,
+      "generated_objects": 316,
       "ids": [
         "Airlock_EVA",
         "Casing_Access_01_000",
@@ -6744,14 +6767,17 @@
         "Ext_Optical_Gimbal",
         "Ext_Optical_Telescope",
         "Ext_RCS_Aft_1",
+        "Ext_RCS_Aft_1_Axial",
         "Ext_RCS_Aft_1_Radial",
         "Ext_RCS_Aft_1_Tan_Neg",
         "Ext_RCS_Aft_1_Tan_Pos",
         "Ext_RCS_Aft_2",
+        "Ext_RCS_Aft_2_Axial",
         "Ext_RCS_Aft_2_Radial",
         "Ext_RCS_Aft_2_Tan_Neg",
         "Ext_RCS_Aft_2_Tan_Pos",
         "Ext_RCS_Aft_3",
+        "Ext_RCS_Aft_3_Axial",
         "Ext_RCS_Aft_3_Radial",
         "Ext_RCS_Aft_3_Tan_Neg",
         "Ext_RCS_Aft_3_Tan_Pos",
@@ -6865,7 +6891,7 @@
       "direct_links": []
     },
     "subsystems/WF_STORAGE.blend": {
-      "generated_objects": 165,
+      "generated_objects": 231,
       "ids": [
         "Body_CMG_03_1",
         "Body_CMG_03_2",
@@ -6891,122 +6917,189 @@
         "CRYO_FEED_LINE_02",
         "CRYO_FEED_LINE_03",
         "CRYO_FEED_LINE_04",
+        "Dry_Store_M1_S1_1",
+        "Dry_Store_M1_S1_2",
+        "Dry_Store_M1_S2_1",
+        "Dry_Store_M1_S2_2",
+        "Dry_Store_M1_S3_1",
+        "Dry_Store_M1_S3_2",
+        "Dry_Store_M2_S1_1",
+        "Dry_Store_M2_S1_2",
+        "Dry_Store_M2_S2_1",
+        "Dry_Store_M2_S2_2",
+        "Dry_Store_M2_S3_1",
+        "Dry_Store_M2_S3_2",
+        "Dry_Store_M3_S1_1",
+        "Dry_Store_M3_S1_2",
+        "Dry_Store_M3_S2_1",
+        "Dry_Store_M3_S2_2",
+        "Dry_Store_M3_S3_1",
+        "Dry_Store_M3_S3_2",
+        "Dry_Store_M4_S1_1",
+        "Dry_Store_M4_S1_2",
+        "Dry_Store_M4_S2_1",
+        "Dry_Store_M4_S2_2",
+        "Dry_Store_M4_S3_1",
+        "Dry_Store_M4_S3_2",
+        "Dry_Store_M5_S1_1",
+        "Dry_Store_M5_S1_2",
+        "Dry_Store_M5_S2_1",
+        "Dry_Store_M5_S2_2",
+        "Dry_Store_M5_S3_1",
+        "Dry_Store_M5_S3_2",
+        "Dry_Store_M6_S1_1",
+        "Dry_Store_M6_S1_2",
+        "Dry_Store_M6_S2_1",
+        "Dry_Store_M6_S2_2",
+        "Dry_Store_M6_S3_1",
+        "Dry_Store_M6_S3_2",
+        "Dry_Store_M7_S1_1",
+        "Dry_Store_M7_S1_2",
+        "Dry_Store_M7_S2_1",
+        "Dry_Store_M7_S2_2",
+        "Dry_Store_M7_S3_1",
+        "Dry_Store_M7_S3_2",
+        "Dry_Store_M8_S1_1",
+        "Dry_Store_M8_S1_2",
+        "Dry_Store_M8_S2_1",
+        "Dry_Store_M8_S2_2",
+        "Dry_Store_M8_S3_1",
+        "Dry_Store_M8_S3_2",
+        "Dry_Store_M9_S1_1",
+        "Dry_Store_M9_S1_2",
+        "Dry_Store_M9_S2_1",
+        "Dry_Store_M9_S2_2",
+        "Dry_Store_M9_S3_1",
+        "Dry_Store_M9_S3_2",
         "Feed_Run_Tank_01",
         "Feed_Run_Tank_02",
         "Feed_Run_Tank_03",
         "Feed_Run_Tank_04",
-        "Fuel_Cryocooler_1_1",
-        "Fuel_Cryocooler_1_2",
-        "Fuel_Cryocooler_1_3",
-        "Fuel_Cryocooler_2_1",
-        "Fuel_Cryocooler_2_2",
-        "Fuel_Cryocooler_2_3",
-        "Fuel_He3_Hangers_1_1",
-        "Fuel_He3_Hangers_1_2",
-        "Fuel_He3_Hangers_1_3",
-        "Fuel_He3_Hangers_2_1",
-        "Fuel_He3_Hangers_2_2",
-        "Fuel_He3_Hangers_2_3",
-        "Fuel_He3_Hangers_3_1",
-        "Fuel_He3_Hangers_3_2",
-        "Fuel_He3_Hangers_3_3",
-        "Fuel_He3_Hangers_4_1",
-        "Fuel_He3_Hangers_4_2",
-        "Fuel_He3_Hangers_4_3",
-        "Fuel_He3_Hangers_5_1",
-        "Fuel_He3_Hangers_5_2",
-        "Fuel_He3_Hangers_5_3",
-        "Fuel_He3_Hangers_6_1",
-        "Fuel_He3_Hangers_6_2",
-        "Fuel_He3_Hangers_6_3",
-        "Fuel_He3_Hangers_7_1",
-        "Fuel_He3_Hangers_7_2",
-        "Fuel_He3_Hangers_7_3",
-        "Fuel_He3_Hangers_8_1",
-        "Fuel_He3_Hangers_8_2",
-        "Fuel_He3_Hangers_8_3",
-        "Fuel_He3_Hangers_9_1",
-        "Fuel_He3_Hangers_9_2",
-        "Fuel_He3_Hangers_9_3",
-        "Fuel_He3_Station_1_1",
-        "Fuel_He3_Station_1_2",
-        "Fuel_He3_Station_1_3",
-        "Fuel_He3_Station_2_1",
-        "Fuel_He3_Station_2_2",
-        "Fuel_He3_Station_2_3",
-        "Fuel_He3_Station_3_1",
-        "Fuel_He3_Station_3_2",
-        "Fuel_He3_Station_3_3",
-        "Fuel_He3_Station_4_1",
-        "Fuel_He3_Station_4_2",
-        "Fuel_He3_Station_4_3",
-        "Fuel_He3_Station_5_1",
-        "Fuel_He3_Station_5_2",
-        "Fuel_He3_Station_5_3",
-        "Fuel_He3_Station_6_1",
-        "Fuel_He3_Station_6_2",
-        "Fuel_He3_Station_6_3",
-        "Fuel_He3_Station_7_1",
-        "Fuel_He3_Station_7_2",
-        "Fuel_He3_Station_7_3",
-        "Fuel_He3_Station_8_1",
-        "Fuel_He3_Station_8_2",
-        "Fuel_He3_Station_8_3",
-        "Fuel_He3_Station_9_1",
-        "Fuel_He3_Station_9_2",
-        "Fuel_He3_Station_9_3",
-        "Fuel_Header_He3",
-        "Fuel_Return_Torus_D2_1",
-        "Fuel_Return_Torus_D2_2",
-        "Fuel_Return_Torus_D2_3",
-        "Fuel_Return_Torus_H2_1",
-        "Fuel_Return_Torus_H2_2",
-        "Fuel_Return_Torus_H2_3",
-        "Fuel_Return_Torus_He3_1",
-        "Fuel_Return_Torus_He3_2",
-        "Fuel_Return_Torus_He3_3",
-        "Fuel_Return_Torus_Strut_1_1_Aft",
-        "Fuel_Return_Torus_Strut_1_1_Fwd",
-        "Fuel_Return_Torus_Strut_1_2_Aft",
-        "Fuel_Return_Torus_Strut_1_2_Fwd",
-        "Fuel_Return_Torus_Strut_2_1_Aft",
-        "Fuel_Return_Torus_Strut_2_1_Fwd",
-        "Fuel_Return_Torus_Strut_2_2_Aft",
-        "Fuel_Return_Torus_Strut_2_2_Fwd",
-        "Fuel_Return_Torus_Strut_3_1_Aft",
-        "Fuel_Return_Torus_Strut_3_1_Fwd",
-        "Fuel_Return_Torus_Strut_3_2_Aft",
-        "Fuel_Return_Torus_Strut_3_2_Fwd",
-        "Fuel_Torus_D2_1",
-        "Fuel_Torus_D2_2",
-        "Fuel_Torus_D2_3",
-        "Fuel_Torus_H2_1_1",
-        "Fuel_Torus_H2_2_1",
-        "Fuel_Torus_H2_3_1",
-        "Fuel_Torus_Strut_1_1_Aft",
-        "Fuel_Torus_Strut_1_1_Fwd",
-        "Fuel_Torus_Strut_1_2_Aft",
-        "Fuel_Torus_Strut_1_2_Fwd",
-        "Fuel_Torus_Strut_2_1_Aft",
-        "Fuel_Torus_Strut_2_1_Fwd",
-        "Fuel_Torus_Strut_2_2_Aft",
-        "Fuel_Torus_Strut_2_2_Fwd",
-        "Fuel_Torus_Strut_3_1_Aft",
-        "Fuel_Torus_Strut_3_1_Fwd",
-        "Fuel_Torus_Strut_3_2_Aft",
-        "Fuel_Torus_Strut_3_2_Fwd",
-        "Fuel_Transfer_D2",
-        "Fuel_Transfer_D2_Ext",
-        "Fuel_Transfer_D2_R",
-        "Fuel_Transfer_D2_R_Ext",
+        "Fuel_Cryocooler_D2_A",
+        "Fuel_Cryocooler_D2_B",
+        "Fuel_Cryocooler_H2_A",
+        "Fuel_Cryocooler_H2_B",
+        "Fuel_Cryocooler_He3_A",
+        "Fuel_Cryocooler_He3_B",
+        "Fuel_Deck_Collar_Tie_O1",
+        "Fuel_Deck_Collar_Tie_O2",
+        "Fuel_Deck_Collar_Tie_O3",
+        "Fuel_Deck_Collar_Tie_O4",
+        "Fuel_Deck_Collar_Tie_O5",
+        "Fuel_Deck_Collar_Tie_O6",
+        "Fuel_Deck_Collar_Tie_O7",
+        "Fuel_Deck_Collar_Tie_O8",
+        "Fuel_Deck_Collar_Tie_O9",
+        "Fuel_Deck_Hoop_Inner_Aft",
+        "Fuel_Deck_Hoop_Inner_Fwd",
+        "Fuel_Deck_Hoop_Outer_Aft",
+        "Fuel_Deck_Hoop_Outer_Fwd",
+        "Fuel_Deck_Ring_Lacing",
+        "Fuel_Deck_Truss_I1",
+        "Fuel_Deck_Truss_I2",
+        "Fuel_Deck_Truss_I3",
+        "Fuel_Deck_Truss_I4",
+        "Fuel_Deck_Truss_O1",
+        "Fuel_Deck_Truss_O2",
+        "Fuel_Deck_Truss_O3",
+        "Fuel_Deck_Truss_O4",
+        "Fuel_Deck_Truss_O5",
+        "Fuel_Deck_Truss_O6",
+        "Fuel_Deck_Truss_O7",
+        "Fuel_Deck_Truss_O8",
+        "Fuel_Deck_Truss_O9",
+        "Fuel_Forward_Hoop",
+        "Fuel_Forward_Ties",
+        "Fuel_Fwd_Link_I1",
+        "Fuel_Fwd_Link_I2",
+        "Fuel_Fwd_Link_I3",
+        "Fuel_Fwd_Link_I4",
+        "Fuel_Fwd_Link_O1",
+        "Fuel_Fwd_Link_O2",
+        "Fuel_Fwd_Link_O3",
+        "Fuel_Fwd_Link_O4",
+        "Fuel_Fwd_Link_O5",
+        "Fuel_Fwd_Link_O6",
+        "Fuel_Fwd_Link_O7",
+        "Fuel_Fwd_Link_O8",
+        "Fuel_Fwd_Link_O9",
+        "Fuel_Keel_Rail_O1",
+        "Fuel_Keel_Rail_O2",
+        "Fuel_Keel_Rail_O3",
+        "Fuel_Keel_Rail_O4",
+        "Fuel_Keel_Rail_O5",
+        "Fuel_Keel_Rail_O6",
+        "Fuel_Keel_Rail_O7",
+        "Fuel_Keel_Rail_O8",
+        "Fuel_Keel_Rail_O9",
+        "Fuel_Outlet_I1_D2",
+        "Fuel_Outlet_I2_H2",
+        "Fuel_Outlet_I3_D2",
+        "Fuel_Outlet_I4_H2",
+        "Fuel_Outlet_O1_He3",
+        "Fuel_Outlet_O2_He3",
+        "Fuel_Outlet_O3_H2",
+        "Fuel_Outlet_O4_He3",
+        "Fuel_Outlet_O5_He3",
+        "Fuel_Outlet_O6_H2",
+        "Fuel_Outlet_O7_He3",
+        "Fuel_Outlet_O8_He3",
+        "Fuel_Outlet_O9_H2",
+        "Fuel_Ring_Main_D2_I",
+        "Fuel_Ring_Main_H2_I",
+        "Fuel_Ring_Main_H2_O",
+        "Fuel_Ring_Main_He3_O",
+        "Fuel_Skirt_I1",
+        "Fuel_Skirt_I2",
+        "Fuel_Skirt_I3",
+        "Fuel_Skirt_I4",
+        "Fuel_Skirt_O1",
+        "Fuel_Skirt_O2",
+        "Fuel_Skirt_O3",
+        "Fuel_Skirt_O4",
+        "Fuel_Skirt_O5",
+        "Fuel_Skirt_O6",
+        "Fuel_Skirt_O7",
+        "Fuel_Skirt_O8",
+        "Fuel_Skirt_O9",
+        "Fuel_Tank_I1_D2",
+        "Fuel_Tank_I2_H2",
+        "Fuel_Tank_I3_D2",
+        "Fuel_Tank_I4_H2",
+        "Fuel_Tank_O1_He3",
+        "Fuel_Tank_O2_He3",
+        "Fuel_Tank_O3_H2",
+        "Fuel_Tank_O4_He3",
+        "Fuel_Tank_O5_He3",
+        "Fuel_Tank_O6_H2",
+        "Fuel_Tank_O7_He3",
+        "Fuel_Tank_O8_He3",
+        "Fuel_Tank_O9_H2",
+        "Fuel_Transfer_D2_A",
+        "Fuel_Transfer_D2_A_Ext",
+        "Fuel_Transfer_D2_B",
+        "Fuel_Transfer_D2_B_Ext",
         "Fuel_Transfer_H2_A",
         "Fuel_Transfer_H2_A_Ext",
         "Fuel_Transfer_H2_B",
         "Fuel_Transfer_H2_B_Ext",
-        "Fuel_Transfer_H2_R",
-        "Fuel_Transfer_H2_R_Ext",
-        "Fuel_Transfer_He3_R",
-        "Fuel_Transfer_He3_R_Ext",
+        "Fuel_Transfer_He3_A",
+        "Fuel_Transfer_He3_A_Ext",
+        "Fuel_Transfer_He3_B",
+        "Fuel_Transfer_He3_B_Ext",
+        "Fuel_Valve_I1",
+        "Fuel_Valve_I2",
+        "Fuel_Valve_I3",
+        "Fuel_Valve_I4",
+        "Fuel_Valve_O1",
+        "Fuel_Valve_O2",
+        "Fuel_Valve_O3",
+        "Fuel_Valve_O4",
+        "Fuel_Valve_O5",
+        "Fuel_Valve_O6",
+        "Fuel_Valve_O7",
+        "Fuel_Valve_O8",
+        "Fuel_Valve_O9",
         "IF_CRYO_FEED_CORE_01",
         "IF_CRYO_FEED_CORE_02",
         "IF_CRYO_FEED_INJECTION_03",
@@ -7019,24 +7112,23 @@
         "IF_CRYO_FEED_TANK_02",
         "IF_CRYO_FEED_TANK_03",
         "IF_CRYO_FEED_TANK_04",
-        "IF_FUEL_HULL_D2",
-        "IF_FUEL_HULL_D2_R",
+        "IF_FUEL_HULL_D2_A",
+        "IF_FUEL_HULL_D2_B",
         "IF_FUEL_HULL_H2_A",
         "IF_FUEL_HULL_H2_B",
-        "IF_FUEL_HULL_H2_R",
-        "IF_FUEL_HULL_HE3_R",
-        "IF_FUEL_RUN_TANK_D2",
-        "IF_FUEL_RUN_TANK_D2_R",
+        "IF_FUEL_HULL_HE3_A",
+        "IF_FUEL_HULL_HE3_B",
+        "IF_FUEL_RUN_TANK_D2_A",
+        "IF_FUEL_RUN_TANK_D2_B",
         "IF_FUEL_RUN_TANK_H2_A",
         "IF_FUEL_RUN_TANK_H2_B",
-        "IF_FUEL_RUN_TANK_H2_R",
-        "IF_FUEL_RUN_TANK_HE3",
-        "IF_FUEL_RUN_TANK_HE3_R"
+        "IF_FUEL_RUN_TANK_HE3_A",
+        "IF_FUEL_RUN_TANK_HE3_B"
       ],
       "direct_links": []
     },
     "subsystems/WF_STRUCTURE.blend": {
-      "generated_objects": 632,
+      "generated_objects": 742,
       "ids": [
         "Body_Envelope_Reference",
         "Brayton_Train_1",
@@ -7107,7 +7199,18 @@
         "IF_SECTOR_0_52",
         "IF_SECTOR_0_53",
         "IF_SECTOR_0_54",
+        "IF_SECTOR_0_55",
+        "IF_SECTOR_0_56",
+        "IF_SECTOR_0_57",
+        "IF_SECTOR_0_58",
+        "IF_SECTOR_0_59",
         "IF_SECTOR_0_6",
+        "IF_SECTOR_0_60",
+        "IF_SECTOR_0_61",
+        "IF_SECTOR_0_62",
+        "IF_SECTOR_0_63",
+        "IF_SECTOR_0_64",
+        "IF_SECTOR_0_65",
         "IF_SECTOR_0_7",
         "IF_SECTOR_0_8",
         "IF_SECTOR_0_9",
@@ -7162,7 +7265,18 @@
         "IF_SECTOR_1_52",
         "IF_SECTOR_1_53",
         "IF_SECTOR_1_54",
+        "IF_SECTOR_1_55",
+        "IF_SECTOR_1_56",
+        "IF_SECTOR_1_57",
+        "IF_SECTOR_1_58",
+        "IF_SECTOR_1_59",
         "IF_SECTOR_1_6",
+        "IF_SECTOR_1_60",
+        "IF_SECTOR_1_61",
+        "IF_SECTOR_1_62",
+        "IF_SECTOR_1_63",
+        "IF_SECTOR_1_64",
+        "IF_SECTOR_1_65",
         "IF_SECTOR_1_7",
         "IF_SECTOR_1_8",
         "IF_SECTOR_1_9",
@@ -7217,7 +7331,18 @@
         "IF_SECTOR_2_52",
         "IF_SECTOR_2_53",
         "IF_SECTOR_2_54",
+        "IF_SECTOR_2_55",
+        "IF_SECTOR_2_56",
+        "IF_SECTOR_2_57",
+        "IF_SECTOR_2_58",
+        "IF_SECTOR_2_59",
         "IF_SECTOR_2_6",
+        "IF_SECTOR_2_60",
+        "IF_SECTOR_2_61",
+        "IF_SECTOR_2_62",
+        "IF_SECTOR_2_63",
+        "IF_SECTOR_2_64",
+        "IF_SECTOR_2_65",
         "IF_SECTOR_2_7",
         "IF_SECTOR_2_8",
         "IF_SECTOR_2_9",
@@ -7293,6 +7418,17 @@
         "Primary_Frame_52",
         "Primary_Frame_53",
         "Primary_Frame_54",
+        "Primary_Frame_55",
+        "Primary_Frame_56",
+        "Primary_Frame_57",
+        "Primary_Frame_58",
+        "Primary_Frame_59",
+        "Primary_Frame_60",
+        "Primary_Frame_61",
+        "Primary_Frame_62",
+        "Primary_Frame_63",
+        "Primary_Frame_64",
+        "Primary_Frame_65",
         "Primary_Rail_10_0",
         "Primary_Rail_10_1",
         "Primary_Rail_10_2",
@@ -7440,9 +7576,42 @@
         "Primary_Rail_54_0",
         "Primary_Rail_54_1",
         "Primary_Rail_54_2",
+        "Primary_Rail_55_0",
+        "Primary_Rail_55_1",
+        "Primary_Rail_55_2",
+        "Primary_Rail_56_0",
+        "Primary_Rail_56_1",
+        "Primary_Rail_56_2",
+        "Primary_Rail_57_0",
+        "Primary_Rail_57_1",
+        "Primary_Rail_57_2",
+        "Primary_Rail_58_0",
+        "Primary_Rail_58_1",
+        "Primary_Rail_58_2",
+        "Primary_Rail_59_0",
+        "Primary_Rail_59_1",
+        "Primary_Rail_59_2",
         "Primary_Rail_5_0",
         "Primary_Rail_5_1",
         "Primary_Rail_5_2",
+        "Primary_Rail_60_0",
+        "Primary_Rail_60_1",
+        "Primary_Rail_60_2",
+        "Primary_Rail_61_0",
+        "Primary_Rail_61_1",
+        "Primary_Rail_61_2",
+        "Primary_Rail_62_0",
+        "Primary_Rail_62_1",
+        "Primary_Rail_62_2",
+        "Primary_Rail_63_0",
+        "Primary_Rail_63_1",
+        "Primary_Rail_63_2",
+        "Primary_Rail_64_0",
+        "Primary_Rail_64_1",
+        "Primary_Rail_64_2",
+        "Primary_Rail_65_0",
+        "Primary_Rail_65_1",
+        "Primary_Rail_65_2",
         "Primary_Rail_6_0",
         "Primary_Rail_6_1",
         "Primary_Rail_6_2",
@@ -7602,9 +7771,42 @@
         "Primary_XBrace_54_0",
         "Primary_XBrace_54_1",
         "Primary_XBrace_54_2",
+        "Primary_XBrace_55_0",
+        "Primary_XBrace_55_1",
+        "Primary_XBrace_55_2",
+        "Primary_XBrace_56_0",
+        "Primary_XBrace_56_1",
+        "Primary_XBrace_56_2",
+        "Primary_XBrace_57_0",
+        "Primary_XBrace_57_1",
+        "Primary_XBrace_57_2",
+        "Primary_XBrace_58_0",
+        "Primary_XBrace_58_1",
+        "Primary_XBrace_58_2",
+        "Primary_XBrace_59_0",
+        "Primary_XBrace_59_1",
+        "Primary_XBrace_59_2",
         "Primary_XBrace_5_0",
         "Primary_XBrace_5_1",
         "Primary_XBrace_5_2",
+        "Primary_XBrace_60_0",
+        "Primary_XBrace_60_1",
+        "Primary_XBrace_60_2",
+        "Primary_XBrace_61_0",
+        "Primary_XBrace_61_1",
+        "Primary_XBrace_61_2",
+        "Primary_XBrace_62_0",
+        "Primary_XBrace_62_1",
+        "Primary_XBrace_62_2",
+        "Primary_XBrace_63_0",
+        "Primary_XBrace_63_1",
+        "Primary_XBrace_63_2",
+        "Primary_XBrace_64_0",
+        "Primary_XBrace_64_1",
+        "Primary_XBrace_64_2",
+        "Primary_XBrace_65_0",
+        "Primary_XBrace_65_1",
+        "Primary_XBrace_65_2",
         "Primary_XBrace_6_0",
         "Primary_XBrace_6_1",
         "Primary_XBrace_6_2",
@@ -7674,7 +7876,7 @@
       "direct_links": []
     },
     "subsystems/WF_THERMAL.blend": {
-      "generated_objects": 1171,
+      "generated_objects": 1247,
       "ids": [
         "Blade_Stay_0_2",
         "Blade_Stay_0_4",
@@ -7775,12 +7977,178 @@
         "IF_RAD_3_STAY_4_HULL",
         "IF_RAD_3_STAY_6_HULL",
         "IF_RAD_3_STAY_8_HULL",
+        "Radiator_Baffle_LOW_Layer_1",
+        "Radiator_Baffle_LOW_Layer_2",
+        "Radiator_Baffle_WARM_Layer_1",
+        "Radiator_Baffle_WARM_Layer_2",
         "Radiator_Root_0_-1",
         "Radiator_Root_0_1",
         "Radiator_Root_1_-1",
         "Radiator_Root_1_1",
         "Radiator_Root_2_-1",
         "Radiator_Root_2_1",
+        "Radiator_Zone_LOW_1_Cell_0_0",
+        "Radiator_Zone_LOW_1_Cell_0_1",
+        "Radiator_Zone_LOW_1_Cell_0_2",
+        "Radiator_Zone_LOW_1_Cell_0_3",
+        "Radiator_Zone_LOW_1_Cell_1_0",
+        "Radiator_Zone_LOW_1_Cell_1_1",
+        "Radiator_Zone_LOW_1_Cell_1_2",
+        "Radiator_Zone_LOW_1_Cell_1_3",
+        "Radiator_Zone_LOW_1_Cell_2_0",
+        "Radiator_Zone_LOW_1_Cell_2_1",
+        "Radiator_Zone_LOW_1_Cell_2_2",
+        "Radiator_Zone_LOW_1_Cell_2_3",
+        "Radiator_Zone_LOW_1_Cell_3_0",
+        "Radiator_Zone_LOW_1_Cell_3_1",
+        "Radiator_Zone_LOW_1_Cell_3_2",
+        "Radiator_Zone_LOW_1_Cell_3_3",
+        "Radiator_Zone_LOW_1_Cell_4_0",
+        "Radiator_Zone_LOW_1_Cell_4_1",
+        "Radiator_Zone_LOW_1_Cell_4_2",
+        "Radiator_Zone_LOW_1_Cell_4_3",
+        "Radiator_Zone_LOW_1_Cell_5_0",
+        "Radiator_Zone_LOW_1_Cell_5_1",
+        "Radiator_Zone_LOW_1_Cell_5_2",
+        "Radiator_Zone_LOW_1_Cell_5_3",
+        "Radiator_Zone_LOW_1_Root_Boom_Aft",
+        "Radiator_Zone_LOW_1_Root_Boom_Fwd",
+        "Radiator_Zone_LOW_1_Trunk",
+        "Radiator_Zone_LOW_2_Cell_0_0",
+        "Radiator_Zone_LOW_2_Cell_0_1",
+        "Radiator_Zone_LOW_2_Cell_0_2",
+        "Radiator_Zone_LOW_2_Cell_0_3",
+        "Radiator_Zone_LOW_2_Cell_1_0",
+        "Radiator_Zone_LOW_2_Cell_1_1",
+        "Radiator_Zone_LOW_2_Cell_1_2",
+        "Radiator_Zone_LOW_2_Cell_1_3",
+        "Radiator_Zone_LOW_2_Cell_2_0",
+        "Radiator_Zone_LOW_2_Cell_2_1",
+        "Radiator_Zone_LOW_2_Cell_2_2",
+        "Radiator_Zone_LOW_2_Cell_2_3",
+        "Radiator_Zone_LOW_2_Cell_3_0",
+        "Radiator_Zone_LOW_2_Cell_3_1",
+        "Radiator_Zone_LOW_2_Cell_3_2",
+        "Radiator_Zone_LOW_2_Cell_3_3",
+        "Radiator_Zone_LOW_2_Cell_4_0",
+        "Radiator_Zone_LOW_2_Cell_4_1",
+        "Radiator_Zone_LOW_2_Cell_4_2",
+        "Radiator_Zone_LOW_2_Cell_4_3",
+        "Radiator_Zone_LOW_2_Cell_5_0",
+        "Radiator_Zone_LOW_2_Cell_5_1",
+        "Radiator_Zone_LOW_2_Cell_5_2",
+        "Radiator_Zone_LOW_2_Cell_5_3",
+        "Radiator_Zone_LOW_2_Root_Boom_Aft",
+        "Radiator_Zone_LOW_2_Root_Boom_Fwd",
+        "Radiator_Zone_LOW_2_Trunk",
+        "Radiator_Zone_LOW_3_Cell_0_0",
+        "Radiator_Zone_LOW_3_Cell_0_1",
+        "Radiator_Zone_LOW_3_Cell_0_2",
+        "Radiator_Zone_LOW_3_Cell_0_3",
+        "Radiator_Zone_LOW_3_Cell_1_0",
+        "Radiator_Zone_LOW_3_Cell_1_1",
+        "Radiator_Zone_LOW_3_Cell_1_2",
+        "Radiator_Zone_LOW_3_Cell_1_3",
+        "Radiator_Zone_LOW_3_Cell_2_0",
+        "Radiator_Zone_LOW_3_Cell_2_1",
+        "Radiator_Zone_LOW_3_Cell_2_2",
+        "Radiator_Zone_LOW_3_Cell_2_3",
+        "Radiator_Zone_LOW_3_Cell_3_0",
+        "Radiator_Zone_LOW_3_Cell_3_1",
+        "Radiator_Zone_LOW_3_Cell_3_2",
+        "Radiator_Zone_LOW_3_Cell_3_3",
+        "Radiator_Zone_LOW_3_Cell_4_0",
+        "Radiator_Zone_LOW_3_Cell_4_1",
+        "Radiator_Zone_LOW_3_Cell_4_2",
+        "Radiator_Zone_LOW_3_Cell_4_3",
+        "Radiator_Zone_LOW_3_Cell_5_0",
+        "Radiator_Zone_LOW_3_Cell_5_1",
+        "Radiator_Zone_LOW_3_Cell_5_2",
+        "Radiator_Zone_LOW_3_Cell_5_3",
+        "Radiator_Zone_LOW_3_Root_Boom_Aft",
+        "Radiator_Zone_LOW_3_Root_Boom_Fwd",
+        "Radiator_Zone_LOW_3_Trunk",
+        "Radiator_Zone_WARM_1_Cell_0_0",
+        "Radiator_Zone_WARM_1_Cell_0_1",
+        "Radiator_Zone_WARM_1_Cell_0_2",
+        "Radiator_Zone_WARM_1_Cell_0_3",
+        "Radiator_Zone_WARM_1_Cell_1_0",
+        "Radiator_Zone_WARM_1_Cell_1_1",
+        "Radiator_Zone_WARM_1_Cell_1_2",
+        "Radiator_Zone_WARM_1_Cell_1_3",
+        "Radiator_Zone_WARM_1_Cell_2_0",
+        "Radiator_Zone_WARM_1_Cell_2_1",
+        "Radiator_Zone_WARM_1_Cell_2_2",
+        "Radiator_Zone_WARM_1_Cell_2_3",
+        "Radiator_Zone_WARM_1_Cell_3_0",
+        "Radiator_Zone_WARM_1_Cell_3_1",
+        "Radiator_Zone_WARM_1_Cell_3_2",
+        "Radiator_Zone_WARM_1_Cell_3_3",
+        "Radiator_Zone_WARM_1_Cell_4_0",
+        "Radiator_Zone_WARM_1_Cell_4_1",
+        "Radiator_Zone_WARM_1_Cell_4_2",
+        "Radiator_Zone_WARM_1_Cell_4_3",
+        "Radiator_Zone_WARM_1_Cell_5_0",
+        "Radiator_Zone_WARM_1_Cell_5_1",
+        "Radiator_Zone_WARM_1_Cell_5_2",
+        "Radiator_Zone_WARM_1_Cell_5_3",
+        "Radiator_Zone_WARM_1_Root_Boom_Aft",
+        "Radiator_Zone_WARM_1_Root_Boom_Fwd",
+        "Radiator_Zone_WARM_1_Trunk",
+        "Radiator_Zone_WARM_2_Cell_0_0",
+        "Radiator_Zone_WARM_2_Cell_0_1",
+        "Radiator_Zone_WARM_2_Cell_0_2",
+        "Radiator_Zone_WARM_2_Cell_0_3",
+        "Radiator_Zone_WARM_2_Cell_1_0",
+        "Radiator_Zone_WARM_2_Cell_1_1",
+        "Radiator_Zone_WARM_2_Cell_1_2",
+        "Radiator_Zone_WARM_2_Cell_1_3",
+        "Radiator_Zone_WARM_2_Cell_2_0",
+        "Radiator_Zone_WARM_2_Cell_2_1",
+        "Radiator_Zone_WARM_2_Cell_2_2",
+        "Radiator_Zone_WARM_2_Cell_2_3",
+        "Radiator_Zone_WARM_2_Cell_3_0",
+        "Radiator_Zone_WARM_2_Cell_3_1",
+        "Radiator_Zone_WARM_2_Cell_3_2",
+        "Radiator_Zone_WARM_2_Cell_3_3",
+        "Radiator_Zone_WARM_2_Cell_4_0",
+        "Radiator_Zone_WARM_2_Cell_4_1",
+        "Radiator_Zone_WARM_2_Cell_4_2",
+        "Radiator_Zone_WARM_2_Cell_4_3",
+        "Radiator_Zone_WARM_2_Cell_5_0",
+        "Radiator_Zone_WARM_2_Cell_5_1",
+        "Radiator_Zone_WARM_2_Cell_5_2",
+        "Radiator_Zone_WARM_2_Cell_5_3",
+        "Radiator_Zone_WARM_2_Root_Boom_Aft",
+        "Radiator_Zone_WARM_2_Root_Boom_Fwd",
+        "Radiator_Zone_WARM_2_Trunk",
+        "Radiator_Zone_WARM_3_Cell_0_0",
+        "Radiator_Zone_WARM_3_Cell_0_1",
+        "Radiator_Zone_WARM_3_Cell_0_2",
+        "Radiator_Zone_WARM_3_Cell_0_3",
+        "Radiator_Zone_WARM_3_Cell_1_0",
+        "Radiator_Zone_WARM_3_Cell_1_1",
+        "Radiator_Zone_WARM_3_Cell_1_2",
+        "Radiator_Zone_WARM_3_Cell_1_3",
+        "Radiator_Zone_WARM_3_Cell_2_0",
+        "Radiator_Zone_WARM_3_Cell_2_1",
+        "Radiator_Zone_WARM_3_Cell_2_2",
+        "Radiator_Zone_WARM_3_Cell_2_3",
+        "Radiator_Zone_WARM_3_Cell_3_0",
+        "Radiator_Zone_WARM_3_Cell_3_1",
+        "Radiator_Zone_WARM_3_Cell_3_2",
+        "Radiator_Zone_WARM_3_Cell_3_3",
+        "Radiator_Zone_WARM_3_Cell_4_0",
+        "Radiator_Zone_WARM_3_Cell_4_1",
+        "Radiator_Zone_WARM_3_Cell_4_2",
+        "Radiator_Zone_WARM_3_Cell_4_3",
+        "Radiator_Zone_WARM_3_Cell_5_0",
+        "Radiator_Zone_WARM_3_Cell_5_1",
+        "Radiator_Zone_WARM_3_Cell_5_2",
+        "Radiator_Zone_WARM_3_Cell_5_3",
+        "Radiator_Zone_WARM_3_Root_Boom_Aft",
+        "Radiator_Zone_WARM_3_Root_Boom_Fwd",
+        "Radiator_Zone_WARM_3_Trunk",
         "WF.RADIATOR.01",
         "WF.RADIATOR.02",
         "WF.RADIATOR.03",
@@ -8756,97 +9124,7 @@
         "WF.THERMAL.HEALTH.03.R0.CELL.19.06.R",
         "WF.THERMAL.HEALTH.03.R0.CELL.19.07",
         "WF.THERMAL.HEALTH.03.R0.CELL.19.07.R",
-        "WF.THERMAL.HEALTH_CONTROL",
-        "Warm_Panel_1M_1",
-        "Warm_Panel_1M_1_Bracket_AI",
-        "Warm_Panel_1M_1_Bracket_AO",
-        "Warm_Panel_1M_1_Bracket_FI",
-        "Warm_Panel_1M_1_Bracket_FO",
-        "Warm_Panel_1M_2",
-        "Warm_Panel_1M_2_Bracket_AI",
-        "Warm_Panel_1M_2_Bracket_AO",
-        "Warm_Panel_1M_2_Bracket_FI",
-        "Warm_Panel_1M_2_Bracket_FO",
-        "Warm_Panel_1M_3",
-        "Warm_Panel_1M_3_Bracket_AI",
-        "Warm_Panel_1M_3_Bracket_AO",
-        "Warm_Panel_1M_3_Bracket_FI",
-        "Warm_Panel_1M_3_Bracket_FO",
-        "Warm_Panel_1P_1",
-        "Warm_Panel_1P_1_Bracket_AI",
-        "Warm_Panel_1P_1_Bracket_AO",
-        "Warm_Panel_1P_1_Bracket_FI",
-        "Warm_Panel_1P_1_Bracket_FO",
-        "Warm_Panel_1P_2",
-        "Warm_Panel_1P_2_Bracket_AI",
-        "Warm_Panel_1P_2_Bracket_AO",
-        "Warm_Panel_1P_2_Bracket_FI",
-        "Warm_Panel_1P_2_Bracket_FO",
-        "Warm_Panel_1P_3",
-        "Warm_Panel_1P_3_Bracket_AI",
-        "Warm_Panel_1P_3_Bracket_AO",
-        "Warm_Panel_1P_3_Bracket_FI",
-        "Warm_Panel_1P_3_Bracket_FO",
-        "Warm_Panel_2M_1",
-        "Warm_Panel_2M_1_Bracket_AI",
-        "Warm_Panel_2M_1_Bracket_AO",
-        "Warm_Panel_2M_1_Bracket_FI",
-        "Warm_Panel_2M_1_Bracket_FO",
-        "Warm_Panel_2M_2",
-        "Warm_Panel_2M_2_Bracket_AI",
-        "Warm_Panel_2M_2_Bracket_AO",
-        "Warm_Panel_2M_2_Bracket_FI",
-        "Warm_Panel_2M_2_Bracket_FO",
-        "Warm_Panel_2M_3",
-        "Warm_Panel_2M_3_Bracket_AI",
-        "Warm_Panel_2M_3_Bracket_AO",
-        "Warm_Panel_2M_3_Bracket_FI",
-        "Warm_Panel_2M_3_Bracket_FO",
-        "Warm_Panel_2P_1",
-        "Warm_Panel_2P_1_Bracket_AI",
-        "Warm_Panel_2P_1_Bracket_AO",
-        "Warm_Panel_2P_1_Bracket_FI",
-        "Warm_Panel_2P_1_Bracket_FO",
-        "Warm_Panel_2P_2",
-        "Warm_Panel_2P_2_Bracket_AI",
-        "Warm_Panel_2P_2_Bracket_AO",
-        "Warm_Panel_2P_2_Bracket_FI",
-        "Warm_Panel_2P_2_Bracket_FO",
-        "Warm_Panel_2P_3",
-        "Warm_Panel_2P_3_Bracket_AI",
-        "Warm_Panel_2P_3_Bracket_AO",
-        "Warm_Panel_2P_3_Bracket_FI",
-        "Warm_Panel_2P_3_Bracket_FO",
-        "Warm_Panel_3M_1",
-        "Warm_Panel_3M_1_Bracket_AI",
-        "Warm_Panel_3M_1_Bracket_AO",
-        "Warm_Panel_3M_1_Bracket_FI",
-        "Warm_Panel_3M_1_Bracket_FO",
-        "Warm_Panel_3M_2",
-        "Warm_Panel_3M_2_Bracket_AI",
-        "Warm_Panel_3M_2_Bracket_AO",
-        "Warm_Panel_3M_2_Bracket_FI",
-        "Warm_Panel_3M_2_Bracket_FO",
-        "Warm_Panel_3M_3",
-        "Warm_Panel_3M_3_Bracket_AI",
-        "Warm_Panel_3M_3_Bracket_AO",
-        "Warm_Panel_3M_3_Bracket_FI",
-        "Warm_Panel_3M_3_Bracket_FO",
-        "Warm_Panel_3P_1",
-        "Warm_Panel_3P_1_Bracket_AI",
-        "Warm_Panel_3P_1_Bracket_AO",
-        "Warm_Panel_3P_1_Bracket_FI",
-        "Warm_Panel_3P_1_Bracket_FO",
-        "Warm_Panel_3P_2",
-        "Warm_Panel_3P_2_Bracket_AI",
-        "Warm_Panel_3P_2_Bracket_AO",
-        "Warm_Panel_3P_2_Bracket_FI",
-        "Warm_Panel_3P_2_Bracket_FO",
-        "Warm_Panel_3P_3",
-        "Warm_Panel_3P_3_Bracket_AI",
-        "Warm_Panel_3P_3_Bracket_AO",
-        "Warm_Panel_3P_3_Bracket_FI",
-        "Warm_Panel_3P_3_Bracket_FO"
+        "WF.THERMAL.HEALTH_CONTROL"
       ],
       "direct_links": [
         "components/WF_RADIATOR.blend"

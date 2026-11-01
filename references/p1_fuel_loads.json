@@ -1,139 +1,910 @@
 {
  "status": "WORKING",
+ "basis": "first order; PROTOTYPE geometry (fuel_storage), materials and fluxes in physics.fuel_loads",
  "draw": {
-  "cells_drain_only": {
-   "Fuel_Return_Torus_D2_1": true,
-   "Fuel_Return_Torus_D2_2": true,
-   "Fuel_Return_Torus_D2_3": true,
-   "Fuel_Return_Torus_H2_1": true,
-   "Fuel_Return_Torus_H2_2": true,
-   "Fuel_Return_Torus_H2_3": true,
-   "Fuel_Return_Torus_He3_1": true,
-   "Fuel_Return_Torus_He3_2": true,
-   "Fuel_Return_Torus_He3_3": true,
-   "Fuel_Torus_D2_1": true,
-   "Fuel_Torus_D2_2": true,
-   "Fuel_Torus_D2_3": true,
-   "Fuel_Torus_H2_1_1": true,
-   "Fuel_Torus_H2_2_1": true,
-   "Fuel_Torus_H2_3_1": true
+  "tanks_drain_only": {
+   "Fuel_Tank_I1_D2": true,
+   "Fuel_Tank_I2_H2": true,
+   "Fuel_Tank_I3_D2": true,
+   "Fuel_Tank_I4_H2": true,
+   "Fuel_Tank_O1_He3": true,
+   "Fuel_Tank_O2_He3": true,
+   "Fuel_Tank_O3_H2": true,
+   "Fuel_Tank_O4_He3": true,
+   "Fuel_Tank_O5_He3": true,
+   "Fuel_Tank_O6_H2": true,
+   "Fuel_Tank_O7_He3": true,
+   "Fuel_Tank_O8_He3": true,
+   "Fuel_Tank_O9_H2": true
   },
   "departure": {
-   "Fuel_Return_Torus_D2_1": 206851.92473409395,
-   "Fuel_Return_Torus_D2_2": 206851.92473409395,
-   "Fuel_Return_Torus_D2_3": 206851.92473409395,
-   "Fuel_Return_Torus_H2_1": 215553.59915160833,
-   "Fuel_Return_Torus_H2_2": 215553.59915160818,
-   "Fuel_Return_Torus_H2_3": 215553.5991516085,
-   "Fuel_Return_Torus_He3_1": 309789.9065083821,
-   "Fuel_Return_Torus_He3_2": 309789.90650838206,
-   "Fuel_Return_Torus_He3_3": 309789.9065083822,
-   "Fuel_Torus_D2_1": 43551.163159195254,
-   "Fuel_Torus_D2_2": 27297.620962517118,
-   "Fuel_Torus_D2_3": 39251.215878287636,
-   "Fuel_Torus_H2_1_1": 129346.39465174501,
-   "Fuel_Torus_H2_2_1": 111888.07736137645,
-   "Fuel_Torus_H2_3_1": 83865.52798687854
+   "Fuel_Tank_I1_D2": 365327.8871011418,
+   "Fuel_Tank_I2_H2": 162079.4935819167,
+   "Fuel_Tank_I3_D2": 365327.88710114005,
+   "Fuel_Tank_I4_H2": 153963.76900639586,
+   "Fuel_Tank_O1_He3": 191670.28564657256,
+   "Fuel_Tank_O2_He3": 185749.42618004666,
+   "Fuel_Tank_O3_H2": 222010.682713708,
+   "Fuel_Tank_O4_He3": 176669.38883332277,
+   "Fuel_Tank_O5_He3": 173505.057549621,
+   "Fuel_Tank_O6_H2": 226303.87303465875,
+   "Fuel_Tank_O7_He3": 180463.19469697235,
+   "Fuel_Tank_O8_He3": 186112.366618611,
+   "Fuel_Tank_O9_H2": 207402.97911814577
   },
   "burnout": {
-   "Fuel_Return_Torus_D2_1": 134484.06560581987,
-   "Fuel_Return_Torus_D2_2": 134484.06560581987,
-   "Fuel_Return_Torus_D2_3": 134484.06560581987,
-   "Fuel_Return_Torus_H2_1": 140141.42922353727,
-   "Fuel_Return_Torus_H2_2": 140141.42922353718,
-   "Fuel_Return_Torus_H2_3": 140141.4292235374,
-   "Fuel_Return_Torus_He3_1": 201408.8395089864,
-   "Fuel_Return_Torus_He3_2": 201408.83950898633,
-   "Fuel_Return_Torus_He3_3": 201408.83950898642,
-   "Fuel_Torus_D2_1": 29313.773673930802,
-   "Fuel_Torus_D2_2": 17068.29615977654,
-   "Fuel_Torus_D2_3": 25199.06552306839,
-   "Fuel_Torus_H2_1_1": 83193.45310394754,
-   "Fuel_Torus_H2_2_1": 71425.71372448055,
-   "Fuel_Torus_H2_3_1": 56743.477172369305
+   "Fuel_Tank_I1_D2": 237516.6660871182,
+   "Fuel_Tank_I2_H2": 105375.42387506668,
+   "Fuel_Tank_I3_D2": 237516.66608711705,
+   "Fuel_Tank_I4_H2": 100099.01352666823,
+   "Fuel_Tank_O1_He3": 124613.77530189988,
+   "Fuel_Tank_O2_He3": 120764.34893585232,
+   "Fuel_Tank_O3_H2": 144339.47983633174,
+   "Fuel_Tank_O4_He3": 114860.99396436803,
+   "Fuel_Tank_O5_He3": 112803.71489141312,
+   "Fuel_Tank_O6_H2": 147130.6827198592,
+   "Fuel_Tank_O7_He3": 117327.5237649423,
+   "Fuel_Tank_O8_He3": 121000.31341050555,
+   "Fuel_Tank_O9_H2": 134842.33171348338
+  },
+  "peak_accel_m_s2": 6.241773968306381
+ },
+ "vessels": [
+  {
+   "name": "Fuel_Tank_O1_He3",
+   "species": "helium-3",
+   "cap_kg": 198016.587002442,
+   "liquid_m3": 3378.546101389558,
+   "design_pressure_Pa": 273437.13181844656,
+   "thickness_m": 0.005928300841105815,
+   "shell_area_m2": 1234.0738288385699,
+   "envelope_area_m2": 1309.0309729161609,
+   "shell_kg": 19753.094477223993,
+   "mli_kg": 2356.25575124909,
+   "barrel_axial_inertial_Pa": 1104793.1955260949,
+   "barrel_axial_pressure_Pa": 136000183.1232318,
+   "unpressurised_buckling_margin": 4.8377969249450645
+  },
+  {
+   "name": "Fuel_Tank_O2_He3",
+   "species": "helium-3",
+   "cap_kg": 198016.587002442,
+   "liquid_m3": 3378.546101389558,
+   "design_pressure_Pa": 273437.13181844656,
+   "thickness_m": 0.005928300841105815,
+   "shell_area_m2": 1234.0738288385699,
+   "envelope_area_m2": 1309.0309729161609,
+   "shell_kg": 19753.094477223993,
+   "mli_kg": 2356.25575124909,
+   "barrel_axial_inertial_Pa": 1104793.1955260949,
+   "barrel_axial_pressure_Pa": 136000183.1232318,
+   "unpressurised_buckling_margin": 4.8377969249450645
+  },
+  {
+   "name": "Fuel_Tank_O3_H2",
+   "species": "hydrogen",
+   "cap_kg": 239201.0639783807,
+   "liquid_m3": 3378.546101389558,
+   "design_pressure_Pa": 278311.7033398058,
+   "thickness_m": 0.0060339848287117555,
+   "shell_area_m2": 1234.0738288385699,
+   "envelope_area_m2": 1309.0309729161609,
+   "shell_kg": 20105.233453949826,
+   "mli_kg": 2356.25575124909,
+   "barrel_axial_inertial_Pa": 1103529.7994414782,
+   "barrel_axial_pressure_Pa": 133618168.23993124,
+   "unpressurised_buckling_margin": 5.00708619638778
+  },
+  {
+   "name": "Fuel_Tank_O4_He3",
+   "species": "helium-3",
+   "cap_kg": 198016.587002442,
+   "liquid_m3": 3378.546101389558,
+   "design_pressure_Pa": 273437.13181844656,
+   "thickness_m": 0.005928300841105815,
+   "shell_area_m2": 1234.0738288385699,
+   "envelope_area_m2": 1309.0309729161609,
+   "shell_kg": 19753.094477223993,
+   "mli_kg": 2356.25575124909,
+   "barrel_axial_inertial_Pa": 1104793.1955260949,
+   "barrel_axial_pressure_Pa": 136000183.1232318,
+   "unpressurised_buckling_margin": 4.8377969249450645
+  },
+  {
+   "name": "Fuel_Tank_O5_He3",
+   "species": "helium-3",
+   "cap_kg": 198016.587002442,
+   "liquid_m3": 3378.546101389558,
+   "design_pressure_Pa": 273437.13181844656,
+   "thickness_m": 0.005928300841105815,
+   "shell_area_m2": 1234.0738288385699,
+   "envelope_area_m2": 1309.0309729161609,
+   "shell_kg": 19753.094477223993,
+   "mli_kg": 2356.25575124909,
+   "barrel_axial_inertial_Pa": 1104793.1955260949,
+   "barrel_axial_pressure_Pa": 136000183.1232318,
+   "unpressurised_buckling_margin": 4.8377969249450645
+  },
+  {
+   "name": "Fuel_Tank_O6_H2",
+   "species": "hydrogen",
+   "cap_kg": 239201.0639783807,
+   "liquid_m3": 3378.546101389558,
+   "design_pressure_Pa": 278311.7033398058,
+   "thickness_m": 0.0060339848287117555,
+   "shell_area_m2": 1234.0738288385699,
+   "envelope_area_m2": 1309.0309729161609,
+   "shell_kg": 20105.233453949826,
+   "mli_kg": 2356.25575124909,
+   "barrel_axial_inertial_Pa": 1103529.7994414782,
+   "barrel_axial_pressure_Pa": 133618168.23993124,
+   "unpressurised_buckling_margin": 5.00708619638778
+  },
+  {
+   "name": "Fuel_Tank_O7_He3",
+   "species": "helium-3",
+   "cap_kg": 198016.587002442,
+   "liquid_m3": 3378.546101389558,
+   "design_pressure_Pa": 273437.13181844656,
+   "thickness_m": 0.005928300841105815,
+   "shell_area_m2": 1234.0738288385699,
+   "envelope_area_m2": 1309.0309729161609,
+   "shell_kg": 19753.094477223993,
+   "mli_kg": 2356.25575124909,
+   "barrel_axial_inertial_Pa": 1104793.1955260949,
+   "barrel_axial_pressure_Pa": 136000183.1232318,
+   "unpressurised_buckling_margin": 4.8377969249450645
+  },
+  {
+   "name": "Fuel_Tank_O8_He3",
+   "species": "helium-3",
+   "cap_kg": 198016.587002442,
+   "liquid_m3": 3378.546101389558,
+   "design_pressure_Pa": 273437.13181844656,
+   "thickness_m": 0.005928300841105815,
+   "shell_area_m2": 1234.0738288385699,
+   "envelope_area_m2": 1309.0309729161609,
+   "shell_kg": 19753.094477223993,
+   "mli_kg": 2356.25575124909,
+   "barrel_axial_inertial_Pa": 1104793.1955260949,
+   "barrel_axial_pressure_Pa": 136000183.1232318,
+   "unpressurised_buckling_margin": 4.8377969249450645
+  },
+  {
+   "name": "Fuel_Tank_O9_H2",
+   "species": "hydrogen",
+   "cap_kg": 239201.0639783807,
+   "liquid_m3": 3378.546101389558,
+   "design_pressure_Pa": 278311.7033398058,
+   "thickness_m": 0.0060339848287117555,
+   "shell_area_m2": 1234.0738288385699,
+   "envelope_area_m2": 1309.0309729161609,
+   "shell_kg": 20105.233453949826,
+   "mli_kg": 2356.25575124909,
+   "barrel_axial_inertial_Pa": 1103529.7994414782,
+   "barrel_axial_pressure_Pa": 133618168.23993124,
+   "unpressurised_buckling_margin": 5.00708619638778
+  },
+  {
+   "name": "Fuel_Tank_I1_D2",
+   "species": "deuterium",
+   "cap_kg": 428057.30583349534,
+   "liquid_m3": 2443.2494625199506,
+   "design_pressure_Pa": 320059.46928155335,
+   "thickness_m": 0.005863274311208288,
+   "shell_area_m2": 1029.7320762784755,
+   "envelope_area_m2": 1101.3716985138756,
+   "shell_kg": 16301.524401731049,
+   "mli_kg": 1982.4690573249761,
+   "barrel_axial_inertial_Pa": 1117594.9491314518,
+   "barrel_axial_pressure_Pa": 116189344.69733343,
+   "unpressurised_buckling_margin": 6.367129886566792
+  },
+  {
+   "name": "Fuel_Tank_I2_H2",
+   "species": "hydrogen",
+   "cap_kg": 172982.0619464125,
+   "liquid_m3": 2443.2494625199506,
+   "design_pressure_Pa": 278311.7033398058,
+   "thickness_m": 0.005098483304880477,
+   "shell_area_m2": 1029.7320762784755,
+   "envelope_area_m2": 1101.3716985138756,
+   "shell_kg": 14175.193858395436,
+   "mli_kg": 1982.4690573249761,
+   "barrel_axial_inertial_Pa": 1128488.602284183,
+   "barrel_axial_pressure_Pa": 133618168.2399312,
+   "unpressurised_buckling_margin": 4.874227362252195
+  },
+  {
+   "name": "Fuel_Tank_I3_D2",
+   "species": "deuterium",
+   "cap_kg": 428057.30583349534,
+   "liquid_m3": 2443.2494625199506,
+   "design_pressure_Pa": 320059.46928155335,
+   "thickness_m": 0.005863274311208288,
+   "shell_area_m2": 1029.7320762784755,
+   "envelope_area_m2": 1101.3716985138756,
+   "shell_kg": 16301.524401731049,
+   "mli_kg": 1982.4690573249761,
+   "barrel_axial_inertial_Pa": 1117594.9491314518,
+   "barrel_axial_pressure_Pa": 116189344.69733343,
+   "unpressurised_buckling_margin": 6.367129886566792
+  },
+  {
+   "name": "Fuel_Tank_I4_H2",
+   "species": "hydrogen",
+   "cap_kg": 172982.0619464125,
+   "liquid_m3": 2443.2494625199506,
+   "design_pressure_Pa": 278311.7033398058,
+   "thickness_m": 0.005098483304880477,
+   "shell_area_m2": 1029.7320762784755,
+   "envelope_area_m2": 1101.3716985138756,
+   "shell_kg": 14175.193858395436,
+   "mli_kg": 1982.4690573249761,
+   "barrel_axial_inertial_Pa": 1128488.602284183,
+   "barrel_axial_pressure_Pa": 133618168.2399312,
+   "unpressurised_buckling_margin": 4.874227362252195
+  }
+ ],
+ "skirts": [
+  {
+   "name": "Fuel_Tank_O1_He3",
+   "struts": 16,
+   "length_m": 4.515099747916089,
+   "flight_load_N": 1045171.852004057,
+   "design_load_N": 3162608.811356933,
+   "strut_force_N": 236415.4676641543,
+   "stress_margin": 7.352733439005231,
+   "buckling_margin": 1.6911736926787881,
+   "heat_W": 1.1756185342206888
+  },
+  {
+   "name": "Fuel_Tank_O2_He3",
+   "struts": 16,
+   "length_m": 4.51509974791609,
+   "flight_load_N": 1016310.9617242666,
+   "design_load_N": 3162608.811356933,
+   "strut_force_N": 236415.4676641543,
+   "stress_margin": 7.352733439005231,
+   "buckling_margin": 1.6911736926787877,
+   "heat_W": 1.1756185342206886
+  },
+  {
+   "name": "Fuel_Tank_O3_H2",
+   "struts": 16,
+   "length_m": 4.515099747916089,
+   "flight_load_N": 1194780.860658699,
+   "design_load_N": 3755966.074380837,
+   "strut_force_N": 280770.88535791944,
+   "stress_margin": 6.033191421322498,
+   "buckling_margin": 1.2660294222068962,
+   "heat_W": 1.1756185342206888
+  },
+  {
+   "name": "Fuel_Tank_O4_He3",
+   "struts": 16,
+   "length_m": 4.515099747916089,
+   "flight_load_N": 972050.8398480822,
+   "design_load_N": 3162608.811356933,
+   "strut_force_N": 236415.46766415433,
+   "stress_margin": 7.352733439005229,
+   "buckling_margin": 1.6911736926787877,
+   "heat_W": 1.1756185342206888
+  },
+  {
+   "name": "Fuel_Tank_O5_He3",
+   "struts": 16,
+   "length_m": 4.515099747916088,
+   "flight_load_N": 956626.4882815332,
+   "design_load_N": 3162608.811356933,
+   "strut_force_N": 236415.46766415428,
+   "stress_margin": 7.352733439005233,
+   "buckling_margin": 1.69117369267879,
+   "heat_W": 1.175618534220689
+  },
+  {
+   "name": "Fuel_Tank_O6_H2",
+   "struts": 16,
+   "length_m": 4.515099747916089,
+   "flight_load_N": 1215707.7709330816,
+   "design_load_N": 3755966.074380837,
+   "strut_force_N": 280770.88535791944,
+   "stress_margin": 6.033191421322498,
+   "buckling_margin": 1.2660294222068962,
+   "heat_W": 1.1756185342206888
+  },
+  {
+   "name": "Fuel_Tank_O7_He3",
+   "struts": 16,
+   "length_m": 4.51509974791609,
+   "flight_load_N": 990543.5291937155,
+   "design_load_N": 3162608.811356933,
+   "strut_force_N": 236415.4676641543,
+   "stress_margin": 7.352733439005231,
+   "buckling_margin": 1.6911736926787877,
+   "heat_W": 1.1756185342206886
+  },
+  {
+   "name": "Fuel_Tank_O8_He3",
+   "struts": 16,
+   "length_m": 4.51509974791609,
+   "flight_load_N": 1018080.0941001868,
+   "design_load_N": 3162608.811356933,
+   "strut_force_N": 236415.4676641543,
+   "stress_margin": 7.352733439005231,
+   "buckling_margin": 1.6911736926787877,
+   "heat_W": 1.1756185342206886
+  },
+  {
+   "name": "Fuel_Tank_O9_H2",
+   "struts": 16,
+   "length_m": 4.515099747916089,
+   "flight_load_N": 1123576.4463173817,
+   "design_load_N": 3755966.074380837,
+   "strut_force_N": 280770.88535791944,
+   "stress_margin": 6.033191421322498,
+   "buckling_margin": 1.2660294222068962,
+   "heat_W": 1.1756185342206888
+  },
+  {
+   "name": "Fuel_Tank_I1_D2",
+   "struts": 16,
+   "length_m": 3.8866597511835157,
+   "flight_load_N": 1872575.7974811746,
+   "design_load_N": 6390362.621461351,
+   "strut_force_N": 473991.70221949375,
+   "stress_margin": 3.1661391391657743,
+   "buckling_margin": 0.8114590864408062,
+   "heat_W": 1.3657061042940484
+  },
+  {
+   "name": "Fuel_Tank_I2_H2",
+   "struts": 16,
+   "length_m": 3.886659751183516,
+   "flight_load_N": 871488.4703925509,
+   "design_load_N": 2716219.827377739,
+   "strut_force_N": 201469.890809842,
+   "stress_margin": 8.801540936557526,
+   "buckling_margin": 3.2617612608598394,
+   "heat_W": 1.3657061042940482
+  },
+  {
+   "name": "Fuel_Tank_I3_D2",
+   "struts": 16,
+   "length_m": 3.8866597511835157,
+   "flight_load_N": 1872575.7974811662,
+   "design_load_N": 6390362.621461351,
+   "strut_force_N": 473991.7022194938,
+   "stress_margin": 3.1661391391657734,
+   "buckling_margin": 0.8114590864408058,
+   "heat_W": 1.3657061042940484
+  },
+  {
+   "name": "Fuel_Tank_I4_H2",
+   "struts": 16,
+   "length_m": 3.886659751183516,
+   "flight_load_N": 831928.8358767634,
+   "design_load_N": 2716219.827377739,
+   "strut_force_N": 201469.890809842,
+   "stress_margin": 8.801540936557526,
+   "buckling_margin": 3.2617612608598394,
+   "heat_W": 1.3657061042940482
+  }
+ ],
+ "deck": {
+  "depth_m": 1.3599999999999994,
+  "trusses": [
+   {
+    "name": "Fuel_Deck_Truss_O1",
+    "tank": "Fuel_Tank_O1_He3",
+    "tied": true,
+    "arm_m": 21.01,
+    "depth_m": 1.3599999999999994,
+    "flight_load_N": 1045171.852004057,
+    "design_load_N": 3162608.811356933,
+    "root_reaction_N": 557122.6383696116,
+    "tip_reaction_N": 2605486.1729873214,
+    "root_moment_N_m": 0.0,
+    "peak_moment_N_m": 11705146.63214554,
+    "chord_force_N": 8606725.4648129,
+    "chord_area_m2": 0.013692517784929614,
+    "chord_wall_at_display_radius_m": 0.00990559949475108,
+    "chord_radius_needed_m": 0.11186623691776429,
+    "flight_chord_force_N": 2844331.2879690016,
+    "mass_kg": 4419.40750111888
+   },
+   {
+    "name": "Fuel_Deck_Truss_O2",
+    "tank": "Fuel_Tank_O2_He3",
+    "tied": true,
+    "arm_m": 21.01,
+    "depth_m": 1.3599999999999994,
+    "flight_load_N": 1016310.9617242666,
+    "design_load_N": 3162608.811356933,
+    "root_reaction_N": 557122.6383696116,
+    "tip_reaction_N": 2605486.1729873214,
+    "root_moment_N_m": 0.0,
+    "peak_moment_N_m": 11705146.63214554,
+    "chord_force_N": 8606725.4648129,
+    "chord_area_m2": 0.013692517784929614,
+    "chord_wall_at_display_radius_m": 0.00990559949475108,
+    "chord_radius_needed_m": 0.11186623691776429,
+    "flight_chord_force_N": 2765789.2443193896,
+    "mass_kg": 4419.40750111888
+   },
+   {
+    "name": "Fuel_Deck_Truss_O3",
+    "tank": "Fuel_Tank_O3_H2",
+    "tied": true,
+    "arm_m": 21.01,
+    "depth_m": 1.3599999999999994,
+    "flight_load_N": 1194780.860658699,
+    "design_load_N": 3755966.074380837,
+    "root_reaction_N": 661647.9791846253,
+    "tip_reaction_N": 3094318.0951962117,
+    "root_moment_N_m": 0.0,
+    "peak_moment_N_m": 13901224.042668981,
+    "chord_force_N": 10221488.266668374,
+    "chord_area_m2": 0.01626145860606332,
+    "chord_wall_at_display_radius_m": 0.011764052359269181,
+    "chord_radius_needed_m": 0.11186623691776429,
+    "flight_chord_force_N": 3251477.331428246,
+    "mass_kg": 5248.560803175895
+   },
+   {
+    "name": "Fuel_Deck_Truss_O4",
+    "tank": "Fuel_Tank_O4_He3",
+    "tied": true,
+    "arm_m": 21.01,
+    "depth_m": 1.3599999999999994,
+    "flight_load_N": 972050.8398480822,
+    "design_load_N": 3162608.811356933,
+    "root_reaction_N": 557122.6383696116,
+    "tip_reaction_N": 2605486.1729873214,
+    "root_moment_N_m": 0.0,
+    "peak_moment_N_m": 11705146.63214554,
+    "chord_force_N": 8606725.4648129,
+    "chord_area_m2": 0.013692517784929614,
+    "chord_wall_at_display_radius_m": 0.00990559949475108,
+    "chord_radius_needed_m": 0.11186623691776429,
+    "flight_chord_force_N": 2645339.722816907,
+    "mass_kg": 4419.40750111888
+   },
+   {
+    "name": "Fuel_Deck_Truss_O5",
+    "tank": "Fuel_Tank_O5_He3",
+    "tied": true,
+    "arm_m": 21.01,
+    "depth_m": 1.3599999999999994,
+    "flight_load_N": 956626.4882815332,
+    "design_load_N": 3162608.811356933,
+    "root_reaction_N": 557122.6383696116,
+    "tip_reaction_N": 2605486.1729873214,
+    "root_moment_N_m": 0.0,
+    "peak_moment_N_m": 11705146.63214554,
+    "chord_force_N": 8606725.4648129,
+    "chord_area_m2": 0.013692517784929614,
+    "chord_wall_at_display_radius_m": 0.00990559949475108,
+    "chord_radius_needed_m": 0.11186623691776429,
+    "flight_chord_force_N": 2603363.8834625967,
+    "mass_kg": 4419.40750111888
+   },
+   {
+    "name": "Fuel_Deck_Truss_O6",
+    "tank": "Fuel_Tank_O6_H2",
+    "tied": true,
+    "arm_m": 21.01,
+    "depth_m": 1.3599999999999994,
+    "flight_load_N": 1215707.7709330816,
+    "design_load_N": 3755966.074380837,
+    "root_reaction_N": 661647.9791846253,
+    "tip_reaction_N": 3094318.0951962117,
+    "root_moment_N_m": 0.0,
+    "peak_moment_N_m": 13901224.042668981,
+    "chord_force_N": 10221488.266668374,
+    "chord_area_m2": 0.01626145860606332,
+    "chord_wall_at_display_radius_m": 0.011764052359269181,
+    "chord_radius_needed_m": 0.11186623691776429,
+    "flight_chord_force_N": 3308427.837261153,
+    "mass_kg": 5248.560803175895
+   },
+   {
+    "name": "Fuel_Deck_Truss_O7",
+    "tank": "Fuel_Tank_O7_He3",
+    "tied": true,
+    "arm_m": 21.01,
+    "depth_m": 1.3599999999999994,
+    "flight_load_N": 990543.5291937155,
+    "design_load_N": 3162608.811356933,
+    "root_reaction_N": 557122.6383696116,
+    "tip_reaction_N": 2605486.1729873214,
+    "root_moment_N_m": 0.0,
+    "peak_moment_N_m": 11705146.63214554,
+    "chord_force_N": 8606725.4648129,
+    "chord_area_m2": 0.013692517784929614,
+    "chord_wall_at_display_radius_m": 0.00990559949475108,
+    "chord_radius_needed_m": 0.11186623691776429,
+    "flight_chord_force_N": 2695665.7383937896,
+    "mass_kg": 4419.40750111888
+   },
+   {
+    "name": "Fuel_Deck_Truss_O8",
+    "tank": "Fuel_Tank_O8_He3",
+    "tied": true,
+    "arm_m": 21.01,
+    "depth_m": 1.3599999999999994,
+    "flight_load_N": 1018080.0941001868,
+    "design_load_N": 3162608.811356933,
+    "root_reaction_N": 557122.6383696116,
+    "tip_reaction_N": 2605486.1729873214,
+    "root_moment_N_m": 0.0,
+    "peak_moment_N_m": 11705146.63214554,
+    "chord_force_N": 8606725.4648129,
+    "chord_area_m2": 0.013692517784929614,
+    "chord_wall_at_display_radius_m": 0.00990559949475108,
+    "chord_radius_needed_m": 0.11186623691776429,
+    "flight_chord_force_N": 2770603.7621996216,
+    "mass_kg": 4419.40750111888
+   },
+   {
+    "name": "Fuel_Deck_Truss_O9",
+    "tank": "Fuel_Tank_O9_H2",
+    "tied": true,
+    "arm_m": 21.01,
+    "depth_m": 1.3599999999999994,
+    "flight_load_N": 1123576.4463173817,
+    "design_load_N": 3755966.074380837,
+    "root_reaction_N": 661647.9791846253,
+    "tip_reaction_N": 3094318.0951962117,
+    "root_moment_N_m": 0.0,
+    "peak_moment_N_m": 13901224.042668981,
+    "chord_force_N": 10221488.266668374,
+    "chord_area_m2": 0.01626145860606332,
+    "chord_wall_at_display_radius_m": 0.011764052359269181,
+    "chord_radius_needed_m": 0.11186623691776429,
+    "flight_chord_force_N": 3057701.5966874193,
+    "mass_kg": 5248.560803175895
+   },
+   {
+    "name": "Fuel_Deck_Truss_I1",
+    "tank": "Fuel_Tank_I1_D2",
+    "tied": false,
+    "arm_m": 6.760000000000001,
+    "depth_m": 1.3599999999999994,
+    "flight_load_N": 1872575.7974811746,
+    "design_load_N": 6390362.621461351,
+    "root_reaction_N": 6390362.621461351,
+    "tip_reaction_N": 0.0,
+    "root_moment_N_m": 43198851.32107874,
+    "peak_moment_N_m": 43198851.32107874,
+    "chord_force_N": 31763861.265499085,
+    "chord_area_m2": 0.05053341564965763,
+    "chord_wall_at_display_radius_m": 0.03655746769072888,
+    "chord_radius_needed_m": 0.11186623691776428,
+    "flight_chord_force_N": 9307803.228656432,
+    "mass_kg": 6098.651021182028
+   },
+   {
+    "name": "Fuel_Deck_Truss_I2",
+    "tank": "Fuel_Tank_I2_H2",
+    "tied": false,
+    "arm_m": 6.760000000000001,
+    "depth_m": 1.3599999999999994,
+    "flight_load_N": 871488.4703925509,
+    "design_load_N": 2716219.827377739,
+    "root_reaction_N": 2716219.827377739,
+    "tip_reaction_N": 0.0,
+    "root_moment_N_m": 18361646.03307352,
+    "peak_moment_N_m": 18361646.03307352,
+    "chord_force_N": 13501210.318436416,
+    "chord_area_m2": 0.021479198233876114,
+    "chord_wall_at_display_radius_m": 0.015538729875327692,
+    "chord_radius_needed_m": 0.11186623691776429,
+    "flight_chord_force_N": 4331810.338127682,
+    "mass_kg": 2592.227985366496
+   },
+   {
+    "name": "Fuel_Deck_Truss_I3",
+    "tank": "Fuel_Tank_I3_D2",
+    "tied": false,
+    "arm_m": 6.760000000000001,
+    "depth_m": 1.3599999999999994,
+    "flight_load_N": 1872575.7974811662,
+    "design_load_N": 6390362.621461351,
+    "root_reaction_N": 6390362.621461351,
+    "tip_reaction_N": 0.0,
+    "root_moment_N_m": 43198851.32107874,
+    "peak_moment_N_m": 43198851.32107874,
+    "chord_force_N": 31763861.265499085,
+    "chord_area_m2": 0.05053341564965763,
+    "chord_wall_at_display_radius_m": 0.03655746769072888,
+    "chord_radius_needed_m": 0.11186623691776428,
+    "flight_chord_force_N": 9307803.22865639,
+    "mass_kg": 6098.651021182028
+   },
+   {
+    "name": "Fuel_Deck_Truss_I4",
+    "tank": "Fuel_Tank_I4_H2",
+    "tied": false,
+    "arm_m": 6.760000000000001,
+    "depth_m": 1.3599999999999994,
+    "flight_load_N": 831928.8358767634,
+    "design_load_N": 2716219.827377739,
+    "root_reaction_N": 2716219.827377739,
+    "tip_reaction_N": 0.0,
+    "root_moment_N_m": 18361646.03307352,
+    "peak_moment_N_m": 18361646.03307352,
+    "chord_force_N": 13501210.318436416,
+    "chord_area_m2": 0.021479198233876114,
+    "chord_wall_at_display_radius_m": 0.015538729875327692,
+    "chord_radius_needed_m": 0.11186623691776429,
+    "flight_chord_force_N": 4135175.6842109733,
+    "mass_kg": 2592.227985366496
+   }
+  ],
+  "ties": [
+   {
+    "name": "Fuel_Deck_Collar_Tie_O1",
+    "force_N": 2768371.770349359,
+    "wall_m": 0.0028122630136035646,
+    "mass_kg": 122.84097729588855
+   },
+   {
+    "name": "Fuel_Deck_Collar_Tie_O2",
+    "force_N": 2768371.7703493596,
+    "wall_m": 0.0028122630136035664,
+    "mass_kg": 122.84097729588862
+   },
+   {
+    "name": "Fuel_Deck_Collar_Tie_O3",
+    "force_N": 3287763.701083386,
+    "wall_m": 0.003339889661155713,
+    "mass_kg": 145.8879585772047
+   },
+   {
+    "name": "Fuel_Deck_Collar_Tie_O4",
+    "force_N": 2768371.77034936,
+    "wall_m": 0.002812263013603567,
+    "mass_kg": 122.84097729588865
+   },
+   {
+    "name": "Fuel_Deck_Collar_Tie_O5",
+    "force_N": 2768371.7703493554,
+    "wall_m": 0.0028122630136035573,
+    "mass_kg": 122.84097729588817
+   },
+   {
+    "name": "Fuel_Deck_Collar_Tie_O6",
+    "force_N": 3287763.7010833886,
+    "wall_m": 0.0033398896611557187,
+    "mass_kg": 145.88795857720498
+   },
+   {
+    "name": "Fuel_Deck_Collar_Tie_O7",
+    "force_N": 2768371.770349356,
+    "wall_m": 0.0028122630136035586,
+    "mass_kg": 122.84097729588822
+   },
+   {
+    "name": "Fuel_Deck_Collar_Tie_O8",
+    "force_N": 2768371.7703493596,
+    "wall_m": 0.0028122630136035664,
+    "mass_kg": 122.84097729588862
+   },
+   {
+    "name": "Fuel_Deck_Collar_Tie_O9",
+    "force_N": 3287763.701083388,
+    "wall_m": 0.003339889661155718,
+    "mass_kg": 145.88795857720493
+   }
+  ],
+  "ring": {
+   "radius_m": 35.0,
+   "depth_m": 5.6000000000000085,
+   "spans": [
+    {
+     "from_deg": 29.999999999999996,
+     "to_deg": 150.0,
+     "length_m": 73.30382858376183,
+     "loads": 3,
+     "peak_moment_N_m": 98673480.52301991,
+     "peak_shear_N": 4927805.661761374,
+     "flight_peak_moment_N_m": 31286562.33993089
+    },
+    {
+     "from_deg": 150.0,
+     "to_deg": 270.0,
+     "length_m": 73.30382858376183,
+     "loads": 3,
+     "peak_moment_N_m": 77746619.03501731,
+     "peak_shear_N": 4869402.076958014,
+     "flight_peak_moment_N_m": 24747718.35646287
+    },
+    {
+     "from_deg": 270.0,
+     "to_deg": 29.999999999999996,
+     "length_m": 73.30382858376183,
+     "loads": 3,
+     "peak_moment_N_m": 94253388.19645695,
+     "peak_shear_N": 4311296.242365044,
+     "flight_peak_moment_N_m": 29240896.780706324
+    }
+   ],
+   "chord_force_N": 17620264.37911067,
+   "chord_area_m2": 0.028032238784948794,
+   "chord_kg": 54618.455941977496,
+   "lacing_force_N": 7292339.572550094,
+   "lacing_wall_m": 0.009252710827358974,
+   "lacing_kg": 26892.084527115196,
+   "girder_interface": {
+    "30.0": {
+     "design_N": 7688781.021774524,
+     "flight_N": 2442711.2717197808
+    },
+    "150.0": {
+     "design_N": 8363694.025974215,
+     "flight_N": 2611990.2062566187
+    },
+    "270.0": {
+     "design_N": 8863396.275763825,
+     "flight_N": 2798848.3384224502
+    }
+   },
+   "note": "chord area is the requirement on the bypass mid/forward hoops (unsized, Q45); counted as new tankage, conservatively"
+  },
+  "hoop_kg": 19045.454569617345,
+  "collar": {
+   "axial_N": 23540844.665449727,
+   "peak_root_moment_N_m": 43198851.32107874,
+   "bypass_collar_N": 24915871.32351256
+  },
+  "trusses_kg": 59643.88542933801,
+  "ties_kg": 1174.7097395069454,
+  "mass_kg": 161374.59020755498
+ },
+ "heat": {
+  "helium_3": {
+   "envelope_area_m2": 7854.185837496965,
+   "mli_W": 2356.2557512490894,
+   "skirt_W": 7.053711205324133,
+   "total_W": 2363.3094624544133,
+   "storage_K": 3.0,
+   "uncooled_boiloff_kg_day": 24022.34559483074,
+   "uncooled_boiloff_fraction_per_year": 8.019013478384126,
+   "carnot_input_W_at_300K": 233967.63678298693
+  },
+  "hydrogen": {
+   "envelope_area_m2": 6129.836315776233,
+   "mli_W": 1838.95089473287,
+   "skirt_W": 6.258267811250163,
+   "total_W": 1845.20916254412,
+   "storage_K": 18.0,
+   "uncooled_boiloff_kg_day": 357.4575597394887,
+   "uncooled_boiloff_fraction_per_year": 0.1343554648806645,
+   "carnot_input_W_at_300K": 28908.276879857884
+  },
+  "deuterium": {
+   "envelope_area_m2": 2202.743397027751,
+   "mli_W": 660.8230191083253,
+   "skirt_W": 2.7314122085880967,
+   "total_W": 663.5544313169135,
+   "storage_K": 20.0,
+   "uncooled_boiloff_kg_day": 188.58915416375436,
+   "uncooled_boiloff_fraction_per_year": 0.09427447368566372,
+   "carnot_input_W_at_300K": 9289.762038436787
   }
  },
- "supports": {
-  "tube": {
-   "radius_m": 0.2,
-   "wall_m": 0.012,
-   "area_m2": 0.015079644737231007,
-   "I_m4": 0.0003015928947446202
-  },
-  "dry_kg": {
-   "1": 30011.00574540977,
-   "2": 24125.64832494211,
-   "3": 19171.81200013367
-  },
-  "worst": {
-   "support": "Fuel_Torus_Strut_1_1",
-   "side": "Aft",
-   "t_s": 0.0,
-   "vessel_kg": 202908.56355635004,
-   "load_N": 494533.0844903337,
-   "force_N": -540628.9094464955,
-   "length_m": 10.923144691889073,
-   "stress_margin": 16.532606320544897,
-   "buckling_margin": 0.8787674734392152
-  },
-  "worst_margin": 0.8787674734392152,
-  "radial_strut": {
-   "length_m": 9.5,
-   "bending_stress_Pa": 3115500653.048442,
-   "yield_Pa": 880000000.0
-  }
+ "cooling": {
+  "shield_lift_W": 3642.0222488177133,
+  "he3_stage_lift_W": 117.81278756245447,
+  "rejected_W": 395240.5162727445,
+  "low_section_load_W": 1000000.0,
+  "low_section_margin_W": 304759.4837272555
  },
- "return_supports": {
-  "tube": {
-   "radius_m": 0.45,
-   "wall_m": 0.02,
-   "area_m2": 0.05654866776461628,
-   "I_m4": 0.005725552611167398
-  },
-  "dry_kg": {
-   "1": 116631.1178620111,
-   "2": 116631.11786201106,
-   "3": 116631.11786201113
-  },
-  "worst": {
-   "support": "Fuel_Return_Torus_Strut_3_2",
-   "side": "Aft",
-   "t_s": 0.0,
-   "vessel_kg": 848826.5482560957,
-   "load_N": 2068778.1912654187,
-   "force_N": -1708617.3798007283,
-   "length_m": 9.877278615001716,
-   "stress_margin": 19.803298211072544,
-   "buckling_margin": 12.802080201463834
-  },
-  "worst_margin": 12.802080201463834,
-  "radial_strut": {
-   "length_m": 7.300000000000001,
-   "bending_stress_Pa": 1186948547.9972317,
-   "yield_Pa": 880000000.0
-  }
+ "contraction": {
+  "worst_axial_m": 0.09470999999999999,
+  "slide_travel_m": 0.2,
+  "margin_m": 0.10529000000000002,
+  "rows": [
+   {
+    "name": "Fuel_Tank_O1_He3",
+    "axial_m": 0.09050999999999998,
+    "radial_m": 0.02709
+   },
+   {
+    "name": "Fuel_Tank_O2_He3",
+    "axial_m": 0.09050999999999998,
+    "radial_m": 0.02709
+   },
+   {
+    "name": "Fuel_Tank_O3_H2",
+    "axial_m": 0.09050999999999998,
+    "radial_m": 0.02709
+   },
+   {
+    "name": "Fuel_Tank_O4_He3",
+    "axial_m": 0.09050999999999998,
+    "radial_m": 0.02709
+   },
+   {
+    "name": "Fuel_Tank_O5_He3",
+    "axial_m": 0.09050999999999998,
+    "radial_m": 0.02709
+   },
+   {
+    "name": "Fuel_Tank_O6_H2",
+    "axial_m": 0.09050999999999998,
+    "radial_m": 0.02709
+   },
+   {
+    "name": "Fuel_Tank_O7_He3",
+    "axial_m": 0.09050999999999998,
+    "radial_m": 0.02709
+   },
+   {
+    "name": "Fuel_Tank_O8_He3",
+    "axial_m": 0.09050999999999998,
+    "radial_m": 0.02709
+   },
+   {
+    "name": "Fuel_Tank_O9_H2",
+    "axial_m": 0.09050999999999998,
+    "radial_m": 0.02709
+   },
+   {
+    "name": "Fuel_Tank_I1_D2",
+    "axial_m": 0.09470999999999999,
+    "radial_m": 0.02289
+   },
+   {
+    "name": "Fuel_Tank_I2_H2",
+    "axial_m": 0.09470999999999999,
+    "radial_m": 0.02289
+   },
+   {
+    "name": "Fuel_Tank_I3_D2",
+    "axial_m": 0.09470999999999999,
+    "radial_m": 0.02289
+   },
+   {
+    "name": "Fuel_Tank_I4_H2",
+    "axial_m": 0.09470999999999999,
+    "radial_m": 0.02289
+   }
+  ]
+ },
+ "dry_mass": {
+  "shells_kg": 239787.7037454464,
+  "mli_kg": 29136.177990541713,
+  "skirts_kg": 7952.5031582420515,
+  "deck_kg": 161374.59020755498,
+  "guides_kg": 19638.53853475377,
+  "total_kg": 457889.51363653893,
+  "budget_kg": 466167.21742644144,
+  "capacity_kg": 3107781.4495096095,
+  "margin_kg": 8277.703789902502
  },
  "spine": [
   {
-   "t_s": 86291.59029804802,
-   "accel_m_s2": 4.9836144291382665,
+   "t_s": 0.0,
+   "accel_m_s2": 4.874442712744316,
    "thrust_N": 21770763.000706356,
    "stations": {
-    "-81.0": {
-     "mass_forward_kg": 4085788.608834661,
-     "axial_N": 20361995.06539718
+    "-113.25": {
+     "mass_forward_kg": 4190618.6428890647,
+     "axial_N": 20426930.505721077
     },
-    "0.0": {
-     "mass_forward_kg": 3763332.066313604,
-     "axial_N": 18754995.987319205
+    "-32.25": {
+     "mass_forward_kg": 3986512.845335374,
+     "axial_N": 19432028.488206625
     },
-    "82.9": {
-     "mass_forward_kg": 3044591.395089737,
-     "axial_N": 15173069.607399419
+    "95.15": {
+     "mass_forward_kg": 3677864.237372353,
+     "axial_N": 17927538.5303226
     },
-    "96.1": {
-     "mass_forward_kg": 1640756.202149512,
-     "axial_N": 8176896.28373041
+    "128.35": {
+     "mass_forward_kg": 953158.984506511,
+     "axial_N": 4646118.866114535
     }
    }
   },
@@ -142,24 +913,25 @@
    "accel_m_s2": 6.241773968306381,
    "thrust_N": 21770763.000706356,
    "stations": {
-    "-81.0": {
-     "mass_forward_kg": 3205232.787473797,
-     "axial_N": 20006338.575216044
+    "-113.25": {
+     "mass_forward_kg": 3212223.2858214374,
+     "axial_N": 20049971.685827836
     },
-    "0.0": {
-     "mass_forward_kg": 2914486.9614946274,
-     "axial_N": 18191568.84722553
+    "-32.25": {
+     "mass_forward_kg": 3008117.4882677463,
+     "axial_N": 18775989.431876794
     },
-    "82.9": {
-     "mass_forward_kg": 2215925.837161053,
-     "axial_N": 13831308.206089385
+    "95.15": {
+     "mass_forward_kg": 2699468.880304726,
+     "axial_N": 16849474.58533921
     },
-    "96.1": {
-     "mass_forward_kg": 1197657.2594909342,
-     "axial_N": 7475505.905243673
+    "128.35": {
+     "mass_forward_kg": 243225.95228071054,
+     "axial_N": 1518161.417362269
     }
    }
   }
  ],
+ "open_findings": [],
  "failures": []
 }

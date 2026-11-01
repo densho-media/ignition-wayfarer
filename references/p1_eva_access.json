@@ -417,7 +417,7 @@
      "reach_m": 0.616,
      "elevation_deg": 180.0,
      "ok": true,
-     "pitch_needed_deg": 60.0
+     "pitch_needed_deg": 50.0
     },
     "newcomer": {
      "side": "r",
@@ -426,7 +426,7 @@
      "reach_m": 0.577,
      "elevation_deg": 180.0,
      "ok": true,
-     "pitch_needed_deg": 60.0
+     "pitch_needed_deg": 50.0
     }
    },
    "rescue": {
@@ -513,14 +513,14 @@
     }
    ],
    "fitting": {
-    "x": 101.8494,
+    "x": 134.1,
     "theta_deg": 50.0,
     "port_face_a_m": 6.8,
     "wall_m": 0.05
    },
    "conditions": [
-    "instructor: unlatching needs the body pitched 60.0 deg toward the hatch (or an extension handle, OPEN)",
-    "newcomer: unlatching needs the body pitched 60.0 deg toward the hatch (or an extension handle, OPEN)"
+    "instructor: unlatching needs the body pitched 50.0 deg toward the hatch (or an extension handle, OPEN)",
+    "newcomer: unlatching needs the body pitched 50.0 deg toward the hatch (or an extension handle, OPEN)"
    ],
    "geometry_fail": [
     "door: instructor.hatch_pass FAIL (margin -0.074 m)",
@@ -659,7 +659,7 @@
      "reach_m": 0.616,
      "elevation_deg": 180.0,
      "ok": true,
-     "pitch_needed_deg": 60.0
+     "pitch_needed_deg": 50.0
     }
    },
    "rescue": {
@@ -681,13 +681,13 @@
     }
    ],
    "fitting": {
-    "x": 101.8494,
+    "x": 134.1,
     "theta_deg": 50.0,
     "port_face_a_m": 6.8,
     "wall_m": 0.05
    },
    "conditions": [
-    "instructor: unlatching needs the body pitched 60.0 deg toward the hatch (or an extension handle, OPEN)"
+    "instructor: unlatching needs the body pitched 50.0 deg toward the hatch (or an extension handle, OPEN)"
    ],
    "geometry_fail": [
     "door: instructor.hatch_pass FAIL (margin -0.074 m)",
@@ -827,7 +827,7 @@
      "reach_m": 0.616,
      "elevation_deg": 180.0,
      "ok": true,
-     "pitch_needed_deg": 60.0
+     "pitch_needed_deg": 50.0
     },
     "newcomer": {
      "side": "r",
@@ -836,7 +836,7 @@
      "reach_m": 0.577,
      "elevation_deg": 180.0,
      "ok": true,
-     "pitch_needed_deg": 60.0
+     "pitch_needed_deg": 50.0
     }
    },
    "rescue": {
@@ -923,14 +923,14 @@
     }
    ],
    "fitting": {
-    "x": 101.8494,
+    "x": 134.1,
     "theta_deg": 50.0,
     "port_face_a_m": 6.8,
     "wall_m": 0.05
    },
    "conditions": [
-    "instructor: unlatching needs the body pitched 60.0 deg toward the hatch (or an extension handle, OPEN)",
-    "newcomer: unlatching needs the body pitched 60.0 deg toward the hatch (or an extension handle, OPEN)"
+    "instructor: unlatching needs the body pitched 50.0 deg toward the hatch (or an extension handle, OPEN)",
+    "newcomer: unlatching needs the body pitched 50.0 deg toward the hatch (or an extension handle, OPEN)"
    ],
    "geometry_fail": [
     "door: instructor.hatch_pass MARGINAL (margin 0.026 m)"
@@ -1068,7 +1068,7 @@
      "reach_m": 0.616,
      "elevation_deg": 180.0,
      "ok": true,
-     "pitch_needed_deg": 60.0
+     "pitch_needed_deg": 50.0
     }
    },
    "rescue": {
@@ -1090,13 +1090,13 @@
     }
    ],
    "fitting": {
-    "x": 101.8494,
+    "x": 134.1,
     "theta_deg": 50.0,
     "port_face_a_m": 6.8,
     "wall_m": 0.05
    },
    "conditions": [
-    "instructor: unlatching needs the body pitched 60.0 deg toward the hatch (or an extension handle, OPEN)"
+    "instructor: unlatching needs the body pitched 50.0 deg toward the hatch (or an extension handle, OPEN)"
    ],
    "geometry_fail": [
     "door: instructor.hatch_pass MARGINAL (margin 0.026 m)",
@@ -1235,7 +1235,7 @@
      "reach_m": 0.616,
      "elevation_deg": 180.0,
      "ok": true,
-     "pitch_needed_deg": 60.0
+     "pitch_needed_deg": 50.0
     },
     "newcomer": {
      "side": "r",
@@ -1244,7 +1244,7 @@
      "reach_m": 0.577,
      "elevation_deg": 180.0,
      "ok": true,
-     "pitch_needed_deg": 60.0
+     "pitch_needed_deg": 50.0
     }
    },
    "rescue": {
@@ -1331,14 +1331,14 @@
     }
    ],
    "fitting": {
-    "x": 101.8494,
+    "x": 134.1,
     "theta_deg": 50.0,
     "port_face_a_m": 6.8,
     "wall_m": 0.05
    },
    "conditions": [
-    "instructor: unlatching needs the body pitched 60.0 deg toward the hatch (or an extension handle, OPEN)",
-    "newcomer: unlatching needs the body pitched 60.0 deg toward the hatch (or an extension handle, OPEN)"
+    "instructor: unlatching needs the body pitched 50.0 deg toward the hatch (or an extension handle, OPEN)",
+    "newcomer: unlatching needs the body pitched 50.0 deg toward the hatch (or an extension handle, OPEN)"
    ],
    "geometry_fail": [
     "radial budget -0.09 m: the inner leaf's swing (with its 0.05 m clearance) reaches below the SP-12 floor"
@@ -1476,7 +1476,7 @@
      "reach_m": 0.616,
      "elevation_deg": 180.0,
      "ok": true,
-     "pitch_needed_deg": 60.0
+     "pitch_needed_deg": 50.0
     }
    },
    "rescue": {
@@ -1498,13 +1498,13 @@
     }
    ],
    "fitting": {
-    "x": 101.8494,
+    "x": 134.1,
     "theta_deg": 50.0,
     "port_face_a_m": 6.8,
     "wall_m": 0.05
    },
    "conditions": [
-    "instructor: unlatching needs the body pitched 60.0 deg toward the hatch (or an extension handle, OPEN)"
+    "instructor: unlatching needs the body pitched 50.0 deg toward the hatch (or an extension handle, OPEN)"
    ],
    "geometry_fail": [
     "radial budget -0.09 m: the inner leaf's swing (with its 0.05 m clearance) reaches below the SP-12 floor",
@@ -1643,7 +1643,7 @@
      "reach_m": 0.616,
      "elevation_deg": 180.0,
      "ok": true,
-     "pitch_needed_deg": 60.0
+     "pitch_needed_deg": 50.0
     },
     "newcomer": {
      "side": "r",
@@ -1652,7 +1652,7 @@
      "reach_m": 0.577,
      "elevation_deg": 180.0,
      "ok": true,
-     "pitch_needed_deg": 60.0
+     "pitch_needed_deg": 50.0
     }
    },
    "rescue": {
@@ -1739,14 +1739,14 @@
     }
    ],
    "fitting": {
-    "x": 101.8494,
+    "x": 134.1,
     "theta_deg": 50.0,
     "port_face_a_m": 6.8,
     "wall_m": 0.05
    },
    "conditions": [
-    "instructor: unlatching needs the body pitched 60.0 deg toward the hatch (or an extension handle, OPEN)",
-    "newcomer: unlatching needs the body pitched 60.0 deg toward the hatch (or an extension handle, OPEN)"
+    "instructor: unlatching needs the body pitched 50.0 deg toward the hatch (or an extension handle, OPEN)",
+    "newcomer: unlatching needs the body pitched 50.0 deg toward the hatch (or an extension handle, OPEN)"
    ],
    "geometry_fail": [
     "radial budget -0.44 m: the inner leaf's swing (with its 0.05 m clearance) reaches below the SP-12 floor"
@@ -1884,7 +1884,7 @@
      "reach_m": 0.616,
      "elevation_deg": 180.0,
      "ok": true,
-     "pitch_needed_deg": 60.0
+     "pitch_needed_deg": 50.0
     }
    },
    "rescue": {
@@ -1906,13 +1906,13 @@
     }
    ],
    "fitting": {
-    "x": 101.8494,
+    "x": 134.1,
     "theta_deg": 50.0,
     "port_face_a_m": 6.8,
     "wall_m": 0.05
    },
    "conditions": [
-    "instructor: unlatching needs the body pitched 60.0 deg toward the hatch (or an extension handle, OPEN)"
+    "instructor: unlatching needs the body pitched 50.0 deg toward the hatch (or an extension handle, OPEN)"
    ],
    "geometry_fail": [
     "radial budget -0.39 m: the inner leaf's swing (with its 0.05 m clearance) reaches below the SP-12 floor",
@@ -1928,8 +1928,8 @@
   "clean": false,
   "open_conditions": [
    "door: instructor.hatch_pass MARGINAL (margin 0.026 m)",
-   "instructor: unlatching needs the body pitched 60.0 deg toward the hatch (or an extension handle, OPEN)",
-   "newcomer: unlatching needs the body pitched 60.0 deg toward the hatch (or an extension handle, OPEN)"
+   "instructor: unlatching needs the body pitched 50.0 deg toward the hatch (or an extension handle, OPEN)",
+   "newcomer: unlatching needs the body pitched 50.0 deg toward the hatch (or an extension handle, OPEN)"
   ],
   "ranking": [
    {
@@ -1993,8 +1993,8 @@
   "id": "SP12",
   "status": "PROTOTYPE STUDY (12A PROPOSED / PROGRAM)",
   "x_m": [
-   100.75,
-   104.85
+   133.0,
+   137.1
   ],
   "az_deg": [
    5.0,
@@ -2012,7 +2012,7 @@
     "id": "SP12_DON_STAND_A",
     "job": "suit donning stand A: suit hung on its PLSS docking frame, entered through the rear-entry hatch",
     "kind": "stand",
-    "x": 103.4,
+    "x": 135.65,
     "az": 20.0,
     "size": [
      0.95,
@@ -2027,7 +2027,7 @@
     "id": "SP12_DON_STAND_B",
     "job": "suit donning stand B",
     "kind": "stand",
-    "x": 104.3,
+    "x": 136.55,
     "az": 20.0,
     "size": [
      0.95,
@@ -2042,7 +2042,7 @@
     "id": "SP12_PRESSURE_CHECK",
     "job": "leak / pressure-check panel and umbilical (no setpoint or leak limit released)",
     "kind": "panel",
-    "x": 103.85,
+    "x": 136.1,
     "az": 8.0,
     "size": [
      0.7,
@@ -2057,7 +2057,7 @@
     "id": "SP12_O2_INTERFACE",
     "job": "oxygen preparation interface (prebreathe supply; no duration, no flow budget)",
     "kind": "panel",
-    "x": 104.7,
+    "x": 136.95,
     "az": 40.0,
     "size": [
      0.1,
@@ -2072,7 +2072,7 @@
     "id": "SP12_TOOL_CHECKOUT",
     "job": "tool and tether checkout board with a tether tug-test fixture (EVA-003: on the aft wall, clear of the SP-11 inner plug's parking pocket)",
     "kind": "board",
-    "x": 100.85,
+    "x": 133.1,
     "az": 14.0,
     "size": [
      0.12,
@@ -2087,7 +2087,7 @@
     "id": "SP12_BUDDY_ZONE",
     "job": "buddy-check zone: two suited bodies, foot restraints",
     "kind": "zone",
-    "x": 103.85,
+    "x": 136.1,
     "az": 55.0,
     "size": [
      1.6,
@@ -2104,8 +2104,8 @@
   "id": "SP13",
   "status": "PROTOTYPE STUDY (12A PROPOSED / PROGRAM)",
   "x_m": [
-   104.95,
-   107.1
+   137.2,
+   139.35
   ],
   "az_deg": [
    5.0,
@@ -2123,7 +2123,7 @@
     "id": "SP13_DRY_RACK",
     "job": "suit drying and storage rack (two suits)",
     "kind": "rack",
-    "x": 105.6,
+    "x": 137.85,
     "az": 25.0,
     "size": [
      0.95,
@@ -2138,7 +2138,7 @@
     "id": "SP13_CHARGE_PANEL",
     "job": "battery charging, O2 recharge and water/consumables exchange interfaces (capacities OPEN)",
     "kind": "panel",
-    "x": 107.0,
+    "x": 139.25,
     "az": 30.0,
     "size": [
      0.1,
@@ -2153,7 +2153,7 @@
     "id": "SP13_BENCH",
     "job": "pressure-shell inspection and component-replacement bench",
     "kind": "bench",
-    "x": 106.4,
+    "x": 138.65,
     "az": 58.0,
     "size": [
      1.0,
@@ -2168,7 +2168,7 @@
     "id": "SP13_SPARES",
     "job": "spares lockers: gloves, visors, bearings, seals, PLSS modules",
     "kind": "locker",
-    "x": 105.3,
+    "x": 137.55,
     "az": 62.0,
     "size": [
      0.7,

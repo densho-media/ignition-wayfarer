@@ -1,28 +1,28 @@
 {
  "section": {
-  "u_centre": -0.825,
+  "u_centre": -0.7749999999999999,
   "clear_u": [
-   -1.275,
-   -0.37499999999999994
+   -1.2249999999999999,
+   -0.3249999999999999
   ],
   "floor_r": 28.15236238801218,
   "ceiling_r": 26.052362388012178,
   "door_u": [
    -1.15,
-   -0.5
+   -0.4
   ],
-  "door_top_r": 26.20236238801218,
-  "door_width": 0.6499999999999999,
-  "door_height": 1.95,
+  "door_top_r": 26.15236238801218,
+  "door_width": 0.7499999999999999,
+  "door_height": 2.0,
   "cavity": [
-   -1.275,
-   -0.37499999999999994,
+   -1.2249999999999999,
+   -0.3249999999999999,
    25.90236238801218,
    28.35236238801218
   ],
   "tunnel": [
-   -1.4249999999999998,
-   -0.22499999999999992,
+   -1.375,
+   -0.17499999999999988,
    25.75236238801218,
    28.502362388012177
   ]
@@ -58,7 +58,7 @@
   "spoke_axial_load_increase_N": 49319.93668913847,
   "spin_energy_increase_J": 2597491.78627397,
   "fill_m3_per_ring": 2248.641891652738,
-  "tunnel_m3_per_ring": 506.56572416806506,
+  "tunnel_m3_per_ring": 506.5657241680652,
   "fill_remaining_m3_per_ring": 1742.076167484673,
   "rotating_water_m3_per_ring": 80.0,
   "basis": "liner = cavity perimeter x centreline length x PROTOTYPE areal mass (an internal shell shielded by the fill: no MMOD or exterior thermal layer); the sector-equivalent figure applies the habitat_pressure_structure allowance per sector skin area as an upper comparison; spin energy and spoke load scale with the added mass at the corridor radius (ring-equivalent dynamics)"
@@ -67,19 +67,19 @@
   {
    "id": "CIRC-C1",
    "ref": "12_HABITAT_LAYOUT!A13 ring_shielding (BASELINE)",
-   "status": "CONFLICT",
+   "status": "CONFLICT, PROTOTYPE DECISION KEEP (2026-10-31)",
    "text": "Pressurized rooms occupy only the sectors; the circuit adds 338 m3 of pressurized corridor per ring inside the fills (tunnel 507 m3 of the 2249 m3 fill)."
   },
   {
    "id": "CIRC-C2",
    "ref": "habitat.volume 400-460 m3 gross (BASELINE, 02/12)",
-   "status": "CONFLICT",
+   "status": "CONFLICT, PROTOTYPE DECISION KEEP (2026-10-31)",
    "text": "Gross pressurized volume 434 -> 1111 m3 (2.42 x the 460 m3 maximum); atmosphere +641 kg; leak, repressurization gas and ECLSS circulation OPEN."
   },
   {
    "id": "CIRC-C3",
    "ref": "physics.rotor_sizing 330 t rotating (PROVISIONAL, Q32)",
-   "status": "CONFLICT",
+   "status": "CONFLICT, PROTOTYPE DECISION KEEP (2026-10-31)",
    "text": "Corridor liner, decks, 18 doors and fit-out ~40.2 t (12.2 % of the rotating allowance, unbudgeted; 301 t at the sectors' areal mass); spoke load and spin energy scale with it."
   },
   {
@@ -103,14 +103,20 @@
   {
    "id": "CIRC-C7",
    "ref": "habitat_ring.construction / OD-016 ring section (OPEN)",
-   "status": "OPEN",
-   "text": "Each web frame takes a framed portal round the corridor and the spoke-node housing splits round it; the load path is OPEN (FEA)."
+   "status": "PROTOTYPE HAND CHECK",
+   "text": "Each flank and web frame and the spoke-node housing becomes a portal with a collar round the tunnel (ring_circulation.portal); the hand check gives 116 MPa in the collar against 200 MPa; FEA OPEN."
   },
   {
    "id": "CIRC-C8",
    "ref": "interior.layouts (PROTOTYPE), Q50 Garden trays (12!A28 WORKING)",
    "status": "CHANGED PROTOTYPE",
-   "text": "Work and Garden couch-2 lockers end at x -1.15 m like the habitation ones; the Garden rack and mess start at x -0.50 m (rack 0.05 m shorter)."
+   "text": "Work and Garden couch-2 lockers end at x -1.15 m like the habitation ones; the Garden rack and mess start at x -0.40 m (rack 0.15 m shorter, mess moved 0.10 m forward) and the landing well is 0.80 m (was 1.00 m) for the 0.75 m door band."
+  },
+  {
+   "id": "CIRC-D1",
+   "ref": "references/evidence/circ001_tradeoff_2026-10-31.md",
+   "status": "PROTOTYPE DECISION",
+   "text": "Kept by Claude under the owner's delegation (2026-10-31): two level exits per sector and the D02 care route (24/24 PASS) outweigh the unbudgeted mass and gas above; the owner canonizes or rejects it (TODO J06)."
   }
  ],
  "doors": [
@@ -124,14 +130,14 @@
    "t": 0.10408604933744602,
    "u": [
     -1.15,
-    -0.5
+    -0.4
    ],
    "r": [
-    26.20236238801218,
+    26.15236238801218,
     28.15236238801218
    ],
-   "width": 0.6499999999999999,
-   "height": 1.95,
+   "width": 0.7499999999999999,
+   "height": 2.0,
    "between": [
     "A1",
     "AC1a"
@@ -142,7 +148,7 @@
     0.0,
     0.0
    ],
-   "travel": 0.7,
+   "travel": 0.7999999999999999,
    "normally": "CLOSED"
   },
   {
@@ -155,14 +161,14 @@
    "t": 1.0471975511965976,
    "u": [
     -1.15,
-    -0.5
+    -0.4
    ],
    "r": [
-    26.20236238801218,
+    26.15236238801218,
     28.15236238801218
    ],
-   "width": 0.6499999999999999,
-   "height": 1.95,
+   "width": 0.7499999999999999,
+   "height": 2.0,
    "between": [
     "AC1a",
     "AC1b"
@@ -173,7 +179,7 @@
     0.0,
     0.0
    ],
-   "travel": 0.7,
+   "travel": 0.7999999999999999,
    "normally": "CLOSED"
   },
   {
@@ -186,14 +192,14 @@
    "t": 1.9903090530557492,
    "u": [
     -1.15,
-    -0.5
+    -0.4
    ],
    "r": [
-    26.20236238801218,
+    26.15236238801218,
     28.15236238801218
    ],
-   "width": 0.6499999999999999,
-   "height": 1.95,
+   "width": 0.7499999999999999,
+   "height": 2.0,
    "between": [
     "AC1b",
     "A2"
@@ -204,7 +210,7 @@
     0.0,
     0.0
    ],
-   "travel": 0.7,
+   "travel": 0.7999999999999999,
    "normally": "CLOSED"
   },
   {
@@ -217,14 +223,14 @@
    "t": 2.198481151730641,
    "u": [
     -1.15,
-    -0.5
+    -0.4
    ],
    "r": [
-    26.20236238801218,
+    26.15236238801218,
     28.15236238801218
    ],
-   "width": 0.6499999999999999,
-   "height": 1.95,
+   "width": 0.7499999999999999,
+   "height": 2.0,
    "between": [
     "A2",
     "AC2a"
@@ -235,7 +241,7 @@
     0.0,
     0.0
    ],
-   "travel": 0.7,
+   "travel": 0.7999999999999999,
    "normally": "CLOSED"
   },
   {
@@ -248,14 +254,14 @@
    "t": 3.141592653589793,
    "u": [
     -1.15,
-    -0.5
+    -0.4
    ],
    "r": [
-    26.20236238801218,
+    26.15236238801218,
     28.15236238801218
    ],
-   "width": 0.6499999999999999,
-   "height": 1.95,
+   "width": 0.7499999999999999,
+   "height": 2.0,
    "between": [
     "AC2a",
     "AC2b"
@@ -266,7 +272,7 @@
     0.0,
     0.0
    ],
-   "travel": 0.7,
+   "travel": 0.7999999999999999,
    "normally": "CLOSED"
   },
   {
@@ -279,14 +285,14 @@
    "t": 4.084704155448945,
    "u": [
     -1.15,
-    -0.5
+    -0.4
    ],
    "r": [
-    26.20236238801218,
+    26.15236238801218,
     28.15236238801218
    ],
-   "width": 0.6499999999999999,
-   "height": 1.95,
+   "width": 0.7499999999999999,
+   "height": 2.0,
    "between": [
     "AC2b",
     "A3"
@@ -297,7 +303,7 @@
     0.0,
     0.0
    ],
-   "travel": 0.7,
+   "travel": 0.7999999999999999,
    "normally": "CLOSED"
   },
   {
@@ -310,14 +316,14 @@
    "t": 4.292876254123836,
    "u": [
     -1.15,
-    -0.5
+    -0.4
    ],
    "r": [
-    26.20236238801218,
+    26.15236238801218,
     28.15236238801218
    ],
-   "width": 0.6499999999999999,
-   "height": 1.95,
+   "width": 0.7499999999999999,
+   "height": 2.0,
    "between": [
     "A3",
     "AC3a"
@@ -328,7 +334,7 @@
     0.0,
     0.0
    ],
-   "travel": 0.7,
+   "travel": 0.7999999999999999,
    "normally": "CLOSED"
   },
   {
@@ -341,14 +347,14 @@
    "t": 5.235987755982988,
    "u": [
     -1.15,
-    -0.5
+    -0.4
    ],
    "r": [
-    26.20236238801218,
+    26.15236238801218,
     28.15236238801218
    ],
-   "width": 0.6499999999999999,
-   "height": 1.95,
+   "width": 0.7499999999999999,
+   "height": 2.0,
    "between": [
     "AC3a",
     "AC3b"
@@ -359,7 +365,7 @@
     0.0,
     0.0
    ],
-   "travel": 0.7,
+   "travel": 0.7999999999999999,
    "normally": "CLOSED"
   },
   {
@@ -372,14 +378,14 @@
    "t": 6.17909925784214,
    "u": [
     -1.15,
-    -0.5
+    -0.4
    ],
    "r": [
-    26.20236238801218,
+    26.15236238801218,
     28.15236238801218
    ],
-   "width": 0.6499999999999999,
-   "height": 1.95,
+   "width": 0.7499999999999999,
+   "height": 2.0,
    "between": [
     "AC3b",
     "A1"
@@ -390,7 +396,7 @@
     0.0,
     0.0
    ],
-   "travel": 0.7,
+   "travel": 0.7999999999999999,
    "normally": "CLOSED"
   }
  ],

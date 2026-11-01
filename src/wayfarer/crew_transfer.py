@@ -716,7 +716,7 @@ def world_obstacles(s):
     shell = s['hull']['shell_thickness_m']
     out.append(ring('Hull_Aft_Body', aft1-6.0, aft1, min(hull_geometry.inner_radius_at(s, aft1-6.0+k*.5) for k in range(13)), R+shell))
     out.append(ring('Hull_Forward_Collar', fwd0, L/2, min(hull_geometry.inner_radius_at(s, fwd0+k*.25) for k in range(int((L/2-fwd0)/.25)+1)), R+shell))
-    out.append(ring('Radiator_Envelope', -L, layout.origin(s, 'RADIATOR_FRONT')+p['radiator_leading_spar_radius_m'], s['radiators']['root_radius']['value']-p['radiator_boom_radius_m'], 10*L))
+    out.append(ring('Radiator_Envelope', -L, layout.origin(s, 'RADIATOR_ZONE_FRONT')+p['radiator_leading_spar_radius_m'], s['radiators']['root_radius']['value']-p['radiator_boom_radius_m'], 10*L))
     return out
 
 

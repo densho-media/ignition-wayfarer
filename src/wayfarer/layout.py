@@ -2,13 +2,15 @@
 
 AFT = -L/2 and FWD = +L/2 follow ship.length. RADIATOR_AFT and RADIATOR_FRONT are DERIVED: the blade aft edge sits a PROTOTYPE gap
 ahead of the thrust-ring forward face and the front follows from the blade length (thermal_geometry); neither is ever typed.
-RING_A is DERIVED too (HAB-001): RADIATOR_FRONT plus ring_a_offset_m, so the ring/spar clearance of the owner (Q29) follows any blade growth. Every ship-frame X in the spec is {datum, offset_m}:
+RADIATOR_ZONE_FRONT (RAD-ZONE) adds the LOW and WARM radiator sections ahead of the hot blade; AFT_STORAGE_FRONT adds the aft propellant
+district (layout.datums.aft_storage_length_m). RING_A is DERIVED too (HAB-001): AFT_STORAGE_FRONT plus ring_a_offset_m, so the ring
+clearance of the owner (Q29) follows any growth aft of it. Every ship-frame X in the spec is {datum, offset_m}:
 metres along +X from that datum's origin."""
 import math
 
-DATUMS = ('AFT', 'RADIATOR_AFT', 'RADIATOR_FRONT', 'RING_A', 'FWD')
+DATUMS = ('AFT', 'RADIATOR_AFT', 'RADIATOR_FRONT', 'RADIATOR_ZONE_FRONT', 'AFT_STORAGE_FRONT', 'RING_A', 'FWD')
 FIXED = ('AFT', 'FWD')
-DERIVED = ('RADIATOR_AFT', 'RADIATOR_FRONT', 'RING_A')
+DERIVED = ('RADIATOR_AFT', 'RADIATOR_FRONT', 'RADIATOR_ZONE_FRONT', 'AFT_STORAGE_FRONT', 'RING_A')
 NAMED = ()
 REF_KEYS = {'datum', 'offset_m'}
 
@@ -36,7 +38,13 @@ def origins(s):
     # Blade aft edge: the gap ahead of the thrust-ring forward face; the front follows from the equivalent blade length.
     out['RADIATOR_AFT'] = ring_x + s['structure']['ring_depth_m']/2 + table['radiator_aft_gap_m']
     out['RADIATOR_FRONT'] = thermal_geometry.blade_at(s, out['RADIATOR_AFT'])['front_x_m']
-    out['RING_A'] = out['RADIATOR_FRONT']+ring_a_offset_m(s)
+    # RAD-ZONE / aft storage district (owner brief 2026-11-01): the LOW and WARM radiator sections ahead of the hot blade, then the aft
+    # propellant bank, then ring A. AFT_STORAGE_FRONT is the forward end of the aft district: the slot between it and ring A's aft sweep
+    # plays the role the blade-front slot played before (collar aft frame, transfer-line drop).
+    import radiator_zones                    # lazy: radiator_zones imports this module
+    out['RADIATOR_ZONE_FRONT'] = out['RADIATOR_FRONT']+(radiator_zones.total_length_m(s) if 'zones' in s['radiators'] else 0.0)
+    out['AFT_STORAGE_FRONT'] = out['RADIATOR_ZONE_FRONT']+table.get('aft_storage_length_m', 0.0)
+    out['RING_A'] = out['AFT_STORAGE_FRONT']+ring_a_offset_m(s)
     for name in NAMED:                       # base must already be resolved, so cycles and forward references cannot occur
         entry = table[name]
         base = entry['datum']
@@ -124,14 +132,14 @@ def check(s):
             out.append(f'layout datum {name}: offset_m must be finite')
         resolved.add(name)
     for key in table:
-        if key not in ('status', 'unit', 'rationale', 'radiator_aft_gap_m', *NAMED, *FIXED, *DERIVED):
+        if key not in ('status', 'unit', 'rationale', 'radiator_aft_gap_m', 'aft_storage_length_m', *NAMED, *FIXED, *DERIVED):
             out.append(f'layout.datums: unexpected key {key!r}')
     if not out:
         try:
             o = origins(s)
         except (ValueError, KeyError, ZeroDivisionError) as e:
             return [f'layout datums cannot be resolved: {e}']
-        order = ('AFT', 'RADIATOR_AFT', 'RADIATOR_FRONT', 'RING_A', 'FWD')
-        if not all(o[a] < o[b] for a, b in zip(order, order[1:])):
-            out.append('layout datum order must be AFT < RADIATOR_AFT < RADIATOR_FRONT < RING_A < FWD')
+        order = ('AFT', 'RADIATOR_AFT', 'RADIATOR_FRONT', 'RADIATOR_ZONE_FRONT', 'AFT_STORAGE_FRONT', 'RING_A', 'FWD')
+        if not all(o[a] <= o[b] for a, b in zip(order, order[1:])) or not o['RADIATOR_FRONT'] < o['RING_A'] < o['FWD']:
+            out.append('layout datum order must be AFT < RADIATOR_AFT < RADIATOR_FRONT <= RADIATOR_ZONE_FRONT <= AFT_STORAGE_FRONT < RING_A < FWD')
     return out

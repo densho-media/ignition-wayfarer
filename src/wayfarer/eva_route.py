@@ -43,7 +43,7 @@ def body_radius(s, x):
     return layout.spine_radius_at(s, x)
 
 
-def collider(s, x0=104.0, x1=118.0, step=0.25):
+def collider(s, x0=126.25, x1=140.25, step=0.25):
     """PROTOTYPE collision proxy of the stationary body for the Godot EVA drift: its outer radius sampled along X from `body_radius`
     (the shared hull formulas, never the visual mesh), plus the interval starts where the radius jumps, and the Airlock_EVA fitting as a
     cylinder. Axis +X, radius about the ship axis. Nothing here is a released collision surface."""
@@ -200,7 +200,7 @@ def route(s, data, suit_r=0.55):
         radiator_feed=dict(eye=radial(d['front_x_m']-6.0, 9.0, math.radians(s['prototype']['radiator_phase_deg'])+.22),
                            look=radial(d['front_x_m']-60.0, 22.0, math.radians(s['prototype']['radiator_phase_deg'])),
                            label='CRAWLER CAMERA FEED (simulated): radiator blade 1 from its root rail'),
-        drive_cutaway=dict(eye=radial(-80.0, 22.0, th), look=radial(-118.0, 0.0, th), label='REMOTE VIEW (simulated): drive section, nozzles aft'),
+        drive_cutaway=dict(eye=radial(-102.25, 22.0, th), look=radial(-140.25, 0.0, th), label='REMOTE VIEW (simulated): drive section, nozzles aft'),
         forward_feed=dict(eye=(sh['lance_tip']+18.0, 12.0, 20.0), look=(sh['face'], 0.0, 0.0),
                           label='REMOTE CAMERA (simulated): Brow, Dust Lance and EYE from ahead; no person goes here'),
         suit_cutaway=dict(eye=None, look=None, label='Suit cutaway: layers and backpack'),

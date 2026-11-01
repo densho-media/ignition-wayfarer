@@ -110,7 +110,7 @@ def stage_pair(s, f, view):
         R = rf.trunk_extent(s)[0]; a = math.radians(s['human_entry']['trunk_handrail_deg'][0]); out = Vector((0.0, math.cos(a), math.sin(a)))
         # microgravity: the body along the trunk axis, head aft, facing the handrail wall it moves along (a 1.6 m bore admits no
         # standing posture across it)
-        bodies.append(m4_look.person(s, 'NEWCOMER', Vector((105.6, 0.0, 0.0))+out*(R-.42), Vector((-1.0, 0.0, 0.0)), out)[1])
+        bodies.append(m4_look.person(s, 'NEWCOMER', Vector((127.85, 0.0, 0.0))+out*(R-.42), Vector((-1.0, 0.0, 0.0)), out)[1])
     return bodies
 
 
@@ -157,7 +157,7 @@ def camera(scene, s, f, view):
     elif view == 'trk_trunk':
         import crew_transfer as ct
         h = math.radians(s['human_entry']['trunk_handrail_deg'][0])
-        eye = Vector(ct.radial(108.4, .35, h+math.pi)); target = Vector(ct.radial(102.0, .05, h))
+        eye = Vector(ct.radial(130.65, .35, h+math.pi)); target = Vector(ct.radial(124.25, .05, h))
         data.lens = 18; up = -Vector(ct.radial(0.0, 1.0, h))
     else:
         eye = Vector(he.world(f, st['a_in']-.35, .45, math.radians(30))); target = Vector(he.world(f, st['node_in']+.1, .2, math.radians(200)))

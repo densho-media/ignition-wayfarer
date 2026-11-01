@@ -1,0 +1,167 @@
+{
+ "task": "longitudinal_tanks",
+ "approved": "2026-11-01T14:46Z",
+ "drive": "S&E 15_MODEL_INTERFACES A244:I244 OWN-TANK-AXIAL-2026-11-01",
+ "baseline": "references/baseline_tank_axial_radzone_rcs",
+ "before_after": {
+  "base": "702ff62",
+  "rows": [
+   [
+    "Liquid capacity He-3 / D2 / H2 (m3)",
+    "20,969 / 4,379 / 15,450",
+    "20,271 / 4,886 / 15,022",
+    "computed"
+   ],
+   [
+    "Need incl. 3 % ullage + 2 % allowance (m3)",
+    "ullage only (3 %)",
+    "19,613 / 4,381 / 14,420",
+    "computed"
+   ],
+   [
+    "Vessels (cells)",
+    "33 (42)",
+    "13 (13)",
+    "counted"
+   ],
+   [
+    "Cold surface area, all vessels (m2)",
+    "17,781",
+    "15,226",
+    "computed (shell geometry)"
+   ],
+   [
+    "MLI heat leak at the same flux (W)",
+    "5,334",
+    "4,568",
+    "computed, flux 0.3 W/m2 PROTOTYPE"
+   ],
+   [
+    "Tank dry mass, first order (t)",
+    "not sized (budget 0.15 x capacity)",
+    "shells 240 + MLI 29",
+    "first order"
+   ],
+   [
+    "Support mass, first order (t)",
+    "not sized",
+    "deck 161 + skirts 8 + guides 20",
+    "first order, 1.5 g"
+   ],
+   [
+    "Tankage vs budget (t)",
+    "budget 466",
+    "458 (+8)",
+    "first order"
+   ],
+   [
+    "Worst support margin at 1.5 g full",
+    "fwd torus -0.38, return torus +3.57",
+    "skirt +0.81; deck sized to carry it",
+    "first order"
+   ],
+   [
+    "Occupied length, forward zone (m)",
+    "29.0 (+ 9 body modules)",
+    "28.6 (body bay freed)",
+    "computed"
+   ],
+   [
+    "Radial envelope (m)",
+    "31.8",
+    "34.5 (between bypass girders)",
+    "computed"
+   ],
+   [
+    "Departure CG X (m, body centre frame) / from the aft end (m) / lateral (mm)",
+    "68.29 (245 m body) / 190.8 / 11",
+    "89.61 (289.5 m body) / 234.4 / 7",
+    "mass_model"
+   ],
+   [
+    "CG travel over burn 1 (m)",
+    "6.43",
+    "11.44",
+    "mass_model"
+   ],
+   [
+    "Roll / pitch inertia at departure (1e9 kg m2)",
+    "1.86 / 17.51",
+    "2.22 / 25.50",
+    "mass_model"
+   ],
+   [
+    "Worst trimmed differential thrust",
+    "0.43 %",
+    "0.37 %",
+    "mass_model"
+   ],
+   [
+    "Plumbing: transfer trunks / outlet valves / ring mains",
+    "13 legs (1,366 m) / per lobe+cell, OPEN / none",
+    "12 legs / 13 / 4 (1,976 m incl. mains and outlets)",
+    "counted"
+   ],
+   [
+    "Support members",
+    "132",
+    "247",
+    "counted"
+   ],
+   [
+    "Cryocooler cold boxes",
+    "6 (He-3 only, body)",
+    "6 (2 per species, on the deck)",
+    "counted"
+   ],
+   [
+    "Clearance: ring B sweep / lanes / girder envelope (m; Q38 panels now removed)",
+    "tori: 22.9 / 6.0 gap apex / n.a.",
+    "1.70 (deck) / 0.00 beyond the 3.15 m keep-out / 0.50",
+    "computed"
+   ]
+  ],
+  "old_supports_at_design": {
+   "supports": -0.3774330398354292,
+   "return_supports": 3.5735937184623348
+  },
+  "design_accel_m_s2": 14.709975
+ },
+ "deck": {
+  "depth_m": 1.3599999999999994,
+  "hoop_kg": 19045.454569617345,
+  "trusses_kg": 59643.88542933801,
+  "ties_kg": 1174.7097395069454,
+  "mass_kg": 161374.59020755498
+ },
+ "cooling": {
+  "shield_lift_W": 3642.0222488177133,
+  "he3_stage_lift_W": 117.81278756245447,
+  "rejected_W": 395240.5162727445,
+  "low_section_load_W": 1000000.0,
+  "low_section_margin_W": 304759.4837272555
+ },
+ "dry_mass": {
+  "shells_kg": 239787.7037454464,
+  "mli_kg": 29136.177990541713,
+  "skirts_kg": 7952.5031582420515,
+  "deck_kg": 161374.59020755498,
+  "guides_kg": 19638.53853475377,
+  "total_kg": 457889.51363653893,
+  "budget_kg": 466167.21742644144,
+  "capacity_kg": 3107781.4495096095,
+  "margin_kg": 8277.703789902502
+ },
+ "decisions": [
+  "owner 12:35Z: tie deck to the bypass collar",
+  "owner 12:38Z: radiators behind the habitats (RAD-ZONE from 741c38d, +44.5 m)",
+  "owner 07:13Z parts 6-7 carried over: RCS +/-X jets, functional colours"
+ ],
+ "rejected": [
+  "aft-of-rings farm (hot blades)",
+  "one central cylinder (owner)",
+  "3-fold layout (capacity)",
+  "He-3 kept in the body (two cold zones)",
+  "split banks of 741c38d (not built)"
+ ]
+}

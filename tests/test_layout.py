@@ -15,20 +15,22 @@ class LayoutTests(unittest.TestCase):
     def setUp(self):
         self.s,self.sources,*_=load()
 
-    def test_origins_at_245(self):
+    def test_origins_at_289_5(self):
         o=layout.origins(self.s)
-        for k,v in {'AFT':-122.5,'RADIATOR_AFT':-111.0,'RADIATOR_FRONT':71.149362477,'RING_A':75.049362477,'FWD':122.5}.items():self.assertAlmostEqual(o[k],v,delta=1e-9)
+        for k,v in {'AFT':-144.75,'RADIATOR_AFT':-133.25,'RADIATOR_FRONT':48.899362477,'RADIATOR_ZONE_FRONT':93.399362477,'RING_A':97.299362477,'FWD':144.75}.items():self.assertAlmostEqual(o[k],v,delta=1e-9)
         self.assertEqual(layout.check(self.s),[])
         # Independent relationships: blade length = area / (outer - root); aft edge 1.0 m ahead of the thrust ring's forward face.
         length=50000/9/(37.0-6.5)
         self.assertAlmostEqual(o['RADIATOR_FRONT']-o['RADIATOR_AFT'],length,delta=1e-9)
         ring=layout.at(self.s,self.s['prototype']['thrust_ring_x'])
         self.assertAlmostEqual(o['RADIATOR_AFT']-(ring+self.s['structure']['ring_depth_m']/2),1.0,delta=1e-12)
-        # HAB-001: RING_A is derived: 0.25 spar radius + 1.5 owner clearance + 2.15 half sweep (2.0 half frame + 0.15 allowance) ahead of the blade front, so the
+        # RAD-ZONE (owner pick 2026-11-01): the LOW and WARM sections (19.5 + 21.0 m, two 2.0 m breaks) sit ahead of the hot blade; the rings follow.
+        self.assertAlmostEqual(o['RADIATOR_ZONE_FRONT']-o['RADIATOR_FRONT'],19.5+21.0+2*2.0,delta=1e-9)
+        # HAB-001: RING_A is derived: 0.25 spar radius + 1.5 owner clearance + 2.15 half sweep (2.0 half frame + 0.15 allowance) ahead of the zone front, so the
         # ring-A aft sweep face is 1.5 m ahead of the spar front (hand numbers, not the formula); ring B is 6.0 m ahead of ring A.
-        self.assertAlmostEqual(o['RING_A']-o['RADIATOR_FRONT'],0.25+1.5+2.15,delta=1e-12)
+        self.assertAlmostEqual(o['RING_A']-o['RADIATOR_ZONE_FRONT'],0.25+1.5+2.15,delta=1e-12)
         self.assertAlmostEqual(layout.ring_a_offset_m(self.s),3.9,delta=1e-12)
-        self.assertAlmostEqual((o['RING_A']-(2.0+0.15))-(o['RADIATOR_FRONT']+0.25),1.5,delta=1e-12)
+        self.assertAlmostEqual((o['RING_A']-(2.0+0.15))-(o['RADIATOR_ZONE_FRONT']+0.25),1.5,delta=1e-12)
         a,b=[layout.at(self.s,r) for r in self.s['prototype']['rotor_centers_x']]
         self.assertAlmostEqual(b-a,6.0,delta=1e-12)
 

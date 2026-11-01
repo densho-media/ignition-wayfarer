@@ -1,4 +1,4 @@
-"""F01 torus load path (S&E 15 OWN-F01-TORUS-LOADS-2026-10-31): the bipods carry the torus under thrust; the cells only drain."""
+"""Tank-farm loads (TANK-AXIAL): every vessel only drains, the skirts hold 1.5 g full, the forward links absorb cold contraction."""
 from pathlib import Path
 import sys
 import unittest
@@ -16,13 +16,13 @@ class FuelLoadTests(unittest.TestCase):
         self.assertEqual(fuel_loads.check(self.s), [])
         self.assertEqual(fuel_storage.check(self.s), [])
 
-    def test_bipod_statics(self):
-        # the two legs' axial components return the support load; their radial components cancel
-        for sp in list(fuel_loads.legs(self.s).values())+list(fuel_loads.legs(self.s, 'return_torus').values()):
-            ua, uf = sp['Aft']['u'], sp['Fwd']['u']; P = 1.0
-            D = ua[0]*uf[1]-ua[1]*uf[0]; Ta, Tf = P*uf[1]/D, -P*ua[1]/D
-            self.assertAlmostEqual(Ta*ua[0]+Tf*uf[0], P, places=9)
-            self.assertAlmostEqual(Ta*ua[1]+Tf*uf[1], 0.0, places=9)
+    def test_skirt_carries_the_design_load(self):
+        # the skirt struts' axial components return each vessel's 1.5 g load
+        for t in fuel_storage.tanks(self.s):
+            st = fuel_loads._struts(self.s, t); W = 1.0
+            F = W/sum(abs(c['ux']) for c in st)
+            self.assertAlmostEqual(sum(F*abs(c['ux']) for c in st), W, places=9)
+            self.assertTrue(all(c['ux'] > 0.3 for c in st))       # struts lean along the thrust axis, not across it
 
 
 if __name__ == '__main__':

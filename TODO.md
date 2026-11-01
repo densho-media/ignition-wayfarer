@@ -99,11 +99,12 @@ close-up, regression check, MODEL/TODO and Model Status update.
     - **Lettering (15!A225):** L1 GU WAYFARER 001 preferred, L2 the comparator. The project title is "G.U. WAYFARER 001" (the
       Y155 Great Union; the G.U.C. is founded in Y310, so it never names this ship).
 - [ ] **S01 — Whole-body internal architecture (BODY-001). BUILT 2026-10-30 as PROTOTYPE (FUEL-SPLIT, WORKING), owner-accepted 2026-10-30.**
-  `fuel_storage.py`, `components/storage.py`, `[fuel_storage]`: He-3 in 27 lobes of nine BODY-C3 stations, H2 and D2 in a torus behind the
-  Brow split into three vessels (gaps at 50/195/315 deg keep the EVA azimuth and keel lanes clear), transfer lines over the bypass
-  collar into the hull at X 80.02 and along the keel lanes to the four feed run tanks (the schematic `Tank_Volume_0n`, renamed
-  `Feed_Run_Tank_0n`). Fit-screen margins He-3 +1,690 m³, D2 +65 m³, H2 +416 m³ at 3 % ullage. **Open:** the hull penetration, boil-off
-  and cryocooler power, torus support loads, MLI. **Done when:** those owner inputs are released and applied.
+  TANK-AXIAL (owner brief 2026-11-01, approved 2026-11-01, S&E 15 OWN-TANK-AXIAL-2026-11-01): all propellant in thirteen axial vessels in the forward farm (X 109.25-137.85
+  on the 289.5 m body), the body bay a dry store (docs/MODEL.md "Fuel storage"); the owner then moved every radiator aft of the rings
+  (RAD-ZONE LOW/WARM sections with baffled breaks, +44.5 m, Q38 panels removed; docs/MODEL.md "Radiator zoning"). **Open:** the hull penetrations, the cryocooler hardware (sized:
+  0.40 MW into the LOW section), the zone sections' mass in B01, MLI beyond first order, PMDs for the coast. Also from the owner's 2026-11-01 07:13Z
+  brief: ±X RCS jets on the aft and rim pods and the functional viewport colours (docs/MODEL.md "Functional review colours").
+  **Done when:** those are released and applied.
 - [ ] **S02 — Essential external hardware. READY where placement is independent of S01.** High-gain RF and laser comms, RCS clusters
   and tankage, star trackers and navigation sensors, position/warning/service lights, docking guidance and proximity sensors, EVA
   handrails and tether anchors along the maintenance routes, service panels. Size from bounded requirements (link budget, control
@@ -185,7 +186,7 @@ Reversible production work in C can proceed while these wait.
 
 - [ ] **B02 — Release mass allocation, power and shielding interfaces. OWNER.** 2026-10-31 (S&E 15 OWN-B02-MASS-PLACEMENT-2026-10-31,
   13!A18:I36, `mass_model.py`, docs/MODEL.md "Placed mass model"): a WORKING placed mass model gives CG and inertia per burn state, the
-  balanced torus loading (three D2 cells), ring trim and spoke loads. Still open: owner adoption of positions (the rig keeps
+  per-species zero-moment vessel loading (TANK-AXIAL), ring trim and spoke loads. Still open: owner adoption of positions (the rig keeps
   `physics.center_of_mass`/`inertia`/`mass_distribution` OPEN until then), whole-ship electrical loads and coast/survival generation,
   shield stack, spoke strength, rotor-motor and water-trim authority, and the 40.2 t corridor mass outside the
   330 t rotating allowance.
@@ -283,13 +284,11 @@ packet (Q_src, T_src; H2 mdot, p, T, phase, enthalpy in/out; field/plume/dose ke
   spine, ring, collar and thrust load-path changes through owner-approved designs. **Done when:** installed envelopes and source
   budgets agree, service routes fit, affected interfaces pass, and remaining unsized members are clearly bounded. No speculative
   acceptance of the held linear-engine/size studies; no additional mass hidden in proxy details.
-  2026-10-30: the volume envelopes, feed lines and cryocoolers are built with S01 (PROTOTYPE). 2026-10-31 (pass 6, `fuel_loads.py`,
-  S&E 15 OWN-F01-TORUS-LOADS-2026-10-31): the torus stands on six bipods (radial struts would bend at 4.9 GPa), worst leg +17 % in
-  buckling; the cells only drain (metered outlets per cell, no crossfeed); spine axial loads per station. Left: outlets of vessels 1-2
-  and their header (OPEN plumbing), tank wall and dry mass (15 % allowance), collar frames under the bipod feet, shield/water layering.
-  Pass 7 (full return): the return torus (2,197 t, ³He/D/H2 cells, X 86.1-104.1 m) on 0.90 m bipods, worst leg +1,280 %; the forward
-  legs keep +88 % at the flown 0.50 g but would be 38 % short at the 1.5 g ramp with full tanks (heavier legs before any drive upgrade);
-  the return torus's collar frames, its outlet manifolds and the longer bypass collar members are not designed.
+  TANK-AXIAL (2026-11-01, `fuel_loads.py`, docs/MODEL.md "Tank-farm load path"): vessels fixed aft on CFRP skirts (+81 % at 1.5 g
+  full) on a radial-truss deck, guided forward on sliding links (0.20 m vs 0.095 m contraction); every vessel only drains. The deck's
+  outer trusses are tied to the bypass collar's forward hoop, laced to the mid hoop as a ring girder (owner pick): deck 161 t, tankage
+  458 t within the 466 t budget. Left: the Q45 collar's load split (23.5 MN axial, 7.7-8.9 MN per girder at 1.5 g), hoop sizing,
+  shell/skirt FEA, shield/water layering.
 
 - [ ] **F02 — Warm/cold cooling: equipment and SP-52 packaging. ARCHITECTURE DECIDED 2026-10-31; AFTER D04 for service access.**
   Pass 7 (Claude under the owner's delegation, S&E 15 OWN-F02-LOOPS-2026-10-31, `heat_rejection.py`, docs/MODEL.md "Warm and cold loop
@@ -297,8 +296,8 @@ packet (Q_src, T_src; H2 mdot, p, T, phase, enthalpy in/out; field/plume/dose ke
   the hot loop's other-loads allowance); coast: drain-back warm channels in the blades radiate at 440 K (51 MW capacity, the 15-30 MW
   normal band uses 29-58 % of the blades); cold loop on each ring's usable faces (0.15 MW in HIGH_POWER, +50 % over the 100 kW bound).
   Left: the heat pumps, exchangers and drain-back hardware and their SP-52 packaging; the blade channel design; the drive's electric tap
-  (210 MW at burnout, with F03); Heat Debt buffer for 50-80 MW bursts; the hot coolant choice. The Q38 candidate panels stay PROTOTYPE
-  with no credited area. Keep all three loops separate.
+  (210 MW at burnout, with F03); Heat Debt buffer for 50-80 MW bursts; the hot coolant choice. The Q38 candidate panels are removed (owner,
+  2026-11-01); warm and low-temperature rejection outside the burn is the RAD-ZONE sections aft of the rings. Keep all three loops separate.
 
 - [ ] **F03 — Integrate electrical, black-start and survival power. AFTER B02; F02 architecture set 2026-10-31 (drive tap 210 MW for the burn heat pumps).** Size/place owner-released A/B distribution,
   storage, survival reserve and drive-off generation; preserve category suballocations and failure domains.

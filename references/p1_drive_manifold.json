@@ -5,8 +5,8 @@
   "failures": [],
   "measurements": {
     "spine_x": [
-      -89.8,
-      118.5
+      -112.05,
+      140.75
     ],
     "spine_core_axial_gap_m": 2.700000000000003,
     "branch_max_off_axis_deg": 21.573398964863518,
@@ -17,17 +17,17 @@
     ],
     "branch_centreline_separation_min_m": 2.4041630560342613,
     "branch_gap_at_max_radius_m": 1.2041630560342613,
-    "branch_hub_gap_m": 1.4052220706176732,
-    "branch_ring_gap_m": 0.7635652467528109,
-    "branch_ring_member_min_gap_m": 0.20364464628621243,
-    "exhaust_ring_member_min_gap_m": 0.1599344253584577,
+    "branch_hub_gap_m": 1.4052220706176692,
+    "branch_ring_gap_m": 0.76356524675281,
+    "branch_ring_member_min_gap_m": 0.20364464628622037,
+    "exhaust_ring_member_min_gap_m": 0.15993442535846455,
     "yoke_coil_gap_m": 0.050000000000000044,
     "yoke_outer_axis_radius_m": 5.556955262170048,
     "yoke_skin_gap_m": 0.3430447378299528,
     "yoke_neighbour_gap_m": 1.4400000000000002,
     "branch_lattice_gap_m": 0.3299266490057594,
-    "branch_seed_coil_gap_m": 0.11866311134255236,
-    "exhaust_nozzle_coil_gap_m": 0.08999999999999975,
+    "branch_seed_coil_gap_m": 0.11866311134255814,
+    "exhaust_nozzle_coil_gap_m": 0.08999999999999997,
     "bypass_gaps_m": {
       "Fusion_Core": 0.25000000000000033,
       "Common_Plasma_Region": 1.35,
@@ -43,23 +43,23 @@
     "bypass_plasma_min_gap_m": 1.0255303392174238,
     "bypass_rails": {
       "30.0": [
-        -113.0,
-        71.34936247723134
+        -135.25,
+        93.59936247723134
       ],
       "150.0": [
-        -113.0,
-        71.34936247723134
+        -135.25,
+        93.59936247723134
       ],
       "270.0": [
-        -113.0,
-        71.34936247723134
+        -135.25,
+        93.59936247723134
       ]
     },
     "bore_spine_gap_m": 0.17500000000000004,
     "bore_hub_wall_m": 0.22356624775262524,
     "route_separation_m": 0.2503863328386533,
     "head_gap_angle_min_deg": 16.419013780432355,
-    "gate_beam_branch_gap_m": 0.4492771150047629,
+    "gate_beam_branch_gap_m": 0.44927711500476314,
     "gate_beam_seed_coil_gap_m": 0.8611874208078342,
     "gate_beam_other_sector_min_m": 1.0444644586421394,
     "route_cage_min_gap_m": 0.25000000000000566,
@@ -89,12 +89,12 @@
     "core_liner_envelope_gap_m": 0.6499999999999999,
     "core_liner_end_gap_m": 0.3199999999999932,
     "core_liner_feed_gap_m": 0.2628410820010305,
-    "throat_liner_plasma_gap_m": 0.09058835465996128,
-    "throat_liner_seed_coil_gap_m": 0.29924929555353363,
+    "throat_liner_plasma_gap_m": 0.0905883546599703,
+    "throat_liner_seed_coil_gap_m": 0.29924929555354673,
     "throat_liner_manifold_gap_m": 0.2999999999999998,
     "throat_liner_lattice_gap_m": 0.4565084884205325,
-    "gate_beam_liner_gap_m": 0.7927052858834677,
-    "nozzle_liner_plasma_gap_m": 0.06022624434389101,
+    "gate_beam_liner_gap_m": 0.7927052858834794,
+    "nozzle_liner_plasma_gap_m": 0.060226244343892676,
     "cryo_feed_member_min_gap_m": 0.21999999999999936,
     "cryo_feed_nearest_member": "Common_Plasma_Region",
     "cryo_feed_gaps_m": {
@@ -122,16 +122,16 @@
       "id": "SPINE_TERMINATION",
       "detail": "Structural_Spine (r 0.875 m) ends on the PROTOTYPE terminated hub (r 2.00 m) on the forward face of the shadow shield; no structure crosses the core, common region or manifold, and the plasma is solid. Drive thrust reaches the forward ship through the 12-node thrust ring and the three outer sector rails around the core. The bulkhead structure, hub shielding and load shares are OPEN (07!H16, 15!G70).",
       "spine_x": [
-        -89.8,
-        118.5
+        -112.05,
+        140.75
       ],
       "hub_x": [
-        -90.5,
-        -89.8
+        -112.75,
+        -112.05
       ],
       "core_x": [
-        -99.5,
-        -92.5
+        -121.75,
+        -114.75
       ],
       "bypass_rails_deg": [
         30.0,
@@ -198,7 +198,7 @@
           "family": "deuterium",
           "terminus": "core",
           "shield_point": [
-            -91.0,
+            -113.25,
             2.953553390593273,
             2.953553390593273
           ],
@@ -210,7 +210,7 @@
           "family": "helium-3",
           "terminus": "core",
           "shield_point": [
-            -91.0,
+            -113.25,
             -2.953553390593273,
             2.953553390593273
           ],
@@ -222,7 +222,7 @@
           "family": "hydrogen",
           "terminus": "injection_ring",
           "shield_point": [
-            -91.0,
+            -113.25,
             -2.953553390593273,
             -2.953553390593273
           ],
@@ -234,7 +234,7 @@
           "family": "hydrogen",
           "terminus": "injection_ring",
           "shield_point": [
-            -91.0,
+            -113.25,
             3.8183766184073566,
             -3.8183766184073566
           ],
@@ -290,7 +290,7 @@
       "id": "H2_INJECTION_OPEN",
       "detail": "Hydrogen reaction mass enters a PROTOTYPE injection ring around the common region at h2_injection_x, downstream of the burn and ahead of the manifold. Injector ports, count, mixing and the heat load on the ring are OPEN; so are the nuclear and radiant heating and boil-off of the hydrogen run in the hot corridor (OD-026, 06!E46); only the ring station is drawn.",
       "ring": {
-        "x": -101.5,
+        "x": -123.75,
         "radius_m": 3.8,
         "tube_m": 0.1
       },

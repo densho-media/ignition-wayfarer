@@ -274,8 +274,8 @@
    "name": "Main_Battery",
    "layer": "MAIN_BATTERY",
    "x_m": [
-    -70.4,
-    -67.6
+    -92.65,
+    -89.85
    ],
    "angle_deg": 90.0,
    "radius_m": [
@@ -290,8 +290,8 @@
    "name": "Pulse_Bank",
    "layer": "PULSE_BANK",
    "x_m": [
-    -70.4,
-    -67.6
+    -92.65,
+    -89.85
    ],
    "angle_deg": 270.0,
    "radius_m": [
@@ -306,8 +306,8 @@
    "name": "Survival_Reserve_1",
    "layer": "SURVIVAL_RESERVE",
    "x_m": [
-    109.4,
-    110.6
+    131.65,
+    132.85
    ],
    "angle_deg": 105.00000000000001,
    "radius_m": [
@@ -322,8 +322,8 @@
    "name": "Survival_Reserve_2",
    "layer": "SURVIVAL_RESERVE",
    "x_m": [
-    113.25,
-    114.65
+    135.5,
+    136.9
    ],
    "angle_deg": 150.0,
    "radius_m": [
@@ -354,10 +354,10 @@
   },
   "Survival_Reserve_1": {
    "nearest_member": "Airlock_EVA",
-   "member_gap_m": 0.23550742421552398,
+   "member_gap_m": 0.23550742421553553,
    "cage_gap_m": Infinity,
    "hull_gap_m": 3.829007973563512,
-   "pack_gap_m": 2.6500000000000057,
+   "pack_gap_m": 2.6499999999999915,
    "passed": true
   },
   "Survival_Reserve_2": {
@@ -372,8 +372,8 @@
  "isolation": {
   "required_m": 2.0,
   "separation_m": {
-   "Survival_Reserve_1": 177.0,
-   "Survival_Reserve_2": 180.85
+   "Survival_Reserve_1": 221.5,
+   "Survival_Reserve_2": 225.34999999999997
   },
   "passed": true
  },
@@ -381,7 +381,7 @@
   {
    "name": "IF_RIDE_THROUGH_POWER_BUS_A",
    "at": [
-    -79.0,
+    -101.25,
     -2.1,
     0.0
    ],
@@ -390,7 +390,7 @@
   {
    "name": "IF_RIDE_THROUGH_POWER_BUS_B",
    "at": [
-    -79.0,
+    -101.25,
     2.1,
     0.0
    ],
@@ -399,7 +399,7 @@
   {
    "name": "IF_RIDE_THROUGH_ROTOR_TRANSFER_1",
    "at": [
-    75.04936247723134,
+    97.29936247723134,
     0.0,
     0.0
    ],
@@ -408,7 +408,7 @@
   {
    "name": "IF_RIDE_THROUGH_ROTOR_TRANSFER_2",
    "at": [
-    81.04936247723134,
+    103.29936247723134,
     0.0,
     0.0
    ],
@@ -417,7 +417,7 @@
   {
    "name": "IF_RIDE_THROUGH_EYE_MOUNT",
    "at": [
-    119.4,
+    141.65,
     0.0,
     0.0
    ],
@@ -426,7 +426,7 @@
   {
    "name": "IF_RIDE_THROUGH_REACTOR_MOUNT",
    "at": [
-    -96.0,
+    -118.25,
     0.0,
     0.0
    ],
@@ -435,7 +435,7 @@
   {
    "name": "IF_RIDE_THROUGH_CREW_REFUGE",
    "at": [
-    85.54936247723134,
+    107.79936247723134,
     0.0,
     0.0
    ],

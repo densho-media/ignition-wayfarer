@@ -48,8 +48,8 @@
    ],
    "inner_parked_leaf_min_radius_m": 0.8400000000000034,
    "fixture_min_radius_m": {
-    "Dock_Primary_Outer_Hatch_Frame": 0.7999999999999968,
-    "Dock_Primary_Inner_Hatch_Frame": 0.7999999999999968,
+    "Dock_Primary_Outer_Hatch_Frame": 0.799999999999999,
+    "Dock_Primary_Inner_Hatch_Frame": 0.7999999999999992,
     "Dock_Primary_Handrail_1": 1.2125000000000001,
     "Dock_Primary_Handrail_1_Bracket_1": 1.2475,
     "Dock_Primary_Handrail_1_Bracket_2": 1.2474999999999996,
@@ -58,8 +58,8 @@
     "Dock_Primary_Handrail_2_Bracket_1": 1.2474999999999998,
     "Dock_Primary_Handrail_2_Bracket_2": 1.2475,
     "Dock_Primary_Handrail_2_Bracket_3": 1.2475,
-    "Dock_Primary_Light_1": 1.2806248474865676,
-    "Dock_Primary_Light_2": 1.2806248474865676,
+    "Dock_Primary_Light_1": 1.2806248474865523,
+    "Dock_Primary_Light_2": 1.2806248474865525,
     "Dock_Primary_Node_Handrail_1": 1.2125,
     "Dock_Primary_Node_Handrail_1_Bracket_1": 1.2475,
     "Dock_Primary_Node_Handrail_1_Bracket_2": 1.2475000000000005,
@@ -68,13 +68,13 @@
     "Dock_Primary_Node_Handrail_2_Bracket_1": 1.2475,
     "Dock_Primary_Node_Handrail_2_Bracket_2": 1.2475,
     "Dock_Primary_Node_Handrail_2_Bracket_3": 1.2475,
-    "Dock_Primary_Node_Light_1": 1.2806248474865676,
-    "Dock_Primary_Node_Light_2": 1.2806248474865678,
+    "Dock_Primary_Node_Light_1": 1.2806248474865525,
+    "Dock_Primary_Node_Light_2": 1.2806248474865527,
     "Dock_Primary_Entry_Panel": 1.2453513560437477,
     "Dock_Primary_Node_Panel": 1.2453513560437475,
-    "Dock_Primary_Equalization_Valve_Outer": 1.0300498978540644,
-    "Dock_Primary_Equalization_Valve_Inner": 1.0300498978540644,
-    "Dock_Primary_Equalization_Valve_Inner_Node": 1.0300498978540644
+    "Dock_Primary_Equalization_Valve_Outer": 1.030049897854051,
+    "Dock_Primary_Equalization_Valve_Inner": 1.030049897854051,
+    "Dock_Primary_Equalization_Valve_Inner_Node": 1.030049897854051
    },
    "fixture_leaf_gap_m": {
     "Dock_Primary_Outer_Hatch_Frame": 2.249999999999999,
@@ -87,8 +87,8 @@
     "Dock_Primary_Handrail_2_Bracket_1": 0.537664766122896,
     "Dock_Primary_Handrail_2_Bracket_2": 0.4563935217173877,
     "Dock_Primary_Handrail_2_Bracket_3": 0.38546951183453837,
-    "Dock_Primary_Light_1": 0.4402035514090881,
-    "Dock_Primary_Light_2": 0.44020355140908846,
+    "Dock_Primary_Light_1": 0.4402035514090765,
+    "Dock_Primary_Light_2": 0.44020355140907685,
     "Dock_Primary_Node_Handrail_1": 0.36251393312964,
     "Dock_Primary_Node_Handrail_1_Bracket_1": 0.6863799848126246,
     "Dock_Primary_Node_Handrail_1_Bracket_2": 0.42761511356820886,
@@ -97,10 +97,10 @@
     "Dock_Primary_Node_Handrail_2_Bracket_1": 0.6863799848126249,
     "Dock_Primary_Node_Handrail_2_Bracket_2": 0.4276151135682085,
     "Dock_Primary_Node_Handrail_2_Bracket_3": 0.3854695118345383,
-    "Dock_Primary_Node_Light_1": 0.43496601027958254,
-    "Dock_Primary_Node_Light_2": 0.43496601027958237,
+    "Dock_Primary_Node_Light_1": 0.43496601027955945,
+    "Dock_Primary_Node_Light_2": 0.43496601027955917,
     "Dock_Primary_Entry_Panel": 0.49587883248460135,
-    "Dock_Primary_Node_Panel": 0.3029391923032535,
+    "Dock_Primary_Node_Panel": 0.30293919230325245,
     "Dock_Primary_Equalization_Valve_Outer": 0.19471725379211696,
     "Dock_Primary_Equalization_Valve_Inner": 0.22710383307265047,
     "Dock_Primary_Equalization_Valve_Inner_Node": 0.19471725379211702
@@ -123,7 +123,7 @@
     {
      "name": "CAM_HUM_ENTRY_PORT",
      "at": [
-      109.4,
+      131.65,
       -6.37511045350785,
       -1.708205697676637
      ],
@@ -133,7 +133,7 @@
     {
      "name": "CAM_HUM_ENTRY_EYE",
      "at": [
-      109.38064624835204,
+      131.63064624835204,
       -3.838386651872827,
       -1.7093147125149524
      ],
@@ -143,7 +143,7 @@
     {
      "name": "CAM_HUM_NODE",
      "at": [
-      109.4,
+      131.65,
       -3.4290366833261934,
       -0.918807610113949
      ],
@@ -153,7 +153,7 @@
     {
      "name": "CAM_HUM_TRUNK_EYE",
      "at": [
-      106.65,
+      128.89999999999998,
       -0.013312599682756748,
       -0.35877956280937556
      ],
@@ -163,7 +163,7 @@
     {
      "name": "CAM_HUM_VESTIBULE_PORT",
      "at": [
-      72.59936247723134,
+      94.84936247723134,
       -1.8369701987210297e-17,
       -0.3
      ],
@@ -173,7 +173,7 @@
     {
      "name": "CAM_HUM_VESTIBULE_EYE",
      "at": [
-      72.59936247723134,
+      94.84936247723134,
       -1.549554470416084,
       0.5931112401679209
      ],
@@ -183,7 +183,7 @@
     {
      "name": "CAM_HUM_SPOKE_TOP",
      "at": [
-      75.04936247723134,
+      97.29936247723134,
       0.9500000000000003,
       5.9
      ],
@@ -193,7 +193,7 @@
     {
      "name": "CAM_HUM_SPOKE_EYE",
      "at": [
-      75.04936247723134,
+      97.29936247723134,
       1.5900000000000005,
       9.282499999999999
      ],
@@ -203,7 +203,7 @@
     {
      "name": "CAM_HUM_LANDING_EYE",
      "at": [
-      75.04936247723134,
+      97.29936247723134,
       1.387947366142828,
       26.35
      ],
@@ -213,7 +213,7 @@
     {
      "name": "CAM_HUM_LANDING_AISLE",
      "at": [
-      75.04936247723134,
+      97.29936247723134,
       -0.2999999999999984,
       26.35
      ],
@@ -223,7 +223,7 @@
     {
      "name": "CAM_HUM_VESTIBULE_B_PORT",
      "at": [
-      78.94936247723135,
+      101.19936247723135,
       0.2598076211353316,
       0.1499999999999999
      ],
@@ -233,7 +233,7 @@
     {
      "name": "CAM_HUM_VESTIBULE_B_EYE",
      "at": [
-      78.94936247723135,
+      101.19936247723135,
       0.26112783395252903,
       -1.6385091560120317
      ],
@@ -243,7 +243,7 @@
     {
      "name": "CAM_HUM_SPOKE_B_BULKHEAD",
      "at": [
-      78.94936247723135,
+      101.19936247723135,
       -2.6413774815425413,
       -1.5249999999999984
      ],
@@ -253,7 +253,7 @@
     {
      "name": "CAM_HUM_REFUGE_PORT",
      "at": [
-      85.54936247723134,
+      107.79936247723134,
       -0.3,
       -0.0
      ],
@@ -263,7 +263,7 @@
     {
      "name": "CAM_HUM_REFUGE_EYE",
      "at": [
-      84.84936247723134,
+      107.09936247723134,
       1.011637506785933,
       -1.1320289549582823
      ],
@@ -273,7 +273,7 @@
     {
      "name": "CAM_HUM_REFUGE_APPROACH",
      "at": [
-      83.04936247723134,
+      105.29936247723134,
       0.0,
       0.0
      ],
@@ -283,7 +283,7 @@
     {
      "name": "CAM_HUM_TRUNK_SHAFT",
      "at": [
-      73.29936247723134,
+      95.54936247723134,
       -0.09058666578588206,
       0.3380740392011739
      ],
@@ -293,7 +293,7 @@
     {
      "name": "CAM_HUM_TRUNK_CLIMB_EYE",
      "at": [
-      85.56686247723134,
+      107.81686247723134,
       0.11388037984510893,
       -0.4250073635671901
      ],
@@ -303,7 +303,7 @@
     {
      "name": "CAM_HUM_THRUST_ELBOW",
      "at": [
-      72.59936247723134,
+      94.84936247723134,
       1.729813603795636e-16,
       2.8249999999999993
      ],
@@ -313,7 +313,7 @@
     {
      "name": "CAM_HUM_THRUST_STEP",
      "at": [
-      74.99936247723134,
+      97.24936247723134,
       -0.39999999999999836,
       27.4
      ],
@@ -323,7 +323,7 @@
     {
      "name": "CAM_IND_HABITAT",
      "at": [
-      74.44936247723135,
+      96.69936247723135,
       0.3000000000000016,
       26.35
      ],
@@ -333,7 +333,7 @@
     {
      "name": "CAM_IND_GARDEN",
      "at": [
-      74.44936247723135,
+      96.69936247723135,
       22.669769389719953,
       -13.434807621135345
      ],
@@ -343,7 +343,7 @@
     {
      "name": "CAM_IND_BURN_READINESS",
      "at": [
-      76.29936247723134,
+      98.54936247723134,
       -22.96976938971996,
       -12.91519237886466
      ],
@@ -353,7 +353,7 @@
     {
      "name": "CAM_IND_SPECIALISTS",
      "at": [
-      74.34936247723134,
+      96.59936247723134,
       -22.96976938971996,
       -12.91519237886466
      ],
@@ -363,7 +363,7 @@
     {
      "name": "CAM_IND_BURN_STATION",
      "at": [
-      73.79936247723134,
+      96.04936247723134,
       -22.96976938971996,
       -12.91519237886466
      ],
@@ -376,39 +376,39 @@
  "trunk": {
   "clear_radius_m": 0.8,
   "cavity_x_m": [
-   71.64936247723134,
-   112.4
+   93.89936247723134,
+   134.64999999999998
   ],
   "clear_between_fixtures_m": 1.1012493144523212,
   "fixture_max_radius_m": 0.8009993757800316,
   "handrail_pieces": 5,
   "lights": 28,
   "fixture_opening_gap_m": {
-   "Crew_Connector_Airlock_EVA": 0.26372742600402627,
+   "Crew_Connector_Airlock_EVA": 0.2637274260040134,
    "Crew_Connector_Dock_Primary": 0.11628269474059427,
-   "Crew_Connector_Dock_Service": 0.25177841111808436,
+   "Crew_Connector_Dock_Service": 0.25177841111807014,
    "Crew_Refuge_Port": 0.039241228783351234,
    "Crew_Store_Port": 0.200006596088527,
    "Crew_Port_1_1": 0.19150836374014935,
    "Crew_Port_2_2": 0.03924122878335112
   },
   "mannequin": {
-   "feet_x_m": 108.30000000000001,
-   "head_x_m": 106.50000000000001,
+   "feet_x_m": 130.54999999999998,
+   "head_x_m": 128.74999999999997,
    "reach_m": {
     "Human_Trunk_Arm_Rail": 0.36250000000000004,
-    "Human_Trunk_Arm_Reach": 0.4716990566028329
+    "Human_Trunk_Arm_Reach": 0.47169905660284644
    },
    "body_max_radius_m": 0.55,
-   "rail_gap_m": 0.11182319359003143,
+   "rail_gap_m": 0.1118231935900274,
    "grip_on_rail_m": -5.898059818321144e-17
   },
   "thrust": {
    "ladder": {
     "angle_deg": 285.0,
     "x_m": [
-     71.64936247723134,
-     108.60594613038884
+     93.89936247723134,
+     130.85594613038884
     ],
     "height_m": 36.95658365315751,
     "rungs": 123,
@@ -417,31 +417,31 @@
     "stile_radius_m": 0.64,
     "rail_radius_m": 0.5704473661428265,
     "rail_x_m": [
-     71.84936247723134,
-     108.60594613038884
+     94.09936247723134,
+     130.85594613038884
     ]
    },
    "ports": {
     "Crew_Connector_Airlock_EVA": {
-     "sill_x_m": 111.39999999999999,
-     "sill_above_floor_m": 39.750637522768656,
+     "sill_x_m": 133.65,
+     "sill_above_floor_m": 39.75063752276867,
      "served": false
     },
     "Crew_Connector_Dock_Primary": {
-     "sill_x_m": 108.60000000000001,
-     "sill_above_floor_m": 36.95063752276867,
+     "sill_x_m": 130.85,
+     "sill_above_floor_m": 36.95063752276866,
      "served": true,
-     "sill_above_rung_m": 0.10063752276867888,
+     "sill_above_rung_m": 0.10063752276866467,
      "near_stile_gap_m": 0.18256077207560711,
      "rail_from_mouth_edge_m": 0.20955263385717346
     },
     "Crew_Connector_Dock_Service": {
-     "sill_x_m": 108.95,
-     "sill_above_floor_m": 37.30063752276867,
+     "sill_x_m": 131.20000000000002,
+     "sill_above_floor_m": 37.30063752276868,
      "served": false
     },
     "Crew_Refuge_Port": {
-     "sill_x_m": 85.09936247723134,
+     "sill_x_m": 107.34936247723134,
      "sill_above_floor_m": 13.450000000000003,
      "served": true,
      "sill_above_rung_m": 0.0,
@@ -449,7 +449,7 @@
      "rail_from_mouth_edge_m": 0.5036300992084313
     },
     "Crew_Store_Port": {
-     "sill_x_m": 87.64936247723134,
+     "sill_x_m": 109.89936247723134,
      "sill_above_floor_m": 16.0,
      "served": true,
      "sill_above_rung_m": 0.15000000000000568,
@@ -457,7 +457,7 @@
      "rail_from_mouth_edge_m": 0.8408533644529276
     },
     "Crew_Port_1_1": {
-     "sill_x_m": 71.79936247723134,
+     "sill_x_m": 94.04936247723134,
      "sill_above_floor_m": 0.15000000000000568,
      "served": true,
      "sill_above_rung_m": 0.15000000000000568,
@@ -465,7 +465,7 @@
      "rail_from_mouth_edge_m": 0.8339215241467762
     },
     "Crew_Port_2_2": {
-     "sill_x_m": 78.49936247723134,
+     "sill_x_m": 100.74936247723134,
      "sill_above_floor_m": 6.8500000000000085,
      "served": true,
      "sill_above_rung_m": 1.4210854715202004e-14,
@@ -594,8 +594,8 @@
    "steep_leg_deg": 30.0,
    "sector_hatch_sill_above_aft_bulkhead_m": 0.95,
    "climber": {
-    "feet_x_m": 83.91686247723133,
-    "rung_x_m": 83.89936247723134,
+    "feet_x_m": 106.16686247723133,
+    "rung_x_m": 106.14936247723134,
     "reach_m": {
      "Human_Trunk_Climber_Arm_1": 0.38488166542090374,
      "Human_Trunk_Climber_Arm_2": 0.38488166542090374
@@ -715,8 +715,8 @@
  "vestibule": {
   "rotor": 1,
   "x_m": [
-   71.44936247723135,
-   73.74936247723134
+   93.69936247723135,
+   95.99936247723134
   ],
   "chamber_u_m": [
    -3.4000000000000004,
@@ -796,8 +796,8 @@
  "vestibule_B": {
   "rotor": 2,
   "x_m": [
-   78.14936247723134,
-   79.74936247723134
+   100.39936247723134,
+   101.99936247723134
   ],
   "chamber_u_m": [
    -2.7,
@@ -1380,7 +1380,7 @@
  },
  "refuge": {
   "port": {
-   "x_m": 85.54936247723134,
+   "x_m": 107.79936247723134,
    "angle_deg": 0.0,
    "clear_m": 0.9,
    "length_m": 0.24999999999999978,
@@ -1389,8 +1389,8 @@
   },
   "cavity": {
    "x_m": [
-    84.34936247723134,
-    86.74936247723134
+    106.59936247723134,
+    108.99936247723134
    ],
    "radii_m": [
     1.0999999999999999,
@@ -1531,7 +1531,7 @@
      "S004A"
     ],
     "point": [
-     109.4,
+     131.65,
      -4.781332840130889,
      -1.281154273257478
     ],
@@ -1548,7 +1548,7 @@
      "S004A"
     ],
     "point": [
-     85.54936247723134,
+     107.79936247723134,
      0.0,
      0.0
     ],
@@ -1565,7 +1565,7 @@
      "S004A"
     ],
     "point": [
-     72.59936247723134,
+     94.84936247723134,
      8.878689293818311e-17,
      1.45
     ],
@@ -1582,7 +1582,7 @@
      "S004A"
     ],
     "point": [
-     75.64936247723134,
+     97.89936247723134,
      1.7145055188062944e-15,
      28.0
     ],
@@ -1607,7 +1607,7 @@
      "S004C"
     ],
     "point": [
-     75.64936247723134,
+     97.89936247723134,
      24.248711305964274,
      -14.000000000000014
     ],
@@ -1631,7 +1631,7 @@
      "S004B"
     ],
     "point": [
-     76.29936247723134,
+     98.54936247723134,
      -24.248711305964285,
      -13.999999999999991
     ],
@@ -1655,7 +1655,7 @@
      "S004C"
     ],
     "point": [
-     74.34936247723134,
+     96.59936247723134,
      -24.248711305964285,
      -13.999999999999991
     ],
@@ -1680,7 +1680,7 @@
      "S004C"
     ],
     "point": [
-     73.79936247723134,
+     96.04936247723134,
      -24.248711305964285,
      -13.999999999999991
     ],

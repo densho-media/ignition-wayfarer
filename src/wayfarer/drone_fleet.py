@@ -153,7 +153,9 @@ def spine_route(s):
     st = next(q for q in table(s)['stations'] if q['id'] == 'DS-13'); c = classes(s)[st['cls']]; a = math.radians(st['deg'])
     g = s['survival']['crawler_rail_gauge_m']; so = s['survival']['crawler_rail_standoff_m']
     x0 = _x(s, st['rail_x'][0]); x1 = min(habitat_ring.centers(s))-habitat_ring.sweep_half(s)-table(s)['ring_keepout_margin_m']-s['survival']['crawler_rail_radius_m']
-    xs = [x0+(x1-x0)*k/60 for k in range(61)]; rails = []
+    # 60 even steps plus the hull profile's breakpoints (both sides), so the track follows a radius step instead of cutting its corner
+    brk = [p['x'] for p in hull_geometry.profile(s) if x0 < p['x'] < x1]
+    xs = sorted(set([x0+(x1-x0)*k/60 for k in range(61)]+[b+d for b in brk for d in (-0.05, 0.05)])); rails = []
     for side, dt in ((1, -g/2), (2, g/2)):
         pts = [crew_transfer.radial(x, hull_geometry.radius_at(s, x)+so, a+dt/(hull_geometry.radius_at(s, x)+so)) for x in xs]
         rails.append(dict(name=f'Drone_Rail_DS-13_{side}', sp='DS-13', role='spine utility crawler track (segmented, anchor-rated: rating OPEN)', shape='rod',

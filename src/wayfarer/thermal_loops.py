@@ -407,7 +407,9 @@ def _casing_span(s):
     rc = thermal_geometry.casing_radius(s)
     xs = [p['x'] for p in hull_geometry.profile(s) if math.isclose(p['r'], rc)]
     iv = hull_geometry.intervals(s)[0]
-    return max(min(xs), iv[1]), min(max(xs), iv[2])
+    # RAD-ZONE (2026-11-01): the radiating warm casing stays along the hot blades; the casing beside the LOW/WARM zone sections is wrapped
+    # in MLI (non-emitting), so a warm casing never irradiates the 300 K section.
+    return max(min(xs), iv[1]), min(max(xs), iv[2], layout.origin(s, 'RADIATOR_FRONT'))
 
 
 def _collar_span(s):
