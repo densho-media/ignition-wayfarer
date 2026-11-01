@@ -1,0 +1,232 @@
+{
+ "task": "first_ignition_render",
+ "approved": "2026-11-01T21:39Z (owner: \"squash everything onto main\")",
+ "brief": "2026-11-01T18:38Z, thread \"Render first engine ignition from outside\"",
+ "study_commit": "619b31b",
+ "study_restore": "git show 619b31b:work/first-ignition-render/<plume.py|make_review.py> (presentation study; no geometry or canon change)",
+ "outputs": "project folder review/first_ignition_2026-11-01/ (first_ignition_{wide,drive,shadow,full_power}.png, REVIEW_FIRST_IGNITION.blend)",
+ "notes": "# First ignition from outside (render study)\n\nOwner ask 2026-11-01 18:38Z: a render of the new ship while the engine starts, the first ignition, from outside. Presentation only:\nno geometry, parameter or canon change. Ship: main 90df1a9 (longitudinal tanks, 289.5 m) plus the Graded Thermal Blade\n(branch claude/project-thread-qlrsa7, b320e9d, owner review pending), the newest built ship.\n\n## Function\n\nShow what an outside observer would actually see when the D-\u00b3He drive comes up, at the B01 operating point, without the display-only\ndrive layers (the plasma tubes) and without glow added for looks (HSFP).\n\n## Fixed constraints (from the spec)\n\n- Effective exhaust velocity 19,201 km/s (0.064 c), peak thrust 21.77 MN, peak fusion power 261 TW (operating_point.burn).\n- Four magnetic nozzles N1-N4 at \u00b12.6 m, exit plane X -144.75 m, exit coil bore r 0.69 m (drive_manifold).\n- FIRST_IGNITION: rings stopped and locked, radiators in high-power rejection; hot blades 1800 K at \u03b5 0.90 at full power (WORKING).\n- Sun, exposure and light calibration from `[look.exterior]` (look.exterior: S = E\u00b7L/(Ev\u00b7Y)); Phase 4 exterior grammar (p4_hero).\n- The plume boundary and luminosity are OPEN (physics.plume_boundary); the startup ramp time is OPEN (S7, OD-009).\n\n## Light budget (plume.py, results/plume.json)\n\nStartup shown at 30 % of full power (6.5 MN, 0.34 kg/s, ~78 TW fusion). Full power for comparison.\n\n| Source | Startup 30 % | Full power | vs sunlit hull (startup / full) |\n| --- | --- | --- | --- |\n| Beam density at the exit | 1.8e18 m\u207b\u00b3 (3e-9 kg/m\u00b3) | 5.9e18 m\u207b\u00b3 | \u2014 |\n| Ion energy | ~1.9 MeV per nucleon | same | \u2014 |\n| Beam recombination, 100 m | 0.7 W visible | 7 W | invisible |\n| Beam bremsstrahlung, 100 m | 4 W (X-ray) | 49 W | invisible |\n| Balmer sheath (edge burn-out of the last neutral H) | 20 kW, e-fold 3.8 m | 6.6 kW, e-fold 1.1 m | 0.06 / 0.10 (crest, more edge-on) |\n| Nozzle refractory (quasi-steady) | 1554 K | 2100 K | 0.18 / 11 |\n| Hot blades (quasi-steady) | 1332 K, deep red | 1800 K, orange | 0.03 / 4.0 |\n\nReading: the exhaust beam is close to invisible. What you see at ignition is the nozzle hardware starting to glow, the blades beginning\nto glow red, and a faint pink-magenta sheath (H\u03b1 656 nm with H\u03b2/H\u03b3) a few metres long hugging each beam's edge while neutral hydrogen is\nstill leaving the nozzles. Against a sunlit hull the sheath is lost; against black space and on the night side it reads.\n\n## PROTOTYPE choices (brackets)\n\n- Startup fraction 30 % (the WF_DRIVE_STARTUP drive_active 0.3 step); neutral fraction 1 % at startup (0.1-3 %), 0.1 % at full power.\n- Neutral gas speed 3 km/s (2-5), edge density 1.5 % of the core (0.5-5 %), sheath half-width 0.3 m (0.1-0.6), beam half-angle 10\u00b0\n  (inside the 5/10/15/20\u00b0 study cones), S/XB 15 (10-20), \u27e8\u03c3v\u27e9ion 3e-14 m\u00b3/s, plume Te 50 eV (10-500).\n- Liner face 2100 K at full power (must sit above the 1800 K hot loop it feeds), \u03b5 0.35; temperatures follow power^\u00bc (quasi-steady; the\n  thermal transient is OPEN, so the startup frame may show the blades cooler still).\n- Sun direction per shot is a presentation choice (attitude and pointing OPEN). The night-side shot is +3 EV, as a camera exposing\n  for the shadow would be; the others are at the matched exposure.\n\n## Unknowns\n\nPlume boundary, neutral fraction and its time history, ramp duration, liner and blade transients, the stray light from the reactor\n(X-ray and neutron, not visible). None of these moves geometry.\n\n## Outputs\n\n`runs/renders/first_ignition_render/first_ignition_{wide,drive,shadow,full_power}.png` and `REVIEW_FIRST_IGNITION.blend` (packed, opens\non CAM_FI_WIDE in the startup pose; WORK_IGNITION_PLUME holds the sheath volumes, sun and cameras), copied to the project folder.\n",
+ "budget": {
+  "startup": {
+   "status": "PROTOTYPE study (work/first-ignition-render); luminosities are order-of-magnitude, plume boundary and luminosity OPEN",
+   "startup_fraction": 0.3,
+   "thrust_N": 6531228.900211907,
+   "mass_flow_kg_s": 0.3401474073041018,
+   "per_nozzle_kg_s": 0.08503685182602545,
+   "hydrogen_mass_share": 0.33932458360942064,
+   "fusion_power_W": 78379531254273.72,
+   "jet_power_W": 62703625003418.98,
+   "exhaust_velocity_m_s": 19201172.08,
+   "ion_energy_MeV_if_proton": 1.9244750117017724,
+   "exit_bore_radius_m": 0.69,
+   "exit_x": -144.75,
+   "exit_density_m3": 1.7702479261215237e+18,
+   "exit_mass_density_kg_m3": 2.9609520861893826e-09,
+   "glow": {
+    "neutral_fraction": 0.01,
+    "neutral_atoms_per_s": 6.900573791374513e+23,
+    "core_burnout_length_m": 0.05648926261932829,
+    "edge_density_m3": 2.6553718891822856e+16,
+    "emission_length_m": 3.765950841288552,
+    "sheath_width_m": 0.3,
+    "visible_power_W": 19891.592793753814,
+    "efficacy_lm_W": 59.85812,
+    "intensity_cd": 94750.77450597456,
+    "colour_linear": [
+     1.0,
+     0.11298882681564246,
+     0.43072625698324024
+    ],
+    "colour_Y": 0.3245080446927375,
+    "j0_cd_m3": 1392.7040853555686,
+    "radiance_side_cd_m2": 1481.1022315561931,
+    "side_vs_sunlit_hull": 0.057701139507346046,
+    "cycles_volume_strength_per_m": 0.10058765116725521
+   },
+   "beam": {
+    "half_angle_deg": 10.0,
+    "recombination_visible_W_100m": 0.6689694252752527,
+    "bremsstrahlung_W_100m": 4.44125255978573,
+    "note": "fully ionised, collisionless, ~2 MeV per nucleon: no visible column at any useful exposure"
+   },
+   "sunlit_hull_cd_m2": 25668.50922186088,
+   "liner": {
+    "kelvin": 1554.2,
+    "emissivity": 0.35,
+    "color": [
+     1.0,
+     0.1614,
+     0.0
+    ],
+    "luminance_cd_m2": 4660.677757176055,
+    "vs_sunlit_hull": 0.18157181302943512,
+    "cycles_strength": 0.33299863639998295
+   },
+   "blade": {
+    "kelvin": 1332.1,
+    "emissivity": 0.9,
+    "color": [
+     1.0,
+     0.1181,
+     0.0
+    ],
+    "luminance_cd_m2": 884.3914247969914,
+    "vs_sunlit_hull": 0.0344543353551592,
+    "cycles_strength": 0.06977569099556179
+   },
+   "blade_full": {
+    "kelvin": 1800.0,
+    "emissivity": 0.9,
+    "color": [
+     1.0,
+     0.21,
+     0.0
+    ],
+    "luminance_cd_m2": 103803.82333255821,
+    "vs_sunlit_hull": 4.044014493999226,
+    "cycles_strength": 6.70605225406523
+   }
+  },
+  "full_power": {
+   "status": "PROTOTYPE study (work/first-ignition-render); luminosities are order-of-magnitude, plume boundary and luminosity OPEN",
+   "startup_fraction": 1.0,
+   "thrust_N": 21770763.000706356,
+   "mass_flow_kg_s": 1.1338246910136727,
+   "per_nozzle_kg_s": 0.28345617275341817,
+   "hydrogen_mass_share": 0.33932458360942064,
+   "fusion_power_W": 261265104180912.4,
+   "jet_power_W": 209012083344729.94,
+   "exhaust_velocity_m_s": 19201172.08,
+   "ion_energy_MeV_if_proton": 1.9244750117017724,
+   "exit_bore_radius_m": 0.69,
+   "exit_x": -144.75,
+   "exit_density_m3": 5.900826420405079e+18,
+   "exit_mass_density_kg_m3": 9.869840287297942e-09,
+   "glow": {
+    "neutral_fraction": 0.001,
+    "neutral_atoms_per_s": 2.300191263791504e+23,
+    "core_burnout_length_m": 0.016946778785798484,
+    "edge_density_m3": 8.851239630607618e+16,
+    "emission_length_m": 1.129785252386566,
+    "sheath_width_m": 0.3,
+    "visible_power_W": 6630.530931251271,
+    "efficacy_lm_W": 59.85812,
+    "intensity_cd": 31583.591501991523,
+    "colour_linear": [
+     1.0,
+     0.11298882681564246,
+     0.43072625698324024
+    ],
+    "colour_Y": 0.3245080446927375,
+    "j0_cd_m3": 2354.6776636203117,
+    "radiance_side_cd_m2": 2504.134495515015,
+    "side_vs_sunlit_hull": 0.09755667825782184,
+    "cycles_volume_strength_per_m": 0.1700659156026654
+   },
+   "beam": {
+    "half_angle_deg": 10.0,
+    "recombination_visible_W_100m": 7.432993614169461,
+    "bremsstrahlung_W_100m": 49.347250664285966,
+    "note": "fully ionised, collisionless, ~2 MeV per nucleon: no visible column at any useful exposure"
+   },
+   "sunlit_hull_cd_m2": 25668.50922186088,
+   "liner": {
+    "kelvin": 2100.0,
+    "emissivity": 0.35,
+    "color": [
+     1.0,
+     0.2693,
+     0.011
+    ],
+    "luminance_cd_m2": 289122.95331317117,
+    "vs_sunlit_hull": 11.263722050010458,
+    "cycles_strength": 16.69054173201792
+   },
+   "blade": {
+    "kelvin": 1800.0,
+    "emissivity": 0.9,
+    "color": [
+     1.0,
+     0.21,
+     0.0
+    ],
+    "luminance_cd_m2": 103803.82333255821,
+    "vs_sunlit_hull": 4.044014493999226,
+    "cycles_strength": 6.70605225406523
+   },
+   "blade_full": {
+    "kelvin": 1800.0,
+    "emissivity": 0.9,
+    "color": [
+     1.0,
+     0.21,
+     0.0
+    ],
+    "luminance_cd_m2": 103803.82333255821,
+    "vs_sunlit_hull": 4.044014493999226,
+    "cycles_strength": 6.70605225406523
+   }
+  }
+ },
+ "shots": {
+  "budget": "work/first-ignition-render/results/plume.json",
+  "shots": {
+   "wide": {
+    "case": "startup",
+    "sun": [
+     70.0,
+     -120.0
+    ],
+    "ev": -0.5,
+    "lens": 35.0,
+    "camera": [
+     -206.44,
+     -339.41,
+     -101.82
+    ]
+   },
+   "drive": {
+    "case": "startup",
+    "sun": [
+     70.0,
+     -120.0
+    ],
+    "ev": -0.5,
+    "lens": 40.0,
+    "camera": [
+     -232.65,
+     -49.44,
+     -25.17
+    ]
+   },
+   "shadow": {
+    "case": "startup",
+    "sun": [
+     95.0,
+     60.0
+    ],
+    "ev": 1.5,
+    "lens": 35.0,
+    "camera": [
+     -208.5,
+     -126.24,
+     -84.16
+    ]
+   },
+   "full_power": {
+    "case": "full_power",
+    "sun": [
+     70.0,
+     -120.0
+    ],
+    "ev": -2.5,
+    "lens": 35.0,
+    "camera": [
+     -206.44,
+     -339.41,
+     -101.82
+    ]
+   }
+  }
+ }
+}

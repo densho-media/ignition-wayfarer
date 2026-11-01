@@ -2171,32 +2171,43 @@ known = false
 canon_status = "OPEN"
 source_ref = "thermal_open"
 
-# RAD-ZONE (owner brief 2026-11-01, Claude under the owner's delegation; radiator_zones.py). The aft radiator district in three thermally
-# separate circuits, front to aft: LOW (stationary low-temperature loads: propellant-bank cryocoolers and stationary avionics), WARM
-# (warm-loop machinery base load, the owner's 5 MW example) and the unchanged 1800 K drive blade. Each section is its own blade per plane
-# with its own trunks and isolation valves; a non-emitting break and a two-layer radiation baffle annulus separate neighbours so a cooler
-# section never sees a hotter one. Lengths are DERIVED from load, temperature, emissivity and view factor (radiator_zones.sections).
-# LOW load: cryocooler rejection of the forward tank farm (TANK-AXIAL; fuel_loads.heat, the redesign-layout study's stage model: ~0.55 MW at a 20 K shield stage
-# of 60 W/W and a 3 K helium-3 stage of 1,500 W/W, heat leak 0.15 / 0.01 W/m2, +50 % for supports and penetrations) plus 0.3 MW of
-# stationary avionics, rounded to 1.0 MW. Every value PROTOTYPE.
+# RAD-ZONE, Graded Thermal Blade (owner briefs 2026-11-01, Claude under the owner's delegation; radiator_zones.py). The aft radiator
+# district in three thermally separate circuits sharing one blade structure per plane, front to aft: LOW (stationary low-temperature
+# loads: tank-farm cryocoolers and stationary avionics), WARM (warm-loop machinery base load, the owner's 5 MW example), one V-groove
+# thermal bulkhead, and the unchanged 1800 K drive blade. Each section has its own trunks and isolation valves; the bulkhead stops every
+# line of sight from the hot blades to the cooler sections, the rings and the tank farm. The district keeps its 44.5 m.
+# LOW load: cryocooler rejection of the forward tank farm (TANK-AXIAL; fuel_loads.cooling, ~0.40 MW) plus 0.3 MW of stationary avionics,
+# rounded to 1.0 MW. Every value PROTOTYPE.
 [radiators.zones]
 status = "PROTOTYPE"
 canon_status = "WORKING"
 source_ref = "radiator_zoning"
-emissivity = 0.90
-space_view_factor = 0.85            # below the hot blades' 0.90: the sections also see the aft bank and the baffles
-baffle_backload_fraction = 0.10     # leak through the two-layer baffle and residual neighbour views (study: radiator_zone_study)
-length_step_m = 0.5
-break_m = 2.0                       # open, non-emitting gap: no sheet and no coolant crosses it
-baffle_layers = 2
-baffle_layer_gap_m = 0.30
-baffle_emissivity = 0.08            # polished both faces
-baffle_casing_gap_m = 0.10         # crawler and EVA passage through a gate in each baffle, open only in the coast (blades dark)
-baffle_thickness_m = 0.04
+design = "Graded Thermal Blade (GTB-2026-11-01): one V-groove thermal bulkhead at the hot blade front, WARM and LOW sheets in the three blade planes"
+coating = "white ceramic (ZnO / potassium silicate family, AZ-93 / Z-93 as on the ISS radiators): alpha_solar 0.15 (0.30 end of life), eps_IR 0.91"
+emissivity = 0.91
+root_strip_m = 0.5                  # zone root strip (no 1800 K root transition here); the sheet runs r 7.0-37 m
+joint_m = 0.5                       # WARM/LOW expansion joint: open, non-emitting, no sheet or coolant crosses it
+min_margin = 0.20                   # design margin at maximum drive, beginning of life; end of life + 10 % cells isolated stays >= load
+evidence = "references/evidence/graded_thermal_blade.json (band-spectral Monte Carlo, multiple diffuse/specular bounces, solved bulkhead layer temperatures)"
+# net_factor: net rejection / (both faces x eps sigma T^4 x planform) at maximum drive, from the study at these lengths.
 sections = [
-  { id = "LOW", T_K = 300.0, load_W = 1.0e6, circuit = "low-temperature (cryocooler and avionics rejection)" },
-  { id = "WARM", T_K = 440.0, load_W = 5.0e6, circuit = "warm machinery base load (dedicated, all modes)" },
+  { id = "LOW", T_K = 300.0, load_W = 1.0e6, length_m = 20.0, net_factor = 0.836, circuit = "low-temperature (cryocooler and avionics rejection)" },
+  { id = "WARM", T_K = 440.0, load_W = 5.0e6, length_m = 22.5, net_factor = 0.899, circuit = "warm machinery base load (dedicated, all modes)" },
 ]
+
+# Thermal bulkhead: three specular sheets from the casing to r 37 m at the hot blade front, aft to front. offset_m from the blade front
+# at the inner edge; slope_deg leans a sheet forward with radius (V-groove: the gaps open to deep space at the rim). Study layer
+# temperatures at maximum drive (beginning / end of life): about 1200 / 1220 K, 800 / 870 K, 490 / 570 K.
+[radiators.zones.bulkhead]
+clearance_m = 0.4                   # last layer to the WARM sheet, along X
+casing_gap_m = 0.10                 # crawler and EVA gate through every layer at the casing, open only in the coast (blades dark)
+display_thickness_m = 0.02
+layers = [
+  { offset_m = 0.5, slope_deg = 0.0, emissivity = 0.12, areal_kg_m2 = 0.60, material = "polished Mo / Nb-alloy foil gores on a rib grid (about 1200 K)" },
+  { offset_m = 0.8, slope_deg = 5.0, emissivity = 0.08, areal_kg_m2 = 0.35, material = "polished Ti or superalloy foil gores (about 800 K)" },
+  { offset_m = 1.1, slope_deg = 10.0, emissivity = 0.05, areal_kg_m2 = 0.35, material = "gold or silver film on Ti foil gores (about 500 K)" },
+]
+frame = { spoke_kg_m = 5.0, rim_kg_m = 3.0 }
 
 # AFT-011 stage A1: three physical heat-rejection regimes (40!A60:A66, Q36). Temperatures and areas of the hot regime are referenced, never repeated.
 [thermal.loops]

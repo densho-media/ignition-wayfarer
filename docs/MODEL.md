@@ -96,7 +96,7 @@ are not modeled; the ring sectors carry only rough PROTOTYPE interior blocking.
   is 301.5 m overall (289.5 m body + 12 m, Q2). The full-return propellant (pass 7) made the
   body 20 m longer than the earlier 225 m and raised the envelope's top from 240 to 260 m
   (S&E 15 OWN-B01-FULL-RETURN-2026-10-31); since TANK-AXIAL (2026-11-01) all of it sits in
-  thirteen axial vessels in the same forward zone. The LOW and WARM radiator sections (RAD-ZONE, owner pick 2026-11-01) add
+  thirteen axial vessels in the same forward zone. The LOW and WARM radiator sections and the thermal bulkhead (RAD-ZONE, Graded Thermal Blade) add
   44.5 m between the rings and the hot blades, so the 1800 K blades stand 44.5 m further from the rings and the tank farm.
 - **Forward defense:** `WF_FORWARD_SHIELD` holds the fixed 90 m conical shield (flat hub to r 7.4 m at X 122.5 m, then a cone sweeping aft by the ~3 m crown depth to X 119.5 m at r 45 m) on a conical truss, one full-diameter sacrificial disruptor layer 2.0 m ahead of it, the four EYE facets recessed in protected wells in the flat hub, the Dust Lance, an elongated display-only diversion-field zone, damage/repair display cells and the concealed Aegis Dustbreak Crown (12 sector bays in the rim, shuttered in every preset). One normalized control, `FORWARD_DEFENSE_CTRL`, drives the field zone, damage, repair and Crown engagement. Rear construction (M4 slice 3, `forward_shield.rear_construction`, PROTOTYPE judgment): a gusset plate at every truss node in its spoke's plane, a dark rib on each Crown bay partition and one ochre service hatch per bay on the housing aft plate (the ring service-cover ochre), and (S04 slice 2, `brow_panel_joints`) the Brow's replaceable-panel joints as dark grooves on the skin's aft face: radial joints 10° either side of every spoke, splitting each truss bay into thirds, and hoop joints midway between the truss rings at r 11.2, 20, 30 and 38 m, broken round each spoke's forward chord. Every replaceable panel carries two ochre handling fixtures on its centre line (S04 2026-10-31, `brow_panel_fixtures`: a post and a target flange at a quarter and three quarters of each hoop band, off the truss rings, 0.30 m from every truss member; 216 in all) so the Brow crawler or the crew can lift a panel out and set a new one in; grip interface and loads OPEN. All of it stays inside the truss envelope (`rear_construction_screen`); joint, rib and hatch sizing and the carriage service path are OPEN.
 - **Structure and thermal:** a 12-node thrust ring and three longitudinal trussed
@@ -666,17 +666,42 @@ blades are dark, and drain-back warm channels in the blade panels (a separate ci
 50–80 MW bursts stay with load shedding and Heat Debt. The cold loop stays on each ring's usable faces: 0.15 MW in HIGH_POWER against the
 owner's 100 kW bound (+50 %), 1.38 MW in the coast. No geometry changes; the Q38 candidate panels keep no credited area.
 
-## Radiator zoning (RAD-ZONE)
+## Radiator zoning (RAD-ZONE): the Graded Thermal Blade
 
-**WORKING (owner pick 2026-11-01, ported from the layout-redesign study; S&E 15 row 242; every value PROTOTYPE).** `radiator_zones.py`
-(`[radiators.zones]`). Between the rings and the unchanged 1800 K hot blade, aft to front: a 2 m break, the WARM section (440 K, 5 MW
-machinery base load, 21 m), a 2 m break and the LOW section (300 K, 1 MW: the tank farm's cryocoolers and stationary avionics, 19.5 m),
-each its own plate in each blade plane with its own booms, trunk and valves (`Radiator_Zone_<id>_<k>`). Lengths derive from load /
-(2 faces × 24 m emitting height × 0.9 × σT⁴ × 0.85 view × 0.9 backload × 3 blades). A two-layer baffle annulus (`Radiator_Baffle_<id>`,
-ε 0.08, from 0.10 m off the casing to r 37 m) at each break stops the cooler plates seeing hotter ones. The radiating warm casing stays
-along the hot blades; the casing beside the zones is MLI-wrapped. The rings follow the zone front by the HAB-001 offset (3.9 m), so the
-hot blades now stand 44.5 m further from the rings and the tank farm; the bypass collar's aft frame and the trunks' hull drop sit in the
-slot between the LOW section and ring A. The zone sections' mass is not in the B01 budget (OPEN).
+**WORKING layout (owner pick 2026-11-01, S&E 15 row 242); Graded Thermal Blade PROTOTYPE (owner brief 2026-11-01, Claude under the
+owner's delegation; every value PROTOTYPE).** `radiator_zones.py` (`[radiators.zones]`). Between the rings and the unchanged 1800 K hot
+blade, aft to front: one V-groove thermal bulkhead, the WARM section (440 K, 5 MW machinery base load) and the LOW section (300 K, 1 MW:
+the tank farm's cryocoolers and stationary avionics). The district keeps its 44.5 m (X 48.9–93.4), so ring A and everything forward keep
+their stations. Each section is its own sheet in each blade plane with its own root booms, trunk and isolation valves
+(`Radiator_Zone_<id>_<k>`): a continuous blade outline, three separate circuits; nothing crosses the bulkhead or the 0.5 m WARM/LOW
+expansion joint. The sheets run r 7.0–37 m (a 0.5 m zone root strip; no 1800 K root transition is needed at these temperatures) and
+are white ceramic on both faces (ZnO/silicate family, AZ-93 as on the ISS radiators: ε 0.91, α_solar 0.15, 0.30 at end of life).
+WARM is 22.5 m along its root line; its aft edge follows the last bulkhead layer (17.0 m at the rim, 19.7 m mean); LOW is 20.0 m.
+
+The bulkhead (`Radiator_Bulkhead_Layer_1–3`, each with a segmented rim ring and three spokes along the blade planes) has three thin
+specular sheets from the casing (r 6.1 m) to r 37 m at 0.5, 0.8 and 1.1 m ahead of the hot blade front: the aft one flat (polished Mo or
+Nb alloy, ε 0.12), the others leaning forward with radius by 5° and 10° (polished Ti, ε 0.08; gold or silver on Ti, ε 0.05), so the gaps
+between them open to deep space at the rim and the heat they pick up leaves sideways (the V-groove principle of Planck's cryogenic
+shields). It stops every line of sight from the hot blades to the cooler sections, the rings and the tank farm. One crawler/EVA gate per
+layer at the casing opens only in the coast. First-order mass 9.0 t (sheets 0.60/0.35/0.35 kg/m², a 1.16 t frame per layer).
+
+Capacities come from a band-spectral Monte Carlo study (8 wavelength bands, multiple diffuse and specular bounces, solved layer
+temperatures; `references/evidence/graded_thermal_blade.json`) through a per-section net factor (WARM 0.899, LOW 0.836 of both faces ×
+εσT⁴ × planform). At maximum drive WARM rejects 6.17 MW (+23 %) and LOW 1.26 MW (+26 %); the layers run about 1200, 800 and 490 K. End of
+life (darkened coatings, layer ε 0.18/0.12/0.08): +15 % / +12 %; with 10 % of the cells isolated as well, +3 % / +1 %. Post-burn (blades
+1300 K) +27 % / +29 %, coast +28 % / +30 %. Docking in full sunlight at 1 AU costs LOW 16 % (33 % at end of life) of its capacity, which
+still covers the 0.7 MW docking load. A lost circuit (one of three planes) is covered by heat-pumping the shortfall into the hot loop (about
+5 MW of work for WARM, the F02 burn mode) or, in the coast, by the blades' drain-back warm channels. `check` requires a 20 % margin.
+
+The same study found the flat two-station baffles of the first RAD-ZONE build inadequate: their forward hot-side layer reached 917 K at
+ε 0.08 and put 3.7 MW into the WARM section beside it (net 2.4 MW for 5 MW). Without any shield the 1800 K blades put about 30 MW on ring A
+and 34 MW on the tank farm's aft face in a burn, so a full-diameter bulkhead at the hot front is needed for the forward ship whatever the
+cool sections do. Rejected: blocker-free gills (net-heated, 26–29 MW on rings and tanks), wedge reflectors only between the blades (5–7 MW
+left on rings and tanks), optical solar reflector coatings without a blocker (still net-heated), separate arrays elsewhere (no shadowed
+area), and directional hot-blade emission (about 20 % hot capacity lost). Ring A's aft face now receives 0.33 MW from the 300–440 K
+sheets (0.12 MW before) and the tank farm's aft caps about 0.38 MW (upper bound), both low-temperature radiation. The zone sections'
+mass (about 18 t of sheets at 5 kg/m², PROTOTYPE) is not in the B01 budget (OPEN); gore seams, layer support conduction, bulkhead dynamics
+and coating qualification are OPEN.
 
 ## Heat-loop screen
 
@@ -1211,7 +1236,11 @@ route clearance: the route sweep is unchanged.
     a sunlit grey hull and deep orange. The 0.125 m seams and the root band stay dark, and the
     blades light the hull. The exposure is set for the hot face.
   - **Exhaust:** the plume is not drawn (`physics.plume_boundary` and its luminosity are OPEN), and
-    the plasma inside the nozzles keeps its display colour without lighting anything.
+    the plasma inside the nozzles keeps its display colour without lighting anything. The first-ignition
+    light budget (`references/evidence/first_ignition_render.json`, PROTOTYPE) finds the ~1.9 MeV/nucleon
+    beam effectively invisible (under 10 W of visible light per 100 m); what shows is the nozzle
+    refractory and the hot blades as grey bodies and a faint Balmer sheath, a few metres long, where
+    the last neutral hydrogen burns out at the beam edge.
 
   The views follow the Art Style spacecraft shot (Spacecraft A14): the establishing three-quarter,
   the Brow, the drive and a blade, plus flat side and three-quarter silhouettes (A16). The Brow's

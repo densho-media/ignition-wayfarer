@@ -101,7 +101,7 @@ close-up, regression check, MODEL/TODO and Model Status update.
 - [ ] **S01 — Whole-body internal architecture (BODY-001). BUILT 2026-10-30 as PROTOTYPE (FUEL-SPLIT, WORKING), owner-accepted 2026-10-30.**
   TANK-AXIAL (owner brief 2026-11-01, approved 2026-11-01, S&E 15 OWN-TANK-AXIAL-2026-11-01): all propellant in thirteen axial vessels in the forward farm (X 109.25-137.85
   on the 289.5 m body), the body bay a dry store (docs/MODEL.md "Fuel storage"); the owner then moved every radiator aft of the rings
-  (RAD-ZONE LOW/WARM sections with baffled breaks, +44.5 m, Q38 panels removed; docs/MODEL.md "Radiator zoning"). **Open:** the hull penetrations, the cryocooler hardware (sized:
+  (RAD-ZONE LOW/WARM sections, +44.5 m, Q38 panels removed; since the Graded Thermal Blade one V-groove bulkhead instead of the baffles; docs/MODEL.md "Radiator zoning"). **Open:** the hull penetrations, the cryocooler hardware (sized:
   0.40 MW into the LOW section), the zone sections' mass in B01, MLI beyond first order, PMDs for the coast. Also from the owner's 2026-11-01 07:13Z
   brief: ±X RCS jets on the aft and rim pods and the functional viewport colours (docs/MODEL.md "Functional review colours").
   **Done when:** those are released and applied.
@@ -297,7 +297,7 @@ packet (Q_src, T_src; H2 mdot, p, T, phase, enthalpy in/out; field/plume/dose ke
   normal band uses 29-58 % of the blades); cold loop on each ring's usable faces (0.15 MW in HIGH_POWER, +50 % over the 100 kW bound).
   Left: the heat pumps, exchangers and drain-back hardware and their SP-52 packaging; the blade channel design; the drive's electric tap
   (210 MW at burnout, with F03); Heat Debt buffer for 50-80 MW bursts; the hot coolant choice. The Q38 candidate panels are removed (owner,
-  2026-11-01); warm and low-temperature rejection outside the burn is the RAD-ZONE sections aft of the rings. Keep all three loops separate.
+  2026-11-01); the RAD-ZONE sections aft of the rings reject the 5 MW warm base load and the 1 MW low-temperature load in every mode, burns included (Graded Thermal Blade). Keep all three loops separate.
 
 - [ ] **F03 — Integrate electrical, black-start and survival power. AFTER B02; F02 architecture set 2026-10-31 (drive tap 210 MW for the burn heat pumps).** Size/place owner-released A/B distribution,
   storage, survival reserve and drive-off generation; preserve category suballocations and failure domains.

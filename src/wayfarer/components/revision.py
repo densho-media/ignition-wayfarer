@@ -440,7 +440,7 @@ def thermal(c,s,assets):
             obj['engineering_status']='OPEN: boot material, sealing, MMOD and thermal function; the member slides free inside the sleeve'
     # AFT-005: thermal-state glow and cell-health markers over the fixed blades, driven by RADIATOR_HEALTH_CTRL (display only).
     radiator_health(c,s,instances)
-    # RAD-ZONE (owner pick 2026-11-01): LOW and WARM sections and their baffles ahead of the hot blade, aft of the rings.
+    # RAD-ZONE / Graded Thermal Blade (owner briefs 2026-11-01): the thermal bulkhead, WARM and LOW sections ahead of the hot blade.
     if 'zones' in s['radiators']:
         radiator_zones_geometry(c,s)
     # Q38: candidate warm panels flanking the bypass-collar truss in each blade plane (removed 2026-11-01: enabled = false).
@@ -457,33 +457,52 @@ def thermal(c,s,assets):
 
 
 def radiator_zones_geometry(c,s):
-    """RAD-ZONE (owner brief 2026-11-01): the LOW and WARM radiator sections ahead of the hot blade, one plate per blade plane with its own
-    root booms and feed/return trunk, and a two-layer radiation baffle annulus at each break (radiator_zones, PROTOTYPE)."""
-    z=s['radiators']['zones'];p=s['prototype'];th=p['radiator_thickness_m'];casing=__import__('thermal_geometry').casing_radius(s)
-    sheet={'LOW':(material('RadiatorZoneLowA',(.62,.78,.90)),material('RadiatorZoneLowB',(.56,.72,.86))),
-           'WARM':(material('RadiatorZoneWarmA',(.86,.52,.20)),material('RadiatorZoneWarmB',(.80,.46,.16)))}
-    metal=material('Structure',(.30,.40,.48));coolant=material('Coolant',(.15,.43,.51));baffle=material('RadiatorBaffle',(.82,.82,.80))
+    """Graded Thermal Blade (owner briefs 2026-11-01): the WARM and LOW sheets ahead of the hot blade, one plate per blade plane with its
+    own root booms and feed/return trunk, and one V-groove thermal bulkhead (three thin specular sheets, the forward two leaning forward
+    with radius) at the hot blade front, carried on spokes along the blade planes and a rim ring per layer (radiator_zones, PROTOTYPE).
+    The WARM aft edge follows the last layer (diagonal seam); the WARM/LOW joint is an open 0.5 m gap with no shield."""
+    z=s['radiators']['zones'];bh=z['bulkhead'];p=s['prototype'];th=p['radiator_thickness_m'];casing=__import__('thermal_geometry').casing_radius(s)
+    sheet={'LOW':(material('RadiatorZoneLowA',(.66,.84,.98)),material('RadiatorZoneLowB',(.60,.79,.95))),
+           'WARM':(material('RadiatorZoneWarmA',(.96,.56,.18)),material('RadiatorZoneWarmB',(.90,.50,.14)))}
+    metal=material('Structure',(.30,.40,.48));coolant=material('Coolant',(.15,.43,.51));strip=material('RadiatorZoneRootStrip',(.42,.44,.46))
+    layer_mat=[material('BulkheadHotLayer',(.62,.60,.58)),material('BulkheadMidLayer',(.74,.74,.72)),material('BulkheadColdLayer',(.86,.72,.36))]
     nx,nr=6,4
     for pl in radiator_zones.plates(s):
         a=pl['azimuth'];u=(0.0,math.cos(a),math.sin(a));n=(0.0,-math.sin(a),math.cos(a))
         P=lambda x,r,w:(x,r*u[1]+w*n[1],r*u[2]+w*n[2])
-        for i in range(nx):
-            x0=pl['x0']+(pl['x1']-pl['x0'])*i/nx;x1=pl['x0']+(pl['x1']-pl['x0'])*(i+1)/nx
-            for k in range(nr):
-                r0=pl['r0']+(pl['r1']-pl['r0'])*k/nr;r1=pl['r0']+(pl['r1']-pl['r0'])*(k+1)/nr
-                vs=[P(x,r,w) for x in (x0,x1) for r in (r0,r1) for w in (-th/2,th/2)]
+        r_c=radiator_zones.inner_radius_m(s)
+        xa=(lambda r:radiator_zones.warm_aft_x(s,r)) if pl['section']=='WARM' else (lambda r:pl['x0'])
+        for k in range(nr):
+            r0=pl['r0']+(pl['r1']-pl['r0'])*k/nr;r1=pl['r0']+(pl['r1']-pl['r0'])*(k+1)/nr
+            for i in range(nx):
+                f0=i/nx;f1=(i+1)/nx
+                X=lambda f,r:xa(r)+(pl['x1']-xa(r))*f
+                vs=[P(X(f,r),r,w) for f in (f0,f1) for r in (r0,r1) for w in (-th/2,th/2)]
                 fs=[(0,2,3,1),(4,5,7,6),(0,1,5,4),(2,6,7,3),(0,4,6,2),(1,3,7,5)]
                 obj=mesh(c,f"{pl['name']}_Cell_{i}_{k}",vs,fs,sheet[pl['section']][(i+k)%2],kind='radiator_zone_cell')
-                obj['radiator_section']=pl['section'];obj['temperature_K']=pl['T_K'];obj['circuit']=pl['circuit']
-                obj['thermal_zone']='ROOT_TRANSITION' if k==0 else pl['section']
-                obj['planform_m2']=(x1-x0)*(r1-r0);obj['source_ref']='radiator_zoning';obj['engineering_status']='PROTOTYPE (RAD-ZONE); panel design, coolant and emissivity OPEN'
-        for tag,x in (('Aft',pl['x0']+0.4),('Fwd',pl['x1']-0.4)):
-            line(c,f"{pl['name']}_Root_Boom_{tag}",[P(x,casing+0.02,0),P(x,pl['r1'],0)],0.16,metal,kind='radiator_zone_support')
-        trunk=line(c,f"{pl['name']}_Trunk",[P(pl['x0']+0.4,pl['r0']+0.6,th/2+0.12),P(pl['x1']-0.4,pl['r0']+0.6,th/2+0.12)],0.10,coolant,kind='radiator_zone_trunk')
-        trunk['circuit']=pl['circuit'];trunk['engineering_status']='own feed/return trunk and isolation valves; no coolant crosses the break (OPEN: sizing, joints)'
-    for b in radiator_zones.baffles(s):
-        for k in range(b['layers']):
-            obj=annulus(c,f"{b['name']}_Layer_{k+1}",b['x']+(k-(b['layers']-1)/2)*b['layer_gap_m'],z['baffle_thickness_m'],b['r1'],b['r0'],baffle)
-            obj['kind']='radiator_baffle';obj['emissivity']=b['emissivity'];obj['source_ref']='radiator_zoning'
-            obj['function']='radiation baffle at the thermal break: blocks the line of sight from the cooler section to every hotter one (crawler gate at the casing, open only in the coast)'
-            obj['engineering_status']='PROTOTYPE; material, support and gate mechanism OPEN'
+                obj['radiator_section']=pl['section'];obj['temperature_K']=pl['T_K'];obj['circuit']=pl['circuit'];obj['coating']=pl['coating']
+                obj['thermal_zone']=pl['section']
+                obj['planform_m2']=0.5*((X(f1,r0)-X(f0,r0))+(X(f1,r1)-X(f0,r1)))*(r1-r0);obj['source_ref']='radiator_zoning'
+                obj['engineering_status']='PROTOTYPE (Graded Thermal Blade); panel design, coolant and coating qualification OPEN'
+        # root strip (0.5 m, non-emitting structure between the root boom line and the sheet)
+        vs=[P(x,r,w) for x in (xa(pl['r_root']),pl['x1']) for r in (pl['r_root'],pl['r0']) for w in (-th/2,th/2)]
+        obj=mesh(c,f"{pl['name']}_Root_Strip",vs,[(0,2,3,1),(4,5,7,6),(0,1,5,4),(2,6,7,3),(0,4,6,2),(1,3,7,5)],strip,kind='radiator_zone_support')
+        obj['function']='zone root strip: sheet carrier and trunk land, not emitting';obj['source_ref']='radiator_zoning'
+        for tag,(x0,x1) in (('Aft',(xa(casing)+0.4,xa(pl['r1'])+0.4)),('Fwd',(pl['x1']-0.4,pl['x1']-0.4))):
+            line(c,f"{pl['name']}_Root_Boom_{tag}",[P(x0,casing+0.02,0),P(x1,pl['r1'],0)],0.16,metal,kind='radiator_zone_support')
+        trunk=line(c,f"{pl['name']}_Trunk",[P(xa(pl['r0']+0.6)+0.4,pl['r0']+0.6,th/2+0.12),P(pl['x1']-0.4,pl['r0']+0.6,th/2+0.12)],0.10,coolant,kind='radiator_zone_trunk')
+        trunk['circuit']=pl['circuit'];trunk['engineering_status']='own feed/return trunk and isolation valves; no coolant crosses the bulkhead or the joint (OPEN: sizing, joints)'
+    # V-groove thermal bulkhead: one revolved sheet per layer, three spokes (along the blade planes) and a rim ring per layer
+    t=bh['display_thickness_m']
+    for L in radiator_zones.layers(s):
+        obj=loft(c,L['name'],[(L['x_inner']-t/2,L['r0']),(L['x_rim']-t/2,L['r1']),(L['x_rim']+t/2,L['r1']),(L['x_inner']+t/2,L['r0']),(L['x_inner']-t/2,L['r0'])],
+                 layer_mat[min(L['index']-1,2)],caps=False,segments=72,kind='radiator_bulkhead')
+        obj['emissivity']=L['emissivity'];obj['slope_deg']=L['slope_deg'];obj['material_note']=L['material'];obj['area_m2']=L['area_m2'];obj['source_ref']='radiator_zoning'
+        obj['function']='V-groove thermal bulkhead layer: blocks every line of sight from the 1800 K blades to the cooler sections, the rings and the tank farm; the forward-leaning layers vent to space at the rim'
+        obj['engineering_status']='PROTOTYPE; gore seams, tensioning, gate mechanism and material qualification OPEN'
+        rim=loft(c,f"{L['name']}_Rim",[(L['x_rim']-0.06,L['r1']+0.06),(L['x_rim']+0.06,L['r1']+0.06),(L['x_rim']+0.06,L['r1']-0.06),(L['x_rim']-0.06,L['r1']-0.06),(L['x_rim']-0.06,L['r1']+0.06)],
+                 metal,caps=False,segments=72,kind='radiator_bulkhead_frame')
+        rim['function']='rim tension ring of the bulkhead layer (segmented, sliding joints for thermal growth)'
+        for k in range(3):
+            a=math.radians(p['radiator_phase_deg']+120*k);u=(0.0,math.cos(a),math.sin(a))
+            line(c,f"{L['name']}_Spoke_{k+1}",[(L['x_inner'],L['r0']*u[1],L['r0']*u[2]),(L['x_rim'],L['r1']*u[1],L['r1']*u[2])],0.08,metal,kind='radiator_bulkhead_frame')

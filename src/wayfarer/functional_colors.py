@@ -50,10 +50,12 @@ def classify(asset, name, kind='', species='', section='', bank=''):
         return DETAIL_DEFAULT.get(d, 'HABITAT')
     if k in ('scale_reference', 'first_person_camera') or n.startswith(('WF_SIM', 'Human_', 'CAM_')):
         return None
-    # radiator sections and baffles
+    # radiator sections and the thermal bulkhead
     if n.startswith('Radiator_Zone_'):
+        if n.endswith('_Root_Strip') or '_Root_Boom_' in n:
+            return 'STRUCTURE'
         return 'LOW_RADIATOR' if '_LOW_' in n else 'WARM_RADIATOR'
-    if n.startswith('Radiator_Baffle_'):
+    if n.startswith('Radiator_Bulkhead_'):
         return 'STRUCTURE'
     # manoeuvring and momentum storage
     if n.startswith('Ext_RCS') or k == 'rcs_thruster' or n.startswith('Body_CMG'):

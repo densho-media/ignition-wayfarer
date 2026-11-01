@@ -1,0 +1,1972 @@
+{
+ "task": "graded_thermal_blade",
+ "approved": "2026-11-01T21:39Z (owner: \"squash everything onto main\")",
+ "brief": "2026-11-01T15:08Z, thread \"Replace radiator baffles with graded thermal blade\"",
+ "base": "90df1a9",
+ "study_commit": "b320e9d",
+ "study_restore": "git show b320e9d:work/graded-thermal-blade/<file> (radmc.py band-spectral Monte Carlo, ship.py, concepts.py, study.py)",
+ "baseline": "references/baseline_graded_thermal_blade",
+ "notes": "# Graded Thermal Blade (owner brief 2026-11-01, thread \"Replace radiator baffles with graded thermal blade\")\n\nBranch `claude/project-thread-qlrsa7` from main 90df1a9. Study code here: `radmc.py` (band-spectral Monte Carlo), `ship.py`\n(scene from the spec), `concepts.py` (A-D builders), `study.py` / `run_concept.py` (driver), `gill_run.py`, `hot_loss.py`;\nresults in `results/*.json`. Run: `python3 study.py <config>` from this folder (numpy, 4 processes, 2-4 min per config).\n\n## Function\n\nReject three heat grades aft of the rings without the 1800 K blades heating the cooler sections, the habitat rings or the tank farm,\nwith fewer and smaller separating structures than the RAD-ZONE baffles.\n\n## Fixed constraints\n\n- Three fixed blade planes at 30/150/270 deg, root r 6.5 m, outer r 37 m (shield shadow, 8 m margin), no fold, hinge or cant.\n- Hot blade 182.149 x 30.5 m at 1800 K, eps 0.90, unchanged; its front X 48.9 m. WARM 440 K / 5 MW, LOW 300 K / 1 MW (PROTOTYPE loads).\n- The district stays 44.5 m (X 48.9-93.4): ring A, the bypass collar, the tank farm and everything forward keep their stations.\n- Kirchhoff per wavelength: a coating's absorptance for a source equals its band-weighted emissivity at that source's spectrum.\n\n## Model (what the numbers include)\n\n- Planar triangles, two-sided groups, 8 wavelength bands (0-2.5-4.5-6-8-9.5-12-20-inf um) with Planck fractions per temperature.\n- Rays from each receiver; reciprocity gives absorbed power from every hotter group, including multiple diffuse and specular bounces.\n- Reflector sheets are adiabatic with their own spectral emissivity; their temperatures are solved (bisection, fixed point).\n- Casing and root bands are adiabatic re-radiators (MLI-wrapped, gray); rings (aft face and rims) and the tank farm (a black disc\n  r 6-34.5 m at its aft face, X 109.25 m, an upper bound) are cold receivers.\n- Limits: 20,000 rays per band per group (about +-1-2 % on section nets); no conduction through supports (sheets are thermally\n  floating; supports are short spokes, see below); the casing temperature is not solved; no sunlight in the Monte Carlo (docking is\n  analytic below); metals as gray specular (real polished metals absorb more at short wavelength: covered by the end-of-life case).\n- Check: the gray WARM-to-hot coupling of the open layout agrees with the existing `mutual_screen` (11.4 vs 12.0 kW/m2).\n\n## Findings\n\n1. **The existing baffles do not work as built.** The 0.10 back-load was an assumption. Solved: hot-side layer 1245 K, its forward\n   layer 917 K at eps 0.08 (3.2 kW/m2), right next to the WARM sheet: WARM absorbs 3.7 MW from it, net 2.36 MW for a 5 MW load\n   (-53 %). LOW passes (+25 %) behind its own baffle pair.\n2. **The baffles also do a job nobody listed:** without any blocker the hot blades put 30 MW on ring A and 34 MW on the tank-farm\n   aft face in a burn (gray cool sections net-heated 6-10 x). A full-diameter shield at the hot front is required for the forward\n   ship regardless of the cool sections. Wedge reflectors that only fill the blade-to-blade hull (B) leave 7 / 5 MW on rings / tanks.\n3. **WARM and LOW do not need a shield between them.** Same plane: zero view; across the wedge the 440 K sheet puts < 0.11 MW on LOW.\n4. **A V-groove bulkhead fixes the leak.** Three sheets (0 / 5 / 10 deg, forward-leaning) vent the heat between them radially to\n   space: layers 1204 / 805 / 493 K instead of 1265 / 1033 / 760 K for three flat layers. WARM interference falls from 62 % to ~8 %.\n5. **Spectral selectivity is real but not the lever here.** OSR (silvered fused silica) absorbs 0.18 of an 1800 K spectrum while\n   emitting 0.81 at 300 K / 0.74 at 440 K: 5x less hot pick-up than gray, still net-heated without a blocker (WARM -3.1 MW). With\n   the bulkhead the hot view is gone, so the higher-emissivity white ceramic (AZ-93 family, ISS radiators) wins; its 0.15 solar\n   absorptance is what matters (docking near the Sun).\n6. **Directional gills (A) fail**: beta 70 deg: WARM -13.3 MW, LOW -4.1 MW; beta 50: -3.1 / -0.36 MW; rings and tanks 26-29 MW. The\n   fins near the break must be almost transverse to hide from the blades, so their polished backs become hot-facing baffles that\n   are cooled by the warm loop, and they look forward onto the rings.\n7. **Separate arrays (D)**: Q38 found 746 m2 of usable shadowed area forward; the sections need about 3,570 m2 of planform, and the\n   forward ship still needs the bulkhead. No credible site.\n8. **Directional hot emission** (suppressing the blades' grazing emission, which is what reaches the forward ship at 60-85 deg) would\n   cost about 20 % of the hot blades' hemispherical emission; rejected (the hot blade is deliberately undersized).\n\n## Selected design (C*, \"Graded Thermal Blade\")\n\nHOT blade (unchanged) | one V-groove thermal bulkhead (offsets 0.5/0.8/1.1 m from the blade front, slopes 0/5/10 deg, eps 0.12 / 0.08\n/ 0.05: polished Mo or Nb-alloy, polished Ti or superalloy, gold or silver on Ti) | 0.4 m clearance | WARM 22.5 m (root line; aft edge\non the diagonal of the last layer, 17.0 m at the rim, 19.7 m mean) | 0.5 m expansion joint | LOW 20.0 m | ring A slot. White ceramic\non both sides of every zone sheet; zone root strip 0.5 m (no 1800 K root transition is needed at 440/300 K), sheets r 7.0-37 m.\n\n| Scenario | WARM net / margin | LOW net / margin | Bulkhead layers (K) |\n| --- | --- | --- | --- |\n| 1 Maximum drive (hot 1800 K), beginning of life | 6.17 MW / +23 % | 1.26 MW / +26 % | 1204 / 805 / 493 |\n| 2 Cruise, drive off (blades 440 K drain-back) | 6.38 / +28 % | 1.30 / +30 % | 296 / 212 / 270 |\n| 3 Post-burn cooling (blades 1300 K) | 6.34 / +27 % | 1.29 / +29 % | 871 / 583 / 377 |\n| 4 Docking, Sun at 1 AU on the sheets (analytic, BOL / EOL) | capacity -4 % / -7 % | capacity -16 % / -33 %; 1.09 / 0.78 MW for the 0.7 MW docking load | cold |\n| 5 Degraded: end-of-life coatings and layers | 5.73 / +15 % | 1.12 / +12 % | 1217 / 874 / 571 |\n| 5 Degraded: end of life and 10 % of cells isolated | 5.16 / +3 % | 1.01 / +1 % | |\n| 5 Degraded: one blade plane's circuit lost (2 of 3) | ~4.1 / -18 % | ~0.84 / -16 % | |\n\nDocking (scenario 4, analytic): the three planes present about 2 one-face areas to a Sun perpendicular to X, so the fraction of a\nsection's capacity lost is alpha_s x 1361 x 2 / (6 x eps sigma T^4): LOW 16 % (beginning of life) / 33 % (end of life), WARM 4 % / 7 %.\nIn docking the LOW load is the cryocoolers and avionics, 0.7 MW: coast capacity 1.30 MW x 0.84 = 1.09 MW (BOL), 1.16 x 0.67 = 0.78 MW\n(EOL) still covers it. The current gray 0.9 sheets would lose about 98 % of LOW in full sun.\n\nOne lost circuit: the shortfall goes into the hot loop by heat pump (the F02 burn mode): WARM 0.9 MW needs about 5 MW of work\n(half Carnot, 440 to 1800 K), 6 MW more in the hot loop against its 3.6 GW other-loads allowance; LOW 0.16 MW into WARM by 0.15 MW of\nwork. In the coast the hot blades' drain-back warm channels (51 MW) cover WARM.\n\nForward ship (maximum drive): ring A 0.33 MW (WARM 0.21, LOW 0.10, bulkhead 0.03) against 0.12 MW today; tank-farm aft disc 0.38 MW\n(0.13 today), an upper bound for a black disc. Both come from the 300-440 K sheets (no hot view): ring A's aft face, already excluded\nas a cold radiator in HIGH_POWER (thermal_loops), stays roughly neutral; the tank aft caps see about 100 W/m2 of 300-500 K\nradiation, a normal MLI outer boundary. Hot blades: 0.4 % of their emission comes back from the bulkhead, the same as the current\nbaffles; the hot face of the bulkhead absorbs 0.6 % (eps 0.12 vs 0.08), net -0.2 % +- 0.15 % to space versus today (hot_loss.json).\n\n## Mass, area (first order, PROTOTYPE areal masses)\n\n| | Current (2 stations x 2 flat discs) | Selected (1 V-groove station, 3 sheets) |\n| --- | --- | --- |\n| Shield sheets | 4 x 4,184 m2 = 16,736 m2 | 4,184 + 4,200 + 4,249 = 12,633 m2 (-25 %) |\n| Shield mass (sheets 0.60 / 0.35 kg/m2, frames 1.16 t per layer) | ~11.5 t | 8.95 t (-2.6 t) |\n| Zone sheets, planform | 3,706 m2 (incl. 3 m root bands) | 3,573 m2 + 64 m2 root strips |\n| Two-face emitting area | 6,682 m2 | 7,145 m2 (+7 %) |\n| Zone sheet mass at 5 kg/m2 planform | 18.5 t | 18.2 t |\n| District total | ~30 t | ~27 t (about -3 t, -10 %) |\n| Crawler/EVA gates | 2 stations x 2 layers | 1 station x 3 layers |\n| Net WARM / LOW at maximum drive | 2.36 / 1.25 MW (-53 % / +25 %) | 6.17 / 1.26 MW (+23 % / +26 %) |\n\n## Structure, expansion, maintenance (judgment)\n\n- Layer growth from 300 K: layer 1 (Mo, 5.5e-6/K, 1204 K) 0.15 m on its 31 m radius; layer 2 (Ti, 805 K) 0.15 m; layer 3 0.06 m.\n  Each layer is 36 overlapping gores (labyrinth overlap >= 0.2 m, no straight gap) on sliding clips; the rim ring is segmented.\n  The cone layers grow mostly in their own surface, so the V gaps (0.3 m at the casing) change by under 0.03 m.\n- The bulkhead hangs from the casing and the WARM root booms (cool side), never from the 1800 K blade spar; spokes run along the\n  three blade planes where the blades already cast an edge-on shadow. The gores carry no load but their own tension.\n- Penetrations: none for coolant (no circuit crosses). One crawler/EVA gate per layer at the casing, opened only in the coast.\n- Vibration, gore flutter during ignition transients, MMOD perforation (a hole in layer 1 is a local hot spot on layer 2): OPEN.\n\n## Unknowns / OPEN\n\nCoating qualification at the 440 K section (AZ-93 is flown near 300 K), polished-refractory emissivity at 1200 K over years, gore\nseams and their leak, layer support conduction, the sheets' structure and mass (B01), bulkhead dynamics. All PROTOTYPE.\n\n## Decisions\n\n- Selected C* in the existing 44.5 m. WARM/LOW baffle pair removed; HOT/WARM baffle pair replaced by the V-groove bulkhead.\n- Kept a full-diameter shield: required for the rings and the tank farm (finding 2), not only for the cool sections.\n- Coating white ceramic (not OSR): higher emissivity once the hot view is blocked; OSR stays the option if the WARM/LOW sections must\n  ever face the blades.\n",
+ "drive_rows_pending": "# Drive rows drafted for this change (not written: the cloud session's auto-mode classifier denied the Sheets append)\n\nAppend only; no existing requirement changes.\n\n## S&E 15_MODEL_INTERFACES, next free row (245), A:I\n\n- A: OWN-RAD-GTB-2026-11-01\n- B: Graded Thermal Blade: one V-groove thermal bulkhead replaces the RAD-ZONE baffle discs; WARM and LOW as one continuous blade\n- C: see NOTES.md \"Findings\" and \"Selected design\" (the attempted cell text summarises them: old baffles WARM -53 %; no shield 30 MW on ring A,\n  34 MW on the tank farm; rejected A gills, B wedges, OSR-only, D separate arrays, directional emission; selected 3 sheets 0/5/10 deg at\n  0.5/0.8/1.1 m, eps 0.12/0.08/0.05, WARM 22.5 m diagonal + 0.5 m joint + LOW 20 m, white ceramic 0.91, 44.5 m kept; WARM +23 %, LOW +26 %,\n  EOL +15/+12 %; bulkhead 9.0 t vs 11.5 t)\n- D: thermal architecture / L1 screen\n- E: WORKING (owner brief; analysis and sizing by Claude under the 2026-10-31 delegation) / geometry PROTOTYPE\n- F: Owner brief 2026-11-01 15:08Z; 15 rows 242, 244, 238; 40_THERMAL; WayFarer radiator_zones.py, work/graded-thermal-blade\n- G: Model builds Radiator_Bulkhead_Layer_1..3 and Radiator_Zone_WARM/LOW_1..3; Radiator_Baffle_* removed; hot blade unchanged.\n- H: Coating qualification at 440 K, refractory emissivity at 1200 K, gore seams, support conduction, dynamics/MMOD, zone sheet mass in B01 OPEN.\n- I: Supersedes the baffle design and its 0.10 back-load / 96 % figures in row 242; loads, temperatures and the 44.5 m district unchanged.\n\n## S&E 98_DECISION_LOG, next free rows (143, 144), A:H\n\n1. 2026-11-01 \u2014 Longitudinal tank farm and tied deck (TANK-AXIAL) | 13 axial vessels X 109.25-137.85, deck tied to the bypass collar,\n   radiators zoned aft of the rings, body 289.5 m | WORKING (owner-approved 2026-11-01) | | 15 OWN-TANK-AXIAL-2026-11-01 | 2026-11-01 |\n   Supersedes the split banks (row 140) | Q45 collar load split, cryocooler hardware, PMDs, FEA OPEN\n2. 2026-11-01 \u2014 Graded Thermal Blade | One V-groove bulkhead (3 sheets) replaces the 4 baffle discs; WARM/LOW continuous; old baffles\n   measured WARM -53 %, new WARM +23 % / LOW +26 % | WORKING (owner brief; analysis by Claude) / PROTOTYPE | | 15 OWN-RAD-GTB-2026-11-01 |\n   2026-11-01 | Owner review before squash | Coatings, gores, support conduction, dynamics OPEN\n\n## Model Status, Implementation row 45 (state of the area)\n\nReplace the superseded pw21o2 text with: TANK-AXIAL + RAD-ZONE + RCS + colours on main 90df1a9 (289.5 m); Graded Thermal Blade on\nclaude/project-thread-qlrsa7, owner review of REVIEW_GRADED_THERMAL_BLADE.blend; Godot runtime export pending (workstation).\n",
+ "results": {
+  "A_gill_50_3.0": {
+   "cfg": {
+    "beta": 50.0,
+    "pitch": 3.0
+   },
+   "span": {
+    "WARM": [
+     50.899362477231335,
+     71.89936247723134
+    ],
+    "LOW": [
+     73.89936247723134,
+     91.89936247723134
+    ]
+   },
+   "WARM": {
+    "emitted_MW": 4.7130891587522745,
+    "net_MW": -3.1154468020387185,
+    "absorbed_MW": 6.97405587418092,
+    "front_area": 2309.9999999999995
+   },
+   "LOW": {
+    "emitted_MW": 0.8730380633464493,
+    "net_MW": -0.3580946011085565,
+    "absorbed_MW": 1.0818675968774916,
+    "front_area": 1979.9999999999957
+   },
+   "RING_A": {
+    "HOT": 27.238,
+    "WARM": 0.118,
+    "LOW": 0.058
+   },
+   "TANKS": {
+    "HOT": 29.035,
+    "WARM": 0.14,
+    "LOW": 0.081
+   }
+  },
+  "A_gill_70_3.0": {
+   "cfg": {
+    "beta": 70.0,
+    "pitch": 3.0
+   },
+   "span": {
+    "WARM": [
+     50.899362477231335,
+     71.89936247723134
+    ],
+    "LOW": [
+     73.89936247723134,
+     91.89936247723134
+    ]
+   },
+   "WARM": {
+    "emitted_MW": 4.713089158752277,
+    "net_MW": -13.335483464292476,
+    "absorbed_MW": 16.965825346212196,
+    "front_area": 2310.0000000000005
+   },
+   "LOW": {
+    "emitted_MW": 0.8730380633464513,
+    "net_MW": -4.1459215732281205,
+    "absorbed_MW": 4.838147999531122,
+    "front_area": 1980.0000000000002
+   },
+   "RING_A": {
+    "HOT": 26.502,
+    "WARM": 0.14,
+    "LOW": 0.07
+   },
+   "TANKS": {
+    "HOT": 26.971,
+    "WARM": 0.145,
+    "LOW": 0.098
+   }
+  },
+  "B_wedge2_gray": {
+   "cfg": {
+    "lw": 21.0,
+    "ll": 19.5,
+    "gap": 2.0,
+    "gap2": 2.0,
+    "coat": "gray 0.90 diffuse (current zone value)",
+    "blocker": "wedge2"
+   },
+   "span": {
+    "WARM": [
+     50.899362477231335,
+     71.89936247723134
+    ],
+    "LOW": [
+     73.89936247723134,
+     93.39936247723134
+    ],
+    "total_front": 93.39936247723134
+   },
+   "sheets": {
+    "WEDGE_0": 1255.4,
+    "WEDGE_1": 892.8
+   },
+   "WARM": {
+    "area_m2": 3465,
+    "emitted_MW": 6.628,
+    "self_MW": 0.247,
+    "absorbed_MW": {
+     "LOW": 0.025,
+     "WEDGE_1": 1.2108
+    },
+    "net_MW": 5.145,
+    "load_MW": 5.0,
+    "margin": 0.029,
+    "interference": 0.194
+   },
+   "LOW": {
+    "area_m2": 3217,
+    "emitted_MW": 1.33,
+    "self_MW": 0.032,
+    "absorbed_MW": {
+     "WARM": 0.1128,
+     "WEDGE_1": 0.1659
+    },
+    "net_MW": 1.019,
+    "load_MW": 1.0,
+    "margin": 0.019,
+    "interference": 0.215
+   },
+   "RING_A": {
+    "HOT": 6.901,
+    "WARM": 0.166,
+    "LOW": 0.08,
+    "WEDGE_0": 0.011,
+    "WEDGE_1": 0.189
+   },
+   "RING_B": {
+    "HOT": 0.174,
+    "WARM": 0.016,
+    "LOW": 0.013,
+    "WEDGE_0": 0.002,
+    "WEDGE_1": 0.014
+   },
+   "TANKS": {
+    "HOT": 5.398,
+    "WARM": 0.165,
+    "LOW": 0.085,
+    "WEDGE_0": 0.157,
+    "WEDGE_1": 0.372
+   },
+   "WEDGE_0_absorbed_MW": 31.62,
+   "WEDGE_0_area_m2": 1730,
+   "WEDGE_1_absorbed_MW": 8.12,
+   "WEDGE_1_area_m2": 1730,
+   "seconds": 80
+  },
+  "C_annulus1_osr": {
+   "cfg": {
+    "lw": 21.0,
+    "ll": 19.5,
+    "gap": 2.0,
+    "gap2": 2.0,
+    "coat": "silvered fused-silica OSR (existing technology)",
+    "blocker": "annulus2"
+   },
+   "span": {
+    "WARM": [
+     50.899362477231335,
+     71.89936247723134
+    ],
+    "LOW": [
+     73.89936247723134,
+     93.39936247723134
+    ],
+    "total_front": 93.39936247723134
+   },
+   "sheets": {
+    "BAF0_0": 1244.4,
+    "BAF0_1": 914.2
+   },
+   "WARM": {
+    "area_m2": 3465,
+    "emitted_MW": 5.417,
+    "self_MW": 0.171,
+    "absorbed_MW": {
+     "LOW": 0.0189,
+     "BAF0_0": 0.0037,
+     "BAF0_1": 1.2378
+    },
+    "net_MW": 3.986,
+    "load_MW": 5.0,
+    "margin": -0.203,
+    "interference": 0.24
+   },
+   "LOW": {
+    "area_m2": 3217,
+    "emitted_MW": 1.194,
+    "self_MW": 0.026,
+    "absorbed_MW": {
+     "HOT": 0.0007,
+     "WARM": 0.0789,
+     "BAF0_1": 0.3293
+    },
+    "net_MW": 0.759,
+    "load_MW": 1.0,
+    "margin": -0.241,
+    "interference": 0.35
+   },
+   "RING_A": {
+    "WARM": 0.138,
+    "LOW": 0.074,
+    "BAF0_1": 0.628
+   },
+   "RING_B": {
+    "WARM": 0.012,
+    "LOW": 0.012,
+    "BAF0_1": 0.053
+   },
+   "TANKS": {
+    "WARM": 0.132,
+    "LOW": 0.078,
+    "BAF0_1": 1.14
+   },
+   "BAF0_0_absorbed_MW": 71.63,
+   "BAF0_0_area_m2": 4163,
+   "BAF0_1_absorbed_MW": 20.89,
+   "BAF0_1_area_m2": 4163,
+   "seconds": 93
+  },
+  "C_wedge2_osr": {
+   "cfg": {
+    "lw": 21.0,
+    "ll": 19.5,
+    "gap": 2.0,
+    "gap2": 2.0,
+    "coat": "silvered fused-silica OSR (existing technology)",
+    "blocker": "wedge2"
+   },
+   "span": {
+    "WARM": [
+     50.899362477231335,
+     71.89936247723134
+    ],
+    "LOW": [
+     73.89936247723134,
+     93.39936247723134
+    ],
+    "total_front": 93.39936247723134
+   },
+   "sheets": {
+    "WEDGE_0": 1255.4,
+    "WEDGE_1": 893.2
+   },
+   "WARM": {
+    "area_m2": 3465,
+    "emitted_MW": 5.417,
+    "self_MW": 0.174,
+    "absorbed_MW": {
+     "LOW": 0.0198,
+     "WEDGE_1": 0.608
+    },
+    "net_MW": 4.616,
+    "load_MW": 5.0,
+    "margin": -0.077,
+    "interference": 0.12
+   },
+   "LOW": {
+    "area_m2": 3217,
+    "emitted_MW": 1.194,
+    "self_MW": 0.026,
+    "absorbed_MW": {
+     "WARM": 0.0779,
+     "WEDGE_1": 0.083
+    },
+    "net_MW": 1.007,
+    "load_MW": 1.0,
+    "margin": 0.007,
+    "interference": 0.138
+   },
+   "RING_A": {
+    "HOT": 6.981,
+    "WARM": 0.137,
+    "LOW": 0.073,
+    "WEDGE_0": 0.01,
+    "WEDGE_1": 0.264
+   },
+   "RING_B": {
+    "HOT": 0.169,
+    "WARM": 0.013,
+    "LOW": 0.012,
+    "WEDGE_1": 0.018
+   },
+   "TANKS": {
+    "HOT": 5.497,
+    "WARM": 0.133,
+    "LOW": 0.076,
+    "WEDGE_0": 0.129,
+    "WEDGE_1": 0.459
+   },
+   "WEDGE_0_absorbed_MW": 31.62,
+   "WEDGE_0_area_m2": 1730,
+   "WEDGE_1_absorbed_MW": 8.15,
+   "WEDGE_1_area_m2": 1730,
+   "seconds": 77
+  },
+  "F3_gray": {
+   "cfg": {
+    "lw": 21.0,
+    "ll": 19.5,
+    "gap2": 0.5,
+    "coat": "gray 0.90 diffuse (current zone value)",
+    "layers": [
+     [
+      0.5,
+      0
+     ],
+     [
+      0.8,
+      0
+     ],
+     [
+      1.1,
+      0
+     ]
+    ],
+    "diagonal": false
+   },
+   "span": {
+    "WARM": [
+     50.49936247723134,
+     71.49936247723133
+    ],
+    "WARM_rim_start": 50.49936247723134,
+    "LOW": [
+     71.99936247723133,
+     91.49936247723133
+    ],
+    "total_front": 91.49936247723133
+   },
+   "sheets": {
+    "VG_0": 1264.9,
+    "VG_1": 1032.6,
+    "VG_2": 759.8
+   },
+   "WARM": {
+    "area_m2": 3465,
+    "emitted_MW": 6.628,
+    "self_MW": 0.244,
+    "absorbed_MW": {
+     "HOT": 0.0798,
+     "VG_0": 0.012,
+     "VG_1": 0.0004,
+     "VG_2": 1.2601,
+     "LOW": 0.0262
+    },
+    "net_MW": 5.005,
+    "load_MW": 5.0,
+    "margin": 0.001,
+    "interference": 0.216
+   },
+   "LOW": {
+    "area_m2": 3217,
+    "emitted_MW": 1.33,
+    "self_MW": 0.032,
+    "absorbed_MW": {
+     "VG_2": 0.355,
+     "WARM": 0.1165
+    },
+    "net_MW": 0.827,
+    "load_MW": 1.0,
+    "margin": -0.173,
+    "interference": 0.363
+   },
+   "RING_A": {
+    "VG_1": 0.001,
+    "VG_2": 0.223,
+    "WARM": 0.165,
+    "LOW": 0.075
+   },
+   "RING_B": {
+    "VG_2": 0.012,
+    "WARM": 0.015,
+    "LOW": 0.012
+   },
+   "TANKS": {
+    "VG_2": 0.448,
+    "WARM": 0.17,
+    "LOW": 0.076
+   },
+   "VG_0_absorbed_MW": 76.49,
+   "VG_0_area_m2": 4163,
+   "VG_1_absorbed_MW": 25.2,
+   "VG_1_area_m2": 4163,
+   "VG_2_absorbed_MW": 9.97,
+   "VG_2_area_m2": 4163,
+   "seconds": 264
+  },
+  "F_coast": {
+   "cfg": {
+    "lw": 22.5,
+    "ll": 20.0,
+    "gap2": 0.5,
+    "coat": "white ceramic AZ-93 family (ISS radiators)",
+    "layers": [
+     [
+      0.5,
+      0
+     ],
+     [
+      0.8,
+      5
+     ],
+     [
+      1.1,
+      10
+     ]
+    ],
+    "coats_b": [
+     {
+      "eps": [
+       0.12,
+       0.12,
+       0.12,
+       0.12,
+       0.12,
+       0.12,
+       0.12,
+       0.12
+      ],
+      "spec": true,
+      "note": "polished Mo/Nb-alloy layer at ~1200 K, 0.12"
+     },
+     {
+      "eps": [
+       0.08,
+       0.08,
+       0.08,
+       0.08,
+       0.08,
+       0.08,
+       0.08,
+       0.08
+      ],
+      "spec": true,
+      "note": "polished Ti/superalloy layer, 0.08"
+     },
+     {
+      "eps": [
+       0.05,
+       0.05,
+       0.05,
+       0.05,
+       0.05,
+       0.05,
+       0.05,
+       0.05
+      ],
+      "spec": true,
+      "note": "gold or silver film on Ti, 0.05 (below 700 K)"
+     }
+    ],
+    "root_strip": 0.5,
+    "clear": 0.4,
+    "hot_T": 440.0
+   },
+   "span": {
+    "WARM": [
+     50.558056759868954,
+     73.05805675986895
+    ],
+    "WARM_rim_start": 55.8478661811229,
+    "LOW": [
+     73.55805675986895,
+     93.55805675986895
+    ],
+    "total_front": 93.55805675986895
+   },
+   "sheets": {
+    "VG_0": 296.2,
+    "VG_1": 211.9,
+    "VG_2": 270.4
+   },
+   "WARM": {
+    "area_m2": 3574,
+    "emitted_MW": 6.749,
+    "self_MW": 0.315,
+    "absorbed_MW": {
+     "HOT": 0.0001,
+     "VG_2": 0.0164,
+     "LOW": 0.0341
+    },
+    "net_MW": 6.384,
+    "load_MW": 5.0,
+    "margin": 0.277,
+    "interference": 0.008
+   },
+   "LOW": {
+    "area_m2": 3600,
+    "emitted_MW": 1.501,
+    "self_MW": 0.044,
+    "absorbed_MW": {
+     "VG_2": 0.0048,
+     "WARM": 0.1502
+    },
+    "net_MW": 1.303,
+    "load_MW": 1.0,
+    "margin": 0.303,
+    "interference": 0.106
+   },
+   "RING_A": {
+    "VG_2": 0.003,
+    "WARM": 0.212,
+    "LOW": 0.095
+   },
+   "RING_B": {
+    "WARM": 0.019,
+    "LOW": 0.016
+   },
+   "TANKS": {
+    "VG_2": 0.005,
+    "WARM": 0.214,
+    "LOW": 0.109
+   },
+   "VG_0_absorbed_MW": 0.38,
+   "VG_0_area_m2": 4163,
+   "VG_1_absorbed_MW": 0.06,
+   "VG_1_area_m2": 4179,
+   "VG_2_absorbed_MW": 0.12,
+   "VG_2_area_m2": 4227,
+   "seconds": 165
+  },
+  "F_eol": {
+   "cfg": {
+    "lw": 22.5,
+    "ll": 20.0,
+    "gap2": 0.5,
+    "coat": "white ceramic end of life",
+    "layers": [
+     [
+      0.5,
+      0
+     ],
+     [
+      0.8,
+      5
+     ],
+     [
+      1.1,
+      10
+     ]
+    ],
+    "coats_b": [
+     {
+      "eps": [
+       0.18,
+       0.18,
+       0.18,
+       0.18,
+       0.18,
+       0.18,
+       0.18,
+       0.18
+      ],
+      "spec": true,
+      "note": "hot layer end of life 0.18"
+     },
+     {
+      "eps": [
+       0.12,
+       0.12,
+       0.12,
+       0.12,
+       0.12,
+       0.12,
+       0.12,
+       0.12
+      ],
+      "spec": true,
+      "note": "mid layer end of life 0.12"
+     },
+     {
+      "eps": [
+       0.08,
+       0.08,
+       0.08,
+       0.08,
+       0.08,
+       0.08,
+       0.08,
+       0.08
+      ],
+      "spec": true,
+      "note": "cold layer end of life 0.08"
+     }
+    ],
+    "root_strip": 0.5,
+    "clear": 0.4
+   },
+   "span": {
+    "WARM": [
+     50.558056759868954,
+     73.05805675986895
+    ],
+    "WARM_rim_start": 55.8478661811229,
+    "LOW": [
+     73.55805675986895,
+     93.55805675986895
+    ],
+    "total_front": 93.55805675986895
+   },
+   "sheets": {
+    "VG_0": 1216.9,
+    "VG_1": 873.5,
+    "VG_2": 571.0
+   },
+   "WARM": {
+    "area_m2": 3574,
+    "emitted_MW": 6.571,
+    "self_MW": 0.289,
+    "absorbed_MW": {
+     "HOT": 0.0074,
+     "VG_0": 0.0019,
+     "VG_2": 0.4524,
+     "LOW": 0.0314
+    },
+    "net_MW": 5.789,
+    "load_MW": 5.0,
+    "margin": 0.158,
+    "interference": 0.078
+   },
+   "LOW": {
+    "area_m2": 3600,
+    "emitted_MW": 1.453,
+    "self_MW": 0.04,
+    "absorbed_MW": {
+     "VG_2": 0.1514,
+     "WARM": 0.1425
+    },
+    "net_MW": 1.119,
+    "load_MW": 1.0,
+    "margin": 0.119,
+    "interference": 0.208
+   },
+   "RING_A": {
+    "VG_2": 0.088,
+    "WARM": 0.203,
+    "LOW": 0.092
+   },
+   "RING_B": {
+    "VG_2": 0.004,
+    "WARM": 0.018,
+    "LOW": 0.016
+   },
+   "TANKS": {
+    "VG_2": 0.158,
+    "WARM": 0.208,
+    "LOW": 0.105
+   },
+   "VG_0_absorbed_MW": 156.38,
+   "VG_0_area_m2": 4163,
+   "VG_1_absorbed_MW": 25.48,
+   "VG_1_area_m2": 4179,
+   "VG_2_absorbed_MW": 3.72,
+   "VG_2_area_m2": 4227,
+   "seconds": 134
+  },
+  "F_final": {
+   "cfg": {
+    "lw": 22.5,
+    "ll": 20.0,
+    "gap2": 0.5,
+    "coat": "white ceramic AZ-93 family (ISS radiators)",
+    "layers": [
+     [
+      0.5,
+      0
+     ],
+     [
+      0.8,
+      5
+     ],
+     [
+      1.1,
+      10
+     ]
+    ],
+    "coats_b": [
+     {
+      "eps": [
+       0.12,
+       0.12,
+       0.12,
+       0.12,
+       0.12,
+       0.12,
+       0.12,
+       0.12
+      ],
+      "spec": true,
+      "note": "polished Mo/Nb-alloy layer at ~1200 K, 0.12"
+     },
+     {
+      "eps": [
+       0.08,
+       0.08,
+       0.08,
+       0.08,
+       0.08,
+       0.08,
+       0.08,
+       0.08
+      ],
+      "spec": true,
+      "note": "polished Ti/superalloy layer, 0.08"
+     },
+     {
+      "eps": [
+       0.05,
+       0.05,
+       0.05,
+       0.05,
+       0.05,
+       0.05,
+       0.05,
+       0.05
+      ],
+      "spec": true,
+      "note": "gold or silver film on Ti, 0.05 (below 700 K)"
+     }
+    ],
+    "root_strip": 0.5,
+    "clear": 0.4
+   },
+   "span": {
+    "WARM": [
+     50.558056759868954,
+     73.05805675986895
+    ],
+    "WARM_rim_start": 55.8478661811229,
+    "LOW": [
+     73.55805675986895,
+     93.55805675986895
+    ],
+    "total_front": 93.55805675986895
+   },
+   "sheets": {
+    "VG_0": 1204.3,
+    "VG_1": 804.6,
+    "VG_2": 494.3
+   },
+   "WARM": {
+    "area_m2": 3574,
+    "emitted_MW": 6.749,
+    "self_MW": 0.315,
+    "absorbed_MW": {
+     "HOT": 0.0076,
+     "VG_0": 0.0009,
+     "VG_2": 0.1714,
+     "LOW": 0.0341
+    },
+    "net_MW": 6.22,
+    "load_MW": 5.0,
+    "margin": 0.244,
+    "interference": 0.033
+   },
+   "LOW": {
+    "area_m2": 3600,
+    "emitted_MW": 1.501,
+    "self_MW": 0.044,
+    "absorbed_MW": {
+     "VG_2": 0.0497,
+     "WARM": 0.1502
+    },
+    "net_MW": 1.258,
+    "load_MW": 1.0,
+    "margin": 0.258,
+    "interference": 0.137
+   },
+   "RING_A": {
+    "VG_2": 0.029,
+    "WARM": 0.212,
+    "LOW": 0.095
+   },
+   "RING_B": {
+    "VG_2": 0.002,
+    "WARM": 0.019,
+    "LOW": 0.016
+   },
+   "TANKS": {
+    "VG_2": 0.058,
+    "WARM": 0.214,
+    "LOW": 0.109
+   },
+   "VG_0_absorbed_MW": 103.29,
+   "VG_0_area_m2": 4163,
+   "VG_1_absorbed_MW": 12.91,
+   "VG_1_area_m2": 4179,
+   "VG_2_absorbed_MW": 1.34,
+   "VG_2_area_m2": 4227,
+   "seconds": 161
+  },
+  "F_postburn": {
+   "cfg": {
+    "lw": 22.5,
+    "ll": 20.0,
+    "gap2": 0.5,
+    "coat": "white ceramic AZ-93 family (ISS radiators)",
+    "layers": [
+     [
+      0.5,
+      0
+     ],
+     [
+      0.8,
+      5
+     ],
+     [
+      1.1,
+      10
+     ]
+    ],
+    "coats_b": [
+     {
+      "eps": [
+       0.12,
+       0.12,
+       0.12,
+       0.12,
+       0.12,
+       0.12,
+       0.12,
+       0.12
+      ],
+      "spec": true,
+      "note": "polished Mo/Nb-alloy layer at ~1200 K, 0.12"
+     },
+     {
+      "eps": [
+       0.08,
+       0.08,
+       0.08,
+       0.08,
+       0.08,
+       0.08,
+       0.08,
+       0.08
+      ],
+      "spec": true,
+      "note": "polished Ti/superalloy layer, 0.08"
+     },
+     {
+      "eps": [
+       0.05,
+       0.05,
+       0.05,
+       0.05,
+       0.05,
+       0.05,
+       0.05,
+       0.05
+      ],
+      "spec": true,
+      "note": "gold or silver film on Ti, 0.05 (below 700 K)"
+     }
+    ],
+    "root_strip": 0.5,
+    "clear": 0.4,
+    "hot_T": 1300.0
+   },
+   "span": {
+    "WARM": [
+     50.558056759868954,
+     73.05805675986895
+    ],
+    "WARM_rim_start": 55.8478661811229,
+    "LOW": [
+     73.55805675986895,
+     93.55805675986895
+    ],
+    "total_front": 93.55805675986895
+   },
+   "sheets": {
+    "VG_0": 871.2,
+    "VG_1": 582.8,
+    "VG_2": 376.6
+   },
+   "WARM": {
+    "area_m2": 3574,
+    "emitted_MW": 6.749,
+    "self_MW": 0.315,
+    "absorbed_MW": {
+     "HOT": 0.0038,
+     "VG_0": 0.0001,
+     "VG_2": 0.0604,
+     "LOW": 0.0341
+    },
+    "net_MW": 6.336,
+    "load_MW": 5.0,
+    "margin": 0.267,
+    "interference": 0.015
+   },
+   "LOW": {
+    "area_m2": 3600,
+    "emitted_MW": 1.501,
+    "self_MW": 0.044,
+    "absorbed_MW": {
+     "VG_2": 0.0174,
+     "WARM": 0.1502
+    },
+    "net_MW": 1.29,
+    "load_MW": 1.0,
+    "margin": 0.29,
+    "interference": 0.115
+   },
+   "RING_A": {
+    "VG_2": 0.01,
+    "WARM": 0.212,
+    "LOW": 0.095
+   },
+   "RING_B": {
+    "WARM": 0.019,
+    "LOW": 0.016
+   },
+   "TANKS": {
+    "VG_2": 0.019,
+    "WARM": 0.214,
+    "LOW": 0.109
+   },
+   "VG_0_absorbed_MW": 28.3,
+   "VG_0_area_m2": 4163,
+   "VG_1_absorbed_MW": 3.55,
+   "VG_1_area_m2": 4179,
+   "VG_2_absorbed_MW": 0.45,
+   "VG_2_area_m2": 4227,
+   "seconds": 159
+  },
+  "G_eol": {
+   "cfg": {
+    "lw": 22.34,
+    "ll": 20.0,
+    "gap2": 0.5,
+    "coat": "white ceramic end of life",
+    "layers": [
+     [
+      0.5,
+      0
+     ],
+     [
+      0.8,
+      5
+     ],
+     [
+      1.1,
+      10
+     ]
+    ],
+    "coats_b": [
+     {
+      "eps": [
+       0.18,
+       0.18,
+       0.18,
+       0.18,
+       0.18,
+       0.18,
+       0.18,
+       0.18
+      ],
+      "spec": true,
+      "note": "hot layer end of life 0.18"
+     },
+     {
+      "eps": [
+       0.12,
+       0.12,
+       0.12,
+       0.12,
+       0.12,
+       0.12,
+       0.12,
+       0.12
+      ],
+      "spec": true,
+      "note": "mid layer end of life 0.12"
+     },
+     {
+      "eps": [
+       0.08,
+       0.08,
+       0.08,
+       0.08,
+       0.08,
+       0.08,
+       0.08,
+       0.08
+      ],
+      "spec": true,
+      "note": "cold layer end of life 0.08"
+     }
+    ],
+    "root_strip": 0.5,
+    "clear": 0.4
+   },
+   "span": {
+    "WARM": [
+     50.558056759868954,
+     72.89805675986895
+    ],
+    "WARM_rim_start": 55.8478661811229,
+    "LOW": [
+     73.39805675986895,
+     93.39805675986895
+    ],
+    "total_front": 93.39805675986895
+   },
+   "sheets": {
+    "VG_0": 1216.9,
+    "VG_1": 873.5,
+    "VG_2": 570.7
+   },
+   "WARM": {
+    "area_m2": 3545,
+    "emitted_MW": 6.518,
+    "self_MW": 0.287,
+    "absorbed_MW": {
+     "HOT": 0.0252,
+     "VG_2": 0.4404,
+     "LOW": 0.0315
+    },
+    "net_MW": 5.734,
+    "load_MW": 5.0,
+    "margin": 0.147,
+    "interference": 0.08
+   },
+   "LOW": {
+    "area_m2": 3600,
+    "emitted_MW": 1.453,
+    "self_MW": 0.04,
+    "absorbed_MW": {
+     "VG_2": 0.1505,
+     "WARM": 0.1404
+    },
+    "net_MW": 1.122,
+    "load_MW": 1.0,
+    "margin": 0.122,
+    "interference": 0.206
+   },
+   "RING_A": {
+    "VG_2": 0.082,
+    "WARM": 0.201,
+    "LOW": 0.09
+   },
+   "RING_B": {
+    "VG_2": 0.005,
+    "WARM": 0.018,
+    "LOW": 0.015
+   },
+   "TANKS": {
+    "VG_2": 0.159,
+    "WARM": 0.206,
+    "LOW": 0.104
+   },
+   "VG_0_absorbed_MW": 156.38,
+   "VG_0_area_m2": 4163,
+   "VG_1_absorbed_MW": 25.48,
+   "VG_1_area_m2": 4179,
+   "VG_2_absorbed_MW": 3.71,
+   "VG_2_area_m2": 4227,
+   "seconds": 144
+  },
+  "G_final": {
+   "cfg": {
+    "lw": 22.34,
+    "ll": 20.0,
+    "gap2": 0.5,
+    "coat": "white ceramic AZ-93 family (ISS radiators)",
+    "layers": [
+     [
+      0.5,
+      0
+     ],
+     [
+      0.8,
+      5
+     ],
+     [
+      1.1,
+      10
+     ]
+    ],
+    "coats_b": [
+     {
+      "eps": [
+       0.12,
+       0.12,
+       0.12,
+       0.12,
+       0.12,
+       0.12,
+       0.12,
+       0.12
+      ],
+      "spec": true,
+      "note": "polished Mo/Nb-alloy layer at ~1200 K, 0.12"
+     },
+     {
+      "eps": [
+       0.08,
+       0.08,
+       0.08,
+       0.08,
+       0.08,
+       0.08,
+       0.08,
+       0.08
+      ],
+      "spec": true,
+      "note": "polished Ti/superalloy layer, 0.08"
+     },
+     {
+      "eps": [
+       0.05,
+       0.05,
+       0.05,
+       0.05,
+       0.05,
+       0.05,
+       0.05,
+       0.05
+      ],
+      "spec": true,
+      "note": "gold or silver film on Ti, 0.05 (below 700 K)"
+     }
+    ],
+    "root_strip": 0.5,
+    "clear": 0.4
+   },
+   "span": {
+    "WARM": [
+     50.558056759868954,
+     72.89805675986895
+    ],
+    "WARM_rim_start": 55.8478661811229,
+    "LOW": [
+     73.39805675986895,
+     93.39805675986895
+    ],
+    "total_front": 93.39805675986895
+   },
+   "sheets": {
+    "VG_0": 1204.3,
+    "VG_1": 804.6,
+    "VG_2": 493.2
+   },
+   "WARM": {
+    "area_m2": 3545,
+    "emitted_MW": 6.695,
+    "self_MW": 0.31,
+    "absorbed_MW": {
+     "HOT": 0.0164,
+     "VG_0": 0.0005,
+     "VG_1": 0.0003,
+     "VG_2": 0.1666,
+     "LOW": 0.0344
+    },
+    "net_MW": 6.167,
+    "load_MW": 5.0,
+    "margin": 0.233,
+    "interference": 0.034
+   },
+   "LOW": {
+    "area_m2": 3600,
+    "emitted_MW": 1.501,
+    "self_MW": 0.043,
+    "absorbed_MW": {
+     "VG_2": 0.0503,
+     "WARM": 0.1487
+    },
+    "net_MW": 1.259,
+    "load_MW": 1.0,
+    "margin": 0.259,
+    "interference": 0.136
+   },
+   "RING_A": {
+    "VG_2": 0.029,
+    "WARM": 0.209,
+    "LOW": 0.095
+   },
+   "RING_B": {
+    "VG_2": 0.001,
+    "WARM": 0.019,
+    "LOW": 0.016
+   },
+   "TANKS": {
+    "VG_2": 0.055,
+    "WARM": 0.212,
+    "LOW": 0.11
+   },
+   "VG_0_absorbed_MW": 103.29,
+   "VG_0_area_m2": 4163,
+   "VG_1_absorbed_MW": 12.91,
+   "VG_1_area_m2": 4179,
+   "VG_2_absorbed_MW": 1.33,
+   "VG_2_area_m2": 4227,
+   "seconds": 165
+  },
+  "S_21_195": {
+   "cfg": {
+    "lw": 21.0,
+    "ll": 19.5,
+    "gap2": 0.5,
+    "coat": "white ceramic AZ-93 family (ISS radiators)",
+    "layers": [
+     [
+      0.5,
+      0
+     ],
+     [
+      0.8,
+      5
+     ],
+     [
+      1.1,
+      10
+     ]
+    ],
+    "coats_b": [
+     {
+      "eps": [
+       0.12,
+       0.12,
+       0.12,
+       0.12,
+       0.12,
+       0.12,
+       0.12,
+       0.12
+      ],
+      "spec": true,
+      "note": "polished Mo/Nb-alloy layer at ~1200 K, 0.12"
+     },
+     {
+      "eps": [
+       0.08,
+       0.08,
+       0.08,
+       0.08,
+       0.08,
+       0.08,
+       0.08,
+       0.08
+      ],
+      "spec": true,
+      "note": "polished Ti/superalloy layer, 0.08"
+     },
+     {
+      "eps": [
+       0.05,
+       0.05,
+       0.05,
+       0.05,
+       0.05,
+       0.05,
+       0.05,
+       0.05
+      ],
+      "spec": true,
+      "note": "gold or silver film on Ti, 0.05 (below 700 K)"
+     }
+    ],
+    "root_strip": 0.5
+   },
+   "span": {
+    "WARM": [
+     50.658056759868956,
+     71.65805675986896
+    ],
+    "WARM_rim_start": 55.947866181122905,
+    "LOW": [
+     72.15805675986896,
+     91.65805675986896
+    ],
+    "total_front": 91.65805675986896
+   },
+   "sheets": {
+    "VG_0": 1204.3,
+    "VG_1": 804.6,
+    "VG_2": 494.7
+   },
+   "WARM": {
+    "area_m2": 3304,
+    "emitted_MW": 6.239,
+    "self_MW": 0.282,
+    "absorbed_MW": {
+     "HOT": 0.0339,
+     "VG_2": 0.1641,
+     "LOW": 0.0328
+    },
+    "net_MW": 5.727,
+    "load_MW": 5.0,
+    "margin": 0.145,
+    "interference": 0.039
+   },
+   "LOW": {
+    "area_m2": 3510,
+    "emitted_MW": 1.464,
+    "self_MW": 0.042,
+    "absorbed_MW": {
+     "VG_2": 0.0573,
+     "WARM": 0.1457
+    },
+    "net_MW": 1.219,
+    "load_MW": 1.0,
+    "margin": 0.219,
+    "interference": 0.143
+   },
+   "RING_A": {
+    "VG_2": 0.028,
+    "WARM": 0.191,
+    "LOW": 0.087
+   },
+   "RING_B": {
+    "VG_2": 0.002,
+    "WARM": 0.017,
+    "LOW": 0.014
+   },
+   "TANKS": {
+    "VG_2": 0.063,
+    "WARM": 0.192,
+    "LOW": 0.097
+   },
+   "VG_0_absorbed_MW": 103.29,
+   "VG_0_area_m2": 4163,
+   "VG_1_absorbed_MW": 12.91,
+   "VG_1_area_m2": 4179,
+   "VG_2_absorbed_MW": 1.34,
+   "VG_2_area_m2": 4227,
+   "seconds": 162
+  },
+  "S_24_21": {
+   "cfg": {
+    "lw": 24.0,
+    "ll": 21.0,
+    "gap2": 0.5,
+    "coat": "white ceramic AZ-93 family (ISS radiators)",
+    "layers": [
+     [
+      0.5,
+      0
+     ],
+     [
+      0.8,
+      5
+     ],
+     [
+      1.1,
+      10
+     ]
+    ],
+    "coats_b": [
+     {
+      "eps": [
+       0.12,
+       0.12,
+       0.12,
+       0.12,
+       0.12,
+       0.12,
+       0.12,
+       0.12
+      ],
+      "spec": true,
+      "note": "polished Mo/Nb-alloy layer at ~1200 K, 0.12"
+     },
+     {
+      "eps": [
+       0.08,
+       0.08,
+       0.08,
+       0.08,
+       0.08,
+       0.08,
+       0.08,
+       0.08
+      ],
+      "spec": true,
+      "note": "polished Ti/superalloy layer, 0.08"
+     },
+     {
+      "eps": [
+       0.05,
+       0.05,
+       0.05,
+       0.05,
+       0.05,
+       0.05,
+       0.05,
+       0.05
+      ],
+      "spec": true,
+      "note": "gold or silver film on Ti, 0.05 (below 700 K)"
+     }
+    ],
+    "root_strip": 0.5
+   },
+   "span": {
+    "WARM": [
+     50.658056759868956,
+     74.65805675986896
+    ],
+    "WARM_rim_start": 55.947866181122905,
+    "LOW": [
+     75.15805675986896,
+     96.15805675986896
+    ],
+    "total_front": 96.15805675986896
+   },
+   "sheets": {
+    "VG_0": 1204.3,
+    "VG_1": 804.6,
+    "VG_2": 493.4
+   },
+   "WARM": {
+    "area_m2": 3844,
+    "emitted_MW": 7.259,
+    "self_MW": 0.347,
+    "absorbed_MW": {
+     "HOT": 0.0203,
+     "VG_1": 0.0008,
+     "VG_2": 0.1732,
+     "LOW": 0.0351
+    },
+    "net_MW": 6.683,
+    "load_MW": 5.0,
+    "margin": 0.337,
+    "interference": 0.033
+   },
+   "LOW": {
+    "area_m2": 3780,
+    "emitted_MW": 1.576,
+    "self_MW": 0.045,
+    "absorbed_MW": {
+     "VG_2": 0.0482,
+     "WARM": 0.1605
+    },
+    "net_MW": 1.322,
+    "load_MW": 1.0,
+    "margin": 0.322,
+    "interference": 0.136
+   },
+   "RING_A": {
+    "VG_2": 0.03,
+    "WARM": 0.231,
+    "LOW": 0.106
+   },
+   "RING_B": {
+    "VG_2": 0.001,
+    "WARM": 0.021,
+    "LOW": 0.022
+   },
+   "TANKS": {
+    "VG_2": 0.053,
+    "WARM": 0.236,
+    "LOW": 0.127
+   },
+   "VG_0_absorbed_MW": 103.29,
+   "VG_0_area_m2": 4163,
+   "VG_1_absorbed_MW": 12.91,
+   "VG_1_area_m2": 4179,
+   "VG_2_absorbed_MW": 1.33,
+   "VG_2_area_m2": 4227,
+   "seconds": 181
+  },
+  "V2_gray": {
+   "cfg": {
+    "lw": 21.0,
+    "ll": 19.5,
+    "gap2": 0.5,
+    "coat": "gray 0.90 diffuse (current zone value)",
+    "layers": [
+     [
+      0.5,
+      0
+     ],
+     [
+      0.8,
+      8
+     ]
+    ]
+   },
+   "span": {
+    "WARM": [
+     50.67720131521946,
+     71.67720131521946
+    ],
+    "WARM_rim_start": 54.54207426953523,
+    "LOW": [
+     72.17720131521946,
+     91.67720131521946
+    ],
+    "total_front": 91.67720131521946
+   },
+   "sheets": {
+    "VG_0": 1173.4,
+    "VG_1": 651.6
+   },
+   "WARM": {
+    "area_m2": 3146,
+    "emitted_MW": 6.018,
+    "self_MW": 0.259,
+    "absorbed_MW": {
+     "HOT": 0.0725,
+     "VG_0": 0.0004,
+     "VG_1": 0.7119,
+     "LOW": 0.0292
+    },
+    "net_MW": 4.945,
+    "load_MW": 5.0,
+    "margin": -0.011,
+    "interference": 0.141
+   },
+   "LOW": {
+    "area_m2": 3217,
+    "emitted_MW": 1.33,
+    "self_MW": 0.037,
+    "absorbed_MW": {
+     "VG_1": 0.2402,
+     "WARM": 0.1341
+    },
+    "net_MW": 0.919,
+    "load_MW": 1.0,
+    "margin": -0.081,
+    "interference": 0.289
+   },
+   "RING_A": {
+    "VG_0": 0.002,
+    "VG_1": 0.144,
+    "WARM": 0.177,
+    "LOW": 0.08
+   },
+   "RING_B": {
+    "VG_1": 0.007,
+    "WARM": 0.017,
+    "LOW": 0.012
+   },
+   "TANKS": {
+    "VG_1": 0.262,
+    "WARM": 0.174,
+    "LOW": 0.084
+   },
+   "VG_0_absorbed_MW": 66.85,
+   "VG_0_area_m2": 4163,
+   "VG_1_absorbed_MW": 6.4,
+   "VG_1_area_m2": 4204,
+   "seconds": 99
+  },
+  "V3_gray": {
+   "cfg": {
+    "lw": 21.0,
+    "ll": 19.5,
+    "gap2": 0.5,
+    "coat": "gray 0.90 diffuse (current zone value)",
+    "layers": [
+     [
+      0.5,
+      0
+     ],
+     [
+      0.8,
+      5
+     ],
+     [
+      1.1,
+      10
+     ]
+    ]
+   },
+   "span": {
+    "WARM": [
+     51.098874211640116,
+     72.09887421164012
+    ],
+    "WARM_rim_start": 55.947866181122905,
+    "LOW": [
+     72.59887421164012,
+     92.09887421164012
+    ],
+    "total_front": 92.09887421164012
+   },
+   "sheets": {
+    "VG_0": 1187.8,
+    "VG_1": 733.5,
+    "VG_2": 451.3
+   },
+   "WARM": {
+    "area_m2": 3065,
+    "emitted_MW": 5.863,
+    "self_MW": 0.27,
+    "absorbed_MW": {
+     "VG_0": 0.0041,
+     "VG_2": 0.1656,
+     "LOW": 0.0293
+    },
+    "net_MW": 5.393,
+    "load_MW": 5.0,
+    "margin": 0.079,
+    "interference": 0.036
+   },
+   "LOW": {
+    "area_m2": 3217,
+    "emitted_MW": 1.33,
+    "self_MW": 0.038,
+    "absorbed_MW": {
+     "VG_2": 0.0598,
+     "WARM": 0.1394
+    },
+    "net_MW": 1.093,
+    "load_MW": 1.0,
+    "margin": 0.093,
+    "interference": 0.154
+   },
+   "RING_A": {
+    "VG_2": 0.033,
+    "WARM": 0.175,
+    "LOW": 0.082
+   },
+   "RING_B": {
+    "VG_2": 0.002,
+    "WARM": 0.016,
+    "LOW": 0.013
+   },
+   "TANKS": {
+    "VG_2": 0.067,
+    "WARM": 0.183,
+    "LOW": 0.087
+   },
+   "VG_0_absorbed_MW": 68.01,
+   "VG_0_area_m2": 4163,
+   "VG_1_absorbed_MW": 8.9,
+   "VG_1_area_m2": 4179,
+   "VG_2_absorbed_MW": 1.44,
+   "VG_2_area_m2": 4227,
+   "seconds": 156
+  },
+  "V3w_gray": {
+   "cfg": {
+    "lw": 21.0,
+    "ll": 19.5,
+    "gap2": 0.5,
+    "coat": "gray 0.90 diffuse (current zone value)",
+    "layers": [
+     [
+      0.5,
+      0
+     ],
+     [
+      0.8,
+      8
+     ],
+     [
+      1.1,
+      16
+     ]
+    ]
+   },
+   "span": {
+    "WARM": [
+     51.47429678881129,
+     72.47429678881129
+    ],
+    "WARM_rim_start": 59.3597948971785,
+    "LOW": [
+     72.97429678881129,
+     92.47429678881129
+    ],
+    "total_front": 92.47429678881129
+   },
+   "sheets": {
+    "VG_0": 1173.6,
+    "VG_1": 659.3,
+    "VG_2": 385.4
+   },
+   "WARM": {
+    "area_m2": 2814,
+    "emitted_MW": 5.383,
+    "self_MW": 0.284,
+    "absorbed_MW": {
+     "HOT": 0.0009,
+     "VG_2": 0.0912,
+     "LOW": 0.0334
+    },
+    "net_MW": 4.974,
+    "load_MW": 5.0,
+    "margin": -0.005,
+    "interference": 0.025
+   },
+   "LOW": {
+    "area_m2": 3217,
+    "emitted_MW": 1.33,
+    "self_MW": 0.044,
+    "absorbed_MW": {
+     "HOT": 0.0008,
+     "VG_2": 0.0349,
+     "WARM": 0.1511
+    },
+    "net_MW": 1.099,
+    "load_MW": 1.0,
+    "margin": 0.099,
+    "interference": 0.145
+   },
+   "RING_A": {
+    "VG_2": 0.019,
+    "WARM": 0.182,
+    "LOW": 0.087
+   },
+   "RING_B": {
+    "VG_2": 0.001,
+    "WARM": 0.017,
+    "LOW": 0.013
+   },
+   "TANKS": {
+    "VG_2": 0.036,
+    "WARM": 0.191,
+    "LOW": 0.094
+   },
+   "VG_0_absorbed_MW": 66.88,
+   "VG_0_area_m2": 4163,
+   "VG_1_absorbed_MW": 6.24,
+   "VG_1_area_m2": 4204,
+   "VG_2_absorbed_MW": 0.81,
+   "VG_2_area_m2": 4332,
+   "seconds": 138
+  },
+  "base_baffled": {
+   "cfg": {
+    "lw": 21.0,
+    "ll": 19.5,
+    "gap": 2.0,
+    "gap2": 2.0,
+    "coat": "gray 0.90 diffuse (current zone value)",
+    "blocker": "annulus2x2"
+   },
+   "span": {
+    "WARM": [
+     50.899362477231335,
+     71.89936247723134
+    ],
+    "LOW": [
+     73.89936247723134,
+     93.39936247723134
+    ],
+    "total_front": 93.39936247723134
+   },
+   "sheets": {
+    "BAF0_0": 1244.6,
+    "BAF0_1": 916.7,
+    "BAF1_0": 406.9,
+    "BAF1_1": 306.9
+   },
+   "WARM": {
+    "area_m2": 3465,
+    "emitted_MW": 6.628,
+    "self_MW": 0.409,
+    "absorbed_MW": {
+     "HOT": 0.0343,
+     "BAF0_1": 3.6816,
+     "BAF1_0": 0.1449
+    },
+    "net_MW": 2.358,
+    "load_MW": 5.0,
+    "margin": -0.528,
+    "interference": 0.621
+   },
+   "LOW": {
+    "area_m2": 3217,
+    "emitted_MW": 1.33,
+    "self_MW": 0.047,
+    "absorbed_MW": {
+     "WARM": 0.0,
+     "BAF1_0": 0.0001,
+     "BAF1_1": 0.0306
+    },
+    "net_MW": 1.252,
+    "load_MW": 1.0,
+    "margin": 0.252,
+    "interference": 0.024
+   },
+   "RING_A": {
+    "LOW": 0.103,
+    "BAF1_1": 0.014
+   },
+   "RING_B": {
+    "LOW": 0.015
+   },
+   "TANKS": {
+    "LOW": 0.106,
+    "BAF1_1": 0.026
+   },
+   "BAF0_0_absorbed_MW": 71.72,
+   "BAF0_0_area_m2": 4163,
+   "BAF0_1_absorbed_MW": 20.82,
+   "BAF0_1_area_m2": 4163,
+   "BAF1_0_absorbed_MW": 0.81,
+   "BAF1_0_area_m2": 4163,
+   "BAF1_1_absorbed_MW": 0.26,
+   "BAF1_1_area_m2": 4163,
+   "seconds": 198
+  },
+  "base_open": {
+   "cfg": {
+    "lw": 21.0,
+    "ll": 19.5,
+    "gap": 2.0,
+    "gap2": 2.0,
+    "coat": "gray 0.90 diffuse (current zone value)",
+    "blocker": "none"
+   },
+   "span": {
+    "WARM": [
+     50.899362477231335,
+     71.89936247723134
+    ],
+    "LOW": [
+     73.89936247723134,
+     93.39936247723134
+    ],
+    "total_front": 93.39936247723134
+   },
+   "sheets": {},
+   "WARM": {
+    "area_m2": 3465,
+    "emitted_MW": 6.628,
+    "self_MW": 0.159,
+    "absorbed_MW": {
+     "HOT": 42.0456,
+     "LOW": 0.0188
+    },
+    "net_MW": -35.595,
+    "load_MW": 5.0,
+    "margin": -8.119,
+    "interference": 6.502
+   },
+   "LOW": {
+    "area_m2": 3217,
+    "emitted_MW": 1.33,
+    "self_MW": 0.029,
+    "absorbed_MW": {
+     "HOT": 14.2891,
+     "WARM": 0.0876
+    },
+    "net_MW": -13.076,
+    "load_MW": 1.0,
+    "margin": -14.076,
+    "interference": 11.054
+   },
+   "RING_A": {
+    "HOT": 30.297,
+    "WARM": 0.126,
+    "LOW": 0.079
+   },
+   "RING_B": {
+    "HOT": 1.666,
+    "WARM": 0.012,
+    "LOW": 0.014
+   },
+   "TANKS": {
+    "HOT": 33.75,
+    "WARM": 0.123,
+    "LOW": 0.08
+   },
+   "seconds": 172
+  },
+  "hot_loss": {
+   "base_open": {
+    "space": 0.9351666666666667,
+    "self": 0.057833333333333334,
+    "other": {
+     "RING_A": 0.0015666666666666667,
+     "TANKS": 0.0022333333333333333,
+     "WARM": 0.0023166666666666665,
+     "LOW": 0.0008
+    }
+   },
+   "base_baffled": {
+    "space": 0.9346333333333333,
+    "self": 0.06183333333333333,
+    "other": {
+     "BAF0_0": 0.003533333333333333
+    }
+   },
+   "F_final": {
+    "space": 0.9323333333333333,
+    "self": 0.0618,
+    "other": {
+     "VG_0": 0.005866666666666667
+    }
+   }
+  },
+  "osr_open": {
+   "cfg": {
+    "lw": 21.0,
+    "ll": 19.5,
+    "gap": 2.0,
+    "gap2": 2.0,
+    "coat": "silvered fused-silica OSR (existing technology)",
+    "blocker": "none"
+   },
+   "span": {
+    "WARM": [
+     50.899362477231335,
+     71.89936247723134
+    ],
+    "LOW": [
+     73.89936247723134,
+     93.39936247723134
+    ],
+    "total_front": 93.39936247723134
+   },
+   "sheets": {},
+   "WARM": {
+    "area_m2": 3465,
+    "emitted_MW": 5.417,
+    "self_MW": 0.112,
+    "absorbed_MW": {
+     "HOT": 8.3776,
+     "LOW": 0.015
+    },
+    "net_MW": -3.087,
+    "load_MW": 5.0,
+    "margin": -1.617,
+    "interference": 1.582
+   },
+   "LOW": {
+    "area_m2": 3217,
+    "emitted_MW": 1.194,
+    "self_MW": 0.024,
+    "absorbed_MW": {
+     "HOT": 2.8419,
+     "WARM": 0.063
+    },
+    "net_MW": -1.735,
+    "load_MW": 1.0,
+    "margin": -2.735,
+    "interference": 2.484
+   },
+   "RING_A": {
+    "HOT": 33.324,
+    "WARM": 0.105,
+    "LOW": 0.07
+   },
+   "RING_B": {
+    "HOT": 1.655,
+    "WARM": 0.01,
+    "LOW": 0.013
+   },
+   "TANKS": {
+    "HOT": 34.964,
+    "WARM": 0.099,
+    "LOW": 0.074
+   },
+   "seconds": 30
+  }
+ }
+}
