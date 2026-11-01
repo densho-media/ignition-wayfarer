@@ -161,7 +161,7 @@ def pointing(s, q, deg, n=24):
     e1 = (1.0, 0.0, 0.0); e2 = (b[1]*e1[2]-b[2]*e1[1], b[2]*e1[0]-b[0]*e1[2], b[0]*e1[1]-b[1]*e1[0])
     blades = [math.radians(s['prototype']['radiator_phase_deg']+j*120) for j in range(s['radiators']['count'])]
     rings = [(x, habitat_ring.sweep_half(s), habitat_ring.outer(s)) for x in habitat_ring.centers(s)]
-    shield_x = 105.9; shield_r = s['forward_shield']['diameter']['value']/2
+    import forward_shield; shield_x = forward_shield.stations(s)['truss_aft']; shield_r = s['forward_shield']['diameter']['value']/2
     hits = total = 0
     for i in range(1, n+1):
         th = math.radians(deg)*i/n

@@ -13,7 +13,7 @@ class OperatingPointTests(unittest.TestCase):
 
     def test_reproduces_owner_case_e(self):
         # S&E 65_BURN_MASSFLOW case E (absorbed fraction 1e-4): 65!B39:B42, B48:B50, 64!B25:B26.
-        e = op.burn(self.s, f_hot=1e-4)
+        e = op.burn(self.s, f_hot=1e-4, profile='ramp')
         self.assertAlmostEqual(e['burnout_mass_kg'], 1480000.0, delta=1.0)
         self.assertAlmostEqual(e['reacted_dhe3_kg'], 274057.95, delta=0.5)
         self.assertAlmostEqual(e['lost_feed_kg'], 3425.72, delta=0.05)
@@ -26,10 +26,17 @@ class OperatingPointTests(unittest.TestCase):
         self.assertGreaterEqual(b['hot_margin_W'], 0)
         self.assertLessEqual(b['absorbed_fraction'], b['max_absorbed_fraction'])
 
-    def test_reserve_cannot_stop_the_ship(self):
-        # S&E 69_RETURN_BOUNDS: ideal braking from the LOCKED cruise on the 180 t reserve fails by ~147 t (B04).
-        r = op.braking(self.s)
-        self.assertAlmostEqual(r['stop_shortfall_kg'], 147200, delta=500)
+    def test_full_return_closes(self):
+        # owner choice 2026-10-31: four equal burns at ve from the departure mass end at the protected + operational ship (+ return tankage)
+        m = op.mission(self.s); R = m['mass_ratio_per_burn']
+        self.assertAlmostEqual(m['departure_mass_kg']/R**4, m['end_mass_kg'], delta=1.0)
+        self.assertAlmostEqual(m['departure_mass_kg']-m['end_mass_kg'], m['propellant_kg'], delta=1.0)
+
+    def test_power_limited_burn_keeps_the_drive_power(self):
+        # gentler first burn: constant thrust at the B01 drive power cap, so the hot loop and the peak loads are B01's
+        b = op.burn(self.s); e = op.burn(self.s, profile='ramp')
+        self.assertAlmostEqual(b['peak_thrust_N'], e['peak_thrust_N'], delta=1.0)
+        self.assertAlmostEqual(b['duration_s']*b['peak_mass_flow_kg_s'], b['expelled_kg'], delta=1.0)
 
 
 if __name__ == '__main__':

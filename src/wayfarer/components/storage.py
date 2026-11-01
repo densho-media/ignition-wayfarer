@@ -58,14 +58,16 @@ def build(c, s):
     for lb in fst.body_lobes(s):
         obj = mesh(c, lb['name'], *sector_solid(lb['x0'], lb['x1'], lb['r_in'], lb['r_out'], lb['a0'], lb['a1']), lobe_mat, kind='fuel_tank')
         stamp(obj, s, lb['species'], 'body station (BODY-C3)'); obj['liquid_m3'] = round(lb['liquid_m3'], 1); obj['module'] = lb['module']
-    tor = fst.torus(s)
-    for cell in tor['cells']:
-        obj = mesh(c, cell['name'], *torus_cell(tor, cell), material(f"Fuel_Torus_{'D2' if cell['species'] == 'deuterium' else 'H2'}", SPECIES_COLOR[cell['species']]), kind='fuel_tank')
-        stamp(obj, s, cell['species'], 'forward torus vessel'); obj['liquid_m3'] = round(cell['liquid_m3'], 1); obj['vessel'] = cell['vessel']
     strut_mat = material('Fuel_Torus_Strut', (.30, .40, .48))
-    for st in fst.torus_struts(s):
-        obj = mesh(c, st['name'], *cylinder_mesh(st['a'], st['b'], st['radius'], 16), strut_mat, kind='fuel_support')
-        stamp(obj, s, 'none', f"torus bipod leg ({st['side'].lower()}) on the forward hull collar")
+    mat_tag = {'deuterium': 'D2', 'hydrogen': 'H2', 'helium-3': 'He3'}
+    for key, role in (('torus', 'forward torus'), ('return_torus', 'return torus (full-return propellant)')):
+        tor = fst.torus(s, key)
+        for cell in tor['cells']:
+            obj = mesh(c, cell['name'], *torus_cell(tor, cell), material(f"Fuel_Torus_{mat_tag[cell['species']]}", SPECIES_COLOR[cell['species']]), kind='fuel_tank')
+            stamp(obj, s, cell['species'], f'{role} vessel'); obj['liquid_m3'] = round(cell['liquid_m3'], 1); obj['vessel'] = cell['vessel']
+        for st in fst.torus_struts(s, key):
+            obj = mesh(c, st['name'], *cylinder_mesh(st['a'], st['b'], st['radius'], 16), strut_mat, kind='fuel_support')
+            stamp(obj, s, 'none', f"{role} bipod leg ({st['side'].lower()}) on the hull collar")
     line_mat = material('CryoFeed', (.55, .74, .86))
     for ln in fst.transfer_lines(s):
         obj = line(c, ln['name'], ln['points'], ln['radius'], line_mat, kind='fuel_transfer_line')

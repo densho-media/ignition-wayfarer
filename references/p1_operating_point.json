@@ -1,6 +1,75 @@
 {
  "operating_point": {
+  "profile": "power_limited",
+  "duration_s": 862915.9029804802,
+  "duration_d": 9.987452580792596,
+  "distance_AU": 13.258797927137461,
+  "accel_g": [
+   0.501573150894622,
+   0.6439114774789606
+  ],
+  "delta_v_m_s": 4796679.328,
+  "exhaust_velocity_m_s": 19201172.08,
+  "exhaust_velocity_c": 0.06404821591609218,
+  "departure_mass_kg": 4426074.234859591,
+  "burnout_mass_kg": 3447678.877791964,
+  "expelled_kg": 978395.3570676274,
+  "reserve_kg": 2147678.877791964,
+  "reacted_dhe3_kg": 638421.4912842116,
+  "reacted_he3_kg": 382799.04925616505,
+  "reacted_d_kg": 255622.44202804656,
+  "lost_feed_kg": 7980.268641052651,
+  "hydrogen_expelled_kg": 331993.5971423631,
+  "jet_energy_J": 1.8035985063324903e+20,
+  "fusion_energy_J": 2.254498132915613e+20,
+  "peak_thrust_N": 21770763.000706356,
+  "peak_mass_flow_kg_s": 1.1338246910136727,
+  "peak_jet_power_W": 209012083344729.94,
+  "peak_fusion_power_W": 261265104180912.4,
+  "absorbed_fraction": 4e-05,
+  "peak_absorbed_heat_W": 10450604167.236498,
+  "ideal_rejection_W": 14401500598.898428,
+  "hot_budget_W": 10801125449.17382,
+  "hot_margin_W": 350521281.9373226,
+  "other_hot_loads_allowance_W": 3600375149.724607,
+  "first_overload_s": null,
+  "max_absorbed_fraction": 4.134163068977864e-05
+ },
+ "mission": {
+  "burns": 4,
+  "mass_ratio_per_burn": 1.2837837837421309,
+  "propellant_kg": 2796586.291182253,
+  "end_mass_kg": 1629487.9436773378,
+  "added_tank_kg": 329487.94367733796,
+  "departure_mass_kg": 4426074.234859591,
+  "burn_masses_kg": [
+   4426074.234859591,
+   3447678.877791964,
+   2685560.389104033,
+   2091910.197896277,
+   1629487.943677338
+  ],
+  "burn_expelled_kg": [
+   978395.3570676274,
+   762118.4886879311,
+   593650.1912077558,
+   462422.254218939
+  ]
+ },
+ "species_kg": {
+  "helium_3": 1094169.7195251463,
+  "deuterium": 730655.7742022818,
+  "hydrogen": 971760.797454825
+ },
+ "design_ramp_1_5g": {
+  "profile": "ramp",
   "duration_s": 652166.8905623564,
+  "duration_d": 7.548227900027274,
+  "distance_AU": 6.970320784488931,
+  "accel_g": [
+   0.0,
+   1.5
+  ],
   "delta_v_m_s": 4796679.328,
   "exhaust_velocity_m_s": 19201172.08,
   "exhaust_velocity_c": 0.06404821591609218,
@@ -29,7 +98,14 @@
   "max_absorbed_fraction": 4.134163068977863e-05
  },
  "owner_case_e": {
+  "profile": "ramp",
   "duration_s": 652166.8905623564,
+  "duration_d": 7.548227900027274,
+  "distance_AU": 6.970320784488931,
+  "accel_g": [
+   0.0,
+   1.5
+  ],
   "delta_v_m_s": 4796679.328,
   "exhaust_velocity_m_s": 19201172.08,
   "exhaust_velocity_c": 0.06404821591609218,
@@ -58,12 +134,26 @@
   "max_absorbed_fraction": 4.134163068977863e-05
  },
  "braking": {
-  "reserve_kg": 180000.000048019,
-  "reserve_dv_m_s": 2489966.2009299584,
-  "stop_needs_kg": 327157.89471005247,
-  "stop_shortfall_kg": 147157.89466203348,
-  "ve_to_stop_on_reserve_m_s": 36989202.96793922,
-  "note": "Ideal screen only (S&E 69): the 180 t reserve cannot stop the ship from 0.016 c at this ve; the return needs B04 (trajectory, assists, replenishment) and is not part of the First Ignition operating point."
+  "legs": [
+   "out: accelerate",
+   "arrive: brake",
+   "home: accelerate",
+   "home: brake"
+  ],
+  "start_mass_kg": [
+   4426074.234859591,
+   3447678.877791964,
+   2685560.389104033,
+   2091910.197896277
+  ],
+  "expelled_kg": [
+   978395.3570676274,
+   762118.4886879311,
+   593650.1912077558,
+   462422.254218939
+  ],
+  "end_mass_kg": 1629487.9436773378,
+  "note": "Ideal, impulsive-equivalent, no assists or replenishment; each burn is power-limited at the B01 drive power."
  },
  "failures": [],
  "status": "WORKING"

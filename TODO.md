@@ -177,10 +177,11 @@ These are owner tasks with local measurement/import support (WF-003, SIM-031). R
 [references/P0_SCIENCE_REQUEST_2026-10-14.md](references/P0_SCIENCE_REQUEST_2026-10-14.md), Doc 2026-10-14T12:12.
 Reversible production work in C can proceed while these wait.
 
-- [ ] **B01 — Return leg of the operating point. AFTER B04.** The First Ignition operating point is WORKING (2026-10-31, S&E 15
-  OWN-B01-OPERATING-POINT-2026-10-31, `physics.operating_point`, docs/MODEL.md "First Ignition operating point"): case E with absorbed
-  fraction 4e-5, hot loop closed. Still open: the absorbed fraction is a drive requirement, not demonstrated; the 180 t reserve cannot
-  stop the ship (147 t short), so whole-mission reaction mass and fuel stay OPEN until B04 sets the return.
+- [ ] **B01 — Operating point follow-ups. WORKING 2026-10-31.** The whole mission is closed (S&E 15 OWN-B01-FULL-RETURN-2026-10-31,
+  docs/MODEL.md "First Ignition operating point"): 0.016 c kept, propellant for four burns (2,797 t, departure 4,426 t), the drive held at
+  its 21.77 MN peak (first burn 0.50-0.64 g over 10 days), a return torus and a 245 m body. Left: the absorbed fraction (4e-5) is a drive
+  requirement, not demonstrated; `flight_timeline` and the rig still show the 1.5 g design ramp, not the flown power-limited burn (switch
+  them with B03); boil-off over the six-year mission and tank insulation are OPEN.
 
 - [ ] **B02 — Release mass allocation, power and shielding interfaces. OWNER.** 2026-10-31 (S&E 15 OWN-B02-MASS-PLACEMENT-2026-10-31,
   13!A18:I36, `mass_model.py`, docs/MODEL.md "Placed mass model"): a WORKING placed mass model gives CG and inertia per burn state, the
@@ -236,7 +237,7 @@ The earlier Garden 24/24 was a zone screen only. No pressure cutout, port, guard
   hypotensive). Still open: the owner's HOLD on burn-couch hold time and the thrust-reduction trigger (15!A197); suited casualties keep the
   crew tubes (15!A221); ring A port remains a FAIL comparator.
 
-- [ ] **D03 — Build the SP-13 second exit. TOPOLOGY DECIDED 2026-10-31; build AFTER D04's trunk sweep.** Pass 6 (Claude under the
+- [ ] **D03 — Build the SP-13 second exit. TOPOLOGY DECIDED 2026-10-31; build with D04's SP-12 build.** Pass 6 (Claude under the
   owner's delegation, S&E 15 OWN-D03-SP13-EXIT-2026-10-31, `work/` study kept in `references/evidence/d03_sp13_exit_2026-10-31.json`):
   the 1.20 m side gallery (az 125°, r 3.8 m) ends in an isolation antechamber inside the refuge's water envelope, two pressure-seated
   plugs seating in opposite directions with equalisation valves and manual overrides from both sides; refuge sealed and shielded in 6 of
@@ -244,12 +245,15 @@ The earlier Garden 24/24 was a zone screen only. No pressure cutout, port, guard
   Left: leaf/dog ratings and seals (pressure flight HOLD), the water-jacket stack, routing past survival reserve 1, the suited casualty
   (MARGINAL +0.021 m), then the built gallery and its sweeps. Nominal 80 kPa both ways is an analysis input, not a door rating.
 
-- [ ] **D04 — Close SP-11/SP-12 and forward-district access. AFTER D03 and applicable D01 loads.** Complete the 1.20 m sliding-plug,
-  limp-casualty, transfer/hoist, one-handed and fault cases. Carry L1-A 205/210° and CB2J6 stile through the full route and load review;
-  its +0.064 m geometric result does not qualify its S-bends, knees or tether load. Sources: `EVA3_REPORT.md`,
-  `EVA3_SP13_L1A_REDLINES.md`, `L1A_STILE_2026-10-13.md`.
-  **Done when:** selected access and pressure boundaries satisfy their required sweeps and released loads, with owner approval for
-  production changes. Only then build the hollow shirt-sleeve SP-12 entrance and service-district access.
+- [ ] **D04 — Build SP-11/SP-12 forward access. PATH DECIDED 2026-10-31 (study); build after owner approval of the fitting change.**
+  Pass 7 (Claude under the owner's delegation, S&E 15 OWN-D04-FORWARD-ACCESS-2026-10-31, `references/evidence/d04_forward_access_2026-10-31.json`):
+  the suited-casualty turn into SP-12 was squeezed between the 1.20 m hatch rim and the floor (−0.013 m). Chosen: SP-11 aperture 1.35 m
+  (2.4 m chamber), a 0.15 m turning well in the SP-12 floor layer, the forward plug rail only along the park run, and a relay handover at
+  the floor slot (feeder above, receiver in the trunk extension). Three-seed sweep: suited-casualty turn +0.090 m and litter +0.10 m PASS,
+  rescuers at the slot +0.109 m PASS. Left: rescuers during the turn +0.003 m MARGINAL; limp unrestrained casualty MARGINAL (secure limbs
+  first); seal, dogs, rim pins and the 132 kN reverse retention (pressure flight HOLD); the Airlock_EVA fitting grows 2.2 → 2.5 m outside
+  and the hull penetration 1.5 → 1.65 m (production change, owner approval); L1-A 205/210° stile S-bends, knees and tether loads; spin
+  and 1.5 g SP-12 geometry (thrust: no casualty transfer, 15!A197). Then build the hollow shirt-sleeve SP-12 entrance and D03's gallery.
 
 - [ ] **D05 — Close thrust steps, arrest and closure families. OWNER; AFTER D01–D04 as affected.** Resolve B3H2 newcomer +0.049 m and
   always-held grip +0.030–0.033 m margins without relaxing the 0.05 m study target; links above 0.206 m remain candidates until rated.
@@ -283,15 +287,20 @@ packet (Q_src, T_src; H2 mdot, p, T, phase, enthalpy in/out; field/plume/dose ke
   S&E 15 OWN-F01-TORUS-LOADS-2026-10-31): the torus stands on six bipods (radial struts would bend at 4.9 GPa), worst leg +17 % in
   buckling; the cells only drain (metered outlets per cell, no crossfeed); spine axial loads per station. Left: outlets of vessels 1-2
   and their header (OPEN plumbing), tank wall and dry mass (15 % allowance), collar frames under the bipod feet, shield/water layering.
+  Pass 7 (full return): the return torus (2,197 t, ³He/D/H2 cells, X 86.1-104.1 m) on 0.90 m bipods, worst leg +1,280 %; the forward
+  legs keep +88 % at the flown 0.50 g but would be 38 % short at the 1.5 g ramp with full tanks (heavier legs before any drive upgrade);
+  the return torus's collar frames, its outlet manifolds and the longer bypass collar members are not designed.
 
-- [ ] **F02 — Close warm/cold cooling and SP-52 packaging. OWNER; AFTER B02 (B01 operating point WORKING) and D04 for service access.** Obtain view factors,
-  loads and selected baffles/routing, then build the required warm/cold equipment and rejection surfaces. Re-screen the built warm
-  panels; no credited area/capacity from hot-facing casing. Reuse Q38 (40 F68), `SERVICE_HOST_SURVEY.md`,
-  `SERV002_FORWARD_DISTRICT.md`, `SP52_SENSITIVITY_2026-10-13.md`; low-e + shield is a study candidate, not installed wall protection.
-  **Done when:** owner heat balance supports the selected interfaces, geometry/service separation is checked and the required
-  capacities are imported. Keep all three loops separate; incorporate HR only with released accounting.
+- [ ] **F02 — Warm/cold cooling: equipment and SP-52 packaging. ARCHITECTURE DECIDED 2026-10-31; AFTER D04 for service access.**
+  Pass 7 (Claude under the owner's delegation, S&E 15 OWN-F02-LOOPS-2026-10-31, `heat_rejection.py`, docs/MODEL.md "Warm and cold loop
+  architecture"): burn: the warm loop is heat-pumped into the hot loop (35 MW at burnout needs 210 MW of drive electric work, 6.8 % of
+  the hot loop's other-loads allowance); coast: drain-back warm channels in the blades radiate at 440 K (51 MW capacity, the 15-30 MW
+  normal band uses 29-58 % of the blades); cold loop on each ring's usable faces (0.15 MW in HIGH_POWER, +50 % over the 100 kW bound).
+  Left: the heat pumps, exchangers and drain-back hardware and their SP-52 packaging; the blade channel design; the drive's electric tap
+  (210 MW at burnout, with F03); Heat Debt buffer for 50-80 MW bursts; the hot coolant choice. The Q38 candidate panels stay PROTOTYPE
+  with no credited area. Keep all three loops separate.
 
-- [ ] **F03 — Integrate electrical, black-start and survival power. AFTER B02/F02.** Size/place owner-released A/B distribution,
+- [ ] **F03 — Integrate electrical, black-start and survival power. AFTER B02; F02 architecture set 2026-10-31 (drive tap 210 MW for the burn heat pumps).** Size/place owner-released A/B distribution,
   storage, survival reserve and drive-off generation; preserve category suballocations and failure domains.
   **Done when:** required operating/black-start/failure states consume sourced budgets and endurance, with matching geometry and
   presentation. Finite batteries alone cannot become a six-year energy source.

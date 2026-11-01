@@ -43,7 +43,7 @@ class OwnerTargetTests(unittest.TestCase):
         self.assertAlmostEqual(self.rows['crown_engaged_hardware_radius_m']['current'],43.353,delta=1e-3);self.assertEqual(self.rows['crown_housing_radius_m']['current'],[41.0,44.5])
         self.assertEqual(self.rows['disruptor_layer_count']['current'],1);self.assertAlmostEqual(self.rows['disruptor_ahead_of_crown']['current'],0.15,delta=1e-9)
         self.assertEqual(self.rows['crown_engaged_motion']['current'][0],0.0);self.assertAlmostEqual(self.rows['crown_engaged_motion']['current'][1],2.949,delta=1e-3)
-        self.assertAlmostEqual(self.rows['overall_length_with_lance_m']['current'],237.0)             # 225 m body + 12 m Lance (Q2)
+        self.assertAlmostEqual(self.rows['overall_length_with_lance_m']['current'],257.0)             # 245 m body (full return, pass 7) + 12 m Lance (Q2)
         self.assertEqual(self.rows['eye_wells']['target'],[3.5,2.0,4.0])
         self.assertEqual(hr.plane_spacing_m(self.s),6.0)
 

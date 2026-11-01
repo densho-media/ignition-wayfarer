@@ -176,6 +176,11 @@ def forward_shield_r(s):
     return fs.stations(s)['shield_r']
 
 
+def fsh_truss_aft(s):
+    import forward_shield as fs
+    return fs.stations(s)['truss_aft']
+
+
 def unit(v):
     n = math.sqrt(sum(c*c for c in v)); return tuple(c/n for c in v)
 
@@ -316,8 +321,8 @@ def obstacles(s):
     import thermal_geometry as tg
     d = tg.blade_of(s)
     return dict(blade=d, blades=[math.radians(s['prototype']['radiator_phase_deg']+j*120) for j in range(s['radiators']['count'])],
-                rings=[(x, habitat_ring.sweep_half(s), habitat_ring.outer(s)) for x in habitat_ring.centers(s)], shield=(105.9, forward_shield_r(s)),
-                hull=[(layout.at(s, {'datum': 'AFT', 'offset_m': 0.0}), 80.0, hg.radius_at(s, 0.0)), (80.0, layout.at(s, {'datum': 'FWD', 'offset_m': 0.0}), hg.radius_at(s, 100.0))])
+                rings=[(x, habitat_ring.sweep_half(s), habitat_ring.outer(s)) for x in habitat_ring.centers(s)], shield=(fsh_truss_aft(s), forward_shield_r(s)),
+                hull=[(layout.at(s, {'datum': 'AFT', 'offset_m': 0.0}), 80.0, hg.radius_at(s, 0.0)), (70.0, layout.at(s, {'datum': 'FWD', 'offset_m': 0.0}), hg.radius_at(s, 110.0))])
 
 
 def ray_hit(o, c, r, tmax=1e9, spheres=(), plume=None):

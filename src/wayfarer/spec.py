@@ -239,7 +239,8 @@ def validate_derived_sources(s):
     sh=s['forward_shield'];shield_r=sh['diameter']['value']/2
     if not math.isclose(sh['ring_shadow_margin']['value'],shield_r-habitat_ring.outer(s),rel_tol=1e-9):
         raise ValueError('Stale DERIVED ring shadow margin')
-    thrust=s['mission']['first_ignition']['max_accel']*g0*s['physics']['departure_mass']['upper_kg']/1e6
+    # pass 7: the full-return ship is power-limited below this load; the design load keeps its 1.5 g x 2,000 t basis (reference_mass_kg)
+    thrust=s['mission']['first_ignition']['max_accel']*g0*s['propulsion']['design_thrust']['reference_mass_kg']/1e6
     if not math.isclose(s['propulsion']['design_thrust']['value'],thrust,rel_tol=1e-6):
         raise ValueError('Stale DERIVED design thrust')
     flight=s['mission']['first_ignition']['max_accel']*g0*s['physics']['protected_burnout_mass']['value']/1e6
@@ -507,8 +508,10 @@ def validate(s, source_map):
     require(all(-length/2-1e-9 <= x <= length/2+1e-9 for x in station_xs) and all(station_radius_ok(x) for x in stations), 'Station envelope')
     # Q2 (2026-10-03b): the 220-240 m envelope INCLUDES the Dust Lance, so it bounds the overall length (aft end to Lance tip), not the body value.
     overall = forward_shield.overall_length(s)
-    require(length > 0 and 220 <= overall <= 240 and s['ship']['length']['min'] == 220 and s['ship']['length']['max'] == 240,
-            'Overall ship length INCLUDING the Dust Lance must stay inside the 220-240 m WORKING envelope')
+    # Pass 7 (owner choice 2026-10-31, full return): the return-propellant torus grows the body; the envelope is the toml's min/max.
+    env = s['ship']['length']
+    require(length > 0 and env['min'] <= overall <= env['max'],
+            f"Overall ship length INCLUDING the Dust Lance must stay inside the {env['min']:.0f}-{env['max']:.0f} m WORKING envelope")
     require(all(a < b for a, b in zip(station_xs, station_xs[1:])), 'Station order')
     require(type(p['radiator_ribbon_count']) is int and 1 <= p['radiator_ribbon_count'] <= 2, 'Study ribbon count')
     d = derived(s)

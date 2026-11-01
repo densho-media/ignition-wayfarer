@@ -274,8 +274,8 @@
    "name": "Main_Battery",
    "layer": "MAIN_BATTERY",
    "x_m": [
-    -60.4,
-    -57.6
+    -70.4,
+    -67.6
    ],
    "angle_deg": 90.0,
    "radius_m": [
@@ -283,15 +283,15 @@
     3.3
    ],
    "width_m": 2.4,
-   "display_volume_m3": 13.439999999999984,
+   "display_volume_m3": 13.440000000000053,
    "status": "PROTOTYPE"
   },
   {
    "name": "Pulse_Bank",
    "layer": "PULSE_BANK",
    "x_m": [
-    -60.4,
-    -57.6
+    -70.4,
+    -67.6
    ],
    "angle_deg": 270.0,
    "radius_m": [
@@ -299,15 +299,15 @@
     3.1
    ],
    "width_m": 2.0,
-   "display_volume_m3": 10.07999999999999,
+   "display_volume_m3": 10.080000000000041,
    "status": "PROTOTYPE"
   },
   {
    "name": "Survival_Reserve_1",
    "layer": "SURVIVAL_RESERVE",
    "x_m": [
-    99.39936247723134,
-    100.59936247723134
+    109.4,
+    110.6
    ],
    "angle_deg": 105.00000000000001,
    "radius_m": [
@@ -315,15 +315,15 @@
     2.5
    ],
    "width_m": 1.2,
-   "display_volume_m3": 1.728000000000004,
+   "display_volume_m3": 1.7279999999999835,
    "status": "PROTOTYPE"
   },
   {
    "name": "Survival_Reserve_2",
    "layer": "SURVIVAL_RESERVE",
    "x_m": [
-    103.24936247723134,
-    104.64936247723134
+    113.25,
+    114.65
    ],
    "angle_deg": 150.0,
    "radius_m": [
@@ -331,7 +331,7 @@
     2.5
    ],
    "width_m": 1.2,
-   "display_volume_m3": 2.0159999999999876,
+   "display_volume_m3": 2.016000000000008,
    "status": "PROTOTYPE"
   }
  ],
@@ -354,10 +354,10 @@
   },
   "Survival_Reserve_1": {
    "nearest_member": "Airlock_EVA",
-   "member_gap_m": 0.2355074242155297,
+   "member_gap_m": 0.23550742421552398,
    "cage_gap_m": Infinity,
    "hull_gap_m": 3.829007973563512,
-   "pack_gap_m": 2.650000000000013,
+   "pack_gap_m": 2.6500000000000057,
    "passed": true
   },
   "Survival_Reserve_2": {
@@ -365,15 +365,15 @@
    "member_gap_m": 0.2555086418974527,
    "cage_gap_m": Infinity,
    "hull_gap_m": 3.829007973563512,
-   "pack_gap_m": 2.650000000000013,
+   "pack_gap_m": 2.6500000000000057,
    "passed": true
   }
  },
  "isolation": {
   "required_m": 2.0,
   "separation_m": {
-   "Survival_Reserve_1": 156.99936247723133,
-   "Survival_Reserve_2": 160.84936247723132
+   "Survival_Reserve_1": 177.0,
+   "Survival_Reserve_2": 180.85
   },
   "passed": true
  },
@@ -381,7 +381,7 @@
   {
    "name": "IF_RIDE_THROUGH_POWER_BUS_A",
    "at": [
-    -69.0,
+    -79.0,
     -2.1,
     0.0
    ],
@@ -390,7 +390,7 @@
   {
    "name": "IF_RIDE_THROUGH_POWER_BUS_B",
    "at": [
-    -69.0,
+    -79.0,
     2.1,
     0.0
    ],
@@ -399,7 +399,7 @@
   {
    "name": "IF_RIDE_THROUGH_ROTOR_TRANSFER_1",
    "at": [
-    85.04936247723134,
+    75.04936247723134,
     0.0,
     0.0
    ],
@@ -408,7 +408,7 @@
   {
    "name": "IF_RIDE_THROUGH_ROTOR_TRANSFER_2",
    "at": [
-    91.04936247723134,
+    81.04936247723134,
     0.0,
     0.0
    ],
@@ -417,7 +417,7 @@
   {
    "name": "IF_RIDE_THROUGH_EYE_MOUNT",
    "at": [
-    109.4,
+    119.4,
     0.0,
     0.0
    ],
@@ -426,7 +426,7 @@
   {
    "name": "IF_RIDE_THROUGH_REACTOR_MOUNT",
    "at": [
-    -86.0,
+    -96.0,
     0.0,
     0.0
    ],
@@ -435,7 +435,7 @@
   {
    "name": "IF_RIDE_THROUGH_CREW_REFUGE",
    "at": [
-    95.54936247723134,
+    85.54936247723134,
     0.0,
     0.0
    ],

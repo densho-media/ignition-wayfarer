@@ -74,6 +74,10 @@ def dry_parts(s):
         m = ring_circulation.budget(s)['mass_kg']['total']
         for tag, xc in (('A', xa), ('B', xb)):
             out.append(_part(f'circ001@ring_{tag}', m/2, xc-1.0, xc+1.0, ['ring', r_com]))
+    add = operating_point.mission(s)['added_tank_kg']
+    if add > 0:                                  # pass 7: the return torus's tank shell, insulation and supports (tank_dry_fraction)
+        rt = fuel_storage.torus(s, 'return_torus')
+        out.append(_part('return_torus_tanks', add, rt['x']-rt['a'], rt['x']+rt['a'], ['ring', rt['R']]))
     op = s['physics']['operating_point']; extra = op['protected_and_operational_kg']-sum(i['mass_kg'] for i in items.values())
     if extra > 0:
         out.append(_part('operating_inventory', extra, p['operating_inventory_x'][0], p['operating_inventory_x'][1], ['cyl', p['operating_inventory_r_m']]))
@@ -86,9 +90,10 @@ def _arc_centroid(a0, a1, R):
     return k*math.cos(mid), k*math.sin(mid)
 
 
-def torus_capacity(s):
+def torus_capacity(s, key='torus'):
     """Liquid capacity (kg) of each torus cell at the species density."""
-    rho = fuel_storage.cfg(s)['density_kg_m3']; tor = fuel_storage.torus(s)
+    rho = fuel_storage.cfg(s)['density_kg_m3']; tor = fuel_storage.torus(s, key)
+    rho = dict(rho, **{'helium-3': rho['helium_3']})
     return [dict(c, cap_kg=c['liquid_m3']*rho[c['species']]) for c in tor['cells']], tor
 
 
@@ -131,10 +136,20 @@ def balance(s, species, kg):
     return [dict(name=c['name'], kg=m, cap_kg=c['cap_kg'], fill=m/c['cap_kg']) for c, m in zip(cs, ms)], res
 
 
-def propellant_parts(s, he3_kg, d2_kg, h2_kg, balanced=True):
+def propellant_parts(s, he3_kg, d2_kg, h2_kg, balanced=True, ret=None):
     """Propellant as point masses: helium-3 spread over the 27 body lobes by volume (axisymmetric), deuterium and hydrogen in the torus
-    cells, balanced per species or (balanced=False) filled in proportion to each cell's capacity."""
+    cells, balanced per species or (balanced=False) filled in proportion to each cell's capacity. ret: the return torus's kg per species
+    (pass 7), filled in proportion to each cell's volume; its three vessels are alike, so it adds no lateral moment."""
     cells, tor = torus_capacity(s); R, a = tor['R'], tor['a_in']; xc = tor['x']; out = []
+    if ret:
+        rc, rt = torus_capacity(s, 'return_torus')
+        for sp, key in fuel_storage.INV_KEY.items():
+            cs = [c for c in rc if c['species'] == sp]; tot = sum(c['liquid_m3'] for c in cs)
+            for c in cs:
+                m = ret[key]*c['liquid_m3']/tot
+                if m > 0:
+                    y, z = _arc_centroid(c['a0'], c['a1'], rt['R'])
+                    out.append(_part(c['name'], m, rt['x']-rt['a_in'], rt['x']+rt['a_in'], ['point'], (y, z)))
     lobes = fuel_storage.body_lobes(s)
     if he3_kg > 0:
         tot = sum(l['liquid_m3'] for l in lobes)
@@ -167,19 +182,25 @@ def totals(parts):
     return dict(mass_kg=M, cg_m=c, lateral_m=math.hypot(c[1], c[2]), I_roll=Ixx, I_pitch=Iyy, I_yaw=Izz, I_xy=Ixy, I_xz=Ixz)
 
 
+def stores_at(s, left):
+    """Propellant in every store with `left` (0..1) of the mission's propellant still aboard: each store drains in proportion (pass 7)."""
+    inv = fuel_storage.cfg(s)['inventory_kg']; ret = fuel_storage.return_inventory(s)
+    return dict(he3=inv['helium_3']*left, d2=inv['deuterium']*left, h2=(inv['hydrogen_first_ignition']+inv['hydrogen_reserve'])*left,
+                ret={k: v*left for k, v in ret.items()})
+
+
 def burn_states(s, steps=10, balanced=True):
-    """Departure to burnout along the First Ignition burn: the propellant consumed in proportion to the expelled mass (operating_point),
-    the reserve hydrogen left at burnout. Each state: mass, CG, lateral offset, inertia, thrust and the steering the offset needs."""
-    inv = fuel_storage.cfg(s)['inventory_kg']; b = operating_point.burn(s); dry = dry_parts(s)
-    fi = __import__('first_ignition').result(s); T = fi['time_s']; ve = b['exhaust_velocity_m_s']; m0 = b['departure_mass_kg']
-    a_max = s['mission']['first_ignition']['max_accel']*G0; r_noz = s['prototype']['nozzle_offset_m']; out = []
+    """Departure to burnout along the First Ignition burn (power-limited, operating_point): every store drained in proportion to the
+    mission's propellant used. Each state: mass, CG, lateral offset, inertia, thrust and the steering the offset needs."""
+    b = operating_point.burn(s); m_ = operating_point.mission(s); dry = dry_parts(s)
+    T = b['duration_s']; m0 = b['departure_mass_kg']; mf = b['burnout_mass_kg']; F = b['peak_thrust_N']
+    r_noz = s['prototype']['nozzle_offset_m']; out = []; P = m_['propellant_kg']; dep_dry = None
     for i in range(steps+1):
-        t = T*i/steps; v = a_max*t*t/(2*T); m = m0*math.exp(-v/ve); f = (m0-m)/b['expelled_kg']   # fraction of the burn's expelled mass
-        he3 = inv['helium_3']*(1-f); d2 = inv['deuterium']*(1-f); h2 = inv['hydrogen_reserve']+inv['hydrogen_first_ignition']*(1-f)
-        tot = totals(dry+propellant_parts(s, he3, d2, h2, balanced))
-        F = m*a_max*t/T
+        t = T*i/steps; m = m0-(m0-mf)*i/steps; left = 1-(m0-m)/P
+        st = stores_at(s, left)
+        tot = totals(dry+propellant_parts(s, st['he3'], st['d2'], st['h2'], balanced, ret=st['ret']))
         tot.update(t_s=t, thrust_N=F, steer_torque_N_m=F*tot['lateral_m'], differential_thrust=tot['lateral_m']/r_noz,
-                   propellant_kg=he3+d2+h2)
+                   propellant_kg=st['he3']+st['d2']+st['h2']+sum(st['ret'].values()), mission_left=left)
         out.append(tot)
     return out
 
@@ -223,7 +244,8 @@ def report(s):
     worst = max(trimmed, key=lambda r: r['differential_thrust']); worst_u = max(untrimmed, key=lambda r: r['differential_thrust'])
     dep_d2, d2_res = balance(s, 'deuterium', inv['deuterium'])
     dep_trim, dep_res = balance(s, 'hydrogen', inv['hydrogen_first_ignition']+inv['hydrogen_reserve'])
-    end_trim, end_res = balance(s, 'hydrogen', inv['hydrogen_reserve'])
+    left = trimmed[-1]['mission_left']
+    end_trim, end_res = balance(s, 'hydrogen', (inv['hydrogen_first_ignition']+inv['hydrogen_reserve'])*left)
     fails = []
     if worst['differential_thrust'] > lim:
         fails.append(f"balanced burn needs {worst['differential_thrust']:.3f} differential thrust (limit {lim})")

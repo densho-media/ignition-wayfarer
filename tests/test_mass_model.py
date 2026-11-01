@@ -13,11 +13,11 @@ class MassModelTests(unittest.TestCase):
         self.s = load()[0]
 
     def test_mass_closes(self):
-        # departure = the B01 1,300 t protected and operational ship + the 600 t inventory + the unbudgeted CIRC-001 corridors
+        # departure = the full-return mission (1.3 kt ship + return tankage + 2.8 kt propellant, pass 7) + the unbudgeted CIRC-001 corridors
         import ring_circulation
+        import operating_point
         st = mm.burn_states(self.s, steps=2)
-        inv = sum(fuel_storage.cfg(self.s)['inventory_kg'].values())
-        want = self.s['physics']['operating_point']['protected_and_operational_kg']+inv+ring_circulation.budget(self.s)['mass_kg']['total']
+        want = operating_point.mission(self.s)['departure_mass_kg']+ring_circulation.budget(self.s)['mass_kg']['total']
         self.assertAlmostEqual(st[0]['mass_kg'], want, delta=1.0)
 
     def test_balanced_load_keeps_the_thrust_line(self):

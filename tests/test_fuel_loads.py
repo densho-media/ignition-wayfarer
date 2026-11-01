@@ -18,7 +18,7 @@ class FuelLoadTests(unittest.TestCase):
 
     def test_bipod_statics(self):
         # the two legs' axial components return the support load; their radial components cancel
-        for sp in fuel_loads.legs(self.s).values():
+        for sp in list(fuel_loads.legs(self.s).values())+list(fuel_loads.legs(self.s, 'return_torus').values()):
             ua, uf = sp['Aft']['u'], sp['Fwd']['u']; P = 1.0
             D = ua[0]*uf[1]-ua[1]*uf[0]; Ta, Tf = P*uf[1]/D, -P*ua[1]/D
             self.assertAlmostEqual(Ta*ua[0]+Tf*uf[0], P, places=9)

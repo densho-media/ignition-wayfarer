@@ -2,6 +2,15 @@
  "status": "WORKING",
  "draw": {
   "cells_drain_only": {
+   "Fuel_Return_Torus_D2_1": true,
+   "Fuel_Return_Torus_D2_2": true,
+   "Fuel_Return_Torus_D2_3": true,
+   "Fuel_Return_Torus_H2_1": true,
+   "Fuel_Return_Torus_H2_2": true,
+   "Fuel_Return_Torus_H2_3": true,
+   "Fuel_Return_Torus_He3_1": true,
+   "Fuel_Return_Torus_He3_2": true,
+   "Fuel_Return_Torus_He3_3": true,
    "Fuel_Torus_D2_1": true,
    "Fuel_Torus_D2_2": true,
    "Fuel_Torus_D2_3": true,
@@ -10,6 +19,15 @@
    "Fuel_Torus_H2_3_1": true
   },
   "departure": {
+   "Fuel_Return_Torus_D2_1": 206851.92473409395,
+   "Fuel_Return_Torus_D2_2": 206851.92473409395,
+   "Fuel_Return_Torus_D2_3": 206851.92473409395,
+   "Fuel_Return_Torus_H2_1": 215553.59915160833,
+   "Fuel_Return_Torus_H2_2": 215553.59915160818,
+   "Fuel_Return_Torus_H2_3": 215553.5991516085,
+   "Fuel_Return_Torus_He3_1": 309789.9065083821,
+   "Fuel_Return_Torus_He3_2": 309789.90650838206,
+   "Fuel_Return_Torus_He3_3": 309789.9065083822,
    "Fuel_Torus_D2_1": 43551.163159195254,
    "Fuel_Torus_D2_2": 27297.620962517118,
    "Fuel_Torus_D2_3": 39251.215878287636,
@@ -18,12 +36,21 @@
    "Fuel_Torus_H2_3_1": 83865.52798687854
   },
   "burnout": {
-   "Fuel_Torus_D2_1": 0.0,
-   "Fuel_Torus_D2_2": 0.0,
-   "Fuel_Torus_D2_3": 0.0,
-   "Fuel_Torus_H2_1_1": 70848.9507665984,
-   "Fuel_Torus_H2_2_1": 60827.34501730588,
-   "Fuel_Torus_H2_3_1": 48323.704216095735
+   "Fuel_Return_Torus_D2_1": 134484.06560581987,
+   "Fuel_Return_Torus_D2_2": 134484.06560581987,
+   "Fuel_Return_Torus_D2_3": 134484.06560581987,
+   "Fuel_Return_Torus_H2_1": 140141.42922353727,
+   "Fuel_Return_Torus_H2_2": 140141.42922353718,
+   "Fuel_Return_Torus_H2_3": 140141.4292235374,
+   "Fuel_Return_Torus_He3_1": 201408.8395089864,
+   "Fuel_Return_Torus_He3_2": 201408.83950898633,
+   "Fuel_Return_Torus_He3_3": 201408.83950898642,
+   "Fuel_Torus_D2_1": 29313.773673930802,
+   "Fuel_Torus_D2_2": 17068.29615977654,
+   "Fuel_Torus_D2_3": 25199.06552306839,
+   "Fuel_Torus_H2_1_1": 83193.45310394754,
+   "Fuel_Torus_H2_2_1": 71425.71372448055,
+   "Fuel_Torus_H2_3_1": 56743.477172369305
   }
  },
  "supports": {
@@ -41,65 +68,95 @@
   "worst": {
    "support": "Fuel_Torus_Strut_1_1",
    "side": "Aft",
-   "t_s": 521733.51244988514,
-   "vessel_kg": 134748.5828633636,
-   "load_N": 773636.8017515041,
-   "force_N": -845748.1077724854,
+   "t_s": 0.0,
+   "vessel_kg": 202908.56355635004,
+   "load_N": 494533.0844903337,
+   "force_N": -540628.9094464955,
    "length_m": 10.923144691889073,
-   "stress_margin": 10.207395851934635,
-   "buckling_margin": 0.20096752323119382
+   "stress_margin": 16.532606320544897,
+   "buckling_margin": 0.8787674734392152
   },
-  "worst_margin": 0.20096752323119382,
+  "worst_margin": 0.8787674734392152,
   "radial_strut": {
    "length_m": 9.5,
-   "bending_stress_Pa": 4873821462.44703,
+   "bending_stress_Pa": 3115500653.048442,
+   "yield_Pa": 880000000.0
+  }
+ },
+ "return_supports": {
+  "tube": {
+   "radius_m": 0.45,
+   "wall_m": 0.02,
+   "area_m2": 0.05654866776461628,
+   "I_m4": 0.005725552611167398
+  },
+  "dry_kg": {
+   "1": 116631.1178620111,
+   "2": 116631.11786201106,
+   "3": 116631.11786201113
+  },
+  "worst": {
+   "support": "Fuel_Return_Torus_Strut_3_2",
+   "side": "Aft",
+   "t_s": 0.0,
+   "vessel_kg": 848826.5482560957,
+   "load_N": 2068778.1912654187,
+   "force_N": -1708617.3798007283,
+   "length_m": 9.877278615001716,
+   "stress_margin": 19.803298211072544,
+   "buckling_margin": 12.802080201463834
+  },
+  "worst_margin": 12.802080201463834,
+  "radial_strut": {
+   "length_m": 7.300000000000001,
+   "bending_stress_Pa": 1186948547.9972317,
    "yield_Pa": 880000000.0
   }
  },
  "spine": [
   {
-   "t_s": 65216.68905623564,
-   "accel_m_s2": 1.4404192893371663,
-   "thrust_N": 2787921.9855586817,
+   "t_s": 86291.59029804802,
+   "accel_m_s2": 4.9836144291382665,
+   "thrust_N": 21770763.000706356,
    "stations": {
     "-81.0": {
-     "mass_forward_kg": 1652813.4091424947,
-     "axial_N": 2380744.3162039714
+     "mass_forward_kg": 4085788.608834661,
+     "axial_N": 20361995.06539718
     },
     "0.0": {
-     "mass_forward_kg": 1342782.8903288436,
-     "axial_N": 1934170.376621579
+     "mass_forward_kg": 3763332.066313604,
+     "axial_N": 18754995.987319205
     },
     "82.9": {
-     "mass_forward_kg": 977944.5639401283,
-     "axial_N": 1408650.2138017847
+     "mass_forward_kg": 3044591.395089737,
+     "axial_N": 15173069.607399419
     },
     "96.1": {
-     "mass_forward_kg": 574684.2341921942,
-     "axial_N": 827786.2562083941
+     "mass_forward_kg": 1640756.202149512,
+     "axial_N": 8176896.28373041
     }
    }
   },
   {
-   "t_s": 652166.8905623564,
-   "accel_m_s2": 14.320666979204555,
-   "thrust_N": 21770763.00070636,
+   "t_s": 862915.9029804801,
+   "accel_m_s2": 6.241773968306381,
+   "thrust_N": 21770763.000706356,
    "stations": {
     "-81.0": {
-     "mass_forward_kg": 1237553.909681833,
-     "axial_N": 17722597.409366123
+     "mass_forward_kg": 3205232.787473797,
+     "axial_N": 20006338.575216044
     },
     "0.0": {
-     "mass_forward_kg": 1012285.0653227883,
-     "axial_N": 14496597.308509981
+     "mass_forward_kg": 2914486.9614946274,
+     "axial_N": 18191568.84722553
     },
     "82.9": {
-     "mass_forward_kg": 725624.9823630787,
-     "axial_N": 10391433.724212829
+     "mass_forward_kg": 2215925.837161053,
+     "axial_N": 13831308.206089385
     },
     "96.1": {
-     "mass_forward_kg": 322364.65261514456,
-     "axial_N": 4616476.835968448
+     "mass_forward_kg": 1197657.2594909342,
+     "axial_N": 7475505.905243673
     }
    }
   }

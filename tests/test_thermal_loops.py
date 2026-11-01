@@ -334,7 +334,10 @@ class SpecTests(unittest.TestCase):
             if path.name in ('thermal_loops.py', 'spec.py'):
                 continue
             text = path.read_text()
-            self.assertNotIn('thermal_loops', text, path.name)
+            if path.name == 'heat_rejection.py':     # F02 reads the screen's written report, never the study module
+                self.assertIsNone(re.search(r'^\s*(import|from) thermal_loops', text, re.M), path.name)
+            else:
+                self.assertNotIn('thermal_loops', text, path.name)
             self.assertNotIn("['loops']['study']", text, path.name)
         module = (ROOT/'src/wayfarer/thermal_loops.py').read_text().lower()
         self.assertNotIn('atmosphere', module)

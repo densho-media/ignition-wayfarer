@@ -15,9 +15,9 @@ class LayoutTests(unittest.TestCase):
     def setUp(self):
         self.s,self.sources,*_=load()
 
-    def test_origins_at_225(self):
+    def test_origins_at_245(self):
         o=layout.origins(self.s)
-        for k,v in {'AFT':-112.5,'RADIATOR_AFT':-101.0,'RADIATOR_FRONT':81.149362477,'RING_A':85.049362477,'FWD':112.5}.items():self.assertAlmostEqual(o[k],v,delta=1e-9)
+        for k,v in {'AFT':-122.5,'RADIATOR_AFT':-111.0,'RADIATOR_FRONT':71.149362477,'RING_A':75.049362477,'FWD':122.5}.items():self.assertAlmostEqual(o[k],v,delta=1e-9)
         self.assertEqual(layout.check(self.s),[])
         # Independent relationships: blade length = area / (outer - root); aft edge 1.0 m ahead of the thrust ring's forward face.
         length=50000/9/(37.0-6.5)

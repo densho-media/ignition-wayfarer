@@ -440,8 +440,8 @@ def main():
         for x in objs:
             x.hide_render = x.get('eva_role') == 'validation_body' or x.get('eva_show') == 'cutaway'
         pose_and_place(rig, env['variants'][k][o['pose']], o, fit)
-    rc.hide_render = False; th = math.radians(95.0); eye = Vector((110.5, 8.0*math.cos(th), 8.0*math.sin(th))); th2 = math.radians(38.0)
-    look = Vector((103.2, 2.7*math.cos(th2), 2.7*math.sin(th2))); camera(eye, look, 24, up=(0, math.cos(th2), math.sin(th2)))
+    rc.hide_render = False; th = math.radians(95.0); eye = Vector((120.5, 8.0*math.cos(th), 8.0*math.sin(th))); th2 = math.radians(38.0)
+    look = Vector((113.2, 2.7*math.cos(th2), 2.7*math.sin(th2))); camera(eye, look, 24, up=(0, math.cos(th2), math.sin(th2)))
     render(a.renders/'sp12_sp13_rooms.png')
     if a.out:
         a.out.mkdir(parents=True, exist_ok=True); bpy.ops.wm.save_as_mainfile(filepath=str(a.out/'WF_EVA_AIRLOCK_STUDY.blend'), copy=True)

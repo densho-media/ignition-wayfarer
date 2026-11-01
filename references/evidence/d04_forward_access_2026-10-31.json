@@ -1,0 +1,136 @@
+{
+ "id": "OWN-D04-FORWARD-ACCESS-2026-10-31",
+ "status": "WORKING (owner-delegated to Claude 2026-10-31) / STUDY, NOT BUILT / PRESSURE FLIGHT HOLD",
+ "basis": "SIM-027 litter-turn sweep (restored eva3_exits study, sampled poses, seeds 17/23/41, least over seeds; PASS >= 0.05 m, MARGINAL 0..0.05, FAIL < 0); carriers S suited casualty on full-length frame (capsule d 0.857 x 2.093 m), A rigid litter 2.00 x 0.55 x 0.30 m",
+ "decision": {
+  "sp11_aperture_m": 1.35,
+  "sp11_chamber_clear_m": 2.4,
+  "turning_well": "SP-12 floor utility layer moved out of X 100.9-102.9, az 30-70: floor r 1.25 -> 1.10 (spine 0.95 + 0.15 clearance kept)",
+  "plug_rail": "forward plug rail only along the park run; rim pins carry the leaf at the seat (KP5 guide concept)",
+  "staffing": "relay handover at the SP-12 floor slot: feeder above the carrier, receiver waiting in the trunk extension aft of the slot; nobody rides down beside the litter",
+  "thrust": "no casualty transfer under thrust (15!A197): restrain at the rated couch, move after a safe thrust reduction"
+ },
+ "results": {
+  "current_LT2_1_20": {
+   "S": {
+    "turn: chamber, aperture, corner, floor run to the lowering station": -0.013,
+    "lowering through the slot": 0.079,
+    "run aft in the extension": 0.1,
+    "run aft in the built trunk": 0.1,
+    "rescuers: turn and floor run": -0.015,
+    "rescuers: lowering": -0.27,
+    "rescuers: aft runs": 0.18
+   },
+   "A": {
+    "turn: chamber, aperture, corner, floor run to the lowering station": 0.1,
+    "lowering through the slot": 0.1,
+    "run aft in the extension": 0.1,
+    "run aft in the built trunk": 0.1,
+    "rescuers: turn and floor run": 0.091,
+    "rescuers: lowering": -0.116,
+    "rescuers: aft runs": 0.106
+   }
+  },
+  "chosen_1_35": {
+   "S": {
+    "turn: chamber, aperture, corner, floor run to the lowering station": 0.09,
+    "lowering through the slot": 0.076,
+    "run aft in the extension": 0.1,
+    "run aft in the built trunk": 0.1,
+    "rescuers: turn and floor run": 0.003,
+    "rescuers: lowering": 0.109,
+    "rescuers: aft runs": 0.18
+   },
+   "A": {
+    "turn: chamber, aperture, corner, floor run to the lowering station": 0.1,
+    "lowering through the slot": 0.1,
+    "run aft in the extension": 0.1,
+    "run aft in the built trunk": 0.1,
+    "rescuers: turn and floor run": 0.101,
+    "rescuers: lowering": 0.1,
+    "rescuers: aft runs": 0.18
+   }
+  },
+  "well_rail_1_20": {
+   "S": {
+    "turn: chamber, aperture, corner, floor run to the lowering station": -0.009,
+    "lowering through the slot": 0.079,
+    "run aft in the extension": 0.1,
+    "run aft in the built trunk": 0.1,
+    "rescuers: turn and floor run": 0.003,
+    "rescuers: lowering": 0.125,
+    "rescuers: aft runs": 0.18
+   },
+   "A": {
+    "turn: chamber, aperture, corner, floor run to the lowering station": 0.062,
+    "lowering through the slot": 0.1,
+    "run aft in the extension": 0.1,
+    "run aft in the built trunk": 0.1,
+    "rescuers: turn and floor run": 0.001,
+    "rescuers: lowering": 0.112,
+    "rescuers: aft runs": 0.18
+   }
+  },
+  "well_rail_1_30": {
+   "S": {
+    "turn: chamber, aperture, corner, floor run to the lowering station": 0.049,
+    "lowering through the slot": 0.075,
+    "run aft in the extension": 0.1,
+    "run aft in the built trunk": 0.1,
+    "rescuers: turn and floor run": -0.005,
+    "rescuers: lowering": 0.1,
+    "rescuers: aft runs": 0.18
+   },
+   "A": {
+    "turn: chamber, aperture, corner, floor run to the lowering station": 0.1,
+    "lowering through the slot": 0.1,
+    "run aft in the extension": 0.1,
+    "run aft in the built trunk": 0.1,
+    "rescuers: turn and floor run": 0.107,
+    "rescuers: lowering": 0.1,
+    "rescuers: aft runs": 0.18
+   }
+  }
+ },
+ "sp11_rows": {
+  "aperture_1_20": {
+   "limp_casualty_door_m": -0.099,
+   "chamber_clear_m": 2.1,
+   "volume_m3": 12.3,
+   "shell_m2": 32.1,
+   "shell_t": 0.64,
+   "fitting_outside_m": 2.2,
+   "hull_penetration_m": 1.5,
+   "reverse_retention_kn": 106.2
+  },
+  "aperture_1_35": {
+   "limp_casualty_door_m": 0.051,
+   "limp_overall": "MARGINAL",
+   "chamber_clear_m": 2.4,
+   "volume_m3": 16.74,
+   "shell_m2": 38.9,
+   "shell_t": 0.78,
+   "fitting_outside_m": 2.5,
+   "hull_penetration_m": 1.65,
+   "reverse_retention_kn": 132.1
+  }
+ },
+ "open": [
+  "rescuers during the suited-casualty turn +0.003 m MARGINAL (rescuer pose search, both apertures)",
+  "limp unrestrained casualty MARGINAL at 1.35 m (secure limbs first)",
+  "plug seal, dogs, rim pins and the 132 kN reverse retention unrated; pressure flight HOLD",
+  "Airlock_EVA fitting 2.2 -> 2.5 m outside and hull penetration 1.5 -> 1.65 m are production changes for owner approval",
+  "L1-A 205/210 deg stile S-bends, knees and tether loads need rated rail/stile data",
+  "spin and locked 1.5 g SP-12 geometry not modelled (thrust: disposition only)"
+ ],
+ "sources": [
+  "15!A134 AIRLOCK-004",
+  "15!A135 RESCUE-004",
+  "15!A157 DIST-005",
+  "15!A197:A199",
+  "43 EVA-062",
+  "45 G-14, I-01..I-04",
+  "references/p1_eva_exits.json",
+  "references/p1_eva_sp11.json"
+ ]
+}

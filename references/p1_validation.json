@@ -1,8 +1,8 @@
 {
   "result": "PASS",
   "blender": "5.2.2 LTS",
-  "spec_hash": "a182bab5cd8e8a575d0606cac8ecb4bfd889f00009a64ac2a6074f63a6bc354f",
-  "source_map_hash": "00f613dcc25b6eae690192c16eb737efbbd4e5d68c1bdcbe860fe4c307435ccb",
+  "spec_hash": "bc6604647d171bc2908e3fefb37cc1ef372664b687ae9d504500615594b169aa",
+  "source_map_hash": "51ae87aca5154950c610b7dfd15fd2fa58d2efdaf1c2f5949e0a3ac2b7b8c254",
   "configurations": {
     "COAST": {
       "realizes": [
@@ -25,13 +25,13 @@
         "spans": [
           [
             "Hull_Aft_Body",
-            -101.75,
-            82.749
+            -111.75,
+            72.749
           ],
           [
             "Hull_Forward_Collar",
-            93.349,
-            112.25
+            83.349,
+            122.25
           ]
         ],
         "min_enclosure_margin_m": -25.5,
@@ -49,21 +49,21 @@
         "dock_corridors": {
           "Dock_Primary": {
             "x_m": [
-              96.4,
-              102.4
+              106.4,
+              112.4
             ],
-            "min_ring_gap_m": 3.201,
-            "blade_front_gap_m": 15.001,
+            "min_ring_gap_m": 23.201,
+            "blade_front_gap_m": 35.001,
             "shield_gap_m": 1.662,
             "pass": true
           },
           "Dock_Service": {
             "x_m": [
-              96.4,
-              102.4
+              106.4,
+              112.4
             ],
-            "min_ring_gap_m": 3.201,
-            "blade_front_gap_m": 15.001,
+            "min_ring_gap_m": 23.201,
+            "blade_front_gap_m": 35.001,
             "shield_gap_m": 1.662,
             "pass": true
           }
@@ -71,34 +71,34 @@
       },
       "body_bounds": {
         "min_m": [
-          -112.5,
+          -122.5,
           -6.5,
           -6.5
         ],
         "max_m": [
-          112.5,
+          122.5,
           6.5,
           6.5
         ],
         "size_m": [
-          225.0,
+          245.0,
           13.0,
           13.0
         ]
       },
       "deployed_bounds": {
         "min_m": [
-          -112.5,
+          -122.5,
           -45.00429916381836,
           -45.004234313964844
         ],
         "max_m": [
-          124.5,
+          134.5,
           45.00429916381836,
           45.00429916381836
         ],
         "size_m": [
-          237.0,
+          257.0,
           90.00859832763672,
           90.0085334777832
         ]
@@ -112,9 +112,9 @@
         "generator_proxy": 2,
         "hull_shell": 2,
         "production_detail": 121,
-        "fuel_tank": 33,
-        "fuel_support": 39,
-        "fuel_transfer_line": 14,
+        "fuel_tank": 42,
+        "fuel_support": 51,
+        "fuel_transfer_line": 26,
         "fuel_equipment": 6,
         "body_frame": 14,
         "body_equipment": 6,
@@ -158,8 +158,8 @@
         "crew_vestibule": 6,
         "crew_passage": 15,
         "crew_bracket": 120,
-        "entry_fixture": 750,
-        "route_fitout": 628,
+        "entry_fixture": 820,
+        "route_fitout": 690,
         "transfer_closure": 14,
         "ring_frame": 4,
         "ring_fill": 6,
@@ -188,7 +188,7 @@
         "sector_keel": 6,
         "sector_frame": 4,
         "sector_tie": 18,
-        "bypass_collar": 96,
+        "bypass_collar": 156,
         "eye_well": 4,
         "eye_shell": 4,
         "eye_shutter": 8,
@@ -228,32 +228,32 @@
       },
       "sector_centers_frame_1": [
         [
-          84.9948959350586,
+          74.99492645263672,
           0.7134559154510498,
           25.710941314697266
         ],
         [
-          84.9948959350586,
+          74.99492645263672,
           -22.623056411743164,
           -12.237597465515137
         ],
         [
-          84.9948959350586,
+          74.99492645263672,
           21.90960693359375,
           -13.47333812713623
         ],
         [
-          90.99491882324219,
+          80.9948959350586,
           0.7134559154510498,
           25.710941314697266
         ],
         [
-          90.99491882324219,
+          80.9948959350586,
           -22.623056411743164,
           -12.237597465515137
         ],
         [
-          90.99491882324219,
+          80.9948959350586,
           21.90960693359375,
           -13.47333812713623
         ]
@@ -332,13 +332,13 @@
         "spans": [
           [
             "Hull_Aft_Body",
-            -101.75,
-            82.749
+            -111.75,
+            72.749
           ],
           [
             "Hull_Forward_Collar",
-            93.349,
-            112.25
+            83.349,
+            122.25
           ]
         ],
         "min_enclosure_margin_m": -25.5,
@@ -356,21 +356,21 @@
         "dock_corridors": {
           "Dock_Primary": {
             "x_m": [
-              96.4,
-              102.4
+              106.4,
+              112.4
             ],
-            "min_ring_gap_m": 3.201,
-            "blade_front_gap_m": 15.001,
+            "min_ring_gap_m": 23.201,
+            "blade_front_gap_m": 35.001,
             "shield_gap_m": 1.662,
             "pass": true
           },
           "Dock_Service": {
             "x_m": [
-              96.4,
-              102.4
+              106.4,
+              112.4
             ],
-            "min_ring_gap_m": 3.201,
-            "blade_front_gap_m": 15.001,
+            "min_ring_gap_m": 23.201,
+            "blade_front_gap_m": 35.001,
             "shield_gap_m": 1.662,
             "pass": true
           }
@@ -378,34 +378,34 @@
       },
       "body_bounds": {
         "min_m": [
-          -112.5,
+          -122.5,
           -6.5,
           -6.5
         ],
         "max_m": [
-          112.5,
+          122.5,
           6.5,
           6.5
         ],
         "size_m": [
-          225.0,
+          245.0,
           13.0,
           13.0
         ]
       },
       "deployed_bounds": {
         "min_m": [
-          -112.5,
+          -122.5,
           -45.00429916381836,
           -45.004234313964844
         ],
         "max_m": [
-          124.5,
+          134.5,
           45.00429916381836,
           45.00429916381836
         ],
         "size_m": [
-          237.0,
+          257.0,
           90.00859832763672,
           90.0085334777832
         ]
@@ -419,9 +419,9 @@
         "generator_proxy": 2,
         "hull_shell": 2,
         "production_detail": 121,
-        "fuel_tank": 33,
-        "fuel_support": 39,
-        "fuel_transfer_line": 14,
+        "fuel_tank": 42,
+        "fuel_support": 51,
+        "fuel_transfer_line": 26,
         "fuel_equipment": 6,
         "body_frame": 14,
         "body_equipment": 6,
@@ -465,8 +465,8 @@
         "crew_vestibule": 6,
         "crew_passage": 15,
         "crew_bracket": 120,
-        "entry_fixture": 750,
-        "route_fitout": 628,
+        "entry_fixture": 820,
+        "route_fitout": 690,
         "transfer_closure": 14,
         "ring_frame": 4,
         "ring_fill": 6,
@@ -495,7 +495,7 @@
         "sector_keel": 6,
         "sector_frame": 4,
         "sector_tie": 18,
-        "bypass_collar": 96,
+        "bypass_collar": 156,
         "eye_well": 4,
         "eye_shell": 4,
         "eye_shutter": 8,
@@ -535,32 +535,32 @@
       },
       "sector_centers_frame_1": [
         [
-          84.9948959350586,
+          74.99492645263672,
           0.7134559154510498,
           25.710941314697266
         ],
         [
-          84.9948959350586,
+          74.99492645263672,
           -22.623056411743164,
           -12.237597465515137
         ],
         [
-          84.9948959350586,
+          74.99492645263672,
           21.90960693359375,
           -13.47333812713623
         ],
         [
-          90.99491882324219,
+          80.9948959350586,
           0.7134559154510498,
           25.710941314697266
         ],
         [
-          90.99491882324219,
+          80.9948959350586,
           -22.623056411743164,
           -12.237597465515137
         ],
         [
-          90.99491882324219,
+          80.9948959350586,
           21.90960693359375,
           -13.47333812713623
         ]
@@ -639,13 +639,13 @@
         "spans": [
           [
             "Hull_Aft_Body",
-            -101.75,
-            82.749
+            -111.75,
+            72.749
           ],
           [
             "Hull_Forward_Collar",
-            93.349,
-            112.25
+            83.349,
+            122.25
           ]
         ],
         "min_enclosure_margin_m": -25.5,
@@ -663,21 +663,21 @@
         "dock_corridors": {
           "Dock_Primary": {
             "x_m": [
-              96.4,
-              102.4
+              106.4,
+              112.4
             ],
-            "min_ring_gap_m": 3.201,
-            "blade_front_gap_m": 15.001,
+            "min_ring_gap_m": 23.201,
+            "blade_front_gap_m": 35.001,
             "shield_gap_m": 1.662,
             "pass": true
           },
           "Dock_Service": {
             "x_m": [
-              96.4,
-              102.4
+              106.4,
+              112.4
             ],
-            "min_ring_gap_m": 3.201,
-            "blade_front_gap_m": 15.001,
+            "min_ring_gap_m": 23.201,
+            "blade_front_gap_m": 35.001,
             "shield_gap_m": 1.662,
             "pass": true
           }
@@ -685,34 +685,34 @@
       },
       "body_bounds": {
         "min_m": [
-          -112.5,
+          -122.5,
           -6.5,
           -6.5
         ],
         "max_m": [
-          112.5,
+          122.5,
           6.5,
           6.5
         ],
         "size_m": [
-          225.0,
+          245.0,
           13.0,
           13.0
         ]
       },
       "deployed_bounds": {
         "min_m": [
-          -112.5,
+          -122.5,
           -45.00429916381836,
           -45.004234313964844
         ],
         "max_m": [
-          124.5,
+          134.5,
           45.00429916381836,
           45.00429916381836
         ],
         "size_m": [
-          237.0,
+          257.0,
           90.00859832763672,
           90.0085334777832
         ]
@@ -726,9 +726,9 @@
         "generator_proxy": 2,
         "hull_shell": 2,
         "production_detail": 121,
-        "fuel_tank": 33,
-        "fuel_support": 39,
-        "fuel_transfer_line": 14,
+        "fuel_tank": 42,
+        "fuel_support": 51,
+        "fuel_transfer_line": 26,
         "fuel_equipment": 6,
         "body_frame": 14,
         "body_equipment": 6,
@@ -772,8 +772,8 @@
         "crew_vestibule": 6,
         "crew_passage": 15,
         "crew_bracket": 120,
-        "entry_fixture": 750,
-        "route_fitout": 628,
+        "entry_fixture": 820,
+        "route_fitout": 690,
         "transfer_closure": 14,
         "ring_frame": 4,
         "ring_fill": 6,
@@ -802,7 +802,7 @@
         "sector_keel": 6,
         "sector_frame": 4,
         "sector_tie": 18,
-        "bypass_collar": 96,
+        "bypass_collar": 156,
         "eye_well": 4,
         "eye_shell": 4,
         "eye_shutter": 8,
@@ -842,32 +842,32 @@
       },
       "sector_centers_frame_1": [
         [
-          84.9948959350586,
+          74.99492645263672,
           0.7134559154510498,
           25.710941314697266
         ],
         [
-          84.9948959350586,
+          74.99492645263672,
           -22.623056411743164,
           -12.237597465515137
         ],
         [
-          84.9948959350586,
+          74.99492645263672,
           21.90960693359375,
           -13.47333812713623
         ],
         [
-          90.99491882324219,
+          80.9948959350586,
           0.7134559154510498,
           25.710941314697266
         ],
         [
-          90.99491882324219,
+          80.9948959350586,
           -22.623056411743164,
           -12.237597465515137
         ],
         [
-          90.99491882324219,
+          80.9948959350586,
           21.90960693359375,
           -13.47333812713623
         ]
@@ -943,13 +943,13 @@
         "spans": [
           [
             "Hull_Aft_Body",
-            -101.75,
-            82.749
+            -111.75,
+            72.749
           ],
           [
             "Hull_Forward_Collar",
-            93.349,
-            112.25
+            83.349,
+            122.25
           ]
         ],
         "min_enclosure_margin_m": -25.5,
@@ -967,21 +967,21 @@
         "dock_corridors": {
           "Dock_Primary": {
             "x_m": [
-              96.4,
-              102.4
+              106.4,
+              112.4
             ],
-            "min_ring_gap_m": 3.201,
-            "blade_front_gap_m": 15.001,
+            "min_ring_gap_m": 23.201,
+            "blade_front_gap_m": 35.001,
             "shield_gap_m": 1.662,
             "pass": true
           },
           "Dock_Service": {
             "x_m": [
-              96.4,
-              102.4
+              106.4,
+              112.4
             ],
-            "min_ring_gap_m": 3.201,
-            "blade_front_gap_m": 15.001,
+            "min_ring_gap_m": 23.201,
+            "blade_front_gap_m": 35.001,
             "shield_gap_m": 1.662,
             "pass": true
           }
@@ -989,34 +989,34 @@
       },
       "body_bounds": {
         "min_m": [
-          -112.5,
+          -122.5,
           -6.5,
           -6.5
         ],
         "max_m": [
-          112.5,
+          122.5,
           6.5,
           6.5
         ],
         "size_m": [
-          225.0,
+          245.0,
           13.0,
           13.0
         ]
       },
       "deployed_bounds": {
         "min_m": [
-          -112.5,
+          -122.5,
           -45.00429916381836,
           -45.004234313964844
         ],
         "max_m": [
-          124.5,
+          134.5,
           45.00429916381836,
           45.00429916381836
         ],
         "size_m": [
-          237.0,
+          257.0,
           90.00859832763672,
           90.0085334777832
         ]
@@ -1030,9 +1030,9 @@
         "generator_proxy": 2,
         "hull_shell": 2,
         "production_detail": 121,
-        "fuel_tank": 33,
-        "fuel_support": 39,
-        "fuel_transfer_line": 14,
+        "fuel_tank": 42,
+        "fuel_support": 51,
+        "fuel_transfer_line": 26,
         "fuel_equipment": 6,
         "body_frame": 14,
         "body_equipment": 6,
@@ -1076,8 +1076,8 @@
         "crew_vestibule": 6,
         "crew_passage": 15,
         "crew_bracket": 120,
-        "entry_fixture": 750,
-        "route_fitout": 628,
+        "entry_fixture": 820,
+        "route_fitout": 690,
         "transfer_closure": 14,
         "ring_frame": 4,
         "ring_fill": 6,
@@ -1106,7 +1106,7 @@
         "sector_keel": 6,
         "sector_frame": 4,
         "sector_tie": 18,
-        "bypass_collar": 96,
+        "bypass_collar": 156,
         "eye_well": 4,
         "eye_shell": 4,
         "eye_shutter": 8,
@@ -1146,32 +1146,32 @@
       },
       "sector_centers_frame_1": [
         [
-          84.9948959350586,
+          74.99492645263672,
           0.7134559154510498,
           25.710941314697266
         ],
         [
-          84.9948959350586,
+          74.99492645263672,
           -22.623056411743164,
           -12.237597465515137
         ],
         [
-          84.9948959350586,
+          74.99492645263672,
           21.90960693359375,
           -13.47333812713623
         ],
         [
-          90.99491882324219,
+          80.9948959350586,
           0.7134559154510498,
           25.710941314697266
         ],
         [
-          90.99491882324219,
+          80.9948959350586,
           -22.623056411743164,
           -12.237597465515137
         ],
         [
-          90.99491882324219,
+          80.9948959350586,
           21.90960693359375,
           -13.47333812713623
         ]
@@ -1247,13 +1247,13 @@
         "spans": [
           [
             "Hull_Aft_Body",
-            -101.75,
-            82.749
+            -111.75,
+            72.749
           ],
           [
             "Hull_Forward_Collar",
-            93.349,
-            112.25
+            83.349,
+            122.25
           ]
         ],
         "min_enclosure_margin_m": -25.5,
@@ -1271,21 +1271,21 @@
         "dock_corridors": {
           "Dock_Primary": {
             "x_m": [
-              96.4,
-              102.4
+              106.4,
+              112.4
             ],
-            "min_ring_gap_m": 3.201,
-            "blade_front_gap_m": 15.001,
+            "min_ring_gap_m": 23.201,
+            "blade_front_gap_m": 35.001,
             "shield_gap_m": 1.662,
             "pass": true
           },
           "Dock_Service": {
             "x_m": [
-              96.4,
-              102.4
+              106.4,
+              112.4
             ],
-            "min_ring_gap_m": 3.201,
-            "blade_front_gap_m": 15.001,
+            "min_ring_gap_m": 23.201,
+            "blade_front_gap_m": 35.001,
             "shield_gap_m": 1.662,
             "pass": true
           }
@@ -1293,34 +1293,34 @@
       },
       "body_bounds": {
         "min_m": [
-          -112.5,
+          -122.5,
           -6.5,
           -6.5
         ],
         "max_m": [
-          112.5,
+          122.5,
           6.5,
           6.5
         ],
         "size_m": [
-          225.0,
+          245.0,
           13.0,
           13.0
         ]
       },
       "deployed_bounds": {
         "min_m": [
-          -112.5,
+          -122.5,
           -45.00429916381836,
           -45.004234313964844
         ],
         "max_m": [
-          124.5,
+          134.5,
           45.00429916381836,
           45.00429916381836
         ],
         "size_m": [
-          237.0,
+          257.0,
           90.00859832763672,
           90.0085334777832
         ]
@@ -1334,9 +1334,9 @@
         "generator_proxy": 2,
         "hull_shell": 2,
         "production_detail": 121,
-        "fuel_tank": 33,
-        "fuel_support": 39,
-        "fuel_transfer_line": 14,
+        "fuel_tank": 42,
+        "fuel_support": 51,
+        "fuel_transfer_line": 26,
         "fuel_equipment": 6,
         "body_frame": 14,
         "body_equipment": 6,
@@ -1380,8 +1380,8 @@
         "crew_vestibule": 6,
         "crew_passage": 15,
         "crew_bracket": 120,
-        "entry_fixture": 750,
-        "route_fitout": 628,
+        "entry_fixture": 820,
+        "route_fitout": 690,
         "transfer_closure": 14,
         "ring_frame": 4,
         "ring_fill": 6,
@@ -1410,7 +1410,7 @@
         "sector_keel": 6,
         "sector_frame": 4,
         "sector_tie": 18,
-        "bypass_collar": 96,
+        "bypass_collar": 156,
         "eye_well": 4,
         "eye_shell": 4,
         "eye_shutter": 8,
@@ -1450,32 +1450,32 @@
       },
       "sector_centers_frame_1": [
         [
-          84.9948959350586,
+          74.99492645263672,
           0.7134559154510498,
           25.710941314697266
         ],
         [
-          84.9948959350586,
+          74.99492645263672,
           -22.623056411743164,
           -12.237597465515137
         ],
         [
-          84.9948959350586,
+          74.99492645263672,
           21.90960693359375,
           -13.47333812713623
         ],
         [
-          90.99491882324219,
+          80.9948959350586,
           0.7134559154510498,
           25.710941314697266
         ],
         [
-          90.99491882324219,
+          80.9948959350586,
           -22.623056411743164,
           -12.237597465515137
         ],
         [
-          90.99491882324219,
+          80.9948959350586,
           21.90960693359375,
           -13.47333812713623
         ]
@@ -1551,13 +1551,13 @@
         "spans": [
           [
             "Hull_Aft_Body",
-            -101.75,
-            82.749
+            -111.75,
+            72.749
           ],
           [
             "Hull_Forward_Collar",
-            93.349,
-            112.25
+            83.349,
+            122.25
           ]
         ],
         "min_enclosure_margin_m": -25.5,
@@ -1575,21 +1575,21 @@
         "dock_corridors": {
           "Dock_Primary": {
             "x_m": [
-              96.4,
-              102.4
+              106.4,
+              112.4
             ],
-            "min_ring_gap_m": 3.201,
-            "blade_front_gap_m": 15.001,
+            "min_ring_gap_m": 23.201,
+            "blade_front_gap_m": 35.001,
             "shield_gap_m": 1.662,
             "pass": true
           },
           "Dock_Service": {
             "x_m": [
-              96.4,
-              102.4
+              106.4,
+              112.4
             ],
-            "min_ring_gap_m": 3.201,
-            "blade_front_gap_m": 15.001,
+            "min_ring_gap_m": 23.201,
+            "blade_front_gap_m": 35.001,
             "shield_gap_m": 1.662,
             "pass": true
           }
@@ -1597,34 +1597,34 @@
       },
       "body_bounds": {
         "min_m": [
-          -112.5,
+          -122.5,
           -6.5,
           -6.5
         ],
         "max_m": [
-          112.5,
+          122.5,
           6.5,
           6.5
         ],
         "size_m": [
-          225.0,
+          245.0,
           13.0,
           13.0
         ]
       },
       "deployed_bounds": {
         "min_m": [
-          -112.5,
+          -122.5,
           -45.00429916381836,
           -45.004234313964844
         ],
         "max_m": [
-          124.5,
+          134.5,
           45.00429916381836,
           45.00429916381836
         ],
         "size_m": [
-          237.0,
+          257.0,
           90.00859832763672,
           90.0085334777832
         ]
@@ -1638,9 +1638,9 @@
         "generator_proxy": 2,
         "hull_shell": 2,
         "production_detail": 121,
-        "fuel_tank": 33,
-        "fuel_support": 39,
-        "fuel_transfer_line": 14,
+        "fuel_tank": 42,
+        "fuel_support": 51,
+        "fuel_transfer_line": 26,
         "fuel_equipment": 6,
         "body_frame": 14,
         "body_equipment": 6,
@@ -1684,8 +1684,8 @@
         "crew_vestibule": 6,
         "crew_passage": 15,
         "crew_bracket": 120,
-        "entry_fixture": 750,
-        "route_fitout": 628,
+        "entry_fixture": 820,
+        "route_fitout": 690,
         "transfer_closure": 14,
         "ring_frame": 4,
         "ring_fill": 6,
@@ -1714,7 +1714,7 @@
         "sector_keel": 6,
         "sector_frame": 4,
         "sector_tie": 18,
-        "bypass_collar": 96,
+        "bypass_collar": 156,
         "eye_well": 4,
         "eye_shell": 4,
         "eye_shutter": 8,
@@ -1754,32 +1754,32 @@
       },
       "sector_centers_frame_1": [
         [
-          84.9948959350586,
+          74.99492645263672,
           0.7134559154510498,
           25.710941314697266
         ],
         [
-          84.9948959350586,
+          74.99492645263672,
           -22.623056411743164,
           -12.237597465515137
         ],
         [
-          84.9948959350586,
+          74.99492645263672,
           21.90960693359375,
           -13.47333812713623
         ],
         [
-          90.99491882324219,
+          80.9948959350586,
           0.7134559154510498,
           25.710941314697266
         ],
         [
-          90.99491882324219,
+          80.9948959350586,
           -22.623056411743164,
           -12.237597465515137
         ],
         [
-          90.99491882324219,
+          80.9948959350586,
           21.90960693359375,
           -13.47333812713623
         ]
@@ -1856,14 +1856,14 @@
     "radial_pack_width_m": 30.5,
     "ribbon_width_m": 30.5,
     "root_radius_m": 6.5,
-    "front_x_m": 81.14936247723134,
-    "center_x_m": -9.925318761384332,
+    "front_x_m": 71.14936247723134,
+    "center_x_m": -19.925318761384332,
     "center_radius_m": 6.5,
     "cant_deg": 0.0,
     "cos": 1.0,
     "sin": 0.0,
-    "mount_x_m": -9.925318761384332,
-    "aft_x_m": -101.0,
+    "mount_x_m": -19.925318761384332,
+    "aft_x_m": -111.0,
     "inner_radius_min_m": 6.5,
     "outer_radius_m": 37.0,
     "nominal_net_area_m2": 5000.0,
@@ -1886,8 +1886,8 @@
     "root_band_planform_m2": 690.1553819444445,
     "root_calibration_margin_W": -1598499401.101572,
     "bay_length_m": 18.214936247723134,
-    "radiator_aft_x_m": -101.0,
-    "length_m": 225.0,
+    "radiator_aft_x_m": -111.0,
+    "length_m": 245.0,
     "body_diameter_m": 13.0,
     "measured_petal_planform_m2": 5521.243347167969,
     "measured_blade_length_m": 182.1493682861328,
@@ -2454,11 +2454,11 @@
           },
           "zone_R": {
             "margin_m": 0.0994,
-            "nearest": "Crew_Trunk"
+            "nearest": "Crew_Refuge_Port"
           }
         }
       },
-      "bodies": 5275,
+      "bodies": 6675,
       "suited_envelope_m": 0.7,
       "scope": "sampled clear: two-chord suited body every 0.1 m along the route, docked, entry leaves open; not a continuous-motion proof"
     },
@@ -2514,8 +2514,8 @@
       "WF_STRUCTURE.blend": {
         "pickups": 4,
         "spine_x": [
-          -79.8,
-          108.5
+          -89.8,
+          118.5
         ]
       }
     },
@@ -2524,18 +2524,18 @@
   },
   "forward_shield": {
     "measured_shield_radius_m": 45.0,
-    "shield_face_x_m": 112.5,
+    "shield_face_x_m": 122.5,
     "measured_crown_depth_m": 3.0,
-    "lance_tip_x_m": 124.5,
-    "overall_length_m": 237.0,
-    "layer_front_x_m": 114.55,
+    "lance_tip_x_m": 134.5,
+    "overall_length_m": 257.0,
+    "layer_front_x_m": 124.55,
     "x_order": {
-      "Lance tip": 124.5,
-      "layer front": 114.55,
-      "shield face": 112.5,
-      "EYE facet faces": 108.697,
-      "truss aft (rim girder)": 105.9,
-      "ring B sweep front": 93.184
+      "Lance tip": 134.5,
+      "layer front": 124.55,
+      "shield face": 122.5,
+      "EYE facet faces": 118.697,
+      "truss aft (rim girder)": 115.9,
+      "ring B sweep front": 83.184
     },
     "wells": 4,
     "crown_bays": 12,
@@ -2908,7 +2908,7 @@
         "ring_locks": 0.0,
         "drive_active": 0.0,
         "thrust_level": 1.0,
-        "exhaust_end_x_m": -118.5,
+        "exhaust_end_x_m": -128.5,
         "radiator_step": "HEAT_ADMITTED",
         "acceleration_g": 0.0,
         "speed_c": 0.0,
@@ -2921,7 +2921,7 @@
         "ring_locks": 0.0,
         "drive_active": 0.0,
         "thrust_level": 1.0,
-        "exhaust_end_x_m": -118.5,
+        "exhaust_end_x_m": -128.5,
         "radiator_step": "HEAT_ADMITTED",
         "acceleration_g": 0.0,
         "speed_c": 0.0,
@@ -2934,7 +2934,7 @@
         "ring_locks": 1.0,
         "drive_active": 0.0,
         "thrust_level": 1.0,
-        "exhaust_end_x_m": -118.5,
+        "exhaust_end_x_m": -128.5,
         "radiator_step": "HEAT_ADMITTED",
         "acceleration_g": 0.0,
         "speed_c": 0.0,
@@ -2947,7 +2947,7 @@
         "ring_locks": 1.0,
         "drive_active": 1.0,
         "thrust_level": 0.499444,
-        "exhaust_end_x_m": -116.74028,
+        "exhaust_end_x_m": -126.74028,
         "radiator_step": "HIGH_POWER_REJECTION",
         "acceleration_g": 0.7491657397107898,
         "speed_c": 0.003991106172845617,
@@ -2960,7 +2960,7 @@
         "ring_locks": 1.0,
         "drive_active": 1.0,
         "thrust_level": 1.0,
-        "exhaust_end_x_m": -118.5,
+        "exhaust_end_x_m": -128.5,
         "radiator_step": "HIGH_POWER_REJECTION",
         "acceleration_g": 1.5000000000000002,
         "speed_c": 0.016000000000000004,
@@ -2973,7 +2973,7 @@
         "ring_locks": 0.0,
         "drive_active": 0.0,
         "thrust_level": 1.0,
-        "exhaust_end_x_m": -118.5,
+        "exhaust_end_x_m": -128.5,
         "radiator_step": "POST_SHUTDOWN_COOLDOWN",
         "acceleration_g": 0.0,
         "speed_c": 0.016000000000000004,
@@ -2986,7 +2986,7 @@
         "ring_locks": 0.0,
         "drive_active": 0.0,
         "thrust_level": 1.0,
-        "exhaust_end_x_m": -118.5,
+        "exhaust_end_x_m": -128.5,
         "radiator_step": "HEAT_ADMITTED",
         "acceleration_g": 0.0,
         "speed_c": 0.016000000000000004,
@@ -4118,7 +4118,7 @@
       "direct_links": []
     },
     "subsystems/WF_CREW_TRANSFER.blend": {
-      "generated_objects": 192,
+      "generated_objects": 287,
       "ids": [
         "CREW_PORT_GATE_CTRL",
         "Crew_Connector_Airlock_EVA",
@@ -4137,7 +4137,21 @@
         "Crew_Trunk_Handrail_1_1_Bracket_1",
         "Crew_Trunk_Handrail_1_1_Bracket_10",
         "Crew_Trunk_Handrail_1_1_Bracket_11",
+        "Crew_Trunk_Handrail_1_1_Bracket_12",
+        "Crew_Trunk_Handrail_1_1_Bracket_13",
+        "Crew_Trunk_Handrail_1_1_Bracket_14",
+        "Crew_Trunk_Handrail_1_1_Bracket_15",
+        "Crew_Trunk_Handrail_1_1_Bracket_16",
+        "Crew_Trunk_Handrail_1_1_Bracket_17",
+        "Crew_Trunk_Handrail_1_1_Bracket_18",
+        "Crew_Trunk_Handrail_1_1_Bracket_19",
         "Crew_Trunk_Handrail_1_1_Bracket_2",
+        "Crew_Trunk_Handrail_1_1_Bracket_20",
+        "Crew_Trunk_Handrail_1_1_Bracket_21",
+        "Crew_Trunk_Handrail_1_1_Bracket_22",
+        "Crew_Trunk_Handrail_1_1_Bracket_23",
+        "Crew_Trunk_Handrail_1_1_Bracket_24",
+        "Crew_Trunk_Handrail_1_1_Bracket_25",
         "Crew_Trunk_Handrail_1_1_Bracket_3",
         "Crew_Trunk_Handrail_1_1_Bracket_4",
         "Crew_Trunk_Handrail_1_1_Bracket_5",
@@ -4158,13 +4172,26 @@
         "Crew_Trunk_Handrail_2_1_Bracket_6",
         "Crew_Trunk_Handrail_2_2",
         "Crew_Trunk_Handrail_2_2_Bracket_1",
+        "Crew_Trunk_Handrail_2_2_Bracket_10",
+        "Crew_Trunk_Handrail_2_2_Bracket_11",
+        "Crew_Trunk_Handrail_2_2_Bracket_12",
+        "Crew_Trunk_Handrail_2_2_Bracket_13",
+        "Crew_Trunk_Handrail_2_2_Bracket_14",
+        "Crew_Trunk_Handrail_2_2_Bracket_15",
+        "Crew_Trunk_Handrail_2_2_Bracket_16",
+        "Crew_Trunk_Handrail_2_2_Bracket_17",
+        "Crew_Trunk_Handrail_2_2_Bracket_18",
+        "Crew_Trunk_Handrail_2_2_Bracket_19",
         "Crew_Trunk_Handrail_2_2_Bracket_2",
+        "Crew_Trunk_Handrail_2_2_Bracket_20",
+        "Crew_Trunk_Handrail_2_2_Bracket_21",
         "Crew_Trunk_Handrail_2_2_Bracket_3",
         "Crew_Trunk_Handrail_2_2_Bracket_4",
         "Crew_Trunk_Handrail_2_2_Bracket_5",
         "Crew_Trunk_Handrail_2_2_Bracket_6",
         "Crew_Trunk_Handrail_2_2_Bracket_7",
         "Crew_Trunk_Handrail_2_2_Bracket_8",
+        "Crew_Trunk_Handrail_2_2_Bracket_9",
         "Crew_Trunk_Handrail_2_3",
         "Crew_Trunk_Handrail_2_3_Bracket_1",
         "Crew_Trunk_Handrail_2_3_Bracket_2",
@@ -4173,18 +4200,34 @@
         "Crew_Trunk_Ladder_Rungs",
         "Crew_Trunk_Ladder_Stile_1",
         "Crew_Trunk_Ladder_Stile_2",
+        "Crew_Trunk_Light_1_10",
+        "Crew_Trunk_Light_1_11",
+        "Crew_Trunk_Light_1_12",
+        "Crew_Trunk_Light_1_13",
+        "Crew_Trunk_Light_1_14",
+        "Crew_Trunk_Light_1_15",
+        "Crew_Trunk_Light_1_16",
         "Crew_Trunk_Light_1_2",
         "Crew_Trunk_Light_1_3",
         "Crew_Trunk_Light_1_4",
         "Crew_Trunk_Light_1_5",
         "Crew_Trunk_Light_1_6",
         "Crew_Trunk_Light_1_8",
+        "Crew_Trunk_Light_1_9",
         "Crew_Trunk_Light_2_1",
+        "Crew_Trunk_Light_2_10",
+        "Crew_Trunk_Light_2_11",
+        "Crew_Trunk_Light_2_12",
+        "Crew_Trunk_Light_2_13",
+        "Crew_Trunk_Light_2_14",
+        "Crew_Trunk_Light_2_15",
         "Crew_Trunk_Light_2_2",
         "Crew_Trunk_Light_2_3",
         "Crew_Trunk_Light_2_4",
         "Crew_Trunk_Light_2_5",
         "Crew_Trunk_Light_2_7",
+        "Crew_Trunk_Light_2_8",
+        "Crew_Trunk_Light_2_9",
         "Crew_Trunk_Refuge_Rail_1",
         "Crew_Trunk_Refuge_Rail_1_Bracket_1",
         "Crew_Trunk_Refuge_Rail_1_Bracket_2",
@@ -4257,11 +4300,53 @@
         "Trunk_Fit_Frame_12_1",
         "Trunk_Fit_Frame_12_2",
         "Trunk_Fit_Frame_12_3",
+        "Trunk_Fit_Frame_12_4",
         "Trunk_Fit_Frame_13_1",
         "Trunk_Fit_Frame_13_2",
         "Trunk_Fit_Frame_13_3",
+        "Trunk_Fit_Frame_14_1",
+        "Trunk_Fit_Frame_14_2",
+        "Trunk_Fit_Frame_14_3",
+        "Trunk_Fit_Frame_15_1",
+        "Trunk_Fit_Frame_15_2",
+        "Trunk_Fit_Frame_15_3",
+        "Trunk_Fit_Frame_16_1",
+        "Trunk_Fit_Frame_16_2",
+        "Trunk_Fit_Frame_16_3",
+        "Trunk_Fit_Frame_17_1",
+        "Trunk_Fit_Frame_17_2",
+        "Trunk_Fit_Frame_17_3",
+        "Trunk_Fit_Frame_18_1",
+        "Trunk_Fit_Frame_18_2",
+        "Trunk_Fit_Frame_18_3",
+        "Trunk_Fit_Frame_19_1",
+        "Trunk_Fit_Frame_19_2",
+        "Trunk_Fit_Frame_19_3",
         "Trunk_Fit_Frame_1_1",
         "Trunk_Fit_Frame_1_2",
+        "Trunk_Fit_Frame_20_1",
+        "Trunk_Fit_Frame_20_2",
+        "Trunk_Fit_Frame_20_3",
+        "Trunk_Fit_Frame_21_1",
+        "Trunk_Fit_Frame_21_2",
+        "Trunk_Fit_Frame_21_3",
+        "Trunk_Fit_Frame_22_1",
+        "Trunk_Fit_Frame_22_2",
+        "Trunk_Fit_Frame_22_3",
+        "Trunk_Fit_Frame_23_1",
+        "Trunk_Fit_Frame_23_2",
+        "Trunk_Fit_Frame_23_3",
+        "Trunk_Fit_Frame_24_1",
+        "Trunk_Fit_Frame_24_2",
+        "Trunk_Fit_Frame_24_3",
+        "Trunk_Fit_Frame_25_1",
+        "Trunk_Fit_Frame_25_2",
+        "Trunk_Fit_Frame_25_3",
+        "Trunk_Fit_Frame_26_1",
+        "Trunk_Fit_Frame_26_2",
+        "Trunk_Fit_Frame_27_1",
+        "Trunk_Fit_Frame_27_2",
+        "Trunk_Fit_Frame_27_3",
         "Trunk_Fit_Frame_2_1",
         "Trunk_Fit_Frame_2_2",
         "Trunk_Fit_Frame_2_3",
@@ -4272,7 +4357,6 @@
         "Trunk_Fit_Frame_4_2",
         "Trunk_Fit_Frame_4_3",
         "Trunk_Fit_Frame_5_1",
-        "Trunk_Fit_Frame_5_4",
         "Trunk_Fit_Frame_6_1",
         "Trunk_Fit_Frame_6_2",
         "Trunk_Fit_Frame_6_3",
@@ -4285,6 +4369,7 @@
         "Trunk_Fit_Frame_9_1",
         "Trunk_Fit_Frame_9_2",
         "Trunk_Fit_Frame_9_3",
+        "Trunk_Fit_Frame_9_4",
         "Trunk_Fit_Placard_1_1",
         "Trunk_Fit_Placard_1_1_Text",
         "Trunk_Fit_Placard_2_2",
@@ -4300,6 +4385,15 @@
         "Trunk_Fit_Placard_Store_Port",
         "Trunk_Fit_Placard_Store_Port_Text",
         "Trunk_Fit_Refuge_Chevron_1",
+        "Trunk_Fit_Refuge_Chevron_10",
+        "Trunk_Fit_Refuge_Chevron_11",
+        "Trunk_Fit_Refuge_Chevron_12",
+        "Trunk_Fit_Refuge_Chevron_13",
+        "Trunk_Fit_Refuge_Chevron_14",
+        "Trunk_Fit_Refuge_Chevron_15",
+        "Trunk_Fit_Refuge_Chevron_16",
+        "Trunk_Fit_Refuge_Chevron_17",
+        "Trunk_Fit_Refuge_Chevron_18",
         "Trunk_Fit_Refuge_Chevron_2",
         "Trunk_Fit_Refuge_Chevron_3",
         "Trunk_Fit_Refuge_Chevron_4",
@@ -4307,6 +4401,7 @@
         "Trunk_Fit_Refuge_Chevron_6",
         "Trunk_Fit_Refuge_Chevron_7",
         "Trunk_Fit_Refuge_Chevron_8",
+        "Trunk_Fit_Refuge_Chevron_9",
         "Trunk_Fit_Route_Stripe_1",
         "Trunk_Fit_Route_Stripe_2",
         "Trunk_Fit_Route_Stripe_3",
@@ -4469,7 +4564,7 @@
       "direct_links": []
     },
     "subsystems/WF_FORWARD_SHIELD.blend": {
-      "generated_objects": 765,
+      "generated_objects": 795,
       "ids": [
         "Alt_Eye1_Branch_in_120_aft",
         "Alt_Eye1_Branch_in_120_fwd",
@@ -4681,16 +4776,31 @@
         "Bypass_Diagonal_1_03",
         "Bypass_Diagonal_1_04",
         "Bypass_Diagonal_1_05",
+        "Bypass_Diagonal_1_06",
+        "Bypass_Diagonal_1_07",
+        "Bypass_Diagonal_1_08",
+        "Bypass_Diagonal_1_09",
+        "Bypass_Diagonal_1_10",
         "Bypass_Diagonal_2_01",
         "Bypass_Diagonal_2_02",
         "Bypass_Diagonal_2_03",
         "Bypass_Diagonal_2_04",
         "Bypass_Diagonal_2_05",
+        "Bypass_Diagonal_2_06",
+        "Bypass_Diagonal_2_07",
+        "Bypass_Diagonal_2_08",
+        "Bypass_Diagonal_2_09",
+        "Bypass_Diagonal_2_10",
         "Bypass_Diagonal_3_01",
         "Bypass_Diagonal_3_02",
         "Bypass_Diagonal_3_03",
         "Bypass_Diagonal_3_04",
         "Bypass_Diagonal_3_05",
+        "Bypass_Diagonal_3_06",
+        "Bypass_Diagonal_3_07",
+        "Bypass_Diagonal_3_08",
+        "Bypass_Diagonal_3_09",
+        "Bypass_Diagonal_3_10",
         "Bypass_Hoop_Aft",
         "Bypass_Hoop_Fwd",
         "Bypass_Hoop_Mid",
@@ -4705,16 +4815,31 @@
         "Bypass_Vertical_1_03",
         "Bypass_Vertical_1_04",
         "Bypass_Vertical_1_05",
+        "Bypass_Vertical_1_06",
+        "Bypass_Vertical_1_07",
+        "Bypass_Vertical_1_08",
+        "Bypass_Vertical_1_09",
+        "Bypass_Vertical_1_10",
         "Bypass_Vertical_2_01",
         "Bypass_Vertical_2_02",
         "Bypass_Vertical_2_03",
         "Bypass_Vertical_2_04",
         "Bypass_Vertical_2_05",
+        "Bypass_Vertical_2_06",
+        "Bypass_Vertical_2_07",
+        "Bypass_Vertical_2_08",
+        "Bypass_Vertical_2_09",
+        "Bypass_Vertical_2_10",
         "Bypass_Vertical_3_01",
         "Bypass_Vertical_3_02",
         "Bypass_Vertical_3_03",
         "Bypass_Vertical_3_04",
         "Bypass_Vertical_3_05",
+        "Bypass_Vertical_3_06",
+        "Bypass_Vertical_3_07",
+        "Bypass_Vertical_3_08",
+        "Bypass_Vertical_3_09",
+        "Bypass_Vertical_3_10",
         "Crown_Carriage_Body_01",
         "Crown_Carriage_Body_02",
         "Crown_Carriage_Body_03",
@@ -6740,7 +6865,7 @@
       "direct_links": []
     },
     "subsystems/WF_STORAGE.blend": {
-      "generated_objects": 132,
+      "generated_objects": 165,
       "ids": [
         "Body_CMG_03_1",
         "Body_CMG_03_2",
@@ -6831,6 +6956,27 @@
         "Fuel_He3_Station_9_2",
         "Fuel_He3_Station_9_3",
         "Fuel_Header_He3",
+        "Fuel_Return_Torus_D2_1",
+        "Fuel_Return_Torus_D2_2",
+        "Fuel_Return_Torus_D2_3",
+        "Fuel_Return_Torus_H2_1",
+        "Fuel_Return_Torus_H2_2",
+        "Fuel_Return_Torus_H2_3",
+        "Fuel_Return_Torus_He3_1",
+        "Fuel_Return_Torus_He3_2",
+        "Fuel_Return_Torus_He3_3",
+        "Fuel_Return_Torus_Strut_1_1_Aft",
+        "Fuel_Return_Torus_Strut_1_1_Fwd",
+        "Fuel_Return_Torus_Strut_1_2_Aft",
+        "Fuel_Return_Torus_Strut_1_2_Fwd",
+        "Fuel_Return_Torus_Strut_2_1_Aft",
+        "Fuel_Return_Torus_Strut_2_1_Fwd",
+        "Fuel_Return_Torus_Strut_2_2_Aft",
+        "Fuel_Return_Torus_Strut_2_2_Fwd",
+        "Fuel_Return_Torus_Strut_3_1_Aft",
+        "Fuel_Return_Torus_Strut_3_1_Fwd",
+        "Fuel_Return_Torus_Strut_3_2_Aft",
+        "Fuel_Return_Torus_Strut_3_2_Fwd",
         "Fuel_Torus_D2_1",
         "Fuel_Torus_D2_2",
         "Fuel_Torus_D2_3",
@@ -6851,10 +6997,16 @@
         "Fuel_Torus_Strut_3_2_Fwd",
         "Fuel_Transfer_D2",
         "Fuel_Transfer_D2_Ext",
+        "Fuel_Transfer_D2_R",
+        "Fuel_Transfer_D2_R_Ext",
         "Fuel_Transfer_H2_A",
         "Fuel_Transfer_H2_A_Ext",
         "Fuel_Transfer_H2_B",
         "Fuel_Transfer_H2_B_Ext",
+        "Fuel_Transfer_H2_R",
+        "Fuel_Transfer_H2_R_Ext",
+        "Fuel_Transfer_He3_R",
+        "Fuel_Transfer_He3_R_Ext",
         "IF_CRYO_FEED_CORE_01",
         "IF_CRYO_FEED_CORE_02",
         "IF_CRYO_FEED_INJECTION_03",
@@ -6868,12 +7020,18 @@
         "IF_CRYO_FEED_TANK_03",
         "IF_CRYO_FEED_TANK_04",
         "IF_FUEL_HULL_D2",
+        "IF_FUEL_HULL_D2_R",
         "IF_FUEL_HULL_H2_A",
         "IF_FUEL_HULL_H2_B",
+        "IF_FUEL_HULL_H2_R",
+        "IF_FUEL_HULL_HE3_R",
         "IF_FUEL_RUN_TANK_D2",
+        "IF_FUEL_RUN_TANK_D2_R",
         "IF_FUEL_RUN_TANK_H2_A",
         "IF_FUEL_RUN_TANK_H2_B",
-        "IF_FUEL_RUN_TANK_HE3"
+        "IF_FUEL_RUN_TANK_H2_R",
+        "IF_FUEL_RUN_TANK_HE3",
+        "IF_FUEL_RUN_TANK_HE3_R"
       ],
       "direct_links": []
     },

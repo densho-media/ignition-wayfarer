@@ -5,8 +5,8 @@
   "failures": [],
   "measurements": {
     "spine_x": [
-      -79.8,
-      108.5
+      -89.8,
+      118.5
     ],
     "spine_core_axial_gap_m": 2.700000000000003,
     "branch_max_off_axis_deg": 21.573398964863518,
@@ -43,16 +43,16 @@
     "bypass_plasma_min_gap_m": 1.0255303392174238,
     "bypass_rails": {
       "30.0": [
-        -103.0,
-        80.44936247723133
+        -113.0,
+        71.34936247723134
       ],
       "150.0": [
-        -103.0,
-        80.44936247723133
+        -113.0,
+        71.34936247723134
       ],
       "270.0": [
-        -103.0,
-        80.44936247723133
+        -113.0,
+        71.34936247723134
       ]
     },
     "bore_spine_gap_m": 0.17500000000000004,
@@ -122,16 +122,16 @@
       "id": "SPINE_TERMINATION",
       "detail": "Structural_Spine (r 0.875 m) ends on the PROTOTYPE terminated hub (r 2.00 m) on the forward face of the shadow shield; no structure crosses the core, common region or manifold, and the plasma is solid. Drive thrust reaches the forward ship through the 12-node thrust ring and the three outer sector rails around the core. The bulkhead structure, hub shielding and load shares are OPEN (07!H16, 15!G70).",
       "spine_x": [
-        -79.8,
-        108.5
+        -89.8,
+        118.5
       ],
       "hub_x": [
-        -80.5,
-        -79.8
+        -90.5,
+        -89.8
       ],
       "core_x": [
-        -89.5,
-        -82.5
+        -99.5,
+        -92.5
       ],
       "bypass_rails_deg": [
         30.0,
@@ -198,7 +198,7 @@
           "family": "deuterium",
           "terminus": "core",
           "shield_point": [
-            -81.0,
+            -91.0,
             2.953553390593273,
             2.953553390593273
           ],
@@ -210,7 +210,7 @@
           "family": "helium-3",
           "terminus": "core",
           "shield_point": [
-            -81.0,
+            -91.0,
             -2.953553390593273,
             2.953553390593273
           ],
@@ -222,7 +222,7 @@
           "family": "hydrogen",
           "terminus": "injection_ring",
           "shield_point": [
-            -81.0,
+            -91.0,
             -2.953553390593273,
             -2.953553390593273
           ],
@@ -234,7 +234,7 @@
           "family": "hydrogen",
           "terminus": "injection_ring",
           "shield_point": [
-            -81.0,
+            -91.0,
             3.8183766184073566,
             -3.8183766184073566
           ],
@@ -244,24 +244,24 @@
       ],
       "cold_items_in_reach": {
         "CRYO_FEED_LINE_01": [
-          "Tank_Volume_01",
-          "Tank_Volume_02",
-          "Tank_Volume_04"
+          "Feed_Run_Tank_01",
+          "Feed_Run_Tank_02",
+          "Feed_Run_Tank_04"
         ],
         "CRYO_FEED_LINE_02": [
-          "Tank_Volume_01",
-          "Tank_Volume_02",
-          "Tank_Volume_03"
+          "Feed_Run_Tank_01",
+          "Feed_Run_Tank_02",
+          "Feed_Run_Tank_03"
         ],
         "CRYO_FEED_LINE_03": [
-          "Tank_Volume_02",
-          "Tank_Volume_03",
-          "Tank_Volume_04"
+          "Feed_Run_Tank_02",
+          "Feed_Run_Tank_03",
+          "Feed_Run_Tank_04"
         ],
         "CRYO_FEED_LINE_04": [
-          "Tank_Volume_01",
-          "Tank_Volume_03",
-          "Tank_Volume_04"
+          "Feed_Run_Tank_01",
+          "Feed_Run_Tank_03",
+          "Feed_Run_Tank_04"
         ]
       },
       "cold_optics_in_reach": {}
@@ -290,7 +290,7 @@
       "id": "H2_INJECTION_OPEN",
       "detail": "Hydrogen reaction mass enters a PROTOTYPE injection ring around the common region at h2_injection_x, downstream of the burn and ahead of the manifold. Injector ports, count, mixing and the heat load on the ring are OPEN; so are the nuclear and radiant heating and boil-off of the hydrogen run in the hot corridor (OD-026, 06!E46); only the ring station is drawn.",
       "ring": {
-        "x": -91.5,
+        "x": -101.5,
         "radius_m": 3.8,
         "tube_m": 0.1
       },

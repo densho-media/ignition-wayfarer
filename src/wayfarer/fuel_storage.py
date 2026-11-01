@@ -27,11 +27,26 @@ def cfg(s):
     return s['fuel_storage']
 
 
+TORI = ('torus', 'return_torus')
+SPECIES_TAG = {'helium-3': 'He3', 'deuterium': 'D2', 'hydrogen': 'H2'}
+INV_KEY = {'helium-3': 'helium_3', 'deuterium': 'deuterium', 'hydrogen': 'hydrogen'}
+
+
+def return_inventory(s):
+    """Pass 7 (owner choice 2026-10-31: full return): the mission's propellant by species (operating_point.species) less what the body
+    stations and the forward torus already hold; the rest goes in the return torus."""
+    import operating_point
+    inv = cfg(s)['inventory_kg']; m = operating_point.species(s)
+    return dict(helium_3=m['helium_3']-inv['helium_3'], deuterium=m['deuterium']-inv['deuterium'],
+                hydrogen=m['hydrogen']-inv['hydrogen_first_ignition']-inv['hydrogen_reserve'])
+
+
 def need_m3(s):
-    """Liquid volume each species needs with its ullage: kg / (kg/m3) * (1 + ullage)."""
-    f = cfg(s); inv, rho, u = f['inventory_kg'], f['density_kg_m3'], f['ullage']
+    """Liquid volume each species needs with its ullage: kg / (kg/m3) * (1 + ullage); return_* for the return torus."""
+    f = cfg(s); inv, rho, u = f['inventory_kg'], f['density_kg_m3'], f['ullage']; ret = return_inventory(s)
     return dict(helium_3=inv['helium_3']/rho['helium_3']*(1+u), deuterium=inv['deuterium']/rho['deuterium']*(1+u),
-                hydrogen=(inv['hydrogen_first_ignition']+inv['hydrogen_reserve'])/rho['hydrogen']*(1+u))
+                hydrogen=(inv['hydrogen_first_ignition']+inv['hydrogen_reserve'])/rho['hydrogen']*(1+u),
+                **{f'return_{k}': v/rho[k]*(1+u) for k, v in ret.items()})
 
 
 # ---------- body: helium-3 stations ---------------------------------------------------------------------------------
@@ -91,11 +106,13 @@ def lane_point(x, r, deg):
 
 # ---------- forward torus: hydrogen and deuterium -------------------------------------------------------------------
 
-def torus(s):
+def torus(s, key='torus'):
     """Torus frame (centre X, major radius R, outer minor radius a, liquid radius) and its vessels. Each gap is the clear distance
-    between the head apexes at R; a vessel's cylindrical arc ends a head depth (head_ratio * a) inside it."""
-    t = cfg(s)['torus']; R, a = t['major_radius_m'], t['minor_radius_m']; a_in = a-t['wall_m']; h = t['head_ratio']*a
-    xc = layout.at(s, t['center_x'])
+    between the head apexes at R; a vessel's cylindrical arc ends a head depth (head_ratio * a) inside it. The forward torus holds
+    hydrogen with a deuterium cell at one end of each vessel; the return torus (pass 7) splits each vessel into cells by `cells`
+    (species, arc fraction), the same in every vessel, so the three vessels stay balanced at any common fill."""
+    t = cfg(s)[key]; R, a = t['major_radius_m'], t['minor_radius_m']; a_in = a-t['wall_m']; h = t['head_ratio']*a
+    xc = layout.at(s, t['center_x']); prefix = t.get('prefix', 'Fuel_Torus')
     gaps = sorted(t['gap_centers_deg']); half = [(t['gap_m']/2+h)/R for _ in gaps]
     vessels = []
     for j, g in enumerate(gaps):
@@ -103,27 +120,35 @@ def torus(s):
         a1 = math.radians(nxt)-half[(j+1) % len(gaps)]
         vessels.append(dict(a0=a0, a1=a1))
     out = []
-    d2s = {d['vessel']: d for d in (t['deuterium'] if isinstance(t['deuterium'], list) else [t['deuterium']])}
+    d2s = {d['vessel']: d for d in (t['deuterium'] if isinstance(t.get('deuterium', []), list) else [t['deuterium']])} if 'deuterium' in t else {}
     for j, v in enumerate(vessels, 1):
         cells = [(v['a0'], v['a1'], 'hydrogen')]
-        if j in d2s:
+        if 'cells' in t:
+            cells = []; c0 = v['a0']
+            for k, cc in enumerate(t['cells']):
+                c1 = v['a1'] if k == len(t['cells'])-1 else c0+(v['a1']-v['a0'])*cc['arc_fraction']
+                cells.append((c0, c1, cc['species'])); c0 = c1
+        elif j in d2s:
             d2 = d2s[j]
             cut = v['a1']-math.radians(d2['arc_deg']) if d2['end'] == 'a1' else v['a0']+math.radians(d2['arc_deg'])
             cells = [(v['a0'], cut, 'hydrogen'), (cut, v['a1'], 'deuterium')] if d2['end'] == 'a1' else [(v['a0'], cut, 'deuterium'), (cut, v['a1'], 'hydrogen')]
         for k, (c0, c1, sp) in enumerate(cells):
             heads = [c0 == v['a0'], c1 == v['a1']]               # ellipsoidal heads at the vessel ends; the common bulkhead is flat
             vol = math.pi*a_in**2*R*(c1-c0)+sum(heads)*(2/3)*math.pi*a_in**2*(t['head_ratio']*a_in)
-            name = f'Fuel_Torus_{"D2" if sp == "deuterium" else "H2"}_{j}' + (f'_{k+1}' if len(cells) > 1 and sp == 'hydrogen' else '')
+            if 'cells' in t:
+                name = f'{prefix}_{SPECIES_TAG[sp]}_{j}'
+            else:
+                name = f'{prefix}_{"D2" if sp == "deuterium" else "H2"}_{j}' + (f'_{k+1}' if len(cells) > 1 and sp == 'hydrogen' else '')
             out.append(dict(name=name, vessel=j, species=sp, a0=c0, a1=c1, heads=heads, liquid_m3=vol))
-    return dict(x=xc, R=R, a=a, a_in=a_in, head=h, cells=out, vessels=vessels)
+    return dict(key=key, prefix=prefix, x=xc, R=R, a=a, a_in=a_in, head=h, cells=out, vessels=vessels)
 
 
-def torus_struts(s):
+def torus_struts(s, key='torus'):
     """Two supports per vessel at 1/4 and 3/4 of its arc. Each support is a bipod in its azimuth's X-r plane (F01, 2026-10-31): both legs meet
     at the torus inner face and stand on the forward hull collar skin (frame stations under them), one leg raked aft, one forward, so the
     torus's inertial load under thrust runs along the legs instead of bending a radial strut."""
     import hull_geometry
-    t = cfg(s)['torus']; tor = torus(s); out = []
+    t = cfg(s)[key]; tor = torus(s, key); out = []
     for j, v in enumerate(tor['vessels'], 1):
         for k, f in enumerate((.25, .75), 1):
             a = v['a0']+(v['a1']-v['a0'])*f; apex = (tor['x'], (tor['R']-tor['a'])*math.cos(a), (tor['R']-tor['a'])*math.sin(a))
@@ -131,8 +156,8 @@ def torus_struts(s):
                 x = tor['x']+dx; hull = hull_geometry.radius_at(s, x); rise = tor['R']-tor['a']-hull
                 # a raked leg's round end dips toward the skin by radius * sin(rake): lift the foot by that much
                 root = hull+t['strut_root_standoff_m']+t['strut_radius_m']*abs(dx)/math.hypot(dx, rise)
-                out.append(dict(name=f'Fuel_Torus_Strut_{j}_{k}_{side}', a=(x, root*math.cos(a), root*math.sin(a)), b=apex,
-                                radius=t['strut_radius_m'], azimuth=a, vessel=j, side=side))
+                out.append(dict(name=f"{tor['prefix']}_Strut_{j}_{k}_{side}", a=(x, root*math.cos(a), root*math.sin(a)), b=apex,
+                                radius=t['strut_radius_m'], azimuth=a, vessel=j, side=side, torus=key))
     return out
 
 
@@ -155,7 +180,7 @@ def transfer_lines(s):
     at lane_r_m on the lane azimuth plus the line's offset, past the pulse bank and battery, and ends standoff_m off its run tank."""
     import eva_route
     import forward_shield
-    f = cfg(s); tl = f['transfer']; tor = torus(s); tanks = {t['name']: t for t in run_tanks(s)}
+    f = cfg(s); tl = f['transfer']; tors = {k: torus(s, k) for k in TORI if k in f}; tanks = {t['name']: t for t in run_tanks(s)}
     col = forward_shield.bypass_collar(s); x_slot = col['stations']['aft']+tl['slot_offset_m']; x_pen = x_slot+tl['penetration_offset_m']
     mods = body_modules(s); x_station_fwd = mods[-1]['x1']
     hull_r = eva_route.body_radius(s, x_pen); clr = tl['hull_clearance_m']; run_r = hull_r+tl['hull_run_m']
@@ -167,7 +192,8 @@ def transfer_lines(s):
         ty, tz = lane_end[1]-tank['y'], lane_end[2]-tank['z']; d = math.hypot(ty, tz); k = (tank['radius']+tl['standoff_m'])/d
         tail = [lane_end, (x_end, tank['y']+ty*k, tank['z']+tz*k)]
         base = dict(species=ln['species'], source=ln['source'], tank=ln['tank'], radius=tl['line_radius_m'])
-        if ln['source'] == 'torus':
+        if ln['source'] in tors:
+            tor = tors[ln['source']]
             ext = [lane_point(tor['x'], tor['R']+tor['a']+clr, deg), lane_point(tor['x'], tl['bypass_r_m'], deg), lane_point(x_slot, tl['bypass_r_m'], deg),
                    lane_point(x_slot, run_r, deg), lane_point(x_pen, run_r, deg), lane_point(x_pen, hull_r+clr, deg)]
             out.append(dict(base, name=ln['name']+'_Ext', points=ext, leg='exterior'))
@@ -181,10 +207,11 @@ def transfer_lines(s):
 # ---------- fit screen ------------------------------------------------------------------------------------------------
 
 def screen(s):
-    n = need_m3(s); lobes = body_lobes(s); tor = torus(s)
+    n = need_m3(s); lobes = body_lobes(s); tor = torus(s); ret = torus(s, 'return_torus')
     cap = dict(helium_3=sum(l['liquid_m3'] for l in lobes),
                deuterium=sum(c['liquid_m3'] for c in tor['cells'] if c['species'] == 'deuterium'),
-               hydrogen=sum(c['liquid_m3'] for c in tor['cells'] if c['species'] == 'hydrogen'))
+               hydrogen=sum(c['liquid_m3'] for c in tor['cells'] if c['species'] == 'hydrogen'),
+               **{f'return_{INV_KEY[sp]}': sum(c['liquid_m3'] for c in ret['cells'] if c['species'] == sp) for sp in INV_KEY})
     t = cfg(s)['torus']; hull = s['ship']['body_diameter']['value']/2
     gaps = {}
     for g in t['gap_centers_deg']:
@@ -199,6 +226,10 @@ def screen(s):
         torus=dict(x=round(tor['x'], 2), r=[tor['R']-tor['a'], r_out], x_range=[round(tor['x']-tor['a'], 2), round(tor['x']+tor['a'], 2)],
                    gap_apex_clear_m=gaps, ring_b_sweep_clear_m=round(tor['x']-tor['a']-ring_front, 2),
                    collar_clear_m=round(tor['R']-tor['a']-__import__('hull_geometry').radius_at(s, tor['x']), 2)),
+        return_torus=dict(x=round(ret['x'], 2), r=[ret['R']-ret['a'], ret['R']+ret['a']], x_range=[round(ret['x']-ret['a'], 2), round(ret['x']+ret['a'], 2)],
+                          ring_b_sweep_clear_m=round(ret['x']-ret['a']-ring_front, 2), torus_gap_m=round(tor['x']-tor['a']-(ret['x']+ret['a']), 2),
+                          bypass_line_clear_m=round(cfg(s)['transfer']['bypass_r_m']-cfg(s)['transfer']['line_radius_m']-(ret['R']+ret['a']), 2),
+                          collar_clear_m=round(ret['R']-ret['a']-__import__('hull_geometry').radius_at(s, ret['x']), 2)),
         body=dict(hull_radius_m=hull, lobe_r=[cfg(s)['body']['r_in_m'], cfg(s)['body']['r_out_m']]),
         transfer=[dict(name=l['name'], length_m=round(sum(math.dist(a, b) for a, b in zip(l['points'], l['points'][1:])), 1)) for l in transfer_lines(s)])
 
@@ -209,9 +240,14 @@ def check(s):
     for k, m in r['margin_m3'].items():
         if m < 0:
             errs.append(f'{k}: capacity short by {-m:.0f} m3')
-    if r['torus']['ring_b_sweep_clear_m'] < s['habitat']['ring_service_clearance']['min_m']:
-        errs.append('torus inside ring B service clearance')
-    aft = min(st['a'][0] for st in torus_struts(s)); import habitat_ring
+    rt = r['return_torus']; svc = s['habitat']['ring_service_clearance']['min_m']
+    if rt['ring_b_sweep_clear_m'] < svc:
+        errs.append('return torus inside ring B service clearance')
+    if rt['torus_gap_m'] < cfg(s)['return_torus']['gap_m']:
+        errs.append('return torus closer to the forward torus than its own head gap')
+    if rt['bypass_line_clear_m'] < cfg(s)['transfer']['hull_clearance_m']:
+        errs.append('return torus touches the bypass transfer lines')
+    aft = min(st['a'][0] for st in torus_struts(s)+torus_struts(s, 'return_torus')); import habitat_ring
     if aft-(max(habitat_ring.centers(s))+habitat_ring.sweep_half(s)) < s['habitat']['ring_service_clearance']['min_m']:
         errs.append('torus strut foot inside ring B service clearance')
     if t['gap_m'] < t['corridor_keepout_m']:

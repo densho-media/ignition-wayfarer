@@ -21,24 +21,24 @@ anchor = "WF-SPINE.SERVICE.ORIGIN"
 zone = "primary boarding port, exterior"
 classes = ["ENGINEERING_FLEXIBLE"]
 # Claimed space in the vehicle frame (m): the covers, fasteners and stencils on the hull beside the port and the port ID plus 0.05 m.
-envelope_min = [97.38, -6.58, -3.07]
-envelope_max = [101.48, -5.72, -0.45]
+envelope_min = [107.38, -6.58, -3.07]
+envelope_max = [111.48, -5.72, -0.45]
 
 [assembly."M7.ENT"]
 anchor = "WF-SPINE.SERVICE.ORIGIN"
 zone = "entry chamber and trunk node (HUM-001 zones 1-2)"
 classes = ["ENGINEERING_FLEXIBLE", "ARTISTIC"]
 # Claimed space in the vehicle frame (m): the chamber and node wall skins plus 0.05 m.
-envelope_min = [98.1, -6.23, -2.87]
-envelope_max = [100.75, -1.4, 0.83]
+envelope_min = [108.1, -6.23, -2.87]
+envelope_max = [110.75, -1.4, 0.83]
 
 [assembly."M7.TRK"]
 anchor = "WF-SPINE.CREW_TRANSFER.ORIGIN"
 zone = "stationary crew trunk (zone 2)"
 classes = ["ENGINEERING_FLEXIBLE", "ARTISTIC"]
 # Claimed space in the vehicle frame (m): the trunk wall cladding plus 0.05 m.
-envelope_min = [81.6, -0.85, -0.8]
-envelope_max = [102.45, 0.85, 0.85]
+envelope_min = [71.6, -0.85, -0.8]
+envelope_max = [112.45, 0.85, 0.85]
 
 [params]
 # Bulkhead faces: radial panel segments from inner_m to the wall, clear of the hinge and parked leaf, the placards (0 and 180 deg) and

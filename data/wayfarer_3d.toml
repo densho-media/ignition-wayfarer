@@ -18,8 +18,8 @@ source_ref = "axis_contract"
 [ship.length]
 unit = "m"
 min = 220.0
-max = 240.0
-value = 225.0
+max = 260.0
+value = 245.0
 canon_status = "WORKING"
 selection_status = "PROTOTYPE"
 envelope_scope = "OVERALL_INCLUDING_DUST_LANCE"
@@ -585,8 +585,13 @@ note = "Whole-mission fuel load stays OPEN (B04 return); the First Ignition reac
 [physics.operating_point]
 canon_status = "WORKING"
 source_ref = "operating_point"
-departure_mass_kg = 1900000.0             # 64!B6 / 28!E36
+owner_case_e_departure_mass_kg = 1900000.0   # 64!B6 / 28!E36: the owner's case E, kept as the reference (and the drive's power cap)
 protected_and_operational_kg = 1300000.0  # 69!B3 less the 180 t reserve: the 1.1 kt protected ship + operational inventory
+# Pass 7 (owner choice 2026-10-31 20:59Z / 21:37Z: keep 0.016 c, grow the ship, gentler first burn): the ship carries its return
+# propellant (four burns) and every burn is power-limited at the B01 drive power; the 1.5 g ramp stays the design-load case.
+profile = "power_limited"
+mission_burns = 4
+legacy_inventory_kg = 600000.0            # today's 600 t inventory, its tanks already inside the 1.3 kt
 exhaust_velocity_m_s = 19201172.08        # 64!B9 / 28!E41, uniform effective exhaust
 directed_efficiency = 0.8                 # 05!B9 / 64!B10
 absorbed_fraction = 4.0e-5                # B01 decision (was 1e-4, 05!B10 / 64!B11)
@@ -615,7 +620,7 @@ reason = "Requires a supported physical mass model."
 canon_status = "WORKING"
 source_ref = "mass_placement"
 include_circulation = true                # CIRC-001 corridors (40.2 t, PROTOTYPE decision 2026-10-31) on the ring planes
-operating_inventory_x = [-80.0, 80.0]     # the 200 t above the 1.1 kt protected ship (B01), unallocated: spread along the body
+operating_inventory_x = [-90.0, 70.0]     # the 200 t above the 1.1 kt protected ship (B01), unallocated: spread along the body
 operating_inventory_r_m = 4.0
 refuge_r_m = 2.5
 person_kg = 80.0
@@ -1358,16 +1363,16 @@ source_ref = "protected_burnout_mass"
 
 [physics.departure_mass]
 unit = "kg"
-lower_kg = 1500000.0
-upper_kg = 2000000.0
-canon_status = "PROVISIONAL"
+lower_kg = 4000000.0                      # pass 7 full return (owner choice 2026-10-31); was 1.5-2.0 kt PROVISIONAL (one-way)
+upper_kg = 4600000.0
+canon_status = "WORKING"
 source_ref = "departure_mass"
 
 [physics.propulsion_inventory]
 unit = "kg"
-lower_kg = 300000.0
-upper_kg = 600000.0
-canon_status = "PROVISIONAL"
+lower_kg = 2500000.0                      # pass 7 full return (owner choice 2026-10-31); was 300-600 t PROVISIONAL (one-way)
+upper_kg = 3000000.0
+canon_status = "WORKING"
 source_ref = "propulsion_inventory"
 
 [physics.operational_reserve]
@@ -1548,7 +1553,8 @@ source_ref = "ring_dynamics_diag"
 [propulsion.design_thrust]
 unit = "MN"
 value = 29.41995
-basis = "Structural proof/design load: 1.5 g at the 2,000 t upper departure envelope. Not normal flight thrust."
+reference_mass_kg = 2000000.0
+basis = "Structural proof/design load: 1.5 g at 2,000 t (the one-way upper departure envelope). Not normal flight thrust. Pass 7: the full-return ship (4.4 kt) flies power-limited at 21.8 MN, below this load."
 canon_status = "DERIVED"
 source_ref = "design_thrust"
 
@@ -2222,6 +2228,21 @@ rule = "hot drive blades are not the direct sink; do not spend the diagnostic ro
 canon_status = "WORKING"
 source_ref = "defense_heat_routing"
 
+# F02 loop architecture (pass 7, Claude under the owner's delegation of 2026-10-31; S&E 15 OWN-F02-LOOPS-2026-10-31; heat_rejection.py).
+# Two modes, keeping all three loops separate: in the burn the blades are at 1800 K, so the warm loop is heat-pumped into the hot loop
+# with drive electric power (explicit work, thermal.loops separation rule); in the coast the blades are dark, so drain-back warm channels
+# in the blade panels (separate circuit from the hot coolant, drained and gas-purged before a burn) radiate the warm loop at
+# blade_warm_T_K. Defense heat scales with the cube of speed (dust kinetic energy flux), so during the burn it follows (t/T)^3.
+# The cold loop stays on each ring (fluid_rule) on its usable faces from the AFT-010 screen. Every value here is PROTOTYPE.
+[thermal.loops.architecture]
+canon_status = "WORKING"
+source_ref = "heat_rejection"
+blade_warm_T_K = 440.0                 # warm channels in the blades, 10 K below the 450 K warm loop across the exchanger
+heat_pump_second_law_efficiency = 0.5  # fraction of Carnot (large industrial heat pumps reach 0.4-0.6)
+burn_machinery_W = 5.0e6               # owner warm example (machinery, computers) carried through the burn
+defense_normal_W = [1.5e7, 3.0e7]      # thermal.loops.defense_routing normal band
+cold_load_bound_W = 1.0e5              # owner cold example, the bound the ring faces must carry in HIGH_POWER
+
 # Q38 (15!A98, 40!A67:F68, 2026-10-08): candidate warm panels, PROTOTYPE geometry only (warm_panels.py). Capacity stays unknown (15!I98):
 # thermal.loops.warm.area is OPEN and the panels feed no area, view factor or margin.
 [thermal.loops.candidate_panels]
@@ -2882,8 +2903,8 @@ rationale = "Main battery and pulse bank stay together on AFT beside the reactor
 main_battery = { x0 = { datum = "AFT", offset_m = 52.1 }, x1 = { datum = "AFT", offset_m = 54.9 }, angle_deg = 90.0, r0_m = 1.3, r1_m = 3.3, width_m = 2.4 }
 pulse_bank = { x0 = { datum = "AFT", offset_m = 52.1 }, x1 = { datum = "AFT", offset_m = 54.9 }, angle_deg = 270.0, r0_m = 1.3, r1_m = 3.1, width_m = 2.0 }
 survival_packs = [
-  { x0 = { datum = "RING_A", offset_m = 14.35 }, x1 = { datum = "RING_A", offset_m = 15.55 }, angle_deg = 105.0, r0_m = 1.3, r1_m = 2.5, width_m = 1.2 },
-  { x0 = { datum = "RING_A", offset_m = 18.2 }, x1 = { datum = "RING_A", offset_m = 19.6 }, angle_deg = 150.0, r0_m = 1.3, r1_m = 2.5, width_m = 1.2 },
+  { x0 = { datum = "FWD", offset_m = -13.1 }, x1 = { datum = "FWD", offset_m = -11.9 }, angle_deg = 105.0, r0_m = 1.3, r1_m = 2.5, width_m = 1.2 },
+  { x0 = { datum = "FWD", offset_m = -9.25 }, x1 = { datum = "FWD", offset_m = -7.85 }, angle_deg = 150.0, r0_m = 1.3, r1_m = 2.5, width_m = 1.2 },
 ]
 survival_isolation_min_m = 2.0
 survival_isolation_basis = "Display separation between any survival pack and the main battery or pulse bank. The owner rule is no shared failure path; distance alone does not prove it, and isolation devices stay OPEN."
@@ -3597,7 +3618,7 @@ forward_mount_outer_radius_m = 4.6
 # with docking axes between the radiator planes. No airlock size or docking standard is sourced.
 service_inner_radius_m = 1.2
 service_collar_m = 0.3
-airlock_x = { datum = "RING_A", offset_m = 16.8 }
+airlock_x = { datum = "FWD", offset_m = -10.65 }      # forward collar with SP-11/12/13 and the docks (pass 7: was RING_A + 16.8 on the 225 m ship)
 airlock_angle_deg = 50.0
 airlock_radius_m = 1.1
 dock_x = { datum = "FWD", offset_m = -13.1 }
@@ -4057,7 +4078,7 @@ family = "xf_shell"
 status = "ILLUSTRATIVE"
 evidence_ref = "p4_exterior_grammar"
 ram_materials = ["Shield", "DisruptorLayer"]
-x_min_m = 100.0
+x_min_m = 110.0
 normal_x_min = 0.5
 tile_m = 1.6
 seam_m = 0.03
@@ -4236,11 +4257,11 @@ cartridge_bay = "Outer_1"
 # (short enough that every outside envelope stays inside the 14 m BASELINE maximum body diameter, as the service fittings do);
 # Eye A29 star trackers on the hull at their own bisector; SP-51 crawler rails along each blade's root edge, offset tangentially from the
 # blade plane, with a dock at each stay and root and a charging dock at the forward end; the crawler's swept envelope along the rail.
-terminal_x_m = 40.0
+terminal_x_m = 30.0
 lasercom_deg = 90.0
 rf_deg = 210.0
 tracker_deg = 330.0
-tracker_x_m = [44.0, 48.0]
+tracker_x_m = [34.0, 38.0]
 mast_height_m = 0.45
 mast_radius_m = 0.08
 lasercom_head_m = [0.50, 0.50, 0.50]
@@ -4388,7 +4409,7 @@ rim_beacon_deg = [45.0, 135.0, 225.0, 315.0]
 # and tangential nozzles only, so no jet fires along the hull, onto a blade, a ring or the shield.
 hga_deg = [90.0, 210.0]
 optical_deg = 330.0
-comms_x_m = -105.0
+comms_x_m = -115.0
 hga_boom_top_r_m = 8.6
 hga_gimbal_m = 0.5
 hga_dish_diameter_m = 4.0
@@ -4427,7 +4448,7 @@ momentum_storage_factor = 2.0
 # sun sensor; radial boresights 120 deg apart, so the sun can blind at most one head and two always see stars. Every value is a
 # PROTOTYPE judgment: FOV, exclusion angle and head size are typical of flight trackers, not requirements.
 nav_tracker_deg = [90.0, 210.0, 330.0]
-nav_tracker_x_m = 20.0       # clear of the survival masts and trackers at X 40-48
+nav_tracker_x_m = 10.0       # clear of the survival masts and trackers at X 30-38
 # S02 slice 4 (owner-delegated 2026-10-30, PROTOTYPE): the guided-EVA handrail built on the forward collar along eva_route (rail tube radius,
 # standoff post radius, anchor ring radius and depth, anchor offset from the rail, hold foot-restraint plate L x W x D).
 eva_rail_radius_m = 0.019
@@ -4445,20 +4466,20 @@ nav_css_m = [0.04, 0.03]                  # coarse sun sensor radius, height (on
 # (from its 13_MASS_POSITIONS region) with a radial model (cyl r: solid cylinder; disc r; ring r: thin hoop; blade r0 r1: radial strip);
 # propellant (the 300-600 t inventory, up to the 2,000 t departure envelope) in the BODY-001 option C train. Not a centre-of-mass claim.
 inertia_items = [
-  { id = "main_structure", x = [-112.5, 112.5], model = ["cyl", 5.5] },
-  { id = "forward_impact_shielding", x = [105.9, 112.5], model = ["disc", 45.0] },
-  { id = "habitat_pressure_structure", x = [82.9, 93.2], model = ["ring", 22.0] },
-  { id = "eye_sensors", x = [108.0, 112.5], model = ["disc", 8.0] },
-  { id = "life_support_garden_medical", x = [82.9, 93.2], model = ["ring", 27.0] },
-  { id = "water_radiation_shielding", x = [82.9, 93.2], model = ["ring", 28.0] },
-  { id = "workshop_spares_cargo", x = [54.5, 81.25], model = ["cyl", 4.0] },
-  { id = "drive_package", x = [-112.5, -81.0], model = ["cyl", 4.0] },
-  { id = "radiators_thermal", x = [-101.0, 81.15], model = ["blade", 6.5, 37.0] },
-  { id = "power_computers_steering_comms", x = [-80.0, 80.0], model = ["cyl", 4.0] },
-  { id = "food_consumables", x = [82.9, 93.2], model = ["ring", 25.0] },
-  { id = "design_margin", x = [-112.5, 112.5], model = ["cyl", 5.0] },
+  { id = "main_structure", x = [-122.5, 122.5], model = ["cyl", 5.5] },
+  { id = "forward_impact_shielding", x = [115.9, 122.5], model = ["disc", 45.0] },
+  { id = "habitat_pressure_structure", x = [72.9, 83.2], model = ["ring", 22.0] },
+  { id = "eye_sensors", x = [118.0, 122.5], model = ["disc", 8.0] },
+  { id = "life_support_garden_medical", x = [72.9, 83.2], model = ["ring", 27.0] },
+  { id = "water_radiation_shielding", x = [72.9, 83.2], model = ["ring", 28.0] },
+  { id = "workshop_spares_cargo", x = [44.5, 71.25], model = ["cyl", 4.0] },
+  { id = "drive_package", x = [-122.5, -91.0], model = ["cyl", 4.0] },
+  { id = "radiators_thermal", x = [-111.0, 71.15], model = ["blade", 6.5, 37.0] },
+  { id = "power_computers_steering_comms", x = [-90.0, 70.0], model = ["cyl", 4.0] },
+  { id = "food_consumables", x = [72.9, 83.2], model = ["ring", 25.0] },
+  { id = "design_margin", x = [-122.5, 122.5], model = ["cyl", 5.0] },
 ]
-propellant_x = [-57.5, 53.5]
+propellant_x = [-67.5, 43.5]
 propellant_r_m = 3.5
 
 # S04 slice 1 (user brief 2026-10-18, construction detail, M4 method): the aft body casing's panel grammar. No owner row sizes casing
@@ -4469,7 +4490,7 @@ propellant_r_m = 3.5
 # (feed lines, root chases, drone rails) it opens onto.
 [casing_panels]
 status = "PROTOTYPE"
-x_range_m = [-101.0, 80.0]
+x_range_m = [-111.0, 70.0]
 seam_width_m = 0.10
 seam_height_m = 0.015
 long_seam_deg0 = 15.0
@@ -4538,6 +4559,31 @@ deuterium = [
   { vessel = 3, end = "a1", arc_deg = 8.0 },
 ]
 
+# Pass 7 (owner choice 2026-10-31 20:59Z / 21:37Z: keep 0.016 c, grow the ship, gentler first burn): the return propellant, the mission's
+# four burns less what the body stations and the forward torus hold (fuel_storage.return_inventory), in a second torus aft of the first,
+# in the Brow's shadow between ring B and the forward torus. The body grew 20 m (ship.length) to make the room. Each vessel holds the
+# same three cells (helium-3, deuterium, hydrogen, insulated common bulkheads), so the vessels stay balanced at any common fill.
+# Outer radius kept inside the bypass transfer lines (bypass_r_m); gaps between the collar sectors. Every dimension PROTOTYPE.
+[fuel_storage.return_torus]
+prefix = "Fuel_Return_Torus"
+center_x = { datum = "FWD", offset_m = -27.4 }  # forward torus aft face (FWD -16.4) less a 2 m gap less the minor radius
+major_radius_m = 22.8
+minor_radius_m = 9.0
+wall_m = 0.3
+head_ratio = 0.5
+gap_m = 2.0
+gap_centers_deg = [90.0, 210.0, 330.0]
+cells = [
+  { species = "helium-3", arc_fraction = 0.546 },
+  { species = "deuterium", arc_fraction = 0.140 },
+  { species = "hydrogen", arc_fraction = 0.314 },
+]
+strut_root_standoff_m = 0.02
+strut_radius_m = 0.45
+strut_wall_m = 0.02
+strut_aft_dx_m = -7.0
+strut_fwd_dx_m = 5.0
+
 [fuel_storage.transfer]
 lane_r_m = 3.6                       # above the pulse bank and main battery (r <= 3.3) in the lane
 line_radius_m = 0.12
@@ -4553,6 +4599,9 @@ lines = [
   { name = "Fuel_Header_He3", species = "helium-3", source = "body", lane_deg = 150.0, offset_deg = 0.0, tank = "Feed_Run_Tank_02" },
   { name = "Fuel_Transfer_H2_A", species = "hydrogen", source = "torus", lane_deg = 270.0, offset_deg = -6.0, tank = "Feed_Run_Tank_03" },
   { name = "Fuel_Transfer_H2_B", species = "hydrogen", source = "torus", lane_deg = 270.0, offset_deg = 6.0, tank = "Feed_Run_Tank_04" },
+  { name = "Fuel_Transfer_D2_R", species = "deuterium", source = "return_torus", lane_deg = 30.0, offset_deg = -6.0, tank = "Feed_Run_Tank_01" },
+  { name = "Fuel_Transfer_He3_R", species = "helium-3", source = "return_torus", lane_deg = 150.0, offset_deg = -6.0, tank = "Feed_Run_Tank_02" },
+  { name = "Fuel_Transfer_H2_R", species = "hydrogen", source = "return_torus", lane_deg = 270.0, offset_deg = 0.0, tank = "Feed_Run_Tank_03" },
 ]
 
 # S04/S02 body framing and momentum storage (owner go 2026-10-30, body_equipment.py). Every value PROTOTYPE: internal ring frames in

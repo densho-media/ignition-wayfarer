@@ -24,34 +24,34 @@
   "rated_occupancy": 12,
   "story_manifest": 6,
   "garden_sectors": 2,
-  "garden_zone_volume_m3": 4.3,
+  "garden_zone_volume_m3": 3.9999999999999996,
   "garden_allocation_m3": 80.0,
   "functions": {
     "HABITATION": {
       "component": "WF_INTERIOR_HABITATION",
       "sectors": 2,
       "zones": 14,
-      "zone_volume_m3": 21.642298140023215,
-      "free_volume_m3": 18.357701859976785,
+      "zone_volume_m3": 20.19207262785469,
+      "free_volume_m3": 19.80792737214531,
       "by_zone_m3": {
         "bunk": 10.122247778698528,
         "burn_couch": 1.2600000000000005,
         "hygiene": 4.4217736584882275,
-        "stowage": 5.838276702836457
+        "stowage": 4.388051190667933
       }
     },
     "WORK_MEDICAL_OPS": {
       "component": "WF_INTERIOR_WORK",
       "sectors": 2,
       "zones": 9,
-      "zone_volume_m3": 14.741900160471658,
-      "free_volume_m3": 25.25809983952834,
+      "zone_volume_m3": 13.291674648303134,
+      "free_volume_m3": 26.708325351696864,
       "by_zone_m3": {
         "burn_couch": 1.2600000000000005,
         "laboratory": 1.2000000000000002,
         "medical": 1.68,
         "operations": 4.505082527469856,
-        "stowage": 4.696817633001801,
+        "stowage": 3.2465921208332773,
         "workshop": 1.4000000000000004
       }
     },
@@ -59,14 +59,14 @@
       "component": "WF_INTERIOR_GARDEN",
       "sectors": 2,
       "zones": 7,
-      "zone_volume_m3": 13.674610764513211,
-      "free_volume_m3": 26.32538923548679,
+      "zone_volume_m3": 11.956874082054098,
+      "free_volume_m3": 28.0431259179459,
       "by_zone_m3": {
         "burn_couch": 1.2600000000000005,
-        "common": 4.230402130461167,
-        "garden": 2.15,
+        "common": 4.112890960170579,
+        "garden": 1.9999999999999998,
         "life_support": 2.2108868292441137,
-        "stowage": 3.82332180480793
+        "stowage": 2.3730962926394055
       }
     }
   },

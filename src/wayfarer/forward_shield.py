@@ -1248,7 +1248,7 @@ def validate(s):
     need(ln['envelope_scope'] == 'OVERALL_INCLUDING_DUST_LANCE' and ln['value_scope'] == 'BODY_AFT_TO_SHIELD_FACE' and lance_row.get('known') is True and lance_row['unit'] == 'm'
          and lance_row['canon_status'] == 'WORKING', 'The Dust Lance length is a WORKING value and counts inside the overall length (Q2)')
     need(ln['min'] <= overall_length(s) <= ln['max']+1e-9,
-         'Overall length INCLUDING the Dust Lance (aft end to Lance tip) must stay inside the 220-240 m working envelope (Q2)')
+         'Overall length INCLUDING the Dust Lance (aft end to Lance tip) must stay inside the ship.length working envelope (Q2; widened for the full return 2026-10-31)')
     need(math.isclose(overall_length(s)-ln['value'], lance_row['value'], abs_tol=1e-9), 'Overall length is the body length plus the Lance length')
     need(st['mount_face'] < st['skin_aft'] and st['lance_cone_end'] > st['face'], 'Lance column and cone ordering')
     # Load path: column from the spine end to the hub, bore through the EYE mount, struts to the truss hub ring (hub path, the only path into the ship); keels and ties form a Brow-side sector frame whose aft ends are free (draft Q45).

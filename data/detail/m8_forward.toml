@@ -25,16 +25,16 @@ zone = "Brow aft face: panel modules between the existing joints, inside the tru
 classes = ["ENGINEERING_FLEXIBLE", "ARTISTIC"]
 # Claimed space in the ship frame (m): the aft-face panels, lane trays, caps and stencils plus 0.05 m (inside the 90 m Brow, aft of its
 # skin; M8.2 trays reach 0.25 m aft of the skin, 3.5 m short of the truss).
-envelope_min = [109.44, -40.65, -40.65]
-envelope_max = [112.39, 40.65, 40.65]
+envelope_min = [119.44, -40.65, -40.65]
+envelope_max = [122.39, 40.65, 40.65]
 
 [assembly."M8.CROWN.RIM"]
 anchor = "WF-FWD.FORWARD_SHIELD.ORIGIN"
 zone = "Aegis Crown rim: the sector module on the housing aft plate and the rim girder (mechanisms, shutters and optics unchanged)"
 classes = ["ENGINEERING_FLEXIBLE", "ARTISTIC"]
 # Claimed space in the ship frame (m): the twelve sector modules and the rim markings (r <= 45.005 m) plus 0.05 m.
-envelope_min = [105.9, -45.06, -45.06]
-envelope_max = [109.4, 45.06, 45.06]
+envelope_min = [115.9, -45.06, -45.06]
+envelope_max = [119.4, 45.06, 45.06]
 
 # M8.BROW.AFT: panel modules on the skin's aft face between the existing joints (forward_shield.brow_panel_joints), off the truss's forward
 # chords by member radius + the shared clearance, in three treatments by what lies behind: structural cladding on the spoke columns

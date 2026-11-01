@@ -1,0 +1,60 @@
+{
+ "status": "WORKING",
+ "hot_T_K": 1800.0,
+ "warm_T_K": 450.0,
+ "hot_allowance_other_loads_W": 3600375149.7246075,
+ "burn": [
+  {
+   "time_fraction": 0.25,
+   "warm_load_W": 5468750.0,
+   "pump_work_W": 32812500.0,
+   "into_hot_loop_W": 38281250.0,
+   "share_of_allowance": 0.010632572553704058
+  },
+  {
+   "time_fraction": 0.5,
+   "warm_load_W": 8750000.0,
+   "pump_work_W": 52500000.0,
+   "into_hot_loop_W": 61250000.0,
+   "share_of_allowance": 0.017012116085926492
+  },
+  {
+   "time_fraction": 0.75,
+   "warm_load_W": 17656250.0,
+   "pump_work_W": 105937500.0,
+   "into_hot_loop_W": 123593750.0,
+   "share_of_allowance": 0.034328019959101674
+  },
+  {
+   "time_fraction": 1.0,
+   "warm_load_W": 35000000.0,
+   "pump_work_W": 210000000.0,
+   "into_hot_loop_W": 245000000.0,
+   "share_of_allowance": 0.06804846434370597
+  }
+ ],
+ "coast": {
+  "blade_effective_area_m2": 26882.117827868853,
+  "flux_W_m2": 1912.7796910520601,
+  "capacity_W": 51419569.03361606,
+  "area_for_band_m2": [
+   7841.990413307742,
+   15683.980826615483
+  ],
+  "blade_fraction_for_band": [
+   0.2917177308544457,
+   0.5834354617088914
+  ],
+  "limited_duty_top_W": 50000000.0,
+  "covers_limited_duty": true
+ },
+ "cold": {
+  "load_bound_W": 100000.0,
+  "high_power_capacity_W": 149847.86656837724,
+  "coast_capacity_W": 1378573.744337002,
+  "high_power_usable_m2": 1883.384795827081,
+  "margin_high_power": 0.4984786656837723
+ },
+ "short_burst": "50-80 MW defense bursts exceed even the blades in coast: load shedding / Heat Debt (defense_routing), buffer OPEN",
+ "failures": []
+}

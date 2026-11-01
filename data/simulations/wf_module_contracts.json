@@ -546,14 +546,14 @@
    "anchors": {
     "WF-RING-A.DRUM.1": {
      "family": "drum_frame",
-     "hash": "68ebfd2457766bc4",
+     "hash": "22e388c6f9bf852c",
      "host": "HABITAT_A",
      "matrix": [
       [
        1.0,
        0.0,
        0.0,
-       85.049362477231
+       75.049362477231
       ],
       [
        0.0,
@@ -616,14 +616,14 @@
     },
     "WF-RING-A.ROTOR.1": {
      "family": "rotor_frame",
-     "hash": "b8992b3a6c566131",
+     "hash": "e5ac6c2736e48685",
      "host": "HABITAT_A",
      "matrix": [
       [
        1.0,
        0.0,
        0.0,
-       85.049362477231
+       75.049362477231
       ],
       [
        0.0,
@@ -756,20 +756,20 @@
      "parent": "Rotor_1"
     }
    },
-   "hash": "2de269194835667c"
+   "hash": "48b1b4bab683c0cb"
   },
   "WF-RING-B": {
    "anchors": {
     "WF-RING-B.DRUM.2": {
      "family": "drum_frame",
-     "hash": "c8b6306987eb0575",
+     "hash": "dbb4b853de89726f",
      "host": "HABITAT_B",
      "matrix": [
       [
        1.0,
        0.0,
        0.0,
-       91.049362477231
+       81.049362477231
       ],
       [
        0.0,
@@ -832,14 +832,14 @@
     },
     "WF-RING-B.ROTOR.2": {
      "family": "rotor_frame",
-     "hash": "a3ff314d01ac22b1",
+     "hash": "ab59c47b6c94b8c8",
      "host": "HABITAT_B",
      "matrix": [
       [
        1.0,
        0.0,
        0.0,
-       91.049362477231
+       81.049362477231
       ],
       [
        0.0,
@@ -972,7 +972,7 @@
      "parent": "Rotor_2"
     }
    },
-   "hash": "6f3413c36a2daf6a"
+   "hash": "70b071967d7408d2"
   },
   "WF-SPINE": {
    "anchors": {

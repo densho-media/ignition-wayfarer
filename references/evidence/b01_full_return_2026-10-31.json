@@ -1,0 +1,59 @@
+{
+ "task": "B01 full return (pass 7)",
+ "date": "2026-10-31",
+ "status": "WORKING (owner decisions 2026-10-31 20:59Z / 21:37Z; sizing by Claude)",
+ "source": "S&E 15 OWN-B01-FULL-RETURN-2026-10-31, 98 row 139, 02_SHIP_INPUTS rows 8-11, 26-27",
+ "mission": {
+  "burns": 4,
+  "mass_ratio_per_burn": 1.2838,
+  "propellant_t": 2796.6,
+  "end_mass_t": 1629.5,
+  "added_tank_t": 329.5,
+  "departure_t": 4426.1,
+  "species_t": {
+   "helium_3": 1094.2,
+   "deuterium": 730.7,
+   "hydrogen": 971.8
+  }
+ },
+ "first_burn": {
+  "profile": "power_limited",
+  "thrust_MN": 21.77,
+  "duration_d": 9.99,
+  "distance_AU": 13.26,
+  "accel_g": [
+   0.502,
+   0.644
+  ],
+  "hot_margin_GW": 0.351
+ },
+ "return_torus": {
+  "x": 95.1,
+  "r": [
+   13.8,
+   31.8
+  ],
+  "x_range": [
+   86.1,
+   104.1
+  ],
+  "ring_b_sweep_clear_m": 2.9,
+  "torus_gap_m": 2.0,
+  "bypass_line_clear_m": 0.58,
+  "collar_clear_m": 7.3
+ },
+ "ship": {
+  "length_m": 245.0,
+  "envelope_m": [
+   220.0,
+   260.0
+  ],
+  "overall_with_lance_m": 257.0,
+  "frame_shift": "aft section (drive to ring B) -10 m, forward collar/Brow +10 m in the ship frame"
+ },
+ "loads": {
+  "forward_torus_margin": 0.879,
+  "return_torus_margin": 12.802,
+  "forward_legs_at_1_5g_full": "about -38 % (needs heavier legs before a drive upgrade)"
+ }
+}

@@ -15,11 +15,11 @@
    "spoke_to_fluid_face_m": 0.16000000000000014,
    "rotor2_fwd_to_refuge_m": 0.75,
    "rotor1_fwd_to_rotor2_aft_m": 2.510000000000005,
-   "rotor2_fwd_to_forward_mount_m": 14.00063752276867,
+   "rotor2_fwd_to_forward_mount_m": 34.00063752276867,
    "ring_sweep_aft_to_outer_cage_m": 1.5499999999999972,
    "ring_sweep_to_radiator_front_m": 1.5,
    "ring_planes_gap_m": 1.6999999999999886,
-   "ring_sweep_fwd_to_forward_mount_m": 14.200637522768659
+   "ring_sweep_fwd_to_forward_mount_m": 34.20063752276866
   },
   "failures": [],
   "passed": true
@@ -29,8 +29,8 @@
    "module": "TOUCHDOWN_A",
    "direction": "AFT",
    "path_x_m": [
-    84.06936247723134,
-    84.44936247723135
+    74.06936247723134,
+    74.44936247723135
    ],
    "fixed_obstacles": {
     "ROTATING": [],
@@ -43,8 +43,8 @@
    "module": "TOUCHDOWN_A",
    "direction": "AFT",
    "path_x_m": [
-    84.06936247723134,
-    84.44936247723135
+    74.06936247723134,
+    74.44936247723135
    ],
    "fixed_obstacles": {
     "ROTATING": [],
@@ -57,8 +57,8 @@
    "module": "TOUCHDOWN_A",
    "direction": "AFT",
    "path_x_m": [
-    84.06936247723134,
-    84.44936247723135
+    74.06936247723134,
+    74.44936247723135
    ],
    "fixed_obstacles": {
     "ROTATING": [],
@@ -71,8 +71,8 @@
    "module": "MAGNETIC_A",
    "direction": "AFT",
    "path_x_m": [
-    83.91936247723132,
-    84.64936247723134
+    73.91936247723132,
+    74.64936247723134
    ],
    "fixed_obstacles": {
     "ROTATING": [],
@@ -87,8 +87,8 @@
    "module": "MAGNETIC_A",
    "direction": "AFT",
    "path_x_m": [
-    83.91936247723132,
-    84.64936247723134
+    73.91936247723132,
+    74.64936247723134
    ],
    "fixed_obstacles": {
     "ROTATING": [],
@@ -103,8 +103,8 @@
    "module": "MAGNETIC_A",
    "direction": "AFT",
    "path_x_m": [
-    83.91936247723132,
-    84.64936247723134
+    73.91936247723132,
+    74.64936247723134
    ],
    "fixed_obstacles": {
     "ROTATING": [],
@@ -119,8 +119,8 @@
    "module": "MOTOR",
    "direction": "FWD",
    "path_x_m": [
-    85.79936247723134,
-    87.99936247723134
+    75.79936247723134,
+    77.99936247723134
    ],
    "fixed_obstacles": {
     "ROTATING": [],
@@ -139,8 +139,8 @@
    "module": "MOTOR",
    "direction": "FWD",
    "path_x_m": [
-    85.79936247723134,
-    87.99936247723134
+    75.79936247723134,
+    77.99936247723134
    ],
    "fixed_obstacles": {
     "ROTATING": [],
@@ -158,8 +158,8 @@
    "module": "MOTOR",
    "direction": "FWD",
    "path_x_m": [
-    85.79936247723134,
-    87.99936247723134
+    75.79936247723134,
+    77.99936247723134
    ],
    "fixed_obstacles": {
     "ROTATING": [],
@@ -177,8 +177,8 @@
    "module": "POWER",
    "direction": "FWD",
    "path_x_m": [
-    86.14936247723134,
-    87.49936247723134
+    76.14936247723134,
+    77.49936247723134
    ],
    "fixed_obstacles": {
     "ROTATING": [],
@@ -196,8 +196,8 @@
    "module": "POWER",
    "direction": "FWD",
    "path_x_m": [
-    86.14936247723134,
-    87.49936247723134
+    76.14936247723134,
+    77.49936247723134
    ],
    "fixed_obstacles": {
     "ROTATING": [],
@@ -214,8 +214,8 @@
    "module": "POWER",
    "direction": "FWD",
    "path_x_m": [
-    86.14936247723134,
-    87.49936247723134
+    76.14936247723134,
+    77.49936247723134
    ],
    "fixed_obstacles": {
     "ROTATING": [],
@@ -232,8 +232,8 @@
    "module": "DATA",
    "direction": "FWD",
    "path_x_m": [
-    86.34936247723134,
-    87.34936247723134
+    76.34936247723134,
+    77.34936247723134
    ],
    "fixed_obstacles": {
     "ROTATING": [],
@@ -250,8 +250,8 @@
    "module": "DATA",
    "direction": "FWD",
    "path_x_m": [
-    86.34936247723134,
-    87.34936247723134
+    76.34936247723134,
+    77.34936247723134
    ],
    "fixed_obstacles": {
     "ROTATING": [],
@@ -267,8 +267,8 @@
    "module": "DATA",
    "direction": "FWD",
    "path_x_m": [
-    86.34936247723134,
-    87.34936247723134
+    76.34936247723134,
+    77.34936247723134
    ],
    "fixed_obstacles": {
     "ROTATING": [],
@@ -284,8 +284,8 @@
    "module": "EMERGENCY_POWER",
    "direction": "FWD",
    "path_x_m": [
-    86.49936247723134,
-    87.29936247723136
+    76.49936247723134,
+    77.29936247723136
    ],
    "fixed_obstacles": {
     "ROTATING": [],
@@ -301,8 +301,8 @@
    "module": "MAGNETIC_B",
    "direction": "FWD",
    "path_x_m": [
-    86.84936247723134,
-    87.49936247723134
+    76.84936247723134,
+    77.49936247723134
    ],
    "fixed_obstacles": {
     "ROTATING": [],
@@ -317,8 +317,8 @@
    "module": "MAGNETIC_B",
    "direction": "FWD",
    "path_x_m": [
-    86.84936247723134,
-    87.49936247723134
+    76.84936247723134,
+    77.49936247723134
    ],
    "fixed_obstacles": {
     "ROTATING": [],
@@ -333,8 +333,8 @@
    "module": "MAGNETIC_B",
    "direction": "FWD",
    "path_x_m": [
-    86.84936247723134,
-    87.49936247723134
+    76.84936247723134,
+    77.49936247723134
    ],
    "fixed_obstacles": {
     "ROTATING": [],
@@ -349,8 +349,8 @@
    "module": "TOUCHDOWN_B",
    "direction": "FWD",
    "path_x_m": [
-    87.04936247723134,
-    87.34936247723135
+    77.04936247723134,
+    77.34936247723135
    ],
    "fixed_obstacles": {
     "ROTATING": [],
@@ -363,8 +363,8 @@
    "module": "TOUCHDOWN_B",
    "direction": "FWD",
    "path_x_m": [
-    87.04936247723134,
-    87.34936247723135
+    77.04936247723134,
+    77.34936247723135
    ],
    "fixed_obstacles": {
     "ROTATING": [],
@@ -377,8 +377,8 @@
    "module": "TOUCHDOWN_B",
    "direction": "FWD",
    "path_x_m": [
-    87.04936247723134,
-    87.34936247723135
+    77.04936247723134,
+    77.34936247723135
    ],
    "fixed_obstacles": {
     "ROTATING": [],
@@ -391,8 +391,8 @@
    "module": "FLUID_COUPLING",
    "direction": "FWD",
    "path_x_m": [
-    87.39936247723134,
-    87.80936247723133
+    77.39936247723134,
+    77.80936247723133
    ],
    "fixed_obstacles": {
     "ROTATING": [],
@@ -405,8 +405,8 @@
    "module": "TOUCHDOWN_A",
    "direction": "AFT",
    "path_x_m": [
-    90.06936247723134,
-    90.44936247723135
+    80.06936247723134,
+    80.44936247723135
    ],
    "fixed_obstacles": {
     "ROTATING": [],
@@ -419,8 +419,8 @@
    "module": "TOUCHDOWN_A",
    "direction": "AFT",
    "path_x_m": [
-    90.06936247723134,
-    90.44936247723135
+    80.06936247723134,
+    80.44936247723135
    ],
    "fixed_obstacles": {
     "ROTATING": [],
@@ -433,8 +433,8 @@
    "module": "TOUCHDOWN_A",
    "direction": "AFT",
    "path_x_m": [
-    90.06936247723134,
-    90.44936247723135
+    80.06936247723134,
+    80.44936247723135
    ],
    "fixed_obstacles": {
     "ROTATING": [],
@@ -447,8 +447,8 @@
    "module": "MAGNETIC_A",
    "direction": "AFT",
    "path_x_m": [
-    89.91936247723132,
-    90.64936247723134
+    79.91936247723132,
+    80.64936247723134
    ],
    "fixed_obstacles": {
     "ROTATING": [],
@@ -463,8 +463,8 @@
    "module": "MAGNETIC_A",
    "direction": "AFT",
    "path_x_m": [
-    89.91936247723132,
-    90.64936247723134
+    79.91936247723132,
+    80.64936247723134
    ],
    "fixed_obstacles": {
     "ROTATING": [],
@@ -479,8 +479,8 @@
    "module": "MAGNETIC_A",
    "direction": "AFT",
    "path_x_m": [
-    89.91936247723132,
-    90.64936247723134
+    79.91936247723132,
+    80.64936247723134
    ],
    "fixed_obstacles": {
     "ROTATING": [],
@@ -495,8 +495,8 @@
    "module": "MOTOR",
    "direction": "FWD",
    "path_x_m": [
-    91.79936247723134,
-    93.99936247723134
+    81.79936247723134,
+    83.99936247723134
    ],
    "fixed_obstacles": {
     "ROTATING": [],
@@ -515,8 +515,8 @@
    "module": "MOTOR",
    "direction": "FWD",
    "path_x_m": [
-    91.79936247723134,
-    93.99936247723134
+    81.79936247723134,
+    83.99936247723134
    ],
    "fixed_obstacles": {
     "ROTATING": [],
@@ -534,8 +534,8 @@
    "module": "MOTOR",
    "direction": "FWD",
    "path_x_m": [
-    91.79936247723134,
-    93.99936247723134
+    81.79936247723134,
+    83.99936247723134
    ],
    "fixed_obstacles": {
     "ROTATING": [],
@@ -553,8 +553,8 @@
    "module": "POWER",
    "direction": "FWD",
    "path_x_m": [
-    92.14936247723134,
-    93.49936247723134
+    82.14936247723134,
+    83.49936247723134
    ],
    "fixed_obstacles": {
     "ROTATING": [],
@@ -572,8 +572,8 @@
    "module": "POWER",
    "direction": "FWD",
    "path_x_m": [
-    92.14936247723134,
-    93.49936247723134
+    82.14936247723134,
+    83.49936247723134
    ],
    "fixed_obstacles": {
     "ROTATING": [],
@@ -590,8 +590,8 @@
    "module": "POWER",
    "direction": "FWD",
    "path_x_m": [
-    92.14936247723134,
-    93.49936247723134
+    82.14936247723134,
+    83.49936247723134
    ],
    "fixed_obstacles": {
     "ROTATING": [],
@@ -608,8 +608,8 @@
    "module": "DATA",
    "direction": "FWD",
    "path_x_m": [
-    92.34936247723134,
-    93.34936247723134
+    82.34936247723134,
+    83.34936247723134
    ],
    "fixed_obstacles": {
     "ROTATING": [],
@@ -626,8 +626,8 @@
    "module": "DATA",
    "direction": "FWD",
    "path_x_m": [
-    92.34936247723134,
-    93.34936247723134
+    82.34936247723134,
+    83.34936247723134
    ],
    "fixed_obstacles": {
     "ROTATING": [],
@@ -643,8 +643,8 @@
    "module": "DATA",
    "direction": "FWD",
    "path_x_m": [
-    92.34936247723134,
-    93.34936247723134
+    82.34936247723134,
+    83.34936247723134
    ],
    "fixed_obstacles": {
     "ROTATING": [],
@@ -660,8 +660,8 @@
    "module": "EMERGENCY_POWER",
    "direction": "FWD",
    "path_x_m": [
-    92.49936247723134,
-    93.29936247723136
+    82.49936247723134,
+    83.29936247723136
    ],
    "fixed_obstacles": {
     "ROTATING": [],
@@ -677,8 +677,8 @@
    "module": "MAGNETIC_B",
    "direction": "FWD",
    "path_x_m": [
-    92.84936247723134,
-    93.49936247723134
+    82.84936247723134,
+    83.49936247723134
    ],
    "fixed_obstacles": {
     "ROTATING": [],
@@ -693,8 +693,8 @@
    "module": "MAGNETIC_B",
    "direction": "FWD",
    "path_x_m": [
-    92.84936247723134,
-    93.49936247723134
+    82.84936247723134,
+    83.49936247723134
    ],
    "fixed_obstacles": {
     "ROTATING": [],
@@ -709,8 +709,8 @@
    "module": "MAGNETIC_B",
    "direction": "FWD",
    "path_x_m": [
-    92.84936247723134,
-    93.49936247723134
+    82.84936247723134,
+    83.49936247723134
    ],
    "fixed_obstacles": {
     "ROTATING": [],
@@ -725,8 +725,8 @@
    "module": "TOUCHDOWN_B",
    "direction": "FWD",
    "path_x_m": [
-    93.04936247723134,
-    93.34936247723135
+    83.04936247723134,
+    83.34936247723135
    ],
    "fixed_obstacles": {
     "ROTATING": [],
@@ -739,8 +739,8 @@
    "module": "TOUCHDOWN_B",
    "direction": "FWD",
    "path_x_m": [
-    93.04936247723134,
-    93.34936247723135
+    83.04936247723134,
+    83.34936247723135
    ],
    "fixed_obstacles": {
     "ROTATING": [],
@@ -753,8 +753,8 @@
    "module": "TOUCHDOWN_B",
    "direction": "FWD",
    "path_x_m": [
-    93.04936247723134,
-    93.34936247723135
+    83.04936247723134,
+    83.34936247723135
    ],
    "fixed_obstacles": {
     "ROTATING": [],
@@ -767,8 +767,8 @@
    "module": "FLUID_COUPLING",
    "direction": "FWD",
    "path_x_m": [
-    93.39936247723134,
-    93.80936247723133
+    83.39936247723134,
+    83.80936247723133
    ],
    "fixed_obstacles": {
     "ROTATING": [],
@@ -782,7 +782,7 @@
   "generation": "P1-008",
   "direction": "Active magnetic primary support with mechanical touchdown backup; direct hub motor; contactless power/data; only essential fluids through serviceable redundant rotary couplings.",
   "canon": {
-   "canon_status": "WORKING",
+   "canon_status": "BASELINE",
    "source_ref": "rotor_interface_i5"
   },
   "architecture": {
@@ -1030,8 +1030,8 @@
       "id": "TOUCHDOWN_A",
       "function": "TOUCHDOWN_BEARING",
       "x_m": [
-       84.44936247723135,
-       84.59936247723134
+       74.44936247723135,
+       74.59936247723134
       ],
       "segments": 3,
       "withdraw": "AFT",
@@ -1041,8 +1041,8 @@
       "id": "MAGNETIC_A",
       "function": "MAGNETIC_BEARING",
       "x_m": [
-       84.64936247723134,
-       84.94936247723135
+       74.64936247723134,
+       74.94936247723135
       ],
       "segments": 3,
       "withdraw": "AFT",
@@ -1054,8 +1054,8 @@
       "id": "MOTOR",
       "function": "HUB_MOTOR",
       "x_m": [
-       84.99936247723134,
-       85.79936247723134
+       74.99936247723134,
+       75.79936247723134
       ],
       "segments": 3,
       "withdraw": "FWD",
@@ -1071,8 +1071,8 @@
       "id": "POWER",
       "function": "CONTACTLESS_POWER",
       "x_m": [
-       85.84936247723134,
-       86.14936247723134
+       75.84936247723134,
+       76.14936247723134
       ],
       "segments": 3,
       "withdraw": "FWD",
@@ -1087,8 +1087,8 @@
       "id": "DATA",
       "function": "CONTACTLESS_DATA",
       "x_m": [
-       86.19936247723135,
-       86.34936247723134
+       76.19936247723135,
+       76.34936247723134
       ],
       "segments": 3,
       "withdraw": "FWD",
@@ -1102,8 +1102,8 @@
       "id": "EMERGENCY_POWER",
       "function": "EMERGENCY_POWER_PATH",
       "x_m": [
-       86.39936247723134,
-       86.49936247723134
+       76.39936247723134,
+       76.49936247723134
       ],
       "segments": 1,
       "withdraw": "FWD",
@@ -1116,8 +1116,8 @@
       "id": "MAGNETIC_B",
       "function": "MAGNETIC_BEARING",
       "x_m": [
-       86.54936247723134,
-       86.84936247723134
+       76.54936247723134,
+       76.84936247723134
       ],
       "segments": 3,
       "withdraw": "FWD",
@@ -1129,8 +1129,8 @@
       "id": "TOUCHDOWN_B",
       "function": "TOUCHDOWN_BEARING",
       "x_m": [
-       86.89936247723134,
-       87.04936247723134
+       76.89936247723134,
+       77.04936247723134
       ],
       "segments": 3,
       "withdraw": "FWD",
@@ -1140,8 +1140,8 @@
       "id": "FLUID_COUPLING",
       "function": "FLUID_COUPLING",
       "x_m": [
-       87.13936247723134,
-       87.39936247723134
+       77.13936247723134,
+       77.39936247723134
       ],
       "segments": 1,
       "withdraw": "FWD",
@@ -1182,8 +1182,8 @@
       "id": "TOUCHDOWN_A",
       "function": "TOUCHDOWN_BEARING",
       "x_m": [
-       90.44936247723135,
-       90.59936247723134
+       80.44936247723135,
+       80.59936247723134
       ],
       "segments": 3,
       "withdraw": "AFT",
@@ -1193,8 +1193,8 @@
       "id": "MAGNETIC_A",
       "function": "MAGNETIC_BEARING",
       "x_m": [
-       90.64936247723134,
-       90.94936247723135
+       80.64936247723134,
+       80.94936247723135
       ],
       "segments": 3,
       "withdraw": "AFT",
@@ -1206,8 +1206,8 @@
       "id": "MOTOR",
       "function": "HUB_MOTOR",
       "x_m": [
-       90.99936247723134,
-       91.79936247723134
+       80.99936247723134,
+       81.79936247723134
       ],
       "segments": 3,
       "withdraw": "FWD",
@@ -1223,8 +1223,8 @@
       "id": "POWER",
       "function": "CONTACTLESS_POWER",
       "x_m": [
-       91.84936247723134,
-       92.14936247723134
+       81.84936247723134,
+       82.14936247723134
       ],
       "segments": 3,
       "withdraw": "FWD",
@@ -1239,8 +1239,8 @@
       "id": "DATA",
       "function": "CONTACTLESS_DATA",
       "x_m": [
-       92.19936247723135,
-       92.34936247723134
+       82.19936247723135,
+       82.34936247723134
       ],
       "segments": 3,
       "withdraw": "FWD",
@@ -1254,8 +1254,8 @@
       "id": "EMERGENCY_POWER",
       "function": "EMERGENCY_POWER_PATH",
       "x_m": [
-       92.39936247723134,
-       92.49936247723134
+       82.39936247723134,
+       82.49936247723134
       ],
       "segments": 1,
       "withdraw": "FWD",
@@ -1268,8 +1268,8 @@
       "id": "MAGNETIC_B",
       "function": "MAGNETIC_BEARING",
       "x_m": [
-       92.54936247723134,
-       92.84936247723134
+       82.54936247723134,
+       82.84936247723134
       ],
       "segments": 3,
       "withdraw": "FWD",
@@ -1281,8 +1281,8 @@
       "id": "TOUCHDOWN_B",
       "function": "TOUCHDOWN_BEARING",
       "x_m": [
-       92.89936247723134,
-       93.04936247723134
+       82.89936247723134,
+       83.04936247723134
       ],
       "segments": 3,
       "withdraw": "FWD",
@@ -1292,8 +1292,8 @@
       "id": "FLUID_COUPLING",
       "function": "FLUID_COUPLING",
       "x_m": [
-       93.13936247723134,
-       93.39936247723134
+       83.13936247723134,
+       83.39936247723134
       ],
       "segments": 1,
       "withdraw": "FWD",
