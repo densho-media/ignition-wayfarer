@@ -52,6 +52,7 @@ var station_root := Node3D.new()
 var station_leaf: Node3D = null
 var station_offset := 0.0         # 0 docked .. 1 at the stand-off
 var station_target := 0.0
+var boom_movers := []             # STN-002: [node, retract_m] per boom stage; the head (station_root) retracts by the whole stroke
 var view_root := Node3D.new()
 var body_vis := Node3D.new()
 var camera := Camera3D.new()
@@ -527,7 +528,10 @@ func _step_modes(dt: float) -> void:
 	if hatch["STATION_HATCH"]["value"] <= 0.0:
 		station_offset = move_toward(station_offset, station_target, dt / STATION_MOVE_S)
 	var u := WfLine.g(stages["boarding"]["axis"]["radial"]).normalized()
-	station_root.position = u * float(stages["boarding"]["station"]["standoff_m"]) * smoothstep(0.0, 1.0, station_offset)
+	var k_off := smoothstep(0.0, 1.0, station_offset)
+	station_root.position = u * float(stages["boarding"]["station"]["standoff_m"]) * k_off
+	for bm in boom_movers:
+		(bm[0] as Node3D).position = u * float(bm[1]) * k_off
 	for k in 2:
 		var f: Dictionary = frames[ring_ids[k]]
 		var w: float = f["rate"] * ctl.spin_frac
@@ -1266,6 +1270,40 @@ func _build_station() -> void:
 	sign.transform = Transform3D(Basis(pe.cross(n), n, -pe).orthonormalized(), c + n * (float(node[1]) - 0.4) + pe * (nr - 0.05))
 	sign.billboard = BaseMaterial3D.BILLBOARD_DISABLED
 	station_root.add_child(sign)
+	_build_boom(c, n)
+
+## STN-002 (display only, not walkable): the telescoping boarding boom behind the node's far-end hatch and the station hub it hangs from. Each
+## stage is a coaxial tube on its own mover; the outer stage and the hub stay with the station, the inner stage retracts with the head.
+func _build_boom(c: Vector3, n: Vector3) -> void:
+	var st: Dictionary = stages["boarding"]["station"]
+	if not st.has("boom"):
+		return
+	var bm: Dictionary = st["boom"]
+	var metal := _mat(Color(0.56, 0.58, 0.60))
+	var blanket := _mat(Color(0.74, 0.71, 0.64))
+	for q in bm["stages"]:
+		var mover := Node3D.new()
+		mover.name = "STN_" + str(q["name"])
+		ship.add_child(mover)
+		boom_movers.append([mover, float(q["retract_m"])])
+		var r: float = q["radius_m"]
+		var a0: float = q["a_m"][0]
+		var a1: float = q["a_m"][1]
+		for mi in [_tube(c, n, r, a0, a1, metal, 32), _ring_disc(c, n, a0, r - 0.08, r + 0.06, metal, 32)]:
+			station_root.remove_child(mi)
+			mover.add_child(mi)
+	var hub: Dictionary = bm["hub"]
+	var cyl := CylinderMesh.new()
+	cyl.top_radius = hub["radius_m"]
+	cyl.bottom_radius = hub["radius_m"]
+	cyl.height = hub["length_m"]
+	cyl.radial_segments = 48
+	var hmi := MeshInstance3D.new()
+	hmi.name = "STN_Hub"
+	hmi.mesh = cyl
+	hmi.material_override = blanket
+	hmi.transform = Transform3D(Basis(Vector3(0, 0, 1), Vector3(1, 0, 0), Vector3(0, 1, 0)), c + n * float(hub["centre_a_m"]))
+	ship.add_child(hmi)
 
 # ---- lights ------------------------------------------------------------------------------------------------------------------------------------
 

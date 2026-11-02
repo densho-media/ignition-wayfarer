@@ -125,6 +125,13 @@ def build_characters(root,s,spec_text,source_text):
     coll,c=begin(path,name);characters(c,s);save(path,coll,spec_text,source_text)
 
 
+def build_station(root,s,spec_text,source_text):
+    """STN-002: the development station's docking context in its own asset (assets/station/), never linked into the vehicle."""
+    from dock_station import build as station_build
+    name=s['station']['context']['asset'];path=root/'assets/station'/f'{name}.blend';path.parent.mkdir(parents=True,exist_ok=True)
+    coll,c=begin(path,name);station_build(c,s);save(path,coll,spec_text,source_text)
+
+
 def detail_targets(s):
     """{DETAIL_<assembly> target: assembly} of every registered detail pack assembly (docs/MODULES.md)."""
     return {modules.target(a):a for a in modules.assemblies(s['detail_packs'])}
@@ -152,7 +159,7 @@ def build(root=ROOT, target='all', rebind=False):
     s,_,spec_text,source_text=load(root)
     assets=root/'assets/wayfarer'
     details=detail_targets(s)
-    valid=['all','vehicle',*COMPONENTS,*SUBSYSTEMS,'CHARACTERS',*details]
+    valid=['all','vehicle',*COMPONENTS,*SUBSYSTEMS,'CHARACTERS','STATION',*details]
     # Several detail targets, or several component/subsystem targets, may be joined with '+' (a pack with several assemblies, or a new
     # pack on two hosts): one build of exactly those files instead of a full one.
     names=target.split('+')
@@ -160,6 +167,8 @@ def build(root=ROOT, target='all', rebind=False):
         raise ValueError(f'target must be one of {valid}, or several DETAIL_* or several component/subsystem targets joined with +')
     if target=='CHARACTERS':
         build_characters(root,s,spec_text,source_text);return
+    if target=='STATION':
+        build_station(root,s,spec_text,source_text);return
     if set(names)<=set(details):
         # A detail-only change rewrites its own files: the host links them, and the vehicle sees them through that nested link.
         for n in names:build_detail(root,assets,s,details[n],spec_text,source_text,rebind)
@@ -227,6 +236,8 @@ def build(root=ROOT, target='all', rebind=False):
     if names==['all']:retire(assets)
     # The greeting staging follows the entry stations (SERVICE).
     if 'all' in names or 'SERVICE' in names:build_characters(root,s,spec_text,source_text)
+    # The station's docking context follows Dock_Primary and the corridor (SERVICE, HULL, FORWARD_SHIELD, HABITAT).
+    if 'all' in names or set(names)&{'SERVICE','HULL','FORWARD_SHIELD','HABITAT'}:build_station(root,s,spec_text,source_text)
     # The rig contract travels with the vehicle so fixtures stay self-consistent.
     print('WF_SIM_RIG',sim_rig.write(root),flush=True)
     print('WF_MODULE_CONTRACTS',modules.write(s,root),flush=True)

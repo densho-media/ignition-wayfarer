@@ -443,7 +443,7 @@ candidates of all nine classes are separate accessory assets (docs/ACCESSORIES.m
   trip, 72/72 bins; web check "touch walk" on an emulated phone). Kept as a PROTOTYPE decision 2026-10-31 (CIRC-D1,
   `references/evidence/circ001_tradeoff_2026-10-31.md`). Left: the owner's canonization or rejection of CIRC-001 against 12!A13, the
   400–460 m³ gross envelope and the 330 t rotating allowance (CIRC-C1..C8 in `ring_circulation.conflicts`); the frame load path round the tunnels
-  (CIRC-C7: portal collars built 2026-10-31 on a hand check, 116 of 200 MPa; FEA OPEN); the station's owner workbook and the boarding straps versus ship hatch-rim handholds (STN-001 PROTOTYPE); a
+  (CIRC-C7: portal collars built 2026-10-31 on a hand check, 116 of 200 MPa; FEA OPEN); the station's owner workbook and the boarding straps versus ship hatch-rim handholds (STN-001 PROTOTYPE); the station context's OPEN items (STN-002, owner-approved form 2026-11-02: docking, capture and boom bending loads, the boom's sliding seals, gimbal stiffness, the standard's utility connectors and bonding; the boom interior is display-only, not walkable; the station is drawn from the rig, not from the WF_STATION asset, in the walk); a
   hands-on walk of both rings by a person (keyboard and controller, desktop and web, and on a real phone); the corridors' cultural pass (31_ARCHITECTURE)
   after the whitebox review. **Done when:** the owner accepts or replaces the circulation, the conflicts are canonized or removed and a
   person completes both excursions in the desktop and web builds.

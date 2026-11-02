@@ -1825,6 +1825,21 @@ utility row.
   (3.2 m diameter) inside the 3 m docking corridor: handrails, light strips, a boarding panel, two windows looking at the collar and the
   closed hatch to the station core (not modelled). Docked, station and ship are one rigid stack in free fall: the SHIP frame, zero field,
   no floor to stand on (the painted band is an orientation convention). Godot builds its whitebox and colliders from the rig.
+- **The station context (STN-002, `station.context_*`, `[station.context]`, PROTOTYPE, not part of Wayfarer; owner-approved 2026-11-02).**
+  The approach is radial through the ring B / shield gap and the 45 m shield and 30 m rings leave only the 3 m Dock_Primary corridor, so
+  the station's body stays beyond r 50 m (shield radius + 5 m) and reaches in with a telescoping boarding boom: three nested pressure
+  stages (r 1.36 / 1.18 / 1.00 m, 13.5 m long, 1.0 m overlap, sliding seal rings), 38.5 m from the node's far-end hatch to the hub.
+  The inner stage carries the head (adapter, tunnel, node); the stroke, 2 x 12.5 = 25 m, is the walk's undock stand-off, so undocking is
+  the boom retracting and the ship never thrusts toward the station at close range. A pressurized hub (axis along X) with a compliant
+  two-axis gimbal at the boom root, the station's EVA airlock, an EVA work platform on its aft side with two floodlights aimed at the
+  collar, a truss segment and a core stub (the station beyond is not modelled); one umbilical (power, data, water, N2/O2, bonding) on
+  clips along the boom to a utility panel on the adapter; an EVA inspection hoop with two foot-restraint sockets round the tunnel at the
+  adapter. `station.check` holds every part inside the shield radius in the corridor less 0.15 m (widest 1.95 m), the body 50.8 m from the
+  axis, docked and retracted, and the mate to DOCKED only (drive off, rings stopped and locked). Loads, seals, gimbal stiffness and the
+  standard's utility connectors are OPEN. `WF_STATION` (`components/dock_station.py`, `assets/station/`, built with `all` or
+  `--target STATION`) is its own asset, never linked into the vehicle; built docked in the vehicle frame so it appends onto the ship;
+  `STN_BOOM_CTRL['retract']` (0..1, saved 0) drives the stage movers; four review cameras CAM_STN_*. The rig's boarding stage carries the
+  boom (`station.boom`) and the walk draws it as display-only tubes and the hub.
 - **Moving.** Weightless (station, airlock, trunk, drums, crew tubes) the trainee moves hand over hand along the rig's body lines (the M2
   technique): W/S pull toward the view; where no rail is in reach the body coasts at its push-off speed and cannot stop, so a push-off
   into a stretch with a shut closure is refused. A push-off brings the body to the line's pace before the hands let go; E within 0.8 m
@@ -1843,8 +1858,8 @@ utility row.
   it before separating; the airlock's two hatches are never open together.
 - **Operating modes.** Docked, the rings are stopped and locked (14!A8): O at a trunk panel runs DOCKED → COAST in the owner's order
   (UNDOCK, OCCUPANTS_SECURED, RINGS_UNLOCKED, RINGS_SPIN_UP) and, on the way back, COAST → DOCKED (spin down timed to end at the
-  index, lock, DOCK). The trainee holding still on a rail is the secured occupant; the 1800 s study ramp runs ×90 and the station
-  stands off 25 m while undocked (display choices, PROTOTYPE).
+  index, lock, DOCK). The trainee holding still on a rail is the secured occupant; the 1800 s study ramp runs ×90 (display choice,
+  PROTOTYPE) and while undocked the boom stands retracted: the head 25 m out, the middle stage 12.5 m (STN-002).
 - **Transfer.** Both rings' access lines and tube runs come from the rig; ring B's (`crew_dynamics.access_stage(s, 2)`): its
   0.90 m spine port opens into a drum annulus 0.95 m deep and 1.2 m long, where a rigid 1.75 m body turns at most 5° with 0.10 m
   clearance, so the trainee tucks to a 1.0 m body there (`[excursion] tuck`, PROTOTYPE technique, 1.1 m does not pass) and is guided

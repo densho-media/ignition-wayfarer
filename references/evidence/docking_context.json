@@ -1,0 +1,207 @@
+{
+ "contract": "WF_EVIDENCE_DOCKING_CONTEXT",
+ "task": "Build station docking and boarding context (STN-002)",
+ "status": "PROTOTYPE; the station is not part of Wayfarer",
+ "approval": "owner ApeDevil 2026-11-02 12:52Z: \"It looks good. You can move on with moving it into source, integrate it into the whole design.\"",
+ "base": "main 0b57bf3; study on claude/project-thread-682m59 under work/wayfarer-docking-context (removed on integration; restore with git show 6d51415)",
+ "review": {
+  "file": "project files review/docking_context_2026-11-02/REVIEW_DOCKING_CONTEXT.blend",
+  "stills": [
+   "docking_context.png",
+   "docking_platform.png",
+   "docking_head.png",
+   "docking_gap.png",
+   "docking_retracted.png"
+  ],
+  "render": "Cycles 32 samples, 1600 px, DOCKED pose, Phase 4 exterior grammar; station floodlights are station lights"
+ },
+ "summary": {
+  "port": {
+   "name": "Dock_Primary",
+   "x": 131.65,
+   "theta_deg": 195.0,
+   "face_a": 6.8
+  },
+  "head": {
+   "face": 6.8,
+   "tunnel": [
+    7.3999999999999995,
+    10.399999999999999
+   ],
+   "node": [
+    10.399999999999999,
+    14.399999999999999
+   ]
+  },
+  "boom": {
+   "stages": [
+    {
+     "name": "Boom_Stage_1",
+     "a": [
+      39.4,
+      52.9
+     ],
+     "r": 1.36
+    },
+    {
+     "name": "Boom_Stage_2",
+     "a": [
+      26.9,
+      40.4
+     ],
+     "r": 1.18
+    },
+    {
+     "name": "Boom_Stage_3",
+     "a": [
+      14.399999999999999,
+      27.9
+     ],
+     "r": 1.0
+    }
+   ],
+   "extended_length_m": 38.5,
+   "stroke_m": 25.0,
+   "retracted": [
+    {
+     "name": "Boom_Stage_1",
+     "a": [
+      39.4,
+      52.9
+     ]
+    },
+    {
+     "name": "Boom_Stage_2",
+     "a": [
+      39.4,
+      52.9
+     ]
+    },
+    {
+     "name": "Boom_Stage_3",
+     "a": [
+      39.4,
+      52.9
+     ]
+    }
+   ],
+   "retracted_head_face": 31.8
+  },
+  "hub": {
+   "face_a": 52.9,
+   "centre_a": 55.1,
+   "radius_m": 2.2,
+   "length_m": 9.0
+  },
+  "corridor": {
+   "radius_m": 3.0,
+   "r0": 6.8,
+   "r1": 45.0
+  },
+  "walk_distance_station_hub_to_node_m": 38.5
+ },
+ "checks": [
+  {
+   "check": "corridor_docked",
+   "value": 1.95,
+   "limit": 2.85,
+   "ok": true,
+   "note": "widest station part inside the shield radius (STN_Utility_Panel) stays inside the 3 m docking corridor less the mechanical clearance"
+  },
+  {
+   "check": "station_body_radius_docked",
+   "value": 50.8,
+   "limit": 50.0,
+   "ok": true,
+   "note": "nearest station-body surface (STN_Boom_Gimbal) from the ship axis stays outside the shield radius plus margin, so no ship part can reach it"
+  },
+  {
+   "check": "corridor_retracted",
+   "value": 1.95,
+   "limit": 2.85,
+   "ok": true,
+   "note": "widest station part inside the shield radius (STN_Utility_Panel) stays inside the 3 m docking corridor less the mechanical clearance"
+  },
+  {
+   "check": "station_body_radius_retracted",
+   "value": 50.8,
+   "limit": 50.0,
+   "ok": true,
+   "note": "nearest station-body surface (STN_Boom_Gimbal) from the ship axis stays outside the shield radius plus margin, so no ship part can reach it"
+  },
+  {
+   "check": "stroke_equals_walk_standoff",
+   "value": 25.0,
+   "limit": 25.0,
+   "ok": true,
+   "note": "boom stroke equals the walk's undock stand-off, so the walk's undock motion is the boom retraction"
+  },
+  {
+   "check": "retracted_gap",
+   "value": 25.0,
+   "limit": 25.0,
+   "ok": true,
+   "note": "retracted head stands off the collar by the stroke"
+  },
+  {
+   "check": "boom_clear_passage",
+   "value": 0.92,
+   "limit": 0.9,
+   "ok": true,
+   "note": "inner stage keeps the 1.6 m passage plus 0.1 m for its seal lands"
+  },
+  {
+   "check": "stage_nesting",
+   "value": [
+    1.36,
+    1.18,
+    1.0
+   ],
+   "limit": "outer bore > inner + seal ring",
+   "ok": true,
+   "note": "stages nest with their seal rings"
+  },
+  {
+   "check": "ring_b_sweep_gap",
+   "value": 23.201,
+   "limit": 0.15,
+   "ok": true,
+   "note": "corridor clear of the ring B sweep"
+  },
+  {
+   "check": "shield_truss_gap",
+   "value": 3.5,
+   "limit": 0.15,
+   "ok": true,
+   "note": "corridor clear of the shield truss aft face"
+  },
+  {
+   "check": "docked_only_in",
+   "value": [
+    "DOCKED"
+   ],
+   "limit": [
+    "DOCKED"
+   ],
+   "ok": true,
+   "note": "the boom may be mated only with the drive OFF and both rings STOPPED_LOCKED"
+  }
+ ],
+ "failures": [],
+ "decisions": [
+  "telescoping boarding boom because only the 3 m Dock_Primary corridor reaches past the 45 m shield and 30 m rings",
+  "stroke 25 m = [station].undock_standoff_m: undocking is the boom retracting; the ship never thrusts toward the station at close range",
+  "station body beyond r 50 m (shield + 5 m): no ship part can reach it, docked or retracted",
+  "umbilical (power, data, water, N2/O2, bonding) along the boom; no propellant through the crew port",
+  "EVA inspection hoop with two foot-restraint sockets at the adapter; work platform on the hub aft side away from the shield rim"
+ ],
+ "open": [
+  "docking, capture, station-keeping and boom bending loads",
+  "sliding seal wear and dynamic loads",
+  "gimbal stiffness",
+  "utility connectors of the standard and the bonding procedure",
+  "station location, orbit and power",
+  "ship radial translation authority and plume rules for separation",
+  "propellant loading interface (service port 315 deg)"
+ ]
+}

@@ -3,7 +3,7 @@
  "contract_version": 43,
  "asset_id": "WF.WAYFARER.001",
  "spec_schema": 5,
- "spec_hash": "6db6473fd6b35d6a450d44568c544b318a4471e9cb37eb09324e17110f9ae5c5",
+ "spec_hash": "f235a8c6c0757b41b6b2721afb6f454bc2f23cf9e2f70bdbd8b82c19e1959d8d",
  "source_map_hash": "e3fce6ca39b9e490d922a2575401d7bdff240515f613614cc960b78c5b629b4f",
  "generated_by": "WF_PROXY_P1_001",
  "coordinates": {
@@ -19591,7 +19591,7 @@
   "file": "data/simulations/wf_first_ignition_timeline.json",
   "schema": "WF_FLIGHT_TIMELINE",
   "timeline_version": 2,
-  "sha256": "d5e6ea8fd0275cf96856cf916033fae8e682dee1ce3482405cb98fc10f767921",
+  "sha256": "4131b9d52630a7a2cb63e60005282049c75a56a4b967fe3fc0afdaa98a8c4f2f",
   "status": "PROTOTYPE",
   "fps": 24,
   "frame_range": [
@@ -26990,6 +26990,45 @@
      "node_clear_radius_m": 1.6,
      "wall_m": 0.08,
      "standoff_m": 25.0,
+     "boom": {
+      "stages": [
+       {
+        "name": "Boom_Stage_1",
+        "a_m": [
+         39.4,
+         52.9
+        ],
+        "radius_m": 1.36,
+        "retract_m": 0.0
+       },
+       {
+        "name": "Boom_Stage_2",
+        "a_m": [
+         26.9,
+         40.4
+        ],
+        "radius_m": 1.18,
+        "retract_m": 12.5
+       },
+       {
+        "name": "Boom_Stage_3",
+        "a_m": [
+         14.399999999999999,
+         27.9
+        ],
+        "radius_m": 1.0,
+        "retract_m": 25.0
+       }
+      ],
+      "head_retract_m": 25.0,
+      "stroke_m": 25.0,
+      "hub": {
+       "centre_a_m": 55.1,
+       "radius_m": 2.2,
+       "length_m": 9.0
+      },
+      "status": "PROTOTYPE (STN-002): the head retracts with the inner stage; the outer stage and the hub stay with the station"
+     },
      "gravity": "microgravity: the docked stack is one rigid body in free fall (SHIP frame, zero field in DOCKED, DYN-007); no floor to stand on, hand-over-hand movement on handrails; the painted deck band is an orientation convention only",
      "docked_rule": "rings stopped and locked while docked (14_HULL_SERVICE!A8 BASELINE): UNDOCK before spin-up, DOCK after spin-down"
     },

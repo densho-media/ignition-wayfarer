@@ -51,5 +51,17 @@ class RingCirculationTests(unittest.TestCase):
         self.assertLessEqual({'CIRC-C1', 'CIRC-C2', 'CIRC-C3'}, {c['id'] for c in rc.conflicts(self.s)})
 
 
+    def test_station_context_stays_in_its_corridor(self):
+        # STN-002: inside the shield radius every station part stays in the 3 m docking corridor less the clearance, the station body stays
+        # outside the shield radius plus margin (docked and retracted), the stroke is the walk's stand-off and only DOCKED allows the mate
+        rows = {r['check']: r for r in station.context_checks(self.s)[0]}
+        for key in ('corridor_docked', 'corridor_retracted', 'station_body_radius_docked', 'station_body_radius_retracted', 'stroke_equals_walk_standoff',
+                    'boom_clear_passage', 'docked_only_in'):
+            self.assertTrue(rows[key]['ok'], rows[key])
+        boom = station.stage(self.s)['station']['boom']
+        self.assertAlmostEqual(boom['head_retract_m'], self.s['station']['undock_standoff_m'])
+        self.assertAlmostEqual(boom['stages'][-1]['retract_m'], boom['stroke_m'])
+
+
 if __name__ == '__main__':
     unittest.main()

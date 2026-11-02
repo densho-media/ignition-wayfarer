@@ -3588,7 +3588,7 @@ cabin_temperature_k = 295.0
 status = "PROTOTYPE"
 unit = "m"
 evidence_ref = "dock_ports"
-rationale = "Judgment: a docking adapter carrying the station's own hatch (seated from the station side, sliding into the adapter collar), a 3 m boarding tunnel of the standard's 1.6 m passage, and a 3.2 m boarding node 4 m long as the trainee's starting area, all coaxial with the port so the passage is straight; two windows in the node's inboard end wall look at Wayfarer's collar; the node's far end holds the closed hatch to the station core (not modelled). Handrails at the trunk's handrail angles; lights; a boarding panel. The station is a stationary microgravity facility (no spin section is needed here). When Wayfarer undocks for a ring walk the station is shown at undock_standoff_m (a display stand-off, not a flight value)."
+rationale = "Judgment: a docking adapter carrying the station's own hatch (seated from the station side, sliding into the adapter collar), a 3 m boarding tunnel of the standard's 1.6 m passage, and a 3.2 m boarding node 4 m long as the trainee's starting area, all coaxial with the port so the passage is straight; two windows in the node's inboard end wall look at Wayfarer's collar; the node's far end holds the hatch into the station's boarding boom ([station.context]). Handrails at the trunk's handrail angles; lights; a boarding panel. The station is a stationary microgravity facility (no spin section is needed here). When Wayfarer undocks for a ring walk the boom retracts the head by undock_standoff_m, the boom's stroke ([station.context])."
 adapter_length_m = 0.60
 hatch_frame_m = 0.08
 tunnel_length_m = 3.00
@@ -3620,6 +3620,53 @@ core_hatch_radius_m = 0.55
 hatch_gap_m = 0.03
 trunk_settle_m = 1.0
 undock_standoff_m = 25.0
+
+# STN-002 the station context (owner approval 2026-11-02, thread "Build station docking and boarding context"; station.context_*): how the
+# station reaches Wayfarer. Not part of Wayfarer, not canon; every value PROTOTYPE. Built as its own asset (WF_STATION), never into the vehicle.
+[station.context]
+status = "PROTOTYPE"
+unit = "m"
+asset = "WF_STATION"
+evidence_ref = "docking_standard"
+rationale = "Wayfarer's approach is radial through the ring B / forward-shield gap (service.docking.standard.approach_docked) and the 45 m shield and 30 m rings leave only the 3 m-radius keep-out corridor (hull_geometry.dock_corridors), so the station's body stays beyond the shield radius plus shield_margin_m and reaches in with a telescoping boarding boom that never leaves the corridor. Three nested pressure stages with sliding seal and bearing rings at each overlap (jetway principle); the inner stage carries STN-001's head (adapter, tunnel, node), whose far-end hatch opens into the boom. The stroke (stage_count - 1) x (stage_length_m - stage_overlap_m) equals [station].undock_standoff_m, so undocking is the boom retracting: the ship holds station with the port axis on the boom axis, the boom closes the last 25 m for soft capture, and after retraction the ship backs away along its own port axis (no thrust toward the station at close range). A pressurized hub (axis along X) with a two-axis compliant gimbal at the boom root, the station's EVA airlock, an EVA work platform on the aft side away from the shield rim with two floodlights aimed down the boom, one truss segment of the station spine and a core stub (the station beyond is not modelled). One umbilical (DC power, data fibre, water and N2/O2 make-up, bonding conductor) from a reel at the hub on clips along the boom to a utility panel on the adapter; no propellant through the crew port. An EVA handrail hoop with two portable foot-restraint sockets round the tunnel just outboard of the adapter, so an inspector reaches the capture ring and collar seals. The boom may be mated only with the drive off and both rings stopped and locked (DOCKED). Docking, capture, station-keeping and boom bending loads, seal wear, gimbal stiffness, the standard's utility connectors and the bonding procedure are OPEN."
+stage_count = 3
+stage_length_m = 13.5
+stage_overlap_m = 1.0
+# outer (fixed at the hub), middle, inner (carries the head); the inner keeps the 1.6 m passage
+stage_radius_m = [1.36, 1.18, 1.00]
+seal_ring_length_m = 0.35
+seal_ring_extra_m = 0.06
+hub_radius_m = 2.2
+hub_length_m = 9.0
+gimbal_radius_m = 1.75
+airlock_radius_m = 1.0
+airlock_length_m = 3.2
+core_stub_radius_m = 2.2
+core_stub_length_m = 10.0
+truss_width_m = 2.4
+truss_bay_m = 2.4
+truss_x = [-26.0, 26.0]
+truss_rod_m = 0.07
+truss_gap_m = 0.6
+# platform along X from the port's x, across w; height of its railing and floodlight posts toward the ship
+platform_size_m = [6.0, 4.0]
+platform_x_m = [-8.5, -2.5]
+railing_h_m = 1.1
+light_post_h_m = 1.6
+umbilical_phi_deg = 90.0
+umbilical_rho_m = 1.55
+umbilical_radius_m = 0.045
+clip_pitch_m = 3.0
+reel_radius_m = 0.6
+reel_width_m = 0.8
+hoop_a_offset_m = 0.55
+hoop_rho_m = 1.35
+hoop_radius_m = 0.025
+pfr_deg = [60.0, 300.0]
+head_rail_rho_m = 1.80
+head_rail_deg = [0.0, 180.0]
+shield_margin_m = 5.0
+figure_height_m = 1.80
 
 # EXC-001 the player's station-to-ring excursion (owner direction 2026-10-26): technique choices of the runtime lines, PROTOTYPE.
 [excursion]
