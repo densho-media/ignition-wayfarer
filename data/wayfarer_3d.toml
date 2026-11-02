@@ -3476,6 +3476,9 @@ node_half_deg = 4.0
 node_outer_radius_m = 27.2
 band_half_u_m = 0.30
 band_depth_m = 0.02
+# Habitat ring refinement (2026-11-02, PROTOTYPE depiction): a dark spin-index block in the rim face on the first half of every segment outside
+# the pressure segments (inset band_depth_m like the band), index_edge_m of light frame left at each rim edge. Paint, not structure.
+index_edge_m = 0.25
 
 [radiators.root_construction]
 status = "PROTOTYPE"
@@ -4156,6 +4159,9 @@ xf_foil_au_b = [0.89, 0.63, 0.30, 0.24, 1.0]
 xf_cc = [0.040, 0.040, 0.044, 0.62, 0.0]          # carbon-carbon trusses, battens' clip tracks
 xf_mli = [0.64, 0.64, 0.63, 0.48, 0.70]           # aluminized MLI outer layer of the cryogenic vessels (quilted, crinkled)
 xf_insul_line = [0.70, 0.69, 0.66, 0.78, 0.0]     # insulated (beta-cloth wrapped) cryogenic transfer lines
+# Habitat ring refinement (2026-11-02, PROTOTYPE depiction): a crew viewport pane lit from the cabin. A sixth value is an emission strength
+# (the cabin's warm light seen through the pane, about 3000 K; a display of occupancy, not a lighting or glazing specification).
+xf_viewport = [1.0, 0.70, 0.40, 0.08, 0.0, 6.0]
 
 # Surface treatments of the new families (hero_preview.dress): foils pillow slightly between their battens (low-frequency bump, so the sun
 # draws soft highlights instead of a mirror of black space); MLI is quilted (stitched seams on a grid) and finely crinkled.
@@ -4228,6 +4234,9 @@ family = "xf_frame"
 [[production.exterior.ship_families]]
 prefixes = ["RingPressureBand"]
 family = "xf_amber"
+[[production.exterior.ship_families]]
+prefixes = ["RingSpinIndex"]
+family = "xf_mark"
 [[production.exterior.ship_families]]
 prefixes = ["RingServiceCover", "CrownServiceHatch", "Casing_Access_Panel"]
 family = "xf_service"

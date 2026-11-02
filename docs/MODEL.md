@@ -1539,9 +1539,29 @@ pressure boundary or mechanism.
   an ochre service cover; over each pressurized segment a calm shell panel on the pressure face in its 0.25 m recess (10 mm off the
   sector skin), a muted amber occupancy band, the text-only sector ID (`A1..A3`, `B1..B3`, 1.06 m) and a GU deep-blue identifier bar.
   246 elements per ring; accents blue 0.06 %, amber 1.3 %, ochre 0.6 % of the detail area.
-- **Screens** (`ring_exterior.check`): every vertex inside r 24.5–30.0 m and |u| ≤ 2.15 m, outside the frame body except the recess
-  panels, and no part in a sector pressure envelope; the envelope screen keeps each flank assembly off ring A's crew-tube pack. The
-  M4 construction inside the frame (joints, webs, cassettes, covers, nodes, rim band), the spokes, crew tubes and hub are unchanged.
+- **Rotating identity (habitat ring refinement, 2026-11-02, PROTOTYPE).** Only rotating parts carry these, so each ring reads as an
+  inhabited, turning wheel against the stationary Q45 collar, fuel mains and tank farm round it:
+  - *Spin index:* a dark block flush in the rim face on the first half of every 15° segment outside the pressure segments, 0.25 m of
+    light frame at each rim edge (`habitat_ring.construction.index_edge_m`, frame class `index`, `RingSpinIndex` → xf_mark), and the
+    same rhythm on both flanks' outer edge (r 28.98–29.92 m). At 4 rpm the rim passes at 12.6 m/s, so the blocks stream in the runtime.
+  - *Crew viewports:* four per sector flank (48 in all) in the pressure-face recess, centred at standing eye height (floor − 1.55 m),
+    0.40 m clear pane in a 0.11 m frame, an armoured external shutter on two guides that slides 0.72 m toward the hub (a stable pattern
+    leaves some closed); the pane shows the warm cabin light (`xf_viewport`, the families' optional sixth value is an emission
+    strength). The pressure-skin penetration, pane stack, seal and shutter drive are OPEN.
+  - *Spoke service trays:* on each structural spoke, between the twin rails, a graphite tray with three insulated lines (water,
+    coolant, power/data), clamps every 2.4 m and ties to both rails, plus a run along the drum from the rotating half of the rotary
+    coupling: where the coupling's rotating side goes. Routing and media are OPEN (OD-002).
+  - *Inner-face blankets:* off-white beta-cloth blankets on the frame's inner face (|u| 0.95–1.90 m), cut back 1.6 m round every spoke
+    root and crew-tube opening. Lay-up and thermal credit OPEN.
+  Assemblies `R<A|B>.EXT.TRAY<060|180|300>.<IN|OUT>` and `R<A|B>.EXT.BLANKET.<FWD|AFT>` in the same packs. Rotation clearance over a
+  full turn ((x, r) half-plane, vertex-sampled): the ring's own minimum is unchanged (0.015 m, the touchdown cartridges by design); the
+  index, viewports and blankets keep ≥ 2.6 m from stationary structure, the outer trays ≥ 1.2 m, and the drum runs end on the rotating
+  coupling half, 0.08 m from its stator (the coupling's own running gap is 0.04 m). The patterns are 3-, 24- and 3-fold symmetric
+  (no first-order imbalance); their mass is unbudgeted like the rest of S4.
+- **Screens** (`ring_exterior.check`, `check_hub`): every vertex inside r 24.5–30.0 m and |u| ≤ 2.15 m, outside the frame body except the
+  recess panels and viewports, and no part in a sector pressure envelope; trays and blankets inside r 24.5 m, the sweep and off the crew
+  spokes; the envelope screen keeps each assembly off ring A's crew-tube pack. The M4 construction inside the frame (joints, webs,
+  cassettes, covers, nodes, rim band), the spokes, crew tubes and hub are unchanged apart from the rim index.
 
 ## Continuous ring circulation (CIRC-001)
 

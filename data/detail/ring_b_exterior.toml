@@ -15,10 +15,10 @@ evidence_ref = "p4_exterior_grammar"
 detail_class = "PRODUCTION"
 inspect = ["rotation"]
 views = ["ring_detail", "habitat_detail"]
-summary = "Shell cassettes, joint caps, spoke node housings, occupancy bands, sector IDs and blue identifier bars on ring B's 24 segments."
+summary = "Shell cassettes, joint caps, spoke node housings, occupancy bands, sector IDs, blue identifier bars, spin-index marks and lit shuttered viewports on ring B's 24 segments; service trays on its structural spokes and thermal blankets on its inner face."
 # Godot draw range per family by scale tier ([production.exterior] tier_range_m): the segment rhythm (cassettes, joints, bands, IDs)
 # reads at whole-ship distance; node housings and identifier bars at subsystem distance.
-detail_tiers = { default = "meso", cassettes = "macro", joints = "macro", occupancy = "macro", markings = "macro" }
+detail_tiers = { default = "meso", cassettes = "macro", joints = "macro", occupancy = "macro", markings = "macro", spin_index = "macro", viewports = "meso", trays = "meso", blankets = "macro" }
 
 [assembly."RB.EXT.FWD"]
 anchor = "WF-RING-B.ROTOR.2"
@@ -34,6 +34,63 @@ zone = "ring B -u (aft) flank, outside the frame body and the sector envelopes"
 classes = ["ENGINEERING_FLEXIBLE", "ARTISTIC"]
 envelope_min = [-2.15, -30.01, -30.01]
 envelope_max = [-1.74, 30.01, 30.01]
+
+[assembly."RB.EXT.TRAY060.IN"]
+anchor = "WF-RING-B.ROTOR.2"
+zone = "ring B structural spoke at 60 deg, hub half: service tray between the twin rails (u = 0), rotating side"
+classes = ["ENGINEERING_FLEXIBLE"]
+envelope_min = [-0.46, 0.64, 1.16]
+envelope_max = [2.02, 4.69, 7.86]
+
+[assembly."RB.EXT.TRAY060.OUT"]
+anchor = "WF-RING-B.ROTOR.2"
+zone = "ring B structural spoke at 60 deg, rim half: service tray between the twin rails (u = 0), rotating side"
+classes = ["ENGINEERING_FLEXIBLE"]
+envelope_min = [-0.46, 4.40, 7.68]
+envelope_max = [0.46, 12.36, 21.16]
+
+[assembly."RB.EXT.TRAY180.IN"]
+anchor = "WF-RING-B.ROTOR.2"
+zone = "ring B structural spoke at 180 deg, hub half: service tray between the twin rails (u = 0), rotating side"
+classes = ["ENGINEERING_FLEXIBLE"]
+envelope_min = [-0.46, -9.02, -0.11]
+envelope_max = [2.02, -1.46, 0.21]
+
+[assembly."RB.EXT.TRAY180.OUT"]
+anchor = "WF-RING-B.ROTOR.2"
+zone = "ring B structural spoke at 180 deg, rim half: service tray between the twin rails (u = 0), rotating side"
+classes = ["ENGINEERING_FLEXIBLE"]
+envelope_min = [-0.46, -24.37, -0.11]
+envelope_max = [0.46, -8.98, 0.21]
+
+[assembly."RB.EXT.TRAY300.IN"]
+anchor = "WF-RING-B.ROTOR.2"
+zone = "ring B structural spoke at 300 deg, hub half: service tray between the twin rails (u = 0), rotating side"
+classes = ["ENGINEERING_FLEXIBLE"]
+envelope_min = [-0.46, 0.55, -7.91]
+envelope_max = [2.02, 4.60, -1.21]
+
+[assembly."RB.EXT.TRAY300.OUT"]
+anchor = "WF-RING-B.ROTOR.2"
+zone = "ring B structural spoke at 300 deg, rim half: service tray between the twin rails (u = 0), rotating side"
+classes = ["ENGINEERING_FLEXIBLE"]
+envelope_min = [-0.46, 4.31, -21.21]
+envelope_max = [0.46, 12.28, -7.73]
+
+[assembly."RB.EXT.BLANKET.FWD"]
+anchor = "WF-RING-B.ROTOR.2"
+zone = "ring B frame inner face, +u half (r 24.46-24.5 m, off the crew-tube pack): thermal blankets"
+classes = ["ENGINEERING_FLEXIBLE"]
+envelope_min = [0.94, -24.51, -24.51]
+envelope_max = [1.91, 24.51, 24.51]
+
+[assembly."RB.EXT.BLANKET.AFT"]
+anchor = "WF-RING-B.ROTOR.2"
+zone = "ring B frame inner face, -u half (r 24.46-24.5 m, off the crew-tube pack): thermal blankets"
+classes = ["ENGINEERING_FLEXIBLE"]
+envelope_min = [-1.91, -24.51, -24.51]
+envelope_max = [-0.94, 24.51, 24.51]
+
 
 # The segment module (ring_exterior.elements). Offsets in m outward from the frame flank (|u| = 2.0 m), radii from the frame's.
 [params]
@@ -53,3 +110,24 @@ node_cover_half_deg = 1.6
 id_bar_width_m = 1.4
 id_bar_m = 0.14
 id_bar_gap_m = 0.08
+# Habitat ring refinement (2026-11-02, PROTOTYPE depiction): what makes the ring read as an inhabited, turning wheel.
+# Spin index: a charcoal block on the first half of every 15 deg segment outside the pressure segments, on the flank's outer edge
+# (radii inward from the rim; it shares the band's radii, which only the pressure segments carry).
+index_r_m = [0.08, 1.02]
+# Viewports: count per sector flank, tangential pitch, clear pane, frame ring width, eye height above the deck (centre radius = floor - eye),
+# frame/pane proud of the pressure-face panel, shutter plate (half size, thickness) and its travel toward the hub when open; shutter pattern
+# (1 closed, 0 open) cycled by segment and viewport index.
+viewport_count = 4
+viewport_pitch_m = 1.15
+viewport_clear_m = 0.40
+viewport_frame_m = 0.11
+viewport_eye_m = 1.55
+viewport_frame_proud_m = 0.06
+viewport_pane_proud_m = 0.02
+viewport_shutter_half_m = 0.32
+viewport_shutter_m = 0.04
+viewport_shutter_travel_m = 0.72
+viewport_closed = [0, 0, 1, 0, 0, 0, 1]
+# Spoke service tray (between the twin rails) and inner-face blankets.
+tray = { root_gap_m = 0.25, end_gap_m = 0.15, width_m = 0.36, depth_m = 0.14, wall_m = 0.03, line_m = 0.08, clamp_pitch_m = 2.4, split_r_m = 9.0 }
+blanket = { u_m = [0.95, 1.90], thickness_m = 0.04, gap_m = 0.10, spoke_clear_m = 1.6 }

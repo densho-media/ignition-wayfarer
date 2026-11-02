@@ -1,7 +1,7 @@
 {
   "result": "PASS",
   "blender": "5.2.2 LTS",
-  "spec_hash": "48c939f6d7d620d2084a44667fa29c834fb067ab4dab68fb8b8bd8d4366af0a9",
+  "spec_hash": "6db6473fd6b35d6a450d44568c544b318a4471e9cb37eb09324e17110f9ae5c5",
   "source_map_hash": "e3fce6ca39b9e490d922a2575401d7bdff240515f613614cc960b78c5b629b4f",
   "configurations": {
     "COAST": {
@@ -111,7 +111,7 @@
         "hull_envelope": 2,
         "generator_proxy": 2,
         "hull_shell": 2,
-        "production_detail": 121,
+        "production_detail": 145,
         "fuel_tank": 13,
         "fuel_transfer_line": 54,
         "fuel_equipment": 19,
@@ -427,7 +427,7 @@
         "hull_envelope": 2,
         "generator_proxy": 2,
         "hull_shell": 2,
-        "production_detail": 121,
+        "production_detail": 145,
         "fuel_tank": 13,
         "fuel_transfer_line": 54,
         "fuel_equipment": 19,
@@ -743,7 +743,7 @@
         "hull_envelope": 2,
         "generator_proxy": 2,
         "hull_shell": 2,
-        "production_detail": 121,
+        "production_detail": 145,
         "fuel_tank": 13,
         "fuel_transfer_line": 54,
         "fuel_equipment": 19,
@@ -1056,7 +1056,7 @@
         "hull_envelope": 2,
         "generator_proxy": 2,
         "hull_shell": 2,
-        "production_detail": 121,
+        "production_detail": 145,
         "fuel_tank": 13,
         "fuel_transfer_line": 54,
         "fuel_equipment": 19,
@@ -1369,7 +1369,7 @@
         "hull_envelope": 2,
         "generator_proxy": 2,
         "hull_shell": 2,
-        "production_detail": 121,
+        "production_detail": 145,
         "fuel_tank": 13,
         "fuel_transfer_line": 54,
         "fuel_equipment": 19,
@@ -1682,7 +1682,7 @@
         "hull_envelope": 2,
         "generator_proxy": 2,
         "hull_shell": 2,
-        "production_detail": 121,
+        "production_detail": 145,
         "fuel_tank": 13,
         "fuel_transfer_line": 54,
         "fuel_equipment": 19,
@@ -2045,13 +2045,61 @@
     },
     "WF_DETAIL_RA_EXT_AFT.blend": {
       "assembly": "RA.EXT.AFT",
-      "objects": 6,
+      "objects": 8,
+      "authored": 0,
+      "enabled": true
+    },
+    "WF_DETAIL_RA_EXT_BLANKET_AFT.blend": {
+      "assembly": "RA.EXT.BLANKET.AFT",
+      "objects": 1,
+      "authored": 0,
+      "enabled": true
+    },
+    "WF_DETAIL_RA_EXT_BLANKET_FWD.blend": {
+      "assembly": "RA.EXT.BLANKET.FWD",
+      "objects": 1,
       "authored": 0,
       "enabled": true
     },
     "WF_DETAIL_RA_EXT_FWD.blend": {
       "assembly": "RA.EXT.FWD",
-      "objects": 6,
+      "objects": 8,
+      "authored": 0,
+      "enabled": true
+    },
+    "WF_DETAIL_RA_EXT_TRAY060_IN.blend": {
+      "assembly": "RA.EXT.TRAY060.IN",
+      "objects": 1,
+      "authored": 0,
+      "enabled": true
+    },
+    "WF_DETAIL_RA_EXT_TRAY060_OUT.blend": {
+      "assembly": "RA.EXT.TRAY060.OUT",
+      "objects": 1,
+      "authored": 0,
+      "enabled": true
+    },
+    "WF_DETAIL_RA_EXT_TRAY180_IN.blend": {
+      "assembly": "RA.EXT.TRAY180.IN",
+      "objects": 1,
+      "authored": 0,
+      "enabled": true
+    },
+    "WF_DETAIL_RA_EXT_TRAY180_OUT.blend": {
+      "assembly": "RA.EXT.TRAY180.OUT",
+      "objects": 1,
+      "authored": 0,
+      "enabled": true
+    },
+    "WF_DETAIL_RA_EXT_TRAY300_IN.blend": {
+      "assembly": "RA.EXT.TRAY300.IN",
+      "objects": 1,
+      "authored": 0,
+      "enabled": true
+    },
+    "WF_DETAIL_RA_EXT_TRAY300_OUT.blend": {
+      "assembly": "RA.EXT.TRAY300.OUT",
+      "objects": 1,
       "authored": 0,
       "enabled": true
     },
@@ -2075,13 +2123,61 @@
     },
     "WF_DETAIL_RB_EXT_AFT.blend": {
       "assembly": "RB.EXT.AFT",
-      "objects": 6,
+      "objects": 8,
+      "authored": 0,
+      "enabled": true
+    },
+    "WF_DETAIL_RB_EXT_BLANKET_AFT.blend": {
+      "assembly": "RB.EXT.BLANKET.AFT",
+      "objects": 1,
+      "authored": 0,
+      "enabled": true
+    },
+    "WF_DETAIL_RB_EXT_BLANKET_FWD.blend": {
+      "assembly": "RB.EXT.BLANKET.FWD",
+      "objects": 1,
       "authored": 0,
       "enabled": true
     },
     "WF_DETAIL_RB_EXT_FWD.blend": {
       "assembly": "RB.EXT.FWD",
-      "objects": 6,
+      "objects": 8,
+      "authored": 0,
+      "enabled": true
+    },
+    "WF_DETAIL_RB_EXT_TRAY060_IN.blend": {
+      "assembly": "RB.EXT.TRAY060.IN",
+      "objects": 1,
+      "authored": 0,
+      "enabled": true
+    },
+    "WF_DETAIL_RB_EXT_TRAY060_OUT.blend": {
+      "assembly": "RB.EXT.TRAY060.OUT",
+      "objects": 1,
+      "authored": 0,
+      "enabled": true
+    },
+    "WF_DETAIL_RB_EXT_TRAY180_IN.blend": {
+      "assembly": "RB.EXT.TRAY180.IN",
+      "objects": 1,
+      "authored": 0,
+      "enabled": true
+    },
+    "WF_DETAIL_RB_EXT_TRAY180_OUT.blend": {
+      "assembly": "RB.EXT.TRAY180.OUT",
+      "objects": 1,
+      "authored": 0,
+      "enabled": true
+    },
+    "WF_DETAIL_RB_EXT_TRAY300_IN.blend": {
+      "assembly": "RB.EXT.TRAY300.IN",
+      "objects": 1,
+      "authored": 0,
+      "enabled": true
+    },
+    "WF_DETAIL_RB_EXT_TRAY300_OUT.blend": {
+      "assembly": "RB.EXT.TRAY300.OUT",
+      "objects": 1,
       "authored": 0,
       "enabled": true
     },
@@ -2130,7 +2226,15 @@
         "RA2.WRK",
         "RA3.GDN",
         "RA.EXT.AFT",
-        "RA.EXT.FWD"
+        "RA.EXT.BLANKET.AFT",
+        "RA.EXT.BLANKET.FWD",
+        "RA.EXT.FWD",
+        "RA.EXT.TRAY060.IN",
+        "RA.EXT.TRAY060.OUT",
+        "RA.EXT.TRAY180.IN",
+        "RA.EXT.TRAY180.OUT",
+        "RA.EXT.TRAY300.IN",
+        "RA.EXT.TRAY300.OUT"
       ]
     },
     "WF_HABITAT_B.blend": {
@@ -2139,7 +2243,15 @@
         "RB2.WRK",
         "RB3.GDN",
         "RB.EXT.AFT",
+        "RB.EXT.BLANKET.AFT",
+        "RB.EXT.BLANKET.FWD",
         "RB.EXT.FWD",
+        "RB.EXT.TRAY060.IN",
+        "RB.EXT.TRAY060.OUT",
+        "RB.EXT.TRAY180.IN",
+        "RB.EXT.TRAY180.OUT",
+        "RB.EXT.TRAY300.IN",
+        "RB.EXT.TRAY300.OUT",
         "RB.SEC",
         "RB.SPK",
         "RB.XFR"
@@ -4060,26 +4172,86 @@
       "direct_links": []
     },
     "detail/WF_DETAIL_RA_EXT_AFT.blend": {
-      "generated_objects": 6,
+      "generated_objects": 8,
       "ids": [
         "RA.EXT.AFT.CASSETTES",
         "RA.EXT.AFT.JOINTS",
         "RA.EXT.AFT.MARKINGS",
         "RA.EXT.AFT.NODES",
         "RA.EXT.AFT.OCCUPANCY",
+        "RA.EXT.AFT.SPIN_INDEX",
+        "RA.EXT.AFT.VIEWPORTS",
         "RA.EXT.AFT.WAYFINDING"
       ],
       "direct_links": []
     },
+    "detail/WF_DETAIL_RA_EXT_BLANKET_AFT.blend": {
+      "generated_objects": 1,
+      "ids": [
+        "RA.EXT.BLANKET.AFT.BLANKETS"
+      ],
+      "direct_links": []
+    },
+    "detail/WF_DETAIL_RA_EXT_BLANKET_FWD.blend": {
+      "generated_objects": 1,
+      "ids": [
+        "RA.EXT.BLANKET.FWD.BLANKETS"
+      ],
+      "direct_links": []
+    },
     "detail/WF_DETAIL_RA_EXT_FWD.blend": {
-      "generated_objects": 6,
+      "generated_objects": 8,
       "ids": [
         "RA.EXT.FWD.CASSETTES",
         "RA.EXT.FWD.JOINTS",
         "RA.EXT.FWD.MARKINGS",
         "RA.EXT.FWD.NODES",
         "RA.EXT.FWD.OCCUPANCY",
+        "RA.EXT.FWD.SPIN_INDEX",
+        "RA.EXT.FWD.VIEWPORTS",
         "RA.EXT.FWD.WAYFINDING"
+      ],
+      "direct_links": []
+    },
+    "detail/WF_DETAIL_RA_EXT_TRAY060_IN.blend": {
+      "generated_objects": 1,
+      "ids": [
+        "RA.EXT.TRAY060.IN.TRAYS"
+      ],
+      "direct_links": []
+    },
+    "detail/WF_DETAIL_RA_EXT_TRAY060_OUT.blend": {
+      "generated_objects": 1,
+      "ids": [
+        "RA.EXT.TRAY060.OUT.TRAYS"
+      ],
+      "direct_links": []
+    },
+    "detail/WF_DETAIL_RA_EXT_TRAY180_IN.blend": {
+      "generated_objects": 1,
+      "ids": [
+        "RA.EXT.TRAY180.IN.TRAYS"
+      ],
+      "direct_links": []
+    },
+    "detail/WF_DETAIL_RA_EXT_TRAY180_OUT.blend": {
+      "generated_objects": 1,
+      "ids": [
+        "RA.EXT.TRAY180.OUT.TRAYS"
+      ],
+      "direct_links": []
+    },
+    "detail/WF_DETAIL_RA_EXT_TRAY300_IN.blend": {
+      "generated_objects": 1,
+      "ids": [
+        "RA.EXT.TRAY300.IN.TRAYS"
+      ],
+      "direct_links": []
+    },
+    "detail/WF_DETAIL_RA_EXT_TRAY300_OUT.blend": {
+      "generated_objects": 1,
+      "ids": [
+        "RA.EXT.TRAY300.OUT.TRAYS"
       ],
       "direct_links": []
     },
@@ -4119,26 +4291,86 @@
       "direct_links": []
     },
     "detail/WF_DETAIL_RB_EXT_AFT.blend": {
-      "generated_objects": 6,
+      "generated_objects": 8,
       "ids": [
         "RB.EXT.AFT.CASSETTES",
         "RB.EXT.AFT.JOINTS",
         "RB.EXT.AFT.MARKINGS",
         "RB.EXT.AFT.NODES",
         "RB.EXT.AFT.OCCUPANCY",
+        "RB.EXT.AFT.SPIN_INDEX",
+        "RB.EXT.AFT.VIEWPORTS",
         "RB.EXT.AFT.WAYFINDING"
       ],
       "direct_links": []
     },
+    "detail/WF_DETAIL_RB_EXT_BLANKET_AFT.blend": {
+      "generated_objects": 1,
+      "ids": [
+        "RB.EXT.BLANKET.AFT.BLANKETS"
+      ],
+      "direct_links": []
+    },
+    "detail/WF_DETAIL_RB_EXT_BLANKET_FWD.blend": {
+      "generated_objects": 1,
+      "ids": [
+        "RB.EXT.BLANKET.FWD.BLANKETS"
+      ],
+      "direct_links": []
+    },
     "detail/WF_DETAIL_RB_EXT_FWD.blend": {
-      "generated_objects": 6,
+      "generated_objects": 8,
       "ids": [
         "RB.EXT.FWD.CASSETTES",
         "RB.EXT.FWD.JOINTS",
         "RB.EXT.FWD.MARKINGS",
         "RB.EXT.FWD.NODES",
         "RB.EXT.FWD.OCCUPANCY",
+        "RB.EXT.FWD.SPIN_INDEX",
+        "RB.EXT.FWD.VIEWPORTS",
         "RB.EXT.FWD.WAYFINDING"
+      ],
+      "direct_links": []
+    },
+    "detail/WF_DETAIL_RB_EXT_TRAY060_IN.blend": {
+      "generated_objects": 1,
+      "ids": [
+        "RB.EXT.TRAY060.IN.TRAYS"
+      ],
+      "direct_links": []
+    },
+    "detail/WF_DETAIL_RB_EXT_TRAY060_OUT.blend": {
+      "generated_objects": 1,
+      "ids": [
+        "RB.EXT.TRAY060.OUT.TRAYS"
+      ],
+      "direct_links": []
+    },
+    "detail/WF_DETAIL_RB_EXT_TRAY180_IN.blend": {
+      "generated_objects": 1,
+      "ids": [
+        "RB.EXT.TRAY180.IN.TRAYS"
+      ],
+      "direct_links": []
+    },
+    "detail/WF_DETAIL_RB_EXT_TRAY180_OUT.blend": {
+      "generated_objects": 1,
+      "ids": [
+        "RB.EXT.TRAY180.OUT.TRAYS"
+      ],
+      "direct_links": []
+    },
+    "detail/WF_DETAIL_RB_EXT_TRAY300_IN.blend": {
+      "generated_objects": 1,
+      "ids": [
+        "RB.EXT.TRAY300.IN.TRAYS"
+      ],
+      "direct_links": []
+    },
+    "detail/WF_DETAIL_RB_EXT_TRAY300_OUT.blend": {
+      "generated_objects": 1,
+      "ids": [
+        "RB.EXT.TRAY300.OUT.TRAYS"
       ],
       "direct_links": []
     },
@@ -5448,7 +5680,7 @@
       ]
     },
     "subsystems/WF_HABITAT_A.blend": {
-      "generated_objects": 370,
+      "generated_objects": 378,
       "ids": [
         "Crew_Tube_1_1",
         "Crew_Tube_1_1_Arrest_Rail",
@@ -5797,7 +6029,15 @@
         "WF.DETAIL.M7.SPK",
         "WF.DETAIL.M7.XFR",
         "WF.DETAIL.RA.EXT.AFT",
+        "WF.DETAIL.RA.EXT.BLANKET.AFT",
+        "WF.DETAIL.RA.EXT.BLANKET.FWD",
         "WF.DETAIL.RA.EXT.FWD",
+        "WF.DETAIL.RA.EXT.TRAY060.IN",
+        "WF.DETAIL.RA.EXT.TRAY060.OUT",
+        "WF.DETAIL.RA.EXT.TRAY180.IN",
+        "WF.DETAIL.RA.EXT.TRAY180.OUT",
+        "WF.DETAIL.RA.EXT.TRAY300.IN",
+        "WF.DETAIL.RA.EXT.TRAY300.OUT",
         "WF.DETAIL.RA1.BRT",
         "WF.DETAIL.RA2.EQP",
         "WF.DETAIL.RA2.WRK",
@@ -5834,11 +6074,19 @@
         "detail/WF_DETAIL_RA2_WRK.blend",
         "detail/WF_DETAIL_RA3_GDN.blend",
         "detail/WF_DETAIL_RA_EXT_AFT.blend",
-        "detail/WF_DETAIL_RA_EXT_FWD.blend"
+        "detail/WF_DETAIL_RA_EXT_BLANKET_AFT.blend",
+        "detail/WF_DETAIL_RA_EXT_BLANKET_FWD.blend",
+        "detail/WF_DETAIL_RA_EXT_FWD.blend",
+        "detail/WF_DETAIL_RA_EXT_TRAY060_IN.blend",
+        "detail/WF_DETAIL_RA_EXT_TRAY060_OUT.blend",
+        "detail/WF_DETAIL_RA_EXT_TRAY180_IN.blend",
+        "detail/WF_DETAIL_RA_EXT_TRAY180_OUT.blend",
+        "detail/WF_DETAIL_RA_EXT_TRAY300_IN.blend",
+        "detail/WF_DETAIL_RA_EXT_TRAY300_OUT.blend"
       ]
     },
     "subsystems/WF_HABITAT_B.blend": {
-      "generated_objects": 372,
+      "generated_objects": 380,
       "ids": [
         "Crew_Tube_2_1",
         "Crew_Tube_2_1_Arrest_Rail",
@@ -6187,7 +6435,15 @@
         "WF.CREW.2.VESTIBULE_GUARD_AFT",
         "WF.CREW.2.VESTIBULE_GUARD_FWD",
         "WF.DETAIL.RB.EXT.AFT",
+        "WF.DETAIL.RB.EXT.BLANKET.AFT",
+        "WF.DETAIL.RB.EXT.BLANKET.FWD",
         "WF.DETAIL.RB.EXT.FWD",
+        "WF.DETAIL.RB.EXT.TRAY060.IN",
+        "WF.DETAIL.RB.EXT.TRAY060.OUT",
+        "WF.DETAIL.RB.EXT.TRAY180.IN",
+        "WF.DETAIL.RB.EXT.TRAY180.OUT",
+        "WF.DETAIL.RB.EXT.TRAY300.IN",
+        "WF.DETAIL.RB.EXT.TRAY300.OUT",
         "WF.DETAIL.RB.SEC",
         "WF.DETAIL.RB.SPK",
         "WF.DETAIL.RB.XFR",
@@ -6222,7 +6478,15 @@
         "detail/WF_DETAIL_RB2_WRK.blend",
         "detail/WF_DETAIL_RB3_GDN.blend",
         "detail/WF_DETAIL_RB_EXT_AFT.blend",
+        "detail/WF_DETAIL_RB_EXT_BLANKET_AFT.blend",
+        "detail/WF_DETAIL_RB_EXT_BLANKET_FWD.blend",
         "detail/WF_DETAIL_RB_EXT_FWD.blend",
+        "detail/WF_DETAIL_RB_EXT_TRAY060_IN.blend",
+        "detail/WF_DETAIL_RB_EXT_TRAY060_OUT.blend",
+        "detail/WF_DETAIL_RB_EXT_TRAY180_IN.blend",
+        "detail/WF_DETAIL_RB_EXT_TRAY180_OUT.blend",
+        "detail/WF_DETAIL_RB_EXT_TRAY300_IN.blend",
+        "detail/WF_DETAIL_RB_EXT_TRAY300_OUT.blend",
         "detail/WF_DETAIL_RB_SEC.blend",
         "detail/WF_DETAIL_RB_SPK.blend",
         "detail/WF_DETAIL_RB_XFR.blend"

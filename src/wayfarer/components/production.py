@@ -15,8 +15,8 @@ GEOMETRY_BASIS = ('PROTOTYPE [production] (M7 L4 visual layer): depiction, panel
 
 
 def prod_material(s, key):
-    r, g, b, rough, metal = pd.material_value(s, key)
-    m = material(f'Prod_{key}', (r, g, b))
+    v = pd.material_value(s, key); r, g, b, rough, metal = v[:5]
+    m = material(f'Prod_{key}', (r, g, b), emission=v[5] if len(v) > 5 else 0)
     node = next(n for n in m.node_tree.nodes if n.type == 'BSDF_PRINCIPLED')
     node.inputs['Roughness'].default_value = rough
     node.inputs['Metallic'].default_value = metal

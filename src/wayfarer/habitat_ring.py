@@ -303,7 +303,7 @@ def tunnel(s):
 
 def frame_mesh(s, q):
     """Display mesh of one frame part with its construction (habitat_ring.construction, PROTOTYPE): vertices, faces and one class per
-    face (frame, joint, band, cassette, cover, service, service_cover, portal). The inner hoop stays frame_solid. Every piece lies inside the part's
+    face (frame, joint, band, index, cassette, cover, service, service_cover, portal). The inner hoop stays frame_solid. Every piece lies inside the part's
     band (u0..u1, r0..r1, t0..t1), inset or flush, so the sweep and the volumes of frame_parts are unchanged."""
     r = s['habitat_ring']; c = r['construction']; n = r['display']['hoop_facets']
     vs, fs, cls = [], [], []
@@ -344,6 +344,15 @@ def frame_mesh(s, q):
                 add('frame', u0, u1, r0, r1-bd, a+g, b-g)
                 add('band', -bu, bu, r1-bd, r1, a+g, b-g)
                 add('frame', bu, u1, r1-bd, r1, a+g, b-g); add('frame', u0, -bu, r1-bd, r1, a+g, b-g)
+            elif 'index_edge_m' in c:
+                # Spin index (habitat ring refinement 2026-11-02): the first half of every segment outside the pressure segments carries a
+                # dark block flush in the rim face (inset band_depth_m, like the pressure band), so the turning rim reads against the
+                # stationary collar; a full-width band of the frame either side keeps the rim's edges light.
+                e = c['index_edge_m']; mid = (a+b)/2
+                add('frame', u0, u1, r0, r1-bd, a+g, b-g)
+                add('index', u0+e, u1-e, r1-bd, r1, a+g, mid)
+                add('frame', u0, u0+e, r1-bd, r1, a+g, mid); add('frame', u1-e, u1, r1-bd, r1, a+g, mid)
+                add('frame', u0, u1, r1-bd, r1, mid, b-g)
             else:
                 add('frame', u0, u1, r0, r1, a+g, b-g)
             add('joint', u0+ins, u1-ins, r0, r1-ins, b-g, b+g, 1)

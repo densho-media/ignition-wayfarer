@@ -1,0 +1,163 @@
+{
+ "task": "habitat_ring_refinement",
+ "approved": "2026-11-02T14:06Z (owner: \"Go ahead, squash it.\"; review 12:53Z: \"Yes, it looks all nice.\")",
+ "brief": "2026-11-02T07:29Z six-thread brief, Thread 1 (P1 habitat ring engineering and visual identity)",
+ "base": "0b57bf3",
+ "branch": "claude/habitat-ring-refinement",
+ "branch_head": "dc161f2",
+ "study_restore": "git show dc161f2:work/habitat-ring-refinement/<file> (NOTES.md, ring_views.py close-ups, rotation_clearance.py swept-clearance study, make_review.py review-file builder)",
+ "baseline": "references/baseline_habitat_ring_refinement",
+ "full_pipeline": "runs/20261102-ring-full-pipeline PASS on dc161f2's parent c4bb822 tree (all tests, whole-ship inspection, fingerprint, Cycles COAST and HIGH_POWER previews); rerun on the merge with main 5a20073: runs/20261102-ring-squash-pipeline PASS (geometry diff vs baseline_propulsion_detail: 2 changed (Ring_1/2_Hoop_Outer, the rim index), 24 added (the new ring detail), 0 unexpected)",
+ "review": "/mnt/project-files/review/habitat_ring_refinement_2026-11-02/ (REVIEW_HABITAT_RING_REFINEMENT.blend, before/after hero and close-up stills, clearance JSON)",
+ "status": "PROTOTYPE depiction on the rotating side; no ring dimension, spin, sector, spoke, interface or stationary part changed",
+ "elements": {
+  "rim_spin_index": {
+   "where": "rim face, first half of each 15 deg segment outside the pressure segments, inset 0.02 m",
+   "index_edge_m": 0.25,
+   "per_ring": 21
+  },
+  "flank_spin_index": {
+   "radii_from_rim_m": [
+    0.08,
+    1.02
+   ],
+   "per_ring": 42
+  },
+  "viewports": {
+   "per_sector_flank": 4,
+   "total": 48,
+   "pitch_m": 1.15,
+   "clear_m": 0.4,
+   "frame_m": 0.11,
+   "eye_above_floor_m": 1.55,
+   "centre_radius_m": 26.45,
+   "shutter_travel_m": 0.72,
+   "emission": 6.0,
+   "open_items": "pressure-skin penetration, pane stack, seal and shutter drive OPEN"
+  },
+  "spoke_trays": {
+   "spokes_per_ring": 3,
+   "width_m": 0.36,
+   "lines": 3,
+   "line_m": 0.08,
+   "clamp_pitch_m": 2.4,
+   "drum_run_from_coupling_u_m": 2.01,
+   "open_items": "routing and media OPEN (OD-002)"
+  },
+  "inner_blankets": {
+   "u_m": [
+    0.95,
+    1.9
+   ],
+   "thickness_m": 0.04,
+   "spoke_clear_m": 1.6
+  }
+ },
+ "rotation_clearance": {
+  "method": "full revolution in the (x, r) half-plane, vertex-sampled, human-scale figures excluded (rotation_clearance.py)",
+  "ring_own_min_m_before": 0.015,
+  "ring_own_min_m_after": 0.015,
+  "ring_own_min_note": "touchdown cartridges to their stator, by design",
+  "new_parts": {
+   "Prod_RA_EXT_AFT_spin_index": {
+    "min_m": 2.645,
+    "stationary": "Fuel_Transfer_H2_A_Ext"
+   },
+   "Prod_RA_EXT_AFT_viewports": {
+    "min_m": 5.666,
+    "stationary": "Fuel_Transfer_H2_A_Ext"
+   },
+   "Prod_RA_EXT_BLANKET_AFT_blankets": {
+    "min_m": 7.983,
+    "stationary": "Fuel_Transfer_H2_A_Ext"
+   },
+   "Prod_RA_EXT_BLANKET_FWD_blankets": {
+    "min_m": 8.323,
+    "stationary": "Fuel_Cryocooler_He3_B"
+   },
+   "Prod_RA_EXT_FWD_spin_index": {
+    "min_m": 3.167,
+    "stationary": "Bypass_Vertical_3_02"
+   },
+   "Prod_RA_EXT_FWD_viewports": {
+    "min_m": 6.215,
+    "stationary": "Bypass_Vertical_3_02"
+   },
+   "Prod_RA_EXT_TRAY060_IN_trays": {
+    "min_m": 0.08,
+    "stationary": "Hub1_FLUID_COUPLING_Stator"
+   },
+   "Prod_RA_EXT_TRAY060_OUT_trays": {
+    "min_m": 3.508,
+    "stationary": "Hull_Aft_Body"
+   },
+   "Prod_RA_EXT_TRAY180_IN_trays": {
+    "min_m": 0.08,
+    "stationary": "Hub1_FLUID_COUPLING_Stator"
+   },
+   "Prod_RA_EXT_TRAY180_OUT_trays": {
+    "min_m": 3.508,
+    "stationary": "Hull_Aft_Body"
+   },
+   "Prod_RA_EXT_TRAY300_IN_trays": {
+    "min_m": 0.08,
+    "stationary": "Hub1_FLUID_COUPLING_Stator"
+   },
+   "Prod_RA_EXT_TRAY300_OUT_trays": {
+    "min_m": 3.508,
+    "stationary": "Hull_Aft_Body"
+   },
+   "Prod_RB_EXT_AFT_spin_index": {
+    "min_m": 3.167,
+    "stationary": "Bypass_Vertical_3_02"
+   },
+   "Prod_RB_EXT_AFT_viewports": {
+    "min_m": 6.22,
+    "stationary": "Bypass_Vertical_3_02"
+   },
+   "Prod_RB_EXT_BLANKET_AFT_blankets": {
+    "min_m": 6.674,
+    "stationary": "Fuel_Cryocooler_He3_B"
+   },
+   "Prod_RB_EXT_BLANKET_FWD_blankets": {
+    "min_m": 6.263,
+    "stationary": "Fuel_Cryocooler_He3_B"
+   },
+   "Prod_RB_EXT_FWD_spin_index": {
+    "min_m": 2.954,
+    "stationary": "Bypass_Diagonal_1_02"
+   },
+   "Prod_RB_EXT_FWD_viewports": {
+    "min_m": 6.018,
+    "stationary": "Bypass_Diagonal_1_02"
+   },
+   "Prod_RB_EXT_TRAY060_IN_trays": {
+    "min_m": 0.08,
+    "stationary": "Hub2_FLUID_COUPLING_Stator"
+   },
+   "Prod_RB_EXT_TRAY060_OUT_trays": {
+    "min_m": 1.229,
+    "stationary": "Fuel_Cryocooler_He3_B"
+   },
+   "Prod_RB_EXT_TRAY180_IN_trays": {
+    "min_m": 0.08,
+    "stationary": "Hub2_FLUID_COUPLING_Stator"
+   },
+   "Prod_RB_EXT_TRAY180_OUT_trays": {
+    "min_m": 1.229,
+    "stationary": "Fuel_Cryocooler_He3_B"
+   },
+   "Prod_RB_EXT_TRAY300_IN_trays": {
+    "min_m": 0.08,
+    "stationary": "Hub2_FLUID_COUPLING_Stator"
+   },
+   "Prod_RB_EXT_TRAY300_OUT_trays": {
+    "min_m": 1.229,
+    "stationary": "Fuel_Cryocooler_He3_B"
+   }
+  },
+  "new_parts_summary": "spin index, viewports and blankets >= 2.6 m; outer trays >= 1.2 m; drum runs end on the rotating coupling half, 0.08 m from its stator (coupling running gap 0.04 m)"
+ },
+ "balance": "patterns 3-, 24- and 3-fold symmetric about the spin axis; no first-order imbalance; mass unbudgeted like the S4 layer",
+ "not_changed": "hub bearing/stator marking (not visible from any review or hero camera; waits for the interior hub pass); cameras (hero thread)"
+}
