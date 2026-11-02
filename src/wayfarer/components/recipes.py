@@ -36,6 +36,7 @@ def build_component(kind, c, s):
                 obj = drive.pfc_metadata(drive.tile_mesh(c, f'PFC_NOZZLE_STRIKE_{coil["index"]:02}', tiles, pfc, 'pfc_band'), s, 'nozzle_adjacent', tiles, 1)
                 obj['strike_module'] = True; obj['liner_performance'] = 'UNKNOWN (Q40, 15!I103): magnetic standoff first; heat flux, active cooling, erosion and life not designed'
                 obj['geometry_basis'] = s['drive_hot_section']['nozzle_strike_module_basis']
+        drive.nozzle_hardware(c, s)
         empty(c, 'IF_NOZZLE_INLET', (length,0,0))
         empty(c, 'IF_NOZZLE_EXIT')
     else:

@@ -1,0 +1,49 @@
+{
+ "task": "propulsion_detail",
+ "approved": "2026-11-02T12:55Z (owner: \"squash it.\"; review: \"I have reviewed the design and it looks good.\")",
+ "brief": "2026-11-02T07:29Z six-thread brief, Thread 5 (P5 propulsion engineering detail)",
+ "base": "0b57bf3",
+ "branch": "claude/propulsion-detail-refinement",
+ "branch_head": "01b960f",
+ "study_restore": "git show 01b960f:work/propulsion-detail/<file> (NOTES.md, closeups.py close-up renders, make_review.py review-file builder)",
+ "baseline": "references/baseline_propulsion_detail",
+ "full_pipeline": "runs/20261102T080914Z-pipeline PASS (all tests, whole-ship inspection, 36 added objects inside the expected prefixes, 0 unexpected)",
+ "review": "/mnt/project-files/review/propulsion_detail_2026-11-02/ (REVIEW_PROPULSION_DETAIL.blend, Propulsion Hero before/after, close-ups)",
+ "construction_screen": {
+  "nozzle_construction_parts": 58,
+  "casing_wall_coil_gap_m": 0.03999999999998856,
+  "casing_plasma_gap_m": 0.07167420814479908,
+  "nozzle_service_gaps_m": {
+   "Nozzle_01": {
+    "gap_m": 0.21896716102269778,
+    "nearest": "Nozzle_Pickup_0"
+   },
+   "Nozzle_02": {
+    "gap_m": 0.2189671610226979,
+    "nearest": "Nozzle_Pickup_1"
+   },
+   "Nozzle_03": {
+    "gap_m": 0.21896716102269778,
+    "nearest": "Nozzle_Pickup_2"
+   },
+   "Nozzle_04": {
+    "gap_m": 0.2189671610226979,
+    "nearest": "Nozzle_Pickup_3"
+   }
+  },
+  "nozzle_service_min_gap_m": 0.21896716102269778,
+  "nozzle_shared_hardware_conflicts": []
+ },
+ "decisions": [
+  "No exit guard ring: the exit coil sits on the exit plane, so an aft wall or guard would stand aft of the AFT datum.",
+  "Casing side walls instead of a thicker yoke: the yoke section (0.08 x 0.30 m, 15!G67) is kept; detail stays outside it and outside every coil bore (Q40).",
+  "Umbilical on the header's side of the pickup strut, parallel to it, then along the hub web to IF_NOZZLE_SERVICE_0n at the thrust hub.",
+  "The magnetic field envelope surface is unchanged: it is a field display, not a wall."
+ ],
+ "open": [
+  "OD-024 coil loads, cold-mass supports, lead currents, cryogen and operating temperature",
+  "OD-025 strike-module coolant, heat flux, erosion and life",
+  "services beyond the thrust hub (power bus, cryoplant, hot loop)"
+ ],
+ "render_note": "Close-ups used an editorial key light (EDITORIAL_KEY_LIGHT in the review file), not a ship light; the hero renders use the physical hero sun."
+}

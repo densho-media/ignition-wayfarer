@@ -2972,6 +2972,35 @@ cryo_feed_sleeve_step_m = 0.5
 cryo_feed_sleeve_jog_inset_m = 0.25
 nozzle_coil_tube_m = 0.08
 nozzle_coil_mid_radius_factor = 0.78
+# Propulsion engineering detail (2026-11-02, drive_hot_section.nozzle_construction / nozzle_services; every number a PROTOTYPE display
+# choice inside the existing yokes, never inside a coil bore or aft of the exit plane). Function of each part: the warm yoke ring becomes
+# a closed coil casing (side walls down to the coil inner face; the exit coil has only its forward wall, the exit plane bounds it); the
+# casing is split into casing_segments bolted segments (dark split flanges midway between the straps) so a segment lifts off to reach the
+# coil and its strike module; every segment carries a robotic handling post; ochre inspection covers on the strike-module coils serve the
+# condition-based inspection of 06!A56 (Q40). Per nozzle a service header beside the pickup strap carries the HTS current leads and the
+# coil cryogen to every casing and the strike-module coolant to the strike-module coils only, then runs as an umbilical beside the pickup
+# to the thrust ring and along the hub web to the thrust hub. The pickup ends get pin-jointed lugs, so the nozzle's thermal growth and
+# the coil cooldown do not load the ring (statically determinate seats). Coil loads, cold-mass supports, cryogen, temperatures,
+# lead currents, coolant and flows stay OPEN (OD-024, OD-025).
+casing_wall_m = 0.03
+casing_segments = 4
+casing_flange = { height_m = 0.14, width_m = 0.08 }
+handling_post = { height_m = 0.10, width_m = 0.05, cap_m = 0.12, cap_height_m = 0.02 }
+inspection_cover_coils = [2, 3]
+inspection_cover = { size_m = 0.24, height_m = 0.04 }
+pickup_lug = { height_m = 0.12, width_m = 0.50 }
+ring_lug = { depth_m = 0.15, radial_m = 0.40, width_m = 0.40 }
+service_header_angle_deg = 30.0
+service_header_standoff_m = 0.06
+service_header_spacing_m = 0.12
+service_lines = [
+  { name = "leads", radius_m = 0.04, offset = -1, coils = [0, 1, 2, 3], role = "HTS current leads (vapour-cooled); currents OPEN (OD-024)" },
+  { name = "cryogen", radius_m = 0.05, offset = 0, coils = [0, 1, 2, 3], role = "coil cryogen supply and return; fluid and temperature OPEN (OD-024)" },
+  { name = "coolant", radius_m = 0.035, offset = 1, coils = [2, 3], role = "strike-module active cooling to the hot loop; coolant and flow OPEN (OD-025)" },
+]
+service_boss_length_m = 0.16
+service_umbilical_offset_m = 0.50
+service_ring_station = { aft_gap_m = 0.25, radius_inset_m = 0.85, web_gap_m = 0.40, hub_gap_m = 0.20 }
 
 # P1-007 storage proxy placement. Every number here is a PROTOTYPE display choice: the owner gives energies, power and
 # isolation rules, not volumes, positions or pack counts. Packs are radial boxes (axial x0..x1, radial r0..r1, tangential
@@ -4205,6 +4234,24 @@ family = "xf_service"
 [[production.exterior.ship_families]]
 prefixes = ["RingJoint", "BrowPanelJoint", "CrownRib"]
 family = "xf_joint"
+# Propulsion engineering detail (2026-11-02): the warm coil casings and yokes read as light machined casings against the graphite field
+# envelope, their split flanges as dark joints, handling posts and inspection covers ochre (maintenance access), the cryogen line
+# insulated like the fuel lines, the pickup lugs mid-value structure. Depiction only.
+[[production.exterior.ship_families]]
+prefixes = ["NozzleCasingJoint"]
+family = "xf_joint"
+[[production.exterior.ship_families]]
+prefixes = ["NozzleYoke", "NozzleCasing"]
+family = "xf_frame"
+[[production.exterior.ship_families]]
+prefixes = ["NozzleHandling", "NozzleInspectionCover"]
+family = "xf_service"
+[[production.exterior.ship_families]]
+prefixes = ["NozzleServiceCryogen"]
+family = "xf_insul_line"
+[[production.exterior.ship_families]]
+prefixes = ["NozzlePickupLug"]
+family = "xf_structure"
 [[production.exterior.ship_families]]
 prefixes = ["Drive_Plasma", "Plasma", "Debug", "Radiator", "Prod_", "Ext_Light"]
 family = "none"

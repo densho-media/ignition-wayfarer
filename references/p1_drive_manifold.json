@@ -115,7 +115,30 @@
     },
     "h2_injection_ring_gap_m": 0.19999999999999973,
     "cryo_feed_in_shadow": true,
-    "cryo_feed_cold_optics_exposed": {}
+    "cryo_feed_cold_optics_exposed": {},
+    "nozzle_construction_parts": 58,
+    "casing_wall_coil_gap_m": 0.03999999999998856,
+    "casing_plasma_gap_m": 0.07167420814479908,
+    "nozzle_service_gaps_m": {
+      "Nozzle_01": {
+        "gap_m": 0.21896716102269778,
+        "nearest": "Nozzle_Pickup_0"
+      },
+      "Nozzle_02": {
+        "gap_m": 0.2189671610226979,
+        "nearest": "Nozzle_Pickup_1"
+      },
+      "Nozzle_03": {
+        "gap_m": 0.21896716102269778,
+        "nearest": "Nozzle_Pickup_2"
+      },
+      "Nozzle_04": {
+        "gap_m": 0.2189671610226979,
+        "nearest": "Nozzle_Pickup_3"
+      }
+    },
+    "nozzle_service_min_gap_m": 0.21896716102269778,
+    "nozzle_shared_hardware_conflicts": []
   },
   "findings": [
     {
@@ -297,6 +320,64 @@
       "lines": [
         "CRYO_FEED_LINE_03",
         "CRYO_FEED_LINE_04"
+      ]
+    },
+    {
+      "id": "NOZZLE_CONSTRUCTION_OPEN",
+      "detail": "Each warm yoke ring is closed into a segmented coil casing (side walls to the coil inner face, bolted split flanges, a handling post per segment, inspection covers on the strike-module coils) and a service header beside the pickup strap carries the HTS current leads, the coil cryogen and the strike-module coolant to an umbilical along the pickup and the hub web to the thrust hub; the pickups end in pin-jointed lugs. All PROTOTYPE display construction: coil loads and cold-mass supports (OD-024), lead currents, cryogen and operating temperature (OD-024), strike-module coolant, heat flux and life (OD-025) and the services beyond the thrust hub are OPEN; nothing enters a coil bore or the exhaust.",
+      "services": [
+        {
+          "nozzle": 1,
+          "lines": [
+            "leads",
+            "cryogen",
+            "coolant"
+          ],
+          "interface": [
+            -135.65,
+            1.45,
+            0.5
+          ]
+        },
+        {
+          "nozzle": 2,
+          "lines": [
+            "leads",
+            "cryogen",
+            "coolant"
+          ],
+          "interface": [
+            -135.65,
+            -0.4999999999999999,
+            1.45
+          ]
+        },
+        {
+          "nozzle": 3,
+          "lines": [
+            "leads",
+            "cryogen",
+            "coolant"
+          ],
+          "interface": [
+            -135.65,
+            0.4999999999999997,
+            -1.45
+          ]
+        },
+        {
+          "nozzle": 4,
+          "lines": [
+            "leads",
+            "cryogen",
+            "coolant"
+          ],
+          "interface": [
+            -135.65,
+            -1.45,
+            -0.49999999999999983
+          ]
+        }
       ]
     }
   ],

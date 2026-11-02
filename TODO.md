@@ -147,6 +147,9 @@ close-up, regression check, MODEL/TODO and Model Status update.
   frames (S01). Slice 6 (2026-10-30): internal ring frames in the body module gaps, utility-frame beams (equipment mounts) and the
   thrust ring's bay splice sleeves. Slice 7 (2026-10-31): two handling fixtures on every replaceable Brow panel (`brow_panel_fixtures`).
   Left: drive section (physics-locked), nozzles; further shield detail only where a function needs it.
+  Nozzle construction slice (2026-11-02, owner-approved; evidence references/evidence/propulsion_detail.json): segmented warm coil casings,
+  handling posts, strike-module inspection covers, per-nozzle service header and umbilical to the thrust hub, pin-jointed pickup lugs
+  (docs/MODEL.md "Drive hardware"). Left: the services past the thrust hub, coil supports and loads (OD-024), strike-module coolant (OD-025).
 - [ ] **S05 — Working interiors.** Workshop and fabrication, medical, operations/navigation, life support, cabins, storage and repair,
   Garden; connected to the traversal system, inside the pressure, rotation, thrust-gravity and evacuation rules.
   Built: berths, work/medical/ops, Garden/mess in both rings (ra1_berths, ra2_work, ra3_garden, rb_fitout), the SP-45 storeroom and

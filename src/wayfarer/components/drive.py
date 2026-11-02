@@ -129,6 +129,64 @@ def pfc_metadata(obj, s, zone, tiles, modules):
     return obj
 
 
+def box_mesh(c, name, boxes, mat, kind, axis=(0.0, 0.0), arc_step=0.12):
+    """One mesh of annular-sector boxes (drive_hot_section box dicts) about an X-parallel axis at (y, z) = axis; arc resolution from arc_step."""
+    vs, f = [], []
+    for b in boxes:
+        steps = max(2, math.ceil((b['a1']-b['a0'])*b['r_out']/arc_step))
+        v, ff = sector_solid(b['x0'], b['x1'], b['r_in'], b['r_out'], b['a0'], b['a1'], steps, len(vs))
+        vs += [(x, y+axis[0], z+axis[1]) for x, y, z in v]; f += ff
+    return mesh(c, name, vs, f, mat, kind=kind)
+
+
+CONSTRUCTION_STATUS = {
+    'casing_wall': 'OPEN OD-024: warm coil casing side walls (PROTOTYPE); cold-mass supports, vacuum gap and loads not designed',
+    'casing_flange': 'OPEN OD-024: bolted split flanges between casing segments (PROTOTYPE); fastening and segment loads not designed',
+    'handling': 'OPEN: robotic handling posts, one per casing segment (PROTOTYPE); grip interface and lift loads not designed',
+    'inspection_cover': 'OPEN OD-025: access covers over the strike-module coils for condition-based inspection (06!A56, Q40); port, seal and tooling not designed',
+}
+
+
+def nozzle_hardware(c, s):
+    """WF_NOZZLE construction (propulsion engineering detail 2026-11-02): casing walls, split flanges, handling posts and inspection covers,
+    rotationally shared by the four linked nozzles (drive_hot_section.nozzle_construction)."""
+    parts = hsec.nozzle_construction(s)
+    groups = [('Nozzle_Casing_Walls', ('casing_wall',), material('NozzleCasing', (.50, .53, .56)), 'casing_wall'),
+              ('Nozzle_Casing_Flanges', ('casing_flange',), material('NozzleCasingJoint', (.12, .12, .13)), 'casing_flange'),
+              ('Nozzle_Handling_Posts', ('handling_post', 'handling_cap'), material('NozzleHandling', (.80, .59, .21)), 'handling'),
+              ('Nozzle_Inspection_Covers', ('inspection_cover',), material('NozzleInspectionCover', (.80, .59, .21)), 'inspection_cover')]
+    for name, kinds, mat, key in groups:
+        boxes = [b for b in parts if b['part'] in kinds]
+        obj = box_mesh(c, name, boxes, mat, 'nozzle_construction')
+        obj['part_count'] = len(boxes); obj['coils'] = sorted({b['coil'] for b in boxes}); obj['engineering_status'] = CONSTRUCTION_STATUS[key]
+        obj['geometry_basis'] = 'PROTOTYPE [drive_hot_section] casing_* keys; outside every coil bore, inside the nozzle span (drive_hot_section.construction_check)'
+    for b in [b for b in parts if b['part'] == 'inspection_cover']:
+        a = (b['a0']+b['a1'])/2; r = b['r_out']
+        empty(c, f'IF_NOZZLE_INSPECTION_{b["coil"]}_{b["name"].rsplit("_", 1)[1]}', ((b['x0']+b['x1'])/2, r*math.cos(a), r*math.sin(a)))['engineering_status'] = CONSTRUCTION_STATUS['inspection_cover']
+
+
+def nozzle_services(c, s, n, parent):
+    """Per-nozzle services and pickup lugs (PROPULSION, ship frame): header lines, casing bosses, umbilical, lugs and IF_NOZZLE_SERVICE."""
+    j = n['nozzle']
+    mats = {'leads': material('NozzleServiceLeads', (.20, .21, .23)), 'cryogen': material('NozzleServiceCryogen', FEED_COLOR),
+            'coolant': material('NozzleServiceCoolant', (.42, .30, .22))}
+    for t in n['tubes']:
+        obj = line(c, t['name'], t['points'], t['radius'], mats[t['line']], kind='nozzle_service_line')
+        obj.data.bevel_resolution = 3
+        obj['role'] = t['role']; obj['serves_coils'] = list(t['coils']); obj['engineering_status'] = 'OPEN: '+t['role']+'; routing PROTOTYPE beyond the casings (pickup, thrust ring, hub web)'
+        attach(obj, parent)
+    obj = box_mesh(c, f'Nozzle_Service_Bosses_{j}', n['bosses'], material('NozzleServiceBoss', (.24, .25, .27)), 'nozzle_service_boss', axis=n['axis'], arc_step=.05)
+    obj['engineering_status'] = 'OPEN OD-024/OD-025: bayonet entries of the leads, cryogen and coolant into each casing (PROTOTYPE)'; attach(obj, parent)
+    lugs = material('NozzlePickupLug', (.69, .45, .16))
+    obj = box_mesh(c, f'Nozzle_Pickup_Lug_{j}', [n['pickup_lug']], lugs, 'nozzle_pickup_lug', axis=n['axis'], arc_step=.05)
+    obj['engineering_status'] = 'OPEN OD-024: pin-jointed pickup seat on the inlet casing (statically determinate: nozzle growth and coil cooldown do not load the ring); bearing and pin not designed (PROTOTYPE)'; attach(obj, parent)
+    obj = box_mesh(c, f'Nozzle_Ring_Lug_{j}', [n['ring_lug']], lugs, 'nozzle_pickup_lug', arc_step=.05)
+    obj['engineering_status'] = 'OPEN: pin-jointed pickup seat on the thrust-ring node (PROTOTYPE)'; attach(obj, parent)
+    iface = empty(c, f'IF_NOZZLE_SERVICE_{j+1:02}', n['interface'])
+    iface['engineering_status'] = 'OPEN: nozzle services (HTS leads, coil cryogen, strike-module coolant) leave the thrust hub for the power bus, cryoplant and hot loop; not routed or sized'
+    attach(iface, parent)
+
+
 def cryo_feed(c, s):
     """Cryogenic feed lines (WF_STORAGE): one jacketed line per tank, tank aft cap -> its terminus, with declared interfaces at both ends and at
     the shadow-shield sleeve. D and 3He end on the core forward face; hydrogen ends on the PROTOTYPE injection ring in the common region
@@ -317,7 +375,7 @@ def propulsion(c, s, asset_dir):
         obj['wf_id'] = obj['component_id']; obj['wf_subsystem'] = 'drive_plasma_facing'; obj['wf_status'] = obj['canon_status']; obj['wf_prototype'] = True
         attach(obj, parent)
     # --- flux channels, plasma branches, nozzles, exhaust ---
-    nozzle_x = st['exit']; inlet = st['inlet']; yokes = dm.nozzle_yokes(s); pickups = dm.nozzle_pickups(s)
+    nozzle_x = st['exit']; inlet = st['inlet']; yokes = dm.nozzle_yokes(s); pickups = dm.nozzle_pickups(s); services = hsec.nozzle_services(s)
     for j, ((yy, zz), lat) in enumerate(zip(dm.quadrants(s), g['lattice']), 1):
         obj = sector(c, f'LATTICE_SECTOR_{j}', lat['x0'], lat['x1'], lat['r_in'], lat['r_out'], lat['a0'], lat['a1'], lattice_body, 'lattice_sector')
         ident(obj, f'WF.DRIVE.LATTICE.L{j}', 'lattice_sector'); meta(obj, src, 'fiji_lattice_sector', 'WORKING', 'optical_manifold_architecture')
@@ -360,6 +418,7 @@ def propulsion(c, s, asset_dir):
             obj = line(c, strap['name'], strap['points'], strap['radius'], yoke_mat, kind='nozzle_yoke_strap')
             ident(obj, f'WF.DRIVE.NOZZLE.YOKE.{j}.STRAP.{strap["name"].rsplit("_", 1)[1]}', 'nozzle_yoke_strap'); meta(obj, src, 'drive_structure', 'WORKING', 'nozzle_pickup_yoke')
             obj['engineering_status'] = 'OPEN OD-024: strap section not designed (PROTOTYPE)'; attach(obj, noz)
+        nozzle_services(c, s, services[j-1], noz)
         iface = empty(c, f'IF_NOZZLE_YOKE_PICKUP_{j-1}', pickups[j-1]['a'])
         iface['engineering_status'] = 'OPEN OD-024: pickup strut seat on the inlet yoke; load path and cold-mass supports not designed (PROTOTYPE)'; attach(iface, noz)
     # --- H2 injection ring (PROTOTYPE) around the common region: reaction mass enters downstream of the burn (06!A54) ---

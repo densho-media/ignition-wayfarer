@@ -157,6 +157,225 @@ def tile_volume_m3(tile):
     return (tile['x1']-tile['x0'])*(tile['a1']-tile['a0'])*(tile['r_out']**2-tile['r_in']**2)/2
 
 
+# ---------- nozzle construction (propulsion engineering detail, 2026-11-02) ------------------------------------------
+
+def strap_angles(s):
+    """Nozzle-frame angles of the yoke straps, the same set for every nozzle (the pickups sit 90 deg apart in that frame), from the first
+    nozzle's pickup direction. Shared hardware in WF_NOZZLE (one linked component for all four) is indexed off these."""
+    a0 = dm.nozzle_yokes(s)[0]['pickup_angle']; n = s['drive_hot_section']['yoke_strap_count']
+    return [a0+k*math.tau/n for k in range(n)]
+
+
+def _box(name, part, coil, x0, x1, r_in, r_out, a_mid, width, **extra):
+    """Annular-sector box in the nozzle frame centred on a_mid with tangential width `width` at r_out."""
+    half = width/2/r_out
+    return dict(name=name, part=part, coil=coil, x0=x0, x1=x1, r_in=r_in, r_out=r_out, a0=a_mid-half, a1=a_mid+half, **extra)
+
+
+def nozzle_construction(s):
+    """Rotationally shared casing hardware of one nozzle, nozzle frame (x from the exit plane along the axis): annular-sector boxes
+    (x0, x1, r_in, r_out, a0, a1). Parts: casing_wall (the side walls closing each warm yoke ring into a coil casing, from the coil inner
+    face to the yoke inner face; full turn), casing_flange (bolted split flange between casing segments, radial on the yoke outer face),
+    handling_post and handling_cap (robotic lift point per segment), inspection_cover (ochre access cover over a strike-module coil).
+    PROTOTYPE display choices ([drive_hot_section] casing_* keys); loads, supports and fastening OPEN (OD-024)."""
+    h = s['drive_hot_section']; coils = {c['index']: c for c in dm.nozzle_coils(s)}; rings = dm.nozzle_yokes(s)[0]['rings']
+    straps = strap_angles(s); n = h['casing_segments']; wall = h['casing_wall_m']; fl = h['casing_flange']; post = h['handling_post']
+    cov = h['inspection_cover']; out = []
+    for ring_ in rings:
+        c = coils[ring_['coil']]; j = c['index']
+        # Side walls stop axially clear of the coil tube; the exit coil has no aft wall (the exit plane bounds the casing).
+        x0, x1 = _local(s, ring_['x0']), _local(s, ring_['x1'])
+        sides = []      # a wall only where it clears the coil tube: the exit and inlet planes bound the end coils' casings
+        if c['x']-c['tube']-x0 >= wall-1e-9:
+            sides.append(('AFT', x0, x0+wall))
+        if x1-(c['x']+c['tube']) >= wall-1e-9:
+            sides.append(('FWD', x1-wall, x1))
+        for tag, a, b in sides:
+            out.append(dict(name=f'Nozzle_Casing_Wall_{j}_{tag}', part='casing_wall', coil=j, x0=a, x1=b, r_in=c['inner'], r_out=ring_['r_in'], a0=0.0, a1=math.tau))
+        for k in range(n):
+            mid = straps[k % len(straps)]+math.tau/(2*n) if n == len(straps) else k*math.tau/n
+            out.append(_box(f'Nozzle_Casing_Flange_{j}_{k}', 'casing_flange', j, x0, x1, ring_['r_out'], ring_['r_out']+fl['height_m'], mid, fl['width_m']))
+            pa = straps[k % len(straps)]-math.tau/(4*n) if n == len(straps) else (k+.25)*math.tau/n
+            xm = (x0+x1)/2
+            out.append(_box(f'Nozzle_Handling_Post_{j}_{k}', 'handling_post', j, xm-post['width_m']/2, xm+post['width_m']/2, ring_['r_out'], ring_['r_out']+post['height_m'], pa, post['width_m']))
+            out.append(_box(f'Nozzle_Handling_Cap_{j}_{k}', 'handling_cap', j, xm-post['cap_m']/2, xm+post['cap_m']/2, ring_['r_out']+post['height_m'], ring_['r_out']+post['height_m']+post['cap_height_m'], pa, post['cap_m']))
+        if j in h['inspection_cover_coils']:
+            for k in (0, n//2):
+                ca = straps[k % len(straps)]+3*math.tau/(4*n) if n == len(straps) else (k+.75)*math.tau/n
+                xm = (x0+x1)/2
+                ax = min(cov['size_m'], x1-x0-2*wall)
+                out.append(_box(f'Nozzle_Inspection_Cover_{j}_{k}', 'inspection_cover', j, xm-ax/2, xm+ax/2, ring_['r_out'], ring_['r_out']+cov['height_m'], ca, cov['size_m']))
+    return out
+
+
+def _local(s, x_ship):
+    """Ship X -> nozzle-frame x (from the exit plane at AFT)."""
+    return x_ship+s['ship']['length']['value']/2
+
+
+def _nozzle_point(axis, u_ship, r, a, t=0.0):
+    """Ship-frame point at nozzle radius r and angle a about the nozzle axis, shifted t tangentially (positive toward increasing a)."""
+    ca, sa = math.cos(a), math.sin(a)
+    return (u_ship, axis[0]+r*ca-t*sa, axis[1]+r*sa+t*ca)
+
+
+def nozzle_services(s):
+    """Per nozzle (ship frame): the service header beside the pickup strap, one polyline per service line from its first casing to the
+    inlet, the casing bosses where the lines enter, the umbilical on to the thrust ring and along the hub web to the thrust hub, the
+    pickup lugs at both strut ends and the IF_NOZZLE_SERVICE interface at the hub. PROTOTYPE routing ([drive_hot_section] service_*).
+    The header angle is measured from the pickup strap; lines sit side by side tangentially (offset x spacing)."""
+    p, h, st = s['prototype'], s['drive_hot_section'], s['structure']; L = s['ship']['length']['value']
+    xring = layout.at(s, p['thrust_ring_x']); phase = math.radians(p['ring_phase_deg']); half = st['ring_depth_m']/2
+    inner = st['ring_od_m']/2-st['ring_radial_depth_m']; rs = h['service_ring_station']
+    lines = h['service_lines']; rmax = max(l['radius_m'] for l in lines); sp = h['service_header_spacing_m']
+    pickups = dm.nozzle_pickups(s); out = []
+    for y in dm.nozzle_yokes(s):
+        j = y['nozzle']; axis = y['axis']; ah = y['pickup_angle']+math.radians(h['service_header_angle_deg'])
+        rings = {r['coil']: r for r in y['rings']}
+        header_r = {k: r['r_out']+h['service_header_standoff_m']+rmax for k, r in rings.items()}
+        station_x = {k: r['x'] for k, r in rings.items()}
+        inlet_x = -L/2+p['nozzle_length_m']
+        # Umbilical: beside the pickup strut on the header's side (never across it), parallel to it up to the station where the strut is
+        # service_ring_station.radius_inset_m inside the ring's inner chord, forward to web_gap_m aft of the hub web, then in along the
+        # web to the thrust hub (hub_gap_m off its face), where IF_NOZZLE_SERVICE marks the OPEN continuation to the engineering bay.
+        node_a = phase+st['nozzle_pickup_nodes'][j]*math.tau/st['ring_nodes']
+        tau = (-math.sin(node_a), math.cos(node_a)); rad = (math.cos(node_a), math.sin(node_a))
+        pk = pickups[j]; d = (pk['b'][1]-pk['a'][1], pk['b'][2]-pk['a'][2]); dl = math.hypot(*d); perp = (-d[1]/dl, d[0]/dl)
+        hp = _nozzle_point(axis, 0.0, rings[max(rings)]['r_out'], ah)
+        if (hp[1]-pk['a'][1])*perp[0]+(hp[2]-pk['a'][2])*perp[1] < 0:
+            perp = (-perp[0], -perp[1])
+        r_station = inner-rs['radius_inset_m']; lo, hi = 0.0, 1.0
+        at = lambda f: tuple(a+f*(b-a) for a, b in zip(pk['a'], pk['b']))
+        for _ in range(60):
+            mid = (lo+hi)/2
+            lo, hi = (mid, hi) if math.hypot(*at(mid)[1:]) < r_station else (lo, mid)
+        q = at(lo); x_aft = xring-half-rs['aft_gap_m']; x_web = xring-rs['web_gap_m']; r_hub = st['hub_diameter_m']/2+rs['hub_gap_m']
+        side = 1.0 if tau[0]*perp[0]+tau[1]*perp[1] >= 0 else -1.0
+        tubes = []
+        for ln in lines:
+            t = ln['offset']*sp; u = h['service_umbilical_offset_m']+ln['offset']*sp
+            first = min(ln['coils'])
+            pts = [_nozzle_point(axis, station_x[k], header_r[k], ah, t) for k in sorted(rings) if k >= first]
+            pts.append(_nozzle_point(axis, inlet_x, header_r[max(rings)], ah, t))
+            yz = (q[1]+u*perp[0], q[2]+u*perp[1])
+            pts += [(x_aft, *yz), (x_web, *yz), (x_web, r_hub*rad[0]+side*u*tau[0], r_hub*rad[1]+side*u*tau[1])]
+            tubes.append(dict(name=f'Nozzle_Service_{ln["name"].capitalize()}_{j}', line=ln['name'], nozzle=j, radius=ln['radius_m'], points=pts,
+                              header_points=len(pts)-3, coils=ln['coils'], role=ln['role']))
+        bosses = []
+        for k, r in rings.items():
+            used = [ln for ln in lines if k in ln['coils']]
+            lo, hi = min(ln['offset'] for ln in used)*sp, max(ln['offset'] for ln in used)*sp
+            w = hi-lo+2*rmax+0.04; mid_t = (lo+hi)/2
+            bl = h['service_boss_length_m']
+            bosses.append(dict(name=f'Nozzle_Service_Boss_{j}_{k}', nozzle=j, coil=k, axis=axis, x0=r['x']-bl/2, x1=r['x']+bl/2,
+                               r_in=r['r_out'], r_out=header_r[k], a0=ah+(mid_t-w/2)/r['r_out'], a1=ah+(mid_t+w/2)/r['r_out'], lines=[ln['name'] for ln in used]))
+        ring_y = rings[h['pickup_attach_yoke']]; pl = h['pickup_lug']; rl = h['ring_lug']
+        lug = dict(name=f'Nozzle_Pickup_Lug_{j}', nozzle=j, axis=axis, x0=ring_y['x0'], x1=ring_y['x1'], r_in=ring_y['r_out'], r_out=ring_y['r_out']+pl['height_m'],
+                   a0=y['pickup_angle']-pl['width_m']/2/ring_y['r_out'], a1=y['pickup_angle']+pl['width_m']/2/ring_y['r_out'])
+        ring_lug = dict(name=f'Nozzle_Ring_Lug_{j}', nozzle=j, axis=(0.0, 0.0), x0=pk['b'][0]-rl['depth_m'], x1=pk['b'][0], r_in=st['ring_node_radius_m']-rl['radial_m']/2,
+                        r_out=st['ring_node_radius_m']+rl['radial_m']/2, a0=node_a-rl['width_m']/2/st['ring_node_radius_m'], a1=node_a+rl['width_m']/2/st['ring_node_radius_m'])
+        out.append(dict(nozzle=j, axis=axis, header_angle=ah, tubes=tubes, bosses=bosses, pickup_lug=lug, ring_lug=ring_lug,
+                        interface=(x_web, r_hub*rad[0]+side*h['service_umbilical_offset_m']*tau[0], r_hub*rad[1]+side*h['service_umbilical_offset_m']*tau[1]), side=side))
+    return out
+
+
+def tube_segments(tube):
+    return list(zip(tube['points'], tube['points'][1:]))
+
+
+def box_corners(b):
+    """Ship-frame corner points of a nozzle-frame or ship-axis box (with its 'axis' offset)."""
+    ax = b.get('axis', (0.0, 0.0)); out = []
+    for x in (b['x0'], b['x1']):
+        for r in (b['r_in'], b['r_out']):
+            for a in (b['a0'], (b['a0']+b['a1'])/2, b['a1']):
+                out.append((x, ax[0]+r*math.cos(a), ax[1]+r*math.sin(a)))
+    return out
+
+
+def construction_check(s, g):
+    """Fit screen of the nozzle construction and services: casing parts never inside a coil bore, aft of the exit plane or on a coil
+    tube; service lines clear of the other nozzles, the flux domains, the thrust-ring chords, the hub webs, the pickups and straps by
+    mechanical_clearance_m (their own pickup, boss and the hub interface excepted). Returns failures and measurements."""
+    p, m, h = s['prototype'], s['drive_manifold'], s['drive_hot_section']; L = s['ship']['length']['value']
+    clr = p['mechanical_clearance_m']; failures, meas = [], {}
+    def need(ok, message):
+        if not ok:
+            failures.append(message)
+    parts = nozzle_construction(s); coils = {c['index']: c for c in dm.nozzle_coils(s)}
+    meas['nozzle_construction_parts'] = len(parts)
+    need(all(b['x0'] >= -1e-6 and b['x1'] <= p['nozzle_length_m']+1e-6 for b in parts), 'Nozzle casing hardware leaves the nozzle span (aft of the exit plane or forward of the inlet)')
+    need(all(b['r_in'] >= coils[b['coil']]['inner']-1e-9 for b in parts), 'Nozzle casing hardware enters a coil bore')
+    walls = [b for b in parts if b['part'] == 'casing_wall']
+    tube_gap = min(rect_point_distance(b, coils[b['coil']]['x'], coils[b['coil']]['ring_radius'])-coils[b['coil']]['tube'] for b in walls)
+    meas['casing_wall_coil_gap_m'] = tube_gap
+    need(tube_gap >= 0.0, 'Casing wall cuts a coil winding')
+    ex = g['exhausts'][0]; st = g['stations']
+    meas['casing_plasma_gap_m'] = min(b['r_in']-m['plasma_branch_max_radius_m']*dm.exhaust_factor(ex, st, min(p['nozzle_length_m'], max(0.0, x))) for b in parts for x in (b['x0'], b['x1']))
+    need(meas['casing_plasma_gap_m'] >= m['plasma_hardware_clearance_m'], 'Casing hardware reaches the exhaust plasma')
+    svc = nozzle_services(s); yokes = dm.nozzle_yokes(s)
+    # Obstacles: other nozzles' casing envelopes (axis segment + outer radius incl. flange), flux domains, hub webs, pickups, straps, ring chords.
+    env_r = max(r['r_out'] for r in yokes[0]['rings'])+h['casing_flange']['height_m']
+    st_ = s['structure']; xring = layout.at(s, p['thrust_ring_x']); half = st_['ring_depth_m']/2
+    inner = st_['ring_od_m']/2-st_['ring_radial_depth_m']; strut = p['structural_strut_radius_m']
+    members = dm.structure_members(s)
+    gaps = {}
+    for n in svc:
+        j = n['nozzle']; worst = (math.inf, '')
+        for tube in n['tubes']:
+            segs = tube_segments(tube)
+            for k, (a, b) in enumerate(segs):
+                header = k < tube['header_points']-1
+                cands = []
+                for o in yokes:
+                    if o['nozzle'] != j:
+                        ax = o['axis']
+                        cands.append((segment_distance(a, b, (-L/2, *ax), (-L/2+p['nozzle_length_m'], *ax))-env_r, f'Nozzle_{o["nozzle"]+1:02} casing'))
+                for i, br in enumerate(g['branches']):
+                    cands += [(segment_distance(a, b, q0, q1)-m['domain_radius_m'], f'Magnetic_Flow_Domain_{i+1:02}') for q0, q1 in zip(br, br[1:])]
+                for mb in members:
+                    own = mb['name'].startswith((f'Nozzle_Pickup_{j}', f'Nozzle_Yoke_{j}_', f'Nozzle_Yoke_Strap_{j}_'))
+                    if own and header:
+                        continue  # the header rides on its own casing; its strap clearance is screened below
+                    if own and mb['name'].startswith(f'Nozzle_Yoke_{j}_') and k == tube['header_points']-1:
+                        continue  # the step off the inlet casing
+                    cands.append((segment_distance(a, b, mb['a'], mb['b'])-mb['radius'], mb['name']))
+                for face in (-1, 1):
+                    for rr in (inner+strut, st_['ring_od_m']/2-strut):
+                        pts = [dm.radial(xring+face*half, rr, q*math.tau/96) for q in range(97)]
+                        cands += [(segment_distance(a, b, q0, q1)-strut, 'Thrust_Ring chord') for q0, q1 in zip(pts, pts[1:])]
+                d, name = min(cands)
+                d -= tube['radius']
+                if d < worst[0]:
+                    worst = (d, name)
+            # Own straps along the header run.
+            for strap in yokes[j]['straps']:
+                for a, b in tube_segments(tube)[:tube['header_points']-1]:
+                    for q0, q1 in zip(strap['points'], strap['points'][1:]):
+                        d = segment_distance(a, b, q0, q1)-strap['radius']-tube['radius']
+                        if d < worst[0]:
+                            worst = (d, strap['name'])
+        gaps[f'Nozzle_{j+1:02}'] = dict(gap_m=worst[0], nearest=worst[1])
+    meas['nozzle_service_gaps_m'] = gaps
+    bad = {k: v for k, v in gaps.items() if v['gap_m'] < clr}
+    need(not bad, f'Nozzle service line within mechanical clearance: {bad}')
+    meas['nozzle_service_min_gap_m'] = min(v['gap_m'] for v in gaps.values())
+    # The rotationally shared parts must miss every nozzle's header, pickup lug and straps (they are drawn once for all four).
+    shared = [b for b in parts if b['part'] != 'casing_wall']
+    def overlap(b, a0, a1):
+        lo, hi = (b['a0']-a0) % math.tau, (b['a1']-a0) % math.tau
+        return lo < (a1-a0) or hi < (a1-a0) or lo > hi
+    hits = []
+    for n in svc:
+        for bo in n['bosses']+[n['pickup_lug']]:
+            for b in shared:
+                if b['coil'] == bo.get('coil', h['pickup_attach_yoke']) and overlap(b, bo['a0'], bo['a1']):
+                    hits.append((b['name'], bo['name']))
+    meas['nozzle_shared_hardware_conflicts'] = hits
+    need(not hits, f'Shared casing hardware overlaps a service boss or pickup lug: {hits[:4]}')
+    return dict(failures=failures, measurements=meas)
+
+
 # ---------- cryogenic feed ------------------------------------------------------------------------------------------
 
 def inventory_families(s):
@@ -448,4 +667,7 @@ def check(s, g, d=None):
                          bores=[dict(bore=n, open_sight_lines=bore_sight[n], jog_m=m['route_jog_m'], offset_m=m['route_offset_m'], radius_m=bore_r) for n in bores]))
     findings.append(dict(id='H2_INJECTION_OPEN', detail='Hydrogen reaction mass enters a PROTOTYPE injection ring around the common region at h2_injection_x, downstream of the burn and ahead of the manifold. Injector ports, count, mixing and the heat load on the ring are OPEN; so are the nuclear and radiant heating and boil-off of the hydrogen run in the hot corridor (OD-026, 06!E46); only the ring station is drawn.',
                          ring=dict(x=ring_['x'], radius_m=ring_['radius'], tube_m=ring_['tube']), lines=[l['name'] for l in lines if l['terminus'] == 'injection_ring']))
+    con = construction_check(s, g); failures += con['failures']; meas.update(con['measurements'])
+    findings.append(dict(id='NOZZLE_CONSTRUCTION_OPEN', detail='Each warm yoke ring is closed into a segmented coil casing (side walls to the coil inner face, bolted split flanges, a handling post per segment, inspection covers on the strike-module coils) and a service header beside the pickup strap carries the HTS current leads, the coil cryogen and the strike-module coolant to an umbilical along the pickup and the hub web to the thrust hub; the pickups end in pin-jointed lugs. All PROTOTYPE display construction: coil loads and cold-mass supports (OD-024), lead currents, cryogen and operating temperature (OD-024), strike-module coolant, heat flux and life (OD-025) and the services beyond the thrust hub are OPEN; nothing enters a coil bore or the exhaust.',
+                         services=[dict(nozzle=n['nozzle']+1, lines=[t['line'] for t in n['tubes']], interface=n['interface']) for n in nozzle_services(s)]))
     return dict(failures=failures, findings=findings, measurements=meas)
