@@ -8,7 +8,7 @@ ROOT=Path(__file__).resolve().parents[3]
 sys.path[:0]=[str(ROOT/'src/wayfarer'),str(ROOT/'src/wayfarer/build'),str(ROOT/'src/wayfarer/components')]
 from spec import load, buildable_configurations
 from common import begin, empty, save, link_instance, group, move
-from recipes import build_component, build_subsystem, entry_guides, human_reference
+from recipes import build_component, build_subsystem, entry_guides, human_reference, hero_cameras
 from rig import rig
 import sim_rig
 import flight_timeline
@@ -215,6 +215,7 @@ def build(root=ROOT, target='all', rebind=False):
         obj.parent=root_obj
     human_reference(c,s)
     entry_guides(c,s)
+    hero_cameras(c,s)
     rig(c,s,root_obj)
     organize(c)
     import bpy

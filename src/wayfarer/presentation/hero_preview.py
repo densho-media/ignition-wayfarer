@@ -179,6 +179,59 @@ def fractal_nodes(nt, op, pos, u, ram, fw=0.003):
     return mix(pv, cv, inside), mix(ph, ch, inside)
 
 
+def finish_families(X):
+    return {f for v in X.get('surface', {}).values() for f in v['families']}
+
+
+def finish(m, node, surf, rule, base, rough):
+    """Surface treatments of the exterior production families ([production.exterior.surface], world-space procedural, depiction only):
+    foil pillowing (low-frequency bump), quilted and crinkled MLI (stitched seams on a world grid, fine crinkle bump), ceramic panel-lot
+    value jitter."""
+    nt = m.node_tree; N, L = nt.nodes, nt.links
+    geo = N.new('ShaderNodeNewGeometry')
+    kind = next(k for k, v in surf.items() if rule in v['families']); q = surf[kind]
+
+    def op(k, a, b):
+        n = N.new('ShaderNodeMath'); n.operation = k
+        for i, v in enumerate((a, b)):
+            if isinstance(v, (int, float)):
+                n.inputs[i].default_value = v
+            else:
+                L.new(v, n.inputs[i])
+        return n.outputs[0]
+
+    def scaled(val):
+        col = N.new('ShaderNodeVectorMath'); col.operation = 'SCALE'; col.inputs[0].default_value = base; L.new(val, col.inputs['Scale'])
+        L.new(col.outputs[0], node.inputs['Base Color'])
+
+    def bump(height, strength, distance):
+        b = N.new('ShaderNodeBump'); b.inputs['Strength'].default_value = strength; b.inputs['Distance'].default_value = distance
+        L.new(height, b.inputs['Height']); L.new(b.outputs['Normal'], node.inputs['Normal'])
+
+    if kind == 'foil':
+        nz = N.new('ShaderNodeTexNoise'); L.new(geo.outputs['Position'], nz.inputs['Vector'])
+        nz.inputs['Scale'].default_value = 1.0/q['scale_m']; nz.inputs['Detail'].default_value = q['detail']
+        bump(nz.outputs['Fac'], min(1.0, q['bump']*10), 0.1)
+    elif kind == 'mli':
+        sep = N.new('ShaderNodeSeparateXYZ'); L.new(geo.outputs['Position'], sep.inputs[0])
+
+        def dist(v):
+            v = op('DIVIDE', v, q['quilt_m']); f = op('SUBTRACT', v, op('FLOOR', v, 0.0))
+            return op('MULTIPLY', op('MINIMUM', f, op('SUBTRACT', 1.0, f)), q['quilt_m'])
+        # blanket seams on a world grid: axial seams every quilt_m in X, long seams where the Y/Z grid planes cut the vessel
+        d = op('MINIMUM', dist(sep.outputs['X']), op('MINIMUM', dist(sep.outputs['Y']), dist(sep.outputs['Z'])))
+        seam = op('LESS_THAN', d, q['seam_m']/2)
+        scaled(op('SUBTRACT', 1.0, op('MULTIPLY', seam, 1.0-q['seam_value'])))
+        vz = N.new('ShaderNodeTexVoronoi'); L.new(geo.outputs['Position'], vz.inputs['Vector']); vz.inputs['Scale'].default_value = 1.0/q['crinkle_m']
+        bump(vz.outputs['Distance'], min(1.0, q['bump']*10), 0.01)
+        L.new(op('ADD', rough, op('MULTIPLY', seam, 0.3)), node.inputs['Roughness'])
+    elif kind == 'ceramic':
+        nz = N.new('ShaderNodeTexNoise'); L.new(geo.outputs['Position'], nz.inputs['Vector']); nz.inputs['Scale'].default_value = 1.0/q['scale_m']
+        mr = N.new('ShaderNodeMapRange'); L.new(nz.outputs['Fac'], mr.inputs['Value'])
+        mr.inputs['To Min'].default_value = 1-q['value_jitter']; mr.inputs['To Max'].default_value = 1+q['value_jitter']
+        scaled(mr.outputs['Result'])
+
+
 def dress(s, functional=False, emit=True, grammar=False, wear=False):
     """Hide the display-only layers and put the exterior look on every WF_MAT_ material copy (linked copies included). functional: the
     look.exterior.functional_materials keep their own base colour (the LOOK-005 functional-mark variant); the light is unchanged.
@@ -227,6 +280,8 @@ def dress(s, functional=False, emit=True, grammar=False, wear=False):
                 ram = dict(ram, fractal=fractal_shield.uniforms(s))
                 if wear:
                     ram['fractal'].update(fs_jitter=X['wear']['ram_face']['jitter'], fs_repair_share=X['wear']['ram_face']['repair_share'])
+            if rule in finish_families(X):
+                finish(m, node, X['surface'], rule, (r, g, b), rough)
             if ram or wear and rule in X['wear']:
                 surface(m, node, (r, g, b), rough, X['wear'].get(rule) if wear else None,
                         ram and dict(ram, **(X['wear']['ram_face'] if wear else {})))

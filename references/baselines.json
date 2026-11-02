@@ -1,6 +1,6 @@
 {
   "purpose": "Current production geometry baseline for tools/pipeline.py fingerprint diffs. Written only by `tools/workflow.py baseline`.",
-  "current": "references/baseline_graded_thermal_blade",
+  "current": "references/baseline_exterior_production",
   "history": [
     {
       "baseline": "references/baseline_fwd_eye_r30_hex",
@@ -53,6 +53,10 @@
     {
       "baseline": "references/baseline_tank_axial_radzone_rcs",
       "replaced_utc": "2026-11-01T17:26:19Z"
+    },
+    {
+      "baseline": "references/baseline_graded_thermal_blade",
+      "replaced_utc": "2026-11-01T23:26:27Z"
     }
   ]
 }

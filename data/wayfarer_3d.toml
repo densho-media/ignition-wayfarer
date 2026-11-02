@@ -2201,13 +2201,41 @@ sections = [
 [radiators.zones.bulkhead]
 clearance_m = 0.4                   # last layer to the WARM sheet, along X
 casing_gap_m = 0.10                 # crawler and EVA gate through every layer at the casing, open only in the coast (blades dark)
-display_thickness_m = 0.02
 layers = [
   { offset_m = 0.5, slope_deg = 0.0, emissivity = 0.12, areal_kg_m2 = 0.60, material = "polished Mo / Nb-alloy foil gores on a rib grid (about 1200 K)" },
   { offset_m = 0.8, slope_deg = 5.0, emissivity = 0.08, areal_kg_m2 = 0.35, material = "polished Ti or superalloy foil gores (about 800 K)" },
   { offset_m = 1.1, slope_deg = 10.0, emissivity = 0.05, areal_kg_m2 = 0.35, material = "gold or silver film on Ti foil gores (about 500 K)" },
 ]
-frame = { spoke_kg_m = 5.0, rim_kg_m = 3.0 }
+# Construction (exterior production refinement 2026-11-01, PROTOTYPE, Claude under the owner's delegation; radiator_zones.construction):
+# a tension-membrane wheel, not a plate. Each layer: gores of polished foil (each split into replaceable panels at the anti-flutter
+# hoops) shingled over each other with a labyrinth overlap, their seams on radial seam battens (tendons) between a hub ring on sliding
+# casing brackets and a segmented rim ring with sliding sleeve joints; the panels hang on sliding clips. Layers 1-2 are carried by three
+# radial C/C trusses in the layer 1-2 gap along the blade planes (where the blades are already edge-on), layer 3 by hangers from the
+# WARM aft root booms. No member is aft of layer 1 (nothing structural sees the 1800 K blades); no primary thrust load enters the
+# bulkhead. L2's seams are staggered half a gore against L1 and L3, so a ray through one seam meets solid foil on the next layer.
+# Foil thickness follows from areal mass and density (radiator_zones.membrane), so the modelled zero-thickness sheets and the mass agree.
+gores = 36
+panel_hoops_r_m = [16.0, 26.0]      # anti-flutter hoop radii; each gore is three replaceable panels
+overlap_m = 0.20                    # labyrinth overlap of neighbouring gores and panels (no straight gap)
+shingle_step_m = 0.03               # axial step between overlapping foils (the seam slot height)
+gore_phase = [0.0, 0.5, 0.0]        # seam phase per layer in gores, from the blade plane (layer 2 staggered half a gore)
+tendon = { radius_m = 0.012, kg_m = 0.15, note = "seam batten: braided C/C or Mo cable with clip track, carries the gore edges" }
+hoop = { radius_m = 0.010, kg_m = 0.10, note = "anti-flutter catenary hoop, panel break" }
+rim = { radius_m = 0.06, kg_m = 2.5, segments = 36, joint_travel_m = 0.06, note = "segmented compression rim, sliding sleeve joint per segment" }
+hub = { radius_m = 0.05, kg_m = 3.0, brackets = 12, slide_m = 0.25, note = "hub ring on radial-slot sliding brackets to the casing" }
+truss = { count = 3, chord_kg_m = 2.0, web_kg_m = 1.2, bay_m = 2.5, clearance_m = 0.05, note = "C/C tapered truss in the layer 1-2 gap, one per blade plane" }
+hanger = { pitch_m = 4.0, kg = 1.5, note = "layer 3 hanger from the WARM aft root boom, sliding clevis" }
+standoff = { k_W_mK = 2.0, area_m2 = 1.0e-4, length_m = 0.15, per_truss_layer = 13, note = "zirconia / C-C low-conductance standoff, one per truss bay per layer" }
+slide_margin = 1.5                  # radial slide travel >= margin x the layer's thermal growth
+gate = { tangential_m = 1.40, radial_m = 1.60, offset_m = 2.30, frame_kg = 25.0, note = "one gate per blade plane per layer on the SP-51 crawler rail line; the door panel slides radially outward on guides (no swing space between layers), closed under thrust" }
+gate_user_m = [1.00, 1.00]          # passing envelope (width, depth): a suited crew member with PLSS (ISS hatch class 1.27 m clear) or a DR-EVA-02 crawler 0.60 m
+gate_margin_m = 0.05                # eva_suit suit_margin_m
+# Foil material per layer (handbook values, mean CTE from 300 K to the layer temperature): density kg/m3, CTE 1/K, study temperature K.
+foil = [
+  { metal = "Mo (TZM)", density = 10220.0, cte = 5.8e-6, T_K = 1204.0 },
+  { metal = "Ti-6Al-4V", density = 4430.0, cte = 9.7e-6, T_K = 805.0 },
+  { metal = "Ti foil, vapour-deposited gold both faces", density = 4500.0, cte = 9.2e-6, T_K = 493.0 },
+]
 
 # AFT-011 stage A1: three physical heat-rejection regimes (40!A60:A66, Q36). Temperatures and areas of the hot regime are referenced, never repeated.
 [thermal.loops]
@@ -4083,6 +4111,29 @@ xf_mark = [0.030, 0.032, 0.035, 0.70, 0.0]        # charcoal stencils on light s
 xf_mark_light = [0.84, 0.84, 0.81, 0.62, 0.0]     # off-white stencils on dark machinery and structure
 xf_fastener = [0.30, 0.31, 0.33, 0.45, 0.60]      # micro tier only
 xf_frame = [0.58, 0.58, 0.55, 0.55, 0.10]         # radiator blade frames, edge chords and joint beads (S5); the raised casing straps (S6): light-mid frames, calm fields
+# Exterior production refinement (2026-11-01, PROTOTYPE depiction; the physical coatings and their optical data stay in [radiators.zones],
+# a render finish qualifies nothing). Each thermal surface reads by its own finish: the HOT blades stay the dark COAST depiction above;
+# the WARM/LOW sheets are matte white ceramic (AZ-93 family); the bulkhead layers are bright polished foils, refractory grey Mo (about
+# 1200 K), warmer Ti (about 800 K) and gold (about 500 K); the C/C trusses near-black; the cryogenic tanks wear quilted aluminized MLI.
+# The B variants are the panel-to-panel manufacturing differences (a slightly different value and roughness per panel lot).
+xf_ceramic = [0.74, 0.75, 0.74, 0.82, 0.0]        # WARM/LOW white ceramic radiator sheets (matte, panel lots A)
+xf_ceramic_b = [0.71, 0.72, 0.71, 0.86, 0.0]
+xf_foil_mo = [0.72, 0.72, 0.73, 0.20, 1.0]        # bulkhead layer 1, polished Mo/TZM foil
+xf_foil_mo_b = [0.69, 0.69, 0.70, 0.24, 1.0]
+xf_foil_ti = [0.62, 0.58, 0.54, 0.22, 1.0]        # bulkhead layer 2, polished Ti foil (warmer grey)
+xf_foil_ti_b = [0.59, 0.55, 0.51, 0.26, 1.0]
+xf_foil_au = [0.92, 0.66, 0.32, 0.20, 1.0]        # bulkhead layer 3, gold film
+xf_foil_au_b = [0.89, 0.63, 0.30, 0.24, 1.0]
+xf_cc = [0.040, 0.040, 0.044, 0.62, 0.0]          # carbon-carbon trusses, battens' clip tracks
+xf_mli = [0.64, 0.64, 0.63, 0.48, 0.70]           # aluminized MLI outer layer of the cryogenic vessels (quilted, crinkled)
+xf_insul_line = [0.70, 0.69, 0.66, 0.78, 0.0]     # insulated (beta-cloth wrapped) cryogenic transfer lines
+
+# Surface treatments of the new families (hero_preview.dress): foils pillow slightly between their battens (low-frequency bump, so the sun
+# draws soft highlights instead of a mirror of black space); MLI is quilted (stitched seams on a grid) and finely crinkled.
+[production.exterior.surface]
+foil = { families = ["xf_foil_mo", "xf_foil_mo_b", "xf_foil_ti", "xf_foil_ti_b", "xf_foil_au", "xf_foil_au_b"], scale_m = 1.6, bump = 0.025, detail = 1.0 }
+mli = { families = ["xf_mli"], quilt_m = 0.9, seam_m = 0.025, seam_value = 0.55, crinkle_m = 0.06, bump = 0.03 }
+ceramic = { families = ["xf_ceramic", "xf_ceramic_b"], scale_m = 6.0, value_jitter = 0.03 }
 
 # Generated engineering materials (WF_MAT_<name>) to family for the grammar look (hero_preview.dress(grammar=True), the review set and,
 # from S9, the runtime exterior): the first rule whose prefixes match wins; "none" keeps the material's own display colour (the exterior
@@ -4091,6 +4142,51 @@ xf_frame = [0.58, 0.58, 0.55, 0.55, 0.10]         # radiator blade frames, edge 
 # optics (P4-SCOPE). S9 coverage (probe of every exterior-visible material): the warm panels are radiators (dark thermal depiction, no
 # capacity claim), coolant trunks, bellows and the hub's rotor-interface parts graphite, crew tubes, transfer drums and the port neck light
 # shell. Readback of the saved vehicle: <review run>/materials.json.
+[[production.exterior.ship_families]]
+prefixes = ["RadiatorZoneLowA", "RadiatorZoneWarmA"]
+family = "xf_ceramic"
+[[production.exterior.ship_families]]
+prefixes = ["RadiatorZoneLowB", "RadiatorZoneWarmB"]
+family = "xf_ceramic_b"
+[[production.exterior.ship_families]]
+prefixes = ["RadiatorZoneRootStrip", "BulkheadRim"]
+family = "xf_structure"
+[[production.exterior.ship_families]]
+prefixes = ["BulkheadFoilMoA"]
+family = "xf_foil_mo"
+[[production.exterior.ship_families]]
+prefixes = ["BulkheadFoilMoB"]
+family = "xf_foil_mo_b"
+[[production.exterior.ship_families]]
+prefixes = ["BulkheadFoilTiA"]
+family = "xf_foil_ti"
+[[production.exterior.ship_families]]
+prefixes = ["BulkheadFoilTiB"]
+family = "xf_foil_ti_b"
+[[production.exterior.ship_families]]
+prefixes = ["BulkheadFoilAuA"]
+family = "xf_foil_au"
+[[production.exterior.ship_families]]
+prefixes = ["BulkheadFoilAuB"]
+family = "xf_foil_au_b"
+[[production.exterior.ship_families]]
+prefixes = ["BulkheadTrussCC", "BulkheadBatten"]
+family = "xf_cc"
+[[production.exterior.ship_families]]
+prefixes = ["BulkheadGateFrame"]
+family = "xf_service"
+[[production.exterior.ship_families]]
+prefixes = ["Fuel_He3", "Fuel_H2", "Fuel_D2"]
+family = "xf_mli"
+[[production.exterior.ship_families]]
+prefixes = ["Fuel_Line"]
+family = "xf_insul_line"
+[[production.exterior.ship_families]]
+prefixes = ["Fuel_Skirt", "Fuel_Deck", "Fuel_Guide"]
+family = "xf_structure"
+[[production.exterior.ship_families]]
+prefixes = ["Fuel_Valve", "Fuel_Cryocooler"]
+family = "xf_machinery"
 [[production.exterior.ship_families]]
 prefixes = ["RadiatorA", "RadiatorB", "WarmPanel"]
 family = "xf_thermal"
@@ -4288,6 +4384,50 @@ functional_materials = ["RingPressureBand", "RingServiceCover", "CrownServiceHat
                         "Casing_Access_Panel", "Casing_Strap", "Ext_RCS_Nozzle", "Ext_Antenna_Dish", "Ext_Dock_Target"]
 hidden_kinds = ["scale_reference", "hull_envelope", "field_display", "magnetic_field", "sim_proxy", "radiator_thermal_glow",
                 "radiator_health_marker"]
+
+# Exterior production refinement (2026-11-01): the three permanent hero cameras (hero_cameras.py; presentation only, PROTOTYPE). Framing
+# follows the ship's stations: focus = [anchor, dx, y, z]; direction = from the focus toward the camera (ship frame, +X bow, +Z dorsal);
+# fit = [anchor0, dx0, anchor1, dx1, half-size (m or an anchor such as "R")]: the subject box the camera backs off to contain, times margin.
+# sun = [degrees from aft, azimuth about +X from +Y] (m8_exterior.sun_vector; attitude and pointing stay OPEN). labels = [text, anchor]:
+# drawn only in the separate review overlay, never in the cinematic frame. The vehicle file carries the resolved poses as CAM_HERO_*.
+[look.hero_cameras]
+status = "PROTOTYPE"
+sensor_mm = 36.0
+aspect = [16, 9]
+min_near_ratio = 0.25               # nearest ship part at least a quarter of the ship length from the camera (no swollen Brow)
+[look.hero_cameras.cameras.CAM_HERO_ENGINEERING]
+purpose = "Engineering Hero: the whole ship, its silhouette, three blades, spine, bulkhead, both rings, tank farm and Brow in their true proportions"
+focus = ["MID", 8.0, 0.0, 0.0]
+direction = [0.50, -1.0, -0.24]
+lens_mm = 50.0
+fit = ["AFT", -6.0, "FWD", 0.0, "R"]
+margin = 1.04
+sun = [72.0, 205.0]
+editorial_ev = 2.0
+states = ["COAST"]
+labels = [["DRIVE AND FOUR MAGNETIC NOZZLES", "NOZZLES"], ["HOT RADIATOR BLADES, 1800 K", "HOT_BLADE_TIP"], ["V-GROOVE THERMAL BULKHEAD", "BULKHEAD_RIM"], ["WARM 440 K", "WARM_SHEET"], ["LOW 300 K", "LOW_SHEET"], ["HABITAT RING A", "RING_A_RIM"], ["HABITAT RING B", "RING_B_RIM"], ["CRYOGENIC TANK FARM", "TANK_SIDE"], ["BROW FORWARD SHIELD", "BROW_RIM"]]
+[look.hero_cameras.cameras.CAM_HERO_FORWARD]
+purpose = "Forward Explorer: where the crew lives and how the ship protects them: Brow, EYE wells, tank farm, both rings, hub and spine"
+focus = ["RING_B", 10.0, 0.0, 0.0]
+direction = [0.25, -1.0, -0.40]
+lens_mm = 40.0
+fit = ["ZONE_FRONT", -6.0, "FWD", 0.0, "R"]
+margin = 1.02
+sun = [96.0, 215.0]
+editorial_ev = 2.0
+states = ["COAST"]
+labels = [["BROW: SEGMENTED FORWARD SHIELD", "BROW_RIM"], ["EYE WELL (ONE OF FOUR)", "EYE_WELL"], ["CRYOGENIC TANK FARM", "TANK_SIDE"], ["RING B", "RING_B_RIM"], ["RING A", "RING_A_RIM"], ["LOW 300 K", "LOW_SHEET"]]
+[look.hero_cameras.cameras.CAM_HERO_PROPULSION]
+purpose = "Propulsion and Thermal Hero: four nozzles and thrust structure, the HOT blades, the bulkhead, WARM and LOW; the First Ignition camera"
+focus = ["HOT_MID", -10.0, 0.0, 0.0]
+direction = [-0.95, -0.85, -0.38]
+lens_mm = 35.0
+fit = ["AFT", -8.0, "ZONE_FRONT", 0.0, "R_BLADE"]
+margin = 1.02
+sun = [55.0, 200.0]
+editorial_ev = 2.0
+states = ["COAST", "FIRST_IGNITION"]
+labels = [["FOUR MAGNETIC NOZZLES", "NOZZLES"], ["HOT BLADES 1800 K", "HOT_BLADE_TIP"], ["V-GROOVE THERMAL BULKHEAD", "BULKHEAD_RIM"], ["WARM 440 K", "WARM_SHEET"], ["LOW 300 K", "LOW_SHEET"]]
 
 [survival]
 status = "PROTOTYPE"

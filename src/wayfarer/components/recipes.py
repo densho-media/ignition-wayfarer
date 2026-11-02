@@ -124,3 +124,19 @@ def human_reference(c,s):
         line(c,f'Human_Arm_{sign}',[at(0,0,.75),at(sign*.28,0,.43)],.055,mat,kind='scale_reference')
     # Low-poly head; no character detail.
     cylinder(c,'Human_Head',base[0],.22,.13,mat,base[1],base[2]+h-.13,kind='scale_reference')
+
+
+def hero_cameras(c,s):
+    """The three permanent exterior hero cameras (hero_cameras.py, [look.hero_cameras]): resolved poses saved in the vehicle file, so the
+    owner opens WF_WAYFARER_001 and looks through CAM_HERO_*; sun, exposure and states ride along as properties for the render script."""
+    import bpy
+    from mathutils import Matrix
+    from common import tag
+    import hero_cameras as hc
+    for cam in hc.all_cameras(s):
+        data=bpy.data.cameras.new(cam['name']);data.lens=cam['lens_mm'];data.sensor_width=cam['sensor_mm'];data.sensor_fit='HORIZONTAL'
+        data.clip_start,data.clip_end=cam['clip']
+        obj=bpy.data.objects.new(cam['name'],data);c.objects.link(obj);tag(obj,cam['name'],'hero_camera')
+        obj.matrix_world=Matrix([(cam['right'][i],cam['up'][i],cam['back'][i],cam['location'][i]) for i in range(3)]+[(0,0,0,1)])
+        obj['purpose']=cam['purpose'];obj['sun_from_aft_deg'],obj['sun_azimuth_deg']=cam['sun'];obj['editorial_ev']=cam['ev']
+        obj['states']=','.join(cam['states']);obj['focus']=cam['focus'];obj['source_ref']='look.hero_cameras';obj['status']='PROTOTYPE presentation'

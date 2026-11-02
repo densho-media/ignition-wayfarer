@@ -464,7 +464,7 @@ def radiator_zones_geometry(c,s):
     z=s['radiators']['zones'];bh=z['bulkhead'];p=s['prototype'];th=p['radiator_thickness_m'];casing=__import__('thermal_geometry').casing_radius(s)
     sheet={'LOW':(material('RadiatorZoneLowA',(.66,.84,.98)),material('RadiatorZoneLowB',(.60,.79,.95))),
            'WARM':(material('RadiatorZoneWarmA',(.96,.56,.18)),material('RadiatorZoneWarmB',(.90,.50,.14)))}
-    metal=material('Structure',(.30,.40,.48));coolant=material('Coolant',(.15,.43,.51));strip=material('RadiatorZoneRootStrip',(.42,.44,.46))
+    metal=material('Structure',(.30,.40,.48));coolant=material('Coolant',(.15,.43,.51));strip=material('RadiatorZoneRootStrip',(.42,.44,.46));zone_frame=material('BladeFrame',(.30,.40,.48))
     layer_mat=[material('BulkheadHotLayer',(.62,.60,.58)),material('BulkheadMidLayer',(.74,.74,.72)),material('BulkheadColdLayer',(.86,.72,.36))]
     nx,nr=6,4
     for pl in radiator_zones.plates(s):
@@ -492,17 +492,149 @@ def radiator_zones_geometry(c,s):
             line(c,f"{pl['name']}_Root_Boom_{tag}",[P(x0,casing+0.02,0),P(x1,pl['r1'],0)],0.16,metal,kind='radiator_zone_support')
         trunk=line(c,f"{pl['name']}_Trunk",[P(xa(pl['r0']+0.6)+0.4,pl['r0']+0.6,th/2+0.12),P(pl['x1']-0.4,pl['r0']+0.6,th/2+0.12)],0.10,coolant,kind='radiator_zone_trunk')
         trunk['circuit']=pl['circuit'];trunk['engineering_status']='own feed/return trunk and isolation valves; no coolant crosses the bulkhead or the joint (OPEN: sizing, joints)'
-    # V-groove thermal bulkhead: one revolved sheet per layer, three spokes (along the blade planes) and a rim ring per layer
-    t=bh['display_thickness_m']
-    for L in radiator_zones.layers(s):
-        obj=loft(c,L['name'],[(L['x_inner']-t/2,L['r0']),(L['x_rim']-t/2,L['r1']),(L['x_rim']+t/2,L['r1']),(L['x_inner']+t/2,L['r0']),(L['x_inner']-t/2,L['r0'])],
-                 layer_mat[min(L['index']-1,2)],caps=False,segments=72,kind='radiator_bulkhead')
-        obj['emissivity']=L['emissivity'];obj['slope_deg']=L['slope_deg'];obj['material_note']=L['material'];obj['area_m2']=L['area_m2'];obj['source_ref']='radiator_zoning'
-        obj['function']='V-groove thermal bulkhead layer: blocks every line of sight from the 1800 K blades to the cooler sections, the rings and the tank farm; the forward-leaning layers vent to space at the rim'
-        obj['engineering_status']='PROTOTYPE; gore seams, tensioning, gate mechanism and material qualification OPEN'
-        rim=loft(c,f"{L['name']}_Rim",[(L['x_rim']-0.06,L['r1']+0.06),(L['x_rim']+0.06,L['r1']+0.06),(L['x_rim']+0.06,L['r1']-0.06),(L['x_rim']-0.06,L['r1']-0.06),(L['x_rim']-0.06,L['r1']+0.06)],
-                 metal,caps=False,segments=72,kind='radiator_bulkhead_frame')
-        rim['function']='rim tension ring of the bulkhead layer (segmented, sliding joints for thermal growth)'
-        for k in range(3):
-            a=math.radians(p['radiator_phase_deg']+120*k);u=(0.0,math.cos(a),math.sin(a))
-            line(c,f"{L['name']}_Spoke_{k+1}",[(L['x_inner'],L['r0']*u[1],L['r0']*u[2]),(L['x_rim'],L['r1']*u[1],L['r1']*u[2])],0.08,metal,kind='radiator_bulkhead_frame')
+        # exterior production refinement (2026-11-01, PROTOTYPE): the return trunk on the other face, an outer edge chord, and thin
+        # transverse ribs at the panel-module boundaries standing edge-on on both faces (0.025 m footprint, at sheet temperature: under
+        # 1 % of the face, and they radiate as fins, so the net capacity is unchanged); guided shoes bridge the WARM/LOW joint.
+        ret=line(c,f"{pl['name']}_Trunk_Return",[P(xa(pl['r0']+0.6)+0.4,pl['r0']+0.6,-th/2-0.12),P(pl['x1']-0.4,pl['r0']+0.6,-th/2-0.12)],0.10,coolant,kind='radiator_zone_trunk')
+        ret['circuit']=pl['circuit'];ret['engineering_status']='return trunk of the section (feed on the other face); sizing OPEN'
+        X=lambda f,r:xa(r)+(pl['x1']-xa(r))*f
+        line(c,f"{pl['name']}_Edge_Chord",[P(X(0,pl['r1']),pl['r1'],0),P(X(1,pl['r1']),pl['r1'],0)],0.06,zone_frame,kind='radiator_zone_support')
+        parts=[]
+        for i in range(1,nx):
+            f=i/nx
+            for sgn in (-1,1):
+                for (a0,a1) in (((0,sgn*th/2),(0,sgn*(th/2+0.12))),):
+                    pass
+                c0=P(X(f,pl['r0']),pl['r0'],sgn*th/2);c1=P(X(f,pl['r1']),pl['r1'],sgn*th/2)
+                d=(c1[0]-c0[0],c1[1]-c0[1],c1[2]-c0[2]);ln=math.sqrt(sum(v*v for v in d));e=tuple(v/ln for v in d)
+                nn=(0.0,n[1]*sgn,n[2]*sgn);tt=(e[1]*nn[2]-e[2]*nn[1],e[2]*nn[0]-e[0]*nn[2],e[0]*nn[1]-e[1]*nn[0])
+                vs=[tuple(cc[m]+tt[m]*wv+nn[m]*hv for m in range(3)) for cc in (c0,c1) for wv in (-0.0125,0.0125) for hv in (0.0,0.12)]
+                parts.append((vs,[(0,1,3,2),(4,6,7,5),(0,4,5,1),(2,3,7,6),(0,2,6,4),(1,5,7,3)]))
+        obj=mesh(c,f"{pl['name']}_Ribs",*_merge(parts),zone_frame,kind='radiator_zone_support')
+        obj['function']='transverse ribs at the panel-module boundaries (edge-on, at sheet temperature; replaceable modules between them)';obj['source_ref']='radiator_zoning'
+        obj['engineering_status']='PROTOTYPE; rib section and attachment OPEN'
+        if pl['section']=='LOW':
+            parts=[]
+            for r in (pl['r0']+0.6,0.5*(pl['r0']+pl['r1']),pl['r1']-0.4):
+                cc=P(pl['x0']-z['joint_m']/2,r,0);vs=[(cc[0]+dx,cc[1]+u[1]*dr+n[1]*dw,cc[2]+u[2]*dr+n[2]*dw) for dx in (-0.45,0.45) for dr in (-0.12,0.12) for dw in (-0.08,0.08)]
+                parts.append((vs,[(0,2,3,1),(4,5,7,6),(0,1,5,4),(2,6,7,3),(0,4,6,2),(1,3,7,5)]))
+            obj=mesh(c,f"{pl['name']}_Joint_Shoes",*_merge(parts),metal,kind='radiator_zone_support')
+            obj['function']='guided shoes across the WARM/LOW expansion joint: carry the sheets radially and tangentially, slide axially; no coolant crosses'
+            obj['engineering_status']='PROTOTYPE';obj['source_ref']='radiator_zoning'
+    bulkhead_geometry(c,s)
+
+
+def _merge(parts):
+    vs=[];fs=[]
+    for v,f in parts:
+        o=len(vs);vs+=list(v);fs+=[tuple(i+o for i in q) for q in f]
+    return vs,fs
+
+
+def _tube_loop(pts,radius,n=8,closed=True):
+    """Closed (or open) polyline as one tube mesh of cylinders (vertices, faces)."""
+    seg=list(zip(pts,pts[1:]+pts[:1])) if closed else list(zip(pts,pts[1:]))
+    return _merge([cylinder_mesh(a,b,radius,n) for a,b in seg if (a[0]-b[0])**2+(a[1]-b[1])**2+(a[2]-b[2])**2>1e-8])
+
+
+def bulkhead_geometry(c,s):
+    """Graded Thermal Blade bulkhead construction (exterior production refinement 2026-11-01, radiator_zones.panels/trusses/gates;
+    PROTOTYPE): per layer 36 shingled foil gores in three replaceable panels, radial seam battens, anti-flutter hoops, a segmented rim
+    with sliding sleeve joints and a hub ring on sliding casing brackets; three tapered C/C trusses in the layer 1-2 gap along the blade
+    planes; layer 3 hung from the WARM aft root booms; one sliding-door gate per blade plane per layer on the crawler rail line. The foils
+    are drawn as sheets without thickness (radiator_zones.membrane gives the 59-79 um they stand for)."""
+    z=s['radiators']['zones'];bh=z['bulkhead'];p=s['prototype'];casing=__import__('thermal_geometry').casing_radius(s)
+    L=radiator_zones.layers(s);mem={m['layer']:m for m in radiator_zones.membrane(s)}
+    foil=[(material('BulkheadFoilMoA',(.62,.62,.63)),material('BulkheadFoilMoB',(.58,.58,.60))),
+          (material('BulkheadFoilTiA',(.56,.53,.50)),material('BulkheadFoilTiB',(.53,.50,.47))),
+          (material('BulkheadFoilAuA',(.83,.62,.30)),material('BulkheadFoilAuB',(.80,.59,.28)))]
+    batten=material('BulkheadBatten',(.20,.20,.22));rimm=material('BulkheadRim',(.30,.31,.33));cc=material('BulkheadTrussCC',(.12,.12,.13))
+    door=material('BulkheadGateFrame',(.80,.59,.21))
+    P=lambda x,r,a:(x,r*math.cos(a),r*math.sin(a))
+    na=4;nr=6
+    by_gore={}
+    for q in radiator_zones.panels(s):
+        by_gore.setdefault((q['layer'],q['gore']),[]).append(q)
+    for (li,k),qs in by_gore.items():
+        Li=L[li-1];vs=[];fs=[];mats=[]
+        for q in qs:
+            dx=q['step']+0.012*((q['panel']-1)%2)
+            r1=q['r1']+(bh['overlap_m'] if q['r1']<Li['r1']-1e-6 else 0.0)
+            for i in range(nr+1):
+                r=q['r0']+(r1-q['r0'])*i/nr;a1=q['a1']+bh['overlap_m']/r
+                for j in range(na+1):
+                    a=q['a0']+(a1-q['a0'])*j/na;vs.append(P(radiator_zones.x_on(Li,r)+dx,r,a))
+            o=len(vs)-(nr+1)*(na+1)
+            for i in range(nr):
+                for j in range(na):
+                    fs.append((o+i*(na+1)+j,o+i*(na+1)+j+1,o+(i+1)*(na+1)+j+1,o+(i+1)*(na+1)+j));mats.append((q['panel']+k)%2)
+        obj=mesh(c,f"Radiator_Bulkhead_Layer_{li}_Gore_{k:02}",vs,fs,foil[li-1][0],kind='radiator_bulkhead')
+        obj.data.materials.append(foil[li-1][1])
+        for poly,mi in zip(obj.data.polygons,mats):poly.material_index=mi
+        obj['layer']=li;obj['gore']=k;obj['panels']=len(qs);obj['emissivity']=Li['emissivity'];obj['slope_deg']=Li['slope_deg']
+        obj['material_note']=Li['material'];obj['foil_thickness_um']=round(mem[li]['thickness_um'],1);obj['source_ref']='radiator_zoning'
+        obj['function']='V-groove thermal bulkhead gore: replaceable foil panels between the hub, the anti-flutter hoops and the rim, shingled over its neighbours (labyrinth overlap)'
+        obj['engineering_status']='PROTOTYPE; foil qualification, tension, flutter and MMOD OPEN; drawn without thickness'
+    for Li in L:
+        i=Li['index'];hx=0.006
+        parts=[cylinder_mesh(P(radiator_zones.x_on(Li,Li['r0'])+hx,Li['r0'],a),P(radiator_zones.x_on(Li,Li['r1'])+hx,Li['r1'],a),bh['tendon']['radius_m'],6)
+               for a in radiator_zones.seam_angles(s,i)]
+        obj=mesh(c,f"Radiator_Bulkhead_Layer_{i}_Battens",*_merge(parts),batten,kind='radiator_bulkhead_frame')
+        obj['function']=bh['tendon']['note'];obj['engineering_status']='PROTOTYPE';obj['source_ref']='radiator_zoning'
+        parts=[]
+        for r in [r for r in bh['panel_hoops_r_m'] if Li['r0']<r<Li['r1']]:
+            parts.append(_tube_loop([P(radiator_zones.x_on(Li,r)+hx,r,2*math.pi*m/144) for m in range(144)],bh['hoop']['radius_m'],6))
+        obj=mesh(c,f"Radiator_Bulkhead_Layer_{i}_Hoops",*_merge(parts),batten,kind='radiator_bulkhead_frame')
+        obj['function']=bh['hoop']['note'];obj['engineering_status']='PROTOTYPE';obj['source_ref']='radiator_zoning'
+        rr=bh['rim']['radius_m'];n=bh['rim']['segments'];xr=Li['x_rim']
+        obj=mesh(c,f"Radiator_Bulkhead_Layer_{i}_Rim",*_tube_loop([P(xr,Li['r1']+rr*.5,2*math.pi*m/(4*n)) for m in range(4*n)],rr,10),rimm,kind='radiator_bulkhead_frame')
+        obj['function']=bh['rim']['note']+'; the foil hems wrap over it (rolled edge)';obj['segments']=n;obj['joint_travel_m']=bh['rim']['joint_travel_m']
+        obj['engineering_status']='PROTOTYPE; segment joints slide for the layer growth (radiator_zones.construction)';obj['source_ref']='radiator_zoning'
+        parts=[]
+        for a in radiator_zones.seam_angles(s,i)[::1]:
+            ta=(0.0,-math.sin(a),math.cos(a));c0=P(xr,Li['r1']+rr*.5,a)
+            parts.append(cylinder_mesh(tuple(c0[m]-ta[m]*.22 for m in range(3)),tuple(c0[m]+ta[m]*.22 for m in range(3)),rr*1.45,10))
+        obj=mesh(c,f"Radiator_Bulkhead_Layer_{i}_Rim_Joints",*_merge(parts),batten,kind='radiator_bulkhead_frame')
+        obj['function']='sliding sleeve joint between rim segments (travel per radiator_zones.construction)';obj['engineering_status']='PROTOTYPE';obj['source_ref']='radiator_zoning'
+        xh=radiator_zones.x_on(Li,Li['r0']);rh_=Li['r0']+bh['hub']['radius_m']
+        parts=[_tube_loop([P(xh,rh_,2*math.pi*m/96) for m in range(96)],bh['hub']['radius_m'],8)]
+        for m in range(bh['hub']['brackets']):
+            a=math.radians(p['radiator_phase_deg'])+2*math.pi*(m+.5)/bh['hub']['brackets']
+            parts.append(cylinder_mesh(P(xh,casing+.01,a),P(xh,rh_,a),0.045,8))
+            ta=(0.0,-math.sin(a),math.cos(a));c0=P(xh,casing+.04,a)
+            parts.append(cylinder_mesh(tuple(c0[q]-ta[q]*.18 for q in range(3)),tuple(c0[q]+ta[q]*.18 for q in range(3)),0.035,8))
+        obj=mesh(c,f"Radiator_Bulkhead_Layer_{i}_Hub",*_merge(parts),rimm,kind='radiator_bulkhead_frame')
+        obj['function']=bh['hub']['note']+f" (radial slide {bh['hub']['slide_m']} m)";obj['engineering_status']='PROTOTYPE';obj['source_ref']='radiator_zoning'
+    for tr in radiator_zones.trusses(s):
+        a=tr['azimuth'];A=[P(x,r,a) for x,r in tr['aft']];F=[P(x,r,a) for x,r in tr['fwd']]
+        parts=[_tube_loop(A,0.05,8,False),_tube_loop(F,0.05,8,False)]
+        for m in range(len(A)):
+            parts.append(cylinder_mesh(A[m],F[m],0.03,6))
+            if m+1<len(A):parts.append(cylinder_mesh(A[m],F[m+1],0.025,6))
+        obj=mesh(c,tr['name'],*_merge(parts),cc,kind='radiator_bulkhead_frame')
+        obj['function']=s['radiators']['zones']['bulkhead']['truss']['note']+'; carries layers 1 and 2 on low-conductance standoffs, sliding at the rim'
+        obj['depth_hub_m']=round(tr['depth_hub'],3);obj['depth_rim_m']=round(tr['depth_rim'],3)
+        obj['engineering_status']='PROTOTYPE; sizing, standoffs and dynamics OPEN; behind layer 1, never in view of the 1800 K blades';obj['source_ref']='radiator_zoning'
+    L3=L[-1]
+    for k in range(3):
+        a=math.radians(p['radiator_phase_deg']+120*k);parts=[]
+        r=L3['r0']+1.0
+        while r<L3['r1']-.5:
+            x=radiator_zones.x_on(L3,r);parts.append(cylinder_mesh(P(x+0.01,r,a),P(x+bh['clearance_m'],r,a),0.02,6));r+=bh['hanger']['pitch_m']
+        obj=mesh(c,f"Radiator_Bulkhead_Layer_3_Hangers_{k+1}",*_merge(parts),rimm,kind='radiator_bulkhead_frame')
+        obj['function']=bh['hanger']['note'];obj['engineering_status']='PROTOTYPE';obj['source_ref']='radiator_zoning'
+    for g in radiator_zones.gates(s):
+        Li=L[g['layer']-1];X=lambda r:radiator_zones.x_on(Li,r)+0.035
+        loop=[P(X(g['r0']),g['r0'],g['a0']),P(X(g['r0']),g['r0'],g['a1']),P(X(g['r1']),g['r1'],g['a1']),P(X(g['r1']),g['r1'],g['a0'])]
+        parts=[_tube_loop(loop,0.03,8)]
+        for aa in (g['a0'],g['a1']):
+            parts.append(cylinder_mesh(P(X(g['r1']),g['r1'],aa),P(X(g['open_r1']),g['open_r1'],aa),0.018,6))
+        obj=mesh(c,g['name']+'_Frame',*_merge(parts),door,kind='radiator_bulkhead_gate')
+        obj['function']=s['radiators']['zones']['bulkhead']['gate']['note'];obj['layer']=g['layer']
+        obj['engineering_status']='PROTOTYPE; door drive, latch and seal OPEN; drawn closed (burn pose); the opening is not cut in the display gore'
+        obj['source_ref']='radiator_zoning'
+        vs=[P(X(r)+0.012,r,aa) for r in (g['r0'],g['r1']) for aa in (g['a0'],g['a1'])]
+        obj=mesh(c,g['name']+'_Door',vs,[(0,1,3,2)],foil[g['layer']-1][1],kind='radiator_bulkhead_gate')
+        obj['function']='gate door: a foil panel on a stiff frame, slides radially outward on its two guides to open (coast only)';obj['layer']=g['layer']
+        obj['engineering_status']='PROTOTYPE';obj['source_ref']='radiator_zoning'
+        empty(c,f"IF_{g['name'].upper()}",P(X((g['r0']+g['r1'])/2),(g['r0']+g['r1'])/2,g['az']))

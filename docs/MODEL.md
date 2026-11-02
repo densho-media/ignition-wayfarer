@@ -683,7 +683,27 @@ specular sheets from the casing (r 6.1 m) to r 37 m at 0.5, 0.8 and 1.1 m ahead 
 Nb alloy, ε 0.12), the others leaning forward with radius by 5° and 10° (polished Ti, ε 0.08; gold or silver on Ti, ε 0.05), so the gaps
 between them open to deep space at the rim and the heat they pick up leaves sideways (the V-groove principle of Planck's cryogenic
 shields). It stops every line of sight from the hot blades to the cooler sections, the rings and the tank farm. One crawler/EVA gate per
-layer at the casing opens only in the coast. First-order mass 9.0 t (sheets 0.60/0.35/0.35 kg/m², a 1.16 t frame per layer).
+layer at the casing opens only in the coast.
+
+**Construction (exterior production refinement 2026-11-01, PROTOTYPE; `radiator_zones.panels/trusses/gates/construction`,
+`[radiators.zones.bulkhead]` construction keys).** Each layer is a tension-membrane wheel, not a plate: 36 gores of polished foil (Mo/TZM
+59 µm, Ti-6Al-4V 79 µm, Ti with gold on both faces 78 µm: the thickness the areal mass stands for; the sheets are drawn without
+thickness), each gore three replaceable panels between the hub, two anti-flutter hoops (r 16 and 26 m) and the rim (324 panels in all).
+Neighbouring gores alternate high and low by 0.03 m with a 0.20 m labyrinth overlap, so no seam is a straight gap, and layer 2's seams
+are staggered half a gore against layers 1 and 3. A radial seam batten carries every seam; the rim is a segmented compression ring with
+a sliding sleeve joint per segment (0.06 m travel) and the foil hems wrap over it; the hub ring sits on 12 radial-slot sliding brackets
+on the casing (0.25 m slide). Layers 1 and 2 hang from three tapered C/C trusses in the layer 1–2 gap along the blade planes (depth
+0.21 m at the casing to 2.89 m at the rim, behind layer 1, never in the blades' view, on low-conductance standoffs); layer 3 hangs from
+the WARM aft root booms every 4 m. One gate per blade plane per layer on the SP-51 crawler rail line, 1.40 × 1.60 m, its door sliding
+radially outward (no swing room between layers), drawn closed. Checks: thermal growth 0.16 / 0.15 / 0.06 m against the 0.25 m hub slide
+(×1.5 margin), rim segment growth 34 / 32 / 11 mm against 60 mm; seam leak bound 0.02 % of a layer's incident flux (a ray passes an
+overlap only within 8.5° of grazing, into the vented V-gap); support conduction layer 1→2 about 10 W against 60 MW radiated by one face;
+the gate clears a 1.0 × 1.0 m suited or crawler envelope with 0.30 / 0.50 m to spare. The layer surfaces, spacing and emissivities are
+unchanged, so the Monte Carlo capacities stand. First-order mass 9.3 t (foils with overlaps 5.8 t, battens, hoops, rims, hubs and gates
+2.9 t, trusses 0.5 t). OPEN: foil qualification, gore tension and flutter, MMOD on layer 1, truss and standoff sizing, the gate drive and
+seal (the openings are not cut in the display gores), the drone panel-exchange tooling. The WARM/LOW sheets carry a return trunk on the
+second face, an outer edge chord, edge-on transverse ribs at the panel-module boundaries (0.025 m footprint at sheet temperature; they
+radiate as fins, no capacity change) and guided shoes across the WARM/LOW joint.
 
 Capacities come from a band-spectral Monte Carlo study (8 wavelength bands, multiple diffuse and specular bounces, solved layer
 temperatures; `references/evidence/graded_thermal_blade.json`) through a per-section net factor (WARM 0.899, LOW 0.836 of both faces ×
@@ -1642,6 +1662,12 @@ from `look.runtime_grammar`) apply the same `[production.exterior]` data. Depict
   and Explore Ship (`web/viewer/shield.js`, the file copied into the site as `shield_file` with build.json `shield`); the Blender grammar
   look builds the same formulas as nodes (`hero_preview.fractal_nodes`, Blender white noise for the hash, fixed footprint, Bump node).
   `python3 src/wayfarer/fractal_shield.py [--png out.png --centre y z --half m]` prints the fit screen and draws a preview raster.
+- **Exterior production families** (2026-11-01, depiction only): every thermal surface reads by its own finish: the HOT blades keep the
+  dark COAST depiction, WARM/LOW are matte white ceramic (`xf_ceramic`, two panel lots), the bulkhead layers polished Mo, Ti and gold
+  foil (`xf_foil_mo/ti/au`, two lots each), its trusses near-black C/C; the cryogenic vessels wear quilted aluminized MLI (`xf_mli`) and
+  the transfer lines insulation wrap (`xf_insul_line`); deck, skirts and guides structure grey, valves and cryocoolers graphite.
+  `[production.exterior.surface]` adds foil pillowing, MLI quilting and crinkle and ceramic lot jitter (`hero_preview.finish`). The
+  coatings' optical data stay in `[radiators.zones]`; a shader qualifies nothing.
 - **Wear layer** (`[production.exterior.wear]`, off for the Y155 launch baseline): handling grime on service covers, heat staining on the
   root boots and blade frames, load marks on structure and machinery, faint weathering on shells; on the ram face denser repairs, more
   tile variation and pitting. A world-space noise with a soft threshold per family; Blender and Godot use their own noise, so the
@@ -1663,6 +1689,20 @@ from `look.runtime_grammar`) apply the same `[production.exterior]` data. Depict
 (DOCKED, primary port), departure (COAST, Y155 baseline), First Ignition (1800 K hot faces at matched exposure, plume not drawn),
 survival (ram face with the wear layer) and return (wear layer). Posed and dressed in memory only; each still is captioned with its
 configuration, look, sun (presentation choice, pointing OPEN) and exposure; `p4_hero.json` records every camera.
+
+## Hero cameras
+
+Three permanent exterior cameras (exterior production refinement 2026-11-01, presentation only, PROTOTYPE; `hero_cameras.py`,
+`[look.hero_cameras]`), fitted to the ship's own stations (focus, view direction, lens, subject box and margin) and saved in the vehicle
+file as `CAM_HERO_*` in 30_CAMERAS: **CAM_HERO_ENGINEERING** (50 mm, about 460 m: the whole ship in true proportion, the ventral blade
+nearly face-on, the primary promotional view), **CAM_HERO_FORWARD** (40 mm, from the forward quarter and below: the Brow face and EYE
+wells, both rings in front of the tank farm, the spine to the bulkhead) and **CAM_HERO_PROPULSION** (35 mm, from aft and below: nozzles,
+HOT blades, bulkhead, WARM and LOW; also FIRST_IGNITION, the camera of the later ignition sequence). `check` keeps the nearest ship part
+at least a quarter of the ship length away (no swollen Brow). `presentation/hero_set.py` renders each camera as **engineering**
+(Workbench, the functional review colours carried on the materials, cavity and outlines), **cinematic** (Cycles, the grammar look with
+the production families, one sun per camera as a presentation choice, black space, AgX; in FIRST_IGNITION the hot faces and bulkhead
+layer 1 emit as grey bodies at their temperature and emissivity) and a separate **overlay** of review labels on a transparent frame,
+composited only onto the engineering image; the cinematic frames carry no labels.
 
 ## Phase 4 grammar study (S1)
 

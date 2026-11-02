@@ -132,6 +132,11 @@ close-up, regression check, MODEL/TODO and Model Status update.
   Spacecraft row 18, S&E 15 OWN-P4-LOCKED); its balance was selected at the S1 art gate 2026-10-24 (row 19), codified in S2
   (`[production.exterior]`) and completed in Phase 4 S9 (coverage, ram face, wear layer, ship name, runtime parity), with the S10 hero
   set. Remaining: the owner's review. The COAST exposure stays the owner's call (C01).
+- [ ] **Exterior production refinement (2026-11-01).** Built on `claude/project-thread-sogbnr`: the bulkhead construction, the three hero
+  cameras and the production families (docs/MODEL.md "Radiator zoning", "Hero cameras", S9). Left: the owner's review; then the next
+  milestone: ring-exterior bearing and transfer hardware close-ups, Brow panel mounting and EYE shutters in the hero views, nozzle and coil
+  housing detail, tank dome closeouts and inspection ports, the gate openings cut and the doors bound as a mechanism, the First Ignition
+  sequence on CAM_HERO_PROPULSION.
 - [ ] **S04 — Construction detail across the remaining ship (M4 method).** Casing and access panels, drive section, thrust ring and
   nozzles, shield assemblies, internal framing and equipment mounts; L2 → L3 → L4 per assembly.
   Slice 1 built 2026-10-18 (`casing_panels.py`, `[casing_panels]`): aft body casing joint straps at the frame stations, longitudinal

@@ -1,0 +1,121 @@
+{
+ "task": "exterior_production",
+ "approved": "2026-11-02T07:29Z (owner: \"explicitly authorizes squashing the current exterior-production branch onto main\")",
+ "brief": "2026-11-01T21:39Z, thread \"Refine Wayfarer exterior for production\"",
+ "base": "1f9eba1",
+ "branch": "claude/project-thread-sogbnr",
+ "branch_head": "c272380",
+ "study_restore": "git show c272380:work/exterior-production/<file> (survey.py study stills, make_review.py review-file builder, NOTES.md)",
+ "baseline": "references/baseline_exterior_production",
+ "full_pipeline": "runs/20261101T230543Z-pipeline PASS (175 tests, whole-ship inspection, geometry diff inside expected prefixes)",
+ "bulkhead_construction": {
+  "layers": [
+   {
+    "layer": 1,
+    "growth_m": 0.16201488,
+    "slide_needed_m": 0.24302232000000001,
+    "rim_joint_growth_m": 0.033859108236009676,
+    "rim_joint_needed_m": 0.05078866235401451
+   },
+   {
+    "layer": 2,
+    "growth_m": 0.15136365,
+    "slide_needed_m": 0.227045475,
+    "rim_joint_growth_m": 0.03163313276130863,
+    "rim_joint_needed_m": 0.04744969914196294
+   },
+   {
+    "layer": 3,
+    "growth_m": 0.05486604,
+    "slide_needed_m": 0.08229906,
+    "rim_joint_growth_m": 0.011466324493412186,
+    "rim_joint_needed_m": 0.01719948674011828
+   }
+  ],
+  "seams": {
+   "pass_angle_deg": 8.530765609948133,
+   "seam_length_m": [
+    1376.2937829015425,
+    1376.2937829015425,
+    1376.2937829015425
+   ],
+   "slot_aperture_fraction": [
+    0.009868400815237734,
+    0.009830848570784092,
+    0.009718477632678116
+   ],
+   "grazing_fraction_diffuse": 0.022004889975550126,
+   "leak_bound_fraction": [
+    0.0002171530741739355,
+    0.00021632674116639814,
+    0.0002138540310369268
+   ]
+  },
+  "conduction": {
+   "standoff_G_W_K": 0.0013333333333333335,
+   "paths": 39,
+   "layer1_to_2_W": 10.374,
+   "layer1_radiated_one_face_W": 59825254.20193898,
+   "fraction": 1.734050300059364e-07
+  },
+  "gate": {
+   "clear_w_m": 0.29999999999999993,
+   "clear_d_m": 0.5000000000000001
+  }
+ },
+ "bulkhead_mass": {
+  "layers": [
+   {
+    "layer": 1,
+    "gross_area_m2": 4459.200436704659,
+    "sheet_t": 2.6755202620227956,
+    "frame_t": 0.9644263103256524
+   },
+   {
+    "layer": 2,
+    "gross_area_m2": 4475.182414213574,
+    "sheet_t": 1.5663138449747507,
+    "frame_t": 0.9644263103256524
+   },
+   {
+    "layer": 3,
+    "gross_area_m2": 4523.744481156529,
+    "sheet_t": 1.583310568404785,
+    "frame_t": 0.9644263103256524
+   }
+  ],
+  "trusses_t": 0.5388945056614632,
+  "hangers_t": 0.036,
+  "total_t": 9.293318112040751
+ },
+ "hero_cameras": [
+  {
+   "name": "CAM_HERO_ENGINEERING",
+   "lens_mm": 50.0,
+   "location": [
+    215.48595054515016,
+    -402.9719010903003,
+    -96.71325626167206
+   ]
+  },
+  {
+   "name": "CAM_HERO_FORWARD",
+   "lens_mm": 40.0,
+   "location": [
+    177.28462348974597,
+    -255.94104405005845,
+    -102.37641762002337
+   ]
+  },
+  {
+   "name": "CAM_HERO_PROPULSION",
+   "lens_mm": 35.0,
+   "location": [
+    -274.9799019479619,
+    -199.3514691669378,
+    -89.12183327463102
+   ]
+  }
+ ],
+ "notes": "# Exterior production refinement (owner brief 2026-11-01 21:39Z, thread \"Refine Wayfarer exterior for production\")\n\nBranch `claude/project-thread-sogbnr` from main 1f9eba1 (longitudinal tanks + Graded Thermal Blade + first-ignition light budget).\nThree stages: A the thermal bulkhead's construction, B three permanent hero cameras, C an exterior detail and material pass.\nEvery new choice here is PROTOTYPE (Claude under the owner's delegation); nothing changes canon, the operating point or a physical budget.\n\n## A. Thermal bulkhead construction\n\n**Function (unchanged):** three specular sheets at the hot blade front (offsets 0.5 / 0.8 / 1.1 m, slopes 0 / 5 / 10 deg, eps 0.12 /\n0.08 / 0.05) stop every line of sight from the 1800 K blades to WARM, LOW, the rings and the tank farm, and vent the heat they pick up\nsideways to space (V-groove). Layer geometry, spacing, emissivities, areal masses and the study's net factors are untouched.\n\n**Fixed constraints:** full diameter (casing r 6.1 m to r 37 m, the shield shadow); no member aft of layer 1 (nothing structural may see\nthe blades); no primary thrust load into the bulkhead; the crawler/EVA gate per layer at the casing (closed under thrust); the\ndistrict length (44.5 m) and every station forward.\n\n**Design (was a revolved plate per layer; now a tension-membrane wheel):**\n\n| Element | Choice | Why |\n| --- | --- | --- |\n| Gores | 36 per layer, each 3 replaceable panels between hub, anti-flutter hoops (r 16 / 26 m) and rim: 324 panels | the 36-gore starting point of the GTB study; panel size (largest about 6.5 x 11 m) fits a drone exchange |\n| Seams | gores alternate high/low by 0.03 m with a 0.20 m labyrinth overlap; layer 2 seams staggered half a gore | no straight gap; a ray through one seam meets solid foil on the next layer |\n| Foil | Mo/TZM 59 um (L1), Ti-6Al-4V 79 um (L2), Ti 78 um with gold both faces (L3), from areal mass / density | the drawn sheets have no thickness; this is the thickness they stand for, so mass and model agree |\n| Seam battens | one radial tendon per seam (36 per layer), clip track for the gore edges | gores hang on sliding clips, carry only their own tension |\n| Rim | segmented compression ring, 36 segments, sliding sleeve joint each (0.06 m travel) | the foil hems wrap over it (rolled edge) |\n| Hub | ring on 12 radial-slot sliding brackets to the casing (0.25 m slide) | layer growth is taken at the hub, the casing stays cool |\n| Trusses | 3 tapered C/C trusses in the layer 1-2 gap along the blade planes, depth 0.21 m at the casing to 2.89 m at the rim | where the blades are edge-on anyway; behind layer 1, never in the blades' view; depth grows with the cantilever moment |\n| Layer 3 | hangers every 4 m from the WARM aft root boom (already 0.4 m ahead of layer 3, parallel to it) | no extra structure |\n| Gates | per blade plane per layer on the SP-51 crawler rail line, 1.40 x 1.60 m, door slides radially outward on two guides | 0.3 m between layers leaves no swing space; aligned along X so the three openings form one passage |\n\n**Checks (radiator_zones.construction, check):**\n\n- Thermal growth from 300 K over the radial span: L1 0.162 m, L2 0.151 m, L3 0.055 m; hub slide 0.25 m >= 1.5 x growth (L1 needs 0.243 m:\n  tight but inside). Rim segment growth 34 / 32 / 11 mm; joint travel 60 mm >= 1.5 x.\n- Seam leakage: a ray passes a shingled overlap only within atan(0.03/0.20) = 8.5 deg of grazing. Slot aperture about 1.0 % of each\n  layer (1,376 m of seam x 0.03 m), diffuse fraction that close to grazing 2.2 %: bound 0.02 % of the flux on a layer, inside the\n  study's +-1-2 % ray noise. A ray that passes enters the vented V-gap, which the Monte Carlo already solved as inter-layer exchange,\n  and the next layer's seams are staggered. The Monte Carlo was not rerun: the layer surfaces, spacing, slopes and emissivities are\n  unchanged, so its assumptions hold.\n- Support conduction layer 1 -> 2 through the truss standoffs (39 paths, two zirconia/C-C standoffs in series, G 1.3 mW/K each): 10 W,\n  against 60 MW radiated by one face of layer 1 (2e-7). The study's \"thermally floating sheets\" stays valid.\n- Shield-shadow and envelope: everything stays inside r 37 m (rim tube outer edge r 37.09 m, 0.09 m past the sheet edge, inside the 8 m\n  shadow margin).\n- Gate fit: 1.40 x 1.60 m opening against a 1.00 x 1.00 m passing envelope (suited crew with PLSS, ISS hatch class; DR-EVA-02 crawler\n  0.60 m) plus 0.05 m margins: 0.30 / 0.50 m spare.\n- Mass: foils 5.83 t (gross area with overlaps), battens, hoops, rims, hubs and gates 2.89 t, trusses 0.54 t, hangers 0.04 t:\n  **9.29 t** (8.95 t before; +0.34 t, the overlaps and the explicit hardware).\n- Capacities unchanged: WARM 6.16 MW (+23 %), LOW 1.26 MW (+26 %) at maximum drive (radiator_zones.placed; check PASS).\n\n**OPEN (unchanged or new):** foil qualification at 1200 K over years, gore tension and flutter during ignition transients, MMOD\nperforation of layer 1, truss and standoff sizing, gate door drive/latch/seal, the gate openings are not cut in the display gores (the\ndoor is drawn closed, the burn pose), drone exchange tooling for a panel.\n\n## B. Hero cameras\n\n`hero_cameras.py` + `[look.hero_cameras]`: focus, direction, lens and fit box from the ship's own stations; poses saved as CAM_HERO_* in\nthe vehicle file (30_CAMERAS). `presentation/hero_set.py` renders each in engineering (Workbench, functional colours), cinematic (Cycles,\ngrammar + production families, one sun, black space) and a separate label overlay; FIRST_IGNITION for the propulsion camera (hot faces and\nlayer 1 as grey bodies). check(): nearest ship part >= 0.25 x ship length (no swollen Brow).\n\n| Camera | Lens | Distance | Purpose |\n| --- | --- | --- | --- |\n| CAM_HERO_ENGINEERING | 50 mm | 461 m | whole ship, true proportions, ventral blade nearly face-on |\n| CAM_HERO_FORWARD | 40 mm | ~280 m | Brow, EYE wells, tank farm, rings, spine to the bulkhead |\n| CAM_HERO_PROPULSION | 35 mm | 312 m | nozzles, HOT blades, bulkhead, WARM/LOW; the First Ignition camera |\n\n## C. Detail and materials\n\n- WARM/LOW sheets: return trunk on the other face, outer edge chord, transverse ribs at the panel-module boundaries (edge-on, 0.025 m\n  footprint, at sheet temperature, so they act as fins: no capacity change claimed or needed), guided shoes across the WARM/LOW joint.\n- Materials (`[production.exterior.families]`, depiction only): WARM/LOW matte white ceramic (AZ-93 family) in two panel lots; bulkhead\n  foils polished Mo, Ti and gold (two lots each); C/C trusses near-black; cryogenic vessels quilted aluminized MLI; insulated transfer\n  lines; deck and skirts structure grey; valves and cryocoolers graphite machinery. Surface treatments (`[production.exterior.surface]`):\n  foil pillowing, MLI quilting and crinkle, ceramic lot jitter. The coatings' optical data stay in `[radiators.zones]`; a shader\n  qualifies nothing. HOT blades keep the dark COAST depiction.\n- Not changed in this pass (next milestone): ring exteriors, Brow/EYE, drive and nozzle detail, markings (they already carry the Phase 4\n  S3-S6 packs).\n"
+}
