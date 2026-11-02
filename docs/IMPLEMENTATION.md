@@ -9,6 +9,8 @@ implementation environment; check the installed runtime when troubleshooting.
 
 Run everything from the project root. System `python3` (3.14) runs the pure-Python layer. Blender 5.2.2 at `/snap/bin/blender`, with its bundled Python 3.13, runs everything that imports `bpy`. There is no venv, package install or build tool.
 
+Cloud sessions (Claude Code on the web) install the toolchain themselves: the SessionStart hook `.claude/hooks/session-start.sh` runs `tools/cloud_toolchain.sh`, which downloads the CI-pinned Blender (`.github/workflows/web-explorer.yml`), the Godot editor pinned in `tools/web_play.py` and the required MPFB dependencies, checks their SHA sums, caches them under `~/.cache/wayfarer` and links `/snap/bin/blender` and `/snap/bin/godot-4`. A cached run takes about a second; the first takes about two minutes. On a workstation the script can be run by hand (`WAYFARER_BIN_DIR` picks another link folder, `WAYFARER_SKIP_CHARACTERS=1` leaves out MPFB).
+
 ```bash
 python3 src/wayfarer/spec.py                      # validate inputs + print derived quantities; run before any build
 python3 -m unittest discover -s tests              # owner-number and invariant tests (132 tests, ~57 s measured 2026-10-14)
