@@ -2227,9 +2227,36 @@ truss = { count = 3, chord_kg_m = 2.0, web_kg_m = 1.2, bay_m = 2.5, clearance_m 
 hanger = { pitch_m = 4.0, kg = 1.5, note = "layer 3 hanger from the WARM aft root boom, sliding clevis" }
 standoff = { k_W_mK = 2.0, area_m2 = 1.0e-4, length_m = 0.15, per_truss_layer = 13, note = "zirconia / C-C low-conductance standoff, one per truss bay per layer" }
 slide_margin = 1.5                  # radial slide travel >= margin x the layer's thermal growth
-gate = { tangential_m = 1.40, radial_m = 1.60, offset_m = 2.30, frame_kg = 25.0, note = "one gate per blade plane per layer on the SP-51 crawler rail line; the door panel slides radially outward on guides (no swing space between layers), closed under thrust" }
+gate = { tangential_m = 1.40, radial_m = 1.60, offset_m = 2.30, frame_kg = 25.0, note = "one gate per blade plane per layer on the SP-51 crawler rail line: a notch cut up from the layer's inner edge (the rail line runs at the casing, inside the layer plane), closed by a door that slides radially on two guides on the layer's forward face (no swing space between layers); closed and latched under thrust" }
 gate_user_m = [1.00, 1.00]          # passing envelope (width, depth): a suited crew member with PLSS (ISS hatch class 1.27 m clear) or a DR-EVA-02 crawler 0.60 m
 gate_margin_m = 0.05                # eva_suit suit_margin_m
+# Gate mechanism (thermal bulkhead mechanisms 2026-11-02, PROTOTYPE, Claude under the owner's delegation; radiator_zones.gate_parts,
+# gate_checks, interlock). One representative mechanism, the same at all nine gates (3 blade planes x 3 layers). A rigid yoke (C/C box
+# section) frames the notch and carries the hub ring's hoop load round it. The door, a foil face of the layer's own metal on a stiff
+# frame, sits forward of the layer (its cold side; the hot side sees only foil) and overlaps the notch by overlap_m on both flanks and
+# the top at standoff_m: a radiation labyrinth like the gore seams. Its bottom edge closes to the casing gap like the rest of the layer.
+# It slides radially outward on two guides to park above the notch. One drive per blade plane, on the casing forward of layer 3 (cold
+# side), turns a shaft along X in the casing gap (where no layer reaches) with a capstan per layer, so the three doors of a stack move
+# together; a constant-force spring closes them on power loss; two spring pawls per door latch it closed. Ceramic rollers on TZM guides,
+# no lubricant: the doors move only when the bulkhead is cold (interlock).
+gate_mechanism = { overlap_m = 0.15, standoff_m = 0.02, door_depth_m = 0.04, guide_depth_m = 0.06, guide_radius_m = 0.02, yoke_width_m = 0.12, yoke_kg_m = 2.0, door_kg_m2 = 4.0, park_gap_m = 0.10, shaft_radius_m = 0.025, drive_m = [0.50, 0.40, 0.30], latches = 2, spring_N = 40.0, close_s = 60.0, slide_margin = 1.5 }
+# SP-51 bridge rail: the crawler track stops crawler_rail_end_gap_m short of the hot blade front, the bulkhead has no rail through it, so a
+# telescoping two-rail bridge stowed in a cassette on the casing forward of layer 3 runs aft through the three open notches to the track
+# end. While extended it lies in every door's closing path (its bottom edge closes below the rail line), so a door cannot close on a crawler
+# or crew member's track; the drive interlock needs it stowed.
+bridge = { sections = 3, overlap_m = 0.15, land_m = 0.30, cassette_m = [0.45, 0.25], kg_m = 3.0 }
+# Interlock (operating rule, PROTOTYPE): the gates open only with the drive safed (not armed, no thrust) and every HOT blade measured at
+# or below the WARM section temperature (open gates then cannot heat WARM: no heat moves uphill, thermal_loop_separation); crew enter only
+# below the temperature at which the blade's IR absorbed by a suit next to it equals the sunlight a suit is designed to absorb
+# (alpha_solar x 1361 W/m2; EMU-class outer layer, view factor 0.5 from a large plane beside the rail line). Arming the drive needs all
+# nine doors closed and latched, every bridge stowed and no crawler or crew past the SP-51 track end.
+interlock = { solar_W_m2 = 1361.0, suit_alpha_solar = 0.18, suit_eps_ir = 0.84, view_factor = 0.5, open_leak_max_of_low = 0.02 }
+# Replaceable panel mount: each panel hangs on clips at clip_pitch_m along its two hems in the seam battens' continuous clip track; one
+# fixed clip at the centre of its inner edge, every other clip slides radially in the track and floats tangentially by clip_float_m
+# (foil grows against the near-zero-CTE C/C batten); a constant-force tensioner at each outer corner keeps the foil flat through the
+# growth. Panels are exchanged only in the coast with the bulkhead cold: L1 from its aft face, L3 from its forward face, L2 through the
+# V-gap from the rim (the gap opens to about 3 m there). Exchange tooling and the drone class OPEN.
+panel_mount = { clip_pitch_m = 0.50, clip_float_m = 0.05, tensioner_travel_m = 0.12, batten_cte = 0.0, cold_T_K = 150.0, margin = 1.5, clip_kg = 0.03 }
 # Foil material per layer (handbook values, mean CTE from 300 K to the layer temperature): density kg/m3, CTE 1/K, study temperature K.
 foil = [
   { metal = "Mo (TZM)", density = 10220.0, cte = 5.8e-6, T_K = 1204.0 },

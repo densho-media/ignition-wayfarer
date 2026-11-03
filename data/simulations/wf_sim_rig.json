@@ -3,7 +3,7 @@
  "contract_version": 43,
  "asset_id": "WF.WAYFARER.001",
  "spec_schema": 5,
- "spec_hash": "f235a8c6c0757b41b6b2721afb6f454bc2f23cf9e2f70bdbd8b82c19e1959d8d",
+ "spec_hash": "756bbc2e041cca48970847bb24cd78cfa74b6d27c225d616580421592b7922ae",
  "source_map_hash": "e3fce6ca39b9e490d922a2575401d7bdff240515f613614cc960b78c5b629b4f",
  "generated_by": "WF_PROXY_P1_001",
  "coordinates": {
@@ -19591,7 +19591,7 @@
   "file": "data/simulations/wf_first_ignition_timeline.json",
   "schema": "WF_FLIGHT_TIMELINE",
   "timeline_version": 2,
-  "sha256": "4131b9d52630a7a2cb63e60005282049c75a56a4b967fe3fc0afdaa98a8c4f2f",
+  "sha256": "4df4d4e3132ca4661b1dc6ab596e552a903002cd11e13a9b38c0bb626e969e9e",
   "status": "PROTOTYPE",
   "fps": 24,
   "frame_range": [

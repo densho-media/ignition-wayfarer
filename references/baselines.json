@@ -1,6 +1,6 @@
 {
   "purpose": "Current production geometry baseline for tools/pipeline.py fingerprint diffs. Written only by `tools/workflow.py baseline`.",
-  "current": "references/baseline_habitat_ring_refinement",
+  "current": "references/baseline_thermal_bulkhead_mechanisms",
   "history": [
     {
       "baseline": "references/baseline_fwd_eye_r30_hex",
@@ -65,6 +65,10 @@
     {
       "baseline": "references/baseline_propulsion_detail",
       "replaced_utc": "2026-11-02T14:24:21Z"
+    },
+    {
+      "baseline": "references/baseline_habitat_ring_refinement",
+      "replaced_utc": "2026-11-02T15:29:07Z"
     }
   ]
 }

@@ -154,17 +154,175 @@ def trusses(s):
     return out
 
 
+def _local(u, v, az):
+    """Point in the layer plane's local gate frame: u along the radial direction at azimuth az, v tangential. Returns (radius, azimuth)."""
+    return math.hypot(u, v), az+math.atan2(v, u)
+
+
+def rail_line(s):
+    """SP-51 crawler rail line at the bulkhead: radius (casing + standoff), rail gauge and the line's azimuth per blade plane, and the
+    X where the track on the hot blade ends (crawler_rail_end_gap_m short of the blade front; survival_fit's track)."""
+    import thermal_geometry
+    q = s['survival']; rr = thermal_geometry.casing_radius(s)+q['crawler_rail_standoff_m']
+    d = thermal_geometry.blade_of(s)
+    return dict(r=rr, gauge=q['crawler_rail_gauge_m'], rail_radius=q['crawler_rail_radius_m'], x_track_end=d['front_x_m']-q['crawler_rail_end_gap_m'],
+                az=[math.radians(s['prototype']['radiator_phase_deg']+120*k)+q['crawler_rail_offset_m']/rr for k in range(3)])
+
+
 def gates(s):
-    """One gate per blade plane per layer at the casing, centred on the SP-51 crawler rail line (offset tangentially from the blade plane):
-    azimuth span, radial span and the slid-open position of its door (radially outward, on the layer)."""
-    b = bulkhead_cfg(s); g = b['gate']; out = []
+    """One gate per blade plane per layer, centred on the SP-51 rail line: a notch cut up from the layer's inner edge, u from r0 to
+    r0 + radial_m, its flanks on radial lines (like the gore seams) at az +- da, tangential_m wide at the bottom chord and wider at the
+    top. The door's closed and parked spans are in gate_parts."""
+    b = bulkhead_cfg(s); g = b['gate']; rl = rail_line(s); out = []
     for L in layers(s):
-        r0 = L['r0']+b['hub']['radius_m']*2; r1 = r0+g['radial_m']; rm = (r0+r1)/2
+        u0 = L['r0']; u1 = u0+g['radial_m']; um = (u0+u1)/2; w = g['tangential_m']
         for k in range(3):
-            az = math.radians(s['prototype']['radiator_phase_deg']+120*k)+g['offset_m']/rm; da = g['tangential_m']/2/rm
-            out.append(dict(name=f"Radiator_Bulkhead_Gate_{L['index']}_{k+1}", layer=L['index'], blade=k+1, a0=az-da, a1=az+da, az=az, r0=r0, r1=r1,
-                            open_r0=r1+0.1, open_r1=r1+0.1+g['radial_m']))
+            az = rl['az'][k]; da = math.asin(w/2/u0)
+            out.append(dict(name=f"Radiator_Bulkhead_Gate_{L['index']}_{k+1}", layer=L['index'], blade=k+1, az=az, a0=az-da, a1=az+da, da=da,
+                            r0=u0, r1=u1, u0=u0, u1=u1, w=w, w_top=2*u1*math.tan(da), area_m2=da*(u1*u1-u0*u0)))
     return out
+
+
+def gate_parts(s):
+    """The representative gate mechanism, per gate (local u/v in the layer plane at the gate azimuth; dx forward of the layer surface):
+    the notch, the yoke (two legs and a head beam framing it, feet on the hub), the door closed and parked, the two guides, the two latch
+    pawls, the drive shaft line in the casing gap with its capstan, and per blade plane the drive unit and the SP-51 bridge rail."""
+    import thermal_geometry
+    b = bulkhead_cfg(s); g = b['gate']; m = b['gate_mechanism']; br = b['bridge']; rl = rail_line(s)
+    casing = thermal_geometry.casing_radius(s); w = g['tangential_m']; ov = m['overlap_m']; yw = m['yoke_width_m']
+    L = layers(s); out = []
+    for gt in gates(s):
+        Li = L[gt['layer']-1]
+        tn = math.tan(gt['da']); door_u0 = casing+0.02; door_u1 = gt['u1']+ov
+        hv = lambda u: u*tn+ov                                   # door half-width at u: the flank line plus the overlap
+        travel = gt['u1']+m['park_gap_m']-door_u0
+        gv = hv(door_u1)+m['guide_radius_m']+0.02
+        out.append(dict(gt, layer_cfg=Li,
+                        yoke=dict(legs_v=[-(w/2+yw/2), w/2+yw/2], u0=gt['u0'], u1=gt['u1']+yw, head_u=gt['u1']+yw/2, width=yw, da=gt['da']),
+                        door=dict(u0=door_u0, u1=door_u1, v0=hv(door_u0), v1=hv(door_u1), v=hv(door_u1), dx=m['standoff_m'], depth=m['door_depth_m'],
+                                  travel=travel, park_u0=door_u0+travel, park_u1=door_u1+travel, area_m2=(door_u1-door_u0)*(hv(door_u0)+hv(door_u1))),
+                        guides=dict(v=[-gv, gv], u0=door_u0, u1=door_u1+travel+0.05, dx=m['standoff_m']+m['door_depth_m']/2, radius=m['guide_radius_m']),
+                        latches=[(gt['u0']+0.10, -(w/2+0.06)), (gt['u0']+0.10, w/2+0.06)][:m['latches']],
+                        shaft=dict(u=casing+b['casing_gap_m']/2, v=-(w/2+yw/2), radius=m['shaft_radius_m'])))
+    # per blade plane: drive unit and bridge rail on the casing, forward of layer 3's door stack at the rail line
+    L3 = L[-1]; stack = m['standoff_m']+m['door_depth_m']+m['guide_radius_m']*2
+    x_l3 = x_on(L3, rl['r'])+stack+0.05
+    dl, dw, dh = m['drive_m']; cl, ch = br['cassette_m']
+    n = br['sections']; x_end = rl['x_track_end']-br['land_m']
+    sec = (x_l3+cl-x_end+(n-1)*br['overlap_m'])/n
+    planes = []
+    for k in range(3):
+        planes.append(dict(blade=k+1, az=rl['az'][k],
+                           drive=dict(x0=x_l3, x1=x_l3+dl, v=-(w/2+yw/2), size=m['drive_m']),
+                           bridge=dict(x_stowed=(x_l3, x_l3+sec+0.10), x_extended=(x_end, x_l3+cl), section_m=sec, sections=n,
+                                       rails_v=[-rl['gauge']/2, rl['gauge']/2], u=rl['r'], cassette=(x_l3, x_l3+sec+0.10, ch))))
+    return dict(gates=out, planes=planes, rail=rl, casing=casing)
+
+
+def hub_bracket_angles(s):
+    """Hub bracket azimuths (12 per layer, even pitch) with any bracket that would fall in a gate notch moved under the near yoke leg:
+    the yoke's foot bears on it, so the hub's support stays at every 30 deg pitch but none blocks the passage."""
+    b = bulkhead_cfg(s); n = b['hub']['brackets']; g = b['gate']; m = b['gate_mechanism']; r0 = inner_radius_m(s); rl = rail_line(s)
+    half = (g['tangential_m']/2+m['yoke_width_m']+0.10)/r0; leg = (g['tangential_m']/2+m['yoke_width_m']/2)/r0
+    out = []
+    for i in range(n):
+        a = math.radians(s['prototype']['radiator_phase_deg'])+2*math.pi*(i+.5)/n
+        for az in rl['az']:
+            d = (a-az+math.pi) % (2*math.pi)-math.pi
+            if abs(d) < half:
+                a = az+(leg if d > 0 else -leg)
+        out.append(a)
+    return out
+
+
+def gate_checks(s):
+    """Closed and open states of the representative gate (first order, PROTOTYPE):
+    - closed labyrinth: a ray passes the door overlap only within atan(standoff/overlap) of grazing; slot aperture (three door edges x
+      standoff, three gates per layer) as a fraction of the layer and the diffuse fraction that close to grazing bound the leak. Notches
+      are aligned along X (one straight passage), so the labyrinth matters more than at the staggered seams: a ray leaving a door edge at
+      that angle runs gap / tan(angle) sideways before the next layer, far past the next door's overlap, onto solid foil;
+    - door growth (door metal at the layer temperature against the C/C yoke) against the overlap, and the closed door's bottom edge staying
+      below the layer edge when the hub has grown outward (the door shuts the casing gap like the layer does);
+    - door stack (standoff, door, guides) inside the gap to the next layer at the notch;
+    - the passing envelope through the notch (crawler on the rails, suited crew), and the parked door clear of the notch;
+    - the bridge rail: extended it lies in every closed door's path (bottom edge below the rail line)."""
+    b = bulkhead_cfg(s); m = b['gate_mechanism']; gp = gate_parts(s); L = layers(s); out = dict(layers=[])
+    ang = math.atan(m['standoff_m']/m['overlap_m']); graze = math.sin(ang)**2
+    for Li, f in zip(L, b['foil']):
+        g = next(x for x in gp['gates'] if x['layer'] == Li['index']); d = g['door']
+        slot = 3*(2*(g['u1']-g['u0'])/math.cos(g['da'])+g['w_top'])*m['standoff_m']
+        dT = f['T_K']-300.0
+        growth = max(d['u1']-d['u0'], 2*d['v1'])*f['cte']*dT
+        hub_growth = Li['r0']*f['cte']*dT
+        nxt = L[Li['index']] if Li['index'] < len(L) else None
+        gap = (x_on(nxt, g['u0'])-x_on(Li, g['u0'])) if nxt else b['clearance_m']
+        stack = m['standoff_m']+m['door_depth_m']+2*m['guide_radius_m']
+        out['layers'].append(dict(layer=Li['index'], slot_fraction=slot/Li['area_m2'], leak_bound_fraction=slot/Li['area_m2']*graze,
+                                  door_growth_m=growth, overlap_needed_m=growth*m['slide_margin'], hub_growth_m=hub_growth,
+                                  door_bottom_hot_u=d['u0']+hub_growth, layer_edge_u=Li['r0'], gap_m=gap, stack_m=stack,
+                                  lateral_run_m=(gap if nxt else 0)/math.tan(ang), park_clear_m=d['park_u0']-g['u1']))
+    g = gp['gates'][0]; rl = gp['rail']; u_cr = s['survival']['crawler_m']; usr = b['gate_user_m']; mg = b['gate_margin_m']
+    crawler_top = rl['r']+rl['rail_radius']+u_cr[2]
+    out['passage'] = dict(angle_deg=math.degrees(ang), grazing_fraction=graze, notch_w=g['w'], notch_top_u=g['u1'],
+                          crawler_clear_w=g['w']-u_cr[1]-2*mg, crawler_clear_top=g['u1']-crawler_top-mg,
+                          crew_clear_w=g['w']-usr[0]-2*mg, crew_clear_top=g['u1']-(gp['casing']+usr[1])-mg,
+                          bridge_blocks_door=g['door']['u0'] < rl['r']-rl['rail_radius'])
+    pl = gp['planes'][0]['bridge']
+    out['bridge'] = dict(section_m=pl['section_m'], extended_m=pl['x_extended'][1]-pl['x_extended'][0], track_end_x=rl['x_track_end'])
+    return out
+
+
+def interlock(s):
+    """Gate operating rule (PROTOTYPE): opening permitted only with the drive safed and every HOT blade at or below t_open_K (the WARM
+    section temperature: the hot blades then cannot heat WARM through the open notches, no heat moves uphill), crew entry at or below
+    t_crew_K (IR from the blade beside the rail line absorbed by a suit no more than the sunlight it is designed to absorb). The open-
+    passage bound fills the three aligned notch apertures with blade surface at temperature T (an upper bound: in fact the passage sees
+    the blade mostly edge-on and the casing). At maximum drive that bound shows why the gates are closed under thrust."""
+    b = bulkhead_cfg(s); il = b['interlock']; eb = s['radiators']['emissivity']['value']
+    secs = {x['id']: x for x in placed(s)}; T_open = secs['WARM']['T_K']
+    A = sum(g['area_m2'] for g in gates(s) if g['layer'] == 1)
+    leak = lambda T: A*eb*SIGMA*T**4
+    T_crew = (il['suit_alpha_solar']*il['solar_W_m2']/(il['suit_eps_ir']*il['view_factor']*eb*SIGMA))**0.25
+    T_hot = s['radiators']['temperature']['value']
+    margins = {k: v['capacity_W']-v['load_W'] for k, v in secs.items()}
+    return dict(t_open_K=T_open, t_crew_K=T_crew, aperture_m2=A, open_leak_W=leak(T_open), open_leak_limit_W=il['open_leak_max_of_low']*secs['LOW']['load_W'],
+                full_power_leak_W=leak(T_hot), margins_W=margins, crew_flux_absorbed_W_m2=il['suit_eps_ir']*il['view_factor']*eb*SIGMA*T_crew**4,
+                rule=['open: drive safed (not armed, no thrust) and every HOT blade <= t_open_K',
+                      'crew past the SP-51 track end: every HOT blade <= t_crew_K',
+                      'arm the drive: all nine doors closed and latched (two pawls each), every bridge stowed, nobody past the track end',
+                      'power loss: the constant-force spring closes the doors after the bridge has retracted (an extended bridge stops a door)'])
+
+
+def panel_mount(s):
+    """Replaceable panel interface per layer: the longest panel's radial growth against the near-zero-CTE batten (hot) and its shrink
+    from assembly (cold), both against the tensioner travel; the widest gore's tangential growth per hem against the clip float; clip
+    count and mass; the face the panel is exchanged from."""
+    b = bulkhead_cfg(s); pm = b['panel_mount']; out = []; n = b['gores']
+    faces = {1: 'aft face, from the hot-blade side in the coast', 2: 'through the V-gap from the rim', 3: 'forward face, from the WARM side'}
+    by = {}
+    for q in panels(s):
+        by.setdefault(q['layer'], []).append(q)
+    for Li, f in zip(layers(s), b['foil']):
+        qs = by[Li['index']]; longest = max(q['r1']-q['r0'] for q in qs)
+        dcte = f['cte']-pm['batten_cte']
+        hot = longest*dcte*(f['T_K']-300.0); cold = longest*f['cte']*(300.0-pm['cold_T_K'])
+        wide = 2*math.pi*Li['r1']/n; tang = wide*dcte*(f['T_K']-300.0)/2
+        clips = sum(2*math.ceil((q['r1']-q['r0'])/pm['clip_pitch_m']) for q in qs)
+        out.append(dict(layer=Li['index'], longest_panel_m=longest, hot_growth_m=hot, cold_shrink_m=cold, tensioner_needed_m=(hot+cold)*pm['margin'],
+                        tangential_per_hem_m=tang, float_needed_m=tang*pm['margin'], clips=clips, clip_t=clips*pm['clip_kg']/1000,
+                        exchange_from=faces.get(Li['index'], 'OPEN')))
+    return out
+
+
+def gate_mass_t(s):
+    """Per layer: three doors, yokes, guides; per blade plane: drive unit (30 kg allowance) and bridge rail. PROTOTYPE allowances."""
+    b = bulkhead_cfg(s); m = b['gate_mechanism']; gp = gate_parts(s); per = {}
+    for g in gp['gates']:
+        y = g['yoke']; d = g['door']; gd = g['guides']
+        kg = d['area_m2']*m['door_kg_m2']+(2*(y['u1']-y['u0'])+(2*y['legs_v'][1]+y['width']))*m['yoke_kg_m']+2*(gd['u1']-gd['u0'])*1.0
+        per[g['layer']] = per.get(g['layer'], 0.0)+kg/1000
+    planes = sum(0.030+(p['bridge']['section_m']*p['bridge']['sections']*2*b['bridge']['kg_m'])/1000 for p in gp['planes'])
+    return dict(layers=per, planes_t=planes, total_t=sum(per.values())+planes)
 
 
 def construction(s):
@@ -214,13 +372,15 @@ def bulkhead_mass_t(s):
         sheet = gross*Li['areal_kg_m2']/1000
         span = Li['r1']-Li['r0']; hoops = [r for r in b['panel_hoops_r_m'] if Li['r0'] < r < Li['r1']]
         frame = (b['gores']*span*b['tendon']['kg_m']+sum(2*math.pi*r for r in hoops)*b['hoop']['kg_m']+2*math.pi*Li['r1']*b['rim']['kg_m']
-                 + 2*math.pi*Li['r0']*b['hub']['kg_m']+3*b['gate']['frame_kg'])/1000
+                 + 2*math.pi*Li['r0']*b['hub']['kg_m'])/1000
         out.append(dict(layer=Li['index'], gross_area_m2=gross, sheet_t=sheet, frame_t=frame))
     tr = b['truss']; L1 = layers(s)[0]; span = L1['r1']-L1['r0']
     web = sum(math.hypot(r2-r1, (f2-a1)) for t in trusses(s) for (a1, r1), (f2, r2) in zip(t['aft'], t['fwd'][1:]))
     truss_t = (tr['count']*2*span*tr['chord_kg_m']+web*tr['web_kg_m']+sum(len(t['aft'])*(t['fwd'][0][0]-t['aft'][0][0]+0.5) for t in trusses(s))*tr['web_kg_m'])/1000
     hang_t = 3*round(span/b['hanger']['pitch_m'])*b['hanger']['kg']/1000
-    return dict(layers=out, trusses_t=truss_t, hangers_t=hang_t, total_t=sum(x['sheet_t']+x['frame_t'] for x in out)+truss_t+hang_t)
+    gm = gate_mass_t(s)['total_t']; clips = sum(x['clip_t'] for x in panel_mount(s))
+    return dict(layers=out, trusses_t=truss_t, hangers_t=hang_t, gates_t=gm, clips_t=clips,
+                total_t=sum(x['sheet_t']+x['frame_t'] for x in out)+truss_t+hang_t+gm+clips)
 
 
 def check(s):
@@ -251,6 +411,35 @@ def check(s):
         errs.append('bulkhead gate smaller than the passing envelope plus margins')
     if min(t['depth_hub'] for t in trusses(s)) <= 0:
         errs.append('bulkhead truss has no depth in the layer 1-2 gap')
+    gc = gate_checks(s); m = b['gate_mechanism']
+    for x in gc['layers']:
+        if m['overlap_m'] < x['overlap_needed_m']:
+            errs.append(f"bulkhead gate layer {x['layer']}: door overlap below {m['slide_margin']} x the door's growth")
+        if x['door_bottom_hot_u'] >= x['layer_edge_u']:
+            errs.append(f"bulkhead gate layer {x['layer']}: hot door bottom edge above the layer edge (casing gap left open)")
+        if x['stack_m'] > x['gap_m']-0.05:
+            errs.append(f"bulkhead gate layer {x['layer']}: door stack does not fit the gap to the next layer")
+        if x['lateral_run_m'] and x['lateral_run_m'] < 2*m['overlap_m']:
+            errs.append(f"bulkhead gate layer {x['layer']}: a labyrinth ray can reach the next door's overlap")
+        if x['park_clear_m'] <= 0:
+            errs.append(f"bulkhead gate layer {x['layer']}: parked door still covers the notch")
+    pa = gc['passage']
+    if min(pa['crawler_clear_w'], pa['crawler_clear_top'], pa['crew_clear_w'], pa['crew_clear_top']) < 0:
+        errs.append('bulkhead gate notch smaller than the crawler or suited-crew envelope plus margins')
+    if not pa['bridge_blocks_door']:
+        errs.append('an extended bridge rail must lie in the closing door path')
+    il = interlock(s)
+    if il['open_leak_W'] > il['open_leak_limit_W']:
+        errs.append('open gates at the interlock temperature leak more than the allowed share of the LOW load')
+    if il['t_crew_K'] > il['t_open_K']:
+        errs.append('crew entry temperature must not exceed the gate opening temperature')
+    if il['full_power_leak_W'] <= min(il['margins_W'].values()):
+        errs.append('the full-power open-gate bound no longer exceeds the zone margins: recheck the interlock basis')
+    for x in panel_mount(s):
+        if b['panel_mount']['tensioner_travel_m'] < x['tensioner_needed_m']:
+            errs.append(f"bulkhead layer {x['layer']}: panel tensioner travel below the margin x panel growth")
+        if b['panel_mount']['clip_float_m'] < x['float_needed_m']:
+            errs.append(f"bulkhead layer {x['layer']}: clip float below the margin x tangential growth")
     if b['gore_phase'][1] == b['gore_phase'][0]:
         errs.append('layer 2 seams must be staggered against layer 1')
     if z['joint_m'] <= 0 or z['bulkhead']['clearance_m'] <= 0:
@@ -262,7 +451,8 @@ def report(s):
     return dict(status='PROTOTYPE (Graded Thermal Blade, RAD-ZONE; Claude under the owner delegation, brief 2026-11-01)',
                 sections=[{k: (round(v, 3) if isinstance(v, float) else v) for k, v in x.items()} for x in placed(s)],
                 total_length_m=total_length_m(s), bulkhead=[{k: (round(v, 3) if isinstance(v, float) else v) for k, v in x.items()} for x in layers(s)],
-                bulkhead_mass=bulkhead_mass_t(s), membrane=membrane(s), construction=construction(s))
+                bulkhead_mass=bulkhead_mass_t(s), membrane=membrane(s), construction=construction(s),
+                gate_checks=gate_checks(s), interlock=interlock(s), panel_mount=panel_mount(s), gate_mass=gate_mass_t(s))
 
 
 if __name__ == '__main__':

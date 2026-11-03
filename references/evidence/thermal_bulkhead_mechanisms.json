@@ -1,0 +1,166 @@
+{
+ "task": "thermal_bulkhead_mechanisms",
+ "approved": "2026-11-03T06:47Z (owner: \"Yes, squash everything\")",
+ "brief": "2026-11-02T07:29Z six-thread brief, Thread 3 (P3)",
+ "base": "5a913f9",
+ "branch": "claude/thermal-bulkhead-mechanisms",
+ "branch_head": "daaeeee",
+ "study_restore": "git show daaeeee:work/thermal-bulkhead-mechanisms/<file> (NOTES.md design and checks, study.py numbers and cooldown, make_review.py review-file builder)",
+ "baseline": "references/baseline_thermal_bulkhead_mechanisms",
+ "full_pipeline": "runs/20261102T150438Z-pipeline PASS (all tests, whole-ship inspection; geometry diff only Radiator_Bulkhead* and IF_RADIATOR_BULKHEAD_GATE_*)",
+ "gate_checks": {
+  "layers": [
+   {
+    "layer": 1,
+    "slot_fraction": 7e-05,
+    "leak_bound_fraction": 0.0,
+    "door_growth_m": 0.01108,
+    "overlap_needed_m": 0.01662,
+    "hub_growth_m": 0.03198,
+    "door_bottom_hot_u": 6.05198,
+    "layer_edge_u": 6.1,
+    "gap_m": 0.3,
+    "stack_m": 0.1,
+    "lateral_run_m": 2.25,
+    "park_clear_m": 0.1
+   },
+   {
+    "layer": 2,
+    "slot_fraction": 7e-05,
+    "leak_bound_fraction": 0.0,
+    "door_growth_m": 0.01035,
+    "overlap_needed_m": 0.01553,
+    "hub_growth_m": 0.02988,
+    "door_bottom_hot_u": 6.04988,
+    "layer_edge_u": 6.1,
+    "gap_m": 0.3,
+    "stack_m": 0.1,
+    "lateral_run_m": 2.25,
+    "park_clear_m": 0.1
+   },
+   {
+    "layer": 3,
+    "slot_fraction": 7e-05,
+    "leak_bound_fraction": 0.0,
+    "door_growth_m": 0.00375,
+    "overlap_needed_m": 0.00563,
+    "hub_growth_m": 0.01083,
+    "door_bottom_hot_u": 6.03083,
+    "layer_edge_u": 6.1,
+    "gap_m": 0.4,
+    "stack_m": 0.1,
+    "lateral_run_m": 0.0,
+    "park_clear_m": 0.1
+   }
+  ],
+  "passage": {
+   "angle_deg": 7.59464,
+   "grazing_fraction": 0.01747,
+   "notch_w": 1.4,
+   "notch_top_u": 7.7,
+   "crawler_clear_w": 0.7,
+   "crawler_clear_top": 1.07,
+   "crew_clear_w": 0.3,
+   "crew_clear_top": 0.65,
+   "bridge_blocks_door": true
+  },
+  "bridge": {
+   "section_m": 1.43627,
+   "extended_m": 4.00882,
+   "track_end_x": 46.89936
+  }
+ },
+ "interlock": {
+  "t_open_K": 440.0,
+  "t_crew_K": 326.96915,
+  "aperture_m2": 7.61809,
+  "open_leak_W": 14571.73568,
+  "open_leak_limit_W": 20000.0,
+  "full_power_leak_W": 4081225.57334,
+  "margins_W": {
+   "LOW": 257902.34294,
+   "WARM": 1164287.83396
+  },
+  "crew_flux_absorbed_W_m2": 244.98,
+  "rule": [
+   "open: drive safed (not armed, no thrust) and every HOT blade <= t_open_K",
+   "crew past the SP-51 track end: every HOT blade <= t_crew_K",
+   "arm the drive: all nine doors closed and latched (two pawls each), every bridge stowed, nobody past the track end",
+   "power loss: the constant-force spring closes the doors after the bridge has retracted (an extended bridge stops a door)"
+  ]
+ },
+ "panel_mount": [
+  {
+   "layer": 1,
+   "longest_panel_m": 11.0,
+   "hot_growth_m": 0.05768,
+   "cold_shrink_m": 0.00957,
+   "tensioner_needed_m": 0.10087,
+   "tangential_per_hem_m": 0.01693,
+   "float_needed_m": 0.02539,
+   "clips": 4464,
+   "clip_t": 0.13392,
+   "exchange_from": "aft face, from the hot-blade side in the coast"
+  },
+  {
+   "layer": 2,
+   "longest_panel_m": 11.0,
+   "hot_growth_m": 0.05388,
+   "cold_shrink_m": 0.01601,
+   "tensioner_needed_m": 0.10483,
+   "tangential_per_hem_m": 0.01582,
+   "float_needed_m": 0.02372,
+   "clips": 4464,
+   "clip_t": 0.13392,
+   "exchange_from": "through the V-gap from the rim"
+  },
+  {
+   "layer": 3,
+   "longest_panel_m": 11.0,
+   "hot_growth_m": 0.01953,
+   "cold_shrink_m": 0.01518,
+   "tensioner_needed_m": 0.05207,
+   "tangential_per_hem_m": 0.00573,
+   "float_needed_m": 0.0086,
+   "clips": 4464,
+   "clip_t": 0.13392,
+   "exchange_from": "forward face, from the WARM side"
+  }
+ ],
+ "gate_mass": {
+  "layers": {
+   "1": 0.09421,
+   "2": 0.09421,
+   "3": 0.09421
+  },
+  "planes_t": 0.16756,
+  "total_t": 0.4502
+ },
+ "cooldown": [
+  {
+   "areal_kg_m2": 5.0,
+   "cp_J_kgK": 800.0,
+   "to_open_min": 2.51858,
+   "to_crew_min": 6.19116
+  },
+  {
+   "areal_kg_m2": 8.0,
+   "cp_J_kgK": 900.0,
+   "to_open_min": 4.53344,
+   "to_crew_min": 11.14409
+  },
+  {
+   "areal_kg_m2": 15.0,
+   "cp_J_kgK": 1000.0,
+   "to_open_min": 9.44466,
+   "to_crew_min": 23.21685
+  }
+ ],
+ "hot_blade_rejection_at_t_open_W": 63759196.15402,
+ "bulkhead_mass_t": 9.92,
+ "open_items": [
+  "panel-exchange tooling and drone class (recommended: patch in place, rim crawler with panel reel; not built)",
+  "part qualification at 1200 K (recommended: Mo-Re foil and clips, SiC/SiC springs, ceramic-on-metal sliding, C braid cables; layer 2 Ti-6Al-4V at 805 K exceeds its rating, recommended Ni superalloy; not built)",
+  "Godot binding of doors and bridge as a mechanism"
+ ]
+}

@@ -694,14 +694,34 @@ are staggered half a gore against layers 1 and 3. A radial seam batten carries e
 a sliding sleeve joint per segment (0.06 m travel) and the foil hems wrap over it; the hub ring sits on 12 radial-slot sliding brackets
 on the casing (0.25 m slide). Layers 1 and 2 hang from three tapered C/C trusses in the layer 1–2 gap along the blade planes (depth
 0.21 m at the casing to 2.89 m at the rim, behind layer 1, never in the blades' view, on low-conductance standoffs); layer 3 hangs from
-the WARM aft root booms every 4 m. One gate per blade plane per layer on the SP-51 crawler rail line, 1.40 × 1.60 m, its door sliding
-radially outward (no swing room between layers), drawn closed. Checks: thermal growth 0.16 / 0.15 / 0.06 m against the 0.25 m hub slide
+the WARM aft root booms every 4 m. One gate per blade plane per layer on the SP-51 crawler rail line (see the gate mechanism below), drawn closed. Checks: thermal growth 0.16 / 0.15 / 0.06 m against the 0.25 m hub slide
 (×1.5 margin), rim segment growth 34 / 32 / 11 mm against 60 mm; seam leak bound 0.02 % of a layer's incident flux (a ray passes an
-overlap only within 8.5° of grazing, into the vented V-gap); support conduction layer 1→2 about 10 W against 60 MW radiated by one face;
-the gate clears a 1.0 × 1.0 m suited or crawler envelope with 0.30 / 0.50 m to spare. The layer surfaces, spacing and emissivities are
-unchanged, so the Monte Carlo capacities stand. First-order mass 9.3 t (foils with overlaps 5.8 t, battens, hoops, rims, hubs and gates
-2.9 t, trusses 0.5 t). OPEN: foil qualification, gore tension and flutter, MMOD on layer 1, truss and standoff sizing, the gate drive and
-seal (the openings are not cut in the display gores), the drone panel-exchange tooling. The WARM/LOW sheets carry a return trunk on the
+overlap only within 8.5° of grazing, into the vented V-gap); support conduction layer 1→2 about 10 W against 60 MW radiated by one face.
+The layer surfaces, spacing and emissivities are
+unchanged, so the Monte Carlo capacities stand. First-order mass 9.9 t (foils with overlaps 5.8 t, battens, hoops, rims and hubs 2.7 t, trusses
+0.5 t, gates 0.45 t, panel clips 0.40 t). OPEN: foil qualification, gore tension and flutter, MMOD on layer 1, truss and standoff sizing, the drone
+panel-exchange tooling. **Gate mechanism and panel mounts (thermal bulkhead mechanisms 2026-11-02, PROTOTYPE; `radiator_zones.gate_parts/gate_checks/
+interlock/panel_mount`, `[radiators.zones.bulkhead]` gate_mechanism, bridge, interlock, panel_mount).** The SP-51 rail line (r 6.15 m,
+2.30 m off each blade plane) runs inside the layer plane, so each gate is a notch cut up from the layer's inner edge (r 6.10–7.70 m, flanks
+on radial lines, 1.40 m wide at the bottom, 1.78 m at the top), framed by a C/C yoke that carries the hub ring's hoop load round it (the
+hub ring is broken across the notch; the bracket that fell there sits under the yoke foot). The door, a foil face of the layer's metal
+on a TZM frame, sits on the layer's forward (cold) face and overlaps the notch by 0.15 m at 0.02 m standoff (a labyrinth: rays pass only
+within 7.6° of grazing, leak bound 1.3e-6 of a layer's flux), its bottom edge closing into the casing gap; it slides radially outward
+1.78 m on two TZM guides (Si3N4 rollers, unlubricated: it only moves cold) and is held by two sensed spring pawls. One drive per blade
+plane on the casing forward of layer 3 turns a shaft along X in the casing gap with a capstan per layer, so a stack's three doors move
+together; a constant-force spring closes them on power loss. A telescoping SP-51 bridge rail (three 1.44 m sections, 4.0 m extended)
+stowed beside the drive reaches through the three open notches to the crawler track end; extended, it blocks every door's closing path.
+The notch passes the crawler with 0.35 m each side and the 1.0 × 1.0 m suited envelope with 0.15 m. Interlock: open only with the drive
+safed and every hot blade at or below 440 K (the WARM temperature, so no heat moves uphill; the open-passage bound is then 15 kW, under
+2 % of the LOW load, against up to 4.1 MW at 1800 K); crew past the track end at or below 327 K (suit IR absorption no more than its
+design sunlight, 245 W/m²); arming the drive needs all nine doors latched, the bridges stowed and nobody past the track end. Panels hang
+on hem clips every 0.50 m in the batten clip track, one fixed clip per panel at its inner edge centre, the others sliding radially and
+floating 0.05 m tangentially, with a 0.12 m constant-force tensioner at each outer corner (needed at ×1.5: 0.10 m for 58 mm hot growth
+plus cold shrink); drawn on the gore beside each layer 1 and 3 gate. Panels are exchanged in the coast: layer 1 from aft, layer 3 from
+forward, layer 2 through the V-gap from the rim. OPEN: exchange tooling and drone class, clip, roller and cable qualification at
+1200 K, motor and shaft sizing, gate sensors.
+
+The WARM/LOW sheets carry a return trunk on the
 second face, an outer edge chord, edge-on transverse ribs at the panel-module boundaries (0.025 m footprint at sheet temperature; they
 radiate as fins, no capacity change) and guided shoes across the WARM/LOW joint.
 

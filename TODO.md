@@ -135,8 +135,12 @@ close-up, regression check, MODEL/TODO and Model Status update.
 - [ ] **Exterior production refinement (2026-11-01).** Built on `claude/project-thread-sogbnr`: the bulkhead construction, the three hero
   cameras and the production families (docs/MODEL.md "Radiator zoning", "Hero cameras", S9). Left: the owner's review; then the next
   milestone: ring-exterior bearing and transfer hardware close-ups, Brow panel mounting and EYE shutters in the hero views, nozzle and coil
-  housing detail, tank dome closeouts and inspection ports, the gate openings cut and the doors bound as a mechanism, the First Ignition
+  housing detail, tank dome closeouts and inspection ports, the First Ignition
   sequence on CAM_HERO_PROPULSION.
+- [ ] **Thermal bulkhead mechanisms: follow-ups.** The gates, doors, bridge rail, interlock and panel mounts are built (docs/MODEL.md
+  "Radiator zoning", references/evidence/thermal_bulkhead_mechanisms.json). Left: the Godot binding of the doors and bridge as a mechanism
+  (the export carries each door's slide vector); panel-exchange tooling and drone class (OPEN); 1200 K part materials (layer 2's
+  Ti-6Al-4V is not rated for 805 K; evidence open_items).
 - [ ] **S04 — Construction detail across the remaining ship (M4 method).** Casing and access panels, drive section, thrust ring and
   nozzles, shield assemblies, internal framing and equipment mounts; L2 → L3 → L4 per assembly.
   Slice 1 built 2026-10-18 (`casing_panels.py`, `[casing_panels]`): aft body casing joint straps at the frame stations, longitudinal

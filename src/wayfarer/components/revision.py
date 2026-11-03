@@ -555,25 +555,37 @@ def bulkhead_geometry(c,s):
     by_gore={}
     for q in radiator_zones.panels(s):
         by_gore.setdefault((q['layer'],q['gore']),[]).append(q)
+    notches={}
+    for g in radiator_zones.gates(s):
+        notches.setdefault(g['layer'],[]).append(g)
+    def in_notch(li,r,a):
+        return any(r<g['u1'] and abs((a-g['az']+math.pi)%(2*math.pi)-math.pi)<g['da'] for g in notches.get(li,[]))
     for (li,k),qs in by_gore.items():
-        Li=L[li-1];vs=[];fs=[];mats=[]
+        Li=L[li-1];vs=[];fs=[];mats=[];cut_here=False
         for q in qs:
             dx=q['step']+0.012*((q['panel']-1)%2)
             r1=q['r1']+(bh['overlap_m'] if q['r1']<Li['r1']-1e-6 else 0.0)
-            for i in range(nr+1):
-                r=q['r0']+(r1-q['r0'])*i/nr;a1=q['a1']+bh['overlap_m']/r
-                for j in range(na+1):
-                    a=q['a0']+(a1-q['a0'])*j/na;vs.append(P(radiator_zones.x_on(Li,r)+dx,r,a))
-            o=len(vs)-(nr+1)*(na+1)
-            for i in range(nr):
-                for j in range(na):
-                    fs.append((o+i*(na+1)+j,o+i*(na+1)+j+1,o+(i+1)*(na+1)+j+1,o+(i+1)*(na+1)+j));mats.append((q['panel']+k)%2)
+            hit=[g for g in notches.get(li,[]) if q['r0']<g['u1'] and any(in_notch(li,g['u0']+0.05,q['a0']+(q['a1']+bh['overlap_m']/g['u0']-q['a0'])*j/40) for j in range(41))]
+            if hit:                      # finer grid so the notch is cut on its top edge and within a few cm of its flanks (the yoke covers them)
+                u1=hit[0]['u1'];rs=[q['r0']+(u1-q['r0'])*i/16 for i in range(17)]+[u1+(r1-u1)*i/5 for i in range(1,6)];nA=32;cut_here=True
+            else:
+                rs=[q['r0']+(r1-q['r0'])*i/nr for i in range(nr+1)];nA=na
+            o=len(vs)
+            for r in rs:
+                a1=q['a1']+bh['overlap_m']/r
+                for j in range(nA+1):
+                    a=q['a0']+(a1-q['a0'])*j/nA;vs.append(P(radiator_zones.x_on(Li,r)+dx,r,a))
+            for i in range(len(rs)-1):
+                for j in range(nA):
+                    rc=(rs[i]+rs[i+1])/2;a1=q['a1']+bh['overlap_m']/rc;ac=q['a0']+(a1-q['a0'])*(j+.5)/nA
+                    if hit and in_notch(li,rc,ac):continue
+                    fs.append((o+i*(nA+1)+j,o+i*(nA+1)+j+1,o+(i+1)*(nA+1)+j+1,o+(i+1)*(nA+1)+j));mats.append((q['panel']+k)%2)
         obj=mesh(c,f"Radiator_Bulkhead_Layer_{li}_Gore_{k:02}",vs,fs,foil[li-1][0],kind='radiator_bulkhead')
         obj.data.materials.append(foil[li-1][1])
         for poly,mi in zip(obj.data.polygons,mats):poly.material_index=mi
         obj['layer']=li;obj['gore']=k;obj['panels']=len(qs);obj['emissivity']=Li['emissivity'];obj['slope_deg']=Li['slope_deg']
         obj['material_note']=Li['material'];obj['foil_thickness_um']=round(mem[li]['thickness_um'],1);obj['source_ref']='radiator_zoning'
-        obj['function']='V-groove thermal bulkhead gore: replaceable foil panels between the hub, the anti-flutter hoops and the rim, shingled over its neighbours (labyrinth overlap)'
+        obj['function']='V-groove thermal bulkhead gore: replaceable foil panels between the hub, the anti-flutter hoops and the rim, shingled over its neighbours (labyrinth overlap)'+('; its inner panel is cut by a gate notch, hemmed to the yoke' if cut_here else '')
         obj['engineering_status']='PROTOTYPE; foil qualification, tension, flutter and MMOD OPEN; drawn without thickness'
     for Li in L:
         i=Li['index'];hx=0.006
@@ -597,9 +609,11 @@ def bulkhead_geometry(c,s):
         obj=mesh(c,f"Radiator_Bulkhead_Layer_{i}_Rim_Joints",*_merge(parts),batten,kind='radiator_bulkhead_frame')
         obj['function']='sliding sleeve joint between rim segments (travel per radiator_zones.construction)';obj['engineering_status']='PROTOTYPE';obj['source_ref']='radiator_zoning'
         xh=radiator_zones.x_on(Li,Li['r0']);rh_=Li['r0']+bh['hub']['radius_m']
-        parts=[_tube_loop([P(xh,rh_,2*math.pi*m/96) for m in range(96)],bh['hub']['radius_m'],8)]
-        for m in range(bh['hub']['brackets']):
-            a=math.radians(p['radiator_phase_deg'])+2*math.pi*(m+.5)/bh['hub']['brackets']
+        parts=[];gaps=sorted((g['az']-g['da']-0.012,g['az']+g['da']+0.012) for g in notches[i])
+        for (g0,g1),(h0,h1) in zip(gaps,gaps[1:]+[(gaps[0][0]+2*math.pi,gaps[0][1]+2*math.pi)]):
+            nseg=max(4,int((h0-g1)/(2*math.pi)*96))     # hub ring arcs between the notches; the yokes carry its hoop load round each notch
+            parts.append(_tube_loop([P(xh,rh_,g1+(h0-g1)*m/nseg) for m in range(nseg+1)],bh['hub']['radius_m'],8,False))
+        for a in radiator_zones.hub_bracket_angles(s):
             parts.append(cylinder_mesh(P(xh,casing+.01,a),P(xh,rh_,a),0.045,8))
             ta=(0.0,-math.sin(a),math.cos(a));c0=P(xh,casing+.04,a)
             parts.append(cylinder_mesh(tuple(c0[q]-ta[q]*.18 for q in range(3)),tuple(c0[q]+ta[q]*.18 for q in range(3)),0.035,8))
@@ -623,18 +637,132 @@ def bulkhead_geometry(c,s):
             x=radiator_zones.x_on(L3,r);parts.append(cylinder_mesh(P(x+0.01,r,a),P(x+bh['clearance_m'],r,a),0.02,6));r+=bh['hanger']['pitch_m']
         obj=mesh(c,f"Radiator_Bulkhead_Layer_3_Hangers_{k+1}",*_merge(parts),rimm,kind='radiator_bulkhead_frame')
         obj['function']=bh['hanger']['note'];obj['engineering_status']='PROTOTYPE';obj['source_ref']='radiator_zoning'
+    gate_geometry(c,s,L,foil)
+
+
+def _box_q(Q,u0,u1,v0,v1,d0,d1):
+    """Box in a gate's local frame (Q maps u, v, dx to ship coordinates): vertices and faces."""
+    vs=[Q(u,v,d) for u in (u0,u1) for v in (v0,v1) for d in (d0,d1)]
+    return vs,[(0,2,3,1),(4,5,7,6),(0,1,5,4),(2,6,7,3),(0,4,6,2),(1,3,7,5)]
+
+
+def gate_geometry(c,s,L,foil):
+    """Thermal bulkhead gate mechanism (thermal bulkhead mechanisms 2026-11-02, radiator_zones.gate_parts / gate_checks / interlock;
+    PROTOTYPE), the same at all nine gates: a notch from the layer's inner edge framed by a C/C yoke, a door forward of the layer that
+    overlaps the notch (radiation labyrinth) and slides radially outward on two guides, two latch pawls, the drive shaft in the casing gap
+    with a capstan and cable per layer; per blade plane the drive unit and the SP-51 bridge rail cassette on the casing forward of layer 3.
+    Drawn closed and latched (the burn pose); each door carries its slide vector, so a review file can show it parked open."""
+    bh=s['radiators']['zones']['bulkhead'];m=bh['gate_mechanism'];gp=radiator_zones.gate_parts(s);casing=gp['casing']
+    yoke=material('BulkheadYokeCC',(.13,.13,.14));frame=material('BulkheadGateFrame',(.80,.59,.21));guide=material('BulkheadGateGuide',(.45,.46,.48))
+    drive=material('BulkheadGateDrive',(.22,.23,.25));cable=material('BulkheadGateCable',(.55,.55,.57));latch=material('BulkheadGateLatch',(.85,.45,.12))
+    def frame_of(Li,az):
+        er=(0.0,math.cos(az),math.sin(az));et=(0.0,-math.sin(az),math.cos(az))
+        def Q(u,v,d=0.0):
+            r=math.hypot(u,v);return (radiator_zones.x_on(Li,r)+d,u*er[1]+v*et[1],u*er[2]+v*et[2])
+        return Q,er
+    for g in gp['gates']:
+        Li=L[g['layer']-1];Q,er=frame_of(Li,g['az']);tn=math.tan(g['da']);y=g['yoke'];d=g['door'];gd=g['guides'];yw=y['width']
+        tag=lambda o,f,st='PROTOTYPE':(o.__setitem__('function',f),o.__setitem__('engineering_status',st),o.__setitem__('source_ref','radiator_zoning'),
+                                       o.__setitem__('layer',g['layer']),o.__setitem__('blade',g['blade']))
+        # yoke: two legs along the flank lines (outside the notch), a head beam over it, feet on the hub ring arcs
+        hw=lambda u:u*tn+yw/2
+        parts=[]
+        for sg in (-1,1):
+            pts=[(y['u0'],sg*hw(y['u0'])),(y['u1'],sg*hw(y['u1']))]
+            vs=[Q(u,v+sg*o,dd) for (u,v) in pts for o in (-yw/2,yw/2) for dd in (-0.03,0.03)]
+            parts.append((vs,[(0,2,3,1),(4,5,7,6),(0,1,5,4),(2,6,7,3),(0,4,6,2),(1,3,7,5)]))
+        vs=[Q(u,v,dd) for u in (g['u1'],g['u1']+yw) for v in (-hw(y['u1'])-yw/2,hw(y['u1'])+yw/2) for dd in (-0.03,0.03)]
+        parts.append((vs,[(0,2,3,1),(4,5,7,6),(0,1,5,4),(2,6,7,3),(0,4,6,2),(1,3,7,5)]))
+        for sg in (-1,1):                       # feet: the leg foot bears on the hub bracket moved under it (hub_bracket_angles)
+            parts.append(_box_q(Q,y['u0']-0.05,y['u0']+0.10,sg*hw(y['u0'])-yw*0.75,sg*hw(y['u0'])+yw*0.75,-0.05,0.05))
+        obj=mesh(c,g['name']+'_Yoke',*_merge(parts),yoke,kind='radiator_bulkhead_gate')
+        tag(obj,'gate yoke: C/C box section framing the notch, carries the hub ring hoop load round it; the cut gore panels hem to it')
+        # door closed: foil face on a stiff frame, forward of the layer by the labyrinth standoff
+        corners=[(d['u0'],-d['v0']),(d['u0'],d['v0']),(d['u1'],d['v1']),(d['u1'],-d['v1'])]
+        vs=[Q(u,v,d['dx']) for u,v in corners]
+        obj=mesh(c,g['name']+'_Door',vs,[(0,1,2,3)],foil[g['layer']-1][1],kind='radiator_bulkhead_gate')
+        slope=Li['tan'];sv=(d['travel']*slope,d['travel']*er[1],d['travel']*er[2])
+        obj['slide_vector']=sv;obj['travel_m']=round(d['travel'],3);obj['pose']='CLOSED_LATCHED'
+        tag(obj,'gate door: a foil face of the layer metal, overlaps the notch by %.2f m at %.2f m standoff (labyrinth, rays pass only within %.1f deg of grazing); slides radially outward %.2f m to park above the notch'
+            %(m['overlap_m'],m['standoff_m'],math.degrees(math.atan(m['standoff_m']/m['overlap_m'])),d['travel']),'PROTOTYPE; drawn closed and latched (burn pose)')
+        itf=empty(c,f"IF_{g['name'].upper()}",Q((g['u0']+g['u1'])/2,0.0))       # the passage interface at the notch centre, in the layer plane
+        itf['mechanism']='sliding door, radial';itf['door']=g['name']+'_Door';itf['slide_vector']=sv;itf['interlock']='radiator_zones.interlock'
+        fr=_tube_loop([Q(u,v,d['dx']+d['depth']/2) for u,v in corners],0.018,6)
+        vsf,fsf=fr
+        for u in (d['u0']+(d['u1']-d['u0'])*k/3 for k in (1,2)):      # two stiffening bars
+            hvv=d['v0']+(d['v1']-d['v0'])*(u-d['u0'])/(d['u1']-d['u0'])
+            vsf,fsf=_merge([(vsf,fsf),cylinder_mesh(Q(u,-hvv,d['dx']+d['depth']/2),Q(u,hvv,d['dx']+d['depth']/2),0.012,6)])
+        obj=mesh(c,g['name']+'_Door_Frame',vsf,fsf,frame,kind='radiator_bulkhead_gate');obj['slide_vector']=sv;obj['pose']='CLOSED_LATCHED'
+        tag(obj,'gate door frame: TZM edge tube and stiffeners on the door\'s forward face, ceramic (Si3N4) rollers in the guides, no lubricant (moves only cold)')
+        # guides with their standoffs to the layer, cable pulleys at the top
+        parts=[]
+        for v in gd['v']:
+            parts.append(cylinder_mesh(Q(gd['u0'],v,gd['dx']),Q(gd['u1'],v,gd['dx']),gd['radius'],8))
+            for u in (gd['u0']+0.15,(gd['u0']+gd['u1'])/2,gd['u1']-0.1):
+                parts.append(cylinder_mesh(Q(u,v,0.0),Q(u,v,gd['dx']),0.012,6))
+            parts.append(cylinder_mesh(Q(gd['u1'],v,gd['dx']-0.03),Q(gd['u1'],v,gd['dx']+0.03),0.05,10))
+        obj=mesh(c,g['name']+'_Guides',*_merge(parts),guide,kind='radiator_bulkhead_gate')
+        tag(obj,'two TZM door guides on the layer\'s forward face, from the casing gap to above the parked door; cable pulley at the top')
+        # latch pawls at the notch foot (spring pawls into the door frame; released by the drive's first motion)
+        parts=[_box_q(Q,u-0.04,u+0.04,v-0.03,v+0.03,d['dx'],d['dx']+d['depth']+0.03) for u,v in g['latches']]
+        obj=mesh(c,g['name']+'_Latches',*_merge(parts),latch,kind='radiator_bulkhead_gate')
+        tag(obj,'two spring latch pawls: hold the door closed under thrust and vibration; position sensed (two sensors per door, drive arm interlock)')
+        # capstan on the drive shaft (casing gap) and the cable up the guide to the door
+        sh=g['shaft'];xs=radiator_zones.x_on(Li,sh['u'])
+        parts=[cylinder_mesh((xs-0.03,)+Q(sh['u'],sh['v'])[1:],(xs+0.05,)+Q(sh['u'],sh['v'])[1:],0.04,12)]
+        pa=Q(sh['u'],sh['v'],0.01);pb=Q(gd['u0']+0.05,gd['v'][0],gd['dx']);pc=Q(gd['u1'],gd['v'][0],gd['dx'])
+        parts+=[cylinder_mesh(pa,pb,0.005,4),cylinder_mesh(pb,pc,0.005,4)]
+        obj=mesh(c,g['name']+'_Capstan',*_merge(parts),cable,kind='radiator_bulkhead_gate')
+        tag(obj,'capstan on the stack\'s common drive shaft and the Mo cable loop to the door (constant-tension take-up for the hub slide)')
+    # per blade plane: drive shaft through the casing gap, drive unit and bridge-rail cassette forward of layer 3
+    L1=L[0]
+    for pl in gp['planes']:
+        Q,er=frame_of(L[-1],pl['az']);dv=pl['drive'];br=pl['bridge'];sh_u=casing+bh['casing_gap_m']/2
+        Qc=lambda x,u,v:(x,)+Q(u,v)[1:]
+        x_aft=radiator_zones.x_on(L1,sh_u)-0.06
+        parts=[cylinder_mesh(Qc(x_aft,sh_u,dv['v']),Qc(dv['x0']+0.05,sh_u,dv['v']),bh['gate_mechanism']['shaft_radius_m'],10)]
+        dl,dw,dh=dv['size']
+        vs=[Qc(x,u,v) for x in (dv['x0'],dv['x1']) for u in (casing,casing+dh) for v in (dv['v']-dw/2,dv['v']+dw/2)]
+        parts.append((vs,[(0,2,3,1),(4,5,7,6),(0,1,5,4),(2,6,7,3),(0,4,6,2),(1,3,7,5)]))
+        obj=mesh(c,f"Radiator_Bulkhead_Gate_Drive_{pl['blade']}",*_merge(parts),drive,kind='radiator_bulkhead_gate')
+        obj['function']=('gate drive: motor, brake and constant-force closing spring on the casing forward of layer 3 (cold side), turning a C/C shaft along X '
+                         'in the casing gap (no layer reaches it) with one capstan per layer, so the three doors of the stack move together; manual EVA drive socket')
+        obj['engineering_status']='PROTOTYPE; motor sizing, shaft dynamics and feedthroughs OPEN';obj['source_ref']='radiator_zoning';obj['blade']=pl['blade']
+        x0,x1,chh=br['cassette'];cw=bh['bridge']['cassette_m'][0]
+        vs=[Qc(x,u,v) for x in (x0,x1) for u in (casing,casing+chh) for v in (-cw/2,cw/2)]
+        obj=mesh(c,f"Radiator_Bulkhead_Bridge_Cassette_{pl['blade']}",vs,[(0,2,3,1),(4,5,7,6),(0,1,5,4),(2,6,7,3),(0,4,6,2),(1,3,7,5)],drive,kind='radiator_bulkhead_gate')
+        obj['function']=('SP-51 bridge rail cassette: %d telescoping two-rail sections of %.2f m, extend aft %.2f m through the three open notches to the crawler track end; '
+                         'an extended bridge lies in every door\'s closing path') %(br['sections'],br['section_m'],br['x_extended'][1]-br['x_extended'][0])
+        obj['engineering_status']='PROTOTYPE; stowed (burn pose)';obj['source_ref']='radiator_zoning';obj['blade']=pl['blade']
+        obj['bridge_extended_x']=br['x_extended'];obj['bridge_rails_v']=br['rails_v'];obj['bridge_u']=br['u'];obj['azimuth']=pl['az']
+    panel_clips(c,s,L)
+
+
+def panel_clips(c,s,L):
+    """Representative replaceable panel interface (radiator_zones.panel_mount; PROTOTYPE): on the gore beside each gate of layers 1 and 3
+    (the faces a panel is exchanged from), the hem clips at their pitch in the batten clip track (the fixed clip at each panel's inner
+    edge centre larger) and a constant-force tensioner at each panel's outer corners. The other gores carry the same interface, not drawn."""
+    bh=s['radiators']['zones']['bulkhead'];pm=bh['panel_mount'];clip=material('BulkheadPanelClip',(.70,.30,.10));P=lambda x,r,a:(x,r*math.cos(a),r*math.sin(a))
+    by={}
+    for q in radiator_zones.panels(s):
+        by.setdefault((q['layer'],q['gore']),[]).append(q)
     for g in radiator_zones.gates(s):
-        Li=L[g['layer']-1];X=lambda r:radiator_zones.x_on(Li,r)+0.035
-        loop=[P(X(g['r0']),g['r0'],g['a0']),P(X(g['r0']),g['r0'],g['a1']),P(X(g['r1']),g['r1'],g['a1']),P(X(g['r1']),g['r1'],g['a0'])]
-        parts=[_tube_loop(loop,0.03,8)]
-        for aa in (g['a0'],g['a1']):
-            parts.append(cylinder_mesh(P(X(g['r1']),g['r1'],aa),P(X(g['open_r1']),g['open_r1'],aa),0.018,6))
-        obj=mesh(c,g['name']+'_Frame',*_merge(parts),door,kind='radiator_bulkhead_gate')
-        obj['function']=s['radiators']['zones']['bulkhead']['gate']['note'];obj['layer']=g['layer']
-        obj['engineering_status']='PROTOTYPE; door drive, latch and seal OPEN; drawn closed (burn pose); the opening is not cut in the display gore'
-        obj['source_ref']='radiator_zoning'
-        vs=[P(X(r)+0.012,r,aa) for r in (g['r0'],g['r1']) for aa in (g['a0'],g['a1'])]
-        obj=mesh(c,g['name']+'_Door',vs,[(0,1,3,2)],foil[g['layer']-1][1],kind='radiator_bulkhead_gate')
-        obj['function']='gate door: a foil panel on a stiff frame, slides radially outward on its two guides to open (coast only)';obj['layer']=g['layer']
-        obj['engineering_status']='PROTOTYPE';obj['source_ref']='radiator_zoning'
-        empty(c,f"IF_{g['name'].upper()}",P(X((g['r0']+g['r1'])/2),(g['r0']+g['r1'])/2,g['az']))
+        if g['layer'] not in (1,3):continue
+        Li=L[g['layer']-1];a_side=g['az']+g['da']+0.12           # the gore next to the notch, beside the passage
+        k=next(kk for (li,kk),qs in by.items() if li==g['layer'] and qs[0]['a0']<=a_side<qs[0]['a1'])
+        parts=[];sgn=1 if g['layer']==3 else -1
+        for q in by[(g['layer'],k)]:
+            for a in (q['a0'],q['a1']):
+                n=max(2,int((q['r1']-q['r0'])/pm['clip_pitch_m']))
+                for j in range(n+1):
+                    r=q['r0']+(q['r1']-q['r0'])*j/n;x=radiator_zones.x_on(Li,r)+sgn*0.015
+                    parts.append(cylinder_mesh(P(x-0.012,r,a),P(x+0.012,r,a),0.022,6))
+            am=(q['a0']+q['a1'])/2;x=radiator_zones.x_on(Li,q['r0'])+sgn*0.02          # fixed clip, inner edge centre
+            parts.append(cylinder_mesh(P(x-0.02,q['r0']+0.05,am),P(x+0.02,q['r0']+0.05,am),0.045,8))
+            for a in (q['a0']+0.004,q['a1']-0.004):                                    # tensioners at the outer corners
+                x=radiator_zones.x_on(Li,q['r1'])+sgn*0.02
+                parts.append(cylinder_mesh(P(x,q['r1']-0.25,a),P(x,q['r1']-0.25+pm['tensioner_travel_m']+0.1,a),0.03,8))
+        obj=mesh(c,f"Radiator_Bulkhead_Layer_{g['layer']}_Gore_{k:02}_Panel_Mounts",*_merge(parts),clip,kind='radiator_bulkhead_frame')
+        obj['function']=('replaceable panel interface: hem clips every %.2f m in the batten clip track, one fixed clip per panel (inner edge centre), the others '
+                         'slide radially and float %.2f m tangentially; constant-force tensioners (%.2f m travel) at the outer corners')%(pm['clip_pitch_m'],pm['clip_float_m'],pm['tensioner_travel_m'])
+        obj['engineering_status']='PROTOTYPE; representative gore; exchange tooling OPEN';obj['source_ref']='radiator_zoning';obj['layer']=g['layer'];obj['gore']=k
