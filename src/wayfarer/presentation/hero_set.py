@@ -3,9 +3,11 @@ hero_cameras.py, [look.hero_cameras]; presentation only, posed and dressed in me
 
 - engineering: Workbench, studio light, the functional review colours (functional_colors, the viewport colour every generated object
   carries), cavity and outlines; the review label overlay is composited onto it as <cam>_engineering_annotated.png;
-- cinematic: Cycles, the Phase 4 grammar with the exterior production families ([production.exterior], hero_preview.dress), one hard sun
+- physical: the reference render: Cycles, the Phase 4 grammar with the exterior production families ([production.exterior], hero_preview.dress), one hard sun
   per camera ([look.hero_cameras] sun, attitude OPEN), black space, AgX; in FIRST_IGNITION the hot faces emit as grey bodies
   (look.exterior) and bulkhead layer 1 at its study temperature and emissivity (radiator_zones, about 1200 K at eps 0.12). No labels;
+- cinematic: the physical render plus the labelled editorial presentation light ([look.hero_cameras.cinematic]: EDITORIAL_FILL,
+  EDITORIAL_RIM, never ship lights) and the camera's editorial exposure (COAST only);
 - overlay: the review labels and leader lines alone on a transparent frame (<cam>_overlay.png), so they stay a separate layer.
 
 Every camera is the saved CAM_HERO_* of the vehicle file; the sun, exposure and states ride on it as properties.
@@ -30,7 +32,7 @@ import look
 import radiator_zones
 from m8_exterior import sun_vector
 
-MODES = ('engineering', 'cinematic', 'overlay')
+MODES = ('engineering', 'physical', 'cinematic', 'overlay')
 
 
 def bulkhead_glow(s):
@@ -38,6 +40,48 @@ def bulkhead_glow(s):
     x = s['look']['exterior']; L1 = radiator_zones.layers(s)[0]; T = radiator_zones.bulkhead_cfg(s)['foil'][0]['T_K']
     col = look.kelvin_rgb(T); Lum = look.grey_body_luminance(T, L1['emissivity']); Y = .2126*col[0]+.7152*col[1]+.0722*col[2]
     return col, x['sun_strength']*Lum/(x['sun_illuminance_lx']*Y), T
+
+
+def hot_face(s):
+    """First Ignition hot face beyond a uniform Lambertian emitter, from the same grey-body model: the ceramic skin's directional
+    emissivity (1 - Fresnel reflectance, normalised at normal incidence) and each isolatable cell's coating-lot emissivity within
+    +-emissivity_spread of the WORKING value (per mesh island and object). The cell temperature is not varied."""
+    c = hc.cfg(s)['cinematic']; x = s['look']['exterior']; e = look.exterior(s)
+    n = c['hot_face_ior']; r0 = ((n-1)/(n+1))**2; spread = c['emissivity_spread']/e['emissivity']
+    for m in bpy.data.materials:
+        name = m.name[7:].split('.')[0] if m.name.startswith('WF_MAT_') else None
+        if name not in x['hot_face'] or not m.use_nodes:
+            continue
+        nt = m.node_tree; N, L = nt.nodes, nt.links
+        bsdf = next(k for k in N if k.type == 'BSDF_PRINCIPLED')
+        fr = N.new('ShaderNodeFresnel'); fr.inputs['IOR'].default_value = n
+        directional = N.new('ShaderNodeMath'); directional.operation = 'MULTIPLY_ADD'      # (1 - F) / (1 - r0) = F x (-1/(1-r0)) + 1/(1-r0)
+        L.new(fr.outputs[0], directional.inputs[0]); directional.inputs[1].default_value = -1/(1-r0); directional.inputs[2].default_value = 1/(1-r0)
+        geo = N.new('ShaderNodeNewGeometry'); oi = N.new('ShaderNodeObjectInfo')
+        mix = N.new('ShaderNodeMath'); mix.operation = 'ADD'; L.new(geo.outputs['Random Per Island'], mix.inputs[0]); L.new(oi.outputs['Random'], mix.inputs[1])
+        frac = N.new('ShaderNodeMath'); frac.operation = 'FRACT'; L.new(mix.outputs[0], frac.inputs[0])
+        lot = N.new('ShaderNodeMath'); lot.operation = 'MULTIPLY_ADD'                     # 1 + spread x (2u - 1)
+        L.new(frac.outputs[0], lot.inputs[0]); lot.inputs[1].default_value = 2*spread; lot.inputs[2].default_value = 1-spread
+        a = N.new('ShaderNodeMath'); a.operation = 'MULTIPLY'; L.new(directional.outputs[0], a.inputs[0]); L.new(lot.outputs[0], a.inputs[1])
+        b = N.new('ShaderNodeMath'); b.operation = 'MULTIPLY'; L.new(a.outputs[0], b.inputs[0]); b.inputs[1].default_value = bsdf.inputs['Emission Strength'].default_value
+        L.new(b.outputs[0], bsdf.inputs['Emission Strength'])
+    return dict(ior=n, r0=r0, emissivity_spread=c['emissivity_spread'])
+
+
+def editorial_lights(scene, cam, s):
+    """The cinematic variant's presentation lights, placed relative to the camera (yaw about world Z from the camera's view direction,
+    pitch above it), named EDITORIAL_* and tagged wf_editorial so no one mistakes them for ship or physical sources."""
+    from mathutils import Euler
+    c = hc.cfg(s)['cinematic']; x = s['look']['exterior']; out = []
+    view = -(cam.matrix_world.to_3x3().col[2])                      # camera looks along its -Z
+    for key in ('fill', 'rim'):
+        q = c[key]
+        d = view.copy(); d.rotate(Euler((0.0, 0.0, math.radians(q['yaw_deg'])))); d.z += math.tan(math.radians(q['pitch_deg'])); d.normalize()
+        lt = bpy.data.lights.new(f'EDITORIAL_{key.upper()}', 'SUN'); lt.energy = x['sun_strength']*q['fraction']
+        lt.color = q['color']; lt.angle = math.radians(q['angle_deg']); lt.use_shadow = q['shadows']
+        ob = bpy.data.objects.new(lt.name, lt); scene.collection.objects.link(ob)
+        ob.rotation_euler = d.to_track_quat('-Z', 'Y').to_euler(); ob['wf_editorial'] = c['label']; out.append(ob)
+    return out
 
 
 def pose_camera(scene, q):
@@ -145,9 +189,10 @@ def render(out, cameras=None, modes=MODES, states=None, size=1920, samples=64, a
                 scene.render.resolution_x = size; scene.render.resolution_y = round(size*9/16); scene.render.resolution_percentage = 100
                 scene.render.image_settings.file_format = 'PNG'; aspect = 16/9
                 stem = f"{name}_{state}_{mode}{tag}"
-                if mode == 'cinematic':
+                if mode in ('physical', 'cinematic'):
                     hp.dress(s, functional=True, emit=state == 'FIRST_IGNITION', grammar=True)
                     if state == 'FIRST_IGNITION':
+                        hot_face(s)
                         col, strength, T = bulkhead_glow(s)
                         for m in bpy.data.materials:
                             if m.name.startswith('WF_MAT_BulkheadFoilMo') and m.use_nodes:
@@ -161,8 +206,11 @@ def render(out, cameras=None, modes=MODES, states=None, size=1920, samples=64, a
                     sun.angle = math.radians(x['sun_angular_deg']); so = bpy.data.objects.new(sun.name, sun); scene.collection.objects.link(so)
                     so.rotation_euler = (-sv).to_track_quat('-Z', 'Y').to_euler()
                     scene.view_settings.view_transform = 'AgX'; scene.view_settings.look = 'AgX - Medium High Contrast'
-                    # editorial exposure only for the COAST set; FIRST_IGNITION stays at the matched exposure (15!A222)
-                    scene.view_settings.exposure = x['exposure_ev']+(q['ev'] if state == 'COAST' else 0.0)
+                    # physical: the matched exposure. cinematic: editorial exposure for the COAST set only (FIRST_IGNITION keeps the
+                    # matched exposure, 15!A222) and the labelled editorial lights
+                    scene.view_settings.exposure = x['exposure_ev']+(q['ev'] if mode == 'cinematic' and state == 'COAST' else 0.0)
+                    if mode == 'cinematic':
+                        editorial_lights(scene, cam, s)
                 elif mode == 'engineering':
                     hide_display(s)
                     scene.render.engine = 'BLENDER_WORKBENCH'; sh = scene.display.shading

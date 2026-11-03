@@ -109,9 +109,11 @@ def casing(s):
 
 
 def text(s, q, name, function, body, x, t, h):
-    """Charcoal lettering on the casing at (x, angle t), reading aft along the axis from outside, bent onto the casing (wrap_r)."""
-    r = hg.radius_at(s, 0.0)+q['text_lift_m']
-    e = pd.lettering(A, 'markings', name, 'xf_mark', function, body, rad(x, r, t), (-1.0, 0.0, 0.0), (0.0, -math.sin(t), math.cos(t)), h)
+    """Charcoal lettering on the casing at (x, angle t), bent onto the casing (wrap_r), letter tops toward the dorsal side (+Z): on the
+    ventral bisectors it reads forward, on the others aft, so from either side and from below (the hero cameras) it reads left to right
+    and upright, never upside down (hero camera pass 2026-11-02)."""
+    r = hg.radius_at(s, 0.0)+q['text_lift_m']; k = -1.0 if math.cos(t) < -1e-9 else 1.0
+    e = pd.lettering(A, 'markings', name, 'xf_mark', function, body, rad(x, r, t), (-k, 0.0, 0.0), (0.0, -k*math.sin(t), k*math.cos(t)), h)
     e['wrap_r'] = r; e['wrap_max_edge_m'] = q['text_max_edge_m']
     return e
 

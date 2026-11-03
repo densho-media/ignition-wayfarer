@@ -1,0 +1,96 @@
+{
+ "task": "hero_camera_lighting",
+ "approved": "2026-11-03T06:47Z (owner: \"Yes, squash everything.\")",
+ "brief": "2026-11-02T07:29Z six-thread brief, Thread 4",
+ "study_commit": "7bb6fd3",
+ "study_restore": "git show 7bb6fd3:work/hero-camera-lighting/<NOTES.md|make_review.py> (presentation study)",
+ "outputs": "project folder review/hero_camera_lighting_2026-11-02/ (compare_*.jpg, *_physical/_cinematic/_engineering_annotated.png, REVIEW_HERO_CAMERA_LIGHTING.blend)",
+ "pipeline": "runs/20261103T071835Z-pipeline FULL PASS on main 3785e5a; diff only CAM_HERO_* poses and Prod_SP_CASING_markings",
+ "cameras": {
+  "CAM_HERO_ENGINEERING": {
+   "location": [
+    215.98,
+    -404.01,
+    -89.42
+   ],
+   "lens_mm": 50.0,
+   "distance_m": 460.4,
+   "sun": [
+    72.0,
+    205.0
+   ],
+   "editorial_ev": 2.0,
+   "states": [
+    "COAST"
+   ]
+  },
+  "CAM_HERO_FORWARD": {
+   "location": [
+    220.47,
+    -188.79,
+    -71.48
+   ],
+   "lens_mm": 40.0,
+   "distance_m": 228.5,
+   "sun": [
+    120.0,
+    215.0
+   ],
+   "editorial_ev": 2.0,
+   "states": [
+    "COAST"
+   ]
+  },
+  "CAM_HERO_PROPULSION": {
+   "location": [
+    -224.81,
+    -134.43,
+    -47.64
+   ],
+   "lens_mm": 35.0,
+   "distance_m": 222.8,
+   "sun": [
+    55.0,
+    200.0
+   ],
+   "editorial_ev": 2.0,
+   "states": [
+    "COAST",
+    "FIRST_IGNITION"
+   ]
+  }
+ },
+ "cinematic": {
+  "fill": {
+   "fraction": 0.06,
+   "color": [
+    0.78,
+    0.84,
+    1.0
+   ],
+   "angle_deg": 20.0,
+   "yaw_deg": 25.0,
+   "pitch_deg": 15.0,
+   "shadows": false
+  },
+  "rim": {
+   "fraction": 0.35,
+   "color": [
+    1.0,
+    0.97,
+    0.92
+   ],
+   "angle_deg": 2.0,
+   "yaw_deg": 150.0,
+   "pitch_deg": 25.0,
+   "shadows": true
+  },
+  "label": "EDITORIAL presentation light, not a ship light and not physical"
+ },
+ "hot_face": {
+  "ior": 1.7,
+  "emissivity_spread": 0.03,
+  "note": "no temperature gradient: hot-loop inlet/outlet split unsourced"
+ },
+ "notes": "# Hero cameras and lighting (owner brief 2026-11-02 07:29Z, Thread 4 / P4)\n\nPresentation only: no geometry, parameter canon or physical budget changes, except the ship-name marking orientation (a detail-pack\nlettering fix, `spine_casing`). Builds on the exterior-production set (`hero_cameras.py`, `[look.hero_cameras]`,\n`presentation/hero_set.py`): the same three cameras, refined; no second camera system.\n\n## Function\n\nThree permanent exterior compositions that read the ship's systems at a glance (Engineering, Forward Explorer, Propulsion/First\nIgnition), each with a reproducible physical-reference render and an explicitly labelled cinematic variant.\n\n## Fixed constraints\n\n- Physical reference = one hard sun ([look.exterior] calibration), black space, matched exposure; it stays renderable unchanged.\n- Editorial light is a presentation option, named `EDITORIAL_*`, never a ship light and never in the physical variant.\n- First Ignition emission follows the established grey-body model (look.grey_body_luminance, kelvin_rgb, radiators.temperature 1800 K,\n  emissivity 0.90; startup 1332 K from references/evidence/first_ignition_render.json). No temperature gradient: the hot loop's\n  inlet/outlet split is not sourced (no key in data/), so none is drawn.\n- check(): nearest ship part >= 0.25 x ship length; cameras follow the ship's stations, so other threads' geometry rerenders as is.\n\n## Diagnosis of the current set (exterior_production_2026-11-01 heroes)\n\n| Issue | Cause | Plan |\n| --- | --- | --- |\n| Rings hard to recognise | Rings (r 30 m, X 97/103) sit between the Brow (r 45 m, X 142-145) and the LOW blades; FORWARD looks 13 deg off broadside, so they are 6.7 m-wide edge-on slivers | Swing FORWARD to ~25-28 deg forward of broadside: ring ellipse about 2x wider and still clear of the Brow's projected disk (needs tan(theta) > ~1.9 from the axis) |\n| EYE wells unreadable | Brow face nearly edge-on to camera and sun | More frontal Brow view in FORWARD, sun raking the face from the camera side |\n| Recesses in darkness | single sun, zero ambient (correct physically) | cinematic variant: labelled editorial fill + rim; physical variant unchanged |\n| Bulkhead dominates | ENGINEERING looks along the blade plane at the polished foil disk, sun on it | lower the bulkhead in frame weight (angle, sun azimuth) |\n| First Ignition blades flat | Lambertian uniform emission at 4x sunlit-hull luminance, near clipping | exposure that keeps the hot face below clip; directional emissivity (dielectric coating, falls at grazing) and per-cell emissivity lot spread (isolatable cells, PROTOTYPE tolerance); startup 1332 K variant |\n| Ship name inverted | spine_casing text reads aft (right = -X) on every bisector, so from the hero sides it is upside down or mirrored | per-bisector reading direction so the camera-facing names read left to right, letter tops dorsal |\n| Black negative space | fit boxes use R (Brow radius) for every camera; 16:9 with a long thin ship | tighter fits, focus offsets, framing on the subject not the box |\n\n## Unknowns\n\nAttitude and sun direction (OPEN; per-shot presentation choices), hot-loop temperature split (OPEN), coating directional emissivity\n(PROTOTYPE assumption, dielectric n ~1.5-2).\n\n## Status\n\nRebased onto main 5a913f9 (propulsion detail, ring identity, docking station). Full pipeline PASS (run 20261102T150421Z-pipeline; diff only\nCAM_HERO_* poses and the casing lettering), baseline hero_camera_lighting accepted. Renders and REVIEW_HERO_CAMERA_LIGHTING.blend in\nthe project folder review/hero_camera_lighting_2026-11-02/. Left: a last rerender when the shield/EYE and bulkhead-gate threads land\n(`hero_set.py` then `make_review.py`, no camera change needed).\n"
+}

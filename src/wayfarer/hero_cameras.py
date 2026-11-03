@@ -73,12 +73,25 @@ def resolve(s, name):
     right, up, back = basis(q['direction']); lens = q['lens_mm']; sensor = c['sensor_mm']; aspect = c['aspect'][0]/c['aspect'][1]
     tanx = sensor/2/lens; tany = tanx/aspect
     x0 = A[q['fit'][0]][0]+q['fit'][1]; x1 = A[q['fit'][2]][0]+q['fit'][3]; r = q['fit'][4] if isinstance(q['fit'][4], (int, float)) else A[q['fit'][4]]
-    corners = [(x, y, z) for x in (x0, x1) for y in (-r, r) for z in (-r, r)]
-    d = 0.0
-    for p in corners:
+    # The subject is the ship's cylindrical envelope from x0 to x1 at radius r (24 points per end), not its bounding box: a box's corners
+    # stand far outside a round ship seen obliquely and leave black space. The camera keeps its view direction and slides sideways
+    # (pan, no rotation) until the envelope is centred in the frame, then backs off until it fills the frame to the margin.
+    pts = [(x, r*math.cos(2*math.pi*k/24), r*math.sin(2*math.pi*k/24)) for x in (x0, x1) for k in range(24)]
+    loc = focus; d = 0.0
+    for p in pts:
         v = _sub(p, focus); lx, ly, lz = _dot(v, right), _dot(v, up), _dot(v, back)
         d = max(d, abs(lx)/tanx+lz, abs(ly)/tany+lz)
-    d *= q['margin']
+    for _ in range(40):
+        cam = _add(focus, _mul(back, d))
+        uv = []
+        for p in pts:
+            v = _sub(p, cam); z = -_dot(v, back)
+            uv.append((_dot(v, right)/(z*tanx), _dot(v, up)/(z*tany)))
+        u0, u1 = min(a for a, b in uv), max(a for a, b in uv); v0, v1 = min(b for a, b in uv), max(b for a, b in uv)
+        cu, cv = (u0+u1)/2, (v0+v1)/2
+        ext = max((u1-u0)/2, (v1-v0)/2)
+        focus = _add(focus, _add(_mul(right, cu*d*tanx), _mul(up, cv*d*tany)))
+        d *= 1+.6*(ext*q['margin']-1)
     loc = _add(focus, _mul(back, d))
     return dict(name=name, location=loc, right=right, up=up, back=back, lens_mm=lens, sensor_mm=sensor, focus=focus, distance_m=d,
                 sun=tuple(q['sun']), ev=q['editorial_ev'], states=list(q['states']), purpose=q['purpose'],

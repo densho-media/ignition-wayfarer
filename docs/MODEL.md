@@ -1735,16 +1735,24 @@ configuration, look, sun (presentation choice, pointing OPEN) and exposure; `p4_
 ## Hero cameras
 
 Three permanent exterior cameras (exterior production refinement 2026-11-01, presentation only, PROTOTYPE; `hero_cameras.py`,
-`[look.hero_cameras]`), fitted to the ship's own stations (focus, view direction, lens, subject box and margin) and saved in the vehicle
-file as `CAM_HERO_*` in 30_CAMERAS: **CAM_HERO_ENGINEERING** (50 mm, about 460 m: the whole ship in true proportion, the ventral blade
-nearly face-on, the primary promotional view), **CAM_HERO_FORWARD** (40 mm, from the forward quarter and below: the Brow face and EYE
-wells, both rings in front of the tank farm, the spine to the bulkhead) and **CAM_HERO_PROPULSION** (35 mm, from aft and below: nozzles,
-HOT blades, bulkhead, WARM and LOW; also FIRST_IGNITION, the camera of the later ignition sequence). `check` keeps the nearest ship part
-at least a quarter of the ship length away (no swollen Brow). `presentation/hero_set.py` renders each camera as **engineering**
-(Workbench, the functional review colours carried on the materials, cavity and outlines), **cinematic** (Cycles, the grammar look with
-the production families, one sun per camera as a presentation choice, black space, AgX; in FIRST_IGNITION the hot faces and bulkhead
-layer 1 emit as grey bodies at their temperature and emissivity) and a separate **overlay** of review labels on a transparent frame,
-composited only onto the engineering image; the cinematic frames carry no labels.
+`[look.hero_cameras]`), fitted to the ship's own stations and saved in the vehicle file as `CAM_HERO_*` in 30_CAMERAS. Each camera keeps
+a view direction and lens and fits the ship's cylindrical subject envelope (from one station to another at a radius), panning until the
+envelope is centred and backing off until it fills 1/margin of the frame, so another thread's geometry rerenders in the same
+composition. **CAM_HERO_ENGINEERING** (50 mm, about 460 m: the whole ship in true proportion, the ventral blade nearly face-on, the
+primary promotional view), **CAM_HERO_FORWARD** (40 mm, about 230 m, 63 deg off the axis from the forward quarter and below: the rings,
+40 m behind the r 45 m Brow, clear its disk and open twice as wide as at broadside; a sun 30 deg forward of broadside rakes the Brow face so
+the EYE wells cast shadow) and **CAM_HERO_PROPULSION** (35 mm, about 220 m, from aft and below: nozzles, HOT blades, bulkhead, WARM and
+LOW; also FIRST_IGNITION). `check` keeps the nearest ship part at least a quarter of the ship length away (no swollen Brow).
+`presentation/hero_set.py` renders each camera as **engineering** (Workbench, the functional review colours carried on the materials,
+cavity and outlines), **physical** (the reference: Cycles, the grammar look with the production families, one sun per camera as a
+presentation choice, black space, AgX at the matched exposure; nothing else lights the ship), **cinematic** (the physical render plus
+`[look.hero_cameras.cinematic]`: an EDITORIAL_FILL from the camera side and an EDITORIAL_RIM from behind, named and tagged `wf_editorial`
+as presentation light, never ship or physical sources, and the camera's editorial exposure in COAST) and a separate **overlay** of review
+labels on a transparent frame, composited only onto the engineering image. In FIRST_IGNITION both lit variants emit the hot faces and
+bulkhead layer 1 as grey bodies at their temperature and emissivity; the hot face adds the ceramic skin's directional emissivity
+(1 - Fresnel, ior 1.7, PROTOTYPE) and a per-cell coating-lot emissivity within +-0.03 of 0.90 (PROTOTYPE). No temperature gradient is
+drawn: the hot loop's inlet/outlet split is not sourced, so an isothermal 1800 K blade correctly reads nearly uniform. The ship name and
+casing numbers stand letter tops dorsal, reading left to right from either side and from below.
 
 ## Phase 4 grammar study (S1)
 

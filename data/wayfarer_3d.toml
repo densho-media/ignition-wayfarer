@@ -4619,14 +4619,32 @@ hidden_kinds = ["scale_reference", "hull_envelope", "field_display", "magnetic_f
 status = "PROTOTYPE"
 sensor_mm = 36.0
 aspect = [16, 9]
-min_near_ratio = 0.25               # nearest ship part at least a quarter of the ship length from the camera (no swollen Brow)
+min_near_ratio = 0.25               # (margin: the subject envelope fills 1/margin of the frame, centred) nearest ship part at least a quarter of the ship length from the camera (no swollen Brow)
+# Hero camera and lighting pass (2026-11-02). Every camera renders two lit variants from the same pose:
+# - physical: the reference. One hard sun ([look.exterior] calibration), black space, the matched exposure_ev; nothing else lights the ship.
+# - cinematic: the physical light plus the editorial options below, each an explicitly named presentation light (EDITORIAL_*, object
+#   property wf_editorial), never a ship lamp or a physical source, plus the camera's editorial_ev (COAST only). Fill opens recesses from
+#   the camera side; rim separates the silhouette from black space. Strengths are fractions of the sun's.
+[look.hero_cameras.cinematic]
+status = "PROTOTYPE"
+label = "EDITORIAL presentation light, not a ship light and not physical"
+fill = { fraction = 0.06, color = [0.78, 0.84, 1.0], angle_deg = 20.0, yaw_deg = 25.0, pitch_deg = 15.0, shadows = false }
+rim = { fraction = 0.35, color = [1.0, 0.97, 0.92], angle_deg = 2.0, yaw_deg = 150.0, pitch_deg = 25.0, shadows = true }
+# First Ignition hot face (both variants, keys in this table; the established grey body at radiators.temperature and .emissivity, look.exterior):
+# - directional emissivity: the hot-face skin is a dielectric ceramic (hot_face_skin), whose emissivity follows 1 - Fresnel reflectance and
+#   falls toward grazing; strength x (1 - F(theta)) / (1 - F(0)) with an effective index ior (PROTOTYPE, 1.5-2.0 for oxide ceramics).
+# - lot spread: each isolatable cell (radiators.cell_isolation) carries its coating lot's emissivity, uniform within +-emissivity_spread of
+#   the WORKING 0.90 (PROTOTYPE coating tolerance). Luminance scales with emissivity; no cell temperature differs (the hot loop's
+#   inlet/outlet split is not sourced, so no temperature gradient is drawn).
+hot_face_ior = 1.7
+emissivity_spread = 0.03
 [look.hero_cameras.cameras.CAM_HERO_ENGINEERING]
 purpose = "Engineering Hero: the whole ship, its silhouette, three blades, spine, bulkhead, both rings, tank farm and Brow in their true proportions"
 focus = ["MID", 8.0, 0.0, 0.0]
 direction = [0.50, -1.0, -0.24]
 lens_mm = 50.0
 fit = ["AFT", -6.0, "FWD", 0.0, "R"]
-margin = 1.04
+margin = 1.06
 sun = [72.0, 205.0]
 editorial_ev = 2.0
 states = ["COAST"]
@@ -4634,11 +4652,11 @@ labels = [["DRIVE AND FOUR MAGNETIC NOZZLES", "NOZZLES"], ["HOT RADIATOR BLADES,
 [look.hero_cameras.cameras.CAM_HERO_FORWARD]
 purpose = "Forward Explorer: where the crew lives and how the ship protects them: Brow, EYE wells, tank farm, both rings, hub and spine"
 focus = ["RING_B", 10.0, 0.0, 0.0]
-direction = [0.25, -1.0, -0.40]
+direction = [0.55, -1.0, -0.40]       # 63 deg off the axis: the rings (r 30 m, 40 m behind the r 45 m Brow) open twice as wide and clear its disk
 lens_mm = 40.0
 fit = ["ZONE_FRONT", -6.0, "FWD", 0.0, "R"]
-margin = 1.02
-sun = [96.0, 215.0]
+margin = 1.12
+sun = [120.0, 215.0]                # 30 deg forward of broadside: rakes the Brow face so the EYE wells cast shadow, still lights the rings
 editorial_ev = 2.0
 states = ["COAST"]
 labels = [["BROW: SEGMENTED FORWARD SHIELD", "BROW_RIM"], ["EYE WELL (ONE OF FOUR)", "EYE_WELL"], ["CRYOGENIC TANK FARM", "TANK_SIDE"], ["RING B", "RING_B_RIM"], ["RING A", "RING_A_RIM"], ["LOW 300 K", "LOW_SHEET"]]
@@ -4648,7 +4666,7 @@ focus = ["HOT_MID", -10.0, 0.0, 0.0]
 direction = [-0.95, -0.85, -0.38]
 lens_mm = 35.0
 fit = ["AFT", -8.0, "ZONE_FRONT", 0.0, "R_BLADE"]
-margin = 1.02
+margin = 1.10
 sun = [55.0, 200.0]
 editorial_ev = 2.0
 states = ["COAST", "FIRST_IGNITION"]
