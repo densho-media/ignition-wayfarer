@@ -127,7 +127,7 @@ def fractal_nodes(nt, op, pos, u, ram, fw=0.003):
     y, z = pos.outputs['Y'], pos.outputs['Z']; a = u['fs_side']; h0 = a*S3/2
     # closeouts
     r = op('SQRT', add(mul(y, y), mul(z, z)))
-    wy = op('ABSOLUTE', sub(op('ABSOLUTE', y), u['fs_well_q'])); wz = op('ABSOLUTE', sub(op('ABSOLUTE', z), u['fs_well_q']))
+    wy = op('ABSOLUTE', sub(op('ABSOLUTE', y), u['fs_well_q'])); wz = op('ABSOLUTE', sub(op('ABSOLUTE', z), u['fs_well_qz']))
     if u['fs_well_hex'] > .5:          # the hexagonal EYE shell keep-out (fs_well_r its apothem)
         dw = sub(mx(wz, add(mul(wy, S3/2), mul(wz, .5))), u['fs_well_r'])
     else:

@@ -43,12 +43,12 @@ def interfaces(s):
     in the four quadrants at one radius (eye.facet_map), so one offset q and one radius describe them; the Crown bays are a regular ring."""
     p = params(s); c = p['closeout_m']; layer = forward_shield.disruptor_layers(s)[0]
     wells = forward_shield.wells(s); ports = forward_shield.eye_ports(s, layer)
-    q = abs(wells[0]['y'])
-    if any(abs(abs(w['y'])-q) > 1e-9 or abs(abs(w['z'])-q) > 1e-9 for w in wells):
-        raise ValueError('fractal_shield: the EYE wells are not one quadrant-symmetric set; the shader keep-out assumes it')
+    q, qz = abs(wells[0]['y']), abs(wells[0]['z'])
+    if any(abs(abs(w['y'])-q) > 1e-9 or abs(abs(w['z'])-qz) > 1e-9 for w in wells):
+        raise ValueError('fractal_shield: the EYE wells are not one mirror-symmetric set; the shader keep-out assumes it')
     shell = forward_shield.eye_shell(s)
-    if shell:          # hexagonal EYE shells (forward_defense.eye_shell): each Eye is one plate, set off from the tiling by the plate gap only
-        well_hex, well_r = 1.0, shell['apothem']+p['plate_gap_m']
+    if shell:          # hexagonal EYE shells (forward_defense.eye_shell): each Eye is one cell of the tiling; the keep-out is that cell
+        well_hex, well_r = 1.0, shell['apothem']
     else:
         well_hex, well_r = 0.0, max(max(w['radius'] for w in wells), max(o['radius'] for o in ports))+c
     lance_r = max(forward_shield.lance_radius_at(s, forward_shield.stations(s)['face'])+forward_shield.clearance(s),
@@ -58,7 +58,7 @@ def interfaces(s):
     hw = max(o['half_angle'] for o in openings)*r1            # the windows are angular sectors: widest at their outer radius
     n = len(forward_shield.crown_skin_windows(s))
     phase = forward_shield.crown_skin_windows(s)[0]['azimuth']
-    return dict(well_q=q, well_r=well_r, well_hex=well_hex, lance_r=lance_r, crown_n=n, crown_phase=phase, crown_rm=(r0+r1)/2, crown_hr=(r1-r0)/2+c,
+    return dict(well_q=q, well_qz=qz, well_r=well_r, well_hex=well_hex, lance_r=lance_r, crown_n=n, crown_phase=phase, crown_rm=(r0+r1)/2, crown_hr=(r1-r0)/2+c,
                 crown_hw=hw+c, rim_r=forward_shield.shield_radius(s)-p['rim_closeout_m'])
 
 
@@ -129,7 +129,7 @@ def plate_of(y, z, a):
 def closeout_distance(u, y, z):
     """Signed distance (m) from the nearest keep-out boundary: negative inside a closeout collar."""
     r = math.hypot(y, z)
-    vy, vz = abs(abs(y)-u['fs_well_q']), abs(abs(z)-u['fs_well_q'])
+    vy, vz = abs(abs(y)-u['fs_well_q']), abs(abs(z)-u['fs_well_qz'])
     # a round keep-out, or the flat-top hexagon of the EYE shell (corners on +-Y; fs_well_r its apothem)
     dw = max(vz, vy*SQRT3/2+vz/2)-u['fs_well_r'] if u['fs_well_hex'] > .5 else math.hypot(vy, vz)-u['fs_well_r']
     dl = r-u['fs_lance_r']
@@ -202,7 +202,7 @@ def eye_keepout_corner(u):
 def eye_shell_probes(s, u):
     """Closeout distances along the edge of every hexagonal EYE shell (= its layer port): corners and edge midpoints."""
     sh = forward_shield.eye_shell(s)
-    return [closeout_distance(u, y, z) for w in forward_shield.wells(s) for y, z in forward_shield.hexagon(sh['side'], w['y'], w['z'], 4)]
+    return [closeout_distance(u, y, z) for w in forward_shield.wells(s) for y, z in forward_shield.hexagon(sh['port_side'], w['y'], w['z'], 4)]
 
 
 # ---------- fit screen ------------------------------------------------------------------------------------------------------------------
@@ -230,10 +230,10 @@ def screen(s):
            ('Lance root inside the collar', u['fs_lance_r']-p['closeout_m'] >= forward_shield.lance_radius_at(s, forward_shield.stations(s)['face']),
             f"keep-out r {u['fs_lance_r']:.3f} m"),
            ('wells and Lance keep-outs inside the flat hub' if not forward_shield.eye_layout_active(s) else 'EYE keep-outs clear of the Crown keep-outs',
-            *((u['fs_well_q']*math.sqrt(2)+u['fs_well_r'] < forward_shield.cone_start_radius(s),
-               f"{u['fs_well_q']*math.sqrt(2)+u['fs_well_r']:.3f} m < {forward_shield.cone_start_radius(s)} m") if not forward_shield.eye_layout_active(s) else
-              (u['fs_well_q']*math.sqrt(2)+eye_keepout_corner(u) < u['fs_crown_rm']-u['fs_crown_hr'],
-               f"{u['fs_well_q']*math.sqrt(2)+eye_keepout_corner(u):.3f} m < {u['fs_crown_rm']-u['fs_crown_hr']:.3f} m")))]
+            *((math.hypot(u['fs_well_q'], u['fs_well_qz'])+u['fs_well_r'] < forward_shield.cone_start_radius(s),
+               f"{math.hypot(u['fs_well_q'], u['fs_well_qz'])+u['fs_well_r']:.3f} m < {forward_shield.cone_start_radius(s)} m") if not forward_shield.eye_layout_active(s) else
+              (math.hypot(u['fs_well_q'], u['fs_well_qz'])+eye_keepout_corner(u) < u['fs_crown_rm']-u['fs_crown_hr'],
+               f"{math.hypot(u['fs_well_q'], u['fs_well_qz'])+eye_keepout_corner(u):.3f} m < {u['fs_crown_rm']-u['fs_crown_hr']:.3f} m")))]
     probes = []
     for o in forward_shield.crown_skin_windows(s)+forward_shield.crown_ports(s):
         for rr in (o['r0'], o['r1'], (o['r0']+o['r1'])/2):
@@ -249,7 +249,7 @@ def screen(s):
     out.append(('every opening edge at least closeout_m inside a collar', worst <= -p['closeout_m']+1e-9, f'worst {worst:.3f} m'))
     if u['fs_well_hex']:          # the hexagonal EYE shell: its edge (the port's) sits one plate gap inside the keep-out, like a neighbouring plate
         worst = max(eye_shell_probes(s, u))
-        out.append(('EYE shell edge one plate gap inside its keep-out', worst <= -p['plate_gap_m']+1e-9, f'worst {worst:.3f} m'))
+        out.append(('EYE port edge one plate gap inside its cell', worst <= -p['plate_gap_m']+1e-9, f'worst {worst:.3f} m'))
     lowest = min(sample(u, y*.0173, z*.0173)['height'] for y in range(-400, 401, 7) for z in range(-400, 401, 7))
     out.append(('no sample deeper than the gap relief (no perforation)', lowest >= -2*p['relief_m']-1e-12, f'lowest {lowest:.4f} m'))
     return out

@@ -25,6 +25,8 @@ CARTRIDGE_STEP_DEG = 5.0          # search step for the window-cartridge withdra
 CARTRIDGE_EXTRA_M = (0.0, 0.5, 1.0, 1.5, 2.0, 3.0)   # search: how far past the collar the cartridge slides before it goes aft
 
 
+SPOKE_SNAP_DEG = 3.0        # FSE: a cell-snapped well may sit this far off its truss spoke
+
 def collar_radius(s):
     """Collar centreline radius round a well: clear of the well wall by the shared clearance, and large enough that the relocated layer posts on
     its nodes stand outside the 2.25 m outer port (FD-A04) by the post radius and the clearance."""
@@ -80,14 +82,20 @@ def alternate(s):
     rings_hit = sorted({R for w in ws for R in p['truss_ring_radii_m'] if ring_crossings(s, w, R)})
     for w in ws:
         d, ur, ut = _frame(w); j = w['index']; az = math.atan2(w['z'], w['y'])
-        k = next(i for i in range(n) if abs(((2*math.pi*(i+.5)/n-az+math.pi) % (2*math.pi))-math.pi) < 1e-6)
+        k = min(range(n), key=lambda i: abs(((2*math.pi*(i+.5)/n-az+math.pi) % (2*math.pi))-math.pi))       # the spoke the well sits on
+        if abs(((2*math.pi*(k+.5)/n-az+math.pi) % (2*math.pi))-math.pi) > math.radians(SPOKE_SNAP_DEG):
+            raise ValueError(f'eye_truss_study: well {j} is {math.degrees(az):.2f} deg, not within {SPOKE_SNAP_DEG} deg of a truss spoke')
+        sk = 2*math.pi*(k+.5)/n; us = (math.cos(sk), math.sin(sk))          # FSE cell-snapped wells sit up to ~1 deg off the spoke: the
+        spoke_end = lambda r, chord: ((_xa if chord == 'aft' else _xf)(s, r), r*us[0], r*us[1])   # replacement spoke keeps the base end nodes
         removed += [f'Truss_Spoke_{k+1:02}_{lab}' for lab in ('aft', 'fwd', 'diagonal')]
         r_si, r_so = d-2*rc, d+2*rc                                     # PROTOTYPE split nodes one collar radius before / after the collar
         tag = f'Study_Eye{j}'
         for seg, (r0, r1) in (('in', (r_in, r_si)), ('out', (r_so, r_out))):
             for chord in ('aft', 'fwd'):
-                add.append(dict(name=f'{tag}_Spoke_{seg}_{chord}', role='spoke', well=j, pts=[radial_point(s, w, r0, chord), radial_point(s, w, r1, chord)], radius=m))
-            add.append(dict(name=f'{tag}_Spoke_{seg}_diagonal', role='spoke', well=j, pts=[radial_point(s, w, r0, 'aft'), radial_point(s, w, r1, 'fwd')], radius=m))
+                ends = (spoke_end(r0, chord), radial_point(s, w, r1, chord)) if seg == 'in' else (radial_point(s, w, r0, chord), spoke_end(r1, chord))
+                add.append(dict(name=f'{tag}_Spoke_{seg}_{chord}', role='spoke', well=j, pts=list(ends), radius=m))
+            ends = (spoke_end(r0, 'aft'), radial_point(s, w, r1, 'fwd')) if seg == 'in' else (radial_point(s, w, r0, 'aft'), spoke_end(r1, 'fwd'))
+            add.append(dict(name=f'{tag}_Spoke_{seg}_diagonal', role='spoke', well=j, pts=list(ends), radius=m))
         for seg, r_split, phis in (('in', r_si, (BRANCH_PHI[1], 360-BRANCH_PHI[1])),
                                    ('out', r_so, (BRANCH_PHI[0], 360-BRANCH_PHI[0]))):
             for phi in phis:

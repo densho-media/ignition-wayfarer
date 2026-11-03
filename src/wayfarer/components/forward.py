@@ -149,6 +149,113 @@ def add_driver(target, path, index, expression, control):
     return fc
 
 
+def forward_bumper(c, s, plate_mat, structure, housing):
+    """FSE bumper facing (forward_shield.bumper_facing, PROTOTYPE): the hexagonal replaceable plates on the disruptor layer, grouped per Crown
+    sector, their tri-clamps and grapple sockets, the segmented rim guard and a frame round each Crown port."""
+    plates = fsh.bumper_plates(s)
+    lance_cells = {(round(q['y'], 6), round(q['z'], 6)) for q in fsh.eye_lance_cells(s)}
+    lance_panels = [p for p in plates if (round(p['y'], 6), round(p['z'], 6)) in lance_cells]
+    plates_all, plates = plates, [p for p in plates if (round(p['y'], 6), round(p['z'], 6)) not in lance_cells]
+    note = ('[ENGINEERING_FLEXIBLE] Replaceable sacrificial bumper plates, one cell of the facing tiling each (production.exterior.fractal_shield), '
+            'on the continuous disruptor layer, which stays whole behind every seam; material, thickness and areal mass OPEN (Eye 40!E33, OD-014).')
+    for k in range(1, fsh.prototype(s)['crown_bay_count']+1):
+        mine = [p for p in plates if p['sector'] == k]
+        if not mine:
+            continue
+        vs, fs_ = fsh.merged([fsh.bumper_plate_mesh(s, p) for p in mine])
+        obj = mesh(c, f'Bumper_Plates_{k:02}', vs, fs_, plate_mat, kind='bumper_plate')
+        mark(obj, 'WORKING', 'eye_disruptor_layer', 'bumper_plate', note)
+        obj['plate_count'] = len(mine); obj['plate_ids'] = ' '.join(f"{p['q']},{p['r']}" for p in mine); obj['sector'] = k
+        obj['component_id'] = f'WF.FORWARD.BUMPER.SECTOR.{k:02}'
+    hw = fsh.bumper_hardware(s, plates)
+    hw['clamps'] = fsh.bumper_hardware(s, plates_all)['clamps']          # the lance panels hang on the same tri-clamps
+    obj = mesh(c, 'Bumper_Clamps', *hw['clamps'], material('BumperClamp', (.22, .24, .27)), kind='bumper_clamp')
+    mark(obj, 'OPEN', 'eye_disruptor_layer', 'bumper_clamp', '[ENGINEERING_FLEXIBLE] Tri-clamp at every other plate corner: each clamp holds three plates, '
+         'each plate hangs on three, so one plate comes out alone; clamp design and loads OPEN.')
+    obj = mesh(c, 'Bumper_Sockets', *hw['sockets'], material('BrowPanelFixture', (.78, .60, .24)), kind='bumper_socket')
+    mark(obj, 'OPEN', 'regenerative_shield', 'bumper_socket', '[ENGINEERING_FLEXIBLE] Grapple socket at each plate centre for the Brow crawler or an EVA crew '
+         '(panel replacement, forward_defense.regenerative escalation); grip interface and loads OPEN.')
+    rim_mat = material('BumperRimGuard', (.34, .33, .30))
+    for g in fsh.rim_guard(s):
+        obj = mesh(c, g['name'], g['vertices'], g['faces'], rim_mat, kind='rim_guard')
+        mark(obj, 'OPEN', 'eye_disruptor_layer', 'rim_guard', '[ENGINEERING_FLEXIBLE] Segmented rim edge guard wrapping the layer edge, where grazing grains '
+             'arrive; ends inside r 45. Material, thickness and fixing OPEN.')
+        obj['component_id'] = f"WF.FORWARD.RIM_GUARD.{g['index']:02}"
+    for q in fsh.crown_port_frames(s):
+        obj = mesh(c, q['name'], q['vertices'], q['faces'], housing, kind='crown_port_frame')
+        mark(obj, 'OPEN', 'eye_crown', 'crown_port_frame', '[ENGINEERING_FLEXIBLE] Raised frame round the Q44 Crown layer port, outside the carriage footprint '
+             'and clearance; sizing OPEN.')
+    if lance_panels:
+        eye_lances(c, s, plate_mat, lance_panels)
+
+
+def eye_lances(c, s, plate_mat, panels):
+    """EYE dust lances (forward_shield.eye_lances, owner 2026-11-02, PROTOTYPE): per Eye six lance panels (whole facing cells, the same fractal
+    plates), six base housings with fold cradles, and per lance a hinge frame carrying the mast with its field coil and the sacrificial tip.
+    The frames fold the lances outward when the diversion field is off (driver on field_on)."""
+    house_mat = material('EyeShell', (.20, .22, .25)); mast_mat = material('EyeLanceMast', (.42, .44, .47)); tip_mat = material('DustLance', (.70, .66, .58))
+    mast, tip = fsh.eye_lance_meshes(s); lances = fsh.eye_lances(s)
+    for w in fsh.wells(s):
+        j = w['index']; mine = [p for p in panels if any(q['eye'] == j and abs(q['y']-p['y']) < 1e-6 and abs(q['z']-p['z']) < 1e-6 for q in lances)]
+        vs, fs_ = fsh.merged([fsh.bumper_plate_mesh(s, p) for p in mine])
+        obj = mesh(c, f'EYE_Lance_Panels_{j:02}', vs, fs_, plate_mat, kind='eye_lance_panel'); obj['owner_well'] = j; obj['plate_ids'] = ' '.join(f"{p['q']},{p['r']}" for p in mine)
+        mark(obj, 'OPEN', 'eye_disruptor_layer', 'eye_lance_panel', '[ENGINEERING_FLEXIBLE] Lance panel: a bumper plate of the same cell and pattern round the EYE '
+             'cell that carries a dust-lance housing in place of the grapple socket (owner 2026-11-02); material and areal mass OPEN.')
+        obj = mesh(c, f'EYE_Lance_Housings_{j:02}', *fsh.eye_lance_housings(s, j), house_mat, kind='eye_lance_housing'); obj['owner_well'] = j
+        mark(obj, 'OPEN', 'eye_wells', 'eye_lance_housing', '[ENGINEERING_FLEXIBLE] Lance base housing (hinge, coil feed, dust-counter electronics, crawler '
+             'grapple interface) and fold cradle; fold drive and loads OPEN.')
+    for q in lances:
+        frame = empty(c, q['frame'], (q['hinge_x'], q['y'], q['z']), ident=f"WF.FORWARD.EYE_LANCE.{q['eye']:02}.{q['k']}", kind='eye_lance_frame')
+        frame.rotation_mode = 'ZYX'; frame.rotation_euler = (q['roll'], 0.0, 0.0); frame.empty_display_type = 'PLAIN_AXES'; frame.empty_display_size = 0.4
+        frame['frame'] = 'local +X lance axis (deployed: ship +X), +Y outward from the EYE, +Z hinge axis'
+        mark(frame, 'OPEN', 'eye_wells', 'eye_lance_frame', '[ENGINEERING_FLEXIBLE] Lance hinge: folds the lance outward over its panel with the field off.')
+        obj = mesh(c, q['name'], *mast, mast_mat, kind='eye_lance'); obj.parent = frame; obj['owner_well'] = q['eye']
+        mark(obj, 'OPEN', 'dust_lance', 'eye_lance', '[ENGINEERING_FLEXIBLE] EYE dust-lance mast with its field coil: one of six round the port whose fields '
+             'cancel on the EYE axis and turn charged and ionized matter away from the port; neutral dust is not diverted (Eye 40!A22); field, coil and power OPEN (OD-018).')
+        obj = mesh(c, q['tip'], *tip, tip_mat, kind='eye_lance_tip'); obj.parent = frame; obj['owner_well'] = q['eye']
+        mark(obj, 'OPEN', 'dust_lance', 'eye_lance_tip', '[ENGINEERING_FLEXIBLE] Replaceable sacrificial tip cartridge with an impact-plasma dust counter (the '
+             'flux record that closes the EYE lid); material and erosion life OPEN (OD-017).')
+
+
+def eye_hardware(c, s, well_mat):
+    """FSE EYE well hardware (forward_shield.eye_hardware, PROTOTYPE; window, shutter and baffle solution OPEN, OD-020)."""
+    objects = {o.name: o for o in c.objects}
+    rail_mat = material('EyeShutterRail', (.24, .26, .29)); drive_mat = material('EyeShutterDrive', (.30, .33, .37))
+    for g in fsh.eye_shutter_hardware(s):
+        frame = objects[f"EYE_Shutter_Frame_{g['index']:02}"]
+        for name, kind, centre, size in g['boxes']:
+            obj = local_box(c, name, centre, size, rail_mat if kind == 'eye_shutter_rail' else drive_mat, kind, frame)
+            obj['owner_facet'] = g['label']
+            mark(obj, 'OPEN', 'eye_wells', kind, '[ENGINEERING_FLEXIBLE] Eyelid guide rail along the full leaf travel, outside the well\'s unvignetted cone (FD-E03).'
+                 if kind == 'eye_shutter_rail' else '[ENGINEERING_FLEXIBLE] Eyelid drive housing at the end of the leaf travel; drive, closing time and jam recovery OPEN (OD-020).')
+    lid_mat = material('EyeShutter', (.34, .36, .40))
+    if fsh.bumper(s):
+        for e in fsh.eye_lids(s):          # FSE port lids: two leaves aft of the layer, closing with the eyelids (eye_shutter_j)
+            j = e['index']
+            frame = empty(c, f'EYE_Lid_Frame_{j:02}', (e['x'], e['y'], e['z']), ident=f'WF.FORWARD.EYE_LID.{j:02}', kind='eye_lid_frame')
+            frame.rotation_euler = (Matrix.Rotation(e['azimuth'], 4, 'X') @ Matrix.Rotation(e['tilt'], 4, 'Z')).to_euler('XYZ')
+            frame.empty_display_type = 'PLAIN_AXES'; frame['frame'] = 'local +X axial, +Y radial, +Z tangential'
+            mark(frame, 'OPEN', 'eye_wells', 'eye_lid_frame', '[ENGINEERING_FLEXIBLE] Port-lid frame aft of the layer (owner 2026-11-02).')
+            for leaf in e['leaves']:
+                obj = local_box(c, leaf['name'], (0.0, 0.0, 0.0), (e['thickness'], e['radial'], e['tangential']), lid_mat, 'eye_lid', frame)
+                obj.location = (leaf['axial'], 0.0, leaf['sign']*e['open_t']); obj['owner_well'] = j
+                mark(obj, 'OPEN', 'eye_wells', 'eye_lid', '[ENGINEERING_FLEXIBLE] Armoured port-lid leaf: closes the EYE cell in the facing with the eyelids '
+                     '(eye_shutter_j); saved open (observe); drive, closing time, erosion life and seal OPEN (OD-020).')
+    shell_mat = material('EyeShell', (.20, .22, .25))
+    for q in fsh.eye_port_coamings(s):
+        obj = mesh(c, q['name'], q['vertices'], q['faces'], shell_mat, kind='eye_port_coaming'); fix_normals(obj)
+        mark(obj, 'OPEN', 'fwd_eye_optics', 'eye_port_coaming', '[ENGINEERING_FLEXIBLE] Reinforcing coaming round the EYE layer port: flush at the port edge '
+             '(the 2.25 m port radius is unchanged, FD-A04) and sloping below every ray leaving the port; sizing OPEN.')
+        obj['owner_well'] = q['index']
+    for q in fsh.eye_baffles(s):
+        w = q['well']; t = q['thickness']/2
+        obj = loft(c, q['name'], [(q['x']-t, q['outer']), (q['x']+t, q['outer']), (q['x']+t, q['inner']), (q['x']-t, q['inner']), (q['x']-t, q['outer'])],
+                   well_mat, center=(0, w['y'], w['z']), caps=False, segments=32, kind=q['kind'])
+        obj['owner_facet'] = w['label']
+        mark(obj, 'OPEN', 'eye_wells', q['kind'], '[ENGINEERING_FLEXIBLE] Knife-edge stray-light baffle on the well wall, outside the unvignetted cone (OD-020).'
+             if q['kind'] == 'eye_baffle' else '[ENGINEERING_FLEXIBLE] Retaining ring of the replaceable window cartridge, out to the well wall (Q43, OD-020).')
+
+
 def forward_shield(c, s):
     st = fsh.stations(s); p = fsh.prototype(s); fd = s['forward_defense']; disp = s['forward_shield']['display']
     CLASSES.clear(); CLASSES.update(fsh.design_classes(s))
@@ -266,6 +373,8 @@ def forward_shield(c, s):
         obj = loft(c, wn['name'], [(wn['x']-wn['thickness']/2, wn['radius']), (wn['x']+wn['thickness']/2, wn['radius'])], window_mat, center=(0, e['y'], e['z']), segments=32, kind='eye_window')
         obj['owner_facet'] = e['label']
         mark(obj, 'WORKING', 'eye_wells', 'eye_window', '[ENGINEERING_FLEXIBLE] Replaceable sacrificial window cartridge inside the well, ahead of the facet (Q43: no exposed pane); material, thickness and swap path OPEN (OD-020).')
+    # --- FSE EYE well hardware (forward_shield.eye_hardware, PROTOTYPE): eyelid rails and drives, port coamings, baffles, cartridge rings ---
+    eye_hardware(c, s, well)
     # --- Dust Lance: root sleeve from the EYE shared-mount face, cone, replaceable tip cartridge ---
     L = fsh.lance(s)
     mark(loft(c, 'Shield_Spine_Column', [(L['column'][0], L['base_r']), (L['column'][1], L['base_r'])], lance_mat, kind='shield_spine_column'), 'BASELINE', 'dust_lance', 'shield_spine_column',
@@ -278,15 +387,19 @@ def forward_shield(c, s):
     mark(loft(c, 'Dust_Lance_Tip_Cartridge', [(L['cone_end'], L['tip_r']), (L['x1'], L['tip_r'])], lance_mat, kind='dust_lance_tip'), 'WORKING', 'mec_lance_tip', 'dust_lance_tip',
          'Replaceable instrumented sacrificial tip (MEC-016); lifetime OPEN.')
     # --- full-area sacrificial disruptor: conical layer(s) with EYE, Lance and Crown ports, carried on posts at truss nodes ---
+    bumper_on = fsh.bumper(s) is not None
+    backing_mat = material('DisruptorBacking', (.52, .49, .38), 0.15, alpha=disp['disruptor_alpha']) if bumper_on else layer_mat
     for layer in fsh.disruptor_layers(s):
-        obj = disruptor_layer_mesh(c, s, layer, layer_mat)
+        obj = disruptor_layer_mesh(c, s, layer, backing_mat)
         outer_ports = [q for q in fsh.eye_ports(s, layer) if math.hypot(q['y'], q['z'])-q['radius'] > st['cone_r']]
         if outer_ports:
-            cut(obj, [dict(x0=st['face'], x1=st['lance_tip'], polygon=fsh.hexagon(q['side'], q['y'], q['z'])) if q['shape'] == 'hex'
-                      else ((st['face'], q['y'], q['z']), (st['lance_tip'], q['y'], q['z']), q['radius']) for q in outer_ports])
+            cut(obj, [dict(x0=st['rim_face'], x1=st['lance_tip'], polygon=fsh.hexagon(q['side'], q['y'], q['z'])) if q['shape'] == 'hex'
+                      else ((st['rim_face'], q['y'], q['z']), (st['lance_tip'], q['y'], q['z']), q['radius']) for q in outer_ports])
         mark(obj, 'WORKING', 'eye_disruptor_layer', 'disruptor_layer',
              f"[PHYSICS_LOCKED existence, full diameter and ahead of the Brow; standoff {layer['standoff']:g} m, display thickness and ports ENGINEERING_FLEXIBLE for owner review] FWD1 sacrificial layer: material, thickness, count and spacing OPEN (Eye 40!E33). Rendered translucent; checks treat it as opaque.")
         obj['standoff_m'] = layer['standoff']; obj['open_fraction_diagnostic'] = fsh.disruptor_open_fraction(s, layer)
+    if bumper_on:
+        forward_bumper(c, s, layer_mat, structure, housing)
     for post in fsh.disruptor_posts(s):
         mark(line(c, post['name'], [post['a'], post['b']], post['radius'], structure, kind='disruptor_post'), 'OPEN', 'eye_disruptor_layer', 'disruptor_post',
              '[ENGINEERING_FLEXIBLE] Post carrying the layer on a truss node (load path layer - post - truss node - truss); sizing OPEN.')

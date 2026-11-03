@@ -1,0 +1,47 @@
+{
+ "task": "forward_shield_eye",
+ "approved": "2026-11-03T06:54Z (owner: \"Squash everything onto main. Go ahead and squash it.\")",
+ "brief": "2026-11-02T07:29Z six-thread brief, Thread 2; owner rounds: one plate size + EYE in one cell + closing lids (2026-11-02), six dust lances per EYE in the six neighbour plates (2026-11-02)",
+ "base": "92579ff",
+ "branch": "claude/project-thread-6zn14w",
+ "branch_head": "see squash parent; study at aa31e28",
+ "study_restore": "git show aa31e28:work/forward-shield-eye-refinement/<file> (NOTES.md design, checks and dependencies; make_review.py review-file builder)",
+ "baseline": "references/baseline_forward_shield_eye",
+ "full_pipeline": "runs/20261103T070333Z-pipeline PASS (all tests, whole-ship inspection; geometry diff 0 unexpected against baseline_thermal_bulkhead_mechanisms)",
+ "bumper": {
+  "plate_side_m": 2.875,
+  "gap_m": 0.08,
+  "plates": 242,
+  "clamps": 276,
+  "thermal_growth_mm_over_200K": 21,
+  "gap_ray_incidence_deg": 53,
+  "design_arrival_cone_deg": 5
+ },
+ "eye_cells": {
+  "radius_m": 31.1,
+  "angle_deg": 46.1,
+  "yz_m": [
+   21.56,
+   22.41
+  ],
+  "spoke_bend_max_deg": 1.1
+ },
+ "eye_lances": {
+  "per_eye": 6,
+  "neighbour_distance_m": 4.98,
+  "folded_length_m": 2.4,
+  "half_cell_m": 2.45,
+  "tip_above_plate_m": 2.7,
+  "worst_cone_margin_m": 1.712,
+  "folded_coil_above_plate_m": 0.08,
+  "clear_of_crown_ports_m": 8.105,
+  "coil_ampere_turns_estimate": 600000.0,
+  "field_estimate_T": 0.001,
+  "status": "PROTOTYPE; field, coil, power OPEN (OD-018)"
+ },
+ "window_cartridge": {
+  "radius_m": 1.3,
+  "unvignetted_footprint_m": 1.35,
+  "decision": "kept 1.30 m pending owner"
+ }
+}

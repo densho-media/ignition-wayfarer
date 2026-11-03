@@ -20,7 +20,8 @@ uniform float fs_inset_value;
 uniform float fs_jitter;
 uniform float fs_repair_share;
 uniform float fs_repair_value;
-uniform float fs_well_q;        // EYE well keep-outs: centres at (+-q, +-q), radius (or, with fs_well_hex 1, the flat-top hexagon's apothem)
+uniform float fs_well_q;        // EYE well keep-outs: centres at (+-q, +-qz), radius (or, with fs_well_hex 1, the flat-top hexagon's apothem)
+uniform float fs_well_qz;       // EYE well centre |z| (the wells sit on facing cells, so |y| and |z| may differ)
 uniform float fs_well_r;
 uniform float fs_well_hex;
 uniform float fs_lance_r;       // Lance root keep-out radius
@@ -62,7 +63,7 @@ float fs_vgroove(float d, float w, float fw) {
 
 float fs_closeout(vec2 p) {
 	float r = length(p);
-	vec2 wv = abs(abs(p) - vec2(fs_well_q));
+	vec2 wv = abs(abs(p) - vec2(fs_well_q, fs_well_qz));
 	float dw = fs_well_hex > 0.5 ? max(wv.y, wv.x * 0.8660254 + wv.y * 0.5) - fs_well_r : length(wv) - fs_well_r;
 	float dl = r - fs_lance_r;
 	float step_a = 2.0 * FS_PI / fs_crown_n;

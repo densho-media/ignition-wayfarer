@@ -125,7 +125,19 @@ def well_centres(s):
     """(y, z) of each well axis = its EYE facet centre, in the owner facet order (eye.facet_map), at the WORKING well centre radius (14!A28).
     The 8 m array baseline is a separate optical input: validate ties it to this radius only for the production layout (FWD-V2 study)."""
     q = s['forward_defense']['eye_wells']['centre_radius_m']/math.sqrt(2)
-    return [(yy*q, zz*q) for yy, zz in s['eye']['facet_map']['quadrants']]
+    out = [(yy*q, zz*q) for yy, zz in s['eye']['facet_map']['quadrants']]
+    e = s['forward_defense'].get('eye_shell')
+    lay = s['forward_defense'].get('eye_layout') or {}
+    selected = lay.get('radii_m', {}).get(lay.get('selected'))
+    if e and e.get('snap_to_facing') and selected and math.isclose(s['forward_defense']['eye_wells']['centre_radius_m'], selected) \
+            and selected > cone_start_radius(s):          # the saved layout only; the r16/r24 comparison variants keep their exact diagonals
+        # FSE (owner 2026-11-02): each Eye sits in one cell of the facing tiling, so the pattern runs on unbroken round it. The cell nearest the
+        # quadrant point of the selected radius; the flat-top lattice is mirror-symmetric about Y and Z, so the four cells stay one mirror set.
+        a = s['production']['exterior']['fractal_shield']['plate_side_m']; y0, z0 = abs(out[0][0]), abs(out[0][1])
+        best = min(((a*1.5*qq, a*SQRT3*(rr+qq/2.0)) for qq in range(0, int(y0/(1.5*a))+3) for rr in range(-int(z0/a)-3, int(z0/a)+3)),
+                   key=lambda c: (c[0]-y0)**2+(c[1]-z0)**2)
+        out = [(yy*best[0], zz*abs(best[1])) for yy, zz in s['eye']['facet_map']['quadrants']]
+    return out
 
 
 def in_hub(s, w):
@@ -582,8 +594,12 @@ def eye_shell(s):
     if not e or e['shape'] != 'hex':
         return None
     rp = max(prototype(s)['eye_port_scale']*eye_port_required_radius(s, q) for q in disruptor_layers(s))
-    side = max(s['production']['exterior']['fractal_shield']['plate_side_m'], 2*rp/math.sqrt(3))
-    return dict(e, side=side, apothem=side*math.sqrt(3)/2)
+    port_side = 2*rp/math.sqrt(3)
+    if e.get('snap_to_facing'):          # FSE: the Eye is one cell of the facing; the port (apothem = the 2.25 m port radius) sits inside it
+        side = s['production']['exterior']['fractal_shield']['plate_side_m']
+    else:
+        side = port_side = max(s['production']['exterior']['fractal_shield']['plate_side_m'], port_side)
+    return dict(e, side=side, apothem=side*math.sqrt(3)/2, port_side=port_side, port_apothem=port_side*math.sqrt(3)/2)
 
 
 def hexagon(side, cy=0.0, cz=0.0, per_edge=1):
@@ -608,9 +624,10 @@ def eye_shell_mesh(s, w, n=36):
     proud_m ahead of the local skin face and its back depth_m into the skin, following the face (flat hub or cone). Vertices and faces: four rings
     of n points (top outer, top inner, back inner, back outer); every 60 deg step lands on a hexagon corner."""
     e = eye_shell(s); rw = w['radius']; vs = []
+    side = e['side']-s['production']['exterior']['fractal_shield']['plate_gap_m']/SQRT3 if e.get('snap_to_facing') else e['side']
     for kind in ('top_out', 'top_in', 'back_in', 'back_out'):
         for k in range(n):
-            th = 2*math.pi*k/n; rad = hex_boundary(e['side'], th) if kind.endswith('out') else rw
+            th = 2*math.pi*k/n; rad = hex_boundary(side, th) if kind.endswith('out') else rw
             y, z = w['y']+rad*math.cos(th), w['z']+rad*math.sin(th)
             vs.append((face_x_at(s, math.hypot(y, z))+(e['proud_m'] if kind.startswith('top') else -e['depth_m']), y, z))
     fs = [(a*n+(k+1) % n, a*n+k, ((a+1) % 4)*n+k, ((a+1) % 4)*n+(k+1) % n) for a in range(4) for k in range(n)]
@@ -621,14 +638,14 @@ def eye_port_radius(s, layer):
     """Port radius cut in a layer coaxial with each well: the required radius times the PROTOTYPE eye_port_scale (>= 1). With the hexagonal EYE
     shell it is the hexagonal port's apothem (its inscribed circle), never below that radius."""
     e = eye_shell(s)
-    return e['apothem'] if e else prototype(s)['eye_port_scale']*eye_port_required_radius(s, layer)
+    return e['port_apothem'] if e else prototype(s)['eye_port_scale']*eye_port_required_radius(s, layer)
 
 
 def eye_port_outer_radius(s, layer):
     """Largest distance from a port's centre to its edge: the hexagon's corner radius, or the round port's radius. Clearances to the posts, the
     other ports, the Lance hole and the Crown housing use it."""
     e = eye_shell(s)
-    return e['side'] if e else eye_port_radius(s, layer)
+    return e['port_side'] if e else eye_port_radius(s, layer)
 
 
 def lance_hole_radius(s, layer):
@@ -664,6 +681,8 @@ def crown_port_covers(s):
 def eye_baselines(s, radius=None):
     """FD-A03 / AG-A03: geometric facet separations follow the placement radius; B_array stays the r4 calibration input; the coherent baseline is OPEN."""
     r = s['forward_defense']['eye_wells']['centre_radius_m'] if radius is None else radius; b = s['eye']['array_baseline']
+    if radius is None:          # the built (possibly cell-snapped) wells: their polar radius
+        r = math.hypot(wells(s)[0]['y'], wells(s)[0]['z'])
     return {'radius_m': float(r),
             'geometric_opposite_m': {'known': True, 'value': float(2*r), 'unit': 'm', 'canon_status': 'DERIVED', 'basis': 'opposite facet centres, 2 r'},
             'geometric_adjacent_m': {'known': True, 'value': float(math.sqrt(2)*r), 'unit': 'm', 'canon_status': 'DERIVED', 'basis': 'adjacent facet centres, sqrt(2) r'},
@@ -675,7 +694,7 @@ def eye_baselines(s, radius=None):
 def eye_ports(s, layer):
     e = eye_shell(s)
     return [dict(index=w['index'], y=w['y'], z=w['z'], radius=eye_port_radius(s, layer), outer_radius=eye_port_outer_radius(s, layer),
-                 shape='hex' if e else 'round', side=e['side'] if e else None, well_radius=w['radius']) for w in wells(s)]
+                 shape='hex' if e else 'round', side=e['port_side'] if e else None, well_radius=w['radius']) for w in wells(s)]
 
 
 def disruptor_open_fraction(s, layer=None):
@@ -793,6 +812,500 @@ def eye_shutters(s):
                         leaves=[dict(name=f"EYE_Shutter_{w['index']:02}_{k}", sign=sg, axial=ax) for k, sg, ax in (('A', 1.0, 0.0), ('B', -1.0, th))],
                         window=dict(name=f"EYE_Window_{w['index']:02}", x=w['x0']+p['eye_window_inset_m'], radius=s['eye']['aperture']['value']/2+ov,
                                     thickness=p['eye_window_thickness_m'])))
+    return out
+
+
+# ---------- FSE: bumper facing plates, rim guard and EYE well hardware (forward_shield.bumper_facing / eye_hardware, PROTOTYPE) ----------
+
+SQRT3 = math.sqrt(3.0)
+
+
+def bumper(s):
+    """The bumper-facing table with the tiling it shares with the fractal shading (plate side and gap: one place), or None when disabled."""
+    b = s['forward_shield'].get('bumper_facing')
+    if not b or not b.get('enabled'):
+        return None
+    f = s['production']['exterior']['fractal_shield']
+    return dict(b, plate_side_m=f['plate_side_m'], plate_gap_m=f['plate_gap_m'])
+
+
+def eye_hardware_params(s):
+    return s['forward_shield']['eye_hardware']
+
+
+def layer_front_at(s, r):
+    """Front face X of the outermost disruptor layer at radius r: the bumper plates sit on it."""
+    return layer_x(s, disruptor_layers(s)[-1], r)[1]
+
+
+def _hex_lattice_centre(a, q, r):
+    return a*1.5*q, a*SQRT3*(r+q/2.0)
+
+
+def _point_in_convex(pt, poly):
+    """True when pt lies inside the counter-clockwise convex polygon poly."""
+    n = len(poly)
+    for i in range(n):
+        (ay, az), (by, bz) = poly[i], poly[(i+1) % n]
+        if (by-ay)*(pt[1]-az)-(bz-az)*(pt[0]-ay) < 0:
+            return False
+    return True
+
+
+def _seg_seg_dist2d(p0, p1, q0, q1):
+    def pd(p, a, b):
+        dy, dz = b[0]-a[0], b[1]-a[1]; L = dy*dy+dz*dz
+        t = 0.0 if L == 0 else max(0.0, min(1.0, ((p[0]-a[0])*dy+(p[1]-a[1])*dz)/L))
+        return math.hypot(p[0]-a[0]-t*dy, p[1]-a[1]-t*dz)
+    def cross(o, a, b):
+        return (a[0]-o[0])*(b[1]-o[1])-(a[1]-o[1])*(b[0]-o[0])
+    d1, d2, d3, d4 = cross(q0, q1, p0), cross(q0, q1, p1), cross(p0, p1, q0), cross(p0, p1, q1)
+    if d1*d2 < 0 and d3*d4 < 0:
+        return 0.0
+    return min(pd(p0, q0, q1), pd(p1, q0, q1), pd(q0, p0, p1), pd(q1, p0, p1))
+
+
+def polygon_gap(a, b):
+    """Smallest distance between two convex polygons in (y, z); 0 when they overlap."""
+    if any(_point_in_convex(p, b) for p in a) or any(_point_in_convex(p, a) for p in b):
+        return 0.0
+    return min(_seg_seg_dist2d(a[i], a[(i+1) % len(a)], b[j], b[(j+1) % len(b)]) for i in range(len(a)) for j in range(len(b)))
+
+
+def _circle_poly(r, cy=0.0, cz=0.0, n=32):
+    return [(cy+r*math.cos(2*math.pi*k/n), cz+r*math.sin(2*math.pi*k/n)) for k in range(n)]
+
+
+def _sector_box(r0, r1, az, half_width):
+    """A Crown port as a convex (y, z) quadrilateral: radial r0..r1 at azimuth az, tangential +-half_width (CCW)."""
+    ur = (math.cos(az), math.sin(az)); ut = (-ur[1], ur[0])
+    return [(ur[0]*r+ut[0]*t, ur[1]*r+ut[1]*t) for r, t in ((r0, -half_width), (r1, -half_width), (r1, half_width), (r0, half_width))]
+
+
+def _grow_hex(side, grow):
+    """Side of a flat-top hexagon whose edges lie `grow` outside those of a hexagon of side `side`."""
+    return side+2*grow/SQRT3
+
+
+def bumper_keepouts(s):
+    """The openings the plates keep off, as convex (y, z) polygons with their kind: each EYE port with its coaming, the Lance hole, each Crown
+    port with its frame. A plate must keep closeout_m from every one, and lie inside the rim guard by a plate gap."""
+    b = bumper(s); h = eye_hardware_params(s); layer = disruptor_layers(s)[-1]; out = []
+    for q in eye_ports(s, layer):
+        if q['shape'] == 'hex':          # the port; with snapped Eyes its cell is left out and the neighbours keep their full plates
+            out.append(('eye', q['index'], hexagon(q['side'], q['y'], q['z'])))
+        else:
+            out.append(('eye', q['index'], _circle_poly(q['radius']+h['coaming_width_m'], q['y'], q['z'])))
+    out.append(('lance', 0, _circle_poly(lance_hole_radius(s, layer))))
+    fw = b['crown_frame_width_m']
+    for q in crown_ports(s):
+        out.append(('crown', q['index'], _sector_box(q['r0']-fw, q['r1']+fw, q['azimuth'], q['width']/2+fw)))
+    return out
+
+
+def eye_cells(s):
+    """Centres of the facing cells the Eyes occupy (forward_defense.eye_shell.snap_to_facing), else empty."""
+    e = eye_shell(s)
+    return [(w['y'], w['z']) for w in wells(s)] if e and e.get('snap_to_facing') else []
+
+
+def eye_gap(s):
+    """Distance from an Eye's port edge to the neighbouring plates when the Eye fills one cell: the cell apothem less half a plate gap (the
+    neighbour's edge) less the port apothem."""
+    e = eye_shell(s); g = s['production']['exterior']['fractal_shield']['plate_gap_m']
+    return e['apothem']-g/2-e['port_apothem']-1e-6
+
+
+def bumper_plates(s):
+    """The replaceable bumper plates: whole cells of the facing tiling (flat-top hexagons of the fractal plate side, one centred on the axis),
+    each shrunk by half the plate gap, kept when every corner lies inside the rim guard less a plate gap and the plate keeps closeout_m from
+    every opening keep-out. Each plate: lattice (q, r), centre, outline (y, z) CCW, the Crown sector it belongs to (1-12, by its centre
+    azimuth, as the bays) and its polar radius."""
+    b = bumper(s)
+    if not b:
+        return []
+    a = b['plate_side_m']; g = b['plate_gap_m']; side = a-g/SQRT3; rmax = b['rim_guard_inner_radius_m']-g
+    keep = bumper_keepouts(s); n = prototype(s)['crown_bay_count']; bays = crown(s)['bays']; phase = bays[0]['azimuth']
+    qmax = int(shield_radius(s)/(1.5*a))+2; out = []; eyes = eye_cells(s)
+    for q in range(-qmax, qmax+1):
+        for r in range(-2*qmax, 2*qmax+1):
+            cy, cz = _hex_lattice_centre(a, q, r)
+            if math.hypot(cy, cz) > rmax:
+                continue
+            poly = hexagon(side, cy, cz)
+            if max(math.hypot(y, z) for y, z in poly) > rmax:
+                continue
+            if any(math.hypot(cy-ey, cz-ez) < 1e-6 for ey, ez in eyes):
+                continue          # the Eye's own cell: its port, frame and lid
+            if any(polygon_gap(poly, k[2]) < (eye_gap(s) if k[0] == 'eye' and eyes else b['closeout_m']) for k in keep):
+                continue
+            az = math.atan2(cz, cy); sector = int(math.floor(((az-phase)/(2*math.pi/n))+.5)) % n+1
+            out.append(dict(q=q, r=r, y=cy, z=cz, radius=math.hypot(cy, cz), outline=poly, sector=sector, side=side))
+    return out
+
+
+def bumper_clamps(s, plates=None):
+    """Tri-clamps at every other plate corner (the lattice A vertices, the shader's fasteners: corners at 0, 120 and 240 deg of each plate), one
+    per vertex shared by any kept plate; each clamp holds up to three plates and each plate hangs on three clamps."""
+    b = bumper(s)
+    if not b:
+        return []
+    a = b['plate_side_m']; seen = {}
+    for p in (plates if plates is not None else bumper_plates(s)):
+        for k in (0, 2, 4):
+            y, z = p['y']+a*math.cos(math.radians(60*k)), p['z']+a*math.sin(math.radians(60*k))
+            seen.setdefault((round(y, 6), round(z, 6)), (y, z))
+    return [dict(y=y, z=z, radius=math.hypot(y, z)) for y, z in seen.values()]
+
+
+def bumper_plate_mesh(s, plate):
+    """One plate as (vertices, faces): bottom outline on the layer front, a short vertical edge, a bevel up to the inset top face; every vertex
+    follows the local layer front (flat hub or cone)."""
+    b = bumper(s); t = b['plate_thickness_m']; e = b['plate_edge_m']; side = plate['side']; top = side-2*b['plate_bevel_m']/SQRT3
+    rings = [(side, 0.0), (side, e), (top, t)]; vs = []
+    for sd, dx in rings:
+        for y, z in hexagon(sd, plate['y'], plate['z']):
+            vs.append((layer_front_at(s, math.hypot(y, z))+dx, y, z))
+    fs = [tuple(range(5, -1, -1)), tuple(range(12, 18))]
+    for i in range(2):
+        for k in range(6):
+            a0, a1 = i*6+k, i*6+(k+1) % 6
+            fs.append((a0, a1, a1+6, a0+6))
+    return vs, fs
+
+
+def _boss(cy, cz, x0, radius, height, n=8, phase=0.0):
+    """A small n-sided boss (vertices, faces) standing `height` ahead of x0 at (cy, cz)."""
+    vs = [(x0+dx, cy+radius*math.cos(phase+2*math.pi*k/n), cz+radius*math.sin(phase+2*math.pi*k/n)) for dx in (0.0, height) for k in range(n)]
+    fs = [tuple(range(n-1, -1, -1)), tuple(range(n, 2*n))]+[(k, (k+1) % n, n+(k+1) % n, n+k) for k in range(n)]
+    return vs, fs
+
+
+def merged(parts):
+    """Merge (vertices, faces) parts into one mesh."""
+    vs, fs = [], []
+    for v, f in parts:
+        o = len(vs); vs += v; fs += [tuple(o+i for i in face) for face in f]
+    return vs, fs
+
+
+def bumper_hardware(s, plates=None):
+    """Clamp caps and grapple sockets as two merged meshes: {'clamps': (vs, fs), 'sockets': (vs, fs)}."""
+    b = bumper(s); plates = plates if plates is not None else bumper_plates(s); t = b['plate_thickness_m']
+    clamps = [_boss(c['y'], c['z'], layer_front_at(s, c['radius'])+t-0.01, b['clamp_radius_m'], b['clamp_height_m']+0.01, 6) for c in bumper_clamps(s, plates)]
+    sockets = [_boss(p['y'], p['z'], layer_front_at(s, p['radius'])+t-0.005, b['socket_half_m']*math.sqrt(2), b['socket_height_m']+0.005, 4, math.pi/4) for p in plates]
+    return {'clamps': merged(clamps), 'sockets': merged(sockets)}
+
+
+def rim_guard(s):
+    """Segmented edge guard of the rim: rim_guard_segments arcs from rim_guard_inner_radius_m to the shield radius on the layer front, each with a
+    lip wrapping the layer's outer edge aft by the layer thickness plus rim_guard_wrap_m; joints between segments. Never beyond r 45."""
+    b = bumper(s); R = shield_radius(s); r0 = b['rim_guard_inner_radius_m']; n = b['rim_guard_segments']; t = b['rim_guard_thickness_m']
+    layer = disruptor_layers(s)[-1]; lip = b['rim_guard_wrap_m']; jt = b['rim_guard_joint_m']/2/R; out = []
+    for k in range(n):
+        a0 = 2*math.pi*k/n+jt; a1 = 2*math.pi*(k+1)/n-jt; m = 6
+        ang = [a0+(a1-a0)*i/m for i in range(m+1)]
+        # profile (r, x) round the edge: inner front, outer front (chamfered), outer aft (the wrap), back on the layer edge
+        prof = [(r0, layer_front_at(s, r0)), (r0+0.15, layer_front_at(s, r0+0.15)+t), (R-0.06, layer_front_at(s, R-0.06)+t), (R, layer_front_at(s, R)+t-0.06),
+                (R, layer_x(s, layer, R)[0]-lip), (R-0.10, layer_x(s, layer, R)[0]-lip), (R-0.10, layer_x(s, layer, R)[0]), (r0, layer_front_at(s, r0))]
+        prof = prof[:-1]; P = len(prof)
+        vs = [(x, r*math.cos(a), r*math.sin(a)) for a in ang for r, x in prof]
+        fs = []
+        for i in range(m):
+            for j in range(P):
+                fs.append((i*P+j, i*P+(j+1) % P, (i+1)*P+(j+1) % P, (i+1)*P+j))
+        fs.append(tuple(range(P-1, -1, -1))); fs.append(tuple(m*P+j for j in range(P)))
+        out.append(dict(name=f'Rim_Guard_{k+1:02}', index=k+1, vertices=vs, faces=fs))
+    return out
+
+
+def crown_port_frames(s):
+    """A raised frame round each Crown layer port (outside the port, so the engaged carriage passes as before): (name, vertices, faces)."""
+    b = bumper(s); fw = b['crown_frame_width_m']; h = b['crown_frame_height_m']; out = []
+    for q in crown_ports(s):
+        inner = _sector_box(q['r0'], q['r1'], q['azimuth'], q['width']/2); outer = _sector_box(q['r0']-fw, q['r1']+fw, q['azimuth'], q['width']/2+fw)
+        vs = []
+        for loop, dx in ((outer, 0.0), (outer, h), (inner, h), (inner, 0.0)):
+            vs += [(layer_front_at(s, math.hypot(y, z))+dx, y, z) for y, z in loop]
+        fs = [(a*4+(k+1) % 4, a*4+k, ((a+1) % 4)*4+k, ((a+1) % 4)*4+(k+1) % 4) for a in range(4) for k in range(4)]
+        out.append(dict(name=f"Crown_Port_Frame_{q['index']:02}", index=q['index'], vertices=vs, faces=fs))
+    return out
+
+
+def eye_port_coamings(s):
+    """Hexagonal (or round) coaming round each EYE layer port: flush with the layer front at the port edge, rising outward at coaming_slope_deg
+    over coaming_width_m, then down to the layer. (name, well index, vertices, faces)."""
+    h = eye_hardware_params(s); layer = disruptor_layers(s)[-1]; e = eye_shell(s); b = bumper(s); out = []
+    tan = math.tan(math.radians(h['coaming_slope_deg']))
+    for q in eye_ports(s, layer):
+        if q['shape'] == 'hex' and e.get('snap_to_facing'):          # the frame fills the Eye's cell out to the plate gap, at plate height
+            w = eye_gap(s); hi = min(b['plate_thickness_m'] if b else w*tan, w*tan); wb = hi/tan
+            inner = hexagon(q['side'], q['y'], q['z'], 2); mid = hexagon(_grow_hex(q['side'], wb), q['y'], q['z'], 2)
+            outer = hexagon(_grow_hex(q['side'], w), q['y'], q['z'], 2)
+        elif q['shape'] == 'hex':
+            w = h['coaming_width_m']; hi = w*tan; inner = hexagon(q['side'], q['y'], q['z'], 2)
+            mid = outer = hexagon(_grow_hex(q['side'], w), q['y'], q['z'], 2)
+        else:
+            w = h['coaming_width_m']; hi = w*tan; inner = _circle_poly(q['radius'], q['y'], q['z'], 36)
+            mid = outer = _circle_poly(q['radius']+w, q['y'], q['z'], 36)
+        n = len(inner); vs = []
+        rings = ((inner, 0.0), (mid, hi), (outer, hi), (outer, 0.0))
+        for loop, top in rings:
+            vs += [(layer_front_at(s, math.hypot(y, z))+top+0.002, y, z) for y, z in loop]
+        m = len(rings)
+        fs = [(a*n+(k+1) % n, a*n+k, ((a+1) % m)*n+k, ((a+1) % m)*n+(k+1) % n) for a in range(m) for k in range(n)]
+        out.append(dict(name=f"EYE_Port_Coaming_{q['index']:02}", index=q['index'], vertices=vs, faces=fs, height=hi, width=w))
+    return out
+
+
+def eye_lids(s):
+    """FSE EYE port lids (owner 2026-11-02: the opening in the facing must close): two armoured leaves per port, one shared clearance aft of the
+    layer, that part tangentially like the eyelids and the Crown port covers (Q44 grammar). Closed, they cover the port's corner circle plus
+    lid_overlap_m and lap lid_seam_m at the middle (leaf B one leaf thickness forward); open, each leaf lies beside the port. Frame: local +X
+    axial, +Y radial, +Z tangential at the port centre, tilted onto the cone. Driven with the eyelids by eye_shutter_j (one EYE closure)."""
+    h = eye_hardware_params(s); layer = disruptor_layers(s)[-1]; clr = clearance(s); th = h['lid_thickness_m']; out = []
+    rc, R = cone_start_radius(s), shield_radius(s); depth = prototype(s)['crown_depth_m']
+    for q in eye_ports(s, layer):
+        side = 2*(q['outer_radius']+h['lid_overlap_m']); seam = h['lid_seam_m']; half = (side+seam)/2
+        closed = (side-seam)/4; opened = side/2+half/2+clr
+        r = math.hypot(q['y'], q['z']); tilt = math.atan(depth/(R-rc)) if r-side/2 > rc else 0.0
+        x = layer_x(s, layer, r)[0]-(clr+th+th/2)/math.cos(tilt)
+        out.append(dict(index=q['index'], azimuth=math.atan2(q['z'], q['y']), tilt=tilt, x=x, y=q['y'], z=q['z'], thickness=th, radial=side,
+                        tangential=half, closed_t=closed, open_t=opened, travel=opened-closed, axial_step=th,
+                        leaves=[dict(name=f"EYE_Lid_{q['index']:02}_{k}", sign=sg, axial=ax) for k, sg, ax in (('A', 1.0, 0.0), ('B', -1.0, th))]))
+    return out
+
+
+def eye_shutter_hardware(s):
+    """Per eyelid frame (eye_shutters, local +X axial, +Y radial, +Z tangential): two guide rails along the full tangential travel just outside
+    the leaves' radial edges, and a drive housing at each end of the travel. Boxes as (name, kind, centre, size) in the frame's local axes, with
+    the frame's world placement for screens."""
+    h = eye_hardware_params(s); out = []; gap = prototype(s)['eye_shutter_gap_m']
+    for e in eye_shutters(s):
+        x_skin = -(gap+e['thickness']/2); x_top = e['axial_step']+e['thickness']/2+h['rail_top_clearance_m']
+        reach = e['open_t']+e['tangential']/2+h['rail_end_m']; ry = e['radial']/2+h['rail_gap_m']+h['rail_width_m']/2
+        boxes = [(f"EYE_Shutter_Rail_{e['index']:02}_{tag}", 'eye_shutter_rail', ((x_skin+x_top)/2, sg*ry, 0.0), (x_top-x_skin, h['rail_width_m'], 2*reach))
+                 for tag, sg in (('P', 1.0), ('N', -1.0))]
+        span = 2*ry+h['rail_width_m']
+        boxes += [(f"EYE_Shutter_Drive_{e['index']:02}_{tag}", 'eye_shutter_drive', (x_skin+h['drive_axial_m']/2, 0.0, sg*(reach+h['drive_tangential_m']/2)),
+                   (h['drive_axial_m'], span, h['drive_tangential_m'])) for tag, sg in (('A', 1.0), ('B', -1.0))]
+        out.append(dict(index=e['index'], label=e['label'], frame=e, boxes=boxes))
+    return out
+
+
+def _frame_to_world(e, p):
+    """Eyelid-frame local point -> world, the generator's rotation (azimuth about X, tilt about the local tangential axis)."""
+    x, y, z = p; ct, st_ = math.cos(e['tilt']), math.sin(e['tilt'])
+    x1, y1 = x*ct-y*st_, x*st_+y*ct          # tilt about local Z (tangential)
+    ca, sa = math.cos(e['azimuth']), math.sin(e['azimuth'])
+    return (e['x']+x1, e['y']+y1*ca-z*sa, e['z']+y1*sa+z*ca)
+
+
+def eye_baffles(s):
+    """Knife-edge baffle rings and the window-cartridge retaining ring per well: (name, kind, well, x, inner radius, outer radius, thickness)."""
+    h = eye_hardware_params(s); r_ap = s['eye']['aperture']['value']/2; out = []
+    for w in wells(s):
+        depth = w['x1']-w['x0']
+        for k, f in enumerate(h['vane_heights'], 1):
+            hgt = f*depth
+            out.append(dict(name=f"EYE_Baffle_{w['index']:02}_{k}", kind='eye_baffle', well=w, x=w['x0']+hgt,
+                            inner=r_ap+(w['radius']-r_ap)*hgt/depth+h['vane_margin_m'], outer=w['radius'], thickness=h['vane_thickness_m']))
+        win = next(e['window'] for e in eye_shutters(s) if e['index'] == w['index'])
+        out.append(dict(name=f"EYE_Cartridge_Ring_{w['index']:02}", kind='eye_cartridge_ring', well=w, x=win['x'], inner=win['radius'], outer=w['radius'],
+                        thickness=h['cartridge_ring_thickness_m']))
+    return out
+
+
+def eye_lance_params(s):
+    """The EYE dust-lance table (forward_shield.eye_lances), or None unless enabled on a bumper facing with Eyes snapped to cells."""
+    t = s['forward_shield'].get('eye_lances')
+    return t if t and t.get('enabled') and bumper(s) and eye_cells(s) else None
+
+
+def eye_lance_cells(s):
+    """The lance panels: the six facing cells round each EYE cell. Per panel: EYE index j, lance k (1-6, at 30 + 60 (k-1) deg round the Eye),
+    centre (y, z), its polar radius and the outward unit direction (from the Eye centre to the panel centre, the fold direction)."""
+    t = eye_lance_params(s)
+    if not t:
+        return []
+    a = bumper(s)['plate_side_m']; d = SQRT3*a; out = []
+    for w in wells(s):
+        for k in range(1, t['per_eye']+1):
+            th = math.radians(30+60*(k-1)); u = (math.cos(th), math.sin(th)); y, z = w['y']+d*u[0], w['z']+d*u[1]
+            out.append(dict(eye=w['index'], k=k, y=y, z=z, radius=math.hypot(y, z), out=u, angle=th, distance=d))
+    return out
+
+
+def eye_lances(s):
+    """Per lance: the hinge (frame origin, on the housing top over the plate top at the panel centre), the frame's roll (local +Y = outward)
+    and the deployed tip X; local frame +X axial (deployed lance axis, ship +X), +Y outward from the Eye, +Z tangential. Folded = turned
+    90 deg about local +Z, lying along +Y over its own panel."""
+    t = eye_lance_params(s)
+    if not t:
+        return []
+    pt = bumper(s)['plate_thickness_m']; out = []
+    for c in eye_lance_cells(s):
+        x_plate = layer_front_at(s, c['radius'])+pt; hinge = x_plate+t['housing_height_m']; L = t['mast_length_m']+t['tip_length_m']
+        out.append(dict(c, name=f"EYE_Lance_{c['eye']:02}_{c['k']}", frame=f"EYE_Lance_Frame_{c['eye']:02}_{c['k']}", tip=f"EYE_Lance_Tip_{c['eye']:02}_{c['k']}",
+                        x_plate=x_plate, hinge_x=hinge, length=L, tip_x=hinge+L, roll=c['angle']))
+    return out
+
+
+def _frustum(x0, x1, r0, r1, n=12, caps=True):
+    """A frustum along local +X (vertices, faces)."""
+    vs = [(x, r*math.cos(2*math.pi*k/n), r*math.sin(2*math.pi*k/n)) for x, r in ((x0, r0), (x1, r1)) for k in range(n)]
+    fs = [(k, (k+1) % n, n+(k+1) % n, n+k) for k in range(n)]
+    if caps:
+        fs += [tuple(range(n-1, -1, -1)), tuple(range(n, 2*n))]
+    return vs, fs
+
+
+def eye_lance_meshes(s):
+    """Local meshes shared by every lance (frame coordinates): the mast with its coil ring, and the sacrificial tip cartridge."""
+    t = eye_lance_params(s); m = t['mast_length_m']
+    mast = merged([_frustum(-0.05, m, t['mast_base_radius_m'], t['mast_top_radius_m']),
+                   _frustum(t['coil_from_m'], t['coil_from_m']+t['coil_length_m'], t['coil_radius_m'], t['coil_radius_m'], 16)])
+    tip = _frustum(m, m+t['tip_length_m'], t['mast_top_radius_m'], t['tip_radius_m'])
+    return mast, tip
+
+
+def eye_lance_housings(s, j):
+    """World mesh of EYE j's six base housings (hexagonal, on the plate top, carrying the hinge) and fold cradles (on the plate at cradle_at_m
+    outward, up to the folded mast's underside)."""
+    t = eye_lance_params(s); parts = []
+    for q in eye_lances(s):
+        if q['eye'] != j:
+            continue
+        parts.append(_boss(q['y'], q['z'], q['x_plate']-0.01, t['housing_radius_m'], t['housing_height_m']+0.01, 6, q['angle']))
+        cy, cz = q['y']+q['out'][0]*t['cradle_at_m'], q['z']+q['out'][1]*t['cradle_at_m']
+        xc = layer_front_at(s, math.hypot(cy, cz))+bumper(s)['plate_thickness_m']
+        parts.append(_boss(cy, cz, xc-0.01, t['cradle_radius_m'], q['hinge_x']-t['mast_base_radius_m']-xc+0.01, 8))
+    return merged(parts)
+
+
+def eye_lance_screen(s):
+    """EYE dust-lance fit checks (name, ok, detail): six lance panels per Eye, every lance deployed and folded (and between) outside every
+    well's unvignetted cone, the folded lance over its own panel and above the plate, the housings off the Crown ports and the other openings."""
+    t = eye_lance_params(s)
+    if not t:
+        return []
+    out = []; lances = eye_lances(s); clr = clearance(s); b = bumper(s)
+    cells = {(round(p['y'], 6), round(p['z'], 6)) for p in bumper_plates(s)}
+    have = sum((round(q['y'], 6), round(q['z'], 6)) in cells for q in lances)
+    out.append(('six lance panels round every Eye (whole cells of the facing)', have == len(lances) == len(wells(s))*t['per_eye'], f'{have}/{len(wells(s))*t["per_eye"]}'))
+    depth = stations(s)['well_depth']; wr = prototype(s)['well_diameter_m']/2; r_ap = s['eye']['aperture']['value']/2; slope = (wr-r_ap)/depth
+    worst = float('inf')
+    for q in lances:
+        for w in wells(s):
+            d = math.hypot(q['y']-w['y'], q['z']-w['z'])
+            # deployed: the coil (widest part) at the tip height; folding moves the lance outward from its own Eye and lower
+            top = q['tip_x']-w['x1']; reach = 0.0 if w['index'] == q['eye'] else q['length']
+            worst = min(worst, d-reach-t['coil_radius_m']-(wr+slope*max(top, 0.0)))
+    out.append(('lances deployed and folded outside every unvignetted cone', worst >= 0, f'worst {worst:.3f} m'))
+    apothem = eye_shell(s)['apothem']-b['plate_gap_m']/2
+    out.append(('folded lance stays over its own panel', q['length'] <= apothem, f"{q['length']:.2f} m <= {apothem:.3f} m"))
+    low = t['housing_height_m']-t['coil_radius_m']
+    out.append(('folded lance clear of the plate', low > 0, f'coil {low:.2f} m above the plate'))
+    keep = [k for k in bumper_keepouts(s) if k[0] != 'eye']
+    gap = min(polygon_gap(_circle_poly(t['housing_radius_m'], q['y'], q['z']), k[2]) for q in lances for k in keep)
+    out.append(('lance housings clear the Crown ports and the Lance hole', gap >= clr-1e-9, f'{gap:.3f} m'))
+    return out
+
+
+def seam_screen(s):
+    """The bumper's seams against the arrival cone: the plates lie on the continuous layer, so a ray through a plate gap meets the layer; the
+    line of sight past the plate edge needs an incidence of atan(gap / thickness) to reach the layer at a plate's foot. Thermal growth of the
+    plate across its flats over the design range against the gap. PROTOTYPE inputs, plain numbers."""
+    b = bumper(s)
+    if not b:
+        return {}
+    a = b['plate_side_m']; g = b['plate_gap_m']; across = SQRT3*a
+    growth = across*b['seam_cte_per_K']*b['seam_delta_t_K']
+    return dict(layer_continuous_behind_seams=True, open_fraction_added=0.0, plate_across_flats_m=across, gap_m=g,
+                gap_incidence_deg=math.degrees(math.atan(g/b['plate_thickness_m'])), arrival_cone_deg=b['seam_arrival_cone_deg'],
+                thermal_growth_m=growth, growth_share_of_gap=growth/g)
+
+
+def eye_hardware_screen(s):
+    """FSE fit checks: (name, ok, detail). Rails, drives, baffles and the cartridge ring stay outside each well's unvignetted cone; rails and
+    drives stay under the layer and clear the posts and the other wells; the coaming adds no edge inside the port and stays below the steepest
+    field ray; plates keep off every opening and inside the rim guard; the rim guard ends inside r 45."""
+    out = []; h = eye_hardware_params(s); clr = clearance(s); layer = disruptor_layers(s)[-1]; r_ap = s['eye']['aperture']['value']/2
+    b = bumper(s)
+    if b:
+        plates = bumper_plates(s); keep = bumper_keepouts(s)
+        snapped = bool(eye_cells(s))
+        need_gap = lambda k: eye_gap(s) if k[0] == 'eye' and snapped else b['closeout_m']
+        worst = min((polygon_gap(p['outline'], k[2])-need_gap(k) for p in plates for k in keep), default=float('inf'))
+        out.append(('plates keep their closeout off every opening (an Eye: its own cell)', worst >= -1e-9, f'{len(plates)} plates, worst margin {worst:.3f} m'))
+        if snapped:
+            a = b['plate_side_m']; cells = {(round(p['y'], 6), round(p['z'], 6)) for p in plates}
+            ring = [(round(ey+SQRT3*a*math.cos(math.radians(30+60*k)), 6), round(ez+SQRT3*a*math.sin(math.radians(30+60*k)), 6)) for ey, ez in eye_cells(s) for k in range(6)]
+            missing = [c for c in ring if c not in cells]
+            out.append(('every Eye cell has its six neighbour plates (continuous pattern)', not missing, f'{len(ring)-len(missing)}/{len(ring)}'))
+        far = max((math.hypot(y, z) for p in plates for y, z in p['outline']), default=0.0)
+        out.append(('plates inside the rim guard', far <= b['rim_guard_inner_radius_m']-b['plate_gap_m']+1e-9, f'{far:.3f} m'))
+        rg = max(math.hypot(v[1], v[2]) for g in rim_guard(s) for v in g['vertices'])
+        out.append(('rim guard inside the shield radius', rg <= shield_radius(s)+1e-9, f'{rg:.3f} m'))
+        rg_in = min(math.hypot(v[1], v[2]) for g in rim_guard(s) for v in g['vertices'])
+        crown_out = max(q['r1'] for q in crown_ports(s))+b['crown_frame_width_m']
+        out.append(('rim guard clear of the Crown port frames', rg_in-crown_out >= clr-1e-9, f'{rg_in-crown_out:.3f} m'))
+        sc = seam_screen(s)
+        out.append(('seams: the arrival cone is far inside the gap incidence', sc['arrival_cone_deg'] < sc['gap_incidence_deg'], f"{sc['arrival_cone_deg']} < {sc['gap_incidence_deg']:.1f} deg"))
+        out.append(('seams: thermal growth inside the plate gap', sc['growth_share_of_gap'] < 0.5, f"{sc['thermal_growth_m']*1000:.1f} mm of {sc['gap_m']*1000:.0f} mm"))
+        # Crown muzzles still clear their frames: the frame lies outside the port, which is the carriage footprint plus the clearance.
+        out.append(('Crown port frames outside the port', b['crown_frame_width_m'] > 0, 'frame outside the Q44 port edge'))
+    # coaming: flush at the port edge, slope below the steepest ray leaving the port (the well's own maximum ray angle)
+    depth = stations(s)['well_depth']; wr = prototype(s)['well_diameter_m']/2
+    steep = math.degrees(math.atan((wr+r_ap)/depth))
+    out.append(('coaming slope below the steepest field ray', h['coaming_slope_deg'] < 90-steep, f"{h['coaming_slope_deg']} < {90-steep:.1f} deg elevation"))
+    # rails and drives: outside the unvignetted cone (well lip radius + (wr - r_ap)/depth per metre above the lip), under the layer, clear of posts
+    posts = [((q['r']*math.cos(q['azimuth']), q['r']*math.sin(q['azimuth'])), q['radius']) for q in disruptor_posts(s) if q['layer'] == 1]
+    worst_cone = worst_layer = worst_post = float('inf')
+    for g in eye_shutter_hardware(s):
+        e = g['frame']; w = next(w for w in wells(s) if w['index'] == e['index'])
+        for name, kind, c, size in g['boxes']:
+            corners = [_frame_to_world(e, (c[0]+sx*size[0]/2, c[1]+sy*size[1]/2, c[2]+sz*size[2]/2)) for sx in (-1, 1) for sy in (-1, 1) for sz in (-1, 1)]
+            for x, y, z in corners:
+                worst_layer = min(worst_layer, layer_x(s, layer, math.hypot(y, z))[0]-x)
+            # nearest point of the box to the well axis, in the frame (radial, tangential) plane
+            ny = max(abs(c[1])-size[1]/2, 0.0); nz = max(abs(c[2])-size[2]/2, 0.0); dist = math.hypot(ny, nz)
+            above = max(x for x, _, _ in corners)-w['x1']
+            worst_cone = min(worst_cone, dist-(wr+(wr-r_ap)/depth*max(above, 0.0)))
+            ur = (math.cos(e['azimuth']), math.sin(e['azimuth'])); ut = (-ur[1], ur[0])
+            for (py, pz), pr in posts:          # post axis against the box footprint in the frame's (radial, tangential) plane
+                dy, dz = py-e['y'], pz-e['z']; a_, b_ = dy*ur[0]+dz*ur[1], dy*ut[0]+dz*ut[1]
+                gap_ = math.hypot(max(abs(a_-c[1])-size[1]/2, 0.0), max(abs(b_-c[2])-size[2]/2, 0.0))-pr
+                worst_post = min(worst_post, gap_)
+    out.append(('rails and drives outside the unvignetted cone', worst_cone >= 0, f'worst {worst_cone:.3f} m'))
+    out.append(('rails and drives under the layer', worst_layer >= clr-1e-9, f'worst {worst_layer:.3f} m'))
+    out.append(('rails and drives clear of the layer posts', worst_post >= clr-1e-9, f'worst {worst_post:.3f} m'))
+    if b:
+        worst_post = worst_port = worst_layer = worst_cone = float('inf'); ports = eye_ports(s, layer)
+        for e in eye_lids(s):
+            ur = (math.cos(e['azimuth']), math.sin(e['azimuth'])); ut = (-ur[1], ur[0])
+            q = next(q for q in ports if q['index'] == e['index'])
+            worst_layer = min(worst_layer, layer_x(s, layer, math.hypot(e['y'], e['z']))[0]-(e['x']+e['axial_step']+e['thickness']/2))
+            for sg in (1, -1):
+                c = (e['y']+sg*ut[0]*e['open_t'], e['z']+sg*ut[1]*e['open_t'])
+                def gap(pt):
+                    dx, dy = pt[0]-c[0], pt[1]-c[1]; a_, b_ = abs(dx*ur[0]+dy*ur[1]), abs(dx*ut[0]+dy*ut[1])
+                    return math.hypot(max(a_-e['radial']/2, 0.0), max(b_-e['tangential']/2, 0.0))
+                worst_post = min([worst_post]+[gap(pp)-pr for pp, pr in posts])
+                worst_port = min([worst_port]+[gap(pt) for pt in hexagon(q['side'], q['y'], q['z'], 4)]+
+                                 [gap((o['y'], o['z']))-o['outer_radius'] for o in ports if o['index'] != e['index']])
+            near = e['open_t']-e['tangential']/2
+            worst_cone = min(worst_cone, near-eye_port_required_radius(s, layer))
+            out.append((f"lid {e['index']} closed covers the port", 2*e['closed_t']+e['tangential'] >= 2*q['outer_radius']-1e-9 and e['radial'] >= 2*q['outer_radius'],
+                        f"{e['radial']:.2f} x {2*e['closed_t']+e['tangential']:.2f} m over the {2*q['outer_radius']:.2f} m port"))
+        out.append(('open lids clear the layer posts', worst_post >= clr-1e-9, f'worst {worst_post:.3f} m'))
+        out.append(('open lids clear their own and the other ports', worst_port >= clr-1e-9, f'worst {worst_port:.3f} m'))
+        out.append(('lids under the layer', worst_layer >= clr-1e-9, f'worst {worst_layer:.3f} m'))
+        out.append(('open lids outside the unvignetted field at the layer', worst_cone >= 0, f'worst {worst_cone:.3f} m'))
+    worst = min(q['inner']-(r_ap+(q['well']['radius']-r_ap)*(q['x']-q['well']['x0'])/(q['well']['x1']-q['well']['x0'])) for q in eye_baffles(s) if q['kind'] == 'eye_baffle')
+    out.append(('baffle vanes outside the unvignetted cone', worst >= 0, f'worst {worst:.3f} m'))
+    ring = min(q['inner'] for q in eye_baffles(s) if q['kind'] == 'eye_cartridge_ring')
+    out.append(('cartridge ring outside the aperture', ring > r_ap, f'{ring:.3f} m > {r_ap} m'))
     return out
 
 
@@ -987,6 +1500,12 @@ def drivers(s):
         j = e['index']
         for leaf in e['leaves']:
             out.append((leaf['name'], 'location', 2, f"{leaf['sign']*e['open_t']!r}-{leaf['sign']*e['travel']!r}*e{j}"))
+    if bumper(s):
+        for e in eye_lids(s):          # FSE port lids close with the eyelids (one EYE closure control)
+            for leaf in e['leaves']:
+                out.append((leaf['name'], 'location', 2, f"{leaf['sign']*e['open_t']!r}-{leaf['sign']*e['travel']!r}*e{e['index']}"))
+        for q in eye_lances(s):          # EYE dust lances fold outward with the diversion field off (DOCKED, EVA)
+            out.append((q['frame'], 'rotation_euler', 2, '1.5707963*(1-fo)'))
     too_long = [f'{name}.{path}[{index}]' for name, path, index, expr in out if len(expr) > 255]
     if too_long:
         raise ValueError(f'Driver expressions over the 255-character Blender limit: {too_long}')
@@ -1406,6 +1925,9 @@ def validate(s):
     need(rear_construction_screen(s) == 'PASS', f'forward_shield.rear_construction leaves the truss envelope: {rear_construction_screen(s)}')
     kinds = [k for cls in DESIGN_CLASSES for k in dc[cls]]
     need(len(kinds) == len(set(kinds)) and all(type(k) is str for k in kinds), 'Every object kind has exactly one design class')
+    # FSE bumper facing and EYE well hardware (PROTOTYPE): plates off every opening, nothing new in an EYE field, the rim guard inside r 45.
+    for name, ok, detail in eye_hardware_screen(s)+eye_lance_screen(s):
+        need(ok, f'FSE: {name} ({detail})')
     return True
 
 

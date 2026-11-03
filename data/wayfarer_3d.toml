@@ -858,7 +858,7 @@ status = "PROTOTYPE"
 doctrine_ref = "hsfp_design_doctrine"
 rationale = "Skin = the sourced 90 m diameter and ~3 m crown depth; wells, Lance, spine column, disruptor layer (existence, full diameter, ahead of the Brow), Crown housing band and bays are physics-locked. Hub, rim, truss, struts, the three sector keels (the sector radius and azimuths, 07!A10/A13, are sourced; the keels' existence ahead of ring B and their length are F2 selections), the Q45 bypass collar, the Crown port covers, ties, posts, Crown carriages, shutters, emitters and the control rig are engineering-flexible PROTOTYPE selections. The diversion-field zone and the damage cells are artistic displays over OPEN or DIAGNOSTIC values. M8.1: the production layer on the shield (production_detail: Brow aft-face panels, Crown rim module) is an artistic presentation layer over the unchanged engineering geometry (L4_VISUAL_CANDIDATE); each object also carries its element surface classes."
 PHYSICS_LOCKED = ["shield_skin", "eye_well", "dust_lance", "dust_lance_tip", "shield_spine_column", "disruptor_layer", "crown_housing", "crown_bay"]
-ENGINEERING_FLEXIBLE = ["shield_hub", "shield_rim", "shield_truss", "shield_mount", "sector_keel", "sector_tie", "sector_frame", "bypass_collar", "disruptor_post", "crown_shutter", "crown_port_cover", "eye_shutter_frame", "eye_shutter", "eye_window", "eye_facet_frame", "eye_raceway", "eye_service", "truss_node", "crown_housing_rib", "crown_service_hatch", "crown_carriage_frame", "crown_head_frame", "crown_carriage", "crown_emitter", "crown_launcher", "state_control", "nav_light", "rcs_thruster", "brow_panel_joint", "brow_panel_fixture"]
+ENGINEERING_FLEXIBLE = ["shield_hub", "shield_rim", "shield_truss", "shield_mount", "sector_keel", "sector_tie", "sector_frame", "bypass_collar", "disruptor_post", "crown_shutter", "crown_port_cover", "eye_shutter_frame", "eye_shutter", "eye_window", "eye_facet_frame", "eye_raceway", "eye_service", "truss_node", "crown_housing_rib", "crown_service_hatch", "crown_carriage_frame", "crown_head_frame", "crown_carriage", "crown_emitter", "crown_launcher", "state_control", "nav_light", "rcs_thruster", "brow_panel_joint", "brow_panel_fixture", "bumper_plate", "bumper_clamp", "bumper_socket", "rim_guard", "crown_port_frame", "eye_port_coaming", "eye_shutter_rail", "eye_shutter_drive", "eye_baffle", "eye_cartridge_ring", "eye_lid_frame", "eye_lid", "eye_lance_panel", "eye_lance_housing", "eye_lance_frame", "eye_lance", "eye_lance_tip"]
 ARTISTIC = ["field_display", "damage_cell", "production_detail", "eye_shell"]
 
 # Forward defence (front systems). Sourced rules and values; every geometry choice is in forward_shield.prototype above.
@@ -1115,9 +1115,12 @@ rationale = "User decision 2026-10-29: the main model carries the r30 Eye layout
 # port of the same size in the disruptor layer. The round well, window and facet aperture stay inside. The port's inscribed circle keeps
 # at least the 2.25 m outer-port radius (FD-A04): the hex side is the larger of the plate side and the side whose apothem is that radius.
 #   proud_m  how far the shell stands ahead of the local skin face (under the eyelid gap); depth_m how far it reaches into the skin.
+# snap_to_facing (owner 2026-11-02): the Eyes sit in cells of the facing tiling (the cell nearest the selected layout radius per quadrant, a
+# mirror set about Y and Z), the shell is that cell and the port its inner hexagon, so the plate pattern runs on unbroken round every Eye.
 [forward_defense.eye_shell]
 status = "PROTOTYPE"
 shape = "hex"
+snap_to_facing = true
 proud_m = 0.015
 depth_m = 0.08
 
@@ -3552,6 +3555,97 @@ fixture_flange_m = [0.16, 0.025]
 fixture_clear_m = 0.30
 
 # Renderer settings, not physical values.
+# FSE (owner brief 2026-11-02, Thread 2 "Forward shield & EYE refinement"; PROTOTYPE judgment, AGENTS.md "calculate constraints, model form").
+# The ram face's hexagonal facing (production.exterior.fractal_shield: one tiling, one plate side) becomes real geometry on the disruptor layer:
+# replaceable sacrificial bumper plates, the first surface a grain meets (Whipple bumper ancestry, forward_defense.disruptor_layer), laid on the
+# continuous layer, which stays whole behind every seam, so no new line of sight opens through the stack (seam_screen). Each plate hangs on three
+# tri-clamps (every other plate corner, as the shader's fasteners) and carries one ochre grapple socket at its centre for the Brow crawler or an
+# EVA crew to lift it out (forward_defense.regenerative escalation: panel replacement). Plates stay off every opening: whole tiling cells that
+# would reach an EYE port coaming, the Lance hole or a Crown port frame plus closeout_m are left out, so each opening sits in a plain closeout
+# field of the layer, framed by whole plates. The rim carries a segmented edge guard (rim_guard_*) that wraps the layer's outer edge, where
+# grazing grains arrive; it ends inside r 45. Plate material, thickness, areal mass and the layer stack stay OPEN (forward_shield.stack, Eye 40!E33);
+# thickness here is a display value. seam_*: the design arrival cone and thermal range of the seam screen (attitude limit OD-015 OPEN).
+[forward_shield.bumper_facing]
+status = "PROTOTYPE"
+unit = "m"
+enabled = true
+plate_thickness_m = 0.06
+plate_edge_m = 0.025
+plate_bevel_m = 0.10
+clamp_radius_m = 0.16
+clamp_height_m = 0.035
+socket_half_m = 0.14
+socket_height_m = 0.03
+closeout_m = 0.35
+rim_guard_inner_radius_m = 44.0
+rim_guard_segments = 36
+rim_guard_joint_m = 0.06
+rim_guard_thickness_m = 0.12
+rim_guard_wrap_m = 0.20
+crown_frame_width_m = 0.15
+crown_frame_height_m = 0.05
+seam_arrival_cone_deg = 5.0
+seam_delta_t_K = 200.0
+seam_cte_per_K = 2.3e-5
+
+# FSE EYE well hardware (PROTOTYPE; window, shutter and baffle solution OPEN, OD-020). Per well:
+#   coaming  the Eye's cell frame round the layer port (snapped Eyes: from the port edge to the neighbours' plate gap, at plate height),
+#            flush at the port edge and rising at coaming_slope_deg, so it adds no edge inside the port and stays below every ray leaving
+#            the port (eye_hardware_screen); coaming_width_m applies only to unsnapped Eyes;
+#   lid      owner 2026-11-02: the port closes: two armoured leaves aft of the layer part tangentially (eye_lids), driven with the eyelids;
+#   rails    two eyelid guide rails on the EYE shell along the leaves' tangential travel, rail_gap_m outside the leaves' radial edges, and one
+#            drive housing at each end of the travel, all under the layer and outside the well's unvignetted cone;
+#   vanes    knife-edge stray-light baffle rings on the well wall between the window and the mouth, each outside the unvignetted cone at its
+#            height by vane_margin_m (vane_heights are fractions of the well depth measured from the facet);
+#   cartridge a retaining ring round the window cartridge out to the well wall.
+[forward_shield.eye_hardware]
+status = "PROTOTYPE"
+unit = "m"
+coaming_width_m = 0.30
+coaming_slope_deg = 30.0
+lid_thickness_m = 0.08
+lid_overlap_m = 0.05
+lid_seam_m = 0.05
+rail_width_m = 0.08
+rail_gap_m = 0.08
+rail_end_m = 0.15
+rail_top_clearance_m = 0.03
+drive_tangential_m = 0.40
+drive_axial_m = 0.30
+vane_heights = [0.40, 0.60, 0.80]
+vane_margin_m = 0.03
+vane_thickness_m = 0.02
+cartridge_ring_thickness_m = 0.08
+
+# EYE dust lances (owner 2026-11-02: "each eye gets 6 dust lances around the opening, a new hexagonal panel type"; PROTOTYPE, field strength,
+# coil and power OPEN as for the central Lance, OD-018). The six facing cells round each EYE cell become lance panels: the same plate outline
+# and fractal material (the pattern runs on), with a base housing at the centre in place of the grapple socket. Each housing carries one short
+# Dust Lance on a hinge: a mast with a field coil ring near its top and a replaceable sacrificial tip cartridge, the central Lance's grammar at
+# EYE scale (forward_defense.dust_lance). Function: the coils form a ring fence round the port whose field cancels on the EYE axis; it turns
+# charged and ionized matter (interstellar plasma, impact-vapour plasma off the plates round the port) away from the port and window; neutral
+# dust is not diverted (LOCKED, Eye 40!A22) and stays the plates', the layer's and the lid's job. The tips are the first contact near the port
+# and carry impact-plasma dust counters, the flux record that tells the EYE when to close its lid. Stow: each lance folds outward, away from
+# its EYE, flat over its own panel, driven by field_on (deployed in COAST, LOW_THRUST, HIGH_POWER, FIRST_IGNITION; folded in DOCKED and EVA,
+# forward_defense.field_states), so the deployed and folded envelopes never enter the unvignetted cone (eye_lance_screen). The hinge sits on
+# the housing top; the folded mast rests on a cradle. Nothing passes through the plate or the layer, so the lid travel aft is untouched.
+[forward_shield.eye_lances]
+status = "PROTOTYPE"
+unit = "m"
+enabled = true
+per_eye = 6
+housing_radius_m = 0.35
+housing_height_m = 0.30
+mast_length_m = 2.05
+mast_base_radius_m = 0.14
+mast_top_radius_m = 0.09
+coil_radius_m = 0.22
+coil_from_m = 1.80
+coil_length_m = 0.15
+tip_length_m = 0.35
+tip_radius_m = 0.04
+cradle_at_m = 1.20
+cradle_radius_m = 0.10
+
 [habitat_ring.display]
 kind = "IMPLEMENTATION"
 hoop_facets = 120
@@ -4350,7 +4444,7 @@ prefixes = ["Crown", "Carriage", "Shutter", "Emitter", "Launcher", "Drive", "Noz
 family = "xf_machinery"
 [[production.exterior.ship_families]]
 prefixes = ["Shield", "Brow", "Forward", "Lance", "Habitat", "Ring", "Hull", "Casing", "Spine", "Body", "Collar", "Dock", "Ext_Dock",
-            "DisruptorLayer", "CrewPassage", "CrewVestibule", "EntryShell"]
+            "DisruptorLayer", "DisruptorBacking", "BumperRimGuard", "CrewPassage", "CrewVestibule", "EntryShell"]
 family = "xf_shell"
 
 # S9: the regenerative ram face (OWN-P4-LOCKED (b), S&E 15 row 228): a subtle tile-and-repair look on the Brow's forward face by shading
@@ -4380,7 +4474,8 @@ repair_value = 1.10
 # Shading and procedural normals only (fractal_shield.py is the reference, godot/shaders/fractal_shield.gdshaderinc the runtime and web
 # copy): no geometry, thickness, mass, opening or shielding claim; the stack stays OPEN (forward_shield.stack). PROTOTYPE depiction choices:
 #   plate_side_m      hex side (= circumradius), a shell module edge inside shell_panel_m; flat-top plates, one centred on the axis
-#                     2.6 m (user 2026-10-29, was 2.4): each EYE shell is one plate, and a 2.6 m hex has the 2.25 m outer-port apothem
+#                     2.875 m (owner 2026-11-02, was 2.6): every plate one size, and each Eye fills one cell: the 2.25 m outer port (apothem)
+#                     plus its frame up to the neighbours' plate gap (2.875 m: cell apothem 2.49 m, frame 0.20 m)
 #   plate_gap_m       dark gap between plates (the grammar's joint gap): room for thermal growth and plate replacement
 #   fractal_depth     Sierpinski levels inside each of a plate's six triangles; level k's triangles have side plate_side_m / 2^k
 #   density           chance (0-1) that a triangle subdivides further, drawn per triangle from a stable hash; 1 is the full gasket
@@ -4395,7 +4490,7 @@ repair_value = 1.10
 status = "PROTOTYPE"
 evidence_ref = "p4_exterior_grammar"
 pattern = "fractal_hex"
-plate_side_m = 2.6
+plate_side_m = 2.875
 plate_gap_m = 0.08
 fractal_depth = 4
 density = 0.85
