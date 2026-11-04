@@ -40,16 +40,18 @@ telemetry_status = { value = "EXAMPLE", unit = "", status = "PROTOTYPE", note = 
 
 # Assembly tree (RUN-005): one collection per assembly, every part a stable semantic id. `asset` is the 44 ASSET row it answers.
 [assemblies]
-PRESSURE = { title = "Pressure envelope", asset = ["ASSET-02", "ASSET-03"], parts = ["SUIT_PRESSURE_HARD_TORSO", "SUIT_PRESSURE_BLADDER", "SUIT_NECK_RING", "SUIT_WAIST_RING"] }
+PRESSURE = { title = "Pressure envelope: rigid rear-entry cuirass with the integral helmet bonded on, continuous bladder", asset = ["ASSET-02", "ASSET-03"], parts = ["SUIT_PRESSURE_HARD_TORSO", "SUIT_PRESSURE_BLADDER"] }
 PROTECTION = { title = "Restraint and outer protective layers", asset = ["ASSET-04", "ASSET-12"], parts = ["SUIT_RESTRAINT_LAYERS", "MMOD_OUTER_SHELL"] }
 JOINTS = { title = "Bearings, gloves and boots", asset = ["ASSET-05", "ASSET-07", "ASSET-08"], parts = ["SUIT_JOINTS", "SUIT_GLOVES", "SUIT_BOOTS"] }
 HELMET = { title = "Helmet, visor and display", asset = ["ASSET-06"], parts = ["SUIT_HELMET_VISOR"] }
-PLSS = { title = "Primary and emergency life support", asset = ["ASSET-09"], parts = ["PLSS_PRIMARY"] }
+PLSS = { title = "Life-support module (the rear-entry hatch): primary and emergency life support, displays and controls", asset = ["ASSET-09"], parts = ["PLSS_PRIMARY"] }
 COOLING = { title = "Cooling and ventilation garment", asset = ["ASSET-11"], parts = ["LCVG_INNER"] }
 TETHERS = { title = "Tethers and safety connectors", asset = ["ASSET-13"], parts = ["TETHERS"] }
 TOOLS = { title = "Tools and maintenance hardware", asset = ["ASSET-14"], parts = ["TOOLS"] }
 MARKINGS = { title = "Safety markings", asset = ["ASSET-15"], parts = ["SAFETY_MARKINGS"] }
 RIG = { title = "Skeleton, sockets and animation helpers", asset = ["RIG-02", "RIG-03", "RIG-04"], parts = ["SOCKETS"] }
+PROPULSION = { title = "Suit maneuvering reserve: four thruster clusters (16 x 8 N cold N2), reserve COPV, manifold (EVA system, PROTOTYPE)", asset = [], parts = ["SUIT_THRUSTERS", "N2_RESERVE"] }
+DOCK = { title = "Companion-drone dock in the module: channel, latch sockets, N2 and power receptacles, capture tongue, load pads, targets (EVA system, PROTOTYPE)", asset = [], parts = ["DRONE_DOCK"] }
 
 # Soft layers: offset shells of the wearer's own body, skinned with its weights, so they follow every existing action and corrective
 # (RIG-02/03). Offsets in metres outward along the body normal, PROTOTYPE fit allowances (no layup thickness is sourced).
@@ -82,7 +84,7 @@ boot_sole_m = [0.12, 0.30, 0.025]  # rigid service sole with toe hook (foot-rest
 # Suit mobility used to author the EVA actions (ANIM-04..08). Display limits of a pressurized soft joint, PROTOTYPE: joint torque and
 # range are OPEN (EVA-033, 44!6 "work against real suit joint torque limits"). Tests check the actions stay inside them.
 [mobility]
-elbow_max_deg = 125.00
+elbow_max_deg = 115.00              # 115: deeper flexion folds the soft layer into the elbow crease (eva_fit coverage)
 knee_max_deg = 105.00
 shoulder_flex_max_deg = 130.00
 head_in_helmet_max_deg = 20.0      # the helmet is fixed to the torso; the head turns inside it
@@ -413,3 +415,91 @@ redline_sp12_path = [
   { id = "LT6_bare_geometry_limit", fitout = "bare", route = "corner", end = "lowering", slot_x_m = 135.90, staff = "two", stand_az_deg = 20.0, what = "N1 with the fit-out removed (geometry limit of the room)" },
   { id = "LT7_N1_aperture_1.35_comparator", fitout = "rearranged", route = "corner", end = "lowering", slot_x_m = 135.90, staff = "two", stand_az_deg = 8.0, aperture_m = 1.35, what = "LT2 with the SP-11 aperture at the 1.35 m comparator (45 G-14): is the 1.20 m aperture the limit of the turn? (the plug parking pocket is left as built)" },
 ]
+
+# ------------------------------------------------------------------------------------------------------------------------------------------
+# Suit form of the EVA system (docs/WAYFARER_EVA_SYSTEM.md; consolidated from the 2026-11 suit and companion-drone study). Every value is a
+# PROTOTYPE design choice; the pressure figure is a sizing assumption inside the EVA-004 trade, never a setpoint (suit_pressure_kpa stays
+# OPEN). Hybrid architecture: gas pressure everywhere (one continuous bladder), a rigid rear-entry composite cuirass with an integral helmet,
+# and a slim patterned restraint (lines of non-extension) on the limbs, so the limbs need only low-profile bearings.
+[form]
+design_pressure_kpa = 40.0         # upper end of the 30-40 kPa trade, sizing only (EVA-004 OPEN)
+proof_factor = 1.5
+burst_factor = 2.0
+lcvg_m = 0.004                     # soft layers, outward along the body normal
+bladder_m = 0.011
+outer_m = 0.020
+hand_m = 0.008
+foot_m = 0.016
+smooth = { lcvg = 2, bladder = 6, outer = 10, hand = 1, foot = 3 }
+hut_margin_m = 0.015               # cuirass margin outside the outer layer
+hut_shell_m = 0.007
+hut_exponent = 2.15                # superellipse section: anatomical chest and back
+cuirass_arch = { z_top_rel_spine03 = 0.020, half_angle_deg = 104.0 }   # arched opening over the flexible abdomen
+helmet_clearance_m = 0.022         # around the head at every point of its motion envelope
+helmet_exponent = 2.25             # asymmetric superellipsoid, front / back / crown fitted separately
+helmet_base_t = -0.62              # helmet starts at 62 % of its half-height below the centre: the yoke rises into it as one shoulder line
+helmet_back_trim = 0.92
+head_motion_deg = { yaw = 25.0, pitch_down = 15.0, pitch_up = 20.0, roll = 10.0 }   # head_in_helmet 20 deg plus margin
+visor = { az_max_deg = 108.0, el_centre_deg = -2.0, el_half_deg = 33.0, side_drop_deg = 10.0, power = 2.6 }
+crest = { width_m = 0.030, height_m = 0.010 }   # brow-to-hatch service rib: light / camera harness, visor-frame load path
+bearing_minor_m = 0.009
+scye_minor_m = 0.012
+scye_axis_deg = [20.0, 10.0]       # scye bearing axis: outboard, tilted down and forward (degrees), PROTOTYPE
+scye_sleeve = { clearance_m = 0.022, convolutes = 6, rib_m = 0.004, end_t = 0.60 }   # shoulder convolute: scye bearing to the upper-arm bearing, PROTOTYPE
+neck_ring = { section_m = [0.016, 0.010], collar_m = 0.006 }   # helmet-to-yoke neck ring: flange section (axial, radial) and lock collar, PROTOTYPE
+wrist_minor_m = 0.010
+# Fold-out hand controller (MMU armrest class, PROTOTYPE): hinged on the life-support module's left front corner, a yaw link and a
+# telescoping link swing forward and down about one skewed hinge to the left hand's free-flight grip; stowed back along the module side,
+# hinge_rise_m above the grip height (above the lumbar cluster's plumes). The grip is seated against the evaluated glove: seat_gap_m clear
+# in the flight pose; deployed, its axis stays within seat_max_m of the palm centre (hand half-thickness, glove, grip radius) and the
+# glove within grip_gap_max_m of it.
+hand_controller = { standoff_m = 0.026, hinge_rise_m = 0.10, seat_gap_m = 0.003, seat_max_m = 0.06, grip_gap_max_m = 0.010, grip_rise_m = 0.05, link_m = 0.24, slide_min_m = 0.02, link_r_m = [0.012, 0.0095], stop_deg = 2.0, deploy_poses = ["flight", "deployed", "chase"] }
+# Rear-entry life-support module (the torso's hatch; the SP-12 donning stands hang the suit on it). It replaces the 0.50 x 0.22 x 0.62 m
+# PLSS display envelope and the ASSET-10 compact study; packaging is shown to fit by volume only ([module]), never by capability.
+plss_size_m = [0.43, 0.125, 0.60]         # 0.125 deep: the life-support budget ([life_support]) needs 27.0 L packed
+plss_rear_bulge_m = 0.030          # rear face: a convex cylinder; the drone's dock face mirrors it
+dock_gap_m = 0.008                 # drone dock face to module rear face, docked (elastomer pads take the contact)
+channel = { width_m = 0.070, depth_m = 0.026, draft_deg = 15.0 }    # dock channel down the module centre
+
+# Life-support packaging (litres, outer envelopes) of 2020s-class technology: regenerable amine swing bed for CO2 and humidity, membrane
+# evaporator for heat, Li-ion at 400 Wh/L, 30 MPa oxygen COPVs. VOLUME ONLY: capacity, duration and heat rejection stay OPEN (EVA-008,
+# EVA-009, EVA-028); `basis` says what each line is.
+[module]
+packaging_factor = 1.25            # brackets, insulation, access clearance
+envelope_fill = 0.86               # rounded, contoured module: usable fraction of its bounding box
+feedwater_in_hatch_l = 3.6         # a conformal bladder in the hatch wall, not in the module
+items_l = { o2_primary_copv = 3.0, o2_secondary = 2.2, co2_swing_bed = 4.5, membrane_evaporator = 2.0, fan_pump_separator = 1.5, battery_1kwh = 2.5, avionics_radio = 1.0, n2_reserve_copv = 2.9, valves_regulators_lines = 2.0 }
+basis = { o2_primary_copv = "2 x 1.1 L water volume at 30 MPa, about 0.8 kg O2: PROVISIONAL", o2_secondary = "1.6 L water volume at 30 MPa, 0.60 kg O2: 30 min open-loop purge at a 2 kPa ppCO2 limit ([life_support]): PROVISIONAL", co2_swing_bed = "two-bed amine swing (ISS / xEMU class): PROVISIONAL", membrane_evaporator = "SWME class: PROVISIONAL, heat rejection OPEN", fan_pump_separator = "one integrated unit: PROVISIONAL", battery_1kwh = "Li-ion at 400 Wh/L: PROVISIONAL, duration OPEN", avionics_radio = "PROVISIONAL", n2_reserve_copv = "suit maneuvering reserve ([suit_propulsion])", valves_regulators_lines = "PROVISIONAL" }
+
+# Life-support budget: DESIGN TARGETS of this study (PROVISIONAL), not IGNITION canon; EVA-008 / EVA-009 / EVA-028 stay OPEN in S&E. Rates are
+# 2020s physiology and hardware (NASA HIDH / EMU / xEMU class): oxygen 14.1 MJ per kg used, RQ 0.85, SWME latent heat 2.45 MJ/kg.
+# cases: [low, nominal, high] metabolic rate and environment heat leak into the suit (+ hot, - cold); the budget reports each.
+[life_support]
+nominal_h = 8.0                    # design EVA duration
+reserve_h = 1.0                    # on top of nominal, on every consumable
+emergency_return_min = 30.0        # secondary O2 alone: open-loop purge back to the drone, a handhold and the airlock
+suit_pressure_kpa = 29.6           # pure O2 operating pressure assumed for leak and repress (EVA-004 OPEN; 40 kPa is the structural case)
+suit_free_volume_m3 = 0.070
+leak_kg_h = [0.005, 0.010, 0.020]  # suit leakage (EMU spec class 0.01 kg/h)
+metabolic_w = [150.0, 250.0, 350.0]
+peak_w = 600.0                     # 15 min peak (climb, ingress), inside the nominal profile
+latent_fraction = 0.20             # metabolic heat leaving as respired / sweat vapour, vented by the swing bed
+environment_w = [-40.0, 0.0, 60.0]
+electronics_w = { vent_fan = 18.0, lcvg_pump = 6.0, avionics_radio = 20.0, displays_lights = 8.0, swing_bed_valves_heaters = 8.0 }
+battery_depth = 0.80               # usable fraction of the 1 kWh Li-ion
+o2 = { primary_water_l = 2.2, secondary_water_l = 1.6, pressure_pa = 30.0e6, temp_k = 293.0, z = 0.95, usable = 0.90 }
+purge = { ppco2_limit_kpa = 2.0 }  # emergency open-loop limit (the swing bed holds 0.7 kPa nominal); sets the purge flow
+feedwater_kg = 3.6
+monitoring = ["ppO2 x2 (electrochemical)", "ppCO2 x2 (NDIR)", "suit pressure x2", "vent-loop humidity and temperature", "O2 primary and secondary P/T", "feedwater quantity", "LCVG inlet / outlet temperature", "battery state of charge", "time remaining = min over every consumable, shown on the cuff and relayed by the drone"]
+plumbing = ["vent loop: fan -> swing bed -> helmet inlet over the visor -> return at the wrists and ankles", "LCVG water loop: pump -> SWME -> gas trap -> garment", "feedwater: hatch bladder -> SWME, back-pressure valve", "O2: primary and secondary COPVs on separate regulators into the vent loop, secondary also feeds the purge valve", "propulsion N2: reserve COPV and the drone's dock probe on their own manifold; no line, valve or regulator is shared with breathing gas"]
+
+# Suit propulsion reserve: 16 x 8 N in four module-corner clusters, fed by one reserve COPV, and the docked drone's feed through the dock
+# probe. The masses are this study's assumptions (suit dry mass is OPEN, EVA-028); they size only the delta-v and authority checks.
+[suit_propulsion]
+thrust_n = 8.0
+nozzles = 16
+# One propulsion system at a time. Docked, the drone flies the pair and the reserve is isolated (its 16 plumes would cross the drone's
+# nozzles and shell); during a docking approach the suit is the passive target. The reserve is armed only with the drone away.
+reserve_armed_states = ["detached", "arms"]
+reserve = { n = 1, outer_d_m = 0.100, length_m = 0.380, wall_m = 0.0045 }
+masses_kg = { crew = 75.0, suit = 46.0, plss = 26.0, reserve_hw = 1.6 }

@@ -1810,10 +1810,17 @@ no character assets and no proxies. The generic mannequins stay the scale gauge.
 
 ## EVA suit and guided spacewalk
 
-WAYFARER_EVA_Y155 ([EVA.md](EVA.md)) is the induction pair's guided-EVA suit: a conventional gas-pressure suit (cooling garment, continuous
-bladder, restraint and thermal/MMOD outer layer as offset shells of each body; hard upper torso, torso-fixed helmet, dorsal PLSS with
-cutaway internals, bearings, gloves, soles, two tether reels, sockets) on the unchanged MPFB rigs, with twelve PROTOTYPE EVA actions,
-assets `assets/characters/WF_EVA_<WEARER>.blend`, separate from the vehicle. It is PROTOTYPE and NOT CERTIFIED; every unreleased
+WAYFARER_EVA_Y155 ([EVA.md](EVA.md), [WAYFARER_EVA_SYSTEM.md](WAYFARER_EVA_SYSTEM.md)) is the induction pair's guided-EVA suit, the
+same suit for both wearers: a hybrid rear-entry gas-pressure suit (cooling garment, continuous bladder, restraint and thermal/MMOD outer
+layer as offset shells of each body, closed at every rigid junction by a neck ring, a cuirass seal skirt and scye sleeves; a rigid cuirass
+with an integral helmet and wrap-around visor; a life-support module that is the rear hatch, with a PROVISIONAL consumables budget of 8 h
+plus 1 h reserve and a 30 min emergency purge; a fold-out hand controller; bearings, gloves, soles, two tether reels, 16 cold-N₂ reserve
+thrusters, sockets) on the unchanged MPFB rigs, with fifteen PROTOTYPE EVA actions, assets `assets/characters/WF_EVA_<WEARER>.blend`,
+separate from the vehicle. The pressure boundary covers the body in every EVA action, system pose and intermediate sweep for both wearers.
+Its companion drone WAYFARER_EVA_DRONE (26.4 kg, two arms, 26 × 4 N cold N₂, near-suit single-fault tolerant) docks into the module; it
+is crew equipment, not an S&E 51 fleet class, and the ship's drone fleet is unchanged. The pair's review file is
+`assets/characters/WF_EVA_SYSTEM.blend`, checked by `validation/eva_system.py` (PASS / PROVISIONAL / UNVERIFIED / FAIL classes); the
+runtime package carries both suits, the system scene and the drone (`export/eva_gltf.py`, `godot/scripts/check_eva.gd`). It is PROTOTYPE and NOT CERTIFIED; every unreleased
 physical value (suit pressure setpoint, prebreathe, consumables, heat rejection, tether length, keep-outs, exposure inputs) is OPEN, and
 the 40 kPa pure-O₂ case appears only as S&E 45's WORKING TRADE CASE. The interior induction is shirt-sleeve: suits are donned in SP-12
 beside SP-11 and serviced in SP-13 (43 EVA-040), and the legacy 0.70 m `suited_envelope_diameter_m` is the UNSUITED route-control envelope

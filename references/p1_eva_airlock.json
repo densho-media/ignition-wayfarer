@@ -9,11 +9,11 @@
     "below_clearance": {},
     "nearest": {
      "Hull_Forward_Collar": 0.314,
-     "Shield_Sector_Keel_1": 0.523,
-     "Ext_Airlock_Flood_1": 0.578,
-     "Ext_Airlock_Flood_2": 0.578,
-     "Casing_Collar_Seams_Long": 0.635,
-     "Storeroom_Shell": 0.7
+     "Ext_EVA_Anchor_Aft_00": 0.389,
+     "Ext_EVA_Anchor_Forward_00": 0.389,
+     "Ext_EVA_Standoff_Aft_00": 0.396,
+     "Ext_EVA_Standoff_Forward_00": 0.396,
+     "Ext_EVA_Rail_Aft": 0.521
     },
     "status": "CLEAR"
    },
@@ -21,11 +21,12 @@
     "intersects": [],
     "below_clearance": {},
     "nearest": {
-     "Hull_Forward_Collar": 0.607,
-     "Casing_Collar_Seams_Long": 0.952,
-     "Ext_Airlock_Flood_1": 0.96,
-     "Ext_Airlock_Flood_2": 0.96,
-     "Casing_Collar_Seams_Hoop": 1.208
+     "Ext_EVA_Anchor_Aft_00": 0.577,
+     "Ext_EVA_Anchor_Forward_00": 0.577,
+     "Ext_EVA_Standoff_Aft_00": 0.587,
+     "Ext_EVA_Standoff_Forward_00": 0.587,
+     "Ext_EVA_Rail_Aft": 0.601,
+     "Ext_EVA_Rail_Forward": 0.601
     },
     "status": "CLEAR"
    },
@@ -34,11 +35,11 @@
     "below_clearance": {},
     "nearest": {
      "Hull_Forward_Collar": 0.793,
-     "Ext_Airlock_Flood_1": 1.094,
-     "Ext_Airlock_Flood_2": 1.094,
-     "Casing_Collar_Seams_Long": 1.136,
-     "Storeroom_Shell": 1.2,
-     "Storeroom_Light": 1.265
+     "Ext_EVA_Anchor_Aft_00": 0.824,
+     "Ext_EVA_Anchor_Forward_00": 0.824,
+     "Ext_EVA_Standoff_Aft_00": 0.836,
+     "Ext_EVA_Standoff_Forward_00": 0.836,
+     "Ext_EVA_Rail_Aft": 0.929
     },
     "status": "CLEAR"
    },
@@ -50,11 +51,11 @@
     "below_clearance": {},
     "nearest": {
      "Hull_Forward_Collar": 0.348,
-     "Shield_Sector_Keel_1": 0.573,
-     "Ext_Airlock_Flood_1": 0.626,
-     "Ext_Airlock_Flood_2": 0.626,
-     "Casing_Collar_Seams_Long": 0.677,
-     "Storeroom_Shell": 0.75
+     "Ext_EVA_Anchor_Aft_00": 0.413,
+     "Ext_EVA_Anchor_Forward_00": 0.413,
+     "Ext_EVA_Standoff_Aft_00": 0.422,
+     "Ext_EVA_Standoff_Forward_00": 0.422,
+     "Ext_EVA_Rail_Aft": 0.542
     },
     "status": "CLEAR"
    },
@@ -62,11 +63,12 @@
     "intersects": [],
     "below_clearance": {},
     "nearest": {
-     "Hull_Forward_Collar": 0.607,
-     "Casing_Collar_Seams_Long": 0.952,
-     "Ext_Airlock_Flood_1": 0.96,
-     "Ext_Airlock_Flood_2": 0.96,
-     "Casing_Collar_Seams_Hoop": 1.208
+     "Ext_EVA_Anchor_Aft_00": 0.577,
+     "Ext_EVA_Anchor_Forward_00": 0.577,
+     "Ext_EVA_Standoff_Aft_00": 0.587,
+     "Ext_EVA_Standoff_Forward_00": 0.587,
+     "Ext_EVA_Rail_Aft": 0.601,
+     "Ext_EVA_Rail_Forward": 0.601
     },
     "status": "CLEAR"
    },
@@ -75,11 +77,11 @@
     "below_clearance": {},
     "nearest": {
      "Hull_Forward_Collar": 0.793,
-     "Ext_Airlock_Flood_1": 1.094,
-     "Ext_Airlock_Flood_2": 1.094,
-     "Casing_Collar_Seams_Long": 1.136,
-     "Storeroom_Shell": 1.2,
-     "Storeroom_Light": 1.265
+     "Ext_EVA_Anchor_Aft_00": 0.824,
+     "Ext_EVA_Anchor_Forward_00": 0.824,
+     "Ext_EVA_Standoff_Aft_00": 0.836,
+     "Ext_EVA_Standoff_Forward_00": 0.836,
+     "Ext_EVA_Rail_Aft": 0.929
     },
     "status": "CLEAR"
    },
@@ -91,11 +93,11 @@
     "below_clearance": {},
     "nearest": {
      "Hull_Forward_Collar": 0.314,
-     "Shield_Sector_Keel_1": 0.524,
-     "Ext_Airlock_Flood_1": 0.578,
-     "Ext_Airlock_Flood_2": 0.578,
-     "Casing_Collar_Seams_Long": 0.635,
-     "Storeroom_Shell": 0.7
+     "Ext_EVA_Anchor_Aft_00": 0.389,
+     "Ext_EVA_Anchor_Forward_00": 0.389,
+     "Ext_EVA_Standoff_Aft_00": 0.396,
+     "Ext_EVA_Standoff_Forward_00": 0.396,
+     "Ext_EVA_Rail_Aft": 0.521
     },
     "status": "CLEAR"
    },
@@ -103,11 +105,12 @@
     "intersects": [],
     "below_clearance": {},
     "nearest": {
-     "Hull_Forward_Collar": 0.557,
-     "Casing_Collar_Seams_Long": 0.903,
-     "Ext_Airlock_Flood_1": 0.91,
-     "Ext_Airlock_Flood_2": 0.91,
-     "Casing_Collar_Seams_Hoop": 1.158
+     "Ext_EVA_Anchor_Aft_00": 0.528,
+     "Ext_EVA_Anchor_Forward_00": 0.528,
+     "Ext_EVA_Standoff_Aft_00": 0.537,
+     "Ext_EVA_Standoff_Forward_00": 0.537,
+     "Ext_EVA_Rail_Aft": 0.552,
+     "Ext_EVA_Rail_Forward": 0.552
     },
     "status": "CLEAR"
    },
@@ -116,11 +119,11 @@
     "below_clearance": {},
     "nearest": {
      "Hull_Forward_Collar": 0.749,
-     "Ext_Airlock_Flood_1": 1.046,
-     "Ext_Airlock_Flood_2": 1.046,
-     "Casing_Collar_Seams_Long": 1.091,
-     "Storeroom_Shell": 1.15,
-     "Storeroom_Light": 1.235
+     "Ext_EVA_Anchor_Aft_00": 0.785,
+     "Ext_EVA_Anchor_Forward_00": 0.785,
+     "Ext_EVA_Standoff_Aft_00": 0.796,
+     "Ext_EVA_Standoff_Forward_00": 0.796,
+     "Ext_EVA_Rail_Aft": 0.892
     },
     "status": "CLEAR"
    },
@@ -132,11 +135,11 @@
     "below_clearance": {},
     "nearest": {
      "Hull_Forward_Collar": 0.314,
-     "Shield_Sector_Keel_1": 0.524,
-     "Ext_Airlock_Flood_1": 0.578,
-     "Ext_Airlock_Flood_2": 0.578,
-     "Casing_Collar_Seams_Long": 0.635,
-     "Storeroom_Shell": 0.7
+     "Ext_EVA_Anchor_Aft_00": 0.389,
+     "Ext_EVA_Anchor_Forward_00": 0.389,
+     "Ext_EVA_Standoff_Aft_00": 0.396,
+     "Ext_EVA_Standoff_Forward_00": 0.396,
+     "Ext_EVA_Rail_Aft": 0.521
     },
     "status": "CLEAR"
    },
@@ -144,11 +147,12 @@
     "intersects": [],
     "below_clearance": {},
     "nearest": {
-     "Hull_Forward_Collar": 0.557,
-     "Casing_Collar_Seams_Long": 0.903,
-     "Ext_Airlock_Flood_1": 0.91,
-     "Ext_Airlock_Flood_2": 0.91,
-     "Casing_Collar_Seams_Hoop": 1.158
+     "Ext_EVA_Anchor_Aft_00": 0.528,
+     "Ext_EVA_Anchor_Forward_00": 0.528,
+     "Ext_EVA_Standoff_Aft_00": 0.537,
+     "Ext_EVA_Standoff_Forward_00": 0.537,
+     "Ext_EVA_Rail_Aft": 0.552,
+     "Ext_EVA_Rail_Forward": 0.552
     },
     "status": "CLEAR"
    },
@@ -157,11 +161,11 @@
     "below_clearance": {},
     "nearest": {
      "Hull_Forward_Collar": 0.749,
-     "Ext_Airlock_Flood_1": 1.046,
-     "Ext_Airlock_Flood_2": 1.046,
-     "Casing_Collar_Seams_Long": 1.091,
-     "Storeroom_Shell": 1.15,
-     "Storeroom_Light": 1.235
+     "Ext_EVA_Anchor_Aft_00": 0.785,
+     "Ext_EVA_Anchor_Forward_00": 0.785,
+     "Ext_EVA_Standoff_Aft_00": 0.796,
+     "Ext_EVA_Standoff_Forward_00": 0.796,
+     "Ext_EVA_Rail_Aft": 0.892
     },
     "status": "CLEAR"
    },
@@ -173,11 +177,11 @@
     "below_clearance": {},
     "nearest": {
      "Hull_Forward_Collar": 0.285,
-     "Shield_Sector_Keel_1": 0.477,
-     "Ext_Airlock_Flood_1": 0.529,
-     "Ext_Airlock_Flood_2": 0.529,
-     "Casing_Collar_Seams_Long": 0.593,
-     "Storeroom_Shell": 0.65
+     "Ext_EVA_Anchor_Aft_00": 0.37,
+     "Ext_EVA_Anchor_Forward_00": 0.37,
+     "Ext_EVA_Standoff_Aft_00": 0.375,
+     "Ext_EVA_Standoff_Forward_00": 0.375,
+     "Shield_Sector_Keel_1": 0.477
     },
     "status": "CLEAR"
    },
@@ -185,11 +189,12 @@
     "intersects": [],
     "below_clearance": {},
     "nearest": {
-     "Hull_Forward_Collar": 0.508,
-     "Casing_Collar_Seams_Long": 0.854,
-     "Ext_Airlock_Flood_1": 0.86,
-     "Ext_Airlock_Flood_2": 0.86,
-     "Casing_Collar_Seams_Hoop": 1.109
+     "Ext_EVA_Anchor_Aft_00": 0.479,
+     "Ext_EVA_Anchor_Forward_00": 0.479,
+     "Ext_EVA_Standoff_Aft_00": 0.487,
+     "Ext_EVA_Standoff_Forward_00": 0.487,
+     "Ext_EVA_Rail_Aft": 0.502,
+     "Ext_EVA_Rail_Forward": 0.502
     },
     "status": "CLEAR"
    },
@@ -198,11 +203,11 @@
     "below_clearance": {},
     "nearest": {
      "Hull_Forward_Collar": 0.706,
-     "Ext_Airlock_Flood_1": 0.998,
-     "Ext_Airlock_Flood_2": 0.998,
-     "Casing_Collar_Seams_Long": 1.046,
-     "Storeroom_Shell": 1.1,
-     "Storeroom_Light": 1.213
+     "Ext_EVA_Anchor_Aft_00": 0.747,
+     "Ext_EVA_Anchor_Forward_00": 0.747,
+     "Ext_EVA_Standoff_Aft_00": 0.757,
+     "Ext_EVA_Standoff_Forward_00": 0.757,
+     "Ext_EVA_Rail_Aft": 0.856
     },
     "status": "CLEAR"
    },
@@ -214,11 +219,11 @@
     "below_clearance": {},
     "nearest": {
      "Hull_Forward_Collar": 0.285,
-     "Shield_Sector_Keel_1": 0.477,
-     "Ext_Airlock_Flood_1": 0.529,
-     "Ext_Airlock_Flood_2": 0.529,
-     "Casing_Collar_Seams_Long": 0.593,
-     "Storeroom_Shell": 0.65
+     "Ext_EVA_Anchor_Aft_00": 0.37,
+     "Ext_EVA_Anchor_Forward_00": 0.37,
+     "Ext_EVA_Standoff_Aft_00": 0.375,
+     "Ext_EVA_Standoff_Forward_00": 0.375,
+     "Shield_Sector_Keel_1": 0.473
     },
     "status": "CLEAR"
    },
@@ -226,11 +231,12 @@
     "intersects": [],
     "below_clearance": {},
     "nearest": {
-     "Hull_Forward_Collar": 0.508,
-     "Casing_Collar_Seams_Long": 0.854,
-     "Ext_Airlock_Flood_1": 0.86,
-     "Ext_Airlock_Flood_2": 0.86,
-     "Casing_Collar_Seams_Hoop": 1.109
+     "Ext_EVA_Anchor_Aft_00": 0.479,
+     "Ext_EVA_Anchor_Forward_00": 0.479,
+     "Ext_EVA_Standoff_Aft_00": 0.487,
+     "Ext_EVA_Standoff_Forward_00": 0.487,
+     "Ext_EVA_Rail_Aft": 0.502,
+     "Ext_EVA_Rail_Forward": 0.502
     },
     "status": "CLEAR"
    },
@@ -239,11 +245,11 @@
     "below_clearance": {},
     "nearest": {
      "Hull_Forward_Collar": 0.706,
-     "Ext_Airlock_Flood_1": 0.998,
-     "Ext_Airlock_Flood_2": 0.998,
-     "Casing_Collar_Seams_Long": 1.046,
-     "Storeroom_Shell": 1.1,
-     "Storeroom_Light": 1.213
+     "Ext_EVA_Anchor_Aft_00": 0.747,
+     "Ext_EVA_Anchor_Forward_00": 0.747,
+     "Ext_EVA_Standoff_Aft_00": 0.757,
+     "Ext_EVA_Standoff_Forward_00": 0.757,
+     "Ext_EVA_Rail_Aft": 0.856
     },
     "status": "CLEAR"
    },
@@ -255,11 +261,11 @@
     "below_clearance": {},
     "nearest": {
      "Hull_Forward_Collar": 0.281,
-     "Shield_Sector_Keel_1": 0.327,
-     "Ext_Airlock_Flood_1": 0.409,
-     "Ext_Airlock_Flood_2": 0.409,
-     "Storeroom_Shell": 0.5,
-     "Casing_Collar_Seams_Long": 0.513
+     "Shield_Sector_Keel_1": 0.328,
+     "Ext_EVA_Standoff_Aft_00": 0.4,
+     "Ext_EVA_Anchor_Aft_00": 0.4,
+     "Ext_EVA_Standoff_Forward_00": 0.4,
+     "Ext_EVA_Anchor_Forward_00": 0.4
     },
     "status": "CLEAR"
    },
@@ -267,11 +273,12 @@
     "intersects": [],
     "below_clearance": {},
     "nearest": {
-     "Hull_Forward_Collar": 0.442,
-     "Casing_Collar_Seams_Long": 0.778,
-     "Ext_Airlock_Flood_1": 0.785,
-     "Ext_Airlock_Flood_2": 0.785,
-     "Casing_Collar_Seams_Hoop": 1.033
+     "Ext_EVA_Anchor_Aft_00": 0.403,
+     "Ext_EVA_Anchor_Forward_00": 0.403,
+     "Ext_EVA_Standoff_Aft_00": 0.413,
+     "Ext_EVA_Standoff_Forward_00": 0.413,
+     "Ext_EVA_Rail_Aft": 0.427,
+     "Ext_EVA_Rail_Forward": 0.427
     },
     "status": "CLEAR"
    },
@@ -280,11 +287,11 @@
     "below_clearance": {},
     "nearest": {
      "Hull_Forward_Collar": 0.674,
-     "Ext_Airlock_Flood_1": 0.942,
-     "Ext_Airlock_Flood_2": 0.942,
-     "Casing_Collar_Seams_Long": 1.003,
-     "Storeroom_Shell": 1.025,
-     "Casing_Collar_Seams_Hoop": 1.211
+     "Ext_EVA_Anchor_Aft_00": 0.728,
+     "Ext_EVA_Anchor_Forward_00": 0.728,
+     "Ext_EVA_Standoff_Aft_00": 0.736,
+     "Ext_EVA_Standoff_Forward_00": 0.736,
+     "Ext_EVA_Rail_Aft": 0.844
     },
     "status": "CLEAR"
    },
@@ -296,11 +303,11 @@
     "below_clearance": {},
     "nearest": {
      "Hull_Forward_Collar": 0.281,
-     "Shield_Sector_Keel_1": 0.328,
-     "Ext_Airlock_Flood_1": 0.409,
-     "Ext_Airlock_Flood_2": 0.409,
-     "Storeroom_Shell": 0.5,
-     "Casing_Collar_Seams_Long": 0.513
+     "Shield_Sector_Keel_1": 0.325,
+     "Ext_EVA_Standoff_Aft_00": 0.4,
+     "Ext_EVA_Anchor_Aft_00": 0.4,
+     "Ext_EVA_Standoff_Forward_00": 0.4,
+     "Ext_EVA_Anchor_Forward_00": 0.4
     },
     "status": "CLEAR"
    },
@@ -308,11 +315,12 @@
     "intersects": [],
     "below_clearance": {},
     "nearest": {
-     "Hull_Forward_Collar": 0.442,
-     "Casing_Collar_Seams_Long": 0.778,
-     "Ext_Airlock_Flood_1": 0.785,
-     "Ext_Airlock_Flood_2": 0.785,
-     "Casing_Collar_Seams_Hoop": 1.033
+     "Ext_EVA_Anchor_Aft_00": 0.403,
+     "Ext_EVA_Anchor_Forward_00": 0.403,
+     "Ext_EVA_Standoff_Aft_00": 0.413,
+     "Ext_EVA_Standoff_Forward_00": 0.413,
+     "Ext_EVA_Rail_Aft": 0.427,
+     "Ext_EVA_Rail_Forward": 0.427
     },
     "status": "CLEAR"
    },
@@ -321,11 +329,11 @@
     "below_clearance": {},
     "nearest": {
      "Hull_Forward_Collar": 0.674,
-     "Ext_Airlock_Flood_1": 0.942,
-     "Ext_Airlock_Flood_2": 0.942,
-     "Casing_Collar_Seams_Long": 1.003,
-     "Storeroom_Shell": 1.025,
-     "Storeroom_Light": 1.196
+     "Ext_EVA_Anchor_Aft_00": 0.728,
+     "Ext_EVA_Anchor_Forward_00": 0.728,
+     "Ext_EVA_Standoff_Aft_00": 0.736,
+     "Ext_EVA_Standoff_Forward_00": 0.736,
+     "Ext_EVA_Rail_Aft": 0.844
     },
     "status": "CLEAR"
    },
@@ -342,7 +350,7 @@
     "Forward_Mount_Strut_0": 0.233,
     "Structural_Spine": 0.25,
     "Crew_Trunk": 0.35,
-    "Crew_Trunk_Light_1_8": 0.399
+    "Crew_Trunk_Light_1_16": 0.399
    },
    "status": "CLEAR"
   },
@@ -353,9 +361,9 @@
     "Structural_Spine": 0.305,
     "Forward_Mount_Strut_0": 0.528,
     "Crew_Trunk": 0.688,
-    "Storeroom_Shell": 0.691,
-    "Storeroom_Rack_Inner_1_Net": 0.741,
-    "Storeroom_Light": 0.741
+    "Prod_TRK_Trays": 0.815,
+    "Prod_TRK_Panels": 0.824,
+    "Prod_TRK_Fasteners": 0.857
    },
    "status": "CLEAR"
   }

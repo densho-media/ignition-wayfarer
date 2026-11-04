@@ -233,11 +233,25 @@ def swing(m, d):
     r = (q.to_matrix() @ m.to_3x3()).to_4x4(); r.translation = m.translation; return r
 
 
+ELBOW_OFF_HINGE_DEG = 45.0
+ELBOW_STEP_M = 0.03                                    # most an elbow moves per frame when it is kept on its hinge (0.9 m/s at 30 fps)
+
+
 class Solver:
     """Poses a game_engine rig from source frames (human_system docstring). All matrices are armature space, rig at the origin."""
 
-    def __init__(self, rig, src_rest):
+    def __init__(self, rig, src_rest, hinge_elbows=False):
         self.rig = rig; self.R = {b.name: b.matrix_local.copy() for b in rig.data.bones}
+        # hinge_elbows (EVA suits): the IK pole fixes the elbow's plane, the minimal swing the upper arm's roll; where the two disagree
+        # the elbow bends off its hinge axis (up to bending backwards, which skews the forearm through the suit's soft elbow layer).
+        # hinge_elbow() then swings the elbow round the shoulder-wrist axis to a place where it bends within ELBOW_OFF_HINGE_DEG of
+        # its hinge, moving continuously from frame to frame; the hand target is unchanged
+        self.hinge = {}
+        if hinge_elbows:
+            for s in 'lr':
+                ua, fa = self.R[f'upperarm_{s}'].to_3x3(), self.R[f'lowerarm_{s}'].to_3x3()
+                ax = Vector((0, 1, 0)).cross(ua.inverted() @ fa.col[1])
+                self.hinge[f'upperarm_{s}'] = ax.normalized() if ax.length > 1e-3 else Vector((1, 0, 0))
         self.parent = {b.name: b.parent.name if b.parent else None for b in rig.data.bones}
         self.order = [b.name for b in rig.data.bones]          # parents precede children
         self.length = {b.name: b.length for b in rig.data.bones}
@@ -246,6 +260,36 @@ class Solver:
         self.pelvis_offset = R['pelvis'].translation-self.hip_rest
         self.rest_frames = source_frames(src_rest)
         self.src_rest = src_rest
+
+    def reset(self):
+        """Forget the previous frame's elbows (a new action starts)."""
+        self.prev = {}
+
+    def hinge_elbow(self, b, unposed, a, mid, end):
+        """(upper-arm matrix, elbow): an elbow position on its circle about the shoulder-wrist axis at which the swung upper arm's hinge
+        axis lies within ELBOW_OFF_HINGE_DEG of the bend normal (see __init__): the one nearest the IK elbow `mid` among those within
+        ELBOW_STEP_M of the previous frame's elbow (so the elbow moves continuously), else the one nearest the previous elbow, or nearest
+        `mid` after a jump (a new pose)."""
+        ax = (end-a).normalized(); t = math.radians(ELBOW_OFF_HINGE_DEG); ok = []
+        for k in range(144):                                       # the whole circle in 2.5 deg steps
+            m = a+Quaternion(ax, math.radians(2.5*k)) @ (mid-a); w = swing(unposed, m-a); u = (m-a).normalized(); n = (m-a).cross(end-m)
+            if n.length < 1e-6:
+                return swing(unposed, mid-a), mid
+            h = w.to_3x3() @ self.hinge[b]; h = (h-u*h.dot(u)).normalized(); n = (n-u*n.dot(u)).normalized()
+            if abs(math.atan2(h.cross(n).dot(u), h.dot(n))) <= t:
+                ok.append((w, m))
+        if not ok:
+            return swing(unposed, mid-a), mid
+        prev = getattr(self, 'prev', {}).get(b)
+        near = [c for c in ok if prev is not None and (c[1]-prev).length <= ELBOW_STEP_M]
+        if near:
+            w, m = min(near, key=lambda c: (c[1]-mid).length)
+        elif prev is not None and min((c[1]-prev).length for c in ok) < 4*ELBOW_STEP_M:
+            w, m = min(ok, key=lambda c: (c[1]-prev).length)       # the admissible arc moved faster than a step: follow it
+        else:
+            w, m = min(ok, key=lambda c: (c[1]-mid).length)        # a new pose
+        self.prev = getattr(self, 'prev', {}); self.prev[b] = m.copy()
+        return w, m
 
     def solve(self, f, k=1.0, za=0.0, zb=0.0):
         """Pose for one source frame. A source body of another size maps by m(p) = (k x, k y, zb + k (z - za)): k is the leg-length
@@ -278,6 +322,8 @@ class Solver:
                 mid, end = ch.ik(tuple(a), tuple(target), l1, l2, tuple(pole if pole.length > 1e-3 else fallback))
                 reach[f'{chain}_{s}'] = max(0.0, (target-a).length-(l1+l2)*.999)
                 mids[lower] = V(end); want = swing(unposed, V(mid)-a)
+                if b in self.hinge:
+                    want, mid = self.hinge_elbow(b, unposed, a, V(mid), V(end)); mids[lower] = V(end)
             elif b.split('_')[0] in ('lowerarm', 'calf'):
                 want = swing(unposed, mids[b]-unposed.translation)
             elif b.startswith('foot_'):
@@ -372,6 +418,8 @@ def bake_action(rig, solver, frames, name, meta, k=(1.0, 0.0, 0.0)):
     act = bpy.data.actions.new(name); act['wf_owner'] = OWNER; act.use_fake_user = True
     rig.animation_data_create(); rig.animation_data.action = act
     prev = {}; points = []; reach = {}
+    if hasattr(solver, 'reset'):
+        solver.reset()
     for i, f in enumerate(frames):
         basis, P, short = solver.solve(f, *k)
         for c, v in short.items():                              # only a held limb has to reach: arm_r <- hand_right, leg_l <- foot_left

@@ -469,13 +469,20 @@ candidates of all nine classes are separate accessory assets (docs/ACCESSORIES.m
   **Done when:** both characters fit every intended stop/action and gravity mode, required assets/licenses are pinned and Blender/
   Godot rig checks agree. Stepped material-zone outfits alone do not close garment production. See `docs/CHARACTERS.md`.
 
-- [ ] **K03 — Complete the selected suit/PLSS and EVA training pass. AFTER K02/D04 and affected owner gate inputs.** The suit look
-  passes and the compact PLSS ASSET-10 study are in docs/ACCESSORIES.md (provisional design candidates). Owner choice between the baseline and
-  compact PLSS (deferred: every subsystem's sizing OPEN, EVA-051), owner Art/Fashion markings, refresh the eva references
-  (`workflow.py eva`), then re-gate the two actors and seven-station training/abort experience.
+- [ ] **K03 — Complete the selected suit and EVA training pass. AFTER K02/D04 and affected owner gate inputs.** Both wearers use the
+  EVA system suit (docs/WAYFARER_EVA_SYSTEM.md; the two-module PLSS and the compact ASSET-10 study are superseded). Life-support capacity
+  stays OPEN (EVA-051), owner Art/Fashion markings, refresh the eva references (`workflow.py eva`: the torso envelope and access classes
+  change with the rear-entry module), then re-gate the two actors and seven-station training/abort experience.
   **Done when:** suited envelopes, airlock, tether/anchor behavior and training review pass; actual H-05..H-11/O-01..O-06 releases
   are required for any operational claim. Missing flight gates remain visible and locked; no training PASS becomes FLIGHT_EVA GO.
   Sources: `docs/EVA.md`, S&E 43–45, Technology 53, Tale 26.
+
+- [ ] **EVA-SYS — EVA system: suit and companion drone (PROTOTYPE).** Built, checked, exported and documented in
+  docs/WAYFARER_EVA_SYSTEM.md. Open: post the drafted owner question (adopt the drone as Y155 crew equipment, the N₂ working case and the
+  PROVISIONAL life-support targets); the PROVISIONAL analyses (life-support budget, structure) need owner rows, FE and test before any
+  canon; the plume model is an order-of-magnitude estimate (no reflection, plume interaction or contamination transport); a hot 350 W
+  EVA ends on feedwater at 6.1 h; the docked-arm assistance stays a study; Brow Games rules (reserve floor, gates).
+  **Done when:** the owner adopts or changes the numbers and the review items have owner-accepted analyses.
 
 - [ ] **K04 — Finish accepted exterior and interior art (FUT-003). AFTER C01/K01; D06/G for affected rooms; F/H/I for affected hardware.**
   Work one bounded zone at a time: stable assembly construction, cultural architecture, lighting/materials, functional wear and

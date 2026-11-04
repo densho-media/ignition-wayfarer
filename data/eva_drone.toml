@@ -1,0 +1,211 @@
+# WAYFARER EVA companion drone: the suit-docking robotic service spacecraft of the EVA system (docs/WAYFARER_EVA_SYSTEM.md).
+# No IGNITION owner row defines this equipment: it is not one of the S&E 51 fleet classes (DR-IVA-01..03, DR-EVA-01..04, DR-FIX-01/02) and
+# never changes their counts. Every value below is a PROTOTYPE engineering choice made in the EVA system study and documented in
+# docs/WAYFARER_EVA_SYSTEM.md, chosen from present-day cold-gas EVA hardware (NASA SAFER, MMU), ISS free-flyers (Astrobee) and small
+# space manipulators, and plain physics. None of it is canon or certified; the owner question is drafted in the system doc.
+# Read by src/wayfarer/eva_system.py; built by src/wayfarer/build/eva_drone.py. Reuses the fleet's GU-SIF interface (data/drone_bodies.toml).
+#
+# Drone LOCAL frame (its body axes): +Y nose (sensor face, the working direction), +Z dorsal (outer face), -Z ventral (the dock face),
+# +X the drone's left. Docked, local -> suit world is (x, y, z) -> (-x, z, y): the nose points up behind the helmet.
+
+[drone]
+id = "WAYFARER_EVA_DRONE"
+title = "EVA companion drone: suit-docking robotic service spacecraft (PROTOTYPE)"
+status = "PROTOTYPE"
+fleet = "NOT AN S&E 51 CLASS: crew equipment of the EVA suit; ship fleet unchanged"
+interface = "GU-SIF-S tool flanges, GU-SIF-M keel for hull service sockets (data/drone_bodies.toml [interface]), suit dock channel"
+
+# Cold-gas physics shared by the suit reserve and the drone (V1 study values; SAFER and MMU class hardware).
+[gas]
+tank_pressure_pa = 30.0e6          # COPV service pressure (type IV composite; SCBA / SAFER class 20-31 MPa)
+tank_temp_k = 293.0
+z_factor = 1.10                    # N2 compressibility at 30 MPa, 293 K
+usable_fraction = 0.90             # left in the bottle when the regulator drops out
+feed_pressure_pa = 1.4e6           # regulated plenum pressure of the drone, carried across the dock coupling
+reserve_feed_pressure_pa = 1.2e6   # suit reserve regulator set lower: check valves give the drone feed passive priority
+isp_s = 65.0                       # delivered cold-N2 specific impulse (ideal vacuum about 73 s)
+cf = 1.55                          # vacuum thrust coefficient of a small conical nozzle, area ratio 20
+plume_half_angle_deg = 12.0        # plume core used for the impingement check
+plume_check_m = 1.2
+plume_fringe_half_angle_deg = 30.0 # wide fringe used for the proximity impingement check (dynamic pressure falls off fast)
+burn_g = [1.1, 1.5]                # Burnbrow: Wayfarer under thrust (owner brief)
+plume_theta_lim_deg = 130.0        # Simons far-field model limiting angle for cold N2 at area ratio 20 (3D envelope, eva_geometry.plume_envelope)
+plume_limits_pa = { sensitive = 1.0, hardware = 5.0 }   # PROTOTYPE impingement limits inside the 30 deg fringe: visor, optics and sensors; anything else
+
+# Plan (local X-Y): a broad nose (shoulders when docked) tapering to a narrow tail (lumbar). Section: concave dock face, a graphite core
+# beam, two vessel humps, and lateral arm bays closed by sliding covers when the arms are stowed.
+[body]
+length_m = 0.52
+half_width_nose_m = 0.225
+half_width_tail_m = 0.140
+taper_start_y_m = -0.15
+nose_round_m = 0.05
+depth_core_m = 0.148
+depth_bay_m = 0.100
+core_half_width_m = 0.046
+bay = { x_in_m = 0.150, floor_m = 0.028, layer_low_m = 0.030, layer_gap_m = 0.046 }
+keel = { width_m = 0.058, depth_m = 0.024, length_m = 0.40 }
+vessels = { n = 2, outer_d_m = 0.104, length_m = 0.400, wall_m = 0.0050, x_m = 0.098, y_centre_m = -0.010 }
+tool_trough = { y_from_m = -0.226, y_to_m = -0.004, floor_z_m = 0.100 }
+# Outer form, in section: the raised graphite core spine, a low crown over each vessel, a shallow valley, then the arm pod's crown and a
+# superellipse rim falling to the dock face (no vertical side wall); soft nose and tail chamfers. Three lobes read what is inside (spine,
+# vessels, folded arms). The arm bays (y range) lie under two-leaf gull-wing covers that carry the same surface when closed; the aft
+# leaf (behind bay_split) closes again once the arm is out, so a working drone only shows the shoulder well.
+form = { profile_m = [[0.046, 0.136], [0.098, 0.128], [0.150, 0.121], [0.185, 0.128]], rim_exponent = 2.5, chamfer_nose_m = 0.045, chamfer_tail_m = 0.060, bay_y_m = [-0.140, 0.205], bay_split_y_m = 0.050 }
+
+# Dry mass model (kg): the generator places each item on the built drone and reports the CoM; totals feed the delta-v budget.
+[dry_mass_kg]
+shell_and_core = 4.6
+copv_pair = 3.8
+regulator_manifold = 1.5
+thrusters_26 = 2.6
+battery_400wh = 2.0
+avionics_sensors = 2.6
+dock_mechanism = 1.4
+arm_precision = 1.9
+arm_utility = 2.6
+tools_carried = 1.1
+tool_cartridge = 0.3
+bay_covers = 0.4
+
+# Propulsion: 26 x 4 N in four corner clusters (seven at the nose, six at the tail). Each LAT nozzle has a twin (LATB) on the same line and
+# each nose DOR an outboard twin (DORB), so near a suit any one nozzle can fail closed (eva_system.nozzles_from_clusters). Directions keep clear of the arm work zone, the sensor face, the helmet
+# (nose clusters fire up and outboard) and the seat (tail clusters fire down, outboard and aft); the four ventral nozzles are valved off
+# while docked and within proximity_m of a suit; the four LAT nozzles lean towards the dock face, so near a suit they still back the drone
+# away (their plumes run outboard past the shoulders and hips).
+[propulsion]
+thrust_n = 4.0
+nozzles = 26
+proximity_m = 1.5                  # near-suit mode (ventral nozzles valved off) from 1.5 m in: their fringes would reach the suit inside it
+lateral_ventral_cant_deg = [30.0, 15.0]   # nose, tail LAT nozzles lean this far towards the dock face: near-suit retreat thrust (VEN
+                                          # valved off); the tail pair leans less so its 30 deg fringe passes outboard of the suit's hands
+approach_speed_max_m_s = 0.03      # final closing speed into the capture tongue (capture spring absorbs about 0.011 J)
+# Near-suit procedure (PROTOTYPE limits the flight software enforces; docs/WAYFARER_EVA_SYSTEM.md "Near-suit fault tolerance"). Valves are
+# dual-seat with independent drivers, so no single failure gives uncommanded thrust; a cluster's two parallel latch legs keep it fed if one
+# fails closed. Manifolds and vessels are design-for-minimum-risk (proof 1.5, burst 2.5, leak-before-burst), not failure tolerant.
+near_suit = { approach_m = [0.50, 0.12], approach_speed_m_s = 0.10, brake_to_m = 0.05, align_tol_deg = 2.0, tipoff_deg_s = 2.0, capture_m = 0.02, retreat_speed_m_s = 0.05, control_margin = 2.0, detect_s = 0.25, capture_energy_j = 0.15 }
+
+# Manipulators: shoulders at the nose corners inside the bays. Stowed (the rest pose) the upper link lies aft in the low layer and the
+# forearm folds forward over it in the high layer. Joint ranges in degrees; shoulder yaw is inboard-positive (towards the core), mirrored
+# for arm B. With the bay cover open the bay is open outboard too, so the shoulder can yaw 95 deg outboard and pitch 215 deg (down past
+# the dock-face plane, outside the rim): that is what lets a docked drone reach beside the helmet. Loads are rated, not demonstrated.
+[arm.A]
+role = "precision"
+side = 1
+shoulder_x_m = 0.1875
+shoulder_y_m = 0.100
+l_upper_m = 0.200
+l_fore_m = 0.165
+l_wrist_m = 0.045
+link_m = 0.032
+yaw_offset_m = 0.016
+tip_force_n = 20.0
+joints = { shoulder_yaw = [-95, 120], shoulder_pitch = [-215, 15], elbow = [0, 200], wrist_pitch = [-115, 115], wrist_yaw = [-90, 90], wrist_roll = [-270, 270] }
+extras = ["wrist camera (macro + close-range, ring light)", "six-axis force / torque sensor at the flange"]
+
+[arm.B]
+role = "utility"
+side = -1
+shoulder_x_m = 0.1875
+shoulder_y_m = 0.100
+l_upper_m = 0.200
+l_fore_m = 0.165
+l_wrist_m = 0.040
+link_m = 0.040
+yaw_offset_m = 0.0
+tip_force_n = 60.0
+joints = { shoulder_yaw = [-95, 120], shoulder_pitch = [-215, 15], elbow = [0, 200], wrist_pitch = [-115, 115], wrist_roll = [-270, 270] }
+extras = ["force sensing in every joint (motor current + output encoders)", "anchor-capable gripper (rated 300 N pull)"]
+
+# Named arm poses (drone local): flange target and tool approach per arm (None / omitted = in-plane approach for the 5-axis arm B).
+# ready: both arms out ahead of the sensor nose; maintenance: anchored in a hull socket, A drives a fastener on the unit's front
+# flange, B holds the grapple post on the unit's top face (the scene places the post on B's jaw line). Both work straight ahead of their
+# shoulders: reaching across towards the centre line swings the upper link through the open cover and the shell rim.
+[arm_pose.ready]
+A = { target = [0.120, 0.380, 0.180], approach = [0.0, 1.0, 0.0] }
+B = { target = [-0.120, 0.380, 0.180] }
+[arm_pose.maintenance]
+A = { target = [0.120, 0.340, 0.140], approach = [0.0, 1.0, 0.0] }
+B = { target = [-0.120, 0.420, 0.220] }
+# assist (docked-arm assistance study): drone docked, both flanges 0.40 m outboard beside the helmet (about 0.25 m clear of it) at the
+# edge of the visor's field, tools pointing forward (a work light or camera over the shoulder, a part held where the glove can take it).
+# Found by a search over reach, joint ranges, arm-vs-drone and arm-vs-suit contact; nothing nearer the face passes all of them. Shoulder
+# pitch stays above -180 deg so the in-file IK control (limits clipped at +-180) reaches the same pose.
+[arm_pose.assist]
+A = { target = [0.400, 0.300, -0.160], approach = [0.5, 0.0, -1.0] }
+B = { target = [-0.400, 0.300, -0.160], approach = [-0.3, 0.28, -1.0] }
+
+# Utility gripper jaw geometry (tool frame: +Y along the tool, jaws close along X): inner face half-gap when closed, jaw centre along the
+# tool. A grasp is valid when both pad pairs touch the bar (line contacts) and never cut into it.
+[utility_jaw]
+inner_m = 0.0045
+centre_y_m = 0.070
+grapple_bar_d_m = 0.019            # grapple post / handrail diameter the jaws close on
+
+# Tool flange: the fleet's GU-SIF in its S size (data/drone_bodies.toml [interface]): square base flange, guide probe, three kinematic
+# pins, recessed power / data pad, positive latch with manual release. Same flange on both arms and every tool.
+[coupling]
+standard = "GU-SIF-S"
+outer_d_m = 0.040
+pins = 3
+contacts = 6
+preload_n = 600.0
+
+[[tool]]
+key = "precision_gripper"
+modelled = true
+length_m = 0.068
+mass_kg = 0.30
+jaw_stroke_m = 0.012
+function = "small parts, connectors, samples; 2 x 12 mm jaw stroke, 25 N grip"
+[[tool]]
+key = "utility_gripper"
+modelled = true
+length_m = 0.082
+mass_kg = 0.42
+jaw_stroke_m = 0.022
+function = "larger objects, stabilisation, handrail anchoring; 2 x 22 mm, 150 N grip"
+[[tool]]
+key = "powered_driver"
+modelled = true
+length_m = 0.095
+mass_kg = 0.38
+function = "fasteners and panels: 1/4 in hex, 0.5-5 N m, reaction tab"
+[[tool]]
+key = "inspection_probe"
+modelled = false
+length_m = 0.180
+mass_kg = 0.20
+function = "borescope for narrow gaps (interface defined only)"
+[[tool]]
+key = "sampling_head"
+modelled = false
+length_m = 0.090
+mass_kg = 0.30
+function = "particulate and scraping samples, sealed canister"
+[[tool]]
+key = "cleaning_head"
+modelled = false
+length_m = 0.080
+mass_kg = 0.25
+function = "approved optical / radiator surfaces: microfibre + CO2 snow"
+[[tool]]
+key = "anchor_interface"
+modelled = false
+length_m = 0.070
+mass_kg = 0.35
+function = "clamps a standard hardpoint pin for anchored work"
+
+# Sensors: one recessed nose window plus the dock-face and dorsal sensors. Every sensor has a job; none is decorative.
+[sensors]
+stereo_baseline_m = 0.196
+forward = ["stereo pair", "flash lidar / time of flight", "gimballed inspection camera", "thermal infrared", "task lights"]
+dock = ["two docking cameras", "proximity rangefinders", "retroreflector targets"]
+dorsal = ["star tracker", "dosimeter", "magnetometer", "status lights"]
+
+# Anchored work: the drone docks its keel into a hull service socket that copies the suit channel (same bolts, same probe).
+[anchor]
+latch_pull_n = 2000
+latch_moment_nm = 260              # raised from 150: a 556 N crew kick (NASA-STD-3001 class) 0.3 m out on the drone is 167 N m, x 1.5 = 250
+# Structural assessment inputs (PRELIMINARY, analytical; eva_system.structure()). Limit loads x factor of safety against the rating.
+structure = { fos_ultimate = 1.5, kick_n = 556.0, kick_lever_m = 0.30, burn_g = 1.5, crew_push_n = 200.0, bolt_section_m = [0.013, 0.009], bolt_shear_mpa = 580.0, link_wall_m = 0.002, link_yield_mpa = 430.0, release_spring_n = 15.0, release_friction = 0.15, release_advantage = 4.0, glove_pull_n = 90.0 }

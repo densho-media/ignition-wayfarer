@@ -468,8 +468,8 @@ SHARED_ACTIONS = {
     'walk': 'unsuited walk in ring gravity',
     'sit': 'unsuited seated pose',
     'crawl': 'unsuited floor crawl: the head leaves the torso-fixed helmet (coverage FAIL)',
-    'climb': 'unsuited ladder climb: overhead reach far past the 120 deg suit shoulder display limit; the outer layer thins under '
-             'the scye bearing (instructor coverage FAIL)',
+    'climb': 'unsuited ladder climb: overhead reach far past the 120 deg suit shoulder display limit (coverage passes; still not '
+             'suited motion)',
 }
 
 

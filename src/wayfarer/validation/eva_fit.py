@@ -1,11 +1,12 @@
 """Engineering checks of WAYFARER_EVA_Y155 (TODO EVA-001, docs/EVA.md; S&E 44 ASSET-03, RUN-007, RUN-010, SIM-01, QA-02).
 
   blender --background --factory-startup --python-exit-code 1 --python src/wayfarer/validation/eva_fit.py -- \
-      [--report references/p1_eva_fit.json] [--renders runs/renders/p1/eva/fit] [--no-route] [--step 6]
+      [--report references/p1_eva_fit.json] [--renders runs/renders/p1/eva/fit] [--no-route] [--step 1] [--vstep 1]
 
-1. Pressure continuity: in sampled frames of every action (the EVA actions and the five shared unsuited ones), each covered body vertex
-   must lie behind the outer layer (the nearest outer-layer surface faces away from it) or inside the torso-fixed helmet; the head must
-   stay inside the helmet. Reports exposed vertices and how far outside (ASSET-03 "no gaps exposing skin in ANY animated pose").
+1. Pressure continuity: in every frame (--step) of every action (the EVA actions and the five shared unsuited ones), the system poses and
+   the intermediate frames between them, every body vertex (--vstep) must lie inside the pressure boundary: under the soft layers or the
+   modelled rigid-to-soft parts (cuirass, helmet, neck ring, seal skirt, scye bearings and sleeves, module, gloves), or enclosed by them;
+   the head must stay inside the helmet, or, where the throat drops into the yoke, be enclosed 8 mm clear of the hull. Reports exposed vertices and how far outside (ASSET-03 "no gaps exposing skin in ANY animated pose").
 2. Suited envelope at rest and its largest extent over the EVA actions: width, depth with the PLSS, height and the diameter of the
    circle that holds the cross-section across the body axis; compared with the route bottlenecks (no shrink, RUN-010): the largest PLSS
    depth each admits is reported instead.
@@ -20,6 +21,7 @@ import math
 from pathlib import Path
 import sys
 
+import bmesh
 import bpy
 from mathutils import Matrix, Vector
 from mathutils.bvhtree import BVHTree
@@ -72,64 +74,161 @@ def world_mesh(o, dg, normals=False):
 AXES = (Vector((1, 0, 0)), Vector((0, 1, 0)), Vector((0, 0, 1)), Vector((-1, 0, 0)), Vector((0, -1, 0)), Vector((0, 0, -1)))
 
 
-def inside(tree, p, sign):
-    """Fallbacks where the skin-normal ray misses in a fold (armpit, crotch): the nearest shell surface faces away from p (by the
-    shell's winding `sign`), or a ray along any axis crosses the shell an odd number of times within 0.6 m."""
-    loc, nor, _, _ = tree.find_nearest(p)
-    if loc is not None and (p-loc).dot(nor)*sign > 0:
-        return True
-    for d in AXES:
-        n = 0; q = p
-        while True:
-            h = tree.ray_cast(q+d*.0005, d, .6-(q-p).length)
-            if h[0] is None:
-                break
-            n += 1; q = h[0]
-        if n % 2 == 1:
-            return True
-    return False
+PRESSURE_PARTS = ('_Torso_Shell', '_Helmet_Shell', '_Helmet_Brow', '_Visor', '_Neck_Ring', '_Scye_Bearing_l', '_Scye_Bearing_r', '_Scye_Sleeve_l',
+                  '_Scye_Sleeve_r', '_Scye_Housing_l', '_Scye_Housing_r', '_Cuirass_Seal')
+SWEEP = (.25, .5, .75)            # intermediate fractions of each system-pose transition
 
 
-def coverage(rig, objs, data, step):
-    """Exposed covered-body and head vertices per action (see module docstring)."""
+def pressure_parts(objs):
+    """The modelled pressure-bearing structure that closes the soft layer where it ends: the cuirass and its rolled edge, the helmet
+    (shell, brow structure, visor), the neck ring, the scye housings, bearings and sleeves, and the life-support module (the rear hatch)."""
+    return [o for o in objs if o.type == 'MESH' and (o.name.endswith(PRESSURE_PARTS) or '_Cuirass_Edge' in o.name
+                                                     or (o.name.startswith('LS_') and o.name.endswith('_Module')))]
+
+
+def sphere_dirs(n=64):
+    """n near-uniform unit directions (Fibonacci sphere)."""
+    g = math.pi*(3.0-math.sqrt(5.0)); out = []
+    for i in range(n):
+        z = 1.0-2.0*(i+.5)/n; r = math.sqrt(1.0-z*z); out.append(Vector((r*math.cos(g*i), r*math.sin(g*i), z)))
+    return out
+
+
+DIRS = sphere_dirs(96)
+ESCAPE = 3.0                      # longer than any chord through the suit (a 1.9 m figure): a ray that meets no pressure surface within it reaches open space
+
+
+def enclosed(tree, p):
+    """True when every one of the DIRS rays from p meets a pressure surface within ESCAPE: no line of sight from p to the outside."""
+    for d in DIRS:
+        if tree.ray_cast(p+d*.0005, d, ESCAPE)[0] is None:
+            return False
+    return True
+
+
+def blend_pose(rig, act, fa, fb, s):
+    """Pose the rig between frames fa and fb of act (s = 0..1): every bone's local rotation slerped, location and scale lerped."""
+    ad = rig.animation_data; sc = bpy.context.scene; pose = {}
+    for f in (fa, fb):
+        ad.action = act
+        if act.slots:
+            ad.action_slot = act.slots[0]
+        sc.frame_set(f); pose[f] = {b.name: (b.rotation_quaternion.copy(), b.location.copy(), b.scale.copy()) for b in rig.pose.bones}
+    ad.action = None
+    for b in rig.pose.bones:
+        (qa, la, ka), (qb, lb, kb) = pose[fa][b.name], pose[fb][b.name]
+        b.rotation_mode = 'QUATERNION'; b.rotation_quaternion = qa.slerp(qb, s); b.location = la.lerp(lb, s); b.scale = ka.lerp(kb, s)
+    bpy.context.view_layer.update()
+
+
+def coverage(rig, objs, data, step, vstep=1, only=None):
+    """Exposed covered-body and head vertices per action, per system pose and per system-pose transition (see module docstring).
+    The pressure surfaces are the outer layer and the modelled pressure parts (pressure_parts) as single sheets (their Solidify walls
+    off). A body vertex is covered when (1) the outer layer or a pressure part lies above it along its posed normal within REACH (the
+    close-fitting soft layer), or (2) it is enclosed: none of 96 rays spread over the sphere escapes the pressure surfaces within ESCAPE
+    (the rigid torso, yoke and helmet stand off the body by more than REACH). The head must stay inside the helmet (8 mm inside its inner surface) or, where the throat drops into the yoke, be enclosed by the rigid hull 8 mm clear of it. The negative control
+    (sensitivity) shows holes are found."""
     body = next(o for o in objs if o.get('eva_role') == 'validation_body'); outer = next(o for o in objs if o.get('part_id', '').endswith('MMOD_OUTER_SHELL'))
     helmet = next(o for o in objs if o.name.endswith('_Helmet_Shell'))
+    rigid = pressure_parts(objs)
+    walls = [m for o in rigid for m in o.modifiers if m.type == 'SOLIDIFY' and m.show_viewport]
+    for m in walls:
+        m.show_viewport = False
     hrep = json.loads(rig['eva_helmet']) if rig.get('eva_helmet') else None
     names = {g.index: g.name for g in body.vertex_groups}; unc = {body.vertex_groups[g].index for g in data['layers']['uncovered_groups'] if g in body.vertex_groups}
     head = [any(g.group in unc and g.weight > .5 for g in v.groups) for v in body.data.vertices]
     bones = set(hs.BONES); dom = []
     for v in body.data.vertices:
         g = [x for x in v.groups if names.get(x.group) in bones]; dom.append(names[max(g, key=lambda x: x.weight).group] if g else '')
-    c0, R0 = Vector(hrep['centre']), hrep['radius'] - .008
-    out = {}; sign = None
-    for name in (*es.EVA_ACTIONS, *SHARED):
-        act = bpy.data.actions[name]; lo, hi = (int(x) for x in act.frame_range); worst = dict(frames=0, exposed=0, max_out_mm=0.0, head_out=0, bones={})
-        for f in range(lo, hi+1, step):
-            set_action(rig, name, f); dg = bpy.context.evaluated_depsgraph_get()
-            bv, _, bn = world_mesh(body, dg, True); ov, of = world_mesh(outer, dg); tree = BVHTree.FromPolygons(ov, of)
-            if sign is None:                                   # the shell's winding, from the rest-like first frame: most skin is inside it
-                ds = sorted((bv[i]-tree.find_nearest(bv[i])[0]).dot(tree.find_nearest(bv[i])[1]) for i in range(0, len(bv), 40) if not head[i])
-                sign = -1.0 if ds[len(ds)//2] < 0 else 1.0
-            c = helmet.matrix_world @ c0; worst['frames'] += 1
-            for i in range(0, len(bv), 2):
-                p = bv[i]; inside_helmet = (p-c).length < R0
-                if head[i]:
-                    if not inside_helmet:
-                        worst['head_out'] += 1
-                    continue
-                if inside_helmet:
-                    continue
-                # covered when the outer layer lies above the skin along the posed skin normal (a ray from the skin hits it within REACH);
-                # a ray that misses means the layer collapsed into, or was crossed by, the body there
-                hit = tree.ray_cast(p+bn[i]*.0005, bn[i], REACH)
-                if hit[0] is None and not inside(tree, p, sign):
-                    back = tree.ray_cast(p, -bn[i], REACH)
-                    depth = back[3] if back[0] is not None else REACH
-                    worst['exposed'] += 1; worst['max_out_mm'] = max(worst['max_out_mm'], round(depth*1000, 1))
-                    worst['bones'][dom[i]] = worst['bones'].get(dom[i], 0)+1
-        worst['status'] = 'PASS' if worst['exposed'] == 0 and worst['head_out'] == 0 else 'FAIL'
-        worst['use'] = 'EVA' if name in es.EVA_ACTIONS else 'NOT_SUITED_EVA'
+    c0, ax, ex = Vector(hrep['centre']), hrep['semi_axes'], hrep['exponent']      # asymmetric superellipsoid: [x, y_front, z, y_back]
+    def in_helmet(p, c):                                   # 8 mm inside the shell's inner surface
+        q = p-c; ay = ax[1] if q.y < 0 else ax[3]
+        return (abs(q.x)/(ax[0]-.008))**ex+(abs(q.y)/(ay-.008))**ex+(abs(q.z)/(ax[2]-.008))**ex < 1.0
+    def sample(worst):
+        dg = bpy.context.evaluated_depsgraph_get()
+        bv, _, bn = world_mesh(body, dg, True); ov, of = world_mesh(outer, dg)
+        for o in rigid:
+            rv, rf = world_mesh(o, dg); k0 = len(ov); ov = ov+rv; of = of+[tuple(k0+k for k in q) for q in rf]
+        tree = BVHTree.FromPolygons(ov, of)
+        hinv = helmet.matrix_world.inverted(); worst['frames'] += 1
+        for i in range(0, len(bv), vstep):
+            p = bv[i]; inside_helmet = in_helmet(hinv @ p, c0)
+            if head[i]:
+                # the head and neck skin must be inside the helmet's inner envelope or, where the throat drops below the helmet base into
+                # the yoke and neck ring, enclosed by the rigid pressure hull with the same 8 mm clearance from every pressure surface
+                if not inside_helmet and not (enclosed(tree, p) and tree.find_nearest(p)[3] >= .008):
+                    worst['head_out'] += 1
+                    if len(worst['at']) < 6:
+                        worst['at'].append(dict(frame=bpy.context.scene.frame_current, vertex=i, head=True, p=[round(c, 3) for c in p]))
+                continue
+            if inside_helmet:
+                continue
+            if tree.ray_cast(p+bn[i]*.0005, bn[i], REACH)[0] is not None:
+                continue
+            if enclosed(tree, p):
+                continue
+            back = tree.ray_cast(p, -bn[i], REACH); depth = back[3] if back[0] is not None else REACH
+            worst['exposed'] += 1; worst['max_out_mm'] = max(worst['max_out_mm'], round(depth*1000, 1))
+            worst['bones'][dom[i]] = worst['bones'].get(dom[i], 0)+1
+            if len(worst['at']) < 6:
+                worst['at'].append(dict(frame=bpy.context.scene.frame_current, vertex=i, bone=dom[i], out_mm=round(depth*1000, 1), p=[round(c, 3) for c in p]))
+    def close(worst, name, use):
+        worst['status'] = 'PASS' if worst['exposed'] == 0 and worst['head_out'] == 0 else 'FAIL'; worst['use'] = use
         worst['bones'] = dict(sorted(worst['bones'].items(), key=lambda x: -x[1])[:4]); out[name] = worst
+    new = lambda: dict(frames=0, exposed=0, max_out_mm=0.0, head_out=0, bones={}, at=[])
+    out = {}
+    try:
+        for name in only or (*es.EVA_ACTIONS, *SHARED):
+            act = bpy.data.actions[name]; lo, hi = (int(x) for x in act.frame_range); worst = new()
+            for f in range(lo, hi+1, step):
+                set_action(rig, name, f); sample(worst)
+            close(worst, name, 'EVA' if name in es.EVA_ACTIONS else 'NOT_SUITED_EVA')
+        act = bpy.data.actions.get('EVA_SYSTEM_POSES')
+        if act is not None and not only:                                    # the system poses (walk, reach, climb, flight, drone work, Burnbrow ...)
+            order = json.loads(act['poses']); seg = act['segment_frames']; at = {k: i*seg+3 for i, k in enumerate(order)}
+            for k in order:
+                worst = new(); set_action(rig, 'EVA_SYSTEM_POSES', at[k]); sample(worst); close(worst, f'pose:{k}', 'EVA')
+            # motion sweeps: every pose from and back to the neutral ready pose, and the system-state sequence
+            pairs = [('ready', k) for k in order if k != 'ready']+list(zip(order[1:], order[2:]))
+            for a_, b_ in pairs:
+                worst = new()
+                for s_ in SWEEP:
+                    blend_pose(rig, act, at[a_], at[b_], s_); sample(worst)
+                close(worst, f'sweep:{a_}>{b_}', 'EVA')
+    finally:
+        for m in walls:
+            m.show_viewport = True
+    return out
+
+
+def sensitivity(key, data):
+    """Negative control: the coverage check must find skin behind holes cut in the pressure surfaces. Three holes are cut in a fresh copy
+    of the suit (a 5 cm patch of the outer layer at the thigh, one at the upper arm below the sleeve, and a 6 cm hole in the cuirass at
+    the sternum) and the rest-like first frame of eva_suit_check is checked. Returns the exposed counts per hole; each must exceed the intact suit's count."""
+    bpy.ops.wm.read_factory_settings(use_empty=True); rig, objs = append(key)
+    base = coverage(rig, objs, data, 1000, 1, only=('eva_suit_check',))['eva_suit_check']['exposed']; out = dict(intact_exposed=base)
+    for hole, (bone_, target, off) in dict(thigh=('thigh_l', 'OUTER_LAYER', .45), upper_arm=('lowerarm_l', 'OUTER_LAYER', -.25),
+                                           sternum=('spine_03', '_Torso_Shell', None)).items():
+        bpy.ops.wm.read_factory_settings(use_empty=True); rig, objs = append(key)
+        o = next(x for x in objs if x.type == 'MESH' and x.name.endswith(target)); pb = rig.pose.bones[bone_]
+        set_action(rig, 'eva_suit_check', 0)
+        if off is None:                                        # the sternum: the front of the cuirass at the spine_03 bone's height
+            c = rig.matrix_world @ pb.head; mw = o.matrix_world
+            c = min((mw @ v.co for v in o.data.vertices if abs((mw @ v.co).z-c.z) < .03 and abs((mw @ v.co).x) < .03), key=lambda q: q.y)
+            r = .06
+        else:
+            h, t = rig.matrix_world @ pb.head, rig.matrix_world @ pb.tail; c = h+(t-h)*abs(off) if off > 0 else h+(t-h)*off
+            r = .05
+        dg = bpy.context.evaluated_depsgraph_get(); vs, _ = world_mesh(o, dg); fs = [tuple(q.vertices) for q in o.data.polygons]
+        if len(vs) != len(o.data.vertices):                    # a generated wall (Solidify): cut its base mesh at its rest place
+            vs = [o.matrix_world @ v.co for v in o.data.vertices]
+        if off is not None:                                    # the outer layer near the bone point (it rides the posed body)
+            c = min(vs, key=lambda q: (q-c).length)
+        bm = bmesh.new(); bm.from_mesh(o.data); bm.faces.ensure_lookup_table()
+        kill = [bm.faces[j] for j, f in enumerate(fs) if all((vs[k]-c).length < r for k in f)]
+        bmesh.ops.delete(bm, geom=kill, context='FACES'); bm.to_mesh(o.data); bm.free(); o.data.update()
+        cov = coverage(rig, objs, data, 1000, 1, only=('eva_suit_check',))['eva_suit_check']
+        out[hole] = dict(faces_removed=len(kill), exposed=cov['exposed'], detected=cov['exposed'] > base)
     return out
 
 
@@ -171,7 +270,8 @@ def envelope(rig, objs):
     rest = dict(width_m=round(max(xs)-min(xs), 3), depth_m=round(max(ys)-min(ys), 3), height_m=round(max(zs)-min(zs), 3),
                 torso_width_m=round(max(p.x for p in torso)-min(p.x for p in torso), 3), torso_depth_with_plss_m=round(max(p.y for p in torso)-min(p.y for p in torso), 3),
                 torso_circle_diameter_m=round(circ, 3))
-    plss = next(o for o in objs if o.name.endswith('_PLSS')); pv, _ = world_mesh(plss, dg)
+    rig = next(o for o in objs if o.type == 'ARMATURE')
+    plss = bpy.data.objects[json.loads(rig['eva_module'])['module_object']]; pv, _ = world_mesh(plss, dg)
     rest['plss_depth_m'] = round(max(p.y for p in pv)-min(p.y for p in pv), 3)
     rest['torso_depth_without_plss_m'] = round(min(p.y for p in pv)-min(p.y for p in torso), 3)
     # the largest distance of any suit point from the hip centre over the EVA actions: the swept radius of a held body about its hold
@@ -372,7 +472,8 @@ def main():
     ap = argparse.ArgumentParser(); ap.add_argument('--report', type=Path, default=ROOT/'references/p1_eva_fit.json')
     ap.add_argument('--renders', type=Path, default=ROOT/'runs/renders/p1/eva/fit'); ap.add_argument('--size', type=int, default=800)
     ap.add_argument('--vehicle', type=Path, default=ROOT/'assets/wayfarer/WF_WAYFARER_001.blend'); ap.add_argument('--no-route', action='store_true')
-    ap.add_argument('--step', type=int, default=6); ap.add_argument('--route-only', action='store_true')
+    ap.add_argument('--step', type=int, default=1); ap.add_argument('--vstep', type=int, default=1, help='every Nth body vertex (1 = all; >1 only for quick iteration)'); ap.add_argument('--route-only', action='store_true')
+    ap.add_argument('--self-test', action='store_true', help='only the coverage negative control (holes must be detected)')
     ap.add_argument('--assets', type=Path, help='suit asset folder (a study build such as the compact PLSS, ASSET-10); default assets/characters')
     args = ap.parse_args(argv)
     if args.assets:
@@ -380,11 +481,14 @@ def main():
         ASSETS = args.assets.resolve()
     s = load(ROOT)[0]; data = es.load(ROOT); keys = list(data['variant'])
     report = dict(suit=data['suit']['id'], certification=data['suit']['certification'], reach_m=REACH, variants={}); hulls = {}
+    if args.self_test:
+        res = {k: sensitivity(k, data) for k in keys}; print('WF_EVA_FIT sensitivity', json.dumps(res), flush=True)
+        sys.exit(0 if all(h['detected'] for v in res.values() for h in v.values() if isinstance(h, dict)) else 1)
     if args.route_only and args.report.exists():
         report = json.loads(args.report.read_text()); keys = list(report['variants'])
     for k in ([] if args.route_only else keys):
         bpy.ops.wm.read_factory_settings(use_empty=True); rig, objs = append(k)
-        cov = coverage(rig, objs, data, args.step); env = envelope(rig, objs)
+        cov = coverage(rig, objs, data, args.step, args.vstep); env = envelope(rig, objs)
         report['variants'][k] = dict(coverage=cov, envelope=env, bottlenecks=bottlenecks(s, env), sp11_pair=pair_fit(s, env))
         hulls[k] = pose_hulls(rig, objs)
         print(f'WF_EVA_FIT {k} coverage', {n: (c['status'], c['exposed'], c['max_out_mm'], c['head_out']) for n, c in cov.items()}, flush=True)

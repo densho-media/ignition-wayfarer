@@ -82,8 +82,8 @@
    },
    "polar_bounds": {
     "x_m": [
-     101.149,
-     102.549
+     133.4,
+     134.8
     ],
     "az_deg": [
      7.5,
@@ -97,14 +97,14 @@
    "sp12_room_margin_m": 0.094,
    "sp12_room_status": "PASS",
    "sp12_fixtures_m": {
-    "SP12_DON_STAND_A": 0.376,
-    "SP12_DON_STAND_B": 1.276,
+    "SP12_DON_STAND_A": 0.375,
+    "SP12_DON_STAND_B": 1.275,
     "SP12_PRESSURE_CHECK": 0.956,
-    "SP12_O2_INTERFACE": 2.101,
-    "SP12_TOOL_CHECKOUT": 0.239,
-    "SP12_BUDDY_ZONE": 0.501
+    "SP12_O2_INTERFACE": 2.1,
+    "SP12_TOOL_CHECKOUT": 0.24,
+    "SP12_BUDDY_ZONE": 0.5
    },
-   "sp12_fixture_min_m": 0.239,
+   "sp12_fixture_min_m": 0.24,
    "sp12_fixture_status": "PASS",
    "under_bulkhead_m": 0.08,
    "parked_edge_to_bore_m": 0.05,
@@ -362,104 +362,104 @@
     "clusters": [
      {
       "for_crew": "instructor",
-      "station_a_m": 4.4,
-      "angle_deg": 0.0,
-      "wall_radius_m": 1.05,
-      "stand_off_m": 0.06,
-      "points": {
-       "release": [
-        4.2,
-        0.99,
-        0.0
-       ],
-       "valve": [
-        4.4,
-        0.99,
-        0.0
-       ],
-       "gauge": [
-        4.6,
-        0.99,
-        0.0
-       ]
-      },
-      "body_gap_m": 0.103,
-      "body_status": "PASS"
-     },
-     {
-      "for_crew": "newcomer",
       "station_a_m": 4.3,
-      "angle_deg": 180.0,
+      "angle_deg": 330.0,
       "wall_radius_m": 1.05,
       "stand_off_m": 0.06,
       "points": {
        "release": [
         4.1,
-        -0.99,
-        0.0
+        0.857,
+        -0.495
        ],
        "valve": [
         4.3,
-        -0.99,
-        0.0
+        0.857,
+        -0.495
        ],
        "gauge": [
         4.5,
-        -0.99,
-        0.0
+        0.857,
+        -0.495
        ]
       },
-      "body_gap_m": 0.127,
+      "body_gap_m": 0.099,
+      "body_status": "PASS"
+     },
+     {
+      "for_crew": "newcomer",
+      "station_a_m": 4.3,
+      "angle_deg": 150.0,
+      "wall_radius_m": 1.05,
+      "stand_off_m": 0.06,
+      "points": {
+       "release": [
+        4.1,
+        -0.857,
+        0.495
+       ],
+       "valve": [
+        4.3,
+        -0.857,
+        0.495
+       ],
+       "gauge": [
+        4.5,
+        -0.857,
+        0.495
+       ]
+      },
+      "body_gap_m": 0.227,
       "body_status": "PASS"
      }
     ],
     "reach_margin_m": {
-     "suited_instructor.release": 0.189,
-     "suited_instructor.valve": 0.194,
-     "suited_instructor.gauge": 0.113,
-     "unsuited_instructor_same_place.release": 0.189,
-     "unsuited_instructor_same_place.valve": 0.194,
-     "unsuited_instructor_same_place.gauge": 0.113,
-     "suited_newcomer.release": 0.114,
-     "suited_newcomer.valve": 0.174,
-     "suited_newcomer.gauge": 0.14,
-     "unsuited_newcomer_same_place.release": 0.114,
-     "unsuited_newcomer_same_place.valve": 0.174,
-     "unsuited_newcomer_same_place.gauge": 0.14,
-     "rescuer_instructor.release": 0.184,
-     "rescuer_instructor.valve": 0.189,
-     "rescuer_instructor.gauge": 0.109,
-     "rescuer_newcomer.release": 0.15,
-     "rescuer_newcomer.valve": 0.165,
-     "rescuer_newcomer.gauge": 0.089
+     "suited_instructor.release": 0.003,
+     "suited_instructor.valve": 0.046,
+     "suited_instructor.gauge": 0.02,
+     "unsuited_instructor_same_place.release": 0.002,
+     "unsuited_instructor_same_place.valve": 0.045,
+     "unsuited_instructor_same_place.gauge": 0.019,
+     "suited_newcomer.release": -0.045,
+     "suited_newcomer.valve": 0.003,
+     "suited_newcomer.gauge": -0.018,
+     "unsuited_newcomer_same_place.release": -0.045,
+     "unsuited_newcomer_same_place.valve": 0.003,
+     "unsuited_newcomer_same_place.gauge": -0.018,
+     "rescuer_instructor.release": -0.16,
+     "rescuer_instructor.valve": -0.126,
+     "rescuer_instructor.gauge": -0.146,
+     "rescuer_newcomer.release": -0.218,
+     "rescuer_newcomer.valve": -0.182,
+     "rescuer_newcomer.gauge": -0.197
     },
     "reach_status": {
-     "suited_instructor.release": "PASS",
-     "suited_instructor.valve": "PASS",
-     "suited_instructor.gauge": "PASS",
-     "unsuited_instructor_same_place.release": "PASS",
-     "unsuited_instructor_same_place.valve": "PASS",
-     "unsuited_instructor_same_place.gauge": "PASS",
-     "suited_newcomer.release": "PASS",
-     "suited_newcomer.valve": "PASS",
-     "suited_newcomer.gauge": "PASS",
-     "unsuited_newcomer_same_place.release": "PASS",
-     "unsuited_newcomer_same_place.valve": "PASS",
-     "unsuited_newcomer_same_place.gauge": "PASS",
-     "rescuer_instructor.release": "PASS",
-     "rescuer_instructor.valve": "PASS",
-     "rescuer_instructor.gauge": "PASS",
-     "rescuer_newcomer.release": "PASS",
-     "rescuer_newcomer.valve": "PASS",
-     "rescuer_newcomer.gauge": "PASS"
+     "suited_instructor.release": "MARGINAL",
+     "suited_instructor.valve": "MARGINAL",
+     "suited_instructor.gauge": "MARGINAL",
+     "unsuited_instructor_same_place.release": "MARGINAL",
+     "unsuited_instructor_same_place.valve": "MARGINAL",
+     "unsuited_instructor_same_place.gauge": "MARGINAL",
+     "suited_newcomer.release": "FAIL",
+     "suited_newcomer.valve": "MARGINAL",
+     "suited_newcomer.gauge": "FAIL",
+     "unsuited_newcomer_same_place.release": "FAIL",
+     "unsuited_newcomer_same_place.valve": "MARGINAL",
+     "unsuited_newcomer_same_place.gauge": "FAIL",
+     "rescuer_instructor.release": "FAIL",
+     "rescuer_instructor.valve": "FAIL",
+     "rescuer_instructor.gauge": "FAIL",
+     "rescuer_newcomer.release": "FAIL",
+     "rescuer_newcomer.valve": "FAIL",
+     "rescuer_newcomer.gauge": "FAIL"
     },
     "head_to_gauge_m": {
-     "suited_instructor": 0.612,
-     "unsuited_instructor_same_place": 0.612,
-     "suited_newcomer": 0.578,
-     "unsuited_newcomer_same_place": 0.578,
-     "rescuer_instructor": 0.613,
-     "rescuer_newcomer": 0.585
+     "suited_instructor": 0.664,
+     "unsuited_instructor_same_place": 0.664,
+     "suited_newcomer": 0.659,
+     "unsuited_newcomer_same_place": 0.659,
+     "rescuer_instructor": 0.787,
+     "rescuer_newcomer": 0.795
     },
     "gauge_view_status": {
      "suited_instructor": "PASS",
@@ -470,12 +470,12 @@
      "rescuer_newcomer": "PASS"
     },
     "lever_arc_min_m": 0.3,
-    "body_gap_m": 0.103,
+    "body_gap_m": 0.099,
     "body_status": "PASS"
    },
    "sp12": {
     "station_a_m": 2.8,
-    "angle_deg": 0.0,
+    "angle_deg": 15.0,
     "wall_radius_m": 1.1,
     "stand_off_m": 0.06,
     "layout": "vertical",
@@ -484,30 +484,30 @@
     "points": {
      "release": [
       2.6,
-      1.16,
-      0.0
+      1.12,
+      0.3
      ],
      "valve": [
       2.8,
-      1.16,
-      0.0
+      1.12,
+      0.3
      ],
      "gauge": [
       3.0,
-      1.16,
-      0.0
+      1.12,
+      0.3
      ]
     },
     "reach_margin_m": {
-     "suited_instructor.release": 0.155,
-     "suited_instructor.valve": 0.152,
-     "suited_instructor.gauge": 0.07,
+     "suited_instructor.release": 0.285,
+     "suited_instructor.valve": 0.277,
+     "suited_instructor.gauge": 0.168,
      "unsuited_instructor.release": 0.319,
      "unsuited_instructor.valve": 0.298,
      "unsuited_instructor.gauge": 0.176,
-     "suited_newcomer.release": 0.146,
-     "suited_newcomer.valve": 0.113,
-     "suited_newcomer.gauge": 0.007,
+     "suited_newcomer.release": 0.269,
+     "suited_newcomer.valve": 0.22,
+     "suited_newcomer.gauge": 0.088,
      "unsuited_newcomer.release": 0.301,
      "unsuited_newcomer.valve": 0.237,
      "unsuited_newcomer.gauge": 0.092
@@ -521,15 +521,15 @@
      "unsuited_instructor.gauge": "PASS",
      "suited_newcomer.release": "PASS",
      "suited_newcomer.valve": "PASS",
-     "suited_newcomer.gauge": "MARGINAL",
+     "suited_newcomer.gauge": "PASS",
      "unsuited_newcomer.release": "PASS",
      "unsuited_newcomer.valve": "PASS",
      "unsuited_newcomer.gauge": "PASS"
     },
     "head_to_gauge_m": {
-     "suited_instructor": 0.384,
+     "suited_instructor": 0.245,
      "unsuited_instructor": 0.221,
-     "suited_newcomer": 0.4,
+     "suited_newcomer": 0.287,
      "unsuited_newcomer": 0.272
     },
     "gauge_view_status": {
@@ -540,10 +540,10 @@
     },
     "operator": {
      "suited_instructor": {
-      "room_m": 0.354,
-      "chamber_wall_m": 0.1,
-      "plug_envelope_m": 0.702,
-      "fixtures_m": 0.013,
+      "room_m": 0.034,
+      "chamber_wall_m": 0.115,
+      "plug_envelope_m": 0.484,
+      "fixtures_m": 0.327,
       "panel_m": null,
       "nearest_fixture": "SP12_DON_STAND_A",
       "zones": [
@@ -551,16 +551,16 @@
       ],
       "station_chamber": [
        1.25,
-       1.596,
-       0.0
+       1.395,
+       0.374
       ],
-      "facing_deg": -90.0
+      "facing_deg": -75.0
      },
      "unsuited_instructor": {
-      "room_m": 0.362,
+      "room_m": 0.054,
       "chamber_wall_m": 0.116,
-      "plug_envelope_m": 0.566,
-      "fixtures_m": 0.054,
+      "plug_envelope_m": 0.458,
+      "fixtures_m": 0.337,
       "panel_m": null,
       "nearest_fixture": "SP12_DON_STAND_A",
       "zones": [
@@ -568,16 +568,16 @@
       ],
       "station_chamber": [
        1.25,
-       1.404,
-       0.0
+       1.356,
+       0.363
       ],
-      "facing_deg": -90.0
+      "facing_deg": -75.0
      },
      "suited_newcomer": {
-      "room_m": 0.367,
-      "chamber_wall_m": 0.1,
-      "plug_envelope_m": 0.647,
-      "fixtures_m": 0.025,
+      "room_m": 0.044,
+      "chamber_wall_m": 0.116,
+      "plug_envelope_m": 0.462,
+      "fixtures_m": 0.339,
       "panel_m": null,
       "nearest_fixture": "SP12_DON_STAND_A",
       "zones": [
@@ -585,16 +585,16 @@
       ],
       "station_chamber": [
        1.25,
-       1.568,
-       0.0
+       1.38,
+       0.37
       ],
-      "facing_deg": -90.0
+      "facing_deg": -75.0
      },
      "unsuited_newcomer": {
-      "room_m": 0.374,
+      "room_m": 0.062,
       "chamber_wall_m": 0.123,
-      "plug_envelope_m": 0.57,
-      "fixtures_m": 0.058,
+      "plug_envelope_m": 0.469,
+      "fixtures_m": 0.349,
       "panel_m": null,
       "nearest_fixture": "SP12_DON_STAND_A",
       "zones": [
@@ -602,13 +602,13 @@
       ],
       "station_chamber": [
        1.25,
-       1.39,
-       0.0
+       1.343,
+       0.36
       ],
-      "facing_deg": -90.0
+      "facing_deg": -75.0
      }
     },
-    "operator_clearance_m": 0.013,
+    "operator_clearance_m": 0.034,
     "operator_status": "MARGINAL",
     "floor_approximation": "the floor is the cylinder r = 1.25 m; the chamber-axis plane stands in for it (0.04 m for stations within 0.3 m of the axis)",
     "zone_overlap": [
@@ -618,7 +618,7 @@
    "equalization": "a manual valve through the chamber wall (PROTOTYPE, not the hull); sizes, flow and equalization times are Sheets items (OPEN)",
    "gauge": "a mechanical dial gauge readable without power; range and accuracy OPEN",
    "release": "a pull ring on a cable to the dog cam ring; location only",
-   "reach_status": "MARGINAL"
+   "reach_status": "FAIL"
   },
   "interlock": {
    "inputs": {
@@ -709,129 +709,129 @@
    "routine_pair": {
     "label": "two suited crew in the routine standing positions",
     "door_status": "PASS",
-    "door_margin_m": 0.126,
+    "door_margin_m": 0.207,
     "transit": null,
-    "plug_to_bodies_m": 0.45,
+    "plug_to_bodies_m": 0.47,
     "plug_status": "PASS",
-    "plug_to_bodies_loose_straps_m": 0.45,
-    "chamber_panel_to_bodies_m": 0.231,
+    "plug_to_bodies_loose_straps_m": 0.47,
+    "chamber_panel_to_bodies_m": 0.353,
     "chamber_panel_status": "PASS",
-    "chamber_panel_to_bodies_loose_straps_m": 0.231,
+    "chamber_panel_to_bodies_loose_straps_m": 0.353,
     "sets": 5,
     "status": "PASS"
    },
    "limp_casualty": {
     "label": "unrestrained limp casualty (no litter, no straps)",
     "door_status": "FAIL",
-    "door_margin_m": -0.099,
+    "door_margin_m": -0.014,
     "transit": {
      "instructor.none": {
-      "enclosing_radius_m": 0.649,
+      "enclosing_radius_m": 0.607,
       "tilt_deg": [
-       10.0,
+       0.0,
        10.0
       ],
-      "bore_clearance_m": -0.049,
+      "bore_clearance_m": -0.007,
       "bore_status": "FAIL",
-      "parked_plug_clearance_m": -0.049,
+      "parked_plug_clearance_m": -0.007,
       "parked_plug_status": "FAIL",
-      "insertion_limit_m": 1.582,
-      "body_length_m": 1.903
+      "insertion_limit_m": 1.613,
+      "body_length_m": 1.822
      },
      "newcomer.none": {
-      "enclosing_radius_m": 0.61,
+      "enclosing_radius_m": 0.596,
       "tilt_deg": [
-       10.0,
+       0.0,
        10.0
       ],
-      "bore_clearance_m": -0.01,
-      "bore_status": "FAIL",
-      "parked_plug_clearance_m": -0.01,
-      "parked_plug_status": "FAIL",
-      "insertion_limit_m": 1.669,
-      "body_length_m": 1.816
+      "bore_clearance_m": 0.004,
+      "bore_status": "MARGINAL",
+      "parked_plug_clearance_m": 0.004,
+      "parked_plug_status": "MARGINAL",
+      "insertion_limit_m": 1.697,
+      "body_length_m": 1.738
      }
     },
-    "plug_to_bodies_m": 0.411,
+    "plug_to_bodies_m": 0.432,
     "plug_status": "PASS",
-    "plug_to_bodies_loose_straps_m": 0.411,
-    "chamber_panel_to_bodies_m": 0.103,
+    "plug_to_bodies_loose_straps_m": 0.432,
+    "chamber_panel_to_bodies_m": 0.099,
     "chamber_panel_status": "PASS",
-    "chamber_panel_to_bodies_loose_straps_m": 0.103,
+    "chamber_panel_to_bodies_loose_straps_m": 0.099,
     "sets": 2,
     "status": "FAIL"
    },
    "limbs_secured": {
     "label": "limbs secured, no support",
     "door_status": "PASS",
-    "door_margin_m": 0.343,
+    "door_margin_m": 0.467,
     "transit": {
      "instructor.none": {
-      "enclosing_radius_m": 0.429,
+      "enclosing_radius_m": 0.355,
       "tilt_deg": [
        0.0,
        0.0
       ],
-      "bore_clearance_m": 0.171,
+      "bore_clearance_m": 0.245,
       "bore_status": "PASS",
-      "parked_plug_clearance_m": 0.171,
+      "parked_plug_clearance_m": 0.245,
       "parked_plug_status": "PASS",
-      "insertion_limit_m": 1.542,
-      "body_length_m": 1.943
+      "insertion_limit_m": 1.561,
+      "body_length_m": 1.874
      },
      "newcomer.none": {
-      "enclosing_radius_m": 0.416,
+      "enclosing_radius_m": 0.367,
       "tilt_deg": [
-       0.0,
+       10.0,
        0.0
       ],
-      "bore_clearance_m": 0.184,
+      "bore_clearance_m": 0.233,
       "bore_status": "PASS",
-      "parked_plug_clearance_m": 0.184,
+      "parked_plug_clearance_m": 0.233,
       "parked_plug_status": "PASS",
-      "insertion_limit_m": 1.63,
-      "body_length_m": 1.855
+      "insertion_limit_m": 1.646,
+      "body_length_m": 1.789
      }
     },
-    "plug_to_bodies_m": 0.412,
+    "plug_to_bodies_m": 0.431,
     "plug_status": "PASS",
-    "plug_to_bodies_loose_straps_m": 0.412,
-    "chamber_panel_to_bodies_m": 0.323,
+    "plug_to_bodies_loose_straps_m": 0.431,
+    "chamber_panel_to_bodies_m": 0.311,
     "chamber_panel_status": "PASS",
-    "chamber_panel_to_bodies_loose_straps_m": 0.323,
+    "chamber_panel_to_bodies_loose_straps_m": 0.311,
     "sets": 2,
     "status": "PASS"
    },
    "litter_frame": {
     "label": "casualty on the litter frame, strapped",
     "door_status": "PASS",
-    "door_margin_m": 0.343,
+    "door_margin_m": 0.403,
     "transit": {
      "instructor.stowed": {
-      "enclosing_radius_m": 0.45,
+      "enclosing_radius_m": 0.432,
       "tilt_deg": [
        0.0,
        0.0
       ],
-      "bore_clearance_m": 0.15,
+      "bore_clearance_m": 0.168,
       "bore_status": "PASS",
-      "parked_plug_clearance_m": 0.15,
+      "parked_plug_clearance_m": 0.168,
       "parked_plug_status": "PASS",
-      "insertion_limit_m": 1.392,
-      "body_length_m": 2.093
+      "insertion_limit_m": 1.411,
+      "body_length_m": 2.024
      },
      "instructor.loose": {
-      "enclosing_radius_m": 0.536,
+      "enclosing_radius_m": 0.532,
       "tilt_deg": [
        0.0,
        0.0
       ],
-      "bore_clearance_m": 0.064,
+      "bore_clearance_m": 0.068,
       "bore_status": "PASS",
-      "parked_plug_clearance_m": 0.064,
+      "parked_plug_clearance_m": 0.068,
       "parked_plug_status": "PASS",
-      "insertion_limit_m": 1.392,
-      "body_length_m": 2.093
+      "insertion_limit_m": 1.411,
+      "body_length_m": 2.024
      },
      "newcomer.stowed": {
       "enclosing_radius_m": 0.435,
@@ -843,165 +843,165 @@
       "bore_status": "PASS",
       "parked_plug_clearance_m": 0.165,
       "parked_plug_status": "PASS",
-      "insertion_limit_m": 1.48,
-      "body_length_m": 2.005
+      "insertion_limit_m": 1.496,
+      "body_length_m": 1.939
      },
      "newcomer.loose": {
-      "enclosing_radius_m": 0.514,
+      "enclosing_radius_m": 0.535,
       "tilt_deg": [
        0.0,
        0.0
       ],
-      "bore_clearance_m": 0.086,
+      "bore_clearance_m": 0.065,
       "bore_status": "PASS",
-      "parked_plug_clearance_m": 0.086,
+      "parked_plug_clearance_m": 0.065,
       "parked_plug_status": "PASS",
-      "insertion_limit_m": 1.48,
-      "body_length_m": 2.005
+      "insertion_limit_m": 1.496,
+      "body_length_m": 1.939
      }
     },
-    "plug_to_bodies_m": 0.272,
+    "plug_to_bodies_m": 0.291,
     "plug_status": "PASS",
-    "plug_to_bodies_loose_straps_m": 0.272,
-    "chamber_panel_to_bodies_m": 0.212,
+    "plug_to_bodies_loose_straps_m": 0.291,
+    "chamber_panel_to_bodies_m": 0.275,
     "chamber_panel_status": "PASS",
-    "chamber_panel_to_bodies_loose_straps_m": 0.212,
+    "chamber_panel_to_bodies_loose_straps_m": 0.275,
     "sets": 2,
     "status": "PASS"
    },
    "vacuum_mattress": {
     "label": "casualty in a vacuum mattress, strapped",
     "door_status": "PASS",
-    "door_margin_m": 0.221,
+    "door_margin_m": 0.348,
     "transit": {
      "instructor.stowed": {
-      "enclosing_radius_m": 0.508,
+      "enclosing_radius_m": 0.415,
       "tilt_deg": [
        0.0,
        0.0
       ],
-      "bore_clearance_m": 0.092,
+      "bore_clearance_m": 0.185,
       "bore_status": "PASS",
-      "parked_plug_clearance_m": 0.092,
+      "parked_plug_clearance_m": 0.185,
       "parked_plug_status": "PASS",
-      "insertion_limit_m": 1.422,
-      "body_length_m": 2.063
+      "insertion_limit_m": 1.441,
+      "body_length_m": 1.994
      },
      "instructor.loose": {
-      "enclosing_radius_m": 0.547,
+      "enclosing_radius_m": 0.503,
       "tilt_deg": [
        0.0,
        0.0
       ],
-      "bore_clearance_m": 0.053,
+      "bore_clearance_m": 0.097,
       "bore_status": "PASS",
-      "parked_plug_clearance_m": 0.053,
+      "parked_plug_clearance_m": 0.097,
       "parked_plug_status": "PASS",
-      "insertion_limit_m": 1.422,
-      "body_length_m": 2.063
+      "insertion_limit_m": 1.441,
+      "body_length_m": 1.994
      },
      "newcomer.stowed": {
-      "enclosing_radius_m": 0.495,
+      "enclosing_radius_m": 0.438,
       "tilt_deg": [
        0.0,
        0.0
       ],
-      "bore_clearance_m": 0.105,
+      "bore_clearance_m": 0.162,
       "bore_status": "PASS",
-      "parked_plug_clearance_m": 0.105,
+      "parked_plug_clearance_m": 0.162,
       "parked_plug_status": "PASS",
-      "insertion_limit_m": 1.51,
-      "body_length_m": 1.975
+      "insertion_limit_m": 1.526,
+      "body_length_m": 1.909
      },
      "newcomer.loose": {
-      "enclosing_radius_m": 0.531,
+      "enclosing_radius_m": 0.5,
       "tilt_deg": [
        0.0,
        0.0
       ],
-      "bore_clearance_m": 0.069,
+      "bore_clearance_m": 0.1,
       "bore_status": "PASS",
-      "parked_plug_clearance_m": 0.069,
+      "parked_plug_clearance_m": 0.1,
       "parked_plug_status": "PASS",
-      "insertion_limit_m": 1.51,
-      "body_length_m": 1.975
+      "insertion_limit_m": 1.526,
+      "body_length_m": 1.909
      }
     },
-    "plug_to_bodies_m": 0.302,
+    "plug_to_bodies_m": 0.322,
     "plug_status": "PASS",
-    "plug_to_bodies_loose_straps_m": 0.302,
-    "chamber_panel_to_bodies_m": 0.253,
+    "plug_to_bodies_loose_straps_m": 0.322,
+    "chamber_panel_to_bodies_m": 0.27,
     "chamber_panel_status": "PASS",
-    "chamber_panel_to_bodies_loose_straps_m": 0.253,
+    "chamber_panel_to_bodies_loose_straps_m": 0.27,
     "sets": 2,
     "status": "PASS"
    },
    "frame_with_kit": {
     "label": "casualty on the frame with a med/O2 kit, strapped",
     "door_status": "PASS",
-    "door_margin_m": 0.193,
+    "door_margin_m": 0.308,
     "transit": {
      "instructor.stowed": {
-      "enclosing_radius_m": 0.564,
+      "enclosing_radius_m": 0.446,
       "tilt_deg": [
        0.0,
        0.0
       ],
-      "bore_clearance_m": 0.036,
-      "bore_status": "MARGINAL",
-      "parked_plug_clearance_m": 0.036,
-      "parked_plug_status": "MARGINAL",
-      "insertion_limit_m": 1.392,
-      "body_length_m": 2.093
+      "bore_clearance_m": 0.154,
+      "bore_status": "PASS",
+      "parked_plug_clearance_m": 0.154,
+      "parked_plug_status": "PASS",
+      "insertion_limit_m": 1.411,
+      "body_length_m": 2.024
      },
      "instructor.loose": {
-      "enclosing_radius_m": 0.593,
+      "enclosing_radius_m": 0.532,
       "tilt_deg": [
        0.0,
        0.0
       ],
-      "bore_clearance_m": 0.007,
-      "bore_status": "MARGINAL",
-      "parked_plug_clearance_m": 0.007,
-      "parked_plug_status": "MARGINAL",
-      "insertion_limit_m": 1.392,
-      "body_length_m": 2.093
+      "bore_clearance_m": 0.068,
+      "bore_status": "PASS",
+      "parked_plug_clearance_m": 0.068,
+      "parked_plug_status": "PASS",
+      "insertion_limit_m": 1.411,
+      "body_length_m": 2.024
      },
      "newcomer.stowed": {
-      "enclosing_radius_m": 0.551,
+      "enclosing_radius_m": 0.479,
       "tilt_deg": [
        0.0,
        0.0
       ],
-      "bore_clearance_m": 0.049,
-      "bore_status": "MARGINAL",
-      "parked_plug_clearance_m": 0.049,
-      "parked_plug_status": "MARGINAL",
-      "insertion_limit_m": 1.48,
-      "body_length_m": 2.005
+      "bore_clearance_m": 0.121,
+      "bore_status": "PASS",
+      "parked_plug_clearance_m": 0.121,
+      "parked_plug_status": "PASS",
+      "insertion_limit_m": 1.496,
+      "body_length_m": 1.939
      },
      "newcomer.loose": {
-      "enclosing_radius_m": 0.577,
+      "enclosing_radius_m": 0.535,
       "tilt_deg": [
        0.0,
        0.0
       ],
-      "bore_clearance_m": 0.023,
-      "bore_status": "MARGINAL",
-      "parked_plug_clearance_m": 0.023,
-      "parked_plug_status": "MARGINAL",
-      "insertion_limit_m": 1.48,
-      "body_length_m": 2.005
+      "bore_clearance_m": 0.065,
+      "bore_status": "PASS",
+      "parked_plug_clearance_m": 0.065,
+      "parked_plug_status": "PASS",
+      "insertion_limit_m": 1.496,
+      "body_length_m": 1.939
      }
     },
-    "plug_to_bodies_m": 0.272,
+    "plug_to_bodies_m": 0.291,
     "plug_status": "PASS",
-    "plug_to_bodies_loose_straps_m": 0.272,
-    "chamber_panel_to_bodies_m": 0.202,
+    "plug_to_bodies_loose_straps_m": 0.291,
+    "chamber_panel_to_bodies_m": 0.239,
     "chamber_panel_status": "PASS",
-    "chamber_panel_to_bodies_loose_straps_m": 0.202,
+    "chamber_panel_to_bodies_loose_straps_m": 0.239,
     "sets": 2,
-    "status": "MARGINAL"
+    "status": "PASS"
    }
   },
   "redlines": {
@@ -1020,11 +1020,11 @@
      "keeper_status": "MARGINAL",
      "sp12_room_margin_m": 0.094,
      "sp12_room_status": "PASS",
-     "sp12_fixture_min_m": 0.239,
+     "sp12_fixture_min_m": 0.24,
      "swept_polar_bounds": {
       "x_m": [
-       101.149,
-       102.549
+       133.4,
+       134.8
       ],
       "az_deg": [
        7.5,
@@ -1041,43 +1041,43 @@
      ],
      "cases": {
       "routine_pair": {
-       "plug_to_bodies_m": 0.45,
+       "plug_to_bodies_m": 0.47,
        "status": "PASS",
-       "plug_to_bodies_loose_straps_m": 0.45,
+       "plug_to_bodies_loose_straps_m": 0.47,
        "sets": 5
       },
       "limp_casualty": {
-       "plug_to_bodies_m": 0.411,
+       "plug_to_bodies_m": 0.432,
        "status": "PASS",
-       "plug_to_bodies_loose_straps_m": 0.411,
+       "plug_to_bodies_loose_straps_m": 0.432,
        "sets": 2
       },
       "limbs_secured": {
-       "plug_to_bodies_m": 0.412,
+       "plug_to_bodies_m": 0.431,
        "status": "PASS",
-       "plug_to_bodies_loose_straps_m": 0.412,
+       "plug_to_bodies_loose_straps_m": 0.431,
        "sets": 2
       },
       "litter_frame": {
-       "plug_to_bodies_m": 0.272,
+       "plug_to_bodies_m": 0.291,
        "status": "PASS",
-       "plug_to_bodies_loose_straps_m": 0.272,
+       "plug_to_bodies_loose_straps_m": 0.291,
        "sets": 2
       },
       "vacuum_mattress": {
-       "plug_to_bodies_m": 0.302,
+       "plug_to_bodies_m": 0.322,
        "status": "PASS",
-       "plug_to_bodies_loose_straps_m": 0.302,
+       "plug_to_bodies_loose_straps_m": 0.322,
        "sets": 2
       },
       "frame_with_kit": {
-       "plug_to_bodies_m": 0.272,
+       "plug_to_bodies_m": 0.291,
        "status": "PASS",
-       "plug_to_bodies_loose_straps_m": 0.272,
+       "plug_to_bodies_loose_straps_m": 0.291,
        "sets": 2
       }
      },
-     "plug_to_bodies_min_m": 0.272,
+     "plug_to_bodies_min_m": 0.291,
      "swept_envelope_status": "PASS",
      "note": "PROTOTYPE study variant; no keeper, seal or panel change to the model before FEA and clearance pass (owner 15!A152:A154)"
     },
@@ -1094,11 +1094,11 @@
      "keeper_status": "PASS",
      "sp12_room_margin_m": 0.083,
      "sp12_room_status": "PASS",
-     "sp12_fixture_min_m": 0.239,
+     "sp12_fixture_min_m": 0.24,
      "swept_polar_bounds": {
       "x_m": [
-       101.149,
-       102.549
+       133.4,
+       134.8
       ],
       "az_deg": [
        7.2,
@@ -1115,43 +1115,43 @@
      ],
      "cases": {
       "routine_pair": {
-       "plug_to_bodies_m": 0.45,
+       "plug_to_bodies_m": 0.47,
        "status": "PASS",
-       "plug_to_bodies_loose_straps_m": 0.45,
+       "plug_to_bodies_loose_straps_m": 0.47,
        "sets": 5
       },
       "limp_casualty": {
-       "plug_to_bodies_m": 0.411,
+       "plug_to_bodies_m": 0.432,
        "status": "PASS",
-       "plug_to_bodies_loose_straps_m": 0.411,
+       "plug_to_bodies_loose_straps_m": 0.432,
        "sets": 2
       },
       "limbs_secured": {
-       "plug_to_bodies_m": 0.412,
+       "plug_to_bodies_m": 0.431,
        "status": "PASS",
-       "plug_to_bodies_loose_straps_m": 0.412,
+       "plug_to_bodies_loose_straps_m": 0.431,
        "sets": 2
       },
       "litter_frame": {
-       "plug_to_bodies_m": 0.272,
+       "plug_to_bodies_m": 0.291,
        "status": "PASS",
-       "plug_to_bodies_loose_straps_m": 0.272,
+       "plug_to_bodies_loose_straps_m": 0.291,
        "sets": 2
       },
       "vacuum_mattress": {
-       "plug_to_bodies_m": 0.302,
+       "plug_to_bodies_m": 0.322,
        "status": "PASS",
-       "plug_to_bodies_loose_straps_m": 0.302,
+       "plug_to_bodies_loose_straps_m": 0.322,
        "sets": 2
       },
       "frame_with_kit": {
-       "plug_to_bodies_m": 0.272,
+       "plug_to_bodies_m": 0.291,
        "status": "PASS",
-       "plug_to_bodies_loose_straps_m": 0.272,
+       "plug_to_bodies_loose_straps_m": 0.291,
        "sets": 2
       }
      },
-     "plug_to_bodies_min_m": 0.272,
+     "plug_to_bodies_min_m": 0.291,
      "swept_envelope_status": "PASS",
      "note": "PROTOTYPE study variant; no keeper, seal or panel change to the model before FEA and clearance pass (owner 15!A152:A154)"
     },
@@ -1168,11 +1168,11 @@
      "keeper_status": "PASS",
      "sp12_room_margin_m": 0.072,
      "sp12_room_status": "PASS",
-     "sp12_fixture_min_m": 0.239,
+     "sp12_fixture_min_m": 0.24,
      "swept_polar_bounds": {
       "x_m": [
-       101.149,
-       102.549
+       133.4,
+       134.8
       ],
       "az_deg": [
        6.9,
@@ -1189,43 +1189,43 @@
      ],
      "cases": {
       "routine_pair": {
-       "plug_to_bodies_m": 0.45,
+       "plug_to_bodies_m": 0.47,
        "status": "PASS",
-       "plug_to_bodies_loose_straps_m": 0.45,
+       "plug_to_bodies_loose_straps_m": 0.47,
        "sets": 5
       },
       "limp_casualty": {
-       "plug_to_bodies_m": 0.411,
+       "plug_to_bodies_m": 0.432,
        "status": "PASS",
-       "plug_to_bodies_loose_straps_m": 0.411,
+       "plug_to_bodies_loose_straps_m": 0.432,
        "sets": 2
       },
       "limbs_secured": {
-       "plug_to_bodies_m": 0.412,
+       "plug_to_bodies_m": 0.431,
        "status": "PASS",
-       "plug_to_bodies_loose_straps_m": 0.412,
+       "plug_to_bodies_loose_straps_m": 0.431,
        "sets": 2
       },
       "litter_frame": {
-       "plug_to_bodies_m": 0.272,
+       "plug_to_bodies_m": 0.291,
        "status": "PASS",
-       "plug_to_bodies_loose_straps_m": 0.272,
+       "plug_to_bodies_loose_straps_m": 0.291,
        "sets": 2
       },
       "vacuum_mattress": {
-       "plug_to_bodies_m": 0.302,
+       "plug_to_bodies_m": 0.322,
        "status": "PASS",
-       "plug_to_bodies_loose_straps_m": 0.302,
+       "plug_to_bodies_loose_straps_m": 0.322,
        "sets": 2
       },
       "frame_with_kit": {
-       "plug_to_bodies_m": 0.272,
+       "plug_to_bodies_m": 0.291,
        "status": "PASS",
-       "plug_to_bodies_loose_straps_m": 0.272,
+       "plug_to_bodies_loose_straps_m": 0.291,
        "sets": 2
       }
      },
-     "plug_to_bodies_min_m": 0.272,
+     "plug_to_bodies_min_m": 0.291,
      "swept_envelope_status": "PASS",
      "note": "PROTOTYPE study variant; no keeper, seal or panel change to the model before FEA and clearance pass (owner 15!A152:A154)"
     },
@@ -1242,11 +1242,11 @@
      "keeper_status": "PASS",
      "sp12_room_margin_m": 0.094,
      "sp12_room_status": "PASS",
-     "sp12_fixture_min_m": 0.239,
+     "sp12_fixture_min_m": 0.24,
      "swept_polar_bounds": {
       "x_m": [
-       101.149,
-       102.549
+       133.4,
+       134.8
       ],
       "az_deg": [
        7.5,
@@ -1263,43 +1263,43 @@
      ],
      "cases": {
       "routine_pair": {
-       "plug_to_bodies_m": 0.45,
+       "plug_to_bodies_m": 0.47,
        "status": "PASS",
-       "plug_to_bodies_loose_straps_m": 0.45,
+       "plug_to_bodies_loose_straps_m": 0.47,
        "sets": 5
       },
       "limp_casualty": {
-       "plug_to_bodies_m": 0.411,
+       "plug_to_bodies_m": 0.432,
        "status": "PASS",
-       "plug_to_bodies_loose_straps_m": 0.411,
+       "plug_to_bodies_loose_straps_m": 0.432,
        "sets": 2
       },
       "limbs_secured": {
-       "plug_to_bodies_m": 0.412,
+       "plug_to_bodies_m": 0.431,
        "status": "PASS",
-       "plug_to_bodies_loose_straps_m": 0.412,
+       "plug_to_bodies_loose_straps_m": 0.431,
        "sets": 2
       },
       "litter_frame": {
-       "plug_to_bodies_m": 0.272,
+       "plug_to_bodies_m": 0.291,
        "status": "PASS",
-       "plug_to_bodies_loose_straps_m": 0.272,
+       "plug_to_bodies_loose_straps_m": 0.291,
        "sets": 2
       },
       "vacuum_mattress": {
-       "plug_to_bodies_m": 0.302,
+       "plug_to_bodies_m": 0.322,
        "status": "PASS",
-       "plug_to_bodies_loose_straps_m": 0.302,
+       "plug_to_bodies_loose_straps_m": 0.322,
        "sets": 2
       },
       "frame_with_kit": {
-       "plug_to_bodies_m": 0.272,
+       "plug_to_bodies_m": 0.291,
        "status": "PASS",
-       "plug_to_bodies_loose_straps_m": 0.272,
+       "plug_to_bodies_loose_straps_m": 0.291,
        "sets": 2
       }
      },
-     "plug_to_bodies_min_m": 0.272,
+     "plug_to_bodies_min_m": 0.291,
      "swept_envelope_status": "PASS",
      "note": "PROTOTYPE study variant; no keeper, seal or panel change to the model before FEA and clearance pass (owner 15!A152:A154)"
     },
@@ -1316,11 +1316,11 @@
      "keeper_status": "PASS",
      "sp12_room_margin_m": 0.094,
      "sp12_room_status": "PASS",
-     "sp12_fixture_min_m": 0.239,
+     "sp12_fixture_min_m": 0.24,
      "swept_polar_bounds": {
       "x_m": [
-       101.149,
-       102.549
+       133.4,
+       134.8
       ],
       "az_deg": [
        7.5,
@@ -1337,43 +1337,43 @@
      ],
      "cases": {
       "routine_pair": {
-       "plug_to_bodies_m": 0.45,
+       "plug_to_bodies_m": 0.47,
        "status": "PASS",
-       "plug_to_bodies_loose_straps_m": 0.45,
+       "plug_to_bodies_loose_straps_m": 0.47,
        "sets": 5
       },
       "limp_casualty": {
-       "plug_to_bodies_m": 0.411,
+       "plug_to_bodies_m": 0.432,
        "status": "PASS",
-       "plug_to_bodies_loose_straps_m": 0.411,
+       "plug_to_bodies_loose_straps_m": 0.432,
        "sets": 2
       },
       "limbs_secured": {
-       "plug_to_bodies_m": 0.412,
+       "plug_to_bodies_m": 0.431,
        "status": "PASS",
-       "plug_to_bodies_loose_straps_m": 0.412,
+       "plug_to_bodies_loose_straps_m": 0.431,
        "sets": 2
       },
       "litter_frame": {
-       "plug_to_bodies_m": 0.272,
+       "plug_to_bodies_m": 0.291,
        "status": "PASS",
-       "plug_to_bodies_loose_straps_m": 0.272,
+       "plug_to_bodies_loose_straps_m": 0.291,
        "sets": 2
       },
       "vacuum_mattress": {
-       "plug_to_bodies_m": 0.302,
+       "plug_to_bodies_m": 0.322,
        "status": "PASS",
-       "plug_to_bodies_loose_straps_m": 0.302,
+       "plug_to_bodies_loose_straps_m": 0.322,
        "sets": 2
       },
       "frame_with_kit": {
-       "plug_to_bodies_m": 0.272,
+       "plug_to_bodies_m": 0.291,
        "status": "PASS",
-       "plug_to_bodies_loose_straps_m": 0.272,
+       "plug_to_bodies_loose_straps_m": 0.291,
        "sets": 2
       }
      },
-     "plug_to_bodies_min_m": 0.272,
+     "plug_to_bodies_min_m": 0.291,
      "swept_envelope_status": "PASS",
      "note": "PROTOTYPE study variant; no keeper, seal or panel change to the model before FEA and clearance pass (owner 15!A152:A154)"
     },
@@ -1390,11 +1390,11 @@
      "keeper_status": "MARGINAL",
      "sp12_room_margin_m": 0.116,
      "sp12_room_status": "PASS",
-     "sp12_fixture_min_m": 0.239,
+     "sp12_fixture_min_m": 0.24,
      "swept_polar_bounds": {
       "x_m": [
-       101.149,
-       102.549
+       133.4,
+       134.8
       ],
       "az_deg": [
        8.0,
@@ -1411,43 +1411,43 @@
      ],
      "cases": {
       "routine_pair": {
-       "plug_to_bodies_m": 0.45,
+       "plug_to_bodies_m": 0.47,
        "status": "PASS",
-       "plug_to_bodies_loose_straps_m": 0.45,
+       "plug_to_bodies_loose_straps_m": 0.47,
        "sets": 5
       },
       "limp_casualty": {
-       "plug_to_bodies_m": 0.411,
+       "plug_to_bodies_m": 0.432,
        "status": "PASS",
-       "plug_to_bodies_loose_straps_m": 0.411,
+       "plug_to_bodies_loose_straps_m": 0.432,
        "sets": 2
       },
       "limbs_secured": {
-       "plug_to_bodies_m": 0.412,
+       "plug_to_bodies_m": 0.431,
        "status": "PASS",
-       "plug_to_bodies_loose_straps_m": 0.412,
+       "plug_to_bodies_loose_straps_m": 0.431,
        "sets": 2
       },
       "litter_frame": {
-       "plug_to_bodies_m": 0.272,
+       "plug_to_bodies_m": 0.291,
        "status": "PASS",
-       "plug_to_bodies_loose_straps_m": 0.272,
+       "plug_to_bodies_loose_straps_m": 0.291,
        "sets": 2
       },
       "vacuum_mattress": {
-       "plug_to_bodies_m": 0.302,
+       "plug_to_bodies_m": 0.322,
        "status": "PASS",
-       "plug_to_bodies_loose_straps_m": 0.302,
+       "plug_to_bodies_loose_straps_m": 0.322,
        "sets": 2
       },
       "frame_with_kit": {
-       "plug_to_bodies_m": 0.272,
+       "plug_to_bodies_m": 0.291,
        "status": "PASS",
-       "plug_to_bodies_loose_straps_m": 0.272,
+       "plug_to_bodies_loose_straps_m": 0.291,
        "sets": 2
       }
      },
-     "plug_to_bodies_min_m": 0.272,
+     "plug_to_bodies_min_m": 0.291,
      "swept_envelope_status": "PASS",
      "note": "PROTOTYPE study variant; no keeper, seal or panel change to the model before FEA and clearance pass (owner 15!A152:A154)"
     },
@@ -1464,11 +1464,11 @@
      "keeper_status": "PASS",
      "sp12_room_margin_m": 0.105,
      "sp12_room_status": "PASS",
-     "sp12_fixture_min_m": 0.239,
+     "sp12_fixture_min_m": 0.24,
      "swept_polar_bounds": {
       "x_m": [
-       101.149,
-       102.549
+       133.4,
+       134.8
       ],
       "az_deg": [
        7.7,
@@ -1485,43 +1485,43 @@
      ],
      "cases": {
       "routine_pair": {
-       "plug_to_bodies_m": 0.45,
+       "plug_to_bodies_m": 0.47,
        "status": "PASS",
-       "plug_to_bodies_loose_straps_m": 0.45,
+       "plug_to_bodies_loose_straps_m": 0.47,
        "sets": 5
       },
       "limp_casualty": {
-       "plug_to_bodies_m": 0.411,
+       "plug_to_bodies_m": 0.432,
        "status": "PASS",
-       "plug_to_bodies_loose_straps_m": 0.411,
+       "plug_to_bodies_loose_straps_m": 0.432,
        "sets": 2
       },
       "limbs_secured": {
-       "plug_to_bodies_m": 0.412,
+       "plug_to_bodies_m": 0.431,
        "status": "PASS",
-       "plug_to_bodies_loose_straps_m": 0.412,
+       "plug_to_bodies_loose_straps_m": 0.431,
        "sets": 2
       },
       "litter_frame": {
-       "plug_to_bodies_m": 0.272,
+       "plug_to_bodies_m": 0.291,
        "status": "PASS",
-       "plug_to_bodies_loose_straps_m": 0.272,
+       "plug_to_bodies_loose_straps_m": 0.291,
        "sets": 2
       },
       "vacuum_mattress": {
-       "plug_to_bodies_m": 0.302,
+       "plug_to_bodies_m": 0.322,
        "status": "PASS",
-       "plug_to_bodies_loose_straps_m": 0.302,
+       "plug_to_bodies_loose_straps_m": 0.322,
        "sets": 2
       },
       "frame_with_kit": {
-       "plug_to_bodies_m": 0.272,
+       "plug_to_bodies_m": 0.291,
        "status": "PASS",
-       "plug_to_bodies_loose_straps_m": 0.272,
+       "plug_to_bodies_loose_straps_m": 0.291,
        "sets": 2
       }
      },
-     "plug_to_bodies_min_m": 0.272,
+     "plug_to_bodies_min_m": 0.291,
      "swept_envelope_status": "PASS",
      "note": "PROTOTYPE study variant; no keeper, seal or panel change to the model before FEA and clearance pass (owner 15!A152:A154)"
     },
@@ -1538,11 +1538,11 @@
      "keeper_status": "PASS",
      "sp12_room_margin_m": 0.105,
      "sp12_room_status": "PASS",
-     "sp12_fixture_min_m": 0.239,
+     "sp12_fixture_min_m": 0.24,
      "swept_polar_bounds": {
       "x_m": [
-       101.149,
-       102.549
+       133.4,
+       134.8
       ],
       "az_deg": [
        7.7,
@@ -1559,43 +1559,43 @@
      ],
      "cases": {
       "routine_pair": {
-       "plug_to_bodies_m": 0.45,
+       "plug_to_bodies_m": 0.47,
        "status": "PASS",
-       "plug_to_bodies_loose_straps_m": 0.45,
+       "plug_to_bodies_loose_straps_m": 0.47,
        "sets": 5
       },
       "limp_casualty": {
-       "plug_to_bodies_m": 0.411,
+       "plug_to_bodies_m": 0.432,
        "status": "PASS",
-       "plug_to_bodies_loose_straps_m": 0.411,
+       "plug_to_bodies_loose_straps_m": 0.432,
        "sets": 2
       },
       "limbs_secured": {
-       "plug_to_bodies_m": 0.412,
+       "plug_to_bodies_m": 0.431,
        "status": "PASS",
-       "plug_to_bodies_loose_straps_m": 0.412,
+       "plug_to_bodies_loose_straps_m": 0.431,
        "sets": 2
       },
       "litter_frame": {
-       "plug_to_bodies_m": 0.272,
+       "plug_to_bodies_m": 0.291,
        "status": "PASS",
-       "plug_to_bodies_loose_straps_m": 0.272,
+       "plug_to_bodies_loose_straps_m": 0.291,
        "sets": 2
       },
       "vacuum_mattress": {
-       "plug_to_bodies_m": 0.302,
+       "plug_to_bodies_m": 0.322,
        "status": "PASS",
-       "plug_to_bodies_loose_straps_m": 0.302,
+       "plug_to_bodies_loose_straps_m": 0.322,
        "sets": 2
       },
       "frame_with_kit": {
-       "plug_to_bodies_m": 0.272,
+       "plug_to_bodies_m": 0.291,
        "status": "PASS",
-       "plug_to_bodies_loose_straps_m": 0.272,
+       "plug_to_bodies_loose_straps_m": 0.291,
        "sets": 2
       }
      },
-     "plug_to_bodies_min_m": 0.272,
+     "plug_to_bodies_min_m": 0.291,
      "swept_envelope_status": "PASS",
      "note": "PROTOTYPE study variant; no keeper, seal or panel change to the model before FEA and clearance pass (owner 15!A152:A154)"
     }
@@ -1606,10 +1606,10 @@
      "what": "published layout (release / valve / gauge stacked), 15 deg station search, stand A at az 20",
      "layout": "vertical",
      "station_a_m": 2.8,
-     "angle_deg": 0.0,
+     "angle_deg": 15.0,
      "body_standoff_m": 0.1,
      "stand_a": {
-      "x_m": 103.4,
+      "x_m": 135.65,
       "az_deg": 20.0,
       "min_edge_az_deg": -1.8,
       "room_min_az_deg": 5.0,
@@ -1617,87 +1617,87 @@
       "to_buddy_zone_m": 0.0
      },
      "buddy_zone": {
-      "x_m": 103.85,
+      "x_m": 136.1,
       "az_deg": 55.0,
       "operator_station_overlaps": [
        "SP12_BUDDY_ZONE"
       ]
      },
-     "reach_suited_min_m": 0.007,
+     "reach_suited_min_m": 0.088,
      "reach_suited_worst": "suited_newcomer.gauge",
      "reach_unsuited_min_m": 0.092,
-     "reach_status": "MARGINAL",
+     "reach_status": "PASS",
      "reach_margin_m": {
-      "suited_instructor.release": 0.155,
-      "suited_instructor.valve": 0.152,
-      "suited_instructor.gauge": 0.07,
+      "suited_instructor.release": 0.285,
+      "suited_instructor.valve": 0.277,
+      "suited_instructor.gauge": 0.168,
       "unsuited_instructor.release": 0.319,
       "unsuited_instructor.valve": 0.298,
       "unsuited_instructor.gauge": 0.176,
-      "suited_newcomer.release": 0.146,
-      "suited_newcomer.valve": 0.113,
-      "suited_newcomer.gauge": 0.007,
+      "suited_newcomer.release": 0.269,
+      "suited_newcomer.valve": 0.22,
+      "suited_newcomer.gauge": 0.088,
       "unsuited_newcomer.release": 0.301,
       "unsuited_newcomer.valve": 0.237,
       "unsuited_newcomer.gauge": 0.092
      },
      "operator_components_m": {
-      "room_m": 0.354,
-      "chamber_wall_m": 0.1,
-      "plug_envelope_m": 0.566,
-      "fixtures_m": 0.013,
-      "panel_m": 0.04
+      "room_m": 0.034,
+      "chamber_wall_m": 0.115,
+      "plug_envelope_m": 0.458,
+      "fixtures_m": 0.327,
+      "panel_m": 0.055
      },
-     "operator_least_m": 0.013,
-     "operator_least_component": "fixtures_m",
+     "operator_least_m": 0.034,
+     "operator_least_component": "room_m",
      "operator_status": "MARGINAL",
      "head_to_gauge_m": {
-      "suited_instructor": 0.384,
+      "suited_instructor": 0.245,
       "unsuited_instructor": 0.221,
-      "suited_newcomer": 0.4,
+      "suited_newcomer": 0.287,
       "unsuited_newcomer": 0.272
      },
      "gauge_view_status": "PASS",
      "points": {
       "release": [
        2.6,
-       1.16,
-       0.0
+       1.12,
+       0.3
       ],
       "valve": [
        2.8,
-       1.16,
-       0.0
+       1.12,
+       0.3
       ],
       "gauge": [
        3.0,
-       1.16,
-       0.0
+       1.12,
+       0.3
       ]
      },
      "operator": {
       "suited_instructor": {
-       "room_m": 0.354,
-       "chamber_wall_m": 0.1,
-       "plug_envelope_m": 0.702,
-       "fixtures_m": 0.013,
-       "panel_m": 0.04,
+       "room_m": 0.034,
+       "chamber_wall_m": 0.115,
+       "plug_envelope_m": 0.484,
+       "fixtures_m": 0.327,
+       "panel_m": 0.055,
        "nearest_fixture": "SP12_DON_STAND_A",
        "zones": [
         "SP12_BUDDY_ZONE"
        ],
        "station_chamber": [
         1.25,
-        1.596,
-        0.0
+        1.395,
+        0.374
        ],
-       "facing_deg": -90.0
+       "facing_deg": -75.0
       },
       "unsuited_instructor": {
-       "room_m": 0.362,
+       "room_m": 0.054,
        "chamber_wall_m": 0.116,
-       "plug_envelope_m": 0.566,
-       "fixtures_m": 0.054,
+       "plug_envelope_m": 0.458,
+       "fixtures_m": 0.337,
        "panel_m": 0.056,
        "nearest_fixture": "SP12_DON_STAND_A",
        "zones": [
@@ -1705,33 +1705,33 @@
        ],
        "station_chamber": [
         1.25,
-        1.404,
-        0.0
+        1.356,
+        0.363
        ],
-       "facing_deg": -90.0
+       "facing_deg": -75.0
       },
       "suited_newcomer": {
-       "room_m": 0.367,
-       "chamber_wall_m": 0.1,
-       "plug_envelope_m": 0.647,
-       "fixtures_m": 0.025,
-       "panel_m": 0.04,
+       "room_m": 0.044,
+       "chamber_wall_m": 0.116,
+       "plug_envelope_m": 0.462,
+       "fixtures_m": 0.339,
+       "panel_m": 0.056,
        "nearest_fixture": "SP12_DON_STAND_A",
        "zones": [
         "SP12_BUDDY_ZONE"
        ],
        "station_chamber": [
         1.25,
-        1.568,
-        0.0
+        1.38,
+        0.37
        ],
-       "facing_deg": -90.0
+       "facing_deg": -75.0
       },
       "unsuited_newcomer": {
-       "room_m": 0.374,
+       "room_m": 0.062,
        "chamber_wall_m": 0.123,
-       "plug_envelope_m": 0.57,
-       "fixtures_m": 0.058,
+       "plug_envelope_m": 0.469,
+       "fixtures_m": 0.349,
        "panel_m": 0.063,
        "nearest_fixture": "SP12_DON_STAND_A",
        "zones": [
@@ -1739,10 +1739,10 @@
        ],
        "station_chamber": [
         1.25,
-        1.39,
-        0.0
+        1.343,
+        0.36
        ],
-       "facing_deg": -90.0
+       "facing_deg": -75.0
       }
      },
      "note": "worst case over both bodies, suited and unsuited, and release / valve / gauge; the Blender study measures the real meshes"
@@ -1752,10 +1752,10 @@
      "what": "stacked cluster, station angle searched in 5 deg steps (cluster moved around the chamber wall away from stand A)",
      "layout": "vertical",
      "station_a_m": 2.8,
-     "angle_deg": 0.0,
+     "angle_deg": 5.0,
      "body_standoff_m": 0.1,
      "stand_a": {
-      "x_m": 103.4,
+      "x_m": 135.65,
       "az_deg": 20.0,
       "min_edge_az_deg": -1.8,
       "room_min_az_deg": 5.0,
@@ -1763,225 +1763,79 @@
       "to_buddy_zone_m": 0.0
      },
      "buddy_zone": {
-      "x_m": 103.85,
+      "x_m": 136.1,
       "az_deg": 55.0,
       "operator_station_overlaps": [
        "SP12_BUDDY_ZONE"
       ]
      },
-     "reach_suited_min_m": 0.007,
+     "reach_suited_min_m": 0.088,
      "reach_suited_worst": "suited_newcomer.gauge",
      "reach_unsuited_min_m": 0.092,
-     "reach_status": "MARGINAL",
+     "reach_status": "PASS",
      "reach_margin_m": {
-      "suited_instructor.release": 0.155,
-      "suited_instructor.valve": 0.152,
-      "suited_instructor.gauge": 0.07,
+      "suited_instructor.release": 0.285,
+      "suited_instructor.valve": 0.277,
+      "suited_instructor.gauge": 0.168,
       "unsuited_instructor.release": 0.319,
       "unsuited_instructor.valve": 0.298,
       "unsuited_instructor.gauge": 0.176,
-      "suited_newcomer.release": 0.146,
-      "suited_newcomer.valve": 0.113,
-      "suited_newcomer.gauge": 0.007,
+      "suited_newcomer.release": 0.269,
+      "suited_newcomer.valve": 0.22,
+      "suited_newcomer.gauge": 0.088,
       "unsuited_newcomer.release": 0.301,
       "unsuited_newcomer.valve": 0.237,
       "unsuited_newcomer.gauge": 0.092
      },
      "operator_components_m": {
-      "room_m": 0.354,
-      "chamber_wall_m": 0.1,
-      "plug_envelope_m": 0.566,
-      "fixtures_m": 0.013,
-      "panel_m": 0.04
+      "room_m": 0.245,
+      "chamber_wall_m": 0.115,
+      "plug_envelope_m": 0.522,
+      "fixtures_m": 0.109,
+      "panel_m": 0.055
      },
-     "operator_least_m": 0.013,
-     "operator_least_component": "fixtures_m",
-     "operator_status": "MARGINAL",
+     "operator_least_m": 0.055,
+     "operator_least_component": "panel_m",
+     "operator_status": "PASS",
      "head_to_gauge_m": {
-      "suited_instructor": 0.384,
+      "suited_instructor": 0.245,
       "unsuited_instructor": 0.221,
-      "suited_newcomer": 0.4,
+      "suited_newcomer": 0.287,
       "unsuited_newcomer": 0.272
      },
      "gauge_view_status": "PASS",
      "points": {
       "release": [
        2.6,
-       1.16,
-       0.0
+       1.156,
+       0.101
       ],
       "valve": [
        2.8,
-       1.16,
-       0.0
-      ],
-      "gauge": [
-       3.0,
-       1.16,
-       0.0
-      ]
-     },
-     "operator": {
-      "suited_instructor": {
-       "room_m": 0.354,
-       "chamber_wall_m": 0.1,
-       "plug_envelope_m": 0.702,
-       "fixtures_m": 0.013,
-       "panel_m": 0.04,
-       "nearest_fixture": "SP12_DON_STAND_A",
-       "zones": [
-        "SP12_BUDDY_ZONE"
-       ],
-       "station_chamber": [
-        1.25,
-        1.596,
-        0.0
-       ],
-       "facing_deg": -90.0
-      },
-      "unsuited_instructor": {
-       "room_m": 0.362,
-       "chamber_wall_m": 0.116,
-       "plug_envelope_m": 0.566,
-       "fixtures_m": 0.054,
-       "panel_m": 0.056,
-       "nearest_fixture": "SP12_DON_STAND_A",
-       "zones": [
-        "SP12_BUDDY_ZONE"
-       ],
-       "station_chamber": [
-        1.25,
-        1.404,
-        0.0
-       ],
-       "facing_deg": -90.0
-      },
-      "suited_newcomer": {
-       "room_m": 0.367,
-       "chamber_wall_m": 0.1,
-       "plug_envelope_m": 0.647,
-       "fixtures_m": 0.025,
-       "panel_m": 0.04,
-       "nearest_fixture": "SP12_DON_STAND_A",
-       "zones": [
-        "SP12_BUDDY_ZONE"
-       ],
-       "station_chamber": [
-        1.25,
-        1.568,
-        0.0
-       ],
-       "facing_deg": -90.0
-      },
-      "unsuited_newcomer": {
-       "room_m": 0.374,
-       "chamber_wall_m": 0.123,
-       "plug_envelope_m": 0.57,
-       "fixtures_m": 0.058,
-       "panel_m": 0.063,
-       "nearest_fixture": "SP12_DON_STAND_A",
-       "zones": [
-        "SP12_BUDDY_ZONE"
-       ],
-       "station_chamber": [
-        1.25,
-        1.39,
-        0.0
-       ],
-       "facing_deg": -90.0
-      }
-     },
-     "note": "worst case over both bodies, suited and unsuited, and release / valve / gauge; the Blender study measures the real meshes"
-    },
-    {
-     "id": "CT2_row_fine_angle",
-     "what": "horizontal row at one height, 5 deg station search, stand A not moved",
-     "layout": "row",
-     "station_a_m": 2.7,
-     "angle_deg": 5.0,
-     "body_standoff_m": 0.1,
-     "stand_a": {
-      "x_m": 103.4,
-      "az_deg": 20.0,
-      "min_edge_az_deg": -1.8,
-      "room_min_az_deg": 5.0,
-      "to_stand_b_m": 0.0,
-      "to_buddy_zone_m": 0.0
-     },
-     "buddy_zone": {
-      "x_m": 103.85,
-      "az_deg": 55.0,
-      "operator_station_overlaps": [
-       "SP12_BUDDY_ZONE"
-      ]
-     },
-     "reach_suited_min_m": 0.141,
-     "reach_suited_worst": "suited_newcomer.valve",
-     "reach_unsuited_min_m": 0.284,
-     "reach_status": "PASS",
-     "reach_margin_m": {
-      "suited_instructor.release": 0.189,
-      "suited_instructor.valve": 0.164,
-      "suited_instructor.gauge": 0.189,
-      "unsuited_instructor.release": 0.379,
-      "unsuited_instructor.valve": 0.325,
-      "unsuited_instructor.gauge": 0.379,
-      "suited_newcomer.release": 0.159,
-      "suited_newcomer.valve": 0.141,
-      "suited_newcomer.gauge": 0.159,
-      "unsuited_newcomer.release": 0.323,
-      "unsuited_newcomer.valve": 0.284,
-      "unsuited_newcomer.gauge": 0.323
-     },
-     "operator_components_m": {
-      "room_m": 0.236,
-      "chamber_wall_m": 0.1,
-      "plug_envelope_m": 0.539,
-      "fixtures_m": 0.111,
-      "panel_m": 0.064
-     },
-     "operator_least_m": 0.064,
-     "operator_least_component": "panel_m",
-     "operator_status": "PASS",
-     "head_to_gauge_m": {
-      "suited_instructor": 0.475,
-      "unsuited_instructor": 0.325,
-      "suited_newcomer": 0.439,
-      "unsuited_newcomer": 0.294
-     },
-     "gauge_view_status": "PASS",
-     "points": {
-      "release": [
-       2.7,
-       1.156,
-       -0.099
-      ],
-      "valve": [
-       2.7,
        1.156,
        0.101
       ],
       "gauge": [
-       2.7,
-       1.121,
-       0.298
+       3.0,
+       1.156,
+       0.101
       ]
      },
      "operator": {
       "suited_instructor": {
-       "room_m": 0.236,
-       "chamber_wall_m": 0.1,
-       "plug_envelope_m": 0.698,
-       "fixtures_m": 0.111,
-       "panel_m": 0.135,
+       "room_m": 0.245,
+       "chamber_wall_m": 0.115,
+       "plug_envelope_m": 0.568,
+       "fixtures_m": 0.109,
+       "panel_m": 0.055,
        "nearest_fixture": "SP12_DON_STAND_A",
        "zones": [
         "SP12_BUDDY_ZONE"
        ],
        "station_chamber": [
         1.25,
-        1.59,
-        0.139
+        1.439,
+        0.126
        ],
        "facing_deg": -85.0
       },
@@ -1990,7 +1844,7 @@
        "chamber_wall_m": 0.116,
        "plug_envelope_m": 0.539,
        "fixtures_m": 0.128,
-       "panel_m": 0.147,
+       "panel_m": 0.056,
        "nearest_fixture": "SP12_DON_STAND_A",
        "zones": [
         "SP12_BUDDY_ZONE"
@@ -2003,19 +1857,19 @@
        "facing_deg": -85.0
       },
       "suited_newcomer": {
-       "room_m": 0.246,
-       "chamber_wall_m": 0.1,
-       "plug_envelope_m": 0.644,
-       "fixtures_m": 0.123,
-       "panel_m": 0.064,
+       "room_m": 0.258,
+       "chamber_wall_m": 0.116,
+       "plug_envelope_m": 0.522,
+       "fixtures_m": 0.12,
+       "panel_m": 0.056,
        "nearest_fixture": "SP12_DON_STAND_A",
        "zones": [
         "SP12_BUDDY_ZONE"
        ],
        "station_chamber": [
         1.25,
-        1.562,
-        0.137
+        1.424,
+        0.125
        ],
        "facing_deg": -85.0
       },
@@ -2024,7 +1878,153 @@
        "chamber_wall_m": 0.123,
        "plug_envelope_m": 0.545,
        "fixtures_m": 0.139,
-       "panel_m": 0.085,
+       "panel_m": 0.063,
+       "nearest_fixture": "SP12_DON_STAND_A",
+       "zones": [
+        "SP12_BUDDY_ZONE"
+       ],
+       "station_chamber": [
+        1.25,
+        1.385,
+        0.121
+       ],
+       "facing_deg": -85.0
+      }
+     },
+     "note": "worst case over both bodies, suited and unsuited, and release / valve / gauge; the Blender study measures the real meshes"
+    },
+    {
+     "id": "CT2_row_fine_angle",
+     "what": "horizontal row at one height, 5 deg station search, stand A not moved",
+     "layout": "row",
+     "station_a_m": 2.9,
+     "angle_deg": 5.0,
+     "body_standoff_m": 0.1,
+     "stand_a": {
+      "x_m": 135.65,
+      "az_deg": 20.0,
+      "min_edge_az_deg": -1.8,
+      "room_min_az_deg": 5.0,
+      "to_stand_b_m": 0.0,
+      "to_buddy_zone_m": 0.0
+     },
+     "buddy_zone": {
+      "x_m": 136.1,
+      "az_deg": 55.0,
+      "operator_station_overlaps": [
+       "SP12_BUDDY_ZONE"
+      ]
+     },
+     "reach_suited_min_m": 0.161,
+     "reach_suited_worst": "suited_newcomer.valve",
+     "reach_unsuited_min_m": 0.17,
+     "reach_status": "PASS",
+     "reach_margin_m": {
+      "suited_instructor.release": 0.268,
+      "suited_instructor.valve": 0.232,
+      "suited_instructor.gauge": 0.268,
+      "unsuited_instructor.release": 0.286,
+      "unsuited_instructor.valve": 0.245,
+      "unsuited_instructor.gauge": 0.286,
+      "suited_newcomer.release": 0.186,
+      "suited_newcomer.valve": 0.161,
+      "suited_newcomer.gauge": 0.186,
+      "unsuited_newcomer.release": 0.198,
+      "unsuited_newcomer.valve": 0.17,
+      "unsuited_newcomer.gauge": 0.198
+     },
+     "operator_components_m": {
+      "room_m": 0.245,
+      "chamber_wall_m": 0.115,
+      "plug_envelope_m": 0.522,
+      "fixtures_m": 0.109,
+      "panel_m": 0.056
+     },
+     "operator_least_m": 0.056,
+     "operator_least_component": "panel_m",
+     "operator_status": "PASS",
+     "head_to_gauge_m": {
+      "suited_instructor": 0.308,
+      "unsuited_instructor": 0.28,
+      "suited_newcomer": 0.32,
+      "unsuited_newcomer": 0.298
+     },
+     "gauge_view_status": "PASS",
+     "points": {
+      "release": [
+       2.9,
+       1.156,
+       -0.099
+      ],
+      "valve": [
+       2.9,
+       1.156,
+       0.101
+      ],
+      "gauge": [
+       2.9,
+       1.121,
+       0.298
+      ]
+     },
+     "operator": {
+      "suited_instructor": {
+       "room_m": 0.245,
+       "chamber_wall_m": 0.115,
+       "plug_envelope_m": 0.568,
+       "fixtures_m": 0.109,
+       "panel_m": 0.065,
+       "nearest_fixture": "SP12_DON_STAND_A",
+       "zones": [
+        "SP12_BUDDY_ZONE"
+       ],
+       "station_chamber": [
+        1.25,
+        1.439,
+        0.126
+       ],
+       "facing_deg": -85.0
+      },
+      "unsuited_instructor": {
+       "room_m": 0.257,
+       "chamber_wall_m": 0.116,
+       "plug_envelope_m": 0.539,
+       "fixtures_m": 0.128,
+       "panel_m": 0.056,
+       "nearest_fixture": "SP12_DON_STAND_A",
+       "zones": [
+        "SP12_BUDDY_ZONE"
+       ],
+       "station_chamber": [
+        1.25,
+        1.399,
+        0.122
+       ],
+       "facing_deg": -85.0
+      },
+      "suited_newcomer": {
+       "room_m": 0.258,
+       "chamber_wall_m": 0.116,
+       "plug_envelope_m": 0.522,
+       "fixtures_m": 0.12,
+       "panel_m": 0.073,
+       "nearest_fixture": "SP12_DON_STAND_A",
+       "zones": [
+        "SP12_BUDDY_ZONE"
+       ],
+       "station_chamber": [
+        1.25,
+        1.424,
+        0.125
+       ],
+       "facing_deg": -85.0
+      },
+      "unsuited_newcomer": {
+       "room_m": 0.269,
+       "chamber_wall_m": 0.123,
+       "plug_envelope_m": 0.545,
+       "fixtures_m": 0.139,
+       "panel_m": 0.063,
        "nearest_fixture": "SP12_DON_STAND_A",
        "zones": [
         "SP12_BUDDY_ZONE"
@@ -2043,11 +2043,11 @@
      "id": "CT3_row_fine_angle_standoff_0.13",
      "what": "row, operator 0.13 m off the wall (more room for the body, less reach)",
      "layout": "row",
-     "station_a_m": 2.7,
+     "station_a_m": 2.9,
      "angle_deg": 5.0,
      "body_standoff_m": 0.13,
      "stand_a": {
-      "x_m": 103.4,
+      "x_m": 135.65,
       "az_deg": 20.0,
       "min_edge_az_deg": -1.8,
       "room_min_az_deg": 5.0,
@@ -2055,79 +2055,79 @@
       "to_buddy_zone_m": 0.0
      },
      "buddy_zone": {
-      "x_m": 103.85,
+      "x_m": 136.1,
       "az_deg": 55.0,
       "operator_station_overlaps": [
        "SP12_BUDDY_ZONE"
       ]
      },
-     "reach_suited_min_m": 0.113,
+     "reach_suited_min_m": 0.142,
      "reach_suited_worst": "suited_newcomer.valve",
-     "reach_unsuited_min_m": 0.261,
+     "reach_unsuited_min_m": 0.154,
      "reach_status": "PASS",
      "reach_margin_m": {
-      "suited_instructor.release": 0.159,
-      "suited_instructor.valve": 0.137,
-      "suited_instructor.gauge": 0.159,
-      "unsuited_instructor.release": 0.349,
-      "unsuited_instructor.valve": 0.302,
-      "unsuited_instructor.gauge": 0.349,
-      "suited_newcomer.release": 0.129,
-      "suited_newcomer.valve": 0.113,
-      "suited_newcomer.gauge": 0.129,
-      "unsuited_newcomer.release": 0.295,
-      "unsuited_newcomer.valve": 0.261,
-      "unsuited_newcomer.gauge": 0.295
+      "suited_instructor.release": 0.244,
+      "suited_instructor.valve": 0.211,
+      "suited_instructor.gauge": 0.244,
+      "unsuited_instructor.release": 0.264,
+      "unsuited_instructor.valve": 0.227,
+      "unsuited_instructor.gauge": 0.264,
+      "suited_newcomer.release": 0.165,
+      "suited_newcomer.valve": 0.142,
+      "suited_newcomer.gauge": 0.165,
+      "unsuited_newcomer.release": 0.179,
+      "unsuited_newcomer.valve": 0.154,
+      "unsuited_newcomer.gauge": 0.179
      },
      "operator_components_m": {
-      "room_m": 0.233,
-      "chamber_wall_m": 0.13,
-      "plug_envelope_m": 0.568,
-      "fixtures_m": 0.113,
-      "panel_m": 0.088
+      "room_m": 0.242,
+      "chamber_wall_m": 0.145,
+      "plug_envelope_m": 0.552,
+      "fixtures_m": 0.112,
+      "panel_m": 0.086
      },
-     "operator_least_m": 0.088,
+     "operator_least_m": 0.086,
      "operator_least_component": "panel_m",
      "operator_status": "PASS",
      "head_to_gauge_m": {
-      "suited_instructor": 0.5,
-      "unsuited_instructor": 0.344,
-      "suited_newcomer": 0.465,
-      "unsuited_newcomer": 0.315
+      "suited_instructor": 0.331,
+      "unsuited_instructor": 0.301,
+      "suited_newcomer": 0.342,
+      "unsuited_newcomer": 0.319
      },
      "gauge_view_status": "PASS",
      "points": {
       "release": [
-       2.7,
+       2.9,
        1.156,
        -0.099
       ],
       "valve": [
-       2.7,
+       2.9,
        1.156,
        0.101
       ],
       "gauge": [
-       2.7,
+       2.9,
        1.121,
        0.298
       ]
      },
      "operator": {
       "suited_instructor": {
-       "room_m": 0.233,
-       "chamber_wall_m": 0.13,
-       "plug_envelope_m": 0.72,
-       "fixtures_m": 0.113,
-       "panel_m": 0.147,
+       "room_m": 0.242,
+       "chamber_wall_m": 0.145,
+       "plug_envelope_m": 0.597,
+       "fixtures_m": 0.112,
+       "panel_m": 0.095,
        "nearest_fixture": "SP12_DON_STAND_A",
        "zones": [
         "SP12_BUDDY_ZONE"
        ],
        "station_chamber": [
         1.25,
-        1.62,
-        0.142
+        1.468,
+        0.128
        ],
        "facing_deg": -85.0
       },
@@ -2136,7 +2136,7 @@
        "chamber_wall_m": 0.146,
        "plug_envelope_m": 0.568,
        "fixtures_m": 0.131,
-       "panel_m": 0.161,
+       "panel_m": 0.086,
        "nearest_fixture": "SP12_DON_STAND_A",
        "zones": [
         "SP12_BUDDY_ZONE"
@@ -2149,19 +2149,19 @@
        "facing_deg": -85.0
       },
       "suited_newcomer": {
-       "room_m": 0.244,
-       "chamber_wall_m": 0.13,
-       "plug_envelope_m": 0.667,
-       "fixtures_m": 0.125,
-       "panel_m": 0.088,
+       "room_m": 0.256,
+       "chamber_wall_m": 0.146,
+       "plug_envelope_m": 0.552,
+       "fixtures_m": 0.122,
+       "panel_m": 0.103,
        "nearest_fixture": "SP12_DON_STAND_A",
        "zones": [
         "SP12_BUDDY_ZONE"
        ],
        "station_chamber": [
         1.25,
-        1.592,
-        0.139
+        1.453,
+        0.127
        ],
        "facing_deg": -85.0
       },
@@ -2170,7 +2170,7 @@
        "chamber_wall_m": 0.153,
        "plug_envelope_m": 0.574,
        "fixtures_m": 0.141,
-       "panel_m": 0.109,
+       "panel_m": 0.093,
        "nearest_fixture": "SP12_DON_STAND_A",
        "zones": [
         "SP12_BUDDY_ZONE"
@@ -2189,11 +2189,11 @@
      "id": "CT4_row_fine_angle_zone_moved",
      "what": "row, buddy zone moved to az 66 / X 104.05 (its limit in the room)",
      "layout": "row",
-     "station_a_m": 2.7,
+     "station_a_m": 2.9,
      "angle_deg": 5.0,
      "body_standoff_m": 0.1,
      "stand_a": {
-      "x_m": 103.4,
+      "x_m": 135.65,
       "az_deg": 20.0,
       "min_edge_az_deg": -1.8,
       "room_min_az_deg": 5.0,
@@ -2201,79 +2201,79 @@
       "to_buddy_zone_m": 0.022
      },
      "buddy_zone": {
-      "x_m": 104.05,
+      "x_m": 136.3,
       "az_deg": 66.0,
       "operator_station_overlaps": [
        "SP12_BUDDY_ZONE"
       ]
      },
-     "reach_suited_min_m": 0.141,
+     "reach_suited_min_m": 0.161,
      "reach_suited_worst": "suited_newcomer.valve",
-     "reach_unsuited_min_m": 0.284,
+     "reach_unsuited_min_m": 0.17,
      "reach_status": "PASS",
      "reach_margin_m": {
-      "suited_instructor.release": 0.189,
-      "suited_instructor.valve": 0.164,
-      "suited_instructor.gauge": 0.189,
-      "unsuited_instructor.release": 0.379,
-      "unsuited_instructor.valve": 0.325,
-      "unsuited_instructor.gauge": 0.379,
-      "suited_newcomer.release": 0.159,
-      "suited_newcomer.valve": 0.141,
-      "suited_newcomer.gauge": 0.159,
-      "unsuited_newcomer.release": 0.323,
-      "unsuited_newcomer.valve": 0.284,
-      "unsuited_newcomer.gauge": 0.323
+      "suited_instructor.release": 0.268,
+      "suited_instructor.valve": 0.232,
+      "suited_instructor.gauge": 0.268,
+      "unsuited_instructor.release": 0.286,
+      "unsuited_instructor.valve": 0.245,
+      "unsuited_instructor.gauge": 0.286,
+      "suited_newcomer.release": 0.186,
+      "suited_newcomer.valve": 0.161,
+      "suited_newcomer.gauge": 0.186,
+      "unsuited_newcomer.release": 0.198,
+      "unsuited_newcomer.valve": 0.17,
+      "unsuited_newcomer.gauge": 0.198
      },
      "operator_components_m": {
-      "room_m": 0.236,
-      "chamber_wall_m": 0.1,
-      "plug_envelope_m": 0.539,
-      "fixtures_m": 0.111,
-      "panel_m": 0.064
+      "room_m": 0.245,
+      "chamber_wall_m": 0.115,
+      "plug_envelope_m": 0.522,
+      "fixtures_m": 0.109,
+      "panel_m": 0.056
      },
-     "operator_least_m": 0.064,
+     "operator_least_m": 0.056,
      "operator_least_component": "panel_m",
      "operator_status": "PASS",
      "head_to_gauge_m": {
-      "suited_instructor": 0.475,
-      "unsuited_instructor": 0.325,
-      "suited_newcomer": 0.439,
-      "unsuited_newcomer": 0.294
+      "suited_instructor": 0.308,
+      "unsuited_instructor": 0.28,
+      "suited_newcomer": 0.32,
+      "unsuited_newcomer": 0.298
      },
      "gauge_view_status": "PASS",
      "points": {
       "release": [
-       2.7,
+       2.9,
        1.156,
        -0.099
       ],
       "valve": [
-       2.7,
+       2.9,
        1.156,
        0.101
       ],
       "gauge": [
-       2.7,
+       2.9,
        1.121,
        0.298
       ]
      },
      "operator": {
       "suited_instructor": {
-       "room_m": 0.236,
-       "chamber_wall_m": 0.1,
-       "plug_envelope_m": 0.698,
-       "fixtures_m": 0.111,
-       "panel_m": 0.135,
+       "room_m": 0.245,
+       "chamber_wall_m": 0.115,
+       "plug_envelope_m": 0.568,
+       "fixtures_m": 0.109,
+       "panel_m": 0.065,
        "nearest_fixture": "SP12_DON_STAND_A",
        "zones": [
         "SP12_BUDDY_ZONE"
        ],
        "station_chamber": [
         1.25,
-        1.59,
-        0.139
+        1.439,
+        0.126
        ],
        "facing_deg": -85.0
       },
@@ -2282,7 +2282,7 @@
        "chamber_wall_m": 0.116,
        "plug_envelope_m": 0.539,
        "fixtures_m": 0.128,
-       "panel_m": 0.147,
+       "panel_m": 0.056,
        "nearest_fixture": "SP12_DON_STAND_A",
        "zones": [
         "SP12_BUDDY_ZONE"
@@ -2295,19 +2295,19 @@
        "facing_deg": -85.0
       },
       "suited_newcomer": {
-       "room_m": 0.246,
-       "chamber_wall_m": 0.1,
-       "plug_envelope_m": 0.644,
-       "fixtures_m": 0.123,
-       "panel_m": 0.064,
+       "room_m": 0.258,
+       "chamber_wall_m": 0.116,
+       "plug_envelope_m": 0.522,
+       "fixtures_m": 0.12,
+       "panel_m": 0.073,
        "nearest_fixture": "SP12_DON_STAND_A",
        "zones": [
         "SP12_BUDDY_ZONE"
        ],
        "station_chamber": [
         1.25,
-        1.562,
-        0.137
+        1.424,
+        0.125
        ],
        "facing_deg": -85.0
       },
@@ -2316,7 +2316,7 @@
        "chamber_wall_m": 0.123,
        "plug_envelope_m": 0.545,
        "fixtures_m": 0.139,
-       "panel_m": 0.085,
+       "panel_m": 0.063,
        "nearest_fixture": "SP12_DON_STAND_A",
        "zones": [
         "SP12_BUDDY_ZONE"
@@ -2335,11 +2335,11 @@
      "id": "CT5_row_standA_az12",
      "what": "row, donning stand A moved to az 12 (its 1.00 m width then leaves the room's az 5 wall by more: reported)",
      "layout": "row",
-     "station_a_m": 2.7,
+     "station_a_m": 2.9,
      "angle_deg": 0.0,
      "body_standoff_m": 0.1,
      "stand_a": {
-      "x_m": 103.4,
+      "x_m": 135.65,
       "az_deg": 12.0,
       "min_edge_az_deg": -9.8,
       "room_min_az_deg": 5.0,
@@ -2347,78 +2347,78 @@
       "to_buddy_zone_m": 0.0
      },
      "buddy_zone": {
-      "x_m": 103.85,
+      "x_m": 136.1,
       "az_deg": 55.0,
       "operator_station_overlaps": [
        "SP12_BUDDY_ZONE"
       ]
      },
-     "reach_suited_min_m": 0.141,
+     "reach_suited_min_m": 0.161,
      "reach_suited_worst": "suited_newcomer.valve",
-     "reach_unsuited_min_m": 0.284,
+     "reach_unsuited_min_m": 0.17,
      "reach_status": "PASS",
      "reach_margin_m": {
-      "suited_instructor.release": 0.189,
-      "suited_instructor.valve": 0.164,
-      "suited_instructor.gauge": 0.189,
-      "unsuited_instructor.release": 0.379,
-      "unsuited_instructor.valve": 0.325,
-      "unsuited_instructor.gauge": 0.379,
-      "suited_newcomer.release": 0.159,
-      "suited_newcomer.valve": 0.141,
-      "suited_newcomer.gauge": 0.159,
-      "unsuited_newcomer.release": 0.323,
-      "unsuited_newcomer.valve": 0.284,
-      "unsuited_newcomer.gauge": 0.323
+      "suited_instructor.release": 0.268,
+      "suited_instructor.valve": 0.232,
+      "suited_instructor.gauge": 0.268,
+      "unsuited_instructor.release": 0.286,
+      "unsuited_instructor.valve": 0.245,
+      "unsuited_instructor.gauge": 0.286,
+      "suited_newcomer.release": 0.186,
+      "suited_newcomer.valve": 0.161,
+      "suited_newcomer.gauge": 0.186,
+      "unsuited_newcomer.release": 0.198,
+      "unsuited_newcomer.valve": 0.17,
+      "unsuited_newcomer.gauge": 0.198
      },
      "operator_components_m": {
-      "room_m": 0.354,
-      "chamber_wall_m": 0.1,
-      "plug_envelope_m": 0.566,
-      "fixtures_m": 0.162,
-      "panel_m": 0.064
+      "room_m": 0.353,
+      "chamber_wall_m": 0.115,
+      "plug_envelope_m": 0.538,
+      "fixtures_m": 0.166,
+      "panel_m": 0.056
      },
-     "operator_least_m": 0.064,
+     "operator_least_m": 0.056,
      "operator_least_component": "panel_m",
      "operator_status": "PASS",
      "head_to_gauge_m": {
-      "suited_instructor": 0.475,
-      "unsuited_instructor": 0.325,
-      "suited_newcomer": 0.439,
-      "unsuited_newcomer": 0.294
+      "suited_instructor": 0.308,
+      "unsuited_instructor": 0.28,
+      "suited_newcomer": 0.32,
+      "unsuited_newcomer": 0.298
      },
      "gauge_view_status": "PASS",
      "points": {
       "release": [
-       2.7,
+       2.9,
        1.143,
        -0.199
       ],
       "valve": [
-       2.7,
+       2.9,
        1.16,
        0.0
       ],
       "gauge": [
-       2.7,
+       2.9,
        1.143,
        0.199
       ]
      },
      "operator": {
       "suited_instructor": {
-       "room_m": 0.354,
-       "chamber_wall_m": 0.1,
-       "plug_envelope_m": 0.702,
-       "fixtures_m": 0.162,
-       "panel_m": 0.135,
+       "room_m": 0.353,
+       "chamber_wall_m": 0.115,
+       "plug_envelope_m": 0.594,
+       "fixtures_m": 0.166,
+       "panel_m": 0.065,
        "nearest_fixture": "SP12_DON_STAND_A",
        "zones": [
         "SP12_BUDDY_ZONE"
        ],
        "station_chamber": [
         1.25,
-        1.596,
+        1.444,
         0.0
        ],
        "facing_deg": -90.0
@@ -2428,7 +2428,7 @@
        "chamber_wall_m": 0.116,
        "plug_envelope_m": 0.566,
        "fixtures_m": 0.183,
-       "panel_m": 0.147,
+       "panel_m": 0.056,
        "nearest_fixture": "SP12_DON_STAND_A",
        "zones": [
         "SP12_BUDDY_ZONE"
@@ -2441,18 +2441,18 @@
        "facing_deg": -90.0
       },
       "suited_newcomer": {
-       "room_m": 0.367,
-       "chamber_wall_m": 0.1,
-       "plug_envelope_m": 0.647,
-       "fixtures_m": 0.176,
-       "panel_m": 0.064,
+       "room_m": 0.366,
+       "chamber_wall_m": 0.116,
+       "plug_envelope_m": 0.538,
+       "fixtures_m": 0.179,
+       "panel_m": 0.073,
        "nearest_fixture": "SP12_DON_STAND_A",
        "zones": [
         "SP12_BUDDY_ZONE"
        ],
        "station_chamber": [
         1.25,
-        1.568,
+        1.429,
         0.0
        ],
        "facing_deg": -90.0
@@ -2462,7 +2462,7 @@
        "chamber_wall_m": 0.123,
        "plug_envelope_m": 0.57,
        "fixtures_m": 0.197,
-       "panel_m": 0.085,
+       "panel_m": 0.063,
        "nearest_fixture": "SP12_DON_STAND_A",
        "zones": [
         "SP12_BUDDY_ZONE"
@@ -2486,11 +2486,11 @@
      "limbs_secured": {},
      "litter_frame": {
       "instructor.stowed": {
-       "bore_clearance_m": 0.15,
+       "bore_clearance_m": 0.168,
        "status": "PASS"
       },
       "instructor.loose": {
-       "bore_clearance_m": 0.064,
+       "bore_clearance_m": 0.068,
        "status": "PASS"
       },
       "newcomer.stowed": {
@@ -2498,44 +2498,44 @@
        "status": "PASS"
       },
       "newcomer.loose": {
-       "bore_clearance_m": 0.086,
+       "bore_clearance_m": 0.065,
        "status": "PASS"
       }
      },
      "vacuum_mattress": {
       "instructor.stowed": {
-       "bore_clearance_m": 0.092,
+       "bore_clearance_m": 0.185,
        "status": "PASS"
       },
       "instructor.loose": {
-       "bore_clearance_m": 0.053,
+       "bore_clearance_m": 0.097,
        "status": "PASS"
       },
       "newcomer.stowed": {
-       "bore_clearance_m": 0.105,
+       "bore_clearance_m": 0.162,
        "status": "PASS"
       },
       "newcomer.loose": {
-       "bore_clearance_m": 0.069,
+       "bore_clearance_m": 0.1,
        "status": "PASS"
       }
      },
      "frame_with_kit": {
       "instructor.stowed": {
-       "bore_clearance_m": 0.036,
-       "status": "MARGINAL"
+       "bore_clearance_m": 0.154,
+       "status": "PASS"
       },
       "instructor.loose": {
-       "bore_clearance_m": 0.007,
-       "status": "MARGINAL"
+       "bore_clearance_m": 0.068,
+       "status": "PASS"
       },
       "newcomer.stowed": {
-       "bore_clearance_m": 0.049,
-       "status": "MARGINAL"
+       "bore_clearance_m": 0.121,
+       "status": "PASS"
       },
       "newcomer.loose": {
-       "bore_clearance_m": 0.023,
-       "status": "MARGINAL"
+       "bore_clearance_m": 0.065,
+       "status": "PASS"
       }
      }
     },
@@ -2562,9 +2562,9 @@
    "aperture_m": 1.35,
    "results": {
     "limp_casualty": {
-     "status": "MARGINAL",
+     "status": "PASS",
      "door_status": "PASS",
-     "door_margin_m": 0.051,
+     "door_margin_m": 0.136,
      "plug_status": "PASS",
      "chamber_panel_status": "PASS"
     }
@@ -2596,26 +2596,26 @@
    "chamber": {
     "clear_radius_m": 1.0,
     "clear_diameter_m": 2.0,
-    "body_radius_m": 0.929,
-    "clear_length_m": 3.5,
+    "body_radius_m": 0.916,
+    "clear_length_m": 3.45,
     "outer_bulkhead_a_m": 6.15,
-    "inner_bulkhead_a_m": 2.55,
-    "inner_leaf_floor_a_m": 1.11,
+    "inner_bulkhead_a_m": 2.6,
+    "inner_leaf_floor_a_m": 1.16,
     "leaf_face_a_m": 5.96,
-    "body_top_a_m": 4.86,
+    "body_top_a_m": 4.835,
     "sp12_floor_r_m": 1.25,
-    "radial_budget_m": -0.14,
+    "radial_budget_m": -0.09,
     "fits_radially": false,
     "outer_leaf": {
-     "gap": 1.1,
-     "hinge_deg": 90.0
+     "gap": 1.125,
+     "hinge_deg": 270.0
     },
-    "volume_m3": 11.0,
+    "volume_m3": 10.84,
     "hull_skin_m": 6.4,
     "fitting_outside_m": 2.1,
     "existing_fitting_outside_m": 2.2
    },
-   "chamber_length_set_by": "supported_frame",
+   "chamber_length_set_by": "supported_mattress",
    "eva002_chamber": {
     "clear_diameter_m": 2.0,
     "clear_length_m": 3.25,
@@ -2623,7 +2623,7 @@
     "basis": "EVA-002: routine pair and the free-limp rescue pairings only"
    },
    "fitting": {
-    "x": 101.8494,
+    "x": 134.1,
     "theta_deg": 50.0,
     "port_face_a_m": 6.8,
     "wall_m": 0.05
@@ -2632,24 +2632,24 @@
     {
      "variant": "instructor",
      "pose": "chamber",
-     "theta_deg": 0.0,
+     "theta_deg": 90.0,
      "shift_m": [
-      0.389,
-      -0.008
+      0.3484,
+      -0.0
      ],
-     "a_top_m": 4.86,
-     "zmax_m": 1.893
+     "a_top_m": 4.835,
+     "zmax_m": 1.828
     },
     {
      "variant": "newcomer",
      "pose": "chamber",
-     "theta_deg": 180.0,
+     "theta_deg": 270.0,
      "shift_m": [
-      -0.416,
-      0.012
+      -0.3656,
+      0.0045
      ],
-     "a_top_m": 4.86,
-     "zmax_m": 1.807
+     "a_top_m": 4.835,
+     "zmax_m": 1.746
     }
    ],
    "rescue_occupants": [
@@ -2657,24 +2657,24 @@
      {
       "variant": "instructor",
       "pose": "rescue",
-      "theta_deg": 0.0,
+      "theta_deg": 180.0,
       "shift_m": [
-       0.5505,
-       -0.0023
+       0.5671,
+       -0.0727
       ],
-      "a_top_m": 4.86,
-      "zmax_m": 1.983
+      "a_top_m": 4.835,
+      "zmax_m": 1.919
      },
      {
       "variant": "newcomer",
       "pose": "casualty",
-      "theta_deg": 180.0,
+      "theta_deg": 360.0,
       "shift_m": [
-       -0.3335,
-       -0.1517
+       -0.3209,
+       0.1588
       ],
-      "a_top_m": 4.86,
-      "zmax_m": 0.928
+      "a_top_m": 4.835,
+      "zmax_m": 0.86
      }
     ],
     [
@@ -2683,166 +2683,166 @@
       "pose": "rescue",
       "theta_deg": 0.0,
       "shift_m": [
-       0.5817,
-       -0.0726
+       0.5508,
+       -0.0911
       ],
-      "a_top_m": 4.86,
-      "zmax_m": 1.899
+      "a_top_m": 4.835,
+      "zmax_m": 1.838
      },
      {
       "variant": "instructor",
       "pose": "casualty",
       "theta_deg": 180.0,
       "shift_m": [
-       -0.3283,
-       -0.2191
+       -0.3412,
+       -0.3101
       ],
-      "a_top_m": 4.86,
-      "zmax_m": 0.956
+      "a_top_m": 4.835,
+      "zmax_m": 0.884
      }
     ],
     [
      {
       "variant": "instructor",
       "pose": "rescue",
-      "theta_deg": 0.0,
+      "theta_deg": 210.0,
       "shift_m": [
-       0.3833,
-       0.0569
+       0.4005,
+       0.0651
       ],
-      "a_top_m": 4.86,
-      "zmax_m": 1.983
+      "a_top_m": 4.835,
+      "zmax_m": 1.919
      },
      {
       "variant": "newcomer",
       "pose": "supported_frame",
-      "theta_deg": 180.0,
+      "theta_deg": 390.0,
       "shift_m": [
-       -0.3747,
-       -0.0691
+       -0.3706,
+       0.079
       ],
-      "a_top_m": 4.86,
-      "zmax_m": 1.907
+      "a_top_m": 4.835,
+      "zmax_m": 1.846
      }
     ],
     [
      {
       "variant": "newcomer",
       "pose": "rescue",
-      "theta_deg": 0.0,
+      "theta_deg": 210.0,
       "shift_m": [
-       0.4111,
-       0.0134
+       0.405,
+       0.0964
       ],
-      "a_top_m": 4.86,
-      "zmax_m": 1.899
+      "a_top_m": 4.835,
+      "zmax_m": 1.838
      },
      {
       "variant": "instructor",
       "pose": "supported_frame",
-      "theta_deg": 180.0,
+      "theta_deg": 390.0,
       "shift_m": [
-       -0.3489,
-       -0.1021
+       -0.3685,
+       0.1018
       ],
-      "a_top_m": 4.86,
-      "zmax_m": 1.993
+      "a_top_m": 4.835,
+      "zmax_m": 1.928
      }
     ],
     [
      {
       "variant": "instructor",
       "pose": "rescue",
-      "theta_deg": 0.0,
+      "theta_deg": 180.0,
       "shift_m": [
-       0.3845,
-       0.0897
+       0.381,
+       -0.1252
       ],
-      "a_top_m": 4.86,
-      "zmax_m": 1.983
+      "a_top_m": 4.835,
+      "zmax_m": 1.919
      },
      {
       "variant": "newcomer",
       "pose": "supported_mattress",
-      "theta_deg": 180.0,
+      "theta_deg": 360.0,
       "shift_m": [
-       -0.3515,
-       -0.0397
+       -0.371,
+       -0.0022
       ],
-      "a_top_m": 4.86,
-      "zmax_m": 1.867
+      "a_top_m": 4.835,
+      "zmax_m": 1.806
      }
     ],
     [
      {
       "variant": "newcomer",
       "pose": "rescue",
-      "theta_deg": 0.0,
+      "theta_deg": 180.0,
       "shift_m": [
-       0.3855,
-       0.0845
+       0.406,
+       -0.0942
       ],
-      "a_top_m": 4.86,
-      "zmax_m": 1.899
+      "a_top_m": 4.835,
+      "zmax_m": 1.838
      },
      {
       "variant": "instructor",
       "pose": "supported_mattress",
-      "theta_deg": 180.0,
+      "theta_deg": 360.0,
       "shift_m": [
-       -0.3535,
-       -0.0345
+       -0.352,
+       0.0058
       ],
-      "a_top_m": 4.86,
-      "zmax_m": 1.953
+      "a_top_m": 4.835,
+      "zmax_m": 1.888
      }
     ],
     [
      {
       "variant": "instructor",
       "pose": "rescue",
-      "theta_deg": 0.0,
+      "theta_deg": 180.0,
       "shift_m": [
-       0.379,
-       0.1255
+       0.4254,
+       -0.1174
       ],
-      "a_top_m": 4.86,
-      "zmax_m": 1.983
+      "a_top_m": 4.835,
+      "zmax_m": 1.919
      },
      {
       "variant": "newcomer",
       "pose": "supported_kit",
-      "theta_deg": 180.0,
+      "theta_deg": 360.0,
       "shift_m": [
-       -0.379,
-       -0.1255
+       -0.3616,
+       0.1251
       ],
-      "a_top_m": 4.86,
-      "zmax_m": 1.907
+      "a_top_m": 4.835,
+      "zmax_m": 1.846
      }
     ],
     [
      {
       "variant": "newcomer",
       "pose": "rescue",
-      "theta_deg": 0.0,
+      "theta_deg": 180.0,
       "shift_m": [
-       0.38,
-       0.1202
+       0.4441,
+       -0.0874
       ],
-      "a_top_m": 4.86,
-      "zmax_m": 1.899
+      "a_top_m": 4.835,
+      "zmax_m": 1.838
      },
      {
       "variant": "instructor",
       "pose": "supported_kit",
-      "theta_deg": 180.0,
+      "theta_deg": 360.0,
       "shift_m": [
-       -0.38,
-       -0.1202
+       -0.3429,
+       0.1376
       ],
-      "a_top_m": 4.86,
-      "zmax_m": 1.993
+      "a_top_m": 4.835,
+      "zmax_m": 1.928
      }
     ]
    ],
@@ -2850,165 +2850,165 @@
     "instructor.chamber": {
      "label": "suited, arms along the body",
      "routine": true,
-     "need_m": 0.857,
+     "need_m": 0.746,
      "tilt_deg": [
       0.0,
       0.0
      ],
-     "margin_m": 0.243,
+     "margin_m": 0.354,
      "status": "PASS"
     },
     "instructor.hatch_pass": {
      "label": "suited, hands ahead (hatch passage)",
      "routine": true,
-     "need_m": 1.074,
+     "need_m": 0.971,
      "tilt_deg": [
       0.0,
       0.0
      ],
-     "margin_m": 0.026,
-     "status": "MARGINAL"
+     "margin_m": 0.129,
+     "status": "PASS"
     },
     "instructor.casualty": {
      "label": "casualty, free limp (unrestrained)",
      "routine": false,
-     "need_m": 1.299,
+     "need_m": 1.214,
      "tilt_deg": [
-      10.0,
+      0.0,
       10.0
      ],
-     "margin_m": -0.199,
+     "margin_m": -0.114,
      "status": "FAIL"
     },
     "instructor.supported": {
      "label": "casualty, limbs secured, no support",
      "routine": false,
-     "need_m": 0.857,
+     "need_m": 0.71,
      "tilt_deg": [
       0.0,
       0.0
      ],
-     "margin_m": 0.243,
+     "margin_m": 0.39,
      "status": "PASS"
     },
     "instructor.supported_frame": {
      "label": "casualty on a full-length litter frame",
      "routine": false,
-     "need_m": 0.857,
+     "need_m": 0.797,
      "tilt_deg": [
       0.0,
       0.0
      ],
-     "margin_m": 0.243,
+     "margin_m": 0.303,
      "status": "PASS"
     },
     "instructor.supported_mattress": {
      "label": "casualty in a vacuum mattress",
      "routine": false,
-     "need_m": 0.979,
+     "need_m": 0.829,
      "tilt_deg": [
       0.0,
       0.0
      ],
-     "margin_m": 0.121,
+     "margin_m": 0.271,
      "status": "PASS"
     },
     "instructor.supported_kit": {
      "label": "casualty on the frame with a med/O2 kit",
      "routine": false,
-     "need_m": 1.007,
+     "need_m": 0.89,
      "tilt_deg": [
       10.0,
       0.0
      ],
-     "margin_m": 0.093,
+     "margin_m": 0.21,
      "status": "PASS"
     },
     "newcomer.chamber": {
      "label": "suited, arms along the body",
      "routine": true,
-     "need_m": 0.832,
+     "need_m": 0.777,
      "tilt_deg": [
       0.0,
       0.0
      ],
-     "margin_m": 0.268,
+     "margin_m": 0.323,
      "status": "PASS"
     },
     "newcomer.hatch_pass": {
      "label": "suited, hands ahead (hatch passage)",
      "routine": true,
-     "need_m": 1.026,
+     "need_m": 0.993,
      "tilt_deg": [
       0.0,
       0.0
      ],
-     "margin_m": 0.074,
+     "margin_m": 0.107,
      "status": "PASS"
     },
     "newcomer.casualty": {
      "label": "casualty, free limp (unrestrained)",
      "routine": false,
-     "need_m": 1.221,
+     "need_m": 1.192,
      "tilt_deg": [
-      10.0,
+      0.0,
       10.0
      ],
-     "margin_m": -0.121,
+     "margin_m": -0.092,
      "status": "FAIL"
     },
     "newcomer.supported": {
      "label": "casualty, limbs secured, no support",
      "routine": false,
-     "need_m": 0.832,
+     "need_m": 0.733,
      "tilt_deg": [
-      0.0,
+      10.0,
       0.0
      ],
-     "margin_m": 0.268,
+     "margin_m": 0.367,
      "status": "PASS"
     },
     "newcomer.supported_frame": {
      "label": "casualty on a full-length litter frame",
      "routine": false,
-     "need_m": 0.832,
+     "need_m": 0.773,
      "tilt_deg": [
       0.0,
       0.0
      ],
-     "margin_m": 0.268,
+     "margin_m": 0.327,
      "status": "PASS"
     },
     "newcomer.supported_mattress": {
      "label": "casualty in a vacuum mattress",
      "routine": false,
-     "need_m": 0.953,
+     "need_m": 0.852,
      "tilt_deg": [
-      0.0,
+      10.0,
       0.0
      ],
-     "margin_m": 0.147,
+     "margin_m": 0.248,
      "status": "PASS"
     },
     "newcomer.supported_kit": {
      "label": "casualty on the frame with a med/O2 kit",
      "routine": false,
-     "need_m": 0.994,
+     "need_m": 0.892,
      "tilt_deg": [
       10.0,
       0.0
      ],
-     "margin_m": 0.106,
+     "margin_m": 0.208,
      "status": "PASS"
     }
    },
-   "routine_door_ok": false,
+   "routine_door_ok": true,
    "mechanisms": {
     "hinged_into_sp12": {
      "concept": "EVA-002 plug leaf: hinged on the frame, seats from SP-12, swings 90 deg into SP-12",
-     "lowest_a_m": 1.11,
+     "lowest_a_m": 1.16,
      "floor_r_m": 1.25,
-     "radial_budget_m": -0.14,
+     "radial_budget_m": -0.09,
      "pressure": "SEATED by cabin pressure when the chamber is evacuated",
      "reverse_load_kn": 0.0,
      "seat_load_kn": 90.5,
@@ -3021,10 +3021,10 @@
     },
     "hinged_floor_recess": {
      "concept": "the same leaf; the SP-12 floor utility layer is removed under the swing (a local well down to the spine clearance)",
-     "lowest_a_m": 1.11,
+     "lowest_a_m": 1.16,
      "floor_r_m": 1.1,
-     "radial_budget_m": 0.01,
-     "recess_depth_m": 0.14,
+     "radial_budget_m": 0.06,
+     "recess_depth_m": 0.09,
      "recess_plan_m": [
       1.2,
       1.25
@@ -3041,69 +3041,69 @@
     },
     "parallel_plug_slide": {
      "concept": "a plug door on a parallel linkage: the leaf drops off its seat by a short stroke and slides sideways in the bulkhead plane (aircraft / bus plug-door kinematics); it never swings toward the floor",
-     "lowest_a_m": 2.18,
+     "lowest_a_m": 2.23,
      "floor_r_m": 1.25,
-     "radial_budget_m": 0.93,
+     "radial_budget_m": 0.98,
      "stroke_m": 0.08,
      "travel_m": 1.2,
      "parking": {
       "+X": {
        "centre_chamber": [
-        2.36,
+        2.41,
         1.2,
         0.0
        ],
        "x_m": [
-        102.399,
-        103.699
+        134.65,
+        135.95
        ],
        "az_deg": [
-        33.7,
-        66.3
+        34.1,
+        65.9
        ],
        "r_m": [
-        2.323,
-        2.477
+        2.371,
+        2.525
        ],
        "inside_sp12": true,
        "corners_chamber": [
         [
-         2.23,
+         2.28,
          0.55,
          -0.65
         ],
         [
-         2.23,
-         0.55,
-         0.65
-        ],
-        [
-         2.23,
-         1.85,
-         -0.65
-        ],
-        [
-         2.23,
-         1.85,
-         0.65
-        ],
-        [
-         2.39,
-         0.55,
-         -0.65
-        ],
-        [
-         2.39,
+         2.28,
          0.55,
          0.65
         ],
         [
-         2.39,
+         2.28,
          1.85,
          -0.65
         ],
         [
-         2.39,
+         2.28,
+         1.85,
+         0.65
+        ],
+        [
+         2.44,
+         0.55,
+         -0.65
+        ],
+        [
+         2.44,
+         0.55,
+         0.65
+        ],
+        [
+         2.44,
+         1.85,
+         -0.65
+        ],
+        [
+         2.44,
          1.85,
          0.65
         ]
@@ -3111,61 +3111,61 @@
       },
       "-X": {
        "centre_chamber": [
-        2.36,
+        2.41,
         -1.2,
         0.0
        ],
        "x_m": [
-        99.999,
-        101.299
+        132.25,
+        133.55
        ],
        "az_deg": [
-        33.7,
-        66.3
+        34.1,
+        65.9
        ],
        "r_m": [
-        2.323,
-        2.477
+        2.371,
+        2.525
        ],
        "inside_sp12": false,
        "corners_chamber": [
         [
-         2.23,
+         2.28,
          -1.85,
          -0.65
         ],
         [
-         2.23,
-         -1.85,
-         0.65
-        ],
-        [
-         2.23,
-         -0.55,
-         -0.65
-        ],
-        [
-         2.23,
-         -0.55,
-         0.65
-        ],
-        [
-         2.39,
-         -1.85,
-         -0.65
-        ],
-        [
-         2.39,
+         2.28,
          -1.85,
          0.65
         ],
         [
-         2.39,
+         2.28,
          -0.55,
          -0.65
         ],
         [
-         2.39,
+         2.28,
+         -0.55,
+         0.65
+        ],
+        [
+         2.44,
+         -1.85,
+         -0.65
+        ],
+        [
+         2.44,
+         -1.85,
+         0.65
+        ],
+        [
+         2.44,
+         -0.55,
+         -0.65
+        ],
+        [
+         2.44,
          -0.55,
          0.65
         ]
@@ -3173,61 +3173,61 @@
       },
       "+az": {
        "centre_chamber": [
-        2.36,
+        2.41,
         0.0,
         1.2
        ],
        "x_m": [
-        101.199,
-        102.499
+        133.45,
+        134.75
        ],
        "az_deg": [
-        63.0,
-        89.7
+        62.7,
+        89.1
        ],
        "r_m": [
-        2.297,
-        3.022
+        2.345,
+        3.062
        ],
        "inside_sp12": false,
        "corners_chamber": [
         [
-         2.23,
+         2.28,
          -0.65,
          0.55
         ],
         [
-         2.23,
-         -0.65,
-         1.85
-        ],
-        [
-         2.23,
-         0.65,
-         0.55
-        ],
-        [
-         2.23,
-         0.65,
-         1.85
-        ],
-        [
-         2.39,
-         -0.65,
-         0.55
-        ],
-        [
-         2.39,
+         2.28,
          -0.65,
          1.85
         ],
         [
-         2.39,
+         2.28,
          0.65,
          0.55
         ],
         [
-         2.39,
+         2.28,
+         0.65,
+         1.85
+        ],
+        [
+         2.44,
+         -0.65,
+         0.55
+        ],
+        [
+         2.44,
+         -0.65,
+         1.85
+        ],
+        [
+         2.44,
+         0.65,
+         0.55
+        ],
+        [
+         2.44,
          0.65,
          1.85
         ]
@@ -3235,61 +3235,61 @@
       },
       "-az": {
        "centre_chamber": [
-        2.36,
+        2.41,
         0.0,
         -1.2
        ],
        "x_m": [
-        101.199,
-        102.499
+        133.45,
+        134.75
        ],
        "az_deg": [
-        10.3,
-        37.0
+        10.9,
+        37.3
        ],
        "r_m": [
-        2.297,
-        3.022
+        2.345,
+        3.062
        ],
        "inside_sp12": true,
        "corners_chamber": [
         [
-         2.23,
+         2.28,
          -0.65,
          -1.85
         ],
         [
-         2.23,
-         -0.65,
-         -0.55
-        ],
-        [
-         2.23,
-         0.65,
-         -1.85
-        ],
-        [
-         2.23,
-         0.65,
-         -0.55
-        ],
-        [
-         2.39,
-         -0.65,
-         -1.85
-        ],
-        [
-         2.39,
+         2.28,
          -0.65,
          -0.55
         ],
         [
-         2.39,
+         2.28,
          0.65,
          -1.85
         ],
         [
-         2.39,
+         2.28,
+         0.65,
+         -0.55
+        ],
+        [
+         2.44,
+         -0.65,
+         -1.85
+        ],
+        [
+         2.44,
+         -0.65,
+         -0.55
+        ],
+        [
+         2.44,
+         0.65,
+         -1.85
+        ],
+        [
+         2.44,
          0.65,
          -0.55
         ]
@@ -3310,9 +3310,9 @@
     },
     "hinged_into_chamber": {
      "concept": "the inner leaf hinged to open up into the chamber (no swing into SP-12): the chamber grows by its swing",
-     "lowest_a_m": 1.17,
+     "lowest_a_m": 1.22,
      "floor_r_m": 1.25,
-     "radial_budget_m": -0.08,
+     "radial_budget_m": -0.03,
      "chamber_length_added_m": 1.3,
      "pressure": "UNSEATED: cabin pressure pushes the leaf off its seat whenever the chamber is below cabin pressure; the latches alone carry it",
      "reverse_load_kn": 90.5,
@@ -3326,9 +3326,9 @@
     },
     "bi_parting": {
      "concept": "two half leaves hinged at opposite rims, meeting on a centre seam: each swings half as deep",
-     "lowest_a_m": 1.71,
+     "lowest_a_m": 1.76,
      "floor_r_m": 1.25,
-     "radial_budget_m": 0.46,
+     "radial_budget_m": 0.51,
      "clear_aperture_with_mullion_m": 0.5,
      "pressure": "a seam beam (mullion) across the opening, or a latch-only seam between the leaves",
      "reverse_load_kn": null,
@@ -3346,34 +3346,34 @@
      "hand": "left on the lever and the strap (right hand on a handhold ahead of the waist, feet in the restraint)",
      "routine_position": true,
      "lever_pivot_chamber": [
-      4.263,
-      0.642,
-      -0.436
+      4.303,
+      0.776,
+      0.253
      ],
      "lever_grip_radius_m": 0.174,
-     "lever_station_a_m": 4.263,
-     "bracket_m": 0.224,
+     "lever_station_a_m": 4.303,
+     "bracket_m": 0.183,
      "bracket_ok": true,
-     "lever_to_wall_m": 0.018,
-     "lever_status": "PASS",
-     "torque_tube_m": 1.757,
-     "strap_grip_high_a_m": 4.736,
-     "strap_length_m": 1.224,
+     "lever_to_wall_m": -0.082,
+     "lever_status": "FAIL",
+     "torque_tube_m": 1.717,
+     "strap_grip_high_a_m": 4.776,
+     "strap_length_m": 1.184,
      "strap_attach_rho_m": 0.55,
-     "body_to_wall_m": 0.053,
-     "body_status": "PASS",
-     "partner_gap_m": 0.159,
+     "body_to_wall_m": -0.091,
+     "body_status": "FAIL",
+     "partner_gap_m": 0.092,
      "partner_status": "PASS",
-     "grips_to_partner_m": 0.662,
-     "body_to_leaf_sweep_m": 0.182,
+     "grips_to_partner_m": 0.863,
+     "body_to_leaf_sweep_m": 0.175,
      "sweep_status": "PASS",
      "strap_note": "the strap hand meets the shut leaf and follows it down as it swings in: the hand moves with the leaf, the body stays below its sweep",
      "shoulder_flex_ok": true,
      "shoulder_flex_max_deg": 109.1,
-     "shoulder_limit_deg": 120.0,
+     "shoulder_limit_deg": 130.0,
      "pitch_backup": {
-      "pitch_deg": 70.0,
-      "needed_radius_alone_m": 1.799,
+      "pitch_deg": 60.0,
+      "needed_radius_alone_m": 1.655,
       "chamber_radius_m": 1.0,
       "status": "FAIL",
       "note": "the rigid suited body tilted about its feet sweeps far across the chamber axis"
@@ -3383,34 +3383,34 @@
      "hand": "left on the lever and the strap (right hand on a handhold ahead of the waist, feet in the restraint)",
      "routine_position": true,
      "lever_pivot_chamber": [
-      4.332,
-      -0.646,
-      0.465
+      4.368,
+      -0.818,
+      -0.226
      ],
      "lever_grip_radius_m": 0.123,
-     "lever_station_a_m": 4.332,
-     "bracket_m": 0.204,
+     "lever_station_a_m": 4.368,
+     "bracket_m": 0.151,
      "bracket_ok": true,
-     "lever_to_wall_m": 0.037,
-     "lever_status": "PASS",
-     "torque_tube_m": 1.688,
-     "strap_grip_high_a_m": 4.736,
-     "strap_length_m": 1.224,
+     "lever_to_wall_m": -0.053,
+     "lever_status": "FAIL",
+     "torque_tube_m": 1.652,
+     "strap_grip_high_a_m": 4.772,
+     "strap_length_m": 1.188,
      "strap_attach_rho_m": 0.55,
-     "body_to_wall_m": 0.085,
-     "body_status": "PASS",
-     "partner_gap_m": 0.193,
+     "body_to_wall_m": -0.048,
+     "body_status": "FAIL",
+     "partner_gap_m": 0.068,
      "partner_status": "PASS",
-     "grips_to_partner_m": 0.684,
-     "body_to_leaf_sweep_m": 0.117,
+     "grips_to_partner_m": 0.87,
+     "body_to_leaf_sweep_m": 0.179,
      "sweep_status": "PASS",
      "strap_note": "the strap hand meets the shut leaf and follows it down as it swings in: the hand moves with the leaf, the body stays below its sweep",
      "shoulder_flex_ok": true,
      "shoulder_flex_max_deg": 109.1,
-     "shoulder_limit_deg": 120.0,
+     "shoulder_limit_deg": 130.0,
      "pitch_backup": {
-      "pitch_deg": 70.0,
-      "needed_radius_alone_m": 1.72,
+      "pitch_deg": 60.0,
+      "needed_radius_alone_m": 1.586,
       "chamber_radius_m": 1.0,
       "status": "FAIL",
       "note": "the rigid suited body tilted about its feet sweeps far across the chamber axis"
@@ -3420,24 +3420,24 @@
    "rescue": {
     "full_length_supported": {
      "label": "full-length supported casualty on a litter frame (EVA-058 preferred)",
-     "door_need_m": 0.857,
-     "door_margin_m": 0.243,
+     "door_need_m": 0.797,
+     "door_margin_m": 0.303,
      "door_status": "PASS",
      "chamber_need": [
       2.0,
-      3.4
+      3.2
      ],
      "chamber_has": [
       2.0,
-      3.5
+      3.45
      ],
      "chamber_fits": true,
      "status": "PASS"
     },
     "unrestrained_limp": {
      "label": "unrestrained limp casualty (free neutral body posture)",
-     "door_need_m": 1.299,
-     "door_margin_m": -0.199,
+     "door_need_m": 1.214,
+     "door_margin_m": -0.114,
      "door_status": "FAIL",
      "chamber_need": [
       2.0,
@@ -3445,15 +3445,31 @@
      ],
      "chamber_has": [
       2.0,
-      3.5
+      3.45
      ],
      "chamber_fits": true,
      "status": "FAIL"
     },
     "stabilized_no_support": {
      "label": "limbs secured, straight and neutral, no support (permissible only medically)",
-     "door_need_m": 0.857,
-     "door_margin_m": 0.243,
+     "door_need_m": 0.733,
+     "door_margin_m": 0.367,
+     "door_status": "PASS",
+     "chamber_need": [
+      2.0,
+      3.15
+     ],
+     "chamber_has": [
+      2.0,
+      3.45
+     ],
+     "chamber_fits": true,
+     "status": "PASS"
+    },
+    "vacuum_mattress": {
+     "label": "casualty in a vacuum mattress",
+     "door_need_m": 0.852,
+     "door_margin_m": 0.248,
      "door_status": "PASS",
      "chamber_need": [
       2.0,
@@ -3461,39 +3477,23 @@
      ],
      "chamber_has": [
       2.0,
-      3.5
-     ],
-     "chamber_fits": true,
-     "status": "PASS"
-    },
-    "vacuum_mattress": {
-     "label": "casualty in a vacuum mattress",
-     "door_need_m": 0.979,
-     "door_margin_m": 0.121,
-     "door_status": "PASS",
-     "chamber_need": [
-      2.0,
-      3.4
-     ],
-     "chamber_has": [
-      2.0,
-      3.5
+      3.45
      ],
      "chamber_fits": true,
      "status": "PASS"
     },
     "with_equipment": {
      "label": "casualty on the frame with a medical/O2 kit",
-     "door_need_m": 1.007,
-     "door_margin_m": 0.093,
+     "door_need_m": 0.892,
+     "door_margin_m": 0.208,
      "door_status": "PASS",
      "chamber_need": [
       2.0,
-      3.4
+      3.25
      ],
      "chamber_has": [
       2.0,
-      3.5
+      3.45
      ],
      "chamber_fits": true,
      "status": "PASS"
@@ -3515,9 +3515,9 @@
     }
    },
    "shell": {
-    "clear_volume_m3": 11.0,
-    "shell_m2": 30.0,
-    "shell_mass_t": 0.6,
+    "clear_volume_m3": 10.84,
+    "shell_m2": 29.7,
+    "shell_mass_t": 0.59,
     "fitting_outside_m": 2.1,
     "existing_fitting_outside_m": 2.2,
     "fits_existing_fitting": true,
@@ -3545,26 +3545,26 @@
    "chamber": {
     "clear_radius_m": 1.05,
     "clear_diameter_m": 2.1,
-    "body_radius_m": 0.929,
+    "body_radius_m": 0.916,
     "clear_length_m": 3.55,
     "outer_bulkhead_a_m": 6.15,
     "inner_bulkhead_a_m": 2.5,
     "inner_leaf_floor_a_m": 0.96,
     "leaf_face_a_m": 5.96,
-    "body_top_a_m": 4.785,
+    "body_top_a_m": 4.735,
     "sp12_floor_r_m": 1.25,
     "radial_budget_m": -0.29,
     "fits_radially": false,
     "outer_leaf": {
-     "gap": 1.175,
-     "hinge_deg": 90.0
+     "gap": 1.225,
+     "hinge_deg": 270.0
     },
     "volume_m3": 12.3,
     "hull_skin_m": 6.4,
     "fitting_outside_m": 2.2,
     "existing_fitting_outside_m": 2.2
    },
-   "chamber_length_set_by": "supported_frame",
+   "chamber_length_set_by": "supported_mattress",
    "eva002_chamber": {
     "clear_diameter_m": 2.1,
     "clear_length_m": 3.35,
@@ -3572,7 +3572,7 @@
     "basis": "EVA-002: routine pair and the free-limp rescue pairings only"
    },
    "fitting": {
-    "x": 101.8494,
+    "x": 134.1,
     "theta_deg": 50.0,
     "port_face_a_m": 6.8,
     "wall_m": 0.05
@@ -3581,24 +3581,24 @@
     {
      "variant": "instructor",
      "pose": "chamber",
-     "theta_deg": 0.0,
+     "theta_deg": 90.0,
      "shift_m": [
-      0.389,
-      -0.008
+      0.3484,
+      -0.0
      ],
-     "a_top_m": 4.785,
-     "zmax_m": 1.893
+     "a_top_m": 4.735,
+     "zmax_m": 1.828
     },
     {
      "variant": "newcomer",
      "pose": "chamber",
-     "theta_deg": 180.0,
+     "theta_deg": 270.0,
      "shift_m": [
-      -0.416,
-      0.012
+      -0.3656,
+      0.0045
      ],
-     "a_top_m": 4.785,
-     "zmax_m": 1.807
+     "a_top_m": 4.735,
+     "zmax_m": 1.746
     }
    ],
    "rescue_occupants": [
@@ -3606,24 +3606,24 @@
      {
       "variant": "instructor",
       "pose": "rescue",
-      "theta_deg": 0.0,
+      "theta_deg": 180.0,
       "shift_m": [
-       0.5505,
-       -0.0023
+       0.5671,
+       -0.0727
       ],
-      "a_top_m": 4.785,
-      "zmax_m": 1.983
+      "a_top_m": 4.735,
+      "zmax_m": 1.919
      },
      {
       "variant": "newcomer",
       "pose": "casualty",
-      "theta_deg": 180.0,
+      "theta_deg": 360.0,
       "shift_m": [
-       -0.3335,
-       -0.1517
+       -0.3209,
+       0.1588
       ],
-      "a_top_m": 4.785,
-      "zmax_m": 0.928
+      "a_top_m": 4.735,
+      "zmax_m": 0.86
      }
     ],
     [
@@ -3632,166 +3632,166 @@
       "pose": "rescue",
       "theta_deg": 0.0,
       "shift_m": [
-       0.5817,
-       -0.0726
+       0.5508,
+       -0.0911
       ],
-      "a_top_m": 4.785,
-      "zmax_m": 1.899
+      "a_top_m": 4.735,
+      "zmax_m": 1.838
      },
      {
       "variant": "instructor",
       "pose": "casualty",
       "theta_deg": 180.0,
       "shift_m": [
-       -0.3283,
-       -0.2191
+       -0.3412,
+       -0.3101
       ],
-      "a_top_m": 4.785,
-      "zmax_m": 0.956
+      "a_top_m": 4.735,
+      "zmax_m": 0.884
      }
     ],
     [
      {
       "variant": "instructor",
       "pose": "rescue",
-      "theta_deg": 0.0,
+      "theta_deg": 210.0,
       "shift_m": [
-       0.3833,
-       0.0569
+       0.4005,
+       0.0651
       ],
-      "a_top_m": 4.785,
-      "zmax_m": 1.983
+      "a_top_m": 4.735,
+      "zmax_m": 1.919
      },
      {
       "variant": "newcomer",
       "pose": "supported_frame",
-      "theta_deg": 180.0,
+      "theta_deg": 390.0,
       "shift_m": [
-       -0.3747,
-       -0.0691
+       -0.3706,
+       0.079
       ],
-      "a_top_m": 4.785,
-      "zmax_m": 1.907
+      "a_top_m": 4.735,
+      "zmax_m": 1.846
      }
     ],
     [
      {
       "variant": "newcomer",
       "pose": "rescue",
-      "theta_deg": 0.0,
+      "theta_deg": 210.0,
       "shift_m": [
-       0.4111,
-       0.0134
+       0.405,
+       0.0964
       ],
-      "a_top_m": 4.785,
-      "zmax_m": 1.899
+      "a_top_m": 4.735,
+      "zmax_m": 1.838
      },
      {
       "variant": "instructor",
       "pose": "supported_frame",
-      "theta_deg": 180.0,
+      "theta_deg": 390.0,
       "shift_m": [
-       -0.3489,
-       -0.1021
+       -0.3685,
+       0.1018
       ],
-      "a_top_m": 4.785,
-      "zmax_m": 1.993
+      "a_top_m": 4.735,
+      "zmax_m": 1.928
      }
     ],
     [
      {
       "variant": "instructor",
       "pose": "rescue",
-      "theta_deg": 0.0,
+      "theta_deg": 180.0,
       "shift_m": [
-       0.3845,
-       0.0897
+       0.381,
+       -0.1252
       ],
-      "a_top_m": 4.785,
-      "zmax_m": 1.983
+      "a_top_m": 4.735,
+      "zmax_m": 1.919
      },
      {
       "variant": "newcomer",
       "pose": "supported_mattress",
-      "theta_deg": 180.0,
+      "theta_deg": 360.0,
       "shift_m": [
-       -0.3515,
-       -0.0397
+       -0.371,
+       -0.0022
       ],
-      "a_top_m": 4.785,
-      "zmax_m": 1.867
+      "a_top_m": 4.735,
+      "zmax_m": 1.806
      }
     ],
     [
      {
       "variant": "newcomer",
       "pose": "rescue",
-      "theta_deg": 0.0,
+      "theta_deg": 180.0,
       "shift_m": [
-       0.3855,
-       0.0845
+       0.406,
+       -0.0942
       ],
-      "a_top_m": 4.785,
-      "zmax_m": 1.899
+      "a_top_m": 4.735,
+      "zmax_m": 1.838
      },
      {
       "variant": "instructor",
       "pose": "supported_mattress",
-      "theta_deg": 180.0,
+      "theta_deg": 360.0,
       "shift_m": [
-       -0.3535,
-       -0.0345
+       -0.352,
+       0.0058
       ],
-      "a_top_m": 4.785,
-      "zmax_m": 1.953
+      "a_top_m": 4.735,
+      "zmax_m": 1.888
      }
     ],
     [
      {
       "variant": "instructor",
       "pose": "rescue",
-      "theta_deg": 0.0,
+      "theta_deg": 180.0,
       "shift_m": [
-       0.379,
-       0.1255
+       0.4254,
+       -0.1174
       ],
-      "a_top_m": 4.785,
-      "zmax_m": 1.983
+      "a_top_m": 4.735,
+      "zmax_m": 1.919
      },
      {
       "variant": "newcomer",
       "pose": "supported_kit",
-      "theta_deg": 180.0,
+      "theta_deg": 360.0,
       "shift_m": [
-       -0.379,
-       -0.1255
+       -0.3616,
+       0.1251
       ],
-      "a_top_m": 4.785,
-      "zmax_m": 1.907
+      "a_top_m": 4.735,
+      "zmax_m": 1.846
      }
     ],
     [
      {
       "variant": "newcomer",
       "pose": "rescue",
-      "theta_deg": 0.0,
+      "theta_deg": 180.0,
       "shift_m": [
-       0.38,
-       0.1202
+       0.4441,
+       -0.0874
       ],
-      "a_top_m": 4.785,
-      "zmax_m": 1.899
+      "a_top_m": 4.735,
+      "zmax_m": 1.838
      },
      {
       "variant": "instructor",
       "pose": "supported_kit",
-      "theta_deg": 180.0,
+      "theta_deg": 360.0,
       "shift_m": [
-       -0.38,
-       -0.1202
+       -0.3429,
+       0.1376
       ],
-      "a_top_m": 4.785,
-      "zmax_m": 1.993
+      "a_top_m": 4.735,
+      "zmax_m": 1.928
      }
     ]
    ],
@@ -3799,155 +3799,155 @@
     "instructor.chamber": {
      "label": "suited, arms along the body",
      "routine": true,
-     "need_m": 0.857,
+     "need_m": 0.746,
      "tilt_deg": [
       0.0,
       0.0
      ],
-     "margin_m": 0.343,
+     "margin_m": 0.454,
      "status": "PASS"
     },
     "instructor.hatch_pass": {
      "label": "suited, hands ahead (hatch passage)",
      "routine": true,
-     "need_m": 1.074,
+     "need_m": 0.971,
      "tilt_deg": [
       0.0,
       0.0
      ],
-     "margin_m": 0.126,
+     "margin_m": 0.229,
      "status": "PASS"
     },
     "instructor.casualty": {
      "label": "casualty, free limp (unrestrained)",
      "routine": false,
-     "need_m": 1.299,
+     "need_m": 1.214,
      "tilt_deg": [
-      10.0,
+      0.0,
       10.0
      ],
-     "margin_m": -0.099,
+     "margin_m": -0.014,
      "status": "FAIL"
     },
     "instructor.supported": {
      "label": "casualty, limbs secured, no support",
      "routine": false,
-     "need_m": 0.857,
+     "need_m": 0.71,
      "tilt_deg": [
       0.0,
       0.0
      ],
-     "margin_m": 0.343,
+     "margin_m": 0.49,
      "status": "PASS"
     },
     "instructor.supported_frame": {
      "label": "casualty on a full-length litter frame",
      "routine": false,
-     "need_m": 0.857,
+     "need_m": 0.797,
      "tilt_deg": [
       0.0,
       0.0
      ],
-     "margin_m": 0.343,
+     "margin_m": 0.403,
      "status": "PASS"
     },
     "instructor.supported_mattress": {
      "label": "casualty in a vacuum mattress",
      "routine": false,
-     "need_m": 0.979,
+     "need_m": 0.829,
      "tilt_deg": [
       0.0,
       0.0
      ],
-     "margin_m": 0.221,
+     "margin_m": 0.371,
      "status": "PASS"
     },
     "instructor.supported_kit": {
      "label": "casualty on the frame with a med/O2 kit",
      "routine": false,
-     "need_m": 1.007,
+     "need_m": 0.89,
      "tilt_deg": [
       10.0,
       0.0
      ],
-     "margin_m": 0.193,
+     "margin_m": 0.31,
      "status": "PASS"
     },
     "newcomer.chamber": {
      "label": "suited, arms along the body",
      "routine": true,
-     "need_m": 0.832,
+     "need_m": 0.777,
      "tilt_deg": [
       0.0,
       0.0
      ],
-     "margin_m": 0.368,
+     "margin_m": 0.423,
      "status": "PASS"
     },
     "newcomer.hatch_pass": {
      "label": "suited, hands ahead (hatch passage)",
      "routine": true,
-     "need_m": 1.026,
+     "need_m": 0.993,
      "tilt_deg": [
       0.0,
       0.0
      ],
-     "margin_m": 0.174,
+     "margin_m": 0.207,
      "status": "PASS"
     },
     "newcomer.casualty": {
      "label": "casualty, free limp (unrestrained)",
      "routine": false,
-     "need_m": 1.221,
+     "need_m": 1.192,
      "tilt_deg": [
-      10.0,
+      0.0,
       10.0
      ],
-     "margin_m": -0.021,
-     "status": "FAIL"
+     "margin_m": 0.008,
+     "status": "MARGINAL"
     },
     "newcomer.supported": {
      "label": "casualty, limbs secured, no support",
      "routine": false,
-     "need_m": 0.832,
+     "need_m": 0.733,
      "tilt_deg": [
-      0.0,
+      10.0,
       0.0
      ],
-     "margin_m": 0.368,
+     "margin_m": 0.467,
      "status": "PASS"
     },
     "newcomer.supported_frame": {
      "label": "casualty on a full-length litter frame",
      "routine": false,
-     "need_m": 0.832,
+     "need_m": 0.773,
      "tilt_deg": [
       0.0,
       0.0
      ],
-     "margin_m": 0.368,
+     "margin_m": 0.427,
      "status": "PASS"
     },
     "newcomer.supported_mattress": {
      "label": "casualty in a vacuum mattress",
      "routine": false,
-     "need_m": 0.953,
+     "need_m": 0.852,
      "tilt_deg": [
-      0.0,
+      10.0,
       0.0
      ],
-     "margin_m": 0.247,
+     "margin_m": 0.348,
      "status": "PASS"
     },
     "newcomer.supported_kit": {
      "label": "casualty on the frame with a med/O2 kit",
      "routine": false,
-     "need_m": 0.994,
+     "need_m": 0.892,
      "tilt_deg": [
       10.0,
       0.0
      ],
-     "margin_m": 0.206,
+     "margin_m": 0.308,
      "status": "PASS"
     }
    },
@@ -4003,8 +4003,8 @@
         0.0
        ],
        "x_m": [
-        102.449,
-        103.849
+        134.7,
+        136.1
        ],
        "az_deg": [
         32.2,
@@ -4065,8 +4065,8 @@
         0.0
        ],
        "x_m": [
-        99.849,
-        101.249
+        132.1,
+        133.5
        ],
        "az_deg": [
         32.2,
@@ -4127,8 +4127,8 @@
         1.3
        ],
        "x_m": [
-        101.149,
-        102.549
+        133.4,
+        134.8
        ],
        "az_deg": [
         64.4,
@@ -4189,8 +4189,8 @@
         -1.3
        ],
        "x_m": [
-        101.149,
-        102.549
+        133.4,
+        134.8
        ],
        "az_deg": [
         7.5,
@@ -4295,34 +4295,34 @@
      "hand": "left on the lever and the strap (right hand on a handhold ahead of the waist, feet in the restraint)",
      "routine_position": true,
      "lever_pivot_chamber": [
-      4.188,
-      0.642,
-      -0.436
+      4.203,
+      0.776,
+      0.253
      ],
      "lever_grip_radius_m": 0.174,
-     "lever_station_a_m": 4.188,
-     "bracket_m": 0.274,
+     "lever_station_a_m": 4.203,
+     "bracket_m": 0.233,
      "bracket_ok": true,
-     "lever_to_wall_m": 0.068,
-     "lever_status": "PASS",
-     "torque_tube_m": 1.832,
-     "strap_grip_high_a_m": 4.661,
-     "strap_length_m": 1.299,
+     "lever_to_wall_m": -0.032,
+     "lever_status": "FAIL",
+     "torque_tube_m": 1.817,
+     "strap_grip_high_a_m": 4.676,
+     "strap_length_m": 1.284,
      "strap_attach_rho_m": 0.6,
-     "body_to_wall_m": 0.103,
-     "body_status": "PASS",
-     "partner_gap_m": 0.159,
+     "body_to_wall_m": -0.041,
+     "body_status": "FAIL",
+     "partner_gap_m": 0.092,
      "partner_status": "PASS",
-     "grips_to_partner_m": 0.662,
-     "body_to_leaf_sweep_m": 0.171,
+     "grips_to_partner_m": 0.863,
+     "body_to_leaf_sweep_m": 0.181,
      "sweep_status": "PASS",
      "strap_note": "the strap hand meets the shut leaf and follows it down as it swings in: the hand moves with the leaf, the body stays below its sweep",
      "shoulder_flex_ok": true,
      "shoulder_flex_max_deg": 109.1,
-     "shoulder_limit_deg": 120.0,
+     "shoulder_limit_deg": 130.0,
      "pitch_backup": {
-      "pitch_deg": 70.0,
-      "needed_radius_alone_m": 1.799,
+      "pitch_deg": 60.0,
+      "needed_radius_alone_m": 1.655,
       "chamber_radius_m": 1.05,
       "status": "FAIL",
       "note": "the rigid suited body tilted about its feet sweeps far across the chamber axis"
@@ -4332,34 +4332,34 @@
      "hand": "left on the lever and the strap (right hand on a handhold ahead of the waist, feet in the restraint)",
      "routine_position": true,
      "lever_pivot_chamber": [
-      4.257,
-      -0.646,
-      0.465
+      4.268,
+      -0.818,
+      -0.226
      ],
      "lever_grip_radius_m": 0.123,
-     "lever_station_a_m": 4.257,
-     "bracket_m": 0.254,
+     "lever_station_a_m": 4.268,
+     "bracket_m": 0.201,
      "bracket_ok": true,
-     "lever_to_wall_m": 0.087,
-     "lever_status": "PASS",
-     "torque_tube_m": 1.763,
-     "strap_grip_high_a_m": 4.661,
-     "strap_length_m": 1.299,
+     "lever_to_wall_m": -0.003,
+     "lever_status": "FAIL",
+     "torque_tube_m": 1.752,
+     "strap_grip_high_a_m": 4.672,
+     "strap_length_m": 1.288,
      "strap_attach_rho_m": 0.6,
-     "body_to_wall_m": 0.135,
-     "body_status": "PASS",
-     "partner_gap_m": 0.193,
+     "body_to_wall_m": 0.002,
+     "body_status": "MARGINAL",
+     "partner_gap_m": 0.068,
      "partner_status": "PASS",
-     "grips_to_partner_m": 0.684,
-     "body_to_leaf_sweep_m": 0.113,
+     "grips_to_partner_m": 0.87,
+     "body_to_leaf_sweep_m": 0.185,
      "sweep_status": "PASS",
      "strap_note": "the strap hand meets the shut leaf and follows it down as it swings in: the hand moves with the leaf, the body stays below its sweep",
      "shoulder_flex_ok": true,
      "shoulder_flex_max_deg": 109.1,
-     "shoulder_limit_deg": 120.0,
+     "shoulder_limit_deg": 130.0,
      "pitch_backup": {
-      "pitch_deg": 70.0,
-      "needed_radius_alone_m": 1.72,
+      "pitch_deg": 60.0,
+      "needed_radius_alone_m": 1.586,
       "chamber_radius_m": 1.05,
       "status": "FAIL",
       "note": "the rigid suited body tilted about its feet sweeps far across the chamber axis"
@@ -4369,12 +4369,12 @@
    "rescue": {
     "full_length_supported": {
      "label": "full-length supported casualty on a litter frame (EVA-058 preferred)",
-     "door_need_m": 0.857,
-     "door_margin_m": 0.343,
+     "door_need_m": 0.797,
+     "door_margin_m": 0.403,
      "door_status": "PASS",
      "chamber_need": [
       2.1,
-      3.5
+      3.3
      ],
      "chamber_has": [
       2.1,
@@ -4385,12 +4385,12 @@
     },
     "unrestrained_limp": {
      "label": "unrestrained limp casualty (free neutral body posture)",
-     "door_need_m": 1.299,
-     "door_margin_m": -0.099,
+     "door_need_m": 1.214,
+     "door_margin_m": -0.014,
      "door_status": "FAIL",
      "chamber_need": [
       2.1,
-      3.35
+      3.3
      ],
      "chamber_has": [
       2.1,
@@ -4401,8 +4401,24 @@
     },
     "stabilized_no_support": {
      "label": "limbs secured, straight and neutral, no support (permissible only medically)",
-     "door_need_m": 0.857,
-     "door_margin_m": 0.343,
+     "door_need_m": 0.733,
+     "door_margin_m": 0.467,
+     "door_status": "PASS",
+     "chamber_need": [
+      2.1,
+      3.25
+     ],
+     "chamber_has": [
+      2.1,
+      3.55
+     ],
+     "chamber_fits": true,
+     "status": "PASS"
+    },
+    "vacuum_mattress": {
+     "label": "casualty in a vacuum mattress",
+     "door_need_m": 0.852,
+     "door_margin_m": 0.348,
      "door_status": "PASS",
      "chamber_need": [
       2.1,
@@ -4415,30 +4431,14 @@
      "chamber_fits": true,
      "status": "PASS"
     },
-    "vacuum_mattress": {
-     "label": "casualty in a vacuum mattress",
-     "door_need_m": 0.979,
-     "door_margin_m": 0.221,
-     "door_status": "PASS",
-     "chamber_need": [
-      2.1,
-      3.5
-     ],
-     "chamber_has": [
-      2.1,
-      3.55
-     ],
-     "chamber_fits": true,
-     "status": "PASS"
-    },
     "with_equipment": {
      "label": "casualty on the frame with a medical/O2 kit",
-     "door_need_m": 1.007,
-     "door_margin_m": 0.193,
+     "door_need_m": 0.892,
+     "door_margin_m": 0.308,
      "door_status": "PASS",
      "chamber_need": [
       2.1,
-      3.5
+      3.35
      ],
      "chamber_has": [
       2.1,
@@ -4494,21 +4494,21 @@
    "chamber": {
     "clear_radius_m": 1.2000000000000002,
     "clear_diameter_m": 2.4,
-    "body_radius_m": 0.929,
-    "clear_length_m": 3.7,
+    "body_radius_m": 0.916,
+    "clear_length_m": 3.6,
     "outer_bulkhead_a_m": 6.1,
-    "inner_bulkhead_a_m": 2.3,
-    "inner_leaf_floor_a_m": 0.61,
+    "inner_bulkhead_a_m": 2.4,
+    "inner_leaf_floor_a_m": 0.71,
     "leaf_face_a_m": 5.91,
     "body_top_a_m": 4.61,
     "sp12_floor_r_m": 1.25,
-    "radial_budget_m": -0.64,
+    "radial_budget_m": -0.54,
     "fits_radially": false,
     "outer_leaf": {
      "gap": 1.3,
      "hinge_deg": 90.0
     },
-    "volume_m3": 16.74,
+    "volume_m3": 16.29,
     "hull_skin_m": 6.4,
     "fitting_outside_m": 2.5,
     "existing_fitting_outside_m": 2.2
@@ -4516,12 +4516,12 @@
    "chamber_length_set_by": "supported_mattress",
    "eva002_chamber": {
     "clear_diameter_m": 2.4,
-    "clear_length_m": 3.5,
-    "volume_m3": 15.83,
+    "clear_length_m": 3.45,
+    "volume_m3": 15.61,
     "basis": "EVA-002: routine pair and the free-limp rescue pairings only"
    },
    "fitting": {
-    "x": 101.8494,
+    "x": 134.1,
     "theta_deg": 50.0,
     "port_face_a_m": 6.8,
     "wall_m": 0.05
@@ -4530,24 +4530,24 @@
     {
      "variant": "instructor",
      "pose": "chamber",
-     "theta_deg": 0.0,
+     "theta_deg": 90.0,
      "shift_m": [
-      0.389,
-      -0.008
+      0.3484,
+      -0.0
      ],
      "a_top_m": 4.61,
-     "zmax_m": 1.893
+     "zmax_m": 1.828
     },
     {
      "variant": "newcomer",
      "pose": "chamber",
-     "theta_deg": 180.0,
+     "theta_deg": 270.0,
      "shift_m": [
-      -0.416,
-      0.012
+      -0.3656,
+      0.0045
      ],
      "a_top_m": 4.61,
-     "zmax_m": 1.807
+     "zmax_m": 1.746
     }
    ],
    "rescue_occupants": [
@@ -4555,24 +4555,24 @@
      {
       "variant": "instructor",
       "pose": "rescue",
-      "theta_deg": 0.0,
+      "theta_deg": 180.0,
       "shift_m": [
-       0.5505,
-       -0.0023
+       0.5671,
+       -0.0727
       ],
       "a_top_m": 4.61,
-      "zmax_m": 1.983
+      "zmax_m": 1.919
      },
      {
       "variant": "newcomer",
       "pose": "casualty",
-      "theta_deg": 180.0,
+      "theta_deg": 360.0,
       "shift_m": [
-       -0.3335,
-       -0.1517
+       -0.3209,
+       0.1588
       ],
       "a_top_m": 4.61,
-      "zmax_m": 0.928
+      "zmax_m": 0.86
      }
     ],
     [
@@ -4581,166 +4581,166 @@
       "pose": "rescue",
       "theta_deg": 0.0,
       "shift_m": [
-       0.5817,
-       -0.0726
+       0.5508,
+       -0.0911
       ],
       "a_top_m": 4.61,
-      "zmax_m": 1.899
+      "zmax_m": 1.838
      },
      {
       "variant": "instructor",
       "pose": "casualty",
       "theta_deg": 180.0,
       "shift_m": [
-       -0.3283,
-       -0.2191
+       -0.3412,
+       -0.3101
       ],
       "a_top_m": 4.61,
-      "zmax_m": 0.956
+      "zmax_m": 0.884
      }
     ],
     [
      {
       "variant": "instructor",
       "pose": "rescue",
-      "theta_deg": 0.0,
+      "theta_deg": 210.0,
       "shift_m": [
-       0.3833,
-       0.0569
+       0.4005,
+       0.0651
       ],
       "a_top_m": 4.61,
-      "zmax_m": 1.983
+      "zmax_m": 1.919
      },
      {
       "variant": "newcomer",
       "pose": "supported_frame",
-      "theta_deg": 180.0,
+      "theta_deg": 390.0,
       "shift_m": [
-       -0.3747,
-       -0.0691
+       -0.3706,
+       0.079
       ],
       "a_top_m": 4.61,
-      "zmax_m": 1.907
+      "zmax_m": 1.846
      }
     ],
     [
      {
       "variant": "newcomer",
       "pose": "rescue",
-      "theta_deg": 0.0,
+      "theta_deg": 210.0,
       "shift_m": [
-       0.4111,
-       0.0134
+       0.405,
+       0.0964
       ],
       "a_top_m": 4.61,
-      "zmax_m": 1.899
+      "zmax_m": 1.838
      },
      {
       "variant": "instructor",
       "pose": "supported_frame",
-      "theta_deg": 180.0,
+      "theta_deg": 390.0,
       "shift_m": [
-       -0.3489,
-       -0.1021
+       -0.3685,
+       0.1018
       ],
       "a_top_m": 4.61,
-      "zmax_m": 1.993
+      "zmax_m": 1.928
      }
     ],
     [
      {
       "variant": "instructor",
       "pose": "rescue",
-      "theta_deg": 0.0,
+      "theta_deg": 180.0,
       "shift_m": [
-       0.3845,
-       0.0897
+       0.381,
+       -0.1252
       ],
       "a_top_m": 4.61,
-      "zmax_m": 1.983
+      "zmax_m": 1.919
      },
      {
       "variant": "newcomer",
       "pose": "supported_mattress",
-      "theta_deg": 180.0,
+      "theta_deg": 360.0,
       "shift_m": [
-       -0.3515,
-       -0.0397
+       -0.371,
+       -0.0022
       ],
       "a_top_m": 4.61,
-      "zmax_m": 1.867
+      "zmax_m": 1.806
      }
     ],
     [
      {
       "variant": "newcomer",
       "pose": "rescue",
-      "theta_deg": 0.0,
+      "theta_deg": 180.0,
       "shift_m": [
-       0.3855,
-       0.0845
+       0.406,
+       -0.0942
       ],
       "a_top_m": 4.61,
-      "zmax_m": 1.899
+      "zmax_m": 1.838
      },
      {
       "variant": "instructor",
       "pose": "supported_mattress",
-      "theta_deg": 180.0,
+      "theta_deg": 360.0,
       "shift_m": [
-       -0.3535,
-       -0.0345
+       -0.352,
+       0.0058
       ],
       "a_top_m": 4.61,
-      "zmax_m": 1.953
+      "zmax_m": 1.888
      }
     ],
     [
      {
       "variant": "instructor",
       "pose": "rescue",
-      "theta_deg": 0.0,
+      "theta_deg": 180.0,
       "shift_m": [
-       0.379,
-       0.1255
+       0.4254,
+       -0.1174
       ],
       "a_top_m": 4.61,
-      "zmax_m": 1.983
+      "zmax_m": 1.919
      },
      {
       "variant": "newcomer",
       "pose": "supported_kit",
-      "theta_deg": 180.0,
+      "theta_deg": 360.0,
       "shift_m": [
-       -0.379,
-       -0.1255
+       -0.3616,
+       0.1251
       ],
       "a_top_m": 4.61,
-      "zmax_m": 1.907
+      "zmax_m": 1.846
      }
     ],
     [
      {
       "variant": "newcomer",
       "pose": "rescue",
-      "theta_deg": 0.0,
+      "theta_deg": 180.0,
       "shift_m": [
-       0.38,
-       0.1202
+       0.4441,
+       -0.0874
       ],
       "a_top_m": 4.61,
-      "zmax_m": 1.899
+      "zmax_m": 1.838
      },
      {
       "variant": "instructor",
       "pose": "supported_kit",
-      "theta_deg": 180.0,
+      "theta_deg": 360.0,
       "shift_m": [
-       -0.38,
-       -0.1202
+       -0.3429,
+       0.1376
       ],
       "a_top_m": 4.61,
-      "zmax_m": 1.993
+      "zmax_m": 1.928
      }
     ]
    ],
@@ -4748,155 +4748,155 @@
     "instructor.chamber": {
      "label": "suited, arms along the body",
      "routine": true,
-     "need_m": 0.857,
+     "need_m": 0.746,
      "tilt_deg": [
       0.0,
       0.0
      ],
-     "margin_m": 0.493,
+     "margin_m": 0.604,
      "status": "PASS"
     },
     "instructor.hatch_pass": {
      "label": "suited, hands ahead (hatch passage)",
      "routine": true,
-     "need_m": 1.074,
+     "need_m": 0.971,
      "tilt_deg": [
       0.0,
       0.0
      ],
-     "margin_m": 0.276,
+     "margin_m": 0.379,
      "status": "PASS"
     },
     "instructor.casualty": {
      "label": "casualty, free limp (unrestrained)",
      "routine": false,
-     "need_m": 1.299,
+     "need_m": 1.214,
      "tilt_deg": [
-      10.0,
+      0.0,
       10.0
      ],
-     "margin_m": 0.051,
+     "margin_m": 0.136,
      "status": "PASS"
     },
     "instructor.supported": {
      "label": "casualty, limbs secured, no support",
      "routine": false,
-     "need_m": 0.857,
+     "need_m": 0.71,
      "tilt_deg": [
       0.0,
       0.0
      ],
-     "margin_m": 0.493,
+     "margin_m": 0.64,
      "status": "PASS"
     },
     "instructor.supported_frame": {
      "label": "casualty on a full-length litter frame",
      "routine": false,
-     "need_m": 0.857,
+     "need_m": 0.797,
      "tilt_deg": [
       0.0,
       0.0
      ],
-     "margin_m": 0.493,
+     "margin_m": 0.553,
      "status": "PASS"
     },
     "instructor.supported_mattress": {
      "label": "casualty in a vacuum mattress",
      "routine": false,
-     "need_m": 0.979,
+     "need_m": 0.829,
      "tilt_deg": [
       0.0,
       0.0
      ],
-     "margin_m": 0.371,
+     "margin_m": 0.521,
      "status": "PASS"
     },
     "instructor.supported_kit": {
      "label": "casualty on the frame with a med/O2 kit",
      "routine": false,
-     "need_m": 1.007,
+     "need_m": 0.89,
      "tilt_deg": [
       10.0,
       0.0
      ],
-     "margin_m": 0.343,
+     "margin_m": 0.46,
      "status": "PASS"
     },
     "newcomer.chamber": {
      "label": "suited, arms along the body",
      "routine": true,
-     "need_m": 0.832,
+     "need_m": 0.777,
      "tilt_deg": [
       0.0,
       0.0
      ],
-     "margin_m": 0.518,
+     "margin_m": 0.573,
      "status": "PASS"
     },
     "newcomer.hatch_pass": {
      "label": "suited, hands ahead (hatch passage)",
      "routine": true,
-     "need_m": 1.026,
+     "need_m": 0.993,
      "tilt_deg": [
       0.0,
       0.0
      ],
-     "margin_m": 0.324,
+     "margin_m": 0.357,
      "status": "PASS"
     },
     "newcomer.casualty": {
      "label": "casualty, free limp (unrestrained)",
      "routine": false,
-     "need_m": 1.221,
+     "need_m": 1.192,
      "tilt_deg": [
-      10.0,
+      0.0,
       10.0
      ],
-     "margin_m": 0.129,
+     "margin_m": 0.158,
      "status": "PASS"
     },
     "newcomer.supported": {
      "label": "casualty, limbs secured, no support",
      "routine": false,
-     "need_m": 0.832,
+     "need_m": 0.733,
      "tilt_deg": [
-      0.0,
+      10.0,
       0.0
      ],
-     "margin_m": 0.518,
+     "margin_m": 0.617,
      "status": "PASS"
     },
     "newcomer.supported_frame": {
      "label": "casualty on a full-length litter frame",
      "routine": false,
-     "need_m": 0.832,
+     "need_m": 0.773,
      "tilt_deg": [
       0.0,
       0.0
      ],
-     "margin_m": 0.518,
+     "margin_m": 0.577,
      "status": "PASS"
     },
     "newcomer.supported_mattress": {
      "label": "casualty in a vacuum mattress",
      "routine": false,
-     "need_m": 0.953,
+     "need_m": 0.852,
      "tilt_deg": [
-      0.0,
+      10.0,
       0.0
      ],
-     "margin_m": 0.397,
+     "margin_m": 0.498,
      "status": "PASS"
     },
     "newcomer.supported_kit": {
      "label": "casualty on the frame with a med/O2 kit",
      "routine": false,
-     "need_m": 0.994,
+     "need_m": 0.892,
      "tilt_deg": [
       10.0,
       0.0
      ],
-     "margin_m": 0.356,
+     "margin_m": 0.458,
      "status": "PASS"
     }
    },
@@ -4904,9 +4904,9 @@
    "mechanisms": {
     "hinged_into_sp12": {
      "concept": "EVA-002 plug leaf: hinged on the frame, seats from SP-12, swings 90 deg into SP-12",
-     "lowest_a_m": 0.61,
+     "lowest_a_m": 0.71,
      "floor_r_m": 1.25,
-     "radial_budget_m": -0.64,
+     "radial_budget_m": -0.54,
      "pressure": "SEATED by cabin pressure when the chamber is evacuated",
      "reverse_load_kn": 0.0,
      "seat_load_kn": 132.1,
@@ -4919,10 +4919,10 @@
     },
     "hinged_floor_recess": {
      "concept": "the same leaf; the SP-12 floor utility layer is removed under the swing (a local well down to the spine clearance)",
-     "lowest_a_m": 0.61,
+     "lowest_a_m": 0.71,
      "floor_r_m": 1.1,
-     "radial_budget_m": -0.49,
-     "recess_depth_m": 0.64,
+     "radial_budget_m": -0.39,
+     "recess_depth_m": 0.54,
      "recess_plan_m": [
       1.45,
       1.5
@@ -4939,69 +4939,69 @@
     },
     "parallel_plug_slide": {
      "concept": "a plug door on a parallel linkage: the leaf drops off its seat by a short stroke and slides sideways in the bulkhead plane (aircraft / bus plug-door kinematics); it never swings toward the floor",
-     "lowest_a_m": 1.93,
+     "lowest_a_m": 2.03,
      "floor_r_m": 1.25,
-     "radial_budget_m": 0.68,
+     "radial_budget_m": 0.78,
      "stroke_m": 0.08,
      "travel_m": 1.45,
      "parking": {
       "+X": {
        "centre_chamber": [
-        2.11,
+        2.21,
         1.45,
         0.0
        ],
        "x_m": [
-        102.524,
-        104.074
+        134.775,
+        136.325
        ],
        "az_deg": [
-        28.6,
-        71.4
+        29.6,
+        70.4
        ],
        "r_m": [
-        2.126,
-        2.276
+        2.22,
+        2.37
        ],
        "inside_sp12": true,
        "corners_chamber": [
         [
-         1.98,
+         2.08,
          0.675,
          -0.775
         ],
         [
-         1.98,
-         0.675,
-         0.775
-        ],
-        [
-         1.98,
-         2.225,
-         -0.775
-        ],
-        [
-         1.98,
-         2.225,
-         0.775
-        ],
-        [
-         2.14,
-         0.675,
-         -0.775
-        ],
-        [
-         2.14,
+         2.08,
          0.675,
          0.775
         ],
         [
-         2.14,
+         2.08,
          2.225,
          -0.775
         ],
         [
-         2.14,
+         2.08,
+         2.225,
+         0.775
+        ],
+        [
+         2.24,
+         0.675,
+         -0.775
+        ],
+        [
+         2.24,
+         0.675,
+         0.775
+        ],
+        [
+         2.24,
+         2.225,
+         -0.775
+        ],
+        [
+         2.24,
          2.225,
          0.775
         ]
@@ -5009,61 +5009,61 @@
       },
       "-X": {
        "centre_chamber": [
-        2.11,
+        2.21,
         -1.45,
         0.0
        ],
        "x_m": [
-        99.624,
-        101.174
+        131.875,
+        133.425
        ],
        "az_deg": [
-        28.6,
-        71.4
+        29.6,
+        70.4
        ],
        "r_m": [
-        2.126,
-        2.276
+        2.22,
+        2.37
        ],
        "inside_sp12": false,
        "corners_chamber": [
         [
-         1.98,
+         2.08,
          -2.225,
          -0.775
         ],
         [
-         1.98,
-         -2.225,
-         0.775
-        ],
-        [
-         1.98,
-         -0.675,
-         -0.775
-        ],
-        [
-         1.98,
-         -0.675,
-         0.775
-        ],
-        [
-         2.14,
-         -2.225,
-         -0.775
-        ],
-        [
-         2.14,
+         2.08,
          -2.225,
          0.775
         ],
         [
-         2.14,
+         2.08,
          -0.675,
          -0.775
         ],
         [
-         2.14,
+         2.08,
+         -0.675,
+         0.775
+        ],
+        [
+         2.24,
+         -2.225,
+         -0.775
+        ],
+        [
+         2.24,
+         -2.225,
+         0.775
+        ],
+        [
+         2.24,
+         -0.675,
+         -0.775
+        ],
+        [
+         2.24,
          -0.675,
          0.775
         ]
@@ -5071,61 +5071,61 @@
       },
       "+az": {
        "centre_chamber": [
-        2.11,
+        2.21,
         0.0,
         1.45
        ],
        "x_m": [
-        101.074,
-        102.624
+        133.325,
+        134.875
        ],
        "az_deg": [
-        67.5,
-        98.3
+        66.8,
+        96.9
        ],
        "r_m": [
-        2.092,
-        3.087
+        2.187,
+        3.157
        ],
        "inside_sp12": false,
        "corners_chamber": [
         [
-         1.98,
+         2.08,
          -0.775,
          0.675
         ],
         [
-         1.98,
-         -0.775,
-         2.225
-        ],
-        [
-         1.98,
-         0.775,
-         0.675
-        ],
-        [
-         1.98,
-         0.775,
-         2.225
-        ],
-        [
-         2.14,
-         -0.775,
-         0.675
-        ],
-        [
-         2.14,
+         2.08,
          -0.775,
          2.225
         ],
         [
-         2.14,
+         2.08,
          0.775,
          0.675
         ],
         [
-         2.14,
+         2.08,
+         0.775,
+         2.225
+        ],
+        [
+         2.24,
+         -0.775,
+         0.675
+        ],
+        [
+         2.24,
+         -0.775,
+         2.225
+        ],
+        [
+         2.24,
+         0.775,
+         0.675
+        ],
+        [
+         2.24,
          0.775,
          2.225
         ]
@@ -5133,61 +5133,61 @@
       },
       "-az": {
        "centre_chamber": [
-        2.11,
+        2.21,
         0.0,
         -1.45
        ],
        "x_m": [
-        101.074,
-        102.624
+        133.325,
+        134.875
        ],
        "az_deg": [
-        1.7,
-        32.5
+        3.1,
+        33.2
        ],
        "r_m": [
-        2.092,
-        3.087
+        2.187,
+        3.157
        ],
        "inside_sp12": false,
        "corners_chamber": [
         [
-         1.98,
+         2.08,
          -0.775,
          -2.225
         ],
         [
-         1.98,
-         -0.775,
-         -0.675
-        ],
-        [
-         1.98,
-         0.775,
-         -2.225
-        ],
-        [
-         1.98,
-         0.775,
-         -0.675
-        ],
-        [
-         2.14,
-         -0.775,
-         -2.225
-        ],
-        [
-         2.14,
+         2.08,
          -0.775,
          -0.675
         ],
         [
-         2.14,
+         2.08,
          0.775,
          -2.225
         ],
         [
-         2.14,
+         2.08,
+         0.775,
+         -0.675
+        ],
+        [
+         2.24,
+         -0.775,
+         -2.225
+        ],
+        [
+         2.24,
+         -0.775,
+         -0.675
+        ],
+        [
+         2.24,
+         0.775,
+         -2.225
+        ],
+        [
+         2.24,
          0.775,
          -0.675
         ]
@@ -5208,9 +5208,9 @@
     },
     "hinged_into_chamber": {
      "concept": "the inner leaf hinged to open up into the chamber (no swing into SP-12): the chamber grows by its swing",
-     "lowest_a_m": 0.67,
+     "lowest_a_m": 0.77,
      "floor_r_m": 1.25,
-     "radial_budget_m": -0.58,
+     "radial_budget_m": -0.48,
      "chamber_length_added_m": 1.55,
      "pressure": "UNSEATED: cabin pressure pushes the leaf off its seat whenever the chamber is below cabin pressure; the latches alone carry it",
      "reverse_load_kn": 132.1,
@@ -5224,9 +5224,9 @@
     },
     "bi_parting": {
      "concept": "two half leaves hinged at opposite rims, meeting on a centre seam: each swings half as deep",
-     "lowest_a_m": 1.335,
+     "lowest_a_m": 1.435,
      "floor_r_m": 1.25,
-     "radial_budget_m": 0.085,
+     "radial_budget_m": 0.185,
      "clear_aperture_with_mullion_m": 0.625,
      "pressure": "a seam beam (mullion) across the opening, or a latch-only seam between the leaves",
      "reverse_load_kn": null,
@@ -5244,34 +5244,34 @@
      "hand": "left on the lever and the strap (right hand on a handhold ahead of the waist, feet in the restraint)",
      "routine_position": true,
      "lever_pivot_chamber": [
-      4.013,
-      0.642,
-      -0.436
+      4.078,
+      0.776,
+      0.253
      ],
      "lever_grip_radius_m": 0.174,
-     "lever_station_a_m": 4.013,
-     "bracket_m": 0.424,
+     "lever_station_a_m": 4.078,
+     "bracket_m": 0.383,
      "bracket_ok": true,
-     "lever_to_wall_m": 0.218,
+     "lever_to_wall_m": 0.118,
      "lever_status": "PASS",
-     "torque_tube_m": 1.957,
-     "strap_grip_high_a_m": 4.486,
-     "strap_length_m": 1.424,
+     "torque_tube_m": 1.892,
+     "strap_grip_high_a_m": 4.551,
+     "strap_length_m": 1.359,
      "strap_attach_rho_m": 0.675,
-     "body_to_wall_m": 0.253,
+     "body_to_wall_m": 0.109,
      "body_status": "PASS",
-     "partner_gap_m": 0.159,
+     "partner_gap_m": 0.092,
      "partner_status": "PASS",
-     "grips_to_partner_m": 0.662,
-     "body_to_leaf_sweep_m": 0.165,
+     "grips_to_partner_m": 0.863,
+     "body_to_leaf_sweep_m": 0.128,
      "sweep_status": "PASS",
      "strap_note": "the strap hand meets the shut leaf and follows it down as it swings in: the hand moves with the leaf, the body stays below its sweep",
      "shoulder_flex_ok": true,
      "shoulder_flex_max_deg": 109.1,
-     "shoulder_limit_deg": 120.0,
+     "shoulder_limit_deg": 130.0,
      "pitch_backup": {
-      "pitch_deg": 70.0,
-      "needed_radius_alone_m": 1.799,
+      "pitch_deg": 60.0,
+      "needed_radius_alone_m": 1.655,
       "chamber_radius_m": 1.2,
       "status": "FAIL",
       "note": "the rigid suited body tilted about its feet sweeps far across the chamber axis"
@@ -5281,34 +5281,34 @@
      "hand": "left on the lever and the strap (right hand on a handhold ahead of the waist, feet in the restraint)",
      "routine_position": true,
      "lever_pivot_chamber": [
-      4.082,
-      -0.646,
-      0.465
+      4.143,
+      -0.818,
+      -0.226
      ],
      "lever_grip_radius_m": 0.123,
-     "lever_station_a_m": 4.082,
-     "bracket_m": 0.404,
+     "lever_station_a_m": 4.143,
+     "bracket_m": 0.351,
      "bracket_ok": true,
-     "lever_to_wall_m": 0.237,
+     "lever_to_wall_m": 0.147,
      "lever_status": "PASS",
-     "torque_tube_m": 1.888,
-     "strap_grip_high_a_m": 4.486,
-     "strap_length_m": 1.424,
+     "torque_tube_m": 1.827,
+     "strap_grip_high_a_m": 4.547,
+     "strap_length_m": 1.363,
      "strap_attach_rho_m": 0.675,
-     "body_to_wall_m": 0.285,
+     "body_to_wall_m": 0.152,
      "body_status": "PASS",
-     "partner_gap_m": 0.193,
+     "partner_gap_m": 0.068,
      "partner_status": "PASS",
-     "grips_to_partner_m": 0.684,
-     "body_to_leaf_sweep_m": 0.108,
+     "grips_to_partner_m": 0.87,
+     "body_to_leaf_sweep_m": 0.129,
      "sweep_status": "PASS",
      "strap_note": "the strap hand meets the shut leaf and follows it down as it swings in: the hand moves with the leaf, the body stays below its sweep",
      "shoulder_flex_ok": true,
      "shoulder_flex_max_deg": 109.1,
-     "shoulder_limit_deg": 120.0,
+     "shoulder_limit_deg": 130.0,
      "pitch_backup": {
-      "pitch_deg": 70.0,
-      "needed_radius_alone_m": 1.72,
+      "pitch_deg": 60.0,
+      "needed_radius_alone_m": 1.586,
       "chamber_radius_m": 1.2,
       "status": "FAIL",
       "note": "the rigid suited body tilted about its feet sweeps far across the chamber axis"
@@ -5318,24 +5318,8 @@
    "rescue": {
     "full_length_supported": {
      "label": "full-length supported casualty on a litter frame (EVA-058 preferred)",
-     "door_need_m": 0.857,
-     "door_margin_m": 0.493,
-     "door_status": "PASS",
-     "chamber_need": [
-      2.4,
-      3.6
-     ],
-     "chamber_has": [
-      2.4,
-      3.7
-     ],
-     "chamber_fits": true,
-     "status": "PASS"
-    },
-    "unrestrained_limp": {
-     "label": "unrestrained limp casualty (free neutral body posture)",
-     "door_need_m": 1.299,
-     "door_margin_m": 0.051,
+     "door_need_m": 0.797,
+     "door_margin_m": 0.553,
      "door_status": "PASS",
      "chamber_need": [
       2.4,
@@ -5343,15 +5327,47 @@
      ],
      "chamber_has": [
       2.4,
-      3.7
+      3.6
+     ],
+     "chamber_fits": true,
+     "status": "PASS"
+    },
+    "unrestrained_limp": {
+     "label": "unrestrained limp casualty (free neutral body posture)",
+     "door_need_m": 1.214,
+     "door_margin_m": 0.136,
+     "door_status": "PASS",
+     "chamber_need": [
+      2.4,
+      3.4
+     ],
+     "chamber_has": [
+      2.4,
+      3.6
      ],
      "chamber_fits": true,
      "status": "PASS"
     },
     "stabilized_no_support": {
      "label": "limbs secured, straight and neutral, no support (permissible only medically)",
-     "door_need_m": 0.857,
-     "door_margin_m": 0.493,
+     "door_need_m": 0.733,
+     "door_margin_m": 0.617,
+     "door_status": "PASS",
+     "chamber_need": [
+      2.4,
+      3.4
+     ],
+     "chamber_has": [
+      2.4,
+      3.6
+     ],
+     "chamber_fits": true,
+     "status": "PASS"
+    },
+    "vacuum_mattress": {
+     "label": "casualty in a vacuum mattress",
+     "door_need_m": 0.852,
+     "door_margin_m": 0.498,
      "door_status": "PASS",
      "chamber_need": [
       2.4,
@@ -5359,39 +5375,23 @@
      ],
      "chamber_has": [
       2.4,
-      3.7
-     ],
-     "chamber_fits": true,
-     "status": "PASS"
-    },
-    "vacuum_mattress": {
-     "label": "casualty in a vacuum mattress",
-     "door_need_m": 0.979,
-     "door_margin_m": 0.371,
-     "door_status": "PASS",
-     "chamber_need": [
-      2.4,
-      3.65
-     ],
-     "chamber_has": [
-      2.4,
-      3.7
+      3.6
      ],
      "chamber_fits": true,
      "status": "PASS"
     },
     "with_equipment": {
      "label": "casualty on the frame with a medical/O2 kit",
-     "door_need_m": 1.007,
-     "door_margin_m": 0.343,
+     "door_need_m": 0.892,
+     "door_margin_m": 0.458,
      "door_status": "PASS",
      "chamber_need": [
       2.4,
-      3.65
+      3.45
      ],
      "chamber_has": [
       2.4,
-      3.7
+      3.6
      ],
      "chamber_fits": true,
      "status": "PASS"
@@ -5413,9 +5413,9 @@
     }
    },
    "shell": {
-    "clear_volume_m3": 16.74,
-    "shell_m2": 38.9,
-    "shell_mass_t": 0.78,
+    "clear_volume_m3": 16.29,
+    "shell_m2": 38.1,
+    "shell_mass_t": 0.76,
     "fitting_outside_m": 2.5,
     "existing_fitting_outside_m": 2.2,
     "fits_existing_fitting": false,
@@ -5426,12 +5426,12 @@
  ],
  "preference": {
   "EVA3_SP11_110": {
-   "routine_door_ok": false,
+   "routine_door_ok": true,
    "mechanisms_pass": [
     "hinged_floor_recess",
     "parallel_plug_slide"
    ],
-   "latch_ok": true,
+   "latch_ok": false,
    "rescue": {
     "full_length_supported": "PASS",
     "unrestrained_limp": "FAIL",
@@ -5446,7 +5446,7 @@
    "mechanisms_pass": [
     "parallel_plug_slide"
    ],
-   "latch_ok": true,
+   "latch_ok": false,
    "rescue": {
     "full_length_supported": "PASS",
     "unrestrained_limp": "FAIL",

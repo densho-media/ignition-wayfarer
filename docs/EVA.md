@@ -33,6 +33,7 @@ as 45's WORKING TRADE CASE. Nothing here is canon. The loop and the rules are in
 | Envelope classes, route access, SP-11 door and chamber candidates, SP-12/13 rooms (pure) | `src/wayfarer/eva_access.py` → `references/p1_eva_access.json` |
 | Training route, hazard gates, flight state (pure) | `src/wayfarer/eva_route.py` → `wf_eva.json` |
 | Generator (Blender) | `src/wayfarer/build/eva_suit.py` → `assets/characters/WF_EVA_<WEARER>.blend` |
+| EVA system: companion drone, system scene, checks ([WAYFARER_EVA_SYSTEM.md](WAYFARER_EVA_SYSTEM.md)) | `data/eva_drone.toml`, `src/wayfarer/eva_system.py`, `build/eva_drone.py` → `WF_EVA_DRONE.blend`, `build/eva_scene.py` → `WF_EVA_SYSTEM.blend`, `validation/eva_system.py` → `references/p1_eva_system.json`, `tests/test_eva_system.py` |
 | Suit checks and access-pose hulls | `src/wayfarer/validation/eva_fit.py` → `references/p1_eva_fit.json`, `references/p1_eva_envelopes.json`, `runs/renders/p1/eva/fit/` |
 | SP-11/12/13 study in the vehicle | `src/wayfarer/validation/eva_airlock_study.py` → `references/p1_eva_airlock.json`, `runs/renders/p1/eva/airlock/`, `runs/<stamp>-eva/WF_EVA_AIRLOCK_STUDY.blend` |
 | EVA-003 SP-11 comparison (pure): 1.10 / 1.20 / 1.35 m, inner-hatch mechanisms, extension latch, rescue | `src/wayfarer/eva_sp11.py` → `references/p1_eva_sp11.json` |
@@ -59,42 +60,19 @@ This publishes the suits, the route and the access study with the ship and runs 
 
 ## Suit
 
-The suit is one assembly sized to each wearer (EXP-03); only the markings differ. Its WORKING look (EVA-052, Tale 26!28): off-white and
-grey shell, dark pressure joints, restrained Great Union deep-blue identifiers and a GU plate on the instructor, neutral grey on the
-visitor, orange only on the tethers and the emergency actuator. Both wear the existing MPFB bodies, unchanged: the 53-bone `game_engine`
-rig, the corrective shape keys and the five shared actions (RIG-02, RUN-006). The collections follow RUN-005:
-`WAYFARER_EVA_Y155 / PRESSURE / PROTECTION / JOINTS / HELMET / PLSS / COOLING / TETHERS / TOOLS / MARKINGS / RIG`. Every object carries
-`part_id` (`WAYFARER_EVA_Y155/<ASSEMBLY>/<PART>`), `assembly`, `job` and `geometry_status = PROTOTYPE`.
+The suit is one assembly sized to each wearer (EXP-03): the instructor and the newcomer wear the same suit, and only the markings differ
+(owner choice 2026-11-03). Its form is the EVA system's hybrid rear-entry suit: one continuous bladder, a rigid composite cuirass with an
+integral asymmetric helmet and a wrap-around visor, a slim patterned restraint on the limbs, and a life-support module that is the rear
+hatch and the companion drone's dock. Both wear the existing MPFB bodies, unchanged: the 53-bone `game_engine` rig, the corrective shape
+keys and the five shared actions (RIG-02, RUN-006). The collections follow RUN-005, plus the EVA system's PROPULSION and DOCK assemblies.
+Every object carries `part_id` (`WAYFARER_EVA_Y155/<ASSEMBLY>/<PART>`), `assembly`, `job` and `geometry_status = PROTOTYPE`.
 
-- **Soft layers.** The liquid cooling and ventilation garment (0.006 m), the continuous bladder (0.020 m) and the restraint plus
-  thermal/MMOD outer layer (0.034 m) are offset shells of the wearer's own body. Each is smoothed, kept at least 80 % of its offset
-  outside the skin, and skinned with the body's weights and correctives. Every existing action therefore drives them, and the pressure
-  boundary is continuous by construction. Gloves (0.011 m, the fingers kept) and boot uppers (0.026 m) are regions of the outer layer.
-- **Rigid parts, bone-mounted.**
-  - Pressure structure: the hard upper torso, lofted from the outer layer's chest sections plus 0.045 m; the waist body-seal ring; the
-    neck ring.
-  - Helmet: a sealed shell fixed to the torso (the head turns inside it), with a clear pressure visor window, a raised glare visor and an
-    identification band.
-  - PLSS: a 0.50 × 0.22 × 0.62 m packaging envelope (45 G-08…G-10 MODEL DISPLAY ONLY, EVA-050: no capacity, mass or duration follows
-    from it), drawn as two replaceable modules (upper: O₂ storage and regulation; lower: CO₂, fan/pump/separator, battery, radio) with
-    an interface band, keyed latches, a heat-rejection vent, side rescue handles, two fastened access panels, umbilical and cooling
-    ports and an orange emergency actuator. Its outer form is the old box's, so the measured envelopes are unchanged.
-  - Helmet details: visor pivots and two light / camera pods. Its cutaway internals are two primary
-    O₂ bottles, the separate emergency reserve, the regulator, the CO₂ cartridge, the fan/pump/separator, the heat exchanger, the battery
-    and the radio/telemetry unit.
-  - Displays: the chest display and control module, and the left forearm display.
-  - Joints: scye, upper-arm, hip, thigh and ankle bearings (flat machined bands with edge races and an inner sleeve; the hip bearing sits
-    on the thigh below the crotch line); elbow and knee convolutes (three-rib bellows, the outer layer charcoal over the elbow and knee,
-    RUN-017); wrist disconnects; gauntlets carried by the forearm. The PLSS stands on a mounting interface on the hard torso.
-  - Feet: rigid soles with toe hooks for foot restraints.
-  - Tethers and tools: two orange waist tether reels with captive hooks, and an inspection scanner with a lanyard ring.
-- **Sockets** (RIG-03/04) are bone-parented empties with stable ids. Hands: `SOCKET_HAND_L_GRIP`, `_R_GRIP`, `_R_TOOL`. Feet:
-  `SOCKET_TOE_HOOK_L/R`. Tethers: `SOCKET_TETHER_A/B`. Others: `SOCKET_TOOL_STOW`, `SOCKET_PLSS_SCU`, `SOCKET_HELMET_EYE`, `SOCKET_HUD`.
-  No bone is added.
-- **Validation body.** The full body stays in the file, hidden, for the coverage check. The exported head (`CHAR_<ID>_Head`) is a copy of
-  it with every covered face removed.
-
-Every size is a PROTOTYPE fit choice in `[rigid]` and `[layers]`. No check shrinks the suit (RUN-010).
+The suit's architecture, layers, articulation, life-support packaging (volume only: no capacity is verified), controls, suit thrusters,
+dock and its validation are in [WAYFARER_EVA_SYSTEM.md](WAYFARER_EVA_SYSTEM.md). This file keeps the owner rows, the actions, the access
+studies and the route. The sockets (RIG-03/04) are unchanged: `SOCKET_HAND_L_GRIP`, `_R_GRIP`, `_R_TOOL`, `SOCKET_TOE_HOOK_L/R`,
+`SOCKET_TETHER_A/B`, `SOCKET_TOOL_STOW`, `SOCKET_PLSS_SCU`, `SOCKET_HELMET_EYE`, `SOCKET_HUD`, plus `SOCKET_DRONE_DOCK`. No bone is added.
+The full body stays in the file, hidden, for the coverage check; the exported head (`CHAR_<ID>_Head`) is a copy of it with every covered
+face removed.
 
 ## Actions
 
@@ -130,22 +108,22 @@ a work-site handhold on a short stanchion at hip height beside the rail, a PROTO
 
 ## Checks (`references/p1_eva_fit.json`)
 
-**Pressure continuity** (ASSET-03). In every 6th frame of every action, each covered skin vertex must lie under the outer layer: a ray
-along the posed skin normal hits it within 0.12 m, or, in a fold, the nearest shell surface faces away or an axis ray crosses the shell an
-odd number of times. The head must also stay inside the helmet.
+**Pressure continuity** (ASSET-03). In every frame of every action, every body vertex must lie inside the pressure boundary: a ray
+along the posed skin normal meets a pressure surface within 0.12 m, or the vertex is enclosed (all 96 rays of a sphere meet one within
+3.0 m, longer than any chord through the suit). The pressure surfaces are the soft layers and the modelled rigid-to-soft parts: cuirass,
+helmet, neck ring, cuirass seal skirt, scye bearings and sleeves, module and gloves ([WAYFARER_EVA_SYSTEM.md](WAYFARER_EVA_SYSTEM.md)
+"Pressure boundary"). The head must also stay inside the helmet. The check also runs the nine system poses and intermediate frames of the
+transitions between them, and a negative control that cuts holes in the thigh, upper arm and sternum must find them.
 
-- All fifteen EVA actions, and the shared `idle`, `walk` and `sit`, pass for both suits.
-- The shared `crawl` fails: the interior crawl's 35° head lift takes the head out of the torso-fixed helmet (208 and 264 vertices). The
-  instructor's shared `climb` fails for 8 vertices by 2.5 mm (every 6th frame; up to 3.8 mm frame by frame): two vertices per arm at
-  the top of the upper arm, 45-62 mm below the shoulder joint, just outside the scye bearing, in the overhead-reach phase of each hand
-  (frames 0-7 and 22-32). The climb raises the arm to about 176° from the trunk, against 120° for the suit's display limit and at most
-  116-121° in the EVA actions (same bone measure), so the offset outer layer thins under the scye bearing. It is an unsuited ladder
-  motion, outside the suit's mobility, not a suit-geometry defect; the newcomer's slimmer arm passes. Interior motion is not suit motion
-  (EVA-040/041); the report marks each action `use` EVA or NOT_SUITED_EVA and gives `eva_coverage_pass` beside `coverage_pass`.
+- All fifteen EVA actions, the nine system poses, every intermediate sweep frame and the shared `idle`, `walk`, `sit` and `climb` pass
+  for both suits.
+- The shared `crawl` fails: the interior crawl's 35° head lift takes the head out of the torso-fixed helmet. Interior motion is not suit
+  motion (EVA-040/041); the report marks each action `use` EVA or NOT_SUITED_EVA and gives `eva_coverage_pass` beside `coverage_pass`.
 
-**Torso envelope** (RUN-010, 45 G-01/G-02). The suited torso cross-section with the PLSS, arms along the body, about its bounding-box
-centre: 0.64 × 0.80 m and a 0.91 m circle for the instructor (1.78 m), 0.60 × 0.77 m and 0.885 m for the newcomer (1.70 m). These are the
-owner's quoted figures; the access study below measures the smallest circles.
+**Torso envelope** (RUN-010, 45 G-01/G-02). The suited torso cross-section with the life-support module, arms along the body, about its
+bounding-box centre. The owner's quoted figures (0.64 × 0.80 m and a 0.91 m circle for the instructor at 1.78 m, 0.60 × 0.77 m and 0.885 m
+for the newcomer at 1.70 m) were measured on the earlier PLSS suit; the EVA system suit's readbacks are in `references/p1_eva_fit.json`
+after `workflow.py eva`, and the access study below measures the smallest circles.
 
 **Holds in the vehicle** (QA-02). The suited bodies posed at the training route's five holds are CLEAR of the vehicle meshes, with
 0.035–0.082 m least clearance. Renders are in `runs/renders/p1/eva/fit/`.
@@ -473,5 +451,6 @@ on the frame) and K (litter + kit) with a rescuer at each end, sampled found pos
   the stroke against the keeper lugs, the SP-12-side control station against donning stand A, and the turn of a litter in SP-12.
 - **Anchors.** A released exterior rail and anchor plan (SP-51) and alternate stationary, shaded paths (EVA-048).
 - **Character and look.** Final markings and the instructor's identity (Tale WTF-16, Art Style, Fashion); face and hair under the helmet.
-- **Compact PLSS and grasp.** The compact PLSS (ASSET-10) is built as a study beside the baseline and measured (docs/ACCESSORIES.md):
-  its packaging is OPEN for every subsystem (feasibility matrix there) and the choice is deferred until EVA-051's calculation. The glove grasp is a display pose (`build/eva_grasp.py`); grip force and glove torque are OPEN.
+- **Life-support module and grasp.** The rear-entry module replaces the two-module PLSS and the compact study (ASSET-10): its items fit
+  by volume, and every capacity stays OPEN until EVA-051's calculation (WAYFARER_EVA_SYSTEM.md). The glove grasp is a display pose
+  (`build/eva_grasp.py`); grip force and glove torque are OPEN.

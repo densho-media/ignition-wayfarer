@@ -1,0 +1,3707 @@
+{
+ "asset": "WF_EVA_SYSTEM",
+ "status": "PROTOTYPE",
+ "wearer": "instructor",
+ "dimensions": {
+  "astronaut_docked": {
+   "min": [
+    -0.641,
+    -0.267,
+    -0.017
+   ],
+   "max": [
+    0.641,
+    0.457,
+    1.829
+   ],
+   "size": [
+    1.282,
+    0.724,
+    1.846
+   ]
+  },
+  "astronaut": {
+   "min": [
+    -0.641,
+    -0.267,
+    -0.017
+   ],
+   "max": [
+    0.641,
+    0.296,
+    1.829
+   ],
+   "size": [
+    1.282,
+    0.563,
+    1.846
+   ]
+  },
+  "module": {
+   "min": [
+    -0.209,
+    -0.044,
+    0.939
+   ],
+   "max": [
+    0.209,
+    0.295,
+    1.539
+   ],
+   "size": [
+    0.417,
+    0.34,
+    0.6
+   ]
+  },
+  "drone_local": {
+   "min": [
+    -0.234,
+    -0.278,
+    -0.043
+   ],
+   "max": [
+    0.234,
+    0.27,
+    0.154
+   ],
+   "size": [
+    0.468,
+    0.548,
+    0.197
+   ]
+  },
+  "stature_m": 1.78,
+  "drone_depth_beyond_module_m": 0.162
+ },
+ "plume_envelope_length_m": {
+  "drone": 1.63,
+  "suit": 2.31
+ },
+ "states": {
+  "ready": {
+   "label": "1 EVA READY (DOCKED)",
+   "torso_shell_vs_outer": {
+    "trunk": 0,
+    "limb": 0
+   },
+   "helmet_vs_outer": {
+    "trunk": 0,
+    "limb": 0
+   },
+   "module_vs_outer": {
+    "trunk": 0,
+    "limb": 0
+   },
+   "arm_A_vs_drone": {},
+   "arm_B_vs_drone": {},
+   "arm_A_vs_arm_B": 0,
+   "tools_vs_drone": {},
+   "drone_vs_astronaut": {
+    "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PL": 24,
+    "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_SL": 24,
+    "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PU": 24,
+    "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Bolt_Socket_SU": 24,
+    "DOCK_Drone_Keel x DOCK_INSTRUCTOR_Suit_Capture_Tongue": 18
+   },
+   "drone_vs_module": {
+    "DOCK_Drone_Load_Pad_UR x LS_INSTRUCTOR_Module": 9,
+    "DOCK_Drone_Load_Pad_UL x LS_INSTRUCTOR_Module": 9,
+    "DOCK_Drone_Load_Pad_LR x LS_INSTRUCTOR_Module": 7,
+    "DOCK_Drone_Load_Pad_LL x LS_INSTRUCTOR_Module": 7
+   },
+   "arms_tools_vs_astronaut": {},
+   "thrusters": "armed",
+   "suit_reserve": "isolated",
+   "suit_plume_hits": {},
+   "drone_plume_hits": {},
+   "drone_live_nozzles": 22,
+   "drone_envelope": {},
+   "drone_joint_limit_violations": [],
+   "hand_controller": {
+    "deployed": false,
+    "palm_to_grip_mm": 501.0,
+    "yaw_deg": 0.0,
+    "slide_m": 0.2747,
+    "vs_suit": {},
+    "vs_drone": {},
+    "to_release_mm": 49.3,
+    "grip_gap_mm": 74.4
+   }
+  },
+  "walk": {
+   "label": "2 WALK ON A DECK (DOCKED)",
+   "torso_shell_vs_outer": {
+    "trunk": 0,
+    "limb": 0
+   },
+   "helmet_vs_outer": {
+    "trunk": 0,
+    "limb": 0
+   },
+   "module_vs_outer": {
+    "trunk": 0,
+    "limb": 0
+   },
+   "arm_A_vs_drone": {},
+   "arm_B_vs_drone": {},
+   "arm_A_vs_arm_B": 0,
+   "tools_vs_drone": {},
+   "drone_vs_astronaut": {
+    "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PL": 24,
+    "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_SL": 24,
+    "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PU": 24,
+    "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Bolt_Socket_SU": 24,
+    "DOCK_Drone_Keel x DOCK_INSTRUCTOR_Suit_Capture_Tongue": 18
+   },
+   "drone_vs_module": {
+    "DOCK_Drone_Load_Pad_UR x LS_INSTRUCTOR_Module": 9,
+    "DOCK_Drone_Load_Pad_UL x LS_INSTRUCTOR_Module": 9,
+    "DOCK_Drone_Load_Pad_LR x LS_INSTRUCTOR_Module": 7,
+    "DOCK_Drone_Load_Pad_LL x LS_INSTRUCTOR_Module": 7
+   },
+   "arms_tools_vs_astronaut": {},
+   "thrusters": "safed",
+   "suit_reserve": "isolated",
+   "suit_plume_hits": {},
+   "drone_joint_limit_violations": [],
+   "hand_controller": {
+    "deployed": false,
+    "palm_to_grip_mm": 588.4,
+    "yaw_deg": 0.0,
+    "slide_m": 0.2747,
+    "vs_suit": {},
+    "vs_drone": {},
+    "to_release_mm": 49.3,
+    "grip_gap_mm": 74.7
+   }
+  },
+  "reach": {
+   "label": "3 REACH OVERHEAD",
+   "torso_shell_vs_outer": {
+    "trunk": 0,
+    "limb": 0
+   },
+   "helmet_vs_outer": {
+    "trunk": 0,
+    "limb": 0
+   },
+   "module_vs_outer": {
+    "trunk": 0,
+    "limb": 0
+   },
+   "arm_A_vs_drone": {},
+   "arm_B_vs_drone": {},
+   "arm_A_vs_arm_B": 0,
+   "tools_vs_drone": {},
+   "drone_vs_astronaut": {
+    "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PL": 24,
+    "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_SL": 24,
+    "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PU": 24,
+    "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Bolt_Socket_SU": 24,
+    "DOCK_Drone_Keel x DOCK_INSTRUCTOR_Suit_Capture_Tongue": 18
+   },
+   "drone_vs_module": {
+    "DOCK_Drone_Load_Pad_UR x LS_INSTRUCTOR_Module": 9,
+    "DOCK_Drone_Load_Pad_UL x LS_INSTRUCTOR_Module": 9,
+    "DOCK_Drone_Load_Pad_LR x LS_INSTRUCTOR_Module": 7,
+    "DOCK_Drone_Load_Pad_LL x LS_INSTRUCTOR_Module": 7
+   },
+   "arms_tools_vs_astronaut": {},
+   "thrusters": "safed",
+   "suit_reserve": "isolated",
+   "suit_plume_hits": {},
+   "drone_joint_limit_violations": [],
+   "hand_controller": {
+    "deployed": false,
+    "palm_to_grip_mm": 486.4,
+    "yaw_deg": 0.0,
+    "slide_m": 0.2747,
+    "vs_suit": {},
+    "vs_drone": {},
+    "to_release_mm": 49.3,
+    "grip_gap_mm": 74.4
+   }
+  },
+  "crouch": {
+   "label": "4 CROUCH",
+   "torso_shell_vs_outer": {
+    "trunk": 0,
+    "limb": 0
+   },
+   "helmet_vs_outer": {
+    "trunk": 0,
+    "limb": 0
+   },
+   "module_vs_outer": {
+    "trunk": 0,
+    "limb": 0
+   },
+   "arm_A_vs_drone": {},
+   "arm_B_vs_drone": {},
+   "arm_A_vs_arm_B": 0,
+   "tools_vs_drone": {},
+   "drone_vs_astronaut": {
+    "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PL": 24,
+    "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_SL": 24,
+    "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PU": 24,
+    "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Bolt_Socket_SU": 24,
+    "DOCK_Drone_Keel x DOCK_INSTRUCTOR_Suit_Capture_Tongue": 18
+   },
+   "drone_vs_module": {
+    "DOCK_Drone_Load_Pad_UR x LS_INSTRUCTOR_Module": 9,
+    "DOCK_Drone_Load_Pad_UL x LS_INSTRUCTOR_Module": 9,
+    "DOCK_Drone_Load_Pad_LR x LS_INSTRUCTOR_Module": 7,
+    "DOCK_Drone_Load_Pad_LL x LS_INSTRUCTOR_Module": 7
+   },
+   "arms_tools_vs_astronaut": {},
+   "thrusters": "safed",
+   "suit_reserve": "isolated",
+   "suit_plume_hits": {},
+   "drone_joint_limit_violations": [],
+   "hand_controller": {
+    "deployed": false,
+    "palm_to_grip_mm": 716.1,
+    "yaw_deg": 0.0,
+    "slide_m": 0.2747,
+    "vs_suit": {},
+    "vs_drone": {},
+    "to_release_mm": 49.3,
+    "grip_gap_mm": 74.3
+   }
+  },
+  "climb": {
+   "label": "5 CLIMB A LADDER",
+   "torso_shell_vs_outer": {
+    "trunk": 0,
+    "limb": 0
+   },
+   "helmet_vs_outer": {
+    "trunk": 0,
+    "limb": 0
+   },
+   "module_vs_outer": {
+    "trunk": 0,
+    "limb": 0
+   },
+   "arm_A_vs_drone": {},
+   "arm_B_vs_drone": {},
+   "arm_A_vs_arm_B": 0,
+   "tools_vs_drone": {},
+   "drone_vs_astronaut": {
+    "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PL": 24,
+    "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_SL": 24,
+    "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PU": 24,
+    "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Bolt_Socket_SU": 24,
+    "DOCK_Drone_Keel x DOCK_INSTRUCTOR_Suit_Capture_Tongue": 18
+   },
+   "drone_vs_module": {
+    "DOCK_Drone_Load_Pad_UR x LS_INSTRUCTOR_Module": 9,
+    "DOCK_Drone_Load_Pad_UL x LS_INSTRUCTOR_Module": 9,
+    "DOCK_Drone_Load_Pad_LR x LS_INSTRUCTOR_Module": 7,
+    "DOCK_Drone_Load_Pad_LL x LS_INSTRUCTOR_Module": 7
+   },
+   "arms_tools_vs_astronaut": {},
+   "thrusters": "safed",
+   "suit_reserve": "isolated",
+   "suit_plume_hits": {},
+   "drone_joint_limit_violations": [],
+   "hand_controller": {
+    "deployed": false,
+    "palm_to_grip_mm": 519.1,
+    "yaw_deg": 0.0,
+    "slide_m": 0.2747,
+    "vs_suit": {},
+    "vs_drone": {},
+    "to_release_mm": 49.3,
+    "grip_gap_mm": 73.5
+   }
+  },
+  "flight": {
+   "label": "6 FREE FLIGHT (DOCKED PROPULSION)",
+   "torso_shell_vs_outer": {
+    "trunk": 0,
+    "limb": 0
+   },
+   "helmet_vs_outer": {
+    "trunk": 0,
+    "limb": 0
+   },
+   "module_vs_outer": {
+    "trunk": 0,
+    "limb": 0
+   },
+   "arm_A_vs_drone": {},
+   "arm_B_vs_drone": {},
+   "arm_A_vs_arm_B": 0,
+   "tools_vs_drone": {},
+   "drone_vs_astronaut": {
+    "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PL": 24,
+    "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_SL": 24,
+    "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PU": 24,
+    "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Bolt_Socket_SU": 24,
+    "DOCK_Drone_Keel x DOCK_INSTRUCTOR_Suit_Capture_Tongue": 18
+   },
+   "drone_vs_module": {
+    "DOCK_Drone_Load_Pad_UR x LS_INSTRUCTOR_Module": 9,
+    "DOCK_Drone_Load_Pad_UL x LS_INSTRUCTOR_Module": 9,
+    "DOCK_Drone_Load_Pad_LR x LS_INSTRUCTOR_Module": 7,
+    "DOCK_Drone_Load_Pad_LL x LS_INSTRUCTOR_Module": 7
+   },
+   "arms_tools_vs_astronaut": {},
+   "thrusters": "armed",
+   "suit_reserve": "isolated",
+   "suit_plume_hits": {},
+   "drone_plume_hits": {},
+   "drone_live_nozzles": 22,
+   "drone_envelope": {},
+   "drone_joint_limit_violations": [],
+   "hand_controller": {
+    "deployed": true,
+    "palm_to_grip_mm": 52.6,
+    "yaw_deg": 150.58,
+    "slide_m": 0.4694,
+    "vs_suit": {},
+    "vs_drone": {},
+    "to_release_mm": 49.3,
+    "grip_gap_mm": 7.2
+   }
+  },
+  "detached": {
+   "label": "7 DRONE DETACHED, ARMS FOLDED",
+   "torso_shell_vs_outer": {
+    "trunk": 0,
+    "limb": 0
+   },
+   "helmet_vs_outer": {
+    "trunk": 0,
+    "limb": 0
+   },
+   "module_vs_outer": {
+    "trunk": 0,
+    "limb": 0
+   },
+   "arm_A_vs_drone": {},
+   "arm_B_vs_drone": {},
+   "arm_A_vs_arm_B": 0,
+   "tools_vs_drone": {},
+   "drone_vs_astronaut": {},
+   "drone_vs_module": {},
+   "arms_tools_vs_astronaut": {},
+   "thrusters": "armed",
+   "suit_reserve": "armed",
+   "suit_plume_hits": {},
+   "drone_plume_hits": {},
+   "drone_live_nozzles": 26,
+   "drone_envelope": {},
+   "suit_envelope": {},
+   "drone_joint_limit_violations": [],
+   "sensor_fov": {
+    "SENS_Drone_Stereo_L": {
+     "rays": 9,
+     "blocked": 0,
+     "first": []
+    },
+    "SENS_Drone_Stereo_R": {
+     "rays": 9,
+     "blocked": 0,
+     "first": []
+    },
+    "SENS_Drone_Lidar": {
+     "rays": 9,
+     "blocked": 0,
+     "first": []
+    },
+    "SENS_Drone_Inspection_Cam": {
+     "rays": 9,
+     "blocked": 0,
+     "first": []
+    },
+    "SENS_Drone_Thermal_IR": {
+     "rays": 9,
+     "blocked": 0,
+     "first": []
+    }
+   },
+   "hand_controller": {
+    "deployed": true,
+    "palm_to_grip_mm": 52.1,
+    "yaw_deg": 150.58,
+    "slide_m": 0.4694,
+    "vs_suit": {},
+    "vs_drone": {},
+    "to_release_mm": 49.3,
+    "grip_gap_mm": 7.0
+   }
+  },
+  "arms": {
+   "label": "8 DRONE DETACHED, ARMS DEPLOYED",
+   "torso_shell_vs_outer": {
+    "trunk": 0,
+    "limb": 0
+   },
+   "helmet_vs_outer": {
+    "trunk": 0,
+    "limb": 0
+   },
+   "module_vs_outer": {
+    "trunk": 0,
+    "limb": 0
+   },
+   "arm_A_vs_drone": {},
+   "arm_B_vs_drone": {},
+   "arm_A_vs_arm_B": 0,
+   "tools_vs_drone": {},
+   "drone_vs_astronaut": {},
+   "drone_vs_module": {},
+   "arms_tools_vs_astronaut": {},
+   "thrusters": "armed",
+   "suit_reserve": "armed",
+   "suit_plume_hits": {},
+   "drone_plume_hits": {},
+   "drone_live_nozzles": 26,
+   "drone_envelope": {},
+   "suit_envelope": {},
+   "drone_joint_limit_violations": [],
+   "sensor_fov": {
+    "SENS_Drone_Stereo_L": {
+     "rays": 9,
+     "blocked": 0,
+     "first": []
+    },
+    "SENS_Drone_Stereo_R": {
+     "rays": 9,
+     "blocked": 1,
+     "first": [
+      "ARMS_TOOLS:TOOL_Utility_Gripper_Body"
+     ]
+    },
+    "SENS_Drone_Lidar": {
+     "rays": 9,
+     "blocked": 0,
+     "first": []
+    },
+    "SENS_Drone_Inspection_Cam": {
+     "rays": 9,
+     "blocked": 0,
+     "first": []
+    },
+    "SENS_Drone_Thermal_IR": {
+     "rays": 9,
+     "blocked": 0,
+     "first": []
+    }
+   },
+   "hand_controller": {
+    "deployed": true,
+    "palm_to_grip_mm": 52.1,
+    "yaw_deg": 150.58,
+    "slide_m": 0.4694,
+    "vs_suit": {},
+    "vs_drone": {},
+    "to_release_mm": 49.3,
+    "grip_gap_mm": 7.0
+   }
+  },
+  "maintenance": {
+   "label": "9 ANCHORED MAINTENANCE (HULL SOCKET)",
+   "torso_shell_vs_outer": {
+    "trunk": 0,
+    "limb": 0
+   },
+   "helmet_vs_outer": {
+    "trunk": 0,
+    "limb": 0
+   },
+   "module_vs_outer": {
+    "trunk": 0,
+    "limb": 0
+   },
+   "arm_A_vs_drone": {},
+   "arm_B_vs_drone": {},
+   "arm_A_vs_arm_B": 0,
+   "tools_vs_drone": {},
+   "drone_vs_astronaut": {},
+   "drone_vs_module": {},
+   "arms_tools_vs_astronaut": {},
+   "thrusters": "safed",
+   "suit_reserve": "isolated",
+   "suit_plume_hits": {},
+   "drone_vs_hull": {
+    "DOCK_Drone_Bolt_PU x HULL_Service_Socket_Rail_S": 12,
+    "DOCK_Drone_Bolt_PL x HULL_Service_Socket_Rail_S": 12,
+    "DOCK_Drone_Bolt_SU x HULL_Service_Socket_Rail_P": 12,
+    "DOCK_Drone_Bolt_SL x HULL_Service_Socket_Rail_P": 12
+   },
+   "drone_joint_limit_violations": [],
+   "sensor_fov": {
+    "SENS_Drone_Stereo_L": {
+     "rays": 9,
+     "blocked": 0,
+     "first": []
+    },
+    "SENS_Drone_Stereo_R": {
+     "rays": 9,
+     "blocked": 0,
+     "first": []
+    },
+    "SENS_Drone_Lidar": {
+     "rays": 9,
+     "blocked": 0,
+     "first": []
+    },
+    "SENS_Drone_Inspection_Cam": {
+     "rays": 9,
+     "blocked": 0,
+     "first": []
+    },
+    "SENS_Drone_Thermal_IR": {
+     "rays": 9,
+     "blocked": 0,
+     "first": []
+    }
+   },
+   "hand_controller": {
+    "deployed": true,
+    "palm_to_grip_mm": 52.1,
+    "yaw_deg": 150.58,
+    "slide_m": 0.4694,
+    "vs_suit": {},
+    "vs_drone": {},
+    "to_release_mm": 49.3,
+    "grip_gap_mm": 7.0
+   }
+  },
+  "burn": {
+   "label": "10 BRACED UNDER THRUST (BURNBROW)",
+   "torso_shell_vs_outer": {
+    "trunk": 0,
+    "limb": 0
+   },
+   "helmet_vs_outer": {
+    "trunk": 0,
+    "limb": 0
+   },
+   "module_vs_outer": {
+    "trunk": 0,
+    "limb": 0
+   },
+   "arm_A_vs_drone": {},
+   "arm_B_vs_drone": {},
+   "arm_A_vs_arm_B": 0,
+   "tools_vs_drone": {},
+   "drone_vs_astronaut": {
+    "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PL": 24,
+    "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_SL": 24,
+    "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PU": 24,
+    "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Bolt_Socket_SU": 24,
+    "DOCK_Drone_Keel x DOCK_INSTRUCTOR_Suit_Capture_Tongue": 18
+   },
+   "drone_vs_module": {
+    "DOCK_Drone_Load_Pad_UR x LS_INSTRUCTOR_Module": 9,
+    "DOCK_Drone_Load_Pad_UL x LS_INSTRUCTOR_Module": 9,
+    "DOCK_Drone_Load_Pad_LR x LS_INSTRUCTOR_Module": 7,
+    "DOCK_Drone_Load_Pad_LL x LS_INSTRUCTOR_Module": 7
+   },
+   "arms_tools_vs_astronaut": {},
+   "thrusters": "safed",
+   "suit_reserve": "isolated",
+   "suit_plume_hits": {},
+   "drone_joint_limit_violations": [],
+   "hand_controller": {
+    "deployed": false,
+    "palm_to_grip_mm": 734.1,
+    "yaw_deg": 0.0,
+    "slide_m": 0.2747,
+    "vs_suit": {},
+    "vs_drone": {},
+    "to_release_mm": 49.3,
+    "grip_gap_mm": 73.9
+   }
+  },
+  "chase": {
+   "label": "11 FREE-FLIGHT CHASE (BROW GAMES PLACEHOLDER)",
+   "torso_shell_vs_outer": {
+    "trunk": 0,
+    "limb": 0
+   },
+   "helmet_vs_outer": {
+    "trunk": 0,
+    "limb": 0
+   },
+   "module_vs_outer": {
+    "trunk": 0,
+    "limb": 0
+   },
+   "arm_A_vs_drone": {},
+   "arm_B_vs_drone": {},
+   "arm_A_vs_arm_B": 0,
+   "tools_vs_drone": {},
+   "drone_vs_astronaut": {
+    "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PU": 24,
+    "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Bolt_Socket_SU": 24,
+    "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PL": 24,
+    "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_SL": 24,
+    "DOCK_Drone_Keel x DOCK_INSTRUCTOR_Suit_Capture_Tongue": 18
+   },
+   "drone_vs_module": {
+    "DOCK_Drone_Load_Pad_UR x LS_INSTRUCTOR_Module": 9,
+    "DOCK_Drone_Load_Pad_UL x LS_INSTRUCTOR_Module": 9,
+    "DOCK_Drone_Load_Pad_LR x LS_INSTRUCTOR_Module": 7,
+    "DOCK_Drone_Load_Pad_LL x LS_INSTRUCTOR_Module": 7
+   },
+   "arms_tools_vs_astronaut": {},
+   "thrusters": "armed",
+   "suit_reserve": "isolated",
+   "suit_plume_hits": {},
+   "drone_plume_hits": {},
+   "drone_live_nozzles": 22,
+   "drone_envelope": {},
+   "drone_joint_limit_violations": [],
+   "hand_controller": {
+    "deployed": true,
+    "palm_to_grip_mm": 52.5,
+    "yaw_deg": 150.58,
+    "slide_m": 0.4694,
+    "vs_suit": {},
+    "vs_drone": {},
+    "to_release_mm": 49.3,
+    "grip_gap_mm": 7.2
+   }
+  },
+  "approach": {
+   "label": "12 DOCKING APPROACH (ALIGNED, 0.26 M OUT)",
+   "torso_shell_vs_outer": {
+    "trunk": 0,
+    "limb": 0
+   },
+   "helmet_vs_outer": {
+    "trunk": 0,
+    "limb": 0
+   },
+   "module_vs_outer": {
+    "trunk": 0,
+    "limb": 0
+   },
+   "arm_A_vs_drone": {},
+   "arm_B_vs_drone": {},
+   "arm_A_vs_arm_B": 0,
+   "tools_vs_drone": {},
+   "drone_vs_astronaut": {},
+   "drone_vs_module": {},
+   "arms_tools_vs_astronaut": {},
+   "thrusters": "armed",
+   "suit_reserve": "isolated",
+   "suit_plume_hits": {},
+   "drone_plume_hits": {},
+   "drone_live_nozzles": 22,
+   "drone_envelope": {},
+   "drone_joint_limit_violations": [],
+   "hand_controller": {
+    "deployed": false,
+    "palm_to_grip_mm": 501.0,
+    "yaw_deg": 0.0,
+    "slide_m": 0.2747,
+    "vs_suit": {},
+    "vs_drone": {},
+    "to_release_mm": 49.3,
+    "grip_gap_mm": 74.4
+   }
+  },
+  "assist": {
+   "label": "13 DOCKED-ARM ASSISTANCE (STUDY)",
+   "torso_shell_vs_outer": {
+    "trunk": 0,
+    "limb": 0
+   },
+   "helmet_vs_outer": {
+    "trunk": 0,
+    "limb": 0
+   },
+   "module_vs_outer": {
+    "trunk": 0,
+    "limb": 0
+   },
+   "arm_A_vs_drone": {},
+   "arm_B_vs_drone": {},
+   "arm_A_vs_arm_B": 0,
+   "tools_vs_drone": {},
+   "drone_vs_astronaut": {
+    "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Bolt_Socket_SU": 24,
+    "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PU": 24,
+    "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PL": 24,
+    "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_SL": 24,
+    "DOCK_Drone_Keel x DOCK_INSTRUCTOR_Suit_Capture_Tongue": 18
+   },
+   "drone_vs_module": {
+    "DOCK_Drone_Load_Pad_UL x LS_INSTRUCTOR_Module": 9,
+    "DOCK_Drone_Load_Pad_UR x LS_INSTRUCTOR_Module": 9,
+    "DOCK_Drone_Load_Pad_LL x LS_INSTRUCTOR_Module": 7,
+    "DOCK_Drone_Load_Pad_LR x LS_INSTRUCTOR_Module": 7
+   },
+   "arms_tools_vs_astronaut": {},
+   "thrusters": "safed",
+   "suit_reserve": "isolated",
+   "suit_plume_hits": {},
+   "drone_joint_limit_violations": [],
+   "hand_controller": {
+    "deployed": false,
+    "palm_to_grip_mm": 501.0,
+    "yaw_deg": 0.0,
+    "slide_m": 0.2747,
+    "vs_suit": {},
+    "vs_drone": {},
+    "to_release_mm": 49.3,
+    "grip_gap_mm": 74.4
+   }
+  }
+ },
+ "pair_contacts": {
+  "ready": {
+   "astronaut": {
+    "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PL": 24,
+    "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_SL": 24,
+    "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PU": 24,
+    "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Bolt_Socket_SU": 24,
+    "DOCK_Drone_Keel x DOCK_INSTRUCTOR_Suit_Capture_Tongue": 18
+   },
+   "module": {
+    "DOCK_Drone_Load_Pad_UR x LS_INSTRUCTOR_Module": 9,
+    "DOCK_Drone_Load_Pad_UL x LS_INSTRUCTOR_Module": 9,
+    "DOCK_Drone_Load_Pad_LR x LS_INSTRUCTOR_Module": 7,
+    "DOCK_Drone_Load_Pad_LL x LS_INSTRUCTOR_Module": 7
+   }
+  },
+  "walk": {
+   "astronaut": {
+    "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PL": 24,
+    "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_SL": 24,
+    "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PU": 24,
+    "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Bolt_Socket_SU": 24,
+    "DOCK_Drone_Keel x DOCK_INSTRUCTOR_Suit_Capture_Tongue": 18
+   },
+   "module": {
+    "DOCK_Drone_Load_Pad_UR x LS_INSTRUCTOR_Module": 9,
+    "DOCK_Drone_Load_Pad_UL x LS_INSTRUCTOR_Module": 9,
+    "DOCK_Drone_Load_Pad_LR x LS_INSTRUCTOR_Module": 7,
+    "DOCK_Drone_Load_Pad_LL x LS_INSTRUCTOR_Module": 7
+   }
+  },
+  "reach": {
+   "astronaut": {
+    "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PL": 24,
+    "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_SL": 24,
+    "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PU": 24,
+    "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Bolt_Socket_SU": 24,
+    "DOCK_Drone_Keel x DOCK_INSTRUCTOR_Suit_Capture_Tongue": 18
+   },
+   "module": {
+    "DOCK_Drone_Load_Pad_UR x LS_INSTRUCTOR_Module": 9,
+    "DOCK_Drone_Load_Pad_UL x LS_INSTRUCTOR_Module": 9,
+    "DOCK_Drone_Load_Pad_LR x LS_INSTRUCTOR_Module": 7,
+    "DOCK_Drone_Load_Pad_LL x LS_INSTRUCTOR_Module": 7
+   }
+  },
+  "crouch": {
+   "astronaut": {
+    "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PL": 24,
+    "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_SL": 24,
+    "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PU": 24,
+    "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Bolt_Socket_SU": 24,
+    "DOCK_Drone_Keel x DOCK_INSTRUCTOR_Suit_Capture_Tongue": 18
+   },
+   "module": {
+    "DOCK_Drone_Load_Pad_UR x LS_INSTRUCTOR_Module": 9,
+    "DOCK_Drone_Load_Pad_UL x LS_INSTRUCTOR_Module": 9,
+    "DOCK_Drone_Load_Pad_LR x LS_INSTRUCTOR_Module": 7,
+    "DOCK_Drone_Load_Pad_LL x LS_INSTRUCTOR_Module": 7
+   }
+  },
+  "climb": {
+   "astronaut": {
+    "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PL": 24,
+    "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_SL": 24,
+    "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PU": 24,
+    "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Bolt_Socket_SU": 24,
+    "DOCK_Drone_Keel x DOCK_INSTRUCTOR_Suit_Capture_Tongue": 18
+   },
+   "module": {
+    "DOCK_Drone_Load_Pad_UR x LS_INSTRUCTOR_Module": 9,
+    "DOCK_Drone_Load_Pad_UL x LS_INSTRUCTOR_Module": 9,
+    "DOCK_Drone_Load_Pad_LR x LS_INSTRUCTOR_Module": 7,
+    "DOCK_Drone_Load_Pad_LL x LS_INSTRUCTOR_Module": 7
+   }
+  },
+  "flight": {
+   "astronaut": {
+    "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PL": 24,
+    "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_SL": 24,
+    "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PU": 24,
+    "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Bolt_Socket_SU": 24,
+    "DOCK_Drone_Keel x DOCK_INSTRUCTOR_Suit_Capture_Tongue": 18
+   },
+   "module": {
+    "DOCK_Drone_Load_Pad_UR x LS_INSTRUCTOR_Module": 9,
+    "DOCK_Drone_Load_Pad_UL x LS_INSTRUCTOR_Module": 9,
+    "DOCK_Drone_Load_Pad_LR x LS_INSTRUCTOR_Module": 7,
+    "DOCK_Drone_Load_Pad_LL x LS_INSTRUCTOR_Module": 7
+   }
+  },
+  "detached": {
+   "astronaut": {},
+   "module": {}
+  },
+  "arms": {
+   "astronaut": {},
+   "module": {}
+  },
+  "maintenance": {
+   "astronaut": {},
+   "module": {}
+  },
+  "burn": {
+   "astronaut": {
+    "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PL": 24,
+    "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_SL": 24,
+    "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PU": 24,
+    "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Bolt_Socket_SU": 24,
+    "DOCK_Drone_Keel x DOCK_INSTRUCTOR_Suit_Capture_Tongue": 18
+   },
+   "module": {
+    "DOCK_Drone_Load_Pad_UR x LS_INSTRUCTOR_Module": 9,
+    "DOCK_Drone_Load_Pad_UL x LS_INSTRUCTOR_Module": 9,
+    "DOCK_Drone_Load_Pad_LR x LS_INSTRUCTOR_Module": 7,
+    "DOCK_Drone_Load_Pad_LL x LS_INSTRUCTOR_Module": 7
+   }
+  },
+  "chase": {
+   "astronaut": {
+    "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PU": 24,
+    "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Bolt_Socket_SU": 24,
+    "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PL": 24,
+    "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_SL": 24,
+    "DOCK_Drone_Keel x DOCK_INSTRUCTOR_Suit_Capture_Tongue": 18
+   },
+   "module": {
+    "DOCK_Drone_Load_Pad_UR x LS_INSTRUCTOR_Module": 9,
+    "DOCK_Drone_Load_Pad_UL x LS_INSTRUCTOR_Module": 9,
+    "DOCK_Drone_Load_Pad_LR x LS_INSTRUCTOR_Module": 7,
+    "DOCK_Drone_Load_Pad_LL x LS_INSTRUCTOR_Module": 7
+   }
+  },
+  "approach": {
+   "astronaut": {},
+   "module": {}
+  },
+  "assist": {
+   "astronaut": {
+    "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Bolt_Socket_SU": 24,
+    "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PU": 24,
+    "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PL": 24,
+    "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_SL": 24,
+    "DOCK_Drone_Keel x DOCK_INSTRUCTOR_Suit_Capture_Tongue": 18
+   },
+   "module": {
+    "DOCK_Drone_Load_Pad_UL x LS_INSTRUCTOR_Module": 9,
+    "DOCK_Drone_Load_Pad_UR x LS_INSTRUCTOR_Module": 9,
+    "DOCK_Drone_Load_Pad_LL x LS_INSTRUCTOR_Module": 7,
+    "DOCK_Drone_Load_Pad_LR x LS_INSTRUCTOR_Module": 7
+   }
+  }
+ },
+ "hand_controller": {
+  "pivot": "CTRL_INSTRUCTOR_HCM_Pivot",
+  "links": [
+   "CTRL_INSTRUCTOR_HCM_Link_1",
+   "CTRL_INSTRUCTOR_HCM_Link_2"
+  ],
+  "housing": "CTRL_INSTRUCTOR_HCM_Hinge_Housing",
+  "release": "CTRL_INSTRUCTOR_Manual_Release",
+  "deploy_poses": [
+   "flight",
+   "deployed",
+   "chase"
+  ],
+  "stops": {
+   "yaw_deg": [
+    0.0,
+    150.58
+   ],
+   "slide_m": [
+    0.2747,
+    0.4694
+   ]
+  },
+  "reach_m": 0.469,
+  "grip_local": [
+   0.4423,
+   -0.1553,
+   0.4403
+  ],
+  "hinge_world": [
+   0.2345,
+   -0.0195,
+   1.0794
+  ],
+  "hinge_axis": [
+   -0.4336,
+   -0.1418,
+   -0.8899
+  ],
+  "seat_from_palm_mm": 52.6,
+  "grip_r_m": 0.018,
+  "grip_axis_link": [
+   -0.21302,
+   0.37771,
+   -0.90109
+  ],
+  "swing_deg": 150.6,
+  "telescope_m": 0.195,
+  "controls": {
+   "yaw": "HCM_Link_1 rotation_euler.z (rad, about the skewed hinge axis), stowed 0",
+   "slide": "HCM_Link_2 location.x (m)"
+  },
+  "states": {
+   "ready": {
+    "deployed": false,
+    "palm_to_grip_mm": 501.0,
+    "yaw_deg": 0.0,
+    "slide_m": 0.2747,
+    "vs_suit": {},
+    "vs_drone": {},
+    "to_release_mm": 49.3,
+    "grip_gap_mm": 74.4
+   },
+   "walk": {
+    "deployed": false,
+    "palm_to_grip_mm": 588.4,
+    "yaw_deg": 0.0,
+    "slide_m": 0.2747,
+    "vs_suit": {},
+    "vs_drone": {},
+    "to_release_mm": 49.3,
+    "grip_gap_mm": 74.7
+   },
+   "reach": {
+    "deployed": false,
+    "palm_to_grip_mm": 486.4,
+    "yaw_deg": 0.0,
+    "slide_m": 0.2747,
+    "vs_suit": {},
+    "vs_drone": {},
+    "to_release_mm": 49.3,
+    "grip_gap_mm": 74.4
+   },
+   "crouch": {
+    "deployed": false,
+    "palm_to_grip_mm": 716.1,
+    "yaw_deg": 0.0,
+    "slide_m": 0.2747,
+    "vs_suit": {},
+    "vs_drone": {},
+    "to_release_mm": 49.3,
+    "grip_gap_mm": 74.3
+   },
+   "climb": {
+    "deployed": false,
+    "palm_to_grip_mm": 519.1,
+    "yaw_deg": 0.0,
+    "slide_m": 0.2747,
+    "vs_suit": {},
+    "vs_drone": {},
+    "to_release_mm": 49.3,
+    "grip_gap_mm": 73.5
+   },
+   "flight": {
+    "deployed": true,
+    "palm_to_grip_mm": 52.6,
+    "yaw_deg": 150.58,
+    "slide_m": 0.4694,
+    "vs_suit": {},
+    "vs_drone": {},
+    "to_release_mm": 49.3,
+    "grip_gap_mm": 7.2
+   },
+   "detached": {
+    "deployed": true,
+    "palm_to_grip_mm": 52.1,
+    "yaw_deg": 150.58,
+    "slide_m": 0.4694,
+    "vs_suit": {},
+    "vs_drone": {},
+    "to_release_mm": 49.3,
+    "grip_gap_mm": 7.0
+   },
+   "arms": {
+    "deployed": true,
+    "palm_to_grip_mm": 52.1,
+    "yaw_deg": 150.58,
+    "slide_m": 0.4694,
+    "vs_suit": {},
+    "vs_drone": {},
+    "to_release_mm": 49.3,
+    "grip_gap_mm": 7.0
+   },
+   "maintenance": {
+    "deployed": true,
+    "palm_to_grip_mm": 52.1,
+    "yaw_deg": 150.58,
+    "slide_m": 0.4694,
+    "vs_suit": {},
+    "vs_drone": {},
+    "to_release_mm": 49.3,
+    "grip_gap_mm": 7.0
+   },
+   "burn": {
+    "deployed": false,
+    "palm_to_grip_mm": 734.1,
+    "yaw_deg": 0.0,
+    "slide_m": 0.2747,
+    "vs_suit": {},
+    "vs_drone": {},
+    "to_release_mm": 49.3,
+    "grip_gap_mm": 73.9
+   },
+   "chase": {
+    "deployed": true,
+    "palm_to_grip_mm": 52.5,
+    "yaw_deg": 150.58,
+    "slide_m": 0.4694,
+    "vs_suit": {},
+    "vs_drone": {},
+    "to_release_mm": 49.3,
+    "grip_gap_mm": 7.2
+   },
+   "approach": {
+    "deployed": false,
+    "palm_to_grip_mm": 501.0,
+    "yaw_deg": 0.0,
+    "slide_m": 0.2747,
+    "vs_suit": {},
+    "vs_drone": {},
+    "to_release_mm": 49.3,
+    "grip_gap_mm": 74.4
+   },
+   "assist": {
+    "deployed": false,
+    "palm_to_grip_mm": 501.0,
+    "yaw_deg": 0.0,
+    "slide_m": 0.2747,
+    "vs_suit": {},
+    "vs_drone": {},
+    "to_release_mm": 49.3,
+    "grip_gap_mm": 74.4
+   }
+  }
+ },
+ "approach_corridor_plumes": {
+  "0.50": {},
+  "0.26": {},
+  "0.12": {},
+  "0.05": {},
+  "0.03": {}
+ },
+ "plume_envelope": {
+  "model": "Simons far field, cold N2 n = 5, theta_lim 130 deg; axis + 5 rings to 30 deg x 16 azimuths, 2.3 m",
+  "limits_pa": {
+   "sensitive": 1.0,
+   "hardware": 5.0
+  },
+  "worst": {
+   "core": 0,
+   "sensitive_pa": 0.0,
+   "hardware_pa": 0.814
+  },
+  "violations": [],
+  "approach": {
+   "2.00": {},
+   "1.60": {
+    "NZ_DRN_NL_VEN": [
+     {
+      "blocker": "MODULE",
+      "object": "LS_INSTRUCTOR_Module",
+      "angle_deg": 24.0,
+      "distance_m": 1.63,
+      "pressure_pa": 0.809,
+      "core": false
+     }
+    ],
+    "NZ_DRN_NR_VEN": [
+     {
+      "blocker": "MODULE",
+      "object": "LS_INSTRUCTOR_Module",
+      "angle_deg": 24.0,
+      "distance_m": 1.63,
+      "pressure_pa": 0.809,
+      "core": false
+     }
+    ],
+    "NZ_DRN_TL_VEN": [
+     {
+      "blocker": "MODULE",
+      "object": "LS_INSTRUCTOR_Module",
+      "angle_deg": 24.0,
+      "distance_m": 1.625,
+      "pressure_pa": 0.814,
+      "core": false
+     }
+    ],
+    "NZ_DRN_TR_VEN": [
+     {
+      "blocker": "MODULE",
+      "object": "LS_INSTRUCTOR_Module",
+      "angle_deg": 24.0,
+      "distance_m": 1.625,
+      "pressure_pa": 0.814,
+      "core": false
+     }
+    ]
+   },
+   "1.20": {},
+   "0.90": {},
+   "0.70": {},
+   "0.50": {},
+   "0.26": {},
+   "0.12": {},
+   "0.05": {},
+   "0.03": {}
+  },
+  "arm_sweeps": {
+   "stowed>ready@0.25": {},
+   "stowed>ready@0.5": {},
+   "stowed>ready@0.75": {}
+  },
+  "arm_sweep_states": {
+   "ready": {
+    "state": "arms",
+    "thrusters": "armed"
+   },
+   "maintenance": {
+    "state": "maintenance",
+    "thrusters": "safed"
+   },
+   "assist": {
+    "state": "assist",
+    "thrusters": "safed"
+   }
+  },
+  "limits": "no reflection, plume-plume interaction, rarefied transition or contamination transport; pressures are order-of-magnitude, not qualification"
+ },
+ "propulsion": {
+  "budget": {
+   "n2_density_kg_m3": 313.6,
+   "drone_vessels": {
+    "volume_l": 4.98,
+    "n2_kg": 1.561,
+    "usable_kg": 1.405
+   },
+   "suit_reserve": {
+    "volume_l": 2.22,
+    "n2_kg": 0.695,
+    "usable_kg": 0.625
+   },
+   "drone_dry_kg": 24.8,
+   "drone_wet_kg": 26.36,
+   "suited_crew_wet_kg": 149.29,
+   "docked_kg": 175.66,
+   "dv_docked_drone_gas_m_s": 5.12,
+   "dv_drone_alone_m_s": 34.9,
+   "dv_suit_reserve_alone_m_s": 2.67,
+   "total_impulse_drone_ns": 896,
+   "total_impulse_reserve_ns": 398,
+   "drone_nozzle": {
+    "thrust_n": 4.0,
+    "throat_mm": 1.53,
+    "exit_mm": 6.9,
+    "mdot_g_s": 6.28
+   },
+   "suit_nozzle": {
+    "thrust_n": 8.0,
+    "throat_mm": 2.17,
+    "exit_mm": 9.7,
+    "mdot_g_s": 12.55
+   },
+   "reference": {
+    "SAFER": "about 1.4 kg GN2, 24 x 3.6 N, about 3 m/s (NASA)",
+    "MMU": "2 x 5.9 kg GN2, 24 x 7.6 N, about 20 m/s (NASA)"
+   }
+  },
+  "life_support": {
+   "items_l": {
+    "o2_primary_copv": 3.0,
+    "o2_secondary": 2.2,
+    "co2_swing_bed": 4.5,
+    "membrane_evaporator": 2.0,
+    "fan_pump_separator": 1.5,
+    "battery_1kwh": 2.5,
+    "avionics_radio": 1.0,
+    "n2_reserve_copv": 2.9,
+    "valves_regulators_lines": 2.0
+   },
+   "basis": {
+    "o2_primary_copv": "2 x 1.1 L water volume at 30 MPa, about 0.8 kg O2: PROVISIONAL",
+    "o2_secondary": "1.6 L water volume at 30 MPa, 0.60 kg O2: 30 min open-loop purge at a 2 kPa ppCO2 limit ([life_support]): PROVISIONAL",
+    "co2_swing_bed": "two-bed amine swing (ISS / xEMU class): PROVISIONAL",
+    "membrane_evaporator": "SWME class: PROVISIONAL, heat rejection OPEN",
+    "fan_pump_separator": "one integrated unit: PROVISIONAL",
+    "battery_1kwh": "Li-ion at 400 Wh/L: PROVISIONAL, duration OPEN",
+    "avionics_radio": "PROVISIONAL",
+    "n2_reserve_copv": "suit maneuvering reserve ([suit_propulsion])",
+    "valves_regulators_lines": "PROVISIONAL"
+   },
+   "sum_l": 21.6,
+   "with_packaging_l": 27.0,
+   "module_envelope_l": 27.7,
+   "envelope_method": "bounding box x 0.86",
+   "margin_l": 0.7,
+   "feedwater_in_hatch_l": 3.6,
+   "verified": "packing volume only; no capability is verified"
+  },
+  "life_support_budget": {
+   "status": "PROVISIONAL design targets (data/eva_suit.toml [life_support]); not IGNITION canon, not a qualification",
+   "target_h": {
+    "nominal": 8.0,
+    "reserve": 1.0,
+    "emergency_return_min": 30.0
+   },
+   "stores": {
+    "o2_primary_usable_kg": 0.821,
+    "o2_secondary_usable_kg": 0.597,
+    "feedwater_kg": 3.6,
+    "battery_usable_wh": 800.0,
+    "repress_o2_kg": 0.0272,
+    "suit_pressure_kpa": 29.6
+   },
+   "electronics_w": 60.0,
+   "cases": {
+    "low": {
+     "metabolic_w": 150.0,
+     "environment_w": -40.0,
+     "leak_kg_h": 0.005,
+     "o2_kg_h": 0.0383,
+     "co2_kg_h": 0.0448,
+     "vapour_kg_h": 0.044,
+     "swme_load_w": 140.0,
+     "feedwater_kg_h": 0.206,
+     "need_for_nominal_plus_reserve": {
+      "o2_kg": 0.417,
+      "feedwater_kg": 1.85,
+      "energy_wh": 540.0
+     },
+     "duration_h": {
+      "o2_h": 18.34,
+      "feedwater_h": 17.5,
+      "battery_h": 13.33
+     },
+     "limiting": "battery_h",
+     "duration_limit_h": 13.33,
+     "meets_target": true
+    },
+    "nominal": {
+     "metabolic_w": 250.0,
+     "environment_w": 0.0,
+     "leak_kg_h": 0.01,
+     "o2_kg_h": 0.0638,
+     "co2_kg_h": 0.0746,
+     "vapour_kg_h": 0.073,
+     "swme_load_w": 260.0,
+     "feedwater_kg_h": 0.382,
+     "need_for_nominal_plus_reserve": {
+      "o2_kg": 0.692,
+      "feedwater_kg": 3.44,
+      "energy_wh": 540.0
+     },
+     "duration_h": {
+      "o2_h": 10.76,
+      "feedwater_h": 9.42,
+      "battery_h": 13.33
+     },
+     "limiting": "feedwater_h",
+     "duration_limit_h": 9.42,
+     "meets_target": true
+    },
+    "high": {
+     "metabolic_w": 350.0,
+     "environment_w": 60.0,
+     "leak_kg_h": 0.02,
+     "o2_kg_h": 0.0894,
+     "co2_kg_h": 0.1045,
+     "vapour_kg_h": 0.103,
+     "swme_load_w": 400.0,
+     "feedwater_kg_h": 0.588,
+     "need_for_nominal_plus_reserve": {
+      "o2_kg": 1.011,
+      "feedwater_kg": 5.29,
+      "energy_wh": 540.0
+     },
+     "duration_h": {
+      "o2_h": 7.26,
+      "feedwater_h": 6.12,
+      "battery_h": 13.33
+     },
+     "limiting": "feedwater_h",
+     "duration_limit_h": 6.12,
+     "meets_target": false
+    }
+   },
+   "peak": {
+    "peak_w": 600.0,
+    "o2_kg_h": 0.153,
+    "swme_load_w": 540.0,
+    "note": "15 min peaks are inside the nominal profile; the SWME and fan are sized for the peak load"
+   },
+   "emergency": {
+    "purge_kg_h": 1.125,
+    "purge_minutes": 31.9,
+    "meets": true,
+    "ppco2_limit_kpa": 2.0
+   },
+   "o2_duration_sensitivity_h": {
+    "metabolic_150w": 16.44,
+    "metabolic_200w": 13.0,
+    "metabolic_250w": 10.76,
+    "metabolic_300w": 9.17,
+    "metabolic_350w": 7.99,
+    "metabolic_400w": 7.08
+   },
+   "heat_rejection_nominal_w": 260.0,
+   "consumable_mass_kg": 5.18,
+   "separation": "breathing O2 and propulsion N2 have separate vessels, regulators and manifolds; no shared line or cross-connect",
+   "monitoring": [
+    "ppO2 x2 (electrochemical)",
+    "ppCO2 x2 (NDIR)",
+    "suit pressure x2",
+    "vent-loop humidity and temperature",
+    "O2 primary and secondary P/T",
+    "feedwater quantity",
+    "LCVG inlet / outlet temperature",
+    "battery state of charge",
+    "time remaining = min over every consumable, shown on the cuff and relayed by the drone"
+   ],
+   "plumbing": [
+    "vent loop: fan -> swing bed -> helmet inlet over the visor -> return at the wrists and ankles",
+    "LCVG water loop: pump -> SWME -> gas trap -> garment",
+    "feedwater: hatch bladder -> SWME, back-pressure valve",
+    "O2: primary and secondary COPVs on separate regulators into the vent loop, secondary also feeds the purge valve",
+    "propulsion N2: reserve COPV and the drone's dock probe on their own manifold; no line, valve or regulator is shared with breathing gas"
+   ],
+   "limits": "steady-state rates; no transient thermal model, no CO2 bed sizing or humidity condensation model; suit pressure EVA-004 OPEN"
+  },
+  "structure": {
+   "status": "PRELIMINARY analytical estimate: limit loads x FoS, closed-form sections; no FE, no test, not a qualification",
+   "fos_ultimate": 1.5,
+   "dock": {
+    "moment_cases_nm": {
+     "kick": 166.8,
+     "burn": 27.1,
+     "crew_push": 2.1,
+     "arm_B_tip": 30.0,
+     "arm_A_tip": 10.1,
+     "driver_reaction": 5.0
+    },
+    "limit_moment_nm": 166.8,
+    "rating_nm": 260,
+    "ok": true,
+    "pull_cases_n": {
+     "kick": 556.0,
+     "burn": 387.8,
+     "anchor_gripper": 300.0,
+     "crew_push": 30.0
+    },
+    "limit_pull_n": 556.0,
+    "pull_rating_n": 2000,
+    "pull_ok": true,
+    "bolt_ultimate_load_n": 752.0,
+    "bolt_shear_capacity_n": 67860.0,
+    "bolt_margin": 89.2,
+    "latch_span_m": 0.23
+   },
+   "anchor": {
+    "same_interface": "the hull service socket copies the suit channel, so the dock figures apply"
+   },
+   "arm_roots": {
+    "A": {
+     "root_moment_nm": 10.1,
+     "section_modulus_cm3": 1.331,
+     "stress_mpa": 11.4,
+     "margin": 36.78
+    },
+    "B": {
+     "root_moment_nm": 30.0,
+     "section_modulus_cm3": 2.161,
+     "stress_mpa": 20.8,
+     "margin": 19.65
+    }
+   },
+   "couplings": {
+    "A": {
+     "tip_n": 20.0,
+     "lever_m": 0.068,
+     "moment_nm": 1.36,
+     "gap_opening_moment_nm": 9.6,
+     "margin": 3.71
+    },
+    "B": {
+     "tip_n": 60.0,
+     "lever_m": 0.082,
+     "moment_nm": 4.92,
+     "gap_opening_moment_nm": 9.6,
+     "margin": 0.3
+    }
+   },
+   "anchor_gripper": {
+    "gripper_anchor_pull_n": 300.0,
+    "max_off_axis_deg": 15.1,
+    "note": "the 300 N anchor-gripper rating holds for loads within this angle of the tool axis; beyond it the GU-SIF-S preload (fleet standard, unchanged) opens the flange: anchored work uses the keel socket instead"
+   },
+   "release": {
+    "unloaded_n": 15.0,
+    "loaded_n": 69.4,
+    "advantage": 4.0,
+    "glove_limit_n": 90.0,
+    "ok": true
+   },
+   "unknowns": "channel-wall bearing, module-to-cuirass mount and composite shell laminates need FE and test; the moment reaches the wearer only through the hard torso"
+  },
+  "arms": {
+   "A": {
+    "role": "precision",
+    "reach_m": 0.505,
+    "tip_force_n": 20.0,
+    "shoulder_torque_nm": 10.1,
+    "elbow_torque_nm": 6.1,
+    "wrist_torque_nm": 2.5,
+    "actuator": "strain-wave (harmonic) joint drives, 40-60 mm frame: about 20-45 N m peak each, back-drivable brake off"
+   },
+   "B": {
+    "role": "utility",
+    "reach_m": 0.5,
+    "tip_force_n": 60.0,
+    "shoulder_torque_nm": 30.0,
+    "elbow_torque_nm": 18.0,
+    "wrist_torque_nm": 7.2,
+    "actuator": "strain-wave (harmonic) joint drives, 40-60 mm frame: about 20-45 N m peak each, back-drivable brake off"
+   }
+  },
+  "coupling": {
+   "standard": "GU-SIF-S",
+   "outer_d_m": 0.04,
+   "pins": 3,
+   "contacts": 6,
+   "preload_n": 600.0
+  },
+  "tools": [
+   {
+    "key": "precision_gripper",
+    "modelled": true,
+    "mass_kg": 0.3,
+    "function": "small parts, connectors, samples; 2 x 12 mm jaw stroke, 25 N grip"
+   },
+   {
+    "key": "utility_gripper",
+    "modelled": true,
+    "mass_kg": 0.42,
+    "function": "larger objects, stabilisation, handrail anchoring; 2 x 22 mm, 150 N grip"
+   },
+   {
+    "key": "powered_driver",
+    "modelled": true,
+    "mass_kg": 0.38,
+    "function": "fasteners and panels: 1/4 in hex, 0.5-5 N m, reaction tab"
+   },
+   {
+    "key": "inspection_probe",
+    "modelled": false,
+    "mass_kg": 0.2,
+    "function": "borescope for narrow gaps (interface defined only)"
+   },
+   {
+    "key": "sampling_head",
+    "modelled": false,
+    "mass_kg": 0.3,
+    "function": "particulate and scraping samples, sealed canister"
+   },
+   {
+    "key": "cleaning_head",
+    "modelled": false,
+    "mass_kg": 0.25,
+    "function": "approved optical / radiator surfaces: microfibre + CO2 snow"
+   },
+   {
+    "key": "anchor_interface",
+    "modelled": false,
+    "mass_kg": 0.35,
+    "function": "clamps a standard hardpoint pin for anchored work"
+   }
+  ],
+  "authority_drone_free": {
+   "+Fx": {
+    "ok": true,
+    "max": 18.57,
+    "unit": "N",
+    "residual": 0.0
+   },
+   "-Fx": {
+    "ok": true,
+    "max": 18.58,
+    "unit": "N",
+    "residual": 0.0
+   },
+   "+Fy": {
+    "ok": true,
+    "max": 16.07,
+    "unit": "N",
+    "residual": 0.0
+   },
+   "-Fy": {
+    "ok": true,
+    "max": 7.02,
+    "unit": "N",
+    "residual": 0.0
+   },
+   "+Fz": {
+    "ok": true,
+    "max": 18.08,
+    "unit": "N",
+    "residual": 0.0
+   },
+   "-Fz": {
+    "ok": true,
+    "max": 17.52,
+    "unit": "N",
+    "residual": 0.0
+   },
+   "+Tx": {
+    "ok": true,
+    "max": 4.06,
+    "unit": "N m",
+    "residual": 0.0
+   },
+   "-Tx": {
+    "ok": true,
+    "max": 4.06,
+    "unit": "N m",
+    "residual": 0.0
+   },
+   "+Ty": {
+    "ok": true,
+    "max": 2.87,
+    "unit": "N m",
+    "residual": 0.0
+   },
+   "-Ty": {
+    "ok": true,
+    "max": 2.87,
+    "unit": "N m",
+    "residual": 0.0
+   },
+   "+Tz": {
+    "ok": true,
+    "max": 4.36,
+    "unit": "N m",
+    "residual": 0.0
+   },
+   "-Tz": {
+    "ok": true,
+    "max": 4.36,
+    "unit": "N m",
+    "residual": 0.0
+   }
+  },
+  "reaction": {
+   "free_flight": {
+    "max_steady_tool_force_n": 7.0,
+    "max_steady_tool_torque_nm": 2.87,
+    "note": "steady-state limit while the RCS holds station; the 0.5-5 N m driver range exceeds it, so torqued fasteners need anchoring"
+   },
+   "unanchored_0.5nm": {
+    "spin_up_deg_s_after_1s": 34.0,
+    "rcs_can_hold": true
+   },
+   "unanchored_2.0nm": {
+    "spin_up_deg_s_after_1s": 135.8,
+    "rcs_can_hold": true
+   },
+   "unanchored_5.0nm": {
+    "spin_up_deg_s_after_1s": 339.6,
+    "rcs_can_hold": false
+   },
+   "anchored": {
+    "dock_latch_pull_rating_n": 2000,
+    "dock_latch_moment_rating_nm": 260,
+    "note": "the keel locks into a hull service socket that copies the suit channel; the 5 N m driver reaction and 60 N tip load are far inside the rating (ratings PROTOTYPE)"
+   }
+  },
+  "single_failure_drone_free": {
+   "worst_axes_reachable": 12,
+   "worst_failed_index": 0,
+   "nozzles": 26
+  },
+  "drone_nozzles": 26,
+  "drone_inhibited_when_docked": 4,
+  "authority_drone_proximity": {
+   "+Fx": {
+    "ok": true,
+    "max": 18.05,
+    "unit": "N",
+    "residual": 0.0
+   },
+   "-Fx": {
+    "ok": true,
+    "max": 18.05,
+    "unit": "N",
+    "residual": 0.0
+   },
+   "+Fy": {
+    "ok": true,
+    "max": 12.46,
+    "unit": "N",
+    "residual": 0.0
+   },
+   "-Fy": {
+    "ok": true,
+    "max": 6.94,
+    "unit": "N",
+    "residual": 0.0
+   },
+   "+Fz": {
+    "ok": true,
+    "max": 8.63,
+    "unit": "N",
+    "residual": 0.0
+   },
+   "-Fz": {
+    "ok": true,
+    "max": 18.24,
+    "unit": "N",
+    "residual": 0.0
+   },
+   "+Tx": {
+    "ok": true,
+    "max": 3.61,
+    "unit": "N m",
+    "residual": 0.0
+   },
+   "-Tx": {
+    "ok": true,
+    "max": 1.92,
+    "unit": "N m",
+    "residual": 0.0
+   },
+   "+Ty": {
+    "ok": true,
+    "max": 1.73,
+    "unit": "N m",
+    "residual": 0.0001
+   },
+   "-Ty": {
+    "ok": true,
+    "max": 1.73,
+    "unit": "N m",
+    "residual": 0.0001
+   },
+   "+Tz": {
+    "ok": true,
+    "max": 4.32,
+    "unit": "N m",
+    "residual": 0.0
+   },
+   "-Tz": {
+    "ok": true,
+    "max": 4.32,
+    "unit": "N m",
+    "residual": 0.0
+   }
+  },
+  "single_failure_drone_proximity": {
+   "worst_axes_reachable": 12,
+   "worst_failed_index": 0,
+   "nozzles": 22
+  },
+  "near_suit_faults": {
+   "mass_kg": 26.36,
+   "inertia_kg_m2": [
+    0.745,
+    0.566,
+    1.141
+   ],
+   "live_nozzles": 22,
+   "requirements": {
+    "brake_force_n": 1.713,
+    "torque_nm": 0.0199,
+    "lateral_n": 0.527,
+    "margin": 2.0,
+    "braking_distance_m": 0.07,
+    "tipoff_deg_s": 2.0,
+    "align_tol_deg": 2.0
+   },
+   "authority": {
+    "+Fx": {
+     "ok": true,
+     "max": 18.05,
+     "unit": "N",
+     "residual": 0.0
+    },
+    "-Fx": {
+     "ok": true,
+     "max": 18.05,
+     "unit": "N",
+     "residual": 0.0
+    },
+    "+Fy": {
+     "ok": true,
+     "max": 12.46,
+     "unit": "N",
+     "residual": 0.0
+    },
+    "-Fy": {
+     "ok": true,
+     "max": 6.94,
+     "unit": "N",
+     "residual": 0.0
+    },
+    "+Fz": {
+     "ok": true,
+     "max": 8.63,
+     "unit": "N",
+     "residual": 0.0
+    },
+    "-Fz": {
+     "ok": true,
+     "max": 18.24,
+     "unit": "N",
+     "residual": 0.0
+    },
+    "+Tx": {
+     "ok": true,
+     "max": 3.61,
+     "unit": "N m",
+     "residual": 0.0
+    },
+    "-Tx": {
+     "ok": true,
+     "max": 1.92,
+     "unit": "N m",
+     "residual": 0.0
+    },
+    "+Ty": {
+     "ok": true,
+     "max": 1.73,
+     "unit": "N m",
+     "residual": 0.0001
+    },
+    "-Ty": {
+     "ok": true,
+     "max": 1.73,
+     "unit": "N m",
+     "residual": 0.0001
+    },
+    "+Tz": {
+     "ok": true,
+     "max": 4.32,
+     "unit": "N m",
+     "residual": 0.0
+    },
+    "-Tz": {
+     "ok": true,
+     "max": 4.32,
+     "unit": "N m",
+     "residual": 0.0
+    }
+   },
+   "cases": {
+    "none": {
+     "approach": {
+      "ok": true,
+      "short": {}
+     },
+     "braking": {
+      "ok": true,
+      "short": {}
+     },
+     "alignment": {
+      "ok": true,
+      "short": {}
+     },
+     "capture": {
+      "ok": true,
+      "short": {}
+     },
+     "abort_retreat": {
+      "ok": true,
+      "short": {}
+     }
+    },
+    "closed:0": {
+     "approach": {
+      "ok": true,
+      "short": {}
+     },
+     "braking": {
+      "ok": true,
+      "short": {}
+     },
+     "alignment": {
+      "ok": true,
+      "short": {}
+     },
+     "capture": {
+      "ok": true,
+      "short": {}
+     },
+     "abort_retreat": {
+      "ok": true,
+      "short": {}
+     }
+    },
+    "closed:1": {
+     "approach": {
+      "ok": true,
+      "short": {}
+     },
+     "braking": {
+      "ok": true,
+      "short": {}
+     },
+     "alignment": {
+      "ok": true,
+      "short": {}
+     },
+     "capture": {
+      "ok": true,
+      "short": {}
+     },
+     "abort_retreat": {
+      "ok": true,
+      "short": {}
+     }
+    },
+    "closed:2": {
+     "approach": {
+      "ok": true,
+      "short": {}
+     },
+     "braking": {
+      "ok": true,
+      "short": {}
+     },
+     "alignment": {
+      "ok": true,
+      "short": {}
+     },
+     "capture": {
+      "ok": true,
+      "short": {}
+     },
+     "abort_retreat": {
+      "ok": true,
+      "short": {}
+     }
+    },
+    "closed:3": {
+     "approach": {
+      "ok": true,
+      "short": {}
+     },
+     "braking": {
+      "ok": true,
+      "short": {}
+     },
+     "alignment": {
+      "ok": true,
+      "short": {}
+     },
+     "capture": {
+      "ok": true,
+      "short": {}
+     },
+     "abort_retreat": {
+      "ok": true,
+      "short": {}
+     }
+    },
+    "closed:4": {
+     "approach": {
+      "ok": true,
+      "short": {}
+     },
+     "braking": {
+      "ok": true,
+      "short": {}
+     },
+     "alignment": {
+      "ok": true,
+      "short": {}
+     },
+     "capture": {
+      "ok": true,
+      "short": {}
+     },
+     "abort_retreat": {
+      "ok": true,
+      "short": {}
+     }
+    },
+    "closed:5": {
+     "approach": {
+      "ok": true,
+      "short": {}
+     },
+     "braking": {
+      "ok": true,
+      "short": {}
+     },
+     "alignment": {
+      "ok": true,
+      "short": {}
+     },
+     "capture": {
+      "ok": true,
+      "short": {}
+     },
+     "abort_retreat": {
+      "ok": true,
+      "short": {}
+     }
+    },
+    "closed:6": {
+     "approach": {
+      "ok": true,
+      "short": {}
+     },
+     "braking": {
+      "ok": true,
+      "short": {}
+     },
+     "alignment": {
+      "ok": true,
+      "short": {}
+     },
+     "capture": {
+      "ok": true,
+      "short": {}
+     },
+     "abort_retreat": {
+      "ok": true,
+      "short": {}
+     }
+    },
+    "closed:7": {
+     "approach": {
+      "ok": true,
+      "short": {}
+     },
+     "braking": {
+      "ok": true,
+      "short": {}
+     },
+     "alignment": {
+      "ok": true,
+      "short": {}
+     },
+     "capture": {
+      "ok": true,
+      "short": {}
+     },
+     "abort_retreat": {
+      "ok": true,
+      "short": {}
+     }
+    },
+    "closed:8": {
+     "approach": {
+      "ok": true,
+      "short": {}
+     },
+     "braking": {
+      "ok": true,
+      "short": {}
+     },
+     "alignment": {
+      "ok": true,
+      "short": {}
+     },
+     "capture": {
+      "ok": true,
+      "short": {}
+     },
+     "abort_retreat": {
+      "ok": true,
+      "short": {}
+     }
+    },
+    "closed:9": {
+     "approach": {
+      "ok": true,
+      "short": {}
+     },
+     "braking": {
+      "ok": true,
+      "short": {}
+     },
+     "alignment": {
+      "ok": true,
+      "short": {}
+     },
+     "capture": {
+      "ok": true,
+      "short": {}
+     },
+     "abort_retreat": {
+      "ok": true,
+      "short": {}
+     }
+    },
+    "closed:10": {
+     "approach": {
+      "ok": true,
+      "short": {}
+     },
+     "braking": {
+      "ok": true,
+      "short": {}
+     },
+     "alignment": {
+      "ok": true,
+      "short": {}
+     },
+     "capture": {
+      "ok": true,
+      "short": {}
+     },
+     "abort_retreat": {
+      "ok": true,
+      "short": {}
+     }
+    },
+    "closed:11": {
+     "approach": {
+      "ok": true,
+      "short": {}
+     },
+     "braking": {
+      "ok": true,
+      "short": {}
+     },
+     "alignment": {
+      "ok": true,
+      "short": {}
+     },
+     "capture": {
+      "ok": true,
+      "short": {}
+     },
+     "abort_retreat": {
+      "ok": true,
+      "short": {}
+     }
+    },
+    "closed:12": {
+     "approach": {
+      "ok": true,
+      "short": {}
+     },
+     "braking": {
+      "ok": true,
+      "short": {}
+     },
+     "alignment": {
+      "ok": true,
+      "short": {}
+     },
+     "capture": {
+      "ok": true,
+      "short": {}
+     },
+     "abort_retreat": {
+      "ok": true,
+      "short": {}
+     }
+    },
+    "closed:13": {
+     "approach": {
+      "ok": true,
+      "short": {}
+     },
+     "braking": {
+      "ok": true,
+      "short": {}
+     },
+     "alignment": {
+      "ok": true,
+      "short": {}
+     },
+     "capture": {
+      "ok": true,
+      "short": {}
+     },
+     "abort_retreat": {
+      "ok": true,
+      "short": {}
+     }
+    },
+    "closed:14": {
+     "approach": {
+      "ok": true,
+      "short": {}
+     },
+     "braking": {
+      "ok": true,
+      "short": {}
+     },
+     "alignment": {
+      "ok": true,
+      "short": {}
+     },
+     "capture": {
+      "ok": true,
+      "short": {}
+     },
+     "abort_retreat": {
+      "ok": true,
+      "short": {}
+     }
+    },
+    "closed:15": {
+     "approach": {
+      "ok": true,
+      "short": {}
+     },
+     "braking": {
+      "ok": true,
+      "short": {}
+     },
+     "alignment": {
+      "ok": true,
+      "short": {}
+     },
+     "capture": {
+      "ok": true,
+      "short": {}
+     },
+     "abort_retreat": {
+      "ok": true,
+      "short": {}
+     }
+    },
+    "closed:16": {
+     "approach": {
+      "ok": true,
+      "short": {}
+     },
+     "braking": {
+      "ok": true,
+      "short": {}
+     },
+     "alignment": {
+      "ok": true,
+      "short": {}
+     },
+     "capture": {
+      "ok": true,
+      "short": {}
+     },
+     "abort_retreat": {
+      "ok": true,
+      "short": {}
+     }
+    },
+    "closed:17": {
+     "approach": {
+      "ok": true,
+      "short": {}
+     },
+     "braking": {
+      "ok": true,
+      "short": {}
+     },
+     "alignment": {
+      "ok": true,
+      "short": {}
+     },
+     "capture": {
+      "ok": true,
+      "short": {}
+     },
+     "abort_retreat": {
+      "ok": true,
+      "short": {}
+     }
+    },
+    "closed:18": {
+     "approach": {
+      "ok": true,
+      "short": {}
+     },
+     "braking": {
+      "ok": true,
+      "short": {}
+     },
+     "alignment": {
+      "ok": true,
+      "short": {}
+     },
+     "capture": {
+      "ok": true,
+      "short": {}
+     },
+     "abort_retreat": {
+      "ok": true,
+      "short": {}
+     }
+    },
+    "closed:19": {
+     "approach": {
+      "ok": true,
+      "short": {}
+     },
+     "braking": {
+      "ok": true,
+      "short": {}
+     },
+     "alignment": {
+      "ok": true,
+      "short": {}
+     },
+     "capture": {
+      "ok": true,
+      "short": {}
+     },
+     "abort_retreat": {
+      "ok": true,
+      "short": {}
+     }
+    },
+    "closed:20": {
+     "approach": {
+      "ok": true,
+      "short": {}
+     },
+     "braking": {
+      "ok": true,
+      "short": {}
+     },
+     "alignment": {
+      "ok": true,
+      "short": {}
+     },
+     "capture": {
+      "ok": true,
+      "short": {}
+     },
+     "abort_retreat": {
+      "ok": true,
+      "short": {}
+     }
+    },
+    "closed:21": {
+     "approach": {
+      "ok": true,
+      "short": {}
+     },
+     "braking": {
+      "ok": true,
+      "short": {}
+     },
+     "alignment": {
+      "ok": true,
+      "short": {}
+     },
+     "capture": {
+      "ok": true,
+      "short": {}
+     },
+     "abort_retreat": {
+      "ok": true,
+      "short": {}
+     }
+    }
+   },
+   "stage_ok_all_single_failures": {
+    "approach": true,
+    "braking": true,
+    "alignment": true,
+    "capture": true,
+    "abort_retreat": true
+   },
+   "failures_breaking_a_stage": {},
+   "energy_j": {
+    "capture": 0.0119,
+    "braking_lost": 0.1318,
+    "double_fault_on": 0.0601,
+    "capture_capacity": 0.15,
+    "ok": true
+   },
+   "double_fault_bound": {
+    "detect_s": 0.25,
+    "dv_m_s": 0.0379,
+    "suitward_dv_m_s": 0.0375,
+    "spin_deg_s": 18.39,
+    "angle_deg": 2.3,
+    "gas_g": 1.57
+   },
+   "propellant": {
+    "procedure_dv_m_s": 0.41,
+    "allocation_factor": 3.0,
+    "gas_kg": 0.0509,
+    "usable_kg": 1.405
+   },
+   "limits": "rigid-body, steady thrust, no plume interaction forces, no sensor or navigation error model; latch and manifold rupture are design-for-minimum-risk items, not covered by fault tolerance"
+  },
+  "com_docked": [
+   0.001,
+   -0.006,
+   1.116
+  ],
+  "com_suit": [
+   0.0,
+   -0.07,
+   1.096
+  ],
+  "com_shift_vs_suit_m": 0.068,
+  "authority_docked": {
+   "+Fx": {
+    "ok": true,
+    "max": 4.69,
+    "unit": "N",
+    "residual": 0.0004
+   },
+   "-Fx": {
+    "ok": true,
+    "max": 4.69,
+    "unit": "N",
+    "residual": 0.0004
+   },
+   "+Fy": {
+    "ok": true,
+    "max": 5.76,
+    "unit": "N",
+    "residual": 0.0002
+   },
+   "-Fy": {
+    "ok": true,
+    "max": 12.45,
+    "unit": "N",
+    "residual": 0.0
+   },
+   "+Fz": {
+    "ok": true,
+    "max": 10.45,
+    "unit": "N",
+    "residual": 0.0
+   },
+   "-Fz": {
+    "ok": true,
+    "max": 5.45,
+    "unit": "N",
+    "residual": 0.0004
+   },
+   "+Tx": {
+    "ok": true,
+    "max": 1.93,
+    "unit": "N m",
+    "residual": 0.0003
+   },
+   "-Tx": {
+    "ok": true,
+    "max": 3.59,
+    "unit": "N m",
+    "residual": 0.0
+   },
+   "+Ty": {
+    "ok": true,
+    "max": 4.33,
+    "unit": "N m",
+    "residual": 0.0
+   },
+   "-Ty": {
+    "ok": true,
+    "max": 4.33,
+    "unit": "N m",
+    "residual": 0.0
+   },
+   "+Tz": {
+    "ok": true,
+    "max": 1.74,
+    "unit": "N m",
+    "residual": 0.0003
+   },
+   "-Tz": {
+    "ok": true,
+    "max": 1.74,
+    "unit": "N m",
+    "residual": 0.0003
+   }
+  },
+  "authority_suit_reserve": {
+   "+Fx": {
+    "ok": true,
+    "max": 7.88,
+    "unit": "N",
+    "residual": 0.0
+   },
+   "-Fx": {
+    "ok": true,
+    "max": 9.4,
+    "unit": "N",
+    "residual": 0.0
+   },
+   "+Fy": {
+    "ok": true,
+    "max": 6.94,
+    "unit": "N",
+    "residual": 0.0
+   },
+   "-Fy": {
+    "ok": true,
+    "max": 15.2,
+    "unit": "N",
+    "residual": 0.0
+   },
+   "+Fz": {
+    "ok": true,
+    "max": 10.73,
+    "unit": "N",
+    "residual": 0.0
+   },
+   "-Fz": {
+    "ok": true,
+    "max": 10.75,
+    "unit": "N",
+    "residual": 0.0
+   },
+   "+Tx": {
+    "ok": true,
+    "max": 3.28,
+    "unit": "N m",
+    "residual": 0.0
+   },
+   "-Tx": {
+    "ok": true,
+    "max": 6.09,
+    "unit": "N m",
+    "residual": 0.0
+   },
+   "+Ty": {
+    "ok": true,
+    "max": 4.83,
+    "unit": "N m",
+    "residual": 0.0
+   },
+   "-Ty": {
+    "ok": true,
+    "max": 4.57,
+    "unit": "N m",
+    "residual": 0.0
+   },
+   "+Tz": {
+    "ok": true,
+    "max": 2.81,
+    "unit": "N m",
+    "residual": 0.0
+   },
+   "-Tz": {
+    "ok": true,
+    "max": 2.81,
+    "unit": "N m",
+    "residual": 0.0
+   }
+  },
+  "single_failure_docked": {
+   "worst_axes_reachable": 12,
+   "worst_failed_index": 0,
+   "nozzles": 22
+  },
+  "single_failure_suit_reserve": {
+   "worst_axes_reachable": 9,
+   "worst_failed_index": 1,
+   "nozzles": 16
+  },
+  "burnbrow": {
+   "1.1g": {
+    "weight_n": 1895,
+    "max_upward_cold_gas_n": 17.9,
+    "fraction": 0.0094
+   },
+   "1.5g": {
+    "weight_n": 2584,
+    "max_upward_cold_gas_n": 17.9,
+    "fraction": 0.0069
+   }
+  }
+ },
+ "single_failure": {
+  "single_failure_drone_free": {
+   "worst_axes_reachable": 12,
+   "worst_failed_index": 0,
+   "nozzles": 26
+  },
+  "single_failure_docked": {
+   "worst_axes_reachable": 12,
+   "worst_failed_index": 0,
+   "nozzles": 22
+  },
+  "single_failure_suit_reserve": {
+   "worst_axes_reachable": 9,
+   "worst_failed_index": 1,
+   "nozzles": 16
+  },
+  "single_failure_drone_proximity": {
+   "worst_axes_reachable": 12,
+   "worst_failed_index": 0,
+   "nozzles": 22
+  }
+ },
+ "manipulators": {
+  "ready": {
+   "A": {
+    "target": [
+     0.12,
+     0.38,
+     0.18
+    ],
+    "reach_ok": true,
+    "fk_residual_mm": 0.0,
+    "fk_approach_error_deg": 0.0,
+    "joint_deg": {
+     "shoulder_yaw": 15.1,
+     "shoulder_pitch": -107.4,
+     "elbow": 86.3,
+     "wrist_pitch": 21.0,
+     "wrist_yaw": -15.1
+    },
+    "joints_in_range": true,
+    "ik_control_residual_mm": 0.0,
+    "ik_control_approach_error_deg": 0.0
+   },
+   "B": {
+    "target": [
+     -0.12,
+     0.38,
+     0.18
+    ],
+    "reach_ok": true,
+    "fk_residual_mm": 0.0,
+    "fk_approach_error_deg": 0.0,
+    "joint_deg": {
+     "shoulder_yaw": 13.6,
+     "shoulder_pitch": -108.3,
+     "elbow": 89.8,
+     "wrist_pitch": 9.9
+    },
+    "joints_in_range": true,
+    "ik_control_residual_mm": 0.0,
+    "ik_control_approach_error_deg": 0.0
+   }
+  },
+  "maintenance": {
+   "A": {
+    "target": [
+     0.12,
+     0.34,
+     0.14
+    ],
+    "reach_ok": true,
+    "fk_residual_mm": 0.0,
+    "fk_approach_error_deg": 0.0,
+    "joint_deg": {
+     "shoulder_yaw": 17.7,
+     "shoulder_pitch": -101.5,
+     "elbow": 62.8,
+     "wrist_pitch": 38.7,
+     "wrist_yaw": -17.7
+    },
+    "joints_in_range": true,
+    "ik_control_residual_mm": 0.0,
+    "ik_control_approach_error_deg": 0.0
+   },
+   "B": {
+    "target": [
+     -0.12,
+     0.42,
+     0.22
+    ],
+    "reach_ok": true,
+    "fk_residual_mm": 0.0,
+    "fk_approach_error_deg": 0.0,
+    "joint_deg": {
+     "shoulder_yaw": 11.9,
+     "shoulder_pitch": -121.6,
+     "elbow": 125.4,
+     "wrist_pitch": -12.3
+    },
+    "joints_in_range": true,
+    "ik_control_residual_mm": 0.0,
+    "ik_control_approach_error_deg": 0.0
+   }
+  },
+  "assist": {
+   "A": {
+    "target": [
+     0.4,
+     0.3,
+     -0.16
+    ],
+    "reach_ok": true,
+    "fk_residual_mm": 0.0,
+    "fk_approach_error_deg": 0.0,
+    "joint_deg": {
+     "shoulder_yaw": -44.9,
+     "shoulder_pitch": -174.7,
+     "elbow": 103.9,
+     "wrist_pitch": 0.3,
+     "wrist_yaw": -18.5
+    },
+    "joints_in_range": true,
+    "ik_control_residual_mm": 0.0,
+    "ik_control_approach_error_deg": 0.0
+   },
+   "B": {
+    "target": [
+     -0.4,
+     0.3,
+     -0.16
+    ],
+    "reach_ok": true,
+    "fk_residual_mm": 0.07,
+    "fk_approach_error_deg": 0.09,
+    "joint_deg": {
+     "shoulder_yaw": -46.7,
+     "shoulder_pitch": -175.8,
+     "elbow": 104.8,
+     "wrist_pitch": 3.3
+    },
+    "joints_in_range": true,
+    "ik_control_residual_mm": 0.0,
+    "ik_control_approach_error_deg": 0.0
+   }
+  }
+ },
+ "tool_contact": {
+  "utility_gripper": {
+   "pad_to_post_mm": {
+    "TOOL_Utility_Gripper_Pad_L_0": 0.0,
+    "TOOL_Utility_Gripper_Pad_L_1": 0.0,
+    "TOOL_Utility_Gripper_Pad_R_0": 0.0,
+    "TOOL_Utility_Gripper_Pad_R_1": 0.0
+   },
+   "pads_overlap": 0,
+   "jaws_body_overlap": 0,
+   "grip_B": 0.2273
+  },
+  "driver": {
+   "tip_to_fastener_mm": 0.5,
+   "fastener": "HULL_ORU_Fastener_0",
+   "bit_into_flange": 0
+  }
+ },
+ "helmet": {
+  "points": 36936,
+  "min_distance_m": 0.0245,
+  "points_outside_shell": 0,
+  "semi_axes_m": [
+   0.1404,
+   0.1677,
+   0.1646,
+   0.1571
+  ],
+  "exponent": 2.25
+ },
+ "docked_arm_assistance": {
+  "arms_to_helmet_mm": 272.4,
+  "arms_to_emergency_items_mm": 221.7,
+  "emergency_items": [
+   "CTRL_INSTRUCTOR_Forearm_Emergency_Guard",
+   "CTRL_INSTRUCTOR_Manual_Release",
+   "N2_INSTRUCTOR_Reserve_Gauge",
+   "N2_INSTRUCTOR_Reserve_Label",
+   "N2_INSTRUCTOR_Reserve_Valve_Knob",
+   "TETHER_INSTRUCTOR_Hardpoint_P",
+   "TETHER_INSTRUCTOR_Hardpoint_S",
+   "TETHER_INSTRUCTOR_Hook_A",
+   "TETHER_INSTRUCTOR_Hook_B",
+   "TETHER_INSTRUCTOR_Reel_A",
+   "TETHER_INSTRUCTOR_Reel_A_Mark",
+   "TETHER_INSTRUCTOR_Reel_B",
+   "TETHER_INSTRUCTOR_Reel_B_Mark"
+  ],
+  "arms_vs_astronaut": {},
+  "flange_world": [
+   [
+    -0.4,
+    0.143,
+    1.514
+   ],
+   [
+    0.4,
+    0.143,
+    1.514
+   ]
+  ],
+  "tool_point_world": [
+   [
+    -0.43,
+    0.082,
+    1.514
+   ],
+   [
+    0.423,
+    0.067,
+    1.536
+   ]
+  ],
+  "tool_point_azimuth_from_face_deg": {
+   "A": 106.3,
+   "B": 104.7
+  },
+  "visor_half_width_deg": 108.0,
+  "reaction": {
+   "A": {
+    "force_n": 20.0,
+    "lever_m": 0.585,
+    "dock_moment_nm": 11.7,
+    "free_body_spin_deg_s2": 44.69,
+    "within_dock_rating": true
+   },
+   "B": {
+    "force_n": 60.0,
+    "lever_m": 0.583,
+    "dock_moment_nm": 34.98,
+    "free_body_spin_deg_s2": 133.61,
+    "within_dock_rating": true
+   }
+  },
+  "plumes": {
+   "suit": {},
+   "drone": null
+  }
+ },
+ "results": [
+  {
+   "check": "mesh_integrity",
+   "kind": "AUTOMATED",
+   "result": "PASS",
+   "measured": {
+    "meshes": 419,
+    "nan_vertices": 0,
+    "zero_area_faces": 0,
+    "worst": {}
+   },
+   "rule": "no NaN vertex, no zero-area face"
+  },
+  {
+   "check": "transforms",
+   "kind": "AUTOMATED",
+   "result": "PASS",
+   "measured": {
+    "negative_scale": [],
+    "unapplied_scale": []
+   },
+   "rule": "every mesh at unit scale (geometry carries the size)"
+  },
+  {
+   "check": "dependencies_packed",
+   "kind": "AUTOMATED",
+   "result": "PASS",
+   "measured": {
+    "libraries": [],
+    "unpacked_images": [],
+    "unpacked_fonts": []
+   },
+   "rule": "no linked library, every image and font packed: the review file opens anywhere"
+  },
+  {
+   "check": "scale",
+   "kind": "AUTOMATED",
+   "result": "PASS",
+   "measured": {
+    "stature_m": 1.78,
+    "drone_size_m": [
+     0.468,
+     0.548,
+     0.197
+    ],
+    "docked_depth_beyond_module_m": 0.162
+   },
+   "rule": "metres, real scale: a 1.55-2.0 m wearer; drone 0.40-0.60 x 0.45-0.70 x 0.15-0.30 m (stowed)"
+  },
+  {
+   "check": "dock_offset",
+   "kind": "AUTOMATED",
+   "result": "PASS",
+   "measured": {
+    "offset_mm": 0.0,
+    "angle_deg": 0.0
+   },
+   "rule": "docked: the drone frame is the suit dock socket"
+  },
+  {
+   "check": "plumes_all_states",
+   "kind": "AUTOMATED",
+   "result": "PASS",
+   "measured": {
+    "ready": {
+     "thrusters": "armed",
+     "suit_reserve": "isolated",
+     "suit": 0,
+     "drone": 0
+    },
+    "walk": {
+     "thrusters": "safed",
+     "suit_reserve": "isolated",
+     "suit": 0,
+     "drone": 0
+    },
+    "reach": {
+     "thrusters": "safed",
+     "suit_reserve": "isolated",
+     "suit": 0,
+     "drone": 0
+    },
+    "crouch": {
+     "thrusters": "safed",
+     "suit_reserve": "isolated",
+     "suit": 0,
+     "drone": 0
+    },
+    "climb": {
+     "thrusters": "safed",
+     "suit_reserve": "isolated",
+     "suit": 0,
+     "drone": 0
+    },
+    "flight": {
+     "thrusters": "armed",
+     "suit_reserve": "isolated",
+     "suit": 0,
+     "drone": 0
+    },
+    "detached": {
+     "thrusters": "armed",
+     "suit_reserve": "armed",
+     "suit": 0,
+     "drone": 0
+    },
+    "arms": {
+     "thrusters": "armed",
+     "suit_reserve": "armed",
+     "suit": 0,
+     "drone": 0
+    },
+    "maintenance": {
+     "thrusters": "safed",
+     "suit_reserve": "isolated",
+     "suit": 0,
+     "drone": 0
+    },
+    "burn": {
+     "thrusters": "safed",
+     "suit_reserve": "isolated",
+     "suit": 0,
+     "drone": 0
+    },
+    "chase": {
+     "thrusters": "armed",
+     "suit_reserve": "isolated",
+     "suit": 0,
+     "drone": 0
+    },
+    "approach": {
+     "thrusters": "armed",
+     "suit_reserve": "isolated",
+     "suit": 0,
+     "drone": 0
+    },
+    "assist": {
+     "thrusters": "safed",
+     "suit_reserve": "isolated",
+     "suit": 0,
+     "drone": 0
+    }
+   },
+   "rule": "in every state with propulsion armed, no live plume (axis + 12 deg cone to 1.2 m) hits the astronaut, module, other clusters, arms, sensors or covers"
+  },
+  {
+   "check": "drone_arms_vs_drone",
+   "kind": "AUTOMATED",
+   "result": "PASS",
+   "measured": {
+    "ready": {
+     "A": 0,
+     "B": 0,
+     "AB": 0
+    },
+    "walk": {
+     "A": 0,
+     "B": 0,
+     "AB": 0
+    },
+    "reach": {
+     "A": 0,
+     "B": 0,
+     "AB": 0
+    },
+    "crouch": {
+     "A": 0,
+     "B": 0,
+     "AB": 0
+    },
+    "climb": {
+     "A": 0,
+     "B": 0,
+     "AB": 0
+    },
+    "flight": {
+     "A": 0,
+     "B": 0,
+     "AB": 0
+    },
+    "detached": {
+     "A": 0,
+     "B": 0,
+     "AB": 0
+    },
+    "arms": {
+     "A": 0,
+     "B": 0,
+     "AB": 0
+    },
+    "maintenance": {
+     "A": 0,
+     "B": 0,
+     "AB": 0
+    },
+    "burn": {
+     "A": 0,
+     "B": 0,
+     "AB": 0
+    },
+    "chase": {
+     "A": 0,
+     "B": 0,
+     "AB": 0
+    },
+    "approach": {
+     "A": 0,
+     "B": 0,
+     "AB": 0
+    },
+    "assist": {
+     "A": 0,
+     "B": 0,
+     "AB": 0
+    }
+   },
+   "rule": "no arm touches the drone body, covers, vessels or clusters, or the other arm, in any state"
+  },
+  {
+   "check": "tools_vs_drone",
+   "kind": "AUTOMATED",
+   "result": "PASS",
+   "measured": {},
+   "rule": "stowed and carried tools clear of the drone body"
+  },
+  {
+   "check": "drone_joint_limits_states",
+   "kind": "AUTOMATED",
+   "result": "PASS",
+   "measured": {},
+   "rule": "every keyed arm pose inside data/eva_drone.toml joint ranges"
+  },
+  {
+   "check": "dock_contacts_mating_only",
+   "kind": "AUTOMATED",
+   "result": "PASS",
+   "measured": "none",
+   "rule": "the drone touches the astronaut and module only through the dock hardware (bolts, keel, load pads), in every state"
+  },
+  {
+   "check": "hand_controller",
+   "kind": "AUTOMATED",
+   "result": "PASS",
+   "measured": {
+    "ready": [
+     false,
+     501.0,
+     74.4,
+     0,
+     0,
+     49.3
+    ],
+    "walk": [
+     false,
+     588.4,
+     74.7,
+     0,
+     0,
+     49.3
+    ],
+    "reach": [
+     false,
+     486.4,
+     74.4,
+     0,
+     0,
+     49.3
+    ],
+    "crouch": [
+     false,
+     716.1,
+     74.3,
+     0,
+     0,
+     49.3
+    ],
+    "climb": [
+     false,
+     519.1,
+     73.5,
+     0,
+     0,
+     49.3
+    ],
+    "flight": [
+     true,
+     52.6,
+     7.2,
+     0,
+     0,
+     49.3
+    ],
+    "detached": [
+     true,
+     52.1,
+     7.0,
+     0,
+     0,
+     49.3
+    ],
+    "arms": [
+     true,
+     52.1,
+     7.0,
+     0,
+     0,
+     49.3
+    ],
+    "maintenance": [
+     true,
+     52.1,
+     7.0,
+     0,
+     0,
+     49.3
+    ],
+    "burn": [
+     false,
+     734.1,
+     73.9,
+     0,
+     0,
+     49.3
+    ],
+    "chase": [
+     true,
+     52.5,
+     7.2,
+     0,
+     0,
+     49.3
+    ],
+    "approach": [
+     false,
+     501.0,
+     74.4,
+     0,
+     0,
+     49.3
+    ],
+    "assist": [
+     false,
+     501.0,
+     74.4,
+     0,
+     0,
+     49.3
+    ]
+   },
+   "rule": "fold-out controller: deployed in flight / drone-deployed / chase with the grip axis <= 60 mm from the left palm centre and the glove <= 10 mm from the grip (hand at the grip, no contact); stowed otherwise; never touching the suit or the drone, >= 20 mm from the manual release; yaw and telescope inside their stops in every state"
+  },
+  {
+   "check": "suit_articulation",
+   "kind": "AUTOMATED",
+   "result": "PASS",
+   "measured": {
+    "ready": {
+     "torso": 0,
+     "module": 0,
+     "trunk_torso": 0,
+     "helmet": 0
+    },
+    "walk": {
+     "torso": 0,
+     "module": 0,
+     "trunk_torso": 0,
+     "helmet": 0
+    },
+    "reach": {
+     "torso": 0,
+     "module": 0,
+     "trunk_torso": 0,
+     "helmet": 0
+    },
+    "crouch": {
+     "torso": 0,
+     "module": 0,
+     "trunk_torso": 0,
+     "helmet": 0
+    },
+    "climb": {
+     "torso": 0,
+     "module": 0,
+     "trunk_torso": 0,
+     "helmet": 0
+    },
+    "flight": {
+     "torso": 0,
+     "module": 0,
+     "trunk_torso": 0,
+     "helmet": 0
+    },
+    "detached": {
+     "torso": 0,
+     "module": 0,
+     "trunk_torso": 0,
+     "helmet": 0
+    },
+    "arms": {
+     "torso": 0,
+     "module": 0,
+     "trunk_torso": 0,
+     "helmet": 0
+    },
+    "maintenance": {
+     "torso": 0,
+     "module": 0,
+     "trunk_torso": 0,
+     "helmet": 0
+    },
+    "burn": {
+     "torso": 0,
+     "module": 0,
+     "trunk_torso": 0,
+     "helmet": 0
+    },
+    "chase": {
+     "torso": 0,
+     "module": 0,
+     "trunk_torso": 0,
+     "helmet": 0
+    },
+    "approach": {
+     "torso": 0,
+     "module": 0,
+     "trunk_torso": 0,
+     "helmet": 0
+    },
+    "assist": {
+     "torso": 0,
+     "module": 0,
+     "trunk_torso": 0,
+     "helmet": 0
+    }
+   },
+   "rule": "the soft outer layer (limbs and trunk) never passes through the rigid torso shell, module or helmet in any state"
+  },
+  {
+   "check": "sensor_view_arms_folded",
+   "kind": "AUTOMATED",
+   "result": "PASS",
+   "measured": {
+    "SENS_Drone_Stereo_L": 0,
+    "SENS_Drone_Stereo_R": 0,
+    "SENS_Drone_Lidar": 0,
+    "SENS_Drone_Inspection_Cam": 0,
+    "SENS_Drone_Thermal_IR": 0
+   },
+   "rule": "arms folded: no forward sensor ray (30 deg cone, 1 m) meets the drone itself"
+  },
+  {
+   "check": "release_path",
+   "kind": "AUTOMATED",
+   "result": "PASS",
+   "measured": [
+    {
+     "offset_m": 0.005,
+     "overlaps": 0,
+     "pairs": {}
+    },
+    {
+     "offset_m": 0.01,
+     "overlaps": 0,
+     "pairs": {}
+    },
+    {
+     "offset_m": 0.02,
+     "overlaps": 0,
+     "pairs": {}
+    },
+    {
+     "offset_m": 0.05,
+     "overlaps": 0,
+     "pairs": {}
+    },
+    {
+     "offset_m": 0.1,
+     "overlaps": 0,
+     "pairs": {}
+    },
+    {
+     "offset_m": 0.2,
+     "overlaps": 0,
+     "pairs": {}
+    },
+    {
+     "offset_m": 0.3,
+     "overlaps": 0,
+     "pairs": {}
+    },
+    {
+     "offset_m": 0.45,
+     "overlaps": 0,
+     "pairs": {}
+    },
+    {
+     "offset_m": 0.6,
+     "overlaps": 0,
+     "pairs": {}
+    }
+   ],
+   "rule": "the drone backs straight off the channel from 5 mm to 0.6 m without touching the suit"
+  },
+  {
+   "check": "approach_corridor_plumes",
+   "kind": "AUTOMATED",
+   "result": "PASS",
+   "measured": "none",
+   "rule": "near-suit mode (22 live nozzles): no 30 deg plume fringe reaches the astronaut or module with the drone on the dock axis 0.5-0.03 m out"
+  },
+  {
+   "check": "plume_envelope",
+   "kind": "AUTOMATED",
+   "result": "PASS",
+   "measured": {
+    "worst": {
+     "core": 0,
+     "sensitive_pa": 0.0,
+     "hardware_pa": 0.814
+    },
+    "violations": 0,
+    "first": []
+   },
+   "rule": "3D envelope (axis + rings to 30 deg, out to the 1 Pa on-axis range) in every armed state, on the approach from 2 m and through the arm motions made with the thrusters armed: no core hit, sensitive surfaces <= 1.0 Pa, everything else <= 5.0 Pa (Simons estimate)"
+  },
+  {
+   "check": "authority_free",
+   "kind": "AUTOMATED",
+   "result": "PASS",
+   "measured": {
+    "+Fx": 18.57,
+    "-Fx": 18.58,
+    "+Fy": 16.07,
+    "-Fy": 7.02,
+    "+Fz": 18.08,
+    "-Fz": 17.52,
+    "+Tx": 4.06,
+    "-Tx": 4.06,
+    "+Ty": 2.87,
+    "-Ty": 2.87,
+    "+Tz": 4.36,
+    "-Tz": 4.36
+   },
+   "rule": "drone alone: all 12 pure axes"
+  },
+  {
+   "check": "authority_docked",
+   "kind": "AUTOMATED",
+   "result": "PASS",
+   "measured": {
+    "+Fx": 4.69,
+    "-Fx": 4.69,
+    "+Fy": 5.76,
+    "-Fy": 12.45,
+    "+Fz": 10.45,
+    "-Fz": 5.45,
+    "+Tx": 1.93,
+    "-Tx": 3.59,
+    "+Ty": 4.33,
+    "-Ty": 4.33,
+    "+Tz": 1.74,
+    "-Tz": 1.74
+   },
+   "rule": "docked (the drone's near-suit set flies the pair, suit reserve isolated): all 12"
+  },
+  {
+   "check": "authority_suit_reserve",
+   "kind": "AUTOMATED",
+   "result": "PASS",
+   "measured": {
+    "+Fx": 7.88,
+    "-Fx": 9.4,
+    "+Fy": 6.94,
+    "-Fy": 15.2,
+    "+Fz": 10.73,
+    "-Fz": 10.75,
+    "+Tx": 3.28,
+    "-Tx": 6.09,
+    "+Ty": 4.83,
+    "-Ty": 4.57,
+    "+Tz": 2.81,
+    "-Tz": 2.81
+   },
+   "rule": "suit reserve alone: all 12"
+  },
+  {
+   "check": "authority_proximity",
+   "kind": "AUTOMATED",
+   "result": "PASS",
+   "measured": {
+    "live": 22,
+    "axes": {
+     "+Fx": 18.05,
+     "-Fx": 18.05,
+     "+Fy": 12.46,
+     "-Fy": 6.94,
+     "+Fz": 8.63,
+     "-Fz": 18.24,
+     "+Tx": 3.61,
+     "-Tx": 1.92,
+     "+Ty": 1.73,
+     "-Ty": 1.73,
+     "+Tz": 4.32,
+     "-Tz": 4.32
+    }
+   },
+   "rule": "within 1.5 m of a suit (near-suit mode, the plume-clear set above): all 12 pure axes, including +Z (back away) for retreat and abort"
+  },
+  {
+   "check": "near_suit_fault_stages",
+   "kind": "AUTOMATED",
+   "result": "PASS",
+   "measured": {
+    "stages": {
+     "approach": true,
+     "braking": true,
+     "alignment": true,
+     "capture": true,
+     "abort_retreat": true
+    },
+    "failing": {},
+    "requirements": {
+     "brake_force_n": 1.713,
+     "torque_nm": 0.0199,
+     "lateral_n": 0.527,
+     "margin": 2.0,
+     "braking_distance_m": 0.07,
+     "tipoff_deg_s": 2.0,
+     "align_tol_deg": 2.0
+    },
+    "energy_j": {
+     "capture": 0.0119,
+     "braking_lost": 0.1318,
+     "double_fault_on": 0.0601,
+     "capture_capacity": 0.15,
+     "ok": true
+    },
+    "double_fault": {
+     "detect_s": 0.25,
+     "dv_m_s": 0.0379,
+     "suitward_dv_m_s": 0.0375,
+     "spin_deg_s": 18.39,
+     "angle_deg": 2.3,
+     "gas_g": 1.57
+    }
+   },
+   "rule": "built near-suit nozzle set, real mass and inertia: approach, braking, alignment, capture and abort / retreat each keep the force and torque they need (x control margin) with any one nozzle failed closed; capture and lost-braking contact energy inside the capture mechanism's capacity"
+  },
+  {
+   "check": "manipulator_fk",
+   "kind": "AUTOMATED",
+   "result": "PASS",
+   "measured": {
+    "ready.A": [
+     0.0,
+     true,
+     true
+    ],
+    "ready.B": [
+     0.0,
+     true,
+     true
+    ],
+    "maintenance.A": [
+     0.0,
+     true,
+     true
+    ],
+    "maintenance.B": [
+     0.0,
+     true,
+     true
+    ],
+    "assist.A": [
+     0.0,
+     true,
+     true
+    ],
+    "assist.B": [
+     0.07,
+     true,
+     true
+    ]
+   },
+   "rule": "every named pose reached (residual < 0.5 mm, approach < 0.5 deg) with every joint in range"
+  },
+  {
+   "check": "manipulator_ik_controls",
+   "kind": "AUTOMATED",
+   "result": "PASS",
+   "measured": {
+    "ready.A": [
+     0.0,
+     0.0
+    ],
+    "ready.B": [
+     0.0,
+     0.0
+    ],
+    "maintenance.A": [
+     0.0,
+     0.0
+    ],
+    "maintenance.B": [
+     0.0,
+     0.0
+    ],
+    "assist.A": [
+     0.0,
+     0.0
+    ],
+    "assist.B": [
+     0.0,
+     0.0
+    ]
+   },
+   "rule": "from the deployed (ready) pose, the in-file IK control (ik_A / ik_B bone + property) brings the flange to each named target within 2 mm"
+  },
+  {
+   "check": "grasp_utility_gripper",
+   "kind": "AUTOMATED",
+   "result": "PASS",
+   "measured": {
+    "pad_to_post_mm": {
+     "TOOL_Utility_Gripper_Pad_L_0": 0.0,
+     "TOOL_Utility_Gripper_Pad_L_1": 0.0,
+     "TOOL_Utility_Gripper_Pad_R_0": 0.0,
+     "TOOL_Utility_Gripper_Pad_R_1": 0.0
+    },
+    "pads_overlap": 0,
+    "jaws_body_overlap": 0,
+    "grip_B": 0.2273
+   },
+   "rule": "all four pads within 1.5 mm of the grapple post (line contacts), no pad, jaw or body inside it"
+  },
+  {
+   "check": "driver_contact",
+   "kind": "AUTOMATED",
+   "result": "PASS",
+   "measured": {
+    "tip_to_fastener_mm": 0.5,
+    "fastener": "HULL_ORU_Fastener_0",
+    "bit_into_flange": 0
+   },
+   "rule": "driver bit engages a fastener (<= 3 mm) without entering the flange"
+  },
+  {
+   "check": "helmet_clearance",
+   "kind": "AUTOMATED",
+   "result": "PASS",
+   "measured": {
+    "points": 36936,
+    "min_distance_m": 0.0245,
+    "points_outside_shell": 0,
+    "semi_axes_m": [
+     0.1404,
+     0.1677,
+     0.1646,
+     0.1571
+    ],
+    "exponent": 2.25
+   },
+   "rule": "every swept head point inside the helmet with >= 15 mm to the shell (data [form] head_motion_deg)"
+  },
+  {
+   "check": "docked_assist_clearance",
+   "kind": "AUTOMATED",
+   "result": "PASS",
+   "measured": {
+    "helmet_mm": 272.4,
+    "emergency_mm": 221.7,
+    "contacts": {}
+   },
+   "rule": "docked assistance pose: arms and tools >= 30 mm from the helmet, >= 50 mm from the release handle, reserve valve, gauge and tether hooks, no contact with the astronaut"
+  },
+  {
+   "check": "docked_assist_in_view",
+   "kind": "AUTOMATED",
+   "result": "PASS",
+   "measured": {
+    "A": 106.3,
+    "B": 104.7
+   },
+   "rule": "both tool working points inside the visor's horizontal field (azimuth from straight ahead <= the visor half-width)"
+  },
+  {
+   "check": "life_support_budget",
+   "kind": "ANALYTICAL",
+   "result": "PROVISIONAL",
+   "measured": {
+    "nominal_limit_h": 9.42,
+    "limiting": "feedwater_h",
+    "high_case_h": 6.12,
+    "purge_min": 31.9,
+    "packed_margin_l": 0.7,
+    "heat_rejection_w": 260.0
+   },
+   "rule": "nominal case covers 8.0 h + 1.0 h on O2, feedwater and battery; secondary O2 gives >= 30 min purge; packed items fit the module (high case is reported, not required)"
+  },
+  {
+   "check": "structure",
+   "kind": "ANALYTICAL",
+   "result": "PROVISIONAL",
+   "measured": {
+    "dock_limit_nm": 166.8,
+    "dock_rating_nm": 260,
+    "pull_limit_n": 556.0,
+    "release_n": 69.4,
+    "arm_root_margin": {
+     "A": 36.78,
+     "B": 19.65
+    },
+    "coupling_margin": {
+     "A": 3.71,
+     "B": 0.3
+    },
+    "anchor_gripper_off_axis_deg": 15.1
+   },
+   "rule": "limit loads x FoS 1.5 inside the dock / anchor ratings, arm-root links and tool couplings; emergency release within a gloved pull"
+  },
+  {
+   "check": "life_support_capability",
+   "kind": "REVIEW",
+   "result": "UNVERIFIED",
+   "statement": "The budget (O2 0.0638 kg/h, feedwater 0.382 kg/h, 60.0 W electronics) is a steady-state estimate; no transient thermal, CO2-bed sizing or humidity model, no test. EVA-004 suit pressure stays OPEN.",
+   "basis": "data/eva_suit.toml [life_support], eva_system.life_support_budget()"
+  },
+  {
+   "check": "structural_loads",
+   "kind": "REVIEW",
+   "result": "UNVERIFIED",
+   "statement": "Closed-form limit-load estimate only: channel-wall bearing, the module-to-cuirass mount and the composite laminates need FE and test.",
+   "basis": "eva_system.structure(), data/eva_drone.toml [anchor] structure"
+  },
+  {
+   "check": "docked_arm_assistance",
+   "kind": "REVIEW",
+   "result": "UNVERIFIED",
+   "statement": "Reach is limited to beside and above the helmet; arm forces react into the suit through the dock, so the astronaut must be anchored (foot restraint or handrail) and the drone thrusters stay inhibited. Moving parts beside the helmet need a crew-commanded hold-to-run mode and a force limit; no human-in-the-loop evaluation exists.",
+   "basis": "arm loads, docked_arm_loads()"
+  },
+  {
+   "check": "plume_model",
+   "kind": "REVIEW",
+   "result": "UNVERIFIED",
+   "statement": "The 3D envelope is a sampled Simons far-field estimate (no flow solution, reflection or contamination transport): it bounds where plumes reach, not their effect on coatings or optics; not a qualification.",
+   "basis": "data/eva_drone.toml [gas], report plume_envelope"
+  }
+ ],
+ "summary": {
+  "PASS": 28,
+  "PROVISIONAL": 2,
+  "UNVERIFIED": 4,
+  "FAIL": 0,
+  "failed": []
+ }
+}

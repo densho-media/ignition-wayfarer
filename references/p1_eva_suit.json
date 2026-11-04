@@ -4,84 +4,139 @@
  "certification": "NOT CERTIFIED (44!40 QA-03): no owner-approved dimensional or physical values",
  "variants": {
   "instructor": {
-   "hut_rings": [
-    [
-     1.1556,
-     0.2084,
-     0.1754,
-     -0.0369
-    ],
-    [
-     1.1932,
-     0.2125,
-     0.1795,
-     -0.0353
-    ],
-    [
-     1.2307,
-     0.2236,
-     0.1829,
-     -0.0328
-    ],
-    [
-     1.2683,
-     0.2361,
-     0.1863,
-     -0.0337
-    ],
-    [
-     1.3058,
-     0.2436,
-     0.1897,
-     -0.0326
-    ],
-    [
-     1.3434,
-     0.2399,
-     0.19,
-     -0.0289
-    ],
-    [
-     1.3809,
-     0.2284,
-     0.184,
-     -0.0229
-    ],
-    [
-     1.4185,
-     0.1468,
-     0.173,
-     -0.0139
-    ],
-    [
-     1.456,
-     0.1992,
-     0.1615,
-     -0.0103
-    ],
-    [
-     1.4936,
-     0.1299,
-     0.1469,
-     -0.013
-    ]
-   ],
    "helmet_centre": [
-    -0.0,
-    -0.1392,
-    1.6443
+    0.0,
+    -0.0435,
+    1.6552
    ],
-   "helmet_radius_m": 0.2434,
+   "helmet_semi_axes_m": [
+    0.1404,
+    0.1677,
+    0.1646,
+    0.1571
+   ],
    "plss_centre": [
     0.0,
-    0.2911,
-    1.3446
+    0.2401,
+    1.2426
    ],
    "plss_size_m": [
-    0.5,
-    0.22,
-    0.62
+    0.43,
+    0.125,
+    0.6
    ],
+   "module": {
+    "top": 1.5426083755493163,
+    "bot": 0.9426083755493163,
+    "zc": 1.2426083755493162,
+    "w": 0.43,
+    "dpt": 0.125,
+    "h": 0.6,
+    "y_r0": 0.3026406141981335,
+    "cwh": 0.035,
+    "dep": 0.026,
+    "zk0": 1.0056083755493164,
+    "zk1": 1.4296083755493163,
+    "pc": [
+     0.0,
+     0.2401406168937683,
+     1.2426084280014038
+    ],
+    "nozzles": [
+     "NZ_INSTRUCTOR_SUIT_UP_FWD",
+     "NZ_INSTRUCTOR_SUIT_UP_AFT",
+     "NZ_INSTRUCTOR_SUIT_UP_OUT",
+     "NZ_INSTRUCTOR_SUIT_UP_VERT",
+     "NZ_INSTRUCTOR_SUIT_US_FWD",
+     "NZ_INSTRUCTOR_SUIT_US_AFT",
+     "NZ_INSTRUCTOR_SUIT_US_OUT",
+     "NZ_INSTRUCTOR_SUIT_US_VERT",
+     "NZ_INSTRUCTOR_SUIT_LP_FWD",
+     "NZ_INSTRUCTOR_SUIT_LP_AFT",
+     "NZ_INSTRUCTOR_SUIT_LP_OUT",
+     "NZ_INSTRUCTOR_SUIT_LP_VERT",
+     "NZ_INSTRUCTOR_SUIT_LS_FWD",
+     "NZ_INSTRUCTOR_SUIT_LS_AFT",
+     "NZ_INSTRUCTOR_SUIT_LS_OUT",
+     "NZ_INSTRUCTOR_SUIT_LS_VERT"
+    ],
+    "clusters": {
+     "UP": [
+      [
+       0.183,
+       0.24832021316865607,
+       1.5026083755493163
+      ],
+      1,
+      1
+     ],
+     "US": [
+      [
+       -0.183,
+       0.24832021316865607,
+       1.5026083755493163
+      ],
+      -1,
+      1
+     ],
+     "LP": [
+      [
+       0.173,
+       0.2548466249261206,
+       0.9826083755493163
+      ],
+      1,
+      -1
+     ],
+     "LS": [
+      [
+       -0.173,
+       0.2548466249261206,
+       0.9826083755493163
+      ],
+      -1,
+      -1
+     ]
+    },
+    "poppet": "DOCK_INSTRUCTOR_Suit_N2_Poppet",
+    "capture": "DOCK_INSTRUCTOR_Suit_Capture_Tongue",
+    "module_object": "LS_INSTRUCTOR_Module"
+   },
+   "sockets": [
+    "SOCKET_HAND_L_GRIP",
+    "SOCKET_HAND_R_GRIP",
+    "SOCKET_HAND_R_TOOL",
+    "SOCKET_TOOL_STOW",
+    "SOCKET_TOE_HOOK_L",
+    "SOCKET_TOE_HOOK_R",
+    "SOCKET_PLSS_SCU",
+    "SOCKET_HELMET_EYE",
+    "SOCKET_HUD",
+    "SOCKET_TETHER_A",
+    "SOCKET_TETHER_B",
+    "SOCKET_DRONE_DOCK"
+   ],
+   "outer_trimmed_faces": 1112,
+   "cuirass_arch": {
+    "z_top": 1.198417444229126,
+    "half": 104.0
+   },
+   "scye_sleeves": {
+    "l": {
+     "length_m": 0.108,
+     "root_radius_m": 0.096,
+     "end_radius_m": 0.087,
+     "rings": 13
+    },
+    "r": {
+     "length_m": 0.108,
+     "root_radius_m": 0.096,
+     "end_radius_m": 0.087,
+     "rings": 13
+    },
+    "outer_faces_replaced": 128,
+    "outer_crumb_faces": 0
+   },
    "actions": {
     "eva_suit_check": {
      "frames": 360,
@@ -216,6 +271,165 @@
      "root_motion": false,
      "slip_mm": {},
      "reach_short_mm": {}
+    },
+    "EVA_SYSTEM_POSES": {
+     "frames": 90,
+     "loop": false,
+     "root_motion": false,
+     "slip_mm": {
+      "foot_right": 371.1,
+      "foot_left": 636.8,
+      "hand_right": 0.0,
+      "hand_left": 0.0
+     },
+     "reach_short_mm": {},
+     "shoulder_clearance": {
+      "walk": {
+       "l": {
+        "abduct_deg": 24,
+        "flex_deg": 0,
+        "hand_moved_mm": 206.2,
+        "contacts_left": 0
+       },
+       "r": {
+        "abduct_deg": 24,
+        "flex_deg": 0,
+        "hand_moved_mm": 212.4,
+        "contacts_left": 0
+       }
+      },
+      "reach": {
+       "l": {
+        "abduct_deg": 12,
+        "flex_deg": 10,
+        "hand_moved_mm": 128.9,
+        "contacts_left": 0
+       }
+      },
+      "crouch": {
+       "l": {
+        "abduct_deg": 24,
+        "flex_deg": 0,
+        "hand_moved_mm": 172.9,
+        "contacts_left": 0
+       },
+       "r": {
+        "abduct_deg": 24,
+        "flex_deg": 0,
+        "hand_moved_mm": 172.9,
+        "contacts_left": 0
+       }
+      },
+      "flight": {
+       "l": {
+        "abduct_deg": 12,
+        "flex_deg": 10,
+        "hand_moved_mm": 132.6,
+        "contacts_left": 0
+       },
+       "r": {
+        "abduct_deg": 6,
+        "flex_deg": -10,
+        "hand_moved_mm": 103.2,
+        "contacts_left": 0
+       }
+      },
+      "deployed": {
+       "l": {
+        "abduct_deg": 12,
+        "flex_deg": 10,
+        "hand_moved_mm": 132.1,
+        "contacts_left": 0
+       },
+       "r": {
+        "abduct_deg": 6,
+        "flex_deg": 0,
+        "hand_moved_mm": 53.0,
+        "contacts_left": 0
+       }
+      },
+      "burn": {
+       "l": {
+        "abduct_deg": 6,
+        "flex_deg": 0,
+        "hand_moved_mm": 26.2,
+        "contacts_left": 0
+       },
+       "r": {
+        "abduct_deg": 6,
+        "flex_deg": 0,
+        "hand_moved_mm": 26.2,
+        "contacts_left": 0
+       }
+      },
+      "chase": {
+       "l": {
+        "abduct_deg": 12,
+        "flex_deg": 10,
+        "hand_moved_mm": 132.5,
+        "contacts_left": 0
+       },
+       "r": {
+        "abduct_deg": 6,
+        "flex_deg": -10,
+        "hand_moved_mm": 103.3,
+        "contacts_left": 0
+       }
+      }
+     },
+     "hand_controller": {
+      "pivot": "CTRL_INSTRUCTOR_HCM_Pivot",
+      "links": [
+       "CTRL_INSTRUCTOR_HCM_Link_1",
+       "CTRL_INSTRUCTOR_HCM_Link_2"
+      ],
+      "housing": "CTRL_INSTRUCTOR_HCM_Hinge_Housing",
+      "release": "CTRL_INSTRUCTOR_Manual_Release",
+      "deploy_poses": [
+       "flight",
+       "deployed",
+       "chase"
+      ],
+      "stops": {
+       "yaw_deg": [
+        0.0,
+        150.58
+       ],
+       "slide_m": [
+        0.2747,
+        0.4694
+       ]
+      },
+      "reach_m": 0.469,
+      "grip_local": [
+       0.4423,
+       -0.1553,
+       0.4403
+      ],
+      "hinge_world": [
+       0.2345,
+       -0.0195,
+       1.0794
+      ],
+      "hinge_axis": [
+       -0.4336,
+       -0.1418,
+       -0.8899
+      ],
+      "seat_from_palm_mm": 52.6,
+      "grip_r_m": 0.018,
+      "grip_axis_link": [
+       -0.21302,
+       0.37771,
+       -0.90109
+      ],
+      "swing_deg": 150.6,
+      "telescope_m": 0.195,
+      "controls": {
+       "yaw": "HCM_Link_1 rotation_euler.z (rad, about the skewed hinge axis), stowed 0",
+       "slide": "HCM_Link_2 location.x (m)"
+      }
+     }
     }
    },
    "mobility": {
@@ -227,12 +441,12 @@
      },
      "knee": {
       "max_deg": 16.5,
-      "limit_deg": 95.0,
+      "limit_deg": 105.0,
       "ok": true
      },
      "shoulder": {
       "max_deg": 51.6,
-      "limit_deg": 120.0,
+      "limit_deg": 130.0,
       "ok": true
      },
      "head": {
@@ -249,13 +463,13 @@
      },
      "knee": {
       "max_deg": 27.8,
-      "limit_deg": 95.0,
+      "limit_deg": 105.0,
       "ok": true
      },
      "shoulder": {
       "max_deg": 123.1,
-      "limit_deg": 120.0,
-      "ok": false
+      "limit_deg": 130.0,
+      "ok": true
      },
      "head": {
       "max_deg": 4.0,
@@ -271,12 +485,12 @@
      },
      "knee": {
       "max_deg": 37.7,
-      "limit_deg": 95.0,
+      "limit_deg": 105.0,
       "ok": true
      },
      "shoulder": {
       "max_deg": 91.3,
-      "limit_deg": 120.0,
+      "limit_deg": 130.0,
       "ok": true
      },
      "head": {
@@ -293,12 +507,12 @@
      },
      "knee": {
       "max_deg": 37.7,
-      "limit_deg": 95.0,
+      "limit_deg": 105.0,
       "ok": true
      },
      "shoulder": {
       "max_deg": 105.5,
-      "limit_deg": 120.0,
+      "limit_deg": 130.0,
       "ok": true
      },
      "head": {
@@ -315,12 +529,12 @@
      },
      "knee": {
       "max_deg": 27.8,
-      "limit_deg": 95.0,
+      "limit_deg": 105.0,
       "ok": true
      },
      "shoulder": {
       "max_deg": 64.1,
-      "limit_deg": 120.0,
+      "limit_deg": 130.0,
       "ok": true
      },
      "head": {
@@ -337,12 +551,12 @@
      },
      "knee": {
       "max_deg": 27.8,
-      "limit_deg": 95.0,
+      "limit_deg": 105.0,
       "ok": true
      },
      "shoulder": {
       "max_deg": 66.4,
-      "limit_deg": 120.0,
+      "limit_deg": 130.0,
       "ok": true
      },
      "head": {
@@ -359,12 +573,12 @@
      },
      "knee": {
       "max_deg": 27.8,
-      "limit_deg": 95.0,
+      "limit_deg": 105.0,
       "ok": true
      },
      "shoulder": {
       "max_deg": 108.3,
-      "limit_deg": 120.0,
+      "limit_deg": 130.0,
       "ok": true
      },
      "head": {
@@ -381,12 +595,12 @@
      },
      "knee": {
       "max_deg": 37.7,
-      "limit_deg": 95.0,
+      "limit_deg": 105.0,
       "ok": true
      },
      "shoulder": {
       "max_deg": 91.3,
-      "limit_deg": 120.0,
+      "limit_deg": 130.0,
       "ok": true
      },
      "head": {
@@ -403,12 +617,12 @@
      },
      "knee": {
       "max_deg": 22.8,
-      "limit_deg": 95.0,
+      "limit_deg": 105.0,
       "ok": true
      },
      "shoulder": {
       "max_deg": 74.2,
-      "limit_deg": 120.0,
+      "limit_deg": 130.0,
       "ok": true
      },
      "head": {
@@ -425,12 +639,12 @@
      },
      "knee": {
       "max_deg": 16.5,
-      "limit_deg": 95.0,
+      "limit_deg": 105.0,
       "ok": true
      },
      "shoulder": {
       "max_deg": 78.2,
-      "limit_deg": 120.0,
+      "limit_deg": 130.0,
       "ok": true
      },
      "head": {
@@ -447,12 +661,12 @@
      },
      "knee": {
       "max_deg": 49.5,
-      "limit_deg": 95.0,
+      "limit_deg": 105.0,
       "ok": true
      },
      "shoulder": {
       "max_deg": 49.2,
-      "limit_deg": 120.0,
+      "limit_deg": 130.0,
       "ok": true
      },
      "head": {
@@ -469,12 +683,12 @@
      },
      "knee": {
       "max_deg": 27.8,
-      "limit_deg": 95.0,
+      "limit_deg": 105.0,
       "ok": true
      },
      "shoulder": {
       "max_deg": 64.1,
-      "limit_deg": 120.0,
+      "limit_deg": 130.0,
       "ok": true
      },
      "head": {
@@ -491,12 +705,12 @@
      },
      "knee": {
       "max_deg": 16.5,
-      "limit_deg": 95.0,
+      "limit_deg": 105.0,
       "ok": true
      },
      "shoulder": {
       "max_deg": 117.2,
-      "limit_deg": 120.0,
+      "limit_deg": 130.0,
       "ok": true
      },
      "head": {
@@ -513,12 +727,12 @@
      },
      "knee": {
       "max_deg": 16.5,
-      "limit_deg": 95.0,
+      "limit_deg": 105.0,
       "ok": true
      },
      "shoulder": {
-      "max_deg": 116.0,
-      "limit_deg": 120.0,
+      "max_deg": 125.8,
+      "limit_deg": 130.0,
       "ok": true
      },
      "head": {
@@ -535,12 +749,12 @@
      },
      "knee": {
       "max_deg": 5.0,
-      "limit_deg": 95.0,
+      "limit_deg": 105.0,
       "ok": true
      },
      "shoulder": {
       "max_deg": 6.5,
-      "limit_deg": 120.0,
+      "limit_deg": 130.0,
       "ok": true
      },
      "head": {
@@ -555,47 +769,31 @@
      "name": "EVA_INSTRUCTOR_LCVG_INNER",
      "assembly": "COOLING",
      "part_id": "WAYFARER_EVA_Y155/COOLING/LCVG_INNER",
-     "job": "liquid cooling and ventilation garment: water tubing and vent ducts against the skin (EVA-009, 53!8)",
+     "job": "liquid cooling and ventilation garment (cutaway layer)",
      "show": "cutaway",
      "bone": ""
     },
     {
-     "name": "EVA_INSTRUCTOR_SUIT_PRESSURE_BLADDER",
+     "name": "EVA_INSTRUCTOR_PRESSURE_BLADDER",
      "assembly": "PRESSURE",
      "part_id": "WAYFARER_EVA_Y155/PRESSURE/SUIT_PRESSURE_BLADDER",
-     "job": "continuous gas bladder: the pressure boundary (EVA-005, 44!4)",
+     "job": "continuous gas bladder: the pressure boundary (cutaway layer)",
      "show": "cutaway",
      "bone": ""
     },
     {
-     "name": "EVA_INSTRUCTOR_MMOD_OUTER_SHELL",
+     "name": "EVA_INSTRUCTOR_OUTER_LAYER",
      "assembly": "PROTECTION",
      "part_id": "WAYFARER_EVA_Y155/PROTECTION/MMOD_OUTER_SHELL",
-     "job": "restraint layer plus replaceable thermal/MMOD outer textile with abrasion patches (EVA-005, 44!5, 44!13, 53!11)",
+     "job": "patterned restraint (lines of non-extension) under a thin thermal / MMOD textile: the visible \"second skin\"",
      "show": "always",
      "bone": ""
     },
     {
-     "name": "EVA_INSTRUCTOR_HUT",
+     "name": "EVA_INSTRUCTOR_Torso_Shell",
      "assembly": "PRESSURE",
      "part_id": "WAYFARER_EVA_Y155/PRESSURE/SUIT_PRESSURE_HARD_TORSO",
-     "job": "rigid/hybrid hard upper torso: load-bearing pressure shell with bearing and seal rings (EVA-021, ASSET-02); ingress concept OPEN",
-     "show": "always",
-     "bone": "spine_03"
-    },
-    {
-     "name": "EVA_INSTRUCTOR_Waist_Ring",
-     "assembly": "PRESSURE",
-     "part_id": "WAYFARER_EVA_Y155/PRESSURE/SUIT_WAIST_RING",
-     "job": "body seal closure: hard torso to lower torso pressure seal (EVA-005)",
-     "show": "always",
-     "bone": "spine_02"
-    },
-    {
-     "name": "EVA_INSTRUCTOR_Neck_Ring",
-     "assembly": "PRESSURE",
-     "part_id": "WAYFARER_EVA_Y155/PRESSURE/SUIT_NECK_RING",
-     "job": "helmet neck ring: sealed mechanical interface, helmet locks here (EVA-005, ASSET-06)",
+     "job": "rigid rear-entry composite torso: pressure shell, load path for the life-support hatch and the drone dock; shoulder yoke flows into the integral helmet",
      "show": "always",
      "bone": "spine_03"
     },
@@ -603,183 +801,311 @@
      "name": "EVA_INSTRUCTOR_Helmet_Shell",
      "assembly": "HELMET",
      "part_id": "WAYFARER_EVA_Y155/HELMET/SUIT_HELMET_VISOR",
-     "job": "sealed helmet pressure shell, independent of the visor assemblies (EVA-023, ASSET-06)",
+     "job": "integral helmet (bonded to the torso, rear entry): superellipsoid sized to the swept head plus 22 mm",
      "show": "always",
      "bone": "spine_03"
     },
     {
-     "name": "EVA_INSTRUCTOR_Pressure_Visor",
+     "name": "EVA_INSTRUCTOR_Visor",
      "assembly": "HELMET",
      "part_id": "WAYFARER_EVA_Y155/HELMET/SUIT_HELMET_VISOR",
-     "job": "clear pressure visor with anti-fog/thermal treatment; never opened in vacuum (EVA-023)",
+     "job": "panoramic pressure visor (polycarbonate, inner anti-fog / thermal coat), set inside the structural frame",
      "show": "always",
      "bone": "spine_03"
     },
     {
-     "name": "EVA_INSTRUCTOR_Glare_Visor",
+     "name": "EVA_INSTRUCTOR_Helmet_Brow",
      "assembly": "HELMET",
      "part_id": "WAYFARER_EVA_Y155/HELMET/SUIT_HELMET_VISOR",
-     "job": "retractable glare visor, shown raised: shutter for sunlit work (EVA-023)",
+     "job": "brow structure: carries the visor frame load, the work lights and cameras in protected recesses, and the retracted sunshade",
      "show": "always",
      "bone": "spine_03"
     },
     {
-     "name": "EVA_INSTRUCTOR_Helmet_Band",
-     "assembly": "MARKINGS",
-     "part_id": "WAYFARER_EVA_Y155/MARKINGS/SAFETY_MARKINGS",
-     "job": "helmet identification band: Great Union deep-blue identification panels (helmet band, chest, upper arms), GUIDED EVA INSTRUCTOR role band, suit serial PROTOTYPE",
+     "name": "EVA_INSTRUCTOR_Visor_Frame",
+     "assembly": "HELMET",
+     "part_id": "WAYFARER_EVA_Y155/HELMET/SUIT_HELMET_VISOR",
+     "job": "visor structural frame: titanium-composite rim bonded to the shell",
      "show": "always",
      "bone": "spine_03"
     },
     {
-     "name": "EVA_INSTRUCTOR_PLSS",
-     "assembly": "PLSS",
-     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
-     "job": "detachable primary life-support pack: display envelope, packaging and mass OPEN (ASSET-09, EVA-024, EVA-028)",
+     "name": "EVA_INSTRUCTOR_Neck_Ring",
+     "assembly": "PRESSURE",
+     "part_id": "WAYFARER_EVA_Y155/PRESSURE/SUIT_PRESSURE_HARD_TORSO",
+     "job": "neck ring: helmet-to-yoke flange, dual O-ring face seal (pressure joint)",
      "show": "always",
      "bone": "spine_03"
     },
     {
-     "name": "EVA_INSTRUCTOR_PLSS_Cover_Upper",
-     "assembly": "PLSS",
-     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
-     "job": "PLSS access panel: replaceable module boundary (ASSET-09 \"distinct access hatches\")",
+     "name": "EVA_INSTRUCTOR_Neck_Ring_Collar",
+     "assembly": "PRESSURE",
+     "part_id": "WAYFARER_EVA_Y155/PRESSURE/SUIT_PRESSURE_HARD_TORSO",
+     "job": "neck-ring locking collar (service, not donning)",
      "show": "always",
      "bone": "spine_03"
     },
     {
-     "name": "EVA_INSTRUCTOR_PLSS_Cover_Lower",
-     "assembly": "PLSS",
-     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
-     "job": "PLSS access panel: replaceable module boundary (ASSET-09 \"distinct access hatches\")",
+     "name": "EVA_INSTRUCTOR_Cuirass_Edge_0",
+     "assembly": "PRESSURE",
+     "part_id": "WAYFARER_EVA_Y155/PRESSURE/SUIT_PRESSURE_HARD_TORSO",
+     "job": "cuirass edge: rolled rim of the rigid torso around the flexible abdomen and the back hem",
      "show": "always",
      "bone": "spine_03"
     },
     {
-     "name": "EVA_INSTRUCTOR_PLSS_O2_Primary_1",
-     "assembly": "PLSS",
-     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
-     "job": "primary oxygen storage (EVA-008)",
-     "show": "cutaway",
-     "bone": "spine_03"
-    },
-    {
-     "name": "EVA_INSTRUCTOR_PLSS_O2_Primary_2",
-     "assembly": "PLSS",
-     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
-     "job": "primary oxygen storage (EVA-008)",
-     "show": "cutaway",
-     "bone": "spine_03"
-    },
-    {
-     "name": "EVA_INSTRUCTOR_PLSS_O2_Emergency_Reserve",
-     "assembly": "PLSS",
-     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
-     "job": "separate emergency oxygen reserve, independent regulator (EVA-008, EVA-026)",
-     "show": "cutaway",
-     "bone": "spine_03"
-    },
-    {
-     "name": "EVA_INSTRUCTOR_PLSS_O2_Regulator",
-     "assembly": "PLSS",
-     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
-     "job": "oxygen pressure regulator; suit setpoint OPEN (EVA-004)",
-     "show": "cutaway",
-     "bone": "spine_03"
-    },
-    {
-     "name": "EVA_INSTRUCTOR_PLSS_CO2_Cartridge",
-     "assembly": "PLSS",
-     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
-     "job": "replaceable/regenerable CO2 removal cartridge (53!7)",
-     "show": "cutaway",
-     "bone": "spine_03"
-    },
-    {
-     "name": "EVA_INSTRUCTOR_PLSS_Fan_Pump_Separator",
-     "assembly": "PLSS",
-     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
-     "job": "ventilation fan, cooling-water pump and water separator (53!6, 53!8)",
-     "show": "cutaway",
-     "bone": "spine_03"
-    },
-    {
-     "name": "EVA_INSTRUCTOR_PLSS_Heat_Exchanger",
-     "assembly": "PLSS",
-     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
-     "job": "primary heat exchanger / evaporator, emergency cooling branch (EVA-009, 53!9)",
-     "show": "cutaway",
-     "bone": "spine_03"
-    },
-    {
-     "name": "EVA_INSTRUCTOR_PLSS_Battery",
-     "assembly": "PLSS",
-     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
-     "job": "PLSS battery",
-     "show": "cutaway",
-     "bone": "spine_03"
-    },
-    {
-     "name": "EVA_INSTRUCTOR_PLSS_Radio_Telemetry",
-     "assembly": "PLSS",
-     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
-     "job": "radio, telemetry and emergency beacon; antenna protected in the shell (EVA-019)",
-     "show": "cutaway",
-     "bone": "spine_03"
-    },
-    {
-     "name": "EVA_INSTRUCTOR_PLSS_SCU_Port",
-     "assembly": "PLSS",
-     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
-     "job": "umbilical port: recharge from certified ship supplies (53!6)",
+     "name": "SENS_Helmet_Light_P",
+     "assembly": "HELMET",
+     "part_id": "WAYFARER_EVA_Y155/HELMET/SUIT_HELMET_VISOR",
+     "job": "work light (flush lens in the brow recess)",
      "show": "always",
      "bone": "spine_03"
     },
     {
-     "name": "EVA_INSTRUCTOR_PLSS_Cooling_Port",
-     "assembly": "PLSS",
-     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
-     "job": "cooling-loop quick disconnect (53!8)",
+     "name": "SENS_Helmet_Cam_P",
+     "assembly": "HELMET",
+     "part_id": "WAYFARER_EVA_Y155/HELMET/SUIT_HELMET_VISOR",
+     "job": "helmet camera (stereo pair, flush)",
      "show": "always",
      "bone": "spine_03"
     },
     {
-     "name": "EVA_INSTRUCTOR_PLSS_Purge_Valve",
-     "assembly": "MARKINGS",
-     "part_id": "WAYFARER_EVA_Y155/MARKINGS/SAFETY_MARKINGS",
-     "job": "emergency reserve actuator, safety orange (EVA-026)",
+     "name": "SENS_Helmet_Status_P",
+     "assembly": "HELMET",
+     "part_id": "WAYFARER_EVA_Y155/HELMET/SUIT_HELMET_VISOR",
+     "job": "in-helmet peripheral status light (drone link, gas, latch)",
      "show": "always",
      "bone": "spine_03"
     },
     {
-     "name": "EVA_INSTRUCTOR_DCM",
-     "assembly": "PLSS",
-     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
-     "job": "chest display and control module: suit status, warnings, tether count (EVA-018); no unreleased value is displayed",
+     "name": "SENS_Helmet_Light_S",
+     "assembly": "HELMET",
+     "part_id": "WAYFARER_EVA_Y155/HELMET/SUIT_HELMET_VISOR",
+     "job": "work light (flush lens in the brow recess)",
      "show": "always",
      "bone": "spine_03"
     },
     {
-     "name": "EVA_INSTRUCTOR_DCM_Display",
-     "assembly": "PLSS",
-     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
-     "job": "DCM status display",
+     "name": "SENS_Helmet_Cam_S",
+     "assembly": "HELMET",
+     "part_id": "WAYFARER_EVA_Y155/HELMET/SUIT_HELMET_VISOR",
+     "job": "helmet camera (stereo pair, flush)",
      "show": "always",
      "bone": "spine_03"
     },
     {
-     "name": "EVA_INSTRUCTOR_Wrist_Display",
-     "assembly": "PLSS",
-     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
-     "job": "forearm status display and checklist (EVA-018)",
+     "name": "SENS_Helmet_Status_S",
+     "assembly": "HELMET",
+     "part_id": "WAYFARER_EVA_Y155/HELMET/SUIT_HELMET_VISOR",
+     "job": "in-helmet peripheral status light (drone link, gas, latch)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "EVA_INSTRUCTOR_Helmet_Crest",
+     "assembly": "HELMET",
+     "part_id": "WAYFARER_EVA_Y155/HELMET/SUIT_HELMET_VISOR",
+     "job": "service crest: structural rib and harness run (brow lights and cameras to the hatch)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "SENS_Helmet_Crest_Cam",
+     "assembly": "HELMET",
+     "part_id": "WAYFARER_EVA_Y155/HELMET/SUIT_HELMET_VISOR",
+     "job": "forward work camera at the crest root",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "SENS_Helmet_Comms_Patch",
+     "assembly": "HELMET",
+     "part_id": "WAYFARER_EVA_Y155/HELMET/SUIT_HELMET_VISOR",
+     "job": "conformal comms antenna patch (suit-drone-ship link) under the shell skin",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "EVA_INSTRUCTOR_Sunshade_Retracted",
+     "assembly": "HELMET",
+     "part_id": "WAYFARER_EVA_Y155/HELMET/SUIT_HELMET_VISOR",
+     "job": "gold sunshade, retracted inside the brow structure (shown stowed; deployment not rigged)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "EVA_INSTRUCTOR_Scye_Sleeve_l",
+     "assembly": "PRESSURE",
+     "part_id": "WAYFARER_EVA_Y155/PRESSURE/SUIT_PRESSURE_HARD_TORSO",
+     "job": "shoulder convolute: pressure-bearing sleeve from the scye bearing to the upper-arm bearing (restraint ribs)",
+     "show": "always",
+     "bone": ""
+    },
+    {
+     "name": "EVA_INSTRUCTOR_Scye_Sleeve_r",
+     "assembly": "PRESSURE",
+     "part_id": "WAYFARER_EVA_Y155/PRESSURE/SUIT_PRESSURE_HARD_TORSO",
+     "job": "shoulder convolute: pressure-bearing sleeve from the scye bearing to the upper-arm bearing (restraint ribs)",
+     "show": "always",
+     "bone": ""
+    },
+    {
+     "name": "EVA_INSTRUCTOR_Cuirass_Seal",
+     "assembly": "PRESSURE",
+     "part_id": "WAYFARER_EVA_Y155/PRESSURE/SUIT_PRESSURE_HARD_TORSO",
+     "job": "bladder-to-cuirass clamp skirt: the soft layer's pressure flange carried into the rigid torso's clamp ring",
+     "show": "always",
+     "bone": ""
+    },
+    {
+     "name": "EVA_INSTRUCTOR_Restraint_Line_upperarm_l_0",
+     "assembly": "PROTECTION",
+     "part_id": "WAYFARER_EVA_Y155/PROTECTION/MMOD_OUTER_SHELL",
+     "job": "line of non-extension (restraint cord): keeps the limb length and volume constant in flexion",
+     "show": "always",
+     "bone": "upperarm_l"
+    },
+    {
+     "name": "EVA_INSTRUCTOR_Restraint_Line_upperarm_l_1",
+     "assembly": "PROTECTION",
+     "part_id": "WAYFARER_EVA_Y155/PROTECTION/MMOD_OUTER_SHELL",
+     "job": "line of non-extension (restraint cord): keeps the limb length and volume constant in flexion",
+     "show": "always",
+     "bone": "upperarm_l"
+    },
+    {
+     "name": "EVA_INSTRUCTOR_Restraint_Line_lowerarm_l_0",
+     "assembly": "PROTECTION",
+     "part_id": "WAYFARER_EVA_Y155/PROTECTION/MMOD_OUTER_SHELL",
+     "job": "line of non-extension (restraint cord): keeps the limb length and volume constant in flexion",
      "show": "always",
      "bone": "lowerarm_l"
+    },
+    {
+     "name": "EVA_INSTRUCTOR_Restraint_Line_lowerarm_l_1",
+     "assembly": "PROTECTION",
+     "part_id": "WAYFARER_EVA_Y155/PROTECTION/MMOD_OUTER_SHELL",
+     "job": "line of non-extension (restraint cord): keeps the limb length and volume constant in flexion",
+     "show": "always",
+     "bone": "lowerarm_l"
+    },
+    {
+     "name": "EVA_INSTRUCTOR_Restraint_Line_thigh_l_0",
+     "assembly": "PROTECTION",
+     "part_id": "WAYFARER_EVA_Y155/PROTECTION/MMOD_OUTER_SHELL",
+     "job": "line of non-extension (restraint cord): keeps the limb length and volume constant in flexion",
+     "show": "always",
+     "bone": "thigh_l"
+    },
+    {
+     "name": "EVA_INSTRUCTOR_Restraint_Line_thigh_l_1",
+     "assembly": "PROTECTION",
+     "part_id": "WAYFARER_EVA_Y155/PROTECTION/MMOD_OUTER_SHELL",
+     "job": "line of non-extension (restraint cord): keeps the limb length and volume constant in flexion",
+     "show": "always",
+     "bone": "thigh_l"
+    },
+    {
+     "name": "EVA_INSTRUCTOR_Restraint_Line_calf_l_0",
+     "assembly": "PROTECTION",
+     "part_id": "WAYFARER_EVA_Y155/PROTECTION/MMOD_OUTER_SHELL",
+     "job": "line of non-extension (restraint cord): keeps the limb length and volume constant in flexion",
+     "show": "always",
+     "bone": "calf_l"
+    },
+    {
+     "name": "EVA_INSTRUCTOR_Restraint_Line_calf_l_1",
+     "assembly": "PROTECTION",
+     "part_id": "WAYFARER_EVA_Y155/PROTECTION/MMOD_OUTER_SHELL",
+     "job": "line of non-extension (restraint cord): keeps the limb length and volume constant in flexion",
+     "show": "always",
+     "bone": "calf_l"
+    },
+    {
+     "name": "EVA_INSTRUCTOR_Restraint_Line_upperarm_r_0",
+     "assembly": "PROTECTION",
+     "part_id": "WAYFARER_EVA_Y155/PROTECTION/MMOD_OUTER_SHELL",
+     "job": "line of non-extension (restraint cord): keeps the limb length and volume constant in flexion",
+     "show": "always",
+     "bone": "upperarm_r"
+    },
+    {
+     "name": "EVA_INSTRUCTOR_Restraint_Line_upperarm_r_1",
+     "assembly": "PROTECTION",
+     "part_id": "WAYFARER_EVA_Y155/PROTECTION/MMOD_OUTER_SHELL",
+     "job": "line of non-extension (restraint cord): keeps the limb length and volume constant in flexion",
+     "show": "always",
+     "bone": "upperarm_r"
+    },
+    {
+     "name": "EVA_INSTRUCTOR_Restraint_Line_lowerarm_r_0",
+     "assembly": "PROTECTION",
+     "part_id": "WAYFARER_EVA_Y155/PROTECTION/MMOD_OUTER_SHELL",
+     "job": "line of non-extension (restraint cord): keeps the limb length and volume constant in flexion",
+     "show": "always",
+     "bone": "lowerarm_r"
+    },
+    {
+     "name": "EVA_INSTRUCTOR_Restraint_Line_lowerarm_r_1",
+     "assembly": "PROTECTION",
+     "part_id": "WAYFARER_EVA_Y155/PROTECTION/MMOD_OUTER_SHELL",
+     "job": "line of non-extension (restraint cord): keeps the limb length and volume constant in flexion",
+     "show": "always",
+     "bone": "lowerarm_r"
+    },
+    {
+     "name": "EVA_INSTRUCTOR_Restraint_Line_thigh_r_0",
+     "assembly": "PROTECTION",
+     "part_id": "WAYFARER_EVA_Y155/PROTECTION/MMOD_OUTER_SHELL",
+     "job": "line of non-extension (restraint cord): keeps the limb length and volume constant in flexion",
+     "show": "always",
+     "bone": "thigh_r"
+    },
+    {
+     "name": "EVA_INSTRUCTOR_Restraint_Line_thigh_r_1",
+     "assembly": "PROTECTION",
+     "part_id": "WAYFARER_EVA_Y155/PROTECTION/MMOD_OUTER_SHELL",
+     "job": "line of non-extension (restraint cord): keeps the limb length and volume constant in flexion",
+     "show": "always",
+     "bone": "thigh_r"
+    },
+    {
+     "name": "EVA_INSTRUCTOR_Restraint_Line_calf_r_0",
+     "assembly": "PROTECTION",
+     "part_id": "WAYFARER_EVA_Y155/PROTECTION/MMOD_OUTER_SHELL",
+     "job": "line of non-extension (restraint cord): keeps the limb length and volume constant in flexion",
+     "show": "always",
+     "bone": "calf_r"
+    },
+    {
+     "name": "EVA_INSTRUCTOR_Restraint_Line_calf_r_1",
+     "assembly": "PROTECTION",
+     "part_id": "WAYFARER_EVA_Y155/PROTECTION/MMOD_OUTER_SHELL",
+     "job": "line of non-extension (restraint cord): keeps the limb length and volume constant in flexion",
+     "show": "always",
+     "bone": "calf_r"
+    },
+    {
+     "name": "EVA_INSTRUCTOR_Scye_Housing_l",
+     "assembly": "PRESSURE",
+     "part_id": "WAYFARER_EVA_Y155/PRESSURE/SUIT_PRESSURE_HARD_TORSO",
+     "job": "scye housing: rigid collar bolted to the torso shell, the scye bearing seat (pressure joint)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "EVA_INSTRUCTOR_Scye_Housing_r",
+     "assembly": "PRESSURE",
+     "part_id": "WAYFARER_EVA_Y155/PRESSURE/SUIT_PRESSURE_HARD_TORSO",
+     "job": "scye housing: rigid collar bolted to the torso shell, the scye bearing seat (pressure joint)",
+     "show": "always",
+     "bone": "spine_03"
     },
     {
      "name": "EVA_INSTRUCTOR_Scye_Bearing_l",
      "assembly": "JOINTS",
      "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_JOINTS",
-     "job": "scye (shoulder) bearing on the hard torso (EVA-022, 53!14)",
+     "job": "scye bearing in the torso shell (shoulder rotation)",
      "show": "always",
      "bone": "spine_03"
     },
@@ -787,95 +1113,103 @@
      "name": "EVA_INSTRUCTOR_Upperarm_Bearing_l",
      "assembly": "JOINTS",
      "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_JOINTS",
-     "job": "rotary bearing: low-torque pressure-compatible rotation (53!14)",
+     "job": "upper-arm bearing (humeral rotation)",
      "show": "always",
      "bone": "upperarm_l"
     },
     {
-     "name": "EVA_INSTRUCTOR_Elbow_Convolute_l_dn",
+     "name": "EVA_INSTRUCTOR_Upperarm_Bearing_l_Sleeve",
      "assembly": "JOINTS",
      "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_JOINTS",
-     "job": "elbow convolute: restraint-held flexible pressure section (ASSET-05)",
-     "show": "always",
-     "bone": "lowerarm_l"
-    },
-    {
-     "name": "EVA_INSTRUCTOR_Elbow_Convolute_l_up",
-     "assembly": "JOINTS",
-     "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_JOINTS",
-     "job": "elbow convolute (ASSET-05)",
+     "job": "restraint attachment sleeve",
      "show": "always",
      "bone": "upperarm_l"
     },
     {
-     "name": "EVA_INSTRUCTOR_Wrist_Bearing_l",
+     "name": "EVA_INSTRUCTOR_Wrist_Disconnect_l",
      "assembly": "JOINTS",
      "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_GLOVES",
-     "job": "glove wrist disconnect and bearing: sealed cuff (ASSET-07)",
+     "job": "glove wrist disconnect and bearing",
      "show": "always",
      "bone": "lowerarm_l"
     },
     {
-     "name": "EVA_INSTRUCTOR_Hip_Bearing_l",
+     "name": "EVA_INSTRUCTOR_Wrist_Disconnect_l_Sleeve",
      "assembly": "JOINTS",
-     "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_JOINTS",
-     "job": "hip bearing (53!14)",
+     "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_GLOVES",
+     "job": "restraint attachment sleeve",
      "show": "always",
-     "bone": "pelvis"
-    },
-    {
-     "name": "EVA_INSTRUCTOR_Thigh_Bearing_l",
-     "assembly": "JOINTS",
-     "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_JOINTS",
-     "job": "rotary bearing: low-torque pressure-compatible rotation (53!14)",
-     "show": "always",
-     "bone": "thigh_l"
-    },
-    {
-     "name": "EVA_INSTRUCTOR_Knee_Convolute_l_dn",
-     "assembly": "JOINTS",
-     "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_JOINTS",
-     "job": "knee convolute (ASSET-05)",
-     "show": "always",
-     "bone": "calf_l"
-    },
-    {
-     "name": "EVA_INSTRUCTOR_Knee_Convolute_l_up",
-     "assembly": "JOINTS",
-     "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_JOINTS",
-     "job": "knee convolute (ASSET-05)",
-     "show": "always",
-     "bone": "thigh_l"
-    },
-    {
-     "name": "EVA_INSTRUCTOR_Ankle_Bearing_l",
-     "assembly": "JOINTS",
-     "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_JOINTS",
-     "job": "ankle bearing and boot seal (ASSET-08)",
-     "show": "always",
-     "bone": "calf_l"
+     "bone": "lowerarm_l"
     },
     {
      "name": "EVA_INSTRUCTOR_Gauntlet_l",
      "assembly": "JOINTS",
      "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_GLOVES",
-     "job": "glove gauntlet: thermal/MMOD cuff over the wrist disconnect (ASSET-07)",
+     "job": "gauntlet cuff: thermal / MMOD cover over the wrist disconnect",
      "show": "always",
-     "bone": "hand_l"
+     "bone": "lowerarm_l"
     },
     {
-     "name": "EVA_INSTRUCTOR_Sole_l",
+     "name": "EVA_INSTRUCTOR_Ankle_Bearing_l",
+     "assembly": "JOINTS",
+     "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_JOINTS",
+     "job": "ankle bearing and boot seal",
+     "show": "always",
+     "bone": "calf_l"
+    },
+    {
+     "name": "EVA_INSTRUCTOR_Ankle_Bearing_l_Sleeve",
+     "assembly": "JOINTS",
+     "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_JOINTS",
+     "job": "restraint attachment sleeve",
+     "show": "always",
+     "bone": "calf_l"
+    },
+    {
+     "name": "EVA_INSTRUCTOR_Knee_Cap_l",
+     "assembly": "PROTECTION",
+     "part_id": "WAYFARER_EVA_Y155/PROTECTION/MMOD_OUTER_SHELL",
+     "job": "knee cap: kneeling and restraint contact",
+     "show": "always",
+     "bone": "calf_l"
+    },
+    {
+     "name": "EVA_INSTRUCTOR_Shin_Guard_l",
+     "assembly": "PROTECTION",
+     "part_id": "WAYFARER_EVA_Y155/PROTECTION/MMOD_OUTER_SHELL",
+     "job": "shin guard: MMOD and abrasion",
+     "show": "always",
+     "bone": "calf_l"
+    },
+    {
+     "name": "EVA_INSTRUCTOR_Elbow_Cap_l",
+     "assembly": "PROTECTION",
+     "part_id": "WAYFARER_EVA_Y155/PROTECTION/MMOD_OUTER_SHELL",
+     "job": "elbow cap",
+     "show": "always",
+     "bone": "lowerarm_l"
+    },
+    {
+     "name": "EVA_INSTRUCTOR_Arm_Band_l",
+     "assembly": "MARKINGS",
+     "part_id": "WAYFARER_EVA_Y155/MARKINGS/SAFETY_MARKINGS",
+     "job": "identification band (role colour)",
+     "show": "always",
+     "bone": "upperarm_l"
+    },
+    {
+     "name": "EVA_INSTRUCTOR_Boot_Shell_l",
      "assembly": "JOINTS",
      "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_BOOTS",
-     "job": "rigid service sole (ASSET-08): no tread, foot-restraint interface",
+     "job": "integrated boot: rigid heel counter and arch, sole band, heel fitting",
      "show": "always",
      "bone": "foot_l"
     },
     {
-     "name": "EVA_INSTRUCTOR_Toe_Sole_l",
+     "name": "EVA_INSTRUCTOR_Boot_Toe_l",
      "assembly": "JOINTS",
      "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_BOOTS",
-     "job": "flexible toe sole",
+     "job": "boot toe section: flexes at the ball joint; toe hook for foot restraints",
      "show": "always",
      "bone": "ball_l"
     },
@@ -883,23 +1217,23 @@
      "name": "EVA_INSTRUCTOR_Toe_Hook_l",
      "assembly": "JOINTS",
      "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_BOOTS",
-     "job": "toe hook for a foot restraint (ASSET-08)",
+     "job": "toe hook bar (foot restraint)",
      "show": "always",
      "bone": "ball_l"
     },
     {
-     "name": "EVA_INSTRUCTOR_Arm_Band_l",
-     "assembly": "MARKINGS",
-     "part_id": "WAYFARER_EVA_Y155/MARKINGS/SAFETY_MARKINGS",
-     "job": "upper-arm identification band: Great Union deep-blue identification panels (helmet band, chest, upper arms), GUIDED EVA INSTRUCTOR role band, suit serial PROTOTYPE",
+     "name": "EVA_INSTRUCTOR_Heel_Fitting_l",
+     "assembly": "JOINTS",
+     "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_BOOTS",
+     "job": "heel fitting: foot-restraint clip",
      "show": "always",
-     "bone": "upperarm_l"
+     "bone": "foot_l"
     },
     {
      "name": "EVA_INSTRUCTOR_Scye_Bearing_r",
      "assembly": "JOINTS",
      "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_JOINTS",
-     "job": "scye (shoulder) bearing on the hard torso (EVA-022, 53!14)",
+     "job": "scye bearing in the torso shell (shoulder rotation)",
      "show": "always",
      "bone": "spine_03"
     },
@@ -907,95 +1241,103 @@
      "name": "EVA_INSTRUCTOR_Upperarm_Bearing_r",
      "assembly": "JOINTS",
      "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_JOINTS",
-     "job": "rotary bearing: low-torque pressure-compatible rotation (53!14)",
+     "job": "upper-arm bearing (humeral rotation)",
      "show": "always",
      "bone": "upperarm_r"
     },
     {
-     "name": "EVA_INSTRUCTOR_Elbow_Convolute_r_dn",
+     "name": "EVA_INSTRUCTOR_Upperarm_Bearing_r_Sleeve",
      "assembly": "JOINTS",
      "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_JOINTS",
-     "job": "elbow convolute: restraint-held flexible pressure section (ASSET-05)",
-     "show": "always",
-     "bone": "lowerarm_r"
-    },
-    {
-     "name": "EVA_INSTRUCTOR_Elbow_Convolute_r_up",
-     "assembly": "JOINTS",
-     "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_JOINTS",
-     "job": "elbow convolute (ASSET-05)",
+     "job": "restraint attachment sleeve",
      "show": "always",
      "bone": "upperarm_r"
     },
     {
-     "name": "EVA_INSTRUCTOR_Wrist_Bearing_r",
+     "name": "EVA_INSTRUCTOR_Wrist_Disconnect_r",
      "assembly": "JOINTS",
      "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_GLOVES",
-     "job": "glove wrist disconnect and bearing: sealed cuff (ASSET-07)",
+     "job": "glove wrist disconnect and bearing",
      "show": "always",
      "bone": "lowerarm_r"
     },
     {
-     "name": "EVA_INSTRUCTOR_Hip_Bearing_r",
+     "name": "EVA_INSTRUCTOR_Wrist_Disconnect_r_Sleeve",
      "assembly": "JOINTS",
-     "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_JOINTS",
-     "job": "hip bearing (53!14)",
+     "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_GLOVES",
+     "job": "restraint attachment sleeve",
      "show": "always",
-     "bone": "pelvis"
-    },
-    {
-     "name": "EVA_INSTRUCTOR_Thigh_Bearing_r",
-     "assembly": "JOINTS",
-     "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_JOINTS",
-     "job": "rotary bearing: low-torque pressure-compatible rotation (53!14)",
-     "show": "always",
-     "bone": "thigh_r"
-    },
-    {
-     "name": "EVA_INSTRUCTOR_Knee_Convolute_r_dn",
-     "assembly": "JOINTS",
-     "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_JOINTS",
-     "job": "knee convolute (ASSET-05)",
-     "show": "always",
-     "bone": "calf_r"
-    },
-    {
-     "name": "EVA_INSTRUCTOR_Knee_Convolute_r_up",
-     "assembly": "JOINTS",
-     "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_JOINTS",
-     "job": "knee convolute (ASSET-05)",
-     "show": "always",
-     "bone": "thigh_r"
-    },
-    {
-     "name": "EVA_INSTRUCTOR_Ankle_Bearing_r",
-     "assembly": "JOINTS",
-     "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_JOINTS",
-     "job": "ankle bearing and boot seal (ASSET-08)",
-     "show": "always",
-     "bone": "calf_r"
+     "bone": "lowerarm_r"
     },
     {
      "name": "EVA_INSTRUCTOR_Gauntlet_r",
      "assembly": "JOINTS",
      "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_GLOVES",
-     "job": "glove gauntlet: thermal/MMOD cuff over the wrist disconnect (ASSET-07)",
+     "job": "gauntlet cuff: thermal / MMOD cover over the wrist disconnect",
      "show": "always",
-     "bone": "hand_r"
+     "bone": "lowerarm_r"
     },
     {
-     "name": "EVA_INSTRUCTOR_Sole_r",
+     "name": "EVA_INSTRUCTOR_Ankle_Bearing_r",
+     "assembly": "JOINTS",
+     "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_JOINTS",
+     "job": "ankle bearing and boot seal",
+     "show": "always",
+     "bone": "calf_r"
+    },
+    {
+     "name": "EVA_INSTRUCTOR_Ankle_Bearing_r_Sleeve",
+     "assembly": "JOINTS",
+     "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_JOINTS",
+     "job": "restraint attachment sleeve",
+     "show": "always",
+     "bone": "calf_r"
+    },
+    {
+     "name": "EVA_INSTRUCTOR_Knee_Cap_r",
+     "assembly": "PROTECTION",
+     "part_id": "WAYFARER_EVA_Y155/PROTECTION/MMOD_OUTER_SHELL",
+     "job": "knee cap: kneeling and restraint contact",
+     "show": "always",
+     "bone": "calf_r"
+    },
+    {
+     "name": "EVA_INSTRUCTOR_Shin_Guard_r",
+     "assembly": "PROTECTION",
+     "part_id": "WAYFARER_EVA_Y155/PROTECTION/MMOD_OUTER_SHELL",
+     "job": "shin guard: MMOD and abrasion",
+     "show": "always",
+     "bone": "calf_r"
+    },
+    {
+     "name": "EVA_INSTRUCTOR_Elbow_Cap_r",
+     "assembly": "PROTECTION",
+     "part_id": "WAYFARER_EVA_Y155/PROTECTION/MMOD_OUTER_SHELL",
+     "job": "elbow cap",
+     "show": "always",
+     "bone": "lowerarm_r"
+    },
+    {
+     "name": "EVA_INSTRUCTOR_Arm_Band_r",
+     "assembly": "MARKINGS",
+     "part_id": "WAYFARER_EVA_Y155/MARKINGS/SAFETY_MARKINGS",
+     "job": "identification band (role colour)",
+     "show": "always",
+     "bone": "upperarm_r"
+    },
+    {
+     "name": "EVA_INSTRUCTOR_Boot_Shell_r",
      "assembly": "JOINTS",
      "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_BOOTS",
-     "job": "rigid service sole (ASSET-08): no tread, foot-restraint interface",
+     "job": "integrated boot: rigid heel counter and arch, sole band, heel fitting",
      "show": "always",
      "bone": "foot_r"
     },
     {
-     "name": "EVA_INSTRUCTOR_Toe_Sole_r",
+     "name": "EVA_INSTRUCTOR_Boot_Toe_r",
      "assembly": "JOINTS",
      "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_BOOTS",
-     "job": "flexible toe sole",
+     "job": "boot toe section: flexes at the ball joint; toe hook for foot restraints",
      "show": "always",
      "bone": "ball_r"
     },
@@ -1003,73 +1345,1001 @@
      "name": "EVA_INSTRUCTOR_Toe_Hook_r",
      "assembly": "JOINTS",
      "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_BOOTS",
-     "job": "toe hook for a foot restraint (ASSET-08)",
+     "job": "toe hook bar (foot restraint)",
      "show": "always",
      "bone": "ball_r"
     },
     {
-     "name": "EVA_INSTRUCTOR_Arm_Band_r",
-     "assembly": "MARKINGS",
-     "part_id": "WAYFARER_EVA_Y155/MARKINGS/SAFETY_MARKINGS",
-     "job": "upper-arm identification band: Great Union deep-blue identification panels (helmet band, chest, upper arms), GUIDED EVA INSTRUCTOR role band, suit serial PROTOTYPE",
+     "name": "EVA_INSTRUCTOR_Heel_Fitting_r",
+     "assembly": "JOINTS",
+     "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_BOOTS",
+     "job": "heel fitting: foot-restraint clip",
      "show": "always",
-     "bone": "upperarm_r"
+     "bone": "foot_r"
     },
     {
-     "name": "EVA_INSTRUCTOR_GU_Chest_Plate",
-     "assembly": "MARKINGS",
-     "part_id": "WAYFARER_EVA_Y155/MARKINGS/SAFETY_MARKINGS",
-     "job": "Great Union deep-blue certified identification plate (Y155 era, EVA-025)",
+     "name": "LS_INSTRUCTOR_Module",
+     "assembly": "PLSS",
+     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
+     "job": "life-support module = the rear-entry hatch: O2, CO2 / humidity swing bed, membrane evaporator, fan / pump, battery, radio, the N2 reserve and the suit manifold (packaging: data/eva_suit.toml [module]); its frame carries the drone dock into the torso shell",
      "show": "always",
      "bone": "spine_03"
     },
     {
-     "name": "EVA_INSTRUCTOR_Tether_Reel_A",
+     "name": "DOCK_INSTRUCTOR_Suit_Channel",
+     "assembly": "DOCK",
+     "part_id": "WAYFARER_EVA_Y155/DOCK/DRONE_DOCK",
+     "job": "dock channel: drafted 15 deg walls guide the drone keel in (capture +-6 mm at the mouth); hard-anodised wear liner",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "DOCK_INSTRUCTOR_Suit_Bolt_Socket_PU",
+     "assembly": "DOCK",
+     "part_id": "WAYFARER_EVA_Y155/DOCK/DRONE_DOCK",
+     "job": "latch bolt socket: hardened insert in the channel wall; the drone keel's bolt shoots into it (carries pull-off and shear loads)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "DOCK_INSTRUCTOR_Suit_Bolt_Socket_SU",
+     "assembly": "DOCK",
+     "part_id": "WAYFARER_EVA_Y155/DOCK/DRONE_DOCK",
+     "job": "latch bolt socket: hardened insert in the channel wall; the drone keel's bolt shoots into it (carries pull-off and shear loads)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "DOCK_INSTRUCTOR_Suit_Bolt_Socket_PL",
+     "assembly": "DOCK",
+     "part_id": "WAYFARER_EVA_Y155/DOCK/DRONE_DOCK",
+     "job": "latch bolt socket: hardened insert in the channel wall; the drone keel's bolt shoots into it (carries pull-off and shear loads)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "DOCK_INSTRUCTOR_Suit_Bolt_Socket_SL",
+     "assembly": "DOCK",
+     "part_id": "WAYFARER_EVA_Y155/DOCK/DRONE_DOCK",
+     "job": "latch bolt socket: hardened insert in the channel wall; the drone keel's bolt shoots into it (carries pull-off and shear loads)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "DOCK_INSTRUCTOR_Suit_N2_Receptacle",
+     "assembly": "DOCK",
+     "part_id": "WAYFARER_EVA_Y155/DOCK/DRONE_DOCK",
+     "job": "N2 dry-break receptacle, flush in the channel floor (no gas path without the probe)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "DOCK_INSTRUCTOR_Suit_N2_Mark",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/N2_RESERVE",
+     "job": "N2 identification ring",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "DOCK_INSTRUCTOR_Suit_N2_Poppet",
+     "assembly": "DOCK",
+     "part_id": "WAYFARER_EVA_Y155/DOCK/DRONE_DOCK",
+     "job": "spring-loaded poppet: pushed in 10 mm by the probe while coupled",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "DOCK_INSTRUCTOR_Suit_Power_Receptacle",
+     "assembly": "PLSS",
+     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
+     "job": "blind-mate power / data receptacle (flush, sealed shutter)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "DOCK_INSTRUCTOR_Suit_Mouth_Mark_1009",
+     "assembly": "DOCK",
+     "part_id": "WAYFARER_EVA_Y155/DOCK/DRONE_DOCK",
+     "job": "channel mouth alignment mark (the only hazard colour on the dock)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "DOCK_INSTRUCTOR_Suit_Mouth_Mark_1425",
+     "assembly": "DOCK",
+     "part_id": "WAYFARER_EVA_Y155/DOCK/DRONE_DOCK",
+     "job": "channel mouth alignment mark (the only hazard colour on the dock)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "DOCK_INSTRUCTOR_Suit_Capture_Tongue",
+     "assembly": "DOCK",
+     "part_id": "WAYFARER_EVA_Y155/DOCK/DRONE_DOCK",
+     "job": "capture tongue: spring-loaded, slides across the channel mouth over the keel nose (soft capture), then the bolts lock",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "DOCK_INSTRUCTOR_Suit_Load_Pad_P",
+     "assembly": "DOCK",
+     "part_id": "WAYFARER_EVA_Y155/DOCK/DRONE_DOCK",
+     "job": "load pad (titanium): takes the drone's upper pads; the load path runs into the shoulder yoke",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "DOCK_INSTRUCTOR_Suit_Load_Pad_S",
+     "assembly": "DOCK",
+     "part_id": "WAYFARER_EVA_Y155/DOCK/DRONE_DOCK",
+     "job": "load pad (titanium): takes the drone's upper pads; the load path runs into the shoulder yoke",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "DOCK_INSTRUCTOR_Suit_Retro_Target_0",
+     "assembly": "DOCK",
+     "part_id": "WAYFARER_EVA_Y155/DOCK/DRONE_DOCK",
+     "job": "retroreflector alignment target (read by the drone's docking cameras)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "DOCK_INSTRUCTOR_Suit_Retro_Ring_0",
+     "assembly": "DOCK",
+     "part_id": "WAYFARER_EVA_Y155/DOCK/DRONE_DOCK",
+     "job": "target ring",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "DOCK_INSTRUCTOR_Suit_Retro_Target_1",
+     "assembly": "DOCK",
+     "part_id": "WAYFARER_EVA_Y155/DOCK/DRONE_DOCK",
+     "job": "retroreflector alignment target (read by the drone's docking cameras)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "DOCK_INSTRUCTOR_Suit_Retro_Ring_1",
+     "assembly": "DOCK",
+     "part_id": "WAYFARER_EVA_Y155/DOCK/DRONE_DOCK",
+     "job": "target ring",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "DOCK_INSTRUCTOR_Suit_Retro_Target_2",
+     "assembly": "DOCK",
+     "part_id": "WAYFARER_EVA_Y155/DOCK/DRONE_DOCK",
+     "job": "retroreflector alignment target (read by the drone's docking cameras)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "DOCK_INSTRUCTOR_Suit_Retro_Ring_2",
+     "assembly": "DOCK",
+     "part_id": "WAYFARER_EVA_Y155/DOCK/DRONE_DOCK",
+     "job": "target ring",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "THR_INSTRUCTOR_Suit_Cluster_UP",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit thruster cluster UP: four 8 N cold-N2 valves in a scarfed composite housing, flush with the module corner",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "THR_INSTRUCTOR_Suit_Cluster_UP_ID",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "propulsion identification ring (amber)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "THR_INSTRUCTOR_Suit_Cluster_US",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit thruster cluster US: four 8 N cold-N2 valves in a scarfed composite housing, flush with the module corner",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "THR_INSTRUCTOR_Suit_Cluster_US_ID",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "propulsion identification ring (amber)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "THR_INSTRUCTOR_Suit_Cluster_LP",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit thruster cluster LP: four 8 N cold-N2 valves in a scarfed composite housing, flush with the module corner",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "THR_INSTRUCTOR_Suit_Cluster_LP_ID",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "propulsion identification ring (amber)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "THR_INSTRUCTOR_Suit_Cluster_LS",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit thruster cluster LS: four 8 N cold-N2 valves in a scarfed composite housing, flush with the module corner",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "THR_INSTRUCTOR_Suit_Cluster_LS_ID",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "propulsion identification ring (amber)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_INSTRUCTOR_SUIT_UP_FWD_Valve",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit nozzle UP_FWD: 8 N cold N2",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_INSTRUCTOR_SUIT_UP_FWD_Bell",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit nozzle UP_FWD: 8 N cold N2",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_INSTRUCTOR_SUIT_UP_FWD",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit thruster socket UP_FWD (+Z = exhaust)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_INSTRUCTOR_SUIT_UP_AFT_Valve",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit nozzle UP_AFT: 8 N cold N2",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_INSTRUCTOR_SUIT_UP_AFT_Bell",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit nozzle UP_AFT: 8 N cold N2",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_INSTRUCTOR_SUIT_UP_AFT",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit thruster socket UP_AFT (+Z = exhaust)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_INSTRUCTOR_SUIT_UP_OUT_Valve",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit nozzle UP_OUT: 8 N cold N2",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_INSTRUCTOR_SUIT_UP_OUT_Bell",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit nozzle UP_OUT: 8 N cold N2",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_INSTRUCTOR_SUIT_UP_OUT",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit thruster socket UP_OUT (+Z = exhaust)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_INSTRUCTOR_SUIT_UP_VERT_Valve",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit nozzle UP_VERT: 8 N cold N2",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_INSTRUCTOR_SUIT_UP_VERT_Bell",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit nozzle UP_VERT: 8 N cold N2",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_INSTRUCTOR_SUIT_UP_VERT",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit thruster socket UP_VERT (+Z = exhaust)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_INSTRUCTOR_SUIT_US_FWD_Valve",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit nozzle US_FWD: 8 N cold N2",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_INSTRUCTOR_SUIT_US_FWD_Bell",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit nozzle US_FWD: 8 N cold N2",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_INSTRUCTOR_SUIT_US_FWD",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit thruster socket US_FWD (+Z = exhaust)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_INSTRUCTOR_SUIT_US_AFT_Valve",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit nozzle US_AFT: 8 N cold N2",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_INSTRUCTOR_SUIT_US_AFT_Bell",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit nozzle US_AFT: 8 N cold N2",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_INSTRUCTOR_SUIT_US_AFT",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit thruster socket US_AFT (+Z = exhaust)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_INSTRUCTOR_SUIT_US_OUT_Valve",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit nozzle US_OUT: 8 N cold N2",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_INSTRUCTOR_SUIT_US_OUT_Bell",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit nozzle US_OUT: 8 N cold N2",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_INSTRUCTOR_SUIT_US_OUT",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit thruster socket US_OUT (+Z = exhaust)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_INSTRUCTOR_SUIT_US_VERT_Valve",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit nozzle US_VERT: 8 N cold N2",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_INSTRUCTOR_SUIT_US_VERT_Bell",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit nozzle US_VERT: 8 N cold N2",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_INSTRUCTOR_SUIT_US_VERT",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit thruster socket US_VERT (+Z = exhaust)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_INSTRUCTOR_SUIT_LP_FWD_Valve",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit nozzle LP_FWD: 8 N cold N2",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_INSTRUCTOR_SUIT_LP_FWD_Bell",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit nozzle LP_FWD: 8 N cold N2",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_INSTRUCTOR_SUIT_LP_FWD",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit thruster socket LP_FWD (+Z = exhaust)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_INSTRUCTOR_SUIT_LP_AFT_Valve",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit nozzle LP_AFT: 8 N cold N2",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_INSTRUCTOR_SUIT_LP_AFT_Bell",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit nozzle LP_AFT: 8 N cold N2",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_INSTRUCTOR_SUIT_LP_AFT",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit thruster socket LP_AFT (+Z = exhaust)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_INSTRUCTOR_SUIT_LP_OUT_Valve",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit nozzle LP_OUT: 8 N cold N2",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_INSTRUCTOR_SUIT_LP_OUT_Bell",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit nozzle LP_OUT: 8 N cold N2",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_INSTRUCTOR_SUIT_LP_OUT",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit thruster socket LP_OUT (+Z = exhaust)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_INSTRUCTOR_SUIT_LP_VERT_Valve",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit nozzle LP_VERT: 8 N cold N2",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_INSTRUCTOR_SUIT_LP_VERT_Bell",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit nozzle LP_VERT: 8 N cold N2",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_INSTRUCTOR_SUIT_LP_VERT",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit thruster socket LP_VERT (+Z = exhaust)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_INSTRUCTOR_SUIT_LS_FWD_Valve",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit nozzle LS_FWD: 8 N cold N2",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_INSTRUCTOR_SUIT_LS_FWD_Bell",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit nozzle LS_FWD: 8 N cold N2",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_INSTRUCTOR_SUIT_LS_FWD",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit thruster socket LS_FWD (+Z = exhaust)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_INSTRUCTOR_SUIT_LS_AFT_Valve",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit nozzle LS_AFT: 8 N cold N2",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_INSTRUCTOR_SUIT_LS_AFT_Bell",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit nozzle LS_AFT: 8 N cold N2",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_INSTRUCTOR_SUIT_LS_AFT",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit thruster socket LS_AFT (+Z = exhaust)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_INSTRUCTOR_SUIT_LS_OUT_Valve",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit nozzle LS_OUT: 8 N cold N2",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_INSTRUCTOR_SUIT_LS_OUT_Bell",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit nozzle LS_OUT: 8 N cold N2",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_INSTRUCTOR_SUIT_LS_OUT",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit thruster socket LS_OUT (+Z = exhaust)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_INSTRUCTOR_SUIT_LS_VERT_Valve",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit nozzle LS_VERT: 8 N cold N2",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_INSTRUCTOR_SUIT_LS_VERT_Bell",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit nozzle LS_VERT: 8 N cold N2",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_INSTRUCTOR_SUIT_LS_VERT",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit thruster socket LS_VERT (+Z = exhaust)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "N2_INSTRUCTOR_Reserve_Valve_Knob",
+     "assembly": "PLSS",
+     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
+     "job": "reserve isolation valve knob (red): open in flight; closed for stowage or a leak",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "N2_INSTRUCTOR_Reserve_Gauge",
+     "assembly": "PLSS",
+     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
+     "job": "direct-reading reserve gauge window",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "N2_INSTRUCTOR_Reserve_Label",
+     "assembly": "MARKINGS",
+     "part_id": "WAYFARER_EVA_Y155/MARKINGS/SAFETY_MARKINGS",
+     "job": "reserve label",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "LS_INSTRUCTOR_Hatch_Hinge_0",
+     "assembly": "PLSS",
+     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
+     "job": "rear-entry hatch hinge knuckle: the whole life-support module swings open to the right for donning",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "LS_INSTRUCTOR_Hatch_Hinge_1",
+     "assembly": "PLSS",
+     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
+     "job": "rear-entry hatch hinge knuckle: the whole life-support module swings open to the right for donning",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "LS_INSTRUCTOR_Hatch_Lever",
+     "assembly": "PLSS",
+     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
+     "job": "hatch closure lever (operated by the wearer from the front via a cable, as on rear-entry suits)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "TETHER_INSTRUCTOR_Hardpoint_P",
      "assembly": "TETHERS",
      "part_id": "WAYFARER_EVA_Y155/TETHERS/TETHERS",
-     "job": "waist tether reel A: one of two independent restraints (EVA-014, ANIM-06); length OPEN (SIM-03)",
+     "job": "rescue / tether hardpoint (folding D-ring) on the module top",
      "show": "always",
-     "bone": "pelvis"
+     "bone": "spine_03"
     },
     {
-     "name": "EVA_INSTRUCTOR_Tether_Hook_A",
+     "name": "TETHER_INSTRUCTOR_Hardpoint_S",
      "assembly": "TETHERS",
      "part_id": "WAYFARER_EVA_Y155/TETHERS/TETHERS",
-     "job": "tether A hook, captive gate",
+     "job": "rescue / tether hardpoint (folding D-ring) on the module top",
      "show": "always",
-     "bone": "pelvis"
+     "bone": "spine_03"
     },
     {
-     "name": "SOCKET_TETHER_A",
-     "assembly": "RIG",
-     "part_id": "WAYFARER_EVA_Y155/RIG/SOCKETS",
-     "job": "tether A hook socket (RIG-04): runtime line start",
+     "name": "SENS_INSTRUCTOR_Suit_Antenna",
+     "assembly": "PLSS",
+     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
+     "job": "conformal S-band / UWB antenna window on the module top",
      "show": "always",
-     "bone": "pelvis"
+     "bone": "spine_03"
     },
     {
-     "name": "EVA_INSTRUCTOR_Tether_Reel_B",
+     "name": "LS_INSTRUCTOR_Label",
+     "assembly": "MARKINGS",
+     "part_id": "WAYFARER_EVA_Y155/MARKINGS/SAFETY_MARKINGS",
+     "job": "service label",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "LS_INSTRUCTOR_INT_O2_Primary_1",
+     "assembly": "PLSS",
+     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
+     "job": "internal: o2 primary 1 (packaging layout, cutaway)",
+     "show": "cutaway",
+     "bone": "spine_03"
+    },
+    {
+     "name": "LS_INSTRUCTOR_INT_O2_Primary_2",
+     "assembly": "PLSS",
+     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
+     "job": "internal: o2 primary 2 (packaging layout, cutaway)",
+     "show": "cutaway",
+     "bone": "spine_03"
+    },
+    {
+     "name": "LS_INSTRUCTOR_INT_O2_Secondary",
+     "assembly": "PLSS",
+     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
+     "job": "internal: o2 secondary (packaging layout, cutaway)",
+     "show": "cutaway",
+     "bone": "spine_03"
+    },
+    {
+     "name": "LS_INSTRUCTOR_INT_CO2_Swing_Bed",
+     "assembly": "PLSS",
+     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
+     "job": "internal: co2 swing bed (packaging layout, cutaway)",
+     "show": "cutaway",
+     "bone": "spine_03"
+    },
+    {
+     "name": "LS_INSTRUCTOR_INT_Membrane_Evaporator",
+     "assembly": "PLSS",
+     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
+     "job": "internal: membrane evaporator (packaging layout, cutaway)",
+     "show": "cutaway",
+     "bone": "spine_03"
+    },
+    {
+     "name": "LS_INSTRUCTOR_INT_Fan_Pump_Separator",
+     "assembly": "PLSS",
+     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
+     "job": "internal: fan pump separator (packaging layout, cutaway)",
+     "show": "cutaway",
+     "bone": "spine_03"
+    },
+    {
+     "name": "LS_INSTRUCTOR_INT_Battery_1kWh",
+     "assembly": "PLSS",
+     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
+     "job": "internal: battery 1kwh (packaging layout, cutaway)",
+     "show": "cutaway",
+     "bone": "spine_03"
+    },
+    {
+     "name": "LS_INSTRUCTOR_INT_Avionics_Radio",
+     "assembly": "PLSS",
+     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
+     "job": "internal: avionics radio (packaging layout, cutaway)",
+     "show": "cutaway",
+     "bone": "spine_03"
+    },
+    {
+     "name": "N2_INSTRUCTOR_INT_Reserve_COPV",
+     "assembly": "PLSS",
+     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
+     "job": "suit N2 reserve COPV 2.22 L at 30 MPa (about 2.67 m/s alone)",
+     "show": "cutaway",
+     "bone": "spine_03"
+    },
+    {
+     "name": "N2_INSTRUCTOR_INT_Suit_Manifold",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/N2_RESERVE",
+     "job": "suit N2 manifold: drone feed (1.4 MPa) or reserve (1.2 MPa) through two check valves",
+     "show": "cutaway",
+     "bone": "spine_03"
+    },
+    {
+     "name": "N2_INSTRUCTOR_INT_Line_UP",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/N2_RESERVE",
+     "job": "manifold to cluster UP",
+     "show": "cutaway",
+     "bone": "spine_03"
+    },
+    {
+     "name": "N2_INSTRUCTOR_INT_Line_US",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/N2_RESERVE",
+     "job": "manifold to cluster US",
+     "show": "cutaway",
+     "bone": "spine_03"
+    },
+    {
+     "name": "N2_INSTRUCTOR_INT_Line_LP",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/N2_RESERVE",
+     "job": "manifold to cluster LP",
+     "show": "cutaway",
+     "bone": "spine_03"
+    },
+    {
+     "name": "N2_INSTRUCTOR_INT_Line_LS",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/N2_RESERVE",
+     "job": "manifold to cluster LS",
+     "show": "cutaway",
+     "bone": "spine_03"
+    },
+    {
+     "name": "N2_INSTRUCTOR_INT_Receptacle_Line",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/N2_RESERVE",
+     "job": "dock receptacle to manifold",
+     "show": "cutaway",
+     "bone": "spine_03"
+    },
+    {
+     "name": "CTRL_INSTRUCTOR_Chest_Display",
+     "assembly": "PLSS",
+     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
+     "job": "chest display: suit and drone status, flush in the torso shell (read in the helmet mirror or by the buddy)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "CTRL_INSTRUCTOR_Chest_Bezel",
+     "assembly": "PROTECTION",
+     "part_id": "WAYFARER_EVA_Y155/PROTECTION/MMOD_OUTER_SHELL",
+     "job": "display bezel",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "MARK_INSTRUCTOR_Suit_GUC",
+     "assembly": "MARKINGS",
+     "part_id": "WAYFARER_EVA_Y155/MARKINGS/SAFETY_MARKINGS",
+     "job": "official marking (small, functional lettering)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "MARK_INSTRUCTOR_Suit_ID_Plate",
+     "assembly": "MARKINGS",
+     "part_id": "WAYFARER_EVA_Y155/MARKINGS/SAFETY_MARKINGS",
+     "job": "identification plate (role colour)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "EVA_INSTRUCTOR_Forearm_Drone_Control",
+     "assembly": "PLSS",
+     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
+     "job": "forearm drone control: mode, gas status (drone and reserve), guarded DRONE RELEASE",
+     "show": "always",
+     "bone": "lowerarm_r"
+    },
+    {
+     "name": "CTRL_INSTRUCTOR_Forearm_Display",
+     "assembly": "PLSS",
+     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
+     "job": "forearm display",
+     "show": "always",
+     "bone": "lowerarm_r"
+    },
+    {
+     "name": "CTRL_INSTRUCTOR_Forearm_Release_Guard",
+     "assembly": "DOCK",
+     "part_id": "WAYFARER_EVA_Y155/DOCK/DRONE_DOCK",
+     "job": "guarded release switch (lift the guard, hold 1 s)",
+     "show": "always",
+     "bone": "lowerarm_r"
+    },
+    {
+     "name": "CTRL_INSTRUCTOR_Forearm_Drone_Key_0",
+     "assembly": "PLSS",
+     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
+     "job": "drone command key (raised bar, operable in EVA gloves): mode / arms / return-and-dock",
+     "show": "always",
+     "bone": "lowerarm_r"
+    },
+    {
+     "name": "CTRL_INSTRUCTOR_Forearm_Drone_Key_1",
+     "assembly": "PLSS",
+     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
+     "job": "drone command key (raised bar, operable in EVA gloves): mode / arms / return-and-dock",
+     "show": "always",
+     "bone": "lowerarm_r"
+    },
+    {
+     "name": "CTRL_INSTRUCTOR_Forearm_Drone_Key_2",
+     "assembly": "PLSS",
+     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
+     "job": "drone command key (raised bar, operable in EVA gloves): mode / arms / return-and-dock",
+     "show": "always",
+     "bone": "lowerarm_r"
+    },
+    {
+     "name": "EVA_INSTRUCTOR_Forearm_Suit_Status",
+     "assembly": "PLSS",
+     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
+     "job": "forearm suit status: pressure, O2, CO2, reserve N2, tether state",
+     "show": "always",
+     "bone": "lowerarm_l"
+    },
+    {
+     "name": "CTRL_INSTRUCTOR_Forearm_Status_Display",
+     "assembly": "PLSS",
+     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
+     "job": "suit status display",
+     "show": "always",
+     "bone": "lowerarm_l"
+    },
+    {
+     "name": "CTRL_INSTRUCTOR_Forearm_Emergency_Guard",
+     "assembly": "PLSS",
+     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
+     "job": "guarded emergency switch: suit reserve open, beacon, comms override (works without the drone)",
+     "show": "always",
+     "bone": "lowerarm_l"
+    },
+    {
+     "name": "CTRL_INSTRUCTOR_Forearm_Tether_Key",
      "assembly": "TETHERS",
      "part_id": "WAYFARER_EVA_Y155/TETHERS/TETHERS",
-     "job": "waist tether reel B: one of two independent restraints (EVA-014, ANIM-06); length OPEN (SIM-03)",
+     "job": "tether reel brake / retract key",
      "show": "always",
-     "bone": "pelvis"
+     "bone": "lowerarm_l"
     },
     {
-     "name": "EVA_INSTRUCTOR_Tether_Hook_B",
+     "name": "TETHER_INSTRUCTOR_Reel_A",
      "assembly": "TETHERS",
      "part_id": "WAYFARER_EVA_Y155/TETHERS/TETHERS",
-     "job": "tether B hook, captive gate",
+     "job": "waist tether reel A (one of two independent restraints)",
      "show": "always",
      "bone": "pelvis"
     },
     {
-     "name": "SOCKET_TETHER_B",
-     "assembly": "RIG",
-     "part_id": "WAYFARER_EVA_Y155/RIG/SOCKETS",
-     "job": "tether B hook socket (RIG-04): runtime line start",
+     "name": "TETHER_INSTRUCTOR_Reel_A_Mark",
+     "assembly": "TETHERS",
+     "part_id": "WAYFARER_EVA_Y155/TETHERS/TETHERS",
+     "job": "tether reel safety mark",
      "show": "always",
      "bone": "pelvis"
+    },
+    {
+     "name": "TETHER_INSTRUCTOR_Hook_A",
+     "assembly": "TETHERS",
+     "part_id": "WAYFARER_EVA_Y155/TETHERS/TETHERS",
+     "job": "tether A hook (captive gate, stowed)",
+     "show": "always",
+     "bone": "pelvis"
+    },
+    {
+     "name": "TETHER_INSTRUCTOR_Reel_B",
+     "assembly": "TETHERS",
+     "part_id": "WAYFARER_EVA_Y155/TETHERS/TETHERS",
+     "job": "waist tether reel B (one of two independent restraints)",
+     "show": "always",
+     "bone": "pelvis"
+    },
+    {
+     "name": "TETHER_INSTRUCTOR_Reel_B_Mark",
+     "assembly": "TETHERS",
+     "part_id": "WAYFARER_EVA_Y155/TETHERS/TETHERS",
+     "job": "tether reel safety mark",
+     "show": "always",
+     "bone": "pelvis"
+    },
+    {
+     "name": "TETHER_INSTRUCTOR_Hook_B",
+     "assembly": "TETHERS",
+     "part_id": "WAYFARER_EVA_Y155/TETHERS/TETHERS",
+     "job": "tether B hook (captive gate, stowed)",
+     "show": "always",
+     "bone": "pelvis"
+    },
+    {
+     "name": "MARK_INSTRUCTOR_Role",
+     "assembly": "MARKINGS",
+     "part_id": "WAYFARER_EVA_Y155/MARKINGS/SAFETY_MARKINGS",
+     "job": "role designation (ASSET-15 \"GUIDED EVA designation\"): Great Union deep-blue identification panels (helmet band, chest, upper arms), GUIDED EVA INSTRUCTOR role band, suit serial PROTOTYPE",
+     "show": "always",
+     "bone": "spine_03"
     },
     {
      "name": "EVA_INSTRUCTOR_Tool_Scanner",
@@ -1080,10 +2350,34 @@
      "bone": "spine_03"
     },
     {
+     "name": "EVA_INSTRUCTOR_Tool_Scanner_Lens",
+     "assembly": "TOOLS",
+     "part_id": "WAYFARER_EVA_Y155/TOOLS/TOOLS",
+     "job": "scanner window",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
      "name": "EVA_INSTRUCTOR_Tool_Lanyard_Ring",
      "assembly": "TOOLS",
      "part_id": "WAYFARER_EVA_Y155/TOOLS/TOOLS",
      "job": "tool retention lanyard ring (EVA-020)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "EVA_INSTRUCTOR_PLSS_SCU_Port",
+     "assembly": "PLSS",
+     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
+     "job": "umbilical port: O2, power and data from certified ship supplies (53!6)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "EVA_INSTRUCTOR_PLSS_Cooling_Port",
+     "assembly": "PLSS",
+     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
+     "job": "cooling-loop quick disconnect (53!8)",
      "show": "always",
      "bone": "spine_03"
     },
@@ -1160,6 +2454,30 @@
      "bone": "spine_03"
     },
     {
+     "name": "SOCKET_TETHER_A",
+     "assembly": "RIG",
+     "part_id": "WAYFARER_EVA_Y155/RIG/SOCKETS",
+     "job": "tether A hook socket (RIG-04): runtime line start",
+     "show": "always",
+     "bone": "pelvis"
+    },
+    {
+     "name": "SOCKET_TETHER_B",
+     "assembly": "RIG",
+     "part_id": "WAYFARER_EVA_Y155/RIG/SOCKETS",
+     "job": "tether B hook socket (RIG-04): runtime line start",
+     "show": "always",
+     "bone": "pelvis"
+    },
+    {
+     "name": "SOCKET_DRONE_DOCK",
+     "assembly": "RIG",
+     "part_id": "WAYFARER_EVA_Y155/RIG/SOCKETS",
+     "job": "companion drone docked frame: the drone rig copies this transform while \"docked\" = 1 (build/eva_drone.py)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
      "name": "CHAR_INSTRUCTOR",
      "assembly": "RIG",
      "part_id": "WAYFARER_EVA_Y155/RIG/SOCKETS",
@@ -1206,162 +2524,382 @@
      "job": "wearer head visible inside the helmet (the covered body is not exported)",
      "show": "always",
      "bone": ""
+    },
+    {
+     "name": "CTRL_INSTRUCTOR_HCM_Pivot",
+     "assembly": "PLSS",
+     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
+     "job": "hand-controller hinge frame (X: stowed direction, Z: hinge axis; the links swing about it)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "CTRL_INSTRUCTOR_HCM_Hinge_Housing",
+     "assembly": "PLSS",
+     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
+     "job": "hinge housing on the module corner: detented hinge, hard stops at stowed and deployed",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "CTRL_INSTRUCTOR_HCM_Link_1",
+     "assembly": "PLSS",
+     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
+     "job": "controller arm, outer tube: swings on the hinge (stops at 0 and the deployed angle)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "CTRL_INSTRUCTOR_HCM_Link_2",
+     "assembly": "PLSS",
+     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
+     "job": "telescoping inner tube with the vertical grip: translation (squeeze / push) and rotation (twist / tilt) controller, thumb puck on top",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "CTRL_INSTRUCTOR_Manual_Release",
+     "assembly": "DOCK",
+     "part_id": "WAYFARER_EVA_Y155/DOCK/DRONE_DOCK",
+     "job": "mechanical release T-handle below the controller hinge: Bowden cable to the drone keel bolts (works unpowered)",
+     "show": "always",
+     "bone": "spine_03"
     }
    ],
    "stature_m": 1.78,
-   "objects": 82,
+   "objects": 225,
    "vertices": {
-    "EVA_INSTRUCTOR_SUIT_PRESSURE_BLADDER": 9278,
-    "EVA_INSTRUCTOR_HUT": 800,
-    "EVA_INSTRUCTOR_Waist_Ring": 400,
-    "EVA_INSTRUCTOR_Neck_Ring": 400,
-    "EVA_INSTRUCTOR_MMOD_OUTER_SHELL": 9278,
-    "EVA_INSTRUCTOR_Scye_Bearing_l": 400,
-    "EVA_INSTRUCTOR_Upperarm_Bearing_l": 400,
-    "EVA_INSTRUCTOR_Elbow_Convolute_l_dn": 400,
-    "EVA_INSTRUCTOR_Elbow_Convolute_l_up": 400,
-    "EVA_INSTRUCTOR_Wrist_Bearing_l": 400,
-    "EVA_INSTRUCTOR_Hip_Bearing_l": 400,
-    "EVA_INSTRUCTOR_Thigh_Bearing_l": 400,
-    "EVA_INSTRUCTOR_Knee_Convolute_l_dn": 400,
-    "EVA_INSTRUCTOR_Knee_Convolute_l_up": 400,
-    "EVA_INSTRUCTOR_Ankle_Bearing_l": 400,
+    "EVA_INSTRUCTOR_PRESSURE_BLADDER": 9278,
+    "EVA_INSTRUCTOR_Torso_Shell": 2035,
+    "EVA_INSTRUCTOR_Neck_Ring": 730,
+    "EVA_INSTRUCTOR_Neck_Ring_Collar": 730,
+    "EVA_INSTRUCTOR_Cuirass_Edge_0": 552,
+    "EVA_INSTRUCTOR_Scye_Sleeve_l": 624,
+    "EVA_INSTRUCTOR_Scye_Sleeve_r": 624,
+    "EVA_INSTRUCTOR_Cuirass_Seal": 104,
+    "EVA_INSTRUCTOR_Scye_Housing_l": 384,
+    "EVA_INSTRUCTOR_Scye_Housing_r": 384,
+    "EVA_INSTRUCTOR_OUTER_LAYER": 7837,
+    "EVA_INSTRUCTOR_Restraint_Line_upperarm_l_0": 54,
+    "EVA_INSTRUCTOR_Restraint_Line_upperarm_l_1": 42,
+    "EVA_INSTRUCTOR_Restraint_Line_lowerarm_l_0": 108,
+    "EVA_INSTRUCTOR_Restraint_Line_lowerarm_l_1": 108,
+    "EVA_INSTRUCTOR_Restraint_Line_thigh_l_0": 96,
+    "EVA_INSTRUCTOR_Restraint_Line_thigh_l_1": 108,
+    "EVA_INSTRUCTOR_Restraint_Line_calf_l_0": 108,
+    "EVA_INSTRUCTOR_Restraint_Line_calf_l_1": 108,
+    "EVA_INSTRUCTOR_Restraint_Line_upperarm_r_0": 54,
+    "EVA_INSTRUCTOR_Restraint_Line_upperarm_r_1": 42,
+    "EVA_INSTRUCTOR_Restraint_Line_lowerarm_r_0": 108,
+    "EVA_INSTRUCTOR_Restraint_Line_lowerarm_r_1": 108,
+    "EVA_INSTRUCTOR_Restraint_Line_thigh_r_0": 108,
+    "EVA_INSTRUCTOR_Restraint_Line_thigh_r_1": 102,
+    "EVA_INSTRUCTOR_Restraint_Line_calf_r_0": 108,
+    "EVA_INSTRUCTOR_Restraint_Line_calf_r_1": 108,
+    "EVA_INSTRUCTOR_Knee_Cap_l": 266,
+    "EVA_INSTRUCTOR_Shin_Guard_l": 266,
+    "EVA_INSTRUCTOR_Elbow_Cap_l": 266,
+    "EVA_INSTRUCTOR_Knee_Cap_r": 266,
+    "EVA_INSTRUCTOR_Shin_Guard_r": 266,
+    "EVA_INSTRUCTOR_Elbow_Cap_r": 266,
+    "CTRL_INSTRUCTOR_Chest_Bezel": 8,
+    "EVA_INSTRUCTOR_Scye_Bearing_l": 480,
+    "EVA_INSTRUCTOR_Upperarm_Bearing_l": 480,
+    "EVA_INSTRUCTOR_Upperarm_Bearing_l_Sleeve": 64,
+    "EVA_INSTRUCTOR_Wrist_Disconnect_l": 480,
+    "EVA_INSTRUCTOR_Wrist_Disconnect_l_Sleeve": 64,
     "EVA_INSTRUCTOR_Gauntlet_l": 48,
-    "EVA_INSTRUCTOR_Sole_l": 96,
-    "EVA_INSTRUCTOR_Toe_Sole_l": 96,
-    "EVA_INSTRUCTOR_Toe_Hook_l": 8,
-    "EVA_INSTRUCTOR_Scye_Bearing_r": 400,
-    "EVA_INSTRUCTOR_Upperarm_Bearing_r": 400,
-    "EVA_INSTRUCTOR_Elbow_Convolute_r_dn": 400,
-    "EVA_INSTRUCTOR_Elbow_Convolute_r_up": 400,
-    "EVA_INSTRUCTOR_Wrist_Bearing_r": 400,
-    "EVA_INSTRUCTOR_Hip_Bearing_r": 400,
-    "EVA_INSTRUCTOR_Thigh_Bearing_r": 400,
-    "EVA_INSTRUCTOR_Knee_Convolute_r_dn": 400,
-    "EVA_INSTRUCTOR_Knee_Convolute_r_up": 400,
-    "EVA_INSTRUCTOR_Ankle_Bearing_r": 400,
+    "EVA_INSTRUCTOR_Ankle_Bearing_l": 480,
+    "EVA_INSTRUCTOR_Ankle_Bearing_l_Sleeve": 64,
+    "EVA_INSTRUCTOR_Boot_Shell_l": 121,
+    "EVA_INSTRUCTOR_Boot_Toe_l": 135,
+    "EVA_INSTRUCTOR_Toe_Hook_l": 24,
+    "EVA_INSTRUCTOR_Heel_Fitting_l": 8,
+    "EVA_INSTRUCTOR_Scye_Bearing_r": 480,
+    "EVA_INSTRUCTOR_Upperarm_Bearing_r": 480,
+    "EVA_INSTRUCTOR_Upperarm_Bearing_r_Sleeve": 64,
+    "EVA_INSTRUCTOR_Wrist_Disconnect_r": 480,
+    "EVA_INSTRUCTOR_Wrist_Disconnect_r_Sleeve": 64,
     "EVA_INSTRUCTOR_Gauntlet_r": 48,
-    "EVA_INSTRUCTOR_Sole_r": 96,
-    "EVA_INSTRUCTOR_Toe_Sole_r": 96,
-    "EVA_INSTRUCTOR_Toe_Hook_r": 8,
-    "EVA_INSTRUCTOR_Helmet_Shell": 2400,
-    "EVA_INSTRUCTOR_Pressure_Visor": 1200,
-    "EVA_INSTRUCTOR_Glare_Visor": 1200,
-    "EVA_INSTRUCTOR_PLSS": 96,
-    "EVA_INSTRUCTOR_PLSS_Cover_Upper": 8,
-    "EVA_INSTRUCTOR_PLSS_Cover_Lower": 8,
-    "EVA_INSTRUCTOR_PLSS_O2_Primary_1": 48,
-    "EVA_INSTRUCTOR_PLSS_O2_Primary_2": 48,
-    "EVA_INSTRUCTOR_PLSS_O2_Emergency_Reserve": 48,
-    "EVA_INSTRUCTOR_PLSS_O2_Regulator": 8,
-    "EVA_INSTRUCTOR_PLSS_CO2_Cartridge": 8,
-    "EVA_INSTRUCTOR_PLSS_Fan_Pump_Separator": 48,
-    "EVA_INSTRUCTOR_PLSS_Heat_Exchanger": 8,
-    "EVA_INSTRUCTOR_PLSS_Battery": 8,
-    "EVA_INSTRUCTOR_PLSS_Radio_Telemetry": 8,
-    "EVA_INSTRUCTOR_PLSS_SCU_Port": 48,
-    "EVA_INSTRUCTOR_PLSS_Cooling_Port": 48,
-    "EVA_INSTRUCTOR_DCM": 96,
-    "EVA_INSTRUCTOR_DCM_Display": 8,
-    "EVA_INSTRUCTOR_Wrist_Display": 8,
+    "EVA_INSTRUCTOR_Ankle_Bearing_r": 480,
+    "EVA_INSTRUCTOR_Ankle_Bearing_r_Sleeve": 64,
+    "EVA_INSTRUCTOR_Boot_Shell_r": 121,
+    "EVA_INSTRUCTOR_Boot_Toe_r": 135,
+    "EVA_INSTRUCTOR_Toe_Hook_r": 24,
+    "EVA_INSTRUCTOR_Heel_Fitting_r": 8,
+    "EVA_INSTRUCTOR_Helmet_Shell": 969,
+    "EVA_INSTRUCTOR_Visor": 376,
+    "EVA_INSTRUCTOR_Helmet_Brow": 38,
+    "EVA_INSTRUCTOR_Visor_Frame": 990,
+    "SENS_Helmet_Light_P": 48,
+    "SENS_Helmet_Cam_P": 40,
+    "SENS_Helmet_Status_P": 8,
+    "SENS_Helmet_Light_S": 48,
+    "SENS_Helmet_Cam_S": 40,
+    "SENS_Helmet_Status_S": 8,
+    "EVA_INSTRUCTOR_Helmet_Crest": 340,
+    "SENS_Helmet_Crest_Cam": 40,
+    "SENS_Helmet_Comms_Patch": 8,
+    "EVA_INSTRUCTOR_Sunshade_Retracted": 38,
+    "LS_INSTRUCTOR_Module": 1573,
+    "DOCK_INSTRUCTOR_Suit_Power_Receptacle": 8,
+    "N2_INSTRUCTOR_Reserve_Valve_Knob": 40,
+    "N2_INSTRUCTOR_Reserve_Gauge": 40,
+    "LS_INSTRUCTOR_Hatch_Hinge_0": 32,
+    "LS_INSTRUCTOR_Hatch_Hinge_1": 32,
+    "LS_INSTRUCTOR_Hatch_Lever": 8,
+    "SENS_INSTRUCTOR_Suit_Antenna": 8,
+    "LS_INSTRUCTOR_INT_O2_Primary_1": 280,
+    "LS_INSTRUCTOR_INT_O2_Primary_2": 280,
+    "LS_INSTRUCTOR_INT_O2_Secondary": 280,
+    "LS_INSTRUCTOR_INT_CO2_Swing_Bed": 8,
+    "LS_INSTRUCTOR_INT_Membrane_Evaporator": 8,
+    "LS_INSTRUCTOR_INT_Fan_Pump_Separator": 8,
+    "LS_INSTRUCTOR_INT_Battery_1kWh": 8,
+    "LS_INSTRUCTOR_INT_Avionics_Radio": 8,
+    "N2_INSTRUCTOR_INT_Reserve_COPV": 336,
+    "CTRL_INSTRUCTOR_Chest_Display": 8,
+    "EVA_INSTRUCTOR_Forearm_Drone_Control": 266,
+    "CTRL_INSTRUCTOR_Forearm_Display": 8,
+    "CTRL_INSTRUCTOR_Forearm_Drone_Key_0": 8,
+    "CTRL_INSTRUCTOR_Forearm_Drone_Key_1": 8,
+    "CTRL_INSTRUCTOR_Forearm_Drone_Key_2": 8,
+    "EVA_INSTRUCTOR_Forearm_Suit_Status": 266,
+    "CTRL_INSTRUCTOR_Forearm_Status_Display": 8,
+    "CTRL_INSTRUCTOR_Forearm_Emergency_Guard": 8,
+    "EVA_INSTRUCTOR_PLSS_SCU_Port": 40,
+    "EVA_INSTRUCTOR_PLSS_Cooling_Port": 40,
+    "CTRL_INSTRUCTOR_HCM_Hinge_Housing": 48,
+    "CTRL_INSTRUCTOR_HCM_Link_1": 80,
+    "CTRL_INSTRUCTOR_HCM_Link_2": 220,
     "EVA_INSTRUCTOR_LCVG_INNER": 9278,
-    "EVA_INSTRUCTOR_Tether_Reel_A": 48,
-    "EVA_INSTRUCTOR_Tether_Hook_A": 120,
-    "EVA_INSTRUCTOR_Tether_Reel_B": 48,
-    "EVA_INSTRUCTOR_Tether_Hook_B": 120,
-    "EVA_INSTRUCTOR_Tool_Scanner": 96,
+    "TETHER_INSTRUCTOR_Hardpoint_P": 120,
+    "TETHER_INSTRUCTOR_Hardpoint_S": 120,
+    "CTRL_INSTRUCTOR_Forearm_Tether_Key": 8,
+    "TETHER_INSTRUCTOR_Reel_A": 48,
+    "TETHER_INSTRUCTOR_Reel_A_Mark": 144,
+    "TETHER_INSTRUCTOR_Hook_A": 120,
+    "TETHER_INSTRUCTOR_Reel_B": 48,
+    "TETHER_INSTRUCTOR_Reel_B_Mark": 144,
+    "TETHER_INSTRUCTOR_Hook_B": 120,
+    "EVA_INSTRUCTOR_Tool_Scanner": 8,
+    "EVA_INSTRUCTOR_Tool_Scanner_Lens": 32,
     "EVA_INSTRUCTOR_Tool_Lanyard_Ring": 96,
-    "EVA_INSTRUCTOR_Helmet_Band": 288,
-    "EVA_INSTRUCTOR_PLSS_Purge_Valve": 48,
     "EVA_INSTRUCTOR_Arm_Band_l": 240,
     "EVA_INSTRUCTOR_Arm_Band_r": 240,
-    "EVA_INSTRUCTOR_GU_Chest_Plate": 8,
+    "N2_INSTRUCTOR_Reserve_Label": 1308,
+    "LS_INSTRUCTOR_Label": 4044,
+    "MARK_INSTRUCTOR_Suit_GUC": 3488,
+    "MARK_INSTRUCTOR_Suit_ID_Plate": 8,
+    "MARK_INSTRUCTOR_Role": 3976,
     "CHAR_INSTRUCTOR_Eyebrow001": 124,
     "CHAR_INSTRUCTOR_Eyelashes01": 250,
     "CHAR_INSTRUCTOR_High_Poly": 1064,
     "CHAR_INSTRUCTOR_Body": 13380,
-    "CHAR_INSTRUCTOR_Head": 4102
+    "CHAR_INSTRUCTOR_Head": 4102,
+    "DOCK_INSTRUCTOR_Suit_N2_Mark": 144,
+    "THR_INSTRUCTOR_Suit_Cluster_UP": 280,
+    "THR_INSTRUCTOR_Suit_Cluster_UP_ID": 144,
+    "THR_INSTRUCTOR_Suit_Cluster_US": 280,
+    "THR_INSTRUCTOR_Suit_Cluster_US_ID": 144,
+    "THR_INSTRUCTOR_Suit_Cluster_LP": 280,
+    "THR_INSTRUCTOR_Suit_Cluster_LP_ID": 144,
+    "THR_INSTRUCTOR_Suit_Cluster_LS": 280,
+    "THR_INSTRUCTOR_Suit_Cluster_LS_ID": 144,
+    "NZ_INSTRUCTOR_SUIT_UP_FWD_Valve": 48,
+    "NZ_INSTRUCTOR_SUIT_UP_FWD_Bell": 80,
+    "NZ_INSTRUCTOR_SUIT_UP_AFT_Valve": 48,
+    "NZ_INSTRUCTOR_SUIT_UP_AFT_Bell": 80,
+    "NZ_INSTRUCTOR_SUIT_UP_OUT_Valve": 48,
+    "NZ_INSTRUCTOR_SUIT_UP_OUT_Bell": 80,
+    "NZ_INSTRUCTOR_SUIT_UP_VERT_Valve": 48,
+    "NZ_INSTRUCTOR_SUIT_UP_VERT_Bell": 80,
+    "NZ_INSTRUCTOR_SUIT_US_FWD_Valve": 48,
+    "NZ_INSTRUCTOR_SUIT_US_FWD_Bell": 80,
+    "NZ_INSTRUCTOR_SUIT_US_AFT_Valve": 48,
+    "NZ_INSTRUCTOR_SUIT_US_AFT_Bell": 80,
+    "NZ_INSTRUCTOR_SUIT_US_OUT_Valve": 48,
+    "NZ_INSTRUCTOR_SUIT_US_OUT_Bell": 80,
+    "NZ_INSTRUCTOR_SUIT_US_VERT_Valve": 48,
+    "NZ_INSTRUCTOR_SUIT_US_VERT_Bell": 80,
+    "NZ_INSTRUCTOR_SUIT_LP_FWD_Valve": 48,
+    "NZ_INSTRUCTOR_SUIT_LP_FWD_Bell": 80,
+    "NZ_INSTRUCTOR_SUIT_LP_AFT_Valve": 48,
+    "NZ_INSTRUCTOR_SUIT_LP_AFT_Bell": 80,
+    "NZ_INSTRUCTOR_SUIT_LP_OUT_Valve": 48,
+    "NZ_INSTRUCTOR_SUIT_LP_OUT_Bell": 80,
+    "NZ_INSTRUCTOR_SUIT_LP_VERT_Valve": 48,
+    "NZ_INSTRUCTOR_SUIT_LP_VERT_Bell": 80,
+    "NZ_INSTRUCTOR_SUIT_LS_FWD_Valve": 48,
+    "NZ_INSTRUCTOR_SUIT_LS_FWD_Bell": 80,
+    "NZ_INSTRUCTOR_SUIT_LS_AFT_Valve": 48,
+    "NZ_INSTRUCTOR_SUIT_LS_AFT_Bell": 80,
+    "NZ_INSTRUCTOR_SUIT_LS_OUT_Valve": 48,
+    "NZ_INSTRUCTOR_SUIT_LS_OUT_Bell": 80,
+    "NZ_INSTRUCTOR_SUIT_LS_VERT_Valve": 48,
+    "NZ_INSTRUCTOR_SUIT_LS_VERT_Bell": 80,
+    "N2_INSTRUCTOR_INT_Suit_Manifold": 8,
+    "N2_INSTRUCTOR_INT_Line_UP": 40,
+    "N2_INSTRUCTOR_INT_Line_US": 40,
+    "N2_INSTRUCTOR_INT_Line_LP": 40,
+    "N2_INSTRUCTOR_INT_Line_LS": 40,
+    "N2_INSTRUCTOR_INT_Receptacle_Line": 30,
+    "DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_INSTRUCTOR_Suit_Bolt_Socket_PU": 8,
+    "DOCK_INSTRUCTOR_Suit_Bolt_Socket_SU": 8,
+    "DOCK_INSTRUCTOR_Suit_Bolt_Socket_PL": 8,
+    "DOCK_INSTRUCTOR_Suit_Bolt_Socket_SL": 8,
+    "DOCK_INSTRUCTOR_Suit_N2_Receptacle": 120,
+    "DOCK_INSTRUCTOR_Suit_N2_Poppet": 40,
+    "DOCK_INSTRUCTOR_Suit_Mouth_Mark_1009": 8,
+    "DOCK_INSTRUCTOR_Suit_Mouth_Mark_1425": 8,
+    "DOCK_INSTRUCTOR_Suit_Capture_Tongue": 8,
+    "DOCK_INSTRUCTOR_Suit_Load_Pad_P": 48,
+    "DOCK_INSTRUCTOR_Suit_Load_Pad_S": 48,
+    "DOCK_INSTRUCTOR_Suit_Retro_Target_0": 40,
+    "DOCK_INSTRUCTOR_Suit_Retro_Ring_0": 120,
+    "DOCK_INSTRUCTOR_Suit_Retro_Target_1": 40,
+    "DOCK_INSTRUCTOR_Suit_Retro_Ring_1": 120,
+    "DOCK_INSTRUCTOR_Suit_Retro_Target_2": 40,
+    "DOCK_INSTRUCTOR_Suit_Retro_Ring_2": 120,
+    "CTRL_INSTRUCTOR_Forearm_Release_Guard": 8,
+    "CTRL_INSTRUCTOR_Manual_Release": 8
    }
   },
   "newcomer": {
-   "hut_rings": [
-    [
-     1.0881,
-     0.2009,
-     0.1679,
-     -0.0494
-    ],
-    [
-     1.1245,
-     0.2028,
-     0.1701,
-     -0.0484
-    ],
-    [
-     1.1608,
-     0.2073,
-     0.172,
-     -0.0474
-    ],
-    [
-     1.1972,
-     0.216,
-     0.1762,
-     -0.044
-    ],
-    [
-     1.2335,
-     0.2299,
-     0.1835,
-     -0.0437
-    ],
-    [
-     1.2699,
-     0.2299,
-     0.187,
-     -0.04
-    ],
-    [
-     1.3062,
-     0.2152,
-     0.1803,
-     -0.0316
-    ],
-    [
-     1.3426,
-     0.1414,
-     0.1712,
-     -0.0233
-    ],
-    [
-     1.3789,
-     0.1923,
-     0.1614,
-     -0.0182
-    ],
-    [
-     1.4153,
-     0.1254,
-     0.1474,
-     -0.0108
-    ]
-   ],
    "helmet_centre": [
-    -0.0,
-    -0.1329,
-    1.5688
+    0.0,
+    -0.0405,
+    1.5809
    ],
-   "helmet_radius_m": 0.2331,
+   "helmet_semi_axes_m": [
+    0.1358,
+    0.1607,
+    0.1569,
+    0.1487
+   ],
    "plss_centre": [
     0.0,
-    0.2788,
-    1.2717
+    0.2307,
+    1.175
    ],
    "plss_size_m": [
-    0.5,
-    0.22,
-    0.62
+    0.43,
+    0.125,
+    0.6
    ],
+   "module": {
+    "top": 1.4750391197204589,
+    "bot": 0.8750391197204589,
+    "zc": 1.1750391197204588,
+    "w": 0.43,
+    "dpt": 0.125,
+    "h": 0.6,
+    "y_r0": 0.29318614499291945,
+    "cwh": 0.035,
+    "dep": 0.026,
+    "zk0": 0.938039119720459,
+    "zk1": 1.3620391197204589,
+    "pc": [
+     0.0,
+     0.23068614304065704,
+     1.1750391721725464
+    ],
+    "nozzles": [
+     "NZ_NEWCOMER_SUIT_UP_FWD",
+     "NZ_NEWCOMER_SUIT_UP_AFT",
+     "NZ_NEWCOMER_SUIT_UP_OUT",
+     "NZ_NEWCOMER_SUIT_UP_VERT",
+     "NZ_NEWCOMER_SUIT_US_FWD",
+     "NZ_NEWCOMER_SUIT_US_AFT",
+     "NZ_NEWCOMER_SUIT_US_OUT",
+     "NZ_NEWCOMER_SUIT_US_VERT",
+     "NZ_NEWCOMER_SUIT_LP_FWD",
+     "NZ_NEWCOMER_SUIT_LP_AFT",
+     "NZ_NEWCOMER_SUIT_LP_OUT",
+     "NZ_NEWCOMER_SUIT_LP_VERT",
+     "NZ_NEWCOMER_SUIT_LS_FWD",
+     "NZ_NEWCOMER_SUIT_LS_AFT",
+     "NZ_NEWCOMER_SUIT_LS_OUT",
+     "NZ_NEWCOMER_SUIT_LS_VERT"
+    ],
+    "clusters": {
+     "UP": [
+      [
+       0.183,
+       0.2377366280342271,
+       1.4350391197204588
+      ],
+      1,
+      1
+     ],
+     "US": [
+      [
+       -0.183,
+       0.2377366280342271,
+       1.4350391197204588
+      ],
+      -1,
+      1
+     ],
+     "LP": [
+      [
+       0.173,
+       0.24547996904689282,
+       0.9150391197204589
+      ],
+      1,
+      -1
+     ],
+     "LS": [
+      [
+       -0.173,
+       0.24547996904689282,
+       0.9150391197204589
+      ],
+      -1,
+      -1
+     ]
+    },
+    "poppet": "DOCK_NEWCOMER_Suit_N2_Poppet",
+    "capture": "DOCK_NEWCOMER_Suit_Capture_Tongue",
+    "module_object": "LS_NEWCOMER_Module"
+   },
+   "sockets": [
+    "SOCKET_HAND_L_GRIP",
+    "SOCKET_HAND_R_GRIP",
+    "SOCKET_HAND_R_TOOL",
+    "SOCKET_TOOL_STOW",
+    "SOCKET_TOE_HOOK_L",
+    "SOCKET_TOE_HOOK_R",
+    "SOCKET_PLSS_SCU",
+    "SOCKET_HELMET_EYE",
+    "SOCKET_HUD",
+    "SOCKET_TETHER_A",
+    "SOCKET_TETHER_B",
+    "SOCKET_DRONE_DOCK"
+   ],
+   "outer_trimmed_faces": 1136,
+   "cuirass_arch": {
+    "z_top": 1.1452353191375733,
+    "half": 104.0
+   },
+   "scye_sleeves": {
+    "l": {
+     "length_m": 0.104,
+     "root_radius_m": 0.09,
+     "end_radius_m": 0.091,
+     "rings": 13
+    },
+    "r": {
+     "length_m": 0.104,
+     "root_radius_m": 0.09,
+     "end_radius_m": 0.091,
+     "rings": 13
+    },
+    "outer_faces_replaced": 108,
+    "outer_crumb_faces": 0
+   },
    "actions": {
     "eva_suit_check": {
      "frames": 360,
@@ -1496,6 +3034,173 @@
      "root_motion": false,
      "slip_mm": {},
      "reach_short_mm": {}
+    },
+    "EVA_SYSTEM_POSES": {
+     "frames": 90,
+     "loop": false,
+     "root_motion": false,
+     "slip_mm": {
+      "foot_right": 372.4,
+      "foot_left": 638.9,
+      "hand_right": 0.0,
+      "hand_left": 0.0
+     },
+     "reach_short_mm": {},
+     "shoulder_clearance": {
+      "walk": {
+       "l": {
+        "abduct_deg": 30,
+        "flex_deg": 10,
+        "hand_moved_mm": 246.0,
+        "contacts_left": 0
+       },
+       "r": {
+        "abduct_deg": 36,
+        "flex_deg": 0,
+        "hand_moved_mm": 292.4,
+        "contacts_left": 0
+       }
+      },
+      "reach": {
+       "l": {
+        "abduct_deg": 24,
+        "flex_deg": 0,
+        "hand_moved_mm": 189.5,
+        "contacts_left": 0
+       }
+      },
+      "crouch": {
+       "l": {
+        "abduct_deg": 30,
+        "flex_deg": 20,
+        "hand_moved_mm": 268.3,
+        "contacts_left": 0
+       },
+       "r": {
+        "abduct_deg": 30,
+        "flex_deg": -20,
+        "hand_moved_mm": 268.3,
+        "contacts_left": 0
+       }
+      },
+      "climb": {
+       "l": {
+        "abduct_deg": 12,
+        "flex_deg": 0,
+        "hand_moved_mm": 35.1,
+        "contacts_left": 0
+       }
+      },
+      "flight": {
+       "l": {
+        "abduct_deg": 24,
+        "flex_deg": 0,
+        "hand_moved_mm": 196.2,
+        "contacts_left": 0
+       },
+       "r": {
+        "abduct_deg": 12,
+        "flex_deg": -10,
+        "hand_moved_mm": 128.0,
+        "contacts_left": 0
+       }
+      },
+      "deployed": {
+       "l": {
+        "abduct_deg": 24,
+        "flex_deg": 10,
+        "hand_moved_mm": 207.1,
+        "contacts_left": 0
+       },
+       "r": {
+        "abduct_deg": 12,
+        "flex_deg": -10,
+        "hand_moved_mm": 128.3,
+        "contacts_left": 0
+       }
+      },
+      "burn": {
+       "l": {
+        "abduct_deg": 6,
+        "flex_deg": 10,
+        "hand_moved_mm": 46.1,
+        "contacts_left": 0
+       },
+       "r": {
+        "abduct_deg": 6,
+        "flex_deg": -10,
+        "hand_moved_mm": 46.1,
+        "contacts_left": 0
+       }
+      },
+      "chase": {
+       "l": {
+        "abduct_deg": 24,
+        "flex_deg": 0,
+        "hand_moved_mm": 196.2,
+        "contacts_left": 0
+       },
+       "r": {
+        "abduct_deg": 12,
+        "flex_deg": -10,
+        "hand_moved_mm": 128.1,
+        "contacts_left": 0
+       }
+      }
+     },
+     "hand_controller": {
+      "pivot": "CTRL_NEWCOMER_HCM_Pivot",
+      "links": [
+       "CTRL_NEWCOMER_HCM_Link_1",
+       "CTRL_NEWCOMER_HCM_Link_2"
+      ],
+      "housing": "CTRL_NEWCOMER_HCM_Hinge_Housing",
+      "release": "CTRL_NEWCOMER_Manual_Release",
+      "deploy_poses": [
+       "flight",
+       "deployed",
+       "chase"
+      ],
+      "stops": {
+       "yaw_deg": [
+        0.0,
+        155.79
+       ],
+       "slide_m": [
+        0.3165,
+        0.553
+       ]
+      },
+      "reach_m": 0.553,
+      "grip_local": [
+       0.438,
+       0.0359,
+       0.4849
+      ],
+      "hinge_world": [
+       0.2345,
+       0.034,
+       1.2095
+      ],
+      "hinge_axis": [
+       -0.4411,
+       -0.0654,
+       -0.8951
+      ],
+      "seat_from_palm_mm": 52.6,
+      "grip_r_m": 0.018,
+      "grip_axis_link": [
+       -0.18085,
+       0.40228,
+       -0.89748
+      ],
+      "swing_deg": 155.8,
+      "telescope_m": 0.236,
+      "controls": {
+       "yaw": "HCM_Link_1 rotation_euler.z (rad, about the skewed hinge axis), stowed 0",
+       "slide": "HCM_Link_2 location.x (m)"
+      }
+     }
     }
    },
    "mobility": {
@@ -1507,12 +3212,12 @@
      },
      "knee": {
       "max_deg": 16.5,
-      "limit_deg": 95.0,
+      "limit_deg": 105.0,
       "ok": true
      },
      "shoulder": {
       "max_deg": 64.0,
-      "limit_deg": 120.0,
+      "limit_deg": 130.0,
       "ok": true
      },
      "head": {
@@ -1529,13 +3234,13 @@
      },
      "knee": {
       "max_deg": 27.8,
-      "limit_deg": 95.0,
+      "limit_deg": 105.0,
       "ok": true
      },
      "shoulder": {
       "max_deg": 123.0,
-      "limit_deg": 120.0,
-      "ok": false
+      "limit_deg": 130.0,
+      "ok": true
      },
      "head": {
       "max_deg": 4.0,
@@ -1551,12 +3256,12 @@
      },
      "knee": {
       "max_deg": 37.7,
-      "limit_deg": 95.0,
+      "limit_deg": 105.0,
       "ok": true
      },
      "shoulder": {
       "max_deg": 104.1,
-      "limit_deg": 120.0,
+      "limit_deg": 130.0,
       "ok": true
      },
      "head": {
@@ -1573,12 +3278,12 @@
      },
      "knee": {
       "max_deg": 37.7,
-      "limit_deg": 95.0,
+      "limit_deg": 105.0,
       "ok": true
      },
      "shoulder": {
       "max_deg": 112.2,
-      "limit_deg": 120.0,
+      "limit_deg": 130.0,
       "ok": true
      },
      "head": {
@@ -1595,12 +3300,12 @@
      },
      "knee": {
       "max_deg": 27.8,
-      "limit_deg": 95.0,
+      "limit_deg": 105.0,
       "ok": true
      },
      "shoulder": {
       "max_deg": 58.3,
-      "limit_deg": 120.0,
+      "limit_deg": 130.0,
       "ok": true
      },
      "head": {
@@ -1617,12 +3322,12 @@
      },
      "knee": {
       "max_deg": 27.8,
-      "limit_deg": 95.0,
+      "limit_deg": 105.0,
       "ok": true
      },
      "shoulder": {
       "max_deg": 61.0,
-      "limit_deg": 120.0,
+      "limit_deg": 130.0,
       "ok": true
      },
      "head": {
@@ -1639,12 +3344,12 @@
      },
      "knee": {
       "max_deg": 27.8,
-      "limit_deg": 95.0,
+      "limit_deg": 105.0,
       "ok": true
      },
      "shoulder": {
       "max_deg": 108.6,
-      "limit_deg": 120.0,
+      "limit_deg": 130.0,
       "ok": true
      },
      "head": {
@@ -1661,12 +3366,12 @@
      },
      "knee": {
       "max_deg": 37.7,
-      "limit_deg": 95.0,
+      "limit_deg": 105.0,
       "ok": true
      },
      "shoulder": {
       "max_deg": 104.1,
-      "limit_deg": 120.0,
+      "limit_deg": 130.0,
       "ok": true
      },
      "head": {
@@ -1683,12 +3388,12 @@
      },
      "knee": {
       "max_deg": 22.8,
-      "limit_deg": 95.0,
+      "limit_deg": 105.0,
       "ok": true
      },
      "shoulder": {
       "max_deg": 75.1,
-      "limit_deg": 120.0,
+      "limit_deg": 130.0,
       "ok": true
      },
      "head": {
@@ -1705,12 +3410,12 @@
      },
      "knee": {
       "max_deg": 16.5,
-      "limit_deg": 95.0,
+      "limit_deg": 105.0,
       "ok": true
      },
      "shoulder": {
       "max_deg": 88.4,
-      "limit_deg": 120.0,
+      "limit_deg": 130.0,
       "ok": true
      },
      "head": {
@@ -1727,12 +3432,12 @@
      },
      "knee": {
       "max_deg": 49.5,
-      "limit_deg": 95.0,
+      "limit_deg": 105.0,
       "ok": true
      },
      "shoulder": {
       "max_deg": 49.2,
-      "limit_deg": 120.0,
+      "limit_deg": 130.0,
       "ok": true
      },
      "head": {
@@ -1749,12 +3454,12 @@
      },
      "knee": {
       "max_deg": 27.8,
-      "limit_deg": 95.0,
+      "limit_deg": 105.0,
       "ok": true
      },
      "shoulder": {
       "max_deg": 64.5,
-      "limit_deg": 120.0,
+      "limit_deg": 130.0,
       "ok": true
      },
      "head": {
@@ -1771,13 +3476,13 @@
      },
      "knee": {
       "max_deg": 16.5,
-      "limit_deg": 95.0,
+      "limit_deg": 105.0,
       "ok": true
      },
      "shoulder": {
       "max_deg": 123.1,
-      "limit_deg": 120.0,
-      "ok": false
+      "limit_deg": 130.0,
+      "ok": true
      },
      "head": {
       "max_deg": 10.0,
@@ -1793,12 +3498,12 @@
      },
      "knee": {
       "max_deg": 16.5,
-      "limit_deg": 95.0,
+      "limit_deg": 105.0,
       "ok": true
      },
      "shoulder": {
-      "max_deg": 115.6,
-      "limit_deg": 120.0,
+      "max_deg": 125.5,
+      "limit_deg": 130.0,
       "ok": true
      },
      "head": {
@@ -1815,12 +3520,12 @@
      },
      "knee": {
       "max_deg": 5.0,
-      "limit_deg": 95.0,
+      "limit_deg": 105.0,
       "ok": true
      },
      "shoulder": {
       "max_deg": 6.5,
-      "limit_deg": 120.0,
+      "limit_deg": 130.0,
       "ok": true
      },
      "head": {
@@ -1835,47 +3540,31 @@
      "name": "EVA_NEWCOMER_LCVG_INNER",
      "assembly": "COOLING",
      "part_id": "WAYFARER_EVA_Y155/COOLING/LCVG_INNER",
-     "job": "liquid cooling and ventilation garment: water tubing and vent ducts against the skin (EVA-009, 53!8)",
+     "job": "liquid cooling and ventilation garment (cutaway layer)",
      "show": "cutaway",
      "bone": ""
     },
     {
-     "name": "EVA_NEWCOMER_SUIT_PRESSURE_BLADDER",
+     "name": "EVA_NEWCOMER_PRESSURE_BLADDER",
      "assembly": "PRESSURE",
      "part_id": "WAYFARER_EVA_Y155/PRESSURE/SUIT_PRESSURE_BLADDER",
-     "job": "continuous gas bladder: the pressure boundary (EVA-005, 44!4)",
+     "job": "continuous gas bladder: the pressure boundary (cutaway layer)",
      "show": "cutaway",
      "bone": ""
     },
     {
-     "name": "EVA_NEWCOMER_MMOD_OUTER_SHELL",
+     "name": "EVA_NEWCOMER_OUTER_LAYER",
      "assembly": "PROTECTION",
      "part_id": "WAYFARER_EVA_Y155/PROTECTION/MMOD_OUTER_SHELL",
-     "job": "restraint layer plus replaceable thermal/MMOD outer textile with abrasion patches (EVA-005, 44!5, 44!13, 53!11)",
+     "job": "patterned restraint (lines of non-extension) under a thin thermal / MMOD textile: the visible \"second skin\"",
      "show": "always",
      "bone": ""
     },
     {
-     "name": "EVA_NEWCOMER_HUT",
+     "name": "EVA_NEWCOMER_Torso_Shell",
      "assembly": "PRESSURE",
      "part_id": "WAYFARER_EVA_Y155/PRESSURE/SUIT_PRESSURE_HARD_TORSO",
-     "job": "rigid/hybrid hard upper torso: load-bearing pressure shell with bearing and seal rings (EVA-021, ASSET-02); ingress concept OPEN",
-     "show": "always",
-     "bone": "spine_03"
-    },
-    {
-     "name": "EVA_NEWCOMER_Waist_Ring",
-     "assembly": "PRESSURE",
-     "part_id": "WAYFARER_EVA_Y155/PRESSURE/SUIT_WAIST_RING",
-     "job": "body seal closure: hard torso to lower torso pressure seal (EVA-005)",
-     "show": "always",
-     "bone": "spine_02"
-    },
-    {
-     "name": "EVA_NEWCOMER_Neck_Ring",
-     "assembly": "PRESSURE",
-     "part_id": "WAYFARER_EVA_Y155/PRESSURE/SUIT_NECK_RING",
-     "job": "helmet neck ring: sealed mechanical interface, helmet locks here (EVA-005, ASSET-06)",
+     "job": "rigid rear-entry composite torso: pressure shell, load path for the life-support hatch and the drone dock; shoulder yoke flows into the integral helmet",
      "show": "always",
      "bone": "spine_03"
     },
@@ -1883,183 +3572,311 @@
      "name": "EVA_NEWCOMER_Helmet_Shell",
      "assembly": "HELMET",
      "part_id": "WAYFARER_EVA_Y155/HELMET/SUIT_HELMET_VISOR",
-     "job": "sealed helmet pressure shell, independent of the visor assemblies (EVA-023, ASSET-06)",
+     "job": "integral helmet (bonded to the torso, rear entry): superellipsoid sized to the swept head plus 22 mm",
      "show": "always",
      "bone": "spine_03"
     },
     {
-     "name": "EVA_NEWCOMER_Pressure_Visor",
+     "name": "EVA_NEWCOMER_Visor",
      "assembly": "HELMET",
      "part_id": "WAYFARER_EVA_Y155/HELMET/SUIT_HELMET_VISOR",
-     "job": "clear pressure visor with anti-fog/thermal treatment; never opened in vacuum (EVA-023)",
+     "job": "panoramic pressure visor (polycarbonate, inner anti-fog / thermal coat), set inside the structural frame",
      "show": "always",
      "bone": "spine_03"
     },
     {
-     "name": "EVA_NEWCOMER_Glare_Visor",
+     "name": "EVA_NEWCOMER_Helmet_Brow",
      "assembly": "HELMET",
      "part_id": "WAYFARER_EVA_Y155/HELMET/SUIT_HELMET_VISOR",
-     "job": "retractable glare visor, shown raised: shutter for sunlit work (EVA-023)",
+     "job": "brow structure: carries the visor frame load, the work lights and cameras in protected recesses, and the retracted sunshade",
      "show": "always",
      "bone": "spine_03"
     },
     {
-     "name": "EVA_NEWCOMER_Helmet_Band",
-     "assembly": "MARKINGS",
-     "part_id": "WAYFARER_EVA_Y155/MARKINGS/SAFETY_MARKINGS",
-     "job": "helmet identification band: neutral grey visitor markings, GUIDED EVA VISITOR band, no institutional plates",
+     "name": "EVA_NEWCOMER_Visor_Frame",
+     "assembly": "HELMET",
+     "part_id": "WAYFARER_EVA_Y155/HELMET/SUIT_HELMET_VISOR",
+     "job": "visor structural frame: titanium-composite rim bonded to the shell",
      "show": "always",
      "bone": "spine_03"
     },
     {
-     "name": "EVA_NEWCOMER_PLSS",
-     "assembly": "PLSS",
-     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
-     "job": "detachable primary life-support pack: display envelope, packaging and mass OPEN (ASSET-09, EVA-024, EVA-028)",
+     "name": "EVA_NEWCOMER_Neck_Ring",
+     "assembly": "PRESSURE",
+     "part_id": "WAYFARER_EVA_Y155/PRESSURE/SUIT_PRESSURE_HARD_TORSO",
+     "job": "neck ring: helmet-to-yoke flange, dual O-ring face seal (pressure joint)",
      "show": "always",
      "bone": "spine_03"
     },
     {
-     "name": "EVA_NEWCOMER_PLSS_Cover_Upper",
-     "assembly": "PLSS",
-     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
-     "job": "PLSS access panel: replaceable module boundary (ASSET-09 \"distinct access hatches\")",
+     "name": "EVA_NEWCOMER_Neck_Ring_Collar",
+     "assembly": "PRESSURE",
+     "part_id": "WAYFARER_EVA_Y155/PRESSURE/SUIT_PRESSURE_HARD_TORSO",
+     "job": "neck-ring locking collar (service, not donning)",
      "show": "always",
      "bone": "spine_03"
     },
     {
-     "name": "EVA_NEWCOMER_PLSS_Cover_Lower",
-     "assembly": "PLSS",
-     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
-     "job": "PLSS access panel: replaceable module boundary (ASSET-09 \"distinct access hatches\")",
+     "name": "EVA_NEWCOMER_Cuirass_Edge_0",
+     "assembly": "PRESSURE",
+     "part_id": "WAYFARER_EVA_Y155/PRESSURE/SUIT_PRESSURE_HARD_TORSO",
+     "job": "cuirass edge: rolled rim of the rigid torso around the flexible abdomen and the back hem",
      "show": "always",
      "bone": "spine_03"
     },
     {
-     "name": "EVA_NEWCOMER_PLSS_O2_Primary_1",
-     "assembly": "PLSS",
-     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
-     "job": "primary oxygen storage (EVA-008)",
-     "show": "cutaway",
-     "bone": "spine_03"
-    },
-    {
-     "name": "EVA_NEWCOMER_PLSS_O2_Primary_2",
-     "assembly": "PLSS",
-     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
-     "job": "primary oxygen storage (EVA-008)",
-     "show": "cutaway",
-     "bone": "spine_03"
-    },
-    {
-     "name": "EVA_NEWCOMER_PLSS_O2_Emergency_Reserve",
-     "assembly": "PLSS",
-     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
-     "job": "separate emergency oxygen reserve, independent regulator (EVA-008, EVA-026)",
-     "show": "cutaway",
-     "bone": "spine_03"
-    },
-    {
-     "name": "EVA_NEWCOMER_PLSS_O2_Regulator",
-     "assembly": "PLSS",
-     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
-     "job": "oxygen pressure regulator; suit setpoint OPEN (EVA-004)",
-     "show": "cutaway",
-     "bone": "spine_03"
-    },
-    {
-     "name": "EVA_NEWCOMER_PLSS_CO2_Cartridge",
-     "assembly": "PLSS",
-     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
-     "job": "replaceable/regenerable CO2 removal cartridge (53!7)",
-     "show": "cutaway",
-     "bone": "spine_03"
-    },
-    {
-     "name": "EVA_NEWCOMER_PLSS_Fan_Pump_Separator",
-     "assembly": "PLSS",
-     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
-     "job": "ventilation fan, cooling-water pump and water separator (53!6, 53!8)",
-     "show": "cutaway",
-     "bone": "spine_03"
-    },
-    {
-     "name": "EVA_NEWCOMER_PLSS_Heat_Exchanger",
-     "assembly": "PLSS",
-     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
-     "job": "primary heat exchanger / evaporator, emergency cooling branch (EVA-009, 53!9)",
-     "show": "cutaway",
-     "bone": "spine_03"
-    },
-    {
-     "name": "EVA_NEWCOMER_PLSS_Battery",
-     "assembly": "PLSS",
-     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
-     "job": "PLSS battery",
-     "show": "cutaway",
-     "bone": "spine_03"
-    },
-    {
-     "name": "EVA_NEWCOMER_PLSS_Radio_Telemetry",
-     "assembly": "PLSS",
-     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
-     "job": "radio, telemetry and emergency beacon; antenna protected in the shell (EVA-019)",
-     "show": "cutaway",
-     "bone": "spine_03"
-    },
-    {
-     "name": "EVA_NEWCOMER_PLSS_SCU_Port",
-     "assembly": "PLSS",
-     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
-     "job": "umbilical port: recharge from certified ship supplies (53!6)",
+     "name": "SENS_Helmet_Light_P",
+     "assembly": "HELMET",
+     "part_id": "WAYFARER_EVA_Y155/HELMET/SUIT_HELMET_VISOR",
+     "job": "work light (flush lens in the brow recess)",
      "show": "always",
      "bone": "spine_03"
     },
     {
-     "name": "EVA_NEWCOMER_PLSS_Cooling_Port",
-     "assembly": "PLSS",
-     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
-     "job": "cooling-loop quick disconnect (53!8)",
+     "name": "SENS_Helmet_Cam_P",
+     "assembly": "HELMET",
+     "part_id": "WAYFARER_EVA_Y155/HELMET/SUIT_HELMET_VISOR",
+     "job": "helmet camera (stereo pair, flush)",
      "show": "always",
      "bone": "spine_03"
     },
     {
-     "name": "EVA_NEWCOMER_PLSS_Purge_Valve",
-     "assembly": "MARKINGS",
-     "part_id": "WAYFARER_EVA_Y155/MARKINGS/SAFETY_MARKINGS",
-     "job": "emergency reserve actuator, safety orange (EVA-026)",
+     "name": "SENS_Helmet_Status_P",
+     "assembly": "HELMET",
+     "part_id": "WAYFARER_EVA_Y155/HELMET/SUIT_HELMET_VISOR",
+     "job": "in-helmet peripheral status light (drone link, gas, latch)",
      "show": "always",
      "bone": "spine_03"
     },
     {
-     "name": "EVA_NEWCOMER_DCM",
-     "assembly": "PLSS",
-     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
-     "job": "chest display and control module: suit status, warnings, tether count (EVA-018); no unreleased value is displayed",
+     "name": "SENS_Helmet_Light_S",
+     "assembly": "HELMET",
+     "part_id": "WAYFARER_EVA_Y155/HELMET/SUIT_HELMET_VISOR",
+     "job": "work light (flush lens in the brow recess)",
      "show": "always",
      "bone": "spine_03"
     },
     {
-     "name": "EVA_NEWCOMER_DCM_Display",
-     "assembly": "PLSS",
-     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
-     "job": "DCM status display",
+     "name": "SENS_Helmet_Cam_S",
+     "assembly": "HELMET",
+     "part_id": "WAYFARER_EVA_Y155/HELMET/SUIT_HELMET_VISOR",
+     "job": "helmet camera (stereo pair, flush)",
      "show": "always",
      "bone": "spine_03"
     },
     {
-     "name": "EVA_NEWCOMER_Wrist_Display",
-     "assembly": "PLSS",
-     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
-     "job": "forearm status display and checklist (EVA-018)",
+     "name": "SENS_Helmet_Status_S",
+     "assembly": "HELMET",
+     "part_id": "WAYFARER_EVA_Y155/HELMET/SUIT_HELMET_VISOR",
+     "job": "in-helmet peripheral status light (drone link, gas, latch)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "EVA_NEWCOMER_Helmet_Crest",
+     "assembly": "HELMET",
+     "part_id": "WAYFARER_EVA_Y155/HELMET/SUIT_HELMET_VISOR",
+     "job": "service crest: structural rib and harness run (brow lights and cameras to the hatch)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "SENS_Helmet_Crest_Cam",
+     "assembly": "HELMET",
+     "part_id": "WAYFARER_EVA_Y155/HELMET/SUIT_HELMET_VISOR",
+     "job": "forward work camera at the crest root",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "SENS_Helmet_Comms_Patch",
+     "assembly": "HELMET",
+     "part_id": "WAYFARER_EVA_Y155/HELMET/SUIT_HELMET_VISOR",
+     "job": "conformal comms antenna patch (suit-drone-ship link) under the shell skin",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "EVA_NEWCOMER_Sunshade_Retracted",
+     "assembly": "HELMET",
+     "part_id": "WAYFARER_EVA_Y155/HELMET/SUIT_HELMET_VISOR",
+     "job": "gold sunshade, retracted inside the brow structure (shown stowed; deployment not rigged)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "EVA_NEWCOMER_Scye_Sleeve_l",
+     "assembly": "PRESSURE",
+     "part_id": "WAYFARER_EVA_Y155/PRESSURE/SUIT_PRESSURE_HARD_TORSO",
+     "job": "shoulder convolute: pressure-bearing sleeve from the scye bearing to the upper-arm bearing (restraint ribs)",
+     "show": "always",
+     "bone": ""
+    },
+    {
+     "name": "EVA_NEWCOMER_Scye_Sleeve_r",
+     "assembly": "PRESSURE",
+     "part_id": "WAYFARER_EVA_Y155/PRESSURE/SUIT_PRESSURE_HARD_TORSO",
+     "job": "shoulder convolute: pressure-bearing sleeve from the scye bearing to the upper-arm bearing (restraint ribs)",
+     "show": "always",
+     "bone": ""
+    },
+    {
+     "name": "EVA_NEWCOMER_Cuirass_Seal",
+     "assembly": "PRESSURE",
+     "part_id": "WAYFARER_EVA_Y155/PRESSURE/SUIT_PRESSURE_HARD_TORSO",
+     "job": "bladder-to-cuirass clamp skirt: the soft layer's pressure flange carried into the rigid torso's clamp ring",
+     "show": "always",
+     "bone": ""
+    },
+    {
+     "name": "EVA_NEWCOMER_Restraint_Line_upperarm_l_0",
+     "assembly": "PROTECTION",
+     "part_id": "WAYFARER_EVA_Y155/PROTECTION/MMOD_OUTER_SHELL",
+     "job": "line of non-extension (restraint cord): keeps the limb length and volume constant in flexion",
+     "show": "always",
+     "bone": "upperarm_l"
+    },
+    {
+     "name": "EVA_NEWCOMER_Restraint_Line_upperarm_l_1",
+     "assembly": "PROTECTION",
+     "part_id": "WAYFARER_EVA_Y155/PROTECTION/MMOD_OUTER_SHELL",
+     "job": "line of non-extension (restraint cord): keeps the limb length and volume constant in flexion",
+     "show": "always",
+     "bone": "upperarm_l"
+    },
+    {
+     "name": "EVA_NEWCOMER_Restraint_Line_lowerarm_l_0",
+     "assembly": "PROTECTION",
+     "part_id": "WAYFARER_EVA_Y155/PROTECTION/MMOD_OUTER_SHELL",
+     "job": "line of non-extension (restraint cord): keeps the limb length and volume constant in flexion",
      "show": "always",
      "bone": "lowerarm_l"
+    },
+    {
+     "name": "EVA_NEWCOMER_Restraint_Line_lowerarm_l_1",
+     "assembly": "PROTECTION",
+     "part_id": "WAYFARER_EVA_Y155/PROTECTION/MMOD_OUTER_SHELL",
+     "job": "line of non-extension (restraint cord): keeps the limb length and volume constant in flexion",
+     "show": "always",
+     "bone": "lowerarm_l"
+    },
+    {
+     "name": "EVA_NEWCOMER_Restraint_Line_thigh_l_0",
+     "assembly": "PROTECTION",
+     "part_id": "WAYFARER_EVA_Y155/PROTECTION/MMOD_OUTER_SHELL",
+     "job": "line of non-extension (restraint cord): keeps the limb length and volume constant in flexion",
+     "show": "always",
+     "bone": "thigh_l"
+    },
+    {
+     "name": "EVA_NEWCOMER_Restraint_Line_thigh_l_1",
+     "assembly": "PROTECTION",
+     "part_id": "WAYFARER_EVA_Y155/PROTECTION/MMOD_OUTER_SHELL",
+     "job": "line of non-extension (restraint cord): keeps the limb length and volume constant in flexion",
+     "show": "always",
+     "bone": "thigh_l"
+    },
+    {
+     "name": "EVA_NEWCOMER_Restraint_Line_calf_l_0",
+     "assembly": "PROTECTION",
+     "part_id": "WAYFARER_EVA_Y155/PROTECTION/MMOD_OUTER_SHELL",
+     "job": "line of non-extension (restraint cord): keeps the limb length and volume constant in flexion",
+     "show": "always",
+     "bone": "calf_l"
+    },
+    {
+     "name": "EVA_NEWCOMER_Restraint_Line_calf_l_1",
+     "assembly": "PROTECTION",
+     "part_id": "WAYFARER_EVA_Y155/PROTECTION/MMOD_OUTER_SHELL",
+     "job": "line of non-extension (restraint cord): keeps the limb length and volume constant in flexion",
+     "show": "always",
+     "bone": "calf_l"
+    },
+    {
+     "name": "EVA_NEWCOMER_Restraint_Line_upperarm_r_0",
+     "assembly": "PROTECTION",
+     "part_id": "WAYFARER_EVA_Y155/PROTECTION/MMOD_OUTER_SHELL",
+     "job": "line of non-extension (restraint cord): keeps the limb length and volume constant in flexion",
+     "show": "always",
+     "bone": "upperarm_r"
+    },
+    {
+     "name": "EVA_NEWCOMER_Restraint_Line_upperarm_r_1",
+     "assembly": "PROTECTION",
+     "part_id": "WAYFARER_EVA_Y155/PROTECTION/MMOD_OUTER_SHELL",
+     "job": "line of non-extension (restraint cord): keeps the limb length and volume constant in flexion",
+     "show": "always",
+     "bone": "upperarm_r"
+    },
+    {
+     "name": "EVA_NEWCOMER_Restraint_Line_lowerarm_r_0",
+     "assembly": "PROTECTION",
+     "part_id": "WAYFARER_EVA_Y155/PROTECTION/MMOD_OUTER_SHELL",
+     "job": "line of non-extension (restraint cord): keeps the limb length and volume constant in flexion",
+     "show": "always",
+     "bone": "lowerarm_r"
+    },
+    {
+     "name": "EVA_NEWCOMER_Restraint_Line_lowerarm_r_1",
+     "assembly": "PROTECTION",
+     "part_id": "WAYFARER_EVA_Y155/PROTECTION/MMOD_OUTER_SHELL",
+     "job": "line of non-extension (restraint cord): keeps the limb length and volume constant in flexion",
+     "show": "always",
+     "bone": "lowerarm_r"
+    },
+    {
+     "name": "EVA_NEWCOMER_Restraint_Line_thigh_r_0",
+     "assembly": "PROTECTION",
+     "part_id": "WAYFARER_EVA_Y155/PROTECTION/MMOD_OUTER_SHELL",
+     "job": "line of non-extension (restraint cord): keeps the limb length and volume constant in flexion",
+     "show": "always",
+     "bone": "thigh_r"
+    },
+    {
+     "name": "EVA_NEWCOMER_Restraint_Line_thigh_r_1",
+     "assembly": "PROTECTION",
+     "part_id": "WAYFARER_EVA_Y155/PROTECTION/MMOD_OUTER_SHELL",
+     "job": "line of non-extension (restraint cord): keeps the limb length and volume constant in flexion",
+     "show": "always",
+     "bone": "thigh_r"
+    },
+    {
+     "name": "EVA_NEWCOMER_Restraint_Line_calf_r_0",
+     "assembly": "PROTECTION",
+     "part_id": "WAYFARER_EVA_Y155/PROTECTION/MMOD_OUTER_SHELL",
+     "job": "line of non-extension (restraint cord): keeps the limb length and volume constant in flexion",
+     "show": "always",
+     "bone": "calf_r"
+    },
+    {
+     "name": "EVA_NEWCOMER_Restraint_Line_calf_r_1",
+     "assembly": "PROTECTION",
+     "part_id": "WAYFARER_EVA_Y155/PROTECTION/MMOD_OUTER_SHELL",
+     "job": "line of non-extension (restraint cord): keeps the limb length and volume constant in flexion",
+     "show": "always",
+     "bone": "calf_r"
+    },
+    {
+     "name": "EVA_NEWCOMER_Scye_Housing_l",
+     "assembly": "PRESSURE",
+     "part_id": "WAYFARER_EVA_Y155/PRESSURE/SUIT_PRESSURE_HARD_TORSO",
+     "job": "scye housing: rigid collar bolted to the torso shell, the scye bearing seat (pressure joint)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "EVA_NEWCOMER_Scye_Housing_r",
+     "assembly": "PRESSURE",
+     "part_id": "WAYFARER_EVA_Y155/PRESSURE/SUIT_PRESSURE_HARD_TORSO",
+     "job": "scye housing: rigid collar bolted to the torso shell, the scye bearing seat (pressure joint)",
+     "show": "always",
+     "bone": "spine_03"
     },
     {
      "name": "EVA_NEWCOMER_Scye_Bearing_l",
      "assembly": "JOINTS",
      "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_JOINTS",
-     "job": "scye (shoulder) bearing on the hard torso (EVA-022, 53!14)",
+     "job": "scye bearing in the torso shell (shoulder rotation)",
      "show": "always",
      "bone": "spine_03"
     },
@@ -2067,95 +3884,103 @@
      "name": "EVA_NEWCOMER_Upperarm_Bearing_l",
      "assembly": "JOINTS",
      "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_JOINTS",
-     "job": "rotary bearing: low-torque pressure-compatible rotation (53!14)",
+     "job": "upper-arm bearing (humeral rotation)",
      "show": "always",
      "bone": "upperarm_l"
     },
     {
-     "name": "EVA_NEWCOMER_Elbow_Convolute_l_dn",
+     "name": "EVA_NEWCOMER_Upperarm_Bearing_l_Sleeve",
      "assembly": "JOINTS",
      "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_JOINTS",
-     "job": "elbow convolute: restraint-held flexible pressure section (ASSET-05)",
-     "show": "always",
-     "bone": "lowerarm_l"
-    },
-    {
-     "name": "EVA_NEWCOMER_Elbow_Convolute_l_up",
-     "assembly": "JOINTS",
-     "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_JOINTS",
-     "job": "elbow convolute (ASSET-05)",
+     "job": "restraint attachment sleeve",
      "show": "always",
      "bone": "upperarm_l"
     },
     {
-     "name": "EVA_NEWCOMER_Wrist_Bearing_l",
+     "name": "EVA_NEWCOMER_Wrist_Disconnect_l",
      "assembly": "JOINTS",
      "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_GLOVES",
-     "job": "glove wrist disconnect and bearing: sealed cuff (ASSET-07)",
+     "job": "glove wrist disconnect and bearing",
      "show": "always",
      "bone": "lowerarm_l"
     },
     {
-     "name": "EVA_NEWCOMER_Hip_Bearing_l",
+     "name": "EVA_NEWCOMER_Wrist_Disconnect_l_Sleeve",
      "assembly": "JOINTS",
-     "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_JOINTS",
-     "job": "hip bearing (53!14)",
+     "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_GLOVES",
+     "job": "restraint attachment sleeve",
      "show": "always",
-     "bone": "pelvis"
-    },
-    {
-     "name": "EVA_NEWCOMER_Thigh_Bearing_l",
-     "assembly": "JOINTS",
-     "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_JOINTS",
-     "job": "rotary bearing: low-torque pressure-compatible rotation (53!14)",
-     "show": "always",
-     "bone": "thigh_l"
-    },
-    {
-     "name": "EVA_NEWCOMER_Knee_Convolute_l_dn",
-     "assembly": "JOINTS",
-     "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_JOINTS",
-     "job": "knee convolute (ASSET-05)",
-     "show": "always",
-     "bone": "calf_l"
-    },
-    {
-     "name": "EVA_NEWCOMER_Knee_Convolute_l_up",
-     "assembly": "JOINTS",
-     "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_JOINTS",
-     "job": "knee convolute (ASSET-05)",
-     "show": "always",
-     "bone": "thigh_l"
-    },
-    {
-     "name": "EVA_NEWCOMER_Ankle_Bearing_l",
-     "assembly": "JOINTS",
-     "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_JOINTS",
-     "job": "ankle bearing and boot seal (ASSET-08)",
-     "show": "always",
-     "bone": "calf_l"
+     "bone": "lowerarm_l"
     },
     {
      "name": "EVA_NEWCOMER_Gauntlet_l",
      "assembly": "JOINTS",
      "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_GLOVES",
-     "job": "glove gauntlet: thermal/MMOD cuff over the wrist disconnect (ASSET-07)",
+     "job": "gauntlet cuff: thermal / MMOD cover over the wrist disconnect",
      "show": "always",
-     "bone": "hand_l"
+     "bone": "lowerarm_l"
     },
     {
-     "name": "EVA_NEWCOMER_Sole_l",
+     "name": "EVA_NEWCOMER_Ankle_Bearing_l",
+     "assembly": "JOINTS",
+     "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_JOINTS",
+     "job": "ankle bearing and boot seal",
+     "show": "always",
+     "bone": "calf_l"
+    },
+    {
+     "name": "EVA_NEWCOMER_Ankle_Bearing_l_Sleeve",
+     "assembly": "JOINTS",
+     "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_JOINTS",
+     "job": "restraint attachment sleeve",
+     "show": "always",
+     "bone": "calf_l"
+    },
+    {
+     "name": "EVA_NEWCOMER_Knee_Cap_l",
+     "assembly": "PROTECTION",
+     "part_id": "WAYFARER_EVA_Y155/PROTECTION/MMOD_OUTER_SHELL",
+     "job": "knee cap: kneeling and restraint contact",
+     "show": "always",
+     "bone": "calf_l"
+    },
+    {
+     "name": "EVA_NEWCOMER_Shin_Guard_l",
+     "assembly": "PROTECTION",
+     "part_id": "WAYFARER_EVA_Y155/PROTECTION/MMOD_OUTER_SHELL",
+     "job": "shin guard: MMOD and abrasion",
+     "show": "always",
+     "bone": "calf_l"
+    },
+    {
+     "name": "EVA_NEWCOMER_Elbow_Cap_l",
+     "assembly": "PROTECTION",
+     "part_id": "WAYFARER_EVA_Y155/PROTECTION/MMOD_OUTER_SHELL",
+     "job": "elbow cap",
+     "show": "always",
+     "bone": "lowerarm_l"
+    },
+    {
+     "name": "EVA_NEWCOMER_Arm_Band_l",
+     "assembly": "MARKINGS",
+     "part_id": "WAYFARER_EVA_Y155/MARKINGS/SAFETY_MARKINGS",
+     "job": "identification band (role colour)",
+     "show": "always",
+     "bone": "upperarm_l"
+    },
+    {
+     "name": "EVA_NEWCOMER_Boot_Shell_l",
      "assembly": "JOINTS",
      "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_BOOTS",
-     "job": "rigid service sole (ASSET-08): no tread, foot-restraint interface",
+     "job": "integrated boot: rigid heel counter and arch, sole band, heel fitting",
      "show": "always",
      "bone": "foot_l"
     },
     {
-     "name": "EVA_NEWCOMER_Toe_Sole_l",
+     "name": "EVA_NEWCOMER_Boot_Toe_l",
      "assembly": "JOINTS",
      "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_BOOTS",
-     "job": "flexible toe sole",
+     "job": "boot toe section: flexes at the ball joint; toe hook for foot restraints",
      "show": "always",
      "bone": "ball_l"
     },
@@ -2163,23 +3988,23 @@
      "name": "EVA_NEWCOMER_Toe_Hook_l",
      "assembly": "JOINTS",
      "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_BOOTS",
-     "job": "toe hook for a foot restraint (ASSET-08)",
+     "job": "toe hook bar (foot restraint)",
      "show": "always",
      "bone": "ball_l"
     },
     {
-     "name": "EVA_NEWCOMER_Arm_Band_l",
-     "assembly": "MARKINGS",
-     "part_id": "WAYFARER_EVA_Y155/MARKINGS/SAFETY_MARKINGS",
-     "job": "upper-arm identification band: neutral grey visitor markings, GUIDED EVA VISITOR band, no institutional plates",
+     "name": "EVA_NEWCOMER_Heel_Fitting_l",
+     "assembly": "JOINTS",
+     "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_BOOTS",
+     "job": "heel fitting: foot-restraint clip",
      "show": "always",
-     "bone": "upperarm_l"
+     "bone": "foot_l"
     },
     {
      "name": "EVA_NEWCOMER_Scye_Bearing_r",
      "assembly": "JOINTS",
      "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_JOINTS",
-     "job": "scye (shoulder) bearing on the hard torso (EVA-022, 53!14)",
+     "job": "scye bearing in the torso shell (shoulder rotation)",
      "show": "always",
      "bone": "spine_03"
     },
@@ -2187,95 +4012,103 @@
      "name": "EVA_NEWCOMER_Upperarm_Bearing_r",
      "assembly": "JOINTS",
      "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_JOINTS",
-     "job": "rotary bearing: low-torque pressure-compatible rotation (53!14)",
+     "job": "upper-arm bearing (humeral rotation)",
      "show": "always",
      "bone": "upperarm_r"
     },
     {
-     "name": "EVA_NEWCOMER_Elbow_Convolute_r_dn",
+     "name": "EVA_NEWCOMER_Upperarm_Bearing_r_Sleeve",
      "assembly": "JOINTS",
      "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_JOINTS",
-     "job": "elbow convolute: restraint-held flexible pressure section (ASSET-05)",
-     "show": "always",
-     "bone": "lowerarm_r"
-    },
-    {
-     "name": "EVA_NEWCOMER_Elbow_Convolute_r_up",
-     "assembly": "JOINTS",
-     "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_JOINTS",
-     "job": "elbow convolute (ASSET-05)",
+     "job": "restraint attachment sleeve",
      "show": "always",
      "bone": "upperarm_r"
     },
     {
-     "name": "EVA_NEWCOMER_Wrist_Bearing_r",
+     "name": "EVA_NEWCOMER_Wrist_Disconnect_r",
      "assembly": "JOINTS",
      "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_GLOVES",
-     "job": "glove wrist disconnect and bearing: sealed cuff (ASSET-07)",
+     "job": "glove wrist disconnect and bearing",
      "show": "always",
      "bone": "lowerarm_r"
     },
     {
-     "name": "EVA_NEWCOMER_Hip_Bearing_r",
+     "name": "EVA_NEWCOMER_Wrist_Disconnect_r_Sleeve",
      "assembly": "JOINTS",
-     "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_JOINTS",
-     "job": "hip bearing (53!14)",
+     "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_GLOVES",
+     "job": "restraint attachment sleeve",
      "show": "always",
-     "bone": "pelvis"
-    },
-    {
-     "name": "EVA_NEWCOMER_Thigh_Bearing_r",
-     "assembly": "JOINTS",
-     "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_JOINTS",
-     "job": "rotary bearing: low-torque pressure-compatible rotation (53!14)",
-     "show": "always",
-     "bone": "thigh_r"
-    },
-    {
-     "name": "EVA_NEWCOMER_Knee_Convolute_r_dn",
-     "assembly": "JOINTS",
-     "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_JOINTS",
-     "job": "knee convolute (ASSET-05)",
-     "show": "always",
-     "bone": "calf_r"
-    },
-    {
-     "name": "EVA_NEWCOMER_Knee_Convolute_r_up",
-     "assembly": "JOINTS",
-     "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_JOINTS",
-     "job": "knee convolute (ASSET-05)",
-     "show": "always",
-     "bone": "thigh_r"
-    },
-    {
-     "name": "EVA_NEWCOMER_Ankle_Bearing_r",
-     "assembly": "JOINTS",
-     "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_JOINTS",
-     "job": "ankle bearing and boot seal (ASSET-08)",
-     "show": "always",
-     "bone": "calf_r"
+     "bone": "lowerarm_r"
     },
     {
      "name": "EVA_NEWCOMER_Gauntlet_r",
      "assembly": "JOINTS",
      "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_GLOVES",
-     "job": "glove gauntlet: thermal/MMOD cuff over the wrist disconnect (ASSET-07)",
+     "job": "gauntlet cuff: thermal / MMOD cover over the wrist disconnect",
      "show": "always",
-     "bone": "hand_r"
+     "bone": "lowerarm_r"
     },
     {
-     "name": "EVA_NEWCOMER_Sole_r",
+     "name": "EVA_NEWCOMER_Ankle_Bearing_r",
+     "assembly": "JOINTS",
+     "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_JOINTS",
+     "job": "ankle bearing and boot seal",
+     "show": "always",
+     "bone": "calf_r"
+    },
+    {
+     "name": "EVA_NEWCOMER_Ankle_Bearing_r_Sleeve",
+     "assembly": "JOINTS",
+     "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_JOINTS",
+     "job": "restraint attachment sleeve",
+     "show": "always",
+     "bone": "calf_r"
+    },
+    {
+     "name": "EVA_NEWCOMER_Knee_Cap_r",
+     "assembly": "PROTECTION",
+     "part_id": "WAYFARER_EVA_Y155/PROTECTION/MMOD_OUTER_SHELL",
+     "job": "knee cap: kneeling and restraint contact",
+     "show": "always",
+     "bone": "calf_r"
+    },
+    {
+     "name": "EVA_NEWCOMER_Shin_Guard_r",
+     "assembly": "PROTECTION",
+     "part_id": "WAYFARER_EVA_Y155/PROTECTION/MMOD_OUTER_SHELL",
+     "job": "shin guard: MMOD and abrasion",
+     "show": "always",
+     "bone": "calf_r"
+    },
+    {
+     "name": "EVA_NEWCOMER_Elbow_Cap_r",
+     "assembly": "PROTECTION",
+     "part_id": "WAYFARER_EVA_Y155/PROTECTION/MMOD_OUTER_SHELL",
+     "job": "elbow cap",
+     "show": "always",
+     "bone": "lowerarm_r"
+    },
+    {
+     "name": "EVA_NEWCOMER_Arm_Band_r",
+     "assembly": "MARKINGS",
+     "part_id": "WAYFARER_EVA_Y155/MARKINGS/SAFETY_MARKINGS",
+     "job": "identification band (role colour)",
+     "show": "always",
+     "bone": "upperarm_r"
+    },
+    {
+     "name": "EVA_NEWCOMER_Boot_Shell_r",
      "assembly": "JOINTS",
      "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_BOOTS",
-     "job": "rigid service sole (ASSET-08): no tread, foot-restraint interface",
+     "job": "integrated boot: rigid heel counter and arch, sole band, heel fitting",
      "show": "always",
      "bone": "foot_r"
     },
     {
-     "name": "EVA_NEWCOMER_Toe_Sole_r",
+     "name": "EVA_NEWCOMER_Boot_Toe_r",
      "assembly": "JOINTS",
      "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_BOOTS",
-     "job": "flexible toe sole",
+     "job": "boot toe section: flexes at the ball joint; toe hook for foot restraints",
      "show": "always",
      "bone": "ball_r"
     },
@@ -2283,65 +4116,1001 @@
      "name": "EVA_NEWCOMER_Toe_Hook_r",
      "assembly": "JOINTS",
      "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_BOOTS",
-     "job": "toe hook for a foot restraint (ASSET-08)",
+     "job": "toe hook bar (foot restraint)",
      "show": "always",
      "bone": "ball_r"
     },
     {
-     "name": "EVA_NEWCOMER_Arm_Band_r",
+     "name": "EVA_NEWCOMER_Heel_Fitting_r",
+     "assembly": "JOINTS",
+     "part_id": "WAYFARER_EVA_Y155/JOINTS/SUIT_BOOTS",
+     "job": "heel fitting: foot-restraint clip",
+     "show": "always",
+     "bone": "foot_r"
+    },
+    {
+     "name": "LS_NEWCOMER_Module",
+     "assembly": "PLSS",
+     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
+     "job": "life-support module = the rear-entry hatch: O2, CO2 / humidity swing bed, membrane evaporator, fan / pump, battery, radio, the N2 reserve and the suit manifold (packaging: data/eva_suit.toml [module]); its frame carries the drone dock into the torso shell",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "DOCK_NEWCOMER_Suit_Channel",
+     "assembly": "DOCK",
+     "part_id": "WAYFARER_EVA_Y155/DOCK/DRONE_DOCK",
+     "job": "dock channel: drafted 15 deg walls guide the drone keel in (capture +-6 mm at the mouth); hard-anodised wear liner",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "DOCK_NEWCOMER_Suit_Bolt_Socket_PU",
+     "assembly": "DOCK",
+     "part_id": "WAYFARER_EVA_Y155/DOCK/DRONE_DOCK",
+     "job": "latch bolt socket: hardened insert in the channel wall; the drone keel's bolt shoots into it (carries pull-off and shear loads)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "DOCK_NEWCOMER_Suit_Bolt_Socket_SU",
+     "assembly": "DOCK",
+     "part_id": "WAYFARER_EVA_Y155/DOCK/DRONE_DOCK",
+     "job": "latch bolt socket: hardened insert in the channel wall; the drone keel's bolt shoots into it (carries pull-off and shear loads)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "DOCK_NEWCOMER_Suit_Bolt_Socket_PL",
+     "assembly": "DOCK",
+     "part_id": "WAYFARER_EVA_Y155/DOCK/DRONE_DOCK",
+     "job": "latch bolt socket: hardened insert in the channel wall; the drone keel's bolt shoots into it (carries pull-off and shear loads)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "DOCK_NEWCOMER_Suit_Bolt_Socket_SL",
+     "assembly": "DOCK",
+     "part_id": "WAYFARER_EVA_Y155/DOCK/DRONE_DOCK",
+     "job": "latch bolt socket: hardened insert in the channel wall; the drone keel's bolt shoots into it (carries pull-off and shear loads)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "DOCK_NEWCOMER_Suit_N2_Receptacle",
+     "assembly": "DOCK",
+     "part_id": "WAYFARER_EVA_Y155/DOCK/DRONE_DOCK",
+     "job": "N2 dry-break receptacle, flush in the channel floor (no gas path without the probe)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "DOCK_NEWCOMER_Suit_N2_Mark",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/N2_RESERVE",
+     "job": "N2 identification ring",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "DOCK_NEWCOMER_Suit_N2_Poppet",
+     "assembly": "DOCK",
+     "part_id": "WAYFARER_EVA_Y155/DOCK/DRONE_DOCK",
+     "job": "spring-loaded poppet: pushed in 10 mm by the probe while coupled",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "DOCK_NEWCOMER_Suit_Power_Receptacle",
+     "assembly": "PLSS",
+     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
+     "job": "blind-mate power / data receptacle (flush, sealed shutter)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "DOCK_NEWCOMER_Suit_Mouth_Mark_942",
+     "assembly": "DOCK",
+     "part_id": "WAYFARER_EVA_Y155/DOCK/DRONE_DOCK",
+     "job": "channel mouth alignment mark (the only hazard colour on the dock)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "DOCK_NEWCOMER_Suit_Mouth_Mark_1358",
+     "assembly": "DOCK",
+     "part_id": "WAYFARER_EVA_Y155/DOCK/DRONE_DOCK",
+     "job": "channel mouth alignment mark (the only hazard colour on the dock)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "DOCK_NEWCOMER_Suit_Capture_Tongue",
+     "assembly": "DOCK",
+     "part_id": "WAYFARER_EVA_Y155/DOCK/DRONE_DOCK",
+     "job": "capture tongue: spring-loaded, slides across the channel mouth over the keel nose (soft capture), then the bolts lock",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "DOCK_NEWCOMER_Suit_Load_Pad_P",
+     "assembly": "DOCK",
+     "part_id": "WAYFARER_EVA_Y155/DOCK/DRONE_DOCK",
+     "job": "load pad (titanium): takes the drone's upper pads; the load path runs into the shoulder yoke",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "DOCK_NEWCOMER_Suit_Load_Pad_S",
+     "assembly": "DOCK",
+     "part_id": "WAYFARER_EVA_Y155/DOCK/DRONE_DOCK",
+     "job": "load pad (titanium): takes the drone's upper pads; the load path runs into the shoulder yoke",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "DOCK_NEWCOMER_Suit_Retro_Target_0",
+     "assembly": "DOCK",
+     "part_id": "WAYFARER_EVA_Y155/DOCK/DRONE_DOCK",
+     "job": "retroreflector alignment target (read by the drone's docking cameras)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "DOCK_NEWCOMER_Suit_Retro_Ring_0",
+     "assembly": "DOCK",
+     "part_id": "WAYFARER_EVA_Y155/DOCK/DRONE_DOCK",
+     "job": "target ring",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "DOCK_NEWCOMER_Suit_Retro_Target_1",
+     "assembly": "DOCK",
+     "part_id": "WAYFARER_EVA_Y155/DOCK/DRONE_DOCK",
+     "job": "retroreflector alignment target (read by the drone's docking cameras)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "DOCK_NEWCOMER_Suit_Retro_Ring_1",
+     "assembly": "DOCK",
+     "part_id": "WAYFARER_EVA_Y155/DOCK/DRONE_DOCK",
+     "job": "target ring",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "DOCK_NEWCOMER_Suit_Retro_Target_2",
+     "assembly": "DOCK",
+     "part_id": "WAYFARER_EVA_Y155/DOCK/DRONE_DOCK",
+     "job": "retroreflector alignment target (read by the drone's docking cameras)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "DOCK_NEWCOMER_Suit_Retro_Ring_2",
+     "assembly": "DOCK",
+     "part_id": "WAYFARER_EVA_Y155/DOCK/DRONE_DOCK",
+     "job": "target ring",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "THR_NEWCOMER_Suit_Cluster_UP",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit thruster cluster UP: four 8 N cold-N2 valves in a scarfed composite housing, flush with the module corner",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "THR_NEWCOMER_Suit_Cluster_UP_ID",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "propulsion identification ring (amber)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "THR_NEWCOMER_Suit_Cluster_US",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit thruster cluster US: four 8 N cold-N2 valves in a scarfed composite housing, flush with the module corner",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "THR_NEWCOMER_Suit_Cluster_US_ID",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "propulsion identification ring (amber)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "THR_NEWCOMER_Suit_Cluster_LP",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit thruster cluster LP: four 8 N cold-N2 valves in a scarfed composite housing, flush with the module corner",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "THR_NEWCOMER_Suit_Cluster_LP_ID",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "propulsion identification ring (amber)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "THR_NEWCOMER_Suit_Cluster_LS",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit thruster cluster LS: four 8 N cold-N2 valves in a scarfed composite housing, flush with the module corner",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "THR_NEWCOMER_Suit_Cluster_LS_ID",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "propulsion identification ring (amber)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_NEWCOMER_SUIT_UP_FWD_Valve",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit nozzle UP_FWD: 8 N cold N2",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_NEWCOMER_SUIT_UP_FWD_Bell",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit nozzle UP_FWD: 8 N cold N2",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_NEWCOMER_SUIT_UP_FWD",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit thruster socket UP_FWD (+Z = exhaust)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_NEWCOMER_SUIT_UP_AFT_Valve",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit nozzle UP_AFT: 8 N cold N2",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_NEWCOMER_SUIT_UP_AFT_Bell",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit nozzle UP_AFT: 8 N cold N2",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_NEWCOMER_SUIT_UP_AFT",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit thruster socket UP_AFT (+Z = exhaust)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_NEWCOMER_SUIT_UP_OUT_Valve",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit nozzle UP_OUT: 8 N cold N2",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_NEWCOMER_SUIT_UP_OUT_Bell",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit nozzle UP_OUT: 8 N cold N2",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_NEWCOMER_SUIT_UP_OUT",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit thruster socket UP_OUT (+Z = exhaust)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_NEWCOMER_SUIT_UP_VERT_Valve",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit nozzle UP_VERT: 8 N cold N2",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_NEWCOMER_SUIT_UP_VERT_Bell",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit nozzle UP_VERT: 8 N cold N2",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_NEWCOMER_SUIT_UP_VERT",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit thruster socket UP_VERT (+Z = exhaust)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_NEWCOMER_SUIT_US_FWD_Valve",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit nozzle US_FWD: 8 N cold N2",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_NEWCOMER_SUIT_US_FWD_Bell",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit nozzle US_FWD: 8 N cold N2",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_NEWCOMER_SUIT_US_FWD",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit thruster socket US_FWD (+Z = exhaust)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_NEWCOMER_SUIT_US_AFT_Valve",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit nozzle US_AFT: 8 N cold N2",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_NEWCOMER_SUIT_US_AFT_Bell",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit nozzle US_AFT: 8 N cold N2",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_NEWCOMER_SUIT_US_AFT",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit thruster socket US_AFT (+Z = exhaust)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_NEWCOMER_SUIT_US_OUT_Valve",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit nozzle US_OUT: 8 N cold N2",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_NEWCOMER_SUIT_US_OUT_Bell",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit nozzle US_OUT: 8 N cold N2",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_NEWCOMER_SUIT_US_OUT",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit thruster socket US_OUT (+Z = exhaust)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_NEWCOMER_SUIT_US_VERT_Valve",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit nozzle US_VERT: 8 N cold N2",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_NEWCOMER_SUIT_US_VERT_Bell",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit nozzle US_VERT: 8 N cold N2",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_NEWCOMER_SUIT_US_VERT",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit thruster socket US_VERT (+Z = exhaust)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_NEWCOMER_SUIT_LP_FWD_Valve",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit nozzle LP_FWD: 8 N cold N2",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_NEWCOMER_SUIT_LP_FWD_Bell",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit nozzle LP_FWD: 8 N cold N2",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_NEWCOMER_SUIT_LP_FWD",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit thruster socket LP_FWD (+Z = exhaust)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_NEWCOMER_SUIT_LP_AFT_Valve",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit nozzle LP_AFT: 8 N cold N2",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_NEWCOMER_SUIT_LP_AFT_Bell",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit nozzle LP_AFT: 8 N cold N2",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_NEWCOMER_SUIT_LP_AFT",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit thruster socket LP_AFT (+Z = exhaust)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_NEWCOMER_SUIT_LP_OUT_Valve",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit nozzle LP_OUT: 8 N cold N2",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_NEWCOMER_SUIT_LP_OUT_Bell",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit nozzle LP_OUT: 8 N cold N2",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_NEWCOMER_SUIT_LP_OUT",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit thruster socket LP_OUT (+Z = exhaust)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_NEWCOMER_SUIT_LP_VERT_Valve",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit nozzle LP_VERT: 8 N cold N2",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_NEWCOMER_SUIT_LP_VERT_Bell",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit nozzle LP_VERT: 8 N cold N2",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_NEWCOMER_SUIT_LP_VERT",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit thruster socket LP_VERT (+Z = exhaust)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_NEWCOMER_SUIT_LS_FWD_Valve",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit nozzle LS_FWD: 8 N cold N2",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_NEWCOMER_SUIT_LS_FWD_Bell",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit nozzle LS_FWD: 8 N cold N2",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_NEWCOMER_SUIT_LS_FWD",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit thruster socket LS_FWD (+Z = exhaust)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_NEWCOMER_SUIT_LS_AFT_Valve",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit nozzle LS_AFT: 8 N cold N2",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_NEWCOMER_SUIT_LS_AFT_Bell",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit nozzle LS_AFT: 8 N cold N2",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_NEWCOMER_SUIT_LS_AFT",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit thruster socket LS_AFT (+Z = exhaust)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_NEWCOMER_SUIT_LS_OUT_Valve",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit nozzle LS_OUT: 8 N cold N2",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_NEWCOMER_SUIT_LS_OUT_Bell",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit nozzle LS_OUT: 8 N cold N2",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_NEWCOMER_SUIT_LS_OUT",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit thruster socket LS_OUT (+Z = exhaust)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_NEWCOMER_SUIT_LS_VERT_Valve",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit nozzle LS_VERT: 8 N cold N2",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_NEWCOMER_SUIT_LS_VERT_Bell",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit nozzle LS_VERT: 8 N cold N2",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "NZ_NEWCOMER_SUIT_LS_VERT",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/SUIT_THRUSTERS",
+     "job": "suit thruster socket LS_VERT (+Z = exhaust)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "N2_NEWCOMER_Reserve_Valve_Knob",
+     "assembly": "PLSS",
+     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
+     "job": "reserve isolation valve knob (red): open in flight; closed for stowage or a leak",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "N2_NEWCOMER_Reserve_Gauge",
+     "assembly": "PLSS",
+     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
+     "job": "direct-reading reserve gauge window",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "N2_NEWCOMER_Reserve_Label",
      "assembly": "MARKINGS",
      "part_id": "WAYFARER_EVA_Y155/MARKINGS/SAFETY_MARKINGS",
-     "job": "upper-arm identification band: neutral grey visitor markings, GUIDED EVA VISITOR band, no institutional plates",
+     "job": "reserve label",
      "show": "always",
-     "bone": "upperarm_r"
+     "bone": "spine_03"
     },
     {
-     "name": "EVA_NEWCOMER_Tether_Reel_A",
+     "name": "LS_NEWCOMER_Hatch_Hinge_0",
+     "assembly": "PLSS",
+     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
+     "job": "rear-entry hatch hinge knuckle: the whole life-support module swings open to the right for donning",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "LS_NEWCOMER_Hatch_Hinge_1",
+     "assembly": "PLSS",
+     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
+     "job": "rear-entry hatch hinge knuckle: the whole life-support module swings open to the right for donning",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "LS_NEWCOMER_Hatch_Lever",
+     "assembly": "PLSS",
+     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
+     "job": "hatch closure lever (operated by the wearer from the front via a cable, as on rear-entry suits)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "TETHER_NEWCOMER_Hardpoint_P",
      "assembly": "TETHERS",
      "part_id": "WAYFARER_EVA_Y155/TETHERS/TETHERS",
-     "job": "waist tether reel A: one of two independent restraints (EVA-014, ANIM-06); length OPEN (SIM-03)",
+     "job": "rescue / tether hardpoint (folding D-ring) on the module top",
      "show": "always",
-     "bone": "pelvis"
+     "bone": "spine_03"
     },
     {
-     "name": "EVA_NEWCOMER_Tether_Hook_A",
+     "name": "TETHER_NEWCOMER_Hardpoint_S",
      "assembly": "TETHERS",
      "part_id": "WAYFARER_EVA_Y155/TETHERS/TETHERS",
-     "job": "tether A hook, captive gate",
+     "job": "rescue / tether hardpoint (folding D-ring) on the module top",
      "show": "always",
-     "bone": "pelvis"
+     "bone": "spine_03"
     },
     {
-     "name": "SOCKET_TETHER_A",
-     "assembly": "RIG",
-     "part_id": "WAYFARER_EVA_Y155/RIG/SOCKETS",
-     "job": "tether A hook socket (RIG-04): runtime line start",
+     "name": "SENS_NEWCOMER_Suit_Antenna",
+     "assembly": "PLSS",
+     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
+     "job": "conformal S-band / UWB antenna window on the module top",
      "show": "always",
-     "bone": "pelvis"
+     "bone": "spine_03"
     },
     {
-     "name": "EVA_NEWCOMER_Tether_Reel_B",
+     "name": "LS_NEWCOMER_Label",
+     "assembly": "MARKINGS",
+     "part_id": "WAYFARER_EVA_Y155/MARKINGS/SAFETY_MARKINGS",
+     "job": "service label",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "LS_NEWCOMER_INT_O2_Primary_1",
+     "assembly": "PLSS",
+     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
+     "job": "internal: o2 primary 1 (packaging layout, cutaway)",
+     "show": "cutaway",
+     "bone": "spine_03"
+    },
+    {
+     "name": "LS_NEWCOMER_INT_O2_Primary_2",
+     "assembly": "PLSS",
+     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
+     "job": "internal: o2 primary 2 (packaging layout, cutaway)",
+     "show": "cutaway",
+     "bone": "spine_03"
+    },
+    {
+     "name": "LS_NEWCOMER_INT_O2_Secondary",
+     "assembly": "PLSS",
+     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
+     "job": "internal: o2 secondary (packaging layout, cutaway)",
+     "show": "cutaway",
+     "bone": "spine_03"
+    },
+    {
+     "name": "LS_NEWCOMER_INT_CO2_Swing_Bed",
+     "assembly": "PLSS",
+     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
+     "job": "internal: co2 swing bed (packaging layout, cutaway)",
+     "show": "cutaway",
+     "bone": "spine_03"
+    },
+    {
+     "name": "LS_NEWCOMER_INT_Membrane_Evaporator",
+     "assembly": "PLSS",
+     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
+     "job": "internal: membrane evaporator (packaging layout, cutaway)",
+     "show": "cutaway",
+     "bone": "spine_03"
+    },
+    {
+     "name": "LS_NEWCOMER_INT_Fan_Pump_Separator",
+     "assembly": "PLSS",
+     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
+     "job": "internal: fan pump separator (packaging layout, cutaway)",
+     "show": "cutaway",
+     "bone": "spine_03"
+    },
+    {
+     "name": "LS_NEWCOMER_INT_Battery_1kWh",
+     "assembly": "PLSS",
+     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
+     "job": "internal: battery 1kwh (packaging layout, cutaway)",
+     "show": "cutaway",
+     "bone": "spine_03"
+    },
+    {
+     "name": "LS_NEWCOMER_INT_Avionics_Radio",
+     "assembly": "PLSS",
+     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
+     "job": "internal: avionics radio (packaging layout, cutaway)",
+     "show": "cutaway",
+     "bone": "spine_03"
+    },
+    {
+     "name": "N2_NEWCOMER_INT_Reserve_COPV",
+     "assembly": "PLSS",
+     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
+     "job": "suit N2 reserve COPV 2.22 L at 30 MPa (about 2.67 m/s alone)",
+     "show": "cutaway",
+     "bone": "spine_03"
+    },
+    {
+     "name": "N2_NEWCOMER_INT_Suit_Manifold",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/N2_RESERVE",
+     "job": "suit N2 manifold: drone feed (1.4 MPa) or reserve (1.2 MPa) through two check valves",
+     "show": "cutaway",
+     "bone": "spine_03"
+    },
+    {
+     "name": "N2_NEWCOMER_INT_Line_UP",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/N2_RESERVE",
+     "job": "manifold to cluster UP",
+     "show": "cutaway",
+     "bone": "spine_03"
+    },
+    {
+     "name": "N2_NEWCOMER_INT_Line_US",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/N2_RESERVE",
+     "job": "manifold to cluster US",
+     "show": "cutaway",
+     "bone": "spine_03"
+    },
+    {
+     "name": "N2_NEWCOMER_INT_Line_LP",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/N2_RESERVE",
+     "job": "manifold to cluster LP",
+     "show": "cutaway",
+     "bone": "spine_03"
+    },
+    {
+     "name": "N2_NEWCOMER_INT_Line_LS",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/N2_RESERVE",
+     "job": "manifold to cluster LS",
+     "show": "cutaway",
+     "bone": "spine_03"
+    },
+    {
+     "name": "N2_NEWCOMER_INT_Receptacle_Line",
+     "assembly": "PROPULSION",
+     "part_id": "WAYFARER_EVA_Y155/PROPULSION/N2_RESERVE",
+     "job": "dock receptacle to manifold",
+     "show": "cutaway",
+     "bone": "spine_03"
+    },
+    {
+     "name": "CTRL_NEWCOMER_Chest_Display",
+     "assembly": "PLSS",
+     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
+     "job": "chest display: suit and drone status, flush in the torso shell (read in the helmet mirror or by the buddy)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "CTRL_NEWCOMER_Chest_Bezel",
+     "assembly": "PROTECTION",
+     "part_id": "WAYFARER_EVA_Y155/PROTECTION/MMOD_OUTER_SHELL",
+     "job": "display bezel",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "MARK_NEWCOMER_Suit_GUC",
+     "assembly": "MARKINGS",
+     "part_id": "WAYFARER_EVA_Y155/MARKINGS/SAFETY_MARKINGS",
+     "job": "official marking (small, functional lettering)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "MARK_NEWCOMER_Suit_ID_Plate",
+     "assembly": "MARKINGS",
+     "part_id": "WAYFARER_EVA_Y155/MARKINGS/SAFETY_MARKINGS",
+     "job": "identification plate (role colour)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "EVA_NEWCOMER_Forearm_Drone_Control",
+     "assembly": "PLSS",
+     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
+     "job": "forearm drone control: mode, gas status (drone and reserve), guarded DRONE RELEASE",
+     "show": "always",
+     "bone": "lowerarm_r"
+    },
+    {
+     "name": "CTRL_NEWCOMER_Forearm_Display",
+     "assembly": "PLSS",
+     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
+     "job": "forearm display",
+     "show": "always",
+     "bone": "lowerarm_r"
+    },
+    {
+     "name": "CTRL_NEWCOMER_Forearm_Release_Guard",
+     "assembly": "DOCK",
+     "part_id": "WAYFARER_EVA_Y155/DOCK/DRONE_DOCK",
+     "job": "guarded release switch (lift the guard, hold 1 s)",
+     "show": "always",
+     "bone": "lowerarm_r"
+    },
+    {
+     "name": "CTRL_NEWCOMER_Forearm_Drone_Key_0",
+     "assembly": "PLSS",
+     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
+     "job": "drone command key (raised bar, operable in EVA gloves): mode / arms / return-and-dock",
+     "show": "always",
+     "bone": "lowerarm_r"
+    },
+    {
+     "name": "CTRL_NEWCOMER_Forearm_Drone_Key_1",
+     "assembly": "PLSS",
+     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
+     "job": "drone command key (raised bar, operable in EVA gloves): mode / arms / return-and-dock",
+     "show": "always",
+     "bone": "lowerarm_r"
+    },
+    {
+     "name": "CTRL_NEWCOMER_Forearm_Drone_Key_2",
+     "assembly": "PLSS",
+     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
+     "job": "drone command key (raised bar, operable in EVA gloves): mode / arms / return-and-dock",
+     "show": "always",
+     "bone": "lowerarm_r"
+    },
+    {
+     "name": "EVA_NEWCOMER_Forearm_Suit_Status",
+     "assembly": "PLSS",
+     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
+     "job": "forearm suit status: pressure, O2, CO2, reserve N2, tether state",
+     "show": "always",
+     "bone": "lowerarm_l"
+    },
+    {
+     "name": "CTRL_NEWCOMER_Forearm_Status_Display",
+     "assembly": "PLSS",
+     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
+     "job": "suit status display",
+     "show": "always",
+     "bone": "lowerarm_l"
+    },
+    {
+     "name": "CTRL_NEWCOMER_Forearm_Emergency_Guard",
+     "assembly": "PLSS",
+     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
+     "job": "guarded emergency switch: suit reserve open, beacon, comms override (works without the drone)",
+     "show": "always",
+     "bone": "lowerarm_l"
+    },
+    {
+     "name": "CTRL_NEWCOMER_Forearm_Tether_Key",
      "assembly": "TETHERS",
      "part_id": "WAYFARER_EVA_Y155/TETHERS/TETHERS",
-     "job": "waist tether reel B: one of two independent restraints (EVA-014, ANIM-06); length OPEN (SIM-03)",
+     "job": "tether reel brake / retract key",
      "show": "always",
-     "bone": "pelvis"
+     "bone": "lowerarm_l"
     },
     {
-     "name": "EVA_NEWCOMER_Tether_Hook_B",
+     "name": "TETHER_NEWCOMER_Reel_A",
      "assembly": "TETHERS",
      "part_id": "WAYFARER_EVA_Y155/TETHERS/TETHERS",
-     "job": "tether B hook, captive gate",
+     "job": "waist tether reel A (one of two independent restraints)",
      "show": "always",
      "bone": "pelvis"
     },
     {
-     "name": "SOCKET_TETHER_B",
-     "assembly": "RIG",
-     "part_id": "WAYFARER_EVA_Y155/RIG/SOCKETS",
-     "job": "tether B hook socket (RIG-04): runtime line start",
+     "name": "TETHER_NEWCOMER_Reel_A_Mark",
+     "assembly": "TETHERS",
+     "part_id": "WAYFARER_EVA_Y155/TETHERS/TETHERS",
+     "job": "tether reel safety mark",
      "show": "always",
      "bone": "pelvis"
+    },
+    {
+     "name": "TETHER_NEWCOMER_Hook_A",
+     "assembly": "TETHERS",
+     "part_id": "WAYFARER_EVA_Y155/TETHERS/TETHERS",
+     "job": "tether A hook (captive gate, stowed)",
+     "show": "always",
+     "bone": "pelvis"
+    },
+    {
+     "name": "TETHER_NEWCOMER_Reel_B",
+     "assembly": "TETHERS",
+     "part_id": "WAYFARER_EVA_Y155/TETHERS/TETHERS",
+     "job": "waist tether reel B (one of two independent restraints)",
+     "show": "always",
+     "bone": "pelvis"
+    },
+    {
+     "name": "TETHER_NEWCOMER_Reel_B_Mark",
+     "assembly": "TETHERS",
+     "part_id": "WAYFARER_EVA_Y155/TETHERS/TETHERS",
+     "job": "tether reel safety mark",
+     "show": "always",
+     "bone": "pelvis"
+    },
+    {
+     "name": "TETHER_NEWCOMER_Hook_B",
+     "assembly": "TETHERS",
+     "part_id": "WAYFARER_EVA_Y155/TETHERS/TETHERS",
+     "job": "tether B hook (captive gate, stowed)",
+     "show": "always",
+     "bone": "pelvis"
+    },
+    {
+     "name": "MARK_NEWCOMER_Role",
+     "assembly": "MARKINGS",
+     "part_id": "WAYFARER_EVA_Y155/MARKINGS/SAFETY_MARKINGS",
+     "job": "role designation (ASSET-15 \"GUIDED EVA designation\"): neutral grey visitor markings, GUIDED EVA VISITOR band, no institutional plates",
+     "show": "always",
+     "bone": "spine_03"
     },
     {
      "name": "EVA_NEWCOMER_Tool_Scanner",
@@ -2352,10 +5121,34 @@
      "bone": "spine_03"
     },
     {
+     "name": "EVA_NEWCOMER_Tool_Scanner_Lens",
+     "assembly": "TOOLS",
+     "part_id": "WAYFARER_EVA_Y155/TOOLS/TOOLS",
+     "job": "scanner window",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
      "name": "EVA_NEWCOMER_Tool_Lanyard_Ring",
      "assembly": "TOOLS",
      "part_id": "WAYFARER_EVA_Y155/TOOLS/TOOLS",
      "job": "tool retention lanyard ring (EVA-020)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "EVA_NEWCOMER_PLSS_SCU_Port",
+     "assembly": "PLSS",
+     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
+     "job": "umbilical port: O2, power and data from certified ship supplies (53!6)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "EVA_NEWCOMER_PLSS_Cooling_Port",
+     "assembly": "PLSS",
+     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
+     "job": "cooling-loop quick disconnect (53!8)",
      "show": "always",
      "bone": "spine_03"
     },
@@ -2432,6 +5225,30 @@
      "bone": "spine_03"
     },
     {
+     "name": "SOCKET_TETHER_A",
+     "assembly": "RIG",
+     "part_id": "WAYFARER_EVA_Y155/RIG/SOCKETS",
+     "job": "tether A hook socket (RIG-04): runtime line start",
+     "show": "always",
+     "bone": "pelvis"
+    },
+    {
+     "name": "SOCKET_TETHER_B",
+     "assembly": "RIG",
+     "part_id": "WAYFARER_EVA_Y155/RIG/SOCKETS",
+     "job": "tether B hook socket (RIG-04): runtime line start",
+     "show": "always",
+     "bone": "pelvis"
+    },
+    {
+     "name": "SOCKET_DRONE_DOCK",
+     "assembly": "RIG",
+     "part_id": "WAYFARER_EVA_Y155/RIG/SOCKETS",
+     "job": "companion drone docked frame: the drone rig copies this transform while \"docked\" = 1 (build/eva_drone.py)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
      "name": "CHAR_NEWCOMER",
      "assembly": "RIG",
      "part_id": "WAYFARER_EVA_Y155/RIG/SOCKETS",
@@ -2478,80 +5295,246 @@
      "job": "wearer head visible inside the helmet (the covered body is not exported)",
      "show": "always",
      "bone": ""
+    },
+    {
+     "name": "CTRL_NEWCOMER_HCM_Pivot",
+     "assembly": "PLSS",
+     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
+     "job": "hand-controller hinge frame (X: stowed direction, Z: hinge axis; the links swing about it)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "CTRL_NEWCOMER_HCM_Hinge_Housing",
+     "assembly": "PLSS",
+     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
+     "job": "hinge housing on the module corner: detented hinge, hard stops at stowed and deployed",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "CTRL_NEWCOMER_HCM_Link_1",
+     "assembly": "PLSS",
+     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
+     "job": "controller arm, outer tube: swings on the hinge (stops at 0 and the deployed angle)",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "CTRL_NEWCOMER_HCM_Link_2",
+     "assembly": "PLSS",
+     "part_id": "WAYFARER_EVA_Y155/PLSS/PLSS_PRIMARY",
+     "job": "telescoping inner tube with the vertical grip: translation (squeeze / push) and rotation (twist / tilt) controller, thumb puck on top",
+     "show": "always",
+     "bone": "spine_03"
+    },
+    {
+     "name": "CTRL_NEWCOMER_Manual_Release",
+     "assembly": "DOCK",
+     "part_id": "WAYFARER_EVA_Y155/DOCK/DRONE_DOCK",
+     "job": "mechanical release T-handle below the controller hinge: Bowden cable to the drone keel bolts (works unpowered)",
+     "show": "always",
+     "bone": "spine_03"
     }
    ],
    "stature_m": 1.6999,
-   "objects": 81,
+   "objects": 225,
    "vertices": {
-    "EVA_NEWCOMER_SUIT_PRESSURE_BLADDER": 9278,
-    "EVA_NEWCOMER_HUT": 800,
-    "EVA_NEWCOMER_Waist_Ring": 400,
-    "EVA_NEWCOMER_Neck_Ring": 400,
-    "EVA_NEWCOMER_MMOD_OUTER_SHELL": 9278,
-    "EVA_NEWCOMER_Scye_Bearing_l": 400,
-    "EVA_NEWCOMER_Upperarm_Bearing_l": 400,
-    "EVA_NEWCOMER_Elbow_Convolute_l_dn": 400,
-    "EVA_NEWCOMER_Elbow_Convolute_l_up": 400,
-    "EVA_NEWCOMER_Wrist_Bearing_l": 400,
-    "EVA_NEWCOMER_Hip_Bearing_l": 400,
-    "EVA_NEWCOMER_Thigh_Bearing_l": 400,
-    "EVA_NEWCOMER_Knee_Convolute_l_dn": 400,
-    "EVA_NEWCOMER_Knee_Convolute_l_up": 400,
-    "EVA_NEWCOMER_Ankle_Bearing_l": 400,
+    "EVA_NEWCOMER_PRESSURE_BLADDER": 9278,
+    "EVA_NEWCOMER_Torso_Shell": 2072,
+    "EVA_NEWCOMER_Neck_Ring": 730,
+    "EVA_NEWCOMER_Neck_Ring_Collar": 730,
+    "EVA_NEWCOMER_Cuirass_Edge_0": 568,
+    "EVA_NEWCOMER_Scye_Sleeve_l": 624,
+    "EVA_NEWCOMER_Scye_Sleeve_r": 624,
+    "EVA_NEWCOMER_Cuirass_Seal": 88,
+    "EVA_NEWCOMER_Scye_Housing_l": 384,
+    "EVA_NEWCOMER_Scye_Housing_r": 384,
+    "EVA_NEWCOMER_OUTER_LAYER": 7821,
+    "EVA_NEWCOMER_Restraint_Line_upperarm_l_0": 54,
+    "EVA_NEWCOMER_Restraint_Line_upperarm_l_1": 48,
+    "EVA_NEWCOMER_Restraint_Line_lowerarm_l_0": 108,
+    "EVA_NEWCOMER_Restraint_Line_lowerarm_l_1": 108,
+    "EVA_NEWCOMER_Restraint_Line_thigh_l_0": 96,
+    "EVA_NEWCOMER_Restraint_Line_thigh_l_1": 108,
+    "EVA_NEWCOMER_Restraint_Line_calf_l_0": 108,
+    "EVA_NEWCOMER_Restraint_Line_calf_l_1": 108,
+    "EVA_NEWCOMER_Restraint_Line_upperarm_r_0": 48,
+    "EVA_NEWCOMER_Restraint_Line_upperarm_r_1": 54,
+    "EVA_NEWCOMER_Restraint_Line_lowerarm_r_0": 108,
+    "EVA_NEWCOMER_Restraint_Line_lowerarm_r_1": 108,
+    "EVA_NEWCOMER_Restraint_Line_thigh_r_0": 108,
+    "EVA_NEWCOMER_Restraint_Line_thigh_r_1": 102,
+    "EVA_NEWCOMER_Restraint_Line_calf_r_0": 108,
+    "EVA_NEWCOMER_Restraint_Line_calf_r_1": 108,
+    "EVA_NEWCOMER_Knee_Cap_l": 266,
+    "EVA_NEWCOMER_Shin_Guard_l": 266,
+    "EVA_NEWCOMER_Elbow_Cap_l": 266,
+    "EVA_NEWCOMER_Knee_Cap_r": 266,
+    "EVA_NEWCOMER_Shin_Guard_r": 266,
+    "EVA_NEWCOMER_Elbow_Cap_r": 266,
+    "CTRL_NEWCOMER_Chest_Bezel": 8,
+    "EVA_NEWCOMER_Scye_Bearing_l": 480,
+    "EVA_NEWCOMER_Upperarm_Bearing_l": 480,
+    "EVA_NEWCOMER_Upperarm_Bearing_l_Sleeve": 64,
+    "EVA_NEWCOMER_Wrist_Disconnect_l": 480,
+    "EVA_NEWCOMER_Wrist_Disconnect_l_Sleeve": 64,
     "EVA_NEWCOMER_Gauntlet_l": 48,
-    "EVA_NEWCOMER_Sole_l": 96,
-    "EVA_NEWCOMER_Toe_Sole_l": 96,
-    "EVA_NEWCOMER_Toe_Hook_l": 8,
-    "EVA_NEWCOMER_Scye_Bearing_r": 400,
-    "EVA_NEWCOMER_Upperarm_Bearing_r": 400,
-    "EVA_NEWCOMER_Elbow_Convolute_r_dn": 400,
-    "EVA_NEWCOMER_Elbow_Convolute_r_up": 400,
-    "EVA_NEWCOMER_Wrist_Bearing_r": 400,
-    "EVA_NEWCOMER_Hip_Bearing_r": 400,
-    "EVA_NEWCOMER_Thigh_Bearing_r": 400,
-    "EVA_NEWCOMER_Knee_Convolute_r_dn": 400,
-    "EVA_NEWCOMER_Knee_Convolute_r_up": 400,
-    "EVA_NEWCOMER_Ankle_Bearing_r": 400,
+    "EVA_NEWCOMER_Ankle_Bearing_l": 480,
+    "EVA_NEWCOMER_Ankle_Bearing_l_Sleeve": 64,
+    "EVA_NEWCOMER_Boot_Shell_l": 120,
+    "EVA_NEWCOMER_Boot_Toe_l": 140,
+    "EVA_NEWCOMER_Toe_Hook_l": 24,
+    "EVA_NEWCOMER_Heel_Fitting_l": 8,
+    "EVA_NEWCOMER_Scye_Bearing_r": 480,
+    "EVA_NEWCOMER_Upperarm_Bearing_r": 480,
+    "EVA_NEWCOMER_Upperarm_Bearing_r_Sleeve": 64,
+    "EVA_NEWCOMER_Wrist_Disconnect_r": 480,
+    "EVA_NEWCOMER_Wrist_Disconnect_r_Sleeve": 64,
     "EVA_NEWCOMER_Gauntlet_r": 48,
-    "EVA_NEWCOMER_Sole_r": 96,
-    "EVA_NEWCOMER_Toe_Sole_r": 96,
-    "EVA_NEWCOMER_Toe_Hook_r": 8,
-    "EVA_NEWCOMER_Helmet_Shell": 2400,
-    "EVA_NEWCOMER_Pressure_Visor": 1200,
-    "EVA_NEWCOMER_Glare_Visor": 1200,
-    "EVA_NEWCOMER_PLSS": 96,
-    "EVA_NEWCOMER_PLSS_Cover_Upper": 8,
-    "EVA_NEWCOMER_PLSS_Cover_Lower": 8,
-    "EVA_NEWCOMER_PLSS_O2_Primary_1": 48,
-    "EVA_NEWCOMER_PLSS_O2_Primary_2": 48,
-    "EVA_NEWCOMER_PLSS_O2_Emergency_Reserve": 48,
-    "EVA_NEWCOMER_PLSS_O2_Regulator": 8,
-    "EVA_NEWCOMER_PLSS_CO2_Cartridge": 8,
-    "EVA_NEWCOMER_PLSS_Fan_Pump_Separator": 48,
-    "EVA_NEWCOMER_PLSS_Heat_Exchanger": 8,
-    "EVA_NEWCOMER_PLSS_Battery": 8,
-    "EVA_NEWCOMER_PLSS_Radio_Telemetry": 8,
-    "EVA_NEWCOMER_PLSS_SCU_Port": 48,
-    "EVA_NEWCOMER_PLSS_Cooling_Port": 48,
-    "EVA_NEWCOMER_DCM": 96,
-    "EVA_NEWCOMER_DCM_Display": 8,
-    "EVA_NEWCOMER_Wrist_Display": 8,
+    "EVA_NEWCOMER_Ankle_Bearing_r": 480,
+    "EVA_NEWCOMER_Ankle_Bearing_r_Sleeve": 64,
+    "EVA_NEWCOMER_Boot_Shell_r": 120,
+    "EVA_NEWCOMER_Boot_Toe_r": 140,
+    "EVA_NEWCOMER_Toe_Hook_r": 24,
+    "EVA_NEWCOMER_Heel_Fitting_r": 8,
+    "EVA_NEWCOMER_Helmet_Shell": 969,
+    "EVA_NEWCOMER_Visor": 376,
+    "EVA_NEWCOMER_Helmet_Brow": 38,
+    "EVA_NEWCOMER_Visor_Frame": 990,
+    "SENS_Helmet_Light_P": 48,
+    "SENS_Helmet_Cam_P": 40,
+    "SENS_Helmet_Status_P": 8,
+    "SENS_Helmet_Light_S": 48,
+    "SENS_Helmet_Cam_S": 40,
+    "SENS_Helmet_Status_S": 8,
+    "EVA_NEWCOMER_Helmet_Crest": 340,
+    "SENS_Helmet_Crest_Cam": 40,
+    "SENS_Helmet_Comms_Patch": 8,
+    "EVA_NEWCOMER_Sunshade_Retracted": 38,
+    "LS_NEWCOMER_Module": 1573,
+    "DOCK_NEWCOMER_Suit_Power_Receptacle": 8,
+    "N2_NEWCOMER_Reserve_Valve_Knob": 40,
+    "N2_NEWCOMER_Reserve_Gauge": 40,
+    "LS_NEWCOMER_Hatch_Hinge_0": 32,
+    "LS_NEWCOMER_Hatch_Hinge_1": 32,
+    "LS_NEWCOMER_Hatch_Lever": 8,
+    "SENS_NEWCOMER_Suit_Antenna": 8,
+    "LS_NEWCOMER_INT_O2_Primary_1": 280,
+    "LS_NEWCOMER_INT_O2_Primary_2": 280,
+    "LS_NEWCOMER_INT_O2_Secondary": 280,
+    "LS_NEWCOMER_INT_CO2_Swing_Bed": 8,
+    "LS_NEWCOMER_INT_Membrane_Evaporator": 8,
+    "LS_NEWCOMER_INT_Fan_Pump_Separator": 8,
+    "LS_NEWCOMER_INT_Battery_1kWh": 8,
+    "LS_NEWCOMER_INT_Avionics_Radio": 8,
+    "N2_NEWCOMER_INT_Reserve_COPV": 336,
+    "CTRL_NEWCOMER_Chest_Display": 8,
+    "EVA_NEWCOMER_Forearm_Drone_Control": 266,
+    "CTRL_NEWCOMER_Forearm_Display": 8,
+    "CTRL_NEWCOMER_Forearm_Drone_Key_0": 8,
+    "CTRL_NEWCOMER_Forearm_Drone_Key_1": 8,
+    "CTRL_NEWCOMER_Forearm_Drone_Key_2": 8,
+    "EVA_NEWCOMER_Forearm_Suit_Status": 266,
+    "CTRL_NEWCOMER_Forearm_Status_Display": 8,
+    "CTRL_NEWCOMER_Forearm_Emergency_Guard": 8,
+    "EVA_NEWCOMER_PLSS_SCU_Port": 40,
+    "EVA_NEWCOMER_PLSS_Cooling_Port": 40,
+    "CTRL_NEWCOMER_HCM_Hinge_Housing": 48,
+    "CTRL_NEWCOMER_HCM_Link_1": 80,
+    "CTRL_NEWCOMER_HCM_Link_2": 220,
     "EVA_NEWCOMER_LCVG_INNER": 9278,
-    "EVA_NEWCOMER_Tether_Reel_A": 48,
-    "EVA_NEWCOMER_Tether_Hook_A": 120,
-    "EVA_NEWCOMER_Tether_Reel_B": 48,
-    "EVA_NEWCOMER_Tether_Hook_B": 120,
-    "EVA_NEWCOMER_Tool_Scanner": 96,
+    "TETHER_NEWCOMER_Hardpoint_P": 120,
+    "TETHER_NEWCOMER_Hardpoint_S": 120,
+    "CTRL_NEWCOMER_Forearm_Tether_Key": 8,
+    "TETHER_NEWCOMER_Reel_A": 48,
+    "TETHER_NEWCOMER_Reel_A_Mark": 144,
+    "TETHER_NEWCOMER_Hook_A": 120,
+    "TETHER_NEWCOMER_Reel_B": 48,
+    "TETHER_NEWCOMER_Reel_B_Mark": 144,
+    "TETHER_NEWCOMER_Hook_B": 120,
+    "EVA_NEWCOMER_Tool_Scanner": 8,
+    "EVA_NEWCOMER_Tool_Scanner_Lens": 32,
     "EVA_NEWCOMER_Tool_Lanyard_Ring": 96,
-    "EVA_NEWCOMER_Helmet_Band": 288,
-    "EVA_NEWCOMER_PLSS_Purge_Valve": 48,
     "EVA_NEWCOMER_Arm_Band_l": 240,
     "EVA_NEWCOMER_Arm_Band_r": 240,
+    "N2_NEWCOMER_Reserve_Label": 1308,
+    "LS_NEWCOMER_Label": 4044,
+    "MARK_NEWCOMER_Suit_GUC": 3488,
+    "MARK_NEWCOMER_Suit_ID_Plate": 8,
+    "MARK_NEWCOMER_Role": 2868,
     "CHAR_NEWCOMER_Eyebrow001": 124,
     "CHAR_NEWCOMER_Eyelashes01": 250,
     "CHAR_NEWCOMER_High_Poly": 1064,
     "CHAR_NEWCOMER_Body": 13380,
-    "CHAR_NEWCOMER_Head": 4102
+    "CHAR_NEWCOMER_Head": 4102,
+    "DOCK_NEWCOMER_Suit_N2_Mark": 144,
+    "THR_NEWCOMER_Suit_Cluster_UP": 280,
+    "THR_NEWCOMER_Suit_Cluster_UP_ID": 144,
+    "THR_NEWCOMER_Suit_Cluster_US": 280,
+    "THR_NEWCOMER_Suit_Cluster_US_ID": 144,
+    "THR_NEWCOMER_Suit_Cluster_LP": 280,
+    "THR_NEWCOMER_Suit_Cluster_LP_ID": 144,
+    "THR_NEWCOMER_Suit_Cluster_LS": 280,
+    "THR_NEWCOMER_Suit_Cluster_LS_ID": 144,
+    "NZ_NEWCOMER_SUIT_UP_FWD_Valve": 48,
+    "NZ_NEWCOMER_SUIT_UP_FWD_Bell": 80,
+    "NZ_NEWCOMER_SUIT_UP_AFT_Valve": 48,
+    "NZ_NEWCOMER_SUIT_UP_AFT_Bell": 80,
+    "NZ_NEWCOMER_SUIT_UP_OUT_Valve": 48,
+    "NZ_NEWCOMER_SUIT_UP_OUT_Bell": 80,
+    "NZ_NEWCOMER_SUIT_UP_VERT_Valve": 48,
+    "NZ_NEWCOMER_SUIT_UP_VERT_Bell": 80,
+    "NZ_NEWCOMER_SUIT_US_FWD_Valve": 48,
+    "NZ_NEWCOMER_SUIT_US_FWD_Bell": 80,
+    "NZ_NEWCOMER_SUIT_US_AFT_Valve": 48,
+    "NZ_NEWCOMER_SUIT_US_AFT_Bell": 80,
+    "NZ_NEWCOMER_SUIT_US_OUT_Valve": 48,
+    "NZ_NEWCOMER_SUIT_US_OUT_Bell": 80,
+    "NZ_NEWCOMER_SUIT_US_VERT_Valve": 48,
+    "NZ_NEWCOMER_SUIT_US_VERT_Bell": 80,
+    "NZ_NEWCOMER_SUIT_LP_FWD_Valve": 48,
+    "NZ_NEWCOMER_SUIT_LP_FWD_Bell": 80,
+    "NZ_NEWCOMER_SUIT_LP_AFT_Valve": 48,
+    "NZ_NEWCOMER_SUIT_LP_AFT_Bell": 80,
+    "NZ_NEWCOMER_SUIT_LP_OUT_Valve": 48,
+    "NZ_NEWCOMER_SUIT_LP_OUT_Bell": 80,
+    "NZ_NEWCOMER_SUIT_LP_VERT_Valve": 48,
+    "NZ_NEWCOMER_SUIT_LP_VERT_Bell": 80,
+    "NZ_NEWCOMER_SUIT_LS_FWD_Valve": 48,
+    "NZ_NEWCOMER_SUIT_LS_FWD_Bell": 80,
+    "NZ_NEWCOMER_SUIT_LS_AFT_Valve": 48,
+    "NZ_NEWCOMER_SUIT_LS_AFT_Bell": 80,
+    "NZ_NEWCOMER_SUIT_LS_OUT_Valve": 48,
+    "NZ_NEWCOMER_SUIT_LS_OUT_Bell": 80,
+    "NZ_NEWCOMER_SUIT_LS_VERT_Valve": 48,
+    "NZ_NEWCOMER_SUIT_LS_VERT_Bell": 80,
+    "N2_NEWCOMER_INT_Suit_Manifold": 8,
+    "N2_NEWCOMER_INT_Line_UP": 40,
+    "N2_NEWCOMER_INT_Line_US": 40,
+    "N2_NEWCOMER_INT_Line_LP": 40,
+    "N2_NEWCOMER_INT_Line_LS": 40,
+    "N2_NEWCOMER_INT_Receptacle_Line": 30,
+    "DOCK_NEWCOMER_Suit_Channel": 24,
+    "DOCK_NEWCOMER_Suit_Bolt_Socket_PU": 8,
+    "DOCK_NEWCOMER_Suit_Bolt_Socket_SU": 8,
+    "DOCK_NEWCOMER_Suit_Bolt_Socket_PL": 8,
+    "DOCK_NEWCOMER_Suit_Bolt_Socket_SL": 8,
+    "DOCK_NEWCOMER_Suit_N2_Receptacle": 120,
+    "DOCK_NEWCOMER_Suit_N2_Poppet": 40,
+    "DOCK_NEWCOMER_Suit_Mouth_Mark_942": 8,
+    "DOCK_NEWCOMER_Suit_Mouth_Mark_1358": 8,
+    "DOCK_NEWCOMER_Suit_Capture_Tongue": 8,
+    "DOCK_NEWCOMER_Suit_Load_Pad_P": 48,
+    "DOCK_NEWCOMER_Suit_Load_Pad_S": 48,
+    "DOCK_NEWCOMER_Suit_Retro_Target_0": 40,
+    "DOCK_NEWCOMER_Suit_Retro_Ring_0": 120,
+    "DOCK_NEWCOMER_Suit_Retro_Target_1": 40,
+    "DOCK_NEWCOMER_Suit_Retro_Ring_1": 120,
+    "DOCK_NEWCOMER_Suit_Retro_Target_2": 40,
+    "DOCK_NEWCOMER_Suit_Retro_Ring_2": 120,
+    "CTRL_NEWCOMER_Forearm_Release_Guard": 8,
+    "CTRL_NEWCOMER_Manual_Release": 8
    }
   }
  }

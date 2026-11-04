@@ -1,6 +1,7 @@
-"""`python3 tools/workflow.py eva`: the EVA suit loop (docs/EVA.md, TODO EVA-001).
+"""`python3 tools/workflow.py eva`: the EVA system loop (docs/WAYFARER_EVA_SYSTEM.md, TODO EVA-001).
 
-build (build/eva_suit.py on the saved induction characters) -> checks (validation/eva_fit.py: pressure continuity in every action,
+build (build/eva_suit.py on the saved induction characters) -> drone (build/eva_drone.py) -> system (build/eva_scene.py: suit + drone,
+dock, states, sequences, packed review file) -> system_checks (validation/eva_system.py -> references/p1_eva_system.json) -> checks (validation/eva_fit.py: pressure continuity in every action,
 envelope against the route bottlenecks, SP-11 pair fit, the access-pose hulls, suited bodies at the training route's holds in the vehicle,
 under the write lock because it reads the vehicle asset) -> EVA-002 access study (eva_access.py: envelope classes, SP-11 door and chamber
 candidates, SP-12/13 rooms) -> its check in the vehicle (validation/eva_airlock_study.py, with section renders unless --no-renders) ->
@@ -16,6 +17,7 @@ rerun stage changed their inputs are reported as STALE afterwards.
 from datetime import datetime, timezone
 import json
 from pathlib import Path
+import os
 import subprocess
 import time
 
@@ -23,11 +25,13 @@ import checks
 import pipeline
 
 ROOT = Path(__file__).resolve().parents[1]
-SCRIPTS = {'build': ['src/wayfarer/build/eva_suit.py'], 'fit': ['src/wayfarer/validation/eva_fit.py'], 'access': ['src/wayfarer/eva_access.py'],
+SCRIPTS = {'build': ['src/wayfarer/build/eva_suit.py'], 'drone': ['src/wayfarer/build/eva_drone.py'], 'system': ['src/wayfarer/build/eva_scene.py'],
+           'system_checks': ['src/wayfarer/validation/eva_system.py'], 'fit': ['src/wayfarer/validation/eva_fit.py'], 'access': ['src/wayfarer/eva_access.py'],
            'airlock': ['src/wayfarer/validation/eva_airlock_study.py'], 'sp11': ['src/wayfarer/eva_sp11.py'],
            'sp11_vehicle': ['src/wayfarer/validation/eva_sp11_study.py'], 'renders': ['src/wayfarer/presentation/eva_preview.py'],
-           'export': ['src/wayfarer/export/eva_gltf.py'], 'route': ['src/wayfarer/eva_route.py']}
+           'export': ['src/wayfarer/export/eva_gltf.py'], 'godot': ['godot/scripts/check_eva.gd'], 'route': ['src/wayfarer/eva_route.py']}
 STAGES = list(SCRIPTS)
+SLOW = {'fit': 4}                    # coverage samples every frame and every body vertex of both suits: about an hour on 4 cores
 
 
 def run(root, renders=True, route=True, only=None):
@@ -39,6 +43,8 @@ def run(root, renders=True, route=True, only=None):
     stamp = datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ'); rd = root/'runs'/f'{stamp}-eva'; (rd/'glb').mkdir(parents=True)
     from workflow import write_lock
     steps = [('build', pipeline.blender(root/'src/wayfarer/build/eva_suit.py', '--report', root/'references/p1_eva_suit.json')),
+             ('drone', pipeline.blender(root/'src/wayfarer/build/eva_drone.py')), ('system', pipeline.blender(root/'src/wayfarer/build/eva_scene.py')),
+             ('system_checks', pipeline.blender(root/'src/wayfarer/validation/eva_system.py')),
              ('fit', pipeline.blender(root/'src/wayfarer/validation/eva_fit.py', *([] if route else ['--no-route']))),
              ('access', ['python3', str(root/'src/wayfarer/eva_access.py')]),
              ('airlock', pipeline.blender(root/'src/wayfarer/validation/eva_airlock_study.py', '--out', rd, *([] if renders else ['--no-renders']))),
@@ -46,6 +52,8 @@ def run(root, renders=True, route=True, only=None):
              ('sp11_vehicle', pipeline.blender(root/'src/wayfarer/validation/eva_sp11_study.py', '--out', rd, *([] if renders else ['--no-renders']))),
              *([('renders', pipeline.blender(root/'src/wayfarer/presentation/eva_preview.py'))] if renders else []),
              ('export', pipeline.blender(root/'src/wayfarer/export/eva_gltf.py', '--out', rd/'glb')),
+             ('godot', [os.environ.get('WAYFARER_GODOT', '/snap/bin/godot-4'), '--headless', '--path', str(root/'godot'), '--script',
+                        'res://scripts/check_eva.gd', '--', f'--dir={rd/"glb"}']),
              ('route', ['python3', str(root/'src/wayfarer/eva_route.py'), '--out', str(rd)])]
     out = dict(run_dir=str(rd.relative_to(root)), seconds={})
     with write_lock(root) as lock:
@@ -62,7 +70,7 @@ def run(root, renders=True, route=True, only=None):
                 continue
             log = rd/f'{name}.log'; t0 = time.monotonic()
             with open(log, 'w') as f:
-                code = subprocess.run([str(a) for a in argv], cwd=root, stdout=f, stderr=subprocess.STDOUT, timeout=pipeline.STEP_TIMEOUT).returncode
+                code = subprocess.run([str(a) for a in argv], cwd=root, stdout=f, stderr=subprocess.STDOUT, timeout=pipeline.STEP_TIMEOUT*SLOW.get(name, 1)).returncode
             out['seconds'][name] = round(time.monotonic() - t0, 1)
             if code:
                 return dict(out, result='FAIL', step=name, log=str(log.relative_to(root)), tail=pipeline.failure_tail(log))
@@ -78,6 +86,8 @@ def run(root, renders=True, route=True, only=None):
     out['envelope'] = {k: dict(circle_m=v['envelope']['torso_circle_diameter_m'], height_m=v['envelope']['height_m'],
                                blocked=[b['bottleneck'] for b in v['bottlenecks'] if b['status'] == 'BLOCKED']) for k, v in fit['variants'].items()}
     out['holds'] = {r['case']: r['status'] for r in fit.get('route', [])}
+    system = json.loads((root/'references/p1_eva_system.json').read_text())
+    out['system'] = dict(system['summary'], review_file='assets/characters/WF_EVA_SYSTEM.blend')
     if route_:
         out['route_status'] = route_['status']; out['flight'] = route_['flight']['state']
     acc = json.loads((root/'references/p1_eva_access.json').read_text()); air = json.loads((root/'references/p1_eva_airlock.json').read_text())

@@ -6,225 +6,563 @@
   "instructor": {
    "coverage": {
     "eva_suit_check": {
+     "frames": 360,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
+    },
+    "eva_airlock": {
+     "frames": 240,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
+    },
+    "eva_translate": {
+     "frames": 150,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
+    },
+    "eva_body_rotate": {
+     "frames": 150,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
+    },
+    "eva_tether_transfer": {
+     "frames": 270,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
+    },
+    "eva_tool_inspect": {
+     "frames": 180,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
+    },
+    "eva_guide_point": {
+     "frames": 180,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
+    },
+    "eva_abort_translate": {
+     "frames": 94,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
+    },
+    "eva_hatch_pass": {
+     "frames": 120,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
+    },
+    "eva_buddy_check": {
+     "frames": 300,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
+    },
+    "eva_casualty": {
+     "frames": 120,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
+    },
+    "eva_rescue_hold": {
+     "frames": 180,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
+    },
+    "eva_latch_extension": {
+     "frames": 240,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
+    },
+    "eva_latch_pitch": {
+     "frames": 90,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
+    },
+    "eva_casualty_supported": {
      "frames": 60,
      "exposed": 0,
      "max_out_mm": 0.0,
      "head_out": 0,
      "bones": {},
-     "status": "PASS"
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
     },
-    "eva_airlock": {
-     "frames": 40,
+    "idle": {
+     "frames": 120,
      "exposed": 0,
      "max_out_mm": 0.0,
      "head_out": 0,
      "bones": {},
-     "status": "PASS"
+     "at": [],
+     "status": "PASS",
+     "use": "NOT_SUITED_EVA"
     },
-    "eva_translate": {
-     "frames": 25,
+    "walk": {
+     "frames": 33,
      "exposed": 0,
      "max_out_mm": 0.0,
      "head_out": 0,
      "bones": {},
-     "status": "PASS"
+     "at": [],
+     "status": "PASS",
+     "use": "NOT_SUITED_EVA"
     },
-    "eva_body_rotate": {
-     "frames": 25,
+    "sit": {
+     "frames": 75,
      "exposed": 0,
      "max_out_mm": 0.0,
      "head_out": 0,
      "bones": {},
-     "status": "PASS"
+     "at": [],
+     "status": "PASS",
+     "use": "NOT_SUITED_EVA"
     },
-    "eva_tether_transfer": {
-     "frames": 45,
+    "crawl": {
+     "frames": 48,
      "exposed": 0,
      "max_out_mm": 0.0,
-     "head_out": 0,
+     "head_out": 1680,
      "bones": {},
-     "status": "PASS"
+     "at": [
+      {
+       "frame": 0,
+       "vertex": 861,
+       "head": true,
+       "p": [
+        -0.054,
+        -0.739,
+        0.651
+       ]
+      },
+      {
+       "frame": 0,
+       "vertex": 862,
+       "head": true,
+       "p": [
+        -0.044,
+        -0.742,
+        0.66
+       ]
+      },
+      {
+       "frame": 0,
+       "vertex": 879,
+       "head": true,
+       "p": [
+        0.0,
+        -0.777,
+        0.652
+       ]
+      },
+      {
+       "frame": 0,
+       "vertex": 962,
+       "head": true,
+       "p": [
+        0.0,
+        -0.674,
+        0.662
+       ]
+      },
+      {
+       "frame": 0,
+       "vertex": 967,
+       "head": true,
+       "p": [
+        -0.049,
+        -0.714,
+        0.654
+       ]
+      },
+      {
+       "frame": 0,
+       "vertex": 968,
+       "head": true,
+       "p": [
+        -0.04,
+        -0.716,
+        0.664
+       ]
+      }
+     ],
+     "status": "FAIL",
+     "use": "NOT_SUITED_EVA"
     },
-    "eva_tool_inspect": {
-     "frames": 30,
-     "exposed": 0,
-     "max_out_mm": 0.0,
-     "head_out": 0,
-     "bones": {},
-     "status": "PASS"
-    },
-    "eva_guide_point": {
-     "frames": 30,
-     "exposed": 0,
-     "max_out_mm": 0.0,
-     "head_out": 0,
-     "bones": {},
-     "status": "PASS"
-    },
-    "eva_abort_translate": {
-     "frames": 16,
-     "exposed": 0,
-     "max_out_mm": 0.0,
-     "head_out": 0,
-     "bones": {},
-     "status": "PASS"
-    },
-    "eva_hatch_pass": {
-     "frames": 20,
-     "exposed": 0,
-     "max_out_mm": 0.0,
-     "head_out": 0,
-     "bones": {},
-     "status": "PASS"
-    },
-    "eva_buddy_check": {
+    "climb": {
      "frames": 50,
      "exposed": 0,
      "max_out_mm": 0.0,
      "head_out": 0,
      "bones": {},
-     "status": "PASS"
+     "at": [],
+     "status": "PASS",
+     "use": "NOT_SUITED_EVA"
     },
-    "eva_casualty": {
-     "frames": 20,
+    "pose:ready": {
+     "frames": 1,
      "exposed": 0,
      "max_out_mm": 0.0,
      "head_out": 0,
      "bones": {},
-     "status": "PASS"
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
     },
-    "eva_rescue_hold": {
-     "frames": 30,
+    "pose:walk": {
+     "frames": 1,
      "exposed": 0,
      "max_out_mm": 0.0,
      "head_out": 0,
      "bones": {},
-     "status": "PASS"
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
     },
-    "eva_latch_extension": {
-     "frames": 40,
+    "pose:reach": {
+     "frames": 1,
      "exposed": 0,
      "max_out_mm": 0.0,
      "head_out": 0,
      "bones": {},
-     "status": "PASS"
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
     },
-    "eva_latch_pitch": {
-     "frames": 15,
+    "pose:crouch": {
+     "frames": 1,
      "exposed": 0,
      "max_out_mm": 0.0,
      "head_out": 0,
      "bones": {},
-     "status": "PASS"
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
     },
-    "eva_casualty_supported": {
-     "frames": 10,
+    "pose:climb": {
+     "frames": 1,
      "exposed": 0,
      "max_out_mm": 0.0,
      "head_out": 0,
      "bones": {},
-     "status": "PASS"
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
     },
-    "idle": {
-     "frames": 20,
+    "pose:flight": {
+     "frames": 1,
      "exposed": 0,
      "max_out_mm": 0.0,
      "head_out": 0,
      "bones": {},
-     "status": "PASS"
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
     },
-    "walk": {
-     "frames": 6,
+    "pose:deployed": {
+     "frames": 1,
      "exposed": 0,
      "max_out_mm": 0.0,
      "head_out": 0,
      "bones": {},
-     "status": "PASS"
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
     },
-    "sit": {
-     "frames": 13,
+    "pose:burn": {
+     "frames": 1,
      "exposed": 0,
      "max_out_mm": 0.0,
      "head_out": 0,
      "bones": {},
-     "status": "PASS"
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
     },
-    "crawl": {
-     "frames": 8,
+    "pose:chase": {
+     "frames": 1,
      "exposed": 0,
      "max_out_mm": 0.0,
-     "head_out": 208,
-     "bones": {},
-     "status": "FAIL"
-    },
-    "climb": {
-     "frames": 9,
-     "exposed": 8,
-     "max_out_mm": 2.5,
      "head_out": 0,
-     "bones": {
-      "upperarm_r": 4,
-      "upperarm_l": 4
-     },
-     "status": "FAIL"
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
+    },
+    "sweep:ready>walk": {
+     "frames": 3,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
+    },
+    "sweep:ready>reach": {
+     "frames": 3,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
+    },
+    "sweep:ready>crouch": {
+     "frames": 3,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
+    },
+    "sweep:ready>climb": {
+     "frames": 3,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
+    },
+    "sweep:ready>flight": {
+     "frames": 3,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
+    },
+    "sweep:ready>deployed": {
+     "frames": 3,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
+    },
+    "sweep:ready>burn": {
+     "frames": 3,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
+    },
+    "sweep:ready>chase": {
+     "frames": 3,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
+    },
+    "sweep:walk>reach": {
+     "frames": 3,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
+    },
+    "sweep:reach>crouch": {
+     "frames": 3,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
+    },
+    "sweep:crouch>climb": {
+     "frames": 3,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
+    },
+    "sweep:climb>flight": {
+     "frames": 3,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
+    },
+    "sweep:flight>deployed": {
+     "frames": 3,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
+    },
+    "sweep:deployed>burn": {
+     "frames": 3,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
+    },
+    "sweep:burn>chase": {
+     "frames": 3,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
     }
    },
    "envelope": {
-    "width_m": 1.182,
-    "depth_m": 0.804,
-    "height_m": 1.918,
-    "torso_width_m": 0.64,
-    "torso_depth_with_plss_m": 0.798,
-    "torso_circle_diameter_m": 0.909,
-    "plss_depth_m": 0.22,
-    "torso_depth_without_plss_m": 0.57,
-    "action_sweep_radius_m": 1.099
+    "width_m": 1.174,
+    "depth_m": 0.698,
+    "height_m": 1.849,
+    "torso_width_m": 0.536,
+    "torso_depth_with_plss_m": 0.525,
+    "torso_circle_diameter_m": 0.644,
+    "plss_depth_m": 0.34,
+    "torso_depth_without_plss_m": 0.185,
+    "action_sweep_radius_m": 1.096
    },
    "bottlenecks": [
     {
      "bottleneck": "Q33 docking passage / trunk / ring-A tubes (1.6 m)",
      "clear_diameter_m": 1.6,
      "kind": "interior route (shirt-sleeve, EVA-040)",
-     "suit_circle_m": 0.909,
-     "margin_m": 0.691,
+     "suit_circle_m": 0.644,
+     "margin_m": 0.956,
      "status": "CLEAR",
-     "largest_plss_depth_m": 0.896
+     "largest_plss_depth_m": 1.323
     },
     {
      "bottleneck": "ring B spine port, necks and refuge port (0.90 m)",
      "clear_diameter_m": 0.9,
      "kind": "interior route (shirt-sleeve, EVA-040)",
-     "suit_circle_m": 0.909,
-     "margin_m": -0.009,
-     "status": "BLOCKED",
-     "largest_plss_depth_m": 0.063
+     "suit_circle_m": 0.644,
+     "margin_m": 0.256,
+     "status": "CLEAR",
+     "largest_plss_depth_m": 0.538
     },
     {
      "bottleneck": "ring B drum chamber length (1.10 m crawl, 15!A113)",
      "clear_diameter_m": 1.1,
      "kind": "crawl with aft down",
-     "suit_circle_m": 0.909,
-     "margin_m": 0.191,
+     "suit_circle_m": 0.644,
+     "margin_m": 0.456,
      "status": "CLEAR",
-     "largest_plss_depth_m": 0.325
+     "largest_plss_depth_m": 0.776
     },
     {
      "bottleneck": "route sweep assumption: suited_envelope_diameter_m",
      "clear_diameter_m": 0.7,
      "kind": "legacy UNSUITED route-control envelope (EVA-041), not a passage",
-     "suit_circle_m": 0.909,
-     "margin_m": -0.209,
-     "status": "BLOCKED",
-     "largest_plss_depth_m": 0.0
+     "suit_circle_m": 0.644,
+     "margin_m": 0.056,
+     "status": "CLEAR",
+     "largest_plss_depth_m": 0.265
     },
     {
      "bottleneck": "sector maintenance strip (0.60 m, SERV-STRIPS 15!A119)",
      "clear_diameter_m": 0.6,
      "kind": "shirt-sleeve only",
-     "suit_circle_m": 0.909,
-     "margin_m": -0.309,
+     "suit_circle_m": 0.644,
+     "margin_m": -0.044,
      "status": "BLOCKED",
-     "largest_plss_depth_m": 0.0
+     "largest_plss_depth_m": 0.085
     }
    ],
    "sp11_pair": {
@@ -234,13 +572,13 @@
     "tube_length_m": 5.5,
     "side_by_side": {
      "status": "FITS",
-     "margin_m": 0.282
+     "margin_m": 0.812
     },
     "head_to_feet": {
      "status": "FITS",
-     "margin_m": 1.664
+     "margin_m": 1.802
     },
-    "hatch_clear_diameter_needed_m": 1.009,
+    "hatch_clear_diameter_needed_m": 0.744,
     "hatch_basis": "suit circle + 0.10 m PROTOTYPE margin; hatch size OPEN (EVA-007, EVA-037)",
     "status": "SIMULATION: interior, doors and door sweep OPEN; a doorway is not two-person capacity (EVA-037)"
    }
@@ -248,222 +586,565 @@
   "newcomer": {
    "coverage": {
     "eva_suit_check": {
+     "frames": 360,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
+    },
+    "eva_airlock": {
+     "frames": 240,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
+    },
+    "eva_translate": {
+     "frames": 150,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
+    },
+    "eva_body_rotate": {
+     "frames": 150,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
+    },
+    "eva_tether_transfer": {
+     "frames": 270,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
+    },
+    "eva_tool_inspect": {
+     "frames": 180,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
+    },
+    "eva_guide_point": {
+     "frames": 180,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
+    },
+    "eva_abort_translate": {
+     "frames": 94,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
+    },
+    "eva_hatch_pass": {
+     "frames": 120,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
+    },
+    "eva_buddy_check": {
+     "frames": 300,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
+    },
+    "eva_casualty": {
+     "frames": 120,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
+    },
+    "eva_rescue_hold": {
+     "frames": 180,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
+    },
+    "eva_latch_extension": {
+     "frames": 240,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
+    },
+    "eva_latch_pitch": {
+     "frames": 90,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
+    },
+    "eva_casualty_supported": {
      "frames": 60,
      "exposed": 0,
      "max_out_mm": 0.0,
      "head_out": 0,
      "bones": {},
-     "status": "PASS"
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
     },
-    "eva_airlock": {
-     "frames": 40,
+    "idle": {
+     "frames": 120,
      "exposed": 0,
      "max_out_mm": 0.0,
      "head_out": 0,
      "bones": {},
-     "status": "PASS"
+     "at": [],
+     "status": "PASS",
+     "use": "NOT_SUITED_EVA"
     },
-    "eva_translate": {
-     "frames": 25,
+    "walk": {
+     "frames": 33,
      "exposed": 0,
      "max_out_mm": 0.0,
      "head_out": 0,
      "bones": {},
-     "status": "PASS"
+     "at": [],
+     "status": "PASS",
+     "use": "NOT_SUITED_EVA"
     },
-    "eva_body_rotate": {
-     "frames": 25,
+    "sit": {
+     "frames": 75,
      "exposed": 0,
      "max_out_mm": 0.0,
      "head_out": 0,
      "bones": {},
-     "status": "PASS"
+     "at": [],
+     "status": "PASS",
+     "use": "NOT_SUITED_EVA"
     },
-    "eva_tether_transfer": {
-     "frames": 45,
-     "exposed": 0,
-     "max_out_mm": 0.0,
-     "head_out": 0,
-     "bones": {},
-     "status": "PASS"
+    "crawl": {
+     "frames": 48,
+     "exposed": 7,
+     "max_out_mm": 120.0,
+     "head_out": 1872,
+     "bones": {
+      "pelvis": 7
+     },
+     "at": [
+      {
+       "frame": 0,
+       "vertex": 861,
+       "head": true,
+       "p": [
+        -0.052,
+        -0.721,
+        0.618
+       ]
+      },
+      {
+       "frame": 0,
+       "vertex": 862,
+       "head": true,
+       "p": [
+        -0.042,
+        -0.723,
+        0.626
+       ]
+      },
+      {
+       "frame": 0,
+       "vertex": 878,
+       "head": true,
+       "p": [
+        -0.041,
+        -0.75,
+        0.613
+       ]
+      },
+      {
+       "frame": 0,
+       "vertex": 879,
+       "head": true,
+       "p": [
+        0.0,
+        -0.757,
+        0.621
+       ]
+      },
+      {
+       "frame": 0,
+       "vertex": 962,
+       "head": true,
+       "p": [
+        0.0,
+        -0.658,
+        0.625
+       ]
+      },
+      {
+       "frame": 0,
+       "vertex": 967,
+       "head": true,
+       "p": [
+        -0.048,
+        -0.697,
+        0.621
+       ]
+      }
+     ],
+     "status": "FAIL",
+     "use": "NOT_SUITED_EVA"
     },
-    "eva_tool_inspect": {
-     "frames": 30,
-     "exposed": 0,
-     "max_out_mm": 0.0,
-     "head_out": 0,
-     "bones": {},
-     "status": "PASS"
-    },
-    "eva_guide_point": {
-     "frames": 30,
-     "exposed": 0,
-     "max_out_mm": 0.0,
-     "head_out": 0,
-     "bones": {},
-     "status": "PASS"
-    },
-    "eva_abort_translate": {
-     "frames": 16,
-     "exposed": 0,
-     "max_out_mm": 0.0,
-     "head_out": 0,
-     "bones": {},
-     "status": "PASS"
-    },
-    "eva_hatch_pass": {
-     "frames": 20,
-     "exposed": 0,
-     "max_out_mm": 0.0,
-     "head_out": 0,
-     "bones": {},
-     "status": "PASS"
-    },
-    "eva_buddy_check": {
+    "climb": {
      "frames": 50,
      "exposed": 0,
      "max_out_mm": 0.0,
      "head_out": 0,
      "bones": {},
-     "status": "PASS"
+     "at": [],
+     "status": "PASS",
+     "use": "NOT_SUITED_EVA"
     },
-    "eva_casualty": {
-     "frames": 20,
+    "pose:ready": {
+     "frames": 1,
      "exposed": 0,
      "max_out_mm": 0.0,
      "head_out": 0,
      "bones": {},
-     "status": "PASS"
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
     },
-    "eva_rescue_hold": {
-     "frames": 30,
+    "pose:walk": {
+     "frames": 1,
      "exposed": 0,
      "max_out_mm": 0.0,
      "head_out": 0,
      "bones": {},
-     "status": "PASS"
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
     },
-    "eva_latch_extension": {
-     "frames": 40,
+    "pose:reach": {
+     "frames": 1,
      "exposed": 0,
      "max_out_mm": 0.0,
      "head_out": 0,
      "bones": {},
-     "status": "PASS"
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
     },
-    "eva_latch_pitch": {
-     "frames": 15,
+    "pose:crouch": {
+     "frames": 1,
      "exposed": 0,
      "max_out_mm": 0.0,
      "head_out": 0,
      "bones": {},
-     "status": "PASS"
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
     },
-    "eva_casualty_supported": {
-     "frames": 10,
+    "pose:climb": {
+     "frames": 1,
      "exposed": 0,
      "max_out_mm": 0.0,
      "head_out": 0,
      "bones": {},
-     "status": "PASS"
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
     },
-    "idle": {
-     "frames": 20,
+    "pose:flight": {
+     "frames": 1,
      "exposed": 0,
      "max_out_mm": 0.0,
      "head_out": 0,
      "bones": {},
-     "status": "PASS"
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
     },
-    "walk": {
-     "frames": 6,
+    "pose:deployed": {
+     "frames": 1,
      "exposed": 0,
      "max_out_mm": 0.0,
      "head_out": 0,
      "bones": {},
-     "status": "PASS"
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
     },
-    "sit": {
-     "frames": 13,
+    "pose:burn": {
+     "frames": 1,
      "exposed": 0,
      "max_out_mm": 0.0,
      "head_out": 0,
      "bones": {},
-     "status": "PASS"
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
     },
-    "crawl": {
-     "frames": 8,
-     "exposed": 0,
-     "max_out_mm": 0.0,
-     "head_out": 264,
-     "bones": {},
-     "status": "FAIL"
-    },
-    "climb": {
-     "frames": 9,
+    "pose:chase": {
+     "frames": 1,
      "exposed": 0,
      "max_out_mm": 0.0,
      "head_out": 0,
      "bones": {},
-     "status": "PASS"
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
+    },
+    "sweep:ready>walk": {
+     "frames": 3,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
+    },
+    "sweep:ready>reach": {
+     "frames": 3,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
+    },
+    "sweep:ready>crouch": {
+     "frames": 3,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
+    },
+    "sweep:ready>climb": {
+     "frames": 3,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
+    },
+    "sweep:ready>flight": {
+     "frames": 3,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
+    },
+    "sweep:ready>deployed": {
+     "frames": 3,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
+    },
+    "sweep:ready>burn": {
+     "frames": 3,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
+    },
+    "sweep:ready>chase": {
+     "frames": 3,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
+    },
+    "sweep:walk>reach": {
+     "frames": 3,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
+    },
+    "sweep:reach>crouch": {
+     "frames": 3,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
+    },
+    "sweep:crouch>climb": {
+     "frames": 3,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
+    },
+    "sweep:climb>flight": {
+     "frames": 3,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
+    },
+    "sweep:flight>deployed": {
+     "frames": 3,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
+    },
+    "sweep:deployed>burn": {
+     "frames": 3,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
+    },
+    "sweep:burn>chase": {
+     "frames": 3,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
     }
    },
    "envelope": {
-    "width_m": 1.106,
-    "depth_m": 0.769,
-    "height_m": 1.833,
-    "torso_width_m": 0.598,
-    "torso_depth_with_plss_m": 0.769,
-    "torso_circle_diameter_m": 0.885,
-    "plss_depth_m": 0.22,
-    "torso_depth_without_plss_m": 0.541,
-    "action_sweep_radius_m": 1.039
+    "width_m": 1.09,
+    "depth_m": 0.714,
+    "height_m": 1.767,
+    "torso_width_m": 0.501,
+    "torso_depth_with_plss_m": 0.512,
+    "torso_circle_diameter_m": 0.636,
+    "plss_depth_m": 0.342,
+    "torso_depth_without_plss_m": 0.169,
+    "action_sweep_radius_m": 1.036
    },
    "bottlenecks": [
     {
      "bottleneck": "Q33 docking passage / trunk / ring-A tubes (1.6 m)",
      "clear_diameter_m": 1.6,
      "kind": "interior route (shirt-sleeve, EVA-040)",
-     "suit_circle_m": 0.885,
-     "margin_m": 0.715,
+     "suit_circle_m": 0.636,
+     "margin_m": 0.964,
      "status": "CLEAR",
-     "largest_plss_depth_m": 0.943
+     "largest_plss_depth_m": 1.351
     },
     {
      "bottleneck": "ring B spine port, necks and refuge port (0.90 m)",
      "clear_diameter_m": 0.9,
      "kind": "interior route (shirt-sleeve, EVA-040)",
-     "suit_circle_m": 0.885,
-     "margin_m": 0.015,
+     "suit_circle_m": 0.636,
+     "margin_m": 0.264,
      "status": "CLEAR",
-     "largest_plss_depth_m": 0.132
+     "largest_plss_depth_m": 0.579
     },
     {
      "bottleneck": "ring B drum chamber length (1.10 m crawl, 15!A113)",
      "clear_diameter_m": 1.1,
      "kind": "crawl with aft down",
-     "suit_circle_m": 0.885,
-     "margin_m": 0.215,
+     "suit_circle_m": 0.636,
+     "margin_m": 0.464,
      "status": "CLEAR",
-     "largest_plss_depth_m": 0.382
+     "largest_plss_depth_m": 0.81
     },
     {
      "bottleneck": "route sweep assumption: suited_envelope_diameter_m",
      "clear_diameter_m": 0.7,
      "kind": "legacy UNSUITED route-control envelope (EVA-041), not a passage",
-     "suit_circle_m": 0.885,
-     "margin_m": -0.185,
-     "status": "BLOCKED",
-     "largest_plss_depth_m": 0.0
+     "suit_circle_m": 0.636,
+     "margin_m": 0.064,
+     "status": "CLEAR",
+     "largest_plss_depth_m": 0.32
     },
     {
      "bottleneck": "sector maintenance strip (0.60 m, SERV-STRIPS 15!A119)",
      "clear_diameter_m": 0.6,
      "kind": "shirt-sleeve only",
-     "suit_circle_m": 0.885,
-     "margin_m": -0.285,
+     "suit_circle_m": 0.636,
+     "margin_m": -0.036,
      "status": "BLOCKED",
-     "largest_plss_depth_m": 0.0
+     "largest_plss_depth_m": 0.161
     }
    ],
    "sp11_pair": {
@@ -473,19 +1154,19 @@
     "tube_length_m": 5.5,
     "side_by_side": {
      "status": "FITS",
-     "margin_m": 0.33
+     "margin_m": 0.828
     },
     "head_to_feet": {
      "status": "FITS",
-     "margin_m": 1.834
+     "margin_m": 1.966
     },
-    "hatch_clear_diameter_needed_m": 0.985,
+    "hatch_clear_diameter_needed_m": 0.736,
     "hatch_basis": "suit circle + 0.10 m PROTOTYPE margin; hatch size OPEN (EVA-007, EVA-037)",
     "status": "SIMULATION: interior, doors and door sweep OPEN; a doorway is not two-person capacity (EVA-037)"
    }
   }
  },
- "sweep_radius_m": 1.099,
+ "sweep_radius_m": 1.096,
  "route": [
   {
    "case": "translate_mid",
@@ -493,10 +1174,14 @@
    "action": "eva_translate",
    "frame": 40,
    "hold": "rail_mid",
-   "x": 98.1,
-   "status": "CLEAR",
-   "least_clearance_m": 0.082,
-   "intersections": {},
+   "x": 130.35,
+   "status": "CONTACT",
+   "least_clearance_m": 0.0,
+   "intersections": {
+    "PROTECTION": [
+     "Ext_EVA_Rail_Aft"
+    ]
+   },
    "route_status": "SIMULATION_ONLY"
   },
   {
@@ -505,10 +1190,17 @@
    "action": "eva_guide_point",
    "frame": 90,
    "hold": "aft_hold",
-   "x": 95.6,
-   "status": "CLEAR",
-   "least_clearance_m": 0.035,
-   "intersections": {},
+   "x": 127.85,
+   "status": "CONTACT",
+   "least_clearance_m": 0.0,
+   "intersections": {
+    "PROTECTION": [
+     "Ext_EVA_Foot_Restraint_Aft"
+    ],
+    "JOINTS": [
+     "Ext_EVA_Foot_Restraint_Aft"
+    ]
+   },
    "route_status": "SIMULATION_ONLY"
   },
   {
@@ -517,9 +1209,9 @@
    "action": "eva_tether_transfer",
    "frame": 115,
    "hold": "aft_hold",
-   "x": 96.9,
+   "x": 129.15,
    "status": "CLEAR",
-   "least_clearance_m": 0.038,
+   "least_clearance_m": 0.043,
    "intersections": {},
    "route_status": "SIMULATION_ONLY"
   },
@@ -529,10 +1221,17 @@
    "action": "eva_tool_inspect",
    "frame": 60,
    "hold": "forward_hold",
-   "x": 106.0,
-   "status": "CLEAR",
-   "least_clearance_m": 0.044,
-   "intersections": {},
+   "x": 138.25,
+   "status": "CONTACT",
+   "least_clearance_m": 0.0,
+   "intersections": {
+    "PROTECTION": [
+     "Ext_EVA_Foot_Restraint_Forward"
+    ],
+    "JOINTS": [
+     "Ext_EVA_Foot_Restraint_Forward"
+    ]
+   },
    "route_status": "SIMULATION_ONLY"
   },
   {
@@ -541,9 +1240,9 @@
    "action": "eva_body_rotate",
    "frame": 140,
    "hold": "forward_hold",
-   "x": 104.7,
+   "x": 136.95,
    "status": "CLEAR",
-   "least_clearance_m": 0.036,
+   "least_clearance_m": 0.043,
    "intersections": {},
    "route_status": "SIMULATION_ONLY"
   }
@@ -554,5 +1253,10 @@
   "aft_hold": "SIMULATION_ONLY",
   "forward_hold": "SIMULATION_ONLY"
  },
- "coverage_pass": false
+ "coverage_pass": false,
+ "eva_coverage_pass": true,
+ "not_suited_eva_failures": [
+  "instructor:crawl",
+  "newcomer:crawl"
+ ]
 }
