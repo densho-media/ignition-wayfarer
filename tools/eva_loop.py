@@ -29,7 +29,8 @@ SCRIPTS = {'build': ['src/wayfarer/build/eva_suit.py'], 'drone': ['src/wayfarer/
            'system_checks': ['src/wayfarer/validation/eva_system.py'], 'fit': ['src/wayfarer/validation/eva_fit.py'], 'access': ['src/wayfarer/eva_access.py'],
            'airlock': ['src/wayfarer/validation/eva_airlock_study.py'], 'sp11': ['src/wayfarer/eva_sp11.py'],
            'sp11_vehicle': ['src/wayfarer/validation/eva_sp11_study.py'], 'renders': ['src/wayfarer/presentation/eva_preview.py'],
-           'export': ['src/wayfarer/export/eva_gltf.py'], 'godot': ['godot/scripts/check_eva.gd'], 'route': ['src/wayfarer/eva_route.py']}
+           'export': ['src/wayfarer/export/eva_gltf.py'], 'godot': ['godot/scripts/check_eva.gd'], 'route': ['src/wayfarer/eva_route.py'],
+           'ops': ['src/wayfarer/eva_ops.py']}
 STAGES = list(SCRIPTS)
 SLOW = {'fit': 4}                    # coverage samples every frame and every body vertex of both suits: about an hour on 4 cores
 
@@ -54,7 +55,9 @@ def run(root, renders=True, route=True, only=None):
              ('export', pipeline.blender(root/'src/wayfarer/export/eva_gltf.py', '--out', rd/'glb')),
              ('godot', [os.environ.get('WAYFARER_GODOT', '/snap/bin/godot-4'), '--headless', '--path', str(root/'godot'), '--script',
                         'res://scripts/check_eva.gd', '--', f'--dir={rd/"glb"}']),
-             ('route', ['python3', str(root/'src/wayfarer/eva_route.py'), '--out', str(rd)])]
+             ('route', ['python3', str(root/'src/wayfarer/eva_route.py'), '--out', str(rd)]),
+             # EVA-OPS-001: the operations package the Godot EVA Operations scene runs on (from the system checks' runtime_layout)
+             ('ops', ['python3', str(root/'src/wayfarer/eva_ops.py')])]
     out = dict(run_dir=str(rd.relative_to(root)), seconds={})
     with write_lock(root) as lock:
         if lock is None:

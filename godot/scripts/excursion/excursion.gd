@@ -91,7 +91,19 @@ var hud_check := Label.new()
 var ring_map: Control = null
 var learning: WfLearning = null   # UJ-013 learning stations (WHAT / WHY / SHOW ME), from the package
 
+## EVA Operations (EVA-OPS-001) is a sibling scene: `-- --eva` (native) or `#eva` on the browser page opens it instead of the walk.
+static func eva_requested() -> bool:
+	if "--eva" in OS.get_cmdline_user_args():
+		return true
+	if OS.has_feature("web") and Engine.has_singleton("JavaScriptBridge"):
+		var h = JavaScriptBridge.eval("location.hash", true)
+		return h != null and String(h).to_lower().contains("eva")
+	return false
+
 func _ready() -> void:
+	if eva_requested() and not "--check-excursion" in OS.get_cmdline_user_args():
+		get_tree().change_scene_to_file.call_deferred("res://scenes/eva_ops.tscn")
+		return
 	if not FileAccess.file_exists("res://generated/manifest_docked.json"):
 		var missing := Label.new()
 		missing.text = "Generate the runtime package from the repository root:\npython3 tools/workflow.py runtime-export"
@@ -467,6 +479,7 @@ func _unhandled_input(e: InputEvent) -> void:
 		KEY_E: use()
 		KEY_O: ops()
 		KEY_V: view_out = not view_out
+		KEY_F9: get_tree().change_scene_to_file("res://scenes/eva_ops.tscn")
 		KEY_M:
 			if ring_map != null:
 				ring_map.visible = not ring_map.visible

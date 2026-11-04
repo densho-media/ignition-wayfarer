@@ -19,7 +19,10 @@
   </header>
   <section class="panel">
     <p id="size">The engine and the ship package download when you press Start.</p>
-    <p><button id="start" type="button">Start the walk</button></p>
+    <p><button id="start" type="button">Start the walk</button> <button id="eva" type="button">Start EVA Operations</button></p>
+    <p class="note">EVA Operations: the suited astronaut and the companion drone outside the hull, on finite nitrogen. 1 astronaut ·
+      2 drone · W/S/A/D/R/F translate · I/K/J/L/U/O rotate · B brake · M assisted/manual · G grab · X dock · Y drone mode · Q ask the
+      drone for nitrogen · F4 the guided "EVA — First Flight" · F8 to the walk.</p>
     <p class="note">Desktop: click to look (Esc frees the cursor) · W/S move, A/D step · E use (hatch, door, drum, ladder, the ring B
       branch) · O ship operations at a trunk panel · V view · M ring map. Touch: left thumb moves, right thumb drags to look, the Use,
       Ops, View and Map buttons appear when they apply.</p>
@@ -58,13 +61,13 @@ fetch('play.json', { cache: 'no-store' }).then(r => r.ok ? r.json() : Promise.re
   const mb = Object.values(p.bytes).reduce((a, b) => a + b, 0) / 1e6;
   size.textContent = `Pressing Start downloads the Godot ${p.godot_short} engine and the ship package: ${mb.toFixed(0)} MB, `
     + `less over the wire when the server compresses it, and cached for later visits.`;
-}).catch(err => { size.textContent = `This release has no interactive build (${err.message}).`; start.disabled = true; });
+}).catch(err => { size.textContent = `This release has no interactive build (${err.message}).`; start.disabled = true; document.getElementById('eva').disabled = true; });
 // Capability probe without starting anything heavy: a throwaway WebGL 2 context, released at once.
 (() => {
   const gl = document.createElement('canvas').getContext('webgl2');
   const touchOnly = matchMedia('(pointer: coarse)').matches && !matchMedia('(pointer: fine)').matches;
   const notes = [];
-  if (!gl) { notes.push('This browser did not provide WebGL 2, which the engine needs. Explore Ship may still work.'); start.disabled = true; }
+  if (!gl) { notes.push('This browser did not provide WebGL 2, which the engine needs. Explore Ship may still work.'); start.disabled = true; document.getElementById('eva').disabled = true; }
   else gl.getExtension('WEBGL_lose_context')?.loseContext();
   if (!WebAssembly?.validate) notes.push('WebAssembly is unavailable.');
   if (touchOnly) notes.push('Touch device: the game shows touch controls. It needs a recent phone and the download above; '
@@ -73,6 +76,9 @@ fetch('play.json', { cache: 'no-store' }).then(r => r.ok ? r.json() : Promise.re
 })();
 // The walk (EXC-001) is the package's main scene.
 start.addEventListener('click', () => { if (play) location.assign(play.entry); });
+// EVA Operations (EVA-OPS-001) is a second scene in the same package: the page's #eva opens it instead of the walk.
+const eva = document.getElementById('eva');
+eva.addEventListener('click', () => { if (play) location.assign(play.entry + '#eva'); });
 </script>
 </body>
 </html>

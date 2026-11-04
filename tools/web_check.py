@@ -310,6 +310,9 @@ RAF_FPS = ('new Promise(r => { const t0 = performance.now(); let n = 0; const ts
            'requestAnimationFrame(f); })')
 
 
+EVA_SECONDS = 1200                         # EVA Operations check in the browser (about 50 s natively; single-threaded Web is slower)
+
+
 def run_equivalence(url, play_release, binary, sandbox, out, play_seconds, record_check, metrics):
     """The walk's own check (excursion check.gd: both rings round and back to the station by the player's actions) in the Web build
     against the native build of the same package (web_play.build), at a fixed 60 fps with drawing off (--disable-render-loop: logic,
@@ -336,6 +339,19 @@ def run_equivalence(url, play_release, binary, sandbox, out, play_seconds, recor
                      notes_differ=sorted(set(notes) ^ set(native.get('notes') or []))[:8], errors=errors[:3], seconds=seconds)
         metrics['equivalence'] = {'web': web and {k: web.get(k) for k in ('result', 'physics_frames', 'wall_s')},
                                   'native': {k: native.get(k) for k in ('result', 'physics_frames', 'seconds')}, 'seconds': seconds}
+        # EVA-OPS-001: the EVA Operations check (movement, gas, docking, drone, rescue, scripted First Flight) in the same browser
+        nat_eva = native.get('eva_ops') or {}
+        mark = traffic.mark()
+        t0 = time.monotonic()
+        query = '&'.join(f'arg={a}' for a in ('--disable-render-loop', '--fixed-fps', '60', '--', '--eva', '--check-eva-ops'))
+        page.send('Page.navigate', {'url': url + play_release['page'] + '?' + query})
+        line = traffic.wait_console('WF_GODOT_EVA_OPS ', mark, EVA_SECONDS)
+        errors = [text for kind, text in traffic.since(mark)[1] if text.startswith('ERROR')]
+        eva = json.loads(line.split(' ', 1)[1]) if line else None
+        record_check('play: the EVA Operations check passes in the browser as natively',
+                     bool(eva) and eva.get('result') == 'PASS' and nat_eva.get('result') == 'PASS' and len(eva.get('tests', {})) == nat_eva.get('checks')
+                     and not errors, web={k: (eva or {}).get(k) for k in ('result', 'fail', 'sim_s', 'wall_s')}, native=nat_eva, errors=errors[:3],
+                     seconds=round(time.monotonic() - t0, 1))
     except Exception as error:
         log.flush()
         record_check('play: equivalence browser session', False, error=repr(error),

@@ -1827,7 +1827,23 @@ beside SP-11 and serviced in SP-13 (43 EVA-040), and the legacy 0.70 m `suited_e
 (EVA-041). The SP-11 door and chamber candidates (1.00/1.10/1.20 m, two-person and sequential) and the SP-12/13 rooms are a STUDY measured
 against the vehicle, never ship geometry (EVA-043). The exterior route is a TRAINING SIMULATION on the stationary forward collar along the
 SP-11 airlock's azimuth (X 105.6–116.0 m): every hold is SIMULATION_ONLY and FLIGHT_EVA is HOLD (locked, 45 O-07) because the ring,
-thermal, debris, radiation and anchor gates have OPEN inputs; nothing in the vehicle changed. Its Godot drift scene is retired (commit 038ae90); the suit assets and `eva_*.py` screens remain.
+thermal, debris, radiation and anchor gates have OPEN inputs; nothing in the vehicle changed. The old Godot drift scene is retired (commit
+038ae90); EVA Operations (below) is its playable successor.
+
+## EVA Operations (EVA-OPS-001)
+
+`godot/scenes/eva_ops.tscn` ([EVA_OPERATIONS.md](EVA_OPERATIONS.md)) flies the canonical suit and companion drone outside the hull as
+a TRAINING SIMULATION (FLIGHT_EVA HOLD): Newtonian 6-DOF bodies in the rig's SHIP frame, contact through Jolt only, and thrust from the
+built nozzle layout (`validation/eva_system.py` `runtime_layout`) through NNLS duty tables per configuration (drone 26 × 4 N, 22 near the
+suit, docked about the pair's mass centre, suit reserve 16 × 8 N). Gas leaves at ΣF/ve from four separate inventories (suit reserve, drone,
+RC-1 cartridges, station rack) with a conserved ledger. It is never created and only refilled by a counted training reset; the
+assisted modes fire the same valves. The drone follows, returns, docks, works its arms and runs a rescue state machine (FETCH a
+cartridge or SHARE by docking, success only when the astronaut's Δv rises, refusals with their reasons). The package
+`data/simulations/wf_eva_ops.json` comes from `src/wayfarer/eva_ops.py` and `data/eva_ops.toml` (PROTOTYPE: the RC-1 dock-channel
+cartridge, the station rack, burn presets at the rig's 1.5 g bound and 1.1 g, assist gains, reach and tether). Its Δv matches the
+canonical budget (34.9 / 5.12 / 2.67 m/s). The guided "EVA — First Flight" has eight stages driven by the scene's state. The walk's F9
+and the web launcher's Start EVA Operations open it. `eva_check.gd` checks movement, gas, drone and a full scripted First Flight
+(34 checks, runtime-export `eva-ops`).
 
 ## Crew physics
 

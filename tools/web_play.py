@@ -5,6 +5,7 @@ disposable workspace.
 package the walk reads, all from the saved assets and tracked inputs:
   wayfarer_docked.glb, manifest_docked.json, wf_sim_rig.json   export/godot.py --preset DOCKED (the same exporter as runtime-export)
   wf_route_v1.json                                             data/simulations/ (NAV-001 import, unchanged)
+  wf_eva_ops.json                                              data/simulations/ (EVA-OPS-001, src/wayfarer/eva_ops.py)
 The MPFB characters are not built here: the walk keeps its proxy body (a presentation-only difference). In the workspace copy
 export_presets.cfg is written; the project's godot/ and godot/generated/ are never touched. It then runs the walk's own check
 natively in the same workspace (the native reference for this package), exports Web (no threads: no COOP/COEP headers needed)
@@ -44,6 +45,7 @@ CACHE = Path(os.environ.get('WAYFARER_GODOT_CACHE') or Path.home() / '.cache/way
 PCK_LIMIT = 95_000_000            # GitHub Pages refuses files over 100 MB
 SCENE = 'res://scenes/excursion.tscn'
 WALK_CHECK = ['--fixed-fps', '60', SCENE, '--quit-after', '300000', '--', '--check-excursion']
+EVA_CHECK = ['res://scenes/eva_ops.tscn', '--', '--check-eva-ops']
 PRESETS = '''[preset.0]
 
 name="Web"
@@ -173,6 +175,17 @@ def walk_result(log):
             'physics_frames': data.get('physics_frames'), 'errors': Path(log).read_text(errors='replace').count('ERROR:')}
 
 
+def eva_result(log):
+    """The EVA Operations check (eva_check.gd) from its log: result, failures and the number of checks."""
+    text = Path(log).read_text(errors='replace')
+    line = next((l for l in text.splitlines() if l.startswith('WF_GODOT_EVA_OPS ')), None)
+    if line is None:
+        return {'result': 'FAIL', 'reason': 'no WF_GODOT_EVA_OPS line'}
+    data = json.loads(line.split(' ', 1)[1])
+    return {'result': data.get('result') if 'ERROR:' not in text else 'FAIL', 'fails': data.get('fail', []), 'checks': len(data.get('tests', {})),
+            'sim_s': data.get('sim_s')}
+
+
 def input_key(project, tools, shell):
     """SHA-256 over what decides the play package: the staged project (no .godot, imports or export_presets.cfg, whose template
     paths are machine-specific), with `identity.git_revision`/`git_dirty` left out of the manifests (the only commit-dependent
@@ -225,6 +238,7 @@ def build(root, run_dir, out, identity, native=False, native_check=True):
     step('export-docked', pipeline.blender(root / 'src/wayfarer/export/godot.py', '--root', root, '--preset', 'DOCKED',
                                            '--out', generated, '--identity', identity))
     shutil.copy2(root / 'data/simulations/wf_route_v1.json', generated / 'wf_route_v1.json')
+    shutil.copy2(root / 'data/simulations/wf_eva_ops.json', generated / 'wf_eva_ops.json')
     if f'run/main_scene="{SCENE}"' not in (project / 'project.godot').read_text():
         raise ValueError(f'project.godot: run/main_scene is not {SCENE}')
     (project / 'export_presets.cfg').write_text(PRESETS.format(web=tools['web'], linux=tools['linux'],
@@ -243,6 +257,12 @@ def build(root, run_dir, out, identity, native=False, native_check=True):
                       'note': 'Godot 4.7.2 headless on Linux, --fixed-fps 60, same workspace and package as the Web export'}
         if native_ref['result'] != 'PASS':
             raise RuntimeError(f'native walk check failed on the web package: {native_ref}')
+        s = time.monotonic()
+        log = run_dir / 'play-native-eva-ops-check.log'
+        run_logged([godot, '--headless', '--fixed-fps', '60', '--path', str(project), *EVA_CHECK], log, root)
+        native_ref['eva_ops'] = {**eva_result(log), 'seconds': round(time.monotonic() - s, 1)}
+        if native_ref['eva_ops']['result'] != 'PASS':
+            raise RuntimeError(f'native EVA operations check failed on the web package: {native_ref["eva_ops"]}')
     export = work / 'web'
     export.mkdir()
     step('export-web', [godot, '--headless', '--path', str(project), '--export-release', 'Web', str(export / 'wayfarer.html')])

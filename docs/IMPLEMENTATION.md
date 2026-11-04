@@ -147,6 +147,8 @@ python3 tools/workflow.py module export-authored <assembly> --id <ID> --objects 
                                                      # ART meshes of a detail asset -> data/detail/<pack>/<id>.glb + its manifest entry
 python3 tools/workflow.py assembly validate           # every detail pack's saved assets and contract against its publication record
 python3 tools/workflow.py eva [--no-renders] [--no-route] [--only <stages>]   # EVA suit: build on the saved pair, coverage/envelope/hold checks, access-pose hulls, SP-11/12/13 study (eva_access.py, then measured and rendered in the vehicle), EVA-003 comparison (eva_sp11.py + validation/eva_sp11_study.py, rigs posed in the chambers), renders, glTF, route (docs/EVA.md, ~9 min; --only <stages> reruns part of it)
+python3 src/wayfarer/eva_ops.py [--check]                     # EVA-OPS-001 package data/simulations/wf_eva_ops.json (nozzles, NNLS duty tables, N2 inventories, RC-1, hazards; the eva loop's `ops` stage); --check: CURRENT/STALE
+/snap/bin/godot-4 --headless --fixed-fps 60 --path godot res://scenes/eva_ops.tscn -- --check-eva-ops   # EVA Operations: 34 checks incl. a scripted First Flight (~50 s; runtime-export check eva-ops); `-- --eva` opens the scene from the walk, `-- --shots=<dir>` writes camera stills (display needed)
 ```
 
 Measured on 2026-10-14 on production (before → after the DEV-FLOW changes, same

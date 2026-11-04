@@ -30,6 +30,9 @@ CHECKS = [
     # EXC-001: station -> ring A circuit -> station, then ring B, by the player's own actions (excursion check.gd); WF_GODOT_EXCURSION.
     dict(name='excursion', args=['--fixed-fps', '60', 'res://scenes/excursion.tscn', '--quit-after', '300000', '--', '--check-excursion'],
          scene='scenes/excursion.tscn', marker='"result":"PASS"'),
+    # EVA-OPS-001: astronaut and drone operations (movement, gas, docking, drone, rescue and a scripted First Flight); WF_GODOT_EVA_OPS.
+    dict(name='eva-ops', args=['--fixed-fps', '60', 'res://scenes/eva_ops.tscn', '--', '--check-eva-ops'],
+         scene='scenes/eva_ops.tscn', marker='"result":"PASS"'),
     # The MPFB humans (docs/CHARACTERS.md), once `workflow.py characters` has built them.
     dict(name='characters', args=['--script', 'res://scripts/check_characters.gd'], script='scripts/check_characters.gd', needs='humans'),
 ]
@@ -66,7 +69,7 @@ def package_inputs(root):
     paths = [*sorted(p for p in src.rglob('*.py') if '__pycache__' not in p.parts),
              root/'tools/runtime_export.py', *sorted((root/'data').glob('*.toml')), *sorted(p for p in (root/'data/detail').rglob('*') if p.is_file()),
              root/'godot/project.godot',
-             *(p for p in (root/'data/simulations/wf_route_v1.json',) if p.exists()),
+             *(p for p in (root/'data/simulations/wf_route_v1.json', root/'data/simulations/wf_eva_ops.json') if p.exists()),
              *sorted((root/'assets/characters').glob('WF_CHAR_HUMAN_*.blend'))]
     return {str(p.relative_to(root)): pipeline.sha256(p) for p in paths}
 
@@ -135,6 +138,9 @@ def run(root, eye_layout=None):
                     'run_dir': str(run_dir)}
         checks = list(CHECKS)
         for name, command in commands:
+            if name == 'import':
+                # EVA-OPS-001: the operations package (src/wayfarer/eva_ops.py output) travels with the walk's package
+                shutil.copy2(root / 'data/simulations/wf_eva_ops.json', work / 'godot/generated/wf_eva_ops.json')
             log = run_dir / f'{name}.log'
             code = pipeline.subprocess_runner(command, log, root, pipeline.STEP_TIMEOUT)
             if code or (name == 'import' and 'ERROR:' in log.read_text()):

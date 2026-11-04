@@ -484,6 +484,12 @@ candidates of all nine classes are separate accessory assets (docs/ACCESSORIES.m
   EVA ends on feedwater at 6.1 h; the docked-arm assistance stays a study; Brow Games rules (reserve floor, gates).
   **Done when:** the owner adopts or changes the numbers and the review items have owner-accepted analyses.
 
+- [ ] **EVA-OPS — EVA Operations (PROTOTYPE, docs/EVA_OPERATIONS.md).** Built and checked headless (34 checks incl. a scripted First
+  Flight). Open: owner review of the playable scene and of the RC-1 dock-channel cartridge and station rack (PROTOTYPE accessories);
+  browser verification on the next web build (the equivalence session now runs the EVA check); the canonical suit and drone GLBs in the
+  web package (proxies there today); hand-over-hand rail translation without thrust; Brow Games rules on the same bodies.
+  **Done when:** the owner has flown it and accepted or changed the accessories, and the web build's EVA check passes.
+
 - [ ] **K04 — Finish accepted exterior and interior art (FUT-003). AFTER C01/K01; D06/G for affected rooms; F/H/I for affected hardware.**
   Work one bounded zone at a time: stable assembly construction, cultural architecture, lighting/materials, functional wear and
   approved furnishings. Preserve engineering envelopes and human routes; retain ART separation and deliberate backups.

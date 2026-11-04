@@ -425,6 +425,14 @@ def main():
                      drone_centre=tuple(dock_w.translation), drone_com_world=tuple(dock_w @ Vector(com))), pc=tuple(module['pc']), body_com=body_com,
                      proximity=live_prox)
     report['propulsion'] = study
+    # the same nozzle layout and mass centres the study used, for the EVA Operations runtime (src/wayfarer/eva_ops.py -> wf_eva_ops.json);
+    # Blender axes: suit frame (faces -Y, +Z up, +X left), drone LOCAL frame (+Y nose, +Z dorsal, -Z dock face)
+    R = lambda v: [round(c, 5) for c in v]
+    report['runtime_layout'] = dict(
+        frames='Blender: suit frame (faces -Y, +Z up, +X left, origin between the feet); drone LOCAL (+Y nose, +Z dorsal, -Z dock face)',
+        drone_com_local=R(com), drone_nozzles=[dict(name=n, p=R(p), e=R(e), inhibit_near_suit=inh) for n, p, e, _, inh in dn_local],
+        suit_nozzles=[dict(name=n, p=R(p), e=R(e)) for n, p, e in suit_noz], suit_pack_centre=R(module['pc']), suit_body_com=R(body_com),
+        dock_matrix=[R(row) for row in dock_w], dock_centre=R(dock_w.translation))
     ok6 = lambda a: ev.axes_ok(a) == 12
     check('authority_free', ok6(study['authority_drone_free']), {k: v['max'] for k, v in study['authority_drone_free'].items()}, 'drone alone: all 12 pure axes')
     check('authority_docked', ok6(study['authority_docked']), {k: v['max'] for k, v in study['authority_docked'].items()}, 'docked (the drone\'s near-suit set flies the pair, suit reserve isolated): all 12')
