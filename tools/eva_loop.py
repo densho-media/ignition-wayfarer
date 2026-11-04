@@ -32,7 +32,7 @@ SCRIPTS = {'build': ['src/wayfarer/build/eva_suit.py'], 'drone': ['src/wayfarer/
            'export': ['src/wayfarer/export/eva_gltf.py'], 'godot': ['godot/scripts/check_eva.gd'], 'route': ['src/wayfarer/eva_route.py'],
            'ops': ['src/wayfarer/eva_ops.py']}
 STAGES = list(SCRIPTS)
-SLOW = {'fit': 4}                    # coverage samples every frame and every body vertex of both suits: about an hour on 4 cores
+SLOW = {'fit': 6}                    # coverage samples every frame and every body vertex of both suits: 1-2 hours on 4 cores
 
 
 def run(root, renders=True, route=True, only=None):
