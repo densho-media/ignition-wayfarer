@@ -790,6 +790,13 @@ def disruptor_flat(s, layer):
     return dict(loops=loops, x_aft=layer['aft_hub'], x_front=layer['front_hub'])
 
 
+def window_radius(s, w, p):
+    """Window cartridge radius: the unvignetted footprint at its station (aperture radius growing to the well lip over the well depth), never less
+    than the aperture plus the eyelid overlap. Owner 2026-11-05: widen it so its edge no longer vignettes the outer field (1.30 -> 1.35 m)."""
+    r_ap = s['eye']['aperture']['value']/2; depth = w['x1']-w['x0']
+    return max(r_ap+p['crown_shutter_overlap_m'], r_ap+(w['radius']-r_ap)*p['eye_window_inset_m']/depth)
+
+
 def eye_shutters(s):
     """FD-E03 / AG-007 armoured eyelids (PROTOTYPE): per well, two leaves on the shield face, between the skin and the disruptor layer, that part
     tangentially by half the leaf width. Closed, they meet on the well axis and overlap the well lip by crown_shutter_overlap_m; open, each leaf lies
@@ -810,7 +817,7 @@ def eye_shutters(s):
         out.append(dict(index=w['index'], label=w['label'], azimuth=az, tilt=tilt, x=x, y=w['y'], z=w['z'], thickness=th, radial=side, tangential=half,
                         closed_t=closed, open_t=opened, travel=opened-closed, seam_overlap=seam, axial_step=th,
                         leaves=[dict(name=f"EYE_Shutter_{w['index']:02}_{k}", sign=sg, axial=ax) for k, sg, ax in (('A', 1.0, 0.0), ('B', -1.0, th))],
-                        window=dict(name=f"EYE_Window_{w['index']:02}", x=w['x0']+p['eye_window_inset_m'], radius=s['eye']['aperture']['value']/2+ov,
+                        window=dict(name=f"EYE_Window_{w['index']:02}", x=w['x0']+p['eye_window_inset_m'], radius=window_radius(s, w, p),
                                     thickness=p['eye_window_thickness_m'])))
     return out
 

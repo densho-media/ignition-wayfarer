@@ -40,8 +40,8 @@
   "status": "PROTOTYPE; field, coil, power OPEN (OD-018)"
  },
  "window_cartridge": {
-  "radius_m": 1.3,
+  "radius_m": 1.35,
   "unvignetted_footprint_m": 1.35,
-  "decision": "kept 1.30 m pending owner"
+  "decision": "widened to the unvignetted footprint, owner 2026-11-05"
  }
 }

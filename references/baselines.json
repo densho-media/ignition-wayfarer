@@ -1,6 +1,6 @@
 {
   "purpose": "Current production geometry baseline for tools/pipeline.py fingerprint diffs. Written only by `tools/workflow.py baseline`.",
-  "current": "references/baseline_hero_camera_lighting",
+  "current": "references/baseline_forward_shield_eye_window",
   "history": [
     {
       "baseline": "references/baseline_fwd_eye_r30_hex",
@@ -77,6 +77,10 @@
     {
       "baseline": "references/baseline_forward_shield_eye",
       "replaced_utc": "2026-11-03T07:33:48Z"
+    },
+    {
+      "baseline": "references/baseline_hero_camera_lighting",
+      "replaced_utc": "2026-11-05T07:44:26Z"
     }
   ]
 }

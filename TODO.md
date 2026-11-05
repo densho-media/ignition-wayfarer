@@ -49,8 +49,7 @@ close-up, regression check, MODEL/TODO and Model Status update.
   (`p4_review.py` ram_face, ram_close) and a desktop-GPU frame-time comparison of the Brow view with `pattern` fractal_hex against running_bond.
 - [ ] **FSE — Forward shield and EYE refinement, remainder (built and squashed 2026-11-03; docs/MODEL.md "Bumper facing and EYE well
   hardware", evidence `references/evidence/forward_shield_eye.json`).** **Open:** `runtime-export` (the Godot fractal shader now lands on
-  the plates; the backing is plain); the window cartridge radius 1.30 m is under the 1.35 m unvignetted footprint at its station and
-  vignettes the outer field slightly (kept at 1.30 m, owner-shaped FD-E03; widening needs the owner); plate/layer material, thickness and
+  the plates; the backing is plain); plate/layer material, thickness and
   mass (OD-014); EYE lance field strength, coils and power (OD-018).
 - [ ] **MOD — Modular detail (docs/MODULES.md).** Every production assembly is a detail pack (phase 2, 2026-10-23: `m7_spine`,
   `ring_a_transfer`, `m8_forward` migrated with geometry, motion, runtime and pixel equivalence), packs carry their own contracts, and
