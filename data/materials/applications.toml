@@ -1,0 +1,677 @@
+# Purpose–Material Design System (PMDS): applications (docs/MATERIALS.md).
+# An application ties purposes and candidate materials to an existing Wayfarer component. Its ID is stable: a material change edits the
+# layer, never the application or the component. Layers run from the outer (visible or plasma/space-facing) face inward.
+#
+# selection: CANDIDATE (one of several under evaluation), PREFERRED (the current working pick, still not canon), REJECTED. No application
+# is SELECTED: a selection becomes canon only in the Drive workbooks (e.g. OD-024, OD-025, OD-026), never here.
+# geometry: DRAWN (an existing generated mesh represents this layer), NOT_DRAWN (the layer exists in the stack only; no dimensions are
+# approved, so none is invented), PROTOTYPE_STUDY (drawn only in a work/ study, outside the generators).
+# bindings: which generated display material (WF_MAT_<material>, in <asset>) carries which layer. A binding names a material that the
+# generator already makes; the build refuses a binding it cannot find. One display material carries one layer of one application per asset.
+# requirements: the operating conditions a candidate must be evaluated against; an unknown one stays OPEN with its source ref.
+schema_version = 1
+
+# --- 1. Plasma armor: the first complete integration (proof of concept) -------------------------------------------------------------------
+[application.APP-DRV-PFC]
+title = "Fusion-core and throat plasma-facing armor"
+component_ids = ["WF.DRIVE.PFC.CORE", "WF.DRIVE.PFC.THROAT"]
+chain = "fuel: plasma confinement"
+purposes = ["P07", "P08", "P02", "P12", "P14"]
+canon_ref = "plasma_facing_material"
+open_refs = ["od_025"]
+engineering_status = "PROTOTYPE"
+note = "ITER-inspired reference stack (W monoblock on a Cu interlayer and a CuCrZr cooling tube on a steel support), consistent with the WORKING architecture 'graded tungsten/UHTC hot face, high-conductivity spreader, actively cooled backing' (05!A39). Exact material, heat flux, erosion, module size and interval stay OPEN (OD-025). Not a Wayfarer material selection."
+requirements = { heat_flux = "OPEN od_025", erosion_rate = "OPEN od_025", replacement_interval = "OPEN od_025", coolant = "OPEN od_025", neutron_fluence = "OPEN od_025" }
+
+[[application.APP-DRV-PFC.layers]]
+role = "hot_face"
+purposes = ["P07"]
+material = "MAT-W"
+alternatives = ["MAT-W-ADV01", "MAT-HFC", "MAT-W-FIJI01"]
+appearance = "APP-W-PLASMA-EXPOSED"
+selection = "PREFERRED"
+geometry = "DRAWN"
+note = "the existing PFC tile meshes are the hot-face envelope"
+
+[[application.APP-DRV-PFC.layers]]
+role = "thermal_interface"
+purposes = ["P08"]
+material = "MAT-CU-OF"
+alternatives = []
+appearance = "APP-CU-BARE"
+selection = "CANDIDATE"
+geometry = "NOT_DRAWN"
+
+[[application.APP-DRV-PFC.layers]]
+role = "cooling_conduit"
+purposes = ["P02", "P12", "P08"]
+material = "MAT-CUCRZR"
+alternatives = ["MAT-SS-316L"]
+appearance = "APP-CUCRZR-MACHINED"
+selection = "CANDIDATE"
+geometry = "NOT_DRAWN"
+note = "CuCrZr's long-term window (about 420-620 K) fixes the coolant temperature band; a hotter coolant needs another conduit material"
+
+[[application.APP-DRV-PFC.layers]]
+role = "support"
+purposes = ["P14"]
+material = "MAT-SS-316L"
+alternatives = ["MAT-INCONEL-718", "MAT-SICSIC"]
+appearance = "APP-SS-PASSIVATED"
+selection = "CANDIDATE"
+geometry = "NOT_DRAWN"
+
+[[application.APP-DRV-PFC.bindings]]
+asset = "PROPULSION"
+material = "PFC_Refractory_Liner"
+layer = "hot_face"
+
+[application.APP-NOZ-STRIKE]
+title = "Nozzle strike modules (local plasma-contact armor)"
+component_ids = ["PFC_NOZZLE_STRIKE_*"]
+chain = "reaction mass: magnetic exhaust acceleration"
+purposes = ["P07", "P08", "P02", "P12", "P14"]
+canon_ref = "plasma_facing_shell"
+open_refs = ["od_025"]
+engineering_status = "PROTOTYPE"
+note = "Q40: magnetic standoff first; local, actively cooled, replaceable W/UHTC strike modules only where plasma may contact. Same reference stack as APP-DRV-PFC; contact zones, heat flux and life OPEN."
+requirements = { heat_flux = "OPEN od_025", contact_zones = "OPEN od_025", replacement_interval = "OPEN od_025" }
+
+[[application.APP-NOZ-STRIKE.layers]]
+role = "hot_face"
+purposes = ["P07"]
+material = "MAT-W"
+alternatives = ["MAT-W-ADV01", "MAT-HFC"]
+appearance = "APP-W-MACHINED"
+selection = "CANDIDATE"
+geometry = "DRAWN"
+note = "exhaust-side contact only; less helium exposure than the core, shown machined"
+
+[[application.APP-NOZ-STRIKE.layers]]
+role = "cooling_conduit"
+purposes = ["P02", "P12"]
+material = "MAT-CUCRZR"
+alternatives = []
+appearance = "APP-CUCRZR-MACHINED"
+selection = "CANDIDATE"
+geometry = "NOT_DRAWN"
+
+[[application.APP-NOZ-STRIKE.bindings]]
+asset = "NOZZLE"
+material = "PFC_Refractory"
+layer = "hot_face"
+
+# --- 2. Magnetic confinement and nozzle coils, their supports ---------------------------------------------------------------------------
+[application.APP-NOZ-COIL]
+title = "Nozzle HTS coil winding packs"
+component_ids = ["Nozzle coils (drive_manifold.nozzle_coils)"]
+chain = "electrical and magnetic: magnet coils"
+purposes = ["P05", "P09"]
+canon_ref = "hts_conductor"
+open_refs = ["od_024"]
+engineering_status = "PROTOTYPE"
+note = "WORKING conductor: REBCO-descended nanoengineered HTS with engineered flux pinning (05!A37:A38). Current density, temperature, stress, quench and radiation lifetime OPEN (OD-024)."
+requirements = { operating_temperature = "OPEN od_024", current_density = "OPEN od_024", neutron_fluence = "OPEN od_024", stress = "OPEN od_024" }
+
+[[application.APP-NOZ-COIL.layers]]
+role = "conductor"
+purposes = ["P05"]
+material = "MAT-REBCO-APC01"
+alternatives = ["MAT-REBCO"]
+appearance = "APP-REBCO-WINDING"
+selection = "PREFERRED"
+geometry = "DRAWN"
+note = "the ring tubes stand for the winding packs"
+
+[[application.APP-NOZ-COIL.layers]]
+role = "stabilizer"
+purposes = ["P09"]
+material = "MAT-CU-OF"
+alternatives = []
+appearance = "APP-CU-BARE"
+selection = "CANDIDATE"
+geometry = "NOT_DRAWN"
+
+[[application.APP-NOZ-COIL.bindings]]
+asset = "NOZZLE"
+material = "Structure"
+layer = "conductor"
+
+[application.APP-NOZ-CASE]
+title = "Nozzle coil casings, flanges and yokes (electromagnetic-force support)"
+component_ids = ["Nozzle_Casing_Walls", "Nozzle_Casing_Flanges", "Nozzle yoke rings"]
+chain = "electrical and magnetic: magnetic support structures"
+purposes = ["P06", "P14", "P04"]
+canon_ref = "hts_coil_architecture"
+open_refs = ["od_024"]
+engineering_status = "PROTOTYPE"
+note = "Warm casing construction is a PROTOTYPE display; cold-mass supports, vacuum gap and loads OPEN (OD-024). 316LN is the ITER magnet-case reference."
+requirements = { coil_loads = "OPEN od_024", case_temperature = "OPEN od_024" }
+
+[[application.APP-NOZ-CASE.layers]]
+role = "case"
+purposes = ["P06", "P14", "P04"]
+material = "MAT-SS-316LN"
+alternatives = ["MAT-INCONEL-718"]
+appearance = "APP-SS316LN-CASE"
+selection = "CANDIDATE"
+geometry = "DRAWN"
+
+[[application.APP-NOZ-CASE.bindings]]
+asset = "NOZZLE"
+material = "NozzleCasing"
+layer = "case"
+
+[[application.APP-NOZ-CASE.bindings]]
+asset = "NOZZLE"
+material = "NozzleCasingJoint"
+layer = "case"
+
+[[application.APP-NOZ-CASE.bindings]]
+asset = "PROPULSION"
+material = "NozzleYoke"
+layer = "case"
+
+[application.APP-NOZ-PICKUP]
+title = "Nozzle pickup lugs (thrust load path)"
+component_ids = ["Nozzle_Pickup_Lug_*", "Nozzle_Ring_Lug_*"]
+chain = "electrical and magnetic: magnetic support structures"
+purposes = ["P14", "P06"]
+canon_ref = "hts_coil_architecture"
+open_refs = ["od_024"]
+engineering_status = "PROTOTYPE"
+note = "Pin-jointed, statically determinate seats; bearing, pin and loads not designed."
+requirements = { thrust_load = "OPEN od_024", temperature = "OPEN od_024" }
+
+[[application.APP-NOZ-PICKUP.layers]]
+role = "lug"
+purposes = ["P14", "P06"]
+material = "MAT-INCONEL-718"
+alternatives = ["MAT-TI6AL4V", "MAT-SS-316LN"]
+appearance = "APP-INCONEL"
+selection = "CANDIDATE"
+geometry = "DRAWN"
+
+[[application.APP-NOZ-PICKUP.bindings]]
+asset = "PROPULSION"
+material = "NozzlePickupLug"
+layer = "lug"
+
+[application.APP-NOZ-SERVICES]
+title = "Nozzle services: HTS current leads, coil cryogen and strike-module coolant lines"
+component_ids = ["Nozzle service header lines"]
+chain = "electrical distribution; cooling circuits"
+purposes = ["P09", "P02", "P12", "P10"]
+canon_ref = "hts_coil_architecture"
+open_refs = ["od_024", "od_025"]
+engineering_status = "PROTOTYPE"
+note = "Leads, cryogen and coolant are distinct circuits; routing beyond the thrust hub, currents, temperatures and flows OPEN."
+requirements = { lead_current = "OPEN od_024", cryogen = "OPEN od_024", coolant = "OPEN od_025" }
+
+[[application.APP-NOZ-SERVICES.layers]]
+role = "current_lead"
+purposes = ["P09"]
+material = "MAT-CU-OF"
+alternatives = ["MAT-REBCO"]
+appearance = "APP-CU-BARE"
+selection = "CANDIDATE"
+geometry = "DRAWN"
+
+[[application.APP-NOZ-SERVICES.layers]]
+role = "cryogen_line"
+purposes = ["P02", "P10"]
+material = "MAT-SS-316L"
+alternatives = []
+appearance = "APP-BETA-CLOTH-LINE"
+selection = "CANDIDATE"
+geometry = "DRAWN"
+
+[[application.APP-NOZ-SERVICES.layers]]
+role = "coolant_line"
+purposes = ["P12", "P02"]
+material = "MAT-SS-316L"
+alternatives = ["MAT-INCONEL-718"]
+appearance = "APP-SS-PASSIVATED"
+selection = "CANDIDATE"
+geometry = "DRAWN"
+
+[[application.APP-NOZ-SERVICES.bindings]]
+asset = "PROPULSION"
+material = "NozzleServiceLeads"
+layer = "current_lead"
+
+[[application.APP-NOZ-SERVICES.bindings]]
+asset = "PROPULSION"
+material = "NozzleServiceCryogen"
+layer = "cryogen_line"
+
+[[application.APP-NOZ-SERVICES.bindings]]
+asset = "PROPULSION"
+material = "NozzleServiceCoolant"
+layer = "coolant_line"
+
+# --- 3. Fusion fuel and reaction mass: storage, transport, injection --------------------------------------------------------------------
+[application.APP-STO-FUEL-VESSEL]
+title = "D and 3He fusion-fuel vessels"
+component_ids = ["Fuel vessels (fuel_storage.tanks, species deuterium and helium-3)"]
+chain = "fuel: storage"
+purposes = ["P01", "P04", "P10"]
+canon_ref = "cryogenic_feed_interface"
+open_refs = ["od_026"]
+engineering_status = "PROTOTYPE"
+note = "Fusion fuel is separate from hydrogen reaction mass. The first-order sizing already uses Al-Li 2195 shells and MLI ([physics.fuel_loads] shell, mli; PROTOTYPE)."
+requirements = { storage_temperature = "PROTOTYPE fuel_loads.storage_K", boil_off = "OPEN od_026", meop = "PROTOTYPE fuel_loads.shell.meop_Pa" }
+
+[[application.APP-STO-FUEL-VESSEL.layers]]
+role = "insulation"
+purposes = ["P10"]
+material = "MAT-MLI-AL"
+alternatives = []
+appearance = "APP-MLI-ALUMINIZED"
+selection = "PREFERRED"
+geometry = "DRAWN"
+note = "the vessel surface shows the outer blanket"
+
+[[application.APP-STO-FUEL-VESSEL.layers]]
+role = "pressure_shell"
+purposes = ["P01", "P04"]
+material = "MAT-ALLI-2195"
+alternatives = ["MAT-AL-2219", "MAT-SS-316L"]
+appearance = "APP-SS-PASSIVATED"
+selection = "PREFERRED"
+geometry = "NOT_DRAWN"
+note = "3He at about 3 K: shell toughness at that temperature is OPEN"
+
+[[application.APP-STO-FUEL-VESSEL.bindings]]
+asset = "STORAGE"
+material = "Fuel_D2"
+layer = "insulation"
+
+[[application.APP-STO-FUEL-VESSEL.bindings]]
+asset = "STORAGE"
+material = "Fuel_He3"
+layer = "insulation"
+
+[application.APP-STO-H2-VESSEL]
+title = "Hydrogen reaction-mass vessels"
+component_ids = ["Fuel vessels (fuel_storage.tanks, species hydrogen)"]
+chain = "reaction mass: storage"
+purposes = ["P01", "P04", "P10"]
+canon_ref = "cryogenic_feed_interface"
+open_refs = ["od_026"]
+engineering_status = "PROTOTYPE"
+note = "Hydrogen reaction mass, a separate inventory from the D-3He fuel."
+requirements = { storage_temperature = "PROTOTYPE fuel_loads.storage_K", boil_off = "OPEN od_026" }
+
+[[application.APP-STO-H2-VESSEL.layers]]
+role = "insulation"
+purposes = ["P10"]
+material = "MAT-MLI-AL"
+alternatives = []
+appearance = "APP-MLI-ALUMINIZED"
+selection = "PREFERRED"
+geometry = "DRAWN"
+
+[[application.APP-STO-H2-VESSEL.layers]]
+role = "pressure_shell"
+purposes = ["P01", "P04"]
+material = "MAT-ALLI-2195"
+alternatives = ["MAT-AL-2219", "MAT-CFRP"]
+appearance = "APP-SS-PASSIVATED"
+selection = "PREFERRED"
+geometry = "NOT_DRAWN"
+
+[[application.APP-STO-H2-VESSEL.bindings]]
+asset = "STORAGE"
+material = "Fuel_H2"
+layer = "insulation"
+
+[application.APP-STO-SUPPORT]
+title = "Tank-farm skirts (low-conductance supports)"
+component_ids = ["Fuel_Skirt_*"]
+chain = "fuel and reaction mass: storage"
+purposes = ["P14", "P10"]
+canon_ref = "fuel_loads"
+open_refs = []
+engineering_status = "PROTOTYPE"
+note = "The sizing uses CFRP struts ([physics.fuel_loads] skirt, PROTOTYPE)."
+requirements = { design_accel = "PROTOTYPE fuel_loads.design_accel_g" }
+
+[[application.APP-STO-SUPPORT.layers]]
+role = "strut"
+purposes = ["P14", "P10"]
+material = "MAT-CFRP"
+alternatives = ["MAT-TI6AL4V"]
+appearance = "APP-CFRP"
+selection = "PREFERRED"
+geometry = "DRAWN"
+
+[[application.APP-STO-SUPPORT.bindings]]
+asset = "STORAGE"
+material = "Fuel_Skirt_CFRP"
+layer = "strut"
+
+[application.APP-FEED-CRYO]
+title = "Cryogenic feed and tank transfer lines"
+component_ids = ["CRYO_FEED_*", "Fuel_Transfer_*"]
+chain = "fuel and reaction mass: transport"
+purposes = ["P02", "P10"]
+canon_ref = "cryogenic_feed_interface"
+open_refs = ["od_026"]
+engineering_status = "PROTOTYPE"
+note = "Cryogenic plumbing, not plasma transport. Vacuum-jacketed lines; temperatures, layout, boil-off and fault isolation OPEN (OD-026)."
+requirements = { fluid_temperature = "OPEN od_026", heat_leak = "OPEN od_026", radiation_heating = "OPEN od_026" }
+
+[[application.APP-FEED-CRYO.layers]]
+role = "jacket"
+purposes = ["P10", "P02"]
+material = "MAT-MLI-AL"
+alternatives = []
+appearance = "APP-BETA-CLOTH-LINE"
+selection = "CANDIDATE"
+geometry = "DRAWN"
+
+[[application.APP-FEED-CRYO.layers]]
+role = "inner_line"
+purposes = ["P02"]
+material = "MAT-SS-316L"
+alternatives = []
+appearance = "APP-SS-PASSIVATED"
+selection = "PREFERRED"
+geometry = "NOT_DRAWN"
+
+[[application.APP-FEED-CRYO.bindings]]
+asset = "STORAGE"
+material = "CryoFeed"
+layer = "jacket"
+
+[[application.APP-FEED-CRYO.bindings]]
+asset = "STORAGE"
+material = "Fuel_Line_H2"
+layer = "jacket"
+
+[[application.APP-FEED-CRYO.bindings]]
+asset = "STORAGE"
+material = "Fuel_Line_D2"
+layer = "jacket"
+
+[[application.APP-FEED-CRYO.bindings]]
+asset = "STORAGE"
+material = "Fuel_Line_He3"
+layer = "jacket"
+
+[application.APP-DRV-H2-INJECT]
+title = "Hydrogen reaction-mass injection ring"
+component_ids = ["H2_INJECTION ring (drive_hot_section.h2_injection)"]
+chain = "reaction mass: injection"
+purposes = ["P03", "P02"]
+canon_ref = "cryogenic_feed_interface"
+open_refs = ["od_026"]
+engineering_status = "PROTOTYPE"
+note = "Wetted by cold hydrogen beside a hot, radiation-loaded region: an austenitic stainless is the hydrogen-compatible reference; Inconel 718 is listed against its hydrogen embrittlement. Ports, mixing and heat load OPEN."
+requirements = { heat_load = "OPEN od_026", port_count = "OPEN od_026" }
+
+[[application.APP-DRV-H2-INJECT.layers]]
+role = "manifold"
+purposes = ["P03", "P02"]
+material = "MAT-SS-316L"
+alternatives = ["MAT-INCONEL-718"]
+appearance = "APP-SS-PASSIVATED"
+selection = "PREFERRED"
+geometry = "DRAWN"
+
+[[application.APP-DRV-H2-INJECT.bindings]]
+asset = "PROPULSION"
+material = "H2InjectionRing"
+layer = "manifold"
+
+# --- 4. Radiation shielding -------------------------------------------------------------------------------------------------------------
+[application.APP-SHLD-SHADOW]
+title = "Reactor shadow shield"
+component_ids = ["Reactor_Shadow_Shield_Envelope"]
+chain = "radiation and thermal: shielding and absorption"
+purposes = ["P11", "P12", "P14", "P04"]
+canon_ref = "plasma_facing_shell"
+open_refs = []
+engineering_status = "OPEN"
+note = "Layered reference: tungsten against photons, a hydride against fast neutrons, boron carbide against thermal neutrons, in steel cans. D-3He emits few neutrons (D-D side reactions) but not none. Shielding converts the absorbed radiation into heat that a cooling path must remove. Thickness and layering not designed; the envelope is the only geometry."
+requirements = { source_spectrum = "OPEN", deposited_heat = "OPEN", dose_limits = "OPEN" }
+
+[[application.APP-SHLD-SHADOW.layers]]
+role = "can"
+purposes = ["P14", "P04"]
+material = "MAT-SS-316L"
+alternatives = []
+appearance = "APP-SHIELD-CAN"
+selection = "CANDIDATE"
+geometry = "DRAWN"
+
+[[application.APP-SHLD-SHADOW.layers]]
+role = "gamma_attenuator"
+purposes = ["P11"]
+material = "MAT-W"
+alternatives = []
+appearance = "APP-W-MACHINED"
+selection = "CANDIDATE"
+geometry = "NOT_DRAWN"
+
+[[application.APP-SHLD-SHADOW.layers]]
+role = "neutron_moderator"
+purposes = ["P11"]
+material = "MAT-LIH"
+alternatives = ["MAT-HDPE"]
+appearance = "APP-SHIELD-CAN"
+selection = "CANDIDATE"
+geometry = "NOT_DRAWN"
+
+[[application.APP-SHLD-SHADOW.layers]]
+role = "neutron_absorber"
+purposes = ["P11"]
+material = "MAT-B4C"
+alternatives = []
+appearance = "APP-SHIELD-CAN"
+selection = "CANDIDATE"
+geometry = "NOT_DRAWN"
+
+[[application.APP-SHLD-SHADOW.bindings]]
+asset = "SHIELDING"
+material = "Shield"
+layer = "can"
+
+# --- 5. Heat rejection: radiators and the thermal bulkhead -----------------------------------------------------------------------------
+[application.APP-RAD-HOT]
+title = "Hot (1800 K) radiator blades"
+component_ids = ["Radiator blade sectors (WF_RADIATOR)"]
+chain = "radiation and thermal: radiators"
+purposes = ["P13", "P08", "P12", "P14"]
+canon_ref = "radiator_nano_stack"
+open_refs = []
+engineering_status = "WORKING"
+note = "WORKING layer order (40_THERMAL B59): nanophotonic emissive skin, transition layer, sensor mesh, spreader, structural cell, coolant/heat-pipe network. No layer thickness or property is sourced; the physical area and emissivity stay as the Drive canon sets them. At 1800 K even Nb-1Zr is beyond its loop limit: the heat-pipe material is OPEN."
+requirements = { temperature_K = "WORKING radiators.temperature", emissivity = "WORKING radiators.emissivity", heat_pipe_material = "OPEN" }
+
+[[application.APP-RAD-HOT.layers]]
+role = "emissive_skin"
+purposes = ["P13"]
+material = "MAT-RAD-NPE01"
+alternatives = ["MAT-CC", "MAT-SIC"]
+appearance = "APP-HOT-EMITTER"
+selection = "CANDIDATE"
+geometry = "DRAWN"
+
+[[application.APP-RAD-HOT.layers]]
+role = "spreader_and_cell"
+purposes = ["P08", "P14"]
+material = "MAT-CC"
+alternatives = ["MAT-SICSIC"]
+appearance = "APP-CC"
+selection = "CANDIDATE"
+geometry = "NOT_DRAWN"
+
+[[application.APP-RAD-HOT.layers]]
+role = "heat_pipe"
+purposes = ["P12"]
+material = "MAT-MORE"
+alternatives = ["MAT-NB1ZR"]
+appearance = "APP-INCONEL"
+selection = "CANDIDATE"
+geometry = "NOT_DRAWN"
+note = "Nb-1Zr listed only to show it is too cold-rated (about 1350 K) for an 1800 K loop"
+
+[[application.APP-RAD-HOT.bindings]]
+asset = "RADIATOR"
+material = "RadiatorA"
+layer = "emissive_skin"
+
+[[application.APP-RAD-HOT.bindings]]
+asset = "RADIATOR"
+material = "RadiatorB"
+layer = "emissive_skin"
+
+[application.APP-RAD-WARMLOW]
+title = "WARM and LOW radiator sheets"
+component_ids = ["Radiator_Zone_* sheets"]
+chain = "radiation and thermal: radiators"
+purposes = ["P13"]
+canon_ref = "radiator_zoning"
+open_refs = []
+engineering_status = "PROTOTYPE"
+note = "The coating is the spec's own record ([radiators.zones] coating: AZ-93 class, alpha 0.15-0.30, eps 0.91); the substrate is OPEN."
+requirements = { emissivity = "PROTOTYPE radiators.zones.emissivity" }
+
+[[application.APP-RAD-WARMLOW.layers]]
+role = "coating"
+purposes = ["P13"]
+material = "MAT-AZ93"
+alternatives = []
+appearance = "APP-AZ93-WHITE"
+selection = "PREFERRED"
+geometry = "DRAWN"
+
+[[application.APP-RAD-WARMLOW.bindings]]
+asset = "THERMAL"
+material = "RadiatorZoneWarmA"
+layer = "coating"
+
+[[application.APP-RAD-WARMLOW.bindings]]
+asset = "THERMAL"
+material = "RadiatorZoneWarmB"
+layer = "coating"
+
+[[application.APP-RAD-WARMLOW.bindings]]
+asset = "THERMAL"
+material = "RadiatorZoneLowA"
+layer = "coating"
+
+[[application.APP-RAD-WARMLOW.bindings]]
+asset = "THERMAL"
+material = "RadiatorZoneLowB"
+layer = "coating"
+
+[application.APP-THM-BULKHEAD]
+title = "V-groove thermal bulkhead (radiation shield foils and C/C truss)"
+component_ids = ["Radiator_Bulkhead_*"]
+chain = "radiation and thermal: radiators"
+purposes = ["P10", "P13", "P14"]
+canon_ref = "radiator_zoning"
+open_refs = []
+engineering_status = "PROTOTYPE"
+note = "Layer 1 refractory Mo/TZM (about 1200 K), layer 2 Ti (about 800 K), layer 3 gold (about 500 K), on near-zero-CTE C/C battens and trusses ([radiators.zones.bulkhead], PROTOTYPE)."
+requirements = { layer_temperatures = "PROTOTYPE radiators.zones.bulkhead" }
+
+[[application.APP-THM-BULKHEAD.layers]]
+role = "foil_layer_1"
+purposes = ["P10", "P13"]
+material = "MAT-TZM"
+alternatives = []
+appearance = "APP-FOIL-MO"
+selection = "PREFERRED"
+geometry = "DRAWN"
+
+[[application.APP-THM-BULKHEAD.layers]]
+role = "foil_layer_2"
+purposes = ["P10", "P13"]
+material = "MAT-TI6AL4V"
+alternatives = ["MAT-TI-CP", "MAT-INCONEL-718"]
+appearance = "APP-FOIL-TI"
+selection = "PREFERRED"
+geometry = "DRAWN"
+
+[[application.APP-THM-BULKHEAD.layers]]
+role = "foil_layer_3"
+purposes = ["P10", "P13"]
+material = "MAT-AU"
+alternatives = []
+appearance = "APP-FOIL-AU"
+selection = "PREFERRED"
+geometry = "DRAWN"
+
+[[application.APP-THM-BULKHEAD.layers]]
+role = "truss"
+purposes = ["P14"]
+material = "MAT-CC"
+alternatives = []
+appearance = "APP-CC"
+selection = "PREFERRED"
+geometry = "DRAWN"
+
+[[application.APP-THM-BULKHEAD.bindings]]
+asset = "THERMAL"
+material = "BulkheadFoilMoA"
+layer = "foil_layer_1"
+
+[[application.APP-THM-BULKHEAD.bindings]]
+asset = "THERMAL"
+material = "BulkheadFoilMoB"
+layer = "foil_layer_1"
+
+[[application.APP-THM-BULKHEAD.bindings]]
+asset = "THERMAL"
+material = "BulkheadFoilTiA"
+layer = "foil_layer_2"
+
+[[application.APP-THM-BULKHEAD.bindings]]
+asset = "THERMAL"
+material = "BulkheadFoilTiB"
+layer = "foil_layer_2"
+
+[[application.APP-THM-BULKHEAD.bindings]]
+asset = "THERMAL"
+material = "BulkheadFoilAuA"
+layer = "foil_layer_3"
+
+[[application.APP-THM-BULKHEAD.bindings]]
+asset = "THERMAL"
+material = "BulkheadFoilAuB"
+layer = "foil_layer_3"
+
+[[application.APP-THM-BULKHEAD.bindings]]
+asset = "THERMAL"
+material = "BulkheadTrussCC"
+layer = "truss"
+
+[[application.APP-THM-BULKHEAD.bindings]]
+asset = "THERMAL"
+material = "BulkheadBatten"
+layer = "truss"
+
+# --- 6. Recorded but not yet bound: requirements unknown, no display material is assigned ------------------------------------------------
+[application.APP-THM-HOT-LOOP]
+title = "Hot loop coolant trunks (waste-heat transport to the 1800 K blades)"
+component_ids = ["coolant_proxy trunks"]
+chain = "radiation and thermal: heat transport"
+purposes = ["P12", "P02"]
+canon_ref = "radiator_nano_stack"
+open_refs = []
+engineering_status = "OPEN"
+note = "Working fluid, pressure and wall temperature unknown. The display material 'Coolant' is shared by loops of different temperature, so no layer is bound until the loops are separated."
+requirements = { working_fluid = "OPEN", wall_temperature = "OPEN" }
+
+[[application.APP-THM-HOT-LOOP.layers]]
+role = "trunk_wall"
+purposes = ["P12", "P02"]
+material = "MAT-MORE"
+alternatives = ["MAT-NB1ZR", "MAT-INCONEL-718"]
+appearance = "APP-INCONEL"
+selection = "CANDIDATE"
+geometry = "NOT_DRAWN"

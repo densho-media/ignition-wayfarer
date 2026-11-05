@@ -1,0 +1,1175 @@
+# Purpose–Material Design System (PMDS): the material master catalogue (docs/MATERIALS.md).
+#
+# An engineering reference and candidate-selection table, never canon. The Drive workbooks stay the authority for the spacecraft; a value
+# here reaches a Wayfarer calculation only through material_physics.get_property, which carries its unit, basis, confidence, source,
+# verification and validity range, and refuses to extrapolate.
+#
+# Rules (materials.validate enforces them):
+# - Every material states every CORE property (materials.CORE) either as a property or in its `open` list: missing data stays explicitly
+#   unresolved, never zero or a convenient constant.
+# - A property is a point (`value`, `at_K`, optional `valid_K`), a range across grades or sources (`min`, `max`), or a temperature table
+#   (`table_K`, `values`), always with `unit`, `basis`, `confidence` and `source`. A point without `valid_K` holds only at `at_K`.
+# - basis: MEASURED, HANDBOOK, TYPICAL (a typical product value), SPECIFICATION_MINIMUM (an acceptance minimum, not a typical value),
+#   ESTIMATE, THEORETICAL (from composition or first principles), FICTIONAL (Level C only).
+# - confidence: HIGH, MEDIUM, LOW, the scientific certainty of the value. Verification is the evidence for the number (materials.VERIFICATION):
+#   a reference gives the default for the numbers citing it (TRANSCRIBED, or UNVERIFIED for a source without a named table); a property may
+#   be PRIMARY_VERIFIED or SECONDARY_VERIFIED only with `verified` (what, against what, when), `verified_against` and `condition` (grade,
+#   form, temper, irradiation, test condition). Nothing below SECONDARY_VERIFIED is fit for canon.
+# - Service limits state `rating` (SCREENING_ESTIMATE or LIFETIME_RATED); `irradiation` (default UNIRRADIATED) and, for anisotropic
+#   materials, `direction` say which state of the material a number belongs to.
+# - melting_point carries `phase_change`: melting, decomposition or sublimation. It is never an operating rating: max_service_temperature
+#   is a separate, usually much lower, long-life limit, and it is OPEN where no credible long-life limit exists.
+# - Emissivity here is the physical infrared emissivity. The Blender emission shader is a display setting (appearances.toml) and never reads it.
+# - level: A existing technology, B plausible development (a variant with a parent), C speculative (fictional, a variant with a parent).
+#   A variant inherits no number from its parent except the keys it lists in `inherits`.
+schema_version = 1
+
+# ---------------------------------------------------------------------------------------------------------------------------------------
+# References
+# ---------------------------------------------------------------------------------------------------------------------------------------
+[reference.crc]
+title = "CRC Handbook of Chemistry and Physics (tables: thermal conductivity of metals, electrical resistivity of pure metals, physical constants of inorganic compounds)"
+publisher = "CRC Press"
+date = "2016 (97th edition)"
+kind = "handbook"
+verification = "TRANSCRIBED"
+
+[reference.hpl1972]
+title = "C.Y. Ho, R.W. Powell, P.E. Liley, Thermal Conductivity of the Elements, J. Phys. Chem. Ref. Data 1 (1972) 279 (NIST)"
+publisher = "NIST / AIP"
+date = "1972"
+kind = "critical review"
+url = "https://srd.nist.gov/jpcrdreprint/1.3253100.pdf"
+verification = "TRANSCRIBED"
+note = "Tungsten 300 K (174) and 1000 K (118 W/m K) matched a secondary listing during the 2026-11-04 search; the 2026-11-05 re-check could not open the reprint (srd.nist.gov is outside this session's network) and found no secondary table for the other points. TRANSCRIBED until the reprint table is read."
+
+[reference.iter_mph]
+title = "ITER Materials Properties Handbook, ITER Doc. G 74 MA 9 00-11-10 W 0.1"
+publisher = "ITER Organization"
+date = "2001"
+kind = "materials handbook"
+verification = "TRANSCRIBED"
+
+[reference.iter_cucrzr_spec]
+title = "ITER CuCrZr-IG procurement specification (ITER_D_2ABAKH): composition and minimum tensile properties"
+publisher = "ITER Organization"
+date = "v2.0"
+kind = "procurement specification"
+verification = "TRANSCRIBED"
+note = "Composition, heat treatment (solution annealed 980 C, water quench, aged 475 C for 3 h), minimum tensile properties and >= 75 % IACS conductivity at 20 C were matched against a reproduction of ITER_D_2ABAKH v2.0 found by search (2026-11-05); the document itself was not opened."
+
+[reference.hirai2016]
+title = "T. Hirai et al., Use of tungsten material for the ITER divertor, Nuclear Materials and Energy 9 (2016) 616-622"
+publisher = "Elsevier"
+date = "2016"
+kind = "journal"
+verification = "TRANSCRIBED"
+
+[reference.pitts2019]
+title = "R.A. Pitts et al., Physics basis for the first ITER tungsten divertor, Nuclear Materials and Energy 20 (2019) 100696"
+publisher = "Elsevier"
+date = "2019"
+kind = "journal"
+verification = "TRANSCRIBED"
+note = "ITER divertor targets: 10 MW/m2 steady state and 20 MW/m2 slow transients, actively water-cooled W monoblocks on CuCrZr tubes with a Cu interlayer."
+
+[reference.baldwin2008]
+title = "M.J. Baldwin, R.P. Doerner, Helium induced nanoscopic morphology on tungsten under fusion relevant plasma conditions, Nucl. Fusion 48 (2008) 035001"
+publisher = "IOP / IAEA"
+date = "2008"
+kind = "journal"
+verification = "TRANSCRIBED"
+
+[reference.neu2016]
+title = "R. Neu et al., Advanced tungsten materials for plasma-facing components of DEMO and fusion power plants, Fusion Eng. Des. 109-111 (2016) 1046"
+publisher = "Elsevier"
+date = "2016"
+kind = "journal"
+verification = "TRANSCRIBED"
+
+[reference.riesch2013]
+title = "J. Riesch et al., In situ synchrotron tomography estimation of toughening effect by semi-ductile fibre reinforcement in a tungsten-fibre-reinforced tungsten composite system, Acta Materialia 61 (2013) 7060"
+publisher = "Elsevier"
+date = "2013"
+kind = "journal"
+verification = "TRANSCRIBED"
+
+[reference.snead2007]
+title = "L.L. Snead et al., Handbook of SiC properties for fuel performance modeling, J. Nucl. Mater. 371 (2007) 329-377"
+publisher = "Elsevier"
+date = "2007"
+kind = "critical review"
+verification = "TRANSCRIBED"
+
+[reference.fahrenholtz2017]
+title = "W.G. Fahrenholtz, G.E. Hilmas, Ultra-high temperature ceramics: materials for extreme environment applications, Scripta Materialia 129 (2017) 94-99"
+publisher = "Elsevier"
+date = "2017"
+kind = "review"
+verification = "TRANSCRIBED"
+
+[reference.macmanus2004]
+title = "J.L. MacManus-Driscoll et al., Strongly enhanced current densities in superconducting coated conductors of YBa2Cu3O7-x + BaZrO3, Nature Materials 3 (2004) 439"
+publisher = "Nature"
+date = "2004"
+kind = "journal"
+verification = "TRANSCRIBED"
+
+[reference.sparc_tfmc]
+title = "Z.S. Hartwig et al., The SPARC Toroidal Field Model Coil Program, IEEE Trans. Appl. Supercond. (2024)"
+publisher = "IEEE"
+date = "2024"
+kind = "journal"
+verification = "TRANSCRIBED"
+note = "Large-bore REBCO model coil operated at about 20 T and about 20 K (2021 test)."
+
+[reference.astm_a240]
+title = "ASTM A240/A240M, chromium and chromium-nickel stainless steel plate, sheet and strip (minimum properties of 316L)"
+publisher = "ASTM International"
+date = "current edition"
+kind = "standard"
+verification = "TRANSCRIBED"
+
+[reference.asm]
+title = "ASM Handbook Vol. 1 and 2 (properties of steels, nickel, titanium and aluminium alloys) and the MMPDS design-allowables handbook"
+publisher = "ASM International / FAA"
+date = "current editions"
+kind = "handbook"
+verification = "UNVERIFIED"
+note = "A family of handbooks without a named table or edition: a number citing it is UNVERIFIED until a specific table or datasheet supports it (several were matched against datasheets: see the property's verified_against)."
+
+[reference.special_metals_718]
+title = "Special Metals Corp., INCONEL alloy 718 technical bulletin"
+publisher = "Special Metals Corporation"
+date = "manufacturer datasheet"
+kind = "manufacturer"
+verification = "TRANSCRIBED"
+
+[reference.nasa_et]
+title = "NASA Marshall Space Flight Center, Space Shuttle External Tank and Super Lightweight Tank fact sheets (Al 2219, Al-Li 2195); SLS core stage (Al 2219)"
+publisher = "NASA"
+date = "1998-2020"
+kind = "agency"
+verification = "TRANSCRIBED"
+
+[reference.caib2003]
+title = "Columbia Accident Investigation Board Report, Vol. 1 (2003): reinforced carbon-carbon (RCC) leading edge with SiC conversion coating"
+publisher = "NASA / CAIB"
+date = "2003"
+kind = "agency"
+verification = "TRANSCRIBED"
+
+[reference.welch1974]
+title = "F.H. Welch, Lithium hydride: a space age shielding material, Nuclear Engineering and Design 26 (1974) 444-460"
+publisher = "Elsevier"
+date = "1974"
+kind = "journal"
+verification = "TRANSCRIBED"
+
+[reference.angelo_buden]
+title = "J.A. Angelo, D. Buden, Space Nuclear Power (Orbit Book Co.), SNAP and SP-100 refractory-alloy / alkali-metal systems"
+publisher = "Orbit Book Company"
+date = "1985"
+kind = "book"
+verification = "TRANSCRIBED"
+
+[reference.az93]
+title = "AZ Technology AZ-93 white thermal-control coating data; the same values recorded in data/wayfarer_3d.toml [radiators.zones] coating"
+publisher = "AZ Technology / Wayfarer spec"
+date = "manufacturer datasheet"
+kind = "manufacturer"
+verification = "TRANSCRIBED"
+
+[reference.rinnerbauer2012]
+title = "V. Rinnerbauer et al., Recent developments in high-temperature photonic crystals for energy conversion, Energy Environ. Sci. 5 (2012) 8815"
+publisher = "RSC"
+date = "2012"
+kind = "review"
+verification = "TRANSCRIBED"
+
+[reference.mli_johnson]
+title = "W.L. Johnson, Thermal performance of cryogenic multilayer insulation at various layer spacings (NASA KSC Cryogenics Test Laboratory)"
+publisher = "NASA"
+date = "2010"
+kind = "agency"
+verification = "TRANSCRIBED"
+
+[reference.wayfarer_spec]
+title = "IGNITION Wayfarer parameters, data/wayfarer_3d.toml (the record named in the property's note)"
+publisher = "this repository"
+date = "current"
+kind = "project canon mirror"
+verification = "TRANSCRIBED"
+note = "The project's own parameter mirror: evidence that a value is what Wayfarer uses, never scientific evidence for the number."
+
+# Secondary references: what a property was matched against (verified_against). They never replace the property's own source.
+[reference.sec_crc_listing]
+title = "Element and compound data listings reproducing CRC Handbook values (Wikipedia infoboxes citing CRC 97th ed. and their mirrors)"
+publisher = "secondary reproduction"
+date = "read 2026-11-05"
+kind = "secondary"
+verification = "TRANSCRIBED"
+
+[reference.sec_iter_cucrzr_repro]
+title = "Search-result reproduction of the ITER CuCrZr-IG procurement specification (ITER_D_2ABAKH v2.0) tensile minima"
+publisher = "secondary reproduction"
+date = "read 2026-11-05"
+kind = "secondary"
+verification = "UNVERIFIED"
+note = "What the CuCrZr yield and UTS minima were matched against; the specification document itself was not opened, so the check is secondary."
+
+[reference.sec_ti64]
+title = "Ti-6Al-4V Grade 5 annealed datasheets: Ulbrich (ASTM B265 strip/foil) and Aerospace Metals 'Titanium Ti 6Al 4V Grade 5 Annealed'"
+publisher = "manufacturer / distributor datasheets"
+date = "read 2026-11-05"
+kind = "secondary"
+verification = "TRANSCRIBED"
+
+[reference.sec_316l]
+title = "ATI 316L product data and ICAST 'ASTM A240 UNS S31603' sheet, both quoting the ASTM A240 / ASME SA-240 minimum tensile properties"
+publisher = "manufacturer datasheets"
+date = "read 2026-11-05"
+kind = "secondary"
+verification = "TRANSCRIBED"
+
+[reference.sec_718]
+title = "NASA Materials Data Handbook, Inconel 718 (NTRS 19720022810) and distributor sheets quoting the Special Metals bulletin"
+publisher = "NASA / distributors"
+date = "read 2026-11-05"
+kind = "secondary"
+verification = "TRANSCRIBED"
+note = "Resistivity varies between sources (1.21-1.27 micro-ohm m); conductivity 0.027 cal/(cm s C) = 11.3 W/(m K)."
+
+[reference.sec_2195]
+title = "NASA Super Lightweight Tank reports on Al-Li 2195 (NTRS 20010000456, 19990041616) and supplier datasheets"
+publisher = "NASA / suppliers"
+date = "read 2026-11-05"
+kind = "secondary"
+verification = "TRANSCRIBED"
+note = "Room-temperature yield of 2195-T8 varies with product form, thickness and direction: 455-570 MPa across the sources found."
+
+[reference.sec_az93]
+title = "AZ Technology AZ-93 product listing and the Modus Advanced AZ-93 material guide (alpha_s 0.15 +- 0.02, eps_t 0.91 +- 0.02 cured, >= 5 mil)"
+publisher = "manufacturer / distributor"
+date = "read 2026-11-05"
+kind = "secondary"
+verification = "TRANSCRIBED"
+
+[reference.sec_rebco_tc]
+title = "REBCO coated-conductor study reporting Tc 89.9-93.0 K across rare-earth compositions (Ioffe Institute, j.ioffe.ru 57644); IEEE overview of YBCO (about 92 K)"
+publisher = "journal / society"
+date = "read 2026-11-05"
+kind = "secondary"
+verification = "TRANSCRIBED"
+
+[reference.sec_w_recrystallization]
+title = "ITER monoblock ELM-transient study (arXiv 2406.10435): W recrystallization threshold about 1450-2050 K depending on manufacturing; Magnum-PSI monoblock exposures"
+publisher = "arXiv / journals"
+date = "read 2026-11-05"
+kind = "secondary"
+verification = "TRANSCRIBED"
+note = "Recrystallization is a time-at-temperature budget, not a single temperature."
+
+[reference.sec_cucrzr_review]
+title = "Review of CuCrZr for fusion heat sinks (found by web search 2026-11-05, core.ac.uk 13790874; author and journal not confirmed): ITER design basis 0.3-0.5 dpa at 100-300 C, irradiation softening above 300 C, insufficient strength above 400 C unirradiated, embrittlement after irradiation at 150 C"
+publisher = "unconfirmed"
+date = "read 2026-11-05"
+kind = "secondary"
+verification = "UNVERIFIED"
+
+[reference.sec_hfc]
+title = "HfC melting-point listings: about 3900 C commonly cited; laser-heating measurement 3958 C (Imperial College, reported by the American Ceramic Society); density 12.2 g/cm3"
+publisher = "secondary"
+date = "read 2026-11-05"
+kind = "secondary"
+verification = "TRANSCRIBED"
+
+# ---------------------------------------------------------------------------------------------------------------------------------------
+# Level A: existing materials
+# ---------------------------------------------------------------------------------------------------------------------------------------
+[material.MAT-W]
+name = "Tungsten"
+level = "A"
+family = "refractory metal"
+composition = "W >= 99.94 wt% (ITER-grade)"
+form = "Powder-metallurgy rolled or forged plate, stress-relieved; in ITER monoblocks the grains run perpendicular to the plasma-facing surface"
+open = ["yield_strength", "fracture_toughness", "emissivity"]
+manufacturing = "Powder metallurgy, sintering, rolling or forging; machining by EDM and grinding."
+joining = "Bonded to copper by hot isostatic pressing, hot radial pressing or casting of an OFHC Cu interlayer (ITER monoblocks); no fusion welding in service hardware."
+availability_cost = "Industrial; moderate cost; strategic supply chain."
+repairability = "Replace as modules; local re-melting is damage, not repair."
+durability = "Long-life limit set by recrystallization, thermal-fatigue cracking, helium nanostructure and neutron embrittlement, not by melting."
+failure_mechanisms = ["recrystallization and grain growth", "thermal-fatigue cracking", "brittle fracture below the DBTT", "melting and splashing in transients", "helium bubbles and fuzz", "transmutation to Re and Os under neutrons"]
+limitations = ["brittle at room temperature", "very dense (mass)", "hard to machine and join", "oxidizes in air above about 700 K"]
+evidence_refs = ["crc", "hpl1972", "hirai2016", "pitts2019", "baldwin2008"]
+
+[material.MAT-W.properties]
+density = { value = 19250.0, unit = "kg/m3", at_K = 293.0, valid_K = [200.0, 400.0], basis = "HANDBOOK", confidence = "HIGH", source = "crc", verification = "SECONDARY_VERIFIED", verified = "19.25 g/cm3 near room temperature (19.254 at 20 C) (2026-11-05 web search)", verified_against = "sec_crc_listing", condition = "pure W, bulk, room temperature, unirradiated" }
+specific_heat = { value = 132.0, unit = "J/(kg K)", at_K = 298.0, basis = "HANDBOOK", confidence = "HIGH", source = "crc" }
+thermal_conductivity = { table_K = [300.0, 400.0, 500.0, 600.0, 800.0, 1000.0, 1200.0, 1500.0, 2000.0], values = [174.0, 159.0, 146.0, 137.0, 125.0, 118.0, 113.0, 107.0, 100.0], unit = "W/(m K)", basis = "HANDBOOK", confidence = "HIGH", source = "hpl1972", note = "pure, unirradiated; neutron transmutation and porosity lower it", irradiation = "UNIRRADIATED" }
+thermal_expansion = { value = 4.5e-6, unit = "1/K", at_K = 293.0, basis = "HANDBOOK", confidence = "HIGH", source = "crc", verification = "SECONDARY_VERIFIED", verified = "4.5 um/(m K) at 25 C (4.42e-6 at 20 C in another listing) (2026-11-05 web search)", verified_against = "sec_crc_listing", condition = "pure W, bulk, room temperature, unirradiated" }
+elastic_modulus = { value = 411.0e9, unit = "Pa", at_K = 293.0, basis = "HANDBOOK", confidence = "HIGH", source = "crc", verification = "SECONDARY_VERIFIED", verified = "411 GPa (2026-11-05 web search)", verified_against = "sec_crc_listing", condition = "pure W, bulk, room temperature, unirradiated" }
+electrical_resistivity = { value = 5.28e-8, unit = "ohm m", at_K = 293.0, basis = "HANDBOOK", confidence = "HIGH", source = "crc", verification = "SECONDARY_VERIFIED", verified = "52.8 nOhm m at 20 C (2026-11-05 web search)", verified_against = "sec_crc_listing", condition = "pure W, bulk, room temperature, unirradiated" }
+melting_point = { value = 3695.0, unit = "K", phase_change = "melting", basis = "HANDBOOK", confidence = "HIGH", source = "crc", verification = "SECONDARY_VERIFIED", verified = "3695 K (3422 C) at standard pressure (2026-11-05 web search)", verified_against = "sec_crc_listing", condition = "pure W" }
+max_service_temperature = { min = 1300.0, max = 1600.0, unit = "K", basis = "ESTIMATE", confidence = "LOW", source = "hirai2016", rating = "SCREENING_ESTIMATE", verification = "UNVERIFIED", note = "Screening threshold for long-exposure recrystallization; the numerical link to hirai2016 is not established. Secondary sources give a recrystallization threshold of about 1450-2050 K depending on manufacturing and treat it as a time-at-temperature budget (sec_w_recrystallization). Not a qualified rating." }
+ductile_brittle_transition = { min = 400.0, max = 700.0, unit = "K", basis = "TYPICAL", confidence = "MEDIUM", source = "hirai2016", note = "unirradiated; raised by neutron irradiation and recrystallization" }
+
+[material.MAT-W.behaviour]
+creep = "Low creep below recrystallization; significant under load at very high temperature (no long-life allowable recorded here)."
+fatigue = "Cyclic high heat flux produces surface and macro cracks; monoblock crack resistance is qualified in high-heat-flux tests, not from bulk data."
+radiation_response = "Neutrons raise the DBTT and transmute W to Re and Os, lowering conductivity; plasma helium forms bubbles and, at roughly 1000-2000 K, fibre-form 'fuzz'."
+chemical_compatibility = "Stable in vacuum and hydrogen; oxidizes quickly in air above about 700 K (venting and maintenance)."
+erosion = "Low physical sputtering yield for D and He at low energy (high threshold); impurity and heavy-ion impacts dominate erosion."
+magnetic = "Paramagnetic, effectively non-magnetic."
+
+[material.MAT-CU-OF]
+name = "Oxygen-free high-conductivity copper"
+level = "A"
+family = "copper"
+composition = "Cu >= 99.99 wt% (C10100/C10200 class)"
+form = "Annealed; in an ITER monoblock a cast or HIPed 1 mm compliant interlayer"
+open = ["fracture_toughness", "max_service_temperature", "emissivity"]
+manufacturing = "Casting, rolling, drawing; electroforming."
+joining = "Brazing, diffusion bonding, HIP; electron-beam welding."
+availability_cost = "Industrial commodity."
+repairability = "Not repaired in place inside bonded stacks."
+durability = "Soft; relied on for conductivity and compliance, not strength."
+failure_mechanisms = ["interface fatigue in bonded stacks", "creep and softening", "radiation swelling and conductivity loss"]
+limitations = ["low strength, especially when hot", "dense"]
+evidence_refs = ["crc", "asm"]
+
+[material.MAT-CU-OF.properties]
+density = { value = 8960.0, unit = "kg/m3", at_K = 293.0, valid_K = [200.0, 400.0], basis = "HANDBOOK", confidence = "HIGH", source = "crc" }
+specific_heat = { value = 385.0, unit = "J/(kg K)", at_K = 298.0, basis = "HANDBOOK", confidence = "HIGH", source = "crc" }
+thermal_conductivity = { table_K = [300.0, 400.0, 500.0, 600.0, 800.0, 1000.0], values = [401.0, 393.0, 386.0, 379.0, 366.0, 352.0], unit = "W/(m K)", basis = "HANDBOOK", confidence = "HIGH", source = "crc", irradiation = "UNIRRADIATED", note = "pure Cu. Partial check 2026-11-05: 401 at 300 K and 352 at 1000 K match a secondary table (PPPL ARIES); another compilation gives 398 and 357. The 400-800 K points are unchecked." }
+thermal_expansion = { value = 16.5e-6, unit = "1/K", at_K = 293.0, basis = "HANDBOOK", confidence = "HIGH", source = "crc" }
+elastic_modulus = { min = 110.0e9, max = 130.0e9, unit = "Pa", at_K = 293.0, basis = "TYPICAL", confidence = "MEDIUM", source = "asm" }
+yield_strength = { min = 30.0e6, max = 70.0e6, unit = "Pa", at_K = 293.0, basis = "TYPICAL", confidence = "MEDIUM", source = "asm", note = "annealed; cold work raises it" }
+electrical_resistivity = { value = 1.68e-8, unit = "ohm m", at_K = 293.0, basis = "HANDBOOK", confidence = "HIGH", source = "crc" }
+melting_point = { value = 1357.8, unit = "K", phase_change = "melting", basis = "HANDBOOK", confidence = "HIGH", source = "crc" }
+
+[material.MAT-CU-OF.behaviour]
+creep = "Creeps and softens at moderate temperature; strength is not relied on."
+fatigue = "Low-cycle fatigue at bonded interfaces under thermal cycling."
+radiation_response = "Neutron irradiation hardens it at low temperature and causes voids and swelling at intermediate temperature; transmutation lowers conductivity."
+chemical_compatibility = "Compatible with treated water coolant; reacts with oxygen at temperature."
+magnetic = "Diamagnetic, non-magnetic."
+
+[material.MAT-CUCRZR]
+name = "Copper-chromium-zirconium alloy (ITER grade)"
+level = "A"
+family = "precipitation-hardened copper alloy"
+composition = "Cu, Cr 0.6-0.9 wt%, Zr 0.07-0.15 wt%"
+form = "Solution-annealed and aged (ITER heat-sink tubes)"
+open = ["specific_heat", "thermal_expansion", "elastic_modulus", "fracture_toughness", "electrical_resistivity", "melting_point", "emissivity"]
+manufacturing = "Hot extrusion and drawing to tubes; solution annealing and ageing (strength and conductivity depend on the heat treatment)."
+joining = "HIP to Cu interlayer and W; brazing; joining heat cycles can overage it."
+availability_cost = "Industrial; specialist product forms."
+repairability = "Not repaired; module replacement."
+durability = "Long-term limit by overageing and thermal creep above about 620 K; irradiation embrittlement at low temperature."
+failure_mechanisms = ["overageing and loss of strength", "thermal creep", "irradiation hardening and loss of ductility at low temperature", "creep-fatigue at the bonded tube"]
+limitations = ["narrow temperature window", "strength depends on heat treatment history"]
+evidence_refs = ["iter_cucrzr_spec", "iter_mph"]
+
+[material.MAT-CUCRZR.properties]
+density = { value = 8900.0, unit = "kg/m3", at_K = 293.0, basis = "TYPICAL", confidence = "MEDIUM", source = "iter_mph" }
+thermal_conductivity = { min = 320.0, max = 340.0, unit = "W/(m K)", at_K = 293.0, basis = "TYPICAL", confidence = "MEDIUM", source = "iter_mph", note = "depends on heat treatment; ITER-grade acceptance requires >= 75 % IACS at 20 C; a vendor listing gives 320 W/(m K) at 20 C (unchecked against the ITER MPH)" }
+yield_strength = { table_K = [293.0, 523.0], values = [240.0e6, 200.0e6], unit = "Pa", basis = "SPECIFICATION_MINIMUM", confidence = "HIGH", source = "iter_cucrzr_spec", verification = "SECONDARY_VERIFIED", verified = "minimum Rp0.2 240 MPa at 20 C and 200 MPa at 250 C in a reproduction of ITER_D_2ABAKH v2.0 (2026-11-05 web search)", verified_against = "sec_iter_cucrzr_repro", condition = "CuCrZr-IG, solution annealed 980 C + aged 475 C 3 h, unirradiated, specification minimum" }
+ultimate_strength = { table_K = [293.0, 523.0], values = [370.0e6, 280.0e6], unit = "Pa", basis = "SPECIFICATION_MINIMUM", confidence = "HIGH", source = "iter_cucrzr_spec", verification = "SECONDARY_VERIFIED", verified = "minimum Rm 370 MPa at 20 C and 280 MPa at 250 C in the same reproduction (2026-11-05 web search)", verified_against = "sec_iter_cucrzr_repro", condition = "CuCrZr-IG, solution annealed 980 C + aged 475 C 3 h, unirradiated, specification minimum" }
+max_service_temperature = { min = 573.0, max = 623.0, unit = "K", basis = "ESTIMATE", confidence = "MEDIUM", source = "sec_cucrzr_review", rating = "SCREENING_ESTIMATE", note = "upper screening limit: irradiation softening above about 573 K (300 C); long-term thermal limit about 623 K from a 2026-11-04 UKAEA summary (not re-confirmed); unirradiated strength is insufficient above about 673 K" }
+min_service_temperature = { min = 373.0, max = 423.0, unit = "K", basis = "ESTIMATE", confidence = "LOW", source = "sec_cucrzr_review", rating = "SCREENING_ESTIMATE", applies = "IRRADIATED", note = "lower screening limit under neutron irradiation: ITER design irradiation range starts at 100 C; severe embrittlement reported after irradiation at 150 C. Not a limit for unirradiated service." }
+
+[material.MAT-CUCRZR.behaviour]
+creep = "Thermal creep cuts the ITER design allowable stress below about 50 MPa above roughly 630 K."
+fatigue = "Creep-fatigue of the bonded tube under cyclic heat flux is a qualifying test item."
+radiation_response = "Irradiation hardening and ductility loss at low temperature; precipitate coarsening at high temperature."
+chemical_compatibility = "Water coolant with chemistry control (ITER)."
+magnetic = "Non-magnetic."
+
+[material.MAT-SS-316L]
+name = "Stainless steel 316L"
+level = "A"
+family = "austenitic stainless steel"
+composition = "Fe, Cr 16-18, Ni 10-14, Mo 2-3, C <= 0.03 wt%"
+form = "Annealed plate, sheet and seamless tube"
+open = ["fracture_toughness", "max_service_temperature", "emissivity"]
+manufacturing = "Rolling, drawing, forming, additive manufacturing."
+joining = "TIG and orbital welding, brazing, bolted and conflat flanges."
+availability_cost = "Industrial commodity."
+repairability = "Weld repairable."
+durability = "Tough down to cryogenic temperature; swelling and helium embrittlement at high neutron dose."
+failure_mechanisms = ["fatigue at welds", "sensitization corrosion", "radiation swelling", "creep above about 800 K"]
+limitations = ["low thermal conductivity", "moderate strength when annealed", "dense"]
+evidence_refs = ["astm_a240", "asm"]
+
+[material.MAT-SS-316L.properties]
+density = { value = 8000.0, unit = "kg/m3", at_K = 293.0, basis = "TYPICAL", confidence = "HIGH", source = "asm" }
+specific_heat = { value = 500.0, unit = "J/(kg K)", at_K = 293.0, basis = "TYPICAL", confidence = "MEDIUM", source = "asm" }
+thermal_conductivity = { value = 16.2, unit = "W/(m K)", at_K = 373.0, basis = "TYPICAL", confidence = "MEDIUM", source = "asm" }
+thermal_expansion = { value = 16.0e-6, unit = "1/K", at_K = 323.0, basis = "TYPICAL", confidence = "MEDIUM", source = "asm", note = "mean 0-100 C" }
+elastic_modulus = { value = 193.0e9, unit = "Pa", at_K = 293.0, basis = "TYPICAL", confidence = "HIGH", source = "asm" }
+yield_strength = { value = 170.0e6, unit = "Pa", at_K = 293.0, basis = "SPECIFICATION_MINIMUM", confidence = "HIGH", source = "astm_a240", verification = "SECONDARY_VERIFIED", verified = "25 ksi (170 MPa) minimum 0.2 % offset (2026-11-05 web search)", verified_against = "sec_316l", condition = "316L annealed plate, sheet or strip to ASTM A240, room temperature, specification minimum" }
+ultimate_strength = { value = 485.0e6, unit = "Pa", at_K = 293.0, basis = "SPECIFICATION_MINIMUM", confidence = "HIGH", source = "astm_a240", verification = "SECONDARY_VERIFIED", verified = "70 ksi (485 MPa) minimum (2026-11-05 web search)", verified_against = "sec_316l", condition = "316L annealed plate, sheet or strip to ASTM A240, room temperature, specification minimum" }
+electrical_resistivity = { value = 7.4e-7, unit = "ohm m", at_K = 293.0, basis = "TYPICAL", confidence = "MEDIUM", source = "asm" }
+melting_point = { min = 1648.0, max = 1673.0, unit = "K", phase_change = "melting", basis = "TYPICAL", confidence = "MEDIUM", source = "asm", note = "solidus to liquidus" }
+
+[material.MAT-SS-316L.behaviour]
+creep = "Creep becomes design-relevant above about 800 K."
+fatigue = "Good; weld quality governs."
+radiation_response = "Well characterized in fission and fusion structures; swelling and helium embrittlement at high dose."
+chemical_compatibility = "Among the best steels for hydrogen and cryogenic service (austenitic); standard LH2 line material."
+magnetic = "Austenitic, nearly non-magnetic; cold work and weld ferrite add weak magnetism."
+
+[material.MAT-SS-316LN]
+name = "Stainless steel 316LN (nitrogen-strengthened, cryogenic structural grade)"
+level = "A"
+family = "austenitic stainless steel"
+composition = "316L with controlled nitrogen addition"
+form = "Forged and plate sections for magnet cases (ITER TF coil cases)"
+open = ["specific_heat", "thermal_conductivity", "thermal_expansion", "elastic_modulus", "yield_strength", "fracture_toughness", "electrical_resistivity", "melting_point", "max_service_temperature", "emissivity"]
+manufacturing = "Forging, plate, machining of large sections."
+joining = "Narrow-gap TIG and electron-beam welding of thick sections."
+availability_cost = "Industrial, specialist cryogenic qualification."
+repairability = "Weld repairable before cooldown; not in service."
+durability = "Selected for 4 K strength and toughness of magnet structures; the 4 K allowables are OPEN here."
+failure_mechanisms = ["cryogenic fatigue crack growth", "weld defects in thick sections"]
+limitations = ["no property data recorded yet: every number OPEN"]
+evidence_refs = ["iter_mph"]
+
+[material.MAT-SS-316LN.properties]
+density = { value = 8000.0, unit = "kg/m3", at_K = 293.0, basis = "TYPICAL", confidence = "MEDIUM", source = "asm" }
+
+[material.MAT-SS-316LN.behaviour]
+creep = "Not relevant at cryogenic temperature."
+fatigue = "Cryogenic fatigue crack growth governs magnet-case design."
+radiation_response = "As 316L; magnet-side fluence is OPEN."
+chemical_compatibility = "As 316L."
+magnetic = "Austenitic; nitrogen stabilizes the austenite against magnetic martensite at 4 K."
+
+[material.MAT-INCONEL-718]
+name = "Nickel superalloy 718"
+level = "A"
+family = "precipitation-hardened nickel superalloy"
+composition = "Ni 50-55, Cr 17-21, Fe balance, Nb+Ta 4.75-5.5, Mo 2.8-3.3 wt%"
+form = "Solution treated and aged"
+open = ["fracture_toughness", "emissivity"]
+manufacturing = "Forging, machining, additive manufacturing (laser powder bed)."
+joining = "Weldable (sluggish ageing response); brazing."
+availability_cost = "Industrial aerospace alloy."
+repairability = "Weld repairable with re-ageing."
+durability = "Strength retained to about 920 K; above that the gamma-double-prime phase coarsens."
+failure_mechanisms = ["hydrogen environment embrittlement", "overageing above about 920 K", "low-cycle fatigue"]
+limitations = ["hydrogen embrittlement in high-pressure H2", "dense", "low conductivity"]
+evidence_refs = ["special_metals_718", "asm"]
+
+[material.MAT-INCONEL-718.properties]
+density = { value = 8190.0, unit = "kg/m3", at_K = 293.0, basis = "TYPICAL", confidence = "HIGH", source = "special_metals_718", verification = "SECONDARY_VERIFIED", verified = "8.19 g/cm3 (NASA handbook and datasheets) (2026-11-05 web search)", verified_against = "sec_718", condition = "alloy 718, solution treated and aged, room temperature" }
+specific_heat = { value = 435.0, unit = "J/(kg K)", at_K = 293.0, basis = "TYPICAL", confidence = "MEDIUM", source = "special_metals_718" }
+thermal_conductivity = { value = 11.4, unit = "W/(m K)", at_K = 293.0, basis = "TYPICAL", confidence = "MEDIUM", source = "special_metals_718", verification = "SECONDARY_VERIFIED", verified = "11.4 W/(m K); NASA handbook 0.027 cal/(cm s C) = 11.3 (2026-11-05 web search)", verified_against = "sec_718", condition = "alloy 718, solution treated and aged, room temperature" }
+thermal_expansion = { value = 13.0e-6, unit = "1/K", at_K = 373.0, basis = "TYPICAL", confidence = "MEDIUM", source = "special_metals_718" }
+elastic_modulus = { value = 200.0e9, unit = "Pa", at_K = 293.0, basis = "TYPICAL", confidence = "MEDIUM", source = "special_metals_718" }
+yield_strength = { value = 1034.0e6, unit = "Pa", at_K = 293.0, basis = "TYPICAL", confidence = "MEDIUM", source = "special_metals_718", note = "aged condition" }
+electrical_resistivity = { min = 1.21e-6, max = 1.27e-6, unit = "ohm m", at_K = 293.0, basis = "TYPICAL", confidence = "MEDIUM", source = "special_metals_718", verification = "SECONDARY_VERIFIED", verified = "1.21-1.27 micro-ohm m across NASA and supplier sheets (the former single 1.25e-6 lay inside the spread) (2026-11-05 web search)", verified_against = "sec_718", condition = "alloy 718, solution treated and aged, room temperature" }
+melting_point = { min = 1533.0, max = 1609.0, unit = "K", phase_change = "melting", basis = "TYPICAL", confidence = "MEDIUM", source = "special_metals_718", note = "solidus to liquidus", verification = "SECONDARY_VERIFIED", verified = "1260-1336 C in the Special Metals bulletin as quoted; another supplier gives 1210-1344 C (2026-11-05 web search)", verified_against = "sec_718", condition = "alloy 718" }
+max_service_temperature = { value = 923.0, unit = "K", basis = "TYPICAL", confidence = "MEDIUM", source = "special_metals_718", note = "usual upper limit for strength-critical use (about 650 C)", rating = "SCREENING_ESTIMATE" }
+
+[material.MAT-INCONEL-718.behaviour]
+creep = "Good creep strength to about 920 K."
+fatigue = "Good high-cycle fatigue; widely used in turbomachinery."
+radiation_response = "Nickel alloys swell less than austenitic steels but helium from Ni transmutation embrittles them at high dose."
+chemical_compatibility = "Susceptible to hydrogen environment embrittlement in high-pressure hydrogen (rocket turbopump experience): avoid on wetted hydrogen surfaces."
+magnetic = "Weakly paramagnetic, effectively non-magnetic."
+
+[material.MAT-TI6AL4V]
+name = "Titanium alloy Ti-6Al-4V"
+level = "A"
+family = "alpha-beta titanium alloy"
+composition = "Ti, Al 5.5-6.75, V 3.5-4.5 wt%"
+form = "Annealed bar, plate and tube"
+open = ["emissivity"]
+manufacturing = "Forging, machining, additive manufacturing."
+joining = "TIG/EB welding in inert atmosphere, diffusion bonding."
+availability_cost = "Industrial aerospace alloy."
+repairability = "Weld repairable under inert gas."
+durability = "Strong and light to about 670 K; low conductance makes it a good strut between temperature zones."
+failure_mechanisms = ["hydrogen pickup and embrittlement", "fatigue", "loss of strength above about 670 K"]
+limitations = ["avoid in hydrogen service", "low conductivity", "galling"]
+evidence_refs = ["asm", "wayfarer_spec"]
+
+[material.MAT-TI6AL4V.properties]
+density = { value = 4430.0, unit = "kg/m3", at_K = 293.0, basis = "TYPICAL", confidence = "HIGH", source = "asm", verification = "SECONDARY_VERIFIED", verified = "4.43 g/cm3 (2026-11-05 web search)", verified_against = "sec_ti64", condition = "Ti-6Al-4V Grade 5 (not ELI), annealed, room temperature" }
+specific_heat = { value = 526.0, unit = "J/(kg K)", at_K = 293.0, basis = "TYPICAL", confidence = "MEDIUM", source = "asm" }
+thermal_conductivity = { value = 6.7, unit = "W/(m K)", at_K = 293.0, basis = "TYPICAL", confidence = "MEDIUM", source = "asm", verification = "SECONDARY_VERIFIED", verified = "6.7 W/(m K) at 21 C (2026-11-05 web search)", verified_against = "sec_ti64", condition = "Ti-6Al-4V Grade 5 (not ELI), annealed, room temperature" }
+thermal_expansion = { value = 8.6e-6, unit = "1/K", at_K = 293.0, basis = "TYPICAL", confidence = "MEDIUM", source = "asm" }
+elastic_modulus = { value = 113.8e9, unit = "Pa", at_K = 293.0, basis = "TYPICAL", confidence = "HIGH", source = "asm", verification = "SECONDARY_VERIFIED", verified = "113.8 GPa in tension (2026-11-05 web search)", verified_against = "sec_ti64", condition = "Ti-6Al-4V Grade 5 (not ELI), annealed, room temperature" }
+yield_strength = { value = 880.0e6, unit = "Pa", at_K = 293.0, basis = "TYPICAL", confidence = "MEDIUM", source = "asm", note = "annealed", verification = "SECONDARY_VERIFIED", verified = "880 MPa typical 0.2 % offset (ELI grade about 790 MPa) (2026-11-05 web search)", verified_against = "sec_ti64", condition = "Ti-6Al-4V Grade 5 (not ELI), annealed, room temperature" }
+ultimate_strength = { value = 950.0e6, unit = "Pa", at_K = 293.0, basis = "TYPICAL", confidence = "MEDIUM", source = "asm" }
+fracture_toughness = { min = 55.0e6, max = 75.0e6, unit = "Pa m^0.5", at_K = 293.0, basis = "TYPICAL", confidence = "MEDIUM", source = "asm" }
+electrical_resistivity = { value = 1.78e-6, unit = "ohm m", at_K = 293.0, basis = "TYPICAL", confidence = "MEDIUM", source = "asm" }
+melting_point = { min = 1877.0, max = 1933.0, unit = "K", phase_change = "melting", basis = "TYPICAL", confidence = "MEDIUM", source = "asm" }
+max_service_temperature = { value = 673.0, unit = "K", basis = "TYPICAL", confidence = "MEDIUM", source = "asm", note = "about 400 C for strength-critical parts", rating = "SCREENING_ESTIMATE" }
+
+[material.MAT-TI6AL4V.behaviour]
+creep = "Creep-limited above about 670 K."
+fatigue = "Good, surface-condition sensitive."
+radiation_response = "Little fusion-relevant data recorded here."
+chemical_compatibility = "Absorbs hydrogen and embrittles: not for wetted hydrogen service."
+magnetic = "Non-magnetic."
+
+[material.MAT-ALLI-2195]
+name = "Aluminium-lithium alloy 2195"
+level = "A"
+family = "aluminium-lithium alloy"
+composition = "Al, Cu about 4, Li about 1, Ag, Mg, Zr (wt%)"
+form = "T8 temper plate (Space Shuttle Super Lightweight Tank)"
+open = ["specific_heat", "thermal_conductivity", "thermal_expansion", "fracture_toughness", "electrical_resistivity", "melting_point", "max_service_temperature", "emissivity"]
+manufacturing = "Plate, spin forming."
+joining = "Friction-stir and variable-polarity plasma-arc welding."
+availability_cost = "Industrial aerospace alloy."
+repairability = "Weld repair qualified case by case."
+durability = "Strength and toughness rise at cryogenic temperature; weld properties govern."
+failure_mechanisms = ["weld cracking", "anisotropy and short-transverse toughness", "fatigue"]
+limitations = ["welds weaker than parent", "anisotropic"]
+evidence_refs = ["nasa_et", "asm"]
+
+[material.MAT-ALLI-2195.properties]
+density = { value = 2710.0, unit = "kg/m3", at_K = 293.0, basis = "TYPICAL", confidence = "MEDIUM", source = "asm", verification = "SECONDARY_VERIFIED", verified = "2.70-2.72 g/cm3 across sources (2026-11-05 web search)", verified_against = "sec_2195", condition = "Al-Li 2195-T8 plate, room temperature" }
+elastic_modulus = { value = 76.0e9, unit = "Pa", at_K = 293.0, basis = "TYPICAL", confidence = "MEDIUM", source = "asm", verification = "SECONDARY_VERIFIED", verified = "76-82 GPa at room temperature (82-91 GPa cryogenic) (2026-11-05 web search)", verified_against = "sec_2195", condition = "Al-Li 2195-T8 plate, room temperature" }
+yield_strength = { min = 490.0e6, max = 590.0e6, unit = "Pa", at_K = 293.0, basis = "TYPICAL", confidence = "LOW", source = "asm", note = "T8 plate; varies with thickness and direction (455-570 MPa across secondary sources, 2026-11-05); higher at cryogenic temperature. Unchecked against a design-allowables table." }
+
+[material.MAT-ALLI-2195.behaviour]
+creep = "Not relevant at storage temperatures."
+fatigue = "Weld and fastener details govern."
+radiation_response = "Not a concern at the tank farm's dose (OPEN for the actual dose)."
+chemical_compatibility = "Compatible with cryogenic hydrogen and oxygen (flight heritage)."
+magnetic = "Non-magnetic."
+
+[material.MAT-AL-2219]
+name = "Aluminium alloy 2219"
+level = "A"
+family = "aluminium-copper alloy"
+composition = "Al, Cu 5.8-6.8, Mn, Zr, V (wt%)"
+form = "T87 plate"
+open = ["specific_heat", "thermal_conductivity", "thermal_expansion", "fracture_toughness", "electrical_resistivity", "melting_point", "max_service_temperature", "emissivity"]
+manufacturing = "Plate, forming."
+joining = "Excellent weldability (friction-stir, VPPA)."
+availability_cost = "Industrial aerospace alloy."
+repairability = "Weld repairable."
+durability = "Long cryogenic heritage (Shuttle ET, SLS core stage)."
+failure_mechanisms = ["weld defects", "fatigue"]
+limitations = ["denser and weaker than Al-Li 2195"]
+evidence_refs = ["nasa_et", "asm"]
+
+[material.MAT-AL-2219.properties]
+density = { value = 2840.0, unit = "kg/m3", at_K = 293.0, basis = "TYPICAL", confidence = "MEDIUM", source = "asm" }
+elastic_modulus = { value = 73.8e9, unit = "Pa", at_K = 293.0, basis = "TYPICAL", confidence = "MEDIUM", source = "asm" }
+yield_strength = { value = 393.0e6, unit = "Pa", at_K = 293.0, basis = "TYPICAL", confidence = "MEDIUM", source = "asm", note = "T87" }
+
+[material.MAT-AL-2219.behaviour]
+creep = "Not relevant at storage temperatures."
+fatigue = "Weld details govern."
+radiation_response = "Not a concern at the tank farm's dose."
+chemical_compatibility = "Compatible with cryogenic hydrogen and oxygen (flight heritage)."
+magnetic = "Non-magnetic."
+
+[material.MAT-CFRP]
+name = "Carbon-fibre reinforced epoxy laminate"
+level = "A"
+family = "polymer-matrix composite"
+composition = "Carbon fibre in epoxy (or cyanate-ester) matrix; properties depend on fibre, layup and matrix"
+form = "Filament-wound or laid-up tubes and skirts"
+anisotropic = true                  # fibre composite: directional properties must name their direction
+open = ["specific_heat", "thermal_conductivity", "thermal_expansion", "yield_strength", "elastic_modulus", "fracture_toughness", "electrical_resistivity", "melting_point", "max_service_temperature", "emissivity"]
+manufacturing = "Filament winding, automated fibre placement, autoclave or out-of-autoclave cure."
+joining = "Bonded and bolted joints; bonded metal end fittings."
+availability_cost = "Industrial aerospace."
+repairability = "Patch repair, limited."
+durability = "Matrix microcracking under cryogenic cycling and outgassing govern long life."
+failure_mechanisms = ["matrix microcracking", "delamination", "radiation degradation of the matrix", "outgassing"]
+limitations = ["layup-specific properties", "matrix temperature limit"]
+evidence_refs = ["asm", "wayfarer_spec"]
+
+[material.MAT-CFRP.properties]
+density = { min = 1500.0, max = 1650.0, unit = "kg/m3", at_K = 293.0, basis = "TYPICAL", confidence = "MEDIUM", source = "asm" }
+
+[material.MAT-CFRP.behaviour]
+creep = "Matrix-dominated creep at elevated temperature."
+fatigue = "Good in fibre direction; matrix-dominated transverse fatigue."
+radiation_response = "Epoxy matrices degrade under high dose; fibres tolerant."
+chemical_compatibility = "Outgasses in vacuum; low-conductance strut material for cryogenic supports."
+magnetic = "Non-magnetic; carbon fibres are electrically conductive."
+
+[material.MAT-SIC]
+name = "Silicon carbide (CVD, high purity)"
+level = "A"
+family = "technical ceramic"
+composition = "beta-SiC, stoichiometric"
+form = "Chemical vapour deposited monolith or coating"
+open = ["specific_heat", "thermal_expansion", "yield_strength", "fracture_toughness", "electrical_resistivity", "max_service_temperature", "emissivity"]
+manufacturing = "CVD, sintering, reaction bonding; diamond machining."
+joining = "Brazing, diffusion bonding, SiC-based joining; mechanically attached."
+availability_cost = "Industrial; CVD is costly."
+repairability = "Not repairable; replace."
+durability = "Brittle; conductivity falls sharply under neutron irradiation."
+failure_mechanisms = ["brittle fracture", "thermal shock", "irradiation conductivity loss", "active oxidation (not in vacuum)"]
+limitations = ["brittle", "joining"]
+evidence_refs = ["snead2007"]
+
+[material.MAT-SIC.properties]
+density = { value = 3210.0, unit = "kg/m3", at_K = 293.0, basis = "HANDBOOK", confidence = "HIGH", source = "snead2007" }
+thermal_conductivity = { min = 250.0, max = 490.0, unit = "W/(m K)", at_K = 293.0, basis = "TYPICAL", confidence = "MEDIUM", source = "snead2007", note = "unirradiated high-purity CVD; drops to roughly 10-30 W/(m K) after low neutron doses", irradiation = "UNIRRADIATED" }
+elastic_modulus = { min = 410.0e9, max = 466.0e9, unit = "Pa", at_K = 293.0, basis = "TYPICAL", confidence = "MEDIUM", source = "snead2007", note = "unirradiated CVD; secondary sources report 460 GPa (Morton CVD) and 503 GPa (another unirradiated CVD lot): the range is not yet checked against Snead 2007" }
+melting_point = { value = 3003.0, unit = "K", phase_change = "decomposition", basis = "HANDBOOK", confidence = "MEDIUM", source = "crc", note = "decomposes rather than melting at ambient pressure" }
+
+[material.MAT-SIC.behaviour]
+creep = "Creep-resistant ceramic to high temperature."
+fatigue = "Brittle; thermal-shock and slow crack growth govern."
+radiation_response = "Swelling saturates at low dose; thermal conductivity collapses to a few tens of W/(m K)."
+chemical_compatibility = "Stable in vacuum and hydrogen to high temperature."
+magnetic = "Non-magnetic; wide-bandgap semiconductor (power electronics)."
+
+[material.MAT-SICSIC]
+name = "SiC fibre / SiC matrix composite"
+level = "A"
+family = "ceramic-matrix composite"
+composition = "Near-stoichiometric SiC fibres (e.g. Hi-Nicalon Type S), pyrolytic carbon or BN interphase, CVI SiC matrix"
+form = "Woven preform densified by chemical vapour infiltration"
+anisotropic = true                  # fibre composite: directional properties must name their direction
+open = ["specific_heat", "thermal_conductivity", "thermal_expansion", "yield_strength", "elastic_modulus", "fracture_toughness", "electrical_resistivity", "melting_point", "emissivity"]
+manufacturing = "CVI, polymer infiltration and pyrolysis; slow and costly."
+joining = "Mechanical and SiC-based joints."
+availability_cost = "Specialist; costly."
+repairability = "Not repairable."
+durability = "Damage-tolerant ceramic; interphase oxidation and irradiation govern life."
+failure_mechanisms = ["matrix cracking", "interphase degradation", "porosity leakage"]
+limitations = ["porosity (not gas-tight without seal coat)", "cost"]
+evidence_refs = ["snead2007"]
+
+[material.MAT-SICSIC.properties]
+density = { min = 2500.0, max = 2800.0, unit = "kg/m3", at_K = 293.0, basis = "TYPICAL", confidence = "LOW", source = "snead2007" }
+max_service_temperature = { min = 1473.0, max = 1773.0, unit = "K", basis = "ESTIMATE", confidence = "LOW", source = "snead2007", note = "fibre- and interphase-dependent", rating = "SCREENING_ESTIMATE" }
+
+[material.MAT-SICSIC.behaviour]
+creep = "Fibre creep sets the upper limit."
+fatigue = "Pseudo-ductile, matrix-crack dominated."
+radiation_response = "Radiation-tolerant fibre grades exist; conductivity falls as for SiC."
+chemical_compatibility = "Stable in vacuum; interphase sensitive to oxygen."
+magnetic = "Non-magnetic."
+
+[material.MAT-CC]
+name = "Carbon-carbon composite"
+level = "A"
+family = "carbon-matrix composite"
+composition = "Carbon fibres in a pyrolytic or graphitic carbon matrix (optionally SiC-converted surface, as Shuttle RCC)"
+form = "Woven or 3D preform, densified by CVI or pitch impregnation"
+anisotropic = true                  # fibre composite: directional properties must name their direction
+open = ["specific_heat", "thermal_conductivity", "thermal_expansion", "yield_strength", "elastic_modulus", "fracture_toughness", "electrical_resistivity", "melting_point", "max_service_temperature"]
+manufacturing = "Repeated densification cycles; long lead time."
+joining = "Mechanical fasteners, brazing to refractory metals."
+availability_cost = "Specialist; costly."
+repairability = "Limited."
+durability = "Strong at very high temperature in vacuum; eroded chemically by hydrogen and oxygen at temperature."
+failure_mechanisms = ["chemical erosion by hydrogen (hydrocarbon formation)", "oxidation", "sublimation at very high temperature", "co-deposition of hydrogen isotopes"]
+limitations = ["avoid on plasma-wetted hydrogen surfaces", "anisotropic", "porosity"]
+evidence_refs = ["caib2003"]
+
+[material.MAT-CC.properties]
+density = { min = 1600.0, max = 2000.0, unit = "kg/m3", at_K = 293.0, basis = "TYPICAL", confidence = "MEDIUM", source = "caib2003" }
+emissivity = { min = 0.80, max = 0.90, unit = "1", at_K = 1500.0, valid_K = [1000.0, 1900.0], basis = "TYPICAL", confidence = "MEDIUM", source = "caib2003", note = "total hemispherical, SiC-coated RCC-class surface; NASA TP-3293 measured it at 1200-2100 K but the numbers were not read (unchecked). A coating property: cracks, silica sealant and ageing change it." }
+
+[material.MAT-CC.behaviour]
+creep = "Creep-resistant to very high temperature."
+fatigue = "Good; damage-tolerant."
+radiation_response = "Graphite swells and loses conductivity under neutrons."
+chemical_compatibility = "Reacts with hydrogen plasma (chemical sputtering) and oxygen at temperature; inert in clean vacuum."
+magnetic = "Diamagnetic, non-magnetic."
+
+[material.MAT-HFC]
+name = "Hafnium carbide"
+level = "A"
+family = "ultra-high-temperature ceramic"
+composition = "HfC (near-stoichiometric)"
+form = "Hot-pressed or spark-plasma-sintered monolith or coating"
+open = ["specific_heat", "thermal_conductivity", "thermal_expansion", "yield_strength", "elastic_modulus", "fracture_toughness", "electrical_resistivity", "max_service_temperature", "emissivity"]
+manufacturing = "Hot pressing, SPS, CVD coatings; difficult."
+joining = "Graded transitions to refractory metals are research-stage."
+availability_cost = "Laboratory to small-industrial; costly."
+repairability = "Not repairable."
+durability = "No long-life plasma-facing qualification; one of the highest melting points known."
+failure_mechanisms = ["brittle fracture", "thermal shock", "oxidation", "unknown plasma erosion and irradiation behaviour"]
+limitations = ["brittle", "very dense", "immature for fusion use"]
+evidence_refs = ["fahrenholtz2017"]
+
+[material.MAT-HFC.properties]
+density = { min = 12200.0, max = 12700.0, unit = "kg/m3", at_K = 293.0, basis = "TYPICAL", confidence = "MEDIUM", source = "fahrenholtz2017" }
+melting_point = { min = 4100.0, max = 4250.0, unit = "K", phase_change = "melting", basis = "MEASURED", confidence = "MEDIUM", source = "fahrenholtz2017", verification = "SECONDARY_VERIFIED", verified = "about 3900 C commonly cited, 3958 C by laser heating (4173-4231 K, inside the range) (2026-11-05 web search)", verified_against = "sec_hfc", condition = "near-stoichiometric HfC" }
+
+[material.MAT-HFC.behaviour]
+creep = "Not characterized for long-life use here."
+fatigue = "Brittle ceramic; thermal shock governs."
+radiation_response = "OPEN at fusion-relevant doses."
+chemical_compatibility = "Stable in vacuum; oxidizes readily."
+magnetic = "Non-magnetic."
+
+[material.MAT-REBCO]
+name = "REBCO coated-conductor tape"
+level = "A"
+family = "high-temperature superconductor"
+composition = "REBa2Cu3O7-x (RE = Y, Gd, Eu...) film on buffered Hastelloy C-276 substrate, Ag cap, Cu stabilizer"
+form = "Tape about 4-12 mm wide, wound or stacked into cables"
+open = ["density", "specific_heat", "thermal_conductivity", "thermal_expansion", "yield_strength", "elastic_modulus", "fracture_toughness", "electrical_resistivity", "melting_point", "max_service_temperature", "emissivity"]
+manufacturing = "Pulsed-laser deposition or MOCVD of the superconducting layer on a textured buffer."
+joining = "Soldered joints between tapes; demountable joints are development items."
+availability_cost = "Industrial, scaling; costly per kA m."
+repairability = "Joints only; damaged turns are not repaired."
+durability = "Limited by delamination, quench damage and neutron fluence."
+failure_mechanisms = ["quench hot spot", "delamination under transverse tension", "critical-current degradation from strain", "neutron damage"]
+limitations = ["anisotropic critical current", "quench detection is slow", "radiation tolerance limited"]
+evidence_refs = ["sparc_tfmc"]
+
+[material.MAT-REBCO.properties]
+critical_temperature = { min = 89.9, max = 93.0, unit = "K", basis = "MEASURED", confidence = "HIGH", source = "sec_rebco_tc", note = "zero field; depends on the rare earth; high-field coils operate far below it (SPARC TFMC about 20 T at 20 K, sparc_tfmc). Tc is not a coil rating: Jc(B, T, angle, strain, fluence) at the operating point is OPEN (OD-024)", verification = "TRANSCRIBED", condition = "REBCO films, zero applied field", check_note = "the band was read in search results for the cited study, which is also its source, so no independent check exists; the IEEE YBCO overview (about 92 K) agrees with it (2026-11-05)" }
+
+[material.MAT-REBCO.behaviour]
+creep = "Not relevant at operating temperature."
+fatigue = "Cyclic Lorentz loads degrade critical current through strain."
+radiation_response = "Critical current degrades with fast-neutron fluence; the tolerable fluence for Wayfarer's spectrum is OPEN (OD-024)."
+chemical_compatibility = "Moisture-sensitive in storage; sealed in operation."
+magnetic = "Superconductor with screening currents and magnetization; the operating current density at field is OPEN (OD-024)."
+
+[material.MAT-B4C]
+name = "Boron carbide"
+level = "A"
+family = "technical ceramic, neutron absorber"
+composition = "B4C (natural boron, 19.9% 10B; enriched grades available)"
+form = "Hot-pressed tiles or pellets"
+open = ["specific_heat", "thermal_conductivity", "thermal_expansion", "yield_strength", "elastic_modulus", "fracture_toughness", "electrical_resistivity", "max_service_temperature", "emissivity"]
+manufacturing = "Hot pressing; diamond machining."
+joining = "Canned or mechanically held."
+availability_cost = "Industrial."
+repairability = "Replace."
+durability = "Helium from 10B(n,alpha) causes swelling and cracking."
+failure_mechanisms = ["helium swelling and cracking", "brittle fracture"]
+limitations = ["brittle", "helium generation"]
+evidence_refs = ["crc"]
+
+[material.MAT-B4C.properties]
+density = { min = 2500.0, max = 2520.0, unit = "kg/m3", at_K = 293.0, basis = "HANDBOOK", confidence = "HIGH", source = "crc", note = "the CRC-cited listing gives 2.50 g/cm3, the theoretical density is 2.519 g/cm3; the former single 2520 was the upper end", verification = "SECONDARY_VERIFIED", verified = "2.50 g/cm3 (CRC-cited) and 2.519 g/cm3 theoretical (2026-11-05 web search)", verified_against = "sec_crc_listing", condition = "B4C, natural boron, dense" }
+melting_point = { min = 2623.0, max = 2723.0, unit = "K", phase_change = "melting", basis = "HANDBOOK", confidence = "MEDIUM", source = "crc", verification = "SECONDARY_VERIFIED", verified = "2350 C (CRC-cited) to 2450 C (other listings); an older listing value of 2763 C is not supported (2026-11-05 web search)", verified_against = "sec_crc_listing", condition = "B4C" }
+hydrogen_content = { value = 0.0, unit = "1", at_K = 293.0, valid_K = [0.0, 2600.0], basis = "THEORETICAL", confidence = "HIGH", source = "crc", note = "mass fraction of hydrogen (none)" }
+
+[material.MAT-B4C.behaviour]
+creep = "Not limiting in shields."
+fatigue = "Brittle."
+radiation_response = "Thermal-neutron absorber via 10B(n,alpha)7Li; the reaction heat and the helium stay in the shield."
+chemical_compatibility = "Stable in vacuum."
+magnetic = "Non-magnetic."
+
+[material.MAT-LIH]
+name = "Lithium hydride"
+level = "A"
+family = "hydride neutron moderator"
+composition = "LiH (natural or 7Li-enriched lithium)"
+form = "Cast or pressed blocks in sealed stainless-steel cans (SNAP reactor shields)"
+open = ["specific_heat", "thermal_conductivity", "thermal_expansion", "yield_strength", "elastic_modulus", "fracture_toughness", "electrical_resistivity", "max_service_temperature", "emissivity"]
+manufacturing = "Melt casting under inert gas into cans."
+joining = "Canned."
+availability_cost = "Industrial chemical; flight heritage in shields."
+repairability = "Replace canned modules."
+durability = "Swelling under irradiation and hydrogen loss at temperature limit life."
+failure_mechanisms = ["hydrogen dissociation at high temperature", "radiation swelling", "can breach", "violent reaction with water"]
+limitations = ["low melting point", "needs cladding", "temperature limit OPEN"]
+evidence_refs = ["welch1974", "crc"]
+
+[material.MAT-LIH.properties]
+density = { value = 780.0, unit = "kg/m3", at_K = 293.0, basis = "HANDBOOK", confidence = "MEDIUM", source = "crc", verification = "SECONDARY_VERIFIED", verified = "0.78 g/cm3 (2026-11-05 web search)", verified_against = "sec_crc_listing", condition = "LiH, natural lithium, room temperature" }
+melting_point = { value = 961.8, unit = "K", phase_change = "melting", basis = "HANDBOOK", confidence = "MEDIUM", source = "crc", verification = "SECONDARY_VERIFIED", verified = "688.7 C (961.9 K) (2026-11-05 web search)", verified_against = "sec_crc_listing", condition = "LiH" }
+hydrogen_content = { value = 0.127, unit = "1", at_K = 293.0, valid_K = [0.0, 700.0], basis = "THEORETICAL", confidence = "HIGH", source = "crc", note = "mass fraction from the formula LiH (1.008 / 7.95)" }
+
+[material.MAT-LIH.behaviour]
+creep = "Weak; relies on the can."
+fatigue = "Thermal cycling cracks the cast blocks."
+radiation_response = "Excellent fast-neutron moderator per mass; swells under irradiation."
+chemical_compatibility = "Reacts violently with water; hydrogen pressure rises steeply with temperature."
+magnetic = "Non-magnetic."
+
+[material.MAT-HDPE]
+name = "High-density polyethylene"
+level = "A"
+family = "hydrogen-rich polymer"
+composition = "(C2H4)n"
+form = "Sheet or block"
+open = ["specific_heat", "thermal_conductivity", "thermal_expansion", "yield_strength", "elastic_modulus", "fracture_toughness", "electrical_resistivity", "max_service_temperature", "emissivity"]
+manufacturing = "Extrusion, moulding, machining."
+joining = "Mechanical."
+availability_cost = "Commodity."
+repairability = "Replace."
+durability = "Radiation crosslinking and embrittlement; outgassing."
+failure_mechanisms = ["radiation embrittlement", "creep", "low temperature limit"]
+limitations = ["low temperature limit", "flammable in atmosphere"]
+evidence_refs = ["crc"]
+
+[material.MAT-HDPE.properties]
+density = { min = 940.0, max = 970.0, unit = "kg/m3", at_K = 293.0, basis = "TYPICAL", confidence = "HIGH", source = "crc" }
+melting_point = { min = 393.0, max = 408.0, unit = "K", phase_change = "melting", basis = "TYPICAL", confidence = "MEDIUM", source = "crc" }
+hydrogen_content = { value = 0.144, unit = "1", at_K = 293.0, valid_K = [0.0, 390.0], basis = "THEORETICAL", confidence = "HIGH", source = "crc", note = "mass fraction from CH2 (2.016 / 14.03)" }
+
+[material.MAT-HDPE.behaviour]
+creep = "Creeps under sustained load."
+fatigue = "Not a structural material here."
+radiation_response = "Good neutron and GCR shielding per mass; crosslinks and embrittles under dose."
+chemical_compatibility = "Outgasses; inert in vacuum."
+magnetic = "Non-magnetic, insulator."
+
+[material.MAT-ALUMINA]
+name = "Alumina (99.5%)"
+level = "A"
+family = "technical ceramic"
+composition = "Al2O3 >= 99.5 wt%"
+form = "Sintered"
+open = ["specific_heat", "thermal_expansion", "yield_strength", "fracture_toughness", "max_service_temperature", "emissivity"]
+manufacturing = "Pressing and sintering, diamond grinding."
+joining = "Metallized and brazed (ceramic-to-metal feedthroughs)."
+availability_cost = "Industrial commodity."
+repairability = "Replace."
+durability = "Dielectric properties fall at temperature and under radiation (radiation-induced conductivity)."
+failure_mechanisms = ["brittle fracture", "thermal shock", "radiation-induced conductivity and degradation"]
+limitations = ["brittle"]
+evidence_refs = ["crc", "asm"]
+
+[material.MAT-ALUMINA.properties]
+density = { min = 3890.0, max = 3950.0, unit = "kg/m3", at_K = 293.0, basis = "TYPICAL", confidence = "MEDIUM", source = "asm" }
+thermal_conductivity = { min = 25.0, max = 35.0, unit = "W/(m K)", at_K = 293.0, basis = "TYPICAL", confidence = "MEDIUM", source = "asm" }
+elastic_modulus = { min = 370.0e9, max = 390.0e9, unit = "Pa", at_K = 293.0, basis = "TYPICAL", confidence = "MEDIUM", source = "asm" }
+electrical_resistivity = { min = 1.0e12, max = 1.0e15, unit = "ohm m", at_K = 293.0, basis = "TYPICAL", confidence = "LOW", source = "asm", note = "volume resistivity; falls steeply with temperature and ionizing dose" }
+melting_point = { value = 2345.0, unit = "K", phase_change = "melting", basis = "HANDBOOK", confidence = "HIGH", source = "crc" }
+
+[material.MAT-ALUMINA.behaviour]
+creep = "Not limiting below about 1300 K."
+fatigue = "Brittle; slow crack growth."
+radiation_response = "Radiation-induced conductivity under ionizing dose; swelling at high neutron dose."
+chemical_compatibility = "Inert."
+magnetic = "Non-magnetic insulator."
+
+[material.MAT-YSZ]
+name = "Yttria-stabilized zirconia"
+level = "A"
+family = "technical ceramic"
+composition = "ZrO2 with 3-8 mol% Y2O3"
+form = "Sintered monolith or plasma-sprayed / EB-PVD thermal-barrier coating"
+open = ["specific_heat", "thermal_expansion", "yield_strength", "elastic_modulus", "fracture_toughness", "electrical_resistivity", "max_service_temperature", "emissivity"]
+manufacturing = "Sintering; plasma spray and EB-PVD for coatings."
+joining = "Coating on a bond coat."
+availability_cost = "Industrial."
+repairability = "Recoat."
+durability = "Sintering and phase change above about 1470 K limit coating life."
+failure_mechanisms = ["spallation", "sintering", "phase destabilization"]
+limitations = ["brittle", "coating adhesion"]
+evidence_refs = ["crc", "asm"]
+
+[material.MAT-YSZ.properties]
+density = { min = 5900.0, max = 6100.0, unit = "kg/m3", at_K = 293.0, basis = "TYPICAL", confidence = "MEDIUM", source = "asm" }
+thermal_conductivity = { min = 2.0, max = 3.0, unit = "W/(m K)", at_K = 293.0, basis = "TYPICAL", confidence = "MEDIUM", source = "asm", note = "dense; porous coatings are lower" }
+melting_point = { value = 2988.0, unit = "K", phase_change = "melting", basis = "HANDBOOK", confidence = "MEDIUM", source = "crc", note = "ZrO2" }
+
+[material.MAT-YSZ.behaviour]
+creep = "Not limiting as a coating."
+fatigue = "Thermal-cycling spallation."
+radiation_response = "Radiation-tolerant oxide."
+chemical_compatibility = "Inert; oxygen-ion conductor at high temperature."
+magnetic = "Non-magnetic."
+
+[material.MAT-MLI-AL]
+name = "Multilayer insulation (aluminized polymer films)"
+level = "A"
+family = "insulation system"
+composition = "Double-aluminized polyimide or polyester films separated by polyester or glass-fibre spacer nets, outer cover layer"
+form = "Quilted blankets, tens of layers"
+open = ["density", "specific_heat", "thermal_conductivity", "thermal_expansion", "yield_strength", "elastic_modulus", "fracture_toughness", "electrical_resistivity", "melting_point", "max_service_temperature", "emissivity"]
+manufacturing = "Blanket fabrication, stitching or tag-pinning."
+joining = "Velcro, pins, tape; grounding straps."
+availability_cost = "Industrial spacecraft product."
+repairability = "Patchable."
+durability = "Performance depends on layer density, compression, seams and penetrations, not a bulk property."
+failure_mechanisms = ["compression at supports", "seam and penetration heat leaks", "UV and atomic-oxygen degradation of outer layer", "micrometeoroid damage"]
+limitations = ["a system, not a material: performance must be measured as installed"]
+evidence_refs = ["mli_johnson", "wayfarer_spec"]
+
+[material.MAT-MLI-AL.behaviour]
+creep = "Not applicable."
+fatigue = "Not applicable."
+radiation_response = "Polyester films degrade under dose faster than polyimide."
+chemical_compatibility = "Outgasses; must be vented on ascent."
+magnetic = "Non-magnetic; layers are grounded against charging."
+
+[material.MAT-AZ93]
+name = "AZ-93 white thermal-control coating"
+level = "A"
+family = "inorganic thermal-control coating"
+composition = "Zinc oxide pigment in a potassium silicate binder"
+form = "Sprayed coating on aluminium panels (ISS radiators)"
+open = ["density", "specific_heat", "thermal_conductivity", "thermal_expansion", "yield_strength", "elastic_modulus", "fracture_toughness", "electrical_resistivity", "melting_point", "max_service_temperature"]
+manufacturing = "Spray coating."
+joining = "Coating."
+availability_cost = "Industrial spacecraft product."
+repairability = "Recoatable on the ground."
+durability = "Solar absorptance rises over life; the IR emissivity is stable."
+failure_mechanisms = ["solar absorptance degradation", "contamination", "spallation"]
+limitations = ["low-temperature radiators only (WARM/LOW zones)"]
+evidence_refs = ["az93"]
+
+[material.MAT-AZ93.properties]
+emissivity = { value = 0.91, unit = "1", at_K = 300.0, valid_K = [250.0, 450.0], basis = "TYPICAL", confidence = "MEDIUM", source = "az93", note = "IR normal emittance; the same value as [radiators.zones] emissivity", verification = "SECONDARY_VERIFIED", verified = "eps_t 0.91 +- 0.02 cured; < 1 % change after vacuum-UV testing (2026-11-05 web search)", verified_against = "sec_az93", condition = "AZ-93 cured coating >= 5 mil on aluminium, beginning of life" }
+solar_absorptance = { min = 0.15, max = 0.30, unit = "1", at_K = 300.0, valid_K = [250.0, 450.0], basis = "TYPICAL", confidence = "MEDIUM", source = "az93", note = "beginning to end of life. 0.15 +- 0.02 beginning of life matches sec_az93 (2026-11-05); the 0.30 end-of-life value is the Wayfarer spec's coating note and depends on UV, particle dose and contamination (unchecked)" }
+
+[material.MAT-AZ93.behaviour]
+creep = "Not applicable."
+fatigue = "Thermal cycling cracking of thick coats."
+radiation_response = "UV and particle darkening raises solar absorptance."
+chemical_compatibility = "Inorganic; low outgassing."
+magnetic = "Non-magnetic."
+
+[material.MAT-NB1ZR]
+name = "Niobium-1% zirconium"
+level = "A"
+family = "refractory alloy"
+composition = "Nb, Zr 1 wt%"
+form = "Sheet and tube"
+open = ["specific_heat", "thermal_conductivity", "thermal_expansion", "yield_strength", "elastic_modulus", "fracture_toughness", "electrical_resistivity", "emissivity"]
+manufacturing = "Rolling, tube drawing in clean conditions."
+joining = "EB or TIG welding in high vacuum or high-purity inert gas."
+availability_cost = "Specialist."
+repairability = "Weld repair in clean conditions."
+durability = "Heritage alkali-metal loop alloy (SNAP, SP-100 designs); interstitial contamination embrittles it."
+failure_mechanisms = ["oxygen and nitrogen pickup", "creep", "alkali-metal corrosion with high oxygen"]
+limitations = ["upper limit far below the 1800 K hot loop", "needs very clean environment"]
+evidence_refs = ["angelo_buden"]
+
+[material.MAT-NB1ZR.properties]
+density = { value = 8570.0, unit = "kg/m3", at_K = 293.0, basis = "TYPICAL", confidence = "MEDIUM", source = "angelo_buden" }
+melting_point = { min = 2670.0, max = 2750.0, unit = "K", phase_change = "melting", basis = "TYPICAL", confidence = "LOW", source = "crc", note = "pure Nb melts at about 2750 K" }
+max_service_temperature = { min = 1300.0, max = 1400.0, unit = "K", basis = "ESTIMATE", confidence = "MEDIUM", source = "angelo_buden", note = "lithium-loop design temperatures of space-reactor studies", rating = "SCREENING_ESTIMATE" }
+
+[material.MAT-NB1ZR.behaviour]
+creep = "Creep sets the loop temperature limit."
+fatigue = "Not limiting in loops."
+radiation_response = "Good in fast-reactor spectra."
+chemical_compatibility = "Compatible with Li, Na and K when oxygen is controlled."
+magnetic = "Non-magnetic (superconducting only at a few K)."
+
+[material.MAT-MORE]
+name = "Molybdenum-47.5% rhenium"
+level = "A"
+family = "refractory alloy"
+composition = "Mo, Re 47.5 wt%"
+form = "Sheet and tube"
+open = ["density", "specific_heat", "thermal_conductivity", "thermal_expansion", "yield_strength", "elastic_modulus", "fracture_toughness", "electrical_resistivity", "melting_point", "max_service_temperature", "emissivity"]
+manufacturing = "Powder metallurgy, rolling, drawing."
+joining = "Weldable (rhenium ductilizes Mo welds)."
+availability_cost = "Rhenium is scarce and very costly."
+repairability = "Weld repair."
+durability = "Candidate for very-high-temperature lithium heat pipes; long-life data not recorded here."
+failure_mechanisms = ["sigma-phase embrittlement", "creep"]
+limitations = ["rhenium cost and supply", "no numbers recorded yet"]
+evidence_refs = ["angelo_buden"]
+
+[material.MAT-MORE.behaviour]
+creep = "OPEN."
+fatigue = "OPEN."
+radiation_response = "OPEN."
+chemical_compatibility = "Compatible with lithium at high temperature (heat-pipe candidate)."
+magnetic = "Non-magnetic."
+
+[material.MAT-TZM]
+name = "Molybdenum alloy TZM"
+level = "A"
+family = "refractory alloy"
+composition = "Mo, Ti 0.5, Zr 0.08, C 0.02 wt%"
+form = "Sheet and foil"
+open = ["specific_heat", "thermal_conductivity", "thermal_expansion", "yield_strength", "elastic_modulus", "fracture_toughness", "electrical_resistivity", "max_service_temperature", "emissivity"]
+manufacturing = "Powder metallurgy, rolling to foil."
+joining = "Brazing, riveting; welds are brittle."
+availability_cost = "Industrial."
+repairability = "Replace."
+durability = "Recrystallization embrittles it; stays strong above Mo's recrystallization temperature."
+failure_mechanisms = ["recrystallization embrittlement", "oxidation in air"]
+limitations = ["brittle welds"]
+evidence_refs = ["crc"]
+
+[material.MAT-TZM.properties]
+density = { value = 10220.0, unit = "kg/m3", at_K = 293.0, basis = "TYPICAL", confidence = "MEDIUM", source = "crc" }
+melting_point = { value = 2896.0, unit = "K", phase_change = "melting", basis = "HANDBOOK", confidence = "MEDIUM", source = "crc", note = "pure Mo" }
+
+[material.MAT-TZM.behaviour]
+creep = "Better than pure Mo at high temperature."
+fatigue = "OPEN."
+radiation_response = "OPEN."
+chemical_compatibility = "Stable in vacuum and hydrogen; oxidizes in air."
+magnetic = "Non-magnetic."
+
+[material.MAT-TI-CP]
+name = "Commercially pure titanium"
+level = "A"
+family = "titanium"
+composition = "Ti >= 99 wt% (grade 2)"
+form = "Foil"
+open = ["specific_heat", "thermal_conductivity", "thermal_expansion", "yield_strength", "elastic_modulus", "fracture_toughness", "electrical_resistivity", "max_service_temperature", "emissivity"]
+manufacturing = "Rolling to foil."
+joining = "Welding under inert gas."
+availability_cost = "Industrial."
+repairability = "Replace."
+durability = "Stable foil in vacuum; hydrogen pickup."
+failure_mechanisms = ["hydrogen pickup"]
+limitations = ["low conductivity"]
+evidence_refs = ["crc"]
+
+[material.MAT-TI-CP.properties]
+density = { value = 4510.0, unit = "kg/m3", at_K = 293.0, basis = "HANDBOOK", confidence = "HIGH", source = "crc" }
+melting_point = { value = 1941.0, unit = "K", phase_change = "melting", basis = "HANDBOOK", confidence = "HIGH", source = "crc" }
+
+[material.MAT-TI-CP.behaviour]
+creep = "Not limiting as a foil."
+fatigue = "Not limiting as a foil."
+radiation_response = "OPEN."
+chemical_compatibility = "Absorbs hydrogen."
+magnetic = "Non-magnetic."
+
+[material.MAT-AU]
+name = "Gold (film or foil)"
+level = "A"
+family = "noble metal"
+composition = "Au >= 99.9 wt%"
+form = "Vapour-deposited film on a carrier or thin foil"
+open = ["specific_heat", "thermal_expansion", "yield_strength", "elastic_modulus", "fracture_toughness", "electrical_resistivity", "max_service_temperature"]
+manufacturing = "Vapour deposition, rolling."
+joining = "Film on carrier."
+availability_cost = "Precious metal; small quantities."
+repairability = "Replace."
+durability = "Stable, non-oxidizing low-emissivity surface."
+failure_mechanisms = ["diffusion into substrates at temperature", "abrasion"]
+limitations = ["soft", "low melting point among the foils"]
+evidence_refs = ["crc"]
+
+[material.MAT-AU.properties]
+density = { value = 19300.0, unit = "kg/m3", at_K = 293.0, basis = "HANDBOOK", confidence = "HIGH", source = "crc" }
+thermal_conductivity = { value = 317.0, unit = "W/(m K)", at_K = 300.0, basis = "HANDBOOK", confidence = "HIGH", source = "crc" }
+melting_point = { value = 1337.3, unit = "K", phase_change = "melting", basis = "HANDBOOK", confidence = "HIGH", source = "crc" }
+emissivity = { min = 0.02, max = 0.03, unit = "1", at_K = 300.0, valid_K = [250.0, 500.0], basis = "TYPICAL", confidence = "MEDIUM", source = "crc", note = "polished, infrared" }
+
+[material.MAT-AU.behaviour]
+creep = "Soft."
+fatigue = "Not structural."
+radiation_response = "Not limiting."
+chemical_compatibility = "Inert."
+magnetic = "Diamagnetic, non-magnetic."
+
+# ---------------------------------------------------------------------------------------------------------------------------------------
+# Level B: plausible developments (variants); Level C: speculative (fictional variants)
+# ---------------------------------------------------------------------------------------------------------------------------------------
+[material.MAT-W-ADV01]
+name = "Tungsten-fibre-reinforced tungsten (Wf/W)"
+level = "B"
+parent = "MAT-W"
+family = "refractory metal-matrix composite"
+composition = "Drawn (potassium-doped) W fibres with engineered oxide interfaces in a CVD or powder W matrix"
+form = "Laboratory to pilot scale"
+inherits = []
+open = ["density", "specific_heat", "thermal_conductivity", "thermal_expansion", "yield_strength", "elastic_modulus", "fracture_toughness", "electrical_resistivity", "melting_point", "max_service_temperature", "emissivity"]
+improvement = "Pseudo-ductility: crack bridging, fibre pull-out and crack deflection keep a cracked hot face load-bearing and slow thermal-fatigue crack growth."
+mechanism = "Extrinsic toughening at engineered fibre-matrix interfaces (established composite mechanics); fibres keep some ductility after high-temperature exposure."
+modified_properties = "Fracture energy and thermal-fatigue crack resistance up; conductivity likely somewhat down across interfaces; melting point unchanged (same element). No number is recorded until measured."
+required_improvement = "Only if W is rejected for thermal fatigue: the required gain in cyclic-crack resistance follows from the OD-025 heat flux, cycle count and replacement interval, which are OPEN."
+validation_required = ["high-heat-flux cyclic test of mock-ups", "neutron irradiation of fibres and interfaces", "recrystallization behaviour of fibres", "joining to the Cu/CuCrZr heat sink"]
+manufacturing = "CVI/CVD of W around woven fibre preforms or powder routes; slow, scale-up unproven."
+tradeoffs = ["lower through-thickness conductivity", "residual porosity", "cost and production rate", "interface stability under irradiation"]
+applicability = "APP-DRV-PFC hot face if monolithic W fails the life requirement."
+evidence_refs = ["riesch2013", "neu2016"]
+
+[material.MAT-W-ADV01.behaviour]
+creep = "OPEN."
+fatigue = "Expected improvement in crack growth resistance (pseudo-ductility); not quantified."
+radiation_response = "Interface and fibre behaviour under neutrons OPEN."
+chemical_compatibility = "As W."
+magnetic = "As W."
+
+[material.MAT-REBCO-APC01]
+name = "REBCO with artificial pinning centres (nanoengineered flux pinning)"
+level = "B"
+parent = "MAT-REBCO"
+family = "high-temperature superconductor"
+composition = "REBCO film with self-assembled BaZrO3 (or similar) nanorods and nanoparticles"
+form = "Coated-conductor tape"
+inherits = ["critical_temperature"]
+open = ["density", "specific_heat", "thermal_conductivity", "thermal_expansion", "yield_strength", "elastic_modulus", "fracture_toughness", "electrical_resistivity", "melting_point", "max_service_temperature", "emissivity"]
+improvement = "Higher in-field critical current density at the operating temperature."
+mechanism = "Correlated pinning of flux vortices by engineered nanoscale defects (demonstrated in research and industrial tapes)."
+modified_properties = "In-field Jc up; Tc slightly changed (inherited range used); it creates no magnetic energy and removes no Maxwell stress (Wayfarer S&E 05!A38)."
+required_improvement = "Set by the coil current density and field required by OD-024 (OPEN)."
+validation_required = ["Jc(B, T, angle) at the coil operating point", "irradiated Jc", "strain tolerance"]
+manufacturing = "In-situ during film deposition; production uniformity is the challenge."
+tradeoffs = ["lower Jc at self field in some recipes", "process window"]
+applicability = "The WORKING conductor designation of the seed, manifold and nozzle coils (hts_conductor, 05!A37:A38)."
+canon_ref = "hts_conductor"
+evidence_refs = ["macmanus2004", "sparc_tfmc"]
+
+[material.MAT-REBCO-APC01.behaviour]
+creep = "Not relevant."
+fatigue = "As REBCO."
+radiation_response = "Pinning-centre stability under neutrons OPEN (OD-024)."
+chemical_compatibility = "As REBCO."
+magnetic = "Superconductor; stronger pinning of vortices."
+
+[material.MAT-RAD-NPE01]
+name = "Nanophotonic refractory emitter skin"
+level = "B"
+parent = "MAT-W"
+family = "refractory photonic surface"
+composition = "Microstructured or multilayer refractory metal / oxide surface (W, HfO2 class) tuned for high broadband infrared emissivity"
+form = "Surface structure on the hot radiator skin"
+inherits = []
+open = ["density", "specific_heat", "thermal_conductivity", "thermal_expansion", "yield_strength", "elastic_modulus", "fracture_toughness", "electrical_resistivity", "melting_point", "max_service_temperature", "emissivity"]
+improvement = "Raise and stabilize the emissivity of a refractory skin at about 1800 K."
+mechanism = "Photonic-crystal and metamaterial control of thermal emission; emissivity can approach but never exceed 1 at any wavelength (Kirchhoff, Planck limit)."
+modified_properties = "Hemispherical emissivity up toward the black-body limit; structure must survive diffusion and coarsening at temperature. No number recorded until measured."
+required_improvement = "The physical radiator area and emissivity stay as the Drive canon sets them (radiators.emissivity); this variant must meet that emissivity for the mission life, not change it."
+validation_required = ["emissivity at temperature after long ageing", "microstructure stability at 1800 K", "micrometeoroid damage tolerance"]
+manufacturing = "Lithography, self-assembly or deposition over large areas: the area scale is the challenge."
+tradeoffs = ["thermal stability of nanostructures", "area manufacturing cost"]
+applicability = "Hot radiator skin (radiators.nano_stack, WORKING)."
+canon_ref = "radiator_nano_stack"
+evidence_refs = ["rinnerbauer2012"]
+
+[material.MAT-RAD-NPE01.behaviour]
+creep = "OPEN."
+fatigue = "Thermal-cycling stability OPEN."
+radiation_response = "OPEN."
+chemical_compatibility = "Vacuum only."
+magnetic = "As parent."
+
+[material.MAT-W-FIJI01]
+name = "Fiji-stabilized tungsten (speculative)"
+level = "C"
+parent = "MAT-W"
+family = "speculative refractory system"
+composition = "Tungsten with a Fiji-lattice-derived grain-boundary and defect stabilization (fictional)"
+form = "Fictional"
+inherits = []
+open = ["density", "specific_heat", "thermal_conductivity", "thermal_expansion", "yield_strength", "elastic_modulus", "fracture_toughness", "electrical_resistivity", "melting_point", "max_service_temperature", "emissivity"]
+improvement = "Suppress recrystallization and helium-bubble growth so the hot face keeps its microstructure longer."
+mechanism = "SPECULATIVE: a Fiji-derived ordering of grain boundaries pins defects and helium. Not established physics."
+modified_properties = "FICTIONAL and unquantified: slower microstructural degradation only. It does not raise the melting point, add conductivity, remove deposited heat or reduce the heat the coolant must carry; energy and momentum are conserved."
+required_improvement = "Owner decision: what life the fictional layer may add, if any (no value assumed)."
+validation_required = ["owner approval as a fictional layer", "explicit separation from Level A data in every calculation"]
+manufacturing = "Fictional."
+tradeoffs = ["depends on the Fiji lattice's existence and supply in the setting"]
+applicability = "Story-level alternative for the PFC hot face; never replaces validated data automatically."
+evidence_refs = ["hirai2016"]
+speculative_claims = ["recrystallization onset delayed (no magnitude)", "helium nanostructure growth slowed (no magnitude)"]
+conservation_check = "No change to energy balance, heat flux, deposited energy or radiator load; only the damage rate is fictional."
+
+[material.MAT-W-FIJI01.behaviour]
+creep = "FICTIONAL, unquantified."
+fatigue = "FICTIONAL, unquantified."
+radiation_response = "FICTIONAL: slower helium-induced damage, unquantified."
+chemical_compatibility = "As W."
+magnetic = "As W."

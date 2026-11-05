@@ -28,7 +28,9 @@ workbooks.
 - its dependencies (acyclic);
 - the inspection groups that guard its interfaces.
 
-It also defines the anchor families. These module IDs are new names. They are not the S&E 48 workflow-gate IDs (WF-001…).
+It also defines the anchor families. WF-CORE owns the shared PMDS material catalogue (`data/materials/*.toml`, `materials.py`,
+`material_physics.py`, docs/MATERIALS.md): a module session proposes a new application or binding for its own assets through integration,
+like any shared-file change. These module IDs are new names. They are not the S&E 48 workflow-gate IDs (WF-001…).
 
 **Habitat: one assembly, one asset per ring (phase 3).** Each ring is its own engineering asset and build target: `WF_HABITAT_A`
 (`HABITAT_A`, owned by WF-RING-A) and `WF_HABITAT_B` (`HABITAT_B`, WF-RING-B). Each holds its rotor, its mechanism control

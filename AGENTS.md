@@ -15,7 +15,7 @@ Each purpose and development stage has one place. Add no top-level folder withou
 
 | Place | Holds |
 | --- | --- |
-| `data/` | the parameters (`wayfarer_3d.toml`), source map, detail packs and `data/simulations/` (imported and generated scenario JSON) |
+| `data/` | the parameters (`wayfarer_3d.toml`), source map, detail packs, the PMDS material catalogue (`data/materials/`, docs/MATERIALS.md) and `data/simulations/` (imported and generated scenario JSON) |
 | `src/wayfarer/` | pure modules, Blender generators (`components/`, `build/`), validation, presentation, shots, export |
 | `assets/` | the built `.blend` libraries of the approved ship (generated, not in Git) |
 | `tests/`, `tools/` | owner-number and invariant tests; the workflow commands |

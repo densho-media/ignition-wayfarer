@@ -624,7 +624,7 @@ def inspect(root=ROOT, output=None, scope=None):
     scope=set(GROUPS) if scope is None else set(scope)
     unknown=scope-set(GROUPS);assert not unknown,f'Unknown inspection groups {sorted(unknown)}; choose from {sorted(GROUPS)}'
     in_scope=lambda group:group in scope
-    s,_,spec_text,source_text=load(root)
+    s,src_doc,spec_text,source_text=load(root)
     assets=root/'assets/wayfarer'
     # Parts are relative to assets/wayfarer: studies embed their own inputs and are summarized separately.
     parts=lambda p:set(p.relative_to(assets).parts)
@@ -636,6 +636,8 @@ def inspect(root=ROOT, output=None, scope=None):
               *(f'{modules.ASSET_DIR}/{n}.blend' for n in detail_assets)}
     found={str(p.relative_to(assets)) for p in files}
     assert found==expected,f'Production file set differs from components + subsystems + vehicle + detail assets: unexpected {sorted(found-expected)} (retired files are listed in RETIRED and moved by a full build: {sorted(RETIRED)}), missing {sorted(expected-found)}'
+    import materials
+    pmds_db=materials.load(root,src_doc['sources'],s['production']['exterior']['families'])
     studies={}
     blade_registry={}
     hot_report={};summaries={};graph={};area=0;detail_report={};interfaces={};interior_report={};drive_report=None;power_report=None;rotor_report={};crew_report={}
@@ -662,6 +664,14 @@ def inspect(root=ROOT, output=None, scope=None):
             if lib.parent is None:links.append(str(resolved.relative_to(assets)))
         graph[str(path.relative_to(assets))]=links
         summaries[str(path.relative_to(assets))]={'generated_objects':len(objects),'ids':sorted(identifiers),'direct_links':sorted(links)}
+        # PMDS (docs/MATERIALS.md): an asset with material bindings must carry the hash of the catalogue records it used; a changed
+        # material, purpose, application, appearance or reference makes exactly the assets that use it stale.
+        pmds_asset=str(scene.get('wf_asset',''))[3:]
+        if pmds_asset in materials.bound_assets(pmds_db):
+            assert scene.get('materials_hash')==materials.asset_hash(pmds_asset,pmds_db),f'Stale material bindings: {path.name} (rebuild {pmds_asset})'
+            bound=[o for o in objects if o.get('material_application_id')]
+            assert {o['material_application_id'] for o in bound}=={b['application_id'] for b in materials.asset_bindings(pmds_asset,pmds_db).values()},f'PMDS bindings incomplete in {path.name}'
+            summaries[str(path.relative_to(assets))]['material_bound_objects']=len(bound)
         interfaces[path.name]={o.name:o.matrix_world.translation.copy() for o in objects if o.name.startswith('IF_')}
         detail_report[path.name]=detail_checks(s,root,path,objects,detail_assets)
         for o in objects:

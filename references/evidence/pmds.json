@@ -1,0 +1,162 @@
+{
+ "task": "pmds",
+ "approved": "2026-11-05 owner brief \"PMDS Final Review, Corrections & Squash to Main\" (squash authorized after verification)",
+ "branch": "claude/project-thread-9yueln",
+ "full_pipeline": "runs/20261105T091549Z-pipeline: PASS, 224 tests OK (1 skipped), geometry diff 0 against baseline_forward_shield_eye_window",
+ "counts": {
+  "materials": 31,
+  "purposes": 14,
+  "applications": 16,
+  "references": 35
+ },
+ "evidence_snapshot": {
+  "PRIMARY_VERIFIED": 0,
+  "SECONDARY_VERIFIED": 25,
+  "TRANSCRIBED": 45,
+  "UNVERIFIED": 31
+ },
+ "spec_crosscheck": {
+  "CONSISTENT": 12,
+  "NOT_LINKED": 9,
+  "DIFFERS": 1,
+  "NOT_CHECKABLE": 1,
+  "DIRECT_LOOKUP": 1
+ },
+ "review_items": [
+  {
+   "spec_key": "radiators.zones.bulkhead.layers.2.emissivity",
+   "spec_value": 0.05,
+   "material": "MAT-AU",
+   "catalogue_low": 0.02,
+   "catalogue_high": 0.03,
+   "status": "DIFFERS",
+   "next_step": "review item: the spec 0.05 lies above polished gold (0.02-0.03); it may hold a degradation or film margin that should be stated"
+  },
+  {
+   "spec_key": "radiators.zones.bulkhead.foil.1.cte",
+   "spec_value": 9.7e-06,
+   "material": "MAT-TI6AL4V",
+   "catalogue_low": null,
+   "catalogue_high": null,
+   "status": "NOT_CHECKABLE",
+   "next_step": "the catalogue holds only a room-temperature CTE: add a mean-CTE table before linking"
+  }
+ ],
+ "screens": {
+  "plasma_armour": {
+   "conditions": {
+    "hot_face": {
+     "temperature_K": 1100.0
+    },
+    "cooling_conduit": {
+     "temperature_K": 900.0
+    }
+   },
+   "verdict": "EXCEEDS_LIMIT",
+   "layers": {
+    "hot_face": {
+     "material": "MAT-W",
+     "verdict": "NOT_EVALUABLE",
+     "reasons": [
+      "application requirements OPEN: heat_flux (OPEN od_025), erosion_rate (OPEN od_025), replacement_interval (OPEN od_025), coolant (OPEN od_025), neutron_fluence (OPEN od_025)",
+      "operating conditions missing: neutron_fluence_dpa, life_h",
+      "no value valid at the operating temperature: thermal_expansion",
+      "evidence UNVERIFIED: max_service_temperature",
+      "life requirement present but no LIFETIME_RATED service limit (screening estimates only)",
+      "service limits are SCREENING_ESTIMATE thresholds, not lifetime ratings"
+     ]
+    },
+    "thermal_interface": {
+     "material": "MAT-CU-OF",
+     "verdict": "NOT_EVALUABLE",
+     "reasons": [
+      "application requirements OPEN: heat_flux (OPEN od_025), erosion_rate (OPEN od_025), replacement_interval (OPEN od_025), coolant (OPEN od_025), neutron_fluence (OPEN od_025)",
+      "operating conditions missing: temperature_K, neutron_fluence_dpa, life_h",
+      "no value valid at the operating temperature: thermal_conductivity, thermal_expansion, yield_strength",
+      "life requirement present but no LIFETIME_RATED service limit (screening estimates only)"
+     ]
+    },
+    "cooling_conduit": {
+     "material": "MAT-CUCRZR",
+     "verdict": "EXCEEDS_LIMIT",
+     "reasons": [
+      "max_service_temperature violated at 900.0 K: requires T <= 573.0 K (conservative low end) (ESTIMATE, SCREENING_ESTIMATE, UNVERIFIED)",
+      "application requirements OPEN: heat_flux (OPEN od_025), erosion_rate (OPEN od_025), replacement_interval (OPEN od_025), coolant (OPEN od_025), neutron_fluence (OPEN od_025)",
+      "operating conditions missing: neutron_fluence_dpa, life_h",
+      "required properties OPEN: thermal_expansion",
+      "limits not checkable without the neutron dose: min_service_temperature",
+      "no value valid at the operating temperature: density, thermal_conductivity, yield_strength",
+      "evidence UNVERIFIED: max_service_temperature",
+      "life requirement present but no LIFETIME_RATED service limit (screening estimates only)",
+      "service limits are SCREENING_ESTIMATE thresholds, not lifetime ratings"
+     ]
+    },
+    "support": {
+     "material": "MAT-SS-316L",
+     "verdict": "NOT_EVALUABLE",
+     "reasons": [
+      "application requirements OPEN: heat_flux (OPEN od_025), erosion_rate (OPEN od_025), replacement_interval (OPEN od_025), coolant (OPEN od_025), neutron_fluence (OPEN od_025)",
+      "operating conditions missing: temperature_K, neutron_fluence_dpa, life_h",
+      "no value valid at the operating temperature: density, elastic_modulus, fracture_toughness, thermal_expansion, yield_strength",
+      "life requirement present but no LIFETIME_RATED service limit (screening estimates only)"
+     ]
+    }
+   }
+  },
+  "thermal_bulkhead": {
+   "conditions": {
+    "foil_layer_1": {
+     "temperature_K": 1204.0
+    },
+    "foil_layer_2": {
+     "temperature_K": 805.0
+    },
+    "foil_layer_3": {
+     "temperature_K": 493.0
+    },
+    "truss": {
+     "temperature_K": 1000.0
+    }
+   },
+   "verdict": "EXCEEDS_LIMIT",
+   "layers": {
+    "foil_layer_1": {
+     "material": "MAT-TZM",
+     "verdict": "NOT_EVALUABLE",
+     "reasons": [
+      "required properties OPEN: electrical_resistivity, emissivity, thermal_conductivity, max_service_temperature",
+      "no value valid at the operating temperature: density"
+     ]
+    },
+    "foil_layer_2": {
+     "material": "MAT-TI6AL4V",
+     "verdict": "EXCEEDS_LIMIT",
+     "reasons": [
+      "max_service_temperature violated at 805.0 K: requires T <= 673.0 K (conservative low end) (TYPICAL, SCREENING_ESTIMATE, UNVERIFIED)",
+      "required properties OPEN: emissivity",
+      "no value valid at the operating temperature: density, electrical_resistivity, thermal_conductivity",
+      "evidence UNVERIFIED: melting_point, max_service_temperature",
+      "service limits are SCREENING_ESTIMATE thresholds, not lifetime ratings"
+     ]
+    },
+    "foil_layer_3": {
+     "material": "MAT-AU",
+     "verdict": "NOT_EVALUABLE",
+     "reasons": [
+      "required properties OPEN: electrical_resistivity, max_service_temperature",
+      "no value valid at the operating temperature: density, thermal_conductivity"
+     ]
+    },
+    "truss": {
+     "material": "MAT-CC",
+     "verdict": "NOT_EVALUABLE",
+     "reasons": [
+      "required properties OPEN: elastic_modulus, fracture_toughness, thermal_expansion, yield_strength",
+      "no value valid at the operating temperature: density"
+     ]
+    }
+   }
+  }
+ },
+ "note": "Screens are conditional on the stated temperatures; none is qualification. CuCrZr 900 K is a screening case, not a Wayfarer operating value; OD-024/025/026 stay OPEN."
+}

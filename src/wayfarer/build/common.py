@@ -310,6 +310,7 @@ def save(path, root_collection, spec_text, source_text):
         for old in backups[:-3]:
             old.unlink()
     functional_review(root_collection)
+    bind_materials(root_collection)
     for name, content in [('WF_SOURCE_SNAPSHOT', spec_text), ('WF_PROVENANCE_SNAPSHOT', source_text)]:
         text = bpy.data.texts.get(name) or bpy.data.texts.new(name)
         text.clear()
@@ -364,6 +365,139 @@ def functional_review(root_collection):
     root_collection['functional_counts'] = counts
     text = bpy.data.texts.get('FUNCTIONAL_COLOR_LEGEND') or bpy.data.texts.new('FUNCTIONAL_COLOR_LEGEND')
     text.clear(); text.write(fc.legend_text())
+
+
+MATERIAL_KEYS = ('material_id', 'material_purpose_ids', 'material_application_id', 'material_variant_id', 'material_engineering_status',
+                 'material_evidence_ref', 'material_layer', 'material_appearance_id', 'material_selection', 'material_geometry',
+                 'material_level', 'material_layer_stack', 'material_canon_ref', 'material_open_refs', 'material_verification', 'material_slots')
+
+
+def binding_props(b):
+    """Custom properties of one PMDS binding (materials.layer_binding)."""
+    return {'material_id': b['material_id'], 'material_purpose_ids': ','.join(b['purpose_ids']), 'material_application_id': b['application_id'],
+            'material_variant_id': b['variant_id'], 'material_engineering_status': b['engineering_status'],
+            'material_evidence_ref': b['evidence_ref'], 'material_layer': b['layer'], 'material_appearance_id': b['appearance_id'],
+            'material_selection': b['selection'], 'material_geometry': b['geometry'], 'material_level': b['level'],
+            'material_layer_stack': b['stack'], 'material_canon_ref': b['canon_ref'], 'material_open_refs': b['open_refs'],
+            'material_verification': b['verification']}
+
+
+def bind_materials(root_collection):
+    """PMDS (docs/MATERIALS.md): the asset's application bindings (data/materials/applications.toml) as custom properties. Each bound
+    display material (WF_MAT_<name>, generator-owned) carries its application, layer, material, purposes and status; every generator-owned
+    object using it carries the same IDs for its first bound slot, and material_slots (JSON, slot index -> binding) when it has several
+    material slots, so a multi-material mesh is never declared one material. Metadata only: geometry, materials' shading, component IDs,
+    source refs and the functional review colours are untouched. The asset records materials_hash, the hash of the records it used."""
+    import json
+    import materials
+    import functional_colors as fc
+    asset = fc.asset_key(root_collection.name)
+    binds = materials.asset_bindings(asset)
+    holders = [bpy.context.scene, root_collection]
+    for h in holders:
+        for k in ('materials_hash', 'materials_bound'):
+            if k in h:
+                del h[k]
+    if not binds:
+        return {}
+    local = {m.name[7:]: m for m in bpy.data.materials if m.library is None and m.name.startswith('WF_MAT_') and m.get('wf_owner') == OWNER}
+    missing = sorted(set(binds) - set(local))
+    if missing:
+        raise ValueError(f'PMDS bindings name display materials {asset} does not make: {missing} (data/materials/applications.toml)')
+    props = binding_props
+    for name, b in binds.items():
+        for k, v in props(b).items():
+            local[name][k] = v
+    gen = bpy.data.collections.get(f'GEN_{root_collection.name}')
+    counts = {}
+    for obj in (gen.all_objects if gen else []):
+        if obj.library is not None or obj.get('wf_owner') != OWNER or not getattr(obj, 'material_slots', None):
+            continue
+        slots = {i: binds[s.material.name[7:]] for i, s in enumerate(obj.material_slots)
+                 if s.material and s.material.library is None and s.material.name.startswith('WF_MAT_') and s.material.name[7:] in binds}
+        for k in MATERIAL_KEYS:
+            if k in obj:
+                del obj[k]
+        if not slots:
+            continue
+        first = slots[min(slots)]
+        for k, v in props(first).items():
+            obj[k] = v
+        if len(obj.material_slots) > 1:
+            obj['material_slots'] = json.dumps({str(i): {'material_id': b['material_id'], 'application_id': b['application_id'], 'layer': b['layer']}
+                                                for i, b in slots.items()}, sort_keys=True)
+        for b in slots.values():
+            counts[b['application_id']] = counts.get(b['application_id'], 0)+1
+    unused = sorted({b['application_id'] for b in binds.values()} - set(counts))
+    if unused:
+        raise ValueError(f'PMDS applications bound in {asset} but on no generated object: {unused}')
+    for h in holders:
+        h['materials_hash'] = materials.asset_hash(asset)
+        h['materials_bound'] = json.dumps(counts, sort_keys=True)
+    return counts
+
+
+VIEW_PROPERTY = 'pmds_view'                     # view-layer property: 0 physical appearance, 1 engineering material view
+VIEW_LAYERS = (('PHYSICAL_APPEARANCE', 0.0), ('ENGINEERING_MATERIAL', 1.0))
+ENGINEERING_NEUTRAL = (0.16, 0.16, 0.17)        # unbound solids in the engineering view: neutral, so the classified parts read
+
+
+def special_representation(m):
+    """Plasma, fields, photons, glows and debug layers are representations of phenomena, not solids: they keep their own shading."""
+    if m.get('driven_by') or getattr(m, 'surface_render_method', 'DITHERED') == 'BLENDED':
+        return True
+    node = next((n for n in m.node_tree.nodes if n.type == 'BSDF_PRINCIPLED'), None) if m.use_nodes else None
+    return node is None or node.inputs['Emission Strength'].default_value > 0 or node.inputs['Alpha'].default_value < 1
+
+
+# surface: (noise scale per metre of object space, bump strength). Kept weak: a cue at review distance, never a decoration.
+SURFACE_CUES = {'brushed': (400.0, 0.02), 'fuzz': (900.0, 0.12), 'weave': (120.0, 0.05), 'quilt': (2.0, 0.20), 'foil': (1.5, 0.06)}
+
+
+def material_views(s, scene=None):
+    """PMDS in-memory presentation (never saved into a production asset; used by the review file and previews): every bound material
+    gets its physical appearance (appearances.toml, through the exterior families where named) and an engineering material view colour
+    (its layer's first purpose), switched per view layer by the pmds_view property (an Attribute node of type View Layer), so both views
+    share every mesh. Unbound solids turn neutral in the engineering view; special representations (plasma, fields, glows) are left as
+    they are. Adds the two view layers to the scene. Returns {material name: (appearance or 'neutral', purpose or '')}."""
+    import materials
+    db = materials.load(); scene = scene or bpy.context.scene; done = {}
+    for m in bpy.data.materials:
+        if not m.name.startswith('WF_MAT_') or not m.use_nodes or special_representation(m):
+            continue
+        nodes, links = m.node_tree.nodes, m.node_tree.links
+        out = next((n for n in nodes if n.type == 'OUTPUT_MATERIAL'), None)
+        phys = next((n for n in nodes if n.type == 'BSDF_PRINCIPLED'), None)
+        if out is None or phys is None or nodes.get('PMDS_Mix'):
+            continue
+        if m.get('material_appearance_id'):
+            color, rough, metal, surface = materials.appearance_finish(m['material_appearance_id'], s, db)
+            phys.inputs['Base Color'].default_value = (*color, 1); phys.inputs['Roughness'].default_value = rough
+            phys.inputs['Metallic'].default_value = metal
+            if surface in ('brushed', 'fuzz', 'weave', 'quilt', 'foil'):
+                noise = nodes.new('ShaderNodeTexNoise'); noise.name = 'PMDS_Surface'
+                # Restrained, process-derived surface cues (PMDS 1.1 review): MLI crinkle and foil waviness at blanket/gore scale, a faint
+                # cloth weave, helium-fuzz micro-roughness as a weak bump; machining lay is anisotropic specular, not an isotropic bump.
+                noise.inputs['Scale'].default_value = SURFACE_CUES[surface][0]
+                bump = nodes.new('ShaderNodeBump'); bump.name = 'PMDS_Bump'; bump.inputs['Strength'].default_value = SURFACE_CUES[surface][1]
+                links.new(noise.outputs['Fac'], bump.inputs['Height']); links.new(bump.outputs['Normal'], phys.inputs['Normal'])
+                if surface == 'brushed' and 'Anisotropic' in phys.inputs:
+                    phys.inputs['Anisotropic'].default_value = 0.5
+            purpose = m['material_purpose_ids'].split(',')[0]
+            eng_color = tuple(db['purposes'][purpose]['view_color']); done[m.name] = (m['material_appearance_id'], purpose)
+        else:
+            eng_color = ENGINEERING_NEUTRAL; done[m.name] = ('neutral', '')
+        eng = nodes.new('ShaderNodeBsdfPrincipled'); eng.name = 'PMDS_Engineering'
+        eng.inputs['Base Color'].default_value = (*eng_color, 1); eng.inputs['Roughness'].default_value = .7; eng.inputs['Metallic'].default_value = 0
+        attr = nodes.new('ShaderNodeAttribute'); attr.name = 'PMDS_View'; attr.attribute_type = 'VIEW_LAYER'; attr.attribute_name = VIEW_PROPERTY
+        mix = nodes.new('ShaderNodeMixShader'); mix.name = 'PMDS_Mix'
+        links.new(attr.outputs['Fac'], mix.inputs['Fac']); links.new(phys.outputs['BSDF'], mix.inputs[1]); links.new(eng.outputs['BSDF'], mix.inputs[2])
+        links.new(mix.outputs['Shader'], out.inputs['Surface'])
+    base = scene.view_layers[0]
+    for name, value in VIEW_LAYERS:
+        layer = scene.view_layers.get(name) or (base if base.name not in dict(VIEW_LAYERS) and name == VIEW_LAYERS[0][0] else scene.view_layers.new(name))
+        layer.name = name; layer[VIEW_PROPERTY] = value
+    return done
 
 
 def owned_action(name):

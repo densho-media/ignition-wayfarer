@@ -326,6 +326,21 @@ packet (Q_src, T_src; H2 mdot, p, T, phase, enthalpy in/out; field/plume/dose ke
   **Done when:** selected owner-released construction passes affected thermal-growth/geometry checks and its real area is retained
   in the shared data. No provisional datum/root move or radiator shrink to fit a visual/runtime budget.
 
+- [ ] **F05 — Purpose–material design system: from candidates to evaluated selections.** The catalogue, applications and both Blender
+  views exist (docs/MATERIALS.md, propulsion chain bound); PMDS 1.1 added evidence states, strict screening and the integration table.
+  Left: read the primary sources (nothing is PRIMARY_VERIFIED: srd.nist.gov, specialmetals.com, arxiv.org and publisher hosts need to be
+  allowed in the cloud environment, or the check runs on the workstation), first the W and Cu conductivity tables (Ho-Powell-Liley), the
+  ITER MPH CuCrZr data, MMPDS Ti-6Al-4V and 2195 allowables and the W recrystallization threshold; resolve the two review items (bulkhead
+  gold emissivity 0.05 vs 0.02-0.03; Ti-6Al-4V layer-2 foil at about 805 K over its 673 K screening limit) and the CFRP skirt's G-10-class
+  conductivity integral; add hot emissivity and mean-CTE tables for the bulkhead foils; fill the OPEN properties a screen needs (CuCrZr expansion, 316L
+  toughness and service limit, W yield and toughness, the 316LN 4 K allowables); bind the hot/warm/low coolant trunks once the loops have
+  their own display materials (`APP-THM-HOT-LOOP`); extend applications to the hull, rings, forward shield and EYE; take the PREFERRED
+  layers to the owner workbooks with OD-024/025/026 instead of choosing here. Research backlog (does not block using PMDS): primary-source
+  verification; plasma-facing materials (OD-025); high-field superconductor Jc at the operating point (OD-024); radiation shielding;
+  long-life high-temperature structures (Ti-6Al-4V foil vacuum limit and life at 805-870 K); radiator materials and coating aging;
+  temperature- and radiation-dependent property tables; creep, fatigue and replacement intervals. **Done when:** each propulsion-chain layer has a screen
+  verdict against Drive-sourced operating requirements and the owner has accepted or rejected it in the workbook.
+
 ## G — Complete habitat, survival and service implementation
 
 Owner scope: S&E 12A, 33–39, 41–42, existing room/recovery reviews. The 42 equipment groups and 32 survival groups overlap; map each

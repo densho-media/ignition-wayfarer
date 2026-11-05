@@ -181,6 +181,24 @@ def detail_selection(root, names, base='HEAD'):
     return targets, groups & set(INSPECT_GROUPS)
 
 
+def material_targets(root, base='HEAD'):
+    """Build targets (asset names) whose PMDS bindings use a catalogue record that differs from `base` (materials.affected_assets);
+    None when either state cannot be read."""
+    sys.path.insert(0, str(root/'src/wayfarer'))
+    import materials
+    old = {}
+    for name in materials.FILES:
+        try:
+            old[name] = subprocess.check_output(['git', '-C', str(root), 'show', f'{base}:{materials.DIR}/{name}.toml'], text=True, stderr=subprocess.DEVNULL)
+        except subprocess.CalledProcessError:
+            old[name] = ''
+    try:
+        new = materials.texts(root)
+    except OSError:
+        return None
+    return materials.affected_assets(old, new)
+
+
 def plan(root=ROOT, paths=None, base='HEAD'):
     root = Path(root).resolve(); paths = changed_paths(root, base) if paths is None else list(paths)
     g = graph(root); reverse = defaultdict(set)
@@ -189,7 +207,7 @@ def plan(root=ROOT, paths=None, base='HEAD'):
             reverse[d].add(p)
     tests = sorted(p for p in g if p.parent == Path('tests') and p.name.startswith('test_'))
     widen = {}                      # reason -> True: run everything of that kind
-    touched = set(); reasons = {}; godot_changed = []; data_files = []; data_values = False; packs_touched = set()
+    touched = set(); reasons = {}; godot_changed = []; data_files = []; data_values = False; packs_touched = set(); materials_changed = []
     for rel in paths:
         p = Path(rel)
         pack = pack_name(rel)
@@ -205,6 +223,8 @@ def plan(root=ROOT, paths=None, base='HEAD'):
             touched.add(p); reasons[rel] = 'Python module: its importers and their tests'
             if p.stem in SHARED:
                 widen['shared module ' + rel] = True
+        elif p.parts[:2] == ('data', 'materials'):
+            materials_changed.append(rel); reasons[rel] = 'PMDS catalogue (docs/MATERIALS.md): test_materials and the assets whose bound records changed'
         elif p.suffix == '.toml' and p.parts[0] == 'data':
             data_files.append(rel)
         elif p.suffix == '.json' and p.parts[:2] == ('data', 'simulations'):
@@ -264,10 +284,22 @@ def plan(root=ROOT, paths=None, base='HEAD'):
     reached = {pack_name(str(q)) for q in closure(reverse, touched)} - {None}
     pack_targets, pack_groups = detail_selection(root, packs_touched | reached, base)
     selected.update(t for t in tests if t.stem in PACK_TESTS and (packs_touched | reached))
-    targets = sorted(set(targets) | pack_targets)
+    pmds_targets = set()
+    if materials_changed:
+        selected.update(t for t in tests if t.stem == 'test_materials')
+        hit = material_targets(root, base)
+        if hit is None:
+            widen['PMDS catalogue not comparable with ' + base] = True
+        else:
+            pmds_targets = set(hit)
+            for rel in materials_changed:
+                reasons[rel] += f": {', '.join(hit) or 'no bound asset'}"
+    targets = sorted(set(targets) | pack_targets | pmds_targets)
     groups |= pack_groups
     for k in list(groups):
         groups |= NEIGHBOURS[k]
+    if pmds_targets and not used_by_build:
+        used_by_build = {True}
     if (packs_touched | reached) and not used_by_build:
         used_by_build = {True}
     if everything or data_values:
@@ -304,7 +336,7 @@ def stage_inputs(root, scripts, g=None):
     import hashlib
     g = g or graph(root)
     paths = closure(g, [Path(s) for s in scripts])
-    files = [*(root/p for p in paths), *sorted((root/'data').glob('*.toml')),
+    files = [*(root/p for p in paths), *sorted((root/'data').glob('*.toml')), *sorted((root/'data/materials').glob('*.toml')),
              *(p for p in sorted((root/'assets').rglob('*.blend')) if 'milestones' not in p.parts and 'studies' not in p.parts),
              *sorted((root/'references').glob('p1_eva_*.json')), *sorted((root/'references').glob('p1_human_*.json'))]
     return {str(f.relative_to(root)): hashlib.sha256(f.read_bytes()).hexdigest() for f in files if f.is_file()}

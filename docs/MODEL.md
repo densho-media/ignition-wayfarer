@@ -592,6 +592,27 @@ file holds the legend as the `FUNCTIONAL_COLOR_LEGEND` text.
 | Power | indigo | violet |
 | Docking, EVA, service | cream | yellow |
 
+## Purpose–material design system (PMDS)
+
+`data/materials/` (docs/MATERIALS.md): 14 engineering purposes (P01–P14), a material catalogue of 27 real materials with cited, unit-bearing,
+temperature-ranged properties and explicit OPEN entries, three Level B variants (Wf/W, REBCO with artificial pinning, a nanophotonic
+refractory emitter) and one Level C variant (Fiji-stabilized W, fictional, blocked from calculations), 20 appearances and 16 applications.
+Nothing in it is canon. The applications cover the propulsion chain: the plasma armour (`APP-DRV-PFC`, the ITER-inspired stack W hot
+face / Cu interlayer / CuCrZr cooling tube / steel support, only the hot face drawn; OD-025 keeps material, heat flux and life OPEN), the
+nozzle strike modules, coils (REBCO-APC, OD-024), casings, pickups and services, the fuel and hydrogen vessels (MLI over Al-Li 2195) and
+skirts, the cryogenic feed (OD-026), the hydrogen injection ring, the shadow shield (steel cans over W, LiH and B4C, unlayered), the hot,
+warm and low radiators and the thermal bulkhead. Bound assets: PROPULSION, NOZZLE, STORAGE, SHIELDING, THERMAL, RADIATOR; their objects
+and display materials carry the PMDS IDs, and each asset records `materials_hash`. Review files and previews switch between the
+`PHYSICAL_APPEARANCE` and `ENGINEERING_MATERIAL` view layers (`common.material_views`); production files keep their review shading.
+`material_physics` gives calculations property lookups without extrapolation. Every number carries its evidence state: none primary-verified
+(the primary sources were not reachable), 25 secondary-verified (a 2026-11-05 snapshot), the rest TRANSCRIBED or UNVERIFIED; service limits are SCREENING_ESTIMATE
+thresholds, never lifetime ratings. Screens return EXCEEDS_LIMIT, NOT_EVALUABLE or WITHIN_CHECKED_LIMITS and never approve; every
+propulsion-chain layer is NOT_EVALUABLE today because its operating requirements are OPEN. No Wayfarer calculation reads the catalogue:
+the integration table cross-checks the spec's material values (Ti-6Al-4V struts, Al-Li 2195 shells, CFRP skirt density, AZ-93, the
+bulkhead foil densities, the standoff conductivity) and finds one difference, the bulkhead's gold layer emissivity (0.05 against
+0.02-0.03 for polished gold), a review item. The bulkhead's layer 2 (Ti-6Al-4V foil at about 805 K) lies above that alloy's 673 K
+strength screening limit, a second review item.
+
 ## Placed mass model (B02)
 
 **WORKING (Claude under the owner's delegation of 2026-10-31; S&E 15 OWN-B02-MASS-PLACEMENT-2026-10-31, 13!A18:I36, 98!A130).**

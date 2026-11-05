@@ -1,0 +1,179 @@
+# Purpose–Material Design System (PMDS): physical appearance records (docs/MATERIALS.md).
+# How a material looks in the Blender physical appearance view: a glTF-safe Principled finish (linear base colour, roughness, metallic)
+# plus an optional surface treatment. An appearance either names an existing exterior family (`family`, data/wayfarer_3d.toml
+# [production.exterior.families], so the exterior grammar and the appearance view share one finish) or gives its own values.
+# basis: PBR_REFERENCE (from published measured reflectance charts), FAMILY (the existing exterior family) or ARTISTIC (a judged
+# depiction). Appearances are presentation: none of these numbers is a physical property, and none feeds a calculation.
+# emission is allowed only with a physical reason (a hot surface's thermal glow); solid materials here have none.
+schema_version = 1
+
+[appearance.APP-W-MACHINED]
+material = "MAT-W"
+name = "Tungsten, ground or machined"
+base_color = [0.50, 0.50, 0.49]
+roughness = 0.35
+metallic = 1.0
+surface = "brushed"
+basis = "ARTISTIC"
+note = "neutral grey metal, darker than steel; no measured tungsten F0 recorded here"
+
+[appearance.APP-W-PLASMA-EXPOSED]
+material = "MAT-W"
+name = "Tungsten after helium plasma exposure"
+base_color = [0.05, 0.05, 0.055]
+roughness = 0.90
+metallic = 0.3
+surface = "fuzz"
+wear = "in-service darkening; nanostructured 'fuzz' surfaces are nearly black (Baldwin 2008)"
+basis = "ARTISTIC"
+note = "the depicted in-service state of a D-3He hot face whose helium ash reaches the wall; extent and temperature window OPEN (OD-025)"
+
+[appearance.APP-CU-BARE]
+material = "MAT-CU-OF"
+name = "Copper, bare"
+base_color = [0.95, 0.64, 0.54]
+roughness = 0.30
+metallic = 1.0
+surface = "none"
+basis = "PBR_REFERENCE"
+
+[appearance.APP-CUCRZR-MACHINED]
+material = "MAT-CUCRZR"
+name = "CuCrZr, machined tube"
+base_color = [0.90, 0.58, 0.47]
+roughness = 0.35
+metallic = 1.0
+surface = "brushed"
+basis = "ARTISTIC"
+note = "slightly duller than pure copper"
+
+[appearance.APP-SS-PASSIVATED]
+material = "MAT-SS-316L"
+name = "Austenitic stainless, passivated"
+base_color = [0.56, 0.57, 0.58]
+roughness = 0.40
+metallic = 1.0
+surface = "brushed"
+basis = "PBR_REFERENCE"
+note = "iron-class reflectance"
+
+[appearance.APP-SS316LN-CASE]
+material = "MAT-SS-316LN"
+name = "Magnet case steel, machined"
+base_color = [0.52, 0.53, 0.54]
+roughness = 0.45
+metallic = 1.0
+surface = "brushed"
+basis = "ARTISTIC"
+
+[appearance.APP-INCONEL]
+material = "MAT-INCONEL-718"
+name = "Nickel superalloy, heat-tinted"
+base_color = [0.55, 0.52, 0.47]
+roughness = 0.45
+metallic = 1.0
+surface = "brushed"
+basis = "ARTISTIC"
+
+[appearance.APP-TI-MACHINED]
+material = "MAT-TI6AL4V"
+name = "Titanium alloy, machined"
+base_color = [0.54, 0.50, 0.45]
+roughness = 0.40
+metallic = 1.0
+surface = "brushed"
+basis = "PBR_REFERENCE"
+
+[appearance.APP-MLI-ALUMINIZED]
+material = "MAT-MLI-AL"
+name = "Aluminized MLI blanket, quilted"
+family = "xf_mli"
+surface = "quilt"
+basis = "FAMILY"
+
+[appearance.APP-BETA-CLOTH-LINE]
+material = "MAT-MLI-AL"
+name = "Insulated line, beta-cloth wrapped"
+family = "xf_insul_line"
+surface = "none"
+basis = "FAMILY"
+
+[appearance.APP-CFRP]
+material = "MAT-CFRP"
+name = "CFRP, cured"
+base_color = [0.035, 0.035, 0.038]
+roughness = 0.45
+metallic = 0.0
+surface = "weave"
+basis = "ARTISTIC"
+
+[appearance.APP-CC]
+material = "MAT-CC"
+name = "Carbon-carbon"
+family = "xf_cc"
+surface = "weave"
+basis = "FAMILY"
+
+[appearance.APP-REBCO-WINDING]
+material = "MAT-REBCO-APC01"
+name = "HTS winding pack (insulated tape turns)"
+base_color = [0.30, 0.22, 0.14]
+roughness = 0.55
+metallic = 0.2
+surface = "none"
+basis = "ARTISTIC"
+note = "the windings are inside casings; shown only in cutaways"
+
+[appearance.APP-HFC]
+material = "MAT-HFC"
+name = "Hafnium carbide"
+base_color = [0.20, 0.20, 0.21]
+roughness = 0.60
+metallic = 0.0
+surface = "none"
+basis = "ARTISTIC"
+
+[appearance.APP-AZ93-WHITE]
+material = "MAT-AZ93"
+name = "White ceramic radiator coating"
+family = "xf_ceramic"
+surface = "none"
+basis = "FAMILY"
+
+[appearance.APP-HOT-EMITTER]
+material = "MAT-RAD-NPE01"
+name = "Hot radiator skin (COAST depiction)"
+family = "xf_thermal"
+surface = "none"
+basis = "FAMILY"
+note = "the 1800 K glow stays with the existing look and radiator-health display, never an appearance emission"
+
+[appearance.APP-FOIL-MO]
+material = "MAT-TZM"
+name = "Polished Mo/TZM foil"
+family = "xf_foil_mo"
+surface = "foil"
+basis = "FAMILY"
+
+[appearance.APP-FOIL-TI]
+material = "MAT-TI-CP"
+name = "Polished Ti foil"
+family = "xf_foil_ti"
+surface = "foil"
+basis = "FAMILY"
+
+[appearance.APP-FOIL-AU]
+material = "MAT-AU"
+name = "Gold film"
+family = "xf_foil_au"
+surface = "foil"
+basis = "FAMILY"
+
+[appearance.APP-SHIELD-CAN]
+material = "MAT-SS-316L"
+name = "Canned shield modules (stainless cans)"
+base_color = [0.45, 0.46, 0.47]
+roughness = 0.55
+metallic = 1.0
+surface = "none"
+basis = "ARTISTIC"

@@ -211,6 +211,16 @@ A geometry-neutral change shows 0 changed/added/removed objects in the pipeline'
 - `sim_rig.py`: the rig anchor frames, the massless simulation proxies (`proxies()`: shapes posed in anchor frames, with realizations and motion) and the `data/simulations/wf_sim_rig.json` contract.
 - `flight_timeline.py` (FUT-004): the First Ignition timeline. `phases()` expands `[flight_timeline.phases]` (induction entries from `[induction].sequence`) into frame spans; `rotor_segment()` and `drive_segment()` re-time the rotor and drive key tables; `track()` plays them phase by phase and checks each hold ends at its configuration's state; `channels()` adds the forward-defense, radiator, EYE, configuration and kinematics channels; `sample()` evaluates every channel at a frame or mark; `bind_frames()` gives every channel its authority (presentation / sheet-import), adds the `frames.*` channels of `tools/frames_import.py` (no keys while UNKNOWN) and marks the presentation channels that stand for them; `validate()` (called by `spec.validate`) checks the structure and, at every frame, the rotor rules, locked rings under thrust and the 07!A39 radiator order; `control_values()` maps a sample onto the controls and `caption()` writes a mark's preview header. FUT-005: `sim_rig.flight_timeline_contract()` (rig section, contract 19) and `inspect.timeline_checks()` (every mark on the saved vehicle).
 
+- `materials.py` and `material_physics.py` (PMDS, docs/MATERIALS.md): load and validate `data/materials/*.toml` (purposes, catalogue,
+  applications, appearances; `load()` validates identical contents once per process), look up records, give each asset its display-material
+  bindings (`asset_bindings()`) and the hash of the records they use (`asset_hash()`, `affected_assets()` for the change selection);
+  `material_physics.get_property()` evaluates a property at a temperature with its unit and provenance and never extrapolates,
+  `require()` refuses unknowns, `conduction_drop()` solves 1-D conduction, `screen_application()` gives EXCEEDS_LIMIT /
+  NOT_EVALUABLE / WITHIN_CHECKED_LIMITS with structured reasons, `INTEGRATION` is the spec-to-catalogue dependency table that
+  `spec_crosscheck()` evaluates, and `reference_value()` / `compare_to_reference()` are the read-only adapters for engineering modules;
+  `materials.evidence_counts()` counts the verification states. `common.bind_materials()` (on every save) writes the IDs into the assets; `common.material_views()`
+  builds the two view layers in memory.
+
 All of these are imported by both system Python and Blender's Python 3.13, so they must stay standard-library only.
 
 **One vehicle, configuration presets.**

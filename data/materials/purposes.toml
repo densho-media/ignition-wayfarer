@@ -1,0 +1,174 @@
+# Purpose–Material Design System (PMDS): engineering purposes (docs/MATERIALS.md).
+# A purpose is the function a material must perform, independent of any material. Candidate lists are starting points for evaluation,
+# not selections, and they are not ranked equal. Nothing here is canon: the Drive workbooks stay the authority for the spacecraft.
+# required_properties name catalogue property keys (materials.PROPERTIES); view_color is the engineering material view's display colour
+# (linear RGB) and nothing else: it is not an Outliner colour, an object colour or a render finish.
+schema_version = 1
+
+[purpose.P01]
+name = "Storage"
+function = "Hold a fluid or solid inventory (cryogenic D, 3He, H2, water, gases) for the mission life with bounded loss and mass."
+required_properties = ["density", "yield_strength", "elastic_modulus", "fracture_toughness", "thermal_conductivity", "thermal_expansion"]
+environment = "Cryogenic to ambient (3-300 K), internal pressure, launch/burn loads, thermal cycling during fill and drain, vacuum outside."
+failure_mechanisms = ["low-temperature embrittlement", "hydrogen embrittlement", "fatigue from pressure and thermal cycles", "weld defects", "permeation and leakage", "boil-off from heat leak"]
+candidates = ["MAT-ALLI-2195", "MAT-AL-2219", "MAT-SS-316L", "MAT-CFRP"]
+selection_criteria = ["specific strength at storage temperature", "toughness at storage temperature", "weldability", "H2 compatibility", "permeability", "heat leak through supports"]
+validation = ["cryogenic proof and burst test", "fracture-mechanics life analysis", "leak test at temperature", "boil-off measurement"]
+systems = ["fuel storage", "reaction-mass storage", "life support stores"]
+view_color = [0.10, 0.30, 0.90]
+
+[purpose.P02]
+name = "Fluid transport"
+function = "Carry a fluid (cryogen, coolant, gas) between components with bounded pressure drop, heat leak and leakage."
+required_properties = ["yield_strength", "thermal_conductivity", "thermal_expansion", "density"]
+environment = "Cryogenic or hot fluid inside, vacuum outside, thermal contraction across long runs, vibration, radiation near the drive."
+failure_mechanisms = ["fatigue at bends and joints", "thermal-contraction stress", "hydrogen embrittlement", "erosion-corrosion", "joint leakage"]
+candidates = ["MAT-SS-316L", "MAT-INCONEL-718", "MAT-CUCRZR"]
+selection_criteria = ["fluid compatibility", "low-temperature ductility", "joinability (orbital welding, brazing)", "conductive heat leak", "radiation tolerance near the drive"]
+validation = ["pressure and leak test", "thermal cycling of joints", "flow test"]
+systems = ["cryogenic feed", "coolant loops", "nozzle services"]
+view_color = [0.15, 0.65, 0.95]
+
+[purpose.P03]
+name = "Flow control and injection"
+function = "Meter, switch and inject fuel or reaction mass (valves, orifices, injector rings) under the local thermal and radiation load."
+required_properties = ["yield_strength", "thermal_conductivity", "max_service_temperature", "thermal_expansion"]
+environment = "Cryogenic inlet beside a hot, radiation-loaded region; cycling; possible plasma radiation on the injector face."
+failure_mechanisms = ["seat wear and galling", "thermal shock", "hydrogen embrittlement", "erosion of orifices", "radiation damage to seals"]
+candidates = ["MAT-SS-316L", "MAT-INCONEL-718", "MAT-ALUMINA"]
+selection_criteria = ["H2 and cryogen compatibility", "dimensional stability", "thermal shock resistance", "wear resistance"]
+validation = ["flow calibration", "cycle-life test", "thermal-shock test"]
+systems = ["fuel injection", "hydrogen injection ring", "valves"]
+view_color = [0.00, 0.80, 0.70]
+
+[purpose.P04]
+name = "Containment and sealing"
+function = "Maintain a pressure or vacuum boundary across joints, penetrations and doors."
+required_properties = ["yield_strength", "thermal_expansion", "max_service_temperature"]
+environment = "Pressure differential, thermal cycling, radiation, long life without re-torque."
+failure_mechanisms = ["seal relaxation", "creep of gaskets", "differential expansion", "radiation hardening of elastomers", "leak paths at penetrations"]
+candidates = ["MAT-SS-316L", "MAT-ALUMINA", "MAT-INCONEL-718"]
+selection_criteria = ["helium leak rate", "behaviour over the temperature span", "radiation tolerance", "re-sealability"]
+validation = ["helium leak test", "thermal-cycle seal test"]
+systems = ["pressure hull", "cryostat and vacuum vessels", "feed penetrations"]
+view_color = [0.55, 0.55, 0.60]
+
+[purpose.P05]
+name = "Magnetic-field generation"
+function = "Carry the coil current that produces the confinement and nozzle fields."
+required_properties = ["critical_temperature", "electrical_resistivity", "yield_strength", "radiation_response"]
+environment = "Cryogenic (about 20 K for REBCO), high field, large Lorentz (Maxwell) stress, neutron and gamma fluence from the core."
+failure_mechanisms = ["quench and hot-spot burnout", "delamination of coated conductor", "strain degradation of critical current", "neutron damage of the superconductor"]
+candidates = ["MAT-REBCO", "MAT-REBCO-APC01", "MAT-CU-OF"]
+selection_criteria = ["engineering current density at field and temperature", "strain tolerance", "radiation lifetime", "quench protection margin"]
+validation = ["short-sample critical current at field", "model coil test", "irradiated-sample critical current"]
+systems = ["seed coils", "manifold coils", "nozzle coils"]
+view_color = [0.90, 0.10, 0.70]
+
+[purpose.P06]
+name = "Electromagnetic-force support"
+function = "Carry the Lorentz forces of the coils into the structure while keeping the coils aligned and cold."
+required_properties = ["yield_strength", "elastic_modulus", "fracture_toughness", "thermal_conductivity", "thermal_expansion"]
+environment = "4-80 K cold mass to warm supports, high stress, cyclic loads per pulse or power change, radiation."
+failure_mechanisms = ["fatigue crack growth", "cryogenic fracture", "creep of warm supports", "conductive heat leak into the cold mass"]
+candidates = ["MAT-SS-316LN", "MAT-INCONEL-718", "MAT-TI6AL4V"]
+selection_criteria = ["yield and toughness at cryogenic temperature", "fatigue", "low thermal conductance for supports", "weldability of thick sections"]
+validation = ["4 K tensile and fracture toughness", "fatigue crack-growth test", "support heat-leak test"]
+systems = ["coil casings", "coil supports", "pickup struts"]
+view_color = [0.60, 0.20, 0.85]
+
+[purpose.P07]
+name = "Plasma and thermal protection"
+function = "Face plasma, particle and radiant heat loads; survive erosion and transients while passing the heat to a cooled substrate."
+required_properties = ["melting_point", "thermal_conductivity", "max_service_temperature", "thermal_expansion", "radiation_response", "erosion"]
+environment = "Steady heat flux of order MW/m2 with transients, ion and neutral bombardment (D, 3He, He ash, H), neutrons, vacuum."
+failure_mechanisms = ["sputtering and erosion", "recrystallization embrittlement", "thermal-fatigue cracking", "melting in transients", "helium nanostructure (fuzz)", "neutron embrittlement"]
+candidates = ["MAT-W", "MAT-W-ADV01", "MAT-HFC", "MAT-SIC", "MAT-CC"]
+selection_criteria = ["continuous heat-flux capability at the required life", "erosion yield", "recrystallization temperature", "thermal-fatigue life", "repairability"]
+validation = ["high-heat-flux cyclic test (e.g. 10-20 MW/m2 class facilities)", "plasma exposure in a linear device", "neutron irradiation then heat-flux test"]
+systems = ["fusion core liner", "convergence throat", "nozzle strike modules"]
+view_color = [0.95, 0.35, 0.05]
+
+[purpose.P08]
+name = "Heat conduction"
+function = "Spread and conduct heat from a hot face to a coolant with a small temperature drop."
+required_properties = ["thermal_conductivity", "yield_strength", "max_service_temperature", "thermal_expansion"]
+environment = "Steep temperature gradient, bonded to dissimilar materials, thermal cycling, radiation."
+failure_mechanisms = ["interface debonding from expansion mismatch", "softening and overageing", "radiation-induced conductivity loss", "creep"]
+candidates = ["MAT-CU-OF", "MAT-CUCRZR", "MAT-SIC", "MAT-CC"]
+selection_criteria = ["conductivity at operating temperature and dose", "strength retention", "bondability to the hot face"]
+validation = ["interface ultrasonic inspection", "thermal cycling of the bonded joint"]
+systems = ["PFC spreaders", "radiator spreaders"]
+view_color = [0.95, 0.75, 0.10]
+
+[purpose.P09]
+name = "Electrical conduction and conversion"
+function = "Carry or convert electrical power with low loss: bus bars, current leads, power electronics."
+required_properties = ["electrical_resistivity", "thermal_conductivity", "density", "max_service_temperature"]
+environment = "From cryogenic leads to warm busbars; radiation for electronics near the drive."
+failure_mechanisms = ["resistive heating", "electromigration", "radiation damage to semiconductors", "fatigue of joints"]
+candidates = ["MAT-CU-OF", "MAT-SIC"]
+selection_criteria = ["conductivity per mass", "heat leak of current leads", "radiation hardness of devices"]
+validation = ["current and temperature-rise test", "radiation testing of devices"]
+systems = ["power bus", "HTS current leads", "power conversion"]
+view_color = [1.00, 0.90, 0.30]
+
+[purpose.P10]
+name = "Electrical and thermal insulation"
+function = "Block heat or current: cryogenic insulation, standoffs, dielectric breaks, thermal breaks."
+required_properties = ["thermal_conductivity", "electrical_resistivity", "max_service_temperature"]
+environment = "Vacuum, large temperature differences, radiation, compression in supports."
+failure_mechanisms = ["layer compression in MLI", "outgassing", "radiation degradation of polymers", "cracking of ceramics"]
+candidates = ["MAT-MLI-AL", "MAT-ALUMINA", "MAT-YSZ", "MAT-CFRP"]
+selection_criteria = ["effective conductance", "outgassing", "radiation tolerance", "mass"]
+validation = ["calorimeter heat-leak test", "dielectric strength test"]
+systems = ["tank MLI", "feed-line jackets", "supports"]
+view_color = [0.85, 0.85, 0.80]
+
+[purpose.P11]
+name = "Radiation attenuation"
+function = "Attenuate neutrons and photons toward crew, magnets and cryogens. The absorbed energy becomes heat that must be removed."
+required_properties = ["density", "hydrogen_content", "melting_point", "thermal_conductivity", "radiation_response"]
+environment = "Neutron and gamma flux from the core, deposited heat, temperature limits of hydrides, vacuum."
+failure_mechanisms = ["hydride dissociation and hydrogen loss above its temperature limit", "swelling", "helium generation (10B(n,alpha))", "overheating from deposited energy"]
+candidates = ["MAT-W", "MAT-LIH", "MAT-B4C", "MAT-HDPE"]
+selection_criteria = ["attenuation per mass for the actual spectrum", "deposited heat and its removal", "temperature limit", "activation"]
+validation = ["transport calculation for the source spectrum", "shield mock-up measurement", "thermal analysis of deposited heat"]
+systems = ["shadow shield", "magnet shielding", "crew refuges"]
+view_color = [0.30, 0.75, 0.25]
+
+[purpose.P12]
+name = "Waste-heat transport"
+function = "Move waste heat from sources to radiators in a coolant loop or heat-pipe network."
+required_properties = ["max_service_temperature", "creep", "thermal_conductivity", "density"]
+environment = "High temperature (up to the 1800 K hot loop), working-fluid compatibility (liquid metals, gases), long life, micrometeoroid damage."
+failure_mechanisms = ["creep rupture", "liquid-metal corrosion and mass transfer", "interstitial embrittlement (O, N)", "freeze-thaw on start-up"]
+candidates = ["MAT-NB1ZR", "MAT-MORE", "MAT-INCONEL-718", "MAT-CUCRZR"]
+selection_criteria = ["creep strength at loop temperature", "working-fluid compatibility", "fabricability of thin walls", "life"]
+validation = ["loop or heat-pipe life test at temperature", "creep test", "corrosion test with the working fluid"]
+systems = ["hot loop", "warm loop", "low loop", "PFC cooling"]
+view_color = [0.95, 0.20, 0.20]
+
+[purpose.P13]
+name = "Thermal radiation"
+function = "Emit waste heat to space from a surface of high infrared emissivity that keeps its optical properties."
+required_properties = ["emissivity", "max_service_temperature", "density", "thermal_conductivity"]
+environment = "Vacuum, the radiator temperature (300-1800 K zones), UV and particle exposure, micrometeoroids, thermal cycling."
+failure_mechanisms = ["emissivity degradation", "coating spallation", "sublimation in vacuum at temperature", "micrometeoroid puncture"]
+candidates = ["MAT-CC", "MAT-SIC", "MAT-AZ93", "MAT-RAD-NPE01"]
+selection_criteria = ["hemispherical emissivity at temperature", "stability over life", "areal mass", "vacuum sublimation rate"]
+validation = ["emissometer at temperature", "thermal-vacuum ageing", "UV/particle exposure"]
+systems = ["hot blades", "warm and low radiator sheets"]
+view_color = [0.75, 0.10, 0.05]
+
+[purpose.P14]
+name = "Structural integrity"
+function = "Carry loads and keep alignment: frames, trusses, struts, skirts, supports."
+required_properties = ["density", "yield_strength", "elastic_modulus", "fracture_toughness", "fatigue", "thermal_expansion"]
+environment = "Burn and spin loads, thermal gradients, long life, radiation near the drive."
+failure_mechanisms = ["fatigue", "buckling", "creep at temperature", "fracture from defects", "radiation embrittlement"]
+candidates = ["MAT-TI6AL4V", "MAT-SS-316LN", "MAT-INCONEL-718", "MAT-SICSIC", "MAT-CC", "MAT-CFRP"]
+selection_criteria = ["specific stiffness and strength", "damage tolerance", "temperature capability", "joinability"]
+validation = ["coupon allowables", "structural test", "fatigue test"]
+systems = ["structure", "tank supports", "nozzle pickups", "radiator trusses"]
+view_color = [0.45, 0.32, 0.20]

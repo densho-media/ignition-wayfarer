@@ -3726,7 +3726,8 @@
         "PFC_NOZZLE_STRIKE_02",
         "PFC_NOZZLE_STRIKE_03"
       ],
-      "direct_links": []
+      "direct_links": [],
+      "material_bound_objects": 8
     },
     "components/WF_RADIATOR.blend": {
       "generated_objects": 354,
@@ -4088,7 +4089,8 @@
       ],
       "direct_links": [
         "detail/WF_DETAIL_RAD_FRAME.blend"
-      ]
+      ],
+      "material_bound_objects": 140
     },
     "components/WF_RING_SECTOR.blend": {
       "generated_objects": 29,
@@ -7077,7 +7079,8 @@
         "subsystems/WF_DEBUG_MAGNETICS.blend",
         "subsystems/WF_DEBUG_OPTICS.blend",
         "subsystems/WF_DEBUG_SEPARATRICES.blend"
-      ]
+      ],
+      "material_bound_objects": 55
     },
     "subsystems/WF_ROTOR_INTERFACE.blend": {
       "generated_objects": 92,
@@ -7507,7 +7510,8 @@
       "ids": [
         "Reactor_Shadow_Shield_Envelope"
       ],
-      "direct_links": []
+      "direct_links": [],
+      "material_bound_objects": 1
     },
     "subsystems/WF_STORAGE.blend": {
       "generated_objects": 231,
@@ -7744,7 +7748,8 @@
         "IF_FUEL_RUN_TANK_HE3_A",
         "IF_FUEL_RUN_TANK_HE3_B"
       ],
-      "direct_links": []
+      "direct_links": [],
+      "material_bound_objects": 59
     },
     "subsystems/WF_STRUCTURE.blend": {
       "generated_objects": 742,
@@ -9974,7 +9979,8 @@
       ],
       "direct_links": [
         "components/WF_RADIATOR.blend"
-      ]
+      ],
+      "material_bound_objects": 273
     }
   },
   "studies": {},
