@@ -29,7 +29,10 @@ Each purpose and development stage has one place. Add no top-level folder withou
   proposes an alternative form of the ship or a subsystem; a study computes numbers without changing geometry; a problem map shows
   where and how badly the design fails and never proposes a fix. All three live in `lab/<kind>/<name>/` with a `NOTES.md` that
   opens with kind, status (ACTIVE, PARKED, SUPERSEDED, PROMOTED), question, model base and open owner questions. Nothing in `lab/`
-  is canon, and nothing in `src/`, `tests/`, `tools/`, `godot/`, `web/` or CI reads it.
+  is canon, and nothing in `src/`, `tests/`, `tools/`, `godot/`, `web/` or CI reads it, except `tools/story.py`: it reads (never runs
+  inside the build, never writes) the lab index, each entry's `NOTES.md`, `REPORT.md`, committed figures and result JSON, and a
+  problem map's `site.py --json`, to publish the Engineering pages of the website. Keep an entry's NOTES header table and its
+  lab/README.md row current, because both are published.
 - **Work in progress** lives only in `work/<task>/`: `NOTES.md` (function, fixed constraints, unknowns, design freedom, decisions),
   study code, `WORK_<TASK>.blend` and `REVIEW_<TASK>.blend`. Nothing in `src/`, `tests/`, `tools/`, `godot/`, `web/` or CI reads
   `work/`. Text and code there are committed on the task branch; `.blend` files are not.
