@@ -571,11 +571,13 @@ function select(r) {
   }
 }
 let down = null;
-canvas.addEventListener('pointerdown', e => { down = { x: e.clientX, y: e.clientY, t: performance.now() }; });
+// A click is a press and release less than 6 px and 500 ms apart, timed by the events' own timestamps (when the input happened),
+// so a slow frame between the two (software WebGL, a busy phone) does not turn a quick click into a long press.
+canvas.addEventListener('pointerdown', e => { down = { x: e.clientX, y: e.clientY, t: e.timeStamp }; });
 canvas.addEventListener('pointerup', e => {
   if (!down || !model) return;
   const moved = Math.hypot(e.clientX - down.x, e.clientY - down.y);
-  const quick = performance.now() - down.t < 500;
+  const quick = e.timeStamp - down.t < 500;
   down = null;
   if (moved > 6 || !quick) return;
   select(pickAt(e.clientX, e.clientY));

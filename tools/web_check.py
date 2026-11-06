@@ -154,10 +154,13 @@ class Page:
             self.mouse('mouseMoved', start[0] + (end[0] - start[0]) * t, start[1] + (end[1] - start[1]) * t, button=button, buttons=mask)
         self.mouse('mouseReleased', *end, button=button, buttons=0, clickCount=1)
 
-    def click(self, x, y):
+    def click(self, x, y, hold=0.08):
+        # Explicit input timestamps: the release is `hold` seconds after the press, as a person's click, however long the page
+        # takes to handle the press (a software-WebGL frame can take seconds and would otherwise read as a long press).
+        t = time.time()
         self.mouse('mouseMoved', x, y)
-        self.mouse('mousePressed', x, y, button='left', buttons=1, clickCount=1)
-        self.mouse('mouseReleased', x, y, button='left', buttons=0, clickCount=1)
+        self.mouse('mousePressed', x, y, button='left', buttons=1, clickCount=1, timestamp=t)
+        self.mouse('mouseReleased', x, y, button='left', buttons=0, clickCount=1, timestamp=t + hold)
 
     def touch(self, kind, points):
         self.send('Input.dispatchTouchEvent', {'type': kind, 'touchPoints': [{'x': x, 'y': y, 'id': i} for i, (x, y) in enumerate(points)]})
@@ -310,7 +313,11 @@ RAF_FPS = ('new Promise(r => { const t0 = performance.now(); let n = 0; const ts
            'requestAnimationFrame(f); })')
 
 
-EVA_SECONDS = 1200                         # EVA Operations check in the browser (about 50 s natively; single-threaded Web is slower)
+# EVA Operations check in the browser: with drawing off the Web build still steps once per animation frame, so --fixed-fps 60 runs
+# at most in real time (the walk: 97,770 frames in 1,633 s). The budget follows the native reference's simulated time (1,102 s)
+# with half again for a slower runner, and never less than the old 1,200 s.
+EVA_SECONDS_MIN = 1200
+EVA_SLACK = 1.5
 
 
 def run_equivalence(url, play_release, binary, sandbox, out, play_seconds, record_check, metrics):
@@ -345,7 +352,7 @@ def run_equivalence(url, play_release, binary, sandbox, out, play_seconds, recor
         t0 = time.monotonic()
         query = '&'.join(f'arg={a}' for a in ('--disable-render-loop', '--fixed-fps', '60', '--', '--eva', '--check-eva-ops'))
         page.send('Page.navigate', {'url': url + play_release['page'] + '?' + query})
-        line = traffic.wait_console('WF_GODOT_EVA_OPS ', mark, EVA_SECONDS)
+        line = traffic.wait_console('WF_GODOT_EVA_OPS ', mark, max(EVA_SECONDS_MIN, EVA_SLACK * float(nat_eva.get('sim_s') or 0) + 120))
         errors = [text for kind, text in traffic.since(mark)[1] if text.startswith('ERROR')]
         eva = json.loads(line.split(' ', 1)[1]) if line else None
         record_check('play: the EVA Operations check passes in the browser as natively',
