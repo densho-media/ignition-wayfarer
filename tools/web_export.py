@@ -6,6 +6,7 @@
                          manifest) in a pinned three.js viewer; build.json names the content-addressed model files
   play/                  Enter Wayfarer: a launcher, and the walk (EXC-001) as a Godot Web export (tools/web_play.py)
   status/                technical status page over release.json
+  engineering/           the engineering story: goal, constraints, the ship today, lab/ work and open problems (tools/story.py)
   release.json           release manifest: identity, toolchain, inputs, every file's size and SHA-256, the experiences, checks
 Every path in the site is relative, so it serves from any subpath (GitHub Pages /ignition-wayfarer/) or another static host.
 It never builds or edits geometry: build first (pipeline), and pass that run with `--pipeline-run` to record its geometry diff.
@@ -27,6 +28,7 @@ import time
 import urllib.request
 
 import pipeline
+import story
 import web_play
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'src/wayfarer'))
 import representation
@@ -171,6 +173,10 @@ def run(root, out=None, pipeline_run=None, draco=True, with_play=True, native=Fa
             if src.is_file() and rel not in SKIP:
                 (site / rel).parent.mkdir(parents=True, exist_ok=True)
                 shutil.copy2(src, site / rel)
+        try:
+            engineering = story.build(root, site, revision=revision, built=pipeline.utc_now()[:10], play=with_play)
+        except (RuntimeError, ValueError, OSError, KeyError) as error:
+            return {'result': 'FAIL', 'step': 'engineering', 'reason': str(error)[-2000:], 'run_dir': str(run_dir)}
         viewer = site / 'viewer'
         vendor_three(viewer)
         (viewer / 'model').mkdir()
@@ -212,7 +218,7 @@ def run(root, out=None, pipeline_run=None, draco=True, with_play=True, native=Fa
                 'scene': play['scene'], 'git_revision': revision}, indent=1) + '\n')
         else:
             shutil.rmtree(site / 'play')
-        release = release_record(root, site, build, play, revision, dirty, built)
+        release = release_record(root, site, build, play, revision, dirty, built, engineering)
         problems = verify_site(site, release)
         if problems:
             return {'result': 'FAIL', 'step': 'verify-site', 'problems': problems[:20], 'run_dir': str(run_dir)}
@@ -241,7 +247,7 @@ def tool_versions():
     return out
 
 
-def release_record(root, site, build, play, revision, dirty, built):
+def release_record(root, site, build, play, revision, dirty, built, engineering=None):
     """release.json: what this site is, what it was built from and what each experience downloads (the checks add `tests`)."""
     files = {p.relative_to(site).as_posix(): {'bytes': p.stat().st_size, 'sha256': pipeline.sha256(p)}
              for p in sorted(site.rglob('*')) if p.is_file()}
@@ -273,6 +279,7 @@ def release_record(root, site, build, play, revision, dirty, built):
                          'reduced_fidelity': play['reduced_fidelity'], 'native_reference': play['native_reference'],
                          'native_zip_sha256': play['native_zip_sha256'], 'input_key': play['input_key']}} if play else {}),
             'status': {'entry': 'status/'},
+            **({'engineering': engineering} if engineering else {}),
         },
         'status_labels': ['CANON', 'DERIVED', 'WORKING', 'PROTOTYPE', 'DIAGNOSTIC', 'HOLD'],
         'limitations': LIMITATIONS,

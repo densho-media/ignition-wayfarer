@@ -27,7 +27,10 @@ questions and where its review file is.
 
 ## Rules
 
-- Nothing in `src/`, `tests/`, `tools/`, `godot/`, `web/` or CI reads `lab/`. Lab code may read `data/` and `src/`.
+- Nothing in `src/`, `tests/`, `tools/`, `godot/`, `web/` or CI reads `lab/`, except `tools/story.py`, which publishes this index,
+  each entry's NOTES header and body, its REPORT.md summary, its committed figures (SVG, or PNG without an SVG twin, up to 1.5 MB) and
+  a problem map's `site.py --json` as the website's Engineering pages. Everything here is public: write it for outside engineers.
+  Lab code may read `data/` and `src/`.
 - Run lab scripts from the repository root (`python3 lab/variants/fdp1/run.py`). Their tests are not part of the pipeline:
   `python3 lab/variants/fdp1/tests/test_fdp1.py`, `python3 lab/studies/four-burn-mission/tests/test_fourburn.py`.
 - A lab number reaches canon only through its Drive owner workbook and the normal loop (AGENTS.md).
