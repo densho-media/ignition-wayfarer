@@ -1,0 +1,77 @@
+{
+ "cfg": {
+  "lw": 21.0,
+  "ll": 19.5,
+  "gap": 2.0,
+  "gap2": 2.0,
+  "coat": "gray 0.90 diffuse (current zone value)",
+  "blocker": "wedge2"
+ },
+ "span": {
+  "WARM": [
+   50.899362477231335,
+   71.89936247723134
+  ],
+  "LOW": [
+   73.89936247723134,
+   93.39936247723134
+  ],
+  "total_front": 93.39936247723134
+ },
+ "sheets": {
+  "WEDGE_0": 1255.4,
+  "WEDGE_1": 892.8
+ },
+ "WARM": {
+  "area_m2": 3465,
+  "emitted_MW": 6.628,
+  "self_MW": 0.247,
+  "absorbed_MW": {
+   "LOW": 0.025,
+   "WEDGE_1": 1.2108
+  },
+  "net_MW": 5.145,
+  "load_MW": 5.0,
+  "margin": 0.029,
+  "interference": 0.194
+ },
+ "LOW": {
+  "area_m2": 3217,
+  "emitted_MW": 1.33,
+  "self_MW": 0.032,
+  "absorbed_MW": {
+   "WARM": 0.1128,
+   "WEDGE_1": 0.1659
+  },
+  "net_MW": 1.019,
+  "load_MW": 1.0,
+  "margin": 0.019,
+  "interference": 0.215
+ },
+ "RING_A": {
+  "HOT": 6.901,
+  "WARM": 0.166,
+  "LOW": 0.08,
+  "WEDGE_0": 0.011,
+  "WEDGE_1": 0.189
+ },
+ "RING_B": {
+  "HOT": 0.174,
+  "WARM": 0.016,
+  "LOW": 0.013,
+  "WEDGE_0": 0.002,
+  "WEDGE_1": 0.014
+ },
+ "TANKS": {
+  "HOT": 5.398,
+  "WARM": 0.165,
+  "LOW": 0.085,
+  "WEDGE_0": 0.157,
+  "WEDGE_1": 0.372
+ },
+ "WEDGE_0_absorbed_MW": 31.62,
+ "WEDGE_0_area_m2": 1730,
+ "WEDGE_1_absorbed_MW": 8.12,
+ "WEDGE_1_area_m2": 1730,
+ "seconds": 80
+}

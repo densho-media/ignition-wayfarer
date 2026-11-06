@@ -289,7 +289,7 @@ Higher levels reference lower ones as **linked collection instances with relativ
     - `hide_viewport` objects are not evaluated either.
     - Blender 5 ignores the new-key interpolation preference, so set `keyframe_points[].interpolation`.
     - Simple driver expressions accept `pow()` but not `**`.
-- Studies live in `work/<task>/` while unapproved (AGENTS.md "Where things go"); the retired `src/wayfarer/studies/` scripts are at commit 038ae90, their kept results in `references/evidence/`.
+- Studies live in `work/<task>/` while in progress and in `lab/` once kept but not adopted (AGENTS.md "Where things go"); the retired `src/wayfarer/studies/` scripts are at commit 038ae90, their kept results in `references/evidence/`.
 - The generated JSON reports live in `references/` (current evidence files are `p1_*.json`), alongside the review markdown, the current geometry baseline (`references/baselines.json` names it) and, on a maintainer's machine only, the Drive captures. Captures and review notes are ignored by Git and never published; tests carry their own synthetic fixtures. `drive_capture_*/` hold full Drive workbook exports (`.xlsx` plus greppable `.txt` dumps and a manifest) or bounded range reads (`ranges.json`), which the source records cite as `capture`.
 
 **Conventions:**

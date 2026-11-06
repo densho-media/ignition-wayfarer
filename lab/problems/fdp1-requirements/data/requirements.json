@@ -1,0 +1,120 @@
+{
+ "meta": {
+  "title": "FDP-1 engineering problem register",
+  "note": "Text in braces is filled from data/fdp1_parameters.json and fdp1diag/model.py at build time: {key!conv} or {key:spec}. TBD marks a value with no adequate source. Status: known, calculated, assumed, unresolved, speculative. Classification: fundamental physics, materials, engineering, unproven technology, hypothetical new science.",
+  "status_values": ["known", "calculated", "assumed", "unresolved", "speculative"],
+  "class_values": ["fundamental physics", "materials", "engineering", "unproven technology", "hypothetical new science"]
+ },
+ "requirements": [
+  {
+   "id": "P01", "title": "Fusion target gain and burn fraction",
+   "description": "D-3He pellets must ignite and burn at very high gain; the design only exists above a gain threshold (a cliff, not a slope).",
+   "params": ["fusion.target_gain", "fusion.burn_fraction", "fusion.rhoR", "sens.gain_closure_threshold", "research.nif_best_gain"],
+   "current": ["gain {fusion.target_gain:,.0f} (assumed), burn fraction {fusion.burn_fraction!pct:0}", "rhoR {fusion.rhoR:.0f} g/cm2, {fusion.yield_per_pulse_tTNT:.1f} t TNT per pellet"],
+   "target": "gain >= ~{sens.gain_closure_threshold:,.0f} for any closure (FDP-1 sensitivity)",
+   "gap": "x{calc.gain_gap_demonstrated:.0f} above the best demonstrated gain (~{research.nif_best_gain:.0f}, D-T); D-3He ignition never demonstrated",
+   "classification": ["unproven technology", "fundamental physics"],
+   "status": "speculative", "depends": ["P02"],
+   "components": ["burn point"]
+  },
+  {
+   "id": "P02", "title": "Driver efficiency, repetition rate and reliability",
+   "description": "Nine heavy-ion beams must fire {fusion.pellet_rate:.0f} times a second for years, with final optics about {fusion.xray_standoff:.0f} m from each pellet.",
+   "params": ["fusion.pellet_rate", "calc.driver_efficiency", "driver.mass", "calc.pulses_mission", "driver.reliability"],
+   "current": ["{fusion.pellet_rate:.0f} Hz, wall-plug {calc.driver_efficiency!pct:0}, {driver.mass!t:3}", "{calc.pulses_mission:.2e} pulses over {mission.engine_years:.2f} y of thrust"],
+   "target": "reliability over {calc.pulses_mission:.1e} pulses: TBD",
+   "gap": "TBD: no heavy-ion driver has run at ignition energy or at this cadence; reliability figure TBD",
+   "classification": ["unproven technology", "engineering"],
+   "status": "unresolved", "depends": ["P01", "P06", "P09"],
+   "components": ["drivers"]
+  },
+  {
+   "id": "P03", "title": "Propulsion power-to-mass ratio",
+   "description": "Acceleration is jet power per kilogram. FDP-1 hardware is too heavy per watt for more than ~0.01 g at any ship size.",
+   "params": ["mass.alpha_jet", "goal1g.specific_mass", "goal1g.required_specific_mass", "goal1g.max_a0_any_size_g", "calc.1g.factor"],
+   "current": ["{goal1g.specific_mass:.2e} kg/W jet (1 g check); closure {mass.alpha_jet:.2e}", "ceiling {goal1g.max_a0_any_size_g:.4f} g at any size; a0 {prop.a0_g:.4f} g"],
+   "target": "1 g: {goal1g.required_specific_mass:.1e} kg/W jet (zero payload)",
+   "gap": "x{goal1g.deficit_factor:.0f} lighter per watt; at fixed mass x{calc.1g.factor:.0f} power and power-scaled hardware x{calc.1g.scaled_mass_over_ship:.0f} the whole ship",
+   "classification": ["engineering", "materials", "fundamental physics"],
+   "status": "calculated", "depends": ["P02", "P04", "P06", "P07"],
+   "components": ["drive assembly"]
+  },
+  {
+   "id": "P04", "title": "Magnetic nozzle coupling and structural forces",
+   "description": "Three Fiji loops must turn each 19 t TNT pulse into a {prop.plume_half_angle_deg:.0f} deg jet and detach it; loop forces are not designed.",
+   "params": ["prop.eta_jet", "prop.plume_half_angle_deg", "geom.solid_angle_loops", "nozzle.interloop_force", "nozzle.detachment_validated"],
+   "current": ["jet share {prop.eta_jet!pct} (assumed), loops r {nozzle.loop1_r:.0f}/{nozzle.loop2_r:.0f}/{nozzle.loop3_r:.0f} m", "loop attraction ~{nozzle.interloop_force:.1e} N; loops intercept {geom.solid_angle_loops!pct:2} of the burn"],
+   "target": "detachment and coupling validated: TBD",
+   "gap": "TBD: no magnetic nozzle has been tested with pulsed fusion plasma; inter-loop load path not designed",
+   "classification": ["unproven technology", "engineering"],
+   "status": "assumed", "depends": ["P01", "P09"],
+   "components": ["nozzle"]
+  },
+  {
+   "id": "P05", "title": "Neutral radiation escape and shielding",
+   "description": "X-rays and neutrons ignore magnetic fields; only mass in their straight path stops them. Hardware dose and secondary photons are placeholders.",
+   "params": ["shield.xray_escape", "shield.neutron_escape", "shield.mass", "geom.solid_angle_total", "shield.hardware_decades", "fusion.neutron_production_fraction"],
+   "current": ["escape X-ray {shield.xray_escape!P}, neutron {shield.neutron_escape!P}; shield {shield.mass!t:3}", "hardware intercepts {geom.solid_angle_total!pct:2} (x{calc.solid_angle_ratio:.1f} the study's)"],
+   "target": "crew <= {shield.crew_dose_budget_Sv_y:.3f} Sv/y from the drive (met on paper); hardware dose: TBD",
+   "gap": "neutron production share TBD; hardware decades {shield.hardware_decades:.0f} is a placeholder; no (n,gamma), build-up or rim scatter",
+   "classification": ["engineering", "fundamental physics"],
+   "status": "assumed", "depends": ["P01", "P04", "P06"],
+   "components": ["shield"]
+  },
+  {
+   "id": "P06", "title": "Waste-heat generation and thermal transport",
+   "description": "About {calc.heat_total!P} must be collected and carried to radiators kilometres away; transport hardware is not designed.",
+   "params": ["thermal.hot_total", "thermal.warm_total", "ledger.plume_to_hardware", "calc.recirc_house", "calc.transport_mass"],
+   "current": ["hot {thermal.hot_total!P} (1800 K), warm {thermal.warm_total!P} (600 K)", "plume on hardware {ledger.plume_to_hardware!P}; house + driver losses {calc.recirc_house!P}"],
+   "target": "loops, pumps and manifolds over {rad.wing_span:,.0f} m wings: design TBD",
+   "gap": "transport booked only as {calc.transport_mass!t:2} ({calc.transport_kg_per_W:.1e} kg/W); pumping power TBD; at 1 g the heat is {calc.1g.heat!P}",
+   "classification": ["engineering"],
+   "status": "unresolved", "depends": ["P02", "P04", "P05", "P07"],
+   "components": ["thermal collection"]
+  },
+  {
+   "id": "P07", "title": "Radiator temperature, area and mass",
+   "description": "Radiated power goes as T^4. The 600 K warm loop dominates area and mass; a hotter loop is the largest single lever.",
+   "params": ["rad.warm_T", "rad.warm_area", "rad.hot_area", "rad.warm_areal", "rad.wing_tip_radius", "rad.emissivity"],
+   "current": ["warm {rad.warm_area!km2} at {rad.warm_T:.0f} K, hot {rad.hot_area!km2:3} at {rad.hot_T:.0f} K", "{calc.radiator_mass!t:4} of radiators; wing tips at {rad.wing_tip_radius!s} m"],
+   "target": "800 K warm loop: departure -{calc.sens_800K_saving!pct:0} (needs 800 K power electronics)",
+   "gap": "1 g at the same T: {calc.1g.warm_area!km2:0} warm; material limits for 1500-2500 K TBD",
+   "classification": ["materials", "fundamental physics"],
+   "status": "calculated", "depends": ["P06", "P09"],
+   "components": ["radiators"]
+  },
+  {
+   "id": "P08", "title": "Fuel inventory, reaction mass and storage",
+   "description": "Four burns need all propellant aboard at departure; unburned fuel is the only reaction mass. Storage is a complete redesign.",
+   "params": ["mass.propellant", "mass.he3", "mass.d", "calc.tank_ratio_he3", "calc.tank_ratio_d", "he3.supply"],
+   "current": ["{mass.propellant!t:5} ({calc.propellant_share!pct:0} of departure): He-3 {mass.he3!t:4}, D {mass.d!t:4}", "tanks x{calc.tank_ratio_he3:.1f} He-3, x{calc.tank_ratio_d:.1f} D the existing farm; {tanks.mass!t:4}"],
+   "target": "proposed tank bays cover the deficit (FDP-1 T-B, +{tanks.added_length:.0f} m)",
+   "gap": "He-3 supply ({mass.he3!t:2}) TBD; bay frames and bow move not designed",
+   "classification": ["engineering"],
+   "status": "calculated", "depends": ["P01", "P03", "P10"],
+   "components": ["tanks"]
+  },
+  {
+   "id": "P09", "title": "Structural stress, fatigue and maintainability",
+   "description": "Every pellet is a {fusion.yield_per_pulse_tTNT:.0f} t TNT pulse; the structure sees one load cycle per pellet for years, plus km-scale wings.",
+   "params": ["structure.total", "calc.pulses_mission", "nozzle.interloop_force", "structure.thrust_ring_ratio", "structure.wing_spars"],
+   "current": ["{structure.total!t:3} structure, thrust ring at {structure.thrust_ring_ratio!pct:0} of the Q45 limit", "~{calc.pulses_mission:.1e} load cycles; wing spars 25 kg/m placeholder"],
+   "target": "fatigue life and maintenance access over {calc.pulses_mission:.1e} cycles: TBD",
+   "gap": "no fatigue, deployment or dynamics analysis; record text says 1.8e10 cycles at 100 Hz (rate is {fusion.pellet_rate:.0f} Hz)",
+   "classification": ["materials", "engineering"],
+   "status": "unresolved", "depends": ["P02", "P04", "P07"],
+   "components": ["structure"]
+  },
+  {
+   "id": "P10", "title": "Full four-burn mission and safety margins",
+   "description": "Four 0.016 c burns close on {mass.propellant!t:5} without refuelling, but only on the speculative tier and with a small reserve.",
+   "params": ["calc.dv_total_c", "mission.engine_years", "mission.min_round_trip_years", "canon.mission_duration_y", "mass.reserve", "mission.margin_policy"],
+   "current": ["dv {calc.dv_total_c:.3f} c, {mission.engine_years:.2f} y thrust, round trip >= {mission.min_round_trip_years:.2f} y", "reserve {mass.reserve!t:3} ({calc.reserve_share!pct:1} of propellant)"],
+   "target": "canon LOCKED mission duration {canon.mission_duration_y:.1f} y; margin policy TBD",
+   "gap": "minimum round trip exceeds the LOCKED {canon.mission_duration_y:.1f} y by {calc.round_trip_vs_canon:.2f} y (conflict, not resolved here)",
+   "classification": ["engineering"],
+   "status": "calculated", "depends": ["P01", "P03", "P08"],
+   "components": ["mission"]
+  }
+ ]
+}

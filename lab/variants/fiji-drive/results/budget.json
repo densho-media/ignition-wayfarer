@@ -1,0 +1,240 @@
+{
+ "flown": {
+  "thrust_MN": 21.770763000706356,
+  "thrust_per_nozzle_MN": 5.442690750176589,
+  "exhaust_velocity_km_s": 19201.172079999997,
+  "exhaust_velocity_c": 0.06404821591609218,
+  "mass_flow_kg_s": 1.1338246910136727,
+  "mass_flow_per_nozzle_kg_s": 0.28345617275341817,
+  "jet_power_TW": 209.01208334472994,
+  "fusion_power_TW": 261.26510418091243,
+  "absorbed_GW": 10.450604167236499,
+  "hot_budget_GW": 10.80112544917382,
+  "ideal_rejection_GW": 14.401500598898428,
+  "absorbed_fraction": 4e-05,
+  "delta_v_per_burn_c": 0.016,
+  "mass_ratio_per_burn": 1.2837837837421309,
+  "burns": [
+   {
+    "burn": 1,
+    "start_mass_t": 4426.074234859591,
+    "end_mass_t": 3447.678877791964,
+    "accel_start_g": 0.501573150894622,
+    "accel_end_g": 0.6439114774789606,
+    "duration_d": 9.987452580792596
+   },
+   {
+    "burn": 2,
+    "start_mass_t": 3447.678877791964,
+    "end_mass_t": 2685.5603891040328,
+    "accel_start_g": 0.6439114774789606,
+    "accel_end_g": 0.8266431129529258,
+    "duration_d": 7.779699905290852
+   },
+   {
+    "burn": 3,
+    "start_mass_t": 2685.5603891040328,
+    "end_mass_t": 2091.910197896277,
+    "accel_start_g": 0.8266431129529258,
+    "accel_end_g": 1.061231023351081,
+    "duration_d": 6.059976768528449
+   },
+   {
+    "burn": 4,
+    "start_mass_t": 2091.910197896277,
+    "end_mass_t": 1629.487943677338,
+    "accel_start_g": 1.061231023351081,
+    "accel_end_g": 1.362391178582184,
+    "duration_d": 4.720402956691099
+   }
+  ],
+  "departure_mass_t": 4426.074234859591,
+  "propellant_t": 2796.5862911822533
+ },
+ "g_targets": [
+  {
+   "g": 1.1,
+   "mass": "departure (burn 1 start)",
+   "mass_t": 4426.074234859591,
+   "thrust_MN": 47.745456984814396,
+   "jet_power_TW": 458.38436780182957,
+   "fusion_power_TW": 572.9804597522868,
+   "absorbed_GW_at_f_hot": 22.919218390091476,
+   "hot_budget_GW": 10.80112544917382,
+   "power_vs_today": 2.193099846030444,
+   "same_power_ve_km_s": 8755.26580094131,
+   "same_power_mass_ratio_per_burn": 1.729551655978667,
+   "same_power_mass_ratio_4_burns": 8.948168425191355
+  },
+  {
+   "g": 1.1,
+   "mass": "burn 4 end",
+   "mass_t": 1629.487943677338,
+   "thrust_MN": 17.577799737149704,
+   "jet_power_TW": 168.7571787703951,
+   "fusion_power_TW": 210.94647346299385,
+   "absorbed_GW_at_f_hot": 8.437858938519755,
+   "hot_budget_GW": 10.80112544917382,
+   "power_vs_today": 0.8074039360301423,
+   "same_power_ve_km_s": 23781.370418391387,
+   "same_power_mass_ratio_per_burn": 1.2234797211023958,
+   "same_power_mass_ratio_4_burns": 2.240717477560012
+  },
+  {
+   "g": 1.5,
+   "mass": "departure (burn 1 start)",
+   "mass_t": 4426.074234859591,
+   "thrust_MN": 65.10744134292871,
+   "jet_power_TW": 625.0695924570402,
+   "fusion_power_TW": 781.3369905713002,
+   "absorbed_GW_at_f_hot": 31.253479622852012,
+   "hot_budget_GW": 10.80112544917382,
+   "power_vs_today": 2.990590699132423,
+   "same_power_ve_km_s": 6420.5282540236285,
+   "same_power_mass_ratio_per_burn": 2.11083761093111,
+   "same_power_mass_ratio_4_burns": 19.852686993475512
+  },
+  {
+   "g": 1.5,
+   "mass": "burn 4 end",
+   "mass_t": 1629.487943677338,
+   "thrust_MN": 23.96972691429505,
+   "jet_power_TW": 230.12342559599333,
+   "fusion_power_TW": 287.6542819949916,
+   "absorbed_GW_at_f_hot": 11.506171279799666,
+   "hot_budget_GW": 10.80112544917382,
+   "power_vs_today": 1.1010053673138305,
+   "same_power_ve_km_s": 17439.671640153683,
+   "same_power_mass_ratio_per_burn": 1.316588775723922,
+   "same_power_mass_ratio_4_burns": 3.0046963759589826
+  }
+ ],
+ "plasma": {
+  "dhe3_100keV": {
+   "Ti_keV": 100.0,
+   "Te_keV": 100.0,
+   "he3_to_d": 1.0,
+   "z_eff": 1.6666666666666667,
+   "sigma_v_DHe3_m3_s": 1.7184772663480242e-22,
+   "sigma_v_DDn_m3_s": 2.681674196574574e-23,
+   "sigma_v_DDp_m3_s": 2.2439277486232552e-23,
+   "tritium_burn": 0.1,
+   "neutron_fraction": 0.014906759552331299,
+   "bremsstrahlung_fraction": 0.1842273610019232,
+   "synchrotron_fraction": 0.01,
+   "radiated_fraction": 0.2091341205542545,
+   "charged_fraction": 0.7908658794457455,
+   "note": "Fractions of gross fusion power. Bremsstrahlung and synchrotron leave the charged channel and are not directable; the charged remainder powers the exhaust (directed efficiency 0.8 is the B01 value, inside this ceiling)."
+  },
+  "hot_ion_mode": {
+   "Ti_keV": 100.0,
+   "Te_keV": 40.0,
+   "he3_to_d": 1.0,
+   "z_eff": 1.6666666666666667,
+   "sigma_v_DHe3_m3_s": 1.7184772663480242e-22,
+   "sigma_v_DDn_m3_s": 2.681674196574574e-23,
+   "sigma_v_DDp_m3_s": 2.2439277486232552e-23,
+   "tritium_burn": 0.0,
+   "neutron_fraction": 0.010129723349213644,
+   "bremsstrahlung_fraction": 0.10340747822296548,
+   "synchrotron_fraction": 0.005,
+   "radiated_fraction": 0.11853720157217912,
+   "charged_fraction": 0.8814627984278208,
+   "note": "Fractions of gross fusion power. Bremsstrahlung and synchrotron leave the charged channel and are not directable; the charged remainder powers the exhaust (directed efficiency 0.8 is the B01 value, inside this ceiling)."
+  },
+  "he3_rich": {
+   "Ti_keV": 100.0,
+   "Te_keV": 60.0,
+   "he3_to_d": 2.0,
+   "z_eff": 1.8,
+   "sigma_v_DHe3_m3_s": 1.7184772663480242e-22,
+   "sigma_v_DDn_m3_s": 2.681674196574574e-23,
+   "sigma_v_DDp_m3_s": 2.2439277486232552e-23,
+   "tritium_burn": 0.0,
+   "neutron_fraction": 0.005135376920573236,
+   "bremsstrahlung_fraction": 0.20031185092751225,
+   "synchrotron_fraction": 0.005,
+   "radiated_fraction": 0.21044722784808548,
+   "charged_fraction": 0.7895527721519146,
+   "note": "Fractions of gross fusion power. Bremsstrahlung and synchrotron leave the charged channel and are not directable; the charged remainder powers the exhaust (directed efficiency 0.8 is the B01 value, inside this ceiling)."
+  }
+ },
+ "plasma_baseline": "dhe3_100keV",
+ "intercept": {
+  "rays": 60000,
+  "total": 0.8193,
+  "by_group": {
+   "drive coils": 0.38666666666666666,
+   "core hardware (limiters, NBI, fueller)": 0.1771,
+   "coil shield inserts and shadow shield": 0.09755,
+   "primary frames and rails": 0.07256666666666667,
+   "Fiji lattice": 0.03233333333333333,
+   "drive structure": 0.013016666666666666,
+   "heat exchangers": 0.013016666666666666,
+   "shadow shield": 0.008483333333333334,
+   "hot radiator blades": 0.0077666666666666665,
+   "engines": 0.00485,
+   "thrust ring and hub": 0.0046,
+   "septa and channel hardware": 0.00135
+  }
+ },
+ "intercept_enclosed": {
+  "rays": 20000,
+  "total": 0.9951,
+  "by_group": {
+   "drive coils": 0.36955,
+   "continuous core liner (main)": 0.27295,
+   "core hardware (limiters, NBI, fueller)": 0.16825,
+   "coil shield inserts and shadow shield": 0.0961,
+   "Fiji lattice": 0.0322,
+   "hull casing (enclosed bay)": 0.0255,
+   "primary frames and rails": 0.00995,
+   "shadow shield": 0.00845,
+   "engines": 0.00495,
+   "thrust ring and hub": 0.0043,
+   "septa and channel hardware": 0.00165,
+   "drive structure": 0.00125,
+   "heat exchangers": 0.0,
+   "hot radiator blades": 0.0
+  }
+ },
+ "shadow": {
+  "source_center_x": -118.4,
+  "governing_target": "thermal bulkhead rim",
+  "protected_half_angle_deg": 12.470775667705167,
+  "cone_fraction": 0.011796861257706626,
+  "cone_floor_absorbed_GW": 644.5739848281327,
+  "ring_A_distance_m": 215.7,
+  "unshielded_neutron_flux_n_cm2_s": 1696985068810411.2,
+  "unshielded_dose_Sv_s": 661824.1768360604,
+  "required_attenuation": 1.7488140323621137e-14,
+  "lih_thickness_m": 3.484497878346528,
+  "w_lih_thickness_m": 2.6133734087598954,
+  "note": "Point-kernel removal estimate for 2.45 MeV D-D neutrons; secondary gammas, D-T 14 MeV neutrons, scatter round the shield edge and the H2/D tank moderation are not included (OPEN: a transport calculation)."
+ },
+ "absorbed_at_today_power_TW": {
+  "dhe3_100keV": 44.76609957794439,
+  "hot_ion_mode": 25.37342139679409,
+  "he3_rich": 45.04717610298189
+ },
+ "radiation_limit": {
+  "revision geometry": {
+   "absorbed_fraction": 0.17134358497010072,
+   "fusion_power_TW": 0.06303781639130876,
+   "thrust_MN": 0.005252830702514803,
+   "accel_departure_g": 0.00012101913224129436,
+   "burn_1_days": 41393.769460936834,
+   "vs_today_power": 0.00024127912753192779
+  },
+  "ideal (cone only)": {
+   "absorbed_fraction": 0.002467126204431032,
+   "fusion_power_TW": 4.3780190205813865,
+   "thrust_MN": 0.36481264808966907,
+   "accel_departure_g": 0.008404860655669689,
+   "burn_1_days": 596.0167890445081,
+   "vs_today_power": 0.01675699873623321
+  },
+  "absorbed_fraction_required_by_today": 4e-05,
+  "radiated_fraction_that_today_needs_with_ideal_geometry": 0.003390732426718073
+ }
+}

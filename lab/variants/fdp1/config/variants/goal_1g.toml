@@ -1,0 +1,3 @@
+# The owner's preferred acceleration. Not expected to close: the run reports the deficit instead of a design.
+[mission]
+a0_g = { value = 1.0, status = "CANON", note = "owner preferred 1 g" }

@@ -14,5 +14,6 @@ work/<task>/
 - Nothing in `src/`, `tests/`, `tools/`, `godot/`, `web/` or CI reads `work/`.
 - Text and code here are committed on the task branch; `.blend` files are ignored by Git and reach the owner as a copied file.
 - On approval: the chosen form goes into the generators and `data/`, kept numbers into `references/evidence/<task>.json`, the
-  folder is deleted and the branch squashed onto `main`. On `main` this README is the only file here.
+  folder is deleted and the branch squashed onto `main`. Work kept but not adopted moves to `lab/<kind>/<name>/` (lab/README.md).
+  On `main` this README is the only file here; the branch is deleted after the squash.
 - Retired studies: `git show 038ae90:src/wayfarer/studies/<name>.py` restores one.

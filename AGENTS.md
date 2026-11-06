@@ -22,8 +22,14 @@ Each purpose and development stage has one place. Add no top-level folder withou
 | `godot/`, `web/` | the walk and its runtime checks; the website (start page, Explore Ship, Enter Wayfarer, status page) |
 | `references/` | the geometry baseline, `p1_*.json` reports the code writes, `evidence/` (kept study results); local-only captures and notes |
 | `runs/` | every run directory and `runs/renders/`; disposable, pruned per step 6 |
-| `work/<task>/` | everything not yet approved, one folder per task, named like its branch |
+| `lab/` | kept work that is not approved: `variants/` (alternative forms), `studies/` (numbers), `problems/` (engineering-problem maps); index in `lab/README.md` |
+| `work/<task>/` | the task in progress, one folder per task, named like its branch; on `main` only `README.md` |
 
+- **Model, variant, study, problem map.** The model is the one approved ship (`data/`, `src/`, the current baseline). A variant
+  proposes an alternative form of the ship or a subsystem; a study computes numbers without changing geometry; a problem map shows
+  where and how badly the design fails and never proposes a fix. All three live in `lab/<kind>/<name>/` with a `NOTES.md` that
+  opens with kind, status (ACTIVE, PARKED, SUPERSEDED, PROMOTED), question, model base and open owner questions. Nothing in `lab/`
+  is canon, and nothing in `src/`, `tests/`, `tools/`, `godot/`, `web/` or CI reads it.
 - **Work in progress** lives only in `work/<task>/`: `NOTES.md` (function, fixed constraints, unknowns, design freedom, decisions),
   study code, `WORK_<TASK>.blend` and `REVIEW_<TASK>.blend`. Nothing in `src/`, `tests/`, `tools/`, `godot/`, `web/` or CI reads
   `work/`. Text and code there are committed on the task branch; `.blend` files are not.
@@ -31,11 +37,14 @@ Each purpose and development stage has one place. Add no top-level folder withou
   approved ship appended, the change in `WORK_<task>` collections, a framed camera, nothing to run), copied to the owner's
   checkout, or a GitHub Pages link. Never hand over a script or command as the review path.
 - **On approval** the chosen form goes into the generators and `data/`, numbers worth keeping into `references/evidence/<task>.json`,
-  `work/<task>/` is deleted, and the branch is squashed onto `main` (step 5). On `main`, `work/` holds only `README.md`.
+  `work/<task>/` is deleted, and the branch is squashed onto `main` (step 5). Work the owner wants kept but not adopted moves to
+  `lab/<kind>/<name>/` and is squashed the same way; dropped work leaves only its last commit hash in `lab/README.md`. On `main`,
+  `work/` holds only `README.md`, and the branch is deleted after the squash, so no branch holds work that `main` lacks.
 - **Inside every `.blend`:** `GEN_<asset>` is generator-owned. In the vehicle file it has numbered groups: `10_SHIP` with one group
   per system (`11_STRUCTURE`, `12_DRIVE`, `13_THERMAL`, `14_HABITAT`, `15_FORWARD`, `16_SERVICE`, `build.py` SYSTEM_GROUPS),
   `20_HUMAN_SCALE` (one `HUMAN_<figure>` each), `30_CAMERAS`, `40_SIM_RIG`. `ART_<asset>` holds hand work; `WORK_<task>` appears only
-  in work and review files. Exported nodes carry a zone (`EXTERIOR`, `SHELL`, `INTERIOR:<area>`, `representation.zone`): one model,
+  in work and review files, and lab files use `VAR_<name>`, `PROB_<name>` and `STUDY_<name>` (pink like `WORK_`; replaced model
+  parts are hidden, never deleted). Exported nodes carry a zone (`EXTERIOR`, `SHELL`, `INTERIOR:<area>`, `representation.zone`): one model,
   never an exterior and an interior copy.
   Outliner colours: a colour is a ship system or an unapproved stage, grey is a helper. Structure brown, drive red, thermal orange,
   habitat green, forward blue, service yellow (`build.py` SYSTEM_COLORS); `ART_` violet, `WORK_` pink; GEN, `10_SHIP`, human scale,

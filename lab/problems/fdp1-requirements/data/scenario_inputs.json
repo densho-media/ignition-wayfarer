@@ -1,0 +1,225 @@
+{
+ "meta": {
+  "purpose": "Record values the scenario layer (fdp1diag/scenario.py) needs; check_v2.py compares each with the record.",
+  "record": "origin/claude/project-thread-8e13aa lab/variants/fdp1/results/fdp1-v1/{baseline,goal_1g}.json"
+ },
+ "inputs": {
+  "closure.alpha_hw": {
+   "value": 9.730602061959146e-08,
+   "unit": "kg/W",
+   "record_path": "baseline:closure.architecture.alpha_hw",
+   "note": "drive hardware mass per W of fusion power (scales with power)",
+   "class": "ASSUMED"
+  },
+  "closure.eta_jet": {
+   "value": 0.7797102257185157,
+   "unit": "-",
+   "record_path": "baseline:closure.architecture.eta_jet",
+   "note": "jet share of fusion power",
+   "class": "ASSUMED"
+  },
+  "closure.fixed_kg": {
+   "value": 1067947.27668527,
+   "unit": "kg",
+   "record_path": "baseline:closure.architecture.fixed_kg",
+   "note": "FDP-1 hardware held fixed in the closure (shield, structure, idle H2 vessels, low loop)",
+   "class": "ASSUMED"
+  },
+  "closure.payload_t": {
+   "value": 990.2338712519676,
+   "unit": "t",
+   "record_path": "baseline:closure.payload_t",
+   "note": "non-propulsion ship",
+   "class": "ASSUMED"
+  },
+  "closure.heat_hot": {
+   "value": 0.004461484027725553,
+   "unit": "W/W",
+   "record_path": "baseline:closure.architecture.heat.hot",
+   "note": "hot-loop heat per W of fusion power",
+   "class": "ASSUMED"
+  },
+  "closure.heat_warm": {
+   "value": 0.00141100130358663,
+   "unit": "W/W",
+   "record_path": "baseline:closure.architecture.heat.warm",
+   "note": "warm-loop heat per W of fusion power",
+   "class": "ASSUMED"
+  },
+  "closure.hot_T": {
+   "value": 1800.0,
+   "unit": "K",
+   "record_path": "baseline:closure.architecture.radiators.hot.T_K",
+   "note": "hot loop temperature",
+   "class": "ASSUMED"
+  },
+  "closure.warm_T": {
+   "value": 600.0,
+   "unit": "K",
+   "record_path": "baseline:closure.architecture.radiators.warm.T_K",
+   "note": "warm loop temperature",
+   "class": "ASSUMED"
+  },
+  "closure.emissivity": {
+   "value": 0.9,
+   "unit": "-",
+   "record_path": "baseline:closure.architecture.radiators.hot.emissivity",
+   "note": "emissivity (both loops)",
+   "class": "ASSUMED"
+  },
+  "closure.hot_areal": {
+   "value": 3.0,
+   "unit": "kg/m2",
+   "record_path": "baseline:closure.architecture.radiators.hot.areal_kg_m2",
+   "note": "hot radiator areal mass",
+   "class": "ASSUMED"
+  },
+  "closure.warm_areal": {
+   "value": 1.0,
+   "unit": "kg/m2",
+   "record_path": "baseline:closure.architecture.radiators.warm.areal_kg_m2",
+   "note": "warm radiator areal mass",
+   "class": "ASSUMED"
+  },
+  "closure.hot_flux": {
+   "value": 1071455.8050160992,
+   "unit": "W/m2",
+   "record_path": "baseline:closure.architecture.radiators.hot.flux_W_m2",
+   "note": "hot planform flux (two faces)",
+   "class": "ASSUMED"
+  },
+  "closure.warm_flux": {
+   "value": 13227.8494446432,
+   "unit": "W/m2",
+   "record_path": "baseline:closure.architecture.radiators.warm.flux_W_m2",
+   "note": "warm planform flux (two faces)",
+   "class": "ASSUMED"
+  },
+  "closure.hot_kg_per_W": {
+   "value": 3.2999288313668928e-06,
+   "unit": "kg/W",
+   "record_path": "baseline:closure.architecture.radiators.hot.kg_per_W",
+   "note": "hot radiator + transport mass per W of heat",
+   "class": "ASSUMED"
+  },
+  "closure.warm_kg_per_W": {
+   "value": 7.75980784469061e-05,
+   "unit": "kg/W",
+   "record_path": "baseline:closure.architecture.radiators.warm.kg_per_W",
+   "note": "warm radiator + transport mass per W of heat",
+   "class": "ASSUMED"
+  },
+  "closure.tank_t": {
+   "value": 1231.0147322852993,
+   "unit": "t",
+   "record_path": "baseline:closure.tank_t",
+   "note": "tankage",
+   "class": "ASSUMED"
+  },
+  "closure.reserve_t": {
+   "value": 524.6885321765841,
+   "unit": "t",
+   "record_path": "baseline:closure.reserve_t",
+   "note": "reserve and allowances",
+   "class": "ASSUMED"
+  },
+  "closure.propellant_t": {
+   "value": 13117.213304414603,
+   "unit": "t",
+   "record_path": "baseline:closure.propellant_t",
+   "note": "four-burn propellant",
+   "class": "ASSUMED"
+  },
+  "closure.departure_t": {
+   "value": 20760.22471499818,
+   "unit": "t",
+   "record_path": "baseline:closure.departure_t",
+   "note": "departure mass",
+   "class": "ASSUMED"
+  },
+  "closure.mass_ratio": {
+   "value": 2.7162362581652935,
+   "unit": "-",
+   "record_path": "baseline:closure.mass_ratio_total",
+   "note": "four-burn mass ratio",
+   "class": "ASSUMED"
+  },
+  "closure.ve_km_s": {
+   "value": 19201.17208,
+   "unit": "km/s",
+   "record_path": "baseline:closure.ve_km_s",
+   "note": "effective exhaust velocity",
+   "class": "ASSUMED"
+  },
+  "closure.a0_g": {
+   "value": 0.006895573489099627,
+   "unit": "g",
+   "record_path": "baseline:closure.a0_g",
+   "note": "departure acceleration",
+   "class": "ASSUMED"
+  },
+  "closure.alpha_jet": {
+   "value": 2.841050212386712e-07,
+   "unit": "kg/W",
+   "record_path": "baseline:closure.alpha_jet_kg_per_W",
+   "note": "drive + radiator mass per W of jet power (baseline closure)",
+   "class": "ASSUMED"
+  },
+  "wings.chord_m": {
+   "value": 266.75,
+   "unit": "m",
+   "record_path": "baseline:layout.wing_length",
+   "note": "wing chord along the ship",
+   "class": "ASSUMED"
+  },
+  "wings.warm_root_m": {
+   "value": 116.92093614714142,
+   "unit": "m",
+   "record_path": "baseline:thermal.layouts.W2.warm_root_radius_m",
+   "note": "warm field root radius",
+   "class": "ASSUMED"
+  },
+  "wings.hot_band_m": {
+   "value": 106.92093614714142,
+   "unit": "m",
+   "record_path": "baseline:thermal.layouts.W2.hot_band_m",
+   "note": "hot band radial extent",
+   "class": "ASSUMED"
+  },
+  "wings.tip_m": {
+   "value": 3573.0613558988957,
+   "unit": "m",
+   "record_path": "baseline:thermal.layouts.W2.tip_radius_m",
+   "note": "wing tip radius (designed)",
+   "class": "ASSUMED"
+  },
+  "wings.count": {
+   "value": 2,
+   "unit": "-",
+   "record_path": "baseline:thermal.layouts.W2.wings",
+   "note": "wings (coplanar, port and starboard; no mutual view)",
+   "class": "ASSUMED"
+  },
+  "wings.reused_hot_m2": {
+   "value": 14934.509904371585,
+   "unit": "m2",
+   "record_path": "baseline:thermal.radiators.hot.reused_m2",
+   "note": "existing Wayfarer hot blades reused by the hot loop",
+   "class": "ASSUMED"
+  },
+  "goal1g.alpha_jet": {
+   "value": 2.684594134093896e-07,
+   "unit": "kg/W",
+   "record_path": "goal_1g:drive_specific_mass_kg_per_W_jet",
+   "note": "specific mass of the record's 1 g check variant",
+   "class": "ASSUMED"
+  },
+  "goal1g.max_a0_g": {
+   "value": 0.011218998660344624,
+   "unit": "g",
+   "record_path": "goal_1g:max_a0_g_any_size",
+   "note": "record's ceiling at any size (1 g check variant)",
+   "class": "ASSUMED"
+  }
+ }
+}

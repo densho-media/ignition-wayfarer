@@ -1,0 +1,134 @@
+{
+ "cfg": {
+  "lw": 22.34,
+  "ll": 20.0,
+  "gap2": 0.5,
+  "coat": "white ceramic end of life",
+  "layers": [
+   [
+    0.5,
+    0
+   ],
+   [
+    0.8,
+    5
+   ],
+   [
+    1.1,
+    10
+   ]
+  ],
+  "coats_b": [
+   {
+    "eps": [
+     0.18,
+     0.18,
+     0.18,
+     0.18,
+     0.18,
+     0.18,
+     0.18,
+     0.18
+    ],
+    "spec": true,
+    "note": "hot layer end of life 0.18"
+   },
+   {
+    "eps": [
+     0.12,
+     0.12,
+     0.12,
+     0.12,
+     0.12,
+     0.12,
+     0.12,
+     0.12
+    ],
+    "spec": true,
+    "note": "mid layer end of life 0.12"
+   },
+   {
+    "eps": [
+     0.08,
+     0.08,
+     0.08,
+     0.08,
+     0.08,
+     0.08,
+     0.08,
+     0.08
+    ],
+    "spec": true,
+    "note": "cold layer end of life 0.08"
+   }
+  ],
+  "root_strip": 0.5,
+  "clear": 0.4
+ },
+ "span": {
+  "WARM": [
+   50.558056759868954,
+   72.89805675986895
+  ],
+  "WARM_rim_start": 55.8478661811229,
+  "LOW": [
+   73.39805675986895,
+   93.39805675986895
+  ],
+  "total_front": 93.39805675986895
+ },
+ "sheets": {
+  "VG_0": 1216.9,
+  "VG_1": 873.5,
+  "VG_2": 570.7
+ },
+ "WARM": {
+  "area_m2": 3545,
+  "emitted_MW": 6.518,
+  "self_MW": 0.287,
+  "absorbed_MW": {
+   "HOT": 0.0252,
+   "VG_2": 0.4404,
+   "LOW": 0.0315
+  },
+  "net_MW": 5.734,
+  "load_MW": 5.0,
+  "margin": 0.147,
+  "interference": 0.08
+ },
+ "LOW": {
+  "area_m2": 3600,
+  "emitted_MW": 1.453,
+  "self_MW": 0.04,
+  "absorbed_MW": {
+   "VG_2": 0.1505,
+   "WARM": 0.1404
+  },
+  "net_MW": 1.122,
+  "load_MW": 1.0,
+  "margin": 0.122,
+  "interference": 0.206
+ },
+ "RING_A": {
+  "VG_2": 0.082,
+  "WARM": 0.201,
+  "LOW": 0.09
+ },
+ "RING_B": {
+  "VG_2": 0.005,
+  "WARM": 0.018,
+  "LOW": 0.015
+ },
+ "TANKS": {
+  "VG_2": 0.159,
+  "WARM": 0.206,
+  "LOW": 0.104
+ },
+ "VG_0_absorbed_MW": 156.38,
+ "VG_0_area_m2": 4163,
+ "VG_1_absorbed_MW": 25.48,
+ "VG_1_area_m2": 4179,
+ "VG_2_absorbed_MW": 3.71,
+ "VG_2_area_m2": 4227,
+ "seconds": 144
+}

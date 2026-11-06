@@ -1,0 +1,6 @@
+# Credible-extrapolation tier (gain 300, rhoR ~36 g/cm2): the same assembly re-sized. Expect a 30 kt-class ship and centuries of thrust.
+[base]
+tier = "central"
+[mission]
+a0_g = { value = 1.0e-4, status = "PROTOTYPE" }
+ve_km_s = { value = 14000.0, status = "STUDY", note = "four-burn central optimum" }

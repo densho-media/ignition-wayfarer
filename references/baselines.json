@@ -82,5 +82,6 @@
       "baseline": "references/baseline_hero_camera_lighting",
       "replaced_utc": "2026-11-05T07:44:26Z"
     }
-  ]
+  ],
+  "pruned": "2026-11-06: every history baseline folder was removed from the tree; restore one with `git checkout 9115cc8 -- <baseline>`."
 }

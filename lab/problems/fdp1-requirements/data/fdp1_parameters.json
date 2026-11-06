@@ -1,0 +1,2074 @@
+{
+ "meta": {
+  "title": "FDP-1 engineering requirements map: parameters",
+  "version": "fdp1-req-v1",
+  "date": "2026-11-04",
+  "record": "FDP-1 fdp1-v1 baseline, branch claude/project-thread-8e13aa commit ec5717d (not canon, speculative tier)",
+  "classes": {
+   "EST": "Established: canon data, owner targets, SI constants",
+   "CALC": "Calculated here from these inputs (fdp1diag/model.py)",
+   "ASSUMED": "Depends on provisional FDP-1 model assumptions (speculative tier)",
+   "UNKNOWN": "No validated figure: shown as TBD",
+   "PROPOSED": "Candidate future technology, not an FDP-1 capability (none used)"
+  },
+  "units": "value in the stated unit; model.py converts to SI"
+ },
+ "parameters": {
+  "const.c": {
+   "value": 299792458.0,
+   "unit": "m/s",
+   "class": "EST",
+   "req": [],
+   "note": "speed of light (exact, SI)",
+   "source": "SI definition"
+  },
+  "const.g0": {
+   "value": 9.80665,
+   "unit": "m/s2",
+   "class": "EST",
+   "req": [],
+   "note": "standard gravity (exact, SI)",
+   "source": "SI / CGPM 1901"
+  },
+  "const.sigma": {
+   "value": 5.670374419e-08,
+   "unit": "W/m2/K4",
+   "class": "EST",
+   "req": [
+    "P07"
+   ],
+   "note": "Stefan-Boltzmann constant",
+   "source": "CODATA 2018"
+  },
+  "const.year_s": {
+   "value": 31557600.0,
+   "unit": "s",
+   "class": "EST",
+   "req": [],
+   "note": "Julian year",
+   "source": "IAU Julian year"
+  },
+  "const.AU_m": {
+   "value": 149597870700.0,
+   "unit": "m",
+   "class": "EST",
+   "req": [],
+   "note": "astronomical unit",
+   "source": "IAU 2012"
+  },
+  "canon.target_speed_c": {
+   "value": 0.016,
+   "unit": "c",
+   "class": "EST",
+   "req": [
+    "P10"
+   ],
+   "note": "LOCKED cruise speed",
+   "source": "data/wayfarer_3d.toml [mission.target_speed] (02_SHIP_INPUTS A2:H2, LOCKED)"
+  },
+  "canon.mission_duration_y": {
+   "value": 6.0,
+   "unit": "y",
+   "class": "EST",
+   "req": [
+    "P10"
+   ],
+   "note": "LOCKED mission duration; compared, not changed",
+   "source": "data/wayfarer_3d.toml [mission.duration] (02_SHIP_INPUTS A6:H6, LOCKED)"
+  },
+  "canon.accel_ceiling_g": {
+   "value": 1.5,
+   "unit": "g",
+   "class": "EST",
+   "req": [
+    "P09",
+    "P10"
+   ],
+   "note": "operational acceleration ceiling (first-ignition max, structure design case)",
+   "source": "data/wayfarer_3d.toml [mission.first_ignition].max_accel (02_SHIP_INPUTS A3:H4, BASELINE)"
+  },
+  "canon.ship_body_length_m": {
+   "value": 289.5,
+   "unit": "m",
+   "class": "EST",
+   "req": [],
+   "note": "Wayfarer body length, aft datum to shield face (PROTOTYPE selection inside WORKING envelope)",
+   "source": "data/wayfarer_3d.toml [ship.length]"
+  },
+  "canon.habitat_ring_radius_m": {
+   "value": 30.0,
+   "unit": "m",
+   "class": "EST",
+   "req": [],
+   "note": "habitat ring radius",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : shield.envelopes.0.radius_m",
+   "record_path": "baseline:shield.envelopes.0.radius_m"
+  },
+  "canon.forward_shield_radius_m": {
+   "value": 45.0,
+   "unit": "m",
+   "class": "EST",
+   "req": [],
+   "note": "forward shield (Brow) radius",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : shield.envelopes.6.radius_m",
+   "record_path": "baseline:shield.envelopes.6.radius_m"
+  },
+  "target.accel_goal_g": {
+   "value": 1.0,
+   "unit": "g",
+   "class": "EST",
+   "req": [
+    "P03"
+   ],
+   "note": "owner goal: about 1 g",
+   "source": "owner brief 2026-11-04 (this task)"
+  },
+  "target.accel_steps_g": {
+   "value": [
+    0.05,
+    0.1,
+    0.25,
+    0.5,
+    1.0,
+    1.5
+   ],
+   "unit": "g",
+   "class": "EST",
+   "req": [
+    "P03"
+   ],
+   "note": "intermediate targets from the owner brief",
+   "source": "owner brief 2026-11-04 (this task)"
+  },
+  "fusion.power": {
+   "value": 17285726261156.754,
+   "unit": "W",
+   "class": "ASSUMED",
+   "req": [
+    "P01",
+    "P03"
+   ],
+   "note": "gross fusion power (FDP-1 speculative tier)",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : fusion.gross_fusion_power_W",
+   "record_path": "baseline:fusion.gross_fusion_power_W"
+  },
+  "fusion.target_gain": {
+   "value": 3000.0,
+   "unit": "-",
+   "class": "ASSUMED",
+   "req": [
+    "P01"
+   ],
+   "note": "target gain (speculative; NIF D-T best ~4)",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : fusion.target_gain",
+   "record_path": "baseline:fusion.target_gain"
+  },
+  "fusion.burn_fraction": {
+   "value": 0.6715884189437099,
+   "unit": "-",
+   "class": "ASSUMED",
+   "req": [
+    "P01"
+   ],
+   "note": "fraction of fuel fused per pellet",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : fusion.burn_fraction",
+   "record_path": "baseline:fusion.burn_fraction"
+  },
+  "fusion.rhoR": {
+   "value": 90.44650464760352,
+   "unit": "g/cm2",
+   "class": "ASSUMED",
+   "req": [
+    "P01"
+   ],
+   "note": "fuel areal density",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : fusion.fuel_rhoR_g_cm2",
+   "record_path": "baseline:fusion.fuel_rhoR_g_cm2"
+  },
+  "fusion.pellet_rate": {
+   "value": 212.31169240068093,
+   "unit": "Hz",
+   "class": "ASSUMED",
+   "req": [
+    "P01",
+    "P02"
+   ],
+   "note": "pellet / driver repetition rate",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : fusion.pellet_rate_Hz",
+   "record_path": "baseline:fusion.pellet_rate_Hz"
+  },
+  "fusion.yield_per_pulse": {
+   "value": 81416741890.70187,
+   "unit": "J",
+   "class": "ASSUMED",
+   "req": [
+    "P01"
+   ],
+   "note": "fusion yield per pellet",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : fusion.yield_per_pulse_J",
+   "record_path": "baseline:fusion.yield_per_pulse_J"
+  },
+  "fusion.yield_per_pulse_tTNT": {
+   "value": 19.459068329517656,
+   "unit": "t TNT",
+   "class": "ASSUMED",
+   "req": [
+    "P01",
+    "P09"
+   ],
+   "note": "yield per pellet in TNT equivalent",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : fusion.yield_per_pulse_t_TNT",
+   "record_path": "baseline:fusion.yield_per_pulse_t_TNT"
+  },
+  "fusion.pellet_mass": {
+   "value": 0.3443669497338516,
+   "unit": "g",
+   "class": "ASSUMED",
+   "req": [
+    "P01",
+    "P08"
+   ],
+   "note": "fuel per pellet",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : fusion.pellet_fuel_mass_g",
+   "record_path": "baseline:fusion.pellet_fuel_mass_g"
+  },
+  "fusion.xray_escape_fraction": {
+   "value": 0.011516936655141615,
+   "unit": "-",
+   "class": "ASSUMED",
+   "req": [
+    "P05"
+   ],
+   "note": "X-ray share of fusion escaping the burning pellet",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : fusion.xray_escape_fraction",
+   "record_path": "baseline:fusion.xray_escape_fraction"
+  },
+  "fusion.neutron_escape_fraction": {
+   "value": 5.52213171235667e-06,
+   "unit": "-",
+   "class": "ASSUMED",
+   "req": [
+    "P05"
+   ],
+   "note": "neutron share escaping the pellet (dense-fuel self-absorption at rhoR ~90 g/cm2; unvalidated)",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : fusion.neutron_escape_fraction",
+   "record_path": "baseline:fusion.neutron_escape_fraction"
+  },
+  "fusion.neutron_production_fraction": {
+   "value": null,
+   "unit": "-",
+   "class": "UNKNOWN",
+   "req": [
+    "P05"
+   ],
+   "note": "neutron share produced before self-absorption: not reported by the FDP-1 record",
+   "source": "TBD: not in FDP-1 record"
+  },
+  "fusion.xray_standoff": {
+   "value": 43.19071770932621,
+   "unit": "m",
+   "class": "ASSUMED",
+   "req": [
+    "P05",
+    "P09"
+   ],
+   "note": "X-ray stand-off distance burn point to shield",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : fusion.xray_standoff_m",
+   "record_path": "baseline:fusion.xray_standoff_m"
+  },
+  "driver.energy_per_pulse_beam": {
+   "value": 27138913.96356729,
+   "unit": "J",
+   "class": "ASSUMED",
+   "req": [
+    "P02"
+   ],
+   "note": "beam energy per pulse",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : fusion.driver_energy_per_pulse_J",
+   "record_path": "baseline:fusion.driver_energy_per_pulse_J"
+  },
+  "driver.energy_per_pulse_electric": {
+   "value": 60308697.69888312,
+   "unit": "J",
+   "class": "ASSUMED",
+   "req": [
+    "P02"
+   ],
+   "note": "electric energy per pulse",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : drivers.electric_energy_per_pulse_J",
+   "record_path": "baseline:drivers.electric_energy_per_pulse_J"
+  },
+  "driver.wall_plug_power": {
+   "value": 12804241674.930927,
+   "unit": "W",
+   "class": "ASSUMED",
+   "req": [
+    "P02"
+   ],
+   "note": "driver wall-plug power",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : fusion.driver_wall_plug_power_W",
+   "record_path": "baseline:fusion.driver_wall_plug_power_W"
+  },
+  "driver.beam_power": {
+   "value": 5761908753.718918,
+   "unit": "W",
+   "class": "ASSUMED",
+   "req": [
+    "P02"
+   ],
+   "note": "driver beam power delivered to targets",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : fusion.driver_beam_power_W",
+   "record_path": "baseline:fusion.driver_beam_power_W"
+  },
+  "driver.mass": {
+   "value": 640212.0837465464,
+   "unit": "kg",
+   "class": "ASSUMED",
+   "req": [
+    "P02",
+    "P03"
+   ],
+   "note": "heavy-ion linacs and pulse storage",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : drivers.mass_kg",
+   "record_path": "baseline:drivers.mass_kg"
+  },
+  "driver.beams": {
+   "value": 9,
+   "unit": "-",
+   "class": "ASSUMED",
+   "req": [
+    "P02"
+   ],
+   "note": "beam count (PROTOTYPE layout)",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : drivers.beams",
+   "record_path": "baseline:drivers.beams"
+  },
+  "power.electric_load": {
+   "value": 30148208347.554924,
+   "unit": "W",
+   "class": "ASSUMED",
+   "req": [
+    "P02",
+    "P06"
+   ],
+   "note": "onboard electric load (drivers + house + cryo)",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : fusion.electric_load_W",
+   "record_path": "baseline:fusion.electric_load_W"
+  },
+  "power.recovered": {
+   "value": 31734956155.320976,
+   "unit": "W",
+   "class": "ASSUMED",
+   "req": [
+    "P02",
+    "P06"
+   ],
+   "note": "power recovered from the burn into the electric bus",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : fusion.recovered_power_W",
+   "record_path": "baseline:fusion.recovered_power_W"
+  },
+  "prop.ve": {
+   "value": 19201172.080000002,
+   "unit": "m/s",
+   "class": "ASSUMED",
+   "req": [
+    "P04",
+    "P08"
+   ],
+   "note": "effective exhaust velocity (four-burn optimum)",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : closure.ve_km_s (x1000)",
+   "record_path": "baseline:closure.ve_km_s",
+   "record_scale": 1000.0
+  },
+  "prop.eta_jet": {
+   "value": 0.7797102257185157,
+   "unit": "-",
+   "class": "ASSUMED",
+   "req": [
+    "P04"
+   ],
+   "note": "share of fusion power in the directed jet (model: 20 deg plume, detachment)",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : fusion.directed_exhaust_efficiency",
+   "record_path": "baseline:fusion.directed_exhaust_efficiency"
+  },
+  "prop.thrust": {
+   "value": 1403857.7924973217,
+   "unit": "N",
+   "class": "ASSUMED",
+   "req": [
+    "P04",
+    "P09"
+   ],
+   "note": "thrust",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : closure.thrust_MN (x1e+06)",
+   "record_path": "baseline:closure.thrust_MN",
+   "record_scale": 1000000.0
+  },
+  "prop.jet_power": {
+   "value": 13477857524795.006,
+   "unit": "W",
+   "class": "ASSUMED",
+   "req": [
+    "P03",
+    "P04"
+   ],
+   "note": "directed jet power",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : fusion.jet_power_W",
+   "record_path": "baseline:fusion.jet_power_W"
+  },
+  "prop.mass_flow": {
+   "value": 0.07311313010728049,
+   "unit": "kg/s",
+   "class": "ASSUMED",
+   "req": [
+    "P08"
+   ],
+   "note": "propellant mass flow",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : fusion.mass_flow_kg_s",
+   "record_path": "baseline:fusion.mass_flow_kg_s"
+  },
+  "prop.plume_half_angle_deg": {
+   "value": 20.0,
+   "unit": "deg",
+   "class": "ASSUMED",
+   "req": [
+    "P04"
+   ],
+   "note": "detached jet half-angle (magnetic-nozzle studies 15-30 deg)",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : nozzle.plume_half_angle_deg",
+   "record_path": "baseline:nozzle.plume_half_angle_deg"
+  },
+  "prop.a0_g": {
+   "value": 0.006895573489099627,
+   "unit": "g",
+   "class": "ASSUMED",
+   "req": [
+    "P03"
+   ],
+   "note": "departure acceleration (held from the four-burn study)",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : closure.a0_g",
+   "record_path": "baseline:closure.a0_g"
+  },
+  "prop.a_peak_g": {
+   "value": 0.01873000673193577,
+   "unit": "g",
+   "class": "ASSUMED",
+   "req": [
+    "P03"
+   ],
+   "note": "acceleration at end of burn 4",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : closure.a_end_g",
+   "record_path": "baseline:closure.a_end_g"
+  },
+  "ledger.jet": {
+   "value": 13477857524795.006,
+   "unit": "W",
+   "class": "ASSUMED",
+   "req": [
+    "P05",
+    "P06"
+   ],
+   "note": "energy ledger channel (share of gross fusion)",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : fusion.ledger_W.jet",
+   "record_path": "baseline:fusion.ledger_W.jet"
+  },
+  "ledger.plume_to_space": {
+   "value": 3511067188104.8247,
+   "unit": "W",
+   "class": "ASSUMED",
+   "req": [
+    "P05",
+    "P06"
+   ],
+   "note": "energy ledger channel (share of gross fusion)",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : fusion.ledger_W.plume_to_space",
+   "record_path": "baseline:fusion.ledger_W.plume_to_space"
+  },
+  "ledger.plume_to_hardware": {
+   "value": 71654432410.30255,
+   "unit": "W",
+   "class": "ASSUMED",
+   "req": [
+    "P05",
+    "P06"
+   ],
+   "note": "energy ledger channel (share of gross fusion)",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : fusion.ledger_W.plume_to_hardware",
+   "record_path": "baseline:fusion.ledger_W.plume_to_hardware"
+  },
+  "ledger.recovery_loss": {
+   "value": 1586747807.766051,
+   "unit": "W",
+   "class": "ASSUMED",
+   "req": [
+    "P05",
+    "P06"
+   ],
+   "note": "energy ledger channel (share of gross fusion)",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : fusion.ledger_W.recovery_loss",
+   "record_path": "baseline:fusion.ledger_W.recovery_loss"
+  },
+  "ledger.driver_loss": {
+   "value": 7042332921.21201,
+   "unit": "W",
+   "class": "ASSUMED",
+   "req": [
+    "P05",
+    "P06"
+   ],
+   "note": "energy ledger channel (share of gross fusion)",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : fusion.ledger_W.driver_loss",
+   "record_path": "baseline:fusion.ledger_W.driver_loss"
+  },
+  "ledger.electric_house": {
+   "value": 17285726261.156754,
+   "unit": "W",
+   "class": "ASSUMED",
+   "req": [
+    "P05",
+    "P06"
+   ],
+   "note": "energy ledger channel (share of gross fusion)",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : fusion.ledger_W.electric_house",
+   "record_path": "baseline:fusion.ledger_W.electric_house"
+  },
+  "ledger.cryo_input": {
+   "value": 58240411.46724321,
+   "unit": "W",
+   "class": "ASSUMED",
+   "req": [
+    "P05",
+    "P06"
+   ],
+   "note": "energy ledger channel (share of gross fusion)",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : fusion.ledger_W.cryo_input",
+   "record_path": "baseline:fusion.ledger_W.cryo_input"
+  },
+  "ledger.radiation_on_hardware": {
+   "value": 3878811403.718398,
+   "unit": "W",
+   "class": "ASSUMED",
+   "req": [
+    "P05",
+    "P06"
+   ],
+   "note": "energy ledger channel (share of gross fusion)",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : fusion.ledger_W.radiation_on_hardware",
+   "record_path": "baseline:fusion.ledger_W.radiation_on_hardware"
+  },
+  "ledger.radiation_on_conductor": {
+   "value": 3882694.0978162144,
+   "unit": "W",
+   "class": "ASSUMED",
+   "req": [
+    "P05",
+    "P06"
+   ],
+   "note": "energy ledger channel (share of gross fusion)",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : fusion.ledger_W.radiation_on_conductor",
+   "record_path": "baseline:fusion.ledger_W.radiation_on_conductor"
+  },
+  "ledger.radiation_to_space": {
+   "value": 195291374347.20187,
+   "unit": "W",
+   "class": "ASSUMED",
+   "req": [
+    "P05",
+    "P06"
+   ],
+   "note": "energy ledger channel (share of gross fusion)",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : fusion.ledger_W.radiation_to_space",
+   "record_path": "baseline:fusion.ledger_W.radiation_to_space"
+  },
+  "hot.plume_on_hardware": {
+   "value": 71654432410.30255,
+   "unit": "W",
+   "class": "ASSUMED",
+   "req": [
+    "P06"
+   ],
+   "note": "hot loop (1800 K) source",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : thermal.circuits.hot_W.plume_on_hardware",
+   "record_path": "baseline:thermal.circuits.hot_W.plume_on_hardware"
+  },
+  "hot.recovery_conversion_loss": {
+   "value": 1586747807.766051,
+   "unit": "W",
+   "class": "ASSUMED",
+   "req": [
+    "P06"
+   ],
+   "note": "hot loop (1800 K) source",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : thermal.circuits.hot_W.recovery_conversion_loss",
+   "record_path": "baseline:thermal.circuits.hot_W.recovery_conversion_loss"
+  },
+  "hot.radiation_on_nozzle_loops": {
+   "value": 1795346876.0669022,
+   "unit": "W",
+   "class": "ASSUMED",
+   "req": [
+    "P06"
+   ],
+   "note": "hot loop (1800 K) source",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : thermal.circuits.hot_W.radiation_on_nozzle_loops",
+   "record_path": "baseline:thermal.circuits.hot_W.radiation_on_nozzle_loops"
+  },
+  "hot.radiation_on_nozzle_struts": {
+   "value": 294267305.57262665,
+   "unit": "W",
+   "class": "ASSUMED",
+   "req": [
+    "P06"
+   ],
+   "note": "hot loop (1800 K) source",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : thermal.circuits.hot_W.radiation_on_nozzle_struts",
+   "record_path": "baseline:thermal.circuits.hot_W.radiation_on_nozzle_struts"
+  },
+  "hot.radiation_on_shadow_shield": {
+   "value": 1789197222.0788693,
+   "unit": "W",
+   "class": "ASSUMED",
+   "req": [
+    "P06"
+   ],
+   "note": "hot loop (1800 K) source",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : thermal.circuits.hot_W.radiation_on_shadow_shield",
+   "record_path": "baseline:thermal.circuits.hot_W.radiation_on_shadow_shield"
+  },
+  "warm.driver_waste": {
+   "value": 7042332921.21201,
+   "unit": "W",
+   "class": "ASSUMED",
+   "req": [
+    "P06"
+   ],
+   "note": "warm loop (600 K) source",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : thermal.circuits.warm_W.driver_waste",
+   "record_path": "baseline:thermal.circuits.warm_W.driver_waste"
+  },
+  "warm.power_and_target_systems": {
+   "value": 17285726261.156754,
+   "unit": "W",
+   "class": "ASSUMED",
+   "req": [
+    "P06"
+   ],
+   "note": "warm loop (600 K) source",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : thermal.circuits.warm_W.power_and_target_systems",
+   "record_path": "baseline:thermal.circuits.warm_W.power_and_target_systems"
+  },
+  "warm.cryoplant_input": {
+   "value": 58240411.46724321,
+   "unit": "W",
+   "class": "ASSUMED",
+   "req": [
+    "P06"
+   ],
+   "note": "warm loop (600 K) source",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : thermal.circuits.warm_W.cryoplant_input",
+   "record_path": "baseline:thermal.circuits.warm_W.cryoplant_input"
+  },
+  "warm.coil_conductor_heating": {
+   "value": 3882694.0978162144,
+   "unit": "W",
+   "class": "ASSUMED",
+   "req": [
+    "P06"
+   ],
+   "note": "warm loop (600 K) source",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : thermal.circuits.warm_W.coil_conductor_heating",
+   "record_path": "baseline:thermal.circuits.warm_W.coil_conductor_heating"
+  },
+  "thermal.hot_total": {
+   "value": 77119991621.787,
+   "unit": "W",
+   "class": "ASSUMED",
+   "req": [
+    "P06",
+    "P07"
+   ],
+   "note": "hot loop heat",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : thermal.circuits.hot_total_W",
+   "record_path": "baseline:thermal.circuits.hot_total_W"
+  },
+  "thermal.warm_total": {
+   "value": 24390182287.933823,
+   "unit": "W",
+   "class": "ASSUMED",
+   "req": [
+    "P06",
+    "P07"
+   ],
+   "note": "warm loop heat",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : thermal.circuits.warm_total_W",
+   "record_path": "baseline:thermal.circuits.warm_total_W"
+  },
+  "thermal.low_added": {
+   "value": 1482902.4839090654,
+   "unit": "W",
+   "class": "ASSUMED",
+   "req": [
+    "P06"
+   ],
+   "note": "added 300 K cryocooling rejection",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : thermal.low_loop.added_cooling_W",
+   "record_path": "baseline:thermal.low_loop.added_cooling_W"
+  },
+  "rad.hot_T": {
+   "value": 1800.0,
+   "unit": "K",
+   "class": "ASSUMED",
+   "req": [
+    "P07"
+   ],
+   "note": "hot radiator temperature",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : thermal.radiators.hot.T_K",
+   "record_path": "baseline:thermal.radiators.hot.T_K"
+  },
+  "rad.warm_T": {
+   "value": 600.0,
+   "unit": "K",
+   "class": "ASSUMED",
+   "req": [
+    "P07"
+   ],
+   "note": "warm radiator temperature",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : thermal.radiators.warm.T_K",
+   "record_path": "baseline:thermal.radiators.warm.T_K"
+  },
+  "rad.hot_area": {
+   "value": 71976.82933887154,
+   "unit": "m2",
+   "class": "ASSUMED",
+   "req": [
+    "P07"
+   ],
+   "note": "hot radiator planform",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : thermal.radiators.hot.planform_m2",
+   "record_path": "baseline:thermal.radiators.hot.planform_m2"
+  },
+  "rad.warm_area": {
+   "value": 1843850.913937561,
+   "unit": "m2",
+   "class": "ASSUMED",
+   "req": [
+    "P07"
+   ],
+   "note": "warm radiator planform",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : thermal.radiators.warm.planform_m2",
+   "record_path": "baseline:thermal.radiators.warm.planform_m2"
+  },
+  "rad.hot_flux": {
+   "value": 1071455.8050160992,
+   "unit": "W/m2",
+   "class": "ASSUMED",
+   "req": [
+    "P07"
+   ],
+   "note": "hot planform flux (two faces)",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : thermal.radiators.hot.flux_W_m2",
+   "record_path": "baseline:thermal.radiators.hot.flux_W_m2"
+  },
+  "rad.warm_flux": {
+   "value": 13227.8494446432,
+   "unit": "W/m2",
+   "class": "ASSUMED",
+   "req": [
+    "P07"
+   ],
+   "note": "warm planform flux (two faces)",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : thermal.radiators.warm.flux_W_m2",
+   "record_path": "baseline:thermal.radiators.warm.flux_W_m2"
+  },
+  "rad.hot_areal": {
+   "value": 3.0,
+   "unit": "kg/m2",
+   "class": "ASSUMED",
+   "req": [
+    "P07"
+   ],
+   "note": "hot radiator areal mass",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : thermal.radiators.hot.areal_kg_m2",
+   "record_path": "baseline:thermal.radiators.hot.areal_kg_m2"
+  },
+  "rad.warm_areal": {
+   "value": 1.0,
+   "unit": "kg/m2",
+   "class": "ASSUMED",
+   "req": [
+    "P07"
+   ],
+   "note": "warm radiator areal mass",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : thermal.radiators.warm.areal_kg_m2",
+   "record_path": "baseline:thermal.radiators.warm.areal_kg_m2"
+  },
+  "rad.emissivity": {
+   "value": 0.9,
+   "unit": "-",
+   "class": "ASSUMED",
+   "req": [
+    "P07"
+   ],
+   "note": "emissivity both faces; reproduces the FDP-1 planform flux with no sink (inferred, see check)",
+   "source": "inferred from FDP-1 record flux = 2*eps*sigma*T^4 (both loops)"
+  },
+  "rad.existing_hot_blades_area": {
+   "value": 14934.509904371585,
+   "unit": "m2",
+   "class": "EST",
+   "req": [
+    "P07"
+   ],
+   "note": "planform of the three canon 1800 K blades reused",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : thermal.radiators.hot.existing_blades_planform_m2",
+   "record_path": "baseline:thermal.radiators.hot.existing_blades_planform_m2"
+  },
+  "rad.wing_span": {
+   "value": 3456.1404197517545,
+   "unit": "m",
+   "class": "ASSUMED",
+   "req": [
+    "P07",
+    "P09"
+   ],
+   "note": "each warm wing span (layout W2)",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : thermal.layouts.W2.span_m",
+   "record_path": "baseline:thermal.layouts.W2.span_m"
+  },
+  "rad.wing_tip_radius": {
+   "value": 3573.0613558988957,
+   "unit": "m",
+   "class": "ASSUMED",
+   "req": [
+    "P07",
+    "P09"
+   ],
+   "note": "warm wing tip radius from ship axis",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : thermal.layouts.W2.tip_radius_m",
+   "record_path": "baseline:thermal.layouts.W2.tip_radius_m"
+  },
+  "rad.wing_root_radius": {
+   "value": 116.92093614714142,
+   "unit": "m",
+   "class": "ASSUMED",
+   "req": [
+    "P07"
+   ],
+   "note": "warm field root radius (after the 1800 K band)",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : thermal.layouts.W2.warm_root_radius_m",
+   "record_path": "baseline:thermal.layouts.W2.warm_root_radius_m"
+  },
+  "rad.wing_chord": {
+   "value": 266.75,
+   "unit": "m",
+   "class": "ASSUMED",
+   "req": [
+    "P07"
+   ],
+   "note": "wing chord along the ship",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : layout.wing_length",
+   "record_path": "baseline:layout.wing_length"
+  },
+  "rad.hot_band": {
+   "value": 106.92093614714142,
+   "unit": "m",
+   "class": "ASSUMED",
+   "req": [
+    "P07"
+   ],
+   "note": "1800 K band at each wing root",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : thermal.layouts.W2.hot_band_m",
+   "record_path": "baseline:thermal.layouts.W2.hot_band_m"
+  },
+  "rad.wings": {
+   "value": 2,
+   "unit": "-",
+   "class": "ASSUMED",
+   "req": [
+    "P07"
+   ],
+   "note": "warm wing count",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : thermal.layouts.W2.wings",
+   "record_path": "baseline:thermal.layouts.W2.wings"
+  },
+  "mass.payload (non-propulsion ship)": {
+   "value": 990233.8712519676,
+   "unit": "kg",
+   "class": "ASSUMED",
+   "req": [
+    "P03"
+   ],
+   "note": "departure mass item",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : mass.items_kg.payload (non-propulsion ship)",
+   "record_path": "baseline:mass.items_kg.payload (non-propulsion ship)"
+  },
+  "mass.drivers (heavy-ion linacs, storage)": {
+   "value": 640212.0837465464,
+   "unit": "kg",
+   "class": "ASSUMED",
+   "req": [
+    "P03"
+   ],
+   "note": "departure mass item",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : mass.items_kg.drivers (heavy-ion linacs, storage)",
+   "record_path": "baseline:mass.items_kg.drivers (heavy-ion linacs, storage)"
+  },
+  "mass.nozzle loops (virial structure)": {
+   "value": 86112.12429929705,
+   "unit": "kg",
+   "class": "ASSUMED",
+   "req": [
+    "P03"
+   ],
+   "note": "departure mass item",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : mass.items_kg.nozzle loops (virial structure)",
+   "record_path": "baseline:mass.items_kg.nozzle loops (virial structure)"
+  },
+  "mass.loop armour": {
+   "value": 91394.71488905176,
+   "unit": "kg",
+   "class": "ASSUMED",
+   "req": [
+    "P03"
+   ],
+   "note": "departure mass item",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : mass.items_kg.loop armour",
+   "record_path": "baseline:mass.items_kg.loop armour"
+  },
+  "mass.target factory, injectors, cryo-targets, misc": {
+   "value": 864286.3130578377,
+   "unit": "kg",
+   "class": "ASSUMED",
+   "req": [
+    "P03"
+   ],
+   "note": "departure mass item",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : mass.items_kg.target factory, injectors, cryo-targets, misc",
+   "record_path": "baseline:mass.items_kg.target factory, injectors, cryo-targets, misc"
+  },
+  "mass.shadow shield": {
+   "value": 429692.55173036666,
+   "unit": "kg",
+   "class": "ASSUMED",
+   "req": [
+    "P03"
+   ],
+   "note": "departure mass item",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : mass.items_kg.shadow shield",
+   "record_path": "baseline:mass.items_kg.shadow shield"
+  },
+  "mass.FDP-1 structure": {
+   "value": 528615.6056874216,
+   "unit": "kg",
+   "class": "ASSUMED",
+   "req": [
+    "P03"
+   ],
+   "note": "departure mass item",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : mass.items_kg.FDP-1 structure",
+   "record_path": "baseline:mass.items_kg.FDP-1 structure"
+  },
+  "mass.hot radiators": {
+   "value": 254490.48382750814,
+   "unit": "kg",
+   "class": "ASSUMED",
+   "req": [
+    "P03"
+   ],
+   "note": "departure mass item",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : mass.items_kg.hot radiators",
+   "record_path": "baseline:mass.items_kg.hot radiators"
+  },
+  "mass.warm radiators": {
+   "value": 1892631.2785134285,
+   "unit": "kg",
+   "class": "ASSUMED",
+   "req": [
+    "P03"
+   ],
+   "note": "departure mass item",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : mass.items_kg.warm radiators",
+   "record_path": "baseline:mass.items_kg.warm radiators"
+  },
+  "mass.warm-wing view-factor area": {
+   "value": 0.0,
+   "unit": "kg",
+   "class": "ASSUMED",
+   "req": [
+    "P03"
+   ],
+   "note": "departure mass item",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : mass.items_kg.warm-wing view-factor area",
+   "record_path": "baseline:mass.items_kg.warm-wing view-factor area"
+  },
+  "mass.low loop radiator": {
+   "value": 4484.183132306778,
+   "unit": "kg",
+   "class": "ASSUMED",
+   "req": [
+    "P03"
+   ],
+   "note": "departure mass item",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : mass.items_kg.low loop radiator",
+   "record_path": "baseline:mass.items_kg.low loop radiator"
+  },
+  "mass.tankage (required volume)": {
+   "value": 1231014.7322852993,
+   "unit": "kg",
+   "class": "ASSUMED",
+   "req": [
+    "P03"
+   ],
+   "note": "departure mass item",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : mass.items_kg.tankage (required volume)",
+   "record_path": "baseline:mass.items_kg.tankage (required volume)"
+  },
+  "mass.idle hydrogen vessels": {
+   "value": 105154.96060446002,
+   "unit": "kg",
+   "class": "ASSUMED",
+   "req": [
+    "P03"
+   ],
+   "note": "departure mass item",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : mass.items_kg.idle hydrogen vessels",
+   "record_path": "baseline:mass.items_kg.idle hydrogen vessels"
+  },
+  "mass.propellant reserve and allowances": {
+   "value": 524688.5321765841,
+   "unit": "kg",
+   "class": "ASSUMED",
+   "req": [
+    "P03"
+   ],
+   "note": "departure mass item",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : mass.items_kg.propellant reserve and allowances",
+   "record_path": "baseline:mass.items_kg.propellant reserve and allowances"
+  },
+  "mass.propellant (four burns)": {
+   "value": 13117213.304414604,
+   "unit": "kg",
+   "class": "ASSUMED",
+   "req": [
+    "P03"
+   ],
+   "note": "departure mass item",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : mass.items_kg.propellant (four burns)",
+   "record_path": "baseline:mass.items_kg.propellant (four burns)"
+  },
+  "mass.departure": {
+   "value": 20760224.714998182,
+   "unit": "kg",
+   "class": "ASSUMED",
+   "req": [
+    "P03",
+    "P10"
+   ],
+   "note": "departure mass",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : closure.departure_t (x1000)",
+   "record_path": "baseline:closure.departure_t",
+   "record_scale": 1000.0
+  },
+  "mass.end": {
+   "value": 7643011.410583579,
+   "unit": "kg",
+   "class": "ASSUMED",
+   "req": [
+    "P10"
+   ],
+   "note": "mass after burn 4 (dry + reserve)",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : closure.end_t (x1000)",
+   "record_path": "baseline:closure.end_t",
+   "record_scale": 1000.0
+  },
+  "mass.dry": {
+   "value": 7118322.878424977,
+   "unit": "kg",
+   "class": "ASSUMED",
+   "req": [
+    "P03"
+   ],
+   "note": "dry mass (no reserve)",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : closure.dry_t (x1000)",
+   "record_path": "baseline:closure.dry_t",
+   "record_scale": 1000.0
+  },
+  "mass.reserve": {
+   "value": 524688.5321765841,
+   "unit": "kg",
+   "class": "ASSUMED",
+   "req": [
+    "P10"
+   ],
+   "note": "propellant reserve and allowances",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : closure.reserve_t (x1000)",
+   "record_path": "baseline:closure.reserve_t",
+   "record_scale": 1000.0
+  },
+  "mass.propellant": {
+   "value": 13117213.304414604,
+   "unit": "kg",
+   "class": "ASSUMED",
+   "req": [
+    "P08",
+    "P10"
+   ],
+   "note": "propellant burned in four burns",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : closure.propellant_t (x1000)",
+   "record_path": "baseline:closure.propellant_t",
+   "record_scale": 1000.0
+  },
+  "mass.fused": {
+   "value": 8809368.519970872,
+   "unit": "kg",
+   "class": "ASSUMED",
+   "req": [
+    "P01",
+    "P08"
+   ],
+   "note": "fuel fused",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : closure.fused_t (x1000)",
+   "record_path": "baseline:closure.fused_t",
+   "record_scale": 1000.0
+  },
+  "mass.unburned": {
+   "value": 4307844.748576038,
+   "unit": "kg",
+   "class": "ASSUMED",
+   "req": [
+    "P08"
+   ],
+   "note": "unburned fuel leaving as reaction mass",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : closure.lost_unburned_t (x1000)",
+   "record_path": "baseline:closure.lost_unburned_t",
+   "record_scale": 1000.0
+  },
+  "mass.he3": {
+   "value": 7864983.840009758,
+   "unit": "kg",
+   "class": "ASSUMED",
+   "req": [
+    "P08"
+   ],
+   "note": "He-3 load",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : closure.species_t.helium_3 (x1000)",
+   "record_path": "baseline:closure.species_t.helium_3",
+   "record_scale": 1000.0
+  },
+  "mass.d": {
+   "value": 5252229.428537151,
+   "unit": "kg",
+   "class": "ASSUMED",
+   "req": [
+    "P08"
+   ],
+   "note": "deuterium load",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : closure.species_t.deuterium (x1000)",
+   "record_path": "baseline:closure.species_t.deuterium",
+   "record_scale": 1000.0
+  },
+  "mass.fixed_added": {
+   "value": 1067947.27668527,
+   "unit": "kg",
+   "class": "ASSUMED",
+   "req": [
+    "P03"
+   ],
+   "note": "FDP-1 fixed masses fed back (shield, structure, idle H2 vessels, low loop)",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : closure.architecture.fixed_kg",
+   "record_path": "baseline:closure.architecture.fixed_kg"
+  },
+  "mass.alpha_jet": {
+   "value": 2.841050212386712e-07,
+   "unit": "kg/W",
+   "class": "ASSUMED",
+   "req": [
+    "P03"
+   ],
+   "note": "power-scaled drive+radiator mass per W of jet (closure)",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : closure.alpha_jet_kg_per_W",
+   "record_path": "baseline:closure.alpha_jet_kg_per_W"
+  },
+  "mass.leverage": {
+   "value": 11.27737649952749,
+   "unit": "t/t",
+   "class": "ASSUMED",
+   "req": [
+    "P03"
+   ],
+   "note": "departure tonnes per added dry tonne",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/sensitivities.json : mass_leverage_t_per_t",
+   "record_path": "sensitivities:mass_leverage_t_per_t"
+  },
+  "burn1.start_mass": {
+   "value": 20760224.714998182,
+   "unit": "kg",
+   "class": "ASSUMED",
+   "req": [
+    "P10"
+   ],
+   "note": "burn start mass",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : mission.burns.0.start_mass_t (x1000)",
+   "record_path": "baseline:mission.burns.0.start_mass_t",
+   "record_scale": 1000.0
+  },
+  "burn1.end_mass": {
+   "value": 16171122.410102211,
+   "unit": "kg",
+   "class": "ASSUMED",
+   "req": [
+    "P10"
+   ],
+   "note": "burn end mass",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : mission.burns.0.end_mass_t (x1000)",
+   "record_path": "baseline:mission.burns.0.end_mass_t",
+   "record_scale": 1000.0
+  },
+  "burn1.days": {
+   "value": 726.4715644431283,
+   "unit": "d",
+   "class": "ASSUMED",
+   "req": [
+    "P10"
+   ],
+   "note": "burn duration",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : mission.burns.0.duration_days",
+   "record_path": "baseline:mission.burns.0.duration_days"
+  },
+  "burn1.distance_AU": {
+   "value": 964.4240758513943,
+   "unit": "AU",
+   "class": "ASSUMED",
+   "req": [
+    "P10"
+   ],
+   "note": "distance covered during burn",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : mission.burns.0.distance_AU",
+   "record_path": "baseline:mission.burns.0.distance_AU"
+  },
+  "burn2.start_mass": {
+   "value": 16171122.410102211,
+   "unit": "kg",
+   "class": "ASSUMED",
+   "req": [
+    "P10"
+   ],
+   "note": "burn start mass",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : mission.burns.1.start_mass_t (x1000)",
+   "record_path": "baseline:mission.burns.1.start_mass_t",
+   "record_scale": 1000.0
+  },
+  "burn2.end_mass": {
+   "value": 12596453.246172525,
+   "unit": "kg",
+   "class": "ASSUMED",
+   "req": [
+    "P10"
+   ],
+   "note": "burn end mass",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : mission.burns.1.end_mass_t (x1000)",
+   "record_path": "baseline:mission.burns.1.end_mass_t",
+   "record_scale": 1000.0
+  },
+  "burn2.days": {
+   "value": 565.8831133740603,
+   "unit": "d",
+   "class": "ASSUMED",
+   "req": [
+    "P10"
+   ],
+   "note": "burn duration",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : mission.burns.1.duration_days",
+   "record_path": "baseline:mission.burns.1.duration_days"
+  },
+  "burn2.distance_AU": {
+   "value": 751.235595950724,
+   "unit": "AU",
+   "class": "ASSUMED",
+   "req": [
+    "P10"
+   ],
+   "note": "distance covered during burn",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : mission.burns.1.distance_AU",
+   "record_path": "baseline:mission.burns.1.distance_AU"
+  },
+  "burn3.start_mass": {
+   "value": 12596453.246172525,
+   "unit": "kg",
+   "class": "ASSUMED",
+   "req": [
+    "P10"
+   ],
+   "note": "burn start mass",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : mission.burns.2.start_mass_t (x1000)",
+   "record_path": "baseline:mission.burns.2.start_mass_t",
+   "record_scale": 1000.0
+  },
+  "burn3.end_mass": {
+   "value": 9811974.107863268,
+   "unit": "kg",
+   "class": "ASSUMED",
+   "req": [
+    "P10"
+   ],
+   "note": "burn end mass",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : mission.burns.2.end_mass_t (x1000)",
+   "record_path": "baseline:mission.burns.2.end_mass_t",
+   "record_scale": 1000.0
+  },
+  "burn3.days": {
+   "value": 440.7931620109382,
+   "unit": "d",
+   "class": "ASSUMED",
+   "req": [
+    "P10"
+   ],
+   "note": "burn duration",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : mission.burns.2.duration_days",
+   "record_path": "baseline:mission.burns.2.duration_days"
+  },
+  "burn3.distance_AU": {
+   "value": 585.1729905490248,
+   "unit": "AU",
+   "class": "ASSUMED",
+   "req": [
+    "P10"
+   ],
+   "note": "distance covered during burn",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : mission.burns.2.distance_AU",
+   "record_path": "baseline:mission.burns.2.distance_AU"
+  },
+  "burn4.start_mass": {
+   "value": 9811974.107863268,
+   "unit": "kg",
+   "class": "ASSUMED",
+   "req": [
+    "P10"
+   ],
+   "note": "burn start mass",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : mission.burns.3.start_mass_t (x1000)",
+   "record_path": "baseline:mission.burns.3.start_mass_t",
+   "record_scale": 1000.0
+  },
+  "burn4.end_mass": {
+   "value": 7643011.410583579,
+   "unit": "kg",
+   "class": "ASSUMED",
+   "req": [
+    "P10"
+   ],
+   "note": "burn end mass",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : mission.burns.3.end_mass_t (x1000)",
+   "record_path": "baseline:mission.burns.3.end_mass_t",
+   "record_scale": 1000.0
+  },
+  "burn4.days": {
+   "value": 343.3546735775553,
+   "unit": "d",
+   "class": "ASSUMED",
+   "req": [
+    "P10"
+   ],
+   "note": "burn duration",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : mission.burns.3.duration_days",
+   "record_path": "baseline:mission.burns.3.duration_days"
+  },
+  "burn4.distance_AU": {
+   "value": 455.81896107402906,
+   "unit": "AU",
+   "class": "ASSUMED",
+   "req": [
+    "P10"
+   ],
+   "note": "distance covered during burn",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : mission.burns.3.distance_AU",
+   "record_path": "baseline:mission.burns.3.distance_AU"
+  },
+  "mission.engine_years": {
+   "value": 5.6851540408095325,
+   "unit": "y",
+   "class": "ASSUMED",
+   "req": [
+    "P10"
+   ],
+   "note": "total engine operation",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : mission.engine_time_years",
+   "record_path": "baseline:mission.engine_time_years"
+  },
+  "mission.min_round_trip_years": {
+   "value": 6.351915811090674,
+   "unit": "y",
+   "class": "ASSUMED",
+   "req": [
+    "P10"
+   ],
+   "note": "minimum round trip (stopping-distance destination)",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : mission.minimum_round_trip_years",
+   "record_path": "baseline:mission.minimum_round_trip_years"
+  },
+  "mission.min_destination_AU": {
+   "value": 1715.6596718021183,
+   "unit": "AU",
+   "class": "ASSUMED",
+   "req": [
+    "P10"
+   ],
+   "note": "minimum destination distance",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : mission.minimum_destination_AU",
+   "record_path": "baseline:mission.minimum_destination_AU"
+  },
+  "mission.coast_years_min": {
+   "value": 0.6667617702811417,
+   "unit": "y",
+   "class": "ASSUMED",
+   "req": [
+    "P10"
+   ],
+   "note": "coast in the minimum round trip",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : mission.round_trips.0.coast_years",
+   "record_path": "baseline:mission.round_trips.0.coast_years"
+  },
+  "mission.total_years_10kAU": {
+   "value": 22.726439914228816,
+   "unit": "y",
+   "class": "ASSUMED",
+   "req": [
+    "P10"
+   ],
+   "note": "round trip to 10,000 AU",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : mission.round_trips.1.total_years",
+   "record_path": "baseline:mission.round_trips.1.total_years"
+  },
+  "mission.fusion_energy": {
+   "value": 3.101228987961709e+21,
+   "unit": "J",
+   "class": "ASSUMED",
+   "req": [
+    "P01"
+   ],
+   "note": "integrated fusion energy, four burns",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : closure.fusion_energy_J",
+   "record_path": "baseline:closure.fusion_energy_J"
+  },
+  "mission.jet_energy": {
+   "value": 2.418059954208428e+21,
+   "unit": "J",
+   "class": "ASSUMED",
+   "req": [
+    "P04"
+   ],
+   "note": "integrated jet energy, four burns",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : closure.jet_energy_J",
+   "record_path": "baseline:closure.jet_energy_J"
+  },
+  "goal1g.max_a0_any_size_g": {
+   "value": 0.011218998660344624,
+   "unit": "g",
+   "class": "ASSUMED",
+   "req": [
+    "P03"
+   ],
+   "note": "highest departure acceleration any FDP-1 closes at",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/goal_1g.json : max_a0_g_any_size",
+   "record_path": "goal_1g:max_a0_g_any_size"
+  },
+  "goal1g.deficit_factor": {
+   "value": 89.13451460999481,
+   "unit": "-",
+   "class": "ASSUMED",
+   "req": [
+    "P03"
+   ],
+   "note": "factor by which drive+radiator mass per W jet must fall for 1 g",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/goal_1g.json : deficit_factor",
+   "record_path": "goal_1g:deficit_factor"
+  },
+  "goal1g.specific_mass": {
+   "value": 2.684594134093896e-07,
+   "unit": "kg/W",
+   "class": "ASSUMED",
+   "req": [
+    "P03"
+   ],
+   "note": "drive specific mass per W jet used by the 1 g check",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/goal_1g.json : drive_specific_mass_kg_per_W_jet",
+   "record_path": "goal_1g:drive_specific_mass_kg_per_W_jet"
+  },
+  "goal1g.required_specific_mass": {
+   "value": 3.0118457993968455e-09,
+   "unit": "kg/W",
+   "class": "ASSUMED",
+   "req": [
+    "P03"
+   ],
+   "note": "required specific mass for 1 g at zero payload",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/goal_1g.json : required_specific_mass_kg_per_W_jet_zero_payload",
+   "record_path": "goal_1g:required_specific_mass_kg_per_W_jet_zero_payload"
+  },
+  "shield.mass": {
+   "value": 429692.55173036666,
+   "unit": "kg",
+   "class": "ASSUMED",
+   "req": [
+    "P05"
+   ],
+   "note": "shadow shield total",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : shield.mass_kg.total",
+   "record_path": "baseline:shield.mass_kg.total"
+  },
+  "shield.lih_core": {
+   "value": 236314.41287871415,
+   "unit": "kg",
+   "class": "ASSUMED",
+   "req": [
+    "P05"
+   ],
+   "note": "shield layer mass",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : shield.mass_kg.lih_core",
+   "record_path": "baseline:shield.mass_kg.lih_core"
+  },
+  "shield.lih_annulus": {
+   "value": 113721.36307724677,
+   "unit": "kg",
+   "class": "ASSUMED",
+   "req": [
+    "P05"
+   ],
+   "note": "shield layer mass",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : shield.mass_kg.lih_annulus",
+   "record_path": "baseline:shield.mass_kg.lih_annulus"
+  },
+  "shield.w_face": {
+   "value": 41806.911239211266,
+   "unit": "kg",
+   "class": "ASSUMED",
+   "req": [
+    "P05"
+   ],
+   "note": "shield layer mass",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : shield.mass_kg.w_face",
+   "record_path": "baseline:shield.mass_kg.w_face"
+  },
+  "shield.axial_plug": {
+   "value": 6020.786629241376,
+   "unit": "kg",
+   "class": "ASSUMED",
+   "req": [
+    "P05"
+   ],
+   "note": "shield layer mass",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : shield.mass_kg.axial_plug",
+   "record_path": "baseline:shield.mass_kg.axial_plug"
+  },
+  "shield.frame": {
+   "value": 31829.077905953083,
+   "unit": "kg",
+   "class": "ASSUMED",
+   "req": [
+    "P05"
+   ],
+   "note": "shield layer mass",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : shield.mass_kg.frame",
+   "record_path": "baseline:shield.mass_kg.frame"
+  },
+  "shield.crew_half_angle_deg": {
+   "value": 5.3114478809530725,
+   "unit": "deg",
+   "class": "ASSUMED",
+   "req": [
+    "P05"
+   ],
+   "note": "crew shadow cone half angle",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : shield.crew_half_angle_deg",
+   "record_path": "baseline:shield.crew_half_angle_deg"
+  },
+  "shield.hw_half_angle_deg": {
+   "value": 9.598083470051419,
+   "unit": "deg",
+   "class": "ASSUMED",
+   "req": [
+    "P05"
+   ],
+   "note": "hardware shadow cone half angle",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : shield.hardware_half_angle_deg",
+   "record_path": "baseline:shield.hardware_half_angle_deg"
+  },
+  "shield.neutron_decades": {
+   "value": 10.391492516490134,
+   "unit": "-",
+   "class": "ASSUMED",
+   "req": [
+    "P05"
+   ],
+   "note": "neutron attenuation decades to crew budget",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : shield.neutron_decades",
+   "record_path": "baseline:shield.neutron_decades"
+  },
+  "shield.hardware_decades": {
+   "value": 3.0,
+   "unit": "-",
+   "class": "ASSUMED",
+   "req": [
+    "P05"
+   ],
+   "note": "hardware attenuation: placeholder until transport",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : shield.hardware_decades",
+   "record_path": "baseline:shield.hardware_decades"
+  },
+  "shield.neutron_escape": {
+   "value": 95454057.1578502,
+   "unit": "W",
+   "class": "ASSUMED",
+   "req": [
+    "P05"
+   ],
+   "note": "neutron power escaping the burn",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : shield.neutron_escape_W",
+   "record_path": "baseline:shield.neutron_escape_W"
+  },
+  "shield.xray_escape": {
+   "value": 199078614387.86023,
+   "unit": "W",
+   "class": "ASSUMED",
+   "req": [
+    "P05"
+   ],
+   "note": "X-ray power escaping the burn",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : shield.xray_escape_W",
+   "record_path": "baseline:shield.xray_escape_W"
+  },
+  "shield.crew_dose_budget_Sv_y": {
+   "value": 0.01,
+   "unit": "Sv/y",
+   "class": "ASSUMED",
+   "req": [
+    "P05"
+   ],
+   "note": "drive share of crew dose (0.5 x 20 mSv/y)",
+   "source": "FDP-1 config fdp1.toml [mission] dose_budget_share x crew_dose_limit"
+  },
+  "geom.solid_angle_total": {
+   "value": 0.019493974031856338,
+   "unit": "-",
+   "class": "ASSUMED",
+   "req": [
+    "P04",
+    "P05",
+    "P06"
+   ],
+   "note": "hardware solid-angle share seen by the burn",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : solid_angle.total",
+   "record_path": "baseline:solid_angle.total"
+  },
+  "geom.solid_angle_loops": {
+   "value": 0.009022981975012126,
+   "unit": "-",
+   "class": "ASSUMED",
+   "req": [
+    "P04"
+   ],
+   "note": "nozzle loops share",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : solid_angle.shares.nozzle_loops",
+   "record_path": "baseline:solid_angle.shares.nozzle_loops"
+  },
+  "geom.solid_angle_struts": {
+   "value": 0.0014789167650063925,
+   "unit": "-",
+   "class": "ASSUMED",
+   "req": [
+    "P09"
+   ],
+   "note": "nozzle struts share",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : solid_angle.shares.nozzle_struts",
+   "record_path": "baseline:solid_angle.shares.nozzle_struts"
+  },
+  "geom.solid_angle_shield": {
+   "value": 0.00899207529183782,
+   "unit": "-",
+   "class": "ASSUMED",
+   "req": [
+    "P05"
+   ],
+   "note": "shadow shield share",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : solid_angle.shares.shadow_shield",
+   "record_path": "baseline:solid_angle.shares.shadow_shield"
+  },
+  "geom.solid_angle_study": {
+   "value": 0.002,
+   "unit": "-",
+   "class": "ASSUMED",
+   "req": [
+    "P05"
+   ],
+   "note": "four-burn study allowance",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : solid_angle.scenario_value",
+   "record_path": "baseline:solid_angle.scenario_value"
+  },
+  "nozzle.loop1_r": {
+   "value": 37.404258743958934,
+   "unit": "m",
+   "class": "ASSUMED",
+   "req": [
+    "P04"
+   ],
+   "note": "loop radius",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : nozzle.loops.0.r",
+   "record_path": "baseline:nozzle.loops.0.r"
+  },
+  "nozzle.loop1_x": {
+   "value": -205.94445282221042,
+   "unit": "m",
+   "class": "ASSUMED",
+   "req": [
+    "P04"
+   ],
+   "note": "loop axial position (ship frame)",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : nozzle.loops.0.x",
+   "record_path": "baseline:nozzle.loops.0.x"
+  },
+  "nozzle.loop2_r": {
+   "value": 64.78607656398931,
+   "unit": "m",
+   "class": "ASSUMED",
+   "req": [
+    "P04"
+   ],
+   "note": "loop radius",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : nozzle.loops.1.r",
+   "record_path": "baseline:nozzle.loops.1.r"
+  },
+  "nozzle.loop2_x": {
+   "value": -227.53981167687354,
+   "unit": "m",
+   "class": "ASSUMED",
+   "req": [
+    "P04"
+   ],
+   "note": "loop axial position (ship frame)",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : nozzle.loops.1.x",
+   "record_path": "baseline:nozzle.loops.1.x"
+  },
+  "nozzle.loop3_r": {
+   "value": 112.21277623187676,
+   "unit": "m",
+   "class": "ASSUMED",
+   "req": [
+    "P04"
+   ],
+   "note": "loop radius",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : nozzle.loops.2.r",
+   "record_path": "baseline:nozzle.loops.2.r"
+  },
+  "nozzle.loop3_x": {
+   "value": -292.3258882408628,
+   "unit": "m",
+   "class": "ASSUMED",
+   "req": [
+    "P04"
+   ],
+   "note": "loop axial position (ship frame)",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : nozzle.loops.2.x",
+   "record_path": "baseline:nozzle.loops.2.x"
+  },
+  "nozzle.loop_mass": {
+   "value": 86112.12429929705,
+   "unit": "kg",
+   "class": "ASSUMED",
+   "req": [
+    "P04"
+   ],
+   "note": "virial loop structure",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : mass.items_kg.nozzle loops (virial structure)",
+   "record_path": "baseline:mass.items_kg.nozzle loops (virial structure)"
+  },
+  "nozzle.interloop_force": {
+   "value": 2334666672.148425,
+   "unit": "N",
+   "class": "ASSUMED",
+   "req": [
+    "P04",
+    "P09"
+   ],
+   "note": "scale of attraction between coaxial loops (not designed)",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : structure.interloop_force_scale_N",
+   "record_path": "baseline:structure.interloop_force_scale_N"
+  },
+  "layout.x_burn": {
+   "value": -227.53981167687354,
+   "unit": "m",
+   "class": "ASSUMED",
+   "req": [],
+   "note": "burn point x",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : layout.x_burn",
+   "record_path": "baseline:layout.x_burn"
+  },
+  "layout.x_shield_aft": {
+   "value": -184.34909396754733,
+   "unit": "m",
+   "class": "ASSUMED",
+   "req": [],
+   "note": "shield aft face x",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : layout.x_shield_aft",
+   "record_path": "baseline:layout.x_shield_aft"
+  },
+  "layout.x_attach": {
+   "value": -144.75,
+   "unit": "m",
+   "class": "EST",
+   "req": [],
+   "note": "thrust ring / AFT datum x",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : layout.x_attach",
+   "record_path": "baseline:layout.x_attach"
+  },
+  "structure.total": {
+   "value": 528615.6056874216,
+   "unit": "kg",
+   "class": "ASSUMED",
+   "req": [
+    "P09"
+   ],
+   "note": "FDP-1 structure",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : structure.mass_kg.total",
+   "record_path": "baseline:structure.mass_kg.total"
+  },
+  "structure.wing_spars": {
+   "value": 356306.1355898896,
+   "unit": "kg",
+   "class": "ASSUMED",
+   "req": [
+    "P09"
+   ],
+   "note": "wing spars (25 kg/m placeholder)",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : structure.mass_kg.radiator_wing_spars",
+   "record_path": "baseline:structure.mass_kg.radiator_wing_spars"
+  },
+  "structure.thrust_ring_ratio": {
+   "value": 0.059738629467971135,
+   "unit": "-",
+   "class": "ASSUMED",
+   "req": [
+    "P09"
+   ],
+   "note": "thrust / canon Q45 collar limit",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : structure.interface_load_N.ratio_to_q45",
+   "record_path": "baseline:structure.interface_load_N.ratio_to_q45"
+  },
+  "structure.q45_limit": {
+   "value": 23500000.0,
+   "unit": "N",
+   "class": "EST",
+   "req": [
+    "P09"
+   ],
+   "note": "canon Q45 collar limit",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : structure.interface_load_N.q45_collar_limit_N",
+   "record_path": "baseline:structure.interface_load_N.q45_collar_limit_N"
+  },
+  "structure.fatigue_note_cycles": {
+   "value": 18000000000.0,
+   "unit": "-",
+   "class": "ASSUMED",
+   "req": [
+    "P09"
+   ],
+   "note": "FDP-1 record limits text: \"100 Hz for 5.7 years is ~1.8e10 load cycles\"",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : structure.limits[2] (text)"
+  },
+  "tanks.he3_required": {
+   "value": 143746.30079198861,
+   "unit": "m3",
+   "class": "ASSUMED",
+   "req": [
+    "P08"
+   ],
+   "note": "He-3 volume required",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : tanks.summary.required_m3.helium_3",
+   "record_path": "baseline:tanks.summary.required_m3.helium_3"
+  },
+  "tanks.d_required": {
+   "value": 32112.94614069062,
+   "unit": "m3",
+   "class": "ASSUMED",
+   "req": [
+    "P08"
+   ],
+   "note": "D volume required",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : tanks.summary.required_m3.deuterium",
+   "record_path": "baseline:tanks.summary.required_m3.deuterium"
+  },
+  "tanks.he3_existing": {
+   "value": 20271.0,
+   "unit": "m3",
+   "class": "EST",
+   "req": [
+    "P08"
+   ],
+   "note": "existing He-3 farm volume",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : tanks.summary.existing_m3.helium_3",
+   "record_path": "baseline:tanks.summary.existing_m3.helium_3"
+  },
+  "tanks.d_existing": {
+   "value": 4886.0,
+   "unit": "m3",
+   "class": "EST",
+   "req": [
+    "P08"
+   ],
+   "note": "existing D farm volume",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : tanks.summary.existing_m3.deuterium",
+   "record_path": "baseline:tanks.summary.existing_m3.deuterium"
+  },
+  "tanks.h_existing_idle": {
+   "value": 15022.0,
+   "unit": "m3",
+   "class": "EST",
+   "req": [
+    "P08"
+   ],
+   "note": "existing H2 vessels, idle in FDP-1",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : tanks.summary.existing_m3.hydrogen",
+   "record_path": "baseline:tanks.summary.existing_m3.hydrogen"
+  },
+  "tanks.mass": {
+   "value": 1231014.732327488,
+   "unit": "kg",
+   "class": "ASSUMED",
+   "req": [
+    "P08"
+   ],
+   "note": "tankage mass",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/baseline.json : tanks.summary.tank_mass_kg",
+   "record_path": "baseline:tanks.summary.tank_mass_kg"
+  },
+  "tanks.added_length": {
+   "value": 122.4,
+   "unit": "m",
+   "class": "ASSUMED",
+   "req": [
+    "P08"
+   ],
+   "note": "ship growth for layout T-B",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/TABLES.md tank comparison (T-B added length)"
+  },
+  "sens.warm_loop_800K": {
+   "value": 11431049.649841426,
+   "unit": "kg",
+   "class": "ASSUMED",
+   "req": [
+    "P07"
+   ],
+   "note": "warm loop at 800 K (needs hotter power electronics)",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/sensitivities.json : warm_loop_800K.summary.departure_t (x1000)",
+   "record_path": "sensitivities:warm_loop_800K.summary.departure_t",
+   "record_scale": 1000.0
+  },
+  "sens.house_load_half": {
+   "value": 14470385.261854079,
+   "unit": "kg",
+   "class": "ASSUMED",
+   "req": [
+    "P03"
+   ],
+   "note": "target factory + controls load 0.05 % of fusion instead of 0.1 %",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/sensitivities.json : house_load_half.summary.departure_t (x1000)",
+   "record_path": "sensitivities:house_load_half.summary.departure_t",
+   "record_scale": 1000.0
+  },
+  "sens.payload_860t": {
+   "value": 19290488.29066994,
+   "unit": "kg",
+   "class": "ASSUMED",
+   "req": [
+    "P03"
+   ],
+   "note": "payload as the four-burn study (860 t)",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/sensitivities.json : payload_860t.summary.departure_t (x1000)",
+   "record_path": "sensitivities:payload_860t.summary.departure_t",
+   "record_scale": 1000.0
+  },
+  "sens.no_idle_hydrogen_vessels": {
+   "value": 19573610.85811356,
+   "unit": "kg",
+   "class": "ASSUMED",
+   "req": [
+    "P03"
+   ],
+   "note": "the three idle H2 vessels removed",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/sensitivities.json : no_idle_hydrogen_vessels.summary.departure_t (x1000)",
+   "record_path": "sensitivities:no_idle_hydrogen_vessels.summary.departure_t",
+   "record_scale": 1000.0
+  },
+  "sens.study_reproduction_no_feedback": {
+   "value": 9732146.188229581,
+   "unit": "kg",
+   "class": "ASSUMED",
+   "req": [
+    "P03"
+   ],
+   "note": "four-burn study as published: 100 t shield placeholder, scenario solid angle 0.002, 860 t payload",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/results/fdp1-v1/sensitivities.json : study_reproduction_no_feedback.summary.departure_t (x1000)",
+   "record_path": "sensitivities:study_reproduction_no_feedback.summary.departure_t",
+   "record_scale": 1000.0
+  },
+  "sens.gain_closure_threshold": {
+   "value": 1100.0,
+   "unit": "-",
+   "class": "ASSUMED",
+   "req": [
+    "P01"
+   ],
+   "note": "gain below which the baseline does not close (report: ~1,100)",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/REPORT.md section 6/7"
+  },
+  "research.nif_best_gain": {
+   "value": 4.0,
+   "unit": "-",
+   "class": "EST",
+   "req": [
+    "P01"
+   ],
+   "note": "best demonstrated target gain (D-T, laser): about 4, as quoted by FDP-1 report",
+   "source": "FDP-1 record fdp1-v1 (branch claude/project-thread-8e13aa, commit ec5717d) lab/variants/fdp1/REPORT.md section 6 (quoted; not re-verified here)"
+  },
+  "driver.reliability": {
+   "value": null,
+   "unit": "-",
+   "class": "UNKNOWN",
+   "req": [
+    "P02"
+   ],
+   "note": "driver/target system reliability over ~3.8e10 pulses",
+   "source": "TBD: no FDP-1 figure"
+  },
+  "nozzle.detachment_validated": {
+   "value": null,
+   "unit": "-",
+   "class": "UNKNOWN",
+   "req": [
+    "P04"
+   ],
+   "note": "measured magnetic-nozzle detachment at these scales",
+   "source": "TBD"
+  },
+  "mission.margin_policy": {
+   "value": null,
+   "unit": "-",
+   "class": "UNKNOWN",
+   "req": [
+    "P10"
+   ],
+   "note": "required propellant / performance margin policy",
+   "source": "TBD: no canon margin rule"
+  },
+  "he3.supply": {
+   "value": null,
+   "unit": "kg",
+   "class": "UNKNOWN",
+   "req": [
+    "P08"
+   ],
+   "note": "He-3 supply chain for ~7,900 t",
+   "source": "TBD: industrial question outside the drive"
+  }
+ }
+}

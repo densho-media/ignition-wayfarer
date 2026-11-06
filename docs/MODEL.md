@@ -11,7 +11,8 @@ live in [TODO.md](../TODO.md). This document describes implemented behavior; a p
 feature or a completed prototype study is not an installed or qualified system.
 
 Study scripts named below as `studies/<name>.py` are retired; commit 038ae90 in `main`'s history holds them under
-`src/wayfarer/studies/`, and their kept results are in `references/evidence/`. New studies live in `work/<task>/` (AGENTS.md).
+`src/wayfarer/studies/`, and their kept results are in `references/evidence/`. New studies live in `work/<task>/`, kept alternatives in `lab/` (AGENTS.md). The drive alternatives FDP-1 and the Fiji drive, the
+four-burn mission study and the FDP-1 problem maps are in `lab/`; none of them is part of this model.
 
 ## Blender development previews
 

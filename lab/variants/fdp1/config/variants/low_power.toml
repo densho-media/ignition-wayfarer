@@ -1,0 +1,3 @@
+# Representative low-power FDP-1: half the departure acceleration of the baseline.
+[mission]
+a0_g = { value = 0.0035, status = "PROTOTYPE", note = "low-power check" }

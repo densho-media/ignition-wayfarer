@@ -1,0 +1,46 @@
+{
+ "meta": {
+  "title": "FDP-1 Spatial Systems V3: scenario-only collision-protection parameters (P11)",
+  "note": "Scenario inputs, not FDP-1 or IGNITION canon. Every value names its source and status. Nothing here is written back to data/fdp1_parameters.json, data/requirements.json or data/wayfarer_3d.toml.",
+  "frame": "metres; +X bow; particles arrive from +X (opposite the velocity), travelling -X relative to the ship"
+ },
+ "shield": {
+  "shape": "circle",
+  "geometry_source": "data/ship_geometry.json parts WF_Shield_Rim, WF_Shield_Skin, WF_Disruptor_Layer_01 (Wayfarer baseline, moved +122.4 m by the FDP-1 T-B bow shift)",
+  "diameter_canon_m": 90.0,
+  "diameter_canon_ref": "data/wayfarer_3d.toml forward_shield.diameter (WORKING, S&E 02/07)",
+  "stack_known": false,
+  "stack_ref": "data/wayfarer_3d.toml forward_shield.stack: thickness, material stack and mass OPEN (OD-014); the 100 t Brow mass is PROVISIONAL and not valid for the 90 m shield"
+ },
+ "canon_margins": {
+  "ring_shadow_margin_m": {"value": 15.0, "status": "DERIVED", "ref": "forward_shield.ring_shadow_margin (45 m shield - 30 m ring)"},
+  "radiator_shadow_margin_m": {"value": 8.0, "status": "WORKING", "ref": "forward_shield.radiator_shadow_margin, zero angle of attack; attitude envelope OPEN (OD-015)"},
+  "shadow_rule": {"value": "At nominal high-speed attitude, occupied rings and vulnerable radiator surfaces remain inside the projected forward-shield silhouette.", "status": "BASELINE", "ref": "forward_shield.shadow_rule"}
+ },
+ "arrival_cone_options_deg": {
+  "aligned_stream": {"value": 0.0, "status": "ASSUMPTION", "note": "idealized parallel stream along -X (the brief's first-order model)"},
+  "shadow_angle_diagnostic": {"value": 2.290610043, "status": "DIAGNOSTIC", "note": "forward_defense.shadow_angle: geometry of the 8 m radiator margin over 200 m; not an operational attitude limit (OD-015)"},
+  "seam_arrival_cone_prototype": {"value": 5.0, "status": "PROTOTYPE", "note": "forward_shield.bumper_facing.seam_arrival_cone_deg: the design arrival cone of the bumper seam screen"}
+ },
+ "defaults": {
+  "arrival_cone_deg": 0.0,
+  "safety_margin_m": 0.0,
+  "uncertainty_band_m": 1.0,
+  "areal_density_kg_m2": null,
+  "engine_radius_exponent": 0.0,
+  "sample_spacing_m": 0.5
+ },
+ "defaults_notes": {
+  "safety_margin_m": "scenario choice; 0 shows pure geometry. The canon 8 m radiator / 15 m ring margins are offered as presets",
+  "uncertainty_band_m": "display assumption: clearances within this band are drawn yellow (uncertain)",
+  "areal_density_kg_m2": "UNKNOWN (OD-014). null keeps shield-mass feedback UNRESOLVED; any number entered is a labelled ASSUMPTION",
+  "engine_radius_exponent": "0 = engine geometry does not change with power (no documented scaling law). 1/3 or 1/2 are labelled hypothetical packaging laws"
+ },
+ "component_classes": {
+  "CRITICAL": "non-sacrificial, mission-critical; must sit inside the protection envelope or have an independently justified protection",
+  "RADIATOR": "assessed separately (planform, frontal area, exposure); survivability class UNKNOWN in the record",
+  "SHIELD": "the protective system itself (shield, disruptor, Crown, EYE wells): not assessed against its own shadow",
+  "NON_CRITICAL": "service and inspection hardware (ASSUMPTION: replaceable)",
+  "EXCLUDED": "superseded four-nozzle drive"
+ }
+}
