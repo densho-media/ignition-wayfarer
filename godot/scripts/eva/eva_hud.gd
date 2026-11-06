@@ -7,18 +7,17 @@ var ops
 var top: Label
 var left: Label
 var right: Label
-var mid: Label
-var keys: Label
-var card: Label
+var mid: RichTextLabel                     # rich text: the keys show as coloured chips (WfKeyText)
+var keys: RichTextLabel
+var card: RichTextLabel
 var font_size := 15
 
 func setup(o) -> void:
 	ops = o
 	# top centre: the scenario card; below it, left the astronaut and right the drone; bottom centre warnings; bottom left the keys
-	card = _panel(Color(1.0, 0.95, 0.75))
+	card = _rich(Color(1.0, 0.95, 0.75), true)
 	card.set_anchors_and_offsets_preset(Control.PRESET_CENTER_TOP)
 	card.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	card.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	card.custom_minimum_size = Vector2(820, 0)
 	card.offset_left = -410
 	card.offset_right = 410
@@ -37,18 +36,23 @@ func setup(o) -> void:
 	right.grow_horizontal = Control.GROW_DIRECTION_BEGIN
 	right.offset_right = -16
 	right.offset_top = 160
-	mid = _panel(Color(1, 1, 1))
+	mid = _rich(Color(1, 1, 1), false)
 	mid.set_anchors_and_offsets_preset(Control.PRESET_CENTER_BOTTOM)
 	mid.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	mid.grow_horizontal = Control.GROW_DIRECTION_BOTH
 	mid.grow_vertical = Control.GROW_DIRECTION_BEGIN
 	mid.offset_bottom = -96
-	keys = _panel(Color(0.7, 0.75, 0.8))
+	keys = _rich(Color(0.7, 0.75, 0.8), false)
 	keys.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_LEFT)
 	keys.grow_vertical = Control.GROW_DIRECTION_BEGIN
 	keys.offset_left = 16
 	keys.offset_bottom = -10
-	keys.add_theme_font_size_override("font_size", 13)
+	keys.add_theme_font_size_override("normal_font_size", 13)
+
+func _rich(c: Color, wrap: bool) -> RichTextLabel:
+	var l := WfKeyText.label(font_size, c, wrap)
+	add_child(l)
+	return l
 
 func _panel(c: Color) -> Label:
 	var l := Label.new()
@@ -119,9 +123,9 @@ func refresh() -> void:
 		w.append("⚠ DRONE N2 LOW (%.0f %%)" % (ops.drone_gas.fraction() * 100.0))
 	for m in ops.messages.slice(maxi(0, ops.messages.size() - 3)):
 		w.append(("" if m["ok"] else "✖ ") + m["t"])
-	mid.text = "\n".join(w)
-	card.text = ops.scenario.card()
-	keys.text = _keys()
+	mid.text = WfKeyText.rich("\n".join(w))
+	card.text = WfKeyText.rich(ops.scenario.card())
+	keys.text = WfKeyText.rich(_keys(), "now")
 
 func _keys() -> String:
 	var k = func(id): return ops.key(id)

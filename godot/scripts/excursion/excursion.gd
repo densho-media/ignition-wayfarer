@@ -84,8 +84,8 @@ const BINS := 72
 
 # HUD
 var layer := CanvasLayer.new()
-var hud_goal := Label.new()
-var hud_prompt := Label.new()
+var hud_goal := WfKeyText.label(16)        # rich text: the keys to press show as coloured chips (WfKeyText)
+var hud_prompt := WfKeyText.label(17)
 var hud_status := Label.new()
 var hud_check := Label.new()
 var ring_map: Control = null
@@ -1369,13 +1369,13 @@ func _update_lamps() -> void:
 
 # ---- HUD ---------------------------------------------------------------------------------------------------------------------------------------
 
-func _label(l: Label, size: int, pos: Vector2) -> void:
-	l.add_theme_font_size_override("font_size", size)
+func _label(l: Control, size: int, pos: Vector2) -> void:
+	l.add_theme_font_size_override("normal_font_size" if l is RichTextLabel else "font_size", size)
 	l.add_theme_color_override("font_outline_color", Color.BLACK)
 	l.add_theme_constant_override("outline_size", 4)
 	l.position = pos
 	l.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	l.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	l.set("autowrap_mode", TextServer.AUTOWRAP_WORD_SMART)
 	var back := StyleBoxFlat.new()
 	back.bg_color = Color(0, 0, 0, 0.42)
 	back.set_content_margin_all(6.0)
@@ -1406,11 +1406,11 @@ func _layout() -> void:
 		# phone or tablet (MOB-001): the goal and prompt under the page's Exit row on the left, the map under the touch utility row on
 		# the right; the stick and the action buttons keep the lower corners; the checklist and status line give way (the map shows %)
 		var w := minf(sz.x * 0.5, 420.0)
-		hud_goal.add_theme_font_size_override("font_size", 13)
+		hud_goal.add_theme_font_size_override("normal_font_size", 13)
 		hud_goal.position = Vector2(12, 66)
 		hud_goal.custom_minimum_size.x = w
 		hud_goal.size.x = w
-		hud_prompt.add_theme_font_size_override("font_size", 13)
+		hud_prompt.add_theme_font_size_override("normal_font_size", 13)
 		hud_prompt.position = Vector2(12, 66 + hud_goal.get_combined_minimum_size().y + 6)
 		hud_prompt.custom_minimum_size.x = w
 		hud_prompt.size.x = w
@@ -1576,7 +1576,7 @@ func _learning_in_reach() -> int:
 	return learning.in_reach(actor.global_position, walk_zone)
 
 func _update_hud() -> void:
-	hud_goal.text = _goal_text()
+	hud_goal.text = WfKeyText.rich(_goal_text())
 	if learning != null:
 		if move == "WALK":
 			learning.update(actor.global_position, walk_zone, get_viewport().get_visible_rect().size)
@@ -1590,7 +1590,7 @@ func _update_hud() -> void:
 	if learning != null and not learning.stations.is_empty():
 		lines_out.append("Learning points %d/%d (ring A)" % [learning.done.size(), learning.stations.size()])
 	hud_check.text = "\n".join(lines_out)
-	hud_prompt.text = _prompt_text()
+	hud_prompt.text = WfKeyText.rich(_prompt_text())
 	if WfInput.compact():
 		hud_prompt.position.y = hud_goal.position.y + hud_goal.size.y + 6.0     # the goal's height follows its text
 	var g := actor.field_now.length() / 9.80665

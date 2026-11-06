@@ -2027,7 +2027,9 @@ The registry still lists the retired scenes' contexts and actions (`walk`, `body
 `flight`, `thermal`, `life`, `lab`, `eva`, `holo`); no scene activates them. Movement follows the keyboard position (W/S/A/D on QWERTY,
 Z/S/Q/D on AZERTY); the others follow the printed key. Each handler asks `WfInput.key_of(event, its contexts)`, which names the
 triggered action by its default key, so a rebind changes the input and not the handler. HUD key lines show the player's actual binding
-for the device last used (`WfInput.label`, `WfInput.keys("{action}: …")`). Bindings change which input triggers an action, never
+for the device last used (`WfInput.label`, `WfInput.keys("{action}: …")`), drawn as coloured key chips (`controls/key_text.gd`, the
+review-guide colours): amber in the walk's goal and prompt lines and the EVA Operations card and messages (the key that moves the step
+on), blue in the EVA Operations key list (keys that also work now). Bindings change which input triggers an action, never
 forces, speeds or permissions (S&E 46 DYN-007, 47 SIM-010, 49 NAV-003). On a touch-first device `controls/wf_touch.gd` (MOB-001) adds
 the stick, the look drag and the contextual buttons.
 
