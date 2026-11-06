@@ -1,0 +1,1244 @@
+{
+ "recheck_ifd1": {
+  "channels": {
+   "hot_ion_0.5:1": {
+    "Ti_keV": 150,
+    "Te_keV": 75,
+    "he3_to_d": 0.5,
+    "brems": 0.10652023462273294,
+    "neutron": 0.022058745824003037,
+    "neutral": 0.12857898044673596,
+    "charged": 0.977941254175997,
+    "Zeff": 1.5
+   },
+   "central_1:1": {
+    "Ti_keV": 100,
+    "Te_keV": 100,
+    "he3_to_d": 1.0,
+    "brems": 0.23693088334541296,
+    "neutron": 0.010125525540206348,
+    "neutral": 0.2470564088856193,
+    "charged": 0.9898744744597936,
+    "Zeff": 1.6666666666666667
+   },
+   "canon_2.5:1": {
+    "Ti_keV": 100,
+    "Te_keV": 100,
+    "he3_to_d": 2.5,
+    "brems": 0.4162734250061106,
+    "neutron": 0.004118080998738364,
+    "neutral": 0.4203915060048489,
+    "charged": 0.9958819190012617,
+    "Zeff": 1.8333333333333333
+   },
+   "cool_70keV_1:1": {
+    "Ti_keV": 70,
+    "Te_keV": 70,
+    "he3_to_d": 1.0,
+    "brems": 0.27527430229112726,
+    "neutron": 0.010521728052202178,
+    "neutral": 0.2857960303433294,
+    "charged": 0.9894782719477978,
+    "Zeff": 1.6666666666666667
+   }
+  },
+  "ledger_sum": 1.0,
+  "mass_closure": {
+   "exhaust_kg_s": 0.0005188888876228096,
+   "reacted_kg_s": 0.00043826187880177165,
+   "inert_allowed_kg_s": 8.062700882103792e-05,
+   "v3_label": "v3 labelled the whole 0.52 g/s as H2 mass loading; 84 % of it is reacted fuel (ash), so only 0.081 g/s is left for unburned fuel plus H2",
+   "burnup_needed_without_recovery": 0.8446160425781805
+  },
+  "confinement": {
+   "ion_density_m3": 5.0908485943518645e+20,
+   "tau_burn_s": 22.861042099675284,
+   "tau_particle_needed_s_without_recovery": 124.26509935657946,
+   "tau_particle_needed_s_canon_burnup_0.8": 91.44416839870114,
+   "beta_at_field": 0.8522429642107654,
+   "note": "burnup = tau_p/(tau_p+tau_burn) for continuous feed; open and FRC devices hold particles for ms-s"
+  },
+  "ve_gate_continuous": {
+   "tau_p_0.1s": {
+    "burnup": 0.004355203024579368,
+    "ve_km_s": 1378.8263457538712
+   },
+   "tau_p_1s": {
+    "burnup": 0.04190931795110527,
+    "ve_km_s": 4277.210920475395
+   },
+   "tau_p_10s": {
+    "burnup": 0.30431171262517004,
+    "ve_km_s": 11525.630822428677
+   },
+   "tau_p_100s": {
+    "burnup": 0.8139276559193721,
+    "ve_km_s": 18849.43222733973
+   },
+   "canon_assumption": {
+    "burnup": 0.8,
+    "recovery": 0.95,
+    "eta": 0.62,
+    "ve_km_s": 20763.848647003873
+   }
+  },
+  "wall_flux_analytic": {
+   "q_infinite_MW_m2": 12.638565125020046,
+   "q_midplane_finite_MW_m2": 12.21182321022016,
+   "v3_peak_MW_m2": 10.000000000000002
+  },
+  "coil_mc": {
+   "face": 0.220175,
+   "side": 0.278025,
+   "own": 0.4982,
+   "shield": 0.0361575,
+   "escape": 0.4656425,
+   "v3_own": 0.25117,
+   "v3_shield": 0.02902,
+   "peak_face_W_m2_per_W_neutral": 0.0003270103564061477,
+   "mean_face_W_m2_per_W_neutral": 0.0002920161632938172
+  },
+  "corrected_power": {
+   "P_fus_TW_at_10MW_m2_peak": 0.12377768863744644,
+   "P_fus_TW_heat_limited": 0.08180798989922923,
+   "P_fus_TW": 0.08180798989922923,
+   "binding": "hot loop",
+   "v3_P_fus_TW": 0.15428466149355857,
+   "neutral_share_v4": 0.2470564088856193,
+   "neutral_share_v3": 0.1955,
+   "hardware_fraction_v3": 0.28018499999999996,
+   "hardware_fraction_v4": 0.5343574999999999,
+   "hot_loop_GW_at_P_corr": 10.8
+  },
+  "sparse_coils": {
+   "pitch_m": 3.75,
+   "coil_width_m": 0.9375,
+   "ripple_at_plasma_edge": 0.0029048731988534937,
+   "NI_per_coil_MA": 23.14088227612906,
+   "J_winding_MA_m2_0.6m_deep": 41.13934626867388,
+   "magnetic_pressure_MPa": 23.926388974814582,
+   "field_energy_J": 357238531309.8528,
+   "virial_structure_t": {
+    "carbon_composite_SF1": 376.04055927352925,
+    "carbon_composite_SF2.5": 940.1013981838231,
+    "maraging_steel_SF1.5": 4286.862375718234,
+    "v3_used": 346.3693877616045
+   },
+   "note": "v3 sized the coil structure at ultimate composite strength with no safety factor; Fiji amplification does not lower the field energy the structure must hold (virial theorem)"
+  },
+  "mass_budget": {
+   "canon_drive_package_t": 250.0,
+   "ifd1_drive_v3_t": 4408.951394065997,
+   "ifd1_drive_v4_t": 5002.683404488215,
+   "protected_operational_t": 6052.683404488215,
+   "mission": {
+    "ve_km_s": 19201.172079999997,
+    "mass_ratio_total": 2.7162362581652935,
+    "propellant_t": 13781.122865827823,
+    "end_t": 8029.851834362388,
+    "departure_t": 21810.974700190214
+   },
+   "burns": {
+    "mdot_kg_s": 0.0002751451915079667,
+    "thrust_N": 5283.110169129022,
+    "a0_g": 2.4699827350505555e-05,
+    "burn1_days": 202812.67513621837,
+    "mission_burn_years": 1587.0319965430879
+   },
+   "today": {
+    "ve_km_s": 19201.172079999997,
+    "mass_ratio_total": 2.7162362581652935,
+    "propellant_t": 2796.5862911822533,
+    "end_t": 1629.4879436773379,
+    "departure_t": 4426.074234859591
+   }
+  }
+ },
+ "pulsed": {
+  "burn_parameter_g_cm2": {
+   "50": 92.21393130155859,
+   "70": 55.8747125556677,
+   "100": 42.14664224828542,
+   "150": 37.91037137580076
+  },
+  "dt_check_g_cm2": 6.670519026522269,
+  "rhoR_scan": [
+   {
+    "rhoR_g_cm2": 2,
+    "T_keV": 100.0,
+    "rho_g_cc": 1000.0,
+    "burnup": 0.045303558733907484,
+    "fuel_g": 3.351032163829113e-05,
+    "radius_mm": 0.02,
+    "yield_J": 534441.249406127,
+    "yield_t_TNT": 0.00012773452423664604,
+    "xray_escape": 0.25022604166456097,
+    "neutron_escape": 0.009155564675834987,
+    "eta_jet": 0.5850885309910872,
+    "ve_km_s": 4320.027162944348,
+    "inert_ratio": 0.0
+   },
+   {
+    "rhoR_g_cm2": 8.5,
+    "T_keV": 100.0,
+    "rho_g_cc": 1000.0,
+    "burnup": 0.16782948726058453,
+    "fuel_g": 0.002572440784514443,
+    "radius_mm": 0.085,
+    "yield_J": 151985693.678916,
+    "yield_t_TNT": 0.03632545260012333,
+    "xray_escape": 0.23025197640136652,
+    "neutron_escape": 0.006986178966398748,
+    "eta_jet": 0.6025818572594654,
+    "ve_km_s": 8438.236347709339,
+    "inert_ratio": 0.0
+   },
+   {
+    "rhoR_g_cm2": 20,
+    "T_keV": 100.0,
+    "rho_g_cc": 1000.0,
+    "burnup": 0.3218194785181944,
+    "fuel_g": 0.03351032163829113,
+    "radius_mm": 0.2,
+    "yield_J": 3796470056.418843,
+    "yield_t_TNT": 0.9073781205589968,
+    "xray_escape": 0.20044061239160446,
+    "neutron_escape": 0.0043599626352973575,
+    "eta_jet": 0.6282075457287476,
+    "ve_km_s": 11930.736757177283,
+    "inert_ratio": 0.0
+   },
+   {
+    "rhoR_g_cm2": 50,
+    "T_keV": 100.0,
+    "rho_g_cc": 1000.0,
+    "burnup": 0.5426133690826955,
+    "fuel_g": 0.5235987755982988,
+    "radius_mm": 0.5,
+    "yield_J": 100018000455.38446,
+    "yield_t_TNT": 23.904875825856706,
+    "xray_escape": 0.1452105217031273,
+    "neutron_escape": 0.0009030242127934286,
+    "eta_jet": 0.6745702987264226,
+    "ve_km_s": 16053.449947702366,
+    "inert_ratio": 0.0
+   },
+   {
+    "rhoR_g_cm2": 100,
+    "T_keV": 100.0,
+    "rho_g_cc": 1000.0,
+    "burnup": 0.7034988545514251,
+    "fuel_g": 4.1887902047863905,
+    "radius_mm": 1.0,
+    "yield_J": 1037387617247.0562,
+    "yield_t_TNT": 247.9415911202333,
+    "xray_escape": 0.09365774160459502,
+    "neutron_escape": 4.126307120634484e-05,
+    "eta_jet": 0.715977786306117,
+    "ve_km_s": 18831.763749522597,
+    "inert_ratio": 0.0
+   },
+   {
+    "rhoR_g_cm2": 150,
+    "T_keV": 100.0,
+    "rho_g_cc": 1000.0,
+    "burnup": 0.7806537665444867,
+    "fuel_g": 14.137166941154067,
+    "radius_mm": 1.5,
+    "yield_J": 3885168882887.962,
+    "yield_t_TNT": 928.5776488737959,
+    "xray_escape": 0.06651649743685643,
+    "neutron_escape": 1.6261151597415532e-06,
+    "eta_jet": 0.7374506823939073,
+    "ve_km_s": 20132.8494688112,
+    "inert_ratio": 0.0
+   },
+   {
+    "rhoR_g_cm2": 250,
+    "T_keV": 100.0,
+    "rho_g_cc": 1000.0,
+    "burnup": 0.8557346340730267,
+    "fuel_g": 65.44984694978737,
+    "radius_mm": 2.5,
+    "yield_J": 19716816774413.16,
+    "yield_t_TNT": 4712.432307460124,
+    "xray_escape": 0.040766010309500285,
+    "neutron_escape": 2.2586308878853687e-09,
+    "eta_jet": 0.7577948500711764,
+    "ve_km_s": 21367.558676902856,
+    "inert_ratio": 0.0
+   }
+  ],
+  "rhoR_for_mission_ve": {
+   "eta_noz_0.79": {
+    "rhoR_g_cm2": 111.26718631958187,
+    "T_keV": 100.0,
+    "rho_g_cc": 1000.0,
+    "burnup": 0.725274816216189,
+    "fuel_g": 5.770187519255557,
+    "radius_mm": 1.1126718631958188,
+    "yield_J": 1473267405123.651,
+    "yield_t_TNT": 352.1193606892091,
+    "xray_escape": 0.08606298924316239,
+    "neutron_escape": 2.0045946462363468e-05,
+    "eta_jet": 0.7219944022001965,
+    "ve_km_s": 19201.172079999997,
+    "inert_ratio": 0.0
+   },
+   "eta_noz_0.55": {
+    "rhoR_g_cm2": 1049.405629971705,
+    "T_keV": 100.0,
+    "rho_g_cc": 1000.0,
+    "burnup": 0.9613883427107272,
+    "fuel_g": 4840.818267151216,
+    "radius_mm": 10.49405629971705,
+    "yield_J": 1638350003325410.8,
+    "yield_t_TNT": 391575.0485959395,
+    "xray_escape": 0.009681512187035423,
+    "neutron_escape": 1.8054917917804628e-32,
+    "eta_jet": 0.5446751682971306,
+    "ve_km_s": 19201.172079999997,
+    "inert_ratio": 0.0
+   }
+  },
+  "inert_mass_effect": [
+   {
+    "inert_per_fuel": 0,
+    "ve_km_s": 19201.172079999997
+   },
+   {
+    "inert_per_fuel": 0.05,
+    "ve_km_s": 18738.425233569335
+   },
+   {
+    "inert_per_fuel": 0.2,
+    "ve_km_s": 17528.19179792398
+   },
+   {
+    "inert_per_fuel": 1,
+    "ve_km_s": 13577.278984497803
+   },
+   {
+    "inert_per_fuel": 10,
+    "ve_km_s": 5789.371211309814
+   },
+   {
+    "inert_per_fuel": 100,
+    "ve_km_s": 1910.5880315221693
+   }
+  ],
+  "fdr_class_liner": {
+   "liner_kg": 0.35,
+   "fuel_g": 5.770187519255557,
+   "ve_km_s": 2445.3325394648705
+  },
+  "mission_power": {
+   "P_jet_TW": 209.00475809079998,
+   "P_fus_TW": 289.48251877560483
+  },
+  "density_scan": [
+   {
+    "rho_g_cc": 300.0,
+    "fuel_g": 64.11319465839506,
+    "yield_t_TNT": 3912.4373409912114,
+    "rate_at_mission_Hz": 17.68411260521832,
+    "standoff_m_1J_cm2": 3348.288080031791
+   },
+   {
+    "rho_g_cc": 1000.0,
+    "fuel_g": 5.770187519255557,
+    "yield_t_TNT": 352.1193606892091,
+    "rate_at_mission_Hz": 196.49014005798128,
+    "standoff_m_1J_cm2": 1004.4864240095374
+   },
+   {
+    "rho_g_cc": 3000.0,
+    "fuel_g": 0.6411319465839506,
+    "yield_t_TNT": 39.12437340991211,
+    "rate_at_mission_Hz": 1768.4112605218322,
+    "standoff_m_1J_cm2": 334.82880800317906
+   },
+   {
+    "rho_g_cc": 10000.0,
+    "fuel_g": 0.057701875192555555,
+    "yield_t_TNT": 3.52119360689209,
+    "rate_at_mission_Hz": 19649.014005798133,
+    "standoff_m_1J_cm2": 100.44864240095373
+   }
+  ],
+  "designs": {
+   "standoff_laser/optimistic": {
+    "pulse": {
+     "rhoR_g_cm2": 111.26718631958187,
+     "T_keV": 100.0,
+     "rho_g_cc": 3000.0,
+     "burnup": 0.725274816216189,
+     "fuel_g": 0.6411319465839506,
+     "radius_mm": 0.37089062106527293,
+     "yield_J": 163696378347.07227,
+     "yield_t_TNT": 39.12437340991211,
+     "xray_escape": 0.08606298924316239,
+     "neutron_escape": 2.0045946462363468e-05,
+     "eta_jet": 0.7219944022001965,
+     "ve_km_s": 19201.172079999997,
+     "inert_ratio": 0.0
+    },
+    "best": {
+     "P_fus_TW": 5.011872336272715,
+     "rep_Hz": 30.61687977999394,
+     "yield_J": 163696378347.07227,
+     "P_jet_TW": 3.6185437713309208,
+     "standoff_m": 167.41440400158953,
+     "nozzle_field_T": 0.19329664589070814,
+     "NI_per_loop_MA": 0.5722618064496288,
+     "hardware_solid_angle": 0.021316563194004923,
+     "radiation_heat_GW": 9.196757969039291,
+     "recovery_heat_GW": 0.5861838989792655,
+     "hot_loop_GW": 9.782941868018556,
+     "driver_draw_GW": 11.137494080606034,
+     "driver_heat_GW": 9.466869968515127,
+     "driver_radiator_m2": 6180875.457694628,
+     "driver_T_K": 350.0,
+     "mass_t": {
+      "nozzle_conductor": 39.12738354774705,
+      "nozzle_structure": 129.23398290558336,
+      "nozzle_shield": 5476.13024302967,
+      "driver": 334.124822418181,
+      "driver_radiator": 30904.37728847314,
+      "injector_and_shadow_shield": 200.0
+     },
+     "drive_t": 37082.993720374325,
+     "inert_kg_per_pulse": 0.0,
+     "mission": {
+      "ve_km_s": 19201.172079999997,
+      "mass_ratio_total": 2.7162362581652935,
+      "propellant_t": 87926.04521812509,
+      "end_t": 51231.900503093086,
+      "departure_t": 139157.94572121816
+     },
+     "burns": {
+      "mdot_kg_s": 0.019629459731674313,
+      "thrust_N": 376908.6341453091,
+      "a0_g": 0.000276189651304069,
+      "burn1_days": 18137.674734393506,
+      "mission_burn_years": 141.9293450325048
+     }
+    },
+    "at_mission_power": {
+     "P_fus_TW": 289.48251877560483,
+     "rep_Hz": 1768.4112605218322,
+     "yield_J": 163696378347.07227,
+     "P_jet_TW": 209.00475809079998,
+     "standoff_m": 167.41440400158953,
+     "nozzle_field_T": 0.19329664589070814,
+     "NI_per_loop_MA": 0.5722618064496288,
+     "hardware_solid_angle": 0.021316563194004923,
+     "radiation_heat_GW": 531.1988180902148,
+     "recovery_heat_GW": 33.85760453515849,
+     "hot_loop_GW": 565.0564226253733,
+     "driver_draw_GW": 643.2944861680107,
+     "driver_heat_GW": 546.8003132428091,
+     "driver_radiator_m2": 357003386.2958317,
+     "driver_T_K": 350.0,
+     "mass_t": {
+      "nozzle_conductor": 39.12738354774705,
+      "nozzle_structure": 129.23398290558336,
+      "nozzle_shield": 5476.13024302967,
+      "driver": 19298.834585040324,
+      "driver_radiator": 1785016.9314791583,
+      "injector_and_shadow_shield": 200.0
+     },
+     "drive_t": 1810160.2576736817,
+     "inert_kg_per_pulse": 0.0
+    }
+   },
+   "standoff_laser/central": {
+    "pulse": {
+     "rhoR_g_cm2": 111.26718631958187,
+     "T_keV": 100.0,
+     "rho_g_cc": 1000.0,
+     "burnup": 0.725274816216189,
+     "fuel_g": 5.770187519255557,
+     "radius_mm": 1.1126718631958188,
+     "yield_J": 1473267405123.651,
+     "yield_t_TNT": 352.1193606892091,
+     "xray_escape": 0.08606298924316239,
+     "neutron_escape": 2.0045946462363468e-05,
+     "eta_jet": 0.7219944022001965,
+     "ve_km_s": 19201.172079999997,
+     "inert_ratio": 0.0
+    },
+    "best": {
+     "P_fus_TW": 6.309573444801942,
+     "rep_Hz": 4.2827075538757216,
+     "yield_J": 1473267405123.651,
+     "P_jet_TW": 4.555476707418013,
+     "standoff_m": 1004.4864240095374,
+     "nozzle_field_T": 0.03945651261864014,
+     "NI_per_loop_MA": 2.102624137627407,
+     "hardware_solid_angle": 0.0032433835631061896,
+     "radiation_heat_GW": 1.7616348074709234,
+     "recovery_heat_GW": 7.3796180640958475,
+     "hot_loop_GW": 9.14125287156677,
+     "driver_draw_GW": 140.21274321782096,
+     "driver_heat_GW": 119.1808317351478,
+     "driver_radiator_m2": 77812611.80826697,
+     "driver_T_K": 350.0,
+     "mass_t": {
+      "nozzle_conductor": 862.5791219593469,
+      "nozzle_structure": 1163.1058461502507,
+      "nozzle_shield": 730.8571486412587,
+      "driver": 14021.274321782095,
+      "driver_radiator": 389063.05904133484,
+      "injector_and_shadow_shield": 200.0
+     },
+     "drive_t": 406040.8754798678,
+     "inert_kg_per_pulse": 0.0,
+     "mission": {
+      "ve_km_s": 19201.172079999997,
+      "mass_ratio_total": 2.7162362581652935,
+      "propellant_t": 940671.9577406392,
+      "end_t": 548101.6691409637,
+      "departure_t": 1488773.6268816027
+     },
+     "burns": {
+      "mdot_kg_s": 0.024712025675995182,
+      "thrust_N": 474499.85745016177,
+      "a0_g": 3.250025315877826e-05,
+      "burn1_days": 154135.3550658643,
+      "mission_burn_years": 1206.1264914717967
+     }
+    },
+    "at_mission_power": {
+     "P_fus_TW": 289.48251877560483,
+     "rep_Hz": 196.49014005798128,
+     "yield_J": 1473267405123.651,
+     "P_jet_TW": 209.00475809079998,
+     "standoff_m": 1004.4864240095374,
+     "nozzle_field_T": 0.03945651261864014,
+     "NI_per_loop_MA": 2.102624137627407,
+     "hardware_solid_angle": 0.0032433835631061896,
+     "radiation_heat_GW": 80.82360649111492,
+     "recovery_heat_GW": 338.5760453515849,
+     "hot_loop_GW": 419.3996518426998,
+     "driver_draw_GW": 6432.944861680107,
+     "driver_heat_GW": 5468.003132428091,
+     "driver_radiator_m2": 3570033862.9583163,
+     "driver_T_K": 350.0,
+     "mass_t": {
+      "nozzle_conductor": 862.5791219593469,
+      "nozzle_structure": 1163.1058461502507,
+      "nozzle_shield": 730.8571486412587,
+      "driver": 643294.4861680109,
+      "driver_radiator": 17850169.31479158,
+      "injector_and_shadow_shield": 200.0
+     },
+     "drive_t": 18496420.34307634,
+     "inert_kg_per_pulse": 0.0
+    }
+   },
+   "standoff_laser/pessimistic": {
+    "pulse": {
+     "rhoR_g_cm2": 111.26718631958187,
+     "T_keV": 100.0,
+     "rho_g_cc": 300.0,
+     "burnup": 0.725274816216189,
+     "fuel_g": 64.11319465839506,
+     "radius_mm": 3.7089062106527293,
+     "yield_J": 16369637834707.229,
+     "yield_t_TNT": 3912.4373409912114,
+     "xray_escape": 0.08606298924316239,
+     "neutron_escape": 2.0045946462363468e-05,
+     "eta_jet": 0.7219944022001965,
+     "ve_km_s": 19201.172079999997,
+     "inert_ratio": 0.0
+    },
+    "best": {
+     "P_fus_TW": 1.2589254117941662,
+     "rep_Hz": 0.07690612489452685,
+     "yield_J": 16369637834707.229,
+     "P_jet_TW": 0.9089371001029654,
+     "standoff_m": 3348.288080031791,
+     "nozzle_field_T": 0.021611222001716435,
+     "NI_per_loop_MA": 12.796163001481975,
+     "hardware_solid_angle": 0.0009239463790849126,
+     "radiation_heat_GW": 0.1001300283524487,
+     "recovery_heat_GW": 8.834564293292402,
+     "hot_loop_GW": 8.934694321644852,
+     "driver_draw_GW": 167.8567215725555,
+     "driver_heat_GW": 142.67821333667217,
+     "driver_radiator_m2": 93153943.1822023,
+     "driver_T_K": 350.0,
+     "mass_t": {
+      "nozzle_conductor": 17498.29787889386,
+      "nozzle_structure": 12923.398290558336,
+      "nozzle_shield": 2436.1904954708625,
+      "driver": 50357.016471766656,
+      "driver_radiator": 465769.71591101144,
+      "injector_and_shadow_shield": 200.0
+     },
+     "drive_t": 549184.6190477011,
+     "inert_kg_per_pulse": 0.0,
+     "mission": {
+      "ve_km_s": 19201.172079999997,
+      "mass_ratio_total": 2.7162362581652935,
+      "propellant_t": 1271509.8345425487,
+      "end_t": 740871.0942290834,
+      "departure_t": 2012380.9287716323
+     },
+     "burns": {
+      "mdot_kg_s": 0.0049306973557856435,
+      "thrust_N": 94675.16840284111,
+      "a0_g": 4.7973921242496755e-06,
+      "burn1_days": 1044200.2510149728,
+      "mission_burn_years": 8170.984422181934
+     }
+    },
+    "at_mission_power": {
+     "P_fus_TW": 289.48251877560483,
+     "rep_Hz": 17.68411260521832,
+     "yield_J": 16369637834707.229,
+     "P_jet_TW": 209.00475809079998,
+     "standoff_m": 3348.288080031791,
+     "nozzle_field_T": 0.021611222001716435,
+     "NI_per_loop_MA": 12.796163001481975,
+     "hardware_solid_angle": 0.0009239463790849126,
+     "radiation_heat_GW": 23.024313069691818,
+     "recovery_heat_GW": 2031.4562721095092,
+     "hot_loop_GW": 2054.480585179201,
+     "driver_draw_GW": 38597.66917008064,
+     "driver_heat_GW": 32808.01879456855,
+     "driver_radiator_m2": 21420203177.749897,
+     "driver_T_K": 350.0,
+     "mass_t": {
+      "nozzle_conductor": 17498.29787889386,
+      "nozzle_structure": 12923.398290558336,
+      "nozzle_shield": 2436.1904954708625,
+      "driver": 11579300.751024192,
+      "driver_radiator": 107101015.88874948,
+      "injector_and_shadow_shield": 200.0
+     },
+     "drive_t": 118713374.5264386,
+     "inert_kg_per_pulse": 0.0
+    }
+   },
+   "heavy_ion_beam/optimistic": {
+    "pulse": {
+     "rhoR_g_cm2": 111.26718631958187,
+     "T_keV": 100.0,
+     "rho_g_cc": 3000.0,
+     "burnup": 0.725274816216189,
+     "fuel_g": 0.6411319465839506,
+     "radius_mm": 0.37089062106527293,
+     "yield_J": 163696378347.07227,
+     "yield_t_TNT": 39.12437340991211,
+     "xray_escape": 0.08606298924316239,
+     "neutron_escape": 2.0045946462363468e-05,
+     "eta_jet": 0.7219944022001965,
+     "ve_km_s": 19201.172079999997,
+     "inert_ratio": 0.0
+    },
+    "best": {
+     "P_fus_TW": 5.011872336272715,
+     "rep_Hz": 30.61687977999394,
+     "yield_J": 163696378347.07227,
+     "P_jet_TW": 3.6185437713309208,
+     "standoff_m": 167.41440400158953,
+     "nozzle_field_T": 0.19329664589070814,
+     "NI_per_loop_MA": 0.5722618064496288,
+     "hardware_solid_angle": 0.021316563194004923,
+     "radiation_heat_GW": 9.196757969039291,
+     "recovery_heat_GW": 0.29309194948963274,
+     "hot_loop_GW": 9.489849918528925,
+     "driver_draw_GW": 5.568747040303017,
+     "driver_heat_GW": 3.8981229282121115,
+     "driver_radiator_m2": 1491871.177295979,
+     "driver_T_K": 400.0,
+     "mass_t": {
+      "nozzle_conductor": 39.12738354774705,
+      "nozzle_structure": 129.23398290558336,
+      "nozzle_shield": 5476.13024302967,
+      "driver": 334.124822418181,
+      "driver_radiator": 7459.355886479895,
+      "injector_and_shadow_shield": 200.0
+     },
+     "drive_t": 13637.972318381077,
+     "inert_kg_per_pulse": 0.0,
+     "mission": {
+      "ve_km_s": 19201.172079999997,
+      "mass_ratio_total": 2.7162362581652935,
+      "propellant_t": 33739.24732615085,
+      "end_t": 19658.859417303705,
+      "departure_t": 53398.106743454555
+     },
+     "burns": {
+      "mdot_kg_s": 0.019629459731674313,
+      "thrust_N": 376908.6341453091,
+      "a0_g": 0.0007197630561994593,
+      "burn1_days": 6959.843266768834,
+      "mission_burn_years": 54.461556447931294
+     }
+    },
+    "at_mission_power": {
+     "P_fus_TW": 289.48251877560483,
+     "rep_Hz": 1768.4112605218322,
+     "yield_J": 163696378347.07227,
+     "P_jet_TW": 209.00475809079998,
+     "standoff_m": 167.41440400158953,
+     "nozzle_field_T": 0.19329664589070814,
+     "NI_per_loop_MA": 0.5722618064496288,
+     "hardware_solid_angle": 0.021316563194004923,
+     "radiation_heat_GW": 531.1988180902148,
+     "recovery_heat_GW": 16.928802267579243,
+     "hot_loop_GW": 548.1276203577941,
+     "driver_draw_GW": 321.64724308400537,
+     "driver_heat_GW": 225.15307015880373,
+     "driver_radiator_m2": 86169518.5184117,
+     "driver_T_K": 400.0,
+     "mass_t": {
+      "nozzle_conductor": 39.12738354774705,
+      "nozzle_structure": 129.23398290558336,
+      "nozzle_shield": 5476.13024302967,
+      "driver": 19298.834585040324,
+      "driver_radiator": 430847.59259205847,
+      "injector_and_shadow_shield": 200.0
+     },
+     "drive_t": 455990.9187865818,
+     "inert_kg_per_pulse": 0.0
+    }
+   },
+   "heavy_ion_beam/central": {
+    "pulse": {
+     "rhoR_g_cm2": 111.26718631958187,
+     "T_keV": 100.0,
+     "rho_g_cc": 1000.0,
+     "burnup": 0.725274816216189,
+     "fuel_g": 5.770187519255557,
+     "radius_mm": 1.1126718631958188,
+     "yield_J": 1473267405123.651,
+     "yield_t_TNT": 352.1193606892091,
+     "xray_escape": 0.08606298924316239,
+     "neutron_escape": 2.0045946462363468e-05,
+     "eta_jet": 0.7219944022001965,
+     "ve_km_s": 19201.172079999997,
+     "inert_ratio": 0.0
+    },
+    "best": {
+     "P_fus_TW": 10.0,
+     "rep_Hz": 6.787634047439408,
+     "yield_J": 1473267405123.651,
+     "P_jet_TW": 7.219944022001965,
+     "standoff_m": 1004.4864240095374,
+     "nozzle_field_T": 0.03945651261864014,
+     "NI_per_loop_MA": 2.102624137627407,
+     "hardware_solid_angle": 0.0032433835631061896,
+     "radiation_heat_GW": 2.792003013963206,
+     "recovery_heat_GW": 5.8479532163742745,
+     "hot_loop_GW": 8.63995623033748,
+     "driver_draw_GW": 111.11111111111111,
+     "driver_heat_GW": 77.77777777777777,
+     "driver_radiator_m2": 29766743.38846928,
+     "driver_T_K": 400.0,
+     "mass_t": {
+      "nozzle_conductor": 862.5791219593469,
+      "nozzle_structure": 1163.1058461502507,
+      "nozzle_shield": 730.8571486412587,
+      "driver": 22222.222222222223,
+      "driver_radiator": 148833.7169423464,
+      "injector_and_shadow_shield": 200.0
+     },
+     "drive_t": 174012.48128131946,
+     "inert_kg_per_pulse": 0.0,
+     "mission": {
+      "ve_km_s": 19201.172079999997,
+      "mass_ratio_total": 2.7162362581652935,
+      "propellant_t": 404401.3574260177,
+      "end_t": 235632.68489522213,
+      "departure_t": 640034.0423212398
+     },
+     "burns": {
+      "mdot_kg_s": 0.03916592126580895,
+      "thrust_N": 752031.593896529,
+      "a0_g": 0.00011981531578956693,
+      "burn1_days": 41809.663709077904,
+      "mission_burn_years": 327.16532152858326
+     }
+    },
+    "at_mission_power": {
+     "P_fus_TW": 289.48251877560483,
+     "rep_Hz": 196.49014005798128,
+     "yield_J": 1473267405123.651,
+     "P_jet_TW": 209.00475809079998,
+     "standoff_m": 1004.4864240095374,
+     "nozzle_field_T": 0.03945651261864014,
+     "NI_per_loop_MA": 2.102624137627407,
+     "hardware_solid_angle": 0.0032433835631061896,
+     "radiation_heat_GW": 80.82360649111492,
+     "recovery_heat_GW": 169.28802267579246,
+     "hot_loop_GW": 250.11162916690733,
+     "driver_draw_GW": 3216.4724308400537,
+     "driver_heat_GW": 2251.5307015880376,
+     "driver_radiator_m2": 861695185.184117,
+     "driver_T_K": 400.0,
+     "mass_t": {
+      "nozzle_conductor": 862.5791219593469,
+      "nozzle_structure": 1163.1058461502507,
+      "nozzle_shield": 730.8571486412587,
+      "driver": 643294.4861680109,
+      "driver_radiator": 4308475.925920584,
+      "injector_and_shadow_shield": 200.0
+     },
+     "drive_t": 4954726.954205346,
+     "inert_kg_per_pulse": 0.0
+    }
+   },
+   "heavy_ion_beam/pessimistic": {
+    "pulse": {
+     "rhoR_g_cm2": 111.26718631958187,
+     "T_keV": 100.0,
+     "rho_g_cc": 300.0,
+     "burnup": 0.725274816216189,
+     "fuel_g": 64.11319465839506,
+     "radius_mm": 3.7089062106527293,
+     "yield_J": 16369637834707.229,
+     "yield_t_TNT": 3912.4373409912114,
+     "xray_escape": 0.08606298924316239,
+     "neutron_escape": 2.0045946462363468e-05,
+     "eta_jet": 0.7219944022001965,
+     "ve_km_s": 19201.172079999997,
+     "inert_ratio": 0.0
+    },
+    "best": {
+     "P_fus_TW": 2.511886431509582,
+     "rep_Hz": 0.15344789279233967,
+     "yield_J": 16369637834707.229,
+     "P_jet_TW": 1.8135679425125455,
+     "standoff_m": 3348.288080031791,
+     "nozzle_field_T": 0.021611222001716435,
+     "NI_per_loop_MA": 12.796163001481975,
+     "hardware_solid_angle": 0.0009239463790849126,
+     "radiation_heat_GW": 0.19978567216840667,
+     "recovery_heat_GW": 8.813636601788016,
+     "hot_loop_GW": 9.013422273956422,
+     "driver_draw_GW": 167.45909543397212,
+     "driver_heat_GW": 117.22136680378048,
+     "driver_radiator_m2": 44862407.29663412,
+     "driver_T_K": 400.0,
+     "mass_t": {
+      "nozzle_conductor": 17498.29787889386,
+      "nozzle_structure": 12923.398290558336,
+      "nozzle_shield": 2436.1904954708625,
+      "driver": 100475.45726038328,
+      "driver_radiator": 224312.03648317064,
+      "injector_and_shadow_shield": 200.0
+     },
+     "drive_t": 357845.380408477,
+     "inert_kg_per_pulse": 0.0,
+     "mission": {
+      "ve_km_s": 19201.172079999997,
+      "mass_ratio_total": 2.7162362581652935,
+      "propellant_t": 829281.1636799836,
+      "end_t": 483197.55496047455,
+      "departure_t": 1312478.718640458
+     },
+     "burns": {
+      "mdot_kg_s": 0.00983803462051581,
+      "thrust_N": 188901.79567752153,
+      "a0_g": 1.4676521682008384e-05,
+      "burn1_days": 341323.2487163305,
+      "mission_burn_years": 2670.8928153185016
+     }
+    },
+    "at_mission_power": {
+     "P_fus_TW": 289.48251877560483,
+     "rep_Hz": 17.68411260521832,
+     "yield_J": 16369637834707.229,
+     "P_jet_TW": 209.00475809079998,
+     "standoff_m": 3348.288080031791,
+     "nozzle_field_T": 0.021611222001716435,
+     "NI_per_loop_MA": 12.796163001481975,
+     "hardware_solid_angle": 0.0009239463790849126,
+     "radiation_heat_GW": 23.024313069691818,
+     "recovery_heat_GW": 1015.7281360547546,
+     "hot_loop_GW": 1038.7524491244465,
+     "driver_draw_GW": 19298.83458504032,
+     "driver_heat_GW": 13509.184209528223,
+     "driver_radiator_m2": 5170171111.104701,
+     "driver_T_K": 400.0,
+     "mass_t": {
+      "nozzle_conductor": 17498.29787889386,
+      "nozzle_structure": 12923.398290558336,
+      "nozzle_shield": 2436.1904954708625,
+      "driver": 11579300.751024192,
+      "driver_radiator": 25850855.555523507,
+      "injector_and_shadow_shield": 200.0
+     },
+     "drive_t": 37463214.19321262,
+     "inert_kg_per_pulse": 0.0
+    }
+   },
+   "magnetic_liner/optimistic": {
+    "pulse": {
+     "rhoR_g_cm2": 111.26718631958187,
+     "T_keV": 100.0,
+     "rho_g_cc": 3000.0,
+     "burnup": 0.725274816216189,
+     "fuel_g": 0.6411319465839506,
+     "radius_mm": 0.37089062106527293,
+     "yield_J": 163696378347.07227,
+     "yield_t_TNT": 39.12437340991211,
+     "xray_escape": 0.08606298924316239,
+     "neutron_escape": 2.0045946462363468e-05,
+     "eta_jet": 0.7219944022001965,
+     "ve_km_s": 821.0507814022874,
+     "inert_ratio": 545.9094681911481
+    },
+    "best": {
+     "infeasible": true,
+     "ve_km_s": 821.0507814022874,
+     "reason": "at this ve the four-burn mass ratio makes the tank mass diverge"
+    },
+    "at_mission_power": {
+     "P_fus_TW": 289.48251877560483,
+     "rep_Hz": 1768.4112605218322,
+     "yield_J": 163696378347.07227,
+     "P_jet_TW": 209.00475809079998,
+     "standoff_m": 167.41440400158953,
+     "nozzle_field_T": 0.19329664589070814,
+     "NI_per_loop_MA": 0.5722618064496288,
+     "hardware_solid_angle": 0.021316563194004923,
+     "radiation_heat_GW": 531.1988180902148,
+     "recovery_heat_GW": 12.696601700684433,
+     "hot_loop_GW": 543.8954197908993,
+     "driver_draw_GW": 241.235432313004,
+     "driver_heat_GW": 144.7412593878024,
+     "driver_radiator_m2": 10942161.08170307,
+     "driver_T_K": 600.0,
+     "mass_t": {
+      "nozzle_conductor": 39.12738354774705,
+      "nozzle_structure": 129.23398290558336,
+      "nozzle_shield": 5476.13024302967,
+      "driver": 3618.53148469506,
+      "driver_radiator": 54710.80540851535,
+      "injector_and_shadow_shield": 200.0
+     },
+     "drive_t": 64173.82850269341,
+     "inert_kg_per_pulse": 0.35
+    }
+   },
+   "magnetic_liner/central": {
+    "pulse": {
+     "rhoR_g_cm2": 111.26718631958187,
+     "T_keV": 100.0,
+     "rho_g_cc": 1000.0,
+     "burnup": 0.725274816216189,
+     "fuel_g": 5.770187519255557,
+     "radius_mm": 1.1126718631958188,
+     "yield_J": 1473267405123.651,
+     "yield_t_TNT": 352.1193606892091,
+     "xray_escape": 0.08606298924316239,
+     "neutron_escape": 2.0045946462363468e-05,
+     "eta_jet": 0.7219944022001965,
+     "ve_km_s": 2445.3325394648705,
+     "inert_ratio": 60.65660757679421
+    },
+    "best": {
+     "infeasible": true,
+     "ve_km_s": 2445.3325394648705,
+     "reason": "at this ve the four-burn mass ratio makes the tank mass diverge"
+    },
+    "at_mission_power": {
+     "P_fus_TW": 289.48251877560483,
+     "rep_Hz": 196.49014005798128,
+     "yield_J": 1473267405123.651,
+     "P_jet_TW": 209.00475809079998,
+     "standoff_m": 1004.4864240095374,
+     "nozzle_field_T": 0.03945651261864014,
+     "NI_per_loop_MA": 2.102624137627407,
+     "hardware_solid_angle": 0.0032433835631061896,
+     "radiation_heat_GW": 80.82360649111492,
+     "recovery_heat_GW": 126.96601700684433,
+     "hot_loop_GW": 207.78962349795924,
+     "driver_draw_GW": 2412.35432313004,
+     "driver_heat_GW": 1447.412593878024,
+     "driver_radiator_m2": 109421610.8170307,
+     "driver_T_K": 600.0,
+     "mass_t": {
+      "nozzle_conductor": 862.5791219593469,
+      "nozzle_structure": 1163.1058461502507,
+      "nozzle_shield": 730.8571486412587,
+      "driver": 120617.716156502,
+      "driver_radiator": 547108.0540851535,
+      "injector_and_shadow_shield": 200.0
+     },
+     "drive_t": 670682.3123584064,
+     "inert_kg_per_pulse": 0.35
+    }
+   },
+   "magnetic_liner/pessimistic": {
+    "pulse": {
+     "rhoR_g_cm2": 111.26718631958187,
+     "T_keV": 100.0,
+     "rho_g_cc": 300.0,
+     "burnup": 0.725274816216189,
+     "fuel_g": 64.11319465839506,
+     "radius_mm": 3.7089062106527293,
+     "yield_J": 16369637834707.229,
+     "yield_t_TNT": 3912.4373409912114,
+     "xray_escape": 0.08606298924316239,
+     "neutron_escape": 2.0045946462363468e-05,
+     "eta_jet": 0.7219944022001965,
+     "ve_km_s": 7555.129526688059,
+     "inert_ratio": 5.4590946819114805
+    },
+    "best": {
+     "infeasible": true,
+     "ve_km_s": 7555.129526688059,
+     "reason": "at this ve the four-burn mass ratio makes the tank mass diverge"
+    },
+    "at_mission_power": {
+     "P_fus_TW": 289.48251877560483,
+     "rep_Hz": 17.68411260521832,
+     "yield_J": 16369637834707.229,
+     "P_jet_TW": 209.00475809079998,
+     "standoff_m": 3348.288080031791,
+     "nozzle_field_T": 0.021611222001716435,
+     "NI_per_loop_MA": 12.796163001481975,
+     "hardware_solid_angle": 0.0009239463790849126,
+     "radiation_heat_GW": 23.024313069691818,
+     "recovery_heat_GW": 761.7961020410661,
+     "hot_loop_GW": 784.8204151107578,
+     "driver_draw_GW": 14474.12593878024,
+     "driver_heat_GW": 8684.475563268143,
+     "driver_radiator_m2": 656529664.9021842,
+     "driver_T_K": 600.0,
+     "mass_t": {
+      "nozzle_conductor": 17498.29787889386,
+      "nozzle_structure": 12923.398290558336,
+      "nozzle_shield": 2436.1904954708625,
+      "driver": 2171118.890817036,
+      "driver_radiator": 3282648.3245109213,
+      "injector_and_shadow_shield": 200.0
+     },
+     "drive_t": 5486825.101992881,
+     "inert_kg_per_pulse": 0.35
+    }
+   }
+  },
+  "nozzle_neutron_fluence": {
+   "mission_fusion_J_today_mass": 7.140356209681746e+20,
+   "escaping_neutrons": 1.7867592781469163e+28,
+   "fluence_n_cm2_at_1km": 1.4218578561619424e+17,
+   "note": "rhoR 110 g/cm^2 thermalises almost all neutrons in the fuel; bred tritium then burns, so the real escape depends on 14 MeV transport (lambda ~15 g/cm^2 assumed)"
+  }
+ },
+ "topology": {
+  "standoff_m": 1004.4864240095374,
+  "rows": [
+   {
+    "chambers": 1,
+    "nozzles": 1,
+    "rate_per_chamber_Hz": 6.787634047439408,
+    "cluster_span_km": 0.0,
+    "hardware_solid_angle": 0.0032433835631061896,
+    "nozzle_mass_t": 2756.5421167508566,
+    "one_out_thrust_left": 0.0
+   },
+   {
+    "chambers": 2,
+    "nozzles": 2,
+    "rate_per_chamber_Hz": 3.393817023719704,
+    "cluster_span_km": 2.209870132820982,
+    "hardware_solid_angle": 0.003860449852832288,
+    "nozzle_mass_t": 5513.084233501713,
+    "one_out_thrust_left": 0.5
+   },
+   {
+    "chambers": 4,
+    "nozzles": 4,
+    "rate_per_chamber_Hz": 1.696908511859852,
+    "cluster_span_km": 3.1252283129186664,
+    "hardware_solid_angle": 0.0050945824322844845,
+    "nozzle_mass_t": 11026.168467003426,
+    "one_out_thrust_left": 0.75
+   }
+  ],
+  "one_chamber_four_nozzles": {
+   "feasible": false,
+   "reason": "a pulse expands from a point within microseconds; a kiloton-class plasma sphere cannot be ducted into four nozzles, so one burn point means one nozzle; its four loop sectors keep the four-way vectoring role"
+  }
+ },
+ "comparison": {
+  "rows": {
+   "IFD-1 continuous (v4 recheck)": {
+    "P_fus_TW": 0.08180798989922923,
+    "ve_km_s_tau_p_1s": 4277.210920475395,
+    "ve_km_s_canon_recovery": 20763.848647003873,
+    "hot_loop_GW": 10.8,
+    "drive_t": 5002.683404488215,
+    "departure_t": 21810.974700190214,
+    "mdot_kg_s": 0.0002751451915079667,
+    "thrust_N": 5283.110169129022,
+    "a0_g": 2.4699827350505555e-05,
+    "burn1_days": 202812.67513621837,
+    "mission_burn_years": 1587.0319965430879
+   },
+   "pulsed standoff_laser/optimistic": {
+    "P_fus_TW": 5.011872336272715,
+    "ve_km_s": 19201.172079999997,
+    "hot_loop_GW": 9.782941868018556,
+    "driver_heat_GW": 9.466869968515127,
+    "driver_radiator_m2": 6180875.457694628,
+    "standoff_m": 167.41440400158953,
+    "rep_Hz": 30.61687977999394,
+    "drive_t": 37082.993720374325,
+    "departure_t": 139157.94572121816,
+    "mdot_kg_s": 0.019629459731674313,
+    "thrust_N": 376908.6341453091,
+    "a0_g": 0.000276189651304069,
+    "burn1_days": 18137.674734393506,
+    "mission_burn_years": 141.9293450325048
+   },
+   "pulsed standoff_laser/central": {
+    "P_fus_TW": 6.309573444801942,
+    "ve_km_s": 19201.172079999997,
+    "hot_loop_GW": 9.14125287156677,
+    "driver_heat_GW": 119.1808317351478,
+    "driver_radiator_m2": 77812611.80826697,
+    "standoff_m": 1004.4864240095374,
+    "rep_Hz": 4.2827075538757216,
+    "drive_t": 406040.8754798678,
+    "departure_t": 1488773.6268816027,
+    "mdot_kg_s": 0.024712025675995182,
+    "thrust_N": 474499.85745016177,
+    "a0_g": 3.250025315877826e-05,
+    "burn1_days": 154135.3550658643,
+    "mission_burn_years": 1206.1264914717967
+   },
+   "pulsed standoff_laser/pessimistic": {
+    "P_fus_TW": 1.2589254117941662,
+    "ve_km_s": 19201.172079999997,
+    "hot_loop_GW": 8.934694321644852,
+    "driver_heat_GW": 142.67821333667217,
+    "driver_radiator_m2": 93153943.1822023,
+    "standoff_m": 3348.288080031791,
+    "rep_Hz": 0.07690612489452685,
+    "drive_t": 549184.6190477011,
+    "departure_t": 2012380.9287716323,
+    "mdot_kg_s": 0.0049306973557856435,
+    "thrust_N": 94675.16840284111,
+    "a0_g": 4.7973921242496755e-06,
+    "burn1_days": 1044200.2510149728,
+    "mission_burn_years": 8170.984422181934
+   },
+   "pulsed heavy_ion_beam/optimistic": {
+    "P_fus_TW": 5.011872336272715,
+    "ve_km_s": 19201.172079999997,
+    "hot_loop_GW": 9.489849918528925,
+    "driver_heat_GW": 3.8981229282121115,
+    "driver_radiator_m2": 1491871.177295979,
+    "standoff_m": 167.41440400158953,
+    "rep_Hz": 30.61687977999394,
+    "drive_t": 13637.972318381077,
+    "departure_t": 53398.106743454555,
+    "mdot_kg_s": 0.019629459731674313,
+    "thrust_N": 376908.6341453091,
+    "a0_g": 0.0007197630561994593,
+    "burn1_days": 6959.843266768834,
+    "mission_burn_years": 54.461556447931294
+   },
+   "pulsed heavy_ion_beam/central": {
+    "P_fus_TW": 10.0,
+    "ve_km_s": 19201.172079999997,
+    "hot_loop_GW": 8.63995623033748,
+    "driver_heat_GW": 77.77777777777777,
+    "driver_radiator_m2": 29766743.38846928,
+    "standoff_m": 1004.4864240095374,
+    "rep_Hz": 6.787634047439408,
+    "drive_t": 174012.48128131946,
+    "departure_t": 640034.0423212398,
+    "mdot_kg_s": 0.03916592126580895,
+    "thrust_N": 752031.593896529,
+    "a0_g": 0.00011981531578956693,
+    "burn1_days": 41809.663709077904,
+    "mission_burn_years": 327.16532152858326
+   },
+   "pulsed heavy_ion_beam/pessimistic": {
+    "P_fus_TW": 2.511886431509582,
+    "ve_km_s": 19201.172079999997,
+    "hot_loop_GW": 9.013422273956422,
+    "driver_heat_GW": 117.22136680378048,
+    "driver_radiator_m2": 44862407.29663412,
+    "standoff_m": 3348.288080031791,
+    "rep_Hz": 0.15344789279233967,
+    "drive_t": 357845.380408477,
+    "departure_t": 1312478.718640458,
+    "mdot_kg_s": 0.00983803462051581,
+    "thrust_N": 188901.79567752153,
+    "a0_g": 1.4676521682008384e-05,
+    "burn1_days": 341323.2487163305,
+    "mission_burn_years": 2670.8928153185016
+   },
+   "pulsed magnetic_liner/optimistic": {
+    "infeasible": true,
+    "ve_km_s": 821.0507814022874
+   },
+   "pulsed magnetic_liner/central": {
+    "infeasible": true,
+    "ve_km_s": 2445.3325394648705
+   },
+   "pulsed magnetic_liner/pessimistic": {
+    "infeasible": true,
+    "ve_km_s": 7555.129526688059
+   },
+   "today (canon WORKING, eta 0.8, burnup 0.8, recovery 0.95)": {
+    "P_fus_TW": 261.3,
+    "ve_km_s": 19201.172079999997,
+    "hot_loop_GW": 10.45,
+    "drive_t": 250,
+    "departure_t": 4426.074234859591,
+    "mdot_kg_s": 1.13378495381934,
+    "thrust_N": 21770000.0,
+    "a0_g": 0.5015555722425367,
+    "burn1_days": 9.987802623666907,
+    "mission_burn_years": 0.07815567901892792
+   }
+  },
+  "ve_trade_not_adopted": [
+   {
+    "ve_km_s": 19201.0,
+    "mass_ratio_total": 2.716260582948242,
+    "propellant_t": 2796.6396698881294,
+    "end_t": 1629.4959504832195,
+    "departure_t": 4426.135620371349,
+    "jet_TW_at_today_thrust": 209.002885
+   },
+   {
+    "ve_km_s": 15000.0,
+    "mass_ratio_total": 3.593456265719225,
+    "propellant_t": 5136.132227608202,
+    "end_t": 1980.4198341412302,
+    "departure_t": 7116.552061749432,
+    "jet_TW_at_today_thrust": 163.275
+   },
+   {
+    "ve_km_s": 10000.0,
+    "mass_ratio_total": 6.81190441740838,
+    "propellant_t": 54848.814011665854,
+    "end_t": 9437.322101749878,
+    "departure_t": 64286.136113415734,
+    "jet_TW_at_today_thrust": 108.85
+   },
+   {
+    "ve_km_s": 6000.0,
+    "infeasible": "tank mass diverges",
+    "jet_TW_at_today_thrust": 65.31
+   }
+  ]
+ },
+ "constants": {
+  "eps_DHe3_J_kg": 352037603442444.06,
+  "ve_m_s": 19201172.08,
+  "dv_per_burn_m_s": 4796679.328
+ }
+}

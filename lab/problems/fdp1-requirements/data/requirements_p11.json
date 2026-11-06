@@ -1,0 +1,21 @@
+{
+ "meta": {
+  "title": "FDP-1 problem register, V3 addition",
+  "note": "V3 reads data/requirements.json (P01-P10, unchanged) plus this file. P11 is kept separate so the phase-1/2/V2 builds and their checks stay byte-identical."
+ },
+ "requirements": [
+  {
+   "id": "P11",
+   "title": "High-velocity collision protection envelope",
+   "description": "At ~0.016 c (~4.8e6 m/s) even small grains cause severe local damage. Critical non-sacrificial hardware must stay inside a validated collision-protection envelope, or it needs an independently justified protective system.",
+   "scope": ["fusion engine", "Fiji magnetic assemblies", "magnetic nozzle hardware", "propellant and fusion-fuel storage", "habitat structures", "essential control systems", "critical power distribution", "other mission-critical structures"],
+   "principle": "The envelope comes from the shield's real silhouette, its station and the modelled arrival directions, not from a universal diameter limit. Geometric coverage is necessary, not sufficient.",
+   "current": ["forward shield r 45 m (canon WORKING 90 m) at x 260.5 m after the T-B bow shift", "FDP-1 engine hardware reaches r 112.5 m (nozzle loop 3, its feeds and armour)"],
+   "target": "every critical part inside the shield shadow for the design arrival cone and margin, plus validated stopping, ejecta and penetration performance",
+   "gap": "nozzle loops 2 and 3, Fiji lattice, loop armour, sector feeds and strut hardware lie outside the 45 m shadow even for an aligned stream; the 3.6 km wings are edge-on and ~96 % outside it",
+   "classification": ["engineering", "materials"],
+   "status": "unresolved",
+   "unresolved": ["shield stopping capability (stack OPEN, OD-014)", "secondary ejecta and fragmentation", "particle penetration", "radiation and shock transmission", "mission survival probability", "attitude / arrival-cone envelope (OD-015)"]
+  }
+ ]
+}

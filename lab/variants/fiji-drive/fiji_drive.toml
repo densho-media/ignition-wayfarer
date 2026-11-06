@@ -1,0 +1,141 @@
+# Fiji Drive revision (lab/variants/fiji-drive, owner brief 2026-11-02). Every number here is a PROTOTYPE study choice unless a comment
+# names its source. Stations come from the LOCKED/WORKING drive (drive_manifold.geometry: core, common, throat, lattice, inlet, exit,
+# shield, thrust ring) and are not moved; the revision fills them with hardware. Units: metres, degrees.
+
+plasma_baseline = "dhe3_100keV"
+
+# D-3He plasma cases for the radiation split (fiji_budget.plasma_split). He-3:D = 1:1 by number is the B01 burn (he3_mass_share 0.5996).
+[plasma_cases.dhe3_100keV]
+Ti_keV = 100.0
+Te_keV = 100.0
+he3_to_d = 1.0
+tritium_burn = 0.1         # open mirror: most DDp tritons leave in the exhaust before burning (judgment)
+synchrotron_fraction = 0.01  # high-beta FRC-like core, wall reflection not counted (judgment; OPEN)
+
+[plasma_cases.hot_ion_mode]
+Ti_keV = 100.0
+Te_keV = 40.0              # electrons held cooler than ions (hot-ion mode, a stated Fiji-enabled operating goal, not shown physics)
+he3_to_d = 1.0
+tritium_burn = 0.0
+synchrotron_fraction = 0.005
+
+[plasma_cases.he3_rich]
+Ti_keV = 100.0
+Te_keV = 60.0
+he3_to_d = 2.0             # He-3 rich mix suppresses D-D neutrons
+tritium_burn = 0.0
+synchrotron_fraction = 0.005
+
+[budget]
+rays = 60000
+
+# ---------- 01 fusion core: an asymmetric linear (mirror/FRC) core, closed forward, leaky aft -------------------------------------
+[core]
+plasma_radius_m = 2.6          # core plasma column (inside the coil bores less shield inserts and limiters)
+coil_count = 6                 # central-cell solenoid coils
+coil_first_x_offset_m = 0.65   # from core_aft
+coil_pitch_m = 1.05
+coil_bore_m = 3.45
+coil_radial_m = 0.42
+coil_axial_m = 0.34
+casing_m = 0.05
+segments = 6                   # bolted casing segments per coil
+choke = { axial_m = 0.55, bore_m = 0.90, outer_m = 4.30 }      # forward mirror plug: high mirror ratio, closed end
+aft_mirror = { axial_m = 0.45, bore_m = 2.55, outer_m = 4.30 } # weaker aft mirror: the plasma leaks aft only
+limiter_m = 0.10               # tungsten limiter ring in each bore (strike point, not a wall)
+coil_shield_m = 0.08           # W/B4C insert protecting each winding's plasma side
+cage_bars = 6                  # axial coil-cage bars
+cage_bar_radius_m = 4.42
+cage_bar_m = 0.10
+cage_phase_deg = 0.0
+nbi = { count = 3, phase_deg = 90.0, length_m = 2.4, width_m = 0.8, height_m = 0.9, inner_r_m = 4.55, tangential_deg = 18.0 }
+icrf = { per_gap = 2, width_m = 0.55, height_m = 0.06, depth_m = 0.22, radius_m = 3.75 }
+fueler = { length_m = 0.85, radius_m = 0.45 }
+diagnostics = { per_coil = 3, size_m = 0.18, phase_deg = 60.0 }
+
+# ---------- mixing cell (common region): fusion products heat the injected hydrogen ------------------------------------------------
+[mixing]
+coils_x_offset_m = [0.7, 2.5, 4.3]   # from common_aft
+coil_bore_m = 3.05
+coil_radial_m = 0.35
+coil_axial_m = 0.30
+h2_ring_offset_m = 4.0               # from common_aft: the B01 injection station (h2_injection_x AFT+21 -> -123.75)
+h2_ring_radius_m = 3.80
+h2_injectors = 16
+coupling_bands = 4                   # Fiji coupling bands between the mixing coils
+
+# ---------- 04 plasma distribution: throat, four-way split, flux channels -----------------------------------------------------------
+[distribution]
+throat_coil = { bore_m = 2.55, radial_m = 0.45, axial_m = 0.70 }
+seed_coil = { bore_m = 3.45, radial_m = 0.30, axial_m = 0.30 }
+septum = { thickness_m = 0.22, r0_m = 0.35, r1_m = 3.05, x_fwd_offset_m = -1.6, x_aft_m = -136.0 }   # x_fwd relative to lattice_aft
+guide_coils_per_channel = 2
+guide_coil = { mid_radius_m = 0.95, tube_m = 0.11 }
+isolation_choke = { u = 0.10, mid_radius_m = 0.92, tube_m = 0.17 }
+control_modules_per_channel = 2
+cage_bar_radius_m = 3.85
+cage_bar_m = 0.09
+
+# ---------- 05-08 engines: one parametric magnetic nozzle, four placements ---------------------------------------------------------
+[engine]
+count = 4
+names = ["PORT_UPPER", "STARBOARD_UPPER", "PORT_LOWER", "STARBOARD_LOWER"]   # N1..N4 (+Y port, +Z upper; owner map 06!A48)
+expansion_coils = 5
+flare_exponent = 1.6           # coil bore follows r_throat + (r_exit - r_throat) u^p: slow first, then opening (field divergence)
+bore_margin_m = 0.12           # coil bore over the WORKING field envelope radius (throat 0.85, exit 1.75)
+coil_radial_m = [0.38, 0.30, 0.26, 0.23, 0.21, 0.20]
+coil_axial_m = [0.40, 0.26, 0.24, 0.22, 0.22, 0.26]
+coil_segments = 4
+segment_gap_deg = 3.0
+tie_struts = 6
+tie_m = 0.075
+tie_phase_deg = 15.0
+trim_modules_per_coil = 8
+trim_module_m = 0.16
+mount = { collar_r0_m = 1.42, collar_r1_m = 1.72, axial_m = 0.40, link_m = 0.11 }
+heating = { x0_offset_m = 0.45, length_m = 1.15, r0_m = 1.08, r1_m = 1.30 }   # ICRH trim booster, aft of the throat coil
+trim_injector = { offset_m = 0.15, radius_m = 1.20, tube_m = 0.05, stubs = 8 }
+coolant_tube_m = 0.035
+diag = { size_m = 0.16 }
+
+# ---------- 09 propellant ------------------------------------------------------------------------------------------------------------
+[propellant]
+fuel_line_m = 0.07
+trim_line_m = 0.055
+trim_header_x = -134.20
+trim_header_radius_m = 1.20
+valve_m = 0.28
+
+# ---------- 10 thermal ---------------------------------------------------------------------------------------------------------------
+[thermal]
+hx = { count = 3, x0 = -118.95, x1 = -115.55, r0_m = 5.45, r1_m = 6.30, width_m = 1.30 }   # in the blade planes, beside the blade roots
+loop_m = 0.10
+header_m = 0.05
+aft_ring = { x = -134.0, radius_m = 4.70, tube_m = 0.09 }
+shield_ring = { radius_m = 5.80, tube_m = 0.10 }
+
+# ---------- 11 shielding: the shadow shield as a layered stack (WORKING envelope r 5.7, 1.0 m kept) --------------------------------
+[shield]
+layers = [
+  { name = "W_HOT_FACE", t_m = 0.05, role = "tungsten hot face: stops the soft bremsstrahlung and takes the surface heat" },
+  { name = "B4C", t_m = 0.10, role = "boron carbide: thermal-neutron capture" },
+  { name = "LIH", t_m = 0.65, role = "lithium hydride: fast-neutron moderation (the main neutron layer)" },
+  { name = "W_GAMMA", t_m = 0.10, role = "tungsten: capture gammas and the hard X-ray tail" },
+  { name = "STEEL_SHELL", t_m = 0.10, role = "structural shell and coolant passages; forward face carries the spine hub" },
+]
+rim_band_m = 0.12
+
+# ---------- protected targets for the shadow cone (fiji_budget.shadow) ---------------------------------------------------------------
+# x and r of the forward structures' outermost points (from the built ship 2026-11-02); the governing one sets the cone.
+[[protected]]
+name = "thermal bulkhead rim"
+x = 48.9
+r = 37.0
+[[protected]]
+name = "ring A rim"
+x = 97.3
+r = 30.0
+[[protected]]
+name = "Brow rim"
+x = 119.5
+r = 45.0

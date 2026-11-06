@@ -1,0 +1,3565 @@
+{
+ "version": "fdp1-v1",
+ "variant": "baseline",
+ "architecture": "IFD-PH",
+ "tier": "optimistic",
+ "converged": true,
+ "iterations": [
+  {
+   "iteration": 1,
+   "departure_t": 10932.972339922417,
+   "fixed_t": 100.0,
+   "solid_angle": 0.002
+  },
+  {
+   "iteration": 2,
+   "departure_t": 18984.291475476963,
+   "fixed_t": 877.8057635852044,
+   "solid_angle": 0.019292677651019937
+  },
+  {
+   "iteration": 3,
+   "departure_t": 20445.29951213228,
+   "fixed_t": 1034.2014416784555,
+   "solid_angle": 0.019463730496848415
+  },
+  {
+   "iteration": 4,
+   "departure_t": 20704.492863716856,
+   "fixed_t": 1061.9746572081872,
+   "solid_angle": 0.01948875220550248
+  },
+  {
+   "iteration": 5,
+   "departure_t": 20750.365442588252,
+   "fixed_t": 1066.8906702843865,
+   "solid_angle": 0.019493054097469827
+  },
+  {
+   "iteration": 6,
+   "departure_t": 20758.48078033978,
+   "fixed_t": 1067.7603821136413,
+   "solid_angle": 0.019493811376134
+  },
+  {
+   "iteration": 7,
+   "departure_t": 20759.916442329042,
+   "fixed_t": 1067.9142356742775,
+   "solid_angle": 0.019493945245199786
+  },
+  {
+   "iteration": 8,
+   "departure_t": 20760.17041103537,
+   "fixed_t": 1067.941456491491,
+   "solid_angle": 0.01949396880306362
+  },
+  {
+   "iteration": 9,
+   "departure_t": 20760.21534595286,
+   "fixed_t": 1067.9462697288002,
+   "solid_angle": 0.019493973046665863
+  },
+  {
+   "iteration": 10,
+   "departure_t": 20760.2233310052,
+   "fixed_t": 1067.9471247838787,
+   "solid_angle": 0.019493973795495372
+  },
+  {
+   "iteration": 11,
+   "departure_t": 20760.22471499818,
+   "fixed_t": 1067.94727668527,
+   "solid_angle": 0.019493973930085333
+  }
+ ],
+ "payload_kg": 990233.8712519676,
+ "payload_reference_kg": 860000.0,
+ "payload_dropped": [
+  {
+   "id": "drive_package",
+   "kg": 250000.0
+  },
+  {
+   "id": "radiators_thermal",
+   "kg": 100000.0
+  },
+  {
+   "id": "tankage_O1",
+   "kg": 26705.85339401674
+  },
+  {
+   "id": "tankage_O2",
+   "kg": 26705.85339401674
+  },
+  {
+   "id": "tankage_O3",
+   "kg": 26705.85339401674
+  },
+  {
+   "id": "tankage_O4",
+   "kg": 26705.85339401674
+  },
+  {
+   "id": "tankage_O5",
+   "kg": 26705.85339401674
+  },
+  {
+   "id": "tankage_O6",
+   "kg": 26705.85339401674
+  },
+  {
+   "id": "tankage_O7",
+   "kg": 26705.85339401674
+  },
+  {
+   "id": "tankage_O8",
+   "kg": 26705.85339401674
+  },
+  {
+   "id": "tankage_O9",
+   "kg": 26705.85339401674
+  },
+  {
+   "id": "tankage_I1",
+   "kg": 22283.81578279682
+  },
+  {
+   "id": "tankage_I2",
+   "kg": 22283.81578279682
+  },
+  {
+   "id": "tankage_I3",
+   "kg": 22283.81578279682
+  },
+  {
+   "id": "tankage_I4",
+   "kg": 22283.81578279682
+  }
+ ],
+ "closure": {
+  "arch": "IFD-PH",
+  "tier": "optimistic",
+  "ve_km_s": 19201.17208,
+  "a0_g": 0.006895573489099627,
+  "converged": true,
+  "feasible": true,
+  "iterations": 3,
+  "departure_t": 20760.22471499818,
+  "end_t": 7643.011410583579,
+  "dry_t": 7118.322878424977,
+  "payload_t": 990.2338712519676,
+  "drive_t": 2749.952512620358,
+  "radiator_t": 2147.1217622673516,
+  "tank_t": 1231.0147322852993,
+  "reserve_t": 524.6885321765841,
+  "propellant_t": 13117.213304414603,
+  "propellant_fraction": 0.6318435125096743,
+  "mass_ratio_total": 2.7162362581652935,
+  "burn_propellant_t": [
+   4589.102304895969,
+   3574.669163929688,
+   2784.479138309257,
+   2168.962697279689
+  ],
+  "burn_start_t": [
+   20760.22471499818,
+   16171.122410102213,
+   12596.453246172525,
+   9811.974107863269
+  ],
+  "species_t": {
+   "helium_3": 7864.983840009758,
+   "deuterium": 5252.229428537151,
+   "hydrogen": 3.586769474582873e-05
+  },
+  "fused_t": 8809.36851997087,
+  "lost_unburned_t": 4307.844748576038,
+  "recovered_t": 0.0,
+  "fusion_energy_J": 3.101228987961709e+21,
+  "jet_energy_J": 2.418059954208428e+21,
+  "thrust_MN": 1.4038577924973217,
+  "jet_power_TW": 13.477857524795006,
+  "fusion_power_TW": 17.285726261156753,
+  "mass_flow_kg_s": 0.07311313010728049,
+  "heat_GW": {
+   "hot": 77.119991621787,
+   "warm": 24.390182287933825
+  },
+  "radiator_area_km2": {
+   "hot": 0.07197682933887152,
+   "warm": 1.8438509139375612
+  },
+  "burns": [
+   {
+    "start_t": 20760.22471499818,
+    "propellant_t": 4589.1023048959705,
+    "days": 726.4715644431283,
+    "distance_AU": 964.4240758513943,
+    "a_start_g": 0.006895573489099627,
+    "a_end_g": 0.008852425424908245
+   },
+   {
+    "start_t": 16171.12241010221,
+    "propellant_t": 3574.669163929686,
+    "days": 565.8831133740603,
+    "distance_AU": 751.235595950724,
+    "a_start_g": 0.008852425424908245,
+    "a_end_g": 0.011364600207283748
+   },
+   {
+    "start_t": 12596.453246172525,
+    "propellant_t": 2784.479138309257,
+    "days": 440.7931620109382,
+    "distance_AU": 585.1729905490248,
+    "a_start_g": 0.011364600207283748,
+    "a_end_g": 0.014589689454823336
+   },
+   {
+    "start_t": 9811.974107863269,
+    "propellant_t": 2168.962697279689,
+    "days": 343.3546735775553,
+    "distance_AU": 455.81896107402906,
+    "a_start_g": 0.014589689454823336,
+    "a_end_g": 0.01873000673193577
+   }
+  ],
+  "burn_time_years": 5.685154040809533,
+  "const_accel_years": 8.990951251644438,
+  "a_end_g": 0.01873000673193577,
+  "tanks": {
+   "required_m3": {
+    "helium_3": 143746.30079198861,
+    "deuterium": 32112.94614069062,
+    "hydrogen": 0.0005426761950809567
+   },
+   "existing_m3": {
+    "helium_3": 20271.0,
+    "deuterium": 4886.0,
+    "hydrogen": 15022.0
+   },
+   "surplus_m3": {
+    "helium_3": -123475.30079198861,
+    "deuterium": -27226.94614069062,
+    "hydrogen": 15021.999457323805
+   },
+   "ratio": {
+    "helium_3": 7.091228888164798,
+    "deuterium": 6.57244088020684,
+    "hydrogen": 3.6125429042801e-08
+   },
+   "vessels_L_equivalent": 52.0524633640241,
+   "farm_length_m": 125.17918509159425,
+   "farm_bays": 4.376894583622176,
+   "axial_load_N": 218780230.90587947,
+   "axial_load_ratio": 9.309797059824659,
+   "cooling_W": 1730454.9951574975,
+   "tank_mass_kg": 1231014.732327488,
+   "outcome": "complete storage redesign required"
+  },
+  "alpha_jet_kg_per_W": 2.841050212386712e-07,
+  "architecture": {
+   "arch": "IFD-PH",
+   "tier": "optimistic",
+   "eta_jet": 0.7797102257185157,
+   "burn_fraction": 0.6715884189437099,
+   "alpha_hw": 9.730602061959146e-08,
+   "alpha_parts": {
+    "nozzle_structure": 4.981689689995962e-09,
+    "driver": 3.7037037037037036e-08,
+    "loop_armour": 5.2872938925584754e-09,
+    "other": 5e-08
+   },
+   "alpha_rad": 1.2421356961817653e-07,
+   "fixed_kg": 1067947.27668527,
+   "geometry": {
+    "fuel_rhoR_g_cm2": 90.44650464760352,
+    "fuel_mass_g": 0.3443669497338516,
+    "yield_J": 81416741890.70187,
+    "yield_t_TNT": 19.459068329517656,
+    "rep_Hz": 212.31169240068093,
+    "standoff_m": 43.19071770932621,
+    "xray_escape": 0.011516936655141615,
+    "neutron_escape": 5.52213171235667e-06,
+    "gain": 3000.0,
+    "tamper_per_fuel": 2.7160984572560665e-09
+   },
+   "heat": {
+    "hot": 0.004461484027725553,
+    "warm": 0.00141100130358663,
+    "cryo_lift": 2.2461851120141399e-07
+   },
+   "ledger": {
+    "jet": 0.7797102257185157,
+    "plume_to_space": 0.2031194486745196,
+    "plume_to_hardware": 0.004145294870908563,
+    "recovery_loss": 9.179526412677707e-05,
+    "driver_loss": 0.0004074074074074074,
+    "electric_house": 0.001,
+    "cryo_input": 3.3692776680212097e-06,
+    "radiation_on_hardware": 0.00022439389269021258,
+    "radiation_on_conductor": 2.2461851120141399e-07,
+    "radiation_to_space": 0.011297840275652558
+   },
+   "radiators": {
+    "hot": {
+     "kind": "hot",
+     "T_K": 1800.0,
+     "emissivity": 0.9,
+     "areal_kg_m2": 3.0,
+     "flux_W_m2": 1071455.8050160992,
+     "kg_per_W": 3.2999288313668928e-06
+    },
+    "warm": {
+     "kind": "warm",
+     "T_K": 600.0,
+     "emissivity": 0.9,
+     "areal_kg_m2": 1.0,
+     "flux_W_m2": 13227.8494446432,
+     "kg_per_W": 7.75980784469061e-05
+    },
+    "cryo_W_per_W": 15.0
+   },
+   "feasible": true,
+   "reason": ""
+  }
+ },
+ "fusion": {
+  "pellet_fuel_mass_g": 0.3443669497338516,
+  "pellet_rate_Hz": 212.31169240068093,
+  "pulse_period_ms": 4.710056185284277,
+  "yield_per_pulse_J": 81416741890.70187,
+  "yield_per_pulse_t_TNT": 19.459068329517656,
+  "driver_energy_per_pulse_J": 27138913.96356729,
+  "target_gain": 3000.0,
+  "burn_fraction": 0.6715884189437099,
+  "fuel_rhoR_g_cm2": 90.44650464760352,
+  "gross_fusion_power_W": 17285726261156.754,
+  "driver_wall_plug_power_W": 12804241674.930927,
+  "driver_beam_power_W": 5761908753.718918,
+  "electric_load_W": 30148208347.554924,
+  "recovered_power_W": 31734956155.320976,
+  "recovery_fraction_of_fusion": 0.0018359052825355389,
+  "directed_exhaust_efficiency": 0.7797102257185157,
+  "jet_power_W": 13477857524795.006,
+  "mass_flow_kg_s": 0.07311313010728049,
+  "species_flow_kg_s": {
+   "helium_3": 0.043838090716475896,
+   "deuterium": 0.029275039190884124,
+   "hydrogen": 1.9992046875668534e-10
+  },
+  "xray_escape_fraction": 0.011516936655141615,
+  "neutron_escape_fraction": 5.52213171235667e-06,
+  "tamper_per_fuel": 2.7160984572560665e-09,
+  "xray_standoff_m": 43.19071770932621,
+  "ledger_per_W_fusion": {
+   "jet": 0.7797102257185157,
+   "plume_to_space": 0.2031194486745196,
+   "plume_to_hardware": 0.004145294870908563,
+   "recovery_loss": 9.179526412677707e-05,
+   "driver_loss": 0.0004074074074074074,
+   "electric_house": 0.001,
+   "cryo_input": 3.3692776680212097e-06,
+   "radiation_on_hardware": 0.00022439389269021258,
+   "radiation_on_conductor": 2.2461851120141399e-07,
+   "radiation_to_space": 0.011297840275652558
+  },
+  "ledger_W": {
+   "jet": 13477857524795.006,
+   "plume_to_space": 3511067188104.8247,
+   "plume_to_hardware": 71654432410.30255,
+   "recovery_loss": 1586747807.766051,
+   "driver_loss": 7042332921.21201,
+   "electric_house": 17285726261.156754,
+   "cryo_input": 58240411.46724321,
+   "radiation_on_hardware": 3878811403.718398,
+   "radiation_on_conductor": 3882694.0978162144,
+   "radiation_to_space": 195291374347.20187
+  }
+ },
+ "pellet": {
+  "he3_kg": 0.00020647987032311398,
+  "d_kg": 0.00013788707941073767,
+  "core_radius_mm": 8.439662617651216,
+  "outer_radius_mm": 9.148682721490905,
+  "shell_mm": 0.7090201038396897,
+  "diameter_mm": 18.29736544298181,
+  "concept": "frozen D2 shell holding liquid He-3 at ~1.5 K (He-3 does not solidify below ~29 bar)"
+ },
+ "layout": {
+  "x_attach": -144.75,
+  "x_module_fwd": -144.75,
+  "x_shield_fwd": -180.75,
+  "x_shield_aft": -184.34909396754733,
+  "x_burn": -227.53981167687354,
+  "d_shield": 43.19071770932621,
+  "R_s": 43.19071770932621,
+  "module_length": 36.0,
+  "module_radius": 6.5,
+  "added_bay_length": 0.0,
+  "gallery_outer_r": 14.0,
+  "x_gallery_aft": -144.75,
+  "x_forward_shield_aft": 260.59999999999997,
+  "wing_aft_x": -178.75,
+  "wing_forward_x": 88.0,
+  "wing_length": 266.75
+ },
+ "nozzle": {
+  "focal_length_m": 32.393038281994656,
+  "loops": [
+   {
+    "name": "Loop_1",
+    "phi_deg": 59.99999999999999,
+    "d": 43.19071770932621,
+    "x": -205.94445282221042,
+    "r": 37.404258743958934,
+    "minor_radius_m": 0.07132170937294373,
+    "envelope_radius_m": 0.21396512811883117,
+    "mass_kg": 15022.917135624557,
+    "armour_kg": 15944.50537116136,
+    "solid_angle_share": 0.00429025601570145
+   },
+   {
+    "name": "Loop_2",
+    "phi_deg": 90.0,
+    "d": 64.78607656398931,
+    "x": -227.53981167687354,
+    "r": 64.78607656398931,
+    "minor_radius_m": 0.07132170937294373,
+    "envelope_radius_m": 0.21396512811883117,
+    "mass_kg": 26020.45575679884,
+    "armour_kg": 27616.693404406335,
+    "solid_angle_share": 0.0033026406207435246
+   },
+   {
+    "name": "Loop_3",
+    "phi_deg": 119.99999999999999,
+    "d": 129.57215312797857,
+    "x": -292.3258882408628,
+    "r": 112.21277623187676,
+    "minor_radius_m": 0.07132170937294373,
+    "envelope_radius_m": 0.21396512811883117,
+    "mass_kg": 45068.75140687366,
+    "armour_kg": 47833.51611348407,
+    "solid_angle_share": 0.0014300853385671507
+   }
+  ],
+  "linear_density_kg_m": 63.9224409755412,
+  "solid_angle_share": 0.009022981975012126,
+  "vertex": {
+   "x": -195.1467733948789,
+   "opening_radius_m": 0.0
+  },
+  "trim_sectors": 4,
+  "plume_half_angle_deg": 20.0
+ },
+ "drivers": {
+  "type": "heavy-ion induction linac",
+  "beams": 9,
+  "galleries": 3,
+  "azimuths_deg": [
+   90.0,
+   225.0,
+   315.0
+  ],
+  "radius_m": 12.0,
+  "linac_length_m": 444.44444444444446,
+  "folds": 2,
+  "pass_length_m": 222.22222222222223,
+  "magnetic_rigidity_Tm": 43.89538656546144,
+  "arc_radius_m": 4.3895386565461445,
+  "beam_energy_per_pulse_J": 27138913.96356729,
+  "electric_energy_per_pulse_J": 60308697.69888312,
+  "ions_per_pulse": 4.234694444365379e+16,
+  "mass_kg": 640212.0837465464,
+  "storage_mass_kg": 150771.74424720783,
+  "core_mass_kg": 489440.3394993386,
+  "core_cross_section_m2": 0.04078669495827822,
+  "core_radius_m": 0.11394212666956208,
+  "storage_exceeds_budget": false,
+  "x_aft": -144.75,
+  "x_fwd": 81.86176087876838
+ },
+ "shield": {
+  "envelopes": [
+   {
+    "name": "habitat_rings",
+    "kind": "crew",
+    "radius_m": 30.0,
+    "nearest_x_m": 95.14936247723134,
+    "half_angle_deg": 5.3114478809530725
+   },
+   {
+    "name": "crew_trunk_and_refuge",
+    "kind": "crew",
+    "radius_m": 6.5,
+    "nearest_x_m": 95.14936247723134,
+    "half_angle_deg": 1.1539656078898763
+   },
+   {
+    "name": "hull_and_spine",
+    "kind": "hardware",
+    "radius_m": 7.5,
+    "nearest_x_m": -144.75,
+    "half_angle_deg": 5.176344390532376
+   },
+   {
+    "name": "equipment_module",
+    "kind": "hardware",
+    "radius_m": 6.5,
+    "nearest_x_m": -180.75,
+    "half_angle_deg": 7.908862675643373
+   },
+   {
+    "name": "driver_galleries",
+    "kind": "hardware",
+    "radius_m": 14.0,
+    "nearest_x_m": -144.75,
+    "half_angle_deg": 9.598083470051419
+   },
+   {
+    "name": "existing_tank_farm",
+    "kind": "hardware",
+    "radius_m": 34.5,
+    "nearest_x_m": 109.25,
+    "half_angle_deg": 5.848850981155888
+   },
+   {
+    "name": "forward_shield_and_eye",
+    "kind": "hardware",
+    "radius_m": 45.0,
+    "nearest_x_m": 260.59999999999997,
+    "half_angle_deg": 5.267022291039475
+   },
+   {
+    "name": "proposed_tanks",
+    "kind": "hardware",
+    "radius_m": 34.5,
+    "nearest_x_m": 139.85,
+    "half_angle_deg": 5.364668540005351
+   }
+  ],
+  "crew_half_angle_deg": 5.3114478809530725,
+  "hardware_half_angle_deg": 9.598083470051419,
+  "hardware_cone_set_by": "driver_galleries",
+  "distance_from_burn_m": 43.19071770932621,
+  "crew_distance_m": 322.6891741541049,
+  "neutron_escape_W": 95454057.1578502,
+  "xray_escape_W": 199078614387.86023,
+  "unshielded_crew_dose_Sv_h": {
+   "neutron": 28099.01202532177,
+   "xray": 1402130.4476883828
+  },
+  "allowed_dose_rate_Sv_h": 1.1407711613050422e-06,
+  "neutron_decades": 10.391492516490134,
+  "xray_decades": 12.089589886564706,
+  "hardware_decades": 3.0,
+  "lih_core_m": 3.589094364364405,
+  "lih_annulus_m": 1.0361632918473207,
+  "w_face_m": 0.01,
+  "w_needed_m": 0.0032482274741208253,
+  "radius_crew_aft_m": 5.0153858110560465,
+  "radius_crew_fwd_m": 5.349989013081561,
+  "radius_hw_aft_m": 8.303677054980849,
+  "radius_hw_fwd_m": 8.480586336318831,
+  "thickness_m": 3.599094364364405,
+  "mass_kg": {
+   "lih_core": 236314.41287871415,
+   "lih_annulus": 113721.36307724677,
+   "w_face": 41806.911239211266,
+   "axial_plug": 6020.786629241376,
+   "frame": 31829.077905953083,
+   "total": 429692.55173036666
+  },
+  "placeholder_kg": 100000.0,
+  "solid_angle_share": 0.00899207529183782,
+  "streaming": {
+   "beam_ports": {
+    "count": 9,
+    "share": 4.824603945908559e-05,
+    "power_W": 4605.280208167452,
+    "mitigation": "final-focus dog-leg: the line of sight ends in a LiH beam dump as thick as the crew core"
+   },
+   "pellet_bore": {
+    "share": 7.538443665482123e-07,
+    "plug_length_m": 3.839094364364405,
+    "plug_radius_m": 0.8,
+    "power_W": 71.95750325261643,
+    "plug_decades": 11.115316652995554,
+    "axis_dose_Sv_h": 2.154638407911948e-07,
+    "ok": true,
+    "mitigation": "on-axis LiH plug behind the injector breech; the crew trunk lies on this axis"
+   }
+  },
+  "limits": [
+   "first-order exponential removal; no build-up factor, no secondary (n,gamma) photons, no scatter around the rim",
+   "neutron spectrum taken as D-D 2.45 MeV; the 14.1 MeV D-T share needs a longer relaxation length",
+   "hardware decades are a placeholder (cryogenic heating, activation, electronics) until a transport calculation",
+   "edge-on radiator planes are exempt from the shadow; their edge and rim-scatter exposure is not computed"
+  ]
+ },
+ "structure": {
+  "thrust_N": 1403857.7924973217,
+  "peak_accel_g": 0.01873000673193577,
+  "design_accel_g": 1.5,
+  "struts": [
+   {
+    "area_m2": 0.024371686303634624,
+    "radius_m": 0.278527354014233,
+    "mass_kg": 1543.1617473608242,
+    "governs": "buckling",
+    "loop": "Loop_1",
+    "length_m": 37.24576925128575,
+    "load_N": 403541.67264111113,
+    "count": 6,
+    "a": [
+     -205.94445282221042,
+     37.404258743958934
+    ],
+    "b": [
+     -184.34909396754733,
+     7.058125496733721
+    ]
+   },
+   {
+    "area_m2": 0.01802842470023249,
+    "radius_m": 0.23955429059827013,
+    "mass_kg": 1068.7977648556139,
+    "governs": "buckling",
+    "loop": "Loop_2",
+    "length_m": 34.872961893005446,
+    "load_N": 251888.89288890758,
+    "count": 6,
+    "a": [
+     -227.53981167687354,
+     64.78607656398931
+    ],
+    "b": [
+     -205.94445282221042,
+     37.404258743958934
+    ]
+   },
+   {
+    "area_m2": 0.02571243962501049,
+    "radius_m": 0.286086066255326,
+    "mass_kg": 3509.579851312795,
+    "governs": "buckling",
+    "loop": "Loop_3",
+    "length_m": 80.29027063065035,
+    "load_N": 96656.67554974608,
+    "count": 6,
+    "a": [
+     -292.3258882408628,
+     112.21277623187676
+    ],
+    "b": [
+     -227.53981167687354,
+     64.78607656398931
+    ]
+   }
+  ],
+  "mass_kg": {
+   "nozzle_struts": 36729.2361811754,
+   "equipment_module_frame": 54000.0,
+   "driver_galleries": 81580.2339163566,
+   "radiator_wing_spars": 356306.1355898896,
+   "added_tank_bay_frames": 0.0,
+   "total": 528615.6056874216
+  },
+  "shield_frame_kg": 31829.077905953083,
+  "interface_load_N": {
+   "hull_thrust_ring": 1403857.7924973217,
+   "q45_collar_limit_N": 23500000.0,
+   "ratio_to_q45": 0.059738629467971135
+  },
+  "interloop_force_scale_N": 2334666672.148425,
+  "limits": [
+   "struts carry thrust only; the GN-scale attraction between coaxial loops is inside the virial nozzle mass, its load paths are not designed",
+   "wing spars sized per metre (in-plane thrust loads are tiny); manoeuvre, deployment and habitat-spin-up loads are unresolved",
+   "no dynamic (pulse-rate) fatigue analysis: 100 Hz for 5.7 years is ~1.8e10 load cycles on the nozzle structure"
+  ]
+ },
+ "solid_angle": {
+  "shares": {
+   "nozzle_loops": 0.009022981975012126,
+   "nozzle_struts": 0.0014789167650063925,
+   "shadow_shield": 0.00899207529183782
+  },
+  "total": 0.019493974031856338,
+  "used_in_closure": 0.019493974031856338,
+  "scenario_value": 0.002
+ },
+ "thermal": {
+  "circuits": {
+   "hot_W": {
+    "plume_on_hardware": 71654432410.30255,
+    "recovery_conversion_loss": 1586747807.766051,
+    "radiation_on_nozzle_loops": 1795346876.0669022,
+    "radiation_on_nozzle_struts": 294267305.57262665,
+    "radiation_on_shadow_shield": 1789197222.0788693
+   },
+   "warm_W": {
+    "driver_waste": 7042332921.21201,
+    "power_and_target_systems": 17285726261.156754,
+    "cryoplant_input": 58240411.46724321,
+    "coil_conductor_heating": 3882694.0978162144
+   },
+   "hot_total_W": 77119991621.787,
+   "warm_total_W": 24390182287.933823,
+   "to_space_W": {
+    "jet": 13477857524795.006,
+    "plume_to_space": 3511067188104.8247,
+    "radiation_to_space": 195291374347.20187
+   },
+   "closure_hot_W": 77119991621.78699,
+   "closure_warm_W": 24390182287.933826,
+   "unaccounted_W": 0.0
+  },
+  "radiators": {
+   "hot": {
+    "kind": "hot",
+    "T_K": 1800.0,
+    "flux_W_m2": 1071455.8050160992,
+    "areal_kg_m2": 3.0,
+    "planform_m2": 71976.82933887154,
+    "mass_kg": 254490.48382750814,
+    "existing_blades_planform_m2": 14934.509904371585,
+    "reused_m2": 14934.509904371585,
+    "extension_m2": 57042.31943449995
+   },
+   "warm": {
+    "kind": "warm",
+    "T_K": 600.0,
+    "flux_W_m2": 13227.8494446432,
+    "areal_kg_m2": 1.0,
+    "planform_m2": 1843850.913937561,
+    "mass_kg": 1892631.2785134285
+   },
+   "closure_radiator_kg": 2147121.7622673516,
+   "check_kg": 2147121.762340937,
+   "cryo_W_per_W": 15.0
+  },
+  "layouts": {
+   "W2": {
+    "wings": 2,
+    "azimuths_deg": [
+     0.0,
+     180.0
+    ],
+    "view_factor_loss": 0.0,
+    "span_m": 3456.1404197517545,
+    "hot_band_m": 106.92093614714142,
+    "warm_root_radius_m": 116.92093614714142,
+    "tip_radius_m": 3573.0613558988957,
+    "planform_each_m2": 921925.4569687805,
+    "total_planform_m2": 1843850.913937561,
+    "area_penalty": 1.0,
+    "note": "one plane (port/starboard); no mutual view",
+    "view_factor_mass_kg": 0.0,
+    "spar_mass_kg": 356306.1355898896,
+    "extra_mass_kg": 356306.1355898896
+   },
+   "W3": {
+    "wings": 3,
+    "azimuths_deg": [
+     90.0,
+     210.0,
+     330.0
+    ],
+    "view_factor_loss": 0.1339745962155614,
+    "span_m": 2660.5381356010953,
+    "hot_band_m": 71.28062409809428,
+    "warm_root_radius_m": 81.28062409809428,
+    "tip_radius_m": 2741.8187596991897,
+    "planform_each_m2": 709698.5476715922,
+    "total_planform_m2": 2129095.6430147765,
+    "area_penalty": 1.1547005383792517,
+    "note": "three wings between the existing blades (30/150/270 deg)",
+    "view_factor_mass_kg": 285244.72907721595,
+    "spar_mass_kg": 409772.8139548785,
+    "extra_mass_kg": 695017.5430320944
+   },
+   "W6": {
+    "wings": 6,
+    "azimuths_deg": [
+     0.0,
+     60.0,
+     120.0,
+     180.0,
+     240.0,
+     300.0
+    ],
+    "view_factor_loss": 0.5,
+    "span_m": 2304.093613167837,
+    "hot_band_m": 35.64031204904714,
+    "warm_root_radius_m": 45.64031204904714,
+    "tip_radius_m": 2349.733925216884,
+    "planform_each_m2": 614616.9713125204,
+    "total_planform_m2": 3687701.8278751224,
+    "area_penalty": 2.0000000000000004,
+    "note": "six wings; 30 deg from the blades",
+    "view_factor_mass_kg": 1843850.913937562,
+    "spar_mass_kg": 701920.1775650652,
+    "extra_mass_kg": 2545771.0915026274
+   },
+   "ENVELOPE": {
+    "wings": 3,
+    "azimuths_deg": [
+     90.0,
+     210.0,
+     330.0
+    ],
+    "view_factor_loss": 0.1339745962155614,
+    "span_m": 0.0,
+    "hot_band_m": 71.28062409809428,
+    "tip_radius_m": 30.0,
+    "planform_each_m2": 0.0,
+    "rejects_share": 0.0,
+    "shortfall_m2": 1843850.913937561,
+    "note": "W3 limited to the habitat-ring radius: rejects 0.0 % of the warm heat"
+   }
+  },
+  "selected_layout": "W2",
+  "low_loop": {
+   "added_cooling_W": 1482902.4839090654,
+   "area_m2": 1793.673252922711,
+   "mass_kg": 4484.183132306778
+  }
+ },
+ "tanks": {
+  "summary": {
+   "required_m3": {
+    "helium_3": 143746.30079198861,
+    "deuterium": 32112.94614069062,
+    "hydrogen": 0.0005426761950809567
+   },
+   "existing_m3": {
+    "helium_3": 20271.0,
+    "deuterium": 4886.0,
+    "hydrogen": 15022.0
+   },
+   "ratio": {
+    "helium_3": 7.091228888164798,
+    "deuterium": 6.57244088020684,
+    "hydrogen": 3.6125429042801e-08
+   },
+   "outcome": "complete storage redesign required",
+   "vessels_L_equivalent": 52.0524633640241,
+   "farm_length_m_same_section": 125.17918509159425,
+   "tank_mass_kg": 1231014.732327488,
+   "cooling_W": 1730454.9951574975,
+   "axial_load_1p5g_N": 218780230.90587947,
+   "axial_load_ratio_1p5g": 9.309797059824659,
+   "idle_hydrogen_m3": 15022.137229208574,
+   "deficit_m3": {
+    "helium_3": 123475.02418365127,
+    "deuterium": 27226.447215650718,
+    "hydrogen": 0.0
+   },
+   "loaded_t": {
+    "helium_3": 7864.983840009758,
+    "deuterium": 5252.229428537151,
+    "hydrogen": 3.586769474582873e-05
+   },
+   "density_kg_m3": {
+    "helium_3": 58.61,
+    "deuterium": 175.2,
+    "hydrogen": 70.8
+   }
+  },
+  "options": {
+   "T-A": {
+    "vessels": [
+     {
+      "name": "FDP1_TA_Tank_B1_00_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": -175.35,
+      "x1": -146.75,
+      "R": 27.75,
+      "azimuth_deg": 6.2,
+      "y": 27.58768925023175,
+      "z": 2.9969821208421337,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TA_Tank_B1_01_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": -175.35,
+      "x1": -146.75,
+      "R": 27.75,
+      "azimuth_deg": 70.9,
+      "y": 9.080296696670132,
+      "z": 26.22233231237148,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TA_Tank_B1_02_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": -175.35,
+      "x1": -146.75,
+      "R": 27.75,
+      "azimuth_deg": 101.2,
+      "y": -5.390003246354222,
+      "z": 27.221505560940066,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TA_Tank_B1_03_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": -175.35,
+      "x1": -146.75,
+      "R": 27.75,
+      "azimuth_deg": 131.5,
+      "y": -18.387706337986717,
+      "z": 20.783521251894808,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TA_Tank_B1_04_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": -175.35,
+      "x1": -146.75,
+      "R": 27.75,
+      "azimuth_deg": 174.1,
+      "y": -27.603003175001586,
+      "z": 2.852492895846097,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TA_Tank_B1_05_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": -175.35,
+      "x1": -146.75,
+      "R": 27.75,
+      "azimuth_deg": 227.65,
+      "y": -18.69400137081989,
+      "z": -20.50845710305346,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TA_Tank_B1_06_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": -175.35,
+      "x1": -146.75,
+      "R": 27.75,
+      "azimuth_deg": 257.95,
+      "y": -5.793234476286982,
+      "z": -27.13855070380067,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TA_Tank_B1_07_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": -175.35,
+      "x1": -146.75,
+      "R": 27.75,
+      "azimuth_deg": 294.1,
+      "y": 11.331170275583437,
+      "z": -25.331148418216934,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TA_Tank_B1_08_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": -175.35,
+      "x1": -146.75,
+      "R": 27.75,
+      "azimuth_deg": 335.9,
+      "y": 25.33114841821693,
+      "z": -11.33117027558345,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TA_Tank_B1_09_deuterium",
+      "key": "deuterium",
+      "species": "deuterium",
+      "x0": -175.35,
+      "x1": -146.75,
+      "R": 13.5,
+      "azimuth_deg": 93.72,
+      "y": -0.8758886748066362,
+      "z": 13.47155592458961,
+      "a_env": 5.75,
+      "a": 5.45,
+      "liquid_m3": 2443.2494625199506
+     },
+     {
+      "name": "FDP1_TA_Tank_B1_10_deuterium",
+      "key": "deuterium",
+      "species": "deuterium",
+      "x0": -175.35,
+      "x1": -146.75,
+      "R": 13.5,
+      "azimuth_deg": 150.3,
+      "y": -11.726525444915582,
+      "z": 6.6886920238375,
+      "a_env": 5.75,
+      "a": 5.45,
+      "liquid_m3": 2443.2494625199506
+     },
+     {
+      "name": "FDP1_TA_Tank_B1_11_deuterium",
+      "key": "deuterium",
+      "species": "deuterium",
+      "x0": -175.35,
+      "x1": -146.75,
+      "R": 13.5,
+      "azimuth_deg": 273.72,
+      "y": 0.8758886748066406,
+      "z": -13.47155592458961,
+      "a_env": 5.75,
+      "a": 5.45,
+      "liquid_m3": 2443.2494625199506
+     },
+     {
+      "name": "FDP1_TA_Tank_B1_12_deuterium",
+      "key": "deuterium",
+      "species": "deuterium",
+      "x0": -175.35,
+      "x1": -146.75,
+      "R": 13.5,
+      "azimuth_deg": 356.24,
+      "y": 13.47094115605268,
+      "z": -0.8852933808439356,
+      "a_env": 5.75,
+      "a": 5.45,
+      "liquid_m3": 2443.2494625199506
+     },
+     {
+      "name": "FDP1_TA_Tank_B2_13_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": -205.95,
+      "x1": -177.35,
+      "R": 27.75,
+      "azimuth_deg": 6.2,
+      "y": 27.58768925023175,
+      "z": 2.9969821208421337,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TA_Tank_B2_14_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": -205.95,
+      "x1": -177.35,
+      "R": 27.75,
+      "azimuth_deg": 70.9,
+      "y": 9.080296696670132,
+      "z": 26.22233231237148,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TA_Tank_B2_15_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": -205.95,
+      "x1": -177.35,
+      "R": 27.75,
+      "azimuth_deg": 101.2,
+      "y": -5.390003246354222,
+      "z": 27.221505560940066,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TA_Tank_B2_16_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": -205.95,
+      "x1": -177.35,
+      "R": 27.75,
+      "azimuth_deg": 131.5,
+      "y": -18.387706337986717,
+      "z": 20.783521251894808,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TA_Tank_B2_17_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": -205.95,
+      "x1": -177.35,
+      "R": 27.75,
+      "azimuth_deg": 174.1,
+      "y": -27.603003175001586,
+      "z": 2.852492895846097,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TA_Tank_B2_18_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": -205.95,
+      "x1": -177.35,
+      "R": 27.75,
+      "azimuth_deg": 227.65,
+      "y": -18.69400137081989,
+      "z": -20.50845710305346,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TA_Tank_B2_19_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": -205.95,
+      "x1": -177.35,
+      "R": 27.75,
+      "azimuth_deg": 257.95,
+      "y": -5.793234476286982,
+      "z": -27.13855070380067,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TA_Tank_B2_20_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": -205.95,
+      "x1": -177.35,
+      "R": 27.75,
+      "azimuth_deg": 294.1,
+      "y": 11.331170275583437,
+      "z": -25.331148418216934,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TA_Tank_B2_21_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": -205.95,
+      "x1": -177.35,
+      "R": 27.75,
+      "azimuth_deg": 335.9,
+      "y": 25.33114841821693,
+      "z": -11.33117027558345,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TA_Tank_B2_22_deuterium",
+      "key": "deuterium",
+      "species": "deuterium",
+      "x0": -205.95,
+      "x1": -177.35,
+      "R": 13.5,
+      "azimuth_deg": 93.72,
+      "y": -0.8758886748066362,
+      "z": 13.47155592458961,
+      "a_env": 5.75,
+      "a": 5.45,
+      "liquid_m3": 2443.2494625199506
+     },
+     {
+      "name": "FDP1_TA_Tank_B2_23_deuterium",
+      "key": "deuterium",
+      "species": "deuterium",
+      "x0": -205.95,
+      "x1": -177.35,
+      "R": 13.5,
+      "azimuth_deg": 150.3,
+      "y": -11.726525444915582,
+      "z": 6.6886920238375,
+      "a_env": 5.75,
+      "a": 5.45,
+      "liquid_m3": 2443.2494625199506
+     },
+     {
+      "name": "FDP1_TA_Tank_B2_24_deuterium",
+      "key": "deuterium",
+      "species": "deuterium",
+      "x0": -205.95,
+      "x1": -177.35,
+      "R": 13.5,
+      "azimuth_deg": 273.72,
+      "y": 0.8758886748066406,
+      "z": -13.47155592458961,
+      "a_env": 5.75,
+      "a": 5.45,
+      "liquid_m3": 2443.2494625199506
+     },
+     {
+      "name": "FDP1_TA_Tank_B2_25_deuterium",
+      "key": "deuterium",
+      "species": "deuterium",
+      "x0": -205.95,
+      "x1": -177.35,
+      "R": 13.5,
+      "azimuth_deg": 356.24,
+      "y": 13.47094115605268,
+      "z": -0.8852933808439356,
+      "a_env": 5.75,
+      "a": 5.45,
+      "liquid_m3": 2443.2494625199506
+     },
+     {
+      "name": "FDP1_TA_Tank_B3_26_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": -236.54999999999998,
+      "x1": -207.95,
+      "R": 27.75,
+      "azimuth_deg": 6.2,
+      "y": 27.58768925023175,
+      "z": 2.9969821208421337,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TA_Tank_B3_27_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": -236.54999999999998,
+      "x1": -207.95,
+      "R": 27.75,
+      "azimuth_deg": 70.9,
+      "y": 9.080296696670132,
+      "z": 26.22233231237148,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TA_Tank_B3_28_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": -236.54999999999998,
+      "x1": -207.95,
+      "R": 27.75,
+      "azimuth_deg": 101.2,
+      "y": -5.390003246354222,
+      "z": 27.221505560940066,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TA_Tank_B3_29_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": -236.54999999999998,
+      "x1": -207.95,
+      "R": 27.75,
+      "azimuth_deg": 131.5,
+      "y": -18.387706337986717,
+      "z": 20.783521251894808,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TA_Tank_B3_30_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": -236.54999999999998,
+      "x1": -207.95,
+      "R": 27.75,
+      "azimuth_deg": 174.1,
+      "y": -27.603003175001586,
+      "z": 2.852492895846097,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TA_Tank_B3_31_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": -236.54999999999998,
+      "x1": -207.95,
+      "R": 27.75,
+      "azimuth_deg": 227.65,
+      "y": -18.69400137081989,
+      "z": -20.50845710305346,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TA_Tank_B3_32_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": -236.54999999999998,
+      "x1": -207.95,
+      "R": 27.75,
+      "azimuth_deg": 257.95,
+      "y": -5.793234476286982,
+      "z": -27.13855070380067,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TA_Tank_B3_33_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": -236.54999999999998,
+      "x1": -207.95,
+      "R": 27.75,
+      "azimuth_deg": 294.1,
+      "y": 11.331170275583437,
+      "z": -25.331148418216934,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TA_Tank_B3_34_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": -236.54999999999998,
+      "x1": -207.95,
+      "R": 27.75,
+      "azimuth_deg": 335.9,
+      "y": 25.33114841821693,
+      "z": -11.33117027558345,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TA_Tank_B3_35_deuterium",
+      "key": "deuterium",
+      "species": "deuterium",
+      "x0": -236.54999999999998,
+      "x1": -207.95,
+      "R": 13.5,
+      "azimuth_deg": 93.72,
+      "y": -0.8758886748066362,
+      "z": 13.47155592458961,
+      "a_env": 5.75,
+      "a": 5.45,
+      "liquid_m3": 2443.2494625199506
+     },
+     {
+      "name": "FDP1_TA_Tank_B3_36_deuterium",
+      "key": "deuterium",
+      "species": "deuterium",
+      "x0": -236.54999999999998,
+      "x1": -207.95,
+      "R": 13.5,
+      "azimuth_deg": 150.3,
+      "y": -11.726525444915582,
+      "z": 6.6886920238375,
+      "a_env": 5.75,
+      "a": 5.45,
+      "liquid_m3": 2443.2494625199506
+     },
+     {
+      "name": "FDP1_TA_Tank_B3_37_deuterium",
+      "key": "deuterium",
+      "species": "deuterium",
+      "x0": -236.54999999999998,
+      "x1": -207.95,
+      "R": 13.5,
+      "azimuth_deg": 273.72,
+      "y": 0.8758886748066406,
+      "z": -13.47155592458961,
+      "a_env": 5.75,
+      "a": 5.45,
+      "liquid_m3": 2443.2494625199506
+     },
+     {
+      "name": "FDP1_TA_Tank_B3_38_deuterium",
+      "key": "deuterium",
+      "species": "deuterium",
+      "x0": -236.54999999999998,
+      "x1": -207.95,
+      "R": 13.5,
+      "azimuth_deg": 356.24,
+      "y": 13.47094115605268,
+      "z": -0.8852933808439356,
+      "a_env": 5.75,
+      "a": 5.45,
+      "liquid_m3": 2443.2494625199506
+     },
+     {
+      "name": "FDP1_TA_Tank_B4_39_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": -267.15,
+      "x1": -238.54999999999998,
+      "R": 27.75,
+      "azimuth_deg": 6.2,
+      "y": 27.58768925023175,
+      "z": 2.9969821208421337,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TA_Tank_B4_40_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": -267.15,
+      "x1": -238.54999999999998,
+      "R": 27.75,
+      "azimuth_deg": 70.9,
+      "y": 9.080296696670132,
+      "z": 26.22233231237148,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TA_Tank_B4_41_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": -267.15,
+      "x1": -238.54999999999998,
+      "R": 27.75,
+      "azimuth_deg": 101.2,
+      "y": -5.390003246354222,
+      "z": 27.221505560940066,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TA_Tank_B4_42_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": -267.15,
+      "x1": -238.54999999999998,
+      "R": 27.75,
+      "azimuth_deg": 131.5,
+      "y": -18.387706337986717,
+      "z": 20.783521251894808,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TA_Tank_B4_43_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": -267.15,
+      "x1": -238.54999999999998,
+      "R": 27.75,
+      "azimuth_deg": 174.1,
+      "y": -27.603003175001586,
+      "z": 2.852492895846097,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TA_Tank_B4_44_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": -267.15,
+      "x1": -238.54999999999998,
+      "R": 27.75,
+      "azimuth_deg": 227.65,
+      "y": -18.69400137081989,
+      "z": -20.50845710305346,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TA_Tank_B4_45_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": -267.15,
+      "x1": -238.54999999999998,
+      "R": 27.75,
+      "azimuth_deg": 257.95,
+      "y": -5.793234476286982,
+      "z": -27.13855070380067,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TA_Tank_B4_46_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": -267.15,
+      "x1": -238.54999999999998,
+      "R": 27.75,
+      "azimuth_deg": 294.1,
+      "y": 11.331170275583437,
+      "z": -25.331148418216934,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TA_Tank_B4_47_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": -267.15,
+      "x1": -238.54999999999998,
+      "R": 27.75,
+      "azimuth_deg": 335.9,
+      "y": 25.33114841821693,
+      "z": -11.33117027558345,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TA_Tank_B4_48_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": -267.15,
+      "x1": -238.54999999999998,
+      "R": 13.5,
+      "azimuth_deg": 93.72,
+      "y": -0.8758886748066362,
+      "z": 13.47155592458961,
+      "a_env": 5.75,
+      "a": 5.45,
+      "liquid_m3": 2443.2494625199506
+     }
+    ],
+    "bays": 4,
+    "added_length_m": 122.39999999999998,
+    "where": "aft of the hull, ahead of the equipment module",
+    "added_m3": {
+     "helium_3": 124070.90911254403,
+     "deuterium": 29318.993550239407
+    },
+    "count": 49,
+    "max_radius_m": 34.5,
+    "spare_m3": {
+     "helium_3": 595.8849288927595,
+     "deuterium": 2092.546334588689
+    }
+   },
+   "T-B": {
+    "vessels": [
+     {
+      "name": "FDP1_TB_Tank_B1_00_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 139.85,
+      "x1": 168.45,
+      "R": 27.75,
+      "azimuth_deg": 6.2,
+      "y": 27.58768925023175,
+      "z": 2.9969821208421337,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TB_Tank_B1_01_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 139.85,
+      "x1": 168.45,
+      "R": 27.75,
+      "azimuth_deg": 70.9,
+      "y": 9.080296696670132,
+      "z": 26.22233231237148,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TB_Tank_B1_02_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 139.85,
+      "x1": 168.45,
+      "R": 27.75,
+      "azimuth_deg": 101.2,
+      "y": -5.390003246354222,
+      "z": 27.221505560940066,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TB_Tank_B1_03_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 139.85,
+      "x1": 168.45,
+      "R": 27.75,
+      "azimuth_deg": 131.5,
+      "y": -18.387706337986717,
+      "z": 20.783521251894808,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TB_Tank_B1_04_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 139.85,
+      "x1": 168.45,
+      "R": 27.75,
+      "azimuth_deg": 174.1,
+      "y": -27.603003175001586,
+      "z": 2.852492895846097,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TB_Tank_B1_05_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 139.85,
+      "x1": 168.45,
+      "R": 27.75,
+      "azimuth_deg": 227.65,
+      "y": -18.69400137081989,
+      "z": -20.50845710305346,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TB_Tank_B1_06_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 139.85,
+      "x1": 168.45,
+      "R": 27.75,
+      "azimuth_deg": 257.95,
+      "y": -5.793234476286982,
+      "z": -27.13855070380067,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TB_Tank_B1_07_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 139.85,
+      "x1": 168.45,
+      "R": 27.75,
+      "azimuth_deg": 294.1,
+      "y": 11.331170275583437,
+      "z": -25.331148418216934,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TB_Tank_B1_08_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 139.85,
+      "x1": 168.45,
+      "R": 27.75,
+      "azimuth_deg": 335.9,
+      "y": 25.33114841821693,
+      "z": -11.33117027558345,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TB_Tank_B1_09_deuterium",
+      "key": "deuterium",
+      "species": "deuterium",
+      "x0": 139.85,
+      "x1": 168.45,
+      "R": 13.5,
+      "azimuth_deg": 93.72,
+      "y": -0.8758886748066362,
+      "z": 13.47155592458961,
+      "a_env": 5.75,
+      "a": 5.45,
+      "liquid_m3": 2443.2494625199506
+     },
+     {
+      "name": "FDP1_TB_Tank_B1_10_deuterium",
+      "key": "deuterium",
+      "species": "deuterium",
+      "x0": 139.85,
+      "x1": 168.45,
+      "R": 13.5,
+      "azimuth_deg": 150.3,
+      "y": -11.726525444915582,
+      "z": 6.6886920238375,
+      "a_env": 5.75,
+      "a": 5.45,
+      "liquid_m3": 2443.2494625199506
+     },
+     {
+      "name": "FDP1_TB_Tank_B1_11_deuterium",
+      "key": "deuterium",
+      "species": "deuterium",
+      "x0": 139.85,
+      "x1": 168.45,
+      "R": 13.5,
+      "azimuth_deg": 273.72,
+      "y": 0.8758886748066406,
+      "z": -13.47155592458961,
+      "a_env": 5.75,
+      "a": 5.45,
+      "liquid_m3": 2443.2494625199506
+     },
+     {
+      "name": "FDP1_TB_Tank_B1_12_deuterium",
+      "key": "deuterium",
+      "species": "deuterium",
+      "x0": 139.85,
+      "x1": 168.45,
+      "R": 13.5,
+      "azimuth_deg": 356.24,
+      "y": 13.47094115605268,
+      "z": -0.8852933808439356,
+      "a_env": 5.75,
+      "a": 5.45,
+      "liquid_m3": 2443.2494625199506
+     },
+     {
+      "name": "FDP1_TB_Tank_B2_13_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 170.45,
+      "x1": 199.04999999999998,
+      "R": 27.75,
+      "azimuth_deg": 6.2,
+      "y": 27.58768925023175,
+      "z": 2.9969821208421337,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TB_Tank_B2_14_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 170.45,
+      "x1": 199.04999999999998,
+      "R": 27.75,
+      "azimuth_deg": 70.9,
+      "y": 9.080296696670132,
+      "z": 26.22233231237148,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TB_Tank_B2_15_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 170.45,
+      "x1": 199.04999999999998,
+      "R": 27.75,
+      "azimuth_deg": 101.2,
+      "y": -5.390003246354222,
+      "z": 27.221505560940066,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TB_Tank_B2_16_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 170.45,
+      "x1": 199.04999999999998,
+      "R": 27.75,
+      "azimuth_deg": 131.5,
+      "y": -18.387706337986717,
+      "z": 20.783521251894808,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TB_Tank_B2_17_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 170.45,
+      "x1": 199.04999999999998,
+      "R": 27.75,
+      "azimuth_deg": 174.1,
+      "y": -27.603003175001586,
+      "z": 2.852492895846097,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TB_Tank_B2_18_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 170.45,
+      "x1": 199.04999999999998,
+      "R": 27.75,
+      "azimuth_deg": 227.65,
+      "y": -18.69400137081989,
+      "z": -20.50845710305346,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TB_Tank_B2_19_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 170.45,
+      "x1": 199.04999999999998,
+      "R": 27.75,
+      "azimuth_deg": 257.95,
+      "y": -5.793234476286982,
+      "z": -27.13855070380067,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TB_Tank_B2_20_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 170.45,
+      "x1": 199.04999999999998,
+      "R": 27.75,
+      "azimuth_deg": 294.1,
+      "y": 11.331170275583437,
+      "z": -25.331148418216934,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TB_Tank_B2_21_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 170.45,
+      "x1": 199.04999999999998,
+      "R": 27.75,
+      "azimuth_deg": 335.9,
+      "y": 25.33114841821693,
+      "z": -11.33117027558345,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TB_Tank_B2_22_deuterium",
+      "key": "deuterium",
+      "species": "deuterium",
+      "x0": 170.45,
+      "x1": 199.04999999999998,
+      "R": 13.5,
+      "azimuth_deg": 93.72,
+      "y": -0.8758886748066362,
+      "z": 13.47155592458961,
+      "a_env": 5.75,
+      "a": 5.45,
+      "liquid_m3": 2443.2494625199506
+     },
+     {
+      "name": "FDP1_TB_Tank_B2_23_deuterium",
+      "key": "deuterium",
+      "species": "deuterium",
+      "x0": 170.45,
+      "x1": 199.04999999999998,
+      "R": 13.5,
+      "azimuth_deg": 150.3,
+      "y": -11.726525444915582,
+      "z": 6.6886920238375,
+      "a_env": 5.75,
+      "a": 5.45,
+      "liquid_m3": 2443.2494625199506
+     },
+     {
+      "name": "FDP1_TB_Tank_B2_24_deuterium",
+      "key": "deuterium",
+      "species": "deuterium",
+      "x0": 170.45,
+      "x1": 199.04999999999998,
+      "R": 13.5,
+      "azimuth_deg": 273.72,
+      "y": 0.8758886748066406,
+      "z": -13.47155592458961,
+      "a_env": 5.75,
+      "a": 5.45,
+      "liquid_m3": 2443.2494625199506
+     },
+     {
+      "name": "FDP1_TB_Tank_B2_25_deuterium",
+      "key": "deuterium",
+      "species": "deuterium",
+      "x0": 170.45,
+      "x1": 199.04999999999998,
+      "R": 13.5,
+      "azimuth_deg": 356.24,
+      "y": 13.47094115605268,
+      "z": -0.8852933808439356,
+      "a_env": 5.75,
+      "a": 5.45,
+      "liquid_m3": 2443.2494625199506
+     },
+     {
+      "name": "FDP1_TB_Tank_B3_26_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 201.04999999999998,
+      "x1": 229.64999999999998,
+      "R": 27.75,
+      "azimuth_deg": 6.2,
+      "y": 27.58768925023175,
+      "z": 2.9969821208421337,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TB_Tank_B3_27_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 201.04999999999998,
+      "x1": 229.64999999999998,
+      "R": 27.75,
+      "azimuth_deg": 70.9,
+      "y": 9.080296696670132,
+      "z": 26.22233231237148,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TB_Tank_B3_28_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 201.04999999999998,
+      "x1": 229.64999999999998,
+      "R": 27.75,
+      "azimuth_deg": 101.2,
+      "y": -5.390003246354222,
+      "z": 27.221505560940066,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TB_Tank_B3_29_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 201.04999999999998,
+      "x1": 229.64999999999998,
+      "R": 27.75,
+      "azimuth_deg": 131.5,
+      "y": -18.387706337986717,
+      "z": 20.783521251894808,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TB_Tank_B3_30_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 201.04999999999998,
+      "x1": 229.64999999999998,
+      "R": 27.75,
+      "azimuth_deg": 174.1,
+      "y": -27.603003175001586,
+      "z": 2.852492895846097,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TB_Tank_B3_31_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 201.04999999999998,
+      "x1": 229.64999999999998,
+      "R": 27.75,
+      "azimuth_deg": 227.65,
+      "y": -18.69400137081989,
+      "z": -20.50845710305346,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TB_Tank_B3_32_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 201.04999999999998,
+      "x1": 229.64999999999998,
+      "R": 27.75,
+      "azimuth_deg": 257.95,
+      "y": -5.793234476286982,
+      "z": -27.13855070380067,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TB_Tank_B3_33_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 201.04999999999998,
+      "x1": 229.64999999999998,
+      "R": 27.75,
+      "azimuth_deg": 294.1,
+      "y": 11.331170275583437,
+      "z": -25.331148418216934,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TB_Tank_B3_34_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 201.04999999999998,
+      "x1": 229.64999999999998,
+      "R": 27.75,
+      "azimuth_deg": 335.9,
+      "y": 25.33114841821693,
+      "z": -11.33117027558345,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TB_Tank_B3_35_deuterium",
+      "key": "deuterium",
+      "species": "deuterium",
+      "x0": 201.04999999999998,
+      "x1": 229.64999999999998,
+      "R": 13.5,
+      "azimuth_deg": 93.72,
+      "y": -0.8758886748066362,
+      "z": 13.47155592458961,
+      "a_env": 5.75,
+      "a": 5.45,
+      "liquid_m3": 2443.2494625199506
+     },
+     {
+      "name": "FDP1_TB_Tank_B3_36_deuterium",
+      "key": "deuterium",
+      "species": "deuterium",
+      "x0": 201.04999999999998,
+      "x1": 229.64999999999998,
+      "R": 13.5,
+      "azimuth_deg": 150.3,
+      "y": -11.726525444915582,
+      "z": 6.6886920238375,
+      "a_env": 5.75,
+      "a": 5.45,
+      "liquid_m3": 2443.2494625199506
+     },
+     {
+      "name": "FDP1_TB_Tank_B3_37_deuterium",
+      "key": "deuterium",
+      "species": "deuterium",
+      "x0": 201.04999999999998,
+      "x1": 229.64999999999998,
+      "R": 13.5,
+      "azimuth_deg": 273.72,
+      "y": 0.8758886748066406,
+      "z": -13.47155592458961,
+      "a_env": 5.75,
+      "a": 5.45,
+      "liquid_m3": 2443.2494625199506
+     },
+     {
+      "name": "FDP1_TB_Tank_B3_38_deuterium",
+      "key": "deuterium",
+      "species": "deuterium",
+      "x0": 201.04999999999998,
+      "x1": 229.64999999999998,
+      "R": 13.5,
+      "azimuth_deg": 356.24,
+      "y": 13.47094115605268,
+      "z": -0.8852933808439356,
+      "a_env": 5.75,
+      "a": 5.45,
+      "liquid_m3": 2443.2494625199506
+     },
+     {
+      "name": "FDP1_TB_Tank_B4_39_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 231.64999999999998,
+      "x1": 260.25,
+      "R": 27.75,
+      "azimuth_deg": 6.2,
+      "y": 27.58768925023175,
+      "z": 2.9969821208421337,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TB_Tank_B4_40_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 231.64999999999998,
+      "x1": 260.25,
+      "R": 27.75,
+      "azimuth_deg": 70.9,
+      "y": 9.080296696670132,
+      "z": 26.22233231237148,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TB_Tank_B4_41_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 231.64999999999998,
+      "x1": 260.25,
+      "R": 27.75,
+      "azimuth_deg": 101.2,
+      "y": -5.390003246354222,
+      "z": 27.221505560940066,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TB_Tank_B4_42_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 231.64999999999998,
+      "x1": 260.25,
+      "R": 27.75,
+      "azimuth_deg": 131.5,
+      "y": -18.387706337986717,
+      "z": 20.783521251894808,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TB_Tank_B4_43_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 231.64999999999998,
+      "x1": 260.25,
+      "R": 27.75,
+      "azimuth_deg": 174.1,
+      "y": -27.603003175001586,
+      "z": 2.852492895846097,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TB_Tank_B4_44_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 231.64999999999998,
+      "x1": 260.25,
+      "R": 27.75,
+      "azimuth_deg": 227.65,
+      "y": -18.69400137081989,
+      "z": -20.50845710305346,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TB_Tank_B4_45_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 231.64999999999998,
+      "x1": 260.25,
+      "R": 27.75,
+      "azimuth_deg": 257.95,
+      "y": -5.793234476286982,
+      "z": -27.13855070380067,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TB_Tank_B4_46_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 231.64999999999998,
+      "x1": 260.25,
+      "R": 27.75,
+      "azimuth_deg": 294.1,
+      "y": 11.331170275583437,
+      "z": -25.331148418216934,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TB_Tank_B4_47_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 231.64999999999998,
+      "x1": 260.25,
+      "R": 27.75,
+      "azimuth_deg": 335.9,
+      "y": 25.33114841821693,
+      "z": -11.33117027558345,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TB_Tank_B4_48_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 231.64999999999998,
+      "x1": 260.25,
+      "R": 13.5,
+      "azimuth_deg": 93.72,
+      "y": -0.8758886748066362,
+      "z": 13.47155592458961,
+      "a_env": 5.75,
+      "a": 5.45,
+      "liquid_m3": 2443.2494625199506
+     }
+    ],
+    "bays": 4,
+    "added_length_m": 122.39999999999998,
+    "where": "ahead of the existing farm; bow assembly moves forward",
+    "added_m3": {
+     "helium_3": 124070.90911254403,
+     "deuterium": 29318.993550239407
+    },
+    "count": 49,
+    "max_radius_m": 34.5,
+    "spare_m3": {
+     "helium_3": 595.8849288927595,
+     "deuterium": 2092.546334588689
+    }
+   },
+   "T-C": {
+    "vessels": [
+     {
+      "name": "FDP1_TC_Tank_R1_00_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 109.25,
+      "x1": 137.85,
+      "R": 41.5,
+      "azimuth_deg": 0.0,
+      "y": 41.5,
+      "z": 0.0,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TC_Tank_R1_01_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 109.25,
+      "x1": 137.85,
+      "R": 41.5,
+      "azimuth_deg": 21.176470588235293,
+      "y": 38.697597520280766,
+      "z": 14.991529146766846,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TC_Tank_R1_02_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 109.25,
+      "x1": 137.85,
+      "R": 41.5,
+      "azimuth_deg": 42.35294117647059,
+      "y": 30.66887006465735,
+      "z": 27.958369211332123,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TC_Tank_R1_03_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 109.25,
+      "x1": 137.85,
+      "R": 41.5,
+      "azimuth_deg": 63.529411764705884,
+      "y": 18.49814176472634,
+      "z": 37.149276591235086,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TC_Tank_R1_04_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 109.25,
+      "x1": 137.85,
+      "R": 41.5,
+      "azimuth_deg": 84.70588235294117,
+      "y": 3.8291369177270336,
+      "z": 41.32296831624393,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TC_Tank_R1_05_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 109.25,
+      "x1": 137.85,
+      "R": 41.5,
+      "azimuth_deg": 105.88235294117646,
+      "y": -11.35701408799143,
+      "z": 39.915764191672,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TC_Tank_R1_06_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 109.25,
+      "x1": 137.85,
+      "R": 41.5,
+      "azimuth_deg": 127.05882352941177,
+      "y": -25.009337409739135,
+      "z": 33.11771493212994,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TC_Tank_R1_07_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 109.25,
+      "x1": 137.85,
+      "R": 41.5,
+      "azimuth_deg": 148.23529411764707,
+      "y": -35.28401113277899,
+      "z": 21.846934759410264,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TC_Tank_R1_08_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 109.25,
+      "x1": 137.85,
+      "R": 41.5,
+      "azimuth_deg": 169.41176470588235,
+      "y": -40.79338363688193,
+      "z": 7.6256049893876705,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TC_Tank_R1_09_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 109.25,
+      "x1": 137.85,
+      "R": 41.5,
+      "azimuth_deg": 190.58823529411765,
+      "y": -40.79338363688193,
+      "z": -7.6256049893876785,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TC_Tank_R1_10_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 109.25,
+      "x1": 137.85,
+      "R": 41.5,
+      "azimuth_deg": 211.76470588235293,
+      "y": -35.28401113277899,
+      "z": -21.846934759410253,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TC_Tank_R1_11_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 109.25,
+      "x1": 137.85,
+      "R": 41.5,
+      "azimuth_deg": 232.94117647058823,
+      "y": -25.009337409739146,
+      "z": -33.11771493212994,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TC_Tank_R1_12_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 109.25,
+      "x1": 137.85,
+      "R": 41.5,
+      "azimuth_deg": 254.11764705882354,
+      "y": -11.357014087991448,
+      "z": -39.91576419167199,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TC_Tank_R1_13_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 109.25,
+      "x1": 137.85,
+      "R": 41.5,
+      "azimuth_deg": 275.29411764705884,
+      "y": 3.829136917727051,
+      "z": -41.32296831624393,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TC_Tank_R1_14_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 109.25,
+      "x1": 137.85,
+      "R": 41.5,
+      "azimuth_deg": 296.47058823529414,
+      "y": 18.49814176472635,
+      "z": -37.14927659123508,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TC_Tank_R1_15_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 109.25,
+      "x1": 137.85,
+      "R": 41.5,
+      "azimuth_deg": 317.6470588235294,
+      "y": 30.66887006465733,
+      "z": -27.958369211332148,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TC_Tank_R1_16_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 109.25,
+      "x1": 137.85,
+      "R": 41.5,
+      "azimuth_deg": 338.8235294117647,
+      "y": 38.697597520280766,
+      "z": -14.991529146766851,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TC_Tank_R2_00_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 109.25,
+      "x1": 137.85,
+      "R": 56.0,
+      "azimuth_deg": 7.5,
+      "y": 55.520912236933384,
+      "z": 7.309466764322888,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TC_Tank_R2_01_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 109.25,
+      "x1": 137.85,
+      "R": 56.0,
+      "azimuth_deg": 22.5,
+      "y": 51.737253820632056,
+      "z": 21.43027221244503,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TC_Tank_R2_02_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 109.25,
+      "x1": 137.85,
+      "R": 56.0,
+      "azimuth_deg": 37.5,
+      "y": 44.42778705630917,
+      "z": 34.09064002448836,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TC_Tank_R2_03_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 109.25,
+      "x1": 137.85,
+      "R": 56.0,
+      "azimuth_deg": 52.5,
+      "y": 34.09064002448836,
+      "z": 44.42778705630917,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TC_Tank_R2_04_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 109.25,
+      "x1": 137.85,
+      "R": 56.0,
+      "azimuth_deg": 67.5,
+      "y": 21.430272212445033,
+      "z": 51.737253820632056,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TC_Tank_R2_05_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 109.25,
+      "x1": 137.85,
+      "R": 56.0,
+      "azimuth_deg": 82.5,
+      "y": 7.309466764322896,
+      "z": 55.520912236933384,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TC_Tank_R2_06_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 109.25,
+      "x1": 137.85,
+      "R": 56.0,
+      "azimuth_deg": 97.5,
+      "y": -7.30946676432289,
+      "z": 55.520912236933384,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TC_Tank_R2_07_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 109.25,
+      "x1": 137.85,
+      "R": 56.0,
+      "azimuth_deg": 112.5,
+      "y": -21.430272212445026,
+      "z": 51.737253820632056,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TC_Tank_R2_08_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 109.25,
+      "x1": 137.85,
+      "R": 56.0,
+      "azimuth_deg": 127.5,
+      "y": -34.09064002448836,
+      "z": 44.42778705630917,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TC_Tank_R2_09_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 109.25,
+      "x1": 137.85,
+      "R": 56.0,
+      "azimuth_deg": 142.5,
+      "y": -44.427787056309164,
+      "z": 34.090640024488366,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TC_Tank_R2_10_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 109.25,
+      "x1": 137.85,
+      "R": 56.0,
+      "azimuth_deg": 157.5,
+      "y": -51.737253820632056,
+      "z": 21.430272212445033,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TC_Tank_R2_11_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 109.25,
+      "x1": 137.85,
+      "R": 56.0,
+      "azimuth_deg": 172.5,
+      "y": -55.520912236933384,
+      "z": 7.309466764322888,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TC_Tank_R2_12_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 109.25,
+      "x1": 137.85,
+      "R": 56.0,
+      "azimuth_deg": 187.5,
+      "y": -55.520912236933384,
+      "z": -7.309466764322874,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TC_Tank_R2_13_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 109.25,
+      "x1": 137.85,
+      "R": 56.0,
+      "azimuth_deg": 202.5,
+      "y": -51.73725382063206,
+      "z": -21.430272212445022,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TC_Tank_R2_14_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 109.25,
+      "x1": 137.85,
+      "R": 56.0,
+      "azimuth_deg": 217.5,
+      "y": -44.42778705630917,
+      "z": -34.09064002448836,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TC_Tank_R2_15_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 109.25,
+      "x1": 137.85,
+      "R": 56.0,
+      "azimuth_deg": 232.5,
+      "y": -34.090640024488366,
+      "z": -44.42778705630916,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TC_Tank_R2_16_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 109.25,
+      "x1": 137.85,
+      "R": 56.0,
+      "azimuth_deg": 247.5,
+      "y": -21.43027221244501,
+      "z": -51.73725382063206,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TC_Tank_R2_17_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 109.25,
+      "x1": 137.85,
+      "R": 56.0,
+      "azimuth_deg": 262.5,
+      "y": -7.309466764322892,
+      "z": -55.520912236933384,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TC_Tank_R2_18_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 109.25,
+      "x1": 137.85,
+      "R": 56.0,
+      "azimuth_deg": 277.5,
+      "y": 7.309466764322871,
+      "z": -55.520912236933384,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TC_Tank_R2_19_helium_3",
+      "key": "helium_3",
+      "species": "helium_3",
+      "x0": 109.25,
+      "x1": 137.85,
+      "R": 56.0,
+      "azimuth_deg": 292.5,
+      "y": 21.43027221244504,
+      "z": -51.73725382063205,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TC_Tank_R2_20_deuterium",
+      "key": "deuterium",
+      "species": "deuterium",
+      "x0": 109.25,
+      "x1": 137.85,
+      "R": 56.0,
+      "azimuth_deg": 307.5,
+      "y": 34.09064002448835,
+      "z": -44.42778705630917,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TC_Tank_R2_21_deuterium",
+      "key": "deuterium",
+      "species": "deuterium",
+      "x0": 109.25,
+      "x1": 137.85,
+      "R": 56.0,
+      "azimuth_deg": 322.5,
+      "y": 44.42778705630916,
+      "z": -34.090640024488366,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TC_Tank_R2_22_deuterium",
+      "key": "deuterium",
+      "species": "deuterium",
+      "x0": 109.25,
+      "x1": 137.85,
+      "R": 56.0,
+      "azimuth_deg": 337.5,
+      "y": 51.73725382063206,
+      "z": -21.430272212445015,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TC_Tank_R2_23_deuterium",
+      "key": "deuterium",
+      "species": "deuterium",
+      "x0": 109.25,
+      "x1": 137.85,
+      "R": 56.0,
+      "azimuth_deg": 352.5,
+      "y": 55.520912236933384,
+      "z": -7.309466764322894,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TC_Tank_R3_00_deuterium",
+      "key": "deuterium",
+      "species": "deuterium",
+      "x0": 109.25,
+      "x1": 137.85,
+      "R": 70.5,
+      "azimuth_deg": 12.0,
+      "y": 68.9594058517333,
+      "z": 14.657774202652034,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TC_Tank_R3_01_deuterium",
+      "key": "deuterium",
+      "species": "deuterium",
+      "x0": 109.25,
+      "x1": 137.85,
+      "R": 70.5,
+      "azimuth_deg": 24.0,
+      "y": 64.40495476380336,
+      "z": 28.674933336843914,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TC_Tank_R3_02_deuterium",
+      "key": "deuterium",
+      "species": "deuterium",
+      "x0": 109.25,
+      "x1": 137.85,
+      "R": 70.5,
+      "azimuth_deg": 36.0,
+      "y": 57.035698103433795,
+      "z": 41.43886028661936,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TC_Tank_R3_03_deuterium",
+      "key": "deuterium",
+      "species": "deuterium",
+      "x0": 109.25,
+      "x1": 137.85,
+      "R": 70.5,
+      "azimuth_deg": 48.0,
+      "y": 47.173707748299506,
+      "z": 52.391710196156296,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     },
+     {
+      "name": "FDP1_TC_Tank_R3_04_deuterium",
+      "key": "deuterium",
+      "species": "deuterium",
+      "x0": 109.25,
+      "x1": 137.85,
+      "R": 70.5,
+      "azimuth_deg": 60.0,
+      "y": 35.25000000000001,
+      "z": 61.05479096680292,
+      "a_env": 6.75,
+      "a": 6.45,
+      "liquid_m3": 3378.546101389558
+     }
+    ],
+    "bays": 0,
+    "added_length_m": 0.0,
+    "rings": 3,
+    "where": "third vessel ring around the existing farm",
+    "added_m3": {
+     "helium_3": 125006.20575141364,
+     "deuterium": 30406.91491250602
+    },
+    "count": 46,
+    "max_radius_m": 77.25,
+    "spare_m3": {
+     "helium_3": 1531.1815677623672,
+     "deuterium": 3180.467696855303
+    }
+   }
+  },
+  "existing": [
+   {
+    "name": "Fuel_Tank_O1_He3",
+    "id": "O1",
+    "species": "helium-3",
+    "ring": "outer",
+    "tank_class": "L",
+    "azimuth_deg": 6.2,
+    "R": 27.75,
+    "y": 27.58768925023175,
+    "z": 2.9969821208421337,
+    "a_env": 6.75,
+    "a": 6.45,
+    "head": 3.225,
+    "x0": 109.25,
+    "x1": 137.85,
+    "x_shell": [
+     109.55,
+     137.54999999999998
+    ],
+    "y_ring": [
+     112.77499999999999,
+     134.325
+    ],
+    "liquid_m3": 3378.546101389558,
+    "length": 28.599999999999994,
+    "key": "helium_3"
+   },
+   {
+    "name": "Fuel_Tank_O2_He3",
+    "id": "O2",
+    "species": "helium-3",
+    "ring": "outer",
+    "tank_class": "L",
+    "azimuth_deg": 70.9,
+    "R": 27.75,
+    "y": 9.080296696670132,
+    "z": 26.22233231237148,
+    "a_env": 6.75,
+    "a": 6.45,
+    "head": 3.225,
+    "x0": 109.25,
+    "x1": 137.85,
+    "x_shell": [
+     109.55,
+     137.54999999999998
+    ],
+    "y_ring": [
+     112.77499999999999,
+     134.325
+    ],
+    "liquid_m3": 3378.546101389558,
+    "length": 28.599999999999994,
+    "key": "helium_3"
+   },
+   {
+    "name": "Fuel_Tank_O3_H2",
+    "id": "O3",
+    "species": "hydrogen",
+    "ring": "outer",
+    "tank_class": "L",
+    "azimuth_deg": 101.2,
+    "R": 27.75,
+    "y": -5.390003246354222,
+    "z": 27.221505560940066,
+    "a_env": 6.75,
+    "a": 6.45,
+    "head": 3.225,
+    "x0": 109.25,
+    "x1": 137.85,
+    "x_shell": [
+     109.55,
+     137.54999999999998
+    ],
+    "y_ring": [
+     112.77499999999999,
+     134.325
+    ],
+    "liquid_m3": 3378.546101389558,
+    "length": 28.599999999999994,
+    "key": "hydrogen"
+   },
+   {
+    "name": "Fuel_Tank_O4_He3",
+    "id": "O4",
+    "species": "helium-3",
+    "ring": "outer",
+    "tank_class": "L",
+    "azimuth_deg": 131.5,
+    "R": 27.75,
+    "y": -18.387706337986717,
+    "z": 20.783521251894808,
+    "a_env": 6.75,
+    "a": 6.45,
+    "head": 3.225,
+    "x0": 109.25,
+    "x1": 137.85,
+    "x_shell": [
+     109.55,
+     137.54999999999998
+    ],
+    "y_ring": [
+     112.77499999999999,
+     134.325
+    ],
+    "liquid_m3": 3378.546101389558,
+    "length": 28.599999999999994,
+    "key": "helium_3"
+   },
+   {
+    "name": "Fuel_Tank_O5_He3",
+    "id": "O5",
+    "species": "helium-3",
+    "ring": "outer",
+    "tank_class": "L",
+    "azimuth_deg": 174.1,
+    "R": 27.75,
+    "y": -27.603003175001586,
+    "z": 2.852492895846097,
+    "a_env": 6.75,
+    "a": 6.45,
+    "head": 3.225,
+    "x0": 109.25,
+    "x1": 137.85,
+    "x_shell": [
+     109.55,
+     137.54999999999998
+    ],
+    "y_ring": [
+     112.77499999999999,
+     134.325
+    ],
+    "liquid_m3": 3378.546101389558,
+    "length": 28.599999999999994,
+    "key": "helium_3"
+   },
+   {
+    "name": "Fuel_Tank_O6_H2",
+    "id": "O6",
+    "species": "hydrogen",
+    "ring": "outer",
+    "tank_class": "L",
+    "azimuth_deg": 227.65,
+    "R": 27.75,
+    "y": -18.69400137081989,
+    "z": -20.50845710305346,
+    "a_env": 6.75,
+    "a": 6.45,
+    "head": 3.225,
+    "x0": 109.25,
+    "x1": 137.85,
+    "x_shell": [
+     109.55,
+     137.54999999999998
+    ],
+    "y_ring": [
+     112.77499999999999,
+     134.325
+    ],
+    "liquid_m3": 3378.546101389558,
+    "length": 28.599999999999994,
+    "key": "hydrogen"
+   },
+   {
+    "name": "Fuel_Tank_O7_He3",
+    "id": "O7",
+    "species": "helium-3",
+    "ring": "outer",
+    "tank_class": "L",
+    "azimuth_deg": 257.95,
+    "R": 27.75,
+    "y": -5.793234476286982,
+    "z": -27.13855070380067,
+    "a_env": 6.75,
+    "a": 6.45,
+    "head": 3.225,
+    "x0": 109.25,
+    "x1": 137.85,
+    "x_shell": [
+     109.55,
+     137.54999999999998
+    ],
+    "y_ring": [
+     112.77499999999999,
+     134.325
+    ],
+    "liquid_m3": 3378.546101389558,
+    "length": 28.599999999999994,
+    "key": "helium_3"
+   },
+   {
+    "name": "Fuel_Tank_O8_He3",
+    "id": "O8",
+    "species": "helium-3",
+    "ring": "outer",
+    "tank_class": "L",
+    "azimuth_deg": 294.1,
+    "R": 27.75,
+    "y": 11.331170275583437,
+    "z": -25.331148418216934,
+    "a_env": 6.75,
+    "a": 6.45,
+    "head": 3.225,
+    "x0": 109.25,
+    "x1": 137.85,
+    "x_shell": [
+     109.55,
+     137.54999999999998
+    ],
+    "y_ring": [
+     112.77499999999999,
+     134.325
+    ],
+    "liquid_m3": 3378.546101389558,
+    "length": 28.599999999999994,
+    "key": "helium_3"
+   },
+   {
+    "name": "Fuel_Tank_O9_H2",
+    "id": "O9",
+    "species": "hydrogen",
+    "ring": "outer",
+    "tank_class": "L",
+    "azimuth_deg": 335.9,
+    "R": 27.75,
+    "y": 25.33114841821693,
+    "z": -11.33117027558345,
+    "a_env": 6.75,
+    "a": 6.45,
+    "head": 3.225,
+    "x0": 109.25,
+    "x1": 137.85,
+    "x_shell": [
+     109.55,
+     137.54999999999998
+    ],
+    "y_ring": [
+     112.77499999999999,
+     134.325
+    ],
+    "liquid_m3": 3378.546101389558,
+    "length": 28.599999999999994,
+    "key": "hydrogen"
+   },
+   {
+    "name": "Fuel_Tank_I1_D2",
+    "id": "I1",
+    "species": "deuterium",
+    "ring": "inner",
+    "tank_class": "M",
+    "azimuth_deg": 93.72,
+    "R": 13.5,
+    "y": -0.8758886748066362,
+    "z": 13.47155592458961,
+    "a_env": 5.75,
+    "a": 5.45,
+    "head": 2.725,
+    "x0": 109.25,
+    "x1": 137.85,
+    "x_shell": [
+     109.55,
+     137.54999999999998
+    ],
+    "y_ring": [
+     112.27499999999999,
+     134.825
+    ],
+    "liquid_m3": 2443.2494625199506,
+    "length": 28.599999999999994,
+    "key": "deuterium"
+   },
+   {
+    "name": "Fuel_Tank_I2_H2",
+    "id": "I2",
+    "species": "hydrogen",
+    "ring": "inner",
+    "tank_class": "M",
+    "azimuth_deg": 150.3,
+    "R": 13.5,
+    "y": -11.726525444915582,
+    "z": 6.6886920238375,
+    "a_env": 5.75,
+    "a": 5.45,
+    "head": 2.725,
+    "x0": 109.25,
+    "x1": 137.85,
+    "x_shell": [
+     109.55,
+     137.54999999999998
+    ],
+    "y_ring": [
+     112.27499999999999,
+     134.825
+    ],
+    "liquid_m3": 2443.2494625199506,
+    "length": 28.599999999999994,
+    "key": "hydrogen"
+   },
+   {
+    "name": "Fuel_Tank_I3_D2",
+    "id": "I3",
+    "species": "deuterium",
+    "ring": "inner",
+    "tank_class": "M",
+    "azimuth_deg": 273.72,
+    "R": 13.5,
+    "y": 0.8758886748066406,
+    "z": -13.47155592458961,
+    "a_env": 5.75,
+    "a": 5.45,
+    "head": 2.725,
+    "x0": 109.25,
+    "x1": 137.85,
+    "x_shell": [
+     109.55,
+     137.54999999999998
+    ],
+    "y_ring": [
+     112.27499999999999,
+     134.825
+    ],
+    "liquid_m3": 2443.2494625199506,
+    "length": 28.599999999999994,
+    "key": "deuterium"
+   },
+   {
+    "name": "Fuel_Tank_I4_H2",
+    "id": "I4",
+    "species": "hydrogen",
+    "ring": "inner",
+    "tank_class": "M",
+    "azimuth_deg": 356.24,
+    "R": 13.5,
+    "y": 13.47094115605268,
+    "z": -0.8852933808439356,
+    "a_env": 5.75,
+    "a": 5.45,
+    "head": 2.725,
+    "x0": 109.25,
+    "x1": 137.85,
+    "x_shell": [
+     109.55,
+     137.54999999999998
+    ],
+    "y_ring": [
+     112.27499999999999,
+     134.825
+    ],
+    "liquid_m3": 2443.2494625199506,
+    "length": 28.599999999999994,
+    "key": "hydrogen"
+   }
+  ],
+  "selected": "T-B",
+  "idle_hydrogen_kg": 105154.96060446002,
+  "bay_length_m": 28.599999999999994
+ },
+ "added_fixed_kg": {
+  "shadow_shield": 429692.55173036666,
+  "fdp1_structure": 528615.6056874216,
+  "idle_hydrogen_vessels": 105154.96060446002,
+  "low_loop_radiator": 4484.183132306778,
+  "wing_view_factor_area": 0.0
+ },
+ "mass": {
+  "items_kg": {
+   "payload (non-propulsion ship)": 990233.8712519676,
+   "drivers (heavy-ion linacs, storage)": 640212.0837465464,
+   "nozzle loops (virial structure)": 86112.12429929705,
+   "loop armour": 91394.71488905176,
+   "target factory, injectors, cryo-targets, misc": 864286.3130578377,
+   "shadow shield": 429692.55173036666,
+   "FDP-1 structure": 528615.6056874216,
+   "hot radiators": 254490.48382750814,
+   "warm radiators": 1892631.2785134285,
+   "warm-wing view-factor area": 0.0,
+   "low loop radiator": 4484.183132306778,
+   "tankage (required volume)": 1231014.7322852993,
+   "idle hydrogen vessels": 105154.96060446002,
+   "propellant reserve and allowances": 524688.5321765841,
+   "propellant (four burns)": 13117213.304414604
+  },
+  "end_mass_kg": 7643011.410583579,
+  "dry_kg_check": 7643011.435202076,
+  "departure_kg": 20760224.714998182,
+  "propulsion_system_kg": 4791919.338883765,
+  "closure_drive_kg": 2749952.512620358,
+  "closure_radiator_kg": 2147121.7622673516,
+  "closure_tank_kg": 1231014.7322852993,
+  "balance_error_kg": -0.024618497118353844
+ },
+ "mission": {
+  "cruise_speed_km_s": 4796.679328,
+  "burns": [
+   {
+    "burn": "1 accelerate outbound",
+    "start_mass_t": 20760.22471499818,
+    "end_mass_t": 16171.12241010221,
+    "propellant_t": 4589.1023048959705,
+    "duration_days": 726.4715644431283,
+    "distance_AU": 964.4240758513943,
+    "accel_start_g": 0.006895573489099627,
+    "accel_end_g": 0.008852425424908245,
+    "delta_v_km_s": 4796.679327999999,
+    "delta_v_error": -2.220446049250313e-16
+   },
+   {
+    "burn": "2 brake at destination",
+    "start_mass_t": 16171.12241010221,
+    "end_mass_t": 12596.453246172525,
+    "propellant_t": 3574.669163929686,
+    "duration_days": 565.8831133740603,
+    "distance_AU": 751.235595950724,
+    "accel_start_g": 0.008852425424908245,
+    "accel_end_g": 0.011364600207283748,
+    "delta_v_km_s": 4796.679327999999,
+    "delta_v_error": -2.220446049250313e-16
+   },
+   {
+    "burn": "3 accelerate home",
+    "start_mass_t": 12596.453246172525,
+    "end_mass_t": 9811.974107863269,
+    "propellant_t": 2784.479138309257,
+    "duration_days": 440.7931620109382,
+    "distance_AU": 585.1729905490248,
+    "accel_start_g": 0.011364600207283748,
+    "accel_end_g": 0.014589689454823336,
+    "delta_v_km_s": 4796.679327999999,
+    "delta_v_error": -2.220446049250313e-16
+   },
+   {
+    "burn": "4 brake at home",
+    "start_mass_t": 9811.974107863269,
+    "end_mass_t": 7643.011410583579,
+    "propellant_t": 2168.962697279689,
+    "duration_days": 343.3546735775553,
+    "distance_AU": 455.81896107402906,
+    "accel_start_g": 0.014589689454823336,
+    "accel_end_g": 0.01873000673193577,
+    "delta_v_km_s": 4796.679327999999,
+    "delta_v_error": -2.220446049250313e-16
+   }
+  ],
+  "outbound_burn_distance_AU": 1715.6596718021183,
+  "return_burn_distance_AU": 1040.9919516230539,
+  "minimum_destination_AU": 1715.6596718021183,
+  "engine_time_years": 5.6851540408095325,
+  "round_trips": [
+   {
+    "destination_AU": 1715.6596718021183,
+    "requested_AU": 0.0,
+    "engine_years": 5.6851540408095325,
+    "coast_years": 0.6667617702811417,
+    "total_years": 6.351915811090674
+   },
+   {
+    "destination_AU": 10000.0,
+    "requested_AU": 10000.0,
+    "engine_years": 5.6851540408095325,
+    "coast_years": 17.04128587341928,
+    "total_years": 22.726439914228816
+   },
+   {
+    "destination_AU": 63241.077,
+    "requested_AU": 63241.077,
+    "engine_years": 5.6851540408095325,
+    "coast_years": 122.27565144458582,
+    "total_years": 127.96080548539534
+   }
+  ],
+  "minimum_round_trip_years": 6.351915811090674
+ },
+ "com": {
+  "baseline_dry_x_m": 35.06059717343276,
+  "baseline_dry_kg": 1669721.8149293056,
+  "fdp1_end_x_m": -9.347731666686617,
+  "fdp1_end_kg": 7643011.435202076,
+  "fdp1_departure_x_m": 113.07961619295776,
+  "propellant_centroid_x_m": 187.38668618861394,
+  "shift_end_vs_baseline_m": -44.40832884011938
+ },
+ "injection": {
+  "speed_m_s": 400.0,
+  "path_m": 46.78981167687354,
+  "flight_time_s": 0.11697452919218385,
+  "pellets_in_flight": 24.83506026056541,
+  "drift_under_peak_accel_m": 0.0012566409999028687,
+  "drift_note": "the ship accelerates away from a pellet in free flight; tracking and beam steering absorb it",
+  "injectors": 2,
+  "magazine_pulses": 3000,
+  "magazine_seconds": 14.13016855585283,
+  "pellets_per_day": 18343730.22341883
+ },
+ "checks": [
+  {
+   "check": "energy ledger closes",
+   "ok": true,
+   "detail": "sum 1.000000000000 of gross fusion"
+  },
+  {
+   "check": "no unaccounted waste heat",
+   "ok": true,
+   "detail": "hot 77.120 GW, warm 24.390 GW match the closure"
+  },
+  {
+   "check": "radiator sizing consistent",
+   "ok": true,
+   "detail": "2147.1 t"
+  },
+  {
+   "check": "crew dose on the pellet-bore axis within budget",
+   "ok": true,
+   "detail": "2.15e-07 Sv/h behind a 3.84 m plug, budget 1.14e-06"
+  },
+  {
+   "check": "mass balance (end mass = sum of dry items + reserve)",
+   "ok": true,
+   "detail": "error -0.025 kg"
+  },
+  {
+   "check": "four burns, each 0.016 c (rocket equation)",
+   "ok": true,
+   "detail": "4796.7, 4796.7, 4796.7, 4796.7 km/s"
+  },
+  {
+   "check": "propellant drawn = sum of burns",
+   "ok": true,
+   "detail": "13117.2 t"
+  },
+  {
+   "check": "acceleration <= 1.5 g",
+   "ok": true,
+   "detail": "peak 0.0187 g"
+  },
+  {
+   "check": "nonnegative propellant",
+   "ok": true,
+   "detail": "{'helium_3': 7864.984, 'deuterium': 5252.229, 'hydrogen': 0.0}"
+  },
+  {
+   "check": "fused + unburned = fusion fuel fed",
+   "ok": true,
+   "detail": "8809.4 + 4307.8 = 13117.2 t"
+  },
+  {
+   "check": "momentum: thrust = mass flow x ve",
+   "ok": true,
+   "detail": "1.4039 MN"
+  },
+  {
+   "check": "jet power = thrust x ve / 2",
+   "ok": true,
+   "detail": "13.478 TW"
+  },
+  {
+   "check": "tank capacity compared",
+   "ok": true,
+   "detail": "complete storage redesign required"
+  },
+  {
+   "check": "proposed tanks cover the deficit",
+   "ok": true,
+   "detail": "{'helium_3': 124071, 'deuterium': 29319}"
+  },
+  {
+   "check": "geometric hardware solid angle fed back to the closure",
+   "ok": true,
+   "detail": "geometry 0.01949, closure 0.019493974031856338"
+  },
+  {
+   "check": "FDP-1 fixed masses fed back to the closure",
+   "ok": true,
+   "detail": "1067.9 t"
+  }
+ ],
+ "clearances": [
+  {
+   "item": "radiator wings vs habitat ring A sweep",
+   "value": 7.149,
+   "unit": "m axial gap",
+   "required": 5.0,
+   "ok": true
+  },
+  {
+   "item": "radiator wings vs docking corridor (Dock_Primary X 99.40 m, 3 m radius)",
+   "value": 8.4,
+   "unit": "m axial gap",
+   "required": 2.0,
+   "ok": true
+  },
+  {
+   "item": "wing planes vs existing hot blades",
+   "value": 30.0,
+   "unit": "deg angular separation",
+   "required": 15.0,
+   "ok": true
+  },
+  {
+   "item": "driver galleries vs radiator planes",
+   "value": 45.0,
+   "unit": "deg angular separation",
+   "required": 15.0,
+   "ok": true
+  },
+  {
+   "item": "forward nozzle loop vs X-ray stand-off",
+   "value": 0.0,
+   "unit": "m (>= 0)",
+   "required": 0.0,
+   "ok": true
+  },
+  {
+   "item": "shield aft face vs X-ray stand-off",
+   "value": 0.0,
+   "unit": "m (>= 0)",
+   "required": 0.0,
+   "ok": true
+  },
+  {
+   "item": "equipment module inside the hardware cone",
+   "value": 1.981,
+   "unit": "m rim margin",
+   "required": 0.0,
+   "ok": true
+  }
+ ]
+}

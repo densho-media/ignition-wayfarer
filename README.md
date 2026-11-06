@@ -80,7 +80,8 @@ The `.blend` files, renders, runs and Godot imports are generated and are not in
 | `references/` | Current geometry baseline, generated validation reports and kept study results (`evidence/`) |
 | `godot/` | The walk and its runtime checks |
 | `web/`, `.github/workflows/` | Website (start page, viewer, Godot launcher and shell, status page) and the workflows that build, check, publish and roll it back |
-| `work/` | Unapproved work, one folder per task branch ([work/README.md](work/README.md)) |
+| `lab/` | Kept, unapproved variants, studies and engineering-problem maps ([lab/README.md](lab/README.md)) |
+| `work/` | Work in progress, one folder per task branch ([work/README.md](work/README.md)) |
 | `docs/` | [Model](docs/MODEL.md), [implementation](docs/IMPLEMENTATION.md) and subsystem notes |
 
 [AGENTS.md](AGENTS.md) describes the development loop that human and AI contributors follow.

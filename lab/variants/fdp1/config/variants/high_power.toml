@@ -1,0 +1,4 @@
+# Representative high-power FDP-1: a departure acceleration near the top of what the integrated (fed-back) design still closes at.
+# The four-burn study's ~0.010 g ceiling drops once FDP-1's shield, structure and idle vessels are carried.
+[mission]
+a0_g = { value = 0.0085, status = "PROTOTYPE", note = "high-power check" }

@@ -1,0 +1,766 @@
+{
+ "status": "PROTOTYPE screening (owner brief 2026-11-01); not flight qualification",
+ "layout": {
+  "AFT": -171.75,
+  "FWD": 171.75,
+  "RADIATOR_AFT": -160.25,
+  "RADIATOR_FRONT": 21.899362477231335,
+  "RADIATOR_ZONE_FRONT": 66.39936247723134,
+  "AFT_STORAGE_FRONT": 120.39936247723134,
+  "RING_A": 124.29936247723134
+ },
+ "length_m": 343.5,
+ "storage": {
+  "status": "PROTOTYPE fit screen (STORAGE-SPLIT WORKING, owner brief 2026-11-01); wall, supports, boil-off and mass OPEN",
+  "allowance": {
+   "ullage": 0.04,
+   "unusable_residual": 0.015,
+   "boiloff_reserve": 0.005,
+   "total": 0.06
+  },
+  "mission_kg": {
+   "helium_3": 1094170,
+   "deuterium": 730656,
+   "hydrogen": 971761
+  },
+  "bank_kg": {
+   "forward": 325100,
+   "aft": 2471486
+  },
+  "tori": {
+   "torus": {
+    "species": "hydrogen",
+    "bank": "forward",
+    "kg": 325100,
+    "x": 159.85,
+    "r": [
+     16.0,
+     25.0
+    ],
+    "x_range": [
+     155.35,
+     164.35
+    ],
+    "vessels": 3,
+    "vessel_m3": 2448.3,
+    "need_m3": 4867.3,
+    "capacity_m3": 5857.9,
+    "fill_at_departure": 0.7839,
+    "hull_clear_m": 9.5
+   },
+   "aft_he3_a": {
+    "species": "helium-3",
+    "bank": "aft",
+    "kg": 547085,
+    "x": 111.9,
+    "r": [
+     17.0,
+     28.0
+    ],
+    "x_range": [
+     106.4,
+     117.4
+    ],
+    "vessels": 3,
+    "vessel_m3": 3587.7,
+    "need_m3": 9894.4,
+    "capacity_m3": 10763.0,
+    "fill_at_departure": 0.8673,
+    "hull_clear_m": 10.5
+   },
+   "aft_he3_b": {
+    "species": "helium-3",
+    "bank": "aft",
+    "kg": 547085,
+    "x": 98.4,
+    "r": [
+     17.0,
+     28.0
+    ],
+    "x_range": [
+     92.9,
+     103.9
+    ],
+    "vessels": 3,
+    "vessel_m3": 3587.7,
+    "need_m3": 9894.4,
+    "capacity_m3": 10763.0,
+    "fill_at_departure": 0.8673,
+    "hull_clear_m": 10.5
+   },
+   "aft_d2": {
+    "species": "deuterium",
+    "bank": "aft",
+    "kg": 730656,
+    "x": 86.8,
+    "r": [
+     20.799999999999997,
+     28.0
+    ],
+    "x_range": [
+     83.2,
+     90.4
+    ],
+    "vessels": 3,
+    "vessel_m3": 1632.0,
+    "need_m3": 4420.6,
+    "capacity_m3": 4896.1,
+    "fill_at_departure": 0.8518,
+    "hull_clear_m": 14.3
+   },
+   "aft_h2": {
+    "species": "hydrogen",
+    "bank": "aft",
+    "kg": 646661,
+    "x": 75.2,
+    "r": [
+     17.0,
+     28.0
+    ],
+    "x_range": [
+     69.7,
+     80.7
+    ],
+    "vessels": 3,
+    "vessel_m3": 3660.5,
+    "need_m3": 9681.6,
+    "capacity_m3": 10981.5,
+    "fill_at_departure": 0.8317,
+    "hull_clear_m": 10.5
+   }
+  },
+  "margin_m3": {
+   "torus": 990.6,
+   "aft_he3_a": 868.6,
+   "aft_he3_b": 868.6,
+   "aft_d2": 475.4,
+   "aft_h2": 1299.8
+  },
+  "forward": {
+   "ring_b_sweep_clear_m": 22.9
+  },
+  "aft": {
+   "stack": {
+    "front_x": 120.39936247723134,
+    "back_x": 66.39936247723134,
+    "tori": [
+     {
+      "key": "aft_he3_a",
+      "x0": 106.39936247723134,
+      "x1": 117.39936247723134,
+      "r": [
+       17.0,
+       28.0
+      ]
+     },
+     {
+      "key": "aft_he3_b",
+      "x0": 92.89936247723134,
+      "x1": 103.89936247723134,
+      "r": [
+       17.0,
+       28.0
+      ]
+     },
+     {
+      "key": "aft_d2",
+      "x0": 83.19936247723135,
+      "x1": 90.39936247723134,
+      "r": [
+       20.799999999999997,
+       28.0
+      ]
+     },
+     {
+      "key": "aft_h2",
+      "x0": 69.69936247723133,
+      "x1": 80.69936247723133,
+      "r": [
+       17.0,
+       28.0
+      ]
+     }
+    ],
+    "front_zone_m": 3.0,
+    "aft_zone_m": 3.299999999999997,
+    "gaps_m": [
+     2.5,
+     2.5,
+     2.500000000000014
+    ]
+   },
+   "ring_a_sweep_clear_m": 4.75
+  },
+  "vents": 30,
+  "transfer": [
+   {
+    "name": "Fuel_Transfer_H2_A_Ext",
+    "length_m": 73.8
+   },
+   {
+    "name": "Fuel_Transfer_H2_A",
+    "length_m": 244.3
+   },
+   {
+    "name": "Fuel_Transfer_H2_B_Ext",
+    "length_m": 73.8
+   },
+   {
+    "name": "Fuel_Transfer_H2_B",
+    "length_m": 244.3
+   },
+   {
+    "name": "Fuel_Transfer_He3_A_Ext",
+    "length_m": 10.2
+   },
+   {
+    "name": "Fuel_Transfer_He3_A",
+    "length_m": 236.4
+   },
+   {
+    "name": "Fuel_Transfer_He3_B_Ext",
+    "length_m": 10.2
+   },
+   {
+    "name": "Fuel_Transfer_He3_B",
+    "length_m": 223.3
+   },
+   {
+    "name": "Fuel_Transfer_D2_Ext",
+    "length_m": 14.0
+   },
+   {
+    "name": "Fuel_Transfer_D2",
+    "length_m": 211.7
+   },
+   {
+    "name": "Fuel_Transfer_H2_C_Ext",
+    "length_m": 10.2
+   },
+   {
+    "name": "Fuel_Transfer_H2_C",
+    "length_m": 200.5
+   }
+  ]
+ },
+ "split": {
+  "adopted": {
+   "forward_bank_t": 325.1,
+   "departure_cg_x": 72.59210771481433,
+   "depleted_cg_x": 27.041211400632857,
+   "cg_travel_m": 45.55089631418147,
+   "I_pitch_departure": 29721115960.08544,
+   "I_pitch_depleted": 21839000326.374557,
+   "spine_compression_MN": {
+    "aft of ring A": 4.182581719189581,
+    "drive end of the aft storage": 17.959880291803202,
+    "hot blade front": 17.959880291803202
+   },
+   "ring_to_shield_m": 47.45063752276866,
+   "forward_district_m": 39.30063752276865
+  },
+  "balanced": {
+   "forward_bank_t": 1419.2697195251462,
+   "departure_cg_x": 74.41079586417575,
+   "depleted_cg_x": 20.569286300785823,
+   "cg_travel_m": 53.841509563389934,
+   "I_pitch_departure": 30367681096.49443,
+   "I_pitch_depleted": 19885890587.834114,
+   "spine_compression_MN": {
+    "aft of ring A": 10.49723729889285,
+    "drive end of the aft storage": 17.959880291803202,
+    "hot blade front": 17.959880291803202
+   },
+   "ring_to_shield_m": 74.45063752276866,
+   "forward_district_m": 66.30063752276865
+  },
+  "note": "Balanced = both He-3 tori ahead of the rings. Point-mass screen: dry items near the ring planes move with the rings; the shield, the Brow and the forward torus stay. Same length, same propellant."
+ },
+ "drawdown": {
+  "proportional": [
+   {
+    "left": 1.0,
+    "mass_t": 4466.308,
+    "cg_x": 72.592,
+    "lateral_mm": 0.0,
+    "I_pitch": "2.972e+10"
+   },
+   {
+    "left": 0.913,
+    "mass_t": 4221.709,
+    "cg_x": 71.016,
+    "lateral_mm": 0.0,
+    "I_pitch": "2.932e+10"
+   },
+   {
+    "left": 0.825,
+    "mass_t": 3977.11,
+    "cg_x": 69.247,
+    "lateral_mm": 0.0,
+    "I_pitch": "2.890e+10"
+   },
+   {
+    "left": 0.738,
+    "mass_t": 3732.512,
+    "cg_x": 67.245,
+    "lateral_mm": 0.0,
+    "I_pitch": "2.846e+10"
+   },
+   {
+    "left": 0.65,
+    "mass_t": 3487.913,
+    "cg_x": 64.963,
+    "lateral_mm": 0.0,
+    "I_pitch": "2.797e+10"
+   }
+  ],
+  "aft_first": [
+   {
+    "left": 1.0,
+    "mass_t": 4466.308,
+    "cg_x": 72.592,
+    "lateral_mm": 0.0,
+    "I_pitch": "2.972e+10"
+   },
+   {
+    "left": 0.913,
+    "mass_t": 4219.521,
+    "cg_x": 71.573,
+    "lateral_mm": 0.0,
+    "I_pitch": "2.954e+10"
+   },
+   {
+    "left": 0.825,
+    "mass_t": 3967.938,
+    "cg_x": 70.393,
+    "lateral_mm": 0.0,
+    "I_pitch": "2.935e+10"
+   },
+   {
+    "left": 0.738,
+    "mass_t": 3710.835,
+    "cg_x": 69.009,
+    "lateral_mm": 0.0,
+    "I_pitch": "2.914e+10"
+   },
+   {
+    "left": 0.65,
+    "mass_t": 3447.333,
+    "cg_x": 67.362,
+    "lateral_mm": 0.0,
+    "I_pitch": "2.891e+10"
+   }
+  ],
+  "forward_first": [
+   {
+    "left": 1.0,
+    "mass_t": 4466.308,
+    "cg_x": 72.592,
+    "lateral_mm": 0.0,
+    "I_pitch": "2.972e+10"
+   },
+   {
+    "left": 0.913,
+    "mass_t": 4219.521,
+    "cg_x": 69.868,
+    "lateral_mm": 0.0,
+    "I_pitch": "2.887e+10"
+   },
+   {
+    "left": 0.825,
+    "mass_t": 3967.938,
+    "cg_x": 66.766,
+    "lateral_mm": 0.0,
+    "I_pitch": "2.795e+10"
+   },
+   {
+    "left": 0.738,
+    "mass_t": 3710.835,
+    "cg_x": 63.193,
+    "lateral_mm": 0.0,
+    "I_pitch": "2.693e+10"
+   },
+   {
+    "left": 0.65,
+    "mass_t": 3447.333,
+    "cg_x": 59.38,
+    "lateral_mm": 0.0,
+    "I_pitch": "2.593e+10"
+   }
+  ],
+  "mission": [
+   {
+    "label": "departure",
+    "mass_t": 4466.308,
+    "cg_x": 72.592,
+    "I_roll": "1.704e+09",
+    "I_pitch": "2.972e+10",
+    "I_yaw": "2.971e+10",
+    "lateral_mm": 0.0
+   },
+   {
+    "label": "after burn 1 (out: accelerate)",
+    "mass_t": 3487.913,
+    "cg_x": 64.963,
+    "I_roll": "1.317e+09",
+    "I_pitch": "2.797e+10",
+    "I_yaw": "2.796e+10",
+    "lateral_mm": 0.0
+   },
+   {
+    "label": "after burn 2 (arrive: brake)",
+    "mass_t": 2725.794,
+    "cg_x": 55.226,
+    "I_roll": "1.015e+09",
+    "I_pitch": "2.615e+10",
+    "I_yaw": "2.614e+10",
+    "lateral_mm": 0.0
+   },
+   {
+    "label": "after burn 3 (home: accelerate)",
+    "mass_t": 2132.144,
+    "cg_x": 42.819,
+    "I_roll": "7.805e+08",
+    "I_pitch": "2.414e+10",
+    "I_yaw": "2.414e+10",
+    "lateral_mm": 0.0
+   },
+   {
+    "label": "after burn 4 (home: brake)",
+    "mass_t": 1669.722,
+    "cg_x": 27.041,
+    "I_roll": "5.975e+08",
+    "I_pitch": "2.184e+10",
+    "I_yaw": "2.184e+10",
+    "lateral_mm": 0.0
+   }
+  ]
+ },
+ "aft_heating": {
+  "view": {
+   "F_plate_to_torus_face": 0.10555,
+   "torus": "aft_h2",
+   "gap_m": 3.299999999999997
+  },
+  "LOW_emission_W_m2": 413.3702951451,
+  "mean_irradiance_on_aft_face_W_m2": 100.12168086998953,
+  "mli_deep_space": {
+   "outer_K": 4.0,
+   "leak_W_m2": 0.0
+  },
+  "mli_with_LOW_view": {
+   "outer_K": 204.98831183379235,
+   "leak_W_m2": 0.3003378248127574
+  },
+  "added_boiloff_W": 467.051856493314,
+  "neutron_adopted": {
+   "distance_m": 236.44936247723132,
+   "unshielded_W_m2": 3718735.145966404,
+   "shield_decades_for_1W_m2": 6.570395248339795
+  },
+  "neutron_pass7": {
+   "distance_m": 203.6,
+   "unshielded_W_m2": 5015520.337728743,
+   "shield_decades_for_1W_m2": 6.700315995797458
+  },
+  "neutron_note": "Unshielded side-reaction neutron flux is MW/m2 class at either position: the reactor shadow shield (mass OPEN, Reactor_Shadow_Shield_Envelope) must cover every tank and the crew. The aft bank is farther from the plasma than the pass-7 return torus, so it needs slightly less attenuation, not more.",
+  "sun": 0.0
+ },
+ "zoning": {
+  "sections": [
+   {
+    "id": "LOW",
+    "T_K": 300.0,
+    "load_MW": 1.0,
+    "length_m": 19.5,
+    "capacity_MW": 1.0174644773414598,
+    "margin": 0.01746447734145984,
+    "x": [
+     46.899362477231335,
+     66.39936247723134
+    ],
+    "area_m2_per_face_all_blades": 1608.75
+   },
+   {
+    "id": "WARM",
+    "T_K": 440.0,
+    "load_MW": 5.0,
+    "length_m": 21.0,
+    "capacity_MW": 5.070252946563972,
+    "margin": 0.01405058931279446,
+    "x": [
+     23.899362477231335,
+     44.899362477231335
+    ],
+    "area_m2_per_face_all_blades": 1732.5
+   }
+  ],
+  "hot": {
+   "T_K": 1800.0,
+   "blade": null
+  },
+  "baffle": {
+   "incident_W_m2": 160718.37075241486,
+   "layer1_T_K": 1091.0783725253766,
+   "forward_leak_W_m2": 3214.3674150482966
+  },
+  "mutual_unbaffled": [
+   {
+    "section": "WARM",
+    "emitted": 1912.78,
+    "absorbed": 12214.596,
+    "net": -5.386
+   },
+   {
+    "section": "LOW",
+    "emitted": 413.37,
+    "absorbed": 4006.902,
+    "net": -8.693
+   }
+  ],
+  "mutual_baffled": [
+   {
+    "section": "WARM",
+    "emitted": 1912.78,
+    "absorbed": 80.359,
+    "net": 0.958
+   },
+   {
+    "section": "LOW",
+    "emitted": 413.37,
+    "absorbed": 0.574,
+    "net": 0.999
+   }
+  ],
+  "expansion_mm": {
+   "LOW": 21.45,
+   "WARM": 87.78
+  },
+  "heat_pump_comparison": "Optional only: pumping the 1 MW LOW load to 440 K at a Carnot fraction of 0.4 needs about 1.3 MW of work and adds 2.3 MW to WARM; it would remove 19.5 m of LOW plate but add about 10 m of WARM plate and the power. Not adopted; radiators are not shrunk by heat pumps."
+ },
+ "shadow": {
+  "shield_r": 45.0,
+  "rows": [
+   {
+    "item": "hot blade aft edge",
+    "distance_behind_shield_m": 332.0,
+    "radius_m": 37.0,
+    "radial_margin_m": 8.0,
+    "allowed_misalignment_deg": 1.3803540734444517
+   },
+   {
+    "item": "WARM/LOW zone aft edge",
+    "distance_behind_shield_m": 147.85063752276866,
+    "radius_m": 37.0,
+    "radial_margin_m": 8.0,
+    "allowed_misalignment_deg": 3.0971776727881055
+   },
+   {
+    "item": "baffle annuli",
+    "distance_behind_shield_m": 148.85063752276866,
+    "radius_m": 37.0,
+    "radial_margin_m": 8.0,
+    "allowed_misalignment_deg": 3.076410490723165
+   },
+   {
+    "item": "aft tori",
+    "distance_behind_shield_m": 102.05063752276867,
+    "radius_m": 28.0,
+    "radial_margin_m": 17.0,
+    "allowed_misalignment_deg": 9.45771184937612
+   },
+   {
+    "item": "habitat rings",
+    "distance_behind_shield_m": 49.600637522768665,
+    "radius_m": 30.0,
+    "radial_margin_m": 15.0,
+    "allowed_misalignment_deg": 16.82612858184862
+   },
+   {
+    "item": "forward torus",
+    "distance_behind_shield_m": 16.400000000000006,
+    "radius_m": 25.0,
+    "radial_margin_m": 20.0,
+    "allowed_misalignment_deg": 50.64824737373526
+   }
+  ],
+  "limit_item": "hot blade aft edge",
+  "limit_deg": 1.3803540734444517,
+  "note": "Geometric shadow only (straight-line dust at 0.016 c along the velocity vector). Ejecta from a grain strike on the shield spray at wide angles and secondary radiation (X-rays, neutrons from the impact plasma) is not stopped by the shadow line: the Brow, the forward H2 torus (325 t) and the hull carry that, between the shield and the rings. OPEN: an ejecta cone model."
+ },
+ "rcs": {
+  "thrust_per_nozzle_N": 100.0,
+  "pitch_yaw_couple_N_m": 31104,
+  "lever_m": 331.0,
+  "flip_departure_min": 57.75347439302535,
+  "flip_depleted_min": 49.50646735711427,
+  "one_pod_out_flip_departure_min": 81.67574676078371,
+  "roll_accel_departure_deg_s2": 0.03258553581572322,
+  "translation": {
+   "plus_x_N": 281.9077862357725,
+   "minus_x_N": 257.11504387461576,
+   "plus_x_mm_s2_departure": 0.06311875032759576,
+   "minus_x_mm_s2_departure": 0.05756769075621707,
+   "docking_closing_0p1_m_s_at_departure_s": 1737.0854846943887
+  },
+  "propellant_per_flip_kg": {
+   "isp_300": 235.56861677749427,
+   "isp_800": 88.33823129156035
+  },
+  "jets": [
+   {
+    "name": "Ext_RCS_Aft_1_Radial",
+    "ok": true,
+    "hits": []
+   },
+   {
+    "name": "Ext_RCS_Aft_1_Tan_Pos",
+    "ok": true,
+    "hits": []
+   },
+   {
+    "name": "Ext_RCS_Aft_1_Tan_Neg",
+    "ok": true,
+    "hits": []
+   },
+   {
+    "name": "Ext_RCS_Aft_1_Axial",
+    "ok": true,
+    "hits": []
+   },
+   {
+    "name": "Ext_RCS_Aft_2_Radial",
+    "ok": true,
+    "hits": []
+   },
+   {
+    "name": "Ext_RCS_Aft_2_Tan_Pos",
+    "ok": true,
+    "hits": []
+   },
+   {
+    "name": "Ext_RCS_Aft_2_Tan_Neg",
+    "ok": true,
+    "hits": []
+   },
+   {
+    "name": "Ext_RCS_Aft_2_Axial",
+    "ok": true,
+    "hits": []
+   },
+   {
+    "name": "Ext_RCS_Aft_3_Radial",
+    "ok": true,
+    "hits": []
+   },
+   {
+    "name": "Ext_RCS_Aft_3_Tan_Pos",
+    "ok": true,
+    "hits": []
+   },
+   {
+    "name": "Ext_RCS_Aft_3_Tan_Neg",
+    "ok": true,
+    "hits": []
+   },
+   {
+    "name": "Ext_RCS_Aft_3_Axial",
+    "ok": true,
+    "hits": []
+   },
+   {
+    "name": "Ext_RCS_Rim_1_Radial",
+    "ok": true,
+    "hits": []
+   },
+   {
+    "name": "Ext_RCS_Rim_1_Tan_Pos",
+    "ok": true,
+    "hits": []
+   },
+   {
+    "name": "Ext_RCS_Rim_1_Tan_Neg",
+    "ok": true,
+    "hits": []
+   },
+   {
+    "name": "Ext_RCS_Rim_1_Forward",
+    "ok": true,
+    "hits": []
+   },
+   {
+    "name": "Ext_RCS_Rim_2_Radial",
+    "ok": true,
+    "hits": []
+   },
+   {
+    "name": "Ext_RCS_Rim_2_Tan_Pos",
+    "ok": true,
+    "hits": []
+   },
+   {
+    "name": "Ext_RCS_Rim_2_Tan_Neg",
+    "ok": true,
+    "hits": []
+   },
+   {
+    "name": "Ext_RCS_Rim_2_Forward",
+    "ok": true,
+    "hits": []
+   },
+   {
+    "name": "Ext_RCS_Rim_3_Radial",
+    "ok": true,
+    "hits": []
+   },
+   {
+    "name": "Ext_RCS_Rim_3_Tan_Pos",
+    "ok": true,
+    "hits": []
+   },
+   {
+    "name": "Ext_RCS_Rim_3_Tan_Neg",
+    "ok": true,
+    "hits": []
+   },
+   {
+    "name": "Ext_RCS_Rim_3_Forward",
+    "ok": true,
+    "hits": []
+   },
+   {
+    "name": "Ext_RCS_Rim_4_Radial",
+    "ok": true,
+    "hits": []
+   },
+   {
+    "name": "Ext_RCS_Rim_4_Tan_Pos",
+    "ok": true,
+    "hits": []
+   },
+   {
+    "name": "Ext_RCS_Rim_4_Tan_Neg",
+    "ok": true,
+    "hits": []
+   },
+   {
+    "name": "Ext_RCS_Rim_4_Forward",
+    "ok": true,
+    "hits": []
+   }
+  ],
+  "high_speed_rule": "Unchanged: at cruise the shield axis stays on the velocity vector within the shadow limit; RCS trims only.",
+  "jet_failures": []
+ },
+ "dry_mass": {
+  "plates_kg": 20047.5,
+  "baffles_kg": 20082.92006459688,
+  "spine_kg": 50255.102040816324,
+  "vents_kg": 2400.0,
+  "cryocoolers_kg": 4800.0,
+  "total_kg": 97585.5221054132,
+  "propellant_to_keep_delta_v_kg": 167479.81130930086,
+  "fraction_of_inventory": 0.05988723174299013,
+  "rule": "Inventory not reduced and not yet grown: the added dry mass is reported, the canon budget stays as is (OPEN)."
+ }
+}

@@ -1,0 +1,134 @@
+{
+ "cfg": {
+  "lw": 24.0,
+  "ll": 21.0,
+  "gap2": 0.5,
+  "coat": "white ceramic AZ-93 family (ISS radiators)",
+  "layers": [
+   [
+    0.5,
+    0
+   ],
+   [
+    0.8,
+    5
+   ],
+   [
+    1.1,
+    10
+   ]
+  ],
+  "coats_b": [
+   {
+    "eps": [
+     0.12,
+     0.12,
+     0.12,
+     0.12,
+     0.12,
+     0.12,
+     0.12,
+     0.12
+    ],
+    "spec": true,
+    "note": "polished Mo/Nb-alloy layer at ~1200 K, 0.12"
+   },
+   {
+    "eps": [
+     0.08,
+     0.08,
+     0.08,
+     0.08,
+     0.08,
+     0.08,
+     0.08,
+     0.08
+    ],
+    "spec": true,
+    "note": "polished Ti/superalloy layer, 0.08"
+   },
+   {
+    "eps": [
+     0.05,
+     0.05,
+     0.05,
+     0.05,
+     0.05,
+     0.05,
+     0.05,
+     0.05
+    ],
+    "spec": true,
+    "note": "gold or silver film on Ti, 0.05 (below 700 K)"
+   }
+  ],
+  "root_strip": 0.5
+ },
+ "span": {
+  "WARM": [
+   50.658056759868956,
+   74.65805675986896
+  ],
+  "WARM_rim_start": 55.947866181122905,
+  "LOW": [
+   75.15805675986896,
+   96.15805675986896
+  ],
+  "total_front": 96.15805675986896
+ },
+ "sheets": {
+  "VG_0": 1204.3,
+  "VG_1": 804.6,
+  "VG_2": 493.4
+ },
+ "WARM": {
+  "area_m2": 3844,
+  "emitted_MW": 7.259,
+  "self_MW": 0.347,
+  "absorbed_MW": {
+   "HOT": 0.0203,
+   "VG_1": 0.0008,
+   "VG_2": 0.1732,
+   "LOW": 0.0351
+  },
+  "net_MW": 6.683,
+  "load_MW": 5.0,
+  "margin": 0.337,
+  "interference": 0.033
+ },
+ "LOW": {
+  "area_m2": 3780,
+  "emitted_MW": 1.576,
+  "self_MW": 0.045,
+  "absorbed_MW": {
+   "VG_2": 0.0482,
+   "WARM": 0.1605
+  },
+  "net_MW": 1.322,
+  "load_MW": 1.0,
+  "margin": 0.322,
+  "interference": 0.136
+ },
+ "RING_A": {
+  "VG_2": 0.03,
+  "WARM": 0.231,
+  "LOW": 0.106
+ },
+ "RING_B": {
+  "VG_2": 0.001,
+  "WARM": 0.021,
+  "LOW": 0.022
+ },
+ "TANKS": {
+  "VG_2": 0.053,
+  "WARM": 0.236,
+  "LOW": 0.127
+ },
+ "VG_0_absorbed_MW": 103.29,
+ "VG_0_area_m2": 4163,
+ "VG_1_absorbed_MW": 12.91,
+ "VG_1_area_m2": 4179,
+ "VG_2_absorbed_MW": 1.33,
+ "VG_2_area_m2": 4227,
+ "seconds": 181
+}

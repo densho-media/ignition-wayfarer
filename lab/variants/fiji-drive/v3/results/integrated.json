@@ -1,0 +1,3472 @@
+{
+ "audit": {
+  "absorbed_45TW": {
+   "formula": "P_fus x neutral fraction x intercepted share = 261.3 TW x 0.21 x 0.82",
+   "value_TW": 44.7373904697831,
+   "source": "lab/variants/fiji-drive/fiji_budget.py intercept(): 60,000 isotropic rays from the v2 core plasma against the modelled coils, limiters, inserts, frames, lattice, HX, shield, blades and engines"
+  },
+  "shield_645GW": {
+   "formula": "P_fus x neutral x cone fraction; cone = (1 - cos 12.5 deg)/2 = 0.0118 (thermal bulkhead rim r 37 m at X 48.9 seen from the core at X -118)",
+   "value_GW": 647.1712346933356
+  },
+  "radiator_10_8GW": {
+   "formula": "hot_share 0.75 x ideal rejection; ideal = 26,882 m2 effective x 0.9 x sigma x 1800^4",
+   "ideal_GW": 14.401500598898428,
+   "drive_share_GW": 10.80112544917382,
+   "source": "src/wayfarer/operating_point.py burn(); data/wayfarer_3d.toml [physics.operating_point] hot_share, [radiators.*]"
+  },
+  "b01_absorbed_fraction": {
+   "note": "B01 absorbed fraction 4e-5 is a requirement, not a mechanism (Fiji 15_ENERGY_FLOW: 1e-4 \"DIAGNOSTIC / UNVALIDATED\"; 04_ROOT_TRUTHS P1 \"OPEN FUNDAMENTAL\")."
+  },
+  "canon_efficiency": {
+   "note": "Canon directed efficiency 0.8 exceeds the charged share: with 0.21 neutral and 0.10 synchrotron the ceiling is 0.69 before nozzle losses, 0.62 after."
+  },
+  "neutral_fraction_check": {
+   "central": 0.19547821009881255,
+   "dfd_published": 0.20756999999999998
+  }
+ },
+ "channels": {
+  "optimistic": {
+   "label": "hot-ion mode (Te = Ti/2), D-rich 0.5:1; Te/Ti = 0.5 is unproven for D-3He (alpha and proton slowing heat electrons)",
+   "Ti_keV": 150.0,
+   "Te_keV": 75.0,
+   "he3_to_d": 0.5,
+   "brems": 0.08814621837857341,
+   "neutron": 0.014689963953118813,
+   "neutral": 0.10283618233169223,
+   "mean_photon_keV": 75.0
+  },
+  "central": {
+   "label": "Ti = Te = 100 keV, 1:1 (the v2 baseline); matches the NASA DFD bremsstrahlung share (0.205)",
+   "Ti_keV": 100.0,
+   "Te_keV": 100.0,
+   "he3_to_d": 1.0,
+   "brems": 0.18534848674959892,
+   "neutron": 0.010129723349213644,
+   "neutral": 0.19547821009881255,
+   "mean_photon_keV": 100.0
+  },
+  "canon_ratio": {
+   "label": "Ti = Te = 100 keV at the WORKING canon 2.5:1 He3:D: more He-3 means fewer reactions per electron",
+   "Ti_keV": 100.0,
+   "Te_keV": 100.0,
+   "he3_to_d": 2.5,
+   "brems": 0.33167857833017533,
+   "neutron": 0.004119772997077987,
+   "neutral": 0.33579835132725333,
+   "mean_photon_keV": 100.0
+  }
+ },
+ "synchrotron": {
+  "emitted": [
+   0.05,
+   0.1,
+   0.142
+  ],
+  "coil_face_reflectivity": 0.98
+ },
+ "dfd_reference": {
+  "thrust": 0.52,
+  "bremsstrahlung": 0.205,
+  "synchrotron": 0.142,
+  "neutron": 0.00257,
+  "gas_box": 0.13
+ },
+ "eta_directed": {
+  "optimistic": 0.7015041595481109,
+  "central": 0.6199791751130449,
+  "canon_ratio": 0.4964974508320171
+ },
+ "absorbers": {
+  "xray_columns": [
+   {
+    "material": "H",
+    "mu_en_100keV_cm2_g": 0.0406,
+    "efold_column_kg_m2": 246.30541871921184,
+    "layer_thickness_m": 3.4690904044959416,
+    "shell_inventory_t": 27.85648658355482,
+    "residence_s": 24568.6011288485,
+    "specific_energy_J_kg": 30340471979619.203,
+    "pressure_if_held_Pa": 1436115673701975.5,
+    "fiji_150T_magnetic_pressure_Pa": 8952465548.919113
+   },
+   {
+    "material": "Li",
+    "mu_en_100keV_cm2_g": 0.019,
+    "efold_column_kg_m2": 526.3157894736843,
+    "layer_thickness_m": 1.0279605263157896,
+    "shell_inventory_t": 59.52491343643819,
+    "residence_s": 52499.22135953942,
+    "specific_energy_J_kg": 30340471979619.203,
+    "pressure_if_held_Pa": 1.035621443571002e+16,
+    "fiji_150T_magnetic_pressure_Pa": 8952465548.919113
+   },
+   {
+    "material": "Sn",
+    "mu_en_100keV_cm2_g": 0.93,
+    "efold_column_kg_m2": 10.75268817204301,
+    "layer_thickness_m": 0.0015382958758287568,
+    "shell_inventory_t": 1.2161003820347585,
+    "residence_s": 1072.5647374529558,
+    "specific_energy_J_kg": 30340471979619.203,
+    "pressure_if_held_Pa": 1.4138659942502549e+17,
+    "fiji_150T_magnetic_pressure_Pa": 8952465548.919113
+   },
+   {
+    "material": "W",
+    "mu_en_100keV_cm2_g": 1.97,
+    "efold_column_kg_m2": 5.0761421319796955,
+    "layer_thickness_m": 0.0002630125456984298,
+    "shell_inventory_t": 0.5740981498945815,
+    "residence_s": 506.3376679346442,
+    "specific_energy_J_kg": 30340471979619.203,
+    "pressure_if_held_Pa": 3.903807394711004e+17,
+    "fiji_150T_magnetic_pressure_Pa": 8952465548.919113
+   }
+  ],
+  "ablation": {
+   "Li": {
+    "J_kg": 25000000.0,
+    "kg_s_per_TW": 40000.0
+   },
+   "Sn": {
+    "J_kg": 3100000.0,
+    "kg_s_per_TW": 322580.6451612903
+   },
+   "H2_to_3000K": {
+    "J_kg": 45000000.0,
+    "kg_s_per_TW": 22222.222222222223
+   }
+  },
+  "regenerative_cooling": {
+   "mdot_kg_s": 1.1338246910136727,
+   "enthalpy_J_kg": 45000000.0,
+   "capacity_GW": 0.05102211109561527
+  },
+  "neutron_mean_free_path_LH2_m": 0.09428169014084507,
+  "verdict": "A column that absorbs 100 keV bremsstrahlung (25-500 kg/m2) cannot also reach exhaust-class specific energy while it stays in place: the pressure is 10^5-10^7 times the 150 T Fiji magnetic pressure. Ablation needs 10^4-10^6 kg/s per TW. The whole hydrogen flow as a coolant carries ~0.05 GW. X-ray energy cannot be routed into the exhaust at Wayfarer ve."
+ },
+ "xray_optics": {
+  "table": [
+   {
+    "coating": "Ir",
+    "E_keV": 10,
+    "critical_angle_deg": 0.4749736834815167,
+    "max_deflection_deg": 0.9499473669630334
+   },
+   {
+    "coating": "Ir",
+    "E_keV": 50,
+    "critical_angle_deg": 0.09499473669630333,
+    "max_deflection_deg": 0.18998947339260666
+   },
+   {
+    "coating": "Ir",
+    "E_keV": 100,
+    "critical_angle_deg": 0.047497368348151665,
+    "max_deflection_deg": 0.09499473669630333
+   },
+   {
+    "coating": "Au",
+    "E_keV": 10,
+    "critical_angle_deg": 0.43931765272977596,
+    "max_deflection_deg": 0.8786353054595519
+   },
+   {
+    "coating": "Au",
+    "E_keV": 50,
+    "critical_angle_deg": 0.08786353054595519,
+    "max_deflection_deg": 0.17572706109191039
+   },
+   {
+    "coating": "Au",
+    "E_keV": 100,
+    "critical_angle_deg": 0.043931765272977596,
+    "max_deflection_deg": 0.08786353054595519
+   },
+   {
+    "coating": "W",
+    "E_keV": 10,
+    "critical_angle_deg": 0.4387482193696061,
+    "max_deflection_deg": 0.8774964387392122
+   },
+   {
+    "coating": "W",
+    "E_keV": 50,
+    "critical_angle_deg": 0.08774964387392123,
+    "max_deflection_deg": 0.17549928774784246
+   },
+   {
+    "coating": "W",
+    "E_keV": 100,
+    "critical_angle_deg": 0.043874821936960615,
+    "max_deflection_deg": 0.08774964387392123
+   }
+  ],
+  "brems_power_below_10keV": 0.09516258196404048,
+  "verdict": "Below the critical angle a mirror deflects rays by at most 2 theta_c (0.1-1 deg); it cannot turn isotropic emission away from coils or the shield. Multilayers extend to ~80 keV only in narrow bands at a few theta_c. REJECTED."
+ },
+ "wall_limits_W_m2": {
+  "W_armour_Li_heat_pipe_1900K": 10000000.0,
+  "flowing_liquid_Sn_1300K": 20000000.0,
+  "flowing_liquid_Li_projection": 50000000.0
+ },
+ "radiators": [
+  {
+   "option": "existing hot blades 1800 K",
+   "T_K": 1800,
+   "both_faces_W_m2": 1071455.8050160992,
+   "area_m2_per_10GW": 9333.096104556309,
+   "mass_t_per_10GW": 93.33096104556309
+  },
+  {
+   "option": "nanostructured hot face 1800 K, eps 0.95",
+   "T_K": 1800,
+   "both_faces_W_m2": 1130981.1275169936,
+   "area_m2_per_10GW": 8841.880520105977,
+   "mass_t_per_10GW": 88.41880520105975
+  },
+  {
+   "option": "armour loop radiator 1300 K",
+   "T_K": 1300,
+   "both_faces_W_m2": 291512.8148059062,
+   "area_m2_per_10GW": 34303.809273901585,
+   "mass_t_per_10GW": 274.4304741912127
+  },
+  {
+   "option": "liquid-Li armour loop 800 K",
+   "T_K": 800,
+   "both_faces_W_m2": 41806.5365164032,
+   "area_m2_per_10GW": 239197.04508591388,
+   "mass_t_per_10GW": 1913.576360687311
+  },
+  {
+   "option": "liquid-droplet sheet 1300 K (tin, eps_sheet 0.5)",
+   "T_K": 1300,
+   "both_faces_W_m2": 161951.563781059,
+   "area_m2_per_10GW": 61746.85669302285,
+   "mass_t_per_10GW": 61.74685669302285
+  }
+ ],
+ "neutron_shield": [
+  {
+   "P_fus_TW": 0.05,
+   "neutron_rate_s": 1.2903012286917147e+21,
+   "coil_flux_n_cm2_s": 136905212415888.33,
+   "mission_burn_s": 23273020497.87241,
+   "mission_fluence_n_cm2": 3.1861978148205454e+24,
+   "rebco_limit_n_cm2": 3e+18,
+   "efolds": 13.875726567626382,
+   "shield_thickness_m": 1.3875726567626383,
+   "note": "~0.1 m per e-fold for W/B4C/hydride (2.45 MeV); in-situ REBCO data suggest a lower limit"
+  },
+  {
+   "P_fus_TW": 0.2,
+   "neutron_rate_s": 5.161204914766859e+21,
+   "coil_flux_n_cm2_s": 547620849663553.3,
+   "mission_burn_s": 5818255124.468102,
+   "mission_fluence_n_cm2": 3.1861978148205454e+24,
+   "rebco_limit_n_cm2": 3e+18,
+   "efolds": 13.875726567626382,
+   "shield_thickness_m": 1.3875726567626383,
+   "note": "~0.1 m per e-fold for W/B4C/hydride (2.45 MeV); in-situ REBCO data suggest a lower limit"
+  },
+  {
+   "P_fus_TW": 1.0,
+   "neutron_rate_s": 2.5806024573834293e+22,
+   "coil_flux_n_cm2_s": 2738104248317766.5,
+   "mission_burn_s": 1163651024.8936205,
+   "mission_fluence_n_cm2": 3.1861978148205454e+24,
+   "rebco_limit_n_cm2": 3e+18,
+   "efolds": 13.875726567626382,
+   "shield_thickness_m": 1.3875726567626383,
+   "note": "~0.1 m per e-fold for W/B4C/hydride (2.45 MeV); in-situ REBCO data suggest a lower limit"
+  }
+ ],
+ "topologies": {
+  "F5_1x1": {
+   "reactors": 1,
+   "nozzles": 1,
+   "R_out": 6.0,
+   "pos": [
+    [
+     0.0,
+     0.0
+    ]
+   ],
+   "manifold": false,
+   "note": "one on-axis core straight into one segmented nozzle (optional mapping)",
+   "R_face": 4.2,
+   "r_plasma": 3.7
+  },
+  "F0_1x4_aft": {
+   "reactors": 1,
+   "nozzles": 4,
+   "R_out": 6.0,
+   "pos": [
+    [
+     0.0,
+     0.0
+    ]
+   ],
+   "manifold": true,
+   "note": "canon topology moved aft: one core, four-way manifold, four nozzles",
+   "R_face": 4.2,
+   "r_plasma": 3.7
+  },
+  "F1_2x4": {
+   "reactors": 2,
+   "nozzles": 4,
+   "R_out": 3.25,
+   "pos": [
+    [
+     1.9900510486144489e-16,
+     3.25
+    ],
+    [
+     -5.970153145843346e-16,
+     -3.25
+    ]
+   ],
+   "manifold": true,
+   "note": "two cores on the Z axis, each splitting to two nozzles",
+   "R_face": 1.45,
+   "r_plasma": 0.95
+  },
+  "F2_4x4": {
+   "reactors": 4,
+   "nozzles": 4,
+   "R_out": 2.692388155425118,
+   "pos": [
+    [
+     2.692388155425118,
+     2.6923881554251174
+    ],
+    [
+     -2.6923881554251174,
+     2.692388155425118
+    ],
+    [
+     -2.6923881554251183,
+     -2.6923881554251174
+    ],
+    [
+     2.692388155425117,
+     -2.6923881554251183
+    ]
+   ],
+   "manifold": false,
+   "note": "one module per nozzle, the current N1-N4 corners",
+   "R_face": 0.8923881554251178,
+   "r_plasma": 0.39238815542511785
+  },
+  "F3_6x6": {
+   "reactors": 6,
+   "nozzles": 6,
+   "R_out": 2.1666666666666665,
+   "pos": [
+    [
+     2.653401398152599e-16,
+     4.333333333333334
+    ],
+    [
+     -3.7527767497325684,
+     2.1666666666666665
+    ],
+    [
+     -3.752776749732568,
+     -2.1666666666666674
+    ],
+    [
+     -7.960204194457796e-16,
+     -4.333333333333334
+    ],
+    [
+     3.7527767497325666,
+     -2.1666666666666687
+    ],
+    [
+     3.752776749732568,
+     2.166666666666667
+    ]
+   ],
+   "manifold": false,
+   "note": "six modules on a ring",
+   "R_face": 0.3666666666666665,
+   "r_plasma": 0.0
+  },
+  "F4_8x8": {
+   "reactors": 8,
+   "nozzles": 8,
+   "R_out": 1.7989962504420087,
+   "pos": [
+    [
+     2.8785345973379494e-16,
+     4.701003749557991
+    ],
+    [
+     -3.3241116296958415,
+     3.324111629695842
+    ],
+    [
+     -4.701003749557991,
+     5.757069194675899e-16
+    ],
+    [
+     -3.3241116296958424,
+     -3.3241116296958415
+    ],
+    [
+     -8.635603792013848e-16,
+     -4.701003749557991
+    ],
+    [
+     3.324111629695841,
+     -3.3241116296958424
+    ],
+    [
+     4.701003749557991,
+     -1.1514138389351798e-15
+    ],
+    [
+     3.3241116296958424,
+     3.324111629695841
+    ]
+   ],
+   "manifold": false,
+   "note": "eight modules on a ring",
+   "R_face": -0.001003749557991318,
+   "r_plasma": 0.0
+  }
+ },
+ "monte_carlo": {
+  "F5_1x1": {
+   "shield_radius_m": 6.985714285714286,
+   "shield_x": -136.5,
+   "fractions": {
+    "own": 0.25116499999999997,
+    "shield": 0.051685,
+    "hull_end": 0.0,
+    "hull_side": 0.0,
+    "blades": 0.0,
+    "escape": 0.69715
+   }
+  },
+  "F0_1x4_aft": {
+   "shield_radius_m": 6.985714285714286,
+   "shield_x": -136.5,
+   "fractions": {
+    "own": 0.25116499999999997,
+    "shield": 0.051685,
+    "hull_end": 0.0,
+    "hull_side": 0.0,
+    "blades": 0.0,
+    "escape": 0.69715
+   }
+  },
+  "F1_2x4": {
+   "shield_radius_m": 13.253571428571428,
+   "shield_x": -136.5,
+   "fractions": {
+    "own": 0.2505825,
+    "shield": 0.0953025,
+    "hull_end": 0.0,
+    "hull_side": 0.0,
+    "blades": 0.0011925,
+    "neighbour": 0.05026,
+    "escape": 0.6026625
+   }
+  },
+  "F2_4x4": {
+   "shield_radius_m": 14.32896570025156,
+   "shield_x": -136.5,
+   "fractions": {
+    "own": 0.250305,
+    "shield": 0.09064,
+    "hull_end": 0.0,
+    "hull_side": 0.0,
+    "blades": 0.001085,
+    "neighbour": 0.13094749999999997,
+    "escape": 0.5270225000000001
+   }
+  },
+  "F3_6x6": {
+   "shield_radius_m": 15.342857142857145,
+   "shield_x": -136.5,
+   "fractions": {
+    "own": 0.24972083333333334,
+    "shield": 0.09184750000000001,
+    "hull_end": 0.0,
+    "hull_side": 0.0,
+    "blades": 0.0009733333333333334,
+    "neighbour": 0.16599166666666662,
+    "escape": 0.4914666666666667
+   }
+  },
+  "F4_8x8": {
+   "shield_radius_m": 16.051935802718983,
+   "shield_x": -136.5,
+   "fractions": {
+    "own": 0.2502625,
+    "shield": 0.092565625,
+    "hull_end": 0.0,
+    "hull_side": 0.0,
+    "blades": 0.0008925,
+    "neighbour": 0.186629375,
+    "escape": 0.46965
+   }
+  }
+ },
+ "evaluation": {
+  "optimistic": {
+   "W_armour_Li_heat_pipe_1900K": {
+    "F5_1x1": {
+     "armour_loop_K": 1800,
+     "armour_heat_GW": 1.9884264594739784,
+     "other_hardware_heat_GW": 0.4091805050779867,
+     "new_armour_radiator_m2": 0.0,
+     "hot_loop_load_GW": 2.397606964551965,
+     "feasible": true,
+     "P_fus_max_TW": 0.07698470817898558,
+     "binding": "own armour flux",
+     "P_wall_TW": 0.07698470817898558,
+     "P_cross_TW": null,
+     "P_heat_TW": 0.34681309447424197,
+     "per_module_TW": 0.07698470817898558,
+     "hardware_fraction_of_neutral": 0.30284999999999995,
+     "permanent_heat_GW": 2.397606964551965,
+     "neutral_TW": 0.007916813487046278,
+     "escaping_neutral_TW": 0.005519206522494314,
+     "field_T": 9.009912581886521,
+     "power_density_W_m3": 59666407.83624357,
+     "peak_wall_MW_m2": 10.0,
+     "mass_t": {
+      "coils_nanocomposite": 64.43951293324356,
+      "coils_steel": 848.4535869543736,
+      "armour_and_coil_shields": 969.8096521631691,
+      "shadow_shield": 383.27590659134944,
+      "module_overhead": 25,
+      "total_nanocomposite": 1442.525071687762
+     },
+     "eta_directed": 0.7015041595481109,
+     "thrust_kN": 5.625187127551211,
+     "accel_mg": 0.12959779277585204,
+     "burn1_days": 38653.72976701016,
+     "burn1_vs_today": 3870.229115414998,
+     "one_module_out": {
+      "thrust_left": 0.0,
+      "trim_deg_to_balance": null
+     }
+    },
+    "F0_1x4_aft": {
+     "armour_loop_K": 1800,
+     "armour_heat_GW": 2.780107808178606,
+     "other_hardware_heat_GW": 0.4091805050779867,
+     "new_armour_radiator_m2": 0.0,
+     "hot_loop_load_GW": 3.1892883132565926,
+     "feasible": true,
+     "P_fus_max_TW": 0.07698470817898558,
+     "binding": "own armour flux",
+     "P_wall_TW": 0.07698470817898558,
+     "P_cross_TW": null,
+     "P_heat_TW": 0.2607232112734868,
+     "per_module_TW": 0.07698470817898558,
+     "hardware_fraction_of_neutral": 0.40284999999999993,
+     "permanent_heat_GW": 3.1892883132565926,
+     "neutral_TW": 0.007916813487046278,
+     "escaping_neutral_TW": 0.004727525173789686,
+     "field_T": 9.009912581886521,
+     "power_density_W_m3": 59666407.83624357,
+     "peak_wall_MW_m2": 10.0,
+     "mass_t": {
+      "coils_nanocomposite": 64.43951293324356,
+      "coils_steel": 848.4535869543736,
+      "armour_and_coil_shields": 969.8096521631691,
+      "shadow_shield": 383.27590659134944,
+      "module_overhead": 85,
+      "total_nanocomposite": 1502.525071687762
+     },
+     "eta_directed": 0.7015041595481109,
+     "thrust_kN": 5.625187127551211,
+     "accel_mg": 0.12959779277585204,
+     "burn1_days": 38653.72976701016,
+     "burn1_vs_today": 3870.229115414998,
+     "one_module_out": {
+      "thrust_left": 0.0,
+      "trim_deg_to_balance": null
+     }
+    },
+    "F1_2x4": {
+     "armour_loop_K": 1800,
+     "armour_heat_GW": 1.9164140872702298,
+     "other_hardware_heat_GW": 0.8022173079869719,
+     "new_armour_radiator_m2": 0.0,
+     "hot_loop_load_GW": 2.718631395257202,
+     "feasible": true,
+     "P_fus_max_TW": 0.053156108028347186,
+     "binding": "own armour flux",
+     "P_wall_TW": 0.053156108028347186,
+     "P_cross_TW": 0.11914300075319197,
+     "P_heat_TW": 0.211189274208207,
+     "per_module_TW": 0.026578054014173593,
+     "hardware_fraction_of_neutral": 0.4973375,
+     "permanent_heat_GW": 2.718631395257202,
+     "neutral_TW": 0.0054663712172462395,
+     "escaping_neutral_TW": 0.002747739821989038,
+     "field_T": 13.629794710930113,
+     "power_density_W_m3": 312467492.08636147,
+     "peak_wall_MW_m2": 10.0,
+     "mass_t": {
+      "coils_nanocomposite": 35.15257497330558,
+      "coils_steel": 462.8422371485236,
+      "armour_and_coil_shields": 851.0574498574749,
+      "shadow_shield": 1379.6080740547693,
+      "module_overhead": 110,
+      "total_nanocomposite": 2375.8180988855497
+     },
+     "eta_directed": 0.7015041595481109,
+     "thrust_kN": 3.8840577785472647,
+     "accel_mg": 0.08948419024999306,
+     "burn1_days": 55981.26380049749,
+     "burn1_vs_today": 5605.159408532067,
+     "one_module_out": {
+      "thrust_left": 0.5,
+      "trim_deg_to_balance": 1.2412143533643065
+     }
+    },
+    "F2_4x4": {
+     "armour_loop_K": 1800,
+     "armour_heat_GW": 1.6841642206340655,
+     "other_hardware_heat_GW": 1.4982403764173267,
+     "new_armour_radiator_m2": 0.0,
+     "hot_loop_load_GW": 3.182404597051392,
+     "feasible": true,
+     "P_fus_max_TW": 0.0654288016455104,
+     "binding": "own armour flux",
+     "P_wall_TW": 0.0654288016455104,
+     "P_cross_TW": 0.1974025870951999,
+     "P_heat_TW": 0.2220662624787102,
+     "per_module_TW": 0.0163572004113776,
+     "hardware_fraction_of_neutral": 0.4729775,
+     "permanent_heat_GW": 3.182404597051392,
+     "neutral_TW": 0.006728448175761832,
+     "escaping_neutral_TW": 0.00354604357871044,
+     "field_T": 18.784066685722138,
+     "power_density_W_m3": 1127213207.2700837,
+     "peak_wall_MW_m2": 10.0,
+     "mass_t": {
+      "coils_nanocomposite": 50.57773101949325,
+      "coils_steel": 665.9401250899945,
+      "armour_and_coil_shields": 1260.6640025482318,
+      "shadow_shield": 1612.5736817394613,
+      "module_overhead": 100,
+      "total_nanocomposite": 3023.8154153071864
+     },
+     "eta_directed": 0.7015041595481109,
+     "thrust_kN": 4.780809871120517,
+     "accel_mg": 0.110144319278485,
+     "burn1_days": 45480.675655120074,
+     "burn1_vs_today": 4553.781385914803,
+     "one_module_out": {
+      "thrust_left": 0.75,
+      "trim_deg_to_balance": 0.48478862795521555
+     }
+    },
+    "F3_6x6": {
+     "feasible": false,
+     "reason": "plasma radius below the 0.25 m DFD scale after the 1.8 m coil, shield and armour build"
+    },
+    "F4_8x8": {
+     "feasible": false,
+     "reason": "plasma radius below the 0.25 m DFD scale after the 1.8 m coil, shield and armour build"
+    }
+   },
+   "flowing_liquid_Sn_1300K": {
+    "F5_1x1": {
+     "armour_loop_K": 1300,
+     "armour_heat_GW": 3.976852918947957,
+     "other_hardware_heat_GW": 0.8183610101559734,
+     "new_armour_radiator_m2": 13642.120404194951,
+     "hot_loop_load_GW": 0.8183610101559734,
+     "feasible": true,
+     "P_fus_max_TW": 0.15396941635797115,
+     "binding": "own armour flux",
+     "P_wall_TW": 0.15396941635797115,
+     "P_cross_TW": null,
+     "P_heat_TW": Infinity,
+     "per_module_TW": 0.15396941635797115,
+     "hardware_fraction_of_neutral": 0.30284999999999995,
+     "permanent_heat_GW": 4.79521392910393,
+     "neutral_TW": 0.015833626974092557,
+     "escaping_neutral_TW": 0.011038413044988628,
+     "field_T": 10.714652147931986,
+     "power_density_W_m3": 119332815.67248714,
+     "peak_wall_MW_m2": 20.0,
+     "mass_t": {
+      "coils_nanocomposite": 91.13123314290947,
+      "coils_steel": 1199.8945697149748,
+      "armour_and_coil_shields": 969.8096521631691,
+      "shadow_shield": 383.27590659134944,
+      "module_overhead": 25,
+      "total_nanocomposite": 1469.216791897428
+     },
+     "eta_directed": 0.7015041595481109,
+     "thrust_kN": 11.250374255102422,
+     "accel_mg": 0.2591955855517041,
+     "burn1_days": 19326.86488350508,
+     "burn1_vs_today": 1935.114557707499,
+     "one_module_out": {
+      "thrust_left": 0.0,
+      "trim_deg_to_balance": null
+     }
+    },
+    "F0_1x4_aft": {
+     "armour_loop_K": 1300,
+     "armour_heat_GW": 5.560215616357212,
+     "other_hardware_heat_GW": 0.8183610101559734,
+     "new_armour_radiator_m2": 19073.657602528692,
+     "hot_loop_load_GW": 0.8183610101559734,
+     "feasible": true,
+     "P_fus_max_TW": 0.15396941635797115,
+     "binding": "own armour flux",
+     "P_wall_TW": 0.15396941635797115,
+     "P_cross_TW": null,
+     "P_heat_TW": Infinity,
+     "per_module_TW": 0.15396941635797115,
+     "hardware_fraction_of_neutral": 0.40284999999999993,
+     "permanent_heat_GW": 6.378576626513185,
+     "neutral_TW": 0.015833626974092557,
+     "escaping_neutral_TW": 0.009455050347579373,
+     "field_T": 10.714652147931986,
+     "power_density_W_m3": 119332815.67248714,
+     "peak_wall_MW_m2": 20.0,
+     "mass_t": {
+      "coils_nanocomposite": 91.13123314290947,
+      "coils_steel": 1199.8945697149748,
+      "armour_and_coil_shields": 969.8096521631691,
+      "shadow_shield": 383.27590659134944,
+      "module_overhead": 85,
+      "total_nanocomposite": 1529.216791897428
+     },
+     "eta_directed": 0.7015041595481109,
+     "thrust_kN": 11.250374255102422,
+     "accel_mg": 0.2591955855517041,
+     "burn1_days": 19326.86488350508,
+     "burn1_vs_today": 1935.114557707499,
+     "one_module_out": {
+      "thrust_left": 0.0,
+      "trim_deg_to_balance": null
+     }
+    },
+    "F1_2x4": {
+     "armour_loop_K": 1300,
+     "armour_heat_GW": 3.8328281745404595,
+     "other_hardware_heat_GW": 1.6044346159739438,
+     "new_armour_radiator_m2": 13148.06066790723,
+     "hot_loop_load_GW": 1.6044346159739438,
+     "feasible": true,
+     "P_fus_max_TW": 0.10631221605669437,
+     "binding": "own armour flux",
+     "P_wall_TW": 0.10631221605669437,
+     "P_cross_TW": 0.23828600150638393,
+     "P_heat_TW": Infinity,
+     "per_module_TW": 0.053156108028347186,
+     "hardware_fraction_of_neutral": 0.4973375,
+     "permanent_heat_GW": 5.437262790514404,
+     "neutral_TW": 0.010932742434492479,
+     "escaping_neutral_TW": 0.005495479643978076,
+     "field_T": 16.208648846264545,
+     "power_density_W_m3": 624934984.1727229,
+     "peak_wall_MW_m2": 20.0,
+     "mass_t": {
+      "coils_nanocomposite": 49.713248279585784,
+      "coils_steel": 654.5577690145464,
+      "armour_and_coil_shields": 851.0574498574749,
+      "shadow_shield": 1379.6080740547693,
+      "module_overhead": 110,
+      "total_nanocomposite": 2390.3787721918297
+     },
+     "eta_directed": 0.7015041595481109,
+     "thrust_kN": 7.7681155570945295,
+     "accel_mg": 0.17896838049998612,
+     "burn1_days": 27990.631900248743,
+     "burn1_vs_today": 2802.5797042660333,
+     "one_module_out": {
+      "thrust_left": 0.5,
+      "trim_deg_to_balance": 1.2412143533643065
+     }
+    },
+    "F2_4x4": {
+     "armour_loop_K": 1300,
+     "armour_heat_GW": 3.368328441268131,
+     "other_hardware_heat_GW": 2.9964807528346533,
+     "new_armour_radiator_m2": 11554.649642112017,
+     "hot_loop_load_GW": 2.9964807528346533,
+     "feasible": true,
+     "P_fus_max_TW": 0.1308576032910208,
+     "binding": "own armour flux",
+     "P_wall_TW": 0.1308576032910208,
+     "P_cross_TW": 0.3948051741903998,
+     "P_heat_TW": Infinity,
+     "per_module_TW": 0.0327144008227552,
+     "hardware_fraction_of_neutral": 0.4729775,
+     "permanent_heat_GW": 6.364809194102784,
+     "neutral_TW": 0.013456896351523664,
+     "escaping_neutral_TW": 0.00709208715742088,
+     "field_T": 22.338145751346346,
+     "power_density_W_m3": 2254426414.5401673,
+     "peak_wall_MW_m2": 20.0,
+     "mass_t": {
+      "coils_nanocomposite": 71.52771316182574,
+      "coils_steel": 941.7815566307057,
+      "armour_and_coil_shields": 1260.6640025482318,
+      "shadow_shield": 1612.5736817394613,
+      "module_overhead": 100,
+      "total_nanocomposite": 3044.765397449519
+     },
+     "eta_directed": 0.7015041595481109,
+     "thrust_kN": 9.561619742241033,
+     "accel_mg": 0.22028863855697,
+     "burn1_days": 22740.337827560037,
+     "burn1_vs_today": 2276.8906929574014,
+     "one_module_out": {
+      "thrust_left": 0.75,
+      "trim_deg_to_balance": 0.48478862795521555
+     }
+    },
+    "F3_6x6": {
+     "feasible": false,
+     "reason": "plasma radius below the 0.25 m DFD scale after the 1.8 m coil, shield and armour build"
+    },
+    "F4_8x8": {
+     "feasible": false,
+     "reason": "plasma radius below the 0.25 m DFD scale after the 1.8 m coil, shield and armour build"
+    }
+   },
+   "flowing_liquid_Li_projection": {
+    "F5_1x1": {
+     "armour_loop_K": 800,
+     "armour_heat_GW": 9.942132297369891,
+     "other_hardware_heat_GW": 2.045902525389933,
+     "new_armour_radiator_m2": 237812.86673841064,
+     "hot_loop_load_GW": 2.045902525389933,
+     "feasible": true,
+     "P_fus_max_TW": 0.38492354089492786,
+     "binding": "own armour flux",
+     "P_wall_TW": 0.38492354089492786,
+     "P_cross_TW": null,
+     "P_heat_TW": Infinity,
+     "per_module_TW": 0.38492354089492786,
+     "hardware_fraction_of_neutral": 0.30284999999999995,
+     "permanent_heat_GW": 11.988034822759825,
+     "neutral_TW": 0.03958406743523139,
+     "escaping_neutral_TW": 0.027596032612471566,
+     "field_T": 13.472961798233749,
+     "power_density_W_m3": 298332039.1812178,
+     "peak_wall_MW_m2": 49.99999999999999,
+     "mass_t": {
+      "coils_nanocomposite": 144.09113135570945,
+      "coils_steel": 1897.199896183508,
+      "armour_and_coil_shields": 969.8096521631691,
+      "shadow_shield": 383.27590659134944,
+      "module_overhead": 25,
+      "total_nanocomposite": 1522.176690110228
+     },
+     "eta_directed": 0.7015041595481109,
+     "thrust_kN": 28.125935637756054,
+     "accel_mg": 0.6479889638792602,
+     "burn1_days": 7730.745953402034,
+     "burn1_vs_today": 774.0458230829996,
+     "one_module_out": {
+      "thrust_left": 0.0,
+      "trim_deg_to_balance": null
+     }
+    },
+    "F0_1x4_aft": {
+     "armour_loop_K": 800,
+     "armour_heat_GW": 13.90053904089303,
+     "other_hardware_heat_GW": 2.045902525389933,
+     "new_armour_radiator_m2": 332496.7863682996,
+     "hot_loop_load_GW": 2.045902525389933,
+     "feasible": true,
+     "P_fus_max_TW": 0.38492354089492786,
+     "binding": "own armour flux",
+     "P_wall_TW": 0.38492354089492786,
+     "P_cross_TW": null,
+     "P_heat_TW": Infinity,
+     "per_module_TW": 0.38492354089492786,
+     "hardware_fraction_of_neutral": 0.40284999999999993,
+     "permanent_heat_GW": 15.946441566282962,
+     "neutral_TW": 0.03958406743523139,
+     "escaping_neutral_TW": 0.02363762586894843,
+     "field_T": 13.472961798233749,
+     "power_density_W_m3": 298332039.1812178,
+     "peak_wall_MW_m2": 49.99999999999999,
+     "mass_t": {
+      "coils_nanocomposite": 144.09113135570945,
+      "coils_steel": 1897.199896183508,
+      "armour_and_coil_shields": 969.8096521631691,
+      "shadow_shield": 383.27590659134944,
+      "module_overhead": 85,
+      "total_nanocomposite": 1582.176690110228
+     },
+     "eta_directed": 0.7015041595481109,
+     "thrust_kN": 28.125935637756054,
+     "accel_mg": 0.6479889638792602,
+     "burn1_days": 7730.745953402034,
+     "burn1_vs_today": 774.0458230829996,
+     "one_module_out": {
+      "thrust_left": 0.0,
+      "trim_deg_to_balance": null
+     }
+    },
+    "F1_2x4": {
+     "armour_loop_K": 800,
+     "armour_heat_GW": 9.582070436351149,
+     "other_hardware_heat_GW": 4.011086539934858,
+     "new_armour_radiator_m2": 229200.2934180288,
+     "hot_loop_load_GW": 4.011086539934858,
+     "feasible": true,
+     "P_fus_max_TW": 0.2657805401417359,
+     "binding": "own armour flux",
+     "P_wall_TW": 0.2657805401417359,
+     "P_cross_TW": 0.59571500376596,
+     "P_heat_TW": Infinity,
+     "per_module_TW": 0.13289027007086796,
+     "hardware_fraction_of_neutral": 0.4973375,
+     "permanent_heat_GW": 13.593156976286007,
+     "neutral_TW": 0.027331856086231197,
+     "escaping_neutral_TW": 0.01373869910994519,
+     "field_T": 20.381296909284785,
+     "power_density_W_m3": 1562337460.4318073,
+     "peak_wall_MW_m2": 50.0,
+     "mass_t": {
+      "coils_nanocomposite": 78.60354722446915,
+      "coils_steel": 1034.9467051221773,
+      "armour_and_coil_shields": 851.0574498574749,
+      "shadow_shield": 1379.6080740547693,
+      "module_overhead": 110,
+      "total_nanocomposite": 2419.269071136713
+     },
+     "eta_directed": 0.7015041595481109,
+     "thrust_kN": 19.42028889273632,
+     "accel_mg": 0.44742095124996534,
+     "burn1_days": 11196.252760099496,
+     "burn1_vs_today": 1121.0318817064133,
+     "one_module_out": {
+      "thrust_left": 0.5,
+      "trim_deg_to_balance": 1.2412143533643065
+     }
+    },
+    "F2_4x4": {
+     "armour_loop_K": 800,
+     "armour_heat_GW": 8.420821103170326,
+     "other_hardware_heat_GW": 7.4912018820866315,
+     "new_armour_radiator_m2": 201423.55250754475,
+     "hot_loop_load_GW": 7.4912018820866315,
+     "feasible": true,
+     "P_fus_max_TW": 0.327144008227552,
+     "binding": "own armour flux",
+     "P_wall_TW": 0.327144008227552,
+     "P_cross_TW": 0.9870129354759994,
+     "P_heat_TW": Infinity,
+     "per_module_TW": 0.081786002056888,
+     "hardware_fraction_of_neutral": 0.4729775,
+     "permanent_heat_GW": 15.912022985256957,
+     "neutral_TW": 0.03364224087880916,
+     "escaping_neutral_TW": 0.017730217893552197,
+     "field_T": 28.08873122487273,
+     "power_density_W_m3": 5636066036.350418,
+     "peak_wall_MW_m2": 49.99999999999999,
+     "mass_t": {
+      "coils_nanocomposite": 113.09524470728668,
+      "coils_steel": 1489.0873886459415,
+      "armour_and_coil_shields": 1260.6640025482318,
+      "shadow_shield": 1612.5736817394613,
+      "module_overhead": 100,
+      "total_nanocomposite": 3086.3329289949797
+     },
+     "eta_directed": 0.7015041595481109,
+     "thrust_kN": 23.904049355602584,
+     "accel_mg": 0.550721596392425,
+     "burn1_days": 9096.135131024015,
+     "burn1_vs_today": 910.7562771829606,
+     "one_module_out": {
+      "thrust_left": 0.75,
+      "trim_deg_to_balance": 0.48478862795521555
+     }
+    },
+    "F3_6x6": {
+     "feasible": false,
+     "reason": "plasma radius below the 0.25 m DFD scale after the 1.8 m coil, shield and armour build"
+    },
+    "F4_8x8": {
+     "feasible": false,
+     "reason": "plasma radius below the 0.25 m DFD scale after the 1.8 m coil, shield and armour build"
+    }
+   }
+  },
+  "central": {
+   "W_armour_Li_heat_pipe_1900K": {
+    "F5_1x1": {
+     "armour_loop_K": 1800,
+     "armour_heat_GW": 1.9884264594739784,
+     "other_hardware_heat_GW": 0.4091805050779867,
+     "new_armour_radiator_m2": 0.0,
+     "hot_loop_load_GW": 2.397606964551965,
+     "feasible": true,
+     "P_fus_max_TW": 0.04049972364205912,
+     "binding": "own armour flux",
+     "P_wall_TW": 0.04049972364205912,
+     "P_cross_TW": null,
+     "P_heat_TW": 0.1824496684328306,
+     "per_module_TW": 0.04049972364205912,
+     "hardware_fraction_of_neutral": 0.30284999999999995,
+     "permanent_heat_GW": 2.397606964551965,
+     "neutral_TW": 0.007916813487046278,
+     "escaping_neutral_TW": 0.005519206522494314,
+     "field_T": 7.6733052524381815,
+     "power_density_W_m3": 31389000.299437087,
+     "peak_wall_MW_m2": 10.0,
+     "mass_t": {
+      "coils_nanocomposite": 46.738637193994315,
+      "coils_steel": 615.3920563875919,
+      "armour_and_coil_shields": 969.8096521631691,
+      "shadow_shield": 383.27590659134944,
+      "module_overhead": 25,
+      "total_nanocomposite": 1424.8241959485129
+     },
+     "eta_directed": 0.6199791751130449,
+     "thrust_kN": 2.6153596406819033,
+     "accel_mg": 0.06025485536069119,
+     "burn1_days": 83137.50037854715,
+     "burn1_vs_today": 8324.194753968928,
+     "one_module_out": {
+      "thrust_left": 0.0,
+      "trim_deg_to_balance": null
+     }
+    },
+    "F0_1x4_aft": {
+     "armour_loop_K": 1800,
+     "armour_heat_GW": 2.780107808178606,
+     "other_hardware_heat_GW": 0.4091805050779867,
+     "new_armour_radiator_m2": 0.0,
+     "hot_loop_load_GW": 3.1892883132565926,
+     "feasible": true,
+     "P_fus_max_TW": 0.04049972364205912,
+     "binding": "own armour flux",
+     "P_wall_TW": 0.04049972364205912,
+     "P_cross_TW": null,
+     "P_heat_TW": 0.1371599406351812,
+     "per_module_TW": 0.04049972364205912,
+     "hardware_fraction_of_neutral": 0.40284999999999993,
+     "permanent_heat_GW": 3.1892883132565926,
+     "neutral_TW": 0.007916813487046278,
+     "escaping_neutral_TW": 0.004727525173789686,
+     "field_T": 7.6733052524381815,
+     "power_density_W_m3": 31389000.299437087,
+     "peak_wall_MW_m2": 10.0,
+     "mass_t": {
+      "coils_nanocomposite": 46.738637193994315,
+      "coils_steel": 615.3920563875919,
+      "armour_and_coil_shields": 969.8096521631691,
+      "shadow_shield": 383.27590659134944,
+      "module_overhead": 85,
+      "total_nanocomposite": 1484.8241959485129
+     },
+     "eta_directed": 0.6199791751130449,
+     "thrust_kN": 2.6153596406819033,
+     "accel_mg": 0.06025485536069119,
+     "burn1_days": 83137.50037854715,
+     "burn1_vs_today": 8324.194753968928,
+     "one_module_out": {
+      "thrust_left": 0.0,
+      "trim_deg_to_balance": null
+     }
+    },
+    "F1_2x4": {
+     "armour_loop_K": 1800,
+     "armour_heat_GW": 1.9164140872702298,
+     "other_hardware_heat_GW": 0.8022173079869719,
+     "new_armour_radiator_m2": 0.0,
+     "hot_loop_load_GW": 2.718631395257202,
+     "feasible": true,
+     "P_fus_max_TW": 0.027964094895707486,
+     "binding": "own armour flux",
+     "P_wall_TW": 0.027964094895707486,
+     "P_cross_TW": 0.06267814373175817,
+     "P_heat_TW": 0.11110137901300975,
+     "per_module_TW": 0.013982047447853743,
+     "hardware_fraction_of_neutral": 0.4973375,
+     "permanent_heat_GW": 2.718631395257202,
+     "neutral_TW": 0.0054663712172462395,
+     "escaping_neutral_TW": 0.002747739821989038,
+     "field_T": 11.607834637074333,
+     "power_density_W_m3": 164381308.65162274,
+     "peak_wall_MW_m2": 10.0,
+     "mass_t": {
+      "coils_nanocomposite": 25.496521828370614,
+      "coils_steel": 335.70420407354646,
+      "armour_and_coil_shields": 851.0574498574749,
+      "shadow_shield": 1379.6080740547693,
+      "module_overhead": 110,
+      "total_nanocomposite": 2366.1620457406148
+     },
+     "eta_directed": 0.6199791751130449,
+     "thrust_kN": 1.805843561423219,
+     "accel_mg": 0.04160454298714391,
+     "burn1_days": 120406.0350309993,
+     "burn1_vs_today": 12055.730333334306,
+     "one_module_out": {
+      "thrust_left": 0.5,
+      "trim_deg_to_balance": 1.2412143533643065
+     }
+    },
+    "F2_4x4": {
+     "armour_loop_K": 1800,
+     "armour_heat_GW": 1.6841642206340655,
+     "other_hardware_heat_GW": 1.4982403764173267,
+     "new_armour_radiator_m2": 0.0,
+     "hot_loop_load_GW": 3.182404597051392,
+     "feasible": true,
+     "P_fus_max_TW": 0.034420451120156355,
+     "binding": "own armour flux",
+     "P_wall_TW": 0.034420451120156355,
+     "P_cross_TW": 0.10384854879225766,
+     "P_heat_TW": 0.11682348966892236,
+     "per_module_TW": 0.008605112780039089,
+     "hardware_fraction_of_neutral": 0.4729775,
+     "permanent_heat_GW": 3.182404597051392,
+     "neutral_TW": 0.006728448175761832,
+     "escaping_neutral_TW": 0.00354604357871044,
+     "field_T": 15.997477916874658,
+     "power_density_W_m3": 592998589.7196531,
+     "peak_wall_MW_m2": 10.0,
+     "mass_t": {
+      "coils_nanocomposite": 36.684545127838845,
+      "coils_steel": 483.01317751654483,
+      "armour_and_coil_shields": 1260.6640025482318,
+      "shadow_shield": 1612.5736817394613,
+      "module_overhead": 100,
+      "total_nanocomposite": 3009.922229415532
+     },
+     "eta_directed": 0.6199791751130449,
+     "thrust_kN": 2.222777110020403,
+     "accel_mg": 0.051210208791175695,
+     "burn1_days": 97821.08252645846,
+     "burn1_vs_today": 9794.397694020938,
+     "one_module_out": {
+      "thrust_left": 0.75,
+      "trim_deg_to_balance": 0.48478862795521555
+     }
+    },
+    "F3_6x6": {
+     "feasible": false,
+     "reason": "plasma radius below the 0.25 m DFD scale after the 1.8 m coil, shield and armour build"
+    },
+    "F4_8x8": {
+     "feasible": false,
+     "reason": "plasma radius below the 0.25 m DFD scale after the 1.8 m coil, shield and armour build"
+    }
+   },
+   "flowing_liquid_Sn_1300K": {
+    "F5_1x1": {
+     "armour_loop_K": 1300,
+     "armour_heat_GW": 3.976852918947957,
+     "other_hardware_heat_GW": 0.8183610101559734,
+     "new_armour_radiator_m2": 13642.120404194951,
+     "hot_loop_load_GW": 0.8183610101559734,
+     "feasible": true,
+     "P_fus_max_TW": 0.08099944728411825,
+     "binding": "own armour flux",
+     "P_wall_TW": 0.08099944728411825,
+     "P_cross_TW": null,
+     "P_heat_TW": Infinity,
+     "per_module_TW": 0.08099944728411825,
+     "hardware_fraction_of_neutral": 0.30284999999999995,
+     "permanent_heat_GW": 4.79521392910393,
+     "neutral_TW": 0.015833626974092557,
+     "escaping_neutral_TW": 0.011038413044988628,
+     "field_T": 9.125149201787236,
+     "power_density_W_m3": 62778000.598874174,
+     "peak_wall_MW_m2": 20.0,
+     "mass_t": {
+      "coils_nanocomposite": 66.09841460658234,
+      "coils_steel": 870.2957923200009,
+      "armour_and_coil_shields": 969.8096521631691,
+      "shadow_shield": 383.27590659134944,
+      "module_overhead": 25,
+      "total_nanocomposite": 1444.183973361101
+     },
+     "eta_directed": 0.6199791751130449,
+     "thrust_kN": 5.230719281363807,
+     "accel_mg": 0.12050971072138238,
+     "burn1_days": 41568.750189273575,
+     "burn1_vs_today": 4162.097376984464,
+     "one_module_out": {
+      "thrust_left": 0.0,
+      "trim_deg_to_balance": null
+     }
+    },
+    "F0_1x4_aft": {
+     "armour_loop_K": 1300,
+     "armour_heat_GW": 5.560215616357212,
+     "other_hardware_heat_GW": 0.8183610101559734,
+     "new_armour_radiator_m2": 19073.657602528692,
+     "hot_loop_load_GW": 0.8183610101559734,
+     "feasible": true,
+     "P_fus_max_TW": 0.08099944728411825,
+     "binding": "own armour flux",
+     "P_wall_TW": 0.08099944728411825,
+     "P_cross_TW": null,
+     "P_heat_TW": Infinity,
+     "per_module_TW": 0.08099944728411825,
+     "hardware_fraction_of_neutral": 0.40284999999999993,
+     "permanent_heat_GW": 6.378576626513185,
+     "neutral_TW": 0.015833626974092557,
+     "escaping_neutral_TW": 0.009455050347579373,
+     "field_T": 9.125149201787236,
+     "power_density_W_m3": 62778000.598874174,
+     "peak_wall_MW_m2": 20.0,
+     "mass_t": {
+      "coils_nanocomposite": 66.09841460658234,
+      "coils_steel": 870.2957923200009,
+      "armour_and_coil_shields": 969.8096521631691,
+      "shadow_shield": 383.27590659134944,
+      "module_overhead": 85,
+      "total_nanocomposite": 1504.183973361101
+     },
+     "eta_directed": 0.6199791751130449,
+     "thrust_kN": 5.230719281363807,
+     "accel_mg": 0.12050971072138238,
+     "burn1_days": 41568.750189273575,
+     "burn1_vs_today": 4162.097376984464,
+     "one_module_out": {
+      "thrust_left": 0.0,
+      "trim_deg_to_balance": null
+     }
+    },
+    "F1_2x4": {
+     "armour_loop_K": 1300,
+     "armour_heat_GW": 3.8328281745404595,
+     "other_hardware_heat_GW": 1.6044346159739438,
+     "new_armour_radiator_m2": 13148.06066790723,
+     "hot_loop_load_GW": 1.6044346159739438,
+     "feasible": true,
+     "P_fus_max_TW": 0.05592818979141497,
+     "binding": "own armour flux",
+     "P_wall_TW": 0.05592818979141497,
+     "P_cross_TW": 0.12535628746351635,
+     "P_heat_TW": Infinity,
+     "per_module_TW": 0.027964094895707486,
+     "hardware_fraction_of_neutral": 0.4973375,
+     "permanent_heat_GW": 5.437262790514404,
+     "neutral_TW": 0.010932742434492479,
+     "escaping_neutral_TW": 0.005495479643978076,
+     "field_T": 13.804119540183823,
+     "power_density_W_m3": 328762617.3032455,
+     "peak_wall_MW_m2": 20.0,
+     "mass_t": {
+      "coils_nanocomposite": 36.057526963023356,
+      "coils_steel": 474.7574383464743,
+      "armour_and_coil_shields": 851.0574498574749,
+      "shadow_shield": 1379.6080740547693,
+      "module_overhead": 110,
+      "total_nanocomposite": 2376.7230508752677
+     },
+     "eta_directed": 0.6199791751130449,
+     "thrust_kN": 3.611687122846438,
+     "accel_mg": 0.08320908597428782,
+     "burn1_days": 60203.01751549965,
+     "burn1_vs_today": 6027.865166667153,
+     "one_module_out": {
+      "thrust_left": 0.5,
+      "trim_deg_to_balance": 1.2412143533643065
+     }
+    },
+    "F2_4x4": {
+     "armour_loop_K": 1300,
+     "armour_heat_GW": 3.368328441268131,
+     "other_hardware_heat_GW": 2.9964807528346533,
+     "new_armour_radiator_m2": 11554.649642112017,
+     "hot_loop_load_GW": 2.9964807528346533,
+     "feasible": true,
+     "P_fus_max_TW": 0.06884090224031271,
+     "binding": "own armour flux",
+     "P_wall_TW": 0.06884090224031271,
+     "P_cross_TW": 0.20769709758451532,
+     "P_heat_TW": Infinity,
+     "per_module_TW": 0.017210225560078177,
+     "hardware_fraction_of_neutral": 0.4729775,
+     "permanent_heat_GW": 6.364809194102784,
+     "neutral_TW": 0.013456896351523664,
+     "escaping_neutral_TW": 0.00709208715742088,
+     "field_T": 19.02431456084625,
+     "power_density_W_m3": 1185997179.4393063,
+     "peak_wall_MW_m2": 20.0,
+     "mass_t": {
+      "coils_nanocomposite": 51.87978124927753,
+      "coils_steel": 683.0837864488209,
+      "armour_and_coil_shields": 1260.6640025482318,
+      "shadow_shield": 1612.5736817394613,
+      "module_overhead": 100,
+      "total_nanocomposite": 3025.1174655369705
+     },
+     "eta_directed": 0.6199791751130449,
+     "thrust_kN": 4.445554220040806,
+     "accel_mg": 0.10242041758235139,
+     "burn1_days": 48910.54126322923,
+     "burn1_vs_today": 4897.198847010469,
+     "one_module_out": {
+      "thrust_left": 0.75,
+      "trim_deg_to_balance": 0.48478862795521555
+     }
+    },
+    "F3_6x6": {
+     "feasible": false,
+     "reason": "plasma radius below the 0.25 m DFD scale after the 1.8 m coil, shield and armour build"
+    },
+    "F4_8x8": {
+     "feasible": false,
+     "reason": "plasma radius below the 0.25 m DFD scale after the 1.8 m coil, shield and armour build"
+    }
+   },
+   "flowing_liquid_Li_projection": {
+    "F5_1x1": {
+     "armour_loop_K": 800,
+     "armour_heat_GW": 9.942132297369891,
+     "other_hardware_heat_GW": 2.045902525389933,
+     "new_armour_radiator_m2": 237812.86673841064,
+     "hot_loop_load_GW": 2.045902525389933,
+     "feasible": true,
+     "P_fus_max_TW": 0.2024986182102956,
+     "binding": "own armour flux",
+     "P_wall_TW": 0.2024986182102956,
+     "P_cross_TW": null,
+     "P_heat_TW": Infinity,
+     "per_module_TW": 0.2024986182102956,
+     "hardware_fraction_of_neutral": 0.30284999999999995,
+     "permanent_heat_GW": 11.988034822759825,
+     "neutral_TW": 0.03958406743523139,
+     "escaping_neutral_TW": 0.027596032612471566,
+     "field_T": 11.474267657171824,
+     "power_density_W_m3": 156945001.49718544,
+     "peak_wall_MW_m2": 49.99999999999999,
+     "mass_t": {
+      "coils_nanocomposite": 104.51076994147128,
+      "coils_steel": 1376.0584708960387,
+      "armour_and_coil_shields": 969.8096521631691,
+      "shadow_shield": 383.27590659134944,
+      "module_overhead": 25,
+      "total_nanocomposite": 1482.5963286959898
+     },
+     "eta_directed": 0.6199791751130449,
+     "thrust_kN": 13.076798203409517,
+     "accel_mg": 0.30127427680345586,
+     "burn1_days": 16627.500075709428,
+     "burn1_vs_today": 1664.8389507937854,
+     "one_module_out": {
+      "thrust_left": 0.0,
+      "trim_deg_to_balance": null
+     }
+    },
+    "F0_1x4_aft": {
+     "armour_loop_K": 800,
+     "armour_heat_GW": 13.90053904089303,
+     "other_hardware_heat_GW": 2.045902525389933,
+     "new_armour_radiator_m2": 332496.7863682996,
+     "hot_loop_load_GW": 2.045902525389933,
+     "feasible": true,
+     "P_fus_max_TW": 0.2024986182102956,
+     "binding": "own armour flux",
+     "P_wall_TW": 0.2024986182102956,
+     "P_cross_TW": null,
+     "P_heat_TW": Infinity,
+     "per_module_TW": 0.2024986182102956,
+     "hardware_fraction_of_neutral": 0.40284999999999993,
+     "permanent_heat_GW": 15.946441566282962,
+     "neutral_TW": 0.03958406743523139,
+     "escaping_neutral_TW": 0.02363762586894843,
+     "field_T": 11.474267657171824,
+     "power_density_W_m3": 156945001.49718544,
+     "peak_wall_MW_m2": 49.99999999999999,
+     "mass_t": {
+      "coils_nanocomposite": 104.51076994147128,
+      "coils_steel": 1376.0584708960387,
+      "armour_and_coil_shields": 969.8096521631691,
+      "shadow_shield": 383.27590659134944,
+      "module_overhead": 85,
+      "total_nanocomposite": 1542.5963286959898
+     },
+     "eta_directed": 0.6199791751130449,
+     "thrust_kN": 13.076798203409517,
+     "accel_mg": 0.30127427680345586,
+     "burn1_days": 16627.500075709428,
+     "burn1_vs_today": 1664.8389507937854,
+     "one_module_out": {
+      "thrust_left": 0.0,
+      "trim_deg_to_balance": null
+     }
+    },
+    "F1_2x4": {
+     "armour_loop_K": 800,
+     "armour_heat_GW": 9.582070436351149,
+     "other_hardware_heat_GW": 4.011086539934858,
+     "new_armour_radiator_m2": 229200.2934180288,
+     "hot_loop_load_GW": 4.011086539934858,
+     "feasible": true,
+     "P_fus_max_TW": 0.1398204744785374,
+     "binding": "own armour flux",
+     "P_wall_TW": 0.1398204744785374,
+     "P_cross_TW": 0.31339071865879087,
+     "P_heat_TW": Infinity,
+     "per_module_TW": 0.0699102372392687,
+     "hardware_fraction_of_neutral": 0.4973375,
+     "permanent_heat_GW": 13.593156976286007,
+     "neutral_TW": 0.027331856086231197,
+     "escaping_neutral_TW": 0.01373869910994519,
+     "field_T": 17.35776137716657,
+     "power_density_W_m3": 821906543.2581136,
+     "peak_wall_MW_m2": 50.0,
+     "mass_t": {
+      "coils_nanocomposite": 57.011955998043895,
+      "coils_steel": 750.6574206409114,
+      "armour_and_coil_shields": 851.0574498574749,
+      "shadow_shield": 1379.6080740547693,
+      "module_overhead": 110,
+      "total_nanocomposite": 2397.677479910288
+     },
+     "eta_directed": 0.6199791751130449,
+     "thrust_kN": 9.029217807116094,
+     "accel_mg": 0.20802271493571953,
+     "burn1_days": 24081.207006199864,
+     "burn1_vs_today": 2411.1460666668618,
+     "one_module_out": {
+      "thrust_left": 0.5,
+      "trim_deg_to_balance": 1.2412143533643065
+     }
+    },
+    "F2_4x4": {
+     "armour_loop_K": 800,
+     "armour_heat_GW": 8.420821103170328,
+     "other_hardware_heat_GW": 7.491201882086633,
+     "new_armour_radiator_m2": 201423.55250754478,
+     "hot_loop_load_GW": 7.491201882086633,
+     "feasible": true,
+     "P_fus_max_TW": 0.1721022556007818,
+     "binding": "own armour flux",
+     "P_wall_TW": 0.1721022556007818,
+     "P_cross_TW": 0.5192427439612882,
+     "P_heat_TW": Infinity,
+     "per_module_TW": 0.04302556390019545,
+     "hardware_fraction_of_neutral": 0.4729775,
+     "permanent_heat_GW": 15.912022985256963,
+     "neutral_TW": 0.03364224087880917,
+     "escaping_neutral_TW": 0.0177302178935522,
+     "field_T": 23.92180910561191,
+     "power_density_W_m3": 2964992948.5982656,
+     "peak_wall_MW_m2": 50.00000000000001,
+     "mass_t": {
+      "coils_nanocomposite": 82.02913662950637,
+      "coils_steel": 1080.0502989551671,
+      "armour_and_coil_shields": 1260.6640025482318,
+      "shadow_shield": 1612.5736817394613,
+      "module_overhead": 100,
+      "total_nanocomposite": 3055.2668209171998
+     },
+     "eta_directed": 0.6199791751130449,
+     "thrust_kN": 11.113885550102015,
+     "accel_mg": 0.2560510439558785,
+     "burn1_days": 19564.21650529169,
+     "burn1_vs_today": 1958.8795388041872,
+     "one_module_out": {
+      "thrust_left": 0.75,
+      "trim_deg_to_balance": 0.48478862795521555
+     }
+    },
+    "F3_6x6": {
+     "feasible": false,
+     "reason": "plasma radius below the 0.25 m DFD scale after the 1.8 m coil, shield and armour build"
+    },
+    "F4_8x8": {
+     "feasible": false,
+     "reason": "plasma radius below the 0.25 m DFD scale after the 1.8 m coil, shield and armour build"
+    }
+   }
+  },
+  "canon_ratio": {
+   "W_armour_Li_heat_pipe_1900K": {
+    "F5_1x1": {
+     "armour_loop_K": 1800,
+     "armour_heat_GW": 1.9884264594739784,
+     "other_hardware_heat_GW": 0.4091805050779867,
+     "new_armour_radiator_m2": 0.0,
+     "hot_loop_load_GW": 2.397606964551965,
+     "feasible": true,
+     "P_fus_max_TW": 0.02357609397352557,
+     "binding": "own armour flux",
+     "P_wall_TW": 0.02357609397352557,
+     "P_cross_TW": null,
+     "P_heat_TW": 0.1062093797584318,
+     "per_module_TW": 0.02357609397352557,
+     "hardware_fraction_of_neutral": 0.30284999999999995,
+     "permanent_heat_GW": 2.397606964551965,
+     "neutral_TW": 0.007916813487046278,
+     "escaping_neutral_TW": 0.005519206522494314,
+     "field_T": 6.702509277547489,
+     "power_density_W_m3": 18272470.877456237,
+     "peak_wall_MW_m2": 10.0,
+     "mass_t": {
+      "coils_nanocomposite": 35.66037798267135,
+      "coils_steel": 469.52831010517286,
+      "armour_and_coil_shields": 969.8096521631691,
+      "shadow_shield": 383.27590659134944,
+      "module_overhead": 25,
+      "total_nanocomposite": 1413.7459367371898
+     },
+     "eta_directed": 0.4964974508320171,
+     "thrust_kN": 1.2192454199839167,
+     "accel_mg": 0.028090001576670888,
+     "burn1_days": 178335.271597819,
+     "burn1_vs_today": 17855.931745877333,
+     "one_module_out": {
+      "thrust_left": 0.0,
+      "trim_deg_to_balance": null
+     }
+    },
+    "F0_1x4_aft": {
+     "armour_loop_K": 1800,
+     "armour_heat_GW": 2.780107808178606,
+     "other_hardware_heat_GW": 0.4091805050779867,
+     "new_armour_radiator_m2": 0.0,
+     "hot_loop_load_GW": 3.1892883132565926,
+     "feasible": true,
+     "P_fus_max_TW": 0.02357609397352557,
+     "binding": "own armour flux",
+     "P_wall_TW": 0.02357609397352557,
+     "P_cross_TW": null,
+     "P_heat_TW": 0.07984488186630526,
+     "per_module_TW": 0.02357609397352557,
+     "hardware_fraction_of_neutral": 0.40284999999999993,
+     "permanent_heat_GW": 3.1892883132565926,
+     "neutral_TW": 0.007916813487046278,
+     "escaping_neutral_TW": 0.004727525173789686,
+     "field_T": 6.702509277547489,
+     "power_density_W_m3": 18272470.877456237,
+     "peak_wall_MW_m2": 10.0,
+     "mass_t": {
+      "coils_nanocomposite": 35.66037798267135,
+      "coils_steel": 469.52831010517286,
+      "armour_and_coil_shields": 969.8096521631691,
+      "shadow_shield": 383.27590659134944,
+      "module_overhead": 85,
+      "total_nanocomposite": 1473.7459367371898
+     },
+     "eta_directed": 0.4964974508320171,
+     "thrust_kN": 1.2192454199839167,
+     "accel_mg": 0.028090001576670888,
+     "burn1_days": 178335.271597819,
+     "burn1_vs_today": 17855.931745877333,
+     "one_module_out": {
+      "thrust_left": 0.0,
+      "trim_deg_to_balance": null
+     }
+    },
+    "F1_2x4": {
+     "armour_loop_K": 1800,
+     "armour_heat_GW": 1.9164140872702298,
+     "other_hardware_heat_GW": 0.8022173079869719,
+     "new_armour_radiator_m2": 0.0,
+     "hot_loop_load_GW": 2.718631395257202,
+     "feasible": true,
+     "P_fus_max_TW": 0.016278731553148604,
+     "binding": "own armour flux",
+     "P_wall_TW": 0.016278731553148604,
+     "P_cross_TW": 0.036486812101884813,
+     "P_heat_TW": 0.06467541792010668,
+     "per_module_TW": 0.008139365776574302,
+     "hardware_fraction_of_neutral": 0.4973375,
+     "permanent_heat_GW": 2.718631395257202,
+     "neutral_TW": 0.0054663712172462395,
+     "escaping_neutral_TW": 0.002747739821989038,
+     "field_T": 10.139257697653361,
+     "power_density_W_m3": 95691250.00737238,
+     "peak_wall_MW_m2": 10.0,
+     "mass_t": {
+      "coils_nanocomposite": 19.45319034162931,
+      "coils_steel": 256.1336728314526,
+      "armour_and_coil_shields": 851.0574498574749,
+      "shadow_shield": 1379.6080740547693,
+      "module_overhead": 110,
+      "total_nanocomposite": 2360.118714253874
+     },
+     "eta_directed": 0.4964974508320171,
+     "thrust_kN": 0.8418599328460376,
+     "accel_mg": 0.019395477279129898,
+     "burn1_days": 258278.66921063446,
+     "burn1_vs_today": 25860.314942305107,
+     "one_module_out": {
+      "thrust_left": 0.5,
+      "trim_deg_to_balance": 1.2412143533643065
+     }
+    },
+    "F2_4x4": {
+     "armour_loop_K": 1800,
+     "armour_heat_GW": 1.6841642206340655,
+     "other_hardware_heat_GW": 1.4982403764173267,
+     "new_armour_radiator_m2": 0.0,
+     "hot_loop_load_GW": 3.182404597051392,
+     "feasible": true,
+     "P_fus_max_TW": 0.020037168583965446,
+     "binding": "own armour flux",
+     "P_wall_TW": 0.020037168583965446,
+     "P_cross_TW": 0.06045332968143782,
+     "P_heat_TW": 0.06800642876213152,
+     "per_module_TW": 0.005009292145991362,
+     "hardware_fraction_of_neutral": 0.4729775,
+     "permanent_heat_GW": 3.182404597051392,
+     "neutral_TW": 0.006728448175761832,
+     "escaping_neutral_TW": 0.00354604357871044,
+     "field_T": 13.973540818168733,
+     "power_density_W_m3": 345202120.413478,
+     "peak_wall_MW_m2": 10.0,
+     "mass_t": {
+      "coils_nanocomposite": 27.989364344350047,
+      "coils_steel": 368.5266305339423,
+      "armour_and_coil_shields": 1260.6640025482318,
+      "shadow_shield": 1612.5736817394613,
+      "module_overhead": 100,
+      "total_nanocomposite": 3001.227048632043
+     },
+     "eta_directed": 0.4964974508320171,
+     "thrust_kN": 1.0362287346190193,
+     "accel_mg": 0.023873509231327604,
+     "burn1_days": 209832.49725956572,
+     "burn1_vs_today": 21009.611366076053,
+     "one_module_out": {
+      "thrust_left": 0.75,
+      "trim_deg_to_balance": 0.48478862795521555
+     }
+    },
+    "F3_6x6": {
+     "feasible": false,
+     "reason": "plasma radius below the 0.25 m DFD scale after the 1.8 m coil, shield and armour build"
+    },
+    "F4_8x8": {
+     "feasible": false,
+     "reason": "plasma radius below the 0.25 m DFD scale after the 1.8 m coil, shield and armour build"
+    }
+   },
+   "flowing_liquid_Sn_1300K": {
+    "F5_1x1": {
+     "armour_loop_K": 1300,
+     "armour_heat_GW": 3.976852918947957,
+     "other_hardware_heat_GW": 0.8183610101559734,
+     "new_armour_radiator_m2": 13642.120404194951,
+     "hot_loop_load_GW": 0.8183610101559734,
+     "feasible": true,
+     "P_fus_max_TW": 0.04715218794705114,
+     "binding": "own armour flux",
+     "P_wall_TW": 0.04715218794705114,
+     "P_cross_TW": null,
+     "P_heat_TW": Infinity,
+     "per_module_TW": 0.04715218794705114,
+     "hardware_fraction_of_neutral": 0.30284999999999995,
+     "permanent_heat_GW": 4.79521392910393,
+     "neutral_TW": 0.015833626974092557,
+     "escaping_neutral_TW": 0.011038413044988628,
+     "field_T": 7.970671721231222,
+     "power_density_W_m3": 36544941.75491247,
+     "peak_wall_MW_m2": 20.0,
+     "mass_t": {
+      "coils_nanocomposite": 50.43139018244473,
+      "coils_steel": 664.0133040688557,
+      "armour_and_coil_shields": 969.8096521631691,
+      "shadow_shield": 383.27590659134944,
+      "module_overhead": 25,
+      "total_nanocomposite": 1428.5169489369632
+     },
+     "eta_directed": 0.4964974508320171,
+     "thrust_kN": 2.4384908399678333,
+     "accel_mg": 0.056180003153341776,
+     "burn1_days": 89167.6357989095,
+     "burn1_vs_today": 8927.965872938667,
+     "one_module_out": {
+      "thrust_left": 0.0,
+      "trim_deg_to_balance": null
+     }
+    },
+    "F0_1x4_aft": {
+     "armour_loop_K": 1300,
+     "armour_heat_GW": 5.560215616357212,
+     "other_hardware_heat_GW": 0.8183610101559734,
+     "new_armour_radiator_m2": 19073.657602528692,
+     "hot_loop_load_GW": 0.8183610101559734,
+     "feasible": true,
+     "P_fus_max_TW": 0.04715218794705114,
+     "binding": "own armour flux",
+     "P_wall_TW": 0.04715218794705114,
+     "P_cross_TW": null,
+     "P_heat_TW": Infinity,
+     "per_module_TW": 0.04715218794705114,
+     "hardware_fraction_of_neutral": 0.40284999999999993,
+     "permanent_heat_GW": 6.378576626513185,
+     "neutral_TW": 0.015833626974092557,
+     "escaping_neutral_TW": 0.009455050347579373,
+     "field_T": 7.970671721231222,
+     "power_density_W_m3": 36544941.75491247,
+     "peak_wall_MW_m2": 20.0,
+     "mass_t": {
+      "coils_nanocomposite": 50.43139018244473,
+      "coils_steel": 664.0133040688557,
+      "armour_and_coil_shields": 969.8096521631691,
+      "shadow_shield": 383.27590659134944,
+      "module_overhead": 85,
+      "total_nanocomposite": 1488.5169489369632
+     },
+     "eta_directed": 0.4964974508320171,
+     "thrust_kN": 2.4384908399678333,
+     "accel_mg": 0.056180003153341776,
+     "burn1_days": 89167.6357989095,
+     "burn1_vs_today": 8927.965872938667,
+     "one_module_out": {
+      "thrust_left": 0.0,
+      "trim_deg_to_balance": null
+     }
+    },
+    "F1_2x4": {
+     "armour_loop_K": 1300,
+     "armour_heat_GW": 3.8328281745404595,
+     "other_hardware_heat_GW": 1.6044346159739438,
+     "new_armour_radiator_m2": 13148.06066790723,
+     "hot_loop_load_GW": 1.6044346159739438,
+     "feasible": true,
+     "P_fus_max_TW": 0.03255746310629721,
+     "binding": "own armour flux",
+     "P_wall_TW": 0.03255746310629721,
+     "P_cross_TW": 0.07297362420376963,
+     "P_heat_TW": Infinity,
+     "per_module_TW": 0.016278731553148604,
+     "hardware_fraction_of_neutral": 0.4973375,
+     "permanent_heat_GW": 5.437262790514404,
+     "neutral_TW": 0.010932742434492479,
+     "escaping_neutral_TW": 0.005495479643978076,
+     "field_T": 12.057677394895485,
+     "power_density_W_m3": 191382500.01474476,
+     "peak_wall_MW_m2": 20.0,
+     "mass_t": {
+      "coils_nanocomposite": 27.510965612557467,
+      "coils_steel": 362.2277138986733,
+      "armour_and_coil_shields": 851.0574498574749,
+      "shadow_shield": 1379.6080740547693,
+      "module_overhead": 110,
+      "total_nanocomposite": 2368.1764895248016
+     },
+     "eta_directed": 0.4964974508320171,
+     "thrust_kN": 1.683719865692075,
+     "accel_mg": 0.038790954558259795,
+     "burn1_days": 129139.33460531723,
+     "burn1_vs_today": 12930.157471152554,
+     "one_module_out": {
+      "thrust_left": 0.5,
+      "trim_deg_to_balance": 1.2412143533643065
+     }
+    },
+    "F2_4x4": {
+     "armour_loop_K": 1300,
+     "armour_heat_GW": 3.368328441268131,
+     "other_hardware_heat_GW": 2.9964807528346533,
+     "new_armour_radiator_m2": 11554.649642112017,
+     "hot_loop_load_GW": 2.9964807528346533,
+     "feasible": true,
+     "P_fus_max_TW": 0.04007433716793089,
+     "binding": "own armour flux",
+     "P_wall_TW": 0.04007433716793089,
+     "P_cross_TW": 0.12090665936287565,
+     "P_heat_TW": Infinity,
+     "per_module_TW": 0.010018584291982723,
+     "hardware_fraction_of_neutral": 0.4729775,
+     "permanent_heat_GW": 6.364809194102784,
+     "neutral_TW": 0.013456896351523664,
+     "escaping_neutral_TW": 0.00709208715742088,
+     "field_T": 16.6174341627472,
+     "power_density_W_m3": 690404240.826956,
+     "peak_wall_MW_m2": 20.0,
+     "mass_t": {
+      "coils_nanocomposite": 39.582938657981764,
+      "coils_steel": 521.17535899676,
+      "armour_and_coil_shields": 1260.6640025482318,
+      "shadow_shield": 1612.5736817394613,
+      "module_overhead": 100,
+      "total_nanocomposite": 3012.8206229456746
+     },
+     "eta_directed": 0.4964974508320171,
+     "thrust_kN": 2.0724574692380386,
+     "accel_mg": 0.04774701846265521,
+     "burn1_days": 104916.24862978286,
+     "burn1_vs_today": 10504.805683038026,
+     "one_module_out": {
+      "thrust_left": 0.75,
+      "trim_deg_to_balance": 0.48478862795521555
+     }
+    },
+    "F3_6x6": {
+     "feasible": false,
+     "reason": "plasma radius below the 0.25 m DFD scale after the 1.8 m coil, shield and armour build"
+    },
+    "F4_8x8": {
+     "feasible": false,
+     "reason": "plasma radius below the 0.25 m DFD scale after the 1.8 m coil, shield and armour build"
+    }
+   },
+   "flowing_liquid_Li_projection": {
+    "F5_1x1": {
+     "armour_loop_K": 800,
+     "armour_heat_GW": 9.942132297369891,
+     "other_hardware_heat_GW": 2.045902525389933,
+     "new_armour_radiator_m2": 237812.86673841064,
+     "hot_loop_load_GW": 2.045902525389933,
+     "feasible": true,
+     "P_fus_max_TW": 0.11788046986762783,
+     "binding": "own armour flux",
+     "P_wall_TW": 0.11788046986762783,
+     "P_cross_TW": null,
+     "P_heat_TW": Infinity,
+     "per_module_TW": 0.11788046986762783,
+     "hardware_fraction_of_neutral": 0.30284999999999995,
+     "permanent_heat_GW": 11.988034822759825,
+     "neutral_TW": 0.03958406743523139,
+     "escaping_neutral_TW": 0.027596032612471566,
+     "field_T": 10.02258907930456,
+     "power_density_W_m3": 91362354.38728116,
+     "peak_wall_MW_m2": 49.99999999999999,
+     "mass_t": {
+      "coils_nanocomposite": 79.73902927258992,
+      "coils_steel": 1049.8972187557674,
+      "armour_and_coil_shields": 969.8096521631691,
+      "shadow_shield": 383.27590659134944,
+      "module_overhead": 25,
+      "total_nanocomposite": 1457.8245880271083
+     },
+     "eta_directed": 0.4964974508320171,
+     "thrust_kN": 6.096227099919583,
+     "accel_mg": 0.14045000788335443,
+     "burn1_days": 35667.0543195638,
+     "burn1_vs_today": 3571.1863491754666,
+     "one_module_out": {
+      "thrust_left": 0.0,
+      "trim_deg_to_balance": null
+     }
+    },
+    "F0_1x4_aft": {
+     "armour_loop_K": 800,
+     "armour_heat_GW": 13.90053904089303,
+     "other_hardware_heat_GW": 2.045902525389933,
+     "new_armour_radiator_m2": 332496.7863682996,
+     "hot_loop_load_GW": 2.045902525389933,
+     "feasible": true,
+     "P_fus_max_TW": 0.11788046986762783,
+     "binding": "own armour flux",
+     "P_wall_TW": 0.11788046986762783,
+     "P_cross_TW": null,
+     "P_heat_TW": Infinity,
+     "per_module_TW": 0.11788046986762783,
+     "hardware_fraction_of_neutral": 0.40284999999999993,
+     "permanent_heat_GW": 15.946441566282962,
+     "neutral_TW": 0.03958406743523139,
+     "escaping_neutral_TW": 0.02363762586894843,
+     "field_T": 10.02258907930456,
+     "power_density_W_m3": 91362354.38728116,
+     "peak_wall_MW_m2": 49.99999999999999,
+     "mass_t": {
+      "coils_nanocomposite": 79.73902927258992,
+      "coils_steel": 1049.8972187557674,
+      "armour_and_coil_shields": 969.8096521631691,
+      "shadow_shield": 383.27590659134944,
+      "module_overhead": 85,
+      "total_nanocomposite": 1517.8245880271083
+     },
+     "eta_directed": 0.4964974508320171,
+     "thrust_kN": 6.096227099919583,
+     "accel_mg": 0.14045000788335443,
+     "burn1_days": 35667.0543195638,
+     "burn1_vs_today": 3571.1863491754666,
+     "one_module_out": {
+      "thrust_left": 0.0,
+      "trim_deg_to_balance": null
+     }
+    },
+    "F1_2x4": {
+     "armour_loop_K": 800,
+     "armour_heat_GW": 9.582070436351149,
+     "other_hardware_heat_GW": 4.011086539934858,
+     "new_armour_radiator_m2": 229200.2934180288,
+     "hot_loop_load_GW": 4.011086539934858,
+     "feasible": true,
+     "P_fus_max_TW": 0.08139365776574303,
+     "binding": "own armour flux",
+     "P_wall_TW": 0.08139365776574303,
+     "P_cross_TW": 0.18243406050942407,
+     "P_heat_TW": Infinity,
+     "per_module_TW": 0.040696828882871516,
+     "hardware_fraction_of_neutral": 0.4973375,
+     "permanent_heat_GW": 13.593156976286007,
+     "neutral_TW": 0.027331856086231197,
+     "escaping_neutral_TW": 0.01373869910994519,
+     "field_T": 15.161726640673832,
+     "power_density_W_m3": 478456250.0368619,
+     "peak_wall_MW_m2": 50.0,
+     "mass_t": {
+      "coils_nanocomposite": 43.498655983125474,
+      "coils_steel": 572.7323037778189,
+      "armour_and_coil_shields": 851.0574498574749,
+      "shadow_shield": 1379.6080740547693,
+      "module_overhead": 110,
+      "total_nanocomposite": 2384.1641798953697
+     },
+     "eta_directed": 0.4964974508320171,
+     "thrust_kN": 4.209299664230188,
+     "accel_mg": 0.09697738639564948,
+     "burn1_days": 51655.733842126894,
+     "burn1_vs_today": 5172.062988461022,
+     "one_module_out": {
+      "thrust_left": 0.5,
+      "trim_deg_to_balance": 1.2412143533643065
+     }
+    },
+    "F2_4x4": {
+     "armour_loop_K": 800,
+     "armour_heat_GW": 8.420821103170328,
+     "other_hardware_heat_GW": 7.491201882086632,
+     "new_armour_radiator_m2": 201423.55250754478,
+     "hot_loop_load_GW": 7.491201882086632,
+     "feasible": true,
+     "P_fus_max_TW": 0.10018584291982724,
+     "binding": "own armour flux",
+     "P_wall_TW": 0.10018584291982724,
+     "P_cross_TW": 0.3022666484071891,
+     "P_heat_TW": Infinity,
+     "per_module_TW": 0.02504646072995681,
+     "hardware_fraction_of_neutral": 0.4729775,
+     "permanent_heat_GW": 15.91202298525696,
+     "neutral_TW": 0.03364224087880916,
+     "escaping_neutral_TW": 0.0177302178935522,
+     "field_T": 20.89531723179359,
+     "power_density_W_m3": 1726010602.0673902,
+     "peak_wall_MW_m2": 50.0,
+     "mass_t": {
+      "coils_nanocomposite": 62.58612132097552,
+      "coils_steel": 824.0505973928443,
+      "armour_and_coil_shields": 1260.6640025482318,
+      "shadow_shield": 1612.5736817394613,
+      "module_overhead": 100,
+      "total_nanocomposite": 3035.8238056086684
+     },
+     "eta_directed": 0.4964974508320171,
+     "thrust_kN": 5.1811436730950975,
+     "accel_mg": 0.11936754615663803,
+     "burn1_days": 41966.49945191314,
+     "burn1_vs_today": 4201.92227321521,
+     "one_module_out": {
+      "thrust_left": 0.75,
+      "trim_deg_to_balance": 0.48478862795521555
+     }
+    },
+    "F3_6x6": {
+     "feasible": false,
+     "reason": "plasma radius below the 0.25 m DFD scale after the 1.8 m coil, shield and armour build"
+    },
+    "F4_8x8": {
+     "feasible": false,
+     "reason": "plasma radius below the 0.25 m DFD scale after the 1.8 m coil, shield and armour build"
+    }
+   }
+  }
+ },
+ "evaluation_with_armour_radiator": {
+  "optimistic": {
+   "F5_1x1": {
+    "armour_loop_K": 1300,
+    "armour_heat_GW": 3.976852918947957,
+    "other_hardware_heat_GW": 0.8183610101559734,
+    "new_armour_radiator_m2": 13642.120404194951,
+    "hot_loop_load_GW": 0.8183610101559734,
+    "feasible": true,
+    "P_fus_max_TW": 0.15396941635797115,
+    "binding": "own armour flux",
+    "P_wall_TW": 0.15396941635797115,
+    "P_cross_TW": null,
+    "P_heat_TW": Infinity,
+    "per_module_TW": 0.15396941635797115,
+    "hardware_fraction_of_neutral": 0.30284999999999995,
+    "permanent_heat_GW": 4.79521392910393,
+    "neutral_TW": 0.015833626974092557,
+    "escaping_neutral_TW": 0.011038413044988628,
+    "field_T": 10.714652147931986,
+    "power_density_W_m3": 119332815.67248714,
+    "peak_wall_MW_m2": 20.0,
+    "mass_t": {
+     "coils_nanocomposite": 91.13123314290947,
+     "coils_steel": 1199.8945697149748,
+     "armour_and_coil_shields": 969.8096521631691,
+     "shadow_shield": 383.27590659134944,
+     "module_overhead": 25,
+     "total_nanocomposite": 1469.216791897428
+    },
+    "eta_directed": 0.7015041595481109,
+    "thrust_kN": 11.250374255102422,
+    "accel_mg": 0.2591955855517041,
+    "burn1_days": 19326.86488350508,
+    "burn1_vs_today": 1935.114557707499,
+    "one_module_out": {
+     "thrust_left": 0.0,
+     "trim_deg_to_balance": null
+    }
+   },
+   "F0_1x4_aft": {
+    "armour_loop_K": 1300,
+    "armour_heat_GW": 5.560215616357212,
+    "other_hardware_heat_GW": 0.8183610101559734,
+    "new_armour_radiator_m2": 19073.657602528692,
+    "hot_loop_load_GW": 0.8183610101559734,
+    "feasible": true,
+    "P_fus_max_TW": 0.15396941635797115,
+    "binding": "own armour flux",
+    "P_wall_TW": 0.15396941635797115,
+    "P_cross_TW": null,
+    "P_heat_TW": Infinity,
+    "per_module_TW": 0.15396941635797115,
+    "hardware_fraction_of_neutral": 0.40284999999999993,
+    "permanent_heat_GW": 6.378576626513185,
+    "neutral_TW": 0.015833626974092557,
+    "escaping_neutral_TW": 0.009455050347579373,
+    "field_T": 10.714652147931986,
+    "power_density_W_m3": 119332815.67248714,
+    "peak_wall_MW_m2": 20.0,
+    "mass_t": {
+     "coils_nanocomposite": 91.13123314290947,
+     "coils_steel": 1199.8945697149748,
+     "armour_and_coil_shields": 969.8096521631691,
+     "shadow_shield": 383.27590659134944,
+     "module_overhead": 85,
+     "total_nanocomposite": 1529.216791897428
+    },
+    "eta_directed": 0.7015041595481109,
+    "thrust_kN": 11.250374255102422,
+    "accel_mg": 0.2591955855517041,
+    "burn1_days": 19326.86488350508,
+    "burn1_vs_today": 1935.114557707499,
+    "one_module_out": {
+     "thrust_left": 0.0,
+     "trim_deg_to_balance": null
+    }
+   },
+   "F1_2x4": {
+    "armour_loop_K": 1300,
+    "armour_heat_GW": 3.8328281745404595,
+    "other_hardware_heat_GW": 1.6044346159739438,
+    "new_armour_radiator_m2": 13148.06066790723,
+    "hot_loop_load_GW": 1.6044346159739438,
+    "feasible": true,
+    "P_fus_max_TW": 0.10631221605669437,
+    "binding": "own armour flux",
+    "P_wall_TW": 0.10631221605669437,
+    "P_cross_TW": 0.23828600150638393,
+    "P_heat_TW": Infinity,
+    "per_module_TW": 0.053156108028347186,
+    "hardware_fraction_of_neutral": 0.4973375,
+    "permanent_heat_GW": 5.437262790514404,
+    "neutral_TW": 0.010932742434492479,
+    "escaping_neutral_TW": 0.005495479643978076,
+    "field_T": 16.208648846264545,
+    "power_density_W_m3": 624934984.1727229,
+    "peak_wall_MW_m2": 20.0,
+    "mass_t": {
+     "coils_nanocomposite": 49.713248279585784,
+     "coils_steel": 654.5577690145464,
+     "armour_and_coil_shields": 851.0574498574749,
+     "shadow_shield": 1379.6080740547693,
+     "module_overhead": 110,
+     "total_nanocomposite": 2390.3787721918297
+    },
+    "eta_directed": 0.7015041595481109,
+    "thrust_kN": 7.7681155570945295,
+    "accel_mg": 0.17896838049998612,
+    "burn1_days": 27990.631900248743,
+    "burn1_vs_today": 2802.5797042660333,
+    "one_module_out": {
+     "thrust_left": 0.5,
+     "trim_deg_to_balance": 1.2412143533643065
+    }
+   },
+   "F2_4x4": {
+    "armour_loop_K": 1300,
+    "armour_heat_GW": 3.368328441268131,
+    "other_hardware_heat_GW": 2.9964807528346533,
+    "new_armour_radiator_m2": 11554.649642112017,
+    "hot_loop_load_GW": 2.9964807528346533,
+    "feasible": true,
+    "P_fus_max_TW": 0.1308576032910208,
+    "binding": "own armour flux",
+    "P_wall_TW": 0.1308576032910208,
+    "P_cross_TW": 0.3948051741903998,
+    "P_heat_TW": Infinity,
+    "per_module_TW": 0.0327144008227552,
+    "hardware_fraction_of_neutral": 0.4729775,
+    "permanent_heat_GW": 6.364809194102784,
+    "neutral_TW": 0.013456896351523664,
+    "escaping_neutral_TW": 0.00709208715742088,
+    "field_T": 22.338145751346346,
+    "power_density_W_m3": 2254426414.5401673,
+    "peak_wall_MW_m2": 20.0,
+    "mass_t": {
+     "coils_nanocomposite": 71.52771316182574,
+     "coils_steel": 941.7815566307057,
+     "armour_and_coil_shields": 1260.6640025482318,
+     "shadow_shield": 1612.5736817394613,
+     "module_overhead": 100,
+     "total_nanocomposite": 3044.765397449519
+    },
+    "eta_directed": 0.7015041595481109,
+    "thrust_kN": 9.561619742241033,
+    "accel_mg": 0.22028863855697,
+    "burn1_days": 22740.337827560037,
+    "burn1_vs_today": 2276.8906929574014,
+    "one_module_out": {
+     "thrust_left": 0.75,
+     "trim_deg_to_balance": 0.48478862795521555
+    }
+   },
+   "F3_6x6": {
+    "feasible": false,
+    "reason": "plasma radius below the 0.25 m DFD scale after the 1.8 m coil, shield and armour build"
+   },
+   "F4_8x8": {
+    "feasible": false,
+    "reason": "plasma radius below the 0.25 m DFD scale after the 1.8 m coil, shield and armour build"
+   }
+  },
+  "central": {
+   "F5_1x1": {
+    "armour_loop_K": 1300,
+    "armour_heat_GW": 3.976852918947957,
+    "other_hardware_heat_GW": 0.8183610101559734,
+    "new_armour_radiator_m2": 13642.120404194951,
+    "hot_loop_load_GW": 0.8183610101559734,
+    "feasible": true,
+    "P_fus_max_TW": 0.08099944728411825,
+    "binding": "own armour flux",
+    "P_wall_TW": 0.08099944728411825,
+    "P_cross_TW": null,
+    "P_heat_TW": Infinity,
+    "per_module_TW": 0.08099944728411825,
+    "hardware_fraction_of_neutral": 0.30284999999999995,
+    "permanent_heat_GW": 4.79521392910393,
+    "neutral_TW": 0.015833626974092557,
+    "escaping_neutral_TW": 0.011038413044988628,
+    "field_T": 9.125149201787236,
+    "power_density_W_m3": 62778000.598874174,
+    "peak_wall_MW_m2": 20.0,
+    "mass_t": {
+     "coils_nanocomposite": 66.09841460658234,
+     "coils_steel": 870.2957923200009,
+     "armour_and_coil_shields": 969.8096521631691,
+     "shadow_shield": 383.27590659134944,
+     "module_overhead": 25,
+     "total_nanocomposite": 1444.183973361101
+    },
+    "eta_directed": 0.6199791751130449,
+    "thrust_kN": 5.230719281363807,
+    "accel_mg": 0.12050971072138238,
+    "burn1_days": 41568.750189273575,
+    "burn1_vs_today": 4162.097376984464,
+    "one_module_out": {
+     "thrust_left": 0.0,
+     "trim_deg_to_balance": null
+    }
+   },
+   "F0_1x4_aft": {
+    "armour_loop_K": 1300,
+    "armour_heat_GW": 5.560215616357212,
+    "other_hardware_heat_GW": 0.8183610101559734,
+    "new_armour_radiator_m2": 19073.657602528692,
+    "hot_loop_load_GW": 0.8183610101559734,
+    "feasible": true,
+    "P_fus_max_TW": 0.08099944728411825,
+    "binding": "own armour flux",
+    "P_wall_TW": 0.08099944728411825,
+    "P_cross_TW": null,
+    "P_heat_TW": Infinity,
+    "per_module_TW": 0.08099944728411825,
+    "hardware_fraction_of_neutral": 0.40284999999999993,
+    "permanent_heat_GW": 6.378576626513185,
+    "neutral_TW": 0.015833626974092557,
+    "escaping_neutral_TW": 0.009455050347579373,
+    "field_T": 9.125149201787236,
+    "power_density_W_m3": 62778000.598874174,
+    "peak_wall_MW_m2": 20.0,
+    "mass_t": {
+     "coils_nanocomposite": 66.09841460658234,
+     "coils_steel": 870.2957923200009,
+     "armour_and_coil_shields": 969.8096521631691,
+     "shadow_shield": 383.27590659134944,
+     "module_overhead": 85,
+     "total_nanocomposite": 1504.183973361101
+    },
+    "eta_directed": 0.6199791751130449,
+    "thrust_kN": 5.230719281363807,
+    "accel_mg": 0.12050971072138238,
+    "burn1_days": 41568.750189273575,
+    "burn1_vs_today": 4162.097376984464,
+    "one_module_out": {
+     "thrust_left": 0.0,
+     "trim_deg_to_balance": null
+    }
+   },
+   "F1_2x4": {
+    "armour_loop_K": 1300,
+    "armour_heat_GW": 3.8328281745404595,
+    "other_hardware_heat_GW": 1.6044346159739438,
+    "new_armour_radiator_m2": 13148.06066790723,
+    "hot_loop_load_GW": 1.6044346159739438,
+    "feasible": true,
+    "P_fus_max_TW": 0.05592818979141497,
+    "binding": "own armour flux",
+    "P_wall_TW": 0.05592818979141497,
+    "P_cross_TW": 0.12535628746351635,
+    "P_heat_TW": Infinity,
+    "per_module_TW": 0.027964094895707486,
+    "hardware_fraction_of_neutral": 0.4973375,
+    "permanent_heat_GW": 5.437262790514404,
+    "neutral_TW": 0.010932742434492479,
+    "escaping_neutral_TW": 0.005495479643978076,
+    "field_T": 13.804119540183823,
+    "power_density_W_m3": 328762617.3032455,
+    "peak_wall_MW_m2": 20.0,
+    "mass_t": {
+     "coils_nanocomposite": 36.057526963023356,
+     "coils_steel": 474.7574383464743,
+     "armour_and_coil_shields": 851.0574498574749,
+     "shadow_shield": 1379.6080740547693,
+     "module_overhead": 110,
+     "total_nanocomposite": 2376.7230508752677
+    },
+    "eta_directed": 0.6199791751130449,
+    "thrust_kN": 3.611687122846438,
+    "accel_mg": 0.08320908597428782,
+    "burn1_days": 60203.01751549965,
+    "burn1_vs_today": 6027.865166667153,
+    "one_module_out": {
+     "thrust_left": 0.5,
+     "trim_deg_to_balance": 1.2412143533643065
+    }
+   },
+   "F2_4x4": {
+    "armour_loop_K": 1300,
+    "armour_heat_GW": 3.368328441268131,
+    "other_hardware_heat_GW": 2.9964807528346533,
+    "new_armour_radiator_m2": 11554.649642112017,
+    "hot_loop_load_GW": 2.9964807528346533,
+    "feasible": true,
+    "P_fus_max_TW": 0.06884090224031271,
+    "binding": "own armour flux",
+    "P_wall_TW": 0.06884090224031271,
+    "P_cross_TW": 0.20769709758451532,
+    "P_heat_TW": Infinity,
+    "per_module_TW": 0.017210225560078177,
+    "hardware_fraction_of_neutral": 0.4729775,
+    "permanent_heat_GW": 6.364809194102784,
+    "neutral_TW": 0.013456896351523664,
+    "escaping_neutral_TW": 0.00709208715742088,
+    "field_T": 19.02431456084625,
+    "power_density_W_m3": 1185997179.4393063,
+    "peak_wall_MW_m2": 20.0,
+    "mass_t": {
+     "coils_nanocomposite": 51.87978124927753,
+     "coils_steel": 683.0837864488209,
+     "armour_and_coil_shields": 1260.6640025482318,
+     "shadow_shield": 1612.5736817394613,
+     "module_overhead": 100,
+     "total_nanocomposite": 3025.1174655369705
+    },
+    "eta_directed": 0.6199791751130449,
+    "thrust_kN": 4.445554220040806,
+    "accel_mg": 0.10242041758235139,
+    "burn1_days": 48910.54126322923,
+    "burn1_vs_today": 4897.198847010469,
+    "one_module_out": {
+     "thrust_left": 0.75,
+     "trim_deg_to_balance": 0.48478862795521555
+    }
+   },
+   "F3_6x6": {
+    "feasible": false,
+    "reason": "plasma radius below the 0.25 m DFD scale after the 1.8 m coil, shield and armour build"
+   },
+   "F4_8x8": {
+    "feasible": false,
+    "reason": "plasma radius below the 0.25 m DFD scale after the 1.8 m coil, shield and armour build"
+   }
+  },
+  "canon_ratio": {
+   "F5_1x1": {
+    "armour_loop_K": 1300,
+    "armour_heat_GW": 3.976852918947957,
+    "other_hardware_heat_GW": 0.8183610101559734,
+    "new_armour_radiator_m2": 13642.120404194951,
+    "hot_loop_load_GW": 0.8183610101559734,
+    "feasible": true,
+    "P_fus_max_TW": 0.04715218794705114,
+    "binding": "own armour flux",
+    "P_wall_TW": 0.04715218794705114,
+    "P_cross_TW": null,
+    "P_heat_TW": Infinity,
+    "per_module_TW": 0.04715218794705114,
+    "hardware_fraction_of_neutral": 0.30284999999999995,
+    "permanent_heat_GW": 4.79521392910393,
+    "neutral_TW": 0.015833626974092557,
+    "escaping_neutral_TW": 0.011038413044988628,
+    "field_T": 7.970671721231222,
+    "power_density_W_m3": 36544941.75491247,
+    "peak_wall_MW_m2": 20.0,
+    "mass_t": {
+     "coils_nanocomposite": 50.43139018244473,
+     "coils_steel": 664.0133040688557,
+     "armour_and_coil_shields": 969.8096521631691,
+     "shadow_shield": 383.27590659134944,
+     "module_overhead": 25,
+     "total_nanocomposite": 1428.5169489369632
+    },
+    "eta_directed": 0.4964974508320171,
+    "thrust_kN": 2.4384908399678333,
+    "accel_mg": 0.056180003153341776,
+    "burn1_days": 89167.6357989095,
+    "burn1_vs_today": 8927.965872938667,
+    "one_module_out": {
+     "thrust_left": 0.0,
+     "trim_deg_to_balance": null
+    }
+   },
+   "F0_1x4_aft": {
+    "armour_loop_K": 1300,
+    "armour_heat_GW": 5.560215616357212,
+    "other_hardware_heat_GW": 0.8183610101559734,
+    "new_armour_radiator_m2": 19073.657602528692,
+    "hot_loop_load_GW": 0.8183610101559734,
+    "feasible": true,
+    "P_fus_max_TW": 0.04715218794705114,
+    "binding": "own armour flux",
+    "P_wall_TW": 0.04715218794705114,
+    "P_cross_TW": null,
+    "P_heat_TW": Infinity,
+    "per_module_TW": 0.04715218794705114,
+    "hardware_fraction_of_neutral": 0.40284999999999993,
+    "permanent_heat_GW": 6.378576626513185,
+    "neutral_TW": 0.015833626974092557,
+    "escaping_neutral_TW": 0.009455050347579373,
+    "field_T": 7.970671721231222,
+    "power_density_W_m3": 36544941.75491247,
+    "peak_wall_MW_m2": 20.0,
+    "mass_t": {
+     "coils_nanocomposite": 50.43139018244473,
+     "coils_steel": 664.0133040688557,
+     "armour_and_coil_shields": 969.8096521631691,
+     "shadow_shield": 383.27590659134944,
+     "module_overhead": 85,
+     "total_nanocomposite": 1488.5169489369632
+    },
+    "eta_directed": 0.4964974508320171,
+    "thrust_kN": 2.4384908399678333,
+    "accel_mg": 0.056180003153341776,
+    "burn1_days": 89167.6357989095,
+    "burn1_vs_today": 8927.965872938667,
+    "one_module_out": {
+     "thrust_left": 0.0,
+     "trim_deg_to_balance": null
+    }
+   },
+   "F1_2x4": {
+    "armour_loop_K": 1300,
+    "armour_heat_GW": 3.8328281745404595,
+    "other_hardware_heat_GW": 1.6044346159739438,
+    "new_armour_radiator_m2": 13148.06066790723,
+    "hot_loop_load_GW": 1.6044346159739438,
+    "feasible": true,
+    "P_fus_max_TW": 0.03255746310629721,
+    "binding": "own armour flux",
+    "P_wall_TW": 0.03255746310629721,
+    "P_cross_TW": 0.07297362420376963,
+    "P_heat_TW": Infinity,
+    "per_module_TW": 0.016278731553148604,
+    "hardware_fraction_of_neutral": 0.4973375,
+    "permanent_heat_GW": 5.437262790514404,
+    "neutral_TW": 0.010932742434492479,
+    "escaping_neutral_TW": 0.005495479643978076,
+    "field_T": 12.057677394895485,
+    "power_density_W_m3": 191382500.01474476,
+    "peak_wall_MW_m2": 20.0,
+    "mass_t": {
+     "coils_nanocomposite": 27.510965612557467,
+     "coils_steel": 362.2277138986733,
+     "armour_and_coil_shields": 851.0574498574749,
+     "shadow_shield": 1379.6080740547693,
+     "module_overhead": 110,
+     "total_nanocomposite": 2368.1764895248016
+    },
+    "eta_directed": 0.4964974508320171,
+    "thrust_kN": 1.683719865692075,
+    "accel_mg": 0.038790954558259795,
+    "burn1_days": 129139.33460531723,
+    "burn1_vs_today": 12930.157471152554,
+    "one_module_out": {
+     "thrust_left": 0.5,
+     "trim_deg_to_balance": 1.2412143533643065
+    }
+   },
+   "F2_4x4": {
+    "armour_loop_K": 1300,
+    "armour_heat_GW": 3.368328441268131,
+    "other_hardware_heat_GW": 2.9964807528346533,
+    "new_armour_radiator_m2": 11554.649642112017,
+    "hot_loop_load_GW": 2.9964807528346533,
+    "feasible": true,
+    "P_fus_max_TW": 0.04007433716793089,
+    "binding": "own armour flux",
+    "P_wall_TW": 0.04007433716793089,
+    "P_cross_TW": 0.12090665936287565,
+    "P_heat_TW": Infinity,
+    "per_module_TW": 0.010018584291982723,
+    "hardware_fraction_of_neutral": 0.4729775,
+    "permanent_heat_GW": 6.364809194102784,
+    "neutral_TW": 0.013456896351523664,
+    "escaping_neutral_TW": 0.00709208715742088,
+    "field_T": 16.6174341627472,
+    "power_density_W_m3": 690404240.826956,
+    "peak_wall_MW_m2": 20.0,
+    "mass_t": {
+     "coils_nanocomposite": 39.582938657981764,
+     "coils_steel": 521.17535899676,
+     "armour_and_coil_shields": 1260.6640025482318,
+     "shadow_shield": 1612.5736817394613,
+     "module_overhead": 100,
+     "total_nanocomposite": 3012.8206229456746
+    },
+    "eta_directed": 0.4964974508320171,
+    "thrust_kN": 2.0724574692380386,
+    "accel_mg": 0.04774701846265521,
+    "burn1_days": 104916.24862978286,
+    "burn1_vs_today": 10504.805683038026,
+    "one_module_out": {
+     "thrust_left": 0.75,
+     "trim_deg_to_balance": 0.48478862795521555
+    }
+   },
+   "F3_6x6": {
+    "feasible": false,
+    "reason": "plasma radius below the 0.25 m DFD scale after the 1.8 m coil, shield and armour build"
+   },
+   "F4_8x8": {
+    "feasible": false,
+    "reason": "plasma radius below the 0.25 m DFD scale after the 1.8 m coil, shield and armour build"
+   }
+  }
+ },
+ "status_quo_v2": {
+  "optimistic": {
+   "P_wall_TW": 0.014413248142398968,
+   "P_heat_TW": 0.12819766344626407
+  },
+  "central": {
+   "P_wall_TW": 0.00758244825965218,
+   "P_heat_TW": 0.0674415746184337
+  },
+  "canon_ratio": {
+   "P_wall_TW": 0.0044139687050433985,
+   "P_heat_TW": 0.03925974693011237
+  }
+ },
+ "required_for_g": {
+  "1.1": {
+   "thrust_MN": 47.745456984814396,
+   "jet_TW": 458.38436780182957,
+   "fusion_TW": 739.3544593142976
+  },
+  "1.5": {
+   "thrust_MN": 65.10744134292871,
+   "jet_TW": 625.0695924570402,
+   "fusion_TW": 1008.2106263376785
+  }
+ },
+ "design_point": {
+  "optimistic": {
+   "R_face_m": 8.0,
+   "R_out_m": 9.8,
+   "L_m": 60.0,
+   "r_plasma_m": 5.0,
+   "x_plasma": [
+    -199.0,
+    -139.0
+   ],
+   "shield_x": -136.5,
+   "shield_radius_m": 7.223076923076923,
+   "fractions": {
+    "own": 0.25116499999999997,
+    "shield": 0.02902,
+    "hull_end": 0.0,
+    "hull_side": 0.0,
+    "blades": 0.0,
+    "escape": 0.7198150000000001
+   },
+   "hardware_fraction": 0.28018499999999996,
+   "P_wall_TW": 0.2932750787770879,
+   "P_heat_TW": 0.37486783968279586,
+   "P_fus_TW": 0.2932750787770879,
+   "ledger_fraction": {
+    "directed exhaust (charged products + H2 mass loading, after nozzle losses)": 0.7015041595481109,
+    "nozzle divergence and detachment loss (charged, leaves aft as plume)": 0.09565965812019693,
+    "synchrotron escaping to space through the coil gaps (net after 0.98 coil-face reflection)": 0.1,
+    "bremsstrahlung escaping to space": 0.06344897018217283,
+    "neutrons escaping to space": 0.01057405640291422,
+    "neutral radiation into coil armour (hot loop 1800 K, blades)": 0.025828849735339474,
+    "neutral radiation into the shadow shield (hot loop)": 0.0029843060112657084,
+    "neutral radiation into blades and hull (radiate directly)": 0.0
+   },
+   "ledger_sum": 1.0,
+   "ledger_GW": {
+    "directed exhaust (charged products + H2 mass loading, after nozzle losses)": 205.73368765392703,
+    "nozzle divergence and detachment loss (charged, leaves aft as plume)": 28.054593770990053,
+    "synchrotron escaping to space through the coil gaps (net after 0.98 coil-face reflection)": 29.32750787770879,
+    "bremsstrahlung escaping to space": 18.608001728501836,
+    "neutrons escaping to space": 3.1011072245580382,
+    "neutral radiation into coil armour (hot loop 1800 K, blades)": 7.574957940853251,
+    "neutral radiation into the shadow shield (hot loop)": 0.8752225805488876,
+    "neutral radiation into blades and hull (radiate directly)": 0.0
+   },
+   "hot_loop_GW": 8.450180521402137,
+   "hot_budget_GW": 10.80112544917382,
+   "wall_MW_m2": 10.0,
+   "field_T": 9.105349308698154,
+   "power_density_MW_m3": 62.23490463071806,
+   "field_energy_J": 397955452960.36774,
+   "eta_directed": 0.7015041595481109,
+   "thrust_kN": 21.42928429543318,
+   "mass_flow_g_s": 1.1160404274358853,
+   "accel_mg": 0.49370587724134096,
+   "burn1_years": 27.77988792290258,
+   "mission_burn_years": 111.11955169161033,
+   "masses_t": {
+    "coil_structure": 477.5465435524413,
+    "armour_and_coil_shields": 3443.8138668651304,
+    "shadow_shield": 409.7645290112198,
+    "heat_pipes_and_manifolds": 169.00361042804275,
+    "controls_power_startup": 40.0
+   },
+   "neutron": {
+    "P_fus_TW": 0.2932750787770879,
+    "neutron_rate_s": 1.0975376118016052e+22,
+    "coil_flux_n_cm2_s": 363913616973956.7,
+    "mission_burn_s": 3506666364.4631624,
+    "mission_fluence_n_cm2": 1.2761236402127045e+24,
+    "rebco_limit_n_cm2": 3e+18,
+    "efolds": 12.960725346242999,
+    "shield_thickness_m": 1.2960725346243,
+    "note": "~0.1 m per e-fold for W/B4C/hydride (2.45 MeV); in-situ REBCO data suggest a lower limit"
+   },
+   "gap_to_1_1g": 2519.8186053909412,
+   "gap_to_today": 890.8534106285056
+  },
+  "central": {
+   "R_face_m": 8.0,
+   "R_out_m": 9.8,
+   "L_m": 60.0,
+   "r_plasma_m": 5.0,
+   "x_plasma": [
+    -199.0,
+    -139.0
+   ],
+   "shield_x": -136.5,
+   "shield_radius_m": 7.223076923076923,
+   "fractions": {
+    "own": 0.25116499999999997,
+    "shield": 0.02902,
+    "hull_end": 0.0,
+    "hull_side": 0.0,
+    "blades": 0.0,
+    "escape": 0.7198150000000001
+   },
+   "hardware_fraction": 0.28018499999999996,
+   "P_wall_TW": 0.15428466149355857,
+   "P_heat_TW": 0.19720856607199794,
+   "P_fus_TW": 0.15428466149355857,
+   "ledger_fraction": {
+    "directed exhaust (charged products + H2 mass loading, after nozzle losses)": 0.6199791751130449,
+    "nozzle divergence and detachment loss (charged, leaves aft as plume)": 0.08454261478814248,
+    "synchrotron escaping to space through the coil gaps (net after 0.98 coil-face reflection)": 0.1,
+    "bremsstrahlung escaping to space": 0.13341662098966256,
+    "neutrons escaping to space": 0.00729152681261422,
+    "neutral radiation into coil armour (hot loop 1800 K, blades)": 0.04909728463946825,
+    "neutral radiation into the shadow shield (hot loop)": 0.0056727776570675405,
+    "neutral radiation into blades and hull (radiate directly)": 0.0
+   },
+   "ledger_sum": 1.0,
+   "ledger_GW": {
+    "directed exhaust (charged products + H2 mass loading, after nozzle losses)": 95.65327716537179,
+    "nozzle divergence and detachment loss (charged, leaves aft as plume)": 13.043628704368881,
+    "synchrotron escaping to space through the coil gaps (net after 0.98 coil-face reflection)": 15.428466149355858,
+    "bremsstrahlung escaping to space": 20.58413820700449,
+    "neutrons escaping to space": 1.124970746055391,
+    "neutral radiation into coil armour (hot loop 1800 K, blades)": 7.574957940853252,
+    "neutral radiation into the shadow shield (hot loop)": 0.8752225805488877,
+    "neutral radiation into blades and hull (radiate directly)": 0.0
+   },
+   "hot_loop_GW": 8.450180521402139,
+   "hot_budget_GW": 10.80112544917382,
+   "wall_MW_m2": 10.000000000000002,
+   "field_T": 7.754584080669153,
+   "power_density_MW_m3": 32.74022202661287,
+   "field_energy_J": 288641156468.0038,
+   "eta_directed": 0.6199791751130449,
+   "thrust_kN": 9.963274821645348,
+   "mass_flow_g_s": 0.5188888876228096,
+   "accel_mg": 0.22954230613596646,
+   "burn1_years": 59.74974359854516,
+   "mission_burn_years": 238.99897439418064,
+   "masses_t": {
+    "coil_structure": 346.3693877616045,
+    "armour_and_coil_shields": 3443.8138668651304,
+    "shadow_shield": 409.7645290112198,
+    "heat_pipes_and_manifolds": 169.00361042804278,
+    "controls_power_startup": 40.0
+   },
+   "neutron": {
+    "P_fus_TW": 0.15428466149355857,
+    "neutron_rate_s": 3.981473765868478e+21,
+    "coil_flux_n_cm2_s": 132014839714306.64,
+    "mission_burn_s": 7542234034.341796,
+    "mission_fluence_n_cm2": 9.956868171314206e+23,
+    "rebco_limit_n_cm2": 3e+18,
+    "efolds": 12.712575757820701,
+    "shield_thickness_m": 1.2712575757820703,
+    "note": "~0.1 m per e-fold for W/B4C/hydride (2.45 MeV); in-situ REBCO data suggest a lower limit"
+   },
+   "gap_to_1_1g": 4789.847499071407,
+   "gap_to_today": 1693.3964896557154
+  },
+  "canon_ratio": {
+   "R_face_m": 8.0,
+   "R_out_m": 9.8,
+   "L_m": 60.0,
+   "r_plasma_m": 5.0,
+   "x_plasma": [
+    -199.0,
+    -139.0
+   ],
+   "shield_x": -136.5,
+   "shield_radius_m": 7.223076923076923,
+   "fractions": {
+    "own": 0.25116499999999997,
+    "shield": 0.02902,
+    "hull_end": 0.0,
+    "hull_side": 0.0,
+    "blades": 0.0,
+    "escape": 0.7198150000000001
+   },
+   "hardware_fraction": 0.28018499999999996,
+   "P_wall_TW": 0.08981369132771645,
+   "P_heat_TW": 0.11480097314217773,
+   "P_fus_TW": 0.08981369132771645,
+   "ledger_fraction": {
+    "directed exhaust (charged products + H2 mass loading, after nozzle losses)": 0.4964974508320171,
+    "nozzle divergence and detachment loss (charged, leaves aft as plume)": 0.0677041978407296,
+    "synchrotron escaping to space through the coil gaps (net after 0.98 coil-face reflection)": 0.1,
+    "bremsstrahlung escaping to space": 0.2387472158607352,
+    "neutrons escaping to space": 0.0029654743998916914,
+    "neutral radiation into coil armour (hot loop 1800 K, blades)": 0.08434079291110957,
+    "neutral radiation into the shadow shield (hot loop)": 0.009744868155516891,
+    "neutral radiation into blades and hull (radiate directly)": 0.0
+   },
+   "ledger_sum": 1.0,
+   "ledger_GW": {
+    "directed exhaust (charged products + H2 mass loading, after nozzle losses)": 44.592268794024854,
+    "nozzle divergence and detachment loss (charged, leaves aft as plume)": 6.080763926457935,
+    "synchrotron escaping to space through the coil gaps (net after 0.98 coil-face reflection)": 8.981369132771645,
+    "bremsstrahlung escaping to space": 21.44276875066776,
+    "neutrons escaping to space": 0.26634020239211753,
+    "neutral radiation into coil armour (hot loop 1800 K, blades)": 7.574957940853251,
+    "neutral radiation into the shadow shield (hot loop)": 0.8752225805488876,
+    "neutral radiation into blades and hull (radiate directly)": 0.0
+   },
+   "hot_loop_GW": 8.450180521402137,
+   "hot_budget_GW": 10.80112544917382,
+   "wall_MW_m2": 10.0,
+   "field_T": 6.773505032618377,
+   "power_density_MW_m3": 19.05905724284769,
+   "field_energy_J": 220225778049.15112,
+   "eta_directed": 0.4964974508320171,
+   "thrust_kN": 4.644744457081587,
+   "mass_flow_g_s": 0.24189900687987517,
+   "accel_mg": 0.10700952981588908,
+   "burn1_years": 128.16703297584527,
+   "mission_burn_years": 512.6681319033811,
+   "masses_t": {
+    "coil_structure": 264.27093365898133,
+    "armour_and_coil_shields": 3443.8138668651304,
+    "shadow_shield": 409.7645290112198,
+    "heat_pipes_and_manifolds": 169.00361042804278,
+    "controls_power_startup": 40.0
+   },
+   "neutron": {
+    "P_fus_TW": 0.08981369132771645,
+    "neutron_rate_s": 9.426258703513913e+20,
+    "coil_flux_n_cm2_s": 31254909740150.836,
+    "mission_burn_s": 16178575839.35414,
+    "mission_fluence_n_cm2": 5.0565992758319866e+23,
+    "rebco_limit_n_cm2": 3e+18,
+    "efolds": 12.03500735377947,
+    "shield_thickness_m": 1.203500735377947,
+    "note": "~0.1 m per e-fold for W/B4C/hydride (2.45 MeV); in-situ REBCO data suggest a lower limit"
+   },
+   "gap_to_1_1g": 8228.144162380564,
+   "gap_to_today": 2908.967444925473
+  }
+ },
+ "sensitivity": [
+  {
+   "case": "optimistic",
+   "armour": "W_armour_Li_heat_pipe_1900K",
+   "L_m": 30.0,
+   "R_face_m": 4.2,
+   "P_fus_TW": 0.07698470817898558,
+   "accel_mg": 0.12959779277585204,
+   "field_energy_J_at_10T": 66150000000.0
+  },
+  {
+   "case": "optimistic",
+   "armour": "W_armour_Li_heat_pipe_1900K",
+   "L_m": 30.0,
+   "R_face_m": 8.0,
+   "P_fus_TW": 0.14663753938854396,
+   "accel_mg": 0.24685293862067048,
+   "field_energy_J_at_10T": 240000000000.0
+  },
+  {
+   "case": "optimistic",
+   "armour": "W_armour_Li_heat_pipe_1900K",
+   "L_m": 30.0,
+   "R_face_m": 15.0,
+   "P_fus_TW": 0.2749453863535199,
+   "accel_mg": 0.46284925991375725,
+   "field_energy_J_at_10T": 843750000000.0
+  },
+  {
+   "case": "optimistic",
+   "armour": "W_armour_Li_heat_pipe_1900K",
+   "L_m": 60.0,
+   "R_face_m": 4.2,
+   "P_fus_TW": 0.15396941635797115,
+   "accel_mg": 0.2591955855517041,
+   "field_energy_J_at_10T": 132300000000.0
+  },
+  {
+   "case": "optimistic",
+   "armour": "W_armour_Li_heat_pipe_1900K",
+   "L_m": 60.0,
+   "R_face_m": 8.0,
+   "P_fus_TW": 0.2932750787770879,
+   "accel_mg": 0.49370587724134096,
+   "field_energy_J_at_10T": 480000000000.0
+  },
+  {
+   "case": "optimistic",
+   "armour": "W_armour_Li_heat_pipe_1900K",
+   "L_m": 60.0,
+   "R_face_m": 15.0,
+   "P_fus_TW": 0.5498907727070398,
+   "accel_mg": 0.9256985198275145,
+   "field_energy_J_at_10T": 1687500000000.0
+  },
+  {
+   "case": "optimistic",
+   "armour": "W_armour_Li_heat_pipe_1900K",
+   "L_m": 120.0,
+   "R_face_m": 4.2,
+   "P_fus_TW": 0.3079388327159423,
+   "accel_mg": 0.5183911711034082,
+   "field_energy_J_at_10T": 264600000000.0
+  },
+  {
+   "case": "optimistic",
+   "armour": "W_armour_Li_heat_pipe_1900K",
+   "L_m": 120.0,
+   "R_face_m": 8.0,
+   "P_fus_TW": 0.5865501575541758,
+   "accel_mg": 0.9874117544826819,
+   "field_energy_J_at_10T": 960000000000.0
+  },
+  {
+   "case": "optimistic",
+   "armour": "W_armour_Li_heat_pipe_1900K",
+   "L_m": 120.0,
+   "R_face_m": 15.0,
+   "P_fus_TW": 1.0997815454140796,
+   "accel_mg": 1.851397039655029,
+   "field_energy_J_at_10T": 3375000000000.0
+  },
+  {
+   "case": "optimistic",
+   "armour": "flowing_liquid_Sn_1300K",
+   "L_m": 30.0,
+   "R_face_m": 4.2,
+   "P_fus_TW": 0.15396941635797115,
+   "accel_mg": 0.2591955855517041,
+   "field_energy_J_at_10T": 66150000000.0
+  },
+  {
+   "case": "optimistic",
+   "armour": "flowing_liquid_Sn_1300K",
+   "L_m": 30.0,
+   "R_face_m": 8.0,
+   "P_fus_TW": 0.2932750787770879,
+   "accel_mg": 0.49370587724134096,
+   "field_energy_J_at_10T": 240000000000.0
+  },
+  {
+   "case": "optimistic",
+   "armour": "flowing_liquid_Sn_1300K",
+   "L_m": 30.0,
+   "R_face_m": 15.0,
+   "P_fus_TW": 0.5498907727070398,
+   "accel_mg": 0.9256985198275145,
+   "field_energy_J_at_10T": 843750000000.0
+  },
+  {
+   "case": "optimistic",
+   "armour": "flowing_liquid_Sn_1300K",
+   "L_m": 60.0,
+   "R_face_m": 4.2,
+   "P_fus_TW": 0.3079388327159423,
+   "accel_mg": 0.5183911711034082,
+   "field_energy_J_at_10T": 132300000000.0
+  },
+  {
+   "case": "optimistic",
+   "armour": "flowing_liquid_Sn_1300K",
+   "L_m": 60.0,
+   "R_face_m": 8.0,
+   "P_fus_TW": 0.5865501575541758,
+   "accel_mg": 0.9874117544826819,
+   "field_energy_J_at_10T": 480000000000.0
+  },
+  {
+   "case": "optimistic",
+   "armour": "flowing_liquid_Sn_1300K",
+   "L_m": 60.0,
+   "R_face_m": 15.0,
+   "P_fus_TW": 1.0997815454140796,
+   "accel_mg": 1.851397039655029,
+   "field_energy_J_at_10T": 1687500000000.0
+  },
+  {
+   "case": "optimistic",
+   "armour": "flowing_liquid_Sn_1300K",
+   "L_m": 120.0,
+   "R_face_m": 4.2,
+   "P_fus_TW": 0.6158776654318846,
+   "accel_mg": 1.0367823422068163,
+   "field_energy_J_at_10T": 264600000000.0
+  },
+  {
+   "case": "optimistic",
+   "armour": "flowing_liquid_Sn_1300K",
+   "L_m": 120.0,
+   "R_face_m": 8.0,
+   "P_fus_TW": 1.1731003151083517,
+   "accel_mg": 1.9748235089653638,
+   "field_energy_J_at_10T": 960000000000.0
+  },
+  {
+   "case": "optimistic",
+   "armour": "flowing_liquid_Sn_1300K",
+   "L_m": 120.0,
+   "R_face_m": 15.0,
+   "P_fus_TW": 2.199563090828159,
+   "accel_mg": 3.702794079310058,
+   "field_energy_J_at_10T": 3375000000000.0
+  },
+  {
+   "case": "optimistic",
+   "armour": "flowing_liquid_Li_projection",
+   "L_m": 30.0,
+   "R_face_m": 4.2,
+   "P_fus_TW": 0.38492354089492786,
+   "accel_mg": 0.6479889638792602,
+   "field_energy_J_at_10T": 66150000000.0
+  },
+  {
+   "case": "optimistic",
+   "armour": "flowing_liquid_Li_projection",
+   "L_m": 30.0,
+   "R_face_m": 8.0,
+   "P_fus_TW": 0.7331876969427197,
+   "accel_mg": 1.2342646931033525,
+   "field_energy_J_at_10T": 240000000000.0
+  },
+  {
+   "case": "optimistic",
+   "armour": "flowing_liquid_Li_projection",
+   "L_m": 30.0,
+   "R_face_m": 15.0,
+   "P_fus_TW": 1.3747269317675994,
+   "accel_mg": 2.314246299568786,
+   "field_energy_J_at_10T": 843750000000.0
+  },
+  {
+   "case": "optimistic",
+   "armour": "flowing_liquid_Li_projection",
+   "L_m": 60.0,
+   "R_face_m": 4.2,
+   "P_fus_TW": 0.7698470817898557,
+   "accel_mg": 1.2959779277585204,
+   "field_energy_J_at_10T": 132300000000.0
+  },
+  {
+   "case": "optimistic",
+   "armour": "flowing_liquid_Li_projection",
+   "L_m": 60.0,
+   "R_face_m": 8.0,
+   "P_fus_TW": 1.4663753938854394,
+   "accel_mg": 2.468529386206705,
+   "field_energy_J_at_10T": 480000000000.0
+  },
+  {
+   "case": "optimistic",
+   "armour": "flowing_liquid_Li_projection",
+   "L_m": 60.0,
+   "R_face_m": 15.0,
+   "P_fus_TW": 2.749453863535199,
+   "accel_mg": 4.628492599137572,
+   "field_energy_J_at_10T": 1687500000000.0
+  },
+  {
+   "case": "optimistic",
+   "armour": "flowing_liquid_Li_projection",
+   "L_m": 120.0,
+   "R_face_m": 4.2,
+   "P_fus_TW": 1.5396941635797115,
+   "accel_mg": 2.5919558555170408,
+   "field_energy_J_at_10T": 264600000000.0
+  },
+  {
+   "case": "optimistic",
+   "armour": "flowing_liquid_Li_projection",
+   "L_m": 120.0,
+   "R_face_m": 8.0,
+   "P_fus_TW": 2.9327507877708787,
+   "accel_mg": 4.93705877241341,
+   "field_energy_J_at_10T": 960000000000.0
+  },
+  {
+   "case": "optimistic",
+   "armour": "flowing_liquid_Li_projection",
+   "L_m": 120.0,
+   "R_face_m": 15.0,
+   "P_fus_TW": 5.498907727070398,
+   "accel_mg": 9.256985198275144,
+   "field_energy_J_at_10T": 3375000000000.0
+  },
+  {
+   "case": "central",
+   "armour": "W_armour_Li_heat_pipe_1900K",
+   "L_m": 30.0,
+   "R_face_m": 4.2,
+   "P_fus_TW": 0.04049972364205912,
+   "accel_mg": 0.06025485536069119,
+   "field_energy_J_at_10T": 66150000000.0
+  },
+  {
+   "case": "central",
+   "armour": "W_armour_Li_heat_pipe_1900K",
+   "L_m": 30.0,
+   "R_face_m": 8.0,
+   "P_fus_TW": 0.07714233074677929,
+   "accel_mg": 0.11477115306798323,
+   "field_energy_J_at_10T": 240000000000.0
+  },
+  {
+   "case": "central",
+   "armour": "W_armour_Li_heat_pipe_1900K",
+   "L_m": 30.0,
+   "R_face_m": 15.0,
+   "P_fus_TW": 0.14464187015021113,
+   "accel_mg": 0.21519591200246851,
+   "field_energy_J_at_10T": 843750000000.0
+  },
+  {
+   "case": "central",
+   "armour": "W_armour_Li_heat_pipe_1900K",
+   "L_m": 60.0,
+   "R_face_m": 4.2,
+   "P_fus_TW": 0.08099944728411825,
+   "accel_mg": 0.12050971072138238,
+   "field_energy_J_at_10T": 132300000000.0
+  },
+  {
+   "case": "central",
+   "armour": "W_armour_Li_heat_pipe_1900K",
+   "L_m": 60.0,
+   "R_face_m": 8.0,
+   "P_fus_TW": 0.15428466149355857,
+   "accel_mg": 0.22954230613596646,
+   "field_energy_J_at_10T": 480000000000.0
+  },
+  {
+   "case": "central",
+   "armour": "W_armour_Li_heat_pipe_1900K",
+   "L_m": 60.0,
+   "R_face_m": 15.0,
+   "P_fus_TW": 0.28928374030042225,
+   "accel_mg": 0.43039182400493703,
+   "field_energy_J_at_10T": 1687500000000.0
+  },
+  {
+   "case": "central",
+   "armour": "W_armour_Li_heat_pipe_1900K",
+   "L_m": 120.0,
+   "R_face_m": 4.2,
+   "P_fus_TW": 0.1619988945682365,
+   "accel_mg": 0.24101942144276475,
+   "field_energy_J_at_10T": 264600000000.0
+  },
+  {
+   "case": "central",
+   "armour": "W_armour_Li_heat_pipe_1900K",
+   "L_m": 120.0,
+   "R_face_m": 8.0,
+   "P_fus_TW": 0.30856932298711715,
+   "accel_mg": 0.4590846122719329,
+   "field_energy_J_at_10T": 960000000000.0
+  },
+  {
+   "case": "central",
+   "armour": "W_armour_Li_heat_pipe_1900K",
+   "L_m": 120.0,
+   "R_face_m": 15.0,
+   "P_fus_TW": 0.5785674806008445,
+   "accel_mg": 0.8607836480098741,
+   "field_energy_J_at_10T": 3375000000000.0
+  },
+  {
+   "case": "central",
+   "armour": "flowing_liquid_Sn_1300K",
+   "L_m": 30.0,
+   "R_face_m": 4.2,
+   "P_fus_TW": 0.08099944728411825,
+   "accel_mg": 0.12050971072138238,
+   "field_energy_J_at_10T": 66150000000.0
+  },
+  {
+   "case": "central",
+   "armour": "flowing_liquid_Sn_1300K",
+   "L_m": 30.0,
+   "R_face_m": 8.0,
+   "P_fus_TW": 0.15428466149355857,
+   "accel_mg": 0.22954230613596646,
+   "field_energy_J_at_10T": 240000000000.0
+  },
+  {
+   "case": "central",
+   "armour": "flowing_liquid_Sn_1300K",
+   "L_m": 30.0,
+   "R_face_m": 15.0,
+   "P_fus_TW": 0.28928374030042225,
+   "accel_mg": 0.43039182400493703,
+   "field_energy_J_at_10T": 843750000000.0
+  },
+  {
+   "case": "central",
+   "armour": "flowing_liquid_Sn_1300K",
+   "L_m": 60.0,
+   "R_face_m": 4.2,
+   "P_fus_TW": 0.1619988945682365,
+   "accel_mg": 0.24101942144276475,
+   "field_energy_J_at_10T": 132300000000.0
+  },
+  {
+   "case": "central",
+   "armour": "flowing_liquid_Sn_1300K",
+   "L_m": 60.0,
+   "R_face_m": 8.0,
+   "P_fus_TW": 0.30856932298711715,
+   "accel_mg": 0.4590846122719329,
+   "field_energy_J_at_10T": 480000000000.0
+  },
+  {
+   "case": "central",
+   "armour": "flowing_liquid_Sn_1300K",
+   "L_m": 60.0,
+   "R_face_m": 15.0,
+   "P_fus_TW": 0.5785674806008445,
+   "accel_mg": 0.8607836480098741,
+   "field_energy_J_at_10T": 1687500000000.0
+  },
+  {
+   "case": "central",
+   "armour": "flowing_liquid_Sn_1300K",
+   "L_m": 120.0,
+   "R_face_m": 4.2,
+   "P_fus_TW": 0.323997789136473,
+   "accel_mg": 0.4820388428855295,
+   "field_energy_J_at_10T": 264600000000.0
+  },
+  {
+   "case": "central",
+   "armour": "flowing_liquid_Sn_1300K",
+   "L_m": 120.0,
+   "R_face_m": 8.0,
+   "P_fus_TW": 0.6171386459742343,
+   "accel_mg": 0.9181692245438658,
+   "field_energy_J_at_10T": 960000000000.0
+  },
+  {
+   "case": "central",
+   "armour": "flowing_liquid_Sn_1300K",
+   "L_m": 120.0,
+   "R_face_m": 15.0,
+   "P_fus_TW": 1.157134961201689,
+   "accel_mg": 1.7215672960197481,
+   "field_energy_J_at_10T": 3375000000000.0
+  },
+  {
+   "case": "central",
+   "armour": "flowing_liquid_Li_projection",
+   "L_m": 30.0,
+   "R_face_m": 4.2,
+   "P_fus_TW": 0.2024986182102956,
+   "accel_mg": 0.30127427680345586,
+   "field_energy_J_at_10T": 66150000000.0
+  },
+  {
+   "case": "central",
+   "armour": "flowing_liquid_Li_projection",
+   "L_m": 30.0,
+   "R_face_m": 8.0,
+   "P_fus_TW": 0.3857116537338964,
+   "accel_mg": 0.5738557653399161,
+   "field_energy_J_at_10T": 240000000000.0
+  },
+  {
+   "case": "central",
+   "armour": "flowing_liquid_Li_projection",
+   "L_m": 30.0,
+   "R_face_m": 15.0,
+   "P_fus_TW": 0.7232093507510556,
+   "accel_mg": 1.0759795600123425,
+   "field_energy_J_at_10T": 843750000000.0
+  },
+  {
+   "case": "central",
+   "armour": "flowing_liquid_Li_projection",
+   "L_m": 60.0,
+   "R_face_m": 4.2,
+   "P_fus_TW": 0.4049972364205912,
+   "accel_mg": 0.6025485536069117,
+   "field_energy_J_at_10T": 132300000000.0
+  },
+  {
+   "case": "central",
+   "armour": "flowing_liquid_Li_projection",
+   "L_m": 60.0,
+   "R_face_m": 8.0,
+   "P_fus_TW": 0.7714233074677928,
+   "accel_mg": 1.1477115306798322,
+   "field_energy_J_at_10T": 480000000000.0
+  },
+  {
+   "case": "central",
+   "armour": "flowing_liquid_Li_projection",
+   "L_m": 60.0,
+   "R_face_m": 15.0,
+   "P_fus_TW": 1.4464187015021113,
+   "accel_mg": 2.151959120024685,
+   "field_energy_J_at_10T": 1687500000000.0
+  },
+  {
+   "case": "central",
+   "armour": "flowing_liquid_Li_projection",
+   "L_m": 120.0,
+   "R_face_m": 4.2,
+   "P_fus_TW": 0.8099944728411824,
+   "accel_mg": 1.2050971072138235,
+   "field_energy_J_at_10T": 264600000000.0
+  },
+  {
+   "case": "central",
+   "armour": "flowing_liquid_Li_projection",
+   "L_m": 120.0,
+   "R_face_m": 8.0,
+   "P_fus_TW": 1.5428466149355855,
+   "accel_mg": 2.2954230613596645,
+   "field_energy_J_at_10T": 960000000000.0
+  },
+  {
+   "case": "central",
+   "armour": "flowing_liquid_Li_projection",
+   "L_m": 120.0,
+   "R_face_m": 15.0,
+   "P_fus_TW": 2.8928374030042225,
+   "accel_mg": 4.30391824004937,
+   "field_energy_J_at_10T": 3375000000000.0
+  },
+  {
+   "case": "canon_ratio",
+   "armour": "W_armour_Li_heat_pipe_1900K",
+   "L_m": 30.0,
+   "R_face_m": 4.2,
+   "P_fus_TW": 0.02357609397352557,
+   "accel_mg": 0.028090001576670888,
+   "field_energy_J_at_10T": 66150000000.0
+  },
+  {
+   "case": "canon_ratio",
+   "armour": "W_armour_Li_heat_pipe_1900K",
+   "L_m": 30.0,
+   "R_face_m": 8.0,
+   "P_fus_TW": 0.044906845663858226,
+   "accel_mg": 0.05350476490794454,
+   "field_energy_J_at_10T": 240000000000.0
+  },
+  {
+   "case": "canon_ratio",
+   "armour": "W_armour_Li_heat_pipe_1900K",
+   "L_m": 30.0,
+   "R_face_m": 15.0,
+   "P_fus_TW": 0.08420033561973417,
+   "accel_mg": 0.100321434202396,
+   "field_energy_J_at_10T": 843750000000.0
+  },
+  {
+   "case": "canon_ratio",
+   "armour": "W_armour_Li_heat_pipe_1900K",
+   "L_m": 60.0,
+   "R_face_m": 4.2,
+   "P_fus_TW": 0.04715218794705114,
+   "accel_mg": 0.056180003153341776,
+   "field_energy_J_at_10T": 132300000000.0
+  },
+  {
+   "case": "canon_ratio",
+   "armour": "W_armour_Li_heat_pipe_1900K",
+   "L_m": 60.0,
+   "R_face_m": 8.0,
+   "P_fus_TW": 0.08981369132771645,
+   "accel_mg": 0.10700952981588908,
+   "field_energy_J_at_10T": 480000000000.0
+  },
+  {
+   "case": "canon_ratio",
+   "armour": "W_armour_Li_heat_pipe_1900K",
+   "L_m": 60.0,
+   "R_face_m": 15.0,
+   "P_fus_TW": 0.16840067123946834,
+   "accel_mg": 0.200642868404792,
+   "field_energy_J_at_10T": 1687500000000.0
+  },
+  {
+   "case": "canon_ratio",
+   "armour": "W_armour_Li_heat_pipe_1900K",
+   "L_m": 120.0,
+   "R_face_m": 4.2,
+   "P_fus_TW": 0.09430437589410227,
+   "accel_mg": 0.11236000630668355,
+   "field_energy_J_at_10T": 264600000000.0
+  },
+  {
+   "case": "canon_ratio",
+   "armour": "W_armour_Li_heat_pipe_1900K",
+   "L_m": 120.0,
+   "R_face_m": 8.0,
+   "P_fus_TW": 0.1796273826554329,
+   "accel_mg": 0.21401905963177817,
+   "field_energy_J_at_10T": 960000000000.0
+  },
+  {
+   "case": "canon_ratio",
+   "armour": "W_armour_Li_heat_pipe_1900K",
+   "L_m": 120.0,
+   "R_face_m": 15.0,
+   "P_fus_TW": 0.33680134247893667,
+   "accel_mg": 0.401285736809584,
+   "field_energy_J_at_10T": 3375000000000.0
+  },
+  {
+   "case": "canon_ratio",
+   "armour": "flowing_liquid_Sn_1300K",
+   "L_m": 30.0,
+   "R_face_m": 4.2,
+   "P_fus_TW": 0.04715218794705114,
+   "accel_mg": 0.056180003153341776,
+   "field_energy_J_at_10T": 66150000000.0
+  },
+  {
+   "case": "canon_ratio",
+   "armour": "flowing_liquid_Sn_1300K",
+   "L_m": 30.0,
+   "R_face_m": 8.0,
+   "P_fus_TW": 0.08981369132771645,
+   "accel_mg": 0.10700952981588908,
+   "field_energy_J_at_10T": 240000000000.0
+  },
+  {
+   "case": "canon_ratio",
+   "armour": "flowing_liquid_Sn_1300K",
+   "L_m": 30.0,
+   "R_face_m": 15.0,
+   "P_fus_TW": 0.16840067123946834,
+   "accel_mg": 0.200642868404792,
+   "field_energy_J_at_10T": 843750000000.0
+  },
+  {
+   "case": "canon_ratio",
+   "armour": "flowing_liquid_Sn_1300K",
+   "L_m": 60.0,
+   "R_face_m": 4.2,
+   "P_fus_TW": 0.09430437589410227,
+   "accel_mg": 0.11236000630668355,
+   "field_energy_J_at_10T": 132300000000.0
+  },
+  {
+   "case": "canon_ratio",
+   "armour": "flowing_liquid_Sn_1300K",
+   "L_m": 60.0,
+   "R_face_m": 8.0,
+   "P_fus_TW": 0.1796273826554329,
+   "accel_mg": 0.21401905963177817,
+   "field_energy_J_at_10T": 480000000000.0
+  },
+  {
+   "case": "canon_ratio",
+   "armour": "flowing_liquid_Sn_1300K",
+   "L_m": 60.0,
+   "R_face_m": 15.0,
+   "P_fus_TW": 0.33680134247893667,
+   "accel_mg": 0.401285736809584,
+   "field_energy_J_at_10T": 1687500000000.0
+  },
+  {
+   "case": "canon_ratio",
+   "armour": "flowing_liquid_Sn_1300K",
+   "L_m": 120.0,
+   "R_face_m": 4.2,
+   "P_fus_TW": 0.18860875178820455,
+   "accel_mg": 0.2247200126133671,
+   "field_energy_J_at_10T": 264600000000.0
+  },
+  {
+   "case": "canon_ratio",
+   "armour": "flowing_liquid_Sn_1300K",
+   "L_m": 120.0,
+   "R_face_m": 8.0,
+   "P_fus_TW": 0.3592547653108658,
+   "accel_mg": 0.42803811926355634,
+   "field_energy_J_at_10T": 960000000000.0
+  },
+  {
+   "case": "canon_ratio",
+   "armour": "flowing_liquid_Sn_1300K",
+   "L_m": 120.0,
+   "R_face_m": 15.0,
+   "P_fus_TW": 0.6736026849578733,
+   "accel_mg": 0.802571473619168,
+   "field_energy_J_at_10T": 3375000000000.0
+  },
+  {
+   "case": "canon_ratio",
+   "armour": "flowing_liquid_Li_projection",
+   "L_m": 30.0,
+   "R_face_m": 4.2,
+   "P_fus_TW": 0.11788046986762783,
+   "accel_mg": 0.14045000788335443,
+   "field_energy_J_at_10T": 66150000000.0
+  },
+  {
+   "case": "canon_ratio",
+   "armour": "flowing_liquid_Li_projection",
+   "L_m": 30.0,
+   "R_face_m": 8.0,
+   "P_fus_TW": 0.2245342283192911,
+   "accel_mg": 0.26752382453972273,
+   "field_energy_J_at_10T": 240000000000.0
+  },
+  {
+   "case": "canon_ratio",
+   "armour": "flowing_liquid_Li_projection",
+   "L_m": 30.0,
+   "R_face_m": 15.0,
+   "P_fus_TW": 0.42100167809867084,
+   "accel_mg": 0.5016071710119802,
+   "field_energy_J_at_10T": 843750000000.0
+  },
+  {
+   "case": "canon_ratio",
+   "armour": "flowing_liquid_Li_projection",
+   "L_m": 60.0,
+   "R_face_m": 4.2,
+   "P_fus_TW": 0.23576093973525566,
+   "accel_mg": 0.28090001576670887,
+   "field_energy_J_at_10T": 132300000000.0
+  },
+  {
+   "case": "canon_ratio",
+   "armour": "flowing_liquid_Li_projection",
+   "L_m": 60.0,
+   "R_face_m": 8.0,
+   "P_fus_TW": 0.4490684566385822,
+   "accel_mg": 0.5350476490794455,
+   "field_energy_J_at_10T": 480000000000.0
+  },
+  {
+   "case": "canon_ratio",
+   "armour": "flowing_liquid_Li_projection",
+   "L_m": 60.0,
+   "R_face_m": 15.0,
+   "P_fus_TW": 0.8420033561973417,
+   "accel_mg": 1.0032143420239603,
+   "field_energy_J_at_10T": 1687500000000.0
+  },
+  {
+   "case": "canon_ratio",
+   "armour": "flowing_liquid_Li_projection",
+   "L_m": 120.0,
+   "R_face_m": 4.2,
+   "P_fus_TW": 0.47152187947051133,
+   "accel_mg": 0.5618000315334177,
+   "field_energy_J_at_10T": 264600000000.0
+  },
+  {
+   "case": "canon_ratio",
+   "armour": "flowing_liquid_Li_projection",
+   "L_m": 120.0,
+   "R_face_m": 8.0,
+   "P_fus_TW": 0.8981369132771644,
+   "accel_mg": 1.070095298158891,
+   "field_energy_J_at_10T": 960000000000.0
+  },
+  {
+   "case": "canon_ratio",
+   "armour": "flowing_liquid_Li_projection",
+   "L_m": 120.0,
+   "R_face_m": 15.0,
+   "P_fus_TW": 1.6840067123946834,
+   "accel_mg": 2.0064286840479206,
+   "field_energy_J_at_10T": 3375000000000.0
+  }
+ ],
+ "today": {
+  "P_fus_TW": 261.26510418091243,
+  "thrust_MN": 21.770763000706356,
+  "ve_km_s": 19201.172079999997,
+  "departure_t": 4426.074234859591,
+  "burn1_days": 9.987452580792596
+ }
+}

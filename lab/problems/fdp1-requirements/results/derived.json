@@ -1,0 +1,1204 @@
+{
+ "checks": [
+  {
+   "name": "dimensional consistency",
+   "ok": true,
+   "detail": "7 equations; mismatched: none",
+   "kind": "dimension"
+  },
+  {
+   "name": "departure = end + propellant",
+   "ok": true,
+   "detail": "20,760.2 t vs 20,760.2 t",
+   "kind": "mass"
+  },
+  {
+   "name": "end = dry + reserve",
+   "ok": true,
+   "detail": "7,643.0 t vs 7,643.0 t",
+   "kind": "mass"
+  },
+  {
+   "name": "departure items sum to departure",
+   "ok": true,
+   "detail": "20,760.2 t vs 20,760.2 t",
+   "kind": "mass"
+  },
+  {
+   "name": "propellant = sum of four burns, burns chain",
+   "ok": true,
+   "detail": "13,117.2 t",
+   "kind": "mass"
+  },
+  {
+   "name": "propellant = fused + unburned = He-3 + D",
+   "ok": true,
+   "detail": "8,809.4 + 4,307.8 t (H tamper 36 g)",
+   "kind": "mass"
+  },
+  {
+   "name": "energy ledger sums to fusion power",
+   "ok": true,
+   "detail": "1.728573e+13 W vs 1.728573e+13 W",
+   "kind": "energy"
+  },
+  {
+   "name": "outflows (jet, plume, radiation, radiators) = fusion",
+   "ok": true,
+   "detail": "residual 0.00195 W",
+   "kind": "energy"
+  },
+  {
+   "name": "hot and warm loops = sum of their sources",
+   "ok": true,
+   "detail": "hot 77.12 GW, warm 24.39 GW",
+   "kind": "energy"
+  },
+  {
+   "name": "recirculating power balance",
+   "ok": true,
+   "detail": "recovered 31.73 GW = load 30.15 + loss 1.59 GW",
+   "kind": "energy"
+  },
+  {
+   "name": "integrated energy E = P x t",
+   "ok": true,
+   "detail": "3.1012e+21 J vs record 3.1012e+21 J",
+   "kind": "energy"
+  },
+  {
+   "name": "fusion power = yield x rate = gain x beam x rate",
+   "ok": true,
+   "detail": "17.286 TW",
+   "kind": "energy"
+  },
+  {
+   "name": "thrust: F = m0 a0 = mdot ve = record",
+   "ok": true,
+   "detail": "1.4039 / 1.4039 / 1.4039 MN",
+   "kind": "performance"
+  },
+  {
+   "name": "P_jet = 0.5 F ve = record",
+   "ok": true,
+   "detail": "13.478 TW",
+   "kind": "performance"
+  },
+  {
+   "name": "each burn dv = 0.016 c (rocket equation)",
+   "ok": true,
+   "detail": "4,796.7, 4,796.7, 4,796.7, 4,796.7 km/s",
+   "kind": "performance"
+  },
+  {
+   "name": "burn times = propellant / mdot = record",
+   "ok": true,
+   "detail": "726, 566, 441, 343 d",
+   "kind": "performance"
+  },
+  {
+   "name": "radiator area = Q / (2 eps sigma T^4) = record",
+   "ok": true,
+   "detail": "hot 71,977 m2, warm 1.8439 km2 (eps 0.9)",
+   "kind": "performance"
+  },
+  {
+   "name": "wing planform = warm area",
+   "ok": true,
+   "detail": "1.8439 km2",
+   "kind": "performance"
+  },
+  {
+   "name": "peak acceleration <= 1.5 g ceiling",
+   "ok": true,
+   "detail": "0.0187 g",
+   "kind": "performance"
+  },
+  {
+   "name": "1 g deficit = specific mass / required",
+   "ok": true,
+   "detail": "x89.1",
+   "kind": "performance"
+  }
+ ],
+ "derived": {
+  "calc.thrust_ma": {
+   "value": 1403857.7924973217,
+   "unit": "N",
+   "formula": "F = m0 x a0",
+   "class": "CALC",
+   "req": [
+    "P03",
+    "P04"
+   ]
+  },
+  "calc.thrust_mdot": {
+   "value": 1403857.7924973217,
+   "unit": "N",
+   "formula": "F = mdot x ve",
+   "class": "CALC",
+   "req": [
+    "P04",
+    "P08"
+   ]
+  },
+  "calc.jet_power": {
+   "value": 13477857524795.006,
+   "unit": "W",
+   "formula": "P_jet = 0.5 x F x ve",
+   "class": "CALC",
+   "req": [
+    "P03",
+    "P04"
+   ]
+  },
+  "calc.eta_jet": {
+   "value": 0.7797102257185157,
+   "unit": "-",
+   "formula": "eta = P_jet / P_fusion",
+   "class": "CALC",
+   "req": [
+    "P04"
+   ]
+  },
+  "calc.non_jet_power": {
+   "value": 3807868736361.748,
+   "unit": "W",
+   "formula": "P_fusion - P_jet",
+   "class": "CALC",
+   "req": [
+    "P05",
+    "P06"
+   ]
+  },
+  "calc.ve_over_c": {
+   "value": 0.0640482159160922,
+   "unit": "-",
+   "formula": "ve / c",
+   "class": "CALC",
+   "req": []
+  },
+  "calc.mass_ratio": {
+   "value": 2.7162362581652935,
+   "unit": "-",
+   "formula": "R = m0 / m_final",
+   "class": "CALC",
+   "req": [
+    "P10"
+   ]
+  },
+  "calc.dv_total": {
+   "value": 19186717.311999995,
+   "unit": "m/s",
+   "formula": "dv = ve x ln(m0 / mf)",
+   "class": "CALC",
+   "req": [
+    "P10"
+   ]
+  },
+  "calc.dv_total_c": {
+   "value": 0.06399999999999999,
+   "unit": "c",
+   "formula": "dv / c",
+   "class": "CALC",
+   "req": [
+    "P10"
+   ]
+  },
+  "calc.dv_burn_required": {
+   "value": 4796679.328,
+   "unit": "m/s",
+   "formula": "0.016 c per burn",
+   "class": "CALC",
+   "req": []
+  },
+  "calc.burn1.dv": {
+   "value": 4796679.327999999,
+   "unit": "m/s",
+   "formula": "ve x ln(m_start/m_end), burn 1",
+   "class": "CALC",
+   "req": [
+    "P10"
+   ]
+  },
+  "calc.burn1.days": {
+   "value": 726.4715644431283,
+   "unit": "d",
+   "formula": "(m_start - m_end) / mdot, burn 1",
+   "class": "CALC",
+   "req": [
+    "P10"
+   ]
+  },
+  "calc.burn1.a_start_g": {
+   "value": 0.006895573489099627,
+   "unit": "g",
+   "formula": "F / m_start",
+   "class": "CALC",
+   "req": [
+    "P03"
+   ]
+  },
+  "calc.burn1.a_end_g": {
+   "value": 0.008852425424908245,
+   "unit": "g",
+   "formula": "F / m_end",
+   "class": "CALC",
+   "req": [
+    "P03"
+   ]
+  },
+  "calc.burn2.dv": {
+   "value": 4796679.327999999,
+   "unit": "m/s",
+   "formula": "ve x ln(m_start/m_end), burn 2",
+   "class": "CALC",
+   "req": [
+    "P10"
+   ]
+  },
+  "calc.burn2.days": {
+   "value": 565.8831133740603,
+   "unit": "d",
+   "formula": "(m_start - m_end) / mdot, burn 2",
+   "class": "CALC",
+   "req": [
+    "P10"
+   ]
+  },
+  "calc.burn2.a_start_g": {
+   "value": 0.008852425424908245,
+   "unit": "g",
+   "formula": "F / m_start",
+   "class": "CALC",
+   "req": [
+    "P03"
+   ]
+  },
+  "calc.burn2.a_end_g": {
+   "value": 0.011364600207283748,
+   "unit": "g",
+   "formula": "F / m_end",
+   "class": "CALC",
+   "req": [
+    "P03"
+   ]
+  },
+  "calc.burn3.dv": {
+   "value": 4796679.327999999,
+   "unit": "m/s",
+   "formula": "ve x ln(m_start/m_end), burn 3",
+   "class": "CALC",
+   "req": [
+    "P10"
+   ]
+  },
+  "calc.burn3.days": {
+   "value": 440.7931620109382,
+   "unit": "d",
+   "formula": "(m_start - m_end) / mdot, burn 3",
+   "class": "CALC",
+   "req": [
+    "P10"
+   ]
+  },
+  "calc.burn3.a_start_g": {
+   "value": 0.011364600207283748,
+   "unit": "g",
+   "formula": "F / m_start",
+   "class": "CALC",
+   "req": [
+    "P03"
+   ]
+  },
+  "calc.burn3.a_end_g": {
+   "value": 0.014589689454823336,
+   "unit": "g",
+   "formula": "F / m_end",
+   "class": "CALC",
+   "req": [
+    "P03"
+   ]
+  },
+  "calc.burn4.dv": {
+   "value": 4796679.327999999,
+   "unit": "m/s",
+   "formula": "ve x ln(m_start/m_end), burn 4",
+   "class": "CALC",
+   "req": [
+    "P10"
+   ]
+  },
+  "calc.burn4.days": {
+   "value": 343.3546735775553,
+   "unit": "d",
+   "formula": "(m_start - m_end) / mdot, burn 4",
+   "class": "CALC",
+   "req": [
+    "P10"
+   ]
+  },
+  "calc.burn4.a_start_g": {
+   "value": 0.014589689454823336,
+   "unit": "g",
+   "formula": "F / m_start",
+   "class": "CALC",
+   "req": [
+    "P03"
+   ]
+  },
+  "calc.burn4.a_end_g": {
+   "value": 0.01873000673193577,
+   "unit": "g",
+   "formula": "F / m_end",
+   "class": "CALC",
+   "req": [
+    "P03"
+   ]
+  },
+  "calc.engine_years": {
+   "value": 5.6851540408095325,
+   "unit": "y",
+   "formula": "sum of burn times",
+   "class": "CALC",
+   "req": [
+    "P10"
+   ]
+  },
+  "calc.burn_fraction_of_ve": {
+   "value": 0.9992471934557025,
+   "unit": "-",
+   "formula": "dv_total / ve = ln R",
+   "class": "CALC",
+   "req": [
+    "P10"
+   ]
+  },
+  "calc.mass_items_sum": {
+   "value": 20760224.73961668,
+   "unit": "kg",
+   "formula": "sum of departure items",
+   "class": "CALC",
+   "req": [
+    "P03"
+   ]
+  },
+  "calc.dry_sum": {
+   "value": 7118322.903025491,
+   "unit": "kg",
+   "formula": "sum of dry items",
+   "class": "CALC",
+   "req": []
+  },
+  "calc.propellant_share": {
+   "value": 0.6318435125096743,
+   "unit": "-",
+   "formula": "propellant / departure",
+   "class": "CALC",
+   "req": [
+    "P08"
+   ]
+  },
+  "calc.unburned_share": {
+   "value": 0.3284115801582818,
+   "unit": "-",
+   "formula": "unburned / propellant",
+   "class": "CALC",
+   "req": [
+    "P08"
+   ]
+  },
+  "calc.power_scaled_mass": {
+   "value": 3829126.9983336693,
+   "unit": "kg",
+   "formula": "alpha_jet x P_jet",
+   "class": "CALC",
+   "req": [
+    "P03"
+   ]
+  },
+  "calc.1g.thrust": {
+   "value": 203588257.70133692,
+   "unit": "N",
+   "formula": "F = m0 x 1 g",
+   "class": "CALC",
+   "req": [
+    "P03"
+   ]
+  },
+  "calc.1g.jet_power": {
+   "value": 1954566584795378.0,
+   "unit": "W",
+   "formula": "0.5 x F x ve",
+   "class": "CALC",
+   "req": [
+    "P03"
+   ]
+  },
+  "calc.1g.fusion_power": {
+   "value": 2506785880606110.0,
+   "unit": "W",
+   "formula": "P_jet / eta",
+   "class": "CALC",
+   "req": [
+    "P01",
+    "P03"
+   ]
+  },
+  "calc.1g.factor": {
+   "value": 145.02057030945699,
+   "unit": "-",
+   "formula": "P_fus(1 g) / P_fus(FDP-1) = 1 g / a0",
+   "class": "CALC",
+   "req": [
+    "P03"
+   ]
+  },
+  "calc.1g.heat": {
+   "value": 14721063312599.873,
+   "unit": "W",
+   "formula": "radiator heat x factor (same fractions)",
+   "class": "CALC",
+   "req": [
+    "P06",
+    "P07"
+   ]
+  },
+  "calc.1g.warm_area": {
+   "value": 267396311.10483858,
+   "unit": "m2",
+   "formula": "warm area x factor (same T)",
+   "class": "CALC",
+   "req": [
+    "P07"
+   ]
+  },
+  "calc.1g.hot_area": {
+   "value": 10438120.839789607,
+   "unit": "m2",
+   "formula": "hot area x factor (same T)",
+   "class": "CALC",
+   "req": [
+    "P07"
+   ]
+  },
+  "calc.1g.scaled_mass": {
+   "value": 555302181.0856879,
+   "unit": "kg",
+   "formula": "alpha_jet x P_jet(1 g)",
+   "class": "CALC",
+   "req": [
+    "P03"
+   ]
+  },
+  "calc.1g.scaled_mass_over_ship": {
+   "value": 26.748370439579634,
+   "unit": "-",
+   "formula": "scaled mass / m0",
+   "class": "CALC",
+   "req": [
+    "P03"
+   ]
+  },
+  "calc.1g.burn_days": {
+   "value": 5.661170925020456,
+   "unit": "d",
+   "formula": "0.016 c / 1 g",
+   "class": "CALC",
+   "req": [
+    "P10"
+   ]
+  },
+  "calc.1g.total_days": {
+   "value": 22.644683700081824,
+   "unit": "d",
+   "formula": "4 burns at constant 1 g",
+   "class": "CALC",
+   "req": [
+    "P10"
+   ]
+  },
+  "calc.1g.mdot": {
+   "value": 10.602907825267346,
+   "unit": "kg/s",
+   "formula": "F / ve",
+   "class": "CALC",
+   "req": [
+    "P08"
+   ]
+  },
+  "calc.alpha_mass_limit_g": {
+   "value": 0.037385455022721586,
+   "unit": "g",
+   "formula": "a at which alpha_jet x P_jet = m0 (no propellant, payload or tanks)",
+   "class": "CALC",
+   "req": [
+    "P03"
+   ]
+  },
+  "calc.heat_total": {
+   "value": 101510173909.72083,
+   "unit": "W",
+   "formula": "hot + warm loop heat",
+   "class": "CALC",
+   "req": [
+    "P06"
+   ]
+  },
+  "calc.flux_hot": {
+   "value": 1071455.8050160992,
+   "unit": "W/m2",
+   "formula": "2 x eps x sigma x T^4",
+   "class": "CALC",
+   "req": [
+    "P07"
+   ]
+  },
+  "calc.flux_warm": {
+   "value": 13227.8494446432,
+   "unit": "W/m2",
+   "formula": "2 x eps x sigma x T^4",
+   "class": "CALC",
+   "req": [
+    "P07"
+   ]
+  },
+  "calc.area_hot": {
+   "value": 71976.82933887154,
+   "unit": "m2",
+   "formula": "Q_hot / flux",
+   "class": "CALC",
+   "req": [
+    "P07"
+   ]
+  },
+  "calc.area_warm": {
+   "value": 1843850.913937561,
+   "unit": "m2",
+   "formula": "Q_warm / flux",
+   "class": "CALC",
+   "req": [
+    "P07"
+   ]
+  },
+  "calc.area_total": {
+   "value": 1915827.7432764326,
+   "unit": "m2",
+   "formula": "hot + warm planform",
+   "class": "CALC",
+   "req": [
+    "P07"
+   ]
+  },
+  "calc.radiator_panel_mass": {
+   "value": 2059781.4019541757,
+   "unit": "kg",
+   "formula": "area x areal mass",
+   "class": "CALC",
+   "req": [
+    "P07"
+   ]
+  },
+  "calc.radiator_mass": {
+   "value": 2147121.762340937,
+   "unit": "kg",
+   "formula": "record hot + warm radiators",
+   "class": "CALC",
+   "req": [
+    "P07"
+   ]
+  },
+  "calc.transport_mass": {
+   "value": 87340.36038676114,
+   "unit": "kg",
+   "formula": "record radiator mass - panel mass = heat-transport allowance (kg/W)",
+   "class": "CALC",
+   "req": [
+    "P06"
+   ]
+  },
+  "calc.transport_kg_per_W": {
+   "value": 8.604099177727568e-07,
+   "unit": "kg/W",
+   "formula": "transport allowance / heat",
+   "class": "CALC",
+   "req": [
+    "P06"
+   ]
+  },
+  "calc.wings_planform": {
+   "value": 1843850.913937561,
+   "unit": "m2",
+   "formula": "wings x span x chord",
+   "class": "CALC",
+   "req": [
+    "P07"
+   ]
+  },
+  "calc.wing_tip_to_tip": {
+   "value": 7146.122711797791,
+   "unit": "m",
+   "formula": "2 x tip radius",
+   "class": "CALC",
+   "req": [
+    "P07",
+    "P09"
+   ]
+  },
+  "calc.wing_span_over_ship": {
+   "value": 24.68436169878339,
+   "unit": "-",
+   "formula": "tip-to-tip / Wayfarer body length",
+   "class": "CALC",
+   "req": [
+    "P07"
+   ]
+  },
+  "calc.ledger_sum": {
+   "value": 17285726261156.754,
+   "unit": "W",
+   "formula": "sum of ledger channels",
+   "class": "CALC",
+   "req": [
+    "P06"
+   ]
+  },
+  "calc.outflow_sum": {
+   "value": 17285726261156.752,
+   "unit": "W",
+   "formula": "jet + plume to space + radiation to space + radiator heat",
+   "class": "CALC",
+   "req": [
+    "P06"
+   ]
+  },
+  "calc.outflow_residual": {
+   "value": 0.001953125,
+   "unit": "W",
+   "formula": "P_fusion - outflows",
+   "class": "CALC",
+   "req": [
+    "P06"
+   ]
+  },
+  "calc.space_escape": {
+   "value": 3706358562452.0264,
+   "unit": "W",
+   "formula": "undirected plume + radiation to space",
+   "class": "CALC",
+   "req": [
+    "P05"
+   ]
+  },
+  "calc.deposited_hardware": {
+   "value": 75537126508.11876,
+   "unit": "W",
+   "formula": "plume + radiation absorbed by hardware",
+   "class": "CALC",
+   "req": [
+    "P05",
+    "P06"
+   ]
+  },
+  "calc.recirc_house": {
+   "value": 25973047401.60206,
+   "unit": "W",
+   "formula": "recirculating-power losses that become heat",
+   "class": "CALC",
+   "req": [
+    "P02",
+    "P06"
+   ]
+  },
+  "calc.driver_efficiency": {
+   "value": 0.45000000000000007,
+   "unit": "-",
+   "formula": "beam / wall-plug",
+   "class": "CALC",
+   "req": [
+    "P02"
+   ]
+  },
+  "calc.pulses_mission": {
+   "value": 38090801914.16497,
+   "unit": "-",
+   "formula": "rep rate x engine time",
+   "class": "CALC",
+   "req": [
+    "P02",
+    "P09"
+   ]
+  },
+  "calc.yield_check": {
+   "value": 81416741890.70187,
+   "unit": "J",
+   "formula": "gain x beam energy",
+   "class": "CALC",
+   "req": [
+    "P01"
+   ]
+  },
+  "calc.fusion_from_pulses": {
+   "value": 17285726260564.33,
+   "unit": "W",
+   "formula": "yield x rate",
+   "class": "CALC",
+   "req": [
+    "P01"
+   ]
+  },
+  "calc.fusion_energy": {
+   "value": 3.101228987961709e+21,
+   "unit": "J",
+   "formula": "P_fusion x engine time",
+   "class": "CALC",
+   "req": [
+    "P01"
+   ]
+  },
+  "calc.jet_energy": {
+   "value": 2.4180599542084277e+21,
+   "unit": "J",
+   "formula": "P_jet x engine time",
+   "class": "CALC",
+   "req": [
+    "P04"
+   ]
+  },
+  "calc.solid_angle_ratio": {
+   "value": 9.746987015928168,
+   "unit": "-",
+   "formula": "drawn solid angle / study allowance",
+   "class": "CALC",
+   "req": [
+    "P05"
+   ]
+  },
+  "calc.tank_ratio_he3": {
+   "value": 7.091228888164798,
+   "unit": "-",
+   "formula": "required / existing",
+   "class": "CALC",
+   "req": [
+    "P08"
+   ]
+  },
+  "calc.tank_ratio_d": {
+   "value": 6.57244088020684,
+   "unit": "-",
+   "formula": "required / existing",
+   "class": "CALC",
+   "req": [
+    "P08"
+   ]
+  },
+  "calc.gain_gap_demonstrated": {
+   "value": 275.0,
+   "unit": "-",
+   "formula": "closure gain / demonstrated gain",
+   "class": "CALC",
+   "req": [
+    "P01"
+   ]
+  },
+  "calc.gain_margin": {
+   "value": 2.727272727272727,
+   "unit": "-",
+   "formula": "assumed gain / closure threshold",
+   "class": "CALC",
+   "req": [
+    "P01"
+   ]
+  },
+  "calc.round_trip_vs_canon": {
+   "value": 0.3519158110906737,
+   "unit": "y",
+   "formula": "FDP-1 minimum round trip - canon LOCKED duration",
+   "class": "CALC",
+   "req": [
+    "P10"
+   ]
+  },
+  "calc.reserve_share": {
+   "value": 0.04,
+   "unit": "-",
+   "formula": "reserve / propellant",
+   "class": "CALC",
+   "req": [
+    "P10"
+   ]
+  },
+  "calc.sens_800K_saving": {
+   "value": 0.4493773643219243,
+   "unit": "-",
+   "formula": "1 - m0(800 K) / m0",
+   "class": "CALC",
+   "req": [
+    "P07"
+   ]
+  },
+  "calc.sens_house_saving": {
+   "value": 0.30297549951855873,
+   "unit": "-",
+   "formula": "1 - m0(house/2) / m0",
+   "class": "CALC",
+   "req": [
+    "P02"
+   ]
+  },
+  "calc.specific_mass_mismatch": {
+   "value": 0.05827922973750477,
+   "unit": "-",
+   "formula": "closure alpha_jet / 1 g-check specific mass - 1",
+   "class": "CALC",
+   "req": [
+    "P03"
+   ]
+  },
+  "calc.deficit_check": {
+   "value": 89.1345146099948,
+   "unit": "-",
+   "formula": "specific mass / required",
+   "class": "CALC",
+   "req": [
+    "P03"
+   ]
+  },
+  "calc.fusion_1g_over_max": {
+   "value": 89.13451460999481,
+   "unit": "-",
+   "formula": "1 g / FDP-1 ceiling",
+   "class": "CALC",
+   "req": [
+    "P03"
+   ]
+  },
+  "calc.standoff": {
+   "value": 43.19071770932621,
+   "unit": "m",
+   "formula": "shield aft face - burn point",
+   "class": "CALC",
+   "req": [
+    "P05"
+   ]
+  }
+ },
+ "accel_rows": [
+  {
+   "a_g": 0.006895573489099627,
+   "thrust_N": 1403857.7924973217,
+   "jet_W": 13477857524795.006,
+   "fusion_W": 17285726261156.754,
+   "factor": 1.0,
+   "mdot": 0.07311313010728049,
+   "heat_W": 101510173909.72083,
+   "scaled_mass_kg": 3829126.9983336693,
+   "mass_over_ship": 0.18444535407978144,
+   "burn_days": 820.9862361657827
+  },
+  {
+   "a_g": 0.05,
+   "thrust_N": 10179412.885066846,
+   "jet_W": 97728329239768.9,
+   "fusion_W": 125339294030305.5,
+   "factor": 7.251028515472849,
+   "mdot": 0.5301453912633673,
+   "heat_W": 736053165629.9938,
+   "scaled_mass_kg": 27765109.054284394,
+   "mass_over_ship": 1.3374185219789816,
+   "burn_days": 113.22341850040911
+  },
+  {
+   "a_g": 0.1,
+   "thrust_N": 20358825.770133693,
+   "jet_W": 195456658479537.8,
+   "fusion_W": 250678588060611.0,
+   "factor": 14.502057030945698,
+   "mdot": 1.0602907825267347,
+   "heat_W": 1472106331259.9875,
+   "scaled_mass_kg": 55530218.10856879,
+   "mass_over_ship": 2.674837043957963,
+   "burn_days": 56.611709250204555
+  },
+  {
+   "a_g": 0.25,
+   "thrust_N": 50897064.42533423,
+   "jet_W": 488641646198844.5,
+   "fusion_W": 626696470151527.5,
+   "factor": 36.255142577364246,
+   "mdot": 2.6507269563168365,
+   "heat_W": 3680265828149.9683,
+   "scaled_mass_kg": 138825545.27142197,
+   "mass_over_ship": 6.687092609894909,
+   "burn_days": 22.644683700081824
+  },
+  {
+   "a_g": 0.5,
+   "thrust_N": 101794128.85066846,
+   "jet_W": 977283292397689.0,
+   "fusion_W": 1253392940303055.0,
+   "factor": 72.51028515472849,
+   "mdot": 5.301453912633673,
+   "heat_W": 7360531656299.937,
+   "scaled_mass_kg": 277651090.54284394,
+   "mass_over_ship": 13.374185219789817,
+   "burn_days": 11.322341850040912
+  },
+  {
+   "a_g": 1.0,
+   "thrust_N": 203588257.70133692,
+   "jet_W": 1954566584795378.0,
+   "fusion_W": 2506785880606110.0,
+   "factor": 145.02057030945699,
+   "mdot": 10.602907825267346,
+   "heat_W": 14721063312599.873,
+   "scaled_mass_kg": 555302181.0856879,
+   "mass_over_ship": 26.748370439579634,
+   "burn_days": 5.661170925020456
+  },
+  {
+   "a_g": 1.5,
+   "thrust_N": 305382386.55200535,
+   "jet_W": 2931849877193066.5,
+   "fusion_W": 3760178820909164.0,
+   "factor": 217.5308554641854,
+   "mdot": 15.904361737901018,
+   "heat_W": 22081594968899.81,
+   "scaled_mass_kg": 832953271.6285317,
+   "mass_over_ship": 40.122555659369446,
+   "burn_days": 3.774113950013637
+  }
+ ],
+ "temp_rows": [
+  {
+   "T": 800.0,
+   "flux": 41806.5365164032,
+   "area_total": 2428093.364536245,
+   "area_warm": 583405.9532380564,
+   "area_1g": 352123484.4896544
+  },
+  {
+   "T": 1000.0,
+   "flux": 102066.739542,
+   "area_total": 994547.0421140459,
+   "area_warm": 238963.07844630792,
+   "area_1g": 144229779.24696246
+  },
+  {
+   "T": 1500.0,
+   "flux": 516712.868931375,
+   "area_total": 196453.73671388562,
+   "area_warm": 47202.583396801565,
+   "area_1g": 28489832.937671594
+  },
+  {
+   "T": 2000.0,
+   "flux": 1633067.832672,
+   "area_total": 62159.19013212787,
+   "area_warm": 14935.192402894245,
+   "area_1g": 9014361.202935154
+  },
+  {
+   "T": 2500.0,
+   "flux": 3986982.013359375,
+   "area_total": 25460.404278119575,
+   "area_warm": 6117.454808225482,
+   "area_1g": 3692282.348722239
+  }
+ ],
+ "brief_comparison": [
+  {
+   "brief": "fusion power 17.3 TW",
+   "quoted": 17300000000000.0,
+   "key": "fusion.power",
+   "derived": 17285726261156.754,
+   "rel_diff": 0.0008250716094361903,
+   "within_rounding": true
+  },
+  {
+   "brief": "effective exhaust velocity ~19.2e6 m/s",
+   "quoted": 19200000.0,
+   "key": "prop.ve",
+   "derived": 19201172.080000002,
+   "rel_diff": 6.104583333343422e-05,
+   "within_rounding": true
+  },
+  {
+   "brief": "directed jet power ~13.5 TW",
+   "quoted": 13500000000000.0,
+   "key": "calc.jet_power",
+   "derived": 13477857524795.006,
+   "rel_diff": 0.0016401833485180845,
+   "within_rounding": true
+  },
+  {
+   "brief": "energy not in jet ~3.8 TW",
+   "quoted": 3800000000000.0,
+   "key": "calc.non_jet_power",
+   "derived": 3807868736361.748,
+   "rel_diff": 0.0020707200951968546,
+   "within_rounding": true
+  },
+  {
+   "brief": "departure mass 20,760 t",
+   "quoted": 20760000.0,
+   "key": "mass.departure",
+   "derived": 20760224.714998182,
+   "rel_diff": 1.0824421877741297e-05,
+   "within_rounding": true
+  },
+  {
+   "brief": "propellant ~13,117 t",
+   "quoted": 13117000.0,
+   "key": "mass.propellant",
+   "derived": 13117213.304414604,
+   "rel_diff": 1.6261676801392025e-05,
+   "within_rounding": true
+  },
+  {
+   "brief": "remaining dry mass ~7,643 t",
+   "quoted": 7643000.0,
+   "key": "mass.dry",
+   "derived": 7118322.878424977,
+   "rel_diff": 0.06864805986851015,
+   "within_rounding": false
+  },
+  {
+   "brief": "initial acceleration 0.0069 g",
+   "quoted": 0.0069,
+   "key": "prop.a0_g",
+   "derived": 0.006895573489099627,
+   "rel_diff": 0.0006415233188946819,
+   "within_rounding": true
+  },
+  {
+   "brief": "maximum acceleration ~0.019 g",
+   "quoted": 0.019,
+   "key": "calc.burn4.a_end_g",
+   "derived": 0.01873000673193577,
+   "rel_diff": 0.014210172003380536,
+   "within_rounding": true
+  },
+  {
+   "brief": "initial thrust ~1.4 MN",
+   "quoted": 1400000.0,
+   "key": "calc.thrust_ma",
+   "derived": 1403857.7924973217,
+   "rel_diff": 0.002755566069515522,
+   "within_rounding": true
+  },
+  {
+   "brief": "1 g thrust ~204 MN",
+   "quoted": 204000000.0,
+   "key": "calc.1g.thrust",
+   "derived": 203588257.70133692,
+   "rel_diff": 0.0020183446012896067,
+   "within_rounding": true
+  },
+  {
+   "brief": "1 g fusion power ~2,507 TW",
+   "quoted": 2507000000000000.0,
+   "key": "calc.1g.fusion_power",
+   "derived": 2506785880606110.0,
+   "rel_diff": 8.540861343837256e-05,
+   "within_rounding": true
+  },
+  {
+   "brief": "power increase ~145x",
+   "quoted": 145.0,
+   "key": "calc.1g.factor",
+   "derived": 145.02057030945699,
+   "rel_diff": 0.00014186420315162463,
+   "within_rounding": true
+  },
+  {
+   "brief": "high-temperature heat ~77 GW",
+   "quoted": 77000000000.0,
+   "key": "thermal.hot_total",
+   "derived": 77119991621.787,
+   "rel_diff": 0.0015583327504805529,
+   "within_rounding": true
+  },
+  {
+   "brief": "intermediate heat ~24 GW",
+   "quoted": 24000000000.0,
+   "key": "thermal.warm_total",
+   "derived": 24390182287.933823,
+   "rel_diff": 0.01625759533057594,
+   "within_rounding": true
+  },
+  {
+   "brief": "combined heat ~101 GW",
+   "quoted": 101000000000.0,
+   "key": "calc.heat_total",
+   "derived": 101510173909.72083,
+   "rel_diff": 0.005051226828919062,
+   "within_rounding": true
+  },
+  {
+   "brief": "warm radiator area 1.84 km2",
+   "quoted": 1840000.0,
+   "key": "rad.warm_area",
+   "derived": 1843850.913937561,
+   "rel_diff": 0.0020928880095440116,
+   "within_rounding": true
+  },
+  {
+   "brief": "wing tip radius 3.57 km",
+   "quoted": 3570.0,
+   "key": "rad.wing_tip_radius",
+   "derived": 3573.0613558988957,
+   "rel_diff": 0.0008575226607551055,
+   "within_rounding": true
+  },
+  {
+   "brief": "total ideal dv ~0.064 c",
+   "quoted": 0.064,
+   "key": "calc.dv_total_c",
+   "derived": 0.06399999999999999,
+   "rel_diff": 2.1684043449710089e-16,
+   "within_rounding": true
+  },
+  {
+   "brief": "engine operating time ~5.69 y",
+   "quoted": 5.69,
+   "key": "mission.engine_years",
+   "derived": 5.6851540408095325,
+   "rel_diff": 0.0008516624236323251,
+   "within_rounding": true
+  },
+  {
+   "brief": "minimum round trip ~6.35 y",
+   "quoted": 6.35,
+   "key": "mission.min_round_trip_years",
+   "derived": 6.351915811090674,
+   "rel_diff": 0.0003017025339644203,
+   "within_rounding": true
+  },
+  {
+   "brief": "1 g: ~5.66 d per 0.016 c burn",
+   "quoted": 5.66,
+   "key": "calc.1g.burn_days",
+   "derived": 5.661170925020456,
+   "rel_diff": 0.0002068772120946827,
+   "within_rounding": true
+  },
+  {
+   "brief": "1 g: ~22.6 d cumulative",
+   "quoted": 22.6,
+   "key": "calc.1g.total_days",
+   "derived": 22.644683700081824,
+   "rel_diff": 0.001977154870877113,
+   "within_rounding": true
+  },
+  {
+   "brief": "target gain 3,000",
+   "quoted": 3000.0,
+   "key": "fusion.target_gain",
+   "derived": 3000.0,
+   "rel_diff": 0.0,
+   "within_rounding": true
+  }
+ ],
+ "record_diffs": []
+}

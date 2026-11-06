@@ -1,0 +1,16 @@
+{
+ "version": "fdp1-v1",
+ "variant": "goal_1g",
+ "architecture": "IFD-PH",
+ "tier": "optimistic",
+ "converged": false,
+ "reason": "loop gain 68.885 >= 1 (drive, radiators and tanks outweigh what they lift)",
+ "requested_a0_g": 1.0,
+ "ve_km_s": 19201.17208,
+ "drive_specific_mass_kg_per_W_jet": 2.684594134093896e-07,
+ "max_a0_g_any_size": 0.011218998660344624,
+ "deficit_factor": 89.13451460999481,
+ "required_specific_mass_kg_per_W_jet_zero_payload": 3.0118457993968455e-09,
+ "iterations": [],
+ "note": "No physical FDP-1 closes at this acceleration. The number is the factor by which drive-plus-radiator mass per watt of jet power must fall."
+}
