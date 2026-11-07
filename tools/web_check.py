@@ -800,14 +800,17 @@ def run_main(url, release, build, binary, sandbox, out, record_check, metrics):
                 page.screenshot(out / 'exterior_first_launch.png')
                 record_check('play: exterior starts in free exploration at the hatch, drone docked', bool(eva0) and eva0['docked'] and eva0['held']
                              and not eva0['scenario'] and eva0['hold'] == 'HOLD_AIRLOCK', state=eva0)
+                # The state record comes once a game second, and a software-rendered runner plays game time at a fraction of real time
+                # (CI run 214: 4 game seconds in 80 s), so each step waits long enough and W stays down until the suit is seen moving.
                 key('x', 'KeyX', 88)
-                undocked = page.wait('window.wayfarerEva && window.wayfarerEva.docked === false', 15)
+                undocked = page.wait('window.wayfarerEva && window.wayfarerEva.docked === false', 90)
                 key('g', 'KeyG', 71)
-                released = page.wait('window.wayfarerEva && window.wayfarerEva.held === false', 15)
-                key('w', 'KeyW', 87, hold=1.5)
-                moving = page.wait('window.wayfarerEva && window.wayfarerEva.v_suit > 0.005', 15)
+                released = page.wait('window.wayfarerEva && window.wayfarerEva.held === false', 90)
+                page.send('Input.dispatchKeyEvent', {'type': 'keyDown', 'key': 'w', 'code': 'KeyW', 'windowsVirtualKeyCode': 87})
+                moving = page.wait('window.wayfarerEva && window.wayfarerEva.v_suit > 0.005', 90)
+                page.send('Input.dispatchKeyEvent', {'type': 'keyUp', 'key': 'w', 'code': 'KeyW', 'windowsVirtualKeyCode': 87})
                 key('2', 'Digit2', 50)
-                drone = page.wait("window.wayfarerEva && window.wayfarerEva.active === 'drone'", 15)
+                drone = page.wait("window.wayfarerEva && window.wayfarerEva.active === 'drone'", 90)
                 time.sleep(2)
                 page.screenshot(out / 'exterior_running.png')
                 record_check('play: exterior: the astronaut undocks, lets go, thrusts and hands control to the drone',
