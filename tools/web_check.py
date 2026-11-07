@@ -317,6 +317,9 @@ RAF_FPS = ('new Promise(r => { const t0 = performance.now(); let n = 0; const ts
 # at most in real time (the walk: 97,770 frames in 1,633 s). The budget follows the native reference's simulated time (1,102 s)
 # with half again for a slower runner, and never less than the old 1,200 s.
 EVA_SECONDS_MIN = 1200
+# The engine quits right after printing its result line; its exit errors (leaked RIDs, ...) follow within a moment. Waiting for
+# them before reading the console makes those errors count every time, instead of only when they happen to arrive first.
+TEARDOWN_SECONDS = 5
 EVA_SLACK = 1.5
 
 
@@ -336,6 +339,7 @@ def run_equivalence(url, play_release, binary, sandbox, out, play_seconds, recor
         query = '&'.join(f'arg={a}' for a in ('--disable-render-loop', '--fixed-fps', '60', '--', '--check-excursion'))
         page.send('Page.navigate', {'url': url + play_release['page'] + '?' + query})
         line = traffic.wait_console('WF_GODOT_EXCURSION ', mark, max(play_seconds, EQUIVALENCE_SECONDS))
+        time.sleep(TEARDOWN_SECONDS if line else 0)
         errors = [text for kind, text in traffic.since(mark)[1] if text.startswith('ERROR')]
         web = json.loads(line.split(' ', 1)[1]) if line else None
         seconds = round(time.monotonic() - t0, 1)
@@ -353,6 +357,7 @@ def run_equivalence(url, play_release, binary, sandbox, out, play_seconds, recor
         query = '&'.join(f'arg={a}' for a in ('--disable-render-loop', '--fixed-fps', '60', '--', '--eva', '--check-eva-ops'))
         page.send('Page.navigate', {'url': url + play_release['page'] + '?' + query})
         line = traffic.wait_console('WF_GODOT_EVA_OPS ', mark, max(EVA_SECONDS_MIN, EVA_SLACK * float(nat_eva.get('sim_s') or 0) + 120))
+        time.sleep(TEARDOWN_SECONDS if line else 0)
         errors = [text for kind, text in traffic.since(mark)[1] if text.startswith('ERROR')]
         eva = json.loads(line.split(' ', 1)[1]) if line else None
         record_check('play: the EVA Operations check passes in the browser as natively',

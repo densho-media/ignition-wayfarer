@@ -100,9 +100,20 @@ static func eva_requested() -> bool:
 		return h != null and String(h).to_lower().contains("eva")
 	return false
 
+## The walk's member nodes are made with the script but enter the tree only in _ready; when EVA Operations opens instead, free
+## them, or they outlive the scene change and leak their light, camera and font resources at exit.
+func _free_unused() -> void:
+	var roots: Array[Node] = []
+	for n in [world, station_root, view_root, body_vis, camera, lamp, world_env, layer, hud_goal, hud_prompt, hud_status, hud_check]:
+		if is_instance_valid(n) and not n.is_inside_tree() and n.get_parent() == null:
+			roots.append(n)
+	for n in roots:
+		n.free()
+
 func _ready() -> void:
 	if eva_requested() and not "--check-excursion" in OS.get_cmdline_user_args():
 		get_tree().change_scene_to_file.call_deferred("res://scenes/eva_ops.tscn")
+		_free_unused()
 		return
 	if not FileAccess.file_exists("res://generated/manifest_docked.json"):
 		var missing := Label.new()
