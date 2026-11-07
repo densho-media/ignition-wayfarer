@@ -360,12 +360,23 @@ def run_equivalence(url, play_release, binary, sandbox, out, play_seconds, recor
         page.send('Page.navigate', {'url': url + play_release['page'] + '?' + query})
         line = traffic.wait_console('WF_GODOT_EVA_OPS ', mark, max(EVA_SECONDS_MIN, EVA_SLACK * float(nat_eva.get('sim_s') or 0) + 120))
         time.sleep(TEARDOWN_SECONDS if line else 0)
-        errors = [text for kind, text in traffic.since(mark)[1] if text.startswith('ERROR')]
+        # Errors up to the result line fail the check; engine messages printed after a PASS line (shutdown diagnostics such as
+        # 'Pages in use exist at exit in PagedAllocator') are reported but do not fail it (owner decision 2026-11-07).
+        texts = [text for kind, text in traffic.since(mark)[1]]
+        cut = texts.index(line) if line in texts else len(texts)
+        errors = [t for t in texts[:cut] if t.startswith('ERROR')]
         eva = json.loads(line.split(' ', 1)[1]) if line else None
+        passed = bool(eva) and eva.get('result') == 'PASS'
+        exit_errors = [t for t in texts[cut + 1:] if t.startswith('ERROR')]
+        if not passed:
+            errors += exit_errors
+            exit_errors = []
         record_check('play: the EVA Operations check passes in the browser as natively',
-                     bool(eva) and eva.get('result') == 'PASS' and nat_eva.get('result') == 'PASS' and len(eva.get('tests', {})) == nat_eva.get('checks')
+                     passed and nat_eva.get('result') == 'PASS' and len(eva.get('tests', {})) == nat_eva.get('checks')
                      and not errors, web={k: (eva or {}).get(k) for k in ('result', 'fail', 'sim_s', 'wall_s')}, native=nat_eva, errors=errors[:3],
-                     seconds=round(time.monotonic() - t0, 1))
+                     exit_messages=exit_errors[:5], seconds=round(time.monotonic() - t0, 1))
+        if exit_errors and os.environ.get('GITHUB_ACTIONS'):
+            print(f'::warning title=web check::EVA Operations engine exit messages after PASS: {json.dumps(exit_errors[:5])}', flush=True)
     except Exception as error:
         log.flush()
         record_check('play: equivalence browser session', False, error=repr(error),
