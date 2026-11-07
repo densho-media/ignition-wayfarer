@@ -546,6 +546,9 @@ candidates of all nine classes are separate accessory assets (docs/ACCESSORIES.m
   exposure, embed/CSP permissions and browser performance/accessibility before a prototype. Reuse the GLB pipeline and stable IDs;
   keep Godot. Acceptance would include publication, desktop/mobile interaction, iframe/new-tab fallback, credits and update procedure.
 - [ ] **P05 — Website follow-ups (WEB-002). Optional, outside WF-R1.** The site, play build, checks, deploy and verify exist (rollback = revert on main) (docs/wayfarer-web-experience-plan.md); the first deploy (`b1db258`) passed the live verify job. Owner's order:
+  - Explore Exterior follow-ups (the two homepage experiences, 2026-11-07): touch controls for EVA Operations (the exterior page
+    says keyboard only); an in-game "back to the hatch" assist and a clearer end-of-session card; the canonical suit and drone
+    GLBs in the web package (proxies today); Interior: a free-roam mode switch that hides the guided goal once a ring is done.
   - Measure on real hardware: frame rates on real GPUs (viewer and Godot, desktop and phone); all numbers so far are software
     rendering. Record them in the plan §5–6.
   - Firefox (then Safari on macOS and iOS): test by hand, then add to the browser check where a headless build exists.

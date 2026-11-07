@@ -1864,7 +1864,7 @@ cartridge or SHARE by docking, success only when the astronaut's Δv rises, refu
 `data/simulations/wf_eva_ops.json` comes from `src/wayfarer/eva_ops.py` and `data/eva_ops.toml` (PROTOTYPE: the RC-1 dock-channel
 cartridge, the station rack, burn presets at the rig's 1.5 g bound and 1.1 g, assist gains, reach and tether). Its Δv matches the
 canonical budget (34.9 / 5.12 / 2.67 m/s). The guided "EVA — First Flight" has eight stages driven by the scene's state. The walk's F9
-and the web launcher's Start EVA Operations open it. `eva_check.gd` checks movement, gas, drone and a full scripted First Flight
+and the website's Explore Exterior (`/exterior/`, `#exterior`) open it. `eva_check.gd` checks movement, gas, drone and a full scripted First Flight
 (34 checks, runtime-export `eva-ops`).
 
 ## Crew physics

@@ -24,6 +24,10 @@ h2 { margin: 0 0 8px; font-size: 16px; letter-spacing: 0.08em; color: var(--mute
 .choice .kicker { font-size: 11px; letter-spacing: 0.25em; color: var(--accent); text-transform: uppercase; }
 .choice .meta { margin-top: auto; font-size: 12px; color: var(--muted); }
 .choice.off { opacity: 0.5; pointer-events: none; }
+.choices.primary .choice { border-color: #3a4652; }
+.choices.primary .choice strong { font-size: 26px; }
+.choices.secondary .choice { min-height: 150px; padding: 16px 18px; gap: 6px; }
+.choices.secondary .choice strong { font-size: 18px; }
 .note { margin: 0; font-size: 13px; color: var(--muted); max-width: 720px; }
 footer { margin-top: auto; display: flex; flex-wrap: wrap; gap: 16px; font-size: 13px; color: var(--muted); }
 footer span:first-child { margin-right: auto; }
@@ -32,7 +36,8 @@ button, .button {
   font-weight: 600; letter-spacing: 0.04em; display: inline-block;
 }
 button:disabled { opacity: 0.5; cursor: default; }
-button.secondary { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+button.secondary, .button.secondary { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+.button.secondary:hover { border-color: var(--accent); text-decoration: none; }
 .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 16px; }
 table { border-collapse: collapse; width: 100%; font-size: 13px; }
 th, td { text-align: left; padding: 4px 8px 4px 0; border-bottom: 1px solid var(--line); vertical-align: top; overflow-wrap: anywhere; }

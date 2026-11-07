@@ -64,8 +64,10 @@ function render(rel) {
     ])),
     section('Experiences', table([
       ['Explore Ship', link('../viewer/', 'viewer/'), `three.js ${v.three} · ${mb(v.download_bytes)} to load`],
-      p ? ['Enter Wayfarer', link('../play/', 'play/'), `Godot ${p.godot} · ${mb(p.download_bytes)} to load · ${p.variant}`]
-        : ['Enter Wayfarer', '—', 'not in this release'],
+      p ? ['Explore Interior', link('../interior/', 'interior/'), `the walk (${p.scene.replace('res://scenes/', '')}) · Godot ${p.godot} · ${mb(p.download_bytes)} to load · ${p.variant}`]
+        : ['Explore Interior', '—', 'not in this release'],
+      p ? ['Explore Exterior', link('../exterior/', 'exterior/'), `EVA Operations (${(rel.experiences.exterior?.scene || '').replace('res://scenes/', '')}) · the same engine and package`]
+        : ['Explore Exterior', '—', 'not in this release'],
       p && ['Play package', p.package.join(', ')],
       p && ['Play build', `inputs key ${(p.input_key || '—').slice(0, 12)}`],
       p && ['Reduced fidelity', p.reduced_fidelity.join('; ')],

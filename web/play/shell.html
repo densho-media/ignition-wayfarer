@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, viewport-fit=cover">
-<title>Enter Wayfarer · G.U. WAYFARER 001</title>
+<title>Explore Wayfarer · G.U. WAYFARER 001</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%2307090c'/%3E%3Cpath d='M2 8h12M8 3v10' stroke='%23e0a040' stroke-width='2'/%3E%3C/svg%3E">
 <style>
 html, body, #canvas { margin: 0; padding: 0; border: 0; }
@@ -16,6 +16,8 @@ body { color: #d9e0e6; background: #07090c; overflow: hidden; touch-action: none
 #status { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 12px; background: #07090c; padding: 16px; text-align: center; }
 #status h1 { margin: 0; font-size: 18px; letter-spacing: 0.12em; font-weight: 600; }
 #status p { margin: 0; color: #7d8a96; max-width: 520px; }
+#hint { font-size: 13px; }
+#hint:empty { display: none; }
 #bar { width: min(420px, 100%); height: 6px; background: #26303a; border-radius: 3px; overflow: hidden; }
 #bar span { display: block; height: 100%; width: 0; background: #e0a040; transition: width 0.2s; }
 #status.error #bar { display: none; }
@@ -45,24 +47,28 @@ $GODOT_HEAD_INCLUDE
 </head>
 <body>
 <canvas id="canvas">Your browser does not support the canvas element.</canvas>
-<noscript>Enter Wayfarer needs JavaScript and WebGL 2.</noscript>
-<a id="exit" href="./" title="Leave the experience (unloads the engine)">← Exit</a>
+<noscript>The Wayfarer experiences need JavaScript and WebGL 2.</noscript>
+<a id="exit" href="../interior/" title="Leave the experience (unloads the engine)">← Exit</a>
 <button id="full" type="button" title="Full screen">⛶ Full screen</button>
 <div id="safe"></div>
 <div id="turn" hidden role="dialog" aria-label="Turn your phone">
   <p><strong>Turn your phone sideways</strong></p>
-  <p>Enter Wayfarer is laid out for landscape: one thumb moves, the other looks. It keeps running if you stay upright.</p>
+  <p>The experience is laid out for landscape: one thumb moves, the other looks. It keeps running if you stay upright.</p>
   <button id="turn-full" type="button">Full screen, landscape</button>
   <button id="turn-stay" type="button" class="quiet">Continue upright</button>
 </div>
 <div id="status" role="status">
-  <h1>ENTER WAYFARER</h1>
+  <h1 id="title">EXPLORE INTERIOR</h1>
   <p id="detail">Loading the engine and the Wayfarer package…</p>
+  <p id="hint"></p>
   <div id="bar"><span></span></div>
 </div>
 <script src="$GODOT_URL"></script>
 <script>
-// WEB-002 Godot shell: starts the walk (EXC-001) at once (the launcher page play/index.html is the click-to-load step).
+// WEB-002 Godot shell: starts the chosen experience at once (the launcher pages interior/ and exterior/ are the click-to-load step).
+// One engine and one pack hold both scenes; the hash picks the one to start: #interior (or none) the walk (EXC-001), #exterior (or
+// the older #eva) EVA Operations (EVA-OPS-001). godot/scripts/web_page.gd reads it and calls window.wayfarerScene when a scene
+// change (F8, F9) moves between them, so the title, the Exit link and the address follow and a reload keeps what is on screen.
 // Checks may pass Godot arguments through ?arg= only from the allowed list below; ordinary visitors pass none. Leaving releases the
 // WebGL context at once (the back-forward cache may still keep the page until the browser evicts it).
 const GODOT_CONFIG = $GODOT_CONFIG;
@@ -71,6 +77,26 @@ const GODOT_THREADS_ENABLED = $GODOT_THREADS_ENABLED;
   const status = document.getElementById('status');
   const detail = document.getElementById('detail');
   const bar = document.querySelector('#bar span');
+  const EXPERIENCES = {
+    interior: { title: 'EXPLORE INTERIOR', back: '../interior/', hash: '#interior',
+                hint: 'Click the view to look, W/S move, A/D step, E use, O ship operations, M map. The goal at the top left says what to do next.' },
+    exterior: { title: 'EXPLORE EXTERIOR', back: '../exterior/', hash: '#exterior',
+                hint: 'W/S A/D R/F thrust, I/K J/L U/O rotate, B brake, G grab, X release or dock the drone, 1/2 astronaut or drone, F4 the guided flight.' },
+  };
+  const experienceOf = h => /eva|exterior/i.test(h || '') ? 'exterior' : 'interior';
+  let experience = experienceOf(location.hash);
+  function showExperience(name) {
+    const x = EXPERIENCES[name] || EXPERIENCES.interior;
+    experience = name in EXPERIENCES ? name : 'interior';
+    document.getElementById('title').textContent = x.title;
+    document.getElementById('hint').textContent = x.hint;
+    document.title = x.title.replace(/\w\S*/g, w => w[0] + w.slice(1).toLowerCase()) + ' · G.U. WAYFARER 001';
+    document.getElementById('exit').href = x.back;
+    if (location.hash !== x.hash) history.replaceState(null, '', location.pathname + location.search + x.hash);
+    if (window.wayfarerPlay) window.wayfarerPlay.experience = experience;
+  }
+  showExperience(experience);
+  window.wayfarerScene = showExperience;          // called by the engine when a scene change switches the experience
   const ALLOWED = ['--disable-render-loop', '--fixed-fps', '30', '60', '--', '--touch', '--no-touch', '--touch-probe', '--check-excursion',
                    '--eva', '--check-eva-ops'];
   const asked = new URLSearchParams(location.search).getAll('arg');
@@ -132,7 +158,7 @@ const GODOT_THREADS_ENABLED = $GODOT_THREADS_ENABLED;
   });
   window.addEventListener('pageshow', e => { if (e.persisted && window.wayfarerPlay?.state === 'running') location.reload(); });
   const started = performance.now();
-  window.wayfarerPlay = { state: 'loading', args };
+  window.wayfarerPlay = { state: 'loading', args, experience };
   engine.startGame({
     args,
     onProgress(current, total) {
@@ -146,7 +172,7 @@ const GODOT_THREADS_ENABLED = $GODOT_THREADS_ENABLED;
     },
   }).then(() => {
     status.hidden = true;
-    window.wayfarerPlay = { state: 'running', args, start_ms: Math.round(performance.now() - started) };
+    window.wayfarerPlay = { state: 'running', args, experience, start_ms: Math.round(performance.now() - started) };
     orient();
   }, fail);
 }());
