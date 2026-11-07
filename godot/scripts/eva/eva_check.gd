@@ -53,7 +53,13 @@ func run(o) -> void:
 	var out := {"result": "PASS" if fails.is_empty() else "FAIL", "fail": fails, "tests": results, "sim_s": snappedf(ops.t_sim, 0.1),
 		"wall_s": snappedf((Time.get_ticks_msec() - t0) / 1000.0, 0.1)}
 	print("WF_GODOT_EVA_OPS ", JSON.stringify(out))
-	ops.get_tree().quit(0 if fails.is_empty() else 1)
+	# Stop the physics server and let two frames drain before quitting, so no Jolt job group is still in flight at exit
+	# (the Web build reported "Pages in use exist at exit in PagedAllocator: WorkerThreadPool::Group" otherwise).
+	var tree := ops.get_tree()
+	PhysicsServer3D.set_active(false)
+	for i in 2:
+		await tree.process_frame
+	tree.quit(0 if fails.is_empty() else 1)
 
 var only := OS.get_environment("EVA_ONLY")
 var trace := OS.get_environment("EVA_TRACE") != ""
