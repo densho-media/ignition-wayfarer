@@ -71,7 +71,8 @@ const GODOT_THREADS_ENABLED = $GODOT_THREADS_ENABLED;
   const status = document.getElementById('status');
   const detail = document.getElementById('detail');
   const bar = document.querySelector('#bar span');
-  const ALLOWED = ['--disable-render-loop', '--fixed-fps', '30', '60', '--', '--touch', '--no-touch', '--touch-probe', '--check-excursion'];
+  const ALLOWED = ['--disable-render-loop', '--fixed-fps', '30', '60', '--', '--touch', '--no-touch', '--touch-probe', '--check-excursion',
+                   '--eva', '--check-eva-ops'];
   const asked = new URLSearchParams(location.search).getAll('arg');
   const args = asked.filter(a => ALLOWED.includes(a));
   function fail(err) {

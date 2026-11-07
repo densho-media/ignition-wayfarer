@@ -152,7 +152,7 @@ jobs:
     name: Browser check (${{ matrix.part }})
     needs: [build]
     runs-on: ubuntu-24.04
-    timeout-minutes: 60
+    timeout-minutes: 90   # equivalence runs the walk (~27 min) and EVA Operations (~19 min sim time) in real time, one after the other
     strategy:
       fail-fast: false
       matrix:
