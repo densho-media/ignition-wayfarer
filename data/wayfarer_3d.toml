@@ -356,7 +356,8 @@ steps = [
   { step = 9, path = "Fusion electrical generation takes ship load", state = "Battery and pulse bank recharge", reactor = "SUSTAINED", supplied_by = ["FUSION_BUS"], charges = ["MAIN_BATTERY", "PULSE_BANK"] },
 ]
 
-# Story manifest (02!A5, LOCKED); the rated design occupancy is a separate WORKING field (02!A42, 12!A14).
+# The ship is designed for 12 (rated_occupancy, 02!A42, 12!A14): every crew-sized system uses it. count is the story manifest
+# (02!A5, LOCKED): six people are aboard in the tale; it never sizes a system.
 [crew]
 count = 6
 canon_status = "LOCKED"

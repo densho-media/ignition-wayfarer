@@ -14,7 +14,8 @@ and explored interactively in Godot. A **[Densho](https://densho.media)** produc
 
 Wayfarer carries the experimental Fiji/Lattice fusion drive. In IGNITION, a hard-science-fiction
 universe, it is the setting of a story about six people who accidentally set out on a years-long
-journey aboard it. The design follows a simple order: physics first, engineering second, aesthetics
+journey aboard it. The ship itself is designed for a crew of twelve; the six are who happens to be
+aboard in the story. The design follows a simple order: physics first, engineering second, aesthetics
 third. Fictional technology can extend what engineering does, but it never removes physical limits.
 Major shapes are explained by what they do: shielding, radiators, thrust structure, crew protection
 and service access.

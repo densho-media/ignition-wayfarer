@@ -495,7 +495,9 @@ def main_page(site, spec, entries, dropped, problem, revision, built, play=True)
         row('Mass ratio', f'{m["mass_ratio_per_burn"]:.3f} per burn, {m["mass_ratio_per_burn"] ** m["burns"]:.3f} overall', 'DERIVED', 'Rocket equation.'),
         row('Mission duration', f'{spec["mission"]["duration"]["value"]:.1f} years', spec['mission']['duration']['canon_status'],
             'Bounds the burn times and the coast.'),
-        row('Crew', f'{spec["crew"]["count"]} (rated {spec["crew"]["rated_occupancy"]["value"]})', spec['crew']['canon_status'], 'Sets habitat, life support and the protected mass.'),
+        row('Design crew', f'{spec["crew"]["rated_occupancy"]["value"]} persons', spec['crew']['rated_occupancy']['canon_status'],
+            f'The ship is built for {spec["crew"]["rated_occupancy"]["value"]}: habitat, life support, refuge, bunks and burn couches, and the protected '
+            f'mass. Only {spec["crew"]["count"]} are aboard in the story; that is a story fact, not a design limit.'),
         row('Design acceleration', f'0 → {spec["mission"]["first_ignition"]["max_accel"]} g ramp', spec['mission']['first_ignition']['canon_status'],
             'The structural design-load case. The flight burns are power-limited and gentler.'),
         row('Peak fusion power', f'{b["peak_fusion_power_W"] / 1e12:,.0f} TW', spec['physics']['operating_point']['canon_status'],
@@ -546,7 +548,7 @@ def main_page(site, spec, entries, dropped, problem, revision, built, play=True)
   <a href="#tried">4 What we tried</a><a href="#problems">5 Open problems</a><a href="#follow">6 Follow along</a></nav>
 
 <section id="goal"><h2>1 · The goal</h2>
-  <p>A crew of {spec["crew"]["count"]} cruises at <strong>{spec["mission"]["target_speed"]["value"]} c</strong> ({spec["mission"]["target_speed"]["value"] * C / 1e3:,.0f} km/s)
+  <p>A ship built for a crew of {spec["crew"]["rated_occupancy"]["value"]} cruises at <strong>{spec["mission"]["target_speed"]["value"]} c</strong> ({spec["mission"]["target_speed"]["value"] * C / 1e3:,.0f} km/s)
     and comes home without refuelling. The mission is four burns: accelerate out, brake at the destination, accelerate home, and brake home.
     That totals {total_dv / C:.3f} c of Δv, which is almost exactly the drive's exhaust velocity of {ve_c:.4f} c. The rocket equation then
     says the departing ship must be <strong>e ≈ {m["mass_ratio_per_burn"] ** m["burns"]:.2f} times</strong> the ship that comes home.</p>
