@@ -49,6 +49,8 @@ function select(id, push) {
   for (const b of document.querySelectorAll('.pairs button')) b.setAttribute('aria-selected', String(b.dataset.pair === pair.id));
   caption(pair);
   if (push) history.replaceState(null, '', '#' + pair.id);
+  if (PAIR_VIEW[pair.id] && !viewChosen) view = PAIR_VIEW[pair.id];
+  else if (!viewChosen) view = 'threequarter';
   if (loaded) show(pair);
 }
 
@@ -170,6 +172,7 @@ function shadow(xAft) {
 
 // Right: the blockout, its pieces made once; per pair merged into one mesh per function colour (focus) and one ghost.
 let blockParts = null;
+const WING_FRAME_M = 1500;            // a part longer than this is framed only when its own problem is shown
 function buildBlockout() {
   blockParts = [];
   for (const p of data.parts) {
@@ -186,23 +189,31 @@ function showRight(pair) {
   side.root.add(frame);
   const all = pair.needed.includes('ALL');
   const byFunc = new Map(), rest = [];
+  // With the whole blockout shown, the km-scale radiator wings would shrink the ship to a dot and wall off the side view: they are
+  // ghosted and left out of the frame then (P07 shows them solid).
+  const huge = g => (g.boundingBox || (g.computeBoundingBox(), g.boundingBox)).getSize(new THREE.Vector3()).length() > WING_FRAME_M;
+  const wide = all && pair.needed.length === 1;
+  let clipped = false;
   for (const { p, g } of blockParts) {
-    if (all || pair.needed.includes(p.group)) (byFunc.get(p.func) || byFunc.set(p.func, []).get(p.func)).push(g);
+    if (wide && huge(g)) { clipped = true; rest.push(g); }
+    else if (all || pair.needed.includes(p.group)) (byFunc.get(p.func) || byFunc.set(p.func, []).get(p.func)).push(g);
     else rest.push(g);
   }
   side.meshes = 0;
   for (const [f, gs] of byFunc) { frame.add(new THREE.Mesh(mergeGeometries(gs), funcMat(f))); side.meshes += gs.length; }
   if (rest.length) { const gm = new THREE.Mesh(mergeGeometries(rest), ghost); gm.renderOrder = 1; frame.add(gm); }
+  const b = new THREE.Box3();                                  // the frame: the solid parts, in the Blender frame
+  for (const gs of byFunc.values()) for (const g of gs) b.union(g.boundingBox || (g.computeBoundingBox(), g.boundingBox));
   side.root.position.set(0, 0, 0);
-  side.root.updateMatrixWorld(true);
-  side.focusBox = new THREE.Box3();
-  for (const c of frame.children) if (c.material !== ghost) side.focusBox.expandByObject(c);
+  side.focusBox = b.isEmpty() ? new THREE.Box3(new THREE.Vector3(-1, -1, -1), new THREE.Vector3(1, 1, 1))
+    : new THREE.Box3(new THREE.Vector3(b.min.x, b.min.z, -b.max.y), new THREE.Vector3(b.max.x, b.max.z, -b.min.y));   // to three axes
   if (pair.id === 'P11') {
     const whole = new THREE.Box3().setFromObject(frame);
     frame.add(shadow(whole.min.x));
   }
   const fn = [...byFunc.keys()];
-  $('label-right').textContent = all ? ' whole FDP-1 blockout' : ' ' + pair.needed.map(g => GROUP_NAMES[g] || g).join(', ');
+  $('label-right').textContent = (all ? ' whole FDP-1 blockout' : ' ' + pair.needed.map(g => GROUP_NAMES[g] || g).join(', '))
+    + (clipped ? '; radiator wings ghosted (see P07)' : '');
   return fn;
 }
 
@@ -291,7 +302,8 @@ const fmt = m => m >= 2000 ? `${(m / 1000).toFixed(1)} km` : `${Math.round(m)} m
 // Camera directions in three axes (bow +X, dorsal +Y, starboard +Z): the default looks down on the ship from aft-starboard
 // so that planforms (radiator wings) and lengths both read.
 const VIEWS = { threequarter: [-0.5, 0.72, 0.48], side: [0, 0, 1], top: [0, 1, 0.0001], front: [1, 0.08, 0] };
-let view = 'threequarter';
+let view = 'threequarter', viewChosen = false;
+const PAIR_VIEW = { P11: 'side', P05: 'side' };      // the shield shadow and the shield read from the side
 function frameAll() {
   const r = $('fit').checked ? radii.right : Math.max(radii.left, radii.right);
   const fov = camera.fov * Math.PI / 180, aspect = Math.min(camera.aspect, 1);
@@ -378,7 +390,7 @@ async function init() {
   for (const b of document.querySelectorAll('.pairs button')) b.addEventListener('click', () => select(b.dataset.pair, true));
   select(location.hash.slice(1), false);
   $('load').addEventListener('click', start);
-  for (const b of document.querySelectorAll('.views button')) b.addEventListener('click', () => { view = b.dataset.view; if (loaded) frameAll(); });
+  for (const b of document.querySelectorAll('.views button')) b.addEventListener('click', () => { view = b.dataset.view; viewChosen = true; if (loaded) frameAll(); });
   $('fit').addEventListener('change', () => { if (loaded) { applyFit(); frameAll(); } });
   window.addEventListener('resize', () => { if (renderer) { layout(); frameAll(); } });
   window.addEventListener('hashchange', () => select(location.hash.slice(1), false));
