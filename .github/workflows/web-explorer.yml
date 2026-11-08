@@ -279,7 +279,8 @@ jobs:
           import json, os, urllib.request
           live = os.environ['LIVE']
           rel = json.loads(urllib.request.urlopen(live + 'release.json').read())
-          paths = ['', 'site.css', 'viewer/', rel['experiences']['viewer']['glb_file'], 'viewer/vendor/three/draco/draco_decoder.wasm', 'play/']
+          paths = ['', 'site.css', 'viewer/', rel['experiences']['viewer']['glb_file'], 'viewer/vendor/three/draco/draco_decoder.wasm', 'play/',
+                   'interior/', 'exterior/', 'play/launch.js']
           paths += [f"play/{f}" for k, f in rel['experiences'].get('play', {}).get('files', {}).items() if k in ('html', 'js', 'wasm', 'pck')]
           print(f"## Live site {live} — release {rel['release']}\n\n| path | status | type | encoding | wire bytes | file bytes | cache |\n|---|---|---|---|---|---|---|")
           bad = 0

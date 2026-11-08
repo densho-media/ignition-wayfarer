@@ -91,6 +91,7 @@ func _ready() -> void:
 	scenario = WfEvaScenario.new(self)
 	WfInput.context = "evaops"
 	start_free(false)
+	WfWebPage.scene("exterior")
 	print("WF_EVA_OPS ready")
 	if "--check-eva-ops" in OS.get_cmdline_user_args():
 		check = WfEvaCheck.new()
@@ -661,11 +662,19 @@ func _drone_auto(dt: float) -> void:
 			drone_ctl.idle()
 	dops.step(dt)
 
-func _process(_dt: float) -> void:
+var _page_t := 0.0
+
+func _process(dt: float) -> void:
 	if pkg.is_empty():
 		return
 	_camera()
 	hud.refresh()
+	_page_t += dt
+	if _page_t >= 1.0:                   # the page's state record (browser check): who is controlled, docked, held, moving
+		_page_t = 0.0
+		WfWebPage.publish("wayfarerEva", {"active": active, "docked": docked, "held": suit.held, "hold": hold_id,
+			"v_suit": snappedf(suit.linear_velocity.length(), 0.001), "v_drone": snappedf(drone.linear_velocity.length(), 0.001),
+			"scenario": scenario.running, "training": training, "t": snappedf(t_sim, 0.1)})
 
 # -------------------------------------------------------------------------------------------------------------------------- camera
 const CAMS := {"suit": ["THIRD PERSON", "HELMET"], "drone": ["CHASE", "SENSOR", "STABILIZED INSPECTION"]}
@@ -812,6 +821,7 @@ func do_action(id: String) -> void:
 			faults += 1
 			say("TRAINING FAULT: drone valve %s failed closed (%d failed). Its share of every manoeuvre is lost." % [a.names[n % a.count()], faults], false)
 		"evaops.exit":
+			WfWebPage.scene("interior")            # the page follows (its Exit link, title and hash), so a reload keeps the walk
 			get_tree().change_scene_to_file("res://scenes/excursion.tscn")
 
 func _ctl() -> WfEvaControl:

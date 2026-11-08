@@ -91,14 +91,10 @@ var hud_check := Label.new()
 var ring_map: Control = null
 var learning: WfLearning = null   # UJ-013 learning stations (WHAT / WHY / SHOW ME), from the package
 
-## EVA Operations (EVA-OPS-001) is a sibling scene: `-- --eva` (native) or `#eva` on the browser page opens it instead of the walk.
+## EVA Operations (EVA-OPS-001) is a sibling scene: `-- --eva` (native) or `#exterior` (`#eva`) on the browser page, the Explore
+## Exterior experience, opens it instead of the walk (WfWebPage).
 static func eva_requested() -> bool:
-	if "--eva" in OS.get_cmdline_user_args():
-		return true
-	if OS.has_feature("web") and Engine.has_singleton("JavaScriptBridge"):
-		var h = JavaScriptBridge.eval("location.hash", true)
-		return h != null and String(h).to_lower().contains("eva")
-	return false
+	return "--eva" in OS.get_cmdline_user_args() or WfWebPage.requested() == "exterior"
 
 ## The walk's member nodes are made with the script but enter the tree only in _ready; when EVA Operations opens instead, free
 ## them, or they outlive the scene change and leak their light, camera and font resources at exit.
@@ -163,6 +159,7 @@ func _ready() -> void:
 	WfInput.context = "excursion"
 	WfInput.touch_provider = touch_state            # MOB-001: the stick, the look drag and the contextual buttons on a touch device
 	tree_exiting.connect(func(): WfInput.touch_provider = Callable(); WfInput.release_touch())
+	WfWebPage.scene("interior")
 	print("WF_EXCURSION ready")                      # the web check waits for this line
 	if "--check-excursion" in OS.get_cmdline_user_args():
 		check = WfExcursionCheck.new()       # held: a RefCounted nobody holds is freed at its first await
@@ -490,7 +487,9 @@ func _unhandled_input(e: InputEvent) -> void:
 		KEY_E: use()
 		KEY_O: ops()
 		KEY_V: view_out = not view_out
-		KEY_F9: get_tree().change_scene_to_file("res://scenes/eva_ops.tscn")
+		KEY_F9:
+			WfWebPage.scene("exterior")
+			get_tree().change_scene_to_file("res://scenes/eva_ops.tscn")
 		KEY_M:
 			if ring_map != null:
 				ring_map.visible = not ring_map.visible
@@ -1054,9 +1053,17 @@ func _frame_pivot() -> Dictionary:
 		return frames[drum_ids[k]]
 	return frames["STATIONARY"]
 
+var _page_t := 0.0
+
 func _process(dt: float) -> void:
 	if actor == null:
 		return
+	_page_t += dt
+	if _page_t >= 1.0:                   # the page's state record (browser check): where the body is and how it moves
+		_page_t = 0.0
+		var p := actor.global_position
+		WfWebPage.publish("wayfarerWalk", {"move": move, "x": snappedf(p.x, 0.01), "y": snappedf(p.y, 0.01), "z": snappedf(p.z, 0.01),
+			"goal": _goal_text().left(80)})
 	var rc: Dictionary = learning.remote_camera() if learning != null else {}
 	var f: Dictionary = _frame_pivot() if rc.is_empty() else frames["STATIONARY"]     # a station's remote camera rides the stationary ship
 	if view_root.get_parent() != f["node"]:
