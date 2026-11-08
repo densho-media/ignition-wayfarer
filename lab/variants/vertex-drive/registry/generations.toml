@@ -1,0 +1,93 @@
+# Vertex Drive Technology Atlas: the three Vertex generations. Research records, not canon.
+#
+# Each generation is FDP-1 (lab/variants/fdp1, variant "baseline") plus a list of [[generation.change]] entries. convergence.py turns the
+# changes into FDP-1 overrides (path = dotted key into the FDP-1 override tree), solves the ship and runs the benchmarks.
+# Every change names the technology that would earn it, its basis (TARGET = a requirement that technology must meet, never a demonstrated
+# value; MODEL = a geometric consequence the calculator computes) and, where the change alters canon or the ship's role, the owner
+# decision it needs (decisions.toml). No change may raise an efficiency without a technology record behind it.
+# Benefits that no model quantifies (collimation by helical shear, magnetised gain, vapour curtains) are NOT in any generation; they are
+# carried as sensitivity bands in convergence.py and reported separately.
+
+[[generation]]
+id = "V0"
+name = "Vertex 0: FDP-1 reference"
+definition = "FDP-1 exactly as on main: pulsed magnetised D-3He point burn, three-loop Fiji-amplified magnetic nozzle, shadow shield, 600 K warm loop. Optimistic scenario tier."
+fictional = "Canon Fiji lattice (VTX-02A); the calculator gives it no numeric credit."
+must_reproduce = { departure_t = 20760.0, tolerance = 0.01 }
+
+[[generation]]
+id = "V1"
+name = "Vertex 1: advanced engineering, no new fictional effect"
+definition = "V0 plus Level A/B engineering targets: split warm loop averaging 700 K, house load halved, driver galleries inside the hull cone. No added fictional property, no new collimation credit."
+fictional = "Canon Fiji lattice only, unchanged from V0."
+
+[[generation.change]]
+path = "base.overrides.radiators.warm.T_K.optimistic"
+value = 700.0
+technology = "VTX-07A"
+basis = "TARGET"
+rationale = "Cores at about 600 K (Curie limits), power conversion at about 773 K (SiC ICs shown for a year): an area-weighted warm loop near 700 K."
+
+[[generation.change]]
+path = "base.overrides.pulsed.house_fraction.value"
+value = 5.0e-4
+technology = "VTX-07C"
+basis = "TARGET"
+rationale = "Target factory and controls at 0.05 % of fusion. The 0.1 % baseline is itself unsourced; this is a requirement, not a result."
+
+[[generation.change]]
+path = "drivers.gallery_radius_m.value"
+value = 4.5
+technology = "VTX-06A"
+basis = "MODEL"
+rationale = "Galleries folded inside the 7.9 deg equipment-module cone; the calculator re-sizes the shield. Routing inside the hull is unchecked."
+
+[[generation.change]]
+path = "integration.keep_idle_hydrogen_vessels.value"
+value = false
+technology = "VTX-04B"
+basis = "MODEL"
+rationale = "The three canon H2 vessels are idle in FDP-1; removing them is a canon change (decision D-04). convergence.py also reports V1 with them kept."
+needs_decision = "D-04"
+
+[[generation]]
+id = "V2"
+name = "Vertex 2: Fiji-integrated, canon-bounded"
+definition = "V1 plus the strongest physically defensible targets: warm loop at 800 K, advanced tungsten armour at half areal mass. Fiji keeps exactly its canon card (VTX-02A); no extra Fiji property is assumed."
+fictional = "Canon Fiji lattice; the gap to any benchmark V2 misses is reported as extra capability that would be needed, not assumed."
+
+[[generation.change]]
+path = "base.overrides.radiators.warm.T_K.optimistic"
+value = 800.0
+technology = "VTX-07A"
+basis = "TARGET"
+rationale = "All machinery heat at 800 K: needs MW-class power electronics at 800 K and induction cores near their FINEMET limit (823-843 K)."
+
+[[generation.change]]
+path = "base.overrides.pulsed.house_fraction.value"
+value = 5.0e-4
+technology = "VTX-07C"
+basis = "TARGET"
+rationale = "As V1."
+
+[[generation.change]]
+path = "drivers.gallery_radius_m.value"
+value = 4.5
+technology = "VTX-06A"
+basis = "MODEL"
+rationale = "As V1."
+
+[[generation.change]]
+path = "integration.keep_idle_hydrogen_vessels.value"
+value = false
+technology = "VTX-04B"
+basis = "MODEL"
+rationale = "As V1."
+needs_decision = "D-04"
+
+[[generation.change]]
+path = "base.overrides.pulsed.loop_armor_kg_m2.optimistic"
+value = 100.0
+technology = "VTX-06B"
+basis = "TARGET"
+rationale = "Advanced W armour (MAT-W-ADV01) holding the allowed fluence at half the areal mass."

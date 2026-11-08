@@ -1,0 +1,163 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1560 445" font-family="Helvetica, Arial, sans-serif">
+<defs><marker id="mrequires" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#666666"/></marker><marker id="menables" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#2f8f4e"/></marker><marker id="mimproves" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#2f6fbf"/></marker><marker id="mworsens" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c0392b"/></marker><marker id="mconflicts" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#8e44ad"/></marker><marker id="mshares" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#b07d2b"/></marker></defs>
+<rect width="1560" height="445" fill="#ffffff"/>
+<text x="20" y="32" font-size="20" font-weight="700" fill="#111">Vertex Drive Technology Atlas: dependencies and interactions</text>
+<text x="20" y="54" font-size="13" fill="#444">Columns are workstreams; box fill is credibility (green A, blue B, violet C); a red outline is a contradicted or impossible record.</text>
+<path d="M105,169 C105.0,139 105.0,75 105,105" fill="none" stroke="#666666" stroke-width="1.4" stroke-opacity="0.7" marker-end="url(#mrequires)"/>
+<path d="M105,215 C105.0,185 105.0,75 105,105" fill="none" stroke="#666666" stroke-width="1.4" stroke-opacity="0.7" marker-end="url(#mrequires)"/>
+<path d="M105,261 C105.0,231 105.0,75 105,105" fill="none" stroke="#666666" stroke-width="1.4" stroke-opacity="0.7" marker-end="url(#mrequires)"/>
+<path d="M295,169 C200.0,139 200.0,139 105,169" fill="none" stroke="#666666" stroke-width="1.4" stroke-opacity="0.7" marker-end="url(#mrequires)"/>
+<path d="M295,169 C295.0,139 295.0,75 295,105" fill="none" stroke="#666666" stroke-width="1.4" stroke-opacity="0.7" marker-end="url(#mrequires)"/>
+<path d="M295,215 C295.0,185 295.0,75 295,105" fill="none" stroke="#666666" stroke-width="1.4" stroke-opacity="0.7" marker-end="url(#mrequires)"/>
+<path d="M295,215 C295.0,185 295.0,231 295,261" fill="none" stroke="#666666" stroke-width="1.4" stroke-opacity="0.7" marker-end="url(#mrequires)"/>
+<path d="M295,105 C390.0,75 390.0,75 485,105" fill="none" stroke="#666666" stroke-width="1.4" stroke-opacity="0.7" marker-end="url(#mrequires)"/>
+<path d="M295,215 C390.0,185 390.0,139 485,169" fill="none" stroke="#666666" stroke-width="1.4" stroke-opacity="0.7" marker-end="url(#mrequires)"/>
+<path d="M295,215 C390.0,185 390.0,185 485,215" fill="none" stroke="#666666" stroke-width="1.4" stroke-opacity="0.7" marker-end="url(#mrequires)"/>
+<path d="M485,169 C485.0,139 485.0,231 485,261" fill="none" stroke="#666666" stroke-width="1.4" stroke-opacity="0.7" marker-end="url(#mrequires)"/>
+<path d="M865,169 C865.0,139 865.0,75 865,105" fill="none" stroke="#666666" stroke-width="1.4" stroke-opacity="0.7" marker-end="url(#mrequires)"/>
+<path d="M865,215 C865.0,185 865.0,75 865,105" fill="none" stroke="#666666" stroke-width="1.4" stroke-opacity="0.7" marker-end="url(#mrequires)"/>
+<path d="M105,261 C485.0,231 485.0,139 865,169" fill="none" stroke="#666666" stroke-width="1.4" stroke-opacity="0.7" marker-end="url(#mrequires)"/>
+<path d="M1055,169 C1055.0,139 1055.0,75 1055,105" fill="none" stroke="#666666" stroke-width="1.4" stroke-opacity="0.7" marker-end="url(#mrequires)"/>
+<path d="M1245,169 C1245.0,139 1245.0,75 1245,105" fill="none" stroke="#666666" stroke-width="1.4" stroke-opacity="0.7" marker-end="url(#mrequires)"/>
+<path d="M1245,261 C1245.0,231 1245.0,75 1245,105" fill="none" stroke="#666666" stroke-width="1.4" stroke-opacity="0.7" marker-end="url(#mrequires)"/>
+<path d="M105,261 C675.0,231 675.0,231 1245,261" fill="none" stroke="#666666" stroke-width="1.4" stroke-opacity="0.7" marker-end="url(#mrequires)"/>
+<path d="M1435,169 C1435.0,139 1435.0,75 1435,105" fill="none" stroke="#666666" stroke-width="1.4" stroke-opacity="0.7" marker-end="url(#mrequires)"/>
+<path d="M1435,169 C1435.0,139 1435.0,277 1435,307" fill="none" stroke="#666666" stroke-width="1.4" stroke-opacity="0.7" marker-end="url(#mrequires)"/>
+<path d="M295,169 C200.0,139 200.0,139 105,169" fill="none" stroke="#2f8f4e" stroke-width="1.4" stroke-opacity="0.7" stroke-dasharray="5,3" marker-end="url(#menables)"/>
+<path d="M105,169 C105.0,139 105.0,75 105,105" fill="none" stroke="#2f6fbf" stroke-width="1.4" stroke-opacity="0.7" stroke-dasharray="5,3" marker-end="url(#mimproves)"/>
+<path d="M105,261 C675.0,231 675.0,231 1245,261" fill="none" stroke="#2f6fbf" stroke-width="1.4" stroke-opacity="0.7" stroke-dasharray="5,3" marker-end="url(#mimproves)"/>
+<path d="M1245,261 C1245.0,231 1245.0,75 1245,105" fill="none" stroke="#2f6fbf" stroke-width="1.4" stroke-opacity="0.7" stroke-dasharray="5,3" marker-end="url(#mimproves)"/>
+<path d="M1245,169 C1245.0,139 1245.0,277 1245,307" fill="none" stroke="#2f6fbf" stroke-width="1.4" stroke-opacity="0.7" stroke-dasharray="5,3" marker-end="url(#mimproves)"/>
+<path d="M1245,169 C1340.0,139 1340.0,75 1435,105" fill="none" stroke="#2f6fbf" stroke-width="1.4" stroke-opacity="0.7" stroke-dasharray="5,3" marker-end="url(#mimproves)"/>
+<path d="M1245,215 C1340.0,185 1340.0,75 1435,105" fill="none" stroke="#2f6fbf" stroke-width="1.4" stroke-opacity="0.7" stroke-dasharray="5,3" marker-end="url(#mimproves)"/>
+<path d="M1245,215 C1340.0,185 1340.0,277 1435,307" fill="none" stroke="#c0392b" stroke-width="1.4" stroke-opacity="0.7" stroke-dasharray="5,3" marker-end="url(#mworsens)"/>
+<path d="M105,215 C580.0,185 580.0,139 1055,169" fill="none" stroke="#c0392b" stroke-width="1.4" stroke-opacity="0.7" stroke-dasharray="5,3" marker-end="url(#mworsens)"/>
+<path d="M1055,169 C1150.0,139 1150.0,75 1245,105" fill="none" stroke="#2f6fbf" stroke-width="1.4" stroke-opacity="0.7" stroke-dasharray="5,3" marker-end="url(#mimproves)"/>
+<path d="M485,105 C865.0,75 865.0,75 1245,105" fill="none" stroke="#2f6fbf" stroke-width="1.4" stroke-opacity="0.7" stroke-dasharray="5,3" marker-end="url(#mimproves)"/>
+<path d="M485,169 C485.0,139 485.0,75 485,105" fill="none" stroke="#c0392b" stroke-width="1.4" stroke-opacity="0.7" stroke-dasharray="5,3" marker-end="url(#mworsens)"/>
+<path d="M485,261 C485.0,231 485.0,139 485,169" fill="none" stroke="#2f8f4e" stroke-width="1.4" stroke-opacity="0.7" stroke-dasharray="5,3" marker-end="url(#menables)"/>
+<path d="M485,215 C770.0,185 770.0,75 1055,105" fill="none" stroke="#c0392b" stroke-width="1.4" stroke-opacity="0.7" stroke-dasharray="5,3" marker-end="url(#mworsens)"/>
+<path d="M1435,169 C1245.0,139 1245.0,75 1055,105" fill="none" stroke="#c0392b" stroke-width="1.4" stroke-opacity="0.7" stroke-dasharray="5,3" marker-end="url(#mworsens)"/>
+<path d="M1435,169 C865.0,139 865.0,75 295,105" fill="none" stroke="#c0392b" stroke-width="1.4" stroke-opacity="0.7" stroke-dasharray="5,3" marker-end="url(#mworsens)"/>
+<path d="M105,307 C390.0,277 390.0,139 675,169" fill="none" stroke="#2f8f4e" stroke-width="1.4" stroke-opacity="0.7" stroke-dasharray="5,3" marker-end="url(#menables)"/>
+<path d="M105,307 C580.0,277 580.0,139 1055,169" fill="none" stroke="#c0392b" stroke-width="1.4" stroke-opacity="0.7" stroke-dasharray="5,3" marker-end="url(#mworsens)"/>
+<path d="M675,169 C390.0,139 390.0,75 105,105" fill="none" stroke="#c0392b" stroke-width="1.4" stroke-opacity="0.7" stroke-dasharray="5,3" marker-end="url(#mworsens)"/>
+<path d="M675,215 C390.0,185 390.0,75 105,105" fill="none" stroke="#8e44ad" stroke-width="1.4" stroke-opacity="0.7" stroke-dasharray="5,3" marker-end="url(#mconflicts)"/>
+<path d="M675,261 C865.0,231 865.0,185 1055,215" fill="none" stroke="#2f6fbf" stroke-width="1.4" stroke-opacity="0.7" stroke-dasharray="5,3" marker-end="url(#mimproves)"/>
+<path d="M675,307 C865.0,277 865.0,139 1055,169" fill="none" stroke="#2f6fbf" stroke-width="1.4" stroke-opacity="0.7" stroke-dasharray="5,3" marker-end="url(#mimproves)"/>
+<path d="M865,169 C675.0,139 675.0,75 485,105" fill="none" stroke="#2f6fbf" stroke-width="1.4" stroke-opacity="0.7" stroke-dasharray="5,3" marker-end="url(#mimproves)"/>
+<path d="M865,215 C960.0,185 960.0,185 1055,215" fill="none" stroke="#2f8f4e" stroke-width="1.4" stroke-opacity="0.7" stroke-dasharray="5,3" marker-end="url(#menables)"/>
+<path d="M295,261 C390.0,231 390.0,75 485,105" fill="none" stroke="#8e44ad" stroke-width="1.4" stroke-opacity="0.7" stroke-dasharray="5,3" marker-end="url(#mconflicts)"/>
+<path d="M295,215 C390.0,185 390.0,139 485,169" fill="none" stroke="#b07d2b" stroke-width="1.4" stroke-opacity="0.7" stroke-dasharray="5,3" marker-end="url(#mshares)"/>
+<path d="M1435,261 C1435.0,231 1435.0,75 1435,105" fill="none" stroke="#8e44ad" stroke-width="1.4" stroke-opacity="0.7" stroke-dasharray="5,3" marker-end="url(#mconflicts)"/>
+<path d="M1435,215 C1435.0,185 1435.0,277 1435,307" fill="none" stroke="#2f6fbf" stroke-width="1.4" stroke-opacity="0.7" stroke-dasharray="5,3" marker-end="url(#mimproves)"/>
+<path d="M1245,307 C1340.0,277 1340.0,75 1435,105" fill="none" stroke="#2f6fbf" stroke-width="1.4" stroke-opacity="0.7" stroke-dasharray="5,3" marker-end="url(#mimproves)"/>
+<rect x="20.0" y="90" width="170" height="30" rx="5" fill="#dde6f5" stroke="#333" stroke-width="2.2"/>
+<text x="105" y="103" text-anchor="middle" font-size="11" font-weight="700" fill="#111">VTX-01</text>
+<text x="105" y="116" text-anchor="middle" font-size="9" fill="#222">Advanced pulsed fusion igniti…</text>
+<rect x="25.0" y="154" width="160" height="30" rx="5" fill="#dde6f5" stroke="#333" stroke-width="1"/>
+<text x="105" y="167" text-anchor="middle" font-size="11" font-weight="700" fill="#111">VTX-01A</text>
+<text x="105" y="180" text-anchor="middle" font-size="9" fill="#222">Magnetised fuel-only D-3He ta…</text>
+<rect x="25.0" y="200" width="160" height="30" rx="5" fill="#dde6f5" stroke="#333" stroke-width="1"/>
+<text x="105" y="213" text-anchor="middle" font-size="11" font-weight="700" fill="#111">VTX-01B</text>
+<text x="105" y="226" text-anchor="middle" font-size="9" fill="#222">Stand-off heavy-ion driver</text>
+<rect x="25.0" y="246" width="160" height="30" rx="5" fill="#dde6f5" stroke="#333" stroke-width="1"/>
+<text x="105" y="259" text-anchor="middle" font-size="11" font-weight="700" fill="#111">VTX-01C</text>
+<text x="105" y="272" text-anchor="middle" font-size="9" fill="#222">Precision cryogenic target fa…</text>
+<rect x="25.0" y="292" width="160" height="30" rx="5" fill="#dde6f5" stroke="#333" stroke-width="1"/>
+<text x="105" y="305" text-anchor="middle" font-size="11" font-weight="700" fill="#111">VTX-01D</text>
+<text x="105" y="318" text-anchor="middle" font-size="9" fill="#222">D-T spark-ignited D-3He target</text>
+<rect x="210.0" y="90" width="170" height="30" rx="5" fill="#f3dcf3" stroke="#333" stroke-width="2.2"/>
+<text x="295" y="103" text-anchor="middle" font-size="11" font-weight="700" fill="#111">VTX-02</text>
+<text x="295" y="116" text-anchor="middle" font-size="9" fill="#222">Fiji lattice field engineering</text>
+<rect x="215.0" y="154" width="160" height="30" rx="5" fill="#f3dcf3" stroke="#333" stroke-width="1"/>
+<text x="295" y="167" text-anchor="middle" font-size="11" font-weight="700" fill="#111">VTX-02A</text>
+<text x="295" y="180" text-anchor="middle" font-size="9" fill="#222">Fiji lattice amplification an…</text>
+<rect x="215.0" y="200" width="160" height="30" rx="5" fill="#d8ecd8" stroke="#333" stroke-width="1"/>
+<text x="295" y="213" text-anchor="middle" font-size="11" font-weight="700" fill="#111">VTX-02B</text>
+<text x="295" y="226" text-anchor="middle" font-size="9" fill="#222">Large no-insulation REBCO loo…</text>
+<rect x="215.0" y="246" width="160" height="30" rx="5" fill="#dde6f5" stroke="#333" stroke-width="1"/>
+<text x="295" y="259" text-anchor="middle" font-size="11" font-weight="700" fill="#111">VTX-02C</text>
+<text x="295" y="272" text-anchor="middle" font-size="9" fill="#222">Inductive pulse-energy recove…</text>
+<rect x="400.0" y="90" width="170" height="30" rx="5" fill="#dde6f5" stroke="#333" stroke-width="2.2"/>
+<text x="485" y="103" text-anchor="middle" font-size="11" font-weight="700" fill="#111">VTX-03</text>
+<text x="485" y="116" text-anchor="middle" font-size="9" fill="#222">Helical magnetic capture</text>
+<rect x="405.0" y="154" width="160" height="30" rx="5" fill="#dde6f5" stroke="#333" stroke-width="1"/>
+<text x="485" y="167" text-anchor="middle" font-size="11" font-weight="700" fill="#111">VTX-03A</text>
+<text x="485" y="180" text-anchor="middle" font-size="9" fill="#222">Clocked trim sectors (m = 4 h…</text>
+<rect x="405.0" y="200" width="160" height="30" rx="5" fill="#dde6f5" stroke="#333" stroke-width="1"/>
+<text x="485" y="213" text-anchor="middle" font-size="11" font-weight="700" fill="#111">VTX-03B</text>
+<text x="485" y="226" text-anchor="middle" font-size="9" fill="#222">External non-axisymmetric sha…</text>
+<rect x="405.0" y="246" width="160" height="30" rx="5" fill="#d8ecd8" stroke="#333" stroke-width="1"/>
+<text x="485" y="259" text-anchor="middle" font-size="11" font-weight="700" fill="#111">VTX-03C</text>
+<text x="485" y="272" text-anchor="middle" font-size="9" fill="#222">Counter-helicity field pairs …</text>
+<rect x="590.0" y="90" width="170" height="30" rx="5" fill="#d8ecd8" stroke="#333" stroke-width="2.2"/>
+<text x="675" y="103" text-anchor="middle" font-size="11" font-weight="700" fill="#111">VTX-04</text>
+<text x="675" y="116" text-anchor="middle" font-size="9" fill="#222">Sacrificial injection and rad…</text>
+<rect x="595.0" y="154" width="160" height="30" rx="5" fill="#d8ecd8" stroke="#c0392b" stroke-width="2.2"/>
+<text x="675" y="167" text-anchor="middle" font-size="11" font-weight="700" fill="#111">VTX-04A</text>
+<text x="675" y="180" text-anchor="middle" font-size="9" fill="#222">Radiation-converting hydrogen…</text>
+<rect x="595.0" y="200" width="160" height="30" rx="5" fill="#d8ecd8" stroke="#333" stroke-width="1"/>
+<text x="675" y="213" text-anchor="middle" font-size="11" font-weight="700" fill="#111">VTX-04B</text>
+<text x="675" y="226" text-anchor="middle" font-size="9" fill="#222">Variable exhaust-mass operati…</text>
+<rect x="595.0" y="246" width="160" height="30" rx="5" fill="#d8ecd8" stroke="#333" stroke-width="1"/>
+<text x="675" y="259" text-anchor="middle" font-size="11" font-weight="700" fill="#111">VTX-04C</text>
+<text x="675" y="272" text-anchor="middle" font-size="9" fill="#222">Sacrificial vapour curtains o…</text>
+<rect x="595.0" y="292" width="160" height="30" rx="5" fill="#d8ecd8" stroke="#333" stroke-width="1"/>
+<text x="675" y="305" text-anchor="middle" font-size="11" font-weight="700" fill="#111">VTX-04D</text>
+<text x="675" y="318" text-anchor="middle" font-size="9" fill="#222">Isotopically tailored absorbe…</text>
+<rect x="780.0" y="90" width="170" height="30" rx="5" fill="#dde6f5" stroke="#333" stroke-width="2.2"/>
+<text x="865" y="103" text-anchor="middle" font-size="11" font-weight="700" fill="#111">VTX-05</text>
+<text x="865" y="116" text-anchor="middle" font-size="9" fill="#222">Predictive ignition and radia…</text>
+<rect x="785.0" y="154" width="160" height="30" rx="5" fill="#dde6f5" stroke="#333" stroke-width="1"/>
+<text x="865" y="167" text-anchor="middle" font-size="11" font-weight="700" fill="#111">VTX-05A</text>
+<text x="865" y="180" text-anchor="middle" font-size="9" fill="#222">Pulse-to-pulse predictive con…</text>
+<rect x="785.0" y="200" width="160" height="30" rx="5" fill="#d8ecd8" stroke="#333" stroke-width="1"/>
+<text x="865" y="213" text-anchor="middle" font-size="11" font-weight="700" fill="#111">VTX-05B</text>
+<text x="865" y="226" text-anchor="middle" font-size="9" fill="#222">Burn diagnostics, damage pred…</text>
+<rect x="970.0" y="90" width="170" height="30" rx="5" fill="#d8ecd8" stroke="#333" stroke-width="2.2"/>
+<text x="1055" y="103" text-anchor="middle" font-size="11" font-weight="700" fill="#111">VTX-06</text>
+<text x="1055" y="116" text-anchor="middle" font-size="9" fill="#222">Directional radiation escape</text>
+<rect x="975.0" y="154" width="160" height="30" rx="5" fill="#d8ecd8" stroke="#333" stroke-width="1"/>
+<text x="1055" y="167" text-anchor="middle" font-size="11" font-weight="700" fill="#111">VTX-06A</text>
+<text x="1055" y="180" text-anchor="middle" font-size="9" fill="#222">Shadow shield and solid-angle…</text>
+<rect x="975.0" y="200" width="160" height="30" rx="5" fill="#dde6f5" stroke="#333" stroke-width="1"/>
+<text x="1055" y="213" text-anchor="middle" font-size="11" font-weight="700" fill="#111">VTX-06B</text>
+<text x="1055" y="226" text-anchor="middle" font-size="9" fill="#222">Renewable sacrificial hardwar…</text>
+<rect x="1160.0" y="90" width="170" height="30" rx="5" fill="#dde6f5" stroke="#333" stroke-width="2.2"/>
+<text x="1245" y="103" text-anchor="middle" font-size="11" font-weight="700" fill="#111">VTX-07</text>
+<text x="1245" y="116" text-anchor="middle" font-size="9" fill="#222">Advanced thermal systems</text>
+<rect x="1165.0" y="154" width="160" height="30" rx="5" fill="#dde6f5" stroke="#333" stroke-width="1"/>
+<text x="1245" y="167" text-anchor="middle" font-size="11" font-weight="700" fill="#111">VTX-07A</text>
+<text x="1245" y="180" text-anchor="middle" font-size="9" fill="#222">Split warm loop with high-tem…</text>
+<rect x="1165.0" y="200" width="160" height="30" rx="5" fill="#dde6f5" stroke="#333" stroke-width="1"/>
+<text x="1245" y="213" text-anchor="middle" font-size="11" font-weight="700" fill="#111">VTX-07B</text>
+<text x="1245" y="226" text-anchor="middle" font-size="9" fill="#222">Liquid droplet or liquid shee…</text>
+<rect x="1165.0" y="246" width="160" height="30" rx="5" fill="#dde6f5" stroke="#333" stroke-width="1"/>
+<text x="1245" y="259" text-anchor="middle" font-size="11" font-weight="700" fill="#111">VTX-07C</text>
+<text x="1245" y="272" text-anchor="middle" font-size="9" fill="#222">Recirculating power reduction</text>
+<rect x="1165.0" y="292" width="160" height="30" rx="5" fill="#dde6f5" stroke="#333" stroke-width="1"/>
+<text x="1245" y="305" text-anchor="middle" font-size="11" font-weight="700" fill="#111">VTX-07D</text>
+<text x="1245" y="318" text-anchor="middle" font-size="9" fill="#222">Deployable radiator wings wit…</text>
+<rect x="1350.0" y="90" width="170" height="30" rx="5" fill="#dde6f5" stroke="#333" stroke-width="2.2"/>
+<text x="1435" y="103" text-anchor="middle" font-size="11" font-weight="700" fill="#111">VTX-08</text>
+<text x="1435" y="116" text-anchor="middle" font-size="9" fill="#222">Interstellar and interplaneta…</text>
+<rect x="1355.0" y="154" width="160" height="30" rx="5" fill="#dde6f5" stroke="#333" stroke-width="1"/>
+<text x="1435" y="167" text-anchor="middle" font-size="11" font-weight="700" fill="#111">VTX-08A</text>
+<text x="1435" y="180" text-anchor="middle" font-size="9" fill="#222">Multi-layer sacrificial bumpe…</text>
+<rect x="1355.0" y="200" width="160" height="30" rx="5" fill="#dde6f5" stroke="#333" stroke-width="1"/>
+<text x="1435" y="213" text-anchor="middle" font-size="11" font-weight="700" fill="#111">VTX-08B</text>
+<text x="1435" y="226" text-anchor="middle" font-size="9" fill="#222">Forward dust detection and ac…</text>
+<rect x="1355.0" y="246" width="160" height="30" rx="5" fill="#d8ecd8" stroke="#c0392b" stroke-width="2.2"/>
+<text x="1435" y="259" text-anchor="middle" font-size="11" font-weight="700" fill="#111">VTX-08C</text>
+<text x="1435" y="272" text-anchor="middle" font-size="9" fill="#222">Charged-particle magnetic def…</text>
+<rect x="1355.0" y="292" width="160" height="30" rx="5" fill="#dde6f5" stroke="#333" stroke-width="1"/>
+<text x="1435" y="305" text-anchor="middle" font-size="11" font-weight="700" fill="#111">VTX-08D</text>
+<text x="1435" y="318" text-anchor="middle" font-size="9" fill="#222">Engine-first braking protecti…</text>
+<line x1="20" y1="395" x2="60" y2="395" stroke="#666666" stroke-width="2.5"/><text x="68" y="399" font-size="13" fill="#222">requires</text>
+<line x1="180" y1="395" x2="220" y2="395" stroke="#2f8f4e" stroke-width="2.5" stroke-dasharray="5,3"/><text x="228" y="399" font-size="13" fill="#222">enables</text>
+<line x1="340" y1="395" x2="380" y2="395" stroke="#2f6fbf" stroke-width="2.5" stroke-dasharray="5,3"/><text x="388" y="399" font-size="13" fill="#222">improves</text>
+<line x1="500" y1="395" x2="540" y2="395" stroke="#c0392b" stroke-width="2.5" stroke-dasharray="5,3"/><text x="548" y="399" font-size="13" fill="#222">worsens</text>
+<line x1="660" y1="395" x2="700" y2="395" stroke="#8e44ad" stroke-width="2.5" stroke-dasharray="5,3"/><text x="708" y="399" font-size="13" fill="#222">conflicts</text>
+<line x1="820" y1="395" x2="860" y2="395" stroke="#b07d2b" stroke-width="2.5" stroke-dasharray="5,3"/><text x="868" y="399" font-size="13" fill="#222">shares</text>
+</svg>

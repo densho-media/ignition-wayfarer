@@ -1,0 +1,299 @@
+# Vertex Drive Technology Atlas: evidence register.
+#
+# One entry per source. The verification states reuse the PMDS vocabulary (docs/MATERIALS.md):
+#   PRIMARY_VERIFIED    read in the original publication
+#   SECONDARY_VERIFIED  matched against a secondary reproduction (abstract page, catalogue record, institutional press release)
+#   TRANSCRIBED         a named source carried over from an earlier Wayfarer study; not re-checked here
+#   UNVERIFIED          the source, or its support for the claim, is not established
+# `checked` records how and when. The cloud session cannot open arxiv.org, osti.gov or ntrs.nasa.gov full texts, so nothing here is
+# PRIMARY_VERIFIED. `finding` is what the source demonstrates; `limits` is what it does not; `relation` is how the Atlas uses it.
+# Our own extrapolations never live here: they are the `advancement` fields of registry/technologies.toml and are labelled there.
+# `kind` is one of: journal, conference, report, press, book, dataset, model (a Wayfarer lab calculation), canon (a Wayfarer canon value).
+
+[S-NIF-2025]
+title = "NIF achieves record 8.6 MJ yield from 2.08 MJ laser energy (eighth ignition shot, 7 April 2025)"
+authors = "Lawrence Livermore National Laboratory"
+date = "2025-05"
+locator = "https://lasers.llnl.gov/news/llnl-experts-foster-national-fusion-energy-ecosystem-ife-star-conference"
+kind = "press"
+finding = "Indirect-drive D-T ignition; target gain (yield / laser energy on target) of about 4.1, the record as of 2025. LLNL estimates a target gain approaching 15 for a facility with zero net electric demand."
+limits = "D-T, not D-3He; one shot per day-scale cadence; laser wall-plug efficiency about 1 %; gain is target gain, not facility gain."
+relation = "Present foundation of VTX-01: demonstrated ignition, three orders of magnitude below the gain FDP-1 assumes (3,000)."
+verification = "SECONDARY_VERIFIED"
+checked = "2026-11-08 web search: LLNL release and independent press agree on 8.6 MJ / 2.08 MJ; the 4.13 figure is press-reported, LLNL says 'exceeding four'."
+
+[S-MAGLIF-2020]
+title = "Performance Scaling in Magnetized Liner Inertial Fusion Experiments"
+authors = "M. R. Gomez et al. (Sandia National Laboratories)"
+date = "2020-10-09"
+locator = "doi:10.1103/PhysRevLett.125.155002"
+kind = "journal"
+finding = "Magnetised, laser-preheated targets on the Z machine; yield rose by more than an order of magnitude over two years; significant yield only with both applied field and preheat."
+limits = "Record ~1.1e13 neutrons (~2 kJ D-T equivalent) is from a 2021 IAEA abstract, not confirmed as the PRL figure; liner mass makes MagLIF unsuitable as a high-ve propulsion target (Fiji v4 section 3)."
+relation = "Ancestry of magnetised targets (VTX-01A) and of the Fiji seed-field role in target magnetisation (VTX-02A)."
+verification = "SECONDARY_VERIFIED"
+checked = "2026-11-08 web search: DOI and title confirmed via OSTI and press; yield figure only from an IAEA contribution."
+
+[S-HAHN-2019]
+title = "45.5-tesla direct-current magnetic field generated with a high-temperature superconducting magnet"
+authors = "S. Hahn, K. Kim, K. Kim, X. Hu, T. Painter, I. Dixon, S. Kim, K. R. Bhattarai, S. Noguchi, J. Jaroszynski, D. C. Larbalestier"
+date = "2019-06"
+locator = "doi:10.1038/s41586-019-1293-1"
+kind = "journal"
+finding = "A 14.4 T no-insulation REBCO insert in a 31.1 T resistive background reached 45.5 T at a winding current density of about 1,260 A/mm2; no-insulation winding allows fast, safe quench."
+limits = "Small bore (cm scale), a test coil, not a large loop under cyclic Maxwell stress or neutron dose."
+relation = "Present foundation of VTX-02B (high-current-density, quench-tolerant HTS loops)."
+verification = "SECONDARY_VERIFIED"
+checked = "2026-11-08 web search: Nature record and MagLab press agree."
+
+[S-SORBOM-2015]
+title = "ARC: A compact, high-field, fusion nuclear science facility and demonstration power plant with demountable magnets"
+authors = "B. N. Sorbom et al. (MIT PSFC)"
+date = "2015"
+locator = "arXiv:1409.3540; doi:10.1016/j.fusengdes.2015.07.008"
+kind = "journal"
+finding = "REBCO-based demountable toroidal-field magnets for a compact tokamak; a fast-neutron fluence limit of about 3e18 n/cm2 used for the superconductor."
+limits = "The fluence limit is Nb3Sn-derived, used as a lower bound for REBCO, not a measured REBCO lifetime (Fiji v4 recheck)."
+relation = "Sets the conductor-dose question of VTX-02B and VTX-06A; demountable joints are the ancestry of replaceable loop carriers."
+verification = "TRANSCRIBED"
+checked = "Carried over from lab/variants/fiji-drive/v4/REPORT.md section 1 (search-confirmed there); not re-checked 2026-11-08."
+
+[S-W7X-2025]
+title = "Wendelstein 7-X sets new performance records in fusion research (long-pulse triple product)"
+authors = "Max Planck Institute for Plasma Physics (IPP), EUROfusion"
+date = "2025-06"
+locator = "https://www.ipp.mpg.de/5532945/w7x"
+kind = "press"
+finding = "An optimised stellarator (3D helical field shaped by non-planar coils) held a record long-pulse triple product for about 43 s, fuelled by about 90 injected frozen pellets at a programmed rate."
+limits = "Steady confinement, not a pulsed expanding plasma; the paper was under review at the time of the release."
+relation = "Ancestry for VTX-03B: externally generated non-axisymmetric fields can be engineered to a specification; also pellet-injection heritage for VTX-01C."
+verification = "SECONDARY_VERIFIED"
+checked = "2026-11-08 web search: IPP, EUROfusion and World Nuclear News agree (43 s vs 'up to 60 s' differ between releases)."
+
+[S-MERINO-AHEDO]
+title = "On plasma detachment in propulsive magnetic nozzles; Magnetic nozzles for space plasma thrusters (review)"
+authors = "E. Ahedo, M. Merino (Universidad Carlos III de Madrid)"
+date = "2011; 2016"
+locator = "Physics of Plasmas 18, 053504 (2011); Encyclopedia of Plasma Technology (Taylor & Francis, 2016)"
+kind = "journal"
+finding = "Thrust in a magnetic nozzle comes from the diamagnetic azimuthal current; the classic detachment mechanisms (induced field, electron inertia, collisions) tend to push the plasma outward; ion demagnetisation is the key to inward detachment."
+limits = "Steady, low-beta thruster plumes; not pulsed beta >> 1 fusion plasmas."
+relation = "Foundation of VTX-03 (what a nozzle field can and cannot do) and of the plume-strike uncertainty."
+verification = "SECONDARY_VERIFIED"
+checked = "2026-11-08 web search: UC3M repository, APS abstract and journal records."
+
+[S-CASSIBRY-PMN]
+title = "Pulsed Magnetic Nozzle for Fusion Propulsion; UAH theses on z-pinch magnetic nozzles"
+authors = "J. Cassibry et al. (University of Alabama in Huntsville)"
+date = "2018"
+locator = "JBIS (2018); https://louis.uah.edu/uah-theses/835"
+kind = "journal"
+finding = "3D simulations of pulsed plasma expansion: a z-pinch linear nozzle peaks near 0.55 efficiency; a simple hemispherical nozzle 'could be over 70 percent' (UAH news); a power-generating nozzle reached 0.34."
+limits = "Simulation only, differing geometries, some runs ended before the plasma left the nozzle; nothing experimental."
+relation = "The VTX-03 efficiency band: simulated 0.34-0.70 against the theoretical 0.79-0.86 FDP-1 uses (S-MSFC-NOZZLE)."
+verification = "SECONDARY_VERIFIED"
+checked = "2026-11-08 web search: UAH thesis record and UAH news item."
+
+[S-MSFC-NOZZLE]
+title = "Pulsed magnetic nozzle theoretical efficiency (MSFC studies, as used by the four-burn scenario)"
+authors = "NASA Marshall Space Flight Center (as cited by scenario v1)"
+date = "unknown"
+locator = "lab/studies/four-burn-mission/scenarios/v1.toml [pulsed].nozzle_efficiency"
+kind = "report"
+finding = "Theoretical pulsed magnetic nozzle efficiency 0.79-0.86."
+limits = "The specific MSFC report was never identified by title in the record."
+relation = "Upper bound used by FDP-1 (0.79) and by the Vertex 2 stretch case (0.86)."
+verification = "UNVERIFIED"
+checked = "Carried from the four-burn scenario; title and authors still to be found."
+
+[S-HIF-REVIEWS]
+title = "Heavy-ion fusion driver reviews (Keefe 1988; Bock 1992 Europhysics News; Hirao)"
+authors = "D. Keefe (LBL); R. Bock (GSI); Y. Hirao"
+date = "1988-1992"
+locator = "https://www.europhysicsnews.org/10.1051/epn/19922305083/pdf; https://www.osti.gov/biblio/6488344"
+kind = "journal"
+finding = "Induction-linac heavy-ion drivers are estimated at about 20-30 % wall-plug efficiency with high repetition-rate capability; a 5 MJ induction linac needs of order 3e7 kg of magnetic core material."
+limits = "Design estimates from the 1980s-90s; no driver has been built at fusion scale."
+relation = "VTX-01B driver efficiency (FDP-1 optimistic 0.45 lies above this range) and the core-material mass and temperature limits behind VTX-07A."
+verification = "SECONDARY_VERIFIED"
+checked = "2026-11-08 web search: review PDFs located; 20-30 % and the core-mass figure read in search excerpts."
+
+[S-GA-TARGET]
+title = "Experimental target injection and tracking system; HAPL target engagement status"
+authors = "D. T. Goodin et al. (General Atomics); J. Sethian (NRL, HAPL)"
+date = "2004-2007"
+locator = "https://www.osti.gov/servlets/purl/828515; https://fire.pppl.gov/fpa04_sethian.pdf"
+kind = "report"
+finding = "Gas-gun injection at 400 m/s demonstrated; bench engagement of a falling target to about 150 um against a requirement of about 20 um (direct drive) or about 200 um (indirect drive)."
+limits = "Single-shot and bench tests; no repetition-rated engagement demonstration found newer than a 2022 GA proposal."
+relation = "Present foundation of VTX-01C and VTX-05A (pellet tracking and aim)."
+verification = "SECONDARY_VERIFIED"
+checked = "2026-11-08 web search: OSTI record, HAPL decks; micron units garbled in one snippet."
+
+[S-DAEDALUS-1978]
+title = "Project Daedalus - The Final Report on the BIS Starship Study"
+authors = "A. Bond, A. R. Martin et al. (British Interplanetary Society)"
+date = "1978"
+locator = "JBIS Supplement 1978, 1978JBIS...31S...5B"
+kind = "report"
+finding = "Electron-beam-driven inertial fusion of D-3He pellets at hundreds of pulses per second, with a magnetic reaction chamber and inductive energy pickup."
+limits = "A design study; the 250 Hz figure and pellet design were not confirmed by the 2026-11-08 search."
+relation = "Architectural ancestor of FDP-1 and Vertex 0 (pulsed D-3He, magnetic nozzle, inductive recovery)."
+verification = "SECONDARY_VERIFIED"
+checked = "2026-11-08 web search: authorship, date and drive principle confirmed; repetition rate only 'hundreds per second'."
+
+[S-SOLEM-MEDUSA]
+title = "Medusa: Nuclear explosive propulsion for interplanetary travel"
+authors = "J. C. Solem (Los Alamos)"
+date = "1993"
+locator = "JBIS 46, 21-26 (1993); extension JBIS 47, 229-238 (1994); LA-12189-MS (1991)"
+kind = "journal"
+finding = "A pulse-propulsion concept that catches the explosion's impulse on a large tension sail ahead of the craft instead of a pusher plate."
+limits = "Low exhaust velocity (tens of km/s); nuclear explosives; performance figures here are from secondary commentary."
+relation = "Ancestry for VTX-04B (deliberate mass loading for thrust) and for tension structures under pulsed loads."
+verification = "SECONDARY_VERIFIED"
+checked = "2026-11-08 web search: BIS catalogue entries."
+
+[S-MATTICK-LDR]
+title = "Liquid droplet radiators for heat rejection in space"
+authors = "A. T. Mattick, A. Hertzberg (University of Washington)"
+date = "1981-09"
+locator = "IAF 81-185; NTRS 19810062992"
+kind = "conference"
+finding = "A recirculating sheet of droplets replaces the solid radiator; even unoptimised designs are lighter than heat-pipe radiators (the 1980 paper claims at least an order of magnitude below tube-and-fin)."
+limits = "Droplet collection, loss and electrostatic charging; liquid-metal emissivity 0.1-0.2 unless doped; a 1987 test used 2,300 silicone-oil streams, not a flight system."
+relation = "Foundation of VTX-07B (liquid droplet or sheet radiators)."
+verification = "SECONDARY_VERIFIED"
+checked = "2026-11-08 web search: NTRS catalogue records and Thermopedia review."
+
+[S-NASA-SIC-500C]
+title = "Silicon carbide integrated circuits operating over a year at 500 C"
+authors = "P. G. Neudeck, D. J. Spry et al. (NASA Glenn Research Center)"
+date = "2016-2021"
+locator = "NTRS 20205004681 (Hunter, high-temperature electronics white paper)"
+kind = "report"
+finding = "SiC JFET integrated circuits of up to about 200 transistors operated for more than a year at 500 C (773 K) and for 60 days in simulated Venus surface conditions."
+limits = "Small-signal logic, not megawatt power conversion; packaging and passive components are separate problems."
+relation = "Present foundation of the hot power-electronics half of VTX-07A."
+verification = "SECONDARY_VERIFIED"
+checked = "2026-11-08 web search: NASA science page and NTRS white paper."
+
+[S-CORE-CURIE]
+title = "Metglas 2605SA1 and FINEMET magnetic alloy data sheets"
+authors = "Metglas Inc.; Hitachi Metals (APEC 2019)"
+date = "2011; 2019"
+locator = "https://metglas.com/magnetic-materials; https://www.mouser.com/pdfDocs/apec2019hitachimetals.pdf"
+kind = "dataset"
+finding = "Curie temperature 395 C (668 K) for amorphous 2605SA1 and 550-570 C (823-843 K) for nanocrystalline FINEMET; FINEMET's rated continuous operating temperature is 150 C."
+limits = "Commercial ratings; core loss at elevated temperature not covered here."
+relation = "The limit that splits the VTX-07A warm loop: induction-linac cores cannot follow an 800 K loop."
+verification = "SECONDARY_VERIFIED"
+checked = "2026-11-08 web search: Metglas product page and Hitachi deck."
+
+[S-LI-VAPOR]
+title = "Lithium vapour shielding and vapour-box divertor experiments on Magnum-PSI"
+authors = "PPPL and DIFFER collaborations (e.g. Jaworski et al., PSI 2014; vapour box module 2024-2026)"
+date = "2013-2026"
+locator = "https://nstx.pppl.gov/nstxhome/DragNDrop/Scientific_Conferences/PSI/2014/Jaworski_PSI2014_v4.pdf; https://www.differ.nl/bibcite/reference/9350"
+kind = "conference"
+finding = "Evaporated lithium forms a vapour cloud that shields a target for seconds under intense plasma bombardment and strongly reduces power reaching the surface."
+limits = "Linear plasma devices; modelling shows strong upstream plasma dilution in the regimes where shielding works best."
+relation = "Ancestry for VTX-04C (sacrificial vapour curtains on strike modules) and VTX-06A (sacrificial surfaces)."
+verification = "SECONDARY_VERIFIED"
+checked = "2026-11-08 web search: PPPL PSI 2014 slides, DIFFER bibliography, Nuclear Fusion 2026 abstract."
+
+[S-HOANG-2017]
+title = "The Interaction of Relativistic Spacecrafts with the Interstellar Medium"
+authors = "T. Hoang, A. Lazarian, B. Burkhart, A. Loeb"
+date = "2017"
+locator = "ApJ 837, 5 (2017), doi:10.3847/1538-4357/aa5da6; arXiv:1608.05284"
+kind = "journal"
+finding = "At 0.05-0.5 c, dust erodes a forward surface by explosive evaporation and cratering (about 0.5 mm at 0.2 c to alpha Centauri); gas bombardment damages about 0.1 mm of quartz; needle-like forms and protective layers reduce damage."
+limits = "Gram-scale probes and a 4.2 ly path; Wayfarer flies 0.016 c over a much shorter path but with km-scale exposed area."
+relation = "Foundation of VTX-08A (erosion scaling and sacrificial layers at relativistic speed)."
+verification = "SECONDARY_VERIFIED"
+checked = "2026-11-08 web search: ApJ metadata, Harvard DASH record, AAS Nova summary."
+
+[S-ULYSSES-ISD]
+title = "Interstellar dust in the heliosphere: Ulysses and Galileo measurements"
+authors = "H. Krueger, M. Landgraf, E. Gruen et al."
+date = "1999-2015"
+locator = "arXiv:astro-ph/9906300; arXiv:1510.06180; arXiv:0802.3787"
+kind = "journal"
+finding = "Interstellar grains of mean mass about 3e-16 kg (radius about 0.3 um) at a flux above 1e-4 m-2 s-1 inside the heliosphere; their charge-to-mass ratio (about 0.6 C/kg for the dominant population) couples them to the interplanetary field."
+limits = "In-situ data inside the heliosphere; the local interstellar dust size distribution beyond it is uncertain; snippet values must be re-read in the papers."
+relation = "Sets the VTX-08 threat: mostly sub-micron grains, weakly charged, so magnetic deflection of neutral-dominated mass is limited (VTX-08C)."
+verification = "SECONDARY_VERIFIED"
+checked = "2026-11-08 web search: arXiv abstracts; the charge-to-mass value was partly garbled in one snippet."
+
+[S-WHIPPLE-BLE]
+title = "A review of Whipple shield ballistic limit equations"
+authors = "S. Ryan, W. P. Schonberg; E. L. Christiansen (NASA JSC)"
+date = "2024; 1990-2009"
+locator = "International Journal of Impact Engineering 187 (2024); NTRS 20090024821"
+kind = "journal"
+finding = "Whipple ballistic-limit equations cover three regimes: ballistic below 3 km/s, shatter 3-7 km/s, melt and vaporisation above 7 km/s; test data above about 9 km/s are scarce."
+limits = "Orbital-debris speeds (up to ~15 km/s); Wayfarer's 4,800 km/s is about 300 times beyond the tested range, so these equations do not apply directly."
+relation = "Shows why VTX-08A cannot reuse orbital shielding rules; points to vaporisation-regime physics instead."
+verification = "SECONDARY_VERIFIED"
+checked = "2026-11-08 web search: IJIE abstract and NTRS records."
+
+[S-FDP1]
+title = "FDP-1 report, Fiji Drive Pulsed prototype fdp1-v1"
+authors = "Wayfarer lab (Claude, owner brief 2026-11-04)"
+date = "2026-11-04"
+locator = "lab/variants/fdp1/REPORT.md; lab/variants/fdp1/run.py"
+kind = "model"
+finding = "Speculative-tier pulsed D-3He closure: 20,760 t departure, 0.0069 g, 17.3 TW, 5.69 y under thrust, 6.35 y minimum round trip; ceiling 0.0112 g; the ledger is in results/ of that entry."
+limits = "Optimistic tier (gain 3,000, nozzle 0.79); first-order shield; geometry not inspected against the ship's clearance contract."
+relation = "Vertex 0 is FDP-1 unchanged; every Atlas number comes from this calculator."
+verification = "PRIMARY_VERIFIED"
+checked = "Rerun by results/convergence.json; the test test_vertex0_reproduces_fdp1 holds it to the published 20,760 t."
+
+[S-FIJI-V4]
+title = "Fiji Drive v4: continuous vs pulsed fusion, an independent comparison"
+authors = "Wayfarer lab"
+date = "2026-11-03"
+locator = "lab/variants/fiji-drive/v4/REPORT.md"
+kind = "model"
+finding = "Continuous D-3He core: neutral share 0.247, coil interception 0.53, 0.082 TW heat-limited; pulsed point burn cuts interception to about 0.003; ve gate eta x burnup >= 0.52; one chamber and one nozzle recommended."
+limits = "Research study, first-order physics; several literature IDs unverified there."
+relation = "Why Configuration A (canon four-nozzle core) is not a Vertex base."
+verification = "PRIMARY_VERIFIED"
+checked = "Wayfarer's own committed record."
+
+[S-FOURBURN]
+title = "Four-burn 0.016 c round-trip study, scenario v1"
+authors = "Wayfarer lab"
+date = "2026-11-03"
+locator = "lab/studies/four-burn-mission/REPORT.md; fourburn/architectures.py"
+kind = "model"
+finding = "Only pulsed D-3He closes the four burns; the hydrogen tamper optimiser picks about 1e-9 kg per kg of fuel every time; 1 g is out of reach by orders of magnitude in drive specific mass."
+limits = "Model choices documented in the scenario file."
+relation = "The calculator under FDP-1, and the tamper model behind the VTX-04 liner analysis."
+verification = "PRIMARY_VERIFIED"
+checked = "Wayfarer's own committed record."
+
+[S-VTX-STUDY-2026-11-08]
+title = "Vertex Drive integration study (research report)"
+authors = "Wayfarer thread 'Study Vertex Drive integration into Wayfarer'"
+date = "2026-11-08"
+locator = "https://claude.ai/artifact/Y2F9EZkPgyXuLer7f2SjKv; project files vertex_drive_2026-11-08/vtx_sens.json"
+kind = "model"
+finding = "Configuration B (FDP-1 axial nozzle) recommended; A and C rejected or folded in; helical capture as clocked-sector shear only; sacrificial liner rejected for the mission ve; package 9.2 kt (800 K) / 12.4 kt (600 K); dust and engine-first braking identified as a new integration risk."
+limits = "Sensitivity runs only; the package mixed technology targets with an owner decision (idle H2 vessels)."
+relation = "Baseline for the Atlas. Its findings are preserved as prior_finding in every record; the rejected mechanisms are reopened here as research candidates."
+verification = "PRIMARY_VERIFIED"
+checked = "Reproduced by results/convergence.json (cases study_package_800K, study_package_600K)."
+
+[S-CANON]
+title = "Wayfarer canon parameters and current model"
+authors = "IGNITION owner workbooks via data/wayfarer_3d.toml"
+date = "main 279a612"
+locator = "data/wayfarer_3d.toml; docs/MODEL.md"
+kind = "canon"
+finding = "LOCKED four-way magnetic topology and four nozzles; Fiji lattice amplifies and stabilises only and is not a heat sink; forward-shield silhouette r 45 m with shadow rule; fixed radiator blades; design crew 12; mission 6.0 y."
+limits = "Canon, not physics."
+relation = "The boundaries every Atlas record must respect; any change is an owner decision (registry/decisions.toml)."
+verification = "PRIMARY_VERIFIED"
+checked = "Read from the files on main."

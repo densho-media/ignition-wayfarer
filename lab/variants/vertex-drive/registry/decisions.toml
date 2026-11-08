@@ -1,0 +1,100 @@
+# Vertex Drive Technology Atlas: the decision register. Research records, not canon.
+#   type  TECHNICAL_CONCLUSION (a finding the Atlas states; the owner may challenge it) | OWNER_APPROVAL_CANON (changes canon or the ship,
+#         needs the owner) | OWNER_APPROVAL_EXPERIMENT (authorises a study, Blender work or Drive change)
+#   state OPEN | DECIDED
+
+[[decision]]
+id = "D-01"
+type = "TECHNICAL_CONCLUSION"
+state = "DECIDED"
+technologies = ["VTX-03", "VTX-03A", "VTX-03C"]
+question = "What form may a helical field take?"
+conclusion = "Magnetic shear only, by clocking the trim sectors (m = 4 harmonic), with balanced helicity. A net swirl about the axis needs axial current in the plasma (Ampere) and would spin the exhaust (1 % swirl about 2.8e5 N m roll, 11x the RCS couple)."
+
+[[decision]]
+id = "D-02"
+type = "TECHNICAL_CONCLUSION"
+state = "DECIDED"
+technologies = ["VTX-04", "VTX-04A"]
+question = "Does a sacrificial liner or tamper help at the mission exhaust velocity?"
+conclusion = "No with the current target model: the four-burn optimiser and the Atlas liner study both find the best tamper is essentially zero. Reopened only through D-T spark targets (VTX-01D) and an unmodelled burnup gain."
+
+[[decision]]
+id = "D-03"
+type = "TECHNICAL_CONCLUSION"
+state = "DECIDED"
+technologies = ["VTX-05", "VTX-05A"]
+question = "Where does fast pulse control act?"
+conclusion = "On the target and driver side only. Superconducting loops cannot be trimmed between pulses (1 % trim in 5 ms is about 340 GW); loops are trimmed over seconds for vectoring."
+
+[[decision]]
+id = "D-04"
+type = "OWNER_APPROVAL_CANON"
+state = "OPEN"
+technologies = ["VTX-04B"]
+question = "Keep the three idle canon H2 vessels and the hydrogen low gear, or remove them?"
+conclusion = "Removing them saves about 1.2 kt at departure in V0. Keeping them is right only if a mission phase needs high thrust at low ve. V1 and V2 assume removal; convergence.py reports V1 with them kept."
+
+[[decision]]
+id = "D-05"
+type = "OWNER_APPROVAL_CANON"
+state = "OPEN"
+technologies = ["VTX-07D", "VTX-07"]
+question = "Allow deployable warm radiator wings (canon blades are fixed)?"
+conclusion = "Needed under every generation: FDP-1 wings reach 3.6 km tip radius; V1 650 m; V2 360 m. Fixed km-class wings are not credible."
+
+[[decision]]
+id = "D-06"
+type = "OWNER_APPROVAL_CANON"
+state = "OPEN"
+technologies = ["VTX-08", "VTX-08D", "VTX-08A"]
+question = "How should Wayfarer survive engine-first braking at 0.016 c (this also affects the canon ship)?"
+conclusion = "Options: engine-side bow shield inside the hardware cone; braking at lower speed (mission change); accept and study the plume as a screen. No option is quantified yet."
+
+[[decision]]
+id = "D-07"
+type = "OWNER_APPROVAL_CANON"
+state = "OPEN"
+technologies = ["VTX-02A"]
+question = "Which open Fiji lattice parameters (operating temperature, response time, maximum amplified field at nozzle scale) does canon fix?"
+conclusion = "The Atlas uses only the canon card. Any added Fiji property is an owner decision, never a study result."
+
+[[decision]]
+id = "D-08"
+type = "OWNER_APPROVAL_CANON"
+state = "OPEN"
+technologies = ["VTX-01", "VTX-03", "VTX-07"]
+question = "Adopt Vertex (Config B: FDP-1 axial point burn plus the thermal package) as the propulsion direction instead of the canon four-nozzle Fiji Drive?"
+conclusion = "Not proposed for adoption by this Atlas. V1 meets the six-year benchmark only above the gain cliff; the dust and braking problem (D-06) is open. Adoption would replace LOCKED canon topology."
+
+[[decision]]
+id = "D-09"
+type = "OWNER_APPROVAL_EXPERIMENT"
+state = "OPEN"
+technologies = ["VTX-03", "VTX-03A", "VTX-03B"]
+question = "Authorise a pulsed-plasma MHD or hybrid-PIC study of plain vs clocked vs shaped nozzle fields?"
+conclusion = "The only way to resolve VTX-03's sign. Nozzle efficiency is the steepest lever in the record (0.79 -> 0.72 is +61 % mass)."
+
+[[decision]]
+id = "D-10"
+type = "OWNER_APPROVAL_EXPERIMENT"
+state = "OPEN"
+technologies = ["VTX-01B", "VTX-06A", "VTX-07D", "VTX-08A"]
+question = "Authorise a Vertex Blender blockout in work/ (VAR_vertex collections, pink) from the readiness report?"
+conclusion = "Only ENGINEERING_SUPPORTED and PARAMETRIC_PLACEHOLDER components would be drawn as hardware; CONCEPTUAL_ILLUSTRATION items as labelled overlays. Production assets stay untouched."
+
+[[decision]]
+id = "D-11"
+type = "OWNER_APPROVAL_EXPERIMENT"
+state = "OPEN"
+technologies = ["VTX-01", "VTX-03", "VTX-07"]
+question = "Record Vertex in the Drive workbooks (S&E or a lab row) as a non-canon research line?"
+conclusion = "Nothing was written to Drive. A row would be correspondence, not canon."
+
+[[decision]]
+id = "D-12"
+type = "TECHNICAL_CONCLUSION"
+state = "DECIDED"
+technologies = ["VTX-08C"]
+question = "Can magnetic fields deflect interstellar dust?"
+conclusion = "No: grains at about 0.6 C/kg have Larmor radii of order 1e9 m at 1 mT. Magnetic deflection is limited to gas and ions."

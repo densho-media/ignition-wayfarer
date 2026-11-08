@@ -1,0 +1,211 @@
+# Vertex Drive Technology Atlas: interactions between technologies. Research records, not canon.
+#
+# Hard prerequisites are `depends_on` in technologies.toml. This file holds the softer interactions the brief asks for: one [[link]] per
+# directed effect of `from` on `to`.
+#   kind      enables (makes `to` possible or easier) | improves (raises its performance) | worsens (raises its cost or risk) |
+#             conflicts (the two cannot both be used as specified) | shares (common hardware or loop)
+#   effect    what happens, in words
+#   quantified  a case name in results/convergence.json that measures it, or "UNKNOWN" (never a guessed number)
+
+[[link]]
+from = "VTX-02A"
+to = "VTX-01A"
+kind = "enables"
+effect = "The lattice provides the target seed field that magnetised targets need."
+quantified = "UNKNOWN"
+
+[[link]]
+from = "VTX-01A"
+to = "VTX-01"
+kind = "improves"
+effect = "Magnetisation is the most direct route to the gain the drive needs; the gain cliff per generation is measured."
+quantified = "gain_threshold"
+
+[[link]]
+from = "VTX-01C"
+to = "VTX-07C"
+kind = "improves"
+effect = "The target factory is the bulk of the house load; its energy per pellet sets the warm loop."
+quantified = "house_sweep"
+
+[[link]]
+from = "VTX-07C"
+to = "VTX-07"
+kind = "improves"
+effect = "Every watt of house load is a watt of warm-loop heat and radiator area."
+quantified = "house_sweep"
+
+[[link]]
+from = "VTX-07A"
+to = "VTX-07D"
+kind = "improves"
+effect = "A hotter machinery loop shrinks the wings (tip radius falls from km to hundreds of metres), which makes deployment and dust protection credible."
+quantified = "warm_sweep"
+
+[[link]]
+from = "VTX-07A"
+to = "VTX-08"
+kind = "improves"
+effect = "Smaller wings expose less edge to the dust stream."
+quantified = "warm_sweep"
+
+[[link]]
+from = "VTX-07B"
+to = "VTX-08"
+kind = "improves"
+effect = "A droplet sheet that exists only during burns has no cruise dust exposure; but during braking burns it flies into the stream."
+quantified = "UNKNOWN"
+
+[[link]]
+from = "VTX-07B"
+to = "VTX-08D"
+kind = "worsens"
+effect = "During engine-first braking the sheet is in the stream and droplets are lost to impacts."
+quantified = "UNKNOWN"
+
+[[link]]
+from = "VTX-01B"
+to = "VTX-06A"
+kind = "worsens"
+effect = "Driver galleries outside the hull set the 9.6 deg hardware cone; inside the hull they allow 7.9 deg and a lighter shield."
+quantified = "galleries_r4p5"
+
+[[link]]
+from = "VTX-06A"
+to = "VTX-07"
+kind = "improves"
+effect = "Less solid angle means less radiation on hardware and a smaller hot loop (small effect: radiation is about 5 % of the hot load)."
+quantified = "galleries_r4p5"
+
+[[link]]
+from = "VTX-03"
+to = "VTX-07"
+kind = "improves"
+effect = "If shaping halves the plume-strike share, the hot loop and shield shrink; the benefit is not demonstrated and is carried as a band."
+quantified = "plume_strike_sweep"
+
+[[link]]
+from = "VTX-03A"
+to = "VTX-03"
+kind = "worsens"
+effect = "Clocked sectors add m = 4 ripple; if ripple lowers nozzle efficiency, the ship grows steeply (0.79 -> 0.72 is +61 %)."
+quantified = "nozzle_efficiency_sweep"
+
+[[link]]
+from = "VTX-03C"
+to = "VTX-03A"
+kind = "enables"
+effect = "Balanced helicity keeps the roll torque inside RCS and CMG authority, so a helical field is usable at all."
+quantified = "UNKNOWN"
+
+[[link]]
+from = "VTX-03B"
+to = "VTX-06"
+kind = "worsens"
+effect = "Shaping coils add hardware in the burn's sky: more solid angle, armour and hot-loop heat."
+quantified = "UNKNOWN"
+
+[[link]]
+from = "VTX-08A"
+to = "VTX-06"
+kind = "worsens"
+effect = "Bumpers on the burn-facing side of loops add solid angle and heat; on the outward side they do not."
+quantified = "UNKNOWN"
+
+[[link]]
+from = "VTX-08A"
+to = "VTX-02"
+kind = "worsens"
+effect = "Bumper mass on loops adds structure mass in the nozzle."
+quantified = "UNKNOWN"
+
+[[link]]
+from = "VTX-01D"
+to = "VTX-04A"
+kind = "enables"
+effect = "A D-T spark produces 14.1 MeV neutrons that a hydrogen tamper could turn into reaction-mass energy: the only regime where the tamper may pay."
+quantified = "UNKNOWN"
+
+[[link]]
+from = "VTX-01D"
+to = "VTX-06A"
+kind = "worsens"
+effect = "D-T neutrons raise the shield mass and the conductor dose."
+quantified = "UNKNOWN"
+
+[[link]]
+from = "VTX-04A"
+to = "VTX-01"
+kind = "worsens"
+effect = "At the mission ve the tamper lowers exhaust velocity more than the radiation it recovers adds (liner study)."
+quantified = "liner_study"
+
+[[link]]
+from = "VTX-04B"
+to = "VTX-01"
+kind = "conflicts"
+effect = "The hydrogen low gear lowers ve below what the four 0.016 c burns need; it is usable only outside the mission burns."
+quantified = "ve_sweep"
+
+[[link]]
+from = "VTX-04C"
+to = "VTX-06B"
+kind = "improves"
+effect = "Vapour curtains spread the heat on armour, extending panel life; total hot load is unchanged."
+quantified = "UNKNOWN"
+
+[[link]]
+from = "VTX-04D"
+to = "VTX-06A"
+kind = "improves"
+effect = "Li-6 and B-10 capture lowers the secondary gamma dose per tonne of shield."
+quantified = "UNKNOWN"
+
+[[link]]
+from = "VTX-05A"
+to = "VTX-03"
+kind = "improves"
+effect = "Symmetric, well-placed burns keep the nozzle at its design efficiency and plume-strike share."
+quantified = "UNKNOWN"
+
+[[link]]
+from = "VTX-05B"
+to = "VTX-06B"
+kind = "enables"
+effect = "A measured fluence ledger per panel lets armour be replaced by condition instead of by margin."
+quantified = "UNKNOWN"
+
+[[link]]
+from = "VTX-02C"
+to = "VTX-03"
+kind = "conflicts"
+effect = "Recovered energy is taken from the jet; strong recovery may lower nozzle efficiency. The calculator treats them as independent."
+quantified = "UNKNOWN"
+
+[[link]]
+from = "VTX-02B"
+to = "VTX-03A"
+kind = "shares"
+effect = "Sector joints are the same hardware that the clocked helical harmonic uses."
+quantified = "UNKNOWN"
+
+[[link]]
+from = "VTX-08C"
+to = "VTX-08"
+kind = "conflicts"
+effect = "Magnetic deflection cannot protect against neutral or weakly charged grains; relying on it would leave the dust problem open."
+quantified = "UNKNOWN"
+
+[[link]]
+from = "VTX-08B"
+to = "VTX-08D"
+kind = "improves"
+effect = "Engine-side detection of large grains reduces the braking-burn risk; it does nothing for the sub-micron flux."
+quantified = "UNKNOWN"
+
+[[link]]
+from = "VTX-07D"
+to = "VTX-08"
+kind = "improves"
+effect = "Retracted wings sit in the shield shadow during coast."
+quantified = "UNKNOWN"
