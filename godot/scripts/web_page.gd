@@ -20,6 +20,21 @@ static func requested() -> String:
 		return "interior"
 	return ""
 
+## LOCO-001: the start the page asked for within its experience: "excursion" (#interior-excursion: the full walk from the station),
+## "hatch" (#exterior-hatch or the older #eva: EVA Operations at the EVA hatch), or "" (the default locomotion starts).
+static func start_variant() -> String:
+	if not _web():
+		return ""
+	var h = JavaScriptBridge.eval("location.hash", true)
+	var s := String(h).to_lower() if h != null else ""
+	if s.contains("excursion") or s.contains("station"):
+		return "excursion"
+	if s.contains("first"):
+		return "first_flight"
+	if s.contains("hatch") or s == "#eva":
+		return "hatch"
+	return ""
+
 ## Tell the page which experience is now running (it updates its title, Exit link and the address hash).
 static func scene(experience: String) -> void:
 	if _web():

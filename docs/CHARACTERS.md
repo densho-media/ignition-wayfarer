@@ -120,8 +120,9 @@ need its own fit check. Evidence: `runs/20261010T130000Z-s004-outfit` (Cycles li
 
 Shared actions, PROTOTYPE motion authored procedurally in `human_system` (not mocap): `idle` (4 s loop), `walk` (1.2 m/s, 108 steps/min,
 root motion), `sit` (onto the sector seat height, `sector_whitebox.seat_height_m`), `crawl` (hands and knees, 0.35 m/s, the drum
-chambers' crawl rail), `climb` (vertical ladder at the tubes' rung pitch, `human_entry.spoke_rung_pitch_m`, root motion up). Each frame
-also lists the limbs held still (feet, hands, knees), which the checks use.
+chambers' crawl rail), `climb` (vertical ladder at the tubes' rung pitch, `human_entry.spoke_rung_pitch_m`, root motion up), and for the
+playable trainee (LOCO-001, [LOCOMOTION.md](LOCOMOTION.md)) `run` (2.4 m/s, 150 steps/min, root motion), `jump` (crouch and extension),
+`fall` (loop), `land` and `step` (turning in place). Each frame also lists the limbs held still (feet, hands, knees), which the checks use.
 
 Every motion source goes through one retarget layer, the source format in `human_system`: per frame, world joint positions (the keys of
 `characters.skeleton`), the head's up and facing, the root and the held contacts, plus the source's rest frame. `build/human.py`
@@ -205,7 +206,9 @@ and the `stage_S004A` pose), and writes `characters.json` (contract, actions wit
 check-bone positions in Godot axes `(x, z, −y)`, and the stage placement). `runtime-export` exports the characters into its disposable
 package when `assets/characters/WF_CHAR_HUMAN_*.blend` exist and runs `check_characters.gd` before publishing.
 `characters.json` carries every stage (`stages`: S004A for both, S004B for the newcomer, each with its placement, action and check
-bones; `stage` stays S004A). No runtime scene swaps the proxies for the MPFB bodies since the boarding walk was retired; the walk keeps its proxy body.
+bones; `stage` stays S004A) and `locomotion` (`data/characters.toml [locomotion]`). Explore Interior shows the newcomer as the trainee
+(`WfCharacterRig`, root motion stripped, clips at physics speed; LOCO-001); the capsule stays the physics body.
+`workflow.py play-characters` builds the same files for the browser package.
 
 ## Licenses
 

@@ -58,6 +58,11 @@ var faults := 0
 var walk_speed := 0.6
 var stowed_cartridges := 0
 var vented_kg := 0.0
+var start_kind := "WALKWAY"          # LOCO-002: Explore Exterior starts on the magnetic walkway; HATCH is the classic start at the airlock hold
+var suit_rig: WfCharacterRig = null
+var suit_model_ok := false
+var _boot_events_seen := 0
+var _oneshot := ""
 
 func _ready() -> void:
 	pkg = WfEvaPkg.load_package()
@@ -90,13 +95,16 @@ func _ready() -> void:
 	hud.setup(self)
 	scenario = WfEvaScenario.new(self)
 	WfInput.context = "evaops"
+	start_kind = requested_start()
 	start_free(false)
+	if start_kind == "WALKWAY":
+		start_walkway(false)
 	WfWebPage.scene("exterior")
 	print("WF_EVA_OPS ready")
 	if "--check-eva-ops" in OS.get_cmdline_user_args():
 		check = WfEvaCheck.new()
 		check.run(self)
-	elif "--first-flight" in OS.get_cmdline_user_args():
+	elif "--first-flight" in OS.get_cmdline_user_args() or WfWebPage.start_variant() == "first_flight":
 		scenario.start()
 	for a in OS.get_cmdline_user_args():
 		if a.begins_with("--shots="):
@@ -105,6 +113,24 @@ func _ready() -> void:
 ## Review stills (-- --shots=<dir>, needs a rendering display): the five camera modes at the hatch, then the drone undocked.
 func _shots(dir: String) -> void:
 	DirAccess.make_dir_recursive_absolute(dir)
+	if start_kind == "WALKWAY":
+		# LOCO-002 the Explore Exterior start: standing on the boots, walking (W through the input layer), then released and drifting
+		active = "suit"
+		cam_mode["suit"] = 0
+		for step in [["mag_1_stand", 60, ""], ["mag_2_walk", 300, "fwd"], ["mag_3_release", 150, "release"]]:
+			if step[2] == "fwd":
+				Input.action_press("evaops.fwd")
+			elif step[2] == "release":
+				Input.action_release("evaops.fwd")
+				push_off()                  # Space with the boots attached: both release and the legs push off along the plate normal
+			for i in step[1]:
+				await get_tree().physics_frame
+			await RenderingServer.frame_post_draw
+			get_viewport().get_texture().get_image().save_png(dir.path_join(step[0] + ".png"))
+			print("WF_EVA_OPS_SHOT ", step[0], " ", suit_rig.current if suit_model_ok else "(no model)")
+		start_walkway(false)
+		for i in 30:
+			await get_tree().physics_frame
 	var plan := [["suit", 0, "astronaut_third_person"], ["suit", 1, "astronaut_helmet"], ["undock", 0, ""], ["drone", 0, "drone_chase"],
 		["drone", 1, "drone_sensor"], ["drone", 2, "drone_stabilized"], ["suit", 0, "astronaut_and_drone"]]
 	for p in plan:
@@ -216,13 +242,30 @@ func _bodies() -> void:
 	sv.position = -com_suit
 	suit.add_child(sv)
 	suit_vis = sv
-	var gl := _visual(["res://generated/characters/eva_%s.glb" % SUIT_VARIANT])
-	if gl != null:
-		sv.add_child(gl)
-		_play_first(gl, ["flight", "FLIGHT", "eva_flight", "ready"])
+	# LOCO-002: the Y155 suit model and its clips (WfCharacterRig strips root motion; the body's physics moves it). A missing suit is shown
+	# as the labelled proxy and reported to the page (wayfarerEva.model false), never silently.
+	var meta := _json(["res://generated/characters/eva_characters.json"])
+	suit_rig = WfCharacterRig.new()
+	suit_rig.name = "SuitRig"
+	suit_model_ok = suit_rig.setup("res://generated/characters/eva_%s.glb" % SUIT_VARIANT, meta.get("variants", {}).get(SUIT_VARIANT, {}))
+	if suit_model_ok:
+		sv.add_child(suit_rig)
+		suit_rig.play("eva_mag_stand" if suit_rig.has("eva_mag_stand") else "eva_float", 1.0, 0.0)
 	else:
+		push_warning("LOCO-002: the Y155 suit model is missing from this package (%s)" % suit_rig.missing)
 		_proxy_suit(sv)
+		var tag := Label3D.new()
+		tag.text = "SUIT MODEL MISSING (proxy shown)\n%s" % suit_rig.missing
+		tag.font_size = 28
+		tag.pixel_size = 0.002
+		tag.position = Vector3(0, 2.1, 0)
+		tag.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+		tag.modulate = Color(1.0, 0.35, 0.25)
+		sv.add_child(tag)
 	add_child(suit)
+	if pkg.has("mag_boots"):
+		suit.boots = WfMagBoots.new(pkg["mag_boots"], world, [Vector3.ZERO, Vector3.ZERO], Vector3.ZERO)
+		_boot_points()
 	suit_ctl = WfEvaControl.new(suit, pkg["assist"], 0.2)
 	# ---- drone
 	drone = WfEvaBody.new()
@@ -247,6 +290,9 @@ func _bodies() -> void:
 	drone_vis = dv
 	var gd := _visual(["res://generated/characters/eva_drone.glb"])
 	if gd != null:
+		# the exported drone sits docked in the suit frame (export/eva_gltf.py keeps the system scene's placement): undo that pose so
+		# the model lies in the drone's own LOCAL frame (otherwise the dock transform is applied twice and the drone floats beside the suit)
+		gd.transform = dock_local.affine_inverse()
 		dv.add_child(gd)
 	else:
 		_proxy_drone(dv)
@@ -264,6 +310,50 @@ func _play_first(n: Node, names: Array) -> void:
 		if ap.has_animation(nm):
 			ap.play(nm)
 			return
+
+## The soles in the suit body's frame (its origin is the mass centre, of the pair when docked): the suit frame's origin is the sole plane.
+func _boot_points() -> void:
+	if suit.boots == null:
+		return
+	var sole := -(com_suit + (pair_off if docked else Vector3.ZERO))
+	var h := float(pkg["mag_boots"]["foot_half_spacing_m"])
+	suit.boots.sole_local = sole
+	suit.boots.feet_local = [sole + Vector3(h, 0, 0), sole + Vector3(-h, 0, 0)]
+
+## LOCO-002: the suit's clip follows its physics state: on the walkway the magnetic stand / walk (at the floor speed / the clip's speed),
+## the attach and release clips once at each boot event, the burn presets' surface walk, and the neutral float otherwise.
+func _animate_suit() -> void:
+	if not suit_model_ok:
+		return
+	var b := suit.boots
+	if b != null and b.events.size() != _boot_events_seen:
+		var ev: Dictionary = b.events[b.events.size() - 1]
+		_boot_events_seen = b.events.size()
+		if ev["kind"] == "release" or ev["kind"] == "break_away":
+			_oneshot = "eva_mag_release"
+		elif ev["kind"] == "attach" and b.count() == 2 and not suit_rig.current.begins_with("eva_mag_walk"):
+			_oneshot = "eva_mag_attach"
+	if _oneshot != "":
+		if suit_rig.current != _oneshot:
+			suit_rig.play(_oneshot, 1.0, 0.12)
+		elif suit_rig.finished():
+			_oneshot = ""
+		else:
+			return
+	var n := suit.support_normal
+	var v := suit.linear_velocity - n * suit.linear_velocity.dot(n)
+	if b != null and b.count() > 0:
+		if v.length() > 0.03:
+			suit_rig.play("eva_mag_walk", suit_rig.rate_for("eva_mag_walk", v.length()), 0.2)
+		else:
+			suit_rig.play("eva_mag_stand", 1.0, 0.3)
+	elif suit.standing and not suit.held:
+		if v.length() > 0.05 and suit_rig.has("walk"):
+			suit_rig.play("walk", suit_rig.rate_for("walk", v.length()), 0.25)
+		else:
+			suit_rig.play("eva_mag_stand", 1.0, 0.3)
+	else:
+		suit_rig.play("eva_float", 1.0, 0.4)
 
 func _proxy_suit(root: Node3D) -> void:
 	var white := _m(Color(0.88, 0.88, 0.84))
@@ -554,6 +644,7 @@ func _physics_process(dt: float) -> void:
 	if pkg.is_empty():
 		return
 	t_sim += dt
+	_boot_points()
 	var held_active := active
 	# ---- the astronaut
 	var t_in := Vector3.ZERO
@@ -630,7 +721,10 @@ func _suit_step(t_in: Vector3, r_in: Vector3, k: float, braking: bool) -> void:
 		var n := suit.support_normal
 		var fwd := (r.z - n * r.z.dot(n)).normalized()
 		var right := n.cross(fwd).normalized()
-		suit.walk_cmd = (fwd * t_in.z - right * t_in.x) * walk_speed * (0.4 if k < 1.0 else 1.0)
+		var vw := walk_speed
+		if suit.mag_a > 0.0:
+			vw = float(pkg["mag_boots"]["gait"]["speed_m_s"])      # the magnetic gait: one boot always down (eva_mag_walk's speed)
+		suit.walk_cmd = (fwd * t_in.z - right * t_in.x) * vw * (0.4 if k < 1.0 else 1.0)
 		suit.turn_rate = r_in.y * 0.8
 		suit_ctl.idle()
 		if t_in.y > 0.5:
@@ -668,13 +762,16 @@ func _process(dt: float) -> void:
 	if pkg.is_empty():
 		return
 	_camera()
+	_animate_suit()
 	hud.refresh()
 	_page_t += dt
 	if _page_t >= 1.0:                   # the page's state record (browser check): who is controlled, docked, held, moving
 		_page_t = 0.0
 		WfWebPage.publish("wayfarerEva", {"active": active, "docked": docked, "held": suit.held, "hold": hold_id,
 			"v_suit": snappedf(suit.linear_velocity.length(), 0.001), "v_drone": snappedf(drone.linear_velocity.length(), 0.001),
-			"scenario": scenario.running, "training": training, "t": snappedf(t_sim, 0.1)})
+			"scenario": scenario.running, "training": training, "t": snappedf(t_sim, 0.1), "start": start_kind, "model": suit_model_ok,
+			"clip": suit_rig.current if suit_model_ok else "", "boots": suit.boots.record() if suit.boots != null else {},
+			"tether": suit.tether_on, "standing": suit.standing})
 
 # -------------------------------------------------------------------------------------------------------------------------- camera
 const CAMS := {"suit": ["THIRD PERSON", "HELMET"], "drone": ["CHASE", "SENSOR", "STABILIZED INSPECTION"]}
@@ -725,7 +822,7 @@ func _unhandled_input(e: InputEvent) -> void:
 	if not WfInput.pressed(e):
 		return
 	for id in ["evaops.astronaut", "evaops.drone", "evaops.camera", "evaops.assist", "evaops.att_hold", "evaops.pos_hold", "evaops.grab",
-			"evaops.tether", "evaops.push", "evaops.dock", "evaops.autopilot", "evaops.arms", "evaops.gripper", "evaops.interact", "evaops.help",
+			"evaops.tether", "evaops.push", "evaops.boots", "evaops.dock", "evaops.autopilot", "evaops.arms", "evaops.gripper", "evaops.interact", "evaops.help",
 			"evaops.frame", "evaops.training", "evaops.scenario", "evaops.reset", "evaops.checkpoint", "evaops.fault", "evaops.exit"]:
 		if e.is_action_pressed(id):
 			do_action(id)
@@ -768,6 +865,8 @@ func do_action(id: String) -> void:
 			tether()
 		"evaops.push":
 			push_off()
+		"evaops.boots":
+			toggle_boots()
 		"evaops.dock":
 			if docked:
 				undock()
@@ -883,7 +982,31 @@ func grab() -> bool:
 	scenario_event("held:" + h["kind"] + ":" + h["id"])
 	return true
 
+## LOCO-002: V. The pads on (they attach where the soles meet the walkway) or off (both boots release at once; the suit floats with the
+## velocity it has, and the EVA physics, thrusters and tether take over).
+func toggle_boots() -> bool:
+	if suit.boots == null:
+		say("This suit has no magnetic boots in the package.", false)
+		return false
+	if suit.boots.armed:
+		suit.boots.arm(false)
+		say("Boot magnets OFF: both boots released. You float with the ship's velocity; thrusters and the tether from here.")
+	else:
+		suit.boots.arm(true)
+		say("Boot magnets ON: they attach when your soles meet the walkway plate (within %.0f mm, closing below %.2f m/s)." %
+			[float(pkg["mag_boots"]["capture_gap_m"]) * 1000.0, float(pkg["mag_boots"]["capture_speed_m_s"])])
+	scenario_event("boots:" + ("on" if suit.boots.armed else "off"))
+	return true
+
 func push_off() -> bool:
+	if suit.boots != null and suit.boots.count() > 0 and not suit.held:
+		# release both pads, then the legs push the body off the plate along its normal (the same push the hands give at a hold)
+		var n := suit.boots.normal
+		suit.boots.arm(false)
+		suit.add_impulse(n * float(pkg["rules"]["push_dv_m_s"]))
+		say("Boots released and pushed off the walkway at %.2f m/s. Nothing slows you now except thrust, a hold or the tether." % float(pkg["rules"]["push_dv_m_s"]))
+		scenario_event("boots:push")
+		return true
 	if not suit.held:
 		say("Push off needs a grip on a hold (%s)." % key("evaops.grab"), false)
 		return false
@@ -1030,6 +1153,8 @@ func training_reset() -> void:
 	drone_gas.training_reset()
 	world.station["cartridges"] = int(pkg["station"]["cartridges"])
 	start_free(true)
+	if start_kind == "WALKWAY":
+		start_walkway(false)
 	say("TRAINING RESET: every N2 vessel refilled and the rack restocked (not an in-world resupply; counted).", false)
 
 func start_free(announce: bool) -> void:
@@ -1064,6 +1189,8 @@ func start_free(announce: bool) -> void:
 	suit.hold_anchor = WfEvaPkg.v(h["p"])
 	hold_id = "HOLD_AIRLOCK"
 	suit.tether_on = false
+	if suit.boots != null:
+		suit.boots.arm(false)
 	suit_ctl.hold_pos = false
 	suit_ctl.mode = WfEvaControl.Mode.ASSIST
 	active = "suit"
@@ -1072,6 +1199,39 @@ func start_free(announce: bool) -> void:
 		scenario.running = false
 	if announce:
 		say("FREE EXPLORATION: everything is open; the gas is still finite.")
+
+## LOCO-002: where Explore Exterior begins. The EVA check, `-- --hatch` and the page's #exterior-hatch (or #eva) start at the airlock hold.
+static func requested_start() -> String:
+	var args := OS.get_cmdline_user_args()
+	if "--check-eva-ops" in args or "--hatch" in args or "--first-flight" in args or WfWebPage.start_variant() in ["hatch", "first_flight"]:
+		return "HATCH"
+	return "WALKWAY"
+
+## Explore Exterior start (LOCO-002): Wayfarer in DRIFT (no field at all), the astronaut standing on the magnetic walkway beside the rail with
+## both boots attached, facing the Brow, the drone docked, the tether clipped to the nearest rail anchor. Everything after it is the EVA
+## physics: release (V) or push off (Space) and the thrusters, holds, tether, drone and rescue work as from the hatch.
+func start_walkway(announce: bool) -> void:
+	var m: Dictionary = pkg["mag_boots"]
+	var phi := float(m["start_phi_rad"])
+	var up := Vector3(0, cos(phi), sin(phi))
+	var fwd := Vector3.RIGHT
+	var frame := Transform3D(Basis(up.cross(fwd).normalized(), up, fwd), world.walkway_point(m, float(m["start_x_m"]), phi, 0.002))
+	place_suit(frame)
+	suit.held = false
+	hold_id = ""
+	suit.boots.arm(true)
+	for a in pkg["ship"]["route"]["anchors"]:
+		if a["id"] == m["tether_anchor"]:
+			suit.tether_on = true
+			suit.tether_anchor = WfEvaPkg.v(a["p"])
+	cam_yaw = 0.6
+	cam_pitch = -0.3
+	_checkpoint()
+	say("EXPLORE EXTERIOR · magnetic walkway (PROTOTYPE, training): Wayfarer drifts, nothing pulls you down. The boot magnets hold you to the plate. "
+		+ "%s/%s walk, %s/%s turn, %s boots on/off, %s push off, %s grab a hold, %s tether, %s reset." % [key("evaops.fwd"), key("evaops.back"),
+		key("evaops.yaw_left"), key("evaops.yaw_right"), key("evaops.boots"), key("evaops.push"), key("evaops.grab"), key("evaops.tether"), key("evaops.reset")])
+	if announce:
+		scenario_event("start:walkway")
 
 func ray(a: Vector3, b: Vector3) -> Dictionary:
 	var q := PhysicsRayQueryParameters3D.create(a, b, WfEvaWorld.LAYER_WORLD)

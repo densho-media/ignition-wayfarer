@@ -33,6 +33,9 @@ CHECKS = [
     # EVA-OPS-001: astronaut and drone operations (movement, gas, docking, drone, rescue and a scripted First Flight); WF_GODOT_EVA_OPS.
     dict(name='eva-ops', args=['--fixed-fps', '60', 'res://scenes/eva_ops.tscn', '--', '--check-eva-ops'],
          scene='scenes/eva_ops.tscn', marker='"result":"PASS"'),
+    # LOCO-001: Explore Interior on ring A's deck with the newcomer model (walk, run, jump, landing, camera); WF_GODOT_LOCOMOTION.
+    dict(name='locomotion', args=['--fixed-fps', '60', 'res://scenes/excursion.tscn', '--quit-after', '60000', '--', '--check-locomotion'],
+         scene='scenes/excursion.tscn', marker='"result":"PASS"'),
     # The MPFB humans (docs/CHARACTERS.md), once `workflow.py characters` has built them.
     dict(name='characters', args=['--script', 'res://scripts/check_characters.gd'], script='scripts/check_characters.gd', needs='humans'),
 ]
@@ -70,7 +73,7 @@ def package_inputs(root):
              root/'tools/runtime_export.py', *sorted((root/'data').glob('*.toml')), *sorted((root/'data/materials').glob('*.toml')), *sorted(p for p in (root/'data/detail').rglob('*') if p.is_file()),
              root/'godot/project.godot',
              *(p for p in (root/'data/simulations/wf_route_v1.json', root/'data/simulations/wf_eva_ops.json') if p.exists()),
-             *sorted((root/'assets/characters').glob('WF_CHAR_HUMAN_*.blend'))]
+             *sorted((root/'assets/characters').glob('WF_CHAR_HUMAN_*.blend')), *sorted((root/'assets/characters').glob('WF_EVA_*.blend'))]
     return {str(p.relative_to(root)): pipeline.sha256(p) for p in paths}
 
 
@@ -132,9 +135,14 @@ def run(root, eye_layout=None):
         if humans:
             identity.update({str(h.relative_to(root)): pipeline.sha256(h) for h in humans})
             commands[3:3] = [('export-characters', pipeline.blender(root / 'src/wayfarer/export/human_gltf.py', '--out', work / 'godot/generated/characters'))]
+        # LOCO-002: the Y155 suits and the drone (workflow.py eva) for Explore Exterior: required like the humans
+        suits = sorted((root / 'assets/characters').glob('WF_EVA_*.blend'))
+        if humans and suits:
+            identity.update({str(h.relative_to(root)): pipeline.sha256(h) for h in suits})
+            commands[4:4] = [('export-eva', pipeline.blender(root / 'src/wayfarer/export/eva_gltf.py', '--out', work / 'godot/generated/characters'))]
         # The MPFB humans are required package content: a missing asset fails the export instead of skipping its checks.
-        if not humans:
-            return {'result': 'FAIL', 'step': 'assets', 'reason': 'required runtime assets missing: characters (python3 tools/workflow.py characters)',
+        if not humans or not any(p.name == 'WF_EVA_SYSTEM.blend' for p in suits):
+            return {'result': 'FAIL', 'step': 'assets', 'reason': 'required runtime assets missing: characters and EVA suits (python3 tools/workflow.py characters, then eva)',
                     'run_dir': str(run_dir)}
         checks = list(CHECKS)
         for name, command in commands:

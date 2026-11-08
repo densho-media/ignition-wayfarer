@@ -482,7 +482,7 @@ def run_touch_walk(url, play_release, binary, sandbox, out, record_check, metric
         page.send('Emulation.setDeviceMetricsOverride', {'width': 844, 'height': 390, 'deviceScaleFactor': 3, 'mobile': True,
                                                           'screenOrientation': {'type': 'landscapePrimary', 'angle': 90}})
         page.send('Emulation.setTouchEmulationEnabled', {'enabled': True, 'maxTouchPoints': 5})
-        page.send('Page.navigate', {'url': url + play_release['page'] + '?arg=--&arg=--touch-probe'})
+        page.send('Page.navigate', {'url': url + play_release['page'] + '?arg=--&arg=--touch-probe&arg=--excursion'})   # the boarding-line start
         s = until(lambda s: s['mode'] == 'welcome' and s['panel'] and scene(s).get('scene') == 'excursion', 300)
         need('touch walk: the walk starts on a phone with the touch welcome', s, seconds=round(time.monotonic() - t_start, 1))
         for _ in range(3):
@@ -804,7 +804,8 @@ def run_main(url, release, build, binary, sandbox, out, record_check, metrics):
                 record_check(f'play: {name}: no engine or script errors', not errors and not traffic.crashed, errors=errors[:5], crashed=traffic.crashed)
                 return reqs
 
-            # Explore Interior: the walk (EXC-001). Two Confirm presses, then W carries the trainee down the boarding line.
+            # Explore Interior (LOCO-001): the trainee stands on ring A's deck in spin gravity, as the newcomer model. W walks (the state
+            # record shows the walk clip), Space jumps once and the trainee lands again.
             launcher('interior')
             mark, running, play_s = start('interior', 'WF_EXCURSION ready')
             if running:
@@ -813,19 +814,26 @@ def run_main(url, release, build, binary, sandbox, out, record_check, metrics):
                 for _ in range(2):
                     key('Enter', 'Enter', 13)
                     time.sleep(3)
-                # W held: the hands pull the body along the boarding line at its pace in game time (a software-rendered runner steps
-                # physics at a fraction of real time, as in the touch walk), so the key stays down until the body has moved.
                 page.wait('!!window.wayfarerWalk', 60)
                 before = page.js('window.wayfarerWalk')
+                record_check('play: interior: the trainee stands on ring A at about 0.5 g as the newcomer model', bool(before)
+                             and before.get('start') == 'RING' and before.get('zone') == 'RING_A' and before.get('move') == 'WALK'
+                             and before.get('model') is True and 0.45 < (before.get('g') or 0) < 0.55, state=before)
+                # W held: a software-rendered runner steps physics at a fraction of real time (as in the touch walk), so the key stays
+                # down until the body has moved.
                 page.send('Input.dispatchKeyEvent', {'type': 'keyDown', 'key': 'w', 'code': 'KeyW', 'windowsVirtualKeyCode': 87})
                 t_w = time.monotonic()
                 dist = lambda a, b: math.dist([a[k] for k in 'xyz'], [b[k] for k in 'xyz']) if a and b else 0.0
-                walked = page.wait(f"window.wayfarerWalk && Math.hypot(window.wayfarerWalk.x - {before['x']}, window.wayfarerWalk.y - {before['y']}, "
-                                  f"window.wayfarerWalk.z - {before['z']}) > 0.5" if before else 'false', 180)
+                walked = page.wait(f"window.wayfarerWalk && window.wayfarerWalk.clip === 'walk' && Math.hypot(window.wayfarerWalk.x - {before['x']}, "
+                                  f"window.wayfarerWalk.y - {before['y']}, window.wayfarerWalk.z - {before['z']}) > 0.5" if before else 'false', 180)
                 page.send('Input.dispatchKeyEvent', {'type': 'keyUp', 'key': 'w', 'code': 'KeyW', 'windowsVirtualKeyCode': 87})
                 now = page.js('window.wayfarerWalk')
-                record_check('play: interior: the trainee moves down the boarding line on W', bool(before) and walked and dist(before, now) > 0.5,
+                record_check('play: interior: the trainee walks on W with the walk clip', bool(before) and walked and dist(before, now) > 0.5,
                              metres=round(dist(before, now), 2), seconds=round(time.monotonic() - t_w, 1), before=before, after=now)
+                page.wait("window.wayfarerWalk && window.wayfarerWalk.state === 'GROUND' && window.wayfarerWalk.speed < 0.1", 60)
+                key(' ', 'Space', 32)
+                jumped = page.wait('window.wayfarerWalk && window.wayfarerWalk.jumps >= 1 && window.wayfarerWalk.landings >= 1', 120)
+                record_check('play: interior: Space jumps once and the trainee lands', jumped, state=page.js('window.wayfarerWalk'))
                 fps = page.js(RAF_FPS.replace('{ms}', '8000'), timeout=120)
                 page.screenshot(out / 'interior_running.png')
                 reqs = after(mark, 'interior')
@@ -836,31 +844,39 @@ def run_main(url, release, build, binary, sandbox, out, record_check, metrics):
             canvases = page.js("document.querySelectorAll('canvas').length")
             record_check('switching: back on the start page with no canvas or engine left', canvases == 0 and not page.js('!!window.Engine'))
 
-            # Explore Exterior: EVA Operations (EVA-OPS-001), free exploration first: at the hatch, holding, the drone docked. The player
-            # releases the drone (X), lets go of the hold (G), thrusts forward (W) and takes the drone (2); the published state must follow.
+            # Explore Exterior (LOCO-002): standing on the magnetic walkway in drift, both boots attached, the Y155 suit model, drone docked,
+            # tether clipped. W walks on the boots, V releases them, R thrusts away from the plate, X releases the drone, 2 takes it.
             launcher('exterior')
             mark, running, play_s = start('exterior', 'WF_EVA_OPS ready')
             if running:
                 eva0 = page.wait("window.wayfarerEva && window.wayfarerEva.active === 'suit'", 20) and page.js('window.wayfarerEva')
                 page.screenshot(out / 'exterior_first_launch.png')
-                record_check('play: exterior starts in free exploration at the hatch, drone docked', bool(eva0) and eva0['docked'] and eva0['held']
-                             and not eva0['scenario'] and eva0['hold'] == 'HOLD_AIRLOCK', state=eva0)
+                boots0 = (eva0 or {}).get('boots') or {}
+                record_check('play: exterior starts on the magnetic walkway: both boots attached, suit model, drone docked, tether clipped',
+                             bool(eva0) and eva0.get('start') == 'WALKWAY' and boots0.get('attached') == 2 and eva0.get('model') is True
+                             and eva0['docked'] and eva0.get('tether') and not eva0['held'] and not eva0['scenario'], state=eva0)
                 # The state record comes once a game second, and a software-rendered runner plays game time at a fraction of real time
-                # (CI run 214: 4 game seconds in 80 s), so each step waits long enough and W stays down until the suit is seen moving.
+                # (CI run 214: 4 game seconds in 80 s), so each step waits long enough and a held key stays down until the state follows.
+                page.send('Input.dispatchKeyEvent', {'type': 'keyDown', 'key': 'w', 'code': 'KeyW', 'windowsVirtualKeyCode': 87})
+                walking = page.wait("window.wayfarerEva && window.wayfarerEva.v_suit > 0.05 && window.wayfarerEva.boots.attached >= 1 "
+                                    "&& window.wayfarerEva.clip === 'eva_mag_walk'", 120)
+                page.send('Input.dispatchKeyEvent', {'type': 'keyUp', 'key': 'w', 'code': 'KeyW', 'windowsVirtualKeyCode': 87})
+                mag_walk = page.js('window.wayfarerEva')
+                page.screenshot(out / 'exterior_mag_walk.png')
+                key('v', 'KeyV', 86)
+                released = page.wait('window.wayfarerEva && window.wayfarerEva.boots.armed === false && window.wayfarerEva.boots.attached === 0', 90)
+                page.send('Input.dispatchKeyEvent', {'type': 'keyDown', 'key': 'r', 'code': 'KeyR', 'windowsVirtualKeyCode': 82})
+                lifted = page.wait('window.wayfarerEva && window.wayfarerEva.v_suit > 0.005 && window.wayfarerEva.standing === false', 90)
+                page.send('Input.dispatchKeyEvent', {'type': 'keyUp', 'key': 'r', 'code': 'KeyR', 'windowsVirtualKeyCode': 82})
                 key('x', 'KeyX', 88)
                 undocked = page.wait('window.wayfarerEva && window.wayfarerEva.docked === false', 90)
-                key('g', 'KeyG', 71)
-                released = page.wait('window.wayfarerEva && window.wayfarerEva.held === false', 90)
-                page.send('Input.dispatchKeyEvent', {'type': 'keyDown', 'key': 'w', 'code': 'KeyW', 'windowsVirtualKeyCode': 87})
-                moving = page.wait('window.wayfarerEva && window.wayfarerEva.v_suit > 0.005', 90)
-                page.send('Input.dispatchKeyEvent', {'type': 'keyUp', 'key': 'w', 'code': 'KeyW', 'windowsVirtualKeyCode': 87})
                 key('2', 'Digit2', 50)
                 drone = page.wait("window.wayfarerEva && window.wayfarerEva.active === 'drone'", 90)
                 time.sleep(2)
                 page.screenshot(out / 'exterior_running.png')
-                record_check('play: exterior: the astronaut undocks, lets go, thrusts and hands control to the drone',
-                             undocked and released and moving and drone, undocked=undocked, released=released, moving=moving, drone=drone,
-                             state=page.js('window.wayfarerEva'))
+                record_check('play: exterior: the astronaut walks on the boots, releases them, thrusts off, releases the drone and hands it control',
+                             walking and released and lifted and undocked and drone, walking=walking, released=released, lifted=lifted,
+                             undocked=undocked, drone=drone, mag_walk=mag_walk, state=page.js('window.wayfarerEva'))
                 metrics['exterior'] = {'interactive_s': play_s, 'start_ms': page.js('window.wayfarerPlay.start_ms'),
                                        'renderer_rss_mb': rss(chrome.process.pid, 'renderer'), 'renderer': 'SwiftShader software WebGL, 1280x800'}
                 after(mark, 'exterior')

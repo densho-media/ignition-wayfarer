@@ -272,6 +272,53 @@
      "slip_mm": {},
      "reach_short_mm": {}
     },
+    "eva_mag_stand": {
+     "frames": 120,
+     "loop": true,
+     "root_motion": false,
+     "slip_mm": {
+      "foot_right": 0.0,
+      "foot_left": 0.0
+     },
+     "reach_short_mm": {}
+    },
+    "eva_mag_walk": {
+     "frames": 75,
+     "loop": true,
+     "root_motion": true,
+     "slip_mm": {
+      "foot_right": 0.0,
+      "foot_left": 0.0
+     },
+     "reach_short_mm": {}
+    },
+    "eva_mag_attach": {
+     "frames": 36,
+     "loop": false,
+     "root_motion": false,
+     "slip_mm": {
+      "foot_right": 0.0,
+      "foot_left": 0.0
+     },
+     "reach_short_mm": {}
+    },
+    "eva_mag_release": {
+     "frames": 36,
+     "loop": false,
+     "root_motion": false,
+     "slip_mm": {
+      "foot_right": 0.0,
+      "foot_left": 0.0
+     },
+     "reach_short_mm": {}
+    },
+    "eva_float": {
+     "frames": 120,
+     "loop": true,
+     "root_motion": false,
+     "slip_mm": {},
+     "reach_short_mm": {}
+    },
     "EVA_SYSTEM_POSES": {
      "frames": 90,
      "loop": false,
@@ -759,6 +806,116 @@
      },
      "head": {
       "max_deg": 4.0,
+      "limit_deg": 20.0,
+      "ok": true
+     }
+    },
+    "eva_mag_stand": {
+     "elbow": {
+      "max_deg": 35.1,
+      "limit_deg": 115.0,
+      "ok": true
+     },
+     "knee": {
+      "max_deg": 27.8,
+      "limit_deg": 105.0,
+      "ok": true
+     },
+     "shoulder": {
+      "max_deg": 27.3,
+      "limit_deg": 130.0,
+      "ok": true
+     },
+     "head": {
+      "max_deg": 6.0,
+      "limit_deg": 20.0,
+      "ok": true
+     }
+    },
+    "eva_mag_walk": {
+     "elbow": {
+      "max_deg": 35.1,
+      "limit_deg": 115.0,
+      "ok": true
+     },
+     "knee": {
+      "max_deg": 53.3,
+      "limit_deg": 105.0,
+      "ok": true
+     },
+     "shoulder": {
+      "max_deg": 32.8,
+      "limit_deg": 130.0,
+      "ok": true
+     },
+     "head": {
+      "max_deg": 8.0,
+      "limit_deg": 20.0,
+      "ok": true
+     }
+    },
+    "eva_mag_attach": {
+     "elbow": {
+      "max_deg": 35.1,
+      "limit_deg": 115.0,
+      "ok": true
+     },
+     "knee": {
+      "max_deg": 40.9,
+      "limit_deg": 105.0,
+      "ok": true
+     },
+     "shoulder": {
+      "max_deg": 30.7,
+      "limit_deg": 130.0,
+      "ok": true
+     },
+     "head": {
+      "max_deg": 6.0,
+      "limit_deg": 20.0,
+      "ok": true
+     }
+    },
+    "eva_mag_release": {
+     "elbow": {
+      "max_deg": 50.2,
+      "limit_deg": 115.0,
+      "ok": true
+     },
+     "knee": {
+      "max_deg": 37.7,
+      "limit_deg": 105.0,
+      "ok": true
+     },
+     "shoulder": {
+      "max_deg": 44.0,
+      "limit_deg": 130.0,
+      "ok": true
+     },
+     "head": {
+      "max_deg": 10.0,
+      "limit_deg": 20.0,
+      "ok": true
+     }
+    },
+    "eva_float": {
+     "elbow": {
+      "max_deg": 50.2,
+      "limit_deg": 115.0,
+      "ok": true
+     },
+     "knee": {
+      "max_deg": 37.7,
+      "limit_deg": 105.0,
+      "ok": true
+     },
+     "shoulder": {
+      "max_deg": 43.2,
+      "limit_deg": 130.0,
+      "ok": true
+     },
+     "head": {
+      "max_deg": 10.0,
       "limit_deg": 20.0,
       "ok": true
      }
@@ -3035,6 +3192,53 @@
      "slip_mm": {},
      "reach_short_mm": {}
     },
+    "eva_mag_stand": {
+     "frames": 120,
+     "loop": true,
+     "root_motion": false,
+     "slip_mm": {
+      "foot_right": 0.0,
+      "foot_left": 0.0
+     },
+     "reach_short_mm": {}
+    },
+    "eva_mag_walk": {
+     "frames": 75,
+     "loop": true,
+     "root_motion": true,
+     "slip_mm": {
+      "foot_right": 0.0,
+      "foot_left": 0.0
+     },
+     "reach_short_mm": {}
+    },
+    "eva_mag_attach": {
+     "frames": 36,
+     "loop": false,
+     "root_motion": false,
+     "slip_mm": {
+      "foot_right": 0.0,
+      "foot_left": 0.0
+     },
+     "reach_short_mm": {}
+    },
+    "eva_mag_release": {
+     "frames": 36,
+     "loop": false,
+     "root_motion": false,
+     "slip_mm": {
+      "foot_right": 0.0,
+      "foot_left": 0.0
+     },
+     "reach_short_mm": {}
+    },
+    "eva_float": {
+     "frames": 120,
+     "loop": true,
+     "root_motion": false,
+     "slip_mm": {},
+     "reach_short_mm": {}
+    },
     "EVA_SYSTEM_POSES": {
      "frames": 90,
      "loop": false,
@@ -3530,6 +3734,116 @@
      },
      "head": {
       "max_deg": 4.0,
+      "limit_deg": 20.0,
+      "ok": true
+     }
+    },
+    "eva_mag_stand": {
+     "elbow": {
+      "max_deg": 35.1,
+      "limit_deg": 115.0,
+      "ok": true
+     },
+     "knee": {
+      "max_deg": 28.3,
+      "limit_deg": 105.0,
+      "ok": true
+     },
+     "shoulder": {
+      "max_deg": 27.3,
+      "limit_deg": 130.0,
+      "ok": true
+     },
+     "head": {
+      "max_deg": 6.0,
+      "limit_deg": 20.0,
+      "ok": true
+     }
+    },
+    "eva_mag_walk": {
+     "elbow": {
+      "max_deg": 35.1,
+      "limit_deg": 115.0,
+      "ok": true
+     },
+     "knee": {
+      "max_deg": 54.8,
+      "limit_deg": 105.0,
+      "ok": true
+     },
+     "shoulder": {
+      "max_deg": 32.8,
+      "limit_deg": 130.0,
+      "ok": true
+     },
+     "head": {
+      "max_deg": 8.0,
+      "limit_deg": 20.0,
+      "ok": true
+     }
+    },
+    "eva_mag_attach": {
+     "elbow": {
+      "max_deg": 35.1,
+      "limit_deg": 115.0,
+      "ok": true
+     },
+     "knee": {
+      "max_deg": 42.0,
+      "limit_deg": 105.0,
+      "ok": true
+     },
+     "shoulder": {
+      "max_deg": 30.7,
+      "limit_deg": 130.0,
+      "ok": true
+     },
+     "head": {
+      "max_deg": 6.0,
+      "limit_deg": 20.0,
+      "ok": true
+     }
+    },
+    "eva_mag_release": {
+     "elbow": {
+      "max_deg": 50.2,
+      "limit_deg": 115.0,
+      "ok": true
+     },
+     "knee": {
+      "max_deg": 37.7,
+      "limit_deg": 105.0,
+      "ok": true
+     },
+     "shoulder": {
+      "max_deg": 44.0,
+      "limit_deg": 130.0,
+      "ok": true
+     },
+     "head": {
+      "max_deg": 10.0,
+      "limit_deg": 20.0,
+      "ok": true
+     }
+    },
+    "eva_float": {
+     "elbow": {
+      "max_deg": 50.2,
+      "limit_deg": 115.0,
+      "ok": true
+     },
+     "knee": {
+      "max_deg": 37.7,
+      "limit_deg": 105.0,
+      "ok": true
+     },
+     "shoulder": {
+      "max_deg": 43.2,
+      "limit_deg": 130.0,
+      "ok": true
+     },
+     "head": {
+      "max_deg": 10.0,
       "limit_deg": 20.0,
       "ok": true
      }

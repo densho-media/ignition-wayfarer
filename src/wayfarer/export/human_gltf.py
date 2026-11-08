@@ -84,8 +84,9 @@ def main():
     ap = argparse.ArgumentParser(); ap.add_argument('--only', nargs='*'); ap.add_argument('--out', type=Path, default=ROOT/'godot/generated/characters')
     args = ap.parse_args(argv); args.out.mkdir(parents=True, exist_ok=True)
     keys = args.only or list(hs.load(ROOT)['human'])
+    data = hs.load(ROOT)
     manifest = dict(contract=dict(rig='game_engine', bones=len(hs.BONES), axes='Godot: x right of the model, y up, +z model front'),
-                    characters={k: export(k, args.out) for k in keys})
+                    locomotion=data.get('locomotion', {}), characters={k: export(k, args.out) for k in keys})
     (args.out/'characters.json').write_text(json.dumps(manifest, indent=1)+'\n')
     print('WF_EXPORTED', ' '.join(f"{k}:{v['glb_bytes']}" for k, v in manifest['characters'].items()), flush=True)
 

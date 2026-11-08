@@ -124,8 +124,7 @@ def review(key, args, report):
     clear_pose(rig); body = body_mesh(rig); rest, vol0 = evaluated(body)
     edges = np.array([tuple(e.vertices) for e in body.data.edges])
     H = built['stature_m']; P = hs.proportions({b.name: (tuple(b.head_local), tuple(b.tail_local)) for b in rig.data.bones}, H)
-    solver = Solver(rig, hs.actions(H, json.loads(json.dumps({'walk_speed_m_s': 1, 'walk_cadence_steps_min': 100, 'step_height_m': .1,
-                                                             'crawl_speed_m_s': .3, 'climb_rungs_per_s': 1})), 30, .45, .3, P)['rest'])
+    solver = Solver(rig, hs.actions(H, hs.load()['actions'], 30, .45, .3, P)['rest'])
     cam = setup_render(args.size); shots = []; rdir = args.renders; rdir.mkdir(parents=True, exist_ok=True)
     clear_pose(rig)
     for view in ('f', 's'):

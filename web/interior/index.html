@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Explore Interior — G.U. Wayfarer 001</title>
-<meta name="description" content="Enter the G.U. Wayfarer 001: board the ship from the development station, cross into a rotating habitat ring and walk it, in the interactive Godot experience.">
+<meta name="description" content="Stand inside the G.U. Wayfarer 001 as a crew trainee: walk, run and jump in the spin gravity of habitat ring A, or take the full excursion from the docking station.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%2307090c'/%3E%3Cpath d='M2 8h12M8 3v10' stroke='%23e0a040' stroke-width='2'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="../site.css">
 </head>
@@ -13,30 +13,29 @@
   <header>
     <p class="eyebrow"><a href="../">← Wayfarer</a> · Experience · inside</p>
     <h1>EXPLORE INTERIOR</h1>
-    <p class="lead">Enter the spacecraft as a crew trainee. You start in the development station docked to Wayfarer's nose: work the
-      airlock, board the ship, ask it to undock and spin its habitat rings up, ride the transfer drum, climb down into spin gravity and
-      walk a whole ring round, through every sector and corridor, before you come back the same way. One continuous run under your
-      control, with the ship's instructor pointing out what to do next.</p>
+    <p class="lead">Stand inside the spacecraft as a crew trainee, on the deck of habitat ring A. Wayfarer is coasting and the ring turns
+      at 4 rpm, so the deck presses up at about half of Earth's gravity: there is no other gravity on board. Walk the curved corridor,
+      run, jump and feel how a rotating floor behaves. When you want the whole journey, the full excursion starts at the development
+      station and takes you through the airlock, the transfer drum and down the ladder into the ring.</p>
   </header>
   <section class="panel">
     <p id="size">The engine and the ship package download when you press Start.</p>
     <p><button id="start" type="button" disabled>Start · Explore Interior</button> <a class="button secondary" href="../exterior/">Explore Exterior instead</a></p>
+    <p>Other starts: <button class="secondary" type="button" data-start-hash="#interior-excursion" disabled>Full excursion from the station</button></p>
     <p id="cap" class="note"></p>
   </section>
   <section class="grid2">
     <div class="panel">
       <h2>Controls</h2>
       <ul class="plain">
-        <li><b>Desktop:</b> click the view to look around (Esc frees the cursor) · <b>W/S</b> move along the line or walk, <b>A/D</b>
-          step sideways · <b>E</b> use what you face (hatch, door, drum, ladder, the ring branch) · <b>O</b> ship operations at a trunk
-          panel (undock, spin the rings up) · <b>V</b> view your body · <b>M</b> ring map · <b>F10</b> all controls and rebinding.</li>
-        <li><b>Touch:</b> left thumb moves where the body can walk or climb, right thumb drags to look; the Use, Ops, View and Map buttons
-          appear when they apply. Landscape works best.</li>
-        <li><b>Where to go:</b> the goal at the top left always says what to do next and which key does it. Guided objectives lead
-          you through the ship, and you are free to wander: every door that is open can be walked through, and shut hatches and doors
-          open with Use.</li>
-        <li><b>Back and exit:</b> the way back to the station is the way you came. <b>← Exit</b> (bottom left) leaves and unloads the
-          engine; your browser's Back button does the same.</li>
+        <li><b>On the deck:</b> click the view to look around (Esc frees the cursor) · <b>W/A/S/D</b> walk, relative to the camera ·
+          <b>Shift</b> with <b>W</b> run · <b>Space</b> jump (a push of the legs; no second jump in the air) · <b>C</b> third-person or
+          first-person view · <b>R</b> training reset to the ring A landing (labelled and counted).</li>
+        <li><b>In the ship:</b> <b>E</b> use what you face (a corridor door, the ladder back up, a hatch, the drum) · <b>O</b> ship
+          operations at a trunk panel · <b>M</b> ring map · <b>F10</b> all controls and rebinding.</li>
+        <li><b>Touch:</b> left thumb walks, right thumb drags to look; the Use, Ops, View and Map buttons appear when they apply. Landscape
+          works best.</li>
+        <li><b>Back and exit:</b> <b>← Exit</b> (bottom left) leaves and unloads the engine; your browser's Back button does the same.</li>
       </ul>
     </div>
     <div class="panel">
@@ -46,7 +45,10 @@
           modes are the project's own simulation, running in the browser build of the native Godot project.</li>
         <li>SIMULATION_ONLY: the ring-ramp time-lapse and the closure timings are display choices; no transfer timing, procedure or
           interlock is released. Learning stations in ring A explain what you see.</li>
-        <li>The trainee appears as a proxy body; the native development runtime carries the full characters.</li>
+        <li>Spin gravity, not a gravity setting: the deck's pull comes from the ring's rotation (about 0.49 g at the feet), and moving
+          bodies feel its Coriolis part. A jump of 1.4 m/s rises about 0.20 m and lands a few centimetres off the take-off spot.</li>
+        <li>You are the newcomer, the project's MPFB character. Physics moves the body; the walk, run, jump, fall and landing clips
+          follow its measured speed, so the feet do not slide. Speeds, the jump and the camera are PROTOTYPE values (docs/LOCOMOTION.md).</li>
         <li>Tested in Chromium-based desktop browsers and in Chrome's phone and tablet emulation with touch; real phones, Firefox and
           Safari are not yet verified. On phones the 3-D view renders at a reduced, frame-rate-adaptive resolution.</li>
         <li>Built with the Godot Engine, MIT licence: <a href="../play/GODOT_LICENSE.txt">licence</a>,

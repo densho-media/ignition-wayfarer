@@ -473,6 +473,14 @@ candidates of all nine classes are separate accessory assets (docs/ACCESSORIES.m
 
 ## K — Finish the two characters, EVA training and production art
 
+- [ ] **LOCO — Character locomotion in both experiences (owner brief 2026-11-08; docs/LOCOMOTION.md).** Built and checked: Explore
+  Interior starts the newcomer on ring A's deck (walk, run, jump, land, third-person camera; `--check-locomotion`), Explore Exterior
+  starts the Y155 suit on a PROTOTYPE magnetic walkway (per-boot attach, bounded pull and friction, gait, release, push-off; 10 EVA
+  checks), the characters ride in the browser package (`workflow.py play-characters`). Open: the owner's hands-on review and a decision on
+  the magnetic boots and walkway (PROTOTYPE, no owner row; FLIGHT_EVA HOLD); the locomotion speeds, jump and camera values; foot IK on
+  the deck and per-boot foot placement; touch controls for Explore Exterior; a hands-on run on a real phone and in Firefox and Safari.
+  **Done when:** the owner has played both and accepted or changed the values and the boots.
+
 - [ ] **K01 — Set the pair's approved appearance. OWNER REVIEW; AFTER C01.** Consume Tale WTF-16, Art Style and Fashion for the
   instructor and newcomer: identity/POV policy, silhouette, face/hair/skin, garments and kit. Reuse MPFB and existing fitted bodies.
   **Done when:** selected greybox/look is reviewed at ship and human scale; no prototype instructor body is silently treated as casting.
@@ -498,10 +506,9 @@ candidates of all nine classes are separate accessory assets (docs/ACCESSORIES.m
   EVA ends on feedwater at 6.1 h; the docked-arm assistance stays a study; Brow Games rules (reserve floor, gates).
   **Done when:** the owner adopts or changes the numbers and the review items have owner-accepted analyses.
 
-- [ ] **EVA-OPS — EVA Operations (PROTOTYPE, docs/EVA_OPERATIONS.md).** Built and checked headless (34 checks incl. a scripted First
-  Flight). Open: owner review of the playable scene and of the RC-1 dock-channel cartridge and station rack (PROTOTYPE accessories);
-  browser verification on the next web build (the equivalence session now runs the EVA check); the canonical suit and drone GLBs in the
-  web package (proxies there today); hand-over-hand rail translation without thrust; Brow Games rules on the same bodies.
+- [ ] **EVA-OPS — EVA Operations (PROTOTYPE, docs/EVA_OPERATIONS.md).** Built and checked headless (44 checks incl. a scripted First
+  Flight and the magnetic boots). Open: owner review of the playable scene and of the RC-1 dock-channel cartridge and station rack (PROTOTYPE accessories);
+  hand-over-hand rail translation without thrust; Brow Games rules on the same bodies.
   **Done when:** the owner has flown it and accepted or changed the accessories, and the web build's EVA check passes.
 
 - [ ] **K04 — Finish accepted exterior and interior art (FUT-003). AFTER C01/K01; D06/G for affected rooms; F/H/I for affected hardware.**

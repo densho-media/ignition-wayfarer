@@ -79,9 +79,9 @@ const GODOT_THREADS_ENABLED = $GODOT_THREADS_ENABLED;
   const bar = document.querySelector('#bar span');
   const EXPERIENCES = {
     interior: { title: 'EXPLORE INTERIOR', back: '../interior/', hash: '#interior',
-                hint: 'Click the view to look, W/S move, A/D step, E use, O ship operations, M map. The goal at the top left says what to do next.' },
+                hint: 'Click the view to look. W/A/S/D walk, Shift run, Space jump, C camera, R training reset; E use, O ship operations, M map. The goal at the top left says what to do next.' },
     exterior: { title: 'EXPLORE EXTERIOR', back: '../exterior/', hash: '#exterior',
-                hint: 'W/S A/D R/F thrust, I/K J/L U/O rotate, B brake, G grab, X release or dock the drone, 1/2 astronaut or drone, F4 the guided flight.' },
+                hint: 'On the walkway: W/S walk on the magnetic boots, J/L turn, V boots on/off, Space push off. Flying: W/S A/D R/F thrust, I/K J/L U/O rotate, B brake, G grab, T tether, X drone, 1/2 astronaut or drone, F4 guided flight, F5 training reset.' },
   };
   const experienceOf = h => /eva|exterior/i.test(h || '') ? 'exterior' : 'interior';
   let experience = experienceOf(location.hash);
@@ -92,13 +92,14 @@ const GODOT_THREADS_ENABLED = $GODOT_THREADS_ENABLED;
     document.getElementById('hint').textContent = x.hint;
     document.title = x.title.replace(/\w\S*/g, w => w[0] + w.slice(1).toLowerCase()) + ' · G.U. WAYFARER 001';
     document.getElementById('exit').href = x.back;
-    if (location.hash !== x.hash) history.replaceState(null, '', location.pathname + location.search + x.hash);
+    // a start variant (#interior-excursion, #exterior-hatch, #exterior-first-flight) is kept while it names this experience
+    if (experienceOf(location.hash) !== experience || !location.hash) history.replaceState(null, '', location.pathname + location.search + x.hash);
     if (window.wayfarerPlay) window.wayfarerPlay.experience = experience;
   }
   showExperience(experience);
   window.wayfarerScene = showExperience;          // called by the engine when a scene change switches the experience
   const ALLOWED = ['--disable-render-loop', '--fixed-fps', '30', '60', '--', '--touch', '--no-touch', '--touch-probe', '--check-excursion',
-                   '--eva', '--check-eva-ops'];
+                   '--eva', '--check-eva-ops', '--check-locomotion', '--excursion', '--hatch', '--first-flight'];
   const asked = new URLSearchParams(location.search).getAll('arg');
   const args = asked.filter(a => ALLOWED.includes(a));
   function fail(err) {

@@ -21,6 +21,7 @@ var drone_face := Vector3.ZERO
 var drone_vmax := 0.5
 var drone_up := Vector3.UP
 var results := {}
+const CHECKS := 44                    # 34 EVA Operations checks + 10 magnetic-boot checks (LOCO-002)
 var fails: Array = []
 var t0 := 0
 
@@ -46,10 +47,11 @@ func run(o) -> void:
 	if _want("rescue_fetch"): await _rescue_fetch()
 	if _want("refusals"): await _refusals()
 	if _want("docked_idle"): await _docked_idle()
+	if _want("mag_boots"): await _mag_boots()
 	if _want("first_flight"): await _first_flight()
 	_ledger()
-	if only == "" and results.size() < 34:
-		fails.append("only %d of 34 checks ran" % results.size())
+	if only == "" and results.size() < CHECKS:
+		fails.append("only %d of %d checks ran" % [results.size(), CHECKS])
 	var out := {"result": "PASS" if fails.is_empty() else "FAIL", "fail": fails, "tests": results, "sim_s": snappedf(ops.t_sim, 0.1),
 		"wall_s": snappedf((Time.get_ticks_msec() - t0) / 1000.0, 0.1)}
 	print("WF_GODOT_EVA_OPS ", JSON.stringify(out))
@@ -473,6 +475,115 @@ func _docked_idle() -> void:
 	suit_goal = null
 	_ok("docked_hold_and_cruise_gas", idle < 0.005 and cruise < 0.001, {"idle_30s_kg": idle, "accel_10s_kg": g0 - g1, "cruise_kg_per_s": cruise, "v": s.linear_velocity.length(),
 		"w": s.angular_velocity.length()})
+
+# ------------------------------------------------------------------------------------------------------------- magnetic boots
+## LOCO-002: the Explore Exterior start and the boots' bounded physics, through the player's actions and stick.
+func _mag_boots() -> void:
+	_clear()
+	ops.start_free(false)
+	ops.start_walkway(false)
+	ops.active = "suit"
+	var s: WfEvaBody = ops.suit
+	var b: WfMagBoots = s.boots
+	var m: Dictionary = ops.pkg["mag_boots"]
+	await _steps(30)
+	var a_field: Vector3 = s.field_now
+	_ok("mag_start_attached", b != null and b.count() == 2 and s.standing and s.tether_on and a_field.length() < 1e-6 and ops.frame_mode == "DRIFT",
+		{"boots": b.record() if b != null else {}, "standing": s.standing, "field_m_s2": a_field.length(), "tether": s.tether_on, "frame": ops.frame_mode})
+	# holding still in drift: no field, no gas; the pads alone keep the body on the plate
+	var p0 := s.global_position
+	var g0: float = ops.total_gas()
+	await _steps(180)
+	_ok("mag_hold_in_drift", s.global_position.distance_to(p0) < 0.005 and absf(ops.total_gas() - g0) < 1e-9 and b.count() == 2
+		and s.angular_velocity.length() < 0.002,
+		{"moved_m": s.global_position.distance_to(p0), "gas_kg": g0 - ops.total_gas(), "attached": b.count(),
+		"rate_deg_s": rad_to_deg(s.angular_velocity.length())})
+	# walking: the gait keeps one boot down, at the clip's speed, with the feet only (no gas)
+	b.single_support_min = 2
+	var lifts0 := b.lifts
+	t_in = Vector3(0, 0, 1)
+	await _steps(480)
+	var v := s.linear_velocity.length()
+	var want := float(m["gait"]["speed_m_s"])
+	_ok("mag_walk_one_boot_down", absf(v - want) < 0.04 and b.single_support_min >= 1 and b.lifts - lifts0 >= 4 and absf(ops.total_gas() - g0) < 1e-9
+		and (not ops.suit_model_ok or ops.suit_rig.current == "eva_mag_walk"),
+		{"v_m_s": v, "want_m_s": want, "min_attached": b.single_support_min, "lifts": b.lifts - lifts0, "gas_kg": g0 - ops.total_gas(),
+		"clip": ops.suit_rig.current if ops.suit_model_ok else "(no model)", "rate": ops.suit_rig.rate_for("eva_mag_walk", v) if ops.suit_model_ok else 0.0})
+	# the walkway's end: the stepping boot would land off the plate, so the walk stops there
+	var t_edge := await _until(func(): return b.blocked == "edge" and s.linear_velocity.length() < 0.005, 40.0)
+	_ok("mag_stops_at_walkway_edge", t_edge >= 0.0 and b.on_plate and s.global_position.x < float(m["walkway_x_m"][1]) and b.count() >= 1,
+		{"t_s": t_edge, "x": s.global_position.x, "x_end": m["walkway_x_m"][1], "attached": b.count(), "blocked": b.blocked})
+	t_in = Vector3.ZERO
+	await _steps(60)
+	# pull-off: the suit's own thrusters (about 18 N up) cannot pull the pads (2 x attach_force_n) off the plate
+	t_in = Vector3(0, 1, 0)
+	var gap_max := 0.0
+	for i in 120:
+		await _steps(1)
+		gap_max = maxf(gap_max, b.gap)
+	t_in = Vector3.ZERO
+	_ok("mag_pull_off_bounded", b.count() == 2 and gap_max < float(m["release_gap_m"]), {"attached": b.count(), "gap_max_mm": gap_max * 1000.0,
+		"pull_n": 2.0 * float(m["attach_force_n"]), "thrust_n": s.delivered_f.length()})
+	# shear: a small along-axis field is held by the soles' friction; a strong one exceeds friction x the pads' load and the boots slide
+	var cap := float(m["sole_friction"]) * 2.0 * float(m["attach_force_n"]) / s.total_mass() / 9.80665       # g the friction can hold
+	await _steps(30)
+	p0 = s.global_position
+	ops.field.a_ship = WfFrames.v3(0.5 * cap * 9.80665, 0.0, 0.0)
+	await _steps(120)
+	var held_low := s.global_position.distance_to(p0)
+	var slips0 := b.slips
+	ops.field.a_ship = WfFrames.v3(2.0 * cap * 9.80665, 0.0, 0.0)
+	await _steps(60)
+	var slid := s.global_position.distance_to(p0)
+	ops.field.a_ship = WfFrames.v3(0, 0, 0)
+	await _steps(120)
+	_ok("mag_shear_friction_limit", held_low < 0.01 and slid > 0.05 and b.slips > slips0, {"friction_holds_g": cap, "moved_at_half_m": held_low,
+		"moved_at_double_m": slid, "slips": b.slips - slips0})
+	# release (V): both pads off; with no field the body stays where it is, and nothing holds it to the plate any more
+	ops.start_walkway(false)
+	await _steps(30)
+	ops.do_action("evaops.boots")
+	await _steps(60)
+	var free_v := s.linear_velocity.length()
+	t_in = Vector3(0, 1, 0)
+	await _steps(90)
+	t_in = Vector3.ZERO
+	await _steps(30)
+	_ok("mag_release_then_eva_physics", not b.armed and b.count() == 0 and free_v < 0.005 and b.gap > 0.02 and not s.standing,
+		{"v_after_release": free_v, "gap_m_after_thrust": b.gap, "standing": s.standing})
+	# push off (Space on the boots): release and a leg push along the plate normal
+	ops.start_walkway(false)
+	await _steps(30)
+	var n: Vector3 = b.normal
+	ops.do_action("evaops.push")
+	await _steps(30)
+	var vn: float = s.linear_velocity.dot(n)
+	_ok("mag_push_off", b.count() == 0 and absf(vn - float(ops.pkg["rules"]["push_dv_m_s"])) < 0.03 and s.tether_on,
+		{"v_normal": vn, "push_dv": ops.pkg["rules"]["push_dv_m_s"], "tether": s.tether_on, "anchor": m["tether_anchor"]})
+	# re-attach: drifting back onto the plate with the pads on, slowly, the boots catch
+	ops.start_walkway(false)
+	await _steps(10)
+	b.arm(false)
+	var f: Transform3D = ops.suit_frame()
+	ops.place_suit(f.translated(n * 0.15), -n * 0.08)
+	b.arm(true)
+	var t_cap := await _until(func(): return b.count() == 2, 6.0)
+	var v_cap := s.linear_velocity.length()
+	await _steps(60)
+	_ok("mag_reattach_on_contact", t_cap >= 0.0 and b.count() == 2 and s.linear_velocity.length() < 0.01 and s.standing,
+		{"t_s": t_cap, "v_at_capture": v_cap, "v_after_1s": s.linear_velocity.length()})
+	# only the walkway: on the bare collar skin beside it the pads find nothing
+	var off_x := float(m["walkway_x_m"][0]) - 1.2
+	var phi := float(m["start_phi_rad"])
+	var up := Vector3(0, cos(phi), sin(phi))
+	ops.place_suit(Transform3D(Basis(up.cross(Vector3.RIGHT).normalized(), up, Vector3.RIGHT), ops.world.walkway_point(m, off_x, phi, 0.002)))
+	b.arm(false)
+	b.arm(true)
+	await _steps(60)
+	_ok("mag_only_on_walkway", b.count() == 0 and not s.standing, {"x": off_x, "attached": b.count(), "standing": s.standing})
+	_clear()
+	ops.start_free(false)
+	await _steps(5)
 
 # ----------------------------------------------------------------------------------------------------------------- First Flight
 ## Fly the astronaut to p; with a lift, go out from the surface first and come down onto the target (clear of the hatch fitting).

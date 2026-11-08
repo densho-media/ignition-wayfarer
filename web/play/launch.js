@@ -30,4 +30,10 @@ function wayfarerLaunch(opts) {
     cap.textContent = notes.join(' ');
   })();
   start.addEventListener('click', () => { if (play && !start.dataset.blocked) location.assign(playDir + play.entry + (opts.hash || '')); });
+  // LOCO-001/002: the other starts of the same package (the full station excursion, the hatch, the guided First Flight)
+  for (const b of document.querySelectorAll('[data-start-hash]')) {
+    b.disabled = true;
+    const ready = setInterval(() => { if (play || start.dataset.blocked) { clearInterval(ready); b.disabled = !play || !!start.dataset.blocked; } }, 200);
+    b.addEventListener('click', () => { if (play && !start.dataset.blocked) location.assign(playDir + play.entry + b.dataset.startHash); });
+  }
 }

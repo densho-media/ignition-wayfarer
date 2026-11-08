@@ -36,6 +36,7 @@ var closures := {}                # manifest closure name -> {node, binding, axi
 var ring_ids := ["", ""]          # rotor id of ring A, ring B
 var drum_ids := ["", ""]
 var check: WfExcursionCheck = null
+var loco_check: WfLocomotionCheck = null
 var circ_doors := {}              # CIRC door id -> {node, rest, travel, value, target, collider, rec, ring}
 var world := Node3D.new()
 var builder: WfExcursionBuild
@@ -75,6 +76,7 @@ var refusal := ""
 var refusal_t := 0.0
 var cmd_override := INF           # check: the line command instead of the keys
 var walk_override := Vector3.INF  # check: the walk direction instead of the keys
+var run_override := false         # check: Shift held with the walk override
 var log: Array = []
 
 # the excursion's own record (what the HUD's checklist shows)
@@ -90,11 +92,31 @@ var hud_status := Label.new()
 var hud_check := Label.new()
 var ring_map: Control = null
 var learning: WfLearning = null   # UJ-013 learning stations (WHAT / WHY / SHOW ME), from the package
+# LOCO-001 (docs/LOCOMOTION.md): the start (RING: on ring A's deck with the rings turning, the default; STATION: the full excursion from the
+# development station), the trainee's visible MPFB body and its locomotion on the decks.
+var start_mode := "RING"
+var char_rig: WfCharacterRig = null
+var loco: WfLocomotion = null
+var loco_params := {}
+var jump_queued := false
+var spawn_at := Vector3.ZERO
+var cam_target := Vector3.INF
+var cam_clipped := 0.0             # how far the camera was pulled in by geometry in the last frame (m)
+var resets := 0
+var cam_close := false             # the follow camera had no room this frame (the view fell back to the eyes)
 
 ## EVA Operations (EVA-OPS-001) is a sibling scene: `-- --eva` (native) or `#exterior` (`#eva`) on the browser page, the Explore
 ## Exterior experience, opens it instead of the walk (WfWebPage).
 static func eva_requested() -> bool:
 	return "--eva" in OS.get_cmdline_user_args() or WfWebPage.requested() == "exterior"
+
+## LOCO-001: where the walk begins. The excursion check and `--excursion` (web: #interior-excursion) run the full station-to-ring walk;
+## everything else starts on ring A's deck.
+static func requested_start() -> String:
+	var args := OS.get_cmdline_user_args()
+	if "--check-excursion" in args or "--excursion" in args or WfWebPage.start_variant() == "excursion":
+		return "STATION"
+	return "RING"
 
 ## The walk's member nodes are made with the script but enter the tree only in _ready; when EVA Operations opens instead, free
 ## them, or they outlive the scene change and leak their light, camera and font resources at exit.
@@ -151,7 +173,10 @@ func _ready() -> void:
 		var bins := PackedByteArray()
 		bins.resize(BINS)
 		progress[r] = {"boarded": false, "entered": false, "bins": bins, "circuit": false, "back": false, "returned": false}
+	start_mode = requested_start()
 	_spawn()
+	if start_mode == "RING":
+		_ring_start()
 	_hud()
 	learning = WfLearning.new(by_name, layer, self, manifest)
 	if learning.welcome() != "":
@@ -164,6 +189,9 @@ func _ready() -> void:
 	if "--check-excursion" in OS.get_cmdline_user_args():
 		check = WfExcursionCheck.new()       # held: a RefCounted nobody holds is freed at its first await
 		check.run(self)
+	elif "--check-locomotion" in OS.get_cmdline_user_args():
+		loco_check = WfLocomotionCheck.new()
+		loco_check.run(self)
 
 # ---- package ---------------------------------------------------------------------------------------------------------------------------------
 
@@ -382,21 +410,94 @@ func _spawn() -> void:
 	lamp.omni_range = 9.0
 	lamp.light_energy = 0.35
 	camera.add_child(lamp)
-	var cap := CapsuleMesh.new()
-	cap.radius = actor.profile["radius_m"]
-	cap.height = actor.profile["height_m"]
-	var mi := MeshInstance3D.new()
-	mi.mesh = cap
-	var m := StandardMaterial3D.new()
-	m.albedo_color = Color(0.95, 0.5, 0.1)
-	mi.material_override = m
-	body_vis.add_child(mi)
+	_character()
 	view_root.add_child(body_vis)
 	enter_line("BOARD", 0.0)
 	# start looking down the boarding line (toward the tunnel and Wayfarer)
 	var d := ref_basis().inverse() * line.tangent(0.0)
 	yaw = atan2(-d.x, -d.z)
 	pitch = asin(clampf(d.y, -1.0, 1.0))
+
+## LOCO-001: the trainee's visible body is the newcomer MPFB character (generated/characters, characters.json); the capsule stays the
+## physics body and is never drawn. A missing character is reported on screen and to the page, not replaced by a proxy.
+func _character() -> void:
+	var meta_path := "res://generated/characters/characters.json"
+	var meta: Dictionary = {}
+	if FileAccess.file_exists(meta_path):
+		meta = JSON.parse_string(FileAccess.get_file_as_string(meta_path))
+	loco_params = meta.get("locomotion", {})
+	var who := str(loco_params.get("player", "newcomer"))
+	char_rig = WfCharacterRig.new()
+	char_rig.name = "Trainee"
+	if not char_rig.setup("res://generated/characters/%s.glb" % who, meta.get("characters", {}).get(who, {})):
+		push_warning("LOCO-001: the trainee character is missing from this package (%s)" % char_rig.missing)
+		var tag := Label3D.new()
+		tag.text = "CHARACTER MISSING: %s\n(run python3 tools/workflow.py characters, then runtime-export)" % char_rig.missing
+		tag.font_size = 28
+		tag.pixel_size = 0.002
+		tag.position = Vector3(0, 1.9, 0)
+		tag.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+		tag.modulate = Color(1.0, 0.35, 0.25)
+		body_vis.add_child(tag)
+	body_vis.add_child(char_rig)
+	loco = WfLocomotion.new(actor, char_rig, loco_params)
+
+## LOCO-001 development start: the trainee stands on ring A's deck at the foot of its crew-tube ladder (the landing in the landing sector),
+## Wayfarer undocked in COAST with both rings at 4 rpm, ring A's transfer drum synchronized and open to its tube, as the full excursion
+## leaves them on arrival. The field is the ring frame's (WfFrameField RING_A, COAST): about 0.50 g at the deck from the rotation, with
+## Coriolis; no other gravity exists. The ladder (E) leads back up into the full excursion.
+func _ring_start() -> void:
+	ctl = WfModeController.new(dyn, WfFrameField.new(dyn, "SHIP", "DOCKED"), "COAST")
+	station_offset = 1.0
+	station_target = 1.0
+	var w: float = ctl.omega_full(0)
+	vest[0].drum_w = w
+	vest[0].closures = {"STATIONARY": true, "RING": false}
+	drum[0] = {"mode": "SYNCED", "to": "RING", "t": 0.0, "from": 0.0}
+	for n in [_drum_door(0), _tube_hatch(0), _sector_leaf(0)]:
+		if closures.has(n):
+			closures[n]["value"] = 1.0
+			closures[n]["target"] = 1.0
+	progress["RING_A"]["boarded"] = true
+	var L: WfLine = lines["ACCESS_A"]
+	enter_line("ACCESS_A", L.length())
+	enter_walk("RING_A")
+	# out of the landing well (its chase leaves little headroom) onto the passage at the well's mouth, feet on the deck, facing along the
+	# circuit: the same point the excursion's walk leaves the well by
+	var c: Dictionary = stages["circuit"]["RING_A"]
+	var mouth := WfLine.g(c["landing_m"][1])
+	var axis_pt := Vector3(mouth.x, 0, 0)
+	var r_body := float(c["floor_radius_m"]) - float(actor.profile["height_m"]) * 0.5 - 0.01
+	spawn_at = axis_pt + (mouth - axis_pt).normalized() * r_body
+	actor.global_position = spawn_at
+	PhysicsServer3D.body_set_state(actor.get_rid(), PhysicsServer3D.BODY_STATE_TRANSFORM, actor.global_transform)
+	actor.linear_velocity = Vector3.ZERO
+	view_out = true
+	var nxt := WfLine.g(c["circuit_m"][1]) - spawn_at
+	nxt -= loco.deck_up() * nxt.dot(loco.deck_up())
+	loco.heading = nxt.normalized() if nxt.length() > 0.1 else loco.deck_up().cross(Vector3.RIGHT).normalized()
+	var dv := ref_basis().inverse() * loco.heading
+	yaw = atan2(-dv.x, -dv.z)
+	pitch = -0.12
+	_last_pos = Vector3.ZERO
+	_closure_colliders()
+	_apply_mechanisms()
+	_log("ring_start", {"pos": _vec(actor.global_position)})
+	say("Ring A, Wayfarer in COAST: the rings turn at 4 rpm and the deck presses up at about 0.50 g. Walk, run, jump. The ladder (%s) leads to the full excursion." % key("exc.use"))
+
+## TRAINING RESET (R): back to the ring A landing, standing still. A training aid, not a crew capability; counted.
+func training_reset() -> void:
+	if move != "WALK" or walk_zone != "RING_A":
+		say("Training reset: walk back to ring A first (the reset only returns you to its landing).")
+		return
+	actor.global_position = spawn_at
+	actor.linear_velocity = Vector3.ZERO
+	PhysicsServer3D.body_set_state(actor.get_rid(), PhysicsServer3D.BODY_STATE_TRANSFORM, actor.global_transform)
+	PhysicsServer3D.body_set_state(actor.get_rid(), PhysicsServer3D.BODY_STATE_LINEAR_VELOCITY, Vector3.ZERO)
+	_last_pos = Vector3.ZERO
+	resets += 1
+	_log("training_reset", {"n": resets})
+	say("TRAINING RESET: back at the ring A landing (a training aid; counted %d)." % resets)
 
 ## snap: the body is already at the line's pose there (a line handover); otherwise (the ladder taken from the deck) the hands draw it onto
 ## the line at no more than the line's pace (_step_line), never by a jump.
@@ -440,6 +541,8 @@ func enter_walk(zone: String) -> void:
 	_set_body_height("")
 	field.set_state(zone, "COAST")
 	field.alpha = PackedFloat64Array([0.0, 0.0, 0.0])
+	if loco != null:
+		loco.axis_point = Vector3(float(dyn["rings"][WfFrames.ring_index(zone)]["centre_x_m"]), 0, 0)
 	_log("walk", {"zone": zone, "pos": _vec(actor.global_position)})
 
 func ring_index() -> int:
@@ -486,7 +589,9 @@ func _unhandled_input(e: InputEvent) -> void:
 	match WfInput.key_of(e, ["excursion"]):
 		KEY_E: use()
 		KEY_O: ops()
-		KEY_V: view_out = not view_out
+		KEY_C: view_out = not view_out
+		KEY_SPACE: jump_queued = true
+		KEY_R: training_reset()
 		KEY_F9:
 			WfWebPage.scene("exterior")
 			get_tree().change_scene_to_file("res://scenes/eva_ops.tscn")
@@ -504,7 +609,7 @@ func say(text: String) -> void:
 ## The reference frame of the view: up is the body's up (the field's, on a deck; the line's head direction, weightless); forward the ship axis
 ## projected on the plane across it, so the view never flips as the ring turns or the body pivots.
 func ref_basis() -> Basis:
-	var up: Vector3 = actor.up_now if move == "WALK" else (line.at(ls)[1] as Vector3)
+	var up: Vector3 = loco.deck_up() if move == "WALK" else (line.at(ls)[1] as Vector3)
 	var fwd := Vector3.RIGHT - up * Vector3.RIGHT.dot(up)
 	if fwd.length() < 0.2:
 		fwd = Vector3.BACK - up * Vector3.BACK.dot(up)
@@ -815,12 +920,20 @@ func _line_transitions(cmd: float) -> void:
 func _step_walk(dt: float) -> void:
 	var b := ref_basis() * Basis.from_euler(Vector3(0, yaw, 0))
 	var d := Vector3.ZERO
+	var back_only := false
+	var run := false
 	if walk_override != Vector3.INF:
 		d = walk_override
+		run = run_override
 	else:
-		d -= b.z * (WfInput.strength("player.move_forward") - WfInput.strength("player.move_back"))
-		d += b.x * (WfInput.strength("player.move_right") - WfInput.strength("player.move_left"))
-	actor.walk_dir = d
+		var f := WfInput.strength("player.move_forward") - WfInput.strength("player.move_back")
+		var r := WfInput.strength("player.move_right") - WfInput.strength("player.move_left")
+		d -= b.z * f
+		d += b.x * r
+		back_only = f < -0.1 and absf(r) < 0.1
+		run = WfInput.held("exc.run") and f > 0.1
+	loco.step(dt, d, run, back_only, jump_queued)
+	jump_queued = false
 	# the circuit record: the ring angle the body has covered
 	var k := WfFrames.ring_index(walk_zone)
 	var cx: float = dyn["rings"][k]["centre_x_m"]
@@ -1062,8 +1175,12 @@ func _process(dt: float) -> void:
 	if _page_t >= 1.0:                   # the page's state record (browser check): where the body is and how it moves
 		_page_t = 0.0
 		var p := actor.global_position
-		WfWebPage.publish("wayfarerWalk", {"move": move, "x": snappedf(p.x, 0.01), "y": snappedf(p.y, 0.01), "z": snappedf(p.z, 0.01),
-			"goal": _goal_text().left(80)})
+		var rec := {"move": move, "x": snappedf(p.x, 0.01), "y": snappedf(p.y, 0.01), "z": snappedf(p.z, 0.01),
+			"goal": _goal_text().left(80), "start": start_mode, "zone": walk_zone if move == "WALK" else line.zone,
+			"g": snappedf(actor.field_now.length() / 9.80665, 0.001), "third_person": view_out}
+		if loco != null:
+			rec.merge(loco.record())
+		WfWebPage.publish("wayfarerWalk", rec)
 	var rc: Dictionary = learning.remote_camera() if learning != null else {}
 	var f: Dictionary = _frame_pivot() if rc.is_empty() else frames["STATIONARY"]     # a station's remote camera rides the stationary ship
 	if view_root.get_parent() != f["node"]:
@@ -1072,14 +1189,16 @@ func _process(dt: float) -> void:
 	var lk := WfInput.take_look()
 	yaw -= lk.x
 	pitch = clampf(pitch - lk.y, -1.45, 1.45)
-	body_vis.transform = actor.global_transform
 	var look := look_basis()
-	var up: Vector3 = actor.up_now if move == "WALK" else (line.at(ls)[1] as Vector3)
+	var up: Vector3 = loco.deck_up() if move == "WALK" else (line.at(ls)[1] as Vector3)
+	_body_visual(up)
 	var eye := actor.global_position + up * (EYE_UP if not tucked() else 0.2)
 	var local := Transform3D(look, eye)
 	if view_out:
-		local = Transform3D(look, eye - look.z * 2.2 + up * 0.25)
-	body_vis.visible = view_out
+		var follow := _follow_camera(look, up, dt)
+		if not cam_close:
+			local = follow
+	body_vis.visible = view_out and not cam_close
 	if not rc.is_empty():
 		var ce := Vector3(rc["eye"][0], rc["eye"][2], -rc["eye"][1])
 		var ct := Vector3(rc["target"][0], rc["target"][2], -rc["target"][1])
@@ -1089,6 +1208,61 @@ func _process(dt: float) -> void:
 	refusal_t = maxf(refusal_t - dt, 0.0)
 	_update_lamps()
 	_update_hud()
+
+## LOCO-001: the trainee model under the capsule, facing its heading on a deck; on a line it hangs along the line's up, facing along it,
+## in the climbing clip on a ladder run and the floating posture elsewhere.
+func _body_visual(up: Vector3) -> void:
+	if move == "WALK":
+		body_vis.transform = loco.model_transform()
+		loco.animate()
+		return
+	var t := line.tangent(ls)
+	var fwd := t - up * t.dot(up)
+	if fwd.length() < 0.1:
+		fwd = WfLocomotion._any_perp(up)
+	fwd = fwd.normalized()
+	var x := up.cross(fwd).normalized()
+	body_vis.transform = Transform3D(Basis(x, up, fwd), actor.global_position - up * float(actor.profile["height_m"]) * 0.5)
+	if char_rig != null and char_rig.ok:
+		var ph := str(line.phase[clampi(line.s.bsearch(ls), 0, line.phase.size() - 1)])
+		if ph == "run" or ph == "ladder":
+			char_rig.play("climb", maxf(0.05, absf(lv)) / maxf(char_rig.clip_speed.get("climb", 0.5), 0.05), 0.3)
+		else:
+			char_rig.play("fall", 0.5, 0.4)
+
+## Third person: behind and above the body along the view, kept on the ring's local up; pulled in where the colliders would put the camera
+## inside a wall, deck or overhead (a ray from the follow point, the same colliders the body walks on).
+func _follow_camera(look: Basis, up: Vector3, dt: float) -> Transform3D:
+	var tgt := actor.global_position + up * float(loco_params.get("camera_height_m", 0.55))
+	if cam_target == Vector3.INF or cam_target.distance_to(tgt) > 3.0:
+		cam_target = tgt
+	cam_target = cam_target.lerp(tgt, 1.0 - exp(-dt * 14.0))
+	var dist := float(loco_params.get("camera_distance_m", 2.4))
+	cam_clipped = 0.0
+	cam_close = false
+	# behind the view along it; where the overhead stops that (a 2.1 m corridor), the same bearing level with the follow point
+	var flat := look.z - up * look.z.dot(up)
+	var tries: Array = [look.z * dist + up * 0.15]
+	if flat.length() > 0.2:
+		tries.append(flat.normalized() * dist)
+	var best := Vector3.INF
+	var best_d := -1.0
+	for off in tries:
+		var want: Vector3 = cam_target + off
+		var q := PhysicsRayQueryParameters3D.create(cam_target, want, LAYER)
+		q.exclude = [actor.get_rid()]
+		var hit := get_world_3d().direct_space_state.intersect_ray(q)
+		var got := dist if hit.is_empty() else cam_target.distance_to(hit["position"]) - 0.18
+		if got > best_d:
+			best_d = got
+			best = cam_target + (off as Vector3).normalized() * minf(got, (off as Vector3).length())
+		if got >= dist - 0.01:
+			break
+	cam_clipped = maxf(0.0, dist - best_d)
+	if best_d < 0.6:
+		cam_close = true                       # no room behind the body: look from its eyes this frame instead of from inside its head
+		return Transform3D()
+	return Transform3D(Basis.looking_at(cam_target - best, up), best)
 
 # ---- record ----------------------------------------------------------------------------------------------------------------------------------
 
@@ -1482,6 +1656,10 @@ func _goal_text() -> String:
 			return "DEBRIEF DONE: leave before First Ignition. Walk to the landing well, face the ladder and press %s, climb the crew tube (%s, look up), cross the drum to the trunk, ask the ship to dock (%s) and float back to the station." % [key("exc.use"), mv, key("exc.ops")]
 		if rec["circuit"]:
 			return "CIRCUIT COMPLETE. Walk back to the landing well, face the ladder and press %s, then climb (%s, look up)." % [key("exc.use"), mv]
+		if start_mode == "RING":
+			return "RING %s, spin gravity %.2f g. %s%s%s%s walk, hold %s to run, %s jump, mouse look, %s camera, %s training reset. Doors and the ladder up to the full excursion: %s." % [
+				walk_zone.right(1), actor.field_now.length() / 9.80665, key("player.move_forward"), key("player.move_left"), key("player.move_back"),
+				key("player.move_right"), key("exc.run"), key("exc.jump"), key("exc.view"), key("exc.reset"), key("exc.use")]
 		return "RING %s (spin gravity %.2f g). Walk the whole circumference through every sector and corridor: %d %% covered. Doors: %s." % [walk_zone.right(1),
 			actor.field_now.length() / 9.80665, int(100.0 * rec["bins"].count(1) / BINS), key("exc.use")]
 	if w == "trunk" and line.id == "BOARD":

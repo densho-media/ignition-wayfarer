@@ -92,6 +92,17 @@ translation_speed_m_s = 0.20       # display pace of hand-over-hand translation 
 abort_speed_m_s = 0.32
 hand_stride_m = 0.50
 
+# LOCO-002 magnetic-boot gait clips (eva_suit.mag_*; PROTOTYPE motion: magnetic boots are not canon). The boot physics (holding
+# force, friction, capture) is in data/eva_ops.toml [mag_boots]; these shape the animation the runtime plays at the physics speed.
+[mag_gait]
+speed_m_s = 0.24                   # the clip's travel speed: 2 steps of step_m in 2.5 s
+step_m = 0.30                      # short suited steps (hip flexion stays small)
+stance_fraction = 0.62             # > 0.5: one boot is always attached; both hold for 12 % of each step
+lift_m = 0.045                     # the swinging boot clears the plate by this much
+knee_drop_m = 0.035                # the pelvis rides this far below the straight-leg stance (knees bent)
+attach_drop_m = 0.03
+release_rise_m = 0.06
+
 # Variants (EXP-03): one assembly sized to each wearer; markings differ. Identity stays OPEN (Tale 26!18, WTF-16).
 [variant.instructor]
 wearer = "instructor"              # data/characters.toml [human.instructor]

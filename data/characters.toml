@@ -141,3 +141,28 @@ crawl_speed_m_s = 0.35
 # Ship-bound values come from data/wayfarer_3d.toml so the actions fit the ship: the seat height (sector_whitebox.seat_height_m) and the
 # tube ladders' rung pitch (human_entry.spoke_rung_pitch_m).
 climb_rungs_per_s = 1.2
+# LOCO-001 locomotion clips (PROTOTYPE motion, not mocap). A clip's speed is the speed it was authored at; the runtime plays it at
+# physics speed / clip speed and strips the Root's translation (the physics moves the body, never the clip). Reduced gravity lowers
+# the cadence at a given speed; these are display choices, not biomechanical canon (HUMAN FACTORS OPEN, 46 DYN-024).
+run_speed_m_s = 2.4
+run_cadence_steps_min = 150
+run_stance_fraction = 0.38          # < 0.5: both feet off the deck between steps
+run_step_height_m = 0.16
+jump_takeoff_s = 0.27               # crouch and extension before the impulse
+jump_crouch_m = 0.12
+land_s = 0.5
+land_crouch_m = 0.14
+
+# LOCO-001 interior locomotion (docs/LOCOMOTION.md): the walk's player body in spin gravity. PROTOTYPE biomechanical inputs (HUMAN FACTORS
+# OPEN, 46 DYN-024), chosen for ring A's 0.50 g. The foot force stays the walk's friction-limited contact (crew_body.gd, mu 0.6 x the
+# support load), so these are requested speeds the friction may or may not allow, never set velocities.
+[locomotion]
+player = "newcomer"                  # [human.newcomer]: the trainee the visitor follows
+walk_speed_m_s = 1.0                 # Froude number v^2/(g L) = 0.23 at 0.50 g and 0.88 m leg: an easy walk (Earth's is ~0.25)
+run_speed_m_s = 2.4                  # Froude 1.3: a run; the walk-run change falls near Froude 0.5 (1.5 m/s at 0.50 g)
+backpedal_speed_m_s = 0.6            # S alone: stepping backward, facing kept
+turn_rate_deg_s = 360.0              # the body turns toward the requested direction at most this fast
+jump_dv_m_s = 1.4                    # take-off speed along the body's up: 0.20 m of rise at 0.50 g (a light hop; the corridors are 2.1 m)
+camera_distance_m = 2.4
+camera_height_m = 0.55               # follow point above the body centre (about the shoulders)
+

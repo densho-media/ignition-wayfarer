@@ -2578,6 +2578,42 @@
   ],
   "approach_gate_m": 0.5
  },
+ "mag_boots": {
+  "status": "PROTOTYPE / SIMULATION_ONLY",
+  "flight": "HOLD",
+  "pad": "electro-permanent magnet pad, 0.10 x 0.16 m, in each boot sole (PROTOTYPE; no suit-boot owner row)",
+  "attach_force_n": 200.0,
+  "sole_friction": 0.5,
+  "capture_gap_m": 0.02,
+  "capture_speed_m_s": 0.3,
+  "capture_angle_deg": 25.0,
+  "release_gap_m": 0.03,
+  "foot_half_spacing_m": 0.12,
+  "walkway_x_m": [
+   128.6,
+   138.2
+  ],
+  "walkway_thickness_m": 0.003,
+  "start_x_m": 132.6,
+  "walkway_phi_rad": [
+   -1.221769,
+   -1.012329
+  ],
+  "start_phi_rad": -1.117049,
+  "surface_r_m": 6.5,
+  "tether_anchor": "ANC_AFT_00",
+  "gait": {
+   "speed_m_s": 0.24,
+   "step_m": 0.3,
+   "stance_fraction": 0.62,
+   "lift_m": 0.045,
+   "knee_drop_m": 0.035,
+   "attach_drop_m": 0.03,
+   "release_rise_m": 0.06,
+   "source": "data/eva_suit.toml [mag_gait]"
+  },
+  "note": "PROTOTYPE mechanism; FLIGHT_EVA HOLD. The plate is drawn by the runtime only; the engineering model is unchanged."
+ },
  "budget": {
   "drone_wet_kg": 26.36,
   "suited_crew_wet_kg": 149.29,
