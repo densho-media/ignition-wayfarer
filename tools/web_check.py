@@ -19,9 +19,10 @@ and walks it as a visitor does, recording every request:
 Screenshots, metrics and check.json go to --out; --record writes the summary into the site's release.json. It checks behaviour,
 loading isolation and transfer sizes, not frame rates on real hardware. The viewer's camera damping is switched off before input.
 --part runs one part (main: start, viewer, play, switching, phone, review; equivalence; walk); CI runs each on its own runner and --merge combines their check.json (a missing part fails), recording into
-release.json with --record.
+release.json with --record. --frame-shell runs the equivalence part in a Chrome headless shell with frames on demand (FramePump):
+the same checks on the same 1/60 s frames, about ten times sooner than in real time.
 
-    python3 tools/web_check.py <site dir> --out <dir> [--chrome google-chrome] [--record] [--part main|equivalence|walk ...]
+    python3 tools/web_check.py <site dir> --out <dir> [--chrome google-chrome] [--record] [--part main|equivalence|walk ...] [--frame-shell <chrome-headless-shell>]
     python3 tools/web_check.py <site dir> --merge <part out dir> ... --out <dir> [--record]
 """
 import argparse
@@ -113,9 +114,9 @@ class Chrome:
 
 
 class Page:
-    def __init__(self, chrome):
+    def __init__(self, chrome, begin_frames=False):
         self.chrome = chrome
-        target = chrome.send('Target.createTarget', {'url': 'about:blank'})['targetId']
+        target = chrome.send('Target.createTarget', {'url': 'about:blank', **({'enableBeginFrameControl': True} if begin_frames else {})})['targetId']
         self.session = chrome.send('Target.attachToTarget', {'targetId': target, 'flatten': True})['sessionId']
         for domain in ('Page', 'Runtime', 'Network'):
             self.send(f'{domain}.enable')
@@ -325,16 +326,46 @@ TEARDOWN_SECONDS = 5
 EVA_SLACK = 1.5
 
 
-def run_equivalence(url, play_release, binary, sandbox, out, play_seconds, record_check, metrics):
+class FramePump:
+    """Animation frames on demand (Chrome headless shell, --enable-begin-frame-control): each HeadlessExperimental.beginFrame runs
+    one frame, 1/60 s of frame time, as soon as the last one is done, instead of at the 60 Hz display cadence. With --fixed-fps 60 the
+    engine steps exactly one 1/60 s frame per animation frame either way, so the walk and EVA checks see the same frames, only sooner."""
+
+    def __init__(self, page):
+        self.page, self.frames, self.stop = page, 0, threading.Event()
+        self.thread = threading.Thread(target=self.run, daemon=True)
+        self.thread.start()
+
+    def run(self):
+        tick = 0.0
+        while not self.stop.is_set():
+            tick += 1000 / 60
+            try:
+                self.page.send('HeadlessExperimental.beginFrame', {'frameTimeTicks': tick, 'interval': 1000 / 60, 'noDisplayUpdates': True},
+                               timeout=120)
+                self.frames += 1
+            except (RuntimeError, TimeoutError):   # mid-navigation, or the browser is closing
+                time.sleep(0.05)
+
+    def close(self):
+        self.stop.set()
+        self.thread.join(timeout=10)
+
+
+def run_equivalence(url, play_release, binary, sandbox, out, play_seconds, record_check, metrics, frame_shell=None):
     """The walk's own check (excursion check.gd: both rings round and back to the station by the player's actions) in the Web build
     against the native build of the same package (web_play.build), at a fixed 60 fps with drawing off (--disable-render-loop: logic,
-    physics and input step exactly as when drawn; the main part covers rendering). Runs in its own browser, alongside the main walk."""
+    physics and input step exactly as when drawn; the main part covers rendering). Runs in its own browser, alongside the main walk.
+    frame_shell: a Chrome headless shell binary; the part then runs there with frames on demand (FramePump), not in real time."""
     native = play_release.get('native_reference') or {}
     profile = tempfile.mkdtemp(prefix='wf-web-equivalence-')
     log = open(out / 'chrome-equivalence.log', 'w')
-    chrome = Chrome(binary, profile, log, sandbox)
+    chrome = Chrome(frame_shell or binary, profile, log, sandbox,
+                    extra=('--enable-begin-frame-control', '--run-all-compositor-stages-before-draw') if frame_shell else ())
+    pump = None
     try:
-        page, traffic = Page(chrome), Traffic(chrome)
+        page, traffic = Page(chrome, begin_frames=bool(frame_shell)), Traffic(chrome)
+        pump = FramePump(page) if frame_shell else None
         page.send('Emulation.setDeviceMetricsOverride', {'width': 640, 'height': 400, 'deviceScaleFactor': 1, 'mobile': False})
         mark = traffic.mark()
         t0 = time.monotonic()
@@ -351,7 +382,8 @@ def run_equivalence(url, play_release, binary, sandbox, out, play_seconds, recor
                      web={k: (web or {}).get(k) for k in ('result', 'fails', 'physics_frames')}, native={k: native.get(k) for k in ('result', 'fails', 'physics_frames')},
                      notes_differ=sorted(set(notes) ^ set(native.get('notes') or []))[:8], errors=errors[:3], seconds=seconds)
         metrics['equivalence'] = {'web': web and {k: web.get(k) for k in ('result', 'physics_frames', 'wall_s')},
-                                  'native': {k: native.get(k) for k in ('result', 'physics_frames', 'seconds')}, 'seconds': seconds}
+                                  'native': {k: native.get(k) for k in ('result', 'physics_frames', 'seconds')}, 'seconds': seconds,
+                                  'frames': 'on demand (headless shell)' if pump else 'real time'}
         # EVA-OPS-001: the EVA Operations check (movement, gas, docking, drone, rescue, scripted First Flight) in the same browser
         nat_eva = native.get('eva_ops') or {}
         mark = traffic.mark()
@@ -382,6 +414,8 @@ def run_equivalence(url, play_release, binary, sandbox, out, play_seconds, recor
         record_check('play: equivalence browser session', False, error=repr(error),
                      chrome_log=(out / 'chrome-equivalence.log').read_text(errors='replace').splitlines()[-8:])
     finally:
+        if pump:
+            pump.close()          # before the browser goes: a frame in flight then still gets its reply
         chrome.close()
         shutil.rmtree(profile, ignore_errors=True)
         log.close()
@@ -945,7 +979,8 @@ def merge(site, part_dirs, out, record=False):
     return report
 
 
-def check(site, out, binary, sandbox=True, record=False, play_seconds=900, live=None, recording=True, touch=True, parts=PARTS):
+def check(site, out, binary, sandbox=True, record=False, play_seconds=900, live=None, recording=True, touch=True, parts=PARTS,
+          frame_shell=None):
     """site: the local site directory, or None with live=<deployed URL ending in />, which reads release.json from there.
     parts: the sessions to run (PARTS); each part's check.json can be merged later (merge)."""
     out.mkdir(parents=True, exist_ok=True)
@@ -974,7 +1009,7 @@ def check(site, out, binary, sandbox=True, record=False, play_seconds=900, live=
     # runner with the main walk; CI runs each part on its own runner and merges them, --part and --merge).
     def side_work():
         if equivalence:
-            run_equivalence(url, play_release, binary, sandbox, out, play_seconds, record_check, metrics)
+            run_equivalence(url, play_release, binary, sandbox, out, play_seconds, record_check, metrics, frame_shell)
         if 'walk' in side_parts:
             run_touch_walk(url, play_release, binary, sandbox, out, record_check, metrics)
     side = threading.Thread(target=side_work) if play_release and (equivalence or side_parts) else None
@@ -1011,6 +1046,8 @@ if __name__ == '__main__':
     parser.add_argument('--record', action='store_true', help="write the results into the site's release.json (tests)")
     parser.add_argument('--play-seconds', type=int, default=900, help='time allowed for the browser walk check')
     parser.add_argument('--part', action='append', choices=PARTS, help='run only this part (repeatable; default all): main, equivalence, walk')
+    parser.add_argument('--frame-shell', type=Path, help='Chrome headless shell binary: run the equivalence part there with frames on demand '
+                        '(begin-frame control) instead of in real time; same checks, same frames')
     parser.add_argument('--merge', type=Path, nargs='+', metavar='DIR', help="merge these parts' check.json into --out (with --record, into the site)")
     args = parser.parse_args()
     if args.merge:
@@ -1018,7 +1055,7 @@ if __name__ == '__main__':
     else:
         report = check(args.site and args.site.resolve(), args.out.resolve(), args.chrome, sandbox=not args.no_sandbox, record=args.record,
                        play_seconds=args.play_seconds, live=args.live, recording=not args.no_recording, touch=not args.no_touch,
-                       parts=tuple(args.part or PARTS))
+                       parts=tuple(args.part or PARTS), frame_shell=args.frame_shell and str(args.frame_shell.resolve()))
     print(report['result'], f"{sum(r['ok'] for r in report['checks'])}/{len(report['checks'])} checks")
     if os.environ.get('GITHUB_ACTIONS'):
         loads = {r['check']: r.get('seconds') for r in report['checks'] if 'seconds' in r}
