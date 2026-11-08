@@ -23,6 +23,9 @@ env:
   BLENDER_VERSION: 5.2.2
   BLENDER_SERIES: '5.2'
   BLENDER_SHA256: 84098912789dc450e95697c4184fb8a90acbe5111c2ba4aede3fecb57806a168
+  # Chrome for Testing headless shell for the equivalence part (begin-frame control: frames on demand, not at 60 Hz)
+  HEADLESS_SHELL_VERSION: 153.0.8010.12
+  HEADLESS_SHELL_SHA256: a9da028861a0cf789ff25c2fed45f5f1aaf969ed9247835b6a7821a4f7af9d1d
   PYTHONUNBUFFERED: '1'
 
 jobs:
@@ -147,12 +150,14 @@ jobs:
           retention-days: 14
 
   # The browser check in three parts, each on its own runner against the same site (software WebGL is CPU-bound, so the parts no
-  # longer share one runner): the main visitor walk, browser-vs-native equivalence, the touch walk.
+  # longer share one runner): the main visitor walk, browser-vs-native equivalence, the touch walk. Equivalence runs in the pinned
+  # headless shell with frames on demand (web_check.py --frame-shell): the walk and EVA Operations checks on the same 1/60 s frames
+  # in about 5 min instead of 46 min in real time.
   browser-check:
     name: Browser check (${{ matrix.part }})
     needs: [build]
     runs-on: ubuntu-24.04
-    timeout-minutes: 90   # equivalence runs the walk (~27 min) and EVA Operations (~19 min sim time) in real time, one after the other
+    timeout-minutes: 60
     strategy:
       fail-fast: false
       matrix:
@@ -163,8 +168,31 @@ jobs:
         with:
           name: wayfarer-web-site-unchecked
           path: _site
+      - name: Chrome headless shell (cached unpacked; the zip is SHA-256 checked when the cache is filled)
+        if: matrix.part == 'equivalence'
+        id: shell
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9  # v6.1.0
+        with:
+          path: ~/chrome-headless-shell-${{ env.HEADLESS_SHELL_VERSION }}
+          key: chrome-headless-shell-${{ env.HEADLESS_SHELL_VERSION }}-${{ env.HEADLESS_SHELL_SHA256 }}
+      - name: Install Chrome headless shell ${{ env.HEADLESS_SHELL_VERSION }} (SHA-256 pinned)
+        if: matrix.part == 'equivalence'
+        env:
+          CACHED: ${{ steps.shell.outputs.cache-hit }}
+        run: |
+          set -euo pipefail
+          dir=$HOME/chrome-headless-shell-$HEADLESS_SHELL_VERSION
+          if [ "$CACHED" != true ]; then
+            zip=$RUNNER_TEMP/chrome-headless-shell.zip
+            curl -sSfL -o "$zip" "https://storage.googleapis.com/chrome-for-testing-public/$HEADLESS_SHELL_VERSION/linux64/chrome-headless-shell-linux64.zip"
+            echo "$HEADLESS_SHELL_SHA256  $zip" | sha256sum -c -
+            mkdir -p "$dir" && unzip -q "$zip" -d "$dir"
+          fi
+          shell=$dir/chrome-headless-shell-linux64/chrome-headless-shell
+          "$shell" --version
+          echo "FRAME_SHELL_ARGS=--frame-shell $shell" >> "$GITHUB_ENV"
       - name: Browser check, ${{ matrix.part }} (headless Chrome, served under /ignition-wayfarer/)
-        run: python3 tools/web_check.py _site --part ${{ matrix.part }} --out web-check-${{ matrix.part }} --chrome google-chrome --no-sandbox   # ubuntu-24.04 AppArmor blocks Chrome's sandbox; local content only
+        run: python3 tools/web_check.py _site --part ${{ matrix.part }} --out web-check-${{ matrix.part }} --chrome google-chrome --no-sandbox $FRAME_SHELL_ARGS   # ubuntu-24.04 AppArmor blocks Chrome's sandbox; local content only
       - name: Upload this part's results and screenshots
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9  # v7.0.2
