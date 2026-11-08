@@ -181,6 +181,21 @@ def hazards(rig, sh, route):
     return out
 
 
+def mag_boots(m, route, root=ROOT):
+    """LOCO-002: the magnetic-boot walkway and limits (data/eva_ops.toml [mag_boots]) with the gait the suit clips were made with
+    (data/eva_suit.toml [mag_gait]). Godot angles: a point at radius r and angle phi about +X is (x, r cos phi, r sin phi); the walkway lies
+    at the rail line's angle minus the offsets (away from the hatch side)."""
+    up = route['rail_up']; phi_rail = math.atan2(up[2], up[1])
+    gait = tomllib.loads((root/'data/eva_suit.toml').read_text())['mag_gait']
+    lo, hi = (phi_rail-math.radians(d) for d in m['walkway_offset_deg'])
+    phi_s = phi_rail-math.radians(m['start_offset_deg'])
+    anchor = min(route['anchors'], key=lambda a: abs(a['x']-m['start_x_m']))
+    return dict({k: v for k, v in m.items() if k not in ('walkway_offset_deg', 'start_offset_deg')},
+                walkway_phi_rad=[round(min(lo, hi), 6), round(max(lo, hi), 6)], start_phi_rad=round(phi_s, 6),
+                surface_r_m=max(r for x, r in route['collider']['samples'] if m['walkway_x_m'][0]-0.3 <= x <= m['walkway_x_m'][1]+0.3), tether_anchor=anchor['id'], gait=dict(gait, source='data/eva_suit.toml [mag_gait]'),
+                note='PROTOTYPE mechanism; FLIGHT_EVA HOLD. The plate is drawn by the runtime only; the engineering model is unchanged.')
+
+
 def build(root=ROOT, layout_path=LAYOUT):
     s = spec.load(root)[0]
     rep = json.loads(Path(layout_path).read_text()); layout = rep['runtime_layout']
@@ -196,7 +211,7 @@ def build(root=ROOT, layout_path=LAYOUT):
                 gas=dict(isp_s=ev.P['isp_s'], g0=ev.G0, ve_m_s=round(ev.P['isp_s']*ev.G0, 4), tank_pressure_pa=ev.P['tank_pressure_pa'],
                          usable_fraction=ev.P['usable_fraction'], n2_density_kg_m3=b['n2_density_kg_m3']),
                 suit=suit, drone=drone, dock=dock, allocation=alloc, cartridge=cartridge(ops['cartridge']), station=ops['station'], modes=modes,
-                rules=ops['rules'], assist=ops['assist'],
+                rules=ops['rules'], assist=ops['assist'], mag_boots=mag_boots(ops['mag_boots'], sh['route'], root),
                 budget={k: b[k] for k in ('drone_wet_kg', 'suited_crew_wet_kg', 'docked_kg', 'dv_drone_alone_m_s', 'dv_docked_drone_gas_m_s',
                                           'dv_suit_reserve_alone_m_s', 'total_impulse_drone_ns', 'total_impulse_reserve_ns')},
                 ship=sh, hazards=hazards(rig, sh, sh['route']), standard_gravity_m_s2=rig['dynamics']['standard_gravity_m_s2'])

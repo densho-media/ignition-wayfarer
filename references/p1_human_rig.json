@@ -86,6 +86,26 @@
     "climb": {
      "frames": 50,
      "max_edge_ratio": 4.058
+    },
+    "run": {
+     "frames": 24,
+     "max_edge_ratio": 3.008
+    },
+    "jump": {
+     "frames": 8,
+     "max_edge_ratio": 2.36
+    },
+    "fall": {
+     "frames": 30,
+     "max_edge_ratio": 1.749
+    },
+    "land": {
+     "frames": 15,
+     "max_edge_ratio": 2.391
+    },
+    "step": {
+     "frames": 33,
+     "max_edge_ratio": 1.867
     }
    },
    "rest_extent_m": {
@@ -176,6 +196,26 @@
     "climb": {
      "frames": 50,
      "max_edge_ratio": 3.652
+    },
+    "run": {
+     "frames": 24,
+     "max_edge_ratio": 2.2
+    },
+    "jump": {
+     "frames": 8,
+     "max_edge_ratio": 1.877
+    },
+    "fall": {
+     "frames": 30,
+     "max_edge_ratio": 1.848
+    },
+    "land": {
+     "frames": 15,
+     "max_edge_ratio": 1.885
+    },
+    "step": {
+     "frames": 33,
+     "max_edge_ratio": 1.838
     }
    },
    "rest_extent_m": {
@@ -266,6 +306,26 @@
     "climb": {
      "frames": 50,
      "max_edge_ratio": 4.443
+    },
+    "run": {
+     "frames": 24,
+     "max_edge_ratio": 4.302
+    },
+    "jump": {
+     "frames": 8,
+     "max_edge_ratio": 3.287
+    },
+    "fall": {
+     "frames": 30,
+     "max_edge_ratio": 2.257
+    },
+    "land": {
+     "frames": 15,
+     "max_edge_ratio": 3.32
+    },
+    "step": {
+     "frames": 33,
+     "max_edge_ratio": 2.022
     },
     "stage_S004A": {
      "frames": 10,
@@ -360,6 +420,26 @@
     "climb": {
      "frames": 50,
      "max_edge_ratio": 3.81
+    },
+    "run": {
+     "frames": 24,
+     "max_edge_ratio": 3.032
+    },
+    "jump": {
+     "frames": 8,
+     "max_edge_ratio": 2.341
+    },
+    "fall": {
+     "frames": 30,
+     "max_edge_ratio": 1.716
+    },
+    "land": {
+     "frames": 15,
+     "max_edge_ratio": 2.374
+    },
+    "step": {
+     "frames": 33,
+     "max_edge_ratio": 1.875
     },
     "stage_S004A": {
      "frames": 10,

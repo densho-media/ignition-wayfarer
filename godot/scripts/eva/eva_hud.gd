@@ -88,10 +88,15 @@ func refresh() -> void:
 	if s.held:
 		contact.append("holding " + (ops.hold_id if ops.hold_id != "" else "hold"))
 	if s.standing:
-		contact.append("standing (%.2f g into the surface)" % (s.field_now.length() / 9.80665))
+		contact.append("standing (%.2f g into the surface)" % (s.field_now.length() / 9.80665) if s.mag_a <= 0.0
+			else "boots on the walkway (%.0f N pull)" % (s.mag_a * s.total_mass()))
 	if s.tether_on:
 		contact.append("tether %.1f / %.0f m%s" % [s.global_position.distance_to(s.tether_anchor), s.tether_len, " TAUT" if s.tether_taut else ""])
 	lines.append("Contact: " + (", ".join(contact) if not contact.is_empty() else "free"))
+	if s.boots != null:
+		var b := s.boots
+		lines.append("Mag boots %s · L %s · R %s%s%s" % ["ON" if b.armed else "OFF", b.state_name(0), b.state_name(1),
+			" · SLIPPING" if b.slipping else "", (" · " + b.blocked) if b.blocked != "" else ""])
 	lines.append("Hatch %.1f m · Brow aft face %.1f m" % [s.global_position.distance_to(ops.world.hatch), maxf(0.0, ops.world.face_x(ops.world.radius_of(s.global_position)) - 0.1 - s.global_position.x)])
 	if s.gas_short:
 		lines.append("!! THRUSTERS STARVED: no gas in the feed")

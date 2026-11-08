@@ -40,7 +40,7 @@ jobs:
   build:
     name: Build and export
     runs-on: ubuntu-24.04
-    timeout-minutes: 40
+    timeout-minutes: 75                  # the first MPFB download (281 MB from the MakeHuman server, ~0.3 MB/s) needs about 20 min once
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
 
@@ -87,11 +87,50 @@ jobs:
           echo "PIPELINE_SECONDS=$SECONDS" >> "$GITHUB_ENV"
           echo "PIPELINE_RUN=$(python3 -c 'import json; print(json.load(open("pipeline.json"))["run_dir"])')" >> "$GITHUB_ENV"
 
+      - name: MPFB and its CC0 assets (cached; SHA-256 checked by tools/external.py)
+        id: external
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9  # v6.1.0
+        with:
+          path: ~/.cache/wayfarer/external/downloads
+          key: external-${{ hashFiles('assets/external/manifest.toml') }}
+
+      # Downloaded once per manifest and saved at once, so a later failing step never throws the slow download away.
+      - name: Download MPFB and its CC0 assets (only on a cache miss)
+        if: steps.external.outputs.cache-hit != 'true'
+        timeout-minutes: 45
+        run: |
+          SECONDS=0
+          python3 tools/workflow.py deps fetch
+          echo "downloaded in ${SECONDS} s"; ls -la ~/.cache/wayfarer/external/downloads
+
+      - name: Save the MPFB download cache
+        if: steps.external.outputs.cache-hit != 'true'
+        uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9  # v6.1.0
+        with:
+          path: ~/.cache/wayfarer/external/downloads
+          key: external-${{ hashFiles('assets/external/manifest.toml') }}
+
+      - name: Build the player and the Y155 suit for the browser experiences (LOCO-001/002)
+        timeout-minutes: 25
+        run: |
+          set -euo pipefail
+          SECONDS=0
+          python3 tools/workflow.py deps fetch && python3 tools/workflow.py deps install
+          echo "MPFB installed after ${SECONDS} s"
+          # the pinned Godot (web_play.toolchain: downloaded and SHA-512 checked once) runs the character check; import the project first
+          WAYFARER_GODOT=$(python3 -c "import sys; sys.path.insert(0, 'tools'); import web_play; print(web_play.toolchain(True)['editor'])")
+          export WAYFARER_GODOT
+          "$WAYFARER_GODOT" --headless --path godot --editor --import > godot-import.log 2>&1 || { tail -20 godot-import.log; exit 1; }
+          echo "Godot import done after ${SECONDS} s"
+          python3 tools/workflow.py play-characters --out _characters | tee characters.json
+          python3 -c "import json, sys; sys.exit(json.load(open('characters.json'))['result'] != 'PASS')"
+          echo "CHARACTER_SECONDS=$SECONDS" >> "$GITHUB_ENV"
+
       - name: Export the viewer GLB and the Godot Web build, assemble the site
         run: |
           set -euo pipefail
           SECONDS=0
-          python3 tools/workflow.py web --pipeline-run "$PIPELINE_RUN" --out _site --native | tee web.json
+          python3 tools/workflow.py web --pipeline-run "$PIPELINE_RUN" --out _site --native --characters _characters | tee web.json
           echo "WEB_SECONDS=$SECONDS" >> "$GITHUB_ENV"
           echo "WEB_RUN=$(python3 -c 'import json; print(json.load(open("web.json"))["run_dir"])')" >> "$GITHUB_ENV"
 
@@ -116,7 +155,12 @@ jobs:
           native = (web.get('play') or {}).get('native_reference') or {}
           print(f"- Native walk check on the web package: **{native.get('result', 'not run')}** ({native.get('physics_frames', '-')} physics frames, "
                 f"{native.get('seconds', '-')} s)")
-          print(f"- Wall time: pipeline {os.environ.get('PIPELINE_SECONDS', '-')} s, export and Godot {os.environ.get('WEB_SECONDS', '-')} s")
+          chars = read('characters.json')
+          print(f"- Characters for the experiences: **{chars.get('result', 'not run')}** ({chars.get('mb', '-')} MB: {', '.join(chars.get('files', {}))})")
+          loco = native.get('locomotion') or {}
+          print(f"- Native locomotion check on the web package: **{loco.get('result', 'not run')}** {loco.get('fails', '')}")
+          print(f"- Wall time: pipeline {os.environ.get('PIPELINE_SECONDS', '-')} s, characters {os.environ.get('CHARACTER_SECONDS', '-')} s, "
+                f"export and Godot {os.environ.get('WEB_SECONDS', '-')} s")
           EOF
 
       - name: Upload the site for the browser check (its release.json gets the results in the site job)
@@ -134,6 +178,7 @@ jobs:
           name: wayfarer-web-build-logs
           path: |
             pipeline.json
+            characters.json
             web.json
             runs/*/logs
             runs/*/*.log

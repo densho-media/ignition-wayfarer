@@ -6,7 +6,7 @@
   "test_a": {
    "height_macro": 0.607178,
    "bisection_stature_m": 1.8,
-   "generate_s": 4.77,
+   "generate_s": 3.49,
    "stature_m": 1.8,
    "contract": {
     "bones": 53,
@@ -156,6 +156,53 @@
       "hand_right": 0.0
      },
      "reach_short_mm": {}
+    },
+    "run": {
+     "frames": 24,
+     "loop": true,
+     "root_motion": true,
+     "slip_mm": {
+      "foot_right": 0.0,
+      "foot_left": 0.0
+     },
+     "reach_short_mm": {}
+    },
+    "jump": {
+     "frames": 8,
+     "loop": false,
+     "root_motion": false,
+     "slip_mm": {
+      "foot_right": 0.0,
+      "foot_left": 0.0
+     },
+     "reach_short_mm": {}
+    },
+    "fall": {
+     "frames": 30,
+     "loop": true,
+     "root_motion": false,
+     "slip_mm": {},
+     "reach_short_mm": {}
+    },
+    "land": {
+     "frames": 15,
+     "loop": false,
+     "root_motion": false,
+     "slip_mm": {
+      "foot_right": 0.0,
+      "foot_left": 0.0
+     },
+     "reach_short_mm": {}
+    },
+    "step": {
+     "frames": 33,
+     "loop": true,
+     "root_motion": false,
+     "slip_mm": {
+      "foot_right": 0.0,
+      "foot_left": 0.0
+     },
+     "reach_short_mm": {}
     }
    },
    "retarget": {
@@ -163,12 +210,12 @@
     "scale": 1.0
    },
    "solver_vs_blender_m": 0.0,
-   "fingerprint": "4adaa4f937ccb13d5922bf2980713c095775ba2ed5fdca8b37232c8ddcfe60bc"
+   "fingerprint": "844867a5cfb661f25593a61cc15d90c9f850799ab2661eee8ad50bfebcebc9b8"
   },
   "test_b": {
    "height_macro": 0.554016,
    "bisection_stature_m": 1.6181,
-   "generate_s": 5.59,
+   "generate_s": 4.31,
    "stature_m": 1.6181,
    "contract": {
     "bones": 53,
@@ -307,6 +354,62 @@
       "hand_right": 0.0
      },
      "reach_short_mm": {}
+    },
+    "run": {
+     "frames": 24,
+     "loop": true,
+     "root_motion": true,
+     "slip_mm": {
+      "foot_right": 0.0,
+      "foot_left": 0.0
+     },
+     "reach_short_mm": {}
+    },
+    "jump": {
+     "frames": 8,
+     "loop": false,
+     "root_motion": false,
+     "slip_mm": {
+      "foot_right": 4.5,
+      "foot_left": 4.5
+     },
+     "reach_short_mm": {
+      "leg_l": 4.5,
+      "leg_r": 4.5
+     }
+    },
+    "fall": {
+     "frames": 30,
+     "loop": true,
+     "root_motion": false,
+     "slip_mm": {},
+     "reach_short_mm": {}
+    },
+    "land": {
+     "frames": 15,
+     "loop": false,
+     "root_motion": false,
+     "slip_mm": {
+      "foot_right": 4.5,
+      "foot_left": 4.5
+     },
+     "reach_short_mm": {
+      "leg_l": 4.5,
+      "leg_r": 4.5
+     }
+    },
+    "step": {
+     "frames": 33,
+     "loop": true,
+     "root_motion": false,
+     "slip_mm": {
+      "foot_right": 2.5,
+      "foot_left": 2.5
+     },
+     "reach_short_mm": {
+      "leg_l": 2.5,
+      "leg_r": 2.5
+     }
     }
    },
    "retarget": {
@@ -317,12 +420,12 @@
      0.0744
     ]
    },
-   "fingerprint": "c6f97bc5d07dd60e984a4eaae9c45506ec43f821713a9094df83696c8a9d290b"
+   "fingerprint": "e55baa786fac56415ae3b5be11926c218e066dbea21c6a0354f443b065424bc8"
   },
   "instructor": {
    "height_macro": 0.545044,
    "bisection_stature_m": 1.78,
-   "generate_s": 3.42,
+   "generate_s": 2.75,
    "outfit": {
     "name": "instructor",
     "faces": {
@@ -496,6 +599,53 @@
      },
      "reach_short_mm": {}
     },
+    "run": {
+     "frames": 24,
+     "loop": true,
+     "root_motion": true,
+     "slip_mm": {
+      "foot_right": 0.0,
+      "foot_left": 0.0
+     },
+     "reach_short_mm": {}
+    },
+    "jump": {
+     "frames": 8,
+     "loop": false,
+     "root_motion": false,
+     "slip_mm": {
+      "foot_right": 0.0,
+      "foot_left": 0.0
+     },
+     "reach_short_mm": {}
+    },
+    "fall": {
+     "frames": 30,
+     "loop": true,
+     "root_motion": false,
+     "slip_mm": {},
+     "reach_short_mm": {}
+    },
+    "land": {
+     "frames": 15,
+     "loop": false,
+     "root_motion": false,
+     "slip_mm": {
+      "foot_right": 0.0,
+      "foot_left": 0.0
+     },
+     "reach_short_mm": {}
+    },
+    "step": {
+     "frames": 33,
+     "loop": true,
+     "root_motion": false,
+     "slip_mm": {
+      "foot_right": 0.0,
+      "foot_left": 0.0
+     },
+     "reach_short_mm": {}
+    },
     "stage_S004A": {
      "frames": 10,
      "loop": true,
@@ -519,7 +669,7 @@
       0.0,
       -0.0,
       1.0,
-      98.18000030517578
+      130.42999267578125
      ],
      [
       0.258819043636322,
@@ -545,12 +695,12 @@
    "stages": [
     "S004A"
    ],
-   "fingerprint": "d48ed7490f8f6340b457a50a2897f627aee9bbfd61a15fb8150de5fff94d6b27"
+   "fingerprint": "7c691041b03bb7f13ecba44bcfbefc6b45b142667a08ac7dbb1af7ddd490e942"
   },
   "newcomer": {
    "height_macro": 0.538025,
    "bisection_stature_m": 1.6999,
-   "generate_s": 4.67,
+   "generate_s": 3.43,
    "outfit": {
     "name": "newcomer",
     "faces": {
@@ -718,6 +868,53 @@
      },
      "reach_short_mm": {}
     },
+    "run": {
+     "frames": 24,
+     "loop": true,
+     "root_motion": true,
+     "slip_mm": {
+      "foot_right": 0.0,
+      "foot_left": 0.0
+     },
+     "reach_short_mm": {}
+    },
+    "jump": {
+     "frames": 8,
+     "loop": false,
+     "root_motion": false,
+     "slip_mm": {
+      "foot_right": 0.0,
+      "foot_left": 0.0
+     },
+     "reach_short_mm": {}
+    },
+    "fall": {
+     "frames": 30,
+     "loop": true,
+     "root_motion": false,
+     "slip_mm": {},
+     "reach_short_mm": {}
+    },
+    "land": {
+     "frames": 15,
+     "loop": false,
+     "root_motion": false,
+     "slip_mm": {
+      "foot_right": 0.0,
+      "foot_left": 0.0
+     },
+     "reach_short_mm": {}
+    },
+    "step": {
+     "frames": 33,
+     "loop": true,
+     "root_motion": false,
+     "slip_mm": {
+      "foot_right": 0.0,
+      "foot_left": 0.0
+     },
+     "reach_short_mm": {}
+    },
     "stage_S004A": {
      "frames": 10,
      "loop": true,
@@ -749,7 +946,7 @@
       0.0,
       -1.0,
       0.0,
-      99.44999694824219
+      131.6999969482422
      ],
      [
       0.258819043636322,
@@ -776,7 +973,7 @@
     "S004A",
     "S004B"
    ],
-   "fingerprint": "8204fc128992c675fed2d8c81e9abbf093246459f6994ae26b673231aa2a10b4"
+   "fingerprint": "54d82d1bfd5de648c44f0bd78ab9c79e1254ad7f85c97e96bbeee881aa580a75"
   }
  }
 }

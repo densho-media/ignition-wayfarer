@@ -140,7 +140,7 @@ def pipeline_record(root, run_dir):
     return record
 
 
-def run(root, out=None, pipeline_run=None, draco=True, with_play=True, native=False, native_check=True):
+def run(root, out=None, pipeline_run=None, draco=True, with_play=True, native=False, native_check=True, characters=None):
     started = time.monotonic()
     with write_lock(root) as lock:
         if lock is None:
@@ -213,7 +213,7 @@ def run(root, out=None, pipeline_run=None, draco=True, with_play=True, native=Fa
         if with_play:
             try:
                 play = web_play.build(root, run_dir, site / 'play', work / 'build_identity.json',
-                                      native=native, native_check=native_check)
+                                      native=native, native_check=native_check, characters=characters)
             except (RuntimeError, ValueError, OSError) as error:
                 return {'result': 'FAIL', 'step': 'play', 'reason': str(error)[-2000:], 'run_dir': str(run_dir)}
             (site / 'play/play.json').write_text(json.dumps({

@@ -74,3 +74,28 @@ transit_speed_m_s = 0.30         # follow, return and docking transits (economy)
 autopilot_brake_fraction = 0.5     # plan braking at this fraction of the axis authority
 follow_offset_m = [1.5, 0.6, 1.5]  # drone follow station behind, above and to the side of the astronaut (suit frame)
 approach_gate_m = 0.50             # final docking approach starts here (eva_drone.toml near_suit approach_m[0])
+
+# LOCO-002 magnetic boots (Explore Exterior). A PROTOTYPE mechanism, not canon: FLIGHT_EVA stays HOLD and no IGNITION owner row
+# defines suit boots. Each Y155 boot carries one electro-permanent magnet pad in its sole (switched by a current pulse, holding with no
+# power): it holds only on the designated walkway below, never on the hull skin, the Brow or the rails. Both values that decide what a
+# boot can do are bounded: the pull per attached boot and the sole friction it creates. Slip and break-away come from those limits.
+[mag_boots]
+status = "PROTOTYPE / SIMULATION_ONLY"
+flight = "HOLD"                    # FLIGHT_EVA (45 O-07): an exercise for the training simulation only
+pad = "electro-permanent magnet pad, 0.10 x 0.16 m, in each boot sole (PROTOTYPE; no suit-boot owner row)"
+attach_force_n = 200.0             # pull per attached boot on the walkway plate at contact (estimate: EPM pads of this area hold several hundred N on thick steel; a 3 mm plate and the sole gap derate it)
+sole_friction = 0.5                # steel pad face on the steel plate (dry, estimate); the shear an attached boot can take is friction x its normal load
+capture_gap_m = 0.02               # a seeking boot attaches only when its sole is this close to the plate (the pad's field falls off fast with the gap)
+capture_speed_m_s = 0.30           # ... and the closing speed is below this (faster contacts rebound; a training value)
+capture_angle_deg = 25.0           # ... and the sole is within this of the plate
+release_gap_m = 0.03               # an attached boot that is pulled this far off the plate has broken away
+foot_half_spacing_m = 0.12         # sole centres either side of the body's mid-plane (suit frame; the mag_gait clip uses the same stance width)
+# The walkway: a ferritic steel plate bonded to the hull collar beside the forward and aft rail runs (the collar skin itself is not magnetic).
+# Its extent keeps a walker clear of the airlock fitting (it lies beside the hatch, not over it), the Brow truss (x > 138.7 m above r 6.85 m)
+# and every keep-out volume. PROTOTYPE placement; geometry is drawn by the runtime only (no change to the engineering model).
+walkway_x_m = [128.6, 138.2]
+walkway_offset_deg = [18.0, 30.0]  # around the hull from the rail line (the hatch and anchor azimuth), on the side away from the hatch fitting's panel
+walkway_thickness_m = 0.003
+# Explore Exterior start: standing on the walkway with both boots attached, the drone docked, the tether clipped to the nearest rail anchor.
+start_x_m = 132.6
+start_offset_deg = 24.0

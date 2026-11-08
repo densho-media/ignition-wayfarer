@@ -228,7 +228,102 @@ def climb(H, a, fps, pitch):
     return dict(frames=out, loop=True, root_motion=True, speed_m_s=rate, rung_pitch_m=pitch)
 
 
-ACTIONS = ('idle', 'walk', 'sit', 'crawl', 'climb')
+def run(H, a, fps):
+    """One running cycle (two steps) at run_speed_m_s and run_cadence_steps_min (LOCO-001, PROTOTYPE): each foot planted for
+    run_stance_fraction of its cycle under the hip (so there are flight phases), swing arcs of run_step_height_m, a pelvis bob of one
+    dip per step at mid-stance, bent counter-swinging arms, the trunk leaning 7 deg into the run. Root motion along -Y."""
+    v = a['run_speed_m_s']; T = 120.0/a['run_cadence_steps_min']; n = round(T*fps); stride = v*T; st = a['run_stance_fraction']
+    l1, l2, la, _ = leg_lengths(H); reach = .985*(l1+l2); right = ch.frame(UP, FORWARD)[0]; out = []
+    for i in range(n):
+        t = i*T/n; y = v*t; contacts = []; ank = {}
+        for side, off, sg in (('right', 0.0, 1), ('left', .5, -1)):
+            ph = (t/T+off) % 1.0; cyc = math.floor(t/T+off); plant = v*(cyc+st/2-off)*T
+            if ph < st:
+                p, lift = plant, 0.0; contacts.append(f'foot_{side}')
+            else:
+                s = smooth((ph-st)/(1-st)); p, lift = plant+stride*s, a['run_step_height_m']*math.sin(math.pi*s)**.8
+            ank[side] = add(mul(right, sg*ch.P['hip_x']*H*.8), (0.0, -p, la+lift))
+        # one dip per step at mid-stance, highest in flight; a planted leg never stretches past `reach`
+        bob = .875*reach-.025*reach*math.cos(4*math.pi*(t/T-st/2))
+        h = min([bob]+[math.sqrt(max(0.0, reach**2-(y-(-ank[f.split('_')[1]][1]))**2)) for f in contacts])+la
+        swing = 32.0*math.sin(2*math.pi*t/T)
+        pose = dict(ch.STAND, trunk=7.0, head=-6.0, arms=dict(right=dict(flex=-swing+10.0, abduct=10.0, elbow=85.0),
+                                                            left=dict(flex=swing+10.0, abduct=10.0, elbow=85.0)))
+        j = ch.skeleton(figure(H), pose, (0.0, -y, h), UP, FORWARD)
+        out.append(frame_of(legs_to(j, H, ank, FORWARD, UP), (0.0, -y, 0.0), contacts))
+    return dict(frames=out, loop=True, root_motion=True, speed_m_s=v)
+
+
+def _stance(H, drop, arms, trunk=0.0, head=0.0, fps=30):
+    """A standing frame with both feet planted where idle plants them and the pelvis `drop` m below standing."""
+    leg = sum(leg_lengths(H)[:3])*.995; right = ch.frame(UP, FORWARD)[0]
+    pose = dict(ch.STAND, trunk=trunk, head=head, arms=arms)
+    j = ch.skeleton(figure(H), pose, (0.0, .02*drop, leg-drop), UP, FORWARD)
+    ank = {s: (sg*ch.P['hip_x']*H*1.25*right[0], 0.0, ch.P['ankle']*H) for s, sg in zip(SIDES, (1, -1))}
+    return frame_of(legs_to(j, H, ank, FORWARD, UP), (0.0, 0.0, 0.0), ('foot_right', 'foot_left'))
+
+
+def _arms(flex, elbow, abduct=12.0):
+    return dict(right=dict(flex=flex, abduct=abduct, elbow=elbow), left=dict(flex=flex, abduct=abduct, elbow=elbow))
+
+
+def jump(H, a, fps):
+    """The take-off (LOCO-001, PROTOTYPE): from standing the body crouches by jump_crouch_m with the arms swung back, then extends to
+    straight legs as the arms swing forward. Both feet stay planted: the runtime applies the jump impulse when this clip ends (the
+    legs' push is the physics impulse, not root motion)."""
+    T = a['jump_takeoff_s']; n = max(4, round(T*fps)); out = []; c = a['jump_crouch_m']
+    for i in range(n):
+        t = i/(n-1); down = .6
+        drop = c*smooth(t/down) if t < down else c*(1-smooth((t-down)/(1-down)))
+        flex = -35.0*smooth(t/down) if t < down else -35.0+95.0*smooth((t-down)/(1-down))
+        out.append(_stance(H, drop, _arms(flex, 20.0+20.0*smooth(t/down)), trunk=18.0*drop/c, head=-4.0))
+    return dict(frames=out, loop=False, root_motion=False)
+
+
+def fall(H, a, fps):
+    """Airborne (LOCO-001, PROTOTYPE): a 1 s loop with the knees and hips a little bent, arms out for balance; no contacts. The body
+    follows its own ballistic path in the runtime."""
+    n = fps; out = []; leg = sum(leg_lengths(H)[:3])*.995
+    for i in range(n):
+        w = math.sin(2*math.pi*i/n)
+        pose = dict(ch.STAND, trunk=4.0, head=-6.0, hip=(22.0+4*w, 16.0-4*w), knee=(30.0+5*w, 24.0-5*w), ankle=(-12.0, -10.0),
+                    arms=dict(right=dict(flex=25.0+5*w, abduct=38.0, elbow=35.0), left=dict(flex=25.0-5*w, abduct=38.0, elbow=35.0)))
+        out.append(frame_of(ch.skeleton(figure(H), pose, (0.0, 0.0, leg), UP, FORWARD), (0.0, 0.0, 0.0), ()))
+    return dict(frames=out, loop=True, root_motion=False)
+
+
+def land(H, a, fps):
+    """Landing (LOCO-001, PROTOTYPE): feet planted, the legs absorb the touchdown down to land_crouch_m at a third of the clip and
+    recover to standing; the arms come forward and settle."""
+    T = a['land_s']; n = max(4, round(T*fps)); out = []; c = a['land_crouch_m']
+    for i in range(n):
+        t = i/(n-1); k = .3
+        drop = c*math.sin(.5*math.pi*t/k) if t < k else c*(1-smooth((t-k)/(1-k)))
+        out.append(_stance(H, drop, _arms(30.0*drop/c, 15.0+35.0*drop/c, 14.0), trunk=14.0*drop/c, head=-6.0))
+    return dict(frames=out, loop=False, root_motion=False)
+
+
+def step(H, a, fps):
+    """Stepping in place (LOCO-001, PROTOTYPE): the feet lift in turn by step_height_m at walk cadence, so a body turning on the spot
+    turns on its feet; root fixed. Turning itself is the body's heading in the runtime."""
+    T = 120.0/a['walk_cadence_steps_min']; n = round(T*fps); out = []; leg = sum(leg_lengths(H)[:3])*.995
+    right = ch.frame(UP, FORWARD)[0]; la = ch.P['ankle']*H
+    for i in range(n):
+        t = i/n; contacts = []; ank = {}
+        for side, off, sg in (('right', 0.0, 1), ('left', .5, -1)):
+            ph = (t+off) % 1.0; lift = 0.0
+            if ph < .6:
+                contacts.append(f'foot_{side}')
+            else:
+                lift = .6*a['step_height_m']*math.sin(math.pi*(ph-.6)/.4)
+            ank[side] = (sg*ch.P['hip_x']*H*1.25*right[0], 0.0, la+lift)
+        dip = .01*math.cos(4*math.pi*t)
+        j = ch.skeleton(figure(H), dict(ch.STAND, trunk=2.0, head=-3.0), (0.0, 0.0, leg-.012-dip), UP, FORWARD)
+        out.append(frame_of(legs_to(j, H, ank, FORWARD, UP), (0.0, 0.0, 0.0), contacts))
+    return dict(frames=out, loop=True, root_motion=False)
+
+
+ACTIONS = ('idle', 'walk', 'sit', 'crawl', 'climb', 'run', 'jump', 'fall', 'land', 'step')
 
 
 def proportions(bones, H):
@@ -247,6 +342,7 @@ def actions(H, a, fps, seat, pitch, P=None):
     try:
         ch.P.update(P or {})
         return dict(idle=idle(H, a, fps), walk=walk(H, a, fps), sit=sit(H, a, fps, seat), crawl=crawl(H, a, fps), climb=climb(H, a, fps, pitch),
+                    run=run(H, a, fps), jump=jump(H, a, fps), fall=fall(H, a, fps), land=land(H, a, fps), step=step(H, a, fps),
                     rest=rest(H))
     finally:
         ch.P.clear(); ch.P.update(saved)

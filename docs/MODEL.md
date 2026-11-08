@@ -34,8 +34,10 @@ Two experiences consume the generated package; neither computes spacecraft geome
   top and three-quarter views, picking by semantic `Assembly_*` lineage, and the standard, subsystem-hologram and engine-hologram
   styles (`representation.py holo-style`, `shots/m5_subsystems.toml`). A picked part shows its source name, geometry status, source
   status and source reference; a PROTOTYPE geometry label is never promoted by a sourced reference.
-- **The walk** (`godot/scenes/excursion.tscn`, "Station-to-ring excursion" below): the Godot project's main scene and the web
-  launcher's Start, on the DOCKED package and the rig.
+- **Explore Interior** (`godot/scenes/excursion.tscn`, "Station-to-ring excursion" below): the Godot project's main scene, on the
+  DOCKED package and the rig. Start puts the newcomer on ring A's deck in spin gravity (walk, run, jump, LOCO-001); the full station
+  excursion is its other start. **Explore Exterior** (`godot/scenes/eva_ops.tscn`, [EVA_OPERATIONS.md](EVA_OPERATIONS.md)) starts the
+  Y155 suit on a magnetic training walkway in drift (LOCO-002). Both: [LOCOMOTION.md](LOCOMOTION.md).
 
 **In Blender** the vehicle file `WF_WAYFARER_001.blend` opens as `GEN_WF_WAYFARER_001` with `10_SHIP` (the linked assemblies by
 system: `11_STRUCTURE` STRUCTURE, HULL; `12_DRIVE` PROPULSION, SHIELDING, POWER_STORAGE, STORAGE; `13_THERMAL`; `14_HABITAT` HABITAT,
@@ -1889,8 +1891,8 @@ the visual meshes. Blender bakes recorded traces onto proxies
 `godot/scenes/excursion.tscn` (`scripts/excursion/`) is one continuous, player-controlled run from the development station into Wayfarer,
 round a whole habitat ring and back to the station, for either ring and as often as wanted without a reset. It reads the DOCKED
 package and the rig (contract 43: `dynamics.stages.boarding`, `trunk`, `access` / `access_b`, `tube` / `tube_b`, `circuit`); Godot
-computes no spacecraft geometry. It is SIMULATION_ONLY. It is the main interactive experience: the web launcher's Start opens it
-and it is the Godot project's main scene (`godot --path godot`). On a touch device (MOB-001) the left thumb's stick moves along the body line (1-D) or
+computes no spacecraft geometry. It is SIMULATION_ONLY. It is Explore Interior's other start (`#interior-excursion`,
+`-- --excursion`); the default start is ring A's deck ([LOCOMOTION.md](LOCOMOTION.md)). On a touch device (MOB-001) the left thumb's stick moves along the body line (1-D) or
 on the deck (2-D), the right thumb drags to look, and Use (labelled with what it works, e.g. "Use · open outer hatch"), Ops at a
 trunk panel, View and Map appear when they apply; a phone layout keeps the goal and prompt top left and the ring map under the
 utility row.

@@ -6,7 +6,9 @@ package the walk reads, all from the saved assets and tracked inputs:
   wayfarer_docked.glb, manifest_docked.json, wf_sim_rig.json   export/godot.py --preset DOCKED (the same exporter as runtime-export)
   wf_route_v1.json                                             data/simulations/ (NAV-001 import, unchanged)
   wf_eva_ops.json                                              data/simulations/ (EVA-OPS-001, src/wayfarer/eva_ops.py)
-The MPFB characters are not built here: the walk keeps its proxy body (a presentation-only difference). In the workspace copy
+  characters/                                                  `workflow.py play-characters` (LOCO-001/002): the player and the Y155
+                                                               suit and drone, copied from the directory `--characters` names
+Without that directory the experiences show their CHARACTER MISSING labels and the browser check fails (no silent proxy). In the workspace copy
 export_presets.cfg is written; the project's godot/ and godot/generated/ are never touched. It then runs the walk's own check
 natively in the same workspace (the native reference for this package), exports Web (no threads: no COOP/COEP headers needed)
 and, optionally, a native Linux build of the same package.
@@ -46,6 +48,7 @@ PCK_LIMIT = 95_000_000            # GitHub Pages refuses files over 100 MB
 SCENE = 'res://scenes/excursion.tscn'
 WALK_CHECK = ['--fixed-fps', '60', SCENE, '--quit-after', '300000', '--', '--check-excursion']
 EVA_CHECK = ['res://scenes/eva_ops.tscn', '--', '--check-eva-ops']
+LOCO_CHECK = ['--fixed-fps', '60', SCENE, '--quit-after', '60000', '--', '--check-locomotion']
 PRESETS = '''[preset.0]
 
 name="Web"
@@ -54,7 +57,7 @@ runnable=true
 dedicated_server=false
 custom_features=""
 export_filter="all_resources"
-include_filter="generated/*.json"
+include_filter="generated/*.json, generated/characters/*.json"
 exclude_filter=""
 export_path=""
 encryption_include_filters=""
@@ -86,7 +89,7 @@ runnable=false
 dedicated_server=false
 custom_features=""
 export_filter="all_resources"
-include_filter="generated/*.json"
+include_filter="generated/*.json, generated/characters/*.json"
 exclude_filter=""
 export_path=""
 encryption_include_filters=""
@@ -175,6 +178,15 @@ def walk_result(log):
             'physics_frames': data.get('physics_frames'), 'errors': Path(log).read_text(errors='replace').count('ERROR:')}
 
 
+def loco_result(log):
+    """The Explore Interior locomotion check (check_locomotion.gd) from its log: result, failures and its measured notes."""
+    line = next((l for l in Path(log).read_text(errors='replace').splitlines() if l.startswith('WF_GODOT_LOCOMOTION ')), None)
+    if line is None:
+        return {'result': 'FAIL', 'reason': 'no WF_GODOT_LOCOMOTION line'}
+    data = json.loads(line.split(' ', 1)[1])
+    return {'result': data.get('result'), 'fails': data.get('fails', []), 'notes': data.get('notes', {})}
+
+
 def eva_result(log):
     """The EVA Operations check (eva_check.gd) from its log: result, failures and the number of checks."""
     text = Path(log).read_text(errors='replace')
@@ -215,7 +227,7 @@ def run_logged(command, log, root, timeout=pipeline.STEP_TIMEOUT):
     return pipeline.subprocess_runner(command, log, root, timeout)
 
 
-def build(root, run_dir, out, identity, native=False, native_check=True):
+def build(root, run_dir, out, identity, native=False, native_check=True, characters=None):
     """Workspace -> package -> import -> native walk check -> Web export into `out` (the site's play/ directory).
     Returns the play record for release.json; raises on any failure."""
     t0 = time.monotonic()
@@ -239,6 +251,19 @@ def build(root, run_dir, out, identity, native=False, native_check=True):
                                            '--out', generated, '--identity', identity))
     shutil.copy2(root / 'data/simulations/wf_route_v1.json', generated / 'wf_route_v1.json')
     shutil.copy2(root / 'data/simulations/wf_eva_ops.json', generated / 'wf_eva_ops.json')
+    reduced = list(REDUCED_FIDELITY)
+    if characters:
+        src = Path(characters)
+        need = ['characters.json', 'eva_characters.json', 'eva_instructor.glb']
+        missing = [n for n in need if not (src / n).exists()]
+        if missing:
+            raise ValueError(f'--characters {src}: missing {missing} (python3 tools/workflow.py play-characters --out {src})')
+        (generated / 'characters').mkdir()
+        for p in sorted(src.iterdir()):
+            if p.is_file() and p.suffix in ('.glb', '.json', '.png', '.jpg'):
+                shutil.copy2(p, generated / 'characters' / p.name)
+    else:
+        reduced.append('characters not packaged: the experiences show CHARACTER MISSING (python3 tools/workflow.py play-characters)')
     if f'run/main_scene="{SCENE}"' not in (project / 'project.godot').read_text():
         raise ValueError(f'project.godot: run/main_scene is not {SCENE}')
     (project / 'export_presets.cfg').write_text(PRESETS.format(web=tools['web'], linux=tools['linux'],
@@ -257,6 +282,12 @@ def build(root, run_dir, out, identity, native=False, native_check=True):
                       'note': 'Godot 4.7.2 headless on Linux, --fixed-fps 60, same workspace and package as the Web export'}
         if native_ref['result'] != 'PASS':
             raise RuntimeError(f'native walk check failed on the web package: {native_ref}')
+        s = time.monotonic()
+        log = run_dir / 'play-native-locomotion-check.log'
+        run_logged([godot, '--headless', '--path', str(project), *LOCO_CHECK], log, root)
+        native_ref['locomotion'] = {**loco_result(log), 'seconds': round(time.monotonic() - s, 1)}
+        if native_ref['locomotion']['result'] != 'PASS' and characters:
+            raise RuntimeError(f'native locomotion check failed on the web package: {native_ref["locomotion"]}')
         s = time.monotonic()
         log = run_dir / 'play-native-eva-ops-check.log'
         run_logged([godot, '--headless', '--fixed-fps', '60', '--path', str(project), *EVA_CHECK], log, root)
@@ -287,13 +318,14 @@ def build(root, run_dir, out, identity, native=False, native_check=True):
     return {'entry': files['html'], 'files': files, 'bytes': sizes, 'godot': tools['version'], 'templates': tools['templates'],
             'variant': VARIANT, 'scene': SCENE,
             'package': sorted(p.name for p in generated.iterdir() if not p.name.endswith('.import')),
-            'reduced_fidelity': REDUCED_FIDELITY, 'native_reference': native_ref, 'native_zip': str(native_zip) if native_zip else None,
+            'reduced_fidelity': reduced, 'characters': sorted(p.name for p in (generated / 'characters').iterdir()
+                                                             if not p.name.endswith('.import')) if (generated / 'characters').exists() else [], 'native_reference': native_ref, 'native_zip': str(native_zip) if native_zip else None,
             'native_zip_sha256': sha(native_zip) if native_zip else None, 'input_key': key,
             'step_seconds': seconds, 'seconds': round(time.monotonic() - t0, 1)}
 
 
 VARIANT = 'web_nothreads_release (single-threaded, no GDExtension, WebGL 2 / Compatibility)'
-REDUCED_FIDELITY = ['MPFB characters not packaged: the proxy body stands in (presentation only)']
+REDUCED_FIDELITY = []
 
 
 def content_named(export, out):
@@ -331,8 +363,8 @@ def content_named(export, out):
 
 NATIVE_README = """G.U. WAYFARER 001 - the walk (EXC-001), native Linux x86_64 build (Godot 4.7.2, Compatibility renderer).
 
-The same package as the browser build at https://densho-media.github.io/ignition-wayfarer/play/ (DOCKED REP_PROXY export, proxy
-body). Run ./wayfarer_walk.x86_64 from this directory. SIMULATION_ONLY: no transfer timing, procedure or interlock is released;
-see the in-game labels. The development runtime (with the MPFB characters) is built from the repository with
+The same package as the browser build at https://densho-media.github.io/ignition-wayfarer/play/ (DOCKED REP_PROXY export, the
+newcomer and the Y155 suit). Run ./wayfarer_walk.x86_64 from this directory. SIMULATION_ONLY: no transfer timing, procedure or interlock is released;
+see the in-game labels. The development runtime is built from the repository with
 python3 tools/workflow.py runtime-export. Godot Engine: MIT licence, see GODOT_LICENSE.txt and GODOT_COPYRIGHT.txt.
 """

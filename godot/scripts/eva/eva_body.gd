@@ -44,6 +44,9 @@ var passenger := false              # docked drone: carried by the suit body, no
 var max_contact_speed := 0.0
 var gas_used_kg := 0.0
 var contact_with := ""            # what the body last touched (diagnostics and HUD)
+var boots: WfMagBoots = null        # LOCO-002: the suit's magnetic boots (null: none)
+var mag_a := 0.0                    # the boots' pull this step (m/s2 toward the plate)
+var walk_dir_now := Vector3.ZERO    # the walking request actually used this step (world)
 
 func setup_eva(k: String, dry: float, inertia_diag: Vector3, exhaust_v: float) -> void:
 	kind = k
@@ -117,7 +120,16 @@ func _after_field(state: PhysicsDirectBodyState3D, a_field: Vector3) -> void:
 	w += impulse_w
 	impulse_dv = Vector3.ZERO
 	impulse_w = Vector3.ZERO
-	# ---- contact support: standing needs the apparent acceleration to press into a supporting surface
+	# ---- magnetic boots: attach / break away, and the pull of the attached pads (a bounded force, added like a field)
+	mag_a = 0.0
+	var mag_n := Vector3.ZERO
+	if boots != null and not held:
+		var res := boots.step(state.transform, v, m)
+		mag_a = res[0]
+		mag_n = res[1]
+		v += -mag_n * mag_a * dt
+	var press := a_field - mag_n * mag_a                       # what presses the body into a surface (field and pads)
+	# ---- contact support: standing needs the apparent acceleration (or the pads' pull) to press into a supporting surface
 	standing = false
 	var n_sum := Vector3.ZERO
 	for i in state.get_contact_count():
@@ -126,20 +138,42 @@ func _after_field(state: PhysicsDirectBodyState3D, a_field: Vector3) -> void:
 		contact_with = (o as Node).name if o is Node else "?"
 		max_contact_speed = maxf(max_contact_speed, absf(v.dot(n)))
 		n_sum += n
-	var a_mag := a_field.length()
+	var a_mag := press.length()
 	if n_sum.length() > 0.1 and a_mag > 0.05:
 		var n := n_sum.normalized()
-		if n.dot(-a_field / a_mag) >= support_cos:
+		if n.dot(-press / a_mag) >= support_cos:
 			standing = true
-			support_normal = n
+			# attached pads sit flat on the walkway plate: its smooth normal, not the faceted contact normal of the hull mesh (which
+			# jumps between lathe segments and made the uprighting moment hunt at about 2 deg/s)
+			support_normal = mag_n if mag_a > 0.0 and mag_n.dot(n) > 0.9 else n
+	walk_dir_now = Vector3.ZERO
+	var was_slipping := false
+	if boots != null:
+		was_slipping = boots.slipping
+		boots.slipping = false
 	if standing and not held:
-		var an := -a_field.dot(support_normal)                 # normal load per kg
+		var an := -press.dot(support_normal)                   # normal load per kg (field and pads)
 		var vt := v - support_normal * v.dot(support_normal)
 		var want := walk_cmd - support_normal * walk_cmd.dot(support_normal)
+		var mu := walk_friction
+		if boots != null and mag_a > 0.0:
+			mu = boots.mu
+			if boots.blocked != "":
+				want = Vector3.ZERO                           # a stepping boot cannot land: the planted one holds the body
+		walk_dir_now = want
 		var dv := want - vt
-		var lim := walk_friction * an * dt                    # Coulomb friction: the feet can change the tangential speed this much
+		var lim := mu * an * dt                               # Coulomb friction: the feet can change the tangential speed this much
 		if dv.length() > lim:
 			dv = dv.normalized() * lim
+		if boots != null and mag_a > 0.0:
+			var shear := (press - support_normal * press.dot(support_normal)).length()
+			if shear > mu * an:                               # the field's shear exceeds what the pads' friction can hold: the boots slide
+				if not was_slipping:
+					boots.slips += 1
+				boots.slipping = true
+			var vn := v.dot(support_normal)
+			if vn < 0.0:
+				v -= support_normal * vn                      # the plate's reaction to the pads' pull (the contact takes it; nothing rebounds)
 		v += dv
 		# the feet also hold the body upright on the surface (a contact moment, not a thruster)
 		var up := r.y
@@ -150,6 +184,9 @@ func _after_field(state: PhysicsDirectBodyState3D, a_field: Vector3) -> void:
 		if dw.length() > wlim:
 			dw = dw.normalized() * wlim
 		w += dw
+	if boots != null and not held:
+		var vt2 := v - support_normal * v.dot(support_normal)
+		boots.advance(state.transform, vt2.length() if standing else 0.0, (walk_cmd - support_normal * walk_cmd.dot(support_normal)) if standing else Vector3.ZERO, dt)
 	if held:
 		v = Vector3.ZERO
 		w = Vector3.ZERO

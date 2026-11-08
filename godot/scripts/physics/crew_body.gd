@@ -25,6 +25,21 @@ var up_now := Vector3.UP
 var ladder_v := Vector3.INF
 var ladder_up := Vector3.ZERO        # on the ladder the hands hold the body parallel to it (head inboard), not along the apparent gravity
 var hand_impulse := Vector3.ZERO
+# LOCO-001 (docs/LOCOMOTION.md, PROTOTYPE gait values from data/characters.toml [locomotion]): the walking request's speed (m/s; < 0 = the
+# profile's test speed, as before) and a queued jump. The jump is the legs' push: an impulse m * dv along the body's up, taken only from
+# a standing contact; afterwards the body follows the field (Coriolis and all) until a floor contact stops it.
+var walk_speed := -1.0
+var jump_dv := 0.0
+var last_jump_step := -1000
+var floor_normal := Vector3.UP
+var floor_load := 0.0                # support acceleration on the feet (m/s2), the N/m that limits the foot force
+
+## Queue a jump of dv m/s along up (the legs' impulse J = m dv); refused off the floor.
+func jump(dv: float) -> bool:
+	if not standing or dv <= 0.0:
+		return false
+	jump_dv = dv
+	return true
 
 func configure(dyn: Dictionary, name: String, f: WfFrameField) -> void:
 	profile_name = name
@@ -150,6 +165,11 @@ func _after_field(state: PhysicsDirectBodyState3D, a: Vector3) -> void:
 	if climbing:
 		hand_impulse = mass * (ladder_v - state.linear_velocity)
 		state.linear_velocity = ladder_v
+	if jump_dv > 0.0 and strong:
+		# the legs push off the deck: an impulse along the body's up through the feet (reaction into the ship, which is far heavier)
+		state.linear_velocity += -a.normalized() * jump_dv
+		jump_dv = 0.0
+		last_jump_step = steps
 	if strong:
 		up_now = -a.normalized()
 		var nf := Vector3.ZERO
@@ -159,13 +179,15 @@ func _after_field(state: PhysicsDirectBodyState3D, a: Vector3) -> void:
 				n = -n
 			if n.dot(up_now) > 0.5:
 				nf += n
-		standing = nf != Vector3.ZERO and not climbing
+		standing = nf != Vector3.ZERO and not climbing and steps - last_jump_step > 3
 		if standing:
 			nf = nf.normalized()
+			floor_normal = nf
+			floor_load = maxf(0.0, -a.dot(nf))
 			# foot contact: tangential speed toward the request, limited by mu * N (N/m = the support acceleration)
 			var v := state.linear_velocity
 			var want := walk_dir - nf * walk_dir.dot(nf)
-			want = want.limit_length(1.0) * profile["test_push_dv_m_s"]
+			want = want.limit_length(1.0) * (walk_speed if walk_speed > 0.0 else float(profile["test_push_dv_m_s"]))
 			var dv := (want - (v - nf * v.dot(nf))).limit_length(WALK_MU * maxf(0.0, -a.dot(nf)) * dt)
 			state.linear_velocity = v + dv
 	if climbing and ladder_up != Vector3.ZERO:

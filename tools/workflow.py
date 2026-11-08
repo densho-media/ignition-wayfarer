@@ -137,6 +137,7 @@ def main(argv=None):
     web_parser.add_argument('--no-draco', action='store_true', help='plain GLB (about 5x larger)')
     web_parser.add_argument('--no-play', action='store_true', help='leave out Enter Wayfarer (no Godot toolchain needed)')
     web_parser.add_argument('--native', action='store_true', help='also export the same walk package as a native Linux build (zip in the run)')
+    web_parser.add_argument('--characters', type=Path, help='LOCO-001/002: the play-characters directory (player and Y155 suit) for Enter Wayfarer')
     web_parser.add_argument('--no-native-check', action='store_true', help="skip the walk's native check on the web package")
     prune_parser = commands.add_parser('prune', help='list run directories AGENTS.md step 6 would allow deleting (sizes); deletes nothing '
                                                      'unless --delete names approved candidates')
@@ -148,6 +149,8 @@ def main(argv=None):
     char_parser.add_argument('--only', nargs='*', help='[human.<id>] recipes of data/characters.toml (default all)')
     char_parser.add_argument('--no-fit', action='store_true', help='skip the in-vehicle fit (it reads the vehicle under the write lock)')
     char_parser.add_argument('--stages', nargs='+', metavar='STAGE', help='run only these stages (character_loop.STAGES); skipped ones must be current')
+    pc_parser = commands.add_parser('play-characters', help='LOCO-001/002: build the player and the Y155 suit for the browser package (web --characters)')
+    pc_parser.add_argument('--out', type=Path, required=True, help='directory for the character files the play package copies')
     eva_parser = commands.add_parser('eva', help='EVA-001: build the suited induction pair, check coverage/envelope/holds, render, export')
     eva_parser.add_argument('--no-renders', action='store_true'); eva_parser.add_argument('--no-route', action='store_true')
     eva_parser.add_argument('--only', nargs='+', metavar='STAGE', help='run only these stages; skipped ones must be current (eva_loop.STAGES)')
@@ -241,7 +244,7 @@ def main(argv=None):
         elif args.action == 'web':
             import web_export
             result = web_export.run(root, args.out, args.pipeline_run, draco=not args.no_draco, with_play=not args.no_play,
-                                    native=args.native, native_check=not args.no_native_check)
+                                    native=args.native, native_check=not args.no_native_check, characters=args.characters)
             emit(result)
             return {'PASS': 0, 'BUSY': 75}.get(result['result'], 1)
         elif args.action == 'runtime-check':
@@ -290,6 +293,11 @@ def main(argv=None):
             else:
                 done = external.fetch(args.optional) + (external.install() if args.op == 'install' else [])
                 emit({name: what for name, what in done})
+        elif args.action == 'play-characters':
+            import play_characters
+            result = play_characters.run(root, args.out)
+            emit(result)
+            return 0 if result['result'] == 'PASS' else 1
         elif args.action == 'characters':
             import character_loop
             result = character_loop.run(root, args.only, not args.no_fit, args.stages)

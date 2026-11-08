@@ -152,6 +152,74 @@ func build(p: Dictionary) -> void:
 	add_child(rb)
 	holds.append({"id": "STATION_RACK", "p": rack + rail_up * 0.05, "kind": "station", "label": "EVA equipment station"})
 	hazards = pkg["hazards"]
+	if pkg.has("mag_boots"):
+		_walkway(pkg["mag_boots"])
+
+## LOCO-002: the magnetic-boot walkway (PROTOTYPE training plate on the hull collar; data/eva_ops.toml [mag_boots]). For a point:
+## on (inside the plate's x and angle range), n (the plate's outward normal there) and gap (radial distance above the plate face, m).
+func mag_surface(p: Vector3) -> Dictionary:
+	var m: Dictionary = pkg.get("mag_boots", {})
+	if m.is_empty():
+		return {"on": false, "n": Vector3.UP, "gap": INF}
+	var r := radius_of(p)
+	var n := Vector3(0, p.y, p.z) / maxf(r, 1e-6)
+	var phi := atan2(p.z, p.y)
+	var on := p.x >= float(m["walkway_x_m"][0]) and p.x <= float(m["walkway_x_m"][1]) and phi >= float(m["walkway_phi_rad"][0]) \
+		and phi <= float(m["walkway_phi_rad"][1])
+	return {"on": on, "n": n, "gap": r - float(m["surface_r_m"]) - float(m["walkway_thickness_m"])}
+
+## A point on the walkway face at x and angle phi, raised by `lift` (m).
+func walkway_point(m: Dictionary, x: float, phi: float, lift := 0.0) -> Vector3:
+	var r := float(m["surface_r_m"]) + float(m["walkway_thickness_m"]) + lift
+	return Vector3(x, r * cos(phi), r * sin(phi))
+
+func _walkway(m: Dictionary) -> void:
+	var x0 := float(m["walkway_x_m"][0])
+	var x1 := float(m["walkway_x_m"][1])
+	var p0 := float(m["walkway_phi_rad"][0])
+	var p1 := float(m["walkway_phi_rad"][1])
+	var plate := _mat(Color(0.30, 0.32, 0.34))
+	plate.metallic = 0.6
+	plate.roughness = 0.55
+	plate.emission_enabled = false
+	plate.cull_mode = BaseMaterial3D.CULL_DISABLED
+	var edge := _mat(Color(0.95, 0.72, 0.08))
+	edge.cull_mode = BaseMaterial3D.CULL_DISABLED
+	var root := Node3D.new()
+	root.name = "MAG_WALKWAY"
+	add_child(root)
+	var band := 0.05 / float(m["surface_r_m"])          # 50 mm yellow edge band (angle)
+	root.add_child(_strip(m, x0, x1, p0 + band, p1 - band, 0.0, plate))
+	root.add_child(_strip(m, x0, x1, p0, p0 + band, 0.0005, edge))
+	root.add_child(_strip(m, x0, x1, p1 - band, p1, 0.0005, edge))
+	root.add_child(_strip(m, x0, x0 + 0.05, p0, p1, 0.0005, edge))
+	root.add_child(_strip(m, x1 - 0.05, x1, p0, p1, 0.0005, edge))
+	var tag := Label3D.new()
+	tag.text = "MAGNETIC WALKWAY · TRAINING (PROTOTYPE)"
+	tag.font_size = 48
+	tag.pixel_size = 0.004
+	tag.modulate = Color(0.95, 0.75, 0.15)
+	var mid := (p0 + p1) * 0.5
+	tag.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	tag.position = walkway_point(m, x0 + 0.3, mid, 0.25)
+	root.add_child(tag)
+
+func _strip(m: Dictionary, x0: float, x1: float, p0: float, p1: float, lift: float, mat: Material) -> MeshInstance3D:
+	var st := SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	var n := maxi(2, int(ceil((p1 - p0) / 0.02)))
+	for i in n:
+		var a := lerpf(p0, p1, float(i) / n)
+		var b := lerpf(p0, p1, float(i + 1) / n)
+		var q := [walkway_point(m, x0, a, lift), walkway_point(m, x1, a, lift), walkway_point(m, x1, b, lift), walkway_point(m, x0, b, lift)]
+		for k in [0, 1, 2, 0, 2, 3]:
+			var v: Vector3 = q[k]
+			st.set_normal(Vector3(0, v.y, v.z).normalized())
+			st.add_vertex(v)
+	var mi := MeshInstance3D.new()
+	mi.mesh = st.commit()
+	mi.material_override = mat
+	return mi
 
 ## X of the Brow's ram face at radius r (linear between profile rows).
 func face_x(r: float) -> float:

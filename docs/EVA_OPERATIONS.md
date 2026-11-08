@@ -8,7 +8,8 @@ physics while the other is controlled, and switching control resets nothing. It 
 - Scene: `godot/scenes/eva_ops.tscn` (`godot/scripts/eva/`). On the website it is **Explore Exterior** (`/exterior/`, Start opens the
   shared Godot page with `#exterior`; the older `#eva` still works); from the walk **F9** opens it, natively `godot --path godot -- --eva`.
   **F8** goes inside to the walk (Explore Interior); the page's title, Exit link and hash follow the scene (`godot/scripts/web_page.gd`).
-  It starts in free exploration at the hatch; **F4** starts the guided First Flight.
+  It starts standing on the magnetic training walkway (LOCO-002, [LOCOMOTION.md](LOCOMOTION.md)); `#exterior-hatch` (`-- --hatch`)
+  starts in free exploration at the hatch, and **F4** (or `#exterior-first-flight`) starts the guided First Flight.
 - Package: `data/simulations/wf_eva_ops.json` (contract `wf_eva_ops v1`), written by `src/wayfarer/eva_ops.py` from the canonical EVA
   system (`data/eva_suit.toml`, `data/eva_drone.toml`, `validation/eva_system.py` and its `runtime_layout`), the Brow
   (`forward_shield.py`), the training route (`eva_route.py`), the rig (`wf_sim_rig.json`) and the operations choices in
@@ -134,7 +135,8 @@ station socket) and RESCUE.
   | H / P | attitude hold / position hold |
   | 1 / 2 | control the astronaut / the drone |
   | G | grab |
-  | Space | push off |
+  | Space | push off (a hold, or the walkway on the boots) |
+  | V | magnetic boots on or off |
   | T | tether |
   | X | dock or undock |
   | Y | drone mode |
@@ -157,7 +159,8 @@ station socket) and RESCUE.
   - finite resupply and the regulator order;
   - burn presets that cold gas cannot fly off.
 - `godot --headless --fixed-fps 60 --path godot res://scenes/eva_ops.tscn -- --check-eva-ops` (`eva_check.gd`; runtime-export check
-  `eva-ops`; the web build's native reference and the browser equivalence session) runs 34 checks in the real scene. It prints one
+  `eva-ops`; the web build's native reference and the browser equivalence session) runs 44 checks in the real scene (34, plus 10
+  for the magnetic boots: [LOCOMOTION.md](LOCOMOTION.md)). It prints one
   `WF_GODOT_EVA_OPS` line:
   - **Physics:** momentum and angular momentum conserved, F = m a with the rocket equation at the allocation efficiency, Euler
     torque, braking and assistance spend gas, no invisible damping, ship acceleration seen relative, standing and walking under 1.1 g
@@ -175,7 +178,8 @@ station socket) and RESCUE.
 - PROTOTYPE throughout: the RC-1 accessory and station rack, the suit inertia box, the assist gains, the hand reach (0.9 m), grab speed,
   push-off, tether length and walking friction.
 - The suit glove loads, tether length and keep-outs are OPEN in canon (`eva_suit.toml`).
-- Without the exported GLBs (`export/eva_gltf.py`, local assets), the astronaut and drone are labelled proxies of the same size. Without
+- The astronaut is the Y155 instructor model with its clips (`WfCharacterRig`); runtime-export and `workflow.py play-characters` export
+  it. Without the exported GLBs the astronaut is a proxy labelled SUIT MODEL MISSING and the page reports `model: false`. Without
   the DOCKED ship GLB, the colliders are drawn as grey surfaces.
 - The truss is simplified to capsules on the member centre lines.
 - The same bodies, gas, allocation, frames and drone are meant for the Brow Games. Their rules (reserve floor, gates) belong to that

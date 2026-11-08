@@ -155,6 +155,56 @@
      "status": "PASS",
      "use": "EVA"
     },
+    "eva_mag_stand": {
+     "frames": 120,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
+    },
+    "eva_mag_walk": {
+     "frames": 75,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
+    },
+    "eva_mag_attach": {
+     "frames": 36,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
+    },
+    "eva_mag_release": {
+     "frames": 36,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
+    },
+    "eva_float": {
+     "frames": 120,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
+    },
     "idle": {
      "frames": 120,
      "exposed": 0,
@@ -258,6 +308,56 @@
     },
     "climb": {
      "frames": 50,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "NOT_SUITED_EVA"
+    },
+    "run": {
+     "frames": 24,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "NOT_SUITED_EVA"
+    },
+    "jump": {
+     "frames": 8,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "NOT_SUITED_EVA"
+    },
+    "fall": {
+     "frames": 30,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "NOT_SUITED_EVA"
+    },
+    "land": {
+     "frames": 15,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "NOT_SUITED_EVA"
+    },
+    "step": {
+     "frames": 33,
      "exposed": 0,
      "max_out_mm": 0.0,
      "head_out": 0,
@@ -735,6 +835,56 @@
      "status": "PASS",
      "use": "EVA"
     },
+    "eva_mag_stand": {
+     "frames": 120,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
+    },
+    "eva_mag_walk": {
+     "frames": 75,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
+    },
+    "eva_mag_attach": {
+     "frames": 36,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
+    },
+    "eva_mag_release": {
+     "frames": 36,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
+    },
+    "eva_float": {
+     "frames": 120,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "EVA"
+    },
     "idle": {
      "frames": 120,
      "exposed": 0,
@@ -840,6 +990,56 @@
     },
     "climb": {
      "frames": 50,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "NOT_SUITED_EVA"
+    },
+    "run": {
+     "frames": 24,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "NOT_SUITED_EVA"
+    },
+    "jump": {
+     "frames": 8,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "NOT_SUITED_EVA"
+    },
+    "fall": {
+     "frames": 30,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "NOT_SUITED_EVA"
+    },
+    "land": {
+     "frames": 15,
+     "exposed": 0,
+     "max_out_mm": 0.0,
+     "head_out": 0,
+     "bones": {},
+     "at": [],
+     "status": "PASS",
+     "use": "NOT_SUITED_EVA"
+    },
+    "step": {
+     "frames": 33,
      "exposed": 0,
      "max_out_mm": 0.0,
      "head_out": 0,

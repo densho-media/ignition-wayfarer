@@ -458,9 +458,111 @@ def casualty_supported(H, mob, fps):
     return dict(frames=out, loop=True, root_motion=False)
 
 
+# LOCO-002 magnetic-boot locomotion (PROTOTYPE motion; magnetic boots are not canon, docs/LOCOMOTION.md). Upright over a designated
+# ferromagnetic walking plate, the soles flush on it. The gait keeps one boot attached at every frame: each boot holds for
+# stance_fraction (> 0.5) of its cycle, so both hold at each change, and the swinging boot peels heel first and is carried
+# low (lift_m) and straight. Hip and knee flexion stay well inside the suited limits (mobility_report). Root motion along -Y at the
+# gait's speed: the runtime strips it and moves the body by the boots' contact force.
+
+def _mag_hip(H, drop=0.0):
+    return (0.0, 0.0, sum(hs.leg_lengths(H)[:3])*.985-drop)
+
+
+def _mag_ankles(H, right, pts):
+    la = ch.P['ankle']*H
+    return {s: add(mul(right, sg*ch.P['hip_x']*H*1.3), (0.0, pts[s][0], la+pts[s][1])) for s, sg in zip(SIDES, (1, -1))}
+
+
+SUIT_ARMS = dict(right=dict(flex=14.0, abduct=22.0, elbow=38.0), left=dict(flex=14.0, abduct=22.0, elbow=38.0))
+
+
+def mag_stand(H, mob, g, fps):
+    """Standing on the plate with both boots attached: the suited neutral stance (arms held a little out and forward by the pressurized
+    sleeves), breathing and a 5 mm sway. 4 s loop."""
+    U = (0.0, 0.0, 1.0); F = (0.0, -1.0, 0.0); right = ch.frame(U, F)[0]; out = []
+    for i in range(4*fps):
+        t = i/(4*fps); w = math.sin(2*math.pi*t)
+        pose = dict(ch.STAND, trunk=2.0+.6*w, head=-6.0, knee=(6.0, 6.0), arms=SUIT_ARMS)
+        j = ch.skeleton(_fig(H), pose, add(_mag_hip(H, .012), mul(right, .005*w)), U, F)
+        out.append(_frame(hs.legs_to(j, H, _mag_ankles(H, right, {'right': (0.0, 0.0), 'left': (0.0, 0.0)}), F, U), (0.0, 0.0, 0.0),
+                          ('foot_right', 'foot_left')))
+    return dict(frames=out, loop=True, root_motion=False, boots=[['right', 'left']]*len(out))
+
+
+def mag_walk(H, mob, g, fps):
+    """The magnetic-boot gait: one cycle (two steps) of step_m each at speed_m_s. Each boot is attached for stance_fraction of its cycle;
+    the other is released, peeled heel first, carried lift_m clear and set down flat. The pelvis rides low (knees bent), the trunk leans
+    a little forward, the arms swing only a little (suit torque). `boots` lists the attached boots per frame."""
+    v = g['speed_m_s']; stride = 2*g['step_m']; T = stride/v; n = round(T*fps); st = g['stance_fraction']
+    U = (0.0, 0.0, 1.0); F = (0.0, -1.0, 0.0); right = ch.frame(U, F)[0]; out = []; boots = []
+    l1, l2, la, _ = hs.leg_lengths(H); reach = .985*(l1+l2)
+    for i in range(n):
+        t = i*T/n; y = v*t; pts = {}; held = []; toes = {}
+        for side, off in (('right', 0.0), ('left', .5)):
+            ph = (t/T+off) % 1.0; cyc = math.floor(t/T+off); plant = v*(cyc+st/2-off)*T
+            if ph < st:
+                yy, lift = plant, 0.0; held.append(side)
+            else:
+                s = hs.smooth((ph-st)/(1-st)); yy, lift = plant+stride*s, g['lift_m']*math.sin(math.pi*s)
+            pts[side] = (-yy, lift)
+        ank = _mag_ankles(H, right, pts)
+        hip = add(_mag_hip(H, g['knee_drop_m']), (0.0, -y, 0.0))
+        # a planted leg never stretches: the pelvis sinks if the stance foot is far behind or ahead
+        for side in held:
+            d = math.dist((hip[1],), (ank[side][1],)); hz = math.sqrt(max(0.0, reach**2-d**2))+la
+            hip = (hip[0], hip[1], min(hip[2], hz))
+        sw = 6.0*math.sin(2*math.pi*t/T)
+        arms = dict(right=dict(SUIT_ARMS['right'], flex=14.0-sw), left=dict(SUIT_ARMS['left'], flex=14.0+sw))
+        j = ch.skeleton(_fig(H), dict(ch.STAND, trunk=5.0, head=-8.0, arms=arms), hip, U, F)
+        out.append(_frame(hs.legs_to(j, H, ank, F, U), (0.0, -y, 0.0), tuple(f'foot_{s}' for s in held))); boots.append(held)
+    return dict(frames=out, loop=True, root_motion=True, travel_speed_m_s=v, boots=boots)
+
+
+def mag_attach(H, mob, g, fps):
+    """Attaching: the boots meet the plate and the knees flex by attach_drop_m as the magnets pull the soles flush, then the body
+    straightens into the stance. Both feet planted (the clip starts at contact). 1.2 s."""
+    U = (0.0, 0.0, 1.0); F = (0.0, -1.0, 0.0); right = ch.frame(U, F)[0]; n = round(1.2*fps); out = []
+    for i in range(n):
+        u = i/(n-1); drop = .012+g['attach_drop_m']*math.sin(math.pi*min(1.0, u/.8))
+        pose = dict(ch.STAND, trunk=2.0+6.0*(drop-.012)/g['attach_drop_m'], head=-6.0, knee=(6.0, 6.0), arms=SUIT_ARMS)
+        j = ch.skeleton(_fig(H), pose, _mag_hip(H, drop), U, F)
+        out.append(_frame(hs.legs_to(j, H, _mag_ankles(H, right, {'right': (0.0, 0.0), 'left': (0.0, 0.0)}), F, U), (0.0, 0.0, 0.0),
+                          ('foot_right', 'foot_left')))
+    return dict(frames=out, loop=False, root_motion=False, boots=[['right', 'left']]*len(out), events=[(0.0, 'boots_attached')])
+
+
+def mag_release(H, mob, g, fps):
+    """Releasing: the magnets switch off and the body rises off the plate by a gentle knee extension (the release push, release_rise_m
+    over the clip); the arms come up into the free-float posture. No boot holds after frame 0. 1.2 s."""
+    U = (0.0, 0.0, 1.0); F = (0.0, -1.0, 0.0); right = ch.frame(U, F)[0]; n = round(1.2*fps); out = []; boots = []
+    for i in range(n):
+        u = hs.smooth(i/(n-1)); rise = g['release_rise_m']*u
+        legs = _legs(6.0+24.0*u, 4.0+16.0*u)
+        arms = {s: dict(flex=14.0+16.0*u, abduct=22.0+10.0*u, elbow=38.0+22.0*u) for s in SIDES}
+        pose = dict(ch.STAND, trunk=2.0, head=-6.0-4.0*u, **{k: (legs[k][0], legs[k][1]) for k in ('hip', 'knee', 'abduct', 'ankle')}, arms=arms)
+        pose['hip'] = tuple(h*u for h in legs['hip']); pose['knee'] = tuple(6.0+(k-6.0)*u for k in legs['knee']); pose['ankle'] = tuple(a*u for a in legs['ankle'])
+        j = ch.skeleton(_fig(H), pose, add(_mag_hip(H, .012), (0.0, 0.0, rise)), U, F)
+        if i == 0:
+            j = hs.legs_to(j, H, _mag_ankles(H, right, {'right': (0.0, 0.0), 'left': (0.0, 0.0)}), F, U)
+        out.append(_frame(j, (0.0, 0.0, 0.0), ('foot_right', 'foot_left') if i == 0 else ())); boots.append(['right', 'left'] if i == 0 else [])
+    return dict(frames=out, loop=False, root_motion=False, boots=boots, events=[(0.0, 'boots_released')])
+
+
+def float_neutral(H, mob, g, fps):
+    """Free float after a release: the suited neutral body posture (hips and knees bent, arms forward), breathing. 4 s loop, no contacts."""
+    U = (0.0, 0.0, 1.0); F = (0.0, -1.0, 0.0); out = []
+    for i in range(4*fps):
+        w = math.sin(2*math.pi*i/(4*fps))
+        pose = dict(ch.STAND, trunk=-2.0+.8*w, head=-10.0, hip=(30.0, 26.0), knee=(36.0+2*w, 32.0-2*w), abduct=(7.0, 7.0), ankle=(-15.0, -15.0),
+                    arms={s: dict(flex=30.0+2*w, abduct=32.0, elbow=60.0) for s in SIDES})
+        out.append(_frame(ch.skeleton(_fig(H), pose, _mag_hip(H, -.04), U, F), (0.0, 0.0, 0.0)))
+    return dict(frames=out, loop=True, root_motion=False, boots=[[]]*len(out))
+
+
 EVA_ACTIONS = ('eva_suit_check', 'eva_airlock', 'eva_translate', 'eva_body_rotate', 'eva_tether_transfer', 'eva_tool_inspect',
                'eva_guide_point', 'eva_abort_translate', 'eva_hatch_pass', 'eva_buddy_check', 'eva_casualty', 'eva_rescue_hold',
-               'eva_latch_extension', 'eva_latch_pitch', 'eva_casualty_supported')
+               'eva_latch_extension', 'eva_latch_pitch', 'eva_casualty_supported',
+               'eva_mag_stand', 'eva_mag_walk', 'eva_mag_attach', 'eva_mag_release', 'eva_float')
 # Actions every suit asset inherits from the wearer's unsuited character rig (build/human.py, human_system.py). They are never suited EVA operations,
 # whatever their coverage readback: not in eva_actions, not played as EVA, tagged NOT_SUITED_EVA in the asset (docs/ACCESSORIES.md).
 SHARED_ACTIONS = {
@@ -470,6 +572,11 @@ SHARED_ACTIONS = {
     'crawl': 'unsuited floor crawl: the head leaves the torso-fixed helmet (coverage FAIL)',
     'climb': 'unsuited ladder climb: overhead reach far past the 120 deg suit shoulder display limit (coverage passes; still not '
              'suited motion)',
+    'run': 'unsuited run in ring gravity (LOCO-001)',
+    'jump': 'unsuited jump take-off in ring gravity (LOCO-001)',
+    'fall': 'unsuited airborne posture in ring gravity (LOCO-001)',
+    'land': 'unsuited landing in ring gravity (LOCO-001)',
+    'step': 'unsuited stepping in place (LOCO-001)',
 }
 
 
@@ -484,7 +591,10 @@ def actions(H, data, fps, P=None):
                     eva_abort_translate=rail_translate(H, mob, fps, mob['abort_speed_m_s']), eva_hatch_pass=hatch_pass(H, mob, fps),
                     eva_buddy_check=buddy_check(H, mob, fps), eva_casualty=casualty(H, mob, fps), eva_rescue_hold=rescue_hold(H, mob, fps),
                     eva_latch_extension=latch_extension(H, mob, fps), eva_latch_pitch=latch_pitch(H, mob, fps),
-                    eva_casualty_supported=casualty_supported(H, mob, fps), rest=hs.rest(H))
+                    eva_casualty_supported=casualty_supported(H, mob, fps), eva_mag_stand=mag_stand(H, mob, data['mag_gait'], fps),
+                    eva_mag_walk=mag_walk(H, mob, data['mag_gait'], fps), eva_mag_attach=mag_attach(H, mob, data['mag_gait'], fps),
+                    eva_mag_release=mag_release(H, mob, data['mag_gait'], fps), eva_float=float_neutral(H, mob, data['mag_gait'], fps),
+                    rest=hs.rest(H))
     finally:
         ch.P.clear(); ch.P.update(saved)
 
