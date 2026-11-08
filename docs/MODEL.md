@@ -2021,34 +2021,66 @@ the owner answers are in [references/DRONE_001_2026-10-13.md](../references/DRON
 navigator stills `drone_stills/` in `runs/20261013T142915069047Z-runtime`. Body candidates for every class (mechanisms, GU-SIF fittings,
 actions, GLBs) are accessory assets outside the ship and replace no proxy (DGT-017 HOLD): [docs/ACCESSORIES.md](ACCESSORIES.md).
 
-## Player controls (ACI)
+## Player controls (ACI, CTRL-001)
 
-The Godot runtime has one player-action registry, the autoload `WfInput` (`godot/scripts/controls/wf_input.gd`). Actions are bound
-through Godot's InputMap, one context per scene; the walk sets `excursion` beside the always-active `ui` (Confirm, Back, Codex, details).
+Wayfarer defines the actions; the player chooses the inputs. The Godot runtime has one player-action registry, the autoload `WfInput`
+(`godot/scripts/controls/wf_input.gd`). Each action has a stable id (`player.move_forward`), a name, a description, its contexts, its
+kind (press, hold, axis), its layout policy, and, new with CTRL-001, `setup` (the experiences that need it before the player can move)
+and `share` (the action whose keyboard input it uses in another context). Actions are bound through Godot's InputMap, one context per
+scene beside the always-active `ui` (Confirm, Back, Controls, guide, details): the walk sets `excursion` (Explore Interior), EVA
+Operations `evaops` (Explore Exterior). Gameplay reads only action states: `WfInput.strength(id)` / `held(id)` for holds, and
+`WfInput.action_of(event, contexts)` or `event.is_action_pressed(id)` for presses, so no playable scene knows which key was pressed.
 The registry still lists the retired scenes' contexts and actions (`walk`, `body`, `demo`, `nav`, `explorer`, `space`, `inspector`,
-`flight`, `thermal`, `life`, `lab`, `eva`, `holo`); no scene activates them. Movement follows the keyboard position (W/S/A/D on QWERTY,
-Z/S/Q/D on AZERTY); the others follow the printed key. Each handler asks `WfInput.key_of(event, its contexts)`, which names the
-triggered action by its default key, so a rebind changes the input and not the handler. HUD key lines show the player's actual binding
-for the device last used (`WfInput.label`, `WfInput.keys("{action}: …")`), drawn as coloured key chips (`controls/key_text.gd`, the
-review-guide colours): amber in the walk's goal and prompt lines and the EVA Operations card and messages (the key that moves the step
-on), blue in the EVA Operations key list (keys that also work now). Bindings change which input triggers an action, never
-forces, speeds or permissions (S&E 46 DYN-007, 47 SIM-010, 49 NAV-003). On a touch-first device `controls/wf_touch.gd` (MOB-001) adds
-the stick, the look drag and the contextual buttons.
+`flight`, `thermal`, `life`, `lab`, `eva`, `holo`); no scene activates them, and they never block a key of a playable action. Bindings
+change which input triggers an action, never forces, speeds, propellant or permissions (S&E 46 DYN-007, 47 SIM-010, 49 NAV-003).
 
-- **Conflicts.** A conflict is the same input on two actions whose contexts can be active together (`ui` with everything). No two
-  shipped defaults clash; Confirm, Back and Codex always keep a keyboard input, and Esc stays locked on Back.
-- **Accessibility.** In the Codex any hold action can latch; the stick dead zone (0.2–0.65), sensitivity (×0.75–×2, never past full
-  speed) and the 2-D panel size (100/125/150 %) are set there. Prompts never time out; every modal has a mouse route.
-- **Profile.** `user://wayfarer_controls.cfg` (schema 3): bindings, preference, discovered actions, lessons, accessibility and touch
-  settings. Unknown actions are dropped; a required action with no keyboard input is repaired. Nothing is written to `data/` or
-  `generated/`.
-- **Control Codex.** F10 or the codex action: this scene's actions (Tab: every context), each with its inputs, availability, function
-  and physics note; rebind, restore defaults, switch hold/toggle, set text size, dead zone and sensitivity. The first-launch flow and
-  the lesson cards remain in `control_overlay.gd`, but nothing opens the first-launch flow since the review menu was retired.
+- **Essential actions.** Explore Interior needs Move forward, back, left, right, Jump and Run; Explore Exterior needs the same four
+  moves (its `evaops.fwd/back/left/right` share them: on the walkway they walk, flying they thrust), Turn left, Turn right and the
+  Magnetic boots. Mouse look needs no binding. Every other action keeps its suggested key and is listed with it on screen.
+- **First visit.** A new profile has no keyboard input for any essential action (controllers keep their defaults; touch-first
+  devices get the touch welcome and on-screen controls instead). When an experience starts (`WfInput.begin`), any essential action not
+  configured opens the setup before anything moves (the scene tree pauses): "Configure your controls · Which key would you like to
+  use to move forward?", then the rest in order. Each press is taken at once; Shift, Ctrl or Alt alone count when released alone; Esc
+  goes back a step and is never a game key. "Use suggested controls" (W/A/S/D, Space, Shift; J/L, V) is a button the player chooses,
+  never applied silently; "Play with the controller" skips the keyboard setup for the visit when a controller is connected. A
+  conflict shows the other action and offers swap, replace or another key. The setup closes, saves and the experience starts.
+- **Configured** means the player chose or knowingly kept the key (`[setup] confirmed`) and it still has one; a profile file alone is
+  not enough. Shared moves are chosen once: Explore Exterior after Explore Interior asks only Turn left, Turn right and the boots.
+- **Conflicts.** The same input on two actions that can be active together is refused until resolved (swap, replace, cancel); a
+  shared key is checked in every context that reads it (Move forward on I would collide with EVA's Pitch up). The same key may serve
+  contexts never active together (Interior Jump and EVA Push off are both suggested on Space). Confirm, Back and Controls and every
+  essential action always keep a keyboard input, and Esc stays locked on Back.
+- **Controls menu** (the Control Codex). The Controls button at the bottom left (beside the page's Exit) or F10 opens it in both
+  experiences; it works with the mouse alone. It groups "Needed to move" for the running experience, the scene's other actions and
+  Everywhere (Tab: every context), shows each action's inputs, and changes one at once: change a key, add a second key, remove a key
+  (refused where a key is needed), the suggested key, hold or toggle, set the experience up again, use suggested for all, clear all.
+  The tree pauses while a key is captured. Accessibility settings (latching holds, stick dead zone 0.2–0.65, sensitivity ×0.75–×2,
+  never past full speed, panel size 100/125/150 %) are set there.
+- **Labels.** Every HUD line, goal, prompt and key list prints the player's current binding (`WfInput.label`, `WfInput.keys("{id}")`)
+  as coloured key chips (`controls/key_text.gd`); an unbound optional action reads "unassigned". The web shell and the launcher pages
+  name actions, not keys.
+- **Keyboard layouts.** Movement binds the key position (physical keycode), so a chosen key stays put on QWERTY, QWERTZ or AZERTY, and
+  keeps the printed character the player pressed for its label (AZERTY's Z, not "W"); every other action binds the printed character.
+- **Profile and persistence.** `user://wayfarer_controls.cfg` (ConfigFile, schema 4): bindings, `[setup] confirmed`, lesson
+  preference and progress, accessibility and touch settings. In the Web export Godot keeps `user://` in the browser's IndexedDB for the
+  site's origin and syncs it after each save, so the profile survives reloads, both experiences (one package) and new deployments,
+  per browser profile; nothing is synced to an account. If the browser does not persist it (private window, blocked storage:
+  `OS.is_userfs_persistent()` false) or a save fails, the setup and Controls say the keys last for this visit and play goes on.
+  An unreadable file is kept as `wayfarer_controls.cfg.bad` and the first-visit setup starts. **Migration:** unknown actions and
+  damaged entries are dropped, a required action without a keyboard input is repaired; from schema 3 every custom key is kept and
+  counts as chosen, an essential key still on its old default is offered to keep ("Keep W") in the setup, a custom key saved on a
+  shared EVA move moves to its source, and an essential action newer than the profile starts without a key.
+- **Checks.** `scripts/check_controls.gd` (runtime check `controls`, CI after the Godot import; isolated profiles in
+  `user://ctrl_check/`) asserts the first-visit setup (Move forward first, custom keys act, the old default does not), returning
+  profiles, the shared exterior moves, conflicts (swap, refused replace, cross-experience, allowed reuse), add and remove, clear and
+  suggested, schema-3 migration, a corrupted profile, a failed save, semantic injection (touch stick, `trigger()`), touch and
+  controller labels, and that checks are never gated. The web check answers the setup in a fresh Chrome profile with the arrows,
+  Space and Shift, shows W does nothing, changes Move forward to W in Controls, reloads with the same profile and finds no setup,
+  then answers only the exterior's three questions. The physics checks drive the bodies through semantic requests, never keys.
 
-Controller prompts are text, not glyphs. The keyboard-layout labels were checked only on a US layout. The controller and
-accessibility review stays OPEN (49 NAV-019). Audit, library decision and stages:
-[references/ACI_PLAN_2026-10-17.md](../references/ACI_PLAN_2026-10-17.md).
+Controller prompts are text, not glyphs. The keyboard-layout labels were checked only on a US layout in a browser (the Web build
+reports the position's US name for keys it has no captured character for). The controller and accessibility review stays OPEN
+(49 NAV-019). Audit, library decision and stages: [references/ACI_PLAN_2026-10-17.md](../references/ACI_PLAN_2026-10-17.md).
 
 ## Limits
 

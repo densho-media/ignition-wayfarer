@@ -453,10 +453,13 @@ candidates of all nine classes are separate accessory assets (docs/ACCESSORIES.m
 
 - [ ] **J05 — Adaptive Control Induction (user brief 2026-10-17).** Plan, audit and library decision:
   `references/ACI_PLAN_2026-10-17.md`. ACI-01 to ACI-10 are built: the walk's keys are `WfInput` actions, with hold/toggle, stick
-  dead zone and sensitivity, and text size. Prune the retired scenes' contexts and actions from `wf_input.gd` and decide whether the
-  walk opens the first-launch flow (nothing opens it since the review menu was retired). Left: the three first-run walkthroughs by a person (keyboard
-  Personal, keyboard/mouse Suggested, controller Personal, with a real controller); a check of the labels on an AZERTY or QWERTZ
-  layout; controller glyphs (optional, `godot_input_icons` MIT); the owner's controller/accessibility review (49 NAV-019 OPEN).
+  dead zone and sensitivity, and text size. CTRL-001 (owner brief 2026-11-08, "Dynamic action mapping"): both experiences open a
+  first-visit controls setup (Move forward first, no silent defaults), share the moves, and keep the keys per browser profile
+  (schema 4, migration from 3); Controls button and menu in both (docs/MODEL.md "Player controls"). Left: prune the retired scenes'
+  contexts and actions from `wf_input.gd`; the owner's hands-on first visit and return in a browser; first-run walkthroughs by a person
+  with a real controller; a check of the labels on a real AZERTY or QWERTZ keyboard in Chrome, Firefox and Safari; asking newer
+  optional actions (drone, EVA equipment) when first needed instead of their suggested keys; controller glyphs (optional,
+  `godot_input_icons` MIT); the owner's controller/accessibility review (49 NAV-019 OPEN).
   **Done when:** the walkthroughs pass.
 
 - [ ] **J06 — Station-to-ring excursion with continuous ring circulation (user brief 2026-10-26; EXC-001, CIRC-001, STN-001).**

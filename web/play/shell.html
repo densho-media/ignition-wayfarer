@@ -79,9 +79,9 @@ const GODOT_THREADS_ENABLED = $GODOT_THREADS_ENABLED;
   const bar = document.querySelector('#bar span');
   const EXPERIENCES = {
     interior: { title: 'EXPLORE INTERIOR', back: '../interior/', hash: '#interior',
-                hint: 'Click the view to look. W/A/S/D walk, Shift run, Space jump, C camera, R training reset; E use, O ship operations, M map. The goal at the top left says what to do next.' },
+                hint: 'First you choose your own keys for walking, running and jumping; they are kept in this browser. Click the view to look. The goal at the top left says what to do next, with your keys; Controls (bottom left) shows and changes them.' },
     exterior: { title: 'EXPLORE EXTERIOR', back: '../exterior/', hash: '#exterior',
-                hint: 'On the walkway: W/S walk on the magnetic boots, J/L turn, V boots on/off, Space push off. Flying: W/S A/D R/F thrust, I/K J/L U/O rotate, B brake, G grab, T tether, X drone, 1/2 astronaut or drone, F4 guided flight, F5 training reset.' },
+                hint: 'Your walking keys from Explore Interior carry over; you choose the keys still missing (turning and the magnetic boots). The key list on screen shows your keys; Controls (bottom left) shows and changes them.' },
   };
   const experienceOf = h => /eva|exterior/i.test(h || '') ? 'exterior' : 'interior';
   let experience = experienceOf(location.hash);

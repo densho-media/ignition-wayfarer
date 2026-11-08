@@ -100,6 +100,7 @@ func _ready() -> void:
 	if start_kind == "WALKWAY":
 		start_walkway(false)
 	WfWebPage.scene("exterior")
+	WfInput.begin("exterior")                        # CTRL-001: asks only what Explore Exterior still needs (turn, boots; moves are shared)
 	print("WF_EVA_OPS ready")
 	if "--check-eva-ops" in OS.get_cmdline_user_args():
 		check = WfEvaCheck.new()
