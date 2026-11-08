@@ -46,6 +46,13 @@ import urllib.request
 BASE = '/ignition-wayfarer/'
 
 
+
+# CTRL-001: the stored line of one action in the controls profile, read straight from Godot's IndexedDB copy of user://.
+IDB_LINE = """new Promise(r => { const q = indexedDB.open('/userfs'); q.onerror = () => r('');
+  q.onsuccess = () => { try { const g = q.result.transaction('FILE_DATA').objectStore('FILE_DATA').get('/userfs/godot/app_userdata/Wayfarer/wayfarer_controls.cfg');
+    g.onsuccess = () => { const v = g.result; const t = v && v.contents ? new TextDecoder().decode(v.contents) : '';
+      const m = t.match(/^{key}=[\\s\\S]*?\\]$/m); r(m ? m[0].slice(0, 300) : ''); }; g.onerror = () => r(''); } catch (e) { r(''); } }; })"""
+
 class Site(http.server.SimpleHTTPRequestHandler):
     extensions_map = {**http.server.SimpleHTTPRequestHandler.extensions_map,
                       '.js': 'text/javascript', '.wasm': 'application/wasm', '.glb': 'model/gltf-binary', '.json': 'application/json'}
@@ -755,6 +762,35 @@ def run_main(url, release, build, binary, sandbox, out, record_check, metrics):
                 time.sleep(hold)
                 page.send('Input.dispatchKeyEvent', {'type': 'keyUp', 'key': k, 'code': code, 'windowsVirtualKeyCode': vk})
 
+            # CTRL-001: the controls state the engine publishes (window.wayfarerControls) and a key press the setup can read
+            CTL = 'window.wayfarerControls'
+            KEYS = {'ArrowUp': ('ArrowUp', 38), 'ArrowDown': ('ArrowDown', 40), 'ArrowLeft': ('ArrowLeft', 37), 'ArrowRight': ('ArrowRight', 39),
+                    ' ': ('Space', 32), 'Shift': ('ShiftLeft', 16), ',': ('Comma', 188), '.': ('Period', 190), '9': ('Digit9', 57),
+                    'w': ('KeyW', 87), 'F10': ('F10', 121), 'Enter': ('Enter', 13), 'Escape': ('Escape', 27)}
+
+            def press(k, hold=0.15):
+                code, vk = KEYS[k]
+                key(k, code, vk, hold)
+
+            def answer(keys, timeout=120):
+                """Answers the setup's questions in order; returns [(asked, key)] and whether each answer moved the setup on."""
+                got = []
+                for k in keys:
+                    asked = page.js(f'{CTL} && {CTL}.asking')
+                    press(k)
+                    moved = page.wait(f"{CTL} && ({CTL}.asking !== {json.dumps(asked)} || {CTL}.state === '')", timeout)
+                    got.append((asked, k, bool(moved)))
+                return got
+
+            def walk_until(k, timeout, metres=0.5):
+                code, vk = KEYS[k]
+                before = page.js('window.wayfarerWalk')
+                page.send('Input.dispatchKeyEvent', {'type': 'keyDown', 'key': k, 'code': code, 'windowsVirtualKeyCode': vk})
+                moved = page.wait(f"window.wayfarerWalk && Math.hypot(window.wayfarerWalk.x - {before['x']}, window.wayfarerWalk.y - {before['y']}, "
+                                  f"window.wayfarerWalk.z - {before['z']}) > {metres}" if before else 'false', timeout)
+                page.send('Input.dispatchKeyEvent', {'type': 'keyUp', 'key': k, 'code': code, 'windowsVirtualKeyCode': vk})
+                return bool(moved), before, page.js('window.wayfarerWalk')
+
             def launcher(name):
                 mark = traffic.mark()
                 page.click(*page.centre_of(f'#go-{name}'))
@@ -809,31 +845,81 @@ def run_main(url, release, build, binary, sandbox, out, record_check, metrics):
             launcher('interior')
             mark, running, play_s = start('interior', 'WF_EXCURSION ready')
             if running:
-                time.sleep(5)
+                # CTRL-001: this browser profile is new (a fresh Chrome profile per run): the controls setup opens before anything moves,
+                # asking for Move forward first. The player answers with keys of their own (the arrows, Space, Shift), never the
+                # suggested W/A/S/D; nothing is put into the profile beforehand.
+                setup = page.wait(f"{CTL} && {CTL}.state === 'listen' && {CTL}.mode === 'setup'", 120) and page.js(CTL)
                 page.screenshot(out / 'interior_first_launch.png')
-                for _ in range(2):
-                    key('Enter', 'Enter', 13)
-                    time.sleep(3)
+                record_check('controls: a new browser profile opens the controls setup, Move forward first',
+                             bool(setup) and setup['asking'] == 'player.move_forward' and setup['experience'] == 'interior'
+                             and setup['missing'][:1] == ['player.move_forward'] and setup['profile'] == 'new', state=setup)
+                answers = answer(['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', ' ', 'Shift'])
+                done = page.wait(f"{CTL} && {CTL}.state === '' && {CTL}.missing.length === 0", 60) and page.js(CTL)
+                record_check('controls: the setup takes the chosen keys and closes',
+                             bool(done) and [a for a, *_ in answers] == ['player.move_forward', 'player.move_back', 'player.move_left', 'player.move_right',
+                                                                          'exc.jump', 'exc.run'] and all(m for *_, m in answers)
+                             and done['keys']['player.move_forward'].startswith('↑') and done['keys']['exc.run'].startswith('Shift'),
+                             answers=answers, state=done, persistent=(done or {}).get('persistent'))
+                time.sleep(3)
                 page.wait('!!window.wayfarerWalk', 60)
                 before = page.js('window.wayfarerWalk')
                 record_check('play: interior: the trainee stands on ring A at about 0.5 g as the newcomer model', bool(before)
                              and before.get('start') == 'RING' and before.get('zone') == 'RING_A' and before.get('move') == 'WALK'
                              and before.get('model') is True and 0.45 < (before.get('g') or 0) < 0.55, state=before)
-                # W held: a software-rendered runner steps physics at a fraction of real time (as in the touch walk), so the key stays
-                # down until the body has moved.
-                page.send('Input.dispatchKeyEvent', {'type': 'keyDown', 'key': 'w', 'code': 'KeyW', 'windowsVirtualKeyCode': 87})
+                # W, the old default, is not the player's key: held for 30 s it moves nothing.
+                w_moved, w_before, w_after = walk_until('w', 30, metres=0.05)
+                record_check('controls: the old default W does not move the trainee', not w_moved, before=w_before, after=w_after)
+                # The chosen Move forward held: a software-rendered runner steps physics at a fraction of real time (as in the touch
+                # walk), so the key stays down until the body has moved.
                 t_w = time.monotonic()
                 dist = lambda a, b: math.dist([a[k] for k in 'xyz'], [b[k] for k in 'xyz']) if a and b else 0.0
+                page.send('Input.dispatchKeyEvent', {'type': 'keyDown', 'key': 'ArrowUp', 'code': 'ArrowUp', 'windowsVirtualKeyCode': 38})
                 walked = page.wait(f"window.wayfarerWalk && window.wayfarerWalk.clip === 'walk' && Math.hypot(window.wayfarerWalk.x - {before['x']}, "
                                   f"window.wayfarerWalk.y - {before['y']}, window.wayfarerWalk.z - {before['z']}) > 0.5" if before else 'false', 180)
-                page.send('Input.dispatchKeyEvent', {'type': 'keyUp', 'key': 'w', 'code': 'KeyW', 'windowsVirtualKeyCode': 87})
+                page.send('Input.dispatchKeyEvent', {'type': 'keyUp', 'key': 'ArrowUp', 'code': 'ArrowUp', 'windowsVirtualKeyCode': 38})
                 now = page.js('window.wayfarerWalk')
-                record_check('play: interior: the trainee walks on W with the walk clip', bool(before) and walked and dist(before, now) > 0.5,
+                record_check('play: interior: the trainee walks on the chosen Move forward (↑) with the walk clip', bool(before) and walked and dist(before, now) > 0.5,
                              metres=round(dist(before, now), 2), seconds=round(time.monotonic() - t_w, 1), before=before, after=now)
                 page.wait("window.wayfarerWalk && window.wayfarerWalk.state === 'GROUND' && window.wayfarerWalk.speed < 0.1", 60)
                 key(' ', 'Space', 32)
                 jumped = page.wait('window.wayfarerWalk && window.wayfarerWalk.jumps >= 1 && window.wayfarerWalk.landings >= 1', 120)
-                record_check('play: interior: Space jumps once and the trainee lands', jumped, state=page.js('window.wayfarerWalk'))
+                record_check('play: interior: the chosen Jump (Space) jumps once and the trainee lands', jumped, state=page.js('window.wayfarerWalk'))
+                # The Controls menu (F10 here; the Controls button is the pointer route): Move forward changes from ↑ to W at once.
+                press('F10')
+                opened = page.wait(f"{CTL} && {CTL}.state === 'codex'", 60)
+                page.screenshot(out / 'interior_controls_menu.png')
+                for _ in range(40):
+                    if page.js(f"{CTL}.pick") == 'player.move_forward':
+                        break
+                    press('ArrowDown', 0.05)
+                    page.wait(f"{CTL} && {CTL}.pick !== ''", 10)
+                picked = page.js(f"{CTL}.pick") == 'player.move_forward'
+                press('Enter')
+                listening = page.wait(f"{CTL} && {CTL}.state === 'listen' && {CTL}.mode === 'rebind'", 60)
+                press('w')
+                changed = page.wait(f"{CTL} && {CTL}.state === 'codex' && {CTL}.keys['player.move_forward'].startsWith('W')", 60)
+                press('Escape')
+                closed = page.wait(f"{CTL} && {CTL}.state === ''", 60)
+                moved_w, *_ = walk_until('w', 180)
+                record_check('controls: the Controls menu changes Move forward to W and it works at once',
+                             bool(opened and picked and listening and changed and closed and moved_w), opened=opened, picked=picked, listening=listening,
+                             changed=changed, closed=closed, walked=moved_w, state=page.js(CTL))
+                # The same browser profile after a reload: the choices are restored and no setup is asked again.
+                # Godot copies user:// to IndexedDB on its own schedule after a save (tens of seconds with software
+                # rendering on a CI runner); reload only once the stored profile holds W (KEY_W = 87), as a player would.
+                stored = page.wait(IDB_LINE.replace('{key}', 'player.move_forward') + ".then(l => /\"k\": 87,/.test(l.split('}')[0]))", 180)
+                record_check('controls: the changed key reaches the browser storage (IndexedDB)', bool(stored),
+                             line=page.js(IDB_LINE.replace('{key}', 'player.move_forward')))
+                mark_r = traffic.mark()
+                page.send('Page.reload', {})
+                reloaded = traffic.wait_console('WF_EXCURSION ready', mark_r, 300)
+                restored = page.wait(f"{CTL} && {CTL}.experience === 'interior'", 60) and (time.sleep(5) or page.js(CTL))
+                page.wait('!!window.wayfarerWalk', 60)
+                moved_r, *_ = walk_until('w', 180)
+                record_check('controls: after a reload the same profile keeps W and asks nothing',
+                             bool(reloaded and restored) and restored['state'] == '' and restored['missing'] == []
+                             and restored['keys']['player.move_forward'].startswith('W') and restored['profile'] == '' and moved_r,
+                             state=restored, walked=moved_r)
                 fps = page.js(RAF_FPS.replace('{ms}', '8000'), timeout=120)
                 page.screenshot(out / 'interior_running.png')
                 reqs = after(mark, 'interior')
@@ -845,12 +931,23 @@ def run_main(url, release, build, binary, sandbox, out, record_check, metrics):
             record_check('switching: back on the start page with no canvas or engine left', canvases == 0 and not page.js('!!window.Engine'))
 
             # Explore Exterior (LOCO-002): standing on the magnetic walkway in drift, both boots attached, the Y155 suit model, drone docked,
-            # tether clipped. W walks on the boots, V releases them, R thrusts away from the plate, X releases the drone, 2 takes it.
+            # tether clipped. W (the player's Move forward) walks on the boots, 9 (their boots key) releases them, R thrusts away from
+            # the plate, X releases the drone, 2 takes it.
             launcher('exterior')
             mark, running, play_s = start('exterior', 'WF_EVA_OPS ready')
             if running:
-                eva0 = page.wait("window.wayfarerEva && window.wayfarerEva.active === 'suit'", 20) and page.js('window.wayfarerEva')
+                # CTRL-001: the moves chosen in Explore Interior carry over; the setup asks only turning and the magnetic boots.
+                ext = page.wait(f"{CTL} && {CTL}.state === 'listen' && {CTL}.mode === 'setup'", 120) and page.js(CTL)
                 page.screenshot(out / 'exterior_first_launch.png')
+                record_check('controls: Explore Exterior reuses the shared moves and asks only what it adds',
+                             bool(ext) and ext['missing'] == ['evaops.yaw_left', 'evaops.yaw_right', 'evaops.boots'] and ext['asking'] == 'evaops.yaw_left'
+                             and ext['keys']['evaops.fwd'].startswith('W'), state=ext)
+                ext_answers = answer([',', '.', '9'])
+                ext_done = page.wait(f"{CTL} && {CTL}.state === '' && {CTL}.missing.length === 0", 60) and page.js(CTL)
+                record_check('controls: the exterior setup takes the chosen keys', bool(ext_done) and all(m for *_, m in ext_answers)
+                             and ext_done['keys']['evaops.boots'] == '9', answers=ext_answers, state=ext_done)
+                time.sleep(2)
+                eva0 = page.wait("window.wayfarerEva && window.wayfarerEva.active === 'suit'", 60) and page.js('window.wayfarerEva')
                 boots0 = (eva0 or {}).get('boots') or {}
                 record_check('play: exterior starts on the magnetic walkway: both boots attached, suit model, drone docked, tether clipped',
                              bool(eva0) and eva0.get('start') == 'WALKWAY' and boots0.get('attached') == 2 and eva0.get('model') is True
@@ -863,7 +960,7 @@ def run_main(url, release, build, binary, sandbox, out, record_check, metrics):
                 page.send('Input.dispatchKeyEvent', {'type': 'keyUp', 'key': 'w', 'code': 'KeyW', 'windowsVirtualKeyCode': 87})
                 mag_walk = page.js('window.wayfarerEva')
                 page.screenshot(out / 'exterior_mag_walk.png')
-                key('v', 'KeyV', 86)
+                press('9')                                     # the player's Magnetic boots key (chosen above; V is not theirs)
                 released = page.wait('window.wayfarerEva && window.wayfarerEva.boots.armed === false && window.wayfarerEva.boots.attached === 0', 90)
                 page.send('Input.dispatchKeyEvent', {'type': 'keyDown', 'key': 'r', 'code': 'KeyR', 'windowsVirtualKeyCode': 82})
                 lifted = page.wait('window.wayfarerEva && window.wayfarerEva.v_suit > 0.005 && window.wayfarerEva.standing === false', 90)

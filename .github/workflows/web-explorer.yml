@@ -122,6 +122,10 @@ jobs:
           export WAYFARER_GODOT
           "$WAYFARER_GODOT" --headless --path godot --editor --import > godot-import.log 2>&1 || { tail -20 godot-import.log; exit 1; }
           echo "Godot import done after ${SECONDS} s"
+          # CTRL-001: the controls check (registry, first-visit setup, Controls menu, conflicts, persistence, migration); no package needed
+          "$WAYFARER_GODOT" --headless --path godot --script res://scripts/check_controls.gd > controls-check.log 2>&1 || true
+          grep '^WF_GODOT_CONTROLS' controls-check.log | cut -c1-400
+          grep -q '^WF_GODOT_CONTROLS {"fails":\[\]' controls-check.log || { tail -30 controls-check.log; exit 1; }
           python3 tools/workflow.py play-characters --out _characters | tee characters.json
           python3 -c "import json, sys; sys.exit(json.load(open('characters.json'))['result'] != 'PASS')"
           echo "CHARACTER_SECONDS=$SECONDS" >> "$GITHUB_ENV"

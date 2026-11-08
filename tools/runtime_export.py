@@ -36,6 +36,10 @@ CHECKS = [
     # LOCO-001: Explore Interior on ring A's deck with the newcomer model (walk, run, jump, landing, camera); WF_GODOT_LOCOMOTION.
     dict(name='locomotion', args=['--fixed-fps', '60', 'res://scenes/excursion.tscn', '--quit-after', '60000', '--', '--check-locomotion'],
          scene='scenes/excursion.tscn', marker='"result":"PASS"'),
+    # CTRL-001: the player-action registry, the first-visit controls setup, the Controls menu, conflicts, persistence, migration and
+    # storage failures, on isolated profiles (needs no package); WF_GODOT_CONTROLS.
+    dict(name='controls', args=['--script', 'res://scripts/check_controls.gd'], script='scripts/check_controls.gd', marker='"result":"PASS"',
+         expected=('ConfigFile parse error at user://ctrl_check/bad.cfg',)),
     # The MPFB humans (docs/CHARACTERS.md), once `workflow.py characters` has built them.
     dict(name='characters', args=['--script', 'res://scripts/check_characters.gd'], script='scripts/check_characters.gd', needs='humans'),
 ]
@@ -50,7 +54,9 @@ def godot_command(project, check):
 
 def failed(check, log):
     text = Path(log).read_text(errors='replace')
-    return 'ERROR:' in text or (check.get('marker') and check['marker'] not in text)
+    # expected: engine errors the check provokes on purpose (the controls check feeds Godot a corrupted profile)
+    errors = [l for l in text.splitlines() if 'ERROR:' in l and not any(x in l for x in check.get('expected', ()))]
+    return bool(errors) or bool(check.get('marker') and check['marker'] not in text)
 
 
 def versions():

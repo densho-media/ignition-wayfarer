@@ -387,7 +387,10 @@ build, import or check keeps the previous package; a successful one moves it to 
 the new one, then imports it into the local Godot cache (rolled back on failure). Git tracks the project, scripts, scenes and UID
 sidecars; `godot/generated/` and `godot/.godot/` are ignored and never edited by hand.
 
-**Controls (ACI).** `WfInput` holds the action registry (`BASE_ACTIONS`, per-scene `SCENE_ACTIONS`), the profile
-`user://wayfarer_controls.cfg` and the overlay. A scene sets `WfInput.context` in `_ready` and matches `WfInput.key_of(e, [its
-contexts])`; hold inputs read `WfInput.strength(id)` / `held(id)`; help text uses `WfInput.keys("{exc.use}: …")`. A new key is a new
-row in `SCENE_ACTIONS`. The registry still carries the retired scenes' contexts.
+**Controls (ACI, CTRL-001).** `WfInput` holds the action registry (`BASE_ACTIONS`, per-scene `SCENE_ACTIONS`; an optional seventh
+row field adds `setup`, `ask` and `share`), the profile `user://wayfarer_controls.cfg` and the overlay (`control_overlay.gd`: setup,
+capture, conflicts, Controls menu, the Controls button). A playable scene sets `WfInput.context` and calls `WfInput.begin("interior"
+| "exterior")` in `_ready`, dispatches presses on `WfInput.action_of(e, [its contexts])` (an action id), reads holds with
+`WfInput.strength(id)` / `held(id)` and writes help text with `WfInput.keys("{exc.use}: …")`. A new action is a new row in
+`SCENE_ACTIONS`; mark it `setup` only if the experience cannot start without it. `key_of` remains only for the retired review guide.
+`--controls-profile=<path>` points a run at another profile; the `controls` check (`scripts/check_controls.gd`) needs no package.

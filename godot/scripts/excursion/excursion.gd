@@ -185,6 +185,7 @@ func _ready() -> void:
 	WfInput.touch_provider = touch_state            # MOB-001: the stick, the look drag and the contextual buttons on a touch device
 	tree_exiting.connect(func(): WfInput.touch_provider = Callable(); WfInput.release_touch())
 	WfWebPage.scene("interior")
+	WfInput.begin("interior")                        # CTRL-001: the controls setup opens first if Move forward, run or jump has no key yet
 	print("WF_EXCURSION ready")                      # the web check waits for this line
 	if "--check-excursion" in OS.get_cmdline_user_args():
 		check = WfExcursionCheck.new()       # held: a RefCounted nobody holds is freed at its first await
@@ -586,16 +587,17 @@ func _unhandled_input(e: InputEvent) -> void:
 		return
 	if not WfInput.pressed(e):
 		return
-	match WfInput.key_of(e, ["excursion"]):
-		KEY_E: use()
-		KEY_O: ops()
-		KEY_C: view_out = not view_out
-		KEY_SPACE: jump_queued = true
-		KEY_R: training_reset()
-		KEY_F9:
+	# CTRL-001: dispatch on the action the player's binding names, never on a key.
+	match WfInput.action_of(e, ["excursion"]):
+		"exc.use": use()
+		"exc.ops": ops()
+		"exc.view": view_out = not view_out
+		"exc.jump": jump_queued = true
+		"exc.reset": training_reset()
+		"exc.eva":
 			WfWebPage.scene("exterior")
 			get_tree().change_scene_to_file("res://scenes/eva_ops.tscn")
-		KEY_M:
+		"exc.map":
 			if ring_map != null:
 				ring_map.visible = not ring_map.visible
 		_: return

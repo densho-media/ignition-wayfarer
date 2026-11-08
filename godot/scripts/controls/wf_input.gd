@@ -8,7 +8,8 @@ extends Node
 ## hold actions through set_virtual() (read by strength()), press actions through trigger() (an InputEventAction that reaches the same
 ## scene handlers as the key) and looking through add_look() / take_look(); it never calls physics or bypasses a scene's own checks.
 
-const SCHEMA := 3                       # 2: ACI-10 scene actions and the [access] settings; 3: MOB-001 [touch] settings
+const SCHEMA := 4                       # 2: ACI-10 scene actions and the [access] settings; 3: MOB-001 [touch] settings;
+										# 4: CTRL-001 [setup] confirmed (the essential actions the player chose) and shared bindings
 const PROFILE := "user://wayfarer_controls.cfg"
 const PREFS := ["PERSONAL", "SUGGESTED", "EXPERIENCED"]
 const DEADZONE := 0.5
@@ -23,12 +24,19 @@ const CONTEXTS := {"ui": "Everywhere", "menu": "Review menu", "walk": "Induction
 	"nav": "Ship Navigator (demonstrator)", "space": "Space Navigator (SPACE view)", "explorer": "Navigator SHOW ME views",
 	"demo": "Demonstrator 01 chapters", "inspector": "Ship inspector", "flight": "First Ignition timeline",
 	"thermal": "Heat balance explorer (timeline)", "life": "Life-support simulator", "lab": "Physics lab", "eva": "EVA drift and tethers",
-	"holo": "Subsystem hologram (M5 / M6)", "excursion": "Station-to-ring excursion",
-	"evaops": "EVA Operations (astronaut and drone)"}
+	"holo": "Subsystem hologram (M5 / M6)", "excursion": "Explore Interior (the walk)",
+	"evaops": "Explore Exterior (EVA Operations)"}
+
+# CTRL-001: the two playable experiences. Each names its scene context; an action whose "setup" lists the experience is essential to
+# start it: a fresh keyboard profile has no key for it, and the experience opens the controls setup until the player has chosen one.
+const EXPERIENCES := {"interior": {"name": "Explore Interior", "ctx": "excursion"}, "exterior": {"name": "Explore Exterior", "ctx": "evaops"}}
 const LINKED := {"nav": ["body", "demo", "explorer"], "body": ["nav", "demo"], "walk": ["demo"], "demo": ["walk", "body", "nav"],
 	"explorer": ["nav"], "flight": ["thermal"], "thermal": ["flight"]}   # contexts whose scenes read input in the same frame
 
 # kind: press / hold / axis. layout: physical (position on the keyboard, follows QWERTZ/AZERTY) or logical (the printed character).
+# CTRL-001: setup: the experiences that need the action before the player can move (their keyboard default is only a suggestion);
+# ask: the setup question ("Which key would you like to use to <ask>?"); share: the action whose keyboard input this one uses, in
+# another context (EVA's forward thrust is the player's Move forward), so the player chooses it once for both experiences.
 const BASE_ACTIONS := [
 	{"id": "ui.confirm", "name": "Confirm", "ctx": ["ui"], "kind": "press", "required": true, "layout": "logical",
 		"keys": [KEY_ENTER, KEY_KP_ENTER], "joy": [{"t": "joyb", "b": JOY_BUTTON_A}],
@@ -44,16 +52,20 @@ const BASE_ACTIONS := [
 	{"id": "ui.details", "name": "Guide details", "ctx": ["ui"], "kind": "press", "layout": "logical", "keys": [KEY_TAB], "joy": [],
 		"what": "Expand or fold the engineering detail line of the review guide."},
 	{"id": "player.move_forward", "name": "Move forward", "ctx": ["walk", "body", "lab", "eva", "excursion"], "kind": "hold", "layout": "physical",
+		"setup": ["interior"], "ask": "move forward",
 		"keys": [KEY_W], "joy": [{"t": "joya", "a": JOY_AXIS_LEFT_Y, "s": -1}],
 		"what": "Walk on along the route, or forward on a ring deck; climb up a ladder.",
 		"why": "On a ring deck you walk because spin gravity presses you onto it; in the weightless trunk this key adds no force (S&E 46 DYN-007)."},
 	{"id": "player.move_back", "name": "Move back", "ctx": ["walk", "body", "lab", "eva", "excursion"], "kind": "hold", "layout": "physical",
+		"setup": ["interior"], "ask": "move backward",
 		"keys": [KEY_S], "joy": [{"t": "joya", "a": JOY_AXIS_LEFT_Y, "s": 1}],
 		"what": "Walk back along the route or the deck; climb down a ladder."},
 	{"id": "player.move_left", "name": "Move left", "ctx": ["walk", "body", "lab", "excursion"], "kind": "hold", "layout": "physical",
+		"setup": ["interior"], "ask": "move left",
 		"keys": [KEY_A], "joy": [{"t": "joya", "a": JOY_AXIS_LEFT_X, "s": -1}],
 		"what": "Step left on a ring deck (free flight: slide left)."},
 	{"id": "player.move_right", "name": "Move right", "ctx": ["walk", "body", "lab", "excursion"], "kind": "hold", "layout": "physical",
+		"setup": ["interior"], "ask": "move right",
 		"keys": [KEY_D], "joy": [{"t": "joya", "a": JOY_AXIS_LEFT_X, "s": 1}],
 		"what": "Step right on a ring deck (free flight: slide right)."},
 	{"id": "player.grab", "name": "Grab handhold", "ctx": ["body", "lab"], "kind": "press", "layout": "logical",
@@ -145,8 +157,10 @@ const SCENE_ACTIONS := [
 	[["excursion"], [["exc.use", "Use / operate", [KEY_E], "Operate what is in reach: a hatch or door, the transfer drum's cycle at its restraint station, the ladder foot, the trunk's ring B branch.", [{"t": "joyb", "b": JOY_BUTTON_X}]],
 		["exc.ops", "Ship operations", [KEY_O], "At a trunk panel: ask Wayfarer to undock and spin up its rings, or to spin down, lock and dock.", [{"t": "joyb", "b": JOY_BUTTON_Y}]],
 		["exc.view", "Camera: third / first person", [KEY_C, KEY_V], "Switch between the third-person follow camera and the trainee's own eyes."],
-		["exc.run", "Run", [KEY_SHIFT], "Hold while walking forward on a ring deck to run (LOCO-001; the feet's friction limits how fast you speed up).", [{"t": "joyb", "b": JOY_BUTTON_LEFT_STICK}], "hold"],
-		["exc.jump", "Jump", [KEY_SPACE], "On a ring deck: jump. The legs give one push; then spin gravity and the Coriolis effect carry you until the deck stops you.", [{"t": "joyb", "b": JOY_BUTTON_RIGHT_SHOULDER}]],
+		["exc.jump", "Jump", [KEY_SPACE], "On a ring deck: jump. The legs give one push; then spin gravity and the Coriolis effect carry you until the deck stops you.", [{"t": "joyb", "b": JOY_BUTTON_RIGHT_SHOULDER}], "press",
+			{"setup": ["interior"], "ask": "jump"}],
+		["exc.run", "Run", [KEY_SHIFT], "Hold while walking forward on a ring deck to run (LOCO-001; the feet's friction limits how fast you speed up).", [{"t": "joyb", "b": JOY_BUTTON_LEFT_STICK}], "hold",
+			{"setup": ["interior"], "ask": "run (held while you walk forward)"}],
 		["exc.reset", "Training reset", [KEY_R], "TRAINING: back to the ring A landing (on ring A's deck only)."],
 		["exc.map", "Ring map", [KEY_M], "Show or hide the ring map (sectors, corridors, doors, the stretch walked)."],
 		["exc.eva", "EVA Operations", [KEY_F9], "Leave the walk for EVA Operations: the astronaut and the companion drone outside the hull (F8 there comes back)."]]],
@@ -229,16 +243,18 @@ const SCENE_ACTIONS := [
 		["eva.show", "Station: show me", [KEY_3], "EVA station: show me."], ["eva.next_station", "Next station", [KEY_N], "EVA: the next station."],
 		["eva.keepout", "Keep-out zones", [KEY_K], "EVA: show or hide the keep-out zones."], ["eva.view", "First person / outside", [KEY_V], "EVA: switch the view."],
 		["eva.abort", "Abort", [KEY_X], "EVA: start the abort back to the airlock."]]],
-	[["evaops"], [["evaops.fwd", "Thrust forward", [KEY_W], "EVA Operations: translate forward (thrusters; on a surface under thrust, walk forward).", [{"t": "joya", "a": JOY_AXIS_LEFT_Y, "s": -1}], "hold"],
-		["evaops.back", "Thrust back", [KEY_S], "EVA Operations: translate back.", [{"t": "joya", "a": JOY_AXIS_LEFT_Y, "s": 1}], "hold"],
-		["evaops.left", "Thrust left", [KEY_A], "EVA Operations: translate left.", [{"t": "joya", "a": JOY_AXIS_LEFT_X, "s": -1}], "hold"],
-		["evaops.right", "Thrust right", [KEY_D], "EVA Operations: translate right.", [{"t": "joya", "a": JOY_AXIS_LEFT_X, "s": 1}], "hold"],
+	[["evaops"], [["evaops.fwd", "Move / thrust forward", [KEY_W], "EVA Operations: translate forward (thrusters; on a surface under thrust, walk forward).", [{"t": "joya", "a": JOY_AXIS_LEFT_Y, "s": -1}], "hold", {"share": "player.move_forward", "setup": ["exterior"]}],
+		["evaops.back", "Move / thrust back", [KEY_S], "EVA Operations: translate back.", [{"t": "joya", "a": JOY_AXIS_LEFT_Y, "s": 1}], "hold", {"share": "player.move_back", "setup": ["exterior"]}],
+		["evaops.left", "Move / thrust left", [KEY_A], "EVA Operations: translate left.", [{"t": "joya", "a": JOY_AXIS_LEFT_X, "s": -1}], "hold", {"share": "player.move_left", "setup": ["exterior"]}],
+		["evaops.right", "Move / thrust right", [KEY_D], "EVA Operations: translate right.", [{"t": "joya", "a": JOY_AXIS_LEFT_X, "s": 1}], "hold", {"share": "player.move_right", "setup": ["exterior"]}],
 		["evaops.up", "Thrust up", [KEY_R], "EVA Operations: translate up (head direction).", [{"t": "joya", "a": JOY_AXIS_TRIGGER_RIGHT, "s": 1}], "hold"],
 		["evaops.down", "Thrust down", [KEY_F], "EVA Operations: translate down.", [{"t": "joya", "a": JOY_AXIS_TRIGGER_LEFT, "s": 1}], "hold"],
 		["evaops.pitch_up", "Pitch up", [KEY_I], "EVA Operations: rotate nose up.", [{"t": "joya", "a": JOY_AXIS_RIGHT_Y, "s": -1}], "hold"],
 		["evaops.pitch_down", "Pitch down", [KEY_K], "EVA Operations: rotate nose down.", [{"t": "joya", "a": JOY_AXIS_RIGHT_Y, "s": 1}], "hold"],
-		["evaops.yaw_left", "Yaw left", [KEY_J], "EVA Operations: rotate left (on a surface: turn).", [{"t": "joya", "a": JOY_AXIS_RIGHT_X, "s": -1}], "hold"],
-		["evaops.yaw_right", "Yaw right", [KEY_L], "EVA Operations: rotate right.", [{"t": "joya", "a": JOY_AXIS_RIGHT_X, "s": 1}], "hold"],
+		["evaops.yaw_left", "Turn / yaw left", [KEY_J], "EVA Operations: on the walkway, turn left on the boots; flying, rotate left.", [{"t": "joya", "a": JOY_AXIS_RIGHT_X, "s": -1}], "hold",
+			{"setup": ["exterior"], "ask": "turn left (on the walkway; flying, it yaws left)"}],
+		["evaops.yaw_right", "Turn / yaw right", [KEY_L], "EVA Operations: on the walkway, turn right on the boots; flying, rotate right.", [{"t": "joya", "a": JOY_AXIS_RIGHT_X, "s": 1}], "hold",
+			{"setup": ["exterior"], "ask": "turn right (on the walkway; flying, it yaws right)"}],
 		["evaops.roll_left", "Roll left", [KEY_U], "EVA Operations: roll left.", [], "hold"],
 		["evaops.roll_right", "Roll right", [KEY_O], "EVA Operations: roll right.", [], "hold"],
 		["evaops.fine", "Fine control", [KEY_SHIFT], "EVA Operations: hold for 25 % stick (fine thrust, slow walk, crouch on a surface).", [], "hold"],
@@ -252,7 +268,8 @@ const SCENE_ACTIONS := [
 		["evaops.grab", "Grab / release hold", [KEY_G], "EVA Operations: grip the hold in reach or let go (rail anchor, Brow fixture, station).", [], "press"],
 		["evaops.tether", "Clip / unclip tether", [KEY_T], "EVA Operations: clip the tether to the anchor in reach, or unclip it.", [], "press"],
 		["evaops.push", "Push off", [KEY_SPACE], "EVA Operations: push off the hold you grip, along your view; on magnetic boots, release them and push off the walkway with the legs.", [], "press"],
-		["evaops.boots", "Magnetic boots", [KEY_V], "EVA Operations: switch the boot magnets on (they attach on the walkway) or off (release, float free). PROTOTYPE, training only.", [], "press"],
+		["evaops.boots", "Magnetic boots", [KEY_V], "EVA Operations: switch the boot magnets on (they attach on the walkway) or off (release, float free). PROTOTYPE, training only.", [], "press",
+			{"setup": ["exterior"], "ask": "attach and release the magnetic boots"}],
 		["evaops.dock", "Dock / undock", [KEY_X], "EVA Operations: release the drone, or start its docking approach.", [], "press"],
 		["evaops.autopilot", "Drone mode", [KEY_Y], "EVA Operations: drone mode (manual, hold, follow, return to astronaut, return to ship).", [], "press"],
 		["evaops.arms", "Arms", [KEY_Z], "EVA Operations: deploy or stow the drone's arms.", [], "press"],
@@ -272,8 +289,13 @@ static func _expand(table: Array) -> Array:
 	var out := []
 	for group in table:
 		for r in group[1]:
-			out.append({"id": r[0], "name": r[1], "ctx": group[0], "keys": r[2], "what": r[3], "joy": r[4] if r.size() > 4 else [],
-				"kind": r[5] if r.size() > 5 else "press", "layout": "logical"})
+			var a := {"id": r[0], "name": r[1], "ctx": group[0], "keys": r[2], "what": r[3], "joy": r[4] if r.size() > 4 else [],
+				"kind": r[5] if r.size() > 5 else "press", "layout": "logical"}
+			if r.size() > 6:
+				a.merge(r[6], true)
+			if a.has("share"):
+				a["layout"] = "physical"         # a shared input follows its source's layout policy (movement: the key position)
+			out.append(a)
 	return out
 
 var ACTIONS: Array = BASE_ACTIONS + _expand(SCENE_ACTIONS)
@@ -317,6 +339,11 @@ var discovered := {}                 # action id -> true
 var shown := {}                      # lesson id -> true (prompted once; never asked again in unrelated scenes)
 var learned := {}                    # lesson id -> true
 var first_launch_done := false
+var confirmed := {}                  # CTRL-001: essential action id -> true once the player chose (or kept) its keyboard input
+var experience := ""                 # the playable experience running now ("interior" / "exterior"), set by its scene
+var storage_ok := true               # false once a profile save failed (blocked or full storage): the controls last for this visit
+var profile_note := ""               # what load_profile found: "", "new", "migrated <n>", "corrupt" (kept as <profile>.bad)
+var setup_skipped := {}              # experience -> true: this visit plays with the controller (nothing saved)
 var device := "keyboard"             # last used: keyboard / joypad / touch
 var context := "ui":                 # the scene's context; changing it drops latched toggles and the hazard flag
 	set(v):
@@ -354,6 +381,9 @@ var touch_provider := Callable()     # the scene's touch controls now: {} or {mo
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
+	for a in OS.get_cmdline_user_args():
+		if a.begins_with("--controls-profile="):        # checks: an isolated profile file
+			profile_path = a.trim_prefix("--controls-profile=")
 	load_profile()
 	overlay = load("res://scripts/controls/control_overlay.gd").new()
 	add_child(overlay)
@@ -390,6 +420,85 @@ func defaults() -> Dictionary:
 		out[a.id] = default_events(a.id)
 	return out
 
+## CTRL-001: the defaults of a profile nobody has configured yet: every essential (setup) action starts without a keyboard input, so
+## the player chooses it; controllers keep their defaults (touch has its own controls). A shared action keeps only its own controller
+## inputs: its keyboard input is its source's.
+func fresh_defaults() -> Dictionary:
+	var out := defaults()
+	for a in ACTIONS:
+		if a.has("share") or not a.get("setup", []).is_empty():
+			out[a.id] = out[a.id].filter(func(x): return _kind(x) != "keyboard")
+	return out
+
+## The action whose keyboard input id uses (itself, unless it shares another context's action).
+func source_of(id: String) -> String:
+	return str(action(id).get("share", id))
+
+func sharers_of(id: String) -> Array:
+	return ACTIONS.filter(func(a): return str(a.get("share", "")) == id).map(func(a): return a.id)
+
+## The contexts an input of id is read in: its own and those of every action that shares it.
+func ctx_all(id: String) -> Array:
+	var out: Array = action(id).get("ctx", []).duplicate()
+	for s in sharers_of(id):
+		for c in action(s).ctx:
+			if not c in out:
+				out.append(c)
+	return out
+
+## The inputs that trigger id now: its own, or for a shared action its source's keyboard inputs plus its own controller inputs.
+func events_of(id: String) -> Array:
+	var a := action(id)
+	if not a.has("share"):
+		return bindings.get(id, [])
+	return bindings.get(str(a.share), []).filter(func(x): return _kind(x) == "keyboard") + bindings.get(id, []).filter(func(x): return _kind(x) != "keyboard")
+
+## The essential actions of an experience in setup order, shared actions resolved to their source (asked once for both experiences).
+func setup_ids(exp: String) -> Array:
+	var out := []
+	for a in ACTIONS:
+		if exp in a.get("setup", []):
+			var s := source_of(a.id)
+			if not s in out:
+				out.append(s)
+	return out
+
+## Required (Confirm, Back, Codex) or essential to an experience: such an action is never left without a keyboard input.
+func essential(id: String) -> bool:
+	var a := action(id)
+	if a.get("required", false) or not a.get("setup", []).is_empty():
+		return true
+	return sharers_of(id).any(func(s): return not action(s).get("setup", []).is_empty())
+
+## The player chose (or knowingly kept) a keyboard input for id, and it still has one.
+func configured(id: String) -> bool:
+	return confirmed.has(id) and has_keyboard(bindings.get(id, []))
+
+func setup_missing(exp: String) -> Array:
+	return setup_ids(exp).filter(func(i): return not configured(i))
+
+## CTRL-001: a playable experience starts. Its scene calls this in _ready: the essential actions the profile has not configured open the
+## controls setup (the scene tree pauses, so nothing moves until the player has chosen). Checks, autoplay and touch-first devices
+## (their own welcome and on-screen controls) start at once; a controller player may skip it for the visit from the panel.
+func begin(exp: String) -> void:
+	experience = exp
+	publish_state()
+	if setup_needed():
+		overlay.call_deferred("open_setup", exp)
+	elif not storage_ok or not persistent():
+		overlay.call_deferred("toast", storage_text())
+
+func setup_needed() -> bool:
+	return experience != "" and prompts_enabled() and not compact() and not setup_skipped.has(experience) \
+		and not setup_missing(experience).is_empty() and not overlay.is_modal()
+
+## The browser keeps user:// (IndexedDB) between visits; false in a private window or with site data blocked.
+static func persistent() -> bool:
+	return OS.is_userfs_persistent()
+
+func storage_text() -> String:
+	return "This browser is not keeping saved data for this site (private window or blocked storage): your controls work now but may not be there next visit."
+
 static func to_event(d: Dictionary) -> InputEvent:
 	match str(d.t):
 		"key":
@@ -423,13 +532,14 @@ func apply() -> void:
 			InputMap.add_action(a.id, stick_deadzone)
 		InputMap.action_set_deadzone(a.id, stick_deadzone)
 		InputMap.action_erase_events(a.id)
-		for d in bindings.get(a.id, []):
+		for d in events_of(a.id):
 			var e := to_event(d)
 			if e != null:
 				InputMap.action_add_event(a.id, e)
 	if is_inside_tree():
 		get_tree().root.content_scale_factor = ui_scale * (touch.ui_density() if touch != null else 1.0)
 	bindings_changed.emit()
+	publish_state()
 
 ## How strongly a hold action is held now (0..1): a latched toggle reads 1; a stick reads past the dead zone, scaled by the
 ## sensitivity. Gameplay uses this instead of Input.get_action_strength so the accessibility settings apply everywhere.
@@ -463,6 +573,8 @@ func capture_of(e: InputEvent, layout := "logical") -> Dictionary:
 		if k in [KEY_SHIFT, KEY_CTRL, KEY_ALT, KEY_META]:
 			return {}                                   # a modifier alone waits for its key
 		var d := {"t": "key", "k": (e.physical_keycode if e.physical_keycode != KEY_NONE else k) if layout == "physical" else k, "p": layout == "physical"}
+		if layout == "physical" and e.keycode != KEY_NONE and e.keycode != d.k:
+			d["l"] = e.keycode                          # the printed key at that position when chosen (AZERTY Z at QWERTY W), for labels
 		if e.shift_pressed: d["shift"] = true
 		if e.ctrl_pressed: d["ctrl"] = true
 		if e.alt_pressed: d["alt"] = true
@@ -474,6 +586,12 @@ func capture_of(e: InputEvent, layout := "logical") -> Dictionary:
 	if e is InputEventMouseButton and e.pressed and e.button_index in [MOUSE_BUTTON_XBUTTON1, MOUSE_BUTTON_XBUTTON2]:   # middle drag pans
 		return {"t": "mouse", "b": e.button_index}
 	return {}
+
+## A modifier key alone (Shift, Ctrl, Alt, Meta), captured when it is released with no other key pressed meanwhile: Run on Shift.
+func capture_modifier(e: InputEventKey, layout := "logical") -> Dictionary:
+	var k: int = e.keycode if e.keycode != KEY_NONE else e.physical_keycode
+	var d := {"t": "key", "k": (e.physical_keycode if e.physical_keycode != KEY_NONE else k) if layout == "physical" else k, "p": layout == "physical"}
+	return d
 
 ## The logical key of a key binding (physical bindings resolved through the current layout), for labels and comparisons.
 static func logical_key(d: Dictionary) -> int:
@@ -516,21 +634,29 @@ static func co_active(a: Array, b: Array) -> bool:
 ## An action's own default key is never refused as reserved: the shipped layout was audited per scene (the demonstrator's guide uses
 ## Tab for details because the navigator owns I), and the context table is coarser than that audit.
 func conflict_of(id: String, d: Dictionary) -> Dictionary:
+	if _kind(d) == "keyboard":
+		id = source_of(id)                       # a shared action's keyboard input is its source's, read in both contexts
 	var a := action(id)
+	var mine: Array = live(ctx_all(id) if _kind(d) == "keyboard" else a.ctx)
 	var own_default := str(d.t) == "key" and default_events(id).any(func(x): return str(x.t) == "key" and same_input(x, d))
 	if str(d.t) == "key" and not own_default and not d.get("shift", false) and not d.get("ctrl", false) and not d.get("alt", false):
 		var k := logical_key(d)
 		for c in RESERVED:
-			if co_active(a.ctx, [c]) and RESERVED[c].has(k) and not (a.has("locked") and a.locked == k):
+			if co_active(mine, [c]) and RESERVED[c].has(k) and not (a.has("locked") and a.locked == k):
 				return {"kind": "reserved", "context": c, "what": RESERVED[c][k]}
 	var reuse := ""
 	var others := []
 	for o in ACTIONS:
-		if o.id == id:
+		if o.id == id or source_of(o.id) == id:
 			continue
-		for od in bindings.get(o.id, []):
+		# own inputs only: a shared action's keyboard input is checked on its source, in every context that reads it
+		var theirs: Array = bindings.get(o.id, []).filter(func(x): return not (o.has("share") and _kind(x) == "keyboard"))
+		var cx: Array = live(o.ctx if o.has("share") else ctx_all(o.id), live(mine, false) == mine)
+		if cx.is_empty():
+			continue                             # only retired scenes read it: it can never be active with a playable action
+		for od in theirs:
 			if same_input(od, d):
-				if co_active(a.ctx, o.ctx):
+				if co_active(mine, cx):
 					if not o.id in others:
 						others.append(o.id)
 				else:
@@ -539,13 +665,22 @@ func conflict_of(id: String, d: Dictionary) -> Dictionary:
 		return {"kind": "conflict", "other": others[0], "others": others}
 	return {"kind": "reuse", "other": reuse} if reuse != "" else {"kind": "none"}
 
+## CTRL-001: the contexts a playable scene can activate (ui and the experiences); the retired scenes' contexts stay in the registry
+## (their actions are kept in old profiles) but never block a key. An action read only in retired contexts keeps its full list.
+func live(ctxs: Array, fallback := true) -> Array:
+	var out := ctxs.filter(func(c): return c == "ui" or EXPERIENCES.values().any(func(x): return x.ctx == c))
+	return out if not out.is_empty() or not fallback else ctxs
+
 func _kind(d: Dictionary) -> String:
 	return "joypad" if str(d.t).begins_with("joy") else "keyboard"
 
 ## Set the binding of id for d's device family (keyboard+mouse or joypad); the other family is kept. resolution: "" (no conflict
-## expected), "swap" (the other action takes id's old input of the same family), "replace" (the other action loses d). Returns
-## {ok, why}. Never leaves a required action without an input, never takes a reserved key.
-func assign(id: String, d: Dictionary, resolution := "") -> Dictionary:
+## expected), "swap" (the other action takes id's old input of the same family), "replace" (the other action loses d). add: keep id's
+## other inputs and add d (a second key). A shared action's keyboard input is set on its source, for every context that reads it.
+## Returns {ok, why}. Never leaves a required or essential action without a keyboard input, never takes a reserved key.
+func assign(id: String, d: Dictionary, resolution := "", add := false) -> Dictionary:
+	if _kind(d) == "keyboard":
+		id = source_of(id)
 	var c := conflict_of(id, d)
 	if c.kind == "reserved":
 		return {"ok": false, "why": "%s is still used for %s (%s) and cannot be reassigned yet" % [describe(d), c.what, CONTEXTS[c.context]]}
@@ -560,18 +695,42 @@ func assign(id: String, d: Dictionary, resolution := "") -> Dictionary:
 		var changed := {}
 		for other in c.others:
 			var theirs: Array = bindings[other].filter(func(x): return not same_input(x, d))
-			if resolution == "swap":
+			if resolution == "swap" and not add:
 				for x in old:
 					if not (lock != null and str(x.t) == "key" and int(x.k) == lock):
 						theirs.append(x)
-			if action(other).get("required", false) and not has_keyboard(theirs):
-				return {"ok": false, "why": "%s would be left with no keyboard input; choose swap or another input" % action(other).name}
+			if essential(other) and has_keyboard(bindings[other]) and not has_keyboard(theirs):
+				return {"ok": false, "why": "%s would be left with no key; choose swap or another key" % action(other).name}
 			changed[other] = theirs
 		for other in changed:
 			bindings[other] = changed[other]
-	var keep: Array = bindings.get(id, []).filter(func(x): return _kind(x) != fam or (lock != null and str(x.t) == "key" and int(x.k) == lock))
-	keep.insert(0, d)
+	var keep: Array = bindings.get(id, []).filter(func(x): return add or _kind(x) != fam or (lock != null and str(x.t) == "key" and int(x.k) == lock))
+	keep = keep.filter(func(x): return not same_input(x, d))
+	if add:
+		keep.append(d)                       # a second key comes after the first (labels keep showing the first)
+	else:
+		keep.insert(0, d)
 	bindings[id] = keep
+	if fam == "keyboard":
+		confirmed[id] = true
+	apply()
+	save_profile()
+	return {"ok": true, "why": ""}
+
+## Remove one input of id (index into events_of(id)). Refused for a locked key and for the last key of a required or essential action.
+func remove_input(id: String, index: int) -> Dictionary:
+	var evs := events_of(id)
+	if index < 0 or index >= evs.size():
+		return {"ok": false, "why": "%s has no such input" % action(id).name}
+	var d: Dictionary = evs[index]
+	var owner := source_of(id) if _kind(d) == "keyboard" else id
+	var lock = action(owner).get("locked", null)
+	if lock != null and str(d.t) == "key" and logical_key(d) == lock:
+		return {"ok": false, "why": "%s always stays on %s" % [action(owner).name, describe(d)]}
+	var rest: Array = bindings.get(owner, []).filter(func(x): return not same_input(x, d) or str(x.t) != str(d.t))
+	if essential(owner) and _kind(d) == "keyboard" and not has_keyboard(rest):
+		return {"ok": false, "why": "%s needs a key to play: change it instead of removing it" % action(owner).name}
+	bindings[owner] = rest
 	apply()
 	save_profile()
 	return {"ok": true, "why": ""}
@@ -582,23 +741,59 @@ static func has_keyboard(evs: Array) -> bool:
 
 func restore(id: String) -> Dictionary:
 	# Restoring one action may collide with a rebind elsewhere: then the other keeps it and this action keeps its own (reported).
+	# A shared action restores its own controller inputs and its source's suggested keys.
+	var src := source_of(id)
+	if src != id:
+		bindings[id] = default_events(id).filter(func(x): return _kind(x) != "keyboard")
+		id = src
 	var out := {"ok": true, "why": ""}
 	var mine := []
 	for d in default_events(id):
 		var c := conflict_of(id, d)
 		if c.kind == "conflict":
-			out = {"ok": false, "why": "%s is now on %s; restore that one or rebind" % [describe(d), action(c.other).name]}
+			out = {"ok": false, "why": "%s is now on %s; restore that one or change it" % [describe(d), action(c.other).name]}
 		else:
 			mine.append(d)
-	if not mine.is_empty() or not action(id).get("required", false):
-		bindings[id] = mine
+	if essential(id) and not has_keyboard(mine):
+		mine = bindings.get(id, []).filter(func(x): return _kind(x) == "keyboard") + mine     # never left without a key
+	bindings[id] = mine
+	if has_keyboard(mine) and out.ok:
+		confirmed[id] = true                 # the player chose the suggested key
 	apply()
 	save_profile()
 	return out
 
+## "Use suggested controls" for every action (a conscious choice: every essential action counts as configured).
 func restore_all() -> void:
 	bindings = defaults()
+	for e in EXPERIENCES:
+		for id in setup_ids(e):
+			confirmed[id] = true
 	apply()
+	save_profile()
+
+## The suggested inputs for the essential actions of exp still missing (the setup's "Use suggested controls" for the rest).
+func suggest_missing(exp: String) -> Array:
+	var refused := []
+	for id in setup_missing(exp):
+		var r := restore(id)
+		if not r.ok or not configured(id):
+			refused.append(id)
+	return refused
+
+## Start over: the profile as on a first visit (no essential key chosen); the running experience opens its setup again.
+func clear_all() -> void:
+	bindings = fresh_defaults()
+	confirmed = {}
+	toggles = {}
+	latched = {}
+	apply()
+	save_profile()
+
+## Ask the essential actions of exp again (their current keys are offered to keep).
+func reconfigure(exp: String) -> void:
+	for id in setup_ids(exp):
+		confirmed.erase(id)
 	save_profile()
 
 # ---- labels and prompts (ACI-07) ----------------------------------------------------------------------------------------------------
@@ -627,7 +822,7 @@ static func describe(d: Dictionary) -> String:
 	match str(d.t):
 		"key":
 			var mods := ("Ctrl+" if d.get("ctrl", false) else "") + ("Alt+" if d.get("alt", false) else "") + ("Shift+" if d.get("shift", false) else "")
-			var k := logical_key(d)
+			var k := int(d.l) if d.has("l") and d.get("p", false) else logical_key(d)
 			return mods + (KEY_GLYPHS[k] if KEY_GLYPHS.has(k) else OS.get_keycode_string(k))
 		"joyb":
 			return JOY_NAMES.get(int(d.b), "button %d" % int(d.b))
@@ -642,7 +837,7 @@ static func describe(d: Dictionary) -> String:
 func label(id: String, all := false) -> String:
 	if device == "touch" and TOUCH_LABELS.has(id):
 		return TOUCH_LABELS[id]
-	var mine: Array = bindings.get(id, [])
+	var mine: Array = events_of(id)
 	var fam: Array = mine.filter(func(x): return _kind(x) == ("keyboard" if device == "touch" else device))
 	if fam.is_empty():
 		fam = mine
@@ -652,7 +847,7 @@ func label(id: String, all := false) -> String:
 
 ## Every input of id, keyboard and controller (the Codex).
 func label_all(id: String) -> String:
-	var mine: Array = bindings.get(id, [])
+	var mine: Array = events_of(id)
 	return " · ".join(mine.map(func(x): return describe(x))) if not mine.is_empty() else "unassigned"
 
 ## Help text with the player's inputs: every {action.id} becomes that action's label ("{flight.play}: play" -> "Space: play").
@@ -676,14 +871,21 @@ func labels(ids: Array) -> Array:
 func active_contexts() -> Array:
 	return ["ui", context] + LINKED.get(context, [])
 
-## The default key of the registry action e triggers among the actions of ctxs (ui always included), so a scene's handler matches
-## the action, not the physical input: KEY_NONE for an input that triggers none of them (including a default key rebound away).
-func key_of(e: InputEvent, ctxs: Array) -> int:
+## CTRL-001: the registry action e triggers among the actions of ctxs (ui always included), "" for none. Scenes dispatch on this id
+## (or ask e.is_action_pressed(id)), never on a key: the player's binding decides which input it is.
+func action_of(e: InputEvent, ctxs: Array) -> String:
 	var cs := ["ui"] + ctxs
 	for a in ACTIONS:
-		if not a["keys"].is_empty() and a.ctx.any(func(c): return c in cs) and e.is_action(a.id, false):
-			return a["keys"][0]
-	return KEY_NONE
+		if a.ctx.any(func(c): return c in cs) and e.is_action(a.id, false):
+			return a.id
+	return ""
+
+## Legacy (the retired review guide, review_guide.gd, matches its session tables by key): the default key of the action e triggers,
+## KEY_NONE for none. The playable scenes use action_of().
+func key_of(e: InputEvent, ctxs: Array) -> int:
+	var id := action_of(e, ctxs)
+	var keys: Array = action(id).get("keys", []) if id != "" else []
+	return keys[0] if not keys.is_empty() else KEY_NONE
 
 ## A press (not a release; repeats only when allowed) of a key, controller button, bindable mouse button or a trigger() action.
 static func pressed(e: InputEvent, repeat := false) -> bool:
@@ -855,10 +1057,21 @@ func replay_lessons() -> void:
 func has_profile() -> bool:
 	return had_profile and first_launch_done
 
+## CTRL-001 persistence: one ConfigFile at user://wayfarer_controls.cfg. In the Web export Godot keeps user:// in the browser's
+## IndexedDB for this site (origin), synced after each save, so the profile survives reloads, both experiences (one package, one
+## profile) and new deployments of the same site. A missing file starts the first-visit profile; an unreadable one is kept beside it
+## as <profile>.bad and the first-visit profile starts (nothing crashes, the setup asks again); an older schema is migrated.
 func load_profile() -> void:
-	bindings = defaults()
+	bindings = fresh_defaults()
+	confirmed = {}
 	var cf := ConfigFile.new()
-	had_profile = cf.load(profile_path) == OK
+	var exists := FileAccess.file_exists(profile_path)
+	var err := cf.load(profile_path) if exists else ERR_FILE_NOT_FOUND
+	had_profile = err == OK
+	profile_note = "" if had_profile else ("corrupt" if exists else "new")
+	if exists and not had_profile:
+		DirAccess.copy_absolute(profile_path, profile_path + ".bad")
+		push_warning("WfInput: %s could not be read (error %d); kept as .bad, starting a new profile" % [profile_path, err])
 	if not had_profile:
 		preference = "SUGGESTED"
 		discovered = {}
@@ -880,15 +1093,25 @@ func load_profile() -> void:
 
 ## Old or partial profiles keep working: unknown actions are dropped, new actions get their defaults (and stay undiscovered, so the
 ## player's preference decides whether they are introduced), a required action left without input gets its defaults back.
+## CTRL-001 (schema 4): an essential action new since the profile was saved starts without a key (the setup asks for it, never a
+## silent default); from an older schema, an essential key the player had changed counts as chosen, one still on its old default is
+## offered to keep ("Keep W") in the setup; a custom key saved on a shared action (EVA forward thrust) moves to its source when the
+## source was still on its default, so no custom choice is lost.
 func migrate(cf: ConfigFile) -> void:
 	var schema := int(cf.get_value("meta", "schema", 0))
+	profile_note = "migrated %d" % schema if schema < SCHEMA else ""
 	preference = str(cf.get_value("meta", "preference", "SUGGESTED"))
 	if not preference in PREFS:
 		preference = "SUGGESTED"
 	first_launch_done = bool(cf.get_value("meta", "first_launch_done", schema >= 1))
+	var saved_ev := {}                       # action id -> its saved, valid events
 	for a in ACTIONS:
 		if cf.has_section_key("bindings", a.id):
-			var evs: Array = cf.get_value("bindings", a.id, []).filter(func(x): return x is Dictionary and x.has("t") and to_event(x) != null)
+			var raw = cf.get_value("bindings", a.id, [])
+			var evs: Array = (raw if raw is Array else []).filter(func(x): return x is Dictionary and x.has("t") and to_event(x) != null)
+			saved_ev[a.id] = evs
+			if a.has("share"):
+				evs = evs.filter(func(x): return _kind(x) != "keyboard")       # its keyboard input is the source's
 			if a.get("required", false) and not has_keyboard(evs):
 				evs += default_events(a.id).filter(func(x): return _kind(x) == "keyboard")
 			bindings[a.id] = evs
@@ -902,6 +1125,28 @@ func migrate(cf: ConfigFile) -> void:
 			continue
 		bindings[a.id] = bindings[a.id].filter(func(d): return not saved.any(func(o): return action(o).has("ctx") and co_active(a.ctx, action(o).ctx) \
 			and bindings.get(o, []).any(func(x): return same_input(x, d)) and not same_input_default(o, d)))
+	if schema >= 4:
+		for id in cf.get_value("setup", "confirmed", []):
+			if action(str(id)).has("id") and has_keyboard(bindings.get(str(id), [])):
+				confirmed[str(id)] = true
+	else:
+		var kb := func(evs: Array) -> Array: return evs.filter(func(x): return _kind(x) == "keyboard")
+		var is_default := func(id: String, evs: Array) -> bool:
+			var dk: Array = kb.call(default_events(id))
+			return evs.size() == dk.size() and evs.all(func(x): return dk.any(func(y): return same_input(x, y)))
+		for a in ACTIONS:
+			if not a.has("share") or not saved_ev.has(a.id):
+				continue
+			var mine: Array = kb.call(saved_ev[a.id])
+			var src := str(a.share)
+			if not mine.is_empty() and not is_default.call(a.id, mine) and is_default.call(src, kb.call(bindings.get(src, []))):
+				bindings[src] = mine + bindings.get(src, []).filter(func(x): return _kind(x) != "keyboard")
+				confirmed[src] = true
+		for e in EXPERIENCES:
+			for id in setup_ids(e):
+				var k: Array = kb.call(bindings.get(id, []))
+				if not k.is_empty() and not is_default.call(id, k):
+					confirmed[id] = true
 	discovered = _set_of(cf.get_value("progress", "discovered", []))
 	shown = _set_of(cf.get_value("progress", "shown", []))
 	learned = _set_of(cf.get_value("progress", "learned", []))
@@ -929,7 +1174,9 @@ static func _set_of(a) -> Dictionary:
 			out[str(x)] = true
 	return out
 
-func save_profile() -> void:
+## Saves the whole profile. A failed write (blocked or full storage, an unwritable path) never stops play: the bindings stay active
+## for this visit and the player is told once that they may not be kept.
+func save_profile() -> bool:
 	var cf := ConfigFile.new()
 	cf.set_value("meta", "schema", SCHEMA)
 	cf.set_value("meta", "preference", preference)
@@ -937,6 +1184,7 @@ func save_profile() -> void:
 	cf.set_value("meta", "device", device)
 	for a in ACTIONS:
 		cf.set_value("bindings", a.id, bindings.get(a.id, []))
+	cf.set_value("setup", "confirmed", confirmed.keys().filter(func(i): return configured(str(i))))
 	cf.set_value("progress", "discovered", discovered.keys())
 	cf.set_value("progress", "shown", shown.keys())
 	cf.set_value("progress", "learned", learned.keys())
@@ -948,8 +1196,28 @@ func save_profile() -> void:
 	cf.set_value("touch", "stick", touch_stick)
 	cf.set_value("touch", "controls", touch_controls)
 	cf.set_value("touch", "intro_done", touch_intro_done)
-	cf.save(profile_path)
-	had_profile = true
+	var ok := cf.save(profile_path) == OK
+	if not ok and storage_ok and overlay != null:
+		overlay.toast("Your controls could not be saved here; they work for this visit. " + ("" if persistent() else storage_text()))
+	storage_ok = ok
+	had_profile = had_profile or ok
+	publish_state()
+	return ok
+
+## CTRL-001: the controls state for the page (window.wayfarerControls; the browser check reads it, nothing in the page acts on it).
+func publish_state() -> void:
+	if not OS.has_feature("web") or overlay == null:
+		return
+	var keys := {}
+	for e in EXPERIENCES:
+		for id in setup_ids(e):
+			keys[id] = label_all(id)
+	for id in ["evaops.fwd", "exc.use", "ui.codex"]:
+		keys[id] = label_all(id)
+	WfWebPage.publish("wayfarerControls", {"schema": SCHEMA, "experience": experience, "state": overlay.state, "mode": overlay.mode,
+		"asking": overlay.current if overlay.state in ["listen", "conflict"] else "", "missing": setup_missing(experience) if experience != "" else [],
+		"confirmed": confirmed.keys(), "keys": keys, "pick": overlay.codex_id(), "persistent": persistent(), "storage_ok": storage_ok,
+		"profile": profile_note, "message": overlay.message})
 
 func set_preference(p: String) -> void:
 	if p in PREFS:

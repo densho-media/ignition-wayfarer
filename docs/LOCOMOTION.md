@@ -92,18 +92,23 @@ V releases and the body then flies away on thrust; Space pushes off at 0.300 m/s
 
 ## Controls and conflicts (WfInput)
 
+The keys below are the **suggested** inputs (CTRL-001, docs/MODEL.md "Player controls"): on a first visit the player chooses
+every key marked *setup* themselves, and the suggestion applies only when they press "Use suggested controls".
+
 | context | key | action | note |
 | --- | --- | --- | --- |
-| excursion | W/A/S/D | walk (camera-relative) | `player.move_*` |
-| excursion | Shift | run | `exc.run`, held, pad L3 |
-| excursion | Space | jump | `exc.jump`, pad RB: pad A is `ui.confirm` |
+| excursion | W/A/S/D | walk (camera-relative, *setup*) (camera-relative) | `player.move_*` |
+| excursion | Shift | run (*setup*) | `exc.run`, held, pad L3 |
+| excursion | Space | jump (*setup*) | `exc.jump`, pad RB: pad A is `ui.confirm` |
 | excursion | C (also V) | third / first person | `exc.view`; the brief's camera key stays C, V kept for old habits |
 | excursion | R | training reset | `exc.reset` |
-| evaops | V | magnetic boots on / off | `evaops.boots`, new; V was free |
+| evaops | W/A/S/D | walk on the boots, thrust when flying | `evaops.fwd/back/left/right` share the excursion moves |
+| evaops | J / L | turn on the walkway, yaw when flying (*setup*) | `evaops.yaw_left/right` |
+| evaops | V | magnetic boots on / off (*setup*) | `evaops.boots`, new; V was free |
 | evaops | Space | push off a hold, or off the walkway | `evaops.push`, one key for both |
 | evaops | F5 | training reset | R is "thrust up" in EVA, so the reset stays on F5 |
 
-Rebinding (F10) works for every row. E stays Use in both scenes.
+Controls (the bottom-left button or F10) changes every row. E stays Use in both scenes.
 
 ## Web package
 
