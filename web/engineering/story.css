@@ -52,3 +52,11 @@ table.meta th { width: 170px; }
 .notes { font-size: 14px; padding-top: 8px; }
 .notes pre { overflow-x: auto; background: var(--panel); padding: 10px; border-radius: 4px; }
 @media (max-width: 560px) { .problem dl { grid-template-columns: 1fr; } table.meta th { width: auto; } }
+.story section.teaser { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 18px; align-items: start; padding: 16px;
+  background: var(--panel); border: 1px solid var(--accent); border-radius: 6px; }
+.teaser .shot img { width: 100%; height: auto; display: block; border-radius: 4px; border: 1px solid var(--line); }
+.teaser h2 { margin-top: 0; }
+.teaser .go { display: inline-block; color: var(--bg); background: var(--accent); padding: 8px 14px; border-radius: 4px; }
+.teaser .go:hover { text-decoration: none; filter: brightness(1.1); }
+.teaser .pick { display: flex; flex-direction: column; gap: 2px; font-size: 13px; }
+@media (max-width: 760px) { .story section.teaser { grid-template-columns: 1fr; } }
