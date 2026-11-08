@@ -4,7 +4,8 @@
   index.html, site.css   start page: two choices, the release line; loads no engine, model or library
   viewer/                Explore Ship: the saved COAST vehicle as a Draco GLB (export/godot.py --out --draco, checked against its
                          manifest) in a pinned three.js viewer; build.json names the content-addressed model files
-  play/                  Enter Wayfarer: a launcher, and the walk (EXC-001) as a Godot Web export (tools/web_play.py)
+  interior/, exterior/   Explore Interior (the walk, EXC-001) and Explore Exterior (EVA Operations, EVA-OPS-001): one launcher each
+  play/                  the shared Godot Web export of both scenes (tools/web_play.py), the launchers' script, and a hub page
   status/                technical status page over release.json
   engineering/           the engineering story: goal, constraints, the ship today, lab/ work and open problems (tools/story.py)
   release.json           release manifest: identity, toolchain, inputs, every file's size and SHA-256, the experiences, checks
@@ -53,7 +54,9 @@ PLAY_BUDGET = 90_000_000
 LIMITATIONS = [
     'REP_PROXY geometry throughout: a display model generated from the parameters, not a measurement source (Draco quantizes '
     'viewer positions to about 1.5 cm).',
-    'Enter Wayfarer is the walk (EXC-001): from the development station into Wayfarer and round either habitat ring.',
+    'Explore Interior is the walk (EXC-001): from the development station into Wayfarer and round either habitat ring. Explore '
+    'Exterior is EVA Operations (EVA-OPS-001), a TRAINING SIMULATION on finite nitrogen; flight EVA stays HOLD (S&E 45 O-07).',
+    'Explore Exterior is keyboard-and-mouse only (no touch controls); the suit and drone are proxies in the browser package.',
     'The MPFB characters are not in the browser package: a proxy body stands in (presentation only).',
     'The browser build is single-threaded WebGL 2 (Godot Compatibility); the native Godot build stays the gameplay and physics reference.',
     'Key labels in the browser show US key positions (the Web display server cannot map physical keys to the layout).',
@@ -273,6 +276,11 @@ def release_record(root, site, build, play, revision, dirty, built, engineering=
             'viewer': {'entry': 'viewer/', 'download_bytes': size(viewer_files), 'three': THREE['version'],
                        'glb_file': f"viewer/{build['glb_file']}", 'glb_sha256': build['glb_sha256'],
                        'mesh_nodes': build['glb']['mesh_nodes'], 'assemblies': 14, 'triangles': build['triangles']},
+            # Explore Interior and Explore Exterior share the play package: one engine, one pack, the hash picks the scene.
+            **({'interior': {'entry': 'interior/', 'page': f"play/{play['entry']}#interior", 'scene': web_play.SCENE,
+                             'download_bytes': size([f'play/{f}' for f in play['files'].values()])},
+                'exterior': {'entry': 'exterior/', 'page': f"play/{play['entry']}#exterior", 'scene': web_play.EVA_CHECK[0],
+                             'download_bytes': size([f'play/{f}' for f in play['files'].values()])}} if play else {}),
             **({'play': {'entry': 'play/', 'page': f"play/{play['entry']}", 'godot': play['godot'], 'godot_short': web_play.GODOT['version'],
                          'download_bytes': size([f'play/{f}' for f in play['files'].values()]), 'files': play['files'],
                          'variant': play['variant'], 'scene': play['scene'], 'package': play['package'],

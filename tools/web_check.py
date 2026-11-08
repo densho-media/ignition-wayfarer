@@ -5,8 +5,10 @@ and walks it as a visitor does, recording every request:
   start      the start page loads only index.html, site.css and release.json: no model, engine or library, no canvas
   viewer     Explore Ship from its link: whole-ship framing, orbit, zoom, pan, reset, presets, picking, the four styles, assembly states,
              Hybrid focus, the picking policy, exported colours, Reset appearance, the #cam and appearance bookmarks, no Enter Wayfarer file
-  play       the launcher requests no engine before Start; Start boots Godot and the walk (EXC-001, the main experience) with no viewer
-             file, no error
+  play       Explore Interior and Explore Exterior, each from its start-page choice: the launcher requests no engine before Start; Start
+             boots Godot and that experience's own scene (the walk, EXC-001; EVA Operations, EVA-OPS-001) and no other, with no viewer
+             file and no error; the player acts (the trainee walks on W; the astronaut undocks, lets go, thrusts, takes the drone) and
+             the scene's published state follows; Exit returns to that experience's launcher
   switching  Exit back to the start page, Explore Ship again; page-renderer memory returns to the start-page level (Chrome runs
              with the back-forward cache off, so this measures what the pages release)
   equivalence  the walk's own check (both rings round and back to the station), drawing off, must pass in the browser as in the
@@ -358,12 +360,23 @@ def run_equivalence(url, play_release, binary, sandbox, out, play_seconds, recor
         page.send('Page.navigate', {'url': url + play_release['page'] + '?' + query})
         line = traffic.wait_console('WF_GODOT_EVA_OPS ', mark, max(EVA_SECONDS_MIN, EVA_SLACK * float(nat_eva.get('sim_s') or 0) + 120))
         time.sleep(TEARDOWN_SECONDS if line else 0)
-        errors = [text for kind, text in traffic.since(mark)[1] if text.startswith('ERROR')]
+        # Errors up to the result line fail the check; engine messages printed after a PASS line (shutdown diagnostics such as
+        # 'Pages in use exist at exit in PagedAllocator') are reported but do not fail it (owner decision 2026-11-07).
+        texts = [text for kind, text in traffic.since(mark)[1]]
+        cut = texts.index(line) if line in texts else len(texts)
+        errors = [t for t in texts[:cut] if t.startswith('ERROR')]
         eva = json.loads(line.split(' ', 1)[1]) if line else None
+        passed = bool(eva) and eva.get('result') == 'PASS'
+        exit_errors = [t for t in texts[cut + 1:] if t.startswith('ERROR')]
+        if not passed:
+            errors += exit_errors
+            exit_errors = []
         record_check('play: the EVA Operations check passes in the browser as natively',
-                     bool(eva) and eva.get('result') == 'PASS' and nat_eva.get('result') == 'PASS' and len(eva.get('tests', {})) == nat_eva.get('checks')
+                     passed and nat_eva.get('result') == 'PASS' and len(eva.get('tests', {})) == nat_eva.get('checks')
                      and not errors, web={k: (eva or {}).get(k) for k in ('result', 'fail', 'sim_s', 'wall_s')}, native=nat_eva, errors=errors[:3],
-                     seconds=round(time.monotonic() - t0, 1))
+                     exit_messages=exit_errors[:5], seconds=round(time.monotonic() - t0, 1))
+        if exit_errors and os.environ.get('GITHUB_ACTIONS'):
+            print(f'::warning title=web check::EVA Operations engine exit messages after PASS: {json.dumps(exit_errors[:5])}', flush=True)
     except Exception as error:
         log.flush()
         record_check('play: equivalence browser session', False, error=repr(error),
@@ -500,7 +513,7 @@ def run_touch_walk(url, play_release, binary, sandbox, out, record_check, metric
 
 
 def run_main(url, release, build, binary, sandbox, out, record_check, metrics):
-    """The visitor's walk in one browser: start page, Explore Ship, Enter Wayfarer (the walk), switching and memory, phone, review."""
+    """The visitor's walk in one browser: start page, Explore Ship, Explore Interior and Explore Exterior, switching and memory, phone, review."""
     play_release = release['experiences'].get('play')
     profile = tempfile.mkdtemp(prefix='wf-web-check-')
     log = open(out / 'chrome.log', 'w')
@@ -697,67 +710,141 @@ def run_main(url, release, build, binary, sandbox, out, record_check, metrics):
 
         # Back to the start page: the viewer's context is released (pagehide) and nothing of it stays loaded.
         page.click(*page.centre_of('a.back'))
-        page.wait("document.readyState === 'complete' && !!document.getElementById('go-play')", 30)
+        page.wait("document.readyState === 'complete' && !!document.getElementById('go-interior')", 30)
         heaps.append(('start after viewer', heap(settled)))
 
-        # C: Enter Wayfarer: the launcher loads no engine; Start loads the engine and the pack only.
+        # C: the two experiences, each from its start-page choice: the launcher loads no engine; Start loads the engine and the pack
+        # and starts the right scene (the hash picks it; one package holds both); the player can act; Exit returns to that launcher.
         if play_release:
-            mark = traffic.mark()
-            page.click(*page.centre_of('#go-play'))
-            page.wait("document.readyState === 'complete' && !document.getElementById('start').disabled && "
-                      "document.getElementById('size').textContent.includes('MB')", 30)
-            reqs, _ = traffic.since(mark)
-            heavy = [u for u, *_ in reqs if any(h in u for h in HEAVY)]
-            record_check('play launcher: no engine or pack before Start', not heavy, requests=sorted({u[len(url):] for u, *_ in reqs}))
-            page.screenshot(out / 'play_launcher.png')
-            mark = traffic.mark()
-            t0 = time.monotonic()
-            page.click(*page.centre_of('#start'))
-            running = page.wait("window.wayfarerPlay && ['running', 'failed'].includes(window.wayfarerPlay.state)", 300) and \
-                page.js("window.wayfarerPlay.state") == 'running'
-            play_s = round(time.monotonic() - t0, 1)
-            booted = traffic.wait_console('Godot Engine v', mark, 30)
-            walk = traffic.wait_console('WF_EXCURSION ready', mark, 300) if running else None
-            record_check('play: engine and the walk start', running and booted and walk, seconds=play_s, engine=booted, walk=walk,
-                         state=page.js('window.wayfarerPlay'))
-            if running:
-                time.sleep(5)
-                page.screenshot(out / 'play_first_launch.png')
-                for key, code in (('Enter', 13), ('Enter', 13)):        # two Confirm presses (the walk opens no first-launch prompt)
-                    page.send('Input.dispatchKeyEvent', {'type': 'keyDown', 'key': key, 'code': key, 'windowsVirtualKeyCode': code})
-                    page.send('Input.dispatchKeyEvent', {'type': 'keyUp', 'key': key, 'code': key, 'windowsVirtualKeyCode': code})
-                    time.sleep(3)
-                fps = page.js(RAF_FPS.replace('{ms}', '8000'), timeout=120)
-                page.screenshot(out / 'play_running.png')
+            def key(k, code, vk, hold=0.0):
+                page.send('Input.dispatchKeyEvent', {'type': 'keyDown', 'key': k, 'code': code, 'windowsVirtualKeyCode': vk})
+                time.sleep(hold)
+                page.send('Input.dispatchKeyEvent', {'type': 'keyUp', 'key': k, 'code': code, 'windowsVirtualKeyCode': vk})
+
+            def launcher(name):
+                mark = traffic.mark()
+                page.click(*page.centre_of(f'#go-{name}'))
+                page.wait("document.readyState === 'complete' && !document.getElementById('start').disabled && "
+                          "document.getElementById('size').textContent.includes('MB')", 30)
+                reqs, _ = traffic.since(mark)
+                heavy = [u for u, *_ in reqs if any(h in u for h in HEAVY)]
+                record_check(f'play launcher: {name} loads no engine or pack before Start', not heavy and page.js('location.pathname').endswith(f'/{name}/'),
+                             requests=sorted({u[len(url):] for u, *_ in reqs}))
+                page.screenshot(out / f'{name}_launcher.png')
+
+            def start(name, ready_line):
+                mark = traffic.mark()
+                t0 = time.monotonic()
+                page.click(*page.centre_of('#start'))
+                running = page.wait("window.wayfarerPlay && ['running', 'failed'].includes(window.wayfarerPlay.state)", 300) and \
+                    page.js("window.wayfarerPlay.state") == 'running'
+                seconds = round(time.monotonic() - t0, 1)
+                booted = traffic.wait_console('Godot Engine v', mark, 30)
+                ready = traffic.wait_console(ready_line, mark, 300) if running else None
+                time.sleep(3)
+                lines = traffic.since(mark)[1]
+                other = [t for _, t in lines if t.startswith(('WF_EXCURSION ready', 'WF_EVA_OPS ready')) and not t.startswith(ready_line)]
+                identity = {'experience': page.js('window.wayfarerPlay && window.wayfarerPlay.experience'), 'hash': page.js('location.hash'),
+                            'exit': page.js("document.getElementById('exit').getAttribute('href')"), 'title': page.js("document.getElementById('title').textContent")}
+                record_check(f'play: {name} starts the engine and its own scene', running and booted and ready and not other
+                             and identity['experience'] == name and identity['exit'] == f'../{name}/' and identity['hash'] == f'#{name}',
+                             seconds=seconds, engine=booted, ready=ready, other_scene=other, **identity, state=page.js('window.wayfarerPlay'))
+                return mark, running, seconds
+
+            def leave(name):
+                # the in-game Exit link returns to this experience's launcher, its Back link to the start page
+                page.click(*page.centre_of('#exit'))
+                back = page.wait("document.readyState === 'complete' && !!document.getElementById('start')", 30)
+                record_check(f'play: Exit from {name} returns to its launcher', back and page.js('location.pathname').endswith(f'/{name}/'),
+                             path=page.js('location.pathname'))
+                page.click(*page.centre_of('header a'))
+                page.wait("document.readyState === 'complete' && !!document.getElementById('go-viewer')", 30)
+                heaps.append((f'start after {name}', heap(settled)))
+
+            def after(mark, name):
                 reqs, lines = traffic.since(mark)
                 viewer = [u for u, *_ in reqs if '/viewer/' in u]
-                record_check('play: no Explore Ship file requested', not viewer, viewer_requests=viewer[:3])
-                requests_ok('play: every request served from the project subpath', reqs)
+                record_check(f'play: {name} requested no Explore Ship file', not viewer, viewer_requests=viewer[:3])
+                requests_ok(f'play: {name}: every request served from the project subpath', reqs)
                 errors = [text for kind, text in lines if kind in ('error', 'exception') and not text.startswith('   at:')]
-                record_check('play: no engine or script errors', not errors and not traffic.crashed, errors=errors[:5], crashed=traffic.crashed)
+                record_check(f'play: {name}: no engine or script errors', not errors and not traffic.crashed, errors=errors[:5], crashed=traffic.crashed)
+                return reqs
+
+            # Explore Interior: the walk (EXC-001). Two Confirm presses, then W carries the trainee down the boarding line.
+            launcher('interior')
+            mark, running, play_s = start('interior', 'WF_EXCURSION ready')
+            if running:
+                time.sleep(5)
+                page.screenshot(out / 'interior_first_launch.png')
+                for _ in range(2):
+                    key('Enter', 'Enter', 13)
+                    time.sleep(3)
+                # W held: the hands pull the body along the boarding line at its pace in game time (a software-rendered runner steps
+                # physics at a fraction of real time, as in the touch walk), so the key stays down until the body has moved.
+                page.wait('!!window.wayfarerWalk', 60)
+                before = page.js('window.wayfarerWalk')
+                page.send('Input.dispatchKeyEvent', {'type': 'keyDown', 'key': 'w', 'code': 'KeyW', 'windowsVirtualKeyCode': 87})
+                t_w = time.monotonic()
+                dist = lambda a, b: math.dist([a[k] for k in 'xyz'], [b[k] for k in 'xyz']) if a and b else 0.0
+                walked = page.wait(f"window.wayfarerWalk && Math.hypot(window.wayfarerWalk.x - {before['x']}, window.wayfarerWalk.y - {before['y']}, "
+                                  f"window.wayfarerWalk.z - {before['z']}) > 0.5" if before else 'false', 180)
+                page.send('Input.dispatchKeyEvent', {'type': 'keyUp', 'key': 'w', 'code': 'KeyW', 'windowsVirtualKeyCode': 87})
+                now = page.js('window.wayfarerWalk')
+                record_check('play: interior: the trainee moves down the boarding line on W', bool(before) and walked and dist(before, now) > 0.5,
+                             metres=round(dist(before, now), 2), seconds=round(time.monotonic() - t_w, 1), before=before, after=now)
+                fps = page.js(RAF_FPS.replace('{ms}', '8000'), timeout=120)
+                page.screenshot(out / 'interior_running.png')
+                reqs = after(mark, 'interior')
                 metrics['play'] = {'interactive_s': play_s, 'transferred_bytes': sum(b for _, _, b, _ in reqs), 'requests': len(reqs),
                                    'raf': fps, 'start_ms': page.js('window.wayfarerPlay.start_ms'), 'renderer_rss_mb': rss(chrome.process.pid, 'renderer'),
                                    'renderer': 'SwiftShader software WebGL, 1280x800'}
-            # Leave through the in-game Exit link to the launcher and on to the start page.
-            page.click(*page.centre_of('#exit'))
-            page.wait("document.readyState === 'complete' && !!document.getElementById('start')", 30)
-            page.click(*page.centre_of('header a'))
-            page.wait("document.readyState === 'complete' && !!document.getElementById('go-viewer')", 30)
-            heaps.append(('start after play', heap(settled)))
+            leave('interior')
             canvases = page.js("document.querySelectorAll('canvas').length")
             record_check('switching: back on the start page with no canvas or engine left', canvases == 0 and not page.js('!!window.Engine'))
+
+            # Explore Exterior: EVA Operations (EVA-OPS-001), free exploration first: at the hatch, holding, the drone docked. The player
+            # releases the drone (X), lets go of the hold (G), thrusts forward (W) and takes the drone (2); the published state must follow.
+            launcher('exterior')
+            mark, running, play_s = start('exterior', 'WF_EVA_OPS ready')
+            if running:
+                eva0 = page.wait("window.wayfarerEva && window.wayfarerEva.active === 'suit'", 20) and page.js('window.wayfarerEva')
+                page.screenshot(out / 'exterior_first_launch.png')
+                record_check('play: exterior starts in free exploration at the hatch, drone docked', bool(eva0) and eva0['docked'] and eva0['held']
+                             and not eva0['scenario'] and eva0['hold'] == 'HOLD_AIRLOCK', state=eva0)
+                # The state record comes once a game second, and a software-rendered runner plays game time at a fraction of real time
+                # (CI run 214: 4 game seconds in 80 s), so each step waits long enough and W stays down until the suit is seen moving.
+                key('x', 'KeyX', 88)
+                undocked = page.wait('window.wayfarerEva && window.wayfarerEva.docked === false', 90)
+                key('g', 'KeyG', 71)
+                released = page.wait('window.wayfarerEva && window.wayfarerEva.held === false', 90)
+                page.send('Input.dispatchKeyEvent', {'type': 'keyDown', 'key': 'w', 'code': 'KeyW', 'windowsVirtualKeyCode': 87})
+                moving = page.wait('window.wayfarerEva && window.wayfarerEva.v_suit > 0.005', 90)
+                page.send('Input.dispatchKeyEvent', {'type': 'keyUp', 'key': 'w', 'code': 'KeyW', 'windowsVirtualKeyCode': 87})
+                key('2', 'Digit2', 50)
+                drone = page.wait("window.wayfarerEva && window.wayfarerEva.active === 'drone'", 90)
+                time.sleep(2)
+                page.screenshot(out / 'exterior_running.png')
+                record_check('play: exterior: the astronaut undocks, lets go, thrusts and hands control to the drone',
+                             undocked and released and moving and drone, undocked=undocked, released=released, moving=moving, drone=drone,
+                             state=page.js('window.wayfarerEva'))
+                metrics['exterior'] = {'interactive_s': play_s, 'start_ms': page.js('window.wayfarerPlay.start_ms'),
+                                       'renderer_rss_mb': rss(chrome.process.pid, 'renderer'), 'renderer': 'SwiftShader software WebGL, 1280x800'}
+                after(mark, 'exterior')
+            leave('exterior')
+            canvases = page.js("document.querySelectorAll('canvas').length")
+            record_check('switching: back on the start page after Explore Exterior with no canvas or engine left', canvases == 0 and not page.js('!!window.Engine'))
 
             # D: the other experience again after the game: the viewer still starts.
             page.click(*page.centre_of('#go-viewer'))
             again = page.wait('!!(window.wayfarer && window.wayfarer.model)', 240)
-            record_check('switching: Explore Ship starts again after Enter Wayfarer', again)
+            record_check('switching: Explore Ship starts again after the experiences', again)
             page.click(*page.centre_of('a.back'))
             page.wait("document.readyState === 'complete' && !!document.getElementById('go-viewer')", 30)
             heaps.append(('start after second viewer', heap(settled)))
             record_check('switching: renderer memory returns to the start-page level after each experience',
                          all(h <= settled for _, h in heaps) and not traffic.crashed, renderer_rss_mb=heaps, crashed=traffic.crashed)
             metrics['memory'] = {'renderer_rss_mb': heaps, 'in_viewer_mb': metrics['viewer'].get('renderer_rss_mb'),
-                                 'in_play_mb': metrics.get('play', {}).get('renderer_rss_mb'),
+                                 'in_play_mb': metrics.get('play', {}).get('renderer_rss_mb'), 'in_exterior_mb': metrics.get('exterior', {}).get('renderer_rss_mb'),
                                  'note': 'page-renderer RSS on the start page after each experience, settled up to 30 s; Chrome runs with '
                                          'the back-forward cache off (with it on, Chrome keeps left pages until it evicts them)'}
 

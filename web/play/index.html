@@ -12,73 +12,29 @@
   <header>
     <p class="eyebrow"><a href="../">← Wayfarer</a> · Interactive</p>
     <h1>ENTER WAYFARER</h1>
-    <p class="lead">The walk: start in the development station, board Wayfarer as the trainee, cross into a habitat ring and walk its
-      whole circumference through every sector and corridor, then return to the station. One continuous run under your control: you
-      work the airlock, ask the ship to undock and spin its rings up, ride the transfer drum, climb down into spin gravity, open the
-      doors and come back the same way.</p>
+    <p class="lead">Two ways into the interactive Wayfarer, one engine and one ship package shared between them. Choose a side.</p>
   </header>
-  <section class="panel">
-    <p id="size">The engine and the ship package download when you press Start.</p>
-    <p><button id="start" type="button">Start the walk</button> <button id="eva" type="button">Start EVA Operations</button></p>
-    <p class="note">EVA Operations: the suited astronaut and the companion drone outside the hull, on finite nitrogen. 1 astronaut ·
-      2 drone · W/S/A/D/R/F translate · I/K/J/L/U/O rotate · B brake · M assisted/manual · G grab · X dock · Y drone mode · Q ask the
-      drone for nitrogen · F4 the guided "EVA — First Flight" · F8 to the walk.</p>
-    <p class="note">Desktop: click to look (Esc frees the cursor) · W/S move, A/D step · E use (hatch, door, drum, ladder, the ring B
-      branch) · O ship operations at a trunk panel · V view · M ring map. Touch: left thumb moves, right thumb drags to look, the Use,
-      Ops, View and Map buttons appear when they apply.</p>
-    <p id="cap" class="note"></p>
+  <section class="choices primary" aria-label="Experiences">
+    <a class="choice" href="../interior/" id="go-interior">
+      <span class="kicker">Experience · inside</span>
+      <strong>Explore Interior</strong>
+      <span>Enter the spacecraft. Walk through Wayfarer, explore its rotating habitats and discover life aboard the ship.</span>
+      <span class="meta">keyboard and mouse or touch</span>
+    </a>
+    <a class="choice" href="../exterior/" id="go-exterior">
+      <span class="kicker">Experience · outside</span>
+      <strong>Explore Exterior</strong>
+      <span>Step outside Wayfarer. Navigate in microgravity, inspect the spacecraft and operate your EVA equipment and companion
+        drone.</span>
+      <span class="meta">keyboard and mouse · desktop browser</span>
+    </a>
   </section>
-  <section class="grid2">
-    <div class="panel">
-      <h2>Controls</h2>
-      <ul class="plain">
-        <li>The walk: the goal at the top left says what to do next and which key or button does it; the ring map shows the
-          stretch walked. A shut hatch or door stops you; open it first. F10 opens the controls.</li>
-        <li>Touch: left thumb moves where the body can walk or climb, right thumb drags to look, buttons appear when their action
-          can be used (Use, Ops, View, Map); ? explains them. Landscape works best.</li>
-        <li>← Exit leaves and unloads the engine.</li>
-      </ul>
-    </div>
-    <div class="panel">
-      <h2>About this build</h2>
-      <ul class="plain">
-        <li>Browser build of the native Godot project: same scenes, scripts, physics (Jolt) and DOCKED package; single-threaded WebGL 2.</li>
-        <li>The trainee appears as a proxy body; the native development runtime carries the full characters.</li>
-        <li>SIMULATION_ONLY: the ring-ramp time-lapse and the closure timings are display choices; no transfer timing, procedure or interlock is released.</li>
-        <li>Tested in Chromium-based desktop browsers and in Chrome's phone and tablet emulation with touch; real phones, Firefox and
-          Safari are not yet verified. On phones the 3-D view renders at a reduced, frame-rate-adaptive resolution.</li>
-        <li>Built with the Godot Engine, MIT licence: <a href="GODOT_LICENSE.txt">licence</a>, <a href="GODOT_COPYRIGHT.txt">third-party notices</a>.</li>
-      </ul>
-    </div>
-  </section>
+  <p class="note">This page loads no engine. Older links that opened the walk from here still work: each experience's page has its own
+    Start.</p>
 </main>
 <script>
-// Click-to-load: this page fetches only play.json (past the browser cache) and opens the content-named Godot page on Start.
-const start = document.getElementById('start'), size = document.getElementById('size'), cap = document.getElementById('cap');
-let play = null;
-fetch('play.json', { cache: 'no-store' }).then(r => r.ok ? r.json() : Promise.reject(new Error(`play.json ${r.status}`))).then(p => {
-  play = p;
-  const mb = Object.values(p.bytes).reduce((a, b) => a + b, 0) / 1e6;
-  size.textContent = `Pressing Start downloads the Godot ${p.godot_short} engine and the ship package: ${mb.toFixed(0)} MB, `
-    + `less over the wire when the server compresses it, and cached for later visits.`;
-}).catch(err => { size.textContent = `This release has no interactive build (${err.message}).`; start.disabled = true; document.getElementById('eva').disabled = true; });
-// Capability probe without starting anything heavy: a throwaway WebGL 2 context, released at once.
-(() => {
-  const gl = document.createElement('canvas').getContext('webgl2');
-  const touchOnly = matchMedia('(pointer: coarse)').matches && !matchMedia('(pointer: fine)').matches;
-  const notes = [];
-  if (!gl) { notes.push('This browser did not provide WebGL 2, which the engine needs. Explore Ship may still work.'); start.disabled = true; document.getElementById('eva').disabled = true; }
-  else gl.getExtension('WEBGL_lose_context')?.loseContext();
-  if (!WebAssembly?.validate) notes.push('WebAssembly is unavailable.');
-  if (touchOnly) notes.push('Touch device: the game shows touch controls. It needs a recent phone and the download above; '
-    + 'Explore Ship is the lighter choice.');
-  cap.textContent = notes.join(' ');
-})();
-// The walk (EXC-001) is the package's main scene.
-start.addEventListener('click', () => { if (play) location.assign(play.entry); });
-// EVA Operations (EVA-OPS-001) is a second scene in the same package: the page's #eva opens it instead of the walk.
-const eva = document.getElementById('eva');
-eva.addEventListener('click', () => { if (play) location.assign(play.entry + '#eva'); });
+// Older links: play/#eva opened EVA Operations from this page. Send them on to the experience they meant.
+if (/eva|exterior/i.test(location.hash)) location.replace('../exterior/');
 </script>
 </body>
 </html>

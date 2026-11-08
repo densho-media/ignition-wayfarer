@@ -5,8 +5,10 @@ A playable, physics-based training experience in the interactive Wayfarer. The p
 physics while the other is controlled, and switching control resets nothing. It is a **TRAINING SIMULATION**: FLIGHT_EVA stays HOLD
 (S&E 45 O-07), every hold is SIMULATION_ONLY, and nothing here is a flight procedure.
 
-- Scene: `godot/scenes/eva_ops.tscn` (`godot/scripts/eva/`). Open it from the walk with **F9**, from the web launcher with **Start EVA
-  Operations** (`#eva`), or natively with `godot --path godot -- --eva`. **F8** goes back to the walk.
+- Scene: `godot/scenes/eva_ops.tscn` (`godot/scripts/eva/`). On the website it is **Explore Exterior** (`/exterior/`, Start opens the
+  shared Godot page with `#exterior`; the older `#eva` still works); from the walk **F9** opens it, natively `godot --path godot -- --eva`.
+  **F8** goes inside to the walk (Explore Interior); the page's title, Exit link and hash follow the scene (`godot/scripts/web_page.gd`).
+  It starts in free exploration at the hatch; **F4** starts the guided First Flight.
 - Package: `data/simulations/wf_eva_ops.json` (contract `wf_eva_ops v1`), written by `src/wayfarer/eva_ops.py` from the canonical EVA
   system (`data/eva_suit.toml`, `data/eva_drone.toml`, `validation/eva_system.py` and its `runtime_layout`), the Brow
   (`forward_shield.py`), the training route (`eva_route.py`), the rig (`wf_sim_rig.json`) and the operations choices in

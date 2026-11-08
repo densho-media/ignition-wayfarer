@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Explore Exterior — G.U. Wayfarer 001</title>
+<meta name="description" content="Step outside the G.U. Wayfarer 001 as a suited astronaut with a companion drone: cold-gas flight in microgravity along the hull, in the interactive Godot experience.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%2307090c'/%3E%3Cpath d='M2 8h12M8 3v10' stroke='%23e0a040' stroke-width='2'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../site.css">
+</head>
+<body>
+<main class="wrap">
+  <header>
+    <p class="eyebrow"><a href="../">← Wayfarer</a> · Experience · outside</p>
+    <h1>EXPLORE EXTERIOR</h1>
+    <p class="lead">Step outside Wayfarer. You start at the EVA hatch on the forward collar, gripping the rail, with the companion drone
+      docked on your back and a finite supply of nitrogen. Fly in microgravity along the hull and the Brow, inspect the structures,
+      switch to the drone and back, and come home to the hatch. Everything is open from the start; the guided training flight is
+      there when you want it.</p>
+  </header>
+  <section class="panel">
+    <p id="size">The engine and the ship package download when you press Start.</p>
+    <p><button id="start" type="button" disabled>Start · Explore Exterior</button> <a class="button secondary" href="../interior/">Explore Interior instead</a></p>
+    <p id="cap" class="note"></p>
+  </section>
+  <section class="grid2">
+    <div class="panel">
+      <h2>Controls</h2>
+      <ul class="plain">
+        <li><b>Flying:</b> <b>W/S A/D R/F</b> thrust forward/back, left/right, up/down · <b>I/K J/L U/O</b> pitch, yaw, roll ·
+          <b>Shift</b> fine thrust · <b>B</b> brake (assisted) · <b>M</b> manual or assisted · <b>H</b> attitude hold · <b>P</b>
+          position hold · right mouse drag looks, the wheel zooms · <b>C</b> next camera.</li>
+        <li><b>On the hull:</b> <b>G</b> grab or release the hold in reach (rail anchors, Brow fixtures, the station rack) ·
+          <b>Space</b> push off along your view · <b>T</b> clip or unclip the tether · <b>E</b> use or inspect what is in reach.</li>
+        <li><b>The drone:</b> <b>1</b> control the astronaut, <b>2</b> the drone (the other keeps moving under physics) · <b>X</b>
+          release the drone or call it back to dock · <b>Y</b> its mode (manual, hold, follow, return to astronaut, return to ship) ·
+          <b>Z</b> arms · <b>N</b> gripper · <b>Q</b> ask it for nitrogen.</li>
+        <li><b>Training:</b> <b>F4</b> starts or leaves the guided "EVA — First Flight" · <b>F5</b> training reset (refills every
+          vessel, labelled) · <b>F6</b> last checkpoint · <b>F2</b> drift or burn presets · <b>F3</b> operational rules ·
+          <b>F7</b> a valve fault.</li>
+        <li><b>Back and exit:</b> fly back to the hatch and grip its hold to end where you began. <b>← Exit</b> (bottom left) leaves
+          and unloads the engine; your browser's Back button does the same. <b>F8</b> goes inside, to Explore Interior, in the
+          same session.</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h2>About this experience</h2>
+      <ul class="plain">
+        <li>EVA Operations (EVA-OPS-001): the suited astronaut and the companion drone, both live in one fixed-step simulation. Cold-gas
+          thrusters with their real nozzle layout and allocation, finite nitrogen in four inventories, momentum that only gas can
+          take away, contact with the hull, holds and tether. The ship is the current generated model.</li>
+        <li><b>Where you can go:</b> the forward collar, the EVA rail, the Brow's faces, rim and truss, the airlock fitting and the
+          station rack have holds and colliders. The drive, radiator and other engineering areas are not EVA-cleared: the keep-outs
+          and the ram face are enforced and warned on the HUD, and the training reset is the only way back from a mistake.</li>
+        <li>TRAINING SIMULATION: flight EVA stays HOLD in the canon (S&amp;E 45 O-07). Every hold is SIMULATION_ONLY and nothing here is a
+          flight procedure. The suit and drone appear as proxies in the browser package.</li>
+        <li>Keyboard and mouse only, desktop browser; key labels show US key positions. Tested in Chromium-based browsers.</li>
+        <li>Built with the Godot Engine, MIT licence: <a href="../play/GODOT_LICENSE.txt">licence</a>,
+          <a href="../play/GODOT_COPYRIGHT.txt">third-party notices</a>.</li>
+      </ul>
+    </div>
+  </section>
+</main>
+<script src="../play/launch.js"></script>
+<script>wayfarerLaunch({ hash: '#exterior', touch: false });</script>
+</body>
+</html>

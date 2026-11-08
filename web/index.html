@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>G.U. Wayfarer 001 — IGNITION</title>
-<meta name="description" content="The G.U. Wayfarer 001 spacecraft from IGNITION: explore the generated engineering model in 3D, or enter the ship in the interactive Godot demonstrator.">
+<meta name="description" content="The G.U. Wayfarer 001 spacecraft from IGNITION: explore it from inside as a crew member or from outside as an EVA astronaut, or inspect the generated engineering model.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%2307090c'/%3E%3Cpath d='M2 8h12M8 3v10' stroke='%23e0a040' stroke-width='2'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="site.css">
 </head>
@@ -14,22 +14,30 @@
     <p class="eyebrow">IGNITION · Densho</p>
     <h1>G.U. WAYFARER 001</h1>
     <p class="lead">A fusion-drive spacecraft built from its engineering workbooks: every shape here is generated from sourced or
-      labelled parameters. Choose how to see it, or read how it is engineered. Nothing heavy loads until you choose.</p>
+      labelled parameters. Step inside it, step outside it, or inspect how it is engineered. Nothing heavy loads until you choose.</p>
   </header>
-  <section class="choices" aria-label="Experiences">
-    <a class="choice" href="viewer/" id="go-viewer">
-      <span class="kicker">Inspect</span>
-      <strong>Explore Ship</strong>
-      <span>The whole vehicle in a 3D engineering viewer: orbit, zoom, camera presets, assemblies and each part's source status.
-        Works on phones.</span>
-      <span class="meta" id="viewer-meta">three.js · WebGL</span>
+  <section class="choices primary" aria-label="Experiences">
+    <a class="choice" href="interior/" id="go-interior">
+      <span class="kicker">Experience · inside</span>
+      <strong>Explore Interior</strong>
+      <span>Enter the spacecraft. Walk through Wayfarer, explore its rotating habitats and discover life aboard the ship.</span>
+      <span class="meta" id="interior-meta">Godot · WebGL 2 · keyboard and mouse or touch</span>
     </a>
-    <a class="choice" href="play/" id="go-play">
-      <span class="kicker">Interactive</span>
-      <strong>Enter Wayfarer</strong>
-      <span>The walk, in the Godot engine: start in the development station, board Wayfarer, cross into a habitat ring, walk its
-        whole circumference and return to the station, under your own control.</span>
-      <span class="meta" id="play-meta">Godot · WebGL 2 · keyboard and mouse or touch</span>
+    <a class="choice" href="exterior/" id="go-exterior">
+      <span class="kicker">Experience · outside</span>
+      <strong>Explore Exterior</strong>
+      <span>Step outside Wayfarer. Navigate in microgravity, inspect the spacecraft and operate your EVA equipment and companion
+        drone.</span>
+      <span class="meta" id="exterior-meta">Godot · WebGL 2 · keyboard and mouse · desktop browser</span>
+    </a>
+  </section>
+  <section class="choices secondary" aria-label="Tools and background">
+    <a class="choice" href="viewer/" id="go-viewer">
+      <span class="kicker">Engineering explorer</span>
+      <strong>Explore Ship</strong>
+      <span>The whole vehicle in a 3D engineering viewer: orbit, zoom, camera presets, assemblies, holograms and each part's source
+        status. Works on phones.</span>
+      <span class="meta" id="viewer-meta">three.js · WebGL</span>
     </a>
     <a class="choice" href="engineering/" id="go-engineering">
       <span class="kicker">Engineering</span>
@@ -39,8 +47,9 @@
       <span class="meta">static pages · figures</span>
     </a>
   </section>
-  <p class="note">Explore Ship and Enter Wayfarer are SIMULATION_ONLY representations (REP_PROXY geometry). Labels on screen keep CANON, DERIVED, WORKING,
-    PROTOTYPE, DIAGNOSTIC and HOLD values apart; nothing here is flight data or a certified procedure.</p>
+  <p class="note">The experiences and Explore Ship are SIMULATION_ONLY representations (REP_PROXY geometry). Labels on screen keep CANON, DERIVED,
+    WORKING, PROTOTYPE, DIAGNOSTIC and HOLD values apart; nothing here is flight data or a certified procedure. EVA outside the hull is
+    a training simulation: flight EVA stays HOLD.</p>
   <footer>
     <span id="release">Release —</span>
     <a href="status/">Technical status</a>
@@ -56,9 +65,13 @@ fetch('release.json', { cache: 'no-store' }).then(r => r.ok ? r.json() : null).t
   document.getElementById('release').textContent = `Release ${rel.release} · ${rel.git_revision.slice(0, 7)} · ${rel.built_utc.slice(0, 10)}`;
   const v = rel.experiences?.viewer, p = rel.experiences?.play;
   if (v?.download_bytes) document.getElementById('viewer-meta').textContent = `three.js · WebGL · about ${mb(v.download_bytes)}`;
-  if (p?.download_bytes) document.getElementById('play-meta').textContent =
-    `Godot ${p.godot_short} · WebGL 2 · about ${mb(p.download_bytes)} · keyboard and mouse · desktop browser`;
-  if (!p) document.getElementById('go-play').classList.add('off');
+  if (p?.download_bytes) {
+    document.getElementById('interior-meta').textContent =
+      `Godot ${p.godot_short} · WebGL 2 · about ${mb(p.download_bytes)} · keyboard and mouse or touch`;
+    document.getElementById('exterior-meta').textContent =
+      `Godot ${p.godot_short} · WebGL 2 · about ${mb(p.download_bytes)} · keyboard and mouse · desktop browser`;
+  }
+  if (!p) for (const id of ['go-interior', 'go-exterior']) document.getElementById(id).classList.add('off');
 }).catch(() => {});
 </script>
 </body>

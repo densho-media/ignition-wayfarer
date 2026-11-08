@@ -530,8 +530,10 @@ def main_page(site, spec, entries, dropped, problem, revision, built, play=True)
     pmap = problem['entry']
     plink = f'{pmap["kind_dir"]}/{pmap["folder"].name}/'
     pp = prob['protection']
-    play_card = ('<a class="choice" href="../play/"><span class="kicker">Interactive</span><strong>Enter Wayfarer</strong>'
-                 '<span>Walk from the station into a habitat ring, at human scale.</span></a>') if play else ''
+    play_card = ('<a class="choice" href="../interior/"><span class="kicker">Experience · inside</span><strong>Explore Interior</strong>'
+                 '<span>Walk from the station into a habitat ring, at human scale.</span></a>'
+                 '<a class="choice" href="../exterior/"><span class="kicker">Experience · outside</span><strong>Explore Exterior</strong>'
+                 '<span>Fly the suited astronaut and the companion drone along the hull, on finite gas.</span></a>') if play else ''
     body = f'''<header>
   <p class="eyebrow">IGNITION · Wayfarer · Engineering</p>
   <h1>0.016 c and back</h1>
