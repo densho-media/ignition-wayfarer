@@ -2063,7 +2063,8 @@ change which input triggers an action, never forces, speeds, propellant or permi
   keeps the printed character the player pressed for its label (AZERTY's Z, not "W"); every other action binds the printed character.
 - **Profile and persistence.** `user://wayfarer_controls.cfg` (ConfigFile, schema 4): bindings, `[setup] confirmed`, lesson
   preference and progress, accessibility and touch settings. In the Web export Godot keeps `user://` in the browser's IndexedDB for the
-  site's origin and syncs it after each save, so the profile survives reloads, both experiences (one package) and new deployments,
+  site's origin and copies it there after each save (asynchronously: within a second at normal frame rates, but tens of seconds
+  with software rendering, so a page closed right after a change can lose it; the browser check waits for the stored copy), so the profile survives reloads, both experiences (one package) and new deployments,
   per browser profile; nothing is synced to an account. If the browser does not persist it (private window, blocked storage:
   `OS.is_userfs_persistent()` false) or a save fails, the setup and Controls say the keys last for this visit and play goes on.
   An unreadable file is kept as `wayfarer_controls.cfg.bad` and the first-visit setup starts. **Migration:** unknown actions and

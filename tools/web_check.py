@@ -46,6 +46,13 @@ import urllib.request
 BASE = '/ignition-wayfarer/'
 
 
+
+# CTRL-001: the stored line of one action in the controls profile, read straight from Godot's IndexedDB copy of user://.
+IDB_LINE = """new Promise(r => { const q = indexedDB.open('/userfs'); q.onerror = () => r('');
+  q.onsuccess = () => { try { const g = q.result.transaction('FILE_DATA').objectStore('FILE_DATA').get('/userfs/godot/app_userdata/Wayfarer/wayfarer_controls.cfg');
+    g.onsuccess = () => { const v = g.result; const t = v && v.contents ? new TextDecoder().decode(v.contents) : '';
+      const m = t.match(/^{key}=[\\s\\S]*?\\]$/m); r(m ? m[0].slice(0, 300) : ''); }; g.onerror = () => r(''); } catch (e) { r(''); } }; })"""
+
 class Site(http.server.SimpleHTTPRequestHandler):
     extensions_map = {**http.server.SimpleHTTPRequestHandler.extensions_map,
                       '.js': 'text/javascript', '.wasm': 'application/wasm', '.glb': 'model/gltf-binary', '.json': 'application/json'}
@@ -898,7 +905,11 @@ def run_main(url, release, build, binary, sandbox, out, record_check, metrics):
                              bool(opened and picked and listening and changed and closed and moved_w), opened=opened, picked=picked, listening=listening,
                              changed=changed, closed=closed, walked=moved_w, state=page.js(CTL))
                 # The same browser profile after a reload: the choices are restored and no setup is asked again.
-                time.sleep(4)                                  # Godot syncs user:// to IndexedDB after the save
+                # Godot copies user:// to IndexedDB on its own schedule after a save (tens of seconds with software
+                # rendering on a CI runner); reload only once the stored profile holds W (KEY_W = 87), as a player would.
+                stored = page.wait(IDB_LINE.replace('{key}', 'player.move_forward') + ".then(l => /\"k\": 87,/.test(l.split('}')[0]))", 180)
+                record_check('controls: the changed key reaches the browser storage (IndexedDB)', bool(stored),
+                             line=page.js(IDB_LINE.replace('{key}', 'player.move_forward')))
                 mark_r = traffic.mark()
                 page.send('Page.reload', {})
                 reloaded = traffic.wait_console('WF_EXCURSION ready', mark_r, 300)
