@@ -522,6 +522,21 @@ one camera and one scale, so a size difference is a real size difference.</p></h
     return True
 
 
+def compare_teaser(prob):
+    """The main page's entry to engineering/compare/: a preview, one sentence and one link per problem."""
+    links = ''.join(f'<a href="compare/#{r["id"]}" title="{esc(r["title"])}"><code>{r["id"]}</code> {esc(r["title"])}</a>' for r in prob['register'])
+    return f'''<section id="compare" class="teaser">
+  <a class="shot" href="compare/#P08"><img src="compare_preview.jpg" alt="Today's tank farm beside the tank bays FDP-1 needs, in 3D at one scale" loading="lazy"></a>
+  <div>
+    <h2>What we have, what we need · in 3D</h2>
+    <p>For every open problem, the ship as it is built today on the left and what the problem needs on the right, under one camera at one
+      scale, so a size difference is a real one. P07, for example, sets today's radiators beside the wing area FDP-1 needs.</p>
+    <p><a class="go" href="compare/">Open the 3D comparison</a></p>
+    <div class="pick">{links}</div>
+  </div>
+</section>'''
+
+
 def main_page(site, spec, entries, dropped, problem, revision, built, play=True):
     n = ship_numbers(spec)
     b, m, fi = n['burn'], n['mission'], n['fi']
@@ -599,7 +614,9 @@ def main_page(site, spec, entries, dropped, problem, revision, built, play=True)
 </header>
 
 <nav class="toc"><a href="#goal">1 Goal</a><a href="#constraints">2 Constraints</a><a href="#ship">3 The ship today</a>
-  <a href="#tried">4 What we tried</a><a href="#problems">5 Open problems</a><a href="#follow">6 Follow along</a></nav>
+  <a href="#tried">4 What we tried</a><a href="#problems">5 Open problems</a><a href="#follow">6 Follow along</a>
+  {'<a href="compare/"><b>Compare in 3D</b></a>' if prob.get("compare") else ''}</nav>
+{compare_teaser(prob) if prob.get("compare") else ''}
 
 <section id="goal"><h2>1 · The goal</h2>
   <p>A ship built for a crew of {spec["crew"]["rated_occupancy"]["value"]} cruises at <strong>{spec["mission"]["target_speed"]["value"]} c</strong> ({spec["mission"]["target_speed"]["value"] * C / 1e3:,.0f} km/s)
