@@ -4,7 +4,11 @@ story() returns the problem register P01-P11 with its values filled from the FDP
 checks, and the P11 side-elevation data: the shield shadow and every part's radial extent along the ship, classified covered or
 outside for the aligned stream (fdp1diag.protection). Nothing here changes the map; it is the same data the Blender boards print.
 
-    python3 lab/problems/fdp1-requirements/site.py [--json]     # prints the summary (or the whole record)
+compare() gives the side-by-side 3D pages (tools/story.py, engineering/compare/): per problem, the subsystems of the current
+model to show on the left (ids of shots/m5_subsystems.toml, as the Explore Ship viewer classifies its nodes) and the parts of the
+FDP-1 blockout (data/ship_geometry.json) to show on the right, at the same scale.
+
+    python3 lab/problems/fdp1-requirements/site.py [--json | --compare]     # the summary, the whole record, or the 3D pairs
 """
 import json
 import math
@@ -73,6 +77,46 @@ def elevation(pr):
             'wings_max_r_m': wings_r}
 
 
+# Per problem: what the current model shows (left, subsystem ids) and which FDP-1 blockout groups carry the requirement (right).
+# ALL means the whole ship. The note says what the pair shows; the numbers come from the register.
+PAIRS = [
+    ('P01', ['S10'], ['fdp1_reaction', 'fdp1_fuel_prep', 'fdp1_nozzle'],
+     'The burn point: today a reactor and four nozzles; FDP-1 needs a target chain (injector, tracker, reaction point) whose gain is unproven.'),
+    ('P02', ['S10', 'S08'], ['fdp1_drivers', 'fdp1_sensors', 'fdp1_power'],
+     'The drivers: FDP-1 needs beam galleries, final focus and their power feeds for billions of pulses.'),
+    ('P03', ['ALL'], ['ALL'],
+     'Power per mass: the whole ship today against the FDP-1 ship. 1 g would need power hardware many times heavier than either.'),
+    ('P04', ['S10'], ['fdp1_nozzle'],
+     'Magnetic nozzle: today\'s four-nozzle drive against the FDP-1 loops, r 112 m, that must catch and push the plasma.'),
+    ('P05', ['S10', 'S01'], ['fdp1_shield'],
+     'Radiation shielding: FDP-1 needs armour shoes and a shadow shield around every loop, near the burn point.'),
+    ('P06', ['S09'], ['fdp1_thermal'],
+     'Heat transport: the headers, lines and pumps that carry the waste heat out to the wings are not designed yet.'),
+    ('P07', ['S09'], ['fdp1_thermal', 'radiators'],
+     'Radiators: today\'s blades and zones against the wing area FDP-1 needs to reject its heat.'),
+    ('P08', ['S05', 'S06', 'S07'], ['storage', 'fdp1_tanks', 'bow'],
+     'Propellant: today\'s tank farm against the T-B farm, which moves the bow 122 m forward.'),
+    ('P09', ['S02'], ['fdp1_structure', 'hull'],
+     'Structure: the spine today against the FDP-1 module frames, which carry every pulse for years.'),
+    ('P10', ['ALL'], ['ALL'],
+     'The whole mission: today\'s ship against the FDP-1 ship that closes four burns.'),
+    ('P11', ['S01'], ['ALL'],
+     'Collision protection: everything outside the shield\'s shadow (the translucent cylinder) is hit at 0.016 c.'),
+]
+
+
+def compare():
+    with open(os.path.join(HERE, 'data', 'ship_geometry.json')) as f:
+        geo = json.load(f)
+    keep = ('name', 'group', 'func', 'shape', 'status', 'x0', 'x1', 'r0', 'r1', 'ri0', 'ri1', 'arc', 'centre', 'x', 'R', 'a',
+            'size', 'roll', 'corners', 'thickness', 'points', 'radius')
+    parts = [{k: p[k] for k in keep if k in p} for p in geo['parts'] if p['status'] != 'SUPERSEDED']
+    pr = fdp1_protection.Protection()
+    return {'units': geo['meta']['units'], 'parts': parts,
+            'shadow': {'radius_m': pr.shield['radius_m'], 'x_m': pr.x_s},
+            'pairs': [{'id': i, 'current': cur, 'needed': need, 'note': note} for i, cur, need, note in PAIRS]}
+
+
 def story():
     m = fdp1_model.Model()
     pr = fdp1_protection.Protection()
@@ -97,6 +141,9 @@ def story():
 
 if __name__ == '__main__':
     s = story()
+    if '--compare' in sys.argv:
+        print(json.dumps(compare(), separators=(',', ':')))
+        sys.exit(0)
     if '--json' in sys.argv:
         print(json.dumps(s, separators=(',', ':')))
         sys.exit(0)

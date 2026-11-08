@@ -3,8 +3,8 @@
  "contract_version": 43,
  "asset_id": "WF.WAYFARER.001",
  "spec_schema": 5,
- "spec_hash": "5f7f4ffded263007bd8f5e131ff13d3d77851787d40b92a32c280ca6a8293e58",
- "source_map_hash": "e3fce6ca39b9e490d922a2575401d7bdff240515f613614cc960b78c5b629b4f",
+ "spec_hash": "1dd3e51ddba149c64caaaa54b978064ba8e7104413347099cc680fa48723fdfa",
+ "source_map_hash": "fc3d72d053f9141c26c8248844df7159101221c41e998ab051243dc008137806",
  "generated_by": "WF_PROXY_P1_001",
  "coordinates": {
   "length_unit": "m",
@@ -19591,7 +19591,7 @@
   "file": "data/simulations/wf_first_ignition_timeline.json",
   "schema": "WF_FLIGHT_TIMELINE",
   "timeline_version": 2,
-  "sha256": "e58a90792e08899abb8f5d2d4597dd9b6200adb81859676e50578cdbcbfe6513",
+  "sha256": "de9ad93a9df10ec185fc20561a8221f89316e9ec635115e7578a626d7967abd6",
   "status": "PROTOTYPE",
   "fps": 24,
   "frame_range": [
@@ -39454,7 +39454,7 @@
     "known": true,
     "value": 12.0,
     "unit": "persons",
-    "canon_status": "WORKING",
+    "canon_status": "LOCKED",
     "source_ref": "design_occupancy"
    },
    "story_manifest": {

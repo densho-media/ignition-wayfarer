@@ -4,9 +4,11 @@ Writes <site>/engineering/:
   index.html                  the story: the goal, the constraints, the ship today, what we tried, the open problems, how to follow
   <kind>/<name>/index.html    one page per lab/ entry (variant, study, problem map): its header, summary, figures and working notes
   <kind>/<name>/fig/          the entry's committed figures (SVG, or PNG where no SVG of the same name exists)
+  compare/                    per open problem, today's ship beside what the problem needs, in 3D at one scale: compare.json from the
+                              problem map's `site.py --compare`, drawn by web/engineering/compare.js over the Explore Ship model
 
 Every number comes from the inputs at build time: data/wayfarer_3d.toml through the pure modules (spec, operating_point,
-first_ignition), the lab entries' NOTES.md, REPORT.md and result JSON, and a problem map's own `site.py --json` (run as a separate
+first_ignition), the lab entries' NOTES.md, REPORT.md and result JSON, and a problem map's own `site.py --json` and `--compare` (run as a separate
 process, so lab code never runs inside the site build). The text around the numbers is written here. This is the one place outside
 lab/ that reads lab/ (AGENTS.md "Where things go"); it reads, never writes, and nothing in the model build depends on it.
 
@@ -271,12 +273,13 @@ def status_counts(spec):
     return counts
 
 
-def lab_story(folder):
-    """A lab entry's own site data (site.py --json), run as its own process with the entry folder first on its path."""
+def lab_story(folder, flag='--json'):
+    """A lab entry's own site data (site.py --json, or --compare for the 3D comparison), run as its own process with the entry
+    folder first on its path."""
     script = folder / 'site.py'
     if not script.exists():
         return None
-    run = subprocess.run([sys.executable, '-I', str(script), '--json'], cwd=ROOT, capture_output=True, text=True, timeout=300)
+    run = subprocess.run([sys.executable, '-I', str(script), flag], cwd=ROOT, capture_output=True, text=True, timeout=300)
     if run.returncode:
         raise RuntimeError(f'{script.relative_to(ROOT)} failed: {run.stderr[-800:]}')
     return json.loads(run.stdout)
@@ -310,7 +313,7 @@ def tag(status):
     return f'<span class="st st-{s or "NONE"}">{esc(status)}</span>'
 
 
-def page(title, description, body, depth, revision, built):
+def page(title, description, body, depth, revision, built, head=''):
     up = '../' * depth
     return f'''<!doctype html>
 <html lang="en">
@@ -321,7 +324,7 @@ def page(title, description, body, depth, revision, built):
 <meta name="description" content="{esc(description)}">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%2307090c'/%3E%3Cpath d='M2 8h12M8 3v10' stroke='%23e0a040' stroke-width='2'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="{up}site.css">
-<link rel="stylesheet" href="{up}engineering/story.css">
+<link rel="stylesheet" href="{up}engineering/story.css">{head}
 </head>
 <body>
 <main class="wrap story">
@@ -387,16 +390,18 @@ def elevation_svg(p):
 
 
 # ---------------------------------------------------------------------------------------------------------------- pages
-def register_table(reg, link=None):
+def register_table(reg, link=None, compare=None):
     rows = []
     for r in reg:
         title = f'<a href="{link}#{r["id"]}">{esc(r["title"])}</a>' if link else esc(r['title'])
-        rows.append(f'<tr><td><code>{r["id"]}</code></td><td>{title}</td><td>{tag(r["status"])}</td><td>{esc(r["gap"])}</td></tr>')
-    return ('<div class="scroll"><table class="register"><thead><tr><th>ID</th><th>Problem</th><th>Status</th><th>Gap</th></tr></thead>'
+        three = f'<td><a href="{compare}#{r["id"]}">3D</a></td>' if compare else ''
+        rows.append(f'<tr><td><code>{r["id"]}</code></td><td>{title}</td><td>{tag(r["status"])}</td><td>{esc(r["gap"])}</td>{three}</tr>')
+    return ('<div class="scroll"><table class="register"><thead><tr><th>ID</th><th>Problem</th><th>Status</th><th>Gap</th>'
+            f'{"<th>Compare</th>" if compare else ""}</tr></thead>'
             f'<tbody>{"".join(rows)}</tbody></table></div>')
 
 
-def register_cards(reg):
+def register_cards(reg, compare=None):
     out = []
     for r in reg:
         cur = ''.join(f'<li>{esc(c)}</li>' for c in r['current'])
@@ -413,6 +418,7 @@ def register_cards(reg):
     {f'<dt>Unresolved</dt><dd><ul class="plain">{unres}</ul></dd>' if unres else ''}
     <dt>Kind</dt><dd>{cls}{f" · depends on {dep}" if dep else ""}</dd>
   </dl>
+  {f'<p class="compare-link"><a href="{compare}#{r["id"]}">Compare in 3D: what Wayfarer has, what it needs</a></p>' if compare else ''}
 </article>''')
     return '\n'.join(out)
 
@@ -449,7 +455,7 @@ planform is outside. Geometric coverage is necessary, not sufficient: the shield
 {"".join(f"<tr><td>{esc(a)}</td><td>{esc(b)}</td></tr>" for a, b in p["unresolved"])}</tbody></table></div></section>''')
         body.append(f'<section><h2>Problem register</h2><p class="note">Values are filled from the FDP-1 record by the map\'s own model '
                     f'({data["checks"]["passed"]}/{data["checks"]["total"]} of its checks pass). TBD marks a value with no adequate source.</p>'
-                    f'{register_cards(data["register"])}</section>')
+                    f'{register_cards(data["register"], "../../compare/" if data.get("compare") else None)}</section>')
     figs = figures(folder)
     if figs:
         (out_dir / 'fig').mkdir(parents=True, exist_ok=True)
@@ -466,6 +472,54 @@ planform is outside. Geometric coverage is necessary, not sufficient: the shield
     if report.exists():
         body.append(f'<p class="note">Full report: <a href="{REPO}/blob/{revision}/{rel}/REPORT.md" rel="noopener"><code>{rel}/REPORT.md</code></a></p>')
     (out_dir / 'index.html').write_text(page(f'{e["name"]} · Wayfarer engineering', e['question'], '\n'.join(body), 3, revision, built))
+
+
+COMPARE_HEAD = '''
+<link rel="stylesheet" href="../compare.css">
+<script type="importmap">
+{ "imports": { "three": "../../viewer/vendor/three/three.module.min.js", "three/addons/": "../../viewer/vendor/three/addons/" } }
+</script>
+<script type="module" src="../compare.js"></script>'''
+
+
+def compare_page(e, data, out_dir, revision, built):
+    """engineering/compare/: per problem, today's ship (the Explore Ship GLB, the problem's subsystems solid) beside what the problem
+    needs (the problem map's blockout, its groups solid), at one scale (web/engineering/compare.js). False if the map has no pairs."""
+    cmp = lab_story(e['folder'], '--compare')
+    if not cmp or not cmp.get('pairs'):
+        return False
+    reg = {r['id']: r for r in data['register']}
+    cmp['problems'] = {i: {k: reg[i][k] for k in ('title', 'status', 'current', 'target', 'gap')} for i in reg}
+    cmp['source'] = {'map': e['name'], 'link': f'../{e["kind_dir"]}/{e["folder"].name}/'}
+    out_dir.mkdir(parents=True, exist_ok=True)
+    (out_dir / 'compare.json').write_text(json.dumps(cmp, separators=(',', ':')))
+    tabs = ''.join(f'<button data-pair="{p["id"]}" title="{esc(reg[p["id"]]["title"])}">{p["id"]}</button>' for p in cmp['pairs'])
+    body = f'''<header><p class="eyebrow">Engineering · open problems</p><h1>What we have, what we need</h1>
+<p class="lead">For each open problem: on the left the ship as it is built today, on the right what the problem needs. Both sides share
+one camera and one scale, so a size difference is a real size difference.</p></header>
+<section class="compare">
+  <div class="pairs" role="tablist" aria-label="Problem">{tabs}</div>
+  <div class="stage" id="stage">
+    <canvas id="compare-view" aria-label="Side-by-side 3D comparison"></canvas>
+    <div class="side-label left"><b>Today</b><span id="label-left"></span></div>
+    <div class="side-label right"><b>Needed</b><span id="label-right"></span></div>
+    <div class="gate" id="gate"><button id="load" class="primary">Load the 3D comparison</button>
+      <span class="meta">Loads the Explore Ship model (a few MB) and the problem blockout.</span></div>
+    <div class="cstatus" id="cstatus" hidden></div>
+  </div>
+  <div class="ctools"><span class="views" role="toolbar" aria-label="Camera"><button data-view="threequarter">3/4</button>
+    <button data-view="side">Side</button><button data-view="top">Top</button><button data-view="front">Bow</button></span>
+    <label><input type="checkbox" id="fit"> Fit each side (sizes no longer comparable)</label>
+    <span class="meta" id="scale"></span></div>
+  <article class="caption" id="caption"></article>
+  <p class="note">Left: the approved model on <code>main</code>, as Explore Ship shows it; the problem's subsystems are solid and the rest is
+    a ghost. Right: the <a href="{cmp["source"]["link"]}">{esc(e["name"])}</a> blockout, built at 1 m from the FDP-1 record on an
+    earlier baseline of the ship. It shows what the problem needs, not a design: nothing on the right is canon.</p>
+</section>'''
+    (out_dir / 'index.html').write_text(page('What we have, what we need · Wayfarer engineering',
+                                             'Per open problem, the ship as built beside what the problem needs, in 3D at one scale.',
+                                             body, 2, revision, built, COMPARE_HEAD))
+    return True
 
 
 def main_page(site, spec, entries, dropped, problem, revision, built, play=True):
@@ -495,7 +549,9 @@ def main_page(site, spec, entries, dropped, problem, revision, built, play=True)
         row('Mass ratio', f'{m["mass_ratio_per_burn"]:.3f} per burn, {m["mass_ratio_per_burn"] ** m["burns"]:.3f} overall', 'DERIVED', 'Rocket equation.'),
         row('Mission duration', f'{spec["mission"]["duration"]["value"]:.1f} years', spec['mission']['duration']['canon_status'],
             'Bounds the burn times and the coast.'),
-        row('Crew', f'{spec["crew"]["count"]} (rated {spec["crew"]["rated_occupancy"]["value"]})', spec['crew']['canon_status'], 'Sets habitat, life support and the protected mass.'),
+        row('Design crew', f'{spec["crew"]["rated_occupancy"]["value"]} persons', spec['crew']['rated_occupancy']['canon_status'],
+            f'The ship is built for {spec["crew"]["rated_occupancy"]["value"]}: habitat, life support, refuge, bunks and burn couches, and the protected '
+            f'mass. Only {spec["crew"]["count"]} are aboard in the story; that is a story fact, not a design limit.'),
         row('Design acceleration', f'0 → {spec["mission"]["first_ignition"]["max_accel"]} g ramp', spec['mission']['first_ignition']['canon_status'],
             'The structural design-load case. The flight burns are power-limited and gentler.'),
         row('Peak fusion power', f'{b["peak_fusion_power_W"] / 1e12:,.0f} TW', spec['physics']['operating_point']['canon_status'],
@@ -546,7 +602,7 @@ def main_page(site, spec, entries, dropped, problem, revision, built, play=True)
   <a href="#tried">4 What we tried</a><a href="#problems">5 Open problems</a><a href="#follow">6 Follow along</a></nav>
 
 <section id="goal"><h2>1 · The goal</h2>
-  <p>A crew of {spec["crew"]["count"]} cruises at <strong>{spec["mission"]["target_speed"]["value"]} c</strong> ({spec["mission"]["target_speed"]["value"] * C / 1e3:,.0f} km/s)
+  <p>A ship built for a crew of {spec["crew"]["rated_occupancy"]["value"]} cruises at <strong>{spec["mission"]["target_speed"]["value"]} c</strong> ({spec["mission"]["target_speed"]["value"] * C / 1e3:,.0f} km/s)
     and comes home without refuelling. The mission is four burns: accelerate out, brake at the destination, accelerate home, and brake home.
     That totals {total_dv / C:.3f} c of Δv, which is almost exactly the drive's exhaust velocity of {ve_c:.4f} c. The rocket equation then
     says the departing ship must be <strong>e ≈ {m["mass_ratio_per_burn"] ** m["burns"]:.2f} times</strong> the ship that comes home.</p>
@@ -607,7 +663,9 @@ def main_page(site, spec, entries, dropped, problem, revision, built, play=True)
   <p class="note">The {spec["forward_shield"]["diameter"]["value"]:.0f} m shield shades r {pp["shield_radius_m"]:.0f} m. FDP-1 engine hardware reaches r
     {pp["engine"]["max_radius_m"]:.1f} m, and {pp["critical_outside"]} of {pp["critical_parts"]} critical parts lie outside the shadow even for an aligned stream
     (<a href="{plink}#p11">P11</a>).</p>
-  {register_table(prob["register"], plink)}
+  {f'<p><a href="compare/">Compare in 3D</a>: for each problem, the ship as built today on the left and what the problem needs on '
+     'the right, at the same scale.</p>' if prob.get("compare") else ''}
+  {register_table(prob["register"], plink, "compare/" if prob.get("compare") else None)}
 </section>
 
 <section id="follow"><h2>6 · Follow along</h2>
@@ -625,7 +683,7 @@ def main_page(site, spec, entries, dropped, problem, revision, built, play=True)
 
 
 def build(root, site, revision=None, built=None, play=True):
-    """Write <site>/engineering/ (story.css must already be there, copied from web/). Returns a small record for release.json."""
+    """Write <site>/engineering/ (with web/engineering/'s styles and scripts). Returns a small record for release.json."""
     from datetime import datetime, timezone
     from spec import load
     spec = load(root)[0]
@@ -633,9 +691,9 @@ def build(root, site, revision=None, built=None, play=True):
     built = built or datetime.now(timezone.utc).strftime('%Y-%m-%d')
     out = Path(site) / 'engineering'
     out.mkdir(parents=True, exist_ok=True)
-    css = root / 'web/engineering/story.css'
-    if not (out / 'story.css').exists():
-        shutil.copy2(css, out / 'story.css')
+    for src in (root / 'web/engineering').iterdir():
+        if src.is_file():
+            shutil.copy2(src, out / src.name)
     entries, dropped = lab_entries()
     problem = None
     pages = ['engineering/index.html']
@@ -645,6 +703,9 @@ def build(root, site, revision=None, built=None, play=True):
         data = lab_story(e['folder'])
         if data and problem is None and e['kind_dir'] == 'problems':
             problem = {'entry': e, 'data': data}
+            data['compare'] = compare_page(e, data, out / 'compare', revision, built)
+            if data['compare']:
+                pages.append('engineering/compare/index.html')
         entry_page(e, d, revision, built, data)
         pages.append(d.relative_to(site).as_posix() + '/index.html')
     if problem is None:
