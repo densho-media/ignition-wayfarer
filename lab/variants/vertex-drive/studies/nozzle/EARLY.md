@@ -4,7 +4,7 @@
 | --- | --- |
 | Thread | T03, plasma physics and electromagnetic propulsion |
 | Date | 2026-11-09 |
-| Status | EARLY (numbers may still move; the final values are in `REPORT.md` and `HANDOFF.md`) |
+| Status | EARLY, superseded by `REPORT.md` and `HANDOFF.md` |
 | Base | `8de3ffa`, generation V1 (10,416 t), branch `claude/project-thread-ujxhjo` |
 | Methods | vacuum fields (exact loops, Biot-Savart), flux-excluding-sphere multipole work, thin-shell reflection model, Boris test particles. No MHD or PIC (D-09 not approved). |
 

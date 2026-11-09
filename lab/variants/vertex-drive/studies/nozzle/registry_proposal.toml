@@ -1,0 +1,207 @@
+# T03 registry proposal (Vertex Phase 1). Provisional IDs; T00 assigns final IDs. Proposals, not edits.
+# Labels as planning/HANDOFF.md. Base 8de3ffa (V1). Evidence: REPORT.md, results/*.json in this folder.
+
+[meta]
+thread = "T03"
+date = "2026-11-09"
+base_commit = "8de3ffa189b47ce9a1212b550b7ea75f8c36314a"
+evidence = "lab/variants/vertex-drive/studies/nozzle/REPORT.md"
+
+# ---------------------------------------------------------------- sources: revisions
+[[revise_source]]
+id = "S-MSFC-NOZZLE"
+action = "re-identify as S-T03-THIO-1999 and retire the generic record, or keep the ID with the fields below"
+title = "High-Energy Space Propulsion Based on Magnetized Target Fusion"
+authors = "Y. C. F. Thio, B. Freeze, R. C. Kirkpatrick, B. Landrum, H. Gerrish, G. R. Schmidt"
+date = "1999"
+locator = "AIAA 99-2703 (35th Joint Propulsion Conference); NTRS 19990080042"
+finding = "Magnetic nozzle converts about 80 % of the spherically radial momentum into axial impulse; theoretical maximum 86.3 % (parabolic flux-compression nozzle). A MOMENTUM efficiency."
+limits = "Full text not reached from the T03 container (ntrs.nasa.gov blocked); value and definition from the abstract and two independent summaries."
+relation = "FDP-1 books 0.79 as an energy (thrust) efficiency; read consistently it is 0.79^2 = 0.624 (V1 39,715 t, calculator_reruns.json)."
+verification = "SECONDARY_VERIFIED"
+checked = "2026-11-09 web search (T03)."
+
+# ---------------------------------------------------------------- sources: new
+[[source]]
+id = "S-T03-NAGAMINE-1999"
+title = "Analysis of plasma behavior in a magnetic thrust chamber of a laser fusion rocket"
+authors = "Y. Nagamine, H. Nakashima"
+date = "1999"
+locator = "Fusion Science and Technology 35 (1999) 62-70"
+kind = "paper"
+finding = "3D hybrid PIC: thrust efficiency in terms of momentum 0.65; Rayleigh-Taylor present, effect on efficiency limited; optimum coil angle about 50 deg."
+limits = "Laser-fusion scale (MJ pulses); abstract only."
+relation = "Closest published simulation of the FDP-1 nozzle class; 0.65^2 = 0.42 energy, V1 does not close."
+verification = "SECONDARY_VERIFIED"
+checked = "2026-11-09 web search (T03)."
+
+[[source]]
+id = "S-T03-MATSUDA-2009"
+title = "Thrust efficiency of a laser fusion rocket magnetic thrust chamber with a shaped target"
+authors = "N. Matsuda, A. Maeno, Y. Kajimura, H. Nakashima"
+date = "2009"
+locator = "Journal of Plasma and Fusion Research SERIES 8 (2009)"
+kind = "paper"
+finding = "Thrust efficiency about 0.67 (3D hybrid)."
+limits = "Definition not seen; abstract only."
+relation = "Second simulation point of the VTX-03 band."
+verification = "SECONDARY_VERIFIED"
+checked = "2026-11-09 web search (T03)."
+
+[[source]]
+id = "S-T03-INATOMI-2023"
+title = "Laser fusion rocket magnetic thrust chamber: dependence of thrust efficiency on plasma parameters"
+authors = "Inatomi et al."
+date = "2023"
+locator = "Plasma and Fusion Research 18 (2023) 1404080"
+kind = "paper"
+finding = "Thrust efficiency independent of plasma energy, species and mass (3D hybrid)."
+limits = "Abstract only; scaling to 80 GJ is an extrapolation."
+relation = "Supports applying laser-scale efficiencies to V1 pulses."
+verification = "SECONDARY_VERIFIED"
+checked = "2026-11-09 web search (T03)."
+
+[[source]]
+id = "S-T03-ROMANELLI-2017"
+title = "Magnetic nozzle MHD simulation for a fusion propulsion concept (Nautilus)"
+authors = "G. Romanelli, A. Mignone, A. Cervone"
+date = "2017"
+locator = "Acta Astronautica 139 (2017) 528-544"
+kind = "paper"
+finding = "2D ideal MHD (PLUTO) of a multi-coil parabolic chamber; relativistic Alfven speeds in the vacuum region break ideal MHD; Hall or relativistic MHD needed; no asymptotic efficiency."
+limits = "Abstract and a citing paper only."
+relation = "Sets the D-09 code requirement (Alfven-speed limiting, Hall term)."
+verification = "SECONDARY_VERIFIED"
+checked = "2026-11-09 web search (T03)."
+
+[[source]]
+id = "S-T03-SCHILLING-2023"
+title = "Pulsed fission-fusion magnetic nozzle with power generation"
+authors = "A. Schilling, J. Cassibry, R. Adams"
+date = "2023"
+locator = "JBIS 76 (2023) 70-76"
+kind = "paper"
+finding = "Adding inductive power generation costs about 7 % of nozzle efficiency and thrust."
+limits = "Extraction share not reached; different pulse class."
+relation = "Upper bound on the VTX-02C coupling; T03 books recovery once, upstream."
+verification = "SECONDARY_VERIFIED"
+checked = "2026-11-09 web search (T03)."
+
+[[source]]
+id = "S-T03-MAENO-2013"
+title = "Laser magnetic thrust chamber impulse measurements"
+authors = "A. Maeno et al."
+date = "2011-2013"
+locator = "GEKKO / Osaka laser magnetic thrust chamber experiments (series)"
+kind = "experiment"
+finding = "Impulse measured: 1.5-2.2 uN s at 0.7 J; 0.02-10 mN s at 30-900 J. No efficiency measurement."
+limits = "Only experiments of the class; joule scale."
+relation = "D-09 validation case."
+verification = "SECONDARY_VERIFIED"
+checked = "2026-11-09 web search (T03)."
+
+# ---------------------------------------------------------------- technologies
+[[technology]]
+id = "T03-NEW-1"
+parent = "VTX-03"
+title = "Forward closure coils on the X-ray stand-off sphere"
+summary = "Two coaxial coils at polar 20 deg and 40 deg on d = R_s close the axial leak of the three-loop cup; with optimised currents the thin-shell model gives eta_mom 0.86-0.89 (eta_T 0.74-0.79) at 10-15 E_p of stored field, forward leak 0.15-0.3 %."
+basis = "MODEL (upper bound, no instabilities)"
+geometry = "C1 r 14.74 m z +40.51 m, C2 r 27.71 m z +33.03 m (nozzle frame, x = x_burn + z); C1 envelope radius 2-3.2 m; PARAMETRIC_PLACEHOLDER"
+cost = "C1 80-132 MA, hoop tension 3-7 GN; envelope solid angle 0.040-0.051 vs 0.017 V1 (2.4-3.0x radiation_on_hardware)"
+evidence = "results/nozzle_results.json designs C_W10, C_W15; results/calculator_reruns.json t03 cases"
+status = "UNDER_INVESTIGATION"
+
+[[revise_technology]]
+id = "VTX-03A"
+change = "Clocked sectors give 0.25-1.1 deg of field rotation at the stopping surface (3-3.7 deg at 20 % trim), no efficiency change (<0.5 pt). Re-scope from 'helical capture' to vectoring, fault tolerance and replacement. Correct 'm = 4 helical harmonic': with four sectors the gap ripple is m = 4 and carries no handedness under a 45 deg clock; the differential trim pattern is m = 2."
+evidence = "results/nozzle_results.json perturbations (C_W10, Astar_W10)"
+
+[[revise_technology]]
+id = "VTX-03B"
+change = "The useful shaping is axisymmetric (current distribution plus forward closure, T03-NEW-1). Non-planar (helical) shaping costs about 10 pt of eta_mom per 18 deg of shear: 0.86 -> 0.83 / 0.76 / 0.63 at 2 / 5 / 20 MA."
+evidence = "results/nozzle_results.json perturbations"
+
+[[revise_technology]]
+id = "VTX-03C"
+change = "Twist-reversal 'balanced' helices cancel roll torque only at one current (2.7e4 N m at 5 MA; 0.24 and 0.57 MN m at 2 and 20 MA). Balance is required but not sufficient; needs measured trim."
+evidence = "results/nozzle_results.json perturbations"
+
+[[claim]]
+technology = "VTX-03"
+quantity = "nozzle_field_energy_ratio needed"
+value = "10-15"
+unit = "J stored field per J pulse plasma"
+basis = "MODEL"
+source = "results/nozzle_results.json (A, A*, C sweeps 3-30)"
+
+[[claim]]
+technology = "VTX-03"
+quantity = "plume-strike share of the nozzle loss (C, 10-15 E_p)"
+value = "0.06-0.07"
+unit = "1"
+basis = "MODEL"
+source = "results/calculator_reruns.json t03 cases"
+
+[[claim]]
+technology = "VTX-02C"
+quantity = "recovery extraction"
+value = "0.0013 (0.0012-0.0020)"
+unit = "share of fusion"
+basis = "MODEL"
+source = "REPORT.md section 6"
+
+# ---------------------------------------------------------------- generations (proposed band, not a credit)
+[[generation_change]]
+generation = "V1 (sensitivity, not credited)"
+key = "base.overrides.pulsed.nozzle_efficiency.value"
+value = 0.624
+basis = "MODEL (definition correction: 0.79 momentum squared)"
+decision = "D-T03-1"
+result = "V1 39,715 t"
+
+[[generation_change]]
+generation = "V1 (sensitivity, not credited)"
+key = "base.overrides.pulsed.nozzle_field_energy_ratio.value"
+value = 15
+basis = "MODEL (C design)"
+decision = "D-T03-2"
+result = "with eta_T 0.791 and plume-to-hardware 0.07: V1 22,683 t"
+
+# ---------------------------------------------------------------- decisions
+[[decision]]
+id = "D-T03-1"
+type = "TECHNICAL_CONCLUSION"
+state = "PROPOSED"
+question = "Which efficiency does the calculator's nozzle_efficiency book?"
+options = ["keep 0.79 as energy (current)", "book eta_T = eta_mom^2 x velocity-spread factor; 0.79 momentum -> 0.624"]
+recommendation = "Book eta_T. The calculator uses it as jet = eta x stream; every published value is momentum. Show 0.79 as an unsupported optimistic bound."
+who = "T00 (calculator owner); ApeDevil if a generation is re-based"
+
+[[decision]]
+id = "D-T03-2"
+type = "TECHNICAL_CONCLUSION"
+state = "PROPOSED"
+question = "What stored field energy per pulse does the nozzle need?"
+options = ["1 x E_p (FDP-1)", "10-15 x E_p (T03 model)"]
+recommendation = "10-15 x E_p; 1 x cannot stop the pulse in any coil set modelled."
+who = "T00"
+
+[[decision]]
+id = "D-T03-3"
+type = "EXPERIMENT_APPROVAL"
+state = "OPEN"
+question = "Approve the D-09 pulsed-nozzle simulation in the scope of REPORT.md section 8?"
+options = ["approve 2D Hall MHD + 2D hybrid PIC campaign (A, C, C+helix)", "approve 2D only", "keep D-09 closed"]
+recommendation = "Approve 2D first (1e4-1e5 core-hours per case); 3D only if C passes eta_T >= 0.70."
+who = "ApeDevil"
+
+[[decision_evidence]]
+id = "D-01"
+stance = "SUPPORT, REFINE"
+evidence = "Balanced helicity confirmed necessary (one-handed helix 0.27-0.7 MN m roll). Refine: sector clocking gives under about 1 deg of shear, so its stability value is nil; the harmonic is m = 2 (trim) / m = 4 (gaps, no handedness), not an 'm = 4 helical harmonic'."
+
+[[decision_evidence]]
+id = "D-03"
+stance = "SUPPORT, STRENGTHEN"
+evidence = "At 10-15 E_p of stored field (W 0.8-1.2e12 J) a 1 % trim in 5 ms is about 3-5 TW, 10-14x the 340 GW quoted."
