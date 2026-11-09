@@ -248,6 +248,1051 @@
    "note": ""
   }
  },
+ "gate_A1": {
+  "source": "T00 9rsgog 43fac75 studies/gate/results/t05_handoff_gate.json",
+  "rays_in_leak_cone": 20000,
+  "static_objects": 1189,
+  "nozzle_objects": 43,
+  "scope": "full drawn V4 chosen ship incl. the canon working copy; Rev 4 coils, supports, Li plant and the FDP-1 loops replaced by the A1 tilted pair and turned loops; FDP-1 nozzle struts and loop lines kept where drawn (their re-landing for the 2.7 deg turn is not drawn)",
+  "clear_azimuths_deg": [
+   25.0,
+   30.0,
+   35.0,
+   40.0,
+   80.0,
+   85.0,
+   90.0,
+   95.0,
+   100.0,
+   140.0,
+   145.0,
+   150.0,
+   155.0,
+   205.0,
+   210.0,
+   215.0,
+   220.0,
+   260.0,
+   265.0,
+   270.0,
+   275.0,
+   280.0,
+   320.0,
+   325.0,
+   330.0,
+   335.0
+  ],
+  "chosen_tilt_azimuth_deg": 90.0,
+  "chosen_window_deg": [
+   80.0,
+   100.0
+  ],
+  "sweep": [
+   {
+    "tilt_azimuth_deg": 0.0,
+    "hit_fraction": 0.3955,
+    "GW_on_hardware": 9.38963567280339,
+    "parts": [
+     {
+      "object": "V4_PP_Wing_P_Spar_Aft_GRADED",
+      "fraction": 0.19125,
+      "GW": 4.540500183119212
+     },
+     {
+      "object": "V4_ES_Nozzle_Strut_Loop_1_0",
+      "fraction": 0.1616,
+      "GW": 3.8365742723768084
+     },
+     {
+      "object": "V4_PP_Strut_Crawler_Rail",
+      "fraction": 0.03825,
+      "GW": 0.9081000366238423
+     },
+     {
+      "object": "V4_PP_Wing_P_Root_Boom_GRADED",
+      "fraction": 0.0044,
+      "GW": 0.10446118068352697
+     }
+    ]
+   },
+   {
+    "tilt_azimuth_deg": 5.0,
+    "hit_fraction": 0.37325,
+    "GW_on_hardware": 8.861394475028737,
+    "parts": [
+     {
+      "object": "V4_PP_Wing_P_Spar_Aft_GRADED",
+      "fraction": 0.17855,
+      "GW": 4.238987229782667
+     },
+     {
+      "object": "V4_ES_Nozzle_Strut_Loop_1_0",
+      "fraction": 0.15335,
+      "GW": 3.6407095585951947
+     },
+     {
+      "object": "V4_PP_Strut_Crawler_Rail",
+      "fraction": 0.03885,
+      "GW": 0.9223447430806869
+     },
+     {
+      "object": "V4_PP_Wing_P_Root_Boom_GRADED",
+      "fraction": 0.0025,
+      "GW": 0.05935294357018577
+     }
+    ]
+   },
+   {
+    "tilt_azimuth_deg": 10.0,
+    "hit_fraction": 0.2971,
+    "GW_on_hardware": 7.0535038138808765,
+    "parts": [
+     {
+      "object": "V4_PP_Wing_P_Spar_Aft_GRADED",
+      "fraction": 0.1353,
+      "GW": 3.212181306018454
+     },
+     {
+      "object": "V4_ES_Nozzle_Strut_Loop_1_0",
+      "fraction": 0.1255,
+      "GW": 2.9795177672233257
+     },
+     {
+      "object": "V4_PP_Strut_Crawler_Rail",
+      "fraction": 0.035,
+      "GW": 0.8309412099826009
+     },
+     {
+      "object": "V4_PP_Wing_P_Root_Boom_GRADED",
+      "fraction": 0.0013,
+      "GW": 0.0308635306564966
+     }
+    ]
+   },
+   {
+    "tilt_azimuth_deg": 15.0,
+    "hit_fraction": 0.13445,
+    "GW_on_hardware": 3.1920013052045904,
+    "parts": [
+     {
+      "object": "V4_PP_Wing_P_Spar_Aft_GRADED",
+      "fraction": 0.0583,
+      "GW": 1.3841106440567321
+     },
+     {
+      "object": "V4_ES_Nozzle_Strut_Loop_1_0",
+      "fraction": 0.05015,
+      "GW": 1.1906200480179265
+     },
+     {
+      "object": "V4_PP_Strut_Crawler_Rail",
+      "fraction": 0.026,
+      "GW": 0.617270613129932
+     }
+    ]
+   },
+   {
+    "tilt_azimuth_deg": 20.0,
+    "hit_fraction": 0.01455,
+    "GW_on_hardware": 0.3454341315784812,
+    "parts": [
+     {
+      "object": "V4_PP_Wing_P_Spar_Aft_GRADED",
+      "fraction": 0.01455,
+      "GW": 0.3454341315784812
+     }
+    ]
+   },
+   {
+    "tilt_azimuth_deg": 25.0,
+    "hit_fraction": 0.0,
+    "GW_on_hardware": 0.0,
+    "parts": []
+   },
+   {
+    "tilt_azimuth_deg": 30.0,
+    "hit_fraction": 0.0,
+    "GW_on_hardware": 0.0,
+    "parts": []
+   },
+   {
+    "tilt_azimuth_deg": 35.0,
+    "hit_fraction": 0.0,
+    "GW_on_hardware": 0.0,
+    "parts": []
+   },
+   {
+    "tilt_azimuth_deg": 40.0,
+    "hit_fraction": 0.0,
+    "GW_on_hardware": 0.0,
+    "parts": []
+   },
+   {
+    "tilt_azimuth_deg": 45.0,
+    "hit_fraction": 0.04985,
+    "GW_on_hardware": 1.1834976947895042,
+    "parts": [
+     {
+      "object": "V4_ES_Nozzle_Strut_Loop_1_1",
+      "fraction": 0.04985,
+      "GW": 1.1834976947895042
+     }
+    ]
+   },
+   {
+    "tilt_azimuth_deg": 50.0,
+    "hit_fraction": 0.12535,
+    "GW_on_hardware": 2.9759565906091145,
+    "parts": [
+     {
+      "object": "V4_ES_Nozzle_Strut_Loop_1_1",
+      "fraction": 0.12535,
+      "GW": 2.9759565906091145
+     }
+    ]
+   },
+   {
+    "tilt_azimuth_deg": 55.0,
+    "hit_fraction": 0.1535,
+    "GW_on_hardware": 3.6442707352094064,
+    "parts": [
+     {
+      "object": "V4_ES_Nozzle_Strut_Loop_1_1",
+      "fraction": 0.1535,
+      "GW": 3.6442707352094064
+     }
+    ]
+   },
+   {
+    "tilt_azimuth_deg": 60.0,
+    "hit_fraction": 0.1617,
+    "GW_on_hardware": 3.838948390119616,
+    "parts": [
+     {
+      "object": "V4_ES_Nozzle_Strut_Loop_1_1",
+      "fraction": 0.1617,
+      "GW": 3.838948390119616
+     }
+    ]
+   },
+   {
+    "tilt_azimuth_deg": 65.0,
+    "hit_fraction": 0.1535,
+    "GW_on_hardware": 3.6442707352094064,
+    "parts": [
+     {
+      "object": "V4_ES_Nozzle_Strut_Loop_1_1",
+      "fraction": 0.1535,
+      "GW": 3.6442707352094064
+     }
+    ]
+   },
+   {
+    "tilt_azimuth_deg": 70.0,
+    "hit_fraction": 0.1254,
+    "GW_on_hardware": 2.9771436494805186,
+    "parts": [
+     {
+      "object": "V4_ES_Nozzle_Strut_Loop_1_1",
+      "fraction": 0.1254,
+      "GW": 2.9771436494805186
+     }
+    ]
+   },
+   {
+    "tilt_azimuth_deg": 75.0,
+    "hit_fraction": 0.0498,
+    "GW_on_hardware": 1.1823106359181006,
+    "parts": [
+     {
+      "object": "V4_ES_Nozzle_Strut_Loop_1_1",
+      "fraction": 0.0498,
+      "GW": 1.1823106359181006
+     }
+    ]
+   },
+   {
+    "tilt_azimuth_deg": 80.0,
+    "hit_fraction": 0.0,
+    "GW_on_hardware": 0.0,
+    "parts": []
+   },
+   {
+    "tilt_azimuth_deg": 85.0,
+    "hit_fraction": 0.0,
+    "GW_on_hardware": 0.0,
+    "parts": []
+   },
+   {
+    "tilt_azimuth_deg": 90.0,
+    "hit_fraction": 0.0,
+    "GW_on_hardware": 0.0,
+    "parts": []
+   },
+   {
+    "tilt_azimuth_deg": 95.0,
+    "hit_fraction": 0.0,
+    "GW_on_hardware": 0.0,
+    "parts": []
+   },
+   {
+    "tilt_azimuth_deg": 100.0,
+    "hit_fraction": 0.0,
+    "GW_on_hardware": 0.0,
+    "parts": []
+   },
+   {
+    "tilt_azimuth_deg": 105.0,
+    "hit_fraction": 0.0518,
+    "GW_on_hardware": 1.229792990774249,
+    "parts": [
+     {
+      "object": "V4_ES_Nozzle_Strut_Loop_1_2",
+      "fraction": 0.0518,
+      "GW": 1.229792990774249
+     }
+    ]
+   },
+   {
+    "tilt_azimuth_deg": 110.0,
+    "hit_fraction": 0.13025,
+    "GW_on_hardware": 3.092288360006679,
+    "parts": [
+     {
+      "object": "V4_ES_Nozzle_Strut_Loop_1_2",
+      "fraction": 0.13025,
+      "GW": 3.092288360006679
+     }
+    ]
+   },
+   {
+    "tilt_azimuth_deg": 115.0,
+    "hit_fraction": 0.1589,
+    "GW_on_hardware": 3.772473093321008,
+    "parts": [
+     {
+      "object": "V4_ES_Nozzle_Strut_Loop_1_2",
+      "fraction": 0.1589,
+      "GW": 3.772473093321008
+     }
+    ]
+   },
+   {
+    "tilt_azimuth_deg": 120.0,
+    "hit_fraction": 0.16795,
+    "GW_on_hardware": 3.98733074904508,
+    "parts": [
+     {
+      "object": "V4_ES_Nozzle_Strut_Loop_1_2",
+      "fraction": 0.16795,
+      "GW": 3.98733074904508
+     }
+    ]
+   },
+   {
+    "tilt_azimuth_deg": 125.0,
+    "hit_fraction": 0.15855,
+    "GW_on_hardware": 3.7641636812211816,
+    "parts": [
+     {
+      "object": "V4_ES_Nozzle_Strut_Loop_1_2",
+      "fraction": 0.15855,
+      "GW": 3.7641636812211816
+     }
+    ]
+   },
+   {
+    "tilt_azimuth_deg": 130.0,
+    "hit_fraction": 0.13005,
+    "GW_on_hardware": 3.087540124521064,
+    "parts": [
+     {
+      "object": "V4_ES_Nozzle_Strut_Loop_1_2",
+      "fraction": 0.13005,
+      "GW": 3.087540124521064
+     }
+    ]
+   },
+   {
+    "tilt_azimuth_deg": 135.0,
+    "hit_fraction": 0.0519,
+    "GW_on_hardware": 1.2321671085170567,
+    "parts": [
+     {
+      "object": "V4_ES_Nozzle_Strut_Loop_1_2",
+      "fraction": 0.0519,
+      "GW": 1.2321671085170567
+     }
+    ]
+   },
+   {
+    "tilt_azimuth_deg": 140.0,
+    "hit_fraction": 0.0,
+    "GW_on_hardware": 0.0,
+    "parts": []
+   },
+   {
+    "tilt_azimuth_deg": 145.0,
+    "hit_fraction": 0.0,
+    "GW_on_hardware": 0.0,
+    "parts": []
+   },
+   {
+    "tilt_azimuth_deg": 150.0,
+    "hit_fraction": 0.0,
+    "GW_on_hardware": 0.0,
+    "parts": []
+   },
+   {
+    "tilt_azimuth_deg": 155.0,
+    "hit_fraction": 0.0,
+    "GW_on_hardware": 0.0,
+    "parts": []
+   },
+   {
+    "tilt_azimuth_deg": 160.0,
+    "hit_fraction": 0.0145,
+    "GW_on_hardware": 0.3442470727070775,
+    "parts": [
+     {
+      "object": "V4_PP_Wing_S_Spar_Aft_GRADED",
+      "fraction": 0.0145,
+      "GW": 0.3442470727070775
+     }
+    ]
+   },
+   {
+    "tilt_azimuth_deg": 165.0,
+    "hit_fraction": 0.1345,
+    "GW_on_hardware": 3.193188364075995,
+    "parts": [
+     {
+      "object": "V4_PP_Wing_S_Spar_Aft_GRADED",
+      "fraction": 0.08455,
+      "GW": 2.0073165515436826
+     },
+     {
+      "object": "V4_ES_Nozzle_Strut_Loop_1_3",
+      "fraction": 0.04995,
+      "GW": 1.1858718125323118
+     }
+    ]
+   },
+   {
+    "tilt_azimuth_deg": 170.0,
+    "hit_fraction": 0.2975,
+    "GW_on_hardware": 7.063000284852107,
+    "parts": [
+     {
+      "object": "V4_PP_Wing_S_Spar_Aft_GRADED",
+      "fraction": 0.16975,
+      "GW": 4.030064868415614
+     },
+     {
+      "object": "V4_ES_Nozzle_Strut_Loop_1_3",
+      "fraction": 0.1262,
+      "GW": 2.996136591422978
+     },
+     {
+      "object": "V4_PP_Wing_S_Root_Boom_GRADED",
+      "fraction": 0.00155,
+      "GW": 0.036798825013515175
+     }
+    ]
+   },
+   {
+    "tilt_azimuth_deg": 175.0,
+    "hit_fraction": 0.3738,
+    "GW_on_hardware": 8.874452122614176,
+    "parts": [
+     {
+      "object": "V4_PP_Wing_S_Spar_Aft_GRADED",
+      "fraction": 0.21565,
+      "GW": 5.119784912364225
+     },
+     {
+      "object": "V4_ES_Nozzle_Strut_Loop_1_3",
+      "fraction": 0.1543,
+      "GW": 3.663263677151866
+     },
+     {
+      "object": "V4_PP_Wing_S_Root_Boom_GRADED",
+      "fraction": 0.00385,
+      "GW": 0.09140353309808609
+     }
+    ]
+   },
+   {
+    "tilt_azimuth_deg": 180.0,
+    "hit_fraction": 0.3956,
+    "GW_on_hardware": 9.392009790546197,
+    "parts": [
+     {
+      "object": "V4_PP_Wing_S_Spar_Aft_GRADED",
+      "fraction": 0.2277,
+      "GW": 5.405866100372521
+     },
+     {
+      "object": "V4_ES_Nozzle_Strut_Loop_1_3",
+      "fraction": 0.16255,
+      "GW": 3.859128390933479
+     },
+     {
+      "object": "V4_PP_Wing_S_Root_Boom_GRADED",
+      "fraction": 0.00535,
+      "GW": 0.12701529924019755
+     }
+    ]
+   },
+   {
+    "tilt_azimuth_deg": 185.0,
+    "hit_fraction": 0.3735,
+    "GW_on_hardware": 8.867329769385755,
+    "parts": [
+     {
+      "object": "V4_PP_Wing_S_Spar_Aft_GRADED",
+      "fraction": 0.2156,
+      "GW": 5.118597853492822
+     },
+     {
+      "object": "V4_ES_Nozzle_Strut_Loop_1_3",
+      "fraction": 0.1543,
+      "GW": 3.663263677151866
+     },
+     {
+      "object": "V4_PP_Wing_S_Root_Boom_GRADED",
+      "fraction": 0.0036,
+      "GW": 0.08546823874106751
+     }
+    ]
+   },
+   {
+    "tilt_azimuth_deg": 190.0,
+    "hit_fraction": 0.29775,
+    "GW_on_hardware": 7.068935579209126,
+    "parts": [
+     {
+      "object": "V4_PP_Wing_S_Spar_Aft_GRADED",
+      "fraction": 0.1702,
+      "GW": 4.0407483982582475
+     },
+     {
+      "object": "V4_ES_Nozzle_Strut_Loop_1_3",
+      "fraction": 0.126,
+      "GW": 2.991388355937363
+     },
+     {
+      "object": "V4_PP_Wing_S_Root_Boom_GRADED",
+      "fraction": 0.00155,
+      "GW": 0.036798825013515175
+     }
+    ]
+   },
+   {
+    "tilt_azimuth_deg": 195.0,
+    "hit_fraction": 0.1352,
+    "GW_on_hardware": 3.2098071882756463,
+    "parts": [
+     {
+      "object": "V4_PP_Wing_S_Spar_Aft_GRADED",
+      "fraction": 0.0847,
+      "GW": 2.010877728157894
+     },
+     {
+      "object": "V4_ES_Nozzle_Strut_Loop_1_3",
+      "fraction": 0.0505,
+      "GW": 1.1989294601177527
+     }
+    ]
+   },
+   {
+    "tilt_azimuth_deg": 200.0,
+    "hit_fraction": 0.0149,
+    "GW_on_hardware": 0.3537435436783072,
+    "parts": [
+     {
+      "object": "V4_PP_Wing_S_Spar_Aft_GRADED",
+      "fraction": 0.0149,
+      "GW": 0.3537435436783072
+     }
+    ]
+   },
+   {
+    "tilt_azimuth_deg": 205.0,
+    "hit_fraction": 0.0,
+    "GW_on_hardware": 0.0,
+    "parts": []
+   },
+   {
+    "tilt_azimuth_deg": 210.0,
+    "hit_fraction": 0.0,
+    "GW_on_hardware": 0.0,
+    "parts": []
+   },
+   {
+    "tilt_azimuth_deg": 215.0,
+    "hit_fraction": 0.0,
+    "GW_on_hardware": 0.0,
+    "parts": []
+   },
+   {
+    "tilt_azimuth_deg": 220.0,
+    "hit_fraction": 0.0,
+    "GW_on_hardware": 0.0,
+    "parts": []
+   },
+   {
+    "tilt_azimuth_deg": 225.0,
+    "hit_fraction": 0.0519,
+    "GW_on_hardware": 1.2321671085170567,
+    "parts": [
+     {
+      "object": "V4_ES_Nozzle_Strut_Loop_1_4",
+      "fraction": 0.0519,
+      "GW": 1.2321671085170567
+     }
+    ]
+   },
+   {
+    "tilt_azimuth_deg": 230.0,
+    "hit_fraction": 0.1303,
+    "GW_on_hardware": 3.0934754188780826,
+    "parts": [
+     {
+      "object": "V4_ES_Nozzle_Strut_Loop_1_4",
+      "fraction": 0.1303,
+      "GW": 3.0934754188780826
+     }
+    ]
+   },
+   {
+    "tilt_azimuth_deg": 235.0,
+    "hit_fraction": 0.15875,
+    "GW_on_hardware": 3.7689119167067964,
+    "parts": [
+     {
+      "object": "V4_ES_Nozzle_Strut_Loop_1_4",
+      "fraction": 0.15875,
+      "GW": 3.7689119167067964
+     }
+    ]
+   },
+   {
+    "tilt_azimuth_deg": 240.0,
+    "hit_fraction": 0.16805,
+    "GW_on_hardware": 3.989704866787888,
+    "parts": [
+     {
+      "object": "V4_ES_Nozzle_Strut_Loop_1_4",
+      "fraction": 0.16805,
+      "GW": 3.989704866787888
+     }
+    ]
+   },
+   {
+    "tilt_azimuth_deg": 245.0,
+    "hit_fraction": 0.15855,
+    "GW_on_hardware": 3.7641636812211816,
+    "parts": [
+     {
+      "object": "V4_ES_Nozzle_Strut_Loop_1_4",
+      "fraction": 0.15855,
+      "GW": 3.7641636812211816
+     }
+    ]
+   },
+   {
+    "tilt_azimuth_deg": 250.0,
+    "hit_fraction": 0.13005,
+    "GW_on_hardware": 3.087540124521064,
+    "parts": [
+     {
+      "object": "V4_ES_Nozzle_Strut_Loop_1_4",
+      "fraction": 0.13005,
+      "GW": 3.087540124521064
+     }
+    ]
+   },
+   {
+    "tilt_azimuth_deg": 255.0,
+    "hit_fraction": 0.05185,
+    "GW_on_hardware": 1.2309800496456529,
+    "parts": [
+     {
+      "object": "V4_ES_Nozzle_Strut_Loop_1_4",
+      "fraction": 0.05185,
+      "GW": 1.2309800496456529
+     }
+    ]
+   },
+   {
+    "tilt_azimuth_deg": 260.0,
+    "hit_fraction": 0.0,
+    "GW_on_hardware": 0.0,
+    "parts": []
+   },
+   {
+    "tilt_azimuth_deg": 265.0,
+    "hit_fraction": 0.0,
+    "GW_on_hardware": 0.0,
+    "parts": []
+   },
+   {
+    "tilt_azimuth_deg": 270.0,
+    "hit_fraction": 0.0,
+    "GW_on_hardware": 0.0,
+    "parts": []
+   },
+   {
+    "tilt_azimuth_deg": 275.0,
+    "hit_fraction": 0.0,
+    "GW_on_hardware": 0.0,
+    "parts": []
+   },
+   {
+    "tilt_azimuth_deg": 280.0,
+    "hit_fraction": 0.0,
+    "GW_on_hardware": 0.0,
+    "parts": []
+   },
+   {
+    "tilt_azimuth_deg": 285.0,
+    "hit_fraction": 0.04975,
+    "GW_on_hardware": 1.181123577046697,
+    "parts": [
+     {
+      "object": "V4_ES_Nozzle_Strut_Loop_1_5",
+      "fraction": 0.04975,
+      "GW": 1.181123577046697
+     }
+    ]
+   },
+   {
+    "tilt_azimuth_deg": 290.0,
+    "hit_fraction": 0.12565,
+    "GW_on_hardware": 2.9830789438375374,
+    "parts": [
+     {
+      "object": "V4_ES_Nozzle_Strut_Loop_1_5",
+      "fraction": 0.12565,
+      "GW": 2.9830789438375374
+     }
+    ]
+   },
+   {
+    "tilt_azimuth_deg": 295.0,
+    "hit_fraction": 0.1537,
+    "GW_on_hardware": 3.6490189706950216,
+    "parts": [
+     {
+      "object": "V4_ES_Nozzle_Strut_Loop_1_5",
+      "fraction": 0.1537,
+      "GW": 3.6490189706950216
+     }
+    ]
+   },
+   {
+    "tilt_azimuth_deg": 300.0,
+    "hit_fraction": 0.1619,
+    "GW_on_hardware": 3.8436966256052303,
+    "parts": [
+     {
+      "object": "V4_ES_Nozzle_Strut_Loop_1_5",
+      "fraction": 0.1619,
+      "GW": 3.8436966256052303
+     }
+    ]
+   },
+   {
+    "tilt_azimuth_deg": 305.0,
+    "hit_fraction": 0.1536,
+    "GW_on_hardware": 3.6466448529522135,
+    "parts": [
+     {
+      "object": "V4_ES_Nozzle_Strut_Loop_1_5",
+      "fraction": 0.1536,
+      "GW": 3.6466448529522135
+     }
+    ]
+   },
+   {
+    "tilt_azimuth_deg": 310.0,
+    "hit_fraction": 0.1256,
+    "GW_on_hardware": 2.981891884966133,
+    "parts": [
+     {
+      "object": "V4_ES_Nozzle_Strut_Loop_1_5",
+      "fraction": 0.1256,
+      "GW": 2.981891884966133
+     }
+    ]
+   },
+   {
+    "tilt_azimuth_deg": 315.0,
+    "hit_fraction": 0.05005,
+    "GW_on_hardware": 1.1882459302751192,
+    "parts": [
+     {
+      "object": "V4_ES_Nozzle_Strut_Loop_1_5",
+      "fraction": 0.05005,
+      "GW": 1.1882459302751192
+     }
+    ]
+   },
+   {
+    "tilt_azimuth_deg": 320.0,
+    "hit_fraction": 0.0,
+    "GW_on_hardware": 0.0,
+    "parts": []
+   },
+   {
+    "tilt_azimuth_deg": 325.0,
+    "hit_fraction": 0.0,
+    "GW_on_hardware": 0.0,
+    "parts": []
+   },
+   {
+    "tilt_azimuth_deg": 330.0,
+    "hit_fraction": 0.0,
+    "GW_on_hardware": 0.0,
+    "parts": []
+   },
+   {
+    "tilt_azimuth_deg": 335.0,
+    "hit_fraction": 0.0,
+    "GW_on_hardware": 0.0,
+    "parts": []
+   },
+   {
+    "tilt_azimuth_deg": 340.0,
+    "hit_fraction": 0.01495,
+    "GW_on_hardware": 0.3549306025497109,
+    "parts": [
+     {
+      "object": "V4_PP_Wing_P_Spar_Aft_GRADED",
+      "fraction": 0.01495,
+      "GW": 0.3549306025497109
+     }
+    ]
+   },
+   {
+    "tilt_azimuth_deg": 345.0,
+    "hit_fraction": 0.1354,
+    "GW_on_hardware": 3.2145554237612615,
+    "parts": [
+     {
+      "object": "V4_PP_Wing_P_Spar_Aft_GRADED",
+      "fraction": 0.0852,
+      "GW": 2.022748316871931
+     },
+     {
+      "object": "V4_ES_Nozzle_Strut_Loop_1_0",
+      "fraction": 0.0502,
+      "GW": 1.1918071068893303
+     }
+    ]
+   },
+   {
+    "tilt_azimuth_deg": 350.0,
+    "hit_fraction": 0.29815,
+    "GW_on_hardware": 7.078432050180356,
+    "parts": [
+     {
+      "object": "V4_PP_Wing_P_Spar_Aft_GRADED",
+      "fraction": 0.1472,
+      "GW": 3.494701317412538
+     },
+     {
+      "object": "V4_ES_Nozzle_Strut_Loop_1_0",
+      "fraction": 0.12635,
+      "GW": 2.999697768037189
+     },
+     {
+      "object": "V4_PP_Strut_Crawler_Rail",
+      "fraction": 0.02305,
+      "GW": 0.5472341397171129
+     },
+     {
+      "object": "V4_PP_Wing_P_Root_Boom_GRADED",
+      "fraction": 0.00155,
+      "GW": 0.036798825013515175
+     }
+    ]
+   },
+   {
+    "tilt_azimuth_deg": 355.0,
+    "hit_fraction": 0.3741,
+    "GW_on_hardware": 8.881574475842598,
+    "parts": [
+     {
+      "object": "V4_PP_Wing_P_Spar_Aft_GRADED",
+      "fraction": 0.18285,
+      "GW": 4.341074292723388
+     },
+     {
+      "object": "V4_ES_Nozzle_Strut_Loop_1_0",
+      "fraction": 0.1539,
+      "GW": 3.6537672061806363
+     },
+     {
+      "object": "V4_PP_Strut_Crawler_Rail",
+      "fraction": 0.0335,
+      "GW": 0.7953294438404894
+     },
+     {
+      "object": "V4_PP_Wing_P_Root_Boom_GRADED",
+      "fraction": 0.00385,
+      "GW": 0.09140353309808609
+     }
+    ]
+   }
+  ],
+  "C1_winding_min_polar_deg": 7.55629578851082,
+  "C1_envelope_min_polar_deg": 7.309770548610333,
+  "shield_rim_polar_deg": 6.374655550598179,
+  "C1_envelope_overlaps": [
+   "V4_ES_Nozzle_Strut_Loop_1_4",
+   "V4_ES_Nozzle_Strut_Loop_1_5"
+  ],
+  "A1_hardware_overlaps_static": [
+   [
+    "V4_CI_GA1_C1_Tilted_Assembly_Envelope",
+    "V4_ES_Nozzle_Strut_Loop_1_4"
+   ],
+   [
+    "V4_CI_GA1_C1_Tilted_Assembly_Envelope",
+    "V4_ES_Nozzle_Strut_Loop_1_5"
+   ],
+   [
+    "V4_CI_GA1_C1_Tilted_Winding",
+    "V4_ES_Nozzle_Strut_Loop_1_4"
+   ],
+   [
+    "V4_CI_GA1_C1_Tilted_Winding",
+    "V4_ES_Nozzle_Strut_Loop_1_5"
+   ],
+   [
+    "V4_CI_GA1_C1_Strut_1",
+    "V4_ES_Shield_LiH_Crew_Core"
+   ],
+   [
+    "V4_CI_GA1_C1_Strut_1",
+    "V4_PP_Shield_LiH_Hardware_Annulus"
+   ],
+   [
+    "V4_CI_GA1_Plant_C1_Supply_1",
+    "V4_ES_Shield_LiH_Crew_Core"
+   ],
+   [
+    "V4_CI_GA1_Plant_C1_Supply_1",
+    "V4_PP_Shield_LiH_Hardware_Annulus"
+   ],
+   [
+    "V4_CI_GA1_Plant_C1_Return_1",
+    "V4_ES_Shield_LiH_Crew_Core"
+   ],
+   [
+    "V4_CI_GA1_C1_Strut_2",
+    "V4_ES_Shield_LiH_Crew_Core"
+   ],
+   [
+    "V4_CI_GA1_C1_Strut_2",
+    "V4_PP_Shield_LiH_Hardware_Annulus"
+   ],
+   [
+    "V4_CI_GA1_Plant_C1_Supply_2",
+    "V4_ES_Shield_LiH_Crew_Core"
+   ],
+   [
+    "V4_CI_GA1_Plant_C1_Supply_2",
+    "V4_PP_Shield_LiH_Hardware_Annulus"
+   ],
+   [
+    "V4_CI_GA1_Plant_C1_Return_2",
+    "V4_ES_Shield_LiH_Crew_Core"
+   ],
+   [
+    "V4_CI_GA1_C1_Strut_3",
+    "V4_ES_Shield_W_Xray_Face"
+   ],
+   [
+    "V4_CI_GA1_C1_Strut_3",
+    "V4_ES_Shield_LiH_Crew_Core"
+   ],
+   [
+    "V4_CI_GA1_C1_Strut_3",
+    "V4_PP_Shield_LiH_Hardware_Annulus"
+   ],
+   [
+    "V4_CI_GA1_Plant_C1_Supply_3",
+    "V4_ES_Shield_LiH_Crew_Core"
+   ],
+   [
+    "V4_CI_GA1_Plant_C1_Supply_3",
+    "V4_PP_Shield_LiH_Hardware_Annulus"
+   ],
+   [
+    "V4_CI_GA1_C1_Strut_4",
+    "V4_ES_Shield_W_Xray_Face"
+   ],
+   [
+    "V4_CI_GA1_C1_Strut_4",
+    "V4_ES_Shield_LiH_Crew_Core"
+   ],
+   [
+    "V4_CI_GA1_C1_Strut_4",
+    "V4_PP_Shield_LiH_Hardware_Annulus"
+   ],
+   [
+    "V4_CI_GA1_Plant_C1_Supply_4",
+    "V4_ES_Shield_LiH_Crew_Core"
+   ],
+   [
+    "V4_CI_GA1_Plant_C1_Supply_4",
+    "V4_PP_Shield_LiH_Hardware_Annulus"
+   ],
+   [
+    "V4_CI_GA1_C1_Strut_5",
+    "V4_ES_Shield_LiH_Crew_Core"
+   ],
+   [
+    "V4_CI_GA1_C1_Strut_5",
+    "V4_PP_Shield_LiH_Hardware_Annulus"
+   ],
+   [
+    "V4_CI_GA1_Plant_C1_Supply_5",
+    "V4_ES_Shield_LiH_Crew_Core"
+   ],
+   [
+    "V4_CI_GA1_Plant_C1_Supply_5",
+    "V4_PP_Shield_LiH_Hardware_Annulus"
+   ],
+   [
+    "V4_CI_GA1_Plant_C1_Return_5",
+    "V4_ES_Shield_LiH_Crew_Core"
+   ],
+   [
+    "V4_CI_GA1_C1_Strut_6",
+    "V4_ES_Shield_LiH_Crew_Core"
+   ],
+   [
+    "V4_CI_GA1_C1_Strut_6",
+    "V4_PP_Shield_LiH_Hardware_Annulus"
+   ],
+   [
+    "V4_CI_GA1_Plant_C1_Supply_6",
+    "V4_ES_Shield_LiH_Crew_Core"
+   ],
+   [
+    "V4_CI_GA1_Plant_C1_Supply_6",
+    "V4_PP_Shield_LiH_Hardware_Annulus"
+   ],
+   [
+    "V4_CI_GA1_Plant_C1_Return_6",
+    "V4_ES_Shield_LiH_Crew_Core"
+   ]
+  ]
+ },
  "canon_unchanged": {
   "objects": 6249,
   "identical_to_append": true
@@ -288,18 +1333,18 @@
   "n": 2000000
  },
  "objects": {
-  "var_objects": 3835,
+  "var_objects": 3893,
   "missing_properties": [],
   "by_status": {
-   "CONCEPTUAL_ILLUSTRATION": 521,
+   "CONCEPTUAL_ILLUSTRATION": 579,
    "ENGINEERING_SUPPORTED": 346,
    "PARAMETRIC_PLACEHOLDER": 895,
    "PROTOTYPE": 2073
   },
   "by_generation": {
-   "ALL": 86,
+   "ALL": 91,
    "V0": 439,
-   "V4": 3301,
+   "V4": 3354,
    "V5": 9
   }
  },
@@ -317,9 +1362,9 @@
   "S5N_longeron_to_tank_ok_ge_1m": true,
   "S5N_B2_shadow_margin_m": 4.38916309289202,
   "K2_to_keel30_m": 2.958898943540674,
-  "geometry_hash_t05_objects": "3226be9fa6df1b66",
-  "object_count_t05": 3835,
-  "rev4_parts_with_trace": 1533,
+  "geometry_hash_t05_objects": "b08e25b6f7ddb917",
+  "object_count_t05": 3893,
+  "rev4_parts_with_trace": 1586,
   "rev4_parts_missing_trace": []
  },
  "rev4_launcher": {

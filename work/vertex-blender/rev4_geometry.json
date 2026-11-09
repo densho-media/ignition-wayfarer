@@ -1102,6 +1102,1606 @@
   }
  },
  "raycast": {
+  "axis_kernel": {
+   "max_polar_deg": 30.0,
+   "rays": 600000,
+   "ray_set_share_of_4pi": 0.06698729810778065,
+   "bins": [
+    {
+     "polar_deg": [
+      0.0,
+      0.5
+     ],
+     "bin_share_of_4pi": 1.903846791434516e-05,
+     "first_hit_fraction": {
+      "launcher": 1.0
+     },
+     "mean_hit_distance_m": {
+      "launcher": 45.256429170307364
+     },
+     "top_objects": [
+      "V4_PR_LB_Accelerator_Barrel",
+      "V4_PP_LBM_Snout_Face_CFC",
+      "V4_PR_LB_Snout_Tip_Cartridge"
+     ]
+    },
+    {
+     "polar_deg": [
+      0.5,
+      1.0
+     ],
+     "bin_share_of_4pi": 5.711395389002005e-05,
+     "first_hit_fraction": {
+      "launcher": 0.7651663405088063,
+      "shield": 0.23483365949119372
+     },
+     "mean_hit_distance_m": {
+      "launcher": 44.973688306101145,
+      "shield": 64.70833282470703
+     },
+     "top_objects": [
+      "V4_PP_LBM_Snout_Face_CFC",
+      "V4_ES_Shield_W_Xray_Face"
+     ]
+    },
+    {
+     "polar_deg": [
+      1.0,
+      1.5
+     ],
+     "bin_share_of_4pi": 9.518509041700485e-05,
+     "first_hit_fraction": {
+      "shield": 0.9695193434935522,
+      "other:Fast": 0.03048065650644783
+     },
+     "mean_hit_distance_m": {
+      "shield": 64.71535655232698,
+      "other:Fast": 64.51737594604492
+     },
+     "top_objects": [
+      "V4_ES_Shield_W_Xray_Face",
+      "V4_PR_Fast_Ignitor_Port"
+     ]
+    },
+    {
+     "polar_deg": [
+      1.5,
+      2.0
+     ],
+     "bin_share_of_4pi": 0.00013324897823074888,
+     "first_hit_fraction": {
+      "shield": 0.9966471081307627,
+      "other:Fast": 0.003352891869237217
+     },
+     "mean_hit_distance_m": {
+      "other:Fast": 64.5184268951416,
+      "shield": 64.7302200022217
+     },
+     "top_objects": [
+      "V4_ES_Shield_W_Xray_Face",
+      "V4_PR_Fast_Ignitor_Port"
+     ]
+    },
+    {
+     "polar_deg": [
+      2.0,
+      2.5
+     ],
+     "bin_share_of_4pi": 0.00017130271861898194,
+     "first_hit_fraction": {
+      "shield": 1.0
+     },
+     "mean_hit_distance_m": {
+      "shield": 64.74992352712427
+     },
+     "top_objects": [
+      "V4_ES_Shield_W_Xray_Face"
+     ]
+    },
+    {
+     "polar_deg": [
+      2.5,
+      3.0
+     ],
+     "bin_share_of_4pi": 0.0002093434136419825,
+     "first_hit_fraction": {
+      "shield": 1.0
+     },
+     "mean_hit_distance_m": {
+      "shield": 64.77460345052083
+     },
+     "top_objects": [
+      "V4_ES_Shield_W_Xray_Face"
+     ]
+    },
+    {
+     "polar_deg": [
+      3.0,
+      3.5
+     ],
+     "bin_share_of_4pi": 0.0002473681663534566,
+     "first_hit_fraction": {
+      "shield": 1.0
+     },
+     "mean_hit_distance_m": {
+      "shield": 64.80422990854922
+     },
+     "top_objects": [
+      "V4_ES_Shield_W_Xray_Face"
+     ]
+    },
+    {
+     "polar_deg": [
+      3.5,
+      4.0
+     ],
+     "bin_share_of_4pi": 0.0002853740810213612,
+     "first_hit_fraction": {
+      "shield": 0.9303599374021909,
+      "other:Beam": 0.06964006259780908
+     },
+     "mean_hit_distance_m": {
+      "shield": 64.83828805293027,
+      "other:Beam": 64.64617688468333
+     },
+     "top_objects": [
+      "V4_ES_Shield_W_Xray_Face",
+      "V4_ES_Beam_Port_6",
+      "V4_ES_Beam_Port_5",
+      "V4_ES_Beam_Port_7",
+      "V4_ES_Beam_Port_3",
+      "V4_ES_Beam_Port_4"
+     ]
+    },
+    {
+     "polar_deg": [
+      4.0,
+      4.5
+     ],
+     "bin_share_of_4pi": 0.0003233582633481169,
+     "first_hit_fraction": {
+      "shield": 0.9972385226095961,
+      "other:Beam": 0.002761477390403866
+     },
+     "mean_hit_distance_m": {
+      "shield": 64.87846265709,
+      "other:Beam": 64.64749526977539
+     },
+     "top_objects": [
+      "V4_ES_Shield_W_Xray_Face",
+      "V4_ES_Beam_Port_8",
+      "V4_ES_Beam_Port_9",
+      "V4_ES_Beam_Port_1",
+      "V4_ES_Beam_Port_2",
+      "V4_ES_Beam_Port_3"
+     ]
+    },
+    {
+     "polar_deg": [
+      4.5,
+      5.0
+     ],
+     "bin_share_of_4pi": 0.0003613178206912093,
+     "first_hit_fraction": {
+      "shield": 1.0
+     },
+     "mean_hit_distance_m": {
+      "shield": 64.92298493780223
+     },
+     "top_objects": [
+      "V4_ES_Shield_W_Xray_Face"
+     ]
+    },
+    {
+     "polar_deg": [
+      5.0,
+      5.5
+     ],
+     "bin_share_of_4pi": 0.00039924986228334625,
+     "first_hit_fraction": {
+      "shield": 0.924496644295302,
+      "nozzle_struts": 0.05453020134228188,
+      "other:Target": 0.016498881431767337,
+      "wing": 0.002796420581655481,
+      "other:Cryo": 0.0016778523489932886
+     },
+     "mean_hit_distance_m": {
+      "shield": 64.97123438794182,
+      "nozzle_struts": 64.62389530279698,
+      "wing": 64.83056411743163,
+      "other:Cryo": 64.87676366170247,
+      "other:Target": 64.31316776598914
+     },
+     "top_objects": [
+      "V4_ES_Shield_W_Xray_Face",
+      "V4_ES_Nozzle_Strut_Loop_1_4",
+      "V4_ES_Nozzle_Strut_Loop_1_1",
+      "V4_ES_Nozzle_Strut_Loop_1_2",
+      "V4_ES_Nozzle_Strut_Loop_1_5",
+      "V4_ES_Nozzle_Strut_Loop_1_0"
+     ]
+    },
+    {
+     "polar_deg": [
+      5.5,
+      6.0
+     ],
+     "bin_share_of_4pi": 0.0004371514994527814,
+     "first_hit_fraction": {
+      "shield": 0.7818646232439336,
+      "nozzle_struts": 0.1243933588761175,
+      "other:Target": 0.07994891443167305,
+      "wing": 0.00842911877394636,
+      "other:Cryo": 0.0053639846743295016
+     },
+     "mean_hit_distance_m": {
+      "other:Target": 63.921328815789266,
+      "shield": 65.02726370242249,
+      "nozzle_struts": 64.43874033275816,
+      "wing": 64.64169334642816,
+      "other:Cryo": 64.6960957845052
+     },
+     "top_objects": [
+      "V4_ES_Shield_W_Xray_Face",
+      "V4_ES_Nozzle_Strut_Loop_1_2",
+      "V4_ES_Nozzle_Strut_Loop_1_4",
+      "V4_PP_Target_Tracker_2",
+      "V4_ES_Nozzle_Strut_Loop_1_5",
+      "V4_ES_Nozzle_Strut_Loop_1_3"
+     ]
+    },
+    {
+     "polar_deg": [
+      6.0,
+      6.5
+     ],
+     "bin_share_of_4pi": 0.0004750198458429167,
+     "first_hit_fraction": {
+      "shield": 0.8119858989424207,
+      "nozzle_struts": 0.11562867215041128,
+      "coil_struts_and_ties": 0.029847238542890717,
+      "other:Target": 0.029142185663924795,
+      "wing": 0.007990599294947122,
+      "other:Cryo": 0.005405405405405406
+     },
+     "mean_hit_distance_m": {
+      "shield": 66.44099852676501,
+      "nozzle_struts": 64.14944851107714,
+      "other:Target": 63.961728065244614,
+      "other:Cryo": 64.41280829388162,
+      "wing": 64.35749031515682,
+      "coil_struts_and_ties": 65.38707384725255
+     },
+     "top_objects": [
+      "V4_ES_Shield_W_Xray_Face",
+      "V4_PP_Shield_Face_Exchange_Rail",
+      "V4_ES_Nozzle_Strut_Loop_1_2",
+      "V4_ES_Nozzle_Strut_Loop_1_4",
+      "V4_ES_Nozzle_Strut_Loop_1_5",
+      "V4_ES_Nozzle_Strut_Loop_1_3"
+     ]
+    },
+    {
+     "polar_deg": [
+      6.5,
+      7.0
+     ],
+     "bin_share_of_4pi": 0.0005128520176327367,
+     "first_hit_fraction": {
+      "NO_HIT": 0.6375707444492816,
+      "shield": 0.12102742707879843,
+      "nozzle_struts": 0.10709621245102308,
+      "coil_struts_and_ties": 0.1001306051371354,
+      "wing": 0.02938615585546365,
+      "other:Cryo": 0.00478885502829778
+     },
+     "mean_hit_distance_m": {
+      "shield": 70.2379632167679,
+      "coil_struts_and_ties": 65.32171864716904,
+      "nozzle_struts": 63.86367610993424,
+      "other:Cryo": 64.13070956143466,
+      "wing": 76.05217030843099
+     },
+     "top_objects": [
+      "V4_PP_Shield_Face_Exchange_Rail",
+      "V4_ES_Nozzle_Strut_Loop_1_2",
+      "V4_ES_Nozzle_Strut_Loop_1_3",
+      "V4_ES_Nozzle_Strut_Loop_1_4",
+      "V4_ES_Nozzle_Strut_Loop_1_5",
+      "V4_PR_C1_R4_Strut_6"
+     ]
+    },
+    {
+     "polar_deg": [
+      7.0,
+      7.5
+     ],
+     "bin_share_of_4pi": 0.0005506451337558005,
+     "first_hit_fraction": {
+      "NO_HIT": 0.7654095701540957,
+      "nozzle_struts": 0.10158150851581509,
+      "coil_struts_and_ties": 0.09326845093268452,
+      "wing": 0.034874290348742905,
+      "other:Cryo": 0.004866180048661801
+     },
+     "mean_hit_distance_m": {
+      "nozzle_struts": 63.590352574270405,
+      "coil_struts_and_ties": 65.22642435820207,
+      "wing": 72.6453405424606,
+      "other:Cryo": 63.86711835861206
+     },
+     "top_objects": [
+      "V4_ES_Nozzle_Strut_Loop_1_4",
+      "V4_ES_Nozzle_Strut_Loop_1_2",
+      "V4_ES_Nozzle_Strut_Loop_1_1",
+      "V4_ES_Nozzle_Strut_Loop_1_5",
+      "V4_ES_Nozzle_Strut_Loop_1_3",
+      "V4_PR_C1_R4_Strut_4"
+     ]
+    },
+    {
+     "polar_deg": [
+      7.5,
+      8.0
+     ],
+     "bin_share_of_4pi": 0.0005883963161200101,
+     "first_hit_fraction": {
+      "NO_HIT": 0.7768500948766603,
+      "nozzle_struts": 0.09563567362428843,
+      "coil_struts_and_ties": 0.08747628083491461,
+      "wing": 0.03586337760910816,
+      "other:Cryo": 0.004174573055028463
+     },
+     "mean_hit_distance_m": {
+      "coil_struts_and_ties": 65.13606543551298,
+      "nozzle_struts": 63.31938957032703,
+      "wing": 69.9983358029966,
+      "other:Cryo": 63.598339947787196
+     },
+     "top_objects": [
+      "V4_ES_Nozzle_Strut_Loop_1_2",
+      "V4_PP_Wing_S_Root_Boom_GRADED",
+      "V4_ES_Nozzle_Strut_Loop_1_4",
+      "V4_ES_Nozzle_Strut_Loop_1_1",
+      "V4_ES_Nozzle_Strut_Loop_1_3",
+      "V4_ES_Nozzle_Strut_Loop_1_5"
+     ]
+    },
+    {
+     "polar_deg": [
+      8.0,
+      8.5
+     ],
+     "bin_share_of_4pi": 0.0006261026898267685,
+     "first_hit_fraction": {
+      "NO_HIT": 0.7783523537803139,
+      "nozzle_struts": 0.09076319543509273,
+      "coil_struts_and_ties": 0.08184736091298145,
+      "wing": 0.04475748930099857,
+      "other:Cryo": 0.0042796005706134095
+     },
+     "mean_hit_distance_m": {
+      "wing": 69.63388485547556,
+      "coil_struts_and_ties": 65.04816998583559,
+      "nozzle_struts": 63.05651310619062,
+      "other:Cryo": 63.343369483947754
+     },
+     "top_objects": [
+      "V4_PP_Wing_S_Spar_Aft_GRADED",
+      "V4_ES_Nozzle_Strut_Loop_1_2",
+      "V4_ES_Nozzle_Strut_Loop_1_4",
+      "V4_ES_Nozzle_Strut_Loop_1_3",
+      "V4_PP_Wing_P_Spar_Aft_GRADED",
+      "V4_ES_Nozzle_Strut_Loop_1_5"
+     ]
+    },
+    {
+     "polar_deg": [
+      8.5,
+      9.0
+     ],
+     "bin_share_of_4pi": 0.0006637613833895273,
+     "first_hit_fraction": {
+      "NO_HIT": 0.7878889823380992,
+      "nozzle_struts": 0.08662741799831791,
+      "coil_struts_and_ties": 0.07720773759461733,
+      "wing": 0.044407064760302775,
+      "other:Cryo": 0.003868797308662742
+     },
+     "mean_hit_distance_m": {
+      "nozzle_struts": 62.802676739738985,
+      "coil_struts_and_ties": 64.96948099240238,
+      "wing": 69.51245991388957,
+      "other:Cryo": 63.086395761241086
+     },
+     "top_objects": [
+      "V4_PP_Wing_S_Spar_Aft_GRADED",
+      "V4_PP_Wing_P_Spar_Aft_GRADED",
+      "V4_ES_Nozzle_Strut_Loop_1_2",
+      "V4_ES_Nozzle_Strut_Loop_1_4",
+      "V4_ES_Nozzle_Strut_Loop_1_1",
+      "V4_ES_Nozzle_Strut_Loop_1_5"
+     ]
+    },
+    {
+     "polar_deg": [
+      9.0,
+      9.5
+     ],
+     "bin_share_of_4pi": 0.0007013695289531663,
+     "first_hit_fraction": {
+      "NO_HIT": 0.7978350843680356,
+      "nozzle_struts": 0.08261700095510983,
+      "coil_struts_and_ties": 0.07370264247055078,
+      "wing": 0.04218401782871697,
+      "other:Cryo": 0.0036612543775867558
+     },
+     "mean_hit_distance_m": {
+      "wing": 69.58417223084648,
+      "coil_struts_and_ties": 64.89494308900112,
+      "nozzle_struts": 62.55639791764276,
+      "other:Cryo": 62.83688785718835
+     },
+     "top_objects": [
+      "V4_PP_Wing_S_Spar_Aft_GRADED",
+      "V4_PP_Wing_P_Spar_Aft_GRADED",
+      "V4_ES_Nozzle_Strut_Loop_1_2",
+      "V4_ES_Nozzle_Strut_Loop_1_4",
+      "V4_ES_Nozzle_Strut_Loop_1_5",
+      "V4_ES_Nozzle_Strut_Loop_1_0"
+     ]
+    },
+    {
+     "polar_deg": [
+      9.5,
+      10.0
+     ],
+     "bin_share_of_4pi": 0.0007389242625117087,
+     "first_hit_fraction": {
+      "NO_HIT": 0.8085813567004079,
+      "nozzle_struts": 0.07841063604774134,
+      "coil_struts_and_ties": 0.06964798307901496,
+      "wing": 0.0400362592536637,
+      "other:Cryo": 0.0033237649191720803
+     },
+     "mean_hit_distance_m": {
+      "nozzle_struts": 62.31211710435577,
+      "coil_struts_and_ties": 64.82636972621826,
+      "wing": 69.61464480993882,
+      "other:Cryo": 62.601647637107156
+     },
+     "top_objects": [
+      "V4_PP_Wing_S_Spar_Aft_GRADED",
+      "V4_PP_Wing_P_Spar_Aft_GRADED",
+      "V4_ES_Nozzle_Strut_Loop_1_4",
+      "V4_ES_Nozzle_Strut_Loop_1_2",
+      "V4_ES_Nozzle_Strut_Loop_1_3",
+      "V4_ES_Nozzle_Strut_Loop_1_5"
+     ]
+    },
+    {
+     "polar_deg": [
+      10.0,
+      10.5
+     ],
+     "bin_share_of_4pi": 0.0007764227241267019,
+     "first_hit_fraction": {
+      "NO_HIT": 0.8167960885821111,
+      "nozzle_struts": 0.07492090882945067,
+      "coil_struts_and_ties": 0.06701179177451826,
+      "wing": 0.037819959735404085,
+      "other:Cryo": 0.003451251078515962
+     },
+     "mean_hit_distance_m": {
+      "coil_struts_and_ties": 64.76226819738298,
+      "nozzle_struts": 62.07834929101984,
+      "wing": 69.69341740771391,
+      "other:Cryo": 62.37301508585612
+     },
+     "top_objects": [
+      "V4_PP_Wing_S_Spar_Aft_GRADED",
+      "V4_PP_Wing_P_Spar_Aft_GRADED",
+      "V4_ES_Nozzle_Strut_Loop_1_4",
+      "V4_ES_Nozzle_Strut_Loop_1_2",
+      "V4_ES_Nozzle_Strut_Loop_1_1",
+      "V4_ES_Nozzle_Strut_Loop_1_3"
+     ]
+    },
+    {
+     "polar_deg": [
+      10.5,
+      11.0
+     ],
+     "bin_share_of_4pi": 0.0008138620581453204,
+     "first_hit_fraction": {
+      "NO_HIT": 0.8260631001371742,
+      "nozzle_struts": 0.07174211248285323,
+      "coil_struts_and_ties": 0.06337448559670782,
+      "wing": 0.03566529492455418,
+      "other:Cryo": 0.0031550068587105624
+     },
+     "mean_hit_distance_m": {
+      "nozzle_struts": 61.84341997398245,
+      "wing": 69.72432428506704,
+      "coil_struts_and_ties": 64.70121198711973,
+      "other:Cryo": 62.14349365234375
+     },
+     "top_objects": [
+      "V4_PP_Wing_S_Spar_Aft_GRADED",
+      "V4_PP_Wing_P_Spar_Aft_GRADED",
+      "V4_ES_Nozzle_Strut_Loop_1_4",
+      "V4_ES_Nozzle_Strut_Loop_1_2",
+      "V4_ES_Nozzle_Strut_Loop_1_0",
+      "V4_ES_Nozzle_Strut_Loop_1_5"
+     ]
+    },
+    {
+     "polar_deg": [
+      11.0,
+      11.5
+     ],
+     "bin_share_of_4pi": 0.000851239413417193,
+     "first_hit_fraction": {
+      "NO_HIT": 0.8336831059811123,
+      "nozzle_struts": 0.06886149003147954,
+      "coil_struts_and_ties": 0.0607292759706191,
+      "wing": 0.0337093389296957,
+      "other:Cryo": 0.003016789087093389
+     },
+     "mean_hit_distance_m": {
+      "nozzle_struts": 61.62510339646112,
+      "coil_struts_and_ties": 64.64773887485974,
+      "wing": 69.8079945456657,
+      "other:Cryo": 61.9305827928626
+     },
+     "top_objects": [
+      "V4_PP_Wing_S_Spar_Aft_GRADED",
+      "V4_PP_Wing_P_Spar_Aft_GRADED",
+      "V4_ES_Nozzle_Strut_Loop_1_2",
+      "V4_ES_Nozzle_Strut_Loop_1_4",
+      "V4_ES_Nozzle_Strut_Loop_1_5",
+      "V4_ES_Nozzle_Strut_Loop_1_0"
+     ]
+    },
+    {
+     "polar_deg": [
+      11.5,
+      12.0
+     ],
+     "bin_share_of_4pi": 0.0008885519435119504,
+     "first_hit_fraction": {
+      "NO_HIT": 0.8390501319261213,
+      "nozzle_struts": 0.06646563638648072,
+      "coil_struts_and_ties": 0.05880135695439125,
+      "wing": 0.032667420530217366,
+      "other:Cryo": 0.003015454202789295
+     },
+     "mean_hit_distance_m": {
+      "coil_struts_and_ties": 64.60044513604579,
+      "nozzle_struts": 61.40860925685255,
+      "wing": 69.83665187542255,
+      "other:Cryo": 61.71900622049967
+     },
+     "top_objects": [
+      "V4_PP_Wing_S_Spar_Aft_GRADED",
+      "V4_PP_Wing_P_Spar_Aft_GRADED",
+      "V4_ES_Nozzle_Strut_Loop_1_4",
+      "V4_ES_Nozzle_Strut_Loop_1_2",
+      "V4_ES_Nozzle_Strut_Loop_1_3",
+      "V4_ES_Nozzle_Strut_Loop_1_5"
+     ]
+    },
+    {
+     "polar_deg": [
+      12.0,
+      12.5
+     ],
+     "bin_share_of_4pi": 0.0009257968069361633,
+     "first_hit_fraction": {
+      "NO_HIT": 0.8463579353593825,
+      "nozzle_struts": 0.0639170284611674,
+      "coil_struts_and_ties": 0.056198745779064155,
+      "wing": 0.030752532561505064,
+      "other:Cryo": 0.002773757838880849
+     },
+     "mean_hit_distance_m": {
+      "coil_struts_and_ties": 64.55416012219605,
+      "nozzle_struts": 61.20274093196077,
+      "wing": 69.92771744073606,
+      "other:Cryo": 61.50880017487899
+     },
+     "top_objects": [
+      "V4_PP_Wing_S_Spar_Aft_GRADED",
+      "V4_PP_Wing_P_Spar_Aft_GRADED",
+      "V4_ES_Nozzle_Strut_Loop_1_4",
+      "V4_ES_Nozzle_Strut_Loop_1_2",
+      "V4_ES_Nozzle_Strut_Loop_1_5",
+      "V4_ES_Nozzle_Strut_Loop_1_0"
+     ]
+    },
+    {
+     "polar_deg": [
+      12.5,
+      13.0
+     ],
+     "bin_share_of_4pi": 0.0009629711673490582,
+     "first_hit_fraction": {
+      "NO_HIT": 0.8531184790169256,
+      "nozzle_struts": 0.061094365870623696,
+      "coil_struts_and_ties": 0.05355900765128681,
+      "wing": 0.029561789937398563,
+      "other:Cryo": 0.0026663575237653604
+     },
+     "mean_hit_distance_m": {
+      "coil_struts_and_ties": 64.51248152431471,
+      "wing": 70.01826207778034,
+      "nozzle_struts": 60.992562078660534,
+      "other:Cryo": 61.30834712152896
+     },
+     "top_objects": [
+      "V4_PP_Wing_S_Spar_Aft_GRADED",
+      "V4_PP_Wing_P_Spar_Aft_GRADED",
+      "V4_ES_Nozzle_Strut_Loop_1_2",
+      "V4_ES_Nozzle_Strut_Loop_1_4",
+      "V4_ES_Nozzle_Strut_Loop_1_0",
+      "V4_ES_Nozzle_Strut_Loop_1_3"
+     ]
+    },
+    {
+     "polar_deg": [
+      13.0,
+      13.5
+     ],
+     "bin_share_of_4pi": 0.0010000721937793444,
+     "first_hit_fraction": {
+      "NO_HIT": 0.857653232108965,
+      "nozzle_struts": 0.059394886680808306,
+      "coil_struts_and_ties": 0.05202634810762532,
+      "wing": 0.02846935357820699,
+      "other:Cryo": 0.0024561795243943285
+     },
+     "mean_hit_distance_m": {
+      "coil_struts_and_ties": 64.47991209889686,
+      "nozzle_struts": 60.79397000047497,
+      "wing": 70.12525157554477,
+      "other:Cryo": 61.113895589655094
+     },
+     "top_objects": [
+      "V4_PP_Wing_S_Spar_Aft_GRADED",
+      "V4_PP_Wing_P_Spar_Aft_GRADED",
+      "V4_ES_Nozzle_Strut_Loop_1_4",
+      "V4_ES_Nozzle_Strut_Loop_1_2",
+      "V4_ES_Nozzle_Strut_Loop_1_3",
+      "V4_ES_Nozzle_Strut_Loop_1_1"
+     ]
+    },
+    {
+     "polar_deg": [
+      13.5,
+      14.0
+     ],
+     "bin_share_of_4pi": 0.001037097060840042,
+     "first_hit_fraction": {
+      "NO_HIT": 0.8627408763053074,
+      "nozzle_struts": 0.057487350629777154,
+      "coil_struts_and_ties": 0.05005920981806438,
+      "wing": 0.027128862094951016,
+      "other:Cryo": 0.002583701151900097
+     },
+     "mean_hit_distance_m": {
+      "nozzle_struts": 60.59933661700188,
+      "coil_struts_and_ties": 64.44940052647745,
+      "wing": 70.20045363713824,
+      "other:Cryo": 60.93177000681559
+     },
+     "top_objects": [
+      "V4_PP_Wing_S_Spar_Aft_GRADED",
+      "V4_PP_Wing_P_Spar_Aft_GRADED",
+      "V4_ES_Nozzle_Strut_Loop_1_2",
+      "V4_ES_Nozzle_Strut_Loop_1_4",
+      "V4_ES_Nozzle_Strut_Loop_1_0",
+      "V4_ES_Nozzle_Strut_Loop_1_3"
+     ]
+    },
+    {
+     "polar_deg": [
+      14.0,
+      14.5
+     ],
+     "bin_share_of_4pi": 0.0010740429489443648,
+     "first_hit_fraction": {
+      "NO_HIT": 0.8673734539029206,
+      "nozzle_struts": 0.055503585905830995,
+      "coil_struts_and_ties": 0.04853965284273984,
+      "wing": 0.026192703461178673,
+      "other:Cryo": 0.0023906038873297993
+     },
+     "mean_hit_distance_m": {
+      "coil_struts_and_ties": 64.42606435444932,
+      "wing": 70.31016817547027,
+      "nozzle_struts": 60.422827595628604,
+      "other:Cryo": 60.75015341717264
+     },
+     "top_objects": [
+      "V4_PP_Wing_S_Spar_Aft_GRADED",
+      "V4_PP_Wing_P_Spar_Aft_GRADED",
+      "V4_ES_Nozzle_Strut_Loop_1_4",
+      "V4_ES_Nozzle_Strut_Loop_1_2",
+      "V4_ES_Nozzle_Strut_Loop_1_5",
+      "V4_ES_Nozzle_Strut_Loop_1_0"
+     ]
+    },
+    {
+     "polar_deg": [
+      14.5,
+      15.0
+     ],
+     "bin_share_of_4pi": 0.0011109070445197156,
+     "first_hit_fraction": {
+      "NO_HIT": 0.8714572864321608,
+      "nozzle_struts": 0.05407035175879397,
+      "coil_struts_and_ties": 0.04693467336683417,
+      "wing": 0.02512562814070352,
+      "other:Cryo": 0.002412060301507538
+     },
+     "mean_hit_distance_m": {
+      "nozzle_struts": 60.234313546503344,
+      "wing": 70.36478628540038,
+      "coil_struts_and_ties": 64.40574195093976,
+      "other:Cryo": 60.57043568293253
+     },
+     "top_objects": [
+      "V4_PP_Wing_S_Spar_Aft_GRADED",
+      "V4_PP_Wing_P_Spar_Aft_GRADED",
+      "V4_ES_Nozzle_Strut_Loop_1_4",
+      "V4_ES_Nozzle_Strut_Loop_1_2",
+      "V4_ES_Nozzle_Strut_Loop_1_1",
+      "V4_ES_Nozzle_Strut_Loop_1_3"
+     ]
+    },
+    {
+     "polar_deg": [
+      15.0,
+      15.5
+     ],
+     "bin_share_of_4pi": 0.001147686540222681,
+     "first_hit_fraction": {
+      "NO_HIT": 0.8760700389105058,
+      "nozzle_struts": 0.052334630350194554,
+      "coil_struts_and_ties": 0.045330739299610893,
+      "wing": 0.024027237354085604,
+      "other:Cryo": 0.0022373540856031127
+     },
+     "mean_hit_distance_m": {
+      "nozzle_struts": 60.05798027861074,
+      "wing": 70.45569230670388,
+      "coil_struts_and_ties": 64.39119144161371,
+      "other:Cryo": 60.401450447414234
+     },
+     "top_objects": [
+      "V4_PP_Wing_S_Spar_Aft_GRADED",
+      "V4_PP_Wing_P_Spar_Aft_GRADED",
+      "V4_ES_Nozzle_Strut_Loop_1_2",
+      "V4_ES_Nozzle_Strut_Loop_1_4",
+      "V4_ES_Nozzle_Strut_Loop_1_0",
+      "V4_ES_Nozzle_Strut_Loop_1_5"
+     ]
+    },
+    {
+     "polar_deg": [
+      15.5,
+      16.0
+     ],
+     "bin_share_of_4pi": 0.001184378635152028,
+     "first_hit_fraction": {
+      "NO_HIT": 0.8798076923076923,
+      "nozzle_struts": 0.05052790346907994,
+      "coil_struts_and_ties": 0.04392911010558069,
+      "wing": 0.02347285067873303,
+      "other:Cryo": 0.0022624434389140274
+     },
+     "mean_hit_distance_m": {
+      "wing": 70.63999735207922,
+      "coil_struts_and_ties": 64.38015683219156,
+      "nozzle_struts": 59.89192189031572,
+      "other:Cryo": 60.23404582341512
+     },
+     "top_objects": [
+      "V4_PP_Wing_S_Spar_Aft_GRADED",
+      "V4_PP_Wing_P_Spar_Aft_GRADED",
+      "V4_ES_Nozzle_Strut_Loop_1_2",
+      "V4_ES_Nozzle_Strut_Loop_1_4",
+      "V4_ES_Nozzle_Strut_Loop_1_3",
+      "V4_ES_Nozzle_Strut_Loop_1_0"
+     ]
+    },
+    {
+     "polar_deg": [
+      16.0,
+      16.5
+     ],
+     "bin_share_of_4pi": 0.001220980535062921,
+     "first_hit_fraction": {
+      "NO_HIT": 0.8832297000731529,
+      "nozzle_struts": 0.04956108266276518,
+      "coil_struts_and_ties": 0.04233723482077542,
+      "wing": 0.02267739575713241,
+      "other:Cryo": 0.0021945866861741038
+     },
+     "mean_hit_distance_m": {
+      "nozzle_struts": 59.7258675072026,
+      "coil_struts_and_ties": 64.37400999131007,
+      "wing": 70.7138484370324,
+      "other:Cryo": 60.07301616668701
+     },
+     "top_objects": [
+      "V4_PP_Wing_S_Spar_Aft_GRADED",
+      "V4_PP_Wing_P_Spar_Aft_GRADED",
+      "V4_ES_Nozzle_Strut_Loop_1_4",
+      "V4_ES_Nozzle_Strut_Loop_1_2",
+      "V4_ES_Nozzle_Strut_Loop_1_0",
+      "V4_ES_Nozzle_Strut_Loop_1_3"
+     ]
+    },
+    {
+     "polar_deg": [
+      16.5,
+      17.0
+     ],
+     "bin_share_of_4pi": 0.0012574894525788083,
+     "first_hit_fraction": {
+      "NO_HIT": 0.8861759744295481,
+      "nozzle_struts": 0.04821095622835834,
+      "coil_struts_and_ties": 0.04128562549942289,
+      "wing": 0.0222853591405487,
+      "other:Cryo": 0.0020420847021219925
+     },
+     "mean_hit_distance_m": {
+      "coil_struts_and_ties": 64.37439527614143,
+      "wing": 70.82560927554431,
+      "nozzle_struts": 59.56171545797949,
+      "other:Cryo": 59.917023866072945
+     },
+     "top_objects": [
+      "V4_PP_Wing_S_Spar_Aft_GRADED",
+      "V4_PP_Wing_P_Spar_Aft_GRADED",
+      "V4_ES_Nozzle_Strut_Loop_1_4",
+      "V4_ES_Nozzle_Strut_Loop_1_2",
+      "V4_ES_Nozzle_Strut_Loop_1_0",
+      "V4_ES_Nozzle_Strut_Loop_1_5"
+     ]
+    },
+    {
+     "polar_deg": [
+      17.0,
+      17.5
+     ],
+     "bin_share_of_4pi": 0.0012939026074042514,
+     "first_hit_fraction": {
+      "NO_HIT": 0.8889559965487489,
+      "nozzle_struts": 0.04676445211389128,
+      "coil_struts_and_ties": 0.04029335634167386,
+      "wing": 0.02182916307161346,
+      "other:Cryo": 0.0021570319240724763
+     },
+     "mean_hit_distance_m": {
+      "nozzle_struts": 59.412385363420434,
+      "coil_struts_and_ties": 64.38116319480748,
+      "wing": 70.98661994180189,
+      "other:Cryo": 59.77081237792969
+     },
+     "top_objects": [
+      "V4_PP_Wing_S_Spar_Aft_GRADED",
+      "V4_PP_Wing_P_Spar_Aft_GRADED",
+      "V4_ES_Nozzle_Strut_Loop_1_2",
+      "V4_ES_Nozzle_Strut_Loop_1_4",
+      "V4_ES_Nozzle_Strut_Loop_1_3",
+      "V4_ES_Nozzle_Strut_Loop_1_0"
+     ]
+    },
+    {
+     "polar_deg": [
+      17.5,
+      18.0
+     ],
+     "bin_share_of_4pi": 0.0013302172265367007,
+     "first_hit_fraction": {
+      "NO_HIT": 0.8918079570253483,
+      "nozzle_struts": 0.045744502266241396,
+      "coil_struts_and_ties": 0.03936545240893067,
+      "wing": 0.02106765150243411,
+      "other:Cryo": 0.0020144367970454926
+     },
+     "mean_hit_distance_m": {
+      "coil_struts_and_ties": 64.39087955173908,
+      "nozzle_struts": 59.27314878691227,
+      "wing": 71.17416995835019,
+      "other:Cryo": 59.6250950495402
+     },
+     "top_objects": [
+      "V4_PP_Wing_S_Spar_Aft_GRADED",
+      "V4_PP_Wing_P_Spar_Aft_GRADED",
+      "V4_ES_Nozzle_Strut_Loop_1_4",
+      "V4_ES_Nozzle_Strut_Loop_1_1",
+      "V4_ES_Nozzle_Strut_Loop_1_2",
+      "V4_ES_Nozzle_Strut_Loop_1_3"
+     ]
+    },
+    {
+     "polar_deg": [
+      18.0,
+      18.5
+     ],
+     "bin_share_of_4pi": 0.001366430544477104,
+     "first_hit_fraction": {
+      "NO_HIT": 0.894435819919928,
+      "nozzle_struts": 0.044856605931857176,
+      "coil_struts_and_ties": 0.03815671214968543,
+      "wing": 0.02058991747691805,
+      "other:Cryo": 0.0019609445216112425
+     },
+     "mean_hit_distance_m": {
+      "nozzle_struts": 59.11340753801968,
+      "wing": 71.34763876597087,
+      "coil_struts_and_ties": 64.40542047079931,
+      "other:Cryo": 59.48484055201212
+     },
+     "top_objects": [
+      "V4_PP_Wing_S_Spar_Aft_GRADED",
+      "V4_PP_Wing_P_Spar_Aft_GRADED",
+      "V4_ES_Nozzle_Strut_Loop_1_4",
+      "V4_ES_Nozzle_Strut_Loop_1_2",
+      "V4_ES_Nozzle_Strut_Loop_1_3",
+      "V4_ES_Nozzle_Strut_Loop_1_5"
+     ]
+    },
+    {
+     "polar_deg": [
+      18.5,
+      19.0
+     ],
+     "bin_share_of_4pi": 0.0014025398034412384,
+     "first_hit_fraction": {
+      "C1_armour_face": 0.8205046565310833,
+      "NO_HIT": 0.12353737164689962,
+      "nozzle_struts": 0.043381357955902256,
+      "wing": 0.0054923187136830375,
+      "coil_struts_and_ties": 0.005173923425933296,
+      "other:Cryo": 0.0019103717264984479
+     },
+     "mean_hit_distance_m": {
+      "nozzle_struts": 58.98449366858246,
+      "wing": 65.8722003992053,
+      "coil_struts_and_ties": 64.40360553448016,
+      "other:Cryo": 59.35194714864095,
+      "C1_armour_face": 63.338149470787066
+     },
+     "top_objects": [
+      "V4_PP_C1_R4_T00_SHADOWED_CFC_Armour_06",
+      "V4_PP_C1_R4_T00_SHADOWED_CFC_Armour_08",
+      "V4_PP_C1_R4_T00_SHADOWED_CFC_Armour_04",
+      "V4_PP_C1_R4_T00_SHADOWED_CFC_Armour_02",
+      "V4_PP_C1_R4_T00_SHADOWED_CFC_Armour_03",
+      "V4_PP_C1_R4_T00_SHADOWED_CFC_Armour_11"
+     ]
+    },
+    {
+     "polar_deg": [
+      19.0,
+      19.5
+     ],
+     "bin_share_of_4pi": 0.0014385422535692083,
+     "first_hit_fraction": {
+      "C1_armour_face": 0.9527357392316648,
+      "nozzle_struts": 0.04260768335273574,
+      "wing": 0.0027939464493597207,
+      "other:Cryo": 0.0018626309662398137
+     },
+     "mean_hit_distance_m": {
+      "C1_armour_face": 62.78644957003278,
+      "nozzle_struts": 58.85609002452079,
+      "wing": 59.175378269619415,
+      "other:Cryo": 59.221468925476074
+     },
+     "top_objects": [
+      "V4_PP_C1_R4_T00_SHADOWED_CFC_Armour_10",
+      "V4_PP_C1_R4_T00_SHADOWED_CFC_Armour_11",
+      "V4_PP_C1_R4_T00_SHADOWED_CFC_Armour_02",
+      "V4_PP_C1_R4_T00_SHADOWED_CFC_Armour_07",
+      "V4_PP_C1_R4_T00_SHADOWED_CFC_Armour_12",
+      "V4_PP_C1_R4_T00_SHADOWED_CFC_Armour_04"
+     ]
+    },
+    {
+     "polar_deg": [
+      19.5,
+      20.0
+     ],
+     "bin_share_of_4pi": 0.0014744351531350008,
+     "first_hit_fraction": {
+      "C1_armour_face": 0.9536574284416175,
+      "nozzle_struts": 0.04179918218991367,
+      "wing": 0.0027260336210813267,
+      "other:Cryo": 0.001817355747387551
+     },
+     "mean_hit_distance_m": {
+      "nozzle_struts": 58.72308124321094,
+      "C1_armour_face": 62.574805883825896,
+      "wing": 59.05357297261556,
+      "other:Cryo": 59.09981616338094
+     },
+     "top_objects": [
+      "V4_PP_C1_R4_T00_SHADOWED_CFC_Armour_03",
+      "V4_PP_C1_R4_T00_SHADOWED_CFC_Armour_06",
+      "V4_PP_C1_R4_T00_SHADOWED_CFC_Armour_07",
+      "V4_PP_C1_R4_T00_SHADOWED_CFC_Armour_12",
+      "V4_PP_C1_R4_T00_SHADOWED_CFC_Armour_02",
+      "V4_PP_C1_R4_T00_SHADOWED_CFC_Armour_10"
+     ]
+    },
+    {
+     "polar_deg": [
+      20.0,
+      20.5
+     ],
+     "bin_share_of_4pi": 0.0015102157687554296,
+     "first_hit_fraction": {
+      "C1_armour_face": 0.9548310785835736,
+      "nozzle_struts": 0.04073334811857766,
+      "wing": 0.0026613439787092482,
+      "other:Cryo": 0.0017742293191394987
+     },
+     "mean_hit_distance_m": {
+      "C1_armour_face": 62.57691364902651,
+      "wing": 58.93387073940701,
+      "nozzle_struts": 58.59835533654409,
+      "other:Cryo": 58.98046016693115
+     },
+     "top_objects": [
+      "V4_PP_C1_R4_T00_SHADOWED_CFC_Armour_11",
+      "V4_PP_C1_R4_T00_SHADOWED_CFC_Armour_06",
+      "V4_PP_C1_R4_T00_SHADOWED_CFC_Armour_10",
+      "V4_PP_C1_R4_T00_SHADOWED_CFC_Armour_03",
+      "V4_PP_C1_R4_T00_SHADOWED_CFC_Armour_07",
+      "V4_PP_C1_R4_T00_SHADOWED_CFC_Armour_05"
+     ]
+    },
+    {
+     "polar_deg": [
+      20.5,
+      21.0
+     ],
+     "bin_share_of_4pi": 0.0015458813755979128,
+     "first_hit_fraction": {
+      "C1_armour_face": 0.9556550628340315,
+      "nozzle_struts": 0.03986710963455149,
+      "wing": 0.0026722519139101546,
+      "other:Cryo": 0.0018055756175068612
+     },
+     "mean_hit_distance_m": {
+      "C1_armour_face": 62.79369791646678,
+      "wing": 58.8220590127481,
+      "nozzle_struts": 58.4897022454635,
+      "other:Cryo": 58.867658081054685
+     },
+     "top_objects": [
+      "V4_PP_C1_R4_T00_SHADOWED_CFC_Armour_09",
+      "V4_PP_C1_R4_T00_SHADOWED_CFC_Armour_12",
+      "V4_PP_C1_R4_T00_SHADOWED_CFC_Armour_10",
+      "V4_PP_C1_R4_T00_SHADOWED_CFC_Armour_02",
+      "V4_PP_C1_R4_T00_SHADOWED_CFC_Armour_07",
+      "V4_PP_C1_R4_T00_SHADOWED_CFC_Armour_04"
+     ]
+    },
+    {
+     "polar_deg": [
+      21.0,
+      21.5
+     ],
+     "bin_share_of_4pi": 0.0015814292575885847,
+     "first_hit_fraction": {
+      "C1_armour_face": 0.8053653370984821,
+      "NO_HIT": 0.14627603247440876,
+      "nozzle_struts": 0.03911048358630427,
+      "wing": 0.005012354394634663,
+      "coil_struts_and_ties": 0.0025414754677020824,
+      "other:Cryo": 0.001694316978468055
+     },
+     "mean_hit_distance_m": {
+      "C1_armour_face": 63.34834402507017,
+      "nozzle_struts": 58.37081323892201,
+      "wing": 66.67702897837464,
+      "other:Cryo": 58.75508817036947,
+      "coil_struts_and_ties": 64.26738145616319
+     },
+     "top_objects": [
+      "V4_PP_C1_R4_T00_SHADOWED_CFC_Armour_06",
+      "V4_PP_C1_R4_T00_SHADOWED_CFC_Armour_11",
+      "V4_PP_C1_R4_T00_SHADOWED_CFC_Armour_02",
+      "V4_PP_C1_R4_T00_SHADOWED_CFC_Armour_04",
+      "V4_PP_C1_R4_T00_SHADOWED_CFC_Armour_07",
+      "V4_PP_C1_R4_T00_SHADOWED_CFC_Armour_09"
+     ]
+    },
+    {
+     "polar_deg": [
+      21.5,
+      22.0
+     ],
+     "bin_share_of_4pi": 0.0016168567076185747,
+     "first_hit_fraction": {
+      "NO_HIT": 0.9254246651015053,
+      "nozzle_struts": 0.03825438475348709,
+      "wing": 0.0173318602402983,
+      "coil_struts_and_ties": 0.0173318602402983,
+      "other:Cryo": 0.0016572296644109929
+     },
+     "mean_hit_distance_m": {
+      "nozzle_struts": 58.27056075003173,
+      "wing": 72.52532003030359,
+      "coil_struts_and_ties": 64.21412929215754,
+      "other:Cryo": 58.65290403366089
+     },
+     "top_objects": [
+      "V4_PP_Wing_P_Spar_Aft_GRADED",
+      "V4_PP_Wing_S_Spar_Aft_GRADED",
+      "V4_ES_Nozzle_Strut_Loop_1_2",
+      "V4_ES_Nozzle_Strut_Loop_1_4",
+      "V4_ES_Nozzle_Strut_Loop_1_1",
+      "V4_ES_Nozzle_Strut_Loop_1_0"
+     ]
+    },
+    {
+     "polar_deg": [
+      22.0,
+      22.5
+     ],
+     "bin_share_of_4pi": 0.001652161027750343,
+     "first_hit_fraction": {
+      "NO_HIT": 0.9272923846205825,
+      "nozzle_struts": 0.037570106088249206,
+      "coil_struts_and_ties": 0.016893033313061693,
+      "wing": 0.016622744780052705,
+      "other:Cryo": 0.0016217311980539226
+     },
+     "mean_hit_distance_m": {
+      "nozzle_struts": 58.15303235088321,
+      "coil_struts_and_ties": 64.13489065551758,
+      "wing": 72.82814337567585,
+      "other:Cryo": 58.55436245600382
+     },
+     "top_objects": [
+      "V4_PP_Wing_S_Spar_Aft_GRADED",
+      "V4_PP_Wing_P_Spar_Aft_GRADED",
+      "V4_ES_Nozzle_Strut_Loop_1_4",
+      "V4_ES_Nozzle_Strut_Loop_1_0",
+      "V4_ES_Nozzle_Strut_Loop_1_2",
+      "V4_ES_Nozzle_Strut_Loop_1_5"
+     ]
+    },
+    {
+     "polar_deg": [
+      22.5,
+      23.0
+     ],
+     "bin_share_of_4pi": 0.0016873395294231819,
+     "first_hit_fraction": {
+      "NO_HIT": 0.9288030172699001,
+      "nozzle_struts": 0.03685568715675246,
+      "coil_struts_and_ties": 0.01667438628994905,
+      "wing": 0.01614504069344273,
+      "other:Cryo": 0.0015218685899556672
+     },
+     "mean_hit_distance_m": {
+      "wing": 72.950044616324,
+      "nozzle_struts": 58.064248007974676,
+      "coil_struts_and_ties": 64.06151694343204,
+      "other:Cryo": 58.459811998450235
+     },
+     "top_objects": [
+      "V4_PP_Wing_P_Spar_Aft_GRADED",
+      "V4_PP_Wing_S_Spar_Aft_GRADED",
+      "V4_ES_Nozzle_Strut_Loop_1_4",
+      "V4_ES_Nozzle_Strut_Loop_1_2",
+      "V4_ES_Nozzle_Strut_Loop_1_0",
+      "V4_ES_Nozzle_Strut_Loop_1_3"
+     ]
+    },
+    {
+     "polar_deg": [
+      23.0,
+      23.5
+     ],
+     "bin_share_of_4pi": 0.001722389533658164,
+     "first_hit_fraction": {
+      "NO_HIT": 0.9299928696441304,
+      "nozzle_struts": 0.03623517210086213,
+      "coil_struts_and_ties": 0.016464639917028585,
+      "wing": 0.01568678291307448,
+      "other:Cryo": 0.0016205354249043884
+     },
+     "mean_hit_distance_m": {
+      "nozzle_struts": 57.963324681590834,
+      "wing": 73.22638295701712,
+      "coil_struts_and_ties": 63.99392416345792,
+      "other:Cryo": 58.37183135986328
+     },
+     "top_objects": [
+      "V4_PP_Wing_S_Spar_Aft_GRADED",
+      "V4_PP_Wing_P_Spar_Aft_GRADED",
+      "V4_ES_Nozzle_Strut_Loop_1_2",
+      "V4_ES_Nozzle_Strut_Loop_1_4",
+      "V4_ES_Nozzle_Strut_Loop_1_0",
+      "V4_ES_Nozzle_Strut_Loop_1_3"
+     ]
+    },
+    {
+     "polar_deg": [
+      23.5,
+      24.0
+     ],
+     "bin_share_of_4pi": 0.00175730837126159,
+     "first_hit_fraction": {
+      "NO_HIT": 0.9315756035578144,
+      "nozzle_struts": 0.035387547649301146,
+      "coil_struts_and_ties": 0.016010165184243964,
+      "wing": 0.015438373570520966,
+      "other:Cryo": 0.0015883100381194409
+     },
+     "mean_hit_distance_m": {
+      "nozzle_struts": 57.88006652749848,
+      "wing": 73.40275845311797,
+      "coil_struts_and_ties": 63.92870680491129,
+      "other:Cryo": 58.28901840209961
+     },
+     "top_objects": [
+      "V4_PP_Wing_P_Spar_Aft_GRADED",
+      "V4_PP_Wing_S_Spar_Aft_GRADED",
+      "V4_ES_Nozzle_Strut_Loop_1_2",
+      "V4_ES_Nozzle_Strut_Loop_1_4",
+      "V4_ES_Nozzle_Strut_Loop_1_3",
+      "V4_ES_Nozzle_Strut_Loop_1_0"
+     ]
+    },
+    {
+     "polar_deg": [
+      24.0,
+      24.5
+     ],
+     "bin_share_of_4pi": 0.0017920933830288255,
+     "first_hit_fraction": {
+      "NO_HIT": 0.9329055569399451,
+      "nozzle_struts": 0.03494891602292549,
+      "coil_struts_and_ties": 0.0157612758534762,
+      "wing": 0.0149514079242462,
+      "other:Cryo": 0.0014328432594069274
+     },
+     "mean_hit_distance_m": {
+      "wing": 73.68125149408976,
+      "nozzle_struts": 57.79168085788448,
+      "coil_struts_and_ties": 63.87037011851435,
+      "other:Cryo": 58.20480777906335
+     },
+     "top_objects": [
+      "V4_PP_Wing_P_Spar_Aft_GRADED",
+      "V4_PP_Wing_S_Spar_Aft_GRADED",
+      "V4_ES_Nozzle_Strut_Loop_1_2",
+      "V4_ES_Nozzle_Strut_Loop_1_4",
+      "V4_ES_Nozzle_Strut_Loop_1_0",
+      "V4_ES_Nozzle_Strut_Loop_1_1"
+     ]
+    },
+    {
+     "polar_deg": [
+      24.5,
+      25.0
+     ],
+     "bin_share_of_4pi": 0.0018267419199466395,
+     "first_hit_fraction": {
+      "NO_HIT": 0.9340545165627674,
+      "nozzle_struts": 0.03422564478670089,
+      "coil_struts_and_ties": 0.015462657376848796,
+      "wing": 0.014668133480014669,
+      "other:Cryo": 0.0015890477936682558
+     },
+     "mean_hit_distance_m": {
+      "nozzle_struts": 57.719397047587805,
+      "other:Cryo": 58.13435481144832,
+      "wing": 73.84933423995972,
+      "coil_struts_and_ties": 63.81700004607792
+     },
+     "top_objects": [
+      "V4_PP_Wing_P_Spar_Aft_GRADED",
+      "V4_PP_Wing_S_Spar_Aft_GRADED",
+      "V4_ES_Nozzle_Strut_Loop_1_2",
+      "V4_ES_Nozzle_Strut_Loop_1_4",
+      "V4_ES_Nozzle_Strut_Loop_1_3",
+      "V4_ES_Nozzle_Strut_Loop_1_5"
+     ]
+    },
+    {
+     "polar_deg": [
+      25.0,
+      25.5
+     ],
+     "bin_share_of_4pi": 0.0018612513433946543,
+     "first_hit_fraction": {
+      "NO_HIT": 0.9356967188530982,
+      "nozzle_struts": 0.033531281866714654,
+      "coil_struts_and_ties": 0.014996101013736428,
+      "wing": 0.014336272569132025,
+      "other:Cryo": 0.001439625697318697
+     },
+     "mean_hit_distance_m": {
+      "coil_struts_and_ties": 63.76797981262207,
+      "nozzle_struts": 57.63584013445859,
+      "wing": 74.0153746345552,
+      "other:Cryo": 58.059306621551514
+     },
+     "top_objects": [
+      "V4_PP_Wing_S_Spar_Aft_GRADED",
+      "V4_PP_Wing_P_Spar_Aft_GRADED",
+      "V4_ES_Nozzle_Strut_Loop_1_4",
+      "V4_ES_Nozzle_Strut_Loop_1_2",
+      "V4_ES_Nozzle_Strut_Loop_1_0",
+      "V4_ES_Nozzle_Strut_Loop_1_5"
+     ]
+    },
+    {
+     "polar_deg": [
+      25.5,
+      26.0
+     ],
+     "bin_share_of_4pi": 0.0018956190253467953,
+     "first_hit_fraction": {
+      "NO_HIT": 0.9366275987985158,
+      "nozzle_struts": 0.03280522998998763,
+      "coil_struts_and_ties": 0.015018552329348019,
+      "wing": 0.014135108074680488,
+      "other:Cryo": 0.0014135108074680488
+     },
+     "mean_hit_distance_m": {
+      "coil_struts_and_ties": 63.725469028248504,
+      "nozzle_struts": 57.572647813834664,
+      "wing": 74.3733328183492,
+      "other:Cryo": 57.99266322453817
+     },
+     "top_objects": [
+      "V4_PP_Wing_P_Spar_Aft_GRADED",
+      "V4_PP_Wing_S_Spar_Aft_GRADED",
+      "V4_ES_Nozzle_Strut_Loop_1_2",
+      "V4_ES_Nozzle_Strut_Loop_1_4",
+      "V4_ES_Nozzle_Strut_Loop_1_5",
+      "V4_ES_Nozzle_Strut_Loop_1_3"
+     ]
+    },
+    {
+     "polar_deg": [
+      26.0,
+      26.5
+     ],
+     "bin_share_of_4pi": 0.0019298423485709648,
+     "first_hit_fraction": {
+      "NO_HIT": 0.9378073474110501,
+      "nozzle_struts": 0.03274515475846109,
+      "coil_struts_and_ties": 0.014636968469771479,
+      "wing": 0.013364188602834828,
+      "other:Cryo": 0.0014463407578825572
+     },
+     "mean_hit_distance_m": {
+      "nozzle_struts": 57.5039125786232,
+      "wing": 74.52520707365754,
+      "coil_struts_and_ties": 63.684665770398766,
+      "other:Cryo": 57.93521011352539
+     },
+     "top_objects": [
+      "V4_PP_Wing_P_Spar_Aft_GRADED",
+      "V4_PP_Wing_S_Spar_Aft_GRADED",
+      "V4_ES_Nozzle_Strut_Loop_1_4",
+      "V4_ES_Nozzle_Strut_Loop_1_2",
+      "V4_ES_Nozzle_Strut_Loop_1_3",
+      "V4_ES_Nozzle_Strut_Loop_1_0"
+     ]
+    },
+    {
+     "polar_deg": [
+      26.5,
+      27.0
+     ],
+     "bin_share_of_4pi": 0.0019639187068286046,
+     "first_hit_fraction": {
+      "NO_HIT": 0.939116593712694,
+      "nozzle_struts": 0.03194815530669092,
+      "coil_struts_and_ties": 0.014382354613154454,
+      "wing": 0.013131715081575806,
+      "other:Cryo": 0.0014211812858848274
+     },
+     "mean_hit_distance_m": {
+      "wing": 74.79847002235842,
+      "nozzle_struts": 57.451049906503265,
+      "coil_struts_and_ties": 63.6523492232613,
+      "other:Cryo": 57.876033020019534
+     },
+     "top_objects": [
+      "V4_PP_Wing_S_Spar_Aft_GRADED",
+      "V4_PP_Wing_P_Spar_Aft_GRADED",
+      "V4_ES_Nozzle_Strut_Loop_1_4",
+      "V4_ES_Nozzle_Strut_Loop_1_2",
+      "V4_ES_Nozzle_Strut_Loop_1_0",
+      "V4_ES_Nozzle_Strut_Loop_1_1"
+     ]
+    },
+    {
+     "polar_deg": [
+      27.0,
+      27.5
+     ],
+     "bin_share_of_4pi": 0.0019978455050730926,
+     "first_hit_fraction": {
+      "NO_HIT": 0.9398714724783459,
+      "nozzle_struts": 0.03151718357082984,
+      "coil_struts_and_ties": 0.014193908913104219,
+      "wing": 0.013020396758871193,
+      "other:Cryo": 0.0013970382788488405
+     },
+     "mean_hit_distance_m": {
+      "nozzle_struts": 57.37566157942968,
+      "coil_struts_and_ties": 63.62243273877722,
+      "wing": 75.11993933747254,
+      "other:Cryo": 57.82507308959961
+     },
+     "top_objects": [
+      "V4_PP_Wing_P_Spar_Aft_GRADED",
+      "V4_PP_Wing_S_Spar_Aft_GRADED",
+      "V4_ES_Nozzle_Strut_Loop_1_2",
+      "V4_ES_Nozzle_Strut_Loop_1_4",
+      "V4_ES_Nozzle_Strut_Loop_1_5",
+      "V4_ES_Nozzle_Strut_Loop_1_0"
+     ]
+    },
+    {
+     "polar_deg": [
+      27.5,
+      28.0
+     ],
+     "bin_share_of_4pi": 0.0020316201596473626,
+     "first_hit_fraction": {
+      "NO_HIT": 0.9410891905259109,
+      "nozzle_struts": 0.031049074023190636,
+      "coil_struts_and_ties": 0.013958344782106941,
+      "wing": 0.012529537835907018,
+      "other:Cryo": 0.0013738528328845413
+     },
+     "mean_hit_distance_m": {
+      "wing": 75.33232456341125,
+      "nozzle_struts": 57.34365301216598,
+      "coil_struts_and_ties": 63.59902470506082,
+      "other:Cryo": 57.7752182006836
+     },
+     "top_objects": [
+      "V4_PP_Wing_S_Spar_Aft_GRADED",
+      "V4_PP_Wing_P_Spar_Aft_GRADED",
+      "V4_ES_Nozzle_Strut_Loop_1_2",
+      "V4_ES_Nozzle_Strut_Loop_1_4",
+      "V4_ES_Nozzle_Strut_Loop_1_5",
+      "V4_ES_Nozzle_Strut_Loop_1_0"
+     ]
+    },
+    {
+     "polar_deg": [
+      28.0,
+      28.5
+     ],
+     "bin_share_of_4pi": 0.002065240098480803,
+     "first_hit_fraction": {
+      "NO_HIT": 0.942209968645259,
+      "nozzle_struts": 0.03043572278084117,
+      "coil_struts_and_ties": 0.013731214185317331,
+      "wing": 0.012271596929397773,
+      "other:Cryo": 0.0013514974591847767
+     },
+     "mean_hit_distance_m": {
+      "coil_struts_and_ties": 63.57872285617618,
+      "nozzle_struts": 57.29458233306505,
+      "wing": 75.63055189695652,
+      "other:Cryo": 57.730973663330076
+     },
+     "top_objects": [
+      "V4_PP_Wing_P_Spar_Aft_GRADED",
+      "V4_PP_Wing_S_Spar_Aft_GRADED",
+      "V4_ES_Nozzle_Strut_Loop_1_4",
+      "V4_ES_Nozzle_Strut_Loop_1_2",
+      "V4_ES_Nozzle_Strut_Loop_1_3",
+      "V4_ES_Nozzle_Strut_Loop_1_0"
+     ]
+    },
+    {
+     "polar_deg": [
+      28.5,
+      29.0
+     ],
+     "bin_share_of_4pi": 0.002098702761284821,
+     "first_hit_fraction": {
+      "NO_HIT": 0.9432386424087669,
+      "nozzle_struts": 0.029949994680285138,
+      "coil_struts_and_ties": 0.01345887860410682,
+      "wing": 0.012022555591020322,
+      "other:Cryo": 0.001329928715820832
+     },
+     "mean_hit_distance_m": {
+      "wing": 75.81193307859708,
+      "nozzle_struts": 57.24235421514427,
+      "coil_struts_and_ties": 63.56521134508457,
+      "other:Cryo": 57.69406463623047
+     },
+     "top_objects": [
+      "V4_PP_Wing_S_Spar_Aft_GRADED",
+      "V4_PP_Wing_P_Spar_Aft_GRADED",
+      "V4_ES_Nozzle_Strut_Loop_1_2",
+      "V4_ES_Nozzle_Strut_Loop_1_4",
+      "V4_ES_Nozzle_Strut_Loop_1_3",
+      "V4_ES_Nozzle_Strut_Loop_1_0"
+     ]
+    },
+    {
+     "polar_deg": [
+      29.0,
+      29.5
+     ],
+     "bin_share_of_4pi": 0.0021320055997480214,
+     "first_hit_fraction": {
+      "NO_HIT": 0.9438625890238793,
+      "nozzle_struts": 0.029796816087138668,
+      "coil_struts_and_ties": 0.013353581901969,
+      "wing": 0.011677838290741517,
+      "other:Cryo": 0.0013091746962714706
+     },
+     "mean_hit_distance_m": {
+      "nozzle_struts": 57.197107941907404,
+      "coil_struts_and_ties": 63.554059690587664,
+      "wing": 76.08318688089003,
+      "other:Cryo": 57.658492736816406
+     },
+     "top_objects": [
+      "V4_ES_Nozzle_Strut_Loop_1_2",
+      "V4_PP_Wing_P_Spar_Aft_GRADED",
+      "V4_ES_Nozzle_Strut_Loop_1_4",
+      "V4_PP_Wing_S_Spar_Aft_GRADED",
+      "V4_ES_Nozzle_Strut_Loop_1_1",
+      "V4_ES_Nozzle_Strut_Loop_1_3"
+     ]
+    },
+    {
+     "polar_deg": [
+      29.5,
+      30.0
+     ],
+     "bin_share_of_4pi": 0.0021651460777304954,
+     "first_hit_fraction": {
+      "NO_HIT": 0.9451348424689321,
+      "nozzle_struts": 0.02918578868663951,
+      "coil_struts_and_ties": 0.013045944412932501,
+      "wing": 0.011344299489506523,
+      "other:Cryo": 0.0012891249419893776
+     },
+     "mean_hit_distance_m": {
+      "nozzle_struts": 57.17087759146,
+      "wing": 76.46259945956143,
+      "coil_struts_and_ties": 63.55018731822138,
+      "other:Cryo": 57.62655151367188
+     },
+     "top_objects": [
+      "V4_ES_Nozzle_Strut_Loop_1_4",
+      "V4_PP_Wing_P_Spar_Aft_GRADED",
+      "V4_ES_Nozzle_Strut_Loop_1_5",
+      "V4_PP_Wing_S_Spar_Aft_GRADED",
+      "V4_ES_Nozzle_Strut_Loop_1_2",
+      "V4_ES_Nozzle_Strut_Loop_1_0"
+     ]
+    }
+   ],
+   "use": "multiply first_hit_fraction x bin_share_of_4pi x (escaping energy per unit solid angle in that bin x 4 pi) to get the energy on each part"
+  },
   "n_rays_full_sphere": 2000000,
   "rays_cast": 1600000,
   "objects_in_bvh": 1470,
@@ -1302,6 +2902,7 @@
   "scope": "V4 chosen assembly (ASM_V4), T05 hardware objects only; canon ship parts not included; first hit per ray from the burn point"
  },
  "raycast_rev3_chosen": {
+  "axis_kernel": null,
   "n_rays_full_sphere": 2000000,
   "rays_cast": 1600000,
   "objects_in_bvh": 866,

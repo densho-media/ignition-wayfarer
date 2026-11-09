@@ -85,3 +85,13 @@ takes under 1 s per generation). The review file is a product of the commit plus
   New scenes `COIL_ASSEMBLY_SECTION`, `LAUNCHER_R4_COMPARE`, `REV3_VS_REV4`.
 - Checks: `checks.json` `rev4` (dimensions, geometry hash, trace tags), `rev4_launcher` (BVH overlap of B-ray and B-modified against
   the drawn V4 hardware, hardware inside the 6° axis channel), `rev4_raycast`.
+
+## Feasibility gate (2026-11-09)
+
+- Inputs: `t00_gate_handoff.json` (copy of 9rsgog `43fac75` studies/gate/results/t05_handoff_gate.json). When present,
+  `build_vertex.py` draws `GATE_A1_TILTED`, `GATE_A1_KEEPOUT`, `GATE_REJECTED`, `GATE_COUPLED_GHOST`, scenes `GATE_COMPARE` and
+  `GATE_COUPLED`, and cameras CAM_VTX_47-50; the Rev 4 assembly is unchanged.
+- `--kernel-rays N` (default 600,000) writes `axis_kernel.json` (first hit by polar angle, 0.5° bins to 30°). `--gate-rays N`
+  (default 4,000) sweeps the A1 leak cone over tilt azimuth and writes `checks.json` `gate_A1`.
+- `python3 work/vertex-blender/fe_s5n.py` (numpy, scipy) writes `fe_s5n.json`: frame FE of S5N, V4 full/dry, coupled mass,
+  sensitivity cases. Report: `GATE_REPORT.md`; register rows in `ISSUES.md` "Feasibility gate register".

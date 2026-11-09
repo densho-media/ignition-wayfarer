@@ -31,7 +31,7 @@ a.add_argument('--out', type=Path, default=HERE/'REVIEW_VERTEX_BLENDER.blend')
 a.add_argument('--render', type=Path); a.add_argument('--cams', nargs='+'); a.add_argument('--size', type=int, nargs=2, default=(2560, 1440))
 a.add_argument('--ship-cache', default='/tmp/wayfarer_vertex_ship_local.blend')
 a.add_argument('--no-save', action='store_true'); a.add_argument('--no-ship', action='store_true')
-a.add_argument('--rays', type=int, default=2000000); a.add_argument('--kernel-rays', type=int, default=600000)
+a.add_argument('--rays', type=int, default=2000000); a.add_argument('--kernel-rays', type=int, default=600000); a.add_argument('--gate-rays', type=int, default=4000)
 a = a.parse_args(sys.argv[sys.argv.index('--')+1:] if '--' in sys.argv else [])
 REV2 = json.loads((Path(__file__).resolve().parent/'rev2.json').read_text())     # python3 work/vertex-blender/rev2.py writes it
 CANON2 = REV2['canon']
@@ -232,6 +232,33 @@ def tag(ob, gen, status, vtx, source, rep='HARDWARE', note=None, **extra):
     PART_LOG.append((gen, status, ob.name, vtx, source, note or ''))
 
 
+def _basis(ax):
+    ax = Vector(ax).normalized(); h = Vector((1, 0, 0)) if abs(ax.x) < 0.9 else Vector((0, 1, 0))
+    u = ax.cross(h).normalized(); w = ax.cross(u).normalized()
+    return ax, u, w
+
+
+def gtorus_mesh(c, ax, R, a, n=96, m=12):
+    """torus about an arbitrary axis (feasibility-gate tilted coils)"""
+    ax, u, w = _basis(ax); c = Vector(c); vs, fs = [], []
+    for i in range(n):
+        t = 2*math.pi*i/n; d = u*math.cos(t)+w*math.sin(t); rc = c+d*R
+        for j in range(m):
+            s_ = 2*math.pi*j/m; vs.append(tuple(rc+(d*math.cos(s_)+ax*math.sin(s_))*a))
+    for i in range(n):
+        for j in range(m):
+            fs.append([i*m+j, ((i+1) % n)*m+j, ((i+1) % n)*m+(j+1) % m, i*m+(j+1) % m])
+    return vs, fs
+
+
+def gcone_mesh(apex, ax, length, half_deg, n=48):
+    """open-ended solid cone from an apex along ax (leak cone keep-outs)"""
+    ax, u, w = _basis(ax); A = Vector(apex); rb = length*math.tan(math.radians(half_deg)); base = A+ax*length
+    vs = [tuple(A), tuple(base)]+[tuple(base+(u*math.cos(2*math.pi*i/n)+w*math.sin(2*math.pi*i/n))*rb) for i in range(n)]
+    fs = [[0, 2+i, 2+(i+1) % n] for i in range(n)]+[[1, 2+(i+1) % n, 2+i] for i in range(n)]
+    return vs, fs
+
+
 def make(name, shape, coll, func, gen, status, vtx, source, rep='HARDWARE', note=None, alpha=None, wire=False, cut=None, trace=None, **kw):
     """One object: name gets '<gen>_<ES|PP|PR|CI>_' so the status reads in the outliner."""
     full = f"{gen}_{CODE[status]}_{name}"
@@ -271,6 +298,10 @@ def make(name, shape, coll, func, gen, status, vtx, source, rep='HARDWARE', note
         vs, fs = panel_mesh(kw['corners'], kw['thickness'])
     elif shape == 'capsule':
         vs, fs = capsule_mesh(kw)
+    elif shape == 'gtorus':
+        vs, fs = gtorus_mesh(kw['centre'], kw['axis'], kw['R'], kw['a'])
+    elif shape == 'gcone':
+        vs, fs = gcone_mesh(kw['apex'], kw['axis'], kw['length'], kw['half_deg'])
     else:
         raise ValueError(shape)
     if not fs:
@@ -1557,6 +1588,131 @@ def build_ghost_coupled(gen, coll):
          trace=tr4('T05-ISS-024', 'rev4.json ghost_coupled', 'VTX-04'), x0=x0, x1=x0+L, r0=33.9, r1=34.2)
 
 
+# ----------------------------------------------------------------------------------------------------------------------------------
+# Feasibility gate (T00 9rsgog 43fac75 studies/gate/results/t05_handoff_gate.json, copy t00_gate_handoff.json): lane A1 (tilted closure,
+# RETAINED, analytically promising only), rejected lanes E / A2 / S, the 117 kt coupled ghost. Drawn at tilt-plane azimuth 0 (nozzle +x =
+# ship +Y); the azimuth sweep later rotates the lane to the chosen window.
+# ----------------------------------------------------------------------------------------------------------------------------------
+GATE = json.loads((HERE/'t00_gate_handoff.json').read_text()) if (HERE/'t00_gate_handoff.json').exists() else None
+SRC_G = 'T00 9rsgog 43fac75 studies/gate/results/t05_handoff_gate.json'
+
+
+def nzp(v, xB):                                       # nozzle frame point -> ship frame at tilt azimuth 0
+    return (xB+v[2], v[0], v[1])
+
+
+def nzd(v):
+    return (v[2], v[0], v[1])
+
+
+def ray_dir_nz(polar, az):
+    p, a_ = math.radians(polar), math.radians(az)
+    return (math.sin(p)*math.cos(a_), math.sin(p)*math.sin(a_), math.cos(p))
+
+
+def build_gate_a1(gen, e, coll, ghost_coll):
+    A = GATE['lanes']['A1_tilted_closure_RETAINED']; xB = e['x_burn_m']; L = A['leak_cone']
+    T = lambda p: tr4('T05-ISS-025', f't00_gate_handoff.json lanes.A1_tilted_closure_RETAINED.{p}', 'VTX-03D')
+    st = 'CONCEPTUAL_ILLUSTRATION'
+    hw = {'C1': CA4['coils']['C1']['builds']['R4_T00_SHADOWED']['projected_half_width_m'], 'C2': CA4['coils']['C2']['builds']['R4_T00_SHADOWED']['projected_half_width_m']}
+    wind = {'C1': CA4['coils']['C1']['builds']['R4_T00_SHADOWED']['profile']['winding_minor_m'], 'C2': CA4['coils']['C2']['builds']['R4_T00_SHADOWED']['profile']['winding_minor_m']}
+    loops = {}
+    for lp in A['loops']:
+        nm = lp['name'].split('@')[0]; c = nzp(lp['centre_m'], xB); ax = nzd(lp['axis']); loops[nm] = (c, ax, lp['radius_m'])
+        if nm in ('C1', 'C2'):
+            make(f'GA1_{nm}_Tilted_Assembly_Envelope', 'gtorus', coll, 'SHIELD', gen, st, 'VTX-03D', SRC_G, alpha=0.8,
+                 note=f"A1 (ANALYTICALLY PROMISING, not a demonstrated plasma solution): {nm} tilted {A['tilt_C1_C2_deg']:.0f} deg as a rigid pair; "
+                      f"T00 shadowed assembly half-width {hw[nm]:.2f} m; {lp['current_MA']:.0f} MA", trace=T('loops'), centre=c, axis=ax, R=lp['radius_m'], a=hw[nm])
+            make(f'GA1_{nm}_Tilted_Winding', 'gtorus', coll, 'MAIN_PROPULSION', gen, st, 'VTX-03D', SRC_G,
+                 note=f'{nm} winding r {wind[nm]:.2f} m (tilted)', trace=T('loops'), centre=c, axis=ax, R=lp['radius_m'], a=wind[nm])
+        else:
+            make(f'GA1_{nm}_Turned_Loop_Ghost', 'gtorus', coll, 'MAIN_PROPULSION', gen, st, 'VTX-03D', SRC_G, rep='VISUALIZATION', alpha=0.35, wire=True,
+                 note=f"{nm} with the whole nozzle turned {A['nozzle_turn_deg']:.2f} deg (ghost; the untilted FDP-1 loop stays drawn for reference)",
+                 trace=T('nozzle_turn_deg'), centre=c, axis=ax, R=lp['radius_m'], a=0.72)
+    # C1 struts to the reaction ring (ring stays on the ship axis inside the shield shadow) and C2 -> C1 ties, at nozzle azimuths 30 + 60 k
+    xr, ring_r, a_ring, _, _ = r4_supports(e, 'R4_T00_SHADOWED')
+    c1, ax1, R1 = loops['C1']; c2, ax2, R2 = loops['C2']
+    a1, u1, w1 = _basis(ax1); a2, u2, w2 = _basis(ax2)
+    def on(c, u, w, R, t, inset=0.0):
+        d = u*math.cos(t)+w*math.sin(t); return tuple(Vector(c)+d*(R-inset))
+
+    def t_at_az(c, u, w, R, az):                        # loop parameter whose point lies at ship azimuth az (tilt plane = az 0 here)
+        return min((2*math.pi*i/720 for i in range(720)),
+                   key=lambda t: abs(((math.degrees(math.atan2(on(c, u, w, R, t)[2], on(c, u, w, R, t)[1]))-az)+180) % 360-180))
+
+    def behind(p, q, dist):                              # shift a line away from the burn point, into the member's own shadow
+        mx, my, mz = [(a_+b_)/2 for a_, b_ in zip(p, q)]; v = Vector((mx-xB, my, mz)).normalized(); dd = (Vector(q)-Vector(p)).normalized()
+        wv = (v-dd*v.dot(dd)).normalized(); return [tuple(Vector(pt)+wv*dist) for pt in (p, q)]
+    sw = CA4['coils']['C1']['builds']['R4_T00_SHADOWED']['struts']['width_m']/2; tw = CA4['coils']['C2']['builds']['R4_T00_SHADOWED']['struts']['width_m']/2
+    LP = {l_['leg']: l_ for l_ in CP4['cases']['LI_LOOP_HX:R4_T00_SHADOWED']['lines']}
+    struts = []
+    for k in range(6):
+        az = 30.0+60.0*k                                  # struts between the leak (tilt plane, az 0) and the FDP-1 loop-1 struts (0 + 60 k)
+        t1 = t_at_az(c1, u1, w1, R1, az); t2 = t_at_az(c2, u2, w2, R2, az)
+        p = on(c1, u1, w1, R1, t1, hw['C1']*0.7); q = pol(xr, ring_r, az)
+        make(f'GA1_C1_Strut_{k+1}', 'tube', coll, 'STRUCTURE', gen, st, 'VTX-02D', SRC_G, note='C1 strut re-landed on the reaction ring for the tilted pair, 30 deg off the leak plane (UNSIZED for the tilt moment)',
+             trace=T('loops'), points=[p, q], radius=sw)
+        p2 = on(c2, u2, w2, R2, t2, hw['C2']*0.7); p1 = on(c1, u1, w1, R1, t1, -hw['C1']*0.7)
+        make(f'GA1_C2_Tie_{k+1}', 'tube', coll, 'STRUCTURE', gen, st, 'VTX-02D', SRC_G, note='C2 -> C1 tie (tilted pair)', trace=T('loops'), points=[p2, p1], radius=tw)
+        for side, extra in (('Supply', 0.0), ('Return', 1.0)):          # Li pair in tandem in each member's shadow (as Rev 4)
+            l1 = LP['C1_to_ring']['line_r_m']; l2 = LP['C2_to_C1']['line_r_m']
+            a_, b_ = behind(p, q, sw+l1+0.05+extra*(2*l1+0.05))
+            make(f'GA1_Plant_C1_{side}_{k+1}', 'tube', coll, 'HOT_RADIATOR', gen, st, 'VTX-03D', SRC_G, note=f'Li {side.lower()} r {l1:.2f} m behind tilted C1 strut {k+1}',
+                 trace=T('loops'), points=[a_, b_], radius=l1)
+            a_, b_ = behind(p2, p1, tw+l2+0.05+extra*(2*l2+0.05))
+            make(f'GA1_Plant_C2_{side}_{k+1}', 'tube', coll, 'HOT_RADIATOR', gen, st, 'VTX-03D', SRC_G, note=f'Li {side.lower()} r {l2:.2f} m behind C2 tie {k+1}',
+                 trace=T('loops'), points=[a_, b_], radius=l2)
+        struts.append((p, q))
+    cd = nzd(ray_dir_nz(L['centre_polar_deg'], 0.0))
+    make('GA1_KEEP_OUT_Leak_Cone', 'gcone', ghost_coll, 'VIS_CONFLICT', gen, st, 'VTX-06A', SRC_G, rep='VISUALIZATION', alpha=0.3,
+         note=f"A1 leak cone: centre polar {L['centre_polar_deg']:.1f} deg in the tilt plane, radius {L['radius_deg']:.1f} deg, {L['GW']:.1f} GW "
+              f"({L['fluence_J_cm2_at_d']['65']:.0f} J/cm2 per pulse at 65 m, {L['fluence_J_cm2_at_d']['400']:.0f} at 400 m)", trace=T('leak_cone'),
+         apex=(xB, 0, 0), axis=cd, length=700.0, half_deg=L['radius_deg'])
+    tax = nzd((math.sin(math.radians(A['nozzle_turn_deg'])), 0.0, math.cos(math.radians(A['nozzle_turn_deg']))))
+    make('GA1_Turned_Nozzle_Axis', 'tube', ghost_coll, 'VIS_SAFE', gen, st, 'VTX-03D', SRC_G, rep='VISUALIZATION', alpha=0.9,
+         note=f"turned nozzle axis {A['nozzle_turn_deg']:.2f} deg from the ship axis (thrust line {abs(A['nozzle_turn_deg']):.1f} deg off: cosine loss "
+              f"{(1-math.cos(math.radians(A['nozzle_turn_deg'])))*100:.2f} % and a torque the burn must trim)", trace=T('nozzle_turn_deg'),
+         points=[(xB-200*tax[0], -200*tax[1], -200*tax[2]), (xB, 0, 0)], radius=0.3)
+    return struts
+
+
+def build_gate_rejected(gen, e, coll):
+    xB = e['x_burn_m']; G = GATE['lanes']; st = 'CONCEPTUAL_ILLUSTRATION'
+    E = G['E_shadow_coil_REJECTED']['rows'][-1]; A2 = G['A2_transverse_plug_REJECTED']['rows'][-1]
+    make('GRJ_E_Shadow_Coil_REJECTED', 'torus', coll, 'VIS_CONFLICT', gen, st, 'VTX-03D', SRC_G, rep='VISUALIZATION', alpha=0.8,
+         note=f"REJECTED E: axisymmetric coil behind the shield narrows the channel, does not remove it ({E['current_MA']:.0f} MA: leak {E['leak_half_angle_deg']:.2f} deg, "
+              f"{E['leak_W']/1e9:.1f} GW; hoop {E['hoop_tension_MN']:,.0f} MN)", trace=tr4('T05-ISS-025', 'lanes.E_shadow_coil_REJECTED', 'VTX-03D'),
+         x=xB+E['coil_z_m'], R=E['coil_radius_m'], a=0.6)
+    make('GRJ_A2_Transverse_Plug_REJECTED', 'gtorus', coll, 'VIS_CONFLICT', gen, st, 'VTX-03D', SRC_G, rep='VISUALIZATION', alpha=0.8,
+         note=f"REJECTED A2: coil with its axis across the nozzle axis; static torque {A2['static_torque_MN_m']:,.0f} MN m at {A2['current_MA']:.0f} MA",
+         trace=tr4('T05-ISS-025', 'lanes.A2_transverse_plug_REJECTED', 'VTX-03D'), centre=(xB+A2['centre_z_m'], 0, 0), axis=(0, 1, 0), R=A2['coil_radius_m'], a=0.5)
+    make('GRJ_S_Centre_Insert_REJECTED', 'ring', coll, 'VIS_CONFLICT', gen, st, 'VTX-06A', SRC_G, rep='VISUALIZATION', alpha=0.9,
+         note=f"REJECTED S: sacrificial or renewable shield-centre insert needs a {G['S_centre_insert_REJECTED']['reduction_needed_x']:.0f}x fluence reduction",
+         trace=tr4('T05-ISS-025', 'lanes.S_centre_insert_REJECTED', 'VTX-06A'), x0=e['x_shield_aft_m']-0.4, x1=e['x_shield_aft_m']-0.05, r0=0.0,
+         r1=(e['x_shield_aft_m']-xB)*math.tan(math.radians(GATE['axis_channel']['half_angle_deg'])))
+
+
+def build_gate_coupled_ghost(gen, e, coll):
+    C = GATE['coupled_ship']; S = C['summary']; sp = C['spine']; sh = sp['shield']; lau = C['launcher']; xB = e['x_burn_m']; x0 = ST3['x_m'][0]
+    T = lambda p: tr4('T05-ISS-024', f't00_gate_handoff.json coupled_ship.{p}', 'VTX-04'); st = 'CONCEPTUAL_ILLUSTRATION'
+    head = (f"COUPLED RESEARCH GHOST (T00, converged on a relaxed free-free 0.2 Hz spine; the T05 cantilever basis does not converge): {S['departure_t']/1e3:.0f} kt, "
+            f"{S['propellant_t']/1e3:.0f} kt propellant, {S['pellet_rate_Hz']:.0f} Hz, {S['fusion_TW']:.0f} TW, wing tip {S['wing_tip_radius_m']/1e3:.1f} km")
+    make('GHG_Wide_Tank_Farm_Envelope', 'ring', coll, 'VIS_CONFLICT', gen, st, 'VTX-04', SRC_G, rep='VISUALIZATION', alpha=0.1, note=head, trace=T('spine'),
+         x0=x0, x1=x0+sp['length_m'], r0=sh['farm_radius_m']-0.3, r1=sh['farm_radius_m'])
+    make('GHG_N9_Longeron_Ring', 'torus', coll, 'VIS_CONFLICT', gen, st, 'VTX-04', SRC_G, rep='VISUALIZATION', alpha=0.4,
+         note=f"N9 longeron ring r {sp['longeron_ring_m']:.1f} m, tube r {sp['tube_r_m']:.2f} m, +{sp['added_t']:.0f} t", trace=T('spine'), x=x0+sp['length_m']/2, R=sp['longeron_ring_m'], a=0.6)
+    make('GHG_Shield_r11', 'ring', coll, 'VIS_CONFLICT', gen, st, 'VTX-06A', SRC_G, rep='VISUALIZATION', alpha=0.3,
+         note=f"shield grown to r {sh['shield_radius_m']:.1f} m for a {sh['needed_half_angle_deg']:.1f} deg shadow (+{sh['added_kg']/1e3:,.0f} t); this puts the A1 leak back on the rim",
+         trace=T('spine.shield'), x0=e['x_shield_aft_m'], x1=e['x_shield_fwd_m'], r0=0.0, r1=sh['shield_radius_m'])
+    make('GHG_Shadow_Cone_9p4deg', 'frustum', coll, 'VIS_SAFE', gen, st, 'VTX-06A', SRC_G, rep='VISUALIZATION', alpha=0.08,
+         note=f"shadow cone {sh['needed_half_angle_deg']:.1f} deg (V4 {sh['fdp1_half_angle_deg']:.1f} deg)", trace=T('spine.shield'),
+         x0=xB+0.5, r0=0.05, x1=x0+sp['length_m'], r1=(x0+sp['length_m']-xB)*math.tan(math.radians(sh['needed_half_angle_deg'])))
+    br = LR4['B_ray']
+    make('GHG_FAILED_B_Ray_At_459Hz', 'tube', coll, 'VIS_CONFLICT', gen, st, 'VTX-01H', SRC_G, rep='VISUALIZATION', alpha=0.5,
+         note=f"FAILED at the coupled rate: B-ray needs {lau['muzzle_m_s']/1e3:.1f} km/s and a {lau['accelerator_m']:,.0f} m barrel ({lau['electric_W']/1e9:.1f} GWe) at {lau['rate_Hz']:.0f} Hz",
+         trace=T('launcher'), points=[ray_pt(e, lau['tip_m']+lau['accelerator_m'], br['polar_deg'], br['az_deg']), ray_pt(e, lau['tip_m'], br['polar_deg'], br['az_deg'])], radius=0.5)
+
+
 bpy.ops.wm.read_factory_settings(use_empty=True)
 for nm in list(bpy.data.scenes):
     pass
@@ -1564,7 +1720,7 @@ main = bpy.context.scene; main.name = 'VERTEX_V4'
 SC = {'VERTEX_V4': main}
 for nm in ('CANON_WAYFARER', 'VERTEX_V0', 'COMPARE_SIDE_BY_SIDE', 'COMPARE_TOP', 'COMPARE_SPAN', 'VERTEX_CUTAWAY', 'BRAKING_EXPOSURE',
            'RADIATOR_ALTERNATIVES', 'LAUNCHER_COMPARE', 'THERMAL_COMPARE', 'COIL_COMPARE', 'SKIRT_COMPARE', 'OPTIONS_LIBRARY',
-           'STRUCTURE_COMPARE', 'STRUCTURE_SECTION', 'COIL_ASSEMBLY_SECTION', 'LAUNCHER_R4_COMPARE', 'REV3_VS_REV4'):
+           'STRUCTURE_COMPARE', 'STRUCTURE_SECTION', 'COIL_ASSEMBLY_SECTION', 'LAUNCHER_R4_COMPARE', 'REV3_VS_REV4', 'GATE_COMPARE', 'GATE_COUPLED'):
     SC[nm] = bpy.data.scenes.new(nm)
 
 LIB = new_coll('VERTEX_LIBRARY', main.collection)          # every built collection hangs here once; scenes link what they show
@@ -1646,6 +1802,10 @@ for g in GENS:
         build_launcher_bmod(g, R, e, opt_coll(g, 'LAUNCH_BMOD'))
         build_launcher_bray(g, R, e, opt_coll(g, 'LAUNCH_BRAY'))
         build_ghost_coupled(g, opt_coll(g, 'GHOST_COUPLED'))
+        if GATE:
+            GA1_STRUTS = build_gate_a1(g, e, opt_coll(g, 'GATE_A1_TILTED', 'COLOR_04'), opt_coll(g, 'GATE_A1_KEEPOUT'))
+            build_gate_rejected(g, e, opt_coll(g, 'GATE_REJECTED'))
+            build_gate_coupled_ghost(g, e, opt_coll(g, 'GATE_COUPLED_GHOST'))
         build_access_r4(g, opt_coll(g, 'ACCESS_R4', 'COLOR_04'))
         chosen = ['LAUNCH_B', 'LAUNCH_BMOD', 'AXIS_KEEPOUT', 'WINGS_PREF', 'COIL_ASM_T00', 'COIL_PLANT_LI', 'COIL_SUP_R4', 'DUST_GUARDS_R4', 'STRUCT_S5N', 'CORR_K2', 'ACCESS_R4', 'DOCK_ROUTES']
         chosen_sk = 'B2_DOCK_CLEAR'
@@ -1825,6 +1985,123 @@ build_coil_assembly('R4_NOMINAL', 'V4', e4, ccolls['03'], cut=(200.0, 340.0), de
 build_overlays('V4', R4, e4, ccolls['01'])
 link(SC['VERTEX_CUTAWAY'], CUT)
 
+# ---- Feasibility gate A1: leak-cone sweep over the tilt-plane azimuth against the FULL drawn ship (canon working copy included) ----
+GATE_PHI = 0.0
+if GATE and 'V4' in OPT:
+    from mathutils.bvhtree import BVHTree
+    _A = GATE['lanes']['A1_tilted_closure_RETAINED']; _L = _A['leak_cone']; _xB = e4['x_burn_m']; O4g = OPT['V4']
+    _moved = {o.name for k in ('COIL_ASM_T00', 'COIL_SUP_R4', 'COIL_PLANT_LI', 'AXIS_KEEPOUT') for o in O4g[k].all_objects}
+    _skip = ('Shadow_Cone', 'KeepOut', 'Keep_Out', 'KEEP_OUT', '_Path', 'Ignition_Point', 'Plasma', 'Exhaust', 'Line_Of_Sight', 'Plume', 'Dust_Streak')
+
+    def _static_ok(o):
+        if o.type != 'MESH' or o.name in _moved or any(k in o.name for k in _skip) or o.hide_render:
+            return False
+        if o.get('wf_owner') == 'wayfarer.t05':
+            if str(o.get('function', '')).upper().startswith('VIS') or o.get('evidence_status') == 'CONCEPTUAL_ILLUSTRATION' or o.get('representation') != 'HARDWARE':
+                return False
+            n_ = o.name.split('_', 2)[2] if o.name.count('_') >= 2 else o.name
+            if n_.startswith(('Loop_', 'Closure_C', 'Hot_Line_Loop', 'Cryo_Line_Loop')):
+                return False                                  # the FDP-1 loops and closure coils move with the nozzle in A1
+        return True
+
+    def _bvh_of(objs):
+        vs, ps, ow = [], [], []
+        for o in objs:
+            mw = o.matrix_world; b0 = len(vs)
+            vs.extend(mw @ v.co for v in o.data.vertices)
+            for p_ in o.data.polygons:
+                ps.append([b0+i for i in p_.vertices]); ow.append(o.name)
+        return BVHTree.FromPolygons(vs, ps, all_triangles=False), ow
+    _stat = [o for o in ASM['V4'].all_objects if _static_ok(o)]
+    _noz = [o for o in O4g['GATE_A1_TILTED'].all_objects if o.type == 'MESH' and not o.name.endswith('_Ghost') or 'Turned_Loop' in o.name]
+    _bs, _os = _bvh_of(_stat); _bn, _on = _bvh_of(_noz)
+    # rays uniform over the leak cone (spherical cap about its centre), in the nozzle frame mapped to ship axes at tilt azimuth 0
+    _c = Vector(nzd(ray_dir_nz(_L['centre_polar_deg'], 0.0))).normalized(); _, _u, _w = _basis(_c)
+    _N = int(a.gate_rays); _cr = math.cos(math.radians(_L['radius_deg'])); _ga = math.pi*(3.0-math.sqrt(5.0)); _rays = []
+    for i in range(_N):
+        ct = 1.0-(1.0-_cr)*(i+0.5)/_N; st_ = math.sqrt(max(0.0, 1-ct*ct)); ps_ = _ga*i
+        _rays.append((_c*ct+(_u*math.cos(ps_)+_w*math.sin(ps_))*st_).normalized())
+    _org = Vector((_xB, 0.0, 0.0)); _noz_hit = []
+    for d in _rays:
+        loc, nrm, idx, dist = _bn.ray_cast(_org, d, 5000.0); _noz_hit.append((dist, _on[idx]) if idx is not None else None)
+    _sweep = []
+    for k in range(72):
+        ph = math.radians(5.0*k); cph, sph = math.cos(ph), math.sin(ph); cnt = {}
+        for d, nh in zip(_rays, _noz_hit):
+            dd = Vector((d.x, d.y*cph-d.z*sph, d.y*sph+d.z*cph))
+            loc, nrm, idx, dist = _bs.ray_cast(_org, dd, 5000.0)
+            best = None
+            if idx is not None:
+                best = (dist, _os[idx])
+            if nh and (best is None or nh[0] < best[0]):
+                best = nh
+            if best:
+                cnt[best[1]] = cnt.get(best[1], 0)+1
+        frac = sum(cnt.values())/_N
+        _sweep.append({'tilt_azimuth_deg': 5.0*k, 'hit_fraction': frac, 'GW_on_hardware': frac*_L['GW'],
+                       'parts': [{'object': o_, 'fraction': v/_N, 'GW': v/_N*_L['GW']} for o_, v in sorted(cnt.items(), key=lambda kv: -kv[1])[:8]]})
+    _clear = [s_['tilt_azimuth_deg'] for s_ in _sweep if s_['hit_fraction'] < 1e-3]
+    runs, cur = [], []
+    for s_ in _sweep+_sweep:                                     # circular runs of clear azimuths
+        if s_['hit_fraction'] < 1e-3:
+            cur.append(s_['tilt_azimuth_deg'])
+        else:
+            if cur:
+                runs.append(cur)
+            cur = []
+    runs = [r_ for r_ in runs if len(r_) < 72] or ([cur] if cur else [])
+    if runs:
+        best_run = max(runs, key=len); GATE_PHI = best_run[len(best_run)//2] % 360.0
+    else:
+        best_run = []; GATE_PHI = min(_sweep, key=lambda s_: s_['hit_fraction'])['tilt_azimuth_deg']
+    # rotate the A1 lane to the chosen azimuth (mesh data, so hashes and the saved file carry it)
+    cph, sph = math.cos(math.radians(GATE_PHI)), math.sin(math.radians(GATE_PHI))
+    for o in list(O4g['GATE_A1_TILTED'].all_objects)+list(O4g['GATE_A1_KEEPOUT'].all_objects):
+        if o.type == 'MESH':
+            for v in o.data.vertices:
+                y_, z_ = v.co.y, v.co.z; v.co.y = y_*cph-z_*sph; v.co.z = y_*sph+z_*cph
+            o.data.update()
+    # tilted C1 envelope against the shield rim, loop-1 strut feet and beam ports; minimum polar angle of its conductor and envelope
+    _c1e = next(o for o in O4g['GATE_A1_TILTED'].objects if o.name.endswith('GA1_C1_Tilted_Assembly_Envelope'))
+    _c1w = next(o for o in O4g['GATE_A1_TILTED'].objects if o.name.endswith('GA1_C1_Tilted_Winding'))
+    def _minpol(o):
+        return min(math.degrees(math.atan2(math.hypot(v.co.y, v.co.z), v.co.x-_xB)) for v in o.data.vertices if v.co.x > _xB)
+    _near = [o for o in _stat if o.get('wf_owner') == 'wayfarer.t05' and any(k in o.name for k in ('Shield', 'Nozzle_Strut_Loop_1', 'Beam_Port', 'Tracker', 'Crawler', 'Reaction'))]
+    from mathutils.bvhtree import BVHTree as _B
+    _be = _bvh_of([_c1e])[0]; _clash = []
+    for o in _near:
+        if _be.overlap(_bvh_of([o])[0]):
+            _clash.append(o.name)
+    _ga1hw = [o for o in O4g['GATE_A1_TILTED'].all_objects if o.type == 'MESH' and 'Ghost' not in o.name]
+    _ga1_clash = []
+    for o in _ga1hw:
+        bo = _bvh_of([o])[0]; bb = [o.matrix_world @ Vector(c_) for c_ in o.bound_box]
+        lo = [min(v[i] for v in bb) for i in range(3)]; hi = [max(v[i] for v in bb) for i in range(3)]
+        for q in _stat:
+            qb = [q.matrix_world @ Vector(c_) for c_ in q.bound_box]
+            if any(max(v[i] for v in qb) < lo[i] or min(v[i] for v in qb) > hi[i] for i in range(3)):
+                continue
+            if bo.overlap(_bvh_of([q])[0]):
+                _ga1_clash.append([o.name, q.name])
+    _sr = (e4['x_shield_aft_m']-_xB)
+    CHECKS['gate_A1'] = {
+        'source': SRC_G, 'rays_in_leak_cone': _N, 'static_objects': len(_stat), 'nozzle_objects': len(_noz),
+        'scope': 'full drawn V4 chosen ship incl. the canon working copy; Rev 4 coils, supports, Li plant and the FDP-1 loops replaced by the A1 tilted pair and turned loops; '
+                 'FDP-1 nozzle struts and loop lines kept where drawn (their re-landing for the 2.7 deg turn is not drawn)',
+        'clear_azimuths_deg': _clear, 'chosen_tilt_azimuth_deg': GATE_PHI, 'chosen_window_deg': [best_run[0] % 360, best_run[-1] % 360] if best_run else None,
+        'sweep': _sweep,
+        'C1_winding_min_polar_deg': _minpol(_c1w), 'C1_envelope_min_polar_deg': _minpol(_c1e), 'shield_rim_polar_deg': math.degrees(math.atan2(e4['shield_r_hw_m'], _sr)),
+        'C1_envelope_overlaps': _clash, 'A1_hardware_overlaps_static': _ga1_clash,
+    }
+    print('WF_GATE_A1', 'clear', len(_clear), 'chosen', GATE_PHI, 'C1 env min polar %.2f' % CHECKS['gate_A1']['C1_envelope_min_polar_deg'], 'clash', _clash[:6], 'A1 overlaps', _ga1_clash[:12], flush=True)
+    # assembly: the V4 chosen set with the Rev 4 coils swapped for the A1 lane
+    ASM['V4_GATE_A1'] = bpy.data.collections.new('ASM_V4_GATE_A1')
+    for c in ([ships['V4']] if 'V4' in ships else [])+[VAR['V4']]+[O4g[k] for k in CHECKS['assemblies']['V4']['options'] if k in O4g and k not in
+                                                                    ('COIL_ASM_T00', 'COIL_SUP_R4', 'COIL_PLANT_LI', 'AXIS_KEEPOUT')]+\
+             [O4g['GATE_A1_TILTED'], O4g['GATE_A1_KEEPOUT'], COLL['V4']['skirts']['B2_DOCK_CLEAR']]:
+        ASM['V4_GATE_A1'].children.link(c)
+
+
 # braking exposure: V4 with skirt A and the dust stream; radiator alternatives: V4 hull + outlines + graded band
 link(SC['BRAKING_EXPOSURE'], ASM['V4']); link(SC['BRAKING_EXPOSURE'], DUST)
 link(SC['RADIATOR_ALTERNATIVES'], ASM['V4']); link(SC['RADIATOR_ALTERNATIVES'], ALT)
@@ -1927,6 +2204,32 @@ text('r34_rev3', "REV 3 CHOSEN: C1/C2 P2 armour envelopes + Rev 2 torus dust bum
 text('r34_rev4', "REV 4 CHOSEN: T00 shadowed C1/C2 (6.1 GW incl. struts) + Li loop in the strut shadows, edge-on cone dust guards, reaction ring in the shield shadow, "
      "S5N 9 nested longerons (2.06 kt, f1 0.2 Hz beam model), B + B-modified overlay, axis KEEP-OUT; ghost = COUPLED APPROXIMATION 68.5 kt / 43.3 kt propellant",
      (-300, 0, -128), SC['REV3_VS_REV4'].collection, size=6.0)
+
+# ---- Feasibility gate scenes: Rev 4 reference vs A1 tilted closure (RETAINED, analytically promising), rejected lanes, coupled ghost ----
+if GATE and 'V4_GATE_A1' in ASM:
+    _G = CHECKS['gate_A1']; _A = GATE['lanes']['A1_tilted_closure_RETAINED']; _AC = GATE['axis_channel']; _CS = GATE['coupled_ship']['summary']
+    inst(SC['GATE_COMPARE'], ASM['V4'], (0, 0, 120.0), 'GC_REV4_REFERENCE')
+    inst(SC['GATE_COMPARE'], O4['AXIS_KEEPOUT'], (0, 0, 120.0), 'GC_REV4_KEEPOUT')
+    inst(SC['GATE_COMPARE'], ASM['V4_GATE_A1'], (0, 0, -120.0), 'GC_A1')
+    inst(SC['GATE_COMPARE'], O4['LANE_CORE_LAUNCH'], (0, 0, -330.0), 'GC_REJ_CORE')
+    inst(SC['GATE_COMPARE'], O4['GATE_REJECTED'], (0, 0, -330.0), 'GC_REJ')
+    inst(SC['GATE_COMPARE'], O4['AXIS_KEEPOUT'], (0, 0, -330.0), 'GC_REJ_KEEPOUT')
+    text('gc_ref', f"REV 4 REFERENCE: axisymmetric closure; field zero on the axis, so a {_AC['half_angle_deg']:.1f} deg channel ({'-'.join(f'{v:.2f}' for v in (_AC['half_angle_deg_band'] if 'half_angle_deg_band' in _AC else _AC['half_angle_band_deg']))} deg band) "
+         f"puts {_AC['centre_fluence_J_cm2_at_shield']:.0f} J/cm2 per pulse on the shield face (red cone = shield angular radius {_AC['shield_angular_radius_deg']:.2f} deg)",
+         (-320, 0, 185), SC['GATE_COMPARE'].collection, size=6.0)
+    text('gc_a1', f"A1 TILTED CLOSURE (T00: RETAINED, ANALYTICALLY PROMISING, not a demonstrated plasma solution): C1+C2 tilted {_A['tilt_C1_C2_deg']:.0f} deg, nozzle turned "
+         f"{_A['nozzle_turn_deg']:.1f} deg; leak {_A['leak_cone']['GW']:.0f} GW in a {_A['leak_cone']['radius_deg']:.1f} deg cone at polar {_A['leak_cone']['centre_polar_deg']:.1f}.\n"
+         f"Tilt plane at az {_G['chosen_tilt_azimuth_deg']:.0f} deg; clear azimuths {len(_G['clear_azimuths_deg'])}/72 (full ship ray cast); C1 envelope min polar {_G['C1_envelope_min_polar_deg']:.2f} deg vs shield rim "
+         f"{_G['shield_rim_polar_deg']:.2f}; works only while the shadow cone stays <= {_A['shadow_cone_limit_deg']} deg.\nCLASH: tilted C1 overlaps {', '.join(n.replace('V4_ES_','') for n in _G['C1_envelope_overlaps']) or 'nothing'} (re-landing needed); thrust line 2.7 deg off axis (torque not booked)", (-320, 0, -50), SC['GATE_COMPARE'].collection, size=6.0)
+    text('gc_rej', "REJECTED (T00): E shadow coil narrows the channel only; A2 transverse plug carries a huge static torque; S centre insert needs a "
+         f"{GATE['lanes']['S_centre_insert_REJECTED']['reduction_needed_x']:.0f}x reduction. B target cap: research only. C twin splayed nozzles: OPEN, not evaluated as a ship",
+         (-320, 0, -290), SC['GATE_COMPARE'].collection, size=6.0)
+    text('gc_title', "VERTEX FEASIBILITY GATE: T00 OVERALL VERDICT BLOCKED (target physics and mass closure). Nothing here is canon.", (-320, 0, 245), SC['GATE_COMPARE'].collection, size=8.0)
+    inst(SC['GATE_COUPLED'], ASM['V4'], (0, 0, 0), 'GCP_V4')
+    inst(SC['GATE_COUPLED'], O4['GATE_COUPLED_GHOST'], (0, 0, 0), 'GCP_GHOST')
+    text('gcp', f"COUPLED RESEARCH GHOST (T00, not a design): {_CS['departure_t']/1e3:.0f} kt at {_CS['pellet_rate_Hz']:.0f} Hz, {_CS['fusion_TW']:.0f} TW, {_CS['propellant_t']/1e3:.0f} kt propellant, "
+         f"wing tip {_CS['wing_tip_radius_m']/1e3:.1f} km; wide farm r 57 m, shield r 11.4 m, 9.4 deg shadow. Converges only on the relaxed free-free spine; "
+         "B-ray FAILS at this rate (1,288 m barrel). V4 (42.9 kt) drawn solid", (-320, 0, 110), SC['GATE_COUPLED'].collection, size=6.0)
 
 # skirts: A full (3 penetrations), B2 dock-clear (preferred), B short, C none; same ship core in each lane
 SKCORE = bpy.data.collections.new('LANE_CORE_SKIRT')
@@ -2064,6 +2367,11 @@ CAMS = {
     'CAM_VTX_43_SNOUT_KEEPOUT': (camera('CAM_VTX_43_SNOUT_KEEPOUT', (-215, -3000, 10), (-215, 0, 10), ortho=110), ['LAUNCHER_R4_COMPARE']),
     'CAM_VTX_44_REV3_VS_REV4': (camera('CAM_VTX_44_REV3_VS_REV4', (80, -4000, -60), (80, 0, -60), ortho=900), ['REV3_VS_REV4']),
     'CAM_VTX_45_REV3_VS_REV4_AFT': (camera('CAM_VTX_45_REV3_VS_REV4_AFT', (-180, -4000, -60), (-180, 0, -60), ortho=260), ['REV3_VS_REV4']),
+    'CAM_VTX_47_GATE_COMPARE': (camera('CAM_VTX_47_GATE_COMPARE', (60, -4000, -40), (60, 0, -40), ortho=1000), ['GATE_COMPARE']),
+    'CAM_VTX_48_GATE_A1_AFT': (camera('CAM_VTX_48_GATE_A1_AFT', (xB-150, -170*math.cos(math.radians(GATE_PHI))+120*math.sin(math.radians(GATE_PHI)), -170*math.sin(math.radians(GATE_PHI))-120*math.cos(math.radians(GATE_PHI))+90-120), (xB+50, 0, -120), lens=30), ['GATE_COMPARE']),
+    'CAM_VTX_49_GATE_TILT_PLANE': (camera('CAM_VTX_49_GATE_TILT_PLANE', (xB+200, 3000*math.sin(math.radians(GATE_PHI)), -3000*math.cos(math.radians(GATE_PHI))-120), (xB+200, 0, -120), ortho=520,
+                                           up='Z'), ['GATE_COMPARE']),
+    'CAM_VTX_50_GATE_COUPLED': (camera('CAM_VTX_50_GATE_COUPLED', (60, -4000, 0), (60, 0, 0), ortho=900), ['GATE_COUPLED']),
     'CAM_VTX_46_BRAY_THREEQ': (camera('CAM_VTX_46_BRAY_THREEQ', (-330, 260, 230), (-110, 25, 25), lens=30), ['VERTEX_V4']),
     'CAM_VTX_38_C1_SECTION_CLOSE': (camera('CAM_VTX_38_C1_SECTION_CLOSE', (-68.3, -3000, 22.1), (-68.3, 0, 22.1), ortho=10), ['COIL_ASSEMBLY_SECTION']),
     'CAM_VTX_38b_C2_SECTION_CLOSE': (camera('CAM_VTX_38b_C2_SECTION_CLOSE', (-79.6, -3000, 41.6), (-79.6, 0, 41.6), ortho=3.2), ['COIL_ASSEMBLY_SECTION']),
@@ -2083,7 +2391,8 @@ DEFAULT = {'COMPARE_SIDE_BY_SIDE': 'CAM_VTX_01_SIDE_COMPARE', 'COMPARE_TOP': 'CA
            'RADIATOR_ALTERNATIVES': 'CAM_VTX_09_RADIATOR_ALTS_END', 'VERTEX_V0': 'CAM_VTX_15_V0_WHOLE', 'CANON_WAYFARER': 'CAM_VTX_16_CANON',
            'LAUNCHER_COMPARE': 'CAM_VTX_20_LAUNCHER_COMPARE', 'THERMAL_COMPARE': 'CAM_VTX_23_THERMAL_TOP', 'COIL_COMPARE': 'CAM_VTX_26_COIL_COMPARE', 'COIL_ASSEMBLY_SECTION': 'CAM_VTX_37_COIL_SECTIONS',
            'SKIRT_COMPARE': 'CAM_VTX_28_SKIRT_COMPARE', 'STRUCTURE_COMPARE': 'CAM_VTX_32_STRUCTURE_COMPARE', 'STRUCTURE_SECTION': 'CAM_VTX_33_STRUCTURE_SECTION',
-           'LAUNCHER_R4_COMPARE': 'CAM_VTX_42_LAUNCHER_R4', 'REV3_VS_REV4': 'CAM_VTX_44_REV3_VS_REV4'}
+           'LAUNCHER_R4_COMPARE': 'CAM_VTX_42_LAUNCHER_R4', 'REV3_VS_REV4': 'CAM_VTX_44_REV3_VS_REV4',
+           'GATE_COMPARE': 'CAM_VTX_47_GATE_COMPARE', 'GATE_COUPLED': 'CAM_VTX_50_GATE_COUPLED'}
 for sc, cam in DEFAULT.items():
     SC[sc].camera = CAMS[cam][0]
 
@@ -2097,7 +2406,7 @@ RENDER_HIDE = {'CAM_VTX_02_TOP_COMPARE': WING+PLUME, 'CAM_VTX_01_SIDE_COMPARE': 
                'CAM_VTX_27_COIL_THREEQ': PLUME, 'CAM_VTX_28_SKIRT_COMPARE': PLUME, 'CAM_VTX_29_DOCK_SKIRT': PLUME, 'CAM_VTX_30_V4_SIDE_TRUE_SCALE': PLUME,
                'CAM_VTX_31_SPINE_STRETCH': PLUME+('_PP_TB_', '_LBL_'), 'CAM_VTX_21_SNOUT_CUTAWAY': PLUME+('_LBL_', '_XRAY_Fan', 'StandOff'), 'CAM_VTX_23_THERMAL_TOP': PLUME, 'CAM_VTX_24_RING_CALC': PLUME,
                'CAM_VTX_25_RING_GRADED': PLUME,
-               'CAM_VTX_34_ROOT_JOINT_CORRIDOR': PLUME+('_PP_TB_', '_LBL_'), 'CAM_VTX_35_BOW_JOINT': PLUME+('_PP_TB_', '_LBL_'), 'CAM_VTX_36_COIL_COOLING': PLUME+('_LBL_',), 'CAM_VTX_39_COIL_PLANT': PLUME+('_LBL_', '_XRAY_Fan', 'StandOff', 'Wing_'), 'CAM_VTX_41_S5N_THREEQ': PLUME+('_PP_TB_', '_LBL_'), 'CAM_VTX_44_REV3_VS_REV4': PLUME, 'CAM_VTX_45_REV3_VS_REV4_AFT': PLUME, 'CAM_VTX_46_BRAY_THREEQ': PLUME, 'CAM_VTX_07b_MODULE_CUTAWAY': ('_LBL_',), 'CAM_VTX_08_BRAKING_EXPOSURE': ('_Exhaust_', '_KeepOut_Plume')}
+               'CAM_VTX_34_ROOT_JOINT_CORRIDOR': PLUME+('_PP_TB_', '_LBL_'), 'CAM_VTX_35_BOW_JOINT': PLUME+('_PP_TB_', '_LBL_'), 'CAM_VTX_36_COIL_COOLING': PLUME+('_LBL_',), 'CAM_VTX_39_COIL_PLANT': PLUME+('_LBL_', '_XRAY_Fan', 'StandOff', 'Wing_'), 'CAM_VTX_41_S5N_THREEQ': PLUME+('_PP_TB_', '_LBL_'), 'CAM_VTX_44_REV3_VS_REV4': PLUME, 'CAM_VTX_45_REV3_VS_REV4_AFT': PLUME, 'CAM_VTX_46_BRAY_THREEQ': PLUME, 'CAM_VTX_47_GATE_COMPARE': PLUME, 'CAM_VTX_48_GATE_A1_AFT': PLUME+('_LBL_',), 'CAM_VTX_49_GATE_TILT_PLANE': PLUME+('_LBL_',), 'CAM_VTX_50_GATE_COUPLED': PLUME, 'CAM_VTX_07b_MODULE_CUTAWAY': ('_LBL_',), 'CAM_VTX_08_BRAKING_EXPOSURE': ('_Exhaust_', '_KeepOut_Plume')}
 
 # ----------------------------------------------------------------------------------------------------------------------------------
 # checks, texts
