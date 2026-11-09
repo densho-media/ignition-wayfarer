@@ -1,0 +1,1738 @@
+{
+ "study": "Revision 4 section 6, S5 spine beam FE (T00)",
+ "status": "MODEL, research only, NON-CANON; 1D Timoshenko beam, not FEA",
+ "inputs": {
+  "t05_ref": "origin/claude/project-thread-ctwplp:work/vertex-blender/rev3.json",
+  "material": {
+   "E": 120000000000.0,
+   "rho": 1700.0,
+   "sigma": 600000000.0,
+   "SF": 2.0,
+   "splice": 0.8,
+   "allowable_Pa": 240000000.0
+  },
+  "geometries": {
+   "S2": [
+    0,
+    0.0,
+    0.0
+   ],
+   "N6_drawn": [
+    6,
+    34.8,
+    0.29
+   ],
+   "N6_fixed": [
+    6,
+    34.8,
+    0.76
+   ],
+   "N9_gaps": [
+    9,
+    31.0,
+    0.52
+   ]
+  },
+  "keel": [
+   3,
+   5.0,
+   0.3914157237254803,
+   0.019570786186274017
+  ],
+  "spine": [
+   0.95,
+   0.006
+  ],
+  "lacing": "0.25 x longeron area, every bay panel (PROTOTYPE)",
+  "frames": "tube r 0.15 m, t/r 0.1, every 7.65 m (PROTOTYPE)"
+ },
+ "rows": [
+  {
+   "geometry": "S2",
+   "n": 0,
+   "R_m": 0.0,
+   "tube_r_m": 0.0,
+   "bow_t": 100.0,
+   "fill": 1.0,
+   "EI_N_m2": 213096544456.61368,
+   "GA_N": 1e+30,
+   "EA_N": 21178167335.555386,
+   "added_structure_t": 0.0,
+   "structure_t": 90.88928184563633,
+   "f_free_free_Hz": [
+    0.05721606950479275,
+    0.16785837255283823,
+    0.3395276721374194
+   ],
+   "f_cantilever_Hz": [
+    0.01275890102729588,
+    0.07353081112915782,
+    0.19997691980690005
+   ],
+   "f1_Hz": 0.05721606950479275,
+   "f1_bound_note": "free-free with a rigid aft ship at J1 is the upper bound; cantilever at J1 (T05 basis) is the lower bound",
+   "meets_0.2Hz_cantilever": 0.0,
+   "meets_0.2Hz_free_free": 0.0,
+   "buckling_factor_SF2": 2.7896745549217745,
+   "lateral": {
+    "0.002g": {
+     "root_moment_MN_m": 65.00411987432446,
+     "root_shear_MN": 0.5424021327236617,
+     "stress_MPa": 387.33071009759243,
+     "allowable_MPa": 240.0,
+     "ok": false
+    },
+    "0.01g": {
+     "root_moment_MN_m": 325.02059937162227,
+     "root_shear_MN": 2.7120106636183086,
+     "stress_MPa": 1851.548612797016,
+     "allowable_MPa": 240.0,
+     "ok": false
+    }
+   },
+   "local": {},
+   "J1": {
+    "axial_design_MN": 3.754930440626796,
+    "moment_0.01g_MN_m": 325.02059937162227,
+    "shear_0.01g_MN": 2.7120106636183086
+   },
+   "J3": {
+    "axial_design_MN": 0.036735724103547585,
+    "lateral_0.01g_MN": 0.00980665
+   }
+  },
+  {
+   "geometry": "S2",
+   "n": 0,
+   "R_m": 0.0,
+   "tube_r_m": 0.0,
+   "bow_t": 100.0,
+   "fill": 0.0,
+   "EI_N_m2": 213096544456.61368,
+   "GA_N": 1e+30,
+   "EA_N": 21178167335.555386,
+   "added_structure_t": 0.0,
+   "structure_t": 90.88928184563633,
+   "f_free_free_Hz": [
+    0.15497138687252532,
+    0.4873408525958175,
+    1.00501357201861
+   ],
+   "f_cantilever_Hz": [
+    0.036284371054199606,
+    0.21861167949919594,
+    0.5984481572560767
+   ],
+   "f1_Hz": 0.15497138687252532,
+   "f1_bound_note": "free-free with a rigid aft ship at J1 is the upper bound; cantilever at J1 (T05 basis) is the lower bound",
+   "meets_0.2Hz_cantilever": 0.0,
+   "meets_0.2Hz_free_free": 0.0,
+   "buckling_factor_SF2": 24.489922130559744,
+   "lateral": {
+    "0.002g": {
+     "root_moment_MN_m": 6.731740779594865,
+     "root_shear_MN": 0.05065847340537887,
+     "stress_MPa": 59.184352342304706,
+     "allowable_MPa": 240.0,
+     "ok": true
+    },
+    "0.01g": {
+     "root_moment_MN_m": 33.65870389797434,
+     "root_shear_MN": 0.2532923670268943,
+     "stress_MPa": 210.81682402057794,
+     "allowable_MPa": 240.0,
+     "ok": true
+    }
+   },
+   "local": {},
+   "J1": {
+    "axial_design_MN": 3.754930440626796,
+    "moment_0.01g_MN_m": 33.65870389797434,
+    "shear_0.01g_MN": 0.2532923670268943
+   },
+   "J3": {
+    "axial_design_MN": 0.036735724103547585,
+    "lateral_0.01g_MN": 0.00980665
+   }
+  },
+  {
+   "geometry": "S2",
+   "n": 0,
+   "R_m": 0.0,
+   "tube_r_m": 0.0,
+   "bow_t": 300.0,
+   "fill": 1.0,
+   "EI_N_m2": 213096544456.61368,
+   "GA_N": 1e+30,
+   "EA_N": 21178167335.555386,
+   "added_structure_t": 0.0,
+   "structure_t": 90.88928184563633,
+   "f_free_free_Hz": [
+    0.055806885900874625,
+    0.16303673638766483,
+    0.329319218578724
+   ],
+   "f_cantilever_Hz": [
+    0.012511713177415403,
+    0.07151203214554713,
+    0.19402757743391721
+   ],
+   "f1_Hz": 0.055806885900874625,
+   "f1_bound_note": "free-free with a rigid aft ship at J1 is the upper bound; cantilever at J1 (T05 basis) is the lower bound",
+   "meets_0.2Hz_cantilever": 0.0,
+   "meets_0.2Hz_free_free": 0.0,
+   "buckling_factor_SF2": 2.7164787401614747,
+   "lateral": {
+    "0.002g": {
+     "root_moment_MN_m": 66.08442043832447,
+     "root_shear_MN": 0.5463247927236617,
+     "stress_MPa": 393.4141530746039,
+     "allowable_MPa": 240.0,
+     "ok": false
+    },
+    "0.01g": {
+     "root_moment_MN_m": 330.42210219162223,
+     "root_shear_MN": 2.731623963618308,
+     "stress_MPa": 1881.9658276820733,
+     "allowable_MPa": 240.0,
+     "ok": false
+    }
+   },
+   "local": {},
+   "J1": {
+    "axial_design_MN": 3.754930440626796,
+    "moment_0.01g_MN_m": 330.42210219162223,
+    "shear_0.01g_MN": 2.731623963618308
+   },
+   "J3": {
+    "axial_design_MN": 0.11020717231064275,
+    "lateral_0.01g_MN": 0.029419949999999997
+   }
+  },
+  {
+   "geometry": "S2",
+   "n": 0,
+   "R_m": 0.0,
+   "tube_r_m": 0.0,
+   "bow_t": 300.0,
+   "fill": 0.0,
+   "EI_N_m2": 213096544456.61368,
+   "GA_N": 1e+30,
+   "EA_N": 21178167335.555386,
+   "added_structure_t": 0.0,
+   "structure_t": 90.88928184563633,
+   "f_free_free_Hz": [
+    0.13722107176958356,
+    0.44644950986124265,
+    0.949983731340207
+   ],
+   "f_cantilever_Hz": [
+    0.03144041370974124,
+    0.1952065920768539,
+    0.5528685340289983
+   ],
+   "f1_Hz": 0.13722107176958356,
+   "f1_bound_note": "free-free with a rigid aft ship at J1 is the upper bound; cantilever at J1 (T05 basis) is the lower bound",
+   "meets_0.2Hz_cantilever": 0.0,
+   "meets_0.2Hz_free_free": 0.0,
+   "buckling_factor_SF2": 19.636760658202896,
+   "lateral": {
+    "0.002g": {
+     "root_moment_MN_m": 7.812041343594867,
+     "root_shear_MN": 0.054581133405378866,
+     "stress_MPa": 65.26779531931619,
+     "allowable_MPa": 240.0,
+     "ok": true
+    },
+    "0.01g": {
+     "root_moment_MN_m": 39.060206717974346,
+     "root_shear_MN": 0.2729056670268943,
+     "stress_MPa": 241.23403890563534,
+     "allowable_MPa": 240.0,
+     "ok": false
+    }
+   },
+   "local": {},
+   "J1": {
+    "axial_design_MN": 3.754930440626796,
+    "moment_0.01g_MN_m": 39.060206717974346,
+    "shear_0.01g_MN": 0.2729056670268943
+   },
+   "J3": {
+    "axial_design_MN": 0.11020717231064275,
+    "lateral_0.01g_MN": 0.029419949999999997
+   }
+  },
+  {
+   "geometry": "S2",
+   "n": 0,
+   "R_m": 0.0,
+   "tube_r_m": 0.0,
+   "bow_t": 1000.0,
+   "fill": 1.0,
+   "EI_N_m2": 213096544456.61368,
+   "GA_N": 1e+30,
+   "EA_N": 21178167335.555386,
+   "added_structure_t": 0.0,
+   "structure_t": 90.88928184563633,
+   "f_free_free_Hz": [
+    0.05198749612947724,
+    0.15204328915896534,
+    0.3099597392406507
+   ],
+   "f_cantilever_Hz": [
+    0.011741975229584025,
+    0.06620121903299185,
+    0.18089900048899943
+   ],
+   "f1_Hz": 0.05198749612947724,
+   "f1_bound_note": "free-free with a rigid aft ship at J1 is the upper bound; cantilever at J1 (T05 basis) is the lower bound",
+   "meets_0.2Hz_cantilever": 0.0,
+   "meets_0.2Hz_free_free": 0.0,
+   "buckling_factor_SF2": 2.4858055156446333,
+   "lateral": {
+    "0.002g": {
+     "root_moment_MN_m": 69.86547241232448,
+     "root_shear_MN": 0.5600541027236617,
+     "stress_MPa": 414.7062034941441,
+     "allowable_MPa": 240.0,
+     "ok": false
+    },
+    "0.01g": {
+     "root_moment_MN_m": 349.32736206162224,
+     "root_shear_MN": 2.800270513618309,
+     "stress_MPa": 1988.4260797797742,
+     "allowable_MPa": 240.0,
+     "ok": false
+    }
+   },
+   "local": {},
+   "J1": {
+    "axial_design_MN": 3.754930440626796,
+    "moment_0.01g_MN_m": 349.32736206162224,
+    "shear_0.01g_MN": 2.800270513618309
+   },
+   "J3": {
+    "axial_design_MN": 0.36735724103547585,
+    "lateral_0.01g_MN": 0.0980665
+   }
+  },
+  {
+   "geometry": "S2",
+   "n": 0,
+   "R_m": 0.0,
+   "tube_r_m": 0.0,
+   "bow_t": 1000.0,
+   "fill": 0.0,
+   "EI_N_m2": 213096544456.61368,
+   "GA_N": 1e+30,
+   "EA_N": 21178167335.555386,
+   "added_structure_t": 0.0,
+   "structure_t": 90.88928184563633,
+   "f_free_free_Hz": [
+    0.11712841642008755,
+    0.4157220164850665,
+    0.9179835655871127
+   ],
+   "f_cantilever_Hz": [
+    0.02290248527936542,
+    0.17190740858082934,
+    0.521128917012554
+   ],
+   "f1_Hz": 0.11712841642008755,
+   "f1_bound_note": "free-free with a rigid aft ship at J1 is the upper bound; cantilever at J1 (T05 basis) is the lower bound",
+   "meets_0.2Hz_cantilever": 0.0,
+   "meets_0.2Hz_free_free": 0.0,
+   "buckling_factor_SF2": 11.468600973078216,
+   "lateral": {
+    "0.002g": {
+     "root_moment_MN_m": 11.59309331759487,
+     "root_shear_MN": 0.06831044340537887,
+     "stress_MPa": 86.55984573885638,
+     "allowable_MPa": 240.0,
+     "ok": true
+    },
+    "0.01g": {
+     "root_moment_MN_m": 57.965466587974355,
+     "root_shear_MN": 0.34155221702689426,
+     "stress_MPa": 347.6942910033362,
+     "allowable_MPa": 240.0,
+     "ok": false
+    }
+   },
+   "local": {},
+   "J1": {
+    "axial_design_MN": 3.754930440626796,
+    "moment_0.01g_MN_m": 57.965466587974355,
+    "shear_0.01g_MN": 0.34155221702689426
+   },
+   "J3": {
+    "axial_design_MN": 0.36735724103547585,
+    "lateral_0.01g_MN": 0.0980665
+   }
+  },
+  {
+   "geometry": "N6_drawn",
+   "n": 6,
+   "R_m": 34.8,
+   "tube_r_m": 0.29,
+   "bow_t": 100.0,
+   "fill": 1.0,
+   "EI_N_m2": 22100172821635.055,
+   "GA_N": 925296188.3365364,
+   "EA_N": 57321813823.9875,
+   "added_structure_t": 533.4262867879709,
+   "structure_t": 624.3155686336072,
+   "f_free_free_Hz": [
+    0.25767151123371074,
+    0.4295318270267556,
+    0.6110031516125533
+   ],
+   "f_cantilever_Hz": [
+    0.07609670170563225,
+    0.23235827332540643,
+    0.4245945893275456
+   ],
+   "f1_Hz": 0.25767151123371074,
+   "f1_bound_note": "free-free with a rigid aft ship at J1 is the upper bound; cantilever at J1 (T05 basis) is the lower bound",
+   "meets_0.2Hz_cantilever": 0.0,
+   "meets_0.2Hz_free_free": 1.0,
+   "buckling_factor_SF2": 76.79531610942844,
+   "lateral": {
+    "0.002g": {
+     "root_moment_MN_m": 66.44477167049813,
+     "root_shear_MN": 0.5528643825143197,
+     "stress_MPa": 32.9712516647361,
+     "allowable_MPa": 240.0,
+     "ok": true
+    },
+    "0.01g": {
+     "root_moment_MN_m": 332.22385835249065,
+     "root_shear_MN": 2.764321912571599,
+     "stress_MPa": 133.4133138098308,
+     "allowable_MPa": 240.0,
+     "ok": true
+    }
+   },
+   "local": {
+    "longeron_bay_Hz": 43.99167099942261,
+    "longeron_load_MN": 6.697282848878868,
+    "longeron_Pcr_MN": 38.66091869564887,
+    "longeron_buckling_margin": 5.77262743235053,
+    "frame_ovalling_n2_Hz": 0.22377936629200013,
+    "pulse_clear": {
+     "longeron_bay": true,
+     "frame_n2": true
+    }
+   },
+   "J1": {
+    "axial_design_MN": 3.754930440626796,
+    "moment_0.01g_MN_m": 332.22385835249065,
+    "shear_0.01g_MN": 2.764321912571599
+   },
+   "J3": {
+    "axial_design_MN": 0.036735724103547585,
+    "lateral_0.01g_MN": 0.00980665
+   }
+  },
+  {
+   "geometry": "N6_drawn",
+   "n": 6,
+   "R_m": 34.8,
+   "tube_r_m": 0.29,
+   "bow_t": 100.0,
+   "fill": 0.0,
+   "EI_N_m2": 22100172821635.055,
+   "GA_N": 925296188.3365364,
+   "EA_N": 57321813823.9875,
+   "added_structure_t": 533.4262867879709,
+   "structure_t": 624.3155686336072,
+   "f_free_free_Hz": [
+    0.668264720162735,
+    1.2207363328495897,
+    1.7394845782394441
+   ],
+   "f_cantilever_Hz": [
+    0.20935834189303354,
+    0.6644146286699727,
+    1.2334930110962492
+   ],
+   "f1_Hz": 0.668264720162735,
+   "f1_bound_note": "free-free with a rigid aft ship at J1 is the upper bound; cantilever at J1 (T05 basis) is the lower bound",
+   "meets_0.2Hz_cantilever": 1.0,
+   "meets_0.2Hz_free_free": 1.0,
+   "buckling_factor_SF2": 690.4453556729566,
+   "lateral": {
+    "0.002g": {
+     "root_moment_MN_m": 8.172392575768544,
+     "root_shear_MN": 0.06112072319603743,
+     "stress_MPa": 10.949210745547752,
+     "allowable_MPa": 240.0,
+     "ok": true
+    },
+    "0.01g": {
+     "root_moment_MN_m": 40.86196287884272,
+     "root_shear_MN": 0.3056036159801872,
+     "stress_MPa": 23.30310921388906,
+     "allowable_MPa": 240.0,
+     "ok": true
+    }
+   },
+   "local": {
+    "longeron_bay_Hz": 43.99167099942261,
+    "longeron_load_MN": 1.1698046409835159,
+    "longeron_Pcr_MN": 38.66091869564887,
+    "longeron_buckling_margin": 33.04903856693936,
+    "frame_ovalling_n2_Hz": 0.22377936629200013,
+    "pulse_clear": {
+     "longeron_bay": true,
+     "frame_n2": true
+    }
+   },
+   "J1": {
+    "axial_design_MN": 3.754930440626796,
+    "moment_0.01g_MN_m": 40.86196287884272,
+    "shear_0.01g_MN": 0.3056036159801872
+   },
+   "J3": {
+    "axial_design_MN": 0.036735724103547585,
+    "lateral_0.01g_MN": 0.00980665
+   }
+  },
+  {
+   "geometry": "N6_drawn",
+   "n": 6,
+   "R_m": 34.8,
+   "tube_r_m": 0.29,
+   "bow_t": 300.0,
+   "fill": 1.0,
+   "EI_N_m2": 22100172821635.055,
+   "GA_N": 925296188.3365364,
+   "EA_N": 57321813823.9875,
+   "added_structure_t": 533.4262867879709,
+   "structure_t": 624.3155686336072,
+   "f_free_free_Hz": [
+    0.25472741877210864,
+    0.42417611736178257,
+    0.6032315796081148
+   ],
+   "f_cantilever_Hz": [
+    0.07524865492643158,
+    0.22923966513900673,
+    0.4191341833790242
+   ],
+   "f1_Hz": 0.25472741877210864,
+   "f1_bound_note": "free-free with a rigid aft ship at J1 is the upper bound; cantilever at J1 (T05 basis) is the lower bound",
+   "meets_0.2Hz_cantilever": 0.0,
+   "meets_0.2Hz_free_free": 1.0,
+   "buckling_factor_SF2": 76.23664370291084,
+   "lateral": {
+    "0.002g": {
+     "root_moment_MN_m": 67.52507223449813,
+     "root_shear_MN": 0.5567870425143198,
+     "stress_MPa": 33.379514097041394,
+     "allowable_MPa": 240.0,
+     "ok": true
+    },
+    "0.01g": {
+     "root_moment_MN_m": 337.62536117249067,
+     "root_shear_MN": 2.7839352125715986,
+     "stress_MPa": 135.45462597135725,
+     "allowable_MPa": 240.0,
+     "ok": true
+    }
+   },
+   "local": {
+    "longeron_bay_Hz": 43.99167099942261,
+    "longeron_load_MN": 6.79975571712713,
+    "longeron_Pcr_MN": 38.66091869564887,
+    "longeron_buckling_margin": 5.685633470371631,
+    "frame_ovalling_n2_Hz": 0.22377936629200013,
+    "pulse_clear": {
+     "longeron_bay": true,
+     "frame_n2": true
+    }
+   },
+   "J1": {
+    "axial_design_MN": 3.754930440626796,
+    "moment_0.01g_MN_m": 337.62536117249067,
+    "shear_0.01g_MN": 2.7839352125715986
+   },
+   "J3": {
+    "axial_design_MN": 0.11020717231064275,
+    "lateral_0.01g_MN": 0.029419949999999997
+   }
+  },
+  {
+   "geometry": "N6_drawn",
+   "n": 6,
+   "R_m": 34.8,
+   "tube_r_m": 0.29,
+   "bow_t": 300.0,
+   "fill": 0.0,
+   "EI_N_m2": 22100172821635.055,
+   "GA_N": 925296188.3365364,
+   "EA_N": 57321813823.9875,
+   "added_structure_t": 533.4262867879709,
+   "structure_t": 624.3155686336072,
+   "f_free_free_Hz": [
+    0.6207547511494725,
+    1.144543059139743,
+    1.648945629696233
+   ],
+   "f_cantilever_Hz": [
+    0.19201446789265209,
+    0.6171525113295995,
+    1.154055095557234
+   ],
+   "f1_Hz": 0.6207547511494725,
+   "f1_bound_note": "free-free with a rigid aft ship at J1 is the upper bound; cantilever at J1 (T05 basis) is the lower bound",
+   "meets_0.2Hz_cantilever": 0.0,
+   "meets_0.2Hz_free_free": 1.0,
+   "buckling_factor_SF2": 647.6431362313235,
+   "lateral": {
+    "0.002g": {
+     "root_moment_MN_m": 9.252693139768544,
+     "root_shear_MN": 0.06504338319603743,
+     "stress_MPa": 11.357473177853043,
+     "allowable_MPa": 240.0,
+     "ok": true
+    },
+    "0.01g": {
+     "root_moment_MN_m": 46.26346569884273,
+     "root_shear_MN": 0.3252169159801872,
+     "stress_MPa": 25.344421375415514,
+     "allowable_MPa": 240.0,
+     "ok": true
+    }
+   },
+   "local": {
+    "longeron_bay_Hz": 43.99167099942261,
+    "longeron_load_MN": 1.272277509231779,
+    "longeron_Pcr_MN": 38.66091869564887,
+    "longeron_buckling_margin": 30.3871745080151,
+    "frame_ovalling_n2_Hz": 0.22377936629200013,
+    "pulse_clear": {
+     "longeron_bay": true,
+     "frame_n2": true
+    }
+   },
+   "J1": {
+    "axial_design_MN": 3.754930440626796,
+    "moment_0.01g_MN_m": 46.26346569884273,
+    "shear_0.01g_MN": 0.3252169159801872
+   },
+   "J3": {
+    "axial_design_MN": 0.11020717231064275,
+    "lateral_0.01g_MN": 0.029419949999999997
+   }
+  },
+  {
+   "geometry": "N6_drawn",
+   "n": 6,
+   "R_m": 34.8,
+   "tube_r_m": 0.29,
+   "bow_t": 1000.0,
+   "fill": 1.0,
+   "EI_N_m2": 22100172821635.055,
+   "GA_N": 925296188.3365364,
+   "EA_N": 57321813823.9875,
+   "added_structure_t": 533.4262867879709,
+   "structure_t": 624.3155686336072,
+   "f_free_free_Hz": [
+    0.2453396471290293,
+    0.4079139465582624,
+    0.5803011676297922
+   ],
+   "f_cantilever_Hz": [
+    0.07242758814384913,
+    0.21931740446412135,
+    0.40189939694529886
+   ],
+   "f1_Hz": 0.2453396471290293,
+   "f1_bound_note": "free-free with a rigid aft ship at J1 is the upper bound; cantilever at J1 (T05 basis) is the lower bound",
+   "meets_0.2Hz_cantilever": 0.0,
+   "meets_0.2Hz_free_free": 1.0,
+   "buckling_factor_SF2": 74.34350447256797,
+   "lateral": {
+    "0.002g": {
+     "root_moment_MN_m": 71.30612420849813,
+     "root_shear_MN": 0.5705163525143198,
+     "stress_MPa": 34.80843261010991,
+     "allowable_MPa": 240.0,
+     "ok": true
+    },
+    "0.01g": {
+     "root_moment_MN_m": 356.5306210424907,
+     "root_shear_MN": 2.8525817625715986,
+     "stress_MPa": 142.59921853669985,
+     "allowable_MPa": 240.0,
+     "ok": true
+    }
+   },
+   "local": {
+    "longeron_bay_Hz": 43.99167099942261,
+    "longeron_load_MN": 7.1584107559960515,
+    "longeron_Pcr_MN": 38.66091869564887,
+    "longeron_buckling_margin": 5.400768412634827,
+    "frame_ovalling_n2_Hz": 0.22377936629200013,
+    "pulse_clear": {
+     "longeron_bay": true,
+     "frame_n2": true
+    }
+   },
+   "J1": {
+    "axial_design_MN": 3.754930440626796,
+    "moment_0.01g_MN_m": 356.5306210424907,
+    "shear_0.01g_MN": 2.8525817625715986
+   },
+   "J3": {
+    "axial_design_MN": 0.36735724103547585,
+    "lateral_0.01g_MN": 0.0980665
+   }
+  },
+  {
+   "geometry": "N6_drawn",
+   "n": 6,
+   "R_m": 34.8,
+   "tube_r_m": 0.29,
+   "bow_t": 1000.0,
+   "fill": 0.0,
+   "EI_N_m2": 22100172821635.055,
+   "GA_N": 925296188.3365364,
+   "EA_N": 57321813823.9875,
+   "added_structure_t": 533.4262867879709,
+   "structure_t": 624.3155686336072,
+   "f_free_free_Hz": [
+    0.5445218456878695,
+    1.0604575568310775,
+    1.5793350057356461
+   ],
+   "f_cantilever_Hz": [
+    0.15229038833834005,
+    0.5442676129509885,
+    1.0649014367134657
+   ],
+   "f1_Hz": 0.5445218456878695,
+   "f1_bound_note": "free-free with a rigid aft ship at J1 is the upper bound; cantilever at J1 (T05 basis) is the lower bound",
+   "meets_0.2Hz_cantilever": 0.0,
+   "meets_0.2Hz_free_free": 1.0,
+   "buckling_factor_SF2": 503.55782169961793,
+   "lateral": {
+    "0.002g": {
+     "root_moment_MN_m": 13.033745113768548,
+     "root_shear_MN": 0.07877269319603744,
+     "stress_MPa": 12.78639169092156,
+     "allowable_MPa": 240.0,
+     "ok": true
+    },
+    "0.01g": {
+     "root_moment_MN_m": 65.16872556884275,
+     "root_shear_MN": 0.3938634659801872,
+     "stress_MPa": 32.4890139407581,
+     "allowable_MPa": 240.0,
+     "ok": true
+    }
+   },
+   "local": {
+    "longeron_bay_Hz": 43.99167099942261,
+    "longeron_load_MN": 1.6309325481007,
+    "longeron_Pcr_MN": 38.66091869564887,
+    "longeron_buckling_margin": 23.704793150808953,
+    "frame_ovalling_n2_Hz": 0.22377936629200013,
+    "pulse_clear": {
+     "longeron_bay": true,
+     "frame_n2": true
+    }
+   },
+   "J1": {
+    "axial_design_MN": 3.754930440626796,
+    "moment_0.01g_MN_m": 65.16872556884275,
+    "shear_0.01g_MN": 0.3938634659801872
+   },
+   "J3": {
+    "axial_design_MN": 0.36735724103547585,
+    "lateral_0.01g_MN": 0.0980665
+   }
+  },
+  {
+   "geometry": "N6_fixed",
+   "n": 6,
+   "R_m": 34.8,
+   "tube_r_m": 0.76,
+   "bow_t": 100.0,
+   "fill": 1.0,
+   "EI_N_m2": 150589281782227.72,
+   "GA_N": 6354947424.294698,
+   "EA_N": 269413247141.9575,
+   "added_structure_t": 2503.5195615409234,
+   "structure_t": 2594.408843386559,
+   "f_free_free_Hz": [
+    0.6592624371462201,
+    1.0890923610534715,
+    1.5480242135891777
+   ],
+   "f_cantilever_Hz": [
+    0.1910783907455704,
+    0.5847072473043338,
+    1.070840680788031
+   ],
+   "f1_Hz": 0.6592624371462201,
+   "f1_bound_note": "free-free with a rigid aft ship at J1 is the upper bound; cantilever at J1 (T05 basis) is the lower bound",
+   "meets_0.2Hz_cantilever": 0.0,
+   "meets_0.2Hz_free_free": 1.0,
+   "buckling_factor_SF2": 492.3972186099426,
+   "lateral": {
+    "0.002g": {
+     "root_moment_MN_m": 71.76550386011868,
+     "root_shear_MN": 0.5915044129400316,
+     "stress_MPa": 5.652759163072622,
+     "allowable_MPa": 240.0,
+     "ok": true
+    },
+    "0.01g": {
+     "root_moment_MN_m": 358.82751930059345,
+     "root_shear_MN": 2.957522064700158,
+     "stress_MPa": 21.57382555361436,
+     "allowable_MPa": 240.0,
+     "ok": true
+    }
+   },
+   "local": {
+    "longeron_bay_Hz": 115.28851710193513,
+    "longeron_load_MN": 7.438028205598413,
+    "longeron_Pcr_MN": 1823.620843548646,
+    "longeron_buckling_margin": 245.17530629637213,
+    "frame_ovalling_n2_Hz": 0.11827211272742573,
+    "pulse_clear": {
+     "longeron_bay": true,
+     "frame_n2": true
+    }
+   },
+   "J1": {
+    "axial_design_MN": 3.754930440626796,
+    "moment_0.01g_MN_m": 358.82751930059345,
+    "shear_0.01g_MN": 2.957522064700158
+   },
+   "J3": {
+    "axial_design_MN": 0.036735724103547585,
+    "lateral_0.01g_MN": 0.00980665
+   }
+  },
+  {
+   "geometry": "N6_fixed",
+   "n": 6,
+   "R_m": 34.8,
+   "tube_r_m": 0.76,
+   "bow_t": 100.0,
+   "fill": 0.0,
+   "EI_N_m2": 150589281782227.72,
+   "GA_N": 6354947424.294698,
+   "EA_N": 269413247141.9575,
+   "added_structure_t": 2503.5195615409234,
+   "structure_t": 2594.408843386559,
+   "f_free_free_Hz": [
+    1.3715880714458997,
+    2.508984691878138,
+    3.5876972455162317
+   ],
+   "f_cantilever_Hz": [
+    0.4252650326987116,
+    1.3581377368750103,
+    2.531711346533918
+   ],
+   "f1_Hz": 1.3715880714458997,
+   "f1_bound_note": "free-free with a rigid aft ship at J1 is the upper bound; cantilever at J1 (T05 basis) is the lower bound",
+   "meets_0.2Hz_cantilever": 1.0,
+   "meets_0.2Hz_free_free": 1.0,
+   "buckling_factor_SF2": 2892.0182370578063,
+   "lateral": {
+    "0.002g": {
+     "root_moment_MN_m": 13.4931247653891,
+     "root_shear_MN": 0.09976075362174945,
+     "stress_MPa": 2.4208497971523983,
+     "allowable_MPa": 240.0,
+     "ok": true
+    },
+    "0.01g": {
+     "root_moment_MN_m": 67.4656238269455,
+     "root_shear_MN": 0.4988037681087473,
+     "stress_MPa": 5.414278724013241,
+     "allowable_MPa": 240.0,
+     "ok": true
+    }
+   },
+   "local": {
+    "longeron_bay_Hz": 115.28851710193513,
+    "longeron_load_MN": 1.8666859877076833,
+    "longeron_Pcr_MN": 1823.620843548646,
+    "longeron_buckling_margin": 976.9296258488971,
+    "frame_ovalling_n2_Hz": 0.11827211272742573,
+    "pulse_clear": {
+     "longeron_bay": true,
+     "frame_n2": true
+    }
+   },
+   "J1": {
+    "axial_design_MN": 3.754930440626796,
+    "moment_0.01g_MN_m": 67.4656238269455,
+    "shear_0.01g_MN": 0.4988037681087473
+   },
+   "J3": {
+    "axial_design_MN": 0.036735724103547585,
+    "lateral_0.01g_MN": 0.00980665
+   }
+  },
+  {
+   "geometry": "N6_fixed",
+   "n": 6,
+   "R_m": 34.8,
+   "tube_r_m": 0.76,
+   "bow_t": 300.0,
+   "fill": 1.0,
+   "EI_N_m2": 150589281782227.72,
+   "GA_N": 6354947424.294698,
+   "EA_N": 269413247141.9575,
+   "added_structure_t": 2503.5195615409234,
+   "structure_t": 2594.408843386559,
+   "f_free_free_Hz": [
+    0.6526662634335023,
+    1.0771065486367717,
+    1.5306459522269673
+   ],
+   "f_cantilever_Hz": [
+    0.1890984952853219,
+    0.5775730279213817,
+    1.0584422411714651
+   ],
+   "f1_Hz": 0.6526662634335023,
+   "f1_bound_note": "free-free with a rigid aft ship at J1 is the upper bound; cantilever at J1 (T05 basis) is the lower bound",
+   "meets_0.2Hz_cantilever": 0.0,
+   "meets_0.2Hz_free_free": 1.0,
+   "buckling_factor_SF2": 489.05112940337915,
+   "lateral": {
+    "0.002g": {
+     "root_moment_MN_m": 72.84580442411868,
+     "root_shear_MN": 0.5954270729400316,
+     "stress_MPa": 5.7126749167288216,
+     "allowable_MPa": 240.0,
+     "ok": true
+    },
+    "0.01g": {
+     "root_moment_MN_m": 364.2290221205934,
+     "root_shear_MN": 2.9771353647001586,
+     "stress_MPa": 21.873404321895354,
+     "allowable_MPa": 240.0,
+     "ok": true
+    }
+   },
+   "local": {
+    "longeron_bay_Hz": 115.28851710193513,
+    "longeron_load_MN": 7.541314260393603,
+    "longeron_Pcr_MN": 1823.620843548646,
+    "longeron_buckling_margin": 241.81737832172846,
+    "frame_ovalling_n2_Hz": 0.11827211272742573,
+    "pulse_clear": {
+     "longeron_bay": true,
+     "frame_n2": true
+    }
+   },
+   "J1": {
+    "axial_design_MN": 3.754930440626796,
+    "moment_0.01g_MN_m": 364.2290221205934,
+    "shear_0.01g_MN": 2.9771353647001586
+   },
+   "J3": {
+    "axial_design_MN": 0.11020717231064275,
+    "lateral_0.01g_MN": 0.029419949999999997
+   }
+  },
+  {
+   "geometry": "N6_fixed",
+   "n": 6,
+   "R_m": 34.8,
+   "tube_r_m": 0.76,
+   "bow_t": 300.0,
+   "fill": 0.0,
+   "EI_N_m2": 150589281782227.72,
+   "GA_N": 6354947424.294698,
+   "EA_N": 269413247141.9575,
+   "added_structure_t": 2503.5195615409234,
+   "structure_t": 2594.408843386559,
+   "f_free_free_Hz": [
+    1.3097792864915965,
+    2.4068756039850316,
+    3.454366006787389
+   ],
+   "f_cantilever_Hz": [
+    0.40306526872564014,
+    1.296670320006167,
+    2.4262707962997325
+   ],
+   "f1_Hz": 1.3097792864915965,
+   "f1_bound_note": "free-free with a rigid aft ship at J1 is the upper bound; cantilever at J1 (T05 basis) is the lower bound",
+   "meets_0.2Hz_cantilever": 1.0,
+   "meets_0.2Hz_free_free": 1.0,
+   "buckling_factor_SF2": 2779.9831140537385,
+   "lateral": {
+    "0.002g": {
+     "root_moment_MN_m": 14.573425329389101,
+     "root_shear_MN": 0.10368341362174945,
+     "stress_MPa": 2.4807655508085977,
+     "allowable_MPa": 240.0,
+     "ok": true
+    },
+    "0.01g": {
+     "root_moment_MN_m": 72.86712664694551,
+     "root_shear_MN": 0.5184170681087473,
+     "stress_MPa": 5.713857492294241,
+     "allowable_MPa": 240.0,
+     "ok": true
+    }
+   },
+   "local": {
+    "longeron_bay_Hz": 115.28851710193513,
+    "longeron_load_MN": 1.969972042502874,
+    "longeron_Pcr_MN": 1823.620843548646,
+    "longeron_buckling_margin": 925.7089969823699,
+    "frame_ovalling_n2_Hz": 0.11827211272742573,
+    "pulse_clear": {
+     "longeron_bay": true,
+     "frame_n2": true
+    }
+   },
+   "J1": {
+    "axial_design_MN": 3.754930440626796,
+    "moment_0.01g_MN_m": 72.86712664694551,
+    "shear_0.01g_MN": 0.5184170681087473
+   },
+   "J3": {
+    "axial_design_MN": 0.11020717231064275,
+    "lateral_0.01g_MN": 0.029419949999999997
+   }
+  },
+  {
+   "geometry": "N6_fixed",
+   "n": 6,
+   "R_m": 34.8,
+   "tube_r_m": 0.76,
+   "bow_t": 1000.0,
+   "fill": 1.0,
+   "EI_N_m2": 150589281782227.72,
+   "GA_N": 6354947424.294698,
+   "EA_N": 269413247141.9575,
+   "added_structure_t": 2503.5195615409234,
+   "structure_t": 2594.408843386559,
+   "f_free_free_Hz": [
+    0.6315730547454719,
+    1.0405201140586375,
+    1.4787481094379795
+   ],
+   "f_cantilever_Hz": [
+    0.18249370490126138,
+    0.5547629693083668,
+    1.0191019407611412
+   ],
+   "f1_Hz": 0.6315730547454719,
+   "f1_bound_note": "free-free with a rigid aft ship at J1 is the upper bound; cantilever at J1 (T05 basis) is the lower bound",
+   "meets_0.2Hz_cantilever": 0.0,
+   "meets_0.2Hz_free_free": 1.0,
+   "buckling_factor_SF2": 477.68826304193715,
+   "lateral": {
+    "0.002g": {
+     "root_moment_MN_m": 76.62685639811869,
+     "root_shear_MN": 0.6091563829400316,
+     "stress_MPa": 5.9223800545255205,
+     "allowable_MPa": 240.0,
+     "ok": true
+    },
+    "0.01g": {
+     "root_moment_MN_m": 383.1342819905934,
+     "root_shear_MN": 3.0457819147001586,
+     "stress_MPa": 22.921930010878853,
+     "allowable_MPa": 240.0,
+     "ok": true
+    }
+   },
+   "local": {
+    "longeron_bay_Hz": 115.28851710193513,
+    "longeron_load_MN": 7.902815452176772,
+    "longeron_Pcr_MN": 1823.620843548646,
+    "longeron_buckling_margin": 230.7558432288006,
+    "frame_ovalling_n2_Hz": 0.11827211272742573,
+    "pulse_clear": {
+     "longeron_bay": true,
+     "frame_n2": true
+    }
+   },
+   "J1": {
+    "axial_design_MN": 3.754930440626796,
+    "moment_0.01g_MN_m": 383.1342819905934,
+    "shear_0.01g_MN": 3.0457819147001586
+   },
+   "J3": {
+    "axial_design_MN": 0.36735724103547585,
+    "lateral_0.01g_MN": 0.0980665
+   }
+  },
+  {
+   "geometry": "N6_fixed",
+   "n": 6,
+   "R_m": 34.8,
+   "tube_r_m": 0.76,
+   "bow_t": 1000.0,
+   "fill": 0.0,
+   "EI_N_m2": 150589281782227.72,
+   "GA_N": 6354947424.294698,
+   "EA_N": 269413247141.9575,
+   "added_structure_t": 2503.5195615409234,
+   "structure_t": 2594.408843386559,
+   "f_free_free_Hz": [
+    1.1793084504003581,
+    2.236772453373755,
+    3.2838435928586382
+   ],
+   "f_cantilever_Hz": [
+    0.3440142850532595,
+    1.1699875160367372,
+    2.2469105830056444
+   ],
+   "f1_Hz": 1.1793084504003581,
+   "f1_bound_note": "free-free with a rigid aft ship at J1 is the upper bound; cantilever at J1 (T05 basis) is the lower bound",
+   "meets_0.2Hz_cantilever": 1.0,
+   "meets_0.2Hz_free_free": 1.0,
+   "buckling_factor_SF2": 2407.915883841812,
+   "lateral": {
+    "0.002g": {
+     "root_moment_MN_m": 18.354477303389103,
+     "root_shear_MN": 0.11741272362174945,
+     "stress_MPa": 2.690470688605297,
+     "allowable_MPa": 240.0,
+     "ok": true
+    },
+    "0.01g": {
+     "root_moment_MN_m": 91.77238651694552,
+     "root_shear_MN": 0.5870636181087473,
+     "stress_MPa": 6.762383181277735,
+     "allowable_MPa": 240.0,
+     "ok": true
+    }
+   },
+   "local": {
+    "longeron_bay_Hz": 115.28851710193513,
+    "longeron_load_MN": 2.3314732342860416,
+    "longeron_Pcr_MN": 1823.620843548646,
+    "longeron_buckling_margin": 782.175328771075,
+    "frame_ovalling_n2_Hz": 0.11827211272742573,
+    "pulse_clear": {
+     "longeron_bay": true,
+     "frame_n2": true
+    }
+   },
+   "J1": {
+    "axial_design_MN": 3.754930440626796,
+    "moment_0.01g_MN_m": 91.77238651694552,
+    "shear_0.01g_MN": 0.5870636181087473
+   },
+   "J3": {
+    "axial_design_MN": 0.36735724103547585,
+    "lateral_0.01g_MN": 0.0980665
+   }
+  },
+  {
+   "geometry": "N9_gaps",
+   "n": 9,
+   "R_m": 31.0,
+   "tube_r_m": 0.52,
+   "bow_t": 100.0,
+   "fill": 1.0,
+   "EI_N_m2": 83992619745965.31,
+   "GA_N": 6542733742.936861,
+   "EA_N": 195492828640.05096,
+   "added_structure_t": 1475.3244980382867,
+   "structure_t": 1566.213779883923,
+   "f_free_free_Hz": [
+    0.6262743997887978,
+    1.0925647683126218,
+    1.5713589041555773
+   ],
+   "f_cantilever_Hz": [
+    0.17422480921795772,
+    0.5627498393447938,
+    1.0744052863267086
+   ],
+   "f1_Hz": 0.6262743997887978,
+   "f1_bound_note": "free-free with a rigid aft ship at J1 is the upper bound; cantilever at J1 (T05 basis) is the lower bound",
+   "meets_0.2Hz_cantilever": 0.0,
+   "meets_0.2Hz_free_free": 1.0,
+   "buckling_factor_SF2": 502.62882944004207,
+   "lateral": {
+    "0.002g": {
+     "root_moment_MN_m": 68.98860459260888,
+     "root_shear_MN": 0.5713381147010358,
+     "stress_MPa": 8.415857361021777,
+     "allowable_MPa": 240.0,
+     "ok": true
+    },
+    "0.01g": {
+     "root_moment_MN_m": 344.94302296304454,
+     "root_shear_MN": 2.856690573505179,
+     "stress_MPa": 32.859682055210634,
+     "allowable_MPa": 240.0,
+     "ok": true
+    }
+   },
+   "local": {
+    "longeron_bay_Hz": 78.88161696448195,
+    "longeron_load_MN": 5.303633655580974,
+    "longeron_Pcr_MN": 399.6626400395396,
+    "longeron_buckling_margin": 75.35638130265231,
+    "frame_ovalling_n2_Hz": 0.16444927573695847,
+    "pulse_clear": {
+     "longeron_bay": true,
+     "frame_n2": true
+    }
+   },
+   "J1": {
+    "axial_design_MN": 3.754930440626796,
+    "moment_0.01g_MN_m": 344.94302296304454,
+    "shear_0.01g_MN": 2.856690573505179
+   },
+   "J3": {
+    "axial_design_MN": 0.036735724103547585,
+    "lateral_0.01g_MN": 0.00980665
+   }
+  },
+  {
+   "geometry": "N9_gaps",
+   "n": 9,
+   "R_m": 31.0,
+   "tube_r_m": 0.52,
+   "bow_t": 100.0,
+   "fill": 0.0,
+   "EI_N_m2": 83992619745965.31,
+   "GA_N": 6542733742.936861,
+   "EA_N": 195492828640.05096,
+   "added_structure_t": 1475.3244980382867,
+   "structure_t": 1566.213779883923,
+   "f_free_free_Hz": [
+    1.4323052413216764,
+    2.757863589223389,
+    3.9986773592187745
+   ],
+   "f_cantilever_Hz": [
+    0.42088279817484814,
+    1.4361511174934334,
+    2.785157452815011
+   ],
+   "f1_Hz": 1.4323052413216764,
+   "f1_bound_note": "free-free with a rigid aft ship at J1 is the upper bound; cantilever at J1 (T05 basis) is the lower bound",
+   "meets_0.2Hz_cantilever": 1.0,
+   "meets_0.2Hz_free_free": 1.0,
+   "buckling_factor_SF2": 3299.734702272744,
+   "lateral": {
+    "0.002g": {
+     "root_moment_MN_m": 10.71622549787931,
+     "root_shear_MN": 0.07959445538275325,
+     "stress_MPa": 3.2541359886435344,
+     "allowable_MPa": 240.0,
+     "ok": true
+    },
+    "0.01g": {
+     "root_moment_MN_m": 53.58112748939655,
+     "root_shear_MN": 0.3979722769137663,
+     "stress_MPa": 7.051075193319405,
+     "allowable_MPa": 240.0,
+     "ok": true
+    }
+   },
+   "local": {
+    "longeron_bay_Hz": 78.88161696448195,
+    "longeron_load_MN": 1.138060911255558,
+    "longeron_Pcr_MN": 399.6626400395396,
+    "longeron_buckling_margin": 351.1786022055836,
+    "frame_ovalling_n2_Hz": 0.16444927573695847,
+    "pulse_clear": {
+     "longeron_bay": true,
+     "frame_n2": true
+    }
+   },
+   "J1": {
+    "axial_design_MN": 3.754930440626796,
+    "moment_0.01g_MN_m": 53.58112748939655,
+    "shear_0.01g_MN": 0.3979722769137663
+   },
+   "J3": {
+    "axial_design_MN": 0.036735724103547585,
+    "lateral_0.01g_MN": 0.00980665
+   }
+  },
+  {
+   "geometry": "N9_gaps",
+   "n": 9,
+   "R_m": 31.0,
+   "tube_r_m": 0.52,
+   "bow_t": 300.0,
+   "fill": 1.0,
+   "EI_N_m2": 83992619745965.31,
+   "GA_N": 6542733742.936861,
+   "EA_N": 195492828640.05096,
+   "added_structure_t": 1475.3244980382867,
+   "structure_t": 1566.213779883923,
+   "f_free_free_Hz": [
+    0.6185071665035963,
+    1.0788761948170769,
+    1.5515932386482825
+   ],
+   "f_cantilever_Hz": [
+    0.17205641407806263,
+    0.5549332624064218,
+    1.0603458624205087
+   ],
+   "f1_Hz": 0.6185071665035963,
+   "f1_bound_note": "free-free with a rigid aft ship at J1 is the upper bound; cantilever at J1 (T05 basis) is the lower bound",
+   "meets_0.2Hz_cantilever": 0.0,
+   "meets_0.2Hz_free_free": 1.0,
+   "buckling_factor_SF2": 496.58799171759034,
+   "lateral": {
+    "0.002g": {
+     "root_moment_MN_m": 70.06890515660889,
+     "root_shear_MN": 0.5752607747010358,
+     "stress_MPa": 8.511549532791978,
+     "allowable_MPa": 240.0,
+     "ok": true
+    },
+    "0.01g": {
+     "root_moment_MN_m": 350.34452578304456,
+     "root_shear_MN": 2.8763038735051794,
+     "stress_MPa": 33.338142914061635,
+     "allowable_MPa": 240.0,
+     "ok": true
+    }
+   },
+   "local": {
+    "longeron_bay_Hz": 78.88161696448195,
+    "longeron_load_MN": 5.380858417208818,
+    "longeron_Pcr_MN": 399.6626400395396,
+    "longeron_buckling_margin": 74.27488498142911,
+    "frame_ovalling_n2_Hz": 0.16444927573695847,
+    "pulse_clear": {
+     "longeron_bay": true,
+     "frame_n2": true
+    }
+   },
+   "J1": {
+    "axial_design_MN": 3.754930440626796,
+    "moment_0.01g_MN_m": 350.34452578304456,
+    "shear_0.01g_MN": 2.8763038735051794
+   },
+   "J3": {
+    "axial_design_MN": 0.11020717231064275,
+    "lateral_0.01g_MN": 0.029419949999999997
+   }
+  },
+  {
+   "geometry": "N9_gaps",
+   "n": 9,
+   "R_m": 31.0,
+   "tube_r_m": 0.52,
+   "bow_t": 300.0,
+   "fill": 0.0,
+   "EI_N_m2": 83992619745965.31,
+   "GA_N": 6542733742.936861,
+   "EA_N": 195492828640.05096,
+   "added_structure_t": 1475.3244980382867,
+   "structure_t": 1566.213779883923,
+   "f_free_free_Hz": [
+    1.346323831857153,
+    2.6183205197606907,
+    3.825008322949105
+   ],
+   "f_cantilever_Hz": [
+    0.39087049995360906,
+    1.3551832473026604,
+    2.642707479118562
+   ],
+   "f1_Hz": 1.346323831857153,
+   "f1_bound_note": "free-free with a rigid aft ship at J1 is the upper bound; cantilever at J1 (T05 basis) is the lower bound",
+   "meets_0.2Hz_cantilever": 1.0,
+   "meets_0.2Hz_free_free": 1.0,
+   "buckling_factor_SF2": 3006.8216678511208,
+   "lateral": {
+    "0.002g": {
+     "root_moment_MN_m": 11.796526061879312,
+     "root_shear_MN": 0.08351711538275325,
+     "stress_MPa": 3.3498281604137348,
+     "allowable_MPa": 240.0,
+     "ok": true
+    },
+    "0.01g": {
+     "root_moment_MN_m": 58.98263030939655,
+     "root_shear_MN": 0.4175855769137663,
+     "stress_MPa": 7.529536052170403,
+     "allowable_MPa": 240.0,
+     "ok": true
+    }
+   },
+   "local": {
+    "longeron_bay_Hz": 78.88161696448195,
+    "longeron_load_MN": 1.2152856728834007,
+    "longeron_Pcr_MN": 399.6626400395396,
+    "longeron_buckling_margin": 328.86312161592053,
+    "frame_ovalling_n2_Hz": 0.16444927573695847,
+    "pulse_clear": {
+     "longeron_bay": true,
+     "frame_n2": true
+    }
+   },
+   "J1": {
+    "axial_design_MN": 3.754930440626796,
+    "moment_0.01g_MN_m": 58.98263030939655,
+    "shear_0.01g_MN": 0.4175855769137663
+   },
+   "J3": {
+    "axial_design_MN": 0.11020717231064275,
+    "lateral_0.01g_MN": 0.029419949999999997
+   }
+  },
+  {
+   "geometry": "N9_gaps",
+   "n": 9,
+   "R_m": 31.0,
+   "tube_r_m": 0.52,
+   "bow_t": 1000.0,
+   "fill": 1.0,
+   "EI_N_m2": 83992619745965.31,
+   "GA_N": 6542733742.936861,
+   "EA_N": 195492828640.05096,
+   "added_structure_t": 1475.3244980382867,
+   "structure_t": 1566.213779883923,
+   "f_free_free_Hz": [
+    0.5943048771190794,
+    1.038222941711912,
+    1.494915206501393
+   ],
+   "f_cantilever_Hz": [
+    0.1649279334211737,
+    0.5307353981980836,
+    1.017399586107689
+   ],
+   "f1_Hz": 0.5943048771190794,
+   "f1_bound_note": "free-free with a rigid aft ship at J1 is the upper bound; cantilever at J1 (T05 basis) is the lower bound",
+   "meets_0.2Hz_cantilever": 0.0,
+   "meets_0.2Hz_free_free": 1.0,
+   "buckling_factor_SF2": 475.81667326886844,
+   "lateral": {
+    "0.002g": {
+     "root_moment_MN_m": 73.84995713060889,
+     "root_shear_MN": 0.5889900847010358,
+     "stress_MPa": 8.846472133987676,
+     "allowable_MPa": 240.0,
+     "ok": true
+    },
+    "0.01g": {
+     "root_moment_MN_m": 369.24978565304457,
+     "root_shear_MN": 2.9449504235051793,
+     "stress_MPa": 35.01275592004013,
+     "allowable_MPa": 240.0,
+     "ok": true
+    }
+   },
+   "local": {
+    "longeron_bay_Hz": 78.88161696448195,
+    "longeron_load_MN": 5.651145082906266,
+    "longeron_Pcr_MN": 399.6626400395396,
+    "longeron_buckling_margin": 70.72241716965466,
+    "frame_ovalling_n2_Hz": 0.16444927573695847,
+    "pulse_clear": {
+     "longeron_bay": true,
+     "frame_n2": true
+    }
+   },
+   "J1": {
+    "axial_design_MN": 3.754930440626796,
+    "moment_0.01g_MN_m": 369.24978565304457,
+    "shear_0.01g_MN": 2.9449504235051793
+   },
+   "J3": {
+    "axial_design_MN": 0.36735724103547585,
+    "lateral_0.01g_MN": 0.0980665
+   }
+  },
+  {
+   "geometry": "N9_gaps",
+   "n": 9,
+   "R_m": 31.0,
+   "tube_r_m": 0.52,
+   "bow_t": 1000.0,
+   "fill": 0.0,
+   "EI_N_m2": 83992619745965.31,
+   "GA_N": 6542733742.936861,
+   "EA_N": 195492828640.05096,
+   "added_structure_t": 1475.3244980382867,
+   "structure_t": 1566.213779883923,
+   "f_free_free_Hz": [
+    1.1910434371661944,
+    2.4288122522100637,
+    3.6493999670280495
+   ],
+   "f_cantilever_Hz": [
+    0.3189323351980099,
+    1.215194001127394,
+    2.4468912106839644
+   ],
+   "f1_Hz": 1.1910434371661944,
+   "f1_bound_note": "free-free with a rigid aft ship at J1 is the upper bound; cantilever at J1 (T05 basis) is the lower bound",
+   "meets_0.2Hz_cantilever": 1.0,
+   "meets_0.2Hz_free_free": 1.0,
+   "buckling_factor_SF2": 2237.5588810718777,
+   "lateral": {
+    "0.002g": {
+     "root_moment_MN_m": 15.577578035879316,
+     "root_shear_MN": 0.09724642538275326,
+     "stress_MPa": 3.684750761609435,
+     "allowable_MPa": 240.0,
+     "ok": true
+    },
+    "0.01g": {
+     "root_moment_MN_m": 77.88789017939656,
+     "root_shear_MN": 0.48623212691376627,
+     "stress_MPa": 9.204149058148904,
+     "allowable_MPa": 240.0,
+     "ok": true
+    }
+   },
+   "local": {
+    "longeron_bay_Hz": 78.88161696448195,
+    "longeron_load_MN": 1.4855723385808504,
+    "longeron_Pcr_MN": 399.6626400395396,
+    "longeron_buckling_margin": 269.0294034562683,
+    "frame_ovalling_n2_Hz": 0.16444927573695847,
+    "pulse_clear": {
+     "longeron_bay": true,
+     "frame_n2": true
+    }
+   },
+   "J1": {
+    "axial_design_MN": 3.754930440626796,
+    "moment_0.01g_MN_m": 77.88789017939656,
+    "shear_0.01g_MN": 0.48623212691376627
+   },
+   "J3": {
+    "axial_design_MN": 0.36735724103547585,
+    "lateral_0.01g_MN": 0.0980665
+   }
+  }
+ ],
+ "sizing_for_0.2Hz": [
+  {
+   "layout": "N6 at R 34.8 m",
+   "bow_t": 100.0,
+   "tube_r_m": 0.7994308860061208,
+   "added_structure_t": 2748.991752415278,
+   "structure_t": 2839.881034260914,
+   "f1_cantilever_Hz": 0.20000000000021267,
+   "f1_free_free_Hz": 0.6917386579951743,
+   "buckling_factor_SF2": 540.3449064188126,
+   "longeron_buckling_margin": 297.42007959961273,
+   "local": {
+    "longeron_bay_Hz": 121.27000180675238,
+    "longeron_load_MN": 7.506432534449862,
+    "longeron_Pcr_MN": 2232.563761905201,
+    "longeron_buckling_margin": 297.42007959961273,
+    "frame_ovalling_n2_Hz": 0.1132948242702023,
+    "pulse_clear": {
+     "longeron_bay": true,
+     "frame_n2": true
+    }
+   }
+  },
+  {
+   "layout": "N6 at R 34.8 m",
+   "bow_t": 300.0,
+   "tube_r_m": 0.8086676689563776,
+   "added_structure_t": 2808.2887947281297,
+   "structure_t": 2899.1780765737653,
+   "f1_cantilever_Hz": 0.2000000000000381,
+   "f1_free_free_Hz": 0.6924685682828137,
+   "buckling_factor_SF2": 548.0975328471322,
+   "longeron_buckling_margin": 306.518879774073,
+   "local": {
+    "longeron_bay_Hz": 122.67117945034127,
+    "longeron_load_MN": 7.626113576777369,
+    "longeron_Pcr_MN": 2337.5477905836483,
+    "longeron_buckling_margin": 306.518879774073,
+    "frame_ovalling_n2_Hz": 0.11218388379485723,
+    "pulse_clear": {
+     "longeron_bay": true,
+     "frame_n2": true
+    }
+   }
+  },
+  {
+   "layout": "N6 at R 34.8 m",
+   "bow_t": 1000.0,
+   "tube_r_m": 0.8408656207700008,
+   "added_structure_t": 3020.3147175742843,
+   "structure_t": 3111.203999419921,
+   "f1_cantilever_Hz": 0.2000000000001414,
+   "f1_free_free_Hz": 0.6962504646014676,
+   "buckling_factor_SF2": 575.031085408177,
+   "longeron_buckling_margin": 339.6349159447657,
+   "local": {
+    "longeron_bay_Hz": 127.5554611849626,
+    "longeron_load_MN": 8.045892635369656,
+    "longeron_Pcr_MN": 2732.6660689143823,
+    "longeron_buckling_margin": 339.6349159447657,
+    "frame_ovalling_n2_Hz": 0.10846339557433249,
+    "pulse_clear": {
+     "longeron_bay": true,
+     "frame_n2": true
+    }
+   }
+  },
+  {
+   "layout": "N9 at R 31 m",
+   "bow_t": 100.0,
+   "tube_r_m": 0.6027641037783269,
+   "added_structure_t": 1921.8089928547865,
+   "structure_t": 2012.698274700423,
+   "f1_cantilever_Hz": 0.20000000000038104,
+   "f1_free_free_Hz": 0.7220146013088179,
+   "buckling_factor_SF2": 664.0693168329276,
+   "longeron_buckling_margin": 133.54091091918428,
+   "local": {
+    "longeron_bay_Hz": 91.43655221957926,
+    "longeron_load_MN": 5.40325380545789,
+    "longeron_Pcr_MN": 721.5554351083956,
+    "longeron_buckling_margin": 133.54091091918428,
+    "frame_ovalling_n2_Hz": 0.14545784577510626,
+    "pulse_clear": {
+     "longeron_bay": true,
+     "frame_n2": true
+    }
+   }
+  },
+  {
+   "layout": "N9 at R 31 m",
+   "bow_t": 300.0,
+   "tube_r_m": 0.610830765295441,
+   "added_structure_t": 1968.8464040565864,
+   "structure_t": 2059.7356859022225,
+   "f1_cantilever_Hz": 0.20000000000022802,
+   "f1_free_free_Hz": 0.722497061113732,
+   "buckling_factor_SF2": 672.6944921840866,
+   "longeron_buckling_margin": 138.59262958795352,
+   "local": {
+    "longeron_bay_Hz": 92.66022780414681,
+    "longeron_load_MN": 5.4906486569595225,
+    "longeron_Pcr_MN": 760.9634355115855,
+    "longeron_buckling_margin": 138.59262958795352,
+    "frame_ovalling_n2_Hz": 0.1438184690365709,
+    "pulse_clear": {
+     "longeron_bay": true,
+     "frame_n2": true
+    }
+   }
+  },
+  {
+   "layout": "N9 at R 31 m",
+   "bow_t": 1000.0,
+   "tube_r_m": 0.6387965617994267,
+   "added_structure_t": 2136.7591070602202,
+   "structure_t": 2227.6483889058563,
+   "f1_cantilever_Hz": 0.200000000000476,
+   "f1_free_free_Hz": 0.7259462347523435,
+   "buckling_factor_SF2": 701.1534681431042,
+   "longeron_buckling_margin": 157.01303057820508,
+   "local": {
+    "longeron_bay_Hz": 96.90251097325077,
+    "longeron_load_MN": 5.796886030087163,
+    "longeron_Pcr_MN": 910.1866435004455,
+    "longeron_buckling_margin": 157.01303057820508,
+    "frame_ovalling_n2_Hz": 0.13838858971017176,
+    "pulse_clear": {
+     "longeron_bay": true,
+     "frame_n2": true
+    }
+   }
+  }
+ ],
+ "requirements": {
+  "f1_min_Hz": 0.2,
+  "basis": "3x the highest slosh (0.040 Hz) and 3x ring spin (0.0667 Hz); below the pulse rate by > 100x",
+  "slosh_Hz": {
+   "outer": [
+    0.022111219812142747,
+    0.03644151913653015
+   ],
+   "inner": [
+    0.024054387794042804,
+    0.03964405584863936
+   ]
+  },
+  "ring_spin_Hz": 0.06666666666666667,
+  "pulse_Hz": 195.73784854631526,
+  "tank_saddle": {
+   "recommend_Hz": [
+    10.0,
+    30.0
+   ],
+   "max_vessel_t": 408.69515561728167,
+   "k_N_m_at_10Hz": 1613463802.6336894,
+   "transmissibility_at_pulse": 0.002610059327360011,
+   "note": "isolate the vessels: a saddle mode at 10-30 Hz passes (f/f_p)^2 = 0.3-2.3 % of the pulse ripple and stays well above f1 and the slosh band; a stiff saddle above 196 Hz would need about 7e11 N/m per vessel"
+  }
+ },
+ "thermal_bow": {
+  "N6_drawn": {
+   "10K": {
+    "curvature_per_m": 2.8735632183908047e-07,
+    "tip_deflection_m": 0.010897293103448275,
+    "angle_urad": 79.13793103448276
+   },
+   "50K": {
+    "curvature_per_m": 1.4367816091954023e-06,
+    "tip_deflection_m": 0.05448646551724137,
+    "angle_urad": 395.6896551724138
+   }
+  },
+  "N6_fixed": {
+   "10K": {
+    "curvature_per_m": 2.8735632183908047e-07,
+    "tip_deflection_m": 0.010897293103448275,
+    "angle_urad": 79.13793103448276
+   },
+   "50K": {
+    "curvature_per_m": 1.4367816091954023e-06,
+    "tip_deflection_m": 0.05448646551724137,
+    "angle_urad": 395.6896551724138
+   }
+  },
+  "N9_gaps": {
+   "10K": {
+    "curvature_per_m": 3.225806451612903e-07,
+    "tip_deflection_m": 0.012233090322580643,
+    "angle_urad": 88.83870967741933
+   },
+   "50K": {
+    "curvature_per_m": 1.6129032258064514e-06,
+    "tip_deflection_m": 0.06116545161290321,
+    "angle_urad": 444.1935483870967
+   }
+  }
+ },
+ "independence": {
+  "K2": "pressure tube r 3 m az 90 deg, between keels 30 and 150; carries no primary load; its own 2.2 m tube",
+  "launcher": "in the spine bore or on its own kinematic rail; must not be a primary member (thermal bow of the stretch is 0.4-2 mrad, far above the 22 urad untracked pointing need)",
+  "services": "two independent runs on keels 150 and 270 (K2 on the 90 side), cross-tied at J1 and J3",
+  "checks": [
+   "K2 and the launcher share no member",
+   "loss of one keel: cantilever f1 in keel_loss"
+  ]
+ },
+ "keel_loss": {
+  "N6_fixed": 0.18917367079173852,
+  "N9_gaps": 0.17210825618596148
+ }
+}

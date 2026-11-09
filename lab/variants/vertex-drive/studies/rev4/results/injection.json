@@ -1,0 +1,1406 @@
+{
+ "study": "Revision 4 section 4, target injection (T00)",
+ "axis_field_summary": {
+  "burn_point_T": 0.6725777999412648,
+  "snout_tip_T": 3.1136167462994973,
+  "max_open_path_T": 2.9634121380756375,
+  "max_to_shield_T": 5.118323917283282,
+  "note": "vacuum field of the T03 C_W15 set at V4 scale; the last 20 m of barrel (snout) and the open path cross it. A metal hohlraum at 8.8 km/s through this field takes eddy heating and drag; a non-conducting direct-drive capsule does not. The coilgun stages in the snout run in this background field."
+ },
+ "status": "MODEL, research only, NON-CANON",
+ "parameters": {
+  "D_mass_fraction": {
+   "value": 0.4,
+   "basis": "equimolar D:3He by atoms (FDP-1 fuel D/3He); mass fraction of D"
+  },
+  "rho_D2_solid": {
+   "value": 200.0,
+   "basis": "SOURCE: solid D2 kg/m3"
+  },
+  "rho_He3_liquid": {
+   "value": 82.0,
+   "basis": "SOURCE: liquid 3He at 1-2 K, kg/m3"
+  },
+  "gamma_He3": {
+   "value": 0.00015,
+   "basis": "SOURCE: 3He surface tension near 1 K, N/m"
+  },
+  "mu_He3": {
+   "value": 2e-06,
+   "basis": "SOURCE (order): liquid 3He viscosity, Pa s"
+  },
+  "D2_ice_yield_Pa": {
+   "value": [
+    300000.0,
+    1000000.0
+   ],
+   "basis": "EXTRAPOLATION: solid D2 yield / creep threshold near 10-17 K"
+  },
+  "HDC_allow_Pa": {
+   "value": 1000000000.0,
+   "basis": "PROTOTYPE: high-density-carbon shell allowable membrane stress (strength several GPa)"
+  },
+  "rho_HDC": {
+   "value": 3500.0,
+   "basis": "SOURCE"
+  },
+  "rho_GDP": {
+   "value": 1050.0,
+   "basis": "SOURCE"
+  },
+  "GDP_allow_Pa": {
+   "value": 60000000.0,
+   "basis": "PROTOTYPE polymer shell allowable"
+  },
+  "capsule_r_m": {
+   "value": 0.02,
+   "basis": "PROTOTYPE capsule outer radius for 0.77 g of D/3He (liquid / solid fuel needs about 1.2 cm radius)"
+  },
+  "sabot_to_target": {
+   "value": 3.0,
+   "basis": "PROTOTYPE sabot mass per target mass (EM armature + carrier)"
+  },
+  "launcher_efficiency": {
+   "value": 0.4,
+   "basis": "EXTRAPOLATION: coilgun electrical-to-kinetic"
+  },
+  "launcher_kg_per_m": {
+   "value": 250.0,
+   "basis": "PROTOTYPE coilgun stages, structure and cooling per metre"
+  },
+  "store_J_per_kg": {
+   "value": 1000.0,
+   "basis": "EXTRAPOLATION: pulsed capacitor bank energy density"
+  },
+  "tip_fluence_J_cm2": {
+   "value": 8.3,
+   "basis": "T05 Rev 3 snout-tip X-ray fluence per pulse (launcher B)"
+  },
+  "accel_cases_g": {
+   "value": [
+    500.0,
+    1000.0,
+    3000.0,
+    6400.0,
+    13700.0
+   ],
+   "basis": "acceleration levels compared"
+  },
+  "placement_mm": {
+   "value": 0.1,
+   "basis": "PROTOTYPE: target position tolerance at the burn point after tracking"
+  },
+  "steering_mm": {
+   "value": 5.0,
+   "basis": "PROTOTYPE: driver beam steering range"
+  }
+ },
+ "evidence": [
+  {
+   "item": "IFE gas-gun injector (GA)",
+   "kind": "DEMONSTRATED / DESIGN",
+   "target": "direct-drive DT capsule in sabot",
+   "value": "400 m/s over an 8 m barrel at <= 10,000 m/s2 (1,020 g)",
+   "source": "Petzoldt, Goodin et al., Fusion Sci. Technol. 2003 (ANS article 323); ARIES meeting 2000 (aries.pppl.gov/MEETINGS/0009/Petzoldt.pdf)"
+  },
+  {
+   "item": "Frozen-DT strength in a capsule",
+   "kind": "CALCULATED (literature)",
+   "target": "layered DT ice below 17 K",
+   "value": "> 10,000 m/s2 (1,020 g) allowed; dual-membrane hohlraum support about 2,000 m/s2 (204 g)",
+   "source": "Petzoldt and Moir 1996, as summarised in ARIES/GA injection papers"
+  },
+  {
+   "item": "IFE injector design ranges",
+   "kind": "DESIGN STUDIES",
+   "target": "layered IFE targets",
+   "value": "1,000-10,000 m/s2; 100-400 m/s; the 400 m/s choice is set by chamber heating, not strength",
+   "source": "ARIES-IFE injection reviews (aries.pppl.gov/MEETINGS/0110/Petzoldt.pdf, IAEA IFE CRP Goodin 2001)"
+  },
+  {
+   "item": "Levitated / electromagnetic sabot mock-ups",
+   "kind": "DEMONSTRATED (mock-up)",
+   "target": "sabot only",
+   "value": "about 500 g",
+   "source": "T05 Rev 3 rev3.json launcher_target.tolerance_evidence_g (T05 literature pass)"
+  },
+  {
+   "item": "Two-stage light-gas gun, D2 pellets with sabot",
+   "kind": "DEMONSTRATED",
+   "target": "solid D2 pellet (MFE fuelling)",
+   "value": "3.8 km/s with a sabot (European group); ORNL bare D2 2.85 km/s, plastic 4.5 km/s; repetitive 2.5 km/s at 1 Hz",
+   "source": "ORNL pellet-injector papers (osti.gov/servlets/purl/7043184, /5588343); ORNL-ENEA repetitive two-stage gun"
+  },
+  {
+   "item": "Bare solid hydrogen pellet acceleration",
+   "kind": "DEMONSTRATED",
+   "target": "solid D2, no layer, no uniformity need",
+   "value": "about 5-6e6 m/s2 (510-610 kg-g) before fracture",
+   "source": "T05 Rev 3 MFE_bare_pellet_fracture_g"
+  },
+  {
+   "item": "Sabot stripping at > 1 km/s and many Hz",
+   "kind": "NOT DEMONSTRATED",
+   "target": "any",
+   "value": "no reliable repetitive sabot separation reported at km/s speeds",
+   "source": "ORNL papers note sabot use, not a repetitive separator"
+  },
+  {
+   "item": "3He phase",
+   "kind": "SOURCE (physical property)",
+   "target": "fuel",
+   "value": "3He is not solid below 2.93 MPa at any temperature (melting-curve minimum 2.93 MPa at 0.32 K); liquid below 3.3 K",
+   "source": "He-3 melting curve (PLTS-2000 scale)"
+  },
+  {
+   "item": "REBCO neutron tolerance",
+   "kind": "SOURCE",
+   "target": "closure coils (cross-check for \u00a73)",
+   "value": "degradation already at about 3.3e18 n/cm2; in-situ 14 MeV irradiation at 40 K shows Ic loss far below ex-situ thresholds",
+   "source": "Oxford / UKAEA in-situ REBCO irradiation (ora.ox.ac.uk uuid:b463ec76...); review in sci-08-00178 (MDPI)"
+  }
+ ],
+ "target_classes": {
+  "fuel_radius_m": 0.01197564243992369,
+  "capsule_radius_m": 0.02,
+  "classes": [
+   {
+    "class": "solid pellet (D2 only)",
+    "fits_DHe3": false,
+    "limit_g": 21287.29665430012,
+    "mechanism": "base stress rho a L below the D2 yield stress; but 3He cannot be carried as a solid (needs > 2.93 MPa), so a D/3He target cannot be a bare solid pellet",
+    "evidence": "MFE pellets: 5-6e6 m/s2 bare"
+   },
+   {
+    "class": "layered: liquid 3He in 25 nm foam",
+    "fits_DHe3": true,
+    "limit_g": 373.06690718704687,
+    "capillary_Pa": 12000.0,
+    "drain_mm_at_8.81km_s_k1e-13": 36.121,
+    "mechanism": "liquid relocates once rho a (2 r) exceeds the capillary pressure; drained liquid cannot rewet in a 5 ms flight (capillary refill takes seconds); displacement k rho v / mu is independent of a"
+   },
+   {
+    "class": "layered: liquid 3He in 10 nm foam",
+    "fits_DHe3": true,
+    "limit_g": 932.6672679676171,
+    "capillary_Pa": 29999.999999999996,
+    "drain_mm_at_8.81km_s_k1e-13": 36.121,
+    "mechanism": "liquid relocates once rho a (2 r) exceeds the capillary pressure; drained liquid cannot rewet in a 5 ms flight (capillary refill takes seconds); displacement k rho v / mu is independent of a"
+   },
+   {
+    "class": "layered: D2 ice on a shell wall (yield 0.3 MPa)",
+    "fits_DHe3": true,
+    "limit_g": 7647.871597334462,
+    "mechanism": "shear in the ice layer about rho a r; above it the layer slumps (uniformity lost); 3He must still be carried as liquid or gas"
+   },
+   {
+    "class": "layered: D2 ice on a shell wall (yield 1 MPa)",
+    "fits_DHe3": true,
+    "limit_g": 25492.90532444821,
+    "mechanism": "shear in the ice layer about rho a r; above it the layer slumps (uniformity lost); 3He must still be carried as liquid or gas"
+   },
+   {
+    "class": "strong shell, gas fill 30 K, HDC",
+    "fits_DHe3": true,
+    "fill_MPa": 1.7140747300889345,
+    "wall_um": 17.14074730088935,
+    "wall_g": 0.30155577646607307,
+    "shell_to_fuel": 0.3905369110523419,
+    "limit_g": 102282.38788328663,
+    "fuel_density_g_cc": 0.023042360602275637,
+    "convergence_to_2000": 44.275928312472566,
+    "gas_scale_height_m": 0.9342204178711107,
+    "mechanism": "wall carries its fill pressure and the inertial load; fuel stays uniform because a gas re-equilibrates at sound speed in about 0.1 ms; penalties: wall mass, convergence about 2x the liquid case, a cold high-pressure fill at 196 Hz (fill tube or cold permeation), carbon mix"
+   },
+   {
+    "class": "strong shell, gas fill 30 K, GDP polymer",
+    "fits_DHe3": true,
+    "fill_MPa": 1.7140747300889345,
+    "wall_um": 285.6791216814891,
+    "wall_g": 1.5077788823303653,
+    "shell_to_fuel": 1.9526845552617091,
+    "limit_g": 48168.85550772174,
+    "fuel_density_g_cc": 0.023042360602275637,
+    "convergence_to_2000": 44.275928312472566,
+    "gas_scale_height_m": 0.9342204178711107,
+    "mechanism": "wall carries its fill pressure and the inertial load; fuel stays uniform because a gas re-equilibrates at sound speed in about 0.1 ms; penalties: wall mass, convergence about 2x the liquid case, a cold high-pressure fill at 196 Hz (fill tube or cold permeation), carbon mix"
+   },
+   {
+    "class": "strong shell, gas fill 77 K, HDC",
+    "fits_DHe3": true,
+    "fill_MPa": 4.399458473894931,
+    "wall_um": 43.994584738949314,
+    "wall_g": 0.773993159596254,
+    "shell_to_fuel": 1.0023780717010105,
+    "limit_g": 182308.43788277078,
+    "fuel_density_g_cc": 0.023042360602275637,
+    "convergence_to_2000": 44.275928312472566,
+    "gas_scale_height_m": 2.397832405869184,
+    "mechanism": "wall carries its fill pressure and the inertial load; fuel stays uniform because a gas re-equilibrates at sound speed in about 0.1 ms; penalties: wall mass, convergence about 2x the liquid case, a cold high-pressure fill at 196 Hz (fill tube or cold permeation), carbon mix"
+   },
+   {
+    "class": "strong shell, gas fill 77 K, GDP polymer",
+    "fits_DHe3": true,
+    "fill_MPa": 4.399458473894931,
+    "wall_um": 733.2430789824886,
+    "wall_g": 3.86996579798127,
+    "shell_to_fuel": 5.0118903585050525,
+    "limit_g": 60721.4031749743,
+    "fuel_density_g_cc": 0.023042360602275637,
+    "convergence_to_2000": 44.275928312472566,
+    "gas_scale_height_m": 2.397832405869184,
+    "mechanism": "wall carries its fill pressure and the inertial load; fuel stays uniform because a gas re-equilibrates at sound speed in about 0.1 ms; penalties: wall mass, convergence about 2x the liquid case, a cold high-pressure fill at 196 Hz (fill tube or cold permeation), carbon mix"
+   },
+   {
+    "class": "indirect drive: capsule on membranes / foam in a hohlraum",
+    "fits_DHe3": true,
+    "limit_g": 203.94324259558567,
+    "support_stress_kPa_at_13700g": 123.83066434896789,
+    "mechanism": "membrane tents give about 2,000 m/s2 (Petzoldt and Moir); a foam bed must carry m a / (pi r^2), about 160 kPa at 13,700 g, i.e. a structural foam that disturbs the drive"
+   }
+  ]
+ },
+ "axis_field_T": [
+  [
+   0.0,
+   0.6725777999412648
+  ],
+  [
+   0.9802937287498733,
+   0.6852955136191271
+  ],
+  [
+   1.9605874574997466,
+   0.6985105065076149
+  ],
+  [
+   2.94088118624962,
+   0.7122519797632848
+  ],
+  [
+   3.921174914999493,
+   0.7265513558708968
+  ],
+  [
+   4.901468643749367,
+   0.7414424908730851
+  ],
+  [
+   5.88176237249924,
+   0.7569619092685463
+  ],
+  [
+   6.862056101249113,
+   0.7731490637244326
+  ],
+  [
+   7.842349829998986,
+   0.7900466218642705
+  ],
+  [
+   8.822643558748862,
+   0.8077007824957984
+  ],
+  [
+   9.802937287498734,
+   0.8261616237274146
+  ],
+  [
+   10.783231016248607,
+   0.8454834854794844
+  ],
+  [
+   11.76352474499848,
+   0.86572538891705
+  ],
+  [
+   12.743818473748354,
+   0.886951495299998
+  ],
+  [
+   13.724112202498226,
+   0.9092316066477133
+  ],
+  [
+   14.704405931248099,
+   0.9326417104247138
+  ],
+  [
+   15.684699659997973,
+   0.957264570141838
+  ],
+  [
+   16.66499338874785,
+   0.9831903632956875
+  ],
+  [
+   17.645287117497723,
+   1.0105173673874768
+  ],
+  [
+   18.625580846247594,
+   1.0393526938075475
+  ],
+  [
+   19.60587457499747,
+   1.0698130680624416
+  ],
+  [
+   20.586168303747343,
+   1.1020256530549761
+  ],
+  [
+   21.566462032497213,
+   1.1361289097753788
+  ],
+  [
+   22.546755761247084,
+   1.1722734866628832
+  ],
+  [
+   23.52704948999696,
+   1.2106231248547124
+  ],
+  [
+   24.507343218746833,
+   1.2513555613124612
+  ],
+  [
+   25.487636947496707,
+   1.2946634051154706
+  ],
+  [
+   26.467930676246578,
+   1.3407549536951258
+  ],
+  [
+   27.448224404996452,
+   1.3898549050574256
+  ],
+  [
+   28.428518133746326,
+   1.4422049086571267
+  ],
+  [
+   29.408811862496197,
+   1.4980638810592377
+  ],
+  [
+   30.38910559124607,
+   1.5577079923501924
+  ],
+  [
+   31.369399319995946,
+   1.6214302049642573
+  ],
+  [
+   32.34969304874582,
+   1.6895392177857087
+  ],
+  [
+   33.3299867774957,
+   1.762357634885273
+  ],
+  [
+   34.31028050624557,
+   1.8402191402108627
+  ],
+  [
+   35.29057423499545,
+   1.9234644177038807
+  ],
+  [
+   36.27086796374531,
+   2.0124355122408164
+  ],
+  [
+   37.25116169249519,
+   2.1074682833408342
+  ],
+  [
+   38.23145542124506,
+   2.2088825652990614
+  ],
+  [
+   39.21174914999494,
+   2.3169696211627073
+  ],
+  [
+   40.19204287874481,
+   2.4319764735190543
+  ],
+  [
+   41.172336607494685,
+   2.554086725603206
+  ],
+  [
+   42.152630336244556,
+   2.6833975686915035
+  ],
+  [
+   43.13292406499443,
+   2.8198928265856487
+  ],
+  [
+   44.1132177937443,
+   2.9634121380756375
+  ],
+  [
+   45.09351152249417,
+   3.1136167462994973
+  ],
+  [
+   46.073805251244046,
+   3.269952867866574
+  ],
+  [
+   47.05409897999392,
+   3.43161426066547
+  ],
+  [
+   48.034392708743795,
+   3.59750638219468
+  ],
+  [
+   49.014686437493665,
+   3.7662153818249515
+  ],
+  [
+   49.99498016624354,
+   3.93598600803979
+  ],
+  [
+   50.975273894993414,
+   4.104713190925319
+  ],
+  [
+   51.955567623743285,
+   4.269952386611827
+  ],
+  [
+   52.935861352493156,
+   4.428953517801423
+  ],
+  [
+   53.91615508124303,
+   4.578722294544447
+  ],
+  [
+   54.896448809992904,
+   4.716110703375781
+  ],
+  [
+   55.87674253874278,
+   4.8379355080082105
+  ],
+  [
+   56.85703626749265,
+   4.941119924805801
+  ],
+  [
+   57.83732999624253,
+   5.0228496870565795
+  ],
+  [
+   58.817623724992394,
+   5.0807311801286446
+  ],
+  [
+   59.79791745374227,
+   5.112937005393549
+  ],
+  [
+   60.77821118249214,
+   5.118323917283282
+  ],
+  [
+   61.75850491124202,
+   5.0965099717717814
+  ],
+  [
+   62.73879863999189,
+   5.047901846011447
+  ],
+  [
+   63.71909236874177,
+   4.973669033804069
+  ],
+  [
+   64.69938609749164,
+   4.875667975746803
+  ]
+ ],
+ "axis_plasma": {
+  "shield_strike_share_of_plasma": 0.003195155355517331,
+  "unstopped_forward_share": 0.0015223526320451354,
+  "stopping_radius_by_polar_deg": {
+   "0": null,
+   "10": 29.65,
+   "20": 26.29,
+   "30": 25.38,
+   "40": 25.63,
+   "50": 26.6,
+   "60": 28.1,
+   "70": 30.48,
+   "80": 34.42,
+   "90": 38.82,
+   "100": 43.29,
+   "110": 51.51,
+   "120": 72.7,
+   "130": 85.54,
+   "140": null,
+   "150": null,
+   "160": null,
+   "170": null,
+   "180": null
+  },
+  "shield_plasma_J_per_pulse": 576350483.6624615,
+  "shield_plasma_W": 112813603680.71844,
+  "shield_face_m2": 121.86468987333575,
+  "shield_mean_J_cm2_per_pulse": 472.94296999525557,
+  "shield_mean_MW_m2": 925.7283943197585,
+  "note": "T03 thin-shell MODEL: on the axis (polar 0) no stopping radius exists, so near-axis plasma reaches the shield face and any snout on the axis. FDP-1 books this heat in plume_to_hardware (hot loop) but no surface check uses it."
+ },
+ "accel_vs_length": [
+  {
+   "open_flight_m": 25.0,
+   "accel_g": 500.0,
+   "muzzle_m_s": 4893.446213657881,
+   "accelerator_m": 2441.7936651111904,
+   "launch_ms": 997.9852882804794,
+   "tip_xray_J_cm2": 26.790467592910694,
+   "tip_xray_MW_m2": 52.43908488186121
+  },
+  {
+   "open_flight_m": 25.0,
+   "accel_g": 1000.0,
+   "muzzle_m_s": 4893.446213657881,
+   "accelerator_m": 1220.8968325555952,
+   "launch_ms": 498.9926441402397,
+   "tip_xray_J_cm2": 26.790467592910694,
+   "tip_xray_MW_m2": 52.43908488186121
+  },
+  {
+   "open_flight_m": 25.0,
+   "accel_g": 3000.0,
+   "muzzle_m_s": 4893.446213657881,
+   "accelerator_m": 406.9656108518651,
+   "launch_ms": 166.3308813800799,
+   "tip_xray_J_cm2": 26.790467592910694,
+   "tip_xray_MW_m2": 52.43908488186121
+  },
+  {
+   "open_flight_m": 25.0,
+   "accel_g": 6400.0,
+   "muzzle_m_s": 4893.446213657881,
+   "accelerator_m": 190.76513008681175,
+   "launch_ms": 77.96760064691246,
+   "tip_xray_J_cm2": 26.790467592910694,
+   "tip_xray_MW_m2": 52.43908488186121
+  },
+  {
+   "open_flight_m": 25.0,
+   "accel_g": 13700.0,
+   "muzzle_m_s": 4893.446213657881,
+   "accelerator_m": 89.11655712084638,
+   "launch_ms": 36.42282074016349,
+   "tip_xray_J_cm2": 26.790467592910694,
+   "tip_xray_MW_m2": 52.43908488186121
+  },
+  {
+   "open_flight_m": 45.0,
+   "accel_g": 500.0,
+   "muzzle_m_s": 8808.203184584187,
+   "accelerator_m": 7911.411474960257,
+   "launch_ms": 1796.3735189048627,
+   "tip_xray_J_cm2": 8.268662837318114,
+   "tip_xray_MW_m2": 16.184902741315184
+  },
+  {
+   "open_flight_m": 45.0,
+   "accel_g": 1000.0,
+   "muzzle_m_s": 8808.203184584187,
+   "accelerator_m": 3955.7057374801284,
+   "launch_ms": 898.1867594524314,
+   "tip_xray_J_cm2": 8.268662837318114,
+   "tip_xray_MW_m2": 16.184902741315184
+  },
+  {
+   "open_flight_m": 45.0,
+   "accel_g": 3000.0,
+   "muzzle_m_s": 8808.203184584187,
+   "accelerator_m": 1318.5685791600429,
+   "launch_ms": 299.39558648414385,
+   "tip_xray_J_cm2": 8.268662837318114,
+   "tip_xray_MW_m2": 16.184902741315184
+  },
+  {
+   "open_flight_m": 45.0,
+   "accel_g": 6400.0,
+   "muzzle_m_s": 8808.203184584187,
+   "accelerator_m": 618.07902148127,
+   "launch_ms": 140.34168116444243,
+   "tip_xray_J_cm2": 8.268662837318114,
+   "tip_xray_MW_m2": 16.184902741315184
+  },
+  {
+   "open_flight_m": 45.0,
+   "accel_g": 13700.0,
+   "muzzle_m_s": 8808.203184584187,
+   "accelerator_m": 288.73764507154226,
+   "launch_ms": 65.56107733229427,
+   "tip_xray_J_cm2": 8.268662837318114,
+   "tip_xray_MW_m2": 16.184902741315184
+  },
+  {
+   "open_flight_m": 64.7,
+   "accel_g": 500.0,
+   "muzzle_m_s": 12664.238800946598,
+   "accelerator_m": 16354.508869736488,
+   "launch_ms": 2582.7859260698806,
+   "tip_xray_J_cm2": 3.999924092785674,
+   "tip_xray_MW_m2": 7.829365362704396
+  },
+  {
+   "open_flight_m": 64.7,
+   "accel_g": 1000.0,
+   "muzzle_m_s": 12664.238800946598,
+   "accelerator_m": 8177.254434868244,
+   "launch_ms": 1291.3929630349403,
+   "tip_xray_J_cm2": 3.999924092785674,
+   "tip_xray_MW_m2": 7.829365362704396
+  },
+  {
+   "open_flight_m": 64.7,
+   "accel_g": 3000.0,
+   "muzzle_m_s": 12664.238800946598,
+   "accelerator_m": 2725.751478289415,
+   "launch_ms": 430.46432101164686,
+   "tip_xray_J_cm2": 3.999924092785674,
+   "tip_xray_MW_m2": 7.829365362704396
+  },
+  {
+   "open_flight_m": 64.7,
+   "accel_g": 6400.0,
+   "muzzle_m_s": 12664.238800946598,
+   "accelerator_m": 1277.696005448163,
+   "launch_ms": 201.78015047420945,
+   "tip_xray_J_cm2": 3.999924092785674,
+   "tip_xray_MW_m2": 7.829365362704396
+  },
+  {
+   "open_flight_m": 64.7,
+   "accel_g": 13700.0,
+   "muzzle_m_s": 12664.238800946598,
+   "accelerator_m": 596.8798857568062,
+   "launch_ms": 94.2622600755431,
+   "tip_xray_J_cm2": 3.999924092785674,
+   "tip_xray_MW_m2": 7.829365362704396
+  }
+ ],
+ "candidates": [
+  {
+   "label": "B (T05 Rev 3): 45 m open, 13,700 g",
+   "basis": "T05 Rev 3 geometry, V4 rate",
+   "kinematics": {
+    "rate_Hz": 195.73784854631526,
+    "open_flight_m": 45.0,
+    "muzzle_m_s": 8808.203184584187,
+    "accel_g": 13700.0,
+    "accelerator_m": 288.73764507154226,
+    "launch_ms": 65.56107733229427,
+    "target_kg": 0.0011582353726316164,
+    "sabot_kg": 0.0034747061178948494,
+    "shot_J": 179722.0932867717,
+    "kinetic_W": 35178415.87619286,
+    "electric_W": 87946039.69048214,
+    "sabot_catcher_W": 26383811.907144647,
+    "tip_xray_J_cm2": 8.268662837318114,
+    "tip_xray_MW_m2": 16.184902741315184,
+    "launcher_kg": 73083.02173431942,
+    "shots_per_mission": 35117291618.64383
+   },
+   "target_class": "best layered liquid / ice target (<= 933 g)",
+   "class_limit_g": 932.6672679676171,
+   "survives": false,
+   "fits_ship": true,
+   "available_straight_m": 594.3499999999999,
+   "uncoupled": {
+    "converged": true,
+    "departure_t": 42915.783853018824,
+    "a0_g": 0.006895573489099627,
+    "fusion_TW": 35.71976022315651,
+    "radiator_t": 3572.4500289867,
+    "hot_km2": 0.4616189354301207,
+    "warm_km2": 4.951041268491101,
+    "drive_t": 7357.663508307523,
+    "propellant_t": 27116.059611797376,
+    "tank_t": 2544.7683195441664,
+    "end_t": 15799.724241221445,
+    "xray_standoff_m": null,
+    "payload_t": 1240.2,
+    "wing_tip_radius_m": 10127.573934427086,
+    "pellet_rate_Hz": 195.73784854631526
+   },
+   "coil_hw_kg": 2049938.7470423908,
+   "coil_share": 0.01491578868932587,
+   "C1_radius_m": 22.12849330614687,
+   "stand_off_m": 64.69938609749164,
+   "yield_GJ": 182.48775331654235,
+   "coupled_set": {
+    "base.overrides.continuous.plume_to_hardware.value": 0.06583547319977415,
+    "base.overrides.pulsed.house_fraction.value": 4.689158017379798e-05,
+    "mission.payload.reference_t": 3363.2217687767106
+   },
+   "coupled": {
+    "converged": true,
+    "departure_t": 69445.94164077076,
+    "a0_g": 0.006895573489099627,
+    "fusion_TW": 57.801574209835515,
+    "radiator_t": 5805.769419382968,
+    "hot_km2": 0.7564092449131408,
+    "warm_km2": 8.022417839802559,
+    "drive_t": 10524.902474693936,
+    "propellant_t": 43878.967695846455,
+    "tank_t": 4117.921574098546,
+    "end_t": 25566.97394492431,
+    "xray_standoff_m": null,
+    "payload_t": 3363.2217687767106,
+    "wing_tip_radius_m": 16437.165088681024,
+    "pellet_rate_Hz": 316.7325404634857
+   },
+   "notes": "13.7x the strongest layered-target evidence; no D/3He layered construction survives",
+   "verdict": "NOT DEFENSIBLE"
+  },
+  {
+   "label": "B-long: 45 m open, 594 m accelerator (6,656 g)",
+   "basis": "longest straight run (shield to forward shield)",
+   "kinematics": {
+    "rate_Hz": 195.73784854631526,
+    "open_flight_m": 45.0,
+    "muzzle_m_s": 8808.203184584187,
+    "accel_g": 6655.515668343786,
+    "accelerator_m": 594.3499999999999,
+    "launch_ms": 134.9537442642583,
+    "target_kg": 0.0011582353726316164,
+    "sabot_kg": 0.0034747061178948494,
+    "shot_J": 179722.0932867717,
+    "kinetic_W": 35178415.87619286,
+    "electric_W": 87946039.69048214,
+    "sabot_catcher_W": 26383811.907144647,
+    "tip_xray_J_cm2": 8.268662837318114,
+    "tip_xray_MW_m2": 16.184902741315184,
+    "launcher_kg": 149486.11046643383,
+    "shots_per_mission": 35117291618.64383
+   },
+   "target_class": "best layered target (<= 933 g)",
+   "class_limit_g": 932.6672679676171,
+   "survives": false,
+   "fits_ship": true,
+   "available_straight_m": 594.3499999999999,
+   "uncoupled": {
+    "converged": true,
+    "departure_t": 42915.783853018824,
+    "a0_g": 0.006895573489099627,
+    "fusion_TW": 35.71976022315651,
+    "radiator_t": 3572.4500289867,
+    "hot_km2": 0.4616189354301207,
+    "warm_km2": 4.951041268491101,
+    "drive_t": 7357.663508307523,
+    "propellant_t": 27116.059611797376,
+    "tank_t": 2544.7683195441664,
+    "end_t": 15799.724241221445,
+    "xray_standoff_m": null,
+    "payload_t": 1240.2,
+    "wing_tip_radius_m": 10127.573934427086,
+    "pellet_rate_Hz": 195.73784854631526
+   },
+   "coil_hw_kg": 2049938.7470423908,
+   "coil_share": 0.01491578868932587,
+   "C1_radius_m": 22.12849330614687,
+   "stand_off_m": 64.69938609749164,
+   "yield_GJ": 182.48775331654235,
+   "coupled_set": {
+    "base.overrides.continuous.plume_to_hardware.value": 0.06583547319977415,
+    "base.overrides.pulsed.house_fraction.value": 4.689158017379798e-05,
+    "mission.payload.reference_t": 3439.624857508825
+   },
+   "coupled": {
+    "converged": true,
+    "departure_t": 70390.86519800313,
+    "a0_g": 0.006895573489099627,
+    "fusion_TW": 58.58805750880842,
+    "radiator_t": 5884.776080531441,
+    "hot_km2": 0.7667051777565566,
+    "warm_km2": 8.131579798145353,
+    "drive_t": 10637.45977386181,
+    "propellant_t": 44476.01151530129,
+    "tank_t": 4173.952510187714,
+    "end_t": 25914.85368270184,
+    "xray_standoff_m": null,
+    "payload_t": 3439.624857508825,
+    "wing_tip_radius_m": 16661.07866166361,
+    "pellet_rate_Hz": 321.04218893414895
+   },
+   "notes": "the whole ship length still leaves the target above every layered limit",
+   "verdict": "NOT DEFENSIBLE"
+  },
+  {
+   "label": "B-modified: B kinematics, 30 K gas-filled HDC capsule",
+   "basis": "physical basis: gas fill is uniform by construction; strength margin from the HDC wall",
+   "kinematics": {
+    "rate_Hz": 195.73784854631526,
+    "open_flight_m": 45.0,
+    "muzzle_m_s": 8808.203184584187,
+    "accel_g": 13700.0,
+    "accelerator_m": 288.73764507154226,
+    "launch_ms": 65.56107733229427,
+    "target_kg": 0.0012347695952868898,
+    "sabot_kg": 0.0037043087858606694,
+    "shot_J": 191597.82340925038,
+    "kinetic_W": 37502945.74028351,
+    "electric_W": 93757364.35070877,
+    "sabot_catcher_W": 28127209.30521263,
+    "tip_xray_J_cm2": 8.268662837318114,
+    "tip_xray_MW_m2": 16.184902741315184,
+    "launcher_kg": 73142.40038493181,
+    "shots_per_mission": 35117291618.64383
+   },
+   "target_class": "strong shell, gas fill 30 K, HDC",
+   "class_limit_g": 102282.38788328663,
+   "survives": true,
+   "fits_ship": true,
+   "available_straight_m": 594.3499999999999,
+   "uncoupled": {
+    "converged": true,
+    "departure_t": 42915.783853018824,
+    "a0_g": 0.006895573489099627,
+    "fusion_TW": 35.71976022315651,
+    "radiator_t": 3572.4500289867,
+    "hot_km2": 0.4616189354301207,
+    "warm_km2": 4.951041268491101,
+    "drive_t": 7357.663508307523,
+    "propellant_t": 27116.059611797376,
+    "tank_t": 2544.7683195441664,
+    "end_t": 15799.724241221445,
+    "xray_standoff_m": null,
+    "payload_t": 1240.2,
+    "wing_tip_radius_m": 10127.573934427086,
+    "pellet_rate_Hz": 195.73784854631526
+   },
+   "coil_hw_kg": 2049938.7470423908,
+   "coil_share": 0.01491578868932587,
+   "C1_radius_m": 22.12849330614687,
+   "stand_off_m": 64.69938609749164,
+   "yield_GJ": 182.48775331654235,
+   "coupled_set": {
+    "base.overrides.continuous.plume_to_hardware.value": 0.06583547319977415,
+    "base.overrides.pulsed.house_fraction.value": 4.7054272325814704e-05,
+    "mission.payload.reference_t": 3363.281147427322
+   },
+   "coupled": {
+    "converged": true,
+    "departure_t": 69451.33581926234,
+    "a0_g": 0.006895573489099627,
+    "fusion_TW": 57.80607360309359,
+    "radiator_t": 5806.537083989861,
+    "hot_km2": 0.7564684764023942,
+    "warm_km2": 8.023634736955204,
+    "drive_t": 10525.605143399958,
+    "propellant_t": 43882.37597253168,
+    "tank_t": 4118.241433012263,
+    "end_t": 25568.959846730668,
+    "xray_standoff_m": null,
+    "payload_t": 3363.281147427322,
+    "wing_tip_radius_m": 16439.557082386553,
+    "pellet_rate_Hz": 316.7566474041582
+   },
+   "notes": "wall 17 um, 0.30 g; convergence 44 (liquid fuel about 24); compression at this convergence is unproven (T04 basis assumed liquid/solid density); FDP-1 gain unchanged (not re-derived)",
+   "verdict": "CANDIDATE, TARGET PHYSICS UNPROVEN"
+  },
+  {
+   "label": "fewer, larger pulses: 150 Hz, 1,000 g",
+   "basis": "labelled rate cap (MAXREP)",
+   "kinematics": {
+    "rate_Hz": 150.00000000000003,
+    "open_flight_m": 54.10607477875614,
+    "muzzle_m_s": 8115.9112168134225,
+    "accel_g": 1000.0,
+    "accelerator_m": 3358.334134449477,
+    "launch_ms": 827.5926250874073,
+    "target_kg": 0.0019575762870066207,
+    "sabot_kg": 0.005872728861019862,
+    "shot_J": 257883.32799943426,
+    "kinetic_W": 38682499.19991515,
+    "electric_W": 96706247.99978787,
+    "sabot_catcher_W": 29011874.399936356,
+    "tip_xray_J_cm2": 8.3,
+    "tip_xray_MW_m2": 12.450000000000001,
+    "launcher_kg": 840872.9502523664,
+    "shots_per_mission": 26911472573.737644
+   },
+   "target_class": "strong shell, gas fill 30 K, HDC",
+   "class_limit_g": 102282.38788328663,
+   "survives": true,
+   "fits_ship": false,
+   "available_straight_m": 594.3499999999999,
+   "uncoupled": {
+    "converged": true,
+    "departure_t": 58808.402741077225,
+    "a0_g": 0.006895573489099627,
+    "fusion_TW": 48.84060577358092,
+    "radiator_t": 4880.94414947494,
+    "hot_km2": 0.630036086071697,
+    "warm_km2": 6.767010091318833,
+    "drive_t": 10531.523524511145,
+    "propellant_t": 37157.70775300579,
+    "tank_t": 3511.7190039651323,
+    "end_t": 21650.694988071435,
+    "xray_standoff_m": null,
+    "payload_t": 1240.2,
+    "wing_tip_radius_m": 13847.135271764122,
+    "pellet_rate_Hz": 150.00000000000003
+   },
+   "coil_hw_kg": 2573348.816515704,
+   "coil_share": 0.014221665441772967,
+   "C1_radius_m": 26.656723275771924,
+   "stand_off_m": 77.93904480763175,
+   "yield_GJ": 325.60403849053654,
+   "coupled_set": {
+    "base.overrides.continuous.plume_to_hardware.value": 0.06564637016398615,
+    "base.overrides.pulsed.house_fraction.value": 4.627694696775617e-05,
+    "mission.payload.reference_t": 4654.4217667680705
+   },
+   "coupled": {
+    "converged": true,
+    "departure_t": 161487.46725206947,
+    "a0_g": 0.006895573489099627,
+    "fusion_TW": 133.73491574169432,
+    "radiator_t": 13396.269042226268,
+    "hot_km2": 1.7379788222093984,
+    "warm_km2": 18.539172072617546,
+    "drive_t": 27584.319384279384,
+    "propellant_t": 102034.8085348386,
+    "tank_t": 9736.25618258265,
+    "end_t": 59452.658717230894,
+    "xray_standoff_m": null,
+    "payload_t": 4654.4217667680705,
+    "wing_tip_radius_m": 37989.78703828036,
+    "pellet_rate_Hz": 150.00000000000003
+   },
+   "notes": "pulse energy grows as 1/rate; stand-off and coils grow as sqrt(E_p); tip fluence held at B value",
+   "verdict": "DOES NOT FIT"
+  },
+  {
+   "label": "fewer, larger pulses: 150 Hz, 3,000 g",
+   "basis": "labelled rate cap (MAXREP)",
+   "kinematics": {
+    "rate_Hz": 150.00000000000003,
+    "open_flight_m": 54.10607477875614,
+    "muzzle_m_s": 8115.9112168134225,
+    "accel_g": 3000.0,
+    "accelerator_m": 1119.4447114831592,
+    "launch_ms": 275.8642083624691,
+    "target_kg": 0.0019575762870066207,
+    "sabot_kg": 0.005872728861019862,
+    "shot_J": 257883.32799943426,
+    "kinetic_W": 38682499.19991515,
+    "electric_W": 96706247.99978787,
+    "sabot_catcher_W": 29011874.399936356,
+    "tip_xray_J_cm2": 8.3,
+    "tip_xray_MW_m2": 12.450000000000001,
+    "launcher_kg": 281150.59451078693,
+    "shots_per_mission": 26911472573.737644
+   },
+   "target_class": "strong shell, gas fill 30 K, HDC",
+   "class_limit_g": 102282.38788328663,
+   "survives": true,
+   "fits_ship": false,
+   "available_straight_m": 594.3499999999999,
+   "uncoupled": {
+    "converged": true,
+    "departure_t": 58808.402741077225,
+    "a0_g": 0.006895573489099627,
+    "fusion_TW": 48.84060577358092,
+    "radiator_t": 4880.94414947494,
+    "hot_km2": 0.630036086071697,
+    "warm_km2": 6.767010091318833,
+    "drive_t": 10531.523524511145,
+    "propellant_t": 37157.70775300579,
+    "tank_t": 3511.7190039651323,
+    "end_t": 21650.694988071435,
+    "xray_standoff_m": null,
+    "payload_t": 1240.2,
+    "wing_tip_radius_m": 13847.135271764122,
+    "pellet_rate_Hz": 150.00000000000003
+   },
+   "coil_hw_kg": 2573348.816515704,
+   "coil_share": 0.014221665441772967,
+   "C1_radius_m": 26.656723275771924,
+   "stand_off_m": 77.93904480763175,
+   "yield_GJ": 325.60403849053654,
+   "coupled_set": {
+    "base.overrides.continuous.plume_to_hardware.value": 0.06564637016398615,
+    "base.overrides.pulsed.house_fraction.value": 4.627694696775617e-05,
+    "mission.payload.reference_t": 4094.6994110264905
+   },
+   "coupled": {
+    "converged": true,
+    "departure_t": 145070.4181776458,
+    "a0_g": 0.006895573489099627,
+    "fusion_TW": 120.16987434142801,
+    "radiator_t": 12038.48858803873,
+    "hot_km2": 1.5620022216584337,
+    "warm_km2": 16.659456548320072,
+    "drive_t": 24870.240428067893,
+    "propellant_t": 91661.80258261102,
+    "tank_t": 8738.715064630935,
+    "end_t": 53408.615595034775,
+    "xray_standoff_m": null,
+    "payload_t": 4094.6994110264905,
+    "wing_tip_radius_m": 34136.56843500307,
+    "pellet_rate_Hz": 150.00000000000003
+   },
+   "notes": "pulse energy grows as 1/rate; stand-off and coils grow as sqrt(E_p); tip fluence held at B value",
+   "verdict": "DOES NOT FIT"
+  },
+  {
+   "label": "fewer, larger pulses: 100 Hz, 1,000 g",
+   "basis": "labelled rate cap (MAXREP)",
+   "kinematics": {
+    "rate_Hz": 100.0,
+    "open_flight_m": 93.22712848560381,
+    "muzzle_m_s": 9322.71284856038,
+    "accel_g": 1000.0,
+    "accelerator_m": 4431.328478976654,
+    "launch_ms": 950.6521440614666,
+    "target_kg": 0.009296184743926173,
+    "sabot_kg": 0.02788855423177852,
+    "shot_J": 1615918.1418244254,
+    "kinetic_W": 161591814.18244255,
+    "electric_W": 403979535.45610636,
+    "sabot_catcher_W": 121193860.6368319,
+    "tip_xray_J_cm2": 8.3,
+    "tip_xray_MW_m2": 8.3,
+    "launcher_kg": 1115911.7104532856,
+    "shots_per_mission": 17940981715.825092
+   },
+   "target_class": "strong shell, gas fill 30 K, HDC",
+   "class_limit_g": 102282.38788328663,
+   "survives": true,
+   "fits_ship": false,
+   "available_straight_m": 594.3499999999999,
+   "uncoupled": {
+    "converged": true,
+    "departure_t": 211984.88016367363,
+    "a0_g": 0.006895573489099627,
+    "fusion_TW": 175.3077489541947,
+    "radiator_t": 17493.859936030585,
+    "hot_km2": 2.2536429884895615,
+    "warm_km2": 24.270878995359507,
+    "drive_t": 41107.422726466124,
+    "propellant_t": 133941.27128155794,
+    "tank_t": 12844.475368356641,
+    "end_t": 78043.6088821157,
+    "xray_standoff_m": null,
+    "payload_t": 1240.2,
+    "wing_tip_radius_m": 49699.94840476982,
+    "pellet_rate_Hz": 100.0
+   },
+   "coil_hw_kg": 8396747.737021659,
+   "coil_share": 0.012878110281662573,
+   "C1_radius_m": 45.93069772659465,
+   "stand_off_m": 134.29237611557815,
+   "yield_GJ": 1753.077489541958,
+   "coupled_set": {
+    "base.overrides.continuous.plume_to_hardware.value": 0.0653212890528087,
+    "base.overrides.pulsed.house_fraction.value": 4.6464750626507776e-05,
+    "mission.payload.reference_t": 10752.859447474944
+   },
+   "coupled": {
+    "converged": true,
+    "departure_t": 1559039.7395426107,
+    "a0_g": 0.006895573489099627,
+    "fusion_TW": 1285.951460341327,
+    "radiator_t": 128480.76962467523,
+    "hot_km2": 16.57755799388141,
+    "warm_km2": 178.153745113082,
+    "drive_t": 299938.4930391669,
+    "propellant_t": 985069.1451747708,
+    "tank_t": 95395.70644953157,
+    "end_t": 573970.5943678399,
+    "xray_standoff_m": null,
+    "payload_t": 10752.859447474944,
+    "wing_tip_radius_m": 364989.1351397545,
+    "pellet_rate_Hz": 100.0
+   },
+   "notes": "pulse energy grows as 1/rate; stand-off and coils grow as sqrt(E_p); tip fluence held at B value",
+   "verdict": "DOES NOT FIT"
+  },
+  {
+   "label": "fewer, larger pulses: 100 Hz, 3,000 g",
+   "basis": "labelled rate cap (MAXREP)",
+   "kinematics": {
+    "rate_Hz": 100.0,
+    "open_flight_m": 93.22712848560381,
+    "muzzle_m_s": 9322.71284856038,
+    "accel_g": 3000.0,
+    "accelerator_m": 1477.109492992218,
+    "launch_ms": 316.8840480204889,
+    "target_kg": 0.009296184743926173,
+    "sabot_kg": 0.02788855423177852,
+    "shot_J": 1615918.1418244254,
+    "kinetic_W": 161591814.18244255,
+    "electric_W": 403979535.45610636,
+    "sabot_catcher_W": 121193860.6368319,
+    "tip_xray_J_cm2": 8.3,
+    "tip_xray_MW_m2": 8.3,
+    "launcher_kg": 377356.96395717666,
+    "shots_per_mission": 17940981715.825092
+   },
+   "target_class": "strong shell, gas fill 30 K, HDC",
+   "class_limit_g": 102282.38788328663,
+   "survives": true,
+   "fits_ship": false,
+   "available_straight_m": 594.3499999999999,
+   "uncoupled": {
+    "converged": true,
+    "departure_t": 211984.88016367363,
+    "a0_g": 0.006895573489099627,
+    "fusion_TW": 175.3077489541947,
+    "radiator_t": 17493.859936030585,
+    "hot_km2": 2.2536429884895615,
+    "warm_km2": 24.270878995359507,
+    "drive_t": 41107.422726466124,
+    "propellant_t": 133941.27128155794,
+    "tank_t": 12844.475368356641,
+    "end_t": 78043.6088821157,
+    "xray_standoff_m": null,
+    "payload_t": 1240.2,
+    "wing_tip_radius_m": 49699.94840476982,
+    "pellet_rate_Hz": 100.0
+   },
+   "coil_hw_kg": 8396747.737021659,
+   "coil_share": 0.012878110281662573,
+   "C1_radius_m": 45.93069772659465,
+   "stand_off_m": 134.29237611557815,
+   "yield_GJ": 1753.077489541958,
+   "coupled_set": {
+    "base.overrides.continuous.plume_to_hardware.value": 0.0653212890528087,
+    "base.overrides.pulsed.house_fraction.value": 4.6464750626507776e-05,
+    "mission.payload.reference_t": 10014.304700978837
+   },
+   "coupled": {
+    "converged": true,
+    "departure_t": 1447486.0740379628,
+    "a0_g": 0.006895573489099627,
+    "fusion_TW": 1194.0184426797423,
+    "radiator_t": 119298.34787434408,
+    "hot_km2": 15.393235224139211,
+    "warm_km2": 165.41946323888266,
+    "drive_t": 278459.0095536096,
+    "propellant_t": 914584.685328985,
+    "tank_t": 88546.3391668858,
+    "end_t": 532901.388708978,
+    "xray_standoff_m": null,
+    "payload_t": 10014.304700978839,
+    "wing_tip_radius_m": 338899.9043169962,
+    "pellet_rate_Hz": 100.0
+   },
+   "notes": "pulse energy grows as 1/rate; stand-off and coils grow as sqrt(E_p); tip fluence held at B value",
+   "verdict": "DOES NOT FIT"
+  },
+  {
+   "label": "fewer, larger pulses: 60 Hz",
+   "verdict": "DOES NOT CLOSE",
+   "uncoupled": {
+    "converged": false,
+    "departure_t": null,
+    "a0_g": null,
+    "fusion_TW": null,
+    "radiator_t": null,
+    "hot_km2": null,
+    "warm_km2": null,
+    "drive_t": null,
+    "propellant_t": null,
+    "tank_t": null,
+    "end_t": null,
+    "xray_standoff_m": null,
+    "payload_t": null,
+    "wing_tip_radius_m": null,
+    "pellet_rate_Hz": null
+   }
+  },
+  {
+   "label": "fewer, larger pulses: 30 Hz",
+   "verdict": "DOES NOT CLOSE",
+   "uncoupled": {
+    "converged": false,
+    "departure_t": null,
+    "a0_g": null,
+    "fusion_TW": null,
+    "radiator_t": null,
+    "hot_km2": null,
+    "warm_km2": null,
+    "drive_t": null,
+    "propellant_t": null,
+    "tank_t": null,
+    "end_t": null,
+    "xray_standoff_m": null,
+    "payload_t": null,
+    "wing_tip_radius_m": null,
+    "pellet_rate_Hz": null
+   }
+  },
+  {
+   "label": "fewer, larger pulses: 15 Hz",
+   "verdict": "DOES NOT CLOSE",
+   "uncoupled": {
+    "converged": false,
+    "departure_t": null,
+    "a0_g": null,
+    "fusion_TW": null,
+    "radiator_t": null,
+    "hot_km2": null,
+    "warm_km2": null,
+    "drive_t": null,
+    "propellant_t": null,
+    "tank_t": null,
+    "end_t": null,
+    "xray_standoff_m": null,
+    "payload_t": null,
+    "wing_tip_radius_m": null,
+    "pellet_rate_Hz": null
+   }
+  }
+ ],
+ "recommended": {
+  "label": "B-modified: B kinematics, 30 K gas-filled HDC capsule",
+  "requirements": {
+   "flight_open_ms": 5.108873973156914,
+   "lateral_velocity_error_m_s": 0.019573784854631526,
+   "pointing_urad_untracked": 2.2222222222222223,
+   "pointing_urad_with_steering": 111.11111111111111,
+   "ship_drift_um_peak_accel": 2.3970604835947094,
+   "arrival_jitter_ns_for_0.1mm_axial": 11.353053273682033,
+   "driver_timing": "fire on tracked arrival (axial error is absorbed by timing; lateral by beam steering)",
+   "shutter": {
+    "closed_before_flash": true,
+    "opens_after_flash_us": 100.0,
+    "cycle_Hz": 195.73784854631526,
+    "note": "rotating chopper disc at the snout tip, rim at about 500 m/s, slot open about 10 us per shot; its rim is in the axis plasma channel (see axis_plasma)"
+   },
+   "shielded_transport": "the accelerator runs inside the shadow-shield cone; the target is behind the shield until the snout; the open flight is one period, so a target never sees an earlier flash",
+   "shots_per_mission": 35117291618.64383,
+   "contact_life": "a railgun cannot run 1e10 shots; a contactless coilgun (or linear induction) is the only EM class with a credible life"
+  }
+ },
+ "b_requirements": {
+  "flight_open_ms": 5.108873973156914,
+  "lateral_velocity_error_m_s": 0.019573784854631526,
+  "pointing_urad_untracked": 2.2222222222222223,
+  "pointing_urad_with_steering": 111.11111111111111,
+  "ship_drift_um_peak_accel": 2.3970604835947094,
+  "arrival_jitter_ns_for_0.1mm_axial": 11.353053273682033,
+  "driver_timing": "fire on tracked arrival (axial error is absorbed by timing; lateral by beam steering)",
+  "shutter": {
+   "closed_before_flash": true,
+   "opens_after_flash_us": 100.0,
+   "cycle_Hz": 195.73784854631526,
+   "note": "rotating chopper disc at the snout tip, rim at about 500 m/s, slot open about 10 us per shot; its rim is in the axis plasma channel (see axis_plasma)"
+  },
+  "shielded_transport": "the accelerator runs inside the shadow-shield cone; the target is behind the shield until the snout; the open flight is one period, so a target never sees an earlier flash",
+  "shots_per_mission": 35117291618.64383,
+  "contact_life": "a railgun cannot run 1e10 shots; a contactless coilgun (or linear induction) is the only EM class with a credible life"
+ },
+ "coupled_launcher": {
+  "label": "B-modified on the coupled ship (coil hardware booked, labelled approximation)",
+  "rows": [
+   {
+    "rate_cap_Hz": null,
+    "converged": true,
+    "summary": {
+     "converged": true,
+     "departure_t": 68472.42098165506,
+     "a0_g": 0.006895573489099627,
+     "fusion_TW": 56.99114421492967,
+     "radiator_t": 5719.647426362787,
+     "hot_km2": 0.7457949700525062,
+     "warm_km2": 7.901093583435159,
+     "drive_t": 10408.030666763989,
+     "propellant_t": 43263.85498309006,
+     "tank_t": 4060.1949479316445,
+     "end_t": 25208.565998565005,
+     "xray_standoff_m": null,
+     "payload_t": 3290.1387470423906,
+     "wing_tip_radius_m": 16189.857626210485,
+     "pellet_rate_Hz": 312.2996954216142
+    },
+    "stand_off_m": 64.69949524279637,
+    "open_flight_m": 44.91504529462411,
+    "muzzle_m_s": 14026.954965359115,
+    "accelerator_m_at_13700g": 732.2435703086057,
+    "fits_at_13700g": true,
+    "accel_g_to_fit": 13423.07742453723,
+    "gas_capsule_survives": true
+   },
+   {
+    "rate_cap_Hz": 250.0,
+    "converged": true,
+    "summary": {
+     "converged": true,
+     "departure_t": 76699.70677679508,
+     "a0_g": 0.006895573489099627,
+     "fusion_TW": 63.754537187506514,
+     "radiator_t": 6395.388169802417,
+     "hot_km2": 0.8333739639916715,
+     "warm_km2": 8.836595525629368,
+     "drive_t": 12046.25039203921,
+     "propellant_t": 48462.212138312265,
+     "tank_t": 4567.228844165294,
+     "end_t": 28237.49463848281,
+     "xray_standoff_m": null,
+     "payload_t": 3290.1387470423906,
+     "wing_tip_radius_m": 18107.535107247735,
+     "pellet_rate_Hz": 249.99999999999994
+    },
+    "stand_off_m": 72.04609345297614,
+    "open_flight_m": 50.015128226235035,
+    "muzzle_m_s": 12503.782056558755,
+    "accelerator_m_at_13700g": 581.8506878596968,
+    "fits_at_13700g": true,
+    "accel_g_to_fit": 9858.826817980145,
+    "gas_capsule_survives": true
+   },
+   {
+    "rate_cap_Hz": 196.0,
+    "converged": true,
+    "summary": {
+     "converged": true,
+     "departure_t": 91026.91483335184,
+     "a0_g": 0.006895573489099627,
+     "fusion_TW": 75.55640683426734,
+     "radiator_t": 7575.453379361005,
+     "hot_km2": 0.9864820540321544,
+     "warm_km2": 10.46965187515243,
+     "drive_t": 14900.4093053545,
+     "propellant_t": 57514.76560122399,
+     "tank_t": 5445.5571763209855,
+     "end_t": 33512.14923212784,
+     "xray_standoff_m": null,
+     "payload_t": 3290.1387470423906,
+     "wing_tip_radius_m": 21455.54717765738,
+     "pellet_rate_Hz": 195.99999999999994
+    },
+    "stand_off_m": 82.29413959613515,
+    "open_flight_m": 57.12942571764605,
+    "muzzle_m_s": 11197.367440658623,
+    "accelerator_m_at_13700g": 466.6170687659095,
+    "fits_at_13700g": true,
+    "accel_g_to_fit": 7349.9900455222305,
+    "gas_capsule_survives": true
+   }
+  ],
+  "adapter_one_target_rule_8.81km_s": "does not close (convergence.py launcher iteration on the full path, cap falls to 78 Hz)"
+ }
+}

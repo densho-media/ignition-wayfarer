@@ -1,0 +1,4220 @@
+{
+ "study": "Revision 4 section 3, closure-coil energy ledger (T00)",
+ "status": "MODEL, research only, NON-CANON",
+ "assumptions": {
+  "B_surface_T": {
+   "value": 25.0,
+   "basis": "T03 design basis (conductor surface field)"
+  },
+  "dynamic_factor": {
+   "value": 1.25,
+   "basis": "PROTOTYPE: pulse field compression on top of the static hoop and inter-coil loads (D-21 would set it)"
+  },
+  "layers_m": {
+   "value": {
+    "ground_insulation": 0.02,
+    "cryostat_wall": 0.03,
+    "vacuum_mli_80K_screen": 0.15,
+    "shadow_margin": 0.05
+   },
+   "basis": "PROTOTYPE radial build between the winding and the burn-facing screen"
+  },
+  "armour_W_m": {
+   "value": 0.005,
+   "basis": "CFC monoblock armour on Mo-TZM lithium tubes (durability.py: carbon is the only solid that survives every spectrum band at 4 J/cm2; conduction limits it to 5.7 mm at 7.8 MW/m2)"
+  },
+  "armour_density": {
+   "value": 1850.0,
+   "basis": "CFC"
+  },
+  "coolant_channel_m": {
+   "value": 0.03,
+   "basis": "PROTOTYPE lithium channel behind the armour"
+  },
+  "screens": {
+   "value": {
+    "LiH": [
+     780.0,
+     0.12,
+     "lithium hydride, the SNAP-era space shadow-shield material (T02 LiH loop shoes); fast-neutron e-fold 0.12 m, band 0.08-0.18 (EXTRAPOLATION from removal cross sections); 600-700 K"
+    ],
+    "WC_steel": [
+     9000.0,
+     0.1,
+     "tungsten carbide / B4C / steel; e-fold 0.10 m, band 0.07-0.15 (EXTRAPOLATION)"
+    ]
+   },
+   "basis": "burn-facing neutron screen, warm loop; (density kg/m3, fast-neutron e-folding length m)"
+  },
+  "rebco_fluence_n_cm2": {
+   "value": 3e+18,
+   "basis": "SOURCE (order): REBCO critical current degrades above ~3e18 n/cm2 fast fluence (Prokopec et al. 2015, Fischer et al. 2018)"
+  },
+  "fluence_safety": {
+   "value": 3.0,
+   "basis": "PROTOTYPE safety factor on the fluence limit"
+  },
+  "neutron_mean_MeV": {
+   "value": 4.0,
+   "basis": "EXTRAPOLATION: mix of 2.45 MeV D-D and 14.1 MeV D-T neutrons"
+  },
+  "neutron_escape_factor": {
+   "value": 1.0,
+   "basis": "FDP-1 uncollided escape exp(-tau_n); x10 sensitivity for scattered neutrons that leave the fuel"
+  },
+  "winding_deposit": {
+   "value": 0.5,
+   "basis": "PROTOTYPE share of the neutron energy reaching the winding that deposits there"
+  },
+  "J_e_A_m2": {
+   "value": 150000000.0,
+   "basis": "TARGET engineering current density of a REBCO winding pack (25 T class magnets 100-300 A/mm2)"
+  },
+  "winding_density": {
+   "value": 7000.0,
+   "basis": "PROTOTYPE winding pack density (REBCO tape, Cu stabiliser, steel, insulation), kg/m3"
+  },
+  "case_options": {
+   "value": {
+    "TARGET_composite": [
+     1600.0,
+     null,
+     "FDP-1 nozzle_kg_per_J 5.35e-7 kg/J (2x CFRP specific strength)"
+    ],
+    "CFRP_1.2GPa": [
+     1600.0,
+     1200000000.0,
+     "unidirectional CFRP hoop band, 1.2 GPa working stress at 20 K"
+    ],
+    "cryo_steel_0.66GPa": [
+     7900.0,
+     660000000.0,
+     "ITER-class 316LN case, 660 MPa allowable"
+    ]
+   },
+   "basis": "hoop structure options; mass = rho / sigma x 2 pi R T"
+  },
+  "strut_sigma": {
+   "value": 1200000000.0,
+   "basis": "CFRP strut working stress (axial coil loads)"
+  },
+  "struts_per_coil": {
+   "value": 6,
+   "basis": "PROTOTYPE"
+  },
+  "strut_armour_m": {
+   "value": 0.06,
+   "basis": "PROTOTYPE armour and screen on each strut face"
+  },
+  "armour_T_K": {
+   "value": 1800.0,
+   "basis": "hot-loop temperature (FDP-1 hot radiator)"
+  },
+  "warm_T_K": {
+   "value": 628.0,
+   "basis": "V4 warm-loop temperature"
+  },
+  "foils": {
+   "value": 10,
+   "basis": "PROTOTYPE reflective foils between armour back face and the warm screen (emissivity 0.1 each)"
+  },
+  "mli_80K_W_m2": {
+   "value": 30.0,
+   "basis": "EXTRAPOLATION: MLI from a 628 K screen to an 80 K shield (1.5 W/m2 from 300 K scaled with T^4)"
+  },
+  "mli_20K_W_m2": {
+   "value": 0.1,
+   "basis": "SOURCE (order): MLI from 80 K to 20 K"
+  },
+  "cryo_W_per_W_20K": {
+   "value": 101.33333333333333,
+   "basis": "Carnot from 20 K to the 628 K warm loop at 30 % of Carnot"
+  },
+  "cryo_W_per_W_80K": {
+   "value": 22.833333333333332,
+   "basis": "Carnot from 80 K to 628 K at 30 % of Carnot"
+  },
+  "li_cp_J_kgK": {
+   "value": 4200.0,
+   "basis": "SOURCE: liquid lithium heat capacity"
+  },
+  "li_density": {
+   "value": 480.0,
+   "basis": "SOURCE: liquid lithium at 1,600-1,800 K"
+  },
+  "li_dT_K": {
+   "value": 300.0,
+   "basis": "PROTOTYPE coolant rise across the armour (1,500 to 1,800 K)"
+  },
+  "li_velocity_m_s": {
+   "value": 10.0,
+   "basis": "PROTOTYPE"
+  },
+  "li_dp_Pa": {
+   "value": 1000000.0,
+   "basis": "T05 Rev 3 loop pressure drop"
+  },
+  "pump_efficiency": {
+   "value": 0.6,
+   "basis": "EXTRAPOLATION: liquid-metal EM pump"
+  },
+  "pump_kg_per_W": {
+   "value": 0.001,
+   "basis": "EXTRAPOLATION: 1 kg/kW electric for large EM pumps"
+  },
+  "pipe_kg_per_m3_flow": {
+   "value": null,
+   "basis": "Mo-TZM tubes of 0.15 m radius, wall r/50 (1 MPa, 50 MPa creep allowable at 1,800 K), min 2 mm"
+  },
+  "loop_length_m": {
+   "value": {
+    "main_radiator": 170.0,
+    "shadow_cone": 40.0
+   },
+   "basis": "PROTOTYPE out-and-back coolant path"
+  },
+  "cryo_kg_per_W_in": {
+   "value": [
+    0.002,
+    0.01
+   ],
+   "basis": "EXTRAPOLATION: cryoplant mass per watt of input, turbo-Brayton TARGET and conservative"
+  },
+  "shadow_cone_T_K": {
+   "value": [
+    1800.0,
+    1400.0,
+    1000.0
+   ],
+   "basis": "alternative coil radiators in the coils own shadow cone"
+  },
+  "emissivity": {
+   "value": 0.85,
+   "basis": "radiator emissivity, two faces"
+  }
+ },
+ "v4": {
+  "summary": {
+   "converged": true,
+   "departure_t": 42915.783853018824,
+   "a0_g": 0.006895573489099627,
+   "fusion_TW": 35.71976022315651,
+   "radiator_t": 3572.4500289867,
+   "hot_km2": 0.4616189354301207,
+   "warm_km2": 4.951041268491101,
+   "drive_t": 7357.663508307523,
+   "propellant_t": 27116.059611797376,
+   "tank_t": 2544.7683195441664,
+   "end_t": 15799.724241221445,
+   "xray_standoff_m": null,
+   "payload_t": 1240.2,
+   "wing_tip_radius_m": 10127.573934427086,
+   "pellet_rate_Hz": 195.73784854631526
+  },
+  "ledger_W": {
+   "jet": 27861587640619.93,
+   "plume_to_space": 6883150630583.746,
+   "plume_to_hardware": 478507797848.0679,
+   "recovery_loss": 5870046718.070167,
+   "driver_loss": 76863967593.50697,
+   "electric_house": 1571669449.8188868,
+   "cryo_input": 153550202.7900421,
+   "radiation_on_hardware": 10226443505.816803,
+   "radiation_on_conductor": 10236680.186002806,
+   "radiation_to_space": 401818239954.58026
+  },
+  "fusion_W": 35719760223156.516,
+  "xray_escape_W": 411855609598.30194,
+  "neutron_escape_W": 199310542.28113794,
+  "omega_fdp1": {
+   "nozzle_loops": 0.020177771129604158,
+   "nozzle_struts": 0.0015737932057694655,
+   "shadow_shield": 0.003091435221079575
+  }
+ },
+ "coils_v4": {
+  "scale": 1.5007301441824272,
+  "current_factor": 1.2272622788077394,
+  "W_V4_J": 2705739250117.0864,
+  "W_V1_J": 1197039726784.9438,
+  "coils": [
+   {
+    "name": "C1",
+    "polar_deg": 20.0,
+    "distance_m": 64.69938609749164,
+    "radius_m": 22.12849330614687,
+    "z_from_burn_m": 60.797535685191285,
+    "current_A": 162127043.72637814,
+    "winding_minor_m": 1.2970163498110252,
+    "stored_J": 1157141906691.984,
+    "tension_self_N": 10951039014.67321,
+    "radial_from_others_N": 12016957432.035318,
+    "axial_from_others_N": -2795688949.86261,
+    "design_tension_N": 16079496488.633152,
+    "T03_envelope_share_x3": 0.02515263277922635
+   },
+   {
+    "name": "C2",
+    "polar_deg": 40.0,
+    "distance_m": 64.69938609749164,
+    "radius_m": 41.58796373779316,
+    "z_from_burn_m": 49.56260519319273,
+    "current_A": 13032109.063614877,
+    "winding_minor_m": 0.104256872508919,
+    "stored_J": 28039279993.27493,
+    "tension_self_N": 124288431.87902932,
+    "radial_from_others_N": 475774981.2897318,
+    "axial_from_others_N": 604594749.0504429,
+    "design_tension_N": 250012964.9384302,
+    "T03_envelope_share_x3": 0.0037997804550914754
+   }
+  ]
+ },
+ "cases": [
+  {
+   "label": "T03 geometry, 11.9 GW (kept case)",
+   "share": 0.029,
+   "other_share": 0.0,
+   "assembly": [
+    {
+     "name": "C1",
+     "layout": "shadowed",
+     "case": "TARGET_composite",
+     "screen": "LiH",
+     "lambda_m": 0.12,
+     "projected_half_width_m": 1.5820163498110251,
+     "share": 0.008363007616341131,
+     "strut_share": 0.0015300574063899252,
+     "strut_width_m": 0.8166797434307267,
+     "strut_length_m": 16.372021844291588,
+     "neutron_flux_n_cm2_s": 591285983243.2039,
+     "mission_fluence_n_cm2": 1.0608251014189983e+20,
+     "screen_attenuation_needed": 106.08251014189985,
+     "screen_m": 0.5597060626659474,
+     "case_area_m2": 5.3765816383867095,
+     "masses_t": {
+      "case": 1196.0736975795614,
+      "case_minus_FDP1_booking": 0.0,
+      "winding_pack": 1051.9472377058128,
+      "neutron_screen": 192.05573928742808,
+      "armour": 4.069250343394651,
+      "cryostat": 109.46908895312455,
+      "struts": 152.57026852331754
+     },
+     "faces_m2": {
+      "burn_face": 439.9189560426649,
+      "armour_back": 691.0230802392635,
+      "cryostat": 1351.470233989192
+     }
+    },
+    {
+     "name": "C2",
+     "layout": "shadowed",
+     "case": "TARGET_composite",
+     "screen": "LiH",
+     "lambda_m": 0.12,
+     "projected_half_width_m": 0.38925687250891905,
+     "share": 0.0038672622682546062,
+     "strut_share": 0.0011554613983402072,
+     "strut_width_m": 0.44398204603741664,
+     "strut_length_m": 22.4698609839971,
+     "neutron_flux_n_cm2_s": 591285983243.2039,
+     "mission_fluence_n_cm2": 1.0608251014189983e+20,
+     "screen_attenuation_needed": 106.08251014189985,
+     "screen_m": 0.5597060626659474,
+     "case_area_m2": 0.08359808515128757,
+     "masses_t": {
+      "case": 34.951340536757584,
+      "case_minus_FDP1_booking": 0.0,
+      "winding_pack": 158.91650741719928,
+      "neutron_screen": 88.81134013279346,
+      "armour": 1.8817223461978871,
+      "cryostat": 47.11190834886009,
+      "struts": 45.283866542726884
+     },
+     "faces_m2": {
+      "burn_face": 203.429442832204,
+      "armour_back": 319.5462215627584,
+      "cryostat": 581.6284981340752
+     }
+    }
+   ],
+   "coil_heat": {
+    "share": 0.029,
+    "other_share": 0.0,
+    "other_hw_W": 0.0,
+    "xray_W": 11943812678.350758,
+    "neutron_W": 5780005.726153,
+    "per_coil": [
+     {
+      "name": "C1",
+      "xray_W": 7921868424.617913,
+      "neutron_W": 3833653.9670550837,
+      "armour_hot_W": 7919929481.316749,
+      "back_face_leak_warm_W": 1938943.301164167,
+      "neutron_screen_warm_W": 3815584.758653402,
+      "shield_80K_W": 40544.10701967576,
+      "winding_20K_W": 18204.355425081,
+      "cryo_input_W": 2770465.1266908045
+     },
+     {
+      "name": "C2",
+      "xray_W": 4021944253.7328444,
+      "neutron_W": 1946351.7590979168,
+      "armour_hot_W": 4021047638.2312365,
+      "back_face_leak_warm_W": 896615.5016079978,
+      "neutron_screen_warm_W": 1937177.995409188,
+      "shield_80K_W": 17448.854944022256,
+      "winding_20K_W": 9231.926538542137,
+      "cryo_input_W": 1333917.410460778
+     }
+    ],
+    "hot_W": 11940977119.547985,
+    "warm_radiation_W": 8530135.284997845,
+    "lifted_cold_W": 85429.24392732116,
+    "cryo_input_W": 4104382.5371515825,
+    "pump_electric_W": 32906131.83296954,
+    "pump_hydraulic_W": 19743679.09978172,
+    "li_flow_m3_s": 19.743679099781723,
+    "check_split_W": -5.802139639854431e-07
+   },
+   "eight_W": {
+    "radiation_to_space": 389868647270.50336,
+    "radiation_on_closure_coils": 11949592684.07691,
+    "radiation_on_other_hardware": 10236680186.002806,
+    "plasma_on_hardware": 478507797848.0679,
+    "plasma_through_nozzle": 6883111672147.567,
+    "useful_jet": 27861587640619.93,
+    "conversion_losses": 84461181885.99503,
+    "coil_cooling_loads": 37010514.37012112
+   },
+   "eta_recovery": 0.9500000000000001,
+   "circuits": {
+    "hot_W": {
+     "plume_on_hardware": 478507797848.0679,
+     "recovery_conversion_loss": 5870046718.070167,
+     "radiation_on_nozzle_loops": 8306035511.585304,
+     "radiation_on_nozzle_struts": 647840743.7099967,
+     "radiation_on_shadow_shield": 1272567250.5215025,
+     "coil_armour": 11940977119.547985,
+     "coil_pump_work": 19743679.09978172,
+     "coil_recovery_loss": 1947921.808953741,
+     "other_hardware_unbooked": 0.0
+    },
+    "warm_W": {
+     "driver_waste": 76863967593.50697,
+     "power_and_target_systems": 1571669449.8188868,
+     "cryoplant_input": 153550202.7900421,
+     "coil_conductor_heating": 10236680.186002806,
+     "coil_screens": 8530135.284997845,
+     "coil_cold_lifted": 85429.24392732116,
+     "coil_cryoplant_input": 4104382.5371515825,
+     "coil_pump_motor_loss": 13162452.733187817
+    },
+    "hot_total_W": 506566956792.41156,
+    "warm_total_W": 78625306326.10117,
+    "hot_added_W": 11962668720.456726,
+    "warm_added_W": 25882399.79925537
+   },
+   "cooling_mass": {
+    "route": "main_radiator",
+    "lithium_inventory_kg": 161108.42145421886,
+    "pipes_kg": 136942.15823608602,
+    "pumps_kg": 32906.13183296954,
+    "cryoplant_kg": [
+     8208.765074303165,
+     41043.82537151583
+    ],
+    "coil_hardware_unbooked_kg": 1852116.929600855,
+    "total_kg": 2224117.466495645,
+    "note": "coil_hardware_unbooked = screen + armour + cryostat + struts + winding pack + (case - FDP-1 booking at 5.35e-7 kg/J)"
+   },
+   "radiators": {
+    "main_hot_1800K": {
+     "area_m2": 11164.873683499227,
+     "mass_kg": 16747.31052524884
+    },
+    "warm_628K": {
+     "area_m2": 1630.3532918237806,
+     "mass_kg": 815.1766459118903
+    },
+    "shadow_cone_1800K": {
+     "area_m2": 11800.195098252281,
+     "mass_kg": 17700.29264737842,
+     "flux_W_m2": 1011930.4825152047
+    },
+    "shadow_cone_1400K": {
+     "area_m2": 32245.347788268726,
+     "mass_kg": 48368.02168240309,
+     "flux_W_m2": 370316.2762565168
+    },
+    "shadow_cone_1000K": {
+     "area_m2": 123873.72806341315,
+     "mass_kg": 185810.5920951197,
+     "flux_W_m2": 96396.365123
+    }
+   },
+   "postprocess_mass_kg": 2241679.9536668058,
+   "coupled": {
+    "label": "COUPLED APPROXIMATION (heat via plume_to_hardware, warm and electric via house_fraction, hardware via payload); not a converged spacecraft design",
+    "set": {
+     "base.overrides.continuous.plume_to_hardware.value": 0.06662473183385603,
+     "base.overrides.pulsed.house_fraction.value": 4.4724596123757745e-05,
+     "mission.payload.reference_t": 3464.317466495645
+    },
+    "summary": {
+     "converged": true,
+     "departure_t": 70868.73196598304,
+     "a0_g": 0.006895573489099627,
+     "fusion_TW": 58.98566613135282,
+     "radiator_t": 5938.657379473063,
+     "hot_km2": 0.7808607058996618,
+     "warm_km2": 8.178715519733695,
+     "drive_t": 10694.402125283095,
+     "propellant_t": 44777.948532493356,
+     "tank_t": 4202.2885076457615,
+     "end_t": 26090.78343348968,
+     "xray_standoff_m": null,
+     "payload_t": 3464.317466495645,
+     "wing_tip_radius_m": 16775.96385328769,
+     "pellet_rate_Hz": 323.2282587980752
+    },
+    "eight_W": {
+     "radiation_to_space": 643663925916.5612,
+     "radiation_on_closure_coils": 19732906381.9323,
+     "radiation_on_other_hardware": 17046588214.444214,
+     "plasma_on_hardware": 790181074655.4812,
+     "plasma_through_nozzle": 11366451081393.447,
+     "useful_jet": 46009071939878.97,
+     "conversion_losses": 139475874126.95108,
+     "coil_cooling_loads": 42740785.036046885
+    },
+    "fusion_W": 58985666131352.82
+   }
+  },
+  {
+   "label": "C1 grown with the V4 pulse, 15.5 GW (kept case)",
+   "share": 0.0377,
+   "other_share": 0.0,
+   "assembly": [
+    {
+     "name": "C1",
+     "layout": "shadowed",
+     "case": "TARGET_composite",
+     "screen": "LiH",
+     "lambda_m": 0.12,
+     "projected_half_width_m": 1.5820163498110251,
+     "share": 0.008363007616341131,
+     "strut_share": 0.0015300574063899252,
+     "strut_width_m": 0.8166797434307267,
+     "strut_length_m": 16.372021844291588,
+     "neutron_flux_n_cm2_s": 591285983243.2039,
+     "mission_fluence_n_cm2": 1.0608251014189983e+20,
+     "screen_attenuation_needed": 106.08251014189985,
+     "screen_m": 0.5597060626659474,
+     "case_area_m2": 5.3765816383867095,
+     "masses_t": {
+      "case": 1196.0736975795614,
+      "case_minus_FDP1_booking": 0.0,
+      "winding_pack": 1051.9472377058128,
+      "neutron_screen": 192.05573928742808,
+      "armour": 4.069250343394651,
+      "cryostat": 109.46908895312455,
+      "struts": 152.57026852331754
+     },
+     "faces_m2": {
+      "burn_face": 439.9189560426649,
+      "armour_back": 691.0230802392635,
+      "cryostat": 1351.470233989192
+     }
+    },
+    {
+     "name": "C2",
+     "layout": "shadowed",
+     "case": "TARGET_composite",
+     "screen": "LiH",
+     "lambda_m": 0.12,
+     "projected_half_width_m": 0.38925687250891905,
+     "share": 0.0038672622682546062,
+     "strut_share": 0.0011554613983402072,
+     "strut_width_m": 0.44398204603741664,
+     "strut_length_m": 22.4698609839971,
+     "neutron_flux_n_cm2_s": 591285983243.2039,
+     "mission_fluence_n_cm2": 1.0608251014189983e+20,
+     "screen_attenuation_needed": 106.08251014189985,
+     "screen_m": 0.5597060626659474,
+     "case_area_m2": 0.08359808515128757,
+     "masses_t": {
+      "case": 34.951340536757584,
+      "case_minus_FDP1_booking": 0.0,
+      "winding_pack": 158.91650741719928,
+      "neutron_screen": 88.81134013279346,
+      "armour": 1.8817223461978871,
+      "cryostat": 47.11190834886009,
+      "struts": 45.283866542726884
+     },
+     "faces_m2": {
+      "burn_face": 203.429442832204,
+      "armour_back": 319.5462215627584,
+      "cryostat": 581.6284981340752
+     }
+    }
+   ],
+   "coil_heat": {
+    "share": 0.0377,
+    "other_share": 0.0,
+    "other_hw_W": 0.0,
+    "xray_W": 15526956481.855982,
+    "neutron_W": 7514007.4439989,
+    "per_coil": [
+     {
+      "name": "C1",
+      "xray_W": 10298428952.003284,
+      "neutron_W": 4983750.157171609,
+      "armour_hot_W": 10296490008.70212,
+      "back_face_leak_warm_W": 1938943.301164167,
+      "neutron_screen_warm_W": 4960260.186249422,
+      "shield_80K_W": 40544.10701967576,
+      "winding_20K_W": 23625.117945585625,
+      "cryo_input_W": 3319769.0621019397
+     },
+     {
+      "name": "C2",
+      "xray_W": 5228527529.852696,
+      "neutron_W": 2530257.286827292,
+      "armour_hot_W": 5227630914.351089,
+      "back_face_leak_warm_W": 896615.5016079978,
+      "neutron_screen_warm_W": 2518331.3940319447,
+      "shield_80K_W": 17448.854944022256,
+      "winding_20K_W": 11984.055645160757,
+      "cryo_input_W": 1612799.8265981316
+     }
+    ],
+    "hot_W": 15524120923.053207,
+    "warm_radiation_W": 10255964.111216621,
+    "lifted_cold_W": 93602.1355544444,
+    "cryo_input_W": 4932568.888700072,
+    "pump_electric_W": 42780315.594833575,
+    "pump_hydraulic_W": 25668189.356900144,
+    "li_flow_m3_s": 25.668189356900143,
+    "check_split_W": -5.634501576423645e-07
+   },
+   "eight_W": {
+    "radiation_to_space": 386283769465.2803,
+    "radiation_on_closure_coils": 15534470489.29998,
+    "radiation_on_other_hardware": 10236680186.002806,
+    "plasma_on_hardware": 478507797848.0679,
+    "plasma_through_nozzle": 6883100406494.816,
+    "useful_jet": 27861587640619.93,
+    "conversion_losses": 84461745168.63257,
+    "coil_cooling_loads": 47712884.48353365
+   },
+   "eta_recovery": 0.9500000000000001,
+   "circuits": {
+    "hot_W": {
+     "plume_on_hardware": 478507797848.0679,
+     "recovery_conversion_loss": 5870046718.070167,
+     "radiation_on_nozzle_loops": 8306035511.585304,
+     "radiation_on_nozzle_struts": 647840743.7099967,
+     "radiation_on_shadow_shield": 1272567250.5215025,
+     "coil_armour": 15524120923.053207,
+     "coil_pump_work": 25668189.356900144,
+     "coil_recovery_loss": 2511204.446501768,
+     "other_hardware_unbooked": 0.0
+    },
+    "warm_W": {
+     "driver_waste": 76863967593.50697,
+     "power_and_target_systems": 1571669449.8188868,
+     "cryoplant_input": 153550202.7900421,
+     "coil_conductor_heating": 10236680.186002806,
+     "coil_screens": 10255964.111216621,
+     "coil_cold_lifted": 93602.1355544444,
+     "coil_cryoplant_input": 4932568.888700072,
+     "coil_pump_motor_loss": 17112126.23793343
+    },
+    "hot_total_W": 510156588388.81146,
+    "warm_total_W": 78631818187.67531,
+    "hot_added_W": 15552300316.856628,
+    "warm_added_W": 32394261.373397827
+   },
+   "cooling_mass": {
+    "route": "main_radiator",
+    "lithium_inventory_kg": 209452.42515230516,
+    "pipes_kg": 178034.5613794594,
+    "pumps_kg": 42780.31559483358,
+    "cryoplant_kg": [
+     9865.137777400143,
+     49325.68888700072
+    ],
+    "coil_hardware_unbooked_kg": 1852116.929600855,
+    "total_kg": 2331709.920614454,
+    "note": "coil_hardware_unbooked = screen + armour + cryostat + struts + winding pack + (case - FDP-1 booking at 5.35e-7 kg/J)"
+   },
+   "radiators": {
+    "main_hot_1800K": {
+     "area_m2": 14515.111350414445,
+     "mass_kg": 21772.667025621668
+    },
+    "warm_628K": {
+     "area_m2": 2040.5407178602711,
+     "mass_kg": 1020.2703589301356
+    },
+    "shadow_cone_1800K": {
+     "area_m2": 15341.094266146836,
+     "mass_kg": 23011.641399220254,
+     "flux_W_m2": 1011930.4825152047
+    },
+    "shadow_cone_1400K": {
+     "area_m2": 41921.249262886035,
+     "mass_kg": 62881.87389432905,
+     "flux_W_m2": 370316.2762565168
+    },
+    "shadow_cone_1000K": {
+     "area_m2": 161044.671168303,
+     "mass_kg": 241567.0067524545,
+     "flux_W_m2": 96396.365123
+    }
+   },
+   "postprocess_mass_kg": 2354502.857999006,
+   "coupled": {
+    "label": "COUPLED APPROXIMATION (heat via plume_to_hardware, warm and electric via house_fraction, hardware via payload); not a converged spacecraft design",
+    "set": {
+     "base.overrides.continuous.plume_to_hardware.value": 0.0671122671288788,
+     "base.overrides.pulsed.house_fraction.value": 4.490690030311002e-05,
+     "mission.payload.reference_t": 3571.9099206144538
+    },
+    "summary": {
+     "converged": true,
+     "departure_t": 72356.83011644095,
+     "a0_g": 0.006895573489099627,
+     "fusion_TW": 60.22425565845781,
+     "radiator_t": 6075.239424783155,
+     "hot_km2": 0.8029113871107689,
+     "warm_km2": 8.3511514160596,
+     "drive_t": 10872.23140378985,
+     "propellant_t": 45718.193694837835,
+     "tank_t": 4290.527924622146,
+     "end_t": 26638.636421603118,
+     "xray_standoff_m": null,
+     "payload_t": 3571.9099206144538,
+     "wing_tip_radius_m": 17140.512264790996,
+     "pellet_rate_Hz": 330.01480898443543
+    },
+    "eight_W": {
+     "radiation_to_space": 651128674711.3628,
+     "radiation_on_closure_coils": 26191439036.028793,
+     "radiation_on_other_hardware": 17410947999.090565,
+     "plasma_on_hardware": 806773248310.2181,
+     "plasma_through_nozzle": 11605123272224.547,
+     "useful_jet": 46975168171019.15,
+     "conversion_losses": 142405287761.68958,
+     "coil_cooling_loads": 54617395.711230636
+    },
+    "fusion_W": 60224255658457.805
+   }
+  },
+  {
+   "label": "T05 Rev 2 upper case, 30.1 GW (kept case)",
+   "share": 0.073,
+   "other_share": 0.0,
+   "assembly": [
+    {
+     "name": "C1",
+     "layout": "shadowed",
+     "case": "TARGET_composite",
+     "screen": "LiH",
+     "lambda_m": 0.12,
+     "projected_half_width_m": 1.5820163498110251,
+     "share": 0.008363007616341131,
+     "strut_share": 0.0015300574063899252,
+     "strut_width_m": 0.8166797434307267,
+     "strut_length_m": 16.372021844291588,
+     "neutron_flux_n_cm2_s": 591285983243.2039,
+     "mission_fluence_n_cm2": 1.0608251014189983e+20,
+     "screen_attenuation_needed": 106.08251014189985,
+     "screen_m": 0.5597060626659474,
+     "case_area_m2": 5.3765816383867095,
+     "masses_t": {
+      "case": 1196.0736975795614,
+      "case_minus_FDP1_booking": 0.0,
+      "winding_pack": 1051.9472377058128,
+      "neutron_screen": 192.05573928742808,
+      "armour": 4.069250343394651,
+      "cryostat": 109.46908895312455,
+      "struts": 152.57026852331754
+     },
+     "faces_m2": {
+      "burn_face": 439.9189560426649,
+      "armour_back": 691.0230802392635,
+      "cryostat": 1351.470233989192
+     }
+    },
+    {
+     "name": "C2",
+     "layout": "shadowed",
+     "case": "TARGET_composite",
+     "screen": "LiH",
+     "lambda_m": 0.12,
+     "projected_half_width_m": 0.38925687250891905,
+     "share": 0.0038672622682546062,
+     "strut_share": 0.0011554613983402072,
+     "strut_width_m": 0.44398204603741664,
+     "strut_length_m": 22.4698609839971,
+     "neutron_flux_n_cm2_s": 591285983243.2039,
+     "mission_fluence_n_cm2": 1.0608251014189983e+20,
+     "screen_attenuation_needed": 106.08251014189985,
+     "screen_m": 0.5597060626659474,
+     "case_area_m2": 0.08359808515128757,
+     "masses_t": {
+      "case": 34.951340536757584,
+      "case_minus_FDP1_booking": 0.0,
+      "winding_pack": 158.91650741719928,
+      "neutron_screen": 88.81134013279346,
+      "armour": 1.8817223461978871,
+      "cryostat": 47.11190834886009,
+      "struts": 45.283866542726884
+     },
+     "faces_m2": {
+      "burn_face": 203.429442832204,
+      "armour_back": 319.5462215627584,
+      "cryostat": 581.6284981340752
+     }
+    }
+   ],
+   "coil_heat": {
+    "share": 0.073,
+    "other_share": 0.0,
+    "other_hw_W": 0.0,
+    "xray_W": 30065459500.67604,
+    "neutron_W": 14549669.58652307,
+    "per_coil": [
+     {
+      "name": "C1",
+      "xray_W": 19941254999.90026,
+      "neutron_W": 9650232.399828313,
+      "armour_hot_W": 19939316056.5991,
+      "back_face_leak_warm_W": 1938943.301164167,
+      "neutron_screen_warm_W": 9604747.840748217,
+      "shield_80K_W": 40544.10701967576,
+      "winding_20K_W": 45619.706103495184,
+      "cryo_input_W": 5548553.995436775
+     },
+     {
+      "name": "C2",
+      "xray_W": 10124204500.77578,
+      "neutron_W": 4899437.186694755,
+      "armour_hot_W": 10123307885.274172,
+      "back_face_leak_warm_W": 896615.5016079978,
+      "neutron_screen_warm_W": 4876344.609133473,
+      "shield_80K_W": 17448.854944022256,
+      "winding_20K_W": 23150.74041109607,
+      "cryo_input_W": 2744357.21621291
+     }
+    ],
+    "hot_W": 30062623941.87327,
+    "warm_radiation_W": 17258464.98081694,
+    "lifted_cold_W": 126763.40847828926,
+    "cryo_input_W": 8292911.211649684,
+    "pump_electric_W": 82844532.46768427,
+    "pump_hydraulic_W": 49706719.48061056,
+    "li_flow_m3_s": 49.70671948061056,
+    "check_split_W": -1.9203871488571167e-06
+   },
+   "eight_W": {
+    "radiation_to_space": 371738230784.3177,
+    "radiation_on_closure_coils": 30080009170.262566,
+    "radiation_on_other_hardware": 10236680186.002806,
+    "plasma_on_hardware": 478507797848.0679,
+    "plasma_through_nozzle": 6883054696432.505,
+    "useful_jet": 27861587640619.93,
+    "conversion_losses": 84464030671.74814,
+    "coil_cooling_loads": 91137443.67933396
+   },
+   "eta_recovery": 0.9500000000000001,
+   "circuits": {
+    "hot_W": {
+     "plume_on_hardware": 478507797848.0679,
+     "recovery_conversion_loss": 5870046718.070167,
+     "radiation_on_nozzle_loops": 8306035511.585304,
+     "radiation_on_nozzle_struts": 647840743.7099967,
+     "radiation_on_shadow_shield": 1272567250.5215025,
+     "coil_armour": 30062623941.87327,
+     "coil_pump_work": 49706719.48061056,
+     "coil_recovery_loss": 4796707.562070203,
+     "other_hardware_unbooked": 0.0
+    },
+    "warm_W": {
+     "driver_waste": 76863967593.50697,
+     "power_and_target_systems": 1571669449.8188868,
+     "cryoplant_input": 153550202.7900421,
+     "coil_conductor_heating": 10236680.186002806,
+     "coil_screens": 17258464.98081694,
+     "coil_cold_lifted": 126763.40847828926,
+     "coil_cryoplant_input": 8292911.211649684,
+     "coil_pump_motor_loss": 33137812.987073712
+    },
+    "hot_total_W": 524721415440.8708,
+    "warm_total_W": 78658239878.88992,
+    "hot_added_W": 30117127368.915955,
+    "warm_added_W": 58815952.588012695
+   },
+   "cooling_mass": {
+    "route": "main_radiator",
+    "lithium_inventory_kg": 405606.8309617822,
+    "pipes_kg": 344765.8063175148,
+    "pumps_kg": 82844.53246768427,
+    "cryoplant_kg": [
+     16585.822423299367,
+     82929.11211649685
+    ],
+    "coil_hardware_unbooked_kg": 1852116.929600855,
+    "total_kg": 2768263.2114643333,
+    "note": "coil_hardware_unbooked = screen + armour + cryostat + struts + winding pack + (case - FDP-1 booking at 5.35e-7 kg/J)"
+   },
+   "radiators": {
+    "main_hot_1800K": {
+     "area_m2": 28108.60441272557,
+     "mass_kg": 42162.90661908835
+    },
+    "warm_628K": {
+     "area_m2": 3704.8644120077556,
+     "mass_kg": 1852.4322060038778
+    },
+    "shadow_cone_1800K": {
+     "area_m2": 29708.19088990292,
+     "mass_kg": 44562.286334854376,
+     "flux_W_m2": 1011930.4825152047
+    },
+    "shadow_cone_1400K": {
+     "area_m2": 81180.941453,
+     "mass_kg": 121771.41217950001,
+     "flux_W_m2": 370316.2762565168
+    },
+    "shadow_cone_1000K": {
+     "area_m2": 311864.70468584483,
+     "mass_kg": 467797.05702876725,
+     "flux_W_m2": 96396.365123
+    }
+   },
+   "postprocess_mass_kg": 2812278.5502894255,
+   "coupled": {
+    "label": "COUPLED APPROXIMATION (heat via plume_to_hardware, warm and electric via house_fraction, hardware via payload); not a converged spacecraft design",
+    "set": {
+     "base.overrides.continuous.plume_to_hardware.value": 0.06909042757879877,
+     "base.overrides.pulsed.house_fraction.value": 4.564659427220576e-05,
+     "mission.payload.reference_t": 4008.4632114643337
+    },
+    "summary": {
+     "converged": true,
+     "departure_t": 78457.4430811163,
+     "a0_g": 0.006895573489099627,
+     "fusion_TW": 65.30198650604036,
+     "radiator_t": 6639.736152658742,
+     "hot_km2": 0.8954825018039112,
+     "warm_km2": 9.058338359445324,
+     "drive_t": 11601.229538821088,
+     "propellant_t": 49572.82641890037,
+     "tank_t": 4652.274702516172,
+     "end_t": 28884.616662215936,
+     "xray_standoff_m": null,
+     "payload_t": 4008.4632114643337,
+     "wing_tip_radius_m": 18639.59016184604,
+     "pellet_rate_Hz": 357.83680811083184
+    },
+    "eight_W": {
+     "radiation_to_space": 679406761210.3439,
+     "radiation_on_closure_coils": 54991532436.56558,
+     "radiation_on_other_hardware": 18906365021.19517,
+     "plasma_on_hardware": 874794558693.2759,
+     "plasma_through_nozzle": 12583584743184.035,
+     "useful_jet": 50935780037248.59,
+     "conversion_losses": 154414982369.40082,
+     "coil_cooling_loads": 107525876.94450396
+    },
+    "fusion_W": 65301986506040.37
+   }
+  },
+  {
+   "label": "T05 Rev 4 ray cast (coils + struts 0.0273; other hardware +0.0118)",
+   "share": 0.0273,
+   "other_share": 0.0122570004435468,
+   "assembly": [
+    {
+     "name": "C1",
+     "layout": "wrapped",
+     "case": "TARGET_composite",
+     "screen": "LiH",
+     "lambda_m": 0.12,
+     "projected_half_width_m": 2.127191765547183,
+     "share": 0.011244966550955205,
+     "strut_share": 0.0015300574063899252,
+     "strut_width_m": 0.8166797434307267,
+     "strut_length_m": 16.372021844291588,
+     "neutron_flux_n_cm2_s": 591285983243.2039,
+     "mission_fluence_n_cm2": 1.0608251014189983e+20,
+     "screen_attenuation_needed": 106.08251014189985,
+     "screen_m": 0.5597060626659474,
+     "case_area_m2": 5.3765816383867095,
+     "masses_t": {
+      "case": 1196.0736975795614,
+      "case_minus_FDP1_booking": 0.0,
+      "winding_pack": 1051.9472377058128,
+      "neutron_screen": 258.2396744427416,
+      "armour": 5.471546374001211,
+      "cryostat": 109.46908895312455,
+      "struts": 152.57026852331754
+     },
+     "faces_m2": {
+      "burn_face": 591.5185269190498,
+      "armour_back": 929.1551293155716,
+      "cryostat": 1351.470233989192
+     }
+    },
+    {
+     "name": "C2",
+     "layout": "wrapped",
+     "case": "TARGET_composite",
+     "screen": "LiH",
+     "lambda_m": 0.12,
+     "projected_half_width_m": 0.47859646803345923,
+     "share": 0.004754850057280132,
+     "strut_share": 0.0011554613983402072,
+     "strut_width_m": 0.44398204603741664,
+     "strut_length_m": 22.4698609839971,
+     "neutron_flux_n_cm2_s": 591285983243.2039,
+     "mission_fluence_n_cm2": 1.0608251014189983e+20,
+     "screen_attenuation_needed": 106.08251014189985,
+     "screen_m": 0.5597060626659474,
+     "case_area_m2": 0.08359808515128757,
+     "masses_t": {
+      "case": 34.951340536757584,
+      "case_minus_FDP1_booking": 0.0,
+      "winding_pack": 158.91650741719928,
+      "neutron_screen": 109.19471616496439,
+      "armour": 2.313602488005675,
+      "cryostat": 47.11190834886009,
+      "struts": 45.283866542726884
+     },
+     "faces_m2": {
+      "burn_face": 250.11918789250538,
+      "armour_back": 392.88630160247,
+      "cryostat": 581.6284981340752
+     }
+    }
+   ],
+   "coil_heat": {
+    "share": 0.0273,
+    "other_share": 0.0122570004435468,
+    "other_hw_W": 5050557338.928768,
+    "xray_W": 11243658142.033644,
+    "neutron_W": 5441177.804275066,
+    "per_coil": [
+     {
+      "name": "C1",
+      "xray_W": 7687204910.0606575,
+      "neutron_W": 3720092.536179778,
+      "armour_hot_W": 7684597791.477722,
+      "back_face_leak_warm_W": 2607118.5829349784,
+      "neutron_screen_warm_W": 3702558.5782671887,
+      "shield_80K_W": 40544.10701967576,
+      "winding_20K_W": 17669.104935988118,
+      "cryo_input_W": 2716226.410462726
+     },
+     {
+      "name": "C2",
+      "xray_W": 3556453231.9729867,
+      "neutron_W": 1721085.2680952875,
+      "armour_hot_W": 3555350831.366704,
+      "back_face_leak_warm_W": 1102400.6062829471,
+      "neutron_screen_warm_W": 1712973.2557296625,
+      "shield_80K_W": 17448.854944022256,
+      "winding_20K_W": 8170.175215438525,
+      "cryo_input_W": 1226326.609719612
+     }
+    ],
+    "hot_W": 11239948622.844425,
+    "warm_radiation_W": 9066864.751377866,
+    "lifted_cold_W": 83832.24211512465,
+    "cryo_input_W": 3942553.0201823376,
+    "pump_electric_W": 30974285.22609244,
+    "pump_hydraulic_W": 18584571.135655463,
+    "li_flow_m3_s": 18.584571135655462,
+    "check_split_W": -1.4603137969970703e-06
+   },
+   "eight_W": {
+    "radiation_to_space": 385518583295.8136,
+    "radiation_on_closure_coils": 11249099319.83792,
+    "radiation_on_other_hardware": 15287237524.931574,
+    "plasma_on_hardware": 478507797848.0679,
+    "plasma_through_nozzle": 6883113876017.171,
+    "useful_jet": 27861587640619.93,
+    "conversion_losses": 84461071692.51482,
+    "coil_cooling_loads": 34916838.24627478
+   },
+   "eta_recovery": 0.9500000000000001,
+   "circuits": {
+    "hot_W": {
+     "plume_on_hardware": 478507797848.0679,
+     "recovery_conversion_loss": 5870046718.070167,
+     "radiation_on_nozzle_loops": 8306035511.585304,
+     "radiation_on_nozzle_struts": 647840743.7099967,
+     "radiation_on_shadow_shield": 1272567250.5215025,
+     "coil_armour": 11239948622.844425,
+     "coil_pump_work": 18584571.135655463,
+     "coil_recovery_loss": 1837728.328751302,
+     "other_hardware_unbooked": 5050557338.928768
+    },
+    "warm_W": {
+     "driver_waste": 76863967593.50697,
+     "power_and_target_systems": 1571669449.8188868,
+     "cryoplant_input": 153550202.7900421,
+     "coil_conductor_heating": 10236680.186002806,
+     "coil_screens": 9066864.751377866,
+     "coil_cold_lifted": 83832.24211512465,
+     "coil_cryoplant_input": 3942553.0201823376,
+     "coil_pump_motor_loss": 12389714.090436976
+    },
+    "hot_total_W": 510915216333.19244,
+    "warm_total_W": 78624906890.40602,
+    "hot_added_W": 16310928261.23761,
+    "warm_added_W": 25482964.104110718
+   },
+   "cooling_mass": {
+    "route": "main_radiator",
+    "lithium_inventory_kg": 151650.10046694858,
+    "pipes_kg": 128902.5853969063,
+    "pumps_kg": 30974.28522609244,
+    "cryoplant_kg": [
+     7885.106040364675,
+     39425.53020182338
+    ],
+    "coil_hardware_unbooked_kg": 1940518.416960754,
+    "total_kg": 2291470.918252525,
+    "note": "coil_hardware_unbooked = screen + armour + cryostat + struts + winding pack + (case - FDP-1 booking at 5.35e-7 kg/J)"
+   },
+   "radiators": {
+    "main_hot_1800K": {
+     "area_m2": 15223.146101665414,
+     "mass_kg": 22834.71915249812
+    },
+    "warm_628K": {
+     "area_m2": 1605.19251440353,
+     "mass_kg": 802.596257201765
+    },
+    "shadow_cone_1800K": {
+     "area_m2": 11107.431604300486,
+     "mass_kg": 16661.147406450727,
+     "flux_W_m2": 1011930.4825152047
+    },
+    "shadow_cone_1400K": {
+     "area_m2": 30352.294358940224,
+     "mass_kg": 45528.441538410334,
+     "flux_W_m2": 370316.2762565168
+    },
+    "shadow_cone_1000K": {
+     "area_m2": 116601.37400930478,
+     "mass_kg": 174902.06101395717,
+     "flux_W_m2": 96396.365123
+    }
+   },
+   "postprocess_mass_kg": 2315108.233662225,
+   "coupled": {
+    "label": "COUPLED APPROXIMATION (heat via plume_to_hardware, warm and electric via house_fraction, hardware via payload); not a converged spacecraft design",
+    "set": {
+     "base.overrides.continuous.plume_to_hardware.value": 0.06721540984160862,
+     "base.overrides.pulsed.house_fraction.value": 4.471341363841492e-05,
+     "mission.payload.reference_t": 3531.6709182525246
+    },
+    "summary": {
+     "converged": true,
+     "departure_t": 71882.68243463831,
+     "a0_g": 0.006895573489099627,
+     "fusion_TW": 59.829599668143224,
+     "radiator_t": 6037.450629930832,
+     "hot_km2": 0.7988345229634521,
+     "warm_km2": 8.29569420509893,
+     "drive_t": 10815.797578905218,
+     "propellant_t": 45418.60655811933,
+     "tank_t": 4262.412487105626,
+     "end_t": 26464.07587651897,
+     "xray_standoff_m": null,
+     "payload_t": 3531.6709182525246,
+     "wing_tip_radius_m": 17028.920746313048,
+     "pellet_rate_Hz": 327.85285587927655
+    },
+    "eight_W": {
+     "radiation_to_space": 645582529410.7793,
+     "radiation_on_closure_coils": 18841926841.848495,
+     "radiation_on_other_hardware": 25754384084.345634,
+     "plasma_on_hardware": 801486541314.488,
+     "plasma_through_nozzle": 11529075957918.967,
+     "useful_jet": 46667344195663.46,
+     "conversion_losses": 141471449656.9494,
+     "coil_cooling_loads": 42683252.384158306
+    },
+    "fusion_W": 59829599668143.23
+   }
+  },
+  {
+   "label": "bottom-up, shadowed, TARGET_composite",
+   "share": 0.01491578868932587,
+   "other_share": 0.0,
+   "assembly": [
+    {
+     "name": "C1",
+     "layout": "shadowed",
+     "case": "TARGET_composite",
+     "screen": "LiH",
+     "lambda_m": 0.12,
+     "projected_half_width_m": 1.5820163498110251,
+     "share": 0.008363007616341131,
+     "strut_share": 0.0015300574063899252,
+     "strut_width_m": 0.8166797434307267,
+     "strut_length_m": 16.372021844291588,
+     "neutron_flux_n_cm2_s": 591285983243.2039,
+     "mission_fluence_n_cm2": 1.0608251014189983e+20,
+     "screen_attenuation_needed": 106.08251014189985,
+     "screen_m": 0.5597060626659474,
+     "case_area_m2": 5.3765816383867095,
+     "masses_t": {
+      "case": 1196.0736975795614,
+      "case_minus_FDP1_booking": 0.0,
+      "winding_pack": 1051.9472377058128,
+      "neutron_screen": 192.05573928742808,
+      "armour": 4.069250343394651,
+      "cryostat": 109.46908895312455,
+      "struts": 152.57026852331754
+     },
+     "faces_m2": {
+      "burn_face": 439.9189560426649,
+      "armour_back": 691.0230802392635,
+      "cryostat": 1351.470233989192
+     }
+    },
+    {
+     "name": "C2",
+     "layout": "shadowed",
+     "case": "TARGET_composite",
+     "screen": "LiH",
+     "lambda_m": 0.12,
+     "projected_half_width_m": 0.38925687250891905,
+     "share": 0.0038672622682546062,
+     "strut_share": 0.0011554613983402072,
+     "strut_width_m": 0.44398204603741664,
+     "strut_length_m": 22.4698609839971,
+     "neutron_flux_n_cm2_s": 591285983243.2039,
+     "mission_fluence_n_cm2": 1.0608251014189983e+20,
+     "screen_attenuation_needed": 106.08251014189985,
+     "screen_m": 0.5597060626659474,
+     "case_area_m2": 0.08359808515128757,
+     "masses_t": {
+      "case": 34.951340536757584,
+      "case_minus_FDP1_booking": 0.0,
+      "winding_pack": 158.91650741719928,
+      "neutron_screen": 88.81134013279346,
+      "armour": 1.8817223461978871,
+      "cryostat": 47.11190834886009,
+      "struts": 45.283866542726884
+     },
+     "faces_m2": {
+      "burn_face": 203.429442832204,
+      "armour_back": 319.5462215627584,
+      "cryostat": 581.6284981340752
+     }
+    }
+   ],
+   "coil_heat": {
+    "share": 0.01491578868932587,
+    "other_share": 0.0,
+    "other_hw_W": 0.0,
+    "xray_W": 6143151243.281763,
+    "neutron_W": 2972873.932220403,
+    "per_coil": [
+     {
+      "name": "C1",
+      "xray_W": 4074514325.7325377,
+      "neutron_W": 1971792.1545030852,
+      "armour_hot_W": 4072575382.4313736,
+      "back_face_leak_warm_W": 1938943.301164167,
+      "neutron_screen_warm_W": 1962498.4822857445,
+      "shield_80K_W": 40544.10701967576,
+      "winding_20K_W": 9428.819240739662,
+      "cryo_input_W": 1881210.7933442155
+     },
+     {
+      "name": "C2",
+      "xray_W": 2068636917.549225,
+      "neutron_W": 1001081.7777173179,
+      "armour_hot_W": 2067740302.0476172,
+      "back_face_leak_warm_W": 896615.5016079978,
+      "neutron_screen_warm_W": 996363.366659839,
+      "shield_80K_W": 17448.854944022256,
+      "winding_20K_W": 4776.573907292317,
+      "cryo_input_W": 882441.6771607962
+     }
+    ],
+    "hot_W": 6140315684.478991,
+    "warm_radiation_W": 5736234.379880838,
+    "lifted_cold_W": 72198.35511173,
+    "cryo_input_W": 2763652.4705050117,
+    "pump_electric_W": 16921063.9453235,
+    "pump_hydraulic_W": 10152638.3671941,
+    "li_flow_m3_s": 10.152638367194099,
+    "check_split_W": 5.587935447692871e-08
+   },
+   "eight_W": {
+    "radiation_to_space": 395672115837.3663,
+    "radiation_on_closure_coils": 6146124117.213984,
+    "radiation_on_other_hardware": 10236680186.002806,
+    "plasma_on_hardware": 478507797848.0679,
+    "plasma_through_nozzle": 6883129909829.624,
+    "useful_jet": 27861587640619.93,
+    "conversion_losses": 84460270001.89217,
+    "coil_cooling_loads": 19684716.41582851
+   },
+   "eta_recovery": 0.9500000000000001,
+   "circuits": {
+    "hot_W": {
+     "plume_on_hardware": 478507797848.0679,
+     "recovery_conversion_loss": 5870046718.070167,
+     "radiation_on_nozzle_loops": 8306035511.585304,
+     "radiation_on_nozzle_struts": 647840743.7099967,
+     "radiation_on_shadow_shield": 1272567250.5215025,
+     "coil_armour": 6140315684.478991,
+     "coil_pump_work": 10152638.3671941,
+     "coil_recovery_loss": 1036037.7060962362,
+     "other_hardware_unbooked": 0.0
+    },
+    "warm_W": {
+     "driver_waste": 76863967593.50697,
+     "power_and_target_systems": 1571669449.8188868,
+     "cryoplant_input": 153550202.7900421,
+     "coil_conductor_heating": 10236680.186002806,
+     "coil_screens": 5736234.379880838,
+     "coil_cold_lifted": 72198.35511173,
+     "coil_cryoplant_input": 2763652.4705050117,
+     "coil_pump_motor_loss": 6768425.578129401
+    },
+    "hot_total_W": 500755792432.50714,
+    "warm_total_W": 78614764437.08553,
+    "hot_added_W": 6151504360.552307,
+    "warm_added_W": 15340510.783615112
+   },
+   "cooling_mass": {
+    "route": "main_radiator",
+    "lithium_inventory_kg": 82845.52907630385,
+    "pipes_kg": 70418.69971485826,
+    "pumps_kg": 16921.0639453235,
+    "cryoplant_kg": [
+     5527.304941010024,
+     27636.524705050117
+    ],
+    "coil_hardware_unbooked_kg": 1852116.929600855,
+    "total_kg": 2049938.7470423908,
+    "note": "coil_hardware_unbooked = screen + armour + cryostat + struts + winding pack + (case - FDP-1 booking at 5.35e-7 kg/J)"
+   },
+   "radiators": {
+    "main_hot_1800K": {
+     "area_m2": 5741.2581384631885,
+     "mass_kg": 8611.887207694783
+    },
+    "warm_628K": {
+     "area_m2": 966.3111785733503,
+     "mass_kg": 483.15558928667514
+    },
+    "shadow_cone_1800K": {
+     "area_m2": 6067.922441882493,
+     "mass_kg": 9101.88366282374,
+     "flux_W_m2": 1011930.4825152047
+    },
+    "shadow_cone_1400K": {
+     "area_m2": 16581.27411128323,
+     "mass_kg": 24871.911166924845,
+     "flux_W_m2": 370316.2762565168
+    },
+    "shadow_cone_1000K": {
+     "area_m2": 63698.62262590566,
+     "mass_kg": 95547.93393885848,
+     "flux_W_m2": 96396.365123
+    }
+   },
+   "postprocess_mass_kg": 2059033.7898393723,
+   "coupled": {
+    "label": "COUPLED APPROXIMATION (heat via plume_to_hardware, warm and electric via house_fraction, hardware via payload); not a converged spacecraft design",
+    "set": {
+     "base.overrides.continuous.plume_to_hardware.value": 0.06583547319977415,
+     "base.overrides.pulsed.house_fraction.value": 4.442946847033061e-05,
+     "mission.payload.reference_t": 3290.1387470423906
+    },
+    "summary": {
+     "converged": true,
+     "departure_t": 68472.42098165506,
+     "a0_g": 0.006895573489099627,
+     "fusion_TW": 56.99114421492967,
+     "radiator_t": 5719.647426362787,
+     "hot_km2": 0.7457949700525062,
+     "warm_km2": 7.901093583435159,
+     "drive_t": 10408.030666763989,
+     "propellant_t": 43263.85498309006,
+     "tank_t": 4060.1949479316445,
+     "end_t": 25208.565998565005,
+     "xray_standoff_m": null,
+     "payload_t": 3290.1387470423906,
+     "wing_tip_radius_m": 16189.857626210485,
+     "pellet_rate_Hz": 312.2996954216142
+    },
+    "eight_W": {
+     "radiation_to_space": 631169356432.1339,
+     "radiation_on_closure_coils": 9806186932.350187,
+     "radiation_on_other_hardware": 16460203602.815975,
+     "plasma_on_hardware": 763462396224.1624,
+     "plasma_through_nozzle": 10982113002354.38,
+     "useful_jet": 44453349953471.914,
+     "conversion_losses": 134758640012.38718,
+     "coil_cooling_loads": 24475899.528376903
+    },
+    "fusion_W": 56991144214929.67
+   }
+  },
+  {
+   "label": "bottom-up, shadowed, CFRP_1.2GPa",
+   "share": 0.01491578868932587,
+   "other_share": 0.0,
+   "assembly": [
+    {
+     "name": "C1",
+     "layout": "shadowed",
+     "case": "CFRP_1.2GPa",
+     "screen": "LiH",
+     "lambda_m": 0.12,
+     "projected_half_width_m": 1.5820163498110251,
+     "share": 0.008363007616341131,
+     "strut_share": 0.0015300574063899252,
+     "strut_width_m": 0.8166797434307267,
+     "strut_length_m": 16.372021844291588,
+     "neutron_flux_n_cm2_s": 591285983243.2039,
+     "mission_fluence_n_cm2": 1.0608251014189983e+20,
+     "screen_attenuation_needed": 106.08251014189985,
+     "screen_m": 0.5597060626659474,
+     "case_area_m2": 13.399580407194295,
+     "masses_t": {
+      "case": 2980.869028235668,
+      "case_minus_FDP1_booking": 1784.7953306561064,
+      "winding_pack": 1051.9472377058128,
+      "neutron_screen": 192.05573928742808,
+      "armour": 4.069250343394651,
+      "cryostat": 109.46908895312455,
+      "struts": 152.57026852331754
+     },
+     "faces_m2": {
+      "burn_face": 439.9189560426649,
+      "armour_back": 691.0230802392635,
+      "cryostat": 1351.470233989192
+     }
+    },
+    {
+     "name": "C2",
+     "layout": "shadowed",
+     "case": "CFRP_1.2GPa",
+     "screen": "LiH",
+     "lambda_m": 0.12,
+     "projected_half_width_m": 0.38925687250891905,
+     "share": 0.0038672622682546062,
+     "strut_share": 0.0011554613983402072,
+     "strut_width_m": 0.44398204603741664,
+     "strut_length_m": 22.4698609839971,
+     "neutron_flux_n_cm2_s": 591285983243.2039,
+     "mission_fluence_n_cm2": 1.0608251014189983e+20,
+     "screen_attenuation_needed": 106.08251014189985,
+     "screen_m": 0.5597060626659474,
+     "case_area_m2": 0.20834413744869185,
+     "masses_t": {
+      "case": 87.10614463989432,
+      "case_minus_FDP1_booking": 52.15480410313674,
+      "winding_pack": 158.91650741719928,
+      "neutron_screen": 88.81134013279346,
+      "armour": 1.8817223461978871,
+      "cryostat": 47.11190834886009,
+      "struts": 45.283866542726884
+     },
+     "faces_m2": {
+      "burn_face": 203.429442832204,
+      "armour_back": 319.5462215627584,
+      "cryostat": 581.6284981340752
+     }
+    }
+   ],
+   "coil_heat": {
+    "share": 0.01491578868932587,
+    "other_share": 0.0,
+    "other_hw_W": 0.0,
+    "xray_W": 6143151243.281763,
+    "neutron_W": 2972873.932220403,
+    "per_coil": [
+     {
+      "name": "C1",
+      "xray_W": 4074514325.7325377,
+      "neutron_W": 1971792.1545030852,
+      "armour_hot_W": 4072575382.4313736,
+      "back_face_leak_warm_W": 1938943.301164167,
+      "neutron_screen_warm_W": 1962498.4822857445,
+      "shield_80K_W": 40544.10701967576,
+      "winding_20K_W": 9428.819240739662,
+      "cryo_input_W": 1881210.7933442155
+     },
+     {
+      "name": "C2",
+      "xray_W": 2068636917.549225,
+      "neutron_W": 1001081.7777173179,
+      "armour_hot_W": 2067740302.0476172,
+      "back_face_leak_warm_W": 896615.5016079978,
+      "neutron_screen_warm_W": 996363.366659839,
+      "shield_80K_W": 17448.854944022256,
+      "winding_20K_W": 4776.573907292317,
+      "cryo_input_W": 882441.6771607962
+     }
+    ],
+    "hot_W": 6140315684.478991,
+    "warm_radiation_W": 5736234.379880838,
+    "lifted_cold_W": 72198.35511173,
+    "cryo_input_W": 2763652.4705050117,
+    "pump_electric_W": 16921063.9453235,
+    "pump_hydraulic_W": 10152638.3671941,
+    "li_flow_m3_s": 10.152638367194099,
+    "check_split_W": 5.587935447692871e-08
+   },
+   "eight_W": {
+    "radiation_to_space": 395672115837.3663,
+    "radiation_on_closure_coils": 6146124117.213984,
+    "radiation_on_other_hardware": 10236680186.002806,
+    "plasma_on_hardware": 478507797848.0679,
+    "plasma_through_nozzle": 6883129909829.624,
+    "useful_jet": 27861587640619.93,
+    "conversion_losses": 84460270001.89217,
+    "coil_cooling_loads": 19684716.41582851
+   },
+   "eta_recovery": 0.9500000000000001,
+   "circuits": {
+    "hot_W": {
+     "plume_on_hardware": 478507797848.0679,
+     "recovery_conversion_loss": 5870046718.070167,
+     "radiation_on_nozzle_loops": 8306035511.585304,
+     "radiation_on_nozzle_struts": 647840743.7099967,
+     "radiation_on_shadow_shield": 1272567250.5215025,
+     "coil_armour": 6140315684.478991,
+     "coil_pump_work": 10152638.3671941,
+     "coil_recovery_loss": 1036037.7060962362,
+     "other_hardware_unbooked": 0.0
+    },
+    "warm_W": {
+     "driver_waste": 76863967593.50697,
+     "power_and_target_systems": 1571669449.8188868,
+     "cryoplant_input": 153550202.7900421,
+     "coil_conductor_heating": 10236680.186002806,
+     "coil_screens": 5736234.379880838,
+     "coil_cold_lifted": 72198.35511173,
+     "coil_cryoplant_input": 2763652.4705050117,
+     "coil_pump_motor_loss": 6768425.578129401
+    },
+    "hot_total_W": 500755792432.50714,
+    "warm_total_W": 78614764437.08553,
+    "hot_added_W": 6151504360.552307,
+    "warm_added_W": 15340510.783615112
+   },
+   "cooling_mass": {
+    "route": "main_radiator",
+    "lithium_inventory_kg": 82845.52907630385,
+    "pipes_kg": 70418.69971485826,
+    "pumps_kg": 16921.0639453235,
+    "cryoplant_kg": [
+     5527.304941010024,
+     27636.524705050117
+    ],
+    "coil_hardware_unbooked_kg": 3689067.064360099,
+    "total_kg": 3886888.8818016346,
+    "note": "coil_hardware_unbooked = screen + armour + cryostat + struts + winding pack + (case - FDP-1 booking at 5.35e-7 kg/J)"
+   },
+   "radiators": {
+    "main_hot_1800K": {
+     "area_m2": 5741.2581384631885,
+     "mass_kg": 8611.887207694783
+    },
+    "warm_628K": {
+     "area_m2": 966.3111785733503,
+     "mass_kg": 483.15558928667514
+    },
+    "shadow_cone_1800K": {
+     "area_m2": 6067.922441882493,
+     "mass_kg": 9101.88366282374,
+     "flux_W_m2": 1011930.4825152047
+    },
+    "shadow_cone_1400K": {
+     "area_m2": 16581.27411128323,
+     "mass_kg": 24871.911166924845,
+     "flux_W_m2": 370316.2762565168
+    },
+    "shadow_cone_1000K": {
+     "area_m2": 63698.62262590566,
+     "mass_kg": 95547.93393885848,
+     "flux_W_m2": 96396.365123
+    }
+   },
+   "postprocess_mass_kg": 3895983.924598616,
+   "coupled": {
+    "label": "COUPLED APPROXIMATION (heat via plume_to_hardware, warm and electric via house_fraction, hardware via payload); not a converged spacecraft design",
+    "set": {
+     "base.overrides.continuous.plume_to_hardware.value": 0.06583547319977415,
+     "base.overrides.pulsed.house_fraction.value": 4.442946847033061e-05,
+     "mission.payload.reference_t": 5127.088881801635
+    },
+    "summary": {
+     "converged": true,
+     "departure_t": 91139.428311747,
+     "a0_g": 0.006895573489099627,
+     "fusion_TW": 75.85740870481135,
+     "radiator_t": 7613.349060505778,
+     "hot_km2": 0.9927883518211004,
+     "warm_km2": 10.51677504108319,
+     "drive_t": 13105.42384986262,
+     "propellant_t": 57585.85651261788,
+     "tank_t": 5404.275746454372,
+     "end_t": 33553.571799129124,
+     "xray_standoff_m": null,
+     "payload_t": 5127.088881801635,
+     "wing_tip_radius_m": 21555.6961255856,
+     "pellet_rate_Hz": 415.6828257769516
+    },
+    "eight_W": {
+     "radiation_to_space": 839996496924.9548,
+     "radiation_on_closure_coils": 13052412619.717154,
+     "radiation_on_other_hardware": 22023336797.752953,
+     "plasma_on_hardware": 1016197840108.8376,
+     "plasma_through_nozzle": 14617615185222.482,
+     "useful_jet": 59169120110225.26,
+     "conversion_losses": 179370744547.06546,
+     "coil_cooling_loads": 32578365.279699046
+    },
+    "fusion_W": 75857408704811.34
+   }
+  },
+  {
+   "label": "bottom-up, shadowed, cryo_steel_0.66GPa",
+   "share": 0.01491578868932587,
+   "other_share": 0.0,
+   "assembly": [
+    {
+     "name": "C1",
+     "layout": "shadowed",
+     "case": "cryo_steel_0.66GPa",
+     "screen": "LiH",
+     "lambda_m": 0.12,
+     "projected_half_width_m": 1.5820163498110251,
+     "share": 0.008363007616341131,
+     "strut_share": 0.0015300574063899252,
+     "strut_width_m": 0.8166797434307267,
+     "strut_length_m": 16.372021844291588,
+     "neutron_flux_n_cm2_s": 591285983243.2039,
+     "mission_fluence_n_cm2": 1.0608251014189983e+20,
+     "screen_attenuation_needed": 106.08251014189985,
+     "screen_m": 0.5597060626659474,
+     "case_area_m2": 24.362873467625988,
+     "masses_t": {
+      "case": 26760.074230752012,
+      "case_minus_FDP1_booking": 25564.00053317245,
+      "winding_pack": 1051.9472377058128,
+      "neutron_screen": 192.05573928742808,
+      "armour": 4.069250343394651,
+      "cryostat": 109.46908895312455,
+      "struts": 152.57026852331754
+     },
+     "faces_m2": {
+      "burn_face": 439.9189560426649,
+      "armour_back": 691.0230802392635,
+      "cryostat": 1351.470233989192
+     }
+    },
+    {
+     "name": "C2",
+     "layout": "shadowed",
+     "case": "cryo_steel_0.66GPa",
+     "screen": "LiH",
+     "lambda_m": 0.12,
+     "projected_half_width_m": 0.38925687250891905,
+     "share": 0.0038672622682546062,
+     "strut_share": 0.0011554613983402072,
+     "strut_width_m": 0.44398204603741664,
+     "strut_length_m": 22.4698609839971,
+     "neutron_flux_n_cm2_s": 591285983243.2039,
+     "mission_fluence_n_cm2": 1.0608251014189983e+20,
+     "screen_attenuation_needed": 106.08251014189985,
+     "screen_m": 0.5597060626659474,
+     "case_area_m2": 0.37880752263398504,
+     "masses_t": {
+      "case": 781.9756166535965,
+      "case_minus_FDP1_booking": 747.0242761168389,
+      "winding_pack": 158.91650741719928,
+      "neutron_screen": 88.81134013279346,
+      "armour": 1.8817223461978871,
+      "cryostat": 47.11190834886009,
+      "struts": 45.283866542726884
+     },
+     "faces_m2": {
+      "burn_face": 203.429442832204,
+      "armour_back": 319.5462215627584,
+      "cryostat": 581.6284981340752
+     }
+    }
+   ],
+   "coil_heat": {
+    "share": 0.01491578868932587,
+    "other_share": 0.0,
+    "other_hw_W": 0.0,
+    "xray_W": 6143151243.281763,
+    "neutron_W": 2972873.932220403,
+    "per_coil": [
+     {
+      "name": "C1",
+      "xray_W": 4074514325.7325377,
+      "neutron_W": 1971792.1545030852,
+      "armour_hot_W": 4072575382.4313736,
+      "back_face_leak_warm_W": 1938943.301164167,
+      "neutron_screen_warm_W": 1962498.4822857445,
+      "shield_80K_W": 40544.10701967576,
+      "winding_20K_W": 9428.819240739662,
+      "cryo_input_W": 1881210.7933442155
+     },
+     {
+      "name": "C2",
+      "xray_W": 2068636917.549225,
+      "neutron_W": 1001081.7777173179,
+      "armour_hot_W": 2067740302.0476172,
+      "back_face_leak_warm_W": 896615.5016079978,
+      "neutron_screen_warm_W": 996363.366659839,
+      "shield_80K_W": 17448.854944022256,
+      "winding_20K_W": 4776.573907292317,
+      "cryo_input_W": 882441.6771607962
+     }
+    ],
+    "hot_W": 6140315684.478991,
+    "warm_radiation_W": 5736234.379880838,
+    "lifted_cold_W": 72198.35511173,
+    "cryo_input_W": 2763652.4705050117,
+    "pump_electric_W": 16921063.9453235,
+    "pump_hydraulic_W": 10152638.3671941,
+    "li_flow_m3_s": 10.152638367194099,
+    "check_split_W": 5.587935447692871e-08
+   },
+   "eight_W": {
+    "radiation_to_space": 395672115837.3663,
+    "radiation_on_closure_coils": 6146124117.213984,
+    "radiation_on_other_hardware": 10236680186.002806,
+    "plasma_on_hardware": 478507797848.0679,
+    "plasma_through_nozzle": 6883129909829.624,
+    "useful_jet": 27861587640619.93,
+    "conversion_losses": 84460270001.89217,
+    "coil_cooling_loads": 19684716.41582851
+   },
+   "eta_recovery": 0.9500000000000001,
+   "circuits": {
+    "hot_W": {
+     "plume_on_hardware": 478507797848.0679,
+     "recovery_conversion_loss": 5870046718.070167,
+     "radiation_on_nozzle_loops": 8306035511.585304,
+     "radiation_on_nozzle_struts": 647840743.7099967,
+     "radiation_on_shadow_shield": 1272567250.5215025,
+     "coil_armour": 6140315684.478991,
+     "coil_pump_work": 10152638.3671941,
+     "coil_recovery_loss": 1036037.7060962362,
+     "other_hardware_unbooked": 0.0
+    },
+    "warm_W": {
+     "driver_waste": 76863967593.50697,
+     "power_and_target_systems": 1571669449.8188868,
+     "cryoplant_input": 153550202.7900421,
+     "coil_conductor_heating": 10236680.186002806,
+     "coil_screens": 5736234.379880838,
+     "coil_cold_lifted": 72198.35511173,
+     "coil_cryoplant_input": 2763652.4705050117,
+     "coil_pump_motor_loss": 6768425.578129401
+    },
+    "hot_total_W": 500755792432.50714,
+    "warm_total_W": 78614764437.08553,
+    "hot_added_W": 6151504360.552307,
+    "warm_added_W": 15340510.783615112
+   },
+   "cooling_mass": {
+    "route": "main_radiator",
+    "lithium_inventory_kg": 82845.52907630385,
+    "pipes_kg": 70418.69971485826,
+    "pumps_kg": 16921.0639453235,
+    "cryoplant_kg": [
+     5527.304941010024,
+     27636.524705050117
+    ],
+    "coil_hardware_unbooked_kg": 28163141.738890145,
+    "total_kg": 28360963.55633168,
+    "note": "coil_hardware_unbooked = screen + armour + cryostat + struts + winding pack + (case - FDP-1 booking at 5.35e-7 kg/J)"
+   },
+   "radiators": {
+    "main_hot_1800K": {
+     "area_m2": 5741.2581384631885,
+     "mass_kg": 8611.887207694783
+    },
+    "warm_628K": {
+     "area_m2": 966.3111785733503,
+     "mass_kg": 483.15558928667514
+    },
+    "shadow_cone_1800K": {
+     "area_m2": 6067.922441882493,
+     "mass_kg": 9101.88366282374,
+     "flux_W_m2": 1011930.4825152047
+    },
+    "shadow_cone_1400K": {
+     "area_m2": 16581.27411128323,
+     "mass_kg": 24871.911166924845,
+     "flux_W_m2": 370316.2762565168
+    },
+    "shadow_cone_1000K": {
+     "area_m2": 63698.62262590566,
+     "mass_kg": 95547.93393885848,
+     "flux_W_m2": 96396.365123
+    }
+   },
+   "postprocess_mass_kg": 28370058.59912866,
+   "coupled": {
+    "label": "COUPLED APPROXIMATION (heat via plume_to_hardware, warm and electric via house_fraction, hardware via payload); not a converged spacecraft design",
+    "set": {
+     "base.overrides.continuous.plume_to_hardware.value": 0.06583547319977415,
+     "base.overrides.pulsed.house_fraction.value": 4.442946847033061e-05,
+     "mission.payload.reference_t": 29601.16355633168
+    },
+    "summary": {
+     "converged": true,
+     "departure_t": 409453.7496470987,
+     "a0_g": 0.006895573489099627,
+     "fusion_TW": 340.00376596448655,
+     "radiator_t": 34100.64645529189,
+     "hot_km2": 4.443038039936358,
+     "warm_km2": 47.119508523386656,
+     "drive_t": 52230.80629749104,
+     "propellant_t": 258710.69538727967,
+     "tank_t": 24462.01013521327,
+     "end_t": 150743.05425981907,
+     "xray_standoff_m": null,
+     "payload_t": 29601.16355633168,
+     "wing_tip_radius_m": 96631.57835692343,
+     "pellet_rate_Hz": 1000.0
+    },
+    "eight_W": {
+     "radiation_to_space": 3000489825244.6987,
+     "radiation_on_closure_coils": 58502782014.28657,
+     "radiation_on_other_hardware": 80670576582.78625,
+     "plasma_on_hardware": 4565515515124.27,
+     "plasma_through_nozzle": 65671082223974.05,
+     "useful_jet": 265823678524530.06,
+     "conversion_losses": 803680496119.1017,
+     "coil_cooling_loads": 146020897.27541396
+    },
+    "fusion_W": 340003765964486.56
+   }
+  },
+  {
+   "label": "bottom-up, wrapped, TARGET_composite",
+   "share": 0.018685335412965468,
+   "other_share": 0.0,
+   "assembly": [
+    {
+     "name": "C1",
+     "layout": "wrapped",
+     "case": "TARGET_composite",
+     "screen": "LiH",
+     "lambda_m": 0.12,
+     "projected_half_width_m": 2.127191765547183,
+     "share": 0.011244966550955205,
+     "strut_share": 0.0015300574063899252,
+     "strut_width_m": 0.8166797434307267,
+     "strut_length_m": 16.372021844291588,
+     "neutron_flux_n_cm2_s": 591285983243.2039,
+     "mission_fluence_n_cm2": 1.0608251014189983e+20,
+     "screen_attenuation_needed": 106.08251014189985,
+     "screen_m": 0.5597060626659474,
+     "case_area_m2": 5.3765816383867095,
+     "masses_t": {
+      "case": 1196.0736975795614,
+      "case_minus_FDP1_booking": 0.0,
+      "winding_pack": 1051.9472377058128,
+      "neutron_screen": 258.2396744427416,
+      "armour": 5.471546374001211,
+      "cryostat": 109.46908895312455,
+      "struts": 152.57026852331754
+     },
+     "faces_m2": {
+      "burn_face": 591.5185269190498,
+      "armour_back": 929.1551293155716,
+      "cryostat": 1351.470233989192
+     }
+    },
+    {
+     "name": "C2",
+     "layout": "wrapped",
+     "case": "TARGET_composite",
+     "screen": "LiH",
+     "lambda_m": 0.12,
+     "projected_half_width_m": 0.47859646803345923,
+     "share": 0.004754850057280132,
+     "strut_share": 0.0011554613983402072,
+     "strut_width_m": 0.44398204603741664,
+     "strut_length_m": 22.4698609839971,
+     "neutron_flux_n_cm2_s": 591285983243.2039,
+     "mission_fluence_n_cm2": 1.0608251014189983e+20,
+     "screen_attenuation_needed": 106.08251014189985,
+     "screen_m": 0.5597060626659474,
+     "case_area_m2": 0.08359808515128757,
+     "masses_t": {
+      "case": 34.951340536757584,
+      "case_minus_FDP1_booking": 0.0,
+      "winding_pack": 158.91650741719928,
+      "neutron_screen": 109.19471616496439,
+      "armour": 2.313602488005675,
+      "cryostat": 47.11190834886009,
+      "struts": 45.283866542726884
+     },
+     "faces_m2": {
+      "burn_face": 250.11918789250538,
+      "armour_back": 392.88630160247,
+      "cryostat": 581.6284981340752
+     }
+    }
+   ],
+   "coil_heat": {
+    "share": 0.018685335412965468,
+    "other_share": 0.0,
+    "other_hw_W": 0.0,
+    "xray_W": 7695660207.055632,
+    "neutron_W": 3724184.333863098,
+    "per_coil": [
+     {
+      "name": "C1",
+      "xray_W": 5261465279.58529,
+      "neutron_W": 2546196.9525929866,
+      "armour_hot_W": 5258858161.002355,
+      "back_face_leak_warm_W": 2607118.5829349784,
+      "neutron_screen_warm_W": 2534195.931174908,
+      "shield_80K_W": 40544.10701967576,
+      "winding_20K_W": 12136.168441477637,
+      "cryo_input_W": 2155555.5123523306
+     },
+     {
+      "name": "C2",
+      "xray_W": 2434194927.4703417,
+      "neutron_W": 1177987.3812701115,
+      "armour_hot_W": 2433092526.864059,
+      "back_face_leak_warm_W": 1102400.6062829471,
+      "neutron_screen_warm_W": 1172435.158855246,
+      "shield_80K_W": 17448.854944022256,
+      "winding_20K_W": 5610.385264678932,
+      "cryo_input_W": 966934.5613759733
+     }
+    ],
+    "hot_W": 7691950687.866413,
+    "warm_radiation_W": 7357964.007411169,
+    "lifted_cold_W": 75739.51566985459,
+    "cryo_input_W": 3122490.073728304,
+    "pump_electric_W": 21196954.056069262,
+    "pump_hydraulic_W": 12718172.433641557,
+    "li_flow_m3_s": 12.718172433641557,
+    "check_split_W": -7.934868335723877e-07
+   },
+   "eight_W": {
+    "radiation_to_space": 394118855563.1908,
+    "radiation_on_closure_coils": 7699384391.389495,
+    "radiation_on_other_hardware": 10236680186.002806,
+    "plasma_on_hardware": 478507797848.0679,
+    "plasma_through_nozzle": 6883125031168.873,
+    "useful_jet": 27861587640619.93,
+    "conversion_losses": 84460513934.92975,
+    "coil_cooling_loads": 24319444.129797567
+   },
+   "eta_recovery": 0.9500000000000001,
+   "circuits": {
+    "hot_W": {
+     "plume_on_hardware": 478507797848.0679,
+     "recovery_conversion_loss": 5870046718.070167,
+     "radiation_on_nozzle_loops": 8306035511.585304,
+     "radiation_on_nozzle_struts": 647840743.7099967,
+     "radiation_on_shadow_shield": 1272567250.5215025,
+     "coil_armour": 7691950687.866413,
+     "coil_pump_work": 12718172.433641557,
+     "coil_recovery_loss": 1279970.7436735546,
+     "other_hardware_unbooked": 0.0
+    },
+    "warm_W": {
+     "driver_waste": 76863967593.50697,
+     "power_and_target_systems": 1571669449.8188868,
+     "cryoplant_input": 153550202.7900421,
+     "coil_conductor_heating": 10236680.186002806,
+     "coil_screens": 7357964.007411169,
+     "coil_cold_lifted": 75739.51566985459,
+     "coil_cryoplant_input": 3122490.073728304,
+     "coil_pump_motor_loss": 8478781.622427706
+    },
+    "hot_total_W": 502310236902.9986,
+    "warm_total_W": 78618458901.52115,
+    "hot_added_W": 7705948831.043762,
+    "warm_added_W": 19034975.21923828
+   },
+   "cooling_mass": {
+    "route": "main_radiator",
+    "lithium_inventory_kg": 103780.2870585151,
+    "pipes_kg": 88213.24399973782,
+    "pumps_kg": 21196.954056069262,
+    "cryoplant_kg": [
+     6244.9801474566075,
+     31224.90073728304
+    ],
+    "coil_hardware_unbooked_kg": 1940518.416960754,
+    "total_kg": 2184933.8028123593,
+    "note": "coil_hardware_unbooked = screen + armour + cryostat + struts + winding pack + (case - FDP-1 booking at 5.35e-7 kg/J)"
+   },
+   "radiators": {
+    "main_hot_1800K": {
+     "area_m2": 7192.036101692478,
+     "mass_kg": 10788.054152538716
+    },
+    "warm_628K": {
+     "area_m2": 1199.0284807115163,
+     "mass_kg": 599.5142403557581
+    },
+    "shadow_cone_1800K": {
+     "area_m2": 7601.263941321026,
+     "mass_kg": 11401.895911981539,
+     "flux_W_m2": 1011930.4825152047
+    },
+    "shadow_cone_1400K": {
+     "area_m2": 20771.30059100677,
+     "mass_kg": 31156.950886510152,
+     "flux_W_m2": 370316.2762565168
+    },
+    "shadow_cone_1000K": {
+     "area_m2": 79795.02835041161,
+     "mass_kg": 119692.5425256174,
+     "flux_W_m2": 96396.365123
+    }
+   },
+   "postprocess_mass_kg": 2196321.3712052535,
+   "coupled": {
+    "label": "COUPLED APPROXIMATION (heat via plume_to_hardware, warm and electric via house_fraction, hardware via payload); not a converged spacecraft design",
+    "set": {
+     "base.overrides.continuous.plume_to_hardware.value": 0.06604659417917891,
+     "base.overrides.pulsed.house_fraction.value": 4.453289762026169e-05,
+     "mission.payload.reference_t": 3425.133802812359
+    },
+    "summary": {
+     "converged": true,
+     "departure_t": 70205.8808071223,
+     "a0_g": 0.006895573489099627,
+     "fusion_TW": 58.43394836693327,
+     "radiator_t": 5869.499308225402,
+     "hot_km2": 0.7670558353932251,
+     "warm_km2": 8.101508128258784,
+     "drive_t": 10614.768611276299,
+     "propellant_t": 44359.13032800768,
+     "tank_t": 4162.983539269944,
+     "end_t": 25846.75047911462,
+     "xray_standoff_m": null,
+     "payload_t": 3425.133802812359,
+     "wing_tip_radius_m": 16605.369172910283,
+     "pellet_rate_Hz": 320.20561082688516
+    },
+    "eight_W": {
+     "radiation_to_space": 644599586183.1858,
+     "radiation_on_closure_coils": 12595421334.658335,
+     "radiation_on_other_hardware": 16884347912.04908,
+     "plasma_on_hardware": 782790341641.4889,
+     "plasma_through_nozzle": 11260138104901.979,
+     "useful_jet": 45578738761798.484,
+     "conversion_losses": 138170663849.3893,
+     "coil_cooling_loads": 31139312.02723321
+    },
+    "fusion_W": 58433948366933.27
+   }
+  },
+  {
+   "label": "bottom-up, wrapped, CFRP_1.2GPa",
+   "share": 0.0226757083984825,
+   "other_share": 0.0,
+   "assembly": [
+    {
+     "name": "C1",
+     "layout": "wrapped",
+     "case": "CFRP_1.2GPa",
+     "screen": "LiH",
+     "lambda_m": 0.12,
+     "projected_half_width_m": 2.723743595788963,
+     "share": 0.0143985164497601,
+     "strut_share": 0.0015300574063899252,
+     "strut_width_m": 0.8166797434307267,
+     "strut_length_m": 16.372021844291588,
+     "neutron_flux_n_cm2_s": 591285983243.2039,
+     "mission_fluence_n_cm2": 1.0608251014189983e+20,
+     "screen_attenuation_needed": 106.08251014189985,
+     "screen_m": 0.5597060626659474,
+     "case_area_m2": 13.399580407194295,
+     "masses_t": {
+      "case": 2980.869028235668,
+      "case_minus_FDP1_booking": 1784.7953306561064,
+      "winding_pack": 1051.9472377058128,
+      "neutron_screen": 330.6606723635527,
+      "armour": 7.005992424671953,
+      "cryostat": 109.46908895312455,
+      "struts": 152.57026852331754
+     },
+     "faces_m2": {
+      "burn_face": 757.4045864510219,
+      "armour_back": 1189.728342294873,
+      "cryostat": 1351.470233989192
+     }
+    },
+    {
+     "name": "C2",
+     "layout": "wrapped",
+     "case": "CFRP_1.2GPa",
+     "screen": "LiH",
+     "lambda_m": 0.12,
+     "projected_half_width_m": 0.5628263740966544,
+     "share": 0.0055916731439922636,
+     "strut_share": 0.0011554613983402072,
+     "strut_width_m": 0.44398204603741664,
+     "strut_length_m": 22.4698609839971,
+     "neutron_flux_n_cm2_s": 591285983243.2039,
+     "mission_fluence_n_cm2": 1.0608251014189983e+20,
+     "screen_attenuation_needed": 106.08251014189985,
+     "screen_m": 0.5597060626659474,
+     "case_area_m2": 0.20834413744869185,
+     "masses_t": {
+      "case": 87.10614463989432,
+      "case_minus_FDP1_booking": 52.15480410313674,
+      "winding_pack": 158.91650741719928,
+      "neutron_screen": 128.41228524349174,
+      "armour": 2.7207816739136423,
+      "cryostat": 47.11190834886009,
+      "struts": 45.283866542726884
+     },
+     "faces_m2": {
+      "burn_face": 294.13855934201536,
+      "armour_back": 462.0317685831805,
+      "cryostat": 581.6284981340752
+     }
+    }
+   ],
+   "coil_heat": {
+    "share": 0.0226757083984825,
+    "other_share": 0.0,
+    "other_hw_W": 0.0,
+    "xray_W": 9339117705.530344,
+    "neutron_W": 4519507.737510501,
+    "per_coil": [
+     {
+      "name": "C1",
+      "xray_W": 6560272495.556244,
+      "neutron_W": 3174732.693034419,
+      "armour_hot_W": 6556934233.976473,
+      "back_face_leak_warm_W": 3338261.5797710675,
+      "neutron_screen_warm_W": 3159769.186379138,
+      "shield_80K_W": 40544.10701967576,
+      "winding_20K_W": 15098.653678679697,
+      "cryo_input_W": 2455754.0163888056
+     },
+     {
+      "name": "C2",
+      "xray_W": 2778845209.9740996,
+      "neutron_W": 1344775.0444760825,
+      "armour_hot_W": 2777548793.937881,
+      "back_face_leak_warm_W": 1296416.0362186532,
+      "neutron_screen_warm_W": 1338436.6997165305,
+      "shield_80K_W": 17448.854944022256,
+      "winding_20K_W": 6396.507609365486,
+      "cryo_input_W": 1046594.9589708773
+     }
+    ],
+    "hot_W": 9334483027.914354,
+    "warm_radiation_W": 9074697.23024848,
+    "lifted_cold_W": 79488.1232517432,
+    "cryo_input_W": 3502348.975359683,
+    "pump_electric_W": 25723332.859111425,
+    "pump_hydraulic_W": 15433999.715466855,
+    "li_flow_m3_s": 15.433999715466856,
+    "check_split_W": 1.7974525690078735e-07
+   },
+   "eight_W": {
+    "radiation_to_space": 392474602741.3124,
+    "radiation_on_closure_coils": 9343637213.267855,
+    "radiation_on_other_hardware": 10236680186.002806,
+    "plasma_on_hardware": 478507797848.0679,
+    "plasma_through_nozzle": 6883119866708.131,
+    "useful_jet": 27861587640619.93,
+    "conversion_losses": 84460772157.96683,
+    "coil_cooling_loads": 29225681.834471107
+   },
+   "eta_recovery": 0.9500000000000001,
+   "circuits": {
+    "hot_W": {
+     "plume_on_hardware": 478507797848.0679,
+     "recovery_conversion_loss": 5870046718.070167,
+     "radiation_on_nozzle_loops": 8306035511.585304,
+     "radiation_on_nozzle_struts": 647840743.7099967,
+     "radiation_on_shadow_shield": 1272567250.5215025,
+     "coil_armour": 9334483027.914354,
+     "coil_pump_work": 15433999.715466855,
+     "coil_recovery_loss": 1538193.7807616354,
+     "other_hardware_unbooked": 0.0
+    },
+    "warm_W": {
+     "driver_waste": 76863967593.50697,
+     "power_and_target_systems": 1571669449.8188868,
+     "cryoplant_input": 153550202.7900421,
+     "coil_conductor_heating": 10236680.186002806,
+     "coil_screens": 9074697.23024848,
+     "coil_cold_lifted": 79488.1232517432,
+     "coil_cryoplant_input": 3502348.975359683,
+     "coil_pump_motor_loss": 10289333.14364457
+    },
+    "hot_total_W": 503955743293.3654,
+    "warm_total_W": 78622369793.77441,
+    "hot_added_W": 9351455221.410583,
+    "warm_added_W": 22945867.472503662
+   },
+   "cooling_mass": {
+    "route": "main_radiator",
+    "lithium_inventory_kg": 125941.43767820954,
+    "pipes_kg": 107050.22202647809,
+    "pumps_kg": 25723.332859111426,
+    "cryoplant_kg": [
+     7004.697950719366,
+     35023.48975359683
+    ],
+    "coil_hardware_unbooked_kg": 3871048.7439559144,
+    "total_kg": 4164787.2262733104,
+    "note": "coil_hardware_unbooked = screen + armour + cryostat + struts + winding pack + (case - FDP-1 booking at 5.35e-7 kg/J)"
+   },
+   "radiators": {
+    "main_hot_1800K": {
+     "area_m2": 8727.803029887988,
+     "mass_kg": 13091.70454483198
+    },
+    "warm_628K": {
+     "area_m2": 1445.3787460861658,
+     "mass_kg": 722.6893730430829
+    },
+    "shadow_cone_1800K": {
+     "area_m2": 9224.431113798471,
+     "mass_kg": 13836.646670697708,
+     "flux_W_m2": 1011930.4825152047
+    },
+    "shadow_cone_1400K": {
+     "area_m2": 25206.785729959087,
+     "mass_kg": 37810.17859493863,
+     "flux_W_m2": 370316.2762565168
+    },
+    "shadow_cone_1000K": {
+     "area_m2": 96834.38806021083,
+     "mass_kg": 145251.58209031622,
+     "flux_W_m2": 96396.365123
+    }
+   },
+   "postprocess_mass_kg": 4178601.6201911853,
+   "coupled": {
+    "label": "COUPLED APPROXIMATION (heat via plume_to_hardware, warm and electric via house_fraction, hardware via payload); not a converged spacecraft design",
+    "set": {
+     "base.overrides.continuous.plume_to_hardware.value": 0.06627008297362984,
+     "base.overrides.pulsed.house_fraction.value": 4.464238582031769e-05,
+     "mission.payload.reference_t": 5404.987226273311
+    },
+    "summary": {
+     "converged": true,
+     "departure_t": 94744.86344820287,
+     "a0_g": 0.006895573489099627,
+     "fusion_TW": 78.85831152603949,
+     "radiator_t": 7928.556147230454,
+     "hot_km2": 1.038671418360794,
+     "warm_km2": 10.933890924383512,
+     "drive_t": 13534.769184302571,
+     "propellant_t": 59863.92731336196,
+     "tank_t": 5618.066484500111,
+     "end_t": 34880.93613484092,
+     "xray_standoff_m": null,
+     "payload_t": 5404.987226273311,
+     "wing_tip_radius_m": 22423.547952839614,
+     "pellet_rate_Hz": 432.1261757075283
+    },
+    "eight_W": {
+     "radiation_to_space": 866150077177.5255,
+     "radiation_on_closure_coils": 20627894743.607536,
+     "radiation_on_other_hardware": 22911326914.501713,
+     "plasma_on_hardware": 1056398165313.1838,
+     "plasma_through_nozzle": 15195881530727.393,
+     "useful_jet": 61509824112766.02,
+     "conversion_losses": 186467760936.0984,
+     "coil_cooling_loads": 50657461.13852298
+    },
+    "fusion_W": 78858311526039.48
+   }
+  },
+  {
+   "label": "bottom-up, wrapped, cryo_steel_0.66GPa",
+   "share": 0.026865097988936073,
+   "other_share": 0.0,
+   "assembly": [
+    {
+     "name": "C1",
+     "layout": "wrapped",
+     "case": "cryo_steel_0.66GPa",
+     "screen": "LiH",
+     "lambda_m": 0.12,
+     "projected_half_width_m": 3.357001772829442,
+     "share": 0.017746106984037727,
+     "strut_share": 0.0015300574063899252,
+     "strut_width_m": 0.8166797434307267,
+     "strut_length_m": 16.372021844291588,
+     "neutron_flux_n_cm2_s": 591285983243.2039,
+     "mission_fluence_n_cm2": 1.0608251014189983e+20,
+     "screen_attenuation_needed": 106.08251014189985,
+     "screen_m": 0.5597060626659474,
+     "case_area_m2": 24.362873467625988,
+     "masses_t": {
+      "case": 26760.074230752012,
+      "case_minus_FDP1_booking": 25564.00053317245,
+      "winding_pack": 1051.9472377058128,
+      "neutron_screen": 407.53779652592056,
+      "armour": 8.634854259562127,
+      "cryostat": 109.46908895312455,
+      "struts": 152.57026852331754
+     },
+     "faces_m2": {
+      "burn_face": 933.4977577905001,
+      "armour_back": 1466.3348490085896,
+      "cryostat": 1351.470233989192
+     }
+    },
+    {
+     "name": "C2",
+     "layout": "wrapped",
+     "case": "cryo_steel_0.66GPa",
+     "screen": "LiH",
+     "lambda_m": 0.12,
+     "projected_half_width_m": 0.6475571332638878,
+     "share": 0.006433472200168212,
+     "strut_share": 0.0011554613983402072,
+     "strut_width_m": 0.44398204603741664,
+     "strut_length_m": 22.4698609839971,
+     "neutron_flux_n_cm2_s": 591285983243.2039,
+     "mission_fluence_n_cm2": 1.0608251014189983e+20,
+     "screen_attenuation_needed": 106.08251014189985,
+     "screen_m": 0.5597060626659474,
+     "case_area_m2": 0.37880752263398504,
+     "masses_t": {
+      "case": 781.9756166535965,
+      "case_minus_FDP1_booking": 747.0242761168389,
+      "winding_pack": 158.91650741719928,
+      "neutron_screen": 147.74412702603743,
+      "armour": 3.1303820540113407,
+      "cryostat": 47.11190834886009,
+      "struts": 45.283866542726884
+     },
+     "faces_m2": {
+      "burn_face": 338.4196815147395,
+      "armour_back": 531.5883926384516,
+      "cryostat": 581.6284981340752
+     }
+    }
+   ],
+   "coil_heat": {
+    "share": 0.026865097988936073,
+    "other_share": 0.0,
+    "other_hw_W": 0.0,
+    "xray_W": 11064541309.151382,
+    "neutron_W": 5354497.248610757,
+    "per_coil": [
+     {
+      "name": "C1",
+      "xray_W": 7938996435.736662,
+      "neutron_W": 3841942.777756497,
+      "armour_hot_W": 7934882043.303106,
+      "back_face_leak_warm_W": 4114392.433555694,
+      "neutron_screen_warm_W": 3823834.501601373,
+      "shield_80K_W": 40544.10701967576,
+      "winding_20K_W": 18243.42317852276,
+      "cryo_input_W": 2774423.992372903
+     },
+     {
+      "name": "C2",
+      "xray_W": 3125544873.41472,
+      "neutron_W": 1512554.4708542605,
+      "armour_hot_W": 3124053288.2819543,
+      "back_face_leak_warm_W": 1491585.132765856,
+      "neutron_screen_warm_W": 1505425.3292604624,
+      "shield_80K_W": 17448.854944022256,
+      "winding_20K_W": 7187.304443611536,
+      "cryo_input_W": 1126729.0381744772
+     }
+    ],
+    "hot_W": 11058935331.58506,
+    "warm_radiation_W": 10877051.125346474,
+    "lifted_cold_W": 83423.68958583231,
+    "cryo_input_W": 3901153.0305473804,
+    "pump_electric_W": 30475461.120990578,
+    "pump_hydraulic_W": 18285276.672594346,
+    "li_flow_m3_s": 18.285276672594346,
+    "check_split_W": 6.92903995513916e-07
+   },
+   "eight_W": {
+    "radiation_to_space": 390748344148.1803,
+    "radiation_on_closure_coils": 11069895806.399994,
+    "radiation_on_other_hardware": 10236680186.002806,
+    "plasma_on_hardware": 478507797848.0679,
+    "plasma_through_nozzle": 6883114444674.113,
+    "useful_jet": 27861587640619.93,
+    "conversion_losses": 84461043259.66774,
+    "coil_cooling_loads": 34376614.151537955
+   },
+   "eta_recovery": 0.9500000000000001,
+   "circuits": {
+    "hot_W": {
+     "plume_on_hardware": 478507797848.0679,
+     "recovery_conversion_loss": 5870046718.070167,
+     "radiation_on_nozzle_loops": 8306035511.585304,
+     "radiation_on_nozzle_struts": 647840743.7099967,
+     "radiation_on_shadow_shield": 1272567250.5215025,
+     "coil_armour": 11058935331.58506,
+     "coil_pump_work": 18285276.672594346,
+     "coil_recovery_loss": 1809295.4816598904,
+     "other_hardware_unbooked": 0.0
+    },
+    "warm_W": {
+     "driver_waste": 76863967593.50697,
+     "power_and_target_systems": 1571669449.8188868,
+     "cryoplant_input": 153550202.7900421,
+     "coil_conductor_heating": 10236680.186002806,
+     "coil_screens": 10877051.125346474,
+     "coil_cold_lifted": 83423.68958583231,
+     "coil_cryoplant_input": 3901153.0305473804,
+     "coil_pump_motor_loss": 12190184.448396232
+    },
+    "hot_total_W": 505683317975.69415,
+    "warm_total_W": 78626475738.59578,
+    "hot_added_W": 11079029903.739319,
+    "warm_added_W": 27051812.29386902
+   },
+   "cooling_mass": {
+    "route": "main_radiator",
+    "lithium_inventory_kg": 149207.85764836986,
+    "pipes_kg": 126826.67900111437,
+    "pumps_kg": 30475.461120990578,
+    "cryoplant_kg": [
+     7802.306061094761,
+     39011.5303054738
+    ],
+    "coil_hardware_unbooked_kg": 28443370.846645862,
+    "total_kg": 28788892.37472181,
+    "note": "coil_hardware_unbooked = screen + armour + cryostat + struts + winding pack + (case - FDP-1 booking at 5.35e-7 kg/J)"
+   },
+   "radiators": {
+    "main_hot_1800K": {
+     "area_m2": 10340.16508368523,
+     "mass_kg": 15510.247625527845
+    },
+    "warm_628K": {
+     "area_m2": 1704.0155304446396,
+     "mass_kg": 852.0077652223198
+    },
+    "shadow_cone_1800K": {
+     "area_m2": 10928.552427927178,
+     "mass_kg": 16392.828641890766,
+     "flux_W_m2": 1011930.4825152047
+    },
+    "shadow_cone_1400K": {
+     "area_m2": 29863.487080229155,
+     "mass_kg": 44795.23062034373,
+     "flux_W_m2": 370316.2762565168
+    },
+    "shadow_cone_1000K": {
+     "area_m2": 114723.57196740832,
+     "mass_kg": 172085.3579511125,
+     "flux_W_m2": 96396.365123
+    }
+   },
+   "postprocess_mass_kg": 28805254.63011256,
+   "coupled": {
+    "label": "COUPLED APPROXIMATION (heat via plume_to_hardware, warm and electric via house_fraction, hardware via payload); not a converged spacecraft design",
+    "set": {
+     "base.overrides.continuous.plume_to_hardware.value": 0.06650471808980919,
+     "base.overrides.pulsed.house_fraction.value": 4.475733465524026e-05,
+     "mission.payload.reference_t": 30029.09237472181
+    },
+    "summary": {
+     "converged": true,
+     "departure_t": 416585.1044640961,
+     "a0_g": 0.006895573489099627,
+     "fusion_TW": 345.90589994101254,
+     "radiator_t": 34786.57580475055,
+     "hot_km2": 4.56459221342141,
+     "warm_km2": 47.944101996417864,
+     "drive_t": 53131.44545150388,
+     "propellant_t": 263216.59566380404,
+     "tank_t": 24892.731342763596,
+     "end_t": 153368.508800292,
+     "xray_standoff_m": null,
+     "payload_t": 30029.09237472181,
+     "wing_tip_radius_m": 98405.05098394545,
+     "pellet_rate_Hz": 1000.0
+    },
+    "eight_W": {
+     "radiation_to_space": 2985877863913.896,
+     "radiation_on_closure_coils": 107199551375.59021,
+     "radiation_on_other_hardware": 81575719393.34344,
+     "plasma_on_hardware": 4645149435934.261,
+     "plasma_through_nozzle": 66814741776597.67,
+     "useful_jet": 270453463871353.0,
+     "conversion_losses": 817629755919.3068,
+     "coil_cooling_loads": 261966525.47739887
+    },
+    "fusion_W": 345905899941012.56
+   }
+  }
+ ],
+ "sensitivities": [
+  {
+   "label": "LiH e-fold 0.08 m",
+   "share": 0.01491578868932587,
+   "other_share": 0.0,
+   "assembly": [
+    {
+     "name": "C1",
+     "layout": "shadowed",
+     "case": "TARGET_composite",
+     "screen": "LiH",
+     "lambda_m": 0.08,
+     "projected_half_width_m": 1.5820163498110251,
+     "share": 0.008363007616341131,
+     "strut_share": 0.0015300574063899252,
+     "strut_width_m": 0.8166797434307267,
+     "strut_length_m": 16.372021844291588,
+     "neutron_flux_n_cm2_s": 591285983243.2039,
+     "mission_fluence_n_cm2": 1.0608251014189983e+20,
+     "screen_attenuation_needed": 106.08251014189985,
+     "screen_m": 0.3731373751106316,
+     "case_area_m2": 5.3765816383867095,
+     "masses_t": {
+      "case": 1196.0736975795614,
+      "case_minus_FDP1_booking": 0.0,
+      "winding_pack": 1051.9472377058128,
+      "neutron_screen": 128.03715952495207,
+      "armour": 4.069250343394651,
+      "cryostat": 109.46908895312455,
+      "struts": 152.57026852331754
+     },
+     "faces_m2": {
+      "burn_face": 439.9189560426649,
+      "armour_back": 691.0230802392635,
+      "cryostat": 1351.470233989192
+     }
+    },
+    {
+     "name": "C2",
+     "layout": "shadowed",
+     "case": "TARGET_composite",
+     "screen": "LiH",
+     "lambda_m": 0.08,
+     "projected_half_width_m": 0.38925687250891905,
+     "share": 0.0038672622682546062,
+     "strut_share": 0.0011554613983402072,
+     "strut_width_m": 0.44398204603741664,
+     "strut_length_m": 22.4698609839971,
+     "neutron_flux_n_cm2_s": 591285983243.2039,
+     "mission_fluence_n_cm2": 1.0608251014189983e+20,
+     "screen_attenuation_needed": 106.08251014189985,
+     "screen_m": 0.3731373751106316,
+     "case_area_m2": 0.08359808515128757,
+     "masses_t": {
+      "case": 34.951340536757584,
+      "case_minus_FDP1_booking": 0.0,
+      "winding_pack": 158.91650741719928,
+      "neutron_screen": 59.20756008852897,
+      "armour": 1.8817223461978871,
+      "cryostat": 47.11190834886009,
+      "struts": 45.283866542726884
+     },
+     "faces_m2": {
+      "burn_face": 203.429442832204,
+      "armour_back": 319.5462215627584,
+      "cryostat": 581.6284981340752
+     }
+    }
+   ],
+   "coil_heat": {
+    "share": 0.01491578868932587,
+    "other_share": 0.0,
+    "other_hw_W": 0.0,
+    "xray_W": 6143151243.281763,
+    "neutron_W": 2972873.932220403,
+    "per_coil": [
+     {
+      "name": "C1",
+      "xray_W": 4074514325.7325377,
+      "neutron_W": 1971792.1545030852,
+      "armour_hot_W": 4072575382.4313736,
+      "back_face_leak_warm_W": 1938943.301164167,
+      "neutron_screen_warm_W": 1962498.4822857445,
+      "shield_80K_W": 40544.10701967576,
+      "winding_20K_W": 9428.819240739662,
+      "cryo_input_W": 1881210.7933442155
+     },
+     {
+      "name": "C2",
+      "xray_W": 2068636917.549225,
+      "neutron_W": 1001081.7777173179,
+      "armour_hot_W": 2067740302.0476172,
+      "back_face_leak_warm_W": 896615.5016079978,
+      "neutron_screen_warm_W": 996363.366659839,
+      "shield_80K_W": 17448.854944022256,
+      "winding_20K_W": 4776.573907292317,
+      "cryo_input_W": 882441.6771607962
+     }
+    ],
+    "hot_W": 6140315684.478991,
+    "warm_radiation_W": 5736234.379880838,
+    "lifted_cold_W": 72198.35511173,
+    "cryo_input_W": 2763652.4705050117,
+    "pump_electric_W": 16921063.9453235,
+    "pump_hydraulic_W": 10152638.3671941,
+    "li_flow_m3_s": 10.152638367194099,
+    "check_split_W": 5.587935447692871e-08
+   },
+   "eight_W": {
+    "radiation_to_space": 395672115837.3663,
+    "radiation_on_closure_coils": 6146124117.213984,
+    "radiation_on_other_hardware": 10236680186.002806,
+    "plasma_on_hardware": 478507797848.0679,
+    "plasma_through_nozzle": 6883129909829.624,
+    "useful_jet": 27861587640619.93,
+    "conversion_losses": 84460270001.89217,
+    "coil_cooling_loads": 19684716.41582851
+   },
+   "eta_recovery": 0.9500000000000001,
+   "circuits": {
+    "hot_W": {
+     "plume_on_hardware": 478507797848.0679,
+     "recovery_conversion_loss": 5870046718.070167,
+     "radiation_on_nozzle_loops": 8306035511.585304,
+     "radiation_on_nozzle_struts": 647840743.7099967,
+     "radiation_on_shadow_shield": 1272567250.5215025,
+     "coil_armour": 6140315684.478991,
+     "coil_pump_work": 10152638.3671941,
+     "coil_recovery_loss": 1036037.7060962362,
+     "other_hardware_unbooked": 0.0
+    },
+    "warm_W": {
+     "driver_waste": 76863967593.50697,
+     "power_and_target_systems": 1571669449.8188868,
+     "cryoplant_input": 153550202.7900421,
+     "coil_conductor_heating": 10236680.186002806,
+     "coil_screens": 5736234.379880838,
+     "coil_cold_lifted": 72198.35511173,
+     "coil_cryoplant_input": 2763652.4705050117,
+     "coil_pump_motor_loss": 6768425.578129401
+    },
+    "hot_total_W": 500755792432.50714,
+    "warm_total_W": 78614764437.08553,
+    "hot_added_W": 6151504360.552307,
+    "warm_added_W": 15340510.783615112
+   },
+   "cooling_mass": {
+    "route": "main_radiator",
+    "lithium_inventory_kg": 82845.52907630385,
+    "pipes_kg": 70418.69971485826,
+    "pumps_kg": 16921.0639453235,
+    "cryoplant_kg": [
+     5527.304941010024,
+     27636.524705050117
+    ],
+    "coil_hardware_unbooked_kg": 1758494.5697941147,
+    "total_kg": 1956316.3872356503,
+    "note": "coil_hardware_unbooked = screen + armour + cryostat + struts + winding pack + (case - FDP-1 booking at 5.35e-7 kg/J)"
+   },
+   "radiators": {
+    "main_hot_1800K": {
+     "area_m2": 5741.2581384631885,
+     "mass_kg": 8611.887207694783
+    },
+    "warm_628K": {
+     "area_m2": 966.3111785733503,
+     "mass_kg": 483.15558928667514
+    },
+    "shadow_cone_1800K": {
+     "area_m2": 6067.922441882493,
+     "mass_kg": 9101.88366282374,
+     "flux_W_m2": 1011930.4825152047
+    },
+    "shadow_cone_1400K": {
+     "area_m2": 16581.27411128323,
+     "mass_kg": 24871.911166924845,
+     "flux_W_m2": 370316.2762565168
+    },
+    "shadow_cone_1000K": {
+     "area_m2": 63698.62262590566,
+     "mass_kg": 95547.93393885848,
+     "flux_W_m2": 96396.365123
+    }
+   },
+   "postprocess_mass_kg": 1965411.4300326318,
+   "coupled": {
+    "label": "COUPLED APPROXIMATION (heat via plume_to_hardware, warm and electric via house_fraction, hardware via payload); not a converged spacecraft design",
+    "set": {
+     "base.overrides.continuous.plume_to_hardware.value": 0.06583547319977415,
+     "base.overrides.pulsed.house_fraction.value": 4.442946847033061e-05,
+     "mission.payload.reference_t": 3196.5163872356507
+    },
+    "summary": {
+     "converged": true,
+     "departure_t": 67315.34025053677,
+     "a0_g": 0.006895573489099627,
+     "fusion_TW": 56.028079674439056,
+     "radiator_t": 5622.982164536827,
+     "hot_km2": 0.7331876451521439,
+     "warm_km2": 7.767572121223868,
+     "drive_t": 10270.186495436501,
+     "propellant_t": 42532.76102968301,
+     "tank_t": 3991.5837372192423,
+     "end_t": 24782.57922085376,
+     "xray_standoff_m": null,
+     "payload_t": 3196.5163872356507,
+     "wing_tip_radius_m": 15915.951745963712,
+     "pellet_rate_Hz": 307.02228850678256
+    },
+    "eight_W": {
+     "radiation_to_space": 620508374149.3016,
+     "radiation_on_closure_coils": 9640477135.818415,
+     "radiation_on_other_hardware": 16177213656.010775,
+     "plasma_on_hardware": 750561032230.671,
+     "plasma_through_nozzle": 10796531841927.81,
+     "useful_jet": 43702155327556.75,
+     "conversion_losses": 132481345489.01335,
+     "coil_cooling_loads": 24062293.67334275
+    },
+    "fusion_W": 56028079674439.055
+   }
+  },
+  {
+   "label": "LiH e-fold 0.18 m",
+   "share": 0.01491578868932587,
+   "other_share": 0.0,
+   "assembly": [
+    {
+     "name": "C1",
+     "layout": "shadowed",
+     "case": "TARGET_composite",
+     "screen": "LiH",
+     "lambda_m": 0.18,
+     "projected_half_width_m": 1.5820163498110251,
+     "share": 0.008363007616341131,
+     "strut_share": 0.0015300574063899252,
+     "strut_width_m": 0.8166797434307267,
+     "strut_length_m": 16.372021844291588,
+     "neutron_flux_n_cm2_s": 591285983243.2039,
+     "mission_fluence_n_cm2": 1.0608251014189983e+20,
+     "screen_attenuation_needed": 106.08251014189985,
+     "screen_m": 0.839559093998921,
+     "case_area_m2": 5.3765816383867095,
+     "masses_t": {
+      "case": 1196.0736975795614,
+      "case_minus_FDP1_booking": 0.0,
+      "winding_pack": 1051.9472377058128,
+      "neutron_screen": 288.08360893114207,
+      "armour": 4.069250343394651,
+      "cryostat": 109.46908895312455,
+      "struts": 152.57026852331754
+     },
+     "faces_m2": {
+      "burn_face": 439.9189560426649,
+      "armour_back": 691.0230802392635,
+      "cryostat": 1351.470233989192
+     }
+    },
+    {
+     "name": "C2",
+     "layout": "shadowed",
+     "case": "TARGET_composite",
+     "screen": "LiH",
+     "lambda_m": 0.18,
+     "projected_half_width_m": 0.38925687250891905,
+     "share": 0.0038672622682546062,
+     "strut_share": 0.0011554613983402072,
+     "strut_width_m": 0.44398204603741664,
+     "strut_length_m": 22.4698609839971,
+     "neutron_flux_n_cm2_s": 591285983243.2039,
+     "mission_fluence_n_cm2": 1.0608251014189983e+20,
+     "screen_attenuation_needed": 106.08251014189985,
+     "screen_m": 0.839559093998921,
+     "case_area_m2": 0.08359808515128757,
+     "masses_t": {
+      "case": 34.951340536757584,
+      "case_minus_FDP1_booking": 0.0,
+      "winding_pack": 158.91650741719928,
+      "neutron_screen": 133.21701019919018,
+      "armour": 1.8817223461978871,
+      "cryostat": 47.11190834886009,
+      "struts": 45.283866542726884
+     },
+     "faces_m2": {
+      "burn_face": 203.429442832204,
+      "armour_back": 319.5462215627584,
+      "cryostat": 581.6284981340752
+     }
+    }
+   ],
+   "coil_heat": {
+    "share": 0.01491578868932587,
+    "other_share": 0.0,
+    "other_hw_W": 0.0,
+    "xray_W": 6143151243.281763,
+    "neutron_W": 2972873.932220403,
+    "per_coil": [
+     {
+      "name": "C1",
+      "xray_W": 4074514325.7325377,
+      "neutron_W": 1971792.1545030852,
+      "armour_hot_W": 4072575382.4313736,
+      "back_face_leak_warm_W": 1938943.301164167,
+      "neutron_screen_warm_W": 1962498.4822857445,
+      "shield_80K_W": 40544.10701967576,
+      "winding_20K_W": 9428.819240739662,
+      "cryo_input_W": 1881210.7933442155
+     },
+     {
+      "name": "C2",
+      "xray_W": 2068636917.549225,
+      "neutron_W": 1001081.7777173179,
+      "armour_hot_W": 2067740302.0476172,
+      "back_face_leak_warm_W": 896615.5016079978,
+      "neutron_screen_warm_W": 996363.366659839,
+      "shield_80K_W": 17448.854944022256,
+      "winding_20K_W": 4776.573907292317,
+      "cryo_input_W": 882441.6771607962
+     }
+    ],
+    "hot_W": 6140315684.478991,
+    "warm_radiation_W": 5736234.379880838,
+    "lifted_cold_W": 72198.35511173,
+    "cryo_input_W": 2763652.4705050117,
+    "pump_electric_W": 16921063.9453235,
+    "pump_hydraulic_W": 10152638.3671941,
+    "li_flow_m3_s": 10.152638367194099,
+    "check_split_W": 5.587935447692871e-08
+   },
+   "eight_W": {
+    "radiation_to_space": 395672115837.3663,
+    "radiation_on_closure_coils": 6146124117.213984,
+    "radiation_on_other_hardware": 10236680186.002806,
+    "plasma_on_hardware": 478507797848.0679,
+    "plasma_through_nozzle": 6883129909829.624,
+    "useful_jet": 27861587640619.93,
+    "conversion_losses": 84460270001.89217,
+    "coil_cooling_loads": 19684716.41582851
+   },
+   "eta_recovery": 0.9500000000000001,
+   "circuits": {
+    "hot_W": {
+     "plume_on_hardware": 478507797848.0679,
+     "recovery_conversion_loss": 5870046718.070167,
+     "radiation_on_nozzle_loops": 8306035511.585304,
+     "radiation_on_nozzle_struts": 647840743.7099967,
+     "radiation_on_shadow_shield": 1272567250.5215025,
+     "coil_armour": 6140315684.478991,
+     "coil_pump_work": 10152638.3671941,
+     "coil_recovery_loss": 1036037.7060962362,
+     "other_hardware_unbooked": 0.0
+    },
+    "warm_W": {
+     "driver_waste": 76863967593.50697,
+     "power_and_target_systems": 1571669449.8188868,
+     "cryoplant_input": 153550202.7900421,
+     "coil_conductor_heating": 10236680.186002806,
+     "coil_screens": 5736234.379880838,
+     "coil_cold_lifted": 72198.35511173,
+     "coil_cryoplant_input": 2763652.4705050117,
+     "coil_pump_motor_loss": 6768425.578129401
+    },
+    "hot_total_W": 500755792432.50714,
+    "warm_total_W": 78614764437.08553,
+    "hot_added_W": 6151504360.552307,
+    "warm_added_W": 15340510.783615112
+   },
+   "cooling_mass": {
+    "route": "main_radiator",
+    "lithium_inventory_kg": 82845.52907630385,
+    "pipes_kg": 70418.69971485826,
+    "pumps_kg": 16921.0639453235,
+    "cryoplant_kg": [
+     5527.304941010024,
+     27636.524705050117
+    ],
+    "coil_hardware_unbooked_kg": 1992550.4693109659,
+    "total_kg": 2190372.2867525015,
+    "note": "coil_hardware_unbooked = screen + armour + cryostat + struts + winding pack + (case - FDP-1 booking at 5.35e-7 kg/J)"
+   },
+   "radiators": {
+    "main_hot_1800K": {
+     "area_m2": 5741.2581384631885,
+     "mass_kg": 8611.887207694783
+    },
+    "warm_628K": {
+     "area_m2": 966.3111785733503,
+     "mass_kg": 483.15558928667514
+    },
+    "shadow_cone_1800K": {
+     "area_m2": 6067.922441882493,
+     "mass_kg": 9101.88366282374,
+     "flux_W_m2": 1011930.4825152047
+    },
+    "shadow_cone_1400K": {
+     "area_m2": 16581.27411128323,
+     "mass_kg": 24871.911166924845,
+     "flux_W_m2": 370316.2762565168
+    },
+    "shadow_cone_1000K": {
+     "area_m2": 63698.62262590566,
+     "mass_kg": 95547.93393885848,
+     "flux_W_m2": 96396.365123
+    }
+   },
+   "postprocess_mass_kg": 2199467.329549483,
+   "coupled": {
+    "label": "COUPLED APPROXIMATION (heat via plume_to_hardware, warm and electric via house_fraction, hardware via payload); not a converged spacecraft design",
+    "set": {
+     "base.overrides.continuous.plume_to_hardware.value": 0.06583547319977415,
+     "base.overrides.pulsed.house_fraction.value": 4.442946847033061e-05,
+     "mission.payload.reference_t": 3430.572286752502
+    },
+    "summary": {
+     "converged": true,
+     "departure_t": 70207.65187787183,
+     "a0_g": 0.006895573489099627,
+     "fusion_TW": 58.435416230676985,
+     "radiator_t": 5864.6130729639735,
+     "hot_km2": 0.7647018857015264,
+     "warm_km2": 8.101330940696553,
+     "drive_t": 10614.718625970721,
+     "propellant_t": 44360.24936757096,
+     "tank_t": 4163.0885499108235,
+     "end_t": 25847.40251030086,
+     "xray_standoff_m": null,
+     "payload_t": 3430.572286752502,
+     "wing_tip_radius_m": 16600.62477318408,
+     "pellet_rate_Hz": 320.21398667106064
+    },
+    "eight_W": {
+     "radiation_to_space": 647157016648.567,
+     "radiation_on_closure_coils": 10054695741.265629,
+     "radiation_on_other_hardware": 16884785832.306782,
+     "plasma_on_hardware": 782810091512.1573,
+     "plasma_through_nozzle": 11260422159756.283,
+     "useful_jet": 45579888568197.8,
+     "conversion_losses": 138173816819.7791,
+     "coil_cooling_loads": 25096168.821721204
+    },
+    "fusion_W": 58435416230676.984
+   }
+  },
+  {
+   "label": "WC / steel screen instead of LiH",
+   "share": 0.01491578868932587,
+   "other_share": 0.0,
+   "assembly": [
+    {
+     "name": "C1",
+     "layout": "shadowed",
+     "case": "TARGET_composite",
+     "screen": "WC_steel",
+     "lambda_m": 0.1,
+     "projected_half_width_m": 1.5820163498110251,
+     "share": 0.008363007616341131,
+     "strut_share": 0.0015300574063899252,
+     "strut_width_m": 0.8166797434307267,
+     "strut_length_m": 16.372021844291588,
+     "neutron_flux_n_cm2_s": 591285983243.2039,
+     "mission_fluence_n_cm2": 1.0608251014189983e+20,
+     "screen_attenuation_needed": 106.08251014189985,
+     "screen_m": 0.46642171888828954,
+     "case_area_m2": 5.3765816383867095,
+     "masses_t": {
+      "case": 1196.0736975795614,
+      "case_minus_FDP1_booking": 0.0,
+      "winding_pack": 1051.9472377058128,
+      "neutron_screen": 1846.689800840655,
+      "armour": 4.069250343394651,
+      "cryostat": 109.46908895312455,
+      "struts": 152.57026852331754
+     },
+     "faces_m2": {
+      "burn_face": 439.9189560426649,
+      "armour_back": 691.0230802392635,
+      "cryostat": 1351.470233989192
+     }
+    },
+    {
+     "name": "C2",
+     "layout": "shadowed",
+     "case": "TARGET_composite",
+     "screen": "WC_steel",
+     "lambda_m": 0.1,
+     "projected_half_width_m": 0.38925687250891905,
+     "share": 0.0038672622682546062,
+     "strut_share": 0.0011554613983402072,
+     "strut_width_m": 0.44398204603741664,
+     "strut_length_m": 22.4698609839971,
+     "neutron_flux_n_cm2_s": 591285983243.2039,
+     "mission_fluence_n_cm2": 1.0608251014189983e+20,
+     "screen_attenuation_needed": 106.08251014189985,
+     "screen_m": 0.46642171888828954,
+     "case_area_m2": 0.08359808515128757,
+     "masses_t": {
+      "case": 34.951340536757584,
+      "case_minus_FDP1_booking": 0.0,
+      "winding_pack": 158.91650741719928,
+      "neutron_screen": 853.9551935845526,
+      "armour": 1.8817223461978871,
+      "cryostat": 47.11190834886009,
+      "struts": 45.283866542726884
+     },
+     "faces_m2": {
+      "burn_face": 203.429442832204,
+      "armour_back": 319.5462215627584,
+      "cryostat": 581.6284981340752
+     }
+    }
+   ],
+   "coil_heat": {
+    "share": 0.01491578868932587,
+    "other_share": 0.0,
+    "other_hw_W": 0.0,
+    "xray_W": 6143151243.281763,
+    "neutron_W": 2972873.932220403,
+    "per_coil": [
+     {
+      "name": "C1",
+      "xray_W": 4074514325.7325377,
+      "neutron_W": 1971792.1545030852,
+      "armour_hot_W": 4072575382.4313736,
+      "back_face_leak_warm_W": 1938943.301164167,
+      "neutron_screen_warm_W": 1962498.4822857445,
+      "shield_80K_W": 40544.10701967576,
+      "winding_20K_W": 9428.819240739662,
+      "cryo_input_W": 1881210.7933442155
+     },
+     {
+      "name": "C2",
+      "xray_W": 2068636917.549225,
+      "neutron_W": 1001081.7777173179,
+      "armour_hot_W": 2067740302.0476172,
+      "back_face_leak_warm_W": 896615.5016079978,
+      "neutron_screen_warm_W": 996363.366659839,
+      "shield_80K_W": 17448.854944022256,
+      "winding_20K_W": 4776.573907292317,
+      "cryo_input_W": 882441.6771607962
+     }
+    ],
+    "hot_W": 6140315684.478991,
+    "warm_radiation_W": 5736234.379880838,
+    "lifted_cold_W": 72198.35511173,
+    "cryo_input_W": 2763652.4705050117,
+    "pump_electric_W": 16921063.9453235,
+    "pump_hydraulic_W": 10152638.3671941,
+    "li_flow_m3_s": 10.152638367194099,
+    "check_split_W": 5.587935447692871e-08
+   },
+   "eight_W": {
+    "radiation_to_space": 395672115837.3663,
+    "radiation_on_closure_coils": 6146124117.213984,
+    "radiation_on_other_hardware": 10236680186.002806,
+    "plasma_on_hardware": 478507797848.0679,
+    "plasma_through_nozzle": 6883129909829.624,
+    "useful_jet": 27861587640619.93,
+    "conversion_losses": 84460270001.89217,
+    "coil_cooling_loads": 19684716.41582851
+   },
+   "eta_recovery": 0.9500000000000001,
+   "circuits": {
+    "hot_W": {
+     "plume_on_hardware": 478507797848.0679,
+     "recovery_conversion_loss": 5870046718.070167,
+     "radiation_on_nozzle_loops": 8306035511.585304,
+     "radiation_on_nozzle_struts": 647840743.7099967,
+     "radiation_on_shadow_shield": 1272567250.5215025,
+     "coil_armour": 6140315684.478991,
+     "coil_pump_work": 10152638.3671941,
+     "coil_recovery_loss": 1036037.7060962362,
+     "other_hardware_unbooked": 0.0
+    },
+    "warm_W": {
+     "driver_waste": 76863967593.50697,
+     "power_and_target_systems": 1571669449.8188868,
+     "cryoplant_input": 153550202.7900421,
+     "coil_conductor_heating": 10236680.186002806,
+     "coil_screens": 5736234.379880838,
+     "coil_cold_lifted": 72198.35511173,
+     "coil_cryoplant_input": 2763652.4705050117,
+     "coil_pump_motor_loss": 6768425.578129401
+    },
+    "hot_total_W": 500755792432.50714,
+    "warm_total_W": 78614764437.08553,
+    "hot_added_W": 6151504360.552307,
+    "warm_added_W": 15340510.783615112
+   },
+   "cooling_mass": {
+    "route": "main_radiator",
+    "lithium_inventory_kg": 82845.52907630385,
+    "pipes_kg": 70418.69971485826,
+    "pumps_kg": 16921.0639453235,
+    "cryoplant_kg": [
+     5527.304941010024,
+     27636.524705050117
+    ],
+    "coil_hardware_unbooked_kg": 4271894.844605841,
+    "total_kg": 4469716.662047377,
+    "note": "coil_hardware_unbooked = screen + armour + cryostat + struts + winding pack + (case - FDP-1 booking at 5.35e-7 kg/J)"
+   },
+   "radiators": {
+    "main_hot_1800K": {
+     "area_m2": 5741.2581384631885,
+     "mass_kg": 8611.887207694783
+    },
+    "warm_628K": {
+     "area_m2": 966.3111785733503,
+     "mass_kg": 483.15558928667514
+    },
+    "shadow_cone_1800K": {
+     "area_m2": 6067.922441882493,
+     "mass_kg": 9101.88366282374,
+     "flux_W_m2": 1011930.4825152047
+    },
+    "shadow_cone_1400K": {
+     "area_m2": 16581.27411128323,
+     "mass_kg": 24871.911166924845,
+     "flux_W_m2": 370316.2762565168
+    },
+    "shadow_cone_1000K": {
+     "area_m2": 63698.62262590566,
+     "mass_kg": 95547.93393885848,
+     "flux_W_m2": 96396.365123
+    }
+   },
+   "postprocess_mass_kg": 4478811.704844357,
+   "coupled": {
+    "label": "COUPLED APPROXIMATION (heat via plume_to_hardware, warm and electric via house_fraction, hardware via payload); not a converged spacecraft design",
+    "set": {
+     "base.overrides.continuous.plume_to_hardware.value": 0.06583547319977415,
+     "base.overrides.pulsed.house_fraction.value": 4.442946847033061e-05,
+     "mission.payload.reference_t": 5709.916662047377
+    },
+    "summary": {
+     "converged": true,
+     "departure_t": 98319.73029561352,
+     "a0_g": 0.006895573489099627,
+     "fusion_TW": 81.83373706596169,
+     "radiator_t": 8213.240190702749,
+     "hot_km2": 1.071035787083607,
+     "warm_km2": 11.345360076792522,
+     "drive_t": 13958.937732518762,
+     "propellant_t": 62122.683738984284,
+     "tank_t": 5830.044621800973,
+     "end_t": 36197.04655662924,
+     "xray_standoff_m": null,
+     "payload_t": 5709.916662047377,
+     "wing_tip_radius_m": 23255.47582750095,
+     "pellet_rate_Hz": 448.4318313352702
+    },
+    "eight_W": {
+     "radiation_to_space": 906140345764.2097,
+     "radiation_on_closure_coils": 14080730157.219654,
+     "radiation_on_other_hardware": 23792591657.675594,
+     "plasma_on_hardware": 1096257672546.0876,
+     "plasma_through_nozzle": 15769245091909.0,
+     "useful_jet": 63830682711406.59,
+     "conversion_losses": 193502777511.02258,
+     "coil_cooling_loads": 35145009.87915571
+    },
+    "fusion_W": 81833737065961.69
+   }
+  },
+  {
+   "label": "screen 0.20 m (REBCO fluence limit exceeded 10x)",
+   "share": 0.01491578868932587,
+   "other_share": 0.0,
+   "assembly": [
+    {
+     "name": "C1",
+     "layout": "shadowed",
+     "case": "TARGET_composite",
+     "screen": "LiH",
+     "lambda_m": 0.12,
+     "projected_half_width_m": 1.5820163498110251,
+     "share": 0.008363007616341131,
+     "strut_share": 0.0015300574063899252,
+     "strut_width_m": 0.8166797434307267,
+     "strut_length_m": 16.372021844291588,
+     "neutron_flux_n_cm2_s": 591285983243.2039,
+     "mission_fluence_n_cm2": 1.0608251014189983e+20,
+     "screen_attenuation_needed": 106.08251014189985,
+     "screen_m": 0.2,
+     "case_area_m2": 5.3765816383867095,
+     "masses_t": {
+      "case": 1196.0736975795614,
+      "case_minus_FDP1_booking": 0.0,
+      "winding_pack": 1051.9472377058128,
+      "neutron_screen": 68.62735714265571,
+      "armour": 4.069250343394651,
+      "cryostat": 109.46908895312455,
+      "struts": 152.57026852331754
+     },
+     "faces_m2": {
+      "burn_face": 439.9189560426649,
+      "armour_back": 691.0230802392635,
+      "cryostat": 1351.470233989192
+     }
+    },
+    {
+     "name": "C2",
+     "layout": "shadowed",
+     "case": "TARGET_composite",
+     "screen": "LiH",
+     "lambda_m": 0.12,
+     "projected_half_width_m": 0.38925687250891905,
+     "share": 0.0038672622682546062,
+     "strut_share": 0.0011554613983402072,
+     "strut_width_m": 0.44398204603741664,
+     "strut_length_m": 22.4698609839971,
+     "neutron_flux_n_cm2_s": 591285983243.2039,
+     "mission_fluence_n_cm2": 1.0608251014189983e+20,
+     "screen_attenuation_needed": 106.08251014189985,
+     "screen_m": 0.2,
+     "case_area_m2": 0.08359808515128757,
+     "masses_t": {
+      "case": 34.951340536757584,
+      "case_minus_FDP1_booking": 0.0,
+      "winding_pack": 158.91650741719928,
+      "neutron_screen": 31.734993081823824,
+      "armour": 1.8817223461978871,
+      "cryostat": 47.11190834886009,
+      "struts": 45.283866542726884
+     },
+     "faces_m2": {
+      "burn_face": 203.429442832204,
+      "armour_back": 319.5462215627584,
+      "cryostat": 581.6284981340752
+     }
+    }
+   ],
+   "coil_heat": {
+    "share": 0.01491578868932587,
+    "other_share": 0.0,
+    "other_hw_W": 0.0,
+    "xray_W": 6143151243.281763,
+    "neutron_W": 2972873.932220403,
+    "per_coil": [
+     {
+      "name": "C1",
+      "xray_W": 4074514325.7325377,
+      "neutron_W": 1971792.1545030852,
+      "armour_hot_W": 4072575382.4313736,
+      "back_face_leak_warm_W": 1938943.301164167,
+      "neutron_screen_warm_W": 1785580.4385770126,
+      "shield_80K_W": 40544.10701967576,
+      "winding_20K_W": 186346.86294947146,
+      "cryo_input_W": 19808905.88916237
+     },
+     {
+      "name": "C2",
+      "xray_W": 2068636917.549225,
+      "neutron_W": 1001081.7777173179,
+      "armour_hot_W": 2067740302.0476172,
+      "back_face_leak_warm_W": 896615.5016079978,
+      "neutron_screen_warm_W": 906541.8155892896,
+      "shield_80K_W": 17448.854944022256,
+      "winding_20K_W": 94598.12497784165,
+      "cryo_input_W": 9984358.852309795
+     }
+    ],
+    "hot_W": 6140315684.478991,
+    "warm_radiation_W": 5469494.785101557,
+    "lifted_cold_W": 338937.9498910111,
+    "cryo_input_W": 29793264.741472162,
+    "pump_electric_W": 16921063.9453235,
+    "pump_hydraulic_W": 10152638.3671941,
+    "li_flow_m3_s": 10.152638367194099,
+    "check_split_W": 5.587935447692871e-08
+   },
+   "eight_W": {
+    "radiation_to_space": 395672115837.3663,
+    "radiation_on_closure_coils": 6146124117.213984,
+    "radiation_on_other_hardware": 10236680186.002806,
+    "plasma_on_hardware": 478507797848.0679,
+    "plasma_through_nozzle": 6883101457606.181,
+    "useful_jet": 27861587640619.93,
+    "conversion_losses": 84461692613.06433,
+    "coil_cooling_loads": 46714328.68679567
+   },
+   "eta_recovery": 0.9500000000000001,
+   "circuits": {
+    "hot_W": {
+     "plume_on_hardware": 478507797848.0679,
+     "recovery_conversion_loss": 5870046718.070167,
+     "radiation_on_nozzle_loops": 8306035511.585304,
+     "radiation_on_nozzle_struts": 647840743.7099967,
+     "radiation_on_shadow_shield": 1272567250.5215025,
+     "coil_armour": 6140315684.478991,
+     "coil_pump_work": 10152638.3671941,
+     "coil_recovery_loss": 2458648.878252401,
+     "other_hardware_unbooked": 0.0
+    },
+    "warm_W": {
+     "driver_waste": 76863967593.50697,
+     "power_and_target_systems": 1571669449.8188868,
+     "cryoplant_input": 153550202.7900421,
+     "coil_conductor_heating": 10236680.186002806,
+     "coil_screens": 5469494.785101557,
+     "coil_cold_lifted": 338937.9498910111,
+     "coil_cryoplant_input": 29793264.741472162,
+     "coil_pump_motor_loss": 6768425.578129401
+    },
+    "hot_total_W": 500757215043.67926,
+    "warm_total_W": 78641794049.3565,
+    "hot_added_W": 6152926971.724426,
+    "warm_added_W": 42370123.05459595
+   },
+   "cooling_mass": {
+    "route": "main_radiator",
+    "lithium_inventory_kg": 82845.52907630385,
+    "pipes_kg": 70418.69971485826,
+    "pumps_kg": 16921.0639453235,
+    "cryoplant_kg": [
+     59586.52948294432,
+     297932.6474147216
+    ],
+    "coil_hardware_unbooked_kg": 1671612.2004051134,
+    "total_kg": 2139730.1405563205,
+    "note": "coil_hardware_unbooked = screen + armour + cryostat + struts + winding pack + (case - FDP-1 booking at 5.35e-7 kg/J)"
+   },
+   "radiators": {
+    "main_hot_1800K": {
+     "area_m2": 5742.585875142069,
+     "mass_kg": 8613.878812713105
+    },
+    "warm_628K": {
+     "area_m2": 2668.9283116253587,
+     "mass_kg": 1334.4641558126793
+    },
+    "shadow_cone_1800K": {
+     "area_m2": 6067.922441882493,
+     "mass_kg": 9101.88366282374,
+     "flux_W_m2": 1011930.4825152047
+    },
+    "shadow_cone_1400K": {
+     "area_m2": 16581.27411128323,
+     "mass_kg": 24871.911166924845,
+     "flux_W_m2": 370316.2762565168
+    },
+    "shadow_cone_1000K": {
+     "area_m2": 63698.62262590566,
+     "mass_kg": 95547.93393885848,
+     "flux_W_m2": 96396.365123
+    }
+   },
+   "postprocess_mass_kg": 2149678.4835248464,
+   "coupled": {
+    "label": "COUPLED APPROXIMATION (heat via plume_to_hardware, warm and electric via house_fraction, hardware via payload); not a converged spacecraft design",
+    "set": {
+     "base.overrides.continuous.plume_to_hardware.value": 0.06583547319977415,
+     "base.overrides.pulsed.house_fraction.value": 4.518618162019823e-05,
+     "mission.payload.reference_t": 3379.930140556321
+    },
+    "summary": {
+     "converged": true,
+     "departure_t": 69603.6524821029,
+     "a0_g": 0.006895573489099627,
+     "fusion_TW": 57.93273902356104,
+     "radiator_t": 5815.629361909637,
+     "hot_km2": 0.7581228682983526,
+     "warm_km2": 8.034399906174722,
+     "drive_t": 10543.05873904451,
+     "propellant_t": 43978.61626779461,
+     "tank_t": 4127.273321996885,
+     "end_t": 25625.036214308297,
+     "xray_standoff_m": null,
+     "payload_t": 3379.930140556321,
+     "wing_tip_radius_m": 16462.836484664862,
+     "pellet_rate_Hz": 317.4569225706622
+    },
+    "eight_W": {
+     "radiation_to_space": 641591014417.932,
+     "radiation_on_closure_coils": 9968202537.321157,
+     "radiation_on_other_hardware": 16736937091.33126,
+     "plasma_on_hardware": 776075535442.9249,
+     "plasma_through_nozzle": 11163548279874.344,
+     "useful_jet": 45187762860841.914,
+     "conversion_losses": 136987474605.01761,
+     "coil_cooling_loads": 68718750.23748863
+    },
+    "fusion_W": 57932739023561.04
+   }
+  },
+  {
+   "label": "neutron escape x10",
+   "share": 0.01491578868932587,
+   "other_share": 0.0,
+   "assembly": [
+    {
+     "name": "C1",
+     "layout": "shadowed",
+     "case": "TARGET_composite",
+     "screen": "LiH",
+     "lambda_m": 0.12,
+     "projected_half_width_m": 1.5820163498110251,
+     "share": 0.008363007616341131,
+     "strut_share": 0.0015300574063899252,
+     "strut_width_m": 0.8166797434307267,
+     "strut_length_m": 16.372021844291588,
+     "neutron_flux_n_cm2_s": 5912859832432.037,
+     "mission_fluence_n_cm2": 1.060825101418998e+21,
+     "screen_attenuation_needed": 1060.825101418998,
+     "screen_m": 0.8360162738252328,
+     "case_area_m2": 5.3765816383867095,
+     "masses_t": {
+      "case": 1196.0736975795614,
+      "case_minus_FDP1_booking": 0.0,
+      "winding_pack": 1051.9472377058128,
+      "neutron_screen": 286.86793700438255,
+      "armour": 4.069250343394651,
+      "cryostat": 109.46908895312455,
+      "struts": 152.57026852331754
+     },
+     "faces_m2": {
+      "burn_face": 439.9189560426649,
+      "armour_back": 691.0230802392635,
+      "cryostat": 1351.470233989192
+     }
+    },
+    {
+     "name": "C2",
+     "layout": "shadowed",
+     "case": "TARGET_composite",
+     "screen": "LiH",
+     "lambda_m": 0.12,
+     "projected_half_width_m": 0.38925687250891905,
+     "share": 0.0038672622682546062,
+     "strut_share": 0.0011554613983402072,
+     "strut_width_m": 0.44398204603741664,
+     "strut_length_m": 22.4698609839971,
+     "neutron_flux_n_cm2_s": 5912859832432.037,
+     "mission_fluence_n_cm2": 1.060825101418998e+21,
+     "screen_attenuation_needed": 1060.825101418998,
+     "screen_m": 0.8360162738252328,
+     "case_area_m2": 0.08359808515128757,
+     "masses_t": {
+      "case": 34.951340536757584,
+      "case_minus_FDP1_booking": 0.0,
+      "winding_pack": 158.91650741719928,
+      "neutron_screen": 132.65485333067946,
+      "armour": 1.8817223461978871,
+      "cryostat": 47.11190834886009,
+      "struts": 45.283866542726884
+     },
+     "faces_m2": {
+      "burn_face": 203.429442832204,
+      "armour_back": 319.5462215627584,
+      "cryostat": 581.6284981340752
+     }
+    }
+   ],
+   "coil_heat": {
+    "share": 0.01491578868932587,
+    "other_share": 0.0,
+    "other_hw_W": 0.0,
+    "xray_W": 6143151243.281763,
+    "neutron_W": 29728739.322204027,
+    "per_coil": [
+     {
+      "name": "C1",
+      "xray_W": 4074514325.7325377,
+      "neutron_W": 19717921.54503085,
+      "armour_hot_W": 4072575382.4313736,
+      "back_face_leak_warm_W": 1938943.301164167,
+      "neutron_screen_warm_W": 19708627.87281351,
+      "shield_80K_W": 40544.10701967576,
+      "winding_20K_W": 9428.81924073967,
+      "cryo_input_W": 1881210.7933442162
+     },
+     {
+      "name": "C2",
+      "xray_W": 2068636917.549225,
+      "neutron_W": 10010817.777173178,
+      "armour_hot_W": 2067740302.0476172,
+      "back_face_leak_warm_W": 896615.5016079978,
+      "neutron_screen_warm_W": 10006099.366115699,
+      "shield_80K_W": 17448.854944022256,
+      "winding_20K_W": 4776.573907292321,
+      "cryo_input_W": 882441.6771607967
+     }
+    ],
+    "hot_W": 6140315684.478991,
+    "warm_radiation_W": 32492099.769864466,
+    "lifted_cold_W": 72198.35511173001,
+    "cryo_input_W": 2763652.470505013,
+    "pump_electric_W": 16921063.9453235,
+    "pump_hydraulic_W": 10152638.3671941,
+    "li_flow_m3_s": 10.152638367194099,
+    "check_split_W": -3.91155481338501e-07
+   },
+   "eight_W": {
+    "radiation_to_space": 395645359971.9763,
+    "radiation_on_closure_coils": 6172879982.603967,
+    "radiation_on_other_hardware": 10236680186.002806,
+    "plasma_on_hardware": 478507797848.0679,
+    "plasma_through_nozzle": 6883129909829.624,
+    "useful_jet": 27861587640619.93,
+    "conversion_losses": 84460270001.89217,
+    "coil_cooling_loads": 19684716.415828515
+   },
+   "eta_recovery": 0.9500000000000001,
+   "circuits": {
+    "hot_W": {
+     "plume_on_hardware": 478507797848.0679,
+     "recovery_conversion_loss": 5870046718.070167,
+     "radiation_on_nozzle_loops": 8306035511.585304,
+     "radiation_on_nozzle_struts": 647840743.7099967,
+     "radiation_on_shadow_shield": 1272567250.5215025,
+     "coil_armour": 6140315684.478991,
+     "coil_pump_work": 10152638.3671941,
+     "coil_recovery_loss": 1036037.7060962365,
+     "other_hardware_unbooked": 0.0
+    },
+    "warm_W": {
+     "driver_waste": 76863967593.50697,
+     "power_and_target_systems": 1571669449.8188868,
+     "cryoplant_input": 153550202.7900421,
+     "coil_conductor_heating": 10236680.186002806,
+     "coil_screens": 32492099.769864466,
+     "coil_cold_lifted": 72198.35511173001,
+     "coil_cryoplant_input": 2763652.470505013,
+     "coil_pump_motor_loss": 6768425.578129401
+    },
+    "hot_total_W": 500755792432.50714,
+    "warm_total_W": 78641520302.47551,
+    "hot_added_W": 6151504360.552307,
+    "warm_added_W": 42096376.17359924
+   },
+   "cooling_mass": {
+    "route": "main_radiator",
+    "lithium_inventory_kg": 82845.52907630385,
+    "pipes_kg": 70418.69971485826,
+    "pumps_kg": 16921.0639453235,
+    "cryoplant_kg": [
+     5527.304941010027,
+     27636.52470505013
+    ],
+    "coil_hardware_unbooked_kg": 1990772.6405156956,
+    "total_kg": 2188594.4579572314,
+    "note": "coil_hardware_unbooked = screen + armour + cryostat + struts + winding pack + (case - FDP-1 booking at 5.35e-7 kg/J)"
+   },
+   "radiators": {
+    "main_hot_1800K": {
+     "area_m2": 5741.2581384631885,
+     "mass_kg": 8611.887207694783
+    },
+    "warm_628K": {
+     "area_m2": 2651.684774240069,
+     "mass_kg": 1325.8423871200346
+    },
+    "shadow_cone_1800K": {
+     "area_m2": 6067.922441882493,
+     "mass_kg": 9101.88366282374,
+     "flux_W_m2": 1011930.4825152047
+    },
+    "shadow_cone_1400K": {
+     "area_m2": 16581.27411128323,
+     "mass_kg": 24871.911166924845,
+     "flux_W_m2": 370316.2762565168
+    },
+    "shadow_cone_1000K": {
+     "area_m2": 63698.62262590566,
+     "mass_kg": 95547.93393885848,
+     "flux_W_m2": 96396.365123
+    }
+   },
+   "postprocess_mass_kg": 2198532.1875520465,
+   "coupled": {
+    "label": "COUPLED APPROXIMATION (heat via plume_to_hardware, warm and electric via house_fraction, hardware via payload); not a converged spacecraft design",
+    "set": {
+     "base.overrides.continuous.plume_to_hardware.value": 0.06583547319977415,
+     "base.overrides.pulsed.house_fraction.value": 4.517851788227595e-05,
+     "mission.payload.reference_t": 3428.7944579572313
+    },
+    "summary": {
+     "converged": true,
+     "departure_t": 70207.34553664025,
+     "a0_g": 0.006895573489099627,
+     "fusion_TW": 58.43520637071158,
+     "radiator_t": 5866.061230233141,
+     "hot_km2": 0.7647006731496342,
+     "warm_km2": 8.104058959283174,
+     "drive_t": 10614.961424179994,
+     "propellant_t": 44360.055807851175,
+     "tank_t": 4163.070384104657,
+     "end_t": 25847.28972878907,
+     "xray_standoff_m": null,
+     "payload_t": 3428.7944579572313,
+     "wing_tip_radius_m": 16605.735937260426,
+     "pellet_rate_Hz": 320.21033745789407
+    },
+    "eight_W": {
+     "radiation_to_space": 647109383742.794,
+     "radiation_on_closure_coils": 10098430488.658567,
+     "radiation_on_other_hardware": 16884676914.321775,
+     "plasma_on_hardware": 782806668062.068,
+     "plasma_through_nozzle": 11260373034253.354,
+     "useful_jet": 45579689686753.59,
+     "conversion_losses": 138175623561.1366,
+     "coil_cooling_loads": 68866935.6623693
+    },
+    "fusion_W": 58435206370711.586
+   }
+  },
+  {
+   "label": "winding J_e 300 A/mm2",
+   "share": 0.01491578868932587,
+   "other_share": 0.0,
+   "assembly": [
+    {
+     "name": "C1",
+     "layout": "shadowed",
+     "case": "TARGET_composite",
+     "screen": "LiH",
+     "lambda_m": 0.12,
+     "projected_half_width_m": 1.5820163498110251,
+     "share": 0.008363007616341131,
+     "strut_share": 0.0015300574063899252,
+     "strut_width_m": 0.8166797434307267,
+     "strut_length_m": 16.372021844291588,
+     "neutron_flux_n_cm2_s": 591285983243.2039,
+     "mission_fluence_n_cm2": 1.0608251014189983e+20,
+     "screen_attenuation_needed": 106.08251014189985,
+     "screen_m": 0.5597060626659474,
+     "case_area_m2": 5.3765816383867095,
+     "masses_t": {
+      "case": 1196.0736975795614,
+      "case_minus_FDP1_booking": 0.0,
+      "winding_pack": 525.9736188529064,
+      "neutron_screen": 192.05573928742808,
+      "armour": 4.069250343394651,
+      "cryostat": 109.46908895312455,
+      "struts": 152.57026852331754
+     },
+     "faces_m2": {
+      "burn_face": 439.9189560426649,
+      "armour_back": 691.0230802392635,
+      "cryostat": 1351.470233989192
+     }
+    },
+    {
+     "name": "C2",
+     "layout": "shadowed",
+     "case": "TARGET_composite",
+     "screen": "LiH",
+     "lambda_m": 0.12,
+     "projected_half_width_m": 0.38925687250891905,
+     "share": 0.0038672622682546062,
+     "strut_share": 0.0011554613983402072,
+     "strut_width_m": 0.44398204603741664,
+     "strut_length_m": 22.4698609839971,
+     "neutron_flux_n_cm2_s": 591285983243.2039,
+     "mission_fluence_n_cm2": 1.0608251014189983e+20,
+     "screen_attenuation_needed": 106.08251014189985,
+     "screen_m": 0.5597060626659474,
+     "case_area_m2": 0.08359808515128757,
+     "masses_t": {
+      "case": 34.951340536757584,
+      "case_minus_FDP1_booking": 0.0,
+      "winding_pack": 79.45825370859964,
+      "neutron_screen": 88.81134013279346,
+      "armour": 1.8817223461978871,
+      "cryostat": 47.11190834886009,
+      "struts": 45.283866542726884
+     },
+     "faces_m2": {
+      "burn_face": 203.429442832204,
+      "armour_back": 319.5462215627584,
+      "cryostat": 581.6284981340752
+     }
+    }
+   ],
+   "coil_heat": {
+    "share": 0.01491578868932587,
+    "other_share": 0.0,
+    "other_hw_W": 0.0,
+    "xray_W": 6143151243.281763,
+    "neutron_W": 2972873.932220403,
+    "per_coil": [
+     {
+      "name": "C1",
+      "xray_W": 4074514325.7325377,
+      "neutron_W": 1971792.1545030852,
+      "armour_hot_W": 4072575382.4313736,
+      "back_face_leak_warm_W": 1938943.301164167,
+      "neutron_screen_warm_W": 1962498.4822857445,
+      "shield_80K_W": 40544.10701967576,
+      "winding_20K_W": 9428.819240739662,
+      "cryo_input_W": 1881210.7933442155
+     },
+     {
+      "name": "C2",
+      "xray_W": 2068636917.549225,
+      "neutron_W": 1001081.7777173179,
+      "armour_hot_W": 2067740302.0476172,
+      "back_face_leak_warm_W": 896615.5016079978,
+      "neutron_screen_warm_W": 996363.366659839,
+      "shield_80K_W": 17448.854944022256,
+      "winding_20K_W": 4776.573907292317,
+      "cryo_input_W": 882441.6771607962
+     }
+    ],
+    "hot_W": 6140315684.478991,
+    "warm_radiation_W": 5736234.379880838,
+    "lifted_cold_W": 72198.35511173,
+    "cryo_input_W": 2763652.4705050117,
+    "pump_electric_W": 16921063.9453235,
+    "pump_hydraulic_W": 10152638.3671941,
+    "li_flow_m3_s": 10.152638367194099,
+    "check_split_W": 5.587935447692871e-08
+   },
+   "eight_W": {
+    "radiation_to_space": 395672115837.3663,
+    "radiation_on_closure_coils": 6146124117.213984,
+    "radiation_on_other_hardware": 10236680186.002806,
+    "plasma_on_hardware": 478507797848.0679,
+    "plasma_through_nozzle": 6883129909829.624,
+    "useful_jet": 27861587640619.93,
+    "conversion_losses": 84460270001.89217,
+    "coil_cooling_loads": 19684716.41582851
+   },
+   "eta_recovery": 0.9500000000000001,
+   "circuits": {
+    "hot_W": {
+     "plume_on_hardware": 478507797848.0679,
+     "recovery_conversion_loss": 5870046718.070167,
+     "radiation_on_nozzle_loops": 8306035511.585304,
+     "radiation_on_nozzle_struts": 647840743.7099967,
+     "radiation_on_shadow_shield": 1272567250.5215025,
+     "coil_armour": 6140315684.478991,
+     "coil_pump_work": 10152638.3671941,
+     "coil_recovery_loss": 1036037.7060962362,
+     "other_hardware_unbooked": 0.0
+    },
+    "warm_W": {
+     "driver_waste": 76863967593.50697,
+     "power_and_target_systems": 1571669449.8188868,
+     "cryoplant_input": 153550202.7900421,
+     "coil_conductor_heating": 10236680.186002806,
+     "coil_screens": 5736234.379880838,
+     "coil_cold_lifted": 72198.35511173,
+     "coil_cryoplant_input": 2763652.4705050117,
+     "coil_pump_motor_loss": 6768425.578129401
+    },
+    "hot_total_W": 500755792432.50714,
+    "warm_total_W": 78614764437.08553,
+    "hot_added_W": 6151504360.552307,
+    "warm_added_W": 15340510.783615112
+   },
+   "cooling_mass": {
+    "route": "main_radiator",
+    "lithium_inventory_kg": 82845.52907630385,
+    "pipes_kg": 70418.69971485826,
+    "pumps_kg": 16921.0639453235,
+    "cryoplant_kg": [
+     5527.304941010024,
+     27636.524705050117
+    ],
+    "coil_hardware_unbooked_kg": 1246685.057039349,
+    "total_kg": 1444506.8744808848,
+    "note": "coil_hardware_unbooked = screen + armour + cryostat + struts + winding pack + (case - FDP-1 booking at 5.35e-7 kg/J)"
+   },
+   "radiators": {
+    "main_hot_1800K": {
+     "area_m2": 5741.2581384631885,
+     "mass_kg": 8611.887207694783
+    },
+    "warm_628K": {
+     "area_m2": 966.3111785733503,
+     "mass_kg": 483.15558928667514
+    },
+    "shadow_cone_1800K": {
+     "area_m2": 6067.922441882493,
+     "mass_kg": 9101.88366282374,
+     "flux_W_m2": 1011930.4825152047
+    },
+    "shadow_cone_1400K": {
+     "area_m2": 16581.27411128323,
+     "mass_kg": 24871.911166924845,
+     "flux_W_m2": 370316.2762565168
+    },
+    "shadow_cone_1000K": {
+     "area_m2": 63698.62262590566,
+     "mass_kg": 95547.93393885848,
+     "flux_W_m2": 96396.365123
+    }
+   },
+   "postprocess_mass_kg": 1453601.9172778663,
+   "coupled": {
+    "label": "COUPLED APPROXIMATION (heat via plume_to_hardware, warm and electric via house_fraction, hardware via payload); not a converged spacecraft design",
+    "set": {
+     "base.overrides.continuous.plume_to_hardware.value": 0.06583547319977415,
+     "base.overrides.pulsed.house_fraction.value": 4.442946847033061e-05,
+     "mission.payload.reference_t": 2684.706874480885
+    },
+    "summary": {
+     "converged": true,
+     "departure_t": 60985.92220150064,
+     "a0_g": 0.006895573489099627,
+     "fusion_TW": 50.75996153777944,
+     "radiator_t": 5094.212513189983,
+     "hot_km2": 0.6642253113780412,
+     "warm_km2": 7.037190125765878,
+     "drive_t": 9515.831592267357,
+     "propellant_t": 38533.55929743789,
+     "tank_t": 3616.2695549282535,
+     "end_t": 22452.36290406275,
+     "xray_standoff_m": null,
+     "payload_t": 2684.706874480885,
+     "wing_tip_radius_m": 14417.649348152852,
+     "pellet_rate_Hz": 278.15411124925754
+    },
+    "eight_W": {
+     "radiation_to_space": 562189247874.5748,
+     "radiation_on_closure_coils": 8734017861.462322,
+     "radiation_on_other_hardware": 14631104498.16853,
+     "plasma_on_hardware": 679988492269.8232,
+     "plasma_through_nozzle": 9781372990209.145,
+     "useful_jet": 39592999677707.49,
+     "conversion_losses": 120024207555.73679,
+     "coil_cooling_loads": 21799803.035670612
+    },
+    "fusion_W": 50759961537779.44
+   }
+  },
+  {
+   "label": "winding J_e 75 A/mm2",
+   "share": 0.01491578868932587,
+   "other_share": 0.0,
+   "assembly": [
+    {
+     "name": "C1",
+     "layout": "shadowed",
+     "case": "TARGET_composite",
+     "screen": "LiH",
+     "lambda_m": 0.12,
+     "projected_half_width_m": 1.5820163498110251,
+     "share": 0.008363007616341131,
+     "strut_share": 0.0015300574063899252,
+     "strut_width_m": 0.8166797434307267,
+     "strut_length_m": 16.372021844291588,
+     "neutron_flux_n_cm2_s": 591285983243.2039,
+     "mission_fluence_n_cm2": 1.0608251014189983e+20,
+     "screen_attenuation_needed": 106.08251014189985,
+     "screen_m": 0.5597060626659474,
+     "case_area_m2": 5.3765816383867095,
+     "masses_t": {
+      "case": 1196.0736975795614,
+      "case_minus_FDP1_booking": 0.0,
+      "winding_pack": 2103.8944754116255,
+      "neutron_screen": 192.05573928742808,
+      "armour": 4.069250343394651,
+      "cryostat": 109.46908895312455,
+      "struts": 152.57026852331754
+     },
+     "faces_m2": {
+      "burn_face": 439.9189560426649,
+      "armour_back": 691.0230802392635,
+      "cryostat": 1351.470233989192
+     }
+    },
+    {
+     "name": "C2",
+     "layout": "shadowed",
+     "case": "TARGET_composite",
+     "screen": "LiH",
+     "lambda_m": 0.12,
+     "projected_half_width_m": 0.38925687250891905,
+     "share": 0.0038672622682546062,
+     "strut_share": 0.0011554613983402072,
+     "strut_width_m": 0.44398204603741664,
+     "strut_length_m": 22.4698609839971,
+     "neutron_flux_n_cm2_s": 591285983243.2039,
+     "mission_fluence_n_cm2": 1.0608251014189983e+20,
+     "screen_attenuation_needed": 106.08251014189985,
+     "screen_m": 0.5597060626659474,
+     "case_area_m2": 0.08359808515128757,
+     "masses_t": {
+      "case": 34.951340536757584,
+      "case_minus_FDP1_booking": 0.0,
+      "winding_pack": 317.83301483439857,
+      "neutron_screen": 88.81134013279346,
+      "armour": 1.8817223461978871,
+      "cryostat": 47.11190834886009,
+      "struts": 45.283866542726884
+     },
+     "faces_m2": {
+      "burn_face": 203.429442832204,
+      "armour_back": 319.5462215627584,
+      "cryostat": 581.6284981340752
+     }
+    }
+   ],
+   "coil_heat": {
+    "share": 0.01491578868932587,
+    "other_share": 0.0,
+    "other_hw_W": 0.0,
+    "xray_W": 6143151243.281763,
+    "neutron_W": 2972873.932220403,
+    "per_coil": [
+     {
+      "name": "C1",
+      "xray_W": 4074514325.7325377,
+      "neutron_W": 1971792.1545030852,
+      "armour_hot_W": 4072575382.4313736,
+      "back_face_leak_warm_W": 1938943.301164167,
+      "neutron_screen_warm_W": 1962498.4822857445,
+      "shield_80K_W": 40544.10701967576,
+      "winding_20K_W": 9428.819240739662,
+      "cryo_input_W": 1881210.7933442155
+     },
+     {
+      "name": "C2",
+      "xray_W": 2068636917.549225,
+      "neutron_W": 1001081.7777173179,
+      "armour_hot_W": 2067740302.0476172,
+      "back_face_leak_warm_W": 896615.5016079978,
+      "neutron_screen_warm_W": 996363.366659839,
+      "shield_80K_W": 17448.854944022256,
+      "winding_20K_W": 4776.573907292317,
+      "cryo_input_W": 882441.6771607962
+     }
+    ],
+    "hot_W": 6140315684.478991,
+    "warm_radiation_W": 5736234.379880838,
+    "lifted_cold_W": 72198.35511173,
+    "cryo_input_W": 2763652.4705050117,
+    "pump_electric_W": 16921063.9453235,
+    "pump_hydraulic_W": 10152638.3671941,
+    "li_flow_m3_s": 10.152638367194099,
+    "check_split_W": 5.587935447692871e-08
+   },
+   "eight_W": {
+    "radiation_to_space": 395672115837.3663,
+    "radiation_on_closure_coils": 6146124117.213984,
+    "radiation_on_other_hardware": 10236680186.002806,
+    "plasma_on_hardware": 478507797848.0679,
+    "plasma_through_nozzle": 6883129909829.624,
+    "useful_jet": 27861587640619.93,
+    "conversion_losses": 84460270001.89217,
+    "coil_cooling_loads": 19684716.41582851
+   },
+   "eta_recovery": 0.9500000000000001,
+   "circuits": {
+    "hot_W": {
+     "plume_on_hardware": 478507797848.0679,
+     "recovery_conversion_loss": 5870046718.070167,
+     "radiation_on_nozzle_loops": 8306035511.585304,
+     "radiation_on_nozzle_struts": 647840743.7099967,
+     "radiation_on_shadow_shield": 1272567250.5215025,
+     "coil_armour": 6140315684.478991,
+     "coil_pump_work": 10152638.3671941,
+     "coil_recovery_loss": 1036037.7060962362,
+     "other_hardware_unbooked": 0.0
+    },
+    "warm_W": {
+     "driver_waste": 76863967593.50697,
+     "power_and_target_systems": 1571669449.8188868,
+     "cryoplant_input": 153550202.7900421,
+     "coil_conductor_heating": 10236680.186002806,
+     "coil_screens": 5736234.379880838,
+     "coil_cold_lifted": 72198.35511173,
+     "coil_cryoplant_input": 2763652.4705050117,
+     "coil_pump_motor_loss": 6768425.578129401
+    },
+    "hot_total_W": 500755792432.50714,
+    "warm_total_W": 78614764437.08553,
+    "hot_added_W": 6151504360.552307,
+    "warm_added_W": 15340510.783615112
+   },
+   "cooling_mass": {
+    "route": "main_radiator",
+    "lithium_inventory_kg": 82845.52907630385,
+    "pipes_kg": 70418.69971485826,
+    "pumps_kg": 16921.0639453235,
+    "cryoplant_kg": [
+     5527.304941010024,
+     27636.524705050117
+    ],
+    "coil_hardware_unbooked_kg": 3062980.6747238673,
+    "total_kg": 3260802.492165403,
+    "note": "coil_hardware_unbooked = screen + armour + cryostat + struts + winding pack + (case - FDP-1 booking at 5.35e-7 kg/J)"
+   },
+   "radiators": {
+    "main_hot_1800K": {
+     "area_m2": 5741.2581384631885,
+     "mass_kg": 8611.887207694783
+    },
+    "warm_628K": {
+     "area_m2": 966.3111785733503,
+     "mass_kg": 483.15558928667514
+    },
+    "shadow_cone_1800K": {
+     "area_m2": 6067.922441882493,
+     "mass_kg": 9101.88366282374,
+     "flux_W_m2": 1011930.4825152047
+    },
+    "shadow_cone_1400K": {
+     "area_m2": 16581.27411128323,
+     "mass_kg": 24871.911166924845,
+     "flux_W_m2": 370316.2762565168
+    },
+    "shadow_cone_1000K": {
+     "area_m2": 63698.62262590566,
+     "mass_kg": 95547.93393885848,
+     "flux_W_m2": 96396.365123
+    }
+   },
+   "postprocess_mass_kg": 3269897.5349623845,
+   "coupled": {
+    "label": "COUPLED APPROXIMATION (heat via plume_to_hardware, warm and electric via house_fraction, hardware via payload); not a converged spacecraft design",
+    "set": {
+     "base.overrides.continuous.plume_to_hardware.value": 0.06583547319977415,
+     "base.overrides.pulsed.house_fraction.value": 4.442946847033061e-05,
+     "mission.payload.reference_t": 4501.002492165403
+    },
+    "summary": {
+     "converged": true,
+     "departure_t": 83420.64646095085,
+     "a0_g": 0.006895573489099627,
+     "fusion_TW": 69.43289137654264,
+     "radiator_t": 6968.478421299705,
+     "hot_km2": 0.9086761766384854,
+     "warm_km2": 9.626054691685379,
+     "drive_t": 12187.44275759291,
+     "propellant_t": 52708.79427571492,
+     "tank_t": 4946.576743149322,
+     "end_t": 30711.852185235937,
+     "xray_standoff_m": null,
+     "payload_t": 4501.002492165403,
+     "wing_tip_radius_m": 19728.456154488274,
+     "pellet_rate_Hz": 380.47783209867083
+    },
+    "eight_W": {
+     "radiation_to_space": 768888656593.3031,
+     "radiation_on_closure_coils": 11946977402.737915,
+     "radiation_on_other_hardware": 20124990106.079224,
+     "plasma_on_hardware": 930133997244.4575,
+     "plasma_through_nozzle": 13379619897214.371,
+     "useful_jet": 54157968088597.77,
+     "conversion_losses": 164178950146.2602,
+     "coil_cooling_loads": 29819237.650115002
+    },
+    "fusion_W": 69432891376542.64
+   }
+  },
+  {
+   "label": "shadow-cone coil radiators (local loop)",
+   "share": 0.01491578868932587,
+   "other_share": 0.0,
+   "assembly": [
+    {
+     "name": "C1",
+     "layout": "shadowed",
+     "case": "TARGET_composite",
+     "screen": "LiH",
+     "lambda_m": 0.12,
+     "projected_half_width_m": 1.5820163498110251,
+     "share": 0.008363007616341131,
+     "strut_share": 0.0015300574063899252,
+     "strut_width_m": 0.8166797434307267,
+     "strut_length_m": 16.372021844291588,
+     "neutron_flux_n_cm2_s": 591285983243.2039,
+     "mission_fluence_n_cm2": 1.0608251014189983e+20,
+     "screen_attenuation_needed": 106.08251014189985,
+     "screen_m": 0.5597060626659474,
+     "case_area_m2": 5.3765816383867095,
+     "masses_t": {
+      "case": 1196.0736975795614,
+      "case_minus_FDP1_booking": 0.0,
+      "winding_pack": 1051.9472377058128,
+      "neutron_screen": 192.05573928742808,
+      "armour": 4.069250343394651,
+      "cryostat": 109.46908895312455,
+      "struts": 152.57026852331754
+     },
+     "faces_m2": {
+      "burn_face": 439.9189560426649,
+      "armour_back": 691.0230802392635,
+      "cryostat": 1351.470233989192
+     }
+    },
+    {
+     "name": "C2",
+     "layout": "shadowed",
+     "case": "TARGET_composite",
+     "screen": "LiH",
+     "lambda_m": 0.12,
+     "projected_half_width_m": 0.38925687250891905,
+     "share": 0.0038672622682546062,
+     "strut_share": 0.0011554613983402072,
+     "strut_width_m": 0.44398204603741664,
+     "strut_length_m": 22.4698609839971,
+     "neutron_flux_n_cm2_s": 591285983243.2039,
+     "mission_fluence_n_cm2": 1.0608251014189983e+20,
+     "screen_attenuation_needed": 106.08251014189985,
+     "screen_m": 0.5597060626659474,
+     "case_area_m2": 0.08359808515128757,
+     "masses_t": {
+      "case": 34.951340536757584,
+      "case_minus_FDP1_booking": 0.0,
+      "winding_pack": 158.91650741719928,
+      "neutron_screen": 88.81134013279346,
+      "armour": 1.8817223461978871,
+      "cryostat": 47.11190834886009,
+      "struts": 45.283866542726884
+     },
+     "faces_m2": {
+      "burn_face": 203.429442832204,
+      "armour_back": 319.5462215627584,
+      "cryostat": 581.6284981340752
+     }
+    }
+   ],
+   "coil_heat": {
+    "share": 0.01491578868932587,
+    "other_share": 0.0,
+    "other_hw_W": 0.0,
+    "xray_W": 6143151243.281763,
+    "neutron_W": 2972873.932220403,
+    "per_coil": [
+     {
+      "name": "C1",
+      "xray_W": 4074514325.7325377,
+      "neutron_W": 1971792.1545030852,
+      "armour_hot_W": 4072575382.4313736,
+      "back_face_leak_warm_W": 1938943.301164167,
+      "neutron_screen_warm_W": 1962498.4822857445,
+      "shield_80K_W": 40544.10701967576,
+      "winding_20K_W": 9428.819240739662,
+      "cryo_input_W": 1881210.7933442155
+     },
+     {
+      "name": "C2",
+      "xray_W": 2068636917.549225,
+      "neutron_W": 1001081.7777173179,
+      "armour_hot_W": 2067740302.0476172,
+      "back_face_leak_warm_W": 896615.5016079978,
+      "neutron_screen_warm_W": 996363.366659839,
+      "shield_80K_W": 17448.854944022256,
+      "winding_20K_W": 4776.573907292317,
+      "cryo_input_W": 882441.6771607962
+     }
+    ],
+    "hot_W": 6140315684.478991,
+    "warm_radiation_W": 5736234.379880838,
+    "lifted_cold_W": 72198.35511173,
+    "cryo_input_W": 2763652.4705050117,
+    "pump_electric_W": 16921063.9453235,
+    "pump_hydraulic_W": 10152638.3671941,
+    "li_flow_m3_s": 10.152638367194099,
+    "check_split_W": 5.587935447692871e-08
+   },
+   "eight_W": {
+    "radiation_to_space": 395672115837.3663,
+    "radiation_on_closure_coils": 6146124117.213984,
+    "radiation_on_other_hardware": 10236680186.002806,
+    "plasma_on_hardware": 478507797848.0679,
+    "plasma_through_nozzle": 6883129909829.624,
+    "useful_jet": 27861587640619.93,
+    "conversion_losses": 84460270001.89217,
+    "coil_cooling_loads": 19684716.41582851
+   },
+   "eta_recovery": 0.9500000000000001,
+   "circuits": {
+    "hot_W": {
+     "plume_on_hardware": 478507797848.0679,
+     "recovery_conversion_loss": 5870046718.070167,
+     "radiation_on_nozzle_loops": 8306035511.585304,
+     "radiation_on_nozzle_struts": 647840743.7099967,
+     "radiation_on_shadow_shield": 1272567250.5215025,
+     "coil_armour": 6140315684.478991,
+     "coil_pump_work": 10152638.3671941,
+     "coil_recovery_loss": 1036037.7060962362,
+     "other_hardware_unbooked": 0.0
+    },
+    "warm_W": {
+     "driver_waste": 76863967593.50697,
+     "power_and_target_systems": 1571669449.8188868,
+     "cryoplant_input": 153550202.7900421,
+     "coil_conductor_heating": 10236680.186002806,
+     "coil_screens": 5736234.379880838,
+     "coil_cold_lifted": 72198.35511173,
+     "coil_cryoplant_input": 2763652.4705050117,
+     "coil_pump_motor_loss": 6768425.578129401
+    },
+    "hot_total_W": 500755792432.50714,
+    "warm_total_W": 78614764437.08553,
+    "hot_added_W": 6151504360.552307,
+    "warm_added_W": 15340510.783615112
+   },
+   "cooling_mass": {
+    "route": "shadow_cone",
+    "lithium_inventory_kg": 19493.06566501267,
+    "pipes_kg": 16569.10581526077,
+    "pumps_kg": 16921.0639453235,
+    "cryoplant_kg": [
+     5527.304941010024,
+     27636.524705050117
+    ],
+    "coil_hardware_unbooked_kg": 1852116.929600855,
+    "total_kg": 1932736.6897315022,
+    "note": "coil_hardware_unbooked = screen + armour + cryostat + struts + winding pack + (case - FDP-1 booking at 5.35e-7 kg/J)"
+   },
+   "radiators": {
+    "main_hot_1800K": {
+     "area_m2": 5741.2581384631885,
+     "mass_kg": 8611.887207694783
+    },
+    "warm_628K": {
+     "area_m2": 966.3111785733503,
+     "mass_kg": 483.15558928667514
+    },
+    "shadow_cone_1800K": {
+     "area_m2": 6067.922441882493,
+     "mass_kg": 9101.88366282374,
+     "flux_W_m2": 1011930.4825152047
+    },
+    "shadow_cone_1400K": {
+     "area_m2": 16581.27411128323,
+     "mass_kg": 24871.911166924845,
+     "flux_W_m2": 370316.2762565168
+    },
+    "shadow_cone_1000K": {
+     "area_m2": 63698.62262590566,
+     "mass_kg": 95547.93393885848,
+     "flux_W_m2": 96396.365123
+    }
+   },
+   "postprocess_mass_kg": 1941831.7325284837
+  }
+ ],
+ "preferred": "bottom-up, shadowed, TARGET_composite"
+}
