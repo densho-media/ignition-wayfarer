@@ -1,0 +1,1342 @@
+{
+ "version": "rev4_geometry v1",
+ "from": "T05 claude/project-thread-ctwplp",
+ "built_on_commit": "unknown",
+ "note": "built from the working tree on top of built_on_commit; the commit that carries this file follows it",
+ "coil_assembly": {
+  "basis": "T03 nozzle_results.json C_W15 (T00 branch), scaled to V4 by the stand-off ratio; B 25 T at the winding surface",
+  "escape_xray_W": 412000000000.0,
+  "layers_PROTOTYPE": [
+   {
+    "id": "cryostat_vacuum_mli",
+    "t_m": 0.1,
+    "what": "vacuum gap and multilayer insulation around the 20 K case"
+   },
+   {
+    "id": "thermal_shield_80K",
+    "t_m": 0.07,
+    "what": "actively cooled 80 K shield (He gas) plus its gap"
+   },
+   {
+    "id": "cryostat_wall",
+    "t_m": 0.03,
+    "what": "vacuum boundary"
+   },
+   {
+    "id": "warm_eddy_screen",
+    "t_m": 0.05,
+    "what": "T03 warm eddy screen, cooled; takes the armour back-face re-radiation"
+   },
+   {
+    "id": "standoff_gap",
+    "t_m": 0.3,
+    "what": "low-conductance stand-offs carry the armour off the cryostat; robot tool clearance for segment exchange"
+   },
+   {
+    "id": "armour_coolant",
+    "t_m": 0.04,
+    "what": "tin channels in the armour back plate (the 1,800 K hot-loop fluid)"
+   },
+   {
+    "id": "armour_face",
+    "t_m": 0.03,
+    "what": "sacrificial plasma- and X-ray-facing tiles; material and thickness wait for T00 sec. 5"
+   }
+  ],
+  "coils": {
+   "C1": {
+    "x_m": -188.34193968133437,
+    "r_m": 22.12849330614687,
+    "distance_from_burn_m": 64.69938609749164,
+    "polar_deg": 19.999999999999996,
+    "scale_from_T03": 1.5007301441824275,
+    "current_A": 198253418.12324575,
+    "hoop_tension_N": 15584497403.255806,
+    "winding_25T_minor_m": 1.5860273449859659,
+    "conductor_area_m2": 0.19825341812324573,
+    "case_area_m2_T03_virial": 9.809066012637476,
+    "case_area_m2_steel": 23.61287485341789,
+    "case_mass_kg_T03_virial": 2318506.3596000406,
+    "case_mass_kg_steel": 25936279.01563343,
+    "builds": {
+     "R4_NOMINAL": {
+      "case_outer_m": 2.3744063310847108,
+      "assembly_outer_m": 2.994406331084711,
+      "projected_half_width_m": 2.994406331084711,
+      "share": 0.015829319941145285,
+      "xray_W": 6521679815.751857,
+      "burn_face_m2": 1307.9535408349475,
+      "projected_m2": 832.6690854337163,
+      "flux_mean_W_m2": 4986170.847925276
+     },
+     "R4_COMPACT": {
+      "case_outer_m": 1.7847769353648322,
+      "assembly_outer_m": 2.4047769353648323,
+      "projected_half_width_m": 2.4047769353648323,
+      "share": 0.012712364084264927,
+      "xray_W": 5237494002.71715,
+      "burn_face_m2": 1050.4040399852017,
+      "projected_m2": 668.707980829367,
+      "flux_mean_W_m2": 4986170.8479252765
+     },
+     "R4_STEEL_CASE": {
+      "case_outer_m": 3.1672849960347387,
+      "assembly_outer_m": 3.787284996034739,
+      "projected_half_width_m": 3.787284996034739,
+      "share": 0.020020711714437346,
+      "xray_W": 8248533226.3481865,
+      "burn_face_m2": 1654.282109041724,
+      "projected_m2": 1053.1486996899048,
+      "flux_mean_W_m2": 4986170.847925276
+     },
+     "T03_3X_WINDING": {
+      "case_outer_m": null,
+      "assembly_outer_m": 4.758082034957898,
+      "projected_half_width_m": 4.758082034957898,
+      "share": 0.025152632779226344,
+      "xray_W": 10362884705.041254,
+      "burn_face_m2": 2078.3252361585655,
+      "projected_m2": 1323.1029387490655,
+      "flux_mean_W_m2": 4986170.847925276
+     },
+     "REV2_COPIED_C1": {
+      "case_outer_m": null,
+      "assembly_outer_m": 4.802336461383767,
+      "projected_half_width_m": 4.802336461383767,
+      "share": 0.02538657480220263,
+      "xray_W": 10459268818.507483,
+      "burn_face_m2": 2097.655523147495,
+      "projected_m2": 1335.408981651758,
+      "flux_mean_W_m2": 4986170.847925276
+     }
+    },
+    "ladder_nominal": [
+     {
+      "layer": "winding_25T_envelope",
+      "outer_m": 1.5860273449859659,
+      "share_if_outermost": 0.00838421092640878
+     },
+     {
+      "layer": "structural_case",
+      "outer_m": 2.3744063310847108,
+      "share_if_outermost": 0.012551816062787222
+     },
+     {
+      "layer": "cryostat_vacuum_mli",
+      "outer_m": 2.474406331084711,
+      "share_if_outermost": 0.013080445720586911
+     },
+     {
+      "layer": "thermal_shield_80K",
+      "outer_m": 2.5444063310847107,
+      "share_if_outermost": 0.01345048648104669
+     },
+     {
+      "layer": "cryostat_wall",
+      "outer_m": 2.5744063310847105,
+      "share_if_outermost": 0.013609075378386595
+     },
+     {
+      "layer": "warm_eddy_screen",
+      "outer_m": 2.6244063310847103,
+      "share_if_outermost": 0.013873390207286437
+     },
+     {
+      "layer": "standoff_gap",
+      "outer_m": 2.92440633108471,
+      "share_if_outermost": 0.015459279180685499
+     },
+     {
+      "layer": "armour_coolant",
+      "outer_m": 2.96440633108471,
+      "share_if_outermost": 0.015670731043805376
+     },
+     {
+      "layer": "armour_face",
+      "outer_m": 2.99440633108471,
+      "share_if_outermost": 0.01582931994114528
+     }
+    ],
+    "armour_segment_arc_deg": 30.0,
+    "armour_segment_length_m": 11.586452000933653,
+    "armour_shell_area_m2_nominal": 1307.9535408349475
+   },
+   "C2": {
+    "x_m": -199.57687017333294,
+    "r_m": 41.58796373779316,
+    "distance_from_burn_m": 64.69938609749163,
+    "polar_deg": 40.00000000000001,
+    "scale_from_T03": 1.5007301441824272,
+    "current_A": 15936022.19489689,
+    "hoop_tension_N": 180740650.0764699,
+    "winding_25T_minor_m": 0.12748817755917513,
+    "conductor_area_m2": 0.01593602219489689,
+    "case_area_m2_T03_virial": 0.11376029151871928,
+    "case_area_m2_steel": 0.2738494698128332,
+    "case_mass_kg_T03_virial": 50534.40337554764,
+    "case_mass_kg_steel": 565309.8083642402,
+    "builds": {
+     "R4_NOMINAL": {
+      "case_outer_m": 0.2290507822796468,
+      "assembly_outer_m": 0.8490507822796468,
+      "projected_half_width_m": 0.8490507822796468,
+      "share": 0.008435309139126119,
+      "xray_W": 3475347365.319961,
+      "burn_face_m2": 696.9972492551144,
+      "projected_m2": 443.7222301616213,
+      "flux_mean_W_m2": 4986170.847925279
+     },
+     "R4_COMPACT": {
+      "case_outer_m": 0.20318370716334117,
+      "assembly_outer_m": 0.8231837071633412,
+      "projected_half_width_m": 0.8231837071633412,
+      "share": 0.008178320064167388,
+      "xray_W": 3369467866.4369636,
+      "burn_face_m2": 675.7626180897877,
+      "projected_m2": 430.20384410284146,
+      "flux_mean_W_m2": 4986170.847925279
+     },
+     "R4_STEEL_CASE": {
+      "case_outer_m": 0.32159326638624464,
+      "assembly_outer_m": 0.9415932663862446,
+      "projected_half_width_m": 0.9415932663862446,
+      "share": 0.009354717587047093,
+      "xray_W": 3854143645.8634024,
+      "burn_face_m2": 772.9666237704414,
+      "projected_m2": 492.0858360724763,
+      "flux_mean_W_m2": 4986170.847925279
+     },
+     "T03_3X_WINDING": {
+      "case_outer_m": null,
+      "assembly_outer_m": 0.3824645326775254,
+      "projected_half_width_m": 0.3824645326775254,
+      "share": 0.0037997804550914767,
+      "xray_W": 1565509547.4976883,
+      "burn_face_m2": 313.97029809941006,
+      "projected_m2": 199.8796997062281,
+      "flux_mean_W_m2": 4986170.847925279
+     },
+     "REV2_COPIED_C1": {
+      "case_outer_m": null,
+      "assembly_outer_m": 4.802336461383767,
+      "projected_half_width_m": 4.802336461383767,
+      "share": 0.04771115401731861,
+      "xray_W": 19656995455.13527,
+      "burn_face_m2": 3942.30283210501,
+      "projected_m2": 2509.7479315787627,
+      "flux_mean_W_m2": 4986170.847925279
+     }
+    },
+    "ladder_nominal": [
+     {
+      "layer": "winding_25T_envelope",
+      "outer_m": 0.12748817755917513,
+      "share_if_outermost": 0.0012665934850304922
+     },
+     {
+      "layer": "structural_case",
+      "outer_m": 0.2290507822796468,
+      "share_if_outermost": 0.0022756167209455826
+     },
+     {
+      "layer": "cryostat_vacuum_mli",
+      "outer_m": 0.3290507822796468,
+      "share_if_outermost": 0.003269115498071476
+     },
+     {
+      "layer": "thermal_shield_80K",
+      "outer_m": 0.3990507822796468,
+      "share_if_outermost": 0.003964564642059601
+     },
+     {
+      "layer": "cryostat_wall",
+      "outer_m": 0.42905078227964677,
+      "share_if_outermost": 0.004262614275197368
+     },
+     {
+      "layer": "warm_eddy_screen",
+      "outer_m": 0.47905078227964676,
+      "share_if_outermost": 0.004759363663760315
+     },
+     {
+      "layer": "standoff_gap",
+      "outer_m": 0.7790507822796467,
+      "share_if_outermost": 0.0077398599951379946
+     },
+     {
+      "layer": "armour_coolant",
+      "outer_m": 0.8190507822796468,
+      "share_if_outermost": 0.008137259505988353
+     },
+     {
+      "layer": "armour_face",
+      "outer_m": 0.8490507822796468,
+      "share_if_outermost": 0.008435309139126119
+     }
+    ],
+    "armour_segment_arc_deg": 30.0,
+    "armour_segment_length_m": 21.77540689273495,
+    "armour_shell_area_m2_nominal": 696.9972492551144
+   }
+  },
+  "cases": {
+   "R4_NOMINAL": {
+    "C1_W": 6521679815.751857,
+    "C2_W": 3475347365.319961,
+    "total_W": 9997027181.071817,
+    "share_total": 0.0242646290802714
+   },
+   "R4_COMPACT": {
+    "C1_W": 5237494002.71715,
+    "C2_W": 3369467866.4369636,
+    "total_W": 8606961869.154114,
+    "share_total": 0.020890684148432315
+   },
+   "R4_STEEL_CASE": {
+    "C1_W": 8248533226.3481865,
+    "C2_W": 3854143645.8634024,
+    "total_W": 12102676872.21159,
+    "share_total": 0.02937542930148444
+   },
+   "T03_3X_WINDING": {
+    "C1_W": 10362884705.041254,
+    "C2_W": 1565509547.4976883,
+    "total_W": 11928394252.538942,
+    "share_total": 0.028952413234317822
+   },
+   "REV2_COPIED_C1": {
+    "C1_W": 10459268818.507483,
+    "C2_W": 19656995455.13527,
+    "total_W": 30116264273.642754,
+    "share_total": 0.07309772881952124
+   }
+  },
+  "preferred": "R4_NOMINAL",
+  "note": "the share uses the outermost layer of the full assembly (armour, which must shadow everything behind it); a share of sin(polar) * h / d is the band between polar +- h/d; the Blender ray cast (rev4_geometry.json raycast) checks it on the drawn mesh"
+ },
+ "coil_plant": {
+  "basis": "300 K coolant rise, 5 m/s, six supply/return pairs per coil in the strut shadows, ring manifolds fed at six points (12 segments, so each manifold arc carries 1/12 of the flow), 1 MPa, Mo-TZM pipe at 50 MPa creep (all PROTOTYPE)",
+  "fluids": {
+   "SN_DIRECT": {
+    "cp_dT_J_kg": 72000.0,
+    "rho": 6990.0
+   },
+   "LI_LOOP_HX": {
+    "cp_dT_J_kg": 1251000.0,
+    "rho": 430.0
+   }
+  },
+  "cases": {
+   "SN_DIRECT:R4_NOMINAL": {
+    "fluid": "SN_DIRECT",
+    "build": "R4_NOMINAL",
+    "heat_W": 9997027181.071817,
+    "flow_m3_s": 19.863748174121397,
+    "flow_C1_m3_s": 12.95835283689369,
+    "flow_C2_m3_s": 6.905395337227708,
+    "lines": [
+     {
+      "leg": "C2_to_C1",
+      "flow_m3_s": 6.905395337227708,
+      "line_r_m": 0.27068158439065326,
+      "wall_m": 0.005413631687813065,
+      "length_m": 22.46986098399711,
+      "fluid_m3": 62.06530930681936,
+      "pipe_kg": 25322.646197182294
+     },
+     {
+      "leg": "C1_to_ring",
+      "flow_m3_s": 19.863748174121397,
+      "line_r_m": 0.4590870440518538,
+      "wall_m": 0.009181740881037076,
+      "length_m": 14.242157455267145,
+      "fluid_m3": 113.16105165904487,
+      "pipe_kg": 46169.70907689031
+     },
+     {
+      "leg": "ring_to_hot_root",
+      "flow_m3_s": 19.863748174121397,
+      "line_r_m": 0.4590870440518538,
+      "wall_m": 0.009181740881037076,
+      "length_m": 23.900486049083412,
+      "fluid_m3": 189.9012944472378,
+      "pipe_kg": 77479.72813447303
+     }
+    ],
+    "manifold_r_m": {
+     "C1": 0.2621949597990343,
+     "C2": 0.19140078386494966
+    },
+    "armour_channel_m3": 40.09901580180124,
+    "manifold_m3": 120.20365055166369,
+    "fluid_m3": 525.430321766567,
+    "fluid_kg": 3672757.9491483034,
+    "pipe_kg": 148972.08340854564,
+    "pump_hydraulic_W": 19863748.1741214,
+    "pump_electric_W": 39727496.3482428,
+    "pump_kg": 39727.4963482428,
+    "hx_kg": 0.0,
+    "armour_m2": {
+     "C1": 1307.9535408349475,
+     "C2": 696.9972492551144
+    },
+    "armour_kg_PROTOTYPE_areal": 523292.1562135062,
+    "plant_kg": 3861457.528905092,
+    "plant_plus_armour_kg": 4384749.685118598
+   },
+   "SN_DIRECT:R4_COMPACT": {
+    "fluid": "SN_DIRECT",
+    "build": "R4_COMPACT",
+    "heat_W": 8606961869.154114,
+    "flow_m3_s": 17.101736347866222,
+    "flow_C1_m3_s": 10.406719922741118,
+    "flow_C2_m3_s": 6.695016425125106,
+    "lines": [
+     {
+      "leg": "C2_to_C1",
+      "flow_m3_s": 6.695016425125106,
+      "line_r_m": 0.26652641621924217,
+      "wall_m": 0.005330528324384843,
+      "length_m": 22.46986098399711,
+      "fluid_m3": 60.17443534325536,
+      "pipe_kg": 24551.169620048182
+     },
+     {
+      "leg": "C1_to_ring",
+      "flow_m3_s": 17.101736347866222,
+      "line_r_m": 0.4259754198868949,
+      "wall_m": 0.008519508397737898,
+      "length_m": 14.242157455267145,
+      "fluid_m3": 97.4262487299104,
+      "pipe_kg": 39749.90948180344
+     },
+     {
+      "leg": "ring_to_hot_root",
+      "flow_m3_s": 17.101736347866222,
+      "line_r_m": 0.4259754198868949,
+      "wall_m": 0.008519508397737898,
+      "length_m": 23.900486049083412,
+      "fluid_m3": 163.4959243989117,
+      "pipe_kg": 66706.33715475597
+     }
+    ],
+    "manifold_r_m": {
+     "C1": 0.23496672935241678,
+     "C2": 0.18846263627397436
+    },
+    "armour_channel_m3": 34.523333161499785,
+    "manifold_m3": 106.54546707305714,
+    "fluid_m3": 462.1654087066344,
+    "fluid_kg": 3230536.2068593744,
+    "pipe_kg": 131007.4162566076,
+    "pump_hydraulic_W": 17101736.347866222,
+    "pump_electric_W": 34203472.695732445,
+    "pump_kg": 34203.472695732446,
+    "hx_kg": 0.0,
+    "armour_m2": {
+     "C1": 1050.4040399852017,
+     "C2": 675.7626180897877
+    },
+    "armour_kg_PROTOTYPE_areal": 450529.4977575722,
+    "plant_kg": 3395747.0958117144,
+    "plant_plus_armour_kg": 3846276.5935692866
+   },
+   "SN_DIRECT:R4_STEEL_CASE": {
+    "fluid": "SN_DIRECT",
+    "build": "R4_STEEL_CASE",
+    "heat_W": 12102676872.21159,
+    "flow_m3_s": 24.047601478722758,
+    "flow_C1_m3_s": 16.38955099814852,
+    "flow_C2_m3_s": 7.658050480574238,
+    "lines": [
+     {
+      "leg": "C2_to_C1",
+      "flow_m3_s": 7.658050480574238,
+      "line_r_m": 0.28505164309070435,
+      "wall_m": 0.005701032861814087,
+      "length_m": 22.46986098399711,
+      "fluid_m3": 68.83013188277415,
+      "pipe_kg": 28082.693808171847
+     },
+     {
+      "leg": "C1_to_ring",
+      "flow_m3_s": 24.047601478722758,
+      "line_r_m": 0.505126693338262,
+      "wall_m": 0.01010253386676524,
+      "length_m": 14.242157455267145,
+      "fluid_m3": 136.99589067259382,
+      "pipe_kg": 55894.32339441827
+     },
+     {
+      "leg": "ring_to_hot_root",
+      "flow_m3_s": 24.047601478722758,
+      "line_r_m": 0.505126693338262,
+      "wall_m": 0.01010253386676524,
+      "length_m": 23.900486049083412,
+      "fluid_m3": 229.89974546245236,
+      "pipe_kg": 93799.09614868058
+     }
+    ],
+    "manifold_r_m": {
+     "C1": 0.2948716136678268,
+     "C2": 0.20156194981780454
+    },
+    "armour_channel_m3": 48.544974656243305,
+    "manifold_m3": 142.66156447060422,
+    "fluid_m3": 626.9323071446679,
+    "fluid_kg": 4382256.8269412285,
+    "pipe_kg": 177776.1133512707,
+    "pump_hydraulic_W": 24047601.47872276,
+    "pump_electric_W": 48095202.95744552,
+    "pump_kg": 48095.202957445515,
+    "hx_kg": 0.0,
+    "armour_m2": {
+     "C1": 1654.282109041724,
+     "C2": 772.9666237704414
+    },
+    "armour_kg_PROTOTYPE_areal": 633511.9192639751,
+    "plant_kg": 4608128.143249945,
+    "plant_plus_armour_kg": 5241640.06251392
+   },
+   "SN_DIRECT:T03_3X_WINDING": {
+    "fluid": "SN_DIRECT",
+    "build": "T03_3X_WINDING",
+    "heat_W": 11928394252.538942,
+    "flow_m3_s": 23.7013079250893,
+    "flow_C1_m3_s": 20.590694454461243,
+    "flow_C2_m3_s": 3.1106134706280564,
+    "lines": [
+     {
+      "leg": "C2_to_C1",
+      "flow_m3_s": 3.1106134706280564,
+      "line_r_m": 0.18167177544474564,
+      "wall_m": 0.004,
+      "length_m": 22.46986098399711,
+      "fluid_m3": 27.958020903984476,
+      "pipe_kg": 12557.671659123514
+     },
+     {
+      "leg": "C1_to_ring",
+      "flow_m3_s": 23.7013079250893,
+      "line_r_m": 0.501476507526928,
+      "wall_m": 0.010029530150538559,
+      "length_m": 14.242157455267145,
+      "fluid_m3": 135.02310374595714,
+      "pipe_kg": 55089.42632835051
+     },
+     {
+      "leg": "ring_to_hot_root",
+      "flow_m3_s": 23.7013079250893,
+      "line_r_m": 0.501476507526928,
+      "wall_m": 0.010029530150538559,
+      "length_m": 23.900486049083412,
+      "fluid_m3": 226.58911176345077,
+      "pipe_kg": 92448.3575994879
+     }
+    ],
+    "manifold_r_m": {
+     "C1": 0.3305102521920908,
+     "C2": 0.12846134436717935
+    },
+    "armour_channel_m3": 47.84591068515952,
+    "manifold_m3": 122.5231867885817,
+    "fluid_m3": 559.9393338871337,
+    "fluid_kg": 3913975.9438710646,
+    "pipe_kg": 160095.45558696194,
+    "pump_hydraulic_W": 23701307.9250893,
+    "pump_electric_W": 47402615.8501786,
+    "pump_kg": 47402.6158501786,
+    "hx_kg": 0.0,
+    "armour_m2": {
+     "C1": 2078.3252361585655,
+     "C2": 313.97029809941006
+    },
+    "armour_kg_PROTOTYPE_areal": 624389.1344413317,
+    "plant_kg": 4121474.015308205,
+    "plant_plus_armour_kg": 4745863.149749537
+   },
+   "SN_DIRECT:REV2_COPIED_C1": {
+    "fluid": "SN_DIRECT",
+    "build": "REV2_COPIED_C1",
+    "heat_W": 30116264273.642754,
+    "flow_m3_s": 59.83997828970503,
+    "flow_C1_m3_s": 20.7822063632719,
+    "flow_C2_m3_s": 39.057771926433134,
+    "lines": [
+     {
+      "leg": "C2_to_C1",
+      "flow_m3_s": 39.057771926433134,
+      "line_r_m": 0.6437513737589325,
+      "wall_m": 0.012875027475178652,
+      "length_m": 22.46986098399711,
+      "fluid_m3": 351.049082212647,
+      "pipe_kg": 143228.02554276
+     },
+     {
+      "leg": "C1_to_ring",
+      "flow_m3_s": 59.83997828970503,
+      "line_r_m": 0.7968198599984088,
+      "wall_m": 0.015936397199968175,
+      "length_m": 14.242157455267145,
+      "fluid_m3": 340.9001571686986,
+      "pipe_kg": 139087.26412482903
+     },
+     {
+      "leg": "ring_to_hot_root",
+      "flow_m3_s": 59.83997828970503,
+      "line_r_m": 0.7968198599984088,
+      "wall_m": 0.015936397199968175,
+      "length_m": 23.900486049083412,
+      "fluid_m3": 572.0818265162196,
+      "pipe_kg": 233409.38521861762
+     }
+    ],
+    "manifold_r_m": {
+     "C1": 0.33204371554915096,
+     "C2": 0.4552009617830969
+    },
+    "armour_channel_m3": 120.79916710505012,
+    "manifold_m3": 436.51636500930783,
+    "fluid_m3": 1821.3465980119233,
+    "fluid_kg": 12731212.720103344,
+    "pipe_kg": 515724.67488620663,
+    "pump_hydraulic_W": 59839978.28970503,
+    "pump_electric_W": 119679956.57941006,
+    "pump_kg": 119679.95657941006,
+    "hx_kg": 0.0,
+    "armour_m2": {
+     "C1": 2097.655523147495,
+     "C2": 3942.30283210501
+    },
+    "armour_kg_PROTOTYPE_areal": 1576429.1307209039,
+    "plant_kg": 13366617.35156896,
+    "plant_plus_armour_kg": 14943046.482289864
+   },
+   "LI_LOOP_HX:R4_NOMINAL": {
+    "fluid": "LI_LOOP_HX",
+    "build": "R4_NOMINAL",
+    "heat_W": 9997027181.071817,
+    "flow_m3_s": 18.584252934530177,
+    "flow_C1_m3_s": 12.12365886965192,
+    "flow_C2_m3_s": 6.460594064878257,
+    "lines": [
+     {
+      "leg": "C2_to_C1",
+      "flow_m3_s": 6.460594064878257,
+      "line_r_m": 0.2618187007244435,
+      "wall_m": 0.00523637401448887,
+      "length_m": 22.46986098399711,
+      "fluid_m3": 58.0674602047405,
+      "pipe_kg": 23691.523763534122
+     },
+     {
+      "leg": "C1_to_ring",
+      "flow_m3_s": 18.584252934530177,
+      "line_r_m": 0.4440552306639749,
+      "wall_m": 0.008881104613279497,
+      "length_m": 14.242157455267145,
+      "fluid_m3": 105.87194259283571,
+      "pipe_kg": 43195.75257787696
+     },
+     {
+      "leg": "ring_to_hot_root",
+      "flow_m3_s": 18.584252934530177,
+      "line_r_m": 0.4440552306639749,
+      "wall_m": 0.008881104613279497,
+      "length_m": 23.900486049083412,
+      "fluid_m3": 177.66907119775038,
+      "pipe_kg": 72488.98104868214
+     }
+    ],
+    "manifold_r_m": {
+     "C1": 0.25360995231950206,
+     "C2": 0.18513377872370526
+    },
+    "armour_channel_m3": 40.09901580180124,
+    "manifold_m3": 112.46090244017121,
+    "fluid_m3": 494.16839223729903,
+    "fluid_kg": 212492.4086620386,
+    "pipe_kg": 139376.25739009323,
+    "pump_hydraulic_W": 18584252.934530176,
+    "pump_electric_W": 37168505.86906035,
+    "pump_kg": 37168.505869060355,
+    "hx_kg": 199940.54362143637,
+    "armour_m2": {
+     "C1": 1307.9535408349475,
+     "C2": 696.9972492551144
+    },
+    "armour_kg_PROTOTYPE_areal": 523292.1562135062,
+    "plant_kg": 588977.7155426285,
+    "plant_plus_armour_kg": 1112269.8717561348
+   },
+   "LI_LOOP_HX:R4_COMPACT": {
+    "fluid": "LI_LOOP_HX",
+    "build": "R4_COMPACT",
+    "heat_W": 8606961869.154114,
+    "flow_m3_s": 16.000152192950964,
+    "flow_C1_m3_s": 9.73638578015197,
+    "flow_C2_m3_s": 6.263766412798995,
+    "lines": [
+     {
+      "leg": "C2_to_C1",
+      "flow_m3_s": 6.263766412798995,
+      "line_r_m": 0.2577995845574555,
+      "wall_m": 0.00515599169114911,
+      "length_m": 22.46986098399711,
+      "fluid_m3": 56.29838421272948,
+      "pipe_kg": 22969.74075879363
+     },
+     {
+      "leg": "C1_to_ring",
+      "flow_m3_s": 16.000152192950964,
+      "line_r_m": 0.4120277750937652,
+      "wall_m": 0.008240555501875305,
+      "length_m": 14.242157455267145,
+      "fluid_m3": 91.15067473609824,
+      "pipe_kg": 37189.47529232808
+     },
+     {
+      "leg": "ring_to_hot_root",
+      "flow_m3_s": 16.000152192950964,
+      "line_r_m": 0.4120277750937652,
+      "wall_m": 0.008240555501875305,
+      "length_m": 23.900486049083412,
+      "fluid_m3": 152.9645657083344,
+      "pipe_kg": 62409.54280900043
+     }
+    ],
+    "manifold_r_m": {
+     "C1": 0.22727325145155305,
+     "C2": 0.18229183442765154
+    },
+    "armour_channel_m3": 34.523333161499785,
+    "manifold_m3": 99.68249152961948,
+    "fluid_m3": 434.61944934828136,
+    "fluid_kg": 186886.363219761,
+    "pipe_kg": 122568.75886012214,
+    "pump_hydraulic_W": 16000152.192950964,
+    "pump_electric_W": 32000304.385901928,
+    "pump_kg": 32000.304385901927,
+    "hx_kg": 172139.23738308228,
+    "armour_m2": {
+     "C1": 1050.4040399852017,
+     "C2": 675.7626180897877
+    },
+    "armour_kg_PROTOTYPE_areal": 450529.4977575722,
+    "plant_kg": 513594.66384886735,
+    "plant_plus_armour_kg": 964124.1616064396
+   },
+   "LI_LOOP_HX:R4_STEEL_CASE": {
+    "fluid": "LI_LOOP_HX",
+    "build": "R4_STEEL_CASE",
+    "heat_W": 12102676872.21159,
+    "flow_m3_s": 22.49860924694958,
+    "flow_C1_m3_s": 15.33384125508558,
+    "flow_C2_m3_s": 7.164767991864001,
+    "lines": [
+     {
+      "leg": "C2_to_C1",
+      "flow_m3_s": 7.164767991864001,
+      "line_r_m": 0.2757182428992501,
+      "wall_m": 0.005514364857985002,
+      "length_m": 22.46986098399711,
+      "fluid_m3": 64.3965363039105,
+      "pipe_kg": 26273.78681199548
+     },
+     {
+      "leg": "C1_to_ring",
+      "flow_m3_s": 22.49860924694958,
+      "line_r_m": 0.4885874111043694,
+      "wall_m": 0.009771748222087387,
+      "length_m": 14.242157455267145,
+      "fluid_m3": 128.1714941678341,
+      "pipe_kg": 52293.96962047632
+     },
+     {
+      "leg": "ring_to_hot_root",
+      "flow_m3_s": 22.49860924694958,
+      "line_r_m": 0.4885874111043694,
+      "wall_m": 0.009771748222087387,
+      "length_m": 23.900486049083412,
+      "fluid_m3": 215.091078572199,
+      "pipe_kg": 87757.16005745718
+     }
+    ],
+    "manifold_r_m": {
+     "C1": 0.28521667975612874,
+     "C2": 0.19496223925089942
+    },
+    "armour_channel_m3": 48.544974656243305,
+    "manifold_m3": 133.47222160274697,
+    "fluid_m3": 589.6763053029339,
+    "fluid_kg": 253560.81128026158,
+    "pipe_kg": 166324.91648992896,
+    "pump_hydraulic_W": 22498609.24694958,
+    "pump_electric_W": 44997218.49389916,
+    "pump_kg": 44997.21849389916,
+    "hx_kg": 242053.53744423183,
+    "armour_m2": {
+     "C1": 1654.282109041724,
+     "C2": 772.9666237704414
+    },
+    "armour_kg_PROTOTYPE_areal": 633511.9192639751,
+    "plant_kg": 706936.4837083216,
+    "plant_plus_armour_kg": 1340448.4029722968
+   },
+   "LI_LOOP_HX:T03_3X_WINDING": {
+    "fluid": "LI_LOOP_HX",
+    "build": "T03_3X_WINDING",
+    "heat_W": 11928394252.538942,
+    "flow_m3_s": 22.174621702710283,
+    "flow_C1_m3_s": 19.26437399855233,
+    "flow_C2_m3_s": 2.910247704157954,
+    "lines": [
+     {
+      "leg": "C2_to_C1",
+      "flow_m3_s": 2.910247704157954,
+      "line_r_m": 0.175723325664443,
+      "wall_m": 0.004,
+      "length_m": 22.46986098399711,
+      "fluid_m3": 26.157144536570392,
+      "pipe_kg": 12146.49783182448
+     },
+     {
+      "leg": "C1_to_ring",
+      "flow_m3_s": 22.174621702710283,
+      "line_r_m": 0.48505674274110533,
+      "wall_m": 0.009701134854822106,
+      "length_m": 14.242157455267145,
+      "fluid_m3": 126.32578152039356,
+      "pipe_kg": 51540.91886032057
+     },
+     {
+      "leg": "ring_to_hot_root",
+      "flow_m3_s": 22.174621702710283,
+      "line_r_m": 0.48505674274110533,
+      "wall_m": 0.009701134854822106,
+      "length_m": 23.900486049083412,
+      "fluid_m3": 211.99369465973174,
+      "pipe_kg": 86493.42742117055
+     }
+    ],
+    "manifold_r_m": {
+     "C1": 0.3196884080601289,
+     "C2": 0.1242551551899797
+    },
+    "armour_channel_m3": 47.84591068515952,
+    "manifold_m3": 114.63102903157922,
+    "fluid_m3": 526.9535604334344,
+    "fluid_kg": 226590.0309863768,
+    "pipe_kg": 150180.8441133156,
+    "pump_hydraulic_W": 22174621.702710282,
+    "pump_electric_W": 44349243.405420564,
+    "pump_kg": 44349.243405420566,
+    "hx_kg": 238567.88505077886,
+    "armour_m2": {
+     "C1": 2078.3252361585655,
+     "C2": 313.97029809941006
+    },
+    "armour_kg_PROTOTYPE_areal": 624389.1344413317,
+    "plant_kg": 659688.0035558918,
+    "plant_plus_armour_kg": 1284077.1379972235
+   },
+   "LI_LOOP_HX:REV2_COPIED_C1": {
+    "fluid": "LI_LOOP_HX",
+    "build": "REV2_COPIED_C1",
+    "heat_W": 30116264273.642754,
+    "flow_m3_s": 55.98547073716422,
+    "flow_C1_m3_s": 19.443549938667637,
+    "flow_C2_m3_s": 36.541920798496584,
+    "lines": [
+     {
+      "leg": "C2_to_C1",
+      "flow_m3_s": 36.541920798496584,
+      "line_r_m": 0.6226731258669228,
+      "wall_m": 0.012453462517338455,
+      "length_m": 22.46986098399711,
+      "fluid_m3": 328.4367521721804,
+      "pipe_kg": 134002.19488624958
+     },
+     {
+      "leg": "C1_to_ring",
+      "flow_m3_s": 55.98547073716422,
+      "line_r_m": 0.7707297152329664,
+      "wall_m": 0.015414594304659327,
+      "length_m": 14.242157455267145,
+      "fluid_m3": 318.94155577837756,
+      "pipe_kg": 130128.15475757804
+     },
+     {
+      "leg": "ring_to_hot_root",
+      "flow_m3_s": 55.98547073716422,
+      "line_r_m": 0.7707297152329664,
+      "wall_m": 0.015414594304659327,
+      "length_m": 23.900486049083412,
+      "fluid_m3": 535.2319849219843,
+      "pipe_kg": 218374.64984816962
+     }
+    ],
+    "manifold_r_m": {
+     "C1": 0.3211716614726499,
+     "C2": 0.44029638976312574
+    },
+    "armour_channel_m3": 120.79916710505012,
+    "manifold_m3": 408.39878084859447,
+    "fluid_m3": 1711.8082408261869,
+    "fluid_kg": 736077.5435552604,
+    "pipe_kg": 482504.9994919973,
+    "pump_hydraulic_W": 55985470.73716422,
+    "pump_electric_W": 111970941.47432844,
+    "pump_kg": 111970.94147432844,
+    "hx_kg": 602325.2854728551,
+    "armour_m2": {
+     "C1": 2097.655523147495,
+     "C2": 3942.30283210501
+    },
+    "armour_kg_PROTOTYPE_areal": 1576429.1307209039,
+    "plant_kg": 1932878.7699944414,
+    "plant_plus_armour_kg": 3509307.9007153455
+   }
+  },
+  "preferred": "LI_LOOP_HX:R4_NOMINAL",
+  "armour_areal_PROTOTYPE": {
+   "face_CFC_kg_m2": 57.0,
+   "backplate_Mo_50pct_kg_m2": 204.0
+  }
+ },
+ "raycast": {
+  "n_rays_full_sphere": 2000000,
+  "rays_cast": 1600000,
+  "objects_in_bvh": 1035,
+  "shares_of_4pi": {
+   "nozzle_loops": 0.01992,
+   "C1_armour_face": 0.01507,
+   "nozzle_struts": 0.0106185,
+   "C2_armour_face": 0.0082155,
+   "coil_struts_and_ties": 0.004013,
+   "wing": 0.002976,
+   "shield": 0.002897,
+   "loop_dust_guards_r4": 0.000697,
+   "other:Cryo": 0.000485,
+   "launcher": 6.45e-05,
+   "other:Target": 5.65e-05,
+   "other:Burn": 3.7e-05,
+   "other:Beam": 2.2e-05,
+   "C2_behind_armour": 1.55e-05,
+   "other:Fast": 3.5e-06
+  },
+  "one_sigma": {
+   "launcher": 5.678908345800273e-06,
+   "shield": 3.805916446797013e-05,
+   "other:Fast": 1.3228756555322954e-06,
+   "other:Beam": 3.3166247903554e-06,
+   "nozzle_struts": 7.286460045865894e-05,
+   "wing": 3.857460304397182e-05,
+   "other:Target": 5.315072906367325e-06,
+   "other:Cryo": 1.5572411502397437e-05,
+   "coil_struts_and_ties": 4.479397280885008e-05,
+   "C1_armour_face": 8.680437776978762e-05,
+   "C2_armour_face": 6.409173113592736e-05,
+   "C2_behind_armour": 2.7838821814150108e-06,
+   "loop_dust_guards_r4": 1.866815470259447e-05,
+   "nozzle_loops": 9.97997995989972e-05,
+   "other:Burn": 4.301162633521313e-06
+  },
+  "top_objects": [
+   {
+    "object": "V4_PP_Loop_1_Armour_Shoe",
+    "share": 0.0053065
+   },
+   {
+    "object": "V4_PP_Loop_2_Armour_Shoe",
+    "share": 0.0040905
+   },
+   {
+    "object": "V4_ES_Shield_W_Xray_Face",
+    "share": 0.0027515
+   },
+   {
+    "object": "V4_PP_Loop_3_Armour_Shoe",
+    "share": 0.001753
+   },
+   {
+    "object": "V4_PP_C1_R4_NOMINAL_Armour_Face_10",
+    "share": 0.001266
+   },
+   {
+    "object": "V4_PP_C1_R4_NOMINAL_Armour_Face_06",
+    "share": 0.0012645
+   },
+   {
+    "object": "V4_PP_C1_R4_NOMINAL_Armour_Face_03",
+    "share": 0.0012645
+   },
+   {
+    "object": "V4_PP_C1_R4_NOMINAL_Armour_Face_02",
+    "share": 0.0012645
+   },
+   {
+    "object": "V4_PP_C1_R4_NOMINAL_Armour_Face_11",
+    "share": 0.0012645
+   },
+   {
+    "object": "V4_PP_C1_R4_NOMINAL_Armour_Face_07",
+    "share": 0.0012645
+   },
+   {
+    "object": "V4_PP_C1_R4_NOMINAL_Armour_Face_12",
+    "share": 0.0012635
+   },
+   {
+    "object": "V4_PP_C1_R4_NOMINAL_Armour_Face_04",
+    "share": 0.0012635
+   },
+   {
+    "object": "V4_PP_C1_R4_NOMINAL_Armour_Face_05",
+    "share": 0.0012625
+   },
+   {
+    "object": "V4_PP_C1_R4_NOMINAL_Armour_Face_09",
+    "share": 0.0012625
+   },
+   {
+    "object": "V4_PP_C1_R4_NOMINAL_Armour_Face_08",
+    "share": 0.001262
+   },
+   {
+    "object": "V4_PP_C1_R4_NOMINAL_Armour_Face_01",
+    "share": 0.0011675
+   },
+   {
+    "object": "V4_PP_Wing_S_Spar_Aft_GRADED",
+    "share": 0.0011205
+   },
+   {
+    "object": "V4_ES_Nozzle_Strut_Loop_1_2",
+    "share": 0.0010785
+   },
+   {
+    "object": "V4_ES_Nozzle_Strut_Loop_1_4",
+    "share": 0.0010775
+   },
+   {
+    "object": "V4_PP_Wing_P_Spar_Aft_GRADED",
+    "share": 0.0010775
+   },
+   {
+    "object": "V4_ES_Nozzle_Strut_Loop_1_3",
+    "share": 0.001048
+   },
+   {
+    "object": "V4_ES_Nozzle_Strut_Loop_1_1",
+    "share": 0.001046
+   },
+   {
+    "object": "V4_ES_Nozzle_Strut_Loop_1_0",
+    "share": 0.001043
+   },
+   {
+    "object": "V4_ES_Nozzle_Strut_Loop_1_5",
+    "share": 0.0010425
+   },
+   {
+    "object": "V4_PP_C2_R4_NOMINAL_Armour_Face_06",
+    "share": 0.000688
+   },
+   {
+    "object": "V4_PP_C2_R4_NOMINAL_Armour_Face_07",
+    "share": 0.0006875
+   },
+   {
+    "object": "V4_PP_C2_R4_NOMINAL_Armour_Face_12",
+    "share": 0.0006875
+   },
+   {
+    "object": "V4_PP_C2_R4_NOMINAL_Armour_Face_04",
+    "share": 0.0006875
+   },
+   {
+    "object": "V4_PP_C2_R4_NOMINAL_Armour_Face_09",
+    "share": 0.0006875
+   },
+   {
+    "object": "V4_PP_C2_R4_NOMINAL_Armour_Face_02",
+    "share": 0.000687
+   },
+   {
+    "object": "V4_PP_C2_R4_NOMINAL_Armour_Face_03",
+    "share": 0.0006865
+   },
+   {
+    "object": "V4_PP_C2_R4_NOMINAL_Armour_Face_08",
+    "share": 0.0006865
+   },
+   {
+    "object": "V4_PP_C2_R4_NOMINAL_Armour_Face_05",
+    "share": 0.0006865
+   },
+   {
+    "object": "V4_PP_C2_R4_NOMINAL_Armour_Face_11",
+    "share": 0.0006865
+   },
+   {
+    "object": "V4_PP_C2_R4_NOMINAL_Armour_Face_10",
+    "share": 0.0006865
+   },
+   {
+    "object": "V4_PP_C2_R4_NOMINAL_Armour_Face_01",
+    "share": 0.000658
+   },
+   {
+    "object": "V4_PP_Strut_Crawler_Rail",
+    "share": 0.000492
+   },
+   {
+    "object": "V4_PP_Hot_Line_Loop_1",
+    "share": 0.0004325
+   },
+   {
+    "object": "V4_PR_C1_R4_Strut_6",
+    "share": 0.0003905
+   },
+   {
+    "object": "V4_PR_C1_R4_Strut_4",
+    "share": 0.0003895
+   }
+  ],
+  "scope": "V4 chosen assembly (ASM_V4), T05 hardware objects only; canon ship parts not included; first hit per ray from the burn point"
+ },
+ "raycast_rev3_chosen": {
+  "n_rays_full_sphere": 2000000,
+  "rays_cast": 1600000,
+  "objects_in_bvh": 866,
+  "shares_of_4pi": {
+   "loop_bumpers_rev2": 0.076004,
+   "closure_winding_drawn_by_nozzle": 0.036142,
+   "other:C2": 0.022074,
+   "other:C1": 0.011933,
+   "nozzle_struts": 0.009901,
+   "loop_guard_rings_rev2": 0.0057035,
+   "coil_struts_and_ties": 0.003473,
+   "shield": 0.0028885,
+   "wing": 0.002366,
+   "other:Cryo": 0.0004195,
+   "launcher": 6.45e-05,
+   "other:Target": 5.65e-05,
+   "other:Beam": 2.2e-05,
+   "other:Fast": 3.5e-06
+  },
+  "one_sigma": {
+   "launcher": 5.678908345800273e-06,
+   "shield": 3.800328933131973e-05,
+   "other:Fast": 1.3228756555322954e-06,
+   "other:Beam": 3.3166247903554e-06,
+   "nozzle_struts": 7.035978965289763e-05,
+   "wing": 3.4394767043839675e-05,
+   "other:Target": 5.315072906367325e-06,
+   "other:Cryo": 1.4482748357960239e-05,
+   "coil_struts_and_ties": 4.167133307202926e-05,
+   "other:C1": 7.724312267121262e-05,
+   "closure_winding_drawn_by_nozzle": 0.00013442841961430624,
+   "other:C2": 0.00010505712731652242,
+   "loop_bumpers_rev2": 0.00019494101672044292,
+   "loop_guard_rings_rev2": 5.3401778996584e-05
+  },
+  "top_objects": [
+   {
+    "object": "V4_PP_Loop_1_Local_Bumper",
+    "share": 0.036055
+   },
+   {
+    "object": "V4_PP_Loop_2_Local_Bumper",
+    "share": 0.0279185
+   },
+   {
+    "object": "V4_PP_Closure_C2_Envelope",
+    "share": 0.023643
+   },
+   {
+    "object": "V4_PP_Closure_C1_Envelope",
+    "share": 0.012499
+   },
+   {
+    "object": "V4_PP_Loop_3_Local_Bumper",
+    "share": 0.0120305
+   },
+   {
+    "object": "V4_PP_Loop_2_Guard_Ring",
+    "share": 0.0037705
+   },
+   {
+    "object": "V4_ES_Shield_W_Xray_Face",
+    "share": 0.002804
+   },
+   {
+    "object": "V4_PP_Loop_3_Guard_Ring",
+    "share": 0.001933
+   },
+   {
+    "object": "V4_PP_C2_P2_Armour_Seg_12",
+    "share": 0.001797
+   },
+   {
+    "object": "V4_PP_C2_P2_Armour_Seg_10",
+    "share": 0.0017965
+   },
+   {
+    "object": "V4_PP_C2_P2_Armour_Seg_07",
+    "share": 0.0017965
+   },
+   {
+    "object": "V4_PP_C2_P2_Armour_Seg_05",
+    "share": 0.0017965
+   },
+   {
+    "object": "V4_PP_C2_P2_Armour_Seg_02",
+    "share": 0.0017965
+   },
+   {
+    "object": "V4_PP_C2_P2_Armour_Seg_11",
+    "share": 0.0017965
+   },
+   {
+    "object": "V4_PP_C2_P2_Armour_Seg_04",
+    "share": 0.001796
+   },
+   {
+    "object": "V4_PP_C2_P2_Armour_Seg_09",
+    "share": 0.001796
+   },
+   {
+    "object": "V4_PP_C2_P2_Armour_Seg_06",
+    "share": 0.001796
+   },
+   {
+    "object": "V4_PP_C2_P2_Armour_Seg_03",
+    "share": 0.0017955
+   },
+   {
+    "object": "V4_PP_C2_P2_Armour_Seg_08",
+    "share": 0.001795
+   },
+   {
+    "object": "V4_PR_C1_Sized_Reaction_Ring",
+    "share": 0.001772
+   },
+   {
+    "object": "V4_PP_C2_P2_Armour_Seg_01",
+    "share": 0.0017585
+   },
+   {
+    "object": "V4_ES_Nozzle_Strut_Loop_1_4",
+    "share": 0.0010035
+   },
+   {
+    "object": "V4_ES_Nozzle_Strut_Loop_1_2",
+    "share": 0.0010005
+   },
+   {
+    "object": "V4_PP_C1_P2_Armour_Seg_04",
+    "share": 0.000983
+   },
+   {
+    "object": "V4_PP_C1_P2_Armour_Seg_08",
+    "share": 0.000983
+   },
+   {
+    "object": "V4_PP_C1_P2_Armour_Seg_12",
+    "share": 0.000983
+   },
+   {
+    "object": "V4_PP_C1_P2_Armour_Seg_03",
+    "share": 0.0009825
+   },
+   {
+    "object": "V4_PP_C1_P2_Armour_Seg_05",
+    "share": 0.0009825
+   },
+   {
+    "object": "V4_PP_C1_P2_Armour_Seg_11",
+    "share": 0.0009825
+   },
+   {
+    "object": "V4_PP_C1_P2_Armour_Seg_09",
+    "share": 0.000982
+   },
+   {
+    "object": "V4_PP_C1_P2_Armour_Seg_06",
+    "share": 0.000982
+   },
+   {
+    "object": "V4_PP_C1_P2_Armour_Seg_10",
+    "share": 0.000982
+   },
+   {
+    "object": "V4_PP_C1_P2_Armour_Seg_07",
+    "share": 0.000982
+   },
+   {
+    "object": "V4_PP_C1_P2_Armour_Seg_02",
+    "share": 0.0009815
+   },
+   {
+    "object": "V4_ES_Nozzle_Strut_Loop_1_3",
+    "share": 0.000976
+   },
+   {
+    "object": "V4_ES_Nozzle_Strut_Loop_1_1",
+    "share": 0.0009745
+   },
+   {
+    "object": "V4_ES_Nozzle_Strut_Loop_1_0",
+    "share": 0.0009715
+   },
+   {
+    "object": "V4_ES_Nozzle_Strut_Loop_1_5",
+    "share": 0.0009705
+   },
+   {
+    "object": "V4_PP_C1_P2_Armour_Seg_01",
+    "share": 0.0009605
+   },
+   {
+    "object": "V4_PP_Wing_S_Spar_Aft_GRADED",
+    "share": 0.0008885
+   }
+  ],
+  "scope": "V4 chosen assembly (ASM_V4), T05 hardware objects only; canon ship parts not included; first hit per ray from the burn point"
+ },
+ "raycast_W_at_escape": {
+  "nozzle_loops": 8207040000.0,
+  "C1_armour_face": 6208840000.0,
+  "nozzle_struts": 4374822000.0,
+  "C2_armour_face": 3384786000.0000005,
+  "coil_struts_and_ties": 1653356000.0,
+  "wing": 1226112000.0,
+  "shield": 1193564000.0,
+  "loop_dust_guards_r4": 287164000.0,
+  "other:Cryo": 199820000.0,
+  "launcher": 26574000.0,
+  "other:Target": 23278000.0,
+  "other:Burn": 15244000.0,
+  "other:Beam": 9064000.0,
+  "C2_behind_armour": 6386000.0,
+  "other:Fast": 1442000.0
+ },
+ "raycast_rev3_W_at_escape": {
+  "loop_bumpers_rev2": 31313648000.0,
+  "closure_winding_drawn_by_nozzle": 14890504000.0,
+  "other:C2": 9094488000.0,
+  "other:C1": 4916396000.0,
+  "nozzle_struts": 4079212000.0,
+  "loop_guard_rings_rev2": 2349842000.0,
+  "coil_struts_and_ties": 1430876000.0,
+  "shield": 1190062000.0,
+  "wing": 974792000.0,
+  "other:Cryo": 172834000.0,
+  "launcher": 26574000.0,
+  "other:Target": 23278000.0,
+  "other:Beam": 9064000.0,
+  "other:Fast": 1442000.0
+ }
+}
