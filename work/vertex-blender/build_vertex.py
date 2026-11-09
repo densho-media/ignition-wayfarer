@@ -1032,11 +1032,16 @@ def annulus(xc, rc, r_in, r_out, phi0=0.0, phi1=360.0, n=28):
     return outer+inner
 
 
-def build_coil_assembly(key, gen, e, coll, cut=None, detail=True, plant_key=None):
+def build_coil_assembly(key, gen, e, coll, cut=None, detail=True, plant_key=None, opaque=False):
     """C1/C2 as the full assembly the burn sees: 25 T winding envelope, structural case, cryostat (vacuum + 80 K shield + wall), warm screen,
     stand-off gap, then the burn-facing armour (coolant back plate + sacrificial face) in 12 replaceable segments. The outermost layer
     sets the X-ray share (rev4.json coil_assembly builds[key]); detail adds manifolds, stand-offs, handling posts and the service rail."""
     xB = e['x_burn_m']
+    _mk = globals()['make']
+    def make(*a_, **k_):                                                 # noqa: E306  (section lanes draw every layer opaque)
+        if opaque:
+            k_['alpha'] = 1.0
+        return _mk(*a_, **k_)
     for c in e['closure_coils']:
         nm = c['name']; q = CA4['coils'][nm]; b = q['builds'][key]; xc, rc = c['x_m'], c['r_m']
         phi_u = math.degrees(math.atan2(-rc, xB-xc))                     # direction of the burn point in the (x, r) section plane
@@ -1188,6 +1193,89 @@ def build_dust_guards_r4(gen, R, e, coll):
             make(f"{L['name']}_R4_Guard_Band", 'profile', coll, 'SHIELD', gen, 'PARAMETRIC_PLACEHOLDER', 'VTX-08F', SRC4, alpha=0.55,
                  note=f'guard band 0.8 m wide, 22.5 m forward of the loop, on the burn-ray cone at {math.degrees(thg):.2f} deg (edge-on)',
                  trace=tr4('T05-ISS-019', 'T02 HANDOFF E guard rings', 'VTX-08F'), prof=cone_band(xB, thg, L['r']-0.4, L['r']+0.4, 0.02))
+
+
+ST4 = REV4['structure']
+
+
+def build_stretch_r4(gen, R, coll, key='S5_N9_NESTED'):
+    """Rev 4 stretch structure (rev4.json structure.cases[key]): spine + three canon sector keels at r 5 m (S2) + nested longerons in the
+    inter-tank gaps, bay frames in the 2 m inter-bay gaps (keel ring, outer ring at the longeron radius, spokes at the longeron azimuths,
+    one girder to each tank's polar boss), J4 polar-boss saddles (aft fixed, forward sliding), J1 root diaphragm and J3 bow frame."""
+    c = ST4['cases'][key]; x0, x1 = ST3['x_m']; rs = CANON2['spine_r_m']; rl = c['longeron_r_m']; rt = c['tube_r_m']
+    k = SO3['S2_CANON_SECTORS']['keel']; T = lambda p: tr4('T05-ISS-013', f'rev4.json structure.cases.{key}.{p}', 'VTX-04')
+    head = (f"{key}: {c['members']} longerons r {rt:.2f} m (t/r {c['t_over_r']}) at r {rl:.0f} m in the inter-tank gaps; {c['structure_kg']/1e3:,.2f} kt; "
+            f"f1 {c['f1_full_Hz']:.2f} Hz full (beam model, PROTOTYPE target); tank clearance {c['min_tank_clearance_m']:.2f} m, B2 margin {c['B2_shadow_margin_m']:.1f} m")
+    make('S5N_Spine', 'ring', coll, 'STRUCTURE', gen, 'PROTOTYPE', 'VTX-04', SRC4, note='spine continuation r 0.95 m; bore left free for services or a B-long barrel',
+         trace=T('base'), x0=x0, x1=x1, r0=rs-0.006, r1=rs)
+    for az in (30.0, 150.0, 270.0):
+        make(f'S5N_Sector_Keel_{int(az)}', 'tube', coll, 'STRUCTURE', gen, 'PROTOTYPE', 'VTX-04', SRC4, note=f"canon sector keel r {k['r_m']:.2f} m at r 5 m (hub + three sectors rule)",
+             trace=T('base'), points=[pol(x0-3.0, 5.0, az), pol(x1, 5.0, az)], radius=k['r_m'])
+    for az in c['longeron_az_deg']:
+        make(f'S5N_Longeron_{az:05.1f}', 'tube', coll, 'STRUCTURE', gen, 'PROTOTYPE', 'VTX-04', SRC4, note=head, trace=T('area_m2_each'),
+             points=[pol(x0-2.0, rl, az), pol(x1+1.0, rl, az)], radius=rt)
+    tanks = R['tanks']['options']['T-B']['vessels']
+    frames = stretch_frames(x0-1.0, x1)
+    for i, x in enumerate(frames):
+        make(f'S5N_Frame_Keel_Ring_{i:02d}', 'torus', coll, 'STRUCTURE', gen, 'PROTOTYPE', 'VTX-04', SRC4, note='bay frame keel ring (2 m inter-bay gap)', trace=T('frames'), x=x, R=5.0, a=0.3)
+        make(f'S5N_Frame_Outer_Ring_{i:02d}', 'torus', coll, 'STRUCTURE', gen, 'PROTOTYPE', 'VTX-04', SRC4, note=f'bay frame outer ring at the longeron radius r {rl:.0f} m', trace=T('frames'),
+             x=x, R=rl, a=0.32)
+        for az in c['longeron_az_deg']:
+            make(f'S5N_Frame_Spoke_{i:02d}_{az:05.1f}', 'tube', coll, 'STRUCTURE', gen, 'PROTOTYPE', 'VTX-04', SRC4, note='spoke: keel ring to longeron', trace=T('frames'),
+                 points=[pol(x, 5.0, az), pol(x, rl, az)], radius=0.2)
+        for j in range(3):
+            make(f'S5N_Frame_Hub_Spoke_{i:02d}_{j}', 'tube', coll, 'STRUCTURE', gen, 'PROTOTYPE', 'VTX-04', SRC4, trace=T('frames'),
+                 points=[pol(x, rs, 30+120*j), pol(x, 5.0, 30+120*j)], radius=0.2)
+    for v in tanks:                                                  # girder to each polar boss + saddle (J4)
+        az = v['azimuth_deg']; nm = v['name'].replace('FDP1_', '')
+        for end, xe, xf, kind in (('Aft', v['x0'], v['x0']-1.0, 'FIXED'), ('Fwd', v['x1'], v['x1']+1.0, 'SLIDING')):
+            make(f'S5N_Girder_{nm}_{end}', 'tube', coll, 'STRUCTURE', gen, 'PROTOTYPE', 'VTX-04', SRC4,
+                 note='two-chord girder (1.8 m deep) from the keel ring to the polar boss', trace=T('frames'),
+                 points=[pol(xf, 5.0, az), (xf, v['y'], v['z'])], radius=0.22)
+            make(f'S5N_Saddle_{nm}_{end}', 'ring', coll, 'SERVICE', gen, 'PROTOTYPE', 'VTX-04', SRC4,
+                 note=f'J4 polar-boss saddle, {kind}: G10/CFRP isolating struts (1.5-20 K tank on a warm frame); '
+                      + ('sliding boss takes the 0.1 m axial contraction' if kind == 'SLIDING' else 'fixed boss carries the axial burn load'),
+                 trace=T('J4'), x0=min(xe, xf), x1=max(xe, xf), r0=0.0, r1=0.9 if kind == 'FIXED' else 0.7, centre=(v['y'], v['z']))
+    # J1 root diaphragm (X 137.9-140.75) and J3 bow frame (X 413.25-416.15): radial deep girders at the longeron azimuths
+    for jn, xa, xb, why in (('J1', 137.9, 140.75, 'J1 root diaphragm: longeron feet land on the canon farm front frame (farm r 7.75-34.5 m, canon, unmodified); '
+                                                      'deep radial girders shear the longeron forces into the keels and spine sleeve'),
+                            ('J3', x1-2.9, x1, 'J3 bow frame: spine to the shield spine column, keels to the Brow sector keels, longerons to the Brow outer truss ring')):
+        xm = (xa+xb)/2
+        make(f'S5N_{jn}_Outer_Ring', 'torus', coll, 'STRUCTURE', gen, 'PROTOTYPE', 'VTX-04', SRC4, note=why, trace=T(jn), x=xm, R=rl, a=0.6)
+        make(f'S5N_{jn}_Keel_Ring', 'torus', coll, 'STRUCTURE', gen, 'PROTOTYPE', 'VTX-04', SRC4, note=why, trace=T(jn), x=xm, R=5.0, a=0.5)
+        make(f'S5N_{jn}_Spine_Sleeve', 'ring', coll, 'STRUCTURE', gen, 'PROTOTYPE', 'VTX-04', SRC4, note='splice sleeve on the spine', trace=T(jn), x0=xa, x1=xb, r0=rs, r1=rs+0.25)
+        for az in c['longeron_az_deg']:
+            for xx in (xa, xb):
+                make(f'S5N_{jn}_Girder_Chord_{az:05.1f}_{int(xx)}', 'tube', coll, 'STRUCTURE', gen, 'PROTOTYPE', 'VTX-04', SRC4, trace=T(jn),
+                     points=[pol(xx, rs+0.25, az), pol(xx, rl, az)], radius=0.25)
+            make(f'S5N_{jn}_Girder_Diag_{az:05.1f}', 'tube', coll, 'STRUCTURE', gen, 'PROTOTYPE', 'VTX-04', SRC4, trace=T(jn),
+                 points=[pol(xa, rl, az), pol(xb, 5.0, az)], radius=0.18)
+            make(f'S5N_{jn}_Longeron_Foot_{az:05.1f}', 'box', coll, 'STRUCTURE', gen, 'PROTOTYPE', 'VTX-04', SRC4, note='longeron end fitting', trace=T(jn),
+                 centre=pol(xa if jn == 'J1' else xb, rl, az), size=(1.6, 1.6, 1.6), roll=az)
+
+
+def build_access_r4(gen, coll):
+    """K2 corridor kept independent of the primary structure: it rides on sliding mounts at each frame (no axial load, no strain from the
+    stretch); robot rails on keel 270 (inner) and along the longeron nearest az 276 (outer inspection); bay crawlways along the frame girder to
+    the inner tank at az 93.7; service trays (power, data, cryo vent) on keel 150, away from K2 and the robot rails."""
+    x0, x1 = ST3['x_m']; frames = stretch_frames(x0-1.0, x1); rl = ST4['cases']['S5_N9_NESTED']['longeron_r_m']
+    T = lambda p: tr4('T05-ISS-015', p, 'VTX-04')
+    cy, cz = pol(0, 3.0, 90.0)[1:]
+    for i, x in enumerate(frames):
+        for side in (-1, 1):
+            make(f'K2R4_Sliding_Mount_{i:02d}_{side:+d}', 'tube', coll, 'STRUCTURE', gen, 'PROTOTYPE', 'VTX-04', SRC4,
+                 note='K2 sliding mount on the frame: carries the tube laterally, lets the stretch strain past it axially (corridor is not primary structure)',
+                 trace=T('build_vertex.py build_access_r4'), points=[(x, cy+side*1.0, cz), (x, *pol(0, 5.0, 90.0+side*25)[1:])], radius=0.09)
+        make(f'K2R4_Robot_Station_{i:02d}', 'box', coll, 'SERVICE', gen, 'PROTOTYPE', 'VTX-04', SRC4, note='robot dock / charger at the frame on the keel-270 rail',
+             trace=T('robot rail'), centre=pol(x+1.5, 5.9, 270.0), size=(1.6, 0.9, 0.9), roll=270.0)
+        make(f'K2R4_Bay_Crawlway_{i:02d}', 'tube', coll, 'HABITAT', gen, 'PROTOTYPE', 'VTX-04', SRC4, alpha=0.6,
+             note='unpressurised crawlway along the frame girder from K2 to the inner tank saddles (EVA or robot)', trace=T('crawlway'),
+             points=[(x, cy, cz+1.2), pol(x, 12.0, 93.7)], radius=0.45)
+    make('K2R4_Robot_Rail_Outer', 'tube', coll, 'SERVICE', gen, 'PROTOTYPE', 'VTX-04', SRC4, note='outer inspection rail along the longeron at az 276',
+         trace=T('robot rail'), points=[pol(x0, rl-0.9, 276.0), pol(x1, rl-0.9, 276.0)], radius=0.1)
+    make('K2R4_Service_Tray_Keel150', 'box', coll, 'POWER', gen, 'PROTOTYPE', 'VTX-04', SRC4,
+         note='service tray on keel 150: power and data trunks, cryo vent; separate from K2 (az 90) and the robot rails (270)',
+         trace=T('services'), centre=pol((x0+x1)/2, 5.9, 150.0), size=(x1-x0, 0.8, 0.5), roll=150.0)
 
 
 def build_coil_plant(key, gen, e, coll, fluid='LI_LOOP_HX'):
@@ -1356,7 +1444,9 @@ for g in GENS:
         build_coil_plant('R4_NOMINAL', g, e, opt_coll(g, 'COIL_PLANT_LI', 'COLOR_01'), fluid='LI_LOOP_HX')
         build_coil_plant('R4_NOMINAL', g, e, opt_coll(g, 'COIL_PLANT_SN', 'COLOR_01'), fluid='SN_DIRECT')
         build_dust_guards_r4(g, R, e, opt_coll(g, 'DUST_GUARDS_R4', 'COLOR_04'))
-        chosen = ['LAUNCH_B', 'WINGS_PREF', 'COIL_ASM_R4', 'COIL_PLANT_LI', 'COIL_SUP_R4', 'DUST_GUARDS_R4', 'STRUCT_S2', 'STRUCT_S3', 'CORR_K2', 'DOCK_ROUTES']
+        build_stretch_r4(g, R, opt_coll(g, 'STRUCT_S5N', 'COLOR_02'))
+        build_access_r4(g, opt_coll(g, 'ACCESS_R4', 'COLOR_04'))
+        chosen = ['LAUNCH_B', 'WINGS_PREF', 'COIL_ASM_R4', 'COIL_PLANT_LI', 'COIL_SUP_R4', 'DUST_GUARDS_R4', 'STRUCT_S5N', 'CORR_K2', 'ACCESS_R4', 'DOCK_ROUTES']
         chosen_sk = 'B2_DOCK_CLEAR'
     else:
         chosen = ['LAUNCH_REV1', 'SUP_REV1', 'WINGS_CALC', 'SPINE_EXT', 'DOCK_ROUTES', 'COIL_ENV_REV3', 'DUST_GUARDS_REV2']
@@ -1591,7 +1681,7 @@ CAS_LANES = [('REV3_COPIED', 0.0), ('T03_3X_WINDING', 40.0), ('R4_COMPACT', 80.0
 for k, dx in CAS_LANES:
     lc = new_coll(f'CASEC_{k}', CASEC, 'COLOR_04')
     kk = 'REV2_COPIED_C1' if k == 'REV3_COPIED' else k
-    build_coil_assembly(kk, 'V4', e4, lc, cut=(90.0, 270.0), detail=False)
+    build_coil_assembly(kk, 'V4', e4, lc, cut=(96.0, 444.0), detail=False, opaque=True)          # keeps a 12 deg wedge at az 84-96
     for o in lc.objects:
         o.location.x += dx
     b1 = CA4['coils']['C1']['builds'][kk]; b2 = CA4['coils']['C2']['builds'][kk]
@@ -1601,8 +1691,8 @@ for k, dx in CAS_LANES:
     text(f'casec_{k}', body, (e4['closure_coils'][0]['x_m']+dx-14, 0, 52), SC['COIL_ASSEMBLY_SECTION'].collection, size=2.2)
 link(SC['COIL_ASSEMBLY_SECTION'], CASEC)
 _c1 = CA4['coils']['C1']; _c2 = CA4['coils']['C2']
-text('casec_title', "CLOSURE-COIL ASSEMBLIES IN SECTION (ISS-014, rev4.json): winding (25 T envelope), case, 80 K shield, cryostat wall, warm screen, "
-     "stand-off gap, armour back plate (Li) + face. The outermost layer sets the X-ray share.", (-205, 0, 62), SC['COIL_ASSEMBLY_SECTION'].collection, size=2.4)
+text('casec_title', "CLOSURE-COIL ASSEMBLIES IN SECTION (ISS-014, rev4.json): winding, case, 80 K shield, cryostat, warm screen,\n"
+     "stand-off gap, Li back plate + armour face. The outermost layer sets the X-ray share.", (-205, 0, 64), SC['COIL_ASSEMBLY_SECTION'].collection, size=2.4)
 text('casec_note', f"C1 hoop {_c1['hoop_tension_N']/1e9:.1f} GN: case {_c1['case_mass_kg_T03_virial']/1e3:,.0f} t on T03's virial basis, "
      f"{_c1['case_mass_kg_steel']/1e3:,.0f} t if steel; C2 hoop {_c2['hoop_tension_N']/1e9:.2f} GN. Upper section: C2 at r 41.6 m; lower: C1 at r 22.1 m (burn to the left, X -249)",
      (-205, 0, 58), SC['COIL_ASSEMBLY_SECTION'].collection, size=2.0)
@@ -1623,17 +1713,27 @@ text('scmp_title', 'DUST PROTECTION WHILE BRAKING (dust arrives along -X; shadow
      (-170, 0, 205), SC['SKIRT_COMPARE'].collection, size=7)
 
 # ---- Rev 3 structure lanes: side view (lanes in Z) and end view (lanes in Y); tanks as ghosts ----
-SLANES = [('S1', ['STRUCT_S1']), ('S2', ['STRUCT_S2', 'CORR_K2']), ('S3', ['STRUCT_S3']), ('S4', ['STRUCT_S4']), ('S5', ['STRUCT_S2', 'STRUCT_S3', 'CORR_K2'])]
+SLANES = [('S1', ['STRUCT_S1']), ('S2', ['STRUCT_S2', 'CORR_K2']), ('S3', ['STRUCT_S3']), ('S4', ['STRUCT_S4']), ('S5', ['STRUCT_S2', 'STRUCT_S3', 'CORR_K2']),
+          ('S5N', ['STRUCT_S5N', 'CORR_K2', 'ACCESS_R4'])]
 for i, (k, parts) in enumerate(SLANES):
     z = 200.0-100.0*i; y = -240.0+120.0*i
     for sc_, loc in (('STRUCTURE_COMPARE', (0, 0, z)), ('STRUCTURE_SECTION', (0, y, 0))):
         inst(SC[sc_], O4['LANE_CORE_TB'], loc, f'{sc_[:5]}_CORE_{k}')
         for pp in parts:
             inst(SC[sc_], O4[pp], loc, f'{sc_[:5]}_{k}_{pp}')
-    key = {'S1': 'S1_SPINE_ONLY', 'S2': 'S2_CANON_SECTORS', 'S3': 'S3_OUTER_CAGE', 'S4': 'S4_SECTORS_PLUS_BELT', 'S5': 'S5_SECTORS_PLUS_OUTER_STIFFENERS'}[k]
-    o = SO3[key]
-    body = (f"{key}: {o['structure_kg']/1e3:,.0f} t (strength), {o['structure_stiff_kg']/1e3:,.0f} t for f1 >= {REV3['f_target_Hz']} Hz; "
-            f"f1 {o['f_bending_Hz']['full']:.3f} Hz full / {o['f_bending_Hz']['dry']:.3f} dry; axial {o['f_axial_Hz']['full']:.2f} Hz; {o['canon_rule'].split(' (')[0]}")
+    if k == 'S5N':
+        c_ = ST4['cases']['S5_N9_NESTED']
+        body = (f"S5N REV 4 PREFERRED: S2 + {c_['members']} longerons r {c_['tube_r_m']:.2f} m nested in the inter-tank gaps at r {c_['longeron_r_m']:.0f} m; "
+                f"{c_['structure_kg']/1e3:,.2f} kt for f1 {c_['f1_full_Hz']:.2f} Hz (beam model); {c_['B2_shadow_margin_m']:.1f} m inside the B2 shadow; tanks exit radially")
+    else:
+        key = {'S1': 'S1_SPINE_ONLY', 'S2': 'S2_CANON_SECTORS', 'S3': 'S3_OUTER_CAGE', 'S4': 'S4_SECTORS_PLUS_BELT', 'S5': 'S5_SECTORS_PLUS_OUTER_STIFFENERS'}[k]
+        o = SO3[key]
+        body = (f"{key}: {o['structure_kg']/1e3:,.0f} t (strength), {o['structure_stiff_kg']/1e3:,.0f} t for f1 >= {REV3['f_target_Hz']} Hz; "
+                f"f1 {o['f_bending_Hz']['full']:.3f} Hz full / {o['f_bending_Hz']['dry']:.3f} dry; axial {o['f_axial_Hz']['full']:.2f} Hz; {o['canon_rule'].split(' (')[0]}")
+        if k == 'S5':
+            c3 = ST4['cases']['S5_REV3_AS_DRAWN']; cc = ST4['cases']['S5_REV3_CORRECTED']
+            body = (f"S5 REV 3 (stiffness area undercounted 6x): as drawn f1 {c3['f1_full_Hz']:.3f} Hz, not 0.2; corrected {cc['structure_kg']/1e3:,.2f} kt, "
+                    f"longerons r {cc['tube_r_m']:.2f} m, {cc['min_tank_clearance_m']:.2f} m to the tanks, {cc['B2_shadow_margin_m']:.2f} m inside B2")
     text(f'scmp3_{k}', body, (100, 0, z+40), SC['STRUCTURE_COMPARE'].collection, size=7)
     text(f'ssec3_{k}', k, (60, y, 48), SC['STRUCTURE_SECTION'].collection, size=12, facing='end')
 text('scmp3_title', f"T-B STRETCH STRUCTURE (ISS-013): X {ST3['x_m'][0]:.2f}-{ST3['x_m'][1]:.2f} m, {ST3['propellant_kg']/1e6:,.1f} kt propellant + "
@@ -1722,17 +1822,21 @@ CAMS = {
     'CAM_VTX_30_V4_SIDE_TRUE_SCALE': (camera('CAM_VTX_30_V4_SIDE_TRUE_SCALE', (37, -6000, 0), (37, 0, 0), ortho=830), ['VERTEX_V4']),
     'CAM_VTX_31_SPINE_STRETCH': (camera('CAM_VTX_31_SPINE_STRETCH', (270, -3000, 0), (270, 0, 0), ortho=360), ['VERTEX_V4']),
     # Rev 3
-    'CAM_VTX_32_STRUCTURE_COMPARE': (camera('CAM_VTX_32_STRUCTURE_COMPARE', (285, -4000, 25), (285, 0, 25), ortho=820), ['STRUCTURE_COMPARE']),
-    'CAM_VTX_33_STRUCTURE_SECTION': (camera('CAM_VTX_33_STRUCTURE_SECTION', (-900, 0, 0), (0, 0, 0), ortho=640, up='Z'), ['STRUCTURE_SECTION']),
+    'CAM_VTX_32_STRUCTURE_COMPARE': (camera('CAM_VTX_32_STRUCTURE_COMPARE', (330, -4000, -30), (330, 0, -30), ortho=1080), ['STRUCTURE_COMPARE']),
+    'CAM_VTX_33_STRUCTURE_SECTION': (camera('CAM_VTX_33_STRUCTURE_SECTION', (-900, 60, 0), (0, 60, 0), ortho=780, up='Z'), ['STRUCTURE_SECTION']),
     'CAM_VTX_34_ROOT_JOINT_CORRIDOR': (camera('CAM_VTX_34_ROOT_JOINT_CORRIDOR', (152, -13, 7), (136, 2, 1), lens=22), ['VERTEX_V4']),
     'CAM_VTX_35_BOW_JOINT': (camera('CAM_VTX_35_BOW_JOINT', (385, -70, 40), (414, 0, 0), lens=28), ['VERTEX_V4']),
     'CAM_VTX_36_COIL_COOLING': (camera('CAM_VTX_36_COIL_COOLING', (-150, -110, 75), (-185, 0, 0), lens=30), ['VERTEX_V4']),
     'CAM_VTX_37_COIL_SECTIONS': (camera('CAM_VTX_37_COIL_SECTIONS', (-110, -3000, 38), (-110, 0, 38), ortho=200), ['COIL_ASSEMBLY_SECTION']),
-    'CAM_VTX_38_C1_SECTION_CLOSE': (camera('CAM_VTX_38_C1_SECTION_CLOSE', (-68, -3000, 22.1), (-68, 0, 22.1), ortho=12), ['COIL_ASSEMBLY_SECTION']),
-    'CAM_VTX_39_COIL_PLANT': (camera('CAM_VTX_39_COIL_PLANT', (-120, -95, 60), (-180, 0, 8), lens=32), ['VERTEX_V4']),
+    'CAM_VTX_38_C1_SECTION_CLOSE': (camera('CAM_VTX_38_C1_SECTION_CLOSE', (-68.3, -3000, 22.1), (-68.3, 0, 22.1), ortho=10), ['COIL_ASSEMBLY_SECTION']),
+    'CAM_VTX_38b_C2_SECTION_CLOSE': (camera('CAM_VTX_38b_C2_SECTION_CLOSE', (-79.6, -3000, 41.6), (-79.6, 0, 41.6), ortho=3.2), ['COIL_ASSEMBLY_SECTION']),
+    'CAM_VTX_39_COIL_PLANT': (camera('CAM_VTX_39_COIL_PLANT', (-150, -62, 38), (-187, 0, 12), lens=28), ['VERTEX_V4']),
+    'CAM_VTX_40_S5N_END': (camera('CAM_VTX_40_S5N_END', (-900, 360, 0), (0, 360, 0), ortho=84, up='Z'), ['STRUCTURE_SECTION']),
+    'CAM_VTX_41_S5N_THREEQ': (camera('CAM_VTX_41_S5N_THREEQ', (95, -120, 75), (230, 0, 0), lens=30), ['VERTEX_V4']),
 }
 CAMS['CAM_VTX_09_RADIATOR_ALTS_END'][0].rotation_euler = (math.radians(90), 0, math.radians(-90))
 CAMS['CAM_VTX_33_STRUCTURE_SECTION'][0].rotation_euler = (math.radians(90), 0, math.radians(-90))
+CAMS['CAM_VTX_40_S5N_END'][0].rotation_euler = (math.radians(90), 0, math.radians(-90))
 for name, (ob, names) in CAMS.items():
     ob['render_scenes'] = [n for n in names if n in bpy.data.scenes]
     for n in ob['render_scenes']:
@@ -1755,7 +1859,7 @@ RENDER_HIDE = {'CAM_VTX_02_TOP_COMPARE': WING+PLUME, 'CAM_VTX_01_SIDE_COMPARE': 
                'CAM_VTX_27_COIL_THREEQ': PLUME, 'CAM_VTX_28_SKIRT_COMPARE': PLUME, 'CAM_VTX_29_DOCK_SKIRT': PLUME, 'CAM_VTX_30_V4_SIDE_TRUE_SCALE': PLUME,
                'CAM_VTX_31_SPINE_STRETCH': PLUME+('_PP_TB_', '_LBL_'), 'CAM_VTX_21_SNOUT_CUTAWAY': PLUME+('_LBL_', '_XRAY_Fan', 'StandOff'), 'CAM_VTX_23_THERMAL_TOP': PLUME, 'CAM_VTX_24_RING_CALC': PLUME,
                'CAM_VTX_25_RING_GRADED': PLUME,
-               'CAM_VTX_34_ROOT_JOINT_CORRIDOR': PLUME+('_PP_TB_', '_LBL_'), 'CAM_VTX_35_BOW_JOINT': PLUME+('_PP_TB_', '_LBL_'), 'CAM_VTX_36_COIL_COOLING': PLUME+('_LBL_',), 'CAM_VTX_07b_MODULE_CUTAWAY': ('_LBL_',), 'CAM_VTX_08_BRAKING_EXPOSURE': ('_Exhaust_', '_KeepOut_Plume')}
+               'CAM_VTX_34_ROOT_JOINT_CORRIDOR': PLUME+('_PP_TB_', '_LBL_'), 'CAM_VTX_35_BOW_JOINT': PLUME+('_PP_TB_', '_LBL_'), 'CAM_VTX_36_COIL_COOLING': PLUME+('_LBL_',), 'CAM_VTX_39_COIL_PLANT': PLUME+('_LBL_', '_XRAY_Fan', 'StandOff', 'Wing_'), 'CAM_VTX_41_S5N_THREEQ': PLUME+('_PP_TB_', '_LBL_'), 'CAM_VTX_07b_MODULE_CUTAWAY': ('_LBL_',), 'CAM_VTX_08_BRAKING_EXPOSURE': ('_Exhaust_', '_KeepOut_Plume')}
 
 # ----------------------------------------------------------------------------------------------------------------------------------
 # checks, texts

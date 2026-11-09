@@ -900,5 +900,114 @@
    "face_CFC_kg_m2": 57.0,
    "backplate_Mo_50pct_kg_m2": 204.0
   }
+ },
+ "structure": {
+  "basis": "Euler-Bernoulli cantilever from J1, distributed tank mass (0.2357 factor), bow tip mass; f1 target and every member choice PROTOTYPE; beam model only, not FE (T00 runs the beam-FE check)",
+  "f_target_Hz": 0.2,
+  "length_m": 275.4,
+  "forward_mass_full_kg": 27463923.152760547,
+  "bow_kg": 300000.0,
+  "base_S2_kg": 992309.8567773319,
+  "inter_tank_gaps_deg": [
+   38.55,
+   86.05,
+   116.35,
+   152.8,
+   200.88,
+   242.8,
+   276.02,
+   315.0,
+   351.05
+  ],
+  "cases": {
+   "S5_REV3_AS_DRAWN": {
+    "name": "S5_REV3_AS_DRAWN",
+    "longeron_r_m": 34.8,
+    "tube_r_m": 0.2873,
+    "area_m2_each": 0.025931111028182467,
+    "structure_kg_rev3_reported": 1176982.9271440005,
+    "f1_full_Hz": 0.07721533358384054,
+    "B2_shadow_margin_m": 0.9127000000000028,
+    "bug": "rev3.py options(): dA was the per-member area but its mass counted one member, and area_each divided it by n again; the stiffness add was 6x too small"
+   },
+   "S5_REV3_CORRECTED": {
+    "name": "S5_REV3_CORRECTED",
+    "note": "six longerons at r 34.8 m outside the tanks (Rev 3 layout), stiffness area corrected",
+    "longeron_az_deg": [
+     0.0,
+     60.0,
+     120.0,
+     180.0,
+     240.0,
+     300.0
+    ],
+    "longeron_r_m": 34.8,
+    "members": 6,
+    "kmin_sum_cos2": 2.9999999999999996,
+    "area_m2_each": 0.1805226855318057,
+    "tube_r_m": 0.7580379639913908,
+    "t_over_r": 0.05,
+    "wall_m": 0.037901898199569545,
+    "longerons_kg": 725156.8116273693,
+    "structure_kg": 1717466.6684047012,
+    "f1_full_Hz": 0.2,
+    "min_tank_clearance_m": 0.23363362681441102,
+    "B2_shadow_margin_m": 0.4419620360086114
+   },
+   "S5_N9_NESTED": {
+    "name": "S5_N9_NESTED",
+    "note": "nine longerons nested in the nine inter-tank gaps at r 31 m (t/r 0.1); tanks leave radially between them",
+    "longeron_az_deg": [
+     38.55,
+     86.05,
+     116.35,
+     152.8,
+     200.88,
+     242.8,
+     276.02,
+     315.0,
+     351.05
+    ],
+    "longeron_r_m": 31.0,
+    "members": 9,
+    "kmin_sum_cos2": 4.078202583233254,
+    "area_m2_each": 0.168961612170378,
+    "tube_r_m": 0.5185660591447477,
+    "t_over_r": 0.1,
+    "wall_m": 0.051856605914474774,
+    "longerons_kg": 1018074.240430888,
+    "structure_kg": 2010384.09720822,
+    "f1_full_Hz": 0.19999999999999996,
+    "min_tank_clearance_m": 1.1194371339405045,
+    "B2_shadow_margin_m": 4.481433940855251,
+    "sens_bow_100t": 1981243.219260268,
+    "sens_bow_1000t": 2112377.1700260504
+   },
+   "S5_N6_NESTED": {
+    "name": "S5_N6_NESTED",
+    "note": "six nested longerons, most isotropic six-gap set",
+    "longeron_az_deg": [
+     38.6,
+     86.1,
+     152.8,
+     242.8,
+     315.0,
+     351.0
+    ],
+    "longeron_r_m": 31.0,
+    "members": 6,
+    "kmin_sum_cos2": 2.865522982037079,
+    "area_m2_each": 0.24004349695474222,
+    "tube_r_m": 0.6180947265380247,
+    "t_over_r": 0.1,
+    "wall_m": 0.06180947265380247,
+    "longerons_kg": 964250.9825886469,
+    "structure_kg": 1956560.8393659787,
+    "f1_full_Hz": 0.2,
+    "min_tank_clearance_m": 0.9965235296822365,
+    "B2_shadow_margin_m": 4.381905273461975
+   }
+  },
+  "preferred": "S5_N9_NESTED"
  }
 }

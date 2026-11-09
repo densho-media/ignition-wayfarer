@@ -171,9 +171,78 @@ def coil_plant(ca):
     return out
 
 
+# ----------------------------------------------------------------------------------------------------------------------------------
+# S5 stretch structure, Revision 4 geometry: Rev 3 stiffness-area bug corrected, longerons nested in the inter-tank gaps (ISS-013, ISS-018)
+# ----------------------------------------------------------------------------------------------------------------------------------
+E_CFRP, RHO_CFRP = 1.2e11, 1700.0        # FDP-1 structure assumptions (rev3.py)
+LACING, JOINTS = 0.30, 1.10
+B2_SHADOW_R = 36.0                       # rev2.json dust B2 shadow radius
+
+
+def structure_r4():
+    r3 = json.loads((HERE/'rev3.json').read_text())
+    st = r3['stretch']; L = st['length_m']; x0 = st['x_m'][0]
+    f_t = r3['f_target_Hz']
+    R = screen.solve('V4'); ves = R['tanks']['options']['T-B']['vessels']
+    bay0 = [v for v in ves if abs(v['x0']-ves[0]['x0']) < 1.0]
+    m_full = st['propellant_kg']+st['tank_kg']; m_bow = st['bow_kg_PROTOTYPE']
+    s2 = r3['options_operational']['S2_CANON_SECTORS']; s3 = r3['options_operational']['S3_OUTER_CAGE']
+    s5 = r3['options_operational']['S5_SECTORS_PLUS_OUTER_STIFFENERS']
+    EI_base = s2['EI_N_m2']                                           # spine + keels; longerons added per case
+    m_base = s5['structure_kg']-6*s3['longeron']['kg_per_m']*L*(1+LACING)*JOINTS   # S5 without its longerons
+
+    def f1(EI, m_struct):
+        return math.sqrt(3*EI/(L**3*(m_bow+0.2357*(m_full+m_struct))))/(2*math.pi)
+
+    def clearance(phi, r, rt):
+        px, py = r*math.cos(math.radians(phi)), r*math.sin(math.radians(phi))
+        return min(math.hypot(px-v['y'], py-v['z'])-v['a_env'] for v in bay0)-rt
+
+    def case(name, azs, r, t_over_r, note):
+        # solve the equal member area that gives f1 = f_t with the member mass included (fixed point)
+        A = 0.05
+        for _ in range(60):
+            Iyy = sum(math.cos(math.radians(a))**2 for a in azs); Izz = sum(math.sin(math.radians(a))**2 for a in azs)
+            Iyz = sum(math.sin(math.radians(a))*math.cos(math.radians(a)) for a in azs)
+            kmin = (Iyy+Izz)/2-math.hypot((Iyy-Izz)/2, Iyz)
+            m_l = len(azs)*A*L*RHO_CFRP*(1+LACING)*JOINTS
+            need = (2*math.pi*f_t)**2*L**3*(m_bow+0.2357*(m_full+m_base+m_l))/3
+            A = max((need-EI_base)/(E_CFRP*kmin*r*r), 0.0)
+        rt = math.sqrt(A/(2*math.pi*t_over_r))
+        m_l = len(azs)*A*L*RHO_CFRP*(1+LACING)*JOINTS
+        return {'name': name, 'note': note, 'longeron_az_deg': list(azs), 'longeron_r_m': r, 'members': len(azs), 'kmin_sum_cos2': kmin,
+                'area_m2_each': A, 'tube_r_m': rt, 't_over_r': t_over_r, 'wall_m': rt*t_over_r, 'longerons_kg': m_l, 'structure_kg': m_base+m_l,
+                'f1_full_Hz': f1(EI_base+E_CFRP*kmin*A*r*r, m_base+m_l),
+                'min_tank_clearance_m': min(clearance(a, r, rt) for a in azs), 'B2_shadow_margin_m': B2_SHADOW_R-(r+rt)}
+    # Rev 3 as drawn: six r 0.29 m tubes at r 34.8 m (its stiffness area was divided by the member count twice)
+    a3 = [60.0*j for j in range(6)]
+    A3 = 2*math.pi*0.05*0.2873**2
+    m3 = 6*A3*L*RHO_CFRP*(1+LACING)*JOINTS
+    rev3_drawn = {'name': 'S5_REV3_AS_DRAWN', 'longeron_r_m': 34.8, 'tube_r_m': 0.2873, 'area_m2_each': A3, 'structure_kg_rev3_reported': s5.get('structure_stiff_kg'),
+                  'f1_full_Hz': f1(EI_base+E_CFRP*3.0*A3*34.8**2, m_base+m3), 'B2_shadow_margin_m': B2_SHADOW_R-34.8-0.2873,
+                  'bug': 'rev3.py options(): dA was the per-member area but its mass counted one member, and area_each divided it by n again; '
+                         'the stiffness add was 6x too small'}
+    gaps = sorted({round(((a+b)/2) % 360, 2) for a, b in zip(sorted(v['azimuth_deg'] for v in bay0 if v['R'] > 20),
+                                                            sorted(v['azimuth_deg'] for v in bay0 if v['R'] > 20)[1:]+[sorted(v['azimuth_deg'] for v in bay0 if v['R'] > 20)[0]+360])})
+    out = {'basis': 'Euler-Bernoulli cantilever from J1, distributed tank mass (0.2357 factor), bow tip mass; f1 target and every member choice PROTOTYPE; '
+                    'beam model only, not FE (T00 runs the beam-FE check)',
+           'f_target_Hz': f_t, 'length_m': L, 'forward_mass_full_kg': m_full, 'bow_kg': m_bow, 'base_S2_kg': m_base, 'inter_tank_gaps_deg': gaps,
+           'cases': {'S5_REV3_AS_DRAWN': rev3_drawn,
+                     'S5_REV3_CORRECTED': case('S5_REV3_CORRECTED', a3, 34.8, 0.05, 'six longerons at r 34.8 m outside the tanks (Rev 3 layout), stiffness area corrected'),
+                     'S5_N9_NESTED': case('S5_N9_NESTED', gaps, 31.0, 0.10, 'nine longerons nested in the nine inter-tank gaps at r 31 m (t/r 0.1); tanks leave radially between them'),
+                     'S5_N6_NESTED': case('S5_N6_NESTED', [38.6, 86.1, 152.8, 242.8, 315.0, 351.0], 31.0, 0.10, 'six nested longerons, most isotropic six-gap set')},
+           'preferred': 'S5_N9_NESTED'}
+    for k, b in ((100e3, 'bow_100t'), (1000e3, 'bow_1000t')):
+        mb = m_bow; m_bow = k
+        out['cases']['S5_N9_NESTED']['sens_'+b] = case('x', gaps, 31.0, 0.10, '')['structure_kg']
+        m_bow = mb
+    return out
+
+
 def main():
     out = {'revision': 4, 'coil_assembly': coil_assemblies()}
     out['coil_plant'] = coil_plant(out['coil_assembly'])
+    out['structure'] = structure_r4()
     hp = HERE/'t00_handoff_rev4.json'
     if hp.exists():
         out['t00'] = json.loads(hp.read_text())
@@ -189,5 +258,12 @@ def main():
               f" armour {v['armour_kg_PROTOTYPE_areal']/1e3:5.0f} t  total {v['plant_plus_armour_kg']/1e3:6.0f} t; lines r " + ', '.join(f"{l['line_r_m']:.2f}" for l in v['lines']))
 
 
+
+def report_structure(st):
+    for k, c in st['cases'].items():
+        print(k, {kk: (round(v, 3) if isinstance(v, float) else v) for kk, v in c.items() if kk not in ('note', 'bug', 'longeron_az_deg')})
+
+
 if __name__ == '__main__':
     main()
+    report_structure(json.loads((HERE/'rev4.json').read_text())['structure'])

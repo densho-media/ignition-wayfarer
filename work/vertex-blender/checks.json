@@ -222,9 +222,9 @@
     "COIL_PLANT_LI",
     "COIL_SUP_R4",
     "DUST_GUARDS_R4",
-    "STRUCT_S2",
-    "STRUCT_S3",
+    "STRUCT_S5N",
     "CORR_K2",
+    "ACCESS_R4",
     "DOCK_ROUTES",
     "B2_DOCK_CLEAR"
    ],
@@ -250,55 +250,19 @@
   "objects": 6249,
   "identical_to_append": true
  },
- "rev4_raycast": {
-  "shares_of_4pi": {
-   "nozzle_loops": 0.01992,
-   "C1_armour_face": 0.01507,
-   "nozzle_struts": 0.0106185,
-   "C2_armour_face": 0.0082155,
-   "coil_struts_and_ties": 0.004013,
-   "wing": 0.002976,
-   "shield": 0.002897,
-   "loop_dust_guards_r4": 0.000697,
-   "other:Cryo": 0.000485,
-   "launcher": 6.45e-05,
-   "other:Target": 5.65e-05,
-   "other:Burn": 3.7e-05,
-   "other:Beam": 2.2e-05,
-   "C2_behind_armour": 1.55e-05,
-   "other:Fast": 3.5e-06
-  },
-  "rev3_chosen_shares_of_4pi": {
-   "loop_bumpers_rev2": 0.076004,
-   "closure_winding_drawn_by_nozzle": 0.036142,
-   "other:C2": 0.022074,
-   "other:C1": 0.011933,
-   "nozzle_struts": 0.009901,
-   "loop_guard_rings_rev2": 0.0057035,
-   "coil_struts_and_ties": 0.003473,
-   "shield": 0.0028885,
-   "wing": 0.002366,
-   "other:Cryo": 0.0004195,
-   "launcher": 6.45e-05,
-   "other:Target": 5.65e-05,
-   "other:Beam": 2.2e-05,
-   "other:Fast": 3.5e-06
-  },
-  "n": 2000000
- },
  "objects": {
-  "var_objects": 2898,
+  "var_objects": 3589,
   "missing_properties": [],
   "by_status": {
-   "CONCEPTUAL_ILLUSTRATION": 478,
+   "CONCEPTUAL_ILLUSTRATION": 480,
    "ENGINEERING_SUPPORTED": 346,
-   "PARAMETRIC_PLACEHOLDER": 854,
-   "PROTOTYPE": 1220
+   "PARAMETRIC_PLACEHOLDER": 842,
+   "PROTOTYPE": 1921
   },
   "by_generation": {
-   "ALL": 75,
+   "ALL": 77,
    "V0": 439,
-   "V4": 2375,
+   "V4": 3064,
    "V5": 9
   }
  },
@@ -314,9 +278,9 @@
      "COIL_PLANT_LI",
      "COIL_SUP_R4",
      "DUST_GUARDS_R4",
-     "STRUCT_S2",
-     "STRUCT_S3",
+     "STRUCT_S5N",
      "CORR_K2",
+     "ACCESS_R4",
      "DOCK_ROUTES",
      "B2_DOCK_CLEAR"
     ],
