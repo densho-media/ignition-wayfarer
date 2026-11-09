@@ -1,0 +1,221 @@
+# T04 registry proposal (for T00 at Phase 4). Nothing here is in the registry; provisional IDs only (T04-NEW-n, S-T04-<NAME>, D-T04-n).
+# Every number cites studies/ignition/results/ignition.json (case:<key>) or a source below. A recommendation is not an owner approval.
+
+# ===================================================================================================================================
+# New sources
+# ===================================================================================================================================
+
+[source.S-T04-ATZENI-2004]
+title = "The Physics of Inertial Fusion (burn parameter H_B, ignition conditions, burn fraction), as tabulated in an arXiv lecture"
+authors = "S. Atzeni, J. Meyer-ter-Vehn (Oxford, 2004); table reproduced in arXiv:2410.18054"
+date = "2004"
+locator = "ISBN 9780198562641; arXiv:2410.18054"
+kind = "book"
+finding = "Burn fraction b = rhoR / (rhoR + H_B), H_B = 8 m_i c_s / <sv>; minimum H_B 7.3 (D-T), 52 (D-D), 51 (D-3He), 73 (p-11B) g/cm2; isochoric D-T ignition needs T > 8 keV and rhoR > 0.25 g/cm2."
+limits = "Fit valid for modest burn fractions; the table is a secondary reproduction; arxiv.org could not be opened from the session."
+relation = "Check of the calculator's H_B (44.2 g/cm2 at 100 keV, 13 % below the published D-3He minimum) and validation of the T04 hot-spot model."
+verification = "SECONDARY_VERIFIED"
+checked = "2026-11-09 web search: H_B table values and formula quoted from arXiv:2410.18054 search extract; D-T isochoric condition from a fast-ignition paper citing Atzeni."
+
+[source.S-T04-ATZENI-1999]
+title = "Inertial fusion fast ignitor: igniting pulse parameter window vs the penetration depth of the heating particles and the density of the precompressed fuel"
+authors = "S. Atzeni"
+date = "1999"
+locator = "Physics of Plasmas 6, 3316-3326 (1999)"
+kind = "journal"
+finding = "Optimal igniting-beam energy scales as rho^-1.85; optimum hot-spot areal density about 0.6 g/cm2 at about 6.5e19 W/cm2 (D-T)."
+limits = "D-T only; the absolute energy at a reference density was not confirmed in the search extract."
+relation = "Calibration of the T04 0-D hot-spot model (factor 3.5 in rhoR for burn dynamics) and the fast-ignition energy scale."
+verification = "SECONDARY_VERIFIED"
+checked = "2026-11-09 web search: abstract (iris.uniroma1.it 11573/104598) gives the exponent and the 0.6 g/cm2 optimum."
+
+[source.S-T04-ATZENI-CIAMPI-1997]
+title = "Burn performance of fast ignited, tritium-poor ICF fuels"
+authors = "S. Atzeni, M. L. Ciampi"
+date = "1997"
+locator = "Nuclear Fusion 37 (1997) 1665-1677, doi:10.1088/0029-5515/37/12/I01"
+kind = "journal"
+finding = "2-D simulations of compressed nearly pure deuterium with an off-centre D-T seed, fast ignited by an external beam; compared with equimolar D-T."
+limits = "Deuterium main fuel, not D-3He; numerical results not seen."
+relation = "Ancestry of the fast-ignited D-T booster core (T04-NEW-3)."
+verification = "SECONDARY_VERIFIED"
+checked = "2026-11-09 web search: bibliographic record and abstract; numbers not seen."
+
+[source.S-T04-NAKAO-1992]
+title = "Burn characteristics of compressed fuel pellets for D-3He inertial fusion; follow-up: Numerical simulation of implosion and burn of DT-ignitor/D3He fuel pellet"
+authors = "Y. Nakao et al. (Kyushu University); H. Nakashima et al. (1993); T. Honda et al. (1991)"
+date = "1992"
+locator = "Fusion Technology 22 (1992) 66-72 (OSTI 7107437); Laser and Particle Beams (1993); Fusion Technology 20 (1991) 819-823"
+kind = "journal"
+finding = "D-3He pellets need a small D-T ignitor; fuel gain about 500 at D-T rhoR 3 and total rhoR 14 g/cm2, 5 keV spark, compressed to 5,000x liquid density; driver about 30 MJ at 10 % coupling. Follow-up implosion simulation: the D-T ignitor pre-ignites before the D-3He is compressed, pellet gain only about 3. Later fast-ignition work: gains about 100 below 10 MJ."
+limits = "Abstract-level; spin polarisation is invoked to relax requirements; the pre-ignition result undercuts the 500."
+relation = "The only published D-3He ICF gain numbers found; anchor for the D-T core size (rhoR about 3 g/cm2) and for the pre-ignition risk."
+verification = "SECONDARY_VERIFIED"
+checked = "2026-11-09 web search: OSTI and ANS abstract records and a citing 2007 Kyushu paper; full texts not opened."
+
+[source.S-T04-MAGLIF-BR]
+title = "Magnetised fuel ignition threshold B R (Basko, Kemp, Meyer-ter-Vehn 2000) and MagLIF B R measurements"
+authors = "M. M. Basko et al. (2000); Sandia MagLIF team; AMPS paper arXiv:2504.10680"
+date = "2000-2025"
+locator = "Nuclear Fusion 40 (2000) 59; arXiv:2504.10680; Sandia publication 'Data-driven assessment of magnetic charged particle confinement parameter' (2023)"
+kind = "journal"
+finding = "Magnetisation lowers the needed fuel rhoR only above B R about 0.6 MG cm (D-T alphas); benefit saturates above about 1.0 MG cm; MagLIF on Z has reached about 0.4-0.5 MG cm."
+limits = "D-T alphas; the D-3He proton values in T04 are scaled by Larmor radius (EXTRAPOLATION)."
+relation = "Sets the magnetisation requirement of VTX-01A for 14.7 MeV protons: about 1.2 MG cm threshold, 2.0 saturation."
+verification = "SECONDARY_VERIFIED"
+checked = "2026-11-09 web search: consistent across a Sandia slide set, an APS abstract and arXiv:2504.10680 (extracts)."
+
+[source.S-T04-POLARISED]
+title = "Fusion reactor plasmas with polarised nuclei"
+authors = "R. M. Kulsrud, H. P. Furth, E. J. Valeo, M. Goldhaber"
+date = "1982"
+locator = "Physical Review Letters 49, 1248 (1982)"
+kind = "journal"
+finding = "Spin-polarised D-T and D-3He raise the fusion cross-section by up to 1.5x; polarisation may survive in a burning plasma."
+limits = "Survival of polarisation through compression to thousands of g/cm3 is undemonstrated; polarised He-3 at target scale not shown."
+relation = "Basis of T04-NEW-2 (H_B / 1.5)."
+verification = "UNVERIFIED"
+checked = "2026-11-09 not searched; carried from the author's knowledge; the Honda/Nakao abstracts mention spin polarisation as a relief."
+
+# ===================================================================================================================================
+# New technology records (provisional)
+# ===================================================================================================================================
+
+[[technology]]
+id = "T04-NEW-1"
+name = "Compression-consistent D-3He target (lower density, larger pulse)"
+kind = "technology"
+workstream = "VTX-01"
+purpose = "A fuel-only target whose gain does not exceed what its own compression energy allows."
+principle = "Compressing fuel to rho costs at least the Fermi-degenerate energy alpha eps_F(rho) (D-3He 132 MJ/g at 3,000 g/cm3, 64 at 1,000). With coupling eta_c, gain G <= eta_c b eps / (alpha eps_F + ignitor). The ceiling rises as rho^-2/3 while the pulse yield at fixed rhoR grows as rho^-2."
+ancestry = ["S-T04-ATZENI-2004", "S-FDP1"]
+credibility = "PLAUSIBLE_FUTURE"
+physics_verdict = "PLAUSIBLE_FUTURE"
+research_status = "PROPOSED"
+canon_status = "NON_CANON"
+prior_finding = "T04 2026-11-09: FDP-1's optimistic tier (3,000 g/cm3, gain 3,000, 27 MJ driver) needs eta_c / alpha = 1.68, i.e. more energy in the cold fuel than the driver delivers. The V1 cliff of 705 needs eta_c/alpha 0.39 at 3,000 g/cm3, 0.19 at 1,000, 0.12 at 500 g/cm3."
+claims = [
+  { quantity = "fermi_energy_DHe3_3000", value = 132.0, unit = "MJ/g", basis = "MODEL", source = "case:compression" },
+  { quantity = "gain_ceiling_per_eta_3000", value = 1787.0, unit = "1", basis = "MODEL", source = "case:compression" },
+  { quantity = "eta_over_alpha_for_FDP1_gain", value = 1.68, unit = "1", basis = "MODEL", source = "case:compression" },
+  { quantity = "eta_over_alpha_for_V1_cliff_1000", value = 0.19, unit = "1", basis = "MODEL", source = "case:compression" },
+]
+
+[[technology]]
+id = "T04-NEW-2"
+name = "Spin-polarised D-3He fuel"
+kind = "technology"
+workstream = "VTX-01"
+purpose = "Raise D-3He reactivity up to 1.5x, cutting H_B and the rhoR for a given burn fraction."
+principle = "Aligned nuclear spins raise the D-3He cross-section (spin-5/2... statistical weight); H_B scales as 1/<sv>."
+ancestry = ["S-T04-POLARISED", "S-T04-NAKAO-1992"]
+credibility = "PLAUSIBLE_FUTURE"
+physics_verdict = "PLAUSIBLE_FUTURE"
+research_status = "PROPOSED"
+canon_status = "NON_CANON"
+prior_finding = "T04: H_B 44.2 -> 29.5 g/cm2; b at 90 g/cm2 0.672 -> 0.754; rhoR for the mission ve 90 -> 60 g/cm2 (fuel mass x0.30). V1 gain cliff and departure in results/IGNITION.md section 2."
+claims = [{ quantity = "reactivity_gain", value = 1.5, unit = "1", basis = "PUBLISHED", source = "S-T04-POLARISED" }]
+
+[[technology]]
+id = "T04-NEW-3"
+name = "Fast-ignited D-T booster core in D-3He fuel"
+kind = "technology"
+workstream = "VTX-01"
+purpose = "Light the D-3He burn from a small D-T core ignited by a separate fast beam after peak compression (avoids pre-ignition)."
+principle = "D-T ignites at 8-12 keV and 0.25-0.6 g/cm2; a D-T core of rhoR about 2-3 g/cm2 releases 0.3-1.3 MJ, matching the 1.1 MJ calibrated D-3He hot spot at 3,000 g/cm3."
+ancestry = ["S-T04-NAKAO-1992", "S-T04-ATZENI-CIAMPI-1997", "S-T04-ATZENI-1999"]
+credibility = "PLAUSIBLE_FUTURE"
+physics_verdict = "PLAUSIBLE_FUTURE"
+research_status = "PROPOSED"
+canon_status = "NON_CANON"
+prior_finding = "T04: energy and neutron cost negligible (D-T share 3e-6 to 2e-5 of yield; escaping 14.1 MeV share below 2e-7 of fusion, below the D-D 5.5e-6); the real cost is tritium: 43-144 kg loaded per mission (10-43 kg burned) at rhoR_DT 2-3 g/cm2, 27 % decay over the burn."
+claims = [
+  { quantity = "tritium_loaded_mission_rhoR3", value = 144.0, unit = "kg", basis = "MODEL", source = "case:spark" },
+  { quantity = "n14_escaping_share_rhoR3", value = 1.6e-7, unit = "1", basis = "MODEL", source = "case:spark" },
+]
+
+[[technology]]
+id = "T04-NEW-4"
+name = "One-target-in-sky injection (fast or shuttered target delivery)"
+kind = "technology"
+workstream = "VTX-01"
+purpose = "Keep the next target out of the previous pulse: at FDP-1's 400 m/s about 23 targets are in flight in the burn's sky and the next is 1.9 m from the burn."
+principle = "Crossing the 43 m X-ray stand-off within one pulse period needs v >= d f (9.2 km/s at 212 Hz, about 4.6 km/s at 106 Hz), or a sacrificial aft-facing shield on each target, or a target launched only after the pulse."
+ancestry = ["S-GA-TARGET"]
+credibility = "PLAUSIBLE_FUTURE"
+physics_verdict = "PLAUSIBLE_FUTURE"
+research_status = "PROPOSED"
+canon_status = "NON_CANON"
+prior_finding = "T04: at 400 m/s the next target receives about 5.5 kJ of escaping X-rays (incident) and up to 0.47 MJ of plasma; its liquid He-3 boils with 1.8 J. Owner of the hardware: T01 (VTX-01C interface)."
+claims = [{ quantity = "v_inj_one_in_sky_V0", value = 9.17, unit = "km/s", basis = "MODEL", source = "case:in_flight" }]
+
+[[technology]]
+id = "T04-NEW-5"
+name = "Two-stage (D-T primary driven) D-3He target"
+kind = "technology"
+workstream = "VTX-01"
+purpose = "Supply the secondary's compression energy from a D-T primary instead of the driver, removing the compression ceiling."
+principle = "Energy ledger only: primary yield = secondary compression energy / stage coupling."
+ancestry = ["S-T04-ATZENI-2004"]
+credibility = "PLAUSIBLE_FUTURE"
+physics_verdict = "POSSIBLE_NOT_PRACTICAL"
+research_status = "CONTRADICTED"
+canon_status = "NON_CANON"
+prior_finding = "T04 negative result: overall gain 1,800-10,700 in the ledger, but 26-52 t of tritium per mission and 0.2-0.45 % of fusion as 14.1 MeV neutrons outside the main fuel (escaping share x2-4 the current X-ray share), plus an unmodelled case mass that dilutes ve."
+claims = [{ quantity = "tritium_mission_min", value = 25.8, unit = "t", basis = "MODEL", source = "case:staged" }]
+
+# ===================================================================================================================================
+# Revisions to existing records (T00 applies; old findings stay visible)
+# ===================================================================================================================================
+
+[revise.VTX-01]
+add_claims = [
+  { quantity = "gain_ceiling_FDP1_density_per_eta", value = 1787.0, unit = "1", basis = "MODEL", source = "case:compression" },
+  { quantity = "DHe3_hotspot_rhoR_min_0D", value = 1.97, unit = "g/cm2", basis = "MODEL", source = "case:hotspot" },
+  { quantity = "DHe3_ideal_ignition_T_min", value = 33.0, unit = "keV", basis = "MODEL", source = "case:hotspot" },
+]
+uncertainties_append = "The FDP-1 optimistic gain (3,000 at 3,000 g/cm3) exceeds the compression-energy ceiling (1,787 x eta_c/alpha); the burn-fraction model H_B is 13 % below the published D-3He minimum."
+breakthrough_replace = "D-3He ignition (hot spot about 50 keV, about 7 g/cm2) at target gain about 600-700 with driver-to-fuel coupling eta_c/alpha of 0.12-0.4 (density 500-3,000 g/cm3) at 3-100 Hz for years; or a labelled Level C compression aid (D-T04-1)."
+
+[revise.VTX-01A]
+add_claims = [
+  { quantity = "BR_threshold_DHe3_protons", value = 1.2, unit = "MG cm", basis = "EXTRAPOLATION", source = "S-T04-MAGLIF-BR" },
+  { quantity = "BR_demonstrated_MagLIF", value = 0.45, unit = "MG cm", basis = "PUBLISHED", source = "S-T04-MAGLIF-BR" },
+]
+prior_finding_append = "T04: magnetisation removes the 7 g/cm2 hot-spot rhoR requirement in the 0-D model only when B R exceeds about 1.2-2.0 MG cm (3-5x MagLIF); it does not lower the 90 g/cm2 burn rhoR or the compression ceiling."
+
+[revise.VTX-01D]
+prior_finding_append = "T04: as a core of rhoR 2-3 g/cm2 the spark costs almost no energy or escaping neutrons (escaping 14.1 MeV below 2e-7 of fusion); the cost is 43-144 kg of tritium per mission and pre-ignition risk (Nakashima 1993: gain 3). The Atlas statement that a spark raises shield mass is not borne out at fuel rhoR 90; it holds only for an outside primary (T04-NEW-5)."
+questions_c_replace = "Yes, as the most credible ignition route, if the mission can carry about 0.1 t of tritium; no tamper needed for its neutrons."
+
+[revise.VTX-04A]
+prior_finding_append = "T04 tamper-inertia case (k = share of thin-shell inertia that confines): k = 1 gives +1.2 % ve at rhoR 90 (mu 0.03), +10.7 % at rhoR 1 (mu 0.18); k = 0.5: +0.3 % / +3.0 %. The k = 0 liner table is reproduced exactly. The burnup effect is real but small at the mission rhoR."
+
+[revise.VTX-04B]
+prior_finding_append = "T04 (D-04): no mission phase needs it. Escape spirals at 0.0069 g take 0.4-2.1 days; the low gear at mu 3 halves that. The idle vessels cost 667 t at V1 departure."
+
+# ===================================================================================================================================
+# Decisions
+# ===================================================================================================================================
+
+[challenge.D-02]
+proposal = "Amend, do not reverse: 'No tamper raises ve by more than about 1 % at the mission rhoR, even with tamper inertia (T04 case k <= 1); tampers help by up to 10 % only at rhoR below 10 g/cm2, far below the mission ve.'"
+evidence = "results/ignition.json liner.tables (k = 0, 0.5, 1)"
+
+[[decision]]
+id = "D-T04-1"
+type = "OWNER_APPROVAL_CANON"
+state = "OPEN"
+technologies = ["VTX-01", "T04-NEW-1"]
+question = "Keep FDP-1's dense 19 t pulses at gain above about 900, which needs an explicit Level C compression aid, or accept a compression-consistent target (lower density, larger, slower pulses, or a lower gain)?"
+options = "A: accept physics-consistent targets: gain capped by eta_c b eps / (alpha eps_F); T00 re-runs V1 on the frontier (results/IGNITION.md section 4). B: declare a Level C 'compression aid' (for example Fiji flux compression doing the work) with the property it must have: deliver about 0.4-1.7 x the driver energy as fuel internal energy each pulse; this is a new Fiji property and falls under D-07."
+recommendation = "A."
+who = "ApeDevil"
+
+[[decision]]
+id = "D-T04-2"
+type = "TECHNICAL_CONCLUSION"
+state = "PROPOSED"
+technologies = ["VTX-04B"]
+question = "D-04 input: does any mission phase need the hydrogen low gear?"
+conclusion = "No. Recommendation only; D-04 remains the owner's."
