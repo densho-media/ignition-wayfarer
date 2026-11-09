@@ -1,0 +1,395 @@
+# T02 registry proposal (dust, radiation and braking protection). Research, not canon; T00 decides what enters registry/*.toml.
+# Provisional IDs: T02-NEW-n (technologies), S-T02-<NAME> (sources), D-T02-n (decisions). Fields follow registry/technologies.toml.
+# Every number cites a T02 script result (case:<file>:<key>) or a source. Nothing here is an owner decision.
+
+# =====================================================================================================================================
+# New technologies
+# =====================================================================================================================================
+
+[[technology]]
+id = "T02-NEW-1"
+name = "Shadow-cone skirt (engine-first braking screen)"
+kind = "technology"
+workstream = "VTX-08"
+purpose = "Screen the tanks, habitat rings and the back of the forward shield during engine-first braking without entering the burn's sky."
+principle = "A thin conical sheet whose apex is the burn point and whose half-angle is the hardware cone: it contains the burn's rays (edge-on), lies in the shadow shield's umbra, and meets every grain moving forward along the ship at a grazing angle equal to the half-angle, 100-300 m ahead of what it protects, so each grain becomes a spreading plasma before it arrives."
+ancestry = ["S-CANON", "S-FDP1", "S-HOANG-2017"]
+ancestry_note = "Canon shadow-cone rule (crew and hardware cones) and the FDP-1 shadow shield; Whipple-bumper principle without the BLEs."
+limitations = "Only works with the stream within ~1 deg of the axis (exposure 2,281 m2 at 0.4 deg, 4,060 at 2.29 deg, 9,194 at 5 deg); finite-source and rim-scatter terms unknown; structure and deployment not designed; cannot cover the bore-visible engine hardware."
+breakthrough = "None needed; engineering only."
+depends_on = ["VTX-08A"]
+materials = ["MAT-CC"]
+purposes = ["P14"]
+inputs = "Sheet mass 22-90 t (V1, 0.5-2 kg/m2 over 44,900 m2); attitude hold within ~1 deg during braking."
+outputs = "V1 engine-first exposure 12,282 -> 2,281 m2 at 0.4 deg; NOMINAL events beyond 2 m bumpers 2,290 -> 540 per mission."
+penalties = "Mass; maintenance of holed area (< 1 % per mission NOMINAL); an attitude requirement."
+criteria = "Exposed critical area engine-first; zero added burn solid angle; holed fraction per leg."
+credibility = "PLAUSIBLE_FUTURE"
+physics_verdict = "PLAUSIBLE_FUTURE"
+research_status = "PROPOSED"
+canon_status = "NON_CANON"
+prior_finding = "T02 2026-11-09: exposure.py and impacts.py."
+evidence = ["S-T02-STUDY"]
+uncertainties = "Debris-cloud spread at 1e10 J/kg; large-grain environment (x5,000 LOW-HIGH)."
+next = ["Rim-scatter and finite-source bound with T04 hot-spot size", "Structural concept and deployment (T05 illustration only, D-10)"]
+
+[technology.stages]
+present = "Thin multi-layer Whipple bumpers flown at 7-10 km/s; conical deployable sheets (solar sails, sunshields) flown."
+advanced = "Large conical sheets on a tensioned frame, replaceable panels by drone."
+wayfarer_era = "Skirt on the hardware cone, panels changed between burns."
+
+[technology.questions]
+a = "No: the impact regime is untested, but every element (thin sheets, deployable cones) exists."
+b = "Yes: the bottleneck is the attitude hold and the unknown large-grain environment, not materials."
+c = "Yes: it removes 80 % of the braking exposure for 0.2-0.9 % of departure mass (V1); canon form 6-31 t."
+
+[technology.claims]
+skirt_surface_m2 = { value = 44878, basis = "MODEL", source = "case:impacts.json:skirt.V1" }
+skirt_mass_t = { value = "22-90", basis = "MODEL", source = "case:impacts.json:skirt.V1" }
+exposure_with_skirt_m2_0p4deg = { value = 2281, basis = "MODEL", source = "case:exposure.json:cases.V1.ENGINE_FIRST.with_skirt" }
+
+[technology.geometry]
+status = "CONCEPTUAL_ILLUSTRATION"
+representation = "HARDWARE"
+envelope = "apex (-227.54, 0, 0); half-angle 7.94 deg (V1/V2), 9.60 deg (V0); r 7.2-45 m, x -175.8 to +95.1 m (V1). Canon form: flat annulus x -98 m, r 5.7-45 m, 6,260 m2, 6-31 t."
+
+[[technology]]
+id = "T02-NEW-2"
+name = "Nozzle-loop guard rings and local bumpers"
+kind = "technology"
+workstream = "VTX-08"
+purpose = "Give the bore-visible and silhouette-outside engine hardware a stand-off bumper where no external shield fits."
+principle = "Bumper sheets on the stream-facing faces of loops, struts and feeds: up to ~2 m stand-off engine-first (burn's sky limits it), 20-25 m forward guard rings for loops 2 and 3 bow-first."
+ancestry = ["S-WHIPPLE-BLE", "S-T02-STUDY"]
+ancestry_note = "Whipple principle; BLEs not extrapolated."
+limitations = "Burn-facing bumpers add burn solid angle (+0.001-0.004 hardware share, EXTRAPOLATION); 2 m stand-off defeats only ~84 kJ (7 ug): ~540 residual events per mission NOMINAL (V1 with skirt)."
+breakthrough = "None."
+depends_on = ["VTX-08A"]
+materials = ["MAT-CC"]
+purposes = ["P14"]
+inputs = "~5-10 t of local bumpers; ~2 t per guard-ring layer."
+outputs = "Loop-face events beyond the bumper: 49,200 (bare 5 mm wall) -> 540 per mission, V1 NOMINAL with the skirt."
+penalties = "Solid angle, plume strike area."
+criteria = "Residual events per sector per leg; added solid-angle share."
+credibility = "PLAUSIBLE_FUTURE"
+physics_verdict = "POSSIBLE_NOT_PRACTICAL"
+research_status = "PROPOSED"
+canon_status = "NON_CANON"
+prior_finding = "T02 2026-11-09: impacts.py hits table."
+evidence = ["S-T02-STUDY"]
+uncertainties = "Solid-angle and plume-strike cost needs T03's field map."
+next = ["T03: plasma fraction reaching 40-60 deg from the axis forward of the burn (guard-ring zone)"]
+
+[technology.questions]
+a = "Bumpers yes; at this speed and stand-off untested."
+b = "Partly: limited by the burn's sky."
+c = "Necessary but not sufficient: pairs with T02-NEW-3."
+
+[technology.geometry]
+status = "PARAMETRIC_PLACEHOLDER"
+representation = "HARDWARE"
+envelope = "Guard rings ~0.8 m wide, 20-25 m forward of loops 2 and 3 at r 64.7 / 112.0 m; local bumpers <= 2 m on every loop, strut and feed outside r 45 m."
+
+[[technology]]
+id = "T02-NEW-3"
+name = "Segmented, replaceable nozzle-loop sectors"
+kind = "technology"
+workstream = "VTX-03"
+purpose = "Make the nozzle loops survive both grain hits and neutron fluence by replacement rather than shielding."
+principle = "Each loop built from independent sectors (six in the FDP-1 geometry) that can lose one sector without losing the nozzle and be swapped between burns."
+ancestry = ["S-T02-REBCO-N", "S-T02-STUDY"]
+ancestry_note = "REBCO fluence tolerance; the FDP-1 loop already has sector arcs (ship_geometry.json Loop_*_Sector_*)."
+limitations = "Field ripple and nozzle efficiency with a missing sector (T03); spare mass; EVA/drone handling of 37-112 m loop sectors."
+breakthrough = "None, unless a conductor tolerating ~1e20 n/cm2 is required (T02-NEW-4)."
+depends_on = ["VTX-03"]
+materials = ["MAT-REBCO"]
+purposes = ["P03"]
+inputs = "Spares for 3-31 loop-1 replacements per mission (V1, neutron fluence) plus grain-hit spares."
+outputs = "Nozzle survival over 5.69 burn-years."
+penalties = "Spare mass (UNKNOWN until T03 gives sector mass); maintenance time between burns."
+criteria = "Nozzle efficiency with n sectors lost; sector mass; replacement time."
+credibility = "PLAUSIBLE_FUTURE"
+physics_verdict = "UNRESOLVED"
+research_status = "PROPOSED"
+canon_status = "NON_CANON"
+prior_finding = "T02 2026-11-09: radiation.py (loops 3-62x REBCO tolerance); impacts.py (~540 residual hits)."
+evidence = ["S-T02-REBCO-N", "S-T02-STUDY"]
+uncertainties = "Quench/cut threshold of a REBCO sector under a ug-class hit; in-situ irradiation tolerance."
+next = ["T03: nozzle efficiency with one of six sectors lost per loop", "T05: separable sectors and a replacement path (illustration)"]
+
+[technology.questions]
+a = "No: no superconducting magnet of this size is serviced in space."
+b = "Yes, plausibly: the bottleneck is sector mass and replacement logistics."
+c = "Yes: it is the only option found that answers both the grain and the neutron problem."
+
+[technology.geometry]
+status = "PARAMETRIC_PLACEHOLDER"
+representation = "HARDWARE"
+envelope = "Six separable sectors per loop at the FDP-1 arcs; replacement path to the hull."
+
+[[technology]]
+id = "T02-NEW-4"
+name = "Neutron-tolerant high-field conductor (proposed Level C need)"
+kind = "technology"
+workstream = "VTX-03"
+purpose = "A superconductor keeping its critical current after ~1e20 n/cm2 of 2.45 MeV neutrons."
+principle = "Not known. Stated as a requirement only, never used as approved."
+ancestry = ["S-T02-REBCO-N"]
+ancestry_note = "Present REBCO degrades from ~1-4e18 n/cm2 (reactor), lower in situ."
+limitations = "Fictional unless demonstrated."
+breakthrough = "Critical current retained to 1e20 n/cm2 at 20-50 K in multi-tesla fields."
+depends_on = []
+materials = []
+purposes = ["P03"]
+inputs = "UNKNOWN"
+outputs = "Removes the loop-replacement requirement."
+penalties = "UNKNOWN"
+criteria = "Ic retention vs fluence."
+credibility = "FICTIONAL_BREAKTHROUGH"
+physics_verdict = "FICTIONAL_DEPENDENT"
+research_status = "PROPOSED"
+canon_status = "NON_CANON"
+prior_finding = "T02 2026-11-09: radiation.py."
+evidence = ["S-T02-REBCO-N"]
+uncertainties = "Whether any physical route exists."
+next = ["Owner question D-T02-4"]
+
+[technology.questions]
+a = "No."
+b = "Unknown."
+c = "Yes, if it existed."
+
+[technology.geometry]
+status = "NONE"
+representation = "NONE"
+
+# =====================================================================================================================================
+# Revisions to existing records (proposed)
+# =====================================================================================================================================
+
+[[revision]]
+id = "VTX-08D"
+fields.physics_verdict = "PLAUSIBLE_FUTURE"
+fields.research_status = "UNDER_INVESTIGATION"
+fields.prior_finding = "T02 2026-11-09: engine-first exposure 12,282 m2 (V1), 12,260 (V0), 4,015 (canon) at 0.4 deg; the shadow-cone skirt T02-NEW-1 (22-90 t) or a flat aft annulus on the canon ship (6-31 t) covers tanks, rings and the forward shield's back; bore-visible engine hardware stays exposed (~540 residual events per mission NOMINAL, V1)."
+fields.uncertainties = "Large-grain environment (LOW 3.4 / NOMINAL 540 / HIGH 17,300 residual events); debris-cloud physics at 1e10 J/kg."
+fields.next = ["Owner decision D-06 with the T02 options (D-T02-2)", "Grazing-impact and thin-sheet tests at 30-100 km/s (dust accelerator)"]
+
+[[revision]]
+id = "VTX-08B"
+fields.physics_verdict = "IMPOSSIBLE"
+fields.prior_finding = "T02 2026-11-09: detection gives 0.2-21 ms warning for 0.1-10 mm grains; vaporising or deflecting a 1 mm grain in that time needs ~0.13 MJ on a 1 mm target or ~58 km/s lateral velocity. No active clearing."
+
+[[revision]]
+id = "VTX-08C"
+fields.prior_finding = "T02 2026-11-09: D-12 confirmed (grain Larmor radius ~8e9 m at 1 mT). Ions deflect at no cost in the nozzle field, but ~75 % of LIC gas is neutral; gas power flux 0.03 W/m2, H fluence ~1e15/cm2 per leg, sputtering < 1 nm: no dedicated field needed."
+
+[[revision]]
+id = "VTX-08A"
+fields.prior_finding = "T02 2026-11-09: defeated energy grows with stand-off squared (21 kJ at 1 m, 2.1 MJ at 10 m, 210 MJ at 100 m; band x0.1-x10); mass is small (tonnes), stand-off and burn's sky limit."
+
+# =====================================================================================================================================
+# Sources
+# =====================================================================================================================================
+
+[S-T02-STUDY]
+title = "T02 dust, radiation and braking protection study"
+authors = "Wayfarer lab"
+date = "2026-11-09"
+locator = "lab/variants/vertex-drive/studies/dust/REPORT.md"
+kind = "model"
+finding = "Two-orientation exposure map, environment cases, hit counts per leg, skirt concept, loop neutron fluence."
+limits = "First-order geometry, energy-scaling damage, first-order radiation."
+relation = "Basis of T02-NEW-1..4 and the VTX-08* revisions."
+verification = "UNVERIFIED"
+checked = "2026-11-09 scripts rerun and reproduce the JSON."
+
+[S-T02-GRUN-1985]
+title = "Collisional balance of the meteoritic complex"
+authors = "E. Grün, H. A. Zook, H. Fechtig, R. H. Giese"
+date = "1985"
+locator = "Icarus 62, 244-272"
+kind = "journal"
+finding = "Interplanetary dust flux model at 1 AU, ~1e-19 kg/m3 spatial mass density."
+limits = "1 AU, ecliptic; factor ~2 accuracy; radial scaling not part of the model."
+relation = "Inner interplanetary population (environment.py)."
+verification = "TRANSCRIBED"
+checked = "2026-11-09 constants from memory reproduce 9.6e-20 kg/m3; not re-checked against the paper."
+
+[S-T02-SDC]
+title = "New Horizons Student Dust Counter: dust density to ~55-60 AU"
+authors = "E. Bernardoni et al. (2022); A. Doner et al. (2024)"
+date = "2022 / 2024"
+locator = "Planet. Sci. J. 3 (2022) 69; Astrophys. J. Lett. (2024)"
+kind = "journal"
+finding = "Number density of grains above ~0.63 um of order 35 per km3 in the Kuiper belt, flux above models and not yet falling at 55-60 AU."
+limits = "Small grains only (> ~1e-15 kg); no large-grain measurement."
+relation = "Kuiper-belt normalisation (environment.py)."
+verification = "SECONDARY_VERIFIED"
+checked = "2026-11-09 web search abstracts and press summaries."
+
+[S-T02-KRUGER-2015]
+title = "Interstellar dust in the solar system: model versus in-situ spacecraft data"
+authors = "H. Krüger, P. Strub et al."
+date = "2015"
+locator = "Astrophys. J. 812, 139"
+kind = "journal"
+finding = "Interstellar dust mass density ~2.1e-24 kg/m3 from Ulysses/Galileo."
+limits = "1e-18 to 1e-13 kg range."
+relation = "NOMINAL interstellar density."
+verification = "SECONDARY_VERIFIED"
+checked = "2026-11-09 web search abstract."
+
+[S-T02-FRISCH-1999]
+title = "Dust in the local interstellar wind"
+authors = "P. C. Frisch et al."
+date = "1999"
+locator = "Astrophys. J. 525, 492"
+kind = "journal"
+finding = "Interstellar dust mass density ~6.2e-24 kg/m3 including larger grains."
+limits = "Older calibration."
+relation = "HIGH interstellar density."
+verification = "SECONDARY_VERIFIED"
+checked = "2026-11-09 web search abstract."
+
+[S-T02-LANDGRAF-2000]
+title = "Aspects of the mass distribution of interstellar dust grains in the solar system from in situ measurements"
+authors = "M. Landgraf, W. J. Baggaley, E. Grün, H. Krüger, G. Linkert"
+date = "2000"
+locator = "J. Geophys. Res. 105, 10343"
+kind = "journal"
+finding = "Upper bound on the interstellar large-grain flux extrapolated from in-situ data; comparison with AMOR radar."
+limits = "Bound, not a measurement."
+relation = "EXTRAPOLATED large-grain tail."
+verification = "SECONDARY_VERIFIED"
+checked = "2026-11-09 web search abstract."
+
+[S-T02-AMOR]
+title = "AMOR radar interstellar meteoroid flux"
+authors = "W. J. Baggaley"
+date = "2000"
+locator = "J. Geophys. Res. 105, 10353"
+kind = "journal"
+finding = "Hyperbolic meteor flux ~2e-9 m-2 s-1 above ~3e-10 kg."
+limits = "Disputed by later radar surveys (hyperbolic fraction may be measurement error)."
+relation = "RADAR (HIGH) large-grain tail."
+verification = "SECONDARY_VERIFIED"
+checked = "2026-11-09 web search abstract."
+
+[S-T02-LIC]
+title = "Radiative transfer models of the local interstellar cloud"
+authors = "J. D. Slavin, P. C. Frisch"
+date = "2008"
+locator = "Astron. Astrophys. 491, 53"
+kind = "journal"
+finding = "LIC n(H0) ~0.19-0.20 cm-3, n_e ~0.07 cm-3 at the heliosphere."
+limits = "Model of the cloud near the Sun."
+relation = "Gas column (environment.py)."
+verification = "SECONDARY_VERIFIED"
+checked = "2026-11-09 web search abstract."
+
+[S-T02-VOYAGER-HP]
+title = "Voyager heliopause crossings"
+authors = "NASA / JPL"
+date = "2012 / 2018"
+locator = "Voyager 1 at 121.6 AU (Aug 2012), Voyager 2 at 119 AU (Nov 2018)"
+kind = "press"
+finding = "Heliopause at ~120 AU in two directions."
+limits = "Two points; it moves with the solar cycle."
+relation = "Heliopause boundary for gas regimes."
+verification = "SECONDARY_VERIFIED"
+checked = "2026-11-09 web search."
+
+[S-T02-HIGGINS-2018]
+title = "Hypervelocity dust accelerators (Heidelberg, Colorado IMPACT)"
+authors = "various"
+date = "2018"
+locator = "IMPACT dust accelerator literature"
+kind = "report"
+finding = "Micron and submicron grains accelerated to ~100 km/s at most."
+limits = "Tiny grains; far below 4,800 km/s."
+relation = "Upper end of laboratory validation."
+verification = "UNVERIFIED"
+checked = "2026-11-09 not re-checked; the ~100 km/s ceiling is widely stated."
+
+[S-T02-BLISTER]
+title = "Hydrogen blistering thresholds in metals (fusion-materials literature)"
+authors = "various"
+date = "various"
+locator = "plasma-facing materials reviews"
+kind = "report"
+finding = "Blistering onset at ~1e17-1e18 H/cm2 for keV-range hydrogen in W and other metals."
+limits = "Temperature- and energy-dependent."
+relation = "Gas implantation verdict."
+verification = "UNVERIFIED"
+checked = "2026-11-09 order of magnitude only."
+
+[S-T02-REBCO-N]
+title = "The effect of fast neutron irradiation on the superconducting properties of REBCO coated conductors"
+authors = "D. X. Fischer, R. Prokopec, J. Emhofer, M. Eisterer (2018); R. Prokopec et al. (2015)"
+date = "2018 / 2015"
+locator = "Supercond. Sci. Technol. 31 (2018) 044006; https://repositum.tuwien.at/handle/20.500.12708/815"
+kind = "journal"
+finding = "Reactor fast-neutron irradiation to 3.9e22 m-2: Ic first rises, then degrades (earlier for tapes with artificial pinning centres); n-values fall; Tc drops up to 8 K at 3.3e22 m-2."
+limits = "Ex-situ, room-temperature irradiation; an in-situ 14 MeV study reported degradation orders of magnitude lower."
+relation = "REBCO tolerance range for the loop fluence (radiation.py)."
+verification = "SECONDARY_VERIFIED"
+checked = "2026-11-09 web search: repository record and abstract."
+
+# =====================================================================================================================================
+# Links (proposed; kinds from registry/links.toml)
+# =====================================================================================================================================
+
+[[link]]
+from = "T02-NEW-1"
+to = "VTX-08D"
+kind = "improves"
+note = "The skirt is the quantified form of the engine-side shield inside the hardware cone."
+
+[[link]]
+from = "T02-NEW-3"
+to = "VTX-03"
+kind = "enables"
+note = "Loop sectors must be separable and the nozzle must tolerate a lost sector."
+
+[[link]]
+from = "T02-NEW-2"
+to = "VTX-03"
+kind = "worsens"
+note = "Burn-facing bumpers and LiH shoes add burn solid angle (shoes +0.0127 share vs the V1 ship's 0.0168)."
+
+# =====================================================================================================================================
+# Decisions (proposed; none made)
+# =====================================================================================================================================
+
+[[decision]]
+id = "D-T02-1"
+type = "OWNER_APPROVAL_CANON"
+state = "OPEN"
+technologies = ["VTX-08D"]
+question = "FDP-1/Vertex needs 1,717 AU to stop (beyond the heliopause); canon names a Kuiper anchorage. Which destination does the FDP-1/Vertex line assume?"
+conclusion = "T02 used FDP-1's own burn distances; no mission parameter was changed."
+
+[[decision]]
+id = "D-T02-2"
+type = "OWNER_APPROVAL_CANON"
+state = "OPEN"
+technologies = ["VTX-08D", "T02-NEW-1", "T02-NEW-2", "T02-NEW-3"]
+question = "Which D-06 option should Wayfarer develop?"
+conclusion = "Options (NOMINAL residual events beyond the protection, Vertex V1 / canon): (a) skirt or aft annulus + local bumpers + replaceable loop sectors, 22-90 t / 6-31 t, ~540 / ~67; (b) as (a) with an out-of-ecliptic heading, ~89 / ~12; (c) braking orientation or speed change (owner only, not studied); (d) accept and study, ~2,290 / ~730. Recommendation: (a), and (b) once the heading is chosen."
+
+[[decision]]
+id = "D-T02-3"
+type = "OWNER_APPROVAL_CANON"
+state = "OPEN"
+technologies = ["VTX-08D"]
+question = "Is the departure heading free to leave the ecliptic? A high-latitude path cuts Kuiper-belt exposure ~10x (ASSUMPTION)."
+conclusion = "Open in canon."
+
+[[decision]]
+id = "D-T02-4"
+type = "OWNER_APPROVAL_CANON"
+state = "OPEN"
+technologies = ["T02-NEW-3", "T02-NEW-4"]
+question = "Accept periodic nozzle-loop sector replacement, or require a conductor tolerating ~1e20 n/cm2 (a proposed Level C breakthrough)?"
+conclusion = "Recommendation: replacement (T02-NEW-3); T02-NEW-4 stays a labelled Level C need."

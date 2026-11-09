@@ -1,0 +1,392 @@
+{
+ "meta": {
+  "script": "radiation.py",
+  "status": "RESEARCH; first-order",
+  "labels": {
+   "fluence": "MODEL (1/r^2 from the Atlas fusion power and the FDP-1 neutron escape share)",
+   "REBCO_limit": "SECONDARY_VERIFIED range (reactor irradiation); in-situ 14 MeV degradation onset lower (UNVERIFIED)",
+   "shoe": "ASSUMPTION geometry, LiH relaxation length from the FDP-1 config"
+  },
+  "rebco_limit_m2": {
+   "PESSIMISTIC": 3e+20,
+   "NOMINAL": 3e+22,
+   "OPTIMISTIC": 4e+22
+  },
+  "shoe_chord_m": 0.6
+ },
+ "orientation_check": {
+  "BOW_FIRST": {
+   "stream_direction_x": -1,
+   "loop_distances_m": [
+    43.191,
+    64.786,
+    129.572
+   ]
+  },
+  "ENGINE_FIRST": {
+   "stream_direction_x": 1,
+   "loop_distances_m": [
+    43.191,
+    64.786,
+    129.572
+   ]
+  },
+  "identical": true
+ },
+ "crew": {
+  "crew_half_angle_deg": 5.3114478809530725,
+  "crew_distance_m": 322.6891741541049,
+  "neutron_decades": 10.391492516490134,
+  "xray_decades": 12.089589886564706,
+  "lih_core_m": 3.589094364364405,
+  "shield_mass_t": 429.69255173036663,
+  "limits": [
+   "first-order exponential removal; no build-up factor, no secondary (n,gamma) photons, no scatter around the rim",
+   "neutron spectrum taken as D-D 2.45 MeV; the 14.1 MeV D-T share needs a longer relaxation length",
+   "hardware decades are a placeholder (cryogenic heating, activation, electronics) until a transport calculation",
+   "edge-on radiator planes are exempt from the shadow; their edge and rim-scatter exposure is not computed"
+  ],
+  "orientation": "the FDP-1 shadow shield sizes the crew dose from the ship-frame burn; turning engine-first changes nothing",
+  "skirt_note": "T02-NEW-1 lies on the hardware-cone boundary (edge-on); it must sit inside the shadow with a penumbra margin (rim scatter not modelled) and adds no burn solid angle"
+ },
+ "gas_secondary": {
+  "LIC_power_flux_W_m2": 0.02995846119509054,
+  "proton_energy_keV": 120.11049483786874,
+  "he_energy_keV": 477.16023260145073,
+  "bremsstrahlung_W_m2_upper": 8.885936149179923e-13,
+  "nuclear": "no (p,n) or (alpha,n) channel open at 120/477 keV on W, Li, C, Al; p+7Li capture resonance at 441 keV not reached by protons",
+  "verdict": "secondary radiation from the gas stream is negligible in both orientations (< 1e-11 W/m2)"
+ },
+ "generations": {
+  "V0": {
+   "fusion_TW": 17.285726261156753,
+   "burn_years": 5.685154040809533,
+   "pellet_rate_Hz": 212.31169240068093,
+   "neutron_escape_fraction": 5.52213171235667e-06,
+   "xray_escape_fraction": 0.011522458786853972,
+   "neutron_rate_per_s": 2.4317443426319116e+20,
+   "hardware_cone_deg": 9.598083470051419,
+   "loops": [
+    {
+     "loop": 1,
+     "R_m": 37.404,
+     "dx_from_burn_m": 21.6,
+     "distance_m": 43.19,
+     "polar_angle_deg": 60.0,
+     "neutron_fluence_per_mission_m2": 1.8611158682025946e+24,
+     "neutron_fluence_per_mission_cm2": 1.8611158682025948e+20,
+     "ratio_to_REBCO_limit": {
+      "PESSIMISTIC": 6203.719560675316,
+      "NOMINAL": 62.03719560675315,
+      "OPTIMISTIC": 46.52789670506487
+     },
+     "xray_J_m2_per_pulse": 40019.17916985258,
+     "xray_W_m2_mean": 8496539.658037478,
+     "lih_shoe_decades": {
+      "PESSIMISTIC": 3.792652157290502,
+      "NOMINAL": 1.7926521572905016,
+      "OPTIMISTIC": 1.6677134206822017
+     },
+     "lih_shoe_thickness_m": {
+      "PESSIMISTIC": 1.3099356480433229,
+      "NOMINAL": 0.6191601201451089,
+      "OPTIMISTIC": 0.5760078092773419
+     },
+     "lih_shoe_mass_t": {
+      "PESSIMISTIC": 144.07768940031465,
+      "NOMINAL": 68.10041364442522,
+      "OPTIMISTIC": 63.35416122248462
+     },
+     "shoe_added_solid_angle_share": 0.006015357810996299,
+     "shoe_xray_heat_MW": 1198.103288368651
+    },
+    {
+     "loop": 2,
+     "R_m": 64.786,
+     "dx_from_burn_m": 0.0,
+     "distance_m": 64.79,
+     "polar_angle_deg": 90.0,
+     "neutron_fluence_per_mission_m2": 8.271626080900422e+23,
+     "neutron_fluence_per_mission_cm2": 8.271626080900422e+19,
+     "ratio_to_REBCO_limit": {
+      "PESSIMISTIC": 2757.208693633474,
+      "NOMINAL": 27.57208693633474,
+      "OPTIMISTIC": 20.679065202251056
+     },
+     "xray_J_m2_per_pulse": 17786.301853267814,
+     "xray_W_m2_mean": 3776239.8480166574,
+     "lih_shoe_decades": {
+      "PESSIMISTIC": 3.440469639179139,
+      "NOMINAL": 1.4404696391791392,
+      "OPTIMISTIC": 1.3155309025708393
+     },
+     "lih_shoe_thickness_m": {
+      "PESSIMISTIC": 1.1882961156108733,
+      "NOMINAL": 0.49752058771265967,
+      "OPTIMISTIC": 0.45436827684489256
+     },
+     "lih_shoe_mass_t": {
+      "PESSIMISTIC": 226.37688458392748,
+      "NOMINAL": 94.78038275405598,
+      "OPTIMISTIC": 86.55963241370799
+     },
+     "shoe_added_solid_angle_share": 0.004630624601934175,
+     "shoe_xray_heat_MW": 922.3003414088221
+    },
+    {
+     "loop": 3,
+     "R_m": 112.213,
+     "dx_from_burn_m": -64.79,
+     "distance_m": 129.57,
+     "polar_angle_deg": 120.0,
+     "neutron_fluence_per_mission_m2": 2.0679065202251075e+23,
+     "neutron_fluence_per_mission_cm2": 2.0679065202251076e+19,
+     "ratio_to_REBCO_limit": {
+      "PESSIMISTIC": 689.3021734083692,
+      "NOMINAL": 6.893021734083692,
+      "OPTIMISTIC": 5.1697663005627685
+     },
+     "xray_J_m2_per_pulse": 4446.575463316958,
+     "xray_W_m2_mean": 944059.9620041653,
+     "lih_shoe_decades": {
+      "PESSIMISTIC": 2.838409647851177,
+      "NOMINAL": 0.8384096478511773,
+      "OPTIMISTIC": 0.7134709112428773
+     },
+     "lih_shoe_thickness_m": {
+      "PESSIMISTIC": 0.9803519614428899,
+      "NOMINAL": 0.2895764335446762,
+      "OPTIMISTIC": 0.24642412267690908
+     },
+     "lih_shoe_mass_t": {
+      "PESSIMISTIC": 323.48194878444866,
+      "NOMINAL": 95.55012151678051,
+      "OPTIMISTIC": 81.31136425095865
+     },
+     "shoe_added_solid_angle_share": 0.002005119270332101,
+     "shoe_xray_heat_MW": 399.3677627895507
+    }
+   ]
+  },
+  "V1": {
+   "fusion_TW": 8.668279563247685,
+   "burn_years": 5.685154040809533,
+   "pellet_rate_Hz": 107.02516613924851,
+   "neutron_escape_fraction": 5.52213171235667e-06,
+   "xray_escape_fraction": 0.011540610650142748,
+   "neutron_rate_per_s": 1.2194477379667108e+20,
+   "hardware_cone_deg": 7.939019743054677,
+   "loops": [
+    {
+     "loop": 1,
+     "R_m": 37.336,
+     "dx_from_burn_m": 21.6,
+     "distance_m": 43.13,
+     "polar_angle_deg": 60.0,
+     "neutron_fluence_per_mission_m2": 9.35852592239913e+23,
+     "neutron_fluence_per_mission_cm2": 9.35852592239913e+19,
+     "ratio_to_REBCO_limit": {
+      "PESSIMISTIC": 3119.50864079971,
+      "NOMINAL": 31.1950864079971,
+      "OPTIMISTIC": 23.396314805997825
+     },
+     "xray_J_m2_per_pulse": 39982.858474992725,
+     "xray_W_m2_mean": 4279172.071008157,
+     "lih_shoe_decades": {
+      "PESSIMISTIC": 3.4940861929304585,
+      "NOMINAL": 1.4940861929304583,
+      "OPTIMISTIC": 1.3691474563221584
+     },
+     "lih_shoe_thickness_m": {
+      "PESSIMISTIC": 1.2068146172216987,
+      "NOMINAL": 0.5160390893234849,
+      "OPTIMISTIC": 0.4728867784557178
+     },
+     "lih_shoe_mass_t": {
+      "PESSIMISTIC": 132.4934682889572,
+      "NOMINAL": 56.65477343533302,
+      "OPTIMISTIC": 51.91717807481594
+     },
+     "shoe_added_solid_angle_share": 0.006020843738327142,
+     "shoe_xray_heat_MW": 602.3085867181685
+    },
+    {
+     "loop": 2,
+     "R_m": 64.668,
+     "dx_from_burn_m": 0.0,
+     "distance_m": 64.67,
+     "polar_angle_deg": 90.0,
+     "neutron_fluence_per_mission_m2": 4.163148535358545e+23,
+     "neutron_fluence_per_mission_cm2": 4.163148535358545e+19,
+     "ratio_to_REBCO_limit": {
+      "PESSIMISTIC": 1387.7161784528485,
+      "NOMINAL": 13.877161784528484,
+      "OPTIMISTIC": 10.407871338396363
+     },
+     "xray_J_m2_per_pulse": 17786.40996240806,
+     "xray_W_m2_mean": 1903593.4812475073,
+     "lih_shoe_decades": {
+      "PESSIMISTIC": 3.1423006514675693,
+      "NOMINAL": 1.142300651467569,
+      "OPTIMISTIC": 1.0173619148592692
+     },
+     "lih_shoe_thickness_m": {
+      "PESSIMISTIC": 1.0853121956662055,
+      "NOMINAL": 0.3945366677679918,
+      "OPTIMISTIC": 0.3513843569002247
+     },
+     "lih_shoe_mass_t": {
+      "PESSIMISTIC": 206.38076481672445,
+      "NOMINAL": 75.02429215053503,
+      "OPTIMISTIC": 66.81853628041685
+     },
+     "shoe_added_solid_angle_share": 0.004639086194484339,
+     "shoe_xray_heat_MW": 464.08137644840633
+    },
+    {
+     "loop": 3,
+     "R_m": 112.008,
+     "dx_from_burn_m": -64.79,
+     "distance_m": 129.39,
+     "polar_angle_deg": 120.0,
+     "neutron_fluence_per_mission_m2": 1.0398362135999044e+23,
+     "neutron_fluence_per_mission_cm2": 1.0398362135999044e+19,
+     "ratio_to_REBCO_limit": {
+      "PESSIMISTIC": 346.6120711999681,
+      "NOMINAL": 3.466120711999681,
+      "OPTIMISTIC": 2.599590533999761
+     },
+     "xray_J_m2_per_pulse": 4442.5398305547515,
+     "xray_W_m2_mean": 475463.5634453512,
+     "lih_shoe_decades": {
+      "PESSIMISTIC": 2.5398436834911338,
+      "NOMINAL": 0.5398436834911339,
+      "OPTIMISTIC": 0.41490494688283397
+     },
+     "lih_shoe_thickness_m": {
+      "PESSIMISTIC": 0.8772309306212658,
+      "NOMINAL": 0.1864554027230521,
+      "OPTIMISTIC": 0.14330309185528498
+     },
+     "lih_shoe_mass_t": {
+      "PESSIMISTIC": 288.9276451322832,
+      "NOMINAL": 61.41156057141083,
+      "OPTIMISTIC": 47.19877448985956
+     },
+     "shoe_added_solid_angle_share": 0.002006947912775716,
+     "shoe_xray_heat_MW": 200.76952890605634
+    }
+   ]
+  },
+  "V2": {
+   "fusion_TW": 7.716537318695427,
+   "burn_years": 5.685154040809533,
+   "pellet_rate_Hz": 95.2742371053435,
+   "neutron_escape_fraction": 5.52213171235667e-06,
+   "xray_escape_fraction": 0.011540610780613443,
+   "neutron_rate_per_s": 1.085557279222464e+20,
+   "hardware_cone_deg": 7.941951760575666,
+   "loops": [
+    {
+     "loop": 1,
+     "R_m": 37.336,
+     "dx_from_burn_m": 21.6,
+     "distance_m": 43.13,
+     "polar_angle_deg": 60.0,
+     "neutron_fluence_per_mission_m2": 8.330997588430604e+23,
+     "neutron_fluence_per_mission_cm2": 8.330997588430604e+19,
+     "ratio_to_REBCO_limit": {
+      "PESSIMISTIC": 2776.9991961435344,
+      "NOMINAL": 27.769991961435345,
+      "OPTIMISTIC": 20.82749397107651
+     },
+     "xray_J_m2_per_pulse": 39982.85817905204,
+     "xray_W_m2_mean": 3809336.3103003264,
+     "lih_shoe_decades": {
+      "PESSIMISTIC": 3.4435757540352854,
+      "NOMINAL": 1.4435757540352854,
+      "OPTIMISTIC": 1.3186370174269855
+     },
+     "lih_shoe_thickness_m": {
+      "PESSIMISTIC": 1.189368929675607,
+      "NOMINAL": 0.49859340177739314,
+      "OPTIMISTIC": 0.4554410909096259
+     },
+     "lih_shoe_mass_t": {
+      "PESSIMISTIC": 130.5781434663617,
+      "NOMINAL": 54.73944974031469,
+      "OPTIMISTIC": 50.00185445023663
+     },
+     "shoe_added_solid_angle_share": 0.006020843782963706,
+     "shoe_xray_heat_MW": 536.1775355617651
+    },
+    {
+     "loop": 2,
+     "R_m": 64.668,
+     "dx_from_burn_m": 0.0,
+     "distance_m": 64.67,
+     "polar_angle_deg": 90.0,
+     "neutron_fluence_per_mission_m2": 3.7060516746426174e+23,
+     "neutron_fluence_per_mission_cm2": 3.706051674642618e+19,
+     "ratio_to_REBCO_limit": {
+      "PESSIMISTIC": 1235.3505582142059,
+      "NOMINAL": 12.353505582142057,
+      "OPTIMISTIC": 9.265129186606543
+     },
+     "xray_J_m2_per_pulse": 17786.409963346057,
+     "xray_W_m2_mean": 1694586.6401006763,
+     "lih_shoe_decades": {
+      "PESSIMISTIC": 3.0917902158098123,
+      "NOMINAL": 1.0917902158098123,
+      "OPTIMISTIC": 0.9668514792015123
+     },
+     "lih_shoe_thickness_m": {
+      "PESSIMISTIC": 1.0678665092382775,
+      "NOMINAL": 0.3770909813400639,
+      "OPTIMISTIC": 0.3339386704722967
+     },
+     "lih_shoe_mass_t": {
+      "PESSIMISTIC": 203.0633254671412,
+      "NOMINAL": 71.70685475397276,
+      "OPTIMISTIC": 63.50109900585852
+     },
+     "shoe_added_solid_angle_share": 0.00463908626345873,
+     "shoe_xray_heat_MW": 413.12711800261195
+    },
+    {
+     "loop": 3,
+     "R_m": 112.008,
+     "dx_from_burn_m": -64.79,
+     "distance_m": 129.39,
+     "polar_angle_deg": 120.0,
+     "neutron_fluence_per_mission_m2": 9.256663987145126e+22,
+     "neutron_fluence_per_mission_cm2": 9.256663987145126e+18,
+     "ratio_to_REBCO_limit": {
+      "PESSIMISTIC": 308.5554662381709,
+      "NOMINAL": 3.0855546623817087,
+      "OPTIMISTIC": 2.3141659967862815
+     },
+     "xray_J_m2_per_pulse": 4442.5397976724535,
+     "xray_W_m2_mean": 423259.5900333701,
+     "lih_shoe_decades": {
+      "PESSIMISTIC": 2.489333244595961,
+      "NOMINAL": 0.48933324459596106,
+      "OPTIMISTIC": 0.3643945079876611
+     },
+     "lih_shoe_thickness_m": {
+      "PESSIMISTIC": 0.8597852430751741,
+      "NOMINAL": 0.16900971517696037,
+      "OPTIMISTIC": 0.12585740430919323
+     },
+     "lih_shoe_mass_t": {
+      "PESSIMISTIC": 283.1816722784698,
+      "NOMINAL": 55.66559110032888,
+      "OPTIMISTIC": 41.45280523009472
+     },
+     "shoe_added_solid_angle_share": 0.00200694792765457,
+     "shoe_xray_heat_MW": 178.72584518725517
+    }
+   ]
+  }
+ }
+}

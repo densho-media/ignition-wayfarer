@@ -1,0 +1,3384 @@
+{
+ "meta": {
+  "title": "T02 impact, erosion and protection estimates (research, not canon)",
+  "k_crater_m3_J": {
+   "LOW": 1e-11,
+   "NOMINAL": 3e-11,
+   "HIGH": 1e-10
+  },
+  "perforation_ratio": 1.5,
+  "bumper_nominal": {
+   "g": 0.5,
+   "alpha_deg": 30.0,
+   "F_allow_J_m2": 10000.0
+  },
+  "bumper_band": {
+   "low": {
+    "g": 0.5,
+    "alpha_deg": 15.0,
+    "F_allow_J_m2": 3000.0
+   },
+   "high": {
+    "g": 0.5,
+    "alpha_deg": 45.0,
+    "F_allow_J_m2": 30000.0
+   }
+  },
+  "validated_speed_limit_km_s": {
+   "whipple_ble": 10,
+   "dust_accelerators": 100
+  },
+  "ratio_cruise_to_lab_speed": 47.96679328,
+  "ratio_specific_energy_to_lab": 2300.813257566253
+ },
+ "grains": [
+  {
+   "mass_kg": 1e-18,
+   "diameter_m": 9.141562994681673e-08,
+   "energy_J_at_cruise": 1.1504066287831266e-05,
+   "tnt_kg": 2.7495378316996334e-12,
+   "regime": "ATOMIC"
+  },
+  {
+   "mass_kg": 1e-16,
+   "diameter_m": 4.2431376717882244e-07,
+   "energy_J_at_cruise": 0.0011504066287831266,
+   "tnt_kg": 2.749537831699633e-10,
+   "regime": "ATOMIC"
+  },
+  {
+   "mass_kg": 1e-14,
+   "diameter_m": 1.9694900436853944e-06,
+   "energy_J_at_cruise": 0.11504066287831263,
+   "tnt_kg": 2.7495378316996327e-08,
+   "regime": "ATOMIC"
+  },
+  {
+   "mass_kg": 1e-12,
+   "diameter_m": 9.141562994681671e-06,
+   "energy_J_at_cruise": 11.504066287831265,
+   "tnt_kg": 2.749537831699633e-06,
+   "regime": "HYDRODYNAMIC"
+  },
+  {
+   "mass_kg": 1e-09,
+   "diameter_m": 9.141562994681671e-05,
+   "energy_J_at_cruise": 11504.066287831265,
+   "tnt_kg": 0.002749537831699633,
+   "regime": "HYDRODYNAMIC"
+  },
+  {
+   "mass_kg": 1e-06,
+   "diameter_m": 0.0009141562994681669,
+   "energy_J_at_cruise": 11504066.287831265,
+   "tnt_kg": 2.7495378316996333,
+   "regime": "HYDRODYNAMIC"
+  },
+  {
+   "mass_kg": 0.001,
+   "diameter_m": 0.009141562994681668,
+   "energy_J_at_cruise": 11504066287.831266,
+   "tnt_kg": 2749.5378316996334,
+   "regime": "HYDRODYNAMIC"
+  }
+ ],
+ "failure_energies_J": {
+  "LOW": {
+   "bare_5mm_wall": 7757.018897752577,
+   "bumper_S1m": 20943.951023931953,
+   "bumper_S2m": 83775.80409572781,
+   "bumper_S10m": 2094395.1023931953,
+   "skirt_or_shield_S100m": 209439510.23931953
+  },
+  "NOMINAL": {
+   "bare_5mm_wall": 2585.6729659175257,
+   "bumper_S1m": 20943.951023931953,
+   "bumper_S2m": 83775.80409572781,
+   "bumper_S10m": 2094395.1023931953,
+   "skirt_or_shield_S100m": 209439510.23931953
+  },
+  "HIGH": {
+   "bare_5mm_wall": 775.7018897752577,
+   "bumper_S1m": 20943.951023931953,
+   "bumper_S2m": 83775.80409572781,
+   "bumper_S10m": 2094395.1023931953,
+   "skirt_or_shield_S100m": 209439510.23931953
+  }
+ },
+ "bumper_defeat_vs_standoff": [
+  {
+   "S_m": 0.5,
+   "E_nominal_J": 5235.987755982988,
+   "E_low_J": 338.33430647690767,
+   "E_high_J": 47123.88980384689,
+   "grain_mass_at_cruise_kg": 4.551423492336354e-10,
+   "grain_d_mm": 0.0703184903826072
+  },
+  {
+   "S_m": 1,
+   "E_nominal_J": 20943.951023931953,
+   "E_low_J": 1353.3372259076307,
+   "E_high_J": 188495.55921538756,
+   "grain_mass_at_cruise_kg": 1.8205693969345415e-09,
+   "grain_d_mm": 0.11162364560616637
+  },
+  {
+   "S_m": 2,
+   "E_nominal_J": 83775.80409572781,
+   "E_low_J": 5413.348903630523,
+   "E_high_J": 753982.2368615502,
+   "grain_mass_at_cruise_kg": 7.282277587738166e-09,
+   "grain_d_mm": 0.177191492459754
+  },
+  {
+   "S_m": 5,
+   "E_nominal_J": 523598.7755982988,
+   "E_low_J": 33833.43064769077,
+   "E_high_J": 4712388.980384689,
+   "grain_mass_at_cruise_kg": 4.5514234923363535e-08,
+   "grain_d_mm": 0.3263895197564171
+  },
+  {
+   "S_m": 10,
+   "E_nominal_J": 2094395.1023931953,
+   "E_low_J": 135333.7225907631,
+   "E_high_J": 18849555.921538755,
+   "grain_mass_at_cruise_kg": 1.8205693969345414e-07,
+   "grain_d_mm": 0.518111067012732
+  },
+  {
+   "S_m": 20,
+   "E_nominal_J": 8377580.409572781,
+   "E_low_J": 541334.8903630524,
+   "E_high_J": 75398223.68615502,
+   "grain_mass_at_cruise_kg": 7.282277587738166e-07,
+   "grain_d_mm": 0.8224500528123769
+  },
+  {
+   "S_m": 50,
+   "E_nominal_J": 52359877.55982988,
+   "E_low_J": 3383343.064769076,
+   "E_high_J": 471238898.0384688,
+   "grain_mass_at_cruise_kg": 4.551423492336354e-06,
+   "grain_d_mm": 1.5149659503096229
+  },
+  {
+   "S_m": 100,
+   "E_nominal_J": 209439510.23931953,
+   "E_low_J": 13533372.259076305,
+   "E_high_J": 1884955592.153875,
+   "grain_mass_at_cruise_kg": 1.8205693969345415e-05,
+   "grain_d_mm": 2.4048585432174985
+  },
+  {
+   "S_m": 200,
+   "E_nominal_J": 837758040.9572781,
+   "E_low_J": 54133489.03630522,
+   "E_high_J": 7539822368.6155,
+   "grain_mass_at_cruise_kg": 7.282277587738166e-05,
+   "grain_d_mm": 3.8174749813381688
+  }
+ ],
+ "hits": {
+  "V1_as_drawn": {
+   "description": "V1 geometry, canon forward shield only, nothing on the engine side",
+   "areas_m2": {
+    "BOW_FIRST": 1509.2,
+    "ENGINE_FIRST": 12282.0
+   },
+   "cases": {
+    "LOW": {
+     "legs": [
+      {
+       "leg": "F1",
+       "name": "accelerate outbound",
+       "orientation": "BOW_FIRST",
+       "area_m2": 1509.2,
+       "bare_5mm_wall": 71.04298599771121,
+       "bumper_S1m": 3.7633241308478205,
+       "bumper_S2m": 0.6842573317144338,
+       "bumper_S10m": 0.010895359076483216,
+       "skirt_or_shield_S100m": 2.4753829478373996e-05
+      },
+      {
+       "leg": "F2",
+       "name": "brake at destination",
+       "orientation": "ENGINE_FIRST",
+       "area_m2": 12282.0,
+       "bare_5mm_wall": 0.0,
+       "bumper_S1m": 0.0,
+       "bumper_S2m": 0.0,
+       "bumper_S10m": 0.0,
+       "skirt_or_shield_S100m": 0.0
+      },
+      {
+       "leg": "F3",
+       "name": "accelerate home",
+       "orientation": "BOW_FIRST",
+       "area_m2": 1509.2,
+       "bare_5mm_wall": 0.0,
+       "bumper_S1m": 0.0,
+       "bumper_S2m": 0.0,
+       "bumper_S10m": 0.0,
+       "skirt_or_shield_S100m": 0.0
+      },
+      {
+       "leg": "F4",
+       "name": "coast home",
+       "orientation": "BOW_FIRST",
+       "area_m2": 1509.2,
+       "bare_5mm_wall": 0.0,
+       "bumper_S1m": 0.0,
+       "bumper_S2m": 0.0,
+       "bumper_S10m": 0.0,
+       "skirt_or_shield_S100m": 0.0
+      },
+      {
+       "leg": "F5",
+       "name": "brake at home",
+       "orientation": "ENGINE_FIRST",
+       "area_m2": 12282.0,
+       "bare_5mm_wall": 1597.9925974733185,
+       "bumper_S1m": 97.90729623680488,
+       "bumper_S2m": 14.607436185237562,
+       "bumper_S10m": 0.23548880840207753,
+       "skirt_or_shield_S100m": 0.00054665765344335
+      }
+     ],
+     "total": {
+      "bare_5mm_wall": {
+       "expected_failures": 1669.0355834710297,
+       "p_no_failure": 0.0
+      },
+      "bumper_S1m": {
+       "expected_failures": 101.6706203676527,
+       "p_no_failure": 6.998590818029735e-45
+      },
+      "bumper_S2m": {
+       "expected_failures": 15.291693516951996,
+       "p_no_failure": 2.2850825120631876e-07
+      },
+      "bumper_S10m": {
+       "expected_failures": 0.24638416747856073,
+       "p_no_failure": 0.7816218935283685
+      },
+      "skirt_or_shield_S100m": {
+       "expected_failures": 0.000571411482921724,
+       "p_no_failure": 0.9994287517415288
+      }
+     },
+     "standoff_for_0p1_failures_m": 14.130817623993504,
+     "standoff_engine_first_only_m": 13.8889903922274,
+     "standoff_bow_first_only_m": 4.2483859101560615
+    },
+    "NOMINAL": {
+     "legs": [
+      {
+       "leg": "F1",
+       "name": "accelerate outbound",
+       "orientation": "BOW_FIRST",
+       "area_m2": 1509.2,
+       "bare_5mm_wall": 3020.907155784983,
+       "bumper_S1m": 468.71445300006593,
+       "bumper_S2m": 125.28539451420143,
+       "bumper_S10m": 0.2278674164086155,
+       "skirt_or_shield_S100m": 6.330754967888052e-05
+      },
+      {
+       "leg": "F2",
+       "name": "brake at destination",
+       "orientation": "ENGINE_FIRST",
+       "area_m2": 12282.0,
+       "bare_5mm_wall": 1678.7058728634045,
+       "bumper_S1m": 217.99888557001233,
+       "bumper_S2m": 47.42017490074774,
+       "bumper_S10m": 1.3001868541127461,
+       "skirt_or_shield_S100m": 0.0002491103101551928
+      },
+      {
+       "leg": "F3",
+       "name": "accelerate home",
+       "orientation": "BOW_FIRST",
+       "area_m2": 1509.2,
+       "bare_5mm_wall": 160.67948375643135,
+       "bumper_S1m": 20.86604268150857,
+       "bumper_S2m": 4.538882806012451,
+       "bumper_S10m": 0.12444905083306022,
+       "skirt_or_shield_S100m": 2.3843912552629692e-05
+      },
+      {
+       "leg": "F4",
+       "name": "coast home",
+       "orientation": "BOW_FIRST",
+       "area_m2": 1509.2,
+       "bare_5mm_wall": 338.089327140053,
+       "bumper_S1m": 52.39038976491251,
+       "bumper_S2m": 11.399405770844451,
+       "bumper_S10m": 0.3220257997300707,
+       "skirt_or_shield_S100m": 0.00045629202165323846
+      },
+      {
+       "leg": "F5",
+       "name": "brake at home",
+       "orientation": "ENGINE_FIRST",
+       "area_m2": 12282.0,
+       "bare_5mm_wall": 44041.20523428452,
+       "bumper_S1m": 7235.544186098459,
+       "bumper_S2m": 2102.1075986885958,
+       "bumper_S10m": 9.713494427448374,
+       "skirt_or_shield_S100m": 0.0011491475356588178
+      }
+     ],
+     "total": {
+      "bare_5mm_wall": {
+       "expected_failures": 49239.58707382939,
+       "p_no_failure": 0.0
+      },
+      "bumper_S1m": {
+       "expected_failures": 7995.513957114958,
+       "p_no_failure": 0.0
+      },
+      "bumper_S2m": {
+       "expected_failures": 2290.751456680402,
+       "p_no_failure": 0.0
+      },
+      "bumper_S10m": {
+       "expected_failures": 11.688023548532867,
+       "p_no_failure": 8.393746878717466e-06
+      },
+      "skirt_or_shield_S100m": {
+       "expected_failures": 0.0019417013296987593,
+       "p_no_failure": 0.9980601825528185
+      }
+     },
+     "standoff_for_0p1_failures_m": 31.709741643113848,
+     "standoff_engine_first_only_m": 29.874389097425656,
+     "standoff_bow_first_only_m": 22.41094158475447
+    },
+    "HIGH": {
+     "legs": [
+      {
+       "leg": "F1",
+       "name": "accelerate outbound",
+       "orientation": "BOW_FIRST",
+       "area_m2": 1509.2,
+       "bare_5mm_wall": 58241.73588778234,
+       "bumper_S1m": 12917.901834394104,
+       "bumper_S2m": 4759.694417176159,
+       "bumper_S10m": 475.40686856133266,
+       "skirt_or_shield_S100m": 0.793204728080632
+      },
+      {
+       "leg": "F2",
+       "name": "brake at destination",
+       "orientation": "ENGINE_FIRST",
+       "area_m2": 12282.0,
+       "bare_5mm_wall": 33574.11745726815,
+       "bumper_S1m": 4359.977711400249,
+       "bumper_S2m": 948.4034980149568,
+       "bumper_S10m": 26.00373708225493,
+       "skirt_or_shield_S100m": 0.004982206203103859
+      },
+      {
+       "leg": "F3",
+       "name": "accelerate home",
+       "orientation": "BOW_FIRST",
+       "area_m2": 1509.2,
+       "bare_5mm_wall": 3213.5896751286255,
+       "bumper_S1m": 417.3208536301714,
+       "bumper_S2m": 90.77765612024908,
+       "bumper_S10m": 2.488981016661205,
+       "skirt_or_shield_S100m": 0.00047687825105259394
+      },
+      {
+       "leg": "F4",
+       "name": "coast home",
+       "orientation": "BOW_FIRST",
+       "area_m2": 1509.2,
+       "bare_5mm_wall": 6761.786542801089,
+       "bumper_S1m": 1047.8077952982537,
+       "bumper_S2m": 227.9881154168884,
+       "bumper_S10m": 6.440515994601406,
+       "skirt_or_shield_S100m": 0.009125840433064778
+      },
+      {
+       "leg": "F5",
+       "name": "brake at home",
+       "orientation": "ENGINE_FIRST",
+       "area_m2": 12282.0,
+       "bare_5mm_wall": 757037.0340666221,
+       "bumper_S1m": 172523.9867666581,
+       "bumper_S2m": 64774.12603111087,
+       "bumper_S10m": 6652.556475757569,
+       "skirt_or_shield_S100m": 132.25410198150584
+      }
+     ],
+     "total": {
+      "bare_5mm_wall": {
+       "expected_failures": 858828.2636296024,
+       "p_no_failure": 0.0
+      },
+      "bumper_S1m": {
+       "expected_failures": 191266.9949613809,
+       "p_no_failure": 0.0
+      },
+      "bumper_S2m": {
+       "expected_failures": 70800.98971783913,
+       "p_no_failure": 0.0
+      },
+      "bumper_S10m": {
+       "expected_failures": 7162.896578412419,
+       "p_no_failure": 0.0
+      },
+      "skirt_or_shield_S100m": {
+       "expected_failures": 133.06189163447368,
+       "p_no_failure": 1.6291261376382945e-58
+      }
+     },
+     "standoff_for_0p1_failures_m": 330.1065883154719,
+     "standoff_engine_first_only_m": 330.09206164512324,
+     "standoff_bow_first_only_m": 126.7137559553595
+    },
+    "NOMINAL_HILAT": {
+     "legs": [
+      {
+       "leg": "F1",
+       "name": "accelerate outbound",
+       "orientation": "BOW_FIRST",
+       "area_m2": 1509.2,
+       "bare_5mm_wall": 558.7348251133628,
+       "bumper_S1m": 79.60209586687769,
+       "bumper_S2m": 19.556244746971785,
+       "bumper_S10m": 0.2117943555567744,
+       "skirt_or_shield_S100m": 2.7326264754592136e-05
+      },
+      {
+       "leg": "F2",
+       "name": "brake at destination",
+       "orientation": "ENGINE_FIRST",
+       "area_m2": 12282.0,
+       "bare_5mm_wall": 1678.7058728634045,
+       "bumper_S1m": 217.99888557001233,
+       "bumper_S2m": 47.42017490074774,
+       "bumper_S10m": 1.3001868541127461,
+       "skirt_or_shield_S100m": 0.0002491103101551928
+      },
+      {
+       "leg": "F3",
+       "name": "accelerate home",
+       "orientation": "BOW_FIRST",
+       "area_m2": 1509.2,
+       "bare_5mm_wall": 160.67948375643135,
+       "bumper_S1m": 20.86604268150857,
+       "bumper_S2m": 4.538882806012451,
+       "bumper_S10m": 0.12444905083306022,
+       "skirt_or_shield_S100m": 2.3843912552629692e-05
+      },
+      {
+       "leg": "F4",
+       "name": "coast home",
+       "orientation": "BOW_FIRST",
+       "area_m2": 1509.2,
+       "bare_5mm_wall": 338.089327140053,
+       "bumper_S1m": 52.39038976491251,
+       "bumper_S2m": 11.399405770844451,
+       "bumper_S10m": 0.3220257997300707,
+       "skirt_or_shield_S100m": 0.00045629202165323846
+      },
+      {
+       "leg": "F5",
+       "name": "brake at home",
+       "orientation": "ENGINE_FIRST",
+       "area_m2": 12282.0,
+       "bare_5mm_wall": 5656.666766858459,
+       "bumper_S1m": 876.4743031339042,
+       "bumper_S2m": 242.0897319696215,
+       "bumper_S10m": 2.2479383652784457,
+       "skirt_or_shield_S100m": 0.00038241845237078865
+      }
+     ],
+     "total": {
+      "bare_5mm_wall": {
+       "expected_failures": 8392.87627573171,
+       "p_no_failure": 0.0
+      },
+      "bumper_S1m": {
+       "expected_failures": 1247.3317170172154,
+       "p_no_failure": 0.0
+      },
+      "bumper_S2m": {
+       "expected_failures": 325.0044401941979,
+       "p_no_failure": 7.118115482433297e-142
+      },
+      "bumper_S10m": {
+       "expected_failures": 4.206394425511097,
+       "p_no_failure": 0.014899994643743399
+      },
+      "skirt_or_shield_S100m": {
+       "expected_failures": 0.0011389909614864418,
+       "p_no_failure": 0.99886165744252
+      }
+     },
+     "standoff_for_0p1_failures_m": 30.108320700699103,
+     "standoff_engine_first_only_m": 28.283379983278024,
+     "standoff_bow_first_only_m": 22.30307786618253
+    }
+   }
+  },
+  "V1_skirt": {
+   "description": "V1 with the shadow-cone skirt (engine-first residual = bore-visible engine hardware)",
+   "areas_m2": {
+    "BOW_FIRST": 1509.2,
+    "ENGINE_FIRST": 2280.7
+   },
+   "cases": {
+    "LOW": {
+     "legs": [
+      {
+       "leg": "F1",
+       "name": "accelerate outbound",
+       "orientation": "BOW_FIRST",
+       "area_m2": 1509.2,
+       "bare_5mm_wall": 71.04298599771121,
+       "bumper_S1m": 3.7633241308478205,
+       "bumper_S2m": 0.6842573317144338,
+       "bumper_S10m": 0.010895359076483216,
+       "skirt_or_shield_S100m": 2.4753829478373996e-05
+      },
+      {
+       "leg": "F2",
+       "name": "brake at destination",
+       "orientation": "ENGINE_FIRST",
+       "area_m2": 2280.7,
+       "bare_5mm_wall": 0.0,
+       "bumper_S1m": 0.0,
+       "bumper_S2m": 0.0,
+       "bumper_S10m": 0.0,
+       "skirt_or_shield_S100m": 0.0
+      },
+      {
+       "leg": "F3",
+       "name": "accelerate home",
+       "orientation": "BOW_FIRST",
+       "area_m2": 1509.2,
+       "bare_5mm_wall": 0.0,
+       "bumper_S1m": 0.0,
+       "bumper_S2m": 0.0,
+       "bumper_S10m": 0.0,
+       "skirt_or_shield_S100m": 0.0
+      },
+      {
+       "leg": "F4",
+       "name": "coast home",
+       "orientation": "BOW_FIRST",
+       "area_m2": 1509.2,
+       "bare_5mm_wall": 0.0,
+       "bumper_S1m": 0.0,
+       "bumper_S2m": 0.0,
+       "bumper_S10m": 0.0,
+       "skirt_or_shield_S100m": 0.0
+      },
+      {
+       "leg": "F5",
+       "name": "brake at home",
+       "orientation": "ENGINE_FIRST",
+       "area_m2": 2280.7,
+       "bare_5mm_wall": 296.7384560378926,
+       "bumper_S1m": 18.180847624758254,
+       "bumper_S2m": 2.7125207382894727,
+       "bumper_S10m": 0.043728979427016625,
+       "skirt_or_shield_S100m": 0.00010151132634817198
+      }
+     ],
+     "total": {
+      "bare_5mm_wall": {
+       "expected_failures": 367.78144203560385,
+       "p_no_failure": 1.8816947686460637e-160
+      },
+      "bumper_S1m": {
+       "expected_failures": 21.944171755606074,
+       "p_no_failure": 2.949628335163465e-10
+      },
+      "bumper_S2m": {
+       "expected_failures": 3.3967780700039065,
+       "p_no_failure": 0.033480969707233806
+      },
+      "bumper_S10m": {
+       "expected_failures": 0.05462433850349984,
+       "p_no_failure": 0.9468407727736732
+      },
+      "skirt_or_shield_S100m": {
+       "expected_failures": 0.00012626515582654597,
+       "p_no_failure": 0.9998737428152827
+      }
+     },
+     "standoff_for_0p1_failures_m": 7.932073807209371,
+     "standoff_engine_first_only_m": 7.281412785724634,
+     "standoff_bow_first_only_m": 4.2483859101560615
+    },
+    "NOMINAL": {
+     "legs": [
+      {
+       "leg": "F1",
+       "name": "accelerate outbound",
+       "orientation": "BOW_FIRST",
+       "area_m2": 1509.2,
+       "bare_5mm_wall": 3020.907155784983,
+       "bumper_S1m": 468.71445300006593,
+       "bumper_S2m": 125.28539451420143,
+       "bumper_S10m": 0.2278674164086155,
+       "skirt_or_shield_S100m": 6.330754967888052e-05
+      },
+      {
+       "leg": "F2",
+       "name": "brake at destination",
+       "orientation": "ENGINE_FIRST",
+       "area_m2": 2280.7,
+       "bare_5mm_wall": 311.7264683471394,
+       "bumper_S1m": 40.48119673664933,
+       "bumper_S2m": 8.80566625111019,
+       "bumper_S10m": 0.24143756376607553,
+       "skirt_or_shield_S100m": 4.6258417551778875e-05
+      },
+      {
+       "leg": "F3",
+       "name": "accelerate home",
+       "orientation": "BOW_FIRST",
+       "area_m2": 1509.2,
+       "bare_5mm_wall": 160.67948375643135,
+       "bumper_S1m": 20.86604268150857,
+       "bumper_S2m": 4.538882806012451,
+       "bumper_S10m": 0.12444905083306022,
+       "skirt_or_shield_S100m": 2.3843912552629692e-05
+      },
+      {
+       "leg": "F4",
+       "name": "coast home",
+       "orientation": "BOW_FIRST",
+       "area_m2": 1509.2,
+       "bare_5mm_wall": 338.089327140053,
+       "bumper_S1m": 52.39038976491251,
+       "bumper_S2m": 11.399405770844451,
+       "bumper_S10m": 0.3220257997300707,
+       "skirt_or_shield_S100m": 0.00045629202165323846
+      },
+      {
+       "leg": "F5",
+       "name": "brake at home",
+       "orientation": "ENGINE_FIRST",
+       "area_m2": 2280.7,
+       "bare_5mm_wall": 8178.210126838682,
+       "bumper_S1m": 1343.6008488222403,
+       "bumper_S2m": 390.34984532886176,
+       "bumper_S10m": 1.8037426103795398,
+       "skirt_or_shield_S100m": 0.00021339039118849253
+      }
+     ],
+     "total": {
+      "bare_5mm_wall": {
+       "expected_failures": 12009.612561867289,
+       "p_no_failure": 0.0
+      },
+      "bumper_S1m": {
+       "expected_failures": 1926.0529310053766,
+       "p_no_failure": 0.0
+      },
+      "bumper_S2m": {
+       "expected_failures": 540.3791946710303,
+       "p_no_failure": 2.0715604887558948e-235
+      },
+      "bumper_S10m": {
+       "expected_failures": 2.7195224411173617,
+       "p_no_failure": 0.06590622101349697
+      },
+      "skirt_or_shield_S100m": {
+       "expected_failures": 0.0008030922926250201,
+       "p_no_failure": 0.9991972300996809
+      }
+     },
+     "standoff_for_0p1_failures_m": 25.154919658138205,
+     "standoff_engine_first_only_m": 20.17679917272376,
+     "standoff_bow_first_only_m": 22.41094158475447
+    },
+    "HIGH": {
+     "legs": [
+      {
+       "leg": "F1",
+       "name": "accelerate outbound",
+       "orientation": "BOW_FIRST",
+       "area_m2": 1509.2,
+       "bare_5mm_wall": 58241.73588778234,
+       "bumper_S1m": 12917.901834394104,
+       "bumper_S2m": 4759.694417176159,
+       "bumper_S10m": 475.40686856133266,
+       "skirt_or_shield_S100m": 0.793204728080632
+      },
+      {
+       "leg": "F2",
+       "name": "brake at destination",
+       "orientation": "ENGINE_FIRST",
+       "area_m2": 2280.7,
+       "bare_5mm_wall": 6234.529366942798,
+       "bumper_S1m": 809.623934732987,
+       "bumper_S2m": 176.11332502220418,
+       "bumper_S10m": 4.828751275321513,
+       "skirt_or_shield_S100m": 0.000925168351035578
+      },
+      {
+       "leg": "F3",
+       "name": "accelerate home",
+       "orientation": "BOW_FIRST",
+       "area_m2": 1509.2,
+       "bare_5mm_wall": 3213.5896751286255,
+       "bumper_S1m": 417.3208536301714,
+       "bumper_S2m": 90.77765612024908,
+       "bumper_S10m": 2.488981016661205,
+       "skirt_or_shield_S100m": 0.00047687825105259394
+      },
+      {
+       "leg": "F4",
+       "name": "coast home",
+       "orientation": "BOW_FIRST",
+       "area_m2": 1509.2,
+       "bare_5mm_wall": 6761.786542801089,
+       "bumper_S1m": 1047.8077952982537,
+       "bumper_S2m": 227.9881154168884,
+       "bumper_S10m": 6.440515994601406,
+       "skirt_or_shield_S100m": 0.009125840433064778
+      },
+      {
+       "leg": "F5",
+       "name": "brake at home",
+       "orientation": "ENGINE_FIRST",
+       "area_m2": 2280.7,
+       "bare_5mm_wall": 140577.6228298115,
+       "bumper_S1m": 32036.757581722613,
+       "bumper_S2m": 12028.199742644078,
+       "bumper_S10m": 1235.3432302768513,
+       "skirt_or_shield_S100m": 24.558860966391492
+      }
+     ],
+     "total": {
+      "bare_5mm_wall": {
+       "expected_failures": 215029.26430246636,
+       "p_no_failure": 0.0
+      },
+      "bumper_S1m": {
+       "expected_failures": 47229.41199977813,
+       "p_no_failure": 0.0
+      },
+      "bumper_S2m": {
+       "expected_failures": 17282.77325637958,
+       "p_no_failure": 0.0
+      },
+      "bumper_S10m": {
+       "expected_failures": 1724.508347124768,
+       "p_no_failure": 0.0
+      },
+      "skirt_or_shield_S100m": {
+       "expected_failures": 25.362593581507276,
+       "p_no_failure": 9.664192250075476e-12
+      }
+     },
+     "standoff_for_0p1_failures_m": 287.42343996475233,
+     "standoff_engine_first_only_m": 287.3937784480061,
+     "standoff_bow_first_only_m": 126.7137559553595
+    },
+    "NOMINAL_HILAT": {
+     "legs": [
+      {
+       "leg": "F1",
+       "name": "accelerate outbound",
+       "orientation": "BOW_FIRST",
+       "area_m2": 1509.2,
+       "bare_5mm_wall": 558.7348251133628,
+       "bumper_S1m": 79.60209586687769,
+       "bumper_S2m": 19.556244746971785,
+       "bumper_S10m": 0.2117943555567744,
+       "skirt_or_shield_S100m": 2.7326264754592136e-05
+      },
+      {
+       "leg": "F2",
+       "name": "brake at destination",
+       "orientation": "ENGINE_FIRST",
+       "area_m2": 2280.7,
+       "bare_5mm_wall": 311.7264683471394,
+       "bumper_S1m": 40.48119673664933,
+       "bumper_S2m": 8.80566625111019,
+       "bumper_S10m": 0.24143756376607553,
+       "skirt_or_shield_S100m": 4.6258417551778875e-05
+      },
+      {
+       "leg": "F3",
+       "name": "accelerate home",
+       "orientation": "BOW_FIRST",
+       "area_m2": 1509.2,
+       "bare_5mm_wall": 160.67948375643135,
+       "bumper_S1m": 20.86604268150857,
+       "bumper_S2m": 4.538882806012451,
+       "bumper_S10m": 0.12444905083306022,
+       "skirt_or_shield_S100m": 2.3843912552629692e-05
+      },
+      {
+       "leg": "F4",
+       "name": "coast home",
+       "orientation": "BOW_FIRST",
+       "area_m2": 1509.2,
+       "bare_5mm_wall": 338.089327140053,
+       "bumper_S1m": 52.39038976491251,
+       "bumper_S2m": 11.399405770844451,
+       "bumper_S10m": 0.3220257997300707,
+       "skirt_or_shield_S100m": 0.00045629202165323846
+      },
+      {
+       "leg": "F5",
+       "name": "brake at home",
+       "orientation": "ENGINE_FIRST",
+       "area_m2": 2280.7,
+       "bare_5mm_wall": 1050.4119764838044,
+       "bumper_S1m": 162.75646825903723,
+       "bumper_S2m": 44.95473470958441,
+       "bumper_S10m": 0.4174298184082845,
+       "skirt_or_shield_S100m": 7.10130080053784e-05
+      }
+     ],
+     "total": {
+      "bare_5mm_wall": {
+       "expected_failures": 2419.642080840791,
+       "p_no_failure": 0.0
+      },
+      "bumper_S1m": {
+       "expected_failures": 356.09619330898533,
+       "p_no_failure": 2.2355697227551256e-155
+      },
+      "bumper_S2m": {
+       "expected_failures": 89.25493428452329,
+       "p_no_failure": 1.726134200997672e-39
+      },
+      "bumper_S10m": {
+       "expected_failures": 1.3171365882942654,
+       "p_no_failure": 0.2679013165006197
+      },
+      "skirt_or_shield_S100m": {
+       "expected_failures": 0.0006247336245176176,
+       "p_no_failure": 0.9993754614809014
+      }
+     },
+     "standoff_for_0p1_failures_m": 24.666727850893015,
+     "standoff_engine_first_only_m": 18.92350311423181,
+     "standoff_bow_first_only_m": 22.30307786618253
+    }
+   }
+  },
+  "V0_as_drawn": {
+   "description": "FDP-1 as drawn",
+   "areas_m2": {
+    "BOW_FIRST": 1509.2,
+    "ENGINE_FIRST": 12260.4
+   },
+   "cases": {
+    "LOW": {
+     "legs": [
+      {
+       "leg": "F1",
+       "name": "accelerate outbound",
+       "orientation": "BOW_FIRST",
+       "area_m2": 1509.2,
+       "bare_5mm_wall": 71.04298599771121,
+       "bumper_S1m": 3.7633241308478205,
+       "bumper_S2m": 0.6842573317144338,
+       "bumper_S10m": 0.010895359076483216,
+       "skirt_or_shield_S100m": 2.4753829478373996e-05
+      },
+      {
+       "leg": "F2",
+       "name": "brake at destination",
+       "orientation": "ENGINE_FIRST",
+       "area_m2": 12260.4,
+       "bare_5mm_wall": 0.0,
+       "bumper_S1m": 0.0,
+       "bumper_S2m": 0.0,
+       "bumper_S10m": 0.0,
+       "skirt_or_shield_S100m": 0.0
+      },
+      {
+       "leg": "F3",
+       "name": "accelerate home",
+       "orientation": "BOW_FIRST",
+       "area_m2": 1509.2,
+       "bare_5mm_wall": 0.0,
+       "bumper_S1m": 0.0,
+       "bumper_S2m": 0.0,
+       "bumper_S10m": 0.0,
+       "skirt_or_shield_S100m": 0.0
+      },
+      {
+       "leg": "F4",
+       "name": "coast home",
+       "orientation": "BOW_FIRST",
+       "area_m2": 1509.2,
+       "bare_5mm_wall": 0.0,
+       "bumper_S1m": 0.0,
+       "bumper_S2m": 0.0,
+       "bumper_S10m": 0.0,
+       "skirt_or_shield_S100m": 0.0
+      },
+      {
+       "leg": "F5",
+       "name": "brake at home",
+       "orientation": "ENGINE_FIRST",
+       "area_m2": 12260.4,
+       "bare_5mm_wall": 1595.1822538724862,
+       "bumper_S1m": 97.73510949207967,
+       "bumper_S2m": 14.581746507530255,
+       "bumper_S10m": 0.23507466101065227,
+       "skirt_or_shield_S100m": 0.0005456962623576656
+      }
+     ],
+     "total": {
+      "bare_5mm_wall": {
+       "expected_failures": 1666.2252398701974,
+       "p_no_failure": 0.0
+      },
+      "bumper_S1m": {
+       "expected_failures": 101.4984336229275,
+       "p_no_failure": 8.313623558701321e-45
+      },
+      "bumper_S2m": {
+       "expected_failures": 15.26600383924469,
+       "p_no_failure": 2.3445460749562187e-07
+      },
+      "bumper_S10m": {
+       "expected_failures": 0.24597002008713548,
+       "p_no_failure": 0.7819456672370448
+      },
+      "skirt_or_shield_S100m": {
+       "expected_failures": 0.0005704500918360395,
+       "p_no_failure": 0.9994297125838834
+      }
+     },
+     "standoff_for_0p1_failures_m": 14.121702751375558,
+     "standoff_engine_first_only_m": 13.879616555147877,
+     "standoff_bow_first_only_m": 4.2483859101560615
+    },
+    "NOMINAL": {
+     "legs": [
+      {
+       "leg": "F1",
+       "name": "accelerate outbound",
+       "orientation": "BOW_FIRST",
+       "area_m2": 1509.2,
+       "bare_5mm_wall": 3020.907155784983,
+       "bumper_S1m": 468.71445300006593,
+       "bumper_S2m": 125.28539451420143,
+       "bumper_S10m": 0.2278674164086155,
+       "skirt_or_shield_S100m": 6.330754967888052e-05
+      },
+      {
+       "leg": "F2",
+       "name": "brake at destination",
+       "orientation": "ENGINE_FIRST",
+       "area_m2": 12260.4,
+       "bare_5mm_wall": 1675.7535811475723,
+       "bumper_S1m": 217.61549720262002,
+       "bumper_S2m": 47.33677840360915,
+       "bumper_S10m": 1.2979002529037544,
+       "skirt_or_shield_S100m": 0.0002486722070205769
+      },
+      {
+       "leg": "F3",
+       "name": "accelerate home",
+       "orientation": "BOW_FIRST",
+       "area_m2": 1509.2,
+       "bare_5mm_wall": 160.67948375643135,
+       "bumper_S1m": 20.86604268150857,
+       "bumper_S2m": 4.538882806012451,
+       "bumper_S10m": 0.12444905083306022,
+       "skirt_or_shield_S100m": 2.3843912552629692e-05
+      },
+      {
+       "leg": "F4",
+       "name": "coast home",
+       "orientation": "BOW_FIRST",
+       "area_m2": 1509.2,
+       "bare_5mm_wall": 338.089327140053,
+       "bumper_S1m": 52.39038976491251,
+       "bumper_S2m": 11.399405770844451,
+       "bumper_S10m": 0.3220257997300707,
+       "skirt_or_shield_S100m": 0.00045629202165323846
+      },
+      {
+       "leg": "F5",
+       "name": "brake at home",
+       "orientation": "ENGINE_FIRST",
+       "area_m2": 12260.4,
+       "bare_5mm_wall": 43963.75123387249,
+       "bumper_S1m": 7222.81924273258,
+       "bumper_S2m": 2098.410682540438,
+       "bumper_S10m": 9.696411584293116,
+       "skirt_or_shield_S100m": 0.0011471265629532136
+      }
+     ],
+     "total": {
+      "bare_5mm_wall": {
+       "expected_failures": 49159.18078170153,
+       "p_no_failure": 0.0
+      },
+      "bumper_S1m": {
+       "expected_failures": 7982.405625381687,
+       "p_no_failure": 0.0
+      },
+      "bumper_S2m": {
+       "expected_failures": 2286.971144035105,
+       "p_no_failure": 0.0
+      },
+      "bumper_S10m": {
+       "expected_failures": 11.668654104168617,
+       "p_no_failure": 8.557913871018642e-06
+      },
+      "skirt_or_shield_S100m": {
+       "expected_failures": 0.001939242253858539,
+       "p_no_failure": 0.9980626368615181
+      }
+     },
+     "standoff_for_0p1_failures_m": 31.69955426855233,
+     "standoff_engine_first_only_m": 29.862162261190434,
+     "standoff_bow_first_only_m": 22.41094158475447
+    },
+    "HIGH": {
+     "legs": [
+      {
+       "leg": "F1",
+       "name": "accelerate outbound",
+       "orientation": "BOW_FIRST",
+       "area_m2": 1509.2,
+       "bare_5mm_wall": 58241.73588778234,
+       "bumper_S1m": 12917.901834394104,
+       "bumper_S2m": 4759.694417176159,
+       "bumper_S10m": 475.40686856133266,
+       "skirt_or_shield_S100m": 0.793204728080632
+      },
+      {
+       "leg": "F2",
+       "name": "brake at destination",
+       "orientation": "ENGINE_FIRST",
+       "area_m2": 12260.4,
+       "bare_5mm_wall": 33515.0716229515,
+       "bumper_S1m": 4352.309944052403,
+       "bumper_S2m": 946.735568072185,
+       "bumper_S10m": 25.958005058075095,
+       "skirt_or_shield_S100m": 0.0049734441404115405
+      },
+      {
+       "leg": "F3",
+       "name": "accelerate home",
+       "orientation": "BOW_FIRST",
+       "area_m2": 1509.2,
+       "bare_5mm_wall": 3213.5896751286255,
+       "bumper_S1m": 417.3208536301714,
+       "bumper_S2m": 90.77765612024908,
+       "bumper_S10m": 2.488981016661205,
+       "skirt_or_shield_S100m": 0.00047687825105259394
+      },
+      {
+       "leg": "F4",
+       "name": "coast home",
+       "orientation": "BOW_FIRST",
+       "area_m2": 1509.2,
+       "bare_5mm_wall": 6761.786542801089,
+       "bumper_S1m": 1047.8077952982537,
+       "bumper_S2m": 227.9881154168884,
+       "bumper_S10m": 6.440515994601406,
+       "skirt_or_shield_S100m": 0.009125840433064778
+      },
+      {
+       "leg": "F5",
+       "name": "brake at home",
+       "orientation": "ENGINE_FIRST",
+       "area_m2": 12260.4,
+       "bare_5mm_wall": 755705.6548176529,
+       "bumper_S1m": 172220.57379530492,
+       "bumper_S2m": 64660.2096394587,
+       "bumper_S10m": 6640.856816103086,
+       "skirt_or_shield_S100m": 132.02151049780608
+      }
+     ],
+     "total": {
+      "bare_5mm_wall": {
+       "expected_failures": 857437.8385463165,
+       "p_no_failure": 0.0
+      },
+      "bumper_S1m": {
+       "expected_failures": 190955.91422267986,
+       "p_no_failure": 0.0
+      },
+      "bumper_S2m": {
+       "expected_failures": 70685.40539624418,
+       "p_no_failure": 0.0
+      },
+      "bumper_S10m": {
+       "expected_failures": 7151.151186733757,
+       "p_no_failure": 0.0
+      },
+      "skirt_or_shield_S100m": {
+       "expected_failures": 132.82929138871123,
+       "p_no_failure": 2.0557567019091918e-58
+      }
+     },
+     "standoff_for_0p1_failures_m": 330.0587994710216,
+     "standoff_engine_first_only_m": 330.0442619550986,
+     "standoff_bow_first_only_m": 126.7137559553595
+    },
+    "NOMINAL_HILAT": {
+     "legs": [
+      {
+       "leg": "F1",
+       "name": "accelerate outbound",
+       "orientation": "BOW_FIRST",
+       "area_m2": 1509.2,
+       "bare_5mm_wall": 558.7348251133628,
+       "bumper_S1m": 79.60209586687769,
+       "bumper_S2m": 19.556244746971785,
+       "bumper_S10m": 0.2117943555567744,
+       "skirt_or_shield_S100m": 2.7326264754592136e-05
+      },
+      {
+       "leg": "F2",
+       "name": "brake at destination",
+       "orientation": "ENGINE_FIRST",
+       "area_m2": 12260.4,
+       "bare_5mm_wall": 1675.7535811475723,
+       "bumper_S1m": 217.61549720262002,
+       "bumper_S2m": 47.33677840360915,
+       "bumper_S10m": 1.2979002529037544,
+       "skirt_or_shield_S100m": 0.0002486722070205769
+      },
+      {
+       "leg": "F3",
+       "name": "accelerate home",
+       "orientation": "BOW_FIRST",
+       "area_m2": 1509.2,
+       "bare_5mm_wall": 160.67948375643135,
+       "bumper_S1m": 20.86604268150857,
+       "bumper_S2m": 4.538882806012451,
+       "bumper_S10m": 0.12444905083306022,
+       "skirt_or_shield_S100m": 2.3843912552629692e-05
+      },
+      {
+       "leg": "F4",
+       "name": "coast home",
+       "orientation": "BOW_FIRST",
+       "area_m2": 1509.2,
+       "bare_5mm_wall": 338.089327140053,
+       "bumper_S1m": 52.39038976491251,
+       "bumper_S2m": 11.399405770844451,
+       "bumper_S10m": 0.3220257997300707,
+       "skirt_or_shield_S100m": 0.00045629202165323846
+      },
+      {
+       "leg": "F5",
+       "name": "brake at home",
+       "orientation": "ENGINE_FIRST",
+       "area_m2": 12260.4,
+       "bare_5mm_wall": 5646.71854977947,
+       "bumper_S1m": 874.9328729964923,
+       "bumper_S2m": 241.66397572385176,
+       "bumper_S10m": 2.243984980757194,
+       "skirt_or_shield_S100m": 0.00038174590404224207
+      }
+     ],
+     "total": {
+      "bare_5mm_wall": {
+       "expected_failures": 8379.97576693689,
+       "p_no_failure": 0.0
+      },
+      "bumper_S1m": {
+       "expected_failures": 1245.406898512411,
+       "p_no_failure": 0.0
+      },
+      "bumper_S2m": {
+       "expected_failures": 324.4952874512896,
+       "p_no_failure": 1.1843696129799225e-141
+      },
+      "bumper_S10m": {
+       "expected_failures": 4.200154439780854,
+       "p_no_failure": 0.014993261085705162
+      },
+      "skirt_or_shield_S100m": {
+       "expected_failures": 0.0011378803100232794,
+       "p_no_failure": 0.9988627668302973
+      }
+     },
+     "standoff_for_0p1_failures_m": 30.100089262724858,
+     "standoff_engine_first_only_m": 28.27321987086024,
+     "standoff_bow_first_only_m": 22.30307786618253
+    }
+   }
+  },
+  "CANON_as_drawn": {
+   "description": "canon four-nozzle ship",
+   "areas_m2": {
+    "BOW_FIRST": 0.0,
+    "ENGINE_FIRST": 4014.6
+   },
+   "cases": {
+    "LOW": {
+     "legs": [
+      {
+       "leg": "C1",
+       "name": "accelerate outbound",
+       "orientation": "BOW_FIRST",
+       "area_m2": 0.0,
+       "bare_5mm_wall": 0.0,
+       "bumper_S1m": 0.0,
+       "bumper_S2m": 0.0,
+       "bumper_S10m": 0.0,
+       "skirt_or_shield_S100m": 0.0
+      },
+      {
+       "leg": "C2",
+       "name": "coast out",
+       "orientation": "BOW_FIRST",
+       "area_m2": 0.0,
+       "bare_5mm_wall": 0.0,
+       "bumper_S1m": 0.0,
+       "bumper_S2m": 0.0,
+       "bumper_S10m": 0.0,
+       "skirt_or_shield_S100m": 0.0
+      },
+      {
+       "leg": "C3",
+       "name": "brake at Kuiper anchorage",
+       "orientation": "ENGINE_FIRST",
+       "area_m2": 4014.6,
+       "bare_5mm_wall": 316.9502317468725,
+       "bumper_S1m": 9.609948341293773,
+       "bumper_S2m": 0.210509947024265,
+       "bumper_S10m": 0.0,
+       "skirt_or_shield_S100m": 0.0
+      },
+      {
+       "leg": "C4",
+       "name": "accelerate home",
+       "orientation": "BOW_FIRST",
+       "area_m2": 0.0,
+       "bare_5mm_wall": 0.0,
+       "bumper_S1m": 0.0,
+       "bumper_S2m": 0.0,
+       "bumper_S10m": 0.0,
+       "skirt_or_shield_S100m": 0.0
+      },
+      {
+       "leg": "C5",
+       "name": "coast home",
+       "orientation": "BOW_FIRST",
+       "area_m2": 0.0,
+       "bare_5mm_wall": 0.0,
+       "bumper_S1m": 0.0,
+       "bumper_S2m": 0.0,
+       "bumper_S10m": 0.0,
+       "skirt_or_shield_S100m": 0.0
+      },
+      {
+       "leg": "C6",
+       "name": "brake at home",
+       "orientation": "ENGINE_FIRST",
+       "area_m2": 4014.6,
+       "bare_5mm_wall": 4603.563437083949,
+       "bumper_S1m": 648.6336506291716,
+       "bumper_S2m": 151.0154466274004,
+       "bumper_S10m": 3.305705115981638,
+       "skirt_or_shield_S100m": 0.008914481618282483
+      }
+     ],
+     "total": {
+      "bare_5mm_wall": {
+       "expected_failures": 4920.513668830821,
+       "p_no_failure": 0.0
+      },
+      "bumper_S1m": {
+       "expected_failures": 658.2435989704654,
+       "p_no_failure": 1.3441174488655196e-286
+      },
+      "bumper_S2m": {
+       "expected_failures": 151.22595657442466,
+       "p_no_failure": 2.1057244468135625e-66
+      },
+      "bumper_S10m": {
+       "expected_failures": 3.305705115981638,
+       "p_no_failure": 0.03667334375667716
+      },
+      "skirt_or_shield_S100m": {
+       "expected_failures": 0.008914481618282483,
+       "p_no_failure": 0.9911251345663306
+      }
+     },
+     "standoff_for_0p1_failures_m": 39.583319331047036,
+     "standoff_engine_first_only_m": 39.583319331047036,
+     "standoff_bow_first_only_m": 0.0
+    },
+    "NOMINAL": {
+     "legs": [
+      {
+       "leg": "C1",
+       "name": "accelerate outbound",
+       "orientation": "BOW_FIRST",
+       "area_m2": 0.0,
+       "bare_5mm_wall": 0.0,
+       "bumper_S1m": 0.0,
+       "bumper_S2m": 0.0,
+       "bumper_S10m": 0.0,
+       "skirt_or_shield_S100m": 0.0
+      },
+      {
+       "leg": "C2",
+       "name": "coast out",
+       "orientation": "BOW_FIRST",
+       "area_m2": 0.0,
+       "bare_5mm_wall": 0.0,
+       "bumper_S1m": 0.0,
+       "bumper_S2m": 0.0,
+       "bumper_S10m": 0.0,
+       "skirt_or_shield_S100m": 0.0
+      },
+      {
+       "leg": "C3",
+       "name": "brake at Kuiper anchorage",
+       "orientation": "ENGINE_FIRST",
+       "area_m2": 4014.6,
+       "bare_5mm_wall": 7947.319148716197,
+       "bumper_S1m": 1380.8964984977886,
+       "bumper_S2m": 428.1400367281286,
+       "bumper_S10m": 5.953639958379806,
+       "skirt_or_shield_S100m": 1.1226687804927819e-06
+      },
+      {
+       "leg": "C4",
+       "name": "accelerate home",
+       "orientation": "BOW_FIRST",
+       "area_m2": 0.0,
+       "bare_5mm_wall": 0.0,
+       "bumper_S1m": 0.0,
+       "bumper_S2m": 0.0,
+       "bumper_S10m": 0.0,
+       "skirt_or_shield_S100m": 0.0
+      },
+      {
+       "leg": "C5",
+       "name": "coast home",
+       "orientation": "BOW_FIRST",
+       "area_m2": 0.0,
+       "bare_5mm_wall": 0.0,
+       "bumper_S1m": 0.0,
+       "bumper_S2m": 0.0,
+       "bumper_S10m": 0.0,
+       "skirt_or_shield_S100m": 0.0
+      },
+      {
+       "leg": "C6",
+       "name": "brake at home",
+       "orientation": "ENGINE_FIRST",
+       "area_m2": 4014.6,
+       "bare_5mm_wall": 9210.55015211417,
+       "bumper_S1m": 1297.7433915571046,
+       "bumper_S2m": 302.13438030848715,
+       "bumper_S10m": 6.614320412786081,
+       "skirt_or_shield_S100m": 0.017829220323790047
+      }
+     ],
+     "total": {
+      "bare_5mm_wall": {
+       "expected_failures": 17157.869300830367,
+       "p_no_failure": 0.0
+      },
+      "bumper_S1m": {
+       "expected_failures": 2678.639890054893,
+       "p_no_failure": 0.0
+      },
+      "bumper_S2m": {
+       "expected_failures": 730.2744170366158,
+       "p_no_failure": 7.012135e-318
+      },
+      "bumper_S10m": {
+       "expected_failures": 12.567960371165887,
+       "p_no_failure": 3.48180273445327e-06
+      },
+      "skirt_or_shield_S100m": {
+       "expected_failures": 0.01783034299257054,
+       "p_no_failure": 0.98232767699568
+      }
+     },
+     "standoff_for_0p1_failures_m": 51.73355951607632,
+     "standoff_engine_first_only_m": 51.73355951607632,
+     "standoff_bow_first_only_m": 0.0
+    },
+    "HIGH": {
+     "legs": [
+      {
+       "leg": "C1",
+       "name": "accelerate outbound",
+       "orientation": "BOW_FIRST",
+       "area_m2": 0.0,
+       "bare_5mm_wall": 0.0,
+       "bumper_S1m": 0.0,
+       "bumper_S2m": 0.0,
+       "bumper_S10m": 0.0,
+       "skirt_or_shield_S100m": 0.0
+      },
+      {
+       "leg": "C2",
+       "name": "coast out",
+       "orientation": "BOW_FIRST",
+       "area_m2": 0.0,
+       "bare_5mm_wall": 0.0,
+       "bumper_S1m": 0.0,
+       "bumper_S2m": 0.0,
+       "bumper_S10m": 0.0,
+       "skirt_or_shield_S100m": 0.0
+      },
+      {
+       "leg": "C3",
+       "name": "brake at Kuiper anchorage",
+       "orientation": "ENGINE_FIRST",
+       "area_m2": 4014.6,
+       "bare_5mm_wall": 113862.21328495727,
+       "bumper_S1m": 26309.88576596446,
+       "bumper_S2m": 9963.437596243206,
+       "bumper_S10m": 1040.6472415697801,
+       "skirt_or_shield_S100m": 35.23275893245035
+      },
+      {
+       "leg": "C4",
+       "name": "accelerate home",
+       "orientation": "BOW_FIRST",
+       "area_m2": 0.0,
+       "bare_5mm_wall": 0.0,
+       "bumper_S1m": 0.0,
+       "bumper_S2m": 0.0,
+       "bumper_S10m": 0.0,
+       "skirt_or_shield_S100m": 0.0
+      },
+      {
+       "leg": "C5",
+       "name": "coast home",
+       "orientation": "BOW_FIRST",
+       "area_m2": 0.0,
+       "bare_5mm_wall": 0.0,
+       "bumper_S1m": 0.0,
+       "bumper_S2m": 0.0,
+       "bumper_S10m": 0.0,
+       "skirt_or_shield_S100m": 0.0
+      },
+      {
+       "leg": "C6",
+       "name": "brake at home",
+       "orientation": "ENGINE_FIRST",
+       "area_m2": 4014.6,
+       "bare_5mm_wall": 18482.719268510715,
+       "bumper_S1m": 2604.0563669991366,
+       "bumper_S2m": 606.131524438349,
+       "bumper_S10m": 13.2810222722179,
+       "skirt_or_shield_S100m": 0.035663068059875035
+      }
+     ],
+     "total": {
+      "bare_5mm_wall": {
+       "expected_failures": 132344.93255346798,
+       "p_no_failure": 0.0
+      },
+      "bumper_S1m": {
+       "expected_failures": 28913.942132963595,
+       "p_no_failure": 0.0
+      },
+      "bumper_S2m": {
+       "expected_failures": 10569.569120681555,
+       "p_no_failure": 0.0
+      },
+      "bumper_S10m": {
+       "expected_failures": 1053.928263841998,
+       "p_no_failure": 0.0
+      },
+      "skirt_or_shield_S100m": {
+       "expected_failures": 35.26842200051023,
+       "p_no_failure": 4.820798062041699e-16
+      }
+     },
+     "standoff_for_0p1_failures_m": 525.3545151852699,
+     "standoff_engine_first_only_m": 525.3545151852699,
+     "standoff_bow_first_only_m": 0.0
+    },
+    "NOMINAL_HILAT": {
+     "legs": [
+      {
+       "leg": "C1",
+       "name": "accelerate outbound",
+       "orientation": "BOW_FIRST",
+       "area_m2": 0.0,
+       "bare_5mm_wall": 0.0,
+       "bumper_S1m": 0.0,
+       "bumper_S2m": 0.0,
+       "bumper_S10m": 0.0,
+       "skirt_or_shield_S100m": 0.0
+      },
+      {
+       "leg": "C2",
+       "name": "coast out",
+       "orientation": "BOW_FIRST",
+       "area_m2": 0.0,
+       "bare_5mm_wall": 0.0,
+       "bumper_S1m": 0.0,
+       "bumper_S2m": 0.0,
+       "bumper_S10m": 0.0,
+       "skirt_or_shield_S100m": 0.0
+      },
+      {
+       "leg": "C3",
+       "name": "brake at Kuiper anchorage",
+       "orientation": "ENGINE_FIRST",
+       "area_m2": 4014.6,
+       "bare_5mm_wall": 801.5655758671152,
+       "bumper_S1m": 139.00507312839815,
+       "bumper_S2m": 43.009147650756084,
+       "bumper_S10m": 0.6137510410695002,
+       "skirt_or_shield_S100m": 1.1226687804927819e-06
+      },
+      {
+       "leg": "C4",
+       "name": "accelerate home",
+       "orientation": "BOW_FIRST",
+       "area_m2": 0.0,
+       "bare_5mm_wall": 0.0,
+       "bumper_S1m": 0.0,
+       "bumper_S2m": 0.0,
+       "bumper_S10m": 0.0,
+       "skirt_or_shield_S100m": 0.0
+      },
+      {
+       "leg": "C5",
+       "name": "coast home",
+       "orientation": "BOW_FIRST",
+       "area_m2": 0.0,
+       "bare_5mm_wall": 0.0,
+       "bumper_S1m": 0.0,
+       "bumper_S2m": 0.0,
+       "bumper_S10m": 0.0,
+       "skirt_or_shield_S100m": 0.0
+      },
+      {
+       "leg": "C6",
+       "name": "brake at home",
+       "orientation": "ENGINE_FIRST",
+       "area_m2": 4014.6,
+       "bare_5mm_wall": 2765.561339693072,
+       "bumper_S1m": 389.65628013711535,
+       "bumper_S2m": 90.71275498925921,
+       "bumper_S10m": 1.9863332268995393,
+       "skirt_or_shield_S100m": 0.005348946056149461
+      }
+     ],
+     "total": {
+      "bare_5mm_wall": {
+       "expected_failures": 3567.126915560187,
+       "p_no_failure": 0.0
+      },
+      "bumper_S1m": {
+       "expected_failures": 528.6613532655135,
+       "p_no_failure": 2.54267867837167e-230
+      },
+      "bumper_S2m": {
+       "expected_failures": 133.7219026400153,
+       "p_no_failure": 8.420067515023317e-59
+      },
+      "bumper_S10m": {
+       "expected_failures": 2.6000842679690397,
+       "p_no_failure": 0.07426731959444874
+      },
+      "skirt_or_shield_S100m": {
+       "expected_failures": 0.005350068724929954,
+       "p_no_failure": 0.9946642174041387
+      }
+     },
+     "standoff_for_0p1_failures_m": 32.576434970040914,
+     "standoff_engine_first_only_m": 32.576434970040914,
+     "standoff_bow_first_only_m": 0.0
+    }
+   }
+  },
+  "CANON_skirt": {
+   "description": "canon ship with the flat aft skirt",
+   "areas_m2": {
+    "BOW_FIRST": 0.0,
+    "ENGINE_FIRST": 367.8
+   },
+   "cases": {
+    "LOW": {
+     "legs": [
+      {
+       "leg": "C1",
+       "name": "accelerate outbound",
+       "orientation": "BOW_FIRST",
+       "area_m2": 0.0,
+       "bare_5mm_wall": 0.0,
+       "bumper_S1m": 0.0,
+       "bumper_S2m": 0.0,
+       "bumper_S10m": 0.0,
+       "skirt_or_shield_S100m": 0.0
+      },
+      {
+       "leg": "C2",
+       "name": "coast out",
+       "orientation": "BOW_FIRST",
+       "area_m2": 0.0,
+       "bare_5mm_wall": 0.0,
+       "bumper_S1m": 0.0,
+       "bumper_S2m": 0.0,
+       "bumper_S10m": 0.0,
+       "skirt_or_shield_S100m": 0.0
+      },
+      {
+       "leg": "C3",
+       "name": "brake at Kuiper anchorage",
+       "orientation": "ENGINE_FIRST",
+       "area_m2": 367.8,
+       "bare_5mm_wall": 29.037586617969335,
+       "bumper_S1m": 0.8804212125561326,
+       "bumper_S2m": 0.01928599574441406,
+       "bumper_S10m": 0.0,
+       "skirt_or_shield_S100m": 0.0
+      },
+      {
+       "leg": "C4",
+       "name": "accelerate home",
+       "orientation": "BOW_FIRST",
+       "area_m2": 0.0,
+       "bare_5mm_wall": 0.0,
+       "bumper_S1m": 0.0,
+       "bumper_S2m": 0.0,
+       "bumper_S10m": 0.0,
+       "skirt_or_shield_S100m": 0.0
+      },
+      {
+       "leg": "C5",
+       "name": "coast home",
+       "orientation": "BOW_FIRST",
+       "area_m2": 0.0,
+       "bare_5mm_wall": 0.0,
+       "bumper_S1m": 0.0,
+       "bumper_S2m": 0.0,
+       "bumper_S10m": 0.0,
+       "skirt_or_shield_S100m": 0.0
+      },
+      {
+       "leg": "C6",
+       "name": "brake at home",
+       "orientation": "ENGINE_FIRST",
+       "area_m2": 367.8,
+       "bare_5mm_wall": 421.75824046218213,
+       "bumper_S1m": 59.42496306018267,
+       "bumper_S2m": 13.835371212463972,
+       "bumper_S10m": 0.3028541677023979,
+       "skirt_or_shield_S100m": 0.0008167056093270306
+      }
+     ],
+     "total": {
+      "bare_5mm_wall": {
+       "expected_failures": 450.79582708015147,
+       "p_no_failure": 1.6667092054020119e-196
+      },
+      "bumper_S1m": {
+       "expected_failures": 60.3053842727388,
+       "p_no_failure": 6.452148899925509e-27
+      },
+      "bumper_S2m": {
+       "expected_failures": 13.854657208208387,
+       "p_no_failure": 9.61609678511436e-07
+      },
+      "bumper_S10m": {
+       "expected_failures": 0.3028541677023979,
+       "p_no_failure": 0.7387068158280101
+      },
+      "skirt_or_shield_S100m": {
+       "expected_failures": 0.0008167056093270306,
+       "p_no_failure": 0.9991836278039261
+      }
+     },
+     "standoff_for_0p1_failures_m": 15.560673010493629,
+     "standoff_engine_first_only_m": 15.560673010493629,
+     "standoff_bow_first_only_m": 0.0
+    },
+    "NOMINAL": {
+     "legs": [
+      {
+       "leg": "C1",
+       "name": "accelerate outbound",
+       "orientation": "BOW_FIRST",
+       "area_m2": 0.0,
+       "bare_5mm_wall": 0.0,
+       "bumper_S1m": 0.0,
+       "bumper_S2m": 0.0,
+       "bumper_S10m": 0.0,
+       "skirt_or_shield_S100m": 0.0
+      },
+      {
+       "leg": "C2",
+       "name": "coast out",
+       "orientation": "BOW_FIRST",
+       "area_m2": 0.0,
+       "bare_5mm_wall": 0.0,
+       "bumper_S1m": 0.0,
+       "bumper_S2m": 0.0,
+       "bumper_S10m": 0.0,
+       "skirt_or_shield_S100m": 0.0
+      },
+      {
+       "leg": "C3",
+       "name": "brake at Kuiper anchorage",
+       "orientation": "ENGINE_FIRST",
+       "area_m2": 367.8,
+       "bare_5mm_wall": 728.0984364314794,
+       "bumper_S1m": 126.51166545795016,
+       "bumper_S2m": 39.22430765421355,
+       "bumper_S10m": 0.5454463151228248,
+       "skirt_or_shield_S100m": 1.028539773489875e-07
+      },
+      {
+       "leg": "C4",
+       "name": "accelerate home",
+       "orientation": "BOW_FIRST",
+       "area_m2": 0.0,
+       "bare_5mm_wall": 0.0,
+       "bumper_S1m": 0.0,
+       "bumper_S2m": 0.0,
+       "bumper_S10m": 0.0,
+       "skirt_or_shield_S100m": 0.0
+      },
+      {
+       "leg": "C5",
+       "name": "coast home",
+       "orientation": "BOW_FIRST",
+       "area_m2": 0.0,
+       "bare_5mm_wall": 0.0,
+       "bumper_S1m": 0.0,
+       "bumper_S2m": 0.0,
+       "bumper_S10m": 0.0,
+       "skirt_or_shield_S100m": 0.0
+      },
+      {
+       "leg": "C6",
+       "name": "brake at home",
+       "orientation": "ENGINE_FIRST",
+       "area_m2": 367.8,
+       "bare_5mm_wall": 843.830106597816,
+       "bumper_S1m": 118.89354342019207,
+       "bumper_S2m": 27.680223453759172,
+       "bumper_S10m": 0.6059749533758583,
+       "skirt_or_shield_S100m": 0.0016334347718552234
+      }
+     ],
+     "total": {
+      "bare_5mm_wall": {
+       "expected_failures": 1571.9285430292953,
+       "p_no_failure": 0.0
+      },
+      "bumper_S1m": {
+       "expected_failures": 245.40520887814222,
+       "p_no_failure": 2.6416297922303876e-107
+      },
+      "bumper_S2m": {
+       "expected_failures": 66.90453110797272,
+       "p_no_failure": 8.784788812979743e-30
+      },
+      "bumper_S10m": {
+       "expected_failures": 1.151421268498683,
+       "p_no_failure": 0.3161870631655481
+      },
+      "skirt_or_shield_S100m": {
+       "expected_failures": 0.0016335376258325724,
+       "p_no_failure": 0.9983677958705506
+      }
+     },
+     "standoff_for_0p1_failures_m": 21.364553985133988,
+     "standoff_engine_first_only_m": 21.364553985133988,
+     "standoff_bow_first_only_m": 0.0
+    },
+    "HIGH": {
+     "legs": [
+      {
+       "leg": "C1",
+       "name": "accelerate outbound",
+       "orientation": "BOW_FIRST",
+       "area_m2": 0.0,
+       "bare_5mm_wall": 0.0,
+       "bumper_S1m": 0.0,
+       "bumper_S2m": 0.0,
+       "bumper_S10m": 0.0,
+       "skirt_or_shield_S100m": 0.0
+      },
+      {
+       "leg": "C2",
+       "name": "coast out",
+       "orientation": "BOW_FIRST",
+       "area_m2": 0.0,
+       "bare_5mm_wall": 0.0,
+       "bumper_S1m": 0.0,
+       "bumper_S2m": 0.0,
+       "bumper_S10m": 0.0,
+       "skirt_or_shield_S100m": 0.0
+      },
+      {
+       "leg": "C3",
+       "name": "brake at Kuiper anchorage",
+       "orientation": "ENGINE_FIRST",
+       "area_m2": 367.8,
+       "bare_5mm_wall": 10431.555334580602,
+       "bumper_S1m": 2410.396050595758,
+       "bumper_S2m": 912.8063438196212,
+       "bumper_S10m": 95.3395245975602,
+       "skirt_or_shield_S100m": 3.2278704566719574
+      },
+      {
+       "leg": "C4",
+       "name": "accelerate home",
+       "orientation": "BOW_FIRST",
+       "area_m2": 0.0,
+       "bare_5mm_wall": 0.0,
+       "bumper_S1m": 0.0,
+       "bumper_S2m": 0.0,
+       "bumper_S10m": 0.0,
+       "skirt_or_shield_S100m": 0.0
+      },
+      {
+       "leg": "C5",
+       "name": "coast home",
+       "orientation": "BOW_FIRST",
+       "area_m2": 0.0,
+       "bare_5mm_wall": 0.0,
+       "bumper_S1m": 0.0,
+       "bumper_S2m": 0.0,
+       "bumper_S10m": 0.0,
+       "skirt_or_shield_S100m": 0.0
+      },
+      {
+       "leg": "C6",
+       "name": "brake at home",
+       "orientation": "ENGINE_FIRST",
+       "area_m2": 367.8,
+       "bare_5mm_wall": 1693.3054717676084,
+       "bumper_S1m": 238.57219443587965,
+       "bumper_S2m": 55.5311051383512,
+       "bumper_S10m": 1.2167488645747382,
+       "skirt_or_shield_S100m": 0.0032672934868784036
+      }
+     ],
+     "total": {
+      "bare_5mm_wall": {
+       "expected_failures": 12124.86080634821,
+       "p_no_failure": 0.0
+      },
+      "bumper_S1m": {
+       "expected_failures": 2648.9682450316377,
+       "p_no_failure": 0.0
+      },
+      "bumper_S2m": {
+       "expected_failures": 968.3374489579725,
+       "p_no_failure": 0.0
+      },
+      "bumper_S10m": {
+       "expected_failures": 96.55627346213494,
+       "p_no_failure": 1.1645100534894806e-42
+      },
+      "skirt_or_shield_S100m": {
+       "expected_failures": 3.231137750158836,
+       "p_no_failure": 0.039512517831266865
+      }
+     },
+     "standoff_for_0p1_failures_m": 331.62184759664143,
+     "standoff_engine_first_only_m": 331.62184759664143,
+     "standoff_bow_first_only_m": 0.0
+    },
+    "NOMINAL_HILAT": {
+     "legs": [
+      {
+       "leg": "C1",
+       "name": "accelerate outbound",
+       "orientation": "BOW_FIRST",
+       "area_m2": 0.0,
+       "bare_5mm_wall": 0.0,
+       "bumper_S1m": 0.0,
+       "bumper_S2m": 0.0,
+       "bumper_S10m": 0.0,
+       "skirt_or_shield_S100m": 0.0
+      },
+      {
+       "leg": "C2",
+       "name": "coast out",
+       "orientation": "BOW_FIRST",
+       "area_m2": 0.0,
+       "bare_5mm_wall": 0.0,
+       "bumper_S1m": 0.0,
+       "bumper_S2m": 0.0,
+       "bumper_S10m": 0.0,
+       "skirt_or_shield_S100m": 0.0
+      },
+      {
+       "leg": "C3",
+       "name": "brake at Kuiper anchorage",
+       "orientation": "ENGINE_FIRST",
+       "area_m2": 367.8,
+       "bare_5mm_wall": 73.43591361628182,
+       "bumper_S1m": 12.735033601510697,
+       "bumper_S2m": 3.940308998641979,
+       "bumper_S10m": 0.056229171749455034,
+       "skirt_or_shield_S100m": 1.028539773489875e-07
+      },
+      {
+       "leg": "C4",
+       "name": "accelerate home",
+       "orientation": "BOW_FIRST",
+       "area_m2": 0.0,
+       "bare_5mm_wall": 0.0,
+       "bumper_S1m": 0.0,
+       "bumper_S2m": 0.0,
+       "bumper_S10m": 0.0,
+       "skirt_or_shield_S100m": 0.0
+      },
+      {
+       "leg": "C5",
+       "name": "coast home",
+       "orientation": "BOW_FIRST",
+       "area_m2": 0.0,
+       "bare_5mm_wall": 0.0,
+       "bumper_S1m": 0.0,
+       "bumper_S2m": 0.0,
+       "bumper_S10m": 0.0,
+       "skirt_or_shield_S100m": 0.0
+      },
+      {
+       "leg": "C6",
+       "name": "brake at home",
+       "orientation": "ENGINE_FIRST",
+       "area_m2": 367.8,
+       "bare_5mm_wall": 253.36856990462613,
+       "bumper_S1m": 35.69859508654188,
+       "bumper_S2m": 8.310703752565521,
+       "bumper_S10m": 0.18197911643841244,
+       "skirt_or_shield_S100m": 0.0004900469186100163
+      }
+     ],
+     "total": {
+      "bare_5mm_wall": {
+       "expected_failures": 326.804483520908,
+       "p_no_failure": 1.1765655976582182e-142
+      },
+      "bumper_S1m": {
+       "expected_failures": 48.43362868805258,
+       "p_no_failure": 9.237242014472788e-22
+      },
+      "bumper_S2m": {
+       "expected_failures": 12.2510127512075,
+       "p_no_failure": 4.780273711847623e-06
+      },
+      "bumper_S10m": {
+       "expected_failures": 0.2382082881878675,
+       "p_no_failure": 0.7880385348800638
+      },
+      "skirt_or_shield_S100m": {
+       "expected_failures": 0.0004901497725873653,
+       "p_no_failure": 0.9995099703311887
+      }
+     },
+     "standoff_for_0p1_failures_m": 13.376467337182842,
+     "standoff_engine_first_only_m": 13.376467337182842,
+     "standoff_bow_first_only_m": 0.0
+    }
+   }
+  }
+ },
+ "brow_bow_first": {
+  "CANON": {
+   "LOW": {
+    "beyond_disruptor_2m": 823.1561231608962,
+    "beyond_10m": 18.935150261263026,
+    "beyond_1MJ": 47.368295531823826,
+    "beyond_100MJ": 0.14013278150386915
+   },
+   "NOMINAL": {
+    "beyond_disruptor_2m": 5182.423912305572,
+    "beyond_10m": 143.36132803713957,
+    "beyond_1MJ": 489.456123831273,
+    "beyond_100MJ": 0.28048088399222415
+   },
+   "HIGH": {
+    "beyond_disruptor_2m": 79445.07333176908,
+    "beyond_10m": 8053.542789807129,
+    "beyond_1MJ": 13585.786114660712,
+    "beyond_100MJ": 512.607070746099
+   },
+   "NOMINAL_HILAT": {
+    "beyond_disruptor_2m": 845.4843411783772,
+    "beyond_10m": 22.333231115420723,
+    "beyond_1MJ": 68.14106394047016,
+    "beyond_100MJ": 0.08429498988680745
+   }
+  },
+  "FDP1_VERTEX": {
+   "LOW": {
+    "beyond_disruptor_2m": 2.884335984076142,
+    "beyond_10m": 0.0459269850496046,
+    "beyond_1MJ": 0.12104844039160897,
+    "beyond_100MJ": 0.000279530579134216
+   },
+   "NOMINAL": {
+    "beyond_disruptor_2m": 595.2973129607644,
+    "beyond_10m": 2.842541213751762,
+    "beyond_1MJ": 6.655003004537734,
+    "beyond_100MJ": 0.0037840166953432655
+   },
+   "HIGH": {
+    "beyond_disruptor_2m": 21407.129726038547,
+    "beyond_10m": 2041.61321021944,
+    "beyond_1MJ": 3513.5146834130405,
+    "beyond_100MJ": 94.53477683540429
+   },
+   "NOMINAL_HILAT": {
+    "beyond_disruptor_2m": 149.61938288245491,
+    "beyond_10m": 2.7747887679386443,
+    "beyond_1MJ": 6.475900896267345,
+    "beyond_100MJ": 0.0033926738845553635
+   }
+  }
+ },
+ "forward_shield_aft_face": {
+  "V0": 6266.7,
+  "V1": 6311.5,
+  "CANON": 6311.5
+ },
+ "erosion": {
+  "FDP1_VERTEX": {
+   "LOW": [
+    {
+     "leg": "F1",
+     "orientation": "BOW_FIRST",
+     "dust_energy_fluence_J_m2": 5222.023481866257,
+     "dust_erosion_um": {
+      "LOW": 0.05222023481866256,
+      "NOMINAL": 0.1566607044559877,
+      "HIGH": 0.5222023481866257
+     },
+     "gas_H_column_per_cm2": 3601208417035768.0,
+     "gas_He_column_per_cm2": 215539046350363.78,
+     "gas_sputter_erosion_nm": {
+      "Y=1e-3": 0.0006106795941417812,
+      "Y=1e-2": 0.006106795941417811
+     },
+     "gas_energy_fluence_J_m2": 432300.5034618373
+    },
+    {
+     "leg": "F2",
+     "orientation": "ENGINE_FIRST",
+     "dust_energy_fluence_J_m2": 937.1151797531422,
+     "dust_erosion_um": {
+      "LOW": 0.009371151797531422,
+      "NOMINAL": 0.028113455392594265,
+      "HIGH": 0.09371151797531423
+     },
+     "gas_H_column_per_cm2": 2978156007029256.5,
+     "gas_He_column_per_cm2": 168574868322410.78,
+     "gas_sputter_erosion_nm": {
+      "Y=1e-3": 0.0005034769400562669,
+      "Y=1e-2": 0.005034769400562668
+     },
+     "gas_energy_fluence_J_m2": 339092.3807334314
+    },
+    {
+     "leg": "F3",
+     "orientation": "BOW_FIRST",
+     "dust_energy_fluence_J_m2": 729.9634031998164,
+     "dust_erosion_um": {
+      "LOW": 0.007299634031998164,
+      "NOMINAL": 0.021898902095994495,
+      "HIGH": 0.07299634031998165
+     },
+     "gas_H_column_per_cm2": 2319826784498061.5,
+     "gas_He_column_per_cm2": 131310950065928.0,
+     "gas_sputter_erosion_nm": {
+      "Y=1e-3": 0.0003921820375302383,
+      "Y=1e-2": 0.003921820375302383
+     },
+     "gas_energy_fluence_J_m2": 264135.1176325065
+    },
+    {
+     "leg": "F4",
+     "orientation": "BOW_FIRST",
+     "dust_energy_fluence_J_m2": 1741.742946635451,
+     "dust_erosion_um": {
+      "LOW": 0.017417429466354512,
+      "NOMINAL": 0.052252288399063526,
+      "HIGH": 0.17417429466354512
+     },
+     "gas_H_column_per_cm2": 2674614640773484.5,
+     "gas_He_column_per_cm2": 151393281553217.8,
+     "gas_sputter_erosion_nm": {
+      "Y=1e-3": 0.0004521612675722724,
+      "Y=1e-2": 0.004521612675722725
+     },
+     "gas_energy_fluence_J_m2": 630264.3852698075
+    },
+    {
+     "leg": "F5",
+     "orientation": "ENGINE_FIRST",
+     "dust_energy_fluence_J_m2": 9189.80224393141,
+     "dust_erosion_um": {
+      "LOW": 0.0918980224393141,
+      "NOMINAL": 0.27569406731794227,
+      "HIGH": 0.918980224393141
+     },
+     "gas_H_column_per_cm2": 1583049623825313.5,
+     "gas_He_column_per_cm2": 101370726520681.73,
+     "gas_sputter_erosion_nm": {
+      "Y=1e-3": 0.0002695072560553592,
+      "Y=1e-2": 0.002695072560553593
+     },
+     "gas_energy_fluence_J_m2": 199134.1276630505
+    }
+   ],
+   "NOMINAL": [
+    {
+     "leg": "F1",
+     "orientation": "BOW_FIRST",
+     "dust_energy_fluence_J_m2": 64973.421039431545,
+     "dust_erosion_um": {
+      "LOW": 0.6497342103943154,
+      "NOMINAL": 1.9492026311829462,
+      "HIGH": 6.497342103943154
+     },
+     "gas_H_column_per_cm2": 3601208417035768.0,
+     "gas_He_column_per_cm2": 215539046350363.78,
+     "gas_sputter_erosion_nm": {
+      "Y=1e-3": 0.0006106795941417812,
+      "Y=1e-2": 0.006106795941417811
+     },
+     "gas_energy_fluence_J_m2": 432300.5034618373
+    },
+    {
+     "leg": "F2",
+     "orientation": "ENGINE_FIRST",
+     "dust_energy_fluence_J_m2": 5114.375186198893,
+     "dust_erosion_um": {
+      "LOW": 0.05114375186198893,
+      "NOMINAL": 0.1534312555859668,
+      "HIGH": 0.5114375186198893
+     },
+     "gas_H_column_per_cm2": 2978156007029256.5,
+     "gas_He_column_per_cm2": 168574868322410.78,
+     "gas_sputter_erosion_nm": {
+      "Y=1e-3": 0.0005034769400562669,
+      "Y=1e-2": 0.005034769400562668
+     },
+     "gas_energy_fluence_J_m2": 339092.3807334314
+    },
+    {
+     "leg": "F3",
+     "orientation": "BOW_FIRST",
+     "dust_energy_fluence_J_m2": 3983.8290925368274,
+     "dust_erosion_um": {
+      "LOW": 0.039838290925368273,
+      "NOMINAL": 0.11951487277610483,
+      "HIGH": 0.39838290925368275
+     },
+     "gas_H_column_per_cm2": 2319826784498061.5,
+     "gas_He_column_per_cm2": 131310950065928.0,
+     "gas_sputter_erosion_nm": {
+      "Y=1e-3": 0.0003921820375302383,
+      "Y=1e-2": 0.003921820375302383
+     },
+     "gas_energy_fluence_J_m2": 264135.1176325065
+    },
+    {
+     "leg": "F4",
+     "orientation": "BOW_FIRST",
+     "dust_energy_fluence_J_m2": 9505.69054847231,
+     "dust_erosion_um": {
+      "LOW": 0.0950569054847231,
+      "NOMINAL": 0.2851707164541693,
+      "HIGH": 0.9505690548472311
+     },
+     "gas_H_column_per_cm2": 2674614640773484.5,
+     "gas_He_column_per_cm2": 151393281553217.8,
+     "gas_sputter_erosion_nm": {
+      "Y=1e-3": 0.0004521612675722724,
+      "Y=1e-2": 0.004521612675722725
+     },
+     "gas_energy_fluence_J_m2": 630264.3852698075
+    },
+    {
+     "leg": "F5",
+     "orientation": "ENGINE_FIRST",
+     "dust_energy_fluence_J_m2": 128831.41287339658,
+     "dust_erosion_um": {
+      "LOW": 1.2883141287339657,
+      "NOMINAL": 3.8649423862018972,
+      "HIGH": 12.883141287339658
+     },
+     "gas_H_column_per_cm2": 1583049623825313.5,
+     "gas_He_column_per_cm2": 101370726520681.73,
+     "gas_sputter_erosion_nm": {
+      "Y=1e-3": 0.0002695072560553592,
+      "Y=1e-2": 0.002695072560553593
+     },
+     "gas_energy_fluence_J_m2": 199134.1276630505
+    }
+   ],
+   "HIGH": [
+    {
+     "leg": "F1",
+     "orientation": "BOW_FIRST",
+     "dust_energy_fluence_J_m2": 8593556.450026667,
+     "dust_erosion_um": {
+      "LOW": 85.93556450026666,
+      "NOMINAL": 257.8066935008,
+      "HIGH": 859.3556450026667
+     },
+     "gas_H_column_per_cm2": 3601208417035768.0,
+     "gas_He_column_per_cm2": 215539046350363.78,
+     "gas_sputter_erosion_nm": {
+      "Y=1e-3": 0.0006106795941417812,
+      "Y=1e-2": 0.006106795941417811
+     },
+     "gas_energy_fluence_J_m2": 432300.5034618373
+    },
+    {
+     "leg": "F2",
+     "orientation": "ENGINE_FIRST",
+     "dust_energy_fluence_J_m2": 79921.6881005362,
+     "dust_erosion_um": {
+      "LOW": 0.7992168810053619,
+      "NOMINAL": 2.3976506430160858,
+      "HIGH": 7.99216881005362
+     },
+     "gas_H_column_per_cm2": 2978156007029256.5,
+     "gas_He_column_per_cm2": 168574868322410.78,
+     "gas_sputter_erosion_nm": {
+      "Y=1e-3": 0.0005034769400562669,
+      "Y=1e-2": 0.005034769400562668
+     },
+     "gas_energy_fluence_J_m2": 339092.3807334314
+    },
+    {
+     "leg": "F3",
+     "orientation": "BOW_FIRST",
+     "dust_energy_fluence_J_m2": 62254.78862770084,
+     "dust_erosion_um": {
+      "LOW": 0.6225478862770083,
+      "NOMINAL": 1.8676436588310252,
+      "HIGH": 6.225478862770084
+     },
+     "gas_H_column_per_cm2": 2319826784498061.5,
+     "gas_He_column_per_cm2": 131310950065928.0,
+     "gas_sputter_erosion_nm": {
+      "Y=1e-3": 0.0003921820375302383,
+      "Y=1e-2": 0.003921820375302383
+     },
+     "gas_energy_fluence_J_m2": 264135.1176325065
+    },
+    {
+     "leg": "F4",
+     "orientation": "BOW_FIRST",
+     "dust_energy_fluence_J_m2": 148544.21264307876,
+     "dust_erosion_um": {
+      "LOW": 1.4854421264307875,
+      "NOMINAL": 4.456326379292363,
+      "HIGH": 14.854421264307877
+     },
+     "gas_H_column_per_cm2": 2674614640773484.5,
+     "gas_He_column_per_cm2": 151393281553217.8,
+     "gas_sputter_erosion_nm": {
+      "Y=1e-3": 0.0004521612675722724,
+      "Y=1e-2": 0.004521612675722725
+     },
+     "gas_energy_fluence_J_m2": 630264.3852698075
+    },
+    {
+     "leg": "F5",
+     "orientation": "ENGINE_FIRST",
+     "dust_energy_fluence_J_m2": 18336086.484786574,
+     "dust_erosion_um": {
+      "LOW": 183.3608648478657,
+      "NOMINAL": 550.0825945435972,
+      "HIGH": 1833.6086484786574
+     },
+     "gas_H_column_per_cm2": 1583049623825313.5,
+     "gas_He_column_per_cm2": 101370726520681.73,
+     "gas_sputter_erosion_nm": {
+      "Y=1e-3": 0.0002695072560553592,
+      "Y=1e-2": 0.002695072560553593
+     },
+     "gas_energy_fluence_J_m2": 199134.1276630505
+    }
+   ],
+   "NOMINAL_HILAT": [
+    {
+     "leg": "F1",
+     "orientation": "BOW_FIRST",
+     "dust_energy_fluence_J_m2": 12764.060917462937,
+     "dust_erosion_um": {
+      "LOW": 0.12764060917462935,
+      "NOMINAL": 0.38292182752388815,
+      "HIGH": 1.2764060917462938
+     },
+     "gas_H_column_per_cm2": 3601208417035768.0,
+     "gas_He_column_per_cm2": 215539046350363.78,
+     "gas_sputter_erosion_nm": {
+      "Y=1e-3": 0.0006106795941417812,
+      "Y=1e-2": 0.006106795941417811
+     },
+     "gas_energy_fluence_J_m2": 432300.5034618373
+    },
+    {
+     "leg": "F2",
+     "orientation": "ENGINE_FIRST",
+     "dust_energy_fluence_J_m2": 5114.375186198893,
+     "dust_erosion_um": {
+      "LOW": 0.05114375186198893,
+      "NOMINAL": 0.1534312555859668,
+      "HIGH": 0.5114375186198893
+     },
+     "gas_H_column_per_cm2": 2978156007029256.5,
+     "gas_He_column_per_cm2": 168574868322410.78,
+     "gas_sputter_erosion_nm": {
+      "Y=1e-3": 0.0005034769400562669,
+      "Y=1e-2": 0.005034769400562668
+     },
+     "gas_energy_fluence_J_m2": 339092.3807334314
+    },
+    {
+     "leg": "F3",
+     "orientation": "BOW_FIRST",
+     "dust_energy_fluence_J_m2": 3983.8290925368274,
+     "dust_erosion_um": {
+      "LOW": 0.039838290925368273,
+      "NOMINAL": 0.11951487277610483,
+      "HIGH": 0.39838290925368275
+     },
+     "gas_H_column_per_cm2": 2319826784498061.5,
+     "gas_He_column_per_cm2": 131310950065928.0,
+     "gas_sputter_erosion_nm": {
+      "Y=1e-3": 0.0003921820375302383,
+      "Y=1e-2": 0.003921820375302383
+     },
+     "gas_energy_fluence_J_m2": 264135.1176325065
+    },
+    {
+     "leg": "F4",
+     "orientation": "BOW_FIRST",
+     "dust_energy_fluence_J_m2": 9505.69054847231,
+     "dust_erosion_um": {
+      "LOW": 0.0950569054847231,
+      "NOMINAL": 0.2851707164541693,
+      "HIGH": 0.9505690548472311
+     },
+     "gas_H_column_per_cm2": 2674614640773484.5,
+     "gas_He_column_per_cm2": 151393281553217.8,
+     "gas_sputter_erosion_nm": {
+      "Y=1e-3": 0.0004521612675722724,
+      "Y=1e-2": 0.004521612675722725
+     },
+     "gas_energy_fluence_J_m2": 630264.3852698075
+    },
+    {
+     "leg": "F5",
+     "orientation": "ENGINE_FIRST",
+     "dust_energy_fluence_J_m2": 16432.162185880272,
+     "dust_erosion_um": {
+      "LOW": 0.16432162185880272,
+      "NOMINAL": 0.4929648655764082,
+      "HIGH": 1.6432162185880272
+     },
+     "gas_H_column_per_cm2": 1583049623825313.5,
+     "gas_He_column_per_cm2": 101370726520681.73,
+     "gas_sputter_erosion_nm": {
+      "Y=1e-3": 0.0002695072560553592,
+      "Y=1e-2": 0.002695072560553593
+     },
+     "gas_energy_fluence_J_m2": 199134.1276630505
+    }
+   ]
+  },
+  "CANON": {
+   "LOW": [
+    {
+     "leg": "C1",
+     "orientation": "BOW_FIRST",
+     "dust_energy_fluence_J_m2": 35761.28682405328,
+     "dust_erosion_um": {
+      "LOW": 0.35761286824053273,
+      "NOMINAL": 1.0728386047215983,
+      "HIGH": 3.5761286824053276
+     },
+     "gas_H_column_per_cm2": 85953575780568.52,
+     "gas_He_column_per_cm2": 2088908843266.785,
+     "gas_sputter_erosion_nm": {
+      "Y=1e-3": 1.4086797539813649e-05,
+      "Y=1e-2": 0.00014086797539813648
+     },
+     "gas_energy_fluence_J_m2": 4534.871921063979
+    },
+    {
+     "leg": "C2",
+     "orientation": "BOW_FIRST",
+     "dust_energy_fluence_J_m2": 35611.43563212235,
+     "dust_erosion_um": {
+      "LOW": 0.35611435632122346,
+      "NOMINAL": 1.0683430689636706,
+      "HIGH": 3.5611435632122355
+     },
+     "gas_H_column_per_cm2": 33502292491141.23,
+     "gas_He_column_per_cm2": 4564622506120.533,
+     "gas_sputter_erosion_nm": {
+      "Y=1e-3": 6.090706399561882e-06,
+      "Y=1e-2": 6.090706399561882e-05
+     },
+     "gas_energy_fluence_J_m2": 9934.903826708527
+    },
+    {
+     "leg": "C3",
+     "orientation": "ENGINE_FIRST",
+     "dust_energy_fluence_J_m2": 5185.085663569799,
+     "dust_erosion_um": {
+      "LOW": 0.05185085663569799,
+      "NOMINAL": 0.15555256990709398,
+      "HIGH": 0.51850856635698
+     },
+     "gas_H_column_per_cm2": 15992744818388.695,
+     "gas_He_column_per_cm2": 2324359439614.4844,
+     "gas_sputter_erosion_nm": {
+      "Y=1e-3": 2.9307366812805086e-06,
+      "Y=1e-2": 2.9307366812805085e-05
+     },
+     "gas_energy_fluence_J_m2": 2349.3454937748725
+    },
+    {
+     "leg": "C4",
+     "orientation": "BOW_FIRST",
+     "dust_energy_fluence_J_m2": 4291.329779990159,
+     "dust_erosion_um": {
+      "LOW": 0.04291329779990159,
+      "NOMINAL": 0.12873989339970476,
+      "HIGH": 0.42913297799901595
+     },
+     "gas_H_column_per_cm2": 12431396558128.828,
+     "gas_He_column_per_cm2": 1810248784746.4849,
+     "gas_sputter_erosion_nm": {
+      "Y=1e-3": 2.2786632548600504e-06,
+      "Y=1e-2": 2.2786632548600503e-05
+     },
+     "gas_energy_fluence_J_m2": 1826.5269251232378
+    },
+    {
+     "leg": "C5",
+     "orientation": "BOW_FIRST",
+     "dust_energy_fluence_J_m2": 66452.91987342233,
+     "dust_erosion_um": {
+      "LOW": 0.6645291987342233,
+      "NOMINAL": 1.9935875962026697,
+      "HIGH": 6.645291987342233
+     },
+     "gas_H_column_per_cm2": 52600933539223.04,
+     "gas_He_column_per_cm2": 6653359602990.477,
+     "gas_sputter_erosion_nm": {
+      "Y=1e-3": 9.480686902754163e-06,
+      "Y=1e-2": 9.480686902754163e-05
+     },
+     "gas_energy_fluence_J_m2": 15205.925967285002
+    },
+    {
+     "leg": "C6",
+     "orientation": "ENGINE_FIRST",
+     "dust_energy_fluence_J_m2": 35383.1745808023,
+     "dust_erosion_um": {
+      "LOW": 0.35383174580802296,
+      "NOMINAL": 1.061495237424069,
+      "HIGH": 3.53831745808023
+     },
+     "gas_H_column_per_cm2": 70416531707984.25,
+     "gas_He_column_per_cm2": 513617775209.84894,
+     "gas_sputter_erosion_nm": {
+      "Y=1e-3": 1.1348823917311054e-05,
+      "Y=1e-2": 0.00011348823917311055
+     },
+     "gas_energy_fluence_J_m2": 3461.673960434628
+    }
+   ],
+   "NOMINAL": [
+    {
+     "leg": "C1",
+     "orientation": "BOW_FIRST",
+     "dust_energy_fluence_J_m2": 81337.64535277593,
+     "dust_erosion_um": {
+      "LOW": 0.8133764535277592,
+      "NOMINAL": 2.4401293605832777,
+      "HIGH": 8.133764535277594
+     },
+     "gas_H_column_per_cm2": 85953575780568.52,
+     "gas_He_column_per_cm2": 2088908843266.785,
+     "gas_sputter_erosion_nm": {
+      "Y=1e-3": 1.4086797539813649e-05,
+      "Y=1e-2": 0.00014086797539813648
+     },
+     "gas_energy_fluence_J_m2": 4534.871921063979
+    },
+    {
+     "leg": "C2",
+     "orientation": "BOW_FIRST",
+     "dust_energy_fluence_J_m2": 243398.82394923473,
+     "dust_erosion_um": {
+      "LOW": 2.4339882394923475,
+      "NOMINAL": 7.301964718477042,
+      "HIGH": 24.339882394923475
+     },
+     "gas_H_column_per_cm2": 33502292491141.23,
+     "gas_He_column_per_cm2": 4564622506120.533,
+     "gas_sputter_erosion_nm": {
+      "Y=1e-3": 6.090706399561882e-06,
+      "Y=1e-2": 6.090706399561882e-05
+     },
+     "gas_energy_fluence_J_m2": 9934.903826708527
+    },
+    {
+     "leg": "C3",
+     "orientation": "ENGINE_FIRST",
+     "dust_energy_fluence_J_m2": 93781.58887621913,
+     "dust_erosion_um": {
+      "LOW": 0.9378158887621912,
+      "NOMINAL": 2.813447666286574,
+      "HIGH": 9.378158887621913
+     },
+     "gas_H_column_per_cm2": 15992744818388.695,
+     "gas_He_column_per_cm2": 2324359439614.4844,
+     "gas_sputter_erosion_nm": {
+      "Y=1e-3": 2.9307366812805086e-06,
+      "Y=1e-2": 2.9307366812805085e-05
+     },
+     "gas_energy_fluence_J_m2": 2349.3454937748725
+    },
+    {
+     "leg": "C4",
+     "orientation": "BOW_FIRST",
+     "dust_energy_fluence_J_m2": 77624.39345356278,
+     "dust_erosion_um": {
+      "LOW": 0.7762439345356278,
+      "NOMINAL": 2.328731803606883,
+      "HIGH": 7.762439345356278
+     },
+     "gas_H_column_per_cm2": 12431396558128.828,
+     "gas_He_column_per_cm2": 1810248784746.4849,
+     "gas_sputter_erosion_nm": {
+      "Y=1e-3": 2.2786632548600504e-06,
+      "Y=1e-2": 2.2786632548600503e-05
+     },
+     "gas_energy_fluence_J_m2": 1826.5269251232378
+    },
+    {
+     "leg": "C5",
+     "orientation": "BOW_FIRST",
+     "dust_energy_fluence_J_m2": 351353.5979127937,
+     "dust_erosion_um": {
+      "LOW": 3.5135359791279366,
+      "NOMINAL": 10.54060793738381,
+      "HIGH": 35.13535979127937
+     },
+     "gas_H_column_per_cm2": 52600933539223.04,
+     "gas_He_column_per_cm2": 6653359602990.477,
+     "gas_sputter_erosion_nm": {
+      "Y=1e-3": 9.480686902754163e-06,
+      "Y=1e-2": 9.480686902754163e-05
+     },
+     "gas_energy_fluence_J_m2": 15205.925967285002
+    },
+    {
+     "leg": "C6",
+     "orientation": "ENGINE_FIRST",
+     "dust_energy_fluence_J_m2": 70787.51751083566,
+     "dust_erosion_um": {
+      "LOW": 0.7078751751083565,
+      "NOMINAL": 2.1236255253250698,
+      "HIGH": 7.0787517510835665
+     },
+     "gas_H_column_per_cm2": 70416531707984.25,
+     "gas_He_column_per_cm2": 513617775209.84894,
+     "gas_sputter_erosion_nm": {
+      "Y=1e-3": 1.1348823917311054e-05,
+      "Y=1e-2": 0.00011348823917311055
+     },
+     "gas_energy_fluence_J_m2": 3461.673960434628
+    }
+   ],
+   "HIGH": [
+    {
+     "leg": "C1",
+     "orientation": "BOW_FIRST",
+     "dust_energy_fluence_J_m2": 1786556.8653686922,
+     "dust_erosion_um": {
+      "LOW": 17.865568653686918,
+      "NOMINAL": 53.59670596106077,
+      "HIGH": 178.6556865368692
+     },
+     "gas_H_column_per_cm2": 85953575780568.52,
+     "gas_He_column_per_cm2": 2088908843266.785,
+     "gas_sputter_erosion_nm": {
+      "Y=1e-3": 1.4086797539813649e-05,
+      "Y=1e-2": 0.00014086797539813648
+     },
+     "gas_energy_fluence_J_m2": 4534.871921063979
+    },
+    {
+     "leg": "C2",
+     "orientation": "BOW_FIRST",
+     "dust_energy_fluence_J_m2": 29085336.33603249,
+     "dust_erosion_um": {
+      "LOW": 290.85336336032486,
+      "NOMINAL": 872.5600900809748,
+      "HIGH": 2908.533633603249
+     },
+     "gas_H_column_per_cm2": 33502292491141.23,
+     "gas_He_column_per_cm2": 4564622506120.533,
+     "gas_sputter_erosion_nm": {
+      "Y=1e-3": 6.090706399561882e-06,
+      "Y=1e-2": 6.090706399561882e-05
+     },
+     "gas_energy_fluence_J_m2": 9934.903826708527
+    },
+    {
+     "leg": "C3",
+     "orientation": "ENGINE_FIRST",
+     "dust_energy_fluence_J_m2": 14048520.230199562,
+     "dust_erosion_um": {
+      "LOW": 140.4852023019956,
+      "NOMINAL": 421.4556069059869,
+      "HIGH": 1404.8520230199563
+     },
+     "gas_H_column_per_cm2": 15992744818388.695,
+     "gas_He_column_per_cm2": 2324359439614.4844,
+     "gas_sputter_erosion_nm": {
+      "Y=1e-3": 2.9307366812805086e-06,
+      "Y=1e-2": 2.9307366812805085e-05
+     },
+     "gas_energy_fluence_J_m2": 2349.3454937748725
+    },
+    {
+     "leg": "C4",
+     "orientation": "BOW_FIRST",
+     "dust_energy_fluence_J_m2": 11628628.772012943,
+     "dust_erosion_um": {
+      "LOW": 116.28628772012942,
+      "NOMINAL": 348.8588631603883,
+      "HIGH": 1162.8628772012944
+     },
+     "gas_H_column_per_cm2": 12431396558128.828,
+     "gas_He_column_per_cm2": 1810248784746.4849,
+     "gas_sputter_erosion_nm": {
+      "Y=1e-3": 2.2786632548600504e-06,
+      "Y=1e-2": 2.2786632548600503e-05
+     },
+     "gas_energy_fluence_J_m2": 1826.5269251232378
+    },
+    {
+     "leg": "C5",
+     "orientation": "BOW_FIRST",
+     "dust_energy_fluence_J_m2": 36982059.939194284,
+     "dust_erosion_um": {
+      "LOW": 369.8205993919428,
+      "NOMINAL": 1109.4617981758286,
+      "HIGH": 3698.2059939194287
+     },
+     "gas_H_column_per_cm2": 52600933539223.04,
+     "gas_He_column_per_cm2": 6653359602990.477,
+     "gas_sputter_erosion_nm": {
+      "Y=1e-3": 9.480686902754163e-06,
+      "Y=1e-2": 9.480686902754163e-05
+     },
+     "gas_energy_fluence_J_m2": 15205.925967285002
+    },
+    {
+     "leg": "C6",
+     "orientation": "ENGINE_FIRST",
+     "dust_energy_fluence_J_m2": 142030.34937447897,
+     "dust_erosion_um": {
+      "LOW": 1.4203034937447896,
+      "NOMINAL": 4.26091048123437,
+      "HIGH": 14.203034937447898
+     },
+     "gas_H_column_per_cm2": 70416531707984.25,
+     "gas_He_column_per_cm2": 513617775209.84894,
+     "gas_sputter_erosion_nm": {
+      "Y=1e-3": 1.1348823917311054e-05,
+      "Y=1e-2": 0.00011348823917311055
+     },
+     "gas_energy_fluence_J_m2": 3461.673960434628
+    }
+   ],
+   "NOMINAL_HILAT": [
+    {
+     "leg": "C1",
+     "orientation": "BOW_FIRST",
+     "dust_energy_fluence_J_m2": 22267.33892347514,
+     "dust_erosion_um": {
+      "LOW": 0.2226733892347514,
+      "NOMINAL": 0.6680201677042542,
+      "HIGH": 2.2267338923475144
+     },
+     "gas_H_column_per_cm2": 85953575780568.52,
+     "gas_He_column_per_cm2": 2088908843266.785,
+     "gas_sputter_erosion_nm": {
+      "Y=1e-3": 1.4086797539813649e-05,
+      "Y=1e-2": 0.00014086797539813648
+     },
+     "gas_energy_fluence_J_m2": 4534.871921063979
+    },
+    {
+     "leg": "C2",
+     "orientation": "BOW_FIRST",
+     "dust_energy_fluence_J_m2": 34553.10565427369,
+     "dust_erosion_um": {
+      "LOW": 0.3455310565427369,
+      "NOMINAL": 1.0365931696282107,
+      "HIGH": 3.4553105654273693
+     },
+     "gas_H_column_per_cm2": 33502292491141.23,
+     "gas_He_column_per_cm2": 4564622506120.533,
+     "gas_sputter_erosion_nm": {
+      "Y=1e-3": 6.090706399561882e-06,
+      "Y=1e-2": 6.090706399561882e-05
+     },
+     "gas_energy_fluence_J_m2": 9934.903826708527
+    },
+    {
+     "leg": "C3",
+     "orientation": "ENGINE_FIRST",
+     "dust_energy_fluence_J_m2": 9441.624031339115,
+     "dust_erosion_um": {
+      "LOW": 0.09441624031339116,
+      "NOMINAL": 0.28324872094017345,
+      "HIGH": 0.9441624031339115
+     },
+     "gas_H_column_per_cm2": 15992744818388.695,
+     "gas_He_column_per_cm2": 2324359439614.4844,
+     "gas_sputter_erosion_nm": {
+      "Y=1e-3": 2.9307366812805086e-06,
+      "Y=1e-2": 2.9307366812805085e-05
+     },
+     "gas_energy_fluence_J_m2": 2349.3454937748725
+    },
+    {
+     "leg": "C4",
+     "orientation": "BOW_FIRST",
+     "dust_energy_fluence_J_m2": 7811.867027379024,
+     "dust_erosion_um": {
+      "LOW": 0.07811867027379024,
+      "NOMINAL": 0.23435601082137072,
+      "HIGH": 0.7811867027379025
+     },
+     "gas_H_column_per_cm2": 12431396558128.828,
+     "gas_He_column_per_cm2": 1810248784746.4849,
+     "gas_sputter_erosion_nm": {
+      "Y=1e-3": 2.2786632548600504e-06,
+      "Y=1e-2": 2.2786632548600503e-05
+     },
+     "gas_energy_fluence_J_m2": 1826.5269251232378
+    },
+    {
+     "leg": "C5",
+     "orientation": "BOW_FIRST",
+     "dust_energy_fluence_J_m2": 56647.35791995746,
+     "dust_erosion_um": {
+      "LOW": 0.5664735791995746,
+      "NOMINAL": 1.6994207375987236,
+      "HIGH": 5.664735791995746
+     },
+     "gas_H_column_per_cm2": 52600933539223.04,
+     "gas_He_column_per_cm2": 6653359602990.477,
+     "gas_sputter_erosion_nm": {
+      "Y=1e-3": 9.480686902754163e-06,
+      "Y=1e-2": 9.480686902754163e-05
+     },
+     "gas_energy_fluence_J_m2": 15205.925967285002
+    },
+    {
+     "leg": "C6",
+     "orientation": "ENGINE_FIRST",
+     "dust_energy_fluence_J_m2": 21259.644336171837,
+     "dust_erosion_um": {
+      "LOW": 0.21259644336171835,
+      "NOMINAL": 0.637789330085155,
+      "HIGH": 2.1259644336171837
+     },
+     "gas_H_column_per_cm2": 70416531707984.25,
+     "gas_He_column_per_cm2": 513617775209.84894,
+     "gas_sputter_erosion_nm": {
+      "Y=1e-3": 1.1348823917311054e-05,
+      "Y=1e-2": 0.00011348823917311055
+     },
+     "gas_energy_fluence_J_m2": 3461.673960434628
+    }
+   ]
+  }
+ },
+ "gas": {
+  "proton_energy_keV": 120.07910234430322,
+  "helium_energy_keV": 477.28760183049474,
+  "lic_mass_density_kg_m3": 5.4282025874858e-22,
+  "lic_power_flux_W_m2": 0.029953536745310847,
+  "proton_larmor_radius_m_at_1mT": 50.06759640710475,
+  "grain_larmor_radius_m_at_1mT": 7994465546.666667,
+  "dipole_bubble_energy_J_r100m_1mT": 1666666.6666666665,
+  "notes": [
+   "120 keV protons stop within ~1 um of a surface (implantation, not penetration)",
+   "neutral H (~75 % of the LIC gas by number) cannot be deflected magnetically without first being ionised",
+   "blistering thresholds for H in metals are ~1e17-1e18 H/cm2 (EXTRAPOLATION from fusion-materials data; S-T02-BLISTER)"
+  ]
+ },
+ "detection": {
+  "assumptions": "1 J, 1.064 um pulse, 10 urad beam, albedo 0.1, 1 m2 receiver; vaporisation 1e7 J/kg; grain density 2500 kg/m3 (ASSUMPTION)",
+  "rows": [
+   {
+    "grain_d_mm": 0.1,
+    "mass_kg": 1.3089969389957473e-09,
+    "range_m": 1000.0,
+    "warning_s": 0.00020847755949884503,
+    "photons_back_per_J": 17049813.028204706,
+    "beam_energy_to_vaporise_J": 130.89969389957474,
+    "sideways_dv_to_miss_engine_m_s": 575601.51936
+   },
+   {
+    "grain_d_mm": 0.1,
+    "mass_kg": 1.3089969389957473e-09,
+    "range_m": 10000.0,
+    "warning_s": 0.0020847755949884505,
+    "photons_back_per_J": 1704.98130282047,
+    "beam_energy_to_vaporise_J": 13089.969389957476,
+    "sideways_dv_to_miss_engine_m_s": 57560.151935999995
+   },
+   {
+    "grain_d_mm": 0.1,
+    "mass_kg": 1.3089969389957473e-09,
+    "range_m": 100000.0,
+    "warning_s": 0.020847755949884503,
+    "photons_back_per_J": 0.17049813028204705,
+    "beam_energy_to_vaporise_J": 1308996.9389957471,
+    "sideways_dv_to_miss_engine_m_s": 5756.0151936
+   },
+   {
+    "grain_d_mm": 0.1,
+    "mass_kg": 1.3089969389957473e-09,
+    "range_m": 1000000.0,
+    "warning_s": 0.20847755949884506,
+    "photons_back_per_J": 1.7049813028204706e-05,
+    "beam_energy_to_vaporise_J": 130899693.89957473,
+    "sideways_dv_to_miss_engine_m_s": 575.6015193599999
+   },
+   {
+    "grain_d_mm": 1.0,
+    "mass_kg": 1.3089969389957471e-06,
+    "range_m": 1000.0,
+    "warning_s": 0.00020847755949884503,
+    "photons_back_per_J": 1704981302.8204703,
+    "beam_energy_to_vaporise_J": 1308.9969389957473,
+    "sideways_dv_to_miss_engine_m_s": 575601.51936
+   },
+   {
+    "grain_d_mm": 1.0,
+    "mass_kg": 1.3089969389957471e-06,
+    "range_m": 10000.0,
+    "warning_s": 0.0020847755949884505,
+    "photons_back_per_J": 170498.13028204703,
+    "beam_energy_to_vaporise_J": 130899.69389957473,
+    "sideways_dv_to_miss_engine_m_s": 57560.151935999995
+   },
+   {
+    "grain_d_mm": 1.0,
+    "mass_kg": 1.3089969389957471e-06,
+    "range_m": 100000.0,
+    "warning_s": 0.020847755949884503,
+    "photons_back_per_J": 17.049813028204703,
+    "beam_energy_to_vaporise_J": 13089969.38995747,
+    "sideways_dv_to_miss_engine_m_s": 5756.0151936
+   },
+   {
+    "grain_d_mm": 1.0,
+    "mass_kg": 1.3089969389957471e-06,
+    "range_m": 1000000.0,
+    "warning_s": 0.20847755949884506,
+    "photons_back_per_J": 0.0017049813028204707,
+    "beam_energy_to_vaporise_J": 1308996938.995747,
+    "sideways_dv_to_miss_engine_m_s": 575.6015193599999
+   },
+   {
+    "grain_d_mm": 10.0,
+    "mass_kg": 0.0013089969389957472,
+    "range_m": 1000.0,
+    "warning_s": 0.00020847755949884503,
+    "photons_back_per_J": 170498130282.04706,
+    "beam_energy_to_vaporise_J": 13089.969389957472,
+    "sideways_dv_to_miss_engine_m_s": 575601.51936
+   },
+   {
+    "grain_d_mm": 10.0,
+    "mass_kg": 0.0013089969389957472,
+    "range_m": 10000.0,
+    "warning_s": 0.0020847755949884505,
+    "photons_back_per_J": 17049813.028204698,
+    "beam_energy_to_vaporise_J": 1308996.9389957474,
+    "sideways_dv_to_miss_engine_m_s": 57560.151935999995
+   },
+   {
+    "grain_d_mm": 10.0,
+    "mass_kg": 0.0013089969389957472,
+    "range_m": 100000.0,
+    "warning_s": 0.020847755949884503,
+    "photons_back_per_J": 1704.9813028204705,
+    "beam_energy_to_vaporise_J": 130899693.89957471,
+    "sideways_dv_to_miss_engine_m_s": 5756.0151936
+   },
+   {
+    "grain_d_mm": 10.0,
+    "mass_kg": 0.0013089969389957472,
+    "range_m": 1000000.0,
+    "warning_s": 0.20847755949884506,
+    "photons_back_per_J": 0.17049813028204705,
+    "beam_energy_to_vaporise_J": 13089969389.957474,
+    "sideways_dv_to_miss_engine_m_s": 575.6015193599999
+   }
+  ],
+  "search_rate_note": "covering a 112 m radius at 100 km needs ~(112/0.5)^2 = 5e4 beam spots per 21 ms frame: ~2.4e6 pulses/s",
+  "verdict": "Grains are detectable only at ranges giving milliseconds of warning, and no beam can vaporise or deflect them in that time; the only workable 'clearing' is a physical screen that turns each grain into plasma far enough ahead (the stand-off physics above)."
+ },
+ "plume": {
+  "cases": {
+   "V0_half_angle_10": {
+    "mass_flow_kg_s": 0.0731,
+    "exit_radius_m": 112.2,
+    "axial_column_kg_m2": 6.125310894760495e-11,
+    "grains": [
+     {
+      "grain_kg": 1e-15,
+      "intercepted_plume_kg": 4.020304338540833e-23,
+      "energy_deposited_J": 1.1576403469297777e-08,
+      "ratio_to_vaporisation": 1.1576403469297778,
+      "momentum_ratio": 2.0113636858744926e-07
+     },
+     {
+      "grain_kg": 1e-12,
+      "intercepted_plume_kg": 4.020304338540833e-21,
+      "energy_deposited_J": 1.1576403469297774e-06,
+      "ratio_to_vaporisation": 0.11576403469297776,
+      "momentum_ratio": 2.0113636858744925e-08
+     },
+     {
+      "grain_kg": 1e-09,
+      "intercepted_plume_kg": 4.0203043385408315e-19,
+      "energy_deposited_J": 0.00011576403469297772,
+      "ratio_to_vaporisation": 0.011576403469297772,
+      "momentum_ratio": 2.0113636858744918e-09
+     },
+     {
+      "grain_kg": 1e-06,
+      "intercepted_plume_kg": 4.02030433854083e-17,
+      "energy_deposited_J": 0.011576403469297768,
+      "ratio_to_vaporisation": 0.0011576403469297767,
+      "momentum_ratio": 2.0113636858744913e-10
+     }
+    ]
+   },
+   "V0_half_angle_20": {
+    "mass_flow_kg_s": 0.0731,
+    "exit_radius_m": 112.2,
+    "axial_column_kg_m2": 2.967433801698867e-11,
+    "grains": [
+     {
+      "grain_kg": 1e-15,
+      "intercepted_plume_kg": 1.947654117851784e-23,
+      "energy_deposited_J": 5.608239572995822e-09,
+      "ratio_to_vaporisation": 0.5608239572995822,
+      "momentum_ratio": 9.744139834729105e-08
+     },
+     {
+      "grain_kg": 1e-12,
+      "intercepted_plume_kg": 1.9476541178517835e-21,
+      "energy_deposited_J": 5.608239572995821e-07,
+      "ratio_to_vaporisation": 0.05608239572995821,
+      "momentum_ratio": 9.744139834729103e-09
+     },
+     {
+      "grain_kg": 1e-09,
+      "intercepted_plume_kg": 1.9476541178517832e-19,
+      "energy_deposited_J": 5.60823957299582e-05,
+      "ratio_to_vaporisation": 0.005608239572995819,
+      "momentum_ratio": 9.7441398347291e-10
+     },
+     {
+      "grain_kg": 1e-06,
+      "intercepted_plume_kg": 1.9476541178517827e-17,
+      "energy_deposited_J": 0.0056082395729958184,
+      "ratio_to_vaporisation": 0.0005608239572995818,
+      "momentum_ratio": 9.744139834729099e-11
+     }
+    ]
+   },
+   "V0_half_angle_40": {
+    "mass_flow_kg_s": 0.0731,
+    "exit_radius_m": 112.2,
+    "axial_column_kg_m2": 1.2871624963753512e-11,
+    "grains": [
+     {
+      "grain_kg": 1e-15,
+      "intercepted_plume_kg": 8.448199703644941e-24,
+      "energy_deposited_J": 2.432645892526935e-09,
+      "ratio_to_vaporisation": 0.24326458925269348,
+      "momentum_ratio": 4.2266457123727273e-08
+     },
+     {
+      "grain_kg": 1e-12,
+      "intercepted_plume_kg": 8.448199703644939e-22,
+      "energy_deposited_J": 2.432645892526934e-07,
+      "ratio_to_vaporisation": 0.024326458925269346,
+      "momentum_ratio": 4.226645712372726e-09
+     },
+     {
+      "grain_kg": 1e-09,
+      "intercepted_plume_kg": 8.44819970364494e-20,
+      "energy_deposited_J": 2.4326458925269345e-05,
+      "ratio_to_vaporisation": 0.0024326458925269345,
+      "momentum_ratio": 4.2266457123727257e-10
+     },
+     {
+      "grain_kg": 1e-06,
+      "intercepted_plume_kg": 8.448199703644936e-18,
+      "energy_deposited_J": 0.0024326458925269336,
+      "ratio_to_vaporisation": 0.00024326458925269336,
+      "momentum_ratio": 4.226645712372725e-11
+     }
+    ]
+   },
+   "V1_half_angle_10": {
+    "mass_flow_kg_s": 0.03667756962746634,
+    "exit_radius_m": 112.0,
+    "axial_column_kg_m2": 3.078833079514558e-11,
+    "grains": [
+     {
+      "grain_kg": 1e-15,
+      "intercepted_plume_kg": 2.0207702433199346e-23,
+      "energy_deposited_J": 5.81877631281844e-09,
+      "ratio_to_vaporisation": 0.581877631281844,
+      "momentum_ratio": 1.0109940797130518e-07
+     },
+     {
+      "grain_kg": 1e-12,
+      "intercepted_plume_kg": 2.020770243319934e-21,
+      "energy_deposited_J": 5.818776312818437e-07,
+      "ratio_to_vaporisation": 0.058187763128184376,
+      "momentum_ratio": 1.0109940797130514e-08
+     },
+     {
+      "grain_kg": 1e-09,
+      "intercepted_plume_kg": 2.0207702433199337e-19,
+      "energy_deposited_J": 5.8187763128184367e-05,
+      "ratio_to_vaporisation": 0.005818776312818436,
+      "momentum_ratio": 1.0109940797130513e-09
+     },
+     {
+      "grain_kg": 1e-06,
+      "intercepted_plume_kg": 2.020770243319933e-17,
+      "energy_deposited_J": 0.005818776312818435,
+      "ratio_to_vaporisation": 0.0005818776312818435,
+      "momentum_ratio": 1.010994079713051e-10
+     }
+    ]
+   },
+   "V1_half_angle_20": {
+    "mass_flow_kg_s": 0.03667756962746634,
+    "exit_radius_m": 112.0,
+    "axial_column_kg_m2": 1.491554225885109e-11,
+    "grains": [
+     {
+      "grain_kg": 1e-15,
+      "intercepted_plume_kg": 9.78971031596803e-24,
+      "energy_deposited_J": 2.818931775357222e-09,
+      "ratio_to_vaporisation": 0.2818931775357222,
+      "momentum_ratio": 4.8978052820537744e-08
+     },
+     {
+      "grain_kg": 1e-12,
+      "intercepted_plume_kg": 9.789710315968026e-22,
+      "energy_deposited_J": 2.818931775357221e-07,
+      "ratio_to_vaporisation": 0.028189317753572214,
+      "momentum_ratio": 4.897805282053773e-09
+     },
+     {
+      "grain_kg": 1e-09,
+      "intercepted_plume_kg": 9.789710315968026e-20,
+      "energy_deposited_J": 2.818931775357221e-05,
+      "ratio_to_vaporisation": 0.002818931775357221,
+      "momentum_ratio": 4.897805282053772e-10
+     },
+     {
+      "grain_kg": 1e-06,
+      "intercepted_plume_kg": 9.789710315968023e-18,
+      "energy_deposited_J": 0.00281893177535722,
+      "ratio_to_vaporisation": 0.000281893177535722,
+      "momentum_ratio": 4.897805282053771e-11
+     }
+    ]
+   },
+   "V1_half_angle_40": {
+    "mass_flow_kg_s": 0.03667756962746634,
+    "exit_radius_m": 112.0,
+    "axial_column_kg_m2": 6.46980788508356e-12,
+    "grains": [
+     {
+      "grain_kg": 1e-15,
+      "intercepted_plume_kg": 4.246412493474613e-24,
+      "energy_deposited_J": 1.2227478365324668e-09,
+      "ratio_to_vaporisation": 0.12227478365324668,
+      "momentum_ratio": 2.1244859009152953e-08
+     },
+     {
+      "grain_kg": 1e-12,
+      "intercepted_plume_kg": 4.246412493474612e-22,
+      "energy_deposited_J": 1.2227478365324664e-07,
+      "ratio_to_vaporisation": 0.012227478365324665,
+      "momentum_ratio": 2.124485900915295e-09
+     },
+     {
+      "grain_kg": 1e-09,
+      "intercepted_plume_kg": 4.246412493474612e-20,
+      "energy_deposited_J": 1.2227478365324664e-05,
+      "ratio_to_vaporisation": 0.0012227478365324663,
+      "momentum_ratio": 2.1244859009152947e-10
+     },
+     {
+      "grain_kg": 1e-06,
+      "intercepted_plume_kg": 4.2464124934746104e-18,
+      "energy_deposited_J": 0.0012227478365324659,
+      "ratio_to_vaporisation": 0.00012227478365324659,
+      "momentum_ratio": 2.124485900915294e-11
+     }
+    ]
+   },
+   "CANON_half_angle_10": {
+    "mass_flow_kg_s": 1.134,
+    "exit_radius_m": 5.6,
+    "axial_column_kg_m2": 1.9038320955459075e-08,
+    "grains": [
+     {
+      "grain_kg": 1e-15,
+      "intercepted_plume_kg": 1.2495666856883313e-20,
+      "energy_deposited_J": 3.5981077294689495e-06,
+      "ratio_to_vaporisation": 359.81077294689493,
+      "momentum_ratio": 6.251598991095953e-05
+     },
+     {
+      "grain_kg": 1e-12,
+      "intercepted_plume_kg": 1.249566685688331e-18,
+      "energy_deposited_J": 0.0003598107729468948,
+      "ratio_to_vaporisation": 35.981077294689484,
+      "momentum_ratio": 6.251598991095951e-06
+     },
+     {
+      "grain_kg": 1e-09,
+      "intercepted_plume_kg": 1.2495666856883309e-16,
+      "energy_deposited_J": 0.03598107729468948,
+      "ratio_to_vaporisation": 3.598107729468948,
+      "momentum_ratio": 6.251598991095951e-07
+     },
+     {
+      "grain_kg": 1e-06,
+      "intercepted_plume_kg": 1.2495666856883305e-14,
+      "energy_deposited_J": 3.5981077294689467,
+      "ratio_to_vaporisation": 0.3598107729468947,
+      "momentum_ratio": 6.251598991095949e-08
+     }
+    ]
+   },
+   "CANON_half_angle_20": {
+    "mass_flow_kg_s": 1.134,
+    "exit_radius_m": 5.6,
+    "axial_column_kg_m2": 9.22319831621055e-09,
+    "grains": [
+     {
+      "grain_kg": 1e-15,
+      "intercepted_plume_kg": 6.0535807639742085e-21,
+      "energy_deposited_J": 1.7431191137927715e-06,
+      "ratio_to_vaporisation": 174.31191137927715,
+      "momentum_ratio": 3.0286146253756858e-05
+     },
+     {
+      "grain_kg": 1e-12,
+      "intercepted_plume_kg": 6.053580763974208e-19,
+      "energy_deposited_J": 0.0001743119113792771,
+      "ratio_to_vaporisation": 17.431191137927712,
+      "momentum_ratio": 3.028614625375686e-06
+     },
+     {
+      "grain_kg": 1e-09,
+      "intercepted_plume_kg": 6.053580763974207e-17,
+      "energy_deposited_J": 0.01743119113792771,
+      "ratio_to_vaporisation": 1.7431191137927708,
+      "momentum_ratio": 3.028614625375685e-07
+     },
+     {
+      "grain_kg": 1e-06,
+      "intercepted_plume_kg": 6.053580763974204e-15,
+      "energy_deposited_J": 1.7431191137927702,
+      "ratio_to_vaporisation": 0.174311911379277,
+      "momentum_ratio": 3.028614625375684e-08
+     }
+    ]
+   },
+   "CANON_half_angle_40": {
+    "mass_flow_kg_s": 1.134,
+    "exit_radius_m": 5.6,
+    "axial_column_kg_m2": 4.0006806428038534e-09,
+    "grains": [
+     {
+      "grain_kg": 1e-15,
+      "intercepted_plume_kg": 2.625818349749178e-21,
+      "energy_deposited_J": 7.561002872935463e-07,
+      "ratio_to_vaporisation": 75.61002872935462,
+      "momentum_ratio": 1.3137004638572443e-05
+     },
+     {
+      "grain_kg": 1e-12,
+      "intercepted_plume_kg": 2.625818349749177e-19,
+      "energy_deposited_J": 7.56100287293546e-05,
+      "ratio_to_vaporisation": 7.561002872935461,
+      "momentum_ratio": 1.313700463857244e-06
+     },
+     {
+      "grain_kg": 1e-09,
+      "intercepted_plume_kg": 2.625818349749177e-17,
+      "energy_deposited_J": 0.00756100287293546,
+      "ratio_to_vaporisation": 0.756100287293546,
+      "momentum_ratio": 1.3137004638572435e-07
+     },
+     {
+      "grain_kg": 1e-06,
+      "intercepted_plume_kg": 2.6258183497491758e-15,
+      "energy_deposited_J": 0.7561002872935457,
+      "ratio_to_vaporisation": 0.07561002872935457,
+      "momentum_ratio": 1.3137004638572431e-08
+     }
+    ]
+   }
+  },
+  "model": "steady conical plume, column from the exit plane to infinity on the axis; the grain meets plume ions at ve + v; pulsed bursts (FDP-1 pellets at ~100-200 Hz) are diluted by the same geometry",
+  "verdict": "The plume can vaporise grains below ~1e-15 kg; their vapour keeps its momentum and energy (momentum ratio < 1e-6). It removes far less than 1 % of the hazardous (> 1 ug) fluence. No credit."
+ },
+ "skirt": {
+  "V0": {
+   "half_angle_deg": 9.598083470051419,
+   "r_from_m": 8.5,
+   "r_to_m": 45.0,
+   "x_from_m": -177.27456887305746,
+   "x_to_m": 38.5702972845057,
+   "slant_m": 218.90924203097583,
+   "surface_m2": 36793.216161357166,
+   "projected_m2": 6134.745054297468,
+   "grazing_angle_deg": 9.598083470051419,
+   "track_thickness_gain": 5.997513480300707,
+   "areal_density_options": {
+    "0.5_kg_m2": {
+     "mass_t": 18.396608080678583,
+     "sheet_C_C_mm_equiv": 0.2777777777777778,
+     "effective_thickness_along_track_mm": 1.6659759667501965
+    },
+    "1_kg_m2": {
+     "mass_t": 36.793216161357165,
+     "sheet_C_C_mm_equiv": 0.5555555555555556,
+     "effective_thickness_along_track_mm": 3.331951933500393
+    },
+    "2_kg_m2": {
+     "mass_t": 73.58643232271433,
+     "sheet_C_C_mm_equiv": 1.1111111111111112,
+     "effective_thickness_along_track_mm": 6.663903867000786
+    }
+   },
+   "burn_solid_angle": "zero for a point source (the sheet contains the burn's rays) and inside the shadow shield's umbra if set at or below the hardware cone; finite-source and scatter terms UNKNOWN (needs T04 source size)"
+  },
+  "V1": {
+   "half_angle_deg": 7.939019743054677,
+   "r_from_m": 7.208527185917713,
+   "r_to_m": 45.0,
+   "x_from_m": -175.84935502190436,
+   "x_to_m": 95.14337858947246,
+   "slant_m": 273.61516238619555,
+   "surface_m2": 44877.79130953809,
+   "projected_m2": 6198.478971120183,
+   "grazing_angle_deg": 7.939019743054677,
+   "track_thickness_gain": 7.240129638034059,
+   "areal_density_options": {
+    "0.5_kg_m2": {
+     "mass_t": 22.43889565476905,
+     "sheet_C_C_mm_equiv": 0.2777777777777778,
+     "effective_thickness_along_track_mm": 2.0111471216761276
+    },
+    "1_kg_m2": {
+     "mass_t": 44.8777913095381,
+     "sheet_C_C_mm_equiv": 0.5555555555555556,
+     "effective_thickness_along_track_mm": 4.022294243352255
+    },
+    "2_kg_m2": {
+     "mass_t": 89.7555826190762,
+     "sheet_C_C_mm_equiv": 1.1111111111111112,
+     "effective_thickness_along_track_mm": 8.04458848670451
+    }
+   },
+   "burn_solid_angle": "zero for a point source (the sheet contains the burn's rays) and inside the shadow shield's umbra if set at or below the hardware cone; finite-source and scatter terms UNKNOWN (needs T04 source size)"
+  },
+  "V2": {
+   "half_angle_deg": 7.941951760575666,
+   "r_from_m": 7.2107762008719725,
+   "r_to_m": 45.0,
+   "x_from_m": -175.85256359901433,
+   "x_to_m": 95.02271123465428,
+   "slant_m": 273.4985191030402,
+   "surface_m2": 44860.59212095531,
+   "projected_m2": 6198.3770916927615,
+   "grazing_angle_deg": 7.941951760575666,
+   "track_thickness_gain": 7.237473851192232,
+   "areal_density_options": {
+    "0.5_kg_m2": {
+     "mass_t": 22.430296060477655,
+     "sheet_C_C_mm_equiv": 0.2777777777777778,
+     "effective_thickness_along_track_mm": 2.0104094031089534
+    },
+    "1_kg_m2": {
+     "mass_t": 44.86059212095531,
+     "sheet_C_C_mm_equiv": 0.5555555555555556,
+     "effective_thickness_along_track_mm": 4.020818806217907
+    },
+    "2_kg_m2": {
+     "mass_t": 89.72118424191062,
+     "sheet_C_C_mm_equiv": 1.1111111111111112,
+     "effective_thickness_along_track_mm": 8.041637612435814
+    }
+   },
+   "burn_solid_angle": "zero for a point source (the sheet contains the burn's rays) and inside the shadow shield's umbra if set at or below the hardware cone; finite-source and scatter terms UNKNOWN (needs T04 source size)"
+  }
+ },
+ "canon_skirt": {
+  "x_m": -98.0,
+  "r_from_m": 5.7,
+  "r_to_m": 45.0,
+  "projected_m2": 6259.654778204199,
+  "shadow_check": {
+   "reactor_shield_half_angle_deg": 70.66519146217358,
+   "radius_in_shadow_at_x_m": 47.879999999999995
+  },
+  "mass_t_at_kg_m2": {
+   "1.0": 6.259654778204199,
+   "2.0": 12.519309556408398,
+   "5.0": 31.298273891020994
+  },
+  "note": "flat annulus 16.8 m forward of the canon fusion core; the 5.7 m reactor shadow shield 2 m forward of the core shadows it to r 47.9 m"
+ }
+}

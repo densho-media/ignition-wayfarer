@@ -1,0 +1,313 @@
+{
+ "cells": {
+  "VTX-01": {
+   "VTX-01A": "R",
+   "VTX-01B": "R",
+   "VTX-01C": "R"
+  },
+  "VTX-01A": {
+   "VTX-01": "Ic",
+   "VTX-01C": "w",
+   "VTX-02A": "R"
+  },
+  "VTX-01B": {
+   "VTX-06A": "W"
+  },
+  "VTX-01C": {
+   "VTX-07C": "I"
+  },
+  "VTX-01D": {
+   "VTX-04A": "E",
+   "VTX-06A": "W"
+  },
+  "VTX-02": {
+   "VTX-02A": "R",
+   "VTX-02B": "R"
+  },
+  "VTX-02A": {
+   "VTX-01A": "E"
+  },
+  "VTX-02B": {
+   "VTX-03A": "S"
+  },
+  "VTX-02C": {
+   "VTX-02B": "R",
+   "VTX-03": "C",
+   "VTX-07": "i"
+  },
+  "VTX-03": {
+   "VTX-02": "R",
+   "VTX-07": "I"
+  },
+  "VTX-03A": {
+   "VTX-02B": "R",
+   "VTX-03": "W"
+  },
+  "VTX-03B": {
+   "VTX-02B": "R",
+   "VTX-06": "W"
+  },
+  "VTX-03C": {
+   "VTX-03A": "RE"
+  },
+  "VTX-04": {},
+  "VTX-04A": {
+   "VTX-01": "W"
+  },
+  "VTX-04B": {
+   "VTX-01": "C"
+  },
+  "VTX-04C": {
+   "VTX-06B": "I"
+  },
+  "VTX-04D": {
+   "VTX-06A": "I"
+  },
+  "VTX-05": {
+   "VTX-05A": "R",
+   "VTX-05B": "R"
+  },
+  "VTX-05A": {
+   "VTX-01C": "R",
+   "VTX-03": "I"
+  },
+  "VTX-05B": {
+   "VTX-06B": "E"
+  },
+  "VTX-06": {
+   "VTX-06A": "R"
+  },
+  "VTX-06A": {
+   "VTX-07": "I"
+  },
+  "VTX-06B": {},
+  "VTX-07": {
+   "VTX-07A": "R",
+   "VTX-07C": "R"
+  },
+  "VTX-07A": {
+   "VTX-01": "e",
+   "VTX-07D": "I",
+   "VTX-08": "I"
+  },
+  "VTX-07B": {
+   "VTX-08": "I",
+   "VTX-08D": "W"
+  },
+  "VTX-07C": {
+   "VTX-01C": "R",
+   "VTX-07": "I"
+  },
+  "VTX-07D": {
+   "VTX-08": "I"
+  },
+  "VTX-08": {
+   "VTX-08A": "R"
+  },
+  "VTX-08A": {
+   "VTX-02": "W",
+   "VTX-06": "W"
+  },
+  "VTX-08B": {
+   "VTX-08D": "I"
+  },
+  "VTX-08C": {
+   "VTX-08": "C"
+  },
+  "VTX-08D": {
+   "VTX-08A": "R"
+  },
+  "T06-NEW-1": {
+   "VTX-07": "i"
+  },
+  "T06-NEW-2": {
+   "VTX-02": "i"
+  }
+ },
+ "names": {
+  "VTX-01": "Advanced pulsed fusion ignition",
+  "VTX-01A": "Magnetised fuel-only D-3He target",
+  "VTX-01B": "Stand-off heavy-ion driver",
+  "VTX-01C": "Precision cryogenic target factory and injection",
+  "VTX-01D": "D-T spark-ignited D-3He target",
+  "VTX-02": "Fiji lattice field engineering",
+  "VTX-02A": "Fiji lattice amplification and stabilisation (capability card)",
+  "VTX-02B": "Large no-insulation REBCO loops with distributed quench protection",
+  "VTX-02C": "Inductive pulse-energy recovery",
+  "VTX-03": "Helical magnetic capture",
+  "VTX-03A": "Clocked trim sectors (m = 4 helical harmonic)",
+  "VTX-03B": "External non-axisymmetric shaping coils",
+  "VTX-03C": "Counter-helicity field pairs (zero net angular momentum)",
+  "VTX-04": "Sacrificial injection and radiation conversion",
+  "VTX-04A": "Radiation-converting hydrogen or LiH tamper",
+  "VTX-04B": "Variable exhaust-mass operating mode (hydrogen low gear)",
+  "VTX-04C": "Sacrificial vapour curtains on strike surfaces",
+  "VTX-04D": "Isotopically tailored absorbers in the shield",
+  "VTX-05": "Predictive ignition and radiation management",
+  "VTX-05A": "Pulse-to-pulse predictive control on the target and driver side",
+  "VTX-05B": "Burn diagnostics, damage prediction and safe stop",
+  "VTX-06": "Directional radiation escape",
+  "VTX-06A": "Shadow shield and solid-angle minimisation",
+  "VTX-06B": "Renewable sacrificial hardware faces",
+  "VTX-07": "Advanced thermal systems",
+  "VTX-07A": "Split warm loop with high-temperature power electronics",
+  "VTX-07B": "Liquid droplet or liquid sheet radiator",
+  "VTX-07C": "Recirculating power reduction",
+  "VTX-07D": "Deployable radiator wings with edge bumpers",
+  "VTX-08": "Interstellar and interplanetary particle protection",
+  "VTX-08A": "Multi-layer sacrificial bumpers for the vaporisation regime",
+  "VTX-08B": "Forward dust detection and active clearing",
+  "VTX-08C": "Charged-particle magnetic deflection (limited)",
+  "VTX-08D": "Engine-first braking protection",
+  "T06-NEW-1": "Thin-wall refractory heat-pipe radiators for the 1,800 K band",
+  "T06-NEW-2": "High-specific-strength hoop and truss structure"
+ },
+ "credibility": {
+  "VTX-01": "PLAUSIBLE_FUTURE",
+  "VTX-01A": "PLAUSIBLE_FUTURE",
+  "VTX-01B": "PLAUSIBLE_FUTURE",
+  "VTX-01C": "PLAUSIBLE_FUTURE",
+  "VTX-01D": "PLAUSIBLE_FUTURE",
+  "VTX-02": "FICTIONAL_BREAKTHROUGH",
+  "VTX-02A": "FICTIONAL_BREAKTHROUGH",
+  "VTX-02B": "ESTABLISHED",
+  "VTX-02C": "PLAUSIBLE_FUTURE",
+  "VTX-03": "PLAUSIBLE_FUTURE",
+  "VTX-03A": "PLAUSIBLE_FUTURE",
+  "VTX-03B": "PLAUSIBLE_FUTURE",
+  "VTX-03C": "ESTABLISHED",
+  "VTX-04": "ESTABLISHED",
+  "VTX-04A": "ESTABLISHED",
+  "VTX-04B": "ESTABLISHED",
+  "VTX-04C": "ESTABLISHED",
+  "VTX-04D": "ESTABLISHED",
+  "VTX-05": "PLAUSIBLE_FUTURE",
+  "VTX-05A": "PLAUSIBLE_FUTURE",
+  "VTX-05B": "ESTABLISHED",
+  "VTX-06": "ESTABLISHED",
+  "VTX-06A": "ESTABLISHED",
+  "VTX-06B": "PLAUSIBLE_FUTURE",
+  "VTX-07": "PLAUSIBLE_FUTURE",
+  "VTX-07A": "PLAUSIBLE_FUTURE",
+  "VTX-07B": "PLAUSIBLE_FUTURE",
+  "VTX-07C": "PLAUSIBLE_FUTURE",
+  "VTX-07D": "PLAUSIBLE_FUTURE",
+  "VTX-08": "PLAUSIBLE_FUTURE",
+  "VTX-08A": "PLAUSIBLE_FUTURE",
+  "VTX-08B": "PLAUSIBLE_FUTURE",
+  "VTX-08C": "ESTABLISHED",
+  "VTX-08D": "PLAUSIBLE_FUTURE",
+  "T06-NEW-1": "PLAUSIBLE_FUTURE",
+  "T06-NEW-2": "PLAUSIBLE_FUTURE"
+ },
+ "engine_parameters": [
+  {
+   "lever": "gain",
+   "path": "base.overrides.pulsed.gain.optimistic",
+   "value": 3000.0,
+   "tech": "VTX-01/01A",
+   "elasticity": -0.6291862355907493
+  },
+  {
+   "lever": "driver",
+   "path": "base.overrides.pulsed.driver_efficiency.optimistic",
+   "value": 0.3,
+   "tech": "VTX-01B",
+   "elasticity": -0.7417076594808614
+  },
+  {
+   "lever": "driver_kg",
+   "path": "base.overrides.pulsed.driver_kg_per_W.optimistic",
+   "value": 5e-05,
+   "tech": "VTX-01B",
+   "elasticity": 0.3660991569587291
+  },
+  {
+   "lever": "house",
+   "path": "base.overrides.pulsed.house_fraction.value",
+   "value": 0.0005,
+   "tech": "VTX-07C/01C",
+   "elasticity": 0.16785477933769208
+  },
+  {
+   "lever": "warm",
+   "path": "base.overrides.radiators.warm.T_K.optimistic",
+   "value": 700.0,
+   "tech": "VTX-07A",
+   "elasticity": -1.7362760750530213
+  },
+  {
+   "lever": "warm_areal",
+   "path": "base.overrides.radiators.warm.areal_kg_m2.optimistic",
+   "value": 1.0,
+   "tech": "VTX-07B",
+   "elasticity": 0.34438380065465013
+  },
+  {
+   "lever": "hot_areal",
+   "path": "base.overrides.radiators.hot.areal_kg_m2.optimistic",
+   "value": 3.0,
+   "tech": "T06-NEW-1",
+   "elasticity": 0.08150590359627395
+  },
+  {
+   "lever": "eta",
+   "path": "base.overrides.pulsed.nozzle_efficiency.optimistic",
+   "value": 0.79,
+   "tech": "VTX-03",
+   "elasticity": -2.8670702587166152
+  },
+  {
+   "lever": "ptw",
+   "path": "base.overrides.continuous.plume_to_hardware.value",
+   "value": 0.02,
+   "tech": "VTX-03/03B",
+   "elasticity": 0.0947839792641107
+  },
+  {
+   "lever": "recovery",
+   "path": "base.overrides.pulsed.recovery_efficiency.optimistic",
+   "value": 0.95,
+   "tech": "VTX-02C",
+   "elasticity": -0.04273535905111835
+  },
+  {
+   "lever": "rho",
+   "path": "base.overrides.pulsed.rho_g_cc.optimistic",
+   "value": 3000.0,
+   "tech": "VTX-01A",
+   "elasticity": -0.33900283028238176
+  },
+  {
+   "lever": "armor",
+   "path": "base.overrides.pulsed.loop_armor_kg_m2.optimistic",
+   "value": 200.0,
+   "tech": "VTX-06B",
+   "elasticity": 0.04800463449729111
+  },
+  {
+   "lever": "nozzle_kg",
+   "path": "base.overrides.pulsed.nozzle_kg_per_J.optimistic",
+   "value": 1.07e-06,
+   "tech": "T06-NEW-2",
+   "elasticity": 0.06663792596008493
+  },
+  {
+   "lever": "spar",
+   "path": "structure.wing_spar_kg_per_m.value",
+   "value": 25.0,
+   "tech": "T06-NEW-2",
+   "elasticity": 0.06783896690006615
+  },
+  {
+   "lever": "gallery_kg",
+   "path": "structure.gallery_kg_per_m.value",
+   "value": 120.0,
+   "tech": "T06-NEW-2",
+   "elasticity": 0.049644295933690394
+  }
+ ],
+ "base": "V1c",
+ "base_departure_t": 12978.03919146156,
+ "legend": "R requires, E enables, I improves, W worsens, C conflicts, S shares; lower case = T06 proposal"
+}
