@@ -32,9 +32,12 @@ a.add_argument('--render', type=Path); a.add_argument('--cams', nargs='+'); a.ad
 a.add_argument('--ship-cache', default='/tmp/wayfarer_vertex_ship_local.blend')
 a.add_argument('--no-save', action='store_true'); a.add_argument('--no-ship', action='store_true')
 a = a.parse_args(sys.argv[sys.argv.index('--')+1:] if '--' in sys.argv else [])
+REV2 = json.loads((Path(__file__).resolve().parent/'rev2.json').read_text())     # python3 work/vertex-blender/rev2.py writes it
+CANON2 = REV2['canon']
+LAUNCHER_KG_PER_M_NOTE = 'mass about 0.5 t/m PROTOTYPE (UNKNOWN)'
 
 SHIP = ROOT/'assets/wayfarer/WF_WAYFARER_001.blend'
-REVISION = 1
+REVISION = 2
 GENS = ('V4', 'V0', 'V5')
 C = screen.canon()
 RS = {g: screen.solve(g) for g in GENS}
@@ -372,6 +375,7 @@ def prepare_working_copy(canon, gen):
     the superseded drive and shielding assemblies left out, idle H2 vessels left out (V4/V5), and every subsystem split at the tank-farm
     front so its bow part is instanced again shifted by the T-B stretch. The canonical collection itself is never touched."""
     work = bpy.data.collections.new(f'WORK_VERTEX_{gen}_SHIP'); work.color_tag = 'COLOR_07'
+    blades = bpy.data.collections.new(f'WORK_VERTEX_{gen}_CANON_HOT_BLADES'); blades.color_tag = 'COLOR_01'
     dx = ENV[gen]['tanks_TB']['bow_shift_m']; x_from = C['tank_farm_x_m'][1]+0.05
     log = {'left_out_assemblies': [], 'left_out_objects': 0, 'bow_objects': 0, 'aft_objects': 0, 'bow_shift_m': dx, 'split_x_m': x_from}
     for asm in [o for o in canon.all_objects if o.instance_type == 'COLLECTION' and o.instance_collection]:
@@ -379,7 +383,8 @@ def prepare_working_copy(canon, gen):
         if base.startswith(SUPERSEDED):
             log['left_out_assemblies'].append(base); continue
         sub = asm.instance_collection
-        parts = {'AFT': bpy.data.collections.new(f'{sub.name}_{gen}_AFT'), 'BOW': bpy.data.collections.new(f'{sub.name}_{gen}_BOW')}
+        parts = {'AFT': bpy.data.collections.new(f'{sub.name}_{gen}_AFT'), 'BOW': bpy.data.collections.new(f'{sub.name}_{gen}_BOW'),
+                 'HOT': bpy.data.collections.new(f'{sub.name}_{gen}_HOT_BLADES')}
         for p in parts.values():
             p.instance_offset = sub.instance_offset
         for r in _roots(sub):
@@ -388,10 +393,12 @@ def prepare_working_copy(canon, gen):
                 log['left_out_objects'] += len(_tree(r)); log.setdefault('left_out_names', []).append(rb); continue
             pts = [o.matrix_world @ Vector(v) for o in _tree(r) for v in (o.bound_box if o.type in ('MESH', 'CURVE', 'FONT') else [(0, 0, 0)])]
             key = 'BOW' if min(v.x for v in pts) >= x_from else 'AFT'
+            if sub.name.startswith('WF_THERMAL') and max(v.x for v in pts) <= C['hot_blades']['x_m'][1]+0.3:
+                key = 'HOT'                          # the 1,800 K blade sections (X -133.25 to 48.9 m); bulkhead, WARM and LOW zones stay
             for o in _tree(r):
                 if o.name not in parts[key].objects:
                     parts[key].objects.link(o)
-            log[key.lower()+'_objects'] += len(_tree(r))
+            log[key.lower()+'_objects'] = log.get(key.lower()+'_objects', 0)+len(_tree(r))
         for key, p in parts.items():
             if not p.objects:
                 bpy.data.collections.remove(p); continue
@@ -399,9 +406,9 @@ def prepare_working_copy(canon, gen):
             e.matrix_world = asm.matrix_world.copy()
             if key == 'BOW':
                 e.location.x += dx
-            work.objects.link(e)
+            (blades if key == 'HOT' else work).objects.link(e)
     print('WF_VTX working copy', gen, log, flush=True)
-    return work, log
+    return work, blades, log
 
 
 # ----------------------------------------------------------------------------------------------------------------------------------
@@ -418,7 +425,10 @@ def gen_collections(gen, top):
     return root, out
 
 
-def build_fdp_parts(gen, R, colls, cut=None, ghost=False):
+BREECH_PARTS = ('FDP1_Pellet_Magazine', 'FDP1_Axial_Plug', 'FDP1_Target_Injection_Axis')
+
+
+def build_fdp_parts(gen, R, colls, cut=None, ghost=False, breech=None):
     for p in G.parts(R)+[t for t in G.tank_parts(R) if t['coll'] == '10:T-B']:
         if p['name'].startswith(REPLACED) or p.get('shape') == 'text':
             continue
@@ -432,11 +442,12 @@ def build_fdp_parts(gen, R, colls, cut=None, ghost=False):
         al = p['alpha'] if p['alpha'] < 1 else None
         if ghost:
             al = 0.12
-        make(p['name'].replace('FDP1_', ''), p['shape'], colls[key], p['func'], gen, st, vtx_of(p['name']),
+        target = breech if (breech is not None and p['name'].startswith(BREECH_PARTS)) else colls[key]
+        make(p['name'].replace('FDP1_', ''), p['shape'], target, p['func'], gen, st, vtx_of(p['name']),
              f'solve:{gen} fdp1 geometry.parts', note=p.get('note'), alpha=al, wire=ghost, cut=cut, **kw)
 
 
-def build_nozzle(gen, R, e, colls, cut=None, ghost=False):
+def build_nozzle(gen, R, e, colls, cut=None, ghost=False, support=None):
     """Loops redrawn as 12 replaceable segments per loop, trim joints clocked 45 deg loop to loop (VTX-03A, 03E), plus closure coils,
     guard rings, local bumpers and coil load-path candidates."""
     loops = R['nozzle']['loops']; src = f'solve:{gen} nozzle.loops'
@@ -490,31 +501,33 @@ def build_nozzle(gen, R, e, colls, cut=None, ghost=False):
     # load-path candidates: C1 -> shield frame ring (compression), C2 -> C1 and C2 -> L1 (tension ties); unsized (ISS-003)
     c1, c2 = e['closure_coils']; L1 = loops[0]
     ring_r = sh['radius_hw_aft_m']+1.0
-    make('Coil_Reaction_Ring', 'torus', colls['08'], 'STRUCTURE', gen, 'PROTOTYPE', 'VTX-03D', 'T05 PR (ISS-003)',
+    sup = support if support is not None else colls['08']
+    make('Coil_Reaction_Ring', 'torus', sup, 'STRUCTURE', gen, 'PROTOTYPE', 'VTX-03D', 'T05 PR (ISS-003)',
          note='candidate reaction ring on the shield aft face carrying C1/C2 axial force into the shield frame; unsized',
          x=xSA-0.8, R=ring_r, a=0.8, cut=cut)
     for j in range(PR_COIL_STRUTS):
         az = 360.0*j/PR_COIL_STRUTS+30.0
-        make(f'C1_Strut_{j+1}', 'tube', colls['08'], 'STRUCTURE', gen, 'PROTOTYPE', 'VTX-02D', 'T05 PR (ISS-003)',
+        make(f'C1_Strut_{j+1}', 'tube', sup, 'STRUCTURE', gen, 'PROTOTYPE', 'VTX-02D', 'T05 PR (ISS-003)',
              note='C1 -> shield reaction ring, compression member for 0.2-1.9 GN inter-coil attraction; unsized',
              points=[pol(c1['x_m'], c1['r_m'], az), pol(xSA-0.8, ring_r, az)], radius=0.6, cut=cut)
-        make(f'C2_Tie_C1_{j+1}', 'tube', colls['08'], 'STRUCTURE', gen, 'PROTOTYPE', 'VTX-02D', 'T05 PR (ISS-003)',
+        make(f'C2_Tie_C1_{j+1}', 'tube', sup, 'STRUCTURE', gen, 'PROTOTYPE', 'VTX-02D', 'T05 PR (ISS-003)',
              note='C2 -> C1 tie (one candidate path); unsized', points=[pol(c2['x_m'], c2['r_m'], az), pol(c1['x_m'], c1['r_m'], az)], radius=0.4, cut=cut)
-        make(f'C2_Tie_L1_{j+1}', 'tube', colls['08'], 'STRUCTURE', gen, 'PROTOTYPE', 'VTX-02D', 'T05 PR (ISS-003)',
+        make(f'C2_Tie_L1_{j+1}', 'tube', sup, 'STRUCTURE', gen, 'PROTOTYPE', 'VTX-02D', 'T05 PR (ISS-003)',
              note='C2 -> L1 tie (alternative candidate path); unsized', points=[pol(c2['x_m'], c2['r_m'], az+15), pol(L1['x'], L1['r'], az+15)],
              radius=0.4, alpha=0.35, cut=cut)
 
 
-def build_module(gen, R, e, colls, cut=None):
+def build_module(gen, R, e, colls, cut=None, launch=None):
     """Launcher, catcher, ignitor line, tritium store in the equipment module (VTX-01H, 01G); returns the corridor fit."""
     lay = R['layout']; xSF = lay['x_shield_fwd']; xMF = lay['x_module_fwd']
     plug = R['shield']['streaming']['pellet_bore']
     x_mag = xSF+14.5; x_plug = xSF+16.0
     v = e['launcher_one_in_flight_m_s']; free = x_mag-xSF
-    make('Target_Launcher_Barrel', 'tube', colls['07'], 'MAIN_PROPULSION', gen, 'PROTOTYPE', 'VTX-01H', 'T05 PR_LAUNCHER_LEN (UNKNOWN 10-20 m)',
+    lc = launch if launch is not None else colls['07']
+    make('Target_Launcher_Barrel', 'tube', lc, 'MAIN_PROPULSION', gen, 'PROTOTYPE', 'VTX-01H', 'T05 PR_LAUNCHER_LEN (UNKNOWN 10-20 m)',
          note=f'barrel {PR_LAUNCHER_LEN:.0f} m, >= {v/1e3:.1f} km/s for one target in flight; length UNKNOWN', unbooked='launcher',
          points=[(xSF+PR_LAUNCHER_LEN, 0, 0), (xSF+0.2, 0, 0)], radius=PR_LAUNCHER_R, cut=cut)
-    make('Sabot_Catcher', 'ring', colls['07'], 'MAIN_PROPULSION', gen, 'PROTOTYPE', 'VTX-01H', 'T05 PR', note='annular sabot trap at the muzzle',
+    make('Sabot_Catcher', 'ring', lc, 'MAIN_PROPULSION', gen, 'PROTOTYPE', 'VTX-01H', 'T05 PR', note='annular sabot trap at the muzzle',
          x0=xSF+0.2, x1=xSF+2.2, r0=0.7, r1=1.8, cut=cut, unbooked='launcher')
     make('Fast_Ignitor_Line', 'tube', colls['04'], 'VIS_BEAM', gen, 'PROTOTYPE', 'VTX-01G', 'T04 (volume UNKNOWN)', alpha=0.8,
          note='fast-ignitor beam line beside the bore; it needs its own shield port (another streaming path)',
@@ -540,12 +553,16 @@ def band_shares():
     return [(T, b[T]/t) for T in sorted(b, reverse=True)]
 
 
-def build_wings(gen, R, e, colls, ghost=False, graded=None, coll=None, label='', alpha_hot=None):
-    """W2 wings at az 0/180 in the z = 0 plane: 1,800 K root band, warm circuit bands (T01 proportions) outward, two spars, ribs every
-    1 km, a droplet generator bar on the forward edge and a collector on the aft edge, the droplet sheet as a translucent overlay."""
-    w = e['wing']; x0, x1 = w['x_m']; h0, h1 = w['hot_band_r_m']; tip = w['tip_r_m']; src = f'solve:{gen} thermal.layouts.W2'
+def build_wings(gen, R, e, colls, ghost=False, graded=None, coll=None, label='', alpha_hot=None, tip_override=None):
+    """W2 wings at az 0/180 in the z = 0 plane: 1,800 K root band, warm circuit bands (T01 proportions) outward, thermal break, two spars,
+    ribs every 1 km, a droplet generator bar on the forward edge and a collector on the aft edge, root boom and struts. Every part goes
+    into one collection so a layout swaps as a unit. graded = (hot x0, hot x1, hot r1): the hot band stops at hot x1 (the canon
+    RADIATOR_FRONT) and the forward root corner becomes a 550 K capacitor band; tip_override keeps the warm area for that layout."""
+    w = e['wing']; x0, x1 = w['x_m']; h0, h1 = w['hot_band_r_m']; tip = tip_override or w['tip_r_m']; src = f'solve:{gen} thermal.layouts.W2'
     out = coll or colls['05']
     hx0, hx1, hr1 = (x0, x1, h1) if graded is None else graded
+    if graded is not None:
+        src = 'rev2.json thermal.preferred_rev2 (same hot and warm areas as solve:V4)'
     for side, az in (('P', 0.0), ('S', 180.0)):
         if ghost:
             make(f'Wing_{side}_Outline', 'panel', out, 'WARM_RADIATOR', gen, 'PARAMETRIC_PLACEHOLDER', 'VTX-07', src, alpha=0.15, wire=True,
@@ -555,40 +572,40 @@ def build_wings(gen, R, e, colls, ghost=False, graded=None, coll=None, label='',
              note=f"1,800 K band r {h0:.0f}-{hr1:.0f} m, X {hx0:.1f} to {hx1:.1f} m", alpha=alpha_hot,
              corners=[pol(hx0, h0, az), pol(hx1, h0, az), pol(hx1, hr1, az), pol(hx0, hr1, az)], thickness=0.4)
         if graded is not None:
-            # forward root corner left by the graded hot band: capacitor (550 K) circuit, same plane
             make(f'Wing_{side}_Root_Capacitor_Band{label}', 'panel', out, 'WARM_RADIATOR', gen, 'PROTOTYPE', 'VTX-07E', 'T05 graded layout',
-                 note='550 K capacitor circuit in the forward root corner by the rings', alpha=0.45,
+                 note='550 K capacitor circuit in the forward root corner by the rings (counted in the warm area)', alpha=0.45,
                  corners=[pol(hx1+2, h0, az), pol(x1, h0, az), pol(x1, hr1, az), pol(hx1+2, hr1, az)], thickness=0.3)
-            continue
-        r = h1+2.0
+            make(f'Wing_{side}_Chordwise_Thermal_Break{label}', 'tube', out, 'STRUCTURE', gen, 'PROTOTYPE', 'VTX-07D', 'T05 graded layout',
+                 note='chordwise 1,800 K / 550 K thermal break with expansion joint (L-shaped break)', points=[pol(hx1+1, h0, az), pol(hx1+1, hr1, az)], radius=0.9)
+        r = hr1+2.0
         for T, sh in band_shares():
-            dr = sh*(tip-h1-2.0)
-            make(f'Wing_{side}_Warm_{T}K', 'panel', out, 'WARM_RADIATOR', gen, 'CONCEPTUAL_ILLUSTRATION', 'VTX-07B',
+            dr = sh*(tip-hr1-2.0)
+            make(f'Wing_{side}_Warm_{T}K{label}', 'panel', out, 'WARM_RADIATOR', gen, 'CONCEPTUAL_ILLUSTRATION', 'VTX-07B',
                  f'{src}; band shares T01 ledger S1_advanced_eta0.30', rep='MIXED',
                  note=f'tin droplet sheet, {T} K circuit band (exists only while the drive runs)', alpha=0.22+0.2*(T-550)/450,
                  corners=[pol(x0+4, r, az), pol(x1-4, r, az), pol(x1-4, r+dr, az), pol(x0+4, r+dr, az)], thickness=0.2)
-            make(f'Wing_{side}_Manifold_{T}K', 'tube', out, 'WARM_RADIATOR', gen, 'PARAMETRIC_PLACEHOLDER', 'VTX-07E', src,
+            make(f'Wing_{side}_Manifold_{T}K{label}', 'tube', out, 'WARM_RADIATOR', gen, 'PARAMETRIC_PLACEHOLDER', 'VTX-07E', src,
                  note=f'thermal break and manifold at the {T} K band root', points=[pol(x0, r, az), pol(x1, r, az)], radius=0.8)
             r += dr
-        make(f'Wing_{side}_Thermal_Break', 'tube', colls['08'], 'STRUCTURE', gen, 'PARAMETRIC_PLACEHOLDER', 'VTX-07D', src,
-             points=[pol(x0, h1+1.0, az), pol(x1, h1+1.0, az)], radius=1.0)
+        make(f'Wing_{side}_Thermal_Break{label}', 'tube', out, 'STRUCTURE', gen, 'PARAMETRIC_PLACEHOLDER', 'VTX-07D', src,
+             points=[pol(x0, hr1+1.0, az), pol(x1, hr1+1.0, az)], radius=1.0)
         for nm, xe, rad in (('Spar_Aft', x0, 1.2), ('Spar_Fwd', x1, 1.2)):
-            make(f'Wing_{side}_{nm}', 'tube', colls['08'], 'STRUCTURE', gen, 'PARAMETRIC_PLACEHOLDER', 'VTX-07D', src,
+            make(f'Wing_{side}_{nm}{label}', 'tube', out, 'STRUCTURE', gen, 'PARAMETRIC_PLACEHOLDER', 'VTX-07D', src,
                  note='12.5 kg/m CFRP spar (V4 package); buckling of the 10 km compression spar not modelled (ISS-005)',
                  points=[pol(xe, h0, az), pol(xe, tip, az)], radius=rad)
         k = 1; rr = h0+PR_RIB_PITCH
         while rr < tip:
-            make(f'Wing_{side}_Rib_{k:02d}', 'tube', colls['08'], 'STRUCTURE', gen, 'PROTOTYPE', 'VTX-07D', 'T05 PR_RIB_PITCH',
+            make(f'Wing_{side}_Rib_{k:02d}{label}', 'tube', out, 'STRUCTURE', gen, 'PROTOTYPE', 'VTX-07D', 'T05 PR_RIB_PITCH',
                  note='chordwise rib / deployment hinge station (1 km pitch)', points=[pol(x0, rr, az), pol(x1, rr, az)], radius=0.7)
             k += 1; rr += PR_RIB_PITCH
-        make(f'Wing_{side}_Droplet_Generator', 'tube', out, 'WARM_RADIATOR', gen, 'CONCEPTUAL_ILLUSTRATION', 'VTX-07B', 'T01 REPORT 5',
-             rep='HARDWARE', note='droplet generator bar on the forward edge: drops fly along -X', points=[pol(x1-2, h1+2, az), pol(x1-2, tip, az)], radius=1.6, alpha=0.8)
-        make(f'Wing_{side}_Droplet_Collector', 'tube', out, 'WARM_RADIATOR', gen, 'CONCEPTUAL_ILLUSTRATION', 'VTX-07B', 'T01 REPORT 5',
-             rep='HARDWARE', note='collector trough on the aft edge', points=[pol(x0+2, h1+2, az), pol(x0+2, tip, az)], radius=2.4, alpha=0.8)
-        make(f'Wing_{side}_Root_Boom', 'tube', colls['08'], 'STRUCTURE', gen, 'PARAMETRIC_PLACEHOLDER', 'VTX-07D', src,
+        make(f'Wing_{side}_Droplet_Generator{label}', 'tube', out, 'WARM_RADIATOR', gen, 'CONCEPTUAL_ILLUSTRATION', 'VTX-07B', 'T01 REPORT 5',
+             rep='HARDWARE', note='droplet generator bar on the forward edge: drops fly along -X', points=[pol(x1-2, hr1+2, az), pol(x1-2, tip, az)], radius=1.6, alpha=0.8)
+        make(f'Wing_{side}_Droplet_Collector{label}', 'tube', out, 'WARM_RADIATOR', gen, 'CONCEPTUAL_ILLUSTRATION', 'VTX-07B', 'T01 REPORT 5',
+             rep='HARDWARE', note='collector trough on the aft edge', points=[pol(x0+2, hr1+2, az), pol(x0+2, tip, az)], radius=2.4, alpha=0.8)
+        make(f'Wing_{side}_Root_Boom{label}', 'tube', out, 'STRUCTURE', gen, 'PARAMETRIC_PLACEHOLDER', 'VTX-07D', src,
              points=[pol(x0, h0, az), pol(x1, h0, az)], radius=1.0)
         for j, xr in enumerate((x0+20, (x0+x1)/2, x1-20)):
-            make(f'Wing_{side}_Root_Strut_{j}', 'tube', colls['08'], 'STRUCTURE', gen, 'PARAMETRIC_PLACEHOLDER', 'VTX-07D', src,
+            make(f'Wing_{side}_Root_Strut_{j}{label}', 'tube', out, 'STRUCTURE', gen, 'PARAMETRIC_PLACEHOLDER', 'VTX-07D', src,
                  points=[pol(xr, 6.4, az), pol(xr, h0, az)], radius=0.6)
 
 
@@ -632,6 +649,8 @@ def build_skirts(gen, R, e, coll_root):
     out = {}
     for key, xe, note in (('A_FULL', x45, 'skirt on the hardware cone to r 45 m; both docking corridors pierce it'),
                           ('B_SHORT', PR_SKIRT_SHORT_X, 'skirt ending 10 m aft of ring A; farm and docks rely on bumpers'),
+                          ('B2_DOCK_CLEAR', REV2['dust']['options']['B2_DOCK_CLEAR']['edge_x_m'],
+                           'Rev 2: skirt ending 3.6 m aft of the docking corridors (shadow r 36.0 m covers the farm and T-B tanks); mounts on the Q45 bypass collar'),
                           ('C_BUMPERS_ONLY', None, 'no skirt: guard rings and local bumpers (in 02_NOZZLE / 10) and sector replacement')):
         c = new_coll(f'VAR_VERTEX_{gen}_10_DUST_{key}', coll_root, 'COLOR_03'); out[key] = c
         if xe is None:
@@ -642,10 +661,11 @@ def build_skirts(gen, R, e, coll_root):
                  note=note+'; slots along the wing planes (burn rays)', x0=xs, r0=r0, x1=xe, r1=r1, ri0=r0-0.15, ri1=r1-0.15, arc=(a0, a1),
                  alpha=0.28, unbooked='skirt 22-90 t')
         if key == 'A_FULL':
-            for nm, az in (('Primary', C['dock_primary']['az_deg']), ('Service', C['dock_service']['az_deg'])):
-                xd = C['dock_primary']['x_m']; rd = (xd-xB)*t
+            for nm, az, xd in (('Primary', C['dock_primary']['az_deg'], C['dock_primary']['x_m']), ('Service', C['dock_service']['az_deg'], C['dock_primary']['x_m']),
+                               ('Airlock', C['airlock']['az_deg'], C['airlock']['x_m'])):
+                rd = (xd-xB)*t
                 make(f'Skirt_A_Dock_Aperture_{nm}', 'torus', c, 'VIS_CONFLICT', gen, 'CONCEPTUAL_ILLUSTRATION', 'VTX-08E', 'T05 ISS-004',
-                     rep='VISUALIZATION', note=f'docking corridor pierces the skirt here (skirt r {rd:.1f} m at X {xd:.2f} m)',
+                     rep='VISUALIZATION', note=f'{nm} route pierces the skirt here (skirt r {rd:.1f} m at X {xd:.2f} m)',
                      x=xd, R=rd, a=0.6, arc=(az-6, az+6), alpha=1.0)
     return out, x45
 
@@ -673,6 +693,183 @@ def build_dust_stream(gen, e, coll):
             make(f'Dust_Streak_{k:03d}', 'tube', coll, 'VIS_DUST', gen, 'CONCEPTUAL_ILLUSTRATION', 'VTX-08D', 'T02 (braking, engine-first)',
                  rep='VISUALIZATION', points=[pol(xa-500, r, az), pol(xa-120, r, az)], radius=0.5, alpha=0.5)
             k += 1
+
+
+# ----------------------------------------------------------------------------------------------------------------------------------
+# Revision 2: launcher architectures, spine across the T-B stretch, closure-coil protection, docking/EVA routes, lane cores
+# ----------------------------------------------------------------------------------------------------------------------------------
+LOPT = {o['key']: o for o in REV2['launcher']['options']}
+BREECH_X = LOPT['A']['breech_x_m']
+SRC_L = 'rev2.json launcher (work/vertex-blender/rev2.py)'
+
+
+def build_spine_extension(gen, e, coll):
+    """PROTOTYPE structure across the T-B stretch (ISS-013): the canonical Momentum Spine (r 0.95 m) ends at X 140.75 m and the bow is
+    instanced 275.4 m (V4) forward, so the forward shield would hang on nothing. Spine continuation, three sector longerons at the
+    canonical sector radius (5 m, 30/150/270 deg) inside the tanks' 7.75 m inner edge, bay frames every tank length, and a crawlway."""
+    dx = e['tanks_TB']['bow_shift_m']; x0 = CANON2['spine_x_m'][1]; x1 = x0+dx
+    note = f'PROTOTYPE continuation across the {dx:.1f} m T-B stretch (ISS-013); sizing OPEN'
+    make('Spine_Extension_TB', 'ring', coll, 'STRUCTURE', gen, 'PROTOTYPE', 'VTX-04', 'T05 Rev 2', note=note, x0=x0, x1=x1, r0=0.55, r1=CANON2['spine_r_m'])
+    make('Spine_Extension_Crawlway', 'tube', coll, 'SERVICE', gen, 'PROTOTYPE', 'VTX-04', 'T05 Rev 2', alpha=0.5,
+         note='0.8 m clear robot/crew crawlway to the bow (bow access gap 281 m beyond the crew trunk)', points=[(x0-6.0, 0, 0), (x1, 0, 0)], radius=0.4)
+    for az in (30.0, 150.0, 270.0):
+        make(f'SpineExt_Longeron_{int(az)}', 'tube', coll, 'STRUCTURE', gen, 'PROTOTYPE', 'VTX-04', 'T05 Rev 2', note=note,
+             points=[pol(x0-20.0, 5.0, az), pol(x1+2.0, 5.0, az)], radius=0.3)
+    x = x0+1.0; k = 0
+    while x < x1:
+        make(f'SpineExt_Bay_Frame_{k:02d}', 'torus', coll, 'STRUCTURE', gen, 'PROTOTYPE', 'VTX-04', 'T05 Rev 2', note='bay frame at a tank joint', x=x, R=5.0, a=0.25)
+        for az in (30.0, 150.0, 270.0):
+            make(f'SpineExt_Bay_Spoke_{k:02d}_{int(az)}', 'tube', coll, 'STRUCTURE', gen, 'PROTOTYPE', 'VTX-04', 'T05 Rev 2',
+                 points=[pol(x, CANON2['spine_r_m'], az), pol(x, 5.0, az)], radius=0.15)
+        k += 1; x += 28.6
+
+
+def build_launcher(key, gen, R, e, coll, labels=True):
+    """One target-injection architecture (rev2.json launcher.options[key]). Every target must be behind a shutter or out of line of sight
+    at each pulse, so a chopper sits at the end of the protected run; only the line-of-sight segment (red-violet) is open."""
+    o = LOPT[key]; lay = R['layout']; xB = e['x_burn_m']; xSA = e['x_shield_aft_m']; xSF = lay['x_shield_fwd']
+    st = 'PROTOTYPE'
+    common = dict(unbooked='launcher, chopper, sabot return')
+    if key in ('A', 'B'):
+        mz = o['muzzle_x_m']
+        make(f'L{key}_Accelerator_Barrel', 'tube', coll, 'MAIN_PROPULSION', gen, st, 'VTX-01H', SRC_L,
+             note=f"{o['accelerator_m']:.0f} m accelerator in the spine bore, {o['exit_speed_m_s']/1e3:.2f} km/s at {o['accel_g']:,.0f} g; "
+                  f"{o['targets_in_barrel']:.0f} targets in the barrel at once; {LAUNCHER_KG_PER_M_NOTE}", points=[(BREECH_X, 0, 0), (mz+0.5, 0, 0)], radius=0.35, **common)
+        k = 0; x = BREECH_X-12.0
+        while x > mz+2:
+            make(f'L{key}_Drive_Coil_{k:02d}', 'torus', coll, 'POWER', gen, st, 'VTX-01H', SRC_L, note='accelerator drive stage (pitch 12 m shown)',
+                 x=x, R=0.5, a=0.12); x -= 12.0; k += 1
+        make(f'L{key}_Breech_Plug', 'ring', coll, 'SHIELD', gen, 'PARAMETRIC_PLACEHOLDER', 'VTX-06A', 'solve:V4 shield.streaming.pellet_bore (moved)',
+             note=f"LiH bore plug moved behind the breech: {R['shield']['streaming']['pellet_bore']['plug_length_m']:.2f} m; "
+                  f"{CANON2['crew_trunk_x_m'][0]-BREECH_X-R['shield']['streaming']['pellet_bore']['plug_length_m']:.1f} m from the crew trunk",
+             x0=BREECH_X+0.3, x1=BREECH_X+0.3+R['shield']['streaming']['pellet_bore']['plug_length_m'], r0=0.0, r1=0.8)
+        make(f'L{key}_Breech_Loader', 'box', coll, 'MAIN_PROPULSION', gen, st, 'VTX-01H', SRC_L, note='side-loading breech (targets enter off axis)',
+             centre=(BREECH_X-1.0, 1.4, 0.0), size=(2.0, 1.4, 1.2))
+        make(f'L{key}_Target_Conditioning', 'box', coll, 'LOW_RADIATOR', gen, st, 'VTX-01C', SRC_L,
+             note='target conditioning at the breech, outside the spine (1.5 K He-3 core)', centre=(BREECH_X-5.0, 3.2, 0.0), size=(6.0, 2.4, 2.4))
+        make(f'L{key}_Target_Transfer_Line', 'tube', coll, 'DEUTERIUM', gen, st, 'VTX-01C', SRC_L,
+             note=f'cryogenic target transfer from the module factory, about {BREECH_X-(xSF+15):.0f} m', points=[pol(xSF+15.0, 2.6, 90.0), pol(BREECH_X-5.0, 2.6, 90.0)],
+             radius=0.12)
+        make(f'L{key}_Sabot_Stripper', 'ring', coll, 'MAIN_PROPULSION', gen, st, 'VTX-01H', SRC_L,
+             note=f"sabot strip and catch: {o['sabot_flow_kg_day']/1e3:.1f} t/day returned, {o['sabot_catch_W']/1e6:.0f} MW into the catcher",
+             x0=xSF+6.0, x1=xSF+10.0, r0=0.4, r1=1.1)
+        make(f'L{key}_Sabot_Return', 'tube', coll, 'MAIN_PROPULSION', gen, st, 'VTX-01H', SRC_L, note='sabot return to the conditioning station',
+             points=[pol(xSF+8.0, 1.6, 270.0), pol(BREECH_X-5.0, 1.6, 270.0)], radius=0.08)
+    if key == 'B':
+        tip = o['muzzle_x_m']
+        make('LB_Snout', 'frustum', coll, 'SHIELD', gen, st, 'VTX-06A', SRC_L,
+             note=f"shielded snout {o['snout_m']:.1f} m aft of the shield, on the axis (side walls grazing to the burn)", x0=tip+1.5, r0=0.6, x1=xSA, r1=0.9, ri0=0.4, ri1=0.4)
+        make('LB_Snout_Tip_Cartridge', 'ring', coll, 'SHIELD', gen, st, 'VTX-06A', SRC_L,
+             note=f"replaceable W tip cartridge, {o['shutter_flux_W_m2']/1e6:.1f} MW/m2 X-ray ({o['tip_flux_vs_shield_face']:.2f} x the shield face)",
+             x0=tip, x1=tip+1.5, r0=0.3, r1=0.75)
+        make('LB_Tip_Chopper', 'ring', coll, 'VIS_CONFLICT', gen, st, 'VTX-06A', SRC_L, alpha=0.9,
+             note='rotating chopper: closed at every pulse, open for the target between pulses (neutron-chopper precedent)', x0=tip+1.6, x1=tip+1.75, r0=0.0, r1=0.55)
+    if key == 'A':
+        make('LA_Face_Chopper', 'ring', coll, 'VIS_CONFLICT', gen, st, 'VTX-06A', SRC_L, alpha=0.9,
+             note=f"rotating chopper at the shield aft face ({o['shutter_flux_W_m2']/1e6:.1f} MW/m2)", x0=xSA-0.25, x1=xSA-0.1, r0=0.0, r1=0.9)
+    if key == 'C':
+        az = 30.0; slope = o['exit_r_m']/(xSA-xB); xe = o['breech_x_m']
+        rA = lambda x: (x-xB)*slope
+        make('LC_Offset_Barrel', 'tube', coll, 'MAIN_PROPULSION', gen, st, 'VTX-01H', SRC_L,
+             note=f"{o['accelerator_m']:.0f} m inclined {o['inclination_deg']:.2f} deg on a line through the burn point; {o['accel_g']:,.0f} g",
+             points=[pol(xe, rA(xe), az), pol(xSA+0.2, rA(xSA+0.2), az)], radius=0.35, **common)
+        make('LC_Own_Shield_Penetration', 'tube', coll, 'VIS_XRAY', gen, st, 'VTX-06A', SRC_L, alpha=0.8,
+             note='second straight shield penetration (a bore-sized streaming path)', points=[pol(xSF+0.3, rA(xSF+0.3), az), pol(xSA-0.3, rA(xSA-0.3), az)], radius=0.3)
+        make('LC_Chopper', 'ring', coll, 'VIS_CONFLICT', gen, st, 'VTX-06A', SRC_L, alpha=0.9, note='own chopper', x0=xSA-0.25, x1=xSA-0.1, r0=0.0, r1=0.6,
+             centre=tuple(pol(0, rA(xSA), az)[1:]))
+        make('LC_Breech_Plug', 'ring', coll, 'SHIELD', gen, 'PARAMETRIC_PLACEHOLDER', 'VTX-06A', SRC_L, note='second bore plug behind its breech',
+             x0=xe+0.3, x1=xe+4.2, r0=0.0, r1=0.8, centre=tuple(pol(0, rA(xe), az)[1:]))
+        make('LC_CONFLICT_Thrust_Ring', 'sphere', coll, 'VIS_CONFLICT', gen, 'CONCEPTUAL_ILLUSTRATION', 'VTX-01H', SRC_L, rep='VISUALIZATION', alpha=1.0,
+             note=f"barrel line at r {o['r_at_thrust_ring_m']:.2f} m where the canon 12 m thrust ring (r 5-6 m) sits", centre=pol(e['x_module_fwd_m'], rA(e['x_module_fwd_m']), az), radius=0.9)
+    # line of sight: the only exposed segment; must be crossed between two pulses
+    if key == 'C':
+        p0 = pol(xSA-0.3, rA(xSA-0.3), 30.0)
+    else:
+        p0 = (o['muzzle_x_m'], 0, 0)
+    make(f'L{key}_Line_Of_Sight', 'tube', coll, 'VIS_XRAY', gen, 'CONCEPTUAL_ILLUSTRATION', 'VTX-01H', SRC_L, rep='VISUALIZATION', alpha=0.9,
+         note=f"open line of sight {o['line_of_sight_m']:.1f} m, crossed in one pulse interval ({1e3/REV2['launcher']['pulse_Hz']:.2f} ms)",
+         points=[p0, (xB, 0, 0)], radius=0.25)
+    if key in ('A', 'B'):
+        make(f'L{key}_Protected_Run', 'tube', coll, 'VIS_SAFE', gen, 'CONCEPTUAL_ILLUSTRATION', 'VTX-01H', SRC_L, rep='VISUALIZATION', alpha=0.35,
+             note='protected run behind the chopper', points=[(BREECH_X, 0, 0), (o['muzzle_x_m']+1.8, 0, 0)], radius=0.55)
+    if key == 'REV1':
+        make('LREV1_CONFLICT_Magazine', 'sphere', coll, 'VIS_CONFLICT', gen, 'CONCEPTUAL_ILLUSTRATION', 'VTX-01H', 'checks.json (Rev 1 ISS-009)',
+             rep='VISUALIZATION', alpha=1.0, note='20 m barrel runs through the FDP-1 magazine (xSF+14.5-16 m) and LiH plug', centre=(xSF+15.0, 0, 0), radius=2.0)
+
+
+def build_lane_core_launch(gen, R, e, coll):
+    """Axis-only ghost context for the launcher comparison lanes (the opaque canon spine would hide the barrel)."""
+    lay = R['layout']; xB = e['x_burn_m']
+    make('LaneCore_Spine', 'ring', coll, 'STRUCTURE', gen, 'CONCEPTUAL_ILLUSTRATION', 'VTX-NONE', 'canon Structural_Spine (built asset)', rep='VISUALIZATION',
+         x0=CANON2['spine_x_m'][0], x1=CANON2['spine_x_m'][1], r0=0.6, r1=CANON2['spine_r_m'], alpha=0.25)
+    make('LaneCore_Crew_Trunk', 'ring', coll, 'SERVICE', gen, 'CONCEPTUAL_ILLUSTRATION', 'VTX-NONE', 'canon Crew_Trunk (built asset)', rep='VISUALIZATION',
+         x0=CANON2['crew_trunk_x_m'][0], x1=CANON2['crew_trunk_x_m'][1], r0=0.0, r1=1.0, alpha=0.8)
+    for nm, x in (('Ring_A', 97.3), ('Ring_B', 103.3)):
+        make(f'LaneCore_{nm}_Hub_Tick', 'box', coll, 'SERVICE', gen, 'CONCEPTUAL_ILLUSTRATION', 'VTX-NONE', 'canon datum', rep='VISUALIZATION',
+             centre=(x, 0, 7.0), size=(4.3, 0.6, 14.0), alpha=0.6)
+    make('LaneCore_Shield', 'frustum', coll, 'SHIELD', gen, 'CONCEPTUAL_ILLUSTRATION', 'VTX-06A', f'solve:{gen}', rep='VISUALIZATION',
+         x0=e['x_shield_aft_m'], r0=e['shield_r_hw_m'], x1=lay['x_shield_fwd'], r1=e['shield_r_hw_m'], alpha=0.7)
+    make('LaneCore_Module', 'frustum', coll, 'STRUCTURE', gen, 'CONCEPTUAL_ILLUSTRATION', 'VTX-NONE', f'solve:{gen}', rep='VISUALIZATION',
+         x0=lay['x_shield_fwd'], r0=6.5, x1=e['x_module_fwd_m'], r1=6.5, ri0=6.3, ri1=6.3, alpha=0.12)
+    make('LaneCore_Thrust_Ring', 'torus', coll, 'STRUCTURE', gen, 'CONCEPTUAL_ILLUSTRATION', 'VTX-NONE', 'canon 12 m thrust ring', rep='VISUALIZATION',
+         x=e['x_module_fwd_m'], R=5.5, a=0.5, alpha=0.5)
+    make('LaneCore_Burn_Point', 'sphere', coll, 'VIS_PLASMA', gen, 'CONCEPTUAL_ILLUSTRATION', 'VTX-01', f'solve:{gen}', rep='VISUALIZATION',
+         centre=(xB, 0, 0), radius=1.5, alpha=1.0)
+    make('LaneCore_Galleries', 'ring', coll, 'MAIN_PROPULSION', gen, 'CONCEPTUAL_ILLUSTRATION', 'VTX-01B', f'solve:{gen}', rep='VISUALIZATION',
+         x0=R['drivers']['x_aft'], x1=R['drivers']['x_fwd'], r0=4.3, r1=4.7, alpha=0.08)
+
+
+def build_coil_protection(gen, R, e, colls_opt, cut=None):
+    """C1/C2 protection concepts (rev2.json coils). P0 = Rev 1 (warm screen only), P1 = monolithic sacrificial armour shoe on the burn face,
+    P2 = 12 replaceable armour segments per coil on low-conductance stand-offs in front of the warm screen. The X-ray they intercept is set by
+    their solid angle, so every option absorbs the same 30 GW; armour only decides where it lands and how it is replaced."""
+    xB = e['x_burn_m']; CR = {c['name']: c for c in REV2['coils']['coils']}
+    for c in e['closure_coils']:
+        q = CR[c['name']]; env = c['envelope_r_m'][1]
+        u = (xB-c['x_m'], -c['r_m']); d = math.hypot(*u); u = (u[0]/d, u[1]/d)
+        sx, sr = c['x_m']+u[0]*(env+0.5), c['r_m']+u[1]*(env+0.5)
+        msg = f"{q['xray_W']/1e9:.1f} GW X-ray on {q['burn_face_m2']:,.0f} m2 (share {q['solid_angle_share']:.3f}); armour {q['armour_kg_at_loop_areal']/1e3:.0f} t at the loops' 45 kg/m2"
+        make(f"{c['name']}_P1_Armour_Shoe", 'torus', colls_opt['P1'], 'SHIELD', gen, 'PARAMETRIC_PLACEHOLDER', 'VTX-06B', 'rev2.json coils', note='sacrificial shoe; '+msg,
+             x=sx, R=sr, a=env*0.45, cut=cut)
+        for k in range(12):
+            a0 = 30.0*k+0.75; a1 = a0+28.5
+            make(f"{c['name']}_P2_Armour_Seg_{k+1:02d}", 'torus', colls_opt['P2'], 'SHIELD', gen, 'PARAMETRIC_PLACEHOLDER', 'VTX-06B', 'rev2.json coils',
+                 note='replaceable segment 1/12; '+msg, x=sx, R=sr, a=env*0.45, arc=(a0, a1), cut=cut)
+            mid = (a0+a1)/2
+            make(f"{c['name']}_P2_Handling_Post_{k+1:02d}", 'box', colls_opt['P2'], 'SERVICE', gen, 'PROTOTYPE', 'VTX-06B', 'T05 Rev 2',
+                 note='robotic handling post', centre=pol(sx+1.6, sr, mid), size=(1.2, 0.6, 0.6), roll=mid, cut=cut)
+            for j in (-1, 1):
+                make(f"{c['name']}_P2_Standoff_{k+1:02d}_{j:+d}", 'tube', colls_opt['P2'], 'STRUCTURE', gen, 'PROTOTYPE', 'VTX-03D', 'T05 Rev 2',
+                     note='low-conductance stand-off: armour to coil structure, bypassing the warm screen', points=[pol(sx-u[0]*0.4, sr-u[1]*0.4, mid+8*j),
+                     pol(c['x_m']+u[0]*env*0.2, c['r_m']+u[1]*env*0.2, mid+8*j)], radius=0.12, cut=cut)
+        make(f"{c['name']}_P2_Warm_Screen", 'torus', colls_opt['P2'], 'LOW_RADIATOR', gen, 'PARAMETRIC_PLACEHOLDER', 'VTX-03D', 'T03 (warm eddy screen)',
+             note='warm screen behind the armour: sees the armour back face (re-radiation) instead of the burn', x=c['x_m'], R=c['r_m'], a=env*0.9, alpha=0.3, cut=cut)
+        if 'CORE' in colls_opt:
+            make(f"{c['name']}_Core_Winding", 'torus', colls_opt['CORE'], 'MAIN_PROPULSION', gen, 'PARAMETRIC_PLACEHOLDER', 'VTX-03D', 'T03 (lane copy)',
+                 x=c['x_m'], R=c['r_m'], a=c['winding_minor_m'], cut=cut)
+            make(f"{c['name']}_Core_Envelope", 'torus', colls_opt['CORE'], 'LOW_RADIATOR', gen, 'PARAMETRIC_PLACEHOLDER', 'VTX-03D', 'T03 (lane copy)',
+                 x=c['x_m'], R=c['r_m'], a=env, alpha=0.22, cut=cut)
+        make(f"{c['name']}_XRAY_Fan", 'frustum', colls_opt['FAN'], 'VIS_XRAY', gen, 'CONCEPTUAL_ILLUSTRATION', 'VTX-03D', 'rev2.json coils', rep='VISUALIZATION',
+             note=msg, x0=xB+0.01, r0=0.01, x1=c['x_m'], r1=c['r_m'], ri0=0.0, ri1=c['r_m']-0.3, alpha=0.05)
+    # sized C1 struts (1.9 GN case) and the reaction ring: indicative, not a structural proof
+    sz = REV2['coils']['struts']['cases'][1]; c1 = e['closure_coils'][0]
+    ring_r = e['shield_r_hw_m']+1.0; xr = e['x_shield_aft_m']-0.8
+    make('C1_Sized_Reaction_Ring', 'torus', colls_opt['SUP'], 'STRUCTURE', gen, 'PROTOTYPE', 'VTX-03D', 'rev2.json coils.struts',
+         note='reaction ring on the shield aft face; the shield frame must take 0.2-1.9 GN (unsized)', x=xr, R=ring_r, a=1.0, cut=cut)
+    for j in range(6):
+        az = 60.0*j+30.0
+        make(f'C1_Sized_Strut_{j+1}', 'tube', colls_opt['SUP'], 'STRUCTURE', gen, 'PROTOTYPE', 'VTX-02D', 'rev2.json coils.struts',
+             note=f"CFRP tube r {sz['tube_r_m']:.1f} m, wall {sz['wall_m']*1e3:.0f} mm for {sz['load_per_strut_N']/1e6:.0f} MN (1.9 GN / 6); buckling {sz['buckling_per_strut_N']/1e9:.2f} GN; "
+                  f"{sz['mass_kg']/1e3:.0f} t for six; hoop 3-7 GN carried by the 855-1,281 t coil structure (T03, unbooked)",
+             points=[pol(c1['x_m'], c1['r_m']-c1['envelope_r_m'][1]*0.6, az), pol(xr, ring_r, az)], radius=sz['tube_r_m'], cut=cut)
+
+
+def build_dock_routes(gen, coll):
+    for nm, az, x, rad in (('Primary_Dock_Corridor', C['dock_primary']['az_deg'], C['dock_primary']['x_m'], 3.0),
+                           ('Service_Dock_Corridor', C['dock_service']['az_deg'], C['dock_primary']['x_m'], 3.0),
+                           ('EVA_Airlock_Route', C['airlock']['az_deg'], C['airlock']['x_m'], 1.5)):
+        make(nm, 'tube', coll, 'SERVICE', gen, 'CONCEPTUAL_ILLUSTRATION', 'VTX-NONE', 'canon spec (dock_x, airlock_x) and MODEL.md 3 m corridor', rep='VISUALIZATION',
+             note=f'{nm.replace("_", " ").lower()}: keep clear (radial, r 7 to 45 m)', points=[pol(x, 7.2, az), pol(x, 45.0, az)], radius=rad, alpha=0.35)
 
 
 # ----------------------------------------------------------------------------------------------------------------------------------
@@ -715,26 +912,32 @@ for nm in list(bpy.data.scenes):
 main = bpy.context.scene; main.name = 'VERTEX_V4'
 SC = {'VERTEX_V4': main}
 for nm in ('CANON_WAYFARER', 'VERTEX_V0', 'COMPARE_SIDE_BY_SIDE', 'COMPARE_TOP', 'COMPARE_SPAN', 'VERTEX_CUTAWAY', 'BRAKING_EXPOSURE',
-           'RADIATOR_ALTERNATIVES'):
+           'RADIATOR_ALTERNATIVES', 'LAUNCHER_COMPARE', 'THERMAL_COMPARE', 'COIL_COMPARE', 'SKIRT_COMPARE', 'OPTIONS_LIBRARY'):
     SC[nm] = bpy.data.scenes.new(nm)
 
 LIB = new_coll('VERTEX_LIBRARY', main.collection)          # every built collection hangs here once; scenes link what they show
-ships, fps = {}, {}
+ships, fps, HOT_BLADES = {}, {}, {}
 if not a.no_ship:
     ships['CANON'] = append_ship('CANON_WAYFARER_SHIP_main'); fps['before'] = fingerprint(ships['CANON'])
     for g in ('V4', 'V0'):
-        ships[g], CHECKS.setdefault('ship_edits', {})[g] = prepare_working_copy(ships['CANON'], g)
+        ships[g], HOT_BLADES[g], CHECKS.setdefault('ship_edits', {})[g] = prepare_working_copy(ships['CANON'], g)
 
-ASM, VAR, COLL = {}, {}, {}
+ASM, VAR, COLL, OPT, OPTROOT = {}, {}, {}, {}, {}
 CORR = {}
+PREF = REV2['thermal']['preferred_rev2']
+
+
+def opt_coll(g, k, color='COLOR_07'):
+    c = new_coll(f'OPT_VERTEX_{g}_{k}', OPTROOT[g], color); OPT[g][k] = c
+    return c
+
+
 for g in GENS:
     R = RS[g]; e = ENV[g]
     top = bpy.data.collections.new(f'ASM_{g}'); ASM[g] = top
     root, colls = gen_collections(g, top); VAR[g] = root; COLL[g] = colls
     ghost = g == 'V5'
     if ghost:
-        for k in ('03', '04', '06', '07', '09', '10', '11', '12'):
-            pass
         build_nozzle(g, R, e, colls, ghost=True)
         build_wings(g, R, e, colls, ghost=True)
         make('Shield_Ghost', 'frustum', colls['03'], 'SHIELD', g, 'ENGINEERING_SUPPORTED', 'VTX-06A', f'solve:{g}', alpha=0.15, wire=True,
@@ -744,21 +947,52 @@ for g in GENS:
         continue
     if g in ships:
         top.children.link(ships[g])
-    build_fdp_parts(g, R, colls)
-    build_nozzle(g, R, e, colls)
-    CORR[g] = build_module(g, R, e, colls)
-    build_wings(g, R, e, colls)
+    # Rev 2: everything that has alternatives is an option collection (OPT_VERTEX_<g>_*); the assembly links the chosen ones
+    OPT[g] = {}; OPTROOT[g] = bpy.data.collections.new(f'OPT_VERTEX_{g}'); OPTROOT[g].color_tag = 'COLOR_07'
+    opt_coll(g, 'LAUNCH_REV1'); opt_coll(g, 'SUP_REV1', 'COLOR_02'); opt_coll(g, 'WINGS_CALC', 'COLOR_01')
+    opt_coll(g, 'SPINE_EXT', 'COLOR_02'); opt_coll(g, 'DOCK_ROUTES', 'COLOR_03')
+    build_fdp_parts(g, R, colls, breech=OPT[g]['LAUNCH_REV1'])
+    build_nozzle(g, R, e, colls, support=OPT[g]['SUP_REV1'])
+    CORR[g] = build_module(g, R, e, colls, launch=OPT[g]['LAUNCH_REV1'])
+    build_wings(g, R, e, colls, coll=OPT[g]['WINGS_CALC'])
     build_overlays(g, R, e, colls['01'])
-    skirts, x45 = build_skirts(g, R, e, colls['10'])
+    skirts, x45 = build_skirts(g, R, e, OPTROOT[g])
     COLL[g]['skirts'] = skirts
+    build_spine_extension(g, e, OPT[g]['SPINE_EXT'])
+    build_dock_routes(g, OPT[g]['DOCK_ROUTES'])
     measure(g, R, e, CORR[g], x45)
+    if g == 'V4':
+        build_launcher('REV1', g, R, e, OPT[g]['LAUNCH_REV1'])
+        for k in ('A', 'B', 'C'):
+            build_launcher(k, g, R, e, opt_coll(g, f'LAUNCH_{k}'))
+        build_lane_core_launch(g, R, e, opt_coll(g, 'LANE_CORE_LAUNCH'))
+        build_wings(g, R, e, colls, graded=(PREF['hot_x_m'][0], PREF['hot_x_m'][1], PREF['hot_r_m'][1]), coll=opt_coll(g, 'WINGS_PREF', 'COLOR_01'),
+                    label='_GRADED', tip_override=PREF['tip_r_m'])
+        build_coil_protection(g, R, e, {'P1': opt_coll(g, 'COIL_P1', 'COLOR_04'), 'P2': opt_coll(g, 'COIL_P2', 'COLOR_04'),
+                                        'FAN': opt_coll(g, 'COIL_XRAY_FAN'), 'SUP': opt_coll(g, 'COIL_SUP_SIZED', 'COLOR_02'),
+                                        'CORE': opt_coll(g, 'LANE_CORE_COIL')})
+        chosen = ['LAUNCH_B', 'WINGS_PREF', 'COIL_P2', 'COIL_SUP_SIZED', 'SPINE_EXT', 'DOCK_ROUTES']
+        chosen_sk = 'B2_DOCK_CLEAR'
+    else:
+        chosen = ['LAUNCH_REV1', 'SUP_REV1', 'WINGS_CALC', 'SPINE_EXT', 'DOCK_ROUTES']
+        chosen_sk = 'A_FULL'
+    for k in chosen:
+        top.children.link(OPT[g][k])
+    top.children.link(skirts[chosen_sk])
+    if g == 'V0' and g in HOT_BLADES:
+        top.children.link(HOT_BLADES[g])               # V0 stays the Rev 1 historical layout (canon blades kept beside its wing)
+    CHECKS.setdefault('assemblies', {})[g] = {'options': chosen+[chosen_sk], 'canon_hot_blades_shown': g == 'V0'}
+
+# V4 calculated layout as an assembly of its own (Rev 1 options, canon blades kept): thermal and launcher comparisons
+ASM['V4_CALC'] = bpy.data.collections.new('ASM_V4_REV1_LAYOUT')
+for c in ([ships['V4']] if 'V4' in ships else [])+[VAR['V4']]+[OPT['V4'][k] for k in ('LAUNCH_REV1', 'SUP_REV1', 'WINGS_CALC', 'SPINE_EXT', 'DOCK_ROUTES')]+\
+         [COLL['V4']['skirts']['A_FULL']]+([HOT_BLADES['V4']] if 'V4' in HOT_BLADES else []):
+    ASM['V4_CALC'].children.link(c)
 
 # V4 extras: alternatives, graded band, dust stream, labels
 e4 = ENV['V4']; R4 = RS['V4']
 ALT = bpy.data.collections.new('VAR_VERTEX_V4_ALTERNATIVES'); ALT.color_tag = 'COLOR_07'
-mit = screen_data['V4_hot_band_mitigations']['hot_aft_of_RADIATOR_FRONT_and_20m_clear_of_C1']
-GRADED = new_coll('VAR_VERTEX_V4_ALT_R0G_GRADED_HOT_BAND', ALT, 'COLOR_07')
-build_wings('V4', R4, e4, COLL['V4'], graded=(mit['hot_x_m'][0], mit['hot_x_m'][1], mit['hot_r_m'][1]), coll=GRADED, label='_GRADED')
+GRADED = OPT['V4']['WINGS_PREF']
 OUTL = new_coll('VAR_VERTEX_V4_ALT_OUTLINES', ALT, 'COLOR_07')
 build_alternatives('V4', e4, OUTL)
 PANEL = new_coll('VAR_VERTEX_V4_ALT_PANEL_SKIN', ALT, 'COLOR_07')
@@ -776,10 +1010,10 @@ LBL = new_coll('VAR_VERTEX_OVERLAYS_LABELS', OVL, 'COLOR_07')
 
 # conflict markers (measured), in V4's keep-out group
 m4 = CHECKS['generations']['V4']; xa = C['ring_a_aft_face_x_m']
-make('CONFLICT_HotBand_RingA', 'tube', COLL['V4']['11'], 'VIS_CONFLICT', 'V4', 'CONCEPTUAL_ILLUSTRATION', 'VTX-07F', 'checks.json', rep='VISUALIZATION',
+make('CONFLICT_HotBand_RingA', 'tube', OPT['V4']['WINGS_CALC'], 'VIS_CONFLICT', 'V4', 'CONCEPTUAL_ILLUSTRATION', 'VTX-07F', 'checks.json', rep='VISUALIZATION',
      note=f"{m4['hot_band_fwd_edge_to_ring_A_m']:.1f} m; {m4['ring_A_irradiance_W_m2']/1e3:.0f} kW/m2 on ring A", points=[(w['x_m'][1], 30.0, 0.5), (xa, 30.0, 0.5)], radius=0.8, alpha=1.0)
 c1 = e4['closure_coils'][0]
-make('CONFLICT_C1_HotBand', 'tube', COLL['V4']['11'], 'VIS_CONFLICT', 'V4', 'CONCEPTUAL_ILLUSTRATION', 'VTX-03D', 'checks.json', rep='VISUALIZATION',
+make('CONFLICT_C1_HotBand', 'tube', OPT['V4']['WINGS_CALC'], 'VIS_CONFLICT', 'V4', 'CONCEPTUAL_ILLUSTRATION', 'VTX-03D', 'checks.json', rep='VISUALIZATION',
      note=f"{m4['C1_envelope_to_hot_band_aft_edge_m']:.1f} m envelope gap", points=[(c1['x_m']+c1['envelope_r_m'][1], c1['r_m'], 0.5), (w['x_m'][0], c1['r_m'], 0.5)],
      radius=0.6, alpha=1.0)
 
@@ -802,7 +1036,7 @@ labels_side = [
     ('burn', f"burn point X {e4['x_burn_m']:.1f} m, stand-off {e4['stand_off_m']:.1f} m, {R4['fusion']['pellet_rate_Hz']:.0f} Hz x {R4['fusion']['yield_per_pulse_J']/4.184e12:.1f} t TNT", (e4['x_burn_m']-60, 0, -80), 5),
     ('loops', f"loops r {L[0]['r_m']:.0f} / {L[1]['r_m']:.0f} / {L[2]['r_m']:.0f} m, 12 replaceable segments each, trim joints clocked 45 deg", (L[2]['x_m']-20, 0, L[2]['r_m']+12), 5),
     ('coils', f"closure coils C1 r {e4['closure_coils'][0]['r_m']:.1f} m, C2 r {e4['closure_coils'][1]['r_m']:.1f} m (PARAMETRIC, structure UNBOOKED)", (-215, 0, 52), 4),
-    ('module', f"module: launcher >= {CORR['V4']['one_in_flight_m_s']/1e3:.1f} km/s, ignitor, tritium store (PROTOTYPE)", (-185, 0, 14), 3),
+    ('module', f"module: launcher B snout (8.8 km/s, 45 m open flight), ignitor, tritium store (PROTOTYPE)", (-185, 0, 14), 3),
     ('wing_edgeon', 'warm wings edge-on in this view (plane z = 0)', (-60, 0, -14), 4),
 ]
 for nm, body, loc, sz in labels_side:
@@ -844,9 +1078,13 @@ def exclude(sc, names, flag=True):
 main.collection.children.unlink(LIB)
 LIB_ALL = [ASM['V4'], ASM['V0'], ASM['V5'], OVL]
 link(SC['VERTEX_V4'], ASM['V4']); link(SC['VERTEX_V4'], ASM['V5']); link(SC['VERTEX_V4'], OVL)
-exclude(SC['VERTEX_V4'], [COLL['V4']['skirts']['B_SHORT'].name, PANEL.name, OUTL.name, DUST.name, GRADED.name, VAR['V5'].name])
+exclude(SC['VERTEX_V4'], [PANEL.name, OUTL.name, DUST.name, VAR['V5'].name])
 link(SC['VERTEX_V0'], ASM['V0'])
-exclude(SC['VERTEX_V0'], [COLL['V0']['skirts']['B_SHORT'].name])
+# every option collection is kept in one library scene (all excluded) so nothing is orphaned and each option can be switched on there
+for g_ in OPTROOT:
+    link(SC['OPTIONS_LIBRARY'], OPTROOT[g_])
+link(SC['OPTIONS_LIBRARY'], ASM['V4_CALC'])
+exclude(SC['OPTIONS_LIBRARY'], [c.name for g_ in OPTROOT for c in OPTROOT[g_].children]+[ASM['V4_CALC'].name])
 if 'CANON' in ships:
     link(SC['CANON_WAYFARER'], ships['CANON'])
 
@@ -883,19 +1121,83 @@ CUT = bpy.data.collections.new('VAR_VERTEX_V4_CUTAWAY'); CUT.color_tag = 'COLOR_
 _, ccolls = gen_collections('V4', CUT)
 for k, c in list(ccolls.items()):
     c.name = c.name.replace('VAR_VERTEX_V4_', 'CUT_V4_')
-build_fdp_parts('V4', R4, ccolls, cut=(200.0, 340.0))
+TRASH = bpy.data.collections.new('TRASH_CUT')
+build_fdp_parts('V4', R4, ccolls, cut=(200.0, 340.0), breech=TRASH)
 for o in [o for c in ccolls.values() for o in c.objects if o.name.split('_', 2)[2].startswith(('Wing_', 'Shadow_Cone', 'Low_Loop', 'Feed_Line', 'KeepOut_Plume', 'TB_'))]:
     bpy.data.objects.remove(o)
-build_nozzle('V4', R4, e4, ccolls, cut=(200.0, 340.0))
-build_module('V4', R4, e4, ccolls, cut=(200.0, 340.0))
+build_nozzle('V4', R4, e4, ccolls, cut=(200.0, 340.0), support=TRASH)
+build_module('V4', R4, e4, ccolls, cut=(200.0, 340.0), launch=TRASH)
+for o in list(TRASH.objects):
+    PART_LOG[:] = [r for r in PART_LOG if r[2] != o.name]; bpy.data.objects.remove(o)
+bpy.data.collections.remove(TRASH)
+build_launcher('B', 'V4', R4, e4, ccolls['07'])
+build_coil_protection('V4', R4, e4, {'P1': new_coll('CUT_V4_COIL_P1_UNUSED', CUT), 'P2': ccolls['03'], 'FAN': ccolls['11'], 'SUP': ccolls['08']},
+                      cut=(200.0, 340.0))
+for o in list(bpy.data.collections['CUT_V4_COIL_P1_UNUSED'].objects):
+    PART_LOG[:] = [r for r in PART_LOG if r[2] != o.name]; bpy.data.objects.remove(o)
+bpy.data.collections.remove(bpy.data.collections['CUT_V4_COIL_P1_UNUSED'])
 build_overlays('V4', R4, e4, ccolls['01'])
 link(SC['VERTEX_CUTAWAY'], CUT)
 
 # braking exposure: V4 with skirt A and the dust stream; radiator alternatives: V4 hull + outlines + graded band
 link(SC['BRAKING_EXPOSURE'], ASM['V4']); link(SC['BRAKING_EXPOSURE'], DUST)
-exclude(SC['BRAKING_EXPOSURE'], [COLL['V4']['skirts']['B_SHORT'].name])
 link(SC['RADIATOR_ALTERNATIVES'], ASM['V4']); link(SC['RADIATOR_ALTERNATIVES'], ALT)
 exclude(SC['RADIATOR_ALTERNATIVES'], [DUST.name, PANEL.name])
+
+# ---- Rev 2 comparison scenes (lanes instance the option collections; nothing is copied) ----
+O4 = OPT['V4']; P4 = {o['key']: o for o in REV2['launcher']['options']}
+LZ = {'REV1': 75.0, 'A': 25.0, 'B': -25.0, 'C': -75.0}
+for k, z in LZ.items():
+    inst(SC['LAUNCHER_COMPARE'], O4['LANE_CORE_LAUNCH'], (0, 0, z), f'LCMP_CORE_{k}')
+    inst(SC['LAUNCHER_COMPARE'], O4[f'LAUNCH_{k}'], (0, 0, z), f'LCMP_{k}')
+    o = P4[k]
+    body = (f"{o['name']}  |  {o['status']}  |  accelerator {o['accelerator_m']:.0f} m, {o['exit_speed_m_s']/1e3:.2f} km/s, {o['accel_g']:,.0f} g, "
+            f"shell {o['shell_stress_MPa']:.1f} MPa (margin {o['stress_margin'][0]:.2f}-{o['stress_margin'][1]:.2f}), {o['targets_in_barrel']:.1f} in barrel, "
+            f"{o['electric_W']/1e6:.0f} MWe")
+    text(f'lcmp_{k}', body, (-250, 0, z+9), SC['LAUNCHER_COMPARE'].collection, size=3.2)
+text('lcmp_title', 'TARGET INJECTION (ISS-009): REV1 vs A axial vs B shielded snout (preferred) vs C offset. Red-violet = open line of sight to the burn, '
+     'yellow = protected run behind the chopper', (-250, 0, 108), SC['LAUNCHER_COMPARE'].collection, size=3.6)
+text('lcmp_rule', f"rule: any target in line of sight at a pulse instant is destroyed ({REV2['launcher']['xray_per_pulse_J']/1e9:.1f} GJ X-ray per pulse, "
+     f"every {1e3*REV2['launcher']['pulse_interval_s']:.2f} ms), so v >= open length x {REV2['launcher']['pulse_Hz']:.0f} Hz", (-250, 0, 102), SC['LAUNCHER_COMPARE'].collection, size=3.0)
+
+# thermal: calculated (Rev 1, canon blades kept) at X 0, preferred graded (canon blades retired) at X +1,000 m
+inst(SC['THERMAL_COMPARE'], ASM['V4_CALC'], (0, 0, 0), 'TCMP_CALC')
+inst(SC['THERMAL_COMPARE'], ASM['V4'], (1000.0, 0, 0), 'TCMP_PREF')
+TH = REV2['thermal']
+for nm, x, body in (('tcmp_calc', -180, f"CALCULATED (Rev 1): hot band X -178.8 to 88.0, r 10-{w['hot_band_r_m'][1]:,.0f} m;\ncanon 1,800 K blades kept beside it; "
+                                          f"ring A {TH['ring_A_W_m2']['calc']/1e3:.0f} kW/m2"),
+                    ('tcmp_pref', 820, f"PREFERRED (graded): hot X {PREF['hot_x_m'][0]:.1f} to {PREF['hot_x_m'][1]:.1f}, r 10-{PREF['hot_r_m'][1]:,.0f} m, "
+                                       f"{PREF['hot_area_m2']:,.0f} m2;\ncanon blades retired, area moved into the wing; ring A {PREF['ring_A_W_m2']/1e3:.0f} kW/m2")):
+    text(nm, body, (x, -90, 5), SC['THERMAL_COMPARE'].collection, size=20, facing='top')
+
+# coils: P0 Rev 1 (warm screen only, unsized struts), P1 monolithic shoe + sized struts, P2 segmented armour + sized struts (preferred)
+for k, x, parts in (('P0', 0.0, ['LANE_CORE_COIL', 'SUP_REV1', 'COIL_XRAY_FAN']), ('P1', 120.0, ['LANE_CORE_COIL', 'COIL_P1', 'COIL_SUP_SIZED', 'COIL_XRAY_FAN']),
+                    ('P2', 240.0, ['LANE_CORE_COIL', 'COIL_P2', 'COIL_SUP_SIZED', 'COIL_XRAY_FAN'])):
+    inst(SC['COIL_COMPARE'], O4['LANE_CORE_LAUNCH'], (x, 0, 0), f'CCMP_CORE_{k}')
+    for pp in parts:
+        inst(SC['COIL_COMPARE'], O4[pp], (x, 0, 0), f'CCMP_{k}_{pp}')
+CO = REV2['coils']; S1 = CO['struts']['cases']
+for k, x, body in (('P0', 0.0, 'P0 Rev 1: warm screen only, struts unsized'),
+                   ('P1', 120.0, f"P1 sacrificial shoe {CO['coil_armour_total_kg']/1e3:.0f} t; struts sized for 1.9 GN ({S1[1]['mass_kg']/1e3:.0f} t)"),
+                   ('P2', 240.0, f"P2 PREFERRED: 12 replaceable segments/coil on stand-offs + warm screen; same {CO['coil_xray_total_W']/1e9:.1f} GW intercepted")):
+    text(f'ccmp_{k}', body, (x-225, 0, 58), SC['COIL_COMPARE'].collection, size=2.6)
+text('ccmp_rule', f"X-ray onto C1+C2 is fixed by their solid angle: {CO['coil_xray_total_W']/1e9:.1f} GW in every option, unbooked "
+     f"(+{CO['extra_hot_area_m2']:,.0f} m2 hot radiator); hoop 3-7 GN and 855-1,281 t coil structure unbooked (T03)", (-225, 0, 66), SC['COIL_COMPARE'].collection, size=3.4)
+
+# skirts: A full (3 penetrations), B2 dock-clear (preferred), B short, C none; same ship core in each lane
+SKCORE = bpy.data.collections.new('LANE_CORE_SKIRT')
+for c in ([ships['V4']] if 'V4' in ships else [])+[VAR['V4'], O4['SPINE_EXT'], O4['DOCK_ROUTES']]:
+    SKCORE.children.link(c)
+DU = REV2['dust']['options']
+for k, z in (('A_FULL', 150.0), ('B2_DOCK_CLEAR', 50.0), ('B_SHORT', -50.0), ('C_BUMPERS_ONLY', -150.0)):
+    inst(SC['SKIRT_COMPARE'], SKCORE, (0, 0, z), f'SCMP_CORE_{k}')
+    inst(SC['SKIRT_COMPARE'], COLL['V4']['skirts'][k], (0, 0, z), f'SCMP_{k}')
+    d = DU[k]
+    body = (f"{k}: shadow r {d['shadow_r_m']:.1f} m, {d['mass_t'][0]:.0f}-{d['mass_t'][1]:.0f} t, dock/EVA penetrations {d['penetrations']}, "
+            f"exposed while braking {sum(d['exposed_annuli_m2'].values()):,.0f} m2" + (' (ring A, farm, fwd-shield back)' if k == 'C_BUMPERS_ONLY' else ''))
+    text(f'scmp_{k}', body, (-170, 0, z+38), SC['SKIRT_COMPARE'].collection, size=6)
+text('scmp_title', 'DUST PROTECTION WHILE BRAKING (dust arrives along -X; shadow = cylinder of the skirt edge radius). Docking corridors and EVA route drawn',
+     (-170, 0, 205), SC['SKIRT_COMPARE'].collection, size=7)
 
 # human scale: a 1.75 m figure at the shield-face rail and one at a wing-root crossing (instances of canon figures if present)
 HUM = bpy.data.collections.new('VAR_VERTEX_V4_HUMAN_SCALE')
@@ -965,6 +1267,19 @@ CAMS = {
     'CAM_VTX_15_V0_WHOLE': (camera('CAM_VTX_15_V0_WHOLE', (-900, -2600, 1600), (-20, 0, 0), lens=35), ['VERTEX_V0']),
     'CAM_VTX_16_CANON': (camera('CAM_VTX_16_CANON', (-260, -420, 200), (0, 0, 0), lens=35), ['CANON_WAYFARER']),
     'CAM_VTX_17_V4_WHOLE': (camera('CAM_VTX_17_V4_WHOLE', (-9000, -16000, 8000), (0, 0, 0), lens=35, clip=120000), ['VERTEX_V4']),
+    # Rev 2
+    'CAM_VTX_20_LAUNCHER_COMPARE': (camera('CAM_VTX_20_LAUNCHER_COMPARE', (-80, -3000, 15), (-80, 0, 15), ortho=350), ['LAUNCHER_COMPARE']),
+    'CAM_VTX_21_SNOUT_CUTAWAY': (camera('CAM_VTX_21_SNOUT_CUTAWAY', (xSA-55, -75, 28), (xSA-15, 0, 0), lens=28), ['VERTEX_CUTAWAY']),
+    'CAM_VTX_22_BREECH_DETAIL': (camera('CAM_VTX_22_BREECH_DETAIL', (80, -3000, -25), (80, 0, -25), ortho=44), ['LAUNCHER_COMPARE']),
+    'CAM_VTX_23_THERMAL_TOP': (camera('CAM_VTX_23_THERMAL_TOP', (480, 560, 9000), (480, 560, 0), ortho=2500, top=True), ['THERMAL_COMPARE']),
+    'CAM_VTX_24_RING_CALC': (camera('CAM_VTX_24_RING_CALC', (40, 30, 3000), (40, 30, 0), ortho=200, top=True), ['THERMAL_COMPARE']),
+    'CAM_VTX_25_RING_GRADED': (camera('CAM_VTX_25_RING_GRADED', (1040, 30, 3000), (1040, 30, 0), ortho=200, top=True), ['THERMAL_COMPARE']),
+    'CAM_VTX_26_COIL_COMPARE': (camera('CAM_VTX_26_COIL_COMPARE', (-40, -3000, 8), (-40, 0, 8), ortho=380), ['COIL_COMPARE']),
+    'CAM_VTX_27_COIL_THREEQ': (camera('CAM_VTX_27_COIL_THREEQ', (-140, -95, 55), (-190, 0, 0), lens=30), ['VERTEX_V4']),
+    'CAM_VTX_28_SKIRT_COMPARE': (camera('CAM_VTX_28_SKIRT_COMPARE', (175, -4000, 25), (175, 0, 25), ortho=760), ['SKIRT_COMPARE']),
+    'CAM_VTX_29_DOCK_SKIRT': (camera('CAM_VTX_29_DOCK_SKIRT', (118, -170, -25), (122, 0, 0), lens=30), ['VERTEX_V4']),
+    'CAM_VTX_30_V4_SIDE_TRUE_SCALE': (camera('CAM_VTX_30_V4_SIDE_TRUE_SCALE', (37, -6000, 0), (37, 0, 0), ortho=830), ['VERTEX_V4']),
+    'CAM_VTX_31_SPINE_STRETCH': (camera('CAM_VTX_31_SPINE_STRETCH', (270, -3000, 0), (270, 0, 0), ortho=360), ['VERTEX_V4']),
 }
 CAMS['CAM_VTX_09_RADIATOR_ALTS_END'][0].rotation_euler = (math.radians(90), 0, math.radians(-90))
 for name, (ob, names) in CAMS.items():
@@ -973,7 +1288,9 @@ for name, (ob, names) in CAMS.items():
         bpy.data.scenes[n].collection.objects.link(ob)
 DEFAULT = {'COMPARE_SIDE_BY_SIDE': 'CAM_VTX_01_SIDE_COMPARE', 'COMPARE_TOP': 'CAM_VTX_02_TOP_COMPARE', 'COMPARE_SPAN': 'CAM_VTX_04_SPAN_FULL',
            'VERTEX_V4': 'CAM_VTX_06_AFT_ASSEMBLY', 'VERTEX_CUTAWAY': 'CAM_VTX_07_CUTAWAY', 'BRAKING_EXPOSURE': 'CAM_VTX_08_BRAKING_EXPOSURE',
-           'RADIATOR_ALTERNATIVES': 'CAM_VTX_09_RADIATOR_ALTS_END', 'VERTEX_V0': 'CAM_VTX_15_V0_WHOLE', 'CANON_WAYFARER': 'CAM_VTX_16_CANON'}
+           'RADIATOR_ALTERNATIVES': 'CAM_VTX_09_RADIATOR_ALTS_END', 'VERTEX_V0': 'CAM_VTX_15_V0_WHOLE', 'CANON_WAYFARER': 'CAM_VTX_16_CANON',
+           'LAUNCHER_COMPARE': 'CAM_VTX_20_LAUNCHER_COMPARE', 'THERMAL_COMPARE': 'CAM_VTX_23_THERMAL_TOP', 'COIL_COMPARE': 'CAM_VTX_26_COIL_COMPARE',
+           'SKIRT_COMPARE': 'CAM_VTX_28_SKIRT_COMPARE'}
 for sc, cam in DEFAULT.items():
     SC[sc].camera = CAMS[cam][0]
 
@@ -983,7 +1300,10 @@ PLUME = ('_Shadow_Cone', '_KeepOut', '_Exhaust_', 'Dust_Streak', 'StandOff_dense
 RENDER_HIDE = {'CAM_VTX_02_TOP_COMPARE': WING+PLUME, 'CAM_VTX_01_SIDE_COMPARE': PLUME, 'CAM_VTX_03_THREEQ_COMPARE': PLUME,
                'CAM_VTX_06_AFT_ASSEMBLY': PLUME, 'CAM_VTX_10_RADIATOR_STATES': PLUME, 'CAM_VTX_12_DOCK_HAB_CLEARANCE': PLUME,
                'CAM_VTX_13_RING_HOTBAND': PLUME, 'CAM_VTX_14_C1_WING': PLUME, 'CAM_VTX_15_V0_WHOLE': PLUME, 'CAM_VTX_17_V4_WHOLE': PLUME,
-               'CAM_VTX_11_MAINTENANCE': PLUME+('_LBL_',), 'CAM_VTX_07b_MODULE_CUTAWAY': ('_LBL_',), 'CAM_VTX_08_BRAKING_EXPOSURE': ('_Exhaust_', '_KeepOut_Plume')}
+               'CAM_VTX_11_MAINTENANCE': PLUME+('_LBL_',),
+               'CAM_VTX_27_COIL_THREEQ': PLUME, 'CAM_VTX_28_SKIRT_COMPARE': PLUME, 'CAM_VTX_29_DOCK_SKIRT': PLUME, 'CAM_VTX_30_V4_SIDE_TRUE_SCALE': PLUME,
+               'CAM_VTX_31_SPINE_STRETCH': PLUME+('_PP_TB_', '_LBL_'), 'CAM_VTX_21_SNOUT_CUTAWAY': PLUME+('_LBL_', '_XRAY_Fan', 'StandOff'), 'CAM_VTX_23_THERMAL_TOP': PLUME, 'CAM_VTX_24_RING_CALC': PLUME,
+               'CAM_VTX_25_RING_GRADED': PLUME, 'CAM_VTX_07b_MODULE_CUTAWAY': ('_LBL_',), 'CAM_VTX_08_BRAKING_EXPOSURE': ('_Exhaust_', '_KeepOut_Plume')}
 
 # ----------------------------------------------------------------------------------------------------------------------------------
 # checks, texts
@@ -998,6 +1318,21 @@ from collections import Counter
 CHECKS['objects'] = {'var_objects': len(VAR_OBJS), 'missing_properties': missing[:20],
                      'by_status': dict(Counter(o['evidence_status'] for o in VAR_OBJS)), 'by_generation': dict(Counter(o['generation'] for o in VAR_OBJS))}
 CHECKS['revision'] = REVISION
+pb = R4['shield']['streaming']['pellet_bore']['plug_length_m']; c1 = e4['closure_coils'][0]; LB = P4['B']; LC = P4['C']
+CHECKS['rev2'] = {
+    'source': 'rev2.json (work/vertex-blender/rev2.py) plus the placements built here',
+    'assemblies': CHECKS.get('assemblies'),
+    'launcher_B_breech_plug_fwd_end_to_crew_trunk_m': CANON2['crew_trunk_x_m'][0]-(BREECH_X+0.3+pb),
+    'launcher_B_snout_tip_x_m': LB['muzzle_x_m'], 'launcher_B_tip_to_burn_m': LB['muzzle_x_m']-e4['x_burn_m'],
+    'launcher_B_snout_to_C1_envelope_radial_m': c1['r_m']-c1['envelope_r_m'][1]-0.6,
+    'launcher_C_line_to_thrust_ring_inner_m': CANON2['thrust_ring_r_m'][0]-LC['r_at_thrust_ring_m'],
+    'skirt_B2_edge_to_dock_corridor_m': (C['dock_primary']['x_m']-CANON2['dock_corridor_halfwidth_m'])-REV2['dust']['options']['B2_DOCK_CLEAR']['edge_x_m'],
+    'skirt_B2_crosses_bypass_collar': REV2['dust']['options']['B2_DOCK_CLEAR']['meets_bypass_collar'],
+    'graded_hot_band_to_ring_A_m': C['ring_a_aft_face_x_m']-PREF['hot_x_m'][1],
+    'canon_hot_blade_objects_left_out_of_V4': CHECKS['ship_edits'].get('V4', {}).get('hot_objects') if 'ship_edits' in CHECKS else None,
+    'spine_extension_m': e4['tanks_TB']['bow_shift_m'],
+    'launcher_options': {k: {kk: P4[k][kk] for kk in ('status', 'accelerator_m', 'exit_speed_m_s', 'accel_g', 'shell_stress_MPa', 'stress_margin', 'targets_in_barrel', 'electric_W', 'line_of_sight_m')} for k in P4},
+}
 (HERE/'checks.json').write_text(json.dumps(CHECKS, indent=1, default=float))
 readme = bpy.data.texts.new('README_VERTEX')
 readme.write((HERE/'REPORT.md').read_text() if (HERE/'REPORT.md').exists() else 'Vertex Stage B review file. See work/vertex-blender/REPORT.md.\n')

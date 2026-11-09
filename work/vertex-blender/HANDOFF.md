@@ -107,3 +107,10 @@ bars and sheet overlay, tip-bracket circles, radiator-alternative outlines.
 
 Stage B first pass (after D-10): cameras 01, 02, 04, 06, 12 and 13 in Workbench, with the calculated and graded hot bands, to confirm
 ISS-001, -002 and -004 on the model before any detail.
+
+## K. Revision 2 (2026-11-09)
+
+See `REV2_REPORT.md` and the Revision 2 register in `ISSUES.md`. Preferred layout (non-canon): launcher B (289 m in the spine
+bore, 45 m open flight, 8.8 km/s, 13,700 g, chopper at a shielded snout tip), graded wings with the canon blades retired in V4, coil
+armour P2 with sized C1 struts, skirt B2. Open for T04: target acceleration tolerance; for T03: the coils' 30 GW X-ray; for T00: the
+spine continuation across the T-B stretch (ISS-013) and bow access (ISS-015).

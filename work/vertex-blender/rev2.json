@@ -1,0 +1,535 @@
+{
+ "canon": {
+  "spine_x_m": [
+   -112.05,
+   140.75
+  ],
+  "spine_r_m": 0.95,
+  "crew_trunk_x_m": [
+   93.85,
+   134.7
+  ],
+  "dock_x_m": 131.65,
+  "airlock_x_m": 134.1,
+  "dock_corridor_halfwidth_m": 3.0,
+  "ring_a_aft_face_x_m": 95.15,
+  "ring_r_m": 30.0,
+  "ring_inner_hoop_r_m": 25.0,
+  "bypass_collar": {
+   "x_m": [
+    72.02,
+    116.5
+   ],
+   "r_m": [
+    33.0,
+    35.0
+   ]
+  },
+  "farm_r_m": [
+   7.75,
+   34.5
+  ],
+  "forward_shield_r_m": 45.0,
+  "thrust_ring_r_m": [
+   5.0,
+   6.0
+  ],
+  "blade_front_x_m": 48.9
+ },
+ "launcher": {
+  "options": [
+   {
+    "key": "REV1",
+    "name": "Rev 1: 20 m barrel ahead of the shield (fails, kept for comparison)",
+    "accelerator_m": 20.0,
+    "line_of_sight_m": 68.38947536652566,
+    "exit_speed_m_s": 13386.408771454959,
+    "accel_m_s2": 4479898.494912157,
+    "accel_g": 456822.51277573453,
+    "times_ife_design_g": [
+     456.82251277573454,
+     4568.225127757345
+    ],
+    "shell_stress_MPa": 48.302359799637166,
+    "implied_D2_strength_MPa": [
+     3.0,
+     3.6
+    ],
+    "stress_margin": [
+     0.06210876678581105,
+     0.07453052014297326
+    ],
+    "barrel_transit_s": 0.0029881053748556964,
+    "targets_in_barrel": 0.5848853173039349,
+    "kinetic_W": 43355980.59877257,
+    "electric_W": 108389951.49693142,
+    "launcher_mass_kg": 10000.0,
+    "sabot_flow_kg_day": 28749.975194482784,
+    "sabot_catch_W": 29814113.56539936,
+    "muzzle_x_m": -180.54008926903404,
+    "breech_x_m": -160.54008926903404,
+    "shutter": "none",
+    "conflicts": [
+     "FDP-1 magazine at xSF+14.5-16 m",
+     "LiH plug at xSF+16 m"
+    ],
+    "status": "FAILED"
+   },
+   {
+    "key": "A",
+    "name": "A: axial accelerator in the spine bore, X-ray chopper at the shield aft face",
+    "accelerator_m": 269.44008926903405,
+    "line_of_sight_m": 64.69938609749164,
+    "exit_speed_m_s": 12664.118636990393,
+    "accel_m_s2": 297616.9976911439,
+    "accel_g": 30348.48778034741,
+    "times_ife_design_g": [
+     30.34848778034741,
+     303.4848778034741
+    ],
+    "shell_stress_MPa": 3.2089127290030937,
+    "implied_D2_strength_MPa": [
+     3.0,
+     3.6
+    ],
+    "stress_margin": [
+     0.9348961013757466,
+     1.1218753216508959
+    ],
+    "barrel_transit_s": 0.042551731706307834,
+    "targets_in_barrel": 8.328984416112723,
+    "kinetic_W": 38803490.066010095,
+    "electric_W": 97008725.16502523,
+    "launcher_mass_kg": 134720.04463451702,
+    "sabot_flow_kg_day": 28749.975194482784,
+    "sabot_catch_W": 26683554.23137686,
+    "muzzle_x_m": -184.44008926903402,
+    "breech_x_m": 85.0,
+    "shutter": "chopper at the shield aft face (shield-face flux)",
+    "shutter_flux_W_m2": 7829513.941852612,
+    "conflicts": [
+     "spine bore services (canon: distributed stationary services)",
+     "breech plug 4.85 m aft of the crew trunk",
+     "barrel passes the drive galleries region and the rotor bay approach"
+    ],
+    "status": "CANDIDATE"
+   },
+   {
+    "key": "B",
+    "name": "B: spine accelerator + shielded snout, chopper at the snout tip 45 m from the burn",
+    "accelerator_m": 289.13947536652563,
+    "line_of_sight_m": 45.0,
+    "exit_speed_m_s": 8808.203184584187,
+    "accel_m_s2": 134164.3911516572,
+    "accel_g": 13680.960486165737,
+    "times_ife_design_g": [
+     13.680960486165738,
+     136.80960486165736
+    ],
+    "shell_stress_MPa": 1.446563287330392,
+    "implied_D2_strength_MPa": [
+     3.0,
+     3.6
+    ],
+    "stress_margin": [
+     2.0738809191932757,
+     2.488657103031931
+    ],
+    "barrel_transit_s": 0.06565231734721279,
+    "targets_in_barrel": 12.850643349623363,
+    "kinetic_W": 18771349.529881544,
+    "electric_W": 46928373.82470386,
+    "launcher_mass_kg": 144569.73768326282,
+    "sabot_flow_kg_day": 28749.975194482784,
+    "sabot_catch_W": 12908280.217182733,
+    "muzzle_x_m": -204.13947536652566,
+    "breech_x_m": 85.0,
+    "snout_m": 19.69938609749164,
+    "shutter": "chopper cartridge at the snout tip (45 m)",
+    "shutter_flux_W_m2": 16184902.741315186,
+    "tip_flux_vs_shield_face": 2.0671657093295286,
+    "conflicts": [
+     "as A",
+     "snout tip is a new plasma-facing component inside C1 (r 22 m) on the axis"
+    ],
+    "status": "PREFERRED"
+   },
+   {
+    "key": "C",
+    "name": "C: offset launcher on a line through the burn point, own shield penetration and chopper",
+    "accelerator_m": 64.69938609749164,
+    "line_of_sight_m": 64.76890119024944,
+    "exit_speed_m_s": 12677.725371688302,
+    "accel_m_s2": 1242088.4516412786,
+    "accel_g": 126657.77320912632,
+    "times_ife_design_g": [
+     126.65777320912632,
+     1266.5777320912632
+    ],
+    "shell_stress_MPa": 13.392223810938756,
+    "implied_D2_strength_MPa": [
+     3.0,
+     3.6
+    ],
+    "stress_margin": [
+     0.22401059318838468,
+     0.2688127118260616
+    ],
+    "barrel_transit_s": 0.010206781453394992,
+    "targets_in_barrel": 1.9978534422699685,
+    "kinetic_W": 38886918.28614291,
+    "electric_W": 97217295.71535726,
+    "launcher_mass_kg": 32349.69304874582,
+    "sabot_flow_kg_day": 28749.975194482784,
+    "sabot_catch_W": 26740924.365675453,
+    "muzzle_x_m": -184.44008926903402,
+    "breech_x_m": -119.74070317154238,
+    "exit_r_m": 3.0,
+    "inclination_deg": 2.654805873512677,
+    "r_at_thrust_ring_m": 4.840361632298677,
+    "shutter": "second chopper at its own penetration",
+    "shutter_flux_W_m2": 7829513.941852612,
+    "extra_streaming_paths": 1,
+    "conflicts": [
+     "line passes the canon 12 m thrust ring (r 5-6 m) at r 4.84 m",
+     "second straight shield penetration (bore-sized streaming path)"
+    ],
+    "status": "REJECTED"
+   }
+  ],
+  "snout_sweep": [
+   {
+    "tip_from_burn_m": 64.7,
+    "snout_m": -0.0006139025083768956,
+    "exit_speed_m_s": 12664.238800946598,
+    "accel_g": 30349.13285718252,
+    "shell_stress_MPa": 3.208980936529028,
+    "tip_flux_MW_m2": 7.829365362704397
+   },
+   {
+    "tip_from_burn_m": 55.0,
+    "snout_m": 9.69938609749164,
+    "exit_speed_m_s": 10765.581670047339,
+    "accel_g": 21169.132964121432,
+    "shell_stress_MPa": 2.2383289975494995,
+    "tip_flux_MW_m2": 10.834521669806032
+   },
+   {
+    "tip_from_burn_m": 45.0,
+    "snout_m": 19.69938609749164,
+    "exit_speed_m_s": 8808.203184584187,
+    "accel_g": 13680.960486165737,
+    "shell_stress_MPa": 1.446563287330392,
+    "tip_flux_MW_m2": 16.184902741315184
+   },
+   {
+    "tip_from_burn_m": 35.0,
+    "snout_m": 29.69938609749164,
+    "exit_speed_m_s": 6850.824699121034,
+    "accel_g": 7999.471781104637,
+    "shell_stress_MPa": 0.8458282010450098,
+    "tip_flux_MW_m2": 26.754635143806738
+   },
+   {
+    "tip_from_burn_m": 25.0,
+    "snout_m": 39.69938609749164,
+    "exit_speed_m_s": 4893.446213657881,
+    "accel_g": 3949.33979592241,
+    "shell_stress_MPa": 0.4175854439278036,
+    "tip_flux_MW_m2": 52.439084881861206
+   }
+  ],
+  "multi_target": [
+   {
+    "targets_in_open_path": 1,
+    "speed_m_s": 12664.118636990393,
+    "nearest_at_pulse_m": null,
+    "xray_fluence_J_m2": 0.0,
+    "absorbed_J": 0.0,
+    "he3_boil_off_budget_J": 4.629795624104881,
+    "ratio_absorbed_to_budget": 0.0
+   },
+   {
+    "targets_in_open_path": 2,
+    "speed_m_s": 6332.059318495197,
+    "nearest_at_pulse_m": 32.34969304874582,
+    "xray_fluence_J_m2": 160000.00000000006,
+    "absorbed_J": 71.78036558628106,
+    "he3_boil_off_budget_J": 4.629795624104881,
+    "ratio_absorbed_to_budget": 15.504003073604137
+   },
+   {
+    "targets_in_open_path": 3,
+    "speed_m_s": 4221.372878996798,
+    "nearest_at_pulse_m": 21.566462032497213,
+    "xray_fluence_J_m2": 360000.0000000001,
+    "absorbed_J": 161.5058225691324,
+    "he3_boil_off_budget_J": 4.629795624104881,
+    "ratio_absorbed_to_budget": 34.884006915609305
+   },
+   {
+    "targets_in_open_path": 5,
+    "speed_m_s": 2532.8237273980785,
+    "nearest_at_pulse_m": 12.939877219498328,
+    "xray_fluence_J_m2": 1000000.0000000002,
+    "absorbed_J": 448.62728491425656,
+    "he3_boil_off_budget_J": 4.629795624104881,
+    "ratio_absorbed_to_budget": 96.90001921002585
+   },
+   {
+    "targets_in_open_path": 10,
+    "speed_m_s": 1266.4118636990393,
+    "nearest_at_pulse_m": 6.469938609749164,
+    "xray_fluence_J_m2": 4000000.000000001,
+    "absorbed_J": 1794.5091396570263,
+    "he3_boil_off_budget_J": 4.629795624104881,
+    "ratio_absorbed_to_budget": 387.6000768401034
+   }
+  ],
+  "xray_per_pulse_J": 2104118404.4030914,
+  "pulse_Hz": 195.73784854631526,
+  "pulse_interval_s": 0.005108873973156914,
+  "shield_face_flux_W_m2": 7829513.941852612,
+  "target_mass_kg": 0.0007721569150877445,
+  "he3_boil_off_budget_J": 4.629795624104881,
+  "last_flight_radiant_J_black": 2.728617080678531,
+  "distance_for_1pct_budget_m": 1273.7731412025996,
+  "rule": "a target on a straight line to the burn point at a pulse instant is destroyed; so v >= (shuttered line-of-sight length) x f, and the accelerator must sit behind a shutter or out of line of sight"
+ },
+ "thermal": {
+  "preferred_rev2": {
+   "hot_x_m": [
+    -163.5396032199506,
+    48.899362477231335
+   ],
+   "hot_r_m": [
+    10.0,
+    1096.474258418601
+   ],
+   "hot_area_m2": 461618.93543012073,
+   "corner_warm_m2": 84963.67231248922,
+   "tip_r_m": 10217.519424639055,
+   "span_m": 20435.03884927811,
+   "span_change_m": 179.89098042393744,
+   "ring_A_W_m2": 55964.57624543794,
+   "C1_W_m2_upper": 30018.984549050623
+  },
+  "hot_circuit_W": 494604288071.95483,
+  "hot_planform_m2": 461618.9354301208,
+  "canon_blades_reused_m2": 14934.509904371585,
+  "wing_extension_m2": 446684.4255257492,
+  "calc_wing_hot_band_m2": 446684.4255257492,
+  "graded_wing_hot_band_m2": 446684.4255257493,
+  "calc_matches_extension": 0.0,
+  "graded_matches_extension": 1.3031047779415361e-16,
+  "blades_share_of_hot_area": 0.03235246381402469,
+  "hot_sources_W": {
+   "plume_on_hardware": 478507797848.0679,
+   "recovery_conversion_loss": 5870046718.070167,
+   "radiation_on_nozzle_loops": 8306035511.585304,
+   "radiation_on_nozzle_struts": 647840743.7099967,
+   "radiation_on_shadow_shield": 1272567250.5215025
+  },
+  "warm_total_W": 78599423926.30191,
+  "warm_planform_m2": 4951041.268491101,
+  "blade_irradiance_from_wing_W_m2": 485030.8730637689,
+  "blade_emitted_W_m2": 535727.8629216,
+  "blade_net_loss_fraction": 0.9053680172964044,
+  "ring_A_W_m2": {
+   "calc": 172811.51256750003,
+   "graded": 55960.50656951538
+  },
+  "C1_W_m2": {
+   "calc": 90524.41716791345,
+   "graded": 30018.984549050623
+  },
+  "canon_blades_on_ring_A_W_m2": 65350.198318340204,
+  "graded_geometry": {
+   "hot_x_m": [
+    -163.5396032199506,
+    48.899362477231335
+   ],
+   "hot_r_m": [
+    10.0,
+    1061.3241392882442
+   ],
+   "chord_m": 212.43896569718194,
+   "tip_m": 10127.573934427086,
+   "warm_starts_r_m": 1061.3241392882442,
+   "forward_root_corner": "X 48.9-88.0 m, r 10-1,061 m: warm circuit (550 K capacitors) by the rings"
+  },
+  "graded_structural": "hot band 1,061 m long instead of 847 m: the 1,800 K / 628 K thermal break becomes an L (spanwise at r 1,061 m aft of X 48.9 m, chordwise at X 48.9 m from r 10 to 1,061 m), so the hot manifold no longer runs the whole chord and the break carries a chordwise expansion joint; the spars see 1,800 K over 212 m of the 267 m root chord"
+ },
+ "coils": {
+  "coils": [
+   {
+    "name": "C1",
+    "r_m": 22.12849330614687,
+    "x_m": -188.34193968133437,
+    "burn_face_m2": 1335.408981651758,
+    "solid_angle_share": 0.025386574802202636,
+    "xray_W": 10455603240.774057,
+    "flux_W_m2": 7829513.942493929,
+    "armour_kg_at_loop_areal": 60325.646095869946,
+    "shadow_cone_r_at_coil_m": 5.852613219163222
+   },
+   {
+    "name": "C2",
+    "r_m": 41.58796373779316,
+    "x_m": -199.57687017333294,
+    "burn_face_m2": 2509.7479315787627,
+    "solid_angle_share": 0.04771115401731859,
+    "xray_W": 19650106422.44122,
+    "flux_W_m2": 7829513.942493929,
+    "armour_kg_at_loop_areal": 113375.12896086245,
+    "shadow_cone_r_at_coil_m": 4.771094009991283
+   }
+  ],
+  "loop_armour_areal_kg_m2": 45.17391070805408,
+  "loops_xray_booked_W": 8306035511.585304,
+  "coil_xray_total_W": 30105709663.21528,
+  "coil_armour_total_kg": 173700.7750567324,
+  "hot_flux_W_m2": 1071455.8050160992,
+  "extra_hot_area_m2": 28097.948158265775,
+  "struts": {
+   "length_m": 14.242157455267145,
+   "cases": [
+    {
+     "axial_force_N": 200000000.0,
+     "allowable_Pa": 600000000.0,
+     "area_total_m2": 0.3333333333333333,
+     "tube_r_m": 0.8,
+     "wall_m": 0.011052426603603843,
+     "mass_kg": 7595.817309475811,
+     "buckling_per_strut_N": 129752851.83912513,
+     "load_per_strut_N": 33333333.333333332
+    },
+    {
+     "axial_force_N": 1900000000.0,
+     "allowable_Pa": 600000000.0,
+     "area_total_m2": 3.1666666666666665,
+     "tube_r_m": 0.8,
+     "wall_m": 0.10499805273423651,
+     "mass_kg": 72160.26444002021,
+     "buckling_per_strut_N": 1232652092.4716887,
+     "load_per_strut_N": 316666666.6666667
+    }
+   ],
+   "xray_W": 1070488035.5251966,
+   "note": "CFRP 0.6 GPa, E 150 GPa, 1,600 kg/m3 (PROTOTYPE)"
+  },
+  "hoop": {
+   "tension_N": [
+    3000000000.0,
+    7000000000.0
+   ],
+   "structure_kg": [
+    855000.0,
+    1281000.0
+   ],
+   "source": "T03 HANDOFF E (unbooked)"
+  }
+ },
+ "dust": {
+  "options": {
+   "A_FULL": {
+    "edge_x_m": 218.32505772024692,
+    "shadow_r_m": 45.0,
+    "cone_area_m2": 65119.94310038151,
+    "mass_t": [
+     22.0,
+     90.0
+    ],
+    "penetrations": 3,
+    "shadow_loss_at_TB_front_1deg_m": 3.403300276868565,
+    "meets_bypass_collar": true,
+    "exposed_annuli_m2": {
+     "ring_A_face (r 25-30)": 0.0,
+     "farm and T-B tanks (r 7.75-34.5)": 0.0,
+     "forward shield aft face (r 34.5-45)": 0.0
+    }
+   },
+   "B_SHORT": {
+    "edge_x_m": 85.15,
+    "shadow_r_m": 32.18003789969091,
+    "cone_area_m2": 32679.95113968683,
+    "mass_t": [
+     11.040533680516962,
+     45.165819602114844
+    ],
+    "penetrations": 0,
+    "shadow_loss_at_TB_front_1deg_m": 5.7278795561946,
+    "meets_bypass_collar": false,
+    "exposed_annuli_m2": {
+     "ring_A_face (r 25-30)": 0.0,
+     "farm and T-B tanks (r 7.75-34.5)": 485.98918063492533,
+     "forward shield aft face (r 34.5-45)": 2622.44446758408
+    }
+   },
+   "B2_DOCK_CLEAR": {
+    "edge_x_m": 125.05000000000001,
+    "shadow_r_m": 36.020971003522156,
+    "cone_area_m2": 41268.435945654644,
+    "mass_t": [
+     13.942051352914698,
+     57.03566462556013
+    ],
+    "penetrations": 0,
+    "shadow_loss_at_TB_front_1deg_m": 5.031422465558718,
+    "meets_bypass_collar": true,
+    "exposed_annuli_m2": {
+     "ring_A_face (r 25-30)": 0.0,
+     "farm and T-B tanks (r 7.75-34.5)": 0.0,
+     "forward shield aft face (r 34.5-45)": 2285.4761336044926
+    }
+   },
+   "C_BUMPERS_ONLY": {
+    "edge_x_m": null,
+    "shadow_r_m": 7.228220898732194,
+    "cone_area_m2": 0.0,
+    "mass_t": [
+     0.0,
+     0.0
+    ],
+    "penetrations": 0,
+    "exposed_annuli_m2": {
+     "ring_A_face (r 25-30)": 863.9379797371931,
+     "farm and T-B tanks (r 7.75-34.5)": 3550.5887471790143,
+     "forward shield aft face (r 34.5-45)": 2622.44446758408
+    }
+   }
+  },
+  "cone_deg": 5.4985773185790325,
+  "TB_front_x_m": 413.29999999999995,
+  "leading_edge_m2_per_cm": 202.0,
+  "note": "axial dust from -X (braking, engine first); shadow = cylinder of the skirt edge radius; mass scaled from T02 22-90 t for the full skirt by cone area"
+ },
+ "scale": {
+  "length_m": 766.338554512763,
+  "x_m": [
+   -346.18855451276306,
+   420.15
+  ],
+  "span_m": 20255.147868854172,
+  "spine_gap_m": [
+   140.75,
+   416.15
+  ],
+  "TB_x_m": [
+   139.85,
+   413.25
+  ],
+  "TB_inner_r_m": 7.75,
+  "bow_parts_shifted": 549,
+  "crew_trunk_end_x_m": 134.7,
+  "bow_access_gap_m": 281.45,
+  "drive_galleries_x_m": [
+   -144.75,
+   81.86176087876838
+  ],
+  "module_x_m": [
+   -180.75,
+   -144.75
+  ]
+ }
+}

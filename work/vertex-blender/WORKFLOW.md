@@ -52,3 +52,13 @@ takes under 1 s per generation). The review file is a product of the commit plus
   of appending it again (a second append took 247 s and doubled the file).
 - `build_vertex.py -- --render DIR [--cams ...] [--size W H] [--no-save]`; it writes `checks.json` and `REVIEW_VERTEX_BLENDER.blend`.
 - Workbench colour type is MATERIAL: collection instances drop per-object colour.
+
+## Stage B as built (revision 2)
+
+- `python3 work/vertex-blender/rev2.py` writes `rev2.json` (launcher, thermal, coil, dust and scale screening; standard library, run
+  from the project root). `axis_survey.py` (Blender) writes `axis_survey.json`, the ray survey of what sits on the canon axis.
+- `build_vertex.py` reads `rev2.json`. Anything with alternatives is an option collection `OPT_VERTEX_<g>_*` (launchers REV1/A/B/C,
+  wings calculated/preferred, coil P1/P2 and supports, skirts, spine extension, dock routes, lane cores). `ASM_<g>` links the chosen
+  ones; `ASM_V4_REV1_LAYOUT` keeps the Rev 1 layout. To swap an option, unlink it from `ASM_V4` and link another (scene
+  `OPTIONS_LIBRARY` holds them all). The canon 1,800 K blade sections go to `WORK_VERTEX_<g>_CANON_HOT_BLADES` (V0 and the Rev 1
+  layout show them; preferred V4 does not).

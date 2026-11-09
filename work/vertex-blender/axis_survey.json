@@ -1,0 +1,1755 @@
+{
+"stations": [
+{
+"x": -145.0,
+"r0.8": null,
+"r1.5": null,
+"r3.0": null
+},
+{
+"x": -144.0,
+"r0.8": null,
+"r1.5": null,
+"r3.0": "MagneticNozzle_FieldEnvelope"
+},
+{
+"x": -143.0,
+"r0.8": null,
+"r1.5": null,
+"r3.0": "MagneticNozzle_FieldEnvelope"
+},
+{
+"x": -142.0,
+"r0.8": null,
+"r1.5": null,
+"r3.0": "Nozzle_Yoke_0_1"
+},
+{
+"x": -141.0,
+"r0.8": null,
+"r1.5": null,
+"r3.0": "MagneticNozzle_FieldEnvelope"
+},
+{
+"x": -140.0,
+"r0.8": null,
+"r1.5": null,
+"r3.0": null
+},
+{
+"x": -139.0,
+"r0.8": null,
+"r1.5": null,
+"r3.0": null
+},
+{
+"x": -138.0,
+"r0.8": null,
+"r1.5": null,
+"r3.0": null
+},
+{
+"x": -137.0,
+"r0.8": null,
+"r1.5": null,
+"r3.0": null
+},
+{
+"x": -136.0,
+"r0.8": null,
+"r1.5": "Central_Thrust_Hub",
+"r3.0": "Central_Thrust_Hub"
+},
+{
+"x": -135.0,
+"r0.8": null,
+"r1.5": "Central_Thrust_Hub",
+"r3.0": "Central_Thrust_Hub"
+},
+{
+"x": -134.0,
+"r0.8": null,
+"r1.5": null,
+"r3.0": null
+},
+{
+"x": -133.0,
+"r0.8": null,
+"r1.5": null,
+"r3.0": null
+},
+{
+"x": -132.0,
+"r0.8": null,
+"r1.5": null,
+"r3.0": "Magnetic_Flow_Domain_01"
+},
+{
+"x": -131.0,
+"r0.8": null,
+"r1.5": null,
+"r3.0": "Magnetic_Flow_Domain_01"
+},
+{
+"x": -130.0,
+"r0.8": null,
+"r1.5": "Magnetic_Flow_Domain_01",
+"r3.0": "Magnetic_Flow_Domain_01"
+},
+{
+"x": -129.0,
+"r0.8": null,
+"r1.5": null,
+"r3.0": null
+},
+{
+"x": -128.0,
+"r0.8": null,
+"r1.5": null,
+"r3.0": null
+},
+{
+"x": -127.0,
+"r0.8": null,
+"r1.5": null,
+"r3.0": null
+},
+{
+"x": -126.0,
+"r0.8": null,
+"r1.5": null,
+"r3.0": null
+},
+{
+"x": -125.0,
+"r0.8": null,
+"r1.5": null,
+"r3.0": null
+},
+{
+"x": -124.0,
+"r0.8": null,
+"r1.5": null,
+"r3.0": null
+},
+{
+"x": -123.0,
+"r0.8": null,
+"r1.5": null,
+"r3.0": null
+},
+{
+"x": -122.0,
+"r0.8": "Core_Common_Field_Transition",
+"r1.5": "Core_Common_Field_Transition",
+"r3.0": "Core_Common_Field_Transition"
+},
+{
+"x": -121.0,
+"r0.8": null,
+"r1.5": null,
+"r3.0": null
+},
+{
+"x": -120.0,
+"r0.8": null,
+"r1.5": null,
+"r3.0": null
+},
+{
+"x": -119.0,
+"r0.8": null,
+"r1.5": null,
+"r3.0": null
+},
+{
+"x": -118.0,
+"r0.8": null,
+"r1.5": null,
+"r3.0": null
+},
+{
+"x": -117.0,
+"r0.8": null,
+"r1.5": null,
+"r3.0": null
+},
+{
+"x": -116.0,
+"r0.8": null,
+"r1.5": null,
+"r3.0": null
+},
+{
+"x": -115.0,
+"r0.8": null,
+"r1.5": null,
+"r3.0": null
+},
+{
+"x": -114.0,
+"r0.8": null,
+"r1.5": "OPTICAL_SPLITTER_A",
+"r3.0": "OPTICAL_SPLITTER_A"
+},
+{
+"x": -113.0,
+"r0.8": null,
+"r1.5": "OPTICAL_BORE_B",
+"r3.0": "OPTICAL_BORE_B"
+},
+{
+"x": -112.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -111.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -110.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -109.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -108.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -107.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -106.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -105.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -104.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -103.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -102.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -101.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -100.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -99.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -98.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -97.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -96.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -95.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -94.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -93.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -92.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -91.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -90.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -89.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -88.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -87.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -86.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -85.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -84.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -83.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -82.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -81.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -80.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -79.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -78.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -77.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -76.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -75.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -74.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -73.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -72.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -71.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -70.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -69.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -68.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -67.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -66.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -65.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -64.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -63.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -62.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -61.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -60.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -59.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -58.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -57.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -56.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -55.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -54.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -53.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -52.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -51.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -50.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -49.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -48.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -47.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -46.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -45.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -44.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -43.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -42.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -41.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -40.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -39.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -38.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -37.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -36.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -35.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -34.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -33.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -32.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -31.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -30.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -29.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -28.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -27.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -26.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -25.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -24.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -23.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -22.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -21.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -20.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -19.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -18.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -17.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -16.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -15.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -14.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -13.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -12.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -11.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -10.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -9.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -8.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -7.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -6.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -5.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -4.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -3.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -2.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": -1.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 0.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 1.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 2.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 3.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 4.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 5.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 6.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 7.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 8.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 9.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 10.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 11.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 12.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 13.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 14.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 15.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 16.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 17.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 18.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 19.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 20.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 21.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 22.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 23.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 24.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 25.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 26.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 27.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 28.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 29.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 30.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 31.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 32.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 33.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 34.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 35.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 36.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 37.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 38.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 39.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 40.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 41.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 42.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 43.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 44.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 45.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 46.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 47.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 48.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 49.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 50.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 51.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 52.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 53.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 54.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 55.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 56.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 57.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 58.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 59.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 60.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 61.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 62.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 63.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 64.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 65.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 66.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 67.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 68.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 69.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 70.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 71.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 72.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 73.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 74.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 75.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 76.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 77.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 78.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 79.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 80.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 81.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 82.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 83.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 84.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 85.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 86.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 87.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 88.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 89.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 90.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 91.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 92.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 93.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 94.0,
+"r0.8": "Crew_Trunk",
+"r1.5": "Crew_Trunk",
+"r3.0": "Crew_Trunk"
+},
+{
+"x": 95.0,
+"r0.8": "Crew_Trunk",
+"r1.5": "Crew_Trunk",
+"r3.0": "Crew_Trunk"
+},
+{
+"x": 96.0,
+"r0.8": "Crew_Trunk",
+"r1.5": "Crew_Trunk",
+"r3.0": "Crew_Trunk"
+},
+{
+"x": 97.0,
+"r0.8": "Prod_TRK_Panels",
+"r1.5": "Prod_TRK_Panels",
+"r3.0": "Prod_TRK_Panels"
+},
+{
+"x": 98.0,
+"r0.8": "Prod_TRK_Panels",
+"r1.5": "Prod_TRK_Panels",
+"r3.0": "Prod_TRK_Panels"
+},
+{
+"x": 99.0,
+"r0.8": "Prod_TRK_Panels",
+"r1.5": "Prod_TRK_Panels",
+"r3.0": "Prod_TRK_Panels"
+},
+{
+"x": 100.0,
+"r0.8": "Prod_TRK_Panels",
+"r1.5": "Prod_TRK_Panels",
+"r3.0": "Prod_TRK_Panels"
+},
+{
+"x": 101.0,
+"r0.8": "Prod_TRK_Panels",
+"r1.5": "Prod_TRK_Panels",
+"r3.0": "Prod_TRK_Panels"
+},
+{
+"x": 102.0,
+"r0.8": "Prod_TRK_Panels",
+"r1.5": "Prod_TRK_Panels",
+"r3.0": "Prod_TRK_Panels"
+},
+{
+"x": 103.0,
+"r0.8": "Prod_TRK_Panels",
+"r1.5": "Prod_TRK_Panels",
+"r3.0": "Prod_TRK_Panels"
+},
+{
+"x": 104.0,
+"r0.8": "Prod_TRK_Panels",
+"r1.5": "Prod_TRK_Panels",
+"r3.0": "Prod_TRK_Panels"
+},
+{
+"x": 105.0,
+"r0.8": "Prod_TRK_Panels",
+"r1.5": "Prod_TRK_Panels",
+"r3.0": "Prod_TRK_Panels"
+},
+{
+"x": 106.0,
+"r0.8": "Crew_Trunk",
+"r1.5": "Crew_Trunk",
+"r3.0": "Crew_Trunk"
+},
+{
+"x": 107.0,
+"r0.8": "Crew_Trunk_Refuge_Rail_1",
+"r1.5": "Crew_Trunk_Refuge_Rail_1",
+"r3.0": "Crew_Trunk_Refuge_Rail_1"
+},
+{
+"x": 108.0,
+"r0.8": "Crew_Trunk",
+"r1.5": "Crew_Trunk",
+"r3.0": "Refuge_Light_1"
+},
+{
+"x": 109.0,
+"r0.8": "Crew_Trunk_Refuge_Rail_2",
+"r1.5": "Crew_Trunk_Refuge_Rail_2",
+"r3.0": "Crew_Trunk_Refuge_Rail_2"
+},
+{
+"x": 110.0,
+"r0.8": "Crew_Trunk",
+"r1.5": "Crew_Trunk",
+"r3.0": "Crew_Trunk"
+},
+{
+"x": 111.0,
+"r0.8": "Crew_Trunk",
+"r1.5": "Crew_Trunk",
+"r3.0": "Crew_Trunk"
+},
+{
+"x": 112.0,
+"r0.8": "Prod_TRK_Panels",
+"r1.5": "Prod_TRK_Panels",
+"r3.0": "Prod_TRK_Panels"
+},
+{
+"x": 113.0,
+"r0.8": "Prod_TRK_Panels",
+"r1.5": "Prod_TRK_Panels",
+"r3.0": "Prod_TRK_Panels"
+},
+{
+"x": 114.0,
+"r0.8": "Prod_TRK_Panels",
+"r1.5": "Prod_TRK_Panels",
+"r3.0": "Prod_TRK_Panels"
+},
+{
+"x": 115.0,
+"r0.8": "Prod_TRK_Panels",
+"r1.5": "Prod_TRK_Panels",
+"r3.0": "Prod_TRK_Panels"
+},
+{
+"x": 116.0,
+"r0.8": "Prod_TRK_Panels",
+"r1.5": "Prod_TRK_Panels",
+"r3.0": "Prod_TRK_Panels"
+},
+{
+"x": 117.0,
+"r0.8": "Prod_TRK_Panels",
+"r1.5": "Prod_TRK_Panels",
+"r3.0": "Prod_TRK_Panels"
+},
+{
+"x": 118.0,
+"r0.8": "Prod_TRK_Panels",
+"r1.5": "Prod_TRK_Panels",
+"r3.0": "Prod_TRK_Panels"
+},
+{
+"x": 119.0,
+"r0.8": "Prod_TRK_Panels",
+"r1.5": "Prod_TRK_Panels",
+"r3.0": "Prod_TRK_Panels"
+},
+{
+"x": 120.0,
+"r0.8": "Prod_TRK_Panels",
+"r1.5": "Prod_TRK_Panels",
+"r3.0": "Prod_TRK_Panels"
+},
+{
+"x": 121.0,
+"r0.8": "Prod_TRK_Panels",
+"r1.5": "Prod_TRK_Panels",
+"r3.0": "Prod_TRK_Panels"
+},
+{
+"x": 122.0,
+"r0.8": "Prod_TRK_Panels",
+"r1.5": "Prod_TRK_Panels",
+"r3.0": "Prod_TRK_Panels"
+},
+{
+"x": 123.0,
+"r0.8": "Trunk_Fit_Frame_20_1",
+"r1.5": "Trunk_Fit_Frame_20_1",
+"r3.0": "Trunk_Fit_Frame_20_1"
+},
+{
+"x": 124.0,
+"r0.8": "Prod_TRK_Panels",
+"r1.5": "Prod_TRK_Panels",
+"r3.0": "Prod_TRK_Panels"
+},
+{
+"x": 125.0,
+"r0.8": "Prod_TRK_Panels",
+"r1.5": "Prod_TRK_Panels",
+"r3.0": "Prod_TRK_Panels"
+},
+{
+"x": 126.0,
+"r0.8": "Prod_TRK_Panels",
+"r1.5": "Prod_TRK_Panels",
+"r3.0": "Prod_TRK_Panels"
+},
+{
+"x": 127.0,
+"r0.8": "Prod_TRK_Panels",
+"r1.5": "Prod_TRK_Panels",
+"r3.0": "Prod_TRK_Panels"
+},
+{
+"x": 128.0,
+"r0.8": "Prod_TRK_Panels",
+"r1.5": "Prod_TRK_Panels",
+"r3.0": "Prod_TRK_Panels"
+},
+{
+"x": 129.0,
+"r0.8": "Prod_TRK_Panels",
+"r1.5": "Prod_TRK_Panels",
+"r3.0": "Prod_TRK_Panels"
+},
+{
+"x": 130.0,
+"r0.8": "Prod_TRK_Panels",
+"r1.5": "Prod_TRK_Panels",
+"r3.0": "Prod_TRK_Panels"
+},
+{
+"x": 131.0,
+"r0.8": "Prod_TRK_Panels",
+"r1.5": "Crew_Trunk",
+"r3.0": "Crew_Trunk"
+},
+{
+"x": 132.0,
+"r0.8": "Prod_TRK_Panels",
+"r1.5": "Crew_Trunk",
+"r3.0": "Crew_Trunk"
+},
+{
+"x": 133.0,
+"r0.8": "Crew_Trunk",
+"r1.5": "Crew_Trunk",
+"r3.0": "Crew_Trunk"
+},
+{
+"x": 134.0,
+"r0.8": "Crew_Trunk",
+"r1.5": "Crew_Trunk",
+"r3.0": "Crew_Trunk"
+},
+{
+"x": 135.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 136.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 137.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 138.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 139.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 140.0,
+"r0.8": null,
+"r1.5": "Structural_Spine",
+"r3.0": "Structural_Spine"
+},
+{
+"x": 141.0,
+"r0.8": null,
+"r1.5": "Shield_Spine_Column",
+"r3.0": "Shield_Spine_Column"
+},
+{
+"x": 142.0,
+"r0.8": null,
+"r1.5": "Shield_Spine_Column",
+"r3.0": "Shield_Spine_Column"
+},
+{
+"x": 143.0,
+"r0.8": null,
+"r1.5": "Shield_Spine_Column",
+"r3.0": "Shield_Spine_Column"
+},
+{
+"x": 144.0,
+"r0.8": null,
+"r1.5": "Shield_Spine_Column",
+"r3.0": "Shield_Spine_Column"
+},
+{
+"x": 145.0,
+"r0.8": null,
+"r1.5": "Dust_Lance",
+"r3.0": "Dust_Lance"
+}
+],
+"radii_m": [
+0.8,
+1.5,
+3.0
+]
+}

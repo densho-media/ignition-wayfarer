@@ -188,7 +188,7 @@
    ],
    "left_out_objects": 5,
    "bow_objects": 549,
-   "aft_objects": 3628,
+   "aft_objects": 3513,
    "bow_shift_m": 275.4,
    "split_x_m": 137.9,
    "left_out_names": [
@@ -197,7 +197,8 @@
     "Fuel_Tank_O9_H2",
     "Fuel_Tank_I2_H2",
     "Fuel_Tank_I4_H2"
-   ]
+   ],
+   "hot_objects": 115
   },
   "V0": {
    "left_out_assemblies": [
@@ -206,9 +207,35 @@
    ],
    "left_out_objects": 0,
    "bow_objects": 549,
-   "aft_objects": 3633,
+   "aft_objects": 3518,
    "bow_shift_m": 122.39999999999998,
-   "split_x_m": 137.9
+   "split_x_m": 137.9,
+   "hot_objects": 115
+  }
+ },
+ "assemblies": {
+  "V4": {
+   "options": [
+    "LAUNCH_B",
+    "WINGS_PREF",
+    "COIL_P2",
+    "COIL_SUP_SIZED",
+    "SPINE_EXT",
+    "DOCK_ROUTES",
+    "B2_DOCK_CLEAR"
+   ],
+   "canon_hot_blades_shown": false
+  },
+  "V0": {
+   "options": [
+    "LAUNCH_REV1",
+    "SUP_REV1",
+    "WINGS_CALC",
+    "SPINE_EXT",
+    "DOCK_ROUTES",
+    "A_FULL"
+   ],
+   "canon_hot_blades_shown": true
   }
  },
  "canon_unchanged": {
@@ -216,20 +243,116 @@
   "identical_to_append": true
  },
  "objects": {
-  "var_objects": 1258,
+  "var_objects": 1705,
   "missing_properties": [],
   "by_status": {
-   "CONCEPTUAL_ILLUSTRATION": 264,
-   "ENGINEERING_SUPPORTED": 349,
-   "PARAMETRIC_PLACEHOLDER": 554,
-   "PROTOTYPE": 91
+   "CONCEPTUAL_ILLUSTRATION": 332,
+   "ENGINEERING_SUPPORTED": 346,
+   "PARAMETRIC_PLACEHOLDER": 634,
+   "PROTOTYPE": 393
   },
   "by_generation": {
-   "ALL": 39,
-   "V0": 408,
-   "V4": 802,
+   "ALL": 56,
+   "V0": 439,
+   "V4": 1201,
    "V5": 9
   }
  },
- "revision": 1
+ "revision": 2,
+ "rev2": {
+  "source": "rev2.json (work/vertex-blender/rev2.py) plus the placements built here",
+  "assemblies": {
+   "V4": {
+    "options": [
+     "LAUNCH_B",
+     "WINGS_PREF",
+     "COIL_P2",
+     "COIL_SUP_SIZED",
+     "SPINE_EXT",
+     "DOCK_ROUTES",
+     "B2_DOCK_CLEAR"
+    ],
+    "canon_hot_blades_shown": false
+   },
+   "V0": {
+    "options": [
+     "LAUNCH_REV1",
+     "SUP_REV1",
+     "WINGS_CALC",
+     "SPINE_EXT",
+     "DOCK_ROUTES",
+     "A_FULL"
+    ],
+    "canon_hot_blades_shown": true
+   }
+  },
+  "launcher_B_breech_plug_fwd_end_to_crew_trunk_m": 4.619910195262094,
+  "launcher_B_snout_tip_x_m": -204.13947536652566,
+  "launcher_B_tip_to_burn_m": 45.0,
+  "launcher_B_snout_to_C1_envelope_radial_m": 16.7261568447631,
+  "launcher_C_line_to_thrust_ring_inner_m": 0.1596383677013229,
+  "skirt_B2_edge_to_dock_corridor_m": 3.5999999999999943,
+  "skirt_B2_crosses_bypass_collar": true,
+  "graded_hot_band_to_ring_A_m": 46.25,
+  "canon_hot_blade_objects_left_out_of_V4": 115,
+  "spine_extension_m": 275.4,
+  "launcher_options": {
+   "REV1": {
+    "status": "FAILED",
+    "accelerator_m": 20.0,
+    "exit_speed_m_s": 13386.408771454959,
+    "accel_g": 456822.51277573453,
+    "shell_stress_MPa": 48.302359799637166,
+    "stress_margin": [
+     0.06210876678581105,
+     0.07453052014297326
+    ],
+    "targets_in_barrel": 0.5848853173039349,
+    "electric_W": 108389951.49693142,
+    "line_of_sight_m": 68.38947536652566
+   },
+   "A": {
+    "status": "CANDIDATE",
+    "accelerator_m": 269.44008926903405,
+    "exit_speed_m_s": 12664.118636990393,
+    "accel_g": 30348.48778034741,
+    "shell_stress_MPa": 3.2089127290030937,
+    "stress_margin": [
+     0.9348961013757466,
+     1.1218753216508959
+    ],
+    "targets_in_barrel": 8.328984416112723,
+    "electric_W": 97008725.16502523,
+    "line_of_sight_m": 64.69938609749164
+   },
+   "B": {
+    "status": "PREFERRED",
+    "accelerator_m": 289.13947536652563,
+    "exit_speed_m_s": 8808.203184584187,
+    "accel_g": 13680.960486165737,
+    "shell_stress_MPa": 1.446563287330392,
+    "stress_margin": [
+     2.0738809191932757,
+     2.488657103031931
+    ],
+    "targets_in_barrel": 12.850643349623363,
+    "electric_W": 46928373.82470386,
+    "line_of_sight_m": 45.0
+   },
+   "C": {
+    "status": "REJECTED",
+    "accelerator_m": 64.69938609749164,
+    "exit_speed_m_s": 12677.725371688302,
+    "accel_g": 126657.77320912632,
+    "shell_stress_MPa": 13.392223810938756,
+    "stress_margin": [
+     0.22401059318838468,
+     0.2688127118260616
+    ],
+    "targets_in_barrel": 1.9978534422699685,
+    "electric_W": 97217295.71535726,
+    "line_of_sight_m": 64.76890119024944
+   }
+  }
+ }
 }
