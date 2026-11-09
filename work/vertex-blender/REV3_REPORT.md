@@ -155,6 +155,14 @@ Passive radiation would need about 3,600 K, so the P2 armour needs a pumped loop
   per-area fluence, 3-62× REBCO tolerance (T02).
 - **Booking it** needs a closure-coil share in a Vertex adapter (T00 X-T06-3).
 
+**Update 2026-11-09 18:00Z (T00 `e24fc7a`).** T00 now books the coil heat in the Vertex adapter (case
+`V4_coil_booking` in `results/convergence.json`), as a proxy through `plume_to_hardware` on the same 1,800 K hot loop.
+V4 departure mass: 43,211 t at the T03 basis of 11.9 GW (+0.7 %; radiators 3,620 t, hot area 0.476 km², wing tip
+10,218 m), 43,301 t at 15.5 GW, 43,668 t at the 30.1 GW upper case (+1.8 %, wing tip 10,359 m). The booking covers
+the heat only. The cooling plant (about 24 MW of pumping, tin inventory, lines and pumps) stays a T05 item and is
+still unsized. ISS-014 moves from "unbooked" to "booked heat, plant open", and drops below the stretch-stiffness
+blocker in section 6.
+
 ## 5. Kept
 
 - **Every Rev 2 alternative** is still in `OPT_VERTEX_V4_*`: radiator layouts, the canon blades in the Rev 1 layout, launchers
