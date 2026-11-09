@@ -31,7 +31,7 @@ a.add_argument('--out', type=Path, default=HERE/'REVIEW_VERTEX_BLENDER.blend')
 a.add_argument('--render', type=Path); a.add_argument('--cams', nargs='+'); a.add_argument('--size', type=int, nargs=2, default=(2560, 1440))
 a.add_argument('--ship-cache', default='/tmp/wayfarer_vertex_ship_local.blend')
 a.add_argument('--no-save', action='store_true'); a.add_argument('--no-ship', action='store_true')
-a.add_argument('--rays', type=int, default=2000000)
+a.add_argument('--rays', type=int, default=2000000); a.add_argument('--kernel-rays', type=int, default=600000)
 a = a.parse_args(sys.argv[sys.argv.index('--')+1:] if '--' in sys.argv else [])
 REV2 = json.loads((Path(__file__).resolve().parent/'rev2.json').read_text())     # python3 work/vertex-blender/rev2.py writes it
 CANON2 = REV2['canon']
@@ -2109,7 +2109,7 @@ if 'CANON' in ships:
 # ----------------------------------------------------------------------------------------------------------------------------------
 # Rev 4 geometry check for T00: X-ray interception shares from the burn point, ray-cast on the drawn V4 hardware (first hit per ray)
 # ----------------------------------------------------------------------------------------------------------------------------------
-def raycast_shares(n_rays, asm):
+def raycast_shares(n_rays, asm, kernel=None):
     from mathutils.bvhtree import BVHTree
     from mathutils import Vector
     xB = e4['x_burn_m']; origin = Vector((xB, 0.0, 0.0))
@@ -2160,14 +2160,40 @@ def raycast_shares(n_rays, asm):
     shares = {k: v/n_rays for k, v in sorted(hits.items(), key=lambda kv: -kv[1])}
     sig = {k: math.sqrt(v)/n_rays for k, v in hits.items()}
     top = sorted(per_obj.items(), key=lambda kv: -kv[1])[:40]
-    return {'n_rays_full_sphere': n_rays, 'rays_cast': kept, 'objects_in_bvh': len(obs), 'shares_of_4pi': shares, 'one_sigma': sig,
+    if kernel:                                             # near-axis exposure kernel: rays uniform in solid angle to polar kmax, binned by polar angle
+        kmax, nk = kernel; cmin = math.cos(math.radians(kmax)); bins = {}
+        for i in range(nk):
+            zc = 1.0-(1.0-cmin)*(i+0.5)/nk; rr = math.sqrt(max(0.0, 1.0-zc*zc)); t = ga*i
+            d = Vector((zc, rr*math.cos(t), rr*math.sin(t)))
+            th = math.degrees(math.acos(zc)); b = min(int(th/0.5), int(kmax/0.5)-1)
+            loc, nrm, idx, dist = bvh.ray_cast(origin, d, 5000.0)
+            B = bins.setdefault(b, {'rays': 0, 'hit': {}, 'obj': {}, 'dist': {}})
+            B['rays'] += 1
+            k = 'NO_HIT' if idx is None else cat(owner[idx])
+            B['hit'][k] = B['hit'].get(k, 0)+1
+            if idx is not None:
+                B['obj'][owner[idx]] = B['obj'].get(owner[idx], 0)+1; B['dist'][k] = B['dist'].get(k, 0.0)+dist
+        dom = 2*math.pi*(1.0-cmin)/(4*math.pi)               # this ray set's share of 4 pi
+        kern = []
+        for b in sorted(bins):
+            B = bins[b]; th0, th1 = 0.5*b, 0.5*b+0.5
+            sh_bin = (math.cos(math.radians(th0))-math.cos(math.radians(th1)))/2.0      # bin share of 4 pi
+            kern.append({'polar_deg': [th0, th1], 'bin_share_of_4pi': sh_bin,
+                         'first_hit_fraction': {k: v/B['rays'] for k, v in sorted(B['hit'].items(), key=lambda kv: -kv[1])},
+                         'mean_hit_distance_m': {k: B['dist'][k]/B['hit'][k] for k in B['dist']},
+                         'top_objects': [o for o, _ in sorted(B['obj'].items(), key=lambda kv: -kv[1])[:6]]})
+        kernel_out = {'max_polar_deg': kmax, 'rays': nk, 'ray_set_share_of_4pi': dom, 'bins': kern,
+                      'use': 'multiply first_hit_fraction x bin_share_of_4pi x (escaping energy per unit solid angle in that bin x 4 pi) to get the energy on each part'}
+    else:
+        kernel_out = None
+    return {'axis_kernel': kernel_out, 'n_rays_full_sphere': n_rays, 'rays_cast': kept, 'objects_in_bvh': len(obs), 'shares_of_4pi': shares, 'one_sigma': sig,
             'top_objects': [{'object': o, 'share': v/n_rays} for o, v in top],
             'scope': 'V4 chosen assembly (ASM_V4), T05 hardware objects only; canon ship parts not included; first hit per ray from the burn point'}
 
 
 import time as _time
 _t0 = _time.time()
-RC = raycast_shares(a.rays, ASM['V4']) if a.rays else None
+RC = raycast_shares(a.rays, ASM['V4'], kernel=(30.0, a.kernel_rays) if a.kernel_rays else None) if a.rays else None
 RC3 = raycast_shares(a.rays, ASM['V4_REV3']) if a.rays else None
 if RC:
     print('WF_RAYCAST', f'{_time.time()-_t0:.1f}s', json.dumps(RC['shares_of_4pi'])[:600], flush=True)
@@ -2182,6 +2208,7 @@ if RC:
            'raycast_W_at_escape': {k: v*esc for k, v in RC['shares_of_4pi'].items()},
            'raycast_rev3_W_at_escape': {k: v*esc for k, v in RC3['shares_of_4pi'].items()}}
     (HERE/'rev4_geometry.json').write_text(json.dumps(geo, indent=1, default=float))
+
     CHECKS['rev4_raycast'] = {'shares_of_4pi': RC['shares_of_4pi'], 'rev3_chosen_shares_of_4pi': RC3['shares_of_4pi'], 'n': RC['n_rays_full_sphere']}
 
 VAR_OBJS = [o for o in bpy.data.objects if o.get('wf_owner') == 'wayfarer.t05']
@@ -2264,6 +2291,23 @@ _bray = _hw(O4['LAUNCH_BRAY'])
 _NOTHW = ('Shadow_Cone', 'KeepOut', '_Path', 'Ignition_Point', 'Plasma_Expansion')
 _v4hw = [o for o in _v4hw if o.get('evidence_status') != 'CONCEPTUAL_ILLUSTRATION' and not any(k in o.name for k in _NOTHW)]
 _bray_others = [o for o in _v4hw+_hw(O4['STRUCT_S5N'])+_hw(O4['COIL_SUP_R4']) if not o.name.split('_', 2)[2].startswith(('LB_', 'LBM_'))]
+def near_axis_parts(objs, deg=15.0):
+    xB_ = e4['x_burn_m']; out = []
+    for o in objs:
+        mw = o.matrix_world; best = None
+        for v in o.data.vertices:
+            p_ = mw @ v.co; dx = p_.x-xB_
+            if dx <= 0.5:
+                continue
+            th = math.degrees(math.atan2(math.hypot(p_.y, p_.z), dx))
+            if best is None or th < best[0]:
+                best = (th, math.sqrt(dx*dx+p_.y*p_.y+p_.z*p_.z), p_.x)
+        if best and best[0] < deg:
+            out.append({'object': o.name, 'function': o.get('function'), 'status': o.get('evidence_status'), 'min_polar_deg': round(best[0], 3),
+                        'distance_at_min_m': round(best[1], 2), 'x_at_min_m': round(best[2], 2)})
+    return sorted(out, key=lambda r: r['min_polar_deg'])
+
+
 CHECKS['rev4_launcher'] = {
     'axis_channel_deg': 6.0,
     'V4_chosen_hardware_in_axis_channel': in_axis_channel(_v4hw),
@@ -2273,6 +2317,10 @@ CHECKS['rev4_launcher'] = {
     'B_ray_mount_overlaps_are_intended_attachments': ['LBR_Mount_C1_Strut_Ring', 'LBR_Mount_Shield_Frame'],
     'note': 'BVH triangle overlap on drawn hardware (VIS keep-outs, concept illustrations and paths excluded from the partner set); canon objects are not tagged wayfarer.t05 and are not in this set',
 }
+if RC and RC.get('axis_kernel'):
+    (HERE/'axis_kernel.json').write_text(json.dumps({'version': 'axis_kernel v1 (feasibility gate, T05 geometry support for ISS-022)', 'built_on_commit': _head,
+        'origin': 'burn point X %.2f m on the axis' % e4['x_burn_m'], 'scope': RC['scope'], 'kernel': RC['axis_kernel'],
+        'parts_within_15deg': near_axis_parts(_v4hw), 'x_shield_aft_m': e4['x_shield_aft_m'], 'shield_r_hw_m': e4['shield_r_hw_m']}, indent=1, default=float))
 pb = R4['shield']['streaming']['pellet_bore']['plug_length_m']; c1 = e4['closure_coils'][0]; LB = P4['B']; LC = P4['C']
 CHECKS['rev2'] = {
     'source': 'rev2.json (work/vertex-blender/rev2.py) plus the placements built here',
