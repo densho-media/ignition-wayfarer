@@ -15,6 +15,9 @@ HARDWARE is physical equipment, VISUALIZATION is an overlay (fields, flows, cone
 | V0 | 20,760 | 37.4, 64.8, 112.2 | 9.6 | 430 | 1.84 | 3,573 | 43.2 |
 | V1 | 10,416 | 37.3, 64.7, 112.0 | 7.9 | 353 | 0.32 | 653 | 43.1 |
 | V2 | 9,272 | 37.3, 64.7, 112.0 | 7.9 | 352 | 0.17 | 356 | 43.1 |
+| V3 | does not close | | | | | | |
+| V4 | 42,916 | 56.0, 97.0, 168.1 | 5.5 | 514 | 4.95 | 10,128 | 64.7 |
+| V5 | 19,442 | 37.3, 64.5, 111.8 | 7.9 | 359 | 1.54 | 3,267 | 43.0 |
 
 ## Engineering-supported
 
@@ -32,10 +35,15 @@ HARDWARE is physical equipment, VISUALIZATION is an overlay (fields, flows, cone
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | VTX-01B | three driver galleries, nine beam lines, folded arcs, pulse storage, final-focus ports | Galleries 444 m of linac folded twice along the hull; FDP-1 r 12-14 m, proposed r <= 6.5 m. | Along the aft body between the radiator planes; ports in the shadow shield. | Pulse storage in the equipment module; beams through VTX-06A shield ports to the burn. | Gallery trusses; negligible thrust load. | Final focus sees the burn through the ports; dog-leg beam dumps behind. | Warm loop (driver losses). | Galleries are pressurised-free trusses with access along the hull; final optics robotic cartridges. | P05, P09, P14 | POWER | HARDWARE |
 | VTX-01C | target factory, magazines (3,000 pellets), two gas-gun injectors, tracking stations | Inside the 36 m x r 6.5 m equipment module (FDP-1 placeholder). | Equipment module, on axis, breech behind the shield plug. | Feeds from the D and He-3 vessels; electricity; low loop. | Small. | Shadowed by the crew-core shield and plug. | Low loop (cryogenics), warm loop (electronics). | Pressurisable work volume; spare injector. | P01, P03, P10 | MAIN_PROPULSION | HARDWARE |
+| VTX-01G | fast-ignitor beam line, tritium store in the equipment module | Ignitor beam on the bore axis beside the target path; tritium store volume UNKNOWN. | Equipment module, bore axis. | VTX-01B, VTX-01H. | none | Behind the shadow shield. | Warm loop. | Tritium handling. | P03 | MAIN_PROPULSION | HARDWARE |
+| VTX-01H | target launcher barrel on the bore axis, sabot catcher behind the shield | Muzzle at the shield face; path to the burn 46.6 m (V0) to 68-83 m (V4). | Bore axis, equipment module. | VTX-01C, VTX-01B. | Launch recoil. | Muzzle inside the shadow cone. | Warm loop. | Barrel and catcher replacement. | P03 | MAIN_PROPULSION | HARDWARE |
 | VTX-02A | lattice carriers on the outer (burn-shadowed) 70 deg band of each loop | Band on each loop envelope (FDP-1 placeholder). | Nozzle loops. | Loop cryostat. | Carried by the loop structure. | Behind the loop armour. | Temperature-controlled; heat to the hot loop. | Replaceable carriers. | P05 | MAIN_PROPULSION | HARDWARE |
 | VTX-02B | sector windings, sector joints, current leads, quench dump resistors | Inside the 0.21 m loop envelope. | Nozzle loops. | Leads and cryogen along the struts. | Hoop stress, inter-loop attraction. | Behind armour. | Low loop. | Sector swap. | P05, P06 | MAIN_PROPULSION | HARDWARE |
 | VTX-02C | pickup windings in the loop cryostats, power lines along the struts, pulse storage | Inside loop envelopes; storage 151 t in the equipment module. | Loops and equipment module. | VTX-01B driver, VTX-07C house loads. | Small. | Behind armour. | Hot loop (recovery loss), warm loop (conversion). | With the sectors. | P09 | POWER | HARDWARE |
+| VTX-02D | thinner loop hoops, lighter wing spars, lighter gallery trusses | none | none | none | none | none | none | none | - | STRUCTURE | HARDWARE |
 | VTX-03A | twelve sector joints clocked 45 deg loop to loop | No new envelope. | Nozzle loops. | VTX-02B. | Small asymmetric hoop loads. | None new. | Joint heat. | Sector swap. | P05 | MAIN_PROPULSION | HARDWARE |
+| VTX-03D | closure coil C1, closure coil C2, warm eddy screens | Nozzle frame x = x_burn + z, x_burn about -227.5 m (V1): C1 r 14.74 m at z +40.51 (envelope r 2-3.2 m), C2 r 27.71 m at z +33.03. | Forward of the burn on the stand-off sphere, inside the shadow cone. | VTX-03, VTX-02B, struts. | 0.2-1.9 GN axial; 3-7 GN hoop. | Inside the burn's sky: armour and screens. | Hot loop (plasma on hardware), cryogenic windings. | Sector replacement (VTX-03E). | P05, P06 | MAIN_PROPULSION | HARDWARE |
+| VTX-03E | none | Six separable sectors per loop at the FDP-1 arcs; replacement path to the hull. | none | none | none | none | none | none | P05, P06 | MAIN_PROPULSION | HARDWARE |
 | VTX-04D | enriched layers in the shadow shield | Inside the shield. | Shadow shield. | VTX-06A. | Shield frame. | Captures neutrons. | Shield heating to the hot loop. | None. | P11 | SHIELD | HARDWARE |
 | VTX-05 | diagnostic ring on loop 1, shield-rim sensor ports, control racks in the equipment module | Small. | Loop 1, shield rim, equipment module. | VTX-01B, VTX-01C, VTX-02B. | None. | Sensors see the burn: radiation-hard or sacrificial. | Warm loop. | Replaceable sensor cartridges. | P09 | SENSORS_COMMS | HARDWARE |
 | VTX-05A | tracking stations along the pellet path, beam steering in final focus | Small. | Equipment module, shield ports. | VTX-01B, VTX-01C. | None. | Behind shield where possible. | Warm loop. | Cartridges. | P09 | SENSORS_COMMS | HARDWARE |
@@ -44,7 +52,10 @@ HARDWARE is physical equipment, VISUALIZATION is an overlay (fields, flows, cone
 | VTX-07 | two warm wings, hot root bands, manifolds, droplet generators and collectors if VTX-07B | Wings 0.17-1.84 km2, tip radius 0.33-3.6 km by generation. | Port/starboard plane, roots near the attach plane. | All warm loads. | Deployment and manoeuvre loads (unresolved). | Edge-on to the burn. | Warm and hot loops. | Panel and generator exchange. | P12, P13 | WARM_RADIATOR | HARDWARE |
 | VTX-07A | second warm manifold, split radiator bands | Within the wings. | Wings. | VTX-01B, VTX-01C, VTX-02C. | None. | Edge-on. | Warm loop A (600 K), warm loop B (700-800 K). | As wings. | P12, P13 | WARM_RADIATOR | HARDWARE |
 | VTX-07D | wing spars, hinge roots, edge bumpers | Tip radius from results/convergence.json per generation. | Port/starboard plane. | VTX-07A. | Deployment. | Edge-on. | Warm and hot root band. | Panel exchange. | P13, P14 | WARM_RADIATOR | HARDWARE |
+| VTX-07E | warm wing circuit bands (1,000 / 740 / 700 / 640 / 550 K) | W2 wings at azimuth 0 and 180 deg, x -178.75 to +88.0 m, root r 10 m; planning tip r 1,088 m, bracket 460-1,688 m. | Wings on the equipment module. | VTX-07A, VTX-07B, VTX-07D. | Wing spars. | Edge-on to the burn. | Warm circuits. | Panel or sheet replacement. | P12, P13 | WARM_RADIATOR | HARDWARE |
+| VTX-07F | hot root bands (thinner panels, same area) | none | none | none | none | none | none | none | - | HOT_RADIATOR | HARDWARE |
 | VTX-08A | bumper layers on loop leading faces (both sides), wing edge bumpers | Loop frontal areas about 100, 175 and 300 m2 (FDP-1 loops). | Loops, wings. | VTX-02, VTX-07D. | Carried by loops. | In the burn's sky (added solid angle). | Hot loop if exposed to the burn. | Replaceable. | P14 | SHIELD | HARDWARE |
+| VTX-08F | none | Guard rings ~0.8 m wide, 20-25 m forward of loops 2 and 3 at r 64.7 / 112.0 m; local bumpers <= 2 m on every loop, strut and feed outside r 45 m. | none | none | none | none | none | none | - | SHIELD | HARDWARE |
 
 ## Conceptual illustration
 
@@ -60,12 +71,17 @@ HARDWARE is physical equipment, VISUALIZATION is an overlay (fields, flows, cone
 | VTX-08 | loop and wing edge bumpers, engine-side bow shield, dust sensors | Per technology. | Forward shield, nozzle loops, wing edges, shadow shield. | VTX-02, VTX-06, VTX-07D. | Impact impulse; bumper mass on loops. | Bumpers in the burn's sky add solid angle. | Bumpers heated by the burn if exposed. | Bumper replacement between burns. | P14, P11 | SHIELD | HARDWARE |
 | VTX-08B | engine-side sensor heads | Small. | Shadow-shield rim (engine side). | Canon EYE. | None. | Burn-facing: must be stowed during burns or shielded. | Warm loop. | Cartridges. | P09 | SENSORS_COMMS | HARDWARE |
 | VTX-08D | engine-side shield (concept), braking-orientation shadow overlay | Not supportable. | Aft of the nozzle or at the shadow shield. | VTX-06A. | Thrust path. | In the burn's sky unless inside the hardware cone. | Hot loop if exposed. | Between burns. | P14 | SHIELD | MIXED |
+| VTX-08E | none | apex (-227.54, 0, 0); half-angle 7.94 deg (V1/V2), 9.60 deg (V0); r 7.2-45 m, x -175.8 to +95.1 m (V1). Canon form: flat annulus x -98 m, r 5.7-45 m, 6,260 m2, 6-31 t. | none | none | none | none | none | none | - | SHIELD | HARDWARE |
 
 ## No geometry
 
 | ID | Components | Envelope | Location | Connections | Loads | Radiation | Thermal | Maintenance | PMDS purposes | Colour | Repr. |
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | VTX-01D | none | No new geometry; the target changes. | Target. | VTX-04A, VTX-06A. | None. | Adds 14.1 MeV neutrons. | Hot loop via shield and loops. | Tritium handling in the target factory. | P11 | MAIN_PROPULSION | NONE |
+| VTX-01E | none | none | none | none | none | none | none | none | - | MAIN_PROPULSION | NONE |
+| VTX-01F | none | none | none | none | none | none | none | none | - | MAIN_PROPULSION | NONE |
+| VTX-01I | none | none | none | none | none | none | none | none | - | MAIN_PROPULSION | NONE |
+| VTX-03F | none | none | none | none | none | none | none | none | P05, P06 | MAIN_PROPULSION | NONE |
 | VTX-04A | none | None: a target layer. | Target. | VTX-01C. | None. | Absorbs part of the escape. | Small hot-loop reduction. | None. | P11 | HYDROGEN | NONE |
 | VTX-07C | none | None. | Equipment module. | VTX-01C. | None. | None. | Warm loop. | None. | P09 | POWER | NONE |
 | VTX-08C | none | None. | None. | VTX-02. | None. | None. | None. | None. | - | SHIELD | VISUALIZATION |

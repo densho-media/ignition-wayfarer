@@ -11,7 +11,9 @@ the 3D model. It is a lab variant (see `../../README.md`): nothing here is canon
 | `registry/technologies.toml` | the registry: 8 workstreams (VTX-01..08) and their technologies, one record each, stable IDs |
 | `registry/sources.toml` | every cited source with finding, limits, relation and PMDS verification state |
 | `registry/links.toml` | positive and negative interactions between technologies |
-| `registry/generations.toml` | Vertex 0 (FDP-1), Vertex 1 (advanced engineering), Vertex 2 (canon-bounded Fiji), each change tied to a technology |
+| `registry/generations.toml` | historical V0 (FDP-1), V1, V2 (2026-11-08, conditional) and corrected V3 (planning), V4 (research target), V5 (bound), each change tied to a technology |
+| `studies/` | the thread studies T01 thermal, T02 dust, T03 nozzle, T04 ignition, T06 futures (each owned by its thread) |
+| `results/history/` | frozen earlier results, never regenerated |
 | `registry/decisions.toml` | technical conclusions vs owner approvals (canon, experiments) |
 | `atlas.py` | validator and generator: `validate`, `render` |
 | `convergence.py` | runs the generations through the FDP-1 calculator; benchmarks, thresholds, sensitivity bands, VTX-04 studies |

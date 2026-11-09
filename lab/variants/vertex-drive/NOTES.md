@@ -4,10 +4,11 @@
 | Kind | Variant |
 | Status | ACTIVE |
 | Question | Which technologies could make a pulsed fusion Vertex Drive credible for Wayfarer, what would each need, and how far do they get the ship? |
+| Phase 4 (2026-11-09) | T01 thermal, T02 dust, T03 nozzle, T04 ignition and T06 convergence integrated; V0-V2 kept as HISTORICAL_CONDITIONAL; corrected V3 (planning), V4 (preferred research target), V5 (bound). See planning/INTEGRATION_REPORT_PHASE4.md. |
 | Model base | main 279a612 (FDP-1 calculator as on main) |
 | Salvaged from | claude/project-thread-dqcppt, 2026-11-08 |
-| Open owner questions | D-04 idle H2 vessels; D-05 deployable warm wings; D-06 engine-first braking through dust; D-07 open Fiji lattice parameters; D-08 Vertex vs canon drive topology; D-09 nozzle MHD study; D-10 Blender blockout; D-11 Drive record. |
-| Review | REPORT.md, ATLAS.md, READINESS.md (this folder) |
+| Open owner questions | D-05 deployable warm wings; D-06 engine-first braking through dust; D-07 open Fiji lattice parameters; D-09 full nozzle MHD/PIC; D-15 destination; D-17 heading; D-18 sector replacement vs Level C conductor; D-21 bounded 2D nozzle simulation (prepared, not launched); D-04 stays open in canon. Decided 2026-11-09: D-08 and D-11 not approved, D-10 in principle, D-13/14/16/19/20/22-25. |
+| Review | REPORT.md, ATLAS.md, READINESS.md, CONVERGENCE.md (this folder); planning/INTEGRATION_REPORT_PHASE4.md |
 
 # Vertex Drive Technology Atlas: notes
 

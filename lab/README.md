@@ -20,7 +20,7 @@ Status: ACTIVE, PARKED, SUPERSEDED (by which entry) or PROMOTED (into which `mai
 | [redesign-layout](variants/redesign-layout/NOTES.md) | Variant | SUPERSEDED by TANK-AXIAL (90df1a9) | 343.5 m split-storage layout | 702ff62 | none |
 | [four-burn-mission](studies/four-burn-mission/NOTES.md) | Study | ACTIVE, engine of fdp1 | What drive and ship fly four 0.016 c burns, by tier | 92b83f0 | which tier to design to |
 | [graded-thermal-blade](studies/graded-thermal-blade/NOTES.md) | Study | PROMOTED 1f9eba1, kept as a tool | Radiator view-factor Monte Carlo and blade concepts | 90df1a9 | none |
-| [vertex-drive](variants/vertex-drive/NOTES.md) | Variant | ACTIVE | Technology atlas for a Vertex pulsed drive: records, generations V0-V2, convergence | 279a612 | D-04 to D-11: H2 vessels, deployable wings, braking dust, Fiji parameters, topology |
+| [vertex-drive](variants/vertex-drive/NOTES.md) | Variant | ACTIVE | Technology atlas for a Vertex pulsed drive: 47 records, historical V0-V2, corrected V3-V5, thread studies T01-T04/T06 | 279a612 | D-06 braking dust, D-15/D-17 destination and heading, D-18 sector replacement, D-21 2D nozzle simulation, D-05, D-07, D-09 |
 | [fdp1-requirements](problems/fdp1-requirements/NOTES.md) | Problem map | ACTIVE | Where FDP-1 fails: 0.016 c x4 closes, 1 g does not | e251f7c | V3 review; P11; shield mass OD-014 |
 
 Each entry's `NOTES.md` opens with the same table: kind, status, question, model base, the branch it came from, open owner

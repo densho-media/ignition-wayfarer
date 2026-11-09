@@ -6,6 +6,8 @@
 #             conflicts (the two cannot both be used as specified) | shares (common hardware or loop)
 #   effect    what happens, in words
 #   quantified  a case name in results/convergence.json that measures it, or "UNKNOWN" (never a guessed number)
+# Phase 4 integration 2026-11-09: written by planning/integrate_phase4.py from the 8de3ffa registry and the thread proposals.
+
 
 [[link]]
 from = "VTX-02A"
@@ -209,3 +211,108 @@ to = "VTX-08"
 kind = "improves"
 effect = "Retracted wings sit in the shield shadow during coast."
 quantified = "UNKNOWN"
+
+[[link]]
+from = "VTX-01H"
+to = "VTX-01C"
+kind = "conflicts"
+effect = "FDP-1's 400 m/s gas-gun injection with 12.5 targets in flight cannot coexist with 81 GJ pulses; a 400 m/s launcher allows about 1 Hz."
+quantified = "study:thermal:S1_advanced_eta0.30_vinj400"
+
+[[link]]
+from = "VTX-07C"
+to = "VTX-01B"
+kind = "shares"
+effect = "Once the house load is booked bottom-up (0.003-0.014 %), driver-proportional loss is 75-95 % of the warm load: driver efficiency, not the house, sets the wings."
+quantified = "study:thermal:S1_advanced_eta0.30"
+
+[[link]]
+from = "VTX-07B"
+to = "VTX-07A"
+kind = "enables"
+effect = "Only a droplet sheet reaches about 1 kg/m2 above 520 K; on halide or alkali heat-pipe panels (5-6 kg/m2) V1 grows to 50.6 kt at 700 K."
+quantified = "study:thermal:V1_areal_by_band_700K"
+
+[[link]]
+from = "VTX-07D"
+to = "VTX-08"
+kind = "worsens"
+effect = "Wing tip radius per case (T02 exposure): 460 m (advanced, eta 0.45) to 1,688 m (advanced, eta 0.25); 1.7-2.3 km if near-term components are flown at 0.5-1.0 kg/m2."
+quantified = "study:thermal:S1_advanced_eta0.45"
+
+[[link]]
+from = "VTX-08E"
+to = "VTX-08D"
+kind = "improves"
+effect = "The skirt is the quantified form of the engine-side shield inside the hardware cone."
+quantified = "UNKNOWN"
+
+[[link]]
+from = "VTX-03E"
+to = "VTX-03"
+kind = "enables"
+effect = "Loop sectors must be separable and the nozzle must tolerate a lost sector."
+quantified = "UNKNOWN"
+
+[[link]]
+from = "VTX-08F"
+to = "VTX-03"
+kind = "worsens"
+effect = "Burn-facing bumpers and LiH shoes add burn solid angle (shoes +0.0127 share vs the V1 ship's 0.0168)."
+quantified = "UNKNOWN"
+
+[[link]]
+from = "VTX-01A"
+to = "VTX-01"
+kind = "conflicts"
+effect = "Compression and gain are one lever (T04 EARLY bound G <= 1,787 x eta_c/alpha x (rho/3,000)^(-2/3)): denser fuel lowers the gain a driver can reach. The Atlas pair (3,000 g/cm3, gain 3,000) needs eta_c/alpha 1.68 and is not energy-consistent; 6,000 g/cm3 at gain 3,000 needs 2.66."
+quantified = "study:futures:consistency"
+
+[[link]]
+from = "VTX-07A"
+to = "VTX-01"
+kind = "enables"
+effect = "Under the gain-compression bound the engineering package decides whether a ship exists: at eta_c/alpha 0.3, V1c (Atlas engineering) closes only at 161 kt, the full T06 package at 10.3 kt; at 0.2 V1c does not close and the package closes at 13.3 kt. Shared with VTX-01B, VTX-07B, VTX-07C, T06-NEW-1, T06-NEW-2."
+quantified = "study:futures:consistency.frontier"
+
+[[link]]
+from = "VTX-01A"
+to = "VTX-01C"
+kind = "worsens"
+effect = "Where density is raised at fixed gain the pulse rate rises (133 to 449 Hz in K4); under the bound the consistent optimum is the opposite, lower density and larger, slower pulses (44 t TNT at 57-94 Hz in V3), which loosens the factory and the launcher but enlarges the nozzle (outer loop r 169 m)."
+quantified = "study:futures:proposals.V3"
+
+[[link]]
+from = "VTX-02D"
+to = "VTX-02"
+kind = "improves"
+effect = "Doubling specific strength halves the virial nozzle structure; small for the whole ship (K5 -9 %)."
+quantified = "study:futures:chains.K5"
+
+[[link]]
+from = "VTX-07F"
+to = "VTX-07"
+kind = "improves"
+effect = "Halving hot-panel areal mass saves about 4 % on V1c."
+quantified = "study:futures:chains.K2"
+
+[[link]]
+from = "VTX-02C"
+to = "VTX-07"
+kind = "improves"
+effect = "Revision: at gain 3,000 the recirculating power is about 0.1 % of fusion, so recovery efficiency barely matters (0.90 to 0.98 moves V1c by 0.4 %). Its value is in pulse storage sizing, not mass."
+quantified = "study:futures:elasticities"
+
+[[link]]
+from = "VTX-03D"
+to = "VTX-06A"
+kind = "worsens"
+quantified = "UNKNOWN"
+effect = "Closure coils raise the hardware solid angle from 0.017 to 0.040-0.051 (x2.4-3.0 radiation on hardware); not booked in the calculator."
+
+[[link]]
+from = "VTX-01E"
+to = "VTX-01H"
+kind = "worsens"
+quantified = "V4_launcher_sweep"
+effect = "Compression-consistent targets give larger, slower pulses and a longer injection path: V4 needs a launcher of at least 12 km/s; at 6 km/s it does not close."

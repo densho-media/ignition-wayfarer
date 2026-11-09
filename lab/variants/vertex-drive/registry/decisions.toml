@@ -2,6 +2,8 @@
 #   type  TECHNICAL_CONCLUSION (a finding the Atlas states; the owner may challenge it) | OWNER_APPROVAL_CANON (changes canon or the ship,
 #         needs the owner) | OWNER_APPROVAL_EXPERIMENT (authorises a study, Blender work or Drive change)
 #   state OPEN | DECIDED
+# Phase 4 integration 2026-11-09: written by planning/integrate_phase4.py from the 8de3ffa registry and the thread proposals.
+
 
 [[decision]]
 id = "D-01"
@@ -9,7 +11,7 @@ type = "TECHNICAL_CONCLUSION"
 state = "DECIDED"
 technologies = ["VTX-03", "VTX-03A", "VTX-03C"]
 question = "What form may a helical field take?"
-conclusion = "Magnetic shear only, by clocking the trim sectors (m = 4 harmonic), with balanced helicity. A net swirl about the axis needs axial current in the plasma (Ampere) and would spin the exhaust (1 % swirl about 2.8e5 N m roll, 11x the RCS couple)."
+conclusion = "Magnetic shear only, by clocking the trim sectors (m = 4 harmonic), with balanced helicity. A net swirl about the axis needs axial current in the plasma (Ampere) and would spin the exhaust (1 % swirl about 2.8e5 N m roll, 11x the RCS couple). | T03 2026-11-09: supported and refined: sector clocking gives under 1 deg of shear; the harmonic is m = 2 (trim) / m = 4 (gaps, no handedness)."
 
 [[decision]]
 id = "D-02"
@@ -17,7 +19,7 @@ type = "TECHNICAL_CONCLUSION"
 state = "DECIDED"
 technologies = ["VTX-04", "VTX-04A"]
 question = "Does a sacrificial liner or tamper help at the mission exhaust velocity?"
-conclusion = "No with the current target model: the four-burn optimiser and the Atlas liner study both find the best tamper is essentially zero. Reopened only through D-T spark targets (VTX-01D) and an unmodelled burnup gain."
+conclusion = "No with the current target model: the four-burn optimiser and the Atlas liner study both find the best tamper is essentially zero. Reopened only through D-T spark targets (VTX-01D) and an unmodelled burnup gain. | T04 2026-11-09 amendment: no tamper raises ve by more than about 1 % at the mission rhoR even with tamper inertia; up to 10 % only below 10 g/cm2."
 
 [[decision]]
 id = "D-03"
@@ -25,7 +27,7 @@ type = "TECHNICAL_CONCLUSION"
 state = "DECIDED"
 technologies = ["VTX-05", "VTX-05A"]
 question = "Where does fast pulse control act?"
-conclusion = "On the target and driver side only. Superconducting loops cannot be trimmed between pulses (1 % trim in 5 ms is about 340 GW); loops are trimmed over seconds for vectoring."
+conclusion = "On the target and driver side only. Superconducting loops cannot be trimmed between pulses (1 % trim in 5 ms is about 340 GW); loops are trimmed over seconds for vectoring. | T03 2026-11-09: strengthened: at 10-15 E_p of stored field (0.8-1.2 TJ) a 1 % trim in 5 ms is 3-5 TW, not 340 GW (which assumed 1 E_p)."
 
 [[decision]]
 id = "D-04"
@@ -33,7 +35,7 @@ type = "OWNER_APPROVAL_CANON"
 state = "OPEN"
 technologies = ["VTX-04B"]
 question = "Keep the three idle canon H2 vessels and the hydrogen low gear, or remove them?"
-conclusion = "Removing them saves about 1.2 kt at departure in V0. Keeping them is right only if a mission phase needs high thrust at low ve. V1 and V2 assume removal; convergence.py reports V1 with them kept."
+conclusion = "Removing them saves about 1.2 kt at departure in V0. Keeping them is right only if a mission phase needs high thrust at low ve. V1 and V2 assume removal; convergence.py reports V1 with them kept. | Owner 2026-11-09: keep the hydrogen low gear out of the preferred experimental configuration, without changing canon (canon keeps the vessels)."
 
 [[decision]]
 id = "D-05"
@@ -49,7 +51,7 @@ type = "OWNER_APPROVAL_CANON"
 state = "OPEN"
 technologies = ["VTX-08", "VTX-08D", "VTX-08A"]
 question = "How should Wayfarer survive engine-first braking at 0.016 c (this also affects the canon ship)?"
-conclusion = "Options: engine-side bow shield inside the hardware cone; braking at lower speed (mission change); accept and study the plume as a screen. No option is quantified yet."
+conclusion = "Options: engine-side bow shield inside the hardware cone; braking at lower speed (mission change); accept and study the plume as a screen. No option is quantified yet. | Owner 2026-11-09: develop skirt, bumpers and replaceable sectors as competing and complementary experimental solutions; do not lock destination or heading."
 
 [[decision]]
 id = "D-07"
@@ -62,10 +64,10 @@ conclusion = "The Atlas uses only the canon card. Any added Fiji property is an 
 [[decision]]
 id = "D-08"
 type = "OWNER_APPROVAL_CANON"
-state = "OPEN"
+state = "DECIDED"
 technologies = ["VTX-01", "VTX-03", "VTX-07"]
 question = "Adopt Vertex (Config B: FDP-1 axial point burn plus the thermal package) as the propulsion direction instead of the canon four-nozzle Fiji Drive?"
-conclusion = "Not proposed for adoption by this Atlas. V1 meets the six-year benchmark only above the gain cliff; the dust and braking problem (D-06) is open. Adoption would replace LOCKED canon topology."
+conclusion = "Not proposed for adoption by this Atlas. V1 meets the six-year benchmark only above the gain cliff; the dust and braking problem (D-06) is open. Adoption would replace LOCKED canon topology. | Owner 2026-11-09: not approved. No canonical engine replacement."
 
 [[decision]]
 id = "D-09"
@@ -73,23 +75,23 @@ type = "OWNER_APPROVAL_EXPERIMENT"
 state = "OPEN"
 technologies = ["VTX-03", "VTX-03A", "VTX-03B"]
 question = "Authorise a pulsed-plasma MHD or hybrid-PIC study of plain vs clocked vs shaped nozzle fields?"
-conclusion = "The only way to resolve VTX-03's sign. Nozzle efficiency is the steepest lever in the record (0.79 -> 0.72 is +61 % mass)."
+conclusion = "The only way to resolve VTX-03's sign. Nozzle efficiency is the steepest lever in the record (0.79 -> 0.72 is +61 % mass). | Owner 2026-11-09: full MHD/PIC not approved; analytical, vacuum-field, field-line and test-particle work allowed (D-PLAN-1); prepare the bounded 2D proposal (D-21), no HPC run."
 
 [[decision]]
 id = "D-10"
 type = "OWNER_APPROVAL_EXPERIMENT"
-state = "OPEN"
+state = "DECIDED"
 technologies = ["VTX-01B", "VTX-06A", "VTX-07D", "VTX-08A"]
 question = "Authorise a Vertex Blender blockout in work/ (VAR_vertex collections, pink) from the readiness report?"
-conclusion = "Only ENGINEERING_SUPPORTED and PARAMETRIC_PLACEHOLDER components would be drawn as hardware; CONCEPTUAL_ILLUSTRATION items as labelled overlays. Production assets stay untouched."
+conclusion = "Only ENGINEERING_SUPPORTED and PARAMETRIC_PLACEHOLDER components would be drawn as hardware; CONCEPTUAL_ILLUSTRATION items as labelled overlays. Production assets stay untouched. | Owner 2026-11-09: approved in principle, strictly non-destructive, isolated experimental files only; modelling after T00 baseline and T05 requirements review."
 
 [[decision]]
 id = "D-11"
 type = "OWNER_APPROVAL_EXPERIMENT"
-state = "OPEN"
+state = "DECIDED"
 technologies = ["VTX-01", "VTX-03", "VTX-07"]
 question = "Record Vertex in the Drive workbooks (S&E or a lab row) as a non-canon research line?"
-conclusion = "Nothing was written to Drive. A row would be correspondence, not canon."
+conclusion = "Nothing was written to Drive. A row would be correspondence, not canon. | Owner 2026-11-09: not approved. No Google Drive changes."
 
 [[decision]]
 id = "D-12"
@@ -97,4 +99,108 @@ type = "TECHNICAL_CONCLUSION"
 state = "DECIDED"
 technologies = ["VTX-08C"]
 question = "Can magnetic fields deflect interstellar dust?"
-conclusion = "No: grains at about 0.6 C/kg have Larmor radii of order 1e9 m at 1 mT. Magnetic deflection is limited to gas and ions."
+conclusion = "No: grains at about 0.6 C/kg have Larmor radii of order 1e9 m at 1 mT. Magnetic deflection is limited to gas and ions. | T02 2026-11-09: confirmed (grain Larmor radius about 8e9 m at 1 mT)."
+
+[[decision]]
+id = "D-13"
+type = "TECHNICAL_CONCLUSION"
+state = "DECIDED"
+technologies = ["VTX-07A", "VTX-07E"]
+question = "Which warm-loop temperature may a Vertex generation claim?"
+conclusion = "Claim the equivalent temperature of the booked circuits, not a single loop: about 630 K with every component TARGET met and a tin droplet sheet; 700-800 K only as a stretch band. V1/V2 should carry the split ledger instead of the 700 / 800 K overrides. Owner 2026-11-09: use the component-based thermal findings, not the obsolete 700-800 K loop."
+
+[[decision]]
+id = "D-14"
+type = "TECHNICAL_CONCLUSION"
+state = "DECIDED"
+technologies = ["VTX-01H", "VTX-01C"]
+question = "Should the target-injection speed be a closure input (one target in flight)?"
+conclusion = "Owner 2026-11-09: investigate through an isolated Vertex model extension (convergence.py vertex.launcher_speed_m_s), no calculator change. Result: V4 needs >= 12 km/s; at 6 km/s it does not close (V4_launcher_sweep)."
+
+[[decision]]
+id = "D-15"
+type = "OWNER_APPROVAL_CANON"
+state = "OPEN"
+technologies = ["VTX-08D"]
+question = "FDP-1/Vertex needs 1,717 AU to stop (beyond the heliopause); canon names a Kuiper anchorage. Which destination does the FDP-1/Vertex line assume?"
+conclusion = "T02 used FDP-1's own burn distances; no mission parameter was changed. Owner 2026-11-09: do not lock the mission destination or heading."
+
+[[decision]]
+id = "D-16"
+type = "OWNER_APPROVAL_CANON"
+state = "DECIDED"
+technologies = ["VTX-08D", "VTX-08E", "VTX-08F", "VTX-03E"]
+question = "Which D-06 option should Wayfarer develop?"
+conclusion = "Options (NOMINAL residual events beyond the protection, Vertex V1 / canon): (a) skirt or aft annulus + local bumpers + replaceable loop sectors, 22-90 t / 6-31 t, ~540 / ~67; (b) as (a) with an out-of-ecliptic heading, ~89 / ~12; (c) braking orientation or speed change (owner only, not studied); (d) accept and study, ~2,290 / ~730. Recommendation: (a), and (b) once the heading is chosen. Owner 2026-11-09: develop options (a) skirt or annulus, local bumpers and replaceable sectors as competing and complementary experimental solutions; destination and heading not locked."
+
+[[decision]]
+id = "D-17"
+type = "OWNER_APPROVAL_CANON"
+state = "OPEN"
+technologies = ["VTX-08D"]
+question = "Is the departure heading free to leave the ecliptic? A high-latitude path cuts Kuiper-belt exposure ~10x (ASSUMPTION)."
+conclusion = "Open in canon. Owner 2026-11-09: do not lock the mission destination or heading."
+
+[[decision]]
+id = "D-18"
+type = "OWNER_APPROVAL_CANON"
+state = "OPEN"
+technologies = ["VTX-03E", "VTX-03F"]
+question = "Accept periodic nozzle-loop sector replacement, or require a conductor tolerating ~1e20 n/cm2 (a proposed Level C breakthrough)?"
+conclusion = "Recommendation: replacement (T02-NEW-3); T02-NEW-4 stays a labelled Level C need."
+
+[[decision]]
+id = "D-19"
+type = "TECHNICAL_CONCLUSION"
+state = "DECIDED"
+technologies = ["VTX-03", "VTX-03D"]
+question = "Which efficiency does the calculator's nozzle_efficiency book?"
+conclusion = "Book eta_T. The calculator uses it as jet = eta x stream; every published value is momentum. Show 0.79 as an unsupported optimistic bound. T00: corrected generations V3-V5 carry eta_T; V0-V2 keep 0.79 as historical conditional cases; the FDP-1 calculator is unchanged."
+
+[[decision]]
+id = "D-20"
+type = "TECHNICAL_CONCLUSION"
+state = "DECIDED"
+technologies = ["VTX-03", "VTX-03D"]
+question = "What stored field energy per pulse does the nozzle need?"
+conclusion = "10-15 x E_p; 1 x cannot stop the pulse in any coil set modelled. Adopted in V3-V5 (15 E_p)."
+
+[[decision]]
+id = "D-21"
+type = "OWNER_APPROVAL_EXPERIMENT"
+state = "OPEN"
+technologies = ["VTX-03", "VTX-03D"]
+question = "Approve the D-09 pulsed-nozzle simulation in the scope of REPORT.md section 8?"
+conclusion = "Approve 2D first (1e4-1e5 core-hours per case); 3D only if C passes eta_T >= 0.70. Owner 2026-11-09: prepare the bounded 2D proposal (planning/D21_MHD_PIC_PROPOSAL.md); do not launch HPC."
+
+[[decision]]
+id = "D-22"
+type = "OWNER_APPROVAL_CANON"
+state = "DECIDED"
+technologies = ["VTX-01", "VTX-01A", "VTX-01E"]
+question = "Compression-consistent targets or a declared compression breakthrough? (T04 D-T04-1 merged with T06 D-T06-1)"
+conclusion = "Owner 2026-11-09: preserve physics-consistent target models (option A); do not declare new Level C compression physics yet; retain a coupling eta_c/alpha >= 0.5 as an advanced research target. V3-V5 set the gain at the T04 ceiling."
+
+[[decision]]
+id = "D-23"
+type = "TECHNICAL_CONCLUSION"
+state = "DECIDED"
+technologies = ["VTX-04B"]
+question = "D-04 input: does any mission phase need the hydrogen low gear?"
+conclusion = "No. Recommendation only; D-04 remains the owner's."
+
+[[decision]]
+id = "D-24"
+type = "OWNER_APPROVAL_CANON"
+state = "DECIDED"
+technologies = ["VTX-03", "VTX-03D"]
+question = "Does IGNITION declare a pulsed magnetic nozzle with closure coils that reaches the ideal-model thrust efficiency eta_T = eta_mom^2 of about 0.79 at a stored field of 15 pulse energies?"
+conclusion = "Owner 2026-11-09: retain the closure-coil nozzle as the preferred experimental candidate without assuming its ideal efficiency has been demonstrated. V3-V5 use 0.791 as a TARGET upper bound with 0.740 and 0.64 reported beside it."
+
+[[decision]]
+id = "D-25"
+type = "OWNER_APPROVAL_EXPERIMENT"
+state = "DECIDED"
+technologies = ["VTX-02A"]
+question = "May T06's non-canon technology-history scaffold (eras E0-E5 in HISTORY_PROPOSALS.md) be aligned with the IGNITION timeline workbook?"
+conclusion = "Owner 2026-11-09: use the available IGNITION timeline as historical context and flag conflicts with the engineering. Read only; read by T00 on 2026-11-09 (S-IGNITION-TIMELINE)."

@@ -133,7 +133,27 @@ class ResultArithmetic(unittest.TestCase):
 
     def each(self):
         for name, g in self.R['generations'].items():
-            yield name, g, g['summary']
+            if g['summary'].get('converged'):                 # a generation that does not close is kept with its reason (below)
+                yield name, g, g['summary']
+
+    def test_open_generations_state_why(self):
+        for name, g in self.R['generations'].items():
+            if not g['summary'].get('converged'):
+                self.assertTrue(g['summary'].get('reason'), msg=name)
+
+    def test_history_unchanged(self):
+        """Phase 4 keeps V0-V2 as historical conditional cases: their ship numbers equal the frozen 2026-11-08 results."""
+        old = json.loads((HERE / 'results/history/2026-11-08_atlas/convergence.json').read_text())
+        for k in ('V0', 'V1', 'V2'):
+            for x in ('departure_t', 'fusion_TW', 'warm_km2', 'shield_t', 'wing_tip_radius_m'):
+                self.assertAlmostEqual(self.R['generations'][k]['summary'][x], old['generations'][k]['summary'][x],
+                                       delta=1e-6 * abs(old['generations'][k]['summary'][x]), msg=f'{k} {x}')
+
+    def test_corrected_generations_are_energy_consistent(self):
+        for k, c in self.R['consistency'].items():
+            if self.R['generations'][k]['record']['status'] != 'HISTORICAL_CONDITIONAL':
+                self.assertLessEqual(c['coupling_needed'], 1.0 + 1e-9, msg=k)
+                self.assertLessEqual(c['coupling_needed'], c['declared_coupling'] + 1e-9, msg=k)
 
     def test_energy_ledger_closes(self):
         for name, g, _ in self.each():

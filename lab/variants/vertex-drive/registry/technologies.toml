@@ -24,6 +24,8 @@
 # =====================================================================================================================================
 # VTX-01  Advanced pulsed fusion ignition
 # =====================================================================================================================================
+# Phase 4 integration 2026-11-09: written by planning/integrate_phase4.py from the 8de3ffa registry and the thread proposals.
+
 
 [[technology]]
 id = "VTX-01"
@@ -35,7 +37,7 @@ principle = "Inertial confinement: a target compressed to areal density rhoR bur
 ancestry = ["S-NIF-2025", "S-MAGLIF-2020", "S-DAEDALUS-1978", "S-FIJI-V4", "S-FOURBURN"]
 ancestry_note = "NIF has shown D-T ignition at gain about 4; MagLIF shows magnetisation helps; Daedalus defined the pulsed D-3He drive; Fiji v4 derived the ve gate eta x b >= 0.52."
 limitations = "D-3He has never been ignited; it needs about 5-10x the temperature of D-T; best target gain is about 4 (D-T), laser wall-plug about 1 %, cadence about one shot per day."
-breakthrough = "D-3He ignition at target gain of about 1,000 or more with rhoR about 90 g/cm2 at 100-200 Hz for years."
+breakthrough = "D-3He ignition (hot spot about 50 keV, about 7 g/cm2) at target gain about 600-700 with driver-to-fuel coupling eta_c/alpha of 0.12-0.4 (density 500-3,000 g/cm3) at 3-100 Hz for years; or a labelled Level C compression aid (D-T04-1)."
 depends_on = ["VTX-01A", "VTX-01B", "VTX-01C"]
 materials = ["MAT-W", "MAT-LIH"]
 purposes = ["P03", "P07"]
@@ -49,8 +51,18 @@ research_status = "UNDER_INVESTIGATION"
 canon_status = "NON_CANON"
 prior_finding = "Integration study 2026-11-08: keep FDP-1's pulsed point burn as is; the gain cliff sits at about 1,100 (FDP-1) and moves to 700-1,000 with the thermal package. Atlas bisection: 1,257 (V0), 705 (V1), 581 (V2)."
 evidence = ["S-NIF-2025", "S-FDP1", "S-FIJI-V4"]
-uncertainties = "Whether D-3He can ignite without a D-T spark; burn physics at 100 keV and rhoR 90 g/cm2; pellet survival at 1.5 K during 400 m/s injection."
+uncertainties = "Whether D-3He can ignite without a D-T spark; burn physics at 100 keV and rhoR 90 g/cm2; pellet survival at 1.5 K during 400 m/s injection. | T04 2026-11-09: The FDP-1 optimistic gain (3,000 at 3,000 g/cm3) exceeds the compression-energy ceiling (1,787 x eta_c/alpha); the burn-fraction model H_B is 13 % below the published D-3He minimum."
 next = ["Gain threshold sweep per Vertex generation (convergence.py, done)", "Burn-fraction model check against published D-3He ICF simulations", "Target-factory energy per pellet (VTX-01C)"]
+claims = [
+  { quantity = "demonstrated_target_gain", value = 4.1, unit = "1", basis = "PUBLISHED", source = "S-NIF-2025" },
+  { quantity = "assumed_target_gain", value = 3000.0, unit = "1", basis = "ASSUMPTION", source = "S-FDP1" },
+  { quantity = "gain_cliff_V0", value = 1257.0, unit = "1", basis = "MODEL", source = "case:gain_threshold" },
+  { quantity = "gain_cliff_V2", value = 581.0, unit = "1", basis = "MODEL", source = "case:gain_threshold" },
+  { quantity = "pulse_rate", value = 212.0, unit = "Hz", basis = "MODEL", source = "case:V0" },
+  { quantity = "gain_ceiling_FDP1_density_per_eta", value = 1787.0, unit = "1", basis = "MODEL", source = "S-T04-STUDY", study_case = "compression" },
+  { quantity = "DHe3_hotspot_rhoR_min_0D", value = 1.97, unit = "g/cm2", basis = "MODEL", source = "S-T04-STUDY", study_case = "hotspot" },
+  { quantity = "DHe3_ideal_ignition_T_min", value = 33.0, unit = "keV", basis = "MODEL", source = "S-T04-STUDY", study_case = "hotspot" },
+]
 
 [technology.stages]
 present = "D-T ignition at gain about 4 with lasers; magnetised liner targets on Z; pellet injection at 400 m/s."
@@ -84,41 +96,6 @@ mass_thermal = 5
 unlock = 5
 design_3d = 3
 
-[[technology.claims]]
-quantity = "demonstrated_target_gain"
-value = 4.1
-unit = "1"
-basis = "PUBLISHED"
-source = "S-NIF-2025"
-
-[[technology.claims]]
-quantity = "assumed_target_gain"
-value = 3000.0
-unit = "1"
-basis = "ASSUMPTION"
-source = "S-FDP1"
-
-[[technology.claims]]
-quantity = "gain_cliff_V0"
-value = 1257.0
-unit = "1"
-basis = "MODEL"
-source = "case:gain_threshold"
-
-[[technology.claims]]
-quantity = "gain_cliff_V2"
-value = 581.0
-unit = "1"
-basis = "MODEL"
-source = "case:gain_threshold"
-
-[[technology.claims]]
-quantity = "pulse_rate"
-value = 212.0
-unit = "Hz"
-basis = "MODEL"
-source = "case:V0"
-
 [[technology]]
 id = "VTX-01A"
 name = "Magnetised fuel-only D-3He target"
@@ -141,10 +118,14 @@ credibility = "PLAUSIBLE_FUTURE"
 physics_verdict = "PLAUSIBLE_FUTURE"
 research_status = "PROPOSED"
 canon_status = "NON_CANON"
-prior_finding = "Fiji v4: target magnetisation raises gain and lowers driver energy but does not lower the rhoR needed for burn fraction."
+prior_finding = "Fiji v4: target magnetisation raises gain and lowers driver energy but does not lower the rhoR needed for burn fraction. | T04 2026-11-09: T04: magnetisation removes the 7 g/cm2 hot-spot rhoR requirement in the 0-D model only when B R exceeds about 1.2-2.0 MG cm (3-5x MagLIF); it does not lower the 90 g/cm2 burn rhoR or the compression ceiling."
 evidence = ["S-MAGLIF-2020", "S-FIJI-V4"]
 uncertainties = "No quantitative gain model for magnetised D-3He in the calculator; its benefit is UNKNOWN and is not credited in any generation."
 next = ["Find published magnetised D-3He ICF simulations and their gain curves", "Define the seed field the Fiji lattice must provide at the target"]
+claims = [
+  { quantity = "BR_threshold_DHe3_protons", value = 1.2, unit = "MG cm", basis = "ASSUMPTION", source = "S-T04-MAGLIF-BR" },
+  { quantity = "BR_demonstrated_MagLIF", value = 0.45, unit = "MG cm", basis = "PUBLISHED", source = "S-T04-MAGLIF-BR" },
+]
 
 [technology.stages]
 present = "Magnetised D-T liner targets on Z (kJ-class yield); no fuel-only magnetised targets."
@@ -202,8 +183,12 @@ research_status = "UNDER_INVESTIGATION"
 canon_status = "NON_CANON"
 prior_finding = "Integration study: the galleries set the 9.6 deg hardware cone; moving them inside the 7.9 deg equipment-module cone saves about 0.9 kt."
 evidence = ["S-HIF-REVIEWS", "S-FDP1"]
-uncertainties = "FDP-1's 0.45 efficiency lies above the published 20-30 %; galleries at r 4.5 m have not been checked against the hull interior."
+uncertainties = "FDP-1's 0.45 efficiency lies above the published 20-30 %; galleries at r 4.5 m have not been checked against the hull interior. | T01 2026-11-09: Efficiency 0.45 vs 0.20-0.30 published; driver mass per W: the closure is steep in it (V1 10.4 kt at 0.05 kg/kW, 12.9 kt at 0.1, 25.1 kt at 0.2 = the calculator's central tier; the T01 advanced case at eta 0.30 does not close at 0.2 kg/kW). Volt-second scaling of the induction cores suggests 0.05 kg/kW is optimistic by more than 10x (EXTRAPOLATION, unmodelled)."
 next = ["Run V1/V2 at driver efficiency 0.30 (sensitivity, done)", "Check gallery routing inside the aft body casing (geometry study)"]
+claims = [
+  { quantity = "driver_wall_plug_efficiency_published", value = 0.25, unit = "1", basis = "PUBLISHED", source = "S-HIF-REVIEWS" },
+  { quantity = "driver_wall_plug_efficiency_assumed", value = 0.45, unit = "1", basis = "ASSUMPTION", source = "S-FDP1" },
+]
 
 [technology.stages]
 present = "Ion accelerators of the right class exist for physics; HIF driver designs at 20-30 % efficiency on paper."
@@ -237,20 +222,6 @@ mass_thermal = 4
 unlock = 3
 design_3d = 4
 
-[[technology.claims]]
-quantity = "driver_wall_plug_efficiency_published"
-value = 0.25
-unit = "1"
-basis = "PUBLISHED"
-source = "S-HIF-REVIEWS"
-
-[[technology.claims]]
-quantity = "driver_wall_plug_efficiency_assumed"
-value = 0.45
-unit = "1"
-basis = "ASSUMPTION"
-source = "S-FDP1"
-
 [[technology]]
 id = "VTX-01C"
 name = "Precision cryogenic target factory and injection"
@@ -260,8 +231,8 @@ purpose = "Make and inject about 10-18 million identical cryogenic targets per d
 principle = "Mass production of layered cryogenic shells, gas-gun injection, optical tracking and beam steering on the fly."
 ancestry = ["S-GA-TARGET", "S-W7X-2025"]
 ancestry_note = "GA/HAPL demonstrated 400 m/s injection and about 150 um bench engagement (requirement about 20-200 um); W7-X fuels with programmed pellet trains."
-limitations = "No repetition-rated engagement demonstration; target-fabrication energy per pellet is not sourced in the record (FDP-1 house load 0.1 % of fusion is an assumption)."
-breakthrough = "Liquid-He-3-in-D2 targets that survive injection, made at sub-MJ energy each, engaged to about 20 um at 100-200 Hz."
+limitations = "No repetition-rated engagement demonstration; target-fabrication energy per pellet is not sourced in the record (FDP-1 house load 0.1 % of fusion is an assumption). | T01 2026-11-09: FDP-1 flies 12.5 targets at once on the axis, 3.7 m apart at 400 m/s; each is 3.7 m from the previous 81 GJ pulse (about 5e6 J/m2 of X-rays and 5e8 J/m2 of plasma) and cannot survive. Only one target may be in the open per period: v >= path x rate, 4.7-7.5 km/s in the T01 cases."
+breakthrough = "Cryogenic D2/He-3 targets launched at 4.7-7.5 km/s (1e5 g in a 10-20 m barrel) at 100-150 Hz, or a shielded flight path; made at about 1-9 MJ each."
 depends_on = []
 materials = ["MAT-SS-316L"]
 purposes = ["P01", "P03"]
@@ -273,10 +244,16 @@ credibility = "PLAUSIBLE_FUTURE"
 physics_verdict = "PLAUSIBLE_FUTURE"
 research_status = "PROPOSED"
 canon_status = "NON_CANON"
-prior_finding = "Integration study: halving the house load saves 30 % of departure mass; the 0.1 % house fraction is unsourced."
+prior_finding = "Integration study: halving the house load saves 30 % of departure mass; the 0.1 % house fraction is unsourced. | T00 2026-11-09: T01 quoted 107 Hz and 3.74 m for \"FDP-1\"; those are V1 figures (V0: 212 Hz, 1.88 m, T04). Both threads agree on the constraint."
 evidence = ["S-GA-TARGET", "S-FDP1"]
 uncertainties = "The energy per target is the largest unsourced number in the warm loop."
 next = ["Source an energy-per-target estimate from IFE target-fab studies (highest-value cheap study)", "House-fraction sweep (convergence.py, done)"]
+claims = [
+  { quantity = "house_fraction_assumed", value = 0.001, unit = "1", basis = "ASSUMPTION", source = "S-FDP1" },
+  { quantity = "injection_speed_demonstrated", value = 400.0, unit = "m/s", basis = "PUBLISHED", source = "S-GA-TARGET" },
+  { quantity = "injection_speed_required_one_in_flight", value = 6067.0, unit = "m/s", basis = "MODEL", source = "S-T01-LEDGER", study_case = "S1_advanced_eta0.30" },
+  { quantity = "injection_speed_fdp1", value = 400.0, unit = "m/s", basis = "ASSUMPTION", source = "S-FDP1" },
+]
 
 [technology.stages]
 present = "Single-shot cryogenic targets; 400 m/s injection; bench tracking about 150 um."
@@ -310,20 +287,6 @@ mass_thermal = 5
 unlock = 3
 design_3d = 3
 
-[[technology.claims]]
-quantity = "house_fraction_assumed"
-value = 0.001
-unit = "1"
-basis = "ASSUMPTION"
-source = "S-FDP1"
-
-[[technology.claims]]
-quantity = "injection_speed_demonstrated"
-value = 400.0
-unit = "m/s"
-basis = "PUBLISHED"
-source = "S-GA-TARGET"
-
 [[technology]]
 id = "VTX-01D"
 name = "D-T spark-ignited D-3He target"
@@ -346,7 +309,7 @@ credibility = "PLAUSIBLE_FUTURE"
 physics_verdict = "PLAUSIBLE_FUTURE"
 research_status = "PROPOSED"
 canon_status = "NON_CANON"
-prior_finding = "Not studied in the integration study; listed by v4 as the usual route and as an added neutron source."
+prior_finding = "Not studied in the integration study; listed by v4 as the usual route and as an added neutron source. | T04 2026-11-09: T04: as a core of rhoR 2-3 g/cm2 the spark costs almost no energy or escaping neutrons (escaping 14.1 MeV below 2e-7 of fusion); the cost is 43-144 kg of tritium per mission and pre-ignition risk (Nakashima 1993: gain 3). The Atlas statement that a spark raises shield mass is not borne out at fuel rhoR 90; it holds only for an outside primary (T04-NEW-5)."
 evidence = ["S-FIJI-V4"]
 uncertainties = "The calculator has no spark model; the neutron load is not quantified. Benefit UNKNOWN."
 next = ["Add a spark-share parameter to an Atlas adapter of fourburn._pulse (not done: needs a burn model)", "Pair with the VTX-04A tamper analysis"]
@@ -359,7 +322,7 @@ wayfarer_era = "A small D-T spark inside a hydrogen-rich tamper that captures th
 [technology.questions]
 a = "No."
 b = "Plausibly, and probably earlier than spark-free D-3He ignition."
-c = "Only together with a neutron-capturing tamper; alone it raises shield mass and conductor dose."
+c = "Yes, as the most credible ignition route, if the mission can carry about 0.1 t of tritium; no tamper needed for its neutrons."
 
 [technology.geometry]
 components = []
@@ -383,9 +346,320 @@ mass_thermal = 2
 unlock = 4
 design_3d = 1
 
-# =====================================================================================================================================
-# VTX-02  Fiji lattice field engineering
-# =====================================================================================================================================
+[[technology]]
+id = "VTX-01E"
+name = "Compression-consistent D-3He target (lower density, larger pulse)"
+kind = "technology"
+workstream = "VTX-01"
+purpose = "A fuel-only target whose gain does not exceed what its own compression energy allows."
+principle = "Compressing fuel to rho costs at least the Fermi-degenerate energy alpha eps_F(rho) (D-3He 132 MJ/g at 3,000 g/cm3, 64 at 1,000). With coupling eta_c, gain G <= eta_c b eps / (alpha eps_F + ignitor). The ceiling rises as rho^-2/3 while the pulse yield at fixed rhoR grows as rho^-2."
+ancestry = ["S-T04-ATZENI-2004", "S-FDP1"]
+credibility = "PLAUSIBLE_FUTURE"
+physics_verdict = "PLAUSIBLE_FUTURE"
+research_status = "PROPOSED"
+canon_status = "NON_CANON"
+prior_finding = "T04 2026-11-09: FDP-1's optimistic tier (3,000 g/cm3, gain 3,000, 27 MJ driver) needs eta_c / alpha = 1.68, i.e. more energy in the cold fuel than the driver delivers. The V1 cliff of 705 needs eta_c/alpha 0.39 at 3,000 g/cm3, 0.19 at 1,000, 0.12 at 500 g/cm3."
+claims = [
+  { quantity = "fermi_energy_DHe3_3000", value = 132.0, unit = "MJ/g", basis = "MODEL", source = "S-T04-STUDY", study_case = "compression" },
+  { quantity = "gain_ceiling_per_eta_3000", value = 1787.0, unit = "1", basis = "MODEL", source = "S-T04-STUDY", study_case = "compression" },
+  { quantity = "eta_over_alpha_for_FDP1_gain", value = 1.68, unit = "1", basis = "MODEL", source = "S-T04-STUDY", study_case = "compression" },
+  { quantity = "eta_over_alpha_for_V1_cliff_1000", value = 0.19, unit = "1", basis = "MODEL", source = "S-T04-STUDY", study_case = "compression" },
+]
+ancestry_note = "Atzeni and Meyer-ter-Vehn: the minimum energy to compress fuel is its Fermi-degenerate energy times the adiabat; FDP-1 supplies the pulse and burn-fraction model the ceiling is evaluated in."
+limitations = "0-D bound: no burn propagation, no hydrodynamic efficiency model; the ignitor term rests on a 3.5x dynamics factor calibrated on D-T fast ignition (EXTRAPOLATION). Present ablative couplings are in the percent range (UNKNOWN as a number)."
+breakthrough = "A driver-to-fuel compression coupling eta_c/alpha of about 0.5 (the 2026-11-09 research target, D-22), against a percent-range coupling today. Not declared as IGNITION physics."
+depends_on = ["VTX-01"]
+materials = []
+purposes = ["P03"]
+inputs = "Driver energy per pulse, coupling eta_c/alpha, compressed density, burn fraction."
+outputs = "The largest gain a target of that density can have: G <= eta_c b eps / (alpha eps_F + ignitor)."
+penalties = "Lower density at fixed coupling gives larger, slower pulses: bigger X-ray stand-off and loops, longer injection path."
+criteria = "Gain at or below the ceiling; coupling needed (convergence.json consistency) at or below the declared value."
+evidence = ["S-T04-ATZENI-2004", "S-FDP1"]
+uncertainties = "Achievable coupling for heavy-ion direct drive of fuel-only D-3He; ignitor energy."
+next = ["1-D radiation-hydrodynamic burn of a fast-ignited, D-T-cored D-3He sphere at 1,000 and 3,000 g/cm3 (T04 J)"]
+
+[technology.stages]
+present = "Percent-range coupling in ablative implosions (engineering judgment, T04)."
+advanced = "Coupling 0.2-0.3 by shaped heavy-ion direct drive."
+wayfarer_era = "Coupling about 0.5 at 1,000-2,000 g/cm3 (research target)."
+
+[technology.questions]
+a = "No."
+b = "Plausibly, at a coupling far above today's."
+c = "Yes: it is what makes any Vertex mass energy-consistent."
+
+[technology.geometry]
+components = []
+envelope = "none"
+location = "none"
+connections = "none"
+loads = "none"
+radiation = "none"
+thermal = "none"
+maintenance = "none"
+purposes = []
+colour = "MAIN_PROPULSION"
+representation = "NONE"
+status = "NONE"
+
+[technology.priority]
+feasibility = 4
+credibility = 3
+independence = 3
+mass_thermal = 5
+unlock = 5
+design_3d = 1
+
+[[technology]]
+id = "VTX-01F"
+name = "Spin-polarised D-3He fuel"
+kind = "technology"
+workstream = "VTX-01"
+purpose = "Raise D-3He reactivity up to 1.5x, cutting H_B and the rhoR for a given burn fraction."
+principle = "Aligned nuclear spins favour the spin-3/2 resonance that dominates D-3He fusion, raising the cross-section up to 1.5x; H_B scales as 1/<sv>."
+ancestry = ["S-T04-POLARISED", "S-T04-NAKAO-1992"]
+credibility = "PLAUSIBLE_FUTURE"
+physics_verdict = "PLAUSIBLE_FUTURE"
+research_status = "PROPOSED"
+canon_status = "NON_CANON"
+prior_finding = "T04: H_B 44.2 -> 29.5 g/cm2; b at 90 g/cm2 0.672 -> 0.754; rhoR for the mission ve 90 -> 60 g/cm2 (fuel mass x0.30). V1 gain cliff and departure in results/IGNITION.md section 2."
+claims = [
+  { quantity = "reactivity_gain", value = 1.5, unit = "1", basis = "PUBLISHED", source = "S-T04-POLARISED" },
+]
+ancestry_note = "Spin-polarised fuel raises the D-3He cross-section up to 1.5x (UNVERIFIED review); Nakao gives the D-3He target context."
+limitations = "Survival of polarisation through compression is unknown; polarised He-3 at target scale is unproven."
+breakthrough = "Polarisation kept through a 1,000-fold compression."
+depends_on = ["VTX-01"]
+materials = []
+purposes = ["P03"]
+inputs = "Polarised D and He-3 at target scale."
+outputs = "H_B 44.2 -> 29.5 g/cm2; fuel rhoR for the mission ve 90 -> 60 g/cm2."
+penalties = "Polariser plant mass and power (UNKNOWN)."
+criteria = "Reactivity gain measured in a compressed target."
+evidence = ["S-T04-POLARISED"]
+uncertainties = "All of it beyond the cross-section factor."
+next = ["Literature check of depolarisation in implosions"]
+
+[technology.stages]
+present = "Polarised He-3 for medical imaging and polarised targets in nuclear physics."
+advanced = "Polarised fuel in a laboratory implosion."
+wayfarer_era = "Polarised cryogenic targets made in the factory."
+
+[technology.questions]
+a = "No."
+b = "Unknown."
+c = "Modest: about 9 % on V1 departure (T04)."
+
+[technology.geometry]
+components = []
+envelope = "none"
+location = "none"
+connections = "none"
+loads = "none"
+radiation = "none"
+thermal = "none"
+maintenance = "none"
+purposes = []
+colour = "MAIN_PROPULSION"
+representation = "NONE"
+status = "NONE"
+
+[technology.priority]
+feasibility = 3
+credibility = 2
+independence = 3
+mass_thermal = 2
+unlock = 2
+design_3d = 1
+
+[[technology]]
+id = "VTX-01G"
+name = "Fast-ignited D-T booster core in D-3He fuel"
+kind = "technology"
+workstream = "VTX-01"
+purpose = "Light the D-3He burn from a small D-T core ignited by a separate fast beam after peak compression (avoids pre-ignition)."
+principle = "D-T ignites at 8-12 keV and 0.25-0.6 g/cm2; a D-T core of rhoR about 2-3 g/cm2 releases 0.3-1.3 MJ, matching the 1.1 MJ calibrated D-3He hot spot at 3,000 g/cm3."
+ancestry = ["S-T04-NAKAO-1992", "S-T04-ATZENI-CIAMPI-1997", "S-T04-ATZENI-1999"]
+credibility = "PLAUSIBLE_FUTURE"
+physics_verdict = "PLAUSIBLE_FUTURE"
+research_status = "PROPOSED"
+canon_status = "NON_CANON"
+prior_finding = "T04: energy and neutron cost negligible (D-T share 3e-6 to 2e-5 of yield; escaping 14.1 MeV share below 2e-7 of fusion, below the D-D 5.5e-6); the real cost is tritium: 43-144 kg loaded per mission (10-43 kg burned) at rhoR_DT 2-3 g/cm2, 27 % decay over the burn."
+claims = [
+  { quantity = "tritium_loaded_mission_rhoR3", value = 144.0, unit = "kg", basis = "MODEL", source = "S-T04-STUDY", study_case = "spark" },
+  { quantity = "n14_escaping_share_rhoR3", value = 1.6e-07, unit = "1", basis = "MODEL", source = "S-T04-STUDY", study_case = "spark" },
+]
+ancestry_note = "Nakao: D-3He pellets with a D-T ignitor; Atzeni: fast-ignition energy scaling and the 0.6 g/cm2 optimum hot spot."
+limitations = "Burn propagation from a D-T core into D-3He at 1,000-3,000 g/cm3 is unmodelled; pre-ignition (Nakashima 1993, gain 3)."
+breakthrough = "Propagating burn from the D-T core into the D-3He fuel at the needed density."
+depends_on = ["VTX-01D"]
+materials = []
+purposes = ["P03"]
+inputs = "Tritium 43-144 kg loaded per mission (rhoR_DT 2-3 g/cm2); a separate fast ignitor beam."
+outputs = "Ignition of the main fuel at a 0.3-1.3 MJ D-T core."
+penalties = "Tritium logistics and decay (27 % over the burn); an ignitor beam line."
+criteria = "Burn fraction against b = rhoR/(rhoR + H_B) and yield per ignitor energy (1-D burn code)."
+evidence = ["S-T04-NAKAO-1992", "S-T04-ATZENI-CIAMPI-1997", "S-T04-ATZENI-1999"]
+uncertainties = "Burn propagation; ignitor coupling (0.2 ASSUMPTION)."
+next = ["1-D burn calculation (T04 J)"]
+
+[technology.stages]
+present = "D-T fast-ignition studies."
+advanced = "Fast-ignited D-T-cored targets in a pulsed facility."
+wayfarer_era = "D-T-cored D-3He targets made per pulse."
+
+[technology.questions]
+a = "No."
+b = "Plausibly: the most credible ignition route found."
+c = "Yes, if the mission carries about 0.1 t of tritium."
+
+[technology.geometry]
+components = ["fast-ignitor beam line", "tritium store in the equipment module"]
+envelope = "Ignitor beam on the bore axis beside the target path; tritium store volume UNKNOWN."
+location = "Equipment module, bore axis."
+connections = "VTX-01B, VTX-01H."
+loads = "none"
+radiation = "Behind the shadow shield."
+thermal = "Warm loop."
+maintenance = "Tritium handling."
+purposes = ["P03"]
+colour = "MAIN_PROPULSION"
+representation = "HARDWARE"
+status = "PARAMETRIC_PLACEHOLDER"
+
+[technology.priority]
+feasibility = 4
+credibility = 3
+independence = 3
+mass_thermal = 3
+unlock = 4
+design_3d = 2
+
+[[technology]]
+name = "One-target-in-flight injection (fast cryogenic target launcher)"
+kind = "technology"
+workstream = "VTX-01"
+purpose = "Keep every target behind the shield until the previous pulse has fired, then deliver it to the burn point within one period."
+principle = "The next target must not be in the open when a pulse fires: v >= (muzzle-to-burn path) x pulse rate. At FDP-1 scale the path is about the X-ray stand-off (43-50 m) and the rate 100-150 Hz, so v is about 4.7-7.5 km/s."
+penalties = "Launcher energy small (0.02-0.25 MJ per target); the hard part is a 1e5 g launch of a liquid-He-3-in-D2 target. A slower launcher caps the pulse rate: 4 km/s +6.3 %, 2.5 km/s +17.5 % (rate 36 Hz), 1.5 km/s does not close (T01 advanced, eta 0.30)."
+credibility = "PLAUSIBLE_FUTURE"
+claims = [
+  { quantity = "mass_penalty_at_2500_m_s", value = 0.175, unit = "1", basis = "MODEL", source = "S-T01-LEDGER", study_case = "S1_advanced_eta0.30_vinj2500" },
+  { quantity = "v_inj_one_in_sky_V0", value = 9.17, unit = "km/s", basis = "MODEL", source = "S-T04-STUDY", study_case = "in_flight" },
+]
+id = "VTX-01H"
+prior_finding = "T01 2026-11-09: FDP-1 flies 12.5-25 targets at once; one target in the open per period needs v >= path x rate (T01-NEW-1). | T04-NEW-4: T04: at 400 m/s the next target receives about 5.5 kJ of escaping X-rays (incident) and up to 0.47 MJ of plasma; its liquid He-3 boils with 1.8 J. Owner of the hardware: T01 (VTX-01C interface)."
+ancestry = ["S-GA-TARGET", "S-T01-LEDGER"]
+ancestry_note = "T01 and T04 found the same constraint independently: at FDP-1's 400 m/s, 12.5-25 targets are in the burn's sky and the next one receives 1-6 kJ of X-rays per pulse; GA target-injection work is the starting point for fast injectors."
+limitations = "No target launcher at 6 km/s or above exists for cryogenic D2/He-3 targets; a sabot must be stopped behind the shield. Under the compression-consistent gain the pulses are larger and the path longer, so V4 needs at least 12 km/s (convergence V4_launcher_sweep)."
+breakthrough = "A 12-15 km/s cryogenic target launcher at 100-200 Hz, or a shielded flight path, or targets that survive the previous pulse."
+depends_on = ["VTX-01C"]
+materials = []
+purposes = ["P03"]
+inputs = "Launcher energy 0.02-0.25 MJ per target; acceleration about 1e5-1e6 g."
+outputs = "One target in the open per pulse period: f <= v / path."
+criteria = "Launcher speed at or above path x rate; target survival of the launch."
+evidence = ["S-T01-LEDGER", "S-T04-ATZENI-2004"]
+uncertainties = "Target survival at 1e5-1e6 g; alternative shielded paths (T03 field sheltering not modelled)."
+next = ["Launcher threshold on the corrected generations (done: V4 needs >= 12 km/s)", "Shielded flight path concept"]
+physics_verdict = "PLAUSIBLE_FUTURE"
+research_status = "PROPOSED"
+canon_status = "NON_CANON"
+
+[technology.stages]
+present = "Gas-gun target injection at about 400 m/s (IFE designs)."
+advanced = "Electromagnetic launch of cryogenic targets at km/s."
+wayfarer_era = "Fast launchers or shuttered paths on the bore axis."
+
+[technology.questions]
+a = "No."
+b = "Plausibly, at a few km/s; 12-15 km/s for cryogenic targets is unproven."
+c = "Yes: without it the pulse rate falls and the ship grows or does not close."
+
+[technology.geometry]
+components = ["target launcher barrel on the bore axis", "sabot catcher behind the shield"]
+envelope = "Muzzle at the shield face; path to the burn 46.6 m (V0) to 68-83 m (V4)."
+location = "Bore axis, equipment module."
+connections = "VTX-01C, VTX-01B."
+loads = "Launch recoil."
+radiation = "Muzzle inside the shadow cone."
+thermal = "Warm loop."
+maintenance = "Barrel and catcher replacement."
+purposes = ["P03"]
+colour = "MAIN_PROPULSION"
+representation = "HARDWARE"
+status = "PARAMETRIC_PLACEHOLDER"
+
+[technology.priority]
+feasibility = 5
+credibility = 3
+independence = 3
+mass_thermal = 4
+unlock = 5
+design_3d = 4
+
+[[technology]]
+id = "VTX-01I"
+name = "Two-stage (D-T primary driven) D-3He target"
+kind = "technology"
+workstream = "VTX-01"
+purpose = "Supply the secondary's compression energy from a D-T primary instead of the driver, removing the compression ceiling."
+principle = "Energy ledger only: primary yield = secondary compression energy / stage coupling."
+ancestry = ["S-T04-ATZENI-2004"]
+credibility = "PLAUSIBLE_FUTURE"
+physics_verdict = "POSSIBLE_NOT_PRACTICAL"
+research_status = "CONTRADICTED"
+canon_status = "NON_CANON"
+prior_finding = "T04 negative result: overall gain 1,800-10,700 in the ledger, but 26-52 t of tritium per mission and 0.2-0.45 % of fusion as 14.1 MeV neutrons outside the main fuel (escaping share x2-4 the current X-ray share), plus an unmodelled case mass that dilutes ve."
+claims = [
+  { quantity = "tritium_mission_min", value = 25.8, unit = "t", basis = "MODEL", source = "S-T04-STUDY", study_case = "staged" },
+]
+ancestry_note = "Energy-ledger only, from the compression-energy bound (Atzeni and Meyer-ter-Vehn)."
+limitations = "26-52 t of tritium per mission; 0.2-0.45 % of fusion as 14.1 MeV neutrons outside the main fuel; unmodelled case mass."
+breakthrough = "none (rejected)"
+depends_on = ["VTX-01"]
+materials = []
+purposes = ["P03"]
+inputs = "A D-T primary per pulse."
+outputs = "Removes the compression ceiling in the ledger."
+penalties = "Tritium and neutron cost (see limitations)."
+criteria = "Tritium per mission and escaping neutron share."
+evidence = ["S-T04-ATZENI-2004"]
+uncertainties = "Case mass; stage coupling."
+next = ["none: kept as a negative result"]
+
+[technology.stages]
+present = "Two-stage concepts on paper."
+advanced = "not pursued"
+wayfarer_era = "not pursued"
+
+[technology.questions]
+a = "No."
+b = "Possible but not practical."
+c = "No."
+
+[technology.geometry]
+components = []
+envelope = "none"
+location = "none"
+connections = "none"
+loads = "none"
+radiation = "none"
+thermal = "none"
+maintenance = "none"
+purposes = []
+colour = "MAIN_PROPULSION"
+representation = "NONE"
+status = "NONE"
+
+[technology.priority]
+feasibility = 1
+credibility = 2
+independence = 2
+mass_thermal = 1
+unlock = 1
+design_3d = 1
 
 [[technology]]
 id = "VTX-02"
@@ -413,6 +687,9 @@ prior_finding = "Integration study: the lattice gets no new properties; it lower
 evidence = ["S-CANON", "S-FIJI-V4"]
 uncertainties = "The canon lattice's operating temperature, response time and field limit at the loops are OPEN in canon."
 next = ["Write the Fiji capability card (VTX-02A) into the Atlas (done)", "Ask the owner which open lattice parameters (temperature, response) canon fixes"]
+claims = [
+  { quantity = "hts_record_field", value = 45.5, unit = "T", basis = "PUBLISHED", source = "S-HAHN-2019" },
+]
 
 [technology.stages]
 present = "REBCO at 45.5 T in small coils; demountable HTS for tokamaks; no Fiji."
@@ -446,13 +723,6 @@ mass_thermal = 3
 unlock = 3
 design_3d = 5
 
-[[technology.claims]]
-quantity = "hts_record_field"
-value = 45.5
-unit = "T"
-basis = "PUBLISHED"
-source = "S-HAHN-2019"
-
 [[technology]]
 id = "VTX-02A"
 name = "Fiji lattice amplification and stabilisation (capability card)"
@@ -479,6 +749,9 @@ prior_finding = "Canon property; the integration study used it unchanged."
 evidence = ["S-CANON"]
 uncertainties = "Canon leaves the lattice operating temperature, response time and maximum amplified field OPEN at nozzle scale."
 next = ["Keep the card in step with canon; any new property is an owner decision (D-C10)"]
+claims = [
+  { quantity = "fiji_amplification_max", value = 30.0, unit = "1", basis = "PUBLISHED", source = "S-CANON" },
+]
 
 [technology.stages]
 present = "Fictional."
@@ -511,13 +784,6 @@ independence = 5
 mass_thermal = 1
 unlock = 3
 design_3d = 4
-
-[[technology.claims]]
-quantity = "fiji_amplification_max"
-value = 30.0
-unit = "1"
-basis = "PUBLISHED"
-source = "S-CANON"
 
 [[technology]]
 id = "VTX-02B"
@@ -604,6 +870,10 @@ prior_finding = "Part of the four-burn ledger; not separately studied."
 evidence = ["S-FOURBURN", "S-CASSIBRY-PMN"]
 uncertainties = "Coupling of recovery and nozzle efficiency is not in the calculator (they are independent inputs)."
 next = ["Treat recovery and nozzle efficiency as one coupled MHD question (VTX-03 simulation)"]
+claims = [
+  { quantity = "recovery_efficiency_assumed", value = 0.95, unit = "1", basis = "ASSUMPTION", source = "S-FOURBURN" },
+  { quantity = "recovery_extraction", value = 0.0013, unit = "share of fusion", basis = "MODEL", source = "S-T03-STUDY", range = "0.0013 (0.0012-0.0020)", study_case = "REPORT.md section 6" },
+]
 
 [technology.stages]
 present = "Flux-compression generators (explosive, single shot); simulated power-generating nozzles at 0.34 efficiency."
@@ -637,16 +907,67 @@ mass_thermal = 3
 unlock = 3
 design_3d = 2
 
-[[technology.claims]]
-quantity = "recovery_efficiency_assumed"
-value = 0.95
-unit = "1"
-basis = "ASSUMPTION"
-source = "S-FOURBURN"
+[[technology]]
+id = "VTX-02D"
+name = "High-specific-strength hoop and truss structure"
+kind = "technology"
+workstream = "VTX-02"
+purpose = "Lower the virial-bound nozzle structure (M >= rho W / sigma) and the light trusses by doubling strength per mass."
+principle = "Virial theorem: magnet structure mass per joule stored is rho / sigma; only the material's specific strength moves it."
+ancestry = ["S-T06-CNTF-2024", "S-FOURBURN"]
+limitations = "CNT fibres reach about 8 GPa in fibre form, not in a structural laminate; composite translation efficiency, creep under cryogenic and radiation load, joints."
+breakthrough = "None beyond advanced engineering: a 3 GPa laminate at 1.6 t/m3."
+depends_on = []
+credibility = "PLAUSIBLE_FUTURE"
+physics_verdict = "PLAUSIBLE_FUTURE"
+research_status = "PROPOSED"
+canon_status = "NON_CANON"
+claims = [
+  { quantity = "K5_chain_departure_V1c", value = 11810.0, unit = "t", basis = "MODEL", source = "S-T06-STUDY", study_case = "chains.K5" },
+]
+ancestry_note = "Virial theorem for magnet structure (M >= rho W / sigma); dynamic CNT fibre strength up to 14 GPa (UNVERIFIED)."
+materials = ["MAT-CFRP"]
+purposes = ["P06", "P14"]
+inputs = "A 3 GPa laminate at 1.6 t/m3."
+outputs = "Half the virial nozzle structure and lighter trusses."
+penalties = "Creep under cryogenic and radiation load; joints."
+criteria = "kg per J stored; laminate allowable stress."
+prior_finding = "T06 2026-11-09: halves the virial nozzle structure; small for the whole ship (chain K5 -9 % on V1c)."
+evidence = ["S-T06-CNTF-2024", "S-FOURBURN"]
+uncertainties = "Translation of fibre strength into a laminate."
+next = ["Coil-pack structure at 15 E_p with fatigue (T03 found a 7-10 % load cycle 1.9e10 times)"]
 
-# =====================================================================================================================================
-# VTX-03  Helical magnetic capture
-# =====================================================================================================================================
+[technology.stages]
+present = "CFRP at about 1.5 GPa allowable; CNT fibres 4-8 GPa quasi-static in the laboratory."
+advanced = "CNT-reinforced laminates at 2-3 GPa."
+wayfarer_era = "Nozzle hoops, wing spars and gallery trusses in a CNT-class laminate."
+
+[technology.geometry]
+components = ["thinner loop hoops", "lighter wing spars", "lighter gallery trusses"]
+status = "PARAMETRIC_PLACEHOLDER"
+representation = "HARDWARE"
+colour = "STRUCTURE"
+purposes = []
+envelope = "none"
+location = "none"
+connections = "none"
+loads = "none"
+radiation = "none"
+thermal = "none"
+maintenance = "none"
+
+[technology.questions]
+a = "No."
+b = "Plausibly."
+c = "Yes, but modest."
+
+[technology.priority]
+feasibility = 4
+credibility = 3
+independence = 4
+mass_thermal = 3
+unlock = 2
+design_3d = 3
 
 [[technology]]
 id = "VTX-03"
@@ -670,10 +991,16 @@ credibility = "PLAUSIBLE_FUTURE"
 physics_verdict = "UNRESOLVED"
 research_status = "UNDER_INVESTIGATION"
 canon_status = "NON_CANON"
-prior_finding = "Integration study: shear only, by clocking the trim sectors; net swirl forbidden (1 % swirl about 2.8e5 N m roll, CMGs full in 0.36 s); efficiency 0.79 -> 0.72 costs +61 % mass."
+prior_finding = "Integration study: shear only, by clocking the trim sectors; net swirl forbidden (1 % swirl about 2.8e5 N m roll, CMGs full in 0.36 s); efficiency 0.79 -> 0.72 costs +61 % mass. | T00 2026-11-09: 0.79 is a momentum efficiency (Thio 1999); the calculator books it as thrust efficiency, so V0-V2 overstate the nozzle (eta_T = 0.62 read consistently). Corrected generations use eta_T."
 evidence = ["S-MERINO-AHEDO", "S-CASSIBRY-PMN", "S-VTX-STUDY-2026-11-08"]
 uncertainties = "Sign and size of the effect: the benefit and the penalty are both plausible, neither is computed."
 next = ["2D/3D resistive MHD or hybrid PIC of a pulsed shell in plain vs clocked vs shaped fields", "Nozzle-efficiency cliff per generation (convergence.py, done)"]
+claims = [
+  { quantity = "nozzle_efficiency_simulated_max", value = 0.7, unit = "1", basis = "PUBLISHED", source = "S-CASSIBRY-PMN" },
+  { quantity = "nozzle_efficiency_assumed", value = 0.79, unit = "1", basis = "ASSUMPTION", source = "S-MSFC-NOZZLE" },
+  { quantity = "nozzle_field_energy_ratio_needed", value = 10.0, unit = "J stored field per J pulse plasma", basis = "MODEL", source = "S-T03-STUDY", range = "10-15", study_case = "results/nozzle_results.json (A, A*, C sweeps 3-30)" },
+  { quantity = "plume-strike_share_of_the_nozzle_loss_C_10-15_E_p", value = 0.06, unit = "1", basis = "MODEL", source = "S-T03-STUDY", range = "0.06-0.07", study_case = "results/calculator_reruns.json t03 cases" },
+]
 
 [technology.stages]
 present = "Steady magnetic nozzles in thrusters; simulated pulsed nozzles; stellarator 3D fields for confinement."
@@ -707,20 +1034,6 @@ mass_thermal = 4
 unlock = 4
 design_3d = 5
 
-[[technology.claims]]
-quantity = "nozzle_efficiency_simulated_max"
-value = 0.70
-unit = "1"
-basis = "PUBLISHED"
-source = "S-CASSIBRY-PMN"
-
-[[technology.claims]]
-quantity = "nozzle_efficiency_assumed"
-value = 0.79
-unit = "1"
-basis = "ASSUMPTION"
-source = "S-MSFC-NOZZLE"
-
 [[technology]]
 id = "VTX-03A"
 name = "Clocked trim sectors (m = 4 helical harmonic)"
@@ -743,7 +1056,7 @@ credibility = "PLAUSIBLE_FUTURE"
 physics_verdict = "UNRESOLVED"
 research_status = "UNDER_INVESTIGATION"
 canon_status = "NON_CANON"
-prior_finding = "Integration study's chosen form of VTX-03."
+prior_finding = "Integration study's chosen form of VTX-03. | T03 2026-11-09: Clocked sectors give 0.25-1.1 deg of field rotation at the stopping surface (3-3.7 deg at 20 % trim), no efficiency change (<0.5 pt). Re-scope from 'helical capture' to vectoring, fault tolerance and replacement. Correct 'm = 4 helical harmonic': with four sectors the gap ripple is m = 4 and carries no handedness under a 45 deg clock; the differential trim pattern is m = 2. Evidence: results/nozzle_results.json perturbations (C_W10, Astar_W10)."
 evidence = ["S-VTX-STUDY-2026-11-08"]
 uncertainties = "Unknown sign of the effect."
 next = ["Same simulation as VTX-03"]
@@ -802,7 +1115,7 @@ credibility = "PLAUSIBLE_FUTURE"
 physics_verdict = "UNRESOLVED"
 research_status = "PROPOSED"
 canon_status = "NON_CANON"
-prior_finding = "Not studied in the integration study; added here on the owner's request."
+prior_finding = "Not studied in the integration study; added here on the owner's request. | T03 2026-11-09: The useful shaping is axisymmetric (current distribution plus forward closure, T03-NEW-1). Non-planar (helical) shaping costs about 10 pt of eta_mom per 18 deg of shear: 0.86 -> 0.83 / 0.76 / 0.63 at 2 / 5 / 20 MA. Evidence: results/nozzle_results.json perturbations."
 evidence = ["S-W7X-2025"]
 uncertainties = "Whether more shaping beats clocked sectors at all."
 next = ["Include in the VTX-03 simulation as a third case", "Price its solid angle with the calculator once a coil set is drawn"]
@@ -861,10 +1174,13 @@ credibility = "ESTABLISHED"
 physics_verdict = "PLAUSIBLE_FUTURE"
 research_status = "SUPPORTED"
 canon_status = "NON_CANON"
-prior_finding = "Integration study requirement."
+prior_finding = "Integration study requirement. | T03 2026-11-09: Twist-reversal 'balanced' helices cancel roll torque only at one current (2.7e4 N m at 5 MA; 0.24 and 0.57 MN m at 2 and 20 MA). Balance is required but not sufficient; needs measured trim. Evidence: results/nozzle_results.json perturbations."
 evidence = ["S-VTX-STUDY-2026-11-08"]
 uncertainties = "Pulse-to-pulse residual."
 next = ["Report the angular-momentum flux in the VTX-03 simulation"]
+claims = [
+  { quantity = "roll_torque_at_1pct_swirl", value = 280000.0, unit = "N m", basis = "MODEL", source = "S-VTX-STUDY-2026-11-08" },
+]
 
 [technology.stages]
 present = "Conservation law; no hardware."
@@ -898,16 +1214,188 @@ mass_thermal = 1
 unlock = 2
 design_3d = 2
 
-[[technology.claims]]
-quantity = "roll_torque_at_1pct_swirl"
-value = 2.8e5
-unit = "N m"
-basis = "MODEL"
-source = "S-VTX-STUDY-2026-11-08"
+[[technology]]
+id = "VTX-03D"
+name = "Forward closure coils on the X-ray stand-off sphere"
+kind = "technology"
+workstream = "VTX-03"
+purpose = "Close the axial leak of the three-loop magnetic cup so the pulse plasma turns aft instead of escaping forward onto the shield."
+principle = "Two coaxial coils at polar 20 and 40 deg on the stand-off sphere; with optimised currents the vacuum-field thin-shell model gives eta_mom 0.86-0.89 (eta_T 0.74-0.79) at 10-15 E_p of stored field and a forward leak of 0.15-0.3 % (A: 22 %)."
+ancestry = ["S-MSFC-NOZZLE", "S-T03-NAGAMINE-1999", "S-CASSIBRY-PMN"]
+ancestry_note = "Thio et al. (1999) momentum efficiency 0.80 (max 0.863); simulations 0.55-0.70; T03 vacuum-field model adds the closure."
+limitations = "Vacuum fields, elastic specular shell, no instabilities, no velocity spread, no detachment: an UPPER BOUND. Rayleigh-Taylor grows 13-14 e-folds per pulse in linear theory. Envelope solid angle 0.040-0.051 against 0.017 (V1), not booked in the calculator."
+breakthrough = "A self-consistent pulsed-plasma simulation showing eta_T >= 0.70 with <= 2 % of plasma on hardware (D-21 campaign)."
+depends_on = ["VTX-03"]
+materials = ["MAT-REBCO", "MAT-CFRP"]
+purposes = ["P05", "P06"]
+inputs = "C1 80-132 MA, hoop tension 3-7 GN; stored field 10-15 E_p (0.8-1.2 TJ)."
+outputs = "eta_T 0.74-0.79 (ideal model)."
+penalties = "Coil structure 855-1,281 t (virial); solid angle x2.4-3.0 on radiation to hardware; 0.2-1.9 GN inter-coil forces; trim 3-5 TW for 1 % in 5 ms."
+criteria = "eta_T and plasma on hardware from a 2D Hall-MHD / hybrid-PIC run (D-21)."
+credibility = "PLAUSIBLE_FUTURE"
+physics_verdict = "UNRESOLVED"
+claims = [
+  { quantity = "nozzle_thrust_efficiency_ideal_15Ep", value = 0.791, unit = "1", basis = "MODEL", source = "S-T03-STUDY", range = "0.74-0.79 (10-15 E_p), vacuum-field upper bound", study_case = "results/nozzle_results.json C_W15" },
+  { quantity = "hardware_solid_angle_closure", value = 0.051, unit = "sr/4pi", basis = "MODEL", source = "S-T03-STUDY", range = "0.040-0.051 (V1: 0.017)", study_case = "results/nozzle_results.json C_W15" },
+]
+research_status = "UNDER_INVESTIGATION"
+canon_status = "NON_CANON"
+prior_finding = "T03 2026-11-09: preferred experimental nozzle (owner 2026-11-09), ideal efficiency not demonstrated. Coupled V1 with C at 15 E_p 22,683 t."
+evidence = ["S-T03-NAGAMINE-1999", "S-T03-MATSUDA-2009", "S-MSFC-NOZZLE"]
+uncertainties = "Detachment, RT mixing, velocity spread (~0.94 on eta_T, not applied), eddy-screen loss 0.03-1 % of plasma."
+next = ["2D axisymmetric Hall-MHD and hybrid-PIC of the V1 pulse in A and C at 15 E_p (D-21 proposal, not launched)"]
 
-# =====================================================================================================================================
-# VTX-04  Sacrificial injection and radiation conversion (reopened)
-# =====================================================================================================================================
+[technology.stages]
+present = "Pulsed magnetic nozzles in laboratory experiments (impulse only)."
+advanced = "Shaped pulsed nozzles validated in 2D simulation."
+wayfarer_era = "Closure-coil nozzle with warm eddy screens."
+
+[technology.questions]
+a = "No."
+b = "Unresolved: D-21 decides."
+c = "Yes: the steepest mass lever (elasticity -2.9, T06)."
+
+[technology.geometry]
+components = ["closure coil C1", "closure coil C2", "warm eddy screens"]
+envelope = "Nozzle frame x = x_burn + z, x_burn about -227.5 m (V1): C1 r 14.74 m at z +40.51 (envelope r 2-3.2 m), C2 r 27.71 m at z +33.03."
+location = "Forward of the burn on the stand-off sphere, inside the shadow cone."
+connections = "VTX-03, VTX-02B, struts."
+loads = "0.2-1.9 GN axial; 3-7 GN hoop."
+radiation = "Inside the burn's sky: armour and screens."
+thermal = "Hot loop (plasma on hardware), cryogenic windings."
+maintenance = "Sector replacement (VTX-03E)."
+purposes = ["P05", "P06"]
+colour = "MAIN_PROPULSION"
+representation = "HARDWARE"
+status = "PARAMETRIC_PLACEHOLDER"
+
+[technology.priority]
+feasibility = 5
+credibility = 3
+independence = 3
+mass_thermal = 5
+unlock = 5
+design_3d = 5
+
+[[technology]]
+id = "VTX-03E"
+name = "Segmented, replaceable nozzle-loop sectors"
+kind = "technology"
+workstream = "VTX-03"
+purpose = "Make the nozzle loops survive both grain hits and neutron fluence by replacement rather than shielding."
+principle = "Each loop built from independent sectors (six in the FDP-1 geometry) that can lose one sector without losing the nozzle and be swapped between burns."
+ancestry = ["S-T02-REBCO-N", "S-T02-STUDY"]
+ancestry_note = "REBCO fluence tolerance; the FDP-1 loop already has sector arcs (ship_geometry.json Loop_*_Sector_*)."
+limitations = "Field ripple and nozzle efficiency with a missing sector (T03); spare mass; EVA/drone handling of 37-112 m loop sectors."
+breakthrough = "None, unless a conductor tolerating ~1e20 n/cm2 is required (T02-NEW-4)."
+depends_on = ["VTX-03"]
+materials = ["MAT-REBCO"]
+purposes = ["P05", "P06"]
+inputs = "Spares for 3-31 loop-1 replacements per mission (V1, neutron fluence) plus grain-hit spares."
+outputs = "Nozzle survival over 5.69 burn-years."
+penalties = "Spare mass (UNKNOWN until T03 gives sector mass); maintenance time between burns."
+criteria = "Nozzle efficiency with n sectors lost; sector mass; replacement time."
+credibility = "PLAUSIBLE_FUTURE"
+physics_verdict = "UNRESOLVED"
+research_status = "PROPOSED"
+canon_status = "NON_CANON"
+prior_finding = "T02 2026-11-09: radiation.py (loops 3-62x REBCO tolerance); impacts.py (~540 residual hits)."
+evidence = ["S-T02-REBCO-N", "S-T02-STUDY"]
+uncertainties = "Quench/cut threshold of a REBCO sector under a ug-class hit; in-situ irradiation tolerance."
+next = ["T03: nozzle efficiency with one of six sectors lost per loop", "T05: separable sectors and a replacement path (illustration)"]
+claims = []
+
+[technology.questions]
+a = "No: no superconducting magnet of this size is serviced in space."
+b = "Yes, plausibly: the bottleneck is sector mass and replacement logistics."
+c = "Yes: it is the only option found that answers both the grain and the neutron problem."
+
+[technology.geometry]
+status = "PARAMETRIC_PLACEHOLDER"
+representation = "HARDWARE"
+envelope = "Six separable sectors per loop at the FDP-1 arcs; replacement path to the hull."
+components = []
+purposes = ["P05", "P06"]
+location = "none"
+connections = "none"
+loads = "none"
+radiation = "none"
+thermal = "none"
+maintenance = "none"
+colour = "MAIN_PROPULSION"
+
+[technology.stages]
+present = "Superconducting magnets are not serviced in space."
+advanced = "Robotic exchange of magnet sectors on large structures."
+wayfarer_era = "Six separable sectors per loop, exchanged between burns."
+
+[technology.priority]
+feasibility = 4
+credibility = 3
+independence = 3
+mass_thermal = 3
+unlock = 4
+design_3d = 4
+
+[[technology]]
+id = "VTX-03F"
+name = "Neutron-tolerant high-field conductor (proposed Level C need)"
+kind = "technology"
+workstream = "VTX-03"
+purpose = "A superconductor keeping its critical current after ~1e20 n/cm2 of 2.45 MeV neutrons."
+principle = "Not known. Stated as a requirement only, never used as approved."
+ancestry = ["S-T02-REBCO-N"]
+ancestry_note = "Present REBCO degrades from ~1-4e18 n/cm2 (reactor), lower in situ."
+limitations = "Fictional unless demonstrated."
+breakthrough = "Critical current retained to 1e20 n/cm2 at 20-50 K in multi-tesla fields."
+depends_on = []
+materials = []
+purposes = ["P05"]
+inputs = "UNKNOWN"
+outputs = "Removes the loop-replacement requirement."
+penalties = "UNKNOWN"
+criteria = "Ic retention vs fluence."
+credibility = "FICTIONAL_BREAKTHROUGH"
+physics_verdict = "FICTIONAL_DEPENDENT"
+research_status = "PROPOSED"
+canon_status = "NON_CANON"
+prior_finding = "T02 2026-11-09: radiation.py."
+evidence = ["S-T02-REBCO-N"]
+uncertainties = "Whether any physical route exists."
+next = ["Owner question D-T02-4"]
+claims = []
+
+[technology.questions]
+a = "No."
+b = "Unknown."
+c = "Yes, if it existed."
+
+[technology.geometry]
+status = "NONE"
+representation = "NONE"
+components = []
+purposes = ["P05", "P06"]
+envelope = "none"
+location = "none"
+connections = "none"
+loads = "none"
+radiation = "none"
+thermal = "none"
+maintenance = "none"
+colour = "MAIN_PROPULSION"
+
+[technology.stages]
+present = "REBCO degrades from about 1-4e22 n/m2."
+advanced = "Unknown."
+wayfarer_era = "Level C need only if replacement is rejected (D-18)."
+
+[technology.priority]
+feasibility = 1
+credibility = 1
+independence = 2
+mass_thermal = 3
+unlock = 3
+design_3d = 1
 
 [[technology]]
 id = "VTX-04"
@@ -935,6 +1423,10 @@ prior_finding = "Integration study: rejected as reaction mass or liner for the m
 evidence = ["S-FOURBURN", "S-VTX-STUDY-2026-11-08"]
 uncertainties = "Tamper-enhanced burnup and D-T spark neutron capture are not in the calculator."
 next = ["Tamper sweep with the four-burn pulse ledger (convergence.py liner study, done)", "Model tamper inertial confinement on burn fraction"]
+claims = [
+  { quantity = "jet_specific_energy", value = 184000000000000.0, unit = "J/kg", basis = "MODEL", source = "case:V0" },
+  { quantity = "optimal_tamper_ratio", value = 1e-09, unit = "1", basis = "MODEL", source = "S-FOURBURN" },
+]
 
 [technology.stages]
 present = "Tampers are standard in ICF; liners in MagLIF; vapour shielding in divertors."
@@ -968,20 +1460,6 @@ mass_thermal = 2
 unlock = 3
 design_3d = 2
 
-[[technology.claims]]
-quantity = "jet_specific_energy"
-value = 1.84e14
-unit = "J/kg"
-basis = "MODEL"
-source = "case:V0"
-
-[[technology.claims]]
-quantity = "optimal_tamper_ratio"
-value = 1.0e-9
-unit = "1"
-basis = "MODEL"
-source = "S-FOURBURN"
-
 [[technology]]
 id = "VTX-04A"
 name = "Radiation-converting hydrogen or LiH tamper"
@@ -1004,17 +1482,15 @@ credibility = "ESTABLISHED"
 physics_verdict = "POSSIBLE_NOT_PRACTICAL"
 research_status = "CONTRADICTED"
 canon_status = "NON_CANON"
-prior_finding = "Rejected for the mission ve (2026-11-08)."
+prior_finding = "Rejected for the mission ve (2026-11-08). | T04 2026-11-09: T04 tamper-inertia case (k = share of thin-shell inertia that confines): k = 1 gives +1.2 % ve at rhoR 90 (mu 0.03), +10.7 % at rhoR 1 (mu 0.18); k = 0.5: +0.3 % / +3.0 %. The k = 0 liner table is reproduced exactly. The burnup effect is real but small at the mission rhoR."
 evidence = ["S-FOURBURN"]
 uncertainties = "Burnup gain from tamper inertia is not modelled and could change the sign."
 next = ["Liner study (done: no tamper raises ve at any fuel rhoR from 1 to 90 g/cm2, even with 26 % escaping at 1 g/cm2; the 2026-11-08 analytic estimate of a break-even near 12 % leak is not borne out by the pulse ledger)", "Add a tamper-inertia burnup term from the ICF literature"]
-
-[[technology.claims]]
-quantity = "tamper_ve_gain_best"
-value = 0.0
-unit = "1"
-basis = "MODEL"
-source = "case:liner_study"
+claims = [
+  { quantity = "tamper_ve_gain_best", value = 0.0, unit = "1", basis = "MODEL", source = "case:liner_study" },
+  { quantity = "xray_opacity_hydrogen", value = 0.4, unit = "cm2/g", basis = "PUBLISHED", source = "S-FOURBURN" },
+  { quantity = "escaping_radiation_share", value = 0.0115, unit = "1", basis = "MODEL", source = "case:V0" },
+]
 
 [technology.stages]
 present = "Hydrogen and plastic ablators and tampers in ICF targets."
@@ -1048,20 +1524,6 @@ mass_thermal = 2
 unlock = 3
 design_3d = 1
 
-[[technology.claims]]
-quantity = "xray_opacity_hydrogen"
-value = 0.40
-unit = "cm2/g"
-basis = "PUBLISHED"
-source = "S-FOURBURN"
-
-[[technology.claims]]
-quantity = "escaping_radiation_share"
-value = 0.0115
-unit = "1"
-basis = "MODEL"
-source = "case:V0"
-
 [[technology]]
 id = "VTX-04B"
 name = "Variable exhaust-mass operating mode (hydrogen low gear)"
@@ -1084,7 +1546,7 @@ credibility = "ESTABLISHED"
 physics_verdict = "PLAUSIBLE_FUTURE"
 research_status = "UNDER_INVESTIGATION"
 canon_status = "NON_CANON"
-prior_finding = "Integration study: valid but costs propellant; recommended removing the idle H2 vessels unless the owner wants the mode (decision)."
+prior_finding = "Integration study: valid but costs propellant; recommended removing the idle H2 vessels unless the owner wants the mode (decision). | T04 2026-11-09: T04 (D-04): no mission phase needs it. Escape spirals at 0.0069 g take 0.4-2.1 days; the low gear at mu 3 halves that. The idle vessels cost 667 t at V1 departure."
 evidence = ["S-FOURBURN", "S-VTX-STUDY-2026-11-08"]
 uncertainties = "Whether any mission phase needs it."
 next = ["Exhaust-velocity sweep of the four-burn closure (convergence.py, done)"]
@@ -1239,10 +1701,6 @@ mass_thermal = 2
 unlock = 1
 design_3d = 1
 
-# =====================================================================================================================================
-# VTX-05  Predictive ignition and radiation management
-# =====================================================================================================================================
-
 [[technology]]
 id = "VTX-05"
 name = "Predictive ignition and radiation management"
@@ -1269,6 +1727,9 @@ prior_finding = "Integration study: control recovers no energy; it holds the ass
 evidence = ["S-GA-TARGET", "S-VTX-STUDY-2026-11-08"]
 uncertainties = "How much asymmetry raises the plume-strike share: no model."
 next = ["Link a placement-error model to the plume-strike share (needs the VTX-03 simulation)"]
+claims = [
+  { quantity = "loop_trim_power_1pct_in_5ms", value = 340000000000.0, unit = "W", basis = "MODEL", source = "S-VTX-STUDY-2026-11-08" },
+]
 
 [technology.stages]
 present = "Bench target engagement about 150 um; pellet-train programming on W7-X."
@@ -1301,13 +1762,6 @@ independence = 3
 mass_thermal = 3
 unlock = 4
 design_3d = 3
-
-[[technology.claims]]
-quantity = "loop_trim_power_1pct_in_5ms"
-value = 3.4e11
-unit = "W"
-basis = "MODEL"
-source = "S-VTX-STUDY-2026-11-08"
 
 [[technology]]
 id = "VTX-05A"
@@ -1427,10 +1881,6 @@ mass_thermal = 1
 unlock = 3
 design_3d = 3
 
-# =====================================================================================================================================
-# VTX-06  Directional radiation escape
-# =====================================================================================================================================
-
 [[technology]]
 id = "VTX-06"
 name = "Directional radiation escape"
@@ -1457,6 +1907,9 @@ prior_finding = "Integration study: radiation is only 5 % of the hot load; the h
 evidence = ["S-FDP1", "S-VTX-STUDY-2026-11-08"]
 uncertainties = "Shield transport (build-up, rim scatter)."
 next = ["Gallery placement in V1 (done)", "Shield transport"]
+claims = [
+  { quantity = "hardware_solid_angle_share", value = 0.0195, unit = "1", basis = "MODEL", source = "case:V0" },
+]
 
 [technology.stages]
 present = "Shadow shields on space reactors; open geometry concepts."
@@ -1489,13 +1942,6 @@ independence = 4
 mass_thermal = 3
 unlock = 2
 design_3d = 5
-
-[[technology.claims]]
-quantity = "hardware_solid_angle_share"
-value = 0.0195
-unit = "1"
-basis = "MODEL"
-source = "case:V0"
 
 [[technology]]
 id = "VTX-06A"
@@ -1615,10 +2061,6 @@ mass_thermal = 2
 unlock = 3
 design_3d = 4
 
-# =====================================================================================================================================
-# VTX-07  Advanced thermal systems (highest system leverage)
-# =====================================================================================================================================
-
 [[technology]]
 id = "VTX-07"
 name = "Advanced thermal systems"
@@ -1628,7 +2070,7 @@ purpose = "Reject every watt that is not jet at the highest temperature its sour
 principle = "Stefan-Boltzmann: area per watt = 1 / (eps sigma T^4); radiator mass scales with area. Waste heat leaves at the temperature of its source (driver cores, electronics, cryo); recirculating power becomes warm-loop heat."
 ancestry = ["S-MATTICK-LDR", "S-NASA-SIC-500C", "S-CORE-CURIE", "S-FDP1"]
 ancestry_note = "Droplet radiators; 500 C SiC electronics; induction-core Curie limits; FDP-1 warm loop 600 K, 24.4 GW, 1.84 km2."
-limitations = "Induction cores lose permeability near their Curie points (668 K amorphous, 823-843 K nanocrystalline); MW-class power electronics at 800 K do not exist; FDP-1 wings 3.6 km cannot be fixed blades."
+limitations = "Induction cores lose permeability near their Curie points (668 K amorphous, 823-843 K nanocrystalline); MW-class power electronics at 800 K do not exist; FDP-1 wings 3.6 km cannot be fixed blades. | T01 2026-11-09: Induction cores and MW SiC are demonstrated to about 423-523 K, not 600-800 K; the 450-700 K band is the heat-pipe working-fluid gap; the Atlas warm radiator (1.0 kg/m2 at 600-800 K) matches no solid panel technology, only a droplet sheet TARGET. FDP-1 itself (V0) does not close at 2.5 kg/m2 or at 500 K."
 breakthrough = "Power conversion at 700-800 K, induction cores at 600 K or better, and deployable or liquid radiators."
 depends_on = ["VTX-07A", "VTX-07C"]
 materials = ["MAT-SIC", "MAT-CC", "MAT-NB1ZR", "MAT-RAD-NPE01", "MAT-AZ93"]
@@ -1645,6 +2087,10 @@ prior_finding = "Integration study: the largest lever. 800 K warm loop -45 %, ha
 evidence = ["S-FDP1", "S-VTX-STUDY-2026-11-08", "S-CORE-CURIE"]
 uncertainties = "How much of the warm load can move above 600 K; the calculator has one warm temperature (split modelled as a range)."
 next = ["Warm-temperature sweep per generation (done)", "Split-loop model: cores and electronics as separate loads (adapter, future)"]
+claims = [
+  { quantity = "sic_ic_demonstrated_temperature", value = 773.0, unit = "K", basis = "PUBLISHED", source = "S-NASA-SIC-500C" },
+  { quantity = "finemet_curie_temperature", value = 833.0, unit = "K", basis = "PUBLISHED", source = "S-CORE-CURIE" },
+]
 
 [technology.stages]
 present = "Heat-pipe and pumped-loop radiators; SiC logic at 773 K; droplet radiator lab tests."
@@ -1678,20 +2124,6 @@ mass_thermal = 5
 unlock = 5
 design_3d = 5
 
-[[technology.claims]]
-quantity = "sic_ic_demonstrated_temperature"
-value = 773.0
-unit = "K"
-basis = "PUBLISHED"
-source = "S-NASA-SIC-500C"
-
-[[technology.claims]]
-quantity = "finemet_curie_temperature"
-value = 833.0
-unit = "K"
-basis = "PUBLISHED"
-source = "S-CORE-CURIE"
-
 [[technology]]
 id = "VTX-07A"
 name = "Split warm loop with high-temperature power electronics"
@@ -1714,9 +2146,9 @@ credibility = "PLAUSIBLE_FUTURE"
 physics_verdict = "PLAUSIBLE_FUTURE"
 research_status = "UNDER_INVESTIGATION"
 canon_status = "NON_CANON"
-prior_finding = "Integration study introduced the split."
+prior_finding = "Integration study introduced the split. | T01 2026-11-09: T01 split ledger: with TARGET components (cores 640 K, power stages 740 K, capacitors 550 K, dumps 1,000 K) the equivalent single loop is 628 K on a tin droplet sheet at emissivity 0.5 (670 K at 0.8; 679 K but 1.5 kg/m2 on panels); the 640 K induction cores alone are about 40 % of the warm area, not 700-800 K. With near-term components (cores 470 K, SiC 500 K) it is 489 K and the ship does not close on 3 kg/m2 radiators at any driver efficiency."
 evidence = ["S-NASA-SIC-500C", "S-CORE-CURIE"]
-uncertainties = "Load split between cores and electronics."
+uncertainties = "Load split between cores and electronics. | T01 2026-11-09: Induction-core loss above 473 K; MW power stages above 523 K; pulse capacitors above 473 K; sheet emissivity of a tin droplet layer."
 next = ["Book the driver loss by component (cores vs conversion)"]
 
 [technology.stages]
@@ -1773,9 +2205,9 @@ credibility = "PLAUSIBLE_FUTURE"
 physics_verdict = "PLAUSIBLE_FUTURE"
 research_status = "PROPOSED"
 canon_status = "NON_CANON"
-prior_finding = "Not studied (the scenario has an 1,100 K droplet option in the hot loop)."
+prior_finding = "Not studied (the scenario has an 1,100 K droplet option in the hot loop). | T01 2026-11-09: T01: a tin sheet at 0.6 kg/m2 (emissivity 0.5) is the only radiator in the record that delivers the Atlas areal mass above 520 K; at emissivity 0.3 the ship grows 11.8 % (S1_adv_eps0.3_eta0.30), at 0.8 it shrinks 5.6 %."
 evidence = ["S-MATTICK-LDR"]
-uncertainties = "Behaviour at 0.007-0.02 g thrust; dust erosion of the sheet."
+uncertainties = "Behaviour at 0.007-0.02 g thrust; dust erosion of the sheet. | T01 2026-11-09: Sheet emissivity; collection loss at 0.007-0.019 g (fly the drops parallel to the thrust axis so acceleration only changes their speed: 0.5 a t^2 about 0.9 m over 100 m at 20 m/s); dust (T02)."
 next = ["Areal-mass sensitivity of the warm loop with a droplet option"]
 
 [technology.stages]
@@ -1829,13 +2261,17 @@ outputs = "Lower warm load."
 penalties = "None."
 criteria = "House fraction."
 credibility = "PLAUSIBLE_FUTURE"
-physics_verdict = "UNRESOLVED"
+physics_verdict = "PLAUSIBLE_FUTURE"
 research_status = "UNDER_INVESTIGATION"
 canon_status = "NON_CANON"
-prior_finding = "Integration study: -30 % at half."
+prior_finding = "Integration study: -30 % at half. | T01 2026-11-09: T01: bottom-up house load 0.012-0.014 % of fusion (conservative, about 10 MJ per pellet, of which 8 MJ factory process) and 0.003-0.005 % (advanced; the factory itself about 0.6 MJ per pellet, the rest is the Carnot surcharge of cryoplants rejecting at 700 K) for fuel-only targets near 81 GJ yield. The 0.05 % TARGET is met with margin; the 0.1 % baseline was about 8x high. Valid only while the yield per target stays near 1e11 J."
 evidence = ["S-FDP1"]
 uncertainties = "The baseline itself may be pessimistic or optimistic."
 next = ["Source the target-factory estimate (top research priority)"]
+claims = [
+  { quantity = "house_fraction_bottom_up_conservative", value = 0.000123, unit = "1", basis = "MODEL", source = "S-T01-IFE-TARGET-COST", study_case = "V1_house_bottomup_cons" },
+  { quantity = "house_fraction_bottom_up_advanced", value = 2.6e-05, unit = "1", basis = "TARGET", source = "S-T01-CRYO", study_case = "V1_house_bottomup_adv" },
+]
 
 [technology.stages]
 present = "Unknown."
@@ -1928,9 +2364,130 @@ mass_thermal = 3
 unlock = 3
 design_3d = 5
 
-# =====================================================================================================================================
-# VTX-08  Interstellar and interplanetary particle protection (cross-cutting)
-# =====================================================================================================================================
+[[technology]]
+name = "Circuit-by-circuit warm radiator (split warm loop as booked)"
+kind = "technology"
+workstream = "VTX-07"
+purpose = "Replace the single warm loop with the circuits the components allow; report each circuit's area."
+principle = "Equivalent radiator: same total area and mass as the circuits; T_eq from the area, areal mass area-weighted."
+claims = [
+  { quantity = "warm_T_eq_advanced", value = 628.0, unit = "K", basis = "TARGET", source = "S-T01-LEDGER", study_case = "S1_advanced_eta0.30" },
+  { quantity = "warm_T_eq_conservative", value = 489.0, unit = "K", basis = "ASSUMPTION", source = "S-T01-LEDGER", study_case = "S1_cons_T_calcopt_eta0.45" },
+]
+id = "VTX-07E"
+ancestry = ["S-T01-LEDGER", "S-T01-TFAWS-2024", "S-T01-HIF-EFF"]
+ancestry_note = "T01 split ledger over FDP-1; component temperature limits from SiC, capacitor, core-material and heat-pipe sources."
+limitations = "One equivalent radiator in the calculator; component loss shares are EXTRAPOLATION from the HIF ranking; burn-average only."
+breakthrough = "Induction cores at 640 K and MW power stages at 740 K (TARGET); near-term parts give 489 K and the ship does not close."
+depends_on = ["VTX-07A"]
+materials = ["MAT-SIC"]
+purposes = ["P12", "P13"]
+inputs = "Per-component loss heat and reject temperature."
+outputs = "Equivalent warm radiator: 628 K, 0.96 kg/m2, 2e-6 kg/W (planning case)."
+penalties = "Several loops, pumps and manifolds (booked as transport mass and pumping power)."
+criteria = "Booking error below 1e-6; circuit areas per component class."
+credibility = "PLAUSIBLE_FUTURE"
+physics_verdict = "PLAUSIBLE_FUTURE"
+research_status = "SUPPORTED"
+canon_status = "NON_CANON"
+prior_finding = "T01 2026-11-09: the 700-800 K single warm loop does not survive booking; the induction cores are about 40 % of the warm area."
+evidence = ["S-T01-LEDGER", "S-T01-SIC-250C", "S-T01-CAP-200C", "S-T01-HITPERM"]
+uncertainties = "FeCo nanocrystalline core loss at 600-700 K; sheet emissivity."
+next = ["Driver loss budget from first principles (T01 J)"]
+
+[technology.stages]
+present = "Components rated to 423-523 K."
+advanced = "Cores at 640 K, power stages at 740 K, capacitors at 550 K (TARGET)."
+wayfarer_era = "Separate warm circuits per component class on split wings."
+
+[technology.questions]
+a = "No."
+b = "Plausibly, at TARGET component temperatures."
+c = "Yes: it replaces the withdrawn 700-800 K loop with a booked one."
+
+[technology.geometry]
+components = ["warm wing circuit bands (1,000 / 740 / 700 / 640 / 550 K)"]
+envelope = "W2 wings at azimuth 0 and 180 deg, x -178.75 to +88.0 m, root r 10 m; planning tip r 1,088 m, bracket 460-1,688 m."
+location = "Wings on the equipment module."
+connections = "VTX-07A, VTX-07B, VTX-07D."
+loads = "Wing spars."
+radiation = "Edge-on to the burn."
+thermal = "Warm circuits."
+maintenance = "Panel or sheet replacement."
+purposes = ["P12", "P13"]
+colour = "WARM_RADIATOR"
+representation = "HARDWARE"
+status = "PARAMETRIC_PLACEHOLDER"
+
+[technology.priority]
+feasibility = 5
+credibility = 4
+independence = 4
+mass_thermal = 5
+unlock = 4
+design_3d = 4
+
+[[technology]]
+id = "VTX-07F"
+name = "Thin-wall refractory heat-pipe radiators for the 1,800 K band"
+kind = "technology"
+workstream = "VTX-07"
+purpose = "Halve the areal mass of the hot loop's heat-pipe panels (3.0 to 1.5 kg/m2 optimistic)."
+principle = "Lithium heat pipes in Mo-Re or carbon-carbon shells; mass is wall and fin thickness, set by creep and meteoroid allowance, not by heat flux."
+ancestry = ["S-T06-SP100", "S-T06-RADMASS"]
+limitations = "Published space radiators sit at about 5-8 kg/m2; 1.5 kg/m2 flat plates are low-temperature. Creep at 1,800 K and dust puncture set the wall."
+breakthrough = "None beyond advanced engineering; a requirement two to five times beyond published refractory practice."
+depends_on = []
+credibility = "PLAUSIBLE_FUTURE"
+physics_verdict = "PLAUSIBLE_FUTURE"
+research_status = "PROPOSED"
+canon_status = "NON_CANON"
+claims = [
+  { quantity = "elasticity_departure_vs_hot_areal_V1c", value = 0.08, unit = "1", basis = "MODEL", source = "S-T06-STUDY", study_case = "elasticities" },
+]
+ancestry_note = "SP-100 Mo-13Re/Li heat pipes; space waste-heat radiators at 5-8 kg/m2 in practice (both UNVERIFIED)."
+materials = ["MAT-MORE", "MAT-CC"]
+purposes = ["P12", "P13"]
+inputs = "Lithium heat pipes, thin refractory walls."
+outputs = "Hot panels at 1.5 kg/m2 (half the optimistic tier)."
+penalties = "Creep at 1,800 K; dust puncture."
+criteria = "kg/m2 at 1,800 K with a life allowance."
+prior_finding = "T06 2026-11-09: saves about 4 % on V1c (chain K2)."
+evidence = ["S-T06-SP100", "S-T06-RADMASS"]
+uncertainties = "Wall thickness under creep and dust."
+next = ["Creep-limited wall sizing"]
+
+[technology.stages]
+present = "SP-100 Mo-13Re/Li heat pipes; waste-heat radiators 6.8-8.2 kg/m2 in studies."
+advanced = "Carbon-carbon armoured heat pipes at 3 kg/m2 (the FDP-1 optimistic tier)."
+wayfarer_era = "1.5 kg/m2 hot panels, robotically replaced after dust damage."
+
+[technology.geometry]
+components = ["hot root bands (thinner panels, same area)"]
+status = "PARAMETRIC_PLACEHOLDER"
+representation = "HARDWARE"
+colour = "HOT_RADIATOR"
+purposes = []
+envelope = "none"
+location = "none"
+connections = "none"
+loads = "none"
+radiation = "none"
+thermal = "none"
+maintenance = "none"
+
+[technology.questions]
+a = "No."
+b = "Plausibly: a requirement two to five times beyond published practice."
+c = "Modest."
+
+[technology.priority]
+feasibility = 3
+credibility = 3
+independence = 4
+mass_thermal = 2
+unlock = 2
+design_3d = 2
 
 [[technology]]
 id = "VTX-08"
@@ -1958,6 +2515,10 @@ prior_finding = "Integration study: the largest integration problem; braking bur
 evidence = ["S-HOANG-2017", "S-ULYSSES-ISD", "S-WHIPPLE-BLE", "S-VTX-STUDY-2026-11-08"]
 uncertainties = "Grain size spectrum on the actual path; penetration physics at 0.016 c; whether the plume clears grains."
 next = ["Exposure map per generation using lab/problems/fdp1-requirements P11 (protrusion, frontal area)", "Vaporisation-regime bumper model", "Owner question on braking orientation (decision D-C9)"]
+claims = [
+  { quantity = "grain_specific_kinetic_energy_at_0016c", value = 11500000000000.0, unit = "J/kg", basis = "MODEL", source = "S-CANON" },
+  { quantity = "isd_mean_grain_mass", value = 3e-16, unit = "kg", basis = "PUBLISHED", source = "S-ULYSSES-ISD" },
+]
 
 [technology.stages]
 present = "Whipple shields to about 15 km/s; erosion estimates for relativistic probes."
@@ -1991,20 +2552,6 @@ mass_thermal = 3
 unlock = 4
 design_3d = 5
 
-[[technology.claims]]
-quantity = "grain_specific_kinetic_energy_at_0016c"
-value = 1.15e13
-unit = "J/kg"
-basis = "MODEL"
-source = "S-CANON"
-
-[[technology.claims]]
-quantity = "isd_mean_grain_mass"
-value = 3.0e-16
-unit = "kg"
-basis = "PUBLISHED"
-source = "S-ULYSSES-ISD"
-
 [[technology]]
 id = "VTX-08A"
 name = "Multi-layer sacrificial bumpers for the vaporisation regime"
@@ -2027,7 +2574,7 @@ credibility = "PLAUSIBLE_FUTURE"
 physics_verdict = "UNRESOLVED"
 research_status = "PROPOSED"
 canon_status = "NON_CANON"
-prior_finding = "Integration study proposed bumpers on both faces of every loop."
+prior_finding = "Integration study proposed bumpers on both faces of every loop. | T02 2026-11-09: T02 2026-11-09: defeated energy grows with stand-off squared (21 kJ at 1 m, 2.1 MJ at 10 m, 210 MJ at 100 m; band x0.1-x10); mass is small (tonnes), stand-off and burn's sky limit."
 evidence = ["S-HOANG-2017", "S-WHIPPLE-BLE"]
 uncertainties = "Physics at the speed."
 next = ["Erosion budget from the grain flux and the mission path length"]
@@ -2083,10 +2630,10 @@ outputs = "Fewer large impacts."
 penalties = "Power; warm-loop heat."
 criteria = "Detectable grain size at range; engagement rate."
 credibility = "PLAUSIBLE_FUTURE"
-physics_verdict = "PLAUSIBLE_FUTURE"
+physics_verdict = "IMPOSSIBLE"
 research_status = "PROPOSED"
 canon_status = "NON_CANON"
-prior_finding = "Canon covers the bow-first case only."
+prior_finding = "Canon covers the bow-first case only. | T02 2026-11-09: T02 2026-11-09: detection gives 0.2-21 ms warning for 0.1-10 mm grains; vaporising or deflecting a 1 mm grain in that time needs ~0.13 MJ on a 1 mm target or ~58 km/s lateral velocity. No active clearing."
 evidence = ["S-CANON"]
 uncertainties = "Large-grain flux."
 next = ["Ask the owner whether the canon forward defence can face aft during braking (decision)"]
@@ -2145,10 +2692,13 @@ credibility = "ESTABLISHED"
 physics_verdict = "IMPOSSIBLE"
 research_status = "CONTRADICTED"
 canon_status = "NON_CANON"
-prior_finding = "Not studied before; recorded so it is not proposed again for grains. Canon's magnetic diversion zone is display-only."
+prior_finding = "Not studied before; recorded so it is not proposed again for grains. Canon's magnetic diversion zone is display-only. | T02 2026-11-09: T02 2026-11-09: D-12 confirmed (grain Larmor radius ~8e9 m at 1 mT). Ions deflect at no cost in the nozzle field, but ~75 % of LIC gas is neutral; gas power flux 0.03 W/m2, H fluence ~1e15/cm2 per leg, sputtering < 1 nm: no dedicated field needed."
 evidence = ["S-ULYSSES-ISD"]
 uncertainties = "Charging of grains by the ship's own environment (photo-electric, plasma) is not modelled; still far too weak."
 next = ["None for grains; gas deflection may be studied for surface damage (Hoang: about 0.1 mm)"]
+claims = [
+  { quantity = "grain_charge_to_mass", value = 0.6, unit = "C/kg", basis = "PUBLISHED", source = "S-ULYSSES-ISD" },
+]
 
 [technology.stages]
 present = "Magnetospheres deflect solar-wind ions."
@@ -2182,13 +2732,6 @@ mass_thermal = 1
 unlock = 1
 design_3d = 1
 
-[[technology.claims]]
-quantity = "grain_charge_to_mass"
-value = 0.6
-unit = "C/kg"
-basis = "PUBLISHED"
-source = "S-ULYSSES-ISD"
-
 [[technology]]
 id = "VTX-08D"
 name = "Engine-first braking protection"
@@ -2208,13 +2751,13 @@ outputs = "Braking-burn survival."
 penalties = "Mass, possibly solid angle."
 criteria = "Exposed critical area during braking; added mass."
 credibility = "PLAUSIBLE_FUTURE"
-physics_verdict = "UNRESOLVED"
-research_status = "PROPOSED"
+physics_verdict = "PLAUSIBLE_FUTURE"
+research_status = "UNDER_INVESTIGATION"
 canon_status = "NON_CANON"
-prior_finding = "New 2026-11-08 finding; also affects the canon ship (10-day braking burns)."
+prior_finding = "New 2026-11-08 finding; also affects the canon ship (10-day braking burns). | T02 2026-11-09: T02 2026-11-09: engine-first exposure 12,282 m2 (V1), 12,260 (V0), 4,015 (canon) at 0.4 deg; the shadow-cone skirt T02-NEW-1 (22-90 t) or a flat aft annulus on the canon ship (6-31 t) covers tanks, rings and the forward shield's back; bore-visible engine hardware stays exposed (~540 residual events per mission NOMINAL, V1)."
 evidence = ["S-VTX-STUDY-2026-11-08"]
-uncertainties = "Everything quantitative."
-next = ["Owner decision on the braking orientation problem (D-C9)", "Geometric exposure map in the braking orientation (P11 reversed)"]
+uncertainties = "Everything quantitative. | T02 2026-11-09: Large-grain environment (LOW 3.4 / NOMINAL 540 / HIGH 17,300 residual events); debris-cloud physics at 1.15e13 J/kg (T00 unit correction, R-01)."
+next = ["Owner decision on the braking orientation problem (D-C9)", "Geometric exposure map in the braking orientation (P11 reversed)", "Owner decision D-06 with the T02 options (D-T02-2)", "Grazing-impact and thin-sheet tests at 30-100 km/s (dust accelerator)"]
 
 [technology.stages]
 present = "Not addressed anywhere."
@@ -2242,6 +2785,130 @@ status = "CONCEPTUAL_ILLUSTRATION"
 
 [technology.priority]
 feasibility = 5
+credibility = 3
+independence = 3
+mass_thermal = 3
+unlock = 3
+design_3d = 4
+
+[[technology]]
+id = "VTX-08E"
+name = "Shadow-cone skirt (engine-first braking screen)"
+kind = "technology"
+workstream = "VTX-08"
+purpose = "Screen the tanks, habitat rings and the back of the forward shield during engine-first braking without entering the burn's sky."
+principle = "A thin conical sheet whose apex is the burn point and whose half-angle is the hardware cone: it contains the burn's rays (edge-on), lies in the shadow shield's umbra, and meets every grain moving forward along the ship at a grazing angle equal to the half-angle, 100-300 m ahead of what it protects, so each grain becomes a spreading plasma before it arrives."
+ancestry = ["S-CANON", "S-FDP1", "S-HOANG-2017"]
+ancestry_note = "Canon shadow-cone rule (crew and hardware cones) and the FDP-1 shadow shield; Whipple-bumper principle without the BLEs."
+limitations = "Only works with the stream within ~1 deg of the axis (exposure 2,281 m2 at 0.4 deg, 4,060 at 2.29 deg, 9,194 at 5 deg); finite-source and rim-scatter terms unknown; structure and deployment not designed; cannot cover the bore-visible engine hardware."
+breakthrough = "None needed; engineering only."
+depends_on = ["VTX-08A"]
+materials = ["MAT-CC"]
+purposes = ["P14"]
+inputs = "Sheet mass 22-90 t (V1, 0.5-2 kg/m2 over 44,900 m2); attitude hold within ~1 deg during braking."
+outputs = "V1 engine-first exposure 12,282 -> 2,281 m2 at 0.4 deg; NOMINAL events beyond 2 m bumpers 2,290 -> 540 per mission."
+penalties = "Mass; maintenance of holed area (< 1 % per mission NOMINAL); an attitude requirement."
+criteria = "Exposed critical area engine-first; zero added burn solid angle; holed fraction per leg."
+credibility = "PLAUSIBLE_FUTURE"
+physics_verdict = "PLAUSIBLE_FUTURE"
+research_status = "PROPOSED"
+canon_status = "NON_CANON"
+prior_finding = "T02 2026-11-09: exposure.py and impacts.py."
+evidence = ["S-T02-STUDY"]
+uncertainties = "Debris-cloud spread at 1e10 J/kg; large-grain environment (x5,000 LOW-HIGH)."
+next = ["Rim-scatter and finite-source bound with T04 hot-spot size", "Structural concept and deployment (T05 illustration only, D-10)"]
+claims = [
+  { quantity = "skirt_surface_m2", value = 44878, unit = "m2", basis = "MODEL", source = "S-T02-STUDY", study_case = "impacts.json:skirt.V1" },
+  { quantity = "skirt_mass_t", value = 22.0, unit = "t", basis = "MODEL", source = "S-T02-STUDY", range = "22-90", study_case = "impacts.json:skirt.V1" },
+  { quantity = "exposure_with_skirt_m2_0p4deg", value = 2281, unit = "1", basis = "MODEL", source = "S-T02-STUDY", study_case = "exposure.json:cases.V1.ENGINE_FIRST.with_skirt" },
+]
+
+[technology.stages]
+present = "Thin multi-layer Whipple bumpers flown at 7-10 km/s; conical deployable sheets (solar sails, sunshields) flown."
+advanced = "Large conical sheets on a tensioned frame, replaceable panels by drone."
+wayfarer_era = "Skirt on the hardware cone, panels changed between burns."
+
+[technology.questions]
+a = "No: the impact regime is untested, but every element (thin sheets, deployable cones) exists."
+b = "Yes: the bottleneck is the attitude hold and the unknown large-grain environment, not materials."
+c = "Yes: it removes 80 % of the braking exposure for 0.2-0.9 % of departure mass (V1); canon form 6-31 t."
+
+[technology.geometry]
+status = "CONCEPTUAL_ILLUSTRATION"
+representation = "HARDWARE"
+envelope = "apex (-227.54, 0, 0); half-angle 7.94 deg (V1/V2), 9.60 deg (V0); r 7.2-45 m, x -175.8 to +95.1 m (V1). Canon form: flat annulus x -98 m, r 5.7-45 m, 6,260 m2, 6-31 t."
+components = []
+purposes = []
+location = "none"
+connections = "none"
+loads = "none"
+radiation = "none"
+thermal = "none"
+maintenance = "none"
+colour = "SHIELD"
+
+[technology.priority]
+feasibility = 5
+credibility = 3
+independence = 4
+mass_thermal = 4
+unlock = 5
+design_3d = 5
+
+[[technology]]
+id = "VTX-08F"
+name = "Nozzle-loop guard rings and local bumpers"
+kind = "technology"
+workstream = "VTX-08"
+purpose = "Give the bore-visible and silhouette-outside engine hardware a stand-off bumper where no external shield fits."
+principle = "Bumper sheets on the stream-facing faces of loops, struts and feeds: up to ~2 m stand-off engine-first (burn's sky limits it), 20-25 m forward guard rings for loops 2 and 3 bow-first."
+ancestry = ["S-WHIPPLE-BLE", "S-T02-STUDY"]
+ancestry_note = "Whipple principle; BLEs not extrapolated."
+limitations = "Burn-facing bumpers add burn solid angle (+0.001-0.004 hardware share, EXTRAPOLATION); 2 m stand-off defeats only ~84 kJ (7 ug): ~540 residual events per mission NOMINAL (V1 with skirt)."
+breakthrough = "None."
+depends_on = ["VTX-08A"]
+materials = ["MAT-CC"]
+purposes = ["P14"]
+inputs = "~5-10 t of local bumpers; ~2 t per guard-ring layer."
+outputs = "Loop-face events beyond the bumper: 49,200 (bare 5 mm wall) -> 540 per mission, V1 NOMINAL with the skirt."
+penalties = "Solid angle, plume strike area."
+criteria = "Residual events per sector per leg; added solid-angle share."
+credibility = "PLAUSIBLE_FUTURE"
+physics_verdict = "POSSIBLE_NOT_PRACTICAL"
+research_status = "PROPOSED"
+canon_status = "NON_CANON"
+prior_finding = "T02 2026-11-09: impacts.py hits table."
+evidence = ["S-T02-STUDY"]
+uncertainties = "Solid-angle and plume-strike cost needs T03's field map."
+next = ["T03: plasma fraction reaching 40-60 deg from the axis forward of the burn (guard-ring zone)"]
+claims = []
+
+[technology.questions]
+a = "Bumpers yes; at this speed and stand-off untested."
+b = "Partly: limited by the burn's sky."
+c = "Necessary but not sufficient: pairs with T02-NEW-3."
+
+[technology.geometry]
+status = "PARAMETRIC_PLACEHOLDER"
+representation = "HARDWARE"
+envelope = "Guard rings ~0.8 m wide, 20-25 m forward of loops 2 and 3 at r 64.7 / 112.0 m; local bumpers <= 2 m on every loop, strut and feed outside r 45 m."
+components = []
+purposes = []
+location = "none"
+connections = "none"
+loads = "none"
+radiation = "none"
+thermal = "none"
+maintenance = "none"
+colour = "SHIELD"
+
+[technology.stages]
+present = "Whipple bumpers at 7-10 km/s."
+advanced = "Burn-facing bumpers and guard rings sized from accelerator tests."
+wayfarer_era = "Guard rings forward of loops 2 and 3; local bumpers on every exposed part."
+
+[technology.priority]
+feasibility = 4
 credibility = 3
 independence = 3
 mass_thermal = 3

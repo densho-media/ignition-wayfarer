@@ -31,7 +31,9 @@ CLAIM_BASIS = {'PUBLISHED', 'MODEL', 'ASSUMPTION', 'TARGET'}
 LINK_KINDS = {'enables', 'improves', 'worsens', 'conflicts', 'shares'}
 DECISION_TYPES = {'TECHNICAL_CONCLUSION', 'OWNER_APPROVAL_CANON', 'OWNER_APPROVAL_EXPERIMENT'}
 DECISION_STATES = {'OPEN', 'DECIDED'}
-SOURCE_KINDS = {'journal', 'conference', 'report', 'press', 'book', 'dataset', 'model', 'canon'}
+SOURCE_KINDS = {'journal', 'conference', 'report', 'press', 'book', 'dataset', 'model', 'canon', 'patent', 'catalogue', 'lecture'}
+GEN_STATUS = {'HISTORICAL_CONDITIONAL', 'RESEARCH_TARGET', 'BOUND'}
+HISTORICAL = ['V0', 'V1', 'V2']                     # the 2026-11-08 generations: kept, never overwritten (T00 Phase 4)
 VERIFICATION = {'PRIMARY_VERIFIED', 'SECONDARY_VERIFIED', 'TRANSCRIBED', 'UNVERIFIED'}   # PMDS evidence states
 PRIORITY_WEIGHTS = {'feasibility': 3, 'credibility': 2, 'independence': 1, 'mass_thermal': 2, 'unlock': 2, 'design_3d': 1}
 
@@ -199,6 +201,11 @@ def validate(A, pmds=None):
         q = l.get('quantified')
         if not q:
             errs.append(f'link {i}: quantified must be a case name or UNKNOWN')
+        elif q.startswith('study:'):                         # study:<folder>:<case> = a case in a thread study's committed results
+            folder, case = q.split(':', 2)[1], q.split(':', 2)[2]
+            texts = [f.read_text() for f in (HERE / 'studies' / folder).rglob('*.json')]
+            if not any(f'"{c}"' in x for x in texts for c in (case, case.split('.')[0])):
+                errs.append(f'link {i}: case {case} not in any committed JSON of studies/{folder}')
         elif q != 'UNKNOWN' and cases is not None and q not in cases:
             errs.append(f'link {i}: case {q} not in results/convergence.json')
     dids = [d.get('id') for d in A['decisions']]
@@ -213,9 +220,15 @@ def validate(A, pmds=None):
             if t not in byid:
                 errs.append(f'{d.get("id")}: unknown technology {t}')
     gids = [g.get('id') for g in A['generations']]
-    if gids != ['V0', 'V1', 'V2']:
-        errs.append(f'generations must be V0, V1, V2 in order, found {gids}')
+    if gids != [f'V{n}' for n in range(len(gids))] or gids[:3] != HISTORICAL:
+        errs.append(f'generations must be V0, V1, V2, ... in order, found {gids}')
     for g in A['generations']:
+        if g.get('status') not in GEN_STATUS:
+            errs.append(f'{g.get("id")}: invalid generation status {g.get("status")}')
+        if g.get('id') in HISTORICAL and g.get('status') != 'HISTORICAL_CONDITIONAL':
+            errs.append(f'{g.get("id")}: the 2026-11-08 generations stay HISTORICAL_CONDITIONAL')
+        if not g.get('consistency'):
+            errs.append(f'{g.get("id")}: missing consistency statement')
         if g.get('id') == 'V0' and g.get('change'):
             errs.append('V0 must be FDP-1 unchanged')
         for c in g.get('change', []):
@@ -331,7 +344,8 @@ def record(t, S):
          f'| Evidence | {", ".join(t["evidence"])} |', f'| Uncertainties | {_cell(t["uncertainties"])} |',
          f'| Next experiments | {_cell("; ".join(t["next"]))} |']
     for c in t.get('claims', []):
-        o.append(f'| Claim | {c["quantity"]} = {c["value"]:g} {c["unit"]} ({c["basis"]}, {c["source"]}) |')
+        extra = (f', range {c["range"]}' if c.get('range') else '') + (f', case {c["study_case"]}' if c.get('study_case') else '')
+        o.append(f'| Claim | {c["quantity"]} = {c["value"]:g} {c["unit"]} ({c["basis"]}, {c["source"]}{_cell(extra)}) |')
     return o + ['']
 
 

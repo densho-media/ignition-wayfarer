@@ -72,3 +72,16 @@ run records them here.
 - Outside this branch, pre-existing on `main` (847713b): `lab/problems/fdp1-requirements/VALIDATION_V3.md` is stale. Re-running
   `check_v3.py` gives 127/127 (the committed file says 128/128; the byte-for-byte geometry export check needs Blender and is absent here)
   and different hashes for `fdp1_parameters.json` and `scenario_inputs.json`. Not touched by Vertex; left for the problem map's owner.
+
+## Phase 4 (2026-11-09): integrated research baseline
+
+The integrated branch changes only `lab/`. A squash onto `main` would add these to `lab/variants/vertex-drive/`:
+
+- the five `studies/` folders;
+- the updated registry and generated pages;
+- the frozen `results/history/2026-11-08_atlas/`;
+- the planning documents.
+
+It would also change the vertex row of `lab/README.md`. Nothing in `src/`, `data/`, `tests/`, `tools/`, `godot/`, `web/` or CI reads
+any of it. The website's Engineering pages would show the new REPORT, NOTES header and figures at the next deploy through
+`tools/story.py`. Validation results are in `INTEGRATION_REPORT_PHASE4.md` §7. Not yet approved for squash.

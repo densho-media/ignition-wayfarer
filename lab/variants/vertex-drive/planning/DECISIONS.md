@@ -14,8 +14,29 @@ approval. Decision texts are in `../registry/decisions.toml`; this page says how
 | D-11 | **Not approved** | no Google Drive changes by any thread; Drive reads only |
 | D-08 | **Not approved** | no canonical engine replacement; the canon four-nozzle Fiji Drive stays |
 
-The registry (`registry/decisions.toml`) keeps D-08 to D-11 `OPEN`; T00 records these rulings there at Phase 4 integration, with the
-date, so the generated Atlas pages change once.
+Phase 4 (2026-11-09) recorded these rulings in `registry/decisions.toml` with their date: D-08, D-10 and D-11 are DECIDED, D-09 stays OPEN.
+
+## Owner rulings, 2026-11-09 (ApeDevil, Phase 4 message) and their registry IDs
+
+Recorded in `registry/decisions.toml` by `planning/integrate_phase4.py`. Thread decision IDs (D-T0n-m) got register IDs D-13 to D-25.
+
+| Register | From | Ruling or state | Effect |
+| --- | --- | --- | --- |
+| D-22 | D-T04-1 + D-T06-1 | **Decided**: keep physics-consistent target models; no Level C compression physics declared; coupling η_c/α ≥ 0.5 stays an advanced research target | V3-V5 take the gain from T04's compression ceiling at coupling 0.5 (V5: 1.0, as a bound only) |
+| D-24 | D-T06-2 | **Decided**: closure-coil nozzle is the preferred experimental candidate; its ideal efficiency is not taken as demonstrated | V3-V5 use 0.791 as a TARGET upper bound, with 0.740 and 0.64 reported |
+| D-21 | D-T03-3 | **Open**: bounded 2D MHD/PIC proposal prepared (`D21_MHD_PIC_PROPOSAL.md`), no HPC run | launching needs a new approval |
+| D-13 | D-T01-1 | **Decided**: component-based thermal findings replace the 700-800 K warm loop | 628 K booked equivalent in V3-V5 |
+| D-14 | D-T01-2 | **Decided**: launcher constraint studied through the Vertex adapter (`vertex.launcher_speed_m_s`), not by changing the calculator | launcher sweeps in convergence.json |
+| D-04 | (Atlas) | **Open** in canon; owner: hydrogen low gear out of the preferred experimental configuration | V3-V5 drop the idle H2 vessels; `V4_keep_idle_H2` shows the cost of keeping them |
+| D-23 | D-T04-2 | **Decided (technical)**: no mission phase needs the low gear | supports the D-04 ruling |
+| D-16 | D-T02-2 | **Decided as a research direction**: skirt, bumpers and replaceable sectors developed as competing and complementary solutions | VTX-08E, VTX-08F, VTX-03E; D-06 stays open |
+| D-15, D-17 | D-T02-1, D-T02-3 | **Open**: destination and heading are not locked | dust exposure stays a band |
+| D-18 | D-T02-4 | **Open**: sector replacement vs a Level C radiation-hard conductor | VTX-03E vs VTX-03F |
+| D-19, D-20 | D-T03-1, D-T03-2 | **Decided (technical)**: η_T = η_mom²; 10-15 E_p stored field | V3-V5 |
+| D-25 | D-T06-3 | **Decided**: IGNITION timeline used read only as historical context; conflicts flagged in `RECONCILIATION.md` | no Drive change |
+| D-08, D-11 | (Atlas) | **Decided: not approved** | no engine replacement, no Drive change |
+| D-10 | (Atlas) | **Decided in principle**: non-destructive, isolated files, after the T00 baseline and T05's requirements review | `T05_HANDOFF.md` |
+| D-09 | (Atlas) | **Open**: full MHD/PIC not approved | see D-21 |
 
 ## Owner decisions carried from the Atlas
 

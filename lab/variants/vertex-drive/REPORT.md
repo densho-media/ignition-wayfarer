@@ -4,7 +4,27 @@ Research only. Nothing here replaces the canonical Fiji Drive, changes productio
 Every ship number below comes from the FDP-1 calculator (optimistic tier, four 0.016 c burns) through `convergence.py`; the full
 tables are in `results/CONVERGENCE.md`, the records in `ATLAS.md`, the 3D readiness in `READINESS.md`.
 
-## Summary
+## Phase 4 summary (2026-11-09): corrected generations
+
+The five research threads (T01 thermal, T02 dust, T03 nozzle, T04 ignition, T06 convergence) are now integrated. The full report is
+`planning/INTEGRATION_REPORT_PHASE4.md`, and the conflicts are in `planning/RECONCILIATION.md`. The registry holds 47 records, 66
+sources, 44 links and 25 decisions.
+
+- **The 2026-11-08 generations V0-V2 are historical conditional cases.** Their target, gain 3,000 at 3,000 g/cm³, needs a driver-to-fuel
+  compression coupling of 1.68 for compression alone, or 2.1 with the ignitor. That is more energy in the cold fuel than the driver
+  delivers (T04). They also booked a 0.79 *momentum* efficiency as thrust efficiency (T03) and a 700-800 K warm loop that T01 could not
+  book. Their numbers below are kept unchanged, as a record.
+- **V4, the corrected research target: 42,916 t.** It uses coupling 0.5 (gain 1,084 at 2,000 g/cm³), a closure-coil nozzle at η_T 0.791
+  (ideal-model upper bound), a 628 K booked warm loop with a 0.5 kg/m² sheet, driver efficiency 0.30 at 0.025 kg/kW, and no idle H2
+  vessels. It flies the four 0.016 c burns in 5.69 y.
+- **V5, the energy-consistent bound at coupling 1.0: 19,442 t.**
+- **V3, the conservative planning case, does not close.**
+- **The steepest levers are the nozzle and a new constraint.** V4 has no solution below η_T 0.63; the published 0.64 gives 1,726 kt.
+  The new constraint is the target launcher: one target in the open per pulse needs ≥ 12 km/s, and the calculator finds no ship at
+  10 km/s or slower.
+- **Mission.** 1 g stays 108× out of reach. The IGNITION "about six years" needs a0 0.0073 g (V4 50.3 kt).
+
+## 2026-11-08 summary (historical; conditional on the withdrawn assumptions above)
 
 The Atlas holds 34 records (8 workstreams VTX-01 to VTX-08, 26 technologies), 24 sources, 29 interactions and 12 decisions, all in
 validated TOML. Run through the FDP-1 calculator, **plausible engineering alone (Vertex 1) halves the ship: 20,760 t to 10,416 t**, and
@@ -85,6 +105,7 @@ provides the last.
 
 - **Target gain.** Demonstrated 4.1 (D-T), needed about 600-1,300 (D-3He). D-3He has never ignited.
 - **Nozzle efficiency.** 0.79 is the theoretical bound for beta >> 1 nozzles; simulations reach 0.34-0.70. The design is steepest here.
+  _Correction (T03, 2026-11-09): 0.79 is a momentum efficiency; thrust efficiency is its square (0.62)._
 - **Driver.** Published heavy-ion efficiency 0.20-0.30 against 0.45 assumed; mass per watt and final-focus survival unknown.
 - **Hot machinery.** No MW-class power electronics at 800 K; induction cores lose permeability near 668 K (amorphous) and 823-843 K
   (nanocrystalline).

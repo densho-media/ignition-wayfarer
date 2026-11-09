@@ -16,14 +16,23 @@ separately; only the owner moves a record past NON_CANON.
 | VTX-01B | Stand-off heavy-ion driver | B | Plausible future engineering | UNDER_INVESTIGATION | NON_CANON | Parametric placeholder | 3.64 |
 | VTX-01C | Precision cryogenic target factory and injection | B | Plausible future engineering | PROPOSED | NON_CANON | Parametric placeholder | 4.00 |
 | VTX-01D | D-T spark-ignited D-3He target | B | Plausible future engineering | PROPOSED | NON_CANON | No geometry | 3.09 |
+| VTX-01E | Compression-consistent D-3He target (lower density, larger pulse) | B | Plausible future engineering | PROPOSED | NON_CANON | No geometry | 3.82 |
+| VTX-01F | Spin-polarised D-3He fuel | B | Plausible future engineering | PROPOSED | NON_CANON | No geometry | 2.27 |
+| VTX-01G | Fast-ignited D-T booster core in D-3He fuel | B | Plausible future engineering | PROPOSED | NON_CANON | Parametric placeholder | 3.36 |
+| VTX-01H | One-target-in-flight injection (fast cryogenic target launcher) | B | Plausible future engineering | PROPOSED | NON_CANON | Parametric placeholder | 4.18 |
+| VTX-01I | Two-stage (D-T primary driven) D-3He target | B | Possible but not practical | CONTRADICTED | NON_CANON | No geometry | 1.27 |
 | VTX-02 | Fiji lattice field engineering | C | Dependent on a defined fictional breakthrough | UNDER_INVESTIGATION | NON_CANON | Engineering-supported | 3.27 |
 | VTX-02A | Fiji lattice amplification and stabilisation (capability card) | C | Dependent on a defined fictional breakthrough | SUPPORTED | APPROVED | Parametric placeholder | 2.55 |
 | VTX-02B | Large no-insulation REBCO loops with distributed quench protection | A | Plausible future engineering | PROPOSED | NON_CANON | Parametric placeholder | 3.09 |
 | VTX-02C | Inductive pulse-energy recovery | B | Plausible future engineering | PROPOSED | NON_CANON | Parametric placeholder | 3.27 |
+| VTX-02D | High-specific-strength hoop and truss structure | B | Plausible future engineering | PROPOSED | NON_CANON | Parametric placeholder | 3.18 |
 | VTX-03 | Helical magnetic capture | B | Unresolved | UNDER_INVESTIGATION | NON_CANON | Conceptual illustration | 4.09 |
 | VTX-03A | Clocked trim sectors (m = 4 helical harmonic) | B | Unresolved | UNDER_INVESTIGATION | NON_CANON | Parametric placeholder | 3.55 |
 | VTX-03B | External non-axisymmetric shaping coils | B | Unresolved | PROPOSED | NON_CANON | Conceptual illustration | 2.82 |
 | VTX-03C | Counter-helicity field pairs (zero net angular momentum) | A | Plausible future engineering | SUPPORTED | NON_CANON | Conceptual illustration | 2.82 |
+| VTX-03D | Forward closure coils on the X-ray stand-off sphere | B | Unresolved | UNDER_INVESTIGATION | NON_CANON | Parametric placeholder | 4.45 |
+| VTX-03E | Segmented, replaceable nozzle-loop sectors | B | Unresolved | PROPOSED | NON_CANON | Parametric placeholder | 3.55 |
+| VTX-03F | Neutron-tolerant high-field conductor (proposed Level C need) | C | Dependent on a defined fictional breakthrough | PROPOSED | NON_CANON | No geometry | 1.82 |
 | VTX-04 | Sacrificial injection and radiation conversion | A | Possible but not practical | UNDER_INVESTIGATION | NON_CANON | Conceptual illustration | 3.18 |
 | VTX-04A | Radiation-converting hydrogen or LiH tamper | A | Possible but not practical | CONTRADICTED | NON_CANON | No geometry | 2.82 |
 | VTX-04B | Variable exhaust-mass operating mode (hydrogen low gear) | A | Plausible future engineering | UNDER_INVESTIGATION | NON_CANON | Engineering-supported | 2.82 |
@@ -38,13 +47,17 @@ separately; only the owner moves a record past NON_CANON.
 | VTX-07 | Advanced thermal systems | B | Plausible future engineering | UNDER_INVESTIGATION | NON_CANON | Parametric placeholder | 4.73 |
 | VTX-07A | Split warm loop with high-temperature power electronics | B | Plausible future engineering | UNDER_INVESTIGATION | NON_CANON | Parametric placeholder | 4.45 |
 | VTX-07B | Liquid droplet or liquid sheet radiator | B | Plausible future engineering | PROPOSED | NON_CANON | Conceptual illustration | 4.09 |
-| VTX-07C | Recirculating power reduction | B | Unresolved | UNDER_INVESTIGATION | NON_CANON | No geometry | 3.82 |
+| VTX-07C | Recirculating power reduction | B | Plausible future engineering | UNDER_INVESTIGATION | NON_CANON | No geometry | 3.82 |
 | VTX-07D | Deployable radiator wings with edge bumpers | B | Plausible future engineering | PROPOSED | NON_CANON | Parametric placeholder | 3.82 |
+| VTX-07E | Circuit-by-circuit warm radiator (split warm loop as booked) | B | Plausible future engineering | SUPPORTED | NON_CANON | Parametric placeholder | 4.45 |
+| VTX-07F | Thin-wall refractory heat-pipe radiators for the 1,800 K band | B | Plausible future engineering | PROPOSED | NON_CANON | Parametric placeholder | 2.64 |
 | VTX-08 | Interstellar and interplanetary particle protection | B | Unresolved | UNDER_INVESTIGATION | NON_CANON | Conceptual illustration | 3.91 |
 | VTX-08A | Multi-layer sacrificial bumpers for the vaporisation regime | B | Unresolved | PROPOSED | NON_CANON | Parametric placeholder | 3.82 |
-| VTX-08B | Forward dust detection and active clearing | B | Plausible future engineering | PROPOSED | NON_CANON | Conceptual illustration | 2.82 |
+| VTX-08B | Forward dust detection and active clearing | B | Physically impossible | PROPOSED | NON_CANON | Conceptual illustration | 2.82 |
 | VTX-08C | Charged-particle magnetic deflection (limited) | A | Physically impossible | CONTRADICTED | NON_CANON | No geometry | 2.09 |
-| VTX-08D | Engine-first braking protection | B | Unresolved | PROPOSED | NON_CANON | Conceptual illustration | 3.64 |
+| VTX-08D | Engine-first braking protection | B | Plausible future engineering | UNDER_INVESTIGATION | NON_CANON | Conceptual illustration | 3.64 |
+| VTX-08E | Shadow-cone skirt (engine-first braking screen) | B | Plausible future engineering | PROPOSED | NON_CANON | Conceptual illustration | 4.36 |
+| VTX-08F | Nozzle-loop guard rings and local bumpers | B | Possible but not practical | PROPOSED | NON_CANON | Parametric placeholder | 3.36 |
 
 ## Priority ranking
 
@@ -54,39 +67,52 @@ unlocking 2, 3D value 1; scores 1-5 in each record). The ranking orders research
 | Rank | ID | Name | Score | Feasibility | Credibility | Independence | Mass/thermal | Unlock | 3D |
 |---|---|---|---|---|---|---|---|---|---|
 | 1 | VTX-07 | Advanced thermal systems | 4.73 | 5 | 4 | 4 | 5 | 5 | 5 |
-| 2 | VTX-07A | Split warm loop with high-temperature power electronics | 4.45 | 5 | 4 | 5 | 5 | 4 | 3 |
-| 3 | VTX-03 | Helical magnetic capture | 4.09 | 5 | 3 | 3 | 4 | 4 | 5 |
-| 4 | VTX-07B | Liquid droplet or liquid sheet radiator | 4.09 | 4 | 4 | 5 | 4 | 4 | 4 |
-| 5 | VTX-01 | Advanced pulsed fusion ignition | 4.00 | 5 | 2 | 2 | 5 | 5 | 3 |
-| 6 | VTX-01C | Precision cryogenic target factory and injection | 4.00 | 5 | 3 | 4 | 5 | 3 | 3 |
-| 7 | VTX-08 | Interstellar and interplanetary particle protection | 3.91 | 5 | 3 | 3 | 3 | 4 | 5 |
-| 8 | VTX-07C | Recirculating power reduction | 3.82 | 5 | 3 | 4 | 5 | 3 | 1 |
-| 9 | VTX-07D | Deployable radiator wings with edge bumpers | 3.82 | 4 | 4 | 5 | 3 | 3 | 5 |
-| 10 | VTX-08A | Multi-layer sacrificial bumpers for the vaporisation regime | 3.82 | 5 | 3 | 4 | 3 | 3 | 5 |
-| 11 | VTX-01B | Stand-off heavy-ion driver | 3.64 | 4 | 3 | 4 | 4 | 3 | 4 |
-| 12 | VTX-05 | Predictive ignition and radiation management | 3.64 | 4 | 4 | 3 | 3 | 4 | 3 |
-| 13 | VTX-08D | Engine-first braking protection | 3.64 | 5 | 3 | 3 | 3 | 3 | 4 |
-| 14 | VTX-03A | Clocked trim sectors (m = 4 helical harmonic) | 3.55 | 4 | 3 | 4 | 3 | 3 | 5 |
-| 15 | VTX-06A | Shadow shield and solid-angle minimisation | 3.55 | 3 | 5 | 5 | 3 | 2 | 5 |
-| 16 | VTX-01A | Magnetised fuel-only D-3He target | 3.45 | 5 | 2 | 2 | 4 | 4 | 1 |
-| 17 | VTX-06 | Directional radiation escape | 3.45 | 3 | 5 | 4 | 3 | 2 | 5 |
-| 18 | VTX-02 | Fiji lattice field engineering | 3.27 | 4 | 2 | 3 | 3 | 3 | 5 |
-| 19 | VTX-02C | Inductive pulse-energy recovery | 3.27 | 4 | 3 | 4 | 3 | 3 | 2 |
-| 20 | VTX-04 | Sacrificial injection and radiation conversion | 3.18 | 3 | 5 | 4 | 2 | 3 | 2 |
-| 21 | VTX-05A | Pulse-to-pulse predictive control on the target and driver side | 3.18 | 4 | 4 | 3 | 2 | 3 | 2 |
-| 22 | VTX-05B | Burn diagnostics, damage prediction and safe stop | 3.18 | 3 | 5 | 5 | 1 | 3 | 3 |
-| 23 | VTX-06B | Renewable sacrificial hardware faces | 3.18 | 3 | 4 | 4 | 2 | 3 | 4 |
-| 24 | VTX-01D | D-T spark-ignited D-3He target | 3.09 | 4 | 3 | 3 | 2 | 4 | 1 |
-| 25 | VTX-02B | Large no-insulation REBCO loops with distributed quench protection | 3.09 | 3 | 4 | 5 | 2 | 2 | 4 |
-| 26 | VTX-03B | External non-axisymmetric shaping coils | 2.82 | 3 | 3 | 3 | 2 | 3 | 3 |
-| 27 | VTX-03C | Counter-helicity field pairs (zero net angular momentum) | 2.82 | 3 | 5 | 4 | 1 | 2 | 2 |
-| 28 | VTX-04A | Radiation-converting hydrogen or LiH tamper | 2.82 | 2 | 5 | 4 | 2 | 3 | 1 |
-| 29 | VTX-04B | Variable exhaust-mass operating mode (hydrogen low gear) | 2.82 | 2 | 5 | 5 | 2 | 2 | 2 |
-| 30 | VTX-08B | Forward dust detection and active clearing | 2.82 | 3 | 4 | 5 | 1 | 2 | 3 |
-| 31 | VTX-02A | Fiji lattice amplification and stabilisation (capability card) | 2.55 | 3 | 1 | 5 | 1 | 3 | 4 |
-| 32 | VTX-04C | Sacrificial vapour curtains on strike surfaces | 2.55 | 2 | 4 | 4 | 2 | 2 | 2 |
-| 33 | VTX-04D | Isotopically tailored absorbers in the shield | 2.55 | 2 | 5 | 5 | 2 | 1 | 1 |
-| 34 | VTX-08C | Charged-particle magnetic deflection (limited) | 2.09 | 1 | 5 | 5 | 1 | 1 | 1 |
+| 2 | VTX-03D | Forward closure coils on the X-ray stand-off sphere | 4.45 | 5 | 3 | 3 | 5 | 5 | 5 |
+| 3 | VTX-07A | Split warm loop with high-temperature power electronics | 4.45 | 5 | 4 | 5 | 5 | 4 | 3 |
+| 4 | VTX-07E | Circuit-by-circuit warm radiator (split warm loop as booked) | 4.45 | 5 | 4 | 4 | 5 | 4 | 4 |
+| 5 | VTX-08E | Shadow-cone skirt (engine-first braking screen) | 4.36 | 5 | 3 | 4 | 4 | 5 | 5 |
+| 6 | VTX-01H | One-target-in-flight injection (fast cryogenic target launcher) | 4.18 | 5 | 3 | 3 | 4 | 5 | 4 |
+| 7 | VTX-03 | Helical magnetic capture | 4.09 | 5 | 3 | 3 | 4 | 4 | 5 |
+| 8 | VTX-07B | Liquid droplet or liquid sheet radiator | 4.09 | 4 | 4 | 5 | 4 | 4 | 4 |
+| 9 | VTX-01 | Advanced pulsed fusion ignition | 4.00 | 5 | 2 | 2 | 5 | 5 | 3 |
+| 10 | VTX-01C | Precision cryogenic target factory and injection | 4.00 | 5 | 3 | 4 | 5 | 3 | 3 |
+| 11 | VTX-08 | Interstellar and interplanetary particle protection | 3.91 | 5 | 3 | 3 | 3 | 4 | 5 |
+| 12 | VTX-01E | Compression-consistent D-3He target (lower density, larger pulse) | 3.82 | 4 | 3 | 3 | 5 | 5 | 1 |
+| 13 | VTX-07C | Recirculating power reduction | 3.82 | 5 | 3 | 4 | 5 | 3 | 1 |
+| 14 | VTX-07D | Deployable radiator wings with edge bumpers | 3.82 | 4 | 4 | 5 | 3 | 3 | 5 |
+| 15 | VTX-08A | Multi-layer sacrificial bumpers for the vaporisation regime | 3.82 | 5 | 3 | 4 | 3 | 3 | 5 |
+| 16 | VTX-01B | Stand-off heavy-ion driver | 3.64 | 4 | 3 | 4 | 4 | 3 | 4 |
+| 17 | VTX-05 | Predictive ignition and radiation management | 3.64 | 4 | 4 | 3 | 3 | 4 | 3 |
+| 18 | VTX-08D | Engine-first braking protection | 3.64 | 5 | 3 | 3 | 3 | 3 | 4 |
+| 19 | VTX-03A | Clocked trim sectors (m = 4 helical harmonic) | 3.55 | 4 | 3 | 4 | 3 | 3 | 5 |
+| 20 | VTX-03E | Segmented, replaceable nozzle-loop sectors | 3.55 | 4 | 3 | 3 | 3 | 4 | 4 |
+| 21 | VTX-06A | Shadow shield and solid-angle minimisation | 3.55 | 3 | 5 | 5 | 3 | 2 | 5 |
+| 22 | VTX-01A | Magnetised fuel-only D-3He target | 3.45 | 5 | 2 | 2 | 4 | 4 | 1 |
+| 23 | VTX-06 | Directional radiation escape | 3.45 | 3 | 5 | 4 | 3 | 2 | 5 |
+| 24 | VTX-01G | Fast-ignited D-T booster core in D-3He fuel | 3.36 | 4 | 3 | 3 | 3 | 4 | 2 |
+| 25 | VTX-08F | Nozzle-loop guard rings and local bumpers | 3.36 | 4 | 3 | 3 | 3 | 3 | 4 |
+| 26 | VTX-02 | Fiji lattice field engineering | 3.27 | 4 | 2 | 3 | 3 | 3 | 5 |
+| 27 | VTX-02C | Inductive pulse-energy recovery | 3.27 | 4 | 3 | 4 | 3 | 3 | 2 |
+| 28 | VTX-02D | High-specific-strength hoop and truss structure | 3.18 | 4 | 3 | 4 | 3 | 2 | 3 |
+| 29 | VTX-04 | Sacrificial injection and radiation conversion | 3.18 | 3 | 5 | 4 | 2 | 3 | 2 |
+| 30 | VTX-05A | Pulse-to-pulse predictive control on the target and driver side | 3.18 | 4 | 4 | 3 | 2 | 3 | 2 |
+| 31 | VTX-05B | Burn diagnostics, damage prediction and safe stop | 3.18 | 3 | 5 | 5 | 1 | 3 | 3 |
+| 32 | VTX-06B | Renewable sacrificial hardware faces | 3.18 | 3 | 4 | 4 | 2 | 3 | 4 |
+| 33 | VTX-01D | D-T spark-ignited D-3He target | 3.09 | 4 | 3 | 3 | 2 | 4 | 1 |
+| 34 | VTX-02B | Large no-insulation REBCO loops with distributed quench protection | 3.09 | 3 | 4 | 5 | 2 | 2 | 4 |
+| 35 | VTX-03B | External non-axisymmetric shaping coils | 2.82 | 3 | 3 | 3 | 2 | 3 | 3 |
+| 36 | VTX-03C | Counter-helicity field pairs (zero net angular momentum) | 2.82 | 3 | 5 | 4 | 1 | 2 | 2 |
+| 37 | VTX-04A | Radiation-converting hydrogen or LiH tamper | 2.82 | 2 | 5 | 4 | 2 | 3 | 1 |
+| 38 | VTX-04B | Variable exhaust-mass operating mode (hydrogen low gear) | 2.82 | 2 | 5 | 5 | 2 | 2 | 2 |
+| 39 | VTX-08B | Forward dust detection and active clearing | 2.82 | 3 | 4 | 5 | 1 | 2 | 3 |
+| 40 | VTX-07F | Thin-wall refractory heat-pipe radiators for the 1,800 K band | 2.64 | 3 | 3 | 4 | 2 | 2 | 2 |
+| 41 | VTX-02A | Fiji lattice amplification and stabilisation (capability card) | 2.55 | 3 | 1 | 5 | 1 | 3 | 4 |
+| 42 | VTX-04C | Sacrificial vapour curtains on strike surfaces | 2.55 | 2 | 4 | 4 | 2 | 2 | 2 |
+| 43 | VTX-04D | Isotopically tailored absorbers in the shield | 2.55 | 2 | 5 | 5 | 2 | 1 | 1 |
+| 44 | VTX-01F | Spin-polarised D-3He fuel | 2.27 | 3 | 2 | 3 | 2 | 2 | 1 |
+| 45 | VTX-08C | Charged-particle magnetic deflection (limited) | 2.09 | 1 | 5 | 5 | 1 | 1 | 1 |
+| 46 | VTX-03F | Neutron-tolerant high-field conductor (proposed Level C need) | 1.82 | 1 | 1 | 2 | 3 | 3 | 1 |
+| 47 | VTX-01I | Two-stage (D-T primary driven) D-3He target | 1.27 | 1 | 2 | 2 | 1 | 1 | 1 |
 
 ## Dependency and synergy map
 
@@ -96,19 +122,29 @@ Hard prerequisites (`depends_on`, acyclic):
 
 - VTX-01 requires VTX-01A, VTX-01B, VTX-01C
 - VTX-01A requires VTX-02A
+- VTX-01E requires VTX-01
+- VTX-01F requires VTX-01
+- VTX-01G requires VTX-01D
+- VTX-01H requires VTX-01C
+- VTX-01I requires VTX-01
 - VTX-02 requires VTX-02A, VTX-02B
 - VTX-02C requires VTX-02B
 - VTX-03 requires VTX-02
 - VTX-03A requires VTX-02B
 - VTX-03B requires VTX-02B
 - VTX-03C requires VTX-03A
+- VTX-03D requires VTX-03
+- VTX-03E requires VTX-03
 - VTX-05 requires VTX-05A, VTX-05B
 - VTX-05A requires VTX-01C
 - VTX-06 requires VTX-06A
 - VTX-07 requires VTX-07A, VTX-07C
 - VTX-07C requires VTX-01C
+- VTX-07E requires VTX-07A
 - VTX-08 requires VTX-08A
 - VTX-08D requires VTX-08A
+- VTX-08E requires VTX-08A
+- VTX-08F requires VTX-08A
 
 Interactions (`registry/links.toml`); a quantified case is in `results/convergence.json`:
 
@@ -143,6 +179,21 @@ Interactions (`registry/links.toml`); a quantified case is in `results/convergen
 | VTX-08C | VTX-08 | conflicts | Magnetic deflection cannot protect against neutral or weakly charged grains; relying on it would leave the dust problem open. | UNKNOWN |
 | VTX-08B | VTX-08D | improves | Engine-side detection of large grains reduces the braking-burn risk; it does nothing for the sub-micron flux. | UNKNOWN |
 | VTX-07D | VTX-08 | improves | Retracted wings sit in the shield shadow during coast. | UNKNOWN |
+| VTX-01H | VTX-01C | conflicts | FDP-1's 400 m/s gas-gun injection with 12.5 targets in flight cannot coexist with 81 GJ pulses; a 400 m/s launcher allows about 1 Hz. | study:thermal:S1_advanced_eta0.30_vinj400 |
+| VTX-07C | VTX-01B | shares | Once the house load is booked bottom-up (0.003-0.014 %), driver-proportional loss is 75-95 % of the warm load: driver efficiency, not the house, sets the wings. | study:thermal:S1_advanced_eta0.30 |
+| VTX-07B | VTX-07A | enables | Only a droplet sheet reaches about 1 kg/m2 above 520 K; on halide or alkali heat-pipe panels (5-6 kg/m2) V1 grows to 50.6 kt at 700 K. | study:thermal:V1_areal_by_band_700K |
+| VTX-07D | VTX-08 | worsens | Wing tip radius per case (T02 exposure): 460 m (advanced, eta 0.45) to 1,688 m (advanced, eta 0.25); 1.7-2.3 km if near-term components are flown at 0.5-1.0 kg/m2. | study:thermal:S1_advanced_eta0.45 |
+| VTX-08E | VTX-08D | improves | The skirt is the quantified form of the engine-side shield inside the hardware cone. | UNKNOWN |
+| VTX-03E | VTX-03 | enables | Loop sectors must be separable and the nozzle must tolerate a lost sector. | UNKNOWN |
+| VTX-08F | VTX-03 | worsens | Burn-facing bumpers and LiH shoes add burn solid angle (shoes +0.0127 share vs the V1 ship's 0.0168). | UNKNOWN |
+| VTX-01A | VTX-01 | conflicts | Compression and gain are one lever (T04 EARLY bound G <= 1,787 x eta_c/alpha x (rho/3,000)^(-2/3)): denser fuel lowers the gain a driver can reach. The Atlas pair (3,000 g/cm3, gain 3,000) needs eta_c/alpha 1.68 and is not energy-consistent; 6,000 g/cm3 at gain 3,000 needs 2.66. | study:futures:consistency |
+| VTX-07A | VTX-01 | enables | Under the gain-compression bound the engineering package decides whether a ship exists: at eta_c/alpha 0.3, V1c (Atlas engineering) closes only at 161 kt, the full T06 package at 10.3 kt; at 0.2 V1c does not close and the package closes at 13.3 kt. Shared with VTX-01B, VTX-07B, VTX-07C, T06-NEW-1, T06-NEW-2. | study:futures:consistency.frontier |
+| VTX-01A | VTX-01C | worsens | Where density is raised at fixed gain the pulse rate rises (133 to 449 Hz in K4); under the bound the consistent optimum is the opposite, lower density and larger, slower pulses (44 t TNT at 57-94 Hz in V3), which loosens the factory and the launcher but enlarges the nozzle (outer loop r 169 m). | study:futures:proposals.V3 |
+| VTX-02D | VTX-02 | improves | Doubling specific strength halves the virial nozzle structure; small for the whole ship (K5 -9 %). | study:futures:chains.K5 |
+| VTX-07F | VTX-07 | improves | Halving hot-panel areal mass saves about 4 % on V1c. | study:futures:chains.K2 |
+| VTX-02C | VTX-07 | improves | Revision: at gain 3,000 the recirculating power is about 0.1 % of fusion, so recovery efficiency barely matters (0.90 to 0.98 moves V1c by 0.4 %). Its value is in pulse storage sizing, not mass. | study:futures:elasticities |
+| VTX-03D | VTX-06A | worsens | Closure coils raise the hardware solid angle from 0.017 to 0.040-0.051 (x2.4-3.0 radiation on hardware); not booked in the calculator. | UNKNOWN |
+| VTX-01E | VTX-01H | worsens | Compression-consistent targets give larger, slower pulses and a longer injection path: V4 needs a launcher of at least 12 km/s; at 6 km/s it does not close. | V4_launcher_sweep |
 
 ## VTX-01 Advanced pulsed fusion ignition
 
@@ -157,7 +208,7 @@ Workstream. Credibility **B** (PLAUSIBLE_FUTURE); verdict **Plausible future eng
 | Scientific ancestry | NIF has shown D-T ignition at gain about 4; MagLIF shows magnetisation helps; Daedalus defined the pulsed D-3He drive; Fiji v4 derived the ve gate eta x b >= 0.52. (S-NIF-2025, S-MAGLIF-2020, S-DAEDALUS-1978, S-FIJI-V4, S-FOURBURN) |
 | Current limitations | D-3He has never been ignited; it needs about 5-10x the temperature of D-T; best target gain is about 4 (D-T), laser wall-plug about 1 %, cadence about one shot per day. |
 | Future advancement | Present: D-T ignition at gain about 4 with lasers; magnetised liner targets on Z; pellet injection at 400 m/s. Advanced: Fuel-only magnetised targets compressed by efficient stand-off drivers at 10-100 Hz; gain hundreds (D-T). Wayfarer era: Magnetised D-3He targets at gain about 1,000-3,000, 100-200 Hz, with Fiji-seeded magnetisation (VTX-02A); still the cliff of the design. |
-| Required breakthrough | D-3He ignition at target gain of about 1,000 or more with rhoR about 90 g/cm2 at 100-200 Hz for years. |
+| Required breakthrough | D-3He ignition (hot spot about 50 keV, about 7 g/cm2) at target gain about 600-700 with driver-to-fuel coupling eta_c/alpha of 0.12-0.4 (density 500-3,000 g/cm3) at 3-100 Hz for years; or a labelled Level C compression aid (D-T04-1). |
 | Dependencies | VTX-01A, VTX-01B, VTX-01C |
 | Input resources | Driver beam energy (27 MJ per pulse in FDP-1), cryogenic D and He-3, electricity for the target factory. |
 | Expected output | Plasma kinetic energy per pulse (19.5 t TNT, 8.1e10 J in FDP-1), plus escaping X-rays and neutrons. |
@@ -170,13 +221,16 @@ Workstream. Credibility **B** (PLAUSIBLE_FUTURE); verdict **Plausible future eng
 | Earlier finding | Integration study 2026-11-08: keep FDP-1's pulsed point burn as is; the gain cliff sits at about 1,100 (FDP-1) and moves to 700-1,000 with the thermal package. Atlas bisection: 1,257 (V0), 705 (V1), 581 (V2). |
 | Geometry | Engineering-supported, MIXED, colour MAIN_PROPULSION: burn-point marker, pellet bore, on-axis LiH plug, final-focus ports |
 | Evidence | S-NIF-2025, S-FDP1, S-FIJI-V4 |
-| Uncertainties | Whether D-3He can ignite without a D-T spark; burn physics at 100 keV and rhoR 90 g/cm2; pellet survival at 1.5 K during 400 m/s injection. |
+| Uncertainties | Whether D-3He can ignite without a D-T spark; burn physics at 100 keV and rhoR 90 g/cm2; pellet survival at 1.5 K during 400 m/s injection. / T04 2026-11-09: The FDP-1 optimistic gain (3,000 at 3,000 g/cm3) exceeds the compression-energy ceiling (1,787 x eta_c/alpha); the burn-fraction model H_B is 13 % below the published D-3He minimum. |
 | Next experiments | Gain threshold sweep per Vertex generation (convergence.py, done); Burn-fraction model check against published D-3He ICF simulations; Target-factory energy per pellet (VTX-01C) |
 | Claim | demonstrated_target_gain = 4.1 1 (PUBLISHED, S-NIF-2025) |
 | Claim | assumed_target_gain = 3000 1 (ASSUMPTION, S-FDP1) |
 | Claim | gain_cliff_V0 = 1257 1 (MODEL, case:gain_threshold) |
 | Claim | gain_cliff_V2 = 581 1 (MODEL, case:gain_threshold) |
 | Claim | pulse_rate = 212 Hz (MODEL, case:V0) |
+| Claim | gain_ceiling_FDP1_density_per_eta = 1787 1 (MODEL, S-T04-STUDY, case compression) |
+| Claim | DHe3_hotspot_rhoR_min_0D = 1.97 g/cm2 (MODEL, S-T04-STUDY, case hotspot) |
+| Claim | DHe3_ideal_ignition_T_min = 33 keV (MODEL, S-T04-STUDY, case hotspot) |
 
 ### VTX-01A Magnetised fuel-only D-3He target
 
@@ -199,11 +253,13 @@ Technology. Credibility **B** (PLAUSIBLE_FUTURE); verdict **Plausible future eng
 | A. Today? | No; magnetised targets exist only with liners and at D-T. |
 | B. Future engineering? | Plausibly; bottleneck is magnetic flux compression without a liner and fuel mix at extreme compression. |
 | C. Benefit to Wayfarer? | Yes if it raises gain past the cliff; it is the most direct lever on VTX-01's breakthrough. |
-| Earlier finding | Fiji v4: target magnetisation raises gain and lowers driver energy but does not lower the rhoR needed for burn fraction. |
+| Earlier finding | Fiji v4: target magnetisation raises gain and lowers driver energy but does not lower the rhoR needed for burn fraction. / T04 2026-11-09: T04: magnetisation removes the 7 g/cm2 hot-spot rhoR requirement in the 0-D model only when B R exceeds about 1.2-2.0 MG cm (3-5x MagLIF); it does not lower the 90 g/cm2 burn rhoR or the compression ceiling. |
 | Geometry | Conceptual illustration, HARDWARE, colour MAIN_PROPULSION: target-formation field coil at the injector muzzle (inside the equipment module) |
 | Evidence | S-MAGLIF-2020, S-FIJI-V4 |
 | Uncertainties | No quantitative gain model for magnetised D-3He in the calculator; its benefit is UNKNOWN and is not credited in any generation. |
 | Next experiments | Find published magnetised D-3He ICF simulations and their gain curves; Define the seed field the Fiji lattice must provide at the target |
+| Claim | BR_threshold_DHe3_protons = 1.2 MG cm (ASSUMPTION, S-T04-MAGLIF-BR) |
+| Claim | BR_demonstrated_MagLIF = 0.45 MG cm (PUBLISHED, S-T04-MAGLIF-BR) |
 
 ### VTX-01B Stand-off heavy-ion driver
 
@@ -229,7 +285,7 @@ Technology. Credibility **B** (PLAUSIBLE_FUTURE); verdict **Plausible future eng
 | Earlier finding | Integration study: the galleries set the 9.6 deg hardware cone; moving them inside the 7.9 deg equipment-module cone saves about 0.9 kt. |
 | Geometry | Parametric placeholder, HARDWARE, colour POWER: three driver galleries, nine beam lines, folded arcs, pulse storage, final-focus ports |
 | Evidence | S-HIF-REVIEWS, S-FDP1 |
-| Uncertainties | FDP-1's 0.45 efficiency lies above the published 20-30 %; galleries at r 4.5 m have not been checked against the hull interior. |
+| Uncertainties | FDP-1's 0.45 efficiency lies above the published 20-30 %; galleries at r 4.5 m have not been checked against the hull interior. / T01 2026-11-09: Efficiency 0.45 vs 0.20-0.30 published; driver mass per W: the closure is steep in it (V1 10.4 kt at 0.05 kg/kW, 12.9 kt at 0.1, 25.1 kt at 0.2 = the calculator's central tier; the T01 advanced case at eta 0.30 does not close at 0.2 kg/kW). Volt-second scaling of the induction cores suggests 0.05 kg/kW is optimistic by more than 10x (EXTRAPOLATION, unmodelled). |
 | Next experiments | Run V1/V2 at driver efficiency 0.30 (sensitivity, done); Check gallery routing inside the aft body casing (geometry study) |
 | Claim | driver_wall_plug_efficiency_published = 0.25 1 (PUBLISHED, S-HIF-REVIEWS) |
 | Claim | driver_wall_plug_efficiency_assumed = 0.45 1 (ASSUMPTION, S-FDP1) |
@@ -243,9 +299,9 @@ Technology. Credibility **B** (PLAUSIBLE_FUTURE); verdict **Plausible future eng
 | Purpose | Make and inject about 10-18 million identical cryogenic targets per day and place each at the burn point within tens of microns. |
 | Physical principle | Mass production of layered cryogenic shells, gas-gun injection, optical tracking and beam steering on the fly. |
 | Scientific ancestry | GA/HAPL demonstrated 400 m/s injection and about 150 um bench engagement (requirement about 20-200 um); W7-X fuels with programmed pellet trains. (S-GA-TARGET, S-W7X-2025) |
-| Current limitations | No repetition-rated engagement demonstration; target-fabrication energy per pellet is not sourced in the record (FDP-1 house load 0.1 % of fusion is an assumption). |
+| Current limitations | No repetition-rated engagement demonstration; target-fabrication energy per pellet is not sourced in the record (FDP-1 house load 0.1 % of fusion is an assumption). / T01 2026-11-09: FDP-1 flies 12.5 targets at once on the axis, 3.7 m apart at 400 m/s; each is 3.7 m from the previous 81 GJ pulse (about 5e6 J/m2 of X-rays and 5e8 J/m2 of plasma) and cannot survive. Only one target may be in the open per period: v >= path x rate, 4.7-7.5 km/s in the T01 cases. |
 | Future advancement | Present: Single-shot cryogenic targets; 400 m/s injection; bench tracking about 150 um. Advanced: IFE power-plant target factories at about 500,000 per day with automated layering and in-flight correction. Wayfarer era: An onboard factory at 10-18 million per day drawing well under 0.05 % of fusion power. |
-| Required breakthrough | Liquid-He-3-in-D2 targets that survive injection, made at sub-MJ energy each, engaged to about 20 um at 100-200 Hz. |
+| Required breakthrough | Cryogenic D2/He-3 targets launched at 4.7-7.5 km/s (1e5 g in a 10-20 m barrel) at 100-150 Hz, or a shielded flight path; made at about 1-9 MJ each. |
 | Dependencies | none |
 | Input resources | Cryogenic D and He-3 from the tank farm; electricity; cryocooling. |
 | Expected output | Targets at the burn point on time. |
@@ -255,13 +311,15 @@ Technology. Credibility **B** (PLAUSIBLE_FUTURE); verdict **Plausible future eng
 | A. Today? | No; neither rate nor accuracy nor target type exists. |
 | B. Future engineering? | Plausibly; bottleneck is liquid He-3 targets and the factory's energy per target. |
 | C. Benefit to Wayfarer? | Yes; it is the largest warm-loop load, so every halving is about a third of the ship. |
-| Earlier finding | Integration study: halving the house load saves 30 % of departure mass; the 0.1 % house fraction is unsourced. |
+| Earlier finding | Integration study: halving the house load saves 30 % of departure mass; the 0.1 % house fraction is unsourced. / T00 2026-11-09: T01 quoted 107 Hz and 3.74 m for "FDP-1"; those are V1 figures (V0: 212 Hz, 1.88 m, T04). Both threads agree on the constraint. |
 | Geometry | Parametric placeholder, HARDWARE, colour MAIN_PROPULSION: target factory, magazines (3,000 pellets), two gas-gun injectors, tracking stations |
 | Evidence | S-GA-TARGET, S-FDP1 |
 | Uncertainties | The energy per target is the largest unsourced number in the warm loop. |
 | Next experiments | Source an energy-per-target estimate from IFE target-fab studies (highest-value cheap study); House-fraction sweep (convergence.py, done) |
 | Claim | house_fraction_assumed = 0.001 1 (ASSUMPTION, S-FDP1) |
 | Claim | injection_speed_demonstrated = 400 m/s (PUBLISHED, S-GA-TARGET) |
+| Claim | injection_speed_required_one_in_flight = 6067 m/s (MODEL, S-T01-LEDGER, case S1_advanced_eta0.30) |
+| Claim | injection_speed_fdp1 = 400 m/s (ASSUMPTION, S-FDP1) |
 
 ### VTX-01D D-T spark-ignited D-3He target
 
@@ -283,12 +341,157 @@ Technology. Credibility **B** (PLAUSIBLE_FUTURE); verdict **Plausible future eng
 | Materials (PMDS) | MAT-LIH, MAT-B4C; purposes P03, P11 |
 | A. Today? | No. |
 | B. Future engineering? | Plausibly, and probably earlier than spark-free D-3He ignition. |
-| C. Benefit to Wayfarer? | Only together with a neutron-capturing tamper; alone it raises shield mass and conductor dose. |
-| Earlier finding | Not studied in the integration study; listed by v4 as the usual route and as an added neutron source. |
+| C. Benefit to Wayfarer? | Yes, as the most credible ignition route, if the mission can carry about 0.1 t of tritium; no tamper needed for its neutrons. |
+| Earlier finding | Not studied in the integration study; listed by v4 as the usual route and as an added neutron source. / T04 2026-11-09: T04: as a core of rhoR 2-3 g/cm2 the spark costs almost no energy or escaping neutrons (escaping 14.1 MeV below 2e-7 of fusion); the cost is 43-144 kg of tritium per mission and pre-ignition risk (Nakashima 1993: gain 3). The Atlas statement that a spark raises shield mass is not borne out at fuel rhoR 90; it holds only for an outside primary (T04-NEW-5). |
 | Geometry | No geometry, NONE, colour MAIN_PROPULSION: none |
 | Evidence | S-FIJI-V4 |
 | Uncertainties | The calculator has no spark model; the neutron load is not quantified. Benefit UNKNOWN. |
 | Next experiments | Add a spark-share parameter to an Atlas adapter of fourburn._pulse (not done: needs a burn model); Pair with the VTX-04A tamper analysis |
+
+### VTX-01E Compression-consistent D-3He target (lower density, larger pulse)
+
+Technology. Credibility **B** (PLAUSIBLE_FUTURE); verdict **Plausible future engineering**; research PROPOSED; canon NON_CANON.
+
+| Attribute | Record |
+|---|---|
+| Purpose | A fuel-only target whose gain does not exceed what its own compression energy allows. |
+| Physical principle | Compressing fuel to rho costs at least the Fermi-degenerate energy alpha eps_F(rho) (D-3He 132 MJ/g at 3,000 g/cm3, 64 at 1,000). With coupling eta_c, gain G <= eta_c b eps / (alpha eps_F + ignitor). The ceiling rises as rho^-2/3 while the pulse yield at fixed rhoR grows as rho^-2. |
+| Scientific ancestry | Atzeni and Meyer-ter-Vehn: the minimum energy to compress fuel is its Fermi-degenerate energy times the adiabat; FDP-1 supplies the pulse and burn-fraction model the ceiling is evaluated in. (S-T04-ATZENI-2004, S-FDP1) |
+| Current limitations | 0-D bound: no burn propagation, no hydrodynamic efficiency model; the ignitor term rests on a 3.5x dynamics factor calibrated on D-T fast ignition (EXTRAPOLATION). Present ablative couplings are in the percent range (UNKNOWN as a number). |
+| Future advancement | Present: Percent-range coupling in ablative implosions (engineering judgment, T04). Advanced: Coupling 0.2-0.3 by shaped heavy-ion direct drive. Wayfarer era: Coupling about 0.5 at 1,000-2,000 g/cm3 (research target). |
+| Required breakthrough | A driver-to-fuel compression coupling eta_c/alpha of about 0.5 (the 2026-11-09 research target, D-22), against a percent-range coupling today. Not declared as IGNITION physics. |
+| Dependencies | VTX-01 |
+| Input resources | Driver energy per pulse, coupling eta_c/alpha, compressed density, burn fraction. |
+| Expected output | The largest gain a target of that density can have: G <= eta_c b eps / (alpha eps_F + ignitor). |
+| Potential penalties | Lower density at fixed coupling gives larger, slower pulses: bigger X-ray stand-off and loops, longer injection path. |
+| Performance criteria | Gain at or below the ceiling; coupling needed (convergence.json consistency) at or below the declared value. |
+| Materials (PMDS) | none; purposes P03 |
+| A. Today? | No. |
+| B. Future engineering? | Plausibly, at a coupling far above today's. |
+| C. Benefit to Wayfarer? | Yes: it is what makes any Vertex mass energy-consistent. |
+| Earlier finding | T04 2026-11-09: FDP-1's optimistic tier (3,000 g/cm3, gain 3,000, 27 MJ driver) needs eta_c / alpha = 1.68, i.e. more energy in the cold fuel than the driver delivers. The V1 cliff of 705 needs eta_c/alpha 0.39 at 3,000 g/cm3, 0.19 at 1,000, 0.12 at 500 g/cm3. |
+| Geometry | No geometry, NONE, colour MAIN_PROPULSION: none |
+| Evidence | S-T04-ATZENI-2004, S-FDP1 |
+| Uncertainties | Achievable coupling for heavy-ion direct drive of fuel-only D-3He; ignitor energy. |
+| Next experiments | 1-D radiation-hydrodynamic burn of a fast-ignited, D-T-cored D-3He sphere at 1,000 and 3,000 g/cm3 (T04 J) |
+| Claim | fermi_energy_DHe3_3000 = 132 MJ/g (MODEL, S-T04-STUDY, case compression) |
+| Claim | gain_ceiling_per_eta_3000 = 1787 1 (MODEL, S-T04-STUDY, case compression) |
+| Claim | eta_over_alpha_for_FDP1_gain = 1.68 1 (MODEL, S-T04-STUDY, case compression) |
+| Claim | eta_over_alpha_for_V1_cliff_1000 = 0.19 1 (MODEL, S-T04-STUDY, case compression) |
+
+### VTX-01F Spin-polarised D-3He fuel
+
+Technology. Credibility **B** (PLAUSIBLE_FUTURE); verdict **Plausible future engineering**; research PROPOSED; canon NON_CANON.
+
+| Attribute | Record |
+|---|---|
+| Purpose | Raise D-3He reactivity up to 1.5x, cutting H_B and the rhoR for a given burn fraction. |
+| Physical principle | Aligned nuclear spins favour the spin-3/2 resonance that dominates D-3He fusion, raising the cross-section up to 1.5x; H_B scales as 1/<sv>. |
+| Scientific ancestry | Spin-polarised fuel raises the D-3He cross-section up to 1.5x (UNVERIFIED review); Nakao gives the D-3He target context. (S-T04-POLARISED, S-T04-NAKAO-1992) |
+| Current limitations | Survival of polarisation through compression is unknown; polarised He-3 at target scale is unproven. |
+| Future advancement | Present: Polarised He-3 for medical imaging and polarised targets in nuclear physics. Advanced: Polarised fuel in a laboratory implosion. Wayfarer era: Polarised cryogenic targets made in the factory. |
+| Required breakthrough | Polarisation kept through a 1,000-fold compression. |
+| Dependencies | VTX-01 |
+| Input resources | Polarised D and He-3 at target scale. |
+| Expected output | H_B 44.2 -> 29.5 g/cm2; fuel rhoR for the mission ve 90 -> 60 g/cm2. |
+| Potential penalties | Polariser plant mass and power (UNKNOWN). |
+| Performance criteria | Reactivity gain measured in a compressed target. |
+| Materials (PMDS) | none; purposes P03 |
+| A. Today? | No. |
+| B. Future engineering? | Unknown. |
+| C. Benefit to Wayfarer? | Modest: about 9 % on V1 departure (T04). |
+| Earlier finding | T04: H_B 44.2 -> 29.5 g/cm2; b at 90 g/cm2 0.672 -> 0.754; rhoR for the mission ve 90 -> 60 g/cm2 (fuel mass x0.30). V1 gain cliff and departure in results/IGNITION.md section 2. |
+| Geometry | No geometry, NONE, colour MAIN_PROPULSION: none |
+| Evidence | S-T04-POLARISED |
+| Uncertainties | All of it beyond the cross-section factor. |
+| Next experiments | Literature check of depolarisation in implosions |
+| Claim | reactivity_gain = 1.5 1 (PUBLISHED, S-T04-POLARISED) |
+
+### VTX-01G Fast-ignited D-T booster core in D-3He fuel
+
+Technology. Credibility **B** (PLAUSIBLE_FUTURE); verdict **Plausible future engineering**; research PROPOSED; canon NON_CANON.
+
+| Attribute | Record |
+|---|---|
+| Purpose | Light the D-3He burn from a small D-T core ignited by a separate fast beam after peak compression (avoids pre-ignition). |
+| Physical principle | D-T ignites at 8-12 keV and 0.25-0.6 g/cm2; a D-T core of rhoR about 2-3 g/cm2 releases 0.3-1.3 MJ, matching the 1.1 MJ calibrated D-3He hot spot at 3,000 g/cm3. |
+| Scientific ancestry | Nakao: D-3He pellets with a D-T ignitor; Atzeni: fast-ignition energy scaling and the 0.6 g/cm2 optimum hot spot. (S-T04-NAKAO-1992, S-T04-ATZENI-CIAMPI-1997, S-T04-ATZENI-1999) |
+| Current limitations | Burn propagation from a D-T core into D-3He at 1,000-3,000 g/cm3 is unmodelled; pre-ignition (Nakashima 1993, gain 3). |
+| Future advancement | Present: D-T fast-ignition studies. Advanced: Fast-ignited D-T-cored targets in a pulsed facility. Wayfarer era: D-T-cored D-3He targets made per pulse. |
+| Required breakthrough | Propagating burn from the D-T core into the D-3He fuel at the needed density. |
+| Dependencies | VTX-01D |
+| Input resources | Tritium 43-144 kg loaded per mission (rhoR_DT 2-3 g/cm2); a separate fast ignitor beam. |
+| Expected output | Ignition of the main fuel at a 0.3-1.3 MJ D-T core. |
+| Potential penalties | Tritium logistics and decay (27 % over the burn); an ignitor beam line. |
+| Performance criteria | Burn fraction against b = rhoR/(rhoR + H_B) and yield per ignitor energy (1-D burn code). |
+| Materials (PMDS) | none; purposes P03 |
+| A. Today? | No. |
+| B. Future engineering? | Plausibly: the most credible ignition route found. |
+| C. Benefit to Wayfarer? | Yes, if the mission carries about 0.1 t of tritium. |
+| Earlier finding | T04: energy and neutron cost negligible (D-T share 3e-6 to 2e-5 of yield; escaping 14.1 MeV share below 2e-7 of fusion, below the D-D 5.5e-6); the real cost is tritium: 43-144 kg loaded per mission (10-43 kg burned) at rhoR_DT 2-3 g/cm2, 27 % decay over the burn. |
+| Geometry | Parametric placeholder, HARDWARE, colour MAIN_PROPULSION: fast-ignitor beam line, tritium store in the equipment module |
+| Evidence | S-T04-NAKAO-1992, S-T04-ATZENI-CIAMPI-1997, S-T04-ATZENI-1999 |
+| Uncertainties | Burn propagation; ignitor coupling (0.2 ASSUMPTION). |
+| Next experiments | 1-D burn calculation (T04 J) |
+| Claim | tritium_loaded_mission_rhoR3 = 144 kg (MODEL, S-T04-STUDY, case spark) |
+| Claim | n14_escaping_share_rhoR3 = 1.6e-07 1 (MODEL, S-T04-STUDY, case spark) |
+
+### VTX-01H One-target-in-flight injection (fast cryogenic target launcher)
+
+Technology. Credibility **B** (PLAUSIBLE_FUTURE); verdict **Plausible future engineering**; research PROPOSED; canon NON_CANON.
+
+| Attribute | Record |
+|---|---|
+| Purpose | Keep every target behind the shield until the previous pulse has fired, then deliver it to the burn point within one period. |
+| Physical principle | The next target must not be in the open when a pulse fires: v >= (muzzle-to-burn path) x pulse rate. At FDP-1 scale the path is about the X-ray stand-off (43-50 m) and the rate 100-150 Hz, so v is about 4.7-7.5 km/s. |
+| Scientific ancestry | T01 and T04 found the same constraint independently: at FDP-1's 400 m/s, 12.5-25 targets are in the burn's sky and the next one receives 1-6 kJ of X-rays per pulse; GA target-injection work is the starting point for fast injectors. (S-GA-TARGET, S-T01-LEDGER) |
+| Current limitations | No target launcher at 6 km/s or above exists for cryogenic D2/He-3 targets; a sabot must be stopped behind the shield. Under the compression-consistent gain the pulses are larger and the path longer, so V4 needs at least 12 km/s (convergence V4_launcher_sweep). |
+| Future advancement | Present: Gas-gun target injection at about 400 m/s (IFE designs). Advanced: Electromagnetic launch of cryogenic targets at km/s. Wayfarer era: Fast launchers or shuttered paths on the bore axis. |
+| Required breakthrough | A 12-15 km/s cryogenic target launcher at 100-200 Hz, or a shielded flight path, or targets that survive the previous pulse. |
+| Dependencies | VTX-01C |
+| Input resources | Launcher energy 0.02-0.25 MJ per target; acceleration about 1e5-1e6 g. |
+| Expected output | One target in the open per pulse period: f <= v / path. |
+| Potential penalties | Launcher energy small (0.02-0.25 MJ per target); the hard part is a 1e5 g launch of a liquid-He-3-in-D2 target. A slower launcher caps the pulse rate: 4 km/s +6.3 %, 2.5 km/s +17.5 % (rate 36 Hz), 1.5 km/s does not close (T01 advanced, eta 0.30). |
+| Performance criteria | Launcher speed at or above path x rate; target survival of the launch. |
+| Materials (PMDS) | none; purposes P03 |
+| A. Today? | No. |
+| B. Future engineering? | Plausibly, at a few km/s; 12-15 km/s for cryogenic targets is unproven. |
+| C. Benefit to Wayfarer? | Yes: without it the pulse rate falls and the ship grows or does not close. |
+| Earlier finding | T01 2026-11-09: FDP-1 flies 12.5-25 targets at once; one target in the open per period needs v >= path x rate (T01-NEW-1). / T04-NEW-4: T04: at 400 m/s the next target receives about 5.5 kJ of escaping X-rays (incident) and up to 0.47 MJ of plasma; its liquid He-3 boils with 1.8 J. Owner of the hardware: T01 (VTX-01C interface). |
+| Geometry | Parametric placeholder, HARDWARE, colour MAIN_PROPULSION: target launcher barrel on the bore axis, sabot catcher behind the shield |
+| Evidence | S-T01-LEDGER, S-T04-ATZENI-2004 |
+| Uncertainties | Target survival at 1e5-1e6 g; alternative shielded paths (T03 field sheltering not modelled). |
+| Next experiments | Launcher threshold on the corrected generations (done: V4 needs >= 12 km/s); Shielded flight path concept |
+| Claim | mass_penalty_at_2500_m_s = 0.175 1 (MODEL, S-T01-LEDGER, case S1_advanced_eta0.30_vinj2500) |
+| Claim | v_inj_one_in_sky_V0 = 9.17 km/s (MODEL, S-T04-STUDY, case in_flight) |
+
+### VTX-01I Two-stage (D-T primary driven) D-3He target
+
+Technology. Credibility **B** (PLAUSIBLE_FUTURE); verdict **Possible but not practical**; research CONTRADICTED; canon NON_CANON.
+
+| Attribute | Record |
+|---|---|
+| Purpose | Supply the secondary's compression energy from a D-T primary instead of the driver, removing the compression ceiling. |
+| Physical principle | Energy ledger only: primary yield = secondary compression energy / stage coupling. |
+| Scientific ancestry | Energy-ledger only, from the compression-energy bound (Atzeni and Meyer-ter-Vehn). (S-T04-ATZENI-2004) |
+| Current limitations | 26-52 t of tritium per mission; 0.2-0.45 % of fusion as 14.1 MeV neutrons outside the main fuel; unmodelled case mass. |
+| Future advancement | Present: Two-stage concepts on paper. Advanced: not pursued Wayfarer era: not pursued |
+| Required breakthrough | none (rejected) |
+| Dependencies | VTX-01 |
+| Input resources | A D-T primary per pulse. |
+| Expected output | Removes the compression ceiling in the ledger. |
+| Potential penalties | Tritium and neutron cost (see limitations). |
+| Performance criteria | Tritium per mission and escaping neutron share. |
+| Materials (PMDS) | none; purposes P03 |
+| A. Today? | No. |
+| B. Future engineering? | Possible but not practical. |
+| C. Benefit to Wayfarer? | No. |
+| Earlier finding | T04 negative result: overall gain 1,800-10,700 in the ledger, but 26-52 t of tritium per mission and 0.2-0.45 % of fusion as 14.1 MeV neutrons outside the main fuel (escaping share x2-4 the current X-ray share), plus an unmodelled case mass that dilutes ve. |
+| Geometry | No geometry, NONE, colour MAIN_PROPULSION: none |
+| Evidence | S-T04-ATZENI-2004 |
+| Uncertainties | Case mass; stage coupling. |
+| Next experiments | none: kept as a negative result |
+| Claim | tritium_mission_min = 25.8 t (MODEL, S-T04-STUDY, case staged) |
 
 
 ## VTX-02 Fiji lattice field engineering
@@ -403,6 +606,35 @@ Technology. Credibility **B** (PLAUSIBLE_FUTURE); verdict **Plausible future eng
 | Uncertainties | Coupling of recovery and nozzle efficiency is not in the calculator (they are independent inputs). |
 | Next experiments | Treat recovery and nozzle efficiency as one coupled MHD question (VTX-03 simulation) |
 | Claim | recovery_efficiency_assumed = 0.95 1 (ASSUMPTION, S-FOURBURN) |
+| Claim | recovery_extraction = 0.0013 share of fusion (MODEL, S-T03-STUDY, range 0.0013 (0.0012-0.0020), case REPORT.md section 6) |
+
+### VTX-02D High-specific-strength hoop and truss structure
+
+Technology. Credibility **B** (PLAUSIBLE_FUTURE); verdict **Plausible future engineering**; research PROPOSED; canon NON_CANON.
+
+| Attribute | Record |
+|---|---|
+| Purpose | Lower the virial-bound nozzle structure (M >= rho W / sigma) and the light trusses by doubling strength per mass. |
+| Physical principle | Virial theorem: magnet structure mass per joule stored is rho / sigma; only the material's specific strength moves it. |
+| Scientific ancestry | Virial theorem for magnet structure (M >= rho W / sigma); dynamic CNT fibre strength up to 14 GPa (UNVERIFIED). (S-T06-CNTF-2024, S-FOURBURN) |
+| Current limitations | CNT fibres reach about 8 GPa in fibre form, not in a structural laminate; composite translation efficiency, creep under cryogenic and radiation load, joints. |
+| Future advancement | Present: CFRP at about 1.5 GPa allowable; CNT fibres 4-8 GPa quasi-static in the laboratory. Advanced: CNT-reinforced laminates at 2-3 GPa. Wayfarer era: Nozzle hoops, wing spars and gallery trusses in a CNT-class laminate. |
+| Required breakthrough | None beyond advanced engineering: a 3 GPa laminate at 1.6 t/m3. |
+| Dependencies | none |
+| Input resources | A 3 GPa laminate at 1.6 t/m3. |
+| Expected output | Half the virial nozzle structure and lighter trusses. |
+| Potential penalties | Creep under cryogenic and radiation load; joints. |
+| Performance criteria | kg per J stored; laminate allowable stress. |
+| Materials (PMDS) | MAT-CFRP; purposes P06, P14 |
+| A. Today? | No. |
+| B. Future engineering? | Plausibly. |
+| C. Benefit to Wayfarer? | Yes, but modest. |
+| Earlier finding | T06 2026-11-09: halves the virial nozzle structure; small for the whole ship (chain K5 -9 % on V1c). |
+| Geometry | Parametric placeholder, HARDWARE, colour STRUCTURE: thinner loop hoops, lighter wing spars, lighter gallery trusses |
+| Evidence | S-T06-CNTF-2024, S-FOURBURN |
+| Uncertainties | Translation of fibre strength into a laminate. |
+| Next experiments | Coil-pack structure at 15 E_p with fatigue (T03 found a 7-10 % load cycle 1.9e10 times) |
+| Claim | K5_chain_departure_V1c = 11810 t (MODEL, S-T06-STUDY, case chains.K5) |
 
 
 ## VTX-03 Helical magnetic capture
@@ -428,13 +660,15 @@ Workstream. Credibility **B** (PLAUSIBLE_FUTURE); verdict **Unresolved**; resear
 | A. Today? | No; no pulsed fusion nozzle exists. |
 | B. Future engineering? | Plausibly; the bottleneck is validated pulsed-plasma MHD and test stands. |
 | C. Benefit to Wayfarer? | Only if it holds 0.79 or better; its direct mass value is small (plume strike 2 % -> 1 % saves about 6 %), its risk is large. |
-| Earlier finding | Integration study: shear only, by clocking the trim sectors; net swirl forbidden (1 % swirl about 2.8e5 N m roll, CMGs full in 0.36 s); efficiency 0.79 -> 0.72 costs +61 % mass. |
+| Earlier finding | Integration study: shear only, by clocking the trim sectors; net swirl forbidden (1 % swirl about 2.8e5 N m roll, CMGs full in 0.36 s); efficiency 0.79 -> 0.72 costs +61 % mass. / T00 2026-11-09: 0.79 is a momentum efficiency (Thio 1999); the calculator books it as thrust efficiency, so V0-V2 overstate the nozzle (eta_T = 0.62 read consistently). Corrected generations use eta_T. |
 | Geometry | Conceptual illustration, MIXED, colour MAIN_PROPULSION: clocked sector joints (VTX-03A), optional shaping coils (VTX-03B) |
 | Evidence | S-MERINO-AHEDO, S-CASSIBRY-PMN, S-VTX-STUDY-2026-11-08 |
 | Uncertainties | Sign and size of the effect: the benefit and the penalty are both plausible, neither is computed. |
 | Next experiments | 2D/3D resistive MHD or hybrid PIC of a pulsed shell in plain vs clocked vs shaped fields; Nozzle-efficiency cliff per generation (convergence.py, done) |
 | Claim | nozzle_efficiency_simulated_max = 0.7 1 (PUBLISHED, S-CASSIBRY-PMN) |
 | Claim | nozzle_efficiency_assumed = 0.79 1 (ASSUMPTION, S-MSFC-NOZZLE) |
+| Claim | nozzle_field_energy_ratio_needed = 10 J stored field per J pulse plasma (MODEL, S-T03-STUDY, range 10-15, case results/nozzle_results.json (A, A*, C sweeps 3-30)) |
+| Claim | plume-strike_share_of_the_nozzle_loss_C_10-15_E_p = 0.06 1 (MODEL, S-T03-STUDY, range 0.06-0.07, case results/calculator_reruns.json t03 cases) |
 
 ### VTX-03A Clocked trim sectors (m = 4 helical harmonic)
 
@@ -457,7 +691,7 @@ Technology. Credibility **B** (PLAUSIBLE_FUTURE); verdict **Unresolved**; resear
 | A. Today? | The coils yes; the pulsed benefit is unknown. |
 | B. Future engineering? | Yes. |
 | C. Benefit to Wayfarer? | Unknown until simulated; zero mass cost, so the cheapest form of VTX-03. |
-| Earlier finding | Integration study's chosen form of VTX-03. |
+| Earlier finding | Integration study's chosen form of VTX-03. / T03 2026-11-09: Clocked sectors give 0.25-1.1 deg of field rotation at the stopping surface (3-3.7 deg at 20 % trim), no efficiency change (<0.5 pt). Re-scope from 'helical capture' to vectoring, fault tolerance and replacement. Correct 'm = 4 helical harmonic': with four sectors the gap ripple is m = 4 and carries no handedness under a 45 deg clock; the differential trim pattern is m = 2. Evidence: results/nozzle_results.json perturbations (C_W10, Astar_W10). |
 | Geometry | Parametric placeholder, HARDWARE, colour MAIN_PROPULSION: twelve sector joints clocked 45 deg loop to loop |
 | Evidence | S-VTX-STUDY-2026-11-08 |
 | Uncertainties | Unknown sign of the effect. |
@@ -484,7 +718,7 @@ Technology. Credibility **B** (PLAUSIBLE_FUTURE); verdict **Unresolved**; resear
 | A. Today? | The coils can be built; the pulsed benefit is unknown. |
 | B. Future engineering? | Yes. |
 | C. Benefit to Wayfarer? | Unknown; it competes with its own solid-angle cost. |
-| Earlier finding | Not studied in the integration study; added here on the owner's request. |
+| Earlier finding | Not studied in the integration study; added here on the owner's request. / T03 2026-11-09: The useful shaping is axisymmetric (current distribution plus forward closure, T03-NEW-1). Non-planar (helical) shaping costs about 10 pt of eta_mom per 18 deg of shear: 0.86 -> 0.83 / 0.76 / 0.63 at 2 / 5 / 20 MA. Evidence: results/nozzle_results.json perturbations. |
 | Geometry | Conceptual illustration, HARDWARE, colour MAIN_PROPULSION: non-planar shaping coils between the loops |
 | Evidence | S-W7X-2025 |
 | Uncertainties | Whether more shaping beats clocked sectors at all. |
@@ -511,12 +745,95 @@ Technology. Credibility **A** (ESTABLISHED); verdict **Plausible future engineer
 | A. Today? | Yes in principle. |
 | B. Future engineering? | Yes. |
 | C. Benefit to Wayfarer? | Required for any helical field. |
-| Earlier finding | Integration study requirement. |
+| Earlier finding | Integration study requirement. / T03 2026-11-09: Twist-reversal 'balanced' helices cancel roll torque only at one current (2.7e4 N m at 5 MA; 0.24 and 0.57 MN m at 2 and 20 MA). Balance is required but not sufficient; needs measured trim. Evidence: results/nozzle_results.json perturbations. |
 | Geometry | Conceptual illustration, VISUALIZATION, colour MAIN_PROPULSION: none |
 | Evidence | S-VTX-STUDY-2026-11-08 |
 | Uncertainties | Pulse-to-pulse residual. |
 | Next experiments | Report the angular-momentum flux in the VTX-03 simulation |
 | Claim | roll_torque_at_1pct_swirl = 280000 N m (MODEL, S-VTX-STUDY-2026-11-08) |
+
+### VTX-03D Forward closure coils on the X-ray stand-off sphere
+
+Technology. Credibility **B** (PLAUSIBLE_FUTURE); verdict **Unresolved**; research UNDER_INVESTIGATION; canon NON_CANON.
+
+| Attribute | Record |
+|---|---|
+| Purpose | Close the axial leak of the three-loop magnetic cup so the pulse plasma turns aft instead of escaping forward onto the shield. |
+| Physical principle | Two coaxial coils at polar 20 and 40 deg on the stand-off sphere; with optimised currents the vacuum-field thin-shell model gives eta_mom 0.86-0.89 (eta_T 0.74-0.79) at 10-15 E_p of stored field and a forward leak of 0.15-0.3 % (A: 22 %). |
+| Scientific ancestry | Thio et al. (1999) momentum efficiency 0.80 (max 0.863); simulations 0.55-0.70; T03 vacuum-field model adds the closure. (S-MSFC-NOZZLE, S-T03-NAGAMINE-1999, S-CASSIBRY-PMN) |
+| Current limitations | Vacuum fields, elastic specular shell, no instabilities, no velocity spread, no detachment: an UPPER BOUND. Rayleigh-Taylor grows 13-14 e-folds per pulse in linear theory. Envelope solid angle 0.040-0.051 against 0.017 (V1), not booked in the calculator. |
+| Future advancement | Present: Pulsed magnetic nozzles in laboratory experiments (impulse only). Advanced: Shaped pulsed nozzles validated in 2D simulation. Wayfarer era: Closure-coil nozzle with warm eddy screens. |
+| Required breakthrough | A self-consistent pulsed-plasma simulation showing eta_T >= 0.70 with <= 2 % of plasma on hardware (D-21 campaign). |
+| Dependencies | VTX-03 |
+| Input resources | C1 80-132 MA, hoop tension 3-7 GN; stored field 10-15 E_p (0.8-1.2 TJ). |
+| Expected output | eta_T 0.74-0.79 (ideal model). |
+| Potential penalties | Coil structure 855-1,281 t (virial); solid angle x2.4-3.0 on radiation to hardware; 0.2-1.9 GN inter-coil forces; trim 3-5 TW for 1 % in 5 ms. |
+| Performance criteria | eta_T and plasma on hardware from a 2D Hall-MHD / hybrid-PIC run (D-21). |
+| Materials (PMDS) | MAT-REBCO, MAT-CFRP; purposes P05, P06 |
+| A. Today? | No. |
+| B. Future engineering? | Unresolved: D-21 decides. |
+| C. Benefit to Wayfarer? | Yes: the steepest mass lever (elasticity -2.9, T06). |
+| Earlier finding | T03 2026-11-09: preferred experimental nozzle (owner 2026-11-09), ideal efficiency not demonstrated. Coupled V1 with C at 15 E_p 22,683 t. |
+| Geometry | Parametric placeholder, HARDWARE, colour MAIN_PROPULSION: closure coil C1, closure coil C2, warm eddy screens |
+| Evidence | S-T03-NAGAMINE-1999, S-T03-MATSUDA-2009, S-MSFC-NOZZLE |
+| Uncertainties | Detachment, RT mixing, velocity spread (~0.94 on eta_T, not applied), eddy-screen loss 0.03-1 % of plasma. |
+| Next experiments | 2D axisymmetric Hall-MHD and hybrid-PIC of the V1 pulse in A and C at 15 E_p (D-21 proposal, not launched) |
+| Claim | nozzle_thrust_efficiency_ideal_15Ep = 0.791 1 (MODEL, S-T03-STUDY, range 0.74-0.79 (10-15 E_p), vacuum-field upper bound, case results/nozzle_results.json C_W15) |
+| Claim | hardware_solid_angle_closure = 0.051 sr/4pi (MODEL, S-T03-STUDY, range 0.040-0.051 (V1: 0.017), case results/nozzle_results.json C_W15) |
+
+### VTX-03E Segmented, replaceable nozzle-loop sectors
+
+Technology. Credibility **B** (PLAUSIBLE_FUTURE); verdict **Unresolved**; research PROPOSED; canon NON_CANON.
+
+| Attribute | Record |
+|---|---|
+| Purpose | Make the nozzle loops survive both grain hits and neutron fluence by replacement rather than shielding. |
+| Physical principle | Each loop built from independent sectors (six in the FDP-1 geometry) that can lose one sector without losing the nozzle and be swapped between burns. |
+| Scientific ancestry | REBCO fluence tolerance; the FDP-1 loop already has sector arcs (ship_geometry.json Loop_*_Sector_*). (S-T02-REBCO-N, S-T02-STUDY) |
+| Current limitations | Field ripple and nozzle efficiency with a missing sector (T03); spare mass; EVA/drone handling of 37-112 m loop sectors. |
+| Future advancement | Present: Superconducting magnets are not serviced in space. Advanced: Robotic exchange of magnet sectors on large structures. Wayfarer era: Six separable sectors per loop, exchanged between burns. |
+| Required breakthrough | None, unless a conductor tolerating ~1e20 n/cm2 is required (T02-NEW-4). |
+| Dependencies | VTX-03 |
+| Input resources | Spares for 3-31 loop-1 replacements per mission (V1, neutron fluence) plus grain-hit spares. |
+| Expected output | Nozzle survival over 5.69 burn-years. |
+| Potential penalties | Spare mass (UNKNOWN until T03 gives sector mass); maintenance time between burns. |
+| Performance criteria | Nozzle efficiency with n sectors lost; sector mass; replacement time. |
+| Materials (PMDS) | MAT-REBCO; purposes P05, P06 |
+| A. Today? | No: no superconducting magnet of this size is serviced in space. |
+| B. Future engineering? | Yes, plausibly: the bottleneck is sector mass and replacement logistics. |
+| C. Benefit to Wayfarer? | Yes: it is the only option found that answers both the grain and the neutron problem. |
+| Earlier finding | T02 2026-11-09: radiation.py (loops 3-62x REBCO tolerance); impacts.py (~540 residual hits). |
+| Geometry | Parametric placeholder, HARDWARE, colour MAIN_PROPULSION: none |
+| Evidence | S-T02-REBCO-N, S-T02-STUDY |
+| Uncertainties | Quench/cut threshold of a REBCO sector under a ug-class hit; in-situ irradiation tolerance. |
+| Next experiments | T03: nozzle efficiency with one of six sectors lost per loop; T05: separable sectors and a replacement path (illustration) |
+
+### VTX-03F Neutron-tolerant high-field conductor (proposed Level C need)
+
+Technology. Credibility **C** (FICTIONAL_BREAKTHROUGH); verdict **Dependent on a defined fictional breakthrough**; research PROPOSED; canon NON_CANON.
+
+| Attribute | Record |
+|---|---|
+| Purpose | A superconductor keeping its critical current after ~1e20 n/cm2 of 2.45 MeV neutrons. |
+| Physical principle | Not known. Stated as a requirement only, never used as approved. |
+| Scientific ancestry | Present REBCO degrades from ~1-4e18 n/cm2 (reactor), lower in situ. (S-T02-REBCO-N) |
+| Current limitations | Fictional unless demonstrated. |
+| Future advancement | Present: REBCO degrades from about 1-4e22 n/m2. Advanced: Unknown. Wayfarer era: Level C need only if replacement is rejected (D-18). |
+| Required breakthrough | Critical current retained to 1e20 n/cm2 at 20-50 K in multi-tesla fields. |
+| Dependencies | none |
+| Input resources | UNKNOWN |
+| Expected output | Removes the loop-replacement requirement. |
+| Potential penalties | UNKNOWN |
+| Performance criteria | Ic retention vs fluence. |
+| Materials (PMDS) | none; purposes P05 |
+| A. Today? | No. |
+| B. Future engineering? | Unknown. |
+| C. Benefit to Wayfarer? | Yes, if it existed. |
+| Earlier finding | T02 2026-11-09: radiation.py. |
+| Geometry | No geometry, NONE, colour MAIN_PROPULSION: none |
+| Evidence | S-T02-REBCO-N |
+| Uncertainties | Whether any physical route exists. |
+| Next experiments | Owner question D-T02-4 |
 
 
 ## VTX-04 Sacrificial injection and radiation conversion
@@ -571,7 +888,7 @@ Technology. Credibility **A** (ESTABLISHED); verdict **Possible but not practica
 | A. Today? | Yes. |
 | B. Future engineering? | Yes. |
 | C. Benefit to Wayfarer? | Contradicted at the mission ve by the calculator; reopened only through VTX-01D and the burnup question. |
-| Earlier finding | Rejected for the mission ve (2026-11-08). |
+| Earlier finding | Rejected for the mission ve (2026-11-08). / T04 2026-11-09: T04 tamper-inertia case (k = share of thin-shell inertia that confines): k = 1 gives +1.2 % ve at rhoR 90 (mu 0.03), +10.7 % at rhoR 1 (mu 0.18); k = 0.5: +0.3 % / +3.0 %. The k = 0 liner table is reproduced exactly. The burnup effect is real but small at the mission rhoR. |
 | Geometry | No geometry, NONE, colour HYDROGEN: none |
 | Evidence | S-FOURBURN |
 | Uncertainties | Burnup gain from tamper inertia is not modelled and could change the sign. |
@@ -601,7 +918,7 @@ Technology. Credibility **A** (ESTABLISHED); verdict **Plausible future engineer
 | A. Today? | Physically yes. |
 | B. Future engineering? | Yes. |
 | C. Benefit to Wayfarer? | Only as an operating mode; the four-burn mission is penalised by it. |
-| Earlier finding | Integration study: valid but costs propellant; recommended removing the idle H2 vessels unless the owner wants the mode (decision). |
+| Earlier finding | Integration study: valid but costs propellant; recommended removing the idle H2 vessels unless the owner wants the mode (decision). / T04 2026-11-09: T04 (D-04): no mission phase needs it. Escape spirals at 0.0069 g take 0.4-2.1 days; the low gear at mu 3 halves that. The idle vessels cost 667 t at V1 departure. |
 | Geometry | Engineering-supported, HARDWARE, colour HYDROGEN: three H2 vessels (existing), H2 feed to the injector |
 | Evidence | S-FOURBURN, S-VTX-STUDY-2026-11-08 |
 | Uncertainties | Whether any mission phase needs it. |
@@ -843,7 +1160,7 @@ Workstream. Credibility **B** (PLAUSIBLE_FUTURE); verdict **Plausible future eng
 | Purpose | Reject every watt that is not jet at the highest temperature its source allows, with the lightest radiator, and draw as little recirculating power as possible. |
 | Physical principle | Stefan-Boltzmann: area per watt = 1 / (eps sigma T^4); radiator mass scales with area. Waste heat leaves at the temperature of its source (driver cores, electronics, cryo); recirculating power becomes warm-loop heat. |
 | Scientific ancestry | Droplet radiators; 500 C SiC electronics; induction-core Curie limits; FDP-1 warm loop 600 K, 24.4 GW, 1.84 km2. (S-MATTICK-LDR, S-NASA-SIC-500C, S-CORE-CURIE, S-FDP1) |
-| Current limitations | Induction cores lose permeability near their Curie points (668 K amorphous, 823-843 K nanocrystalline); MW-class power electronics at 800 K do not exist; FDP-1 wings 3.6 km cannot be fixed blades. |
+| Current limitations | Induction cores lose permeability near their Curie points (668 K amorphous, 823-843 K nanocrystalline); MW-class power electronics at 800 K do not exist; FDP-1 wings 3.6 km cannot be fixed blades. / T01 2026-11-09: Induction cores and MW SiC are demonstrated to about 423-523 K, not 600-800 K; the 450-700 K band is the heat-pipe working-fluid gap; the Atlas warm radiator (1.0 kg/m2 at 600-800 K) matches no solid panel technology, only a droplet sheet TARGET. FDP-1 itself (V0) does not close at 2.5 kg/m2 or at 500 K. |
 | Future advancement | Present: Heat-pipe and pumped-loop radiators; SiC logic at 773 K; droplet radiator lab tests. Advanced: Split warm loops; high-temperature SiC/GaN power conversion; droplet or sheet radiators with high-emissivity fluids. Wayfarer era: Machinery heat leaves at 700-800 K, cores at 600 K; wings about 0.2-0.3 km2 instead of 1.8 km2. |
 | Required breakthrough | Power conversion at 700-800 K, induction cores at 600 K or better, and deployable or liquid radiators. |
 | Dependencies | VTX-07A, VTX-07C |
@@ -884,10 +1201,10 @@ Technology. Credibility **B** (PLAUSIBLE_FUTURE); verdict **Plausible future eng
 | A. Today? | No. |
 | B. Future engineering? | Yes. |
 | C. Benefit to Wayfarer? | Yes, the largest lever. |
-| Earlier finding | Integration study introduced the split. |
+| Earlier finding | Integration study introduced the split. / T01 2026-11-09: T01 split ledger: with TARGET components (cores 640 K, power stages 740 K, capacitors 550 K, dumps 1,000 K) the equivalent single loop is 628 K on a tin droplet sheet at emissivity 0.5 (670 K at 0.8; 679 K but 1.5 kg/m2 on panels); the 640 K induction cores alone are about 40 % of the warm area, not 700-800 K. With near-term components (cores 470 K, SiC 500 K) it is 489 K and the ship does not close on 3 kg/m2 radiators at any driver efficiency. |
 | Geometry | Parametric placeholder, HARDWARE, colour WARM_RADIATOR: second warm manifold, split radiator bands |
 | Evidence | S-NASA-SIC-500C, S-CORE-CURIE |
-| Uncertainties | Load split between cores and electronics. |
+| Uncertainties | Load split between cores and electronics. / T01 2026-11-09: Induction-core loss above 473 K; MW power stages above 523 K; pulse capacitors above 473 K; sheet emissivity of a tin droplet layer. |
 | Next experiments | Book the driver loss by component (cores vs conversion) |
 
 ### VTX-07B Liquid droplet or liquid sheet radiator
@@ -911,15 +1228,15 @@ Technology. Credibility **B** (PLAUSIBLE_FUTURE); verdict **Plausible future eng
 | A. Today? | Partly demonstrated. |
 | B. Future engineering? | Yes. |
 | C. Benefit to Wayfarer? | Possibly decisive for VTX-08: a sheet that exists only during burns has no cruise dust exposure. |
-| Earlier finding | Not studied (the scenario has an 1,100 K droplet option in the hot loop). |
+| Earlier finding | Not studied (the scenario has an 1,100 K droplet option in the hot loop). / T01 2026-11-09: T01: a tin sheet at 0.6 kg/m2 (emissivity 0.5) is the only radiator in the record that delivers the Atlas areal mass above 520 K; at emissivity 0.3 the ship grows 11.8 % (S1_adv_eps0.3_eta0.30), at 0.8 it shrinks 5.6 %. |
 | Geometry | Conceptual illustration, MIXED, colour WARM_RADIATOR: droplet generator bar, collector, flow sheet (shown as overlay) |
 | Evidence | S-MATTICK-LDR |
-| Uncertainties | Behaviour at 0.007-0.02 g thrust; dust erosion of the sheet. |
+| Uncertainties | Behaviour at 0.007-0.02 g thrust; dust erosion of the sheet. / T01 2026-11-09: Sheet emissivity; collection loss at 0.007-0.019 g (fly the drops parallel to the thrust axis so acceleration only changes their speed: 0.5 a t^2 about 0.9 m over 100 m at 20 m/s); dust (T02). |
 | Next experiments | Areal-mass sensitivity of the warm loop with a droplet option |
 
 ### VTX-07C Recirculating power reduction
 
-Technology. Credibility **B** (PLAUSIBLE_FUTURE); verdict **Unresolved**; research UNDER_INVESTIGATION; canon NON_CANON.
+Technology. Credibility **B** (PLAUSIBLE_FUTURE); verdict **Plausible future engineering**; research UNDER_INVESTIGATION; canon NON_CANON.
 
 | Attribute | Record |
 |---|---|
@@ -938,11 +1255,13 @@ Technology. Credibility **B** (PLAUSIBLE_FUTURE); verdict **Unresolved**; resear
 | A. Today? | Unknown. |
 | B. Future engineering? | Plausibly. |
 | C. Benefit to Wayfarer? | Yes. |
-| Earlier finding | Integration study: -30 % at half. |
+| Earlier finding | Integration study: -30 % at half. / T01 2026-11-09: T01: bottom-up house load 0.012-0.014 % of fusion (conservative, about 10 MJ per pellet, of which 8 MJ factory process) and 0.003-0.005 % (advanced; the factory itself about 0.6 MJ per pellet, the rest is the Carnot surcharge of cryoplants rejecting at 700 K) for fuel-only targets near 81 GJ yield. The 0.05 % TARGET is met with margin; the 0.1 % baseline was about 8x high. Valid only while the yield per target stays near 1e11 J. |
 | Geometry | No geometry, NONE, colour POWER: none |
 | Evidence | S-FDP1 |
 | Uncertainties | The baseline itself may be pessimistic or optimistic. |
 | Next experiments | Source the target-factory estimate (top research priority) |
+| Claim | house_fraction_bottom_up_conservative = 0.000123 1 (MODEL, S-T01-IFE-TARGET-COST, case V1_house_bottomup_cons) |
+| Claim | house_fraction_bottom_up_advanced = 2.6e-05 1 (TARGET, S-T01-CRYO, case V1_house_bottomup_adv) |
 
 ### VTX-07D Deployable radiator wings with edge bumpers
 
@@ -970,6 +1289,63 @@ Technology. Credibility **B** (PLAUSIBLE_FUTURE); verdict **Plausible future eng
 | Evidence | S-CANON, S-FDP1 |
 | Uncertainties | Deployment dynamics. |
 | Next experiments | Size wings per generation (done: tip radius in convergence results) |
+
+### VTX-07E Circuit-by-circuit warm radiator (split warm loop as booked)
+
+Technology. Credibility **B** (PLAUSIBLE_FUTURE); verdict **Plausible future engineering**; research SUPPORTED; canon NON_CANON.
+
+| Attribute | Record |
+|---|---|
+| Purpose | Replace the single warm loop with the circuits the components allow; report each circuit's area. |
+| Physical principle | Equivalent radiator: same total area and mass as the circuits; T_eq from the area, areal mass area-weighted. |
+| Scientific ancestry | T01 split ledger over FDP-1; component temperature limits from SiC, capacitor, core-material and heat-pipe sources. (S-T01-LEDGER, S-T01-TFAWS-2024, S-T01-HIF-EFF) |
+| Current limitations | One equivalent radiator in the calculator; component loss shares are EXTRAPOLATION from the HIF ranking; burn-average only. |
+| Future advancement | Present: Components rated to 423-523 K. Advanced: Cores at 640 K, power stages at 740 K, capacitors at 550 K (TARGET). Wayfarer era: Separate warm circuits per component class on split wings. |
+| Required breakthrough | Induction cores at 640 K and MW power stages at 740 K (TARGET); near-term parts give 489 K and the ship does not close. |
+| Dependencies | VTX-07A |
+| Input resources | Per-component loss heat and reject temperature. |
+| Expected output | Equivalent warm radiator: 628 K, 0.96 kg/m2, 2e-6 kg/W (planning case). |
+| Potential penalties | Several loops, pumps and manifolds (booked as transport mass and pumping power). |
+| Performance criteria | Booking error below 1e-6; circuit areas per component class. |
+| Materials (PMDS) | MAT-SIC; purposes P12, P13 |
+| A. Today? | No. |
+| B. Future engineering? | Plausibly, at TARGET component temperatures. |
+| C. Benefit to Wayfarer? | Yes: it replaces the withdrawn 700-800 K loop with a booked one. |
+| Earlier finding | T01 2026-11-09: the 700-800 K single warm loop does not survive booking; the induction cores are about 40 % of the warm area. |
+| Geometry | Parametric placeholder, HARDWARE, colour WARM_RADIATOR: warm wing circuit bands (1,000 / 740 / 700 / 640 / 550 K) |
+| Evidence | S-T01-LEDGER, S-T01-SIC-250C, S-T01-CAP-200C, S-T01-HITPERM |
+| Uncertainties | FeCo nanocrystalline core loss at 600-700 K; sheet emissivity. |
+| Next experiments | Driver loss budget from first principles (T01 J) |
+| Claim | warm_T_eq_advanced = 628 K (TARGET, S-T01-LEDGER, case S1_advanced_eta0.30) |
+| Claim | warm_T_eq_conservative = 489 K (ASSUMPTION, S-T01-LEDGER, case S1_cons_T_calcopt_eta0.45) |
+
+### VTX-07F Thin-wall refractory heat-pipe radiators for the 1,800 K band
+
+Technology. Credibility **B** (PLAUSIBLE_FUTURE); verdict **Plausible future engineering**; research PROPOSED; canon NON_CANON.
+
+| Attribute | Record |
+|---|---|
+| Purpose | Halve the areal mass of the hot loop's heat-pipe panels (3.0 to 1.5 kg/m2 optimistic). |
+| Physical principle | Lithium heat pipes in Mo-Re or carbon-carbon shells; mass is wall and fin thickness, set by creep and meteoroid allowance, not by heat flux. |
+| Scientific ancestry | SP-100 Mo-13Re/Li heat pipes; space waste-heat radiators at 5-8 kg/m2 in practice (both UNVERIFIED). (S-T06-SP100, S-T06-RADMASS) |
+| Current limitations | Published space radiators sit at about 5-8 kg/m2; 1.5 kg/m2 flat plates are low-temperature. Creep at 1,800 K and dust puncture set the wall. |
+| Future advancement | Present: SP-100 Mo-13Re/Li heat pipes; waste-heat radiators 6.8-8.2 kg/m2 in studies. Advanced: Carbon-carbon armoured heat pipes at 3 kg/m2 (the FDP-1 optimistic tier). Wayfarer era: 1.5 kg/m2 hot panels, robotically replaced after dust damage. |
+| Required breakthrough | None beyond advanced engineering; a requirement two to five times beyond published refractory practice. |
+| Dependencies | none |
+| Input resources | Lithium heat pipes, thin refractory walls. |
+| Expected output | Hot panels at 1.5 kg/m2 (half the optimistic tier). |
+| Potential penalties | Creep at 1,800 K; dust puncture. |
+| Performance criteria | kg/m2 at 1,800 K with a life allowance. |
+| Materials (PMDS) | MAT-MORE, MAT-CC; purposes P12, P13 |
+| A. Today? | No. |
+| B. Future engineering? | Plausibly: a requirement two to five times beyond published practice. |
+| C. Benefit to Wayfarer? | Modest. |
+| Earlier finding | T06 2026-11-09: saves about 4 % on V1c (chain K2). |
+| Geometry | Parametric placeholder, HARDWARE, colour HOT_RADIATOR: hot root bands (thinner panels, same area) |
+| Evidence | S-T06-SP100, S-T06-RADMASS |
+| Uncertainties | Wall thickness under creep and dust. |
+| Next experiments | Creep-limited wall sizing |
+| Claim | elasticity_departure_vs_hot_areal_V1c = 0.08 1 (MODEL, S-T06-STUDY, case elasticities) |
 
 
 ## VTX-08 Interstellar and interplanetary particle protection
@@ -1024,7 +1400,7 @@ Technology. Credibility **B** (PLAUSIBLE_FUTURE); verdict **Unresolved**; resear
 | A. Today? | No. |
 | B. Future engineering? | Plausibly. |
 | C. Benefit to Wayfarer? | Yes. |
-| Earlier finding | Integration study proposed bumpers on both faces of every loop. |
+| Earlier finding | Integration study proposed bumpers on both faces of every loop. / T02 2026-11-09: T02 2026-11-09: defeated energy grows with stand-off squared (21 kJ at 1 m, 2.1 MJ at 10 m, 210 MJ at 100 m; band x0.1-x10); mass is small (tonnes), stand-off and burn's sky limit. |
 | Geometry | Parametric placeholder, HARDWARE, colour SHIELD: bumper layers on loop leading faces (both sides), wing edge bumpers |
 | Evidence | S-HOANG-2017, S-WHIPPLE-BLE |
 | Uncertainties | Physics at the speed. |
@@ -1032,7 +1408,7 @@ Technology. Credibility **B** (PLAUSIBLE_FUTURE); verdict **Unresolved**; resear
 
 ### VTX-08B Forward dust detection and active clearing
 
-Technology. Credibility **B** (PLAUSIBLE_FUTURE); verdict **Plausible future engineering**; research PROPOSED; canon NON_CANON.
+Technology. Credibility **B** (PLAUSIBLE_FUTURE); verdict **Physically impossible**; research PROPOSED; canon NON_CANON.
 
 | Attribute | Record |
 |---|---|
@@ -1051,7 +1427,7 @@ Technology. Credibility **B** (PLAUSIBLE_FUTURE); verdict **Plausible future eng
 | A. Today? | Partly. |
 | B. Future engineering? | Yes for large grains. |
 | C. Benefit to Wayfarer? | Yes for large grains; does nothing for the sub-micron flux. |
-| Earlier finding | Canon covers the bow-first case only. |
+| Earlier finding | Canon covers the bow-first case only. / T02 2026-11-09: T02 2026-11-09: detection gives 0.2-21 ms warning for 0.1-10 mm grains; vaporising or deflecting a 1 mm grain in that time needs ~0.13 MJ on a 1 mm target or ~58 km/s lateral velocity. No active clearing. |
 | Geometry | Conceptual illustration, HARDWARE, colour SENSORS_COMMS: engine-side sensor heads |
 | Evidence | S-CANON |
 | Uncertainties | Large-grain flux. |
@@ -1078,7 +1454,7 @@ Technology. Credibility **A** (ESTABLISHED); verdict **Physically impossible**; 
 | A. Today? | For ions yes; for grains impossible (verdict applies to grain deflection). |
 | B. Future engineering? | Not for grains: the limit is the charge-to-mass ratio, not engineering. |
 | C. Benefit to Wayfarer? | No for the dust problem. |
-| Earlier finding | Not studied before; recorded so it is not proposed again for grains. Canon's magnetic diversion zone is display-only. |
+| Earlier finding | Not studied before; recorded so it is not proposed again for grains. Canon's magnetic diversion zone is display-only. / T02 2026-11-09: T02 2026-11-09: D-12 confirmed (grain Larmor radius ~8e9 m at 1 mT). Ions deflect at no cost in the nozzle field, but ~75 % of LIC gas is neutral; gas power flux 0.03 W/m2, H fluence ~1e15/cm2 per leg, sputtering < 1 nm: no dedicated field needed. |
 | Geometry | No geometry, VISUALIZATION, colour SHIELD: none |
 | Evidence | S-ULYSSES-ISD |
 | Uncertainties | Charging of grains by the ship's own environment (photo-electric, plasma) is not modelled; still far too weak. |
@@ -1087,7 +1463,7 @@ Technology. Credibility **A** (ESTABLISHED); verdict **Physically impossible**; 
 
 ### VTX-08D Engine-first braking protection
 
-Technology. Credibility **B** (PLAUSIBLE_FUTURE); verdict **Unresolved**; research PROPOSED; canon NON_CANON.
+Technology. Credibility **B** (PLAUSIBLE_FUTURE); verdict **Plausible future engineering**; research UNDER_INVESTIGATION; canon NON_CANON.
 
 | Attribute | Record |
 |---|---|
@@ -1106,29 +1482,99 @@ Technology. Credibility **B** (PLAUSIBLE_FUTURE); verdict **Unresolved**; resear
 | A. Today? | No. |
 | B. Future engineering? | Plausibly. |
 | C. Benefit to Wayfarer? | Essential: braking is half the mission's burning. |
-| Earlier finding | New 2026-11-08 finding; also affects the canon ship (10-day braking burns). |
+| Earlier finding | New 2026-11-08 finding; also affects the canon ship (10-day braking burns). / T02 2026-11-09: T02 2026-11-09: engine-first exposure 12,282 m2 (V1), 12,260 (V0), 4,015 (canon) at 0.4 deg; the shadow-cone skirt T02-NEW-1 (22-90 t) or a flat aft annulus on the canon ship (6-31 t) covers tanks, rings and the forward shield's back; bore-visible engine hardware stays exposed (~540 residual events per mission NOMINAL, V1). |
 | Geometry | Conceptual illustration, MIXED, colour SHIELD: engine-side shield (concept), braking-orientation shadow overlay |
 | Evidence | S-VTX-STUDY-2026-11-08 |
-| Uncertainties | Everything quantitative. |
-| Next experiments | Owner decision on the braking orientation problem (D-C9); Geometric exposure map in the braking orientation (P11 reversed) |
+| Uncertainties | Everything quantitative. / T02 2026-11-09: Large-grain environment (LOW 3.4 / NOMINAL 540 / HIGH 17,300 residual events); debris-cloud physics at 1.15e13 J/kg (T00 unit correction, R-01). |
+| Next experiments | Owner decision on the braking orientation problem (D-C9); Geometric exposure map in the braking orientation (P11 reversed); Owner decision D-06 with the T02 options (D-T02-2); Grazing-impact and thin-sheet tests at 30-100 km/s (dust accelerator) |
+
+### VTX-08E Shadow-cone skirt (engine-first braking screen)
+
+Technology. Credibility **B** (PLAUSIBLE_FUTURE); verdict **Plausible future engineering**; research PROPOSED; canon NON_CANON.
+
+| Attribute | Record |
+|---|---|
+| Purpose | Screen the tanks, habitat rings and the back of the forward shield during engine-first braking without entering the burn's sky. |
+| Physical principle | A thin conical sheet whose apex is the burn point and whose half-angle is the hardware cone: it contains the burn's rays (edge-on), lies in the shadow shield's umbra, and meets every grain moving forward along the ship at a grazing angle equal to the half-angle, 100-300 m ahead of what it protects, so each grain becomes a spreading plasma before it arrives. |
+| Scientific ancestry | Canon shadow-cone rule (crew and hardware cones) and the FDP-1 shadow shield; Whipple-bumper principle without the BLEs. (S-CANON, S-FDP1, S-HOANG-2017) |
+| Current limitations | Only works with the stream within ~1 deg of the axis (exposure 2,281 m2 at 0.4 deg, 4,060 at 2.29 deg, 9,194 at 5 deg); finite-source and rim-scatter terms unknown; structure and deployment not designed; cannot cover the bore-visible engine hardware. |
+| Future advancement | Present: Thin multi-layer Whipple bumpers flown at 7-10 km/s; conical deployable sheets (solar sails, sunshields) flown. Advanced: Large conical sheets on a tensioned frame, replaceable panels by drone. Wayfarer era: Skirt on the hardware cone, panels changed between burns. |
+| Required breakthrough | None needed; engineering only. |
+| Dependencies | VTX-08A |
+| Input resources | Sheet mass 22-90 t (V1, 0.5-2 kg/m2 over 44,900 m2); attitude hold within ~1 deg during braking. |
+| Expected output | V1 engine-first exposure 12,282 -> 2,281 m2 at 0.4 deg; NOMINAL events beyond 2 m bumpers 2,290 -> 540 per mission. |
+| Potential penalties | Mass; maintenance of holed area (< 1 % per mission NOMINAL); an attitude requirement. |
+| Performance criteria | Exposed critical area engine-first; zero added burn solid angle; holed fraction per leg. |
+| Materials (PMDS) | MAT-CC; purposes P14 |
+| A. Today? | No: the impact regime is untested, but every element (thin sheets, deployable cones) exists. |
+| B. Future engineering? | Yes: the bottleneck is the attitude hold and the unknown large-grain environment, not materials. |
+| C. Benefit to Wayfarer? | Yes: it removes 80 % of the braking exposure for 0.2-0.9 % of departure mass (V1); canon form 6-31 t. |
+| Earlier finding | T02 2026-11-09: exposure.py and impacts.py. |
+| Geometry | Conceptual illustration, HARDWARE, colour SHIELD: none |
+| Evidence | S-T02-STUDY |
+| Uncertainties | Debris-cloud spread at 1e10 J/kg; large-grain environment (x5,000 LOW-HIGH). |
+| Next experiments | Rim-scatter and finite-source bound with T04 hot-spot size; Structural concept and deployment (T05 illustration only, D-10) |
+| Claim | skirt_surface_m2 = 44878 m2 (MODEL, S-T02-STUDY, case impacts.json:skirt.V1) |
+| Claim | skirt_mass_t = 22 t (MODEL, S-T02-STUDY, range 22-90, case impacts.json:skirt.V1) |
+| Claim | exposure_with_skirt_m2_0p4deg = 2281 1 (MODEL, S-T02-STUDY, case exposure.json:cases.V1.ENGINE_FIRST.with_skirt) |
+
+### VTX-08F Nozzle-loop guard rings and local bumpers
+
+Technology. Credibility **B** (PLAUSIBLE_FUTURE); verdict **Possible but not practical**; research PROPOSED; canon NON_CANON.
+
+| Attribute | Record |
+|---|---|
+| Purpose | Give the bore-visible and silhouette-outside engine hardware a stand-off bumper where no external shield fits. |
+| Physical principle | Bumper sheets on the stream-facing faces of loops, struts and feeds: up to ~2 m stand-off engine-first (burn's sky limits it), 20-25 m forward guard rings for loops 2 and 3 bow-first. |
+| Scientific ancestry | Whipple principle; BLEs not extrapolated. (S-WHIPPLE-BLE, S-T02-STUDY) |
+| Current limitations | Burn-facing bumpers add burn solid angle (+0.001-0.004 hardware share, EXTRAPOLATION); 2 m stand-off defeats only ~84 kJ (7 ug): ~540 residual events per mission NOMINAL (V1 with skirt). |
+| Future advancement | Present: Whipple bumpers at 7-10 km/s. Advanced: Burn-facing bumpers and guard rings sized from accelerator tests. Wayfarer era: Guard rings forward of loops 2 and 3; local bumpers on every exposed part. |
+| Required breakthrough | None. |
+| Dependencies | VTX-08A |
+| Input resources | ~5-10 t of local bumpers; ~2 t per guard-ring layer. |
+| Expected output | Loop-face events beyond the bumper: 49,200 (bare 5 mm wall) -> 540 per mission, V1 NOMINAL with the skirt. |
+| Potential penalties | Solid angle, plume strike area. |
+| Performance criteria | Residual events per sector per leg; added solid-angle share. |
+| Materials (PMDS) | MAT-CC; purposes P14 |
+| A. Today? | Bumpers yes; at this speed and stand-off untested. |
+| B. Future engineering? | Partly: limited by the burn's sky. |
+| C. Benefit to Wayfarer? | Necessary but not sufficient: pairs with T02-NEW-3. |
+| Earlier finding | T02 2026-11-09: impacts.py hits table. |
+| Geometry | Parametric placeholder, HARDWARE, colour SHIELD: none |
+| Evidence | S-T02-STUDY |
+| Uncertainties | Solid-angle and plume-strike cost needs T03's field map. |
+| Next experiments | T03: plasma fraction reaching 40-60 deg from the axis forward of the burn (guard-ring zone) |
 
 
 ## Decision register
 
 | ID | Type | State | Technologies | Question | Conclusion |
 |---|---|---|---|---|---|
-| D-01 | TECHNICAL_CONCLUSION | DECIDED | VTX-03, VTX-03A, VTX-03C | What form may a helical field take? | Magnetic shear only, by clocking the trim sectors (m = 4 harmonic), with balanced helicity. A net swirl about the axis needs axial current in the plasma (Ampere) and would spin the exhaust (1 % swirl about 2.8e5 N m roll, 11x the RCS couple). |
-| D-02 | TECHNICAL_CONCLUSION | DECIDED | VTX-04, VTX-04A | Does a sacrificial liner or tamper help at the mission exhaust velocity? | No with the current target model: the four-burn optimiser and the Atlas liner study both find the best tamper is essentially zero. Reopened only through D-T spark targets (VTX-01D) and an unmodelled burnup gain. |
-| D-03 | TECHNICAL_CONCLUSION | DECIDED | VTX-05, VTX-05A | Where does fast pulse control act? | On the target and driver side only. Superconducting loops cannot be trimmed between pulses (1 % trim in 5 ms is about 340 GW); loops are trimmed over seconds for vectoring. |
-| D-04 | OWNER_APPROVAL_CANON | OPEN | VTX-04B | Keep the three idle canon H2 vessels and the hydrogen low gear, or remove them? | Removing them saves about 1.2 kt at departure in V0. Keeping them is right only if a mission phase needs high thrust at low ve. V1 and V2 assume removal; convergence.py reports V1 with them kept. |
+| D-01 | TECHNICAL_CONCLUSION | DECIDED | VTX-03, VTX-03A, VTX-03C | What form may a helical field take? | Magnetic shear only, by clocking the trim sectors (m = 4 harmonic), with balanced helicity. A net swirl about the axis needs axial current in the plasma (Ampere) and would spin the exhaust (1 % swirl about 2.8e5 N m roll, 11x the RCS couple). / T03 2026-11-09: supported and refined: sector clocking gives under 1 deg of shear; the harmonic is m = 2 (trim) / m = 4 (gaps, no handedness). |
+| D-02 | TECHNICAL_CONCLUSION | DECIDED | VTX-04, VTX-04A | Does a sacrificial liner or tamper help at the mission exhaust velocity? | No with the current target model: the four-burn optimiser and the Atlas liner study both find the best tamper is essentially zero. Reopened only through D-T spark targets (VTX-01D) and an unmodelled burnup gain. / T04 2026-11-09 amendment: no tamper raises ve by more than about 1 % at the mission rhoR even with tamper inertia; up to 10 % only below 10 g/cm2. |
+| D-03 | TECHNICAL_CONCLUSION | DECIDED | VTX-05, VTX-05A | Where does fast pulse control act? | On the target and driver side only. Superconducting loops cannot be trimmed between pulses (1 % trim in 5 ms is about 340 GW); loops are trimmed over seconds for vectoring. / T03 2026-11-09: strengthened: at 10-15 E_p of stored field (0.8-1.2 TJ) a 1 % trim in 5 ms is 3-5 TW, not 340 GW (which assumed 1 E_p). |
+| D-04 | OWNER_APPROVAL_CANON | OPEN | VTX-04B | Keep the three idle canon H2 vessels and the hydrogen low gear, or remove them? | Removing them saves about 1.2 kt at departure in V0. Keeping them is right only if a mission phase needs high thrust at low ve. V1 and V2 assume removal; convergence.py reports V1 with them kept. / Owner 2026-11-09: keep the hydrogen low gear out of the preferred experimental configuration, without changing canon (canon keeps the vessels). |
 | D-05 | OWNER_APPROVAL_CANON | OPEN | VTX-07D, VTX-07 | Allow deployable warm radiator wings (canon blades are fixed)? | Needed under every generation: FDP-1 wings reach 3.6 km tip radius; V1 650 m; V2 360 m. Fixed km-class wings are not credible. |
-| D-06 | OWNER_APPROVAL_CANON | OPEN | VTX-08, VTX-08D, VTX-08A | How should Wayfarer survive engine-first braking at 0.016 c (this also affects the canon ship)? | Options: engine-side bow shield inside the hardware cone; braking at lower speed (mission change); accept and study the plume as a screen. No option is quantified yet. |
+| D-06 | OWNER_APPROVAL_CANON | OPEN | VTX-08, VTX-08D, VTX-08A | How should Wayfarer survive engine-first braking at 0.016 c (this also affects the canon ship)? | Options: engine-side bow shield inside the hardware cone; braking at lower speed (mission change); accept and study the plume as a screen. No option is quantified yet. / Owner 2026-11-09: develop skirt, bumpers and replaceable sectors as competing and complementary experimental solutions; do not lock destination or heading. |
 | D-07 | OWNER_APPROVAL_CANON | OPEN | VTX-02A | Which open Fiji lattice parameters (operating temperature, response time, maximum amplified field at nozzle scale) does canon fix? | The Atlas uses only the canon card. Any added Fiji property is an owner decision, never a study result. |
-| D-08 | OWNER_APPROVAL_CANON | OPEN | VTX-01, VTX-03, VTX-07 | Adopt Vertex (Config B: FDP-1 axial point burn plus the thermal package) as the propulsion direction instead of the canon four-nozzle Fiji Drive? | Not proposed for adoption by this Atlas. V1 meets the six-year benchmark only above the gain cliff; the dust and braking problem (D-06) is open. Adoption would replace LOCKED canon topology. |
-| D-09 | OWNER_APPROVAL_EXPERIMENT | OPEN | VTX-03, VTX-03A, VTX-03B | Authorise a pulsed-plasma MHD or hybrid-PIC study of plain vs clocked vs shaped nozzle fields? | The only way to resolve VTX-03's sign. Nozzle efficiency is the steepest lever in the record (0.79 -> 0.72 is +61 % mass). |
-| D-10 | OWNER_APPROVAL_EXPERIMENT | OPEN | VTX-01B, VTX-06A, VTX-07D, VTX-08A | Authorise a Vertex Blender blockout in work/ (VAR_vertex collections, pink) from the readiness report? | Only ENGINEERING_SUPPORTED and PARAMETRIC_PLACEHOLDER components would be drawn as hardware; CONCEPTUAL_ILLUSTRATION items as labelled overlays. Production assets stay untouched. |
-| D-11 | OWNER_APPROVAL_EXPERIMENT | OPEN | VTX-01, VTX-03, VTX-07 | Record Vertex in the Drive workbooks (S&E or a lab row) as a non-canon research line? | Nothing was written to Drive. A row would be correspondence, not canon. |
-| D-12 | TECHNICAL_CONCLUSION | DECIDED | VTX-08C | Can magnetic fields deflect interstellar dust? | No: grains at about 0.6 C/kg have Larmor radii of order 1e9 m at 1 mT. Magnetic deflection is limited to gas and ions. |
+| D-08 | OWNER_APPROVAL_CANON | DECIDED | VTX-01, VTX-03, VTX-07 | Adopt Vertex (Config B: FDP-1 axial point burn plus the thermal package) as the propulsion direction instead of the canon four-nozzle Fiji Drive? | Not proposed for adoption by this Atlas. V1 meets the six-year benchmark only above the gain cliff; the dust and braking problem (D-06) is open. Adoption would replace LOCKED canon topology. / Owner 2026-11-09: not approved. No canonical engine replacement. |
+| D-09 | OWNER_APPROVAL_EXPERIMENT | OPEN | VTX-03, VTX-03A, VTX-03B | Authorise a pulsed-plasma MHD or hybrid-PIC study of plain vs clocked vs shaped nozzle fields? | The only way to resolve VTX-03's sign. Nozzle efficiency is the steepest lever in the record (0.79 -> 0.72 is +61 % mass). / Owner 2026-11-09: full MHD/PIC not approved; analytical, vacuum-field, field-line and test-particle work allowed (D-PLAN-1); prepare the bounded 2D proposal (D-21), no HPC run. |
+| D-10 | OWNER_APPROVAL_EXPERIMENT | DECIDED | VTX-01B, VTX-06A, VTX-07D, VTX-08A | Authorise a Vertex Blender blockout in work/ (VAR_vertex collections, pink) from the readiness report? | Only ENGINEERING_SUPPORTED and PARAMETRIC_PLACEHOLDER components would be drawn as hardware; CONCEPTUAL_ILLUSTRATION items as labelled overlays. Production assets stay untouched. / Owner 2026-11-09: approved in principle, strictly non-destructive, isolated experimental files only; modelling after T00 baseline and T05 requirements review. |
+| D-11 | OWNER_APPROVAL_EXPERIMENT | DECIDED | VTX-01, VTX-03, VTX-07 | Record Vertex in the Drive workbooks (S&E or a lab row) as a non-canon research line? | Nothing was written to Drive. A row would be correspondence, not canon. / Owner 2026-11-09: not approved. No Google Drive changes. |
+| D-12 | TECHNICAL_CONCLUSION | DECIDED | VTX-08C | Can magnetic fields deflect interstellar dust? | No: grains at about 0.6 C/kg have Larmor radii of order 1e9 m at 1 mT. Magnetic deflection is limited to gas and ions. / T02 2026-11-09: confirmed (grain Larmor radius about 8e9 m at 1 mT). |
+| D-13 | TECHNICAL_CONCLUSION | DECIDED | VTX-07A, VTX-07E | Which warm-loop temperature may a Vertex generation claim? | Claim the equivalent temperature of the booked circuits, not a single loop: about 630 K with every component TARGET met and a tin droplet sheet; 700-800 K only as a stretch band. V1/V2 should carry the split ledger instead of the 700 / 800 K overrides. Owner 2026-11-09: use the component-based thermal findings, not the obsolete 700-800 K loop. |
+| D-14 | TECHNICAL_CONCLUSION | DECIDED | VTX-01H, VTX-01C | Should the target-injection speed be a closure input (one target in flight)? | Owner 2026-11-09: investigate through an isolated Vertex model extension (convergence.py vertex.launcher_speed_m_s), no calculator change. Result: V4 needs >= 12 km/s; at 6 km/s it does not close (V4_launcher_sweep). |
+| D-15 | OWNER_APPROVAL_CANON | OPEN | VTX-08D | FDP-1/Vertex needs 1,717 AU to stop (beyond the heliopause); canon names a Kuiper anchorage. Which destination does the FDP-1/Vertex line assume? | T02 used FDP-1's own burn distances; no mission parameter was changed. Owner 2026-11-09: do not lock the mission destination or heading. |
+| D-16 | OWNER_APPROVAL_CANON | DECIDED | VTX-08D, VTX-08E, VTX-08F, VTX-03E | Which D-06 option should Wayfarer develop? | Options (NOMINAL residual events beyond the protection, Vertex V1 / canon): (a) skirt or aft annulus + local bumpers + replaceable loop sectors, 22-90 t / 6-31 t, ~540 / ~67; (b) as (a) with an out-of-ecliptic heading, ~89 / ~12; (c) braking orientation or speed change (owner only, not studied); (d) accept and study, ~2,290 / ~730. Recommendation: (a), and (b) once the heading is chosen. Owner 2026-11-09: develop options (a) skirt or annulus, local bumpers and replaceable sectors as competing and complementary experimental solutions; destination and heading not locked. |
+| D-17 | OWNER_APPROVAL_CANON | OPEN | VTX-08D | Is the departure heading free to leave the ecliptic? A high-latitude path cuts Kuiper-belt exposure ~10x (ASSUMPTION). | Open in canon. Owner 2026-11-09: do not lock the mission destination or heading. |
+| D-18 | OWNER_APPROVAL_CANON | OPEN | VTX-03E, VTX-03F | Accept periodic nozzle-loop sector replacement, or require a conductor tolerating ~1e20 n/cm2 (a proposed Level C breakthrough)? | Recommendation: replacement (T02-NEW-3); T02-NEW-4 stays a labelled Level C need. |
+| D-19 | TECHNICAL_CONCLUSION | DECIDED | VTX-03, VTX-03D | Which efficiency does the calculator's nozzle_efficiency book? | Book eta_T. The calculator uses it as jet = eta x stream; every published value is momentum. Show 0.79 as an unsupported optimistic bound. T00: corrected generations V3-V5 carry eta_T; V0-V2 keep 0.79 as historical conditional cases; the FDP-1 calculator is unchanged. |
+| D-20 | TECHNICAL_CONCLUSION | DECIDED | VTX-03, VTX-03D | What stored field energy per pulse does the nozzle need? | 10-15 x E_p; 1 x cannot stop the pulse in any coil set modelled. Adopted in V3-V5 (15 E_p). |
+| D-21 | OWNER_APPROVAL_EXPERIMENT | OPEN | VTX-03, VTX-03D | Approve the D-09 pulsed-nozzle simulation in the scope of REPORT.md section 8? | Approve 2D first (1e4-1e5 core-hours per case); 3D only if C passes eta_T >= 0.70. Owner 2026-11-09: prepare the bounded 2D proposal (planning/D21_MHD_PIC_PROPOSAL.md); do not launch HPC. |
+| D-22 | OWNER_APPROVAL_CANON | DECIDED | VTX-01, VTX-01A, VTX-01E | Compression-consistent targets or a declared compression breakthrough? (T04 D-T04-1 merged with T06 D-T06-1) | Owner 2026-11-09: preserve physics-consistent target models (option A); do not declare new Level C compression physics yet; retain a coupling eta_c/alpha >= 0.5 as an advanced research target. V3-V5 set the gain at the T04 ceiling. |
+| D-23 | TECHNICAL_CONCLUSION | DECIDED | VTX-04B | D-04 input: does any mission phase need the hydrogen low gear? | No. Recommendation only; D-04 remains the owner's. |
+| D-24 | OWNER_APPROVAL_CANON | DECIDED | VTX-03, VTX-03D | Does IGNITION declare a pulsed magnetic nozzle with closure coils that reaches the ideal-model thrust efficiency eta_T = eta_mom^2 of about 0.79 at a stored field of 15 pulse energies? | Owner 2026-11-09: retain the closure-coil nozzle as the preferred experimental candidate without assuming its ideal efficiency has been demonstrated. V3-V5 use 0.791 as a TARGET upper bound with 0.740 and 0.64 reported beside it. |
+| D-25 | OWNER_APPROVAL_EXPERIMENT | DECIDED | VTX-02A | May T06's non-canon technology-history scaffold (eras E0-E5 in HISTORY_PROPOSALS.md) be aligned with the IGNITION timeline workbook? | Owner 2026-11-09: use the available IGNITION timeline as historical context and flag conflicts with the engineering. Read only; read by T00 on 2026-11-09 (S-IGNITION-TIMELINE). |
 
 ## Sources
 
@@ -1149,8 +1595,8 @@ session; the finding is then quoted from a secondary description and must not be
   Finding: Thrust in a magnetic nozzle comes from the diamagnetic azimuthal current; the classic detachment mechanisms (induced field, electron inertia, collisions) tend to push the plasma outward; ion demagnetisation is the key to inward detachment. Limits: Steady, low-beta thruster plumes; not pulsed beta >> 1 fusion plasmas. Relation: Foundation of VTX-03 (what a nozzle field can and cannot do) and of the plume-strike uncertainty.
 - **S-CASSIBRY-PMN** J. Cassibry et al. (University of Alabama in Huntsville) (2018). _Pulsed Magnetic Nozzle for Fusion Propulsion; UAH theses on z-pinch magnetic nozzles_. JBIS (2018); https://louis.uah.edu/uah-theses/835. [SECONDARY_VERIFIED, checked 2026-11-08 web search: UAH thesis record and UAH news item.]
   Finding: 3D simulations of pulsed plasma expansion: a z-pinch linear nozzle peaks near 0.55 efficiency; a simple hemispherical nozzle 'could be over 70 percent' (UAH news); a power-generating nozzle reached 0.34. Limits: Simulation only, differing geometries, some runs ended before the plasma left the nozzle; nothing experimental. Relation: The VTX-03 efficiency band: simulated 0.34-0.70 against the theoretical 0.79-0.86 FDP-1 uses (S-MSFC-NOZZLE).
-- **S-MSFC-NOZZLE** NASA Marshall Space Flight Center (as cited by scenario v1) (unknown). _Pulsed magnetic nozzle theoretical efficiency (MSFC studies, as used by the four-burn scenario)_. lab/studies/four-burn-mission/scenarios/v1.toml [pulsed].nozzle_efficiency. [UNVERIFIED, checked Carried from the four-burn scenario; title and authors still to be found.]
-  Finding: Theoretical pulsed magnetic nozzle efficiency 0.79-0.86. Limits: The specific MSFC report was never identified by title in the record. Relation: Upper bound used by FDP-1 (0.79) and by the Vertex 2 stretch case (0.86).
+- **S-MSFC-NOZZLE** Y. C. F. Thio, B. Freeze, R. C. Kirkpatrick, B. Landrum, H. Gerrish, G. R. Schmidt (1999). _High-Energy Space Propulsion Based on Magnetized Target Fusion_. AIAA 99-2703 (35th Joint Propulsion Conference); NTRS 19990080042. [SECONDARY_VERIFIED, checked 2026-11-09 web search (T03).]
+  Finding: Magnetic nozzle converts about 80 % of the spherically radial momentum into axial impulse; theoretical maximum 86.3 % (parabolic flux-compression nozzle). A MOMENTUM efficiency. Limits: Full text not reached from the T03 container (ntrs.nasa.gov blocked); value and definition from the abstract and two independent summaries. Relation: FDP-1 books 0.79 as an energy (thrust) efficiency; read consistently it is 0.79^2 = 0.624 (V1 39,715 t, calculator_reruns.json).
 - **S-HIF-REVIEWS** D. Keefe (LBL); R. Bock (GSI); Y. Hirao (1988-1992). _Heavy-ion fusion driver reviews (Keefe 1988; Bock 1992 Europhysics News; Hirao)_. https://www.europhysicsnews.org/10.1051/epn/19922305083/pdf; https://www.osti.gov/biblio/6488344. [SECONDARY_VERIFIED, checked 2026-11-08 web search: review PDFs located; 20-30 % and the core-mass figure read in search excerpts.]
   Finding: Induction-linac heavy-ion drivers are estimated at about 20-30 % wall-plug efficiency with high repetition-rate capability; a 5 MJ induction linac needs of order 3e7 kg of magnetic core material. Limits: Design estimates from the 1980s-90s; no driver has been built at fusion scale. Relation: VTX-01B driver efficiency (FDP-1 optimistic 0.45 lies above this range) and the core-material mass and temperature limits behind VTX-07A.
 - **S-GA-TARGET** D. T. Goodin et al. (General Atomics); J. Sethian (NRL, HAPL) (2004-2007). _Experimental target injection and tracking system; HAPL target engagement status_. https://www.osti.gov/servlets/purl/828515; https://fire.pppl.gov/fpa04_sethian.pdf. [SECONDARY_VERIFIED, checked 2026-11-08 web search: OSTI record, HAPL decks; micron units garbled in one snippet.]
@@ -1183,5 +1629,89 @@ session; the finding is then quoted from a secondary description and must not be
   Finding: Configuration B (FDP-1 axial nozzle) recommended; A and C rejected or folded in; helical capture as clocked-sector shear only; sacrificial liner rejected for the mission ve; package 9.2 kt (800 K) / 12.4 kt (600 K); dust and engine-first braking identified as a new integration risk. Limits: Sensitivity runs only; the package mixed technology targets with an owner decision (idle H2 vessels). Relation: Baseline for the Atlas. Its findings are preserved as prior_finding in every record; the rejected mechanisms are reopened here as research candidates.
 - **S-CANON** IGNITION owner workbooks via data/wayfarer_3d.toml (main 279a612). _Wayfarer canon parameters and current model_. data/wayfarer_3d.toml; docs/MODEL.md. [PRIMARY_VERIFIED, checked Read from the files on main.]
   Finding: LOCKED four-way magnetic topology and four nozzles; Fiji lattice amplifies and stabilises only and is not a heat sink; forward-shield silhouette r 45 m with shadow rule; fixed radiator blades; design crew 12; mission 6.0 y. Limits: Canon, not physics. Relation: The boundaries every Atlas record must respect; any change is an owner decision (registry/decisions.toml).
+- **S-T01-TFAWS-2024** NASA Glenn / TFAWS 2024 authors (2024). _Intermediate temperature ceramic heat pipe modeling and optimization (TFAWS 2024, paper PT-23)_. https://tfaws.nasa.gov/wp-content/uploads/TFAWS2024-PT-23-Paper.pdf; https://ntrs.nasa.gov/citations/20240009806. [SECONDARY_VERIFIED, checked 2026-11-09 web search excerpts of the TFAWS paper; full text not read.]
+  Finding: Titanium-water is the state of the art near 500 K and degrades quickly above it; the 450-700 K heat-pipe regime is poorly characterised; a 3D-printed AlN radiator with AlBr3 is estimated at 5.2 kg/m2 and 1.0 kg/kW. Limits: Modelling and early hardware; no flight radiator in the 450-700 K band. Relation: Sets the T01 radiator areal mass for 450-700 K circuits (HALIDE_HP) and the finding that the Atlas warm loop (600-800 K) sits in the heat-pipe gap.
+- **S-T01-NASA-ITHP** Advanced Cooling Technologies / NASA Glenn (Anderson, Tarau et al.) (2013). _Intermediate temperature heat pipe life tests and analyses (ICES 2013); intermediate-temperature fluids review_. https://www.1-act.com/wp-content/uploads/2023/05/ICES-2013-Intermediate-Temperature-Heat-Pipe-Life-Tests-and-Analyses-Rev-4.pdf. [SECONDARY_VERIFIED, checked 2026-11-09 web search excerpts.]
+  Finding: No accepted working fluid covers the intermediate range; water to about 500-550 K; halide life tests suggest use to about 673 K; property data incomplete. NASA has sought 500-600 K radiators at 2-3 kg/m2. Limits: Life tests, not radiators; the 2-3 kg/m2 figure is a programme goal. Relation: T01 TiH2O_HP (3 kg/m2 to 520 K) and HALIDE_HP band edges.
+- **S-T01-LDR-PATENT** Mattick, Hertzberg et al. (patent family) (1987). _Collector for liquid droplet radiator (US 4,702,309) and related droplet-radiator patents_. https://image-ppubs.uspto.gov/dirsearch-public/print/downloadPdf/4702309. [SECONDARY_VERIFIED, checked 2026-11-09 web search excerpts of the patent text.]
+  Finding: Tin droplet sheet about 0.1 kg/m2 for 0.1 mm droplets; best tube-and-fin heat-pipe radiators 5-10 kg/m2; tin suitable 505-1000 K; liquid-metal emissivity 0.1-0.2. Limits: Patent background and estimates; generator, collector and pump mass not in the 0.1 kg/m2. Relation: T01 SN_DROPLET (0.6 kg/m2 incl. generators and collectors, TARGET) and ALKALI_HP (6 kg/m2).
+- **S-T01-HIF-EFF** LBNL/LLNL HIF programme (Molvik et al.) (1992-2000). _Induction accelerator efficiency at 5 Hz (2000); induction-linac efficiency papers (EPAC 1992, PAC 1999)_. https://www.osti.gov/biblio/767594; https://accelconf.web.cern.ch/e92/PDF/EPAC1992_1594.PDF; https://jacow.org/p99/papers/TUP13.pdf. [SECONDARY_VERIFIED, checked 2026-11-09 web search excerpts.]
+  Finding: Induction-core loss is the primary limitation on induction-linac efficiency; pulser efficiency taken as 50-75 %; measured core loss about 2,400-2,500 J/m3 per pulse in one tested material. Limits: Studies at 5 Hz; no subsystem breakdown of a fusion-scale driver. Relation: Basis of the T01 driver loss split (cores 45 %, modulators 30 %).
+- **S-T01-SIC-250C** Arkansas Power Electronics (DTIC ADA547349); SAE 2008-01-2892; IEEE 2014 phase-leg module; Virginia Tech CPES (2008-2014). _250 C SiC power module package designs and continuous 250 C operation; 300 C MOSFET bias-stress failures_. https://apps.dtic.mil/sti/pdfs/ADA547349.pdf; https://saemobilus.sae.org/content/2008-01-2892; https://cpes.vt.edu/library/view_nugget/990. [SECONDARY_VERIFIED, checked 2026-11-09 web search excerpts.]
+  Finding: SiC power modules (1,200 V, >100 A) operated continuously at 250 C junction; current SiC MOSFETs failed within 300 h of bias stress at 300 C. Limits: Module scale (kW), not MW conversion; durations of hours to months, not years. Relation: Conservative modulator circuit at 500 K coolant (Tj 523 K); the advanced 773 K power stage stays a TARGET.
+- **S-T01-CAP-200C** KEMET; Knowles; polyetherimide film patents (2015-2024). _High-temperature pulse capacitors: PEI films and C0G pulse-discharge MLCCs rated to 200 C_. https://knowlescapacitors.com/Products/Capacitors/SMDCap/Detonation-Pulse; https://www.tti.com/content/ttiinc/en/manufacturers/kemet/products/pulse-discharge-high-temperature-capacitor.html. [SECONDARY_VERIFIED, checked 2026-11-09 web search excerpts.]
+  Finding: Pulse-discharge ceramic and polymer-film capacitors are rated to 200 C; breakdown strength falls with temperature; no rated 300 C pulse capacitor found. Limits: Small parts; no MJ-class bank at temperature. Relation: Pulse storage circuit: 440 K conservative, 550 K TARGET.
+- **S-T01-HITPERM** M. E. McHenry, D. E. Laughlin et al. (CMU) (1998-2004). _HITPERM (Fe44Co44Zr7B4Cu1) nanocrystalline soft magnets for high-temperature applications_. https://www.osti.gov/biblio/347044; https://www.andrew.cmu.edu/user/dl0p/laughlin/pdf/342.pdf. [SECONDARY_VERIFIED, checked 2026-11-09 web search excerpts.]
+  Finding: Magnetisation persists to about 980 C; grain size stable at 600 C for 3,072 h; core loss reported at room temperature only (about 1 W/g at 1 T, 10 kHz). Limits: No core-loss data at 400-600 C found; not an induction-linac core material today. Relation: Advanced induction-core circuit at 640 K (TARGET).
+- **S-T01-CRYO** CERN (cryostat design lecture arXiv:1501.07154; Claudet; CERN Courier) (2015-2025). _LHC cryogenics: 1.8 K refrigeration at about 0.15 of Carnot; best plants below 30 % of Carnot_. https://arxiv.org/pdf/1501.07154; https://cerncourier.com/a/the-challenge-of-keeping-cool/. [SECONDARY_VERIFIED, checked 2026-11-09 web search excerpts; arXiv full text not opened.]
+  Finding: About 1 kW of input per W extracted at 1.8 K (0.15 of Carnot, Carnot minimum about 162 W/W from 300 K); the most efficient plants reach 28.5 % of Carnot. Limits: Terrestrial plants rejecting at about 300 K. Relation: Target-factory 1.5 K load at 1,000 W/W (conservative) and 600 W/W (TARGET), both rescaled to the reject temperature by Carnot.
+- **S-T01-IFE-TARGET-COST** J. Woodworth, W. Meier (LLNL); D. Goodin, N. Alexander et al. (GA) (1995-2007). _IFE target factory costing: about 0.16-0.17 USD per target (Woodworth and Meier 1995; GA/HAPL 2003-2007)_. https://www.osti.gov/servlets/purl/896290; https://www.osti.gov/biblio/512912; https://fire.pppl.gov/IFE_NAS2_GA_goodin_target.pdf. [SECONDARY_VERIFIED, checked 2026-11-09 web search excerpts.]
+  Finding: Total cost about 0.17 USD per injected target for a 1,000 MWe plant (capital about 100 M USD, operation about 20 M USD per year); operation exceeds annualised capital. Limits: Cost, not energy; direct-drive D-T capsules of 350 MJ yield; no per-target power figure found. Relation: Upper bound on the factory process energy: even if all operating cost were electricity at 0.05 USD/kWh it buys at most about 7.6 MJ per target (T01 conservative uses 8 MJ).
+- **S-T01-LEDGER** T01 thread (2026-11-09). _T01 split warm-loop ledger (studies/thermal/split.py, ledger.json)_. lab/variants/vertex-drive/studies/thermal/ledger.json. [PRIMARY_VERIFIED, checked Rerun reproduces ledger.json. T00 2026-11-09: rerun reproduces the committed JSON byte for byte (only timings differ).]
+  Finding: See studies/thermal/REPORT.md. Limits: Adapter over FDP-1; component shares are EXTRAPOLATION; the calculator's single warm radiator receives the equivalent of the circuits. Relation: All T01 MODEL claims.
+- **S-T02-STUDY** Wayfarer lab (2026-11-09). _T02 dust, radiation and braking protection study_. lab/variants/vertex-drive/studies/dust/REPORT.md. [PRIMARY_VERIFIED, checked 2026-11-09 scripts rerun and reproduce the JSON. T00 2026-11-09: rerun reproduces the committed JSON byte for byte (only timings differ).]
+  Finding: Two-orientation exposure map, environment cases, hit counts per leg, skirt concept, loop neutron fluence. Limits: First-order geometry, energy-scaling damage, first-order radiation. Relation: Basis of T02-NEW-1..4 and the VTX-08* revisions.
+- **S-T02-GRUN-1985** E. Grün, H. A. Zook, H. Fechtig, R. H. Giese (1985). _Collisional balance of the meteoritic complex_. Icarus 62, 244-272. [TRANSCRIBED, checked 2026-11-09 constants from memory reproduce 9.6e-20 kg/m3; not re-checked against the paper.]
+  Finding: Interplanetary dust flux model at 1 AU, ~1e-19 kg/m3 spatial mass density. Limits: 1 AU, ecliptic; factor ~2 accuracy; radial scaling not part of the model. Relation: Inner interplanetary population (environment.py).
+- **S-T02-SDC** E. Bernardoni et al. (2022); A. Doner et al. (2024) (2022 / 2024). _New Horizons Student Dust Counter: dust density to ~55-60 AU_. Planet. Sci. J. 3 (2022) 69; Astrophys. J. Lett. (2024). [SECONDARY_VERIFIED, checked 2026-11-09 web search abstracts and press summaries.]
+  Finding: Number density of grains above ~0.63 um of order 35 per km3 in the Kuiper belt, flux above models and not yet falling at 55-60 AU. Limits: Small grains only (> ~1e-15 kg); no large-grain measurement. Relation: Kuiper-belt normalisation (environment.py).
+- **S-T02-KRUGER-2015** H. Krüger, P. Strub et al. (2015). _Interstellar dust in the solar system: model versus in-situ spacecraft data_. Astrophys. J. 812, 139. [SECONDARY_VERIFIED, checked 2026-11-09 web search abstract.]
+  Finding: Interstellar dust mass density ~2.1e-24 kg/m3 from Ulysses/Galileo. Limits: 1e-18 to 1e-13 kg range. Relation: NOMINAL interstellar density.
+- **S-T02-FRISCH-1999** P. C. Frisch et al. (1999). _Dust in the local interstellar wind_. Astrophys. J. 525, 492. [SECONDARY_VERIFIED, checked 2026-11-09 web search abstract.]
+  Finding: Interstellar dust mass density ~6.2e-24 kg/m3 including larger grains. Limits: Older calibration. Relation: HIGH interstellar density.
+- **S-T02-LANDGRAF-2000** M. Landgraf, W. J. Baggaley, E. Grün, H. Krüger, G. Linkert (2000). _Aspects of the mass distribution of interstellar dust grains in the solar system from in situ measurements_. J. Geophys. Res. 105, 10343. [SECONDARY_VERIFIED, checked 2026-11-09 web search abstract.]
+  Finding: Upper bound on the interstellar large-grain flux extrapolated from in-situ data; comparison with AMOR radar. Limits: Bound, not a measurement. Relation: EXTRAPOLATED large-grain tail.
+- **S-T02-AMOR** W. J. Baggaley (2000). _AMOR radar interstellar meteoroid flux_. J. Geophys. Res. 105, 10353. [SECONDARY_VERIFIED, checked 2026-11-09 web search abstract.]
+  Finding: Hyperbolic meteor flux ~2e-9 m-2 s-1 above ~3e-10 kg. Limits: Disputed by later radar surveys (hyperbolic fraction may be measurement error). Relation: RADAR (HIGH) large-grain tail.
+- **S-T02-LIC** J. D. Slavin, P. C. Frisch (2008). _Radiative transfer models of the local interstellar cloud_. Astron. Astrophys. 491, 53. [SECONDARY_VERIFIED, checked 2026-11-09 web search abstract.]
+  Finding: LIC n(H0) ~0.19-0.20 cm-3, n_e ~0.07 cm-3 at the heliosphere. Limits: Model of the cloud near the Sun. Relation: Gas column (environment.py).
+- **S-T02-VOYAGER-HP** NASA / JPL (2012 / 2018). _Voyager heliopause crossings_. Voyager 1 at 121.6 AU (Aug 2012), Voyager 2 at 119 AU (Nov 2018). [SECONDARY_VERIFIED, checked 2026-11-09 web search.]
+  Finding: Heliopause at ~120 AU in two directions. Limits: Two points; it moves with the solar cycle. Relation: Heliopause boundary for gas regimes.
+- **S-T02-HIGGINS-2018** various (2018). _Hypervelocity dust accelerators (Heidelberg, Colorado IMPACT)_. IMPACT dust accelerator literature. [UNVERIFIED, checked 2026-11-09 not re-checked; the ~100 km/s ceiling is widely stated.]
+  Finding: Micron and submicron grains accelerated to ~100 km/s at most. Limits: Tiny grains; far below 4,800 km/s. Relation: Upper end of laboratory validation.
+- **S-T02-BLISTER** various (various). _Hydrogen blistering thresholds in metals (fusion-materials literature)_. plasma-facing materials reviews. [UNVERIFIED, checked 2026-11-09 order of magnitude only.]
+  Finding: Blistering onset at ~1e17-1e18 H/cm2 for keV-range hydrogen in W and other metals. Limits: Temperature- and energy-dependent. Relation: Gas implantation verdict.
+- **S-T02-REBCO-N** D. X. Fischer, R. Prokopec, J. Emhofer, M. Eisterer (2018); R. Prokopec et al. (2015) (2018 / 2015). _The effect of fast neutron irradiation on the superconducting properties of REBCO coated conductors_. Supercond. Sci. Technol. 31 (2018) 044006; https://repositum.tuwien.at/handle/20.500.12708/815. [SECONDARY_VERIFIED, checked 2026-11-09 web search: repository record and abstract.]
+  Finding: Reactor fast-neutron irradiation to 3.9e22 m-2: Ic first rises, then degrades (earlier for tapes with artificial pinning centres); n-values fall; Tc drops up to 8 K at 3.3e22 m-2. Limits: Ex-situ, room-temperature irradiation; an in-situ 14 MeV study reported degradation orders of magnitude lower. Relation: REBCO tolerance range for the loop fluence (radiation.py).
+- **S-T03-NAGAMINE-1999** Y. Nagamine, H. Nakashima (1999). _Analysis of plasma behavior in a magnetic thrust chamber of a laser fusion rocket_. Fusion Science and Technology 35 (1999) 62-70. [SECONDARY_VERIFIED, checked 2026-11-09 web search (T03).]
+  Finding: 3D hybrid PIC: thrust efficiency in terms of momentum 0.65; Rayleigh-Taylor present, effect on efficiency limited; optimum coil angle about 50 deg. Limits: Laser-fusion scale (MJ pulses); abstract only. Relation: Closest published simulation of the FDP-1 nozzle class; 0.65^2 = 0.42 energy, V1 does not close.
+- **S-T03-MATSUDA-2009** N. Matsuda, A. Maeno, Y. Kajimura, H. Nakashima (2009). _Thrust efficiency of a laser fusion rocket magnetic thrust chamber with a shaped target_. Journal of Plasma and Fusion Research SERIES 8 (2009). [SECONDARY_VERIFIED, checked 2026-11-09 web search (T03).]
+  Finding: Thrust efficiency about 0.67 (3D hybrid). Limits: Definition not seen; abstract only. Relation: Second simulation point of the VTX-03 band.
+- **S-T03-INATOMI-2023** Inatomi et al. (2023). _Laser fusion rocket magnetic thrust chamber: dependence of thrust efficiency on plasma parameters_. Plasma and Fusion Research 18 (2023) 1404080. [SECONDARY_VERIFIED, checked 2026-11-09 web search (T03).]
+  Finding: Thrust efficiency independent of plasma energy, species and mass (3D hybrid). Limits: Abstract only; scaling to 80 GJ is an extrapolation. Relation: Supports applying laser-scale efficiencies to V1 pulses.
+- **S-T03-ROMANELLI-2017** G. Romanelli, A. Mignone, A. Cervone (2017). _Magnetic nozzle MHD simulation for a fusion propulsion concept (Nautilus)_. Acta Astronautica 139 (2017) 528-544. [SECONDARY_VERIFIED, checked 2026-11-09 web search (T03).]
+  Finding: 2D ideal MHD (PLUTO) of a multi-coil parabolic chamber; relativistic Alfven speeds in the vacuum region break ideal MHD; Hall or relativistic MHD needed; no asymptotic efficiency. Limits: Abstract and a citing paper only. Relation: Sets the D-09 code requirement (Alfven-speed limiting, Hall term).
+- **S-T03-SCHILLING-2023** A. Schilling, J. Cassibry, R. Adams (2023). _Pulsed fission-fusion magnetic nozzle with power generation_. JBIS 76 (2023) 70-76. [SECONDARY_VERIFIED, checked 2026-11-09 web search (T03).]
+  Finding: Adding inductive power generation costs about 7 % of nozzle efficiency and thrust. Limits: Extraction share not reached; different pulse class. Relation: Upper bound on the VTX-02C coupling; T03 books recovery once, upstream.
+- **S-T03-MAENO-2013** A. Maeno et al. (2011-2013). _Laser magnetic thrust chamber impulse measurements_. GEKKO / Osaka laser magnetic thrust chamber experiments (series). [SECONDARY_VERIFIED, checked 2026-11-09 web search (T03).]
+  Finding: Impulse measured: 1.5-2.2 uN s at 0.7 J; 0.02-10 mN s at 30-900 J. No efficiency measurement. Limits: Only experiments of the class; joule scale. Relation: D-09 validation case.
+- **S-T04-ATZENI-2004** S. Atzeni, J. Meyer-ter-Vehn (Oxford, 2004); table reproduced in arXiv:2410.18054 (2004). _The Physics of Inertial Fusion (burn parameter H_B, ignition conditions, burn fraction), as tabulated in an arXiv lecture_. ISBN 9780198562641; arXiv:2410.18054. [SECONDARY_VERIFIED, checked 2026-11-09 web search: H_B table values and formula quoted from arXiv:2410.18054 search extract; D-T isochoric condition from a fast-ignition paper citing Atzeni.]
+  Finding: Burn fraction b = rhoR / (rhoR + H_B), H_B = 8 m_i c_s / <sv>; minimum H_B 7.3 (D-T), 52 (D-D), 51 (D-3He), 73 (p-11B) g/cm2; isochoric D-T ignition needs T > 8 keV and rhoR > 0.25 g/cm2. Limits: Fit valid for modest burn fractions; the table is a secondary reproduction; arxiv.org could not be opened from the session. Relation: Check of the calculator's H_B (44.2 g/cm2 at 100 keV, 13 % below the published D-3He minimum) and validation of the T04 hot-spot model.
+- **S-T04-ATZENI-1999** S. Atzeni (1999). _Inertial fusion fast ignitor: igniting pulse parameter window vs the penetration depth of the heating particles and the density of the precompressed fuel_. Physics of Plasmas 6, 3316-3326 (1999). [SECONDARY_VERIFIED, checked 2026-11-09 web search: abstract (iris.uniroma1.it 11573/104598) gives the exponent and the 0.6 g/cm2 optimum.]
+  Finding: Optimal igniting-beam energy scales as rho^-1.85; optimum hot-spot areal density about 0.6 g/cm2 at about 6.5e19 W/cm2 (D-T). Limits: D-T only; the absolute energy at a reference density was not confirmed in the search extract. Relation: Calibration of the T04 0-D hot-spot model (factor 3.5 in rhoR for burn dynamics) and the fast-ignition energy scale.
+- **S-T04-ATZENI-CIAMPI-1997** S. Atzeni, M. L. Ciampi (1997). _Burn performance of fast ignited, tritium-poor ICF fuels_. Nuclear Fusion 37 (1997) 1665-1677, doi:10.1088/0029-5515/37/12/I01. [SECONDARY_VERIFIED, checked 2026-11-09 web search: bibliographic record and abstract; numbers not seen.]
+  Finding: 2-D simulations of compressed nearly pure deuterium with an off-centre D-T seed, fast ignited by an external beam; compared with equimolar D-T. Limits: Deuterium main fuel, not D-3He; numerical results not seen. Relation: Ancestry of the fast-ignited D-T booster core (T04-NEW-3).
+- **S-T04-NAKAO-1992** Y. Nakao et al. (Kyushu University); H. Nakashima et al. (1993); T. Honda et al. (1991) (1992). _Burn characteristics of compressed fuel pellets for D-3He inertial fusion; follow-up: Numerical simulation of implosion and burn of DT-ignitor/D3He fuel pellet_. Fusion Technology 22 (1992) 66-72 (OSTI 7107437); Laser and Particle Beams (1993); Fusion Technology 20 (1991) 819-823. [SECONDARY_VERIFIED, checked 2026-11-09 web search: OSTI and ANS abstract records and a citing 2007 Kyushu paper; full texts not opened.]
+  Finding: D-3He pellets need a small D-T ignitor; fuel gain about 500 at D-T rhoR 3 and total rhoR 14 g/cm2, 5 keV spark, compressed to 5,000x liquid density; driver about 30 MJ at 10 % coupling. Follow-up implosion simulation: the D-T ignitor pre-ignites before the D-3He is compressed, pellet gain only about 3. Later fast-ignition work: gains about 100 below 10 MJ. Limits: Abstract-level; spin polarisation is invoked to relax requirements; the pre-ignition result undercuts the 500. Relation: The only published D-3He ICF gain numbers found; anchor for the D-T core size (rhoR about 3 g/cm2) and for the pre-ignition risk.
+- **S-T04-MAGLIF-BR** M. M. Basko et al. (2000); Sandia MagLIF team; AMPS paper arXiv:2504.10680 (2000-2025). _Magnetised fuel ignition threshold B R (Basko, Kemp, Meyer-ter-Vehn 2000) and MagLIF B R measurements_. Nuclear Fusion 40 (2000) 59; arXiv:2504.10680; Sandia publication 'Data-driven assessment of magnetic charged particle confinement parameter' (2023). [SECONDARY_VERIFIED, checked 2026-11-09 web search: consistent across a Sandia slide set, an APS abstract and arXiv:2504.10680 (extracts).]
+  Finding: Magnetisation lowers the needed fuel rhoR only above B R about 0.6 MG cm (D-T alphas); benefit saturates above about 1.0 MG cm; MagLIF on Z has reached about 0.4-0.5 MG cm. Limits: D-T alphas; the D-3He proton values in T04 are scaled by Larmor radius (EXTRAPOLATION). Relation: Sets the magnetisation requirement of VTX-01A for 14.7 MeV protons: about 1.2 MG cm threshold, 2.0 saturation.
+- **S-T04-POLARISED** R. M. Kulsrud, H. P. Furth, E. J. Valeo, M. Goldhaber (1982). _Fusion reactor plasmas with polarised nuclei_. Physical Review Letters 49, 1248 (1982). [UNVERIFIED, checked 2026-11-09 not searched; carried from the author's knowledge; the Honda/Nakao abstracts mention spin polarisation as a relief.]
+  Finding: Spin-polarised D-T and D-3He raise the fusion cross-section by up to 1.5x; polarisation may survive in a burning plasma. Limits: Survival of polarisation through compression to thousands of g/cm3 is undemonstrated; polarised He-3 at target scale not shown. Relation: Basis of T04-NEW-2 (H_B / 1.5).
+- **S-T06-NIF-DENSITY** V. A. Smalyuk et al. (2013). _NIF high-convergence implosions: fuel areal density about 1.0 g/cm2, inferred fuel density 500-800 g/cm3_. https://dspace.mit.edu/handle/1721.1/84979. [UNVERIFIED, checked 2026-11-09 web search summary of the MIT repository record; full text not opened.]
+  Finding: Inferred compressed D-T fuel density approaching 600 g/cm3 (500-800 from neutron images) at rhoR about 1.0 g/cm2. Limits: Older design era; inferred, not measured directly; D-T, not D-3He. Relation: Present foundation for compression: FDP-1's optimistic 3,000 g/cm3 is about 5x, the T06 V3 target 6,000 about 10x.
+- **S-T06-CNTF-2024** Zhang et al. (Peking University) (2024-06). _Carbon nanotube fibers with dynamic strength up to 14 GPa_. Science 384, 1318-1323 (2024). [UNVERIFIED, checked 2026-11-09 web search (Peking University news release and secondary press).]
+  Finding: CNT fibres at 8.2 +- 0.2 GPa quasi-static tensile strength, 14 GPa dynamic. Limits: Fibre, not laminate; laboratory lengths; individual CNTs exceed 100 GPa. Relation: Ancestry of T06-NEW-2: a 3 GPa structural laminate is a plausible extrapolation, not a demonstration.
+- **S-T06-SP100** Los Alamos / DTIC reports (1982-1985). _SP-100 space reactor heat pipes: Mo-13Re shells with lithium working fluid_. DTIC ADA160279; OSTI 5995869. [UNVERIFIED, checked 2026-11-09 web search; record titles only.]
+  Finding: Refractory Mo-Re/Li heat pipes for a 100 kWe, 7-year space reactor; interface heat-flux limit about 30 W/cm2. Limits: Areal mass of the radiator not found in the abstract; 1,400 K class, not 1,800 K. Relation: Ancestry of T06-NEW-1.
+- **S-T06-RADMASS** Space Solar Power Review 10(1) (1991); NASA advanced radiator targets (1991). _Waste-heat radiator specific masses in space power studies_. ssi.org Space Solar Power Review vol. 10 no. 1. [UNVERIFIED, checked 2026-11-09 web search snippet.]
+  Finding: 6.8 kg/m2 below 690 K and 8.2 kg/m2 above 690 K used for waste-heat radiators; NASA advanced radiator target 5 kg/m2. Limits: Study values, not flight hardware; generic, not refractory 1,800 K panels. Relation: Shows FDP-1's optimistic 3.0 kg/m2 hot and 1.0 kg/m2 warm panels are already beyond published practice.
+- **S-T04-STUDY** T04 thread (2026-11-09). _T04 ignition and target study (studies/ignition/ignition.py, results/ignition.json)_. lab/variants/vertex-drive/studies/ignition/results/ignition.json. [PRIMARY_VERIFIED, checked T00 2026-11-09: ignition.py rerun, exit 0 (Atlas cliffs and liner table reproduced).]
+  Finding: See studies/ignition/REPORT.md. Limits: 0-D boundaries; no burn calculation. Relation: All T04 MODEL claims (cases named in study_case).
+- **S-T03-STUDY** T03 thread (2026-11-09). _T03 nozzle study (studies/nozzle/*.py, results/*.json)_. lab/variants/vertex-drive/studies/nozzle/results/. [PRIMARY_VERIFIED, checked T00 2026-11-09: test_nozzle.py and the three runners rerun.]
+  Finding: See studies/nozzle/REPORT.md. Limits: Vacuum fields, thin elastic shell, test particles: upper bounds. Relation: All T03 MODEL claims.
+- **S-T06-STUDY** T06 thread (2026-11-09). _T06 convergence and futures study (studies/futures/futures.py, results/futures.json)_. lab/variants/vertex-drive/studies/futures/results/futures.json. [PRIMARY_VERIFIED, checked T00 2026-11-09: futures.py rerun.]
+  Finding: See studies/futures/CONVERGENCE.md. Limits: Gain bound without the T04 ignitor term (8-12 % optimistic, RECONCILIATION R-03). Relation: T06 MODEL claims.
+- **S-IGNITION-TIMELINE** IGNITION owner (Drive) (2026-10-21). _IGNITION - Timeline (master chronology workbook)_. Google Drive file 1e7gjilGfkcOLkTKrlIPRrjjk3AMW3v7h (xlsx), tabs Master Timeline, Canon Guardrails, Open Chronology. [PRIMARY_VERIFIED, checked 2026-11-09 read by T00 through the Drive connector (read only).]
+  Finding: T055 First Ignition Y155; T056 Wayfarer runaway ignition to about 0.016 c; G10 out Y155, back about Y161; G07 technology does not cancel inertia, heat or radiation; G09 Fiji lattice not synthesisable; O04 Fiji Drive performance ladder OPEN. Limits: Read only, 2026-11-09; not captured into the repository (Drive captures stay local). Relation: Historical context for the Vertex history scaffold (D-25); conflicts listed in planning/RECONCILIATION.md.
 
 Convergence results: `results/convergence.json`, summary in `results/CONVERGENCE.md` (FDP-1 calculator fdp1-v1).
