@@ -1,0 +1,3265 @@
+{
+ "pulse": {
+  "generation": "V1",
+  "E_pulse_J": 80992909200.15524,
+  "E_plasma_J": 79979171142.51698,
+  "mass_per_pulse_kg": 0.00034275082315847135,
+  "v_rms_m_s": 21603006.390806578,
+  "rep_Hz": 107.02516613924851,
+  "R_s_m": 43.11193877746674,
+  "focal_m": 32.33395408310005,
+  "shield_z_m": 43.11193877746674,
+  "shield_radius_m": 6.012204240898563,
+  "thrust_N": 704355.9001918745
+ },
+ "assumptions": {
+  "B_limit_T": 25.0,
+  "J_eng_A_m2": 1000000000.0,
+  "virial_kg_per_J": 1.07e-06,
+  "strike_tube_m": 0.5,
+  "forward_coils_polar_deg": [
+   20.0,
+   40.0
+  ]
+ },
+ "designs": {
+  "A_equal_W3": {
+   "kind": "A",
+   "loops": [
+    {
+     "name": "L1",
+     "polar_deg": 60.0,
+     "distance_m": 43.11193877746674,
+     "radius_m": 37.33603418768563,
+     "z_m": 21.555969388733374,
+     "current_MA": 15.427965249814797,
+     "winding_minor_m": 0.12342372199851837
+    },
+    {
+     "name": "L2",
+     "polar_deg": 90.0,
+     "distance_m": 64.6679081662001,
+     "radius_m": 64.6679081662001,
+     "z_m": 3.959767337164597e-15,
+     "current_MA": 15.427965249814797,
+     "winding_minor_m": 0.12342372199851837
+    },
+    {
+     "name": "L3",
+     "polar_deg": 120.0,
+     "distance_m": 129.33581633240016,
+     "radius_m": 112.00810256305685,
+     "z_m": -64.66790816620005,
+     "current_MA": 15.427965249814797,
+     "winding_minor_m": 0.12342372199851837
+    }
+   ],
+   "ledger": {
+    "stored_J": 239881562216.25388,
+    "W_over_Ep": 2.9993004277176443,
+    "virial_mass_t": 256.67327157139164,
+    "conductor_minor_m": [
+     0.12342372199851837,
+     0.12342372199851837,
+     0.12342372199851837
+    ],
+    "currents_MA": [
+     15.427965249814797,
+     15.427965249814797,
+     15.427965249814797
+    ],
+    "B_surface_T": [
+     25.000000000000004,
+     25.000000000000004,
+     25.000000000000004
+    ],
+    "hoop_tension_MN": [
+     167.60404154593996,
+     180.67874239307633,
+     193.75344324021262
+    ]
+   },
+   "thin_shell": {
+    "eta_mom": 0.29193971868376506,
+    "eta_T": 0.08522879934515588,
+    "strike_share": 0.5036089565343158,
+    "strike_by": {
+     "shield": 0.01157766016962095,
+     "ship_forward": 0.4920312963646947
+    },
+    "unstopped_forward_share": 0.3517264015583309,
+    "forward_going_share": 0.5036089565343158,
+    "min_R_fwd": 38.099569389044646,
+    "stopping_radius_m_by_polar_deg": {
+     "0": null,
+     "10": null,
+     "20": null,
+     "30": null,
+     "40": null,
+     "50": null,
+     "60": 38.1,
+     "70": null,
+     "80": null,
+     "90": 55.63,
+     "100": null,
+     "110": null,
+     "120": 110.9,
+     "130": null,
+     "140": null,
+     "150": null,
+     "160": null,
+     "170": null,
+     "180": null
+    }
+   },
+   "stresses": [
+    {
+     "loop": "L1",
+     "hoop_tension_self_MN": 167.60404154593996,
+     "net_radial_from_others_MN": 647.6408802274775,
+     "net_axial_from_others_MN": -225.32312815703074,
+     "solid_angle_share_envelope_x3": 0.007437945152414176
+    },
+    {
+     "loop": "L2",
+     "hoop_tension_self_MN": 180.67874239307633,
+     "net_radial_from_others_MN": 228.68913301719067,
+     "net_axial_from_others_MN": 33.61095065467428,
+     "solid_angle_share_envelope_x3": 0.005725732847951997
+    },
+    {
+     "loop": "L3",
+     "hoop_tension_self_MN": 193.75344324021262,
+     "net_radial_from_others_MN": 9.681195764102574,
+     "net_axial_from_others_MN": 191.71217750235644,
+     "solid_angle_share_envelope_x3": 0.002479315050804727
+    }
+   ],
+   "axis": {
+    "B_burn_T": 0.37474828006839694,
+    "B_forward_max_T": 0.43529426321242476,
+    "z_forward_max_m": 17.554388597149284,
+    "mirror_ratio": 1.1615644056671248,
+    "forward_loss_cone_share": 0.31352474901100846,
+    "B_aft_100m_T": 0.10564080123677994
+   },
+   "ac_screen": {
+    "current_swing_per_pulse": 0.1667055408585666,
+    "winding_volume_m3": 64.3524722184363,
+    "B_swing_amplitude_T": 2.0838192607320822,
+    "unscreened_hysteresis_W": 5740783723.265198,
+    "screen_dissipation_share_of_plasma": 0.001,
+    "screen_dissipation_W": 8559784079.207271
+   },
+   "rt": {
+    "stopping_depth_m": 12.699856463014882,
+    "l_max_FLR": 47.808395197577376,
+    "efolds_l10": 5.163977794943222,
+    "efolds_l_max": 11.291105077015551,
+    "growth_l_max": 80105.92313011111,
+    "shear_needed_deg": 45.0,
+    "wavelength_at_l_max_m": 5.0072095832918695
+   }
+  },
+  "A_equal_W6": {
+   "kind": "A",
+   "loops": [
+    {
+     "name": "L1",
+     "polar_deg": 60.0,
+     "distance_m": 43.11193877746674,
+     "radius_m": 37.33603418768563,
+     "z_m": 21.555969388733374,
+     "current_MA": 22.37790457036218,
+     "winding_minor_m": 0.17902323656289745
+    },
+    {
+     "name": "L2",
+     "polar_deg": 90.0,
+     "distance_m": 64.6679081662001,
+     "radius_m": 64.6679081662001,
+     "z_m": 3.959767337164597e-15,
+     "current_MA": 22.37790457036218,
+     "winding_minor_m": 0.17902323656289745
+    },
+    {
+     "name": "L3",
+     "polar_deg": 120.0,
+     "distance_m": 129.33581633240016,
+     "radius_m": 112.00810256305685,
+     "z_m": -64.66790816620005,
+     "current_MA": 22.37790457036218,
+     "winding_minor_m": 0.17902323656289745
+    }
+   ],
+   "ledger": {
+    "stored_J": 479640386180.288,
+    "W_over_Ep": 5.997066227725769,
+    "virial_mass_t": 513.2152132129081,
+    "conductor_minor_m": [
+     0.17902323656289745,
+     0.17902323656289745,
+     0.17902323656289745
+    ],
+    "currents_MA": [
+     22.37790457036218,
+     22.37790457036218,
+     22.37790457036218
+    ],
+    "B_surface_T": [
+     25.000000000000004,
+     25.000000000000004,
+     25.000000000000004
+    ],
+    "hoop_tension_MN": [
+     333.9959778312133,
+     361.5036152913121,
+     389.011252751411
+    ]
+   },
+   "thin_shell": {
+    "eta_mom": 0.5914082259214267,
+    "eta_T": 0.3497636896875293,
+    "strike_share": 0.23133996607571666,
+    "strike_by": {
+     "shield": 0.01131887735354786,
+     "ship_forward": 0.2200210887221688
+    },
+    "unstopped_forward_share": 0.17526361086825795,
+    "forward_going_share": 0.23133996607571666,
+    "min_R_fwd": 33.95723565990901,
+    "stopping_radius_m_by_polar_deg": {
+     "0": null,
+     "10": null,
+     "20": null,
+     "30": null,
+     "40": null,
+     "50": 38.47,
+     "60": 33.99,
+     "70": 35.66,
+     "80": 42.33,
+     "90": 45.29,
+     "100": 49.64,
+     "110": 70.9,
+     "120": 92.34,
+     "130": 103.32,
+     "140": null,
+     "150": null,
+     "160": null,
+     "170": null,
+     "180": null
+    }
+   },
+   "stresses": [
+    {
+     "loop": "L1",
+     "hoop_tension_self_MN": 333.9959778312133,
+     "net_radial_from_others_MN": 1362.5604704782727,
+     "net_axial_from_others_MN": -474.0534405478595,
+     "solid_angle_share_envelope_x3": 0.01078856635500333
+    },
+    {
+     "loop": "L2",
+     "hoop_tension_self_MN": 361.5036152913121,
+     "net_radial_from_others_MN": 481.13512008032006,
+     "net_axial_from_others_MN": 70.71349900143613,
+     "solid_angle_share_envelope_x3": 0.008305042252308418
+    },
+    {
+     "loop": "L3",
+     "hoop_tension_self_MN": 389.011252751411,
+     "net_radial_from_others_MN": 20.368100683351823,
+     "net_axial_from_others_MN": 403.3399415464234,
+     "solid_angle_share_envelope_x3": 0.0035961887850011116
+    }
+   ],
+   "axis": {
+    "B_burn_T": 0.5435636594643364,
+    "B_forward_max_T": 0.6313841990479396,
+    "z_forward_max_m": 17.554388597149284,
+    "mirror_ratio": 1.1615644056671255,
+    "forward_loss_cone_share": 0.3135247490110082,
+    "B_aft_100m_T": 0.1532295238247078
+   },
+   "ac_screen": {
+    "current_swing_per_pulse": 0.08337410010387895,
+    "winding_volume_m3": 135.39005566108546,
+    "B_swing_amplitude_T": 1.042176251298487,
+    "unscreened_hysteresis_W": 6040513248.685926,
+    "screen_dissipation_share_of_plasma": 0.001,
+    "screen_dissipation_W": 8559784079.207271
+   },
+   "rt": {
+    "stopping_depth_m": 11.319078553303003,
+    "l_max_FLR": 61.805509756703756,
+    "efolds_l10": 5.163977794943222,
+    "efolds_l_max": 12.838017474849586,
+    "growth_l_max": 376253.1529146022,
+    "shear_needed_deg": 45.0,
+    "wavelength_at_l_max_m": 3.4521130075726436
+   }
+  },
+  "A_equal_W10": {
+   "kind": "A",
+   "loops": [
+    {
+     "name": "L1",
+     "polar_deg": 60.0,
+     "distance_m": 43.11193877746674,
+     "radius_m": 37.33603418768563,
+     "z_m": 21.555969388733374,
+     "current_MA": 29.460676474107967,
+     "winding_minor_m": 0.2356854117928637
+    },
+    {
+     "name": "L2",
+     "polar_deg": 90.0,
+     "distance_m": 64.6679081662001,
+     "radius_m": 64.6679081662001,
+     "z_m": 3.959767337164597e-15,
+     "current_MA": 29.460676474107967,
+     "winding_minor_m": 0.2356854117928637
+    },
+    {
+     "name": "L3",
+     "polar_deg": 120.0,
+     "distance_m": 129.33581633240016,
+     "radius_m": 112.00810256305685,
+     "z_m": -64.66790816620005,
+     "current_MA": 29.460676474107967,
+     "winding_minor_m": 0.2356854117928637
+    }
+   ],
+   "ledger": {
+    "stored_J": 799215876937.3866,
+    "W_over_Ep": 9.992800194356139,
+    "virial_mass_t": 855.1609883230036,
+    "conductor_minor_m": [
+     0.2356854117928637,
+     0.2356854117928637,
+     0.2356854117928637
+    ],
+    "currents_MA": [
+     29.460676474107967,
+     29.460676474107967,
+     29.460676474107967
+    ],
+    "B_surface_T": [
+     25.000000000000004,
+     25.000000000000004,
+     25.000000000000004
+    ],
+    "hoop_tension_MN": [
+     555.0124695862161,
+     602.6884778773793,
+     650.3644861685422
+    ]
+   },
+   "thin_shell": {
+    "eta_mom": 0.6506210918684157,
+    "eta_T": 0.42330780518404937,
+    "strike_share": 0.23150138461704522,
+    "strike_by": {
+     "shield": 0.010943861580105407,
+     "ship_forward": 0.21307713732915096,
+     "L2": 0.007480385707788881
+    },
+    "unstopped_forward_share": 0.14336119571004424,
+    "forward_going_share": 0.22402099890925634,
+    "min_R_fwd": 30.191536250055385,
+    "stopping_radius_m_by_polar_deg": {
+     "0": null,
+     "10": null,
+     "20": null,
+     "30": null,
+     "40": null,
+     "50": 32.69,
+     "60": 30.3,
+     "70": 30.7,
+     "80": 33.02,
+     "90": 36.35,
+     "100": 40.25,
+     "110": 47.02,
+     "120": 63.38,
+     "130": 82.19,
+     "140": 119.6,
+     "150": null,
+     "160": null,
+     "170": null,
+     "180": null
+    }
+   },
+   "stresses": [
+    {
+     "loop": "L1",
+     "hoop_tension_self_MN": 555.0124695862161,
+     "net_radial_from_others_MN": 2361.578466415472,
+     "net_axial_from_others_MN": -821.6254774623188,
+     "solid_angle_share_envelope_x3": 0.014203227205873062
+    },
+    {
+     "loop": "L2",
+     "hoop_tension_self_MN": 602.6884778773793,
+     "net_radial_from_others_MN": 833.8993854849433,
+     "net_axial_from_others_MN": 122.56004789869351,
+     "solid_angle_share_envelope_x3": 0.010933649400896306
+    },
+    {
+     "loop": "L3",
+     "hoop_tension_self_MN": 650.3644861685422,
+     "net_radial_from_others_MN": 35.30182257430531,
+     "net_axial_from_others_MN": 699.0654295636251,
+     "solid_angle_share_envelope_x3": 0.004734409068624356
+    }
+   ],
+   "axis": {
+    "B_burn_T": 0.7156055681714719,
+    "B_forward_max_T": 0.8312219564851813,
+    "z_forward_max_m": 17.554388597149284,
+    "mirror_ratio": 1.1615644056671253,
+    "forward_loss_cone_share": 0.31352474901100824,
+    "B_aft_100m_T": 0.20172779866351323
+   },
+   "ac_screen": {
+    "current_swing_per_pulse": 0.050036024965494294,
+    "winding_volume_m3": 234.65691757796378,
+    "B_swing_amplitude_T": 0.6254503120686786,
+    "unscreened_hysteresis_W": 6283072587.524025,
+    "screen_dissipation_share_of_plasma": 0.001,
+    "screen_dissipation_W": 8559784079.207271
+   },
+   "rt": {
+    "stopping_depth_m": 10.063845416685128,
+    "l_max_FLR": 72.34414253388701,
+    "efolds_l10": 5.163977794943222,
+    "efolds_l_max": 13.889482115028576,
+    "growth_l_max": 1076776.1783850566,
+    "shear_needed_deg": 45.0,
+    "wavelength_at_l_max_m": 2.622175207601226
+   }
+  },
+  "A_equal_W15": {
+   "kind": "A",
+   "loops": [
+    {
+     "name": "L1",
+     "polar_deg": 60.0,
+     "distance_m": 43.11193877746674,
+     "radius_m": 37.33603418768563,
+     "z_m": 21.555969388733374,
+     "current_MA": 36.66867415085125,
+     "winding_minor_m": 0.29334939320680997
+    },
+    {
+     "name": "L2",
+     "polar_deg": 90.0,
+     "distance_m": 64.6679081662001,
+     "radius_m": 64.6679081662001,
+     "z_m": 3.959767337164597e-15,
+     "current_MA": 36.66867415085125,
+     "winding_minor_m": 0.29334939320680997
+    },
+    {
+     "name": "L3",
+     "polar_deg": 120.0,
+     "distance_m": 129.33581633240016,
+     "radius_m": 112.00810256305685,
+     "z_m": -64.66790816620005,
+     "current_MA": 36.66867415085125,
+     "winding_minor_m": 0.29334939320680997
+    }
+   ],
+   "ledger": {
+    "stored_J": 1198566126619.4858,
+    "W_over_Ep": 14.985978342832903,
+    "virial_mass_t": 1282.4657554828498,
+    "conductor_minor_m": [
+     0.29334939320680997,
+     0.29334939320680997,
+     0.29334939320680997
+    ],
+    "currents_MA": [
+     36.66867415085125,
+     36.66867415085125,
+     36.66867415085125
+    ],
+    "B_surface_T": [
+     25.000000000000004,
+     25.000000000000004,
+     25.000000000000004
+    ],
+    "hoop_tension_MN": [
+     830.3917605495855,
+     904.2510068141137,
+     978.1102530786418
+    ]
+   },
+   "thin_shell": {
+    "eta_mom": 0.6150384465676546,
+    "eta_T": 0.3782722907563537,
+    "strike_share": 0.22402099890925634,
+    "strike_by": {
+     "shield": 0.02308953079302345,
+     "ship_forward": 0.20093146811623286
+    },
+    "unstopped_forward_share": 0.11417301719687482,
+    "forward_going_share": 0.22402099890925634,
+    "min_R_fwd": 27.068631923718748,
+    "stopping_radius_m_by_polar_deg": {
+     "0": null,
+     "10": null,
+     "20": null,
+     "30": null,
+     "40": 36.31,
+     "50": 29.08,
+     "60": 27.26,
+     "70": 27.22,
+     "80": 28.44,
+     "90": 30.65,
+     "100": 33.78,
+     "110": 38.48,
+     "120": 47.12,
+     "130": 62.75,
+     "140": 85.92,
+     "150": null,
+     "160": null,
+     "170": null,
+     "180": null
+    }
+   },
+   "stresses": [
+    {
+     "loop": "L1",
+     "hoop_tension_self_MN": 830.3917605495855,
+     "net_radial_from_others_MN": 3658.5362696213333,
+     "net_axial_from_others_MN": -1272.8548519937267,
+     "solid_angle_share_envelope_x3": 0.017678260401127955
+    },
+    {
+     "loop": "L2",
+     "hoop_tension_self_MN": 904.2510068141137,
+     "net_radial_from_others_MN": 1291.8694806877825,
+     "net_axial_from_others_MN": 189.8689316575997,
+     "solid_angle_share_envelope_x3": 0.013608731201860702
+    },
+    {
+     "loop": "L3",
+     "hoop_tension_self_MN": 978.1102530786418,
+     "net_radial_from_others_MN": 54.689268262116336,
+     "net_axial_from_others_MN": 1082.985920336127,
+     "solid_angle_share_envelope_x3": 0.005892753467042654
+    }
+   ],
+   "axis": {
+    "B_burn_T": 0.8906892352888174,
+    "B_forward_max_T": 1.0345929122223616,
+    "z_forward_max_m": 17.554388597149284,
+    "mirror_ratio": 1.1615644056671255,
+    "forward_loss_cone_share": 0.3135247490110082,
+    "B_aft_100m_T": 0.25108353920053256
+   },
+   "ac_screen": {
+    "current_swing_per_pulse": 0.033364521725678775,
+    "winding_volume_m3": 363.5284010611774,
+    "B_swing_amplitude_T": 0.4170565215709847,
+    "unscreened_hysteresis_W": 6490515105.160809,
+    "screen_dissipation_share_of_plasma": 0.001,
+    "screen_dissipation_W": 8559784079.207271
+   },
+   "rt": {
+    "stopping_depth_m": 9.02287730790625,
+    "l_max_FLR": 80.73037326550107,
+    "efolds_l10": 5.163977794943222,
+    "efolds_l_max": 14.672457032640088,
+    "growth_l_max": 2355955.728552487,
+    "shear_needed_deg": 45.0,
+    "wavelength_at_l_max_m": 2.106731624158635
+   }
+  },
+  "A_equal_W20": {
+   "kind": "A",
+   "loops": [
+    {
+     "name": "L1",
+     "polar_deg": 60.0,
+     "distance_m": 43.11193877746674,
+     "radius_m": 37.33603418768563,
+     "z_m": 21.555969388733374,
+     "current_MA": 42.843605571664256,
+     "winding_minor_m": 0.34274884457331406
+    },
+    {
+     "name": "L2",
+     "polar_deg": 90.0,
+     "distance_m": 64.6679081662001,
+     "radius_m": 64.6679081662001,
+     "z_m": 3.959767337164597e-15,
+     "current_MA": 42.843605571664256,
+     "winding_minor_m": 0.34274884457331406
+    },
+    {
+     "name": "L3",
+     "polar_deg": 120.0,
+     "distance_m": 129.33581633240016,
+     "radius_m": 112.00810256305685,
+     "z_m": -64.66790816620005,
+     "current_MA": 42.843605571664256,
+     "winding_minor_m": 0.34274884457331406
+    }
+   ],
+   "ledger": {
+    "stored_J": 1597812864439.0942,
+    "W_over_Ep": 19.977862256060515,
+    "virial_mass_t": 1709.6597649498308,
+    "conductor_minor_m": [
+     0.34274884457331406,
+     0.34274884457331406,
+     0.34274884457331406
+    ],
+    "currents_MA": [
+     42.843605571664256,
+     42.843605571664256,
+     42.843605571664256
+    ],
+    "B_surface_T": [
+     25.0,
+     25.0,
+     25.0
+    ],
+    "hoop_tension_MN": [
+     1105.044837029992,
+     1205.8740742615387,
+     1306.7033114930857
+    ]
+   },
+   "thin_shell": {
+    "eta_mom": 0.576118411295756,
+    "eta_T": 0.3319124238339459,
+    "strike_share": 0.22498667088554714,
+    "strike_by": {
+     "shield": 0.016049816861384385,
+     "ship_forward": 0.2007362807586125,
+     "L3": 0.008200573265550268
+    },
+    "unstopped_forward_share": 0.09292674071946917,
+    "forward_going_share": 0.21678609761999687,
+    "min_R_fwd": 24.886834925693734,
+    "stopping_radius_m_by_polar_deg": {
+     "0": null,
+     "10": null,
+     "20": null,
+     "30": null,
+     "40": 31.32,
+     "50": 26.72,
+     "60": 25.15,
+     "70": 24.94,
+     "80": 25.71,
+     "90": 27.35,
+     "100": 29.86,
+     "110": 33.63,
+     "120": 39.84,
+     "130": 51.21,
+     "140": 71.23,
+     "150": 151.34,
+     "160": null,
+     "170": null,
+     "180": null
+    }
+   },
+   "stresses": [
+    {
+     "loop": "L1",
+     "hoop_tension_self_MN": 1105.044837029992,
+     "net_radial_from_others_MN": 4994.465014287993,
+     "net_axial_from_others_MN": -1737.6427505548213,
+     "solid_angle_share_envelope_x3": 0.020655244111178604
+    },
+    {
+     "loop": "L2",
+     "hoop_tension_self_MN": 1205.8740742615387,
+     "net_radial_from_others_MN": 1763.6006448527964,
+     "net_axial_from_others_MN": 259.2003103367537,
+     "solid_angle_share_envelope_x3": 0.0159004143303552
+    },
+    {
+     "loop": "L3",
+     "hoop_tension_self_MN": 1306.7033114930857,
+     "net_radial_from_others_MN": 74.65926722121078,
+     "net_axial_from_others_MN": 1478.4424402180678,
+     "solid_angle_share_envelope_x3": 0.006885081370392871
+    }
+   ],
+   "axis": {
+    "B_burn_T": 1.0406795218898166,
+    "B_forward_max_T": 1.2088162903338926,
+    "z_forward_max_m": 17.554388597149284,
+    "mirror_ratio": 1.161564405667125,
+    "forward_loss_cone_share": 0.3135247490110084,
+    "B_aft_100m_T": 0.2933655052481735
+   },
+   "ac_screen": {
+    "current_swing_per_pulse": 0.025027702843847532,
+    "winding_volume_m3": 496.2722102487251,
+    "B_swing_amplitude_T": 0.3128462855480941,
+    "unscreened_hysteresis_W": 6646558960.037034,
+    "screen_dissipation_share_of_plasma": 0.001,
+    "screen_dissipation_W": 8559784079.207271
+   },
+   "rt": {
+    "stopping_depth_m": 8.295611641897912,
+    "l_max_FLR": 86.72236764193195,
+    "efolds_l10": 5.163977794943223,
+    "efolds_l_max": 15.20722351532823,
+    "growth_l_max": 4021733.2135548843,
+    "shear_needed_deg": 45.0,
+    "wavelength_at_l_max_m": 1.803094170502275
+   }
+  },
+  "A_equal_W30": {
+   "kind": "A",
+   "loops": [
+    {
+     "name": "L1",
+     "polar_deg": 60.0,
+     "distance_m": 43.11193877746674,
+     "radius_m": 37.33603418768563,
+     "z_m": 21.555969388733374,
+     "current_MA": 53.379628318621606,
+     "winding_minor_m": 0.4270370265489728
+    },
+    {
+     "name": "L2",
+     "polar_deg": 90.0,
+     "distance_m": 64.6679081662001,
+     "radius_m": 64.6679081662001,
+     "z_m": 3.959767337164597e-15,
+     "current_MA": 53.379628318621606,
+     "winding_minor_m": 0.4270370265489728
+    },
+    {
+     "name": "L3",
+     "polar_deg": 120.0,
+     "distance_m": 129.33581633240016,
+     "radius_m": 112.00810256305685,
+     "z_m": -64.66790816620005,
+     "current_MA": 53.379628318621606,
+     "winding_minor_m": 0.4270370265489728
+    }
+   ],
+   "ledger": {
+    "stored_J": 2396060055218.408,
+    "W_over_Ep": 29.958550720021915,
+    "virial_mass_t": 2563.7842590836967,
+    "conductor_minor_m": [
+     0.4270370265489728,
+     0.4270370265489728,
+     0.4270370265489728
+    ],
+    "currents_MA": [
+     53.379628318621606,
+     53.379628318621606,
+     53.379628318621606
+    ],
+    "B_surface_T": [
+     25.000000000000004,
+     25.000000000000004,
+     25.000000000000004
+    ],
+    "hoop_tension_MN": [
+     1652.7243510866285,
+     1809.2428044823055,
+     1965.7612578779822
+    ]
+   },
+   "thin_shell": {
+    "eta_mom": 0.5272041675822879,
+    "eta_T": 0.27794423431613313,
+    "strike_share": 0.22434378682226214,
+    "strike_by": {
+     "shield": 0.025504969480566287,
+     "ship_forward": 0.18440426247500852,
+     "L1": 0.0068768656644220515,
+     "L2": 0.007557689202265255
+    },
+    "unstopped_forward_share": 0.06916901505547038,
+    "forward_going_share": 0.21678609761999687,
+    "min_R_fwd": 21.95428219977112,
+    "stopping_radius_m_by_polar_deg": {
+     "0": null,
+     "10": null,
+     "20": null,
+     "30": 41.17,
+     "40": 26.81,
+     "50": 23.63,
+     "60": 22.3,
+     "70": 21.96,
+     "80": 22.36,
+     "90": 23.44,
+     "100": 25.25,
+     "110": 28.01,
+     "120": 32.33,
+     "130": 39.71,
+     "140": 53.74,
+     "150": 78.68,
+     "160": null,
+     "170": null,
+     "180": null
+    }
+   },
+   "stresses": [
+    {
+     "loop": "L1",
+     "hoop_tension_self_MN": 1652.7243510866285,
+     "net_radial_from_others_MN": 7752.968891156029,
+     "net_axial_from_others_MN": -2697.3640120522227,
+     "solid_angle_share_envelope_x3": 0.02573474474833473
+    },
+    {
+     "loop": "L2",
+     "hoop_tension_self_MN": 1809.2428044823055,
+     "net_radial_from_others_MN": 2737.6587676259205,
+     "net_axial_from_others_MN": 402.35979967222204,
+     "solid_angle_share_envelope_x3": 0.019810615743969823
+    },
+    {
+     "loop": "L3",
+     "hoop_tension_self_MN": 1965.7612578779822,
+     "net_radial_from_others_MN": 115.89449010988214,
+     "net_axial_from_others_MN": 2295.004212380001,
+     "solid_angle_share_envelope_x3": 0.008578248249444914
+    }
+   ],
+   "axis": {
+    "B_burn_T": 1.2966015659993708,
+    "B_forward_max_T": 1.5060862273971227,
+    "z_forward_max_m": 17.554388597149284,
+    "mirror_ratio": 1.161564405667125,
+    "forward_loss_cone_share": 0.3135247490110084,
+    "B_aft_100m_T": 0.3655094248652387
+   },
+   "ac_screen": {
+    "current_swing_per_pulse": 0.016689725904058494,
+    "winding_volume_m3": 770.3693982431706,
+    "B_swing_amplitude_T": 0.20862157380073118,
+    "unscreened_hysteresis_W": 6880248781.566221,
+    "screen_dissipation_share_of_plasma": 0.001,
+    "screen_dissipation_W": 8559784079.207271
+   },
+   "rt": {
+    "stopping_depth_m": 7.3180940665903735,
+    "l_max_FLR": 95.31697135589356,
+    "efolds_l10": 5.163977794943222,
+    "efolds_l_max": 15.942979341465096,
+    "growth_l_max": 8393593.896263625,
+    "shear_needed_deg": 45.0,
+    "wavelength_at_l_max_m": 1.4472010743210324
+   }
+  },
+  "Astar_W3": {
+   "kind": "A*",
+   "loops": [
+    {
+     "name": "L1",
+     "polar_deg": 60.0,
+     "distance_m": 43.11193877746674,
+     "radius_m": 37.33603418768563,
+     "z_m": 21.555969388733374,
+     "current_MA": 26.07085872338,
+     "winding_minor_m": 0.20856686978703998
+    },
+    {
+     "name": "L2",
+     "polar_deg": 90.0,
+     "distance_m": 64.6679081662001,
+     "radius_m": 64.6679081662001,
+     "z_m": 3.959767337164597e-15,
+     "current_MA": 22.405586089693216,
+     "winding_minor_m": 0.17924468871754573
+    },
+    {
+     "name": "L3",
+     "polar_deg": 120.0,
+     "distance_m": 129.33581633240016,
+     "radius_m": 112.00810256305685,
+     "z_m": -64.66790816620005,
+     "current_MA": 1.3128111008903884,
+     "winding_minor_m": 0.020442131789645535
+    }
+   ],
+   "ledger": {
+    "stored_J": 239854243892.15466,
+    "W_over_Ep": 2.9989588597355192,
+    "virial_mass_t": 256.64404096460544,
+    "conductor_minor_m": [
+     0.20856686978703998,
+     0.17924468871754573,
+     0.020442131789645535
+    ],
+    "currents_MA": [
+     26.07085872338,
+     22.405586089693216,
+     1.3128111008903884
+    ],
+    "B_surface_T": [
+     25.0,
+     25.0,
+     12.844170210812955
+    ],
+    "hoop_tension_MN": [
+     442.9466946462535,
+     362.336469647818,
+     1.7128167494847455
+    ]
+   },
+   "thin_shell": {
+    "eta_mom": 0.4965843362357357,
+    "eta_T": 0.24659600299468623,
+    "strike_share": 0.23889765527798196,
+    "strike_by": {
+     "shield": 0.01122827951234856,
+     "ship_forward": 0.2201116865633681,
+     "L3": 0.007557689202265304
+    },
+    "unstopped_forward_share": 0.16867736014123477,
+    "forward_going_share": 0.23133996607571666,
+    "min_R_fwd": 33.3880383158393,
+    "stopping_radius_m_by_polar_deg": {
+     "0": null,
+     "10": null,
+     "20": null,
+     "30": null,
+     "40": null,
+     "50": 37.0,
+     "60": 33.4,
+     "70": 35.37,
+     "80": 47.02,
+     "90": 49.77,
+     "100": 59.35,
+     "110": null,
+     "120": 129.37,
+     "130": null,
+     "140": null,
+     "150": null,
+     "160": null,
+     "170": null,
+     "180": null
+    }
+   },
+   "stresses": [
+    {
+     "loop": "L1",
+     "hoop_tension_self_MN": 442.9466946462535,
+     "net_radial_from_others_MN": 1247.1138600045329,
+     "net_axial_from_others_MN": -464.83669177583056,
+     "solid_angle_share_envelope_x3": 0.012568969019629271
+    },
+    {
+     "loop": "L2",
+     "hoop_tension_self_MN": 362.336469647818,
+     "net_radial_from_others_MN": -172.095476759139,
+     "net_axial_from_others_MN": 440.3741093025115,
+     "solid_angle_share_envelope_x3": 0.008315315608642092
+    },
+    {
+     "loop": "L3",
+     "hoop_tension_self_MN": 1.7128167494847455,
+     "net_radial_from_others_MN": 1.3042236432444443,
+     "net_axial_from_others_MN": 24.46258247331894,
+     "solid_angle_share_envelope_x3": 0.00041063811879867273
+    }
+   ],
+   "axis": {
+    "B_burn_T": 0.5074475051318906,
+    "B_forward_max_T": 0.6317319448239367,
+    "z_forward_max_m": 18.93473368342086,
+    "mirror_ratio": 1.2449207818249954,
+    "forward_loss_cone_share": 0.2782253183597416,
+    "B_aft_100m_T": 0.05235161844033227
+   },
+   "ac_screen": {
+    "current_swing_per_pulse": 0.16672452787301506,
+    "winding_volume_m3": 73.9948293492989,
+    "B_swing_amplitude_T": 2.084056598412688,
+    "unscreened_hysteresis_W": 6601715190.961696,
+    "screen_dissipation_share_of_plasma": 0.001,
+    "screen_dissipation_W": 8559784079.207271
+   },
+   "rt": {
+    "stopping_depth_m": 11.129346105279767,
+    "l_max_FLR": 56.73178850366529,
+    "efolds_l10": 5.163977794943222,
+    "efolds_l_max": 12.299787369833163,
+    "growth_l_max": 219649.27964346332,
+    "shear_needed_deg": 45.0,
+    "wavelength_at_l_max_m": 3.6978074782196764
+   }
+  },
+  "C_W3": {
+   "kind": "C",
+   "loops": [
+    {
+     "name": "C1@20",
+     "polar_deg": 20.0,
+     "distance_m": 43.11193877746674,
+     "radius_m": 14.745151479716629,
+     "z_m": 40.511970736959356,
+     "current_MA": 34.07402308513019,
+     "winding_minor_m": 0.27259218468104157
+    },
+    {
+     "name": "C2@40",
+     "polar_deg": 40.0,
+     "distance_m": 43.11193877746674,
+     "radius_m": 27.71182007572027,
+     "z_m": 33.02566113256398,
+     "current_MA": 14.058611444987129,
+     "winding_minor_m": 0.11246889155989705
+    },
+    {
+     "name": "L1",
+     "polar_deg": 60.0,
+     "distance_m": 43.11193877746674,
+     "radius_m": 37.33603418768563,
+     "z_m": 21.555969388733374,
+     "current_MA": 12.95120673440662,
+     "winding_minor_m": 0.10360965387525295
+    },
+    {
+     "name": "L2",
+     "polar_deg": 90.0,
+     "distance_m": 64.6679081662001,
+     "radius_m": 64.6679081662001,
+     "z_m": 3.959767337164597e-15,
+     "current_MA": 20.97067040491017,
+     "winding_minor_m": 0.16776536323928135
+    },
+    {
+     "name": "L3",
+     "polar_deg": 120.0,
+     "distance_m": 129.33581633240016,
+     "radius_m": 112.00810256305685,
+     "z_m": -64.66790816620005,
+     "current_MA": 0.5812388011416434,
+     "winding_minor_m": 0.02
+    }
+   ],
+   "ledger": {
+    "stored_J": 239929220615.3869,
+    "W_over_Ep": 2.999896312851889,
+    "virial_mass_t": 256.72426605846397,
+    "conductor_minor_m": [
+     0.27259218468104157,
+     0.11246889155989705,
+     0.10360965387525295,
+     0.16776536323928135,
+     0.02
+    ],
+    "currents_MA": [
+     34.07402308513019,
+     14.058611444987129,
+     12.95120673440662,
+     20.97067040491017,
+     0.5812388011416434
+    ],
+    "B_surface_T": [
+     24.999999999999996,
+     25.0,
+     25.000000000000004,
+     25.000000000000004,
+     5.8123880114164335
+    ],
+    "hoop_tension_MN": [
+     617.6883654072683,
+     135.11731292937662,
+     121.04548821134132,
+     320.32315803931016,
+     0.33648839789075463
+    ]
+   },
+   "thin_shell": {
+    "eta_mom": 0.541162019674688,
+    "eta_T": 0.2928563315383874,
+    "strike_share": 0.20235959361787245,
+    "strike_by": {
+     "shield": 0.008036228951731046,
+     "ship_forward": 0.18465445506528813,
+     "C1@20": 0.002111220398588049,
+     "L3": 0.007557689202265304
+    },
+    "unstopped_forward_share": 0.03338791922318374,
+    "forward_going_share": 0.19480190441560716,
+    "min_R_fwd": 34.06957623598583,
+    "stopping_radius_m_by_polar_deg": {
+     "0": null,
+     "10": 52.86,
+     "20": 34.39,
+     "30": 34.16,
+     "40": 34.27,
+     "50": 35.25,
+     "60": 35.96,
+     "70": 86.13,
+     "80": 59.55,
+     "90": 52.52,
+     "100": 84.01,
+     "110": null,
+     "120": null,
+     "130": null,
+     "140": null,
+     "150": null,
+     "160": null,
+     "170": null,
+     "180": null
+    }
+   },
+   "stresses": [
+    {
+     "loop": "C1@20",
+     "hoop_tension_self_MN": 617.6883654072683,
+     "net_radial_from_others_MN": 1893.0256559772142,
+     "net_axial_from_others_MN": -476.98461753302576,
+     "solid_angle_share_envelope_x3": 0.0064876705189697795
+    },
+    {
+     "loop": "C2@40",
+     "hoop_tension_self_MN": 135.11731292937662,
+     "net_radial_from_others_MN": 640.6659846897654,
+     "net_axial_from_others_MN": -137.67188455823216,
+     "solid_angle_share_envelope_x3": 0.005030644319410642
+    },
+    {
+     "loop": "L1",
+     "hoop_tension_self_MN": 121.04548821134132,
+     "net_radial_from_others_MN": 457.3838680830151,
+     "net_axial_from_others_MN": 232.59377876509944,
+     "solid_angle_share_envelope_x3": 0.006243880109157618
+    },
+    {
+     "loop": "L2",
+     "hoop_tension_self_MN": 320.32315803931016,
+     "net_radial_from_others_MN": -106.58001854026543,
+     "net_axial_from_others_MN": 371.9731454184736,
+     "solid_angle_share_envelope_x3": 0.007782779805160006
+    },
+    {
+     "loop": "L3",
+     "hoop_tension_self_MN": 0.33648839789075463,
+     "net_radial_from_others_MN": 0.6448904682274578,
+     "net_axial_from_others_MN": 10.08957790768498,
+     "solid_angle_share_envelope_x3": 0.00040175664947691167
+    }
+   ],
+   "axis": {
+    "B_burn_T": 0.49018298409251393,
+    "B_forward_max_T": 2.0242915555398313,
+    "z_forward_max_m": 39.75493873468366,
+    "mirror_ratio": 4.129665086778655,
+    "forward_loss_cone_share": 0.06472720830947565,
+    "B_aft_100m_T": 0.04532540804133475
+   },
+   "ac_screen": {
+    "current_swing_per_pulse": 0.16667242726288387,
+    "winding_volume_m3": 73.26978701915829,
+    "B_swing_amplitude_T": 2.083405340786048,
+    "unscreened_hysteresis_W": 6534985138.584629,
+    "screen_dissipation_share_of_plasma": 0.001,
+    "screen_dissipation_W": 8559784079.207271
+   },
+   "rt": {
+    "stopping_depth_m": 11.356525411995277,
+    "l_max_FLR": 55.92028980058356,
+    "efolds_l10": 5.163977794943222,
+    "efolds_l_max": 12.211501660383794,
+    "growth_l_max": 201088.75573206216,
+    "shear_needed_deg": 45.0,
+    "wavelength_at_l_max_m": 3.8280463422338533
+   }
+  },
+  "Astar_W6": {
+   "kind": "A*",
+   "loops": [
+    {
+     "name": "L1",
+     "polar_deg": 60.0,
+     "distance_m": 43.11193877746674,
+     "radius_m": 37.33603418768563,
+     "z_m": 21.555969388733374,
+     "current_MA": 26.67756113743585,
+     "winding_minor_m": 0.2134204890994868
+    },
+    {
+     "name": "L2",
+     "polar_deg": 90.0,
+     "distance_m": 64.6679081662001,
+     "radius_m": 64.6679081662001,
+     "z_m": 3.959767337164597e-15,
+     "current_MA": 27.750363247615766,
+     "winding_minor_m": 0.22200290598092612
+    },
+    {
+     "name": "L3",
+     "polar_deg": 120.0,
+     "distance_m": 129.33581633240016,
+     "radius_m": 112.00810256305685,
+     "z_m": -64.66790816620005,
+     "current_MA": 17.094330713176728,
+     "winding_minor_m": 0.13675464570541382
+    }
+   ],
+   "ledger": {
+    "stored_J": 479646840264.3534,
+    "W_over_Ep": 5.997146924786931,
+    "virial_mass_t": 513.2221190828581,
+    "conductor_minor_m": [
+     0.2134204890994868,
+     0.22200290598092612,
+     0.13675464570541382
+    ],
+    "currents_MA": [
+     26.67756113743585,
+     27.750363247615766,
+     17.094330713176728
+    ],
+    "B_surface_T": [
+     25.0,
+     25.0,
+     25.000000000000004
+    ],
+    "hoop_tension_MN": [
+     462.1652298811942,
+     539.3482925866113,
+     234.8710512043584
+    ]
+   },
+   "thin_shell": {
+    "eta_mom": 0.6218683416897824,
+    "eta_T": 0.386720234396,
+    "strike_share": 0.23133996607571666,
+    "strike_by": {
+     "shield": 0.017917608727339808,
+     "ship_forward": 0.21342235734837683
+    },
+    "unstopped_forward_share": 0.1558096064375945,
+    "forward_going_share": 0.23133996607571666,
+    "min_R_fwd": 31.840811621051753,
+    "stopping_radius_m_by_polar_deg": {
+     "0": null,
+     "10": null,
+     "20": null,
+     "30": null,
+     "40": null,
+     "50": 34.8,
+     "60": 31.91,
+     "70": 32.76,
+     "80": 36.44,
+     "90": 40.62,
+     "100": 45.24,
+     "110": 58.73,
+     "120": 101.42,
+     "130": 145.14,
+     "140": null,
+     "150": null,
+     "160": null,
+     "170": null,
+     "180": null
+    }
+   },
+   "stresses": [
+    {
+     "loop": "L1",
+     "hoop_tension_self_MN": 462.1652298811942,
+     "net_radial_from_others_MN": 1837.397472645433,
+     "net_axial_from_others_MN": -655.2548180088573,
+     "solid_angle_share_envelope_x3": 0.01286146509455003
+    },
+    {
+     "loop": "L2",
+     "hoop_tension_self_MN": 539.3482925866113,
+     "net_radial_from_others_MN": 359.7203695686822,
+     "net_axial_from_others_MN": 276.11491133914853,
+     "solid_angle_share_envelope_x3": 0.010298906162715192
+    },
+    {
+     "loop": "L3",
+     "hoop_tension_self_MN": 234.8710512043584,
+     "net_radial_from_others_MN": 18.883449572166715,
+     "net_axial_from_others_MN": 379.1399066697088,
+     "solid_angle_share_envelope_x3": 0.0027471044129504596
+    }
+   ],
+   "axis": {
+    "B_burn_T": 0.6235097855387721,
+    "B_forward_max_T": 0.7339425388049621,
+    "z_forward_max_m": 17.78444611152787,
+    "mirror_ratio": 1.1771147074632766,
+    "forward_loss_cone_share": 0.3060508304428852,
+    "B_aft_100m_T": 0.1377118320956733
+   },
+   "ac_screen": {
+    "current_swing_per_pulse": 0.08337297822960443,
+    "winding_volume_m3": 137.82954946035247,
+    "B_swing_amplitude_T": 1.0421622278700555,
+    "unscreened_hysteresis_W": 6149270067.45632,
+    "screen_dissipation_share_of_plasma": 0.001,
+    "screen_dissipation_W": 8559784079.207271
+   },
+   "rt": {
+    "stopping_depth_m": 10.613603873683918,
+    "l_max_FLR": 66.47706754499715,
+    "efolds_l10": 5.163977794943222,
+    "efolds_l_max": 13.31435992152805,
+    "growth_l_max": 605833.1647943694,
+    "shear_needed_deg": 45.0,
+    "wavelength_at_l_max_m": 3.009484731116443
+   }
+  },
+  "C_W6": {
+   "kind": "C",
+   "loops": [
+    {
+     "name": "C1@20",
+     "polar_deg": 20.0,
+     "distance_m": 43.11193877746674,
+     "radius_m": 14.745151479716629,
+     "z_m": 40.511970736959356,
+     "current_MA": 63.36160781075148,
+     "winding_minor_m": 0.5068928624860118
+    },
+    {
+     "name": "C2@40",
+     "polar_deg": 40.0,
+     "distance_m": 43.11193877746674,
+     "radius_m": 27.71182007572027,
+     "z_m": 33.02566113256398,
+     "current_MA": 15.025774624520311,
+     "winding_minor_m": 0.12020619699616249
+    },
+    {
+     "name": "L1",
+     "polar_deg": 60.0,
+     "distance_m": 43.11193877746674,
+     "radius_m": 37.33603418768563,
+     "z_m": 21.555969388733374,
+     "current_MA": 15.172744059387126,
+     "winding_minor_m": 0.12138195247509702
+    },
+    {
+     "name": "L2",
+     "polar_deg": 90.0,
+     "distance_m": 64.6679081662001,
+     "radius_m": 64.6679081662001,
+     "z_m": 3.959767337164597e-15,
+     "current_MA": 29.79625474545084,
+     "winding_minor_m": 0.23837003796360676
+    },
+    {
+     "name": "L3",
+     "polar_deg": 120.0,
+     "distance_m": 129.33581633240016,
+     "radius_m": 112.00810256305685,
+     "z_m": -64.66790816620005,
+     "current_MA": 2.8492351438605272,
+     "winding_minor_m": 0.030115439800094252
+    }
+   ],
+   "ledger": {
+    "stored_J": 479600869398.6343,
+    "W_over_Ep": 5.9965721393138836,
+    "virial_mass_t": 513.1729302565386,
+    "conductor_minor_m": [
+     0.5068928624860118,
+     0.12020619699616249,
+     0.12138195247509702,
+     0.23837003796360676,
+     0.030115439800094252
+    ],
+    "currents_MA": [
+     63.36160781075148,
+     15.025774624520311,
+     15.172744059387126,
+     29.79625474545084,
+     2.8492351438605272
+    ],
+    "B_surface_T": [
+     25.000000000000004,
+     25.0,
+     25.0,
+     25.0,
+     18.922088887120356
+    ],
+    "hoop_tension_MN": [
+     1886.8301834414933,
+     152.84548444509113,
+     162.48866007446986,
+     615.4912144824323,
+     7.7534172236760135
+    ]
+   },
+   "thin_shell": {
+    "eta_mom": 0.7677287967488342,
+    "eta_T": 0.5894075053574128,
+    "strike_share": 0.021354215864973044,
+    "strike_by": {
+     "shield": 0.006838421149593223,
+     "ship_forward": 0.005292940637175904,
+     "C1@20": 0.0016651648759386127,
+     "L3": 0.007557689202265304
+    },
+    "unstopped_forward_share": 0.003195155355517331,
+    "forward_going_share": 0.013796526662707741,
+    "min_R_fwd": 29.443222803697658,
+    "stopping_radius_m_by_polar_deg": {
+     "0": null,
+     "10": 34.39,
+     "20": 30.33,
+     "30": 29.46,
+     "40": 29.65,
+     "50": 30.34,
+     "60": 31.48,
+     "70": 34.12,
+     "80": 39.24,
+     "90": 42.75,
+     "100": 47.9,
+     "110": null,
+     "120": 128.54,
+     "130": null,
+     "140": null,
+     "150": null,
+     "160": null,
+     "170": null,
+     "180": null
+    }
+   },
+   "stresses": [
+    {
+     "loop": "C1@20",
+     "hoop_tension_self_MN": 1886.8301834414933,
+     "net_radial_from_others_MN": 4135.30391152888,
+     "net_axial_from_others_MN": -1016.1223917505753,
+     "solid_angle_share_envelope_x3": 0.01206400647206602
+    },
+    {
+     "loop": "C2@40",
+     "hoop_tension_self_MN": 152.84548444509113,
+     "net_radial_from_others_MN": 752.6635783493681,
+     "net_axial_from_others_MN": 6.179968599880748,
+     "solid_angle_share_envelope_x3": 0.005376727855050045
+    },
+    {
+     "loop": "L1",
+     "hoop_tension_self_MN": 162.48866007446986,
+     "net_radial_from_others_MN": 803.2414122536691,
+     "net_axial_from_others_MN": 318.90577176441974,
+     "solid_angle_share_envelope_x3": 0.007314900980004102
+    },
+    {
+     "loop": "L2",
+     "hoop_tension_self_MN": 615.4912144824323,
+     "net_radial_from_others_MN": -94.20075510580727,
+     "net_axial_from_others_MN": 622.4753921925147,
+     "solid_angle_share_envelope_x3": 0.01105819152295676
+    },
+    {
+     "loop": "L3",
+     "hoop_tension_self_MN": 7.7534172236760135,
+     "net_radial_from_others_MN": 4.272471575035783,
+     "net_axial_from_others_MN": 68.56125919376025,
+     "solid_angle_share_envelope_x3": 0.0006049539095804752
+    }
+   ],
+   "axis": {
+    "B_burn_T": 0.6642344932801594,
+    "B_forward_max_T": 3.374090056990767,
+    "z_forward_max_m": 39.98499624906225,
+    "mirror_ratio": 5.079667031937245,
+    "forward_loss_cone_share": 0.05191052709441368,
+    "B_aft_100m_T": 0.07264240240681782
+   },
+   "ac_screen": {
+    "current_swing_per_pulse": 0.08338096972468159,
+    "winding_volume_m3": 168.08279391819536,
+    "B_swing_amplitude_T": 1.04226212155852,
+    "unscreened_hysteresis_W": 7499738403.173038,
+    "screen_dissipation_share_of_plasma": 0.001,
+    "screen_dissipation_W": 8559784079.207271
+   },
+   "rt": {
+    "stopping_depth_m": 9.814407601232553,
+    "l_max_FLR": 65.48641563319948,
+    "efolds_l10": 5.163977794943222,
+    "efolds_l_max": 13.21478118201478,
+    "growth_l_max": 548411.4920313244,
+    "shear_needed_deg": 45.0,
+    "wavelength_at_l_max_m": 2.8249709978388324
+   }
+  },
+  "Astar_W10": {
+   "kind": "A*",
+   "loops": [
+    {
+     "name": "L1",
+     "polar_deg": 60.0,
+     "distance_m": 43.11193877746674,
+     "radius_m": 37.33603418768563,
+     "z_m": 21.555969388733374,
+     "current_MA": 39.61412368939328,
+     "winding_minor_m": 0.31691298951514624
+    },
+    {
+     "name": "L2",
+     "polar_deg": 90.0,
+     "distance_m": 64.6679081662001,
+     "radius_m": 64.6679081662001,
+     "z_m": 3.959767337164597e-15,
+     "current_MA": 23.34393441210095,
+     "winding_minor_m": 0.18675147529680758
+    },
+    {
+     "name": "L3",
+     "polar_deg": 120.0,
+     "distance_m": 129.33581633240016,
+     "radius_m": 112.00810256305685,
+     "z_m": -64.66790816620005,
+     "current_MA": 29.367594643649944,
+     "winding_minor_m": 0.23494075714919954
+    }
+   ],
+   "ledger": {
+    "stored_J": 799237697860.994,
+    "W_over_Ep": 9.993073026936118,
+    "virial_mass_t": 855.1843367112635,
+    "conductor_minor_m": [
+     0.31691298951514624,
+     0.18675147529680758,
+     0.23494075714919954
+    ],
+    "currents_MA": [
+     39.61412368939328,
+     23.34393441210095,
+     29.367594643649944
+    ],
+    "B_surface_T": [
+     25.000000000000004,
+     25.000000000000004,
+     25.000000000000004
+    ],
+    "hoop_tension_MN": [
+     957.0291443899653,
+     391.0856512755749,
+     646.5342156256429
+    ]
+   },
+   "thin_shell": {
+    "eta_mom": 0.6784050303173972,
+    "eta_T": 0.4602333851599486,
+    "strike_share": 0.21678609761999687,
+    "strike_by": {
+     "shield": 0.016918703399659438,
+     "ship_forward": 0.1928072098699502,
+     "L1": 0.007060184350387224
+    },
+    "unstopped_forward_share": 0.11978253968414714,
+    "forward_going_share": 0.21678609761999687,
+    "min_R_fwd": 28.19419161390779,
+    "stopping_radius_m_by_polar_deg": {
+     "0": null,
+     "10": null,
+     "20": null,
+     "30": null,
+     "40": 39.92,
+     "50": 29.92,
+     "60": 28.24,
+     "70": 28.77,
+     "80": 31.35,
+     "90": 36.21,
+     "100": 42.3,
+     "110": 51.89,
+     "120": 73.19,
+     "130": 86.72,
+     "140": null,
+     "150": null,
+     "160": null,
+     "170": null,
+     "180": null
+    }
+   },
+   "stresses": [
+    {
+     "loop": "L1",
+     "hoop_tension_self_MN": 957.0291443899653,
+     "net_radial_from_others_MN": 2664.697755767517,
+     "net_axial_from_others_MN": -913.6551998929939,
+     "solid_angle_share_envelope_x3": 0.01909828512649751
+    },
+    {
+     "loop": "L2",
+     "hoop_tension_self_MN": 391.0856512755749,
+     "net_radial_from_others_MN": 572.2806369377347,
+     "net_axial_from_others_MN": 284.90483690731764,
+     "solid_angle_share_envelope_x3": 0.008663561908490032
+    },
+    {
+     "loop": "L3",
+     "hoop_tension_self_MN": 646.5342156256429,
+     "net_radial_from_others_MN": 38.592590536194976,
+     "net_axial_from_others_MN": 628.7503629856764,
+     "solid_angle_share_envelope_x3": 0.00471945057089156
+    }
+   ],
+   "axis": {
+    "B_burn_T": 0.7668189695348587,
+    "B_forward_max_T": 0.9470311129882835,
+    "z_forward_max_m": 19.049762440610152,
+    "mirror_ratio": 1.2350126308987097,
+    "forward_loss_cone_share": 0.2818878258442945,
+    "B_aft_100m_T": 0.19608351869623666
+   },
+   "ac_screen": {
+    "current_swing_per_pulse": 0.05003465887342767,
+    "winding_volume_m3": 240.57547196767172,
+    "B_swing_amplitude_T": 0.6254332359178459,
+    "unscreened_hysteresis_W": 6441369383.31332,
+    "screen_dissipation_share_of_plasma": 0.001,
+    "screen_dissipation_W": 8559784079.207271
+   },
+   "rt": {
+    "stopping_depth_m": 9.398063871302597,
+    "l_max_FLR": 72.39306181232172,
+    "efolds_l10": 5.163977794943222,
+    "efolds_l_max": 13.894177371577559,
+    "growth_l_max": 1081843.8063853509,
+    "shear_needed_deg": 45.0,
+    "wavelength_at_l_max_m": 2.447048461019223
+   }
+  },
+  "C_W10": {
+   "kind": "C",
+   "loops": [
+    {
+     "name": "C1@20",
+     "polar_deg": 20.0,
+     "distance_m": 43.11193877746674,
+     "radius_m": 14.745151479716629,
+     "z_m": 40.511970736959356,
+     "current_MA": 80.66852491710247,
+     "winding_minor_m": 0.6453481993368198
+    },
+    {
+     "name": "C2@40",
+     "polar_deg": 40.0,
+     "distance_m": 43.11193877746674,
+     "radius_m": 27.71182007572027,
+     "z_m": 33.02566113256398,
+     "current_MA": 14.144013045446638,
+     "winding_minor_m": 0.1131521043635731
+    },
+    {
+     "name": "L1",
+     "polar_deg": 60.0,
+     "distance_m": 43.11193877746674,
+     "radius_m": 37.33603418768563,
+     "z_m": 21.555969388733374,
+     "current_MA": 15.45648324022188,
+     "winding_minor_m": 0.12365186592177504
+    },
+    {
+     "name": "L2",
+     "polar_deg": 90.0,
+     "distance_m": 64.6679081662001,
+     "radius_m": 64.6679081662001,
+     "z_m": 3.959767337164597e-15,
+     "current_MA": 25.55759425534123,
+     "winding_minor_m": 0.20446075404272984
+    },
+    {
+     "name": "L3",
+     "polar_deg": 120.0,
+     "distance_m": 129.33581633240016,
+     "radius_m": 112.00810256305685,
+     "z_m": -64.66790816620005,
+     "current_MA": 24.062868887438945,
+     "winding_minor_m": 0.19250295109951157
+    }
+   ],
+   "ledger": {
+    "stored_J": 799095034952.6646,
+    "W_over_Ep": 9.991289276163366,
+    "virial_mass_t": 855.0316873993511,
+    "conductor_minor_m": [
+     0.6453481993368198,
+     0.1131521043635731,
+     0.12365186592177504,
+     0.20446075404272984,
+     0.19250295109951157
+    ],
+    "currents_MA": [
+     80.66852491710247,
+     14.144013045446638,
+     15.45648324022188,
+     25.55759425534123,
+     24.062868887438945
+    ],
+    "B_surface_T": [
+     25.000000000000004,
+     25.0,
+     25.0,
+     25.0,
+     25.0
+    ],
+    "hoop_tension_MN": [
+     2901.2127514019567,
+     136.64273025937555,
+     168.18011375103168,
+     462.85648350314307,
+     445.59518231999897
+    ]
+   },
+   "thin_shell": {
+    "eta_mom": 0.8600554780464478,
+    "eta_T": 0.7396954253177038,
+    "strike_share": 0.016055206251047876,
+    "strike_by": {
+     "shield": 0.005473238255269051,
+     "ship_forward": 0.008323288407438689,
+     "L1": 0.0022586795883401344
+    },
+    "unstopped_forward_share": 0.003195155355517331,
+    "forward_going_share": 0.013796526662707741,
+    "min_R_fwd": 28.04319061627032,
+    "stopping_radius_m_by_polar_deg": {
+     "0": null,
+     "10": 32.68,
+     "20": 28.95,
+     "30": 28.06,
+     "40": 28.3,
+     "50": 29.11,
+     "60": 30.37,
+     "70": 32.8,
+     "80": 37.21,
+     "90": 40.98,
+     "100": 45.16,
+     "110": 55.23,
+     "120": 84.23,
+     "130": 96.67,
+     "140": null,
+     "150": null,
+     "160": null,
+     "170": null,
+     "180": null
+    }
+   },
+   "stresses": [
+    {
+     "loop": "C1@20",
+     "hoop_tension_self_MN": 2901.2127514019567,
+     "net_radial_from_others_MN": 5294.4144630498495,
+     "net_axial_from_others_MN": -1262.6603200641096,
+     "solid_angle_share_envelope_x3": 0.01535923156493527
+    },
+    {
+     "loop": "C2@40",
+     "hoop_tension_self_MN": 136.64273025937555,
+     "net_radial_from_others_MN": 663.5034532190773,
+     "net_axial_from_others_MN": 142.2960695690112,
+     "solid_angle_share_envelope_x3": 0.00506120388625701
+    },
+    {
+     "loop": "L1",
+     "hoop_tension_self_MN": 168.18011375103168,
+     "net_radial_from_others_MN": 874.8353300594437,
+     "net_axial_from_others_MN": 379.43573979711095,
+     "solid_angle_share_envelope_x3": 0.007451693903145095
+    },
+    {
+     "loop": "L2",
+     "hoop_tension_self_MN": 462.85648350314307,
+     "net_radial_from_others_MN": 631.611348436764,
+     "net_axial_from_others_MN": 219.99254043537968,
+     "solid_angle_share_envelope_x3": 0.009485110613934861
+    },
+    {
+     "loop": "L3",
+     "hoop_tension_self_MN": 445.59518231999897,
+     "net_radial_from_others_MN": 36.302537523205665,
+     "net_axial_from_others_MN": 520.9359702626075,
+     "solid_angle_share_envelope_x3": 0.0038669670324078774
+    }
+   ],
+   "axis": {
+    "B_burn_T": 0.7276415411611892,
+    "B_forward_max_T": 4.117002234684559,
+    "z_forward_max_m": 40.10002500625154,
+    "mirror_ratio": 5.658008788385749,
+    "forward_loss_cone_share": 0.04633179065487464,
+    "B_aft_100m_T": 0.1700543087627161
+   },
+   "ac_screen": {
+    "current_swing_per_pulse": 0.05004359159061391,
+    "winding_volume_m3": 274.78478181330314,
+    "B_swing_amplitude_T": 0.6255448948826738,
+    "unscreened_hysteresis_W": 7358631632.322948,
+    "screen_dissipation_share_of_plasma": 0.001,
+    "screen_dissipation_W": 8559784079.207271
+   },
+   "rt": {
+    "stopping_depth_m": 9.34773020542344,
+    "l_max_FLR": 68.32652904702825,
+    "efolds_l10": 5.163977794943222,
+    "efolds_l_max": 13.498299057982898,
+    "growth_l_max": 728176.7294733423,
+    "shear_needed_deg": 45.0,
+    "wavelength_at_l_max_m": 2.5788016119669948
+   }
+  },
+  "Astar_W15": {
+   "kind": "A*",
+   "loops": [
+    {
+     "name": "L1",
+     "polar_deg": 60.0,
+     "distance_m": 43.11193877746674,
+     "radius_m": 37.33603418768563,
+     "z_m": 21.555969388733374,
+     "current_MA": 58.66451279968001,
+     "winding_minor_m": 0.4693161023974401
+    },
+    {
+     "name": "L2",
+     "polar_deg": 90.0,
+     "distance_m": 64.6679081662001,
+     "radius_m": 64.6679081662001,
+     "z_m": 3.959767337164597e-15,
+     "current_MA": 21.874423104892415,
+     "winding_minor_m": 0.17499538483913932
+    },
+    {
+     "name": "L3",
+     "polar_deg": 120.0,
+     "distance_m": 129.33581633240016,
+     "radius_m": 112.00810256305685,
+     "z_m": -64.66790816620005,
+     "current_MA": 36.41849360001542,
+     "winding_minor_m": 0.2913479488001233
+    }
+   ],
+   "ledger": {
+    "stored_J": 1198378757998.0803,
+    "W_over_Ep": 14.983635625113665,
+    "virial_mass_t": 1282.265271057946,
+    "conductor_minor_m": [
+     0.4693161023974401,
+     0.17499538483913932,
+     0.2913479488001233
+    ],
+    "currents_MA": [
+     58.66451279968001,
+     21.874423104892415,
+     36.41849360001542
+    ],
+    "B_surface_T": [
+     25.0,
+     24.999999999999996,
+     25.0
+    ],
+    "hoop_tension_MN": [
+     1963.692630640152,
+     346.508492437039,
+     965.7170194079184
+    ]
+   },
+   "thin_shell": {
+    "eta_mom": 0.6796314995602619,
+    "eta_T": 0.4618989751945303,
+    "strike_share": 0.1956076951693819,
+    "strike_by": {
+     "shield": 0.021085551750087233,
+     "ship_forward": 0.17452214341929467
+    },
+    "unstopped_forward_share": 0.08304121245341929,
+    "forward_going_share": 0.1956076951693819,
+    "min_R_fwd": 24.35025191093645,
+    "stopping_radius_m_by_polar_deg": {
+     "0": null,
+     "10": null,
+     "20": null,
+     "30": null,
+     "40": 29.01,
+     "50": 25.5,
+     "60": 24.4,
+     "70": 24.69,
+     "80": 26.32,
+     "90": 29.75,
+     "100": 35.67,
+     "110": 44.67,
+     "120": 60.07,
+     "130": 74.6,
+     "140": 96.37,
+     "150": null,
+     "160": null,
+     "170": null,
+     "180": null
+    }
+   },
+   "stresses": [
+    {
+     "loop": "L1",
+     "hoop_tension_self_MN": 1963.692630640152,
+     "net_radial_from_others_MN": 4022.692461674083,
+     "net_axial_from_others_MN": -1351.5305787637778,
+     "solid_angle_share_envelope_x3": 0.0282826297267138
+    },
+    {
+     "loop": "L2",
+     "hoop_tension_self_MN": 346.508492437039,
+     "net_radial_from_others_MN": 589.637318825479,
+     "net_axial_from_others_MN": 495.16026564725104,
+     "solid_angle_share_envelope_x3": 0.008118186739057252
+    },
+    {
+     "loop": "L3",
+     "hoop_tension_self_MN": 965.7170194079184,
+     "net_radial_from_others_MN": 62.42989991678493,
+     "net_axial_from_others_MN": 856.370313116527,
+     "solid_angle_share_envelope_x3": 0.005852548787095418
+    }
+   ],
+   "axis": {
+    "B_burn_T": 0.9864633712909165,
+    "B_forward_max_T": 1.2737632139301713,
+    "z_forward_max_m": 19.73993498374591,
+    "mirror_ratio": 1.2912422812651272,
+    "forward_loss_cone_share": 0.2625384232471995,
+    "B_aft_100m_T": 0.23621889253185127
+   },
+   "ac_screen": {
+    "current_swing_per_pulse": 0.03336973832718967,
+    "winding_volume_m3": 389.0903951765889,
+    "B_swing_amplitude_T": 0.41712172908987083,
+    "unscreened_hysteresis_W": 6947990666.091159,
+    "screen_dissipation_share_of_plasma": 0.001,
+    "screen_dissipation_W": 8559784079.207271
+   },
+   "rt": {
+    "stopping_depth_m": 8.116750636978816,
+    "l_max_FLR": 80.43200090125728,
+    "efolds_l10": 5.163977794943222,
+    "efolds_l_max": 14.645317877625125,
+    "growth_l_max": 2292876.9053993444,
+    "shear_needed_deg": 45.0,
+    "wavelength_at_l_max_m": 1.9021924522398144
+   }
+  },
+  "C_W15": {
+   "kind": "C",
+   "loops": [
+    {
+     "name": "C1@20",
+     "polar_deg": 20.0,
+     "distance_m": 43.11193877746674,
+     "radius_m": 14.745151479716629,
+     "z_m": 40.511970736959356,
+     "current_MA": 132.10464179171325,
+     "winding_minor_m": 1.056837134333706
+    },
+    {
+     "name": "C2@40",
+     "polar_deg": 40.0,
+     "distance_m": 43.11193877746674,
+     "radius_m": 27.71182007572027,
+     "z_m": 33.02566113256398,
+     "current_MA": 10.618845937541002,
+     "winding_minor_m": 0.08495076750032803
+    },
+    {
+     "name": "L1",
+     "polar_deg": 60.0,
+     "distance_m": 43.11193877746674,
+     "radius_m": 37.33603418768563,
+     "z_m": 21.555969388733374,
+     "current_MA": 16.958524998114623,
+     "winding_minor_m": 0.13566819998491697
+    },
+    {
+     "name": "L2",
+     "polar_deg": 90.0,
+     "distance_m": 64.6679081662001,
+     "radius_m": 64.6679081662001,
+     "z_m": 3.959767337164597e-15,
+     "current_MA": 24.934291702555317,
+     "winding_minor_m": 0.19947433362044253
+    },
+    {
+     "name": "L3",
+     "polar_deg": 120.0,
+     "distance_m": 129.33581633240016,
+     "radius_m": 112.00810256305685,
+     "z_m": -64.66790816620005,
+     "current_MA": 28.9979406085749,
+     "winding_minor_m": 0.2319835248685992
+    }
+   ],
+   "ledger": {
+    "stored_J": 1197039726784.9438,
+    "W_over_Ep": 14.966893375925432,
+    "virial_mass_t": 1280.8325076598899,
+    "conductor_minor_m": [
+     1.056837134333706,
+     0.08495076750032803,
+     0.13566819998491697,
+     0.19947433362044253,
+     0.2319835248685992
+    ],
+    "currents_MA": [
+     132.10464179171325,
+     10.618845937541002,
+     16.958524998114623,
+     24.934291702555317,
+     28.9979406085749
+    ],
+    "B_surface_T": [
+     25.0,
+     24.999999999999996,
+     25.000000000000004,
+     25.0,
+     25.000000000000004
+    ],
+    "hoop_tension_MN": [
+     6919.705140857786,
+     80.25103236469118,
+     199.78824019215168,
+     442.0904047838828,
+     631.4257620632734
+    ]
+   },
+   "thin_shell": {
+    "eta_mom": 0.8894076046715826,
+    "eta_T": 0.7910458872476422,
+    "strike_share": 0.013796526662707741,
+    "strike_by": {
+     "shield": 0.003195155355517331,
+     "ship_forward": 0.010601371307190409
+    },
+    "unstopped_forward_share": 0.0015223526320451354,
+    "forward_going_share": 0.013796526662707741,
+    "min_R_fwd": 25.350187047433273,
+    "stopping_radius_m_by_polar_deg": {
+     "0": null,
+     "10": 29.65,
+     "20": 26.29,
+     "30": 25.38,
+     "40": 25.63,
+     "50": 26.6,
+     "60": 28.1,
+     "70": 30.48,
+     "80": 34.42,
+     "90": 38.82,
+     "100": 43.29,
+     "110": 51.51,
+     "120": 72.7,
+     "130": 85.54,
+     "140": null,
+     "150": null,
+     "160": null,
+     "170": null,
+     "180": null
+    }
+   },
+   "stresses": [
+    {
+     "loop": "C1@20",
+     "hoop_tension_self_MN": 6919.705140857786,
+     "net_radial_from_others_MN": 7978.472471438094,
+     "net_axial_from_others_MN": -1856.1543095526001,
+     "solid_angle_share_envelope_x3": 0.02515263277922635
+    },
+    {
+     "loop": "C2@40",
+     "hoop_tension_self_MN": 80.25103236469118,
+     "net_radial_from_others_MN": 315.8834182685605,
+     "net_axial_from_others_MN": 401.41130472973487,
+     "solid_angle_share_envelope_x3": 0.0037997804550914754
+    },
+    {
+     "loop": "L1",
+     "hoop_tension_self_MN": 199.78824019215168,
+     "net_radial_from_others_MN": 964.6209293608262,
+     "net_axial_from_others_MN": 565.8247174713279,
+     "solid_angle_share_envelope_x3": 0.008175840219975573
+    },
+    {
+     "loop": "L2",
+     "hoop_tension_self_MN": 442.0904047838828,
+     "net_radial_from_others_MN": 761.9001377388728,
+     "net_axial_from_others_MN": 244.1269036826731,
+     "solid_angle_share_envelope_x3": 0.009253786272525584
+    },
+    {
+     "loop": "L3",
+     "hoop_tension_self_MN": 631.4257620632734,
+     "net_radial_from_others_MN": 50.84207350577956,
+     "net_axial_from_others_MN": 644.7913836688646,
+     "solid_angle_share_envelope_x3": 0.004660046184252612
+    }
+   ],
+   "axis": {
+    "B_burn_T": 0.8224487973029821,
+    "B_forward_max_T": 6.26031096769707,
+    "z_forward_max_m": 40.33008252063013,
+    "mirror_ratio": 7.6117941788306025,
+    "forward_loss_cone_share": 0.0339997507807801,
+    "B_aft_100m_T": 0.1955500166660564
+   },
+   "ac_screen": {
+    "current_swing_per_pulse": 0.033407066345796294,
+    "winding_volume_m3": 512.3730486580341,
+    "B_swing_amplitude_T": 0.41758832932245366,
+    "unscreened_hysteresis_W": 9159684859.201565,
+    "screen_dissipation_share_of_plasma": 0.001,
+    "screen_dissipation_W": 8559784079.207271
+   },
+   "rt": {
+    "stopping_depth_m": 8.450062349144424,
+    "l_max_FLR": 69.8127086288507,
+    "efolds_l10": 5.163977794943222,
+    "efolds_l_max": 13.644311012662696,
+    "growth_l_max": 842653.4091653215,
+    "shear_needed_deg": 45.0,
+    "wavelength_at_l_max_m": 2.281531914733118
+   }
+  },
+  "Astar_W20": {
+   "kind": "A*",
+   "loops": [
+    {
+     "name": "L1",
+     "polar_deg": 60.0,
+     "distance_m": 43.11193877746674,
+     "radius_m": 37.33603418768563,
+     "z_m": 21.555969388733374,
+     "current_MA": 80.80314520243702,
+     "winding_minor_m": 0.6464251616194963
+    },
+    {
+     "name": "L2",
+     "polar_deg": 90.0,
+     "distance_m": 64.6679081662001,
+     "radius_m": 64.6679081662001,
+     "z_m": 3.959767337164597e-15,
+     "current_MA": 20.147660836807468,
+     "winding_minor_m": 0.16118128669445975
+    },
+    {
+     "name": "L3",
+     "polar_deg": 120.0,
+     "distance_m": 129.33581633240016,
+     "radius_m": 112.00810256305685,
+     "z_m": -64.66790816620005,
+     "current_MA": 39.61159258221638,
+     "winding_minor_m": 0.31689274065773104
+    }
+   ],
+   "ledger": {
+    "stored_J": 1597063905298.9644,
+    "W_over_Ep": 19.968497828679848,
+    "virial_mass_t": 1708.8583786698916,
+    "conductor_minor_m": [
+     0.6464251616194963,
+     0.16118128669445975,
+     0.31689274065773104
+    ],
+    "currents_MA": [
+     80.80314520243702,
+     20.147660836807468,
+     39.61159258221638
+    ],
+    "B_surface_T": [
+     25.0,
+     24.999999999999996,
+     25.0
+    ],
+    "hoop_tension_MN": [
+     3516.402284632701,
+     297.29908684016726,
+     1129.29774373086
+    ]
+   },
+   "thin_shell": {
+    "eta_mom": 0.6735100483168833,
+    "eta_T": 0.4536157851838105,
+    "strike_share": 0.1819487794452027,
+    "strike_by": {
+     "shield": 0.018897214121473115,
+     "ship_forward": 0.1630515653237296
+    },
+    "unstopped_forward_share": 0.060574711700513234,
+    "forward_going_share": 0.1819487794452027,
+    "min_R_fwd": 21.403656473298383,
+    "stopping_radius_m_by_polar_deg": {
+     "0": null,
+     "10": null,
+     "20": null,
+     "30": 31.44,
+     "40": 24.64,
+     "50": 22.29,
+     "60": 21.45,
+     "70": 21.63,
+     "80": 22.81,
+     "90": 25.29,
+     "100": 29.93,
+     "110": 38.42,
+     "120": 53.41,
+     "130": 69.37,
+     "140": 90.72,
+     "150": null,
+     "160": null,
+     "170": null,
+     "180": null
+    }
+   },
+   "stresses": [
+    {
+     "loop": "L1",
+     "hoop_tension_self_MN": 3516.402284632701,
+     "net_radial_from_others_MN": 5408.552960646918,
+     "net_axial_from_others_MN": -1793.195548341076,
+     "solid_angle_share_envelope_x3": 0.03895584106047298
+    },
+    {
+     "loop": "L2",
+     "hoop_tension_self_MN": 297.29908684016726,
+     "net_radial_from_others_MN": 467.0348532074308,
+     "net_axial_from_others_MN": 765.3252413853545,
+     "solid_angle_share_envelope_x3": 0.007477338819134906
+    },
+    {
+     "loop": "L3",
+     "hoop_tension_self_MN": 1129.29774373086,
+     "net_radial_from_others_MN": 86.30833354822168,
+     "net_axial_from_others_MN": 1027.8703069557212,
+     "solid_angle_share_envelope_x3": 0.006365688286510297
+    }
+   ],
+   "axis": {
+    "B_burn_T": 1.2233086356324439,
+    "B_forward_max_T": 1.639894586460625,
+    "z_forward_max_m": 20.315078769692434,
+    "mirror_ratio": 1.3405403499116217,
+    "forward_loss_cone_share": 0.24799198822972301,
+    "B_aft_100m_T": 0.2584990674119944
+   },
+   "ac_screen": {
+    "current_swing_per_pulse": 0.025039439836173988,
+    "winding_volume_m3": 563.1485891001934,
+    "B_swing_amplitude_T": 0.31299299795217483,
+    "unscreened_hysteresis_W": 7545769319.583842,
+    "screen_dissipation_share_of_plasma": 0.001,
+    "screen_dissipation_W": 8559784079.207271
+   },
+   "rt": {
+    "stopping_depth_m": 7.1345521577661275,
+    "l_max_FLR": 87.67352412803304,
+    "efolds_l10": 5.163977794943222,
+    "efolds_l_max": 15.290391242261313,
+    "growth_l_max": 4370514.270836155,
+    "shear_needed_deg": 45.0,
+    "wavelength_at_l_max_m": 1.5339082261203134
+   }
+  },
+  "C_W20": {
+   "kind": "C",
+   "loops": [
+    {
+     "name": "C1@20",
+     "polar_deg": 20.0,
+     "distance_m": 43.11193877746674,
+     "radius_m": 14.745151479716629,
+     "z_m": 40.511970736959356,
+     "current_MA": 155.46539716959774,
+     "winding_minor_m": 1.243723177356782
+    },
+    {
+     "name": "C2@40",
+     "polar_deg": 40.0,
+     "distance_m": 43.11193877746674,
+     "radius_m": 27.71182007572027,
+     "z_m": 33.02566113256398,
+     "current_MA": 39.6962081533094,
+     "winding_minor_m": 0.3175696652264752
+    },
+    {
+     "name": "L1",
+     "polar_deg": 60.0,
+     "distance_m": 43.11193877746674,
+     "radius_m": 37.33603418768563,
+     "z_m": 21.555969388733374,
+     "current_MA": 11.019764282176892,
+     "winding_minor_m": 0.08815811425741513
+    },
+    {
+     "name": "L2",
+     "polar_deg": 90.0,
+     "distance_m": 64.6679081662001,
+     "radius_m": 64.6679081662001,
+     "z_m": 3.959767337164597e-15,
+     "current_MA": 27.243195971481253,
+     "winding_minor_m": 0.21794556777185004
+    },
+    {
+     "name": "L3",
+     "polar_deg": 120.0,
+     "distance_m": 129.33581633240016,
+     "radius_m": 112.00810256305685,
+     "z_m": -64.66790816620005,
+     "current_MA": 30.111976947640017,
+     "winding_minor_m": 0.24089581558112014
+    }
+   ],
+   "ledger": {
+    "stored_J": 1595582263896.6055,
+    "W_over_Ep": 19.94997248787932,
+    "virial_mass_t": 1707.2730223693677,
+    "conductor_minor_m": [
+     1.243723177356782,
+     0.3175696652264752,
+     0.08815811425741513,
+     0.21794556777185004,
+     0.24089581558112014
+    ],
+    "currents_MA": [
+     155.46539716959774,
+     39.6962081533094,
+     11.019764282176892,
+     27.243195971481253,
+     30.111976947640017
+    ],
+    "B_surface_T": [
+     25.0,
+     25.000000000000004,
+     25.000000000000004,
+     25.0,
+     25.0
+    ],
+    "hoop_tension_MN": [
+     9189.835560201705,
+     913.6989437937345,
+     89.59518301913563,
+     521.1831024435975,
+     677.4554324892937
+    ]
+   },
+   "thin_shell": {
+    "eta_mom": 0.8864861144360565,
+    "eta_T": 0.785857631087937,
+    "strike_share": 0.018166426649635924,
+    "strike_by": {
+     "shield": 0.0022829492762093326,
+     "ship_forward": 0.015883477373426592
+    },
+    "unstopped_forward_share": 0.0009135971081306172,
+    "forward_going_share": 0.018166426649635924,
+    "min_R_fwd": 22.282981515831317,
+    "stopping_radius_m_by_polar_deg": {
+     "0": null,
+     "10": 27.83,
+     "20": 24.04,
+     "30": 22.6,
+     "40": 22.3,
+     "50": 22.86,
+     "60": 24.28,
+     "70": 26.69,
+     "80": 30.32,
+     "90": 34.79,
+     "100": 39.59,
+     "110": 46.82,
+     "120": 64.83,
+     "130": 80.96,
+     "140": null,
+     "150": null,
+     "160": null,
+     "170": null,
+     "180": null
+    }
+   },
+   "stresses": [
+    {
+     "loop": "C1@20",
+     "hoop_tension_self_MN": 9189.835560201705,
+     "net_radial_from_others_MN": 18255.625319620078,
+     "net_axial_from_others_MN": -4626.539035681994,
+     "solid_angle_share_envelope_x3": 0.02960050450800102
+    },
+    {
+     "loop": "C2@40",
+     "hoop_tension_self_MN": 913.6989437937345,
+     "net_radial_from_others_MN": 247.95772495505662,
+     "net_axial_from_others_MN": 2424.618561819013,
+     "solid_angle_share_envelope_x3": 0.01420463925829562
+    },
+    {
+     "loop": "L1",
+     "hoop_tension_self_MN": 89.59518301913563,
+     "net_radial_from_others_MN": 513.9935948826549,
+     "net_axial_from_others_MN": 979.1215719701581,
+     "solid_angle_share_envelope_x3": 0.005312716291239276
+    },
+    {
+     "loop": "L2",
+     "hoop_tension_self_MN": 521.1831024435975,
+     "net_radial_from_others_MN": 874.1759510140583,
+     "net_axial_from_others_MN": 455.9338191401092,
+     "solid_angle_share_envelope_x3": 0.010110682745994404
+    },
+    {
+     "loop": "L3",
+     "hoop_tension_self_MN": 677.4554324892937,
+     "net_radial_from_others_MN": 69.38223516063896,
+     "net_axial_from_others_MN": 766.8650827527144,
+     "solid_angle_share_envelope_x3": 0.004839074787043943
+    }
+   ],
+   "axis": {
+    "B_burn_T": 0.9989492685636624,
+    "B_forward_max_T": 7.797431151180838,
+    "z_forward_max_m": 40.215053763440835,
+    "mirror_ratio": 7.805632774917951,
+    "forward_loss_cone_share": 0.03312544822026442,
+    "B_aft_100m_T": 0.208756743129984
+   },
+   "ac_screen": {
+    "current_swing_per_pulse": 0.025062691204400248,
+    "winding_volume_m3": 700.0526488261141,
+    "B_swing_amplitude_T": 0.3132836400550031,
+    "unscreened_hysteresis_W": 9388891525.083023,
+    "screen_dissipation_share_of_plasma": 0.001,
+    "screen_dissipation_W": 8559784079.207271
+   },
+   "rt": {
+    "stopping_depth_m": 7.427660505277106,
+    "l_max_FLR": 74.5351592260138,
+    "efolds_l10": 5.163977794943222,
+    "efolds_l_max": 14.098241897580829,
+    "growth_l_max": 1326748.6691253872,
+    "shear_needed_deg": 45.0,
+    "wavelength_at_l_max_m": 1.8784168909585004
+   }
+  },
+  "Astar_W30": {
+   "kind": "A*",
+   "loops": [
+    {
+     "name": "L1",
+     "polar_deg": 60.0,
+     "distance_m": 43.11193877746674,
+     "radius_m": 37.33603418768563,
+     "z_m": 21.555969388733374,
+     "current_MA": 111.15829355054028,
+     "winding_minor_m": 0.8892663484043222
+    },
+    {
+     "name": "L2",
+     "polar_deg": 90.0,
+     "distance_m": 64.6679081662001,
+     "radius_m": 64.6679081662001,
+     "z_m": 3.959767337164597e-15,
+     "current_MA": 15.083099763394673,
+     "winding_minor_m": 0.12066479810715737
+    },
+    {
+     "name": "L3",
+     "polar_deg": 120.0,
+     "distance_m": 129.33581633240016,
+     "radius_m": 112.00810256305685,
+     "z_m": -64.66790816620005,
+     "current_MA": 48.49091074457998,
+     "winding_minor_m": 0.38792728595663983
+    }
+   ],
+   "ledger": {
+    "stored_J": 2393581238977.8843,
+    "W_over_Ep": 29.927557447584686,
+    "virial_mass_t": 2561.131925706336,
+    "conductor_minor_m": [
+     0.8892663484043222,
+     0.12066479810715737,
+     0.38792728595663983
+    ],
+    "currents_MA": [
+     111.15829355054028,
+     15.083099763394673,
+     48.49091074457998
+    ],
+    "B_surface_T": [
+     25.0,
+     25.0,
+     25.0
+    ],
+    "hoop_tension_MN": [
+     6260.571580656833,
+     173.20580672607957,
+     1644.7704842954045
+    ]
+   },
+   "thin_shell": {
+    "eta_mom": 0.6598710165339063,
+    "eta_T": 0.4354297584614909,
+    "strike_share": 0.16867736014123477,
+    "strike_by": {
+     "shield": 0.024737534728870293,
+     "ship_forward": 0.1439398254123645
+    },
+    "unstopped_forward_share": 0.0380426438237499,
+    "forward_going_share": 0.16867736014123477,
+    "min_R_fwd": 18.66328306098262,
+    "stopping_radius_m_by_polar_deg": {
+     "0": null,
+     "10": null,
+     "20": null,
+     "30": 25.1,
+     "40": 21.13,
+     "50": 19.39,
+     "60": 18.71,
+     "70": 18.81,
+     "80": 19.65,
+     "90": 21.44,
+     "100": 24.73,
+     "110": 31.01,
+     "120": 43.62,
+     "130": 59.32,
+     "140": 78.19,
+     "150": 113.75,
+     "160": null,
+     "170": null,
+     "180": null
+    }
+   },
+   "stresses": [
+    {
+     "loop": "L1",
+     "hoop_tension_self_MN": 6260.571580656833,
+     "net_radial_from_others_MN": 6873.304519985635,
+     "net_axial_from_others_MN": -2182.318147921998,
+     "solid_angle_share_envelope_x3": 0.05359030029412325
+    },
+    {
+     "loop": "L2",
+     "hoop_tension_self_MN": 173.20580672607957,
+     "net_radial_from_others_MN": 361.31552236301434,
+     "net_axial_from_others_MN": 846.5820230838765,
+     "solid_angle_share_envelope_x3": 0.005597743990591538
+    },
+    {
+     "loop": "L3",
+     "hoop_tension_self_MN": 1644.7704842954045,
+     "net_radial_from_others_MN": 134.15912798096642,
+     "net_axial_from_others_MN": 1335.7361248381217,
+     "solid_angle_share_envelope_x3": 0.007792618332330571
+    }
+   ],
+   "axis": {
+    "B_burn_T": 1.5382529472677942,
+    "B_forward_max_T": 2.132627807348162,
+    "z_forward_max_m": 20.660165041260314,
+    "mirror_ratio": 1.3863960482806688,
+    "forward_loss_cone_share": 0.2360372243098675,
+    "B_aft_100m_T": 0.30675306853694906
+   },
+   "ac_screen": {
+    "current_swing_per_pulse": 0.016707009948129018,
+    "winding_volume_m3": 934.1092648305234,
+    "B_swing_amplitude_T": 0.20883762435161274,
+    "unscreened_hysteresis_W": 8351266172.973835,
+    "screen_dissipation_share_of_plasma": 0.001,
+    "screen_dissipation_W": 8559784079.207271
+   },
+   "rt": {
+    "stopping_depth_m": 6.221094353660874,
+    "l_max_FLR": 96.13028925822269,
+    "efolds_l10": 5.163977794943222,
+    "efolds_l_max": 16.01085375680907,
+    "growth_l_max": 8983083.51172556,
+    "shear_needed_deg": 45.0,
+    "wavelength_at_l_max_m": 1.2198534594804538
+   }
+  },
+  "C_W30": {
+   "kind": "C",
+   "loops": [
+    {
+     "name": "C1@20",
+     "polar_deg": 20.0,
+     "distance_m": 43.11193877746674,
+     "radius_m": 14.745151479716629,
+     "z_m": 40.511970736959356,
+     "current_MA": 197.3501153755974,
+     "winding_minor_m": 1.578800923004779
+    },
+    {
+     "name": "C2@40",
+     "polar_deg": 40.0,
+     "distance_m": 43.11193877746674,
+     "radius_m": 27.71182007572027,
+     "z_m": 33.02566113256398,
+     "current_MA": 82.62463169083206,
+     "winding_minor_m": 0.6609970535266565
+    },
+    {
+     "name": "L1",
+     "polar_deg": 60.0,
+     "distance_m": 43.11193877746674,
+     "radius_m": 37.33603418768563,
+     "z_m": 21.555969388733374,
+     "current_MA": -4.802824780953382,
+     "winding_minor_m": 0.03909970088614439
+    },
+    {
+     "name": "L2",
+     "polar_deg": 90.0,
+     "distance_m": 64.6679081662001,
+     "radius_m": 64.6679081662001,
+     "z_m": 3.959767337164597e-15,
+     "current_MA": 31.479530153528817,
+     "winding_minor_m": 0.25183624122823056
+    },
+    {
+     "name": "L3",
+     "polar_deg": 120.0,
+     "distance_m": 129.33581633240016,
+     "radius_m": 112.00810256305685,
+     "z_m": -64.66790816620005,
+     "current_MA": 29.44725593279772,
+     "winding_minor_m": 0.23557804746238176
+    }
+   ],
+   "ledger": {
+    "stored_J": 2389595374827.8325,
+    "W_over_Ep": 29.877721170300074,
+    "virial_mass_t": 2556.8670510657807,
+    "conductor_minor_m": [
+     1.578800923004779,
+     0.6609970535266565,
+     0.03909970088614439,
+     0.25183624122823056,
+     0.23557804746238176
+    ],
+    "currents_MA": [
+     197.3501153755974,
+     82.62463169083206,
+     -4.802824780953382,
+     31.479530153528817,
+     29.44725593279772
+    ],
+    "B_surface_T": [
+     25.000000000000004,
+     25.000000000000004,
+     24.567066612293914,
+     24.999999999999996,
+     25.0
+    ],
+    "hoop_tension_MN": [
+     13879.52849905972,
+     3457.998501878132,
+     18.894377214592588,
+     681.55142271491,
+     649.8115967704164
+    ]
+   },
+   "thin_shell": {
+    "eta_mom": 0.8823823457154758,
+    "eta_T": 0.7785986040303454,
+    "strike_share": 0.025820117079927124,
+    "strike_by": {
+     "shield": 0.0022829492762093326,
+     "ship_forward": 0.020840417348709978,
+     "L1": 0.002696750455007818
+    },
+    "unstopped_forward_share": 0.00045686813729550925,
+    "forward_going_share": 0.025820117079927124,
+    "min_R_fwd": 19.666717903517785,
+    "stopping_radius_m_by_polar_deg": {
+     "0": null,
+     "10": 25.6,
+     "20": 21.68,
+     "30": 20.11,
+     "40": 19.67,
+     "50": 20.06,
+     "60": 21.31,
+     "70": 23.61,
+     "80": 27.19,
+     "90": 31.58,
+     "100": 36.21,
+     "110": 42.62,
+     "120": 57.35,
+     "130": 77.3,
+     "140": null,
+     "150": null,
+     "160": null,
+     "170": null,
+     "180": null
+    }
+   },
+   "stresses": [
+    {
+     "loop": "C1@20",
+     "hoop_tension_self_MN": 13879.52849905972,
+     "net_radial_from_others_MN": 38271.08767285472,
+     "net_axial_from_others_MN": -10042.210899572952,
+     "solid_angle_share_envelope_x3": 0.03757532599654443
+    },
+    {
+     "loop": "C2@40",
+     "hoop_tension_self_MN": 3457.998501878132,
+     "net_radial_from_others_MN": -4225.708562247534,
+     "net_axial_from_others_MN": 9252.466158122146,
+     "solid_angle_share_envelope_x3": 0.029565873961691337
+    },
+    {
+     "loop": "L1",
+     "hoop_tension_self_MN": 18.894377214592588,
+     "net_radial_from_others_MN": -150.63636892909605,
+     "net_axial_from_others_MN": -829.352719945751,
+     "solid_angle_share_envelope_x3": 0.00235628472353502
+    },
+    {
+     "loop": "L2",
+     "hoop_tension_self_MN": 681.55142271491,
+     "net_radial_from_others_MN": 1063.7165814196271,
+     "net_axial_from_others_MN": 741.938378230561,
+     "solid_angle_share_envelope_x3": 0.011682900299527123
+    },
+    {
+     "loop": "L3",
+     "hoop_tension_self_MN": 649.8115967704164,
+     "net_radial_from_others_MN": 88.79193206010265,
+     "net_axial_from_others_MN": 877.1590831659946,
+     "solid_angle_share_envelope_x3": 0.0047322523519399695
+    }
+   ],
+   "axis": {
+    "B_burn_T": 1.1946475039792661,
+    "B_forward_max_T": 10.297753597120312,
+    "z_forward_max_m": 40.10002500625154,
+    "mirror_ratio": 8.619909691201293,
+    "forward_loss_cone_share": 0.029896419962802956,
+    "B_aft_100m_T": 0.21565843038924104
+   },
+   "ac_screen": {
+    "current_swing_per_pulse": 0.016734877374015546,
+    "winding_volume_m3": 1169.2765993879154,
+    "B_swing_amplitude_T": 0.20918596717519433,
+    "unscreened_hysteresis_W": 10471181988.657196,
+    "screen_dissipation_share_of_plasma": 0.001,
+    "screen_dissipation_W": 8559784079.207271
+   },
+   "rt": {
+    "stopping_depth_m": 6.555572634505928,
+    "l_max_FLR": 78.67126232621841,
+    "efolds_l10": 5.163977794943222,
+    "efolds_l_max": 14.484130380175255,
+    "growth_l_max": 1951541.9861397885,
+    "shear_needed_deg": 45.0,
+    "wavelength_at_l_max_m": 1.570708659274267
+   }
+  }
+ },
+ "perturbations": {
+  "C_W10": {
+   "B gaps only, clocked 0/45/90": {
+    "dR_p50_m": 0.015153532294757868,
+    "dR_p95_m": 0.17832073809736534,
+    "eta_mom_total": 0.8614575290152557,
+    "ripple_max": 0.009054486026621955,
+    "ripple_rms": 0.0012967350940045004,
+    "shear_max_deg": 0.24738951827753447,
+    "shear_rms_deg": 0.05718390635492369,
+    "dR_max_m": 4.364651318361989,
+    "eta_mom": 0.7430095415499715,
+    "strike_share": 0.011513577386498408,
+    "roll_torque_Nm": -9.1607897442135e-12,
+    "mean_abs_swirl": 0.0031337932197532453,
+    "net_swirl": -6.506873042236902e-19
+   },
+   "B gaps + 5 % m=2 trim, clocked": {
+    "dR_p50_m": 0.0430045303344824,
+    "dR_p95_m": 0.8803148647077038,
+    "eta_mom_total": 0.8611416129096381,
+    "ripple_max": 0.014065682403349156,
+    "ripple_rms": 0.0035140684025649067,
+    "shear_max_deg": 0.8858476883340487,
+    "shear_rms_deg": 0.1436917205239554,
+    "dR_max_m": 7.603521337988147,
+    "eta_mom": 0.7426936254443538,
+    "strike_share": 0.011513577386498408,
+    "roll_torque_Nm": -1665.9567560788423,
+    "mean_abs_swirl": 0.005872276361987223,
+    "net_swirl": -4.0334543003636715e-05
+   },
+   "B gaps + 20 % m=2 trim, clocked": {
+    "dR_p50_m": 0.15800478772928972,
+    "dR_p95_m": 3.263619848471988,
+    "eta_mom_total": 0.8548303152494452,
+    "ripple_max": 0.051220653196140775,
+    "ripple_rms": 0.01313078658632398,
+    "shear_max_deg": 3.010988266394368,
+    "shear_rms_deg": 0.5302815110182785,
+    "dR_max_m": 29.25183594466189,
+    "eta_mom": 0.7363823277841609,
+    "strike_share": 0.012454693881640132,
+    "roll_torque_Nm": -27921.655768950557,
+    "mean_abs_swirl": 0.021861096911362753,
+    "net_swirl": -0.0006612723214428982
+   },
+   "D counter-clocked 0/45/0, 5 % trim": {
+    "dR_p50_m": 0.04227678673714387,
+    "dR_p95_m": 0.8949717964290872,
+    "eta_mom_total": 0.861138204025652,
+    "ripple_max": 0.013094036675531107,
+    "ripple_rms": 0.0035024825172944203,
+    "shear_max_deg": 0.8921379584062186,
+    "shear_rms_deg": 0.13816348586110333,
+    "dR_max_m": 7.650861762289579,
+    "eta_mom": 0.7426902165603677,
+    "strike_share": 0.011513577386498408,
+    "roll_torque_Nm": 1380.550192896143,
+    "mean_abs_swirl": 0.005808574444243649,
+    "net_swirl": 2.4915249201238554e-05
+   },
+   "D counter-clocked 0/45/0, 20 % trim": {
+    "dR_p50_m": 0.15477358041053207,
+    "dR_p95_m": 3.2294338442251522,
+    "eta_mom_total": 0.8547628776959809,
+    "ripple_max": 0.04905660327453121,
+    "ripple_rms": 0.013081070953063694,
+    "shear_max_deg": 3.0369742911404156,
+    "shear_rms_deg": 0.5062345887594359,
+    "dR_max_m": 29.447840540209818,
+    "eta_mom": 0.7363148902306966,
+    "strike_share": 0.012454693881640132,
+    "roll_torque_Nm": 25312.467087418034,
+    "mean_abs_swirl": 0.021567817391162435,
+    "net_swirl": 0.00047497785846727694
+   },
+   "C3D helix l=2, 90 deg twist, 2 MA": {
+    "dR_p50_m": 0.40968916564339486,
+    "dR_p95_m": 10.983510123191696,
+    "eta_mom_total": 0.8261297882373659,
+    "ripple_max": 0.1609475529536598,
+    "ripple_rms": 0.03856742676252703,
+    "shear_max_deg": 7.4210855570948615,
+    "shear_rms_deg": 1.508233403500458,
+    "dR_max_m": 27.546001205001236,
+    "eta_mom": 0.7076818007720816,
+    "strike_share": 0.0313292937125372,
+    "roll_torque_Nm": 268317.806745961,
+    "mean_abs_swirl": 0.04512449812480831,
+    "net_swirl": 0.0065230969156717155
+   },
+   "D helix balanced, 90 deg twist, 2 MA": {
+    "dR_p50_m": 0.3926875061686429,
+    "dR_p95_m": 11.131039074182217,
+    "eta_mom_total": 0.8272339101936034,
+    "ripple_max": 0.16096645943858312,
+    "ripple_rms": 0.038079917571839005,
+    "shear_max_deg": 7.659297922892372,
+    "shear_rms_deg": 1.5802417806578715,
+    "dR_max_m": 27.53217079050798,
+    "eta_mom": 0.7087859227283191,
+    "strike_share": 0.02967971701018944,
+    "roll_torque_Nm": -239122.06501044432,
+    "mean_abs_swirl": 0.041653348504431205,
+    "net_swirl": -0.005070965807392852
+   },
+   "C3D helix l=2, 90 deg twist, 5 MA": {
+    "dR_p50_m": 1.0127109164610295,
+    "dR_p95_m": 30.422474621398745,
+    "eta_mom_total": 0.7600538104599214,
+    "ripple_max": 0.4548828178377273,
+    "ripple_rms": 0.10323502650114404,
+    "shear_max_deg": 18.036746699682702,
+    "shear_rms_deg": 3.735514276868143,
+    "dR_max_m": 77.61375879245351,
+    "eta_mom": 0.6416058229946371,
+    "strike_share": 0.05037844755869572,
+    "roll_torque_Nm": 285484.5419003197,
+    "mean_abs_swirl": 0.091084829935137,
+    "net_swirl": 0.010308444999397773
+   },
+   "D helix balanced, 90 deg twist, 5 MA": {
+    "dR_p50_m": 0.9629194992624612,
+    "dR_p95_m": 30.494259896515832,
+    "eta_mom_total": 0.7627195020845349,
+    "ripple_max": 0.4560020398280902,
+    "ripple_rms": 0.1022132270011058,
+    "shear_max_deg": 18.582902303783555,
+    "shear_rms_deg": 3.9121337515860346,
+    "dR_max_m": 77.77198728058654,
+    "eta_mom": 0.6442715146192506,
+    "strike_share": 0.04925615445836044,
+    "roll_torque_Nm": 26747.74063186602,
+    "mean_abs_swirl": 0.08064501531715526,
+    "net_swirl": 0.0018887287326409441
+   },
+   "C3D helix l=2, 90 deg twist, 20 MA": {
+    "dR_p50_m": 3.70405759469321,
+    "dR_p95_m": 169.72528894398403,
+    "eta_mom_total": 0.6327577261117562,
+    "ripple_max": 2.9563334408168083,
+    "ripple_rms": 0.5615519437032832,
+    "shear_max_deg": 52.48492439374813,
+    "shear_rms_deg": 13.302767490931606,
+    "dR_max_m": 505.9733001754438,
+    "eta_mom": 0.5143097386464719,
+    "strike_share": 0.18235254137836082,
+    "roll_torque_Nm": -696500.0320044219,
+    "mean_abs_swirl": 0.14250850334615967,
+    "net_swirl": -0.03832373092106717
+   },
+   "D helix balanced, 90 deg twist, 20 MA": {
+    "dR_p50_m": 3.539459334055464,
+    "dR_p95_m": 174.05061993261833,
+    "eta_mom_total": 0.6384034940714247,
+    "ripple_max": 2.986145221696697,
+    "ripple_rms": 0.561529588948234,
+    "shear_max_deg": 53.36573188410908,
+    "shear_rms_deg": 13.871592170070468,
+    "dR_max_m": 511.07555452458,
+    "eta_mom": 0.5199555066061404,
+    "strike_share": 0.17596289698187406,
+    "roll_torque_Nm": -570242.0986538925,
+    "mean_abs_swirl": 0.13657739097094124,
+    "net_swirl": -0.020932188245992543
+   }
+  },
+  "Astar_W10": {
+   "B gaps only, clocked 0/45/90": {
+    "dR_p50_m": 0.030044129830224378,
+    "dR_p95_m": 0.14873423446572545,
+    "eta_mom_total": 0.6778731436323235,
+    "ripple_max": 0.011799134197353567,
+    "ripple_rms": 0.0016654145334421828,
+    "shear_max_deg": 0.3646016272425498,
+    "shear_rms_deg": 0.06615731271350742,
+    "dR_max_m": 1.592192640160044,
+    "eta_mom": 0.5724384607613606,
+    "strike_share": 0.1045570044574459,
+    "roll_torque_Nm": 2.723989848954247e-11,
+    "mean_abs_swirl": 0.003274082411376565,
+    "net_swirl": 1.2302378798321596e-18
+   },
+   "B gaps + 5 % m=2 trim, clocked": {
+    "dR_p50_m": 0.1064394941547366,
+    "dR_p95_m": 0.7087157585389416,
+    "eta_mom_total": 0.6782293287590558,
+    "ripple_max": 0.01640593650924005,
+    "ripple_rms": 0.004468271625769797,
+    "shear_max_deg": 1.1384610642664847,
+    "shear_rms_deg": 0.20195395395407661,
+    "dR_max_m": 2.213841365648994,
+    "eta_mom": 0.5727946458880929,
+    "strike_share": 0.10206961650272336,
+    "roll_torque_Nm": -319.64810092997294,
+    "mean_abs_swirl": 0.006948718471789562,
+    "net_swirl": -1.1469617788643611e-05
+   },
+   "B gaps + 20 % m=2 trim, clocked": {
+    "dR_p50_m": 0.38203258713800436,
+    "dR_p95_m": 2.7480011144244796,
+    "eta_mom_total": 0.6738023919933447,
+    "ripple_max": 0.05525521968288827,
+    "ripple_rms": 0.01667136019339763,
+    "shear_max_deg": 3.6670761424242326,
+    "shear_rms_deg": 0.7659555522865555,
+    "dR_max_m": 7.456221163181066,
+    "eta_mom": 0.5683677091223818,
+    "strike_share": 0.10097564393245892,
+    "roll_torque_Nm": -5906.923907469841,
+    "mean_abs_swirl": 0.026594320585865673,
+    "net_swirl": -0.0002864072342352145
+   },
+   "D counter-clocked 0/45/0, 5 % trim": {
+    "dR_p50_m": 0.1039386565491337,
+    "dR_p95_m": 0.7183345593028695,
+    "eta_mom_total": 0.6782171195591108,
+    "ripple_max": 0.0164779179050909,
+    "ripple_rms": 0.004411656319752929,
+    "shear_max_deg": 1.154280822128465,
+    "shear_rms_deg": 0.19131216248774394,
+    "dR_max_m": 2.2235546417915675,
+    "eta_mom": 0.5727824366881479,
+    "strike_share": 0.10206961650272336,
+    "roll_torque_Nm": 1102.3240557562904,
+    "mean_abs_swirl": 0.006706594901786071,
+    "net_swirl": 3.25593768950082e-05
+   },
+   "D counter-clocked 0/45/0, 20 % trim": {
+    "dR_p50_m": 0.3727948284937904,
+    "dR_p95_m": 2.704739403284904,
+    "eta_mom_total": 0.6735415807259326,
+    "ripple_max": 0.0562244359149755,
+    "ripple_rms": 0.01642818703574396,
+    "shear_max_deg": 3.7301170801061954,
+    "shear_rms_deg": 0.7209333278831012,
+    "dR_max_m": 7.587008636705951,
+    "eta_mom": 0.5681068978549697,
+    "strike_share": 0.10073708808208667,
+    "roll_torque_Nm": 16261.360851668598,
+    "mean_abs_swirl": 0.025667377363210876,
+    "net_swirl": 0.00040511718410750456
+   },
+   "C3D helix l=2, 90 deg twist, 2 MA": {
+    "dR_p50_m": 0.45421780069226797,
+    "dR_p95_m": 8.377686256693455,
+    "eta_mom_total": 0.6641911239056976,
+    "ripple_max": 0.10783925351768264,
+    "ripple_rms": 0.03480450341491529,
+    "shear_max_deg": 4.713415087741551,
+    "shear_rms_deg": 1.3911000860555258,
+    "dR_max_m": 22.29276365211613,
+    "eta_mom": 0.5587564410347347,
+    "strike_share": 0.10839893717054512,
+    "roll_torque_Nm": 228218.91643262186,
+    "mean_abs_swirl": 0.0425412176978377,
+    "net_swirl": 0.007856880068180264
+   },
+   "D helix balanced, 90 deg twist, 2 MA": {
+    "dR_p50_m": 0.4120601873373241,
+    "dR_p95_m": 8.429600559568923,
+    "eta_mom_total": 0.665128077577779,
+    "ripple_max": 0.1079843035537732,
+    "ripple_rms": 0.03461034825538254,
+    "shear_max_deg": 4.9598787207554595,
+    "shear_rms_deg": 1.4783975174777617,
+    "dR_max_m": 22.315354115757938,
+    "eta_mom": 0.5596933947068161,
+    "strike_share": 0.10839893717054512,
+    "roll_torque_Nm": -144263.2722311175,
+    "mean_abs_swirl": 0.038297290405372386,
+    "net_swirl": -0.0044584812852754814
+   },
+   "C3D helix l=2, 90 deg twist, 5 MA": {
+    "dR_p50_m": 1.1291781452741652,
+    "dR_p95_m": 22.38226976810946,
+    "eta_mom_total": 0.6023427029402587,
+    "ripple_max": 0.2917551666687247,
+    "ripple_rms": 0.09175311803236358,
+    "shear_max_deg": 11.647065531761392,
+    "shear_rms_deg": 3.462120626543543,
+    "dR_max_m": 59.56771524962276,
+    "eta_mom": 0.4969080200692958,
+    "strike_share": 0.14125118144902932,
+    "roll_torque_Nm": 434111.7355976431,
+    "mean_abs_swirl": 0.09553473418188883,
+    "net_swirl": 0.016613265828030285
+   },
+   "D helix balanced, 90 deg twist, 5 MA": {
+    "dR_p50_m": 1.0211320757167879,
+    "dR_p95_m": 22.8386446441294,
+    "eta_mom_total": 0.60423377302954,
+    "ripple_max": 0.29266173492752934,
+    "ripple_rms": 0.09145432272973253,
+    "shear_max_deg": 12.241051507195507,
+    "shear_rms_deg": 3.67775292609141,
+    "dR_max_m": 59.632412027420145,
+    "eta_mom": 0.49879909015857704,
+    "strike_share": 0.13972858210337183,
+    "roll_torque_Nm": -294395.3670568957,
+    "mean_abs_swirl": 0.08825919521239516,
+    "net_swirl": -0.008900196945089407
+   },
+   "C3D helix l=2, 90 deg twist, 20 MA": {
+    "dR_p50_m": 4.2005738336507505,
+    "dR_p95_m": 118.68782697745833,
+    "eta_mom_total": 0.45807157914096097,
+    "ripple_max": 1.6468112478349317,
+    "ripple_rms": 0.46786662512046673,
+    "shear_max_deg": 39.50581658338056,
+    "shear_rms_deg": 12.94409447676104,
+    "dR_max_m": 314.9869833851394,
+    "eta_mom": 0.35263689626999806,
+    "strike_share": 0.22682441229442407,
+    "roll_torque_Nm": -273897.47528672667,
+    "mean_abs_swirl": 0.15403068704370207,
+    "net_swirl": -0.02544140026875386
+   },
+   "D helix balanced, 90 deg twist, 20 MA": {
+    "dR_p50_m": 3.773383162008783,
+    "dR_p95_m": 121.69173986300493,
+    "eta_mom_total": 0.46298883349251596,
+    "ripple_max": 1.6577784486663494,
+    "ripple_rms": 0.47063465180166825,
+    "shear_max_deg": 40.952457330014184,
+    "shear_rms_deg": 13.672157615016728,
+    "dR_max_m": 315.41018287018534,
+    "eta_mom": 0.3575541506215531,
+    "strike_share": 0.22356732621293118,
+    "roll_torque_Nm": -261698.51560108183,
+    "mean_abs_swirl": 0.14598527616795223,
+    "net_swirl": -0.0148395894324978
+   }
+  }
+ },
+ "test_particles": {
+  "A_equal_W10": {
+   "p": {
+    "species": "p",
+    "n": 400,
+    "speed_m_s": 21603006.390806578,
+    "B_burn_T": 0.7156056798912975,
+    "gyroradius_at_burn_m": 0.31515872133568096,
+    "dt_s": 2.9332223287863186e-09,
+    "steps": 25249,
+    "fate_share": {
+     "still_inside": 0.0,
+     "shield": 0.3375,
+     "forward_ship": 0.0,
+     "coil": 0.0,
+     "aft_exhaust": 0.6625,
+     "sideways": 0.0
+    },
+    "aft_mean_cos": 0.9981207749182478,
+    "aft_eta_mom": 0.6612550133833391
+   },
+   "D": {
+    "species": "D",
+    "n": 400,
+    "speed_m_s": 21603006.390806578,
+    "B_burn_T": 0.7156056798912975,
+    "gyroradius_at_burn_m": 0.6300014329138475,
+    "dt_s": 5.863503514541828e-09,
+    "steps": 12631,
+    "fate_share": {
+     "still_inside": 0.0,
+     "shield": 0.3375,
+     "forward_ship": 0.0,
+     "coil": 0.0,
+     "aft_exhaust": 0.6625,
+     "sideways": 0.0
+    },
+    "aft_mean_cos": 0.9978346942229998,
+    "aft_eta_mom": 0.6610654849227373
+   },
+   "He4": {
+    "species": "He4",
+    "n": 400,
+    "speed_m_s": 21603006.390806578,
+    "B_burn_T": 0.7156056798912975,
+    "gyroradius_at_burn_m": 0.6259981211837524,
+    "dt_s": 5.82624418278023e-09,
+    "steps": 12712,
+    "fate_share": {
+     "still_inside": 0.0,
+     "shield": 0.3375,
+     "forward_ship": 0.0,
+     "coil": 0.0,
+     "aft_exhaust": 0.6625,
+     "sideways": 0.0
+    },
+    "aft_mean_cos": 0.9978808162728754,
+    "aft_eta_mom": 0.6610960407807799
+   },
+   "slow_tail_He4_0.1v": {
+    "species": "He4",
+    "n": 300,
+    "speed_m_s": 2160300.639080658,
+    "B_burn_T": 0.7156056798912975,
+    "gyroradius_at_burn_m": 0.06259981211837526,
+    "dt_s": 5.82624418278023e-09,
+    "steps": 127120,
+    "fate_share": {
+     "still_inside": 0.0,
+     "shield": 0.3333333333333333,
+     "forward_ship": 0.0,
+     "coil": 0.0,
+     "aft_exhaust": 0.6666666666666666,
+     "sideways": 0.0
+    },
+    "aft_mean_cos": 0.9982716072433339,
+    "aft_eta_mom": 0.6655144048288892
+   }
+  },
+  "C_W10": {
+   "p": {
+    "species": "p",
+    "n": 400,
+    "speed_m_s": 21603006.390806578,
+    "B_burn_T": 0.7276400937348656,
+    "gyroradius_at_burn_m": 0.30994632236039127,
+    "dt_s": 2.884709868156749e-09,
+    "steps": 25674,
+    "fate_share": {
+     "still_inside": 0.0,
+     "shield": 0.055,
+     "forward_ship": 0.0,
+     "coil": 0.0,
+     "aft_exhaust": 0.945,
+     "sideways": 0.0
+    },
+    "aft_mean_cos": 0.9985018967427438,
+    "aft_eta_mom": 0.9435842924218929
+   },
+   "D": {
+    "species": "D",
+    "n": 400,
+    "speed_m_s": 21603006.390806578,
+    "B_burn_T": 0.7276400937348656,
+    "gyroradius_at_burn_m": 0.6195818614375007,
+    "dt_s": 5.766527236743529e-09,
+    "steps": 12843,
+    "fate_share": {
+     "still_inside": 0.0,
+     "shield": 0.055,
+     "forward_ship": 0.0,
+     "coil": 0.0,
+     "aft_exhaust": 0.945,
+     "sideways": 0.0
+    },
+    "aft_mean_cos": 0.998218557598331,
+    "aft_eta_mom": 0.9433165369304227
+   },
+   "He4": {
+    "species": "He4",
+    "n": 400,
+    "speed_m_s": 21603006.390806578,
+    "B_burn_T": 0.7276400937348656,
+    "gyroradius_at_burn_m": 0.6156447603388973,
+    "dt_s": 5.729884135755655e-09,
+    "steps": 12925,
+    "fate_share": {
+     "still_inside": 0.0,
+     "shield": 0.055,
+     "forward_ship": 0.0,
+     "coil": 0.0,
+     "aft_exhaust": 0.945,
+     "sideways": 0.0
+    },
+    "aft_mean_cos": 0.9981427784919864,
+    "aft_eta_mom": 0.9432449256749271
+   },
+   "slow_tail_He4_0.1v": {
+    "species": "He4",
+    "n": 300,
+    "speed_m_s": 2160300.639080658,
+    "B_burn_T": 0.7276400937348656,
+    "gyroradius_at_burn_m": 0.06156447603388973,
+    "dt_s": 5.729884135755655e-09,
+    "steps": 129258,
+    "fate_share": {
+     "still_inside": 0.0,
+     "shield": 0.05333333333333334,
+     "forward_ship": 0.0,
+     "coil": 0.0,
+     "aft_exhaust": 0.9466666666666667,
+     "sideways": 0.0
+    },
+    "aft_mean_cos": 0.9986586340017612,
+    "aft_eta_mom": 0.9453968401883339
+   }
+  }
+ },
+ "recovery": {
+  "electric_load_share_fusion": 0.0012436478866461045,
+  "required_extraction_share_fusion_eta_r_0.95": 0.001309103038574847,
+  "required_extraction_share_fusion_eta_r_0.80": 0.0015545598583076305,
+  "driver_eff_0.30_eta_r_0.80": 0.002013888888888889,
+  "stream_share_fusion": 0.9874836196446156
+ },
+ "runtime_s": 295.5
+}
