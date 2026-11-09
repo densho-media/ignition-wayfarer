@@ -50,6 +50,26 @@
 | S5 mass | **2.0-2.2 kt** (N9, cantilever-sized), against 1.18 kt in the brief | T05 draws N9 |
 | Ring frames | a free frame ovalises at 0.14 Hz | frames need spokes or ties |
 
+### 3a. T05 proposals checked by T00 (`studies/rev4/proposals.py`, `results/proposals.json`)
+
+- **AXIS_PLUG_LI** (lithium droplet sheet across the axis at 35 m): **not plausible as a renewable consumable.**
+  - It intercepts 81-113 GW, at 1,170 J/cm² of MeV/u ions per pulse.
+  - The ions stop in under 1 mm of lithium, and a droplet heats through without boiling only above about 0.5 cm radius. So the plug
+    vaporises.
+  - Lithium consumption is 0.18-25 kg per pulse, depending on whether 99 %, 90 % or none of the energy is re-radiated. That is 230-32,000×
+    the propellant flow, or 6-880 Mt over the mission.
+  - The axial channel stays a blocker. The next step is field topology or target design (for example a forward-suppressing target), not a
+    consumable plug.
+- **B-ray** (launcher along a burn ray at polar 12°, az 120°, 30,000 g):
+  - **Kinematics are plausible:** the gas capsule's safety factor is 3.4; an EM armature and sabot at 30,000 g are not demonstrated.
+  - **The 45 m tip sits on the V4 stopping surface.** T05 used the V1 radius of 29.7 m; scaled to V4 it is 43.5 m at 12°. Moving the tip
+    to about 56 m gives an 11.1 km/s muzzle speed, a 208 m barrel and 5.2 J/cm² at the tip.
+  - **Background field:** the vacuum field along the ray reaches up to about 6 T near 58 m (upper bound). The non-conducting capsule is
+    fine, but the coilgun stages and sabot stripping run in that field.
+  - **Drift and pointing:** ship drift is 0.5 µm transverse and 2.3 µm axial (negligible); untracked pointing is 2.2 µrad.
+  - **Status:** B-ray takes the launcher out of the axial channel, so it no longer needs the plug. It can be retained as a CONCEPTUAL lane
+    with the tip at about 56 m.
+
 ## 4. Still unproven
 
 - **Launcher B-modified.** The 30 K gas-filled HDC capsule survives 13,700 g mechanically. Its compression from gas density (convergence
@@ -67,6 +87,8 @@
 | Launcher B (layered target, 13,700 g) | **REJECT** (NOT DEFENSIBLE); keep as a labelled failed lane |
 | Launcher B-long (594 m, 6,660 g) | **REJECT** (NOT DEFENSIBLE); keep as a labelled failed lane |
 | **Launcher B-modified** (gas-filled strong shell) | **RETAIN** as the only candidate, labelled target physics unproven |
+| B-ray (B-modified along polar 12°, tip about 56 m) | **RETAIN** as a CONCEPTUAL lane; preferred over the axial snout once the tip is moved out |
+| AXIS_PLUG_LI (lithium droplet plug) | **REJECT** (lithium consumption 230-32,000× the propellant flow) |
 | Fewer, larger pulses (≤ 150 Hz) | **REJECT** (does not fit at 150-100 Hz; V4 does not close at ≤ 60 Hz) |
 | Coil case of cryogenic steel | **REJECT** (409-417 kt) |
 | Coil case of CFRP at 1.2 GPa | retain as a sensitivity (91-95 kt) |

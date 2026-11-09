@@ -1,0 +1,166 @@
+{
+ "study": "Revision 4: check of T05 proposals AXIS_PLUG_LI and B-ray (T00)",
+ "status": "MODEL, research only, NON-CANON",
+ "axis_plug": {
+  "distance_m": 35.0,
+  "raw_plasma_J_cm2_per_pulse": 1171.7871464996447,
+  "intercepted_J_per_pulse": [
+   414880018.3173038,
+   577224373.3110313
+  ],
+  "intercepted_W": [
+   81207722190.28491,
+   112984656960.3964
+  ],
+  "li_h_to_vapour_J_kg": 23023000.0,
+  "droplet_radius_to_stay_liquid_m": 0.00534886770787524,
+  "ion_range_note": "MeV/u D, He, p ions stop in about 0.1-1 mm of lithium; a droplet larger than that vaporises its front layer, and one smaller than that heats through: it stays liquid only above r = 0.5 cm, which is above the range",
+  "consumption": [
+   {
+    "case": "all absorbed energy vaporises lithium (no re-radiation)",
+    "li_kg_per_pulse": [
+     18.020241424545183,
+     25.071640242845472
+    ],
+    "li_kg_s": [
+     3527.2432867256616,
+     4907.4689206617895
+    ],
+    "times_propellant_flow": [
+     23337.538056923182,
+     32469.61816615399
+    ],
+    "mission_t": [
+     632804926.6563126,
+     880424245.7826958
+    ]
+   },
+   {
+    "case": "vapour shielding: 10 % of the energy vaporises (90 % re-radiated)",
+    "li_kg_per_pulse": [
+     1.8020241424545185,
+     2.5071640242845477
+    ],
+    "li_kg_s": [
+     352.7243286725662,
+     490.74689206617904
+    ],
+    "times_propellant_flow": [
+     2333.7538056923186,
+     3246.9618166153996
+    ],
+    "mission_t": [
+     63280492.66563127,
+     88042424.57826959
+    ]
+   },
+   {
+    "case": "strong vapour shielding: 1 %",
+    "li_kg_per_pulse": [
+     0.18020241424545186,
+     0.2507164024284547
+    ],
+    "li_kg_s": [
+     35.27243286725662,
+     49.0746892066179
+    ],
+    "times_propellant_flow": [
+     233.37538056923185,
+     324.6961816615399
+    ],
+    "mission_t": [
+     6328049.266563127,
+     8804242.457826957
+    ]
+   }
+  ],
+  "propellant_flow_kg_s": 0.15114033357427303,
+  "verdict": "NOT PLAUSIBLE as a renewable consumable: even with 99 % re-radiation it vaporises far more lithium than the ship carries as propellant, and the vapour expands back toward the shield and the coils"
+ },
+ "b_ray": {
+  "stopping_radius_V4_m": {
+   "10": 44.496648775008964,
+   "12_interp": 43.48815811811837,
+   "20": 39.45419549055601,
+   "basis": "T03 thin shell (V1) x stand-off scale 1.501"
+  },
+  "field_along_ray": [
+   {
+    "distance_m": 5,
+    "B_T_upper": 0.741188325390535
+   },
+   {
+    "distance_m": 10,
+    "B_T_upper": 0.8252572444131415
+   },
+   {
+    "distance_m": 20,
+    "B_T_upper": 1.0643281258114081
+   },
+   {
+    "distance_m": 30,
+    "B_T_upper": 1.4743257763430497
+   },
+   {
+    "distance_m": 40,
+    "B_T_upper": 2.2470570844029076
+   },
+   {
+    "distance_m": 45,
+    "B_T_upper": 2.889120100320567
+   },
+   {
+    "distance_m": 50,
+    "B_T_upper": 3.8122590059545787
+   },
+   {
+    "distance_m": 58,
+    "B_T_upper": 5.999988862625893
+   },
+   {
+    "distance_m": 70,
+    "B_T_upper": 5.011406292743983
+   },
+   {
+    "distance_m": 90,
+    "B_T_upper": 1.1596901589796003
+   },
+   {
+    "distance_m": 120,
+    "B_T_upper": 0.3162802141855324
+   },
+   {
+    "distance_m": 177,
+    "B_T_upper": 0.08582348601179557
+   }
+  ],
+  "field_note": "sum of loop magnitudes: an upper bound on |B| (directions not combined)",
+  "tip_45m": {
+   "open_flight_m": 45.0,
+   "muzzle_m_s": 8808.203184584187,
+   "accelerator_m": 131.8568579160043,
+   "tip_xray_J_cm2": 8.268662837318114,
+   "tip_MW_m2": 16.184902741315184,
+   "margin_to_stopping_surface_m": 1.5118418818816295,
+   "gas_capsule_SF": 3.4094,
+   "far_end_distance_m": 176.8568579160043
+  },
+  "tip_56.5m": {
+   "open_flight_m": 56.5,
+   "muzzle_m_s": 11059.188442866813,
+   "accelerator_m": 207.86175539869862,
+   "tip_xray_J_cm2": 5.245216460355292,
+   "tip_MW_m2": 10.266873851096639,
+   "margin_to_stopping_surface_m": 13.01184188188163,
+   "gas_capsule_SF": 3.4094,
+   "far_end_distance_m": 264.3617553986986
+  },
+  "alignment": {
+   "ship_drift_transverse_um": 0.4983768981366119,
+   "ship_drift_axial_component_um": 2.344678960841981,
+   "pointing_urad_untracked": 2.2222222222222223,
+   "note": "the barrel is off the spine: mount it on the shield frame or the C1 strut ring, track the target and steer the driver; drift is negligible"
+  },
+  "verdict": "KINEMATICS PLAUSIBLE (gas capsule SF 3.4 at 30,000 g; armature and sabot at 30,000 g not demonstrated). The 45 m tip sits on the V4 stopping surface near 12 deg (T05 used the V1 radius 29.7 m), so the tip must move out to about 57 m; the barrel then grows and the tip fluence falls. Off-axis it no longer needs the plug, but the shield-face centre is still in the axial channel."
+ }
+}
