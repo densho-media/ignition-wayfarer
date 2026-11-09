@@ -1,0 +1,876 @@
+{
+ "study": "Feasibility gate Phase 5: S5N spine and J1/J3 under the revised mass (T00)",
+ "status": "MODEL, research only, NON-CANON; BEAM MODEL (1D Timoshenko), NOT FE",
+ "method": "Feasibility gate Phase 5: the S5N spine and the J1/J3 joints under the revised coupled mass (T00, research only, NON-CANON).\n\n  python3 lab/variants/vertex-drive/studies/gate/structure.py    # needs results/coupled.json; writes results/structure.json (minute)\n\nBEAM MODEL ONLY: the Rev 4 1D Timoshenko beam (studies/rev4/spine.py) with Guyan-condensed modes, closed-form local checks (longeron\nbays, frame ovalling) and joint loads from beam statics. No finite-element model was built or run in this gate; every number here is a\nbeam-model prediction, and the joints are sized from statics, not from an FE stress field. FE (shells and joints) remains to be done.\nQuestion from the brief: is about 2 kt of spine (Rev 4's N9, tube r 0.61 m on a 31 m ring) still enough on the coupled ship?\n",
+ "ships": [
+  {
+   "ship": "V4 (Rev 4 reference)",
+   "departure_t": 42915.783853018824,
+   "rate_Hz": 195.73784854631526,
+   "rows": [
+    {
+     "case": "S5N as drawn (31 m ring, r 0.611 m, about 2 kt) on this ship",
+     "farm": "wide",
+     "ring_m": 31.0,
+     "tube_r_m": 0.611,
+     "added_t": 1969.83992340603,
+     "structure_t": 2060.7292052516664,
+     "length_m": 275.4,
+     "f1_cantilever_Hz": 0.20005124592223414,
+     "f1_free_free_Hz": 0.7147328728235482,
+     "meets_0.2Hz_cantilever": 1.0,
+     "meets_0.2Hz_free_free": 1.0,
+     "buckling_factor_SF2": 673.0425942072112,
+     "J1_axial_design_MN": 3.754930440626796,
+     "J1_joint": {
+      "0.002g": {
+       "root_moment_MN_m": 71.40446838893757,
+       "root_shear_MN": 0.5849598540934008,
+       "splice_force_per_longeron_MN": 1.4409344703053082,
+       "splice_stress_MPa": 6.466337030417638,
+       "allowable_MPa": 240.0,
+       "ok": true,
+       "longeron_stress_MPa_beam": 6.304844090926195
+      },
+      "0.01g": {
+       "root_moment_MN_m": 357.0223419446879,
+       "root_shear_MN": 2.924799270467004,
+       "splice_force_per_longeron_MN": 5.535814377914631,
+       "splice_stress_MPa": 24.842518687087235,
+       "allowable_MPa": 240.0,
+       "ok": true,
+       "longeron_stress_MPa_beam": 24.640790335931637
+      }
+     },
+     "J3": {
+      "axial_design_MN": 0.11020717231064275,
+      "lateral_0.01g_MN": 0.029419949999999997
+     },
+     "local": {
+      "longeron_bay_Hz": 92.68589993326628,
+      "longeron_load_MN": 5.4908619831584335,
+      "longeron_Pcr_MN": 761.8071058635865,
+      "longeron_buckling_margin": 138.74089499976515,
+      "frame_ovalling_n2_Hz": 0.14378443756295017,
+      "pulse_clear": {
+       "longeron_bay": true,
+       "frame_n2": true
+      }
+     },
+     "pulse_Hz": 195.73784854631526
+    },
+    {
+     "case": "N9 wide farm sized for cantilever 0.2 Hz",
+     "farm": "wide",
+     "ring_m": 31.0,
+     "tube_r_m": 0.610830765295441,
+     "added_t": 1968.8464040565864,
+     "structure_t": 2059.7356859022225,
+     "length_m": 275.4,
+     "f1_cantilever_Hz": 0.20000000000022802,
+     "f1_free_free_Hz": 0.7145469461652371,
+     "meets_0.2Hz_cantilever": 1.0,
+     "meets_0.2Hz_free_free": 1.0,
+     "buckling_factor_SF2": 672.6944921840866,
+     "J1_axial_design_MN": 3.754930440626796,
+     "J1_joint": {
+      "0.002g": {
+       "root_moment_MN_m": 71.4017851401537,
+       "root_shear_MN": 0.5849403679003446,
+       "splice_force_per_longeron_MN": 1.4408960007886935,
+       "splice_stress_MPa": 6.469747878219987,
+       "allowable_MPa": 240.0,
+       "ok": true,
+       "longeron_stress_MPa_beam": 6.308084862045292
+      },
+      "0.01g": {
+       "root_moment_MN_m": 357.00892570076854,
+       "root_shear_MN": 2.924701839501723,
+       "splice_force_per_longeron_MN": 5.535622030331559,
+       "splice_stress_MPa": 24.855422504998355,
+       "allowable_MPa": 240.0,
+       "ok": true,
+       "longeron_stress_MPa_beam": 24.65348816220688
+      }
+     },
+     "J3": {
+      "axial_design_MN": 0.11020717231064275,
+      "lateral_0.01g_MN": 0.029419949999999997
+     },
+     "local": {
+      "longeron_bay_Hz": 92.66022780414681,
+      "longeron_load_MN": 5.4906486569595225,
+      "longeron_Pcr_MN": 760.9634355115855,
+      "longeron_buckling_margin": 138.59262958795352,
+      "frame_ovalling_n2_Hz": 0.1438184690365709,
+      "pulse_clear": {
+       "longeron_bay": true,
+       "frame_n2": true
+      }
+     },
+     "pulse_Hz": 195.73784854631526
+    },
+    {
+     "case": "N9 wide farm sized for free_free 0.2 Hz",
+     "farm": "wide",
+     "ring_m": 31.0,
+     "tube_r_m": 0.1797035720391432,
+     "added_t": 331.2683818289869,
+     "structure_t": 422.15766367462317,
+     "length_m": 275.4,
+     "f1_cantilever_Hz": 0.06123312597440108,
+     "f1_free_free_Hz": 0.21697052621618543,
+     "meets_0.2Hz_cantilever": 0.0,
+     "meets_0.2Hz_free_free": 1.0,
+     "buckling_factor_SF2": 62.3126289802981,
+     "J1_axial_design_MN": 3.754930440626796,
+     "J1_joint": {
+      "0.002g": {
+       "root_moment_MN_m": 66.97909398763753,
+       "root_shear_MN": 0.5528220588769879,
+       "splice_force_per_longeron_MN": 1.3774882423296801,
+       "splice_stress_MPa": 71.46131559563355,
+       "allowable_MPa": 240.0,
+       "ok": true,
+       "longeron_stress_MPa_beam": 59.50582676599756
+      },
+      "0.01g": {
+       "root_moment_MN_m": 334.8954699381875,
+       "root_shear_MN": 2.7641102943849396,
+       "splice_force_per_longeron_MN": 5.21858323803649,
+       "splice_stress_MPa": 270.7295875750602,
+       "allowable_MPa": 240.0,
+       "ok": false,
+       "longeron_stress_MPa_beam": 254.61180726263026
+      }
+     },
+     "J3": {
+      "axial_design_MN": 0.11020717231064275,
+      "lateral_0.01g_MN": 0.029419949999999997
+     },
+     "local": {
+      "longeron_bay_Hz": 27.260208339886315,
+      "longeron_load_MN": 4.9078969221217905,
+      "longeron_Pcr_MN": 5.700422133329593,
+      "longeron_buckling_margin": 1.1614795957990858,
+      "frame_ovalling_n2_Hz": 0.3068492547534536,
+      "pulse_clear": {
+       "longeron_bay": true,
+       "frame_n2": true
+      }
+     },
+     "pulse_Hz": 195.73784854631526
+    },
+    {
+     "case": "N9 wide farm sized for cantilever 0.1 Hz",
+     "farm": "wide",
+     "ring_m": 31.0,
+     "tube_r_m": 0.2961792057707498,
+     "added_t": 597.5927564250865,
+     "structure_t": 688.4820382707228,
+     "length_m": 275.4,
+     "f1_cantilever_Hz": 0.10000000000001552,
+     "f1_free_free_Hz": 0.3551438728578167,
+     "meets_0.2Hz_cantilever": 0.0,
+     "meets_0.2Hz_free_free": 1.0,
+     "buckling_factor_SF2": 166.82881102328835,
+     "J1_axial_design_MN": 3.754930440626796,
+     "J1_joint": {
+      "0.002g": {
+       "root_moment_MN_m": 67.69836991784528,
+       "root_shear_MN": 0.5580455587332537,
+       "splice_force_per_longeron_MN": 1.3878004420459202,
+       "splice_stress_MPa": 26.50418287520756,
+       "allowable_MPa": 240.0,
+       "ok": true,
+       "longeron_stress_MPa_beam": 24.187467947469695
+      },
+      "0.01g": {
+       "root_moment_MN_m": 338.4918495892265,
+       "root_shear_MN": 2.790227793666268,
+       "splice_force_per_longeron_MN": 5.270144236617694,
+       "splice_stress_MPa": 100.64910083190092,
+       "allowable_MPa": 240.0,
+       "ok": true,
+       "longeron_stress_MPa_beam": 97.74940985271587
+      }
+     },
+     "J3": {
+      "axial_design_MN": 0.11020717231064275,
+      "lateral_0.01g_MN": 0.029419949999999997
+     },
+     "local": {
+      "longeron_bay_Hz": 44.92902819702456,
+      "longeron_load_MN": 5.118311884658114,
+      "longeron_Pcr_MN": 42.06282479762783,
+      "longeron_buckling_margin": 8.21810505993374,
+      "frame_ovalling_n2_Hz": 0.24429369342977794,
+      "pulse_clear": {
+       "longeron_bay": true,
+       "frame_n2": true
+      }
+     },
+     "pulse_Hz": 195.73784854631526
+    }
+   ]
+  },
+  {
+   "ship": "coils + launcher + axis A1, rate free",
+   "departure_t": 85224.21498496081,
+   "rate_Hz": 334.2714857944359,
+   "rows": [
+    {
+     "case": "S5N as drawn (31 m ring, r 0.611 m, about 2 kt) on this ship",
+     "farm": "wide",
+     "ring_m": 31.0,
+     "tube_r_m": 0.611,
+     "added_t": 1969.83992340603,
+     "structure_t": 2060.7292052516664,
+     "length_m": 275.4,
+     "f1_cantilever_Hz": 0.14645849821329188,
+     "f1_free_free_Hz": 0.5212288716093482,
+     "meets_0.2Hz_cantilever": 0.0,
+     "meets_0.2Hz_free_free": 1.0,
+     "buckling_factor_SF2": 355.3532871114986,
+     "J1_axial_design_MN": 7.4167210763422435,
+     "J1_joint": {
+      "0.002g": {
+       "root_moment_MN_m": 134.71413561874505,
+       "root_shear_MN": 1.1159948204386843,
+       "splice_force_per_longeron_MN": 2.7554655764931533,
+       "splice_stress_MPa": 12.365426367753905,
+       "allowable_MPa": 240.0,
+       "ok": true,
+       "longeron_stress_MPa_beam": 12.047337087685932
+      },
+      "0.01g": {
+       "root_moment_MN_m": 673.5706780937251,
+       "root_shear_MN": 5.579974102193421,
+       "splice_force_per_longeron_MN": 10.481007404091434,
+       "splice_stress_MPa": 47.03456520045484,
+       "allowable_MPa": 240.0,
+       "ok": true,
+       "longeron_stress_MPa_beam": 46.640566403435116
+      }
+     },
+     "J3": {
+      "axial_design_MN": 0.11020717231064274,
+      "lateral_0.01g_MN": 0.029419949999999997
+     },
+     "local": {
+      "longeron_bay_Hz": 92.68589993326628,
+      "longeron_load_MN": 10.393210178983313,
+      "longeron_Pcr_MN": 761.8071058635865,
+      "longeron_buckling_margin": 73.29853748210334,
+      "frame_ovalling_n2_Hz": 0.14378443756295017,
+      "pulse_clear": {
+       "longeron_bay": true,
+       "frame_n2": true
+      }
+     },
+     "pulse_Hz": 334.2714857944359
+    },
+    {
+     "case": "N9 wide farm sized for cantilever 0.2 Hz",
+     "farm": "wide",
+     "ring_m": 43.68523476630866,
+     "tube_r_m": 0.8090800014529121,
+     "added_t": 3884.868312730433,
+     "structure_t": 3975.757594576069,
+     "length_m": 275.4,
+     "f1_cantilever_Hz": 0.20000000000001453,
+     "f1_free_free_Hz": 0.664253109506119,
+     "meets_0.2Hz_cantilever": 1.0,
+     "meets_0.2Hz_free_free": 1.0,
+     "buckling_factor_SF2": 488.0656924124536,
+     "J1_axial_design_MN": 7.4167210763422435,
+     "J1_joint": {
+      "0.002g": {
+       "root_moment_MN_m": 139.88615124140296,
+       "root_shear_MN": 1.1535548467470205,
+       "splice_force_per_longeron_MN": 2.247252573777243,
+       "splice_stress_MPa": 5.751292819706386,
+       "allowable_MPa": 240.0,
+       "ok": true,
+       "longeron_stress_MPa_beam": 5.64745236192129
+      },
+      "0.01g": {
+       "root_moment_MN_m": 699.430756207015,
+       "root_shear_MN": 5.767774233735103,
+       "splice_force_per_longeron_MN": 7.939942390511887,
+       "splice_stress_MPa": 20.320338796043078,
+       "allowable_MPa": 240.0,
+       "ok": true,
+       "longeron_stress_MPa_beam": 20.204275883163973
+      }
+     },
+     "J3": {
+      "axial_design_MN": 0.11020717231064274,
+      "lateral_0.01g_MN": 0.029419949999999997
+     },
+     "local": {
+      "longeron_bay_Hz": 122.73372840044442,
+      "longeron_load_MN": 7.894592120952673,
+      "longeron_Pcr_MN": 2342.3190180702672,
+      "longeron_buckling_margin": 296.69918118424715,
+      "frame_ovalling_n2_Hz": 0.06585719126390666,
+      "pulse_clear": {
+       "longeron_bay": true,
+       "frame_n2": true
+      }
+     },
+     "pulse_Hz": 334.2714857944359
+    },
+    {
+     "case": "N9 wide farm sized for free_free 0.2 Hz",
+     "farm": "wide",
+     "ring_m": 43.68523476630866,
+     "tube_r_m": 0.256801938398712,
+     "added_t": 614.5384870882576,
+     "structure_t": 705.427768933894,
+     "length_m": 275.4,
+     "f1_cantilever_Hz": 0.06575268534864737,
+     "f1_free_free_Hz": 0.21707920340306094,
+     "meets_0.2Hz_cantilever": 0.0,
+     "meets_0.2Hz_free_free": 1.0,
+     "buckling_factor_SF2": 52.116054034447764,
+     "J1_axial_design_MN": 7.4167210763422435,
+     "J1_joint": {
+      "0.002g": {
+       "root_moment_MN_m": 131.0538033536348,
+       "root_shear_MN": 1.0894128867777524,
+       "splice_force_per_longeron_MN": 2.1573941131069887,
+       "splice_stress_MPa": 54.806165845652885,
+       "allowable_MPa": 240.0,
+       "ok": true,
+       "longeron_stress_MPa_beam": 47.667030443740266
+      },
+      "0.01g": {
+       "root_moment_MN_m": 655.269016768174,
+       "root_shear_MN": 5.447064433888762,
+       "splice_force_per_longeron_MN": 7.490650087160612,
+       "splice_stress_MPa": 190.2915227563336,
+       "allowable_MPa": 240.0,
+       "ok": true,
+       "longeron_stress_MPa_beam": 182.44019957094048
+      }
+     },
+     "J3": {
+      "axial_design_MN": 0.11020717231064274,
+      "lateral_0.01g_MN": 0.029419949999999997
+     },
+     "local": {
+      "longeron_bay_Hz": 38.95567719327633,
+      "longeron_load_MN": 7.181589999506056,
+      "longeron_Pcr_MN": 23.772418576647866,
+      "longeron_buckling_margin": 3.3101887713282037,
+      "frame_ovalling_n2_Hz": 0.14401555529966334,
+      "pulse_clear": {
+       "longeron_bay": true,
+       "frame_n2": true
+      }
+     },
+     "pulse_Hz": 334.2714857944359
+    },
+    {
+     "case": "N9 wide farm sized for cantilever 0.1 Hz",
+     "farm": "wide",
+     "ring_m": 43.68523476630866,
+     "tube_r_m": 0.39280481606979273,
+     "added_t": 1105.3596590736151,
+     "structure_t": 1196.2489409192517,
+     "length_m": 275.4,
+     "f1_cantilever_Hz": 0.10000000000013305,
+     "f1_free_free_Hz": 0.33048905590659966,
+     "meets_0.2Hz_cantilever": 0.0,
+     "meets_0.2Hz_free_free": 1.0,
+     "buckling_factor_SF2": 120.84780548832266,
+     "J1_axial_design_MN": 7.4167210763422435,
+     "J1_joint": {
+      "0.002g": {
+       "root_moment_MN_m": 132.37938932593215,
+       "root_shear_MN": 1.0990395096702532,
+       "splice_force_per_longeron_MN": 2.1708803476247303,
+       "splice_stress_MPa": 23.571043298933482,
+       "allowable_MPa": 240.0,
+       "ok": true,
+       "longeron_stress_MPa_beam": 21.966533604643832
+      },
+      "0.01g": {
+       "root_moment_MN_m": 661.8969466296606,
+       "root_shear_MN": 5.495197548351267,
+       "splice_force_per_longeron_MN": 7.558081259749321,
+       "splice_stress_MPa": 82.06433893297432,
+       "allowable_MPa": 240.0,
+       "ok": true,
+       "longeron_stress_MPa_beam": 80.324533447342
+      }
+     },
+     "J3": {
+      "axial_design_MN": 0.11020717231064274,
+      "lateral_0.01g_MN": 0.029419949999999997
+     },
+     "local": {
+      "longeron_bay_Hz": 59.586690467348426,
+      "longeron_load_MN": 7.397846114891743,
+      "longeron_Pcr_MN": 130.13298565311962,
+      "longeron_buckling_margin": 17.590658636594785,
+      "frame_ovalling_n2_Hz": 0.11502418400872003,
+      "pulse_clear": {
+       "longeron_bay": true,
+       "frame_n2": true
+      }
+     },
+     "pulse_Hz": 334.2714857944359
+    }
+   ]
+  },
+  {
+   "ship": "full: + spine cantilever 0.1 Hz, rate free",
+   "departure_t": 142804.61539416903,
+   "rate_Hz": 559.9042672120521,
+   "rows": [
+    {
+     "case": "S5N as drawn (31 m ring, r 0.611 m, about 2 kt) on this ship",
+     "farm": "wide",
+     "ring_m": 31.0,
+     "tube_r_m": 0.611,
+     "added_t": 1969.83992340603,
+     "structure_t": 2060.7292052516664,
+     "length_m": 275.4,
+     "f1_cantilever_Hz": 0.11465661693612554,
+     "f1_free_free_Hz": 0.40744875311874146,
+     "meets_0.2Hz_cantilever": 0.0,
+     "meets_0.2Hz_free_free": 1.0,
+     "buckling_factor_SF2": 216.33901176267855,
+     "J1_axial_design_MN": 12.40029918070734,
+     "J1_joint": {
+      "0.002g": {
+       "root_moment_MN_m": 220.87653614590246,
+       "root_shear_MN": 1.838716159315432,
+       "splice_force_per_longeron_MN": 4.544499710342428,
+       "splice_stress_MPa": 20.393895327858353,
+       "allowable_MPa": 240.0,
+       "ok": true,
+       "longeron_stress_MPa_beam": 19.86268351519413
+      },
+      "0.01g": {
+       "root_moment_MN_m": 1104.3826807295125,
+       "root_shear_MN": 9.193580796577159,
+       "splice_force_per_longeron_MN": 17.21125447139777,
+       "splice_stress_MPa": 77.23721961121478,
+       "allowable_MPa": 240.0,
+       "ok": true,
+       "longeron_stress_MPa_beam": 76.58154698315208
+      }
+     },
+     "J3": {
+      "axial_design_MN": 0.11020717231064275,
+      "lateral_0.01g_MN": 0.029419949999999997
+     },
+     "local": {
+      "longeron_bay_Hz": 92.68589993326628,
+      "longeron_load_MN": 17.06514682396662,
+      "longeron_Pcr_MN": 761.8071058635865,
+      "longeron_buckling_margin": 44.641110546654645,
+      "frame_ovalling_n2_Hz": 0.14378443756295017,
+      "pulse_clear": {
+       "longeron_bay": true,
+       "frame_n2": true
+      }
+     },
+     "pulse_Hz": 559.9042672120521
+    },
+    {
+     "case": "N9 wide farm sized for cantilever 0.2 Hz",
+     "farm": "wide",
+     "ring_m": 56.54891689882403,
+     "tube_r_m": 1.0895967702669624,
+     "added_t": 7838.367027029784,
+     "structure_t": 7929.256308875421,
+     "length_m": 275.4,
+     "f1_cantilever_Hz": 0.20000000000011472,
+     "f1_free_free_Hz": 0.6424284121560485,
+     "meets_0.2Hz_cantilever": 1.0,
+     "meets_0.2Hz_free_free": 1.0,
+     "buckling_factor_SF2": 419.28673094744784,
+     "J1_axial_design_MN": 12.40029918070734,
+     "J1_joint": {
+      "0.002g": {
+       "root_moment_MN_m": 236.72596899563754,
+       "root_shear_MN": 1.953817341956936,
+       "splice_force_per_longeron_MN": 3.2383513724973825,
+       "splice_stress_MPa": 4.56971253864961,
+       "allowable_MPa": 240.0,
+       "ok": true,
+       "longeron_stress_MPa_beam": 4.516022299522307
+      },
+      "0.01g": {
+       "root_moment_MN_m": 1183.629844978188,
+       "root_shear_MN": 9.76908670978468,
+       "splice_force_per_longeron_MN": 10.680512782172544,
+       "splice_stress_MPa": 15.07151867286778,
+       "allowable_MPa": 240.0,
+       "ok": true,
+       "longeron_stress_MPa_beam": 15.012473834368665
+      }
+     },
+     "J3": {
+      "axial_design_MN": 0.11020717231064275,
+      "lateral_0.01g_MN": 0.029419949999999997
+     },
+     "local": {
+      "longeron_bay_Hz": 165.28683668833685,
+      "longeron_load_MN": 10.638670339748582,
+      "longeron_Pcr_MN": 7704.481334348032,
+      "longeron_buckling_margin": 724.1958899282998,
+      "frame_ovalling_n2_Hz": 0.033792312323707385,
+      "pulse_clear": {
+       "longeron_bay": true,
+       "frame_n2": true
+      }
+     },
+     "pulse_Hz": 559.9042672120521
+    },
+    {
+     "case": "N9 wide farm sized for free_free 0.2 Hz",
+     "farm": "wide",
+     "ring_m": 56.54891689882403,
+     "tube_r_m": 0.35564913099158735,
+     "added_t": 1122.116299594192,
+     "structure_t": 1213.0055814398286,
+     "length_m": 275.4,
+     "f1_cantilever_Hz": 0.06803584535924219,
+     "f1_free_free_Hz": 0.2171425713798874,
+     "meets_0.2Hz_cantilever": 0.0,
+     "meets_0.2Hz_free_free": 1.0,
+     "buckling_factor_SF2": 47.95824787044881,
+     "J1_axial_design_MN": 12.40029918070734,
+     "J1_joint": {
+      "0.002g": {
+       "root_moment_MN_m": 218.58704537360234,
+       "root_shear_MN": 1.822089501564523,
+       "splice_force_per_longeron_MN": 3.0957890693777754,
+       "splice_stress_MPa": 41.00382630320556,
+       "allowable_MPa": 240.0,
+       "ok": true,
+       "longeron_stress_MPa_beam": 37.20331953185713
+      },
+      "0.01g": {
+       "root_moment_MN_m": 1092.9352268680118,
+       "root_shear_MN": 9.110447507822617,
+       "splice_force_per_longeron_MN": 9.967701266574505,
+       "splice_stress_MPa": 132.02252550720797,
+       "allowable_MPa": 240.0,
+       "ok": true,
+       "longeron_stress_MPa_beam": 128.0702432695087
+      }
+     },
+     "J3": {
+      "axial_design_MN": 0.11020717231064275,
+      "lateral_0.01g_MN": 0.029419949999999997
+     },
+     "local": {
+      "longeron_bay_Hz": 53.950343316594726,
+      "longeron_load_MN": 9.669303939942358,
+      "longeron_Pcr_MN": 87.45148443578881,
+      "longeron_buckling_margin": 9.044237825076594,
+      "frame_ovalling_n2_Hz": 0.07832504445311549,
+      "pulse_clear": {
+       "longeron_bay": true,
+       "frame_n2": true
+      }
+     },
+     "pulse_Hz": 559.9042672120521
+    },
+    {
+     "case": "N9 wide farm sized for cantilever 0.1 Hz",
+     "farm": "wide",
+     "ring_m": 56.54891689882403,
+     "tube_r_m": 0.5259395503400812,
+     "added_t": 2072.6692122351883,
+     "structure_t": 2163.5584940808244,
+     "length_m": 275.4,
+     "f1_cantilever_Hz": 0.10000000000013734,
+     "f1_free_free_Hz": 0.31945821966165316,
+     "meets_0.2Hz_cantilever": 0.0,
+     "meets_0.2Hz_free_free": 1.0,
+     "buckling_factor_SF2": 103.79853921401875,
+     "J1_axial_design_MN": 12.40029918070734,
+     "J1_joint": {
+      "0.002g": {
+       "root_moment_MN_m": 221.1542524926971,
+       "root_shear_MN": 1.8407329810060247,
+       "splice_force_per_longeron_MN": 3.115965953470203,
+       "splice_stress_MPa": 18.871984388543325,
+       "allowable_MPa": 240.0,
+       "ok": true,
+       "longeron_stress_MPa_beam": 17.977439442847604
+      },
+      "0.01g": {
+       "root_moment_MN_m": 1105.7712624634858,
+       "root_shear_MN": 9.203664905030124,
+       "splice_force_per_longeron_MN": 10.068585687036645,
+       "splice_stress_MPa": 60.980830579631494,
+       "allowable_MPa": 240.0,
+       "ok": true,
+       "longeron_stress_MPa_beam": 60.05154530553316
+      }
+     },
+     "J3": {
+      "axial_design_MN": 0.11020717231064275,
+      "lateral_0.01g_MN": 0.029419949999999997
+     },
+     "local": {
+      "longeron_bay_Hz": 79.78261953153492,
+      "longeron_load_MN": 9.91515077444158,
+      "longeron_Pcr_MN": 418.2380116541424,
+      "longeron_buckling_margin": 42.18170970553874,
+      "frame_ovalling_n2_Hz": 0.0615603523701262,
+      "pulse_clear": {
+       "longeron_bay": true,
+       "frame_n2": true
+      }
+     },
+     "pulse_Hz": 559.9042672120521
+    }
+   ]
+  },
+  {
+   "ship": "full: + spine free-free 0.2 Hz (upper bound), rate free",
+   "departure_t": 117089.02655131288,
+   "rate_Hz": 459.16799247308575,
+   "rows": [
+    {
+     "case": "S5N as drawn (31 m ring, r 0.611 m, about 2 kt) on this ship",
+     "farm": "wide",
+     "ring_m": 31.0,
+     "tube_r_m": 0.611,
+     "added_t": 1969.83992340603,
+     "structure_t": 2060.7292052516664,
+     "length_m": 275.4,
+     "f1_cantilever_Hz": 0.12607227756654923,
+     "f1_free_free_Hz": 0.4482270209834099,
+     "meets_0.2Hz_cantilever": 0.0,
+     "meets_0.2Hz_free_free": 1.0,
+     "buckling_factor_SF2": 262.1392237725519,
+     "J1_axial_design_MN": 10.174617445475453,
+     "J1_joint": {
+      "0.002g": {
+       "root_moment_MN_m": 182.39613569846938,
+       "root_shear_MN": 1.5159465247447628,
+       "splice_force_per_longeron_MN": 3.745511410765651,
+       "splice_stress_MPa": 16.808355711106007,
+       "allowable_MPa": 240.0,
+       "ok": true,
+       "longeron_stress_MPa_beam": 16.372325095210908
+      },
+      "0.01g": {
+       "root_moment_MN_m": 911.9806784923469,
+       "root_shear_MN": 7.579732623723814,
+       "splice_force_per_longeron_MN": 14.205504855839163,
+       "splice_stress_MPa": 63.748618676342296,
+       "allowable_MPa": 240.0,
+       "ok": true,
+       "longeron_stress_MPa_beam": 63.2098104084128
+      }
+     },
+     "J3": {
+      "axial_design_MN": 0.11020717231064274,
+      "lateral_0.01g_MN": 0.029419949999999997
+     },
+     "local": {
+      "longeron_bay_Hz": 92.68589993326628,
+      "longeron_load_MN": 14.08543882734529,
+      "longeron_Pcr_MN": 761.8071058635865,
+      "longeron_buckling_margin": 54.08472644704713,
+      "frame_ovalling_n2_Hz": 0.14378443756295017,
+      "pulse_clear": {
+       "longeron_bay": true,
+       "frame_n2": true
+      }
+     },
+     "pulse_Hz": 459.16799247308575
+    },
+    {
+     "case": "N9 wide farm sized for cantilever 0.2 Hz",
+     "farm": "wide",
+     "ring_m": 51.20486988348257,
+     "tube_r_m": 0.9646761345908546,
+     "added_t": 5882.025245169161,
+     "structure_t": 5972.914527014797,
+     "length_m": 275.4,
+     "f1_cantilever_Hz": 0.20000000000022364,
+     "f1_free_free_Hz": 0.6492881924798002,
+     "meets_0.2Hz_cantilever": 1.0,
+     "meets_0.2Hz_free_free": 1.0,
+     "buckling_factor_SF2": 439.7961299086096,
+     "J1_axial_design_MN": 10.174617445475453,
+     "J1_joint": {
+      "0.002g": {
+       "root_moment_MN_m": 192.9619757224024,
+       "root_shear_MN": 1.5926773891160986,
+       "splice_force_per_longeron_MN": 2.8053708959090615,
+       "splice_stress_MPa": 5.050376371418989,
+       "allowable_MPa": 240.0,
+       "ok": true,
+       "longeron_stress_MPa_beam": 4.979195052964131
+      },
+      "0.01g": {
+       "root_moment_MN_m": 964.8098786120122,
+       "root_shear_MN": 7.963386945580492,
+       "splice_force_per_longeron_MN": 9.50480228155622,
+       "splice_stress_MPa": 17.111045433522204,
+       "allowable_MPa": 240.0,
+       "ok": true,
+       "longeron_stress_MPa_beam": 17.032726462193228
+      }
+     },
+     "J3": {
+      "axial_design_MN": 0.11020717231064274,
+      "lateral_0.01g_MN": 0.029419949999999997
+     },
+     "local": {
+      "longeron_bay_Hz": 146.33694873764003,
+      "longeron_load_MN": 9.461297848103055,
+      "longeron_Pcr_MN": 4733.760880869557,
+      "longeron_buckling_margin": 500.3289143696764,
+      "frame_ovalling_n2_Hz": 0.04399364456159403,
+      "pulse_clear": {
+       "longeron_bay": true,
+       "frame_n2": true
+      }
+     },
+     "pulse_Hz": 459.16799247308575
+    },
+    {
+     "case": "N9 wide farm sized for free_free 0.2 Hz",
+     "farm": "wide",
+     "ring_m": 51.20486988348257,
+     "tube_r_m": 0.31242639711716047,
+     "added_t": 877.3373314245171,
+     "structure_t": 968.2266132701535,
+     "length_m": 275.4,
+     "f1_cantilever_Hz": 0.06728763262056557,
+     "f1_free_free_Hz": 0.21712092762469154,
+     "meets_0.2Hz_cantilever": 0.0,
+     "meets_0.2Hz_free_free": 1.0,
+     "buckling_factor_SF2": 49.21424930928773,
+     "J1_axial_design_MN": 10.174617445475453,
+     "J1_joint": {
+      "0.002g": {
+       "root_moment_MN_m": 179.44555778274665,
+       "root_shear_MN": 1.4945189436574513,
+       "splice_force_per_longeron_MN": 2.6880520378446056,
+       "splice_stress_MPa": 46.13587450997874,
+       "allowable_MPa": 240.0,
+       "ok": true,
+       "longeron_stress_MPa_beam": 41.180104518394735
+      },
+      "0.01g": {
+       "root_moment_MN_m": 897.2277889137332,
+       "root_shear_MN": 7.472594718287257,
+       "splice_force_per_longeron_MN": 8.91820799123394,
+       "splice_stress_MPa": 153.06598196193264,
+       "allowable_MPa": 240.0,
+       "ok": true,
+       "longeron_stress_MPa_beam": 147.83111582700266
+      }
+     },
+     "J3": {
+      "axial_design_MN": 0.11020717231064274,
+      "lateral_0.01g_MN": 0.029419949999999997
+     },
+     "local": {
+      "longeron_bay_Hz": 47.393652667286496,
+      "longeron_load_MN": 8.613204721407579,
+      "longeron_Pcr_MN": 52.08001020678771,
+      "longeron_buckling_margin": 6.046531098621878,
+      "frame_ovalling_n2_Hz": 0.0994338511748736,
+      "pulse_clear": {
+       "longeron_bay": true,
+       "frame_n2": true
+      }
+     },
+     "pulse_Hz": 459.16799247308575
+    },
+    {
+     "case": "N9 wide farm sized for cantilever 0.1 Hz",
+     "farm": "wide",
+     "ring_m": 51.20486988348257,
+     "tube_r_m": 0.46700954578836895,
+     "added_t": 1601.2395370313159,
+     "structure_t": 1692.1288188769524,
+     "length_m": 275.4,
+     "f1_cantilever_Hz": 0.10000000000003463,
+     "f1_free_free_Hz": 0.3229768494799091,
+     "meets_0.2Hz_cantilever": 0.0,
+     "meets_0.2Hz_free_free": 1.0,
+     "buckling_factor_SF2": 108.90980303529209,
+     "J1_axial_design_MN": 10.174617445475453,
+     "J1_joint": {
+      "0.002g": {
+       "root_moment_MN_m": 181.40063768524132,
+       "root_shear_MN": 1.5087170547866795,
+       "splice_force_per_longeron_MN": 2.7050216034950214,
+       "splice_stress_MPa": 20.778574453540852,
+       "allowable_MPa": 240.0,
+       "ok": true,
+       "longeron_stress_MPa_beam": 19.626871442180104
+      },
+      "0.01g": {
+       "root_moment_MN_m": 907.0031884262067,
+       "root_shear_MN": 7.543585273933399,
+       "splice_force_per_longeron_MN": 9.003055819486018,
+       "splice_stress_MPa": 69.15681021285373,
+       "allowable_MPa": 240.0,
+       "ok": true,
+       "longeron_stress_MPa_beam": 67.94560724307964
+      }
+     },
+     "J3": {
+      "axial_design_MN": 0.11020717231064274,
+      "lateral_0.01g_MN": 0.029419949999999997
+     },
+     "local": {
+      "longeron_bay_Hz": 70.84320790314388,
+      "longeron_load_MN": 8.845377524144736,
+      "longeron_Pcr_MN": 260.00590375932666,
+      "longeron_buckling_margin": 29.394551340471672,
+      "frame_ovalling_n2_Hz": 0.07875062012002114,
+      "pulse_clear": {
+       "longeron_bay": true,
+       "frame_n2": true
+      }
+     },
+     "pulse_Hz": 459.16799247308575
+    }
+   ]
+  }
+ ],
+ "answer": {
+  "two_kt_sufficient_by_ship": {
+   "V4 (Rev 4 reference)": {
+    "cantilever_0.2Hz": 1.0,
+    "free_free_0.2Hz": 1.0,
+    "f1_cantilever_Hz": 0.20005124592223414
+   },
+   "coils + launcher + axis A1, rate free": {
+    "cantilever_0.2Hz": 0.0,
+    "free_free_0.2Hz": 1.0,
+    "f1_cantilever_Hz": 0.14645849821329188
+   },
+   "full: + spine cantilever 0.1 Hz, rate free": {
+    "cantilever_0.2Hz": 0.0,
+    "free_free_0.2Hz": 1.0,
+    "f1_cantilever_Hz": 0.11465661693612554
+   },
+   "full: + spine free-free 0.2 Hz (upper bound), rate free": {
+    "cantilever_0.2Hz": 0.0,
+    "free_free_0.2Hz": 1.0,
+    "f1_cantilever_Hz": 0.12607227756654923
+   }
+  },
+  "note": "beam model; the cantilever bound is T05 basis, the free-free bound assumes a rigid aft ship"
+ }
+}

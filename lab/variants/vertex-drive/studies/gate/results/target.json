@@ -1,0 +1,146 @@
+{
+ "study": "Feasibility gate Phase 3: gas-filled capsule as a fusion target (T00)",
+ "status": "MODEL, research only, NON-CANON",
+ "fdp1_target": {
+  "fuel_g": 0.7721569150877443,
+  "rhoR_g_cm2": 90.3425439613695,
+  "compressed_density_g_cc": 2000.0,
+  "driver_MJ": 168.29499577709106,
+  "gain": 1084.3326176985665,
+  "burn_fraction": 0.6713347108114922,
+  "electrons_per_amu": 0.5964778549949645,
+  "radius_compressed_cm": 0.04517127198068475,
+  "fill_density_30K_g_cc": 0.0231,
+  "convergence_gas": 44.239071697549996,
+  "convergence_liquid_0.18": 22.314431669405646
+ },
+ "compression": {
+  "specific_MJ_g_alpha1": 101.62478566407583,
+  "rows": [
+   {
+    "adiabat_alpha": 1.0,
+    "fuel_energy_MJ": 78.47028099482601,
+    "coupling_needed": 0.46626627626385836,
+    "driver_needed_MJ_at_10pc": 784.7028099482601,
+    "driver_needed_MJ_at_20pc": 392.35140497413005
+   },
+   {
+    "adiabat_alpha": 1.5,
+    "fuel_energy_MJ": 117.70542149223903,
+    "coupling_needed": 0.6993994143957876,
+    "driver_needed_MJ_at_10pc": 1177.0542149223902,
+    "driver_needed_MJ_at_20pc": 588.5271074611951
+   },
+   {
+    "adiabat_alpha": 2.0,
+    "fuel_energy_MJ": 156.94056198965202,
+    "coupling_needed": 0.9325325525277167,
+    "driver_needed_MJ_at_10pc": 1569.4056198965202,
+    "driver_needed_MJ_at_20pc": 784.7028099482601
+   },
+   {
+    "adiabat_alpha": 3.0,
+    "fuel_energy_MJ": 235.41084298447805,
+    "coupling_needed": 1.3987988287915751,
+    "driver_needed_MJ_at_10pc": 2354.1084298447804,
+    "driver_needed_MJ_at_20pc": 1177.0542149223902
+   }
+  ],
+  "consistent_targets": [
+   {
+    "coupling": 0.1,
+    "reachable_density_g_cc": 108.12897823753764,
+    "fuel_g_for_FDP1_rhoR": 264.1686994972238,
+    "yield_GJ_at_FDP1_burn_fraction": 62432.32628736234
+   },
+   {
+    "coupling": 0.2,
+    "reachable_density_g_cc": 305.83493501814195,
+    "fuel_g_for_FDP1_rhoR": 33.02108743715298,
+    "yield_GJ_at_FDP1_burn_fraction": 7804.040785920292
+   }
+  ],
+  "finding": "the compression energy alone exceeds what a heavy-ion driver of this size can couple (10-20 %) even for liquid or solid fuel at alpha 1: this is a V4/FDP-1 target assumption (gain 1,084 at 168 MJ), upstream of the launcher; the gas fill makes it worse."
+ },
+ "beam": {
+  "ion": "Bi-209 1+ at 4 GeV (FDP-1 energy; species ASSUMPTION)",
+  "range_in_carbon_g_cm2": 0.040578103162850494,
+  "range_in_D3He_g_cm2_approx": 0.027800190169139993,
+  "wall_areal_g_cm2": 0.0119,
+  "wall_over_range": 0.2932616133445716,
+  "gas_areal_diameter_g_cm2": 0.0924,
+  "range_matched_HDC_um": 115.93743760814426,
+  "range_matched_ablator_g": 2.039677932688318,
+  "finding": "the 34 um wall is about a third of the ion range: two thirds of the beam energy deposits in the gas fuel itself, preheating it (high adiabat). A range-matched direct-drive ablator is about 0.1 mm of HDC, several grams, several times the fuel mass. Indirect drive (hohlraum) avoids this but its capsule supports hold about 200 g, not 30,000 g."
+ },
+ "mix": {
+  "rows": [
+   {
+    "carbon_mass_fraction_in_burn": 0.005,
+    "C_atoms_per_fuel_ion": 0.0010522180463553301,
+    "bremsstrahlung_x": 1.0194245846312016
+   },
+   {
+    "carbon_mass_fraction_in_burn": 0.01,
+    "C_atoms_per_fuel_ion": 0.002115064557825361,
+    "bremsstrahlung_x": 1.0391748613536118
+   },
+   {
+    "carbon_mass_fraction_in_burn": 0.02,
+    "C_atoms_per_fuel_ion": 0.004273293698463483,
+    "bremsstrahlung_x": 1.079680439900048
+   },
+   {
+    "carbon_mass_fraction_in_burn": 0.05,
+    "C_atoms_per_fuel_ion": 0.011020599538142672,
+    "bremsstrahlung_x": 1.2097747596785995
+   },
+   {
+    "carbon_mass_fraction_in_burn": 0.1,
+    "C_atoms_per_fuel_ion": 0.02326571013607897,
+    "bremsstrahlung_x": 1.4592675587484893
+   }
+  ],
+  "wall_over_fuel": 0.7640933966549469,
+  "finding": "D-3He burns near its bremsstrahlung limit: 2 % carbon by mass raises the radiation loss by about 8 %, 5 % by about 21 %. The wall must leave the burn region almost completely."
+ },
+ "exhaust": {
+  "wall_over_fuel": 0.7640933966549469,
+  "fdp1_tamper_per_fuel": 1.724869802544049e-09,
+  "ve_factor_at_fixed_pulse_energy": 0.7529033210942452,
+  "ve_factor_range_matched_ablator": 0.5240320846126363,
+  "mass_ratio_V4_ln": 0.9992471934557027,
+  "note": "FDP-1 (IFD-PH) chooses a hydrogen tamper to set ve and picks about zero; an HDC wall is inert exhaust it does not carry. At fixed pulse energy ve falls as 1/sqrt(1 + wall/fuel); the coupled solve here does not include it (it would need a change to protected code or a ve adapter).",
+  "ln_mass_ratio_with_wall": 1.3271919056000834,
+  "mass_ratio_with_wall": 3.7704407543709215,
+  "departure_t_at_V4_end_mass_before_regearing": 59571.92418692352
+ },
+ "fill_and_rate": {
+  "rates_Hz": [
+   195.7,
+   196.0,
+   250.0,
+   312.3,
+   320.1,
+   332.2,
+   334.3,
+   459.2,
+   553.9,
+   559.9,
+   879.2,
+   1000.0
+  ],
+  "targets_per_mission_V4": 35116340105.98635,
+  "fill": "HDC (diamond) is effectively impermeable to hydrogen isotopes and helium at 30 K and slow even at 300 K: NIF fills HDC capsules through a fill tube. A cold gas capsule therefore needs a fill tube and a seal per target, at 196-330 per second for 3.5e10 targets, kept below 30 K from fill to shot (the fill pressure scales with temperature and the wall is sized for 30 K). No such process exists; it is an unsupported assumption."
+ },
+ "unsupported_assumptions": [
+  "compression of a gas-start D-3He fuel to 2,000 g/cc at alpha near 1 (convergence 44)",
+  "hydrodynamic coupling near 50 % (FDP-1 gain at 168 MJ)",
+  "beam deposition in a wall thinner than the ion range without fuel preheat",
+  "wall/fuel mix below about 2 % by mass with a 0.76 wall/fuel ratio",
+  "a cold fill-and-seal process at 196-330 Hz for 3.5e10 targets",
+  "inert wall mass leaving as exhaust without the ve penalty"
+ ],
+ "verdict": "NOT DEFENSIBLE as a fusion target on FDP-1's numbers. Mechanically it survives (Rev 4), but: (1) compressing 0.77 g of D-3He to 2000 g/cc costs 78 MJ even at alpha 1, 47% of the 168 MJ driver, and a gas start raises alpha; (2) the 4 GeV ions pass through the 34 um wall and preheat the gas; (3) the carbon wall is 0.76x the fuel mass while the burn tolerates about 1-2 % carbon by mass; (4) the wall is exhaust mass FDP-1 does not carry (ve x0.75); (5) there is no fill process at the pulse rate.",
+ "B_ray": "same target, same verdict; B-ray changes only where the launcher sits (off the axis channel), not the target physics"
+}
