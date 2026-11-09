@@ -37,7 +37,7 @@ CANON2 = REV2['canon']
 LAUNCHER_KG_PER_M_NOTE = 'mass about 0.5 t/m PROTOTYPE (UNKNOWN)'
 
 SHIP = ROOT/'assets/wayfarer/WF_WAYFARER_001.blend'
-REVISION = 2
+REVISION = 3
 GENS = ('V4', 'V0', 'V5')
 C = screen.canon()
 RS = {g: screen.solve(g) for g in GENS}
@@ -873,6 +873,137 @@ def build_dock_routes(gen, coll):
 
 
 # ----------------------------------------------------------------------------------------------------------------------------------
+# Revision 3: structure and access across the T-B stretch (rev3.json), longer launcher outline, coil cooling lines
+# ----------------------------------------------------------------------------------------------------------------------------------
+REV3 = json.loads((HERE/'rev3.json').read_text())     # python3 work/vertex-blender/rev3.py writes it
+SRC3 = 'rev3.json (work/vertex-blender/rev3.py)'
+ST3 = REV3['stretch']; SO3 = REV3['options_operational']
+
+
+def stretch_frames(x0, x1):
+    xs = []; pitch = ST3['bay_pitch_m']; x = x0
+    while x <= x1+0.1:
+        xs.append(x); x += pitch
+    return xs
+
+
+def build_stretch(key, gen, coll):
+    """One ISS-013 layout from rev3.json options_operational[key]. Member radii are the screened sizes (stiffness-upgraded where the
+    0.2 Hz target added area); every member is PROTOTYPE."""
+    o = SO3[key]; x0, x1 = ST3['x_m']; rs = CANON2['spine_r_m']
+    note = f"{key}: {o['members']}; {o['structure_kg']/1e3:,.0f} t strength, {o['structure_stiff_kg']/1e3:,.0f} t for f1 >= {REV3['f_target_Hz']} Hz; f1 full {o['f_bending_Hz']['full']:.3f} Hz"
+    if key == 'S1_SPINE_ONLY':
+        make('S1_Spine_Thick_Tube', 'ring', coll, 'STRUCTURE', gen, 'PROTOTYPE', 'VTX-04', SRC3, note=note+'; violates the hub-alone rule', x0=x0, x1=x1, r0=0.24, r1=rs)
+        make('S1_CONFLICT_Hub_Alone', 'sphere', coll, 'VIS_CONFLICT', gen, 'CONCEPTUAL_ILLUSTRATION', 'VTX-04', 'data/wayfarer_3d.toml forward_defense.shield_load_path',
+             rep='VISUALIZATION', alpha=1.0, note='hub alone forbidden: the Brow needs the three primary sectors', centre=(x1-2.0, 0, 0), radius=3.0)
+        return
+    make(f'{key[:2]}_Spine', 'ring', coll, 'STRUCTURE', gen, 'PROTOTYPE', 'VTX-04', SRC3, note=note, x0=x0, x1=x1, r0=rs-0.006, r1=rs)
+    if key in ('S2_CANON_SECTORS', 'S4_SECTORS_PLUS_BELT'):
+        k = SO3['S2_CANON_SECTORS']['keel']
+        for az in (30.0, 150.0, 270.0):
+            make(f'{key[:2]}_Sector_Keel_{int(az)}', 'tube', coll, 'STRUCTURE', gen, 'PROTOTYPE', 'VTX-04', SRC3, note=f"sector keel r {k['r_m']:.2f} m x {k['t_m']*1e3:.0f} mm; " + note,
+                 points=[pol(x0-3.0, 5.0, az), pol(x1, 5.0, az)], radius=k['r_m'])
+    if key == 'S4_SECTORS_PLUS_BELT':
+        b = o['belt_keel']
+        for az in (90.0, 210.0, 330.0):
+            make(f'S4_Belt_Keel_{int(az)}', 'tube', coll, 'STRUCTURE', gen, 'PROTOTYPE', 'VTX-04', SRC3, note='belt keel in the 1.75 m gap between the tank rings; the 0.2 Hz stiffness upgrade would need r about 1.0 m, which does not fit',
+                 points=[pol(x0, 20.1, az), pol(x1, 20.1, az)], radius=b['r_m'])
+    if key == 'S3_OUTER_CAGE':
+        L_ = o['longeron']; rr = o.get('stiffness_member_r_m_each_at_t_over_r_0p05') or L_['r_m']
+        for j in range(6):
+            az = 60.0*j
+            make(f'S3_Outer_Longeron_{int(az)}', 'tube', coll, 'STRUCTURE', gen, 'PROTOTYPE', 'VTX-04', SRC3, note=f"outer longeron r {max(rr, L_['r_m']):.2f} m at r 34.8 m; " + note,
+                 points=[pol(x0, 34.8, az), pol(x1, 34.8, az)], radius=max(rr, L_['r_m']))
+    # frames: S2/S4 keel ring + radial girders to each outer and inner tank saddle; S3 outer rings + 12 spokes
+    xs = stretch_frames(x0-1.0, x1)
+    for i, x in enumerate(xs):
+        if key in ('S2_CANON_SECTORS', 'S4_SECTORS_PLUS_BELT'):
+            make(f'{key[:2]}_Frame_{i:02d}', 'torus', coll, 'STRUCTURE', gen, 'PROTOTYPE', 'VTX-04', SRC3, note='bay frame at a tank joint (2 m gap between bays)', x=x, R=5.0, a=0.3)
+            for j in range(12):
+                az = 6.2+30.0*j
+                make(f'{key[:2]}_Girder_{i:02d}_O{j:02d}', 'tube', coll, 'STRUCTURE', gen, 'PROTOTYPE', 'VTX-04', SRC3, note='radial two-chord girder (1.8 m deep) to an outer tank saddle',
+                     points=[pol(x, 5.0, az), pol(x, 27.75, az)], radius=0.25)
+            for j in range(3):
+                make(f'{key[:2]}_Spoke_{i:02d}_{j}', 'tube', coll, 'STRUCTURE', gen, 'PROTOTYPE', 'VTX-04', SRC3, points=[pol(x, rs, 30+120*j), pol(x, 5.0, 30+120*j)], radius=0.2)
+        if key == 'S3_OUTER_CAGE':
+            make(f'S3_Ring_{i:02d}', 'torus', coll, 'STRUCTURE', gen, 'PROTOTYPE', 'VTX-04', SRC3, note='outer ring frame r 34.8 m', x=x, R=34.8, a=0.35)
+            for j in range(12):
+                make(f'S3_Spoke_{i:02d}_{j:02d}', 'tube', coll, 'STRUCTURE', gen, 'PROTOTYPE', 'VTX-04', SRC3, points=[pol(x, rs, 30*j+15), pol(x, 34.8, 30*j+15)], radius=0.18)
+    # joints
+    for nm, x, why in (('J1_Root_Transfer_Frame', x0-1.5, 'J1: splice to the canon spine end and sector rails (farm front frame X 137.9 m)'),
+                       ('J3_Bow_Interface_Frame', x1-1.5, 'J3: spine to the shield spine column, keels to the Brow-side sector keels')):
+        make(f'{key[:2]}_{nm}', 'torus', coll, 'VIS_BEAM', gen, 'CONCEPTUAL_ILLUSTRATION', 'VTX-04', SRC3, rep='VISUALIZATION', note=why, x=x, R=5.0 if key != 'S3_OUTER_CAGE' else 34.8, a=0.9, alpha=0.9)
+
+
+def build_corridor(key, gen, coll):
+    c = REV3['corridor'][key]; x0 = CANON2['crew_trunk_x_m'][1]; x1 = ST3['x_m'][1]
+    if key == 'K1_TRUNK_IN_SPINE':
+        make('K1_Trunk_In_Spine', 'ring', coll, 'HABITAT', gen, 'PROTOTYPE', 'VTX-04', SRC3, alpha=0.8,
+             note=f"pressurised trunk inside the spine bore, 1.65 m clear, {c['mass_kg']/1e3:.0f} t; spine becomes the pressure hull; single route",
+             x0=x0, x1=x1, r0=0.7, r1=0.83)
+        pts = [x0+ST3['bay_pitch_m']*k for k in range(10)]
+        for k, x in enumerate(pts):
+            make(f'K1_Hatch_{k:02d}', 'ring', coll, 'SERVICE', gen, 'PROTOTYPE', 'VTX-04', SRC3, note='0.75 m bulkhead hatch', x0=x, x1=x+0.3, r0=0.38, r1=0.9)
+    elif key == 'K2_TUBE_BESIDE_SPINE':
+        cy, cz = pol(0, 3.0, 90.0)[1:]
+        make('K2_Pressure_Tube', 'ring', coll, 'HABITAT', gen, 'PROTOTYPE', 'VTX-04', SRC3, alpha=0.8,
+             note=f"2.2 m pressure tube at r 3 m az 90, {c['wall_mm']:.1f} mm Al-Li (min gauge 2.5), {c['kg_per_m']:.0f} kg/m, {c['mass_kg']/1e3:.0f} t; 10 hatches",
+             x0=x0-3.0, x1=x1, r0=0.98, r1=1.1, centre=(cy, cz))
+        make('K2_Link_To_Crew_Trunk', 'tube', coll, 'HABITAT', gen, 'PROTOTYPE', 'VTX-04', SRC3, alpha=0.8, note='transfer node from the canon crew trunk end (X 134.7 m) into the tube',
+             points=[(x0-1.5, 0, 0), pol(x0-1.5, 3.0, 90.0)], radius=0.8)
+        for k in range(10):
+            x = x0+ST3['bay_pitch_m']*k
+            make(f'K2_Hatch_Ring_{k:02d}', 'ring', coll, 'SERVICE', gen, 'PROTOTYPE', 'VTX-04', SRC3, note='bulkhead with 0.75 m hatch at each bay frame; bay service hatch to the tanks',
+                 x0=x, x1=x+0.4, r0=0.0, r1=1.25, centre=(cy, cz))
+    make(f'{key[:2]}_Robot_Rail', 'tube', coll, 'SERVICE', gen, 'PROTOTYPE', 'VTX-04', SRC3, note='robot rail along keel 270 (inspection, tank saddles, cable runs)',
+         points=[pol(x0, 5.6, 270.0), pol(x1, 5.6, 270.0)], radius=0.12)
+
+
+def build_tb_section_core(gen, R, coll):
+    """Ghost T-B tank cylinders for the structure comparison lanes (the built tanks would hide the members)."""
+    for v in R['tanks']['options']['T-B']['vessels']:
+        make('Core_' + v['name'].replace('FDP1_', ''), 'ring', coll, 'HELIUM3' if v['species'] == 'helium_3' else 'DEUTERIUM', gen, 'CONCEPTUAL_ILLUSTRATION', 'VTX-NONE',
+             f'solve:{gen} tanks T-B', rep='VISUALIZATION', alpha=0.12, x0=v['x0'], x1=v['x1'], r0=0.0, r1=v['a'], centre=(v['y'], v['z']))
+    make('Core_Canon_Spine_End', 'ring', coll, 'STRUCTURE', gen, 'CONCEPTUAL_ILLUSTRATION', 'VTX-NONE', 'canon Structural_Spine', rep='VISUALIZATION', alpha=0.5,
+         x0=100.0, x1=CANON2['spine_x_m'][1], r0=0.0, r1=CANON2['spine_r_m'])
+    make('Core_Crew_Trunk', 'ring', coll, 'HABITAT', gen, 'CONCEPTUAL_ILLUSTRATION', 'VTX-NONE', 'canon Crew_Trunk', rep='VISUALIZATION', alpha=0.7,
+         x0=CANON2['crew_trunk_x_m'][0], x1=CANON2['crew_trunk_x_m'][1], r0=0.0, r1=0.9)
+    make('Core_Bow_Shield', 'frustum', coll, 'SHIELD', gen, 'CONCEPTUAL_ILLUSTRATION', 'VTX-NONE', 'canon forward shield (shifted)', rep='VISUALIZATION', alpha=0.25,
+         x0=ST3['x_m'][1], r0=45.0, x1=ST3['x_m'][1]+4.0, r1=45.0, ri0=0.0, ri1=0.0)
+    make('Core_Skirt_B2_Shadow', 'frustum', coll, 'VIS_SAFE', gen, 'CONCEPTUAL_ILLUSTRATION', 'VTX-08E', 'rev2.json dust B2', rep='VISUALIZATION', alpha=0.06,
+         x0=ST3['x_m'][0], r0=36.0, x1=ST3['x_m'][1], r1=36.0, ri0=35.9, ri1=35.9)
+
+
+def build_launcher_long(gen, R, e, coll):
+    lt = REV3['launcher_target']['B_long_to_bow']; o = LOPT['B']; x1 = ST3['x_m'][1]
+    make('LBL_Accelerator_To_Bow', 'tube', coll, 'MAIN_PROPULSION', gen, 'CONCEPTUAL_ILLUSTRATION', 'VTX-01H', SRC3, rep='VISUALIZATION', alpha=0.7,
+         note=f"B-long: {lt['accelerator_m']:.0f} m accelerator from the bow to the snout tip, {lt['accel_g']:,.0f} g at {o['exit_speed_m_s']/1e3:.2f} km/s; {lt['needs']}",
+         points=[(x1-2.0, 0, 0), (o['muzzle_x_m']+0.5, 0, 0)], radius=0.35)
+    make('LBL_CONFLICT_Crew_Trunk', 'sphere', coll, 'VIS_CONFLICT', gen, 'CONCEPTUAL_ILLUSTRATION', 'VTX-01H', SRC3, rep='VISUALIZATION', alpha=1.0,
+         note='shares the spine bore with the canon crew trunk X 93.85-134.7 m', centre=(114.0, 0, 0), radius=2.0)
+    make('LBL_Line_Of_Sight', 'tube', coll, 'VIS_XRAY', gen, 'CONCEPTUAL_ILLUSTRATION', 'VTX-01H', SRC3, rep='VISUALIZATION', alpha=0.9,
+         points=[(o['muzzle_x_m'], 0, 0), (e['x_burn_m'], 0, 0)], radius=0.25)
+    make('LBL_Stretch_Spine_Ghost', 'ring', coll, 'STRUCTURE', gen, 'CONCEPTUAL_ILLUSTRATION', 'VTX-04', SRC3, rep='VISUALIZATION', alpha=0.25,
+         x0=CANON2['spine_x_m'][1], x1=x1, r0=0.6, r1=CANON2['spine_r_m'])
+
+
+def build_coil_cooling(gen, R, e, coll):
+    """P2 armour cooling: tin (the T01 hot-radiator fluid) at 1,800 K into the wing hot-band root; pipe radius for 5 m/s per side."""
+    cc = REV3['coil_cooling']; w0 = PREF['hot_x_m'][0]
+    for c in e['closure_coils']:
+        q = cc[c['name']]; per_side = q['tin_m3_s']/2; r_p = math.sqrt(per_side/5.0/math.pi)
+        env = c['envelope_r_m'][1]
+        make(f"{c['name']}_Cooling_Manifold", 'torus', coll, 'HOT_RADIATOR', gen, 'PROTOTYPE', 'VTX-03D', SRC3,
+             note=f"armour coolant manifold: {q['xray_W']/1e9:.1f} GW, tin {q['tin_m3_s']:.0f} m3/s (lithium {q['lithium_m3_s']:.0f} m3/s), 300 K rise",
+             x=c['x_m']+env+0.8, R=c['r_m'], a=r_p*0.7)
+        for az in (0.0, 180.0):
+            for k, dz in (('Supply', 1.0), ('Return', -1.0)):
+                make(f"{c['name']}_Coolant_{k}_{int(az)}", 'tube', coll, 'HOT_RADIATOR', gen, 'PROTOTYPE', 'VTX-03D', SRC3,
+                     note=f"{k.lower()} line r {r_p:.2f} m (5 m/s) to the wing hot-band root; pump about {q['tin_m3_s']*1e6/1e6:.0f} MW at 1 MPa",
+                     points=[pol(c['x_m']+env+0.8, c['r_m'], az+dz*4), pol(w0+2.0, 12.0+(3 if k == 'Return' else 0), az+dz*1.5)], radius=r_p)
+
+
+# ----------------------------------------------------------------------------------------------------------------------------------
 # measurements on the built geometry inputs (written to checks.json)
 # ----------------------------------------------------------------------------------------------------------------------------------
 def measure(gen, R, e, mod, x45):
@@ -912,7 +1043,8 @@ for nm in list(bpy.data.scenes):
 main = bpy.context.scene; main.name = 'VERTEX_V4'
 SC = {'VERTEX_V4': main}
 for nm in ('CANON_WAYFARER', 'VERTEX_V0', 'COMPARE_SIDE_BY_SIDE', 'COMPARE_TOP', 'COMPARE_SPAN', 'VERTEX_CUTAWAY', 'BRAKING_EXPOSURE',
-           'RADIATOR_ALTERNATIVES', 'LAUNCHER_COMPARE', 'THERMAL_COMPARE', 'COIL_COMPARE', 'SKIRT_COMPARE', 'OPTIONS_LIBRARY'):
+           'RADIATOR_ALTERNATIVES', 'LAUNCHER_COMPARE', 'THERMAL_COMPARE', 'COIL_COMPARE', 'SKIRT_COMPARE', 'OPTIONS_LIBRARY',
+           'STRUCTURE_COMPARE', 'STRUCTURE_SECTION'):
     SC[nm] = bpy.data.scenes.new(nm)
 
 LIB = new_coll('VERTEX_LIBRARY', main.collection)          # every built collection hangs here once; scenes link what they show
@@ -971,7 +1103,15 @@ for g in GENS:
         build_coil_protection(g, R, e, {'P1': opt_coll(g, 'COIL_P1', 'COLOR_04'), 'P2': opt_coll(g, 'COIL_P2', 'COLOR_04'),
                                         'FAN': opt_coll(g, 'COIL_XRAY_FAN'), 'SUP': opt_coll(g, 'COIL_SUP_SIZED', 'COLOR_02'),
                                         'CORE': opt_coll(g, 'LANE_CORE_COIL')})
-        chosen = ['LAUNCH_B', 'WINGS_PREF', 'COIL_P2', 'COIL_SUP_SIZED', 'SPINE_EXT', 'DOCK_ROUTES']
+        # Rev 3: stretch structure options, corridors, B-long outline, coil cooling, tank ghosts for the lanes
+        for k in ('S1_SPINE_ONLY', 'S2_CANON_SECTORS', 'S3_OUTER_CAGE', 'S4_SECTORS_PLUS_BELT'):
+            build_stretch(k, g, opt_coll(g, 'STRUCT_'+k[:2], 'COLOR_02'))
+        for k in ('K1_TRUNK_IN_SPINE', 'K2_TUBE_BESIDE_SPINE'):
+            build_corridor(k, g, opt_coll(g, 'CORR_'+k[:2], 'COLOR_04'))
+        build_tb_section_core(g, R, opt_coll(g, 'LANE_CORE_TB'))
+        build_launcher_long(g, R, e, opt_coll(g, 'LAUNCH_B_LONG'))
+        build_coil_cooling(g, R, e, opt_coll(g, 'COIL_COOLING', 'COLOR_01'))
+        chosen = ['LAUNCH_B', 'WINGS_PREF', 'COIL_P2', 'COIL_SUP_SIZED', 'COIL_COOLING', 'STRUCT_S2', 'STRUCT_S3', 'CORR_K2', 'DOCK_ROUTES']
         chosen_sk = 'B2_DOCK_CLEAR'
     else:
         chosen = ['LAUNCH_REV1', 'SUP_REV1', 'WINGS_CALC', 'SPINE_EXT', 'DOCK_ROUTES']
@@ -981,7 +1121,8 @@ for g in GENS:
     top.children.link(skirts[chosen_sk])
     if g == 'V0' and g in HOT_BLADES:
         top.children.link(HOT_BLADES[g])               # V0 stays the Rev 1 historical layout (canon blades kept beside its wing)
-    CHECKS.setdefault('assemblies', {})[g] = {'options': chosen+[chosen_sk], 'canon_hot_blades_shown': g == 'V0'}
+    CHECKS.setdefault('assemblies', {})[g] = {'options': chosen+[chosen_sk], 'canon_hot_blades_shown': g == 'V0',
+                                              'note': 'V4 Rev 3: STRUCT_S2 + STRUCT_S3 together = S5 (canon sectors + outer stiffeners)' if g == 'V4' else ''}
 
 # V4 calculated layout as an assembly of its own (Rev 1 options, canon blades kept): thermal and launcher comparisons
 ASM['V4_CALC'] = bpy.data.collections.new('ASM_V4_REV1_LAYOUT')
@@ -1147,6 +1288,12 @@ exclude(SC['RADIATOR_ALTERNATIVES'], [DUST.name, PANEL.name])
 # ---- Rev 2 comparison scenes (lanes instance the option collections; nothing is copied) ----
 O4 = OPT['V4']; P4 = {o['key']: o for o in REV2['launcher']['options']}
 LZ = {'REV1': 75.0, 'A': 25.0, 'B': -25.0, 'C': -75.0}
+inst(SC['LAUNCHER_COMPARE'], O4['LANE_CORE_LAUNCH'], (0, 0, -125.0), 'LCMP_CORE_B_LONG')
+inst(SC['LAUNCHER_COMPARE'], O4['LAUNCH_B'], (0, 0, -125.0), 'LCMP_B_LONG_B')
+inst(SC['LAUNCHER_COMPARE'], O4['LAUNCH_B_LONG'], (0, 0, -125.0), 'LCMP_B_LONG')
+_bl = REV3['launcher_target']['B_long_to_bow']
+text('lcmp_B_LONG', f"B-long (Rev 3 outline): accelerator {_bl['accelerator_m']:.0f} m from the bow, {_bl['accel_g']:,.0f} g; needs the crew trunk out of the spine bore. "
+     f"Evidence: IFE targets about 1,000 g (DT ice extrapolation), mockup < 500 g", (-250, 0, -114), SC['LAUNCHER_COMPARE'].collection, size=6.0)
 for k, z in LZ.items():
     inst(SC['LAUNCHER_COMPARE'], O4['LANE_CORE_LAUNCH'], (0, 0, z), f'LCMP_CORE_{k}')
     inst(SC['LAUNCHER_COMPARE'], O4[f'LAUNCH_{k}'], (0, 0, z), f'LCMP_{k}')
@@ -1154,11 +1301,11 @@ for k, z in LZ.items():
     body = (f"{o['name']}  |  {o['status']}  |  accelerator {o['accelerator_m']:.0f} m, {o['exit_speed_m_s']/1e3:.2f} km/s, {o['accel_g']:,.0f} g, "
             f"shell {o['shell_stress_MPa']:.1f} MPa (margin {o['stress_margin'][0]:.2f}-{o['stress_margin'][1]:.2f}), {o['targets_in_barrel']:.1f} in barrel, "
             f"{o['electric_W']/1e6:.0f} MWe")
-    text(f'lcmp_{k}', body, (-250, 0, z+9), SC['LAUNCHER_COMPARE'].collection, size=3.2)
+    text(f'lcmp_{k}', body, (-250, 0, z+10), SC['LAUNCHER_COMPARE'].collection, size=6.0)
 text('lcmp_title', 'TARGET INJECTION (ISS-009): REV1 vs A axial vs B shielded snout (preferred) vs C offset. Red-violet = open line of sight to the burn, '
-     'yellow = protected run behind the chopper', (-250, 0, 108), SC['LAUNCHER_COMPARE'].collection, size=3.6)
+     'yellow = protected run behind the chopper', (-250, 0, 130), SC['LAUNCHER_COMPARE'].collection, size=7.0)
 text('lcmp_rule', f"rule: any target in line of sight at a pulse instant is destroyed ({REV2['launcher']['xray_per_pulse_J']/1e9:.1f} GJ X-ray per pulse, "
-     f"every {1e3*REV2['launcher']['pulse_interval_s']:.2f} ms), so v >= open length x {REV2['launcher']['pulse_Hz']:.0f} Hz", (-250, 0, 102), SC['LAUNCHER_COMPARE'].collection, size=3.0)
+     f"every {1e3*REV2['launcher']['pulse_interval_s']:.2f} ms), so v >= open length x {REV2['launcher']['pulse_Hz']:.0f} Hz", (-250, 0, 120), SC['LAUNCHER_COMPARE'].collection, size=6.0)
 
 # thermal: calculated (Rev 1, canon blades kept) at X 0, preferred graded (canon blades retired) at X +1,000 m
 inst(SC['THERMAL_COMPARE'], ASM['V4_CALC'], (0, 0, 0), 'TCMP_CALC')
@@ -1181,8 +1328,8 @@ for k, x, body in (('P0', 0.0, 'P0 Rev 1: warm screen only, struts unsized'),
                    ('P1', 120.0, f"P1 sacrificial shoe {CO['coil_armour_total_kg']/1e3:.0f} t; struts sized for 1.9 GN ({S1[1]['mass_kg']/1e3:.0f} t)"),
                    ('P2', 240.0, f"P2 PREFERRED: 12 replaceable segments/coil on stand-offs + warm screen; same {CO['coil_xray_total_W']/1e9:.1f} GW intercepted")):
     text(f'ccmp_{k}', body, (x-225, 0, 58), SC['COIL_COMPARE'].collection, size=2.6)
-text('ccmp_rule', f"X-ray onto C1+C2 is fixed by their solid angle: {CO['coil_xray_total_W']/1e9:.1f} GW in every option, unbooked "
-     f"(+{CO['extra_hot_area_m2']:,.0f} m2 hot radiator); hoop 3-7 GN and 855-1,281 t coil structure unbooked (T03)", (-225, 0, 66), SC['COIL_COMPARE'].collection, size=3.4)
+text('ccmp_rule', f"X-ray onto C1+C2 is fixed by their solid angle, the same in every option and unbooked: 11.9 GW on T03 geometry (T00), "
+     f"{CO['coil_xray_total_W']/1e9:.1f} GW upper case as drawn (C2 envelope); hoop 3-7 GN and 855-1,281 t coil structure unbooked (T03)", (-225, 0, 66), SC['COIL_COMPARE'].collection, size=3.4)
 
 # skirts: A full (3 penetrations), B2 dock-clear (preferred), B short, C none; same ship core in each lane
 SKCORE = bpy.data.collections.new('LANE_CORE_SKIRT')
@@ -1198,6 +1345,24 @@ for k, z in (('A_FULL', 150.0), ('B2_DOCK_CLEAR', 50.0), ('B_SHORT', -50.0), ('C
     text(f'scmp_{k}', body, (-170, 0, z+38), SC['SKIRT_COMPARE'].collection, size=6)
 text('scmp_title', 'DUST PROTECTION WHILE BRAKING (dust arrives along -X; shadow = cylinder of the skirt edge radius). Docking corridors and EVA route drawn',
      (-170, 0, 205), SC['SKIRT_COMPARE'].collection, size=7)
+
+# ---- Rev 3 structure lanes: side view (lanes in Z) and end view (lanes in Y); tanks as ghosts ----
+SLANES = [('S1', ['STRUCT_S1']), ('S2', ['STRUCT_S2', 'CORR_K2']), ('S3', ['STRUCT_S3']), ('S4', ['STRUCT_S4']), ('S5', ['STRUCT_S2', 'STRUCT_S3', 'CORR_K2'])]
+for i, (k, parts) in enumerate(SLANES):
+    z = 200.0-100.0*i; y = -240.0+120.0*i
+    for sc_, loc in (('STRUCTURE_COMPARE', (0, 0, z)), ('STRUCTURE_SECTION', (0, y, 0))):
+        inst(SC[sc_], O4['LANE_CORE_TB'], loc, f'{sc_[:5]}_CORE_{k}')
+        for pp in parts:
+            inst(SC[sc_], O4[pp], loc, f'{sc_[:5]}_{k}_{pp}')
+    key = {'S1': 'S1_SPINE_ONLY', 'S2': 'S2_CANON_SECTORS', 'S3': 'S3_OUTER_CAGE', 'S4': 'S4_SECTORS_PLUS_BELT', 'S5': 'S5_SECTORS_PLUS_OUTER_STIFFENERS'}[k]
+    o = SO3[key]
+    body = (f"{key}: {o['structure_kg']/1e3:,.0f} t (strength), {o['structure_stiff_kg']/1e3:,.0f} t for f1 >= {REV3['f_target_Hz']} Hz; "
+            f"f1 {o['f_bending_Hz']['full']:.3f} Hz full / {o['f_bending_Hz']['dry']:.3f} dry; axial {o['f_axial_Hz']['full']:.2f} Hz; {o['canon_rule'].split(' (')[0]}")
+    text(f'scmp3_{k}', body, (100, 0, z+40), SC['STRUCTURE_COMPARE'].collection, size=7)
+    text(f'ssec3_{k}', k, (60, y, 48), SC['STRUCTURE_SECTION'].collection, size=12, facing='end')
+text('scmp3_title', f"T-B STRETCH STRUCTURE (ISS-013): X {ST3['x_m'][0]:.2f}-{ST3['x_m'][1]:.2f} m, {ST3['propellant_kg']/1e6:,.1f} kt propellant + "
+     f"{ST3['tank_kg']/1e6:.1f} kt tanks + bow {ST3['bow_kg_PROTOTYPE']/1e3:.0f} t; root axial {REV3['loads']['root_axial_design_N']/1e6:.2f} MN design, slosh "
+     f"{REV3['dynamics']['slosh_Hz']['outer'][0]:.3f}-{REV3['dynamics']['slosh_Hz']['inner'][1]:.3f} Hz, ring spin 0.067 Hz", (100, 0, 262), SC['STRUCTURE_COMPARE'].collection, size=8)
 
 # human scale: a 1.75 m figure at the shield-face rail and one at a wing-root crossing (instances of canon figures if present)
 HUM = bpy.data.collections.new('VAR_VERTEX_V4_HUMAN_SCALE')
@@ -1268,7 +1433,7 @@ CAMS = {
     'CAM_VTX_16_CANON': (camera('CAM_VTX_16_CANON', (-260, -420, 200), (0, 0, 0), lens=35), ['CANON_WAYFARER']),
     'CAM_VTX_17_V4_WHOLE': (camera('CAM_VTX_17_V4_WHOLE', (-9000, -16000, 8000), (0, 0, 0), lens=35, clip=120000), ['VERTEX_V4']),
     # Rev 2
-    'CAM_VTX_20_LAUNCHER_COMPARE': (camera('CAM_VTX_20_LAUNCHER_COMPARE', (-80, -3000, 15), (-80, 0, 15), ortho=350), ['LAUNCHER_COMPARE']),
+    'CAM_VTX_20_LAUNCHER_COMPARE': (camera('CAM_VTX_20_LAUNCHER_COMPARE', (80, -3000, -10), (80, 0, -10), ortho=680), ['LAUNCHER_COMPARE']),
     'CAM_VTX_21_SNOUT_CUTAWAY': (camera('CAM_VTX_21_SNOUT_CUTAWAY', (xSA-55, -75, 28), (xSA-15, 0, 0), lens=28), ['VERTEX_CUTAWAY']),
     'CAM_VTX_22_BREECH_DETAIL': (camera('CAM_VTX_22_BREECH_DETAIL', (80, -3000, -25), (80, 0, -25), ortho=44), ['LAUNCHER_COMPARE']),
     'CAM_VTX_23_THERMAL_TOP': (camera('CAM_VTX_23_THERMAL_TOP', (480, 560, 9000), (480, 560, 0), ortho=2500, top=True), ['THERMAL_COMPARE']),
@@ -1280,8 +1445,15 @@ CAMS = {
     'CAM_VTX_29_DOCK_SKIRT': (camera('CAM_VTX_29_DOCK_SKIRT', (118, -170, -25), (122, 0, 0), lens=30), ['VERTEX_V4']),
     'CAM_VTX_30_V4_SIDE_TRUE_SCALE': (camera('CAM_VTX_30_V4_SIDE_TRUE_SCALE', (37, -6000, 0), (37, 0, 0), ortho=830), ['VERTEX_V4']),
     'CAM_VTX_31_SPINE_STRETCH': (camera('CAM_VTX_31_SPINE_STRETCH', (270, -3000, 0), (270, 0, 0), ortho=360), ['VERTEX_V4']),
+    # Rev 3
+    'CAM_VTX_32_STRUCTURE_COMPARE': (camera('CAM_VTX_32_STRUCTURE_COMPARE', (285, -4000, 25), (285, 0, 25), ortho=820), ['STRUCTURE_COMPARE']),
+    'CAM_VTX_33_STRUCTURE_SECTION': (camera('CAM_VTX_33_STRUCTURE_SECTION', (-900, 0, 0), (0, 0, 0), ortho=640, up='Z'), ['STRUCTURE_SECTION']),
+    'CAM_VTX_34_ROOT_JOINT_CORRIDOR': (camera('CAM_VTX_34_ROOT_JOINT_CORRIDOR', (152, -13, 7), (136, 2, 1), lens=22), ['VERTEX_V4']),
+    'CAM_VTX_35_BOW_JOINT': (camera('CAM_VTX_35_BOW_JOINT', (385, -70, 40), (414, 0, 0), lens=28), ['VERTEX_V4']),
+    'CAM_VTX_36_COIL_COOLING': (camera('CAM_VTX_36_COIL_COOLING', (-150, -110, 75), (-185, 0, 0), lens=30), ['VERTEX_V4']),
 }
 CAMS['CAM_VTX_09_RADIATOR_ALTS_END'][0].rotation_euler = (math.radians(90), 0, math.radians(-90))
+CAMS['CAM_VTX_33_STRUCTURE_SECTION'][0].rotation_euler = (math.radians(90), 0, math.radians(-90))
 for name, (ob, names) in CAMS.items():
     ob['render_scenes'] = [n for n in names if n in bpy.data.scenes]
     for n in ob['render_scenes']:
@@ -1290,7 +1462,7 @@ DEFAULT = {'COMPARE_SIDE_BY_SIDE': 'CAM_VTX_01_SIDE_COMPARE', 'COMPARE_TOP': 'CA
            'VERTEX_V4': 'CAM_VTX_06_AFT_ASSEMBLY', 'VERTEX_CUTAWAY': 'CAM_VTX_07_CUTAWAY', 'BRAKING_EXPOSURE': 'CAM_VTX_08_BRAKING_EXPOSURE',
            'RADIATOR_ALTERNATIVES': 'CAM_VTX_09_RADIATOR_ALTS_END', 'VERTEX_V0': 'CAM_VTX_15_V0_WHOLE', 'CANON_WAYFARER': 'CAM_VTX_16_CANON',
            'LAUNCHER_COMPARE': 'CAM_VTX_20_LAUNCHER_COMPARE', 'THERMAL_COMPARE': 'CAM_VTX_23_THERMAL_TOP', 'COIL_COMPARE': 'CAM_VTX_26_COIL_COMPARE',
-           'SKIRT_COMPARE': 'CAM_VTX_28_SKIRT_COMPARE'}
+           'SKIRT_COMPARE': 'CAM_VTX_28_SKIRT_COMPARE', 'STRUCTURE_COMPARE': 'CAM_VTX_32_STRUCTURE_COMPARE', 'STRUCTURE_SECTION': 'CAM_VTX_33_STRUCTURE_SECTION'}
 for sc, cam in DEFAULT.items():
     SC[sc].camera = CAMS[cam][0]
 
@@ -1303,7 +1475,8 @@ RENDER_HIDE = {'CAM_VTX_02_TOP_COMPARE': WING+PLUME, 'CAM_VTX_01_SIDE_COMPARE': 
                'CAM_VTX_11_MAINTENANCE': PLUME+('_LBL_',),
                'CAM_VTX_27_COIL_THREEQ': PLUME, 'CAM_VTX_28_SKIRT_COMPARE': PLUME, 'CAM_VTX_29_DOCK_SKIRT': PLUME, 'CAM_VTX_30_V4_SIDE_TRUE_SCALE': PLUME,
                'CAM_VTX_31_SPINE_STRETCH': PLUME+('_PP_TB_', '_LBL_'), 'CAM_VTX_21_SNOUT_CUTAWAY': PLUME+('_LBL_', '_XRAY_Fan', 'StandOff'), 'CAM_VTX_23_THERMAL_TOP': PLUME, 'CAM_VTX_24_RING_CALC': PLUME,
-               'CAM_VTX_25_RING_GRADED': PLUME, 'CAM_VTX_07b_MODULE_CUTAWAY': ('_LBL_',), 'CAM_VTX_08_BRAKING_EXPOSURE': ('_Exhaust_', '_KeepOut_Plume')}
+               'CAM_VTX_25_RING_GRADED': PLUME,
+               'CAM_VTX_34_ROOT_JOINT_CORRIDOR': PLUME+('_PP_TB_', '_LBL_'), 'CAM_VTX_35_BOW_JOINT': PLUME+('_PP_TB_', '_LBL_'), 'CAM_VTX_36_COIL_COOLING': PLUME+('_LBL_',), 'CAM_VTX_07b_MODULE_CUTAWAY': ('_LBL_',), 'CAM_VTX_08_BRAKING_EXPOSURE': ('_Exhaust_', '_KeepOut_Plume')}
 
 # ----------------------------------------------------------------------------------------------------------------------------------
 # checks, texts

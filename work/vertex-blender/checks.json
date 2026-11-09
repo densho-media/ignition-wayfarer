@@ -220,11 +220,15 @@
     "WINGS_PREF",
     "COIL_P2",
     "COIL_SUP_SIZED",
-    "SPINE_EXT",
+    "COIL_COOLING",
+    "STRUCT_S2",
+    "STRUCT_S3",
+    "CORR_K2",
     "DOCK_ROUTES",
     "B2_DOCK_CLEAR"
    ],
-   "canon_hot_blades_shown": false
+   "canon_hot_blades_shown": false,
+   "note": "V4 Rev 3: STRUCT_S2 + STRUCT_S3 together = S5 (canon sectors + outer stiffeners)"
   },
   "V0": {
    "options": [
@@ -235,7 +239,8 @@
     "DOCK_ROUTES",
     "A_FULL"
    ],
-   "canon_hot_blades_shown": true
+   "canon_hot_blades_shown": true,
+   "note": ""
   }
  },
  "canon_unchanged": {
@@ -243,22 +248,22 @@
   "identical_to_append": true
  },
  "objects": {
-  "var_objects": 1705,
+  "var_objects": 2346,
   "missing_properties": [],
   "by_status": {
-   "CONCEPTUAL_ILLUSTRATION": 332,
+   "CONCEPTUAL_ILLUSTRATION": 469,
    "ENGINEERING_SUPPORTED": 346,
    "PARAMETRIC_PLACEHOLDER": 634,
-   "PROTOTYPE": 393
+   "PROTOTYPE": 897
   },
   "by_generation": {
-   "ALL": 56,
+   "ALL": 68,
    "V0": 439,
-   "V4": 1201,
+   "V4": 1830,
    "V5": 9
   }
  },
- "revision": 2,
+ "revision": 3,
  "rev2": {
   "source": "rev2.json (work/vertex-blender/rev2.py) plus the placements built here",
   "assemblies": {
@@ -268,11 +273,15 @@
      "WINGS_PREF",
      "COIL_P2",
      "COIL_SUP_SIZED",
-     "SPINE_EXT",
+     "COIL_COOLING",
+     "STRUCT_S2",
+     "STRUCT_S3",
+     "CORR_K2",
      "DOCK_ROUTES",
      "B2_DOCK_CLEAR"
     ],
-    "canon_hot_blades_shown": false
+    "canon_hot_blades_shown": false,
+    "note": "V4 Rev 3: STRUCT_S2 + STRUCT_S3 together = S5 (canon sectors + outer stiffeners)"
    },
    "V0": {
     "options": [
@@ -283,7 +292,8 @@
      "DOCK_ROUTES",
      "A_FULL"
     ],
-    "canon_hot_blades_shown": true
+    "canon_hot_blades_shown": true,
+    "note": ""
    }
   },
   "launcher_B_breech_plug_fwd_end_to_crew_trunk_m": 4.619910195262094,

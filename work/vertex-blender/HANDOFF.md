@@ -114,3 +114,9 @@ See `REV2_REPORT.md` and the Revision 2 register in `ISSUES.md`. Preferred layou
 bore, 45 m open flight, 8.8 km/s, 13,700 g, chopper at a shielded snout tip), graded wings with the canon blades retired in V4, coil
 armour P2 with sized C1 struts, skirt B2. Open for T04: target acceleration tolerance; for T03: the coils' 30 GW X-ray; for T00: the
 spine continuation across the T-B stretch (ISS-013) and bow access (ISS-015).
+
+## L. Revision 3 (2026-11-09)
+
+See `REV3_REPORT.md` (section 6 is the prioritised blocker list) and the Revision 3 register in `ISSUES.md`. Preferred stretch
+structure S5 (canon r 5 m sectors + outer stiffening longerons, about 1.2 kt, f1 0.2 Hz full), corridor K2, coil cooling lines.
+Gates: target survival (T04), X-ray spectrum on solid faces (T04/T02), coil 30 GW booking (T00/T03).

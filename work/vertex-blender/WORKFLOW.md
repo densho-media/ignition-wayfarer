@@ -62,3 +62,10 @@ takes under 1 s per generation). The review file is a product of the commit plus
   ones; `ASM_V4_REV1_LAYOUT` keeps the Rev 1 layout. To swap an option, unlink it from `ASM_V4` and link another (scene
   `OPTIONS_LIBRARY` holds them all). The canon 1,800 K blade sections go to `WORK_VERTEX_<g>_CANON_HOT_BLADES` (V0 and the Rev 1
   layout show them; preferred V4 does not).
+
+## Stage B as built (revision 3)
+
+- `python3 work/vertex-blender/rev3.py` writes `rev3.json` (stretch loads, five structure layouts with strength, buckling and
+  bending/axial modes, corridors, target and snout screening, coil cooling). `build_vertex.py` reads it after `rev2.json`.
+- New option collections: `OPT_VERTEX_V4_STRUCT_S1..S4` (S5 = S2 + S3 linked together), `CORR_K1`, `CORR_K2`, `LAUNCH_B_LONG`,
+  `COIL_COOLING`, `LANE_CORE_TB` (ghost tanks). Scenes `STRUCTURE_COMPARE` (side lanes) and `STRUCTURE_SECTION` (end view).

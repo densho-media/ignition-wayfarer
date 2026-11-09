@@ -1,0 +1,679 @@
+{
+ "stretch": {
+  "x_m": [
+   140.75,
+   416.15
+  ],
+  "length_m": 275.4,
+  "bays": 9,
+  "bay_pitch_m": 30.599999999999998,
+  "vessels": 110,
+  "propellant_kg": 25071949.10179738,
+  "tank_kg": 2391974.0509631666,
+  "bow_kg_PROTOTYPE": 300000.0,
+  "forward_kg_full": 27763923.152760547,
+  "bay_masses": [
+   {
+    "x_m": 154.15,
+    "propellant_kg": 3193517.314403067,
+    "tank_kg": 281259.3893381007,
+    "vessels": 13,
+    "outer_kg": 1994997.68740952,
+    "inner_kg": 1780640.2082845399,
+    "vessel_max_kg": 408695.1556172817
+   },
+   {
+    "x_m": 184.75,
+    "propellant_kg": 3193517.314403067,
+    "tank_kg": 281259.3893381007,
+    "vessels": 13,
+    "outer_kg": 1994997.68740952,
+    "inner_kg": 1780640.2082845399,
+    "vessel_max_kg": 408695.1556172817
+   },
+   {
+    "x_m": 215.35,
+    "propellant_kg": 3193517.314403067,
+    "tank_kg": 281259.3893381007,
+    "vessels": 13,
+    "outer_kg": 1994997.68740952,
+    "inner_kg": 1780640.2082845399,
+    "vessel_max_kg": 408695.1556172817
+   },
+   {
+    "x_m": 245.95,
+    "propellant_kg": 3193517.314403067,
+    "tank_kg": 281259.3893381007,
+    "vessels": 13,
+    "outer_kg": 1994997.68740952,
+    "inner_kg": 1780640.2082845399,
+    "vessel_max_kg": 408695.1556172817
+   },
+   {
+    "x_m": 276.55,
+    "propellant_kg": 3193517.314403067,
+    "tank_kg": 281259.3893381007,
+    "vessels": 13,
+    "outer_kg": 1994997.68740952,
+    "inner_kg": 1780640.2082845399,
+    "vessel_max_kg": 408695.1556172817
+   },
+   {
+    "x_m": 307.15,
+    "propellant_kg": 3193517.314403067,
+    "tank_kg": 281259.3893381007,
+    "vessels": 13,
+    "outer_kg": 1994997.68740952,
+    "inner_kg": 1780640.2082845399,
+    "vessel_max_kg": 408695.1556172817
+   },
+   {
+    "x_m": 337.75,
+    "propellant_kg": 2672852.2484889682,
+    "tank_kg": 281259.3893381007,
+    "vessels": 13,
+    "outer_kg": 1994997.68740952,
+    "inner_kg": 1210923.2986141378,
+    "vessel_max_kg": 408695.1556172817
+   },
+   {
+    "x_m": 368.35,
+    "propellant_kg": 2152187.1825748687,
+    "tank_kg": 281259.3893381007,
+    "vessels": 13,
+    "outer_kg": 1994997.68740952,
+    "inner_kg": 641206.3889437359,
+    "vessel_max_kg": 204444.00903022676
+   },
+   {
+    "x_m": 398.95,
+    "propellant_kg": 1085805.7843151398,
+    "tank_kg": 141898.9362583614,
+    "vessels": 6,
+    "outer_kg": 1329998.4582730134,
+    "inner_kg": 0.0,
+    "vessel_max_kg": 204617.45342891684
+   }
+  ]
+ },
+ "loads": {
+  "thrust_N": 2902071.5531882183,
+  "root_axial_by_burn": [
+   {
+    "burn_start_t": 42915.783853018824,
+    "when": "start",
+    "ship_kg": 42915783.85301882,
+    "forward_kg": 27763923.152760547,
+    "accel_g": 0.006895573489099627,
+    "root_axial_N": 1877465.220313398
+   },
+   {
+    "burn_start_t": 42915.783853018824,
+    "when": "end",
+    "ship_kg": 33429136.897120334,
+    "forward_kg": 18992415.307220664,
+    "accel_g": 0.008852425424908246,
+    "root_axial_N": 1648781.6708833277
+   },
+   {
+    "burn_start_t": 33429.136897120334,
+    "when": "start",
+    "ship_kg": 33429136.897120334,
+    "forward_kg": 18992415.307220664,
+    "accel_g": 0.008852425424908246,
+    "root_axial_N": 1648781.6708833277
+   },
+   {
+    "burn_start_t": 33429.136897120334,
+    "when": "end",
+    "ship_kg": 26039538.21544386,
+    "forward_kg": 12159872.353631068,
+    "accel_g": 0.01136460020728375,
+    "root_axial_N": 1355201.4385164112
+   },
+   {
+    "burn_start_t": 26039.53821544386,
+    "when": "start",
+    "ship_kg": 26039538.21544386,
+    "forward_kg": 12159872.353631068,
+    "accel_g": 0.01136460020728375,
+    "root_axial_N": 1355201.4385164112
+   },
+   {
+    "burn_start_t": 26039.53821544386,
+    "when": "end",
+    "ship_kg": 20283429.76847753,
+    "forward_kg": 6837681.000135967,
+    "accel_g": 0.014589689454823342,
+    "root_axial_N": 978307.896976518
+   },
+   {
+    "burn_start_t": 20283.429768477534,
+    "when": "start",
+    "ship_kg": 20283429.768477533,
+    "forward_kg": 6837681.000135967,
+    "accel_g": 0.014589689454823338,
+    "root_axial_N": 978307.8969765177
+   },
+   {
+    "burn_start_t": 20283.429768477534,
+    "when": "end",
+    "ship_kg": 15799724.241221445,
+    "forward_kg": 2691974.0509631685,
+    "accel_g": 0.018730006731935773,
+    "root_axial_N": 494458.08015046146
+   }
+  ],
+  "root_axial_peak_N": 1877465.220313398,
+  "DAF": 2.0,
+  "root_axial_design_N": 3754930.440626796,
+  "lateral_g": 0.002,
+  "root_shear_N": 544542.1539720384,
+  "root_moment_N_m": 66899404.0078721,
+  "canon_1p5g_ceiling_root_axial_N": 408406615.47902876,
+  "slew_0p1deg_s_bow_g": 0.0013107430188469761
+ },
+ "options_operational": {
+  "S1_SPINE_ONLY": {
+   "members": "one tube r 0.95 m, wall 714 mm",
+   "governs": "global buckling",
+   "EI_N_m2": 230844754042.44223,
+   "EA_N": 511567321977.7113,
+   "structure_kg": 2195467.8973656446,
+   "canon_rule": "VIOLATES forward_defense.shield_load_path (hub alone forbidden; three primary sectors required)",
+   "EI_required_N_m2": 80160535442985.98,
+   "stiffness_add_kg": 691070777.2252924,
+   "stiffness_note": "needs a 248.0 m wall on r 0.95 m: infeasible",
+   "structure_stiff_kg": 693266245.1226581,
+   "f_bending_Hz": {
+    "full": 0.010732717437577137,
+    "dry": 0.02465795931978102
+   },
+   "f_axial_Hz": {
+    "full": 2.1492049910532436,
+    "dry": 5.071836198131244
+   }
+  },
+  "S2_CANON_SECTORS": {
+   "members": "spine r 0.95 m x 6 mm; three keels r 0.39 m x 20 mm at r 5 m (az 30/150/270); frames every 7.6 m; tank arms r 0.16 m",
+   "keel": {
+    "r_m": 0.3914157237254803,
+    "t_m": 0.019570786186274017,
+    "area_m2": 0.04813116884817109,
+    "governs": "stress",
+    "kg_per_m": 81.82298704189085
+   },
+   "keel_force_N": 11551480.523561062,
+   "frame_pitch_m": 7.6499999999999995,
+   "global_buckling_N": 7109223.140204978,
+   "global_margin": 0.9466517759272077,
+   "EI_N_m2": 218529596377.75745,
+   "EA_N": 21624919535.45243,
+   "structure_kg": 319033.24532292836,
+   "mass_split_kg": {
+    "keels_and_lacing": 87882.79746221329,
+    "frames_and_tank_arms": 185379.95388507325,
+    "spine": 16767.47167355743,
+    "joints_10pct": 29003.022302084395
+   },
+   "canon_rule": "MEETS forward_defense.shield_load_path (hub + three primary sectors carried to the Brow)",
+   "EI_required_N_m2": 75297770153215.38,
+   "stiffness_add_kg": 11170079.188172745,
+   "stiffness_member_area_m2_each": 5.561425226432417,
+   "stiffness_member_r_m_each_at_t_over_r_0p05": 4.2074417771911765,
+   "structure_stiff_kg": 11489112.433495672,
+   "f_bending_Hz": {
+    "full": 0.010774424191297175,
+    "dry": 0.02909784283531382
+   },
+   "f_axial_Hz": {
+    "full": 0.45610421400348,
+    "dry": 1.2854697410558509
+   }
+  },
+  "S3_OUTER_CAGE": {
+   "members": "six longerons r 0.25 m at r 34.8 m; 18 ring frames with 12 spokes",
+   "longeron": {
+    "r_m": 0.2512419408633828,
+    "t_m": 0.012562097043169141,
+    "area_m2": 0.019830522264191595,
+    "governs": "buckling",
+    "kg_per_m": 33.71188784912571
+   },
+   "EI_N_m2": 8647539382378.558,
+   "EA_N": 18575674780.328785,
+   "global_buckling_N": 281322475.77471316,
+   "structure_kg": 771379.728874427,
+   "conflicts": [
+    "longerons (outer face r 35.05 m) 0.95 m inside the skirt B2 shadow (r 36.0 m): a 0.2 deg attitude error exposes them",
+    "blocks radial tank exchange and EVA access between frames",
+    "canon shield load path wants the sectors at r 5 m: needs a second transfer to the Brow keels"
+   ],
+   "canon_rule": "PARTLY: carries the Brow rim, not the three r 5 m sectors",
+   "EI_required_N_m2": 76470022422576.02,
+   "stiffness_add_kg": 104150.55575959575,
+   "stiffness_member_area_m2_each": 0.02592754797842774,
+   "stiffness_member_r_m_each_at_t_over_r_0p05": 0.28728026117431227,
+   "structure_stiff_kg": 875530.2846340227,
+   "f_bending_Hz": {
+    "full": 0.06725594219902883,
+    "dry": 0.17345939441523556
+   },
+   "f_axial_Hz": {
+    "full": 0.4194317687626658,
+    "dry": 1.1231267531675517
+   }
+  },
+  "S4_SECTORS_PLUS_BELT": {
+   "members": "S2 plus three belt keels r 0.22 m at r 20.1 m (az 90/210/330) between the tank rings, frames tie both",
+   "belt_keel": {
+    "r_m": 0.22109869871584542,
+    "t_m": 0.011054934935792272,
+    "area_m2": 0.015357560885059794,
+    "governs": "buckling",
+    "kg_per_m": 26.10785350460165
+   },
+   "EI_N_m2": 1333419730987.9114,
+   "EA_N": 27153641454.07396,
+   "global_buckling_N": 43378922.41725668,
+   "structure_kg": 400858.2738899912,
+   "canon_rule": "MEETS (keeps the three r 5 m sectors; the belt is added)",
+   "conflicts": [
+    "belt keels sit in a 1.75 m radial gap between the tank rings: tank exchange must be axial or outward"
+   ],
+   "EI_required_N_m2": 75509819055806.92,
+   "stiffness_add_kg": 682888.8516143449,
+   "stiffness_member_area_m2_each": 0.34000074862842133,
+   "stiffness_member_r_m_each_at_t_over_r_0p05": 1.040315334878403,
+   "structure_stiff_kg": 1083747.125504336,
+   "f_bending_Hz": {
+    "full": 0.026577352678803626,
+    "dry": 0.07114988729119587
+   },
+   "f_axial_Hz": {
+    "full": 0.5103666545303099,
+    "dry": 1.4244035134898931
+   }
+  },
+  "S5_SECTORS_PLUS_OUTER_STIFFENERS": {
+   "members": "S2 (spine + three r 5 m sector keels) plus the S3 ring frames and six outer longerons at r 34.8 m, tied by the same bay frames and carried into the Brow outer truss ring",
+   "EI_N_m2": 8864129642195.326,
+   "EA_N": 35902895565.67038,
+   "structure_kg": 1071968.7553564422,
+   "canon_rule": "MEETS (hub + three r 5 m sectors; the outer ring echoes the Q45 bypass collar radius)",
+   "conflicts": [
+    "as S3: outer longerons 0.95 m inside the skirt B2 shadow; tank access between frames only"
+   ],
+   "EI_required_N_m2": 77248996464049.55,
+   "stiffness_add_kg": 105014.17178755833,
+   "stiffness_member_area_m2_each": 0.026142539111567956,
+   "stiffness_member_r_m_each_at_t_over_r_0p05": 0.2884688657231226,
+   "structure_stiff_kg": 1176982.9271440005,
+   "f_bending_Hz": {
+    "full": 0.06774880233409836,
+    "dry": 0.1699546334006506
+   },
+   "f_axial_Hz": {
+    "full": 0.5801294719358124,
+    "dry": 1.5066903401718317
+   }
+  }
+ },
+ "options_canon_1p5g": {
+  "S1_SPINE_ONLY": {
+   "structure_kg": 238791004.92905256,
+   "members": "one tube r 0.95 m, wall 77680 mm"
+  },
+  "S2_CANON_SECTORS": {
+   "structure_kg": 1447838.4579847164,
+   "members": "spine r 0.95 m x 6 mm; three keels r 1.39 m x 70 mm at r 5 m (az 30/150/270); frames every 7.6 m; tank arms r 0.16 m"
+  },
+  "S3_OUTER_CAGE": {
+   "structure_kg": 1841726.0234058022,
+   "members": "six longerons r 0.95 m at r 34.8 m; 18 ring frames with 12 spokes"
+  },
+  "S4_SECTORS_PLUS_BELT": {
+   "structure_kg": 2088650.2754448997,
+   "members": "S2 plus three belt keels r 0.97 m at r 20.1 m (az 90/210/330) between the tank rings, frames tie both"
+  },
+  "S5_SECTORS_PLUS_OUTER_STIFFENERS": {
+   "structure_kg": 3271120.262549605,
+   "members": "S2 (spine + three r 5 m sector keels) plus the S3 ring frames and six outer longerons at r 34.8 m, tied by the same bay frames and carried into the Brow outer truss ring"
+  }
+ },
+ "options_lateral_0p01g": {
+  "S1_SPINE_ONLY": {
+   "structure_kg": 2195467.8973656446,
+   "members": "one tube r 0.95 m, wall 714 mm"
+  },
+  "S2_CANON_SECTORS": {
+   "structure_kg": 663818.9513703253,
+   "members": "spine r 0.95 m x 6 mm; three keels r 0.84 m x 42 mm at r 5 m (az 30/150/270); frames every 7.6 m; tank arms r 0.16 m"
+  },
+  "S3_OUTER_CAGE": {
+   "structure_kg": 830236.8437344027,
+   "members": "six longerons r 0.33 m at r 34.8 m; 18 ring frames with 12 spokes"
+  },
+  "S4_SECTORS_PLUS_BELT": {
+   "structure_kg": 820997.7563500226,
+   "members": "S2 plus three belt keels r 0.41 m at r 20.1 m (az 90/210/330) between the tank rings, frames tie both"
+  },
+  "S5_SECTORS_PLUS_OUTER_STIFFENERS": {
+   "structure_kg": 1475611.576263815,
+   "members": "S2 (spine + three r 5 m sector keels) plus the S3 ring frames and six outer longerons at r 34.8 m, tied by the same bay frames and carried into the Brow outer truss ring"
+  }
+ },
+ "f_target_Hz": 0.2,
+ "lateral_sensitivity_g": 0.01,
+ "dynamics": {
+  "pulse_Hz": 195.73784854631526,
+  "ring_spin_Hz": 0.06666666666666667,
+  "slosh_Hz": {
+   "outer": [
+    0.022111219812142747,
+    0.03644151913653015
+   ],
+   "inner": [
+    0.024054387794042804,
+    0.03964405584863936
+   ]
+  },
+  "requirement": "bending mode above 3x the highest slosh and ring-spin frequency, below the pulse rate by >100x (quasi-static); local frame and tank-saddle modes must avoid 195.7 Hz and its harmonics",
+  "pulse_ripple_transmissibility_at_f1": 5.4297634117312e-06
+ },
+ "joints": [
+  {
+   "id": "J1",
+   "x_m": [
+    137.9,
+    140.75
+   ],
+   "what": "canon spine end and farm-front frame: splice sleeve on the spine, keel shoes on the canon sector rails, a new transfer frame"
+  },
+  {
+   "id": "J2",
+   "x_m": "every 30.6 m",
+   "what": "bay splices on keels and spine (keels in 30.6 m segments for assembly); joint efficiency 0.8 used"
+  },
+  {
+   "id": "J3",
+   "x_m": [
+    413.25,
+    416.15
+   ],
+   "what": "bow interface: spine to the canon shield spine column, keels to the Brow-side sector keels (hub + three sectors)"
+  },
+  {
+   "id": "J4",
+   "x_m": "each tank",
+   "what": "tank saddles: G10/CFRP isolating struts (1.5-20 K tanks on a warm frame), one fixed and one sliding saddle per tank for 0.1 m axial contraction"
+  }
+ ],
+ "corridor": {
+  "K1_TRUNK_IN_SPINE": {
+   "diameter_m": 1.9,
+   "wall_mm": 2.5,
+   "kg_per_m": 117.07222669508286,
+   "mass_kg": 36094.12459199631,
+   "hatches": 10,
+   "hatch_clear_m": 0.75,
+   "transit_min_at_1m_s": 4.6899999999999995,
+   "note": "continues the canon crew trunk (inside the spine bore, X 93.85-134.7 m); 1.65 m clear after service trays; spine becomes a pressure vessel"
+  },
+  "K2_TUBE_BESIDE_SPINE": {
+   "diameter_m": 2.2,
+   "wall_mm": 2.5,
+   "kg_per_m": 131.60994669956963,
+   "mass_kg": 40185.03900125889,
+   "hatches": 10,
+   "hatch_clear_m": 0.75,
+   "transit_min_at_1m_s": 4.6899999999999995,
+   "note": "own 2.2 m pressure tube at r 3 m, az 90 deg, between the keels; spine bore stays free for services (or a longer launcher)",
+   "clearances_m": {
+    "to_keel_30": 2.958898943540674,
+    "to_inner_tank_envelope": 3.6500000000000004
+   }
+  },
+  "K3_ROBOT_RAIL_EVA": {
+   "kg_per_m": 6.0,
+   "mass_kg": 1688.3999999999999,
+   "note": "unpressurised rail on keel 270; crew only in suits; no shirt-sleeve access to the bow",
+   "transit_min_at_1m_s": 4.6899999999999995
+  }
+ },
+ "launcher_target": {
+  "tolerance_evidence_g": {
+   "IFE_DT_ice_extrapolation_g": 1019.7162129779283,
+   "levitated_sabot_mockup_g": 500.0,
+   "MFE_bare_pellet_fracture_g": [
+    509858.1064889642,
+    611829.7277867569
+   ]
+  },
+  "accelerator_vs_tolerance": [
+   {
+    "tolerance_g": 500.0,
+    "open_flight_m": 25.0,
+    "exit_m_s": 4893.446213657881,
+    "accelerator_m": 2441.7936651111904,
+    "tip_flux_MW_m2": 52.439084881861206
+   },
+   {
+    "tolerance_g": 500.0,
+    "open_flight_m": 45.0,
+    "exit_m_s": 8808.203184584187,
+    "accelerator_m": 7911.411474960257,
+    "tip_flux_MW_m2": 16.184902741315184
+   },
+   {
+    "tolerance_g": 1000.0,
+    "open_flight_m": 25.0,
+    "exit_m_s": 4893.446213657881,
+    "accelerator_m": 1220.8968325555952,
+    "tip_flux_MW_m2": 52.439084881861206
+   },
+   {
+    "tolerance_g": 1000.0,
+    "open_flight_m": 45.0,
+    "exit_m_s": 8808.203184584187,
+    "accelerator_m": 3955.7057374801284,
+    "tip_flux_MW_m2": 16.184902741315184
+   },
+   {
+    "tolerance_g": 3000.0,
+    "open_flight_m": 25.0,
+    "exit_m_s": 4893.446213657881,
+    "accelerator_m": 406.9656108518651,
+    "tip_flux_MW_m2": 52.439084881861206
+   },
+   {
+    "tolerance_g": 3000.0,
+    "open_flight_m": 45.0,
+    "exit_m_s": 8808.203184584187,
+    "accelerator_m": 1318.5685791600429,
+    "tip_flux_MW_m2": 16.184902741315184
+   },
+   {
+    "tolerance_g": 6378.0,
+    "open_flight_m": 25.0,
+    "exit_m_s": 4893.446213657881,
+    "accelerator_m": 191.4231471551576,
+    "tip_flux_MW_m2": 52.439084881861206
+   },
+   {
+    "tolerance_g": 6378.0,
+    "open_flight_m": 45.0,
+    "exit_m_s": 8808.203184584187,
+    "accelerator_m": 620.2109967827106,
+    "tip_flux_MW_m2": 16.184902741315184
+   },
+   {
+    "tolerance_g": 13681.0,
+    "open_flight_m": 25.0,
+    "exit_m_s": 4893.446213657881,
+    "accelerator_m": 89.24032106977525,
+    "tip_flux_MW_m2": 52.439084881861206
+   },
+   {
+    "tolerance_g": 13681.0,
+    "open_flight_m": 45.0,
+    "exit_m_s": 8808.203184584187,
+    "accelerator_m": 289.13864026607183,
+    "tip_flux_MW_m2": 16.184902741315184
+   }
+  ],
+  "open_flight_for_289m_m": {
+   "1000.0": 12.166179492629261,
+   "3000.0": 21.07244101523643
+  },
+  "B_long_to_bow": {
+   "accelerator_m": 620.2894753665256,
+   "accel_g": 6377.193059970466,
+   "needs": "crew trunk out of the spine bore (corridor K2) through X 93.85-134.7 m and the stretch; breech at the bow"
+  },
+  "fluence_J_m2_per_pulse": {
+   "shield_face_64.7m": 40000.000000000015,
+   "snout_tip_45m": 82686.62837318116,
+   "snout_tip_25m": 267904.6759291069
+  },
+  "fluence_J_cm2_per_pulse": {
+   "shield_face_64.7m": 4.000000000000002,
+   "snout_tip_45m": 8.268662837318116,
+   "snout_tip_25m": 26.790467592910687
+  },
+  "published_W_single_pulse_J_cm2": {
+   "damage_soft_xray": [
+    0.15,
+    0.21
+   ],
+   "no_roughening": [
+    0.5,
+    0.7
+   ],
+   "HAPL_design": [
+    0.4,
+    1.2
+   ]
+  },
+  "surface_jump_K_by_keV": {
+   "shield_face_64.7m": {
+    "W": {
+     "1": 109850.74626865677,
+     "3": 56716.41791044779,
+     "10": 2746.268656716419,
+     "30": 677.6119402985078,
+     "50": 177.61194029850753,
+     "100": 132.5373134328359
+    },
+    "C": {
+     "1": 5896.000000000003,
+     "3": 239.46666666666678,
+     "10": 6.320000000000004,
+     "30": 0.682666666666667,
+     "50": 0.49866666666666687,
+     "100": 0.40266666666666684
+    }
+   },
+   "snout_tip_45m": {
+    "W": {
+     "1": 227079.6958308259,
+     "3": 117242.23426048075,
+     "10": 5676.992395770647,
+     "30": 1400.7361672173224,
+     "50": 367.1533125525582,
+     "100": 273.9765895350182
+    },
+    "C": {
+     "1": 12188.009022206903,
+     "3": 495.01728186077787,
+     "10": 13.064487282962624,
+     "30": 1.4111851242356253,
+     "50": 1.030826633718992,
+     "100": 0.8323787256233571
+    }
+   },
+   "snout_tip_25m": {
+    "W": {
+     "1": 735738.2144918757,
+     "3": 379864.8390039575,
+     "10": 18393.455362296892,
+     "30": 4538.385181784124,
+     "50": 1189.5767326702883,
+     "100": 887.6841500934588
+    },
+    "C": {
+     "1": 39489.14923195036,
+     "3": 1603.8559932289197,
+     "10": 42.328938796798894,
+     "30": 4.572239802523424,
+     "50": 3.339878293249533,
+     "100": 2.6969070710196763
+    }
+   }
+  },
+  "jump_limit_K_from_600K": {
+   "W": 3095,
+   "C": 3200
+  },
+  "steady_flux_MW_m2": {
+   "shield_face_64.7m": 7.829513941852613,
+   "snout_tip_45m": 16.184902741315188,
+   "snout_tip_25m": 52.43908488186119
+  },
+  "conduction_dT_K_5mm_W_k100": {
+   "shield_face_64.7m": 391.47569709263064,
+   "snout_tip_45m": 809.2451370657595,
+   "snout_tip_25m": 2621.9542440930595
+  },
+  "cycles_per_year": 6177486500.12171,
+  "mu_source": "approximate NIST XCOM mass attenuation (cm2/g); spectrum UNKNOWN (T04)"
+ },
+ "coil_cooling": {
+  "C1": {
+   "xray_W": 10400000000.0,
+   "flux_MW_m2": 7.829513942493929,
+   "passive_one_face_T_K": 3624.5849060573546,
+   "tin_kg_s": 144444.44444444444,
+   "tin_m3_s": 20.664441265299633,
+   "lithium_kg_s": 8253.968253968254,
+   "lithium_m3_s": 17.195767195767196,
+   "armour_dT_5mm_W_K": 391.47569712469647,
+   "back_face_to_warm_screen_W": 24102396.1520516,
+   "warm_screen_to_cold_mass_W_at_1W_m2": 2656.6144658239914,
+   "cold_power_W_at_COP_1_over_60": 159396.86794943947
+  },
+  "C2": {
+   "xray_W": 1600000000.0,
+   "flux_MW_m2": 7.829513942493929,
+   "passive_one_face_T_K": 3624.5849060573546,
+   "tin_kg_s": 22222.222222222223,
+   "tin_m3_s": 3.1791448100460977,
+   "lithium_kg_s": 1269.8412698412699,
+   "lithium_m3_s": 2.6455026455026456,
+   "armour_dT_5mm_W_K": 391.47569712469647,
+   "back_face_to_warm_screen_W": 3708060.946469477,
+   "warm_screen_to_cold_mass_W_at_1W_m2": 408.7099178190756,
+   "cold_power_W_at_COP_1_over_60": 24522.595069144536
+  },
+  "cases_W": {
+   "T03_basis": 11900000000.0,
+   "T00_extrapolated_C1_grows": 15500000000.0,
+   "rev2_upper_case": 30105709663.21528
+  },
+  "cases_hot_area_m2": {
+   "T03_basis": 11106.384364422007,
+   "T00_extrapolated_C1_grows": 14466.29896206228,
+   "rev2_upper_case": 28097.948158265775
+  },
+  "total": {
+   "xray_W": 12000000000.0,
+   "extra_hot_area_m2": 11199.71532546757,
+   "extra_hot_radiator_kg": 22799.572988201362,
+   "share_of_hot_circuit": 0.024261819578592587,
+   "basis": "T00 222dad1 (T03 geometry); upper case 30.1 GW kept",
+   "pump_W_at_1MPa_tin": 23843586.07534573,
+   "neutron_note": "T04 neutron escape 5.5e-6 of fusion power: coil nuclear heating ~ 14 kW total, but T02 puts loop neutron fluence at 3-62x REBCO tolerance and the coils share the per-area dose (lab/variants/vertex-drive/studies/futures/CONVERGENCE.md)",
+   "booking_T00": "T00 222dad1: not booked. plume_on_hardware (478.5 GW) is plasma only; radiation_on_hardware (10.2 GW) covers loops + struts + shield (Omega 0.0248). Booking needs a closure_coils share in a Vertex adapter (X-T06-3)."
+  }
+ }
+}
