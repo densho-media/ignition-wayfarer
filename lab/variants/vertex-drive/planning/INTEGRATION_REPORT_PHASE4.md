@@ -145,7 +145,8 @@ These loads and masses are **unbooked** in the calculator (every mass above is a
 - closure-coil hoop tension 3-7 GN and inter-coil forces 0.2-1.9 GN, with coil structure 855-1,281 t on the virial bound (T03);
 - closure coils raise the hardware solid angle 2.4-3.0× (0.040-0.051 at V1);
   ISS-014 puts their X-ray load at V4 at 11.9 GW (C1 10.4, C2 1.6) on T03's geometry, with a band of 11.9-16 GW
-  (`ISS-014_COIL_RADIATION.md`);
+  (`ISS-014_COIL_RADIATION.md`). Booked as a proxy in case `V4_coil_booking`, it adds +0.7 % to departure
+  (+1.8 % in the 30 GW upper case);
 - skirt 22-90 t (T02);
 - launcher and sabot catcher;
 - tritium store.

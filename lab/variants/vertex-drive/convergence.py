@@ -331,8 +331,20 @@ def tasks(G):
                                             ('warm areal 0.96 kg/m2 (circuit panels, V3 value)', {WAREAL: 0.96})],
               'warm-circuit equivalent temperature and areal mass (VTX-07E, VTX-07B)'),
              ('multi', 'V3_density_scan', V3, [(f'{r:,.0f} g/cm3, coupling 0.5', resolve_kv(r, 0.5)) for r in (1000.0, 2000.0, 3000.0)],
-              'compressed density at coupling 0.5 without the T06 package')]
+              'compressed density at coupling 0.5 without the T06 package'),
+             ('multi', 'V4_coil_booking', V4, [(f'closure-coil share {sh:g} ({lab})', coil_kv(sh)) for sh, lab in
+                                               ((0.029, 'T03 geometry, 11.9 GW'), (0.0377, 'C1 grown with the V4 pulse, 15.5 GW'),
+                                                (0.073, 'T05 Rev 2 upper case, 30.1 GW'))],
+              'ISS-014: closure-coil X-ray interception booked as extra hot-loop heat (PROXY, see coil_kv)')]
     return jobs
+
+
+def coil_kv(share, ptw=0.065, eta_T=0.791, escape=0.01154):
+    """ISS-014 proxy: the closure coils intercept `share` of the escaping X-rays (escape share of fusion from the V4 run). FDP-1's
+    solid angle has no coil term and its geometry is protected, so the same heat is booked through plume_to_hardware, which goes
+    to the same 1,800 K hot loop and scales with fusion power: delta = share * escape / plume share, plume share = (1 - escape)(1 - eta_T).
+    Thrust is unaffected either way (the heat comes out of plume and radiation that leave the ship anyway)."""
+    return {PTW: ptw + share * escape / ((1 - escape) * (1 - eta_T))}
 
 
 def resolve_kv(rho, coupling):

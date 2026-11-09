@@ -55,7 +55,27 @@ The band to keep (EXTRAPOLATION):
   elasticity (not solved). It is listed as an unbooked penalty with the coil structure (855-1,281 t), the skirt, the launcher and the
   tritium store.
 
-## 4. To book it properly (not done; calculator unchanged)
+## 4. Booked (PROXY) in the Vertex adapter, 2026-11-09
 
-Add `closure_coils` to the solid-angle shares in a Vertex adapter, not in FDP-1. Then rerun V4. This is the X-T06-3 extension T06
-proposed. It needs a coil envelope decision from T05: is T03's winding plus armour enough, or is there a thicker cryostat?
+T05 confirmed that it has no physical reason for C2's thicker envelope; its screen script had copied C1's 4.8 m envelope across. T03
+geometry is now the basis for both threads, with 30.1 GW kept only as the upper case.
+
+FDP-1's solid-angle code is protected, so `convergence.py` books the coil heat through `coil_kv()`. It is added to
+`plume_to_hardware`, which goes to the same 1,800 K hot loop and scales with fusion power:
+
+  Δ = share × escape / ((1 − escape)(1 − η_T))
+
+Thrust is unchanged, because the heat comes out of plume and radiation that leave the ship anyway. Case `V4_coil_booking` in
+`results/convergence.json`; full rerun exit 0, every other result unchanged:
+
+| Coil share | Basis | V4 departure | Radiators | Hot area | Wing tip r |
+| --- | --- | --- | --- | --- | --- |
+| 0 (V4 as integrated) | unbooked | 42,916 t | 3,572 t | 0.462 km² | 10,128 m |
+| 0.029 | T03 geometry, 11.9 GW | **43,211 t (+0.7 %)** | 3,620 t | 0.476 km² | 10,218 m |
+| 0.0377 | C1 grown with the V4 pulse, 15.5 GW | 43,301 t (+0.9 %) | 3,634 t | 0.480 km² | 10,246 m |
+| 0.073 | T05 Rev 2 upper case, 30.1 GW | 43,668 t (+1.8 %) | 3,693 t | 0.498 km² | 10,359 m |
+
+**Result: the coil interception is a real load of 12-16 GW but a small mass penalty, under 1 % on the expected basis.** It is not a
+blocker. The penalties that still dominate are the coil structure (855-1,281 t at V1 scale, unbooked) and C1's local flux of
+7.8 MW/m², which needs the pumped loop. The proxy books the heat but not the coil cooling plant's own mass or pumping (about 24 MW,
+T05 Rev 3).

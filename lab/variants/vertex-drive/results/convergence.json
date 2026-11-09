@@ -91,7 +91,7 @@
    },
    "gain_threshold": 1256.5678205921029,
    "nozzle_efficiency_threshold": 0.5751953125,
-   "secs": 263.2
+   "secs": 148.6
   },
   "V1": {
    "record": {
@@ -208,7 +208,7 @@
    },
    "gain_threshold": 705.0026029896881,
    "nozzle_efficiency_threshold": 0.5284765625,
-   "secs": 285.9
+   "secs": 166.6
   },
   "V2": {
    "record": {
@@ -332,7 +332,7 @@
    },
    "gain_threshold": 581.4677727587293,
    "nozzle_efficiency_threshold": 0.5284765625,
-   "secs": 199.7
+   "secs": 104.2
   },
   "V3": {
    "record": {
@@ -458,7 +458,7 @@
    },
    "gain_threshold": 1554.1968059750598,
    "nozzle_efficiency_threshold": null,
-   "secs": 141.6
+   "secs": 103.5
   },
   "V4": {
    "record": {
@@ -680,7 +680,7 @@
    },
    "gain_threshold": 705.0026029896881,
    "nozzle_efficiency_threshold": 0.63,
-   "secs": 300.0
+   "secs": 184.1
   },
   "V5": {
    "record": {
@@ -902,7 +902,7 @@
    },
    "gain_threshold": 705.0026029896881,
    "nozzle_efficiency_threshold": 0.538359375,
-   "secs": 402.6
+   "secs": 222.1
   }
  },
  "variants": {
@@ -985,7 +985,7 @@
    },
    "gain_threshold": 705.0026029896881,
    "nozzle_efficiency_threshold": 0.5284765625,
-   "secs": 292.5
+   "secs": 168.8
   },
   "V1_driver_eff_0.30": {
    "generation": "V1_driver_eff_0.30",
@@ -1066,7 +1066,7 @@
    },
    "gain_threshold": 1160.2882767829017,
    "nozzle_efficiency_threshold": 0.5284765625,
-   "secs": 154.5
+   "secs": 101.3
   },
   "V2_collimation_band": {
    "generation": "V2_collimation_band",
@@ -1147,7 +1147,7 @@
    },
    "gain_threshold": 566.2205660720276,
    "nozzle_efficiency_threshold": 0.5284765625,
-   "secs": 298.5
+   "secs": 190.9
   },
   "V4_keep_idle_H2": {
    "generation": "V4_keep_idle_H2",
@@ -1228,7 +1228,7 @@
    },
    "gain_threshold": 705.0026029896881,
    "nozzle_efficiency_threshold": 0.63,
-   "secs": 345.7
+   "secs": 200.3
   }
  },
  "cases": {
@@ -4267,6 +4267,207 @@
     }
    ]
   },
+  "V4_coil_booking": {
+   "label": "ISS-014: closure-coil X-ray interception booked as extra hot-loop heat (PROXY, see coil_kv)",
+   "multi": true,
+   "rows": [
+    {
+     "label": "closure-coil share 0.029 (T03 geometry, 11.9 GW)",
+     "set": {
+      "base.overrides.continuous.plume_to_hardware.value": 0.06661993810486895
+     },
+     "summary": {
+      "variant": "baseline",
+      "converged": true,
+      "a0_g": 0.006895573489099627,
+      "peak_g": 0.018730006731935773,
+      "ve_km_s": 19201.17208,
+      "departure_t": 43211.31901715863,
+      "end_t": 15908.527429181036,
+      "propellant_t": 27302.7915879776,
+      "fusion_TW": 35.96574072299216,
+      "jet_TW": 28.05345361945809,
+      "thrust_MN": 2.922056372660568,
+      "burn_years": 5.685154040809533,
+      "min_round_trip_years": 6.351915811090675,
+      "shield_t": 514.0251958686387,
+      "structure_t": 729.2878191484972,
+      "radiator_t": 3619.867984919817,
+      "tank_t": 2562.292607006651,
+      "drive_t": 7394.0551736764555,
+      "payload_t": 1240.2,
+      "solid_angle": 0.024845687322647372,
+      "warm_km2": 4.985137235072968,
+      "hot_km2": 0.4760056334454154,
+      "wing_layout": "W2",
+      "wing_tip_radius_m": 10218.450531610142,
+      "pellet_rate_Hz": 197.08577710762026,
+      "yield_t_TNT": 43.61561987806841,
+      "checks_ok": true,
+      "clearances_ok": true
+     },
+     "ledger_share": {
+      "jet": 0.7800048895287758,
+      "plume_to_space": 0.19236481861185403,
+      "plume_to_hardware": 0.013730025776912205,
+      "recovery_loss": 0.00016433614211690262,
+      "driver_loss": 0.002151861241881388,
+      "electric_house": 4.4e-05,
+      "cryo_input": 4.2992118191615834e-06,
+      "radiation_on_hardware": 0.0002863275071561614,
+      "radiation_on_conductor": 2.866141212774389e-07,
+      "radiation_to_space": 0.011249155365362948
+     },
+     "hot_GW": 510.01899917545575,
+     "warm_GW": 79.14070871594816,
+     "loop_radii_m": [
+      56.031312002407155,
+      97.04907920291305,
+      168.09393600722143
+     ],
+     "hardware_cone_deg": 5.498561634380254,
+     "burn_aft_of_shield_m": 64.69938613527536,
+     "xray_standoff_m": 64.69938613527536,
+     "escape_share": 0.011535769486640387,
+     "jet_specific_energy_J_kg": 184342504622885.8,
+     "gain": 1084.3326176985665,
+     "pellet_rate_Hz": 197.08577710762026,
+     "injection_path_m": 68.3905039470771,
+     "yield_J": 182487753569.83823,
+     "fuel_rhoR_g_cm2": 90.34254399904131
+    },
+    {
+     "label": "closure-coil share 0.0377 (C1 grown with the V4 pulse, 15.5 GW)",
+     "set": {
+      "base.overrides.continuous.plume_to_hardware.value": 0.06710591953632963
+     },
+     "summary": {
+      "variant": "baseline",
+      "converged": true,
+      "a0_g": 0.006895573489099627,
+      "peak_g": 0.018730006731935766,
+      "ve_km_s": 19201.17208,
+      "departure_t": 43300.769473237,
+      "end_t": 15941.459194895257,
+      "propellant_t": 27359.310278341745,
+      "fusion_TW": 36.040192323763655,
+      "jet_TW": 28.111526232789736,
+      "thrust_MN": 2.928105233958169,
+      "burn_years": 5.685154040809533,
+      "min_round_trip_years": 6.351915811090677,
+      "shield_t": 514.064671205999,
+      "structure_t": 730.7914971052929,
+      "radiator_t": 3634.220531144365,
+      "tank_t": 2567.5967333431877,
+      "drive_t": 7405.069519274032,
+      "payload_t": 1240.2,
+      "solid_angle": 0.024846498107853242,
+      "warm_km2": 4.995457157678111,
+      "hot_km2": 0.4803603022158919,
+      "wing_layout": "W2",
+      "wing_tip_radius_m": 10245.956794732201,
+      "pellet_rate_Hz": 197.4937502352709,
+      "yield_t_TNT": 43.61562169244724,
+      "checks_ok": true,
+      "clearances_ok": true
+     },
+     "ledger_share": {
+      "jet": 0.780004889548105,
+      "plume_to_space": 0.19226466034912582,
+      "plume_to_hardware": 0.013830184044747649,
+      "recovery_loss": 0.00016433614949770952,
+      "driver_loss": 0.002151861241881388,
+      "electric_house": 4.4e-05,
+      "cryo_input": 4.2993520544940224e-06,
+      "radiation_on_hardware": 0.0002863368468293019,
+      "radiation_on_conductor": 2.866234702996015e-07,
+      "radiation_to_space": 0.011249145844288246
+     },
+     "hot_GW": 514.6848343085052,
+     "warm_GW": 79.30454091360936,
+     "loop_radii_m": [
+      56.03131275383559,
+      97.04908050442529,
+      168.09393826150674
+     ],
+     "hardware_cone_deg": 5.4985568960796956,
+     "burn_aft_of_shield_m": 64.69938700295019,
+     "xray_standoff_m": 64.69938700295019,
+     "escape_share": 0.011535769314587847,
+     "jet_specific_energy_J_kg": 184342504622885.8,
+     "gain": 1084.3326176985665,
+     "pellet_rate_Hz": 197.4937502352709,
+     "injection_path_m": 68.39081468923968,
+     "yield_J": 182487761161.19925,
+     "fuel_rhoR_g_cm2": 90.34254512807813
+    },
+    {
+     "label": "closure-coil share 0.073 (T05 Rev 2 upper case, 30.1 GW)",
+     "set": {
+      "base.overrides.continuous.plume_to_hardware.value": 0.06907777522949769
+     },
+     "summary": {
+      "variant": "baseline",
+      "converged": true,
+      "a0_g": 0.006895573489099627,
+      "peak_g": 0.01873000673193577,
+      "ve_km_s": 19201.17208,
+      "departure_t": 43667.5137717436,
+      "end_t": 16076.478487640548,
+      "propellant_t": 27591.035284103054,
+      "fusion_TW": 36.34544177903421,
+      "jet_TW": 28.349622278047466,
+      "thrust_MN": 2.952905391392905,
+      "burn_years": 5.685154040809533,
+      "min_round_trip_years": 6.351915811090681,
+      "shield_t": 514.2256564575619,
+      "structure_t": 736.9552435513776,
+      "radiator_t": 3693.0679078253793,
+      "tank_t": 2589.3435085622295,
+      "drive_t": 7450.225652922373,
+      "payload_t": 1240.2,
+      "solid_angle": 0.024849809273066292,
+      "warm_km2": 5.037768558098924,
+      "hot_km2": 0.4982154576398749,
+      "wing_layout": "W2",
+      "wing_tip_radius_m": 10358.733844113265,
+      "pellet_rate_Hz": 199.16647162866255,
+      "yield_t_TNT": 43.61561989548042,
+      "checks_ok": true,
+      "clearances_ok": true
+     },
+     "ledger_share": {
+      "jet": 0.7800048889322039,
+      "plume_to_space": 0.1918582709053816,
+      "plume_to_hardware": 0.014236573325756926,
+      "recovery_loss": 0.00016433617965646826,
+      "driver_loss": 0.002151861241881388,
+      "electric_house": 4.4e-05,
+      "cryo_input": 4.29992507091426e-06,
+      "radiation_on_hardware": 0.0002863750097228897,
+      "radiation_on_conductor": 2.86661671394284e-07,
+      "radiation_to_space": 0.011249107818654404
+     },
+     "hot_GW": 533.8158442369964,
+     "warm_GW": 79.9762484430448,
+     "loop_radii_m": [
+      56.031312021446205,
+      97.04907923588965,
+      168.09393606433858
+     ],
+     "hardware_cone_deg": 5.49853763520918,
+     "burn_aft_of_shield_m": 64.69938615725977,
+     "xray_standoff_m": 64.69938615725977,
+     "escape_share": 0.011535769490048689,
+     "jet_specific_energy_J_kg": 184342504622885.8,
+     "gain": 1084.3326176985665,
+     "pellet_rate_Hz": 199.16647162866255,
+     "injection_path_m": 68.39207784055878,
+     "yield_J": 182487753642.6901,
+     "fuel_rhoR_g_cm2": 90.34254400987632
+    }
+   ]
+  },
   "V0": {
    "summary": {
     "variant": "baseline",
@@ -4761,7 +4962,7 @@
    "V4_keep_idle_H2": 705.0026029896881
   }
  },
- "runtime_s": 794.1,
+ "runtime_s": 485.2,
  "consistency": {
   "V0": {
    "rho_g_cc": 3000.0,

@@ -310,6 +310,14 @@ Target gain 1,593, pulse yield 19.2 t TNT at 201 Hz, X-ray stand-off 43.0 m, inj
 | 2,000 g/cm3, coupling 0.5 | does not close | | | | | | | |
 | 3,000 g/cm3, coupling 0.5 | does not close | | | | | | | |
 
+### V4_coil_booking: ISS-014: closure-coil X-ray interception booked as extra hot-loop heat (PROXY, see coil_kv)
+
+| Case | Departure t | Fusion TW | Gain | Rate Hz | Warm km2 | Wing tip m | Hot GW | Loop 3 r m |
+|---|---|---|---|---|---|---|---|---|
+| closure-coil share 0.029 (T03 geometry, 11.9 GW) | 43,211 | 36.0 | 1,084 | 197 | 4.99 | 10,218 | 510.0 | 168 |
+| closure-coil share 0.0377 (C1 grown with the V4 pulse, 15.5 GW) | 43,301 | 36.0 | 1,084 | 197 | 5.00 | 10,246 | 514.7 | 168 |
+| closure-coil share 0.073 (T05 Rev 2 upper case, 30.1 GW) | 43,668 | 36.3 | 1,084 | 199 | 5.04 | 10,359 | 533.8 | 168 |
+
 ### Single cases
 
 | Case | Departure t | Burn y | Warm km2 |
@@ -342,4 +350,4 @@ Rocket equation on the whole four-burn delta-v; tanks, radiators and drive that 
 | 1 | 13,577 | 1.41 | 4.11 | 1.51x |
 | 3 | 9,601 | 2.00 | 7.38 | 2.72x |
 
-V0 reproduces FDP-1: yes. Runtime 794 s.
+V0 reproduces FDP-1: yes. Runtime 485 s.
