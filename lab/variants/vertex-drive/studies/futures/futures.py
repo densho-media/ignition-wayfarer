@@ -46,7 +46,9 @@ K = {
     'spar': 'structure.wing_spar_kg_per_m.value',
     'gallery_kg': 'structure.gallery_kg_per_m.value',
     'frame': 'structure.module_frame_kg_per_m.value',
+    'field_ratio': S + 'pulsed.nozzle_field_energy_ratio.value',
 }
+PAYLOAD_T = 990.2          # FDP-1 payload from mass_model (NOTES.md); 'payload_add' in a lever set adds dry mass to it
 
 # Defaults read from the FDP-1 / four-burn optimistic tier (checked against the files at the base commit, 8de3ffa)
 DEFAULT = {'driver_kg': 0.05e-3, 'nozzle_kg': 1.07e-6, 'other_kg': 0.05e-6, 'warm_areal': 1.0, 'warm_transport': 2.0e-6,
@@ -143,7 +145,21 @@ SPECIFIC = ['driver_kg', 'nozzle_kg', 'other_kg', 'warm_areal', 'warm_transport'
 
 
 def ov_for(base_ov, kv):
-    return cv.P(base_ov, **{K[k]: v for k, v in kv.items()})
+    kv = dict(kv)
+    add = kv.pop('payload_add', None)
+    ov = cv.P(base_ov, **{K[k]: v for k, v in kv.items()})
+    if add:
+        ov.setdefault('mission', {})['payload'] = {'source': 'reference', 'reference_t': PAYLOAD_T + add}
+    return ov
+
+
+def get_path(tree, path, default=None):
+    node = tree
+    for k in path.split('.'):
+        if not isinstance(node, dict) or k not in node:
+            return default
+        node = node[k]
+    return node
 
 
 def brief(r):
@@ -206,17 +222,14 @@ def downside(_=None):
 
 
 def one_g(_=None):
-    """Smallest uniform scale on every specific mass (SPECIFIC) at which the grand endpoint closes at a0 = 1 g and 1.5 g."""
-    B = bases()['V1c']
-    kv = {st['key']: st['value'] for ch in CHAINS for st in ch['steps']}
+    """Smallest uniform scale on every specific mass (SPECIFIC) at which the final V4 proposal (the most optimistic consistent ship) closes
+    at a0 = 1 g and 1.5 g. Shield, tanks and payload are not scaled."""
+    V4 = proposals()['V4']['overrides']
+    base_vals = {k: get_path(V4, K[k], DEFAULT[k]) for k in SPECIFIC}
     out = {}
     for g in (1.0, 1.5):
-        def at(s):
-            vals = dict(kv)
-            for k in SPECIFIC:
-                vals[k] = vals.get(k, DEFAULT[k]) * s
-            vals['a0'] = g
-            return cv.solve(ov_for(B, vals))
+        def at(sc):
+            return cv.solve(ov_for(V4, {**{k: base_vals[k] * sc for k in SPECIFIC}, 'a0': g}))
         lo, hi = math.log(1e-5), math.log(1.0)
         r_lo = at(math.exp(lo))
         if not r_lo['summary'].get('converged'):
@@ -229,20 +242,16 @@ def one_g(_=None):
                 lo, good = m, r
             else:
                 hi = m
-        s = math.exp(lo)
-        out[f'{g:g}'] = {'closes_at_any_scale': True, 'scale': s, 'reduction_factor': 1 / s, 'result': brief(good)}
+        sc = math.exp(lo)
+        out[f'{g:g}'] = {'closes_at_any_scale': True, 'scale': sc, 'reduction_factor': 1 / sc, 'result': brief(good)}
     return out
 
 
 def floor(_=None):
-    """Convergence asymptote: the grand endpoint with every SPECIFIC mass at 1e-4 of its value, at the FDP-1 a0. What remains is the
-    payload, the propellant the rocket equation demands at ve 19,201 km/s, its tanks and the dose-set shield: no hardware improvement
-    in this model can go below it."""
-    B = bases()['V1c']
-    kv = {st['key']: st['value'] for ch in CHAINS for st in ch['steps']}
-    for k in SPECIFIC:
-        kv[k] = kv.get(k, DEFAULT[k]) * 1e-4
-    return brief(cv.solve(ov_for(B, kv)))
+    """Convergence asymptote: the final V4 proposal with every SPECIFIC mass at 1e-4 of its value, at the FDP-1 a0. What remains is the
+    payload (with T02's protection), the propellant the rocket equation demands at ve 19,201 km/s, its tanks and the dose-set shield."""
+    V4 = proposals()['V4']['overrides']
+    return brief(cv.solve(ov_for(V4, {k: get_path(V4, K[k], DEFAULT[k]) * 1e-4 for k in SPECIFIC})))
 
 
 # T04 EARLY (claude/project-thread-9hxayw 1b85941, studies/ignition/EARLY.md section 1): compressing fuel to rho costs at least its
@@ -271,7 +280,7 @@ def consistency(_=None):
         G[ch['id']] = (kv.get('rho', 3000.0), kv.get('gain', 3000.0))
     G['grand (all chains)'] = (6000.0, 6000.0); G['V0-V2 (Atlas)'] = (3000.0, 3000.0)
     for gid, pg in proposals().items():
-        if gid.endswith('c'):
+        if gid.endswith('o'):
             continue
         tree = pg['overrides']['base']['overrides']['pulsed']
         G[gid + ' (proposal)'] = (tree.get('rho_g_cc', {}).get('optimistic', 3000.0), tree.get('gain', {}).get('optimistic', 3000.0))
@@ -296,6 +305,79 @@ def consistency(_=None):
             'source': 'T04 EARLY 1b85941 section 1 (bound); T01 EARLY 57fe625 (628 K, 0.005 %)'}
 
 
+# ----------------------------------------------------------------------------------------------------------------------------------
+# Final synthesis: the four thread handoffs (all at /mnt/project-files/vertex/threads/, read 2026-11-09)
+#   T01 thermal  claude/project-thread-93sqqi 1302708   T02 dust     claude/project-thread-uwi5pl 3c665ec
+#   T03 nozzle   claude/project-thread-ujxhjo 59244a9   T04 ignition claude/project-thread-9hxayw fd4ff3d
+# Each correction below is one thread's own number, applied as FDP-1 overrides. Nothing is re-derived here.
+# ----------------------------------------------------------------------------------------------------------------------------------
+
+CORRECTIONS = [
+    ('T01', 'warm', 628.0, 'equivalent warm loop of 14 components at TARGET temperatures (HANDOFF D; D-T01-1), not 700-800 K'),
+    ('T01', 'house', 2.6e-5, 'bottom-up house load, advanced (HANDOFF D; 0.6 MJ per pellet TARGET)'),
+    ('T03', 'ptw', 0.065, 'plume-strike share of the nozzle loss 0.06-0.07 for the closure-coil nozzle C (HANDOFF D), not 0.02'),
+    ('T03', 'field_ratio', 15.0, 'stored field 15 E_p, needed to reach eta_T 0.791 with nozzle C (HANDOFF D; D-T03-2)'),
+    ('T03', 'eta', 0.791, 'eta_T = eta_mom^2 = 0.791 for C at 15 E_p: an upper bound (ideal model), reached only with closure coils (T03-NEW-1)'),
+    ('T02', 'payload_add', 250.0, 'engine-side skirt 22-90 t (56 central) and LiH loop shoes 193 t (HANDOFF D); their solid angle is NOT booked'),
+]
+NOZZLE_CASES = {'C_15Ep': {'eta': 0.791, 'field_ratio': 15.0}, 'C_10Ep': {'eta': 0.740, 'field_ratio': 10.0},
+                'lit_best': {'eta': 0.64, 'field_ratio': 10.0}}
+# T06 engineering package (Level B TARGETs, registry_proposal.toml); the warm temperature is T01's, not T06's 800 K
+T06_PLUS = {'driver_kg': 2.5e-5, 'warm_areal': 0.5, 'hot_areal': 1.5, 'nozzle_kg': 0.535e-6, 'spar': 12.5, 'gallery_kg': 60.0, 'armor': 100.0}
+INT_COUPLINGS = [0.2, 0.3, 0.5, 1.0]
+INT_RHOS = [500.0, 1000.0, 1500.0, 2000.0, 3000.0]
+UNBOOKED = [
+    ('T01', 'one-target-in-flight launcher at 4.0 / 2.5 km/s', '+6.3 % / +17.5 % departure (T01 planning case); needs a calculator change (D-T01-2)'),
+    ('T03', 'closure coils and larger loop envelopes', 'envelope solid angle 0.040-0.051 against V1 0.017: more armour and hot-loop heat'),
+    ('T02', 'LiH shoes on the loops', '+0.0127 hardware solid-angle share'),
+    ('T03', 'warm eddy-current screens', 'about 0.1 % of plasma (0.03-1 %) into the hot loop'),
+    ('T04', 'fast ignitor and D-T core', 'ignitor beam line, 43-144 kg tritium per mission; energy within the driver budget only if eta_c holds'),
+]
+
+
+def int_sets():
+    corr = {k: v for _, k, v, _ in CORRECTIONS if k not in ('eta', 'field_ratio')}
+    return {'atlas_engineering': corr, 't06_package': {**corr, **T06_PLUS}}
+
+
+def integrated(job):
+    """One lever set x one coupling: every nozzle case x density, gain at the T04 bound. Base V1c (published driver 0.30)."""
+    sname, cpl = job
+    B = bases()['V1c']
+    kv0 = int_sets()[sname]
+    out = {}
+    for nname, nz in NOZZLE_CASES.items():
+        rows = []
+        for rho in INT_RHOS:
+            g = gain_bound(rho, cpl)
+            r = brief(cv.solve(ov_for(B, {**kv0, **nz, 'rho': rho, 'gain': g})))
+            rows.append({'rho': rho, 'gain': g, 'departure_t': r.get('departure_t'), 'converged': r.get('converged'),
+                         'rate_Hz': r.get('pellet_rate_Hz'), 'loop3_r_m': (r.get('loop_radii_m') or [None])[-1],
+                         'wing_tip_m': r.get('wing_tip_radius_m'), 'yield_t_TNT': r.get('yield_t_TNT')})
+        ok = [x for x in rows if x['converged']]
+        out[nname] = {'rows': rows, 'best': min(ok, key=lambda x: x['departure_t']) if ok else None}
+    return {'set': sname, 'coupling': cpl, 'cases': out}
+
+
+def attribution(_=None):
+    """What each thread's correction costs, alone and cumulatively, on the T06 package at a consistent target (gain at the bound)."""
+    B = bases()['V1c']
+    out = {}
+    for cpl, rho in ((0.5, 3000.0), (1.0, 3000.0)):
+        g = gain_bound(rho, cpl)
+        start = {**T06_PLUS, 'warm': 800.0, 'house': 2.5e-4, 'rho': rho, 'gain': g}
+        m0 = brief(cv.solve(ov_for(B, start))).get('departure_t')
+        alone, cum, kv = [], [], dict(start)
+        for th, key, val, why in CORRECTIONS:
+            r = brief(cv.solve(ov_for(B, {**start, key: val})))
+            alone.append({'thread': th, 'key': key, 'value': val, 'why': why, 'departure_t': r.get('departure_t')})
+            kv[key] = val
+            r = brief(cv.solve(ov_for(B, kv)))
+            cum.append({'thread': th, 'key': key, 'departure_t': r.get('departure_t')})
+        out[f'{cpl:g}@{rho:g}'] = {'coupling': cpl, 'rho': rho, 'gain': g, 'start_t': m0, 'alone': alone, 'cumulative': cum}
+    return out
+
+
 def reproduce(_=None):
     r = cv.solve(bases()['V0'])['summary']
     return {'V0_departure_t': r['departure_t'], 'target_t': 20760.0, 'within_1pct': abs(r['departure_t'] - 20760.0) <= 207.6}
@@ -312,8 +394,8 @@ def proposals():
         for c in g.get('change', []):
             cv.put(ov, c['path'], c['value'])
         out[g['id']] = {'record': g, 'overrides': ov}
-        out[g['id'] + 'c'] = {'record': {**g, 'id': g['id'] + 'c', 'name': g['name'] + ' at driver efficiency 0.30'},
-                              'overrides': cv.P(ov, **{cv.DRIVER: 0.30})}
+        out[g['id'] + 'o'] = {'record': {**g, 'id': g['id'] + 'o', 'name': g['name'] + ' at driver efficiency 0.45'},
+                              'overrides': cv.P(ov, **{cv.DRIVER: 0.45})}
     return out
 
 
@@ -355,16 +437,17 @@ def ve_gate(_=None):
 
 
 JOBS = [('chain', ch) for ch in CHAINS] + [('grand', None), ('downside', None), ('one_g', None), ('reproduce', None),
-                                          ('elasticities', None), ('ve_gate', None), ('floor', None), ('consistency', None)] + [('proposal', g) for g in ('V3', 'V3c', 'V4', 'V4c')]
+                                          ('elasticities', None), ('ve_gate', None), ('floor', None), ('consistency', None), ('attribution', None)] + \
+       [('integrated', (sn, c)) for sn in ('atlas_engineering', 't06_package') for c in INT_COUPLINGS] + [('proposal', g) for g in ('V3', 'V3o', 'V4', 'V4o')]
 
 
 def do(job):
     kind, arg = job
     t = time.time()
     fn = {'chain': run_chain, 'grand': grand, 'downside': downside, 'one_g': one_g, 'reproduce': reproduce,
-          'elasticities': elasticities, 've_gate': ve_gate, 'floor': floor, 'consistency': consistency, 'proposal': run_proposal}[kind]
+          'elasticities': elasticities, 've_gate': ve_gate, 'floor': floor, 'consistency': consistency, 'attribution': attribution, 'integrated': integrated, 'proposal': run_proposal}[kind]
     res = fn(arg)
-    name = arg['id'] if isinstance(arg, dict) else (arg or kind)
+    name = arg['id'] if isinstance(arg, dict) else (f'{arg[0]}@{arg[1]:g}' if isinstance(arg, tuple) else (arg or kind))
     print(f'{kind} {name}: {time.time() - t:.0f} s', flush=True)
     return kind, name, res
 
@@ -379,6 +462,8 @@ def main():
             out['chains'][name] = res
         elif kind == 'proposal':
             out.setdefault('proposals', {})[name] = res
+        elif kind == 'integrated':
+            out.setdefault('integrated', {})[name] = res
         else:
             out[name] = res
     # product of the five chain ratios: does the grand endpoint add anything beyond the chains?
@@ -448,7 +533,7 @@ def report(o):
     for cid, c in o['chains'].items():
         L.append(amb_row(f'{cid} combined', c['ambitions'], c['combined']['departure_t']))
     L.append(amb_row('Grand', g['ambitions'], gr['departure_t']))
-    L += ['', '## Proposed generations (generations_proposal.toml; c = driver efficiency 0.30)', '',
+    L += ['', '## Proposed generations (generations_proposal.toml; driver 0.30, o = driver 0.45)', '',
           '| Generation | Departure t | Four 0.016 c burns | Min round trip y | LOCKED 6.0 y | Ceiling a0 g | 1 g | Gain cliff | Nozzle-eff. cliff |',
           '|---|---|---|---|---|---|---|---|---|']
     for gid, pr in o['proposals'].items():
@@ -474,7 +559,7 @@ def report(o):
         res = r['result']
         L.append(f'| {r["case"]} | {r["tech"]} | {r["what"]} | {f(res.get("departure_t")) if res.get("converged") else "does not close"} | '
                  f'{f(r["ratio"], "{:.3f}")} |')
-    L += ['', '## 1 g and 1.5 g: uniform specific-mass reduction on the grand endpoint', '',
+    L += ['', '## 1 g and 1.5 g: uniform specific-mass reduction on the final V4 proposal', '',
           'Every drive, power, radiator, nozzle and light-structure specific mass scaled by one factor; shield, tanks and payload unscaled.', '']
     for g_, r in o['one_g'].items():
         if r['closes_at_any_scale']:
@@ -484,15 +569,15 @@ def report(o):
             L.append(f'- {g_} g does not close even at x{r["tested_scale_min"]:g}: {r["reason"]}')
     fl = o['floor']
     if fl.get('converged'):
-        L += ['', '## Convergence floor (specific masses x1e-4 on the grand endpoint, FDP-1 a0)', '',
+        L += ['', '## Convergence floor (specific masses x1e-4 on the final V4 proposal, FDP-1 a0)', '',
               f'Departure {fl["departure_t"]:,.0f} t: payload {fl["payload_t"]:,.0f}, propellant {fl["propellant_t"]:,.0f}, tanks {fl["tank_t"]:,.0f}, '
               f'shield {fl["shield_t"]:,.0f}, drive {fl["drive_t"]:,.0f}, radiators {fl["radiator_t"]:,.0f}, structure {fl["structure_t"]:,.0f} t. '
               'No drive, thermal or structural improvement in this model goes below this at ve 19,201 km/s.']
     else:
         L += ['', f'Convergence floor: did not close ({fl.get("reason")}).']
     cs = o['consistency']
-    L += ['', '## Gain-compression consistency (T04 EARLY bound)', '',
-          f'G <= {cs["bound_at_3000"]:,.0f} x eta_c/alpha x (rho / 3,000 g/cm3)^(-2/3); eta_c/alpha <= 1 by definition. Source: {cs["source"]}.', '',
+    L += ['', '## Gain-compression consistency (T04 bound)', '',
+          f'G <= {cs["bound_at_3000"]:,.0f} x eta_c/alpha x (rho / 3,000 g/cm3)^(-2/3); eta_c/alpha <= 1 by definition. Source: T04 HANDOFF fd4ff3d case compression (EARLY 1b85941). The \'T01_early\' set uses T01 EARLY 57fe625 numbers.', '',
           '| Case | rho g/cm3 | Gain | eta_c/alpha needed | Possible at all |', '|---|---|---|---|---|']
     for k, c in cs['checks'].items():
         L.append(f'| {k} | {c["rho"]:,.0f} | {c["gain"]:,.0f} | {c["coupling_needed"]:.2f} | {"yes" if c["possible"] else "NO"} |')
@@ -503,6 +588,28 @@ def report(o):
             b = fr['best']
             L.append(f'| {sname} | {cpl} | ' + (f'{b["rho"]:,.0f} | {b["gain"]:,.0f} | {b["departure_t"]:,.0f} | {b["rate_Hz"]:.0f} | {b["loop3_r_m"]:.0f} | '
                                                 f'{b["wing_tip_m"]:,.0f} |' if b else 'none closes | | | | | |'))
+    L += ['', '## Final synthesis: every T01-T04 correction together', '',
+          'Corrections applied (each a thread handoff number):', '']
+    for th, key, val, why in CORRECTIONS:
+        L.append(f'- {th}: `{key}` = {val:g}: {why}.')
+    L += ['', 'Not booked (no calculator path; each makes the ship heavier):', '']
+    for th, what, eff in UNBOOKED:
+        L.append(f'- {th}: {what}: {eff}.')
+    L += ['', '### Per-thread cost on the T06 package at a consistent target (V1c, driver 0.30)', '']
+    for k, a in o['attribution'].items():
+        L += [f'Coupling {a["coupling"]:g} at {a["rho"]:,.0f} g/cm3 (gain {a["gain"]:,.0f}); start (Atlas thermal, T03/T02 not applied) '
+              f'{f(a["start_t"])} t.', '', '| Thread | Correction | Alone t | Cumulative t |', '|---|---|---|---|']
+        for x, c in zip(a['alone'], a['cumulative']):
+            L.append(f'| {x["thread"]} | `{x["key"]}` = {x["value"]:g} | {f(x["departure_t"])} | {f(c["departure_t"])} |')
+        L.append('')
+    L += ['### Integrated frontier (gain at the T04 bound; lightest closing density per cell)', '',
+          '| Lever set | eta_c/alpha | Nozzle C 15 E_p (0.791) | Nozzle C 10 E_p (0.740) | Literature best (0.64) |', '|---|---|---|---|---|']
+    for name, r in o['integrated'].items():
+        cells = []
+        for nn in NOZZLE_CASES:
+            b = r['cases'][nn]['best']
+            cells.append(f'{b["departure_t"] / 1e3:,.1f} kt ({b["rho"]:,.0f} g/cm3, G {b["gain"]:,.0f}, {b["rate_Hz"]:.0f} Hz, loop3 r {b["loop3_r_m"]:.0f} m)' if b else 'none closes')
+        L.append(f'| {r["set"]} | {r["coupling"]:g} | ' + ' | '.join(cells) + ' |')
     L += ['', f'Runtime {o["runtime_s"]:.0f} s.', '']
     return '\n'.join(L)
 

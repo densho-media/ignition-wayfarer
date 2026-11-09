@@ -5,7 +5,7 @@
 | Thread | T06, technology convergence and IGNITION technology history |
 | Date | 2026-11-09 |
 | Base | `8de3ffa` on `claude/project-thread-pv2pie` |
-| Status | EARLY / GATHERING. The final synthesis waits for the T01-T04 handoffs |
+| Status | SUPERSEDED by the final synthesis (CONVERGENCE.md, HANDOFF.md). Kept as the early record; its V3/V4 numbers are withdrawn |
 | Inputs | Atlas at 8de3ffa; T01 EARLY `57fe625`; T04 EARLY `1b85941`; T02 and T03 had nothing published yet |
 
 Research only, not canon. Every number comes from `futures.py` (FDP-1 solves through `convergence.py`, read-only) and is listed in

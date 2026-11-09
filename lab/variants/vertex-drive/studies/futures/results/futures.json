@@ -1286,42 +1286,42 @@
  "one_g": {
   "1": {
    "closes_at_any_scale": true,
-   "scale": 0.01553457722823584,
-   "reduction_factor": 64.37252751123394,
+   "scale": 0.00019669473022359958,
+   "reduction_factor": 5084.02029308673,
    "result": {
-    "departure_t": 40272.155751549704,
-    "payload_t": 990.2338712519676,
-    "fusion_TW": 4418.248142419512,
-    "burn_years": 0.04524208840015852,
-    "min_round_trip_years": 0.04675618386362481,
-    "drive_t": 9707.316675104339,
-    "radiator_t": 620.3277682934432,
-    "shield_t": 423.3494505643465,
-    "structure_t": 5168.0710233161735,
-    "tank_t": 2490.7490766482742,
-    "propellant_t": 25445.70034639585,
-    "warm_km2": 47.96957752291607,
-    "hot_km2": 5.863452461162281,
-    "wing_tip_radius_m": 100887.40482506836,
+    "departure_t": 30155.13492453412,
+    "payload_t": 1240.2,
+    "fusion_TW": 3605.3333964384806,
+    "burn_years": 0.045242088400158524,
+    "min_round_trip_years": 0.04675618386362483,
+    "drive_t": 7207.374776801236,
+    "radiator_t": 50.01842885660578,
+    "shield_t": 542.6112841358622,
+    "structure_t": 6583.451452804805,
+    "tank_t": 1842.082293118656,
+    "propellant_t": 19053.326370920793,
+    "warm_km2": 302.5004313160038,
+    "hot_km2": 45.89999577169234,
+    "wing_tip_radius_m": 653028.7302301626,
     "pellet_rate_Hz": 1000.0,
-    "yield_t_TNT": 1055.9866497178568,
-    "solid_angle": 0.00737529285305718,
+    "yield_t_TNT": 861.6953624374953,
+    "solid_angle": 0.005586260230225605,
     "checks_ok": true,
     "converged": true,
     "loop_radii_m": [
-     104.66279757595812,
-     181.28128306385622,
-     313.98839272787427
+     127.68295963395205,
+     221.15337334677105,
+     383.0488789018561
     ],
-    "xray_standoff_m": 120.85418870923748,
-    "hot_GW": 6282.430176948261,
-    "warm_GW": 2005.4418943882245,
+    "xray_standoff_m": 147.4355822311807,
+    "hot_GW": 49179.81691979416,
+    "warm_GW": 4802.294779930593,
     "ledger_sum": 1.0
    }
   },
   "1.5": {
    "closes_at_any_scale": false,
-   "reason": "integration diverged (RuntimeError: FDP-1 integration did not converge)",
+   "reason": "integration diverged (ValueError: math domain error)",
    "tested_scale_min": 1e-05
   }
  },
@@ -1478,34 +1478,34 @@
   "note": "With burn fraction capped at 0.999 and about 1.2 % of fusion escaping as radiation, the lowest nozzle efficiency that can reach the mission ve is about gate / 0.988; the Atlas bisection (0.40-0.86, 9 steps) lands at 0.528 for every generation because it hits this gate, which no mass or thermal improvement moves."
  },
  "floor": {
-  "departure_t": 4228.017441777915,
-  "payload_t": 990.2338712519676,
-  "fusion_TW": 3.240527127331769,
-  "burn_years": 5.685154040809533,
-  "min_round_trip_years": 6.351915811090678,
-  "drive_t": 208.76923335645984,
-  "radiator_t": 0.0032582013624323997,
-  "shield_t": 206.22859813778894,
-  "structure_t": 2.202649540117155,
-  "tank_t": 250.7078719497761,
-  "propellant_t": 2671.445391365126,
-  "warm_km2": 0.035797105715825055,
-  "hot_km2": 0.005742591992696754,
-  "wing_tip_radius_m": 77.09860490313976,
-  "pellet_rate_Hz": 348.4441511992145,
-  "yield_t_TNT": 2.222750959849508,
-  "solid_angle": 0.03480413259928899,
+  "departure_t": 5665.395254547674,
+  "payload_t": 1240.2,
+  "fusion_TW": 4.711136258784536,
+  "burn_years": 5.685154040809534,
+  "min_round_trip_years": 6.351915811090682,
+  "drive_t": 366.39331166060873,
+  "radiator_t": 0.03321048933354352,
+  "shield_t": 346.2916446229421,
+  "structure_t": 19.31115174936438,
+  "tank_t": 335.9397655138048,
+  "propellant_t": 3579.643237389043,
+  "warm_km2": 0.39563423331349545,
+  "hot_km2": 0.05979489052271419,
+  "wing_tip_radius_m": 835.6693794411209,
+  "pellet_rate_Hz": 58.624893155301784,
+  "yield_t_TNT": 19.206663397876003,
+  "solid_angle": 0.007889736573256959,
   "checks_ok": true,
   "converged": true,
   "loop_radii_m": [
-   14.207069972301573,
-   24.607367018712488,
-   42.621209916904704
+   37.23382543447516,
+   64.4908774126613,
+   111.70147630342544
   ],
-  "xray_standoff_m": 16.404911345808326,
-  "hot_GW": 6.152933526413906,
-  "warm_GW": 1.4965530072901863,
-  "ledger_sum": 0.9999999999999999
+  "xray_standoff_m": 42.99391827510754,
+  "hot_GW": 64.06758256086425,
+  "warm_GW": 6.280824807877635,
+  "ledger_sum": 1.0
  },
  "consistency": {
   "bound_at_3000": 1787.0,
@@ -1554,14 +1554,14 @@
    },
    "V3 (proposal)": {
     "rho": 2000.0,
-    "gain": 702.0,
-    "coupling_needed": 0.299790859269703,
+    "gain": 1171.0,
+    "coupling_needed": 0.5000784846222538,
     "possible": true
    },
    "V4 (proposal)": {
     "rho": 3000.0,
-    "gain": 894.0,
-    "coupling_needed": 0.5002797985450476,
+    "gain": 1787.0,
+    "coupling_needed": 1.0,
     "possible": true
    }
   },
@@ -2667,192 +2667,1899 @@
   },
   "source": "T04 EARLY 1b85941 section 1 (bound); T01 EARLY 57fe625 (628 K, 0.005 %)"
  },
+ "attribution": {
+  "0.5@3000": {
+   "coupling": 0.5,
+   "rho": 3000.0,
+   "gain": 893.5,
+   "start_t": 13144.053145751695,
+   "alone": [
+    {
+     "thread": "T01",
+     "key": "warm",
+     "value": 628.0,
+     "why": "equivalent warm loop of 14 components at TARGET temperatures (HANDOFF D; D-T01-1), not 700-800 K",
+     "departure_t": 25141.338539785997
+    },
+    {
+     "thread": "T01",
+     "key": "house",
+     "value": 2.6e-05,
+     "why": "bottom-up house load, advanced (HANDOFF D; 0.6 MJ per pellet TARGET)",
+     "departure_t": 12800.194695325257
+    },
+    {
+     "thread": "T03",
+     "key": "ptw",
+     "value": 0.065,
+     "why": "plume-strike share of the nozzle loss 0.06-0.07 for the closure-coil nozzle C (HANDOFF D), not 0.02",
+     "departure_t": 15165.761617797132
+    },
+    {
+     "thread": "T03",
+     "key": "field_ratio",
+     "value": 15.0,
+     "why": "stored field 15 E_p, needed to reach eta_T 0.791 with nozzle C (HANDOFF D; D-T03-2)",
+     "departure_t": 18864.89516977077
+    },
+    {
+     "thread": "T03",
+     "key": "eta",
+     "value": 0.791,
+     "why": "eta_T = eta_mom^2 = 0.791 for C at 15 E_p: an upper bound (ideal model), reached only with closure coils (T03-NEW-1)",
+     "departure_t": 13102.720167077507
+    },
+    {
+     "thread": "T02",
+     "key": "payload_add",
+     "value": 250.0,
+     "why": "engine-side skirt 22-90 t (56 central) and LiH loop shoes 193 t (HANDOFF D); their solid angle is NOT booked",
+     "departure_t": 15302.920693302718
+    }
+   ],
+   "cumulative": [
+    {
+     "thread": "T01",
+     "key": "warm",
+     "departure_t": 25141.338539785997
+    },
+    {
+     "thread": "T01",
+     "key": "house",
+     "departure_t": 22405.15047412339
+    },
+    {
+     "thread": "T03",
+     "key": "ptw",
+     "departure_t": 28930.292396084755
+    },
+    {
+     "thread": "T03",
+     "key": "field_ratio",
+     "departure_t": 41580.51005658758
+    },
+    {
+     "thread": "T03",
+     "key": "eta",
+     "departure_t": 41095.348133848966
+    },
+    {
+     "thread": "T02",
+     "key": "payload_add",
+     "departure_t": 45785.90801415467
+    }
+   ]
+  },
+  "1@3000": {
+   "coupling": 1.0,
+   "rho": 3000.0,
+   "gain": 1787.0,
+   "start_t": 8795.856645458593,
+   "alone": [
+    {
+     "thread": "T01",
+     "key": "warm",
+     "value": 628.0,
+     "why": "equivalent warm loop of 14 components at TARGET temperatures (HANDOFF D; D-T01-1), not 700-800 K",
+     "departure_t": 10661.292010823232
+    },
+    {
+     "thread": "T01",
+     "key": "house",
+     "value": 2.6e-05,
+     "why": "bottom-up house load, advanced (HANDOFF D; 0.6 MJ per pellet TARGET)",
+     "departure_t": 8639.998550093787
+    },
+    {
+     "thread": "T03",
+     "key": "ptw",
+     "value": 0.065,
+     "why": "plume-strike share of the nozzle loss 0.06-0.07 for the closure-coil nozzle C (HANDOFF D), not 0.02",
+     "departure_t": 9663.187387029211
+    },
+    {
+     "thread": "T03",
+     "key": "field_ratio",
+     "value": 15.0,
+     "why": "stored field 15 E_p, needed to reach eta_T 0.791 with nozzle C (HANDOFF D; D-T03-2)",
+     "departure_t": 12581.02443502326
+    },
+    {
+     "thread": "T03",
+     "key": "eta",
+     "value": 0.791,
+     "why": "eta_T = eta_mom^2 = 0.791 for C at 15 E_p: an upper bound (ideal model), reached only with closure coils (T03-NEW-1)",
+     "departure_t": 8777.972105015639
+    },
+    {
+     "thread": "T02",
+     "key": "payload_add",
+     "value": 250.0,
+     "why": "engine-side skirt 22-90 t (56 central) and LiH loop shoes 193 t (HANDOFF D); their solid angle is NOT booked",
+     "departure_t": 10249.038542846258
+    }
+   ],
+   "cumulative": [
+    {
+     "thread": "T01",
+     "key": "warm",
+     "departure_t": 10661.292010823232
+    },
+    {
+     "thread": "T01",
+     "key": "house",
+     "departure_t": 10131.520688889628
+    },
+    {
+     "thread": "T03",
+     "key": "ptw",
+     "departure_t": 11297.794253164304
+    },
+    {
+     "thread": "T03",
+     "key": "field_ratio",
+     "departure_t": 16153.603064386774
+    },
+    {
+     "thread": "T03",
+     "key": "eta",
+     "departure_t": 16048.734439869866
+    },
+    {
+     "thread": "T02",
+     "key": "payload_add",
+     "departure_t": 17906.60860887337
+    }
+   ]
+  }
+ },
+ "integrated": {
+  "atlas_engineering@0.2": {
+   "set": "atlas_engineering",
+   "coupling": 0.2,
+   "cases": {
+    "C_15Ep": {
+     "rows": [
+      {
+       "rho": 500.0,
+       "gain": 1180.1087987549397,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      },
+      {
+       "rho": 1000.0,
+       "gain": 743.4219583587505,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      },
+      {
+       "rho": 1500.0,
+       "gain": 567.3371359734346,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      },
+      {
+       "rho": 2000.0,
+       "gain": 468.32648714512993,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      },
+      {
+       "rho": 3000.0,
+       "gain": 357.40000000000003,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      }
+     ],
+     "best": null
+    },
+    "C_10Ep": {
+     "rows": [
+      {
+       "rho": 500.0,
+       "gain": 1180.1087987549397,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      },
+      {
+       "rho": 1000.0,
+       "gain": 743.4219583587505,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      },
+      {
+       "rho": 1500.0,
+       "gain": 567.3371359734346,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      },
+      {
+       "rho": 2000.0,
+       "gain": 468.32648714512993,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      },
+      {
+       "rho": 3000.0,
+       "gain": 357.40000000000003,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      }
+     ],
+     "best": null
+    },
+    "lit_best": {
+     "rows": [
+      {
+       "rho": 500.0,
+       "gain": 1180.1087987549397,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      },
+      {
+       "rho": 1000.0,
+       "gain": 743.4219583587505,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      },
+      {
+       "rho": 1500.0,
+       "gain": 567.3371359734346,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      },
+      {
+       "rho": 2000.0,
+       "gain": 468.32648714512993,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      },
+      {
+       "rho": 3000.0,
+       "gain": 357.40000000000003,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      }
+     ],
+     "best": null
+    }
+   }
+  },
+  "atlas_engineering@0.3": {
+   "set": "atlas_engineering",
+   "coupling": 0.3,
+   "cases": {
+    "C_15Ep": {
+     "rows": [
+      {
+       "rho": 500.0,
+       "gain": 1770.1631981324094,
+       "departure_t": 1746996.1260354759,
+       "converged": true,
+       "rate_Hz": 502.0914717618414,
+       "loop3_r_m": 670.2438725826073,
+       "wing_tip_m": 265940.4686043998,
+       "yield_t_TNT": 691.5431522870114
+      },
+      {
+       "rho": 1000.0,
+       "gain": 1115.1329375381258,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      },
+      {
+       "rho": 1500.0,
+       "gain": 851.0057039601517,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      },
+      {
+       "rho": 2000.0,
+       "gain": 702.4897307176948,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      },
+      {
+       "rho": 3000.0,
+       "gain": 536.1,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      }
+     ],
+     "best": {
+      "rho": 500.0,
+      "gain": 1770.1631981324094,
+      "departure_t": 1746996.1260354759,
+      "converged": true,
+      "rate_Hz": 502.0914717618414,
+      "loop3_r_m": 670.2438725826073,
+      "wing_tip_m": 265940.4686043998,
+      "yield_t_TNT": 691.5431522870114
+     }
+    },
+    "C_10Ep": {
+     "rows": [
+      {
+       "rho": 500.0,
+       "gain": 1770.1631981324094,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      },
+      {
+       "rho": 1000.0,
+       "gain": 1115.1329375381258,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      },
+      {
+       "rho": 1500.0,
+       "gain": 851.0057039601517,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      },
+      {
+       "rho": 2000.0,
+       "gain": 702.4897307176948,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      },
+      {
+       "rho": 3000.0,
+       "gain": 536.1,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      }
+     ],
+     "best": null
+    },
+    "lit_best": {
+     "rows": [
+      {
+       "rho": 500.0,
+       "gain": 1770.1631981324094,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      },
+      {
+       "rho": 1000.0,
+       "gain": 1115.1329375381258,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      },
+      {
+       "rho": 1500.0,
+       "gain": 851.0057039601517,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      },
+      {
+       "rho": 2000.0,
+       "gain": 702.4897307176948,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      },
+      {
+       "rho": 3000.0,
+       "gain": 536.1,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      }
+     ],
+     "best": null
+    }
+   }
+  },
+  "atlas_engineering@0.5": {
+   "set": "atlas_engineering",
+   "coupling": 0.5,
+   "cases": {
+    "C_15Ep": {
+     "rows": [
+      {
+       "rho": 500.0,
+       "gain": 2950.271996887349,
+       "departure_t": 583562.8387580684,
+       "converged": true,
+       "rate_Hz": 168.56653039155708,
+       "loop3_r_m": 668.9312843108961,
+       "wing_tip_m": 58542.52649372676,
+       "yield_t_TNT": 687.6788326440685
+      },
+      {
+       "rho": 1000.0,
+       "gain": 1858.5548958968764,
+       "departure_t": 367780.4912127113,
+       "converged": true,
+       "rate_Hz": 423.05395532465707,
+       "loop3_r_m": 335.0452049604091,
+       "wing_tip_m": 53788.524672665095,
+       "yield_t_TNT": 172.7726533665068
+      },
+      {
+       "rho": 1500.0,
+       "gain": 1418.3428399335862,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      },
+      {
+       "rho": 2000.0,
+       "gain": 1170.8162178628247,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      },
+      {
+       "rho": 3000.0,
+       "gain": 893.5,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      }
+     ],
+     "best": {
+      "rho": 1000.0,
+      "gain": 1858.5548958968764,
+      "departure_t": 367780.4912127113,
+      "converged": true,
+      "rate_Hz": 423.05395532465707,
+      "loop3_r_m": 335.0452049604091,
+      "wing_tip_m": 53788.524672665095,
+      "yield_t_TNT": 172.7726533665068
+     }
+    },
+    "C_10Ep": {
+     "rows": [
+      {
+       "rho": 500.0,
+       "gain": 2950.271996887349,
+       "departure_t": 1058588.074127936,
+       "converged": true,
+       "rate_Hz": 162.94047308577018,
+       "loop3_r_m": 852.1152223087923,
+       "wing_tip_m": 118492.50463188422,
+       "yield_t_TNT": 1376.4059380168405
+      },
+      {
+       "rho": 1000.0,
+       "gain": 1858.5548958968764,
+       "departure_t": 1234238.0349718826,
+       "converged": true,
+       "rate_Hz": 756.0008748534464,
+       "loop3_r_m": 426.89474176265776,
+       "wing_tip_m": 198548.89198905448,
+       "yield_t_TNT": 346.04908017038167
+      },
+      {
+       "rho": 1500.0,
+       "gain": 1418.3428399335862,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      },
+      {
+       "rho": 2000.0,
+       "gain": 1170.8162178628247,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      },
+      {
+       "rho": 3000.0,
+       "gain": 893.5,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      }
+     ],
+     "best": {
+      "rho": 500.0,
+      "gain": 2950.271996887349,
+      "departure_t": 1058588.074127936,
+      "converged": true,
+      "rate_Hz": 162.94047308577018,
+      "loop3_r_m": 852.1152223087923,
+      "wing_tip_m": 118492.50463188422,
+      "yield_t_TNT": 1376.4059380168405
+     }
+    },
+    "lit_best": {
+     "rows": [
+      {
+       "rho": 500.0,
+       "gain": 2950.271996887349,
+       "departure_t": 29541601.814917848,
+       "converged": true,
+       "rate_Hz": 712.6781156881931,
+       "loop3_r_m": 1695.732932399315,
+       "wing_tip_m": 4145417.9333819197,
+       "yield_t_TNT": 10109.87214762216
+      },
+      {
+       "rho": 1000.0,
+       "gain": 1858.5548958968764,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      },
+      {
+       "rho": 1500.0,
+       "gain": 1418.3428399335862,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      },
+      {
+       "rho": 2000.0,
+       "gain": 1170.8162178628247,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      },
+      {
+       "rho": 3000.0,
+       "gain": 893.5,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      }
+     ],
+     "best": {
+      "rho": 500.0,
+      "gain": 2950.271996887349,
+      "departure_t": 29541601.814917848,
+      "converged": true,
+      "rate_Hz": 712.6781156881931,
+      "loop3_r_m": 1695.732932399315,
+      "wing_tip_m": 4145417.9333819197,
+      "yield_t_TNT": 10109.87214762216
+     }
+    }
+   }
+  },
+  "atlas_engineering@1": {
+   "set": "atlas_engineering",
+   "coupling": 1.0,
+   "cases": {
+    "C_15Ep": {
+     "rows": [
+      {
+       "rho": 500.0,
+       "gain": 5900.543993774698,
+       "departure_t": 384787.03687362693,
+       "converged": true,
+       "rate_Hz": 111.56968591616811,
+       "loop3_r_m": 667.9499209951432,
+       "wing_tip_m": 23638.567111453624,
+       "yield_t_TNT": 684.7989640277301
+      },
+      {
+       "rho": 1000.0,
+       "gain": 3717.1097917937527,
+       "departure_t": 129380.88218807401,
+       "converged": true,
+       "rate_Hz": 149.7224041351251,
+       "loop3_r_m": 334.2644639886088,
+       "wing_tip_m": 10920.633567592007,
+       "yield_t_TNT": 171.62428270660627
+      },
+      {
+       "rho": 1500.0,
+       "gain": 2836.6856798671724,
+       "departure_t": 81652.52681122701,
+       "converged": true,
+       "rate_Hz": 212.2050931943153,
+       "loop3_r_m": 223.0050163223709,
+       "wing_tip_m": 8464.39853999878,
+       "yield_t_TNT": 76.43611260003246
+      },
+      {
+       "rho": 2000.0,
+       "gain": 2341.6324357256494,
+       "departure_t": 68381.28444204097,
+       "converged": true,
+       "rate_Hz": 315.40963479627425,
+       "loop3_r_m": 167.36234449140142,
+       "wing_tip_m": 8265.915411931419,
+       "yield_t_TNT": 43.07515131450107
+      },
+      {
+       "rho": 3000.0,
+       "gain": 1787.0,
+       "departure_t": 86507.37075971799,
+       "converged": true,
+       "rate_Hz": 895.116858360914,
+       "loop3_r_m": 111.70399525137593,
+       "wing_tip_m": 13125.088160062443,
+       "yield_t_TNT": 19.207901537685622
+      }
+     ],
+     "best": {
+      "rho": 2000.0,
+      "gain": 2341.6324357256494,
+      "departure_t": 68381.28444204097,
+      "converged": true,
+      "rate_Hz": 315.40963479627425,
+      "loop3_r_m": 167.36234449140142,
+      "wing_tip_m": 8265.915411931419,
+      "yield_t_TNT": 43.07515131450107
+     }
+    },
+    "C_10Ep": {
+     "rows": [
+      {
+       "rho": 500.0,
+       "gain": 5900.543993774698,
+       "departure_t": 611634.5685527246,
+       "converged": true,
+       "rate_Hz": 94.55686858820411,
+       "loop3_r_m": 850.6972538837426,
+       "wing_tip_m": 43098.47268176441,
+       "yield_t_TNT": 1369.8307889654614
+      },
+      {
+       "rho": 1000.0,
+       "gain": 3717.1097917937527,
+       "departure_t": 208083.22795635802,
+       "converged": true,
+       "rate_Hz": 128.34510121388132,
+       "loop3_r_m": 425.76618835965917,
+       "wing_tip_m": 19751.754415242187,
+       "yield_t_TNT": 343.4251880159979
+      },
+      {
+       "rho": 1500.0,
+       "gain": 2836.6856798671724,
+       "departure_t": 137087.78155199016,
+       "converged": true,
+       "rate_Hz": 189.83861329204768,
+       "loop3_r_m": 284.07793365440773,
+       "wing_tip_m": 15825.08506875184,
+       "yield_t_TNT": 152.9951925736111
+      },
+      {
+       "rho": 2000.0,
+       "gain": 2341.6324357256494,
+       "departure_t": 125000.61247358042,
+       "converged": true,
+       "rate_Hz": 307.14036520278876,
+       "loop3_r_m": 213.21516586039175,
+       "wing_tip_m": 16722.357324677065,
+       "yield_t_TNT": 86.24193184070674
+      },
+      {
+       "rho": 3000.0,
+       "gain": 1787.0,
+       "departure_t": 1085587.6063050802,
+       "converged": true,
+       "rate_Hz": 1000.0,
+       "loop3_r_m": 253.72949195486527,
+       "wing_tip_m": 179628.30802502096,
+       "yield_t_TNT": 229.104765748425
+      }
+     ],
+     "best": {
+      "rho": 2000.0,
+      "gain": 2341.6324357256494,
+      "departure_t": 125000.61247358042,
+      "converged": true,
+      "rate_Hz": 307.14036520278876,
+      "loop3_r_m": 213.21516586039175,
+      "wing_tip_m": 16722.357324677065,
+      "yield_t_TNT": 86.24193184070674
+     }
+    },
+    "lit_best": {
+     "rows": [
+      {
+       "rho": 500.0,
+       "gain": 5900.543993774698,
+       "departure_t": 7265963.657981392,
+       "converged": true,
+       "rate_Hz": 176.52703263255722,
+       "loop3_r_m": 1691.4051283103988,
+       "wing_tip_m": 672743.1030483558,
+       "yield_t_TNT": 10034.748728620958
+      },
+      {
+       "rho": 1000.0,
+       "gain": 3717.1097917937527,
+       "departure_t": 2817094.6247261157,
+       "converged": true,
+       "rate_Hz": 272.63455020179555,
+       "loop3_r_m": 846.9743568187932,
+       "wing_tip_m": 340049.64547956805,
+       "yield_t_TNT": 2519.714007098678
+      },
+      {
+       "rho": 1500.0,
+       "gain": 2836.6856798671724,
+       "departure_t": 3002293.3668014137,
+       "converged": true,
+       "rate_Hz": 651.4853644478885,
+       "loop3_r_m": 565.3625451115834,
+       "wing_tip_m": 433261.7141877395,
+       "yield_t_TNT": 1124.0050783984123
+      },
+      {
+       "rho": 2000.0,
+       "gain": 2341.6324357256494,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      },
+      {
+       "rho": 3000.0,
+       "gain": 1787.0,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      }
+     ],
+     "best": {
+      "rho": 1000.0,
+      "gain": 3717.1097917937527,
+      "departure_t": 2817094.6247261157,
+      "converged": true,
+      "rate_Hz": 272.63455020179555,
+      "loop3_r_m": 846.9743568187932,
+      "wing_tip_m": 340049.64547956805,
+      "yield_t_TNT": 2519.714007098678
+     }
+    }
+   }
+  },
+  "t06_package@0.2": {
+   "set": "t06_package",
+   "coupling": 0.2,
+   "cases": {
+    "C_15Ep": {
+     "rows": [
+      {
+       "rho": 500.0,
+       "gain": 1180.1087987549397,
+       "departure_t": 361743.40653411753,
+       "converged": true,
+       "rate_Hz": 103.31161879380916,
+       "loop3_r_m": 671.8887388728575,
+       "wing_tip_m": 78475.3523635511,
+       "yield_t_TNT": 696.4058740836789
+      },
+      {
+       "rho": 1000.0,
+       "gain": 743.4219583587505,
+       "departure_t": 497953.98847408284,
+       "converged": true,
+       "rate_Hz": 562.5237703435682,
+       "loop3_r_m": 337.40549334979835,
+       "wing_tip_m": 165206.5080813892,
+       "yield_t_TNT": 176.27509452649934
+      },
+      {
+       "rho": 1500.0,
+       "gain": 567.3371359734346,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      },
+      {
+       "rho": 2000.0,
+       "gain": 468.32648714512993,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      },
+      {
+       "rho": 3000.0,
+       "gain": 357.40000000000003,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      }
+     ],
+     "best": {
+      "rho": 500.0,
+      "gain": 1180.1087987549397,
+      "departure_t": 361743.40653411753,
+      "converged": true,
+      "rate_Hz": 103.31161879380916,
+      "loop3_r_m": 671.8887388728575,
+      "wing_tip_m": 78475.3523635511,
+      "yield_t_TNT": 696.4058740836789
+     }
+    },
+    "C_10Ep": {
+     "rows": [
+      {
+       "rho": 500.0,
+       "gain": 1180.1087987549397,
+       "departure_t": 654959.8187035818,
+       "converged": true,
+       "rate_Hz": 99.49595716850584,
+       "loop3_r_m": 856.392671135751,
+       "wing_tip_m": 154817.85114489633,
+       "yield_t_TNT": 1396.3667755292242
+      },
+      {
+       "rho": 1000.0,
+       "gain": 743.4219583587505,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      },
+      {
+       "rho": 1500.0,
+       "gain": 567.3371359734346,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      },
+      {
+       "rho": 2000.0,
+       "gain": 468.32648714512993,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      },
+      {
+       "rho": 3000.0,
+       "gain": 357.40000000000003,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      }
+     ],
+     "best": {
+      "rho": 500.0,
+      "gain": 1180.1087987549397,
+      "departure_t": 654959.8187035818,
+      "converged": true,
+      "rate_Hz": 99.49595716850584,
+      "loop3_r_m": 856.392671135751,
+      "wing_tip_m": 154817.85114489633,
+      "yield_t_TNT": 1396.3667755292242
+     }
+    },
+    "lit_best": {
+     "rows": [
+      {
+       "rho": 500.0,
+       "gain": 1180.1087987549397,
+       "departure_t": 15551688.601425579,
+       "converged": true,
+       "rate_Hz": 367.30029756430866,
+       "loop3_r_m": 1708.835594623935,
+       "wing_tip_m": 4411270.573380353,
+       "yield_t_TNT": 10339.587253752263
+      },
+      {
+       "rho": 1000.0,
+       "gain": 743.4219583587505,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      },
+      {
+       "rho": 1500.0,
+       "gain": 567.3371359734346,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      },
+      {
+       "rho": 2000.0,
+       "gain": 468.32648714512993,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      },
+      {
+       "rho": 3000.0,
+       "gain": 357.40000000000003,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      }
+     ],
+     "best": {
+      "rho": 500.0,
+      "gain": 1180.1087987549397,
+      "departure_t": 15551688.601425579,
+      "converged": true,
+      "rate_Hz": 367.30029756430866,
+      "loop3_r_m": 1708.835594623935,
+      "wing_tip_m": 4411270.573380353,
+      "yield_t_TNT": 10339.587253752263
+     }
+    }
+   }
+  },
+  "t06_package@0.3": {
+   "set": "t06_package",
+   "coupling": 0.3,
+   "cases": {
+    "C_15Ep": {
+     "rows": [
+      {
+       "rho": 500.0,
+       "gain": 1770.1631981324094,
+       "departure_t": 241968.44321869672,
+       "converged": true,
+       "rate_Hz": 69.54296053426127,
+       "loop3_r_m": 670.2417541373402,
+       "wing_tip_m": 36776.39555278448,
+       "yield_t_TNT": 691.5369029432172
+      },
+      {
+       "rho": 1000.0,
+       "gain": 1115.1329375381258,
+       "departure_t": 109821.34239561217,
+       "converged": true,
+       "rate_Hz": 125.31731948818586,
+       "loop3_r_m": 336.0897680125316,
+       "wing_tip_m": 25078.5768427422,
+       "yield_t_TNT": 174.3169740395982
+      },
+      {
+       "rho": 1500.0,
+       "gain": 851.0057039601517,
+       "departure_t": 113812.34624737964,
+       "converged": true,
+       "rate_Hz": 290.38957793683704,
+       "loop3_r_m": 224.60414092889596,
+       "wing_tip_m": 33299.278460922236,
+       "yield_t_TNT": 78.01348640420038
+      },
+      {
+       "rho": 2000.0,
+       "gain": 702.4897307176948,
+       "departure_t": 1115395.0499875906,
+       "converged": true,
+       "rate_Hz": 1000.0,
+       "loop3_r_m": 283.70141901566535,
+       "wing_tip_m": 388224.79205735784,
+       "yield_t_TNT": 221.02952666603204
+      },
+      {
+       "rho": 3000.0,
+       "gain": 536.1,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      }
+     ],
+     "best": {
+      "rho": 1000.0,
+      "gain": 1115.1329375381258,
+      "departure_t": 109821.34239561217,
+      "converged": true,
+      "rate_Hz": 125.31731948818586,
+      "loop3_r_m": 336.0897680125316,
+      "wing_tip_m": 25078.5768427422,
+      "yield_t_TNT": 174.3169740395982
+     }
+    },
+    "C_10Ep": {
+     "rows": [
+      {
+       "rho": 500.0,
+       "gain": 1770.1631981324094,
+       "departure_t": 386762.0365950635,
+       "converged": true,
+       "rate_Hz": 59.185048787272514,
+       "loop3_r_m": 854.0104962383703,
+       "wing_tip_m": 64633.40560928947,
+       "yield_t_TNT": 1385.2268725428282
+      },
+      {
+       "rho": 1000.0,
+       "gain": 1115.1329375381258,
+       "departure_t": 188513.42407264252,
+       "converged": true,
+       "rate_Hz": 114.40212403571427,
+       "loop3_r_m": 428.40618640238904,
+       "wing_tip_m": 46854.773763321486,
+       "yield_t_TNT": 349.5838905579288
+      },
+      {
+       "rho": 1500.0,
+       "gain": 851.0057039601517,
+       "departure_t": 282880.69852352614,
+       "converged": true,
+       "rate_Hz": 383.47360116217476,
+       "loop3_r_m": 286.39174099610875,
+       "wing_tip_m": 89680.7720964118,
+       "yield_t_TNT": 156.605969458643
+      },
+      {
+       "rho": 2000.0,
+       "gain": 702.4897307176948,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      },
+      {
+       "rho": 3000.0,
+       "gain": 536.1,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      }
+     ],
+     "best": {
+      "rho": 1000.0,
+      "gain": 1115.1329375381258,
+      "departure_t": 188513.42407264252,
+      "converged": true,
+      "rate_Hz": 114.40212403571427,
+      "loop3_r_m": 428.40618640238904,
+      "wing_tip_m": 46854.773763321486,
+      "yield_t_TNT": 349.5838905579288
+     }
+    },
+    "lit_best": {
+     "rows": [
+      {
+       "rho": 500.0,
+       "gain": 1770.1631981324094,
+       "departure_t": 4520355.066062451,
+       "converged": true,
+       "rate_Hz": 108.03031994611605,
+       "loop3_r_m": 1701.5310436723223,
+       "wing_tip_m": 921830.1441192392,
+       "yield_t_TNT": 10211.101629084695
+      },
+      {
+       "rho": 1000.0,
+       "gain": 1115.1329375381258,
+       "departure_t": 4190480.6332879495,
+       "converged": true,
+       "rate_Hz": 395.0633579973094,
+       "loop3_r_m": 855.0607156347978,
+       "wing_tip_m": 1247354.0434884408,
+       "yield_t_TNT": 2590.578853370535
+      },
+      {
+       "rho": 1500.0,
+       "gain": 851.0057039601517,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      },
+      {
+       "rho": 2000.0,
+       "gain": 702.4897307176948,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      },
+      {
+       "rho": 3000.0,
+       "gain": 536.1,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      }
+     ],
+     "best": {
+      "rho": 1000.0,
+      "gain": 1115.1329375381258,
+      "departure_t": 4190480.6332879495,
+      "converged": true,
+      "rate_Hz": 395.0633579973094,
+      "loop3_r_m": 855.0607156347978,
+      "wing_tip_m": 1247354.0434884408,
+      "yield_t_TNT": 2590.578853370535
+     }
+    }
+   }
+  },
+  "t06_package@0.5": {
+   "set": "t06_package",
+   "coupling": 0.5,
+   "cases": {
+    "C_15Ep": {
+     "rows": [
+      {
+       "rho": 500.0,
+       "gain": 2950.271996887349,
+       "departure_t": 190361.92297636106,
+       "converged": true,
+       "rate_Hz": 54.987888369798696,
+       "loop3_r_m": 668.929350923745,
+       "wing_tip_m": 19054.34723921092,
+       "yield_t_TNT": 687.6731505821623
+      },
+      {
+       "rho": 1000.0,
+       "gain": 1858.5548958968764,
+       "departure_t": 66639.86259520962,
+       "converged": true,
+       "rate_Hz": 76.65594103487157,
+       "loop3_r_m": 335.0438102180922,
+       "wing_tip_m": 9716.085801659014,
+       "yield_t_TNT": 172.77059738394695
+      },
+      {
+       "rho": 1500.0,
+       "gain": 1418.3428399335862,
+       "departure_t": 43951.36546157033,
+       "converged": true,
+       "rate_Hz": 113.32910624424535,
+       "loop3_r_m": 223.6872424207905,
+       "wing_tip_m": 8094.2425227475,
+       "yield_t_TNT": 77.10646382324225
+      },
+      {
+       "rho": 2000.0,
+       "gain": 1170.8162178628247,
+       "departure_t": 37902.874747308444,
+       "converged": true,
+       "rate_Hz": 173.1675800358079,
+       "loop3_r_m": 167.9833063563517,
+       "wing_tip_m": 8281.224546059118,
+       "yield_t_TNT": 43.533606389739916
+      },
+      {
+       "rho": 3000.0,
+       "gain": 893.5,
+       "departure_t": 45785.90801415467,
+       "converged": true,
+       "rate_Hz": 467.8650865996034,
+       "loop3_r_m": 112.2481816438711,
+       "wing_tip_m": 12813.789955130229,
+       "yield_t_TNT": 19.476626804132632
+      }
+     ],
+     "best": {
+      "rho": 2000.0,
+      "gain": 1170.8162178628247,
+      "departure_t": 37902.874747308444,
+      "converged": true,
+      "rate_Hz": 173.1675800358079,
+      "loop3_r_m": 167.9833063563517,
+      "wing_tip_m": 8281.224546059118,
+      "yield_t_TNT": 43.533606389739916
+     }
+    },
+    "C_10Ep": {
+     "rows": [
+      {
+       "rho": 500.0,
+       "gain": 2950.271996887349,
+       "departure_t": 288672.68082972325,
+       "converged": true,
+       "rate_Hz": 44.43346564426909,
+       "loop3_r_m": 852.1133334999273,
+       "wing_tip_m": 32265.94835234331,
+       "yield_t_TNT": 1376.3971663913503
+      },
+      {
+       "rho": 1000.0,
+       "gain": 1858.5548958968764,
+       "departure_t": 98740.47493022762,
+       "converged": true,
+       "rate_Hz": 60.48148769585484,
+       "loop3_r_m": 426.8932890523212,
+       "wing_tip_m": 15850.086064350235,
+       "yield_t_TNT": 346.0456941178342
+      },
+      {
+       "rho": 1500.0,
+       "gain": 1418.3428399335862,
+       "departure_t": 65329.70733233673,
+       "converged": true,
+       "rate_Hz": 89.64812471716277,
+       "loop3_r_m": 285.0648124674149,
+       "wing_tip_m": 13160.453100378645,
+       "yield_t_TNT": 154.52844872300253
+      },
+      {
+       "rho": 2000.0,
+       "gain": 1170.8162178628247,
+       "departure_t": 57822.67806092618,
+       "converged": true,
+       "rate_Hz": 140.5162609291789,
+       "loop3_r_m": 214.11362815188053,
+       "wing_tip_m": 13764.454430238304,
+       "yield_t_TNT": 87.29104712299936
+      },
+      {
+       "rho": 3000.0,
+       "gain": 893.5,
+       "departure_t": 85212.38699497601,
+       "converged": true,
+       "rate_Hz": 462.72271115091763,
+       "loop3_r_m": 143.11734230068902,
+       "wing_tip_m": 25852.07215679026,
+       "yield_t_TNT": 39.08977878682464
+      }
+     ],
+     "best": {
+      "rho": 2000.0,
+      "gain": 1170.8162178628247,
+      "departure_t": 57822.67806092618,
+      "converged": true,
+      "rate_Hz": 140.5162609291789,
+      "loop3_r_m": 214.11362815188053,
+      "wing_tip_m": 13764.454430238304,
+      "yield_t_TNT": 87.29104712299936
+     }
+    },
+    "lit_best": {
+     "rows": [
+      {
+       "rho": 500.0,
+       "gain": 2950.271996887349,
+       "departure_t": 2765720.265708899,
+       "converged": true,
+       "rate_Hz": 66.72217815923403,
+       "loop3_r_m": 1695.7292797909806,
+       "wing_tip_m": 387849.93645863363,
+       "yield_t_TNT": 10109.808585241115
+      },
+      {
+       "rho": 1000.0,
+       "gain": 1858.5548958968764,
+       "departure_t": 880194.5437372039,
+       "converged": true,
+       "rate_Hz": 84.23576264357192,
+       "loop3_r_m": 850.4211353945911,
+       "wing_tip_m": 172873.74158273474,
+       "yield_t_TNT": 2549.760311714541
+      },
+      {
+       "rho": 1500.0,
+       "gain": 1418.3428399335862,
+       "departure_t": 604933.4266221282,
+       "converged": true,
+       "rate_Hz": 129.35325039590006,
+       "loop3_r_m": 568.3842753913854,
+       "wing_tip_m": 147336.6316239569,
+       "yield_t_TNT": 1141.6305265724338
+      },
+      {
+       "rho": 2000.0,
+       "gain": 1170.8162178628247,
+       "departure_t": 679961.2858732832,
+       "converged": true,
+       "rate_Hz": 256.87416084057975,
+       "loop3_r_m": 427.2543755849785,
+       "wing_tip_m": 194259.39374413894,
+       "yield_t_TNT": 646.4250378857419
+      },
+      {
+       "rho": 3000.0,
+       "gain": 893.5,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      }
+     ],
+     "best": {
+      "rho": 1500.0,
+      "gain": 1418.3428399335862,
+      "departure_t": 604933.4266221282,
+      "converged": true,
+      "rate_Hz": 129.35325039590006,
+      "loop3_r_m": 568.3842753913854,
+      "wing_tip_m": 147336.6316239569,
+      "yield_t_TNT": 1141.6305265724338
+     }
+    }
+   }
+  },
+  "t06_package@1": {
+   "set": "t06_package",
+   "coupling": 1.0,
+   "cases": {
+    "C_15Ep": {
+     "rows": [
+      {
+       "rho": 500.0,
+       "gain": 5900.543993774698,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      },
+      {
+       "rho": 1000.0,
+       "gain": 3717.1097917937527,
+       "departure_t": 51246.75544123463,
+       "converged": true,
+       "rate_Hz": 59.30447597277974,
+       "loop3_r_m": 334.26314629214306,
+       "wing_tip_m": 4303.532235738229,
+       "yield_t_TNT": 171.6223484009026
+      },
+      {
+       "rho": 1500.0,
+       "gain": 2836.6856798671724,
+       "departure_t": 29891.288079884274,
+       "converged": true,
+       "rate_Hz": 77.68482265545049,
+       "loop3_r_m": 223.00394482149767,
+       "wing_tip_m": 3079.2728774851066,
+       "yield_t_TNT": 76.43506273885406
+      },
+      {
+       "rho": 2000.0,
+       "gain": 2341.6324357256494,
+       "departure_t": 22326.989027487412,
+       "converged": true,
+       "rate_Hz": 102.98502782552488,
+       "loop3_r_m": 167.36141274849086,
+       "wing_tip_m": 2679.8867184560004,
+       "yield_t_TNT": 43.074465683593296
+      },
+      {
+       "rho": 3000.0,
+       "gain": 1787.0,
+       "departure_t": 17906.60860887337,
+       "converged": true,
+       "rate_Hz": 185.2881606937941,
+       "loop3_r_m": 111.70322600420837,
+       "wing_tip_m": 2695.728708466351,
+       "yield_t_TNT": 19.20752340847335
+      }
+     ],
+     "best": {
+      "rho": 3000.0,
+      "gain": 1787.0,
+      "departure_t": 17906.60860887337,
+      "converged": true,
+      "rate_Hz": 185.2881606937941,
+      "loop3_r_m": 111.70322600420837,
+      "wing_tip_m": 2695.728708466351,
+      "yield_t_TNT": 19.20752340847335
+     }
+    },
+    "C_10Ep": {
+     "rows": [
+      {
+       "rho": 500.0,
+       "gain": 5900.543993774698,
+       "departure_t": 241693.83679383612,
+       "converged": true,
+       "rate_Hz": 37.365350240261776,
+       "loop3_r_m": 850.6954464869141,
+       "wing_tip_m": 16993.1128214335,
+       "yield_t_TNT": 1369.82242200252
+      },
+      {
+       "rho": 1000.0,
+       "gain": 3717.1097917937527,
+       "departure_t": 72234.57427442001,
+       "converged": true,
+       "rate_Hz": 44.55441257436844,
+       "loop3_r_m": 425.76492524381433,
+       "wing_tip_m": 6833.752691334877,
+       "yield_t_TNT": 343.4222586994195
+      },
+      {
+       "rho": 1500.0,
+       "gain": 2836.6856798671724,
+       "departure_t": 40897.234444679685,
+       "converged": true,
+       "rate_Hz": 56.63486828468048,
+       "loop3_r_m": 284.0769000966183,
+       "wing_tip_m": 4700.708130065508,
+       "yield_t_TNT": 152.9935918975333
+      },
+      {
+       "rho": 2000.0,
+       "gain": 2341.6324357256494,
+       "departure_t": 29808.17286398473,
+       "converged": true,
+       "rate_Hz": 73.24279545004427,
+       "loop3_r_m": 213.2142677507848,
+       "wing_tip_m": 3967.4136740811737,
+       "yield_t_TNT": 86.24088762372135
+      },
+      {
+       "rho": 3000.0,
+       "gain": 1787.0,
+       "departure_t": 22748.951294213795,
+       "converged": true,
+       "rate_Hz": 125.33771054659759,
+       "loop3_r_m": 142.3288804178706,
+       "wing_tip_m": 3765.5734716836105,
+       "yield_t_TNT": 38.47370313332101
+      }
+     ],
+     "best": {
+      "rho": 3000.0,
+      "gain": 1787.0,
+      "departure_t": 22748.951294213795,
+      "converged": true,
+      "rate_Hz": 125.33771054659759,
+      "loop3_r_m": 142.3288804178706,
+      "wing_tip_m": 3765.5734716836105,
+      "yield_t_TNT": 38.47370313332101
+     }
+    },
+    "lit_best": {
+     "rows": [
+      {
+       "rho": 500.0,
+       "gain": 5900.543993774698,
+       "departure_t": 2117833.5418307935,
+       "converged": true,
+       "rate_Hz": 51.45315309347883,
+       "loop3_r_m": 1691.4020578460315,
+       "wing_tip_m": 195923.6314028325,
+       "yield_t_TNT": 10034.695556150562
+      },
+      {
+       "rho": 1000.0,
+       "gain": 3717.1097917937527,
+       "departure_t": 536739.5534979464,
+       "converged": true,
+       "rate_Hz": 51.9452836234441,
+       "loop3_r_m": 846.9721897073249,
+       "wing_tip_m": 64721.23641584079,
+       "yield_t_TNT": 2519.6951893361593
+      },
+      {
+       "rho": 1500.0,
+       "gain": 2836.6856798671724,
+       "departure_t": 268084.67780450947,
+       "converged": true,
+       "rate_Hz": 58.17380301462247,
+       "loop3_r_m": 565.3606905688875,
+       "wing_tip_m": 38636.68643612286,
+       "yield_t_TNT": 1123.994315586269
+      },
+      {
+       "rho": 2000.0,
+       "gain": 2341.6324357256494,
+       "departure_t": 174773.83309882527,
+       "converged": true,
+       "rate_Hz": 67.21412179937956,
+       "loop3_r_m": 424.4985657739681,
+       "wing_tip_m": 28860.652759518198,
+       "yield_t_TNT": 634.3295725917798
+      },
+      {
+       "rho": 3000.0,
+       "gain": 1787.0,
+       "departure_t": 110152.77953231508,
+       "converged": true,
+       "rate_Hz": 94.78944131960945,
+       "loop3_r_m": 283.56745212259034,
+       "wing_tip_m": 22307.539425177856,
+       "yield_t_TNT": 283.58024674614023
+      }
+     ],
+     "best": {
+      "rho": 3000.0,
+      "gain": 1787.0,
+      "departure_t": 110152.77953231508,
+      "converged": true,
+      "rate_Hz": 94.78944131960945,
+      "loop3_r_m": 283.56745212259034,
+      "wing_tip_m": 22307.539425177856,
+      "yield_t_TNT": 283.58024674614023
+     }
+    }
+   }
+  }
+ },
  "proposals": {
   "V3": {
-   "name": "Vertex 3: convergent engineering (proposal)",
-   "fictional": "Canon Fiji lattice only (VTX-02A), unchanged. The coupling 0.3 is a Level B TARGET far beyond present implosions (D-T06-1 asks whether IGNITION declares it).",
+   "name": "Vertex 3: integrated convergence at declared compression coupling 0.5 (proposal)",
+   "fictional": "Canon Fiji lattice only (VTX-02A), no credit. Declared breakthroughs: compression coupling 0.5 (D-T06-1) and the nozzle C upper bound (D-T06-2).",
    "result": {
-    "departure_t": 12654.559513126038,
-    "payload_t": 990.2338712519676,
-    "fusion_TW": 10.543561918959007,
-    "burn_years": 5.685154040809534,
-    "min_round_trip_years": 6.351915811090678,
-    "drive_t": 2216.3443226189243,
-    "radiator_t": 382.07714739658024,
-    "shield_t": 492.47756701027475,
-    "structure_t": 212.22011007265044,
-    "tank_t": 750.3747865341178,
-    "propellant_t": 7995.701332036269,
-    "warm_km2": 0.5025811123975291,
-    "hot_km2": 0.0436031946237099,
-    "wing_tip_radius_m": 1005.7821876604826,
-    "pellet_rate_Hz": 57.174658562937886,
-    "yield_t_TNT": 44.07497729493033,
-    "solid_angle": 0.009453911344690601,
+    "departure_t": 37894.64481978122,
+    "payload_t": 1240.2,
+    "fusion_TW": 31.5346823742199,
+    "burn_years": 5.685154040809533,
+    "min_round_trip_years": 6.3519158110906755,
+    "drive_t": 6540.191136542062,
+    "radiator_t": 2965.997886263432,
+    "shield_t": 511.16770279237346,
+    "structure_t": 624.2396415530034,
+    "tank_t": 2247.030886842137,
+    "propellant_t": 23943.485488237096,
+    "warm_km2": 4.018831880614018,
+    "hot_km2": 0.407216188774845,
+    "wing_tip_radius_m": 8278.25409462885,
+    "pellet_rate_Hz": 173.13050410978803,
+    "yield_t_TNT": 43.53346068100022,
+    "solid_angle": 0.024797581268908624,
     "checks_ok": true,
     "converged": true,
     "loop_radii_m": [
-     56.23701752715927,
-     97.40537162318131,
-     168.71105258147773
+     55.9943699171151,
+     96.98509363424967,
+     167.98310975134524
     ],
-    "xray_standoff_m": 64.93691441545421,
-    "hot_GW": 46.71889599682074,
-    "warm_GW": 21.01117562790184,
-    "ledger_sum": 0.9999999999999999
+    "xray_standoff_m": 64.65672908949978,
+    "hot_GW": 436.31414935933935,
+    "warm_GW": 63.80029039208281,
+    "ledger_sum": 1.0
    },
    "ambitions": {
     "four_burns_close": true,
-    "min_round_trip_years": 6.351915811090678,
-    "six_year_a0_g": 0.007301337772756478,
-    "six_year_departure_t": 13498.621056165353,
+    "min_round_trip_years": 6.3519158110906755,
+    "six_year_a0_g": 0.007302640313579764,
+    "six_year_departure_t": 43265.55447969326,
     "six_year_met_at_base_a0": false,
-    "ceiling_a0_g": 0.013504357631884154,
-    "deficit_1g": 74.05017160083001,
-    "deficit_1p5g": 111.07525740124501,
-    "gain_cliff": 278.15724574050716,
+    "ceiling_a0_g": 0.009800070978603654,
+    "deficit_1g": 102.04007727936714,
+    "deficit_1p5g": 153.0601159190507,
+    "gain_cliff": 705.0026029896881,
+    "nozzle_eff_cliff": 0.606640625
+   }
+  },
+  "V3o": {
+   "name": "Vertex 3: integrated convergence at declared compression coupling 0.5 (proposal) at driver efficiency 0.45",
+   "fictional": "Canon Fiji lattice only (VTX-02A), no credit. Declared breakthroughs: compression coupling 0.5 (D-T06-1) and the nozzle C upper bound (D-T06-2).",
+   "result": {
+    "departure_t": 24143.11325797309,
+    "payload_t": 1240.2,
+    "fusion_TW": 20.071483046615473,
+    "burn_years": 5.6851540408095325,
+    "min_round_trip_years": 6.351915811090674,
+    "drive_t": 4357.988251689581,
+    "radiator_t": 1248.4595720412995,
+    "shield_t": 500.77251196918166,
+    "structure_t": 336.88820373839184,
+    "tank_t": 1431.609171052142,
+    "propellant_t": 15254.669483836602,
+    "warm_km2": 1.3582679146255214,
+    "hot_km2": 0.25848233738764204,
+    "wing_tip_radius_m": 3012.4662457521877,
+    "pellet_rate_Hz": 111.29042736411529,
+    "yield_t_TNT": 43.105231011790146,
+    "solid_angle": 0.024648854204919718,
+    "checks_ok": true,
+    "converged": true,
+    "loop_radii_m": [
+     55.80107324887672,
+     96.650293983927,
+     167.4032197466301
+    ],
+    "xray_standoff_m": 64.433529322618,
+    "hot_GW": 276.952400888119,
+    "warm_GW": 21.562954101507973,
+    "ledger_sum": 1.0
+   },
+   "ambitions": {
+    "four_burns_close": true,
+    "min_round_trip_years": 6.351915811090674,
+    "six_year_a0_g": 0.0073050889527975565,
+    "six_year_departure_t": 25667.382175969014,
+    "six_year_met_at_base_a0": false,
+    "ceiling_a0_g": 0.013167604299767745,
+    "deficit_1g": 75.94395891875627,
+    "deficit_1p5g": 113.9159383781344,
+    "gain_cliff": 417.13393936368453,
     "nozzle_eff_cliff": 0.5302734375
    }
   },
-  "V3c": {
-   "name": "Vertex 3: convergent engineering (proposal) at driver efficiency 0.30",
-   "fictional": "Canon Fiji lattice only (VTX-02A), unchanged. The coupling 0.3 is a Level B TARGET far beyond present implosions (D-T06-1 asks whether IGNITION declares it).",
-   "result": {
-    "departure_t": 21069.265744359484,
-    "payload_t": 990.2338712519676,
-    "fusion_TW": 17.583229050174385,
-    "burn_years": 5.685154040809535,
-    "min_round_trip_years": 6.35191581109068,
-    "drive_t": 3956.4288021293114,
-    "radiator_t": 1028.2851679760822,
-    "shield_t": 505.25813568397456,
-    "structure_t": 329.5739464278187,
-    "tank_t": 1249.3398741296344,
-    "propellant_t": 13312.47887391585,
-    "warm_km2": 1.5038431261822856,
-    "hot_km2": 0.0739895835587883,
-    "wing_tip_radius_m": 2939.518650115656,
-    "pellet_rate_Hz": 93.78006691671675,
-    "yield_t_TNT": 44.812215868285236,
-    "solid_angle": 0.009594325732079368,
-    "checks_ok": true,
-    "converged": true,
-    "loop_radii_m": [
-     56.56422914345973,
-     97.97211876744045,
-     169.69268743037912
-    ],
-    "xray_standoff_m": 65.3147458449603,
-    "hot_GW": 79.27656881478747,
-    "warm_GW": 62.87047256968167,
-    "ledger_sum": 0.9999999999999998
-   },
-   "ambitions": {
-    "four_burns_close": true,
-    "min_round_trip_years": 6.35191581109068,
-    "six_year_a0_g": 0.007302298313847575,
-    "six_year_departure_t": 24510.354445253226,
-    "six_year_met_at_base_a0": false,
-    "ceiling_a0_g": 0.009757976812089104,
-    "deficit_1g": 102.48025992038693,
-    "deficit_1p5g": 153.7203898805804,
-    "gain_cliff": 445.7851030169865,
-    "nozzle_eff_cliff": 0.5733984375000001
-   }
-  },
   "V4": {
-   "name": "Vertex 4: declared-breakthrough endpoint (proposal)",
-   "fictional": "Canon Fiji lattice only, unchanged. Two declared breakthroughs, physics-permitted but undemonstrated (compression coupling, gain) or unvalidated (pulsed nozzle): D-T06-1 and D-T06-2. They are not Fiji properties.",
+   "name": "Vertex 4: ideal-compression limit (proposal, bound not target)",
+   "fictional": "Canon Fiji lattice only. Declared: ideal compression (D-T06-1, upper bound) and the nozzle C upper bound (D-T06-2).",
    "result": {
-    "departure_t": 8295.311231036456,
-    "payload_t": 990.2338712519676,
-    "fusion_TW": 6.365348512725193,
+    "departure_t": 17906.60860887337,
+    "payload_t": 1240.2,
+    "fusion_TW": 14.890549217921567,
     "burn_years": 5.685154040809533,
-    "min_round_trip_years": 6.351915811090678,
-    "drive_t": 1197.5827663150253,
-    "radiator_t": 164.61711772605196,
-    "shield_t": 306.3802131661112,
-    "structure_t": 131.31972325893477,
-    "tank_t": 491.8853467425223,
-    "propellant_t": 5241.338585579025,
-    "warm_km2": 0.24686808089854684,
-    "hot_km2": 0.010090581543265326,
-    "wing_tip_radius_m": 472.733047607398,
-    "pellet_rate_Hz": 169.3375175004752,
-    "yield_t_TNT": 8.984156786419224,
-    "solid_angle": 0.018268747165888072,
+    "min_round_trip_years": 6.351915811090676,
+    "drive_t": 2777.772885283601,
+    "radiator_t": 1060.0898104780924,
+    "shield_t": 358.2977205290137,
+    "structure_t": 263.39482162974025,
+    "tank_t": 1061.8044524939537,
+    "propellant_t": 11314.17448056652,
+    "warm_km2": 1.254791301385235,
+    "hot_km2": 0.19297947448593486,
+    "wing_tip_radius_m": 2695.728708466351,
+    "pellet_rate_Hz": 185.2881606937941,
+    "yield_t_TNT": 19.20752340847335,
+    "solid_angle": 0.03268821111009894,
     "checks_ok": true,
     "converged": true,
     "loop_radii_m": [
-     28.518616880894875,
-     49.39569339930139,
-     85.5558506426846
+     37.23440866806947,
+     64.49188760287933,
+     111.70322600420837
     ],
-    "xray_standoff_m": 32.93046226620093,
-    "hot_GW": 10.811612170519943,
-    "warm_GW": 10.320699438819478,
+    "xray_standoff_m": 42.99459173525288,
+    "hot_GW": 206.7689781869111,
+    "warm_GW": 19.920228511177758,
     "ledger_sum": 1.0
    },
    "ambitions": {
     "four_burns_close": true,
-    "min_round_trip_years": 6.351915811090678,
-    "six_year_a0_g": 0.007305318570112051,
-    "six_year_departure_t": 8622.092448055495,
+    "min_round_trip_years": 6.351915811090676,
+    "six_year_a0_g": 0.007302290361135699,
+    "six_year_departure_t": 19153.723527046193,
     "six_year_met_at_base_a0": false,
-    "ceiling_a0_g": 0.01767168011682472,
-    "deficit_1g": 56.58771511192802,
-    "deficit_1p5g": 84.88157266789203,
-    "gain_cliff": 245.1745183732254,
-    "nozzle_eff_cliff": 0.5284765625
+    "ceiling_a0_g": 0.01253619180204948,
+    "deficit_1g": 79.76904117217758,
+    "deficit_1p5g": 119.65356175826638,
+    "gain_cliff": 700.3348174648188,
+    "nozzle_eff_cliff": 0.5302734375
    }
   },
-  "V4c": {
-   "name": "Vertex 4: declared-breakthrough endpoint (proposal) at driver efficiency 0.30",
-   "fictional": "Canon Fiji lattice only, unchanged. Two declared breakthroughs, physics-permitted but undemonstrated (compression coupling, gain) or unvalidated (pulsed nozzle): D-T06-1 and D-T06-2. They are not Fiji properties.",
+  "V4o": {
+   "name": "Vertex 4: ideal-compression limit (proposal, bound not target) at driver efficiency 0.45",
+   "fictional": "Canon Fiji lattice only. Declared: ideal compression (D-T06-1, upper bound) and the nozzle C upper bound (D-T06-2).",
    "result": {
-    "departure_t": 10756.669868624629,
-    "payload_t": 990.2338712519676,
-    "fusion_TW": 8.26430485143126,
+    "departure_t": 14314.016668216043,
+    "payload_t": 1240.2,
+    "fusion_TW": 11.895451488996908,
     "burn_years": 5.685154040809533,
-    "min_round_trip_years": 6.351915811090678,
-    "drive_t": 1702.738151220302,
-    "radiator_t": 357.46847169954253,
-    "shield_t": 308.8549282093945,
-    "structure_t": 163.23151776100883,
-    "tank_t": 637.8360188514695,
-    "propellant_t": 6796.532072698763,
-    "warm_km2": 0.5661996160597924,
-    "hot_km2": 0.013276319391530005,
-    "wing_tip_radius_m": 1071.2926261664338,
-    "pellet_rate_Hz": 217.44573929156803,
-    "yield_t_TNT": 9.083720247076997,
-    "solid_angle": 0.01826643594550321,
+    "min_round_trip_years": 6.3519158110906755,
+    "drive_t": 2220.471386184564,
+    "radiator_t": 598.5826966801916,
+    "shield_t": 355.5582537821997,
+    "structure_t": 188.63327303458829,
+    "tank_t": 848.775272792933,
+    "propellant_t": 9044.21856976765,
+    "warm_km2": 0.5365064111434471,
+    "hot_km2": 0.1538982964860072,
+    "wing_tip_radius_m": 1276.110961059199,
+    "pellet_rate_Hz": 148.97956507457744,
+    "yield_t_TNT": 19.083698750190358,
+    "solid_angle": 0.03264697168017839,
     "checks_ok": true,
     "converged": true,
     "loop_radii_m": [
-     28.629500200685815,
-     49.5877489428912,
-     85.88850060205742
+     37.15026027359953,
+     64.34613830828205,
+     111.45078082079856
     ],
-    "xray_standoff_m": 33.0584992952608,
-    "hot_GW": 14.22498948130263,
-    "warm_GW": 23.67084492437718,
+    "xray_standoff_m": 42.8974255388547,
+    "hot_GW": 164.89522315202115,
+    "warm_GW": 8.517217401723304,
     "ledger_sum": 1.0
    },
    "ambitions": {
     "four_burns_close": true,
-    "min_round_trip_years": 6.351915811090678,
-    "six_year_a0_g": 0.007302823562609439,
-    "six_year_departure_t": 11517.194746503652,
+    "min_round_trip_years": 6.3519158110906755,
+    "six_year_a0_g": 0.007303300241511339,
+    "six_year_departure_t": 14921.330528809509,
     "six_year_met_at_base_a0": false,
-    "ceiling_a0_g": 0.013041321800224093,
-    "deficit_1g": 76.6793439590469,
-    "deficit_1p5g": 115.01901593857035,
-    "gain_cliff": 395.5446431757512,
-    "nozzle_eff_cliff": 0.5293749999999999
+    "ceiling_a0_g": 0.01598791345624267,
+    "deficit_1g": 62.54724875368512,
+    "deficit_1p5g": 93.82087313052769,
+    "gain_cliff": 414.3721172713451,
+    "nozzle_eff_cliff": 0.527578125
    }
   }
  },
  "ledger_closes": true,
- "runtime_s": 373.3
+ "runtime_s": 566.2
 }

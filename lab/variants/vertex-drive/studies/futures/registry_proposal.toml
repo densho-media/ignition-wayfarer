@@ -179,18 +179,20 @@ checked = "2026-11-09 web search snippet."
 [[decision]]
 id = "D-T06-1"
 kind = "canon"
-question = "Does IGNITION declare, as part of its history, that D-3He targets were ignited with a driver-to-fuel compression coupling eta_c/alpha of about 0.3-0.5 (gain about 700-900 at 2,000-3,000 g/cm3)?"
-options = ["Yes, as a named historical breakthrough (a fictional-history premise, not a Fiji property)", "No: keep the coupling an open research question and every Vertex generation provisional", "Defer until T04 reports"]
-recommendation = "Defer until T04's handoff, then decide. The declared quantity should be the coupling, not the gain: the gain follows from it and the density, and the Atlas gain 3,000 at 3,000 g/cm3 is not energy-consistent at any coupling."
+question = "Does IGNITION declare, as part of its history, that D-3He targets were compressed with a driver-to-fuel coupling eta_c/alpha of at least 0.5 (gain about 1,170 at 2,000 g/cm3), or near the ideal limit (gain 1,787 at 3,000 g/cm3)?"
+options = ["Declare eta_c/alpha 0.5 (V3 proposal, about 38 kt): a named historical breakthrough, not a Fiji property", "Declare the ideal limit (V4 proposal, about 18 kt): an upper bound, honest only as 'as good as physics allows'", "Do not declare: every Vertex generation stays provisional (at 0.3 the ship is about 110 kt, at 0.2 about 360 kt)", "Ask for a Level C compression aid instead (T04 D-T04-1 option)"]
+recommendation = "Declare 0.5 as the planning value and carry the ideal limit as the bound, never as a target. Same decision as T04 D-T04-1; decide them together."
 decider = "ApeDevil"
+links = ["D-T04-1", "VTX-01", "VTX-01A"]
 
 [[decision]]
 id = "D-T06-2"
 kind = "canon"
-question = "Does IGNITION declare a validated pulsed magnetic nozzle at efficiency 0.79-0.86 (the top of the theoretical range)?"
-options = ["Yes, as an engineering milestone of the history", "No: carry 0.65-0.72 as the planning band", "Defer until T03 and a D-09 study"]
-recommendation = "Defer to T03. It is the steepest lever (elasticity -2.9 at V1c) and every generation's fate depends on it."
+question = "Does IGNITION declare a pulsed magnetic nozzle with closure coils that reaches the ideal-model thrust efficiency eta_T = eta_mom^2 of about 0.79 at a stored field of 15 pulse energies?"
+options = ["Yes, as an engineering milestone (closure-coil nozzle C, T03-NEW-1); booked solid angle and coil mass follow", "No: plan at 0.74 (10 E_p), which roughly adds 30-60 % mass", "No: plan at the literature best 0.64; then no ship below about 110 kt exists even at ideal compression"]
+recommendation = "Declare it, with the closure coils drawn and their solid angle booked (T03 D-T03-2). It is the steepest mass lever (elasticity -2.9) and the ve gate at about 0.53 is a hard floor below it."
 decider = "ApeDevil"
+links = ["D-T03-2", "VTX-03", "T03-NEW-1"]
 
 [[decision]]
 id = "D-T06-3"
@@ -211,15 +213,55 @@ source = "case:ve_gate"
 
 [[finding]]
 id = "F-T06-2"
-text = "Convergence is sub-multiplicative in mass: combined chains save less than the product of their single savings, because payload, propellant and tanks form a floor (4,228 t at ve 19,201 km/s with every specific mass x1e-4). Its real effect is on closure: under the gain-compression bound the combined engineering package turns non-closing or 161 kt ships into 10-13 kt ones at eta_c/alpha 0.2-0.3."
-source = "case:consistency"
-
-[[finding]]
-id = "F-T06-4"
-text = "The Atlas generations V0-V2 (3,000 g/cm3, gain 3,000) need a compression coupling eta_c/alpha of 1.68 under T04's bound and are not energy-consistent; their masses are conditional (as T04 EARLY states)."
-source = "case:consistency"
+text = "Convergence is sub-multiplicative in mass: combined chains save less than the product of their single savings, because payload, propellant and tanks form a floor (5,665 t on V4 with every specific mass x1e-4). Its real effect is on closure: under the gain-compression bound the Atlas engineering package does not close at eta_c/alpha 0.2 and is 1,747 kt at 0.3, while the T06 package closes at 362 kt and 110 kt."
+source = "case:integrated"
 
 [[finding]]
 id = "F-T06-3"
-text = "The LOCKED 6.0 y round trip is a kinematic question, not a mass one: the minimum round trip is 6.35 y at 0.0069 g in every generation and every chain; any generation whose ceiling exceeds 0.0073 g meets 6.0 y at a few per cent more mass."
-source = "case:chains"
+text = "The LOCKED 6.0 y round trip is a kinematic question, not a mass one: the minimum round trip is 6.35 y at 0.0069 g in every generation and chain; any generation whose ceiling exceeds 0.0073 g meets 6.0 y at 4-14 % more mass."
+source = "case:proposals"
+
+[[finding]]
+id = "F-T06-4"
+text = "The Atlas generations V0-V2 (3,000 g/cm3, gain 3,000) need a compression coupling eta_c/alpha of 1.68 under T04's bound and are not energy-consistent; their masses are conditional."
+source = "case:consistency"
+
+[[finding]]
+id = "F-T06-5"
+text = "With every T01-T04 correction applied (warm 628 K, house 2.6e-5, plume strike 0.065, stored field 15 E_p, eta_T 0.791, +250 t skirt and shoes), the lightest consistent ship is 17.9 kt at ideal compression (V4), 37.9 kt at eta_c/alpha 0.5 (V3) and 110 kt at 0.3. FDP-1's 20.8 kt is therefore an ideal-limit ship, not a planning ship."
+source = "case:integrated"
+
+[[finding]]
+id = "F-T06-6"
+text = "Per-thread cost at coupling 0.5 (start 13,144 t): T01's 628 K warm loop is the largest single correction (25,141 t alone); T03's 15 E_p stored field is second (18,865 t); together all six reach 45,786 t. At ideal coupling the same six take 8,796 t to 17,907 t."
+source = "case:attribution"
+
+[[finding]]
+id = "F-T06-7"
+text = "Five penalties have no calculator path and are not booked, each making every number above heavier: the one-target-in-flight launcher (+6-18 %, T01), closure-coil solid angle 0.040-0.051 against 0.017 (T03), LiH shoes +0.0127 solid angle (T02), eddy screens about 0.1 % of plasma (T03), and the fast ignitor and 43-144 kg tritium (T04)."
+source = "case:integrated"
+
+[[finding]]
+id = "F-T06-8"
+text = "1 g is not met by any convergence: on V4 every specific mass would have to fall 5,084-fold (30 kt, 3,605 TW fusion); 1.5 g does not close at all."
+source = "case:one_g"
+
+# ------------------------------------------------------------------------------------------------------------------------------------
+# calculator extensions proposed to T00 (Atlas convergence.py / FDP-1 adapter; not done by T06)
+# ------------------------------------------------------------------------------------------------------------------------------------
+
+[[extension]]
+id = "X-T06-1"
+text = "Cap the target gain at T04's compression bound G <= 1,787 x eta_c/alpha x (rho/3000)^(-2/3), with eta_c/alpha as the input, so no generation can be energy-inconsistent by construction."
+
+[[extension]]
+id = "X-T06-2"
+text = "Name the calculator's nozzle_efficiency as thrust efficiency eta_T = eta_mom^2 (T03) and tie the stored field ratio to it."
+
+[[extension]]
+id = "X-T06-3"
+text = "Add hooks for the five unbooked penalties: launcher speed (T01 D-T01-2), nozzle-envelope solid angle, loop-shoe solid angle, eddy-screen heat, ignitor and tritium."
+
+[[extension]]
+id = "X-T06-4"
+text = "Book T02 protection mass (skirt, shoes) as drive hardware, not payload, so it scales with the drive in solves."

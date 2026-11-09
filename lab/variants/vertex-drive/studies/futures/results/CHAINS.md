@@ -101,19 +101,19 @@ Departure 5,731 t; product of the five chain ratios 3,863 t; interaction +48.3 %
 | K5 combined | 11,810 | MET | 6.35 | MET ONLY ABOVE 0.0073 g (12,672 t) | 0.0128 | NOT MET (78x short) | 1,108 | 0.528 |
 | Grand | 5,731 | MET | 6.35 | MET ONLY ABOVE 0.0073 g (5,816 t) | 0.0357 | NOT MET (28x short) | 245 | 0.546 |
 
-## Proposed generations (generations_proposal.toml; c = driver efficiency 0.30)
+## Proposed generations (generations_proposal.toml; driver 0.30, o = driver 0.45)
 
 | Generation | Departure t | Four 0.016 c burns | Min round trip y | LOCKED 6.0 y | Ceiling a0 g | 1 g | Gain cliff | Nozzle-eff. cliff |
 |---|---|---|---|---|---|---|---|---|
-| V3 | 12,655 | MET | 6.35 | MET ONLY ABOVE 0.0073 g (13,499 t) | 0.0135 | NOT MET (74x short) | 278 | 0.530 |
-| V3c | 21,069 | MET | 6.35 | MET ONLY ABOVE 0.0073 g (24,510 t) | 0.0098 | NOT MET (102x short) | 446 | 0.573 |
-| V4 | 8,295 | MET | 6.35 | MET ONLY ABOVE 0.0073 g (8,622 t) | 0.0177 | NOT MET (57x short) | 245 | 0.528 |
-| V4c | 10,757 | MET | 6.35 | MET ONLY ABOVE 0.0073 g (11,517 t) | 0.0130 | NOT MET (77x short) | 396 | 0.529 |
+| V3 | 37,895 | MET | 6.35 | MET ONLY ABOVE 0.0073 g (43,266 t) | 0.0098 | NOT MET (102x short) | 705 | 0.607 |
+| V3o | 24,143 | MET | 6.35 | MET ONLY ABOVE 0.0073 g (25,667 t) | 0.0132 | NOT MET (76x short) | 417 | 0.530 |
+| V4 | 17,907 | MET | 6.35 | MET ONLY ABOVE 0.0073 g (19,154 t) | 0.0125 | NOT MET (80x short) | 700 | 0.530 |
+| V4o | 14,314 | MET | 6.35 | MET ONLY ABOVE 0.0073 g (14,921 t) | 0.0160 | NOT MET (63x short) | 414 | 0.528 |
 
-- V3: fusion 10.54 TW, wing tip 1,006 m, loops r 56.2, 97.4, 168.7 m, stand-off 64.9 m, 57 Hz, yield 44.1 t TNT; mass split payload 990 / propellant 7,996 / tanks 750 / drive 2,216 / radiators 382 / shield 492 / structure 212 t.
-- V3c: fusion 17.58 TW, wing tip 2,940 m, loops r 56.6, 98.0, 169.7 m, stand-off 65.3 m, 94 Hz, yield 44.8 t TNT; mass split payload 990 / propellant 13,312 / tanks 1,249 / drive 3,956 / radiators 1,028 / shield 505 / structure 330 t.
-- V4: fusion 6.37 TW, wing tip 473 m, loops r 28.5, 49.4, 85.6 m, stand-off 32.9 m, 169 Hz, yield 9.0 t TNT; mass split payload 990 / propellant 5,241 / tanks 492 / drive 1,198 / radiators 165 / shield 306 / structure 131 t.
-- V4c: fusion 8.26 TW, wing tip 1,071 m, loops r 28.6, 49.6, 85.9 m, stand-off 33.1 m, 217 Hz, yield 9.1 t TNT; mass split payload 990 / propellant 6,797 / tanks 638 / drive 1,703 / radiators 357 / shield 309 / structure 163 t.
+- V3: fusion 31.53 TW, wing tip 8,278 m, loops r 56.0, 97.0, 168.0 m, stand-off 64.7 m, 173 Hz, yield 43.5 t TNT; mass split payload 1,240 / propellant 23,943 / tanks 2,247 / drive 6,540 / radiators 2,966 / shield 511 / structure 624 t.
+- V3o: fusion 20.07 TW, wing tip 3,012 m, loops r 55.8, 96.7, 167.4 m, stand-off 64.4 m, 111 Hz, yield 43.1 t TNT; mass split payload 1,240 / propellant 15,255 / tanks 1,432 / drive 4,358 / radiators 1,248 / shield 501 / structure 337 t.
+- V4: fusion 14.89 TW, wing tip 2,696 m, loops r 37.2, 64.5, 111.7 m, stand-off 43.0 m, 185 Hz, yield 19.2 t TNT; mass split payload 1,240 / propellant 11,314 / tanks 1,062 / drive 2,778 / radiators 1,060 / shield 358 / structure 263 t.
+- V4o: fusion 11.90 TW, wing tip 1,276 m, loops r 37.2, 64.3, 111.5 m, stand-off 42.9 m, 149 Hz, yield 19.1 t TNT; mass split payload 1,240 / propellant 9,044 / tanks 849 / drive 2,220 / radiators 599 / shield 356 / structure 189 t.
 
 ## Elasticities at V1c (12,978 t): d ln(departure) / d ln(lever), +-10 % steps
 
@@ -149,20 +149,20 @@ eta_jet x b must be at least 0.5236 at ve 19,201 km/s. With burn fraction capped
 | house_1e-3 | VTX-07C | house load at the unsourced FDP-1 0.1 % | 15,585 | 1.201 |
 | recovery_0.90 | VTX-02C | recovery at the central tier 0.90 | 13,009 | 1.002 |
 
-## 1 g and 1.5 g: uniform specific-mass reduction on the grand endpoint
+## 1 g and 1.5 g: uniform specific-mass reduction on the final V4 proposal
 
 Every drive, power, radiator, nozzle and light-structure specific mass scaled by one factor; shield, tanks and payload unscaled.
 
-- 1 g closes at specific masses x0.0155 (a 64-fold reduction): departure 40,272 t, fusion 4,418 TW, warm 47.97 km2.
-- 1.5 g does not close even at x1e-05: integration diverged (RuntimeError: FDP-1 integration did not converge)
+- 1 g closes at specific masses x0.0002 (a 5,084-fold reduction): departure 30,155 t, fusion 3,605 TW, warm 302.50 km2.
+- 1.5 g does not close even at x1e-05: integration diverged (ValueError: math domain error)
 
-## Convergence floor (specific masses x1e-4 on the grand endpoint, FDP-1 a0)
+## Convergence floor (specific masses x1e-4 on the final V4 proposal, FDP-1 a0)
 
-Departure 4,228 t: payload 990, propellant 2,671, tanks 251, shield 206, drive 209, radiators 0, structure 2 t. No drive, thermal or structural improvement in this model goes below this at ve 19,201 km/s.
+Departure 5,665 t: payload 1,240, propellant 3,580, tanks 336, shield 346, drive 366, radiators 0, structure 19 t. No drive, thermal or structural improvement in this model goes below this at ve 19,201 km/s.
 
-## Gain-compression consistency (T04 EARLY bound)
+## Gain-compression consistency (T04 bound)
 
-G <= 1,787 x eta_c/alpha x (rho / 3,000 g/cm3)^(-2/3); eta_c/alpha <= 1 by definition. Source: T04 EARLY 1b85941 section 1 (bound); T01 EARLY 57fe625 (628 K, 0.005 %).
+G <= 1,787 x eta_c/alpha x (rho / 3,000 g/cm3)^(-2/3); eta_c/alpha <= 1 by definition. Source: T04 HANDOFF fd4ff3d case compression (EARLY 1b85941). The 'T01_early' set uses T01 EARLY 57fe625 numbers.
 
 | Case | rho g/cm3 | Gain | eta_c/alpha needed | Possible at all |
 |---|---|---|---|---|
@@ -173,8 +173,8 @@ G <= 1,787 x eta_c/alpha x (rho / 3,000 g/cm3)^(-2/3); eta_c/alpha <= 1 by defin
 | K5 | 3,000 | 3,000 | 1.68 | NO |
 | grand (all chains) | 6,000 | 6,000 | 5.33 | NO |
 | V0-V2 (Atlas) | 3,000 | 3,000 | 1.68 | NO |
-| V3 (proposal) | 2,000 | 702 | 0.30 | yes |
-| V4 (proposal) | 3,000 | 894 | 0.50 | yes |
+| V3 (proposal) | 2,000 | 1,171 | 0.50 | yes |
+| V4 (proposal) | 3,000 | 1,787 | 1.00 | yes |
 
 Frontier: gain set to its bound at each density. Best (lightest closing) density per coupling; full rows in futures.json.
 
@@ -196,4 +196,60 @@ Frontier: gain set to its bound at each density. Best (lightest closing) density
 | grand_levers_T01_early | 0.5 | 2,000 | 1,171 | 9,283 | 85 | 128 | 932 |
 | grand_levers_T01_early | 1 | 3,000 | 1,787 | 7,363 | 151 | 85 | 502 |
 
-Runtime 373 s.
+## Final synthesis: every T01-T04 correction together
+
+Corrections applied (each a thread handoff number):
+
+- T01: `warm` = 628: equivalent warm loop of 14 components at TARGET temperatures (HANDOFF D; D-T01-1), not 700-800 K.
+- T01: `house` = 2.6e-05: bottom-up house load, advanced (HANDOFF D; 0.6 MJ per pellet TARGET).
+- T03: `ptw` = 0.065: plume-strike share of the nozzle loss 0.06-0.07 for the closure-coil nozzle C (HANDOFF D), not 0.02.
+- T03: `field_ratio` = 15: stored field 15 E_p, needed to reach eta_T 0.791 with nozzle C (HANDOFF D; D-T03-2).
+- T03: `eta` = 0.791: eta_T = eta_mom^2 = 0.791 for C at 15 E_p: an upper bound (ideal model), reached only with closure coils (T03-NEW-1).
+- T02: `payload_add` = 250: engine-side skirt 22-90 t (56 central) and LiH loop shoes 193 t (HANDOFF D); their solid angle is NOT booked.
+
+Not booked (no calculator path; each makes the ship heavier):
+
+- T01: one-target-in-flight launcher at 4.0 / 2.5 km/s: +6.3 % / +17.5 % departure (T01 planning case); needs a calculator change (D-T01-2).
+- T03: closure coils and larger loop envelopes: envelope solid angle 0.040-0.051 against V1 0.017: more armour and hot-loop heat.
+- T02: LiH shoes on the loops: +0.0127 hardware solid-angle share.
+- T03: warm eddy-current screens: about 0.1 % of plasma (0.03-1 %) into the hot loop.
+- T04: fast ignitor and D-T core: ignitor beam line, 43-144 kg tritium per mission; energy within the driver budget only if eta_c holds.
+
+### Per-thread cost on the T06 package at a consistent target (V1c, driver 0.30)
+
+Coupling 0.5 at 3,000 g/cm3 (gain 894); start (Atlas thermal, T03/T02 not applied) 13,144 t.
+
+| Thread | Correction | Alone t | Cumulative t |
+|---|---|---|---|
+| T01 | `warm` = 628 | 25,141 | 25,141 |
+| T01 | `house` = 2.6e-05 | 12,800 | 22,405 |
+| T03 | `ptw` = 0.065 | 15,166 | 28,930 |
+| T03 | `field_ratio` = 15 | 18,865 | 41,581 |
+| T03 | `eta` = 0.791 | 13,103 | 41,095 |
+| T02 | `payload_add` = 250 | 15,303 | 45,786 |
+
+Coupling 1 at 3,000 g/cm3 (gain 1,787); start (Atlas thermal, T03/T02 not applied) 8,796 t.
+
+| Thread | Correction | Alone t | Cumulative t |
+|---|---|---|---|
+| T01 | `warm` = 628 | 10,661 | 10,661 |
+| T01 | `house` = 2.6e-05 | 8,640 | 10,132 |
+| T03 | `ptw` = 0.065 | 9,663 | 11,298 |
+| T03 | `field_ratio` = 15 | 12,581 | 16,154 |
+| T03 | `eta` = 0.791 | 8,778 | 16,049 |
+| T02 | `payload_add` = 250 | 10,249 | 17,907 |
+
+### Integrated frontier (gain at the T04 bound; lightest closing density per cell)
+
+| Lever set | eta_c/alpha | Nozzle C 15 E_p (0.791) | Nozzle C 10 E_p (0.740) | Literature best (0.64) |
+|---|---|---|---|---|
+| atlas_engineering | 0.2 | none closes | none closes | none closes |
+| atlas_engineering | 0.3 | 1,747.0 kt (500 g/cm3, G 1,770, 502 Hz, loop3 r 670 m) | none closes | none closes |
+| atlas_engineering | 0.5 | 367.8 kt (1,000 g/cm3, G 1,859, 423 Hz, loop3 r 335 m) | 1,058.6 kt (500 g/cm3, G 2,950, 163 Hz, loop3 r 852 m) | 29,541.6 kt (500 g/cm3, G 2,950, 713 Hz, loop3 r 1696 m) |
+| atlas_engineering | 1 | 68.4 kt (2,000 g/cm3, G 2,342, 315 Hz, loop3 r 167 m) | 125.0 kt (2,000 g/cm3, G 2,342, 307 Hz, loop3 r 213 m) | 2,817.1 kt (1,000 g/cm3, G 3,717, 273 Hz, loop3 r 847 m) |
+| t06_package | 0.2 | 361.7 kt (500 g/cm3, G 1,180, 103 Hz, loop3 r 672 m) | 655.0 kt (500 g/cm3, G 1,180, 99 Hz, loop3 r 856 m) | 15,551.7 kt (500 g/cm3, G 1,180, 367 Hz, loop3 r 1709 m) |
+| t06_package | 0.3 | 109.8 kt (1,000 g/cm3, G 1,115, 125 Hz, loop3 r 336 m) | 188.5 kt (1,000 g/cm3, G 1,115, 114 Hz, loop3 r 428 m) | 4,190.5 kt (1,000 g/cm3, G 1,115, 395 Hz, loop3 r 855 m) |
+| t06_package | 0.5 | 37.9 kt (2,000 g/cm3, G 1,171, 173 Hz, loop3 r 168 m) | 57.8 kt (2,000 g/cm3, G 1,171, 141 Hz, loop3 r 214 m) | 604.9 kt (1,500 g/cm3, G 1,418, 129 Hz, loop3 r 568 m) |
+| t06_package | 1 | 17.9 kt (3,000 g/cm3, G 1,787, 185 Hz, loop3 r 112 m) | 22.7 kt (3,000 g/cm3, G 1,787, 125 Hz, loop3 r 142 m) | 110.2 kt (3,000 g/cm3, G 1,787, 95 Hz, loop3 r 284 m) |
+
+Runtime 566 s.

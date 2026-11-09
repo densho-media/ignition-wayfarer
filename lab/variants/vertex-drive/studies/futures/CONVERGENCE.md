@@ -1,149 +1,148 @@
 # T06 convergence analysis
 
-Status: **GATHERING draft**, 2026-11-09. Inputs: the Atlas, T06's own FDP-1 solves, and the EARLY findings of T01
-(`claude/project-thread-93sqqi` 57fe625) and T04 (`claude/project-thread-9hxayw` 1b85941). T02 and T03 had published nothing yet. The
-final synthesis replaces this after the T01-T04 handoffs.
+Status: **FINAL synthesis**, 2026-11-09. Inputs: the Atlas at `8de3ffa`, T06's own FDP-1 solves, and the final handoffs of
+T01 thermal (`claude/project-thread-93sqqi` 1302708), T02 dust (`claude/project-thread-uwi5pl` 3c665ec), T03 nozzle
+(`claude/project-thread-ujxhjo` 59244a9) and T04 ignition (`claude/project-thread-9hxayw` fd4ff3d).
 
-All tables come from `futures.py` (generated detail in `results/CHAINS.md`, data in `results/futures.json`). The FDP-1 calculator, the
+All numbers come from `futures.py` (generated tables in `results/CHAINS.md`, data in `results/futures.json`). The FDP-1 calculator, the
 four-burn engine and `convergence.py` are imported read-only. V0 through this adapter reproduces 20,760 t, and the energy ledger closes
-in every combined solve. Every step value is a TARGET, never a result.
+in every combined solve. Every step value is a TARGET, never a demonstrated result. Research only, not canon.
 
-## 0. The headline: gain and compression are one lever, and the Atlas pair is not energy-consistent
+## 0. The headline
 
-T04 EARLY shows that compressing fuel to density ρ costs at least its Fermi-degenerate energy. Target gain is therefore bounded:
-**G ≤ 1,787 × (η_c/α) × (ρ / 3,000 g/cm³)^(-2/3)**. Here η_c is the share of driver energy that ends up as fuel internal energy, and α is
-the adiabat, so η_c/α ≤ 1 by definition. Present implosions are far below 1.
+**Once the four threads' corrections are applied together, the Vertex ship is heavier than the Atlas said, and it exists only if
+IGNITION declares two breakthroughs.**
+
+| Ship (T06 engineering package, every T01-T04 correction, driver 0.30) | Coupling η_c/α | ρ g/cm³ | Gain | Departure |
+| --- | --- | --- | --- | --- |
+| Not declared (0.2) | 0.2 | 500 | 1,180 | 362 kt |
+| Not declared (0.3) | 0.3 | 1,000 | 1,115 | 110 kt |
+| **V3 proposal** (declared 0.5) | 0.5 | 2,000 | 1,171 | **37.9 kt** |
+| **V4 proposal** (ideal-compression limit) | 1.0 | 3,000 | 1,787 | **17.9 kt** |
+| Atlas V0 (FDP-1 optimistic tier), for comparison | 1.68 needed | 3,000 | 3,000 | 20.8 kt, **not energy-consistent** |
+
+All at the closure-coil nozzle at η_T 0.791 (T03's ideal-model upper bound). FDP-1's 20.8 kt is therefore an ideal-limit ship, not a
+planning ship (F-T06-5). Five further penalties have no calculator path and are not booked (section 3); each makes these numbers heavier.
+
+## 1. Gain and compression are one lever
+
+T04 shows that compressing fuel to density ρ costs at least its Fermi-degenerate energy, so target gain is bounded:
+**G ≤ 1,787 × (η_c/α) × (ρ / 3,000 g/cm³)^(-2/3)**, with η_c/α ≤ 1 by definition and present implosions in the per-cent range.
 
 | Case | ρ g/cm³ | Gain | η_c/α needed | Energy-consistent |
 | --- | --- | --- | --- | --- |
-| Atlas V0, V1, V2 (FDP-1 optimistic tier) | 3,000 | 3,000 | 1.68 | **NO** |
-| T06 chains K1-K5 and the grand endpoint (draft 1) | 3,000-6,000 | 3,000-6,000 | 1.68-5.33 | **NO** |
-| T06 V3 proposal | 2,000 | 702 | 0.30 | yes |
-| T06 V4 proposal | 3,000 | 894 | 0.50 | yes |
+| Atlas V0, V1, V2 | 3,000 | 3,000 | 1.68 | **NO** |
+| T06 chains K1-K5, grand endpoint (sensitivity only) | 3,000-6,000 | 3,000-6,000 | 1.68-5.33 | **NO** |
+| V3 proposal | 2,000 | 1,171 | 0.50 | yes (declared) |
+| V4 proposal | 3,000 | 1,787 | 1.00 | yes (the bound itself) |
 
-So the steepest-looking convergence step in T06's first draft (K4, denser compression, which halved every loop radius) is not available.
-Denser fuel lowers the gain the driver can reach. The two numbers must be chosen together, and the quantity that IGNITION would have to
-declare is the **compression coupling η_c/α**, not the gain. This changes D-T06-1 (registry_proposal.toml).
+Denser fuel lowers the gain the driver can reach, so density and gain must be chosen together. The quantity IGNITION would declare is
+the **coupling**, not the gain (D-T06-1, same question as T04 D-T04-1). T06's first-draft compression chain K4 (6,000 g/cm³, half-size
+nozzle) is withdrawn.
 
-**Frontier**: the gain is set to its bound at each density, and the lightest closing ship is kept (results/CHAINS.md, "Frontier").
+## 2. What each thread changed
 
-| Lever set | η_c/α 0.1 | 0.2 | 0.3 | 0.5 | 1.0 (ideal) |
-| --- | --- | --- | --- | --- | --- |
-| V1c (Atlas V1 at driver 0.30) | none closes | none closes | 160.8 kt (500 g/cm³) | 50.3 kt (1,000) | 18.9 kt (2,000) |
-| All T06 engineering levers, Atlas thermal | 30.5 kt (1,000) | 13.3 kt (1,500) | 10.3 kt (2,000) | 8.3 kt (3,000) | 7.0 kt (3,000) |
-| The same, with T01 EARLY thermal (628 K equivalent, house 0.005 %) | 51.8 kt (500) | 18.3 kt (1,500) | 12.4 kt (1,500) | 9.3 kt (2,000) | 7.4 kt (3,000) |
+Six corrections from the handoffs, applied to the T06 package at a consistent target (results/CHAINS.md, "Per-thread cost"):
 
-What this means:
+| Thread | Correction | Alone, coupling 0.5 (start 13,144 t) | Alone, ideal coupling (start 8,796 t) |
+| --- | --- | --- | --- |
+| T01 | equivalent warm loop 628 K, not 700-800 K | **25,141 t** (largest) | 10,661 t |
+| T01 | bottom-up house load 2.6e-5 of fusion | 12,800 t (a saving) | 8,640 t |
+| T03 | plume strike 0.065 of nozzle loss, not 0.02 | 15,166 t | 9,663 t |
+| T03 | stored field 15 E_p for the closure-coil nozzle | **18,865 t** | 12,581 t |
+| T03 | η_T = η_mom² = 0.791 (upper bound, nozzle C) | 13,103 t | 8,778 t |
+| T02 | +250 t engine skirt and LiH loop shoes | 15,303 t | 10,249 t |
+| **All six** | | **45,786 t** | **17,907 t** |
 
-- On its own, the Atlas V1 engineering package does not survive the bound at a believable coupling. Only the full T06 engineering
-  package does, and then only at η_c/α of about 0.2 or more.
-- **Engineering convergence now earns more than it did.** With the bound in force, the thermal, driver and structure levers decide
-  whether a ship exists at all (V1c at 0.3: 161 kt; the full package at 0.3: 10.3 kt). Before the bound they only made a closing ship
-  smaller. This is the one place the analysis finds a real convergence effect: the improvements do not multiply, but together they
-  move the ship across the closure boundary.
-- The convergent ship is not small and dense. At η_c/α 0.3 the lightest density is 1,500-2,000 g/cm³, with 44 t TNT pulses at
-  57-93 Hz and the outer loop at r 128-171 m. That is larger than FDP-1, not half its size.
+(The cumulative coupling-0.5 value, 45,786 t at 3,000 g/cm³, is above V3's 37,895 t because V3 picks the better density 2,000 g/cm³.)
 
-## 1. What is real, what is hopeful
+The thermal correction is the largest. T01 finds that a split warm loop of fourteen component types, each at its own TARGET temperature,
+behaves like one loop at 628 K. Only 489 K is supported by present components, and at that value no T06 ship closes.
 
-These are the single-lever chains on V1c (12,978 t). They keep the Atlas gain and density, so they show sensitivity only (section 0).
+## 3. Integrated frontier and what is not booked
 
-| Chain | Mechanism | Link status | Alone on V1c | Combined | Verdict |
-| --- | --- | --- | --- | --- | --- |
-| **K1 recirculating power** | gain ×2 (VTX-01A), driver 0.30→0.45 and half its mass (VTX-01B), house ÷2 (VTX-01C) | modelled | -24 %, -20 %, -15 %, -8 % | 8,204 t (-37 %) | the driver steps are real; the gain step is excluded by the bound |
-| **K2 thermal** | 800 K warm loop (VTX-07A), liquid-sheet warm radiators (VTX-07B), thin hot heat pipes (T06-NEW-1) | modelled | -14 %, -15 %, -4 % | 9,904 t (-24 %) | real mechanism, but T01 EARLY finds the split loop is 628 K, not 800 K |
-| **K3 nozzle** | nozzle 0.86 (VTX-03), plume strike ÷2 (VTX-03B), recovery 0.98 (VTX-02C) | unmodelled / speculative / modelled | -18 %, -5 %, -0.1 % | 10,410 t (-20 %) | hopeful; the sign of the helical effect is unresolved (D-09); an upper bound, because the ledger is shared |
-| **K4 compression** | 6,000 g/cm³ (VTX-01A), half-mass armour (VTX-06B) | modelled, but **inconsistent** | -14 %, -2 % | 10,971 t | **withdrawn**: 6,000 g/cm³ at gain 3,000 needs η_c/α 2.66 |
-| **K5 structure** | 3 GPa laminate for hoops, spars and trusses (T06-NEW-2) | modelled | -3 % each | 11,810 t (-9 %) | real but small |
+Lightest closing ship per coupling, gain at the bound, density searched (results/CHAINS.md "Integrated frontier"):
 
-The prompt's example chain (*better ignition → less fusion power → less recirculating power → smaller thermal system → lower dry mass →
-lower propulsion demand*) holds in sign but is in the wrong order. At fixed exhaust velocity and acceleration, gain does not lower the
-fusion power that a given thrust needs. It lowers the recirculating power (driver loss and driver mass). Fusion power then falls only
-because the lighter ship needs less thrust (K1: 10.8 to 6.8 TW). Booking it the other way round would credit the same saving twice.
-
-## 2. Combined against summed: no super-additive synergy in mass
-
-| Chain | Combined t | Additive expectation t | Multiplicative expectation t | Interaction vs product |
+| Lever set | η_c/α | Nozzle C at 15 E_p (η_T 0.791) | Nozzle C at 10 E_p (0.740) | Literature best (0.64) |
 | --- | --- | --- | --- | --- |
-| K1 | 8,204 | 4,313 | 6,188 | +32.6 % |
-| K2 | 9,904 | 8,694 | 9,106 | +8.8 % |
-| K3 | 10,410 | 10,083 | 10,190 | +2.2 % |
-| K5 | 11,810 | 11,784 | 11,820 | -0.1 % |
+| Atlas engineering | 0.2 | none closes | none closes | none closes |
+| Atlas engineering | 0.3 | 1,747 kt | none closes | none closes |
+| Atlas engineering | 0.5 | 368 kt | 1,059 kt | 29,542 kt |
+| Atlas engineering | 1.0 | 68.4 kt | 125 kt | 2,817 kt |
+| T06 package | 0.2 | 362 kt | 655 kt | 15,552 kt |
+| T06 package | 0.3 | 110 kt | 189 kt | 4,191 kt |
+| T06 package | 0.5 | **37.9 kt** | 57.8 kt | 605 kt |
+| T06 package | 1.0 | **17.9 kt** | 22.7 kt | 110 kt |
 
-Each combination saves less than its single effects multiplied together, and much less than their sum. The additive column is what double
-counting would claim: 4,313 t for K1. The cause is a floor that the drive cannot shrink: payload 990 t, plus propellant at the rocket
-equation's four-burn mass ratio of 2.72 at 19,201 km/s, plus its tanks. With every specific mass at 1e-4 of today's value, the ship
-still departs at **4,228 t** (payload 990, propellant 2,671, tanks 251, shield 206, drive 209). That is the convergence floor at the
-mission exhaust velocity. Only a higher ve or a lighter payload moves it.
+Not booked (no calculator path; each adds mass):
 
-## 3. Steepest parameters
+- T01: one-target-in-flight launcher at 4.0 / 2.5 km/s: +6.3 % / +17.5 % departure (D-T01-2).
+- T03: closure coils and their larger envelope: solid angle 0.040-0.051 against V1's 0.017 (more armour and hot-loop heat).
+- T02: LiH loop shoes: +0.0127 of hardware solid angle.
+- T03: warm eddy-current screens: about 0.1 % of plasma energy (0.03-1 %) into the hot loop.
+- T04: fast ignitor beam line and D-T core: 43-144 kg tritium per mission.
 
-Elasticity of departure mass at V1c (d ln m / d ln x, from ±10 % solves):
+## 4. What is real, what is hopeful
 
-| Parameter | Elasticity |
-| --- | --- |
-| Nozzle efficiency | **-2.87** |
-| Warm-loop temperature | **-1.74** |
-| Driver efficiency | -0.74 |
-| Gain | -0.63 |
-| Driver mass | +0.37 |
-| Warm areal mass | +0.34 |
-| Compression | -0.34 (at fixed gain, which section 0 rules out) |
-| House load | +0.17 |
+| Chain | Mechanism | After the four threads | Verdict |
+| --- | --- | --- | --- |
+| **K1 recirculating power** | driver 0.30→0.45 and half its mass (VTX-01B), house load (VTX-01C), gain (VTX-01A) | driver steps hold; T01 house load is a real saving; the gain step is ruled out by the bound | **REAL** (driver, house); gain step **WITHDRAWN** |
+| **K2 thermal** | hot machinery (VTX-07A), liquid-sheet warm radiators (VTX-07B), thin refractory heat pipes (T06-NEW-1) | T01: 628 K at TARGET components, 489 K today; T01 calls driver kg/W fragile | **REAL in kind, smaller than hoped**; 800 K withdrawn |
+| **K3 nozzle** | η 0.86, plume strike ÷2, recovery 0.98 | T03: η_T 0.791 is the ideal-model ceiling and needs closure coils; plume strike 0.06-0.07 (3× the Atlas); recovery extraction 0.13 % of fusion; clocked sectors give no useful shear; helices trade collimation | **HOPEFUL**; 0.86 and plume ÷2 **WITHDRAWN**; recovery **NEGLIGIBLE** |
+| **K4 compression** | 6,000 g/cm³, half-mass armour | inconsistent with T04's bound | **WITHDRAWN** (armour step real, -2 %) |
+| **K5 structure** | 3 GPa laminate (T06-NEW-2) | not touched by the threads | **REAL but small** (-3 % per step) |
+| **Protection** (new) | engine skirt, LiH shoes (T02) | +250 t mass, +0.0127 solid angle; residual events 540 (3.4-17,300); loop neutron fluence 3-62× REBCO tolerance; plume clearing and deflection fail | **NOT CONVERGED** (D-06) |
 
-Plume strike, hot areal mass, structure, armour and recovery are all below 0.1. **Recovery efficiency barely matters**: 0.90 to 0.98
-moves the ship 0.4 %, because at high gain the recirculating power is about 0.1 % of fusion.
+The prompt's example chain (*better ignition → less fusion power → less recirculating power → …*) holds in sign but runs in the wrong
+order. At fixed exhaust velocity and acceleration, gain lowers the recirculating power (driver loss and driver mass); fusion power then
+falls only because the lighter ship needs less thrust. Booking it the other way would credit the same saving twice.
 
-The downside is steeper than the upside, and these negative results are kept:
+## 5. Combined against summed: no super-additive synergy
 
-| Change on V1c | Departure t | Factor |
-| --- | --- | --- |
-| Gain 1,500 | 34,385 | ×2.65 |
-| Nozzle efficiency 0.72 | 17,891 | ×1.38 |
-| Warm loop 600 K | 19,865 | ×1.53 |
-| House load 0.1 % | 15,585 | ×1.20 |
+On V1c (single-lever sensitivity chains, kept for their structure): K1 combined 8,204 t against a product of single ratios of 6,188 t
+(+32.6 %), K2 9,904 against 9,106 (+8.8 %), K3 10,410 against 10,190 (+2.2 %), K5 11,810 against 11,820 (-0.1 %). Every combination
+saves less than its single effects multiplied, and far less than their sum (the sum is what double counting would claim). The reason is
+a floor the drive cannot shrink: on V4 with every specific mass at 1e-4 the ship still departs at **5,665 t** (payload 1,240,
+propellant 3,580, tanks 336, shield 346, drive 366). Only a higher ve or a lighter payload moves it.
 
-**The nozzle-efficiency cliff near 0.53 is the exhaust-velocity gate**, η_jet × b ≥ ve²/(2ε) = 0.524 (S-FIJI-V4), not the mass
-feedback. No thermal or mass improvement moves it (F-T06-1).
+Convergence still matters more than these ratios suggest, because it acts on **closure**: at coupling 0.2 the Atlas engineering package
+never closes, and the T06 package does (362 kt). At coupling 0.5 the package is the difference between 368 kt and 38 kt.
 
-## 4. Mission ambitions
+## 6. Steepest parameters
 
-| Ambition | V1c | V3 (η_c/α 0.3) | V3c | V4 (0.5 + nozzle) | V4c | Verdict |
-| --- | --- | --- | --- | --- | --- | --- |
-| Departure t | 12,978* | 12,655 | 21,069 | 8,295 | 10,757 | |
-| Four 0.016 c burns | closes* | closes | closes | closes | closes | **MET** at TARGET values (*V1c only with the inconsistent gain 3,000) |
-| LOCKED 6.0 y round trip | 0.0073 g | 0.0073 g (13,499 t) | 0.0073 g (24,510 t) | 0.0073 g (8,622 t) | 0.0073 g (11,517 t) | **MET ONLY ABOVE 0.0073 g** departure acceleration; 0.0069 g gives 6.35 y |
-| 1 g | 81× short | 74× short | 102× short | 57× short | 77× short | **NOT MET** |
-| 1.5 g | — | — | — | — | — | **NOT MET** (no closing solution found) |
+Elasticities at V1c (d ln m / d ln x, ±10 %): nozzle efficiency **-2.87**, warm temperature **-1.74**, driver efficiency -0.74, gain -0.63,
+driver mass +0.37, warm areal mass +0.34, density -0.34 (at fixed gain, which the bound rules out), house load +0.17; everything else
+below 0.1. **Recovery efficiency is -0.04**: 0.90 to 0.98 is worth 0.4 %, consistent with T03's 0.13 % extraction.
 
-- **6.0 years is a kinematic question, not a mass one.** The minimum round trip is 6.35 y at 0.0069 g in every case, because it depends
-  on acceleration and ve only. Meeting the lock costs 4-16 % more mass and needs an owner choice of departure acceleration, not a new
-  technology.
-- **1 g needs a specific-mass breakthrough that no record provides.** Even on the first-draft grand endpoint, which is inconsistent in
-  the optimistic direction, every drive, power, radiator, nozzle and light-structure specific mass must fall about **64-fold** together
-  (40 kt, about 4,400 TW of fusion). 1.5 g found no closing solution. T06 does not propose a breakthrough of that size.
-- The canon First Ignition ramp (0 to 1.5 g, BASELINE `[mission.first_ignition]`) is inconsistent with every Vertex ship. That conflict
-  is already open on the canon side; T06 records it and does not resolve it.
+Negative results kept: on V1c, gain 1,500 ×2.65, nozzle 0.72 ×1.38, warm 600 K ×1.53, house 0.1 % ×1.20. **The nozzle cliff near 0.53
+is the exhaust-velocity gate** η_jet × b ≥ ve²/(2ε) = 0.524 (F-T06-1); no mass or thermal improvement moves it. On V3 the cliff rises to
+0.607 because V3's heat budget is tighter.
 
-## 5. Which breakthroughs IGNITION would have to declare
+## 7. Mission ambitions
 
-| Breakthrough | Why it cannot be derived | Decision |
-| --- | --- | --- |
-| D-³He ignition with compression coupling η_c/α of about 0.3-0.5 (gain about 700-900 at 2,000-3,000 g/cm³) | demonstrated gain 4.1 (D-T); D-³He has never ignited; present couplings are far lower | D-T06-1 |
-| A pulsed magnetic nozzle at 0.79-0.86 | theory gives 0.79-0.86 (unverified source); simulations give 0.34-0.70 | D-T06-2 (after T03 and D-09) |
-| Survival of engine-first braking through dust at 0.016 c | no shield physics validated above about 15 km/s | D-06 (T02 leads) |
-| Anything for 1 g | a 64-fold specific-mass gap | not proposed |
+| Ambition | V3 (0.5) | V3o (driver 0.45) | V4 (ideal) | V4o | Verdict |
+| --- | --- | --- | --- | --- | --- |
+| Departure t | 37,895 | 24,143 | 17,907 | 14,314 | |
+| Four 0.016 c burns | closes | closes | closes | closes | **MET** at TARGET values |
+| LOCKED 6.0 y round trip | above 0.0073 g: 43,266 t | 25,667 t | 19,154 t | 14,921 t | **MET ONLY ABOVE 0.0073 g**; 0.0069 g gives 6.35 y |
+| Ceiling acceleration | 0.0098 g | 0.0132 g | 0.0125 g | 0.0160 g | |
+| 1 g | 102× short | 76× short | 80× short | 63× short | **NOT MET** |
+| 1.5 g | | | no solution | | **NOT MET** |
 
-Fiji is not on this list. Canon defines it as a premise, not a missing breakthrough, and T06 adds no property to it (D-07).
+- **6.0 years is kinematic**: the minimum round trip is 6.35 y at 0.0069 g everywhere; the lock costs 4-14 % more mass and an owner
+  choice of departure acceleration, not a technology (F-T06-3).
+- **1 g** on V4 needs every drive, power, radiator, nozzle and light-structure specific mass to fall **5,084-fold** together (30 kt,
+  3,605 TW fusion). 1.5 g does not close at all (F-T06-8). T06 proposes no breakthrough of that size. The canon First Ignition ramp
+  (0 to 1.5 g) stays inconsistent with every Vertex ship; that conflict is already open on the canon side.
 
-## 6. Open for the final synthesis
+## 8. What IGNITION would have to declare
 
-- **T04:** confirm the bound and its ρ^(-2/3) scaling. Say whether magnetisation, shock or fast ignition change α or the coupling
-  (T04 EARLY says magnetisation removes the hot-spot requirement but not the compression ceiling), and give a credible η_c/α band
-  for heavy-ion direct drive.
-- **T01:** sourced driver and house numbers at 1,500-2,000 g/cm³ (larger, slower pulses: about 44 t TNT at 57-94 Hz in V3), and the
-  launcher speed T01 and T04 both flag.
-- **T03:** the joint nozzle and recovery ledger, and whether 0.79 is defensible for 44 t TNT pulses.
-- **T02:** protection mass and orientation constraints for loops at r 128-171 m.
-- Check every cross-thread chain for energy booked twice (especially VTX-02C recovery between T01 and T03).
-- Re-run `futures.py` against any calculator change that T00 integrates.
+| Breakthrough | Why it cannot be derived | Without it | Decision |
+| --- | --- | --- | --- |
+| **Compression coupling η_c/α ≥ 0.5** for D-³He (gain about 1,170 at 2,000 g/cm³) | demonstrated gain 4.1 (D-T); D-³He never ignited; couplings today are per-cent | 110 kt at 0.3, 362 kt at 0.2 | D-T06-1 = D-T04-1 |
+| **Closure-coil pulsed nozzle at its ideal model**, η_T 0.79 at 15 E_p | literature η_mom 0.55-0.80 → η_T 0.30-0.64; 0.791 is T03's ideal upper bound | 58 kt at 10 E_p; ≥110 kt at literature 0.64 | D-T06-2 = D-T03-2 |
+| **Engine-first dust survival** at 0.016 c | no shield physics above about 15 km/s; T02's clearing and deflection fail | no ship, at any mass | D-06 (T02 D-T02-1..4) |
+| Anything for 1 g | 5,084-fold specific-mass gap | | not proposed |
+
+Fiji is not on this list. Canon defines it as a premise (×30 amplification of a slow seed field, flux stabilisation), not a missing
+breakthrough; T06 credits it with nothing numeric and adds no property (D-07).

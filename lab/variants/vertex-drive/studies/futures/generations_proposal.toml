@@ -1,76 +1,73 @@
 # T06 proposal: candidate Vertex generations beyond V2, in the registry/generations.toml schema. Research records, not canon.
+# FINAL SYNTHESIS version (2026-11-09): built on the T01-T04 handoffs (T01 1302708, T02 3c665ec, T03 59244a9, T04 fd4ff3d).
 #
 # Proposal only: T00 decides what enters registry/generations.toml. futures.py solves every generation here through convergence.py
-# (read-only) and reports it in results/CHAINS.md, so each one is checked before T00 sees it.
-# Each change names its technology (existing VTX ID or T06-NEW-n from registry_proposal.toml), its basis (TARGET = a requirement the
-# technology must meet; MODEL = a geometric consequence the calculator computes) and any owner decision. Paths are dotted keys into the
-# FDP-1 override tree, applied on top of V0 exactly as convergence.py applies registry/generations.toml.
+# (read-only) and reports it in results/CHAINS.md. Each change names its technology (VTX ID or T06-NEW-n), its basis (TARGET or MODEL)
+# and any owner decision. Paths are dotted keys into the FDP-1 override tree, applied on top of V0 as convergence.py applies the registry.
 #
-# Gain-compression consistency (T04 EARLY 1b85941): compressing fuel to rho costs at least its Fermi-degenerate energy, so target gain
-# G <= 1,787 x (eta_c / alpha) x (rho / 3,000 g/cm3)^(-2/3), where eta_c/alpha (driver-to-fuel compression coupling over adiabat) is at
-# most 1. The Atlas V0-V2 pair (3,000 g/cm3, gain 3,000) needs eta_c/alpha = 1.68 and is therefore not energy-consistent. Both
-# generations below set gain AT the bound for a stated coupling, so the coupling, not the gain, is the target the technology must meet.
-#
-# Ladder logic: V3 adds only Level B engineering targets and a consistent target at coupling 0.3 (itself far beyond present implosions);
-# no nozzle-efficiency or Fiji change. V4 raises the coupling to 0.5 and adds a pulsed nozzle at the top of its theoretical range: the two
-# levers IGNITION would have to declare (D-T06-1, D-T06-2). Fiji keeps exactly its canon card throughout. futures.py also solves each at
-# the published driver efficiency 0.30 (V3c, V4c).
+# Both generations carry every thread correction (T01 628 K and house, T02 protection mass, T03 nozzle C at 15 E_p, T04 gain at the
+# compression bound) and the T06 Level B package. They differ only in the declared compression coupling eta_c/alpha (T04 bound
+# G <= 1,787 x eta_c/alpha x (rho/3,000)^(-2/3)):
+#   V3: eta_c/alpha 0.5 at 2,000 g/cm3, gain 1,171 -- a declared breakthrough (present couplings are in the percent range, T04).
+#   V4: eta_c/alpha 1.0 at 3,000 g/cm3, gain 1,787 -- the ideal-compression LIMIT, not a target: no real implosion reaches it.
+# Driver efficiency is the published 0.30 (T01 planning value); futures.py also solves the 0.45 twins (V3o, V4o).
+# Not booked (no calculator path): T01 launcher (+6-18 %), T03 closure-coil solid angle, T02 shoe solid angle, T03 eddy screens.
 
 [[generation]]
 id = "V3"
-name = "Vertex 3: convergent engineering (proposal)"
-definition = "V2 plus the T06 Level B package (house 0.025 %, lighter drivers, liquid-sheet warm radiators, thin refractory hot heat pipes, high-specific-strength structure) and an energy-consistent target: 2,000 g/cm3 at gain 702, the bound for compression coupling eta_c/alpha 0.3. Nozzle efficiency and Fiji unchanged."
-fictional = "Canon Fiji lattice only (VTX-02A), unchanged. The coupling 0.3 is a Level B TARGET far beyond present implosions (D-T06-1 asks whether IGNITION declares it)."
-
-[[generation.change]]
-path = "base.overrides.radiators.warm.T_K.optimistic"
-value = 800.0
-technology = "VTX-07A"
-basis = "TARGET"
-rationale = "As V2."
+name = "Vertex 3: integrated convergence at declared compression coupling 0.5 (proposal)"
+definition = "Atlas V1 layout with every T01-T04 correction, the T06 Level B package, and an energy-consistent target: 2,000 g/cm3 at gain 1,171 (the T04 bound at eta_c/alpha 0.5). Nozzle C with closure coils at 15 E_p (eta_T 0.791, upper bound)."
+fictional = "Canon Fiji lattice only (VTX-02A), no credit. Declared breakthroughs: compression coupling 0.5 (D-T06-1) and the nozzle C upper bound (D-T06-2)."
 
 [[generation.change]]
 path = "drivers.gallery_radius_m.value"
 value = 4.5
 technology = "VTX-06A"
 basis = "MODEL"
-rationale = "As V1."
+rationale = "Galleries inside the hull cone (Atlas V1)."
 
 [[generation.change]]
 path = "integration.keep_idle_hydrogen_vessels.value"
 value = false
 technology = "VTX-04B"
 basis = "MODEL"
-rationale = "As V1."
+rationale = "Idle H2 vessels removed (T04 D-T04-2: no mission phase needs the low gear; T01 +809 t if kept)."
 needs_decision = "D-04"
 
 [[generation.change]]
-path = "base.overrides.pulsed.loop_armor_kg_m2.optimistic"
-value = 100.0
-technology = "VTX-06B"
+path = "base.overrides.pulsed.driver_efficiency.optimistic"
+value = 0.3
+technology = "VTX-01B"
 basis = "TARGET"
-rationale = "As V2."
+rationale = "Published heavy-ion wall-plug 0.30, the T01 planning value; futures.py also solves the 0.45 twin (suffix o)."
+
+[[generation.change]]
+path = "base.overrides.radiators.warm.T_K.optimistic"
+value = 628.0
+technology = "VTX-07A"
+basis = "TARGET"
+rationale = "T01: the split warm loop at TARGET component temperatures is equivalent to 628 K, not 700-800 K (D-T01-1)."
 
 [[generation.change]]
 path = "base.overrides.pulsed.house_fraction.value"
-value = 2.5e-4
+value = 2.6e-05
 technology = "VTX-07C"
 basis = "TARGET"
-rationale = "Target factory at 0.025 % of fusion; requires the energy per target (VTX-01C) to be sourced by T01, otherwise a requirement only."
+rationale = "T01 bottom-up house load, advanced (0.6 MJ per pellet)."
 
 [[generation.change]]
 path = "base.overrides.pulsed.driver_kg_per_W.optimistic"
-value = 2.5e-5
+value = 2.5e-05
 technology = "VTX-01B"
 basis = "TARGET"
-rationale = "Driver hardware 0.025 kg/kW: induction cores at higher flux swing and gradient; the 5 MJ terrestrial reference is 3e7 kg (S-HIF-REVIEWS), so this is a large extrapolation."
+rationale = "Driver hardware 0.025 kg/kW; T01 warns volt-second scaling suggests far more than 0.05 kg/kW, so this is the most fragile T06 lever."
 
 [[generation.change]]
 path = "base.overrides.radiators.warm.areal_kg_m2.optimistic"
 value = 0.5
 technology = "VTX-07B"
 basis = "TARGET"
-rationale = "Liquid-sheet or droplet warm field at 0.5 kg/m2 (Mattick: at least an order below tube-and-fin); needs D-05 if deployable."
+rationale = "Tin droplet sheet (T01: the only radiator in the record near 1 kg/m2 above 520 K; sheet alone 0.1 kg/m2)."
 needs_decision = "D-05"
 
 [[generation.change]]
@@ -78,99 +75,135 @@ path = "base.overrides.radiators.hot.areal_kg_m2.optimistic"
 value = 1.5
 technology = "T06-NEW-1"
 basis = "TARGET"
-rationale = "Thin-wall refractory heat pipes for the 1,800 K band at half the optimistic areal mass."
+rationale = "Thin-wall refractory heat pipes at half the optimistic areal mass."
 
 [[generation.change]]
 path = "base.overrides.pulsed.nozzle_kg_per_J.optimistic"
-value = 5.35e-7
+value = 5.35e-07
 technology = "T06-NEW-2"
 basis = "TARGET"
-rationale = "Virial hoop structure at twice the specific strength of 1.5 GPa CFRP."
+rationale = "Virial structure at twice CFRP specific strength; it now carries 15 E_p of stored field (T03)."
 
 [[generation.change]]
 path = "structure.wing_spar_kg_per_m.value"
 value = 12.5
 technology = "T06-NEW-2"
 basis = "TARGET"
-rationale = "Same material class for the wing spars."
+rationale = "Same material class."
 
 [[generation.change]]
 path = "structure.gallery_kg_per_m.value"
 value = 60.0
 technology = "T06-NEW-2"
 basis = "TARGET"
-rationale = "Same material class for the gallery truss."
+rationale = "Same material class."
+
+[[generation.change]]
+path = "base.overrides.pulsed.loop_armor_kg_m2.optimistic"
+value = 100.0
+technology = "VTX-06B"
+basis = "TARGET"
+rationale = "Advanced W armour at half areal mass (Atlas V2)."
+
+[[generation.change]]
+path = "base.overrides.pulsed.nozzle_efficiency.optimistic"
+value = 0.791
+technology = "VTX-03"
+basis = "TARGET"
+rationale = "T03: thrust efficiency eta_T = eta_mom^2 = 0.791 for the closure-coil nozzle C at 15 E_p, an ideal-model upper bound (literature momentum 0.55-0.80, i.e. eta_T 0.30-0.64)."
+
+[[generation.change]]
+path = "base.overrides.pulsed.nozzle_field_energy_ratio.value"
+value = 15.0
+technology = "VTX-03"
+basis = "MODEL"
+rationale = "T03: 15 E_p of stored field to stop the pulse (D-T03-2); 1 E_p cannot."
+
+[[generation.change]]
+path = "base.overrides.continuous.plume_to_hardware.value"
+value = 0.065
+technology = "VTX-03"
+basis = "MODEL"
+rationale = "T03: plume-strike share of the nozzle loss 0.06-0.07 for nozzle C."
+
+[[generation.change]]
+path = "mission.payload"
+value = { source = "reference", reference_t = 1240.2 }
+technology = "VTX-08D"
+basis = "MODEL"
+rationale = "T02: engine-side skirt (22-90 t, 56 central) and LiH loop shoes (193 t) added to the 990.2 t payload; their solid angle (+0.0127) is not booked."
+needs_decision = "D-06"
 
 [[generation.change]]
 path = "base.overrides.pulsed.rho_g_cc.optimistic"
 value = 2000.0
 technology = "VTX-01A"
 basis = "TARGET"
-rationale = "Consistent target: 2,000 g/cm3 (about 3x NIF D-T), the lightest density at coupling 0.3 in the T06 frontier."
+rationale = "Lightest density at coupling 0.5 in the integrated frontier."
 
 [[generation.change]]
 path = "base.overrides.pulsed.gain.optimistic"
-value = 702.0
+value = 1171.0
 technology = "VTX-01A"
 basis = "TARGET"
-rationale = "Gain at the compression-energy bound for eta_c/alpha = 0.3 at 2,000 g/cm3 (1,787 x 0.3 x (2/3)^(-2/3)); still 170x the demonstrated 4.1."
+rationale = "T04 compression-energy bound at eta_c/alpha 0.5, 2,000 g/cm3."
 needs_decision = "D-T06-1"
 
 [[generation]]
 id = "V4"
-name = "Vertex 4: declared-breakthrough endpoint (proposal)"
-definition = "V3 with the two levers IGNITION would have to declare: compression coupling eta_c/alpha 0.5 (3,000 g/cm3, gain 894 at the bound) and a pulsed magnetic nozzle at efficiency 0.86 with half the plume striking hardware and recovery 0.98."
-fictional = "Canon Fiji lattice only, unchanged. Two declared breakthroughs, physics-permitted but undemonstrated (compression coupling, gain) or unvalidated (pulsed nozzle): D-T06-1 and D-T06-2. They are not Fiji properties."
-
-[[generation.change]]
-path = "base.overrides.radiators.warm.T_K.optimistic"
-value = 800.0
-technology = "VTX-07A"
-basis = "TARGET"
-rationale = "As V3."
+name = "Vertex 4: ideal-compression limit (proposal, bound not target)"
+definition = "V3 at the T04 ceiling itself: eta_c/alpha 1.0, 3,000 g/cm3, gain 1,787. No implosion can exceed it; it is the lightest ship the combined physics allows in this model, not a design."
+fictional = "Canon Fiji lattice only. Declared: ideal compression (D-T06-1, upper bound) and the nozzle C upper bound (D-T06-2)."
 
 [[generation.change]]
 path = "drivers.gallery_radius_m.value"
 value = 4.5
 technology = "VTX-06A"
 basis = "MODEL"
-rationale = "As V3."
+rationale = "Galleries inside the hull cone (Atlas V1)."
 
 [[generation.change]]
 path = "integration.keep_idle_hydrogen_vessels.value"
 value = false
 technology = "VTX-04B"
 basis = "MODEL"
-rationale = "As V3."
+rationale = "Idle H2 vessels removed (T04 D-T04-2: no mission phase needs the low gear; T01 +809 t if kept)."
 needs_decision = "D-04"
 
 [[generation.change]]
-path = "base.overrides.pulsed.loop_armor_kg_m2.optimistic"
-value = 100.0
-technology = "VTX-06B"
+path = "base.overrides.pulsed.driver_efficiency.optimistic"
+value = 0.3
+technology = "VTX-01B"
 basis = "TARGET"
-rationale = "As V3."
+rationale = "Published heavy-ion wall-plug 0.30, the T01 planning value; futures.py also solves the 0.45 twin (suffix o)."
+
+[[generation.change]]
+path = "base.overrides.radiators.warm.T_K.optimistic"
+value = 628.0
+technology = "VTX-07A"
+basis = "TARGET"
+rationale = "T01: the split warm loop at TARGET component temperatures is equivalent to 628 K, not 700-800 K (D-T01-1)."
 
 [[generation.change]]
 path = "base.overrides.pulsed.house_fraction.value"
-value = 2.5e-4
+value = 2.6e-05
 technology = "VTX-07C"
 basis = "TARGET"
-rationale = "As V3."
+rationale = "T01 bottom-up house load, advanced (0.6 MJ per pellet)."
 
 [[generation.change]]
 path = "base.overrides.pulsed.driver_kg_per_W.optimistic"
-value = 2.5e-5
+value = 2.5e-05
 technology = "VTX-01B"
 basis = "TARGET"
-rationale = "As V3."
+rationale = "Driver hardware 0.025 kg/kW; T01 warns volt-second scaling suggests far more than 0.05 kg/kW, so this is the most fragile T06 lever."
 
 [[generation.change]]
 path = "base.overrides.radiators.warm.areal_kg_m2.optimistic"
 value = 0.5
 technology = "VTX-07B"
 basis = "TARGET"
-rationale = "As V3."
+rationale = "Tin droplet sheet (T01: the only radiator in the record near 1 kg/m2 above 520 K; sheet alone 0.1 kg/m2)."
 needs_decision = "D-05"
 
 [[generation.change]]
@@ -178,62 +211,76 @@ path = "base.overrides.radiators.hot.areal_kg_m2.optimistic"
 value = 1.5
 technology = "T06-NEW-1"
 basis = "TARGET"
-rationale = "As V3."
+rationale = "Thin-wall refractory heat pipes at half the optimistic areal mass."
 
 [[generation.change]]
 path = "base.overrides.pulsed.nozzle_kg_per_J.optimistic"
-value = 5.35e-7
+value = 5.35e-07
 technology = "T06-NEW-2"
 basis = "TARGET"
-rationale = "As V3."
+rationale = "Virial structure at twice CFRP specific strength; it now carries 15 E_p of stored field (T03)."
 
 [[generation.change]]
 path = "structure.wing_spar_kg_per_m.value"
 value = 12.5
 technology = "T06-NEW-2"
 basis = "TARGET"
-rationale = "As V3."
+rationale = "Same material class."
 
 [[generation.change]]
 path = "structure.gallery_kg_per_m.value"
 value = 60.0
 technology = "T06-NEW-2"
 basis = "TARGET"
-rationale = "As V3."
+rationale = "Same material class."
+
+[[generation.change]]
+path = "base.overrides.pulsed.loop_armor_kg_m2.optimistic"
+value = 100.0
+technology = "VTX-06B"
+basis = "TARGET"
+rationale = "Advanced W armour at half areal mass (Atlas V2)."
+
+[[generation.change]]
+path = "base.overrides.pulsed.nozzle_efficiency.optimistic"
+value = 0.791
+technology = "VTX-03"
+basis = "TARGET"
+rationale = "T03: thrust efficiency eta_T = eta_mom^2 = 0.791 for the closure-coil nozzle C at 15 E_p, an ideal-model upper bound (literature momentum 0.55-0.80, i.e. eta_T 0.30-0.64)."
+
+[[generation.change]]
+path = "base.overrides.pulsed.nozzle_field_energy_ratio.value"
+value = 15.0
+technology = "VTX-03"
+basis = "MODEL"
+rationale = "T03: 15 E_p of stored field to stop the pulse (D-T03-2); 1 E_p cannot."
+
+[[generation.change]]
+path = "base.overrides.continuous.plume_to_hardware.value"
+value = 0.065
+technology = "VTX-03"
+basis = "MODEL"
+rationale = "T03: plume-strike share of the nozzle loss 0.06-0.07 for nozzle C."
+
+[[generation.change]]
+path = "mission.payload"
+value = { source = "reference", reference_t = 1240.2 }
+technology = "VTX-08D"
+basis = "MODEL"
+rationale = "T02: engine-side skirt (22-90 t, 56 central) and LiH loop shoes (193 t) added to the 990.2 t payload; their solid angle (+0.0127) is not booked."
+needs_decision = "D-06"
 
 [[generation.change]]
 path = "base.overrides.pulsed.rho_g_cc.optimistic"
 value = 3000.0
 technology = "VTX-01A"
 basis = "TARGET"
-rationale = "FDP-1 optimistic density, now with a consistent gain."
+rationale = "FDP-1 density at the ideal coupling."
 
 [[generation.change]]
 path = "base.overrides.pulsed.gain.optimistic"
-value = 894.0
+value = 1787.0
 technology = "VTX-01A"
 basis = "TARGET"
-rationale = "Declared breakthrough D-T06-1: gain at the compression-energy bound for eta_c/alpha = 0.5 at 3,000 g/cm3 (demonstrated 4.1, D-T, S-NIF-2025)."
+rationale = "T04 compression ceiling at eta_c/alpha 1.0 (case compression)."
 needs_decision = "D-T06-1"
-
-[[generation.change]]
-path = "base.overrides.pulsed.nozzle_efficiency.optimistic"
-value = 0.86
-technology = "VTX-03"
-basis = "TARGET"
-rationale = "Declared breakthrough D-T06-2: a validated pulsed nozzle at the top of the theoretical range (S-MSFC-NOZZLE 0.79-0.86, UNVERIFIED; simulations 0.34-0.70). Needs the D-09 study to be meaningful."
-needs_decision = "D-T06-2"
-
-[[generation.change]]
-path = "base.overrides.continuous.plume_to_hardware.value"
-value = 0.01
-technology = "VTX-03B"
-basis = "TARGET"
-rationale = "Shaped field halves the plume share striking hardware (Atlas collimation band); speculative until T03 reports."
-
-[[generation.change]]
-path = "base.overrides.pulsed.recovery_efficiency.optimistic"
-value = 0.98
-technology = "VTX-02C"
-basis = "TARGET"
-rationale = "Recovery 0.98; shares the expanding-plasma ledger with the nozzle (upper bound until T03)."
