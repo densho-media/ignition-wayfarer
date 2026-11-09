@@ -159,6 +159,8 @@ def coil_plant(ca):
             vol_m3 += chan_m3+man_m3
             hyd = (V1+V2)*DP; el = hyd/ETA_PUMP
             armour_kg = sum(arm_m2.values())*sum(ARMOUR_AREAL.values())
+            if key == 'R4_T00_SHADOWED':
+                armour_kg = sum(ca['coils'][n]['builds'][key]['masses_t']['armour']*1e3 for n in ('C1', 'C2'))
             hx = case['total_W']*HX_KG_PER_W if fl == 'LI_LOOP_HX' else 0.0
             plant = vol_m3*F['rho']+pipe_kg+el*PUMP_KG_PER_W+hx
             out['cases'][f'{fl}:{key}'] = {
@@ -239,13 +241,84 @@ def structure_r4():
     return out
 
 
+# ----------------------------------------------------------------------------------------------------------------------------------
+# T00 handoff v1 (t00_handoff_rev4.json, copy of 9rsgog lab/variants/vertex-drive/results/t05_handoff_rev4.json): adopted inputs
+# ----------------------------------------------------------------------------------------------------------------------------------
+def adopt_t00(out, h):
+    ca = out['coil_assembly']; esc = ca['escape_xray_W']
+    for n in ('C1', 'C2'):
+        t = h['coils'][n]; rb = t['radial_build_m']; a = t['winding_minor_m']
+        front = rb['ground_insulation']+rb['cryostat_wall']+rb['vacuum_mli_80K_screen']
+        case_hw = a                                                       # case strip behind the winding, as wide as the winding
+        A_case = float(t['case'].split('area m2 = ')[1])
+        S = (A_case+math.pi*a*a/2)/(2*case_hw)                            # strip from the winding centre back to S, minus the winding's back half
+        b = {'case_outer_m': None, 'assembly_outer_m': t['projected_half_width_m'], 'projected_half_width_m': t['projected_half_width_m'],
+             'share': t['share_ring'], 'share_struts': t['share_struts'], 'xray_W': t['share_ring']*esc, 'struts_xray_W': t['share_struts']*esc,
+             'profile': {'winding_minor_m': a, 'case_area_m2': A_case, 'case_half_width_m': case_hw, 'case_back_s_m': S, 'front_layers_m': front,
+                         'shadow_margin_m': rb['shadow_margin'], 'li_channel_m': rb['lithium_channel'], 'cfc_m': rb['CFC_armour'],
+                         'lih_nose_m': rb['LiH_neutron_screen_burn_face']},
+             'masses_t': t['masses_t'], 'struts': t['struts'], 'source': 'T00 handoff v1 coils.'+n}
+        b['burn_face_m2'] = 2*math.pi*ca['coils'][n]['r_m']*math.pi*b['assembly_outer_m']
+        b['flux_mean_W_m2'] = b['xray_W']/b['burn_face_m2']
+        ca['coils'][n]['builds']['R4_T00_SHADOWED'] = b
+    ca['cases']['R4_T00_SHADOWED'] = {'C1_W': h['coils']['C1']['cooling_W']['armour_hot_1800K'], 'C2_W': h['coils']['C2']['cooling_W']['armour_hot_1800K'],
+                                      'note': 'T00 armour_hot_1800K per coil (ring + struts)'}
+    c = ca['cases']['R4_T00_SHADOWED']; c['total_W'] = c['C1_W']+c['C2_W']; c['share_total'] = c['total_W']/esc
+    ca['preferred'] = 'R4_T00_SHADOWED'
+    # structure: T00 beam sizing of N9 at the 300 t bow
+    sz = h['spine']['sizing']['N9 at R 31 m bow 300 t']
+    st = out['structure']; n9 = dict(st['cases']['S5_N9_NESTED'])
+    n9.update({'name': 'S5_N9_T00', 'tube_r_m': sz['tube_r_m'], 'structure_kg': sz['structure_t']*1e3, 'f1_full_Hz': sz['f1_cantilever_Hz'],
+               'f1_free_free_Hz': sz['f1_free_free_Hz'], 'buckling_factor_SF2': sz['buckling_factor_SF2'], 'source': 'T00 handoff v1 spine.sizing N9 bow 300 t',
+               'min_tank_clearance_m': n9['min_tank_clearance_m']+n9['tube_r_m']-sz['tube_r_m'],
+               'B2_shadow_margin_m': n9['B2_shadow_margin_m']+n9['tube_r_m']-sz['tube_r_m'],
+               'range_kg_bow_100_1000t': [h['spine']['sizing']['N9 at R 31 m bow 100 t']['structure_t']*1e3, h['spine']['sizing']['N9 at R 31 m bow 1000 t']['structure_t']*1e3],
+               'joints': h['spine']['joints'], 'frames': h['spine']['frames'], 'lacing': h['spine']['lacing'], 'tank_saddles': h['spine']['tank_saddles']})
+    st['cases']['S5_N9_T00'] = n9; st['preferred'] = 'S5_N9_T00'
+    # launcher: B-modified (T00) and the T05 B-ray proposal (geometry only; T00 assesses)
+    lb = h['launcher']['B_modified']
+    e = json.loads((HERE/'screen.json').read_text())['generations']['V4']; xB = e['x_burn_m']
+    g_ray = 30000.0; L_ray = lb['muzzle_m_s']**2/(2*g_ray*9.80665)
+    pol_ray = 12.0; az_ray = 45.0; tip = lb['open_flight_m']   # az 45: 15 deg clear of loop struts (0+60k, 15+60k) and C1 struts (30+60k); T00 checked az 120 (axisymmetric, same numbers)
+    th = math.radians(pol_ray)
+    out['launcher'] = {'B_modified': lb, 'target': h['launcher']['target'], 'shutter': h['launcher']['shutter'], 'alignment': h['launcher']['alignment'],
+                       'verdicts': h['launcher']['verdicts'], 'axis_plasma': h['launcher']['axis_plasma'], 'axis_field_T': h['launcher']['axis_field_T'],
+                       'B_ray_T05_proposal': {'polar_deg': pol_ray, 'az_deg': az_ray, 'tip_from_burn_m': tip, 'accel_g': g_ray, 'accelerator_m': L_ray,
+                                              'tip_xr_m': [xB+tip*math.cos(th), tip*math.sin(th)],
+                                              'breech_xr_m': [xB+(tip+L_ray)*math.cos(th), (tip+L_ray)*math.sin(th)],
+                                              'capsule_limit_g': h['launcher']['target']['limit_g'], 'margin_on_capsule_limit': h['launcher']['target']['limit_g']/g_ray,
+                                              'stopping_radius_at_10deg_m': h['launcher']['axis_plasma']['stopping_radius_by_polar_deg'].get('10'),
+                                              'status': 'T05 GEOMETRY PROPOSAL, not assessed by T00: off the unstopped axis channel, barrel on a burn ray (self-shadowed)'}}
+    out['axis_plug_T05_proposal'] = {'x_from_burn_m': 35.0, 'r_m': 35.0*math.tan(math.radians(6.0)), 'covers_polar_deg': 6.0, 'medium': 'renewable liquid-lithium droplet sheet',
+                                     'heat_W': h['launcher']['axis_plasma']['shield_plasma_W'], 'status': 'T05 GEOMETRY PROPOSAL (CONCEPTUAL), T00 to assess'}
+    out['ghost_coupled'] = h['ship_consequence']
+    pp = HERE/'t00_proposals_rev4.json'                          # T00 853b867 studies/rev4/results/proposals.json (copy)
+    if pp.exists():
+        pr = json.loads(pp.read_text()); br = pr['b_ray']; t56 = br['tip_56.5m']
+        tip = t56['open_flight_m']; L_ray = t56['accelerator_m']
+        out['launcher']['B_ray'] = {'polar_deg': pol_ray, 'az_deg': az_ray, 'tip_from_burn_m': tip, 'accel_g': g_ray, 'accelerator_m': L_ray,
+                                    'muzzle_m_s': t56['muzzle_m_s'], 'tip_xray_J_cm2': t56['tip_xray_J_cm2'], 'tip_MW_m2': t56['tip_MW_m2'],
+                                    'margin_to_stopping_surface_m': t56['margin_to_stopping_surface_m'], 'gas_capsule_SF': t56['gas_capsule_SF'],
+                                    'tip_xr_m': [xB+tip*math.cos(th), tip*math.sin(th)],
+                                    'breech_xr_m': [xB+(tip+L_ray)*math.cos(th), (tip+L_ray)*math.sin(th)],
+                                    'stopping_radius_V4_m': br['stopping_radius_V4_m'], 'field_along_ray': br['field_along_ray'],
+                                    'alignment': br['alignment'], 'verdict': br['verdict'],
+                                    'status': 'CONCEPTUAL, KINEMATICS PLAUSIBLE (T00 853b867); EM armature and sabot at 30,000 g NOT DEMONSTRATED',
+                                    'superseded_T05_45m': out['launcher']['B_ray_T05_proposal']}
+        out['axis_plug_T05_proposal'].update({'status': 'REJECTED: NOT PLAUSIBLE (T00 853b867)', 'verdict': pr['axis_plug']['verdict'],
+                                              'intercepted_W': pr['axis_plug']['intercepted_W'], 'raw_J_cm2_per_pulse': pr['axis_plug']['raw_plasma_J_cm2_per_pulse'],
+                                              'li_mission_t_range': [pr['axis_plug']['consumption'][-1]['mission_t'][0], pr['axis_plug']['consumption'][0]['mission_t'][1]]})
+
+
 def main():
     out = {'revision': 4, 'coil_assembly': coil_assemblies()}
-    out['coil_plant'] = coil_plant(out['coil_assembly'])
     out['structure'] = structure_r4()
     hp = HERE/'t00_handoff_rev4.json'
     if hp.exists():
-        out['t00'] = json.loads(hp.read_text())
+        h = json.loads(hp.read_text())
+        out['t00_handoff'] = {'version': h['version'], 'base_commit': h['base_commit'], 'file': 't00_handoff_rev4.json'}
+        adopt_t00(out, h)
+    out['coil_plant'] = coil_plant(out['coil_assembly'])
     (HERE/'rev4.json').write_text(json.dumps(out, indent=1, default=float))
     ca = out['coil_assembly']
     for k, v in ca['cases'].items():

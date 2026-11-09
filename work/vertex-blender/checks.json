@@ -217,8 +217,10 @@
   "V4": {
    "options": [
     "LAUNCH_B",
+    "LAUNCH_BMOD",
+    "AXIS_KEEPOUT",
     "WINGS_PREF",
-    "COIL_ASM_R4",
+    "COIL_ASM_T00",
     "COIL_PLANT_LI",
     "COIL_SUP_R4",
     "DUST_GUARDS_R4",
@@ -229,7 +231,7 @@
     "B2_DOCK_CLEAR"
    ],
    "canon_hot_blades_shown": false,
-   "note": "V4 Rev 4: STRUCT_S2 + STRUCT_S3 together = S5 (canon sectors + outer stiffeners); COIL_ASM_R4 + COIL_PLANT_LI replace Rev 3 COIL_P2 + COIL_COOLING"
+   "note": "V4 Rev 4: COIL_ASM_T00 (T00 shadowed build) + COIL_PLANT_LI + COIL_SUP_R4 replace Rev 3 COIL_P2 + COIL_COOLING + COIL_SUP_SIZED; STRUCT_S5N (S5_N9_T00) replaces S2 + S3; LAUNCH_BMOD overlays LAUNCH_B; AXIS_KEEPOUT is a keep-out, not hardware"
   },
   "V0": {
    "options": [
@@ -250,31 +252,146 @@
   "objects": 6249,
   "identical_to_append": true
  },
+ "rev4_raycast": {
+  "shares_of_4pi": {
+   "nozzle_loops": 0.01992,
+   "nozzle_struts": 0.0106185,
+   "C1_armour_face": 0.008122,
+   "C2_armour_face": 0.003946,
+   "wing": 0.0031175,
+   "shield": 0.002973,
+   "coil_struts_and_ties": 0.00229,
+   "loop_dust_guards_r4": 0.000697,
+   "other:Cryo": 0.000485,
+   "launcher": 6.45e-05,
+   "other:Target": 5.65e-05,
+   "other:Burn": 3.7e-05,
+   "other:Beam": 2.2e-05,
+   "other:Fast": 3.5e-06
+  },
+  "rev3_chosen_shares_of_4pi": {
+   "loop_bumpers_rev2": 0.076004,
+   "closure_winding_drawn_by_nozzle": 0.036142,
+   "other:C2": 0.022074,
+   "other:C1": 0.011933,
+   "nozzle_struts": 0.009901,
+   "loop_guard_rings_rev2": 0.0057035,
+   "coil_struts_and_ties": 0.003473,
+   "shield": 0.0028885,
+   "wing": 0.002366,
+   "other:Cryo": 0.0004195,
+   "launcher": 6.45e-05,
+   "other:Target": 5.65e-05,
+   "other:Beam": 2.2e-05,
+   "other:Fast": 3.5e-06
+  },
+  "n": 2000000
+ },
  "objects": {
-  "var_objects": 3589,
+  "var_objects": 3835,
   "missing_properties": [],
   "by_status": {
-   "CONCEPTUAL_ILLUSTRATION": 480,
+   "CONCEPTUAL_ILLUSTRATION": 521,
    "ENGINEERING_SUPPORTED": 346,
-   "PARAMETRIC_PLACEHOLDER": 842,
-   "PROTOTYPE": 1921
+   "PARAMETRIC_PLACEHOLDER": 895,
+   "PROTOTYPE": 2073
   },
   "by_generation": {
-   "ALL": 77,
+   "ALL": 86,
    "V0": 439,
-   "V4": 3064,
+   "V4": 3301,
    "V5": 9
   }
  },
  "revision": 4,
+ "rev4": {
+  "preferred_coil_build": "R4_T00_SHADOWED",
+  "preferred_structure": "S5_N9_T00",
+  "coil_C1_assembly_outer_m": 1.5820163498110251,
+  "coil_C2_assembly_outer_m": 0.38925687250891905,
+  "C1_assembly_to_hot_band_aft_edge_m": 23.220320111572732,
+  "reaction_ring_outer_r_m": 7.078768975016201,
+  "shield_shadow_r_at_ring_m": 7.328768975016201,
+  "reaction_ring_inside_shadow": true,
+  "S5N_longeron_to_tank_min_m": 1.027166285977274,
+  "S5N_longeron_to_tank_ok_ge_1m": true,
+  "S5N_B2_shadow_margin_m": 4.38916309289202,
+  "K2_to_keel30_m": 2.958898943540674,
+  "geometry_hash_t05_objects": "3226be9fa6df1b66",
+  "object_count_t05": 3835,
+  "rev4_parts_with_trace": 1533,
+  "rev4_parts_missing_trace": []
+ },
+ "rev4_launcher": {
+  "axis_channel_deg": 6.0,
+  "V4_chosen_hardware_in_axis_channel": [
+   "V4_ES_Shield_W_Xray_Face",
+   "V4_ES_Beam_Port_1",
+   "V4_ES_Beam_Port_2",
+   "V4_ES_Beam_Port_3",
+   "V4_ES_Beam_Port_4",
+   "V4_ES_Beam_Port_5",
+   "V4_ES_Beam_Port_6",
+   "V4_ES_Beam_Port_7",
+   "V4_ES_Beam_Port_8",
+   "V4_ES_Beam_Port_9",
+   "V4_ES_Pellet_Bore",
+   "V4_PR_Fast_Ignitor_Port",
+   "V4_PP_Hot_Line_Loop_1",
+   "V4_PP_Cryo_Line_Loop_1",
+   "V4_ES_Nozzle_Strut_Loop_1_0",
+   "V4_ES_Nozzle_Strut_Loop_1_1",
+   "V4_ES_Nozzle_Strut_Loop_1_2",
+   "V4_ES_Nozzle_Strut_Loop_1_3",
+   "V4_ES_Nozzle_Strut_Loop_1_4",
+   "V4_ES_Nozzle_Strut_Loop_1_5",
+   "V4_PP_Strut_Crawler_Rail",
+   "V4_PP_Target_Tracker_1",
+   "V4_PP_Target_Tracker_2",
+   "V4_PP_Target_Tracker_3",
+   "V4_PP_Target_Tracker_4",
+   "V4_PR_LB_Accelerator_Barrel",
+   "V4_PR_LB_Drive_Coil_22",
+   "V4_PR_LB_Snout",
+   "V4_PR_LB_Snout_Tip_Cartridge",
+   "V4_PR_LB_Tip_Chopper",
+   "V4_PR_LBM_Kinematic_Mount_11_0",
+   "V4_PR_LBM_Kinematic_Mount_11_1",
+   "V4_PR_LBM_Kinematic_Mount_11_2",
+   "V4_PP_LBM_Snout_Face_CFC"
+  ],
+  "B_ray_hardware_in_axis_channel": [],
+  "B_ray_overlaps_V4_chosen_hardware": [
+   [
+    "V4_CI_LBR_Mount_C1_Strut_Ring",
+    "V4_ES_Shield_LiH_Crew_Core"
+   ],
+   [
+    "V4_CI_LBR_Mount_C1_Strut_Ring",
+    "V4_PP_Shield_LiH_Hardware_Annulus"
+   ],
+   [
+    "V4_CI_LBR_Mount_C1_Strut_Ring",
+    "V4_PR_C1_R4_Reaction_Ring"
+   ]
+  ],
+  "B_modified_overlaps_canon_or_V4": [],
+  "B_ray_mount_overlaps_are_intended_attachments": [
+   "LBR_Mount_C1_Strut_Ring",
+   "LBR_Mount_Shield_Frame"
+  ],
+  "note": "BVH triangle overlap on drawn hardware (VIS keep-outs, concept illustrations and paths excluded from the partner set); canon objects are not tagged wayfarer.t05 and are not in this set"
+ },
  "rev2": {
   "source": "rev2.json (work/vertex-blender/rev2.py) plus the placements built here",
   "assemblies": {
    "V4": {
     "options": [
      "LAUNCH_B",
+     "LAUNCH_BMOD",
+     "AXIS_KEEPOUT",
      "WINGS_PREF",
-     "COIL_ASM_R4",
+     "COIL_ASM_T00",
      "COIL_PLANT_LI",
      "COIL_SUP_R4",
      "DUST_GUARDS_R4",
@@ -285,7 +402,7 @@
      "B2_DOCK_CLEAR"
     ],
     "canon_hot_blades_shown": false,
-    "note": "V4 Rev 4: STRUCT_S2 + STRUCT_S3 together = S5 (canon sectors + outer stiffeners); COIL_ASM_R4 + COIL_PLANT_LI replace Rev 3 COIL_P2 + COIL_COOLING"
+    "note": "V4 Rev 4: COIL_ASM_T00 (T00 shadowed build) + COIL_PLANT_LI + COIL_SUP_R4 replace Rev 3 COIL_P2 + COIL_COOLING + COIL_SUP_SIZED; STRUCT_S5N (S5_N9_T00) replaces S2 + S3; LAUNCH_BMOD overlays LAUNCH_B; AXIS_KEEPOUT is a keep-out, not hardware"
    },
    "V0": {
     "options": [

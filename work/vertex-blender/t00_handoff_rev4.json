@@ -1,0 +1,463 @@
+{
+ "version": 1,
+ "from": "T00",
+ "to": "T05",
+ "base_commit": "e24fc7a",
+ "published_in": "the commit that adds this file on claude/project-thread-9rsgog (git log -- lab/variants/vertex-drive/results/t05_handoff_rev4.json)",
+ "status": "NON-CANON research geometry; numbers MODEL / PROTOTYPE as labelled in studies/rev4/results/*.json",
+ "coils": {
+  "C1": {
+   "radius_m": 22.12849330614687,
+   "z_from_burn_m": 60.797535685191285,
+   "polar_deg": 20.0,
+   "current_MA": 162.12704372637813,
+   "winding_minor_m": 1.2970163498110252,
+   "design_hoop_tension_GN": 16.07949648863315,
+   "radial_build_m": {
+    "winding_minor": 1.2970163498110252,
+    "ground_insulation": 0.02,
+    "cryostat_wall": 0.03,
+    "vacuum_mli_80K_screen": 0.15,
+    "shadow_margin": 0.05,
+    "lithium_channel": 0.03,
+    "CFC_armour": 0.005,
+    "LiH_neutron_screen_burn_face": 0.5597060626659474
+   },
+   "projected_half_width_m": 1.5820163498110251,
+   "share_ring": 0.008363007616341131,
+   "share_struts": 0.0015300574063899252,
+   "case": "hoop case behind the winding (in its own shadow), TARGET composite; area m2 = 5.38",
+   "struts": {
+    "count": 6,
+    "width_m": 0.8166797434307267,
+    "length_m": 16.372021844291588,
+    "to": "shield rim"
+   },
+   "masses_t": {
+    "case": 1196.0736975795614,
+    "case_minus_FDP1_booking": 0.0,
+    "winding_pack": 1051.9472377058128,
+    "neutron_screen": 192.05573928742808,
+    "armour": 4.069250343394651,
+    "cryostat": 109.46908895312455,
+    "struts": 152.57026852331754
+   },
+   "cooling_W": {
+    "armour_hot_1800K": 4072575382.4313736,
+    "back_face_leak_warm": 1938943.301164167,
+    "neutron_screen_warm": 1962498.4822857445,
+    "shield_80K": 40544.10701967576,
+    "winding_20K": 9428.819240739662,
+    "cryoplant_input_electric": 1881210.7933442155
+   },
+   "neutron_fluence_n_cm2_unshielded": 1.0608251014189983e+20
+  },
+  "C2": {
+   "radius_m": 41.58796373779316,
+   "z_from_burn_m": 49.56260519319273,
+   "polar_deg": 40.0,
+   "current_MA": 13.032109063614877,
+   "winding_minor_m": 0.104256872508919,
+   "design_hoop_tension_GN": 0.25001296493843017,
+   "radial_build_m": {
+    "winding_minor": 0.104256872508919,
+    "ground_insulation": 0.02,
+    "cryostat_wall": 0.03,
+    "vacuum_mli_80K_screen": 0.15,
+    "shadow_margin": 0.05,
+    "lithium_channel": 0.03,
+    "CFC_armour": 0.005,
+    "LiH_neutron_screen_burn_face": 0.5597060626659474
+   },
+   "projected_half_width_m": 0.38925687250891905,
+   "share_ring": 0.0038672622682546062,
+   "share_struts": 0.0011554613983402072,
+   "case": "hoop case behind the winding (in its own shadow), TARGET composite; area m2 = 0.08",
+   "struts": {
+    "count": 6,
+    "width_m": 0.44398204603741664,
+    "length_m": 22.4698609839971,
+    "to": "C1"
+   },
+   "masses_t": {
+    "case": 34.951340536757584,
+    "case_minus_FDP1_booking": 0.0,
+    "winding_pack": 158.91650741719928,
+    "neutron_screen": 88.81134013279346,
+    "armour": 1.8817223461978871,
+    "cryostat": 47.11190834886009,
+    "struts": 45.283866542726884
+   },
+   "cooling_W": {
+    "armour_hot_1800K": 2067740302.0476172,
+    "back_face_leak_warm": 896615.5016079978,
+    "neutron_screen_warm": 996363.366659839,
+    "shield_80K": 17448.854944022256,
+    "winding_20K": 4776.573907292317,
+    "cryoplant_input_electric": 882441.6771607962
+   },
+   "neutron_fluence_n_cm2_unshielded": 1.0608251014189983e+20
+  }
+ },
+ "coil_totals": {
+  "preferred_case": "bottom-up, shadowed, TARGET_composite",
+  "share_total": 0.01491578868932587,
+  "intercepted_W": 6146124117.213984,
+  "hot_W": 6140315684.478991,
+  "warm_W": 15340510.783615112,
+  "cryo_input_W": 2763652.4705050117,
+  "pump_electric_W": 16921063.9453235,
+  "li_flow_m3_s": 10.152638367194099,
+  "coolant": "lithium loop, 1,500 -> 1,800 K, 1 MPa, EM pumps, Li/Sn exchanger at the hot-radiator root (T05 Rev 4 plant)",
+  "cooling_mass_t": {
+   "lithium_inventory_kg": 82.84552907630385,
+   "pipes_kg": 70.41869971485826,
+   "pumps_kg": 16.921063945323503,
+   "cryoplant_kg": [
+    5.527304941010024,
+    27.636524705050117
+   ],
+   "coil_hardware_unbooked_kg": 1852.1169296008552,
+   "total_kg": 2049.938747042391
+  },
+  "t05_ray_cast_case": {
+   "share": 0.0273,
+   "other_share": 0.0122570004435468,
+   "intercepted_W": 11249099319.83792,
+   "other_hw_W": 5050557338.928768,
+   "coupled_departure_t": 71882.68243463831
+  }
+ },
+ "ship_consequence": {
+  "answer_to_T05_question_B": "more propellant: the coupled solve re-sizes the whole ship, so propellant and tanks grow with the dry mass",
+  "V4": {
+   "departure_t": 42915.783853018824,
+   "propellant_t": 27116.059611797376,
+   "tank_t": 2544.7683195441664,
+   "fusion_TW": 35.71976022315651,
+   "pellet_rate_Hz": 195.73784854631526,
+   "wing_tip_radius_m": 10127.573934427086
+  },
+  "coupled_preferred": {
+   "departure_t": 68472.42098165506,
+   "propellant_t": 43263.85498309006,
+   "tank_t": 4060.1949479316445,
+   "fusion_TW": 56.99114421492967,
+   "pellet_rate_Hz": 312.2996954216142,
+   "wing_tip_radius_m": 16189.857626210485
+  },
+  "propellant_ratio": 1.5955067071864404,
+  "tank_stretch_length_m_if_same_section": 439.4025471591456,
+  "note": "COUPLED APPROXIMATION, not a converged spacecraft design. Draw it as a labelled envelope (ghost), keep V4 as the drawn baseline. The rate rises to about 312 Hz unless capped; capped at 196 Hz the same ship is 91 kt (injection.json)."
+ },
+ "launcher": {
+  "recommended_for_blender": "B-modified geometry (B kinematics) as the preferred lane, labelled TARGET PHYSICS UNPROVEN; B and B-long kept as labelled failed lanes; no fewer-larger-pulse lane (does not fit or does not close)",
+  "B_modified": {
+   "rate_Hz": 195.73784854631526,
+   "open_flight_m": 45.0,
+   "muzzle_m_s": 8808.203184584187,
+   "accel_g": 13700.0,
+   "accelerator_m": 288.73764507154226,
+   "launch_ms": 65.56107733229427,
+   "target_kg": 0.0012347695952868898,
+   "sabot_kg": 0.0037043087858606694,
+   "electric_W": 93757364.35070877,
+   "sabot_catcher_W": 28127209.30521263,
+   "launcher_kg": 73142.40038493181,
+   "tip_xray_J_cm2": 8.268662837318114
+  },
+  "target": {
+   "class": "strong shell, gas fill 30 K, HDC",
+   "fits_DHe3": true,
+   "fill_MPa": 1.7140747300889345,
+   "wall_um": 17.14074730088935,
+   "wall_g": 0.30155577646607307,
+   "shell_to_fuel": 0.3905369110523419,
+   "limit_g": 102282.38788328663,
+   "fuel_density_g_cc": 0.023042360602275637,
+   "convergence_to_2000": 44.275928312472566,
+   "gas_scale_height_m": 0.9342204178711107,
+   "mechanism": "wall carries its fill pressure and the inertial load; fuel stays uniform because a gas re-equilibrates at sound speed in about 0.1 ms; penalties: wall mass, convergence about 2x the liquid case, a cold high-pressure fill at 196 Hz (fill tube or cold permeation), carbon mix"
+  },
+  "type": "contactless coilgun (linear induction); railgun life cannot reach 1e10 shots",
+  "sabot": "split EM armature sabot, stripped magnetically before the snout; catcher in the shadow cone takes the sabot energy",
+  "shutter": {
+   "closed_before_flash": true,
+   "opens_after_flash_us": 100.0,
+   "cycle_Hz": 195.73784854631526,
+   "note": "rotating chopper disc at the snout tip, rim at about 500 m/s, slot open about 10 us per shot; its rim is in the axis plasma channel (see axis_plasma)"
+  },
+  "alignment": {
+   "flight_open_ms": 5.108873973156914,
+   "lateral_velocity_error_m_s": 0.019573784854631526,
+   "pointing_urad_untracked": 2.2222222222222223,
+   "pointing_urad_with_steering": 111.11111111111111,
+   "ship_drift_um_peak_accel": 2.3970604835947094,
+   "arrival_jitter_ns_for_0.1mm_axial": 11.353053273682033,
+   "driver_timing": "fire on tracked arrival (axial error is absorbed by timing; lateral by beam steering)",
+   "shielded_transport": "the accelerator runs inside the shadow-shield cone; the target is behind the shield until the snout; the open flight is one period, so a target never sees an earlier flash",
+   "shots_per_mission": 35117291618.64383,
+   "contact_life": "a railgun cannot run 1e10 shots; a contactless coilgun (or linear induction) is the only EM class with a credible life"
+  },
+  "mounting": "own kinematic straight rail, actively aligned; not a primary spine member (thermal bow of the stretch 0.4-2 mrad)",
+  "axis_field_T": {
+   "burn_point_T": 0.6725777999412648,
+   "snout_tip_T": 3.1136167462994973,
+   "max_open_path_T": 2.9634121380756375,
+   "max_to_shield_T": 5.118323917283282,
+   "note": "vacuum field of the T03 C_W15 set at V4 scale; the last 20 m of barrel (snout) and the open path cross it. A metal hohlraum at 8.8 km/s through this field takes eddy heating and drag; a non-conducting direct-drive capsule does not. The coilgun stages in the snout run in this background field."
+  },
+  "axis_plasma": {
+   "shield_strike_share_of_plasma": 0.003195155355517331,
+   "unstopped_forward_share": 0.0015223526320451354,
+   "stopping_radius_by_polar_deg": {
+    "0": null,
+    "10": 29.65,
+    "20": 26.29,
+    "30": 25.38,
+    "40": 25.63,
+    "50": 26.6,
+    "60": 28.1,
+    "70": 30.48,
+    "80": 34.42,
+    "90": 38.82,
+    "100": 43.29,
+    "110": 51.51,
+    "120": 72.7,
+    "130": 85.54,
+    "140": null,
+    "150": null,
+    "160": null,
+    "170": null,
+    "180": null
+   },
+   "shield_plasma_J_per_pulse": 576350483.6624615,
+   "shield_plasma_W": 112813603680.71844,
+   "shield_face_m2": 121.86468987333575,
+   "shield_mean_J_cm2_per_pulse": 472.94296999525557,
+   "shield_mean_MW_m2": 925.7283943197585,
+   "note": "T03 thin-shell MODEL: on the axis (polar 0) no stopping radius exists, so near-axis plasma reaches the shield face and any snout on the axis. FDP-1 books this heat in plume_to_hardware (hot loop) but no surface check uses it."
+  },
+  "verdicts": {
+   "B (T05 Rev 3): 45 m open, 13,700 g": "NOT DEFENSIBLE",
+   "B-long: 45 m open, 594 m accelerator (6,656 g)": "NOT DEFENSIBLE",
+   "B-modified: B kinematics, 30 K gas-filled HDC capsule": "CANDIDATE, TARGET PHYSICS UNPROVEN",
+   "fewer, larger pulses: 150 Hz, 1,000 g": "DOES NOT FIT",
+   "fewer, larger pulses: 150 Hz, 3,000 g": "DOES NOT FIT",
+   "fewer, larger pulses: 100 Hz, 1,000 g": "DOES NOT FIT",
+   "fewer, larger pulses: 100 Hz, 3,000 g": "DOES NOT FIT"
+  }
+ },
+ "surfaces": {
+  "recommendation": "CFC monoblocks on Mo-TZM lithium tubes for every X-ray face (shield rim, coil armour, snout cartridge sides): the only solid that survives every spectrum band at 4.0 and 8.3 J/cm2. W, Mo and SiC fail for spectra at or below 10 keV. A renewable liquid-Li surface is the only option for the snout tip face if CFC neutron damage or the axis plasma rules it out",
+  "thickness_mm": {
+   "shield_face_and_coil_armour": 5.0,
+   "snout_tip": 2.5
+  },
+  "replacement": "cartridges: the snout tip on a magazine (CFC face, 2.5 mm, exchanged at the axis-plasma rate; see axis_plasma); coil armour and shield rim by sector at maintenance stops (neutron conductivity loss of CFC, not erosion, sets the interval)",
+  "axis_plasma_blocker": "An axisymmetric field is purely axial on the axis, so plasma moving along the axis forward is not reflected (T03 has no stopping radius at polar 0). Anything inside that channel (shield face centre, snout tip, shutter) receives the raw pulse: about 350 J/cm2 of MeV/u ions per pulse. No solid survives this; it needs an axis plug (a sacrificial or renewable stagnation target, or a non-axisymmetric field), and the 0.23-0.32 % of plasma it stops must be booked as hardware heat (FDP-1 already books it in plume_to_hardware).",
+  "per_surface": {
+   "shield face and coil armour": {
+    "steady_MW_m2": 7.8295139418526105,
+    "max_armour_mm": {
+     "W": 3.8316554798676856,
+     "C (CFC)": 5.747483219801529,
+     "Mo": 3.8316554798676856,
+     "SiC": 2.2989932879206116
+    },
+    "verdicts": {
+     "W | Planck 1 keV (soft surface)": "ABLATES / MELTS",
+     "W | Planck 3 keV": "ABLATES / MELTS",
+     "W | Wien 10 keV (Comptonised)": "FATIGUE (cartridge)",
+     "W | Wien 30 keV": "OK (elastic, below shakedown)",
+     "W | bremsstrahlung 50 keV with its soft tail (unfiltered)": "ABLATES / MELTS",
+     "W | bremsstrahlung 50 keV above 5 keV (hard bound)": "FATIGUE (cartridge)",
+     "C (CFC) | Planck 1 keV (soft surface)": "OK (below fracture)",
+     "C (CFC) | Planck 3 keV": "OK (below fracture)",
+     "C (CFC) | Wien 10 keV (Comptonised)": "OK (below fracture)",
+     "C (CFC) | Wien 30 keV": "OK (below fracture)",
+     "C (CFC) | bremsstrahlung 50 keV with its soft tail (unfiltered)": "OK (below fracture)",
+     "C (CFC) | bremsstrahlung 50 keV above 5 keV (hard bound)": "OK (below fracture)",
+     "Be | Planck 1 keV (soft surface)": "FATIGUE (cartridge)",
+     "Be | Planck 3 keV": "OK (elastic, below shakedown)",
+     "Be | Wien 10 keV (Comptonised)": "OK (elastic, below shakedown)",
+     "Be | Wien 30 keV": "OK (elastic, below shakedown)",
+     "Be | bremsstrahlung 50 keV with its soft tail (unfiltered)": "OK (elastic, below shakedown)",
+     "Be | bremsstrahlung 50 keV above 5 keV (hard bound)": "OK (elastic, below shakedown)",
+     "SiC | Planck 1 keV (soft surface)": "ABLATES / MELTS",
+     "SiC | Planck 3 keV": "CRACKS (brittle)",
+     "SiC | Wien 10 keV (Comptonised)": "OK (below fracture)",
+     "SiC | Wien 30 keV": "OK (below fracture)",
+     "SiC | bremsstrahlung 50 keV with its soft tail (unfiltered)": "CRACKS (brittle)",
+     "SiC | bremsstrahlung 50 keV above 5 keV (hard bound)": "OK (below fracture)",
+     "Mo | Planck 1 keV (soft surface)": "ABLATES / MELTS",
+     "Mo | Planck 3 keV": "ABLATES / MELTS",
+     "Mo | Wien 10 keV (Comptonised)": "FATIGUE (cartridge)",
+     "Mo | Wien 30 keV": "OK (elastic, below shakedown)",
+     "Mo | bremsstrahlung 50 keV with its soft tail (unfiltered)": "ABLATES / MELTS",
+     "Mo | bremsstrahlung 50 keV above 5 keV (hard bound)": "FATIGUE (cartridge)",
+     "Sn film (liquid, renewable) | Planck 1 keV (soft surface)": "VAPOUR LOSS (renew)",
+     "Sn film (liquid, renewable) | Planck 3 keV": "VAPOUR LOSS (renew)",
+     "Sn film (liquid, renewable) | Wien 10 keV (Comptonised)": "OK (film below boiling)",
+     "Sn film (liquid, renewable) | Wien 30 keV": "OK (film below boiling)",
+     "Sn film (liquid, renewable) | bremsstrahlung 50 keV with its soft tail (unfiltered)": "VAPOUR LOSS (renew)",
+     "Sn film (liquid, renewable) | bremsstrahlung 50 keV above 5 keV (hard bound)": "OK (film below boiling)",
+     "Li film (liquid, renewable) | Planck 1 keV (soft surface)": "OK (film below boiling)",
+     "Li film (liquid, renewable) | Planck 3 keV": "OK (film below boiling)",
+     "Li film (liquid, renewable) | Wien 10 keV (Comptonised)": "OK (film below boiling)",
+     "Li film (liquid, renewable) | Wien 30 keV": "OK (film below boiling)",
+     "Li film (liquid, renewable) | bremsstrahlung 50 keV with its soft tail (unfiltered)": "OK (film below boiling)",
+     "Li film (liquid, renewable) | bremsstrahlung 50 keV above 5 keV (hard bound)": "OK (film below boiling)"
+    }
+   },
+   "snout tip (launcher B)": {
+    "steady_MW_m2": 16.246241429344167,
+    "max_armour_mm": {
+     "W": 1.8465809541531015,
+     "C (CFC)": 2.769871431229652,
+     "Mo": 1.8465809541531015,
+     "SiC": 1.1079485724918612
+    },
+    "verdicts": {
+     "W | Planck 1 keV (soft surface)": "ABLATES / MELTS",
+     "W | Planck 3 keV": "ABLATES / MELTS",
+     "W | Wien 10 keV (Comptonised)": "FATIGUE (cartridge)",
+     "W | Wien 30 keV": "FATIGUE (cartridge)",
+     "W | bremsstrahlung 50 keV with its soft tail (unfiltered)": "ABLATES / MELTS",
+     "W | bremsstrahlung 50 keV above 5 keV (hard bound)": "ABLATES / MELTS",
+     "C (CFC) | Planck 1 keV (soft surface)": "OK (below fracture)",
+     "C (CFC) | Planck 3 keV": "OK (below fracture)",
+     "C (CFC) | Wien 10 keV (Comptonised)": "OK (below fracture)",
+     "C (CFC) | Wien 30 keV": "OK (below fracture)",
+     "C (CFC) | bremsstrahlung 50 keV with its soft tail (unfiltered)": "OK (below fracture)",
+     "C (CFC) | bremsstrahlung 50 keV above 5 keV (hard bound)": "OK (below fracture)",
+     "Be | Planck 1 keV (soft surface)": "FATIGUE (cartridge)",
+     "Be | Planck 3 keV": "OK (elastic, below shakedown)",
+     "Be | Wien 10 keV (Comptonised)": "OK (elastic, below shakedown)",
+     "Be | Wien 30 keV": "OK (elastic, below shakedown)",
+     "Be | bremsstrahlung 50 keV with its soft tail (unfiltered)": "OK (elastic, below shakedown)",
+     "Be | bremsstrahlung 50 keV above 5 keV (hard bound)": "OK (elastic, below shakedown)",
+     "SiC | Planck 1 keV (soft surface)": "ABLATES / MELTS",
+     "SiC | Planck 3 keV": "CRACKS (brittle)",
+     "SiC | Wien 10 keV (Comptonised)": "OK (below fracture)",
+     "SiC | Wien 30 keV": "OK (below fracture)",
+     "SiC | bremsstrahlung 50 keV with its soft tail (unfiltered)": "CRACKS (brittle)",
+     "SiC | bremsstrahlung 50 keV above 5 keV (hard bound)": "OK (below fracture)",
+     "Mo | Planck 1 keV (soft surface)": "ABLATES / MELTS",
+     "Mo | Planck 3 keV": "ABLATES / MELTS",
+     "Mo | Wien 10 keV (Comptonised)": "FATIGUE (cartridge)",
+     "Mo | Wien 30 keV": "OK (elastic, below shakedown)",
+     "Mo | bremsstrahlung 50 keV with its soft tail (unfiltered)": "ABLATES / MELTS",
+     "Mo | bremsstrahlung 50 keV above 5 keV (hard bound)": "FATIGUE (cartridge)",
+     "Sn film (liquid, renewable) | Planck 1 keV (soft surface)": "VAPOUR LOSS (renew)",
+     "Sn film (liquid, renewable) | Planck 3 keV": "VAPOUR LOSS (renew)",
+     "Sn film (liquid, renewable) | Wien 10 keV (Comptonised)": "OK (film below boiling)",
+     "Sn film (liquid, renewable) | Wien 30 keV": "OK (film below boiling)",
+     "Sn film (liquid, renewable) | bremsstrahlung 50 keV with its soft tail (unfiltered)": "VAPOUR LOSS (renew)",
+     "Sn film (liquid, renewable) | bremsstrahlung 50 keV above 5 keV (hard bound)": "OK (film below boiling)",
+     "Li film (liquid, renewable) | Planck 1 keV (soft surface)": "OK (film below boiling)",
+     "Li film (liquid, renewable) | Planck 3 keV": "OK (film below boiling)",
+     "Li film (liquid, renewable) | Wien 10 keV (Comptonised)": "OK (film below boiling)",
+     "Li film (liquid, renewable) | Wien 30 keV": "OK (film below boiling)",
+     "Li film (liquid, renewable) | bremsstrahlung 50 keV with its soft tail (unfiltered)": "OK (film below boiling)",
+     "Li film (liquid, renewable) | bremsstrahlung 50 keV above 5 keV (hard bound)": "OK (film below boiling)"
+    }
+   }
+  }
+ },
+ "spine": {
+  "recommended": "N9 in the inter-tank gaps at R 31 m, tube r 0.61 m t/r 0.1 (cantilever-sized for 0.2 Hz at 300 t bow)",
+  "sizing": {
+   "N6 at R 34.8 m bow 100 t": {
+    "tube_r_m": 0.7994348532520233,
+    "added_structure_t": 2749.0170745752557,
+    "structure_t": 2839.906356420892,
+    "f1_cantilever_Hz": 0.20000000040492802,
+    "f1_free_free_Hz": 0.691730530756087,
+    "buckling_factor_SF2": 540.3498119565186,
+    "longeron_buckling_margin": 297.4257058949441
+   },
+   "N6 at R 34.8 m bow 300 t": {
+    "tube_r_m": 0.8086717241083079,
+    "added_structure_t": 2808.3149770360556,
+    "structure_t": 2899.2042588816917,
+    "f1_cantilever_Hz": 0.20000000104369936,
+    "f1_free_free_Hz": 0.6924604842743299,
+    "buckling_factor_SF2": 548.1025541978405,
+    "longeron_buckling_margin": 306.5247377372764
+   },
+   "N6 at R 34.8 m bow 1000 t": {
+    "tube_r_m": 0.8408699342946422,
+    "added_structure_t": 3020.3436769783702,
+    "structure_t": 3111.2329588240063,
+    "f1_cantilever_Hz": 0.20000000065161247,
+    "f1_free_free_Hz": 0.6962426978205765,
+    "buckling_factor_SF2": 575.0364494924085,
+    "longeron_buckling_margin": 339.64155086933664
+   },
+   "N9 at R 31 m bow 100 t": {
+    "tube_r_m": 0.6027701524104032,
+    "added_structure_t": 1921.8440286976406,
+    "structure_t": 2012.7333105432767,
+    "f1_cantilever_Hz": 0.20000000007605406,
+    "f1_free_free_Hz": 0.7219960814558122,
+    "buckling_factor_SF2": 664.0817756077453,
+    "longeron_buckling_margin": 133.54608437145527
+   },
+   "N9 at R 31 m bow 300 t": {
+    "tube_r_m": 0.610836907107978,
+    "added_structure_t": 1968.8824557346445,
+    "structure_t": 2059.771737580281,
+    "f1_cantilever_Hz": 0.200000000096767,
+    "f1_free_free_Hz": 0.722478534220733,
+    "buckling_factor_SF2": 672.7071241509028,
+    "longeron_buckling_margin": 138.59800837408463
+   },
+   "N9 at R 31 m bow 1000 t": {
+    "tube_r_m": 0.638803008640525,
+    "added_structure_t": 2136.79868175452,
+    "structure_t": 2227.6879636001568,
+    "f1_cantilever_Hz": 0.200000000257376,
+    "f1_free_free_Hz": 0.7259279110117857,
+    "buckling_factor_SF2": 701.16663698328,
+    "longeron_buckling_margin": 157.01914240536422
+   }
+  },
+  "frames": "ring frames every 7.65 m need spokes or tie rods to the keel hub: a free ring frame (r 0.15 m tube) ovalises at 0.14 Hz, inside the requirement band",
+  "lacing": "diagonal lacing in every bay panel (0.25 x longeron area) is part of the stiffness; without it shear governs",
+  "joints": {
+   "J1": {
+    "axial_design_MN": 3.754930440626796,
+    "moment_0.01g_MN_m": 350.34452578304456,
+    "shear_0.01g_MN": 2.8763038735051794
+   },
+   "J3": {
+    "axial_design_MN": 0.11020717231064275,
+    "lateral_0.01g_MN": 0.029419949999999997
+   }
+  },
+  "tank_saddles": {
+   "recommend_Hz": [
+    10.0,
+    30.0
+   ],
+   "max_vessel_t": 408.69515561728167,
+   "k_N_m_at_10Hz": 1613463802.6336894,
+   "transmissibility_at_pulse": 0.002610059327360011,
+   "note": "isolate the vessels: a saddle mode at 10-30 Hz passes (f/f_p)^2 = 0.3-2.3 % of the pulse ripple and stays well above f1 and the slosh band; a stiff saddle above 196 Hz would need about 7e11 N/m per vessel"
+  },
+  "independence": {
+   "K2": "pressure tube r 3 m az 90 deg, between keels 30 and 150; carries no primary load; its own 2.2 m tube",
+   "launcher": "in the spine bore or on its own kinematic rail; must not be a primary member (thermal bow of the stretch is 0.4-2 mrad, far above the 22 urad untracked pointing need)",
+   "services": "two independent runs on keels 150 and 270 (K2 on the 90 side), cross-tied at J1 and J3",
+   "checks": [
+    "K2 and the launcher share no member",
+    "loss of one keel: cantilever f1 in keel_loss"
+   ]
+  },
+  "keel_loss_f1_cantilever_Hz": {
+   "N6_fixed": 0.18917282046892753,
+   "N9_gaps": 0.1721066548718322
+  }
+ }
+}

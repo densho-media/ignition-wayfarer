@@ -105,6 +105,44 @@
       "burn_face_m2": 2097.655523147495,
       "projected_m2": 1335.408981651758,
       "flux_mean_W_m2": 4986170.847925276
+     },
+     "R4_T00_SHADOWED": {
+      "case_outer_m": null,
+      "assembly_outer_m": 1.5820163498110251,
+      "projected_half_width_m": 1.5820163498110251,
+      "share": 0.008363007616341131,
+      "share_struts": 0.0015300574063899252,
+      "xray_W": 3445559137.932546,
+      "struts_xray_W": 630383651.4326491,
+      "profile": {
+       "winding_minor_m": 1.2970163498110252,
+       "case_area_m2": 5.38,
+       "case_half_width_m": 1.2970163498110252,
+       "case_back_s_m": 3.092665076803702,
+       "front_layers_m": 0.2,
+       "shadow_margin_m": 0.05,
+       "li_channel_m": 0.03,
+       "cfc_m": 0.005,
+       "lih_nose_m": 0.5597060626659474
+      },
+      "masses_t": {
+       "case": 1196.0736975795614,
+       "case_minus_FDP1_booking": 0.0,
+       "winding_pack": 1051.9472377058128,
+       "neutron_screen": 192.05573928742808,
+       "armour": 4.069250343394651,
+       "cryostat": 109.46908895312455,
+       "struts": 152.57026852331754
+      },
+      "struts": {
+       "count": 6,
+       "width_m": 0.8166797434307267,
+       "length_m": 16.372021844291588,
+       "to": "shield rim"
+      },
+      "source": "T00 handoff v1 coils.C1",
+      "burn_face_m2": 691.0230802392637,
+      "flux_mean_W_m2": 4986170.847925277
      }
     },
     "ladder_nominal": [
@@ -222,6 +260,44 @@
       "burn_face_m2": 3942.30283210501,
       "projected_m2": 2509.7479315787627,
       "flux_mean_W_m2": 4986170.847925279
+     },
+     "R4_T00_SHADOWED": {
+      "case_outer_m": null,
+      "assembly_outer_m": 0.38925687250891905,
+      "projected_half_width_m": 0.38925687250891905,
+      "share": 0.0038672622682546062,
+      "share_struts": 0.0011554613983402072,
+      "xray_W": 1593312054.5208979,
+      "struts_xray_W": 476050096.11616534,
+      "profile": {
+       "winding_minor_m": 0.104256872508919,
+       "case_area_m2": 0.08,
+       "case_half_width_m": 0.104256872508919,
+       "case_back_s_m": 0.46555090909123004,
+       "front_layers_m": 0.2,
+       "shadow_margin_m": 0.05,
+       "li_channel_m": 0.03,
+       "cfc_m": 0.005,
+       "lih_nose_m": 0.5597060626659474
+      },
+      "masses_t": {
+       "case": 34.951340536757584,
+       "case_minus_FDP1_booking": 0.0,
+       "winding_pack": 158.91650741719928,
+       "neutron_screen": 88.81134013279346,
+       "armour": 1.8817223461978871,
+       "cryostat": 47.11190834886009,
+       "struts": 45.283866542726884
+      },
+      "struts": {
+       "count": 6,
+       "width_m": 0.44398204603741664,
+       "length_m": 22.4698609839971,
+       "to": "C1"
+      },
+      "source": "T00 handoff v1 coils.C2",
+      "burn_face_m2": 319.5462215627584,
+      "flux_mean_W_m2": 4986170.847925278
      }
     },
     "ladder_nominal": [
@@ -306,10 +382,446 @@
     "C2_W": 19656995455.13527,
     "total_W": 30116264273.642754,
     "share_total": 0.07309772881952124
+   },
+   "R4_T00_SHADOWED": {
+    "C1_W": 4072575382.4313736,
+    "C2_W": 2067740302.0476172,
+    "note": "T00 armour_hot_1800K per coil (ring + struts)",
+    "total_W": 6140315684.478991,
+    "share_total": 0.014903678845822792
    }
   },
-  "preferred": "R4_NOMINAL",
+  "preferred": "R4_T00_SHADOWED",
   "note": "the share uses the outermost layer of the full assembly (armour, which must shadow everything behind it); a share of sin(polar) * h / d is the band between polar +- h/d; the Blender ray cast (rev4_geometry.json raycast) checks it on the drawn mesh"
+ },
+ "structure": {
+  "basis": "Euler-Bernoulli cantilever from J1, distributed tank mass (0.2357 factor), bow tip mass; f1 target and every member choice PROTOTYPE; beam model only, not FE (T00 runs the beam-FE check)",
+  "f_target_Hz": 0.2,
+  "length_m": 275.4,
+  "forward_mass_full_kg": 27463923.152760547,
+  "bow_kg": 300000.0,
+  "base_S2_kg": 992309.8567773319,
+  "inter_tank_gaps_deg": [
+   38.55,
+   86.05,
+   116.35,
+   152.8,
+   200.88,
+   242.8,
+   276.02,
+   315.0,
+   351.05
+  ],
+  "cases": {
+   "S5_REV3_AS_DRAWN": {
+    "name": "S5_REV3_AS_DRAWN",
+    "longeron_r_m": 34.8,
+    "tube_r_m": 0.2873,
+    "area_m2_each": 0.025931111028182467,
+    "structure_kg_rev3_reported": 1176982.9271440005,
+    "f1_full_Hz": 0.07721533358384054,
+    "B2_shadow_margin_m": 0.9127000000000028,
+    "bug": "rev3.py options(): dA was the per-member area but its mass counted one member, and area_each divided it by n again; the stiffness add was 6x too small"
+   },
+   "S5_REV3_CORRECTED": {
+    "name": "S5_REV3_CORRECTED",
+    "note": "six longerons at r 34.8 m outside the tanks (Rev 3 layout), stiffness area corrected",
+    "longeron_az_deg": [
+     0.0,
+     60.0,
+     120.0,
+     180.0,
+     240.0,
+     300.0
+    ],
+    "longeron_r_m": 34.8,
+    "members": 6,
+    "kmin_sum_cos2": 2.9999999999999996,
+    "area_m2_each": 0.1805226855318057,
+    "tube_r_m": 0.7580379639913908,
+    "t_over_r": 0.05,
+    "wall_m": 0.037901898199569545,
+    "longerons_kg": 725156.8116273693,
+    "structure_kg": 1717466.6684047012,
+    "f1_full_Hz": 0.2,
+    "min_tank_clearance_m": 0.23363362681441102,
+    "B2_shadow_margin_m": 0.4419620360086114
+   },
+   "S5_N9_NESTED": {
+    "name": "S5_N9_NESTED",
+    "note": "nine longerons nested in the nine inter-tank gaps at r 31 m (t/r 0.1); tanks leave radially between them",
+    "longeron_az_deg": [
+     38.55,
+     86.05,
+     116.35,
+     152.8,
+     200.88,
+     242.8,
+     276.02,
+     315.0,
+     351.05
+    ],
+    "longeron_r_m": 31.0,
+    "members": 9,
+    "kmin_sum_cos2": 4.078202583233254,
+    "area_m2_each": 0.168961612170378,
+    "tube_r_m": 0.5185660591447477,
+    "t_over_r": 0.1,
+    "wall_m": 0.051856605914474774,
+    "longerons_kg": 1018074.240430888,
+    "structure_kg": 2010384.09720822,
+    "f1_full_Hz": 0.19999999999999996,
+    "min_tank_clearance_m": 1.1194371339405045,
+    "B2_shadow_margin_m": 4.481433940855251,
+    "sens_bow_100t": 1981243.219260268,
+    "sens_bow_1000t": 2112377.1700260504
+   },
+   "S5_N6_NESTED": {
+    "name": "S5_N6_NESTED",
+    "note": "six nested longerons, most isotropic six-gap set",
+    "longeron_az_deg": [
+     38.6,
+     86.1,
+     152.8,
+     242.8,
+     315.0,
+     351.0
+    ],
+    "longeron_r_m": 31.0,
+    "members": 6,
+    "kmin_sum_cos2": 2.865522982037079,
+    "area_m2_each": 0.24004349695474222,
+    "tube_r_m": 0.6180947265380247,
+    "t_over_r": 0.1,
+    "wall_m": 0.06180947265380247,
+    "longerons_kg": 964250.9825886469,
+    "structure_kg": 1956560.8393659787,
+    "f1_full_Hz": 0.2,
+    "min_tank_clearance_m": 0.9965235296822365,
+    "B2_shadow_margin_m": 4.381905273461975
+   },
+   "S5_N9_T00": {
+    "name": "S5_N9_T00",
+    "note": "nine longerons nested in the nine inter-tank gaps at r 31 m (t/r 0.1); tanks leave radially between them",
+    "longeron_az_deg": [
+     38.55,
+     86.05,
+     116.35,
+     152.8,
+     200.88,
+     242.8,
+     276.02,
+     315.0,
+     351.05
+    ],
+    "longeron_r_m": 31.0,
+    "members": 9,
+    "kmin_sum_cos2": 4.078202583233254,
+    "area_m2_each": 0.168961612170378,
+    "tube_r_m": 0.610836907107978,
+    "t_over_r": 0.1,
+    "wall_m": 0.051856605914474774,
+    "longerons_kg": 1018074.240430888,
+    "structure_kg": 2059771.7375802808,
+    "f1_full_Hz": 0.200000000096767,
+    "min_tank_clearance_m": 1.027166285977274,
+    "B2_shadow_margin_m": 4.38916309289202,
+    "sens_bow_100t": 1981243.219260268,
+    "sens_bow_1000t": 2112377.1700260504,
+    "f1_free_free_Hz": 0.722478534220733,
+    "buckling_factor_SF2": 672.7071241509028,
+    "source": "T00 handoff v1 spine.sizing N9 bow 300 t",
+    "range_kg_bow_100_1000t": [
+     2012733.3105432768,
+     2227687.963600157
+    ],
+    "joints": {
+     "J1": {
+      "axial_design_MN": 3.754930440626796,
+      "moment_0.01g_MN_m": 350.34452578304456,
+      "shear_0.01g_MN": 2.8763038735051794
+     },
+     "J3": {
+      "axial_design_MN": 0.11020717231064275,
+      "lateral_0.01g_MN": 0.029419949999999997
+     }
+    },
+    "frames": "ring frames every 7.65 m need spokes or tie rods to the keel hub: a free ring frame (r 0.15 m tube) ovalises at 0.14 Hz, inside the requirement band",
+    "lacing": "diagonal lacing in every bay panel (0.25 x longeron area) is part of the stiffness; without it shear governs",
+    "tank_saddles": {
+     "recommend_Hz": [
+      10.0,
+      30.0
+     ],
+     "max_vessel_t": 408.69515561728167,
+     "k_N_m_at_10Hz": 1613463802.6336894,
+     "transmissibility_at_pulse": 0.002610059327360011,
+     "note": "isolate the vessels: a saddle mode at 10-30 Hz passes (f/f_p)^2 = 0.3-2.3 % of the pulse ripple and stays well above f1 and the slosh band; a stiff saddle above 196 Hz would need about 7e11 N/m per vessel"
+    }
+   }
+  },
+  "preferred": "S5_N9_T00"
+ },
+ "t00_handoff": {
+  "version": 1,
+  "base_commit": "e24fc7a",
+  "file": "t00_handoff_rev4.json"
+ },
+ "launcher": {
+  "B_modified": {
+   "rate_Hz": 195.73784854631526,
+   "open_flight_m": 45.0,
+   "muzzle_m_s": 8808.203184584187,
+   "accel_g": 13700.0,
+   "accelerator_m": 288.73764507154226,
+   "launch_ms": 65.56107733229427,
+   "target_kg": 0.0012347695952868898,
+   "sabot_kg": 0.0037043087858606694,
+   "electric_W": 93757364.35070877,
+   "sabot_catcher_W": 28127209.30521263,
+   "launcher_kg": 73142.40038493181,
+   "tip_xray_J_cm2": 8.268662837318114
+  },
+  "target": {
+   "class": "strong shell, gas fill 30 K, HDC",
+   "fits_DHe3": true,
+   "fill_MPa": 1.7140747300889345,
+   "wall_um": 17.14074730088935,
+   "wall_g": 0.30155577646607307,
+   "shell_to_fuel": 0.3905369110523419,
+   "limit_g": 102282.38788328663,
+   "fuel_density_g_cc": 0.023042360602275637,
+   "convergence_to_2000": 44.275928312472566,
+   "gas_scale_height_m": 0.9342204178711107,
+   "mechanism": "wall carries its fill pressure and the inertial load; fuel stays uniform because a gas re-equilibrates at sound speed in about 0.1 ms; penalties: wall mass, convergence about 2x the liquid case, a cold high-pressure fill at 196 Hz (fill tube or cold permeation), carbon mix"
+  },
+  "shutter": {
+   "closed_before_flash": true,
+   "opens_after_flash_us": 100.0,
+   "cycle_Hz": 195.73784854631526,
+   "note": "rotating chopper disc at the snout tip, rim at about 500 m/s, slot open about 10 us per shot; its rim is in the axis plasma channel (see axis_plasma)"
+  },
+  "alignment": {
+   "flight_open_ms": 5.108873973156914,
+   "lateral_velocity_error_m_s": 0.019573784854631526,
+   "pointing_urad_untracked": 2.2222222222222223,
+   "pointing_urad_with_steering": 111.11111111111111,
+   "ship_drift_um_peak_accel": 2.3970604835947094,
+   "arrival_jitter_ns_for_0.1mm_axial": 11.353053273682033,
+   "driver_timing": "fire on tracked arrival (axial error is absorbed by timing; lateral by beam steering)",
+   "shielded_transport": "the accelerator runs inside the shadow-shield cone; the target is behind the shield until the snout; the open flight is one period, so a target never sees an earlier flash",
+   "shots_per_mission": 35117291618.64383,
+   "contact_life": "a railgun cannot run 1e10 shots; a contactless coilgun (or linear induction) is the only EM class with a credible life"
+  },
+  "verdicts": {
+   "B (T05 Rev 3): 45 m open, 13,700 g": "NOT DEFENSIBLE",
+   "B-long: 45 m open, 594 m accelerator (6,656 g)": "NOT DEFENSIBLE",
+   "B-modified: B kinematics, 30 K gas-filled HDC capsule": "CANDIDATE, TARGET PHYSICS UNPROVEN",
+   "fewer, larger pulses: 150 Hz, 1,000 g": "DOES NOT FIT",
+   "fewer, larger pulses: 150 Hz, 3,000 g": "DOES NOT FIT",
+   "fewer, larger pulses: 100 Hz, 1,000 g": "DOES NOT FIT",
+   "fewer, larger pulses: 100 Hz, 3,000 g": "DOES NOT FIT"
+  },
+  "axis_plasma": {
+   "shield_strike_share_of_plasma": 0.003195155355517331,
+   "unstopped_forward_share": 0.0015223526320451354,
+   "stopping_radius_by_polar_deg": {
+    "0": null,
+    "10": 29.65,
+    "20": 26.29,
+    "30": 25.38,
+    "40": 25.63,
+    "50": 26.6,
+    "60": 28.1,
+    "70": 30.48,
+    "80": 34.42,
+    "90": 38.82,
+    "100": 43.29,
+    "110": 51.51,
+    "120": 72.7,
+    "130": 85.54,
+    "140": null,
+    "150": null,
+    "160": null,
+    "170": null,
+    "180": null
+   },
+   "shield_plasma_J_per_pulse": 576350483.6624615,
+   "shield_plasma_W": 112813603680.71844,
+   "shield_face_m2": 121.86468987333575,
+   "shield_mean_J_cm2_per_pulse": 472.94296999525557,
+   "shield_mean_MW_m2": 925.7283943197585,
+   "note": "T03 thin-shell MODEL: on the axis (polar 0) no stopping radius exists, so near-axis plasma reaches the shield face and any snout on the axis. FDP-1 books this heat in plume_to_hardware (hot loop) but no surface check uses it."
+  },
+  "axis_field_T": {
+   "burn_point_T": 0.6725777999412648,
+   "snout_tip_T": 3.1136167462994973,
+   "max_open_path_T": 2.9634121380756375,
+   "max_to_shield_T": 5.118323917283282,
+   "note": "vacuum field of the T03 C_W15 set at V4 scale; the last 20 m of barrel (snout) and the open path cross it. A metal hohlraum at 8.8 km/s through this field takes eddy heating and drag; a non-conducting direct-drive capsule does not. The coilgun stages in the snout run in this background field."
+  },
+  "B_ray_T05_proposal": {
+   "polar_deg": 12.0,
+   "az_deg": 45.0,
+   "tip_from_burn_m": 45.0,
+   "accel_g": 30000.0,
+   "accelerator_m": 131.8568579160043,
+   "tip_xr_m": [
+    -205.1228333335044,
+    9.35602608679917
+   ],
+   "breech_xr_m": [
+    -76.14736412266649,
+    36.770608362032675
+   ],
+   "capsule_limit_g": 102282.38788328663,
+   "margin_on_capsule_limit": 3.4094129294428877,
+   "stopping_radius_at_10deg_m": 29.65,
+   "status": "T05 GEOMETRY PROPOSAL, not assessed by T00: off the unstopped axis channel, barrel on a burn ray (self-shadowed)"
+  },
+  "B_ray": {
+   "polar_deg": 12.0,
+   "az_deg": 45.0,
+   "tip_from_burn_m": 56.5,
+   "accel_g": 30000.0,
+   "accelerator_m": 207.86175539869862,
+   "muzzle_m_s": 11059.188442866813,
+   "tip_xray_J_cm2": 5.245216460355292,
+   "tip_MW_m2": 10.266873851096639,
+   "margin_to_stopping_surface_m": 13.01184188188163,
+   "gas_capsule_SF": 3.4094,
+   "tip_xr_m": [
+    -193.87413592506564,
+    11.747010531203403
+   ],
+   "breech_xr_m": [
+    9.445341402488594,
+    54.96389955249435
+   ],
+   "stopping_radius_V4_m": {
+    "10": 44.496648775008964,
+    "12_interp": 43.48815811811837,
+    "20": 39.45419549055601,
+    "basis": "T03 thin shell (V1) x stand-off scale 1.501"
+   },
+   "field_along_ray": [
+    {
+     "distance_m": 5,
+     "B_T_upper": 0.741188325390535
+    },
+    {
+     "distance_m": 10,
+     "B_T_upper": 0.8252572444131415
+    },
+    {
+     "distance_m": 20,
+     "B_T_upper": 1.0643281258114081
+    },
+    {
+     "distance_m": 30,
+     "B_T_upper": 1.4743257763430497
+    },
+    {
+     "distance_m": 40,
+     "B_T_upper": 2.2470570844029076
+    },
+    {
+     "distance_m": 45,
+     "B_T_upper": 2.889120100320567
+    },
+    {
+     "distance_m": 50,
+     "B_T_upper": 3.8122590059545787
+    },
+    {
+     "distance_m": 58,
+     "B_T_upper": 5.999988862625893
+    },
+    {
+     "distance_m": 70,
+     "B_T_upper": 5.011406292743983
+    },
+    {
+     "distance_m": 90,
+     "B_T_upper": 1.1596901589796003
+    },
+    {
+     "distance_m": 120,
+     "B_T_upper": 0.3162802141855324
+    },
+    {
+     "distance_m": 177,
+     "B_T_upper": 0.08582348601179557
+    }
+   ],
+   "alignment": {
+    "ship_drift_transverse_um": 0.4983768981366119,
+    "ship_drift_axial_component_um": 2.344678960841981,
+    "pointing_urad_untracked": 2.2222222222222223,
+    "note": "the barrel is off the spine: mount it on the shield frame or the C1 strut ring, track the target and steer the driver; drift is negligible"
+   },
+   "verdict": "KINEMATICS PLAUSIBLE (gas capsule SF 3.4 at 30,000 g; armature and sabot at 30,000 g not demonstrated). The 45 m tip sits on the V4 stopping surface near 12 deg (T05 used the V1 radius 29.7 m), so the tip must move out to about 57 m; the barrel then grows and the tip fluence falls. Off-axis it no longer needs the plug, but the shield-face centre is still in the axial channel.",
+   "status": "CONCEPTUAL, KINEMATICS PLAUSIBLE (T00 853b867); EM armature and sabot at 30,000 g NOT DEMONSTRATED",
+   "superseded_T05_45m": {
+    "polar_deg": 12.0,
+    "az_deg": 45.0,
+    "tip_from_burn_m": 45.0,
+    "accel_g": 30000.0,
+    "accelerator_m": 131.8568579160043,
+    "tip_xr_m": [
+     -205.1228333335044,
+     9.35602608679917
+    ],
+    "breech_xr_m": [
+     -76.14736412266649,
+     36.770608362032675
+    ],
+    "capsule_limit_g": 102282.38788328663,
+    "margin_on_capsule_limit": 3.4094129294428877,
+    "stopping_radius_at_10deg_m": 29.65,
+    "status": "T05 GEOMETRY PROPOSAL, not assessed by T00: off the unstopped axis channel, barrel on a burn ray (self-shadowed)"
+   }
+  }
+ },
+ "axis_plug_T05_proposal": {
+  "x_from_burn_m": 35.0,
+  "r_m": 3.6786482342986764,
+  "covers_polar_deg": 6.0,
+  "medium": "renewable liquid-lithium droplet sheet",
+  "heat_W": 112813603680.71844,
+  "status": "REJECTED: NOT PLAUSIBLE (T00 853b867)",
+  "verdict": "NOT PLAUSIBLE as a renewable consumable: even with 99 % re-radiation it vaporises far more lithium than the ship carries as propellant, and the vapour expands back toward the shield and the coils",
+  "intercepted_W": [
+   81207722190.28491,
+   112984656960.3964
+  ],
+  "raw_J_cm2_per_pulse": 1171.7871464996447,
+  "li_mission_t_range": [
+   6328049.266563127,
+   880424245.7826958
+  ]
+ },
+ "ghost_coupled": {
+  "answer_to_T05_question_B": "more propellant: the coupled solve re-sizes the whole ship, so propellant and tanks grow with the dry mass",
+  "V4": {
+   "departure_t": 42915.783853018824,
+   "propellant_t": 27116.059611797376,
+   "tank_t": 2544.7683195441664,
+   "fusion_TW": 35.71976022315651,
+   "pellet_rate_Hz": 195.73784854631526,
+   "wing_tip_radius_m": 10127.573934427086
+  },
+  "coupled_preferred": {
+   "departure_t": 68472.42098165506,
+   "propellant_t": 43263.85498309006,
+   "tank_t": 4060.1949479316445,
+   "fusion_TW": 56.99114421492967,
+   "pellet_rate_Hz": 312.2996954216142,
+   "wing_tip_radius_m": 16189.857626210485
+  },
+  "propellant_ratio": 1.5955067071864404,
+  "tank_stretch_length_m_if_same_section": 439.4025471591456,
+  "note": "COUPLED APPROXIMATION, not a converged spacecraft design. Draw it as a labelled envelope (ghost), keep V4 as the drawn baseline. The rate rises to about 312 Hz unless capped; capped at 196 Hz the same ship is 91 kt (injection.json)."
  },
  "coil_plant": {
   "basis": "300 K coolant rise, 5 m/s, six supply/return pairs per coil in the strut shadows, ring manifolds fed at six points (12 segments, so each manifold arc carries 1/12 of the flow), 1 MPa, Mo-TZM pipe at 50 MPa creep (all PROTOTYPE)",
@@ -609,6 +1121,63 @@
     "plant_kg": 13366617.35156896,
     "plant_plus_armour_kg": 14943046.482289864
    },
+   "SN_DIRECT:R4_T00_SHADOWED": {
+    "fluid": "SN_DIRECT",
+    "build": "R4_T00_SHADOWED",
+    "heat_W": 6140315684.478991,
+    "flow_m3_s": 12.200595462722521,
+    "flow_C1_m3_s": 8.092066806611376,
+    "flow_C2_m3_s": 4.108528656111146,
+    "lines": [
+     {
+      "leg": "C2_to_C1",
+      "flow_m3_s": 4.108528656111146,
+      "line_r_m": 0.2087889914809991,
+      "wall_m": 0.004175779829619982,
+      "length_m": 22.46986098399711,
+      "fluid_m3": 36.92722710063437,
+      "pipe_kg": 15066.308657058822
+     },
+     {
+      "leg": "C1_to_ring",
+      "flow_m3_s": 12.200595462722521,
+      "line_r_m": 0.3597948560459455,
+      "wall_m": 0.007195897120918911,
+      "length_m": 14.242157455267145,
+      "fluid_m3": 69.50512065124484,
+      "pipe_kg": 28358.089225707896
+     },
+     {
+      "leg": "ring_to_hot_root",
+      "flow_m3_s": 12.200595462722521,
+      "line_r_m": 0.3597948560459455,
+      "wall_m": 0.007195897120918911,
+      "length_m": 23.900486049083412,
+      "fluid_m3": 116.64006465892402,
+      "pipe_kg": 47589.146380841004
+     }
+    ],
+    "manifold_r_m": {
+     "C1": 0.20719495104064423,
+     "C2": 0.14763611171331475
+    },
+    "armour_channel_m3": 20.21138603604044,
+    "manifold_m3": 73.28929074417314,
+    "fluid_m3": 316.57308919101683,
+    "fluid_kg": 2212845.8934452077,
+    "pipe_kg": 91013.54426360772,
+    "pump_hydraulic_W": 12200595.462722521,
+    "pump_electric_W": 24401190.925445043,
+    "pump_kg": 24401.190925445044,
+    "hx_kg": 0.0,
+    "armour_m2": {
+     "C1": 691.0230802392637,
+     "C2": 319.5462215627584
+    },
+    "armour_kg_PROTOTYPE_areal": 5950.972689592538,
+    "plant_kg": 2328260.6286342605,
+    "plant_plus_armour_kg": 2334211.6013238532
+   },
    "LI_LOOP_HX:R4_NOMINAL": {
     "fluid": "LI_LOOP_HX",
     "build": "R4_NOMINAL",
@@ -893,6 +1462,63 @@
     "armour_kg_PROTOTYPE_areal": 1576429.1307209039,
     "plant_kg": 1932878.7699944414,
     "plant_plus_armour_kg": 3509307.9007153455
+   },
+   "LI_LOOP_HX:R4_T00_SHADOWED": {
+    "fluid": "LI_LOOP_HX",
+    "build": "R4_T00_SHADOWED",
+    "heat_W": 6140315684.478991,
+    "flow_m3_s": 11.414711364822542,
+    "flow_C1_m3_s": 7.570827770214291,
+    "flow_C2_m3_s": 3.843883594608252,
+    "lines": [
+     {
+      "leg": "C2_to_C1",
+      "flow_m3_s": 3.843883594608252,
+      "line_r_m": 0.20195264704904572,
+      "wall_m": 0.004039052940980914,
+      "length_m": 22.46986098399711,
+      "fluid_m3": 34.548612003805815,
+      "pipe_kg": 14095.833697552769
+     },
+     {
+      "leg": "C1_to_ring",
+      "flow_m3_s": 11.414711364822542,
+      "line_r_m": 0.3480141508309437,
+      "wall_m": 0.006960283016618874,
+      "length_m": 14.242157455267145,
+      "fluid_m3": 65.02804662569199,
+      "pipe_kg": 26531.443023282332
+     },
+     {
+      "leg": "ring_to_hot_root",
+      "flow_m3_s": 11.414711364822542,
+      "line_r_m": 0.3480141508309437,
+      "wall_m": 0.006960283016618874,
+      "length_m": 23.900486049083412,
+      "fluid_m3": 109.126859891702,
+      "pipe_kg": 44523.75883581442
+     }
+    ],
+    "manifold_r_m": {
+     "C1": 0.20041080001894412,
+     "C2": 0.14280208620695364
+    },
+    "armour_channel_m3": 20.21138603604044,
+    "manifold_m3": 68.56846475513072,
+    "fluid_m3": 297.48336931237094,
+    "fluid_kg": 127917.84880431951,
+    "pipe_kg": 85151.03555664953,
+    "pump_hydraulic_W": 11414711.364822542,
+    "pump_electric_W": 22829422.729645085,
+    "pump_kg": 22829.422729645084,
+    "hx_kg": 122806.31368957982,
+    "armour_m2": {
+     "C1": 691.0230802392637,
+     "C2": 319.5462215627584
+    },
+    "armour_kg_PROTOTYPE_areal": 5950.972689592538,
+    "plant_kg": 358704.62078019395,
+    "plant_plus_armour_kg": 364655.59346978646
    }
   },
   "preferred": "LI_LOOP_HX:R4_NOMINAL",
@@ -900,114 +1526,5 @@
    "face_CFC_kg_m2": 57.0,
    "backplate_Mo_50pct_kg_m2": 204.0
   }
- },
- "structure": {
-  "basis": "Euler-Bernoulli cantilever from J1, distributed tank mass (0.2357 factor), bow tip mass; f1 target and every member choice PROTOTYPE; beam model only, not FE (T00 runs the beam-FE check)",
-  "f_target_Hz": 0.2,
-  "length_m": 275.4,
-  "forward_mass_full_kg": 27463923.152760547,
-  "bow_kg": 300000.0,
-  "base_S2_kg": 992309.8567773319,
-  "inter_tank_gaps_deg": [
-   38.55,
-   86.05,
-   116.35,
-   152.8,
-   200.88,
-   242.8,
-   276.02,
-   315.0,
-   351.05
-  ],
-  "cases": {
-   "S5_REV3_AS_DRAWN": {
-    "name": "S5_REV3_AS_DRAWN",
-    "longeron_r_m": 34.8,
-    "tube_r_m": 0.2873,
-    "area_m2_each": 0.025931111028182467,
-    "structure_kg_rev3_reported": 1176982.9271440005,
-    "f1_full_Hz": 0.07721533358384054,
-    "B2_shadow_margin_m": 0.9127000000000028,
-    "bug": "rev3.py options(): dA was the per-member area but its mass counted one member, and area_each divided it by n again; the stiffness add was 6x too small"
-   },
-   "S5_REV3_CORRECTED": {
-    "name": "S5_REV3_CORRECTED",
-    "note": "six longerons at r 34.8 m outside the tanks (Rev 3 layout), stiffness area corrected",
-    "longeron_az_deg": [
-     0.0,
-     60.0,
-     120.0,
-     180.0,
-     240.0,
-     300.0
-    ],
-    "longeron_r_m": 34.8,
-    "members": 6,
-    "kmin_sum_cos2": 2.9999999999999996,
-    "area_m2_each": 0.1805226855318057,
-    "tube_r_m": 0.7580379639913908,
-    "t_over_r": 0.05,
-    "wall_m": 0.037901898199569545,
-    "longerons_kg": 725156.8116273693,
-    "structure_kg": 1717466.6684047012,
-    "f1_full_Hz": 0.2,
-    "min_tank_clearance_m": 0.23363362681441102,
-    "B2_shadow_margin_m": 0.4419620360086114
-   },
-   "S5_N9_NESTED": {
-    "name": "S5_N9_NESTED",
-    "note": "nine longerons nested in the nine inter-tank gaps at r 31 m (t/r 0.1); tanks leave radially between them",
-    "longeron_az_deg": [
-     38.55,
-     86.05,
-     116.35,
-     152.8,
-     200.88,
-     242.8,
-     276.02,
-     315.0,
-     351.05
-    ],
-    "longeron_r_m": 31.0,
-    "members": 9,
-    "kmin_sum_cos2": 4.078202583233254,
-    "area_m2_each": 0.168961612170378,
-    "tube_r_m": 0.5185660591447477,
-    "t_over_r": 0.1,
-    "wall_m": 0.051856605914474774,
-    "longerons_kg": 1018074.240430888,
-    "structure_kg": 2010384.09720822,
-    "f1_full_Hz": 0.19999999999999996,
-    "min_tank_clearance_m": 1.1194371339405045,
-    "B2_shadow_margin_m": 4.481433940855251,
-    "sens_bow_100t": 1981243.219260268,
-    "sens_bow_1000t": 2112377.1700260504
-   },
-   "S5_N6_NESTED": {
-    "name": "S5_N6_NESTED",
-    "note": "six nested longerons, most isotropic six-gap set",
-    "longeron_az_deg": [
-     38.6,
-     86.1,
-     152.8,
-     242.8,
-     315.0,
-     351.0
-    ],
-    "longeron_r_m": 31.0,
-    "members": 6,
-    "kmin_sum_cos2": 2.865522982037079,
-    "area_m2_each": 0.24004349695474222,
-    "tube_r_m": 0.6180947265380247,
-    "t_over_r": 0.1,
-    "wall_m": 0.06180947265380247,
-    "longerons_kg": 964250.9825886469,
-    "structure_kg": 1956560.8393659787,
-    "f1_full_Hz": 0.2,
-    "min_tank_clearance_m": 0.9965235296822365,
-    "B2_shadow_margin_m": 4.381905273461975
-   }
-  },
-  "preferred": "S5_N9_NESTED"
  }
 }

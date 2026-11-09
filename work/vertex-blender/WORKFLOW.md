@@ -69,3 +69,19 @@ takes under 1 s per generation). The review file is a product of the commit plus
   bending/axial modes, corridors, target and snout screening, coil cooling). `build_vertex.py` reads it after `rev2.json`.
 - New option collections: `OPT_VERTEX_V4_STRUCT_S1..S4` (S5 = S2 + S3 linked together), `CORR_K1`, `CORR_K2`, `LAUNCH_B_LONG`,
   `COIL_COOLING`, `LANE_CORE_TB` (ghost tanks). Scenes `STRUCTURE_COMPARE` (side lanes) and `STRUCTURE_SECTION` (end view).
+
+## Stage B as built (revision 4)
+
+- `python3 work/vertex-blender/rev4.py` writes `rev4.json`: coil assembly builds and the X-ray ladder, the coil coolant plant (tin
+  direct and Li loop), the corrected and nested structure cases, and, when the T00 copies are present, the T00 shadowed coil build,
+  S5_N9_T00, launcher B-modified and B-ray, the axis plasma and the coupled-ship ghost. Inputs it reads: `t00_handoff_rev4.json`
+  (copy of 9rsgog `f180b63` results/t05_handoff_rev4.json), `t00_proposals_rev4.json` (copy of 9rsgog `853b867`
+  studies/rev4/results/proposals.json) and the T03 nozzle results (cached in `t03_nozzle_results_cache.json`).
+- `build_vertex.py -- --rays N` (default 2,000,000) ray-casts the X-ray interception on the drawn V4 hardware for `ASM_V4` and
+  `ASM_V4_REV3_CHOSEN` and writes `rev4_geometry.json` for T00. Every Rev 4 part carries `issue_id`, `parameter`, `tech_id` and
+  `geom_rev = 4` besides the six Stage B properties.
+- New option collections: `COIL_ASM_T00` (chosen), `COIL_ASM_R4/COMPACT/STEEL/T03`, `COIL_SUP_R4`, `COIL_PLANT_LI/SN`,
+  `DUST_GUARDS_R4`, `STRUCT_S5N`, `ACCESS_R4`, `AXIS_KEEPOUT`, `AXIS_PLUG_REJECTED`, `LAUNCH_BMOD`, `LAUNCH_BRAY`, `GHOST_COUPLED`.
+  New scenes `COIL_ASSEMBLY_SECTION`, `LAUNCHER_R4_COMPARE`, `REV3_VS_REV4`.
+- Checks: `checks.json` `rev4` (dimensions, geometry hash, trace tags), `rev4_launcher` (BVH overlap of B-ray and B-modified against
+  the drawn V4 hardware, hardware inside the 6° axis channel), `rev4_raycast`.
