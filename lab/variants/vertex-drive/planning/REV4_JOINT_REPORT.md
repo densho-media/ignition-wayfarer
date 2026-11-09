@@ -4,7 +4,7 @@
 | --- | --- |
 | Kind | research report, NON-CANON |
 | T00 | `claude/project-thread-9rsgog`, from `e24fc7a`; details in `studies/rev4/REPORT.md` |
-| T05 | `claude/project-thread-ctwplp`, Rev 4 step 1 `f6f527d` (`work/vertex-blender/rev4_geometry.json`, `rev4.json`); T05's later Rev 4 commits are named in its own thread |
+| T05 | `claude/project-thread-ctwplp`: `f6f527d` (step 1), `08f3c8d` (Rev 4), `7de0057` (renders untracked) |
 | Handoffs | T00 → T05 `lab/variants/vertex-drive/results/t05_handoff_rev4.json` (v1); T05 → T00 `work/vertex-blender/rev4_geometry.json` (v1) |
 | Unchanged | canon, IGNITION Drive, production geometry, `data/`, `src/`, FDP-1 and four-burn physics; nothing on `main` |
 | Date | 2026-11-09 |
@@ -23,8 +23,10 @@
 
   It conserves energy to 1e-9 and books each watt once. Coil heat is 6.2 GW on the bottom-up assembly and 11.3 GW on T05's ray cast.
   The 11.9 / 15.5 / 30.1 GW cases are kept.
-- **Coil assembly projected solid angle.** T00's analytic build and T05's 2-million-ray cast agree within 5 % per coil (C1 0.0151,
-  C2 0.0082 on T05's build).
+- **Coil assembly projected solid angle.** T00's analytic build and T05's 2-million-ray cast agree within 5 % per coil. On the chosen
+  shadowed build, the ray cast gives C1 0.00812 and C2 0.00395 against T00's 0.00836 and 0.00387.
+- **Whole-ship interception falls.** The chosen Rev 4 hardware set goes from 0.171 (70.5 GW, Rev 3) to 0.052 (21.6 GW). Two items stay
+  unbooked: the coil struts and ties (0.9 GW) and the wing aft spars (1.3 GW, ISS-020).
 - **Fluid basis:** a lithium loop with a Li/Sn exchanger (both threads).
 - **Launcher kinematics** reproduced independently (8.81 km/s, 289 m, 8.3 J/cm² at the snout tip).
 - **S5 stiffness error** found by T05 and confirmed by T00's beam model: S5 as drawn gives a cantilever f₁ of 0.075 Hz, not 0.2 Hz.
@@ -44,7 +46,7 @@
 | REBCO neutron fluence at the coils | about 1.1e20 n/cm² unshielded, 35× the degradation level | 0.56 m LiH screen, or a lower-neutron fuel model |
 | FDP-1 loops carry no conductor mass | same finding for every FDP-1 loop | OPEN (FDP-1 code protected) |
 | FDP-1's Ω misses hardware | T05's ray cast: loops + struts + shield 0.033 against 0.0248; wing spars 0.0030 | booked as a case (+5 GW hot) |
-| **Near-axis plasma channel** | the shield-face centre and the snout tip receive about 340-470 J/cm² of 2.4 MeV/u ions per pulse | **blocker**: an axis plug or a non-axisymmetric field; D-21-class modelling |
+| **Near-axis plasma channel (ISS-022)** | about 340-470 J/cm² of 2.4 MeV/u ions per pulse inside the 6° axis cone. T05 counts **34 V4 parts inside it**: the shield face, 9 beam ports, the pellet bore, the fast-ignitor port, all loop-1 struts and lines, the crawler rail, 4 trackers, and the B snout and chopper | **blocker**: field topology or target design (the lithium plug is rejected, §3a); D-21-class modelling |
 | Soft X-ray spectrum | W, Mo and SiC fail at or below 10 keV; only CFC and lithium survive every band | spectrum calculation (radiation transport) |
 | Pulse rate on the heavier ship | rises to 312 Hz, so the launcher needs 14 km/s; capped at 196 Hz the ship is 91 kt | joint launcher and ship closure |
 | S5 mass | **2.0-2.2 kt** (N9, cantilever-sized), against 1.18 kt in the brief | T05 draws N9 |
@@ -67,7 +69,9 @@
   - **Background field:** the vacuum field along the ray reaches up to about 6 T near 58 m (upper bound). The non-conducting capsule is
     fine, but the coilgun stages and sabot stripping run in that field.
   - **Drift and pointing:** ship drift is 0.5 µm transverse and 2.3 µm axial (negligible); untracked pointing is 2.2 µrad.
-  - **Status:** B-ray takes the launcher out of the axial channel, so it no longer needs the plug. It can be retained as a CONCEPTUAL lane
+  - **As drawn by T05 (08f3c8d):** tip at 56.5 m, azimuth 45° (azimuth 120° ran through loop-1 strut 2). The results are axisymmetric, so
+    nothing changes. The barrel clears all drawn hardware. The breech is 55 m off the axis, and its support is UNSIZED (OPEN).
+- **Status:** B-ray takes the launcher out of the axial channel, so it no longer needs the plug. It can be retained as a CONCEPTUAL lane
     with the tip at about 56 m.
 
 ## 4. Still unproven
@@ -131,9 +135,10 @@
 
 | Item | Location |
 | --- | --- |
-| T00 branch | `claude/project-thread-9rsgog` (Rev 4 commit after `e24fc7a`) |
+| T00 branch | `claude/project-thread-9rsgog`: `f180b63` (Rev 4), `853b867` (T05 proposal check), and the commit that finalises this report |
 | T00 code and results | `lab/variants/vertex-drive/studies/rev4/` |
 | T00 tests | `python3 lab/variants/vertex-drive/studies/rev4/test_rev4.py` (15, OK); Atlas 24 OK; FDP-1 45 OK; four-burn 18 OK |
-| T05 branch | `claude/project-thread-ctwplp` (`f6f527d` and its later Rev 4 commits) |
-| T05 review file | T05's `work/vertex-blender/` review `.blend`, as named in T05's Rev 4 report |
+| T05 branch | `claude/project-thread-ctwplp` (`f6f527d`, `08f3c8d`, `7de0057`) |
+| T05 review | `/mnt/project-files/review/vertex_blender_rev4_2026-11-09/`: `REVIEW_VERTEX_BLENDER.blend` (packed), 23 renders, `CONTACT_SHEET.png`, `REV4_REPORT.md`, `ISSUES.md`, `rev4.json`, `rev4_geometry.json`, `checks.json` |
+| T05 validation | canon objects 6,249 identical; two builds give the same hash, 3226be9fa6df1b66 (3,835 objects); 1,529 Rev 4 parts traced, 0 missing; T05 draws the shadowed coils, S5N at r 0.611 m with lacing in the gap planes, saddles at 10-30 Hz, B-ray, the rejected plug lane and the 439 m coupled ghost |
 | Squash | none; nothing goes onto `main` without a separate authorisation |
