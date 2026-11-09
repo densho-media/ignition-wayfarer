@@ -4,7 +4,7 @@
 | --- | --- |
 | Thread | T05, mechanical architecture, spacecraft geometry and visual design |
 | Date | 2026-11-09 |
-| Status | PARTIAL: Stage A DONE; Stage B not started (D-10 Stage B awaits ApeDevil) |
+| Status | Stage A DONE; Stage B revision 1 DONE (`STAGE_B_REPORT.md`), waiting for owner direction |
 
 ## A. Mission and scope
 
@@ -13,7 +13,8 @@
   (5, `COLLECTIONS.md`, `PARAMETERS.md`, `CAMERAS.md`, `WORKFLOW.md`); evidence status per component (6, `GEOMETRY_SPEC.md`);
   interfaces with closure coils, dust shielding, replaceable sectors, launchers, docking, maintenance (7, `GEOMETRY_SPEC.md` §2,
   `ISSUES.md`); delivery for review (8).
-- Excluded: Blender geometry (Stage B, D-10); the D-21 simulation proposal and the story checks (other threads); V1, V2 (historical
+- Stage B (owner authorisation 2026-11-09): `build_vertex.py`, `localise_ship.py`, `checks.json`, `STAGE_B_REPORT.md`, ISSUES rows 009-012.
+- Excluded: the D-21 simulation proposal and the story checks (other threads); V1, V2 (historical
   conditional); any change outside `work/vertex-blender/`.
 
 ## B. Repository state

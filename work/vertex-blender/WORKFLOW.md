@@ -43,3 +43,12 @@ changes, rebuild, compare `checks.json`, log the source commit and what moved in
 
 From a clean checkout of a T05 commit, the build gives the same object list and `params/*.json` (FDP-1 solve is deterministic; it
 takes under 1 s per generation). The review file is a product of the commit plus the built canonical asset named in `README_VERTEX`.
+
+## Stage B as built (revision 1)
+
+- `localise_ship.py` writes a self-contained cache copy of the built vehicle (`/tmp/wayfarer_vertex_ship_local.blend`; Blender's
+  `make_local(type='ALL')`, about 75 s). Appending the linked vehicle and localising IDs one by one took tens of minutes.
+- The canonical ship is appended once. Working copies link its objects into new instance collections (`WF_<SUB>_<g>_AFT/_BOW`) instead
+  of appending it again (a second append took 247 s and doubled the file).
+- `build_vertex.py -- --render DIR [--cams ...] [--size W H] [--no-save]`; it writes `checks.json` and `REVIEW_VERTEX_BLENDER.blend`.
+- Workbench colour type is MATERIAL: collection instances drop per-object colour.

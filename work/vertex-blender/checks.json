@@ -1,0 +1,235 @@
+{
+ "canon": {
+  "datums_x_m": {
+   "AFT": -144.75,
+   "FWD": 144.75,
+   "RADIATOR_AFT": -133.25,
+   "RADIATOR_FRONT": 48.899362477231335,
+   "RADIATOR_ZONE_FRONT": 93.39936247723134,
+   "AFT_STORAGE_FRONT": 93.39936247723134,
+   "RING_A": 97.29936247723134
+  },
+  "body_x_m": [
+   -144.75,
+   144.75
+  ],
+  "ring_a_x_m": 97.29936247723134,
+  "ring_b_x_m": 103.29936247723134,
+  "ring_sweep_half_m": 2.15,
+  "ring_outer_r_m": 30.0,
+  "ring_a_aft_face_x_m": 95.14936247723134,
+  "hot_blades": {
+   "x_m": [
+    -133.25,
+    48.899362477231335
+   ],
+   "r_m": [
+    6.5,
+    37.0
+   ],
+   "az_deg": [
+    30.0,
+    150.0,
+    270.0
+   ],
+   "T_K": 1800.0
+  },
+  "dock_primary": {
+   "x_m": 131.65,
+   "az_deg": 195.0
+  },
+  "dock_service": {
+   "x_m": 131.65,
+   "az_deg": 315.0
+  },
+  "airlock": {
+   "x_m": 134.1,
+   "az_deg": 50.0
+  },
+  "tank_farm_x_m": [
+   109.25,
+   137.85
+  ],
+  "forward_shield": {
+   "r_m": 45.0,
+   "note": "bow assembly ahead of the farm; position from the built asset in Stage B"
+  },
+  "source": "data/wayfarer_3d.toml through src/wayfarer/layout.py (datums, fuel_storage.farm, docks); docs/MODEL.md (blade radii, shield radius). The X 99.40 m dock figure in lab/variants/fdp1/NOTES.md and planning/T05-BLENDER.md is stale (pass 7)."
+ },
+ "generations": {
+  "V4": {
+   "hot_band_fwd_edge_to_ring_A_m": 7.149362477231335,
+   "C1_envelope_to_hot_band_aft_edge_m": 4.789603219950607,
+   "C1_to_shield_aft_face_m": 3.901850412300348,
+   "wing_fwd_edge_to_dock_x_m": 43.650000000000006,
+   "dock_az_off_wing_plane_deg": {
+    "primary": 15.0,
+    "service": 45.0
+   },
+   "skirt_r_at_dock_m": 36.656313321449126,
+   "skirt_x_at_r45_m": 218.32505772024692,
+   "skirt_r_at_ring_A_m": 33.14261640485396,
+   "ring_A_inside_hardware_cone": true,
+   "hardware_cone_margin_at_ring_A_m": 3.1426164048539604,
+   "tank_farm_r_m": 34.5,
+   "hardware_cone_r_at_farm_front_m": 63.76425221966661,
+   "module_corridor": {
+    "shield_face_to_magazine_m": 14.5,
+    "plug_from_shield_face_m": 16.0,
+    "plug_length_m": 3.9300898047379005,
+    "barrel_m": 20.0,
+    "barrel_clashes_magazine_and_plug": true,
+    "one_in_flight_m_s": 13386.408771454959,
+    "accel_g_if_barrel_fits_free_length": 630100.0176217027,
+    "accel_g_at_20m": 456822.51277573453
+   },
+   "ring_A_irradiance_W_m2": 172811.51256750003,
+   "C1_irradiance_W_m2": {
+    "facing_fwd_z4.8m": {
+     "W_m2": 90524.41716791345,
+     "view_factor": 0.16897461704741665
+    },
+    "facing_wing_plane_z4.8m": {
+     "W_m2": 24092.384497495634,
+     "view_factor": 0.04497130798060986
+    },
+    "facing_fwd_z9.6m": {
+     "W_m2": 134712.62321772703,
+     "view_factor": 0.251457171797586
+    },
+    "facing_wing_plane_z9.6m": {
+     "W_m2": 63669.14991560396,
+     "view_factor": 0.11884605901154699
+    },
+    "gap_coil_centre_to_wing_aft_edge_m": 9.591939681334367
+   },
+   "loop_struts_at_wing_plane_azimuths": true,
+   "loop_struts_overlap_wing_chord_in_x": false,
+   "C1_envelope_radial_gap_to_shield_rim_m": 10.097935946030908,
+   "C1_r_vs_hardware_cone_r_at_C1_m": [
+    22.12849330614687,
+    5.852613219163222
+   ],
+   "L1_strut_x_range_m": [
+    -216.78978231777984,
+    -184.44008926903402
+   ],
+   "wing_aft_x_m": -178.75,
+   "C2_struts_vs_wing": "C2 ties run X -199.6 to -188.3 m, aft of the wing edge X -178.8 m",
+   "farm_inside_forward_shield_shadow": true
+  },
+  "V0": {
+   "hot_band_fwd_edge_to_ring_A_m": 7.149362477231335,
+   "C1_envelope_to_hot_band_aft_edge_m": 4.997965562889135,
+   "C1_to_shield_aft_face_m": 2.604718991425102,
+   "wing_fwd_edge_to_dock_x_m": 43.650000000000006,
+   "dock_az_off_wing_plane_deg": {
+    "primary": 15.0,
+    "service": 45.0
+   },
+   "skirt_r_at_dock_m": 60.74005075773028,
+   "skirt_x_at_r45_m": 38.5702972845057,
+   "skirt_r_at_ring_A_m": 54.56768588615386,
+   "ring_A_inside_hardware_cone": true,
+   "hardware_cone_margin_at_ring_A_m": 24.56768588615386,
+   "tank_farm_r_m": 34.5,
+   "hardware_cone_r_at_farm_front_m": 82.48668797713735,
+   "module_corridor": {
+    "shield_face_to_magazine_m": 14.5,
+    "plug_from_shield_face_m": 16.0,
+    "plug_length_m": 3.839094364364405,
+    "barrel_m": 20.0,
+    "barrel_clashes_magazine_and_plug": true,
+    "one_in_flight_m_s": 9934.024104226164,
+    "accel_g_if_barrel_fits_free_length": 347001.8142275604,
+    "accel_g_at_20m": 251576.3153149813
+   },
+   "ring_A_irradiance_W_m2": 164272.4925723132,
+   "C1_irradiance_W_m2": {
+    "facing_fwd_z3.2m": {
+     "W_m2": 61203.562323318634,
+     "view_factor": 0.11424374582094689
+    },
+    "facing_wing_plane_z3.2m": {
+     "W_m2": 12980.105822866324,
+     "view_factor": 0.02422891501842447
+    },
+    "facing_fwd_z6.4m": {
+     "W_m2": 99075.67719894371,
+     "view_factor": 0.18493656338434797
+    },
+    "facing_wing_plane_z6.4m": {
+     "W_m2": 38667.8521648333,
+     "view_factor": 0.07217815608223298
+    },
+    "gap_coil_centre_to_wing_aft_edge_m": 8.203812958972435
+   },
+   "loop_struts_at_wing_plane_azimuths": true,
+   "loop_struts_overlap_wing_chord_in_x": false,
+   "C1_envelope_radial_gap_to_shield_rim_m": 3.262571010218112,
+   "C1_r_vs_hardware_cone_r_at_C1_m": [
+    14.772095461282248,
+    6.863211433168862
+   ],
+   "L1_strut_x_range_m": [
+    -205.94445282221042,
+    -184.34909396754733
+   ],
+   "wing_aft_x_m": -178.75,
+   "C2_struts_vs_wing": "C2 ties run X -194.5 to -187.0 m, aft of the wing edge X -178.8 m",
+   "farm_inside_forward_shield_shadow": true
+  }
+ },
+ "ship_edits": {
+  "V4": {
+   "left_out_assemblies": [
+    "Assembly_SHIELDING",
+    "Assembly_PROPULSION"
+   ],
+   "left_out_objects": 5,
+   "bow_objects": 549,
+   "aft_objects": 3628,
+   "bow_shift_m": 275.4,
+   "split_x_m": 137.9,
+   "left_out_names": [
+    "Fuel_Tank_O3_H2",
+    "Fuel_Tank_O6_H2",
+    "Fuel_Tank_O9_H2",
+    "Fuel_Tank_I2_H2",
+    "Fuel_Tank_I4_H2"
+   ]
+  },
+  "V0": {
+   "left_out_assemblies": [
+    "Assembly_SHIELDING",
+    "Assembly_PROPULSION"
+   ],
+   "left_out_objects": 0,
+   "bow_objects": 549,
+   "aft_objects": 3633,
+   "bow_shift_m": 122.39999999999998,
+   "split_x_m": 137.9
+  }
+ },
+ "canon_unchanged": {
+  "objects": 6249,
+  "identical_to_append": true
+ },
+ "objects": {
+  "var_objects": 1258,
+  "missing_properties": [],
+  "by_status": {
+   "CONCEPTUAL_ILLUSTRATION": 264,
+   "ENGINEERING_SUPPORTED": 349,
+   "PARAMETRIC_PLACEHOLDER": 554,
+   "PROTOTYPE": 91
+  },
+  "by_generation": {
+   "ALL": 39,
+   "V0": 408,
+   "V4": 802,
+   "V5": 9
+  }
+ },
+ "revision": 1
+}
