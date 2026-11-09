@@ -1,0 +1,237 @@
+# T01 registry proposal (thermal, electrical efficiency, mass). Provisional IDs only; T00 assigns final IDs at integration.
+# Nothing here edits registry/*.toml. Every number names its case in studies/thermal/ledger.json (script split.py) or a source.
+# Value labels: PUBLISHED / MODEL / EXTRAPOLATION / ASSUMPTION / TARGET (planning/HANDOFF.md).
+
+# ------------------------------------------------------------------------------------------------------------------------------------
+# new sources
+# ------------------------------------------------------------------------------------------------------------------------------------
+
+[source.S-T01-TFAWS-2024]
+title = "Intermediate temperature ceramic heat pipe modeling and optimization (TFAWS 2024, paper PT-23)"
+authors = "NASA Glenn / TFAWS 2024 authors"
+date = "2024"
+locator = "https://tfaws.nasa.gov/wp-content/uploads/TFAWS2024-PT-23-Paper.pdf; https://ntrs.nasa.gov/citations/20240009806"
+kind = "conference"
+finding = "Titanium-water is the state of the art near 500 K and degrades quickly above it; the 450-700 K heat-pipe regime is poorly characterised; a 3D-printed AlN radiator with AlBr3 is estimated at 5.2 kg/m2 and 1.0 kg/kW."
+limits = "Modelling and early hardware; no flight radiator in the 450-700 K band."
+relation = "Sets the T01 radiator areal mass for 450-700 K circuits (HALIDE_HP) and the finding that the Atlas warm loop (600-800 K) sits in the heat-pipe gap."
+verification = "SECONDARY_VERIFIED"
+checked = "2026-11-09 web search excerpts of the TFAWS paper; full text not read."
+
+[source.S-T01-NASA-ITHP]
+title = "Intermediate temperature heat pipe life tests and analyses (ICES 2013); intermediate-temperature fluids review"
+authors = "Advanced Cooling Technologies / NASA Glenn (Anderson, Tarau et al.)"
+date = "2013"
+locator = "https://www.1-act.com/wp-content/uploads/2023/05/ICES-2013-Intermediate-Temperature-Heat-Pipe-Life-Tests-and-Analyses-Rev-4.pdf"
+kind = "conference"
+finding = "No accepted working fluid covers the intermediate range; water to about 500-550 K; halide life tests suggest use to about 673 K; property data incomplete. NASA has sought 500-600 K radiators at 2-3 kg/m2."
+limits = "Life tests, not radiators; the 2-3 kg/m2 figure is a programme goal."
+relation = "T01 TiH2O_HP (3 kg/m2 to 520 K) and HALIDE_HP band edges."
+verification = "SECONDARY_VERIFIED"
+checked = "2026-11-09 web search excerpts."
+
+[source.S-T01-LDR-PATENT]
+title = "Collector for liquid droplet radiator (US 4,702,309) and related droplet-radiator patents"
+authors = "Mattick, Hertzberg et al. (patent family)"
+date = "1987"
+locator = "https://image-ppubs.uspto.gov/dirsearch-public/print/downloadPdf/4702309"
+kind = "patent"
+finding = "Tin droplet sheet about 0.1 kg/m2 for 0.1 mm droplets; best tube-and-fin heat-pipe radiators 5-10 kg/m2; tin suitable 505-1000 K; liquid-metal emissivity 0.1-0.2."
+limits = "Patent background and estimates; generator, collector and pump mass not in the 0.1 kg/m2."
+relation = "T01 SN_DROPLET (0.6 kg/m2 incl. generators and collectors, TARGET) and ALKALI_HP (6 kg/m2)."
+verification = "SECONDARY_VERIFIED"
+checked = "2026-11-09 web search excerpts of the patent text."
+
+[source.S-T01-HIF-EFF]
+title = "Induction accelerator efficiency at 5 Hz (2000); induction-linac efficiency papers (EPAC 1992, PAC 1999)"
+authors = "LBNL/LLNL HIF programme (Molvik et al.)"
+date = "1992-2000"
+locator = "https://www.osti.gov/biblio/767594; https://accelconf.web.cern.ch/e92/PDF/EPAC1992_1594.PDF; https://jacow.org/p99/papers/TUP13.pdf"
+kind = "report"
+finding = "Induction-core loss is the primary limitation on induction-linac efficiency; pulser efficiency taken as 50-75 %; measured core loss about 2,400-2,500 J/m3 per pulse in one tested material."
+limits = "Studies at 5 Hz; no subsystem breakdown of a fusion-scale driver."
+relation = "Basis of the T01 driver loss split (cores 45 %, modulators 30 %)."
+verification = "SECONDARY_VERIFIED"
+checked = "2026-11-09 web search excerpts."
+
+[source.S-T01-SIC-250C]
+title = "250 C SiC power module package designs and continuous 250 C operation; 300 C MOSFET bias-stress failures"
+authors = "Arkansas Power Electronics (DTIC ADA547349); SAE 2008-01-2892; IEEE 2014 phase-leg module; Virginia Tech CPES"
+date = "2008-2014"
+locator = "https://apps.dtic.mil/sti/pdfs/ADA547349.pdf; https://saemobilus.sae.org/content/2008-01-2892; https://cpes.vt.edu/library/view_nugget/990"
+kind = "report"
+finding = "SiC power modules (1,200 V, >100 A) operated continuously at 250 C junction; current SiC MOSFETs failed within 300 h of bias stress at 300 C."
+limits = "Module scale (kW), not MW conversion; durations of hours to months, not years."
+relation = "Conservative modulator circuit at 500 K coolant (Tj 523 K); the advanced 773 K power stage stays a TARGET."
+verification = "SECONDARY_VERIFIED"
+checked = "2026-11-09 web search excerpts."
+
+[source.S-T01-CAP-200C]
+title = "High-temperature pulse capacitors: PEI films and C0G pulse-discharge MLCCs rated to 200 C"
+authors = "KEMET; Knowles; polyetherimide film patents"
+date = "2015-2024"
+locator = "https://knowlescapacitors.com/Products/Capacitors/SMDCap/Detonation-Pulse; https://www.tti.com/content/ttiinc/en/manufacturers/kemet/products/pulse-discharge-high-temperature-capacitor.html"
+kind = "catalogue"
+finding = "Pulse-discharge ceramic and polymer-film capacitors are rated to 200 C; breakdown strength falls with temperature; no rated 300 C pulse capacitor found."
+limits = "Small parts; no MJ-class bank at temperature."
+relation = "Pulse storage circuit: 440 K conservative, 550 K TARGET."
+verification = "SECONDARY_VERIFIED"
+checked = "2026-11-09 web search excerpts."
+
+[source.S-T01-HITPERM]
+title = "HITPERM (Fe44Co44Zr7B4Cu1) nanocrystalline soft magnets for high-temperature applications"
+authors = "M. E. McHenry, D. E. Laughlin et al. (CMU)"
+date = "1998-2004"
+locator = "https://www.osti.gov/biblio/347044; https://www.andrew.cmu.edu/user/dl0p/laughlin/pdf/342.pdf"
+kind = "journal"
+finding = "Magnetisation persists to about 980 C; grain size stable at 600 C for 3,072 h; core loss reported at room temperature only (about 1 W/g at 1 T, 10 kHz)."
+limits = "No core-loss data at 400-600 C found; not an induction-linac core material today."
+relation = "Advanced induction-core circuit at 640 K (TARGET)."
+verification = "SECONDARY_VERIFIED"
+checked = "2026-11-09 web search excerpts."
+
+[source.S-T01-CRYO]
+title = "LHC cryogenics: 1.8 K refrigeration at about 0.15 of Carnot; best plants below 30 % of Carnot"
+authors = "CERN (cryostat design lecture arXiv:1501.07154; Claudet; CERN Courier)"
+date = "2015-2025"
+locator = "https://arxiv.org/pdf/1501.07154; https://cerncourier.com/a/the-challenge-of-keeping-cool/"
+kind = "lecture"
+finding = "About 1 kW of input per W extracted at 1.8 K (0.15 of Carnot, Carnot minimum about 162 W/W from 300 K); the most efficient plants reach 28.5 % of Carnot."
+limits = "Terrestrial plants rejecting at about 300 K."
+relation = "Target-factory 1.5 K load at 1,000 W/W (conservative) and 600 W/W (TARGET), both rescaled to the reject temperature by Carnot."
+verification = "SECONDARY_VERIFIED"
+checked = "2026-11-09 web search excerpts; arXiv full text not opened."
+
+[source.S-T01-IFE-TARGET-COST]
+title = "IFE target factory costing: about 0.16-0.17 USD per target (Woodworth and Meier 1995; GA/HAPL 2003-2007)"
+authors = "J. Woodworth, W. Meier (LLNL); D. Goodin, N. Alexander et al. (GA)"
+date = "1995-2007"
+locator = "https://www.osti.gov/servlets/purl/896290; https://www.osti.gov/biblio/512912; https://fire.pppl.gov/IFE_NAS2_GA_goodin_target.pdf"
+kind = "report"
+finding = "Total cost about 0.17 USD per injected target for a 1,000 MWe plant (capital about 100 M USD, operation about 20 M USD per year); operation exceeds annualised capital."
+limits = "Cost, not energy; direct-drive D-T capsules of 350 MJ yield; no per-target power figure found."
+relation = "Upper bound on the factory process energy: even if all operating cost were electricity at 0.05 USD/kWh it buys at most about 7.6 MJ per target (T01 conservative uses 8 MJ)."
+verification = "SECONDARY_VERIFIED"
+checked = "2026-11-09 web search excerpts."
+
+# ------------------------------------------------------------------------------------------------------------------------------------
+# revised records (claims and text T00 should change; everything else in the records stands)
+# ------------------------------------------------------------------------------------------------------------------------------------
+
+[revise.VTX-07C]
+physics_verdict = "PLAUSIBLE_FUTURE"
+prior_finding = "T01: bottom-up house load 0.012-0.014 % of fusion (conservative, about 10 MJ per pellet, of which 8 MJ factory process) and 0.003-0.005 % (advanced; the factory itself about 0.6 MJ per pellet, the rest is the Carnot surcharge of cryoplants rejecting at 700 K) for fuel-only targets near 81 GJ yield. The 0.05 % TARGET is met with margin; the 0.1 % baseline was about 8x high. Valid only while the yield per target stays near 1e11 J."
+claims = [
+  { quantity = "house_fraction_bottom_up_conservative", value = 1.23e-4, unit = "1", basis = "MODEL", source = "S-T01-IFE-TARGET-COST", case = "V1_house_bottomup_cons" },
+  { quantity = "house_fraction_bottom_up_advanced", value = 2.6e-5, unit = "1", basis = "TARGET", source = "S-T01-CRYO", case = "V1_house_bottomup_adv" },
+]
+
+[revise.VTX-01C]
+limitations = "No repetition-rated engagement demonstration. NEW (T01): FDP-1 flies 12.5 targets at once on the axis, 3.7 m apart at 400 m/s; each is 3.7 m from the previous 81 GJ pulse (about 5e6 J/m2 of X-rays and 5e8 J/m2 of plasma) and cannot survive. Only one target may be in the open per period: v >= path x rate, 4.7-7.5 km/s in the T01 cases."
+breakthrough = "Cryogenic D2/He-3 targets launched at 4.7-7.5 km/s (1e5 g in a 10-20 m barrel) at 100-150 Hz, or a shielded flight path; made at about 1-9 MJ each."
+claims = [
+  { quantity = "injection_speed_required_one_in_flight", value = 6067.0, unit = "m/s", basis = "MODEL", source = "S-T01-LEDGER", case = "S1_advanced_eta0.30" },
+  { quantity = "injection_speed_fdp1", value = 400.0, unit = "m/s", basis = "ASSUMPTION", source = "S-FDP1" },
+]
+
+[revise.VTX-07A]
+prior_finding = "T01 split ledger: with TARGET components (cores 640 K, power stages 740 K, capacitors 550 K, dumps 1,000 K) the equivalent single loop is 628 K on a tin droplet sheet at emissivity 0.5 (670 K at 0.8; 679 K but 1.5 kg/m2 on panels); the 640 K induction cores alone are about 40 % of the warm area, not 700-800 K. With near-term components (cores 470 K, SiC 500 K) it is 489 K and the ship does not close on 3 kg/m2 radiators at any driver efficiency."
+uncertainties = "Induction-core loss above 473 K; MW power stages above 523 K; pulse capacitors above 473 K; sheet emissivity of a tin droplet layer."
+
+[revise.VTX-07]
+limitations = "Induction cores and MW SiC are demonstrated to about 423-523 K, not 600-800 K; the 450-700 K band is the heat-pipe working-fluid gap; the Atlas warm radiator (1.0 kg/m2 at 600-800 K) matches no solid panel technology, only a droplet sheet TARGET. FDP-1 itself (V0) does not close at 2.5 kg/m2 or at 500 K."
+
+[revise.VTX-07B]
+prior_finding = "T01: a tin sheet at 0.6 kg/m2 (emissivity 0.5) is the only radiator in the record that delivers the Atlas areal mass above 520 K; at emissivity 0.3 the ship grows 11.8 % (S1_adv_eps0.3_eta0.30), at 0.8 it shrinks 5.6 %."
+uncertainties = "Sheet emissivity; collection loss at 0.007-0.019 g (fly the drops parallel to the thrust axis so acceleration only changes their speed: 0.5 a t^2 about 0.9 m over 100 m at 20 m/s); dust (T02)."
+
+[revise.VTX-01B]
+uncertainties = "Efficiency 0.45 vs 0.20-0.30 published; driver mass per W: the closure is steep in it (V1 10.4 kt at 0.05 kg/kW, 12.9 kt at 0.1, 25.1 kt at 0.2 = the calculator's central tier; the T01 advanced case at eta 0.30 does not close at 0.2 kg/kW). Volt-second scaling of the induction cores suggests 0.05 kg/kW is optimistic by more than 10x (EXTRAPOLATION, unmodelled)."
+
+# ------------------------------------------------------------------------------------------------------------------------------------
+# new records
+# ------------------------------------------------------------------------------------------------------------------------------------
+
+[new.T01-NEW-1]
+name = "One-target-in-flight injection (fast cryogenic target launcher)"
+kind = "technology"
+workstream = "VTX-01"
+purpose = "Keep every target behind the shield until the previous pulse has fired, then deliver it to the burn point within one period."
+principle = "The next target must not be in the open when a pulse fires: v >= (muzzle-to-burn path) x pulse rate. At FDP-1 scale the path is about the X-ray stand-off (43-50 m) and the rate 100-150 Hz, so v is about 4.7-7.5 km/s."
+penalties = "Launcher energy small (0.02-0.25 MJ per target); the hard part is a 1e5 g launch of a liquid-He-3-in-D2 target. A slower launcher caps the pulse rate: 4 km/s +6.3 %, 2.5 km/s +17.5 % (rate 36 Hz), 1.5 km/s does not close (T01 advanced, eta 0.30)."
+credibility = "PLAUSIBLE_FUTURE"
+claims = [
+  { quantity = "mass_penalty_at_2500_m_s", value = 0.175, unit = "1", basis = "MODEL", source = "S-T01-LEDGER", case = "S1_advanced_eta0.30_vinj2500" },
+]
+handoff = "T04 owns the target and cadence; T03 owns whether the nozzle field can shelter a slower target."
+
+[new.T01-NEW-2]
+name = "Circuit-by-circuit warm radiator (split warm loop as booked)"
+kind = "technology"
+workstream = "VTX-07"
+purpose = "Replace the single warm loop with the circuits the components allow; report each circuit's area."
+principle = "Equivalent radiator: same total area and mass as the circuits; T_eq from the area, areal mass area-weighted."
+claims = [
+  { quantity = "warm_T_eq_advanced", value = 628.0, unit = "K", basis = "TARGET", source = "S-T01-LEDGER", case = "S1_advanced_eta0.30" },
+  { quantity = "warm_T_eq_conservative", value = 489.0, unit = "K", basis = "EXTRAPOLATION", source = "S-T01-LEDGER", case = "S1_cons_T_calcopt_eta0.45" },
+]
+
+[source.S-T01-LEDGER]
+title = "T01 split warm-loop ledger (studies/thermal/split.py, ledger.json)"
+authors = "T01 thread"
+date = "2026-11-09"
+locator = "lab/variants/vertex-drive/studies/thermal/ledger.json"
+kind = "model"
+finding = "See studies/thermal/REPORT.md."
+limits = "Adapter over FDP-1; component shares are EXTRAPOLATION; the calculator's single warm radiator receives the equivalent of the circuits."
+relation = "All T01 MODEL claims."
+verification = "MODEL"
+checked = "Rerun reproduces ledger.json."
+
+# ------------------------------------------------------------------------------------------------------------------------------------
+# new links
+# ------------------------------------------------------------------------------------------------------------------------------------
+
+[[link]]
+from = "T01-NEW-1"
+to = "VTX-01C"
+kind = "conflicts"
+effect = "FDP-1's 400 m/s gas-gun injection with 12.5 targets in flight cannot coexist with 81 GJ pulses; a 400 m/s launcher allows about 1 Hz."
+quantified = "S1_advanced_eta0.30_vinj400"
+
+[[link]]
+from = "VTX-07C"
+to = "VTX-01B"
+kind = "shares"
+effect = "Once the house load is booked bottom-up (0.003-0.014 %), driver-proportional loss is 75-95 % of the warm load: driver efficiency, not the house, sets the wings."
+quantified = "S1_advanced_eta0.30"
+
+[[link]]
+from = "VTX-07B"
+to = "VTX-07A"
+kind = "enables"
+effect = "Only a droplet sheet reaches about 1 kg/m2 above 520 K; on halide or alkali heat-pipe panels (5-6 kg/m2) V1 grows to 50.6 kt at 700 K."
+quantified = "V1_areal_by_band_700K"
+
+[[link]]
+from = "VTX-07D"
+to = "VTX-08"
+kind = "worsens"
+effect = "Wing tip radius per case (T02 exposure): 460 m (advanced, eta 0.45) to 1,688 m (advanced, eta 0.25); 1.7-2.3 km if near-term components are flown at 0.5-1.0 kg/m2."
+quantified = "S1_advanced_eta0.45"
+
+# ------------------------------------------------------------------------------------------------------------------------------------
+# proposed decisions (recommendations only; ApeDevil decides)
+# ------------------------------------------------------------------------------------------------------------------------------------
+
+[decision.D-T01-1]
+type = "TECHNICAL_CONCLUSION"
+question = "Which warm-loop temperature may a Vertex generation claim?"
+recommendation = "Claim the equivalent temperature of the booked circuits, not a single loop: about 630 K with every component TARGET met and a tin droplet sheet; 700-800 K only as a stretch band. V1/V2 should carry the split ledger instead of the 700 / 800 K overrides."
+who = "T00 proposes; ApeDevil confirms at integration."
+
+[decision.D-T01-2]
+type = "TECHNICAL_CONCLUSION"
+question = "Should the target-injection speed be a closure input (one target in flight)?"
+recommendation = "Yes. FDP-1's 12.5 targets in flight is not physical at 81 GJ per pulse. Propose a calculator change (T00 integration proposal, owner approval): cap the pulse rate at v_inj / path, or carry v_inj as a TARGET of 5-7 km/s."
+who = "Calculator change: T00 proposal, ApeDevil approval. Target physics: T04."
