@@ -3,6 +3,20 @@
 Only ApeDevil approves. A thread or the coordinator may recommend; a recommendation, a passing test or a study result is never an
 approval. Decision texts are in `../registry/decisions.toml`; this page says how the threads treat each one.
 
+## Owner rulings, 2026-11-09 (ApeDevil, T00 launch message)
+
+| Decision | Ruling | Effect on the threads |
+| --- | --- | --- |
+| D-T00-1 | **Approved.** Lab tests stay outside ordinary CI; the complete relevant lab validation is required before any integration | T00 runs `atlas.py validate`, the Atlas, FDP-1 and four-burn tests at every integration and records them in `MERGE_READINESS.md` |
+| D-PLAN-1 | **Approved.** T03 may run analytical, vacuum-field, field-line and test-particle studies without D-09 | T03 proceeds on those methods |
+| D-09 | **Not approved** (full MHD/PIC) | no self-consistent MHD or PIC run; T03 may write the study plan only |
+| D-10 | **Approved in principle**, strictly non-destructive and only in isolated experimental files; modelling starts only after T00's baseline exists and T05 has reviewed its initial geometry requirements | T05 Stage A (requirements review) first; Stage B only in `work/vertex-blender/` files, never in `assets/` or a generator; the registry entry stays OPEN until Stage B starts |
+| D-11 | **Not approved** | no Google Drive changes by any thread; Drive reads only |
+| D-08 | **Not approved** | no canonical engine replacement; the canon four-nozzle Fiji Drive stays |
+
+The registry (`registry/decisions.toml`) keeps D-08 to D-11 `OPEN`; T00 records these rulings there at Phase 4 integration, with the
+date, so the generated Atlas pages change once.
+
 ## Owner decisions carried from the Atlas
 
 | Decision | Question (short) | Handling in this plan | Threads | Blocks |
@@ -29,7 +43,7 @@ evidence in its `registry_proposal.toml` (T03: D-01, D-03; T04: D-02; T02: D-12)
 | "squash" for a named branch | anything reaches `main` | per branch; "looks good" is not a squash |
 | Shared calculator change | editing FDP-1, four-burn or `convergence.py` physics | written integration proposal, then ApeDevil |
 
-## Proposed for the owner by this plan
+## Proposed for the owner by this plan (both approved 2026-11-09, see above)
 
 | ID | Question | Recommendation | Why |
 | --- | --- | --- | --- |

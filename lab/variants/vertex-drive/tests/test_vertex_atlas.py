@@ -15,7 +15,15 @@ ROOT = HERE.parents[2]
 sys.path.insert(0, str(HERE))
 import atlas  # noqa: E402
 
-ALLOWED = ('lab/variants/vertex-drive/', 'lab/README.md')
+# Canon guard (shared rule with lab/variants/fdp1/tests/test_fdp1.py): only lab/ and work/ may change, never the calculators this
+# entry builds on (FDP-1 engineering, config and run.py; the four-burn engine). T05 writes work/vertex-blender/, so work/ is allowed.
+ALLOWED_ROOTS = ('lab/', 'work/')
+PROTECTED_IN_LAB = ('lab/variants/fdp1/engineering/', 'lab/variants/fdp1/config/', 'lab/variants/fdp1/run.py',
+                    'lab/studies/four-burn-mission/fourburn/', 'lab/studies/four-burn-mission/scenarios/')
+
+
+def guard_violations(paths):
+    return [p for p in paths if not p.startswith(ALLOWED_ROOTS) or p.startswith(PROTECTED_IN_LAB)]
 
 
 class Registry(unittest.TestCase):
@@ -114,16 +122,66 @@ class Results(unittest.TestCase):
                 self.assertAlmostEqual(sum(share.values()), 1.0, delta=1e-6, msg=k)   # every watt of fusion is booked once
 
 
+class ResultArithmetic(unittest.TestCase):
+    """Independent hand checks of the committed results (T00, 2026-11-09): each generation's summary must obey the physics it reports,
+    recomputed here without the FDP-1 calculator."""
+    G0, C, SIGMA, EPS, YEAR = 9.80665, 299792458.0, 5.670374419e-8, 0.9, 3.15576e7
+
+    @classmethod
+    def setUpClass(cls):
+        cls.R = json.loads((HERE / 'results/convergence.json').read_text())
+
+    def each(self):
+        for name, g in self.R['generations'].items():
+            yield name, g, g['summary']
+
+    def test_energy_ledger_closes(self):
+        for name, g, _ in self.each():
+            self.assertAlmostEqual(sum(g['ledger_share'].values()), 1.0, places=9, msg=name)
+
+    def test_thrust_power_and_burn_time(self):
+        for name, g, s in self.each():
+            m0, F, ve = s['departure_t'] * 1e3, s['thrust_MN'] * 1e6, s['ve_km_s'] * 1e3
+            self.assertAlmostEqual(F / m0 / self.G0, s['a0_g'], delta=1e-6 * s['a0_g'], msg=name)
+            self.assertAlmostEqual(0.5 * F * ve / 1e12, s['jet_TW'], delta=1e-6 * s['jet_TW'], msg=name)
+            self.assertAlmostEqual(s['jet_TW'] / s['fusion_TW'], g['ledger_share']['jet'], delta=1e-6, msg=name)
+            self.assertAlmostEqual(s['propellant_t'] * 1e3 / (F / ve) / self.YEAR, s['burn_years'], delta=1e-3, msg=name)
+
+    def test_rocket_equation_four_burns(self):
+        for name, g, s in self.each():
+            dv = 4 * 0.016 * self.C
+            self.assertAlmostEqual(s['departure_t'] / s['end_t'], 2.718281828 ** (dv / (s['ve_km_s'] * 1e3)), delta=1e-4, msg=name)
+            self.assertAlmostEqual(s['propellant_t'] + s['end_t'], s['departure_t'], delta=1e-6 * s['departure_t'], msg=name)
+
+    def test_warm_radiator_stefan_boltzmann(self):
+        for name, g, s in self.each():
+            T = 600.0
+            for c in g['changes']:
+                if c['path'] == 'base.overrides.radiators.warm.T_K.optimistic':
+                    T = c['value']
+            area = g['warm_GW'] * 1e9 / (2 * self.EPS * self.SIGMA * T ** 4)
+            self.assertAlmostEqual(area / 1e6, s['warm_km2'], delta=1e-4 * s['warm_km2'], msg=name)
+
+
 class CanonGuard(unittest.TestCase):
-    def test_only_this_lab_entry_changed(self):
+    def test_guard_rule(self):
+        ok = ['lab/README.md', 'lab/variants/vertex-drive/studies/thermal/HANDOFF.md', 'work/vertex-blender/NOTES.md']
+        self.assertEqual(guard_violations(ok), [])
+        bad = ['data/wayfarer_3d.toml', 'src/wayfarer/spec.py', 'tests/test_spec.py', 'tools/workflow.py', 'godot/project.godot',
+               'web/index.html', 'assets/WF_WAYFARER_001.blend', 'references/geometry_baseline.json', 'docs/MODEL.md',
+               '.github/workflows/web-explorer.yml', 'AGENTS.md', 'CLAUDE.md', 'README.md', 'TODO.md', '.gitignore',
+               'lab/variants/fdp1/engineering/model.py', 'lab/variants/fdp1/config/fdp1.toml', 'lab/variants/fdp1/run.py',
+               'lab/studies/four-burn-mission/fourburn/closure.py']
+        self.assertEqual(guard_violations(bad), bad)
+
+    def test_only_lab_and_work_changed(self):
         try:
             base = subprocess.run(['git', 'merge-base', 'HEAD', 'origin/main'], cwd=ROOT, capture_output=True, text=True, check=True).stdout.strip()
             out = subprocess.run(['git', 'diff', '--name-only', base], cwd=ROOT, capture_output=True, text=True, check=True).stdout.split()
             out += subprocess.run(['git', 'ls-files', '--others', '--exclude-standard'], cwd=ROOT, capture_output=True, text=True, check=True).stdout.split()
         except (subprocess.CalledProcessError, FileNotFoundError):
             self.skipTest('git or origin/main not available')
-        stray = [p for p in out if not p.startswith(ALLOWED)]
-        self.assertEqual(stray, [], 'files outside the Vertex lab entry changed (canon, geometry, data or code)')
+        self.assertEqual(guard_violations(out), [], 'canon, geometry, data, code or a shared lab calculator changed')
 
 
 if __name__ == '__main__':

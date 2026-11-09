@@ -87,6 +87,11 @@ Readers fetch from the writer's branch (`git fetch origin <branch>`; `git show o
 
 No two threads write the same path. The only shared-file writes go through T00 at integration.
 
+Enforced since T00 Phase 0 (checked against the repository 2026-11-09): both lab guards (`test_vertex_atlas.py` `CanonGuard`,
+`test_fdp1.py` `BaselineUnchanged`) refuse any change outside `lab/` and `work/`, and the Atlas guard also refuses changes to the
+FDP-1 calculator (`engineering/`, `config/`, `run.py`) and the four-burn engine (`fourburn/`, `scenarios/`). Path ownership between
+threads inside `lab/variants/vertex-drive/` is checked by T00 at integration (rule 1 below), not by a test.
+
 ### Integration and conflict resolution
 
 1. A thread pushes only its owned paths. T00 brings in each thread's folder by merge or path-limited cherry-pick and rejects anything

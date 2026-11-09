@@ -1,4 +1,4 @@
-"""FDP-1 study tests: physical invariants of the integrated solve and the parametric geometry (work/ only; nothing in tests/ reads it).
+"""FDP-1 study tests: physical invariants of the integrated solve and the parametric geometry (lab/ only; nothing in tests/ or CI reads it).
 
   python3 -m unittest discover -s lab/variants/fdp1/tests -v
 """
@@ -160,14 +160,33 @@ class Parametric(unittest.TestCase):
             self.assertIn(p['coll'].split(':')[0], G.COLLECTIONS)
 
 
+# Canon guard. FDP-1 was written in work/fdp1 and first guarded "nothing outside work/"; since it moved to lab/ that failed on every
+# branch carrying any lab or work change. The guard now allows only lab/ and work/ (stricter than a list of canon folders: a new
+# top-level path or file is refused too) and refuses changes to the four-burn engine FDP-1 depends on.
+ALLOWED_ROOTS = ('lab/', 'work/')
+PROTECTED_IN_LAB = ('lab/studies/four-burn-mission/fourburn/', 'lab/studies/four-burn-mission/scenarios/')
+
+
+def guard_violations(paths):
+    return [p for p in paths if not p.startswith(ALLOWED_ROOTS) or p.startswith(PROTECTED_IN_LAB)]
+
+
 class BaselineUnchanged(unittest.TestCase):
+    def test_guard_rule(self):
+        self.assertEqual(guard_violations(['lab/README.md', 'lab/variants/vertex-drive/atlas.py', 'work/vertex-blender/NOTES.md',
+                                           'lab/variants/fdp1/engineering/model.py']), [])
+        bad = ['data/wayfarer_3d.toml', 'src/wayfarer/spec.py', 'tests/test_spec.py', 'tools/workflow.py', 'godot/project.godot',
+               'web/index.html', 'references/geometry_baseline.json', 'docs/MODEL.md', '.github/workflows/web-explorer.yml',
+               'AGENTS.md', 'TODO.md', '.gitignore', 'lab/studies/four-burn-mission/fourburn/closure.py']
+        self.assertEqual(guard_violations(bad), bad)
+
     def test_no_tracked_change_outside_work(self):
         try:
             base = subprocess.run(['git', 'merge-base', 'HEAD', 'origin/main'], cwd=ROOT, capture_output=True, text=True, check=True).stdout.strip()
         except Exception:
             self.skipTest('git or origin/main unavailable')
-        diff = subprocess.run(['git', 'diff', '--name-only', base, '--', '.', ':!work'], cwd=ROOT, capture_output=True, text=True).stdout.split()
-        self.assertEqual(diff, [], 'FDP-1 must not change canon, generators or tests')
+        diff = subprocess.run(['git', 'diff', '--name-only', base], cwd=ROOT, capture_output=True, text=True, check=True).stdout.split()
+        self.assertEqual(guard_violations(diff), [], 'FDP-1 must not change canon, generators, tests or the four-burn engine')
 
     def test_review_written_inside_work(self):
         src = (HERE/'blender'/'build_fdp1.py').read_text()
