@@ -1,0 +1,196 @@
+{
+ "generation": "V4",
+ "source": "lab/variants/vertex-drive/results/convergence.json",
+ "thrust_MN": 2.902071553188218,
+ "ve_km_s": 19201.17208,
+ "departure_t": 42915.783853018824,
+ "pulse_rate_Hz": 195.73784854631526,
+ "burns": [
+  {
+   "start_t": 42915.783853018824,
+   "end_t": 33429.136897120334,
+   "propellant_t": 9486.646955898486,
+   "years": 1.988970744539708,
+   "days": 726.4715644431283,
+   "distance_AU": 964.4240757987496,
+   "a_start_g": 0.006895573489099627,
+   "a_end_g": 0.008852425424908246
+  },
+  {
+   "start_t": 33429.136897120334,
+   "end_t": 26039.53821544386,
+   "propellant_t": 7389.5986816764735,
+   "years": 1.549303527375935,
+   "days": 565.8831133740603,
+   "distance_AU": 751.2355959097147,
+   "a_start_g": 0.008852425424908246,
+   "a_end_g": 0.01136460020728375
+  },
+  {
+   "start_t": 26039.53821544386,
+   "end_t": 20283.429768477534,
+   "propellant_t": 5756.108446966327,
+   "years": 1.2068259055740946,
+   "days": 440.79316201093803,
+   "distance_AU": 585.1729905170821,
+   "a_start_g": 0.01136460020728375,
+   "a_end_g": 0.014589689454823338
+  },
+  {
+   "start_t": 20283.429768477534,
+   "end_t": 15799.724241221445,
+   "propellant_t": 4483.705527256088,
+   "years": 0.9400538633197951,
+   "days": 343.35467357755516,
+   "distance_AU": 455.81896104914995,
+   "a_start_g": 0.014589689454823338,
+   "a_end_g": 0.018730006731935773
+  }
+ ],
+ "trip": {
+  "engine_years": 5.6851540408095325,
+  "coast_home_years": 0.6667617702447414,
+  "round_trip_years": 6.3519158110542735,
+  "turn_distance_AU": 1715.6596717084644,
+  "first_loop_years": 2.7561294329500297
+ },
+ "check_round_trip_vs_convergence": {
+  "here": 6.3519158110542735,
+  "convergence": 6.35191581109068
+ },
+ "runaway_burn1": {
+  "start_t": 42915.783853018824,
+  "end_t": 33429.136897120334,
+  "propellant_t": 9486.646955898486,
+  "years": 1.988970744539708,
+  "days": 726.4715644431283,
+  "distance_AU": 964.4240757987496,
+  "a_start_g": 0.006895573489099627,
+  "a_end_g": 0.008852425424908246,
+  "pulses": 12285905563.080614,
+  "share_of_propellant": 0.34985344816734115,
+  "propellant_left_t": 17629.41265589889
+ },
+ "decision_window": [
+  {
+   "rescue_dv_km_s": 10,
+   "case": "match only",
+   "days": 1.7111264516573115,
+   "ship_speed_km_s": 10.000000000002656,
+   "distance_AU": 0.004940862194926566
+  },
+  {
+   "rescue_dv_km_s": 10,
+   "case": "match and return",
+   "days": 0.855674620489382,
+   "ship_speed_km_s": 5.000000000000778,
+   "distance_AU": 0.0012354299944241946
+  },
+  {
+   "rescue_dv_km_s": 20,
+   "case": "match only",
+   "days": 3.421361978040488,
+   "ship_speed_km_s": 20.00000000000348,
+   "distance_AU": 0.019756588527449166
+  },
+  {
+   "rescue_dv_km_s": 20,
+   "case": "match and return",
+   "days": 1.7111264516573115,
+   "ship_speed_km_s": 10.000000000002656,
+   "distance_AU": 0.004940862194926566
+  },
+  {
+   "rescue_dv_km_s": 50,
+   "case": "match only",
+   "days": 8.546727643081056,
+   "ship_speed_km_s": 50.00000000000421,
+   "distance_AU": 0.123350148999802
+  },
+  {
+   "rescue_dv_km_s": 50,
+   "case": "match and return",
+   "days": 4.276145789224626,
+   "ship_speed_km_s": 25.000000000002306,
+   "distance_AU": 0.030864311571877884
+  },
+  {
+   "rescue_dv_km_s": 100,
+   "case": "match only",
+   "days": 17.071228493473672,
+   "ship_speed_km_s": 100.0000000000019,
+   "distance_AU": 0.49254507145622217
+  },
+  {
+   "rescue_dv_km_s": 100,
+   "case": "match and return",
+   "days": 8.546727643081056,
+   "ship_speed_km_s": 50.00000000000421,
+   "distance_AU": 0.123350148999802
+  }
+ ],
+ "burn1_milestones": [
+  {
+   "day": 1,
+   "speed_km_s": 5.84347098365868,
+   "distance_AU": 0.0016873578566697347,
+   "one_way_light_hours": 0.000233888789589367
+  },
+  {
+   "day": 7,
+   "speed_km_s": 40.94169128301805,
+   "distance_AU": 0.08273090767584511,
+   "one_way_light_hours": 0.01146753297259836
+  },
+  {
+   "day": 30,
+   "speed_km_s": 176.08236742520702,
+   "distance_AU": 1.523109671298737,
+   "one_way_light_hours": 0.21112194785699598
+  },
+  {
+   "day": 100,
+   "speed_km_s": 593.3317048642357,
+   "distance_AU": 17.045646259278172,
+   "one_way_light_hours": 2.362738618599637
+  },
+  {
+   "day": 365,
+   "speed_km_s": 2260.5360486102486,
+   "distance_AU": 233.5922425696034,
+   "one_way_light_hours": 32.37879069701332
+  }
+ ],
+ "calendar": {
+  "round_trip_years": 6.3519158110542735,
+  "latest_departure_fraction_of_Y155_for_return_in_Y161": 0.6480841889457265,
+  "latest_departure_day_of_Y155": 236.7127500124266,
+  "max_repair_coast_at_0.016c_years_if_departure_at_start_of_Y155": 0.32404209447286325,
+  "max_repair_coast_days_if_departure_at_start_of_Y155": 118.3563750062133,
+  "gamma_at_0.016c": 1.000128024581244,
+  "ship_clock_saving_hours_upper_bound": 7.1276106282380765,
+  "six_year_case_from_convergence": {
+   "met_at_base_a0": false,
+   "a0_g": 0.007301699098240959,
+   "departure_t": 50337.96419334335,
+   "min_round_trip_years": 5.998617812462506,
+   "burn_years": 5.368941798039585
+  }
+ },
+ "overdrive_to_6y": {
+  "saving_needed_years": 0.3519158110542735,
+  "power_factor_burn1": 1.214968846711218,
+  "pulse_rate_Hz": 237.81538810605173,
+  "radiator_temperature_factor": 1.04988392346158,
+  "warm_loop_K_from_628": 659.3271039338722,
+  "one_target_in_flight_launcher_km_s": 16.26657254645394,
+  "nominal_launcher_km_s": 13.388468840567965
+ },
+ "forced_stop_freeze": {
+  "reject_W_m2_at_628K": 15875.33200874655,
+  "seconds_to_melting_point": 0.8825390229496192,
+  "seconds_to_solid": 2.747066957464111,
+  "warm_area_km2": 4.951041268491101,
+  "sheet_inventory_t": 2475.520634245551
+ }
+}
