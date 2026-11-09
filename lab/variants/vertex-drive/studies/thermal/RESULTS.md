@@ -639,4 +639,4 @@ Warm 9.16 GW, 0.576 km2, 570 t; equivalent T 628 K, areal 0.96 kg/m2; heat-weigh
 | injection | 2.6 | 740 | SN_DROPLET | 151 | 0.1 | TARGET | yes |
 | magnetisation | 0.0 | 740 | SN_DROPLET | 0 | 0.0 | TARGET | yes |
 
-Runtime 304 s.
+Runtime 300 s.

@@ -38,7 +38,7 @@
     "min_round_trip_years": 6.351915811090674
    },
    "overrides": {},
-   "secs": 8.8
+   "secs": 8.6
   },
   "V1": {
    "scenario": "atlas",
@@ -103,7 +103,7 @@
      }
     }
    },
-   "secs": 8.8
+   "secs": 8.2
   },
   "V2": {
    "scenario": "atlas",
@@ -171,7 +171,7 @@
      }
     }
    },
-   "secs": 8.4
+   "secs": 7.9
   },
   "V1_eta0.25": {
    "scenario": "atlas",
@@ -589,7 +589,7 @@
     }
    ],
    "booking_error": -2.3749335831269036e-11,
-   "secs": 4.5
+   "secs": 4.7
   },
   "S2_advanced_eta0.25": {
    "scenario": "advanced",
@@ -857,7 +857,7 @@
     }
    ],
    "booking_error": 8.216605174027336e-11,
-   "secs": 2.7
+   "secs": 2.9
   },
   "V1_eta0.30": {
    "scenario": "atlas",
@@ -1010,7 +1010,7 @@
      "house": 0.0001344941005904123
     }
    ],
-   "secs": 1.7
+   "secs": 1.9
   },
   "S1_advanced_eta0.30": {
    "scenario": "advanced",
@@ -1275,7 +1275,7 @@
     }
    ],
    "booking_error": 1.0713430143027836e-11,
-   "secs": 5.9
+   "secs": 5.8
   },
   "S2_advanced_eta0.30": {
    "scenario": "advanced",
@@ -1543,7 +1543,7 @@
     }
    ],
    "booking_error": -5.1995963090689656e-11,
-   "secs": 4.0
+   "secs": 4.2
   },
   "S1_conservative_eta0.45": {
    "scenario": "conservative",
@@ -1822,7 +1822,7 @@
     }
    ],
    "booking_error": 1.199527144279955e-10,
-   "secs": 4.4
+   "secs": 4.2
   },
   "S2_advanced_eta0.45": {
    "scenario": "advanced",
@@ -2090,7 +2090,7 @@
     }
    ],
    "booking_error": -3.188938002551822e-11,
-   "secs": 1.6
+   "secs": 1.3
   },
   "S1_demonstrated_eta0.30": {
    "scenario": "demonstrated",
@@ -2376,7 +2376,7 @@
     }
    ],
    "booking_error": 1.1148564293961272e-09,
-   "secs": 8.5
+   "secs": 8.2
   },
   "S1_cons_T_areal0.5_eta0.45": {
    "scenario": "cons_T_areal0.5",
@@ -2638,7 +2638,7 @@
     }
    ],
    "booking_error": 5.650652834532366e-09,
-   "secs": 5.6
+   "secs": 5.4
   },
   "S1_cons_T_areal1_eta0.30": {
    "scenario": "cons_T_areal1",
@@ -2673,7 +2673,7 @@
      "house": 0.0003095765015718128
     }
    ],
-   "secs": 13.5
+   "secs": 13.3
   },
   "S1_cons_T_areal1_eta0.45": {
    "scenario": "cons_T_areal1",
@@ -2942,7 +2942,7 @@
     }
    ],
    "booking_error": 3.175776308594891e-09,
-   "secs": 5.2
+   "secs": 5.3
   },
   "S1_cons_T_areal1.5_eta0.30": {
    "scenario": "cons_T_areal1.5",
@@ -2956,7 +2956,7 @@
      "house": 0.0001344941005904123
     }
    ],
-   "secs": 1.7
+   "secs": 1.5
   },
   "S1_cons_T_areal1.5_eta0.45": {
    "scenario": "cons_T_areal1.5",
@@ -3232,7 +3232,7 @@
     }
    ],
    "booking_error": 6.263321490340701e-07,
-   "secs": 7.3
+   "secs": 7.4
   },
   "S1_cons_T_areal2_eta0.30": {
    "scenario": "cons_T_areal2",
@@ -3246,7 +3246,7 @@
      "house": 0.0001344941005904123
     }
    ],
-   "secs": 1.6
+   "secs": 1.8
   },
   "S1_cons_T_areal2_eta0.45": {
    "scenario": "cons_T_areal2",
@@ -3274,7 +3274,7 @@
      "house": 0.0002365578910107516
     }
    ],
-   "secs": 5.6
+   "secs": 5.9
   },
   "S1_cons_T_calcopt_eta0.30": {
    "scenario": "cons_T_calcopt",
@@ -3316,7 +3316,7 @@
      "house": 0.0002959764097746456
     }
    ],
-   "secs": 22.5
+   "secs": 23.1
   },
   "S1_cons_T_calcopt_eta0.45": {
    "scenario": "cons_T_calcopt",
@@ -3585,7 +3585,7 @@
     }
    ],
    "booking_error": -3.0349028845577664e-09,
-   "secs": 6.1
+   "secs": 6.5
   },
   "S1_adv_T_panel_eta0.30": {
    "scenario": "adv_T_panel",
@@ -3850,7 +3850,7 @@
     }
    ],
    "booking_error": 1.3670620191419403e-11,
-   "secs": 6.1
+   "secs": 6.2
   },
   "S1_adv_T_panel_eta0.45": {
    "scenario": "adv_T_panel",
@@ -4112,7 +4112,7 @@
     }
    ],
    "booking_error": 2.831999079688785e-10,
-   "secs": 6.1
+   "secs": 5.6
   },
   "S1_adv_eps0.3_eta0.30": {
    "scenario": "adv_eps0.3",
@@ -4377,7 +4377,7 @@
     }
    ],
    "booking_error": 5.22597298768801e-10,
-   "secs": 4.7
+   "secs": 4.6
   },
   "S1_adv_eps0.3_eta0.45": {
    "scenario": "adv_eps0.3",
@@ -4904,7 +4904,7 @@
     }
    ],
    "booking_error": 1.6345569342490762e-10,
-   "secs": 2.8
+   "secs": 2.9
   },
   "S1_adv_eps0.8_eta0.45": {
    "scenario": "adv_eps0.8",
@@ -5166,7 +5166,7 @@
     }
    ],
    "booking_error": -2.602492665815248e-10,
-   "secs": 3.0
+   "secs": 2.5
   },
   "V0_areal2.5": {
    "scenario": "atlas",
@@ -5204,7 +5204,7 @@
      }
     }
    },
-   "secs": 0.8
+   "secs": 0.6
   },
   "step1_galleries": {
    "scenario": "atlas",
@@ -5248,7 +5248,7 @@
      }
     }
    },
-   "secs": 0.5
+   "secs": 0.6
   },
   "step2_noH2": {
    "scenario": "atlas",
@@ -5355,7 +5355,7 @@
      }
     }
    },
-   "secs": 0.5
+   "secs": 0.3
   },
   "step3b_house_bottomup_cons": {
    "scenario": "atlas",
@@ -5414,7 +5414,7 @@
      }
     }
    },
-   "secs": 4.1
+   "secs": 3.9
   },
   "V1_keepH2": {
    "scenario": "atlas",
@@ -5479,7 +5479,7 @@
      }
     }
    },
-   "secs": 1.7
+   "secs": 1.8
   },
   "S1_conservative_eta0.30_keepH2": {
    "scenario": "conservative",
@@ -5493,7 +5493,7 @@
      "house": 0.00013474849955664374
     }
    ],
-   "secs": 2.9
+   "secs": 2.8
   },
   "S1_advanced_eta0.30_keepH2": {
    "scenario": "advanced",
@@ -5751,7 +5751,7 @@
     }
    ],
    "booking_error": 2.063374759941894e-08,
-   "secs": 5.2
+   "secs": 5.1
   },
   "V1_house_bottomup_cons": {
    "scenario": "atlas",
@@ -5817,7 +5817,7 @@
      }
     }
    },
-   "secs": 8.4
+   "secs": 7.9
   },
   "V1_house_bottomup_adv": {
    "scenario": "atlas",
@@ -5883,7 +5883,7 @@
      }
     }
    },
-   "secs": 4.1
+   "secs": 3.9
   },
   "V1_areal_by_band_700K": {
    "scenario": "atlas",
@@ -5954,7 +5954,7 @@
      }
     }
    },
-   "secs": 2.0
+   "secs": 2.2
   },
   "V2_areal_by_band_800K": {
    "scenario": "atlas",
@@ -6296,7 +6296,7 @@
     }
    ],
    "booking_error": -2.4792279340601908e-11,
-   "secs": 5.6
+   "secs": 5.5
   },
   "S1_advanced_eta0.45_drvkg0.075": {
    "scenario": "advanced",
@@ -6561,7 +6561,7 @@
     }
    ],
    "booking_error": 3.0395064243293746e-10,
-   "secs": 7.4
+   "secs": 7.5
   },
   "V1_drvkg0.075": {
    "scenario": "atlas",
@@ -6897,7 +6897,7 @@
     }
    ],
    "booking_error": -2.9871616291643477e-10,
-   "secs": 3.4
+   "secs": 3.2
   },
   "S1_advanced_eta0.45_drvkg0.1": {
    "scenario": "advanced",
@@ -7162,7 +7162,7 @@
     }
    ],
    "booking_error": 1.3451018077148547e-10,
-   "secs": 1.4
+   "secs": 1.1
   },
   "V1_drvkg0.1": {
    "scenario": "atlas",
@@ -7230,7 +7230,7 @@
      }
     }
    },
-   "secs": 0.3
+   "secs": 0.4
   },
   "S1_advanced_eta0.30_drvkg0.15": {
    "scenario": "advanced",
@@ -7505,7 +7505,7 @@
     }
    ],
    "booking_error": -3.280412474993e-08,
-   "secs": 7.8
+   "secs": 7.2
   },
   "S1_advanced_eta0.45_drvkg0.15": {
    "scenario": "advanced",
@@ -7770,7 +7770,7 @@
     }
    ],
    "booking_error": 5.415512482898066e-11,
-   "secs": 2.6
+   "secs": 2.8
   },
   "V1_drvkg0.15": {
    "scenario": "atlas",
@@ -8109,7 +8109,7 @@
     }
    ],
    "booking_error": -9.884442375707181e-09,
-   "secs": 3.2
+   "secs": 3.0
   },
   "V1_drvkg0.2": {
    "scenario": "atlas",
@@ -8183,7 +8183,7 @@
    "scenario": "advanced",
    "converged": false,
    "hist": [],
-   "secs": 7.4,
+   "secs": 7.1,
    "v_inj_cap_m_s": 400.0,
    "max_rep_Hz": 8.5789339707126
   },
@@ -8191,7 +8191,7 @@
    "scenario": "advanced",
    "converged": false,
    "hist": [],
-   "secs": 19.0,
+   "secs": 19.1,
    "v_inj_cap_m_s": 1000.0,
    "max_rep_Hz": 6.0030395057403245
   },
@@ -8199,7 +8199,7 @@
    "scenario": "advanced",
    "converged": false,
    "hist": [],
-   "secs": 45.6,
+   "secs": 44.9,
    "v_inj_cap_m_s": 1500.0,
    "max_rep_Hz": 7.1523849483680015
   },
@@ -8469,7 +8469,7 @@
     }
    ],
    "booking_error": 1.6313039807869245e-10,
-   "secs": 21.0,
+   "secs": 19.8,
    "v_inj_cap_m_s": 2500.0,
    "max_rep_Hz": 35.69097034419959
   },
@@ -8739,7 +8739,7 @@
     }
    ],
    "booking_error": 4.807974018916639e-10,
-   "secs": 18.8,
+   "secs": 18.5,
    "v_inj_cap_m_s": 4000.0,
    "max_rep_Hz": 71.56433423565528
   }
@@ -8748,23 +8748,23 @@
  "gain_cliffs": {
   "V0": {
    "gain_cliff": 1256.5678205921029,
-   "secs": 46.9
+   "secs": 47.7
   },
   "V1": {
    "gain_cliff": 705.0026029896881,
-   "secs": 43.4
+   "secs": 43.9
   },
   "V2": {
    "gain_cliff": 581.4677727587293,
-   "secs": 55.2
+   "secs": 52.2
   },
   "V1_eta0.30": {
    "gain_cliff": 1160.2882767829017,
-   "secs": 47.2
+   "secs": 45.9
   },
   "V1_eta0.25": {
    "gain_cliff": 1435.1126172692832,
-   "secs": 38.8
+   "secs": 35.3
   },
   "S1_conservative_eta0.45": {
    "gain_cliff": null,
@@ -8772,28 +8772,28 @@
   },
   "S1_conservative_eta0.30": {
    "gain_cliff": null,
-   "secs": 1.8
+   "secs": 1.9
   },
   "S1_conservative_eta0.25": {
    "gain_cliff": null,
-   "secs": 0.5
+   "secs": 0.4
   },
   "S1_advanced_eta0.45": {
    "gain_cliff": 768.591809939978,
-   "secs": 91.7
+   "secs": 88.2
   },
   "S1_advanced_eta0.30": {
    "gain_cliff": 1299.0053685653504,
-   "secs": 100.9
+   "secs": 99.0
   },
   "S1_advanced_eta0.25": {
    "gain_cliff": 1617.3947415743519,
-   "secs": 89.8
+   "secs": 91.1
   },
   "S2_advanced_eta0.30": {
    "gain_cliff": 1290.4047216593613,
-   "secs": 115.1
+   "secs": 115.9
   }
  },
- "runtime_s": 303.5148820877075
+ "runtime_s": 299.8607265949249
 }
