@@ -1,0 +1,2858 @@
+{
+ "chains": {
+  "K1": {
+   "id": "K1",
+   "name": "Recirculating-power chain (ignition and driver)",
+   "base_name": "V1c",
+   "story": "Better targets and drivers lower the recirculating power, which lowers warm-loop heat and driver mass, which lowers the mass the drive must push. Gain does not lower the fusion power needed for a given thrust; fusion power falls only because the lighter ship needs less thrust at the same acceleration.",
+   "base": {
+    "departure_t": 12978.03919146156,
+    "payload_t": 990.2338712519676,
+    "fusion_TW": 10.804545136718067,
+    "burn_years": 5.685154040809533,
+    "min_round_trip_years": 6.351915811090677,
+    "drive_t": 1939.9875719328131,
+    "radiator_t": 750.1681915758523,
+    "shield_t": 355.64532543439077,
+    "structure_t": 276.4603344926631,
+    "tank_t": 769.5560937507902,
+    "propellant_t": 8200.089868221285,
+    "warm_km2": 0.5647287186148566,
+    "hot_km2": 0.04461902617240483,
+    "wing_tip_radius_m": 1124.1766352069164,
+    "pellet_rate_Hz": 132.88693802016226,
+    "yield_t_TNT": 19.43267188263566,
+    "solid_angle": 0.01684162940649433,
+    "checks_ok": true,
+    "converged": true,
+    "loop_radii_m": [
+     37.386503328822386,
+     64.75532328286334,
+     112.15950998646714
+    ],
+    "xray_standoff_m": 43.170215521908894,
+    "hot_GW": 47.80731460658842,
+    "warm_GW": 13.839368570243469,
+    "ledger_sum": 1.0
+   },
+   "singles": [
+    {
+     "tech": "VTX-01A",
+     "key": "gain",
+     "value": 6000.0,
+     "basis": "TARGET",
+     "link": "CAUSAL_MODELLED",
+     "mechanism": "magnetised fuel-only targets double target gain (3,000 to 6,000): driver power 1/(G eta_d) halves",
+     "path": "base.overrides.pulsed.gain.optimistic",
+     "result": {
+      "departure_t": 9881.388440105362,
+      "payload_t": 990.2338712519676,
+      "fusion_TW": 8.223141962119591,
+      "burn_years": 5.685154040809533,
+      "min_round_trip_years": 6.35191581109068,
+      "drive_t": 1378.7012806888242,
+      "radiator_t": 433.28782296954466,
+      "shield_t": 352.5366499538725,
+      "structure_t": 220.83820714238578,
+      "tank_t": 585.9346375123814,
+      "propellant_t": 6243.4911804686635,
+      "warm_km2": 0.29930928348160796,
+      "hot_km2": 0.03374373311385757,
+      "wing_tip_radius_m": 606.285860714328,
+      "pellet_rate_Hz": 101.55757711199435,
+      "yield_t_TNT": 19.352353156437324,
+      "solid_angle": 0.016779966909315984,
+      "checks_ok": true,
+      "converged": true,
+      "loop_radii_m": [
+       37.332379418477515,
+       64.66157792024171,
+       111.9971382554325
+      ],
+      "xray_standoff_m": 43.10771861349447,
+      "hot_GW": 36.154918727756666,
+      "warm_GW": 7.334940395376743,
+      "ledger_sum": 1.0
+     },
+     "delta_t": -3096.6507513561974,
+     "ratio": 0.7613930189551648
+    },
+    {
+     "tech": "VTX-01B",
+     "key": "driver",
+     "value": 0.45,
+     "basis": "TARGET",
+     "link": "CAUSAL_MODELLED",
+     "mechanism": "heavy-ion driver wall-plug 0.30 (published) to 0.45 (FDP-1 optimistic): less driver loss heat",
+     "path": "base.overrides.pulsed.driver_efficiency.optimistic",
+     "result": {
+      "departure_t": 10416.002849765884,
+      "payload_t": 990.2338712519676,
+      "fusion_TW": 8.668279563247685,
+      "burn_years": 5.685154040809533,
+      "min_round_trip_years": 6.351915811090676,
+      "drive_t": 1499.7037459548606,
+      "radiator_t": 463.89449532668533,
+      "shield_t": 353.10508040983893,
+      "structure_t": 226.15021052494342,
+      "tank_t": 617.6355572492429,
+      "propellant_t": 6581.283826906853,
+      "warm_km2": 0.32206271283061244,
+      "hot_km2": 0.035649434543776504,
+      "wing_tip_radius_m": 652.5072867291798,
+      "pellet_rate_Hz": 107.02516613924851,
+      "yield_t_TNT": 19.35776988531435,
+      "solid_angle": 0.016793715079487563,
+      "checks_ok": true,
+      "converged": true,
+      "loop_radii_m": [
+       37.33603418768563,
+       64.6679081662001,
+       112.00810256305685
+      ],
+      "xray_standoff_m": 43.11193877746674,
+      "hot_GW": 38.196793587470786,
+      "warm_GW": 7.892541035503964,
+      "ledger_sum": 0.9999999999999999
+     },
+     "delta_t": -2562.036341695675,
+     "ratio": 0.8025867926657768
+    },
+    {
+     "tech": "VTX-01B",
+     "key": "driver_kg",
+     "value": 2.5e-05,
+     "basis": "TARGET",
+     "link": "CAUSAL_MODELLED",
+     "mechanism": "driver hardware 0.05 to 0.025 kg/kW (lighter induction cores, higher gradient)",
+     "path": "base.overrides.pulsed.driver_kg_per_W.optimistic",
+     "result": {
+      "departure_t": 10974.370715494033,
+      "payload_t": 990.2338712519676,
+      "fusion_TW": 9.136440484512308,
+      "burn_years": 5.685154040809533,
+      "min_round_trip_years": 6.3519158110906755,
+      "drive_t": 1487.6141219520587,
+      "radiator_t": 634.3294036433039,
+      "shield_t": 353.8846548277493,
+      "structure_t": 256.45420655419906,
+      "tank_t": 650.7449805672031,
+      "propellant_t": 6934.084940461056,
+      "warm_km2": 0.47753729243670734,
+      "hot_km2": 0.03772542543268093,
+      "wing_tip_radius_m": 947.8223204592626,
+      "pellet_rate_Hz": 112.37064307927149,
+      "yield_t_TNT": 19.432670525329232,
+      "solid_angle": 0.01679169594553562,
+      "checks_ok": true,
+      "converged": true,
+      "loop_radii_m": [
+       37.38650239395736,
+       64.75532166362962,
+       112.15950718187204
+      ],
+      "xray_standoff_m": 43.17021444241974,
+      "hot_GW": 40.42112607654798,
+      "warm_GW": 11.702635935139902,
+      "ledger_sum": 0.9999999999999999
+     },
+     "delta_t": -2003.6684759675263,
+     "ratio": 0.8456108471851611
+    },
+    {
+     "tech": "VTX-01C",
+     "key": "house",
+     "value": 0.00025,
+     "basis": "TARGET",
+     "link": "CAUSAL_MODELLED",
+     "mechanism": "target factory and controls 0.05 % to 0.025 % of fusion",
+     "path": "base.overrides.pulsed.house_fraction.value",
+     "result": {
+      "departure_t": 11974.881606823694,
+      "payload_t": 990.2338712519676,
+      "fusion_TW": 9.96682558049682,
+      "burn_years": 5.685154040809532,
+      "min_round_trip_years": 6.351915811090675,
+      "drive_t": 1820.7270107599068,
+      "radiator_t": 584.9473510066887,
+      "shield_t": 354.6422866987864,
+      "structure_t": 247.30951656312436,
+      "tank_t": 710.0720671944342,
+      "propellant_t": 7566.2512563429755,
+      "warm_km2": 0.41926661305982077,
+      "hot_km2": 0.04104712203916463,
+      "wing_tip_radius_m": 844.8251643760335,
+      "pellet_rate_Hz": 122.90369734490676,
+      "yield_t_TNT": 19.38207341515184,
+      "solid_angle": 0.016828920538759257,
+      "checks_ok": true,
+      "converged": true,
+      "loop_radii_m": [
+       37.35242402244894,
+       64.69629619273783,
+       112.0572720673468
+      ],
+      "xray_standoff_m": 43.130864128491886,
+      "hot_GW": 43.9801771880672,
+      "warm_GW": 10.274641604139358,
+      "ledger_sum": 1.0
+     },
+     "delta_t": -1003.1575846378655,
+     "ratio": 0.9227034554420318
+    }
+   ],
+   "combined": {
+    "departure_t": 8204.284434505982,
+    "payload_t": 990.2338712519676,
+    "fusion_TW": 6.82442472227626,
+    "burn_years": 5.685154040809533,
+    "min_round_trip_years": 6.351915811090678,
+    "drive_t": 1104.4037950017057,
+    "radiator_t": 231.98216804563415,
+    "shield_t": 350.32420724495756,
+    "structure_t": 185.12449833592746,
+    "tank_t": 486.48774969794704,
+    "propellant_t": 5183.823894726706,
+    "warm_km2": 0.12720863009320396,
+    "hot_km2": 0.027869432905481512,
+    "wing_tip_radius_m": 272.6870723417317,
+    "pellet_rate_Hz": 84.66595492853332,
+    "yield_t_TNT": 19.264846841745193,
+    "solid_angle": 0.01674891393550468,
+    "checks_ok": true,
+    "converged": true,
+    "loop_radii_m": [
+     37.27324335687743,
+     64.55915125699084,
+     111.81973007063225
+    ],
+    "xray_standoff_m": 43.03943417132723,
+    "hot_GW": 29.860865669084863,
+    "warm_GW": 3.117403204663763,
+    "ledger_sum": 1.0
+   },
+   "additive_expectation_t": 4312.526037804295,
+   "multiplicative_expectation_t": 6187.891255442737,
+   "interaction_vs_product": 0.3258611206668618,
+   "combined_vs_sum_t": 3891.758396701687,
+   "ambitions": {
+    "four_burns_close": true,
+    "min_round_trip_years": 6.351915811090678,
+    "six_year_a0_g": 0.007312880210368595,
+    "six_year_departure_t": 8418.538412482916,
+    "six_year_met_at_base_a0": false,
+    "ceiling_a0_g": 0.023354392596289124,
+    "deficit_1g": 42.818497457257536,
+    "deficit_1p5g": 64.2277461858863,
+    "gain_cliff": 457.7892194529276,
+    "nozzle_eff_cliff": 0.527578125
+   }
+  },
+  "K2": {
+   "id": "K2",
+   "name": "Thermal chain (hot machinery and light radiators)",
+   "base_name": "V1c",
+   "story": "Hotter machinery and lighter radiator surfaces shrink the wings; smaller wings shrink spars, view-factor penalties and the dust-exposed edge.",
+   "base": {
+    "departure_t": 12978.03919146156,
+    "payload_t": 990.2338712519676,
+    "fusion_TW": 10.804545136718067,
+    "burn_years": 5.685154040809533,
+    "min_round_trip_years": 6.351915811090677,
+    "drive_t": 1939.9875719328131,
+    "radiator_t": 750.1681915758523,
+    "shield_t": 355.64532543439077,
+    "structure_t": 276.4603344926631,
+    "tank_t": 769.5560937507902,
+    "propellant_t": 8200.089868221285,
+    "warm_km2": 0.5647287186148566,
+    "hot_km2": 0.04461902617240483,
+    "wing_tip_radius_m": 1124.1766352069164,
+    "pellet_rate_Hz": 132.88693802016226,
+    "yield_t_TNT": 19.43267188263566,
+    "solid_angle": 0.01684162940649433,
+    "checks_ok": true,
+    "converged": true,
+    "loop_radii_m": [
+     37.386503328822386,
+     64.75532328286334,
+     112.15950998646714
+    ],
+    "xray_standoff_m": 43.170215521908894,
+    "hot_GW": 47.80731460658842,
+    "warm_GW": 13.839368570243469,
+    "ledger_sum": 1.0
+   },
+   "singles": [
+    {
+     "tech": "VTX-07A",
+     "key": "warm",
+     "value": 800.0,
+     "basis": "TARGET",
+     "link": "CAUSAL_MODELLED",
+     "mechanism": "warm loop 700 to 800 K: MW power electronics at 800 K, cores near the FINEMET limit",
+     "path": "base.overrides.radiators.warm.T_K.optimistic",
+     "result": {
+      "departure_t": 11103.733434873147,
+      "payload_t": 990.2338712519676,
+      "fusion_TW": 9.244138216927212,
+      "burn_years": 5.685154040809533,
+      "min_round_trip_years": 6.351915811090677,
+      "drive_t": 1716.764041145549,
+      "radiator_t": 441.8649346087478,
+      "shield_t": 354.007647645101,
+      "structure_t": 220.2744323762546,
+      "tank_t": 658.4157749959196,
+      "propellant_t": 7015.82193546136,
+      "warm_km2": 0.2832233915440242,
+      "hot_km2": 0.03817046126800586,
+      "wing_tip_radius_m": 584.4317580274762,
+      "pellet_rate_Hz": 113.69523321602408,
+      "yield_t_TNT": 19.43267098302544,
+      "solid_angle": 0.016795109363644572,
+      "checks_ok": true,
+      "converged": true,
+      "loop_radii_m": [
+       37.386502683496246,
+       64.75532216512568,
+       112.15950805048871
+      ],
+      "xray_standoff_m": 43.170214776750456,
+      "hot_GW": 40.89796230574705,
+      "warm_GW": 11.840589060884811,
+      "ledger_sum": 1.0
+     },
+     "delta_t": -1874.305756588412,
+     "ratio": 0.8555786641620295
+    },
+    {
+     "tech": "VTX-07B",
+     "key": "warm_areal",
+     "value": 0.5,
+     "basis": "TARGET",
+     "link": "CAUSAL_MODELLED",
+     "mechanism": "liquid-sheet or droplet surfaces for the warm field: 1.0 to 0.5 kg/m2",
+     "path": "base.overrides.radiators.warm.areal_kg_m2.optimistic",
+     "result": {
+      "departure_t": 11075.666108903733,
+      "payload_t": 990.2338712519676,
+      "fusion_TW": 9.220771459024505,
+      "burn_years": 5.685154040809534,
+      "min_round_trip_years": 6.351915811090678,
+      "drive_t": 1751.456582710362,
+      "radiator_t": 399.21289364577837,
+      "shield_t": 353.9810825010448,
+      "structure_t": 257.4705585702813,
+      "tank_t": 656.7514725561703,
+      "propellant_t": 6998.087777634091,
+      "warm_km2": 0.48194523241436343,
+      "hot_km2": 0.038073903125417946,
+      "wing_tip_radius_m": 956.7378174984251,
+      "pellet_rate_Hz": 113.40784244633208,
+      "yield_t_TNT": 19.43267081696096,
+      "solid_angle": 0.016794371170815264,
+      "checks_ok": true,
+      "converged": true,
+      "loop_radii_m": [
+       37.38650257940141,
+       64.75532198482813,
+       112.1595077382042
+      ],
+      "xray_standoff_m": 43.17021465655209,
+      "hot_GW": 40.79450452334966,
+      "warm_GW": 11.810657900333952,
+      "ledger_sum": 1.0
+     },
+     "delta_t": -1902.373082557826,
+     "ratio": 0.8534159856899319
+    },
+    {
+     "tech": "T06-NEW-1",
+     "key": "hot_areal",
+     "value": 1.5,
+     "basis": "TARGET",
+     "link": "CAUSAL_MODELLED",
+     "mechanism": "thin-wall refractory heat pipes (Mo-Re / C-C) for the 1,800 K band: 3.0 to 1.5 kg/m2",
+     "path": "base.overrides.radiators.hot.areal_kg_m2.optimistic",
+     "result": {
+      "departure_t": 12470.687197910169,
+      "payload_t": 990.2338712519676,
+      "fusion_TW": 10.382161776281682,
+      "burn_years": 5.685154040809533,
+      "min_round_trip_years": 6.351915811090678,
+      "drive_t": 1889.7519187573678,
+      "radiator_t": 656.5259452240857,
+      "shield_t": 355.22651199853277,
+      "structure_t": 271.41290576061664,
+      "tank_t": 739.4717480298021,
+      "propellant_t": 7879.522802536989,
+      "warm_km2": 0.542650767546895,
+      "hot_km2": 0.04287337951571215,
+      "wing_tip_radius_m": 1079.5213442516128,
+      "pellet_rate_Hz": 127.69197578796576,
+      "yield_t_TNT": 19.432671495565977,
+      "solid_angle": 0.01682954143463045,
+      "checks_ok": true,
+      "converged": true,
+      "loop_radii_m": [
+       37.38650306634275,
+       64.75532282823526,
+       112.15950919902821
+      ],
+      "xray_standoff_m": 43.17021521882351,
+      "hot_GW": 45.9369313627681,
+      "warm_GW": 13.298321352289419,
+      "ledger_sum": 1.0
+     },
+     "delta_t": -507.3519935513905,
+     "ratio": 0.9609068838468923
+    }
+   ],
+   "combined": {
+    "departure_t": 9903.925670370532,
+    "payload_t": 990.2338712519676,
+    "fusion_TW": 8.245267936308611,
+    "burn_years": 5.685154040809533,
+    "min_round_trip_years": 6.3519158110906755,
+    "drive_t": 1601.6463891143949,
+    "radiator_t": 216.73395650091354,
+    "shield_t": 352.8078143520448,
+    "structure_t": 212.24912573209207,
+    "tank_t": 587.2710229782653,
+    "propellant_t": 6257.7311832016485,
+    "warm_km2": 0.2526186492341865,
+    "hot_km2": 0.034043061567639345,
+    "wing_tip_radius_m": 519.3293362651439,
+    "pellet_rate_Hz": 101.40996634326986,
+    "yield_t_TNT": 19.432669231561626,
+    "solid_angle": 0.016762278613999555,
+    "checks_ok": true,
+    "converged": true,
+    "loop_radii_m": [
+     37.38650153766484,
+     64.75532018048747,
+     112.15950461299451
+    ],
+    "xray_standoff_m": 43.17021345365831,
+    "hot_GW": 36.475635937167645,
+    "warm_GW": 10.561110783933469,
+    "ledger_sum": 1.0
+   },
+   "additive_expectation_t": 8694.008358763931,
+   "multiplicative_expectation_t": 9105.65319489326,
+   "interaction_vs_product": 0.08766778817416077,
+   "combined_vs_sum_t": 1209.9173116066013,
+   "ambitions": {
+    "four_burns_close": true,
+    "min_round_trip_years": 6.3519158110906755,
+    "six_year_a0_g": 0.007309063016194642,
+    "six_year_departure_t": 10344.026175429026,
+    "six_year_met_at_base_a0": false,
+    "ceiling_a0_g": 0.01653513762093184,
+    "deficit_1g": 60.47727106511043,
+    "deficit_1p5g": 90.71590659766564,
+    "gain_cliff": 789.2884763736221,
+    "nozzle_eff_cliff": 0.5284765625
+   }
+  },
+  "K3": {
+   "id": "K3",
+   "name": "Nozzle chain (collimation and recovery)",
+   "base_name": "V1c",
+   "story": "A validated 3D nozzle field raises efficiency and lowers the plume share that strikes hardware; pulse-to-pulse control keeps burns centred so the design efficiency holds. Recovery and nozzle efficiency draw on the same expanding plasma.",
+   "base": {
+    "departure_t": 12978.03919146156,
+    "payload_t": 990.2338712519676,
+    "fusion_TW": 10.804545136718067,
+    "burn_years": 5.685154040809533,
+    "min_round_trip_years": 6.351915811090677,
+    "drive_t": 1939.9875719328131,
+    "radiator_t": 750.1681915758523,
+    "shield_t": 355.64532543439077,
+    "structure_t": 276.4603344926631,
+    "tank_t": 769.5560937507902,
+    "propellant_t": 8200.089868221285,
+    "warm_km2": 0.5647287186148566,
+    "hot_km2": 0.04461902617240483,
+    "wing_tip_radius_m": 1124.1766352069164,
+    "pellet_rate_Hz": 132.88693802016226,
+    "yield_t_TNT": 19.43267188263566,
+    "solid_angle": 0.01684162940649433,
+    "checks_ok": true,
+    "converged": true,
+    "loop_radii_m": [
+     37.386503328822386,
+     64.75532328286334,
+     112.15950998646714
+    ],
+    "xray_standoff_m": 43.170215521908894,
+    "hot_GW": 47.80731460658842,
+    "warm_GW": 13.839368570243469,
+    "ledger_sum": 1.0
+   },
+   "singles": [
+    {
+     "tech": "VTX-03",
+     "key": "eta",
+     "value": 0.86,
+     "basis": "TARGET",
+     "link": "CAUSAL_UNMODELLED",
+     "mechanism": "nozzle efficiency 0.79 to 0.86 (top of the MSFC theoretical range); the sign of the helical effect is unresolved (D-09)",
+     "path": "base.overrides.pulsed.nozzle_efficiency.optimistic",
+     "result": {
+      "departure_t": 10685.727228362744,
+      "payload_t": 990.2338712519676,
+      "fusion_TW": 8.197135178641592,
+      "burn_years": 5.685154040809533,
+      "min_round_trip_years": 6.351915811090676,
+      "drive_t": 1504.9046304438748,
+      "radiator_t": 535.1836563353892,
+      "shield_t": 308.0320307528364,
+      "structure_t": 232.88570611378154,
+      "tank_t": 633.6293476149705,
+      "propellant_t": 6751.707425688983,
+      "warm_km2": 0.4290452858662714,
+      "hot_km2": 0.024071368869992386,
+      "wing_tip_radius_m": 831.3348544177924,
+      "pellet_rate_Hz": 218.65502743076186,
+      "yield_t_TNT": 8.96006074322522,
+      "solid_angle": 0.021049055639018436,
+      "checks_ok": true,
+      "converged": true,
+      "loop_radii_m": [
+       28.49166008895287,
+       49.34900286604877,
+       85.47498026685858
+      ],
+      "xray_standoff_m": 32.899335244032514,
+      "hot_GW": 25.791407910437165,
+      "warm_GW": 10.514279951960981,
+      "ledger_sum": 1.0
+     },
+     "delta_t": -2292.311963098815,
+     "ratio": 0.8233699305973001
+    },
+    {
+     "tech": "VTX-03B",
+     "key": "ptw",
+     "value": 0.01,
+     "basis": "TARGET",
+     "link": "SPECULATIVE",
+     "mechanism": "shaped field halves the plume share striking hardware (2 % to 1 % of the nozzle loss)",
+     "path": "base.overrides.continuous.plume_to_hardware.value",
+     "result": {
+      "departure_t": 12391.767498617126,
+      "payload_t": 990.2338712519676,
+      "fusion_TW": 10.31645913131537,
+      "burn_years": 5.685154040809533,
+      "min_round_trip_years": 6.351915811090675,
+      "drive_t": 1878.1937807246686,
+      "radiator_t": 645.7035649150196,
+      "shield_t": 355.1598447542595,
+      "structure_t": 266.8855594207727,
+      "tank_t": 734.7920630882493,
+      "propellant_t": 7829.657902529465,
+      "warm_km2": 0.5392164989689622,
+      "hot_km2": 0.022642790210850423,
+      "wing_tip_radius_m": 1035.1635975172278,
+      "pellet_rate_Hz": 126.883887207,
+      "yield_t_TNT": 19.43267158140738,
+      "solid_angle": 0.01682762945439458,
+      "checks_ok": true,
+      "converged": true,
+      "loop_radii_m": [
+       37.386503115759034,
+       64.75532291382679,
+       112.15950934727707
+      ],
+      "xray_standoff_m": 43.17021527588452,
+      "hot_GW": 24.260749013177396,
+      "warm_GW": 13.214160396679105,
+      "ledger_sum": 1.0
+     },
+     "delta_t": -586.2716928444333,
+     "ratio": 0.9548258651252841
+    },
+    {
+     "tech": "VTX-02C",
+     "key": "recovery",
+     "value": 0.98,
+     "basis": "TARGET",
+     "link": "CAUSAL_MODELLED",
+     "mechanism": "inductive recovery 0.95 to 0.98",
+     "shares_ledger_with": "VTX-03",
+     "path": "base.overrides.pulsed.recovery_efficiency.optimistic",
+     "result": {
+      "departure_t": 12961.112009402983,
+      "payload_t": 990.2338712519676,
+      "fusion_TW": 10.789903922074153,
+      "burn_years": 5.6851540408095325,
+      "min_round_trip_years": 6.351915811090673,
+      "drive_t": 1938.0459131340751,
+      "radiator_t": 747.3095392680227,
+      "shield_t": 355.6001249897066,
+      "structure_t": 276.1776961724288,
+      "tank_t": 768.5523661705548,
+      "propellant_t": 8189.394538052503,
+      "warm_km2": 0.5639638214926941,
+      "hot_km2": 0.044037458311340205,
+      "wing_tip_radius_m": 1121.6528020612236,
+      "pellet_rate_Hz": 132.77528067187953,
+      "yield_t_TNT": 19.422658470235945,
+      "solid_angle": 0.016843511820074483,
+      "checks_ok": true,
+      "converged": true,
+      "loop_radii_m": [
+       37.37976369978802,
+       64.74364990295165,
+       112.13929109936402
+      ],
+      "xray_standoff_m": 43.16243326863443,
+      "hot_GW": 47.18419034583993,
+      "warm_GW": 13.820623829905331,
+      "ledger_sum": 1.0
+     },
+     "delta_t": -16.927182058576363,
+     "ratio": 0.9986957057372956
+    }
+   ],
+   "combined": {
+    "departure_t": 10409.929262222307,
+    "payload_t": 990.2338712519676,
+    "fusion_TW": 7.9851611587546,
+    "burn_years": 5.685154040809533,
+    "min_round_trip_years": 6.351915811090676,
+    "drive_t": 1478.2060475579713,
+    "radiator_t": 483.6698096730043,
+    "shield_t": 307.82040530196855,
+    "structure_t": 228.89121996796067,
+    "tank_t": 617.2754129200048,
+    "propellant_t": 6577.446270019785,
+    "warm_km2": 0.4179502656153998,
+    "hot_km2": 0.012793625389153147,
+    "wing_tip_radius_m": 793.411931800187,
+    "pellet_rate_Hz": 213.09688266094668,
+    "yield_t_TNT": 8.956017080521036,
+    "solid_angle": 0.021044712419562267,
+    "checks_ok": true,
+    "converged": true,
+    "loop_radii_m": [
+     28.48713168935597,
+     49.34115944786997,
+     85.46139506806789
+    ],
+    "xray_standoff_m": 32.89410629857998,
+    "hot_GW": 13.70780419040949,
+    "warm_GW": 10.242382898588621,
+    "ledger_sum": 1.0
+   },
+   "additive_expectation_t": 10082.528353459735,
+   "multiplicative_expectation_t": 10189.701019545426,
+   "interaction_vs_product": 0.021612826740887714,
+   "combined_vs_sum_t": 327.4009087625727,
+   "ambitions": {
+    "four_burns_close": true,
+    "min_round_trip_years": 6.351915811090676,
+    "six_year_a0_g": 0.007304827760567191,
+    "six_year_departure_t": 11016.780873142192,
+    "six_year_met_at_base_a0": false,
+    "ceiling_a0_g": 0.014262052629146076,
+    "deficit_1g": 70.11613447256461,
+    "deficit_1p5g": 105.17420170884692,
+    "gain_cliff": 1002.5264748906833,
+    "nozzle_eff_cliff": 0.5284765625
+   }
+  },
+  "K4": {
+   "id": "K4",
+   "name": "Compression chain (small pulses, small nozzle)",
+   "base_name": "V1c",
+   "story": "Denser compression gives the same burn fraction from a smaller pellet: smaller yield per pulse, a closer X-ray stand-off, loops of half the radius, a smaller shield and less dust-exposed loop area, paid for by a higher pulse rate.",
+   "base": {
+    "departure_t": 12978.03919146156,
+    "payload_t": 990.2338712519676,
+    "fusion_TW": 10.804545136718067,
+    "burn_years": 5.685154040809533,
+    "min_round_trip_years": 6.351915811090677,
+    "drive_t": 1939.9875719328131,
+    "radiator_t": 750.1681915758523,
+    "shield_t": 355.64532543439077,
+    "structure_t": 276.4603344926631,
+    "tank_t": 769.5560937507902,
+    "propellant_t": 8200.089868221285,
+    "warm_km2": 0.5647287186148566,
+    "hot_km2": 0.04461902617240483,
+    "wing_tip_radius_m": 1124.1766352069164,
+    "pellet_rate_Hz": 132.88693802016226,
+    "yield_t_TNT": 19.43267188263566,
+    "solid_angle": 0.01684162940649433,
+    "checks_ok": true,
+    "converged": true,
+    "loop_radii_m": [
+     37.386503328822386,
+     64.75532328286334,
+     112.15950998646714
+    ],
+    "xray_standoff_m": 43.170215521908894,
+    "hot_GW": 47.80731460658842,
+    "warm_GW": 13.839368570243469,
+    "ledger_sum": 1.0
+   },
+   "singles": [
+    {
+     "tech": "VTX-01A",
+     "key": "rho",
+     "value": 6000.0,
+     "basis": "TARGET",
+     "link": "CAUSAL_MODELLED",
+     "mechanism": "compressed fuel density 3,000 to 6,000 g/cm3 (pellet mass /4 at the same rhoR); rate rises about 3.4x",
+     "path": "base.overrides.pulsed.rho_g_cc.optimistic",
+     "result": {
+      "departure_t": 11136.743803922445,
+      "payload_t": 990.2338712519676,
+      "fusion_TW": 9.271652097574965,
+      "burn_years": 5.685154040809533,
+      "min_round_trip_years": 6.351915811090681,
+      "drive_t": 1516.0395166435437,
+      "radiator_t": 651.9507363589862,
+      "shield_t": 233.7232622301248,
+      "structure_t": 237.77547766660092,
+      "tank_t": 660.3731837603455,
+      "propellant_t": 7036.679322990709,
+      "warm_km2": 0.4859538179354509,
+      "hot_km2": 0.04021212490294561,
+      "wing_tip_radius_m": 968.2594806635894,
+      "pellet_rate_Hz": 456.1186288760953,
+      "yield_t_TNT": 4.858337051990223,
+      "solid_angle": 0.03612998056993398,
+      "checks_ok": true,
+      "converged": true,
+      "loop_radii_m": [
+       18.69347922196609,
+       32.378055782678395,
+       56.08043766589825
+      ],
+      "xray_standoff_m": 21.585370521785595,
+      "hot_GW": 43.08551465929352,
+      "warm_GW": 11.908893195694423,
+      "ledger_sum": 0.9999999999999999
+     },
+     "delta_t": -1841.295387539114,
+     "ratio": 0.8581222201308708
+    },
+    {
+     "tech": "VTX-06B",
+     "key": "armor",
+     "value": 100.0,
+     "basis": "TARGET",
+     "link": "CAUSAL_MODELLED",
+     "mechanism": "advanced W armour (MAT-W-ADV01) at half areal mass",
+     "path": "base.overrides.pulsed.loop_armor_kg_m2.optimistic",
+     "result": {
+      "departure_t": 12667.036556198791,
+      "payload_t": 990.2338712519676,
+      "fusion_TW": 10.545627580727817,
+      "burn_years": 5.685154040809532,
+      "min_round_trip_years": 6.351915811090674,
+      "drive_t": 1869.7720137933554,
+      "radiator_t": 732.187770469323,
+      "shield_t": 355.39057345590095,
+      "structure_t": 273.3676777472008,
+      "tank_t": 751.1146350927156,
+      "propellant_t": 8003.584870757092,
+      "warm_km2": 0.5511951087720386,
+      "hot_km2": 0.043548950639391036,
+      "wing_tip_radius_m": 1096.8032793009525,
+      "pellet_rate_Hz": 129.70246889187618,
+      "yield_t_TNT": 19.432671594698682,
+      "solid_angle": 0.016834260841709615,
+      "checks_ok": true,
+      "converged": true,
+      "loop_radii_m": [
+       37.386503136675145,
+       64.75532295005455,
+       112.1595094100254
+      ],
+      "xray_standoff_m": 43.17021530003637,
+      "hot_GW": 46.66077596493509,
+      "warm_GW": 13.507710893686792,
+      "ledger_sum": 0.9999999999999999
+     },
+     "delta_t": -311.0026352627683,
+     "ratio": 0.9760362385507835
+    }
+   ],
+   "combined": {
+    "departure_t": 10970.744606331042,
+    "payload_t": 990.2338712519676,
+    "fusion_TW": 9.133453096571126,
+    "burn_years": 5.6851540408095325,
+    "min_round_trip_years": 6.351915811090677,
+    "drive_t": 1478.6833819252793,
+    "radiator_t": 642.2318299978809,
+    "shield_t": 233.67042015763985,
+    "structure_t": 236.25761100124677,
+    "tank_t": 650.5299639676198,
+    "propellant_t": 6931.7938069107695,
+    "warm_km2": 0.47871021170838585,
+    "hot_km2": 0.03961245396517552,
+    "wing_tip_radius_m": 953.5579302140387,
+    "pellet_rate_Hz": 449.3199288779513,
+    "yield_t_TNT": 4.858337101327195,
+    "solid_angle": 0.0361270551122871,
+    "checks_ok": true,
+    "converged": true,
+    "loop_radii_m": [
+     18.69347928017551,
+     32.37805588350007,
+     56.08043784052651
+    ],
+    "xray_standoff_m": 21.585370589000046,
+    "hot_GW": 42.44299375192031,
+    "warm_GW": 11.73137975773797,
+    "ledger_sum": 1.0
+   },
+   "additive_expectation_t": 10825.741168659677,
+   "multiplicative_expectation_t": 10869.865532084208,
+   "interaction_vs_product": 0.00928061841695027,
+   "combined_vs_sum_t": 145.00343767136474,
+   "ambitions": {
+    "four_burns_close": true,
+    "min_round_trip_years": 6.351915811090677,
+    "six_year_a0_g": 0.007304706549314454,
+    "six_year_departure_t": 11829.030868358179,
+    "six_year_met_at_base_a0": false,
+    "ceiling_a0_g": 0.01249409763553493,
+    "deficit_1g": 80.03779297801088,
+    "deficit_1p5g": 120.05668946701633,
+    "gain_cliff": 1160.2882767829017,
+    "nozzle_eff_cliff": 0.527578125
+   }
+  },
+  "K5": {
+   "id": "K5",
+   "name": "Structure chain (strength per mass)",
+   "base_name": "V1c",
+   "story": "The nozzle structure obeys the virial bound M >= rho W / sigma; only a stronger-per-mass material lowers it. Lighter spars and frames follow from the same material class.",
+   "base": {
+    "departure_t": 12978.03919146156,
+    "payload_t": 990.2338712519676,
+    "fusion_TW": 10.804545136718067,
+    "burn_years": 5.685154040809533,
+    "min_round_trip_years": 6.351915811090677,
+    "drive_t": 1939.9875719328131,
+    "radiator_t": 750.1681915758523,
+    "shield_t": 355.64532543439077,
+    "structure_t": 276.4603344926631,
+    "tank_t": 769.5560937507902,
+    "propellant_t": 8200.089868221285,
+    "warm_km2": 0.5647287186148566,
+    "hot_km2": 0.04461902617240483,
+    "wing_tip_radius_m": 1124.1766352069164,
+    "pellet_rate_Hz": 132.88693802016226,
+    "yield_t_TNT": 19.43267188263566,
+    "solid_angle": 0.01684162940649433,
+    "checks_ok": true,
+    "converged": true,
+    "loop_radii_m": [
+     37.386503328822386,
+     64.75532328286334,
+     112.15950998646714
+    ],
+    "xray_standoff_m": 43.170215521908894,
+    "hot_GW": 47.80731460658842,
+    "warm_GW": 13.839368570243469,
+    "ledger_sum": 1.0
+   },
+   "singles": [
+    {
+     "tech": "T06-NEW-2",
+     "key": "nozzle_kg",
+     "value": 5.35e-07,
+     "basis": "TARGET",
+     "link": "CAUSAL_MODELLED",
+     "mechanism": "hoop structure at twice the specific strength of 1.5 GPa CFRP (3 GPa at 1.6 t/m3): virial mass halves",
+     "path": "base.overrides.pulsed.nozzle_kg_per_J.optimistic",
+     "result": {
+      "departure_t": 12530.432547765948,
+      "payload_t": 990.2338712519676,
+      "fusion_TW": 10.431896381782972,
+      "burn_years": 5.6851540408095325,
+      "min_round_trip_years": 6.3519158110906755,
+      "drive_t": 1840.197099942005,
+      "radiator_t": 723.0237060527379,
+      "shield_t": 355.2764129796641,
+      "structure_t": 271.9132677051069,
+      "tank_t": 743.0144556935738,
+      "propellant_t": 7917.272514245983,
+      "warm_km2": 0.5450429001916337,
+      "hot_km2": 0.04278239814469664,
+      "wing_tip_radius_m": 1083.8346549802413,
+      "pellet_rate_Hz": 128.30428069383188,
+      "yield_t_TNT": 19.43257902725027,
+      "solid_angle": 0.01418815143117069,
+      "checks_ok": true,
+      "converged": true,
+      "loop_radii_m": [
+       37.38644083336174,
+       64.75521503755026,
+       112.1593225000852
+      ],
+      "xray_standoff_m": 43.170143358366836,
+      "hot_GW": 45.839448844645204,
+      "warm_GW": 13.356943491111496,
+      "ledger_sum": 0.9999999999999999
+     },
+     "delta_t": -447.60664369561164,
+     "ratio": 0.9655104567730002
+    },
+    {
+     "tech": "T06-NEW-2",
+     "key": "spar",
+     "value": 12.5,
+     "basis": "TARGET",
+     "link": "CAUSAL_MODELLED",
+     "mechanism": "wing spars 25 to 12.5 kg/m",
+     "path": "structure.wing_spar_kg_per_m.value",
+     "result": {
+      "departure_t": 12553.305945784326,
+      "payload_t": 990.2338712519676,
+      "fusion_TW": 10.450943971327947,
+      "burn_years": 5.6851540408095325,
+      "min_round_trip_years": 6.351915811090675,
+      "drive_t": 1844.0948452332213,
+      "radiator_t": 725.612535076601,
+      "shield_t": 355.2958567595451,
+      "structure_t": 218.39598254811386,
+      "tank_t": 744.3707749463076,
+      "propellant_t": 7931.7249223929475,
+      "warm_km2": 0.5462460050801781,
+      "hot_km2": 0.04315764112340698,
+      "wing_tip_radius_m": 1086.7931327070542,
+      "pellet_rate_Hz": 128.53793615675573,
+      "yield_t_TNT": 19.432672032765943,
+      "solid_angle": 0.01683153364340517,
+      "checks_ok": true,
+      "converged": true,
+      "loop_radii_m": [
+       37.38650340231901,
+       64.75532341016321,
+       112.15951020695698
+      ],
+      "xray_standoff_m": 43.17021560677547,
+      "hot_GW": 46.24150511247594,
+      "warm_GW": 13.386427049203007,
+      "ledger_sum": 1.0
+     },
+     "delta_t": -424.73324567723284,
+     "ratio": 0.967272926255557
+    },
+    {
+     "tech": "T06-NEW-2",
+     "key": "gallery_kg",
+     "value": 60.0,
+     "basis": "TARGET",
+     "link": "CAUSAL_MODELLED",
+     "mechanism": "driver gallery truss 120 to 60 kg/m",
+     "path": "structure.gallery_kg_per_m.value",
+     "result": {
+      "departure_t": 12656.266824880919,
+      "payload_t": 990.2338712519676,
+      "fusion_TW": 10.536661505800629,
+      "burn_years": 5.685154040809533,
+      "min_round_trip_years": 6.351915811090676,
+      "drive_t": 1867.3405122518786,
+      "radiator_t": 731.5651271837751,
+      "shield_t": 355.3816405184463,
+      "structure_t": 232.4703880359333,
+      "tank_t": 750.476024865178,
+      "propellant_t": 7996.780085892422,
+      "warm_km2": 0.5507264527408015,
+      "hot_km2": 0.04351189539386917,
+      "wing_tip_radius_m": 1095.8553668796608,
+      "pellet_rate_Hz": 129.5921897191119,
+      "yield_t_TNT": 19.432672177896738,
+      "solid_angle": 0.016834003241997894,
+      "checks_ok": true,
+      "converged": true,
+      "loop_radii_m": [
+       37.386503496785274,
+       64.75532357378358,
+       112.15951049035577
+      ],
+      "xray_standoff_m": 43.170215715855726,
+      "hot_GW": 46.62107290701438,
+      "warm_GW": 13.496225903929469,
+      "ledger_sum": 0.9999999999999999
+     },
+     "delta_t": -321.77236658064066,
+     "ratio": 0.9752063958327126
+    }
+   ],
+   "combined": {
+    "departure_t": 11810.27272999191,
+    "payload_t": 990.2338712519676,
+    "fusion_TW": 9.832345410595291,
+    "burn_years": 5.685154040809533,
+    "min_round_trip_years": 6.351915811090674,
+    "drive_t": 1677.5321344598472,
+    "radiator_t": 681.4614617770121,
+    "shield_t": 354.65490535633415,
+    "structure_t": 173.42025345059247,
+    "tank_t": 700.3112888724905,
+    "propellant_t": 7462.244205415308,
+    "warm_km2": 0.5137164120903471,
+    "hot_km2": 0.04032169740372559,
+    "wing_tip_radius_m": 1020.5034668972842,
+    "pellet_rate_Hz": 120.93026590352751,
+    "yield_t_TNT": 19.432579059103304,
+    "solid_angle": 0.01417043290198991,
+    "checks_ok": true,
+    "converged": true,
+    "loop_radii_m": [
+     37.386440819128715,
+     64.75521501289793,
+     112.15932245738611
+    ],
+    "xray_standoff_m": 43.170143341931954,
+    "hot_GW": 43.202916751324366,
+    "warm_GW": 12.589249551429415,
+    "ledger_sum": 1.0
+   },
+   "additive_expectation_t": 11783.926935508074,
+   "multiplicative_expectation_t": 11819.841043133089,
+   "interaction_vs_product": -0.0008095128442304755,
+   "combined_vs_sum_t": 26.34579448383556,
+   "ambitions": {
+    "four_burns_close": true,
+    "min_round_trip_years": 6.351915811090674,
+    "six_year_a0_g": 0.00730042823903213,
+    "six_year_departure_t": 12672.43238241507,
+    "six_year_met_at_base_a0": false,
+    "ceiling_a0_g": 0.012830850967651335,
+    "deficit_1g": 77.93715339077376,
+    "deficit_1p5g": 116.90573008616063,
+    "gain_cliff": 1107.5692434212863,
+    "nozzle_eff_cliff": 0.5284765625
+   }
+  }
+ },
+ "basis_note": "FDP-1 fdp1-v1 optimistic tier via convergence.py; base V1c = Atlas V1 at driver efficiency 0.30",
+ "grand": {
+  "overrides": {
+   "base.overrides.pulsed.gain.optimistic": 6000.0,
+   "base.overrides.pulsed.driver_efficiency.optimistic": 0.45,
+   "base.overrides.pulsed.driver_kg_per_W.optimistic": 2.5e-05,
+   "base.overrides.pulsed.house_fraction.value": 0.00025,
+   "base.overrides.radiators.warm.T_K.optimistic": 800.0,
+   "base.overrides.radiators.warm.areal_kg_m2.optimistic": 0.5,
+   "base.overrides.radiators.hot.areal_kg_m2.optimistic": 1.5,
+   "base.overrides.pulsed.nozzle_efficiency.optimistic": 0.86,
+   "base.overrides.continuous.plume_to_hardware.value": 0.01,
+   "base.overrides.pulsed.recovery_efficiency.optimistic": 0.98,
+   "base.overrides.pulsed.rho_g_cc.optimistic": 6000.0,
+   "base.overrides.pulsed.loop_armor_kg_m2.optimistic": 100.0,
+   "base.overrides.pulsed.nozzle_kg_per_J.optimistic": 5.35e-07,
+   "structure.wing_spar_kg_per_m.value": 12.5,
+   "structure.gallery_kg_per_m.value": 60.0
+  },
+  "result": {
+   "departure_t": 5730.655676549509,
+   "payload_t": 990.2338712519676,
+   "fusion_TW": 4.392219819712475,
+   "burn_years": 5.6851540408095325,
+   "min_round_trip_years": 6.351915811090672,
+   "drive_t": 589.5015883480438,
+   "radiator_t": 45.39800160705438,
+   "shield_t": 206.86415428217276,
+   "structure_t": 101.91199726557387,
+   "tank_t": 339.8094992214724,
+   "propellant_t": 3620.8776116545455,
+   "warm_km2": 0.04874246846218095,
+   "hot_km2": 0.008326878940783627,
+   "wing_tip_radius_m": 101.36357724869907,
+   "pellet_rate_Hz": 472.2739114482833,
+   "yield_t_TNT": 2.222790007754969,
+   "solid_angle": 0.04390066634847992,
+   "checks_ok": true,
+   "converged": true,
+   "loop_radii_m": [
+    14.207157861206616,
+    24.607519246761445,
+    42.62147358361984
+   ],
+   "xray_standoff_m": 16.405012831174297,
+   "hot_GW": 8.921882778768927,
+   "warm_GW": 2.0377537876637994,
+   "ledger_sum": 1.0
+  },
+  "ambitions": {
+   "four_burns_close": true,
+   "min_round_trip_years": 6.351915811090672,
+   "six_year_a0_g": 0.007317430529894294,
+   "six_year_departure_t": 5815.79767929966,
+   "six_year_met_at_base_a0": false,
+   "ceiling_a0_g": 0.03573007755156717,
+   "deficit_1g": 27.98762467158817,
+   "deficit_1p5g": 41.981437007382254,
+   "gain_cliff": 245.1745183732254,
+   "nozzle_eff_cliff": 0.5464453125
+  },
+  "product_of_chain_ratios_t": 3863.2744836949187,
+  "interaction_vs_chain_product": 0.4833674647597359
+ },
+ "downside": [
+  {
+   "case": "gain_1500",
+   "tech": "VTX-01",
+   "what": "target gain halved (3,000 to 1,500)",
+   "result": {
+    "departure_t": 34385.47741755374,
+    "payload_t": 990.2338712519676,
+    "fusion_TW": 28.65021461926364,
+    "burn_years": 5.685154040809533,
+    "min_round_trip_years": 6.3519158110906755,
+    "drive_t": 5812.378465591857,
+    "radiator_t": 2948.6261056397066,
+    "shield_t": 366.45243008887803,
+    "structure_t": 654.6481306751135,
+    "tank_t": 2038.9485109960965,
+    "propellant_t": 21726.24083082924,
+    "warm_km2": 2.406836797858338,
+    "hot_km2": 0.11986904966637854,
+    "wing_tip_radius_m": 4718.099976795398,
+    "pellet_rate_Hz": 349.4618521640394,
+    "yield_t_TNT": 19.594601222616962,
+    "solid_angle": 0.017145925842774516,
+    "checks_ok": true,
+    "converged": true,
+    "loop_radii_m": [
+     37.495175274966044,
+     64.94354861494153,
+     112.48552582489809
+    ],
+    "xray_standoff_m": 43.295699076627685,
+    "hot_GW": 128.43438910680442,
+    "warm_GW": 58.9824820945627,
+    "ledger_sum": 1.0
+   },
+   "ratio": 2.6495125272989193
+  },
+  {
+   "case": "eta_0.72",
+   "tech": "VTX-03A",
+   "what": "m = 4 ripple costs 0.07 of nozzle efficiency",
+   "result": {
+    "departure_t": 17890.53811144977,
+    "payload_t": 990.2338712519676,
+    "fusion_TW": 16.29259305587249,
+    "burn_years": 5.685154040809533,
+    "min_round_trip_years": 6.351915811090677,
+    "drive_t": 2881.9703683106723,
+    "radiator_t": 1201.3010870027326,
+    "shield_t": 417.54724616609883,
+    "structure_t": 379.6333965147095,
+    "tank_t": 1060.8515248415633,
+    "propellant_t": 11304.020441026616,
+    "warm_km2": 0.850738205223395,
+    "hot_km2": 0.08735573673034012,
+    "wing_tip_radius_m": 1740.3831903455737,
+    "pellet_rate_Hz": 73.85535721413474,
+    "yield_t_TNT": 52.72499322510675,
+    "solid_angle": 0.013550984992579972,
+    "checks_ok": true,
+    "converged": true,
+    "loop_radii_m": [
+     52.93030788596149,
+     91.67798251874892,
+     158.7909236578844
+    ],
+    "xray_standoff_m": 61.11865501249928,
+    "hot_GW": 93.597811221181,
+    "warm_GW": 20.84838116211265,
+    "ledger_sum": 1.0
+   },
+   "ratio": 1.3785239701865142
+  },
+  {
+   "case": "warm_600",
+   "tech": "VTX-07A",
+   "what": "warm loop held at the 600 K core limit",
+   "result": {
+    "departure_t": 19865.043320998982,
+    "payload_t": 990.2338712519676,
+    "fusion_TW": 16.538150277918753,
+    "burn_years": 5.6851540408095325,
+    "min_round_trip_years": 6.351915811090675,
+    "drive_t": 2757.8200141443663,
+    "radiator_t": 1885.393390568271,
+    "shield_t": 360.12126120427126,
+    "structure_t": 482.221656743327,
+    "tank_t": 1177.9333470062707,
+    "propellant_t": 12551.598748096842,
+    "warm_km2": 1.6014599940800056,
+    "hot_km2": 0.06832133572906965,
+    "wing_tip_radius_m": 3111.8684534296226,
+    "pellet_rate_Hz": 203.4054702726437,
+    "yield_t_TNT": 19.43267689059361,
+    "solid_angle": 0.016979411383290174,
+    "checks_ok": true,
+    "converged": true,
+    "loop_radii_m": [
+     37.38650668917506,
+     64.7553291031649,
+     112.15952006752514
+    ],
+    "xray_standoff_m": 43.17021940210993,
+    "hot_GW": 73.20329177336548,
+    "warm_GW": 21.183871693309506,
+    "ledger_sum": 1.0
+   },
+   "ratio": 1.5306659987641649
+  },
+  {
+   "case": "house_1e-3",
+   "tech": "VTX-07C",
+   "what": "house load at the unsourced FDP-1 0.1 %",
+   "result": {
+    "departure_t": 15585.089918059779,
+    "payload_t": 990.2338712519676,
+    "fusion_TW": 12.981663878281996,
+    "burn_years": 5.685154040809533,
+    "min_round_trip_years": 6.3519158110906755,
+    "drive_t": 2249.2647076400835,
+    "radiator_t": 1180.214025046958,
+    "shield_t": 357.8927941246374,
+    "structure_t": 352.12493582167644,
+    "tank_t": 924.1458392505275,
+    "propellant_t": 9847.337956606003,
+    "warm_km2": 0.9433870805641155,
+    "hot_km2": 0.05390381816658834,
+    "wing_tip_radius_m": 1851.3428094214287,
+    "pellet_rate_Hz": 158.83238901566418,
+    "yield_t_TNT": 19.534379295992103,
+    "solid_angle": 0.016875814760452013,
+    "checks_ok": true,
+    "converged": true,
+    "loop_radii_m": [
+     37.45482923913067,
+     64.87366723099068,
+     112.36448771739197
+    ],
+    "xray_standoff_m": 43.24911148732712,
+    "hot_GW": 57.755558887123335,
+    "warm_GW": 23.118855269758004,
+    "ledger_sum": 1.0
+   },
+   "ratio": 1.200881711646659
+  },
+  {
+   "case": "recovery_0.90",
+   "tech": "VTX-02C",
+   "what": "recovery at the central tier 0.90",
+   "result": {
+    "departure_t": 13008.871518552722,
+    "payload_t": 990.2338712519676,
+    "fusion_TW": 10.831213806572402,
+    "burn_years": 5.685154040809533,
+    "min_round_trip_years": 6.351915811090677,
+    "drive_t": 1943.5236909436535,
+    "radiator_t": 755.3756874036358,
+    "shield_t": 355.7274303626127,
+    "structure_t": 276.9751274506911,
+    "tank_t": 771.3843519212772,
+    "propellant_t": 8219.571074069412,
+    "warm_km2": 0.5661219631056397,
+    "hot_km2": 0.04567848694446545,
+    "wing_tip_radius_m": 1128.7740208917216,
+    "pellet_rate_Hz": 133.09036414259057,
+    "yield_t_TNT": 19.450861418718436,
+    "solid_angle": 0.016838215613168627,
+    "checks_ok": true,
+    "converged": true,
+    "loop_radii_m": [
+     37.398740121275374,
+     64.77651802911359,
+     112.19622036382609
+    ],
+    "xray_standoff_m": 43.18434535274239,
+    "hot_GW": 48.9424800009996,
+    "warm_GW": 13.873511732049906,
+    "ledger_sum": 1.0
+   },
+   "ratio": 1.0023757307738328
+  }
+ ],
+ "one_g": {
+  "1": {
+   "closes_at_any_scale": true,
+   "scale": 0.01553457722823584,
+   "reduction_factor": 64.37252751123394,
+   "result": {
+    "departure_t": 40272.155751549704,
+    "payload_t": 990.2338712519676,
+    "fusion_TW": 4418.248142419512,
+    "burn_years": 0.04524208840015852,
+    "min_round_trip_years": 0.04675618386362481,
+    "drive_t": 9707.316675104339,
+    "radiator_t": 620.3277682934432,
+    "shield_t": 423.3494505643465,
+    "structure_t": 5168.0710233161735,
+    "tank_t": 2490.7490766482742,
+    "propellant_t": 25445.70034639585,
+    "warm_km2": 47.96957752291607,
+    "hot_km2": 5.863452461162281,
+    "wing_tip_radius_m": 100887.40482506836,
+    "pellet_rate_Hz": 1000.0,
+    "yield_t_TNT": 1055.9866497178568,
+    "solid_angle": 0.00737529285305718,
+    "checks_ok": true,
+    "converged": true,
+    "loop_radii_m": [
+     104.66279757595812,
+     181.28128306385622,
+     313.98839272787427
+    ],
+    "xray_standoff_m": 120.85418870923748,
+    "hot_GW": 6282.430176948261,
+    "warm_GW": 2005.4418943882245,
+    "ledger_sum": 1.0
+   }
+  },
+  "1.5": {
+   "closes_at_any_scale": false,
+   "reason": "integration diverged (RuntimeError: FDP-1 integration did not converge)",
+   "tested_scale_min": 1e-05
+  }
+ },
+ "reproduce": {
+  "V0_departure_t": 20760.22471499818,
+  "target_t": 20760.0,
+  "within_1pct": true
+ },
+ "elasticities": {
+  "base": "V1c",
+  "departure_t": 12978.03919146156,
+  "rows": [
+   {
+    "lever": "gain",
+    "path": "base.overrides.pulsed.gain.optimistic",
+    "value": 3000.0,
+    "tech": "VTX-01/01A",
+    "elasticity": -0.6291862355907493,
+    "up_t": 12279.301357243312,
+    "down_t": 13843.983512967858
+   },
+   {
+    "lever": "driver",
+    "path": "base.overrides.pulsed.driver_efficiency.optimistic",
+    "value": 0.3,
+    "tech": "VTX-01B",
+    "elasticity": -0.7417076594808614,
+    "up_t": 12162.882345091544,
+    "down_t": 14010.02947474083
+   },
+   {
+    "lever": "driver_kg",
+    "path": "base.overrides.pulsed.driver_kg_per_W.optimistic",
+    "value": 5e-05,
+    "tech": "VTX-01B",
+    "elasticity": 0.3660991569587291,
+    "up_t": 13469.298444269409,
+    "down_t": 12561.379066278441
+   },
+   {
+    "lever": "house",
+    "path": "base.overrides.pulsed.house_fraction.value",
+    "value": 0.0005,
+    "tech": "VTX-07C/01C",
+    "elasticity": 0.16785477933769208,
+    "up_t": 13199.04909786534,
+    "down_t": 12783.410179453074
+   },
+   {
+    "lever": "warm",
+    "path": "base.overrides.radiators.warm.T_K.optimistic",
+    "value": 700.0,
+    "tech": "VTX-07A",
+    "elasticity": -1.7362760750530213,
+    "up_t": 11492.358940678954,
+    "down_t": 16001.011586487712
+   },
+   {
+    "lever": "warm_areal",
+    "path": "base.overrides.radiators.warm.areal_kg_m2.optimistic",
+    "value": 1.0,
+    "tech": "VTX-07B",
+    "elasticity": 0.34438380065465013,
+    "up_t": 13439.198706690435,
+    "down_t": 12585.296012350032
+   },
+   {
+    "lever": "hot_areal",
+    "path": "base.overrides.radiators.hot.areal_kg_m2.optimistic",
+    "value": 3.0,
+    "tech": "T06-NEW-1",
+    "elasticity": 0.08150590359627395,
+    "up_t": 13084.478830379834,
+    "down_t": 12882.760483795719
+   },
+   {
+    "lever": "eta",
+    "path": "base.overrides.pulsed.nozzle_efficiency.optimistic",
+    "value": 0.79,
+    "tech": "VTX-03",
+    "elasticity": -2.8670702587166152,
+    "up_t": 10475.880811837062,
+    "down_t": 18094.309798317565
+   },
+   {
+    "lever": "ptw",
+    "path": "base.overrides.continuous.plume_to_hardware.value",
+    "value": 0.02,
+    "tech": "VTX-03/03B",
+    "elasticity": 0.0947839792641107,
+    "up_t": 13101.974442349172,
+    "down_t": 12867.376869971567
+   },
+   {
+    "lever": "recovery",
+    "path": "base.overrides.pulsed.recovery_efficiency.optimistic",
+    "value": 0.95,
+    "tech": "VTX-02C",
+    "elasticity": -0.04273535905111835,
+    "up_t": 12927.898744538177,
+    "down_t": 13033.642496462111
+   },
+   {
+    "lever": "rho",
+    "path": "base.overrides.pulsed.rho_g_cc.optimistic",
+    "value": 3000.0,
+    "tech": "VTX-01A",
+    "elasticity": -0.33900283028238176,
+    "up_t": 12590.746336465432,
+    "down_t": 13431.235043073975
+   },
+   {
+    "lever": "armor",
+    "path": "base.overrides.pulsed.loop_armor_kg_m2.optimistic",
+    "value": 200.0,
+    "tech": "VTX-06B",
+    "elasticity": 0.04800463449729111,
+    "up_t": 13040.262075598916,
+    "down_t": 12921.479361035694
+   },
+   {
+    "lever": "nozzle_kg",
+    "path": "base.overrides.pulsed.nozzle_kg_per_J.optimistic",
+    "value": 1.07e-06,
+    "tech": "T06-NEW-2",
+    "elasticity": 0.06663792596008493,
+    "up_t": 13064.000876071666,
+    "down_t": 12899.104331855915
+   },
+   {
+    "lever": "spar",
+    "path": "structure.wing_spar_kg_per_m.value",
+    "value": 25.0,
+    "tech": "T06-NEW-2",
+    "elasticity": 0.06783896690006615,
+    "up_t": 13066.529210522942,
+    "down_t": 12898.647361912266
+   },
+   {
+    "lever": "gallery_kg",
+    "path": "structure.gallery_kg_per_m.value",
+    "value": 120.0,
+    "tech": "T06-NEW-2",
+    "elasticity": 0.049644295933690394,
+    "up_t": 13042.382687983785,
+    "down_t": 12919.54198611155
+   }
+  ]
+ },
+ "ve_gate": {
+  "ve_km_s": 19201.172079999997,
+  "eps_J_kg": 352037604163250.94,
+  "gate_eta_jet_times_b": 0.5236443562926882,
+  "note": "With burn fraction capped at 0.999 and about 1.2 % of fusion escaping as radiation, the lowest nozzle efficiency that can reach the mission ve is about gate / 0.988; the Atlas bisection (0.40-0.86, 9 steps) lands at 0.528 for every generation because it hits this gate, which no mass or thermal improvement moves."
+ },
+ "floor": {
+  "departure_t": 4228.017441777915,
+  "payload_t": 990.2338712519676,
+  "fusion_TW": 3.240527127331769,
+  "burn_years": 5.685154040809533,
+  "min_round_trip_years": 6.351915811090678,
+  "drive_t": 208.76923335645984,
+  "radiator_t": 0.0032582013624323997,
+  "shield_t": 206.22859813778894,
+  "structure_t": 2.202649540117155,
+  "tank_t": 250.7078719497761,
+  "propellant_t": 2671.445391365126,
+  "warm_km2": 0.035797105715825055,
+  "hot_km2": 0.005742591992696754,
+  "wing_tip_radius_m": 77.09860490313976,
+  "pellet_rate_Hz": 348.4441511992145,
+  "yield_t_TNT": 2.222750959849508,
+  "solid_angle": 0.03480413259928899,
+  "checks_ok": true,
+  "converged": true,
+  "loop_radii_m": [
+   14.207069972301573,
+   24.607367018712488,
+   42.621209916904704
+  ],
+  "xray_standoff_m": 16.404911345808326,
+  "hot_GW": 6.152933526413906,
+  "warm_GW": 1.4965530072901863,
+  "ledger_sum": 0.9999999999999999
+ },
+ "consistency": {
+  "bound_at_3000": 1787.0,
+  "checks": {
+   "K1": {
+    "rho": 3000.0,
+    "gain": 6000.0,
+    "coupling_needed": 3.357582540570789,
+    "possible": false
+   },
+   "K2": {
+    "rho": 3000.0,
+    "gain": 3000.0,
+    "coupling_needed": 1.6787912702853944,
+    "possible": false
+   },
+   "K3": {
+    "rho": 3000.0,
+    "gain": 3000.0,
+    "coupling_needed": 1.6787912702853944,
+    "possible": false
+   },
+   "K4": {
+    "rho": 6000.0,
+    "gain": 3000.0,
+    "coupling_needed": 2.664915028486065,
+    "possible": false
+   },
+   "K5": {
+    "rho": 3000.0,
+    "gain": 3000.0,
+    "coupling_needed": 1.6787912702853944,
+    "possible": false
+   },
+   "grand (all chains)": {
+    "rho": 6000.0,
+    "gain": 6000.0,
+    "coupling_needed": 5.32983005697213,
+    "possible": false
+   },
+   "V0-V2 (Atlas)": {
+    "rho": 3000.0,
+    "gain": 3000.0,
+    "coupling_needed": 1.6787912702853944,
+    "possible": false
+   },
+   "V3 (proposal)": {
+    "rho": 2000.0,
+    "gain": 702.0,
+    "coupling_needed": 0.299790859269703,
+    "possible": true
+   },
+   "V4 (proposal)": {
+    "rho": 3000.0,
+    "gain": 894.0,
+    "coupling_needed": 0.5002797985450476,
+    "possible": true
+   }
+  },
+  "frontier": {
+   "V1c": {
+    "0.1": {
+     "rows": [
+      {
+       "rho": 500.0,
+       "gain": 590.0543993774698,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      },
+      {
+       "rho": 1000.0,
+       "gain": 371.7109791793753,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      },
+      {
+       "rho": 1500.0,
+       "gain": 283.6685679867173,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      },
+      {
+       "rho": 2000.0,
+       "gain": 234.16324357256497,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      },
+      {
+       "rho": 3000.0,
+       "gain": 178.70000000000002,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      },
+      {
+       "rho": 6000.0,
+       "gain": 112.57394580810693,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      }
+     ],
+     "best": null
+    },
+    "0.2": {
+     "rows": [
+      {
+       "rho": 500.0,
+       "gain": 1180.1087987549397,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      },
+      {
+       "rho": 1000.0,
+       "gain": 743.4219583587505,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      },
+      {
+       "rho": 1500.0,
+       "gain": 567.3371359734346,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      },
+      {
+       "rho": 2000.0,
+       "gain": 468.32648714512993,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      },
+      {
+       "rho": 3000.0,
+       "gain": 357.40000000000003,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      },
+      {
+       "rho": 6000.0,
+       "gain": 225.14789161621385,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      }
+     ],
+     "best": null
+    },
+    "0.3": {
+     "rows": [
+      {
+       "rho": 500.0,
+       "gain": 1770.1631981324094,
+       "departure_t": 160807.5140754764,
+       "converged": true,
+       "rate_Hz": 45.50182698319421,
+       "loop3_r_m": 674.3102744233288,
+       "wing_tip_m": 19637.569481150524,
+       "yield_t_TNT": 703.6055734851884
+      },
+      {
+       "rho": 1000.0,
+       "gain": 1115.1329375381258,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      },
+      {
+       "rho": 1500.0,
+       "gain": 851.0057039601517,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      },
+      {
+       "rho": 2000.0,
+       "gain": 702.4897307176948,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      },
+      {
+       "rho": 3000.0,
+       "gain": 536.1,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      },
+      {
+       "rho": 6000.0,
+       "gain": 337.72183742432077,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      }
+     ],
+     "best": {
+      "rho": 500.0,
+      "gain": 1770.1631981324094,
+      "departure_t": 160807.5140754764,
+      "converged": true,
+      "rate_Hz": 45.50182698319421,
+      "loop3_r_m": 674.3102744233288,
+      "wing_tip_m": 19637.569481150524,
+      "yield_t_TNT": 703.6055734851884
+     }
+    },
+    "0.5": {
+     "rows": [
+      {
+       "rho": 500.0,
+       "gain": 2950.271996887349,
+       "departure_t": 83691.52906225873,
+       "converged": true,
+       "rate_Hz": 23.80155670085551,
+       "loop3_r_m": 672.9852355372187,
+       "wing_tip_m": 7391.1122480850145,
+       "yield_t_TNT": 699.6599290794334
+      },
+      {
+       "rho": 1000.0,
+       "gain": 1858.5548958968764,
+       "departure_t": 50324.18178985717,
+       "converged": true,
+       "rate_Hz": 56.99272378837864,
+       "loop3_r_m": 337.0767651363743,
+       "wing_tip_m": 5934.942037266437,
+       "yield_t_TNT": 175.78451584063603
+      },
+      {
+       "rho": 1500.0,
+       "gain": 1418.3428399335862,
+       "departure_t": 66556.11271544264,
+       "converged": true,
+       "rate_Hz": 168.95957898868332,
+       "loop3_r_m": 225.04539832011002,
+       "wing_tip_m": 9517.905479744912,
+       "yield_t_TNT": 78.45248465038875
+      },
+      {
+       "rho": 2000.0,
+       "gain": 1170.8162178628247,
+       "departure_t": 626534.3898993587,
+       "converged": true,
+       "rate_Hz": 1000.0,
+       "loop3_r_m": 235.63201346492352,
+       "wing_tip_m": 103309.98955211433,
+       "yield_t_TNT": 124.37981864317189
+      },
+      {
+       "rho": 3000.0,
+       "gain": 893.5,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      },
+      {
+       "rho": 6000.0,
+       "gain": 562.8697290405346,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      }
+     ],
+     "best": {
+      "rho": 1000.0,
+      "gain": 1858.5548958968764,
+      "departure_t": 50324.18178985717,
+      "converged": true,
+      "rate_Hz": 56.99272378837864,
+      "loop3_r_m": 337.0767651363743,
+      "wing_tip_m": 5934.942037266437,
+      "yield_t_TNT": 175.78451584063603
+     }
+    },
+    "1": {
+     "rows": [
+      {
+       "rho": 500.0,
+       "gain": 5900.543993774698,
+       "departure_t": 60759.85821132958,
+       "converged": true,
+       "rate_Hz": 17.345592520586887,
+       "loop3_r_m": 671.9945220158686,
+       "wing_tip_m": 3826.803862134095,
+       "yield_t_TNT": 696.7193695545134
+      },
+      {
+       "rho": 1000.0,
+       "gain": 3717.1097917937527,
+       "departure_t": 26696.750907744627,
+       "converged": true,
+       "rate_Hz": 30.417318739699834,
+       "loop3_r_m": 336.28860679765256,
+       "wing_tip_m": 2069.12648715044,
+       "yield_t_TNT": 174.61197091130902
+      },
+      {
+       "rho": 1500.0,
+       "gain": 2836.6856798671724,
+       "departure_t": 20373.402950553744,
+       "converged": true,
+       "rate_Hz": 52.13084320349104,
+       "loop3_r_m": 224.3555141186053,
+       "wing_tip_m": 1829.3922591654405,
+       "yield_t_TNT": 77.76684670091683
+      },
+      {
+       "rho": 2000.0,
+       "gain": 2341.6324357256494,
+       "departure_t": 18931.72918700895,
+       "converged": true,
+       "rate_Hz": 85.97498558441363,
+       "loop3_r_m": 168.37595276997453,
+       "wing_tip_m": 1909.8790189872411,
+       "yield_t_TNT": 43.825148821897265
+      },
+      {
+       "rho": 3000.0,
+       "gain": 1787.0,
+       "departure_t": 22510.29744787025,
+       "converged": true,
+       "rate_Hz": 229.32442517145583,
+       "loop3_r_m": 112.38061968700929,
+       "wing_tip_m": 2722.6829699154723,
+       "yield_t_TNT": 19.542398614522078
+      },
+      {
+       "rho": 6000.0,
+       "gain": 1125.7394580810692,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      }
+     ],
+     "best": {
+      "rho": 2000.0,
+      "gain": 2341.6324357256494,
+      "departure_t": 18931.72918700895,
+      "converged": true,
+      "rate_Hz": 85.97498558441363,
+      "loop3_r_m": 168.37595276997453,
+      "wing_tip_m": 1909.8790189872411,
+      "yield_t_TNT": 43.825148821897265
+     }
+    }
+   },
+   "grand_levers": {
+    "0.1": {
+     "rows": [
+      {
+       "rho": 500.0,
+       "gain": 590.0543993774698,
+       "departure_t": 37286.379639684,
+       "converged": true,
+       "rate_Hz": 21.024889878518824,
+       "loop3_r_m": 514.4782184959475,
+       "wing_tip_m": 3040.124410031113,
+       "yield_t_TNT": 325.4793026916402
+      },
+      {
+       "rho": 1000.0,
+       "gain": 371.7109791793753,
+       "departure_t": 30524.759590014855,
+       "converged": true,
+       "rate_Hz": 68.18045358752666,
+       "loop3_r_m": 258.2363674381794,
+       "wing_tip_m": 3772.6572112050612,
+       "yield_t_TNT": 82.2689880518968
+      },
+      {
+       "rho": 1500.0,
+       "gain": 283.6685679867173,
+       "departure_t": 55823.84209203928,
+       "converged": true,
+       "rate_Hz": 278.2571647917504,
+       "loop3_r_m": 172.71871821348904,
+       "wing_tip_m": 8893.169084565938,
+       "yield_t_TNT": 36.903537552630844
+      },
+      {
+       "rho": 2000.0,
+       "gain": 234.16324357256497,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      },
+      {
+       "rho": 3000.0,
+       "gain": 178.70000000000002,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      },
+      {
+       "rho": 6000.0,
+       "gain": 112.57394580810693,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      }
+     ],
+     "best": {
+      "rho": 1000.0,
+      "gain": 371.7109791793753,
+      "departure_t": 30524.759590014855,
+      "converged": true,
+      "rate_Hz": 68.18045358752666,
+      "loop3_r_m": 258.2363674381794,
+      "wing_tip_m": 3772.6572112050612,
+      "yield_t_TNT": 82.2689880518968
+     }
+    },
+    "0.2": {
+     "rows": [
+      {
+       "rho": 500.0,
+       "gain": 1180.1087987549397,
+       "departure_t": 26501.288582050693,
+       "converged": true,
+       "rate_Hz": 15.06759035254385,
+       "loop3_r_m": 512.7918013236033,
+       "wing_tip_m": 1207.955214025681,
+       "yield_t_TNT": 322.4584571050032
+      },
+      {
+       "rho": 1000.0,
+       "gain": 743.4219583587505,
+       "departure_t": 15074.971689585962,
+       "converged": true,
+       "rate_Hz": 34.11789119646499,
+       "loop3_r_m": 256.89099387007934,
+       "wing_tip_m": 996.7777723327498,
+       "yield_t_TNT": 81.05747905822328
+      },
+      {
+       "rho": 1500.0,
+       "gain": 567.3371359734346,
+       "departure_t": 13262.300154023404,
+       "converged": true,
+       "rate_Hz": 67.25952616442127,
+       "loop3_r_m": 171.53834858720077,
+       "wing_tip_m": 1109.162686570255,
+       "yield_t_TNT": 36.19169014628338
+      },
+      {
+       "rho": 2000.0,
+       "gain": 468.32648714512993,
+       "departure_t": 14027.19808460238,
+       "converged": true,
+       "rate_Hz": 126.0078530124092,
+       "loop3_r_m": 128.84026668493138,
+       "wing_tip_m": 1396.1678799902327,
+       "yield_t_TNT": 20.4417572285224
+      },
+      {
+       "rho": 3000.0,
+       "gain": 357.40000000000003,
+       "departure_t": 19022.185977800033,
+       "converged": true,
+       "rate_Hz": 381.9823682409335,
+       "loop3_r_m": 86.11552988635137,
+       "wing_tip_m": 2436.799993927684,
+       "yield_t_TNT": 9.152085185333974
+      },
+      {
+       "rho": 6000.0,
+       "gain": 225.14789161621385,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      }
+     ],
+     "best": {
+      "rho": 1500.0,
+      "gain": 567.3371359734346,
+      "departure_t": 13262.300154023404,
+      "converged": true,
+      "rate_Hz": 67.25952616442127,
+      "loop3_r_m": 171.53834858720077,
+      "wing_tip_m": 1109.162686570255,
+      "yield_t_TNT": 36.19169014628338
+     }
+    },
+    "0.3": {
+     "rows": [
+      {
+       "rho": 500.0,
+       "gain": 1770.1631981324094,
+       "departure_t": 24131.76162631524,
+       "converged": true,
+       "rate_Hz": 13.758193385279014,
+       "loop3_r_m": 512.2318192273433,
+       "wing_tip_m": 811.1201466642517,
+       "yield_t_TNT": 321.45945806460196
+      },
+      {
+       "rho": 1000.0,
+       "gain": 1115.1329375381258,
+       "departure_t": 12867.56278482125,
+       "converged": true,
+       "rate_Hz": 29.249764345216093,
+       "loop3_r_m": 256.4452807743788,
+       "wing_tip_m": 606.4512136542971,
+       "yield_t_TNT": 80.65871360635734
+      },
+      {
+       "rho": 1500.0,
+       "gain": 851.0057039601517,
+       "departure_t": 10627.972603546774,
+       "converged": true,
+       "rate_Hz": 54.20986297389539,
+       "loop3_r_m": 171.14807804448614,
+       "wing_tip_m": 627.3619475822509,
+       "yield_t_TNT": 35.95832812103457
+      },
+      {
+       "rho": 2000.0,
+       "gain": 702.4897307176948,
+       "departure_t": 10259.118893687611,
+       "converged": true,
+       "rate_Hz": 92.80256510226926,
+       "loop3_r_m": 128.4849062684982,
+       "wing_tip_m": 713.5375460989653,
+       "yield_t_TNT": 20.282032538616235
+      },
+      {
+       "rho": 3000.0,
+       "gain": 536.1,
+       "departure_t": 11074.144551790032,
+       "converged": true,
+       "rate_Hz": 224.42013178139572,
+       "loop3_r_m": 85.80391810986733,
+       "wing_tip_m": 976.372021917257,
+       "yield_t_TNT": 9.058336019576494
+      },
+      {
+       "rho": 6000.0,
+       "gain": 337.72183742432077,
+       "departure_t": 19898.81347580443,
+       "converged": true,
+       "rate_Hz": 819.5656896555205,
+       "loop3_r_m": 53.26085852326088,
+       "wing_tip_m": 2684.124603041464,
+       "yield_t_TNT": 4.449036086119522
+      }
+     ],
+     "best": {
+      "rho": 2000.0,
+      "gain": 702.4897307176948,
+      "departure_t": 10259.118893687611,
+      "converged": true,
+      "rate_Hz": 92.80256510226926,
+      "loop3_r_m": 128.4849062684982,
+      "wing_tip_m": 713.5375460989653,
+      "yield_t_TNT": 20.282032538616235
+     }
+    },
+    "0.5": {
+     "rows": [
+      {
+       "rho": 500.0,
+       "gain": 2950.271996887349,
+       "departure_t": 22510.314286329885,
+       "converged": true,
+       "rate_Hz": 12.86203219886795,
+       "loop3_r_m": 511.7846126668675,
+       "wing_tip_m": 541.2089793255104,
+       "yield_t_TNT": 320.6631105486234
+      },
+      {
+       "rho": 1000.0,
+       "gain": 1858.5548958968764,
+       "departure_t": 11705.546171245218,
+       "converged": true,
+       "rate_Hz": 26.701515179680772,
+       "loop3_r_m": 256.0897305863255,
+       "wing_tip_m": 375.94033457719433,
+       "yield_t_TNT": 80.34153877011465
+      },
+      {
+       "rho": 1500.0,
+       "gain": 1418.3428399335862,
+       "departure_t": 9121.64998357917,
+       "converged": true,
+       "rate_Hz": 46.740387743760095,
+       "loop3_r_m": 170.83696628844552,
+       "wing_tip_m": 359.3585997052068,
+       "yield_t_TNT": 35.77300844097905
+      },
+      {
+       "rho": 2000.0,
+       "gain": 1170.8162178628247,
+       "departure_t": 8439.90793027171,
+       "converged": true,
+       "rate_Hz": 76.77169574972598,
+       "loop3_r_m": 128.20186028678745,
+       "wing_tip_m": 386.3614364958883,
+       "yield_t_TNT": 20.155399159118193
+      },
+      {
+       "rho": 3000.0,
+       "gain": 893.5,
+       "departure_t": 8297.057431137986,
+       "converged": true,
+       "rate_Hz": 169.37212533851476,
+       "loop3_r_m": 85.55605866220544,
+       "wing_tip_m": 473.0491974758801,
+       "yield_t_TNT": 8.984218841091677
+      },
+      {
+       "rho": 6000.0,
+       "gain": 562.8697290405346,
+       "departure_t": 9689.635351692164,
+       "converged": true,
+       "rate_Hz": 786.098707078239,
+       "loop3_r_m": 42.887928732616,
+       "wing_tip_m": 821.2504995445526,
+       "yield_t_TNT": 2.262481249151695
+      }
+     ],
+     "best": {
+      "rho": 3000.0,
+      "gain": 893.5,
+      "departure_t": 8297.057431137986,
+      "converged": true,
+      "rate_Hz": 169.37212533851476,
+      "loop3_r_m": 85.55605866220544,
+      "wing_tip_m": 473.0491974758801,
+      "yield_t_TNT": 8.984218841091677
+     }
+    },
+    "1": {
+     "rows": [
+      {
+       "rho": 500.0,
+       "gain": 5900.543993774698,
+       "departure_t": 21425.12687243014,
+       "converged": true,
+       "rate_Hz": 12.262181475265143,
+       "loop3_r_m": 511.4496486117284,
+       "wing_tip_m": 361.41933578265446,
+       "yield_t_TNT": 320.06748230299627
+      },
+      {
+       "rho": 1000.0,
+       "gain": 3717.1097917937527,
+       "departure_t": 10845.41004021286,
+       "converged": true,
+       "rate_Hz": 24.80434597262673,
+       "loop3_r_m": 255.8236051777244,
+       "wing_tip_m": 226.37842135607232,
+       "yield_t_TNT": 80.10467371225502
+      },
+      {
+       "rho": 1500.0,
+       "gain": 2836.6856798671724,
+       "departure_t": 8242.640742239219,
+       "converged": true,
+       "rate_Hz": 42.38151924020903,
+       "loop3_r_m": 170.6042880755017,
+       "wing_tip_m": 203.48559001615098,
+       "yield_t_TNT": 35.6348200039679
+      },
+      {
+       "rho": 2000.0,
+       "gain": 2341.6324357256494,
+       "departure_t": 7447.511815386716,
+       "converged": true,
+       "rate_Hz": 68.02707784778327,
+       "loop3_r_m": 127.99029507896594,
+       "wing_tip_m": 208.30890372912313,
+       "yield_t_TNT": 20.06108569810694
+      },
+      {
+       "rho": 3000.0,
+       "gain": 1787.0,
+       "departure_t": 6982.588440155474,
+       "converged": true,
+       "rate_Hz": 143.319039053052,
+       "loop3_r_m": 85.3709899934118,
+       "wing_tip_m": 235.22973518790494,
+       "yield_t_TNT": 8.929138341518803
+      },
+      {
+       "rho": 6000.0,
+       "gain": 1125.7394580810692,
+       "departure_t": 7014.683060924647,
+       "converged": true,
+       "rate_Hz": 574.0439500395621,
+       "loop3_r_m": 42.74054763828985,
+       "wing_tip_m": 334.7189592233964,
+       "yield_t_TNT": 2.24047032048535
+      }
+     ],
+     "best": {
+      "rho": 3000.0,
+      "gain": 1787.0,
+      "departure_t": 6982.588440155474,
+      "converged": true,
+      "rate_Hz": 143.319039053052,
+      "loop3_r_m": 85.3709899934118,
+      "wing_tip_m": 235.22973518790494,
+      "yield_t_TNT": 8.929138341518803
+     }
+    }
+   },
+   "grand_levers_T01_early": {
+    "0.1": {
+     "rows": [
+      {
+       "rho": 500.0,
+       "gain": 590.0543993774698,
+       "departure_t": 51752.60465469139,
+       "converged": true,
+       "rate_Hz": 29.22800286602625,
+       "loop3_r_m": 514.1570840173817,
+       "wing_tip_m": 10045.526774954738,
+       "yield_t_TNT": 324.90263542812977
+      },
+      {
+       "rho": 1000.0,
+       "gain": 371.7109791793753,
+       "departure_t": 106289.64099102569,
+       "converged": true,
+       "rate_Hz": 237.78473351683607,
+       "loop3_r_m": 258.0747638734142,
+       "wing_tip_m": 32431.293858957422,
+       "yield_t_TNT": 82.12284006040043
+      },
+      {
+       "rho": 1500.0,
+       "gain": 283.6685679867173,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      },
+      {
+       "rho": 2000.0,
+       "gain": 234.16324357256497,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      },
+      {
+       "rho": 3000.0,
+       "gain": 178.70000000000002,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      },
+      {
+       "rho": 6000.0,
+       "gain": 112.57394580810693,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      }
+     ],
+     "best": {
+      "rho": 500.0,
+      "gain": 590.0543993774698,
+      "departure_t": 51752.60465469139,
+      "converged": true,
+      "rate_Hz": 29.22800286602625,
+      "loop3_r_m": 514.1570840173817,
+      "wing_tip_m": 10045.526774954738,
+      "yield_t_TNT": 324.90263542812977
+     }
+    },
+    "0.2": {
+     "rows": [
+      {
+       "rho": 500.0,
+       "gain": 1180.1087987549397,
+       "departure_t": 29375.194059083493,
+       "converged": true,
+       "rate_Hz": 16.727812490603213,
+       "loop3_r_m": 512.4724877871976,
+       "wing_tip_m": 2931.647889618751,
+       "yield_t_TNT": 321.8885568519509
+      },
+      {
+       "rho": 1000.0,
+       "gain": 743.4219583587505,
+       "departure_t": 18365.102527988856,
+       "converged": true,
+       "rate_Hz": 41.62954722191222,
+       "loop3_r_m": 256.73080434205025,
+       "wing_tip_m": 2841.7815813866723,
+       "yield_t_TNT": 80.91401401581611
+      },
+      {
+       "rho": 1500.0,
+       "gain": 567.3371359734346,
+       "departure_t": 18296.66034089401,
+       "converged": true,
+       "rate_Hz": 92.93736112145454,
+       "loop3_r_m": 171.43125535469602,
+       "wing_tip_m": 3680.6906081189272,
+       "yield_t_TNT": 36.12755518702132
+      },
+      {
+       "rho": 2000.0,
+       "gain": 468.32648714512993,
+       "departure_t": 23197.09745038146,
+       "converged": true,
+       "rate_Hz": 208.71068427405748,
+       "loop3_r_m": 128.7597470669859,
+       "wing_tip_m": 5634.885626077996,
+       "yield_t_TNT": 20.405493759293876
+      },
+      {
+       "rho": 3000.0,
+       "gain": 357.40000000000003,
+       "departure_t": 87664.66438491168,
+       "converged": true,
+       "rate_Hz": 595.3304884880788,
+       "loop3_r_m": 121.6229564166288,
+       "wing_tip_m": 27672.974083585406,
+       "yield_t_TNT": 26.928594983489262
+      },
+      {
+       "rho": 6000.0,
+       "gain": 225.14789161621385,
+       "departure_t": null,
+       "converged": false,
+       "rate_Hz": null,
+       "loop3_r_m": null,
+       "wing_tip_m": null,
+       "yield_t_TNT": null
+      }
+     ],
+     "best": {
+      "rho": 1500.0,
+      "gain": 567.3371359734346,
+      "departure_t": 18296.66034089401,
+      "converged": true,
+      "rate_Hz": 92.93736112145454,
+      "loop3_r_m": 171.43125535469602,
+      "wing_tip_m": 3680.6906081189272,
+      "yield_t_TNT": 36.12755518702132
+     }
+    },
+    "0.3": {
+     "rows": [
+      {
+       "rho": 500.0,
+       "gain": 1770.1631981324094,
+       "departure_t": 25583.530244226065,
+       "converged": true,
+       "rate_Hz": 14.608776015551557,
+       "loop3_r_m": 511.9131150263221,
+       "wing_tip_m": 1750.0806706348883,
+       "yield_t_TNT": 320.8918025469
+      },
+      {
+       "rho": 1000.0,
+       "gain": 1115.1329375381258,
+       "departure_t": 14289.669155260164,
+       "converged": true,
+       "rate_Hz": 32.53343741419339,
+       "loop3_r_m": 256.2855704244852,
+       "wing_tip_m": 1496.3695589922122,
+       "yield_t_TNT": 80.51613952287178
+      },
+      {
+       "rho": 1500.0,
+       "gain": 851.0057039601517,
+       "departure_t": 12406.41425069664,
+       "converged": true,
+       "rate_Hz": 63.38061639834438,
+       "loop3_r_m": 171.04140588913052,
+       "wing_tip_m": 1682.6864329867208,
+       "yield_t_TNT": 35.89471595446561
+      },
+      {
+       "rho": 2000.0,
+       "gain": 702.4897307176948,
+       "departure_t": 12671.116578109855,
+       "converged": true,
+       "rate_Hz": 114.80151576049816,
+       "loop3_r_m": 128.40476988512705,
+       "wing_tip_m": 2068.2221548091597,
+       "yield_t_TNT": 20.24612711389557
+      },
+      {
+       "rho": 3000.0,
+       "gain": 536.1,
+       "departure_t": 15829.423203087046,
+       "converged": true,
+       "rate_Hz": 321.29242372079153,
+       "loop3_r_m": 85.75033514557953,
+       "wing_tip_m": 3368.6950582599907,
+       "yield_t_TNT": 9.04227928426152
+      },
+      {
+       "rho": 6000.0,
+       "gain": 337.72183742432077,
+       "departure_t": 281692.5678373802,
+       "converged": true,
+       "rate_Hz": 1000.0,
+       "loop3_r_m": 117.00587148221214,
+       "wing_tip_m": 93540.88472839119,
+       "yield_t_TNT": 51.26336923463372
+      }
+     ],
+     "best": {
+      "rho": 1500.0,
+      "gain": 851.0057039601517,
+      "departure_t": 12406.41425069664,
+      "converged": true,
+      "rate_Hz": 63.38061639834438,
+      "loop3_r_m": 171.04140588913052,
+      "wing_tip_m": 1682.6864329867208,
+      "yield_t_TNT": 35.89471595446561
+     }
+    },
+    "0.5": {
+     "rows": [
+      {
+       "rho": 500.0,
+       "gain": 2950.271996887349,
+       "departure_t": 23168.040318180432,
+       "converged": true,
+       "rate_Hz": 13.258604429432449,
+       "loop3_r_m": 511.4663954706597,
+       "wing_tip_m": 1003.3348583098789,
+       "yield_t_TNT": 320.0972444202595
+      },
+      {
+       "rho": 1000.0,
+       "gain": 1858.5548958968764,
+       "departure_t": 12324.586949393706,
+       "converged": true,
+       "rate_Hz": 28.15771916679678,
+       "loop3_r_m": 255.93041473625843,
+       "wing_tip_m": 801.3250376099553,
+       "yield_t_TNT": 80.1996848674875
+      },
+      {
+       "rho": 1500.0,
+       "gain": 1418.3428399335862,
+       "departure_t": 9815.742967157194,
+       "converged": true,
+       "rate_Hz": 50.37595954495721,
+       "loop3_r_m": 170.73063511898658,
+       "wing_tip_m": 822.0887434890413,
+       "yield_t_TNT": 35.70981447793982
+      },
+      {
+       "rho": 2000.0,
+       "gain": 1170.8162178628247,
+       "departure_t": 9283.162912845317,
+       "converged": true,
+       "rate_Hz": 84.5747998388156,
+       "loop3_r_m": 128.12203062629672,
+       "wing_tip_m": 931.8126537052475,
+       "yield_t_TNT": 20.119777884051416
+      },
+      {
+       "rho": 3000.0,
+       "gain": 893.5,
+       "departure_t": 9555.356849060163,
+       "converged": true,
+       "rate_Hz": 195.3650656656335,
+       "loop3_r_m": 85.50274367793233,
+       "wing_tip_m": 1240.958413371666,
+       "yield_t_TNT": 8.968328338607668
+      },
+      {
+       "rho": 6000.0,
+       "gain": 562.8697290405346,
+       "departure_t": 13409.785771058205,
+       "converged": true,
+       "rate_Hz": 870.8333916682363,
+       "loop3_r_m": 46.024926767765194,
+       "wing_tip_m": 2726.05012238888,
+       "yield_t_TNT": 2.8225881890481963
+      }
+     ],
+     "best": {
+      "rho": 2000.0,
+      "gain": 1170.8162178628247,
+      "departure_t": 9283.162912845317,
+      "converged": true,
+      "rate_Hz": 84.5747998388156,
+      "loop3_r_m": 128.12203062629672,
+      "wing_tip_m": 931.8126537052475,
+      "yield_t_TNT": 20.119777884051416
+     }
+    },
+    "1": {
+     "rows": [
+      {
+       "rho": 500.0,
+       "gain": 5900.543993774698,
+       "departure_t": 21626.292018655793,
+       "converged": true,
+       "rate_Hz": 12.396710942855677,
+       "loop3_r_m": 511.13180836498503,
+       "wing_tip_m": 529.6486483841475,
+       "yield_t_TNT": 319.5029779462634
+      },
+      {
+       "rho": 1000.0,
+       "gain": 3717.1097917937527,
+       "departure_t": 11059.737305477749,
+       "converged": true,
+       "rate_Hz": 25.334184242107153,
+       "loop3_r_m": 255.66457472881874,
+       "wing_tip_m": 390.8109613221782,
+       "yield_t_TNT": 79.96334768252702
+      },
+      {
+       "rho": 1500.0,
+       "gain": 2836.6856798671724,
+       "departure_t": 8481.428681575464,
+       "converged": true,
+       "rate_Hz": 43.677689816926545,
+       "loop3_r_m": 170.49820736568682,
+       "wing_tip_m": 380.68100834611477,
+       "yield_t_TNT": 35.571934683796044
+      },
+      {
+       "rho": 2000.0,
+       "gain": 2341.6324357256494,
+       "departure_t": 7728.491001642531,
+       "converged": true,
+       "rate_Hz": 70.70432083718816,
+       "loop3_r_m": 127.91069673131959,
+       "wing_tip_m": 411.93687398772636,
+       "yield_t_TNT": 20.025676866200435
+      },
+      {
+       "rho": 3000.0,
+       "gain": 1787.0,
+       "departure_t": 7363.107917215153,
+       "converged": true,
+       "rate_Hz": 151.366426748817,
+       "loop3_r_m": 85.31787506086373,
+       "wing_tip_m": 502.0277781493376,
+       "yield_t_TNT": 8.913371199962386
+      },
+      {
+       "rho": 6000.0,
+       "gain": 1125.7394580810692,
+       "departure_t": 7756.226130609021,
+       "converged": true,
+       "rate_Hz": 635.7248773083766,
+       "loop3_r_m": 42.71393116237739,
+       "wing_tip_m": 814.86518549624,
+       "yield_t_TNT": 2.2365102841943045
+      }
+     ],
+     "best": {
+      "rho": 3000.0,
+      "gain": 1787.0,
+      "departure_t": 7363.107917215153,
+      "converged": true,
+      "rate_Hz": 151.366426748817,
+      "loop3_r_m": 85.31787506086373,
+      "wing_tip_m": 502.0277781493376,
+      "yield_t_TNT": 8.913371199962386
+     }
+    }
+   }
+  },
+  "source": "T04 EARLY 1b85941 section 1 (bound); T01 EARLY 57fe625 (628 K, 0.005 %)"
+ },
+ "proposals": {
+  "V3": {
+   "name": "Vertex 3: convergent engineering (proposal)",
+   "fictional": "Canon Fiji lattice only (VTX-02A), unchanged. The coupling 0.3 is a Level B TARGET far beyond present implosions (D-T06-1 asks whether IGNITION declares it).",
+   "result": {
+    "departure_t": 12654.559513126038,
+    "payload_t": 990.2338712519676,
+    "fusion_TW": 10.543561918959007,
+    "burn_years": 5.685154040809534,
+    "min_round_trip_years": 6.351915811090678,
+    "drive_t": 2216.3443226189243,
+    "radiator_t": 382.07714739658024,
+    "shield_t": 492.47756701027475,
+    "structure_t": 212.22011007265044,
+    "tank_t": 750.3747865341178,
+    "propellant_t": 7995.701332036269,
+    "warm_km2": 0.5025811123975291,
+    "hot_km2": 0.0436031946237099,
+    "wing_tip_radius_m": 1005.7821876604826,
+    "pellet_rate_Hz": 57.174658562937886,
+    "yield_t_TNT": 44.07497729493033,
+    "solid_angle": 0.009453911344690601,
+    "checks_ok": true,
+    "converged": true,
+    "loop_radii_m": [
+     56.23701752715927,
+     97.40537162318131,
+     168.71105258147773
+    ],
+    "xray_standoff_m": 64.93691441545421,
+    "hot_GW": 46.71889599682074,
+    "warm_GW": 21.01117562790184,
+    "ledger_sum": 0.9999999999999999
+   },
+   "ambitions": {
+    "four_burns_close": true,
+    "min_round_trip_years": 6.351915811090678,
+    "six_year_a0_g": 0.007301337772756478,
+    "six_year_departure_t": 13498.621056165353,
+    "six_year_met_at_base_a0": false,
+    "ceiling_a0_g": 0.013504357631884154,
+    "deficit_1g": 74.05017160083001,
+    "deficit_1p5g": 111.07525740124501,
+    "gain_cliff": 278.15724574050716,
+    "nozzle_eff_cliff": 0.5302734375
+   }
+  },
+  "V3c": {
+   "name": "Vertex 3: convergent engineering (proposal) at driver efficiency 0.30",
+   "fictional": "Canon Fiji lattice only (VTX-02A), unchanged. The coupling 0.3 is a Level B TARGET far beyond present implosions (D-T06-1 asks whether IGNITION declares it).",
+   "result": {
+    "departure_t": 21069.265744359484,
+    "payload_t": 990.2338712519676,
+    "fusion_TW": 17.583229050174385,
+    "burn_years": 5.685154040809535,
+    "min_round_trip_years": 6.35191581109068,
+    "drive_t": 3956.4288021293114,
+    "radiator_t": 1028.2851679760822,
+    "shield_t": 505.25813568397456,
+    "structure_t": 329.5739464278187,
+    "tank_t": 1249.3398741296344,
+    "propellant_t": 13312.47887391585,
+    "warm_km2": 1.5038431261822856,
+    "hot_km2": 0.0739895835587883,
+    "wing_tip_radius_m": 2939.518650115656,
+    "pellet_rate_Hz": 93.78006691671675,
+    "yield_t_TNT": 44.812215868285236,
+    "solid_angle": 0.009594325732079368,
+    "checks_ok": true,
+    "converged": true,
+    "loop_radii_m": [
+     56.56422914345973,
+     97.97211876744045,
+     169.69268743037912
+    ],
+    "xray_standoff_m": 65.3147458449603,
+    "hot_GW": 79.27656881478747,
+    "warm_GW": 62.87047256968167,
+    "ledger_sum": 0.9999999999999998
+   },
+   "ambitions": {
+    "four_burns_close": true,
+    "min_round_trip_years": 6.35191581109068,
+    "six_year_a0_g": 0.007302298313847575,
+    "six_year_departure_t": 24510.354445253226,
+    "six_year_met_at_base_a0": false,
+    "ceiling_a0_g": 0.009757976812089104,
+    "deficit_1g": 102.48025992038693,
+    "deficit_1p5g": 153.7203898805804,
+    "gain_cliff": 445.7851030169865,
+    "nozzle_eff_cliff": 0.5733984375000001
+   }
+  },
+  "V4": {
+   "name": "Vertex 4: declared-breakthrough endpoint (proposal)",
+   "fictional": "Canon Fiji lattice only, unchanged. Two declared breakthroughs, physics-permitted but undemonstrated (compression coupling, gain) or unvalidated (pulsed nozzle): D-T06-1 and D-T06-2. They are not Fiji properties.",
+   "result": {
+    "departure_t": 8295.311231036456,
+    "payload_t": 990.2338712519676,
+    "fusion_TW": 6.365348512725193,
+    "burn_years": 5.685154040809533,
+    "min_round_trip_years": 6.351915811090678,
+    "drive_t": 1197.5827663150253,
+    "radiator_t": 164.61711772605196,
+    "shield_t": 306.3802131661112,
+    "structure_t": 131.31972325893477,
+    "tank_t": 491.8853467425223,
+    "propellant_t": 5241.338585579025,
+    "warm_km2": 0.24686808089854684,
+    "hot_km2": 0.010090581543265326,
+    "wing_tip_radius_m": 472.733047607398,
+    "pellet_rate_Hz": 169.3375175004752,
+    "yield_t_TNT": 8.984156786419224,
+    "solid_angle": 0.018268747165888072,
+    "checks_ok": true,
+    "converged": true,
+    "loop_radii_m": [
+     28.518616880894875,
+     49.39569339930139,
+     85.5558506426846
+    ],
+    "xray_standoff_m": 32.93046226620093,
+    "hot_GW": 10.811612170519943,
+    "warm_GW": 10.320699438819478,
+    "ledger_sum": 1.0
+   },
+   "ambitions": {
+    "four_burns_close": true,
+    "min_round_trip_years": 6.351915811090678,
+    "six_year_a0_g": 0.007305318570112051,
+    "six_year_departure_t": 8622.092448055495,
+    "six_year_met_at_base_a0": false,
+    "ceiling_a0_g": 0.01767168011682472,
+    "deficit_1g": 56.58771511192802,
+    "deficit_1p5g": 84.88157266789203,
+    "gain_cliff": 245.1745183732254,
+    "nozzle_eff_cliff": 0.5284765625
+   }
+  },
+  "V4c": {
+   "name": "Vertex 4: declared-breakthrough endpoint (proposal) at driver efficiency 0.30",
+   "fictional": "Canon Fiji lattice only, unchanged. Two declared breakthroughs, physics-permitted but undemonstrated (compression coupling, gain) or unvalidated (pulsed nozzle): D-T06-1 and D-T06-2. They are not Fiji properties.",
+   "result": {
+    "departure_t": 10756.669868624629,
+    "payload_t": 990.2338712519676,
+    "fusion_TW": 8.26430485143126,
+    "burn_years": 5.685154040809533,
+    "min_round_trip_years": 6.351915811090678,
+    "drive_t": 1702.738151220302,
+    "radiator_t": 357.46847169954253,
+    "shield_t": 308.8549282093945,
+    "structure_t": 163.23151776100883,
+    "tank_t": 637.8360188514695,
+    "propellant_t": 6796.532072698763,
+    "warm_km2": 0.5661996160597924,
+    "hot_km2": 0.013276319391530005,
+    "wing_tip_radius_m": 1071.2926261664338,
+    "pellet_rate_Hz": 217.44573929156803,
+    "yield_t_TNT": 9.083720247076997,
+    "solid_angle": 0.01826643594550321,
+    "checks_ok": true,
+    "converged": true,
+    "loop_radii_m": [
+     28.629500200685815,
+     49.5877489428912,
+     85.88850060205742
+    ],
+    "xray_standoff_m": 33.0584992952608,
+    "hot_GW": 14.22498948130263,
+    "warm_GW": 23.67084492437718,
+    "ledger_sum": 1.0
+   },
+   "ambitions": {
+    "four_burns_close": true,
+    "min_round_trip_years": 6.351915811090678,
+    "six_year_a0_g": 0.007302823562609439,
+    "six_year_departure_t": 11517.194746503652,
+    "six_year_met_at_base_a0": false,
+    "ceiling_a0_g": 0.013041321800224093,
+    "deficit_1g": 76.6793439590469,
+    "deficit_1p5g": 115.01901593857035,
+    "gain_cliff": 395.5446431757512,
+    "nozzle_eff_cliff": 0.5293749999999999
+   }
+  }
+ },
+ "ledger_closes": true,
+ "runtime_s": 373.3
+}

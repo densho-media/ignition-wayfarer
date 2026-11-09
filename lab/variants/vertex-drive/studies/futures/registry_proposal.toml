@@ -1,0 +1,225 @@
+# T06 registry proposal (provisional IDs). Research records, not canon. T00 assigns final IDs and decides what enters registry/*.toml.
+#
+# Sections: [[technology]] (new records, core attributes; T00 completes the remaining brief attributes), [[link]] (new or revised
+# interactions in links.toml schema), [[source]] (new evidence, S-T06-*), [[decision]] (D-T06-n), [[finding]] (corrections to the Atlas
+# text that T00 may fold in). Numbers cite case:<name> in studies/futures/results/futures.json.
+
+# ------------------------------------------------------------------------------------------------------------------------------------
+# technologies
+# ------------------------------------------------------------------------------------------------------------------------------------
+
+[[technology]]
+id = "T06-NEW-1"
+name = "Thin-wall refractory heat-pipe radiators for the 1,800 K band"
+kind = "technology"
+workstream = "VTX-07"
+purpose = "Halve the areal mass of the hot loop's heat-pipe panels (3.0 to 1.5 kg/m2 optimistic)."
+principle = "Lithium heat pipes in Mo-Re or carbon-carbon shells; mass is wall and fin thickness, set by creep and meteoroid allowance, not by heat flux."
+ancestry = ["S-T06-SP100", "S-T06-RADMASS"]
+limitations = "Published space radiators sit at about 5-8 kg/m2; 1.5 kg/m2 flat plates are low-temperature. Creep at 1,800 K and dust puncture set the wall."
+breakthrough = "None beyond advanced engineering; a requirement two to five times beyond published refractory practice."
+depends_on = []
+credibility = "PLAUSIBLE_FUTURE"
+physics_verdict = "PLAUSIBLE_FUTURE"
+research_status = "PROPOSED"
+canon_status = "NON_CANON"
+[technology.stages]
+present = "SP-100 Mo-13Re/Li heat pipes; waste-heat radiators 6.8-8.2 kg/m2 in studies."
+advanced = "Carbon-carbon armoured heat pipes at 3 kg/m2 (the FDP-1 optimistic tier)."
+wayfarer_era = "1.5 kg/m2 hot panels, robotically replaced after dust damage."
+[technology.geometry]
+components = ["hot root bands (thinner panels, same area)"]
+status = "PARAMETRIC_PLACEHOLDER"
+representation = "HARDWARE"
+colour = "THERMAL"
+[[technology.claims]]
+quantity = "elasticity_departure_vs_hot_areal_V1c"
+value = 0.08
+unit = "1"
+basis = "MODEL"
+source = "case:elasticities"
+
+[[technology]]
+id = "T06-NEW-2"
+name = "High-specific-strength hoop and truss structure"
+kind = "technology"
+workstream = "VTX-02"
+purpose = "Lower the virial-bound nozzle structure (M >= rho W / sigma) and the light trusses by doubling strength per mass."
+principle = "Virial theorem: magnet structure mass per joule stored is rho / sigma; only the material's specific strength moves it."
+ancestry = ["S-T06-CNTF-2024", "S-FOURBURN"]
+limitations = "CNT fibres reach about 8 GPa in fibre form, not in a structural laminate; composite translation efficiency, creep under cryogenic and radiation load, joints."
+breakthrough = "None beyond advanced engineering: a 3 GPa laminate at 1.6 t/m3."
+depends_on = []
+credibility = "PLAUSIBLE_FUTURE"
+physics_verdict = "PLAUSIBLE_FUTURE"
+research_status = "PROPOSED"
+canon_status = "NON_CANON"
+[technology.stages]
+present = "CFRP at about 1.5 GPa allowable; CNT fibres 4-8 GPa quasi-static in the laboratory."
+advanced = "CNT-reinforced laminates at 2-3 GPa."
+wayfarer_era = "Nozzle hoops, wing spars and gallery trusses in a CNT-class laminate."
+[technology.geometry]
+components = ["thinner loop hoops", "lighter wing spars", "lighter gallery trusses"]
+status = "PARAMETRIC_PLACEHOLDER"
+representation = "HARDWARE"
+colour = "STRUCTURE"
+[[technology.claims]]
+quantity = "K5_chain_departure_V1c"
+value = 11810.0
+unit = "t"
+basis = "MODEL"
+source = "case:chains.K5"
+
+# ------------------------------------------------------------------------------------------------------------------------------------
+# links (links.toml schema)
+# ------------------------------------------------------------------------------------------------------------------------------------
+
+[[link]]
+from = "VTX-01A"
+to = "VTX-01"
+kind = "conflicts"
+effect = "Compression and gain are one lever (T04 EARLY bound G <= 1,787 x eta_c/alpha x (rho/3,000)^(-2/3)): denser fuel lowers the gain a driver can reach. The Atlas pair (3,000 g/cm3, gain 3,000) needs eta_c/alpha 1.68 and is not energy-consistent; 6,000 g/cm3 at gain 3,000 needs 2.66."
+quantified = "consistency"
+
+[[link]]
+from = "VTX-07A"
+to = "VTX-01"
+kind = "enables"
+effect = "Under the gain-compression bound the engineering package decides whether a ship exists: at eta_c/alpha 0.3, V1c (Atlas engineering) closes only at 161 kt, the full T06 package at 10.3 kt; at 0.2 V1c does not close and the package closes at 13.3 kt. Shared with VTX-01B, VTX-07B, VTX-07C, T06-NEW-1, T06-NEW-2."
+quantified = "consistency.frontier"
+
+[[link]]
+from = "VTX-01A"
+to = "VTX-01C"
+kind = "worsens"
+effect = "Where density is raised at fixed gain the pulse rate rises (133 to 449 Hz in K4); under the bound the consistent optimum is the opposite, lower density and larger, slower pulses (44 t TNT at 57-94 Hz in V3), which loosens the factory and the launcher but enlarges the nozzle (outer loop r 169 m)."
+quantified = "proposals.V3"
+
+[[link]]
+from = "T06-NEW-2"
+to = "VTX-02"
+kind = "improves"
+effect = "Doubling specific strength halves the virial nozzle structure; small for the whole ship (K5 -9 %)."
+quantified = "chains.K5"
+
+[[link]]
+from = "T06-NEW-1"
+to = "VTX-07"
+kind = "improves"
+effect = "Halving hot-panel areal mass saves about 4 % on V1c."
+quantified = "chains.K2"
+
+[[link]]
+from = "VTX-02C"
+to = "VTX-07"
+kind = "improves"
+effect = "Revision: at gain 3,000 the recirculating power is about 0.1 % of fusion, so recovery efficiency barely matters (0.90 to 0.98 moves V1c by 0.4 %). Its value is in pulse storage sizing, not mass."
+quantified = "elasticities"
+
+# ------------------------------------------------------------------------------------------------------------------------------------
+# sources (sources.toml schema; none PRIMARY_VERIFIED: the cloud session reads search abstracts only)
+# ------------------------------------------------------------------------------------------------------------------------------------
+
+[[source]]
+id = "S-T06-NIF-DENSITY"
+title = "NIF high-convergence implosions: fuel areal density about 1.0 g/cm2, inferred fuel density 500-800 g/cm3"
+authors = "V. A. Smalyuk et al."
+date = "2013"
+locator = "https://dspace.mit.edu/handle/1721.1/84979"
+kind = "journal"
+finding = "Inferred compressed D-T fuel density approaching 600 g/cm3 (500-800 from neutron images) at rhoR about 1.0 g/cm2."
+limits = "Older design era; inferred, not measured directly; D-T, not D-3He."
+relation = "Present foundation for compression: FDP-1's optimistic 3,000 g/cm3 is about 5x, the T06 V3 target 6,000 about 10x."
+verification = "SECONDARY_VERIFIED"
+checked = "2026-11-09 web search summary of the MIT repository record; full text not opened."
+
+[[source]]
+id = "S-T06-CNTF-2024"
+title = "Carbon nanotube fibers with dynamic strength up to 14 GPa"
+authors = "Zhang et al. (Peking University)"
+date = "2024-06"
+locator = "Science 384, 1318-1323 (2024)"
+kind = "journal"
+finding = "CNT fibres at 8.2 +- 0.2 GPa quasi-static tensile strength, 14 GPa dynamic."
+limits = "Fibre, not laminate; laboratory lengths; individual CNTs exceed 100 GPa."
+relation = "Ancestry of T06-NEW-2: a 3 GPa structural laminate is a plausible extrapolation, not a demonstration."
+verification = "SECONDARY_VERIFIED"
+checked = "2026-11-09 web search (Peking University news release and secondary press)."
+
+[[source]]
+id = "S-T06-SP100"
+title = "SP-100 space reactor heat pipes: Mo-13Re shells with lithium working fluid"
+authors = "Los Alamos / DTIC reports"
+date = "1982-1985"
+locator = "DTIC ADA160279; OSTI 5995869"
+kind = "report"
+finding = "Refractory Mo-Re/Li heat pipes for a 100 kWe, 7-year space reactor; interface heat-flux limit about 30 W/cm2."
+limits = "Areal mass of the radiator not found in the abstract; 1,400 K class, not 1,800 K."
+relation = "Ancestry of T06-NEW-1."
+verification = "UNVERIFIED"
+checked = "2026-11-09 web search; record titles only."
+
+[[source]]
+id = "S-T06-RADMASS"
+title = "Waste-heat radiator specific masses in space power studies"
+authors = "Space Solar Power Review 10(1) (1991); NASA advanced radiator targets"
+date = "1991"
+locator = "ssi.org Space Solar Power Review vol. 10 no. 1"
+kind = "journal"
+finding = "6.8 kg/m2 below 690 K and 8.2 kg/m2 above 690 K used for waste-heat radiators; NASA advanced radiator target 5 kg/m2."
+limits = "Study values, not flight hardware; generic, not refractory 1,800 K panels."
+relation = "Shows FDP-1's optimistic 3.0 kg/m2 hot and 1.0 kg/m2 warm panels are already beyond published practice."
+verification = "UNVERIFIED"
+checked = "2026-11-09 web search snippet."
+
+# ------------------------------------------------------------------------------------------------------------------------------------
+# decisions
+# ------------------------------------------------------------------------------------------------------------------------------------
+
+[[decision]]
+id = "D-T06-1"
+kind = "canon"
+question = "Does IGNITION declare, as part of its history, that D-3He targets were ignited with a driver-to-fuel compression coupling eta_c/alpha of about 0.3-0.5 (gain about 700-900 at 2,000-3,000 g/cm3)?"
+options = ["Yes, as a named historical breakthrough (a fictional-history premise, not a Fiji property)", "No: keep the coupling an open research question and every Vertex generation provisional", "Defer until T04 reports"]
+recommendation = "Defer until T04's handoff, then decide. The declared quantity should be the coupling, not the gain: the gain follows from it and the density, and the Atlas gain 3,000 at 3,000 g/cm3 is not energy-consistent at any coupling."
+decider = "ApeDevil"
+
+[[decision]]
+id = "D-T06-2"
+kind = "canon"
+question = "Does IGNITION declare a validated pulsed magnetic nozzle at efficiency 0.79-0.86 (the top of the theoretical range)?"
+options = ["Yes, as an engineering milestone of the history", "No: carry 0.65-0.72 as the planning band", "Defer until T03 and a D-09 study"]
+recommendation = "Defer to T03. It is the steepest lever (elasticity -2.9 at V1c) and every generation's fate depends on it."
+decider = "ApeDevil"
+
+[[decision]]
+id = "D-T06-3"
+kind = "canon"
+question = "May T06's non-canon technology-history scaffold (eras E0-E5 in HISTORY_PROPOSALS.md) be aligned with the IGNITION timeline workbook?"
+options = ["Yes, read-only alignment through the drive reader when it is available", "No, keep it a free-standing proposal"]
+recommendation = "Yes, read-only; no Drive write (D-11 stands)."
+decider = "ApeDevil"
+
+# ------------------------------------------------------------------------------------------------------------------------------------
+# findings for the Atlas text
+# ------------------------------------------------------------------------------------------------------------------------------------
+
+[[finding]]
+id = "F-T06-1"
+text = "The nozzle-efficiency cliff of about 0.53 that V1 and V2 share is the exhaust-velocity gate eta_jet x b >= ve^2/(2 eps) = 0.524 (S-FIJI-V4), not the mass feedback. REPORT.md says the cause 'was not separated'; it can now say so."
+source = "case:ve_gate"
+
+[[finding]]
+id = "F-T06-2"
+text = "Convergence is sub-multiplicative in mass: combined chains save less than the product of their single savings, because payload, propellant and tanks form a floor (4,228 t at ve 19,201 km/s with every specific mass x1e-4). Its real effect is on closure: under the gain-compression bound the combined engineering package turns non-closing or 161 kt ships into 10-13 kt ones at eta_c/alpha 0.2-0.3."
+source = "case:consistency"
+
+[[finding]]
+id = "F-T06-4"
+text = "The Atlas generations V0-V2 (3,000 g/cm3, gain 3,000) need a compression coupling eta_c/alpha of 1.68 under T04's bound and are not energy-consistent; their masses are conditional (as T04 EARLY states)."
+source = "case:consistency"
+
+[[finding]]
+id = "F-T06-3"
+text = "The LOCKED 6.0 y round trip is a kinematic question, not a mass one: the minimum round trip is 6.35 y at 0.0069 g in every generation and every chain; any generation whose ceiling exceeds 0.0073 g meets 6.0 y at a few per cent more mass."
+source = "case:chains"
