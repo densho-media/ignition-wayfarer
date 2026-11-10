@@ -16,14 +16,17 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[2]
 
 IMPORTS = [
-    {'thread': 'T00', 'name': 'Vertex T00 integration and feasibility gate', 'branch': 'claude/project-thread-9rsgog',
-     'commit': '43fac754c15fbc249f9b16a6af49b29698e96616', 'folder': 't00-43fac75', 'base': 'lab/variants/vertex-drive/',
+    {'thread': 'T00', 'name': 'Vertex T00 integration and feasibility gates 1 and 2', 'branch': 'claude/project-thread-9rsgog',
+     'commit': '030fc14259e20eeeb224aa2c78dd06459c3afc7a', 'folder': 't00-030fc14', 'base': 'lab/variants/vertex-drive/',
      'files': ['registry/sources.toml', 'registry/technologies.toml', 'registry/generations.toml', 'results/convergence.json',
                'studies/gate/REPORT.md', 'studies/gate/results/coupled.json', 'studies/gate/results/target.json',
-               'studies/gate/results/axis_base.json', 'studies/gate/results/structure.json', 'studies/gate/results/concepts.json']},
-    {'thread': 'T05', 'name': 'Vertex T05 Blender blockout and feasibility gate', 'branch': 'claude/project-thread-ctwplp',
-     'commit': 'c45ab4adaa82553c586720fdedcbea305502eca6', 'folder': 't05-c45ab4a', 'base': 'work/vertex-blender/',
-     'files': ['GATE_REPORT.md', 'fe_s5n.json', 'screen.json']},
+               'studies/gate/results/axis_base.json', 'studies/gate/results/structure.json', 'studies/gate/results/concepts.json',
+               'studies/gate2/REPORT.md', 'studies/gate2/results/target2.json', 'studies/gate2/results/eta.json',
+               'studies/gate2/results/matrix.json', 'studies/gate2/results/cone.json', 'studies/gate2/results/g1.json',
+               'studies/gate2/results/validity.json']},
+    {'thread': 'T05', 'name': 'Vertex T05 Blender blockout and feasibility gates 1 and 2', 'branch': 'claude/project-thread-ctwplp',
+     'commit': 'f49777844782dd4aade5e1eb3834a8f832a4ba24', 'folder': 't05-f497778', 'base': 'work/vertex-blender/',
+     'files': ['GATE_REPORT.md', 'fe_s5n.json', 'screen.json', 'GATE2_REPORT.md', 'gate2.json', 'gate2_fe.json']},
 ]
 
 

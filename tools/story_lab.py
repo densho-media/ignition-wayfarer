@@ -123,7 +123,7 @@ def baseline_page(d, ship, page, revision, built, out):
 
     def cpl(label, what, verdict):
         c = cp[label]
-        return (label, c['status'], what, c['departure_t'], None, None, verdict)
+        return (label, c['status'], what, c['departure_t'] if c['status'] == 'CONVERGED' else None, None, None, verdict)
 
     def scen(label, c, what):
         sm = c.get('summary', {})
@@ -139,6 +139,9 @@ def baseline_page(d, ship, page, revision, built, out):
             're-sized on every pass.', 'Converged without the spine; launcher and A1 break at the coupled rates'),
         cpl('full: + spine cantilever 0.2 Hz (T05 basis), rate free', 'The same with the S5N spine sized for a 0.2 Hz cantilever.',
             'Does not converge (loop gain above 1)'),
+        *[(f'Gate 2 {r["name"]}', r['status'], r['what'], r['departure_t'] if r['status'] == 'CONVERGED' else None, None, None,
+           f'Shadow-cone rim {r["rim_deg"]:.1f} deg (A1 needs 7.5 or less); spine FE estimate {r["fe_Hz"]:.3f} Hz')
+          for r in d['config'].get('gate2', []) if r['name'] in ('G0', 'G0-noA1', 'K1', 'T15')],
         gen('V5', 'Vertex V5', d['config']['v5_note'], 'A bound, never a design'),
         scen('Layer A: scientific reference', ref, d['reference']['definition']),
         scen('Layer A without the launcher limit', reff, 'The same reference with targets that always arrive (BT-005 at L2 only).'),
@@ -173,7 +176,8 @@ def baseline_page(d, ship, page, revision, built, out):
     in the <a href="../breakthrough-lab/">Breakthrough Lab</a> never makes it canon.</p></div>
 </div></section>
 <section id="configs"><h2>Configurations</h2>
-<p>The approved ship, the historical and research generations of the Vertex drive, the coupled feasibility-gate results and the
+<p>The approved ship, the historical and research generations of the Vertex drive, the coupled results of feasibility gates 1 and 2
+  (Gate 2: the reference G0, G0 without A1, and two of the nine variants that hold A1's 7.5 deg cone, all of which diverge) and the
   Layer A reference, side by side. Status labels are the records' own. Masses are departure masses for the four-burn 0.016 c mission.</p>
 <div class="scroll"><table class="configs"><thead><tr><th>Configuration</th><th>Status</th><th>What it is</th><th>Departure (t)</th>
   <th>Peak g</th><th>Radiator tip (km)</th><th>Verdict</th></tr></thead><tbody>{trs}</tbody></table></div>

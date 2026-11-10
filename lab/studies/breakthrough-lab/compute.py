@@ -3,10 +3,10 @@
 Nothing here is a new engineering model. Every number comes from the Technology Atlas adapter and the FDP-1 calculator
 (lab/variants/vertex-drive/convergence.py on claude/project-thread-9rsgog at the imported commit) and, for the coupled check, the T00
 feasibility gate's fixed-point solver (studies/gate/coupled.py: closure-coil hardware re-sized on every solve, the A1 axis fix as its
-nozzle-efficiency factor). This script only builds the override tree of each scenario (reference + declared breakthrough levels),
+nozzle-efficiency factor, squared as Gate 2 corrects it). This script only builds the override tree of each scenario (reference + declared breakthrough levels),
 calls those solvers in separate processes and records what they return, with provenance.
 
-    git worktree add /tmp/t00 43fac754c15fbc249f9b16a6af49b29698e96616       # the pinned T00 commit, read-only use
+    git worktree add /tmp/t00 030fc14259e20eeeb224aa2c78dd06459c3afc7a       # the pinned T00 commit, read-only use
     python3 lab/studies/breakthrough-lab/compute.py --t00 /tmp/t00 [--jobs 4]   # writes results/scenarios.json (about 15 min on 4 cores)
 
 Order: (1) every combination of the grid levers at the unconstrained launcher level; (2) the finite launcher levels for each case that
@@ -119,17 +119,24 @@ def coupled_case(args):
     if not hasattr(coupled_case, 'R4'):
         coupled_case.R4 = G.solve_full(G.v4_overrides())
         coupled_case.axis = json.loads((T00 / 'lab/variants/vertex-drive/studies/gate/results/concepts.json').read_text())['chosen']
+        # Gate 2 (section 1.1, Task D): the A1 thrust loss belongs in eta_T as the momentum factor squared; the first gate applied the
+        # factor once. The corrected factor must equal Gate 2's own booking on its reference row (eta_T_booked / V4 eta_T).
+        m = coupled_case.axis['nozzle_efficiency_factor']
+        g2 = json.loads((T00 / 'lab/variants/vertex-drive/studies/gate2/results/matrix.json').read_text())['rows'][0]
+        v4_eta = json.loads((T00 / 'lab/variants/vertex-drive/studies/gate2/results/g1.json').read_text())['v4_calculator_eta_T']
+        assert abs(m * m - g2['eta_T_booked'] / v4_eta) < 1e-6, (m * m, g2['eta_T_booked'] / v4_eta)
+        coupled_case.noz = m * m
         coupled_case.d0 = None
     ov = tree(inputs)
     ax = coupled_case.axis
     try:
         r = CP.run('coils + axis A1', ov, coupled_case.R4, coupled_case.d0, cap, ('coils',), None, ax.get('booked_kg', 0.0),
-                   ax.get('house_W', 0.0), ax.get('nozzle_efficiency_factor', 1.0))
+                   ax.get('house_W', 0.0), coupled_case.noz)
     except Exception as e:
         return {'status': 'FAILED', 'reason': f'{type(e).__name__}: {e}', 'seconds': time.time() - t0}
     out = {'status': r['status'], 'rate_cap_Hz': cap, 'iterations': r['iterations'], 'departure_trajectory_t': r['departure_trajectory_t'],
-           'seconds': time.time() - t0, 'items': 'closure coils C1, C2 (re-sized each pass) + A1 tilted closure (thrust x %.4f)'
-           % ax.get('nozzle_efficiency_factor', 1.0)}
+           'seconds': time.time() - t0, 'items': 'closure coils C1, C2 (re-sized each pass) + A1 tilted closure (eta_T x %.4f, Gate 2 booking)'
+           % coupled_case.noz}
     if r['status'] == 'CONVERGED':
         s = r['summary']
         out['summary'] = {k: s[k] for k in ('departure_t', 'propellant_t', 'warm_km2', 'hot_km2', 'wing_tip_radius_m', 'thrust_MN')
@@ -232,7 +239,7 @@ def main():
                           'registry_sha256': lab.registry_hash(), 'computed_utc': datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'),
                           'python': platform.python_version(), 'runtime_s': round(time.time() - t_start, 1),
                           'method': 'FDP-1 fdp1-v1 through the Technology Atlas adapter (convergence.solve: compression ceiling, launcher rate cap); '
-                                    'coupled check by the T00 gate fixed-point solver (coupled.run, items coils + A1 axis factor). '
+                                    'coupled check by the T00 gate fixed-point solver (coupled.run, items coils + A1 thrust loss booked as Gate 2 corrects it, eta_T x momentum factor squared). '
                                     'Every value is the calculator output for the recorded inputs; nothing is interpolated.'},
            'reproduces': repro, 'order': order, 'cases': dict(sorted(cases.items()))}
     lab.RESULTS.parent.mkdir(exist_ok=True)

@@ -1,9 +1,9 @@
 {
  "thread": "T05",
- "name": "Vertex T05 Blender blockout and feasibility gate",
+ "name": "Vertex T05 Blender blockout and feasibility gates 1 and 2",
  "branch": "claude/project-thread-ctwplp",
- "commit": "c45ab4adaa82553c586720fdedcbea305502eca6",
- "folder": "t05-c45ab4a",
+ "commit": "f49777844782dd4aade5e1eb3834a8f832a4ba24",
+ "folder": "t05-f497778",
  "base": "work/vertex-blender/",
  "status": "RESEARCH, NON-CANON, read-only snapshot",
  "files": [
@@ -24,6 +24,24 @@
    "source_path": "work/vertex-blender/screen.json",
    "sha256": "1bd4d239aafcc7ba4a57bc6946b0aad8fe45aa6274dd6ea78925a29e7bd056c0",
    "bytes": 16975
+  },
+  {
+   "path": "GATE2_REPORT.md",
+   "source_path": "work/vertex-blender/GATE2_REPORT.md",
+   "sha256": "6c9980040d0726db5ec194e282d0df11fbeaedf18e10c4c5a442e21117e8a4f4",
+   "bytes": 8365
+  },
+  {
+   "path": "gate2.json",
+   "source_path": "work/vertex-blender/gate2.json",
+   "sha256": "778cbfd3593bf763029d3ec694c17357731947cc3246bb7d0c10f5347ed58396",
+   "bytes": 12768
+  },
+  {
+   "path": "gate2_fe.json",
+   "source_path": "work/vertex-blender/gate2_fe.json",
+   "sha256": "ec7bee6a26f928a8d994d6407a6cf18162c92114ce3ae8ee8694dde36670c0a4",
+   "bytes": 64490
   }
  ]
 }

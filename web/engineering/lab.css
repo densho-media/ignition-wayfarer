@@ -41,6 +41,7 @@ ul.src li { margin: 4px 0; }
 .tiers li { margin: 3px 0; }
 table.configs th[scope=row] { white-space: normal; min-width: 140px; color: var(--ink); }
 table.configs td:nth-child(3) { min-width: 260px; color: var(--muted); }
+table.configs td:last-child { min-width: 200px; }
 
 .filters { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: end; padding: 10px 12px; background: var(--panel);
   border: 1px solid var(--line); border-radius: 6px; font-size: 13px; }

@@ -107,8 +107,8 @@ def story():
             if unmet:
                 y['dependency_unmet'] = unmet
             cases[k] = y
-    gens = json.loads((lab.IMPORTS / 't00-43fac75/results/convergence.json').read_text())['generations']
-    coupled = json.loads((lab.IMPORTS / 't00-43fac75/studies/gate/results/coupled.json').read_text())
+    gens = json.loads((lab.IMPORTS / 't00-030fc14/results/convergence.json').read_text())['generations']
+    coupled = json.loads((lab.IMPORTS / 't00-030fc14/studies/gate/results/coupled.json').read_text())
     config = {
         'generations': {g: {'name': v['record']['name'], 'status': v['record']['status'], 'definition': v['record']['definition'],
                             'consistency': v['record'].get('consistency', ''), 'summary': {f: v['summary'].get(f) for f in CASE_KEYS if f in v['summary']},
@@ -118,6 +118,10 @@ def story():
                      'departure_t': c.get('summary', {}).get('departure_t'), 'rate_Hz': c.get('fusion', {}).get('pellet_rate_Hz'),
                      'warm_km2': c.get('heat_rejection', {}).get('warm_km2')} for c in coupled['cases']],
         'v5_note': 'V5 is a bound (ideal compression), never a design or a target.',
+        # Feasibility Gate 2 coupled matrix: the shadow geometry computed, every variant as T00 records it
+        'gate2': [{'name': r['name'], 'what': r['what'], 'status': r['status'], 'departure_t': r.get('summary', {}).get('departure_t'),
+                   'rim_deg': r['report']['1_shield']['rim_deg'], 'fe_Hz': r['report']['5_structure']['f1_FE_estimate_Hz']}
+                  for r in json.loads((lab.IMPORTS / 't00-030fc14/studies/gate2/results/matrix.json').read_text())['rows']],
     }
     data = {
         'vocab': {'levels': lab.LEVELS, 'evidence': lab.EVIDENCE, 'development': lab.DEVELOPMENT, 'canon': lab.CANON, 'tiers': lab.TIERS,

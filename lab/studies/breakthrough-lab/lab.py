@@ -56,7 +56,7 @@ def load():
 
 
 def _atlas_sources():
-    p = IMPORTS / 't00-43fac75' / 'registry' / 'sources.toml'
+    p = IMPORTS / 't00-030fc14' / 'registry' / 'sources.toml'
     if not p.exists():
         return {}
     with open(p, 'rb') as f:
@@ -338,7 +338,7 @@ def _materials():
 
 
 def _atlas_ids():
-    p = IMPORTS / 't00-43fac75' / 'registry' / 'technologies.toml'
+    p = IMPORTS / 't00-030fc14' / 'registry' / 'technologies.toml'
     if not p.exists():
         return set()
     with open(p, 'rb') as f:

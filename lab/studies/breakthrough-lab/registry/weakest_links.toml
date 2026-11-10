@@ -25,17 +25,22 @@ subsystem = "Drive: fusion target and driver"
 description = "The D-3He target must be compressed to 2,000 g/cm3 and reach gain about 1,084 on a 168 MJ heavy-ion pulse. Compressing its 0.77 g of fuel on the ideal cold adiabat alone takes about 47 % of the driver energy; heavy-ion drivers couple 10-20 %."
 baseline = "Indirect- and direct-drive ICF: D-T ignition at target gain about 4 (NIF 2025); D-3He has never ignited; heavy-ion coupling into fuel 10-20 %."
 metrics = [
-  { label = "Compression energy per gram at alpha 1", file = "t00-43fac75/studies/gate/results/target.json", pointer = "/compression/specific_MJ_g_alpha1", unit = "MJ/g", fmt = "{:,.1f}" },
-  { label = "FDP-1 target fuel", file = "t00-43fac75/studies/gate/results/target.json", pointer = "/fdp1_target/fuel_g", unit = "g", fmt = "{:.2f}" },
-  { label = "Driver energy per pulse", file = "t00-43fac75/studies/gate/results/target.json", pointer = "/fdp1_target/driver_MJ", unit = "MJ", fmt = "{:,.0f}" },
-  { label = "Target gain the V4 ship needs", file = "t00-43fac75/studies/gate/results/target.json", pointer = "/fdp1_target/gain", unit = "", fmt = "{:,.0f}" },
+  { label = "Compression energy per gram at alpha 1", file = "t00-030fc14/studies/gate/results/target.json", pointer = "/compression/specific_MJ_g_alpha1", unit = "MJ/g", fmt = "{:,.1f}" },
+  { label = "FDP-1 target fuel", file = "t00-030fc14/studies/gate/results/target.json", pointer = "/fdp1_target/fuel_g", unit = "g", fmt = "{:.2f}" },
+  { label = "Driver energy per pulse", file = "t00-030fc14/studies/gate/results/target.json", pointer = "/fdp1_target/driver_MJ", unit = "MJ", fmt = "{:,.0f}" },
+  { label = "Target gain the V4 ship needs", file = "t00-030fc14/studies/gate/results/target.json", pointer = "/fdp1_target/gain", unit = "", fmt = "{:,.0f}" },
+  { label = "Compression energy, first principles (Gate 2)", file = "t00-030fc14/studies/gate2/results/target2.json", pointer = "/compression/ideal_E_MJ_alpha1", unit = "MJ", fmt = "{:.1f}" },
+  { label = "Lowest gain at which V4 closes at all (Gate 2)", file = "t00-030fc14/studies/gate2/results/target2.json", pointer = "/gain_sensitivity_fdp1_V4/closure_threshold_gain", unit = "", fmt = "{:,.0f}" },
+  { label = "Best analytical target gain (Gate 2 operating map)", file = "t00-030fc14/studies/gate2/results/target2.json", pointer = "/operating_map/best_any/gain", unit = "", fmt = "{:,.0f}" },
+  { label = "Ignitor energy that best case deposits in 20 ps", file = "t00-030fc14/studies/gate2/results/target2.json", pointer = "/operating_map/best_any/ignitor_MJ_deposited", unit = "MJ", fmt = "{:.1f}" },
+  { label = "Coupling needed for closure at alpha 1, free ignitor", file = "t00-030fc14/studies/gate2/results/target2.json", pointer = "/coupling_needed_for_closure/alpha 1", unit = "", fmt = "{:.2f}" },
 ]
-current = "Coupling eta_c/alpha 0.10-0.20 reaches 110-310 g/cm3, far below 2,000."
-required = "Coupling about 0.47 at alpha 1 (0.5 is the Vertex research target), and D-3He ignition itself."
-gap = "About 2.5-5x in coupling; D-3He ignition undemonstrated (gain 4 shown for D-T, 1,084 needed)."
-evidence = [ { source = "S-T00-GATE", note = "section 3: compression energy, gas capsule NOT DEFENSIBLE" }, { source = "S-T04-STUDY", note = "compression ceiling, D-T04-1" }, { source = "S-NIF-2025", note = "demonstrated gain" } ]
+current = "Coupling eta_c/alpha 0.10-0.20 reaches 110-310 g/cm3, far below 2,000. Gate 2: the best analytical operating point reaches gain 440, and only with alpha 1, 20 % coupling and a 7.8 MJ, 20 ps ignitor that does not exist."
+required = "Gain at least 703 for V4 to close at all (Gate 2), i.e. coupling at least 0.30 at alpha 1 with a free ignitor, more with the coupled extras; and D-3He ignition itself (hot spot rhoR 8-10 g/cm2 at about 60 keV)."
+gap = "Gain 440 at best against 703 needed; the ignitor about 10^4 beyond any built; D-3He ignition undemonstrated (gain 4 shown for D-T)."
+evidence = [ { source = "S-T00-GATE2", note = "section 2: compression 77.8 MJ confirmed, gain 440 against 703, no defensible operating point" }, { source = "S-T00-GATE", note = "section 3: compression energy, gas capsule NOT DEFENSIBLE" }, { source = "S-T04-STUDY", note = "compression ceiling, D-T04-1" }, { source = "S-NIF-2025", note = "demonstrated gain" } ]
 confidence = "HIGH"
-uncertainty = "The 1D implosion of this target at this scale has never been computed (the gate's next decisive experiment); the ideal adiabat is a lower bound on the energy, so the real coupling needed is higher."
+uncertainty = "The 1D implosion of this target at this scale has never been computed (Gate 2 defines it as a falsification test, expected to fail); the ideal adiabat is a lower bound on the energy, so the real coupling needed is higher."
 consequences = "If the gain is far below 1,084, no launcher, nozzle or spine change rescues V4: Vertex needs a different fuel or driver basis."
 depends_on = []
 candidates = "Higher-coupling target architectures; magnetised fuel; a D-T spark; a declared Level C compression aid (none declared)."
@@ -54,23 +59,26 @@ subsystem = "Drive: magnetic nozzle and shadow shield"
 description = "An axisymmetric magnetic nozzle has a field zero on its axis. Plasma escapes along it onto the centre of the shadow shield."
 baseline = "Topology: on a closed flux-excluding surface the tangential field has at least two zeros, so no field shape removes the leak; it can only be moved."
 metrics = [
-  { label = "Shield-centre fluence per pulse", file = "t00-43fac75/studies/gate/results/axis_base.json", pointer = "/baseline/centre_fluence_J_cm2", unit = "J/cm2", fmt = "{:,.0f}" },
-  { label = "Permanent-face limit over the mission", file = "t00-43fac75/studies/gate/results/axis_base.json", pointer = "/requirement/limit_J_cm2", unit = "J/cm2", fmt = "{:.1f}" },
-  { label = "Unstopped channel half-angle", file = "t00-43fac75/studies/gate/results/axis_base.json", pointer = "/baseline/leak_half_angle_deg", unit = "deg", fmt = "{:.1f}" },
-  { label = "Leak power on V4", file = "t00-43fac75/studies/gate/results/axis_base.json", pointer = "/baseline/leak_W", unit = "GW", scale = 1e-9, fmt = "{:,.0f}" },
+  { label = "Shield-centre fluence per pulse", file = "t00-030fc14/studies/gate/results/axis_base.json", pointer = "/baseline/centre_fluence_J_cm2", unit = "J/cm2", fmt = "{:,.0f}" },
+  { label = "Permanent-face limit over the mission", file = "t00-030fc14/studies/gate/results/axis_base.json", pointer = "/requirement/limit_J_cm2", unit = "J/cm2", fmt = "{:.1f}" },
+  { label = "Unstopped channel half-angle", file = "t00-030fc14/studies/gate/results/axis_base.json", pointer = "/baseline/leak_half_angle_deg", unit = "deg", fmt = "{:.1f}" },
+  { label = "Leak power on V4", file = "t00-030fc14/studies/gate/results/axis_base.json", pointer = "/baseline/leak_W", unit = "GW", scale = 1e-9, fmt = "{:,.0f}" },
+  { label = "A1 at 14 deg: shadow-cone rim limit (Gate 2)", file = "t00-030fc14/studies/gate2/results/cone.json", pointer = "/rows/0/rim_limit_deg", unit = "deg", fmt = "{:.1f}" },
+  { label = "Coupled ship with the cone held to that limit (Gate 2 K1)", file = "t00-030fc14/studies/gate2/results/matrix.json", pointer = "/rows/3/status", unit = "", fmt = "{}" },
+  { label = "Static C1/C2 pair torque at V4 scale (Gate 2)", file = "t00-030fc14/studies/gate2/results/cone.json", pointer = "/rows/0/static_pair_load/torque_mag_MN_m", unit = "GN m", scale = 1e-3, fmt = "{:.1f}" },
 ]
 current = "342 J/cm2 per pulse at the shield centre; about 34 um of a solid face ablated per pulse."
 required = "At most about 1.7 J/cm2 for 3.5e10 pulses (a 200x reduction), or the zero moved off every surface."
-gap = "200x in fluence. Tilted closure A1 moves the zero to 10.8 +/- 3.0 deg (vacuum-field model) but needs a shadow cone of at most 7.5 deg; the converged coupled ships need 9.4 deg."
-evidence = [ { source = "S-T00-GATE", note = "section 1: leak, concepts, A1" }, { source = "S-T05-GATE", note = "A1 drawn, azimuth windows, C1 clash with loop-1 struts" } ]
+gap = "200x in fluence. Tilted closure A1 moves the zero to 10.8 +/- 3.0 deg (vacuum-field model) but needs a shadow cone of at most 7.5 deg. Gate 2: all nine tested ships that hold 7.5 deg diverge past 400 kt; the converged ones need 8.2-11.6 deg. A1 is geometrically blocked, and twin splayed nozzles do not fit with FDP-1-sized loops (T05)."
+evidence = [ { source = "S-T00-GATE2", note = "section 1: A1 shield-cone matrix, A1 geometrically blocked" }, { source = "S-T05-GATE2", note = "envelopes, twin nozzles do not fit" }, { source = "S-T00-GATE", note = "section 1: leak, concepts, A1" }, { source = "S-T05-GATE", note = "A1 drawn, azimuth windows, C1 clash with loop-1 struts" } ]
 confidence = "MEDIUM"
 uncertainty = "Vacuum field, thin shell, no lateral flow: funnelling toward the moved zero would enlarge the leak (only MHD, D-21, can settle it)."
 consequences = "Without a fix the shield face erodes at metres per hour at 196 Hz; the drive cannot run."
 depends_on = []
-candidates = "A1 tilted closure (retained, analytically promising); twin splayed nozzles (open, a different architecture); rejected: stronger field, plug coil, centre insert, lithium plug."
-conventional = "POSSIBLY"
+candidates = "None open. A1 tilted closure: geometrically blocked (Gate 2); twin splayed nozzles: do not fit (T05 Gate 2); rejected earlier: stronger field, plug coil, centre insert, lithium plug. Gate 2 recommends a non-ICF architecture study instead of more Vertex geometry."
+conventional = "UNLIKELY"
 speculative = "MAY_HELP"
-resolution = "CANDIDATE_FIX"
+resolution = "OPEN"
 questions = { blocks_engine = true, non_convergence = false, major_penalty = false, local = false }
 tier_reason = "A destroyed shield stops the drive; no other subsystem change removes the field zero."
 breakthroughs = ["BT-003"]
@@ -83,9 +91,9 @@ subsystem = "Drive: target factory and launcher"
 description = "Only one target may be in the open per pulse, so the launcher speed caps the pulse rate. The target must survive the launch acceleration and still be a working fusion target."
 baseline = "Cryogenic target injection demonstrated at about 400 m/s; layered D-3He targets survive about 1,000 g."
 metrics = [
-  { label = "Targets per mission (V4)", file = "t00-43fac75/studies/gate/results/target.json", pointer = "/fill_and_rate/targets_per_mission_V4", unit = "", fmt = "{:.2e}" },
-  { label = "Capsule wall per fuel mass (gas capsule)", file = "t00-43fac75/studies/gate/results/target.json", pointer = "/mix/wall_over_fuel", unit = "", fmt = "{:.2f}" },
-  { label = "Exhaust-velocity factor of the capsule wall", file = "t00-43fac75/studies/gate/results/target.json", pointer = "/exhaust/ve_factor_at_fixed_pulse_energy", unit = "", fmt = "{:.2f}" },
+  { label = "Targets per mission (V4)", file = "t00-030fc14/studies/gate/results/target.json", pointer = "/fill_and_rate/targets_per_mission_V4", unit = "", fmt = "{:.2e}" },
+  { label = "Capsule wall per fuel mass (gas capsule)", file = "t00-030fc14/studies/gate/results/target.json", pointer = "/mix/wall_over_fuel", unit = "", fmt = "{:.2f}" },
+  { label = "Exhaust-velocity factor of the capsule wall", file = "t00-030fc14/studies/gate/results/target.json", pointer = "/exhaust/ve_factor_at_fixed_pulse_energy", unit = "", fmt = "{:.2f}" },
 ]
 current = "Layered targets survive at most about 930 g (launcher B, B-long NOT DEFENSIBLE); the gas-filled diamond capsule survives 30,000 g but is not a defensible fusion target."
 required = "About 11 km/s at 196 Hz; 27.5 km/s and a 1.3 km barrel at the coupled ships' 459 Hz; a fill process at the pulse rate."
@@ -111,19 +119,21 @@ subsystem = "Whole ship: mass loop"
 description = "Every added tonne must be accelerated four times to and from 0.016 c. V4 gears about 12 t of departure per added tonne, and FDP-1 raises the pulse rate when the ship grows, so items that grow with the ship multiply."
 baseline = "Rocket equation at the canon mission (0.016 c, four burns, ve 19,200 km/s); FDP-1 sizes drive, radiators, tanks and structure on every solve."
 metrics = [
-  { label = "V4 departure (nothing added)", file = "t00-43fac75/studies/gate/results/coupled.json", pointer = "/v4_reference/departure_t", unit = "t", fmt = "{:,.0f}" },
-  { label = "Coils + launcher + axis fix, converged", file = "t00-43fac75/studies/gate/results/coupled.json", pointer = "/cases/3/summary/departure_t", unit = "t", fmt = "{:,.0f}" },
-  { label = "+ spine at the free-free 0.2 Hz bound", file = "t00-43fac75/studies/gate/results/coupled.json", pointer = "/cases/6/summary/departure_t", unit = "t", fmt = "{:,.0f}" },
-  { label = "+ spine at T05's 0.2 Hz cantilever basis", file = "t00-43fac75/studies/gate/results/coupled.json", pointer = "/cases/4/status", unit = "", fmt = "{}" },
+  { label = "V4 departure (nothing added)", file = "t00-030fc14/studies/gate/results/coupled.json", pointer = "/v4_reference/departure_t", unit = "t", fmt = "{:,.0f}" },
+  { label = "Coils + launcher + axis fix, converged", file = "t00-030fc14/studies/gate/results/coupled.json", pointer = "/cases/3/summary/departure_t", unit = "t", fmt = "{:,.0f}" },
+  { label = "+ spine at the free-free 0.2 Hz bound", file = "t00-030fc14/studies/gate/results/coupled.json", pointer = "/cases/6/summary/departure_t", unit = "t", fmt = "{:,.0f}" },
+  { label = "+ spine at T05's 0.2 Hz cantilever basis", file = "t00-030fc14/studies/gate/results/coupled.json", pointer = "/cases/4/status", unit = "", fmt = "{}" },
+  { label = "Gate 2 G0 with the shadow geometry computed", file = "t00-030fc14/studies/gate2/results/matrix.json", pointer = "/rows/0/summary/departure_t", unit = "t", fmt = "{:,.0f}" },
+  { label = "Gate 2 G0 without A1 (axis leak unsolved)", file = "t00-030fc14/studies/gate2/results/matrix.json", pointer = "/rows/1/summary/departure_t", unit = "t", fmt = "{:,.0f}" },
 ]
-current = "Converges at 70-85 kt with coils, launcher and axis fix; 117-143 kt with a relaxed spine; does not converge at the 0.2 Hz cantilever basis or with a rate cap."
+current = "Converges at 70-85 kt with coils, launcher and axis fix; 117-143 kt with a relaxed spine; does not converge at the 0.2 Hz cantilever basis or with a rate cap. Gate 2, with the shadow geometry computed: 146 kt (G0) or 84 kt without A1, neither an engineering-feasible ship (dust shield, C1 clash, spine in the spin band)."
 required = "A ship that converges with every needed item booked (coils, spine, launcher, axis fix, target wall as exhaust)."
-gap = "Loop gain above 1 for the spine at T05's basis; the 1.7 % A1 thrust cost alone adds about 12 kt."
-evidence = [ { source = "S-T00-GATE", note = "section 2: coupled fixed-point solve" }, { source = "S-T00-ATLAS", note = "V3-V5 generations" } ]
+gap = "Loop gain above 1 for the spine at T05's basis; FDP-1 near V4 amplifies added mass about 14x (Gate 2), so a few kt of extras decide closure."
+evidence = [ { source = "S-T00-GATE2", note = "section 1.2 matrix: about 14x amplification of added mass near V4" }, { source = "S-T00-GATE", note = "section 2: coupled fixed-point solve" }, { source = "S-T00-ATLAS", note = "V3-V5 generations" } ]
 confidence = "HIGH"
 uncertainty = "Which stiffness criterion applies decides whether it closes at all; the target wall as exhaust mass is not in the solve."
 consequences = "Masses quoted for V4 are lower bounds; any growing item can tip the ship into divergence."
-depends_on = ["WL-006", "WL-007", "WL-009"]
+depends_on = ["WL-001", "WL-006", "WL-007", "WL-009"]  # Gate 2: the binding problem sits upstream, in target gain and nozzle efficiency
 candidates = "Lighter growing items (BT-002, BT-004, BT-006), better nozzle efficiency (BT-003), higher gain (BT-001), an accepted stiffness criterion."
 conventional = "POSSIBLY"
 speculative = "MAY_HELP"
@@ -140,15 +150,17 @@ subsystem = "Drive: magnetic nozzle"
 description = "The share of the plasma's energy that becomes thrust. Published pulsed magnetic-nozzle efficiencies are 0.30-0.64; T03's ideal thin-shell model gives 0.791 at 15 pulse energies of stored field."
 baseline = "Laser-fusion magnetic thrust chamber experiments and simulations (0.30-0.64)."
 metrics = [
-  { label = "V4 at 0.64 (best published)", file = "t00-43fac75/results/convergence.json", pointer = "/cases/V4_nozzle_band/rows/2/summary/departure_t", unit = "t", fmt = "{:,.0f}" },
-  { label = "V4 at 0.791 (ideal model)", file = "t00-43fac75/results/convergence.json", pointer = "/cases/V4_nozzle_band/rows/0/summary/departure_t", unit = "t", fmt = "{:,.0f}" },
+  { label = "V4 at 0.64 (best published)", file = "t00-030fc14/results/convergence.json", pointer = "/cases/V4_nozzle_band/rows/2/summary/departure_t", unit = "t", fmt = "{:,.0f}" },
+  { label = "V4 at 0.791 (ideal model)", file = "t00-030fc14/results/convergence.json", pointer = "/cases/V4_nozzle_band/rows/0/summary/departure_t", unit = "t", fmt = "{:,.0f}" },
+  { label = "V4 closure threshold (Gate 2)", file = "t00-030fc14/studies/gate2/results/eta.json", pointer = "/closure_threshold_eta_T", unit = "", fmt = "{:.2f}" },
+  { label = "Coupled ship without A1 at 0.72 (Gate 2)", file = "t00-030fc14/studies/gate2/results/matrix.json", pointer = "/rows/15/status", unit = "", fmt = "{}" },
 ]
-current = "0.64 published; 0.791 only in the ideal model."
-required = "About 0.79 for V4 at 43 kt; the departure mass grows 40x between them."
+current = "0.64 published. Gate 2 resolved G1: 0.791 is the calculator's value at 1 deg resolution; the converged ledger gives 0.67, shell-scale smoothing 0.80-0.82 (physically about 0.80, not demonstrated)."
+required = "About 0.79 for V4 at 43 kt; the coupled ship needs about 0.75 (it diverges at 0.72, Gate 2)."
 gap = "0.15 in efficiency, geared about 40x in mass."
-evidence = [ { source = "S-T03-STUDY", note = "ideal thin-shell nozzle" }, { source = "S-T00-ATLAS", note = "V4 nozzle band" }, { source = "S-T03-INATOMI-2023", note = "published efficiency" } ]
+evidence = [ { source = "S-T00-GATE2", note = "section 3: G1 resolution and smoothing, eta_T vs closure" }, { source = "S-T03-STUDY", note = "ideal thin-shell nozzle" }, { source = "S-T00-ATLAS", note = "V4 nozzle band" }, { source = "S-T03-INATOMI-2023", note = "published efficiency" } ]
 confidence = "MEDIUM"
-uncertainty = "The reflection ledger depends on angular resolution (gate G1); lateral flow is outside the model."
+uncertainty = "Thin-shell band 0.67-0.82 (Gate 2); lateral flow, Rayleigh-Taylor, detachment and velocity spread are outside the model; 14.7 MeV protons are marginally kinetic."
 consequences = "Nozzle efficiency is as heavily geared as mass: every point of efficiency is kilotonnes."
 depends_on = ["WL-002"]
 candidates = "Closure-coil nozzle at 15 E_p (T03), shaped targets, MHD-optimised field (D-21)."
@@ -167,24 +179,27 @@ subsystem = "Structure: spine and tank-farm frame"
 description = "The 275 m tank stretch needs a spine whose first bending mode stays above the slosh band and the control bandwidth. Stiffness, not strength, governs."
 baseline = "Euler-Bernoulli frame FE (T05) and Timoshenko beam (T00) with CFRP at 120 GPa."
 metrics = [
-  { label = "S5N first bending, full tanks (frame FE)", file = "t05-c45ab4a/fe_s5n.json", pointer = "/cases/0/cantilever_first_bending_Hz", unit = "Hz", fmt = "{:.3f}" },
-  { label = "Beam model (the original criterion)", file = "t05-c45ab4a/fe_s5n.json", pointer = "/beam_model_reference/f1_cantilever_Hz", unit = "Hz", fmt = "{:.2f}" },
-  { label = "S5N with the coupled mass on V4 geometry", file = "t05-c45ab4a/fe_s5n.json", pointer = "/cases/2/cantilever_first_bending_Hz", unit = "Hz", fmt = "{:.3f}" },
+  { label = "S5N first bending, full tanks (frame FE)", file = "t05-f497778/fe_s5n.json", pointer = "/cases/0/cantilever_first_bending_Hz", unit = "Hz", fmt = "{:.3f}" },
+  { label = "Beam model (the original criterion)", file = "t05-f497778/fe_s5n.json", pointer = "/beam_model_reference/f1_cantilever_Hz", unit = "Hz", fmt = "{:.2f}" },
+  { label = "S5N with the coupled mass on V4 geometry", file = "t05-f497778/fe_s5n.json", pointer = "/cases/2/cantilever_first_bending_Hz", unit = "Hz", fmt = "{:.3f}" },
+  { label = "Cone-limited r 41.7 m farm, coupled mass (Gate 2 FE)", file = "t05-f497778/gate2_fe.json", pointer = "/cases/3/cantilever_first_bending_Hz", unit = "Hz", fmt = "{:.3f}" },
+  { label = "Best stiffened section, 18 longerons r 1.2 m (Gate 2 FE)", file = "t05-f497778/gate2_fe.json", pointer = "/cases/17/cantilever_first_bending_Hz", unit = "Hz", fmt = "{:.3f}" },
+  { label = "Gate 2 G0 spine, FE estimate", file = "t00-030fc14/studies/gate2/results/matrix.json", pointer = "/rows/0/report/5_structure/f1_FE_estimate_Hz", unit = "Hz", fmt = "{:.3f}" },
 ]
 current = "0.110 Hz in frame FE (beam model 0.2 Hz, unconservative by 1.8x); 0.066 Hz with the coupled mass, lowest mode 0.028 Hz inside the 0.022-0.040 Hz slosh band; keel ring overstressed (1.64)."
 required = "0.2 Hz cantilever (T05 basis) or another criterion the owner accepts; lowest mode clear of the slosh band."
-gap = "About 2x in frequency (4x in stiffness); adding area does not reach 0.2 Hz (rings, spokes, lacing x4 give 0.148 Hz)."
-evidence = [ { source = "S-T05-GATE", note = "section 3: frame FE" }, { source = "S-T00-GATE", note = "section 4: beam model under the coupled mass" } ]
+gap = "About 2x in frequency (4x in stiffness); adding area does not reach 0.2 Hz (rings, spokes, lacing x4 give 0.148 Hz). Gate 2: the r 41.7 m section saturates at about 0.13 Hz, so 0.2 Hz is unreachable at any mass; every converged coupled case has an estimated 0.04-0.07 Hz, inside the slosh and ring-spin band (0.022-0.040 and 0.067 Hz)."
+evidence = [ { source = "S-T05-GATE2", note = "stretched-farm frame FE, practical window 0.077-0.113 Hz free-free" }, { source = "S-T00-GATE2", note = "section 4: spine under the matrix" }, { source = "S-T05-GATE", note = "section 3: frame FE" }, { source = "S-T00-GATE", note = "section 4: beam model under the coupled mass" } ]
 confidence = "MEDIUM"
 uncertainty = "Joints were rigid in the FE; real joints lower the frequencies. The criterion itself is an owner question."
 consequences = "A spine sized to the basis grows with the ship and drives the coupled loop gain above 1 (WL-003)."
 depends_on = []
 candidates = "Different load path (shorter farm, wider section), a relaxed criterion with active slosh control, stiffer material (BT-007, no lever yet)."
-conventional = "POSSIBLY"
+conventional = "UNLIKELY"
 speculative = "MAY_HELP"
 resolution = "OPEN"
 questions = { blocks_engine = false, non_convergence = true, major_penalty = true, local = false }
-tier_reason = "At the T05 basis the spine is the item whose growth makes the coupled ship diverge."
+tier_reason = "At the T05 basis the spine is the item whose growth makes the coupled ship diverge; Gate 2 shows the divergence holds down to T05's practical target, a mass-loop failure rather than a choice of criterion."
 breakthroughs = ["BT-007"]
 systems = ["structure", "P09"]
 
@@ -195,10 +210,10 @@ subsystem = "Thermal: hot and warm loops"
 description = "Hundreds of GW of hot-loop heat and tens of GW of warm-loop heat at 628 K must be radiated. At V4's sizes the radiator wings reach about 10 km from the axis; coupled ships need about 3x the warm area."
 baseline = "Stefan-Boltzmann at the loop temperatures; component temperature limits (cores 640 K, power stages 740 K, capacitors 550 K) set the warm loop."
 metrics = [
-  { label = "V4 hot-loop heat", file = "t00-43fac75/results/convergence.json", pointer = "/generations/V4/hot_GW", unit = "GW", fmt = "{:,.0f}" },
-  { label = "V4 warm-loop heat", file = "t00-43fac75/results/convergence.json", pointer = "/generations/V4/warm_GW", unit = "GW", fmt = "{:,.0f}" },
-  { label = "V4 wing tip radius", file = "t00-43fac75/results/convergence.json", pointer = "/generations/V4/summary/wing_tip_radius_m", unit = "km", scale = 1e-3, fmt = "{:,.1f}" },
-  { label = "Preferred coupled ship, warm area", file = "t00-43fac75/studies/gate/results/coupled.json", pointer = "/cases/6/heat_rejection/warm_km2", unit = "km2", fmt = "{:,.1f}" },
+  { label = "V4 hot-loop heat", file = "t00-030fc14/results/convergence.json", pointer = "/generations/V4/hot_GW", unit = "GW", fmt = "{:,.0f}" },
+  { label = "V4 warm-loop heat", file = "t00-030fc14/results/convergence.json", pointer = "/generations/V4/warm_GW", unit = "GW", fmt = "{:,.0f}" },
+  { label = "V4 wing tip radius", file = "t00-030fc14/results/convergence.json", pointer = "/generations/V4/summary/wing_tip_radius_m", unit = "km", scale = 1e-3, fmt = "{:,.1f}" },
+  { label = "Preferred coupled ship, warm area", file = "t00-030fc14/studies/gate/results/coupled.json", pointer = "/cases/6/heat_rejection/warm_km2", unit = "km2", fmt = "{:,.1f}" },
 ]
 current = "V4: 4.95 km2 warm, 0.46 km2 hot, two wings to about 10.1 km tip radius (20.3 km span); coupled 117 kt ship: 14.0 km2 warm, 1.37 km2 hot."
 required = "Reject the same heat with a span the ship can deploy, carry under thrust and keep edge-on to the burn and the dust."
@@ -224,9 +239,9 @@ subsystem = "Drive: closure coils C1, C2"
 description = "The closure coils that stop the forward pulse carry hundreds of MA at 25 T. Their winding, case, neutron screen, cryostat, armour and struts were never booked in FDP-1."
 baseline = "REBCO coated conductor (MAT-REBCO), virial theorem for the structure, Rev 4 bottom-up assembly."
 metrics = [
-  { label = "Coil hardware on the converged coils-only ship", file = "t00-43fac75/studies/gate/results/coupled.json", pointer = "/cases/1/added_kg/closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)", unit = "t", scale = 1e-3, fmt = "{:,.0f}" },
-  { label = "Coils-only ship, converged", file = "t00-43fac75/studies/gate/results/coupled.json", pointer = "/cases/1/summary/departure_t", unit = "t", fmt = "{:,.0f}" },
-  { label = "Coil hot-loop heat (coils-only ship)", file = "t00-43fac75/studies/gate/results/coupled.json", pointer = "/cases/1/heat_rejection/coil_hot_GW", unit = "GW", fmt = "{:,.1f}" },
+  { label = "Coil hardware on the converged coils-only ship", file = "t00-030fc14/studies/gate/results/coupled.json", pointer = "/cases/1/added_kg/closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)", unit = "t", scale = 1e-3, fmt = "{:,.0f}" },
+  { label = "Coils-only ship, converged", file = "t00-030fc14/studies/gate/results/coupled.json", pointer = "/cases/1/summary/departure_t", unit = "t", fmt = "{:,.0f}" },
+  { label = "Coil hot-loop heat (coils-only ship)", file = "t00-030fc14/studies/gate/results/coupled.json", pointer = "/cases/1/heat_rejection/coil_hot_GW", unit = "GW", fmt = "{:,.1f}" },
 ]
 current = "About 2.2 kt of coil hardware raises V4 from 42.9 kt to 70.2 kt; coil heat 6-11 GW (small); REBCO and CFC data at the coil fluence are missing."
 required = "Coils booked, cooled and shielded for 3.5e10 pulses, with conductor that keeps its current density after the neutron fluence."
@@ -252,9 +267,9 @@ subsystem = "Shielding: shadow shield and hardware faces"
 description = "Three different fluxes need three different answers: soft X-rays ablate faces per pulse, D-D neutrons damage conductor and need mass, charged plasma needs field geometry (WL-002)."
 baseline = "Shadow shield sized by FDP-1 to the crew and hardware cones; X-ray per-pulse surface limits; LiH and W attenuation."
 metrics = [
-  { label = "V4 shield mass", file = "t00-43fac75/results/convergence.json", pointer = "/generations/V4/summary/shield_t", unit = "t", fmt = "{:,.0f}" },
-  { label = "V4 hardware cone half-angle", file = "t00-43fac75/results/convergence.json", pointer = "/generations/V4/hardware_cone_deg", unit = "deg", fmt = "{:.1f}" },
-  { label = "Escape share (X-rays and neutrons)", file = "t00-43fac75/results/convergence.json", pointer = "/generations/V4/escape_share", unit = "", fmt = "{:.4f}" },
+  { label = "V4 shield mass", file = "t00-030fc14/results/convergence.json", pointer = "/generations/V4/summary/shield_t", unit = "t", fmt = "{:,.0f}" },
+  { label = "V4 hardware cone half-angle", file = "t00-030fc14/results/convergence.json", pointer = "/generations/V4/hardware_cone_deg", unit = "deg", fmt = "{:.1f}" },
+  { label = "Escape share (X-rays and neutrons)", file = "t00-030fc14/results/convergence.json", pointer = "/generations/V4/escape_share", unit = "", fmt = "{:.4f}" },
 ]
 current = "CFC and lithium faces survive every modelled X-ray spectrum; tungsten fails soft; the coupled ships need a 9.4 deg shadow cone (shield radius 11.4 m), which breaks A1."
 required = "Every face below its per-pulse limit; conductor below its neutron fluence; a shadow cone at or below about 7.5 deg if A1 is used."

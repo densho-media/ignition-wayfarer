@@ -21,7 +21,7 @@ Status: ACTIVE, PARKED, SUPERSEDED (by which entry) or PROMOTED (into which `mai
 | [four-burn-mission](studies/four-burn-mission/NOTES.md) | Study | ACTIVE, engine of fdp1 | What drive and ship fly four 0.016 c burns, by tier | 92b83f0 | which tier to design to |
 | [graded-thermal-blade](studies/graded-thermal-blade/NOTES.md) | Study | PROMOTED 1f9eba1, kept as a tool | Radiator view-factor Monte Carlo and blade concepts | 90df1a9 | none |
 | [fdp1-requirements](problems/fdp1-requirements/NOTES.md) | Problem map | ACTIVE | Where FDP-1 fails: 0.016 c x4 closes, 1 g does not | e251f7c | V3 review; P11; shield mass OD-014 |
-| [breakthrough-lab](studies/breakthrough-lab/NOTES.md) | Study | ACTIVE | Which declared breakthroughs, and how few, make the Vertex drive close? | 279a612 (T00 43fac75, T05 c45ab4a imports) | which breakthroughs to select for experiment; spine stiffness criterion |
+| [breakthrough-lab](studies/breakthrough-lab/NOTES.md) | Study | ACTIVE | Which declared breakthroughs, and how few, make the Vertex drive close? | 279a612 (T00 030fc14, T05 f497778 imports, Gate 2) | which breakthroughs to select for experiment; spine stiffness criterion |
 
 Each entry's `NOTES.md` opens with the same table: kind, status, question, model base, the branch it came from, open owner
 questions and where its review file is.

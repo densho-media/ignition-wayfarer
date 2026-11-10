@@ -1,0 +1,3850 @@
+{
+ "study": "Gate 2 Task A: shield-cone feasibility matrix (T00)",
+ "status": "MODEL, research only, NON-CANON",
+ "method": "  python3 lab/variants/vertex-drive/studies/gate2/coupled2.py          # writes results/matrix.json (tens of minutes)\n  python3 lab/variants/vertex-drive/studies/gate2/coupled2.py NAME...  # selected variants only (merged into matrix.json)\n\nSame fixed-point method as the gate (studies/gate/coupled.py, unchanged): each added item is re-sized on every FDP-1 solution until\nthe departure mass changes by less than 1 t; FDP-1 and the four-burn engine are untouched (adapter terms through payload, plume heat\nand house power). What Gate 2 adds is the geometry of the shadow cone, so that the A1 limit is a computed constraint:\n\n  shield rim     FDP-1's own rule: rim = atan(tan(theta_hw) + m / d_shield), m = 1 m shadow margin, theta_hw = the widest protected\n                 hardware envelope seen from the burn point (FDP-1 envelopes; the tank-farm envelopes replaced by the variant's farm)\n  shield mass    FDP-1's layered-shield formulas re-evaluated at the variant's cones and distance (the crew core follows the crew cone,\n                 the hardware annulus and W face the hardware cone); booked as the difference to FDP-1's own shield. (The gate scaled\n                 the whole shield with the hardware cone; that over-counted, because the crew core does not grow.)\n  tank farm      radius Rf at its V4 near end (X 109.25 m): 'wide' Rf = 34.5 sqrt(lam) (the gate), 'cone' Rf = the largest radius that\n                 keeps the rim at the A1 limit, capped by the forward dust shield (canon r 45, 1 m clearance: Rf <= 44 m); the rest of\n                 the propellant goes into more bays (the stretch grows). lam = propellant / V4 propellant.\n  spine          N9 longerons on a ring 31 Rf/34.5 m, sized on a stated basis (beam model, Rev 4 spine.py); the result is also given\n                 as an FE-calibrated estimate f_FE = k_FE f_beam_cantilever with T05's S5N frame FE ratio (0.110 / 0.200 on V4)\n  aft stand-off  dx: the drive (shield, module, nozzle, coils) moves aft by dx on a new truss from the hull (six longerons at r 6.5 m,\n                 sized for the same frequency basis with the drive as a tip mass and for the thrust); nine beam lines lengthen by dx\n  A1             tilt chi from results/cone.json: thrust-efficiency factor (momentum factor squared; the gate applied the momentum\n                 factor, which under-counted), the static pair torque booked as strut mass 1.25 x 2 rho tau / sigma_a (scaled with the\n                 coils' stored energy), the residual thrust torque trimmed by a small nozzle turn (reported)\n  launcher       B-ray as in the gate (one target in flight per period, 30,000 g)\n",
+ "k_FE": 0.5499999999999999,
+ "dust_r_m": 44.0,
+ "rows": [
+  {
+   "name": "G0",
+   "what": "gate reference: wide farm, spine free-free 0.2 Hz (beam), A1 14 deg, corrected shield and eta_T",
+   "variant": {
+    "name": "G0",
+    "what": "gate reference: wide farm, spine free-free 0.2 Hz (beam), A1 14 deg, corrected shield and eta_T",
+    "farm": "wide",
+    "basis": [
+     "free_free",
+     0.2
+    ]
+   },
+   "status": "CONVERGED",
+   "iterations": 13,
+   "departure_trajectory_t": [
+    58725.57672091077,
+    117342.23227797251,
+    135201.89942975066,
+    141679.7041981568,
+    144161.22762931034,
+    145130.9511818288,
+    145512.80044448603,
+    145663.61024362524,
+    145723.24222175227,
+    145746.83279134217,
+    145756.1672591989,
+    145759.86076866637,
+    145761.32127570634,
+    145761.89892052233
+   ],
+   "history": [
+    {
+     "departure_t": 117342.23227797251,
+     "farm_r_m": 40.35749630584382,
+     "stretch_m": 275.4,
+     "rim_deg": 7.061088986523822,
+     "added_t": {
+      "closure coils C1, C2": 2519.4508738457407,
+      "A1 pair-torque struts": 1049.084678942014,
+      "launcher B-ray": 70.10261351341417,
+      "spine N9 over S2 keels": 428.9435213355045,
+      "shadow shield change (variant cones)": 67.49728129343363,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 135201.89942975066,
+     "farm_r_m": 57.04764794948545,
+     "stretch_m": 275.4,
+     "rim_deg": 9.612948888456136,
+     "added_t": {
+      "closure coils C1, C2": 2778.1199342191694,
+      "A1 pair-torque struts": 1049.1850994434767,
+      "launcher B-ray": 279.86192389786277,
+      "spine N9 over S2 keels": 879.6040981689781,
+      "shadow shield change (variant cones)": 310.7709964502704,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 141679.7041981568,
+     "farm_r_m": 61.235316506954064,
+     "stretch_m": 275.4,
+     "rim_deg": 10.247302696975389,
+     "added_t": {
+      "closure coils C1, C2": 2852.1745677831436,
+      "A1 pair-torque struts": 1049.4716512715806,
+      "launcher B-ray": 371.4272347337483,
+      "spine N9 over S2 keels": 1046.6767484714098,
+      "shadow shield change (variant cones)": 383.6968306468064,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 144161.22762931034,
+     "farm_r_m": 62.68510983504421,
+     "stretch_m": 275.4,
+     "rim_deg": 10.466300900545358,
+     "added_t": {
+      "closure coils C1, C2": 2878.722431465543,
+      "A1 pair-torque struts": 1049.5969711447697,
+      "launcher B-ray": 407.81944150833726,
+      "spine N9 over S2 keels": 1110.7911008734545,
+      "shadow shield change (variant cones)": 410.06068324248,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 145130.9511818288,
+     "farm_r_m": 63.231692476346296,
+     "stretch_m": 275.4,
+     "rim_deg": 10.548780786429246,
+     "added_t": {
+      "closure coils C1, C2": 2888.852896200855,
+      "A1 pair-torque struts": 1049.6467511341414,
+      "launcher B-ray": 422.20905166307836,
+      "spine N9 over S2 keels": 1135.849564841018,
+      "shadow shield change (variant cones)": 420.14914363659943,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 145512.80044448603,
+     "farm_r_m": 63.4440050819411,
+     "stretch_m": 275.4,
+     "rim_deg": 10.580806451878399,
+     "added_t": {
+      "closure coils C1, C2": 2892.805968327757,
+      "A1 pair-torque struts": 1049.6664664963487,
+      "launcher B-ray": 427.8996630274885,
+      "spine N9 over S2 keels": 1145.7168079903038,
+      "shadow shield change (variant cones)": 424.0898946842049,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 145663.61024362524,
+     "farm_r_m": 63.52741297048579,
+     "stretch_m": 275.4,
+     "rim_deg": 10.593385953353907,
+     "added_t": {
+      "closure coils C1, C2": 2894.361703040078,
+      "A1 pair-torque struts": 1049.6742570662354,
+      "launcher B-ray": 430.15087268003384,
+      "spine N9 over S2 keels": 1149.6138079754753,
+      "shadow shield change (variant cones)": 425.64140486904313,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 145723.24222175227,
+     "farm_r_m": 63.56032442335636,
+     "stretch_m": 275.4,
+     "rim_deg": 10.598349360938707,
+     "added_t": {
+      "closure coils C1, C2": 2894.975972857201,
+      "A1 pair-torque struts": 1049.6773020381954,
+      "launcher B-ray": 431.04161870575143,
+      "spine N9 over S2 keels": 1151.1547121718668,
+      "shadow shield change (variant cones)": 426.25412248740406,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 145746.83279134217,
+     "farm_r_m": 63.57333330057892,
+     "stretch_m": 275.4,
+     "rim_deg": 10.60031116330935,
+     "added_t": {
+      "closure coils C1, C2": 2895.2188710229966,
+      "A1 pair-torque struts": 1049.6785470828809,
+      "launcher B-ray": 431.3940612917399,
+      "spine N9 over S2 keels": 1151.764285135914,
+      "shadow shield change (variant cones)": 426.4964004807355,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 145756.1672591989,
+     "farm_r_m": 63.57847891231843,
+     "stretch_m": 275.4,
+     "rim_deg": 10.601087151125496,
+     "added_t": {
+      "closure coils C1, C2": 2895.3149479963818,
+      "A1 pair-torque struts": 1049.6790248734296,
+      "launcher B-ray": 431.53353622913414,
+      "spine N9 over S2 keels": 1152.0054778199421,
+      "shadow shield change (variant cones)": 426.5922423777096,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 145759.86076866637,
+     "farm_r_m": 63.580514845979536,
+     "stretch_m": 275.4,
+     "rim_deg": 10.60139415848007,
+     "added_t": {
+      "closure coils C1, C2": 2895.3529830057196,
+      "A1 pair-torque struts": 1049.6792400741363,
+      "launcher B-ray": 431.58871647760475,
+      "spine N9 over S2 keels": 1152.1009213712578,
+      "shadow shield change (variant cones)": 426.6301707239789,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 145761.32127570634,
+     "farm_r_m": 63.58132041650964,
+     "stretch_m": 275.4,
+     "rim_deg": 10.601515664657112,
+     "added_t": {
+      "closure coils C1, C2": 2895.368005215859,
+      "A1 pair-torque struts": 1049.679287607623,
+      "launcher B-ray": 431.6105720199244,
+      "spine N9 over S2 keels": 1152.1386880363568,
+      "shadow shield change (variant cones)": 426.64517088986037,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 145761.89892052233,
+     "farm_r_m": 63.58163895665154,
+     "stretch_m": 275.4,
+     "rim_deg": 10.60156371768118,
+     "added_t": {
+      "closure coils C1, C2": 2895.3739395806892,
+      "A1 pair-torque struts": 1049.6792984907881,
+      "launcher B-ray": 431.6192187398291,
+      "spine N9 over S2 keels": 1152.1536221066642,
+      "shadow shield change (variant cones)": 426.65110078799785,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    }
+   ],
+   "eta_T_booked": 0.764858856592654,
+   "loop_gain": 0.3955097785768778,
+   "report": {
+    "1_shield": {
+     "rim_deg": 10.60156371768118,
+     "A1_limit_from_leak_deg": 7.5,
+     "theta_hw_deg": 9.83987153428738,
+     "set_by": "tank_farm",
+     "theta_crew_deg": 4.864834603727951,
+     "d_shield_m": 72.85215274068648,
+     "shield_radius_m": 13.63596773132386,
+     "shield_t": 1033.7973278774402,
+     "fdp1_shield_t": 607.1463179360421,
+     "envelope_margins_deg": {
+      "habitat_rings": 5.7367291139532295,
+      "crew_trunk_and_refuge": 9.545095671980635,
+      "hull_and_spine": 6.790100960592049,
+      "equipment_module": 5.749840500004377,
+      "driver_galleries": 7.297083531794087,
+      "forward_shield_and_eye": 8.04421603396269,
+      "tank_farm": 0.7616921833938015
+     },
+     "hardware_decades": 3.0,
+     "crew_decades_n": 10.756534678912507,
+     "dust_farm_inside_r44": false,
+     "W_face_fluence_factor_vs_d_shield": 1.0000000100881055
+    },
+    "2_mass": {
+     "departure_t": 145761.89892052233,
+     "status": "CONVERGED"
+    },
+    "3_rate_Hz": 488.9440664517011,
+    "4_launcher": {
+     "muzzle_m_s": 31133.812376360213,
+     "accelerator_m": 1647.3757995618626,
+     "launcher_kg": 431619.2187398291,
+     "electric_W": 4834481090.740218
+    },
+    "5_structure": {
+     "farm_radius_m": 63.58163895665154,
+     "length_m": 275.4,
+     "longeron_ring_m": 57.13132775815066,
+     "tube_r_m": 0.3605304327409247,
+     "tube_at_cap": false,
+     "added_t": 1152.1536221066642,
+     "f1_cantilever_beam_Hz": 0.06810438332760414,
+     "f1_free_free_beam_Hz": 0.217144658861452,
+     "f1_FE_estimate_Hz": 0.037457410830182274,
+     "meets_basis": 1.0,
+     "screen": {
+      "above_3x_slosh_0.12Hz": 0.0,
+      "clear_of_spin_1x_2x": true,
+      "note": "FE estimate = k_FE x beam cantilever (T05 S5N ratio on V4); lowest (torsion-like) mode about 0.43 x that (T05)"
+     },
+     "aft_truss": {
+      "dx_m": 0.0,
+      "kg": 0.0
+     }
+    },
+    "6_coil_and_leak": {
+     "tilt_deg": 14.0,
+     "leak_centre_polar_deg": 10.828821274840449,
+     "leak_inner_edge_deg": 7.8403371705996285,
+     "rim_below_leak_limit": false,
+     "C1_near_side": {
+      "polar_deg": 8.68337376993094,
+      "z_m": 72.01710230974604,
+      "r_m": 10.998778744019013,
+      "envelope_r_min_m": 9.219683017255274,
+      "envelope_z_m": [
+       70.2380065829823,
+       73.79619803650978
+      ],
+      "envelope_polar_deg": 7.29536568903109
+     },
+     "C1_shield_same_z": true,
+     "C1_clear": false,
+     "pair_torque_GN_m": 74.0950093052321
+    },
+    "7_thrust": {
+     "thrust_MN": 9.856780476029648,
+     "residual_lever_m": 2.2881271683949387,
+     "untrimmed_torque_MN_m": 22.553567200108233,
+     "trim_turn_deg_full_to_dry": [
+      0.31975617009329216,
+      0.6302886045108164
+     ],
+     "eta_T": 0.764858856592654,
+     "side_over_axial": 2.084213743206176e-05
+    },
+    "added_t": {
+     "closure coils C1, C2": 2895.3739395806892,
+     "A1 pair-torque struts": 1049.6792984907881,
+     "launcher B-ray": 431.6192187398291,
+     "spine N9 over S2 keels": 1152.1536221066642,
+     "shadow shield change (variant cones)": 426.65110078799785,
+     "aft stand-off truss and beam lines": 0.0
+    }
+   },
+   "summary": {
+    "converged": true,
+    "departure_t": 145761.89892052233,
+    "a0_g": 0.006895573489099627,
+    "fusion_TW": 125.33092186592572,
+    "radiator_t": 13177.087866206237,
+    "hot_km2": 1.8321962651711985,
+    "warm_km2": 17.766286806522047,
+    "drive_t": 20963.262223622416,
+    "propellant_t": 92098.71020402292,
+    "tank_t": 8643.213038850596,
+    "end_t": 53663.188716499404,
+    "xray_standoff_m": null,
+    "payload_t": 7195.677179705968,
+    "wing_tip_radius_m": 36717.68240260332,
+    "pellet_rate_Hz": 488.9440664517011
+   }
+  },
+  {
+   "name": "G0-noA1",
+   "what": "as G0 without A1 (axisymmetric closure, leak on the shield centre)",
+   "variant": {
+    "name": "G0-noA1",
+    "what": "as G0 without A1 (axisymmetric closure, leak on the shield centre)",
+    "farm": "wide",
+    "basis": [
+     "free_free",
+     0.2
+    ],
+    "a1": false
+   },
+   "status": "CONVERGED",
+   "iterations": 9,
+   "departure_trajectory_t": [
+    42915.783853018824,
+    73438.14330618367,
+    80841.06577762659,
+    82825.49383576242,
+    83371.27296727916,
+    83522.42178354328,
+    83564.36087464598,
+    83576.0040832511,
+    83579.23667800095,
+    83580.13413190153
+   ],
+   "history": [
+    {
+     "departure_t": 73438.14330618367,
+     "farm_r_m": 34.5,
+     "stretch_m": 275.4,
+     "rim_deg": 6.374655550598178,
+     "added_t": {
+      "closure coils C1, C2": 2049.938747042391,
+      "A1 pair-torque struts": 0.0,
+      "launcher B-ray": 53.97674032163315,
+      "spine N9 over S2 keels": 331.2683818289869,
+      "shadow shield change (variant cones)": 5.820766091346741e-14,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 80841.06577762659,
+     "farm_r_m": 45.13063192284912,
+     "stretch_m": 275.4,
+     "rim_deg": 8.045628734253416,
+     "added_t": {
+      "closure coils C1, C2": 2203.4744385368163,
+      "A1 pair-torque struts": 0.0,
+      "launcher B-ray": 158.04483144270176,
+      "spine N9 over S2 keels": 528.418406447929,
+      "shadow shield change (variant cones)": 108.03121541817399,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 82825.49383576242,
+     "farm_r_m": 47.35071983912189,
+     "stretch_m": 275.4,
+     "rim_deg": 8.39281760869259,
+     "added_t": {
+      "closure coils C1, C2": 2238.7681430263206,
+      "A1 pair-torque struts": 0.0,
+      "launcher B-ray": 191.4860002193764,
+      "spine N9 over S2 keels": 581.8269905419833,
+      "shadow shield change (variant cones)": 133.7907372073105,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 83371.27296727916,
+     "farm_r_m": 47.92836206937659,
+     "stretch_m": 275.4,
+     "rim_deg": 8.483041928376615,
+     "added_t": {
+      "closure coils C1, C2": 2248.146107978805,
+      "A1 pair-torque struts": 0.0,
+      "launcher B-ray": 200.9927629953201,
+      "spine N9 over S2 keels": 596.5356870823442,
+      "shadow shield change (variant cones)": 140.67497737116634,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 83522.42178354328,
+     "farm_r_m": 48.08601490934981,
+     "stretch_m": 275.4,
+     "rim_deg": 8.507658398871763,
+     "added_t": {
+      "closure coils C1, C2": 2250.7195900961756,
+      "A1 pair-torque struts": 0.0,
+      "launcher B-ray": 203.6476270866283,
+      "spine N9 over S2 keels": 600.6103286260371,
+      "shadow shield change (variant cones)": 142.56690937139513,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 83564.36087464598,
+     "farm_r_m": 48.129584191323,
+     "stretch_m": 275.4,
+     "rim_deg": 8.51446082034905,
+     "added_t": {
+      "closure coils C1, C2": 2251.431897656497,
+      "A1 pair-torque struts": 0.0,
+      "launcher B-ray": 204.38592151494197,
+      "spine N9 over S2 keels": 601.7410044604366,
+      "shadow shield change (variant cones)": 143.09075853121107,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 83576.0040832511,
+     "farm_r_m": 48.14166632237258,
+     "stretch_m": 275.4,
+     "rim_deg": 8.516347190108494,
+     "added_t": {
+      "closure coils C1, C2": 2251.6294623804724,
+      "A1 pair-torque struts": 0.0,
+      "launcher B-ray": 204.59102992600182,
+      "spine N9 over S2 keels": 602.0549040165657,
+      "shadow shield change (variant cones)": 143.23609752970887,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 83579.23667800095,
+     "farm_r_m": 48.14502004837693,
+     "stretch_m": 275.4,
+     "rim_deg": 8.516870772170025,
+     "added_t": {
+      "closure coils C1, C2": 2251.6843336545758,
+      "A1 pair-torque struts": 0.0,
+      "launcher B-ray": 204.64798001371116,
+      "spine N9 over S2 keels": 602.1420626707213,
+      "shadow shield change (variant cones)": 143.27644882330355,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 83580.13413190153,
+     "farm_r_m": 48.145951128032266,
+     "stretch_m": 275.4,
+     "rim_deg": 8.517016149219431,
+     "added_t": {
+      "closure coils C1, C2": 2251.6995518162603,
+      "A1 pair-torque struts": 0.0,
+      "launcher B-ray": 204.66379960702378,
+      "spine N9 over S2 keels": 602.166262228502,
+      "shadow shield change (variant cones)": 143.2876500999952,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    }
+   ],
+   "eta_T_booked": 0.791,
+   "loop_gain": 0.2776264796659964,
+   "report": {
+    "1_shield": {
+     "rim_deg": 8.517016149219431,
+     "A1_limit_from_leak_deg": 7.5,
+     "theta_hw_deg": 7.649056297832497,
+     "set_by": "tank_farm",
+     "theta_crew_deg": 4.978429568966228,
+     "d_shield_m": 64.70560382123033,
+     "shield_radius_m": 9.689964151725691,
+     "shield_t": 669.9674553052287,
+     "fdp1_shield_t": 526.680014416711,
+     "envelope_margins_deg": {
+      "habitat_rings": 3.5385865802532033,
+      "crew_trunk_and_refuge": 7.435761980500347,
+      "hull_and_spine": 4.411740537953843,
+      "equipment_module": 3.096065016674576,
+      "driver_galleries": 4.957595646892354,
+      "forward_shield_and_eye": 5.678682562158725,
+      "tank_farm": 0.8679598513869342
+     },
+     "hardware_decades": 3.0,
+     "crew_decades_n": 10.943857866782361,
+     "dust_farm_inside_r44": false,
+     "W_face_fluence_factor_vs_d_shield": 1.0000000128520155
+    },
+    "2_mass": {
+     "departure_t": 83580.13413190153,
+     "status": "CONVERGED"
+    },
+    "3_rate_Hz": 381.11258117146866,
+    "4_launcher": {
+     "muzzle_m_s": 21553.756549360136,
+     "accelerator_m": 789.5397874386002,
+     "launcher_kg": 204663.79960702377,
+     "electric_W": 1387016308.105868
+    },
+    "5_structure": {
+     "farm_radius_m": 48.145951128032266,
+     "length_m": 275.4,
+     "longeron_ring_m": 43.26157927446378,
+     "tube_r_m": 0.253865712166953,
+     "tube_at_cap": false,
+     "added_t": 602.166262228502,
+     "f1_cantilever_beam_Hz": 0.06564478210787524,
+     "f1_free_free_beam_Hz": 0.21707632468117352,
+     "f1_FE_estimate_Hz": 0.03610463015933137,
+     "meets_basis": 1.0,
+     "screen": {
+      "above_3x_slosh_0.12Hz": 0.0,
+      "clear_of_spin_1x_2x": true,
+      "note": "FE estimate = k_FE x beam cantilever (T05 S5N ratio on V4); lowest (torsion-like) mode about 0.43 x that (T05)"
+     },
+     "aft_truss": {
+      "dx_m": 0.0,
+      "kg": 0.0
+     }
+    },
+    "6_coil_and_leak": {
+     "tilt_deg": 14.0,
+     "leak_centre_polar_deg": 10.828821274840449,
+     "leak_inner_edge_deg": 7.8403371705996285,
+     "rim_below_leak_limit": false,
+     "C1_near_side": {
+      "polar_deg": 8.68337376993094,
+      "z_m": 63.963931264929826,
+      "r_m": 9.768861909421696,
+      "envelope_r_min_m": 8.188710068668643,
+      "envelope_z_m": [
+       62.38377942417677,
+       65.54408310568289
+      ],
+      "envelope_polar_deg": 7.29536568903109
+     },
+     "C1_shield_same_z": true,
+     "C1_clear": false,
+     "pair_torque_GN_m": 0.0
+    },
+    "7_thrust": {
+     "thrust_MN": 5.651895594091194,
+     "residual_lever_m": 0.0,
+     "untrimmed_torque_MN_m": 0.0,
+     "trim_turn_deg_full_to_dry": [
+      0.0,
+      0.0
+     ],
+     "eta_T": 0.791,
+     "side_over_axial": 2.084213743206176e-05
+    },
+    "added_t": {
+     "closure coils C1, C2": 2251.6995518162603,
+     "A1 pair-torque struts": 0.0,
+     "launcher B-ray": 204.66379960702378,
+     "spine N9 over S2 keels": 602.166262228502,
+     "shadow shield change (variant cones)": 143.2876500999952,
+     "aft stand-off truss and beam lines": 0.0
+    }
+   },
+   "summary": {
+    "converged": true,
+    "departure_t": 83580.13413190153,
+    "a0_g": 0.006895573489099627,
+    "fusion_TW": 69.56748948101752,
+    "radiator_t": 7042.338518039037,
+    "hot_km2": 0.910502999522449,
+    "warm_km2": 9.757960840878642,
+    "drive_t": 12217.796353181848,
+    "propellant_t": 52809.565525930375,
+    "tank_t": 4956.0338499612735,
+    "end_t": 30770.568605971155,
+    "xray_standoff_m": null,
+    "payload_t": 4442.017263751781,
+    "wing_tip_radius_m": 19979.127142449328,
+    "pellet_rate_Hz": 381.11258117146866
+   }
+  },
+  {
+   "name": "G0-P",
+   "what": "wide farm, spine beam cantilever 0.1 Hz (T05 practical basis)",
+   "variant": {
+    "name": "G0-P",
+    "what": "wide farm, spine beam cantilever 0.1 Hz (T05 practical basis)",
+    "farm": "wide",
+    "basis": [
+     "cantilever",
+     0.1
+    ]
+   },
+   "status": "CONVERGED",
+   "iterations": 23,
+   "departure_trajectory_t": [
+    58725.57672091077,
+    122083.22900537793,
+    147712.08062719766,
+    160771.46690897466,
+    168078.72414378586,
+    172367.54700164904,
+    174953.147892569,
+    176536.68613249168,
+    177515.78881008466,
+    178124.70277294843,
+    178504.7624274211,
+    178742.5168771532,
+    178891.45128244592,
+    178984.83165968605,
+    179043.41182890916,
+    179080.17419468734,
+    179103.2497473369,
+    179117.7352413155,
+    179126.82911480402,
+    179132.53907997423,
+    179136.1245502957,
+    179138.37602606224,
+    179139.7931927938,
+    179140.6787099929
+   ],
+   "history": [
+    {
+     "departure_t": 122083.22900537793,
+     "farm_r_m": 40.35749630584382,
+     "stretch_m": 275.4,
+     "rim_deg": 7.061088986523822,
+     "added_t": {
+      "closure coils C1, C2": 2519.4508738457407,
+      "A1 pair-torque struts": 1049.084678942014,
+      "launcher B-ray": 70.10261351341417,
+      "spine N9 over S2 keels": 767.3285008454145,
+      "shadow shield change (variant cones)": 67.49728129343363,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 147712.08062719766,
+     "farm_r_m": 58.18868921482914,
+     "stretch_m": 275.4,
+     "rim_deg": 9.786107920806138,
+     "added_t": {
+      "closure coils C1, C2": 2797.8367900130074,
+      "A1 pair-torque struts": 1049.1851621632168,
+      "launcher B-ray": 302.93336422261024,
+      "spine N9 over S2 keels": 1687.8179985297206,
+      "shadow shield change (variant cones)": 330.1561279022726,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 160771.46690897466,
+     "farm_r_m": 64.00568917931858,
+     "stretch_m": 275.4,
+     "rim_deg": 10.66568629873965,
+     "added_t": {
+      "closure coils C1, C2": 2903.0661982098377,
+      "A1 pair-torque struts": 1049.503294610972,
+      "launcher B-ray": 443.3290316438398,
+      "spine N9 over S2 keels": 2169.8605269604172,
+      "shadow shield change (variant cones)": 434.52764450859127,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 168078.72414378586,
+     "farm_r_m": 66.77517849773625,
+     "stretch_m": 275.4,
+     "rim_deg": 11.082629427456382,
+     "added_t": {
+      "closure coils C1, C2": 2955.8119527124113,
+      "A1 pair-torque struts": 1049.6955011608393,
+      "launcher B-ray": 525.0817803592008,
+      "spine N9 over S2 keels": 2439.77281442864,
+      "shadow shield change (variant cones)": 487.459674009838,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 172367.54700164904,
+     "farm_r_m": 68.2758226793248,
+     "stretch_m": 275.4,
+     "rim_deg": 11.308039663788007,
+     "added_t": {
+      "closure coils C1, C2": 2985.112750676162,
+      "A1 pair-torque struts": 1049.807402040937,
+      "launcher B-ray": 573.8322204913107,
+      "spine N9 over S2 keels": 2597.9480598674477,
+      "shadow shield change (variant cones)": 517.0144949148339,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 174953.147892569,
+     "farm_r_m": 69.14142419145027,
+     "stretch_m": 275.4,
+     "rim_deg": 11.437894817845022,
+     "added_t": {
+      "closure coils C1, C2": 3002.245651403695,
+      "A1 pair-torque struts": 1049.8741536147243,
+      "launcher B-ray": 603.4494368897347,
+      "spine N9 over S2 keels": 2693.173408022387,
+      "shadow shield change (variant cones)": 534.3416628451313,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 176536.68613249168,
+     "farm_r_m": 69.65807217573091,
+     "stretch_m": 275.4,
+     "rim_deg": 11.515342474518981,
+     "added_t": {
+      "closure coils C1, C2": 3012.5526931485306,
+      "A1 pair-torque struts": 1049.9147189217122,
+      "launcher B-ray": 621.6636042392742,
+      "spine N9 over S2 keels": 2751.435246212353,
+      "shadow shield change (variant cones)": 544.7810786074205,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 177515.78881008466,
+     "farm_r_m": 69.97260707922338,
+     "stretch_m": 275.4,
+     "rim_deg": 11.562471029981634,
+     "added_t": {
+      "closure coils C1, C2": 3018.857311050188,
+      "A1 pair-torque struts": 1049.939663935533,
+      "launcher B-ray": 632.952054175071,
+      "spine N9 over S2 keels": 2787.4343580140862,
+      "shadow shield change (variant cones)": 551.1722538229441,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 178124.70277294843,
+     "farm_r_m": 70.16637880567242,
+     "stretch_m": 275.4,
+     "rim_deg": 11.591496815204302,
+     "added_t": {
+      "closure coils C1, C2": 3022.752521269845,
+      "A1 pair-torque struts": 1049.9551231632706,
+      "launcher B-ray": 639.9823570466859,
+      "spine N9 over S2 keels": 2809.8130798361613,
+      "shadow shield change (variant cones)": 555.1230263564169,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 178504.7624274211,
+     "farm_r_m": 70.2866180016926,
+     "stretch_m": 275.4,
+     "rim_deg": 11.609504730304078,
+     "added_t": {
+      "closure coils C1, C2": 3025.1739006746097,
+      "A1 pair-torque struts": 1049.9647913272356,
+      "launcher B-ray": 644.3740588281894,
+      "spine N9 over S2 keels": 2823.777053534397,
+      "shadow shield change (variant cones)": 557.5797213028378,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 178742.5168771532,
+     "farm_r_m": 70.36156233357462,
+     "stretch_m": 275.4,
+     "rim_deg": 11.62072777141865,
+     "added_t": {
+      "closure coils C1, C2": 3026.6847685676635,
+      "A1 pair-torque struts": 1049.9707908767105,
+      "launcher B-ray": 647.1228018106024,
+      "spine N9 over S2 keels": 2832.51084819608,
+      "shadow shield change (variant cones)": 559.1129491558959,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 178891.45128244592,
+     "farm_r_m": 70.40840480337108,
+     "stretch_m": 275.4,
+     "rim_deg": 11.627742044859216,
+     "added_t": {
+      "closure coils C1, C2": 3027.6297513325994,
+      "A1 pair-torque struts": 1049.9745390302878,
+      "launcher B-ray": 648.8453072625425,
+      "spine N9 over S2 keels": 2837.9815113295786,
+      "shadow shield change (variant cones)": 560.0720395413788,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 178984.83165968605,
+     "farm_r_m": 70.43773204631576,
+     "stretch_m": 275.4,
+     "rim_deg": 11.63213337020791,
+     "added_t": {
+      "closure coils C1, C2": 3028.2216448095155,
+      "A1 pair-torque struts": 1049.9768906046547,
+      "launcher B-ray": 649.9254810533623,
+      "spine N9 over S2 keels": 2841.4112146754196,
+      "shadow shield change (variant cones)": 560.6728146999728,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 179043.41182890916,
+     "farm_r_m": 70.45611370684803,
+     "stretch_m": 275.4,
+     "rim_deg": 11.634885666123578,
+     "added_t": {
+      "closure coils C1, C2": 3028.592741981521,
+      "A1 pair-torque struts": 1049.9783823249468,
+      "launcher B-ray": 650.6031818893829,
+      "spine N9 over S2 keels": 2843.56269040742,
+      "shadow shield change (variant cones)": 561.0494911941593,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 179080.17419468734,
+     "farm_r_m": 70.46764259834933,
+     "stretch_m": 275.4,
+     "rim_deg": 11.636611838123898,
+     "added_t": {
+      "closure coils C1, C2": 3028.8255552261185,
+      "A1 pair-torque struts": 1049.979349760235,
+      "launcher B-ray": 651.0284753899657,
+      "spine N9 over S2 keels": 2844.9127996849656,
+      "shadow shield change (variant cones)": 561.2857957338576,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 179103.2497473369,
+     "farm_r_m": 70.47487666594884,
+     "stretch_m": 275.4,
+     "rim_deg": 11.63769500637703,
+     "added_t": {
+      "closure coils C1, C2": 3028.9716075611077,
+      "A1 pair-torque struts": 1049.9798928569937,
+      "launcher B-ray": 651.2954965515271,
+      "spine N9 over S2 keels": 2845.760237783919,
+      "shadow shield change (variant cones)": 561.4340728736321,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 179117.7352413155,
+     "farm_r_m": 70.47941707459472,
+     "stretch_m": 275.4,
+     "rim_deg": 11.638374804442208,
+     "added_t": {
+      "closure coils C1, C2": 3029.0633159283498,
+      "A1 pair-torque struts": 1049.980280811602,
+      "launcher B-ray": 651.4630927608339,
+      "spine N9 over S2 keels": 2846.292236719473,
+      "shadow shield change (variant cones)": 561.5271573083609,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 179126.82911480402,
+     "farm_r_m": 70.48226713044596,
+     "stretch_m": 275.4,
+     "rim_deg": 11.638801564011732,
+     "added_t": {
+      "closure coils C1, C2": 3029.120847945597,
+      "A1 pair-torque struts": 1049.9804720004422,
+      "launcher B-ray": 651.5683543976193,
+      "spine N9 over S2 keels": 2846.6262209068063,
+      "shadow shield change (variant cones)": 561.5855765188385,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 179132.53907997423,
+     "farm_r_m": 70.48405631308722,
+     "stretch_m": 275.4,
+     "rim_deg": 11.639069447585756,
+     "added_t": {
+      "closure coils C1, C2": 3029.1569850782,
+      "A1 pair-torque struts": 1049.9806189989977,
+      "launcher B-ray": 651.6344184057599,
+      "spine N9 over S2 keels": 2846.835903732627,
+      "shadow shield change (variant cones)": 561.6222584393911,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 179136.1245502957,
+     "farm_r_m": 70.48517970231194,
+     "stretch_m": 275.4,
+     "rim_deg": 11.639237649039096,
+     "added_t": {
+      "closure coils C1, C2": 3029.179672964893,
+      "A1 pair-torque struts": 1049.9807084908673,
+      "launcher B-ray": 651.6759036360648,
+      "spine N9 over S2 keels": 2846.9675658179094,
+      "shadow shield change (variant cones)": 561.6452901332237,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 179138.37602606224,
+     "farm_r_m": 70.48588510529633,
+     "stretch_m": 275.4,
+     "rim_deg": 11.639343251533225,
+     "added_t": {
+      "closure coils C1, C2": 3029.193930591473,
+      "A1 pair-torque struts": 1049.9807808495495,
+      "launcher B-ray": 651.7019408535576,
+      "spine N9 over S2 keels": 2847.050242283935,
+      "shadow shield change (variant cones)": 561.6597566031811,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 179139.7931927938,
+     "farm_r_m": 70.48632805549397,
+     "stretch_m": 275.4,
+     "rim_deg": 11.639409556795517,
+     "added_t": {
+      "closure coils C1, C2": 3029.2028881094275,
+      "A1 pair-torque struts": 1049.980832867517,
+      "launcher B-ray": 651.7182856126966,
+      "spine N9 over S2 keels": 2847.102159124776,
+      "shadow shield change (variant cones)": 561.6688423810543,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 179140.6787099929,
+     "farm_r_m": 70.48660686421103,
+     "stretch_m": 275.4,
+     "rim_deg": 11.639451326723451,
+     "added_t": {
+      "closure coils C1, C2": 3029.2084989817995,
+      "A1 pair-torque struts": 1049.980826112532,
+      "launcher B-ray": 651.7286063443719,
+      "spine N9 over S2 keels": 2847.1348378610087,
+      "shadow shield change (variant cones)": 561.6745509801281,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    }
+   ],
+   "eta_T_booked": 0.764858856592654,
+   "loop_gain": 0.624850400027247,
+   "report": {
+    "1_shield": {
+     "rim_deg": 11.639451326723451,
+     "A1_limit_from_leak_deg": 7.5,
+     "theta_hw_deg": 10.883064389428744,
+     "set_by": "tank_farm",
+     "theta_crew_deg": 4.864312724580541,
+     "d_shield_m": 72.85937951744462,
+     "shield_radius_m": 15.008171736767045,
+     "shield_t": 1173.4665768775687,
+     "fdp1_shield_t": 611.7921385416332,
+     "envelope_margins_deg": {
+      "habitat_rings": 6.77513860214291,
+      "crew_trunk_and_refuge": 10.58309713514878,
+      "hull_and_spine": 7.829270843773584,
+      "equipment_module": 6.790122923714631,
+      "driver_galleries": 8.336083668206516,
+      "forward_shield_and_eye": 9.082199961056947,
+      "tank_farm": 0.7563869372947067
+     },
+     "hardware_decades": 3.0,
+     "crew_decades_n": 10.845628833056427,
+     "dust_farm_inside_r44": false,
+     "W_face_fluence_factor_vs_d_shield": 1.0000000079053222
+    },
+    "2_mass": {
+     "departure_t": 179140.6787099929,
+     "status": "CONVERGED"
+    },
+    "3_rate_Hz": 600.7548909199261,
+    "4_launcher": {
+     "muzzle_m_s": 38257.19199947325,
+     "accelerator_m": 2487.4494002956503,
+     "launcher_kg": 651728.6063443719,
+     "electric_W": 8971105507.355753
+    },
+    "5_structure": {
+     "farm_radius_m": 70.48660686421103,
+     "length_m": 275.4,
+     "longeron_ring_m": 63.335791675088174,
+     "tube_r_m": 0.6072939591195788,
+     "tube_at_cap": false,
+     "added_t": 2847.1348378610087,
+     "f1_cantilever_beam_Hz": 0.10000000000016905,
+     "f1_free_free_beam_Hz": 0.3163674401599754,
+     "f1_FE_estimate_Hz": 0.055000000000092975,
+     "meets_basis": 1.0,
+     "screen": {
+      "above_3x_slosh_0.12Hz": 0.0,
+      "clear_of_spin_1x_2x": true,
+      "note": "FE estimate = k_FE x beam cantilever (T05 S5N ratio on V4); lowest (torsion-like) mode about 0.43 x that (T05)"
+     },
+     "aft_truss": {
+      "dx_m": 0.0,
+      "kg": 0.0
+     }
+    },
+    "6_coil_and_leak": {
+     "tilt_deg": 14.0,
+     "leak_centre_polar_deg": 10.828821274840449,
+     "leak_inner_edge_deg": 7.8403371705996285,
+     "rim_below_leak_limit": false,
+     "C1_near_side": {
+      "polar_deg": 8.68337376993094,
+      "z_m": 72.02424625129865,
+      "r_m": 10.999869799198647,
+      "envelope_r_min_m": 9.220597589967817,
+      "envelope_z_m": [
+       70.24497404206782,
+       73.80351846052949
+      ],
+      "envelope_polar_deg": 7.29536568903109
+     },
+     "C1_shield_same_z": true,
+     "C1_clear": false,
+     "pair_torque_GN_m": 74.11629360794343
+    },
+    "7_thrust": {
+     "thrust_MN": 12.11393620313732,
+     "residual_lever_m": 2.2881271683949387,
+     "untrimmed_torque_MN_m": 27.718226542601528,
+     "trim_turn_deg_full_to_dry": [
+      0.31975617009329216,
+      0.6302886045108164
+     ],
+     "eta_T": 0.764858856592654,
+     "side_over_axial": 2.084213743206176e-05
+    },
+    "added_t": {
+     "closure coils C1, C2": 3029.2084989817995,
+     "A1 pair-torque struts": 1049.980826112532,
+     "launcher B-ray": 651.7286063443719,
+     "spine N9 over S2 keels": 2847.1348378610087,
+     "shadow shield change (variant cones)": 561.6745509801281,
+     "aft stand-off truss and beam lines": 0.0
+    }
+   },
+   "summary": {
+    "converged": true,
+    "departure_t": 179140.6787099929,
+    "a0_g": 0.006895573489099627,
+    "fusion_TW": 154.03516576033095,
+    "radiator_t": 16327.545487343441,
+    "hot_km2": 2.2521098602814704,
+    "warm_km2": 22.083399983998213,
+    "drive_t": 25094.307597661827,
+    "propellant_t": 113188.87566948895,
+    "tank_t": 10622.467608439294,
+    "end_t": 65951.80304050396,
+    "xray_standoff_m": null,
+    "payload_t": 9379.92732027984,
+    "wing_tip_radius_m": 45596.83286668287,
+    "pellet_rate_Hz": 600.7548909199261
+   }
+  },
+  {
+   "name": "K1",
+   "what": "cone farm: rim <= 7.5 deg, Rf <= 44, stretch grows; spine free-free 0.2 Hz",
+   "variant": {
+    "name": "K1",
+    "what": "cone farm: rim <= 7.5 deg, Rf <= 44, stretch grows; spine free-free 0.2 Hz",
+    "farm": "cone",
+    "rim_limit": 7.5,
+    "basis": [
+     "free_free",
+     0.2
+    ]
+   },
+   "status": "NON-CONVERGING (diverges past 400 kt)",
+   "iterations": 4,
+   "departure_trajectory_t": [
+    58725.57672091077,
+    117342.23227797251,
+    152028.00830454874,
+    203523.32671462913,
+    419545.9633588852
+   ],
+   "history": [
+    {
+     "departure_t": 117342.23227797251,
+     "farm_r_m": 40.35749630584382,
+     "stretch_m": 275.4,
+     "rim_deg": 7.061088986523822,
+     "added_t": {
+      "closure coils C1, C2": 2519.4508738457407,
+      "A1 pair-torque struts": 1049.084678942014,
+      "launcher B-ray": 70.10261351341417,
+      "spine N9 over S2 keels": 428.9435213355045,
+      "shadow shield change (variant cones)": 67.49728129343363,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 152028.00830454874,
+     "farm_r_m": 43.22299936856771,
+     "stretch_m": 459.0,
+     "rim_deg": 7.499999999999999,
+     "added_t": {
+      "closure coils C1, C2": 2778.1199342191694,
+      "A1 pair-torque struts": 1049.1850994434767,
+      "launcher B-ray": 279.86192389786277,
+      "spine N9 over S2 keels": 2275.619391973024,
+      "shadow shield change (variant cones)": 103.86102136152296,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 203523.32671462913,
+     "farm_r_m": 43.22884662386623,
+     "stretch_m": 581.4,
+     "rim_deg": 7.500000000000001,
+     "added_t": {
+      "closure coils C1, C2": 2920.448762942326,
+      "A1 pair-torque struts": 1049.47171699928,
+      "launcher B-ray": 469.62947498132587,
+      "spine N9 over S2 keels": 5435.184387097332,
+      "shadow shield change (variant cones)": 103.93159039833793,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 419545.9633588852,
+     "farm_r_m": 43.23515451442383,
+     "stretch_m": 765.0,
+     "rim_deg": 7.499999999999999,
+     "added_t": {
+      "closure coils C1, C2": 3124.7738917705533,
+      "A1 pair-torque struts": 1049.7317246851028,
+      "launcher B-ray": 841.4364947532263,
+      "spine N9 over S2 keels": 18437.549790170793,
+      "shadow shield change (variant cones)": 104.00419138153957,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    }
+   ],
+   "eta_T_booked": 0.764858856592654,
+   "loop_gain": 4.19499564841935,
+   "report": {
+    "1_shield": {
+     "rim_deg": 7.499999999999999,
+     "A1_limit_from_leak_deg": 7.5,
+     "theta_hw_deg": 6.7256174416520516,
+     "set_by": "tank_farm",
+     "theta_crew_deg": 4.864130578748715,
+     "d_shield_m": 72.85340930917332,
+     "shield_radius_m": 9.591333293309502,
+     "shield_t": 718.5842006100706,
+     "fdp1_shield_t": 654.2918389494612,
+     "envelope_margins_deg": {
+      "habitat_rings": 2.635869421251284,
+      "crew_trunk_and_refuge": 6.443685545659332,
+      "hull_and_spine": 3.6902669171117113,
+      "equipment_module": 2.6515069986879247,
+      "driver_galleries": 4.197020514768649,
+      "forward_shield_and_eye": 4.942782254327739,
+      "tank_farm": 0.7743825583479476
+     },
+     "hardware_decades": 3.0,
+     "crew_decades_n": 9.945869637539289,
+     "dust_farm_inside_r44": true,
+     "W_face_fluence_factor_vs_d_shield": 1.2453764502226399
+    },
+    "2_mass": {
+     "departure_t": 419545.9633588852,
+     "status": "NON-CONVERGING (diverges past 400 kt)"
+    },
+    "3_rate_Hz": 1000.0,
+    "4_launcher": {
+     "muzzle_m_s": 43470.25653969828,
+     "accelerator_m": 3211.5336763440814,
+     "launcher_kg": 841436.4947532263,
+     "electric_W": 13159485462.096817
+    },
+    "5_structure": {
+     "farm_radius_m": 43.23515451442383,
+     "length_m": 765.0,
+     "longeron_ring_m": 38.84897941875765,
+     "tube_r_m": 1.1037841254056548,
+     "tube_at_cap": false,
+     "added_t": 18437.549790170793,
+     "f1_cantilever_beam_Hz": 0.048177903962910655,
+     "f1_free_free_beam_Hz": 0.21597545388387032,
+     "f1_FE_estimate_Hz": 0.026497847179600856,
+     "meets_basis": 1.0,
+     "screen": {
+      "above_3x_slosh_0.12Hz": 0.0,
+      "clear_of_spin_1x_2x": true,
+      "note": "FE estimate = k_FE x beam cantilever (T05 S5N ratio on V4); lowest (torsion-like) mode about 0.43 x that (T05)"
+     },
+     "aft_truss": {
+      "dx_m": 0.0,
+      "kg": 0.0
+     }
+    },
+    "6_coil_and_leak": {
+     "tilt_deg": 14.0,
+     "leak_centre_polar_deg": 10.828821274840449,
+     "leak_inner_edge_deg": 7.8403371705996285,
+     "rim_below_leak_limit": true,
+     "C1_near_side": {
+      "polar_deg": 8.68337376993094,
+      "z_m": 72.0183444751162,
+      "r_m": 10.998968453152422,
+      "envelope_r_min_m": 9.219842040190112,
+      "envelope_z_m": [
+       70.23921806215388,
+       73.79747088807851
+      ],
+      "envelope_polar_deg": 7.29536568903109
+     },
+     "C1_shield_same_z": true,
+     "C1_clear": false,
+     "pair_torque_GN_m": 74.09870997777196
+    },
+    "7_thrust": {
+     "thrust_MN": 28.3707367361326,
+     "residual_lever_m": 2.2881271683949387,
+     "untrimmed_torque_MN_m": 64.91585351332535,
+     "trim_turn_deg_full_to_dry": [
+      0.31975617009329216,
+      0.6302886045108164
+     ],
+     "eta_T": 0.764858856592654,
+     "side_over_axial": 2.084213743206176e-05
+    },
+    "added_t": {
+     "closure coils C1, C2": 3124.7738917705533,
+     "A1 pair-torque struts": 1049.7317246851028,
+     "launcher B-ray": 841.4364947532263,
+     "spine N9 over S2 keels": 18437.549790170793,
+     "shadow shield change (variant cones)": 104.00419138153957,
+     "aft stand-off truss and beam lines": 0.0
+    }
+   },
+   "summary": {
+    "converged": true,
+    "departure_t": 419545.9633588852,
+    "a0_g": 0.006895573489099627,
+    "fusion_TW": 360.323802366561,
+    "radiator_t": 38449.48804596772,
+    "hot_km2": 5.265634954738671,
+    "warm_km2": 52.14866650974675,
+    "drive_t": 55630.379237163674,
+    "propellant_t": 265087.39514793316,
+    "tank_t": 24977.50902914216,
+    "end_t": 154458.56821095207,
+    "xray_standoff_m": null,
+    "payload_t": 24797.696092761216,
+    "wing_tip_radius_m": 107600.19110511913,
+    "pellet_rate_Hz": 1000.0
+   }
+  },
+  {
+   "name": "K2",
+   "what": "K1 with spine beam cantilever 0.1 Hz (T05 practical basis)",
+   "variant": {
+    "name": "K2",
+    "what": "K1 with spine beam cantilever 0.1 Hz (T05 practical basis)",
+    "farm": "cone",
+    "rim_limit": 7.5,
+    "basis": [
+     "cantilever",
+     0.1
+    ]
+   },
+   "status": "NON-CONVERGING (diverges past 400 kt)",
+   "iterations": 3,
+   "departure_trajectory_t": [
+    58725.57672091077,
+    122083.22900537793,
+    247690.63345960935,
+    1325045.8815189824
+   ],
+   "history": [
+    {
+     "departure_t": 122083.22900537793,
+     "farm_r_m": 40.35749630584382,
+     "stretch_m": 275.4,
+     "rim_deg": 7.061088986523822,
+     "added_t": {
+      "closure coils C1, C2": 2519.4508738457407,
+      "A1 pair-torque struts": 1049.084678942014,
+      "launcher B-ray": 70.10261351341417,
+      "spine N9 over S2 keels": 767.3285008454145,
+      "shadow shield change (variant cones)": 67.49728129343363,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 247690.63345960935,
+     "farm_r_m": 43.223699663025315,
+     "stretch_m": 489.5999999999999,
+     "rim_deg": 7.499999999999999,
+     "added_t": {
+      "closure coils C1, C2": 2797.8367900130074,
+      "A1 pair-torque struts": 1049.1851621632168,
+      "launcher B-ray": 302.93336422261024,
+      "spine N9 over S2 keels": 8988.57309493255,
+      "shadow shield change (variant cones)": 103.86701919282204,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 1325045.8815189824,
+     "farm_r_m": 43.237615519016074,
+     "stretch_m": 918.0,
+     "rim_deg": 7.499999999999999,
+     "added_t": {
+      "closure coils C1, C2": 3295.6037076227294,
+      "A1 pair-torque struts": 1049.5037692667177,
+      "launcher B-ray": 1246.559758125574,
+      "spine N9 over S2 keels": 70962.25433756343,
+      "shadow shield change (variant cones)": 104.00890223185509,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    }
+   ],
+   "eta_T_booked": 0.764858856592654,
+   "loop_gain": 8.577163525832885,
+   "report": {
+    "1_shield": {
+     "rim_deg": 7.499999999999999,
+     "A1_limit_from_leak_deg": 7.5,
+     "theta_hw_deg": 6.725559261001261,
+     "set_by": "tank_farm",
+     "theta_crew_deg": 4.8638000788414395,
+     "d_shield_m": 72.84794517905834,
+     "shield_radius_m": 9.590613926932722,
+     "shield_t": 722.9118471168006,
+     "fdp1_shield_t": 558.9302196165164,
+     "envelope_margins_deg": {
+      "habitat_rings": 2.6361999211585596,
+      "crew_trunk_and_refuge": 6.443757648009934,
+      "hull_and_spine": 3.691078532902939,
+      "equipment_module": 2.653022244363396,
+      "driver_galleries": 4.197724688685946,
+      "forward_shield_and_eye": 4.94284326128172,
+      "tank_farm": 0.774440738998738
+     },
+     "hardware_decades": 3.0,
+     "crew_decades_n": 4.601853252895972,
+     "dust_farm_inside_r44": true,
+     "W_face_fluence_factor_vs_d_shield": 2.614633899432629
+    },
+    "2_mass": {
+     "departure_t": 1325045.8815189824,
+     "status": "NON-CONVERGING (diverges past 400 kt)"
+    },
+    "3_rate_Hz": 1000.0,
+    "4_launcher": {
+     "muzzle_m_s": 52910.24340161422,
+     "accelerator_m": 4757.815456549147,
+     "launcher_kg": 1246559.758125574,
+     "electric_W": 23726896891.72994
+    },
+    "5_structure": {
+     "farm_radius_m": 43.237615519016074,
+     "length_m": 918.0,
+     "longeron_ring_m": 38.85119075621734,
+     "tube_r_m": 2.0,
+     "tube_at_cap": true,
+     "added_t": 70962.25433756343,
+     "f1_cantilever_beam_Hz": 0.05470741057658244,
+     "f1_free_free_beam_Hz": 0.25308947801692794,
+     "f1_FE_estimate_Hz": 0.030089075817120337,
+     "meets_basis": 0.0,
+     "screen": {
+      "above_3x_slosh_0.12Hz": 0.0,
+      "clear_of_spin_1x_2x": true,
+      "note": "FE estimate = k_FE x beam cantilever (T05 S5N ratio on V4); lowest (torsion-like) mode about 0.43 x that (T05)"
+     },
+     "aft_truss": {
+      "dx_m": 0.0,
+      "kg": 0.0
+     }
+    },
+    "6_coil_and_leak": {
+     "tilt_deg": 14.0,
+     "leak_centre_polar_deg": 10.828821274840449,
+     "leak_inner_edge_deg": 7.8403371705996285,
+     "rim_below_leak_limit": true,
+     "C1_near_side": {
+      "polar_deg": 8.68337376993094,
+      "z_m": 72.01294297628988,
+      "r_m": 10.99814351173474,
+      "envelope_r_min_m": 9.219150536291739,
+      "envelope_z_m": [
+       70.23395000084687,
+       73.79193595173288
+      ],
+      "envelope_polar_deg": 7.29536568903109
+     },
+     "C1_shield_same_z": true,
+     "C1_clear": false,
+     "pair_torque_GN_m": 74.08261900706242
+    },
+    "7_thrust": {
+     "thrust_MN": 89.60288299976955,
+     "residual_lever_m": 2.2881271683949387,
+     "untrimmed_torque_MN_m": 205.0227909582857,
+     "trim_turn_deg_full_to_dry": [
+      0.31975617009329216,
+      0.6302886045108164
+     ],
+     "eta_T": 0.764858856592654,
+     "side_over_axial": 2.084213743206176e-05
+    },
+    "added_t": {
+     "closure coils C1, C2": 3295.6037076227294,
+     "A1 pair-torque struts": 1049.5037692667177,
+     "launcher B-ray": 1246.559758125574,
+     "spine N9 over S2 keels": 70962.25433756343,
+     "shadow shield change (variant cones)": 104.00890223185509,
+     "aft stand-off truss and beam lines": 0.0
+    }
+   },
+   "summary": {
+    "converged": true,
+    "departure_t": 1325045.8815189824,
+    "a0_g": 0.006895573489099627,
+    "fusion_TW": 1134.5325288394458,
+    "radiator_t": 122745.32576743743,
+    "hot_km2": 16.550011775347766,
+    "warm_km2": 167.473237055698,
+    "drive_t": 173949.63395902308,
+    "propellant_t": 837221.6440154315,
+    "tank_t": 79742.28154166316,
+    "end_t": 487824.2375035509,
+    "xray_standoff_m": null,
+    "payload_t": 77898.1304748103,
+    "wing_tip_radius_m": 344917.80566287047,
+    "pellet_rate_Hz": 1000.0
+   }
+  },
+  {
+   "name": "K3",
+   "what": "K1 with spine beam cantilever 0.2 Hz (Rev 4 / T05 gate basis)",
+   "variant": {
+    "name": "K3",
+    "what": "K1 with spine beam cantilever 0.2 Hz (Rev 4 / T05 gate basis)",
+    "farm": "cone",
+    "rim_limit": 7.5,
+    "basis": [
+     "cantilever",
+     0.2
+    ]
+   },
+   "status": "NON-CONVERGING (diverges past 400 kt)",
+   "iterations": 2,
+   "departure_trajectory_t": [
+    58725.57672091077,
+    147513.296109901,
+    822865.2728972457
+   ],
+   "history": [
+    {
+     "departure_t": 147513.296109901,
+     "farm_r_m": 40.35749630584382,
+     "stretch_m": 275.4,
+     "rim_deg": 7.061088986523822,
+     "added_t": {
+      "closure coils C1, C2": 2519.4508738457407,
+      "A1 pair-torque struts": 1049.084678942014,
+      "launcher B-ray": 70.10261351341417,
+      "spine N9 over S2 keels": 2584.486932523178,
+      "shadow shield change (variant cones)": 67.49728129343363,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 822865.2728972457,
+     "farm_r_m": 43.227044519884316,
+     "stretch_m": 581.4,
+     "rim_deg": 7.500000000000003,
+     "added_t": {
+      "closure coils C1, C2": 2901.8999074738426,
+      "A1 pair-torque struts": 1049.18533284028,
+      "launcher B-ray": 442.2800504856073,
+      "spine N9 over S2 keels": 44937.880101005976,
+      "shadow shield change (variant cones)": 103.8956543278516,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    }
+   ],
+   "eta_T_booked": 0.764858856592654,
+   "loop_gain": 7.606366977718418,
+   "report": {
+    "1_shield": {
+     "rim_deg": 7.500000000000003,
+     "A1_limit_from_leak_deg": 7.5,
+     "theta_hw_deg": 6.725477956095249,
+     "set_by": "tank_farm",
+     "theta_crew_deg": 4.864969714063942,
+     "d_shield_m": 72.84031067211619,
+     "shield_radius_m": 9.589608825025943,
+     "shield_t": 711.2082582697453,
+     "fdp1_shield_t": 652.1443117622516,
+     "envelope_margins_deg": {
+      "habitat_rings": 2.635030285936061,
+      "crew_trunk_and_refuge": 6.443502478349746,
+      "hull_and_spine": 3.688205176691613,
+      "equipment_module": 2.647656482975762,
+      "driver_galleries": 4.1952317065091425,
+      "forward_shield_and_eye": 4.942627382486428,
+      "tank_farm": 0.7745220439047538
+     },
+     "hardware_decades": 3.0,
+     "crew_decades_n": 7.140375597980099,
+     "dust_farm_inside_r44": true,
+     "W_face_fluence_factor_vs_d_shield": 1.9222059097054627
+    },
+    "2_mass": {
+     "departure_t": 822865.2728972457,
+     "status": "NON-CONVERGING (diverges past 400 kt)"
+    },
+    "3_rate_Hz": 1000.0,
+    "4_launcher": {
+     "muzzle_m_s": 31516.227449234662,
+     "accelerator_m": 1688.0936110222697,
+     "launcher_kg": 442280.0504856073,
+     "electric_W": 5013806478.991352
+    },
+    "5_structure": {
+     "farm_radius_m": 43.227044519884316,
+     "length_m": 581.4,
+     "longeron_ring_m": 38.84169217728736,
+     "tube_r_m": 2.0,
+     "tube_at_cap": true,
+     "added_t": 44937.880101005976,
+     "f1_cantilever_beam_Hz": 0.13208931065658003,
+     "f1_free_free_beam_Hz": 0.574892342665642,
+     "f1_FE_estimate_Hz": 0.07264912086111901,
+     "meets_basis": 0.0,
+     "screen": {
+      "above_3x_slosh_0.12Hz": 0.0,
+      "clear_of_spin_1x_2x": false,
+      "note": "FE estimate = k_FE x beam cantilever (T05 S5N ratio on V4); lowest (torsion-like) mode about 0.43 x that (T05)"
+     },
+     "aft_truss": {
+      "dx_m": 0.0,
+      "kg": 0.0
+     }
+    },
+    "6_coil_and_leak": {
+     "tilt_deg": 14.0,
+     "leak_centre_polar_deg": 10.828821274840449,
+     "leak_inner_edge_deg": 7.8403371705996285,
+     "rim_below_leak_limit": false,
+     "C1_near_side": {
+      "polar_deg": 8.68337376993094,
+      "z_m": 72.00539597806328,
+      "r_m": 10.996990899910415,
+      "envelope_r_min_m": 9.218184363963925,
+      "envelope_z_m": [
+       70.22658944211679,
+       73.78420251400976
+      ],
+      "envelope_polar_deg": 7.29536568903109
+     },
+     "C1_shield_same_z": true,
+     "C1_clear": false,
+     "pair_torque_GN_m": 74.06014114166682
+    },
+    "7_thrust": {
+     "thrust_MN": 55.64418696767151,
+     "residual_lever_m": 2.2881271683949387,
+     "untrimmed_torque_MN_m": 127.32097596397675,
+     "trim_turn_deg_full_to_dry": [
+      0.31975617009329216,
+      0.6302886045108164
+     ],
+     "eta_T": 0.764858856592654,
+     "side_over_axial": 2.084213743206176e-05
+    },
+    "added_t": {
+     "closure coils C1, C2": 2901.8999074738426,
+     "A1 pair-torque struts": 1049.18533284028,
+     "launcher B-ray": 442.2800504856073,
+     "spine N9 over S2 keels": 44937.880101005976,
+     "shadow shield change (variant cones)": 103.8956543278516,
+     "aft stand-off truss and beam lines": 0.0
+    }
+   },
+   "summary": {
+    "converged": true,
+    "departure_t": 822865.2728972457,
+    "a0_g": 0.006895573489099627,
+    "fusion_TW": 705.2827370318713,
+    "radiator_t": 74118.40453943328,
+    "hot_km2": 10.293235622159836,
+    "warm_km2": 99.97952269283833,
+    "drive_t": 108030.03075767145,
+    "propellant_t": 519922.08434962743,
+    "tank_t": 49322.52883144883,
+    "end_t": 302943.18854761834,
+    "xray_standoff_m": null,
+    "payload_t": 50675.34104613356,
+    "wing_tip_radius_m": 206678.8356234185,
+    "pellet_rate_Hz": 1000.0
+   }
+  },
+  {
+   "name": "S1",
+   "what": "aft stand-off +100 m, cone farm rim 7.5, spine practical",
+   "variant": {
+    "name": "S1",
+    "what": "aft stand-off +100 m, cone farm rim 7.5, spine practical",
+    "farm": "cone",
+    "rim_limit": 7.5,
+    "basis": [
+     "cantilever",
+     0.1
+    ],
+    "dx": 100.0
+   },
+   "status": "NON-CONVERGING (diverges past 400 kt)",
+   "iterations": 3,
+   "departure_trajectory_t": [
+    58725.57672091077,
+    126857.98887488489,
+    257886.30093391586,
+    1394159.4716771266
+   ],
+   "history": [
+    {
+     "departure_t": 126857.98887488489,
+     "farm_r_m": 40.35749630584382,
+     "stretch_m": 275.4,
+     "rim_deg": 5.724995422483975,
+     "added_t": {
+      "closure coils C1, C2": 2519.4508738457407,
+      "A1 pair-torque struts": 1049.084678942014,
+      "launcher B-ray": 70.10261351341417,
+      "spine N9 over S2 keels": 767.3285008454145,
+      "shadow shield change (variant cones)": -156.35754452254665,
+      "aft stand-off truss and beam lines": 564.7856077250234
+     }
+    },
+    {
+     "departure_t": 257886.30093391586,
+     "farm_r_m": 43.99999999999999,
+     "stretch_m": 489.5999999999999,
+     "rim_deg": 6.166260627310334,
+     "added_t": {
+      "closure coils C1, C2": 2817.5827332032195,
+      "A1 pair-torque struts": 1049.1851418754532,
+      "launcher B-ray": 327.0926248658346,
+      "spine N9 over S2 keels": 9271.760886346123,
+      "shadow shield change (variant cones)": -132.5608062869231,
+      "aft stand-off truss and beam lines": 607.3341079689054
+     }
+    },
+    {
+     "departure_t": 1394159.4716771266,
+     "farm_r_m": 43.99999999999999,
+     "stretch_m": 948.5999999999999,
+     "rim_deg": 6.164858845411185,
+     "added_t": {
+      "closure coils C1, C2": 3334.765578958366,
+      "A1 pair-torque struts": 1049.5369268236484,
+      "launcher B-ray": 1351.2502450904922,
+      "spine N9 over S2 keels": 73902.38573938058,
+      "shadow shield change (variant cones)": -137.95593380623217,
+      "aft stand-off truss and beam lines": 688.1849737980045
+     }
+    }
+   ],
+   "eta_T_booked": 0.764858856592654,
+   "loop_gain": 8.671966790133846,
+   "report": {
+    "1_shield": {
+     "rim_deg": 6.164858845411185,
+     "A1_limit_from_leak_deg": 7.5,
+     "theta_hw_deg": 5.386332667090928,
+     "set_by": "tank_farm",
+     "theta_crew_deg": 3.7925724931332563,
+     "d_shield_m": 72.84873992370157,
+     "shield_radius_m": 7.86870117330552,
+     "shield_t": 481.8514649541861,
+     "fdp1_shield_t": 542.3016379302604,
+     "envelope_margins_deg": {
+      "habitat_rings": 2.372286352277929,
+      "crew_trunk_and_refuge": 5.34198915096452,
+      "hull_and_spine": 4.1450085874473475,
+      "equipment_module": 1.3183106192755787,
+      "driver_galleries": 4.414141478434598,
+      "forward_shield_and_eye": 3.838323278142934,
+      "tank_farm": 0.7785261783202575
+     },
+     "hardware_decades": 3.0,
+     "crew_decades_n": 4.300039185732345,
+     "dust_farm_inside_r44": true,
+     "W_face_fluence_factor_vs_d_shield": 2.702048783378202
+    },
+    "2_mass": {
+     "departure_t": 1394159.4716771266,
+     "status": "NON-CONVERGING (diverges past 400 kt)"
+    },
+    "3_rate_Hz": 1000.0,
+    "4_launcher": {
+     "muzzle_m_s": 55087.22011456844,
+     "accelerator_m": 5157.387792893791,
+     "launcher_kg": 1351250.245090492,
+     "electric_W": 26778123935.59831
+    },
+    "5_structure": {
+     "farm_radius_m": 43.99999999999999,
+     "length_m": 948.5999999999999,
+     "longeron_ring_m": 39.53623188405796,
+     "tube_r_m": 2.0,
+     "tube_at_cap": true,
+     "added_t": 73902.38573938058,
+     "f1_cantilever_beam_Hz": 0.05335743064892447,
+     "f1_free_free_beam_Hz": 0.24609897331482108,
+     "f1_FE_estimate_Hz": 0.029346586856908455,
+     "meets_basis": 0.0,
+     "screen": {
+      "above_3x_slosh_0.12Hz": 0.0,
+      "clear_of_spin_1x_2x": true,
+      "note": "FE estimate = k_FE x beam cantilever (T05 S5N ratio on V4); lowest (torsion-like) mode about 0.43 x that (T05)"
+     },
+     "aft_truss": {
+      "dx_m": 100.0,
+      "tip_t": 17245.06687435197,
+      "governed_by": "stiffness",
+      "truss_t": 238.1849737980046,
+      "beamlines_t": 450.0,
+      "kg": 688184.9737980046,
+      "f_target_Hz": 0.1
+     }
+    },
+    "6_coil_and_leak": {
+     "tilt_deg": 14.0,
+     "leak_centre_polar_deg": 10.828821274840449,
+     "leak_inner_edge_deg": 7.8403371705996285,
+     "rim_below_leak_limit": true,
+     "C1_near_side": {
+      "polar_deg": 8.68337376993094,
+      "z_m": 72.01372861136213,
+      "r_m": 10.998263497488901,
+      "envelope_r_min_m": 9.219251113878189,
+      "envelope_z_m": [
+       70.2347162277514,
+       73.79274099497285
+      ],
+      "envelope_polar_deg": 7.29536568903109
+     },
+     "C1_shield_same_z": true,
+     "C1_clear": true,
+     "pair_torque_GN_m": 74.08495954049283
+    },
+    "7_thrust": {
+     "thrust_MN": 94.27651507470952,
+     "residual_lever_m": 2.2881271683949387,
+     "untrimmed_torque_MN_m": 215.71665548403786,
+     "trim_turn_deg_full_to_dry": [
+      0.31975617009329216,
+      0.6302886045108164
+     ],
+     "eta_T": 0.764858856592654,
+     "side_over_axial": 2.084213743206176e-05
+    },
+    "added_t": {
+     "closure coils C1, C2": 3334.765578958366,
+     "A1 pair-torque struts": 1049.5369268236484,
+     "launcher B-ray": 1351.2502450904922,
+     "spine N9 over S2 keels": 73902.38573938058,
+     "shadow shield change (variant cones)": -137.95593380623217,
+     "aft stand-off truss and beam lines": 688.1849737980045
+    }
+   },
+   "summary": {
+    "converged": true,
+    "departure_t": 1394159.4716771266,
+    "a0_g": 0.006895573489099627,
+    "fusion_TW": 1193.593544155555,
+    "radiator_t": 129618.20849258041,
+    "hot_km2": 17.410881947754774,
+    "warm_km2": 177.10253447124134,
+    "drive_t": 183051.99763488688,
+    "propellant_t": 880890.6175831074,
+    "tank_t": 83934.65573298304,
+    "end_t": 513268.85409401916,
+    "xray_standoff_m": null,
+    "payload_t": 81428.36753024487,
+    "wing_tip_radius_m": 364580.7252279133,
+    "pellet_rate_Hz": 1000.0
+   }
+  },
+  {
+   "name": "S2",
+   "what": "aft stand-off +200 m, cone farm rim 7.5, spine practical",
+   "variant": {
+    "name": "S2",
+    "what": "aft stand-off +200 m, cone farm rim 7.5, spine practical",
+    "farm": "cone",
+    "rim_limit": 7.5,
+    "basis": [
+     "cantilever",
+     0.1
+    ],
+    "dx": 200.0
+   },
+   "status": "NON-CONVERGING (diverges past 400 kt)",
+   "iterations": 2,
+   "departure_trajectory_t": [
+    58725.57672091077,
+    153836.911280397,
+    514590.42748596787
+   ],
+   "history": [
+    {
+     "departure_t": 153836.911280397,
+     "farm_r_m": 40.35749630584382,
+     "stretch_m": 275.4,
+     "rim_deg": 5.641234334330522,
+     "added_t": {
+      "closure coils C1, C2": 2519.4508738457407,
+      "A1 pair-torque struts": 1049.084678942014,
+      "launcher B-ray": 70.10261351341417,
+      "spine N9 over S2 keels": 767.3285008454145,
+      "shadow shield change (variant cones)": -228.92623375106604,
+      "aft stand-off truss and beam lines": 2565.92426350554
+     }
+    },
+    {
+     "departure_t": 514590.42748596787,
+     "farm_r_m": 43.99999999999999,
+     "stretch_m": 581.4,
+     "rim_deg": 5.631963126133597,
+     "added_t": {
+      "closure coils C1, C2": 2927.406548571109,
+      "A1 pair-torque struts": 1049.1853304428053,
+      "launcher B-ray": 481.0122382367264,
+      "spine N9 over S2 keels": 22345.896754703335,
+      "shadow shield change (variant cones)": -240.5851414575292,
+      "aft stand-off truss and beam lines": 3513.951120366506
+     }
+    }
+   ],
+   "eta_T_booked": 0.764858856592654,
+   "loop_gain": 3.792960301486906,
+   "report": {
+    "1_shield": {
+     "rim_deg": 5.631963126133597,
+     "A1_limit_from_leak_deg": 7.5,
+     "theta_hw_deg": 4.851946777280341,
+     "set_by": "equipment_module",
+     "theta_crew_deg": 3.1081817218508263,
+     "d_shield_m": 72.84031074802162,
+     "shield_radius_m": 7.183082650166513,
+     "shield_t": 367.66044390361066,
+     "fdp1_shield_t": 664.6240275524594,
+     "envelope_margins_deg": {
+      "habitat_rings": 2.5237814042827704,
+      "crew_trunk_and_refuge": 4.95789346587104,
+      "hull_and_spine": 4.257452744033474,
+      "equipment_module": 0.7800163488532554,
+      "driver_galleries": 4.440663919838833,
+      "forward_shield_and_eye": 3.4977463577875563,
+      "tank_farm": 1.1912979794201828
+     },
+     "hardware_decades": 3.0,
+     "crew_decades_n": 9.18278965057396,
+     "dust_farm_inside_r44": true,
+     "W_face_fluence_factor_vs_d_shield": 1.4205665822555966
+    },
+    "2_mass": {
+     "departure_t": 514590.42748596787,
+     "status": "NON-CONVERGING (diverges past 400 kt)"
+    },
+    "3_rate_Hz": 1000.0,
+    "4_launcher": {
+     "muzzle_m_s": 32867.268592250344,
+     "accelerator_m": 1835.9265476575013,
+     "launcher_kg": 481012.2382367264,
+     "electric_W": 5686639930.68246
+    },
+    "5_structure": {
+     "farm_radius_m": 43.99999999999999,
+     "length_m": 581.4,
+     "longeron_ring_m": 39.53623188405796,
+     "tube_r_m": 1.397113313451245,
+     "tube_at_cap": false,
+     "added_t": 22345.896754703335,
+     "f1_cantilever_beam_Hz": 0.10000000000034062,
+     "f1_free_free_beam_Hz": 0.4294251561165038,
+     "f1_FE_estimate_Hz": 0.05500000000018734,
+     "meets_basis": 1.0,
+     "screen": {
+      "above_3x_slosh_0.12Hz": 0.0,
+      "clear_of_spin_1x_2x": true,
+      "note": "FE estimate = k_FE x beam cantilever (T05 S5N ratio on V4); lowest (torsion-like) mode about 0.43 x that (T05)"
+     },
+     "aft_truss": {
+      "dx_m": 200.0,
+      "tip_t": 12350.15235998458,
+      "governed_by": "stiffness",
+      "truss_t": 2613.951120366506,
+      "beamlines_t": 900.0,
+      "kg": 3513951.1203665063,
+      "f_target_Hz": 0.1
+     }
+    },
+    "6_coil_and_leak": {
+     "tilt_deg": 14.0,
+     "leak_centre_polar_deg": 10.828821274840449,
+     "leak_inner_edge_deg": 7.8403371705996285,
+     "rim_below_leak_limit": true,
+     "C1_near_side": {
+      "polar_deg": 8.68337376993094,
+      "z_m": 72.00539605309866,
+      "r_m": 10.996990911370158,
+      "envelope_r_min_m": 9.218184373570011,
+      "envelope_z_m": [
+       70.22658951529851,
+       73.78420259089881
+      ],
+      "envelope_polar_deg": 7.29536568903109
+     },
+     "C1_shield_same_z": true,
+     "C1_clear": true,
+     "pair_torque_GN_m": 74.0601409724333
+    },
+    "7_thrust": {
+     "thrust_MN": 34.79787870739179,
+     "residual_lever_m": 2.2881271683949387,
+     "untrimmed_torque_MN_m": 79.62197167289492,
+     "trim_turn_deg_full_to_dry": [
+      0.31975617009329216,
+      0.6302886045108164
+     ],
+     "eta_T": 0.764858856592654,
+     "side_over_axial": 2.084213743206176e-05
+    },
+    "added_t": {
+     "closure coils C1, C2": 2927.406548571109,
+     "A1 pair-torque struts": 1049.1853304428053,
+     "launcher B-ray": 481.0122382367264,
+     "spine N9 over S2 keels": 22345.896754703335,
+     "shadow shield change (variant cones)": -240.5851414575292,
+     "aft stand-off truss and beam lines": 3513.951120366506
+    }
+   },
+   "summary": {
+    "converged": true,
+    "departure_t": 514590.42748596787,
+    "a0_g": 0.006895573489099627,
+    "fusion_TW": 441.6449670308133,
+    "radiator_t": 46497.69212103125,
+    "hot_km2": 6.450858298459998,
+    "warm_km2": 62.7465128781355,
+    "drive_t": 67925.72060038496,
+    "propellant_t": 325140.62320658873,
+    "tank_t": 30703.69977883644,
+    "end_t": 189449.8042793791,
+    "xray_standoff_m": null,
+    "payload_t": 31317.066850862953,
+    "wing_tip_radius_m": 129686.54482978654,
+    "pellet_rate_Hz": 1000.0
+   }
+  },
+  {
+   "name": "S3",
+   "what": "aft stand-off +200 m, cone farm rim 7.5, spine cantilever 0.2 Hz",
+   "variant": {
+    "name": "S3",
+    "what": "aft stand-off +200 m, cone farm rim 7.5, spine cantilever 0.2 Hz",
+    "farm": "cone",
+    "rim_limit": 7.5,
+    "basis": [
+     "cantilever",
+     0.2
+    ],
+    "dx": 200.0
+   },
+   "status": "NON-CONVERGING (diverges past 400 kt)",
+   "iterations": 2,
+   "departure_trajectory_t": [
+    58725.57672091077,
+    247875.7395720992,
+    1581109.3411729473
+   ],
+   "history": [
+    {
+     "departure_t": 247875.7395720992,
+     "farm_r_m": 40.35749630584382,
+     "stretch_m": 275.4,
+     "rim_deg": 5.641234334330522,
+     "added_t": {
+      "closure coils C1, C2": 2519.4508738457407,
+      "A1 pair-torque struts": 1049.084678942014,
+      "launcher B-ray": 70.10261351341417,
+      "spine N9 over S2 keels": 2584.486932523178,
+      "shadow shield change (variant cones)": -228.92623375106604,
+      "aft stand-off truss and beam lines": 7490.563285410088
+     }
+    },
+    {
+     "departure_t": 1581109.3411729473,
+     "farm_r_m": 43.99999999999999,
+     "stretch_m": 918.0,
+     "rim_deg": 5.627469239119125,
+     "added_t": {
+      "closure coils C1, C2": 3295.9811575300987,
+      "A1 pair-torque struts": 1049.1858001359437,
+      "launcher B-ray": 1248.8286727010527,
+      "spine N9 over S2 keels": 71518.43781230377,
+      "shadow shield change (variant cones)": -246.35900215391047,
+      "aft stand-off truss and beam lines": 14992.839226454922
+     }
+    }
+   ],
+   "eta_T_booked": 0.764858856592654,
+   "loop_gain": 7.048545882827249,
+   "report": {
+    "1_shield": {
+     "rim_deg": 5.627469239119125,
+     "A1_limit_from_leak_deg": 7.5,
+     "theta_hw_deg": 4.84744177586578,
+     "set_by": "equipment_module",
+     "theta_crew_deg": 3.107780276424565,
+     "d_shield_m": 72.8403220194037,
+     "shield_radius_m": 7.177315153862767,
+     "shield_t": 372.4951687443627,
+     "fdp1_shield_t": 494.17753479259994,
+     "envelope_margins_deg": {
+      "habitat_rings": 2.51968896269456,
+      "crew_trunk_and_refuge": 4.953486803064875,
+      "hull_and_spine": 4.253273102656035,
+      "equipment_module": 0.7800274632533446,
+      "driver_galleries": 4.436442418042462,
+      "forward_shield_and_eye": 3.493378727654791,
+      "tank_farm": 1.1873622234786056
+     },
+     "hardware_decades": 3.0,
+     "crew_decades_n": 3.5239969206854713,
+     "dust_farm_inside_r44": true,
+     "W_face_fluence_factor_vs_d_shield": 2.9319584516847264
+    },
+    "2_mass": {
+     "departure_t": 1581109.3411729473,
+     "status": "NON-CONVERGING (diverges past 400 kt)"
+    },
+    "3_rate_Hz": 1000.0,
+    "4_launcher": {
+     "muzzle_m_s": 52958.65882475668,
+     "accelerator_m": 4766.526701297893,
+     "launcher_kg": 1248828.6727010526,
+     "electric_W": 23788984674.16585
+    },
+    "5_structure": {
+     "farm_radius_m": 43.99999999999999,
+     "length_m": 918.0,
+     "longeron_ring_m": 39.53623188405796,
+     "tube_r_m": 2.0,
+     "tube_at_cap": true,
+     "added_t": 71518.43781230377,
+     "f1_cantilever_beam_Hz": 0.057148050082802354,
+     "f1_free_free_beam_Hz": 0.26270694631834113,
+     "f1_FE_estimate_Hz": 0.03143142754554129,
+     "meets_basis": 0.0,
+     "screen": {
+      "above_3x_slosh_0.12Hz": 0.0,
+      "clear_of_spin_1x_2x": true,
+      "note": "FE estimate = k_FE x beam cantilever (T05 S5N ratio on V4); lowest (torsion-like) mode about 0.43 x that (T05)"
+     },
+     "aft_truss": {
+      "dx_m": 200.0,
+      "tip_t": 16773.771903593137,
+      "governed_by": "stiffness",
+      "truss_t": 14092.839226454922,
+      "beamlines_t": 900.0,
+      "kg": 14992839.226454923,
+      "f_target_Hz": 0.2
+     }
+    },
+    "6_coil_and_leak": {
+     "tilt_deg": 14.0,
+     "leak_centre_polar_deg": 10.828821274840449,
+     "leak_inner_edge_deg": 7.8403371705996285,
+     "rim_below_leak_limit": true,
+     "C1_near_side": {
+      "polar_deg": 8.68337376993094,
+      "z_m": 72.00540719528522,
+      "r_m": 10.996992613055463,
+      "envelope_r_min_m": 9.218185800001022,
+      "envelope_z_m": [
+       70.22660038223077,
+       73.78421400833966
+      ],
+      "envelope_polar_deg": 7.29536568903109
+     },
+     "C1_shield_same_z": true,
+     "C1_clear": true,
+     "pair_torque_GN_m": 74.06017412724309
+    },
+    "7_thrust": {
+     "thrust_MN": 106.91852809244233,
+     "residual_lever_m": 2.2881271683949387,
+     "untrimmed_torque_MN_m": 244.64318893311477,
+     "trim_turn_deg_full_to_dry": [
+      0.31975617009329216,
+      0.6302886045108164
+     ],
+     "eta_T": 0.764858856592654,
+     "side_over_axial": 2.084213743206176e-05
+    },
+    "added_t": {
+     "closure coils C1, C2": 3295.9811575300987,
+     "A1 pair-torque struts": 1049.1858001359437,
+     "launcher B-ray": 1248.8286727010527,
+     "spine N9 over S2 keels": 71518.43781230377,
+     "shadow shield change (variant cones)": -246.35900215391047,
+     "aft stand-off truss and beam lines": 14992.839226454922
+    }
+   },
+   "summary": {
+    "converged": true,
+    "departure_t": 1581109.3411729473,
+    "a0_g": 0.006895573489099627,
+    "fusion_TW": 1353.2754522681423,
+    "radiator_t": 146407.72770275208,
+    "hot_km2": 19.736431518068645,
+    "warm_km2": 199.77356034291063,
+    "drive_t": 207347.57600411668,
+    "propellant_t": 999013.679788572,
+    "tank_t": 95280.696818992,
+    "end_t": 582095.6613843753,
+    "xray_standoff_m": null,
+    "payload_t": 93099.1136669719,
+    "wing_tip_radius_m": 411434.66232628847,
+    "pellet_rate_Hz": 1000.0
+   }
+  },
+  {
+   "name": "T15",
+   "what": "A1 at 15 deg, shield moved 3.5 m forward clear of C1 (rim limit from the leak), cone farm, spine practical",
+   "variant": {
+    "name": "T15",
+    "what": "A1 at 15 deg, shield moved 3.5 m forward clear of C1 (rim limit from the leak), cone farm, spine practical",
+    "farm": "cone",
+    "rim_limit": 8.347049353994212,
+    "tilt": 15.0,
+    "dz": 3.5,
+    "basis": [
+     "cantilever",
+     0.1
+    ]
+   },
+   "status": "NON-CONVERGING (diverges past 400 kt)",
+   "iterations": 3,
+   "departure_trajectory_t": [
+    62191.112484784906,
+    133377.4607848214,
+    303542.4592613699,
+    1696729.5558236176
+   ],
+   "history": [
+    {
+     "departure_t": 133377.4607848214,
+     "farm_r_m": 41.53122423895775,
+     "stretch_m": 275.4,
+     "rim_deg": 7.161703573137332,
+     "added_t": {
+      "closure coils C1, C2": 2611.251274712385,
+      "A1 pair-torque struts": 1272.7078603305324,
+      "launcher B-ray": 73.829709714679,
+      "spine N9 over S2 keels": 807.7129932555447,
+      "shadow shield change (variant cones)": 149.425164039818,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 303542.4592613699,
+     "farm_r_m": 43.99999999999999,
+     "stretch_m": 520.1999999999999,
+     "rim_deg": 7.537725259717718,
+     "added_t": {
+      "closure coils C1, C2": 2916.8108568238745,
+      "A1 pair-torque struts": 1272.8352828157183,
+      "launcher B-ray": 339.5414704836969,
+      "spine N9 over S2 keels": 11807.5643028881,
+      "shadow shield change (variant cones)": 187.4057385287859,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 1696729.5558236176,
+     "farm_r_m": 43.99999999999999,
+     "stretch_m": 1101.6,
+     "rim_deg": 7.5352265344908105,
+     "added_t": {
+      "closure coils C1, C2": 3571.775418778614,
+      "A1 pair-torque struts": 1273.275064342502,
+      "launcher B-ray": 1757.9482886159258,
+      "spine N9 over S2 keels": 85822.12537476454,
+      "shadow shield change (variant cones)": 189.04855985341337,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    }
+   ],
+   "eta_T_booked": 0.7606305321817767,
+   "loop_gain": 8.187271818735693,
+   "report": {
+    "1_shield": {
+     "rim_deg": 7.5352265344908105,
+     "A1_limit_from_leak_deg": 8.347049353994212,
+     "theta_hw_deg": 6.8154806217279535,
+     "set_by": "tank_farm",
+     "theta_crew_deg": 4.843341547210228,
+     "d_shield_m": 78.3625088521649,
+     "shield_radius_m": 10.365637794170302,
+     "shield_t": 825.3419368397996,
+     "fdp1_shield_t": 485.252669081414,
+     "envelope_margins_deg": {
+      "habitat_rings": 2.6918849872805826,
+      "crew_trunk_and_refuge": 6.483447315038761,
+      "hull_and_spine": 3.7760915163260518,
+      "equipment_module": 3.0123351563315266,
+      "driver_galleries": 4.276146303940665,
+      "forward_shield_and_eye": 4.981856702207907,
+      "tank_farm": 0.7197459127628569
+     },
+     "hardware_decades": 3.0,
+     "crew_decades_n": 3.2734156291344725,
+     "dust_farm_inside_r44": true,
+     "W_face_fluence_factor_vs_d_shield": 2.6702641841378356
+    },
+    "2_mass": {
+     "departure_t": 1696729.5558236176,
+     "status": "NON-CONVERGING (diverges past 400 kt)"
+    },
+    "3_rate_Hz": 1000.0,
+    "4_launcher": {
+     "muzzle_m_s": 62765.634593471244,
+     "accelerator_m": 6695.328996006373,
+     "launcher_kg": 1757948.2886159257,
+     "electric_W": 40626580479.34544
+    },
+    "5_structure": {
+     "farm_radius_m": 43.99999999999999,
+     "length_m": 1101.6,
+     "longeron_ring_m": 39.53623188405796,
+     "tube_r_m": 2.0,
+     "tube_at_cap": true,
+     "added_t": 85822.12537476454,
+     "f1_cantilever_beam_Hz": 0.03975453455417291,
+     "f1_free_free_beam_Hz": 0.18583273137100356,
+     "f1_FE_estimate_Hz": 0.021864994004795097,
+     "meets_basis": 0.0,
+     "screen": {
+      "above_3x_slosh_0.12Hz": 0.0,
+      "clear_of_spin_1x_2x": true,
+      "note": "FE estimate = k_FE x beam cantilever (T05 S5N ratio on V4); lowest (torsion-like) mode about 0.43 x that (T05)"
+     },
+     "aft_truss": {
+      "dx_m": 0.0,
+      "kg": 0.0
+     }
+    },
+    "6_coil_and_leak": {
+     "tilt_deg": 15.0,
+     "leak_centre_polar_deg": 11.653587858408892,
+     "leak_inner_edge_deg": 8.68738652459384,
+     "rim_below_leak_limit": true,
+     "C1_near_side": {
+      "polar_deg": 7.8816051255419755,
+      "z_m": 73.63867751245267,
+      "r_m": 10.194114983682258,
+      "envelope_r_min_m": 8.37866221979038,
+      "envelope_z_m": [
+       71.8232247485608,
+       75.45413027634456
+      ],
+      "envelope_polar_deg": 6.491239490197296
+     },
+     "C1_shield_same_z": false,
+     "C1_clear": true,
+     "pair_torque_GN_m": 89.87823983594133
+    },
+    "7_thrust": {
+     "thrust_MN": 114.73705325466241,
+     "residual_lever_m": 2.4723597235446997,
+     "untrimmed_torque_MN_m": 283.6712692650306,
+     "trim_turn_deg_full_to_dry": [
+      0.3455018965786397,
+      0.681037392294434
+     ],
+     "eta_T": 0.7606305321817767,
+     "side_over_axial": 1.2891960131502482e-05
+    },
+    "added_t": {
+     "closure coils C1, C2": 3571.775418778614,
+     "A1 pair-torque struts": 1273.275064342502,
+     "launcher B-ray": 1757.9482886159258,
+     "spine N9 over S2 keels": 85822.12537476454,
+     "shadow shield change (variant cones)": 189.04855985341337,
+     "aft stand-off truss and beam lines": 0.0
+    }
+   },
+   "summary": {
+    "converged": true,
+    "departure_t": 1696729.5558236176,
+    "a0_g": 0.006895573489099627,
+    "fusion_TW": 1460.198320504336,
+    "radiator_t": 161466.43275928142,
+    "hot_km2": 21.662874209054234,
+    "warm_km2": 220.71757164656472,
+    "drive_t": 224216.47009861688,
+    "propellant_t": 1072067.562330574,
+    "tank_t": 102242.01543556788,
+    "end_t": 624661.9934930437,
+    "xray_standoff_m": null,
+    "payload_t": 93854.37270635499,
+    "wing_tip_radius_m": 454303.36709599727,
+    "pellet_rate_Hz": 1000.0
+   }
+  },
+  {
+   "name": "T15-S2",
+   "what": "T15 with aft stand-off +200 m",
+   "variant": {
+    "name": "T15-S2",
+    "what": "T15 with aft stand-off +200 m",
+    "farm": "cone",
+    "rim_limit": 8.347049353994212,
+    "tilt": 15.0,
+    "dz": 3.5,
+    "basis": [
+     "cantilever",
+     0.1
+    ],
+    "dx": 200.0
+   },
+   "status": "NON-CONVERGING (diverges past 400 kt)",
+   "iterations": 2,
+   "departure_trajectory_t": [
+    62191.112484784906,
+    165963.6446508164,
+    691443.811067103
+   ],
+   "history": [
+    {
+     "departure_t": 165963.6446508164,
+     "farm_r_m": 41.53122423895775,
+     "stretch_m": 275.4,
+     "rim_deg": 5.262536878531937,
+     "added_t": {
+      "closure coils C1, C2": 2611.251274712385,
+      "A1 pair-torque struts": 1272.7078603305324,
+      "launcher B-ray": 73.829709714679,
+      "spine N9 over S2 keels": 807.7129932555447,
+      "shadow shield change (variant cones)": -222.41689116007666,
+      "aft stand-off truss and beam lines": 2649.155566119484
+     }
+    },
+    {
+     "departure_t": 691443.811067103,
+     "farm_r_m": 43.99999999999999,
+     "stretch_m": 612.0,
+     "rim_deg": 5.254284995732069,
+     "added_t": {
+      "closure coils C1, C2": 3046.770226213044,
+      "A1 pair-torque struts": 1272.835574071849,
+      "launcher B-ray": 525.7190922870658,
+      "spine N9 over S2 keels": 31551.252711462257,
+      "shadow shield change (variant cones)": -233.65856393154093,
+      "aft stand-off truss and beam lines": 3686.314398635078
+     }
+    }
+   ],
+   "eta_T_booked": 0.7606305321817767,
+   "loop_gain": 5.063769337106869,
+   "report": {
+    "1_shield": {
+     "rim_deg": 5.254284995732069,
+     "A1_limit_from_leak_deg": 8.347049353994212,
+     "theta_hw_deg": 4.528361018104576,
+     "set_by": "equipment_module",
+     "theta_crew_deg": 3.0999158259483366,
+     "d_shield_m": 78.35316971890903,
+     "shield_radius_m": 7.205554225663867,
+     "shield_t": 388.7814417038193,
+     "fdp1_shield_t": 677.1622973312949,
+     "envelope_margins_deg": {
+      "habitat_rings": 2.154369169783733,
+      "crew_trunk_and_refuge": 4.5820112984145,
+      "hull_and_spine": 3.8862324410020967,
+      "equipment_module": 0.7259239776274935,
+      "driver_galleries": 4.0685833710274295,
+      "forward_shield_and_eye": 3.1226714641546587,
+      "tank_farm": 0.8251127646519141
+     },
+     "hardware_decades": 3.0,
+     "crew_decades_n": 8.090344225442525,
+     "dust_farm_inside_r44": true,
+     "W_face_fluence_factor_vs_d_shield": 1.4950423110464304
+    },
+    "2_mass": {
+     "departure_t": 691443.811067103,
+     "status": "NON-CONVERGING (diverges past 400 kt)"
+    },
+    "3_rate_Hz": 1000.0,
+    "4_launcher": {
+     "muzzle_m_s": 34324.05132540222,
+     "accelerator_m": 2002.2816139878657,
+     "launcher_kg": 525719.0922870658,
+     "electric_W": 6643167143.283426
+    },
+    "5_structure": {
+     "farm_radius_m": 43.99999999999999,
+     "length_m": 612.0,
+     "longeron_ring_m": 39.53623188405796,
+     "tube_r_m": 1.6225478785842826,
+     "tube_at_cap": false,
+     "added_t": 31551.252711462257,
+     "f1_cantilever_beam_Hz": 0.10000000000021576,
+     "f1_free_free_beam_Hz": 0.43620900798354756,
+     "f1_FE_estimate_Hz": 0.05500000000011866,
+     "meets_basis": 1.0,
+     "screen": {
+      "above_3x_slosh_0.12Hz": 0.0,
+      "clear_of_spin_1x_2x": true,
+      "note": "FE estimate = k_FE x beam cantilever (T05 S5N ratio on V4); lowest (torsion-like) mode about 0.43 x that (T05)"
+     },
+     "aft_truss": {
+      "dx_m": 200.0,
+      "tip_t": 13172.184635396528,
+      "governed_by": "stiffness",
+      "truss_t": 2786.314398635078,
+      "beamlines_t": 900.0,
+      "kg": 3686314.3986350778,
+      "f_target_Hz": 0.1
+     }
+    },
+    "6_coil_and_leak": {
+     "tilt_deg": 15.0,
+     "leak_centre_polar_deg": 11.653587858408892,
+     "leak_inner_edge_deg": 8.68738652459384,
+     "rim_below_leak_limit": true,
+     "C1_near_side": {
+      "polar_deg": 7.8816051255419755,
+      "z_m": 73.62990135875178,
+      "r_m": 10.192900063439751,
+      "envelope_r_min_m": 8.37766366264714,
+      "envelope_z_m": [
+       71.81466495795918,
+       75.4451377595444
+      ],
+      "envelope_polar_deg": 6.491239490197296
+     },
+     "C1_shield_same_z": false,
+     "C1_clear": true,
+     "pair_torque_GN_m": 89.84721699330699
+    },
+    "7_thrust": {
+     "thrust_MN": 46.75714235112908,
+     "residual_lever_m": 2.4723597235446997,
+     "untrimmed_torque_MN_m": 115.60047553697768,
+     "trim_turn_deg_full_to_dry": [
+      0.3455018965786397,
+      0.681037392294434
+     ],
+     "eta_T": 0.7606305321817767,
+     "side_over_axial": 1.2891960131502482e-05
+    },
+    "added_t": {
+     "closure coils C1, C2": 3046.770226213044,
+     "A1 pair-torque struts": 1272.835574071849,
+     "launcher B-ray": 525.7190922870658,
+     "spine N9 over S2 keels": 31551.252711462257,
+     "shadow shield change (variant cones)": -233.65856393154093,
+     "aft stand-off truss and beam lines": 3686.314398635078
+    }
+   },
+   "summary": {
+    "converged": true,
+    "departure_t": 691443.811067103,
+    "a0_g": 0.006895573489099627,
+    "fusion_TW": 596.2233701695652,
+    "radiator_t": 63145.62634804368,
+    "hot_km2": 8.853391193101627,
+    "warm_km2": 84.8565576270597,
+    "drive_t": 91496.2154188926,
+    "propellant_t": 436884.2862877139,
+    "tank_t": 41352.87812220645,
+    "end_t": 254559.52477938903,
+    "xray_standoff_m": null,
+    "payload_t": 41089.433438737746,
+    "wing_tip_radius_m": 175633.26955999428,
+    "pellet_rate_Hz": 1000.0
+   }
+  },
+  {
+   "name": "N-V4",
+   "what": "narrowest: farm kept at V4 r 34.5 (long farm), spine practical",
+   "variant": {
+    "name": "N-V4",
+    "what": "narrowest: farm kept at V4 r 34.5 (long farm), spine practical",
+    "farm": "fixed",
+    "farm_r": 34.5,
+    "basis": [
+     "cantilever",
+     0.1
+    ]
+   },
+   "status": "NON-CONVERGING (diverges past 400 kt)",
+   "iterations": 2,
+   "departure_trajectory_t": [
+    58725.57672091077,
+    138532.73529928701,
+    1028059.6609375312
+   ],
+   "history": [
+    {
+     "departure_t": 138532.73529928701,
+     "farm_r_m": 34.5,
+     "stretch_m": 367.2,
+     "rim_deg": 6.1573437006567335,
+     "added_t": {
+      "closure coils C1, C2": 2519.4508738457407,
+      "A1 pair-torque struts": 1049.084678942014,
+      "launcher B-ray": 70.10261351341417,
+      "spine N9 over S2 keels": 2009.8887507788766,
+      "shadow shield change (variant cones)": 0.0,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 1028059.6609375312,
+     "farm_r_m": 34.5,
+     "stretch_m": 826.1999999999999,
+     "rim_deg": 6.155412349007524,
+     "added_t": {
+      "closure coils C1, C2": 2865.442763206444,
+      "A1 pair-torque struts": 1049.185253634911,
+      "launcher B-ray": 390.067595756343,
+      "spine N9 over S2 keels": 58185.98545819023,
+      "shadow shield change (variant cones)": 0.0,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    }
+   ],
+   "eta_T_booked": 0.764858856592654,
+   "loop_gain": 11.145954090881034,
+   "report": {
+    "1_shield": {
+     "rim_deg": 6.155412349007524,
+     "A1_limit_from_leak_deg": 7.5,
+     "theta_hw_deg": 5.376769953829622,
+     "set_by": "tank_farm",
+     "theta_crew_deg": 4.865099053751732,
+     "d_shield_m": 72.84030887462637,
+     "shield_radius_m": 7.8556412408056255,
+     "shield_t": 605.9166128902754,
+     "fdp1_shield_t": 621.1485884026802,
+     "envelope_margins_deg": {
+      "habitat_rings": 1.2903132952557925,
+      "crew_trunk_and_refuge": 5.0988866103335155,
+      "hull_and_spine": 2.343299605349148,
+      "equipment_module": 1.3024749099683977,
+      "driver_galleries": 2.8503682211135093,
+      "forward_shield_and_eye": 3.5980158634762285,
+      "tank_farm": 0.7786423951779025
+     },
+     "hardware_decades": 3.0,
+     "crew_decades_n": 6.015643830457113,
+     "dust_farm_inside_r44": true,
+     "W_face_fluence_factor_vs_d_shield": 2.2192622840813825
+    },
+    "2_mass": {
+     "departure_t": 1028059.6609375312,
+     "status": "NON-CONVERGING (diverges past 400 kt)"
+    },
+    "3_rate_Hz": 1000.0,
+    "4_launcher": {
+     "muzzle_m_s": 29597.53127450536,
+     "accelerator_m": 1488.809222220505,
+     "launcher_kg": 390067.595756343,
+     "electric_W": 4152707474.511719
+    },
+    "5_structure": {
+     "farm_radius_m": 34.5,
+     "length_m": 826.1999999999999,
+     "longeron_ring_m": 31.0,
+     "tube_r_m": 2.0,
+     "tube_at_cap": true,
+     "added_t": 58185.98545819023,
+     "f1_cantilever_beam_Hz": 0.06614691743000942,
+     "f1_free_free_beam_Hz": 0.3162517528271565,
+     "f1_FE_estimate_Hz": 0.036380804586505174,
+     "meets_basis": 0.0,
+     "screen": {
+      "above_3x_slosh_0.12Hz": 0.0,
+      "clear_of_spin_1x_2x": true,
+      "note": "FE estimate = k_FE x beam cantilever (T05 S5N ratio on V4); lowest (torsion-like) mode about 0.43 x that (T05)"
+     },
+     "aft_truss": {
+      "dx_m": 0.0,
+      "kg": 0.0
+     }
+    },
+    "6_coil_and_leak": {
+     "tilt_deg": 14.0,
+     "leak_centre_polar_deg": 10.828821274840449,
+     "leak_inner_edge_deg": 7.8403371705996285,
+     "rim_below_leak_limit": true,
+     "C1_near_side": {
+      "polar_deg": 8.68337376993094,
+      "z_m": 72.00539420117676,
+      "r_m": 10.99699062853624,
+      "envelope_r_min_m": 9.218184136485592,
+      "envelope_z_m": [
+       70.22658770912611,
+       73.78420069322742
+      ],
+      "envelope_polar_deg": 7.29536568903109
+     },
+     "C1_shield_same_z": true,
+     "C1_clear": true,
+     "pair_torque_GN_m": 74.0601355506996
+    },
+    "7_thrust": {
+     "thrust_MN": 69.51993949837329,
+     "residual_lever_m": 2.2881271683949387,
+     "untrimmed_torque_MN_m": 159.07046231140032,
+     "trim_turn_deg_full_to_dry": [
+      0.31975617009329216,
+      0.6302886045108164
+     ],
+     "eta_T": 0.764858856592654,
+     "side_over_axial": 2.084213743206176e-05
+    },
+    "added_t": {
+     "closure coils C1, C2": 2865.442763206444,
+     "A1 pair-torque struts": 1049.185253634911,
+     "launcher B-ray": 390.067595756343,
+     "spine N9 over S2 keels": 58185.98545819023,
+     "shadow shield change (variant cones)": 0.0,
+     "aft stand-off truss and beam lines": 0.0
+    }
+   },
+   "summary": {
+    "converged": true,
+    "departure_t": 1028059.6609375312,
+    "a0_g": 0.006895573489099627,
+    "fusion_TW": 880.6629482114141,
+    "radiator_t": 92354.5790204635,
+    "hot_km2": 12.848280465236911,
+    "warm_km2": 124.4925121078018,
+    "drive_t": 134676.1720118009,
+    "propellant_t": 649572.8272362745,
+    "tank_t": 61742.28850886536,
+    "end_t": 378486.8337012567,
+    "xray_standoff_m": null,
+    "payload_t": 63730.881070787924,
+    "wing_tip_radius_m": 257415.54463567823,
+    "pellet_rate_Hz": 1000.0
+   }
+  },
+  {
+   "name": "D-G0-0.80",
+   "what": "G0 at the G1-regularised eta_T 0.80",
+   "variant": {
+    "name": "D-G0-0.80",
+    "what": "G0 at the G1-regularised eta_T 0.80",
+    "farm": "wide",
+    "basis": [
+     "free_free",
+     0.2
+    ],
+    "eta_T": 0.8
+   },
+   "status": "CONVERGED",
+   "iterations": 12,
+   "departure_trajectory_t": [
+    52510.363625291924,
+    103610.4733041268,
+    118063.81140674622,
+    122855.32981716921,
+    124519.26740519506,
+    125106.08143344341,
+    125314.14321771328,
+    125388.0539108836,
+    125414.32802594028,
+    125423.6701086562,
+    125426.99126361034,
+    125428.17173659612,
+    125428.59163989667
+   ],
+   "history": [
+    {
+     "departure_t": 103610.4733041268,
+     "farm_r_m": 38.162171884173404,
+     "stretch_m": 275.4,
+     "rim_deg": 6.801439991997327,
+     "added_t": {
+      "closure coils C1, C2": 2345.778116603351,
+      "A1 pair-torque struts": 932.477013606562,
+      "launcher B-ray": 63.57761450124553,
+      "spine N9 over S2 keels": 389.46950252938865,
+      "shadow shield change (variant cones)": 38.6675857129884,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 118063.81140674622,
+     "farm_r_m": 53.605876223612,
+     "stretch_m": 275.4,
+     "rim_deg": 9.18550724531617,
+     "added_t": {
+      "closure coils C1, C2": 2580.7317788110317,
+      "A1 pair-torque struts": 932.5591363447846,
+      "launcher B-ray": 247.50308658906923,
+      "spine N9 over S2 keels": 760.7596608051687,
+      "shadow shield change (variant cones)": 239.15380115512934,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 122855.32981716921,
+     "farm_r_m": 57.22278226181939,
+     "stretch_m": 275.4,
+     "rim_deg": 9.73927706146706,
+     "added_t": {
+      "closure coils C1, C2": 2643.21984369531,
+      "A1 pair-torque struts": 932.7840466936343,
+      "launcher B-ray": 321.2883583188756,
+      "spine N9 over S2 keels": 886.0794522758233,
+      "shadow shield change (variant cones)": 294.8852663983981,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 124519.26740519506,
+     "farm_r_m": 58.37240291399803,
+     "stretch_m": 275.4,
+     "rim_deg": 9.914884621046074,
+     "added_t": {
+      "closure coils C1, C2": 2663.7137303665427,
+      "A1 pair-torque struts": 932.8744777290738,
+      "launcher B-ray": 347.85992800806514,
+      "spine N9 over S2 keels": 929.6637187890586,
+      "shadow shield change (variant cones)": 313.30047269795114,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 125106.08143344341,
+     "farm_r_m": 58.766367796606616,
+     "stretch_m": 275.4,
+     "rim_deg": 9.975018076756873,
+     "added_t": {
+      "closure coils C1, C2": 2670.8070599536018,
+      "A1 pair-torque struts": 932.9070405264503,
+      "launcher B-ray": 357.33315446811076,
+      "spine N9 over S2 keels": 945.0376409635438,
+      "shadow shield change (variant cones)": 319.68903158503866,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 125314.14321771328,
+     "farm_r_m": 58.904677298623994,
+     "stretch_m": 275.4,
+     "rim_deg": 9.996123604826744,
+     "added_t": {
+      "closure coils C1, C2": 2673.3058335648043,
+      "A1 pair-torque struts": 932.9186473173543,
+      "launcher B-ray": 360.70425766728914,
+      "spine N9 over S2 keels": 950.4888652354117,
+      "shadow shield change (variant cones)": 321.94128987470873,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 125388.0539108836,
+     "farm_r_m": 58.95363863105922,
+     "stretch_m": 275.4,
+     "rim_deg": 10.003594228709487,
+     "added_t": {
+      "closure coils C1, C2": 2674.19145952083,
+      "A1 pair-torque struts": 932.9227817613174,
+      "launcher B-ray": 361.90330330549034,
+      "spine N9 over S2 keels": 952.4253392945158,
+      "shadow shield change (variant cones)": 322.73975995172236,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 125414.32802594028,
+     "farm_r_m": 58.97102159313187,
+     "stretch_m": 275.4,
+     "rim_deg": 10.006246462459993,
+     "added_t": {
+      "closure coils C1, C2": 2674.5060281416454,
+      "A1 pair-torque struts": 932.9242618427237,
+      "launcher B-ray": 362.3297173573735,
+      "spine N9 over S2 keels": 953.113705035557,
+      "shadow shield change (variant cones)": 323.0233936412984,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 125423.6701086562,
+     "farm_r_m": 58.97719973450849,
+     "stretch_m": 275.4,
+     "rim_deg": 10.00718907450255,
+     "added_t": {
+      "closure coils C1, C2": 2674.617862967209,
+      "A1 pair-torque struts": 932.924808870951,
+      "launcher B-ray": 362.48135049308587,
+      "spine N9 over S2 keels": 953.3584670348649,
+      "shadow shield change (variant cones)": 323.12422313333315,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 125426.99126361034,
+     "farm_r_m": 58.97939629221815,
+     "stretch_m": 275.4,
+     "rim_deg": 10.007524212104864,
+     "added_t": {
+      "closure coils C1, C2": 2674.657620216958,
+      "A1 pair-torque struts": 932.9249953209224,
+      "launcher B-ray": 362.5352773261124,
+      "spine N9 over S2 keels": 953.4455025607906,
+      "shadow shield change (variant cones)": 323.1600726350916,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 125428.17173659612,
+     "farm_r_m": 58.98017715924801,
+     "stretch_m": 275.4,
+     "rim_deg": 10.007643379545286,
+     "added_t": {
+      "closure coils C1, C2": 2674.671729560673,
+      "A1 pair-torque struts": 932.925030003232,
+      "launcher B-ray": 362.554465917221,
+      "spine N9 over S2 keels": 953.4764450345841,
+      "shadow shield change (variant cones)": 323.17281189654034,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 125428.59163989667,
+     "farm_r_m": 58.980454708527134,
+     "stretch_m": 275.4,
+     "rim_deg": 10.00768573146277,
+     "added_t": {
+      "closure coils C1, C2": 2674.6767498529566,
+      "A1 pair-torque struts": 932.9250491369767,
+      "launcher B-ray": 362.56128291615613,
+      "spine N9 over S2 keels": 953.4874433608613,
+      "shadow shield change (variant cones)": 323.1773411926667,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    }
+   ],
+   "eta_T_booked": 0.7735614225968688,
+   "loop_gain": 0.35570767446570306,
+   "report": {
+    "1_shield": {
+     "rim_deg": 10.00768573146277,
+     "A1_limit_from_leak_deg": 7.5,
+     "theta_hw_deg": 9.211359762544006,
+     "set_by": "tank_farm",
+     "theta_crew_deg": 4.9046875314646625,
+     "d_shield_m": 69.94393646051005,
+     "shield_radius_m": 12.342677444993345,
+     "shield_t": 902.5803026165463,
+     "fdp1_shield_t": 579.4030345516594,
+     "envelope_margins_deg": {
+      "habitat_rings": 5.102998199998107,
+      "crew_trunk_and_refuge": 8.942522798720635,
+      "hull_and_spine": 6.096537534756138,
+      "equipment_module": 4.967463882950567,
+      "driver_galleries": 6.616713871044477,
+      "forward_shield_and_eye": 7.443022060294355,
+      "tank_farm": 0.7963259689187634
+     },
+     "hardware_decades": 3.0,
+     "crew_decades_n": 10.844280712914241,
+     "dust_farm_inside_r44": false,
+     "W_face_fluence_factor_vs_d_shield": 1.0000000121671868
+    },
+    "2_mass": {
+     "departure_t": 125428.59163989667,
+     "status": "CONVERGED"
+    },
+    "3_rate_Hz": 467.69313953211076,
+    "4_launcher": {
+     "muzzle_m_s": 28591.837920597016,
+     "accelerator_m": 1389.3517760527966,
+     "launcher_kg": 362561.2829161561,
+     "electric_W": 3559913726.85786
+    },
+    "5_structure": {
+     "farm_radius_m": 58.980454708527134,
+     "length_m": 275.4,
+     "longeron_ring_m": 52.99693031780699,
+     "tube_r_m": 0.3265984342750744,
+     "tube_at_cap": false,
+     "added_t": 953.4874433608613,
+     "f1_cantilever_beam_Hz": 0.06756463134993136,
+     "f1_free_free_beam_Hz": 0.21712875260061543,
+     "f1_FE_estimate_Hz": 0.03716054724246225,
+     "meets_basis": 1.0,
+     "screen": {
+      "above_3x_slosh_0.12Hz": 0.0,
+      "clear_of_spin_1x_2x": true,
+      "note": "FE estimate = k_FE x beam cantilever (T05 S5N ratio on V4); lowest (torsion-like) mode about 0.43 x that (T05)"
+     },
+     "aft_truss": {
+      "dx_m": 0.0,
+      "kg": 0.0
+     }
+    },
+    "6_coil_and_leak": {
+     "tilt_deg": 14.0,
+     "leak_centre_polar_deg": 10.828821274840449,
+     "leak_inner_edge_deg": 7.8403371705996285,
+     "rim_below_leak_limit": false,
+     "C1_near_side": {
+      "polar_deg": 8.68337376993094,
+      "z_m": 69.14222076528667,
+      "r_m": 10.559713785715447,
+      "envelope_r_min_m": 8.851638543068123,
+      "envelope_z_m": [
+       67.43414552263934,
+       70.85029600793399
+      ],
+      "envelope_polar_deg": 7.29536568903109
+     },
+     "C1_shield_same_z": true,
+     "C1_clear": false,
+     "pair_torque_GN_m": 65.85353288025718
+    },
+    "7_thrust": {
+     "thrust_MN": 8.48179189738837,
+     "residual_lever_m": 2.2881271683949387,
+     "untrimmed_torque_MN_m": 19.407418477086384,
+     "trim_turn_deg_full_to_dry": [
+      0.31975617009329216,
+      0.6302886045108164
+     ],
+     "eta_T": 0.7735614225968688,
+     "side_over_axial": 2.084213743206176e-05
+    },
+    "added_t": {
+     "closure coils C1, C2": 2674.6767498529566,
+     "A1 pair-torque struts": 932.9250491369767,
+     "launcher B-ray": 362.56128291615613,
+     "spine N9 over S2 keels": 953.4874433608613,
+     "shadow shield change (variant cones)": 323.1773411926667,
+     "aft stand-off truss and beam lines": 0.0
+    }
+   },
+   "summary": {
+    "converged": true,
+    "departure_t": 125428.59163989667,
+    "a0_g": 0.006895573489099627,
+    "fusion_TW": 106.67409984470704,
+    "radiator_t": 11081.312839093809,
+    "hot_km2": 1.5050537477767736,
+    "warm_km2": 15.077429089409783,
+    "drive_t": 18001.446205658056,
+    "propellant_t": 79251.24191089388,
+    "tank_t": 7437.513141355554,
+    "end_t": 46177.34972900279,
+    "xray_standoff_m": null,
+    "payload_t": 6487.027866459617,
+    "wing_tip_radius_m": 31064.448598467075,
+    "pellet_rate_Hz": 467.69313953211076
+   }
+  },
+  {
+   "name": "D-G0-0.72",
+   "what": "G0 at eta_T 0.72",
+   "variant": {
+    "name": "D-G0-0.72",
+    "what": "G0 at eta_T 0.72",
+    "farm": "wide",
+    "basis": [
+     "free_free",
+     0.2
+    ],
+    "eta_T": 0.72
+   },
+   "status": "NON-CONVERGING (diverges past 400 kt)",
+   "iterations": 1,
+   "departure_trajectory_t": [
+    207843.9393503281,
+    485306.2453320098
+   ],
+   "history": [
+    {
+     "departure_t": 485306.2453320098,
+     "farm_r_m": 75.92403015803708,
+     "stretch_m": 275.4,
+     "rim_deg": 11.275750096502417,
+     "added_t": {
+      "closure coils C1, C2": 5056.28367588549,
+      "A1 pair-torque struts": 3159.9013668522325,
+      "launcher B-ray": 269.171462568734,
+      "spine N9 over S2 keels": 1873.639752429503,
+      "shadow shield change (variant cones)": 1186.7594023207434,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    }
+   ],
+   "eta_T_booked": 0.6962052803371819,
+   "report": {
+    "1_shield": {
+     "rim_deg": 11.275750096502417,
+     "A1_limit_from_leak_deg": 7.5,
+     "theta_hw_deg": 10.757209840344682,
+     "set_by": "tank_farm",
+     "theta_crew_deg": 4.449521469692861,
+     "d_shield_m": 106.45876074905443,
+     "shield_radius_m": 21.225706743756298,
+     "shield_t": 2049.6199349622375,
+     "fdp1_shield_t": 893.2202661452382,
+     "envelope_margins_deg": {
+      "habitat_rings": 6.826228626809556,
+      "crew_trunk_and_refuge": 10.309835888660468,
+      "hull_and_spine": 8.327579413546282,
+      "equipment_module": 7.882604005121978,
+      "driver_galleries": 8.720107672895272,
+      "forward_shield_and_eye": 8.799528005768275,
+      "tank_farm": 0.5185402561577348
+     },
+     "hardware_decades": 3.0,
+     "crew_decades_n": 9.517069787984255,
+     "dust_farm_inside_r44": false,
+     "W_face_fluence_factor_vs_d_shield": 1.0002299636261094
+    },
+    "2_mass": {
+     "departure_t": 485306.2453320098,
+     "status": "NON-CONVERGING (diverges past 400 kt)"
+    },
+    "3_rate_Hz": 597.8093964619505,
+    "4_launcher": {
+     "muzzle_m_s": 23830.42557033332,
+     "accelerator_m": 965.143011567314,
+     "launcher_kg": 269171.462568734,
+     "electric_W": 3570833892.836573
+    },
+    "5_structure": {
+     "farm_radius_m": 75.92403015803708,
+     "length_m": 275.4,
+     "longeron_ring_m": 68.22159231591738,
+     "tube_r_m": 0.45937603900092655,
+     "tube_at_cap": false,
+     "added_t": 1873.639752429503,
+     "f1_cantilever_beam_Hz": 0.06906393606222225,
+     "f1_free_free_beam_Hz": 0.21717861567600188,
+     "f1_FE_estimate_Hz": 0.037985164834222235,
+     "meets_basis": 1.0,
+     "screen": {
+      "above_3x_slosh_0.12Hz": 0.0,
+      "clear_of_spin_1x_2x": true,
+      "note": "FE estimate = k_FE x beam cantilever (T05 S5N ratio on V4); lowest (torsion-like) mode about 0.43 x that (T05)"
+     },
+     "aft_truss": {
+      "dx_m": 0.0,
+      "kg": 0.0
+     }
+    },
+    "6_coil_and_leak": {
+     "tilt_deg": 14.0,
+     "leak_centre_polar_deg": 10.828821274840449,
+     "leak_inner_edge_deg": 7.8403371705996285,
+     "rim_below_leak_limit": false,
+     "C1_near_side": {
+      "polar_deg": 8.68337376993094,
+      "z_m": 105.23850258650826,
+      "r_m": 16.072501783291465,
+      "envelope_r_min_m": 13.472711396871905,
+      "envelope_z_m": [
+       102.6387122000887,
+       107.83829297292783
+      ],
+      "envelope_polar_deg": 7.29536568903109
+     },
+     "C1_shield_same_z": true,
+     "C1_clear": false,
+     "pair_torque_GN_m": 223.0518611895694
+    },
+    "7_thrust": {
+     "thrust_MN": 32.817609809625736,
+     "residual_lever_m": 2.2881271683949387,
+     "untrimmed_torque_MN_m": 75.09086460718889,
+     "trim_turn_deg_full_to_dry": [
+      0.31975617009329216,
+      0.6302886045108164
+     ],
+     "eta_T": 0.6962052803371819,
+     "side_over_axial": 2.084213743206176e-05
+    },
+    "added_t": {
+     "closure coils C1, C2": 5056.28367588549,
+     "A1 pair-torque struts": 3159.9013668522325,
+     "launcher B-ray": 269.171462568734,
+     "spine N9 over S2 keels": 1873.639752429503,
+     "shadow shield change (variant cones)": 1186.7594023207434,
+     "aft stand-off truss and beam lines": 0.0
+    }
+   },
+   "summary": {
+    "converged": true,
+    "departure_t": 485306.2453320098,
+    "a0_g": 0.006895573489099627,
+    "fusion_TW": 457.04867194103656,
+    "radiator_t": 51387.84270512472,
+    "hot_km2": 8.528415695136895,
+    "warm_km2": 63.989218107690476,
+    "drive_t": 73452.23680111441,
+    "propellant_t": 306637.6026934588,
+    "tank_t": 28777.1034381219,
+    "end_t": 178668.64263855098,
+    "xray_standoff_m": null,
+    "payload_t": 12785.955660056703,
+    "wing_tip_radius_m": 135910.0923953571,
+    "pellet_rate_Hz": 597.8093964619505
+   }
+  },
+  {
+   "name": "D-noA1-0.80",
+   "what": "G0-noA1 at eta_T 0.80",
+   "variant": {
+    "name": "D-noA1-0.80",
+    "what": "G0-noA1 at eta_T 0.80",
+    "farm": "wide",
+    "basis": [
+     "free_free",
+     0.2
+    ],
+    "a1": false,
+    "eta_T": 0.8
+   },
+   "status": "CONVERGED",
+   "iterations": 9,
+   "departure_trajectory_t": [
+    39136.83653218518,
+    66730.06856042909,
+    72794.26015623363,
+    74334.22956032699,
+    74733.99394429018,
+    74838.35545953622,
+    74865.63929079448,
+    74872.7754438445,
+    74874.64231174167,
+    74875.13003733159
+   ],
+   "history": [
+    {
+     "departure_t": 66730.06856042909,
+     "farm_r_m": 34.5,
+     "stretch_m": 275.4,
+     "rim_deg": 6.535529709102894,
+     "added_t": {
+      "closure coils C1, C2": 1919.1355942325768,
+      "A1 pair-torque struts": 0.0,
+      "launcher B-ray": 50.494359001774434,
+      "spine N9 over S2 keels": 318.2722644164408,
+      "shadow shield change (variant cones)": 0.0,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 72794.26015623363,
+     "farm_r_m": 43.02009409542063,
+     "stretch_m": 275.4,
+     "rim_deg": 7.794161813876786,
+     "added_t": {
+      "closure coils C1, C2": 2062.921888069907,
+      "A1 pair-torque struts": 0.0,
+      "launcher B-ray": 146.78467814284437,
+      "spine N9 over S2 keels": 481.9833253571679,
+      "shadow shield change (variant cones)": 75.22086405165895,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 74334.22956032699,
+     "farm_r_m": 44.932350568771625,
+     "stretch_m": 275.4,
+     "rim_deg": 8.095633158019705,
+     "added_t": {
+      "closure coils C1, C2": 2092.9097927499784,
+      "A1 pair-torque struts": 0.0,
+      "launcher B-ray": 174.65149868249904,
+      "spine N9 over S2 keels": 523.8811196091906,
+      "shadow shield change (variant cones)": 95.27757046964014,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 74733.99394429018,
+     "farm_r_m": 45.405137239696074,
+     "stretch_m": 275.4,
+     "rim_deg": 8.170093664452484,
+     "added_t": {
+      "closure coils C1, C2": 2100.4637624507936,
+      "A1 pair-torque struts": 0.0,
+      "launcher B-ray": 182.11196468495783,
+      "spine N9 over S2 keels": 534.7614899867957,
+      "shadow shield change (variant cones)": 100.35558935275063,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 74838.35545953622,
+     "farm_r_m": 45.527066383505584,
+     "stretch_m": 275.4,
+     "rim_deg": 8.189291675640995,
+     "added_t": {
+      "closure coils C1, C2": 2102.4209886297594,
+      "A1 pair-torque struts": 0.0,
+      "launcher B-ray": 184.07403587632422,
+      "spine N9 over S2 keels": 537.602035881509,
+      "shadow shield change (variant cones)": 101.67286124534137,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 74865.63929079448,
+     "farm_r_m": 45.55884319498178,
+     "stretch_m": 275.4,
+     "rim_deg": 8.194294668229915,
+     "added_t": {
+      "closure coils C1, C2": 2102.9316900134186,
+      "A1 pair-torque struts": 0.0,
+      "launcher B-ray": 184.58797127422528,
+      "spine N9 over S2 keels": 538.3446754983705,
+      "shadow shield change (variant cones)": 102.01668225043866,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 74872.7754438445,
+     "farm_r_m": 45.56714713559543,
+     "stretch_m": 275.4,
+     "rim_deg": 8.19560205888572,
+     "added_t": {
+      "closure coils C1, C2": 2103.0651641739755,
+      "A1 pair-torque struts": 0.0,
+      "launcher B-ray": 184.72245964729373,
+      "spine N9 over S2 keels": 538.5389027495805,
+      "shadow shield change (variant cones)": 102.10656011820677,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 74874.64231174167,
+     "farm_r_m": 45.56931880200078,
+     "stretch_m": 275.4,
+     "rim_deg": 8.195943932537483,
+     "added_t": {
+      "closure coils C1, C2": 2103.100106239922,
+      "A1 pair-torque struts": 0.0,
+      "launcher B-ray": 184.75763051515736,
+      "spine N9 over S2 keels": 538.5897084748827,
+      "shadow shield change (variant cones)": 102.13007417869446,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 74875.13003733159,
+     "farm_r_m": 45.56988690814868,
+     "stretch_m": 275.4,
+     "rim_deg": 8.196033370063054,
+     "added_t": {
+      "closure coils C1, C2": 2103.109244064671,
+      "A1 pair-torque struts": 0.0,
+      "launcher B-ray": 184.76683326271228,
+      "spine N9 over S2 keels": 538.602999955775,
+      "shadow shield change (variant cones)": 102.13622493286466,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    }
+   ],
+   "eta_T_booked": 0.8,
+   "loop_gain": 0.26125340237387334,
+   "report": {
+    "1_shield": {
+     "rim_deg": 8.196033370063054,
+     "A1_limit_from_leak_deg": 7.5,
+     "theta_hw_deg": 7.292674278677737,
+     "set_by": "tank_farm",
+     "theta_crew_deg": 5.013271036629854,
+     "d_shield_m": 62.27218788462668,
+     "shield_radius_m": 8.969158726793948,
+     "shield_t": 610.3613074621666,
+     "fdp1_shield_t": 508.225198237527,
+     "envelope_margins_deg": {
+      "habitat_rings": 3.1827623334331996,
+      "crew_trunk_and_refuge": 7.107175258608183,
+      "hull_and_spine": 3.9943643944162144,
+      "equipment_module": 2.5790034005086184,
+      "driver_galleries": 4.5529627304530615,
+      "forward_shield_and_eye": 5.250776895634307,
+      "tank_farm": 0.9033590913853171
+     },
+     "hardware_decades": 3.0,
+     "crew_decades_n": 11.024323247607636,
+     "dust_farm_inside_r44": false,
+     "W_face_fluence_factor_vs_d_shield": 0.9999999763279105
+    },
+    "2_mass": {
+     "departure_t": 74875.13003733159,
+     "status": "CONVERGED"
+    },
+    "3_rate_Hz": 376.80407356164346,
+    "4_launcher": {
+     "muzzle_m_s": 20508.75595224543,
+     "accelerator_m": 714.8364812121746,
+     "launcher_kg": 184766.8332627123,
+     "electric_W": 1141277980.6845868
+    },
+    "5_structure": {
+     "farm_radius_m": 45.56988690814868,
+     "length_m": 275.4,
+     "longeron_ring_m": 40.94685490297418,
+     "tube_r_m": 0.2382256473772577,
+     "tube_at_cap": false,
+     "added_t": 538.602999955775,
+     "f1_cantilever_beam_Hz": 0.06500759136005695,
+     "f1_free_free_beam_Hz": 0.2170594383571129,
+     "f1_FE_estimate_Hz": 0.03575417524803132,
+     "meets_basis": 1.0,
+     "screen": {
+      "above_3x_slosh_0.12Hz": 0.0,
+      "clear_of_spin_1x_2x": true,
+      "note": "FE estimate = k_FE x beam cantilever (T05 S5N ratio on V4); lowest (torsion-like) mode about 0.43 x that (T05)"
+     },
+     "aft_truss": {
+      "dx_m": 0.0,
+      "kg": 0.0
+     }
+    },
+    "6_coil_and_leak": {
+     "tilt_deg": 14.0,
+     "leak_centre_polar_deg": 10.828821274840449,
+     "leak_inner_edge_deg": 7.8403371705996285,
+     "rim_below_leak_limit": false,
+     "C1_near_side": {
+      "polar_deg": 8.68337376993094,
+      "z_m": 61.55840777830979,
+      "r_m": 9.401479444086176,
+      "envelope_r_min_m": 7.880753162240903,
+      "envelope_z_m": [
+       60.03768149646452,
+       63.07913406015507
+      ],
+      "envelope_polar_deg": 7.29536568903109
+     },
+     "C1_shield_same_z": true,
+     "C1_clear": false,
+     "pair_torque_GN_m": 0.0
+    },
+    "7_thrust": {
+     "thrust_MN": 5.063241665742607,
+     "residual_lever_m": 0.0,
+     "untrimmed_torque_MN_m": 0.0,
+     "trim_turn_deg_full_to_dry": [
+      0.0,
+      0.0
+     ],
+     "eta_T": 0.8,
+     "side_over_axial": 2.084213743206176e-05
+    },
+    "added_t": {
+     "closure coils C1, C2": 2103.109244064671,
+     "A1 pair-torque struts": 0.0,
+     "launcher B-ray": 184.76683326271228,
+     "spine N9 over S2 keels": 538.602999955775,
+     "shadow shield change (variant cones)": 102.13622493286466,
+     "aft stand-off truss and beam lines": 0.0
+    }
+   },
+   "summary": {
+    "converged": true,
+    "departure_t": 74875.13003733159,
+    "a0_g": 0.006895573489099627,
+    "fusion_TW": 61.64490013790415,
+    "radiator_t": 6171.181889590305,
+    "hot_km2": 0.7744838199153028,
+    "warm_km2": 8.640409647324024,
+    "drive_t": 10893.538046336156,
+    "propellant_t": 47309.36516240621,
+    "tank_t": 4439.855030286652,
+    "end_t": 27565.764874925382,
+    "xray_standoff_m": null,
+    "payload_t": 4168.815302216023,
+    "wing_tip_radius_m": 17629.416977197663,
+    "pellet_rate_Hz": 376.80407356164346
+   }
+  },
+  {
+   "name": "D-noA1-0.72",
+   "what": "G0-noA1 at eta_T 0.72",
+   "variant": {
+    "name": "D-noA1-0.72",
+    "what": "G0-noA1 at eta_T 0.72",
+    "farm": "wide",
+    "basis": [
+     "free_free",
+     0.2
+    ],
+    "a1": false,
+    "eta_T": 0.72
+   },
+   "status": "NON-CONVERGING (diverges past 400 kt)",
+   "iterations": 8,
+   "departure_trajectory_t": [
+    121968.40113780872,
+    225155.96114249455,
+    278361.46726806706,
+    313455.28055719216,
+    339917.067253521,
+    361790.07885375817,
+    381213.8030031714,
+    399549.68369561207,
+    417853.85575148073
+   ],
+   "history": [
+    {
+     "departure_t": 225155.96114249455,
+     "farm_r_m": 58.1613174986596,
+     "stretch_m": 275.4,
+     "rim_deg": 9.189083860388095,
+     "added_t": {
+      "closure coils C1, C2": 3845.2783499625966,
+      "A1 pair-torque struts": 0.0,
+      "launcher B-ray": 145.8065912506329,
+      "spine N9 over S2 keels": 921.5192333914629,
+      "shadow shield change (variant cones)": 467.442317275353,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 278361.46726806706,
+     "farm_r_m": 79.02277841464146,
+     "stretch_m": 275.4,
+     "rim_deg": 12.180102969424231,
+     "added_t": {
+      "closure coils C1, C2": 4205.448435018763,
+      "A1 pair-torque struts": 0.0,
+      "launcher B-ray": 496.7779869332976,
+      "spine N9 over S2 keels": 2105.8147759512613,
+      "shadow shield change (variant cones)": 1060.8657245319878,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 313455.28055719216,
+     "farm_r_m": 87.86484129888468,
+     "stretch_m": 275.4,
+     "rim_deg": 13.428085006425482,
+     "added_t": {
+      "closure coils C1, C2": 4380.602661092847,
+      "A1 pair-torque struts": 0.0,
+      "launcher B-ray": 758.9409836266964,
+      "spine N9 over S2 keels": 2904.0591136782327,
+      "shadow shield change (variant cones)": 1363.9003104800581,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 339917.067253521,
+     "farm_r_m": 93.23916287815999,
+     "stretch_m": 275.4,
+     "rim_deg": 14.180242090366,
+     "added_t": {
+      "closure coils C1, C2": 4493.907506880217,
+      "A1 pair-torque struts": 0.0,
+      "launcher B-ray": 962.0269427110695,
+      "spine N9 over S2 keels": 3500.52097877985,
+      "shadow shield change (variant cones)": 1563.1096221035393,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 361790.07885375817,
+     "farm_r_m": 97.09504245522204,
+     "stretch_m": 275.4,
+     "rim_deg": 14.716776029999723,
+     "added_t": {
+      "closure coils C1, C2": 4578.431537114963,
+      "A1 pair-torque struts": 0.0,
+      "launcher B-ray": 1131.0008151730926,
+      "spine N9 over S2 keels": 3987.030890781519,
+      "shadow shield change (variant cones)": 1713.0365950227394,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 381213.8030031714,
+     "farm_r_m": 100.17028215584895,
+     "stretch_m": 275.4,
+     "rim_deg": 15.142768037946762,
+     "added_t": {
+      "closure coils C1, C2": 4647.795478342028,
+      "A1 pair-torque struts": 0.0,
+      "launcher B-ray": 1280.9470548484053,
+      "spine N9 over S2 keels": 4413.030258597318,
+      "shadow shield change (variant cones)": 1836.8053691936334,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 399549.68369561207,
+     "farm_r_m": 102.82409103432548,
+     "stretch_m": 275.4,
+     "rim_deg": 15.50898433846069,
+     "added_t": {
+      "closure coils C1, C2": 4709.05454023934,
+      "A1 pair-torque struts": 0.0,
+      "launcher B-ray": 1421.8939649453682,
+      "spine N9 over S2 keels": 4809.42629601369,
+      "shadow shield change (variant cones)": 1946.6062422455589,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    },
+    {
+     "departure_t": 417853.85575148073,
+     "farm_r_m": 105.26790164598468,
+     "stretch_m": 275.4,
+     "rim_deg": 15.845055971288756,
+     "added_t": {
+      "closure coils C1, C2": 4766.619452411358,
+      "A1 pair-torque struts": 0.0,
+      "launcher B-ray": 1561.6686465301632,
+      "spine N9 over S2 keels": 5199.244297988473,
+      "shadow shield change (variant cones)": 2050.1720128131096,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    }
+   ],
+   "eta_T_booked": 0.72,
+   "loop_gain": 0.9982706782889859,
+   "report": {
+    "1_shield": {
+     "rim_deg": 15.845055971288756,
+     "A1_limit_from_leak_deg": 7.5,
+     "theta_hw_deg": 15.267817759381836,
+     "set_by": "tank_farm",
+     "theta_crew_deg": 4.616272072327218,
+     "d_shield_m": 92.11839044397765,
+     "shield_radius_m": 26.145134503154516,
+     "shield_t": 2837.187969145947,
+     "fdp1_shield_t": 788.3963128314921,
+     "envelope_margins_deg": {
+      "habitat_rings": 11.228783898961538,
+      "crew_trunk_and_refuge": 14.842796084397397,
+      "hull_and_spine": 12.584373946332075,
+      "equipment_module": 11.957256245786969,
+      "driver_galleries": 13.018372369161707,
+      "forward_shield_and_eye": 13.33514777862627,
+      "tank_farm": 0.5772382119069199
+     },
+     "hardware_decades": 3.0,
+     "crew_decades_n": 10.202418276439982,
+     "dust_farm_inside_r44": false,
+     "W_face_fluence_factor_vs_d_shield": 1.0001208801958268
+    },
+    "2_mass": {
+     "departure_t": 417853.85575148073,
+     "status": "NON-CONVERGING (diverges past 400 kt)"
+    },
+    "3_rate_Hz": 756.8637651863693,
+    "4_launcher": {
+     "muzzle_m_s": 58279.04404245645,
+     "accelerator_m": 5772.353410700186,
+     "launcher_kg": 1561668.6465301632,
+     "electric_W": 42915695531.28091
+    },
+    "5_structure": {
+     "farm_radius_m": 105.26790164598468,
+     "length_m": 275.4,
+     "longeron_ring_m": 94.58854930508768,
+     "tube_r_m": 0.7338213617703878,
+     "tube_at_cap": false,
+     "added_t": 5199.244297988473,
+     "f1_cantilever_beam_Hz": 0.07000341558333242,
+     "f1_free_free_beam_Hz": 0.21725119848729968,
+     "f1_FE_estimate_Hz": 0.03850187857083283,
+     "meets_basis": 1.0,
+     "screen": {
+      "above_3x_slosh_0.12Hz": 0.0,
+      "clear_of_spin_1x_2x": true,
+      "note": "FE estimate = k_FE x beam cantilever (T05 S5N ratio on V4); lowest (torsion-like) mode about 0.43 x that (T05)"
+     },
+     "aft_truss": {
+      "dx_m": 0.0,
+      "kg": 0.0
+     }
+    },
+    "6_coil_and_leak": {
+     "tilt_deg": 14.0,
+     "leak_centre_polar_deg": 10.828821274840449,
+     "leak_inner_edge_deg": 7.8403371705996285,
+     "rim_below_leak_limit": false,
+     "C1_near_side": {
+      "polar_deg": 8.68337376993094,
+      "z_m": 91.06250535693584,
+      "r_m": 13.907479142790233,
+      "envelope_r_min_m": 11.65788968482894,
+      "envelope_z_m": [
+       88.81291589897455,
+       93.31209481489714
+      ],
+      "envelope_polar_deg": 7.29536568903109
+     },
+     "C1_shield_same_z": true,
+     "C1_clear": false,
+     "pair_torque_GN_m": 0.0
+    },
+    "7_thrust": {
+     "thrust_MN": 28.256312230472858,
+     "residual_lever_m": 0.0,
+     "untrimmed_torque_MN_m": 0.0,
+     "trim_turn_deg_full_to_dry": [
+      0.0,
+      0.0
+     ],
+     "eta_T": 0.72,
+     "side_over_axial": 2.084213743206176e-05
+    },
+    "added_t": {
+     "closure coils C1, C2": 4766.619452411358,
+     "A1 pair-torque struts": 0.0,
+     "launcher B-ray": 1561.6686465301632,
+     "spine N9 over S2 keels": 5199.244297988473,
+     "shadow shield change (variant cones)": 2050.1720128131096,
+     "aft stand-off truss and beam lines": 0.0
+    }
+   },
+   "summary": {
+    "converged": true,
+    "departure_t": 417853.85575148073,
+    "a0_g": 0.006895573489099627,
+    "fusion_TW": 380.9644478954739,
+    "radiator_t": 43405.15364466915,
+    "hot_km2": 6.575448435055602,
+    "warm_km2": 56.45377020711347,
+    "drive_t": 60274.42657124086,
+    "propellant_t": 264018.24793372635,
+    "tank_t": 24777.393274752223,
+    "end_t": 153835.60781775438,
+    "xray_standoff_m": null,
+    "payload_t": 14817.904409743105,
+    "wing_tip_radius_m": 118124.87185054306,
+    "pellet_rate_Hz": 756.8637651863693
+   }
+  },
+  {
+   "name": "D-noA1-0.67",
+   "what": "G0-noA1 at the fine-grid eta_T 0.67",
+   "variant": {
+    "name": "D-noA1-0.67",
+    "what": "G0-noA1 at the fine-grid eta_T 0.67",
+    "farm": "wide",
+    "basis": [
+     "free_free",
+     0.2
+    ],
+    "a1": false,
+    "eta_T": 0.67
+   },
+   "status": "NON-CONVERGING (diverges past 400 kt)",
+   "iterations": 1,
+   "departure_trajectory_t": [
+    451046.77703702444,
+    1120036.8734154338
+   ],
+   "history": [
+    {
+     "departure_t": 1120036.8734154338,
+     "farm_r_m": 111.84623321062655,
+     "stretch_m": 275.4,
+     "rim_deg": 15.302411499790502,
+     "added_t": {
+      "closure coils C1, C2": 7546.957308438019,
+      "A1 pair-torque struts": 0.0,
+      "launcher B-ray": 719.6979577143658,
+      "spine N9 over S2 keels": 6375.225226682053,
+      "shadow shield change (variant cones)": 3735.9606489932467,
+      "aft stand-off truss and beam lines": 0.0
+     }
+    }
+   ],
+   "eta_T_booked": 0.67,
+   "report": {
+    "1_shield": {
+     "rim_deg": 15.302411499790502,
+     "A1_limit_from_leak_deg": 7.5,
+     "theta_hw_deg": 14.88480867941688,
+     "set_by": "tank_farm",
+     "theta_crew_deg": 4.218777946030809,
+     "d_shield_m": 127.89775832965171,
+     "shield_radius_m": 34.99465333101664,
+     "shield_t": 4741.372556508313,
+     "fdp1_shield_t": 1046.1420653521386,
+     "envelope_margins_deg": {
+      "habitat_rings": 11.083633553759693,
+      "crew_trunk_and_refuge": 14.386765405598387,
+      "hull_and_spine": 12.727865847770346,
+      "equipment_module": 12.457441298526671,
+      "driver_galleries": 13.070764879602162,
+      "forward_shield_and_eye": 12.875500504358994,
+      "tank_farm": 0.41760282037362195
+     },
+     "hardware_decades": 3.0,
+     "crew_decades_n": 8.760886469118486,
+     "dust_farm_inside_r44": false,
+     "W_face_fluence_factor_vs_d_shield": 1.0005930545075084
+    },
+    "2_mass": {
+     "departure_t": 1120036.8734154338,
+     "status": "NON-CONVERGING (diverges past 400 kt)"
+    },
+    "3_rate_Hz": 840.9449778093928,
+    "4_launcher": {
+     "muzzle_m_s": 37887.98475678863,
+     "accelerator_m": 2439.670001020817,
+     "launcher_kg": 719697.9577143658,
+     "electric_W": 18603778687.15775
+    },
+    "5_structure": {
+     "farm_radius_m": 111.84623321062655,
+     "length_m": 275.4,
+     "longeron_ring_m": 100.49951389940357,
+     "tube_r_m": 0.8021582214184309,
+     "tube_at_cap": false,
+     "added_t": 6375.225226682053,
+     "f1_cantilever_beam_Hz": 0.0701005029526621,
+     "f1_free_free_beam_Hz": 0.2172693857097138,
+     "f1_FE_estimate_Hz": 0.03855527662396415,
+     "meets_basis": 1.0,
+     "screen": {
+      "above_3x_slosh_0.12Hz": 0.0,
+      "clear_of_spin_1x_2x": true,
+      "note": "FE estimate = k_FE x beam cantilever (T05 S5N ratio on V4); lowest (torsion-like) mode about 0.43 x that (T05)"
+     },
+     "aft_truss": {
+      "dx_m": 0.0,
+      "kg": 0.0
+     }
+    },
+    "6_coil_and_leak": {
+     "tilt_deg": 14.0,
+     "leak_centre_polar_deg": 10.828821274840449,
+     "leak_inner_edge_deg": 7.8403371705996285,
+     "rim_below_leak_limit": false,
+     "C1_near_side": {
+      "polar_deg": 8.68337376993094,
+      "z_m": 126.43176076895307,
+      "r_m": 19.30923236724382,
+      "envelope_r_min_m": 16.185888076830466,
+      "envelope_z_m": [
+       123.30841647853971,
+       129.55510505936644
+      ],
+      "envelope_polar_deg": 7.29536568903109
+     },
+     "C1_shield_same_z": true,
+     "C1_clear": false,
+     "pair_torque_GN_m": 0.0
+    },
+    "7_thrust": {
+     "thrust_MN": 75.73966631934556,
+     "residual_lever_m": 0.0,
+     "untrimmed_torque_MN_m": 0.0,
+     "trim_turn_deg_full_to_dry": [
+      0.0,
+      0.0
+     ],
+     "eta_T": 0.67,
+     "side_over_axial": 2.084213743206176e-05
+    },
+    "added_t": {
+     "closure coils C1, C2": 7546.957308438019,
+     "A1 pair-torque struts": 0.0,
+     "launcher B-ray": 719.6979577143658,
+     "spine N9 over S2 keels": 6375.225226682053,
+     "shadow shield change (variant cones)": 3735.9606489932467,
+     "aft stand-off truss and beam lines": 0.0
+    }
+   },
+   "summary": {
+    "converged": true,
+    "departure_t": 1120036.8734154338,
+    "a0_g": 0.006895573489099627,
+    "fusion_TW": 1094.859779417512,
+    "radiator_t": 127687.56863915913,
+    "hot_km2": 22.131728215456754,
+    "warm_km2": 155.39875656258076,
+    "drive_t": 170321.11630905705,
+    "propellant_t": 707688.0322391611,
+    "tank_t": 66414.59379874992,
+    "end_t": 412348.8411762728,
+    "xray_standoff_m": null,
+    "payload_t": 19618.041141827685,
+    "wing_tip_radius_m": 332747.6762289281,
+    "pellet_rate_Hz": 840.9449778093928
+   }
+  }
+ ]
+}

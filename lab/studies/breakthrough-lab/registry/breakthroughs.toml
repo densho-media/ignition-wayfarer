@@ -38,12 +38,12 @@ allowed = "A larger fraction of the delivered driver energy ends in the cold fue
 forbidden = "Coupling above 1.0 (more energy in the fuel than the driver delivers); gain above the compression ceiling; energy-free compression; a Fiji effect on compression (none is declared; it would be a separate Level C record)."
 energy = "Driver pulse energy, from the ship's electrical plant. Energy is conserved: compression work = coupling x driver energy, and the calculator books the driver, its losses and its waste heat on every solve."
 depends_on = []
-risks = "No implosion has shown more than a few per cent coupling; D-3He has never ignited; 47 % coupling at alpha 1 is already the T00 gate's minimum for the FDP-1 target. The gain cliff (about 700) sits close to every closing case."
-validation = "1D radiation-hydrodynamics implosion of FDP-1's D-3He target at its scale (0.77 g, 168 MJ heavy-ion drive): reachable rhoR, density, adiabat and gain (T00 gate section 7, the next decisive experiment; needs a D-21-class authorisation)."
-references = ["S-T04-STUDY", "S-T00-GATE", "S-NIF-2025", "S-HIF-REVIEWS", "S-T04-ATZENI-2004", "S-T06-NIF-DENSITY"]
+risks = "No implosion has shown more than a few per cent coupling; D-3He has never ignited; 47 % coupling at alpha 1 is already the T00 gate's minimum for the FDP-1 target. Gate 2: the V4 ship closes only at gain 703 or more, the best analytical operating point reaches 440 (alpha 1, 20 % coupling, a 30 % ignitor), and D-3He fast ignition needs about 7.8 MJ in 20 ps, about 10^4 beyond any ignitor. This lever raises the compression coupling only; the ignitor stays an unbooked requirement."
+validation = "1D radiation-hydrodynamics implosion of FDP-1's D-3He target at its scale (0.77 g, 168 MJ heavy-ion drive): reachable coupling, adiabat and rhoR. Gate 2 section 5 defines it as a falsification test (pass: fuel energy at least 0.30 of the driver at alpha 1.2 or less with rhoR 90; fail: coupling below 0.25), workstation compute, not run; it cannot test the ignitor."
+references = ["S-T04-STUDY", "S-T00-GATE", "S-T00-GATE2", "S-NIF-2025", "S-HIF-REVIEWS", "S-T04-ATZENI-2004", "S-T06-NIF-DENSITY"]
 atlas = ["VTX-01", "VTX-01E", "VTX-01A"]
 materials = []
-penalties = { power = "Recomputed: driver electrical power follows pulse energy and rate.", heat = "Recomputed: driver loss heat to the warm loop.", mass = "Recomputed: driver, radiators, propellant, tanks, structure.", maintenance = "Not modelled: target-factory and driver life.", booked = ["driver", "radiators", "propellant", "tanks", "structure", "shield"], unbooked = ["Target fabrication and fill at 196-560 Hz (WL-004)", "Ignition of D-3He itself (undemonstrated)"] }
+penalties = { power = "Recomputed: driver electrical power follows pulse energy and rate.", heat = "Recomputed: driver loss heat to the warm loop.", mass = "Recomputed: driver, radiators, propellant, tanks, structure.", maintenance = "Not modelled: target-factory and driver life.", booked = ["driver", "radiators", "propellant", "tanks", "structure", "shield"], unbooked = ["Target fabrication and fill at 196-560 Hz (WL-004)", "Ignition of D-3He itself (undemonstrated; Gate 2: a 7.8 MJ, 20 ps ignitor)"] }
 limit = { path = "vertex.compression_coupling", max = 1.0, why = "Coupling 1.0 is the ideal bound: all driver energy in the fuel. The T00 V5 bound uses it; no implosion can exceed it." }
 
 [[breakthrough.levels]]
@@ -123,17 +123,17 @@ canon = "NON_CANON"
 assumption = "The real plasma reaches the thin-shell model's thrust efficiency (0.70 or 0.791), and the tilted closure (C1 and C2 tilted 14 deg as a pair) moves the axial leak off the shield as the vacuum-field model predicts."
 modifies = ["base.overrides.pulsed.nozzle_efficiency.optimistic"]
 unchanged = "Fiji lattice behaviour (its canon card VTX-02A only; no new property), stored field energy 15 E_p, coil currents and stresses, the plasma pulse energy and momentum."
-allowed = "Thrust efficiency up to the ideal model's 0.791; moving the field zero (it can be moved, not removed)."
-forbidden = "Thrust efficiency above 0.791 (beyond the ideal thin-shell model); removing the field zero: on any closed flux-excluding surface the tangential field has at least two zeros (it is the surface gradient of a potential), so no field shape eliminates the leak; a new Fiji property (it would be a separate Level C record)."
-energy = "Plasma kinetic energy, redirected by stored field; momentum is conserved (the tilted closure turns the nozzle 2.7 deg so the thrust passes through the centre of mass, at a 1.7 % thrust cost)."
+allowed = "Thrust efficiency up to the thin-shell band's 0.82; moving the field zero (it can be moved, not removed)."
+forbidden = "Thrust efficiency above 0.82 (beyond Gate 2's thin-shell band); removing the field zero: on any closed flux-excluding surface the tangential field has at least two zeros (it is the surface gradient of a potential), so no field shape eliminates the leak; a new Fiji property (it would be a separate Level C record)."
+energy = "Plasma kinetic energy, redirected by stored field; momentum is conserved (the tilted closure turns the field set back 2.7 deg so the net thrust lies on the axis; Gate 2 books its cost as eta_T x 0.967)."
 depends_on = []
-risks = "Lateral plasma flow toward the moved zero (funnelling) is outside the thin-shell model; the specular-reflection ledger depends on angular resolution (gate G1); A1 fails once the shadow cone exceeds about 7.5 deg."
+risks = "Gate 2 found A1 geometrically blocked: every tested ship with a shadow cone at or under 7.5 deg diverges past 400 kt, and the converged ships need 8.2-11.6 deg. Gate 2 also resolved G1: the 0.791 is the calculator's value at 1 deg resolution; the converged ledger gives 0.67, shell-scale smoothing 0.80-0.82, and the coupled ship needs about 0.75. Lateral flow toward the moved zero stays outside the thin-shell model."
 validation = "2D/3D MHD or hybrid PIC of the pulsed shell in the closure-coil field, plain and tilted (D-21, not authorised); T05 azimuth sweep of the A1 leak against the full ship."
-references = ["S-T03-STUDY", "S-T00-GATE", "S-T05-GATE", "S-T03-NAGAMINE-1999", "S-T03-MATSUDA-2009", "S-T03-INATOMI-2023", "S-T03-MAENO-2013"]
+references = ["S-T03-STUDY", "S-T00-GATE", "S-T00-GATE2", "S-T05-GATE", "S-T05-GATE2", "S-T03-NAGAMINE-1999", "S-T03-MATSUDA-2009", "S-T03-INATOMI-2023", "S-T03-MAENO-2013"]
 atlas = ["VTX-03D", "VTX-03", "VTX-02A"]
 materials = []
-penalties = { power = "None booked beyond the nozzle field (15 E_p, recomputed).", heat = "Recomputed: plume strike share 0.065 of the nozzle loss.", mass = "Recomputed: nozzle structure follows the field energy.", maintenance = "Not modelled.", booked = ["nozzle field energy", "plume-to-hardware heat", "whole ship"], unbooked = ["A1 tilt: 1.7 % thrust (booked only in the coupled check)", "Side torque of the turned nozzle", "Re-landing loop-1 struts 4 and 5 (T05 clash)"] }
-limit = { path = "base.overrides.pulsed.nozzle_efficiency.optimistic", max = 0.791, why = "0.791 is the T03 ideal thin-shell upper bound at 15 E_p; nothing in the record supports a higher value." }
+penalties = { power = "None booked beyond the nozzle field (15 E_p, recomputed).", heat = "Recomputed: plume strike share 0.065 of the nozzle loss.", mass = "Recomputed: nozzle structure follows the field energy.", maintenance = "Not modelled.", booked = ["nozzle field energy", "plume-to-hardware heat", "whole ship"], unbooked = ["A1 tilt: eta_T x 0.967 (Gate 2 booking; only in the coupled check)", "A1 geometrically blocked at a 7.5 deg shadow cone (Gate 2)", "Static C1/C2 pair torque, about 53 GN m (Gate 2)", "Driver-beam deflection 198-510 mrad through the tilted field (Gate 2)", "Re-landing loop-1 struts 4 and 5 (T05 clash)"] }
+limit = { path = "base.overrides.pulsed.nozzle_efficiency.optimistic", max = 0.82, why = "0.82 is the top of Gate 2's thin-shell band (shell-scale smoothing, 0.80-0.82); nothing in the record supports a higher value, and none of it is demonstrated (D-21)." }
 
 [[breakthrough.levels]]
 key = "L0"
@@ -149,7 +149,7 @@ evidence = "EXTRAPOLATED"
 
 [[breakthrough.levels]]
 key = "L2"
-label = "0.791 (T03 ideal thin-shell model, upper bound)"
+label = "0.791 (V4 calculator value; Gate 2 thin-shell band 0.67-0.82, not demonstrated)"
 set = { "base.overrides.pulsed.nozzle_efficiency.optimistic" = 0.791 }
 evidence = "CALCULATED"
 

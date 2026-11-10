@@ -4,7 +4,7 @@
 | Kind | Study |
 | Status | ACTIVE |
 | Question | Which declared breakthroughs, and how few, make the Vertex drive close? |
-| Model base | main 279a612; T00 calculators and results at 43fac75 (claude/project-thread-9rsgog), T05 results at c45ab4a (claude/project-thread-ctwplp), as versioned read-only imports |
+| Model base | main 279a612; T00 calculators and results at 030fc14 (claude/project-thread-9rsgog, Feasibility Gate 2), T05 results at f497778 (claude/project-thread-ctwplp, Gate 2), as versioned read-only imports |
 | Branch | claude/project-thread-oul6bx, 2026-11-10 |
 | Open owner questions | Which breakthroughs to select for experiment (none is selected); the spine stiffness criterion (decides whether the coupled ship closes); D-21 (MHD) and the 1D target implosion that would replace the two largest assumptions |
 | Review | GitHub Pages /engineering/breakthrough-lab/ after a squash; preview screenshots in the project files review/engineering2_2026-11-10/ |
@@ -57,12 +57,16 @@ no lever yet), and how the website presents them.
 
 See REPORT.md. In short: the scientific reference does not close (loop gain 3.1 even with targets that always arrive); 9 of the 111
 computed cases close, and every one needs compression coupling of at least 0.5, the ideal-model nozzle (0.791) and a launcher far
-beyond any surviving target. The coupled check (coil hardware and the A1 axis fix) roughly doubles each closing ship, and with a
-launcher-limited pulse rate (V4 at 12 km/s) it diverges.
+beyond any surviving target. The coupled check (coil hardware and the A1 axis fix, booked as Gate 2 corrects it) more than doubles each
+closing ship, and with a launcher-limited pulse rate (V4 at 12 km/s) it diverges. Gate 2 adds that A1 is geometrically blocked and
+the best analytical target gain is 440 against 703, so no closing case is a defensible ship.
 
 ## Decisions
 
 - 2026-11-10: research imports pinned at T00 43fac75 and T05 c45ab4a (both feasibility-gate finals). Re-import on purpose only.
+- 2026-11-10: re-pinned to Gate 2 (T00 030fc14, T05 f497778). The calculators and the gate 1 files are byte-identical; Gate 2 results
+  enter the register (A1 geometrically blocked, best gain 440 against 703, spine 0.04-0.10 Hz, nozzle band 0.67-0.82) and the coupled
+  check books the A1 loss as Gate 2 corrects it (eta_T x momentum factor squared, 0.967); BT-003's limit is Gate 2's 0.82.
 - 2026-11-10: grid of five levers solved as a full product at the unconstrained launcher; launcher levels only on closing cases; named
   scenarios always solved; coupled check on every closing case, a finite launcher entering as its uncoupled rate cap held fixed.
 - 2026-11-10: tests stay in the lab (not CI, as the other lab entries); the site build validates the registries and fails on error.

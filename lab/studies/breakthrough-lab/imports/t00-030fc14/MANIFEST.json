@@ -1,9 +1,9 @@
 {
  "thread": "T00",
- "name": "Vertex T00 integration and feasibility gate",
+ "name": "Vertex T00 integration and feasibility gates 1 and 2",
  "branch": "claude/project-thread-9rsgog",
- "commit": "43fac754c15fbc249f9b16a6af49b29698e96616",
- "folder": "t00-43fac75",
+ "commit": "030fc14259e20eeeb224aa2c78dd06459c3afc7a",
+ "folder": "t00-030fc14",
  "base": "lab/variants/vertex-drive/",
  "status": "RESEARCH, NON-CANON, read-only snapshot",
  "files": [
@@ -66,6 +66,48 @@
    "source_path": "lab/variants/vertex-drive/studies/gate/results/concepts.json",
    "sha256": "911ac429287604e7992ec65fe87e62ed73d7b9dbbdc78a0e2a1d10618c4d4d73",
    "bytes": 58675
+  },
+  {
+   "path": "studies/gate2/REPORT.md",
+   "source_path": "lab/variants/vertex-drive/studies/gate2/REPORT.md",
+   "sha256": "a306826e676e3cdb8472025120bed814209f00fa4287baa82b140e801ad84f9d",
+   "bytes": 18941
+  },
+  {
+   "path": "studies/gate2/results/target2.json",
+   "source_path": "lab/variants/vertex-drive/studies/gate2/results/target2.json",
+   "sha256": "0d8af4f8482b2f2df82bebdc263fb8908346c32b37872d7d02825746e8a9a39b",
+   "bytes": 54304
+  },
+  {
+   "path": "studies/gate2/results/eta.json",
+   "source_path": "lab/variants/vertex-drive/studies/gate2/results/eta.json",
+   "sha256": "9f0bf08e36360641ad95aa077a8e6db2475360312de8994d5eb819c4e6cf8a44",
+   "bytes": 1599
+  },
+  {
+   "path": "studies/gate2/results/matrix.json",
+   "source_path": "lab/variants/vertex-drive/studies/gate2/results/matrix.json",
+   "sha256": "d47cd287731b0c5de1c824d11509ef03890d1e6587959bb1a63c6a57c1f55b41",
+   "bytes": 125009
+  },
+  {
+   "path": "studies/gate2/results/cone.json",
+   "source_path": "lab/variants/vertex-drive/studies/gate2/results/cone.json",
+   "sha256": "d81e51a512cb928c7550d08db2edaaf538cf7ff05eb553ef1b6b4fa1111af023",
+   "bytes": 65825
+  },
+  {
+   "path": "studies/gate2/results/g1.json",
+   "source_path": "lab/variants/vertex-drive/studies/gate2/results/g1.json",
+   "sha256": "13e000f1e0f94346337b759d9ddbf6b4cbce1ca9bca9df0666113d846e620954",
+   "bytes": 16797
+  },
+  {
+   "path": "studies/gate2/results/validity.json",
+   "source_path": "lab/variants/vertex-drive/studies/gate2/results/validity.json",
+   "sha256": "46228b769cdece973b4841f9862d2b6b1b4e15068e8da9c69b965804e4b99de8",
+   "bytes": 2516
   }
  ]
 }
