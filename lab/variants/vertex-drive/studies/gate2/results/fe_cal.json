@@ -1,0 +1,34 @@
+{
+ "34.5x275": {
+  "beam_cantilever_Hz": 0.1809310970428273,
+  "beam_free_free_Hz": 0.6515133565502236,
+  "T05_FE_free_free_Hz": 0.165,
+  "T05_FE_cantilever_Hz": 0.118,
+  "FE_over_beam_cantilever": 0.65218197384869,
+  "FE_ff_over_beam_ff": 0.25325651169099334
+ },
+ "41.7x514": {
+  "beam_cantilever_Hz": 0.05906504913157697,
+  "beam_free_free_Hz": 0.2444229753258094,
+  "T05_FE_free_free_Hz": 0.084,
+  "T05_FE_cantilever_Hz": 0.053,
+  "FE_over_beam_cantilever": 0.897315769295881,
+  "FE_ff_over_beam_ff": 0.3436665472549388
+ },
+ "44x462": {
+  "beam_cantilever_Hz": 0.07076340161038043,
+  "beam_free_free_Hz": 0.281103610163936,
+  "T05_FE_free_free_Hz": 0.096,
+  "T05_FE_cantilever_Hz": 0.061,
+  "FE_over_beam_cantilever": 0.862027525695596,
+  "FE_ff_over_beam_ff": 0.3415110888971296
+ },
+ "34.5x751": {
+  "beam_cantilever_Hz": 0.03030318152656498,
+  "beam_free_free_Hz": 0.1392111256551335,
+  "T05_FE_free_free_Hz": 0.049,
+  "T05_FE_cantilever_Hz": 0.028,
+  "FE_over_beam_cantilever": 0.9239953889149917,
+  "FE_ff_over_beam_ff": 0.35198336174213024
+ }
+}
