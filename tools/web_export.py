@@ -302,7 +302,7 @@ def release_record(root, site, build, play, revision, dirty, built, engineering=
 
 # Local references in the site's pages, scripts and styles: attributes, module imports, import-map targets, fetches and url().
 REFERENCE = re.compile(r"""\b(?:src|href)="([^"]+)"|\bfrom\s+'([^']+)'|"(\./vendor/[^"]+)"|\bfetch\('([^']+)'|url\(([^)]+)\)""")
-
+DATA_URI = re.compile(r"""url\((["']?)data:.*?\1\)""", re.S)       # an inline image, which may hold url(#id) of its own
 
 def verify_site(site, release):
     """Every local reference resolves inside the site; file, site and start-page sizes stay within the budgets."""
@@ -311,8 +311,8 @@ def verify_site(site, release):
     for page in sorted(p for p in site.rglob('*') if p.suffix in ('.html', '.js', '.css') and 'vendor' not in p.parts):
         if page.parent.name == 'play' and page.name in play_pages - {release['experiences']['play']['files']['html']}:
             continue                     # the Godot engine's own scripts
-        for match in REFERENCE.finditer(page.read_text(errors='replace')):
-            ref = next(g for g in match.groups() if g)
+        for match in REFERENCE.finditer(DATA_URI.sub('url(data:)', page.read_text(errors='replace'))):
+            ref = next(g for g in match.groups() if g).strip().strip('"\'')
             if re.match(r'^(?:[a-z]+:|#|//)', ref) or '${' in ref or ref.startswith('three'):
                 continue
             target = (page.parent / ref.split('#')[0].split('?')[0]).resolve()
