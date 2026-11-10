@@ -5,14 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>G.U. Wayfarer 001 — IGNITION</title>
 <meta name="description" content="The G.U. Wayfarer 001 spacecraft from IGNITION: explore it from inside as a crew member or from outside as an EVA astronaut, or inspect the generated engineering model.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%2307090c'/%3E%3Cpath d='M2 8h12M8 3v10' stroke='%23e0a040' stroke-width='2'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%231B2633'/%3E%3Ccircle cx='8' cy='8' r='4.6' fill='%238C83C5'/%3E%3Ccircle cx='8' cy='8' r='3' fill='%23D99AC9'/%3E%3Ccircle cx='8' cy='8' r='1.3' fill='%23D8EAFF'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#0A0F15">
 <link rel="stylesheet" href="site.css">
 </head>
 <body>
-<main class="wrap">
-  <header>
+<main class="wrap home">
+  <div class="sitebar"><a class="mark" href="./">Wayfarer 001</a>
+    <nav aria-label="Site"><a href="engineering/">Engineering</a><a href="viewer/">Explore Ship</a><a href="status/">Technical status</a></nav></div>
+  <header class="hero">
     <p class="eyebrow">IGNITION · Densho</p>
     <h1>G.U. WAYFARER 001</h1>
+    <hr class="ignite">
     <p class="lead">A fusion-drive spacecraft built from its engineering workbooks: every shape here is generated from sourced or
       labelled parameters. Step inside it, step outside it, or inspect how it is engineered. Nothing heavy loads until you choose.</p>
   </header>
@@ -21,6 +25,7 @@
       <span class="kicker">Experience · inside</span>
       <strong>Explore Interior</strong>
       <span>Enter the spacecraft. Walk through Wayfarer, explore its rotating habitats and discover life aboard the ship.</span>
+      <span class="go">Enter</span>
       <span class="meta" id="interior-meta">Godot · WebGL 2 · keyboard and mouse or touch</span>
     </a>
     <a class="choice" href="exterior/" id="go-exterior">
@@ -28,6 +33,7 @@
       <strong>Explore Exterior</strong>
       <span>Step outside Wayfarer. Navigate in microgravity, inspect the spacecraft and operate your EVA equipment and companion
         drone.</span>
+      <span class="go">Step outside</span>
       <span class="meta" id="exterior-meta">Godot · WebGL 2 · keyboard and mouse · desktop browser</span>
     </a>
   </section>
@@ -45,6 +51,12 @@
       <span>The engineering story: the full-return goal, the constraints, what we tried in the lab and the open problems where
         the design still fails.</span>
       <span class="meta">static pages · figures</span>
+    </a>
+    <a class="choice" href="status/" id="go-status">
+      <span class="kicker">Release</span>
+      <strong>Technical status</strong>
+      <span>The published release: its model, the checks it passed, known limitations and what this browser supports.</span>
+      <span class="meta">one small record</span>
     </a>
   </section>
   <p class="note">The experiences and Explore Ship are SIMULATION_ONLY representations (REP_PROXY geometry). Labels on screen keep CANON, DERIVED,

@@ -1,46 +1,63 @@
-/* Engineering section (tools/story.py): long-form pages on top of site.css. */
-.story { max-width: 1040px; gap: 36px; }
+/* Engineering section (tools/story.py): long-form pages on top of site.css; tokens only (tools/web_identity.py). The reading sheet
+   (.story) keeps text off the scene; topics carry a function mark (.topic.fn-<KEY>), statuses use the status layer. */
+.story { max-width: 1080px; gap: 36px; background: var(--surface-0); border-left: 1px solid var(--line); border-right: 1px solid var(--line);
+  padding-left: clamp(16px, 3vw, 36px); padding-right: clamp(16px, 3vw, 36px); }
+@media (max-width: 640px) { .story { border: 0; } }
 .story h1 { letter-spacing: 0.06em; }
-.story h2 { font-size: 15px; color: var(--accent); margin: 0 0 12px; }
-.story h3 { font-size: 15px; margin: 18px 0 8px; font-weight: 600; letter-spacing: 0.02em; }
+.story h2 { font-size: 14px; color: var(--ink-strong); margin: 0 0 14px; padding-bottom: 8px; border-bottom: 1px solid var(--line);
+  letter-spacing: 0.14em; }
+.story h2::before { content: ""; display: inline-block; width: 6px; height: 6px; margin: 0 10px 2px 0; border-radius: 50%;
+  background: var(--accent); vertical-align: middle; }
+.story h1 + .lead, .story header .lead { color: var(--muted); }
+.story h3 { font-size: 16px; margin: 18px 0 8px; font-weight: 600; letter-spacing: 0.01em; color: var(--ink-strong); }
 .story h4, .story h5 { font-size: 14px; margin: 14px 0 6px; color: var(--muted); }
 .story p { margin: 0 0 10px; max-width: 760px; }
 .story section { display: flex; flex-direction: column; }
 .crumbs { font-size: 13px; color: var(--muted); }
-.toc { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 13px; padding: 10px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.toc { display: flex; flex-wrap: wrap; gap: 6px; font-size: 13px; padding: 0; }
+.toc a { padding: 6px 12px; border: 1px solid var(--line-strong); border-radius: 999px; color: var(--ink); background: var(--surface-1); }
+.toc a:hover { border-color: var(--accent); text-decoration: none; }
+.toc a b { color: var(--action); font-weight: 600; }
 .scroll { overflow-x: auto; max-width: 100%; margin: 4px 0 12px; }
 table.register td:first-child code, .problem h3 code { white-space: nowrap; }
 td.num { white-space: nowrap; font-variant-numeric: tabular-nums; }
 table.meta th { width: 170px; }
 .panel h3 { margin-top: 0; }
-.st { font: 11px ui-monospace, Menlo, monospace; padding: 1px 6px; border-radius: 3px; border: 1px solid var(--line); white-space: nowrap; color: var(--muted); }
+.st { font: 11px var(--mono); padding: 1px 6px; border-radius: 3px; border: 1px solid var(--line-strong); white-space: nowrap; color: var(--muted); }
 .st-LOCKED, .st-BASELINE, .st-PROMOTED { color: var(--good); border-color: var(--good); }
-.st-WORKING, .st-ACTIVE, .st-CALCULATED, .st-KNOWN { color: var(--sel); border-color: var(--sel); }
+.st-WORKING, .st-ACTIVE, .st-CALCULATED, .st-KNOWN { color: var(--info); border-color: var(--info); }
 .st-DERIVED { color: var(--ink); }
-.st-PROTOTYPE, .st-ASSUMED, .st-PARKED { color: var(--accent); border-color: var(--accent); }
+.st-PROTOTYPE, .st-ASSUMED, .st-PARKED { color: var(--warn); border-color: var(--warn); }
 .st-OPEN, .st-UNRESOLVED, .st-SPECULATIVE { color: var(--bad); border-color: var(--bad); }
-.st-SUPERSEDED { opacity: 0.7; }
+.st-OPEN::before, .st-UNRESOLVED::before { content: "○ "; }
+.st-LOCKED::before, .st-BASELINE::before { content: "● "; }
+.st-SUPERSEDED { color: var(--muted); border-style: dashed; }
 .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 12px; margin: 6px 0 14px; }
-.card { display: flex; flex-direction: column; gap: 8px; padding: 16px; color: var(--ink); background: var(--panel); border: 1px solid var(--line); border-radius: 6px; font-size: 13px; }
-.card:hover { border-color: var(--accent); text-decoration: none; }
-.card strong { font-size: 17px; }
+.card { display: flex; flex-direction: column; gap: 8px; padding: 16px; color: var(--ink); background: var(--surface-1); border: 1px solid var(--line-strong); border-radius: var(--r-2); font-size: 13px;
+  transition: border-color var(--dur), background-color var(--dur); }
+.card.topic { border-left: 3px solid var(--fn, var(--line-strong)); }
+.card:hover { border-color: var(--accent); background: var(--surface-2); text-decoration: none; }
+.card.topic:hover { border-left-color: var(--fn); }
+.card .meta { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; }
+.card strong { font-size: 17px; color: var(--ink-strong); }
 .card .kicker { font-size: 11px; letter-spacing: 0.2em; color: var(--accent); text-transform: uppercase; }
 .card .meta { margin-top: auto; }
 .story .choices .choice { min-height: 150px; }
-.quote { border-left: 2px solid var(--accent); padding: 4px 0 4px 16px; margin: 4px 0 12px; }
+.quote { border-left: 2px solid var(--accent-2); padding: 4px 0 4px 16px; margin: 4px 0 12px; }
 .quote ul, .notes ul, .notes ol, section > ul { margin: 0 0 10px; padding-left: 20px; }
 .quote li, .notes li { margin: 3px 0; }
 .open details { border-bottom: 1px solid var(--line); padding: 6px 0; font-size: 13px; }
 .open summary, details > summary { cursor: pointer; }
 .open li { margin: 4px 0; color: var(--muted); }
 .open li code { color: var(--ink); }
-.figure { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 12px; margin: 6px 0 10px; }
+.figure { background: var(--surface-1); border: 1px solid var(--line); border-radius: var(--r-2); padding: 12px; margin: 6px 0 10px; }
 .figure-svg { width: 100%; height: auto; display: block; }
-.figure-svg .lbl { font: 12px system-ui, sans-serif; fill: var(--ink); paint-order: stroke; stroke: var(--panel); stroke-width: 4px; stroke-linejoin: round; }
+.figure-svg .lbl { font: 12px var(--font); fill: var(--ink); paint-order: stroke; stroke: var(--surface-1); stroke-width: 4px; stroke-linejoin: round; }
 .figure-svg .ax { font: 11px system-ui, sans-serif; fill: var(--muted); }
 .legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 12px; color: var(--muted); margin: 8px 0 0; }
 .legend i { display: inline-block; width: 10px; height: 10px; margin-right: 6px; vertical-align: -1px; border-radius: 2px; }
-.problem { border-top: 1px solid var(--line); padding: 14px 0 4px; }
+.problem { border-top: 1px solid var(--line); padding: 14px 0 4px 14px; }
+.problem.topic { border-left: 3px solid var(--fn); margin-top: 6px; }
 .problem h3 { margin: 0 0 6px; display: flex; flex-wrap: wrap; gap: 8px; align-items: baseline; }
 .problem dl { display: grid; grid-template-columns: 110px 1fr; gap: 4px 12px; margin: 6px 0; font-size: 13px; }
 .problem dt { color: var(--muted); }
@@ -50,13 +67,13 @@ table.meta th { width: 170px; }
 .gallery img { width: 100%; height: auto; display: block; }
 .gallery figcaption { font-size: 12px; color: #333; padding: 4px 8px; }
 .notes { font-size: 14px; padding-top: 8px; }
-.notes pre { overflow-x: auto; background: var(--panel); padding: 10px; border-radius: 4px; }
+.notes pre { overflow-x: auto; background: var(--surface-1); padding: 10px; border-radius: var(--r-1); }
 @media (max-width: 560px) { .problem dl { grid-template-columns: 1fr; } table.meta th { width: auto; } }
 .story section.teaser { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 18px; align-items: start; padding: 16px;
-  background: var(--panel); border: 1px solid var(--accent); border-radius: 6px; }
+  background: var(--surface-1); border: 1px solid var(--line-strong); border-top: 2px solid var(--wf-radiator); border-radius: var(--r-2); }
 .teaser .shot img { width: 100%; height: auto; display: block; border-radius: 4px; border: 1px solid var(--line); }
 .teaser h2 { margin-top: 0; }
-.teaser .go { display: inline-block; color: var(--bg); background: var(--accent); padding: 8px 14px; border-radius: 4px; }
-.teaser .go:hover { text-decoration: none; filter: brightness(1.1); }
+.teaser .go { display: inline-block; color: var(--action-ink); background: var(--action); padding: 8px 14px; border-radius: var(--r-1); font-weight: 600; }
+.teaser .go:hover { text-decoration: none; background: var(--action-hover); }
 .teaser .pick { display: flex; flex-direction: column; gap: 2px; font-size: 13px; }
 @media (max-width: 760px) { .story section.teaser { grid-template-columns: 1fr; } }

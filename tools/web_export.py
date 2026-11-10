@@ -30,6 +30,7 @@ import urllib.request
 
 import pipeline
 import story
+import web_identity
 import web_play
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'src/wayfarer'))
 import representation
@@ -305,7 +306,7 @@ REFERENCE = re.compile(r"""\b(?:src|href)="([^"]+)"|\bfrom\s+'([^']+)'|"(\./vend
 
 def verify_site(site, release):
     """Every local reference resolves inside the site; file, site and start-page sizes stay within the budgets."""
-    problems = []
+    problems = [f'{rel}: the generated identity block is stale (run python3 tools/web_identity.py)' for rel in web_identity.stale()]
     play_pages = set(release['experiences'].get('play', {}).get('files', {}).values())
     for page in sorted(p for p in site.rglob('*') if p.suffix in ('.html', '.js', '.css') and 'vendor' not in p.parts):
         if page.parent.name == 'play' and page.name in play_pages - {release['experiences']['play']['files']['html']}:
