@@ -1132,7 +1132,7 @@ def controls(rig, info, ls, M):
     put(bx(f'CTRL_{KEY}_Chest_Display', Vector((0, yf-.0012, z)), (.055, .0015, .030), M['display'], bevel=.002), 'sensor',
         'chest display: suit and drone status, flush in the torso shell (read in the helmet mirror or by the buddy)', B3, rig)
     put(bx(f'CTRL_{KEY}_Chest_Bezel', Vector((0, yf-.0004, z)), (.063, .0012, .037), M['graphite'], bevel=.003), 'frame', 'display bezel', B3, rig)
-    put(text(f'MARK_{KEY}_Suit_GUC', 'G.U.C. WAYFARER 001', Vector((0, yf-.0016, z+.058)), Vector((1, 0, 0)), Vector((0, -1, 0)), .0095, M['text']), 'suit',
+    put(text(f'MARK_{KEY}_Suit_ShipName', 'G.U. WAYFARER 001', Vector((0, yf-.0016, z+.058)), Vector((1, 0, 0)), Vector((0, -1, 0)), .0095, M['text']), 'suit',
         'official marking (small, functional lettering)', B3, rig)
     put(bx(f'MARK_{KEY}_Suit_ID_Plate', Vector((0, yf-.0008, z+.082)), (.035, .001, .006), M['band']), 'suit', 'identification plate (role colour)', B3, rig)
     # forearm drone control: a curved plate on the right forearm with display and guarded release

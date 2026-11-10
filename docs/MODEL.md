@@ -1455,6 +1455,8 @@ geometry and carries no load. It changes no pressure boundary, interface, volume
 - **Hologram styles (WEB-003):** the web viewer redraws the same meshes as the M5 subsystem hologram (overlay
   colour per subsystem, additive rim and scan) or the engine exposition hologram (one colour, rim glow), from `wf_holo.json`
   (`representation.py holo-style`: `shots/m5_subsystems.toml` and the SH_ENGINE_HOLOGRAM colour). Instance overrides only.
+  The twelve subsystem overlay colours are the sRGB encoding of the matching `functional_colors.py` function (WEB-005, owner
+  2026-11-10), so holograms, Blender review colours and the website agree (docs/WEB_IDENTITY.md).
 - **Value hierarchy (M7.1, owner 2026-10-20):** `[production.materials]` steps from inhabited panels (warm off-white, ~0.69 linear)
   through service panels (~0.45), machinery (~0.26) and structure and housings (~0.15) to trays and seams (0.05). Fasteners are dulled.
   No texture maps.

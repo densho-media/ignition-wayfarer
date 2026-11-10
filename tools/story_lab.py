@@ -15,6 +15,8 @@ import html
 import json
 import math
 
+import web_identity
+
 REPO = 'https://github.com/densho-media/ignition-wayfarer'
 AREAS = [('baseline', 'Engineering Baseline', 'What hard science says: the reference configurations and where they fail.'),
          ('weakest-links', 'Weakest Links', 'The ranked engineering bottlenecks, with the evidence behind each.'),
@@ -179,22 +181,22 @@ def baseline_page(d, ship, page, revision, built, out):
 <p>The approved ship, the historical and research generations of the Vertex drive, the coupled results of feasibility gates 1 and 2
   (Gate 2: the reference G0, G0 without A1, and two of the nine variants that hold A1's 7.5 deg cone, all of which diverge) and the
   Layer A reference, side by side. Status labels are the records' own. Masses are departure masses for the four-burn 0.016 c mission.</p>
-<div class="scroll"><table class="configs"><thead><tr><th>Configuration</th><th>Status</th><th>What it is</th><th>Departure (t)</th>
+<div class="scroll" tabindex="0"><table class="configs"><thead><tr><th>Configuration</th><th>Status</th><th>What it is</th><th>Departure (t)</th>
   <th>Peak g</th><th>Radiator tip (km)</th><th>Verdict</th></tr></thead><tbody>{trs}</tbody></table></div>
 <p class="note">HISTORICAL_CONDITIONAL: kept as a record, energy-inconsistent under the later compression bound. RESEARCH_TARGET: every
   correction applied, still resting on targets nobody has demonstrated. BOUND: the lightest ship the physics allows in this model.
   CONVERGED means the coupled iteration settled, not that the ship is feasible.</p></section>
 <section id="reference"><h2>What the scientific reference assumes</h2>
 <p>{esc(d["reference"]["definition"])} Where no lever is declared it uses FDP-1's optimistic engineering tier; the central tier would be heavier.</p>
-<h3>Fixed inputs</h3><div class="scroll"><table><thead><tr><th>Calculator input</th><th>Value</th><th>Basis</th><th>Why</th></tr></thead><tbody>{inputs}</tbody></table></div>
-<h3>Lever settings (each breakthrough at level L0)</h3><div class="scroll"><table><thead><tr><th>Breakthrough lever</th><th>Reference value</th><th>Evidence</th></tr></thead><tbody>{levers}</tbody></table></div>
+<h3>Fixed inputs</h3><div class="scroll" tabindex="0"><table><thead><tr><th>Calculator input</th><th>Value</th><th>Basis</th><th>Why</th></tr></thead><tbody>{inputs}</tbody></table></div>
+<h3>Lever settings (each breakthrough at level L0)</h3><div class="scroll" tabindex="0"><table><thead><tr><th>Breakthrough lever</th><th>Reference value</th><th>Evidence</th></tr></thead><tbody>{levers}</tbody></table></div>
 </section>
 <section id="failures"><h2>Known failures</h2><p>The blockers of tiers 1 and 2 of the <a href="../weakest-links/">Weakest Links</a> register:</p><ul class="plain">{fails}</ul></section>
 <section id="provenance"><h2>Provenance</h2>
 <p>The Vertex research lives on two branches that are not merged into <code>main</code>. Their results reach this site only as versioned,
   read-only imports (<code>lab/studies/breakthrough-lab/imports/</code>, each with a manifest of file hashes). The scenario grid was solved with
   the T00 calculators at <code>{esc((prov.get("t00_commit") or "")[:7])}</code> on {esc(prov.get("computed_utc", ""))}.</p>
-<div class="scroll"><table><thead><tr><th>Import</th><th>Branch</th><th>Commit</th><th>Files</th></tr></thead><tbody>{imports}</tbody></table></div>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Import</th><th>Branch</th><th>Commit</th><th>Files</th></tr></thead><tbody>{imports}</tbody></table></div>
 <p class="note">{esc(prov.get("method", ""))}</p></section>'''
     out.mkdir(parents=True, exist_ok=True)
     (out / 'index.html').write_text(page('Engineering Baseline · Wayfarer engineering', 'The scientific reference configurations of the Wayfarer '
@@ -222,10 +224,10 @@ def link_card(d, w):
         ('local', 'is it confined to one assembly with a known engineering fix?')))
     attrs = (f'data-tier="{w["tier"]}" data-subsystem="{esc(w["subsystem"].split(":")[0])}" data-speculative="{esc(w["speculative"])}" '
              f'data-conventional="{esc(w["conventional"])}" data-text="{esc((w["name"] + " " + w["description"]).lower())}"')
-    return f'''<article class="wl" id="{w["id"]}" {attrs}>
+    return f'''<article class="wl topic {(web_identity.topic(w["id"]) or ("",))[0]}" id="{w["id"]}" {attrs}>
 <h3><span class="rank">#{w["rank"]}</span> <code>{w["id"]}</code> {esc(w["name"])}</h3>
 <p class="chips">{badge("tier", w["tier"], f"Tier {w['tier']}: {w['tier_label']}")} {badge("res", w["resolution"], d["vocab"]["resolution"][w["resolution"]])}
-  {badge("conf", w["confidence"], "Confidence " + w["confidence"].lower())} <span class="sub">{esc(w["subsystem"])}</span></p>
+  {badge("conf", w["confidence"], "Confidence " + w["confidence"].lower())} {web_identity.topic_chip(w["id"])} <span class="sub">{esc(w["subsystem"])}</span></p>
 <dl class="qa">
   <dt>What is wrong?</dt><dd>{esc(w["description"])}</dd>
   <dt>Why is it a problem?</dt><dd>{esc(w["consequences"])}</dd>
@@ -235,7 +237,7 @@ def link_card(d, w):
   <dt>Would a breakthrough help?</dt><dd>{badge("spec", w["speculative"], w["speculative"].replace("_", " ").lower())} {bts}</dd>
 </dl>
 <details><summary>Numbers, evidence and dependencies</summary>
-<div class="scroll"><table><thead><tr><th>Calculated value</th><th>Value</th><th>Read from</th></tr></thead><tbody>{metrics}</tbody></table></div>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Calculated value</th><th>Value</th><th>Read from</th></tr></thead><tbody>{metrics}</tbody></table></div>
 <p><strong>Scientific baseline:</strong> {esc(w["baseline"])}</p>
 <p><strong>Uncertainty:</strong> {esc(w["uncertainty"])}</p>
 <p><strong>Depends on:</strong> {deps}. <strong>Touches:</strong> {sysl}</p>
@@ -248,7 +250,7 @@ def links_page(d, page, revision, built, out):
     subs = sorted({w['subsystem'].split(':')[0] for w in d['links']})
     tiers = ''.join(f'<option value="{t}">Tier {t}: {esc(n)}</option>' for t, n in d['vocab']['tiers'].items() if any(w['tier'] == int(t) for w in d['links']))
     rows = ''.join(f'<tr><td class="num">{w["rank"]}</td><td><a href="#{w["id"]}"><code>{w["id"]}</code> {esc(w["name"])}</a></td>'
-                   f'<td>{badge("tier", w["tier"], str(w["tier"]))}</td><td>{esc(w["subsystem"])}</td>'
+                   f'<td>{badge("tier", w["tier"], str(w["tier"]))}</td><td>{web_identity.topic_chip(w["id"])}<br>{esc(w["subsystem"])}</td>'
                    f'<td>{badge("conv", w["conventional"], w["conventional"].lower())}</td><td>{badge("spec", w["speculative"], w["speculative"].replace("_", " ").lower())}</td></tr>'
                    for w in d['links'])
     body = f'''<header><p class="eyebrow">Engineering 2.0 · B</p><h1>Weakest Links</h1>
@@ -272,7 +274,7 @@ def links_page(d, page, revision, built, out):
   <label>Search <input type="search" name="q" placeholder="e.g. coil"></label>
   <output name="count" aria-live="polite"></output>
 </form>
-<div class="scroll"><table class="register-summary"><thead><tr><th>#</th><th>Link</th><th>Tier</th><th>System</th><th>Conventional?</th><th>Breakthrough?</th></tr></thead><tbody>{rows}</tbody></table></div>
+<div class="scroll" tabindex="0"><table class="register-summary"><thead><tr><th>#</th><th>Link</th><th>Tier</th><th>System</th><th>Conventional?</th><th>Breakthrough?</th></tr></thead><tbody>{rows}</tbody></table></div>
 <div class="wl-list">{"".join(link_card(d, w) for w in d["links"])}</div>
 <p class="note">The FDP-1 problem map's register (<a href="../problems/fdp1-requirements/">P01-P11</a>) remains the record for the canon-scale
   FDP-1 drive; these links are the Vertex-generation bottlenecks from the T00 and T05 feasibility gates.</p></section>'''
@@ -290,8 +292,8 @@ def bt_card(d, b):
     pen = b['penalties']
     refs = ''.join(src_link(s) for s in b['references'])
     wl = ', '.join(f'<a href="../weakest-links/#{w}"><code>{w}</code></a>' for w in b['weakest_links'])
-    return f'''<article class="btc" id="{b["id"]}">
-<h3><code>{b["id"]}</code> {esc(b["name"])}</h3>
+    return f'''<article class="btc topic {(web_identity.topic(b["id"]) or ("",))[0]}" id="{b["id"]}">
+<h3><code>{b["id"]}</code> {esc(b["name"])} {web_identity.topic_chip(b["id"])}</h3>
 <p class="chips">{badge("lvl", b["level"], "Level " + b["level"] + ": " + b["level_label"])} {badge("ev", b["evidence"], v["evidence"][b["evidence"]])}
   {badge("dev", b["development"], v["development"][b["development"]])} {badge("canon", b["canon"], v["canon"][b["canon"]])}
   {'' if b["computed"] else badge("st", "NOT_COMPUTED", "No calculator lever yet")}</p>
@@ -303,16 +305,17 @@ def bt_card(d, b):
   <dt>Unchanged</dt><dd>{esc(b["unchanged"])}</dd>
   <dt>Forbidden effects</dt><dd>{esc(b["forbidden"])}</dd>
   <dt>Energy and momentum</dt><dd>{esc(b["energy"])}</dd>
+  {f'<dt>Materials (PMDS)</dt><dd>{" ".join(web_identity.material_chip(m) for m in b["materials"])}</dd>' if b["materials"] else ''}
 </dl>
 <details><summary>Levels, costs, risks, validation, sources</summary>
-{f'<div class="scroll"><table><thead><tr><th>Level</th><th>Setting</th><th>Evidence</th><th>Calculator input</th></tr></thead><tbody>{lv}</tbody></table></div>' if lv else ''}
+{f'<div class="scroll" tabindex="0"><table><thead><tr><th>Level</th><th>Setting</th><th>Evidence</th><th>Calculator input</th></tr></thead><tbody>{lv}</tbody></table></div>' if lv else ''}
 {f'<p><strong>Validity limit:</strong> <code>{esc(lim["path"])}</code> ≤ {lim["max"]}. {esc(lim["why"])} Beyond it a scenario is OUT OF RANGE, never computed.</p>' if lim else ''}
 <p><strong>Allowed effects:</strong> {esc(b["allowed"])}</p>
 <p><strong>Existing basis:</strong> {esc(b["basis"])}</p>
 <p><strong>Costs.</strong> Power: {esc(pen["power"])} Heat: {esc(pen["heat"])} Mass: {esc(pen["mass"])} Maintenance: {esc(pen["maintenance"])}</p>
 <p><strong>Recomputed on every solve:</strong> {esc(", ".join(pen["booked"]) or "nothing")}. <strong>Not computed (open):</strong> {esc("; ".join(pen["unbooked"]) or "none")}</p>
 <p><strong>Depends on:</strong> {", ".join(f'<a href="#{x}"><code>{x}</code></a>' for x in b["depends_on"]) or "none"}.
-  <strong>Atlas:</strong> {", ".join(f"<code>{esc(a)}</code>" for a in b["atlas"]) or "none"}. <strong>PMDS materials:</strong> {", ".join(f"<code>{esc(m)}</code>" for m in b["materials"]) or "none"}</p>
+  <strong>Atlas:</strong> {", ".join(f"<code>{esc(a)}</code>" for a in b["atlas"]) or "none"}. <strong>PMDS materials:</strong> {" ".join(web_identity.material_chip(m) for m in b["materials"]) or "none"}</p>
 <p><strong>Engineering risks:</strong> {esc(b["risks"])}</p>
 <p><strong>Required validation:</strong> {esc(b["validation"])}</p>
 <ul class="plain src">{refs}</ul></details>
@@ -331,8 +334,8 @@ def lever_fieldset(d, b):
                   f'<input type="number" step="any" inputmode="decimal" data-bt="{b["id"]}" data-path="{esc(path)}" data-max="{lim["max"]}" '
                   f'aria-describedby="lim-{b["id"]}"></label><small id="lim-{b["id"]}">Limit {lim["max"]}: beyond it the result is out of range. '
                   'A value between table points is not computed: nothing is interpolated.</small>')
-    return (f'<fieldset class="lever" data-bt="{b["id"]}"><legend><code>{b["id"]}</code> {esc(b["name"])} '
-            f'{badge("lvl", b["level"], "Level " + b["level"])}</legend>{opts}{custom}</fieldset>')
+    return (f'<fieldset class="lever topic {(web_identity.topic(b["id"]) or ("",))[0]}" data-bt="{b["id"]}"><legend><code>{b["id"]}</code> {esc(b["name"])} '
+            f'{badge("lvl", b["level"], "Level " + b["level"])} {web_identity.topic_chip(b["id"])}</legend>{opts}{custom}</fieldset>')
 
 
 def result_table(d, c, label):
@@ -354,7 +357,7 @@ def grid_table(d):
                     f'<td class="num">{num("departure_t", s.get("departure_t"))}</td><td class="num">{num("wing_tip_radius_m", s.get("wing_tip_radius_m"))}</td>'
                     f'<td>{esc(cpl.get("status", ""))} {num("departure_t", cpl.get("summary", {}).get("departure_t")) if cpl.get("summary") else ""}</td></tr>')
     head = ''.join(f'<th title="{esc(by[b]["name"])}">{b}</th>' for b in d['order'])
-    return (f'<div class="scroll"><table class="grid"><thead><tr><th>Status</th>{head}<th>Departure (t)</th><th>Tip (km)</th>'
+    return (f'<div class="scroll" tabindex="0"><table class="grid"><thead><tr><th>Status</th>{head}<th>Departure (t)</th><th>Tip (km)</th>'
             f'<th>Coupled check (t)</th></tr></thead><tbody>{"".join(rows)}</tbody></table></div>')
 
 
@@ -500,7 +503,7 @@ def evolution_page(d, ship, page, revision, built, out):
   own layout of each computed case. These are labelled envelopes, not models: where a case does not close, nothing is drawn.</p></header>
 {subnav("evolution", "../../")}
 <section id="compare"><h2>Reference, V4 and the smallest closing set</h2>
-<div class="scroll"><table class="evo"><thead><tr><th></th>{"".join(f"<th>{esc(l)}</th>" for l, _ in cols)}</tr></thead><tbody>
+<div class="scroll" tabindex="0"><table class="evo"><thead><tr><th></th>{"".join(f"<th>{esc(l)}</th>" for l, _ in cols)}</tr></thead><tbody>
 <tr><td>Status</td>{"".join(f"<td>{status_badge(d, c['status'])}</td>" for _, c in cols)}</tr>{rows}{"".join(env_rows)}
 <tr><td>Coupled check (coils + A1 axis fix)</td>{coupled}</tr></tbody></table></div>
 <p class="note">Grey: the approved hull for scale (canon parameters). Dark band: the calculator's shadow shield and equipment module.

@@ -29,6 +29,8 @@ import subprocess
 import sys
 import tomllib
 
+import web_identity
+
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'src/wayfarer'))
 
@@ -140,7 +142,7 @@ class Markdown:
             head, body = cells[0], cells[2:]
         else:
             head, body = None, cells
-        out = ['<div class="scroll"><table>']
+        out = ['<div class="scroll" tabindex="0"><table>']
         if head and any(head):
             out.append('<thead><tr>' + ''.join(f'<th>{self.inline(c)}</th>' for c in head) + '</tr></thead>')
         out.append('<tbody>' + ''.join('<tr>' + ''.join(f'<td>{self.inline(c)}</td>' for c in r) + '</tr>' for r in body) + '</tbody>')
@@ -325,13 +327,16 @@ def page(title, description, body, depth, revision, built, head=''):
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>{esc(title)}</title>
 <meta name="description" content="{esc(description)}">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%2307090c'/%3E%3Cpath d='M2 8h12M8 3v10' stroke='%23e0a040' stroke-width='2'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%231B2633'/%3E%3Ccircle cx='8' cy='8' r='4.6' fill='%238C83C5'/%3E%3Ccircle cx='8' cy='8' r='3' fill='%23D99AC9'/%3E%3Ccircle cx='8' cy='8' r='1.3' fill='%23D8EAFF'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#0A0F15">
 <link rel="stylesheet" href="{up}site.css">
 <link rel="stylesheet" href="{up}engineering/story.css">{head}
 </head>
-<body>
+<body class="scene-quiet">
 <main class="wrap story">
-<nav class="crumbs"><a href="{up}">Wayfarer</a> / <a href="{up}engineering/">Engineering</a></nav>
+<div class="sitebar"><a class="mark" href="{up}">Wayfarer</a>
+  <nav aria-label="Site"><a href="{up}engineering/" aria-current="true">Engineering</a><a href="{up}viewer/">Explore Ship</a><a href="{up}status/">Technical status</a></nav></div>
+<nav class="crumbs" aria-label="Breadcrumb"><a href="{up}">Wayfarer</a> / <a href="{up}engineering/">Engineering</a></nav>
 {body}
 <footer>
   <span>Generated from <a href="{REPO}/tree/{revision}" rel="noopener"><code>{revision[:7]}</code></a> · {built}</span>
@@ -398,8 +403,9 @@ def register_table(reg, link=None, compare=None):
     for r in reg:
         title = f'<a href="{link}#{r["id"]}">{esc(r["title"])}</a>' if link else esc(r['title'])
         three = f'<td><a href="{compare}#{r["id"]}">3D</a></td>' if compare else ''
-        rows.append(f'<tr><td><code>{r["id"]}</code></td><td>{title}</td><td>{tag(r["status"])}</td><td>{esc(r["gap"])}</td>{three}</tr>')
-    return ('<div class="scroll"><table class="register"><thead><tr><th>ID</th><th>Problem</th><th>Status</th><th>Gap</th>'
+        rows.append(f'<tr><td><code>{r["id"]}</code></td><td>{title}</td><td>{web_identity.topic_chip(r["id"])}</td><td>{tag(r["status"])}</td>'
+                    f'<td>{esc(r["gap"])}</td>{three}</tr>')
+    return ('<div class="scroll" tabindex="0"><table class="register"><thead><tr><th>ID</th><th>Problem</th><th>System</th><th>Status</th><th>Gap</th>'
             f'{"<th>Compare</th>" if compare else ""}</tr></thead>'
             f'<tbody>{"".join(rows)}</tbody></table></div>')
 
@@ -411,8 +417,8 @@ def register_cards(reg, compare=None):
         unres = ''.join(f'<li>{esc(u)}</li>' for u in r.get('unresolved', []))
         cls = ' · '.join(esc(c) for c in r['classification'])
         dep = ', '.join(f'<a href="#{d}">{d}</a>' for d in r['depends'])
-        out.append(f'''<article class="problem" id="{r["id"]}">
-  <h3><code>{r["id"]}</code> {esc(r["title"])} {tag(r["status"])}</h3>
+        out.append(f'''<article class="problem topic {(web_identity.topic(r["id"]) or ("",))[0]}" id="{r["id"]}">
+  <h3><code>{r["id"]}</code> {esc(r["title"])} {tag(r["status"])} {web_identity.topic_chip(r["id"])}</h3>
   <p>{esc(r["description"])}</p>
   <dl>
     <dt>Now</dt><dd><ul class="plain">{cur}</ul></dd>
@@ -454,7 +460,7 @@ against the shadow for an aligned dust stream (no arrival cone, no margin): {p["
 lie partly or wholly outside, the farthest by {p["max_protrusion_m"]:.1f} m, and {100 * p["radiator_outside_fraction"]:.1f} % of the radiator
 planform is outside. Geometric coverage is necessary, not sufficient: the shield's stopping power is not modelled.</p>
 <div class="figure">{elevation_svg(p)}</div>
-<div class="scroll"><table><thead><tr><th>Protection question</th><th>State</th></tr></thead><tbody>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Protection question</th><th>State</th></tr></thead><tbody>
 {"".join(f"<tr><td>{esc(a)}</td><td>{esc(b)}</td></tr>" for a, b in p["unresolved"])}</tbody></table></div></section>''')
         body.append(f'<section><h2>Problem register</h2><p class="note">Values are filled from the FDP-1 record by the map\'s own model '
                     f'({data["checks"]["passed"]}/{data["checks"]["total"]} of its checks pass). TBD marks a value with no adequate source.</p>'
@@ -496,7 +502,8 @@ def compare_page(e, data, out_dir, revision, built):
     cmp['source'] = {'map': e['name'], 'link': f'../{e["kind_dir"]}/{e["folder"].name}/'}
     out_dir.mkdir(parents=True, exist_ok=True)
     (out_dir / 'compare.json').write_text(json.dumps(cmp, separators=(',', ':')))
-    tabs = ''.join(f'<button data-pair="{p["id"]}" title="{esc(reg[p["id"]]["title"])}">{p["id"]}</button>' for p in cmp['pairs'])
+    tabs = ''.join(f'<button role="tab" data-pair="{p["id"]}" class="{(web_identity.topic(p["id"]) or ("",))[0]}" title="{esc(reg[p["id"]]["title"])}'
+                   f' · {esc((web_identity.topic(p["id"]) or ("", "", ""))[1])}"><i aria-hidden="true"></i>{p["id"]}</button>' for p in cmp['pairs'])
     body = f'''<header><p class="eyebrow">Engineering · open problems</p><h1>What we have, what we need</h1>
 <p class="lead">For each open problem: on the left the ship as it is built today, on the right what the problem needs. Both sides share
 one camera and one scale, so a size difference is a real size difference.</p></header>
@@ -608,9 +615,9 @@ def main_page(site, spec, entries, dropped, problem, revision, built, play=True,
         for area, items in sorted(open_items.items(), key=lambda kv: -len(kv[1])))
     count_html = ' '.join(f'{tag(k)} {v}' for k, v in sorted(counts.items(), key=lambda kv: -kv[1]))
     lab_cards = ''.join(
-        f'<a class="card" href="{e["kind_dir"]}/{e["folder"].name}/"><span class="kicker">{esc(e["kind"])}</span>'
+        f'<a class="card topic {(web_identity.topic(e["folder"].name) or ("",))[0]}" href="{e["kind_dir"]}/{e["folder"].name}/"><span class="kicker">{esc(e["kind"])}</span>'
         f'<strong>{esc(e["name"])}</strong><span>{Markdown(revision, ROOT / "lab").inline(e["question"])}</span>'
-        f'<span class="meta">{tag(e["status"])}</span></a>' for e in entries)
+        f'<span class="meta">{tag(e["status"])} {web_identity.topic_chip(e["folder"].name)}</span></a>' for e in entries)
     dropped_rows = ''.join(f'<tr><td>{Markdown(revision, ROOT / "lab").inline(a)}</td><td><code>{esc(b_)}</code></td><td>{esc(c)}</td></tr>'
                            for a, b_, c in dropped)
     prob = problem['data']
@@ -652,7 +659,7 @@ def main_page(site, spec, entries, dropped, problem, revision, built, play=True,
   <p>Wayfarer follows its engineering workbooks: <strong>Drive workbooks → parameters → shared formulas → geometry</strong>. Each value carries
     its status. LOCKED and BASELINE values come from the owner, WORKING values are agreed and still movable, DERIVED values are calculated,
     PROTOTYPE values are our unsourced choices, and OPEN means nobody knows yet. An unknown stays unknown and is never set to zero.</p>
-  <div class="scroll"><table><thead><tr><th>Quantity</th><th>Value</th><th>Status</th><th>Why it matters</th></tr></thead><tbody>{constraints}</tbody></table></div>
+  <div class="scroll" tabindex="0"><table><thead><tr><th>Quantity</th><th>Value</th><th>Status</th><th>Why it matters</th></tr></thead><tbody>{constraints}</tbody></table></div>
   <h3>What canon does not know yet</h3>
   <p>{sum(len(v) for v in open_items.values())} parameters are explicitly unknown (<code>known = false</code>). By area:</p>
   <div class="open">{open_html}</div>
@@ -687,7 +694,7 @@ def main_page(site, spec, entries, dropped, problem, revision, built, play=True,
     round trip of at least {base["min_round_trip_years"]:.2f} years. Its radiator wings reach r {base["wing_tip_radius_m"]:,.0f} m.
     {f'Holding 1 g does not close. The most it can reach is {goal["max_a0_g"]:.4f} g, a factor of {goal["deficit_factor"]:.0f} short.' if goal.get("max_a0_g") else ''}
     <a href="variants/fdp1/">The variant</a>.</p>
-  {f'<details><summary>Dropped work</summary><div class="scroll"><table><tbody>{dropped_rows}</tbody></table></div></details>' if dropped_rows else ''}
+  {f'<details><summary>Dropped work</summary><div class="scroll" tabindex="0"><table><tbody>{dropped_rows}</tbody></table></div></details>' if dropped_rows else ''}
 </section>
 
 <section id="problems"><h2>5 · Open problems</h2>

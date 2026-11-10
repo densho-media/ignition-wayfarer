@@ -1,6 +1,6 @@
 # FDP-1: Fiji Drive Pulsed prototype (lab/variants/fdp1)
 
-FDP-1 is a research prototype of a pulsed D–³He fusion drive for G.U.C. WAYFARER 001. It is not canon. Nothing in `src/`, `tests/`,
+FDP-1 is a research prototype of a pulsed D–³He fusion drive for G.U. WAYFARER 001. It is not canon. Nothing in `src/`, `tests/`,
 `tools/`, `godot/` or `web/` reads this folder. The approved ship on `main` keeps its four-nozzle drive, and the built assets are not
 touched.
 
