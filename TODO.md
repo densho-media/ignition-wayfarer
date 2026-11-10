@@ -577,6 +577,8 @@ candidates of all nine classes are separate accessory assets (docs/ACCESSORIES.m
     Radiator blades cannot be isolated one by one: their cells carry no lineage below Assembly_THERMAL in the export (the viewer's
     Group scope reads the manifest lineage); a blade-level lineage in export/godot.py would add it. Later (P3): exploded views,
     section planes and cutaways.
+  - Build sequence (`engineering/build/`, lab/studies/assembly-sequence): owner review of the step order; then grow it with the
+    design (split steps as parts gain detail, the assembly yard once it is designed).
   - Visual identity (WEB-005, docs/WEB_IDENTITY.md): owner answer on a radiation-shielding function of its own (the site files WL-008 and P05 under
     SHIELD). Real-GPU check that the fixed scene layer costs nothing while scrolling.
 - [ ] **P03 — Optional compliant-tether stress study. PARKED, owner-led.** Do only when OD-038/required interaction needs it; do not
