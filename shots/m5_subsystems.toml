@@ -1,5 +1,6 @@
 # M5 functional cutaway: the ship's twelve functional subsystems, as presentation data over the saved assets.
-# An explanatory overlay colour per subsystem (never a ship material), the selectors that assign each shot item to it, its
+# An explanatory overlay colour per subsystem (never a ship material; since WEB-005 the sRGB encoding of the matching
+# src/wayfarer/functional_colors.py function, so the holograms, the Blender review colours and the website agree), the selectors that assign each shot item to it, its
 # source references and its maturity. Classification: the first subsystem (file order) whose `select` matches wins; an item no `select`
 # matches falls to the first matching `fallback` (whole assemblies); anything else is CTX (context: hull casing, unclassified).
 # Read by representation.load_subsystems() for shots that name this file (`subsystems = "m5_subsystems.toml"`) and by the web viewer's
@@ -9,7 +10,7 @@ schema = 1
 [[subsystem]]
 id = "S01"
 name = "Forward protection, EYE and Dust Lance"
-color = [0.25, 0.42, 0.78]
+color = [0.906, 0.786, 0.461]   # functional_colors SHIELD in sRGB (WEB-005)
 select = []   # rim RCS pods and rim strobes are claimed by S11 (a select beats every fallback)
 fallback = ["group:Assembly_FORWARD_SHIELD*", "group:Assembly_EYE*"]
 sources = "14_HULL_SERVICE / 15 Q2, FD-V2 rows 15!A189:A192, Eye 45/50; forward_shield.py, eye_placement.py"
@@ -19,7 +20,7 @@ label = { text = "S01 FORWARD SHIELD / EYE / DUST LANCE", select = ["kind:shield
 [[subsystem]]
 id = "S02"
 name = "Central spine and primary load paths"
-color = [0.55, 0.55, 0.58]
+color = [0.774, 0.774, 0.786]   # functional_colors STRUCTURE in sRGB (WEB-005)
 select = ["name:Structural_Spine*", "name:Primary_*", "name:Central_Thrust_Hub*", "name:Hub_Web*", "name:Ring_Web*", "name:Forward_Mount_Strut*", "name:Nozzle_Pickup*", "name:Thrust_Ring*", "kind:thrust_node*", "kind:tank_support", "kind:drive_thrust_strut"]
 fallback = ["group:Assembly_STRUCTURE*"]
 sources = "07_PRIMARY_STRUCTURE (cage, keels, frames), 08 thrust ring; hull_geometry.py, components/structure.py"
@@ -29,7 +30,7 @@ label = { text = "S02 SPINE + KEEL CAGE + THRUST RING", select = ["name:Structur
 [[subsystem]]
 id = "S03"
 name = "Counter-rotating habitat rings and transfer mechanisms"
-color = [0.36, 0.66, 0.62]
+color = [0.380, 0.615, 0.420]   # functional_colors HABITAT (darker: the rotating structure, beside S04) in sRGB (WEB-005)
 select = ["kind:ring_*", "kind:rotor*", "kind:transfer_drum", "kind:transfer_closure", "kind:ring_stop_lock", "kind:crew_bracket", "kind:sector_pressure", "kind:ring_sector"]
 fallback = ["group:Assembly_HABITAT*", "group:Assembly_ROTOR_INTERFACE*"]
 sources = "08 rings (r 30 m, residual momentum), Q46 despun drum (ANSWERED 2026-10-07); habitat_ring.py, rotor_interface.py"
@@ -39,7 +40,7 @@ label = { text = "S03 COUNTER-ROTATING RINGS + TRANSFER DRUMS", select = ["kind:
 [[subsystem]]
 id = "S04"
 name = "Pressurized crew and survival spaces"
-color = [0.93, 0.79, 0.28]
+color = [0.527, 0.854, 0.584]   # functional_colors HABITAT in sRGB (WEB-005)
 select = ["kind:sector_interior*", "kind:crew_vestibule", "kind:survival_envelope", "kind:crew_refuge", "kind:refuge_wall", "kind:storeroom*", "name:Refuge_*", "name:Survival_Refuge*", "name:Crew_Refuge*"]
 fallback = []
 sources = "HUM-001 zones 1-5, storm refuge for 12 (15 rows), storeroom survey; habitat_interior.py, storeroom.py"
@@ -49,8 +50,8 @@ label = { text = "S04 PRESSURIZED SECTORS + STORM REFUGE", select = ["kind:crew_
 [[subsystem]]
 id = "S05"
 name = "D-3He fusion-fuel cryostats"
-color = [0.69, 0.48, 0.63]
-colors = { "kind:he3_cryostat" = [0.62, 0.38, 0.85], "kind:d2_cryostat" = [0.95, 0.52, 0.62] }
+color = [0.774, 0.584, 0.945]   # functional_colors HELIUM3 in sRGB (WEB-005)
+colors = { "kind:he3_cryostat" = [0.774, 0.584, 0.945], "kind:d2_cryostat" = [0.152, 0.774, 0.748] }
 select = ["kind:he3_cryostat", "kind:d2_cryostat"]
 fallback = []
 sources = "S&E 62_FUEL_STORAGE_STUDY (IDEAL MIN), 28 col E; BODY-001 option C; studies/m5_cutaway.py"
@@ -60,7 +61,7 @@ label = { text = "S05 He-3 (3.2 K) + D2 (20 K) CRYOSTATS", select = ["kind:he3_c
 [[subsystem]]
 id = "S06"
 name = "Hydrogen reaction-mass storage"
-color = [0.55, 0.78, 0.95]
+color = [0.410, 0.601, 0.964]   # functional_colors HYDROGEN in sRGB (WEB-005)
 select = ["kind:h2_tank", "name:Feed_Run_Tank*", "name:Fuel_*", "kind:shortfall_scale"]
 fallback = []
 sources = "S&E 62 (H2 HYPOTHESIS), 30/34 PROXY FAIL; BODY-001 option C; schematic feed tanks (WF_STORAGE)"
@@ -70,7 +71,7 @@ label = { text = "S06 H2 REACTION MASS", select = ["name:Feed_Run_Tank*", "name:
 [[subsystem]]
 id = "S07"
 name = "Refrigeration, isolation and transfer"
-color = [0.95, 0.56, 0.17]
+color = [0.832, 0.926, 0.991]   # functional_colors LOW_RADIATOR in sRGB (WEB-005)
 colors = { "kind:insulation_envelope" = [0.80, 0.76, 0.62], "kind:cryo_coil_jacket" = [0.80, 0.76, 0.62] }   # cream: insulation / vacuum-jacket allowance; orange: plant
 select = ["kind:cryo_*", "kind:refrigeration_frame", "kind:transfer_pump_frame", "kind:vent_frame", "kind:insulation_envelope", "kind:transfer_manifold"]
 fallback = ["group:Assembly_STORAGE*"]
@@ -81,7 +82,7 @@ label = { text = "S07 REFRIGERATION / PUMPS / VENTS / MLI", select = ["kind:refr
 [[subsystem]]
 id = "S08"
 name = "Power distribution and auxiliary equipment"
-color = [0.35, 0.63, 0.31]
+color = [0.556, 0.506, 0.821]   # functional_colors POWER in sRGB (WEB-005)
 select = ["kind:power_storage", "kind:ride_through", "kind:generator_proxy", "name:Brayton_Train*", "kind:equipment_envelope", "kind:drive_power_lead", "kind:drive_quench_dump"]
 fallback = ["group:Assembly_POWER_STORAGE*"]
 sources = "power_storage (main battery, pulse bank, survival reserves), Brayton A/B, 34 fore hardware envelopes"
@@ -91,7 +92,7 @@ label = { text = "S08 POWER + EQUIPMENT BAY", select = ["kind:equipment_envelope
 [[subsystem]]
 id = "S09"
 name = "Heat rejection, coolant routing and radiator interfaces"
-color = [0.88, 0.34, 0.35]
+color = [0.982, 0.735, 0.349]   # functional_colors WARM_RADIATOR in sRGB (WEB-005)
 select = ["kind:coolant_*", "kind:root_boom", "kind:casing_boot", "kind:thermal_support", "kind:warm_panel*"]
 fallback = ["group:Assembly_THERMAL*"]
 sources = "Q52 option D blades (4,978 m2 net / 26,882 m2 effective), AFT-009; 28 hot-radiator screen FAIL DIAGNOSTIC"
@@ -101,7 +102,7 @@ label = { text = "S09 THERMAL BLADES + COOLANT CHASES", select = ["kind:root_boo
 [[subsystem]]
 id = "S10"
 name = "Reactor, magnetic manifold and four-nozzle propulsion"
-color = [0.61, 0.46, 0.37]
+color = [0.936, 0.437, 0.886]   # functional_colors MAIN_PROPULSION in sRGB (WEB-005)
 select = ["name:Reactor_Shadow_Shield*", "name:Engineering_Envelope*"]
 fallback = ["group:Assembly_PROPULSION*", "group:Assembly_SHIELDING*"]
 sources = "Fiji lattice manifold, 28 (4 nozzles LOCKED), Q40 magnetic nozzles; drive_manifold.py"
@@ -111,7 +112,7 @@ label = { text = "S10 REACTOR / MANIFOLD / 4 MAGNETIC NOZZLES", select = ["name:
 [[subsystem]]
 id = "S11"
 name = "Communications, navigation and attitude"
-color = [0.09, 0.75, 0.81]
+color = [0.349, 0.906, 0.936]   # functional_colors SENSORS_COMMS in sRGB (WEB-005)
 select = ["kind:comms_antenna", "kind:exterior_hardware", "kind:rcs_thruster", "kind:rcs_balanced_*", "kind:rcs_plume_cone*", "kind:nav_light", "name:Survival_Lasercom*", "name:Survival_RF*", "name:Survival_Star_Tracker*", "name:Ext_*"]
 fallback = []
 sources = "S&E 37 F14-F17, 38 S20, 63_COMMS_ATTITUDE_STUDY (screen), owner 15!A210:A212 (2026-10-18); exterior_hardware.py"
@@ -121,7 +122,7 @@ label = { text = "S11 COMMS / NAV / RCS", select = ["name:Ext_HGA_1_Dish*"], off
 [[subsystem]]
 id = "S12"
 name = "Access corridors, service interfaces and maintenance"
-color = [0.92, 0.92, 0.90]
+color = [0.982, 0.959, 0.886]   # functional_colors SERVICE in sRGB (WEB-005)
 colors = { "kind:eva_rail_forward" = [0.25, 0.85, 0.35], "kind:eva_rail_crossing" = [0.95, 0.85, 0.20], "kind:eva_rail_aft" = [0.95, 0.35, 0.15], "kind:eva_target" = [0.95, 0.20, 0.85] }   # EVA L2 comparison rails by option; targets magenta
 select = ["kind:eva_*", "kind:crew_trunk", "kind:crew_passage", "kind:route_fitout", "kind:entry_*", "kind:casing_detail", "kind:hull_opening", "kind:service_*", "kind:dock_capture_ring", "kind:hatch_hinge", "kind:drone_proxy", "kind:spine_tunnel", "name:Dock_*", "name:Airlock*", "name:Crew_*", "name:Trunk_*", "name:Casing_*"]
 fallback = ["group:Assembly_CREW_TRANSFER*", "group:Assembly_SERVICE*", "group:Assembly_DRONES*"]

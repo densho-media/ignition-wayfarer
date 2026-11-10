@@ -50,9 +50,14 @@ Task branch `claude/project-thread-m2e2z9`, based on main 0fc013d (Engineering 2
 - Not run locally: Explore Ship with its model and the Godot pages (no Blender build or Pages access in this container); the
   branch CI build and browser checks cover them.
 
+## Decisions
+
+- Name (owner, 2026-11-10): the ship is G.U. WAYFARER 001; G.U.C. is outdated. Site bar says "Wayfarer"; titles and specific text
+  say "G.U. WAYFARER 001". The one stale "G.U.C." (lab/variants/fdp1/README.md) is corrected.
+
+- Holograms (owner, 2026-11-10): the M5 overlay colours are aligned with functional_colors.py (shots/m5_subsystems.toml).
+
 ## Open owner questions
 
-- Name: the brief says "G.U.C. Wayfarer 001", the site and canon text say "G.U. WAYFARER 001". The site keeps G.U.
-- M5 subsystem overlay colours disagree with the functional palette (docs/WEB_IDENTITY.md): align them, or keep two registries?
 - Radiation shielding has no function of its own (shadow shield is MAIN_PROPULSION in Blender, SHIELD is the dust shield); the site
   files WL-008 and P05 under SHIELD.

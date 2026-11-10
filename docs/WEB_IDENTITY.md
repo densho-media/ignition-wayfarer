@@ -92,10 +92,26 @@ Charts keep their own categorical colours where the categories are not subsystem
 mark that *is* a subsystem takes its function colour: the radiator wings in the Ship Evolution envelopes are now the hot-radiator
 colour.
 
-**M5 subsystems.** Explore Ship's Subsystems and Hybrid holograms use the twelve M5 overlay colours (`shots/m5_subsystems.toml`,
-sRGB, set in three.js with `SRGBColorSpace`). They are a second, older registry that does not follow the functional palette (for
-example S08 power is green, S10 propulsion brown). The site carries them as `--sub-*` and does not mix them with `--fn-*`. Aligning
-the M5 overlay colours with the functional palette would change the Blender M5 shots and the viewer holograms: an owner decision.
+**M5 subsystems.** Explore Ship's Subsystems and Hybrid holograms (and the Blender M5 shots) use the twelve overlay colours of
+`shots/m5_subsystems.toml`, set in three.js with `SRGBColorSpace`. Since WEB-005 (owner, 2026-11-10) each is the sRGB value of
+its function, so a hologram, the Blender review colour and a page chip agree. The site carries them as `--sub-*`.
+
+| Subsystem | Function |
+| --- | --- |
+| S01 Forward protection, EYE and Dust Lance | Shielding |
+| S02 Central spine and primary load paths | Structure |
+| S03 Counter-rotating habitat rings and transfer | Habitat and crew, at 72 % value (the rotating structure, so it stays apart from S04) |
+| S04 Pressurized crew and survival spaces | Habitat and crew |
+| S05 D-3He fusion-fuel cryostats | Helium-3 (He-3 cryostats) and Deuterium (D2 cryostats) |
+| S06 Hydrogen reaction-mass storage | Hydrogen |
+| S07 Refrigeration, isolation and transfer | Low-temperature radiators (the cold side; insulation keeps its cream) |
+| S08 Power distribution and auxiliary equipment | Electrical power |
+| S09 Heat rejection, coolant routing and radiator interfaces | Warm radiators (the blades are the warm and low circuits) |
+| S10 Reactor, magnetic manifold and four-nozzle propulsion | Fusion propulsion |
+| S11 Communications, navigation and attitude | EYE and sensors |
+| S12 Access corridors, service interfaces and maintenance | Docking and service |
+
+S01 (pale gold) and S09 (amber) are the closest pair; they sit at opposite ends of the ship and the legend names them.
 
 ### 3 · Materials
 

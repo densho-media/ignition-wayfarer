@@ -334,7 +334,7 @@ def page(title, description, body, depth, revision, built, head=''):
 </head>
 <body class="scene-quiet">
 <main class="wrap story">
-<div class="sitebar"><a class="mark" href="{up}">Wayfarer 001</a>
+<div class="sitebar"><a class="mark" href="{up}">Wayfarer</a>
   <nav aria-label="Site"><a href="{up}engineering/" aria-current="true">Engineering</a><a href="{up}viewer/">Explore Ship</a><a href="{up}status/">Technical status</a></nav></div>
 <nav class="crumbs" aria-label="Breadcrumb"><a href="{up}">Wayfarer</a> / <a href="{up}engineering/">Engineering</a></nav>
 {body}

@@ -4,8 +4,8 @@ Four colour layers, kept apart (docs/WEB_IDENTITY.md):
   1. UI identity     the First Ignition palette and the tokens derived from it (IDENTITY below): surfaces, text, actions, focus.
   2. Function        the engineering function colours of src/wayfarer/functional_colors.py PALETTE (the Blender review colours), shown on
                      the site as the sRGB encoding of their scene-linear values, so a page shows the hue the Blender viewport shows.
-                     The M5 subsystem overlay colours (shots/m5_subsystems.toml, already sRGB: the viewer sets them with SRGBColorSpace)
-                     are carried as --sub-<id> for legends that speak about the viewer's subsystem holograms.
+                     The M5 subsystem overlay colours (shots/m5_subsystems.toml, sRGB: the viewer sets them with SRGBColorSpace) are
+                     the same function colours since WEB-005 and are carried as --sub-<id> for legends about the viewer's holograms.
   3. Material        PMDS appearance base colours (data/materials/appearances.toml, linear) for material swatches; a material with no
                      appearance of its own shows its parent's, marked as inherited, or none.
   4. Status          state chips (good, info, warn, bad): never a function or identity colour.

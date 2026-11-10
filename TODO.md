@@ -577,10 +577,8 @@ candidates of all nine classes are separate accessory assets (docs/ACCESSORIES.m
     Radiator blades cannot be isolated one by one: their cells carry no lineage below Assembly_THERMAL in the export (the viewer's
     Group scope reads the manifest lineage); a blade-level lineage in export/godot.py would add it. Later (P3): exploded views,
     section planes and cutaways.
-  - Visual identity (WEB-005, docs/WEB_IDENTITY.md): owner answers on the M5 subsystem overlay colours (align with
-    `functional_colors.py` or keep two registries), a radiation-shielding function of its own (the site files WL-008 and P05 under
-    SHIELD), and the vessel name in the brief ("G.U.C.") against the site ("G.U."). Real-GPU check that the fixed scene layer costs
-    nothing while scrolling.
+  - Visual identity (WEB-005, docs/WEB_IDENTITY.md): owner answer on a radiation-shielding function of its own (the site files WL-008 and P05 under
+    SHIELD). Real-GPU check that the fixed scene layer costs nothing while scrolling.
 - [ ] **P03 — Optional compliant-tether stress study. PARKED, owner-led.** Do only when OD-038/required interaction needs it; do not
   confuse a timestep-dependent impulse diagnostic with rated human loads. Required operational tether releases remain in D/K.
 - [ ] **P04 — Full-gate policy relaxation. PARKED, optional process change.** Retain the existing full pre-commit geometry gate. Consider
