@@ -1,0 +1,29 @@
+{
+ "thread": "T05",
+ "name": "Vertex T05 Blender blockout and feasibility gate",
+ "branch": "claude/project-thread-ctwplp",
+ "commit": "c45ab4adaa82553c586720fdedcbea305502eca6",
+ "folder": "t05-c45ab4a",
+ "base": "work/vertex-blender/",
+ "status": "RESEARCH, NON-CANON, read-only snapshot",
+ "files": [
+  {
+   "path": "GATE_REPORT.md",
+   "source_path": "work/vertex-blender/GATE_REPORT.md",
+   "sha256": "c75a03289a12a45aacbb1356373596954013b7eaf875833cb3f9070c5e1bcadd",
+   "bytes": 7722
+  },
+  {
+   "path": "fe_s5n.json",
+   "source_path": "work/vertex-blender/fe_s5n.json",
+   "sha256": "6fafd46052e390162d99fbf0c3c93c2bc083e48cea946a90b39a62b5ef656b73",
+   "bytes": 22611
+  },
+  {
+   "path": "screen.json",
+   "source_path": "work/vertex-blender/screen.json",
+   "sha256": "1bd4d239aafcc7ba4a57bc6946b0aad8fe45aa6274dd6ea78925a29e7bd056c0",
+   "bytes": 16975
+  }
+ ]
+}

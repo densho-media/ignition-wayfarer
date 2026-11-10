@@ -1,0 +1,705 @@
+{
+ "canon": {
+  "datums_x_m": {
+   "AFT": -144.75,
+   "FWD": 144.75,
+   "RADIATOR_AFT": -133.25,
+   "RADIATOR_FRONT": 48.899362477231335,
+   "RADIATOR_ZONE_FRONT": 93.39936247723134,
+   "AFT_STORAGE_FRONT": 93.39936247723134,
+   "RING_A": 97.29936247723134
+  },
+  "body_x_m": [
+   -144.75,
+   144.75
+  ],
+  "ring_a_x_m": 97.29936247723134,
+  "ring_b_x_m": 103.29936247723134,
+  "ring_sweep_half_m": 2.15,
+  "ring_outer_r_m": 30.0,
+  "ring_a_aft_face_x_m": 95.14936247723134,
+  "hot_blades": {
+   "x_m": [
+    -133.25,
+    48.899362477231335
+   ],
+   "r_m": [
+    6.5,
+    37.0
+   ],
+   "az_deg": [
+    30.0,
+    150.0,
+    270.0
+   ],
+   "T_K": 1800.0
+  },
+  "dock_primary": {
+   "x_m": 131.65,
+   "az_deg": 195.0
+  },
+  "dock_service": {
+   "x_m": 131.65,
+   "az_deg": 315.0
+  },
+  "airlock": {
+   "x_m": 134.1,
+   "az_deg": 50.0
+  },
+  "tank_farm_x_m": [
+   109.25,
+   137.85
+  ],
+  "forward_shield": {
+   "r_m": 45.0,
+   "note": "bow assembly ahead of the farm; position from the built asset in Stage B"
+  },
+  "source": "data/wayfarer_3d.toml through src/wayfarer/layout.py (datums, fuel_storage.farm, docks); docs/MODEL.md (blade radii, shield radius). The X 99.40 m dock figure in lab/variants/fdp1/NOTES.md and planning/T05-BLENDER.md is stale (pass 7)."
+ },
+ "generations": {
+  "V0": {
+   "x_burn_m": -227.53981167687354,
+   "stand_off_m": 43.19071770932621,
+   "x_shield_aft_m": -184.34909396754733,
+   "x_shield_fwd_m": -180.75,
+   "x_module_fwd_m": -144.75,
+   "module_r_m": 6.5,
+   "shield_r_hw_m": 8.303677054980849,
+   "hardware_cone_deg": 9.598083470051419,
+   "crew_cone_deg": 5.3114478809530725,
+   "loops": [
+    {
+     "name": "Loop_1",
+     "x_m": -205.94445282221042,
+     "r_m": 37.404258743958934,
+     "envelope_r_m": 0.21396512811883117
+    },
+    {
+     "name": "Loop_2",
+     "x_m": -227.53981167687354,
+     "r_m": 64.78607656398931,
+     "envelope_r_m": 0.21396512811883117
+    },
+    {
+     "name": "Loop_3",
+     "x_m": -292.3258882408628,
+     "r_m": 112.21277623187676,
+     "envelope_r_m": 0.21396512811883117
+    }
+   ],
+   "closure_coils": [
+    {
+     "name": "C1",
+     "x_m": -186.95381295897243,
+     "r_m": 14.772095461282248,
+     "winding_minor_m": 1.0587683047461984,
+     "envelope_r_m": [
+      2.003654622552055,
+      3.205847396083288
+     ]
+    },
+    {
+     "name": "C2",
+     "x_m": -194.45380238132375,
+     "r_m": 27.76245819702387,
+     "winding_minor_m": 0.08510599899568856,
+     "envelope_r_m": [
+      2.003654622552055,
+      3.205847396083288
+     ]
+    }
+   ],
+   "wing": {
+    "layout": "W2",
+    "az_deg": [
+     0.0,
+     180.0
+    ],
+    "x_m": [
+     -178.75,
+     88.0
+    ],
+    "chord_m": 266.75,
+    "hot_band_r_m": [
+     10.0,
+     116.92093614714142
+    ],
+    "warm_r_m": [
+     116.92093614714142,
+     3573.0613558988957
+    ],
+    "tip_r_m": 3573.0613558988957,
+    "warm_T_K": 600.0,
+    "hot_T_K": 1800.0,
+    "warm_planform_m2": 1843850.913937561,
+    "all_layouts": {
+     "W2": {
+      "wings": 2,
+      "tip_radius_m": 3573.0613558988957,
+      "area_penalty": 1.0
+     },
+     "W3": {
+      "wings": 3,
+      "tip_radius_m": 2741.8187596991897,
+      "area_penalty": 1.1547005383792517
+     },
+     "W6": {
+      "wings": 6,
+      "tip_radius_m": 2349.733925216884,
+      "area_penalty": 2.0000000000000004
+     }
+    }
+   },
+   "drivers": {
+    "galleries": 3,
+    "r_m": 12.0,
+    "x_m": [
+     -144.75,
+     81.86176087876838
+    ],
+    "linac_m": 444.44444444444446
+   },
+   "injection_path_m": 46.78981167687354,
+   "pulse_Hz": 212.31169240068093,
+   "launcher_one_in_flight_m_s": 9934.024104226164,
+   "tanks_TB": {
+    "vessels": 49,
+    "added_length_m": 122.39999999999998,
+    "bow_shift_m": 122.39999999999998
+   },
+   "low_loop_m2": 1793.673252922711,
+   "departure_t": 20760.22471499818,
+   "extent_x_m": [
+    -292.3258882408628,
+    267.15
+   ],
+   "extent_span_m": 7146.122711797791,
+   "ring_A_irradiance": {
+    "hot_band": {
+     "aft_face": {
+      "W_m2": 164272.4925723132,
+      "az_deg": 30,
+      "r_m": 30.0,
+      "view_factor": 0.30663419210248233
+     },
+     "rim": {
+      "W_m2": 39309.521386344255,
+      "az_deg": 15,
+      "view_factor": 0.0733759081845725
+     }
+    },
+    "warm_field": {
+     "aft_face": {
+      "W_m2": 141.61775804200536,
+      "az_deg": 60,
+      "r_m": 30.0,
+      "view_factor": 0.02141206076386898
+     },
+     "rim": {
+      "W_m2": 160.9634812789907,
+      "az_deg": 30,
+      "view_factor": 0.024337059769632487
+     }
+    }
+   },
+   "closure_coil_C1_irradiance": {
+    "facing_fwd_z3.2m": {
+     "W_m2": 61203.562323318634,
+     "view_factor": 0.11424374582094689
+    },
+    "facing_wing_plane_z3.2m": {
+     "W_m2": 12980.105822866324,
+     "view_factor": 0.02422891501842447
+    },
+    "facing_fwd_z6.4m": {
+     "W_m2": 99075.67719894371,
+     "view_factor": 0.18493656338434797
+    },
+    "facing_wing_plane_z6.4m": {
+     "W_m2": 38667.8521648333,
+     "view_factor": 0.07217815608223298
+    },
+    "gap_coil_centre_to_wing_aft_edge_m": 8.203812958972435
+   }
+  },
+  "V4": {
+   "x_burn_m": -249.13947536652566,
+   "stand_off_m": 64.69938609749164,
+   "x_shield_aft_m": -184.44008926903402,
+   "x_shield_fwd_m": -180.75,
+   "x_module_fwd_m": -144.75,
+   "module_r_m": 6.5,
+   "shield_r_hw_m": 7.228220898732194,
+   "hardware_cone_deg": 5.4985773185790325,
+   "crew_cone_deg": 4.979954642503908,
+   "loops": [
+    {
+     "name": "Loop_1",
+     "x_m": -216.78978231777984,
+     "r_m": 56.03131196968549,
+     "envelope_r_m": 0.716763429847836
+    },
+    {
+     "name": "Loop_2",
+     "x_m": -249.13947536652566,
+     "r_m": 97.04907914623746,
+     "envelope_r_m": 0.716763429847836
+    },
+    {
+     "name": "Loop_3",
+     "x_m": -346.18855451276306,
+     "r_m": 168.09393590905643,
+     "envelope_r_m": 0.716763429847836
+    }
+   ],
+   "closure_coils": [
+    {
+     "name": "C1",
+     "x_m": -188.34193968133437,
+     "r_m": 22.12849330614687,
+     "winding_minor_m": 1.5860273449859659,
+     "envelope_r_m": [
+      3.0014602883648545,
+      4.802336461383767
+     ]
+    },
+    {
+     "name": "C2",
+     "x_m": -199.57687017333294,
+     "r_m": 41.58796373779316,
+     "winding_minor_m": 0.12748817755917513,
+     "envelope_r_m": [
+      3.0014602883648545,
+      4.802336461383767
+     ]
+    }
+   ],
+   "wing": {
+    "layout": "W2",
+    "az_deg": [
+     0.0,
+     180.0
+    ],
+    "x_m": [
+     -178.75,
+     88.0
+    ],
+    "chord_m": 266.75,
+    "hot_band_r_m": [
+     10.0,
+     847.2716504700079
+    ],
+    "warm_r_m": [
+     847.2716504700079,
+     10127.573934427086
+    ],
+    "tip_r_m": 10127.573934427086,
+    "warm_T_K": 628.0,
+    "hot_T_K": 1800.0,
+    "warm_planform_m2": 4951041.268491101,
+    "all_layouts": {
+     "W2": {
+      "wings": 2,
+      "tip_radius_m": 10127.573934427086,
+      "area_penalty": 1.0
+     },
+     "W3": {
+      "wings": 3,
+      "tip_radius_m": 7712.161129384963,
+      "area_penalty": 1.1547005383792517
+     },
+     "W6": {
+      "wings": 6,
+      "tip_radius_m": 6475.958739461389,
+      "area_penalty": 2.0000000000000004
+     }
+    }
+   },
+   "drivers": {
+    "galleries": 3,
+    "r_m": 4.5,
+    "x_m": [
+     -144.75,
+     81.86176087876838
+    ],
+    "linac_m": 444.44444444444446
+   },
+   "injection_path_m": 68.38947536652566,
+   "pulse_Hz": 195.73784854631526,
+   "launcher_one_in_flight_m_s": 13386.408771454959,
+   "tanks_TB": {
+    "vessels": 110,
+    "added_length_m": 275.4,
+    "bow_shift_m": 275.4
+   },
+   "low_loop_m2": 4027.4600143827115,
+   "departure_t": 42915.783853018824,
+   "extent_x_m": [
+    -346.18855451276306,
+    420.15
+   ],
+   "extent_span_m": 20255.147868854172,
+   "ring_A_irradiance": {
+    "hot_band": {
+     "aft_face": {
+      "W_m2": 172811.51256750003,
+      "az_deg": 30,
+      "r_m": 30.0,
+      "view_factor": 0.3225732909532436
+     },
+     "rim": {
+      "W_m2": 47686.82406909908,
+      "az_deg": 15,
+      "view_factor": 0.08901314239159414
+     }
+    },
+    "warm_field": {
+     "aft_face": {
+      "W_m2": 1.4547398084242653,
+      "az_deg": 85,
+      "r_m": 30.0,
+      "view_factor": 0.00018327047366603394
+     },
+     "rim": {
+      "W_m2": 6.671952257582002,
+      "az_deg": 45,
+      "view_factor": 0.000840543335270856
+     }
+    }
+   },
+   "closure_coil_C1_irradiance": {
+    "facing_fwd_z4.8m": {
+     "W_m2": 90524.41716791345,
+     "view_factor": 0.16897461704741665
+    },
+    "facing_wing_plane_z4.8m": {
+     "W_m2": 24092.384497495634,
+     "view_factor": 0.04497130798060986
+    },
+    "facing_fwd_z9.6m": {
+     "W_m2": 134712.62321772703,
+     "view_factor": 0.251457171797586
+    },
+    "facing_wing_plane_z9.6m": {
+     "W_m2": 63669.14991560396,
+     "view_factor": 0.11884605901154699
+    },
+    "gap_coil_centre_to_wing_aft_edge_m": 9.591939681334367
+   }
+  },
+  "V5": {
+   "x_burn_m": -227.3666136325292,
+   "stand_off_m": 43.02283486029213,
+   "x_shield_aft_m": -184.34377877223707,
+   "x_shield_fwd_m": -180.75,
+   "x_module_fwd_m": -144.75,
+   "module_r_m": 6.5,
+   "shield_r_hw_m": 6.9989004949248255,
+   "hardware_cone_deg": 7.937873159487198,
+   "crew_cone_deg": 5.314283916605566,
+   "loops": [
+    {
+     "name": "Loop_1",
+     "x_m": -205.85519620238313,
+     "r_m": 37.25886793183571,
+     "envelope_r_m": 0.5838390173093453
+    },
+    {
+     "name": "Loop_2",
+     "x_m": -227.3666136325292,
+     "r_m": 64.53425229043819,
+     "envelope_r_m": 0.5838390173093453
+    },
+    {
+     "name": "Loop_3",
+     "x_m": -291.90086592296734,
+     "r_m": 111.7766037955071,
+     "envelope_r_m": 0.5838390173093453
+    }
+   ],
+   "closure_coils": [
+    {
+     "name": "C1",
+     "x_m": -186.93837318902195,
+     "r_m": 14.71467614519369,
+     "winding_minor_m": 1.0546528593705502,
+     "envelope_r_m": [
+      1.9958663924796078,
+      3.193386227967373
+     ]
+    },
+    {
+     "name": "C2",
+     "x_m": -194.40921006057698,
+     "r_m": 27.654545181785892,
+     "winding_minor_m": 0.0847751909346268,
+     "envelope_r_m": [
+      1.9958663924796078,
+      3.193386227967373
+     ]
+    }
+   ],
+   "wing": {
+    "layout": "W2",
+    "az_deg": [
+     0.0,
+     180.0
+    ],
+    "x_m": [
+     -178.75,
+     88.0
+    ],
+    "chord_m": 266.75,
+    "hot_band_r_m": [
+     10.0,
+     375.109462113527
+    ],
+    "warm_r_m": [
+     375.109462113527,
+     3266.8886073055332
+    ],
+    "tip_r_m": 3266.8886073055332,
+    "warm_T_K": 628.0,
+    "hot_T_K": 1800.0,
+    "warm_planform_m2": 1542764.1739599353,
+    "all_layouts": {
+     "W2": {
+      "wings": 2,
+      "tip_radius_m": 3266.8886073055332,
+      "area_penalty": 1.0
+     },
+     "W3": {
+      "wings": 3,
+      "tip_radius_m": 2479.4989319604188,
+      "area_penalty": 1.1547005383792517
+     },
+     "W6": {
+      "wings": 6,
+      "tip_radius_m": 2059.55591749918,
+      "area_penalty": 2.0000000000000004
+     }
+    }
+   },
+   "drivers": {
+    "galleries": 3,
+    "r_m": 4.5,
+    "x_m": [
+     -144.75,
+     81.86176087876838
+    ],
+    "linac_m": 444.44444444444446
+   },
+   "injection_path_m": 46.61661363252921,
+   "pulse_Hz": 200.83373510928817,
+   "launcher_one_in_flight_m_s": 9362.188633967402,
+   "tanks_TB": {
+    "vessels": 46,
+    "added_length_m": 122.39999999999998,
+    "bow_shift_m": 122.39999999999998
+   },
+   "low_loop_m2": 1660.7482513004297,
+   "departure_t": 19441.82325881093,
+   "extent_x_m": [
+    -291.90086592296734,
+    267.15
+   ],
+   "extent_span_m": 6533.7772146110665,
+   "ring_A_irradiance": {
+    "hot_band": {
+     "aft_face": {
+      "W_m2": 171886.31279227426,
+      "az_deg": 30,
+      "r_m": 30.0,
+      "view_factor": 0.32084629526962444
+     },
+     "rim": {
+      "W_m2": 46498.20480000499,
+      "az_deg": 15,
+      "view_factor": 0.0867944428175576
+     }
+    },
+    "warm_field": {
+     "aft_face": {
+      "W_m2": 13.90391587684772,
+      "az_deg": 75,
+      "r_m": 30.0,
+      "view_factor": 0.0017516378075352786
+     },
+     "rim": {
+      "W_m2": 32.18697526132102,
+      "az_deg": 45,
+      "view_factor": 0.004054967196098643
+     }
+    }
+   },
+   "closure_coil_C1_irradiance": {
+    "facing_fwd_z3.2m": {
+     "W_m2": 62488.88957334257,
+     "view_factor": 0.11664296237100258
+    },
+    "facing_wing_plane_z3.2m": {
+     "W_m2": 13004.07180314857,
+     "view_factor": 0.02427365037786729
+    },
+    "facing_fwd_z6.4m": {
+     "W_m2": 101664.33161338212,
+     "view_factor": 0.1897685954706355
+    },
+    "facing_wing_plane_z6.4m": {
+     "W_m2": 38792.4767616495,
+     "view_factor": 0.07241078275004842
+    },
+    "gap_coil_centre_to_wing_aft_edge_m": 8.188373189021945
+   }
+  }
+ },
+ "canon_blades_on_ring_A_W_m2": 65350.198318340204,
+ "V4_hot_band_mitigations": {
+  "as_calculated": {
+   "hot_x_m": [
+    -178.75,
+    88.0
+   ],
+   "hot_r_m": [
+    10.0,
+    847.2716504700079
+   ],
+   "ring_A_aft_face_W_m2": 172811.51256750003,
+   "C1_W_m2": 90524.41716791345
+  },
+  "hot_aft_of_RADIATOR_FRONT": {
+   "hot_x_m": [
+    -178.75,
+    48.899362477231335
+   ],
+   "hot_r_m": [
+    10.0,
+    991.0798955574166
+   ],
+   "ring_A_aft_face_W_m2": 56698.461035857224,
+   "C1_W_m2": 89866.6865180296
+  },
+  "hot_aft_of_RADIATOR_FRONT_and_20m_clear_of_C1": {
+   "hot_x_m": [
+    -163.5396032199506,
+    48.899362477231335
+   ],
+   "hot_r_m": [
+    10.0,
+    1061.3241392882442
+   ],
+   "ring_A_aft_face_W_m2": 55960.50656951538,
+   "C1_W_m2": 30018.984549050623
+  }
+ },
+ "V4_radiator_alternatives": [
+  {
+   "id": "R0",
+   "name": "W2 flat wings, droplet sheet 0.5 kg/m2 (V4 as calculated)",
+   "planform_m2": 4951041.268491101,
+   "tip_r_m": 10127.573934427086,
+   "closed_by_calculator": true,
+   "label": "MODEL",
+   "leading_edge_m2_per_cm": 202.35147868854173
+  },
+  {
+   "id": "R1-W3",
+   "name": "W3: 3 wings, view-factor penalty x1.15",
+   "planform_m2": 5716970.018264568,
+   "tip_r_m": 7712.161129384963,
+   "closed_by_calculator": false,
+   "label": "MODEL (layout only; mass not re-closed)",
+   "leading_edge_m2_per_cm": 231.06483388154888
+  },
+  {
+   "id": "R1-W6",
+   "name": "W6: 6 wings, view-factor penalty x2.00",
+   "planform_m2": 9902082.536982205,
+   "tip_r_m": 6475.958739461389,
+   "closed_by_calculator": false,
+   "label": "MODEL (layout only; mass not re-closed)",
+   "leading_edge_m2_per_cm": 387.9575243676834
+  },
+  {
+   "id": "R2",
+   "name": "Tandem W2: aft wing 267 m chord + forward wing 270 m chord (x 143 to 413)",
+   "planform_m2": 4951041.268491101,
+   "tip_r_m": 5455.892397459771,
+   "closed_by_calculator": false,
+   "label": "EXTRAPOLATION (geometry only)",
+   "note": "only exists with the T-B stretch; forward wing lies in the forward shield dust shadow only inside r 45 m; edge-on to the burn",
+   "leading_edge_m2_per_cm": 217.83569589839084
+  },
+  {
+   "id": "R3",
+   "name": "Equivalent warm temperature 670 K (V4_warm_band)",
+   "tip_r_m": 6700.0,
+   "closed_by_calculator": true,
+   "label": "MODEL (convergence.json V4_warm_band; tip from T05_HANDOFF)",
+   "leading_edge_m2_per_cm": 133.8
+  },
+  {
+   "id": "R4",
+   "name": "Driver efficiency 0.45 (V4_driver_band)",
+   "tip_r_m": 3400.0,
+   "closed_by_calculator": true,
+   "label": "MODEL (convergence.json V4_driver_band; tip from T05_HANDOFF)",
+   "leading_edge_m2_per_cm": 67.8
+  },
+  {
+   "id": "R5",
+   "name": "Heat pump lifting the warm loop to 1000 K (ideal Carnot)",
+   "planform_m2": 1226239.9966492697,
+   "tip_r_m": 3145.753368650457,
+   "extra_electric_W": 46558894427.68203,
+   "closed_by_calculator": false,
+   "label": "EXTRAPOLATION",
+   "note": "needs 47 GW extra electric at the Carnot limit (x2 at a real COP), against about 110 GW driver input: rejected",
+   "leading_edge_m2_per_cm": 62.71506737300914
+  },
+  {
+   "id": "R6-15",
+   "name": "Coaxial cone radiator, apex at the burn, half-angle 15 deg",
+   "slant_m": [
+    104.69938609749164,
+    3491.287338085448
+   ],
+   "mouth_r_m": 903.6116550217971,
+   "frontal_m2": 2562847.5467480794,
+   "closed_by_calculator": false,
+   "label": "EXTRAPOLATION",
+   "note": "edge-on to the burn, but its frontal area to the dust stream is the whole annulus: rejected on dust"
+  },
+  {
+   "id": "R6-30",
+   "name": "Coaxial cone radiator, apex at the burn, half-angle 30 deg",
+   "slant_m": [
+    104.69938609749164,
+    2512.9312549506417
+   ],
+   "mouth_r_m": 1256.4656274753206,
+   "frontal_m2": 4951041.268491101,
+   "closed_by_calculator": false,
+   "label": "EXTRAPOLATION",
+   "note": "edge-on to the burn, but its frontal area to the dust stream is the whole annulus: rejected on dust"
+  },
+  {
+   "id": "R7",
+   "name": "Propellant as heat sink (regenerative)",
+   "sink_W": 1269578.8020238935,
+   "closed_by_calculator": false,
+   "label": "EXTRAPOLATION",
+   "note": "0.151 kg/s of propellant absorbs about 1.3 MW against 78.6 GW: rejected"
+  }
+ ],
+ "V4_warm_W": 78599423926.30191,
+ "V4_wing_loads": {
+  "wing_mass_t": 1825.7129846277646,
+  "peak_accel_m_s2": 0.18367862051773792,
+  "in_plane_force_MN": 0.3353444424777499,
+  "root_moment_N_m": 1696436095.1339328,
+  "chord_couple_MN": 6.359647966762635,
+  "label": "EXTRAPOLATION (uniform mass along span; in-plane cantilever; no dynamics)"
+ },
+ "solar_constant_1AU_W_m2": 1361.0
+}

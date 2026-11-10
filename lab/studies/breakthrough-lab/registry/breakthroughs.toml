@@ -1,0 +1,304 @@
+# Breakthrough Lab: the breakthrough registry. Research records, NOT canon.
+#
+# A breakthrough (BT-nnn) is the smallest, precisely defined technological advance that would remove one named engineering limitation
+# (a weakest link, WL-nnn). It changes only the calculator inputs it lists under `levels`; everything else stays at the scientific
+# reference (scenarios.toml [reference]). IDs are stable: never reuse or renumber one; retire a record with development = "REJECTED".
+#
+# Classifications (lab.py validates every vocabulary; they are kept apart on purpose):
+#   level        A established | B advanced, physics-consistent extrapolation | C speculative (a defined fictional property). The same
+#                A/B/C as the PMDS material levels (docs/MATERIALS.md) and the Technology Atlas credibility (ESTABLISHED, PLAUSIBLE_FUTURE,
+#                FICTIONAL_BREAKTHROUGH); not a new scale.
+#   evidence     scientific evidence for the advanced value: DEMONSTRATED | LITERATURE_SUPPORTED | CALCULATED | EXTRAPOLATED | UNVERIFIED |
+#                FICTIONAL_ASSUMPTION. A calculated result is not a demonstration.
+#   development  PROPOSED | UNDER_INVESTIGATION | SELECTED_FOR_EXPERIMENT | REJECTED | APPROVED_FOR_CANON
+#   canon        NON_CANON | CANDIDATE | APPROVED (the Atlas canon vocabulary). Only the owner moves a record past NON_CANON, with a decision
+#                id in `canon_decision`. Switching a breakthrough on in the website's Breakthrough Lab never changes it.
+#
+# Each [[breakthrough.levels]] is one point of a bounded parameter table: `set` maps calculator input paths (the Technology Atlas adapter,
+# lab/variants/vertex-drive/convergence.py at the pinned T00 commit) to values. Level 0 is always the scientific reference and must equal
+# scenarios.toml [reference] exactly; a level may only set paths the breakthrough lists in `modifies`. `limit` is the edge of what the
+# calculator may be asked: a value beyond it is reported OUT_OF_RANGE, never computed. `penalties.booked` names what the calculator
+# re-sizes on every solve; `penalties.unbooked` names consequences it cannot compute (they stay as open indicators on every scenario).
+
+[[breakthrough]]
+id = "BT-001"
+name = "Advanced fusion-target compression"
+summary = "Put a much larger share of the driver pulse into compressing the D-3He fuel than any implosion has shown."
+limitation = "Compressing 0.77 g of D-3He to 2,000 g/cm3 costs about 78 MJ on the ideal cold adiabat, 47 % of FDP-1's 168 MJ driver. Heavy-ion drivers couple about 10-20 % of the beam into the fuel; at that coupling the reachable density is 110-310 g/cm3 and the gain falls far below the mission's needs."
+weakest_links = ["WL-001", "WL-004"]
+basis = "Indirect- and direct-drive ICF (NIF ignition at target gain about 4), heavy-ion driver studies, magnetised targets (MagLIF). The compression ceiling is T04's Fermi-degenerate adiabat plus a calibrated fast-ignitor hot spot."
+level = "B"
+evidence = "EXTRAPOLATED"
+development = "UNDER_INVESTIGATION"
+canon = "NON_CANON"
+assumption = "The driver-to-fuel compression coupling eta_c/alpha reaches the level chosen (0.3-0.7) at 2,000 g/cm3, by target architecture and beam coupling. Not a new physical law: the gain stays at T04's compression ceiling for that coupling."
+modifies = ["vertex.compression_coupling"]
+unchanged = "Fuel (D-3He), fuel density 2,000 g/cm3, burn physics and burn fraction, driver efficiency 0.30, the compression energy itself (the ceiling is recomputed, never waived), every other subsystem."
+allowed = "A larger fraction of the delivered driver energy ends in the cold fuel; the gain follows the T04 ceiling for that coupling; the ship re-sizes."
+forbidden = "Coupling above 1.0 (more energy in the fuel than the driver delivers); gain above the compression ceiling; energy-free compression; a Fiji effect on compression (none is declared; it would be a separate Level C record)."
+energy = "Driver pulse energy, from the ship's electrical plant. Energy is conserved: compression work = coupling x driver energy, and the calculator books the driver, its losses and its waste heat on every solve."
+depends_on = []
+risks = "No implosion has shown more than a few per cent coupling; D-3He has never ignited; 47 % coupling at alpha 1 is already the T00 gate's minimum for the FDP-1 target. The gain cliff (about 700) sits close to every closing case."
+validation = "1D radiation-hydrodynamics implosion of FDP-1's D-3He target at its scale (0.77 g, 168 MJ heavy-ion drive): reachable rhoR, density, adiabat and gain (T00 gate section 7, the next decisive experiment; needs a D-21-class authorisation)."
+references = ["S-T04-STUDY", "S-T00-GATE", "S-NIF-2025", "S-HIF-REVIEWS", "S-T04-ATZENI-2004", "S-T06-NIF-DENSITY"]
+atlas = ["VTX-01", "VTX-01E", "VTX-01A"]
+materials = []
+penalties = { power = "Recomputed: driver electrical power follows pulse energy and rate.", heat = "Recomputed: driver loss heat to the warm loop.", mass = "Recomputed: driver, radiators, propellant, tanks, structure.", maintenance = "Not modelled: target-factory and driver life.", booked = ["driver", "radiators", "propellant", "tanks", "structure", "shield"], unbooked = ["Target fabrication and fill at 196-560 Hz (WL-004)", "Ignition of D-3He itself (undemonstrated)"] }
+limit = { path = "vertex.compression_coupling", max = 1.0, why = "Coupling 1.0 is the ideal bound: all driver energy in the fuel. The T00 V5 bound uses it; no implosion can exceed it." }
+
+[[breakthrough.levels]]
+key = "L0"
+label = "0.15 (heavy-ion coupling, published range 0.10-0.20)"
+set = { "vertex.compression_coupling" = 0.15 }
+evidence = "LITERATURE_SUPPORTED"
+
+[[breakthrough.levels]]
+key = "L1"
+label = "0.30 (twice today's best)"
+set = { "vertex.compression_coupling" = 0.3 }
+evidence = "EXTRAPOLATED"
+
+[[breakthrough.levels]]
+key = "L2"
+label = "0.50 (Vertex research target, owner D-22)"
+set = { "vertex.compression_coupling" = 0.5 }
+evidence = "EXTRAPOLATED"
+
+[[breakthrough.levels]]
+key = "L3"
+label = "0.70 (near the ideal bound)"
+set = { "vertex.compression_coupling" = 0.7 }
+evidence = "UNVERIFIED"
+
+
+[[breakthrough]]
+id = "BT-002"
+name = "Advanced superconducting and structural materials"
+summary = "Halve the mass of the nozzle's virial structure, radiator spars, driver galleries and the renewable loop armour."
+limitation = "The magnetic nozzle stores about 15 pulse energies of field; its hoop structure, the radiator spars, the galleries and the tungsten armour are mass the drive must lift, and V4 gears about 12 t of departure per added tonne."
+weakest_links = ["WL-007", "WL-003"]
+basis = "CFRP hoop structures, carbon-nanotube fibres (14 GPa dynamic strength shown in 2024), tungsten-fibre-reinforced tungsten (PMDS MAT-W-ADV01, Level B), REBCO with artificial pinning (MAT-REBCO-APC01, Level B)."
+level = "B"
+evidence = "EXTRAPOLATED"
+development = "PROPOSED"
+canon = "NON_CANON"
+assumption = "Structure at twice CFRP specific strength (virial nozzle structure 5.35e-7 kg/J, spars 12.5 kg/m, galleries 60 kg/m) and advanced W armour at half areal mass (100 kg/m2) holding the same fluence."
+modifies = ["base.overrides.pulsed.nozzle_kg_per_J.optimistic", "structure.wing_spar_kg_per_m.value", "structure.gallery_kg_per_m.value", "base.overrides.pulsed.loop_armor_kg_m2.optimistic"]
+unchanged = "Field strength, stored field energy (15 E_p), magnetic stresses (the virial theorem sets the minimum structure per joule; only the material's strength-to-density changes), X-ray and neutron fluence, conductor current density."
+allowed = "Lower specific mass of structure that carries the same loads; armour that survives the same fluence with half the areal mass."
+forbidden = "Less stored field energy, lower magnetic pressure, fewer neutrons or less X-ray dose; any change to conductor current density (that is the coupled solve's J_e, reported separately)."
+energy = "None: a material property. The virial minimum mass per stored joule still holds; only the allowable stress per density rises."
+depends_on = []
+risks = "Specific strength of macroscopic CNT structures is far below single-fibre values; neutron damage of composites and REBCO is unmeasured at these fluences; armour erosion sets maintenance."
+validation = "Measured strength and stiffness of large CNT or advanced composite hoops under cyclic magnetic load; irradiated W-fibre armour fluence limits; REBCO and CFC data at the coil fluence (T00 Rev 4 item)."
+references = ["S-T06-CNTF-2024", "S-T06-STUDY", "S-T00-GATE", "S-T02-REBCO-N"]
+atlas = ["VTX-02D", "VTX-06B", "VTX-02B", "VTX-03F"]
+materials = ["MAT-W-ADV01", "MAT-REBCO-APC01", "MAT-CFRP"]
+penalties = { power = "None.", heat = "None.", mass = "Recomputed: nozzle structure, spars, galleries, armour, then the whole ship.", maintenance = "Not modelled: armour renewal rate.", booked = ["nozzle structure", "radiator spars", "driver galleries", "loop armour"], unbooked = ["Closure-coil conductor at a higher J_e (only in the coupled solve)", "Neutron and X-ray life of the composite"] }
+
+[[breakthrough.levels]]
+key = "L0"
+label = "Off: FDP-1 optimistic structure and armour (1.07e-6 kg/J, 25 kg/m, 120 kg/m, 200 kg/m2)"
+set = { "base.overrides.pulsed.nozzle_kg_per_J.optimistic" = 1.07e-6, "structure.wing_spar_kg_per_m.value" = 25.0, "structure.gallery_kg_per_m.value" = 120.0, "base.overrides.pulsed.loop_armor_kg_m2.optimistic" = 200.0 }
+evidence = "CALCULATED"
+
+[[breakthrough.levels]]
+key = "L1"
+label = "On: twice CFRP specific strength, advanced W armour"
+set = { "base.overrides.pulsed.nozzle_kg_per_J.optimistic" = 5.35e-7, "structure.wing_spar_kg_per_m.value" = 12.5, "structure.gallery_kg_per_m.value" = 60.0, "base.overrides.pulsed.loop_armor_kg_m2.optimistic" = 100.0 }
+evidence = "EXTRAPOLATED"
+
+
+[[breakthrough]]
+id = "BT-003"
+name = "Advanced magnetic nozzle control"
+summary = "Reach the ideal-model thrust efficiency of the closure-coil nozzle, and move its unavoidable field zero off the shield."
+limitation = "Published pulsed magnetic-nozzle thrust efficiencies are 0.30-0.64; at 0.64 the V4 ship grows to 1,726 kt. T03's ideal thin-shell model gives 0.791 at 15 pulse energies of field. Separately, an axisymmetric nozzle has a field zero on its axis that sends 342 J/cm2 per pulse onto the shield centre."
+weakest_links = ["WL-002", "WL-009"]
+basis = "Laser-fusion magnetic thrust chamber experiments (Osaka, GEKKO) and simulations (Nagamine, Matsuda, Inatomi); T03's thin-shell vacuum-field model; the T00 gate's tilted closure A1."
+level = "B"
+evidence = "CALCULATED"
+development = "UNDER_INVESTIGATION"
+canon = "NON_CANON"
+assumption = "The real plasma reaches the thin-shell model's thrust efficiency (0.70 or 0.791), and the tilted closure (C1 and C2 tilted 14 deg as a pair) moves the axial leak off the shield as the vacuum-field model predicts."
+modifies = ["base.overrides.pulsed.nozzle_efficiency.optimistic"]
+unchanged = "Fiji lattice behaviour (its canon card VTX-02A only; no new property), stored field energy 15 E_p, coil currents and stresses, the plasma pulse energy and momentum."
+allowed = "Thrust efficiency up to the ideal model's 0.791; moving the field zero (it can be moved, not removed)."
+forbidden = "Thrust efficiency above 0.791 (beyond the ideal thin-shell model); removing the field zero: on any closed flux-excluding surface the tangential field has at least two zeros (it is the surface gradient of a potential), so no field shape eliminates the leak; a new Fiji property (it would be a separate Level C record)."
+energy = "Plasma kinetic energy, redirected by stored field; momentum is conserved (the tilted closure turns the nozzle 2.7 deg so the thrust passes through the centre of mass, at a 1.7 % thrust cost)."
+depends_on = []
+risks = "Lateral plasma flow toward the moved zero (funnelling) is outside the thin-shell model; the specular-reflection ledger depends on angular resolution (gate G1); A1 fails once the shadow cone exceeds about 7.5 deg."
+validation = "2D/3D MHD or hybrid PIC of the pulsed shell in the closure-coil field, plain and tilted (D-21, not authorised); T05 azimuth sweep of the A1 leak against the full ship."
+references = ["S-T03-STUDY", "S-T00-GATE", "S-T05-GATE", "S-T03-NAGAMINE-1999", "S-T03-MATSUDA-2009", "S-T03-INATOMI-2023", "S-T03-MAENO-2013"]
+atlas = ["VTX-03D", "VTX-03", "VTX-02A"]
+materials = []
+penalties = { power = "None booked beyond the nozzle field (15 E_p, recomputed).", heat = "Recomputed: plume strike share 0.065 of the nozzle loss.", mass = "Recomputed: nozzle structure follows the field energy.", maintenance = "Not modelled.", booked = ["nozzle field energy", "plume-to-hardware heat", "whole ship"], unbooked = ["A1 tilt: 1.7 % thrust (booked only in the coupled check)", "Side torque of the turned nozzle", "Re-landing loop-1 struts 4 and 5 (T05 clash)"] }
+limit = { path = "base.overrides.pulsed.nozzle_efficiency.optimistic", max = 0.791, why = "0.791 is the T03 ideal thin-shell upper bound at 15 E_p; nothing in the record supports a higher value." }
+
+[[breakthrough.levels]]
+key = "L0"
+label = "0.64 (best published thrust efficiency)"
+set = { "base.overrides.pulsed.nozzle_efficiency.optimistic" = 0.64 }
+evidence = "LITERATURE_SUPPORTED"
+
+[[breakthrough.levels]]
+key = "L1"
+label = "0.70 (between published and ideal)"
+set = { "base.overrides.pulsed.nozzle_efficiency.optimistic" = 0.7 }
+evidence = "EXTRAPOLATED"
+
+[[breakthrough.levels]]
+key = "L2"
+label = "0.791 (T03 ideal thin-shell model, upper bound)"
+set = { "base.overrides.pulsed.nozzle_efficiency.optimistic" = 0.791 }
+evidence = "CALCULATED"
+
+
+[[breakthrough]]
+id = "BT-004"
+name = "Advanced heat rejection"
+summary = "Reject the same waste heat with lighter radiators: a tin droplet sheet for the warm loop and thin-wall refractory heat pipes for the hot loop."
+limitation = "Hundreds of GW of hot-loop heat and about 80 GW of warm-loop heat at 628 K need km2 of radiator; at the T01 circuit-panel areal mass (0.96 kg/m2) V4 grows to 124 kt, and the wings reach about 10 km tip radius."
+weakest_links = ["WL-005"]
+basis = "Liquid droplet radiator concept studies (Mattick and Hertzberg), SP-100 Mo-Re/Li heat pipes, T01 circuit-by-circuit warm ledger."
+level = "B"
+evidence = "EXTRAPOLATED"
+development = "PROPOSED"
+canon = "NON_CANON"
+assumption = "Warm sheet at 0.5 kg/m2 including generators and collectors; hot panels at 1.5 kg/m2 (half the optimistic tier)."
+modifies = ["base.overrides.radiators.warm.areal_kg_m2.optimistic", "base.overrides.radiators.hot.areal_kg_m2.optimistic"]
+unchanged = "Radiator temperatures (warm 628 K, hot 1,800 K) and emissivity, so the physical radiator area is set by the same Stefan-Boltzmann balance; every heat load is still computed from the energy ledger."
+allowed = "Lower mass per m2 of radiator."
+forbidden = "Higher radiator temperature without the components that would run at it (the warm loop's 628 K is set by cores, power stages and capacitors); a heat pump without its work input; smaller area for the same heat; any reduction of the heat itself."
+energy = "None created or removed: the heat to reject comes from the ledger on every solve; only the mass per m2 changes."
+depends_on = []
+risks = "Droplet sheets have never flown; droplet loss, collector capture and the sheet under 0.0187 g thrust are unresolved; hot panels at half the optimistic areal mass have no hardware precedent."
+validation = "Droplet-sheet loss rate and collector efficiency in vacuum at 628 K; thrust-axis sheet stability; refractory heat-pipe areal mass on a built panel."
+references = ["S-MATTICK-LDR", "S-T01-LEDGER", "S-T06-SP100", "S-T06-RADMASS", "S-T01-LDR-PATENT"]
+atlas = ["VTX-07B", "VTX-07F", "VTX-07E"]
+materials = ["MAT-NB1ZR", "MAT-MORE"]
+penalties = { power = "Not modelled: droplet pumping.", heat = "Unchanged: the same heat is rejected.", mass = "Recomputed: radiators, transport, wings, then the whole ship.", maintenance = "Not modelled: droplet loss make-up.", booked = ["radiators", "heat transport", "wing spars"], unbooked = ["Droplet loss and make-up mass", "Collector and pumping power"] }
+
+[[breakthrough.levels]]
+key = "L0"
+label = "Off: T01 circuit panels 0.96 kg/m2, hot panels 3.0 kg/m2"
+set = { "base.overrides.radiators.warm.areal_kg_m2.optimistic" = 0.96, "base.overrides.radiators.hot.areal_kg_m2.optimistic" = 3.0 }
+evidence = "CALCULATED"
+
+[[breakthrough.levels]]
+key = "L1"
+label = "On: droplet sheet 0.5 kg/m2, hot panels 1.5 kg/m2"
+set = { "base.overrides.radiators.warm.areal_kg_m2.optimistic" = 0.5, "base.overrides.radiators.hot.areal_kg_m2.optimistic" = 1.5 }
+evidence = "EXTRAPOLATED"
+
+
+[[breakthrough]]
+id = "BT-005"
+name = "Advanced target delivery"
+summary = "Launch each fusion target fast enough that only one is in the open per pulse, without destroying it."
+limitation = "Only one target may be between the shield and the burn point at a time, so the launcher speed caps the pulse rate (f <= v / path). Demonstrated cryogenic target injection reaches about 400 m/s; layered D-3He targets survive about 1,000 g, and the only capsule that survives 30,000 g (gas-filled diamond) is not a defensible fusion target."
+weakest_links = ["WL-004"]
+basis = "GA/HAPL target injection and tracking (400 m/s), coilgun and railgun launchers, T00 Rev 4 and gate launcher studies."
+level = "C"
+evidence = "FICTIONAL_ASSUMPTION"
+development = "PROPOSED"
+canon = "NON_CANON"
+assumption = "A target that is both a working fusion target (BT-001's gain) and survives a launch to the stated speed, arriving with the required precision. Survival and gain are separate requirements; this record only asserts survival and precision."
+modifies = ["vertex.launcher_speed_m_s"]
+unchanged = "Target gain and design (set by BT-001), the one-target-in-flight rule, driver energy, path length (recomputed from the stand-off)."
+allowed = "A higher launcher speed, which lifts the pulse-rate cap."
+forbidden = "Any change to target gain; target mass removed from the exhaust; a launcher without power and mass (the coupled gate books them: 336 t and 3.1 GWe at 459 Hz)."
+energy = "Electrical launcher energy (small against the drive); not booked in the scenario grid, booked in the T00 coupled gate."
+depends_on = ["BT-001"]
+risks = "At the coupled ships' rates (320-560 Hz) the launcher needs 27.5 km/s and a 1.3 km barrel; the fill process for 3.5e10 targets at 196-560 Hz does not exist."
+validation = "Survival of a layered cryogenic D-3He target at the launch acceleration; placement accuracy at the burn point; a fill process at the pulse rate."
+references = ["S-GA-TARGET", "S-T00-GATE", "S-T00-REV4", "S-T04-STUDY"]
+atlas = ["VTX-01H", "VTX-01C"]
+materials = []
+penalties = { power = "Not booked in the grid (booked in the T00 coupled gate).", heat = "Not booked in the grid.", mass = "Not booked in the grid.", maintenance = "Not modelled.", booked = ["pulse-rate cap and its re-sizing"], unbooked = ["Launcher mass and power", "Target survival", "Fill process at the pulse rate"] }
+
+[[breakthrough.levels]]
+key = "L0"
+label = "0.4 km/s (demonstrated cryogenic target injection)"
+set = { "vertex.launcher_speed_m_s" = 400.0 }
+evidence = "DEMONSTRATED"
+
+[[breakthrough.levels]]
+key = "L1"
+label = "12 km/s (far beyond any surviving target)"
+set = { "vertex.launcher_speed_m_s" = 12000.0 }
+evidence = "UNVERIFIED"
+
+[[breakthrough.levels]]
+key = "L2"
+label = "Unconstrained (FDP-1's implicit assumption: targets always arrive)"
+set = { "vertex.launcher_speed_m_s" = "none" }
+evidence = "FICTIONAL_ASSUMPTION"
+
+
+[[breakthrough]]
+id = "BT-006"
+name = "Lightweight pulsed-power driver hardware"
+summary = "Build the heavy-ion driver's accelerator and pulsed power at 0.025 kg per kW of electrical input."
+limitation = "Driver hardware mass multiplies through the ship: at 0.05 kg/kW the otherwise-V4 ship grows to 199 kt, at 0.1 kg/kW it does not close. T01's volt-second scaling suggests far more than 0.05 kg/kW."
+weakest_links = ["WL-001", "WL-003"]
+basis = "Induction linac studies (heavy-ion fusion), high-temperature SiC power electronics, nanocrystalline cores. Consolidated from the T06 Level B package, where it is the most fragile lever."
+level = "B"
+evidence = "UNVERIFIED"
+development = "PROPOSED"
+canon = "NON_CANON"
+assumption = "Driver hardware 0.025 kg/kW (half FDP-1's optimistic tier)."
+modifies = ["base.overrides.pulsed.driver_kg_per_W.optimistic"]
+unchanged = "Driver wall-plug efficiency (0.30), its waste heat, pulse energy and repetition rate."
+allowed = "Lower driver hardware mass per W."
+forbidden = "Higher driver efficiency or less driver waste heat (a separate lever, not declared)."
+energy = "None: a mass property. The driver's electrical input and its losses are recomputed."
+depends_on = []
+risks = "Induction-core volt-seconds scale with beam energy and pulse length; no driver design reaches 0.025 kg/kW."
+validation = "A point design of a 168 MJ heavy-ion driver at 200-500 Hz with its cores, pulsed power and cooling, and its mass per kW."
+references = ["S-HIF-REVIEWS", "S-T01-HIF-EFF", "S-T06-STUDY", "S-CORE-CURIE"]
+atlas = ["VTX-01B"]
+materials = []
+penalties = { power = "Unchanged.", heat = "Unchanged (recomputed).", mass = "Recomputed: driver, then the whole ship.", maintenance = "Not modelled.", booked = ["driver"], unbooked = ["Driver cooling hardware beyond the warm loop"] }
+
+[[breakthrough.levels]]
+key = "L0"
+label = "Off: 0.05 kg/kW (FDP-1 optimistic tier)"
+set = { "base.overrides.pulsed.driver_kg_per_W.optimistic" = 5.0e-5 }
+evidence = "UNVERIFIED"
+
+[[breakthrough.levels]]
+key = "L1"
+label = "On: 0.025 kg/kW"
+set = { "base.overrides.pulsed.driver_kg_per_W.optimistic" = 2.5e-5 }
+evidence = "UNVERIFIED"
+
+
+# ---------------------------------------------------------------------------------------------------------------------------------------
+# Records with no calculator lever yet. They are listed so that a visitor sees the need, and are reported NOT_COMPUTED in every scenario.
+# ---------------------------------------------------------------------------------------------------------------------------------------
+
+[[breakthrough]]
+id = "BT-007"
+name = "Stiff lightweight long-span structure"
+summary = "A spine and tank-farm frame stiff enough for the coupled ship without adding mass that re-gears into propellant."
+limitation = "The drawn S5N spine reaches 0.110 Hz in frame FE against its 0.2 Hz target; with the coupled mass it falls to 0.066 Hz (lowest mode 0.028 Hz, inside the 0.022-0.040 Hz slosh band) and the keel ring is overstressed (1.64). Sized to the 0.2 Hz cantilever basis, the coupled ship does not converge."
+weakest_links = ["WL-006", "WL-003"]
+basis = "CFRP trusses; T05 frame FE of S5N; T00 gate beam model."
+level = "B"
+evidence = "UNVERIFIED"
+development = "PROPOSED"
+canon = "NON_CANON"
+assumption = "None declared yet: the owner has not chosen the stiffness criterion (0.2 Hz cantilever, free-free, or another), and no calculator lever exists in the scenario grid."
+modifies = []
+unchanged = "Everything."
+allowed = "Nothing until a lever and a criterion are defined."
+forbidden = "Treating a relaxed criterion as a material breakthrough."
+energy = "None."
+depends_on = []
+risks = "Joint flexibility makes the frame softer still (joints were rigid in the FE)."
+validation = "A stiffness criterion the owner accepts; shell and joint FE of the spine with the slosh modes."
+references = ["S-T05-GATE", "S-T00-GATE"]
+atlas = ["VTX-02D"]
+materials = ["MAT-CFRP"]
+penalties = { power = "None.", heat = "None.", mass = "Not computed.", maintenance = "None.", booked = [], unbooked = ["Spine mass at the chosen criterion"] }

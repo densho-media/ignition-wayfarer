@@ -1,0 +1,117 @@
+# Breakthrough Lab: the scientific reference and the experimental scenarios. Research records, NOT canon.
+#
+# [reference] is Layer A, the scientific reference model: the Vertex V3/V4 layout (T00 Phase 4, lab/variants/vertex-drive at the pinned
+# commit) with every research TARGET of the generations replaced by its present-evidence value. Its inputs are the calculator's own
+# paths. Each entry says why it is in the reference: a T01-T04 correction (CALCULATED from established physics), a published value
+# (LITERATURE_SUPPORTED), a layout choice (MODEL) or an owner decision. The levers (breakthroughs.toml, level L0) are the reference too.
+# Layer A uses FDP-1's optimistic engineering tier where a lever is not declared; that is stated, not hidden (the central tier is heavier).
+#
+# A scenario (Layer B) is the reference plus one level per breakthrough lever. compute.py solves every combination of the grid levers at
+# the unconstrained launcher level, then the launcher levels for every case that closes, then the coupled check (closure-coil hardware
+# and the A1 axis fix, T00 gate coupled.py) for every closing case. A combination outside the grid is NOT_COMPUTED; a level beyond a
+# breakthrough's `limit` is OUT_OF_RANGE. Nothing is interpolated.
+#
+# [[named]] scenarios are the stable, linkable ones. They are a selection of grid points, never new calculations.
+
+[reference]
+name = "Layer A: scientific reference"
+definition = "Vertex V3/V4 layout with every research target at its present-evidence value: heavy-ion coupling 0.15, best published nozzle efficiency 0.64, demonstrated target injection at 0.4 km/s, FDP-1 optimistic-tier structure, driver hardware and radiator mass."
+status = "SCIENTIFIC_REFERENCE"
+
+[[reference.input]]
+path = "drivers.gallery_radius_m.value"
+value = 4.5
+basis = "MODEL"
+why = "Driver galleries inside the 7.9 deg equipment-module cone (Atlas V1 layout; the calculator re-sizes the shield)."
+
+[[reference.input]]
+path = "integration.keep_idle_hydrogen_vessels.value"
+value = false
+basis = "OWNER_DECISION"
+why = "Hydrogen low gear out of the preferred configuration (owner 2026-11-09, T04 D-T04-2). Canon keeps the vessels."
+
+[[reference.input]]
+path = "base.overrides.pulsed.driver_efficiency.optimistic"
+value = 0.3
+basis = "LITERATURE_SUPPORTED"
+why = "Published heavy-ion wall-plug efficiency, upper end of 0.20-0.30."
+
+[[reference.input]]
+path = "base.overrides.radiators.warm.T_K.optimistic"
+value = 628.0
+basis = "CALCULATED"
+why = "T01 component circuits (cores 640 K, power stages 740 K, capacitors 550 K, dumps 1,000 K) booked as one equivalent radiator."
+
+[[reference.input]]
+path = "base.overrides.pulsed.house_fraction.value"
+value = 4.4e-5
+basis = "CALCULATED"
+why = "T01 bottom-up house load at its planning case (band 2.6e-5 to 1.2e-4)."
+
+[[reference.input]]
+path = "base.overrides.pulsed.nozzle_field_energy_ratio.value"
+value = 15.0
+basis = "CALCULATED"
+why = "T03: one pulse energy of field cannot stop the pulse; the closure-coil nozzle stores 15."
+
+[[reference.input]]
+path = "base.overrides.continuous.plume_to_hardware.value"
+value = 0.065
+basis = "CALCULATED"
+why = "T03 plume-strike share of the nozzle loss for the closure-coil nozzle (0.06-0.07)."
+
+[[reference.input]]
+path = "mission.payload"
+value = { source = "reference", reference_t = 1240.2 }
+basis = "CALCULATED"
+why = "T02 engine-side skirt (56 t) and LiH loop shoes (193 t) on the 990.2 t payload."
+
+[[reference.input]]
+path = "vertex.rho_g_cc"
+value = 2000.0
+basis = "MODEL"
+why = "Fuel density for the compression ceiling; 2,000 g/cm3 is the lightest closing density at coupling 0.5 (T06 frontier)."
+
+[grid]
+# Levers solved as a full product at BT-005 L2 (unconstrained launcher). BT-005's lower levels are solved only where that case closes:
+# a rate cap only adds a constraint, so a case that does not close unconstrained is reported NOT_COMPUTED (inferred: does not close).
+levers = ["BT-001", "BT-002", "BT-003", "BT-004", "BT-006"]
+launcher = "BT-005"
+launcher_free = "L2"
+
+[[named]]
+id = "SC-REF"
+name = "Scientific reference"
+layer = "A"
+levels = { "BT-001" = "L0", "BT-002" = "L0", "BT-003" = "L0", "BT-004" = "L0", "BT-005" = "L0", "BT-006" = "L0" }
+note = "What present evidence and established physics give, on the Vertex layout."
+
+[[named]]
+id = "SC-REF-FREE"
+name = "Reference with targets that always arrive"
+layer = "B"
+levels = { "BT-001" = "L0", "BT-002" = "L0", "BT-003" = "L0", "BT-004" = "L0", "BT-005" = "L2", "BT-006" = "L0" }
+note = "Only the launcher constraint removed: shows whether anything else would close."
+
+[[named]]
+id = "SC-V3"
+name = "Vertex V3 equivalent (corrections, coupling 0.5, ideal nozzle)"
+layer = "B"
+levels = { "BT-001" = "L2", "BT-002" = "L0", "BT-003" = "L2", "BT-004" = "L0", "BT-005" = "L2", "BT-006" = "L0" }
+note = "Reproduces the T00 V3 research target from its declared breakthroughs; the T00 generation must match."
+reproduces = "V3"
+
+[[named]]
+id = "SC-V4"
+name = "Vertex V4 equivalent (T06 Level B package)"
+layer = "B"
+levels = { "BT-001" = "L2", "BT-002" = "L1", "BT-003" = "L2", "BT-004" = "L1", "BT-005" = "L2", "BT-006" = "L1" }
+note = "Reproduces the T00 V4 preferred experimental configuration (42,916 t); the T00 generation must match."
+reproduces = "V4"
+
+[[named]]
+id = "SC-V4-12KMS"
+name = "V4 with a 12 km/s target launcher"
+layer = "B"
+levels = { "BT-001" = "L2", "BT-002" = "L1", "BT-003" = "L2", "BT-004" = "L1", "BT-005" = "L1", "BT-006" = "L1" }
+note = "The V4 breakthroughs with a finite (still unproven) launcher instead of FDP-1's implicit one."

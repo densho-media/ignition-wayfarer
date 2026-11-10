@@ -21,6 +21,7 @@ Status: ACTIVE, PARKED, SUPERSEDED (by which entry) or PROMOTED (into which `mai
 | [four-burn-mission](studies/four-burn-mission/NOTES.md) | Study | ACTIVE, engine of fdp1 | What drive and ship fly four 0.016 c burns, by tier | 92b83f0 | which tier to design to |
 | [graded-thermal-blade](studies/graded-thermal-blade/NOTES.md) | Study | PROMOTED 1f9eba1, kept as a tool | Radiator view-factor Monte Carlo and blade concepts | 90df1a9 | none |
 | [fdp1-requirements](problems/fdp1-requirements/NOTES.md) | Problem map | ACTIVE | Where FDP-1 fails: 0.016 c x4 closes, 1 g does not | e251f7c | V3 review; P11; shield mass OD-014 |
+| [breakthrough-lab](studies/breakthrough-lab/NOTES.md) | Study | ACTIVE | Which declared breakthroughs, and how few, make the Vertex drive close? | 279a612 (T00 43fac75, T05 c45ab4a imports) | which breakthroughs to select for experiment; spine stiffness criterion |
 
 Each entry's `NOTES.md` opens with the same table: kind, status, question, model base, the branch it came from, open owner
 questions and where its review file is.
@@ -32,7 +33,8 @@ questions and where its review file is.
   a problem map's `site.py --json` and `--compare` (the 3D comparison's blockout and problem pairs) as the website's Engineering pages. Everything here is public: write it for outside engineers.
   Lab code may read `data/` and `src/`.
 - Run lab scripts from the repository root (`python3 lab/variants/fdp1/run.py`). Their tests are not part of the pipeline:
-  `python3 lab/variants/fdp1/tests/test_fdp1.py`, `python3 lab/studies/four-burn-mission/tests/test_fourburn.py`.
+  `python3 lab/variants/fdp1/tests/test_fdp1.py`, `python3 lab/studies/four-burn-mission/tests/test_fourburn.py`,
+  `python3 lab/studies/breakthrough-lab/tests/test_breakthrough_lab.py`.
 - A lab number reaches canon only through its Drive owner workbook and the normal loop (AGENTS.md).
 - `.blend` files and renders stay out of Git; the entry's script rebuilds them, and the review copy sits in the project files
   `review/` folder or on GitHub Pages.

@@ -1,0 +1,71 @@
+{
+ "thread": "T00",
+ "name": "Vertex T00 integration and feasibility gate",
+ "branch": "claude/project-thread-9rsgog",
+ "commit": "43fac754c15fbc249f9b16a6af49b29698e96616",
+ "folder": "t00-43fac75",
+ "base": "lab/variants/vertex-drive/",
+ "status": "RESEARCH, NON-CANON, read-only snapshot",
+ "files": [
+  {
+   "path": "registry/sources.toml",
+   "source_path": "lab/variants/vertex-drive/registry/sources.toml",
+   "sha256": "2cf601357969a70967f740436194a346cd900fd978993632f2e0cf9375958e44",
+   "bytes": 49424
+  },
+  {
+   "path": "registry/technologies.toml",
+   "source_path": "lab/variants/vertex-drive/registry/technologies.toml",
+   "sha256": "5293d5f4396d719127ea2c1960f0493d068172c5f28f121c7645e39095db3136",
+   "bytes": 142197
+  },
+  {
+   "path": "registry/generations.toml",
+   "source_path": "lab/variants/vertex-drive/registry/generations.toml",
+   "sha256": "e658b51401b31c3a4a278a1da756fe7bf3d783b91da76f23ee1c4db91ff8b176",
+   "bytes": 20907
+  },
+  {
+   "path": "results/convergence.json",
+   "source_path": "lab/variants/vertex-drive/results/convergence.json",
+   "sha256": "1a3109fbcf16f5e6a2e192141fcb49b821bf118915cf6e4cf0178f7c85eae601",
+   "bytes": 171165
+  },
+  {
+   "path": "studies/gate/REPORT.md",
+   "source_path": "lab/variants/vertex-drive/studies/gate/REPORT.md",
+   "sha256": "6e96e4a63ba561f6cfd44573fee84323e35ab04a0098092048320da77baeba9f",
+   "bytes": 19255
+  },
+  {
+   "path": "studies/gate/results/coupled.json",
+   "source_path": "lab/variants/vertex-drive/studies/gate/results/coupled.json",
+   "sha256": "7f25eab987eff2fa385942ec40cd0de90fa70807c2e734c373818f961ff8f8f3",
+   "bytes": 120162
+  },
+  {
+   "path": "studies/gate/results/target.json",
+   "source_path": "lab/variants/vertex-drive/studies/gate/results/target.json",
+   "sha256": "8bc4550a786515dfb918f292aa31bec0c5742d7922fa660855a3e5bf12a9c5b7",
+   "bytes": 6434
+  },
+  {
+   "path": "studies/gate/results/axis_base.json",
+   "source_path": "lab/variants/vertex-drive/studies/gate/results/axis_base.json",
+   "sha256": "e1769d2ee78dde80a9dd2fcaa18541f4e10fe78666831a0e23f9210bf818f36a",
+   "bytes": 9270
+  },
+  {
+   "path": "studies/gate/results/structure.json",
+   "source_path": "lab/variants/vertex-drive/studies/gate/results/structure.json",
+   "sha256": "52cdb7cd0382d2202b809c4b150493a3f4b74a0b0d4194400cacc6f1aa46e1e4",
+   "bytes": 29327
+  },
+  {
+   "path": "studies/gate/results/concepts.json",
+   "source_path": "lab/variants/vertex-drive/studies/gate/results/concepts.json",
+   "sha256": "911ac429287604e7992ec65fe87e62ed73d7b9dbbdc78a0e2a1d10618c4d4d73",
+   "bytes": 58675
+  }
+ ]
+}

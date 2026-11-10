@@ -1,0 +1,53 @@
+# Breakthrough Lab: sources this study adds. The literature sources are the Technology Atlas registry (imported read-only from T00 in
+# imports/t00-43fac75/registry/sources.toml) and are cited by the same IDs; this file adds the Wayfarer research results the register and
+# the breakthroughs rest on. `nature`: SCIENTIFIC (published literature or data), PROJECT_MODEL (a Wayfarer calculation: a result of a model,
+# not a demonstration), FICTIONAL (IGNITION canon or a declared fictional property). Imported Atlas sources of kind "canon" count as FICTIONAL,
+# kind "model" as PROJECT_MODEL, every other kind as SCIENTIFIC (site.py applies this when it shows them).
+
+[S-T00-GATE]
+title = "Vertex propulsion feasibility gate: T00 report (axis leak, coupled ship, gas-capsule target, spine)"
+locator = "lab/variants/vertex-drive/studies/gate/REPORT.md at 43fac75 (copy: imports/t00-43fac75/studies/gate/REPORT.md)"
+url = "https://github.com/densho-media/ignition-wayfarer/blob/43fac754c15fbc249f9b16a6af49b29698e96616/lab/variants/vertex-drive/studies/gate/REPORT.md"
+nature = "PROJECT_MODEL"
+
+[S-T00-REV4]
+title = "Vertex Revision 4 joint report (coil hardware, launcher B variants, durability)"
+locator = "lab/variants/vertex-drive/planning/REV4_JOINT_REPORT.md at 43fac75"
+url = "https://github.com/densho-media/ignition-wayfarer/blob/43fac754c15fbc249f9b16a6af49b29698e96616/lab/variants/vertex-drive/planning/REV4_JOINT_REPORT.md"
+nature = "PROJECT_MODEL"
+
+[S-T00-ATLAS]
+title = "Vertex Drive Technology Atlas and generations V0-V5 (convergence.json)"
+locator = "lab/variants/vertex-drive/results/CONVERGENCE.md at 43fac75 (copy: imports/t00-43fac75/results/convergence.json)"
+url = "https://github.com/densho-media/ignition-wayfarer/blob/43fac754c15fbc249f9b16a6af49b29698e96616/lab/variants/vertex-drive/results/CONVERGENCE.md"
+nature = "PROJECT_MODEL"
+
+[S-T05-GATE]
+title = "Vertex propulsion feasibility gate: T05 report (A1 drawn, S5N frame FE)"
+locator = "work/vertex-blender/GATE_REPORT.md at c45ab4a (copy: imports/t05-c45ab4a/GATE_REPORT.md)"
+url = "https://github.com/densho-media/ignition-wayfarer/blob/c45ab4adaa82553c586720fdedcbea305502eca6/work/vertex-blender/GATE_REPORT.md"
+nature = "PROJECT_MODEL"
+
+[S-T05-SCREEN]
+title = "Vertex T05 true-scale screen of the generations (layout envelopes, radiator alternatives)"
+locator = "work/vertex-blender/screen.json at c45ab4a (copy: imports/t05-c45ab4a/screen.json)"
+url = "https://github.com/densho-media/ignition-wayfarer/blob/c45ab4adaa82553c586720fdedcbea305502eca6/work/vertex-blender/screen.json"
+nature = "PROJECT_MODEL"
+
+[S-FDP1-REQ]
+title = "FDP-1 requirements problem map P01-P11"
+locator = "lab/problems/fdp1-requirements/"
+url = "https://github.com/densho-media/ignition-wayfarer/tree/main/lab/problems/fdp1-requirements"
+nature = "PROJECT_MODEL"
+
+[S-BTLAB-GRID]
+title = "Breakthrough Lab scenario grid (this study's compute.py over the pinned T00 calculators)"
+locator = "lab/studies/breakthrough-lab/results/scenarios.json"
+url = "https://github.com/densho-media/ignition-wayfarer/blob/main/lab/studies/breakthrough-lab/results/scenarios.json"
+nature = "PROJECT_MODEL"
+
+[S-FIJI-CARD]
+title = "IGNITION canon: the Fiji lattice capability card (amplification and stabilisation of an applied field only)"
+locator = "Technology Atlas VTX-02A; Drive canon workbooks"
+url = "https://github.com/densho-media/ignition-wayfarer/blob/43fac754c15fbc249f9b16a6af49b29698e96616/lab/variants/vertex-drive/ATLAS.md"
+nature = "FICTIONAL"
