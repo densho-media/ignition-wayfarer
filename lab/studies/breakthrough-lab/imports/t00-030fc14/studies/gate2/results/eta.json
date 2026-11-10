@@ -1,0 +1,78 @@
+{
+ "study": "Gate 2 Task D: eta_T vs FDP-1 closure (V4 alone)",
+ "status": "MODEL, research only, NON-CANON",
+ "rows": [
+  {
+   "eta_T": 0.82,
+   "converged": true,
+   "departure_t": 32679.501708784694,
+   "rate_Hz": 202.50223374108467,
+   "reason": null
+  },
+  {
+   "eta_T": 0.8,
+   "converged": true,
+   "departure_t": 39136.83653218518,
+   "rate_Hz": 196.99793919808585,
+   "reason": null
+  },
+  {
+   "eta_T": 0.791,
+   "converged": true,
+   "departure_t": 42915.783853018824,
+   "rate_Hz": 195.73784854631526,
+   "reason": null
+  },
+  {
+   "eta_T": 0.78,
+   "converged": true,
+   "departure_t": 48580.22215293813,
+   "rate_Hz": 195.50010636994892,
+   "reason": null
+  },
+  {
+   "eta_T": 0.765,
+   "converged": true,
+   "departure_t": 58615.31996255792,
+   "rate_Hz": 197.0631511095039,
+   "reason": null
+  },
+  {
+   "eta_T": 0.75,
+   "converged": true,
+   "departure_t": 72512.73608000515,
+   "rate_Hz": 201.28862157760474,
+   "reason": null
+  },
+  {
+   "eta_T": 0.74,
+   "converged": true,
+   "departure_t": 84918.6338247279,
+   "rate_Hz": 205.95685941326641,
+   "reason": null
+  },
+  {
+   "eta_T": 0.72,
+   "converged": true,
+   "departure_t": 121968.40113780872,
+   "rate_Hz": 221.31913426730574,
+   "reason": null
+  },
+  {
+   "eta_T": 0.7,
+   "converged": true,
+   "departure_t": 189195.07295254592,
+   "rate_Hz": 248.8387634671769,
+   "reason": null
+  },
+  {
+   "eta_T": 0.67,
+   "converged": true,
+   "departure_t": 451046.77703702444,
+   "rate_Hz": 338.92696601448193,
+   "reason": null
+  }
+ ],
+ "closure_threshold_eta_T": 0.62975048828125,
+ "d_departure_d_eta_near_V4_t_per_0.01": null
+}

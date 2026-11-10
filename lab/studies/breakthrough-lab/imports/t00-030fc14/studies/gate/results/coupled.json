@@ -1,0 +1,3495 @@
+{
+ "study": "Feasibility gate Phase 2: self-consistent coupled ship (T00)",
+ "status": "MODEL, research only, NON-CANON",
+ "v4_reference": {
+  "converged": true,
+  "departure_t": 42915.783853018824,
+  "a0_g": 0.006895573489099627,
+  "fusion_TW": 35.71976022315651,
+  "radiator_t": 3572.4500289867,
+  "hot_km2": 0.4616189354301207,
+  "warm_km2": 4.951041268491101,
+  "drive_t": 7357.663508307523,
+  "propellant_t": 27116.059611797376,
+  "tank_t": 2544.7683195441664,
+  "end_t": 15799.724241221445,
+  "xray_standoff_m": null,
+  "payload_t": 1240.2,
+  "wing_tip_radius_m": 10127.573934427086,
+  "pellet_rate_Hz": 195.73784854631526
+ },
+ "axis_concept_booked": {
+  "concept": "A1: C1 and C2 tilted 14 deg as a rigid pair, whole nozzle turned 2.7 deg so the thrust passes through the centre of mass",
+  "leak_direction_polar_deg": 10.828821274840449,
+  "leak_radius_deg": 2.9884841042408197,
+  "leak_share_of_plasma": 0.0006740201451488044,
+  "C1_conductor_min_polar_deg": 8.68337376993094,
+  "status": "ANALYTICALLY PROMISING (vacuum-field thin shell); NOT a demonstrated plasma solution",
+  "nozzle_efficiency_factor": 0.9833370623779447,
+  "booked_kg": 0.0,
+  "house_W": 0.0,
+  "booked_note": "no added conductor; the pulsed side load and the re-placed C1/C2 supports are inside the coil strut booking (PROTOTYPE); the thrust loss is booked as a nozzle-efficiency factor"
+ },
+ "cases": [
+  {
+   "label": "Rev 4 method: coils only, rate free, one pass",
+   "rate_cap_Hz": null,
+   "items": [
+    "coils"
+   ],
+   "J_e_A_mm2": 150.0,
+   "status": "SINGLE PASS (Rev 4 method)",
+   "iterations": 1,
+   "departure_trajectory_t": [
+    42915.783853018824,
+    68472.42098165506
+   ],
+   "history": [
+    {
+     "departure_t": 68472.42098165506,
+     "rate_Hz": 312.2996954216142,
+     "stand_off_m": 64.69949524279637,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2049.938747042391
+     }
+    }
+   ],
+   "added_kg": {
+    "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2049938.7470423908
+   },
+   "final_set": {
+    "base.overrides.continuous.plume_to_hardware.value": 0.06583547319977415,
+    "base.overrides.pulsed.house_fraction.value": 4.442946847033061e-05,
+    "mission.payload.reference_t": 3290.1387470423906
+   },
+   "summary": {
+    "converged": true,
+    "departure_t": 68472.42098165506,
+    "a0_g": 0.006895573489099627,
+    "fusion_TW": 56.99114421492967,
+    "radiator_t": 5719.647426362787,
+    "hot_km2": 0.7457949700525062,
+    "warm_km2": 7.901093583435159,
+    "drive_t": 10408.030666763989,
+    "propellant_t": 43263.85498309006,
+    "tank_t": 4060.1949479316445,
+    "end_t": 25208.565998565005,
+    "xray_standoff_m": null,
+    "payload_t": 3290.1387470423906,
+    "wing_tip_radius_m": 16189.857626210485,
+    "pellet_rate_Hz": 312.2996954216142
+   },
+   "fusion": {
+    "yield_per_pulse_GJ": 182.4886332497873,
+    "pellet_rate_Hz": 312.2996954216142,
+    "fuel_g": 0.7721602707064897,
+    "target_gain": 1084.3326176985665,
+    "driver_MJ": 168.29580727462476,
+    "stand_off_m": 64.69949524279637,
+    "thrust_MN": 4.630274627846772,
+    "peak_accel_g": 0.018730006731935766,
+    "jet_TW": 44.453349953471914,
+    "mass_flow_kg_s": 0.2411454159441485
+   },
+   "heat_rejection": {
+    "hot_km2": 0.7457949700525062,
+    "warm_km2": 7.901093583435159,
+    "radiator_t": 5719.647426362787,
+    "coil_hot_GW": 6.14031568447899,
+    "coil_warm_GW": 0.015340510783615112
+   },
+   "coils": [
+    {
+     "name": "C1",
+     "radius_m": 22.128530636039635,
+     "distance_m": 64.69949524279637,
+     "z_from_burn_m": 60.797638248228736,
+     "current_A": 162127298.6996426,
+     "winding_minor_m": 1.2970183895971408,
+     "stored_J": 1157147540138.4524
+    },
+    {
+     "name": "C2",
+     "radius_m": 41.5880338950427,
+     "distance_m": 64.69949524279637,
+     "z_from_burn_m": 49.562688803346916,
+     "current_A": 13032129.558896322,
+     "winding_minor_m": 0.10425703647117057,
+     "stored_J": 28039415995.223686
+    }
+   ],
+   "coil_scale_from_V4": 1.0000016869604385,
+   "propellant_t": 43263.85498309006
+  },
+  {
+   "label": "coils only, rate free",
+   "rate_cap_Hz": null,
+   "items": [
+    "coils"
+   ],
+   "J_e_A_mm2": 150.0,
+   "status": "CONVERGED",
+   "iterations": 5,
+   "departure_trajectory_t": [
+    42915.783853018824,
+    68472.42098165506,
+    70071.47621312356,
+    70166.9669449297,
+    70172.65662675408,
+    70172.99556988709
+   ],
+   "history": [
+    {
+     "departure_t": 68472.42098165506,
+     "rate_Hz": 312.2996954216142,
+     "stand_off_m": 64.69949524279637,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2049.938747042391
+     }
+    },
+    {
+     "departure_t": 70071.47621312356,
+     "rate_Hz": 319.59307346740457,
+     "stand_off_m": 64.69948255000266,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2179.4831907722014
+     }
+    },
+    {
+     "departure_t": 70166.9669449297,
+     "rate_Hz": 320.02860837628214,
+     "stand_off_m": 64.69948209441714,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2187.2175077296347
+     }
+    },
+    {
+     "departure_t": 70172.65662675408,
+     "rate_Hz": 320.0545684601906,
+     "stand_off_m": 64.69948146285535,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2187.6783837543635
+     }
+    },
+    {
+     "departure_t": 70172.99556988709,
+     "rate_Hz": 320.0561129520257,
+     "stand_off_m": 64.69948155236418,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2187.705821364859
+     }
+    }
+   ],
+   "loop_gain": 0.05957154432828338,
+   "added_kg": {
+    "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2187705.8213648587
+   },
+   "final_set": {
+    "base.overrides.continuous.plume_to_hardware.value": 0.06583562869690597,
+    "base.overrides.pulsed.house_fraction.value": 4.436861646678221e-05,
+    "mission.payload.reference_t": 3427.9058213648586
+   },
+   "summary": {
+    "converged": true,
+    "departure_t": 70172.99556988709,
+    "a0_g": 0.006895573489099627,
+    "fusion_TW": 58.40656734338113,
+    "radiator_t": 5861.601679261253,
+    "hot_km2": 0.7643258461945471,
+    "warm_km2": 8.097107383919726,
+    "drive_t": 10610.568444863135,
+    "propellant_t": 44338.352004203276,
+    "tank_t": 4161.033540167233,
+    "end_t": 25834.643565683815,
+    "xray_standoff_m": null,
+    "payload_t": 3427.9058213648586,
+    "wing_tip_radius_m": 16592.003224385946,
+    "pellet_rate_Hz": 320.0561129520257
+   },
+   "fusion": {
+    "yield_per_pulse_GJ": 182.4885230281453,
+    "pellet_rate_Hz": 320.0561129520257,
+    "fuel_g": 0.7721598503771648,
+    "target_gain": 1084.3326176985665,
+    "driver_MJ": 168.29570562533354,
+    "stand_off_m": 64.69948155236418,
+    "thrust_MN": 4.745271691712256,
+    "peak_accel_g": 0.018730006731935773,
+    "jet_TW": 45.55738915945987,
+    "mass_flow_kg_s": 0.24713448074635744
+   },
+   "heat_rejection": {
+    "hot_km2": 0.7643258461945471,
+    "warm_km2": 8.097107383919726,
+    "radiator_t": 5861.601679261253,
+    "coil_hot_GW": 10.042050281588837,
+    "coil_warm_GW": 0.021529518501159667
+   },
+   "coils": [
+    {
+     "name": "C1",
+     "radius_m": 22.128525953636053,
+     "distance_m": 64.69948155236418,
+     "z_from_burn_m": 60.79762538343063,
+     "current_A": 162127267.24755394,
+     "winding_minor_m": 1.2970181379804315,
+     "stored_J": 1157146839887.6128
+    },
+    {
+     "name": "C2",
+     "radius_m": 41.588025095002514,
+     "distance_m": 64.69948155236418,
+     "z_from_burn_m": 49.5626783158674,
+     "current_A": 13032127.030712001,
+     "winding_minor_m": 0.10425701624569601,
+     "stored_J": 28039399104.869823
+    }
+   ],
+   "coil_scale_from_V4": 1.0000014753597877,
+   "propellant_t": 44338.352004203276
+  },
+  {
+   "label": "coils + launcher, rate free",
+   "rate_cap_Hz": null,
+   "items": [
+    "coils",
+    "launcher"
+   ],
+   "J_e_A_mm2": 150.0,
+   "status": "CONVERGED",
+   "iterations": 6,
+   "departure_trajectory_t": [
+    42915.783853018824,
+    69334.68272319513,
+    72395.83113676214,
+    72787.0500162785,
+    72837.64557946468,
+    72844.19873831888,
+    72845.04781769382
+   ],
+   "history": [
+    {
+     "departure_t": 69334.68272319513,
+     "rate_Hz": 316.21209142399954,
+     "stand_off_m": 64.701110402281,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2049.938747042391,
+      "launcher B-ray": 53.97674032163315
+     }
+    },
+    {
+     "departure_t": 72395.83113676214,
+     "rate_Hz": 330.13893918312937,
+     "stand_off_m": 64.70369763236093,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2183.7304036037444,
+      "launcher B-ray": 140.87633151678972
+     }
+    },
+    {
+     "departure_t": 72787.0500162785,
+     "rate_Hz": 331.91796349541005,
+     "stand_off_m": 64.70407658755177,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2198.5934824661836,
+      "launcher B-ray": 153.57152077656932
+     }
+    },
+    {
+     "departure_t": 72837.64557946468,
+     "rate_Hz": 332.1480392129039,
+     "stand_off_m": 64.70412557905324,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2200.4871593178937,
+      "launcher B-ray": 155.23297581596395
+     }
+    },
+    {
+     "departure_t": 72844.19873831888,
+     "rate_Hz": 332.1778372423247,
+     "stand_off_m": 64.70413201362568,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2200.731943314062,
+      "launcher B-ray": 155.44850083768847
+     }
+    },
+    {
+     "departure_t": 72845.04781769382,
+     "rate_Hz": 332.18169427671313,
+     "stand_off_m": 64.70413308688487,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2200.7636487256245,
+      "launcher B-ray": 155.47642575712908
+     }
+    }
+   ],
+   "loop_gain": 0.12956795246797365,
+   "added_kg": {
+    "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2200763.6487256247,
+    "launcher B-ray": 155476.42575712907
+   },
+   "final_set": {
+    "base.overrides.continuous.plume_to_hardware.value": 0.06583558133616578,
+    "base.overrides.pulsed.house_fraction.value": 6.405542219136377e-05,
+    "mission.payload.reference_t": 3596.4400744827535
+   },
+   "summary": {
+    "converged": true,
+    "departure_t": 72845.04781769382,
+    "a0_g": 0.006895573489099627,
+    "fusion_TW": 60.63180709504799,
+    "radiator_t": 6125.017025943837,
+    "hot_km2": 0.7934981527309977,
+    "warm_km2": 8.48079936895461,
+    "drive_t": 10936.375332257412,
+    "propellant_t": 46026.67088206684,
+    "tank_t": 4319.477667660298,
+    "end_t": 26818.376935626973,
+    "xray_standoff_m": null,
+    "payload_t": 3596.4400744827535,
+    "wing_tip_radius_m": 17365.88193398545,
+    "pellet_rate_Hz": 332.18169427671313
+   },
+   "fusion": {
+    "yield_per_pulse_GJ": 182.52603361261876,
+    "pellet_rate_Hz": 332.18169427671313,
+    "fuel_g": 0.7723028955269962,
+    "target_gain": 1084.3326176985665,
+    "driver_MJ": 168.33029887085732,
+    "stand_off_m": 64.70413308688487,
+    "thrust_MN": 4.925962480060681,
+    "peak_accel_g": 0.01873000673193577,
+    "jet_TW": 47.29212661963435,
+    "mass_flow_kg_s": 0.25654488484021126
+   },
+   "heat_rejection": {
+    "hot_km2": 0.7934981527309977,
+    "warm_km2": 8.48079936895461,
+    "radiator_t": 6125.017025943837,
+    "coil_hot_GW": 10.423770201434317,
+    "coil_warm_GW": 0.022133160964660645
+   },
+   "coils": [
+    {
+     "name": "C1",
+     "radius_m": 22.130116872139503,
+     "distance_m": 64.70413308688487,
+     "z_from_burn_m": 60.80199639609505,
+     "current_A": 162138159.37714005,
+     "winding_minor_m": 1.2971052750171204,
+     "stored_J": 1157387251237.1848
+    },
+    {
+     "name": "C2",
+     "radius_m": 41.59101504375844,
+     "distance_m": 64.70413308688487,
+     "z_from_burn_m": 49.56624159803896,
+     "current_A": 13033002.562748102,
+     "winding_minor_m": 0.10426402050198483,
+     "stored_J": 28045203812.464283
+    }
+   ],
+   "coil_scale_from_V4": 1.0000733699294468,
+   "launcher": {
+    "tip_m": 56.554149069510224,
+    "target_g": 1.566733843223809,
+    "muzzle_m_s": 18786.253056287707,
+    "accelerator_m": 599.8026915322413,
+    "launcher_kg": 155480.041725805,
+    "electric_W": 918377555.2318988,
+    "sabot_catcher_W": 275513266.56956965,
+    "tip_xray_J_cm2": 5.23594520019581,
+    "rate_Hz": 332.18169427671313,
+    "fits_gas_capsule": true
+   },
+   "propellant_t": 46026.67088206684
+  },
+  {
+   "label": "coils + launcher + axis A1, rate free",
+   "rate_cap_Hz": null,
+   "items": [
+    "coils",
+    "launcher"
+   ],
+   "J_e_A_mm2": 150.0,
+   "status": "CONVERGED",
+   "iterations": 7,
+   "departure_trajectory_t": [
+    42915.783853018824,
+    77998.42495102414,
+    84271.42972220863,
+    85096.0430628693,
+    85206.9607019681,
+    85221.92317581712,
+    85223.94257322905,
+    85224.21498496081
+   ],
+   "history": [
+    {
+     "departure_t": 77998.42495102414,
+     "rate_Hz": 305.97363622266624,
+     "stand_off_m": 68.58760159047205,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2049.938747042391,
+      "launcher B-ray": 53.97674032163315
+     }
+    },
+    {
+     "departure_t": 84271.42972220863,
+     "rate_Hz": 330.5456461427533,
+     "stand_off_m": 68.59047462885823,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2402.9849702584233,
+      "launcher B-ray": 148.9504566676092
+     }
+    },
+    {
+     "departure_t": 85096.0430628693,
+     "rate_Hz": 333.770321214302,
+     "stand_off_m": 68.59125133640286,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2431.7976310206386,
+      "launcher B-ray": 173.85000979077222
+     }
+    },
+    {
+     "departure_t": 85206.9607019681,
+     "rate_Hz": 334.2040299196594,
+     "stand_off_m": 68.59135770277663,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2435.5752609221577,
+      "launcher B-ray": 177.26277633340322
+     }
+    },
+    {
+     "departure_t": 85221.92317581712,
+     "rate_Hz": 334.26253540328685,
+     "stand_off_m": 68.5913721216767,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2436.08299458344,
+      "launcher B-ray": 177.72433006504195
+     }
+    },
+    {
+     "departure_t": 85223.94257322905,
+     "rate_Hz": 334.2704142421266,
+     "stand_off_m": 68.59137515630856,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2436.151478261954,
+      "launcher B-ray": 177.78663815925506
+     }
+    },
+    {
+     "departure_t": 85224.21498496081,
+     "rate_Hz": 334.2714857944359,
+     "stand_off_m": 68.59137499823579,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2436.160760182457,
+      "launcher B-ray": 177.79503586706673
+     }
+    }
+   ],
+   "loop_gain": 0.13489753435659183,
+   "added_kg": {
+    "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2436160.760182457,
+    "launcher B-ray": 177795.03586706673
+   },
+   "final_set": {
+    "base.overrides.continuous.plume_to_hardware.value": 0.06573166096599381,
+    "base.overrides.pulsed.house_fraction.value": 6.58915493393361e-05,
+    "mission.payload.reference_t": 3854.155796049524,
+    "base.overrides.pulsed.nozzle_efficiency.optimistic": 0.7778196163409543
+   },
+   "summary": {
+    "converged": true,
+    "departure_t": 85224.21498496081,
+    "a0_g": 0.006895573489099627,
+    "fusion_TW": 72.09617662126773,
+    "radiator_t": 7400.015864893044,
+    "hot_km2": 0.9990678157441786,
+    "warm_km2": 10.091544776535184,
+    "drive_t": 12914.218710759707,
+    "propellant_t": 53848.367346977255,
+    "tank_t": 5053.522572402188,
+    "end_t": 31375.847637983552,
+    "xray_standoff_m": null,
+    "payload_t": 3854.155796049524,
+    "wing_tip_radius_m": 20770.40877671039,
+    "pellet_rate_Hz": 334.2714857944359
+   },
+   "fusion": {
+    "yield_per_pulse_GJ": 215.68150346393625,
+    "pellet_rate_Hz": 334.2714857944359,
+    "fuel_g": 0.8978979984929332,
+    "target_gain": 1084.3326176985665,
+    "driver_MJ": 198.9071433834646,
+    "stand_off_m": 68.59137499823579,
+    "thrust_MN": 5.763072411719544,
+    "peak_accel_g": 0.01873000673193577,
+    "jet_TW": 55.32887254346379,
+    "mass_flow_kg_s": 0.30014169904359
+   },
+   "heat_rejection": {
+    "hot_km2": 0.9990678157441786,
+    "warm_km2": 10.091544776535184,
+    "radiator_t": 7400.015864893044,
+    "coil_hot_GW": 11.544354450879943,
+    "coil_warm_GW": 0.02256948292626953
+   },
+   "coils": [
+    {
+     "name": "C1",
+     "radius_m": 23.459631907801292,
+     "distance_m": 68.59137499823579,
+     "z_from_burn_m": 64.45480893540123,
+     "current_A": 171232040.0074581,
+     "winding_minor_m": 1.3698563200596647,
+     "stored_J": 1370038249571.4993
+    },
+    {
+     "name": "C2",
+     "radius_m": 44.089685980229035,
+     "distance_m": 68.59137499823579,
+     "z_from_burn_m": 52.544041663288525,
+     "current_A": 13763987.606710376,
+     "winding_minor_m": 0.11011190085368301,
+     "stored_J": 33178351065.876194
+    }
+   ],
+   "coil_scale_from_V4": 1.0601549587329862,
+   "launcher": {
+    "tip_m": 59.95176291635037,
+    "target_g": 1.7828755535715417,
+    "muzzle_m_s": 20040.1648660442,
+    "accelerator_m": 682.5440013634156,
+    "launcher_kg": 177796.17489989512,
+    "electric_W": 1196721094.1991122,
+    "sabot_catcher_W": 359016328.2597336,
+    "tip_xray_J_cm2": 5.235945200195809,
+    "rate_Hz": 334.2714857944359,
+    "fits_gas_capsule": true
+   },
+   "propellant_t": 53848.367346977255
+  },
+  {
+   "label": "full: + spine cantilever 0.2 Hz (T05 basis), rate free",
+   "rate_cap_Hz": null,
+   "items": [
+    "coils",
+    "launcher",
+    "spine",
+    [
+     "cantilever",
+     0.2
+    ]
+   ],
+   "J_e_A_mm2": 150.0,
+   "status": "NON-CONVERGING (diverges past 400 kt)",
+   "iterations": 4,
+   "departure_trajectory_t": [
+    42915.783853018824,
+    105174.95311768529,
+    168504.78919131745,
+    262865.81608061143,
+    499072.33032683196
+   ],
+   "history": [
+    {
+     "departure_t": 105174.95311768529,
+     "rate_Hz": 412.5821223886533,
+     "stand_off_m": 68.58760745735374,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2049.938747042391,
+      "spine N9 over S2 keels": 1968.8464040565864,
+      "shadow shield growth (wide farm)": 98.42652993461952,
+      "launcher B-ray": 53.97674032163315
+     }
+    },
+    {
+     "departure_t": 168504.78919131745,
+     "rate_Hz": 660.8466145101462,
+     "stand_off_m": 68.59429744215929,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2524.8332315717553,
+      "spine N9 over S2 keels": 5080.118482891407,
+      "shadow shield growth (wide farm)": 989.27970072856,
+      "launcher B-ray": 270.8287170575215
+     }
+    },
+    {
+     "departure_t": 262865.81608061143,
+     "rate_Hz": 1000.0,
+     "stand_off_m": 69.26885057540973,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2794.1625326656763,
+      "spine N9 over S2 keels": 10104.156810419743,
+      "shadow shield growth (wide farm)": 1901.3271410302855,
+      "launcher B-ray": 694.966313865737
+     }
+    },
+    {
+     "departure_t": 499072.33032683196,
+     "rate_Hz": 1000.0,
+     "stand_off_m": 85.09796160922703,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 3193.0478621575407,
+      "spine N9 over S2 keels": 21168.60784511652,
+      "shadow shield growth (wide farm)": 3290.307066422254,
+      "launcher B-ray": 1624.353296772033
+     }
+    }
+   ],
+   "loop_gain": 2.503221107622559,
+   "added_kg": {
+    "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 3193047.862157541,
+    "spine N9 over S2 keels": 21168607.84511652,
+    "shadow shield growth (wide farm)": 3290307.0664222543,
+    "launcher B-ray": 1624353.296772033
+   },
+   "final_set": {
+    "base.overrides.continuous.plume_to_hardware.value": 0.06572197653583858,
+    "base.overrides.pulsed.house_fraction.value": 0.00023986641902118644,
+    "mission.payload.reference_t": 30516.516070468348,
+    "base.overrides.pulsed.nozzle_efficiency.optimistic": 0.7778196163409543
+   },
+   "summary": {
+    "converged": true,
+    "departure_t": 499072.33032683196,
+    "a0_g": 0.006895573489099627,
+    "fusion_TW": 421.2786079821588,
+    "radiator_t": 45672.19626488916,
+    "hot_km2": 5.832286034409365,
+    "warm_km2": 63.56221277444826,
+    "drive_t": 65111.321230636524,
+    "propellant_t": 315335.61419009394,
+    "tank_t": 29823.258003140243,
+    "end_t": 183736.716136738,
+    "xray_standoff_m": null,
+    "payload_t": 30516.516070468348,
+    "wing_tip_radius_m": 130056.04367188989,
+    "pellet_rate_Hz": 1000.0
+   },
+   "fusion": {
+    "yield_per_pulse_GJ": 421.27860798215835,
+    "pellet_rate_Hz": 1000.0,
+    "fuel_g": 1.6514078874621658,
+    "target_gain": 1084.3326176985665,
+    "driver_MJ": 388.514189378807,
+    "stand_off_m": 85.09796160922703,
+    "thrust_MN": 33.748506558455226,
+    "peak_accel_g": 0.01873000673193577,
+    "jet_TW": 324.00544093595374,
+    "mass_flow_kg_s": 1.7576274207556202
+   },
+   "heat_rejection": {
+    "hot_km2": 5.832286034409365,
+    "warm_km2": 63.56221277444826,
+    "radiator_t": 45672.19626488916,
+    "coil_hot_GW": 35.1362445476212,
+    "coil_warm_GW": 0.054003298431396486
+   },
+   "coils": [
+    {
+     "name": "C1",
+     "radius_m": 29.105217026310083,
+     "distance_m": 85.09796160922703,
+     "z_from_burn_m": 79.96592656811318,
+     "current_A": 215104210.63959798,
+     "winding_minor_m": 1.7208336851167836,
+     "stored_J": 2671768250171.067
+    },
+    {
+     "name": "C2",
+     "radius_m": 54.69991533199193,
+     "distance_m": 85.09796160922703,
+     "z_from_burn_m": 65.18882061150049,
+     "current_A": 17290523.95372788,
+     "winding_minor_m": 0.138324191629823,
+     "stored_J": 64829838780.437225
+    }
+   ],
+   "coil_scale_from_V4": 1.3152823657553412,
+   "spine": {
+    "farm": "wide",
+    "basis": [
+     "cantilever",
+     0.2
+    ],
+    "longeron_ring_m": 76.72205476300411,
+    "stretch_scale": 6.125154721183559,
+    "bays": 9,
+    "length_m": 275.4,
+    "tube_r_m": 1.6558384354811095,
+    "added_t": 21168.60784511652,
+    "structure_t": 21259.497126962156,
+    "f1_cantilever_Hz": 0.20000000000006782,
+    "f1_free_free_Hz": 0.6305977472275021,
+    "buckling_factor_SF2": 384.34490237708735,
+    "J1": {
+     "axial_design_MN": 22.791584525590984,
+     "moment_0.01g_MN_m": 2261.926587983905,
+     "shear_0.01g_MN": 18.611087405788233
+    },
+    "J3": {
+     "axial_design_MN": 0.11020717231064274,
+     "lateral_0.01g_MN": 0.029419949999999997
+    },
+    "lateral": {
+     "0.002g": {
+      "root_moment_MN_m": 452.38531759678096,
+      "root_shear_MN": 3.722217481157647,
+      "stress_MPa": 3.1295799994814,
+      "allowable_MPa": 240.0,
+      "ok": 1.0
+     },
+     "0.01g": {
+      "root_moment_MN_m": 2261.926587983905,
+      "root_shear_MN": 18.611087405788233,
+      "stress_MPa": 9.531725469518044,
+      "allowable_MPa": 240.0,
+      "ok": 1.0
+     }
+    },
+    "local": {
+     "longeron_bay_Hz": 251.18310235132296,
+     "longeron_load_MN": 15.599508589622287,
+     "longeron_Pcr_MN": 41091.50192640809,
+     "longeron_buckling_margin": 2634.153613899388,
+     "frame_ovalling_n2_Hz": 0.014336814415989788,
+     "pulse_clear": {
+      "longeron_bay": true,
+      "frame_n2": true
+     }
+    },
+    "EI_N_m2": 5204444982101126.0,
+    "EA_N": 1788693328223.203,
+    "pulse_Hz": 1000.0,
+    "bow_kg": 300000.0,
+    "shield": {
+     "farm_radius_m": 85.3842222362465,
+     "needed_half_angle_deg": 13.732014533653015,
+     "fdp1_half_angle_deg": 5.427305405814357,
+     "shield_area_factor": 6.615370310040809,
+     "added_kg": 3290307.0664222543,
+     "shield_radius_m": 16.926935823446126
+    }
+   },
+   "launcher": {
+    "tip_m": 74.37921778346454,
+    "target_g": 3.0254060020294684,
+    "muzzle_m_s": 74379.21778346454,
+    "accelerator_m": 9402.239021616366,
+    "launcher_kg": 2517933.324676523,
+    "electric_W": 83686784636.21584,
+    "sabot_catcher_W": 25106035390.86475,
+    "tip_xray_J_cm2": 5.235945200195809,
+    "rate_Hz": 1000.0,
+    "fits_gas_capsule": true
+   },
+   "propellant_t": 315335.61419009394
+  },
+  {
+   "label": "full: + spine cantilever 0.1 Hz, rate free",
+   "rate_cap_Hz": null,
+   "items": [
+    "coils",
+    "launcher",
+    "spine",
+    [
+     "cantilever",
+     0.1
+    ]
+   ],
+   "J_e_A_mm2": 150.0,
+   "status": "CONVERGED",
+   "iterations": 26,
+   "departure_trajectory_t": [
+    42915.783853018824,
+    87158.00915570848,
+    110136.13765039116,
+    122665.6822788315,
+    130055.71992472364,
+    134606.8808994956,
+    137482.5121413084,
+    139328.49768501666,
+    140525.4710186422,
+    141306.64046936567,
+    141818.58873481772,
+    142155.02019318618,
+    142376.50559909738,
+    142522.4930308204,
+    142618.7904802978,
+    142682.34211082887,
+    142724.2982417864,
+    142752.00286177258,
+    142770.3001480661,
+    142782.38777486185,
+    142790.37082371683,
+    142795.64319198352,
+    142799.12660040017,
+    142801.42729447994,
+    142802.9470081479,
+    142803.9524775003,
+    142804.61539416903
+   ],
+   "history": [
+    {
+     "departure_t": 87158.00915570848,
+     "rate_Hz": 341.9050035463521,
+     "stand_off_m": 68.58760296258677,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2049.938747042391,
+      "spine N9 over S2 keels": 597.5927564250865,
+      "shadow shield growth (wide farm)": 98.42652993461952,
+      "launcher B-ray": 53.97674032163315
+     }
+    },
+    {
+     "departure_t": 110136.13765039116,
+     "rate_Hz": 431.9782466079418,
+     "stand_off_m": 68.5916364973141,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2444.732971255963,
+      "spine N9 over S2 keels": 1132.668128966986,
+      "shadow shield growth (wide farm)": 731.8520029414101,
+      "launcher B-ray": 185.98792731823283
+     }
+    },
+    {
+     "departure_t": 122665.6822788315,
+     "rate_Hz": 481.0588961999548,
+     "stand_off_m": 68.59510586119903,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2546.7008972854064,
+      "spine N9 over S2 keels": 1484.702744853143,
+      "shadow shield growth (wide farm)": 1060.4118934376345,
+      "launcher B-ray": 296.92787098146505
+     }
+    },
+    {
+     "departure_t": 130055.71992472364,
+     "rate_Hz": 509.9974661055489,
+     "stand_off_m": 68.59733930636952,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2601.043570499664,
+      "spine N9 over S2 keels": 1698.071561067805,
+      "shadow shield growth (wide farm)": 1240.278121741632,
+      "launcher B-ray": 368.2727727093066
+     }
+    },
+    {
+     "departure_t": 134606.8808994956,
+     "rate_Hz": 527.815820600378,
+     "stand_off_m": 68.59876811477204,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2632.768104683926,
+      "spine N9 over S2 keels": 1831.0005728489436,
+      "shadow shield growth (wide farm)": 1346.5722031232444,
+      "launcher B-ray": 413.9412394306017
+     }
+    },
+    {
+     "departure_t": 137482.5121413084,
+     "rate_Hz": 539.0728892988006,
+     "stand_off_m": 68.59969013942057,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2652.1994529612016,
+      "spine N9 over S2 keels": 1915.4787688732533,
+      "shadow shield growth (wide farm)": 1412.1057835014774,
+      "launcher B-ray": 443.39048447316264
+     }
+    },
+    {
+     "departure_t": 139328.49768501666,
+     "rate_Hz": 546.2987091596514,
+     "stand_off_m": 68.60028880909299,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2664.4382977391865,
+      "spine N9 over S2 keels": 1969.8828581457303,
+      "shadow shield growth (wide farm)": 1453.5404040393285,
+      "launcher B-ray": 462.51810929976455
+     }
+    },
+    {
+     "departure_t": 140525.4710186422,
+     "rate_Hz": 550.9838480646188,
+     "stand_off_m": 68.60067947571899,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2672.2797743370356,
+      "spine N9 over S2 keels": 2005.2261121678473,
+      "shadow shield growth (wide farm)": 1480.149994733907,
+      "launcher B-ray": 475.00920751287066
+     }
+    },
+    {
+     "departure_t": 141306.64046936567,
+     "rate_Hz": 554.0413648681251,
+     "stand_off_m": 68.60093568995214,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2677.3581806825136,
+      "spine N9 over S2 keels": 2028.3184695889718,
+      "shadow shield growth (wide farm)": 1497.4087196021217,
+      "launcher B-ray": 483.19739378529664
+     }
+    },
+    {
+     "departure_t": 141818.58873481772,
+     "rate_Hz": 556.0451147517218,
+     "stand_off_m": 68.6011035403222,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2680.669892648558,
+      "spine N9 over S2 keels": 2043.4632980472627,
+      "shadow shield growth (wide farm)": 1508.6740346612714,
+      "launcher B-ray": 488.57879939353927
+     }
+    },
+    {
+     "departure_t": 142155.02019318618,
+     "rate_Hz": 557.3618733591962,
+     "stand_off_m": 68.60121427527376,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2682.839158382879,
+      "spine N9 over S2 keels": 2053.4204546445353,
+      "shadow shield growth (wide farm)": 1516.0576969370688,
+      "launcher B-ray": 492.1217010814877
+     }
+    },
+    {
+     "departure_t": 142376.50559909738,
+     "rate_Hz": 558.228710362634,
+     "stand_off_m": 68.6012882332149,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2684.264253169885,
+      "spine N9 over S2 keels": 2059.9776099193905,
+      "shadow shield growth (wide farm)": 1520.9102911620619,
+      "launcher B-ray": 494.4568945034537
+     }
+    },
+    {
+     "departure_t": 142522.4930308204,
+     "rate_Hz": 558.8000977711271,
+     "stand_off_m": 68.60133591709307,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2685.202279759682,
+      "spine N9 over S2 keels": 2064.300369886893,
+      "shadow shield growth (wide farm)": 1524.10509674557,
+      "launcher B-ray": 495.99721602323723
+     }
+    },
+    {
+     "departure_t": 142618.7904802978,
+     "rate_Hz": 559.1769982662968,
+     "stand_off_m": 68.60136734334328,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2685.820427624321,
+      "spine N9 over S2 keels": 2067.1522044492544,
+      "shadow shield growth (wide farm)": 1526.2109394471631,
+      "launcher B-ray": 497.01383551809477
+     }
+    },
+    {
+     "departure_t": 142682.34211082887,
+     "rate_Hz": 559.4257148018334,
+     "stand_off_m": 68.6013887153805,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2686.228142708134,
+      "spine N9 over S2 keels": 2069.0344768037,
+      "shadow shield growth (wide farm)": 1527.6000413461943,
+      "launcher B-ray": 497.68499159123996
+     }
+    },
+    {
+     "departure_t": 142724.2982417864,
+     "rate_Hz": 559.5899168128791,
+     "stand_off_m": 68.60140281185357,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2686.4972233211042,
+      "spine N9 over S2 keels": 2070.277173247613,
+      "shadow shield growth (wide farm)": 1528.516799739066,
+      "launcher B-ray": 498.12814532948454
+     }
+    },
+    {
+     "departure_t": 142752.00286177258,
+     "rate_Hz": 559.6983621453245,
+     "stand_off_m": 68.6014113756951,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2686.6748560606584,
+      "spine N9 over S2 keels": 2071.097801379434,
+      "shadow shield growth (wide farm)": 1529.1220394485047,
+      "launcher B-ray": 498.42082230894516
+     }
+    },
+    {
+     "departure_t": 142770.3001480661,
+     "rate_Hz": 559.7699707333027,
+     "stand_off_m": 68.60141754770693,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2686.7921258659007,
+      "spine N9 over S2 keels": 2071.6397742051254,
+      "shadow shield growth (wide farm)": 1529.5216883146595,
+      "launcher B-ray": 498.6141532852009
+     }
+    },
+    {
+     "departure_t": 142782.38777486185,
+     "rate_Hz": 559.8172834654952,
+     "stand_off_m": 68.60142149075844,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2686.8695895387514,
+      "spine N9 over S2 keels": 2071.9977561127916,
+      "shadow shield growth (wide farm)": 1529.7856390272168,
+      "launcher B-ray": 498.74184199918125
+     }
+    },
+    {
+     "departure_t": 142790.37082371683,
+     "rate_Hz": 559.8484979175657,
+     "stand_off_m": 68.6014251728868,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2686.9207526039595,
+      "spine N9 over S2 keels": 2072.2342652050256,
+      "shadow shield growth (wide farm)": 1529.9600104335784,
+      "launcher B-ray": 498.82621452972114
+     }
+    },
+    {
+     "departure_t": 142795.64319198352,
+     "rate_Hz": 559.8691568791963,
+     "stand_off_m": 68.60142597204079,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2686.954585715198,
+      "spine N9 over S2 keels": 2072.3904709604635,
+      "shadow shield growth (wide farm)": 1530.075182576656,
+      "launcher B-ray": 498.8818994829648
+     }
+    },
+    {
+     "departure_t": 142799.12660040017,
+     "rate_Hz": 559.8827816973683,
+     "stand_off_m": 68.6014274573999,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2686.976876950845,
+      "spine N9 over S2 keels": 2072.49363968828,
+      "shadow shield growth (wide farm)": 1530.151230383449,
+      "launcher B-ray": 498.91873072286523
+     }
+    },
+    {
+     "departure_t": 142801.42729447994,
+     "rate_Hz": 559.8917920191109,
+     "stand_off_m": 68.60142798675479,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2686.9916333481856,
+      "spine N9 over S2 keels": 2072.5618038519497,
+      "shadow shield growth (wide farm)": 1530.2014844699572,
+      "launcher B-ray": 498.94303670327497
+     }
+    },
+    {
+     "departure_t": 142802.9470081479,
+     "rate_Hz": 559.8977444539017,
+     "stand_off_m": 68.60142830862655,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2687.0013659087185,
+      "spine N9 over S2 keels": 2072.606825014134,
+      "shadow shield growth (wide farm)": 1530.2346709606672,
+      "launcher B-ray": 498.95910407407973
+     }
+    },
+    {
+     "departure_t": 142803.9524775003,
+     "rate_Hz": 559.9016783195118,
+     "stand_off_m": 68.60142876215271,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2687.0077938676263,
+      "spine N9 over S2 keels": 2072.6365638395987,
+      "shadow shield growth (wide farm)": 1530.256592309456,
+      "launcher B-ray": 498.969718282289
+     }
+    },
+    {
+     "departure_t": 142804.61539416903,
+     "rate_Hz": 559.9042672120521,
+     "stand_off_m": 68.6014291330899,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2687.0120499206214,
+      "spine N9 over S2 keels": 2072.656239690858,
+      "shadow shield growth (wide farm)": 1530.2710979451583,
+      "launcher B-ray": 498.9767367723205
+     }
+    }
+   ],
+   "loop_gain": 0.6593106663351078,
+   "added_kg": {
+    "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2687012.0499206213,
+    "spine N9 over S2 keels": 2072656.239690858,
+    "shadow shield growth (wide farm)": 1530271.0979451584,
+    "launcher B-ray": 498976.7367723205
+   },
+   "final_set": {
+    "base.overrides.continuous.plume_to_hardware.value": 0.06573164589543748,
+    "base.overrides.pulsed.house_fraction.value": 0.00010483155471624326,
+    "mission.payload.reference_t": 8029.116124328958,
+    "base.overrides.pulsed.nozzle_efficiency.optimistic": 0.7778196163409543
+   },
+   "summary": {
+    "converged": true,
+    "departure_t": 142804.61539416903,
+    "a0_g": 0.006895573489099627,
+    "fusion_TW": 120.81167832679667,
+    "radiator_t": 12558.923828433317,
+    "hot_km2": 1.6746086460030283,
+    "warm_km2": 17.207080124459843,
+    "drive_t": 19909.343243861065,
+    "propellant_t": 90230.16979324487,
+    "tank_t": 8467.85561257104,
+    "end_t": 52574.44560092417,
+    "xray_standoff_m": null,
+    "payload_t": 8029.116124328958,
+    "wing_tip_radius_m": 35374.11295324929,
+    "pellet_rate_Hz": 559.9042672120521
+   },
+   "fusion": {
+    "yield_per_pulse_GJ": 215.7720264007949,
+    "pellet_rate_Hz": 559.9042672120521,
+    "fuel_g": 0.8982387630078906,
+    "target_gain": 1084.3326176985665,
+    "driver_MJ": 198.99062601174776,
+    "stand_off_m": 68.6014291330899,
+    "thrust_MN": 9.656801642462604,
+    "peak_accel_g": 0.018730006731935773,
+    "jet_TW": 92.71095503967555,
+    "mass_flow_kg_s": 0.5029277172366554
+   },
+   "heat_rejection": {
+    "hot_km2": 1.6746086460030283,
+    "warm_km2": 17.207080124459843,
+    "radiator_t": 12558.923828433317,
+    "coil_hot_GW": 19.343689550306014,
+    "coil_warm_GW": 0.03365220253146362
+   },
+   "coils": [
+    {
+     "name": "C1",
+     "radius_m": 23.46307062444511,
+     "distance_m": 68.6014291330899,
+     "z_from_burn_m": 64.46425673173202,
+     "current_A": 171255539.40008074,
+     "winding_minor_m": 1.3700443152006458,
+     "stored_J": 1370619230205.6973
+    },
+    {
+     "name": "C2",
+     "radius_m": 44.09614865353937,
+     "distance_m": 68.6014291330899,
+     "z_from_burn_m": 52.551743577423885,
+     "current_A": 13765876.536777489,
+     "winding_minor_m": 0.11012701229421992,
+     "stored_J": 33192371963.957783
+    }
+   ],
+   "coil_scale_from_V4": 1.0603103564185061,
+   "spine": {
+    "farm": "wide",
+    "basis": [
+     "cantilever",
+     0.1
+    ],
+    "longeron_ring_m": 56.54878564514217,
+    "stretch_scale": 3.3275391862021197,
+    "bays": 9,
+    "length_m": 275.4,
+    "tube_r_m": 0.5259380452450839,
+    "added_t": 2072.656239690858,
+    "structure_t": 2163.5455215364946,
+    "f1_cantilever_Hz": 0.10000000000033424,
+    "f1_free_free_Hz": 0.3194582925016732,
+    "buckling_factor_SF2": 103.79864223151695,
+    "J1": {
+     "axial_design_MN": 12.40024180533357,
+     "moment_0.01g_MN_m": 1105.7661273953042,
+     "shear_0.01g_MN": 9.203622029810983
+    },
+    "J3": {
+     "axial_design_MN": 0.11020717231064273,
+     "lateral_0.01g_MN": 0.029419949999999997
+    },
+    "lateral": {
+     "0.002g": {
+      "root_moment_MN_m": 221.15322547906086,
+      "root_shear_MN": 1.8407244059621968,
+      "stress_MPa": 17.977478778927523,
+      "allowable_MPa": 240.0,
+      "ok": 1.0
+     },
+     "0.01g": {
+      "root_moment_MN_m": 1105.7661273953042,
+      "root_shear_MN": 9.203622029810983,
+      "stress_MPa": 60.0517273985123,
+      "allowable_MPa": 240.0,
+      "ok": 1.0
+     }
+    },
+    "local": {
+     "longeron_bay_Hz": 79.78239121552132,
+     "longeron_load_MN": 9.915124090950437,
+     "longeron_Pcr_MN": 418.2332241439699,
+     "longeron_buckling_margin": 42.18134037532547,
+     "frame_ovalling_n2_Hz": 0.061560711905422096,
+     "pulse_clear": {
+      "longeron_bay": true,
+      "frame_n2": true
+     }
+    },
+    "EI_N_m2": 285345760947585.5,
+    "EA_N": 199496668436.5205,
+    "pulse_Hz": 559.9016783195118,
+    "bow_kg": 300000.0,
+    "shield": {
+     "farm_radius_m": 62.93332595991628,
+     "needed_half_angle_deg": 10.351551303933206,
+     "fdp1_half_angle_deg": 5.43808256133827,
+     "shield_area_factor": 3.6815340960732508,
+     "added_kg": 1530271.0979451584,
+     "shield_radius_m": 12.5307649116831
+    }
+   },
+   "launcher": {
+    "tip_m": 59.96055065546653,
+    "target_g": 1.7834572516608866,
+    "muzzle_m_s": 33572.16817638012,
+    "accelerator_m": 1915.5207198910093,
+    "launcher_kg": 498981.3568008798,
+    "electric_W": 5627367341.026292,
+    "sabot_catcher_W": 1688210202.3078876,
+    "tip_xray_J_cm2": 5.235945200195807,
+    "rate_Hz": 559.9042672120521,
+    "fits_gas_capsule": true
+   },
+   "propellant_t": 90230.16979324487
+  },
+  {
+   "label": "full: + spine free-free 0.2 Hz (upper bound), rate free",
+   "rate_cap_Hz": null,
+   "items": [
+    "coils",
+    "launcher",
+    "spine",
+    [
+     "free_free",
+     0.2
+    ]
+   ],
+   "J_e_A_mm2": 150.0,
+   "status": "CONVERGED",
+   "iterations": 16,
+   "departure_trajectory_t": [
+    42915.783853018824,
+    83654.51364547187,
+    101991.55076309344,
+    110036.16614064414,
+    113744.48808391296,
+    115492.08606533972,
+    116324.15445058681,
+    116722.24484312312,
+    116913.14668842281,
+    117004.7939402653,
+    117048.8149891333,
+    117069.96414316025,
+    117080.12882283244,
+    117085.0108476513,
+    117087.35778615062,
+    117088.48526252386,
+    117089.02655131293
+   ],
+   "history": [
+    {
+     "departure_t": 83654.51364547187,
+     "rate_Hz": 328.1614292981187,
+     "stand_off_m": 68.58760262955504,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2049.938747042391,
+      "spine N9 over S2 keels": 331.2683818289869,
+      "shadow shield growth (wide farm)": 98.42652993461952,
+      "launcher B-ray": 53.97674032163315
+     }
+    },
+    {
+     "departure_t": 101991.55076309344,
+     "rate_Hz": 400.04032145191536,
+     "stand_off_m": 68.59117675892547,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2428.8600447772546,
+      "spine N9 over S2 keels": 602.7299195670442,
+      "shadow shield growth (wide farm)": 681.9249315475973,
+      "launcher B-ray": 171.33611157824672
+     }
+    },
+    {
+     "departure_t": 110036.16614064414,
+     "rate_Hz": 431.5511953989992,
+     "stand_off_m": 68.59378173463949,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2511.0084337264066,
+      "spine N9 over S2 keels": 747.2947663367646,
+      "shadow shield growth (wide farm)": 943.7703170340332,
+      "launcher B-ray": 254.6411940745881
+     }
+    },
+    {
+     "departure_t": 113744.48808391296,
+     "rate_Hz": 446.0729140370952,
+     "stand_off_m": 68.59508627726895,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2546.363846551552,
+      "spine N9 over S2 keels": 815.3376032547492,
+      "shadow shield growth (wide farm)": 1059.014133093956,
+      "launcher B-ray": 296.36044631027096
+     }
+    },
+    {
+     "departure_t": 115492.08606533972,
+     "rate_Hz": 452.91561318346294,
+     "stand_off_m": 68.59572218818069,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2562.5433581773846,
+      "spine N9 over S2 keels": 847.6624061682471,
+      "shadow shield growth (wide farm)": 1112.2067690398392,
+      "launcher B-ray": 316.6536935690306
+     }
+    },
+    {
+     "departure_t": 116324.15445058681,
+     "rate_Hz": 456.1733901249432,
+     "stand_off_m": 68.59602863237693,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2570.144322388194,
+      "spine N9 over S2 keels": 863.1064966784991,
+      "shadow shield growth (wide farm)": 1137.2890532609617,
+      "launcher B-ray": 326.4493808200259
+     }
+    },
+    {
+     "departure_t": 116722.24484312312,
+     "rate_Hz": 457.7320012961883,
+     "stand_off_m": 68.59617519863686,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2573.7580942817845,
+      "spine N9 over S2 keels": 870.5072306340867,
+      "shadow shield growth (wide farm)": 1149.234469571889,
+      "launcher B-ray": 331.16559792694096
+     }
+    },
+    {
+     "departure_t": 116913.14668842281,
+     "rate_Hz": 458.47939054717125,
+     "stand_off_m": 68.5962468259531,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2575.4858522233935,
+      "spine N9 over S2 keels": 874.0588373089395,
+      "shadow shield growth (wide farm)": 1154.9502910987098,
+      "launcher B-ray": 333.43394476200353
+     }
+    },
+    {
+     "departure_t": 117004.7939402653,
+     "rate_Hz": 458.8381953636586,
+     "stand_off_m": 68.596281067976,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2576.3141585195326,
+      "spine N9 over S2 keels": 875.7644782106663,
+      "shadow shield growth (wide farm)": 1157.691454669041,
+      "launcher B-ray": 334.52443202724106
+     }
+    },
+    {
+     "departure_t": 117048.8149891333,
+     "rate_Hz": 459.0105379784531,
+     "stand_off_m": 68.59629762561539,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2576.711740898044,
+      "spine N9 over S2 keels": 876.5838875894133,
+      "shadow shield growth (wide farm)": 1159.007456137589,
+      "launcher B-ray": 335.04858236414236
+     }
+    },
+    {
+     "departure_t": 117069.96414316025,
+     "rate_Hz": 459.0933579870416,
+     "stand_off_m": 68.59630457433758,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2576.902701299712,
+      "spine N9 over S2 keels": 876.9776078508883,
+      "shadow shield growth (wide farm)": 1159.6395825662858,
+      "launcher B-ray": 335.30049162230176
+     }
+    },
+    {
+     "departure_t": 117080.12882283244,
+     "rate_Hz": 459.13314784375217,
+     "stand_off_m": 68.59630875158139,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2576.9944096913778,
+      "spine N9 over S2 keels": 877.1667944884458,
+      "shadow shield growth (wide farm)": 1159.9432705112665,
+      "launcher B-ray": 335.4215711172531
+     }
+    },
+    {
+     "departure_t": 117085.0108476513,
+     "rate_Hz": 459.1522706310674,
+     "stand_off_m": 68.59631000547255,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2577.038505394191,
+      "spine N9 over S2 keels": 877.2577281821635,
+      "shadow shield growth (wide farm)": 1160.0892359539912,
+      "launcher B-ray": 335.4797586607243
+     }
+    },
+    {
+     "departure_t": 117087.35778615062,
+     "rate_Hz": 459.16143966088214,
+     "stand_off_m": 68.59631180659706,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2577.059670475102,
+      "spine N9 over S2 keels": 877.3014046289569,
+      "shadow shield growth (wide farm)": 1160.1593365535193,
+      "launcher B-ray": 335.5077173422071
+     }
+    },
+    {
+     "departure_t": 117088.48526252386,
+     "rate_Hz": 459.1658614490505,
+     "stand_off_m": 68.59631186098109,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2577.069879759613,
+      "spine N9 over S2 keels": 877.3224016018404,
+      "shadow shield growth (wide farm)": 1160.1930453239809,
+      "launcher B-ray": 335.5211357462935
+     }
+    },
+    {
+     "departure_t": 117089.02655131293,
+     "rate_Hz": 459.16799247308575,
+     "stand_off_m": 68.5963114978297,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2577.074758632579,
+      "spine N9 over S2 keels": 877.332488698119,
+      "shadow shield growth (wide farm)": 1160.20923260984,
+      "launcher B-ray": 335.52759854945515
+     }
+    }
+   ],
+   "loop_gain": 0.48008880888295385,
+   "added_kg": {
+    "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2577074.758632579,
+    "spine N9 over S2 keels": 877332.4886981191,
+    "shadow shield growth (wide farm)": 1160209.23260984,
+    "launcher B-ray": 335527.5985494552
+   },
+   "final_set": {
+    "base.overrides.continuous.plume_to_hardware.value": 0.06573166896685691,
+    "base.overrides.pulsed.house_fraction.value": 8.50097268302185e-05,
+    "mission.payload.reference_t": 6190.344078489993,
+    "base.overrides.pulsed.nozzle_efficiency.optimistic": 0.7778196163409543
+   },
+   "summary": {
+    "converged": true,
+    "departure_t": 117089.02655131293,
+    "a0_g": 0.006895573489099627,
+    "fusion_TW": 99.05444951514127,
+    "radiator_t": 10230.995842003958,
+    "hot_km2": 1.3728569392592371,
+    "warm_km2": 13.984435125457406,
+    "drive_t": 16783.46346343562,
+    "propellant_t": 73981.94181252008,
+    "tank_t": 6943.003682151157,
+    "end_t": 43107.08473879285,
+    "xray_standoff_m": null,
+    "payload_t": 6190.344078489993,
+    "wing_tip_radius_m": 28767.933561035185,
+    "pellet_rate_Hz": 459.16799247308575
+   },
+   "fusion": {
+    "yield_per_pulse_GJ": 215.72594594127983,
+    "pellet_rate_Hz": 459.16799247308575,
+    "fuel_g": 0.8980652990995627,
+    "target_gain": 1084.3326176985665,
+    "driver_MJ": 198.94812940253124,
+    "stand_off_m": 68.5963114978297,
+    "thrust_MN": 7.917849859362703,
+    "peak_accel_g": 0.018730006731935773,
+    "jet_TW": 76.01599882661353,
+    "mass_flow_kg_s": 0.4123628404752416
+   },
+   "heat_rejection": {
+    "hot_km2": 1.3728569392592371,
+    "warm_km2": 13.984435125457406,
+    "radiator_t": 10230.995842003958,
+    "coil_hot_GW": 15.860868629295842,
+    "coil_warm_GW": 0.02870408391644287
+   },
+   "coils": [
+    {
+     "name": "C1",
+     "radius_m": 23.461320290099934,
+     "distance_m": 68.5963114978297,
+     "z_from_burn_m": 64.45944772764214,
+     "current_A": 171243577.85538152,
+     "winding_minor_m": 1.369948622843052,
+     "stored_J": 1370323483666.942
+    },
+    {
+     "name": "C2",
+     "radius_m": 44.09285910100323,
+     "distance_m": 68.5963114978297,
+     "z_from_burn_m": 52.54782324137091,
+     "current_A": 13764915.042929783,
+     "winding_minor_m": 0.11011932034343827,
+     "stored_J": 33185234662.134678
+    }
+   ],
+   "coil_scale_from_V4": 1.0602312577505144,
+   "spine": {
+    "farm": "wide",
+    "basis": [
+     "free_free",
+     0.2
+    ],
+    "longeron_ring_m": 51.20475152630232,
+    "stretch_scale": 2.728331507669468,
+    "bays": 9,
+    "length_m": 275.4,
+    "tube_r_m": 0.3124254721940817,
+    "added_t": 877.332488698119,
+    "structure_t": 968.2217705437554,
+    "f1_cantilever_Hz": 0.06728761335773586,
+    "f1_free_free_Hz": 0.21712092708525893,
+    "buckling_factor_SF2": 49.21428285366504,
+    "J1": {
+     "axial_design_MN": 10.174570596982948,
+     "moment_0.01g_MN_m": 897.2236736388161,
+     "shear_0.01g_MN": 7.472560273402521
+    },
+    "J3": {
+     "axial_design_MN": 0.11020717231064274,
+     "lateral_0.01g_MN": 0.029419949999999997
+    },
+    "lateral": {
+     "0.002g": {
+      "root_moment_MN_m": 179.4447347277632,
+      "root_shear_MN": 1.4945120546805044,
+      "stress_MPa": 41.1801984662,
+      "allowable_MPa": 240.0,
+      "ok": 1.0
+     },
+     "0.01g": {
+      "root_moment_MN_m": 897.2236736388161,
+      "root_shear_MN": 7.472560273402521,
+      "stress_MPa": 147.83159569954333,
+      "allowable_MPa": 240.0,
+      "ok": 1.0
+     }
+    },
+    "local": {
+     "longeron_bay_Hz": 47.39351236069414,
+     "longeron_load_MN": 8.61318168257905,
+     "longeron_Pcr_MN": 52.0793934882272,
+     "longeron_buckling_margin": 6.04647567037423,
+     "frame_ovalling_n2_Hz": 0.09943439724166835,
+     "pulse_clear": {
+      "longeron_bay": true,
+      "frame_n2": true
+     }
+    },
+    "EI_N_m2": 82707647167167.8,
+    "EA_N": 84102714508.07915,
+    "pulse_Hz": 459.1658614490505,
+    "bow_kg": 300000.0,
+    "shield": {
+     "farm_radius_m": 56.985933150239674,
+     "needed_half_angle_deg": 9.437180261888448,
+     "fdp1_half_angle_deg": 5.438601376472387,
+     "shield_area_factor": 3.047899979032298,
+     "added_kg": 1160209.23260984,
+     "shield_radius_m": 11.401784042724847
+    }
+   },
+   "launcher": {
+    "tip_m": 59.95607762579159,
+    "target_g": 1.7831611451201599,
+    "muzzle_m_s": 27529.911799995218,
+    "accelerator_m": 1288.0648058809004,
+    "launcher_kg": 335530.7092421631,
+    "electric_W": 3102714701.451339,
+    "sabot_catcher_W": 930814410.4354017,
+    "tip_xray_J_cm2": 5.235945200195806,
+    "rate_Hz": 459.16799247308575,
+    "fits_gas_capsule": true
+   },
+   "propellant_t": 73981.94181252008
+  },
+  {
+   "label": "full: spine free-free 0.2 Hz, cap 250 Hz",
+   "rate_cap_Hz": 250.0,
+   "items": [
+    "coils",
+    "launcher",
+    "spine",
+    [
+     "free_free",
+     0.2
+    ]
+   ],
+   "J_e_A_mm2": 150.0,
+   "status": "NON-CONVERGING (diverges past 400 kt)",
+   "iterations": 20,
+   "departure_trajectory_t": [
+    42915.784293874895,
+    97114.16667227872,
+    141748.00519814505,
+    180896.53491147872,
+    216192.14385247784,
+    247108.05477799114,
+    273444.0274446756,
+    295323.1607916808,
+    313108.573814069,
+    327303.8271460515,
+    338464.52405185637,
+    347133.90374483564,
+    353804.0137235078,
+    359011.52722515917,
+    364055.0290616889,
+    369514.0642695153,
+    375457.0730154644,
+    381967.42824714433,
+    389147.75072752894,
+    397125.79546276084,
+    406062.6056888794
+   ],
+   "history": [
+    {
+     "departure_t": 97114.16667227872,
+     "rate_Hz": 249.99999999999994,
+     "stand_off_m": 78.50695252543558,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2049.9387765950237,
+      "spine N9 over S2 keels": 331.2683844309774,
+      "shadow shield growth (wide farm)": 98.42653648305637,
+      "launcher B-ray": 53.976738635601116
+     }
+    },
+    {
+     "departure_t": 141748.00519814505,
+     "rate_Hz": 249.99999999999994,
+     "stand_off_m": 88.65182037096831,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2813.8233138269793,
+      "spine N9 over S2 keels": 707.4207916403326,
+      "shadow shield growth (wide farm)": 915.2296587931155,
+      "launcher B-ray": 132.32811220542362
+     }
+    },
+    {
+     "departure_t": 180896.53491147872,
+     "rate_Hz": 249.99999999999994,
+     "stand_off_m": 95.89211352845963,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 3509.7809736190616,
+      "spine N9 over S2 keels": 1111.4771149508613,
+      "shadow shield growth (wide farm)": 1583.210506158174,
+      "launcher B-ray": 172.01110190230855
+     }
+    },
+    {
+     "departure_t": 216192.14385247784,
+     "rate_Hz": 249.99999999999994,
+     "stand_off_m": 101.56220489573518,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 4161.955962978531,
+      "spine N9 over S2 keels": 1539.1505641252536,
+      "shadow shield growth (wide farm)": 2105.3805714114123,
+      "launcher B-ray": 204.46411391118997
+     }
+    },
+    {
+     "departure_t": 247108.05477799114,
+     "rate_Hz": 249.99999999999994,
+     "stand_off_m": 106.03699829041533,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 4720.392774653547,
+      "spine N9 over S2 keels": 1983.9103032439243,
+      "shadow shield growth (wide farm)": 2507.1371981773946,
+      "launcher B-ray": 232.5093674732939
+     }
+    },
+    {
+     "departure_t": 273444.0274446756,
+     "rate_Hz": 249.99999999999994,
+     "stand_off_m": 109.56073734253907,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 5190.7284894638915,
+      "spine N9 over S2 keels": 2419.674736661291,
+      "shadow shield growth (wide farm)": 2797.9727514338806,
+      "launcher B-ray": 256.39450550013896
+     }
+    },
+    {
+     "departure_t": 295323.1607916808,
+     "rate_Hz": 249.99999999999994,
+     "stand_off_m": 112.31857843001168,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 5579.833228243535,
+      "spine N9 over S2 keels": 2824.9221731068455,
+      "shadow shield growth (wide farm)": 2997.576161284064,
+      "launcher B-ray": 276.3556296101173
+     }
+    },
+    {
+     "departure_t": 313108.573814069,
+     "rate_Hz": 249.99999999999994,
+     "stand_off_m": 114.4609812974387,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 5896.063611525157,
+      "spine N9 over S2 keels": 3185.402258095076,
+      "shadow shield growth (wide farm)": 3128.3365435834107,
+      "launcher B-ray": 292.7199885406712
+     }
+    },
+    {
+     "departure_t": 327303.8271460515,
+     "rate_Hz": 249.99999999999994,
+     "stand_off_m": 116.11302095231227,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 6148.903867415822,
+      "spine N9 over S2 keels": 3494.356388910608,
+      "shadow shield growth (wide farm)": 3210.5859133210683,
+      "launcher B-ray": 305.89883403658695
+     }
+    },
+    {
+     "departure_t": 338464.52405185637,
+     "rate_Hz": 249.99999999999994,
+     "stand_off_m": 117.37844506010622,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 6348.20190099336,
+      "spine N9 over S2 keels": 3751.1900974407754,
+      "shadow shield growth (wide farm)": 3260.503319249255,
+      "launcher B-ray": 316.34781075362025
+     }
+    },
+    {
+     "departure_t": 347133.90374483564,
+     "rate_Hz": 249.99999999999994,
+     "stand_off_m": 118.3422090786504,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 6503.428309897519,
+      "spine N9 over S2 keels": 3959.505614774965,
+      "shadow shield growth (wide farm)": 3289.83616658692,
+      "launcher B-ray": 324.5240597394793
+     }
+    },
+    {
+     "departure_t": 353804.0137235078,
+     "rate_Hz": 249.99999999999994,
+     "stand_off_m": 119.07278093182028,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 6623.15424258784,
+      "spine N9 over S2 keels": 4125.199602014677,
+      "shadow shield growth (wide farm)": 3306.552984604489,
+      "launcher B-ray": 330.85336636078574
+     }
+    },
+    {
+     "departure_t": 359011.52722515917,
+     "rate_Hz": 249.99999999999994,
+     "stand_off_m": 119.63675787360454,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 6714.7812903483045,
+      "spine N9 over S2 keels": 4254.991083488157,
+      "shadow shield growth (wide farm)": 3315.783860244655,
+      "launcher B-ray": 335.71087616011926
+     }
+    },
+    {
+     "departure_t": 364055.0290616889,
+     "rate_Hz": 249.99999999999994,
+     "stand_off_m": 120.17776117951256,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 6786.046092859961,
+      "spine N9 over S2 keels": 4357.718001702233,
+      "shadow shield growth (wide farm)": 3363.410052734792,
+      "launcher B-ray": 339.4962426261028
+     }
+    },
+    {
+     "departure_t": 369514.0642695153,
+     "rate_Hz": 249.99999999999994,
+     "stand_off_m": 120.75769941075306,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 6854.841139170168,
+      "spine N9 over S2 keels": 4458.376068985678,
+      "shadow shield growth (wide farm)": 3434.444072971917,
+      "launcher B-ray": 343.1567454742882
+     }
+    },
+    {
+     "departure_t": 375457.0730154644,
+     "rate_Hz": 249.99999999999994,
+     "stand_off_m": 121.3825548439795,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 6929.048764284311,
+      "spine N9 over S2 keels": 4568.620986734936,
+      "shadow shield growth (wide farm)": 3511.7797689438567,
+      "launcher B-ray": 347.1128253371811
+     }
+    },
+    {
+     "departure_t": 381967.42824714433,
+     "rate_Hz": 249.99999999999994,
+     "stand_off_m": 122.05949327623134,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 7009.539653080886,
+      "spine N9 over S2 keels": 4690.168686566981,
+      "shadow shield growth (wide farm)": 3596.4968397937264,
+      "launcher B-ray": 351.4128174407606
+     }
+    },
+    {
+     "departure_t": 389147.75072752894,
+     "rate_Hz": 249.99999999999994,
+     "stand_off_m": 122.79717858280453,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 7097.368489853423,
+      "spine N9 over S2 keels": 4825.1492600390375,
+      "shadow shield growth (wide farm)": 3689.922295948244,
+      "launcher B-ray": 356.1154978285344
+     }
+    },
+    {
+     "departure_t": 397125.79546276084,
+     "rate_Hz": 249.99999999999994,
+     "stand_off_m": 123.60618967648955,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 7193.825786376758,
+      "spine N9 over S2 keels": 4976.238551154122,
+      "shadow shield growth (wide farm)": 3793.7052560937414,
+      "launcher B-ray": 361.2930953693978
+     }
+    },
+    {
+     "departure_t": 406062.6056888794,
+     "rate_Hz": 249.99999999999994,
+     "stand_off_m": 124.49958287501883,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 7300.507896063692,
+      "spine N9 over S2 keels": 5146.842488549358,
+      "shadow shield growth (wide farm)": 3909.920137985618,
+      "launcher B-ray": 367.03538422461287
+     }
+    }
+   ],
+   "loop_gain": 1.12017549696765,
+   "added_kg": {
+    "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 7300507.896063692,
+    "spine N9 over S2 keels": 5146842.488549358,
+    "shadow shield growth (wide farm)": 3909920.1379856183,
+    "launcher B-ray": 367035.38422461285
+   },
+   "final_set": {
+    "base.overrides.continuous.plume_to_hardware.value": 0.06533803266734926,
+    "base.overrides.pulsed.house_fraction.value": 7.187858200169845e-05,
+    "mission.payload.reference_t": 17964.50590682328,
+    "base.overrides.pulsed.nozzle_efficiency.optimistic": 0.7778196163409543
+   },
+   "summary": {
+    "converged": true,
+    "departure_t": 406062.6056888794,
+    "a0_g": 0.006895573489099627,
+    "fusion_TW": 341.68943699259813,
+    "radiator_t": 35024.12359973887,
+    "hot_km2": 4.6899358338232515,
+    "warm_km2": 47.91097047187717,
+    "drive_t": 61725.821663716044,
+    "propellant_t": 256568.0230772924,
+    "tank_t": 24517.41051830225,
+    "end_t": 149494.582611587,
+    "xray_standoff_m": null,
+    "payload_t": 17964.50590682328,
+    "wing_tip_radius_m": 98577.89465003948,
+    "pellet_rate_Hz": 249.99999999999994
+   },
+   "fusion": {
+    "yield_per_pulse_GJ": 1366.7577479590498,
+    "pellet_rate_Hz": 249.99999999999994,
+    "fuel_g": 4.908473836728578,
+    "target_gain": 1084.3326176985665,
+    "driver_MJ": 1260.4598678032155,
+    "stand_off_m": 124.49958287501883,
+    "thrust_MN": 27.458958708971302,
+    "peak_accel_g": 0.018730006731935773,
+    "jet_TW": 263.62209565428634,
+    "mass_flow_kg_s": 1.430066799806072
+   },
+   "heat_rejection": {
+    "hot_km2": 4.6899358338232515,
+    "warm_km2": 47.91097047187717,
+    "radiator_t": 35024.12359973887,
+    "coil_hot_GW": 24.85334881974991,
+    "coil_warm_GW": 0.04041888384313965
+   },
+   "coils": [
+    {
+     "name": "C1",
+     "radius_m": 42.58136517889991,
+     "distance_m": 124.49958287501883,
+     "z_from_burn_m": 116.99133931857885,
+     "current_A": 320795770.41854423,
+     "winding_minor_m": 2.566366163348354,
+     "stored_J": 8640930016723.849
+    },
+    {
+     "name": "C2",
+     "radius_m": 80.02678928320456,
+     "distance_m": 124.49958287501883,
+     "z_from_burn_m": 95.37221363203885,
+     "current_A": 25786231.40934158,
+     "winding_minor_m": 0.20628985127473265,
+     "stored_J": 210310384467.58945
+    }
+   ],
+   "coil_scale_from_V4": 1.9242776536923838,
+   "spine": {
+    "farm": "wide",
+    "basis": [
+     "free_free",
+     0.2
+    ],
+    "longeron_ring_m": 94.30119974333908,
+    "stretch_scale": 9.253606943843012,
+    "bays": 9,
+    "length_m": 275.4,
+    "tube_r_m": 0.7305596766733649,
+    "added_t": 5146.842488549358,
+    "structure_t": 5237.731770394995,
+    "f1_cantilever_Hz": 0.06999806350820077,
+    "f1_free_free_Hz": 0.21725034043054361,
+    "buckling_factor_SF2": 45.03686352115189,
+    "J1": {
+     "axial_design_MN": 34.41177279775152,
+     "moment_0.01g_MN_m": 3050.0951100961042,
+     "shear_0.01g_MN": 25.46572060510835
+    },
+    "J3": {
+     "axial_design_MN": 0.11020717231064274,
+     "lateral_0.01g_MN": 0.029419949999999997
+    },
+    "lateral": {
+     "0.002g": {
+      "root_moment_MN_m": 610.0190220192208,
+      "root_shear_MN": 5.09314412102167,
+      "stress_MPa": 20.32884324780602,
+      "allowable_MPa": 240.0,
+      "ok": 1.0
+     },
+     "0.01g": {
+      "root_moment_MN_m": 3050.0951100961042,
+      "root_shear_MN": 25.46572060510835,
+      "stress_MPa": 56.4203229865159,
+      "allowable_MPa": 240.0,
+      "ok": 1.0
+     }
+    },
+    "local": {
+     "longeron_bay_Hz": 110.82255497123874,
+     "longeron_load_MN": 17.974235885157388,
+     "longeron_Pcr_MN": 1557.0514694781994,
+     "longeron_buckling_margin": 86.62685186878893,
+     "frame_ovalling_n2_Hz": 0.021005601779394898,
+     "pulse_clear": {
+      "longeron_bay": true,
+      "frame_n2": true
+     }
+    },
+    "EI_N_m2": 1530125808550129.8,
+    "EA_N": 365241684317.00494,
+    "pulse_Hz": 249.99999999999994,
+    "bow_kg": 300000.0,
+    "shield": {
+     "farm_radius_m": 104.94810939178059,
+     "needed_half_angle_deg": 14.703237918840225,
+     "fdp1_half_angle_deg": 4.756181686137737,
+     "shield_area_factor": 9.94662895475123,
+     "added_kg": 3909920.1379856183,
+     "shield_radius_m": 32.4349429658452
+    }
+   },
+   "launcher": {
+    "tip_m": 108.8179013163043,
+    "target_g": 7.97307095330947,
+    "muzzle_m_s": 27204.475329076067,
+    "accelerator_m": 1257.7918690043803,
+    "launcher_kg": 373455.34806019894,
+    "electric_W": 7375922601.137988,
+    "sabot_catcher_W": 2212776780.341396,
+    "tip_xray_J_cm2": 5.235945200195808,
+    "rate_Hz": 249.99999999999994,
+    "fits_gas_capsule": true
+   },
+   "propellant_t": 256568.0230772924
+  },
+  {
+   "label": "full: spine free-free 0.2 Hz, cap 196 Hz",
+   "rate_cap_Hz": 196.0,
+   "items": [
+    "coils",
+    "launcher",
+    "spine",
+    [
+     "free_free",
+     0.2
+    ]
+   ],
+   "J_e_A_mm2": 150.0,
+   "status": "NON-CONVERGING (diverges past 400 kt)",
+   "iterations": 5,
+   "departure_trajectory_t": [
+    42915.78384891936,
+    117879.12515073945,
+    201452.9542660305,
+    292623.0133824688,
+    390333.04072267876,
+    525936.3099286165
+   ],
+   "history": [
+    {
+     "departure_t": 117879.12515073945,
+     "rate_Hz": 195.99999999999994,
+     "stand_off_m": 90.34901286074394,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2049.9387493004497,
+      "spine N9 over S2 keels": 331.2683818134067,
+      "shadow shield growth (wide farm)": 98.42652999777702,
+      "launcher B-ray": 53.976740078117274
+     }
+    },
+    {
+     "departure_t": 201452.9542660305,
+     "rate_Hz": 195.99999999999994,
+     "stand_off_m": 107.38205608448555,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 3571.998220554961,
+      "spine N9 over S2 keels": 884.419905829974,
+      "shadow shield growth (wide farm)": 1216.1836979882398,
+      "launcher B-ray": 110.20503594802707
+     }
+    },
+    {
+     "departure_t": 292623.0133824688,
+     "rate_Hz": 195.99999999999994,
+     "stand_off_m": 121.14958364509968,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 5222.372564637383,
+      "spine N9 over S2 keels": 1791.3474809841337,
+      "shadow shield growth (wide farm)": 2133.558575451133,
+      "launcher B-ray": 162.20240328632448
+     }
+    },
+    {
+     "departure_t": 390333.04072267876,
+     "rate_Hz": 195.99999999999994,
+     "stand_off_m": 132.99356070118222,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 6836.095173760795,
+      "spine N9 over S2 keels": 3139.745819724241,
+      "shadow shield growth (wide farm)": 2728.5181146925643,
+      "launcher B-ray": 215.0101029106686
+     }
+    },
+    {
+     "departure_t": 525936.3099286165,
+     "rate_Hz": 195.99999999999994,
+     "stand_off_m": 146.49544816707484,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 8437.786277688785,
+      "spine N9 over S2 keels": 5001.403323412413,
+      "shadow shield growth (wide farm)": 4206.086134911619,
+      "launcher B-ray": 269.72166038245234
+     }
+    }
+   ],
+   "loop_gain": 1.3878132357264605,
+   "added_kg": {
+    "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 8437786.277688785,
+    "spine N9 over S2 keels": 5001403.323412413,
+    "shadow shield growth (wide farm)": 4206086.134911619,
+    "launcher B-ray": 269721.66038245236
+   },
+   "final_set": {
+    "base.overrides.continuous.plume_to_hardware.value": 0.06530882986076621,
+    "base.overrides.pulsed.house_fraction.value": 6.320083081623495e-05,
+    "mission.payload.reference_t": 19155.19739639527,
+    "base.overrides.pulsed.nozzle_efficiency.optimistic": 0.7778196163409543
+   },
+   "summary": {
+    "converged": true,
+    "departure_t": 525936.3099286165,
+    "a0_g": 0.006895573489099627,
+    "fusion_TW": 442.1458724415518,
+    "radiator_t": 45173.04626797986,
+    "hot_km2": 6.061850644996275,
+    "warm_km2": 61.74466717585082,
+    "drive_t": 84143.61149446829,
+    "propellant_t": 332309.4454216737,
+    "tank_t": 31862.63153157763,
+    "end_t": 193626.86450694274,
+    "xray_standoff_m": null,
+    "payload_t": 19155.19739639527,
+    "wing_tip_radius_m": 127079.50948630314,
+    "pellet_rate_Hz": 195.99999999999994
+   },
+   "fusion": {
+    "yield_per_pulse_GJ": 2255.846287908511,
+    "pellet_rate_Hz": 195.99999999999994,
+    "fuel_g": 7.855766167475272,
+    "target_gain": 1084.3326176985665,
+    "driver_MJ": 2080.400654825283,
+    "stand_off_m": 146.49544816707484,
+    "thrust_MN": 35.565115367810186,
+    "peak_accel_g": 0.01873000673193577,
+    "jet_TW": 341.445950111188,
+    "mass_flow_kg_s": 1.8522366874080005
+   },
+   "heat_rejection": {
+    "hot_km2": 6.061850644996275,
+    "warm_km2": 61.74466717585082,
+    "radiator_t": 45173.04626797986,
+    "coil_hot_GW": 22.31787010460566,
+    "coil_warm_GW": 0.03949059376074219
+   },
+   "coils": [
+    {
+     "name": "C1",
+     "radius_m": 50.10439417866101,
+     "distance_m": 146.49544816707484,
+     "z_from_burn_m": 137.66069162132476,
+     "current_A": 380110618.83825207,
+     "winding_minor_m": 3.0408849507060167,
+     "stored_J": 14243426157621.748
+    },
+    {
+     "name": "C2",
+     "radius_m": 94.16545895727235,
+     "distance_m": 146.49544816707484,
+     "z_from_burn_m": 112.22202401061196,
+     "current_A": 30554082.323850363,
+     "winding_minor_m": 0.24443265859080288,
+     "stored_J": 347055155473.55206
+    }
+   ],
+   "coil_scale_from_V4": 2.2642478855414425,
+   "spine": {
+    "farm": "wide",
+    "basis": [
+     "free_free",
+     0.2
+    ],
+    "longeron_ring_m": 93.49121989357693,
+    "stretch_scale": 9.095325907584968,
+    "bays": 9,
+    "length_m": 275.4,
+    "tube_r_m": 0.7213961262223892,
+    "added_t": 5001.403323412413,
+    "structure_t": 5092.29260525805,
+    "f1_cantilever_Hz": 0.06998262449577941,
+    "f1_free_free_Hz": 0.21724793417940952,
+    "buckling_factor_SF2": 45.058162756390345,
+    "J1": {
+     "axial_design_MN": 33.823860529854514,
+     "moment_0.01g_MN_m": 2997.308281122902,
+     "shear_0.01g_MN": 25.025161033308695
+    },
+    "J3": {
+     "axial_design_MN": 0.11020717231064275,
+     "lateral_0.01g_MN": 0.029419949999999997
+    },
+    "lateral": {
+     "0.002g": {
+      "root_moment_MN_m": 599.4616562245806,
+      "root_shear_MN": 5.005032206661739,
+      "stress_MPa": 20.55219494834105,
+      "allowable_MPa": 240.0,
+      "ok": 1.0
+     },
+     "0.01g": {
+      "root_moment_MN_m": 2997.308281122902,
+      "root_shear_MN": 25.025161033308695,
+      "stress_MPa": 57.240737243541695,
+      "allowable_MPa": 240.0,
+      "ok": 1.0
+     }
+    },
+    "local": {
+     "longeron_bay_Hz": 109.43248636218381,
+     "longeron_load_MN": 17.781005002870543,
+     "longeron_Pcr_MN": 1480.3874745805201,
+     "longeron_buckling_margin": 83.25668174220344,
+     "frame_ovalling_n2_Hz": 0.021501563656331414,
+     "pulse_clear": {
+      "longeron_bay": true,
+      "frame_n2": true
+     }
+    },
+    "EI_N_m2": 1466469423237449.0,
+    "EA_N": 356664506747.90906,
+    "pulse_Hz": 195.99999999999994,
+    "bow_kg": 300000.0,
+    "shield": {
+     "farm_radius_m": 104.04668020414206,
+     "needed_half_angle_deg": 14.28630474402074,
+     "fdp1_half_angle_deg": 4.65135676129804,
+     "shield_area_factor": 9.795708712897016,
+     "added_kg": 4206086.134911619,
+     "shield_radius_m": 33.86578109852328
+    }
+   },
+   "launcher": {
+    "tip_m": 128.04321792736857,
+    "target_g": 12.21983328074398,
+    "muzzle_m_s": 25096.470713764233,
+    "accelerator_m": 1070.4179345764112,
+    "launcher_kg": 344569.0069189241,
+    "electric_W": 7542523280.932484,
+    "sabot_catcher_W": 2262756984.279745,
+    "tip_xray_J_cm2": 5.235945200195809,
+    "rate_Hz": 195.99999999999994,
+    "fits_gas_capsule": true
+   },
+   "propellant_t": 332309.4454216737
+  },
+  {
+   "label": "full: spine cantilever 0.2 Hz, long farm (same section)",
+   "rate_cap_Hz": null,
+   "items": [
+    "coils",
+    "launcher",
+    "spine",
+    [
+     "cantilever",
+     0.2
+    ],
+    "long"
+   ],
+   "J_e_A_mm2": 150.0,
+   "status": "NON-CONVERGING (diverges past 400 kt)",
+   "iterations": 2,
+   "departure_trajectory_t": [
+    42915.783853018824,
+    103882.8054726951,
+    734254.0259758249
+   ],
+   "history": [
+    {
+     "departure_t": 103882.8054726951,
+     "rate_Hz": 407.51326351361655,
+     "stand_off_m": 68.58760740286976,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2049.938747042391,
+      "spine N9 over S2 keels": 1968.8464040565864,
+      "shadow shield growth (wide farm)": 0.0,
+      "launcher B-ray": 53.97674032163315
+     }
+    },
+    {
+     "departure_t": 734254.0259758249,
+     "rate_Hz": 1000.0,
+     "stand_off_m": 96.34624124913026,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2519.1623040874124,
+      "spine N9 over S2 keels": 45255.76646748129,
+      "shadow shield growth (wide farm)": 0.0,
+      "launcher B-ray": 264.2149560397701
+     }
+    }
+   ],
+   "loop_gain": 10.339544293888979,
+   "added_kg": {
+    "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2519162.3040874125,
+    "spine N9 over S2 keels": 45255766.46748129,
+    "shadow shield growth (wide farm)": 0.0,
+    "launcher B-ray": 264214.9560397701
+   },
+   "final_set": {
+    "base.overrides.continuous.plume_to_hardware.value": 0.06573173659999457,
+    "base.overrides.pulsed.house_fraction.value": 7.636608323288295e-05,
+    "mission.payload.reference_t": 49279.34372760847,
+    "base.overrides.pulsed.nozzle_efficiency.optimistic": 0.7778196163409543
+   },
+   "summary": {
+    "converged": true,
+    "departure_t": 734254.0259758249,
+    "a0_g": 0.006895573489099627,
+    "fusion_TW": 619.0026598488664,
+    "radiator_t": 63690.49510098961,
+    "hot_km2": 8.560583405462067,
+    "warm_km2": 87.00219808309335,
+    "drive_t": 94748.5110439113,
+    "propellant_t": 463933.64284693485,
+    "tank_t": 44044.68754277233,
+    "end_t": 270320.38312889007,
+    "xray_standoff_m": null,
+    "payload_t": 49279.34372760847,
+    "wing_tip_radius_m": 179106.2455082494,
+    "pellet_rate_Hz": 1000.0
+   },
+   "fusion": {
+    "yield_per_pulse_GJ": 619.0026598398935,
+    "pellet_rate_Hz": 1000.0,
+    "fuel_g": 2.352174370961018,
+    "target_gain": 1084.3326176985665,
+    "driver_MJ": 570.8604995704094,
+    "stand_off_m": 96.34624124913026,
+    "thrust_MN": 49.65207507094092,
+    "peak_accel_g": 0.01873000673193577,
+    "jet_TW": 476.68901878310743,
+    "mass_flow_kg_s": 2.5858877189407967
+   },
+   "heat_rejection": {
+    "hot_km2": 8.560583405462067,
+    "warm_km2": 87.00219808309335,
+    "radiator_t": 63690.49510098961,
+    "coil_hot_GW": 14.07332097800736,
+    "coil_warm_GW": 0.02616603648147583
+   },
+   "coils": [
+    {
+     "name": "C1",
+     "radius_m": 32.95235524091699,
+     "distance_m": 96.34624124913026,
+     "z_from_burn_m": 90.53585194226662,
+     "current_A": 245185086.50875542,
+     "winding_minor_m": 1.9614806920700432,
+     "stored_J": 3921713886863.531
+    },
+    {
+     "name": "C2",
+     "radius_m": 61.9301701148111,
+     "distance_m": 96.34624124913026,
+     "z_from_burn_m": 73.8055027242967,
+     "current_A": 19708487.33630536,
+     "winding_minor_m": 0.1576678986904429,
+     "stored_J": 95261251670.78947
+    }
+   ],
+   "coil_scale_from_V4": 1.4891368691497608,
+   "spine": {
+    "farm": "long",
+    "basis": [
+     "cantilever",
+     0.2
+    ],
+    "longeron_ring_m": 31.0,
+    "stretch_scale": 2.420620017765041,
+    "bays": 21,
+    "length_m": 642.5999999999999,
+    "tube_r_m": 2.0,
+    "added_t": 45255.76646748129,
+    "structure_t": 45467.841458454444,
+    "f1_cantilever_Hz": 0.10943691103473313,
+    "f1_free_free_Hz": 0.5124630410038459,
+    "buckling_factor_SF2": 526.9083742849074,
+    "J1": {
+     "axial_design_MN": 8.996299202502378,
+     "moment_0.01g_MN_m": 3453.972435790359,
+     "shear_0.01g_MN": 10.98211427949256
+    },
+    "J3": {
+     "axial_design_MN": 0.11020717231064274,
+     "lateral_0.01g_MN": 0.029419949999999997
+    },
+    "lateral": {
+     "0.002g": {
+      "root_moment_MN_m": 690.7944871580719,
+      "root_shear_MN": 2.196422855898512,
+      "stress_MPa": 4.546994922580873,
+      "allowable_MPa": 240.0,
+      "ok": 1.0
+     },
+     "0.01g": {
+      "root_moment_MN_m": 3453.972435790359,
+      "root_shear_MN": 10.98211427949256,
+      "stress_MPa": 21.073989957601384,
+      "allowable_MPa": 240.0,
+      "ok": 1.0
+     }
+    },
+    "local": {
+     "longeron_bay_Hz": 303.3908344787767,
+     "longeron_load_MN": 50.31647794479542,
+     "longeron_Pcr_MN": 87458.12472417361,
+     "longeron_buckling_margin": 1738.160703937347,
+     "frame_ovalling_n2_Hz": 0.04714997375903275,
+     "pulse_clear": {
+      "longeron_bay": true,
+      "frame_n2": true
+     }
+    },
+    "EI_N_m2": 1243906947044031.0,
+    "EA_N": 2599797417402.0566,
+    "pulse_Hz": 407.51326351361655,
+    "bow_kg": 300000.0,
+    "shield": {
+     "farm_radius_m": 34.5,
+     "added_kg": 0.0
+    }
+   },
+   "launcher": {
+    "tip_m": 84.21068995041898,
+    "target_g": 4.130802301455959,
+    "muzzle_m_s": 84210.68995041898,
+    "accelerator_m": 12052.094415397709,
+    "launcher_kg": 3305956.983047745,
+    "electric_W": 146466689599.15894,
+    "sabot_catcher_W": 43940006879.74769,
+    "tip_xray_J_cm2": 5.2359452001958084,
+    "rate_Hz": 1000.0,
+    "fits_gas_capsule": true
+   },
+   "propellant_t": 463933.64284693485
+  },
+  {
+   "label": "full (free-free 0.2 Hz) + FDP-1 loop conductor, rate free",
+   "rate_cap_Hz": null,
+   "items": [
+    "coils",
+    "launcher",
+    "spine",
+    [
+     "free_free",
+     0.2
+    ],
+    "loops"
+   ],
+   "J_e_A_mm2": 150.0,
+   "status": "CONVERGED",
+   "iterations": 35,
+   "departure_trajectory_t": [
+    42915.783853018824,
+    120588.57360021597,
+    160660.47649400594,
+    182311.24148320098,
+    195479.71962325167,
+    204037.9838003565,
+    209834.54196486052,
+    213869.16120738967,
+    216730.3833607592,
+    218786.25638831596,
+    220277.34500416997,
+    221366.1296753374,
+    222165.0688438507,
+    222753.43226957505,
+    223187.86891629655,
+    223509.2721421296,
+    223747.39573604998,
+    223924.00561657595,
+    224055.09601590928,
+    224152.45655147327,
+    224224.79742181665,
+    224278.56611282655,
+    224318.5392098023,
+    224348.2625548018,
+    224370.36592589592,
+    224386.80601844462,
+    224399.03391848682,
+    224408.12897674693,
+    224414.89540803691,
+    224419.92837617788,
+    224423.67214195448,
+    224426.45760275624,
+    224428.53001290272,
+    224430.07113747863,
+    224431.2197428069,
+    224432.0727113906
+   ],
+   "history": [
+    {
+     "departure_t": 120588.57360021597,
+     "rate_Hz": 473.0469068012826,
+     "stand_off_m": 68.58760943423626,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2049.938747042391,
+      "FDP-1 loop conductor (adapter term)": 2812.4970097571027,
+      "spine N9 over S2 keels": 331.2683818289869,
+      "shadow shield growth (wide farm)": 98.42652993461952,
+      "launcher B-ray": 53.97674032163315
+     }
+    },
+    {
+     "departure_t": 160660.47649400594,
+     "rate_Hz": 630.0192269337736,
+     "stand_off_m": 68.59696159597357,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2591.7719351245764,
+      "FDP-1 loop conductor (adapter term)": 3148.79813084422,
+      "spine N9 over S2 keels": 908.9180153302351,
+      "shadow shield growth (wide farm)": 1210.3006187140838,
+      "launcher B-ray": 356.02651353927797
+     }
+    },
+    {
+     "departure_t": 182311.24148320098,
+     "rate_Hz": 714.6885181070865,
+     "stand_off_m": 68.60558911959448,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2761.666183328583,
+      "FDP-1 loop conductor (adapter term)": 3149.629525155557,
+      "spine N9 over S2 keels": 1309.4821623207906,
+      "shadow shield growth (wide farm)": 1787.951133720188,
+      "launcher B-ray": 631.6918430334354
+     }
+    },
+    {
+     "departure_t": 195479.71962325167,
+     "rate_Hz": 766.1468443400919,
+     "stand_off_m": 68.61126707035699,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2851.7082251408215,
+      "FDP-1 loop conductor (adapter term)": 3150.396587527326,
+      "spine N9 over S2 keels": 1555.8964418217738,
+      "shadow shield growth (wide farm)": 2101.6578724941796,
+      "launcher B-ray": 813.1027046391798
+     }
+    },
+    {
+     "departure_t": 204037.9838003565,
+     "rate_Hz": 799.5746718258214,
+     "stand_off_m": 68.61506922316845,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2906.0109346220393,
+      "FDP-1 loop conductor (adapter term)": 3150.9014570042687,
+      "spine N9 over S2 keels": 1716.1004221064013,
+      "shadow shield growth (wide farm)": 2292.9420914551274,
+      "launcher B-ray": 934.5680649174647
+     }
+    },
+    {
+     "departure_t": 209834.54196486052,
+     "rate_Hz": 822.2089222051175,
+     "stand_off_m": 68.6176813065365,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2941.1399070707525,
+      "FDP-1 loop conductor (adapter term)": 3151.2395593481324,
+      "spine N9 over S2 keels": 1824.4111311602521,
+      "shadow shield growth (wide farm)": 2417.4419270581125,
+      "launcher B-ray": 1018.0175156127516
+     }
+    },
+    {
+     "departure_t": 213869.16120738967,
+     "rate_Hz": 837.9601023999521,
+     "stand_off_m": 68.61951391898387,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2964.8660757320486,
+      "FDP-1 loop conductor (adapter term)": 3151.4718457647405,
+      "spine N9 over S2 keels": 1899.6478184674097,
+      "shadow shield growth (wide farm)": 2501.845350892888,
+      "launcher B-ray": 1076.5547271803562
+     }
+    },
+    {
+     "departure_t": 216730.3833607592,
+     "rate_Hz": 849.1288305916833,
+     "stand_off_m": 68.62081924895482,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2981.350186337945,
+      "FDP-1 loop conductor (adapter term)": 3151.6348224163075,
+      "spine N9 over S2 keels": 1952.9104041025344,
+      "shadow shield growth (wide farm)": 2560.6300599079837,
+      "launcher B-ray": 1118.2596699696483
+     }
+    },
+    {
+     "departure_t": 218786.25638831596,
+     "rate_Hz": 857.1530823717017,
+     "stand_off_m": 68.62176099356074,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2993.025700544376,
+      "FDP-1 loop conductor (adapter term)": 3151.750907771551,
+      "spine N9 over S2 keels": 1991.1277959976364,
+      "shadow shield growth (wide farm)": 2602.336293508627,
+      "launcher B-ray": 1148.3133598445454
+     }
+    },
+    {
+     "departure_t": 220277.34500416997,
+     "rate_Hz": 862.9725656886633,
+     "stand_off_m": 68.62244446071831,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 3001.4076985417937,
+      "FDP-1 loop conductor (adapter term)": 3151.8346662686095,
+      "spine N9 over S2 keels": 2018.816280034409,
+      "shadow shield growth (wide farm)": 2632.312609163489,
+      "launcher B-ray": 1170.1525451635075
+     }
+    },
+    {
+     "departure_t": 221366.1296753374,
+     "rate_Hz": 867.2217330555948,
+     "stand_off_m": 68.62294356929901,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 3007.483275652403,
+      "FDP-1 loop conductor (adapter term)": 3151.8954493851934,
+      "spine N9 over S2 keels": 2039.0176229528124,
+      "shadow shield growth (wide farm)": 2654.0586286377716,
+      "launcher B-ray": 1186.1202413009116
+     }
+    },
+    {
+     "departure_t": 222165.0688438507,
+     "rate_Hz": 870.3395787312595,
+     "stand_off_m": 68.62331109358855,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 3011.9176646630253,
+      "FDP-1 loop conductor (adapter term)": 3151.9398338251344,
+      "spine N9 over S2 keels": 2053.8319325007924,
+      "shadow shield growth (wide farm)": 2669.9399438092087,
+      "launcher B-ray": 1197.8478151410836
+     }
+    },
+    {
+     "departure_t": 222753.43226957505,
+     "rate_Hz": 872.6356288767879,
+     "stand_off_m": 68.62358107442496,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 3015.170561149927,
+      "FDP-1 loop conductor (adapter term)": 3151.9725222239476,
+      "spine N9 over S2 keels": 2064.736564684714,
+      "shadow shield growth (wide farm)": 2681.5948490240094,
+      "launcher B-ray": 1206.4898337448396
+     }
+    },
+    {
+     "departure_t": 223187.86891629655,
+     "rate_Hz": 874.3309090492065,
+     "stand_off_m": 68.6237817138222,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 3017.5655161792993,
+      "FDP-1 loop conductor (adapter term)": 3151.9965303566737,
+      "spine N9 over S2 keels": 2072.785495842665,
+      "shadow shield growth (wide farm)": 2690.178585885944,
+      "launcher B-ray": 1212.873903864994
+     }
+    },
+    {
+     "departure_t": 223509.2721421296,
+     "rate_Hz": 875.5851458818289,
+     "stand_off_m": 68.623928705799,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 3019.3336343112574,
+      "FDP-1 loop conductor (adapter term)": 3152.0143791164205,
+      "spine N9 over S2 keels": 2078.7387070779437,
+      "shadow shield growth (wide farm)": 2696.5170737691387,
+      "launcher B-ray": 1217.5984515331088
+     }
+    },
+    {
+     "departure_t": 223747.39573604998,
+     "rate_Hz": 876.5143350819557,
+     "stand_off_m": 68.62403887137434,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 3020.6415152040327,
+      "FDP-1 loop conductor (adapter term)": 3152.027447016677,
+      "spine N9 over S2 keels": 2083.148472047741,
+      "shadow shield growth (wide farm)": 2701.206575197951,
+      "launcher B-ray": 1221.0997382947653
+     }
+    },
+    {
+     "departure_t": 223924.00561657595,
+     "rate_Hz": 877.2035196645788,
+     "stand_off_m": 68.6241197072332,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 3021.6104482767264,
+      "FDP-1 loop conductor (adapter term)": 3152.037248059667,
+      "spine N9 over S2 keels": 2086.418618704477,
+      "shadow shield growth (wide farm)": 2704.681107496655,
+      "launcher B-ray": 1223.6969317199923
+     }
+    },
+    {
+     "departure_t": 224055.09601590928,
+     "rate_Hz": 877.7150618328301,
+     "stand_off_m": 68.62417993518962,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 3022.3290085753665,
+      "FDP-1 loop conductor (adapter term)": 3152.044434638149,
+      "spine N9 over S2 keels": 2088.8456520706254,
+      "shadow shield growth (wide farm)": 2707.258123549089,
+      "launcher B-ray": 1225.6250389345732
+     }
+    },
+    {
+     "departure_t": 224152.45655147327,
+     "rate_Hz": 878.0949747506708,
+     "stand_off_m": 68.62422483862943,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 3022.8623453888094,
+      "FDP-1 loop conductor (adapter term)": 3152.0497905017955,
+      "spine N9 over S2 keels": 2090.6480516424645,
+      "shadow shield growth (wide farm)": 2709.170977893516,
+      "launcher B-ray": 1227.0571552898543
+     }
+    },
+    {
+     "departure_t": 224224.79742181665,
+     "rate_Hz": 878.3772543831302,
+     "stand_off_m": 68.6242582662237,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 3023.2584424231145,
+      "FDP-1 loop conductor (adapter term)": 3152.053784401947,
+      "spine N9 over S2 keels": 2091.9871916994953,
+      "shadow shield growth (wide farm)": 2710.5916734611465,
+      "launcher B-ray": 1228.1213109855892
+     }
+    },
+    {
+     "departure_t": 224278.56611282655,
+     "rate_Hz": 878.5870452492558,
+     "stand_off_m": 68.62428356856074,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 3023.5527440321007,
+      "FDP-1 loop conductor (adapter term)": 3152.056758096845,
+      "spine N9 over S2 keels": 2092.9824772620746,
+      "shadow shield growth (wide farm)": 2711.6472904711695,
+      "launcher B-ray": 1228.9122928180257
+     }
+    },
+    {
+     "departure_t": 224318.5392098023,
+     "rate_Hz": 878.7430437990531,
+     "stand_off_m": 68.6243015123927,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 3023.7714957932567,
+      "FDP-1 loop conductor (adapter term)": 3152.0590115527903,
+      "spine N9 over S2 keels": 2093.7223947420757,
+      "shadow shield growth (wide farm)": 2712.4319123992104,
+      "launcher B-ray": 1229.5003350304298
+     }
+    },
+    {
+     "departure_t": 224348.2625548018,
+     "rate_Hz": 878.8590063978475,
+     "stand_off_m": 68.6243157402678,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 3023.9340978811374,
+      "FDP-1 loop conductor (adapter term)": 3152.06060484834,
+      "spine N9 over S2 keels": 2094.272553965023,
+      "shadow shield growth (wide farm)": 2713.0152086862,
+      "launcher B-ray": 1229.937656530241
+     }
+    },
+    {
+     "departure_t": 224370.36592589592,
+     "rate_Hz": 878.9452886767795,
+     "stand_off_m": 68.62432510933623,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 3024.0550264292006,
+      "FDP-1 loop conductor (adapter term)": 3152.0618731529116,
+      "spine N9 over S2 keels": 2094.6816901791426,
+      "shadow shield growth (wide farm)": 2713.4489563101824,
+      "launcher B-ray": 1230.2628264618288
+     }
+    },
+    {
+     "departure_t": 224386.80601844462,
+     "rate_Hz": 879.0094176425621,
+     "stand_off_m": 68.62433323317386,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 3024.144922834172,
+      "FDP-1 loop conductor (adapter term)": 3152.0627018538025,
+      "spine N9 over S2 keels": 2094.9859647469057,
+      "shadow shield growth (wide farm)": 2713.771485470756,
+      "launcher B-ray": 1230.5047522112636
+     }
+    },
+    {
+     "departure_t": 224399.03391848682,
+     "rate_Hz": 879.0571339859174,
+     "stand_off_m": 68.62433882170743,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 3024.2118143385487,
+      "FDP-1 loop conductor (adapter term)": 3152.0634276343417,
+      "spine N9 over S2 keels": 2095.2122930440282,
+      "shadow shield growth (wide farm)": 2714.0113989560273,
+      "launcher B-ray": 1230.6846216727681
+     }
+    },
+    {
+     "departure_t": 224408.12897674693,
+     "rate_Hz": 879.0926433692127,
+     "stand_off_m": 68.62434252580309,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 3024.261555693882,
+      "FDP-1 loop conductor (adapter term)": 3152.063924417335,
+      "spine N9 over S2 keels": 2095.380640635316,
+      "shadow shield growth (wide farm)": 2714.1898351326886,
+      "launcher B-ray": 1230.818448272136
+     }
+    },
+    {
+     "departure_t": 224414.89540803691,
+     "rate_Hz": 879.1190157133368,
+     "stand_off_m": 68.62434641807405,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 3024.2985416982788,
+      "FDP-1 loop conductor (adapter term)": 3152.06425092616,
+      "spine N9 over S2 keels": 2095.5058611932677,
+      "shadow shield growth (wide farm)": 2714.3225470762463,
+      "launcher B-ray": 1230.9180265159534
+     }
+    },
+    {
+     "departure_t": 224419.92837617788,
+     "rate_Hz": 879.1386679598238,
+     "stand_off_m": 68.62434840841574,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 3024.3260861246094,
+      "FDP-1 loop conductor (adapter term)": 3152.0646014964523,
+      "spine N9 over S2 keels": 2095.5990237064243,
+      "shadow shield growth (wide farm)": 2714.421302053203,
+      "launcher B-ray": 1230.9920274983997
+     }
+    },
+    {
+     "departure_t": 224423.67214195448,
+     "rate_Hz": 879.1532959535098,
+     "stand_off_m": 68.62434964640653,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 3024.346551747661,
+      "FDP-1 loop conductor (adapter term)": 3152.0647766972197,
+      "spine N9 over S2 keels": 2095.668320646032,
+      "shadow shield growth (wide farm)": 2714.4947398895415,
+      "launcher B-ray": 1231.0471390494777
+     }
+    },
+    {
+     "departure_t": 224426.45760275624,
+     "rate_Hz": 879.1641614178698,
+     "stand_off_m": 68.62435102293328,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 3024.3617691372783,
+      "FDP-1 loop conductor (adapter term)": 3152.064884074867,
+      "spine N9 over S2 keels": 2095.7198678076043,
+      "shadow shield growth (wide farm)": 2714.5493618509754,
+      "launcher B-ray": 1231.088152535736
+     }
+    },
+    {
+     "departure_t": 224428.53001290272,
+     "rate_Hz": 879.1722274401803,
+     "stand_off_m": 68.62435249513,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 3024.373102387535,
+      "FDP-1 loop conductor (adapter term)": 3152.0650069634003,
+      "spine N9 over S2 keels": 2095.75822068542,
+      "shadow shield growth (wide farm)": 2714.5900112463387,
+      "launcher B-ray": 1231.1186344036082
+     }
+    },
+    {
+     "departure_t": 224430.07113747863,
+     "rate_Hz": 879.1782609515781,
+     "stand_off_m": 68.62435270892396,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 3024.3815455556874,
+      "FDP-1 loop conductor (adapter term)": 3152.065140922829,
+      "spine N9 over S2 keels": 2095.78675581774,
+      "shadow shield growth (wide farm)": 2714.6202630950506,
+      "launcher B-ray": 1231.1412799336952
+     }
+    },
+    {
+     "departure_t": 224431.2197428069,
+     "rate_Hz": 879.1827417401876,
+     "stand_off_m": 68.62435332479001,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 3024.3878023741145,
+      "FDP-1 loop conductor (adapter term)": 3152.065157013973,
+      "spine N9 over S2 keels": 2095.8079757705354,
+      "shadow shield growth (wide farm)": 2714.6427424584554,
+      "launcher B-ray": 1231.1581858906256
+     }
+    },
+    {
+     "departure_t": 224432.0727113906,
+     "rate_Hz": 879.186055079168,
+     "stand_off_m": 68.6243540353517,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 3024.392473303658,
+      "FDP-1 loop conductor (adapter term)": 3152.0652081948715,
+      "spine N9 over S2 keels": 2095.8237911525994,
+      "shadow shield growth (wide farm)": 2714.6595052180987,
+      "launcher B-ray": 1231.1707583780294
+     }
+    }
+   ],
+   "loop_gain": 0.742612421094011,
+   "added_kg": {
+    "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 3024392.473303658,
+    "FDP-1 loop conductor (adapter term)": 3152065.2081948714,
+    "spine N9 over S2 keels": 2095823.7911525993,
+    "shadow shield growth (wide farm)": 2714659.505218099,
+    "launcher B-ray": 1231170.7583780293
+   },
+   "final_set": {
+    "base.overrides.continuous.plume_to_hardware.value": 0.06573146432899654,
+    "base.overrides.pulsed.house_fraction.value": 0.0001936314807990163,
+    "mission.payload.reference_t": 13458.311736247257,
+    "base.overrides.pulsed.nozzle_efficiency.optimistic": 0.7778196163409543
+   },
+   "summary": {
+    "converged": true,
+    "departure_t": 224432.0727113906,
+    "a0_g": 0.006895573489099627,
+    "fusion_TW": 189.8853086136018,
+    "radiator_t": 20306.6371295801,
+    "hot_km2": 2.633109558059676,
+    "warm_km2": 28.107802290183287,
+    "drive_t": 29880.83474490273,
+    "propellant_t": 141805.94914179164,
+    "tank_t": 13308.10199319719,
+    "end_t": 82626.12356959895,
+    "xray_standoff_m": null,
+    "payload_t": 13458.311736247257,
+    "wing_tip_radius_m": 57603.20963137505,
+    "pellet_rate_Hz": 879.186055079168
+   },
+   "fusion": {
+    "yield_per_pulse_GJ": 215.97852640702226,
+    "pellet_rate_Hz": 879.186055079168,
+    "fuel_g": 0.8990160708867492,
+    "target_gain": 1084.3326176985665,
+    "driver_MJ": 199.1810657373973,
+    "stand_off_m": 68.6243540353517,
+    "thrust_MN": 15.176652395992084,
+    "peak_accel_g": 0.01873000673193577,
+    "jet_TW": 145.70475712689415,
+    "mass_flow_kg_s": 0.7904023948517253
+   },
+   "heat_rejection": {
+    "hot_km2": 2.633109558059676,
+    "warm_km2": 28.107802290183287,
+    "radiator_t": 20306.6371295801,
+    "coil_hot_GW": 30.393069756067177,
+    "coil_warm_GW": 0.049336314041687014
+   },
+   "coils": [
+    {
+     "name": "C1",
+     "radius_m": 23.470911402802418,
+     "distance_m": 68.6243540353517,
+     "z_from_burn_m": 64.48579909321967,
+     "current_A": 171309121.37995818,
+     "winding_minor_m": 1.3704729710396655,
+     "stored_J": 1371944563959.793
+    },
+    {
+     "name": "C2",
+     "radius_m": 44.110884496666536,
+     "distance_m": 68.6243540353517,
+     "z_from_burn_m": 52.56930507141058,
+     "current_A": 13770183.567791918,
+     "winding_minor_m": 0.11016146854233534,
+     "stored_J": 33224356401.41186
+    }
+   ],
+   "coil_scale_from_V4": 1.0606646859360576,
+   "spine": {
+    "farm": "wide",
+    "basis": [
+     "free_free",
+     0.2
+    ],
+    "longeron_ring_m": 70.8916042011623,
+    "stretch_scale": 5.229572888880595,
+    "bays": 9,
+    "length_m": 275.4,
+    "tube_r_m": 0.48475025457388254,
+    "added_t": 2095.8237911525994,
+    "structure_t": 2186.713072998236,
+    "f1_cantilever_Hz": 0.06922177460960746,
+    "f1_free_free_Hz": 0.21718587697402042,
+    "buckling_factor_SF2": 46.13717118964834,
+    "J1": {
+     "axial_design_MN": 19.465073917850184,
+     "moment_0.01g_MN_m": 1716.807735305524,
+     "shear_0.01g_MN": 14.328623900985033
+    },
+    "J3": {
+     "axial_design_MN": 0.11020717231064273,
+     "lateral_0.01g_MN": 0.029419949999999997
+    },
+    "lateral": {
+     "0.002g": {
+      "root_moment_MN_m": 343.3615470611049,
+      "root_shear_MN": 2.8657247801970063,
+      "stress_MPa": 28.86645996908501,
+      "allowable_MPa": 240.0,
+      "ok": 1.0
+     },
+     "0.01g": {
+      "root_moment_MN_m": 1716.807735305524,
+      "root_shear_MN": 14.328623900985033,
+      "stress_MPa": 90.21911094491125,
+      "allowable_MPa": 240.0,
+      "ok": 1.0
+     }
+    },
+    "local": {
+     "longeron_bay_Hz": 73.53439212448484,
+     "longeron_load_MN": 12.65429948000116,
+     "longeron_Pcr_MN": 301.8230209328429,
+     "longeron_buckling_margin": 23.851420729361088,
+     "frame_ovalling_n2_Hz": 0.044553949265303996,
+     "pulse_clear": {
+      "longeron_bay": true,
+      "frame_n2": true
+     }
+    },
+    "EI_N_m2": 380876661151539.0,
+    "EA_N": 172660966215.56488,
+    "pulse_Hz": 879.1827417401876,
+    "bow_kg": 300000.0,
+    "shield": {
+     "farm_radius_m": 78.89549499806772,
+     "needed_half_angle_deg": 12.778824541527737,
+     "fdp1_half_angle_deg": 5.43673653822945,
+     "shield_area_factor": 5.678905106908951,
+     "added_kg": 2714659.505218099,
+     "shield_radius_m": 15.564401365019975
+    }
+   },
+   "launcher": {
+    "tip_m": 59.98058798968406,
+    "target_g": 1.7847840562046071,
+    "muzzle_m_s": 52734.09653597925,
+    "accelerator_m": 4726.189095266952,
+    "launcher_kg": 1231180.0648020264,
+    "electric_W": 21818228854.462234,
+    "sabot_catcher_W": 6545468656.338671,
+    "tip_xray_J_cm2": 5.235945200195807,
+    "rate_Hz": 879.186055079168,
+    "fits_gas_capsule": true
+   },
+   "propellant_t": 141805.94914179164
+  },
+  {
+   "label": "full (free-free 0.2 Hz) + loop conductor at J_e 300 A/mm2",
+   "rate_cap_Hz": null,
+   "items": [
+    "coils",
+    "launcher",
+    "spine",
+    [
+     "free_free",
+     0.2
+    ],
+    "loops"
+   ],
+   "J_e_A_mm2": 300.0,
+   "status": "CONVERGED",
+   "iterations": 18,
+   "departure_trajectory_t": [
+    42915.783853018824,
+    94184.80014548056,
+    118400.2917273502,
+    129649.33814026213,
+    135239.38303668165,
+    138107.31675692112,
+    139602.42027015734,
+    140388.29814252077,
+    140803.16688842836,
+    141022.6755919581,
+    141138.95676836983,
+    141200.5954053036,
+    141233.2784715425,
+    141250.61152205156,
+    141259.8050742426,
+    141264.67994643372,
+    141267.2673363142,
+    141268.64028168572,
+    141269.36838692863
+   ],
+   "history": [
+    {
+     "departure_t": 94184.80014548056,
+     "rate_Hz": 369.4697996518126,
+     "stand_off_m": 68.58760475305317,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 1444.5068744808848,
+      "FDP-1 loop conductor (adapter term)": 1406.2485048785513,
+      "spine N9 over S2 keels": 331.2683818289869,
+      "shadow shield growth (wide farm)": 98.42652993461952,
+      "launcher B-ray": 53.97674032163315
+     }
+    },
+    {
+     "departure_t": 118400.2917273502,
+     "rate_Hz": 464.37497842827105,
+     "stand_off_m": 68.59261251759033,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 1798.4286479179962,
+      "FDP-1 loop conductor (adapter term)": 1574.398858386809,
+      "spine N9 over S2 keels": 683.9701590864969,
+      "shadow shield growth (wide farm)": 832.1223842283484,
+      "launcher B-ray": 217.18596437417264
+     }
+    },
+    {
+     "departure_t": 129649.33814026213,
+     "rate_Hz": 508.41899393873115,
+     "stand_off_m": 68.5965523918608,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 1904.6482138202516,
+      "FDP-1 loop conductor (adapter term)": 1574.621442269943,
+      "spine N9 over S2 keels": 889.1068698145486,
+      "shadow shield growth (wide farm)": 1178.9728475472034,
+      "launcher B-ray": 343.14505510123104
+     }
+    },
+    {
+     "departure_t": 135239.38303668165,
+     "rate_Hz": 530.2975632141843,
+     "stand_off_m": 68.5986883642086,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 1953.0025627389264,
+      "FDP-1 loop conductor (adapter term)": 1574.7965700530856,
+      "spine N9 over S2 keels": 993.2123506243603,
+      "shadow shield growth (wide farm)": 1340.709589758014,
+      "launcher B-ray": 411.37299833619636
+     }
+    },
+    {
+     "departure_t": 138107.31675692112,
+     "rate_Hz": 541.5201182772714,
+     "stand_off_m": 68.59981992705842,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 1976.8435597815585,
+      "FDP-1 loop conductor (adapter term)": 1574.8915220058873,
+      "spine N9 over S2 keels": 1047.04234745591,
+      "shadow shield growth (wide farm)": 1421.2114663832233,
+      "launcher B-ray": 447.5687641667085
+     }
+    },
+    {
+     "departure_t": 139602.42027015734,
+     "rate_Hz": 547.3700447879867,
+     "stand_off_m": 68.60041963857519,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 1989.0310864035043,
+      "FDP-1 loop conductor (adapter term)": 1574.9418206808741,
+      "spine N9 over S2 keels": 1075.2011403677425,
+      "shadow shield growth (wide farm)": 1462.5442952168573,
+      "launcher B-ray": 466.7288729959318
+     }
+    },
+    {
+     "departure_t": 140388.29814252077,
+     "rate_Hz": 550.4448112505976,
+     "stand_off_m": 68.60073727254543,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 1995.373397847727,
+      "FDP-1 loop conductor (adapter term)": 1574.9684805277816,
+      "spine N9 over S2 keels": 1090.0266469121505,
+      "shadow shield growth (wide farm)": 1484.1002318068258,
+      "launcher B-ray": 476.87599711569436
+     }
+    },
+    {
+     "departure_t": 140803.16688842836,
+     "rate_Hz": 552.0679396341612,
+     "stand_off_m": 68.6009060963367,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 1998.7041129304398,
+      "FDP-1 loop conductor (adapter term)": 1574.982600888652,
+      "spine N9 over S2 keels": 1097.859542486104,
+      "shadow shield growth (wide farm)": 1495.4330619703514,
+      "launcher B-ray": 482.2532649001446
+     }
+    },
+    {
+     "departure_t": 141022.6755919581,
+     "rate_Hz": 552.9267356439157,
+     "stand_off_m": 68.60099542389652,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2000.4615890384937,
+      "FDP-1 loop conductor (adapter term)": 1574.990107452998,
+      "spine N9 over S2 keels": 1102.0057126142199,
+      "shadow shield growth (wide farm)": 1501.416355654941,
+      "launcher B-ray": 485.1040489487797
+     }
+    },
+    {
+     "departure_t": 141138.95676836983,
+     "rate_Hz": 553.3816863306139,
+     "stand_off_m": 68.60104196790515,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2001.3912444987839,
+      "FDP-1 loop conductor (adapter term)": 1574.9940788120418,
+      "spine N9 over S2 keels": 1104.2025840098895,
+      "shadow shield growth (wide farm)": 1504.5823146155178,
+      "launcher B-ray": 486.61580111462325
+     }
+    },
+    {
+     "departure_t": 141200.5954053036,
+     "rate_Hz": 553.6228362926943,
+     "stand_off_m": 68.6010671291262,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2001.88364189501,
+      "FDP-1 loop conductor (adapter term)": 1574.996145694783,
+      "spine N9 over S2 keels": 1105.3672148855526,
+      "shadow shield growth (wide farm)": 1506.259470711743,
+      "launcher B-ray": 487.4176010494813
+     }
+    },
+    {
+     "departure_t": 141233.2784715425,
+     "rate_Hz": 553.7507084094186,
+     "stand_off_m": 68.60108018051531,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2002.14463747275,
+      "FDP-1 loop conductor (adapter term)": 1574.997262433175,
+      "spine N9 over S2 keels": 1105.984810984989,
+      "shadow shield growth (wide farm)": 1507.1485210320652,
+      "launcher B-ray": 487.84287642656705
+     }
+    },
+    {
+     "departure_t": 141250.61152205156,
+     "rate_Hz": 553.818512119142,
+     "stand_off_m": 68.60108755705988,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2002.28302170891,
+      "FDP-1 loop conductor (adapter term)": 1574.9978430805015,
+      "spine N9 over S2 keels": 1106.312352087156,
+      "shadow shield growth (wide farm)": 1507.6199289205522,
+      "launcher B-ray": 488.0684538731492
+     }
+    },
+    {
+     "departure_t": 141259.8050742426,
+     "rate_Hz": 553.8544830134422,
+     "stand_off_m": 68.60109118818195,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2002.356415198479,
+      "FDP-1 loop conductor (adapter term)": 1574.998172736699,
+      "spine N9 over S2 keels": 1106.486078774599,
+      "shadow shield growth (wide farm)": 1507.8699398683893,
+      "launcher B-ray": 488.18809346493106
+     }
+    },
+    {
+     "departure_t": 141264.67994643372,
+     "rate_Hz": 553.8735380163305,
+     "stand_off_m": 68.60109375293185,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2002.39533983722,
+      "FDP-1 loop conductor (adapter term)": 1574.998333802999,
+      "spine N9 over S2 keels": 1106.5782298870738,
+      "shadow shield growth (wide farm)": 1508.0025445284002,
+      "launcher B-ray": 488.2515658293395
+     }
+    },
+    {
+     "departure_t": 141267.2673363142,
+     "rate_Hz": 553.8836821525002,
+     "stand_off_m": 68.60109405027818,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2002.4159898726093,
+      "FDP-1 loop conductor (adapter term)": 1574.9984528901407,
+      "spine N9 over S2 keels": 1106.6270944651947,
+      "shadow shield growth (wide farm)": 1508.072864796862,
+      "launcher B-ray": 488.2852005405683
+     }
+    },
+    {
+     "departure_t": 141268.64028168572,
+     "rate_Hz": 553.8890352298462,
+     "stand_off_m": 68.60109533598006,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2002.4269333184482,
+      "FDP-1 loop conductor (adapter term)": 1574.998460522585,
+      "spine N9 over S2 keels": 1106.6530302894914,
+      "shadow shield growth (wide farm)": 1508.1101772227958,
+      "launcher B-ray": 488.3030908711221
+     }
+    },
+    {
+     "departure_t": 141269.36838692863,
+     "rate_Hz": 553.8918890670085,
+     "stand_off_m": 68.6010954234036,
+     "added_t": {
+      "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2002.432753501935,
+      "FDP-1 loop conductor (adapter term)": 1574.9985197523092,
+      "spine N9 over S2 keels": 1106.6667927214319,
+      "shadow shield growth (wide farm)": 1508.1299876706012,
+      "launcher B-ray": 488.3125486117575
+     }
+    }
+   ],
+   "loop_gain": 0.5303235350950191,
+   "added_kg": {
+    "closure coils C1, C2 (winding, case, LiH screen, cryostat, armour, struts, cooling)": 2002432.753501935,
+    "FDP-1 loop conductor (adapter term)": 1574998.5197523092,
+    "spine N9 over S2 keels": 1106666.792721432,
+    "shadow shield growth (wide farm)": 1508129.987670601,
+    "launcher B-ray": 488312.5486117575
+   },
+   "final_set": {
+    "base.overrides.continuous.plume_to_hardware.value": 0.06573164782791152,
+    "base.overrides.pulsed.house_fraction.value": 0.00010353817456978778,
+    "mission.payload.reference_t": 7920.740602258034,
+    "base.overrides.pulsed.nozzle_efficiency.optimistic": 0.7778196163409543
+   },
+   "summary": {
+    "converged": true,
+    "departure_t": 141269.36838692863,
+    "a0_g": 0.006895573489099627,
+    "fusion_TW": 119.51271094894058,
+    "radiator_t": 12418.684349410349,
+    "hot_km2": 1.6565912029993635,
+    "warm_km2": 17.0123255626392,
+    "drive_t": 19722.583755812655,
+    "propellant_t": 89260.13393162012,
+    "tank_t": 8376.82039056266,
+    "end_t": 52009.234455308506,
+    "xray_standoff_m": null,
+    "payload_t": 7920.740602258034,
+    "wing_tip_radius_m": 34975.29007635275,
+    "pellet_rate_Hz": 553.8918890670085
+   },
+   "fusion": {
+    "yield_per_pulse_GJ": 215.76902155085037,
+    "pellet_rate_Hz": 553.8918890670085,
+    "fuel_g": 0.8982274517261959,
+    "target_gain": 1084.3326176985665,
+    "driver_MJ": 198.98785486026205,
+    "stand_off_m": 68.6010954234036,
+    "thrust_MN": 9.552984438934669,
+    "peak_accel_g": 0.018730006731935773,
+    "jet_TW": 91.71424904477342,
+    "mass_flow_kg_s": 0.49752090128316107
+   },
+   "heat_rejection": {
+    "hot_km2": 1.6565912029993635,
+    "warm_km2": 17.0123255626392,
+    "radiator_t": 12418.684349410349,
+    "coil_hot_GW": 19.13577244240783,
+    "coil_warm_GW": 0.03335685781265259
+   },
+   "coils": [
+    {
+     "name": "C1",
+     "radius_m": 23.462956489010377,
+     "distance_m": 68.6010954234036,
+     "z_from_burn_m": 64.46394314720233,
+     "current_A": 171254759.47671354,
+     "winding_minor_m": 1.3700380758137083,
+     "stored_J": 1370599944774.4788
+    },
+    {
+     "name": "C2",
+     "radius_m": 44.09593414908779,
+     "distance_m": 68.6010954234036,
+     "z_from_burn_m": 52.55148794097308,
+     "current_A": 13765813.844914682,
+     "winding_minor_m": 0.11012651075931745,
+     "stored_J": 33191906547.429325
+    }
+   ],
+   "coil_scale_from_V4": 1.0603051985691598,
+   "spine": {
+    "farm": "wide",
+    "basis": [
+     "free_free",
+     0.2
+    ],
+    "longeron_ring_m": 56.24398085397808,
+    "stretch_scale": 3.291764185538661,
+    "bays": 9,
+    "length_m": 275.4,
+    "tube_r_m": 0.35310642532902414,
+    "added_t": 1106.6667927214319,
+    "structure_t": 1197.5560745670684,
+    "f1_cantilever_Hz": 0.06799904557322248,
+    "f1_free_free_Hz": 0.21714146044291294,
+    "buckling_factor_SF2": 48.017924516429865,
+    "J1": {
+     "axial_design_MN": 12.267360682797946,
+     "moment_0.01g_MN_m": 1081.234556147779,
+     "shear_0.01g_MN": 9.012538344842365
+    },
+    "J3": {
+     "axial_design_MN": 0.11020717231064275,
+     "lateral_0.01g_MN": 0.029419949999999997
+    },
+    "lateral": {
+     "0.002g": {
+      "root_moment_MN_m": 216.24691122955576,
+      "root_shear_MN": 1.8025076689684734,
+      "stress_MPa": 37.416242568519266,
+      "allowable_MPa": 240.0,
+      "ok": 1.0
+     },
+     "0.01g": {
+      "root_moment_MN_m": 1081.234556147779,
+      "root_shear_MN": 9.012538344842365,
+      "stress_MPa": 129.10029833681537,
+      "allowable_MPa": 240.0,
+      "ok": 1.0
+     }
+    },
+    "local": {
+     "longeron_bay_Hz": 53.564626520195254,
+     "longeron_load_MN": 9.608198353355766,
+     "longeron_Pcr_MN": 84.97724746358176,
+     "longeron_buckling_margin": 8.844243669668055,
+     "frame_ovalling_n2_Hz": 0.0793610645169386,
+     "pulse_clear": {
+      "longeron_bay": true,
+      "frame_n2": true
+     }
+    },
+    "EI_N_m2": 127351299543704.16,
+    "EA_N": 101556403135.9995,
+    "pulse_Hz": 553.8890352298462,
+    "bow_kg": 300000.0,
+    "shield": {
+     "farm_radius_m": 62.59410772458851,
+     "needed_half_angle_deg": 10.299534104306673,
+     "fdp1_half_angle_deg": 5.438111608005598,
+     "shield_area_factor": 3.643780816018198,
+     "added_kg": 1508129.987670601,
+     "shield_radius_m": 12.466355695010348
+    }
+   },
+   "launcher": {
+    "tip_m": 59.96025897908599,
+    "target_g": 1.7834379432546537,
+    "muzzle_m_s": 33211.501114873,
+    "accelerator_m": 1874.5847737729164,
+    "launcher_kg": 488317.5818403836,
+    "electric_W": 5447911239.935374,
+    "sabot_catcher_W": 1634373371.9806123,
+    "tip_xray_J_cm2": 5.235945200195809,
+    "rate_Hz": 553.8918890670085,
+    "fits_gas_capsule": true
+   },
+   "propellant_t": 89260.13393162012
+  }
+ ],
+ "method": "  python3 lab/variants/vertex-drive/studies/gate/coupled.py      # writes results/coupled.json (minutes)\n\nRevision 4 coupled the coil hardware once: it sized the coils on V4, then re-solved FDP-1 with that hardware as payload (68.5-71.9 kt).\nHere every added item is re-sized on each new solution until the departure mass stops changing (fixed-point iteration), so the coil\ngeometry and mass follow the pulse energy and the stand-off, the spine follows the propellant, and the launcher follows the pulse rate:\n\n  closure coils C1, C2      LG.coils_v4(R): stand-off scale and field-limited current from this solve's nozzle field energy; then the\n                            Rev 4 bottom-up assembly (winding pack at J_e, TARGET-composite case in its own shadow, LiH neutron screen\n                            for the REBCO fluence over this solve's burn time, cryostat, CFC armour, struts), its heat, cooling and\n                            cryoplant (injection.coil_hw)\n  FDP-1 loop conductor      adapter term (FDP-1 code is protected and books only the virial structure): winding packs of L1-L3 at\n                            the same J_e, current from FDP-1's own minor radius at 25 T (labelled; on in the 'full' cases)\n  spine                     N9 longerons in the inter-tank gaps (R 31 m), sized for a 0.2 Hz cantilever f1 on a stretch that grows\n                            with this solve's propellant at the same section (spine.size_for); booked over the S2 keels\n  launcher                  B-ray (B-modified gas capsule on a 12 deg burn ray, 30,000 g), tip at 1.3x the stopping radius at 12 deg\n                            scaled with the stand-off, coilgun mass and electric power at this solve's rate (injection.kin)\n  axis protection           the Phase 1 concept's hardware (results/concepts.json), booked as payload\n  propellant, radiators, drivers, shield, tanks, fusion yield, rate: FDP-1's own sizing on each solve (four-burn engine untouched)\n\nHeat from the coils goes into FDP-1 through plume_to_hardware, warm/electric loads through house_fraction, hardware through the payload\n(the adapter used in Rev 4). Pulse rate: FDP-1's own choice, or capped (max_rep_Hz), which forces larger pulses and a longer stand-off.\nA case that does not converge in 40 iterations, or whose departure passes 400 kt, is recorded as NON-CONVERGING with its trajectory.\n",
+ "runtime_s": 366.27561473846436
+}

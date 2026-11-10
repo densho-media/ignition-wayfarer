@@ -1,0 +1,58 @@
+{
+ "study": "Gate 2 Task D: thin-shell validity screen (T00)",
+ "status": "MODEL, research only, NON-CANON",
+ "pulse": {
+  "E_plasma_J": 179951125092.28003,
+  "mass_kg": 0.0007721569164918576,
+  "bulk_speed_m_s": 21589346.56877003,
+  "stopping_radius_median_m": 48.33468791529127,
+  "stopping_radius_range_m": [
+   38.011125703161575,
+   186.29282889397706
+  ],
+  "Bt_at_surface_T_median": 0.9613882088633565,
+  "Bt_at_surface_T_range": [
+   0.039220749942624304,
+   2.020639228507734
+  ]
+ },
+ "larmor": {
+  "bulk ion (mean 2.5 amu, Z 1.5)": {
+   "speed_m_s": 21589346.56877003,
+   "larmor_m_median": 0.3879126762245775,
+   "larmor_m_max": 9.508479133759492,
+   "larmor_over_R_median": 0.008269723231120227,
+   "larmor_over_R_max": 0.07531394650239896
+  },
+  "14.7 MeV proton": {
+   "speed_m_s": 53067570.78614255,
+   "larmor_m_median": 0.5762688477538773,
+   "larmor_m_max": 14.125447942647565,
+   "larmor_over_R_median": 0.012285197596590388,
+   "larmor_over_R_max": 0.11188363729987538
+  },
+  "3.6 MeV alpha": {
+   "speed_m_s": 13174246.975549819,
+   "larmor_m_median": 0.28423903516769056,
+   "larmor_m_max": 6.967240568666623,
+   "larmor_over_R_median": 0.006059554885379952,
+   "larmor_over_R_max": 0.0551855218985407
+  }
+ },
+ "shell_thickness_m_10_30pc": [
+  4.8334687915291275,
+  14.50040637458738
+ ],
+ "magnetic_Reynolds_shell": {
+  "10 eV": 5316351.387209732,
+  "100 eV": 168117792.25378513,
+  "1000 eV": 5316351387.209733
+ },
+ "g1_regularisation_scale_m": 2.0,
+ "reading": [
+  "bulk-ion Larmor radii at the surface field (median about 0.4 m, at most 7.5 % of the stopping radius) are small: the flux-excluding fluid picture holds in the bulk; fast products are marginal (14.7 MeV protons up to 11 % of R where the field is weak) and kinetic effects there are a PIC-class question",
+  "the shell is thick against the G1 kinks: a 10-30 % velocity spread gives 5-15 m at the 48 m median stopping radius, against 0.5-2 m kinks. A shell that thick cannot reflect specularly off them, so the ledger regularised on the shell scale (2-8 m smoothing: eta_T 0.80-0.82) is the meaningful thin-shell value and the fine-grid 0.67 is an artefact of an infinitely thin shell; neither is a plasma result",
+  "outside the model: lateral flow toward field zeros (funnelling), Rayleigh-Taylor at the decelerating surface, the shell velocity spread itself and detachment (MHD: D-21)",
+  "magnetic Reynolds numbers are large (5e6 or more) for any electron temperature above a few eV: frozen-in flux is not the weak point"
+ ]
+}

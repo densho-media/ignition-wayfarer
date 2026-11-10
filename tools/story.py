@@ -6,6 +6,9 @@ Writes <site>/engineering/:
   <kind>/<name>/fig/          the entry's committed figures (SVG, or PNG where no SVG of the same name exists)
   compare/                    per open problem, today's ship beside what the problem needs, in 3D at one scale: compare.json from the
                               problem map's `site.py --compare`, drawn by web/engineering/compare.js over the Explore Ship model
+  baseline/ weakest-links/    Engineering 2.0 (tools/story_lab.py): the scientific reference, the ranked bottlenecks, the Breakthrough
+  breakthrough-lab/           Lab over the precomputed scenario grid and true-scale envelopes, from the Breakthrough Lab study's
+  evolution/                  `site.py --json` (lab/studies/breakthrough-lab), which validates its registries and stops the build on error
 
 Every number comes from the inputs at build time: data/wayfarer_3d.toml through the pure modules (spec, operating_point,
 first_ignition), the lab entries' NOTES.md, REPORT.md and result JSON, and a problem map's own `site.py --json` and `--compare` (run as a separate
@@ -443,7 +446,7 @@ def entry_page(e, out_dir, revision, built, data):
         summary = next((b for h, b in sections(notes_body(folder / 'NOTES.md')) if h and h.lower().startswith('findings')), None)
     if summary:
         body.append(f'<section><h2>Summary</h2>{Markdown(revision, report.parent if report.exists() else folder).render(summary)}</section>')
-    if data:
+    if data and 'protection' in data:
         p = data['protection']
         body.append(f'''<section id="p11"><h2>Where the shield shadow ends</h2>
 <p>The forward shield protects only what lies in its shadow. The problem map places the FDP-1 drive behind it and tests every part
@@ -537,7 +540,20 @@ def compare_teaser(prob):
 </section>'''
 
 
-def main_page(site, spec, entries, dropped, problem, revision, built, play=True):
+def lab_ship(spec):
+    """The canon ship as Engineering 2.0 draws it for scale, and its mission-ledger numbers (canon operating point)."""
+    import layout
+    o = layout.origins(spec)
+    n = ship_numbers(spec)
+    h = spec['habitat']
+    r_out = h['outer_radius']['value'] if isinstance(h['outer_radius'], dict) else h['outer_radius']
+    return {'hull': {'x_aft': o['AFT'], 'x_fwd': o['FWD'], 'r': spec['ship']['body_diameter']['value'] / 2, 'ring_x': o['RING_A'],
+                     'ring_r': r_out}, 'departure_t': n['mission']['departure_mass_kg'] / 1e3, 'peak_g': n['burn']['accel_g'][1],
+            'length_m': spec['ship']['length']['value']}
+
+
+def main_page(site, spec, entries, dropped, problem, revision, built, play=True, lab2=None):
+    import story_lab
     n = ship_numbers(spec)
     b, m, fi = n['burn'], n['mission'], n['fi']
     sh = spec['ship']
@@ -616,6 +632,7 @@ def main_page(site, spec, entries, dropped, problem, revision, built, play=True)
 <nav class="toc"><a href="#goal">1 Goal</a><a href="#constraints">2 Constraints</a><a href="#ship">3 The ship today</a>
   <a href="#tried">4 What we tried</a><a href="#problems">5 Open problems</a><a href="#follow">6 Follow along</a>
   {'<a href="compare/"><b>Compare in 3D</b></a>' if prob.get("compare") else ''}</nav>
+{story_lab.teaser(lab2) if lab2 else ''}
 {compare_teaser(prob) if prob.get("compare") else ''}
 
 <section id="goal"><h2>1 · The goal</h2>
@@ -696,7 +713,8 @@ def main_page(site, spec, entries, dropped, problem, revision, built, play=True)
   </ul>
 </section>'''
     (site / 'engineering/index.html').write_text(page('Wayfarer engineering', 'The engineering story of G.U. Wayfarer 001: a 0.016 c full-return '
-                                                      'fusion ship, its constraints, the lab work and the open problems.', body, 1, revision, built))
+                                                      'fusion ship, its constraints, the lab work and the open problems.', body, 1, revision, built,
+                                                      '\n<link rel="stylesheet" href="lab.css">' if lab2 else ''))
 
 
 def build(root, site, revision=None, built=None, play=True):
@@ -712,7 +730,7 @@ def build(root, site, revision=None, built=None, play=True):
         if src.is_file():
             shutil.copy2(src, out / src.name)
     entries, dropped = lab_entries()
-    problem = None
+    problem = lab2 = None
     pages = ['engineering/index.html']
     for e in entries:
         d = out / e['kind_dir'] / e['folder'].name
@@ -725,9 +743,14 @@ def build(root, site, revision=None, built=None, play=True):
                 pages.append('engineering/compare/index.html')
         entry_page(e, d, revision, built, data)
         pages.append(d.relative_to(site).as_posix() + '/index.html')
+        if data and 'breakthroughs' in data:
+            lab2 = data
     if problem is None:
         raise RuntimeError('no lab problem map with a site.py: the Engineering page needs one')
-    main_page(Path(site), spec, entries, dropped, problem, revision, built, play)
+    if lab2 is not None:
+        import story_lab
+        pages += story_lab.build(Path(site), lab2, lab_ship(spec), page, revision, built)
+    main_page(Path(site), spec, entries, dropped, problem, revision, built, play, lab2)
     files = sorted(p.relative_to(site).as_posix() for p in out.rglob('*') if p.is_file())
     return {'entry': 'engineering/', 'pages': pages, 'files': len(files),
             'bytes': sum((Path(site) / f).stat().st_size for f in files), 'lab_entries': len(entries),

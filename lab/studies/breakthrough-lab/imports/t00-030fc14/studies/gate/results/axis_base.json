@@ -1,0 +1,336 @@
+{
+ "study": "Feasibility gate Phase 1: ISS-022 axial plasma leak (T00)",
+ "status": "MODEL, research only, NON-CANON",
+ "methods": "T03 thin shell at 0.025 deg; T05 first-hit kernel 4c1a29b; 3D vacuum-field ray work; closed-form estimates. No MHD/PIC.",
+ "v4": {
+  "E_plasma_J": 179951125092.28003,
+  "rate_Hz": 195.73784854631526,
+  "shield_z_m": 64.69938609749164,
+  "shield_r_m": 7.228220898732194,
+  "scale_from_V1": 1.5007301441824272,
+  "current_factor": 1.2272622788077394,
+  "loops": [
+   {
+    "name": "C1@20",
+    "R": 22.12849330614687,
+    "z": 60.797535685191285,
+    "I": 162127043.72637814,
+    "a": 1.297016349811025
+   },
+   {
+    "name": "C2@40",
+    "R": 41.58796373779316,
+    "z": 49.56260519319273,
+    "I": 13032109.063614877,
+    "a": 0.10425687250891902
+   },
+   {
+    "name": "L1",
+    "R": 56.03131196968548,
+    "z": 32.34969304874582,
+    "I": 20812558.034404166,
+    "a": 0.16650046427523332
+   },
+   {
+    "name": "L2",
+    "R": 97.04907914623745,
+    "z": 5.942542206831891e-15,
+    "I": 30600915.655334946,
+    "a": 0.24480732524267956
+   },
+   {
+    "name": "L3",
+    "R": 168.0939359090564,
+    "z": -97.04907914623736,
+    "I": 35588078.67201112,
+    "a": 0.2847046293760889
+   }
+  ]
+ },
+ "baseline": {
+  "leak_share_of_plasma": 0.0009392601517872746,
+  "leak_J_per_pulse": 169020921.06846577,
+  "leak_W": 33083791449.25806,
+  "leak_half_angle_deg": 3.5,
+  "half_angle_within_0.9_of_shield_deg": 3.7000000000000006,
+  "centre_fluence_J_cm2": 342.09315353302026,
+  "shield_angular_radius_deg": 6.374655550598178,
+  "stopping_radius_m": {
+   "0": null,
+   "0.5": null,
+   "1": null,
+   "1.5": null,
+   "2": null,
+   "2.5": null,
+   "3": null,
+   "3.5": 67.38,
+   "4": 56.16,
+   "4.5": 53.79,
+   "5": 52.13,
+   "5.5": 50.82,
+   "6": 49.73,
+   "6.5": 48.8,
+   "7": 47.98,
+   "7.5": 47.25,
+   "8": 46.59,
+   "8.5": 46.0,
+   "9": 45.45,
+   "9.5": 44.95,
+   "10": 44.48,
+   "10.5": 44.05,
+   "11": 43.65,
+   "11.5": 43.28,
+   "12": 42.93,
+   "12.5": 42.6,
+   "13": 42.29,
+   "13.5": 42.0,
+   "14": 41.73,
+   "14.5": 41.47,
+   "15": 41.23,
+   "15.5": 41.0,
+   "16": 40.78,
+   "16.5": 40.58,
+   "17": 40.38,
+   "17.5": 40.2,
+   "18": 40.03,
+   "18.5": 39.87,
+   "19": 39.71,
+   "19.5": 39.57,
+   "20": 39.43,
+   "20.5": 39.3,
+   "21": 39.18,
+   "21.5": 39.07,
+   "22": 38.96,
+   "22.5": 38.86,
+   "23": 38.77,
+   "23.5": 38.68,
+   "24": 38.6,
+   "24.5": 38.53,
+   "25": 38.46,
+   "25.5": 38.4,
+   "26": 38.34,
+   "26.5": 38.29,
+   "27": 38.24,
+   "27.5": 38.2,
+   "28": 38.16,
+   "28.5": 38.12,
+   "29": 38.1,
+   "29.5": 38.07
+  },
+  "reflect": {
+   "strike_by_share": {
+    "shield": 0.0022829492762093326,
+    "ship_forward": 0.011513577386498408
+   },
+   "strike_W": {
+    "shield": 80412884119.08488,
+    "ship_forward": 405545569419.70306
+   },
+   "unstopped_forward_share": 0.0015223526320451354,
+   "eta_mom": 0.8894106064064347,
+   "n_th": 181,
+   "resolution_sensitivity": {
+    "181": {
+     "strike_by_share": {
+      "shield": 0.0022829492762093326,
+      "ship_forward": 0.011513577386498408
+     },
+     "eta_mom": 0.8894106064064347,
+     "ship_forward_from_aft_hemisphere": 0.0
+    },
+    "721": {
+     "strike_by_share": {
+      "shield": 0.0026250292695807107,
+      "ship_forward": 0.06375690309135362,
+      "C1@20": 0.004491004164006344,
+      "C2@40": 0.0004442780863595819,
+      "L1": 0.0005462452981335852,
+      "L3": 0.0008348870605401847
+     },
+     "eta_mom": 0.8211564408473919,
+     "ship_forward_from_aft_hemisphere": 0.054733264645052626
+    },
+    "2881": {
+     "strike_by_share": {
+      "shield": 0.00481086340962404,
+      "ship_forward": 0.0667093948824473,
+      "C1@20": 0.002249592355211427,
+      "C2@40": 0.00044078157094849807,
+      "L1": 0.0009863593436598016,
+      "L2": 0.0009039695888525493,
+      "L3": 0.00020872145468429505
+     },
+     "eta_mom": 0.8184134377752208,
+     "ship_forward_from_aft_hemisphere": 0.05743415299106491
+    }
+   },
+   "note": "the specular-reflection ledger is resolution-sensitive: at 0.25 deg and finer about 5-6 % of the plasma is reflected forward from kinks of the aft stopping surface near L2 and L3 (1.2 % at 1 deg). The stopping-based axial leak is not sensitive. New issue for the D-21 nozzle-efficiency question."
+  },
+  "exposure_by_part": {
+   "shield": {
+    "J_per_pulse": 157269519.18371162,
+    "polar_deg": [
+     0.5,
+     4.0
+    ],
+    "distance_m": 64.70833282470703,
+    "peak_J_cm2": 341.99856285483577,
+    "W": 30783597326.933167,
+    "MW_m2_peak": 669.4206289913732
+   },
+   "launcher": {
+    "J_per_pulse": 10987798.777867522,
+    "polar_deg": [
+     0.0,
+     1.0
+    ],
+    "distance_m": 45.256429170307364,
+    "peak_J_cm2": 707.9909250215328,
+    "W": 2150728093.039621,
+    "MW_m2_peak": 1385.8062045403044
+   },
+   "other:Fast": {
+    "J_per_pulse": 596695.4019634934,
+    "polar_deg": [
+     1.0,
+     2.0
+    ],
+    "distance_m": 64.51737594604492,
+    "peak_J_cm2": 344.02603604549364,
+    "W": 116795874.21781299,
+    "MW_m2_peak": 673.3891613946203
+   },
+   "other:Beam": {
+    "J_per_pulse": 166907.70492312388,
+    "polar_deg": [
+     3.5,
+     4.0
+    ],
+    "distance_m": 64.64617688468333,
+    "peak_J_cm2": 342.656527869369,
+    "W": 32670155.0674555,
+    "MW_m2_peak": 670.7085155550079
+   }
+  },
+  "shield_centre_surface": {
+   "fluence_J_cm2": 342.09315353302026,
+   "heat_flux_factor_MJ_m2_s05": 1975.075742802172,
+   "average_MW_m2": 669.605778749777,
+   "materials": {
+    "W": {
+     "melt_or_crack_limit_MJ_m2_s05": 50.0,
+     "over_limit_x": 39.50151485604344,
+     "ablation_um_per_pulse_if_all_vaporises": 33.72599486607527,
+     "mm_per_hour_at_rate": 23765.233230610727,
+     "mm_per_hour_with_99pc_vapour_shielding": 237.65233230610727
+    },
+    "C (CFC)": {
+     "melt_or_crack_limit_MJ_m2_s05": 60.0,
+     "over_limit_x": 32.91792904670287,
+     "ablation_um_per_pulse_if_all_vaporises": 31.341562394229978,
+     "mm_per_hour_at_rate": 22085.02797525604,
+     "mm_per_hour_with_99pc_vapour_shielding": 220.8502797525604
+    },
+    "Li (liquid surface)": {
+     "melt_or_crack_limit_MJ_m2_s05": null,
+     "over_limit_x": null,
+     "ablation_um_per_pulse_if_all_vaporises": 310.40682485211624,
+     "mm_per_hour_at_rate": 218730.1106543261,
+     "mm_per_hour_with_99pc_vapour_shielding": 2187.301106543261
+    }
+   }
+  },
+  "booked": {
+   "fdp1_plume_to_hardware_W": 478507797848.0679,
+   "note": "FDP-1 books plume_to_hardware as one aggregate heat (a share of the plume, PROTOTYPE) with no location; the shield-face leak fits inside it as heat, but nothing in V4 books its surface fluence, erosion or the parts inside the channel."
+  }
+ },
+ "requirement": {
+  "pulses_in_mission": 35116340105.98635,
+  "fluence_limit_from_fatigue_J_cm2": 1.7320508075688772,
+  "fluence_limit_from_average_10MW_m2_J_cm2": 5.108873973156914,
+  "limit_J_cm2": 1.7320508075688772
+ },
+ "anisotropy": {
+  "isotropic": {
+   "leak_share_of_plasma": 0.0009392601517872746,
+   "leak_W": 33083791449.25806,
+   "leak_half_angle_deg": 3.5,
+   "centre_fluence_J_cm2": 342.09315353302026
+  },
+  "P2 +0.25 (prolate, polar-heavy)": {
+   "leak_share_of_plasma": 0.0014370597116768397,
+   "leak_W": 50617907840.31387,
+   "leak_half_angle_deg": 3.875,
+   "centre_fluence_J_cm2": 427.6164436123615
+  },
+  "P2 +0.5 (prolate, polar-heavy)": {
+   "leak_share_of_plasma": 0.002047435461958074,
+   "leak_W": 72117323087.05186,
+   "leak_half_angle_deg": 4.2250000000000005,
+   "centre_fluence_J_cm2": 513.1397343701373
+  },
+  "P2 -0.25 (oblate, equator-heavy)": {
+   "leak_share_of_plasma": 0.0005359292108379004,
+   "leak_W": 18877166468.936077,
+   "leak_half_angle_deg": 3.0500000000000003,
+   "centre_fluence_J_cm2": 256.5698641321134
+  },
+  "P1 +0.2 (forward-heavy, target side)": {
+   "leak_share_of_plasma": 0.0013275493918512966,
+   "leak_W": 46760598897.998215,
+   "leak_half_angle_deg": 3.8,
+   "centre_fluence_J_cm2": 410.51178423962426
+  },
+  "P1 -0.2 (aft-heavy)": {
+   "leak_share_of_plasma": 0.0005996780490894661,
+   "leak_W": 21122607485.28715,
+   "leak_half_angle_deg": 3.125,
+   "centre_fluence_J_cm2": 273.6745228264162
+  },
+  "forward jet x2 within 10 deg": {
+   "leak_share_of_plasma": 0.003241177005678362,
+   "leak_W": 114164775224.36124,
+   "leak_half_angle_deg": 4.7,
+   "centre_fluence_J_cm2": 674.0239479406479
+  },
+  "forward jet x5 within 10 deg": {
+   "leak_share_of_plasma": 0.013422516331332048,
+   "leak_W": 472784595604.3743,
+   "leak_half_angle_deg": 6.3500000000000005,
+   "centre_fluence_J_cm2": 1613.1773123729292
+  }
+ },
+ "current_scale": {
+  "0.8": {
+   "stored_energy_x": 0.6400000000000001,
+   "leak_share_of_plasma": 0.0014320648922373806,
+   "leak_half_angle_deg": 4.325
+  },
+  "1": {
+   "stored_energy_x": 1.0,
+   "leak_share_of_plasma": 0.0009392601517872746,
+   "leak_half_angle_deg": 3.5
+  },
+  "1.25": {
+   "stored_energy_x": 1.5625,
+   "leak_share_of_plasma": 0.0006022600126286162,
+   "leak_half_angle_deg": 2.8
+  },
+  "1.5": {
+   "stored_energy_x": 2.25,
+   "leak_share_of_plasma": 0.00042497628502737364,
+   "leak_half_angle_deg": 2.35
+  },
+  "2": {
+   "stored_energy_x": 4.0,
+   "leak_share_of_plasma": 0.00023653581672247444,
+   "leak_half_angle_deg": 1.75
+  },
+  "3": {
+   "stored_energy_x": 9.0,
+   "leak_share_of_plasma": 0.0001073737989141404,
+   "leak_half_angle_deg": 1.175
+  }
+ }
+}

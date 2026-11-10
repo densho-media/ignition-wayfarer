@@ -1,0 +1,973 @@
+{
+ "study": "S5N frame FE (feasibility gate Phase 5, T05)",
+ "status": "MODEL, research only, NON-CANON",
+ "method": "Euler-Bernoulli 3D frame FE, rigid joints and saddles, lumped mass; NOT shell or joint FE",
+ "beam_model_reference": {
+  "f1_cantilever_Hz": 0.200000000096767,
+  "f1_free_free_Hz": 0.722478534220733,
+  "structure_kg": 2059771.7375802808,
+  "J1_moment_0p01g_MN_m": 350.34452578304456
+ },
+ "sections": {
+  "spine": {
+   "A": 0.03581415625092364,
+   "I": 0.01616113800822929,
+   "J": 0.03232227601645858,
+   "r": 0.95,
+   "t": 0.006
+  },
+  "keel": {
+   "A": 0.04813116884817109,
+   "I": 0.003686998395613198,
+   "J": 0.007373996791226396,
+   "r": 0.3914157237254803,
+   "t": 0.019570786186274017
+  },
+  "longeron": {
+   "A": 0.23443929534114552,
+   "I": 0.043737197387167505,
+   "J": 0.08747439477433501,
+   "r": 0.610836907107978,
+   "t": 0.061083690710797806
+  },
+  "lacing": {
+   "A": 0.0422404030425945,
+   "I": 0.00141986234845089,
+   "J": 0.00283972469690178,
+   "r": 0.25928302957237387,
+   "t": 0.025928302957237387
+  },
+  "keel_ring": {
+   "A": 0.05654866776461628,
+   "I": 0.002544690049407732,
+   "J": 0.005089380098815464,
+   "r": 0.3,
+   "t": 0.03
+  },
+  "outer_ring": {
+   "A": 0.06433981754551897,
+   "I": 0.003294198658330572,
+   "J": 0.006588397316661144,
+   "r": 0.32,
+   "t": 0.032
+  },
+  "spoke": {
+   "A": 0.025132741228718346,
+   "I": 0.000502654824574367,
+   "J": 0.001005309649148734,
+   "r": 0.2,
+   "t": 0.02
+  },
+  "hub_spoke": {
+   "A": 0.025132741228718346,
+   "I": 0.000502654824574367,
+   "J": 0.001005309649148734,
+   "r": 0.2,
+   "t": 0.02
+  },
+  "girder": {
+   "A": 0.030410616886749196,
+   "I": 0.0492651993565337,
+   "J": 0.0985303987130674,
+   "r": 0.22,
+   "t": 0.022
+  },
+  "vessel": {
+   "A": 0.8105309046261667,
+   "I": 16.86005597985505,
+   "J": 33.7201119597101,
+   "r": 6.45,
+   "t": 0.02
+  }
+ },
+ "cases": [
+  {
+   "case": "V4_full_tanks",
+   "nodes": 557,
+   "elements": 975,
+   "structure_kg": 1863801.1253884833,
+   "member_kg": {
+    "hub_spoke": 6408.849013323177,
+    "keel_ring": 29625.52766473006,
+    "outer_ring": 208434.30599520335,
+    "spoke": 99978.04460784177,
+    "spine": 16767.471673557426,
+    "keel": 67602.15189401028,
+    "longeron": 987838.1036353573,
+    "lacing": 233557.0609030376,
+    "vessel": 0.0,
+    "girder": 213589.61000142235
+   },
+   "tank_and_bow_kg": 27763923.15276055,
+   "total_kg": 29627724.278149035,
+   "cantilever_Hz": [
+    0.047,
+    0.11,
+    0.1116,
+    0.1189,
+    0.1753,
+    0.1825,
+    0.2036,
+    0.2065,
+    0.2125,
+    0.2174,
+    0.2309,
+    0.2333
+   ],
+   "cantilever_first_bending_Hz": 0.10995275449203784,
+   "cantilever_modes": [
+    {
+     "Hz": 0.047,
+     "ke_x": 0.0,
+     "ke_y": 0.545,
+     "ke_z": 0.455,
+     "tank_node_ke_share": 0.963,
+     "eff_mass_frac_x": 0.0,
+     "eff_mass_frac_y": 0.001,
+     "eff_mass_frac_z": 0.001
+    },
+    {
+     "Hz": 0.11,
+     "ke_x": 0.001,
+     "ke_y": 0.042,
+     "ke_z": 0.957,
+     "tank_node_ke_share": 0.959,
+     "eff_mass_frac_x": 0.0,
+     "eff_mass_frac_y": 0.002,
+     "eff_mass_frac_z": 0.663
+    },
+    {
+     "Hz": 0.1116,
+     "ke_x": 0.001,
+     "ke_y": 0.904,
+     "ke_z": 0.095,
+     "tank_node_ke_share": 0.962,
+     "eff_mass_frac_x": 0.0,
+     "eff_mass_frac_y": 0.592,
+     "eff_mass_frac_z": 0.018
+    },
+    {
+     "Hz": 0.1189,
+     "ke_x": 0.001,
+     "ke_y": 0.613,
+     "ke_z": 0.386,
+     "tank_node_ke_share": 0.983,
+     "eff_mass_frac_x": 0.0,
+     "eff_mass_frac_y": 0.129,
+     "eff_mass_frac_z": 0.033
+    },
+    {
+     "Hz": 0.1753,
+     "ke_x": 0.002,
+     "ke_y": 0.582,
+     "ke_z": 0.416,
+     "tank_node_ke_share": 0.985,
+     "eff_mass_frac_x": 0.0,
+     "eff_mass_frac_y": 0.002,
+     "eff_mass_frac_z": 0.0
+    },
+    {
+     "Hz": 0.1825,
+     "ke_x": 0.0,
+     "ke_y": 0.363,
+     "ke_z": 0.637,
+     "tank_node_ke_share": 0.993,
+     "eff_mass_frac_x": 0.0,
+     "eff_mass_frac_y": 0.002,
+     "eff_mass_frac_z": 0.002
+    },
+    {
+     "Hz": 0.2036,
+     "ke_x": 0.0,
+     "ke_y": 0.693,
+     "ke_z": 0.307,
+     "tank_node_ke_share": 0.922,
+     "eff_mass_frac_x": 0.0,
+     "eff_mass_frac_y": 0.0,
+     "eff_mass_frac_z": 0.0
+    },
+    {
+     "Hz": 0.2065,
+     "ke_x": 0.001,
+     "ke_y": 0.541,
+     "ke_z": 0.459,
+     "tank_node_ke_share": 0.858,
+     "eff_mass_frac_x": 0.0,
+     "eff_mass_frac_y": 0.014,
+     "eff_mass_frac_z": 0.015
+    },
+    {
+     "Hz": 0.2125,
+     "ke_x": 0.0,
+     "ke_y": 0.441,
+     "ke_z": 0.559,
+     "tank_node_ke_share": 0.804,
+     "eff_mass_frac_x": 0.0,
+     "eff_mass_frac_y": 0.004,
+     "eff_mass_frac_z": 0.018
+    },
+    {
+     "Hz": 0.2174,
+     "ke_x": 0.001,
+     "ke_y": 0.575,
+     "ke_z": 0.424,
+     "tank_node_ke_share": 0.981,
+     "eff_mass_frac_x": 0.0,
+     "eff_mass_frac_y": 0.024,
+     "eff_mass_frac_z": 0.01
+    },
+    {
+     "Hz": 0.2309,
+     "ke_x": 0.001,
+     "ke_y": 0.536,
+     "ke_z": 0.463,
+     "tank_node_ke_share": 0.974,
+     "eff_mass_frac_x": 0.0,
+     "eff_mass_frac_y": 0.012,
+     "eff_mass_frac_z": 0.0
+    },
+    {
+     "Hz": 0.2333,
+     "ke_x": 0.001,
+     "ke_y": 0.585,
+     "ke_z": 0.413,
+     "tank_node_ke_share": 0.984,
+     "eff_mass_frac_x": 0.0,
+     "eff_mass_frac_y": 0.001,
+     "eff_mass_frac_z": 0.004
+    },
+    {
+     "Hz": 0.2466,
+     "ke_x": 0.001,
+     "ke_y": 0.6,
+     "ke_z": 0.4,
+     "tank_node_ke_share": 0.999,
+     "eff_mass_frac_x": 0.0,
+     "eff_mass_frac_y": 0.015,
+     "eff_mass_frac_z": 0.005
+    },
+    {
+     "Hz": 0.2534,
+     "ke_x": 0.001,
+     "ke_y": 0.428,
+     "ke_z": 0.571,
+     "tank_node_ke_share": 0.996,
+     "eff_mass_frac_x": 0.0,
+     "eff_mass_frac_y": 0.001,
+     "eff_mass_frac_z": 0.029
+    },
+    {
+     "Hz": 0.2551,
+     "ke_x": 0.001,
+     "ke_y": 0.503,
+     "ke_z": 0.496,
+     "tank_node_ke_share": 0.997,
+     "eff_mass_frac_x": 0.0,
+     "eff_mass_frac_y": 0.001,
+     "eff_mass_frac_z": 0.0
+    },
+    {
+     "Hz": 0.2717,
+     "ke_x": 0.001,
+     "ke_y": 0.41,
+     "ke_z": 0.589,
+     "tank_node_ke_share": 0.997,
+     "eff_mass_frac_x": 0.0,
+     "eff_mass_frac_y": 0.011,
+     "eff_mass_frac_z": 0.007
+    }
+   ],
+   "local_modes_below_first_bending": 1,
+   "free_free_Hz": [
+    0.0831,
+    0.1463,
+    0.1732,
+    0.1912,
+    0.2002,
+    0.2028,
+    0.2065,
+    0.2209
+   ],
+   "free_free_first_bending_Hz": 0.19118684213484227,
+   "root_moment_0p01g_MN_m": 384.8024007904652,
+   "axial_design_N": 3750000.0,
+   "members_combined_0p01g_lateral_plus_axial": {
+    "hub_spoke": {
+     "max_stress_MPa": 92.49218758625078,
+     "utilisation_vs_300MPa": 0.3083072919541693,
+     "min_buckling_ratio_axial_case": 3522.785790639266
+    },
+    "keel_ring": {
+     "max_stress_MPa": 184.4773590527091,
+     "utilisation_vs_300MPa": 0.6149245301756969,
+     "min_buckling_ratio_axial_case": 4369.698785282718
+    },
+    "outer_ring": {
+     "max_stress_MPa": 16.048984642426436,
+     "utilisation_vs_300MPa": 0.05349661547475479,
+     "min_buckling_ratio_axial_case": 1552.4251412899666
+    },
+    "spoke": {
+     "max_stress_MPa": 17.68615398432325,
+     "utilisation_vs_300MPa": 0.05895384661441084,
+     "min_buckling_ratio_axial_case": 44.03495527435707
+    },
+    "spine": {
+     "max_stress_MPa": 16.294508791788495,
+     "utilisation_vs_300MPa": 0.05431502930596165,
+     "min_buckling_ratio_axial_case": 2169.647509755253
+    },
+    "keel": {
+     "max_stress_MPa": 54.57491319724889,
+     "utilisation_vs_300MPa": 0.18191637732416296,
+     "min_buckling_ratio_axial_case": 136.80822123173473
+    },
+    "longeron": {
+     "max_stress_MPa": 20.498900390944886,
+     "utilisation_vs_300MPa": 0.0683296679698163,
+     "min_buckling_ratio_axial_case": 677.9126620405251
+    },
+    "lacing": {
+     "max_stress_MPa": 32.91355633816469,
+     "utilisation_vs_300MPa": 0.10971185446054896,
+     "min_buckling_ratio_axial_case": 15.074034243499595
+    },
+    "vessel": {
+     "max_stress_MPa": 2.0749396824696955,
+     "utilisation_vs_300MPa": 0.006916465608232319,
+     "min_buckling_ratio_axial_case": 237926.95189358512
+    },
+    "girder": {
+     "max_stress_MPa": 16.441802736369205,
+     "utilisation_vs_300MPa": 0.05480600912123068,
+     "min_buckling_ratio_axial_case": 4690.5703940907415
+    }
+   }
+  },
+  {
+   "case": "V4_dry_tanks",
+   "nodes": 557,
+   "elements": 975,
+   "structure_kg": 1863801.1253884833,
+   "member_kg": {
+    "hub_spoke": 6408.849013323177,
+    "keel_ring": 29625.52766473006,
+    "outer_ring": 208434.30599520335,
+    "spoke": 99978.04460784177,
+    "spine": 16767.471673557426,
+    "keel": 67602.15189401028,
+    "longeron": 987838.1036353573,
+    "lacing": 233557.0609030376,
+    "vessel": 0.0,
+    "girder": 213589.61000142235
+   },
+   "tank_and_bow_kg": 2691974.0509631666,
+   "total_kg": 4555775.17635165,
+   "cantilever_Hz": [
+    0.1152,
+    0.2701,
+    0.2735,
+    0.2823,
+    0.3681,
+    0.4344,
+    0.5748,
+    0.5842,
+    0.6569,
+    0.6802,
+    0.685,
+    0.6976
+   ],
+   "cantilever_first_bending_Hz": 0.2735375013420235,
+   "cantilever_modes": [
+    {
+     "Hz": 0.1152,
+     "ke_x": 0.0,
+     "ke_y": 0.538,
+     "ke_z": 0.462,
+     "tank_node_ke_share": 0.652,
+     "eff_mass_frac_x": 0.0,
+     "eff_mass_frac_y": 0.0,
+     "eff_mass_frac_z": 0.0
+    },
+    {
+     "Hz": 0.2701,
+     "ke_x": 0.0,
+     "ke_y": 0.572,
+     "ke_z": 0.428,
+     "tank_node_ke_share": 0.826,
+     "eff_mass_frac_x": 0.0,
+     "eff_mass_frac_y": 0.036,
+     "eff_mass_frac_z": 0.0
+    },
+    {
+     "Hz": 0.2735,
+     "ke_x": 0.001,
+     "ke_y": 0.078,
+     "ke_z": 0.921,
+     "tank_node_ke_share": 0.692,
+     "eff_mass_frac_x": 0.0,
+     "eff_mass_frac_y": 0.053,
+     "eff_mass_frac_z": 0.664
+    },
+    {
+     "Hz": 0.2823,
+     "ke_x": 0.002,
+     "ke_y": 0.895,
+     "ke_z": 0.103,
+     "tank_node_ke_share": 0.701,
+     "eff_mass_frac_x": 0.0,
+     "eff_mass_frac_y": 0.637,
+     "eff_mass_frac_z": 0.057
+    },
+    {
+     "Hz": 0.3681,
+     "ke_x": 0.001,
+     "ke_y": 0.545,
+     "ke_z": 0.455,
+     "tank_node_ke_share": 0.599,
+     "eff_mass_frac_x": 0.0,
+     "eff_mass_frac_y": 0.003,
+     "eff_mass_frac_z": 0.001
+    },
+    {
+     "Hz": 0.4344,
+     "ke_x": 0.0,
+     "ke_y": 0.556,
+     "ke_z": 0.444,
+     "tank_node_ke_share": 0.596,
+     "eff_mass_frac_x": 0.0,
+     "eff_mass_frac_y": 0.0,
+     "eff_mass_frac_z": 0.0
+    },
+    {
+     "Hz": 0.5748,
+     "ke_x": 0.001,
+     "ke_y": 0.458,
+     "ke_z": 0.541,
+     "tank_node_ke_share": 0.968,
+     "eff_mass_frac_x": 0.0,
+     "eff_mass_frac_y": 0.0,
+     "eff_mass_frac_z": 0.002
+    },
+    {
+     "Hz": 0.5842,
+     "ke_x": 0.001,
+     "ke_y": 0.454,
+     "ke_z": 0.545,
+     "tank_node_ke_share": 0.956,
+     "eff_mass_frac_x": 0.0,
+     "eff_mass_frac_y": 0.001,
+     "eff_mass_frac_z": 0.0
+    },
+    {
+     "Hz": 0.6569,
+     "ke_x": 0.001,
+     "ke_y": 0.744,
+     "ke_z": 0.255,
+     "tank_node_ke_share": 0.975,
+     "eff_mass_frac_x": 0.0,
+     "eff_mass_frac_y": 0.015,
+     "eff_mass_frac_z": 0.001
+    },
+    {
+     "Hz": 0.6802,
+     "ke_x": 0.001,
+     "ke_y": 0.513,
+     "ke_z": 0.486,
+     "tank_node_ke_share": 0.751,
+     "eff_mass_frac_x": 0.0,
+     "eff_mass_frac_y": 0.011,
+     "eff_mass_frac_z": 0.016
+    },
+    {
+     "Hz": 0.685,
+     "ke_x": 0.0,
+     "ke_y": 0.461,
+     "ke_z": 0.539,
+     "tank_node_ke_share": 0.421,
+     "eff_mass_frac_x": 0.0,
+     "eff_mass_frac_y": 0.003,
+     "eff_mass_frac_z": 0.01
+    },
+    {
+     "Hz": 0.6976,
+     "ke_x": 0.001,
+     "ke_y": 0.539,
+     "ke_z": 0.46,
+     "tank_node_ke_share": 0.969,
+     "eff_mass_frac_x": 0.0,
+     "eff_mass_frac_y": 0.023,
+     "eff_mass_frac_z": 0.016
+    },
+    {
+     "Hz": 0.7427,
+     "ke_x": 0.001,
+     "ke_y": 0.589,
+     "ke_z": 0.41,
+     "tank_node_ke_share": 0.967,
+     "eff_mass_frac_x": 0.0,
+     "eff_mass_frac_y": 0.008,
+     "eff_mass_frac_z": 0.003
+    },
+    {
+     "Hz": 0.7594,
+     "ke_x": 0.002,
+     "ke_y": 0.603,
+     "ke_z": 0.395,
+     "tank_node_ke_share": 0.982,
+     "eff_mass_frac_x": 0.0,
+     "eff_mass_frac_y": 0.0,
+     "eff_mass_frac_z": 0.006
+    },
+    {
+     "Hz": 0.7907,
+     "ke_x": 0.002,
+     "ke_y": 0.283,
+     "ke_z": 0.715,
+     "tank_node_ke_share": 0.945,
+     "eff_mass_frac_x": 0.0,
+     "eff_mass_frac_y": 0.0,
+     "eff_mass_frac_z": 0.032
+    },
+    {
+     "Hz": 0.8049,
+     "ke_x": 0.001,
+     "ke_y": 0.631,
+     "ke_z": 0.367,
+     "tank_node_ke_share": 0.972,
+     "eff_mass_frac_x": 0.0,
+     "eff_mass_frac_y": 0.02,
+     "eff_mass_frac_z": 0.0
+    }
+   ],
+   "local_modes_below_first_bending": 2,
+   "free_free_Hz": [
+    0.2116,
+    0.2759,
+    0.3459,
+    0.4584,
+    0.5247,
+    0.5606,
+    0.6491,
+    0.6544
+   ],
+   "free_free_first_bending_Hz": 0.2116465057192203,
+   "root_moment_0p01g_MN_m": 63.77057943898696,
+   "axial_design_N": 3750000.0,
+   "members_combined_0p01g_lateral_plus_axial": {
+    "hub_spoke": {
+     "max_stress_MPa": 17.841889797066628,
+     "utilisation_vs_300MPa": 0.059472965990222094,
+     "min_buckling_ratio_axial_case": 3946.901052752393
+    },
+    "keel_ring": {
+     "max_stress_MPa": 35.08590960365353,
+     "utilisation_vs_300MPa": 0.11695303201217845,
+     "min_buckling_ratio_axial_case": 4226.896155107299
+    },
+    "outer_ring": {
+     "max_stress_MPa": 2.6583417950905486,
+     "utilisation_vs_300MPa": 0.008861139316968495,
+     "min_buckling_ratio_axial_case": 2091.537232322525
+    },
+    "spoke": {
+     "max_stress_MPa": 4.120357786104369,
+     "utilisation_vs_300MPa": 0.013734525953681232,
+     "min_buckling_ratio_axial_case": 80.26328200644797
+    },
+    "spine": {
+     "max_stress_MPa": 3.7031411259135107,
+     "utilisation_vs_300MPa": 0.012343803753045036,
+     "min_buckling_ratio_axial_case": 1888.627002263977
+    },
+    "keel": {
+     "max_stress_MPa": 11.649006068653716,
+     "utilisation_vs_300MPa": 0.03883002022884572,
+     "min_buckling_ratio_axial_case": 170.40508816316324
+    },
+    "longeron": {
+     "max_stress_MPa": 4.539307687755144,
+     "utilisation_vs_300MPa": 0.015131025625850482,
+     "min_buckling_ratio_axial_case": 670.4985965491181
+    },
+    "lacing": {
+     "max_stress_MPa": 6.9508792592251,
+     "utilisation_vs_300MPa": 0.023169597530750333,
+     "min_buckling_ratio_axial_case": 21.067450492035956
+    },
+    "vessel": {
+     "max_stress_MPa": 0.4629935280987643,
+     "utilisation_vs_300MPa": 0.0015433117603292144,
+     "min_buckling_ratio_axial_case": 347989.9966404653
+    },
+    "girder": {
+     "max_stress_MPa": 3.8273576879937967,
+     "utilisation_vs_300MPa": 0.012757858959979322,
+     "min_buckling_ratio_axial_case": 7928.418216952206
+    }
+   }
+  },
+  {
+   "case": "coupled_117kt_mass_on_V4_geometry",
+   "nodes": 557,
+   "elements": 975,
+   "structure_kg": 1863801.1253884833,
+   "member_kg": {
+    "hub_spoke": 6408.849013323177,
+    "keel_ring": 29625.52766473006,
+    "outer_ring": 208434.30599520335,
+    "spoke": 99978.04460784177,
+    "spine": 16767.471673557426,
+    "keel": 67602.15189401028,
+    "longeron": 987838.1036353573,
+    "lacing": 233557.0609030376,
+    "vessel": 0.0,
+    "girder": 213589.61000142235
+   },
+   "tank_and_bow_kg": 81224945.49467123,
+   "total_kg": 83088746.6200597,
+   "cantilever_Hz": [
+    0.0279,
+    0.0655,
+    0.0664,
+    0.0701,
+    0.1029,
+    0.107,
+    0.1194,
+    0.1221,
+    0.1269,
+    0.1341,
+    0.1361,
+    0.144
+   ],
+   "cantilever_first_bending_Hz": 0.06550808197316511,
+   "cantilever_modes": [
+    {
+     "Hz": 0.0279,
+     "ke_x": 0.0,
+     "ke_y": 0.545,
+     "ke_z": 0.455,
+     "tank_node_ke_share": 0.988,
+     "eff_mass_frac_x": 0.0,
+     "eff_mass_frac_y": 0.001,
+     "eff_mass_frac_z": 0.001
+    },
+    {
+     "Hz": 0.0655,
+     "ke_x": 0.001,
+     "ke_y": 0.157,
+     "ke_z": 0.842,
+     "tank_node_ke_share": 0.987,
+     "eff_mass_frac_x": 0.0,
+     "eff_mass_frac_y": 0.041,
+     "eff_mass_frac_z": 0.541
+    },
+    {
+     "Hz": 0.0664,
+     "ke_x": 0.001,
+     "ke_y": 0.753,
+     "ke_z": 0.246,
+     "tank_node_ke_share": 0.987,
+     "eff_mass_frac_x": 0.0,
+     "eff_mass_frac_y": 0.474,
+     "eff_mass_frac_z": 0.127
+    },
+    {
+     "Hz": 0.0701,
+     "ke_x": 0.001,
+     "ke_y": 0.648,
+     "ke_z": 0.351,
+     "tank_node_ke_share": 0.993,
+     "eff_mass_frac_x": 0.0,
+     "eff_mass_frac_y": 0.206,
+     "eff_mass_frac_z": 0.043
+    },
+    {
+     "Hz": 0.1029,
+     "ke_x": 0.002,
+     "ke_y": 0.574,
+     "ke_z": 0.425,
+     "tank_node_ke_share": 0.999,
+     "eff_mass_frac_x": 0.0,
+     "eff_mass_frac_y": 0.002,
+     "eff_mass_frac_z": 0.0
+    },
+    {
+     "Hz": 0.107,
+     "ke_x": 0.0,
+     "ke_y": 0.373,
+     "ke_z": 0.626,
+     "tank_node_ke_share": 0.998,
+     "eff_mass_frac_x": 0.0,
+     "eff_mass_frac_y": 0.002,
+     "eff_mass_frac_z": 0.003
+    },
+    {
+     "Hz": 0.1194,
+     "ke_x": 0.0,
+     "ke_y": 0.696,
+     "ke_z": 0.303,
+     "tank_node_ke_share": 0.999,
+     "eff_mass_frac_x": 0.0,
+     "eff_mass_frac_y": 0.001,
+     "eff_mass_frac_z": 0.003
+    },
+    {
+     "Hz": 0.1221,
+     "ke_x": 0.0,
+     "ke_y": 0.479,
+     "ke_z": 0.521,
+     "tank_node_ke_share": 0.999,
+     "eff_mass_frac_x": 0.0,
+     "eff_mass_frac_y": 0.018,
+     "eff_mass_frac_z": 0.027
+    },
+    {
+     "Hz": 0.1269,
+     "ke_x": 0.001,
+     "ke_y": 0.529,
+     "ke_z": 0.47,
+     "tank_node_ke_share": 0.999,
+     "eff_mass_frac_x": 0.0,
+     "eff_mass_frac_y": 0.021,
+     "eff_mass_frac_z": 0.014
+    },
+    {
+     "Hz": 0.1341,
+     "ke_x": 0.002,
+     "ke_y": 0.592,
+     "ke_z": 0.407,
+     "tank_node_ke_share": 0.998,
+     "eff_mass_frac_x": 0.0,
+     "eff_mass_frac_y": 0.01,
+     "eff_mass_frac_z": 0.001
+    },
+    {
+     "Hz": 0.1361,
+     "ke_x": 0.001,
+     "ke_y": 0.535,
+     "ke_z": 0.464,
+     "tank_node_ke_share": 0.999,
+     "eff_mass_frac_x": 0.0,
+     "eff_mass_frac_y": 0.004,
+     "eff_mass_frac_z": 0.004
+    },
+    {
+     "Hz": 0.144,
+     "ke_x": 0.001,
+     "ke_y": 0.601,
+     "ke_z": 0.398,
+     "tank_node_ke_share": 1.0,
+     "eff_mass_frac_x": 0.0,
+     "eff_mass_frac_y": 0.015,
+     "eff_mass_frac_z": 0.004
+    },
+    {
+     "Hz": 0.1483,
+     "ke_x": 0.001,
+     "ke_y": 0.45,
+     "ke_z": 0.55,
+     "tank_node_ke_share": 0.999,
+     "eff_mass_frac_x": 0.0,
+     "eff_mass_frac_y": 0.001,
+     "eff_mass_frac_z": 0.029
+    },
+    {
+     "Hz": 0.1488,
+     "ke_x": 0.001,
+     "ke_y": 0.479,
+     "ke_z": 0.52,
+     "tank_node_ke_share": 0.999,
+     "eff_mass_frac_x": 0.0,
+     "eff_mass_frac_y": 0.0,
+     "eff_mass_frac_z": 0.001
+    },
+    {
+     "Hz": 0.1588,
+     "ke_x": 0.001,
+     "ke_y": 0.405,
+     "ke_z": 0.594,
+     "tank_node_ke_share": 0.999,
+     "eff_mass_frac_x": 0.0,
+     "eff_mass_frac_y": 0.01,
+     "eff_mass_frac_z": 0.007
+    },
+    {
+     "Hz": 0.1615,
+     "ke_x": 0.001,
+     "ke_y": 0.469,
+     "ke_z": 0.53,
+     "tank_node_ke_share": 0.999,
+     "eff_mass_frac_x": 0.0,
+     "eff_mass_frac_y": 0.016,
+     "eff_mass_frac_z": 0.003
+    }
+   ],
+   "local_modes_below_first_bending": 1,
+   "free_free_Hz": [
+    0.0489,
+    0.0859,
+    0.1013,
+    0.1167,
+    0.1174,
+    0.1199,
+    0.1291,
+    0.1309
+   ],
+   "free_free_first_bending_Hz": 0.18583261284850278,
+   "root_moment_0p01g_MN_m": 1069.3399014072513,
+   "axial_design_N": 3750000.0,
+   "members_combined_0p01g_lateral_plus_axial": {
+    "hub_spoke": {
+     "max_stress_MPa": 250.78247079342484,
+     "utilisation_vs_300MPa": 0.8359415693114162,
+     "min_buckling_ratio_axial_case": 3479.0777801523377
+    },
+    "keel_ring": {
+     "max_stress_MPa": 491.05256912397584,
+     "utilisation_vs_300MPa": 1.6368418970799195,
+     "min_buckling_ratio_axial_case": 4387.0270141479505
+    },
+    "outer_ring": {
+     "max_stress_MPa": 44.4186129245487,
+     "utilisation_vs_300MPa": 0.148062043081829,
+     "min_buckling_ratio_axial_case": 1392.762511666207
+    },
+    "spoke": {
+     "max_stress_MPa": 44.533385283094276,
+     "utilisation_vs_300MPa": 0.14844461761031424,
+     "min_buckling_ratio_axial_case": 41.8276419662593
+    },
+    "spine": {
+     "max_stress_MPa": 43.31666572651904,
+     "utilisation_vs_300MPa": 0.14438888575506348,
+     "min_buckling_ratio_axial_case": 2208.059951817053
+    },
+    "keel": {
+     "max_stress_MPa": 142.0604846931418,
+     "utilisation_vs_300MPa": 0.4735349489771393,
+     "min_buckling_ratio_axial_case": 133.72573980592117
+    },
+    "longeron": {
+     "max_stress_MPa": 54.34228114409819,
+     "utilisation_vs_300MPa": 0.18114093714699395,
+     "min_buckling_ratio_axial_case": 678.790194810306
+    },
+    "lacing": {
+     "max_stress_MPa": 85.58548114237956,
+     "utilisation_vs_300MPa": 0.28528493714126524,
+     "min_buckling_ratio_axial_case": 14.580244597014731
+    },
+    "vessel": {
+     "max_stress_MPa": 5.332018405835563,
+     "utilisation_vs_300MPa": 0.017773394686118545,
+     "min_buckling_ratio_axial_case": 229442.61161073594
+    },
+    "girder": {
+     "max_stress_MPa": 41.40875569913286,
+     "utilisation_vs_300MPa": 0.1380291856637762,
+     "min_buckling_ratio_axial_case": 4476.618423093346
+    }
+   }
+  },
+  {
+   "case": "sensitivity_rings_spokes_x4_area",
+   "scaled_sections": {
+    "keel_ring": 4,
+    "spoke": 4,
+    "hub_spoke": 4,
+    "outer_ring": 4
+   },
+   "structure_kg": 2897141.3072317783,
+   "cantilever_first_bending_Hz": 0.13188912356177313,
+   "free_free_first_bending_Hz": 0.26576297706589863,
+   "cantilever_Hz": [
+    0.0583,
+    0.1319,
+    0.1351,
+    0.1401,
+    0.2005,
+    0.2545,
+    0.2886,
+    0.2914,
+    0.306,
+    0.3118,
+    0.3189,
+    0.3349
+   ]
+  },
+  {
+   "case": "sensitivity_lacing_x4_area",
+   "scaled_sections": {
+    "lacing": 4
+   },
+   "structure_kg": 2564472.3080975963,
+   "cantilever_first_bending_Hz": 0.11872352988903721,
+   "free_free_first_bending_Hz": 0.08750764828265992,
+   "cantilever_Hz": [
+    0.0487,
+    0.1187,
+    0.1212,
+    0.1277,
+    0.1837,
+    0.1904,
+    0.2109,
+    0.2154,
+    0.2243,
+    0.2349,
+    0.2389,
+    0.2533
+   ]
+  },
+  {
+   "case": "sensitivity_longerons_x2_area",
+   "scaled_sections": {
+    "longeron": 2
+   },
+   "structure_kg": 2851639.2290238407,
+   "cantilever_first_bending_Hz": 0.11357986735967314,
+   "free_free_first_bending_Hz": 0.1456509060730052,
+   "cantilever_Hz": [
+    0.0495,
+    0.1136,
+    0.1155,
+    0.121,
+    0.1745,
+    0.1829,
+    0.1883,
+    0.205,
+    0.2101,
+    0.2181,
+    0.2302,
+    0.2332
+   ]
+  },
+  {
+   "case": "sensitivity_rings_spokes_lacing_x4",
+   "scaled_sections": {
+    "keel_ring": 4,
+    "spoke": 4,
+    "hub_spoke": 4,
+    "outer_ring": 4,
+    "lacing": 4
+   },
+   "structure_kg": 3597812.489940891,
+   "cantilever_first_bending_Hz": 0.14815256759287,
+   "free_free_first_bending_Hz": 0.1052827609046728,
+   "cantilever_Hz": [
+    0.0595,
+    0.142,
+    0.1482,
+    0.1517,
+    0.208,
+    0.2621,
+    0.2968,
+    0.3062,
+    0.3152,
+    0.3234,
+    0.3306,
+    0.3388
+   ]
+  }
+ ]
+}
