@@ -1,0 +1,2837 @@
+{
+ "study": "parametric stretch frame FE (Vertex gate 2, Task C, T05)",
+ "status": "MODEL, research only, NON-CANON",
+ "method": "fe_s5n.py elements on a generated section; cantilever (J1 fixed) and free-free with the aft ship as a rigid body on J1",
+ "calibration": {
+  "fe_s5n_drawn_V4_cantilever_first_bending_Hz": 0.10995275449203784,
+  "generator_V4_cantilever_first_bending_Hz": 0.1182135813808675
+ },
+ "scaling": {
+  "lam_propellant_coupled_over_rev4": 2.7283315076694685,
+  "stretch_propellant_t": 68404.58869311902,
+  "stretch_tank_t": 6526.098168770583,
+  "length_by_farm_radius_m": {
+   "34.5": 751.3824972121715,
+   "41.7": 514.3125886667857,
+   "44.0": 461.94887257581985,
+   "57.0": 275.2640865825753
+  }
+ },
+ "screens": {
+  "slosh_band_Hz": [
+   0.022,
+   0.04
+  ],
+  "ring_spin_Hz": 0.06666666666666667,
+  "f1_min_3x_slosh_Hz": 0.12,
+  "target_Hz": 0.2
+ },
+ "cases": [
+  {
+   "case": "CAL_V4_generator_full",
+   "nodes": 553,
+   "elements": 969,
+   "tanks": 108,
+   "structure_t": 1830.005573783016,
+   "member_t": {
+    "hub_spoke": 6.408849013323177,
+    "keel_ring": 29.7054499226717,
+    "outer_ring": 208.74430218476667,
+    "spoke": 99.97804460784177,
+    "spine": 16.767471673557424,
+    "keel": 67.60215189401023,
+    "longeron": 987.8381036353574,
+    "lacing": 233.5570609030376,
+    "vessel": 0.0,
+    "girder": 179.40413994845025
+   },
+   "stretch_mass_t": 27763.923152760548,
+   "cantilever_Hz": [
+    0.054,
+    0.1182,
+    0.1224,
+    0.1375,
+    0.2082,
+    0.2151,
+    0.2405,
+    0.2465,
+    0.2516,
+    0.2731
+   ],
+   "cantilever_first_bending_Hz": 0.1182135813808675,
+   "cantilever_lowest_Hz": 0.05402563447852433,
+   "aft_body": {
+    "mass_kg": 15136076.847239453,
+    "centroid_x_m": -104.01591462065339,
+    "lever_from_J1_m": 244.7659146206534,
+    "I_lateral_kg_m2": 193331207627.59363,
+    "items_t": {
+     "drive": 7650.573617561162,
+     "radiators": 4663.696920527675,
+     "payload_rings": 2821.8063091506174
+    }
+   },
+   "free_free_flexible_Hz": [
+    0.054,
+    0.1374,
+    0.1653,
+    0.1712,
+    0.2015,
+    0.2015,
+    0.2016,
+    0.2016,
+    0.2016,
+    0.2016
+   ],
+   "free_free_first_global_bending_Hz": 0.1653140451636613,
+   "free_free_first_lateral_Hz": 0.1653140451636613,
+   "free_free_modes": [
+    {
+     "Hz": 0.054,
+     "aft_body_ke_share": 0.0,
+     "lateral_ke_share": 1.0,
+     "tank_node_ke_share": 0.951,
+     "ke_x": 0.0
+    },
+    {
+     "Hz": 0.1374,
+     "aft_body_ke_share": 0.0002,
+     "lateral_ke_share": 1.0,
+     "tank_node_ke_share": 0.993,
+     "ke_x": 0.0
+    },
+    {
+     "Hz": 0.1653,
+     "aft_body_ke_share": 0.2125,
+     "lateral_ke_share": 0.998,
+     "tank_node_ke_share": 0.716,
+     "ke_x": 0.002
+    },
+    {
+     "Hz": 0.1712,
+     "aft_body_ke_share": 0.215,
+     "lateral_ke_share": 0.997,
+     "tank_node_ke_share": 0.713,
+     "ke_x": 0.003
+    },
+    {
+     "Hz": 0.2015,
+     "aft_body_ke_share": 0.0043,
+     "lateral_ke_share": 0.999,
+     "tank_node_ke_share": 0.819,
+     "ke_x": 0.001
+    },
+    {
+     "Hz": 0.2015,
+     "aft_body_ke_share": 0.0026,
+     "lateral_ke_share": 0.999,
+     "tank_node_ke_share": 0.934,
+     "ke_x": 0.001
+    },
+    {
+     "Hz": 0.2016,
+     "aft_body_ke_share": 0.0005,
+     "lateral_ke_share": 0.997,
+     "tank_node_ke_share": 0.691,
+     "ke_x": 0.003
+    },
+    {
+     "Hz": 0.2016,
+     "aft_body_ke_share": 0.007,
+     "lateral_ke_share": 0.998,
+     "tank_node_ke_share": 0.781,
+     "ke_x": 0.002
+    },
+    {
+     "Hz": 0.2016,
+     "aft_body_ke_share": 0.0026,
+     "lateral_ke_share": 0.999,
+     "tank_node_ke_share": 0.96,
+     "ke_x": 0.001
+    },
+    {
+     "Hz": 0.2016,
+     "aft_body_ke_share": 0.0022,
+     "lateral_ke_share": 0.999,
+     "tank_node_ke_share": 0.947,
+     "ke_x": 0.001
+    },
+    {
+     "Hz": 0.2017,
+     "aft_body_ke_share": 0.035,
+     "lateral_ke_share": 0.998,
+     "tank_node_ke_share": 0.862,
+     "ke_x": 0.002
+    },
+    {
+     "Hz": 0.2017,
+     "aft_body_ke_share": 0.0631,
+     "lateral_ke_share": 0.998,
+     "tank_node_ke_share": 0.84,
+     "ke_x": 0.002
+    }
+   ],
+   "free_free_lowest_flexible_Hz": 0.05401932232711772,
+   "screens": {
+    "basis_Hz": 0.1653140451636613,
+    "above_3x_slosh_0p12": true,
+    "clear_of_spin_1x_2x": true,
+    "meets_0p2": false,
+    "lowest_mode_Hz": 0.05401932232711772,
+    "lowest_mode_in_slosh_band": false,
+    "lowest_mode_near_spin": false
+   }
+  },
+  {
+   "case": "F0_V4_farm_r34.5_275m_V4_mass",
+   "nodes": 553,
+   "elements": 969,
+   "tanks": 108,
+   "structure_t": 1830.005573783016,
+   "member_t": {
+    "hub_spoke": 6.408849013323177,
+    "keel_ring": 29.7054499226717,
+    "outer_ring": 208.74430218476667,
+    "spoke": 99.97804460784177,
+    "spine": 16.767471673557424,
+    "keel": 67.60215189401023,
+    "longeron": 987.8381036353574,
+    "lacing": 233.5570609030376,
+    "vessel": 0.0,
+    "girder": 179.40413994845025
+   },
+   "stretch_mass_t": 27763.923152760548,
+   "cantilever_Hz": [
+    0.054,
+    0.1182,
+    0.1224,
+    0.1375,
+    0.2082,
+    0.2151,
+    0.2405,
+    0.2465,
+    0.2516,
+    0.2731
+   ],
+   "cantilever_first_bending_Hz": 0.11821358138088887,
+   "cantilever_lowest_Hz": 0.054025634478515265,
+   "aft_body": {
+    "mass_kg": 15136076.847239453,
+    "centroid_x_m": -104.01591462065339,
+    "lever_from_J1_m": 244.7659146206534,
+    "I_lateral_kg_m2": 193331207627.59363,
+    "items_t": {
+     "drive": 7650.573617561162,
+     "radiators": 4663.696920527675,
+     "payload_rings": 2821.8063091506174
+    }
+   },
+   "free_free_flexible_Hz": [
+    0.054,
+    0.1374,
+    0.1653,
+    0.1712,
+    0.2015,
+    0.2015,
+    0.2016,
+    0.2016,
+    0.2016,
+    0.2016
+   ],
+   "free_free_first_global_bending_Hz": 0.16531404545225925,
+   "free_free_first_lateral_Hz": 0.16531404545225925,
+   "free_free_modes": [
+    {
+     "Hz": 0.054,
+     "aft_body_ke_share": 0.0,
+     "lateral_ke_share": 1.0,
+     "tank_node_ke_share": 0.951,
+     "ke_x": 0.0
+    },
+    {
+     "Hz": 0.1374,
+     "aft_body_ke_share": 0.0002,
+     "lateral_ke_share": 1.0,
+     "tank_node_ke_share": 0.993,
+     "ke_x": 0.0
+    },
+    {
+     "Hz": 0.1653,
+     "aft_body_ke_share": 0.2125,
+     "lateral_ke_share": 0.998,
+     "tank_node_ke_share": 0.716,
+     "ke_x": 0.002
+    },
+    {
+     "Hz": 0.1712,
+     "aft_body_ke_share": 0.215,
+     "lateral_ke_share": 0.997,
+     "tank_node_ke_share": 0.713,
+     "ke_x": 0.003
+    },
+    {
+     "Hz": 0.2015,
+     "aft_body_ke_share": 0.004,
+     "lateral_ke_share": 0.999,
+     "tank_node_ke_share": 0.81,
+     "ke_x": 0.001
+    },
+    {
+     "Hz": 0.2015,
+     "aft_body_ke_share": 0.0027,
+     "lateral_ke_share": 0.999,
+     "tank_node_ke_share": 0.934,
+     "ke_x": 0.001
+    },
+    {
+     "Hz": 0.2016,
+     "aft_body_ke_share": 0.0005,
+     "lateral_ke_share": 0.997,
+     "tank_node_ke_share": 0.693,
+     "ke_x": 0.003
+    },
+    {
+     "Hz": 0.2016,
+     "aft_body_ke_share": 0.007,
+     "lateral_ke_share": 0.998,
+     "tank_node_ke_share": 0.78,
+     "ke_x": 0.002
+    },
+    {
+     "Hz": 0.2016,
+     "aft_body_ke_share": 0.0026,
+     "lateral_ke_share": 0.999,
+     "tank_node_ke_share": 0.96,
+     "ke_x": 0.001
+    },
+    {
+     "Hz": 0.2016,
+     "aft_body_ke_share": 0.0022,
+     "lateral_ke_share": 0.999,
+     "tank_node_ke_share": 0.947,
+     "ke_x": 0.001
+    },
+    {
+     "Hz": 0.2017,
+     "aft_body_ke_share": 0.035,
+     "lateral_ke_share": 0.998,
+     "tank_node_ke_share": 0.862,
+     "ke_x": 0.002
+    },
+    {
+     "Hz": 0.2017,
+     "aft_body_ke_share": 0.0631,
+     "lateral_ke_share": 0.998,
+     "tank_node_ke_share": 0.84,
+     "ke_x": 0.002
+    }
+   ],
+   "free_free_lowest_flexible_Hz": 0.05401932228197153,
+   "screens": {
+    "basis_Hz": 0.16531404545225925,
+    "above_3x_slosh_0p12": true,
+    "clear_of_spin_1x_2x": true,
+    "meets_0p2": false,
+    "lowest_mode_Hz": 0.05401932228197153,
+    "lowest_mode_in_slosh_band": false,
+    "lowest_mode_near_spin": false
+   }
+  },
+  {
+   "case": "F1_wide_r57_275m_coupled",
+   "nodes": 931,
+   "elements": 1536,
+   "tanks": 297,
+   "structure_t": 2735.063011352224,
+   "member_t": {
+    "hub_spoke": 6.408849013323177,
+    "keel_ring": 29.7054499226717,
+    "outer_ring": 344.88189056613544,
+    "spoke": 177.72016959554432,
+    "spine": 16.767471673557424,
+    "keel": 67.60215189401023,
+    "longeron": 987.8381036353574,
+    "lacing": 322.4047153221516,
+    "vessel": 0.0,
+    "girder": 781.7342097294725
+   },
+   "stretch_mass_t": 75230.6868618896,
+   "cantilever_Hz": [
+    0.0294,
+    0.0769,
+    0.0969,
+    0.0985,
+    0.1014,
+    0.1073,
+    0.1101,
+    0.1144,
+    0.116,
+    0.1203
+   ],
+   "cantilever_first_bending_Hz": 0.10142721801131502,
+   "cantilever_lowest_Hz": 0.02943777586149024,
+   "aft_body": {
+    "mass_kg": 41858339.68942333,
+    "centroid_x_m": -103.18568907354772,
+    "lever_from_J1_m": 243.93568907354774,
+    "I_lateral_kg_m2": 424231489863.0149,
+    "items_t": {
+     "drive": 16783.46346343562,
+     "radiators": 10230.995842003958,
+     "payload_rings": 6190.344078489993,
+     "other": 8653.536305493762
+    }
+   },
+   "free_free_flexible_Hz": [
+    0.0295,
+    0.0768,
+    0.0967,
+    0.0998,
+    0.1047,
+    0.1144,
+    0.1157,
+    0.1198,
+    0.1206,
+    0.1235
+   ],
+   "free_free_first_global_bending_Hz": null,
+   "free_free_first_lateral_Hz": null,
+   "free_free_modes": [
+    {
+     "Hz": 0.0295,
+     "aft_body_ke_share": 0.0,
+     "lateral_ke_share": 1.0,
+     "tank_node_ke_share": 0.986,
+     "ke_x": 0.0
+    },
+    {
+     "Hz": 0.0768,
+     "aft_body_ke_share": 0.0,
+     "lateral_ke_share": 1.0,
+     "tank_node_ke_share": 0.999,
+     "ke_x": 0.0
+    },
+    {
+     "Hz": 0.0967,
+     "aft_body_ke_share": 0.0001,
+     "lateral_ke_share": 1.0,
+     "tank_node_ke_share": 1.0,
+     "ke_x": 0.0
+    },
+    {
+     "Hz": 0.0998,
+     "aft_body_ke_share": 0.0008,
+     "lateral_ke_share": 1.0,
+     "tank_node_ke_share": 0.997,
+     "ke_x": 0.0
+    },
+    {
+     "Hz": 0.1047,
+     "aft_body_ke_share": 0.0021,
+     "lateral_ke_share": 1.0,
+     "tank_node_ke_share": 0.997,
+     "ke_x": 0.0
+    },
+    {
+     "Hz": 0.1144,
+     "aft_body_ke_share": 0.0,
+     "lateral_ke_share": 1.0,
+     "tank_node_ke_share": 0.443,
+     "ke_x": 0.0
+    },
+    {
+     "Hz": 0.1157,
+     "aft_body_ke_share": 0.0002,
+     "lateral_ke_share": 1.0,
+     "tank_node_ke_share": 0.996,
+     "ke_x": 0.0
+    },
+    {
+     "Hz": 0.1198,
+     "aft_body_ke_share": 0.0001,
+     "lateral_ke_share": 0.999,
+     "tank_node_ke_share": 0.999,
+     "ke_x": 0.001
+    },
+    {
+     "Hz": 0.1206,
+     "aft_body_ke_share": 0.0001,
+     "lateral_ke_share": 0.999,
+     "tank_node_ke_share": 0.997,
+     "ke_x": 0.001
+    },
+    {
+     "Hz": 0.1235,
+     "aft_body_ke_share": 0.0016,
+     "lateral_ke_share": 1.0,
+     "tank_node_ke_share": 0.998,
+     "ke_x": 0.0
+    },
+    {
+     "Hz": 0.1285,
+     "aft_body_ke_share": 0.0007,
+     "lateral_ke_share": 1.0,
+     "tank_node_ke_share": 0.999,
+     "ke_x": 0.0
+    },
+    {
+     "Hz": 0.1306,
+     "aft_body_ke_share": 0.0004,
+     "lateral_ke_share": 0.999,
+     "tank_node_ke_share": 0.999,
+     "ke_x": 0.001
+    }
+   ],
+   "free_free_lowest_flexible_Hz": 0.029492486152030418,
+   "screens": {
+    "basis_Hz": 0.10142721801131502,
+    "above_3x_slosh_0p12": false,
+    "clear_of_spin_1x_2x": true,
+    "meets_0p2": false,
+    "lowest_mode_Hz": 0.02943777586149024,
+    "lowest_mode_in_slosh_band": true,
+    "lowest_mode_near_spin": false
+   }
+  },
+  {
+   "case": "F2_r41.7_514m_coupled_7.5deg",
+   "nodes": 1229,
+   "elements": 2107,
+   "tanks": 306,
+   "structure_t": 3741.650311154391,
+   "member_t": {
+    "hub_spoke": 11.535928223981728,
+    "keel_ring": 53.46980986080901,
+    "outer_ring": 454.15499484024724,
+    "spoke": 224.7399442870312,
+    "spine": 31.313441400959785,
+    "keel": 126.24777683389127,
+    "longeron": 1844.7987373434676,
+    "lacing": 487.58774794785677,
+    "vessel": 0.0,
+    "girder": 507.8019304161466
+   },
+   "stretch_mass_t": 75230.6868618896,
+   "cantilever_Hz": [
+    0.0281,
+    0.0527,
+    0.0527,
+    0.0781,
+    0.1222,
+    0.1576,
+    0.165,
+    0.1774,
+    0.1774,
+    0.2054
+   ],
+   "cantilever_first_bending_Hz": 0.05265574962098907,
+   "cantilever_lowest_Hz": 0.02814084664245954,
+   "aft_body": {
+    "mass_kg": 41858339.68942333,
+    "centroid_x_m": -103.18568907354772,
+    "lever_from_J1_m": 243.93568907354774,
+    "I_lateral_kg_m2": 424231489863.0149,
+    "items_t": {
+     "drive": 16783.46346343562,
+     "radiators": 10230.995842003958,
+     "payload_rings": 6190.344078489993,
+     "other": 8653.536305493762
+    }
+   },
+   "free_free_flexible_Hz": [
+    0.0282,
+    0.078,
+    0.0841,
+    0.0841,
+    0.1222,
+    0.1576,
+    0.165,
+    0.1989,
+    0.1989,
+    0.2014
+   ],
+   "free_free_first_global_bending_Hz": 0.08409943264584839,
+   "free_free_first_lateral_Hz": 0.08409943264584839,
+   "free_free_modes": [
+    {
+     "Hz": 0.0282,
+     "aft_body_ke_share": 0.0,
+     "lateral_ke_share": 1.0,
+     "tank_node_ke_share": 0.927,
+     "ke_x": 0.0
+    },
+    {
+     "Hz": 0.078,
+     "aft_body_ke_share": 0.0,
+     "lateral_ke_share": 1.0,
+     "tank_node_ke_share": 0.977,
+     "ke_x": 0.0
+    },
+    {
+     "Hz": 0.0841,
+     "aft_body_ke_share": 0.1153,
+     "lateral_ke_share": 0.997,
+     "tank_node_ke_share": 0.816,
+     "ke_x": 0.003
+    },
+    {
+     "Hz": 0.0841,
+     "aft_body_ke_share": 0.1153,
+     "lateral_ke_share": 0.997,
+     "tank_node_ke_share": 0.816,
+     "ke_x": 0.003
+    },
+    {
+     "Hz": 0.1222,
+     "aft_body_ke_share": 0.0,
+     "lateral_ke_share": 1.0,
+     "tank_node_ke_share": 0.993,
+     "ke_x": 0.0
+    },
+    {
+     "Hz": 0.1576,
+     "aft_body_ke_share": 0.0,
+     "lateral_ke_share": 1.0,
+     "tank_node_ke_share": 0.45,
+     "ke_x": 0.0
+    },
+    {
+     "Hz": 0.165,
+     "aft_body_ke_share": 0.0,
+     "lateral_ke_share": 1.0,
+     "tank_node_ke_share": 0.958,
+     "ke_x": 0.0
+    },
+    {
+     "Hz": 0.1989,
+     "aft_body_ke_share": 0.1211,
+     "lateral_ke_share": 0.995,
+     "tank_node_ke_share": 0.841,
+     "ke_x": 0.005
+    },
+    {
+     "Hz": 0.1989,
+     "aft_body_ke_share": 0.1211,
+     "lateral_ke_share": 0.995,
+     "tank_node_ke_share": 0.841,
+     "ke_x": 0.005
+    },
+    {
+     "Hz": 0.2014,
+     "aft_body_ke_share": 0.0049,
+     "lateral_ke_share": 0.999,
+     "tank_node_ke_share": 0.824,
+     "ke_x": 0.001
+    },
+    {
+     "Hz": 0.2014,
+     "aft_body_ke_share": 0.0049,
+     "lateral_ke_share": 0.999,
+     "tank_node_ke_share": 0.824,
+     "ke_x": 0.001
+    },
+    {
+     "Hz": 0.2014,
+     "aft_body_ke_share": 0.0,
+     "lateral_ke_share": 0.997,
+     "tank_node_ke_share": 0.642,
+     "ke_x": 0.003
+    }
+   ],
+   "free_free_lowest_flexible_Hz": 0.028165291265462637,
+   "screens": {
+    "basis_Hz": 0.08409943264584839,
+    "above_3x_slosh_0p12": false,
+    "clear_of_spin_1x_2x": true,
+    "meets_0p2": false,
+    "lowest_mode_Hz": 0.02814084664245954,
+    "lowest_mode_in_slosh_band": true,
+    "lowest_mode_near_spin": false
+   }
+  },
+  {
+   "case": "F2x_r44_462m_coupled_dust_limit",
+   "nodes": 1147,
+   "elements": 1953,
+   "tanks": 300,
+   "structure_t": 3454.7698080373575,
+   "member_t": {
+    "hub_spoke": 10.254158421317088,
+    "keel_ring": 47.528719876274685,
+    "outer_ring": 425.95938764659513,
+    "spoke": 212.483995808684,
+    "spine": 28.125325474026344,
+    "keel": 113.39410984436202,
+    "longeron": 1656.9742130057634,
+    "lacing": 448.5774836739886,
+    "vessel": 0.0,
+    "girder": 511.472414286346
+   },
+   "stretch_mass_t": 75230.6868618896,
+   "cantilever_Hz": [
+    0.03,
+    0.0613,
+    0.0618,
+    0.0824,
+    0.1294,
+    0.1462,
+    0.1749,
+    0.1771,
+    0.1875,
+    0.1884
+   ],
+   "cantilever_first_bending_Hz": 0.06134778287394631,
+   "cantilever_lowest_Hz": 0.03001144954118748,
+   "aft_body": {
+    "mass_kg": 41858339.68942333,
+    "centroid_x_m": -103.18568907354772,
+    "lever_from_J1_m": 243.93568907354774,
+    "I_lateral_kg_m2": 424231489863.0149,
+    "items_t": {
+     "drive": 16783.46346343562,
+     "radiators": 10230.995842003958,
+     "payload_rings": 6190.344078489993,
+     "other": 8653.536305493762
+    }
+   },
+   "free_free_flexible_Hz": [
+    0.03,
+    0.0824,
+    0.0957,
+    0.0964,
+    0.1293,
+    0.1462,
+    0.1748,
+    0.1772,
+    0.1876,
+    0.1957
+   ],
+   "free_free_first_global_bending_Hz": 0.09572492207380674,
+   "free_free_first_lateral_Hz": 0.09572492207380674,
+   "free_free_modes": [
+    {
+     "Hz": 0.03,
+     "aft_body_ke_share": 0.0,
+     "lateral_ke_share": 1.0,
+     "tank_node_ke_share": 0.934,
+     "ke_x": 0.0
+    },
+    {
+     "Hz": 0.0824,
+     "aft_body_ke_share": 0.0,
+     "lateral_ke_share": 1.0,
+     "tank_node_ke_share": 0.984,
+     "ke_x": 0.0
+    },
+    {
+     "Hz": 0.0957,
+     "aft_body_ke_share": 0.1274,
+     "lateral_ke_share": 0.998,
+     "tank_node_ke_share": 0.803,
+     "ke_x": 0.002
+    },
+    {
+     "Hz": 0.0964,
+     "aft_body_ke_share": 0.1274,
+     "lateral_ke_share": 0.997,
+     "tank_node_ke_share": 0.803,
+     "ke_x": 0.003
+    },
+    {
+     "Hz": 0.1293,
+     "aft_body_ke_share": 0.0,
+     "lateral_ke_share": 1.0,
+     "tank_node_ke_share": 0.993,
+     "ke_x": 0.0
+    },
+    {
+     "Hz": 0.1462,
+     "aft_body_ke_share": 0.0,
+     "lateral_ke_share": 1.0,
+     "tank_node_ke_share": 0.412,
+     "ke_x": 0.0
+    },
+    {
+     "Hz": 0.1748,
+     "aft_body_ke_share": 0.0,
+     "lateral_ke_share": 1.0,
+     "tank_node_ke_share": 0.996,
+     "ke_x": 0.0
+    },
+    {
+     "Hz": 0.1772,
+     "aft_body_ke_share": 0.0008,
+     "lateral_ke_share": 1.0,
+     "tank_node_ke_share": 0.998,
+     "ke_x": 0.0
+    },
+    {
+     "Hz": 0.1876,
+     "aft_body_ke_share": 0.0002,
+     "lateral_ke_share": 1.0,
+     "tank_node_ke_share": 0.999,
+     "ke_x": 0.0
+    },
+    {
+     "Hz": 0.1957,
+     "aft_body_ke_share": 0.0145,
+     "lateral_ke_share": 1.0,
+     "tank_node_ke_share": 0.981,
+     "ke_x": 0.0
+    },
+    {
+     "Hz": 0.2009,
+     "aft_body_ke_share": 0.02,
+     "lateral_ke_share": 0.999,
+     "tank_node_ke_share": 0.904,
+     "ke_x": 0.001
+    },
+    {
+     "Hz": 0.2009,
+     "aft_body_ke_share": 0.0129,
+     "lateral_ke_share": 0.999,
+     "tank_node_ke_share": 0.934,
+     "ke_x": 0.001
+    }
+   ],
+   "free_free_lowest_flexible_Hz": 0.03003798578997561,
+   "screens": {
+    "basis_Hz": 0.09572492207380674,
+    "above_3x_slosh_0p12": false,
+    "clear_of_spin_1x_2x": true,
+    "meets_0p2": false,
+    "lowest_mode_Hz": 0.03001144954118748,
+    "lowest_mode_in_slosh_band": true,
+    "lowest_mode_near_spin": false
+   }
+  },
+  {
+   "case": "F3_long_r34.5_751m_coupled",
+   "nodes": 1497,
+   "elements": 2633,
+   "tanks": 300,
+   "structure_t": 4962.346461128703,
+   "member_t": {
+    "hub_spoke": 16.663007434640285,
+    "keel_ring": 77.23416979894637,
+    "outer_ring": 542.7351856803936,
+    "spoke": 259.94291598038876,
+    "spine": 45.74722127092209,
+    "keel": 184.44108099868566,
+    "longeron": 2695.1498226247973,
+    "lacing": 642.0882241497897,
+    "vessel": 0.0,
+    "girder": 498.34483319013844
+   },
+   "stretch_mass_t": 75230.6868618896,
+   "cantilever_Hz": [
+    0.0203,
+    0.0275,
+    0.028,
+    0.058,
+    0.0906,
+    0.1054,
+    0.109,
+    0.1198,
+    0.1474,
+    0.1738
+   ],
+   "cantilever_first_bending_Hz": 0.0274693135644758,
+   "cantilever_lowest_Hz": 0.02032917755979603,
+   "aft_body": {
+    "mass_kg": 41858339.68942333,
+    "centroid_x_m": -103.18568907354772,
+    "lever_from_J1_m": 243.93568907354774,
+    "I_lateral_kg_m2": 424231489863.0149,
+    "items_t": {
+     "drive": 16783.46346343562,
+     "radiators": 10230.995842003958,
+     "payload_rings": 6190.344078489993,
+     "other": 8653.536305493762
+    }
+   },
+   "free_free_flexible_Hz": [
+    0.0204,
+    0.0488,
+    0.0495,
+    0.058,
+    0.0906,
+    0.1198,
+    0.1231,
+    0.1277,
+    0.1473,
+    0.1737
+   ],
+   "free_free_first_global_bending_Hz": 0.048771905066922305,
+   "free_free_first_lateral_Hz": 0.048771905066922305,
+   "free_free_modes": [
+    {
+     "Hz": 0.0204,
+     "aft_body_ke_share": 0.0,
+     "lateral_ke_share": 1.0,
+     "tank_node_ke_share": 0.92,
+     "ke_x": 0.0
+    },
+    {
+     "Hz": 0.0488,
+     "aft_body_ke_share": 0.0663,
+     "lateral_ke_share": 0.998,
+     "tank_node_ke_share": 0.865,
+     "ke_x": 0.002
+    },
+    {
+     "Hz": 0.0495,
+     "aft_body_ke_share": 0.0654,
+     "lateral_ke_share": 0.998,
+     "tank_node_ke_share": 0.866,
+     "ke_x": 0.002
+    },
+    {
+     "Hz": 0.058,
+     "aft_body_ke_share": 0.0002,
+     "lateral_ke_share": 1.0,
+     "tank_node_ke_share": 0.951,
+     "ke_x": 0.0
+    },
+    {
+     "Hz": 0.0906,
+     "aft_body_ke_share": 0.0,
+     "lateral_ke_share": 1.0,
+     "tank_node_ke_share": 0.977,
+     "ke_x": 0.0
+    },
+    {
+     "Hz": 0.1198,
+     "aft_body_ke_share": 0.0005,
+     "lateral_ke_share": 1.0,
+     "tank_node_ke_share": 0.989,
+     "ke_x": 0.0
+    },
+    {
+     "Hz": 0.1231,
+     "aft_body_ke_share": 0.1394,
+     "lateral_ke_share": 0.997,
+     "tank_node_ke_share": 0.806,
+     "ke_x": 0.003
+    },
+    {
+     "Hz": 0.1277,
+     "aft_body_ke_share": 0.1423,
+     "lateral_ke_share": 0.996,
+     "tank_node_ke_share": 0.802,
+     "ke_x": 0.004
+    },
+    {
+     "Hz": 0.1473,
+     "aft_body_ke_share": 0.0,
+     "lateral_ke_share": 1.0,
+     "tank_node_ke_share": 0.995,
+     "ke_x": 0.0
+    },
+    {
+     "Hz": 0.1737,
+     "aft_body_ke_share": 0.0,
+     "lateral_ke_share": 1.0,
+     "tank_node_ke_share": 0.996,
+     "ke_x": 0.0
+    },
+    {
+     "Hz": 0.1991,
+     "aft_body_ke_share": 0.0,
+     "lateral_ke_share": 1.0,
+     "tank_node_ke_share": 0.971,
+     "ke_x": 0.0
+    },
+    {
+     "Hz": 0.2029,
+     "aft_body_ke_share": 0.0378,
+     "lateral_ke_share": 0.998,
+     "tank_node_ke_share": 0.854,
+     "ke_x": 0.002
+    }
+   ],
+   "free_free_lowest_flexible_Hz": 0.020354375179499316,
+   "screens": {
+    "basis_Hz": 0.048771905066922305,
+    "above_3x_slosh_0p12": false,
+    "clear_of_spin_1x_2x": true,
+    "meets_0p2": false,
+    "lowest_mode_Hz": 0.02032917755979603,
+    "lowest_mode_in_slosh_band": true,
+    "lowest_mode_near_spin": false
+   }
+  },
+  {
+   "case": "F5_ellipse_44x73.8_275m_coupled",
+   "nodes": 949,
+   "elements": 1563,
+   "tanks": 306,
+   "structure_t": 2747.810825408522,
+   "member_t": {
+    "hub_spoke": 6.408849013323177,
+    "keel_ring": 29.7054499226717,
+    "outer_ring": 362.10264795957374,
+    "spoke": 187.89858213242834,
+    "spine": 16.767471673557424,
+    "keel": 67.60215189401023,
+    "longeron": 987.8381036353574,
+    "lacing": 336.6649555810969,
+    "vessel": 0.0,
+    "girder": 752.8226135965034
+   },
+   "stretch_mass_t": 75230.6868618896,
+   "cantilever_Hz": [
+    0.0314,
+    0.0797,
+    0.0835,
+    0.0929,
+    0.1003,
+    0.1082,
+    0.1167,
+    0.1185,
+    0.1215,
+    0.1237
+   ],
+   "cantilever_first_bending_Hz": 0.08346146058070501,
+   "cantilever_lowest_Hz": 0.03140101117096411,
+   "aft_body": {
+    "mass_kg": 41858339.68942333,
+    "centroid_x_m": -103.18568907354772,
+    "lever_from_J1_m": 243.93568907354774,
+    "I_lateral_kg_m2": 424231489863.0149,
+    "items_t": {
+     "drive": 16783.46346343562,
+     "radiators": 10230.995842003958,
+     "payload_rings": 6190.344078489993,
+     "other": 8653.536305493762
+    }
+   },
+   "free_free_flexible_Hz": [
+    0.0313,
+    0.0795,
+    0.0932,
+    0.0964,
+    0.1072,
+    0.1147,
+    0.1168,
+    0.1206,
+    0.1241,
+    0.1299
+   ],
+   "free_free_first_global_bending_Hz": 0.1147490155319175,
+   "free_free_first_lateral_Hz": 0.1147490155319175,
+   "free_free_modes": [
+    {
+     "Hz": 0.0313,
+     "aft_body_ke_share": 0.0,
+     "lateral_ke_share": 1.0,
+     "tank_node_ke_share": 0.983,
+     "ke_x": 0.0
+    },
+    {
+     "Hz": 0.0795,
+     "aft_body_ke_share": 0.0001,
+     "lateral_ke_share": 1.0,
+     "tank_node_ke_share": 0.998,
+     "ke_x": 0.0
+    },
+    {
+     "Hz": 0.0932,
+     "aft_body_ke_share": 0.0011,
+     "lateral_ke_share": 1.0,
+     "tank_node_ke_share": 0.993,
+     "ke_x": 0.0
+    },
+    {
+     "Hz": 0.0964,
+     "aft_body_ke_share": 0.0096,
+     "lateral_ke_share": 1.0,
+     "tank_node_ke_share": 0.914,
+     "ke_x": 0.0
+    },
+    {
+     "Hz": 0.1072,
+     "aft_body_ke_share": 0.0055,
+     "lateral_ke_share": 1.0,
+     "tank_node_ke_share": 0.521,
+     "ke_x": 0.0
+    },
+    {
+     "Hz": 0.1147,
+     "aft_body_ke_share": 0.0209,
+     "lateral_ke_share": 0.999,
+     "tank_node_ke_share": 0.963,
+     "ke_x": 0.001
+    },
+    {
+     "Hz": 0.1168,
+     "aft_body_ke_share": 0.0014,
+     "lateral_ke_share": 1.0,
+     "tank_node_ke_share": 0.998,
+     "ke_x": 0.0
+    },
+    {
+     "Hz": 0.1206,
+     "aft_body_ke_share": 0.006,
+     "lateral_ke_share": 0.999,
+     "tank_node_ke_share": 0.99,
+     "ke_x": 0.001
+    },
+    {
+     "Hz": 0.1241,
+     "aft_body_ke_share": 0.0442,
+     "lateral_ke_share": 0.999,
+     "tank_node_ke_share": 0.929,
+     "ke_x": 0.001
+    },
+    {
+     "Hz": 0.1299,
+     "aft_body_ke_share": 0.0182,
+     "lateral_ke_share": 0.999,
+     "tank_node_ke_share": 0.961,
+     "ke_x": 0.001
+    },
+    {
+     "Hz": 0.1408,
+     "aft_body_ke_share": 0.0034,
+     "lateral_ke_share": 0.999,
+     "tank_node_ke_share": 0.988,
+     "ke_x": 0.001
+    },
+    {
+     "Hz": 0.1487,
+     "aft_body_ke_share": 0.0,
+     "lateral_ke_share": 1.0,
+     "tank_node_ke_share": 1.0,
+     "ke_x": 0.0
+    }
+   ],
+   "free_free_lowest_flexible_Hz": 0.03133974826383077,
+   "screens": {
+    "basis_Hz": 0.1147490155319175,
+    "above_3x_slosh_0p12": false,
+    "clear_of_spin_1x_2x": false,
+    "meets_0p2": false,
+    "lowest_mode_Hz": 0.03133974826383077,
+    "lowest_mode_in_slosh_band": true,
+    "lowest_mode_near_spin": false
+   }
+  },
+  {
+   "case": "F2a_frames_every_7.65m",
+   "nodes": 2979,
+   "elements": 5507,
+   "tanks": 306,
+   "structure_t": 6765.162956628898,
+   "member_t": {
+    "hub_spoke": 43.58017329059771,
+    "keel_ring": 201.997059474166,
+    "outer_ring": 1715.696647174263,
+    "spoke": 849.0175673065562,
+    "spine": 31.31344140095975,
+    "keel": 126.24777683389188,
+    "longeron": 1844.7987373434435,
+    "lacing": 1444.7096233888738,
+    "vessel": 0.0,
+    "girder": 507.8019304161466
+   },
+   "stretch_mass_t": 75230.6868618896,
+   "cantilever_Hz": [
+    0.0364,
+    0.0512,
+    0.0512,
+    0.0962,
+    0.1422,
+    0.1694,
+    0.1694,
+    0.182,
+    0.2209,
+    0.2543
+   ],
+   "cantilever_first_bending_Hz": 0.051219566342331053,
+   "cantilever_lowest_Hz": 0.036440505537864,
+   "aft_body": {
+    "mass_kg": 41858339.68942333,
+    "centroid_x_m": -103.18568907354772,
+    "lever_from_J1_m": 243.93568907354774,
+    "I_lateral_kg_m2": 424231489863.0149,
+    "items_t": {
+     "drive": 16783.46346343562,
+     "radiators": 10230.995842003958,
+     "payload_rings": 6190.344078489993,
+     "other": 8653.536305493762
+    }
+   },
+   "free_free_flexible_Hz": [
+    0.0364,
+    0.0835,
+    0.0835,
+    0.0961,
+    0.1421,
+    0.1819,
+    0.1914,
+    0.1914,
+    0.2014,
+    0.2014
+   ],
+   "free_free_first_global_bending_Hz": 0.08347559849615302,
+   "free_free_first_lateral_Hz": 0.08347559849615302,
+   "free_free_modes": [
+    {
+     "Hz": 0.0364,
+     "aft_body_ke_share": 0.0,
+     "lateral_ke_share": 1.0,
+     "tank_node_ke_share": 0.867,
+     "ke_x": 0.0
+    },
+    {
+     "Hz": 0.0835,
+     "aft_body_ke_share": 0.1194,
+     "lateral_ke_share": 0.996,
+     "tank_node_ke_share": 0.781,
+     "ke_x": 0.004
+    },
+    {
+     "Hz": 0.0835,
+     "aft_body_ke_share": 0.1194,
+     "lateral_ke_share": 0.996,
+     "tank_node_ke_share": 0.781,
+     "ke_x": 0.004
+    },
+    {
+     "Hz": 0.0961,
+     "aft_body_ke_share": 0.0,
+     "lateral_ke_share": 1.0,
+     "tank_node_ke_share": 0.949,
+     "ke_x": 0.0
+    },
+    {
+     "Hz": 0.1421,
+     "aft_body_ke_share": 0.0,
+     "lateral_ke_share": 1.0,
+     "tank_node_ke_share": 0.983,
+     "ke_x": 0.0
+    },
+    {
+     "Hz": 0.1819,
+     "aft_body_ke_share": 0.0,
+     "lateral_ke_share": 1.0,
+     "tank_node_ke_share": 0.994,
+     "ke_x": 0.0
+    },
+    {
+     "Hz": 0.1914,
+     "aft_body_ke_share": 0.1309,
+     "lateral_ke_share": 0.991,
+     "tank_node_ke_share": 0.802,
+     "ke_x": 0.009
+    },
+    {
+     "Hz": 0.1914,
+     "aft_body_ke_share": 0.1309,
+     "lateral_ke_share": 0.991,
+     "tank_node_ke_share": 0.802,
+     "ke_x": 0.009
+    },
+    {
+     "Hz": 0.2014,
+     "aft_body_ke_share": 0.017,
+     "lateral_ke_share": 0.999,
+     "tank_node_ke_share": 0.302,
+     "ke_x": 0.001
+    },
+    {
+     "Hz": 0.2014,
+     "aft_body_ke_share": 0.017,
+     "lateral_ke_share": 0.999,
+     "tank_node_ke_share": 0.302,
+     "ke_x": 0.001
+    },
+    {
+     "Hz": 0.2015,
+     "aft_body_ke_share": 0.0,
+     "lateral_ke_share": 0.999,
+     "tank_node_ke_share": 0.073,
+     "ke_x": 0.001
+    },
+    {
+     "Hz": 0.2015,
+     "aft_body_ke_share": 0.0,
+     "lateral_ke_share": 0.999,
+     "tank_node_ke_share": 0.034,
+     "ke_x": 0.001
+    }
+   ],
+   "free_free_lowest_flexible_Hz": 0.03644382685696607,
+   "screens": {
+    "basis_Hz": 0.08347559849615302,
+    "above_3x_slosh_0p12": false,
+    "clear_of_spin_1x_2x": true,
+    "meets_0p2": false,
+    "lowest_mode_Hz": 0.036440505537864,
+    "lowest_mode_in_slosh_band": true,
+    "lowest_mode_near_spin": false
+   }
+  },
+  {
+   "case": "F2b_saddles_tied_to_longerons",
+   "nodes": 1229,
+   "elements": 2719,
+   "tanks": 306,
+   "structure_t": 4296.1286516838145,
+   "member_t": {
+    "hub_spoke": 11.535928223981728,
+    "keel_ring": 53.46980986080901,
+    "outer_ring": 454.15499484024724,
+    "spoke": 224.7399442870312,
+    "spine": 31.313441400959785,
+    "keel": 126.24777683389127,
+    "longeron": 1844.7987373434676,
+    "lacing": 487.58774794785677,
+    "vessel": 0.0,
+    "girder": 1062.28027094557
+   },
+   "stretch_mass_t": 75230.6868618896,
+   "cantilever_Hz": [
+    0.0541,
+    0.0541,
+    0.055,
+    0.1641,
+    0.1961,
+    0.1961,
+    0.2712,
+    0.3751,
+    0.3948,
+    0.3948
+   ],
+   "cantilever_first_bending_Hz": 0.05414744890650722,
+   "cantilever_lowest_Hz": 0.05414744890650722,
+   "aft_body": {
+    "mass_kg": 41858339.68942333,
+    "centroid_x_m": -103.18568907354772,
+    "lever_from_J1_m": 243.93568907354774,
+    "I_lateral_kg_m2": 424231489863.0149,
+    "items_t": {
+     "drive": 16783.46346343562,
+     "radiators": 10230.995842003958,
+     "payload_rings": 6190.344078489993,
+     "other": 8653.536305493762
+    }
+   },
+   "free_free_flexible_Hz": [
+    0.0546,
+    0.0867,
+    0.0867,
+    0.1622,
+    0.2018,
+    0.2018,
+    0.2018,
+    0.2018,
+    0.2018,
+    0.2019
+   ],
+   "free_free_first_global_bending_Hz": 0.08666703943947966,
+   "free_free_first_lateral_Hz": 0.08666703943947966,
+   "free_free_modes": [
+    {
+     "Hz": 0.0546,
+     "aft_body_ke_share": 0.0,
+     "lateral_ke_share": 1.0,
+     "tank_node_ke_share": 0.904,
+     "ke_x": 0.0
+    },
+    {
+     "Hz": 0.0867,
+     "aft_body_ke_share": 0.1135,
+     "lateral_ke_share": 0.998,
+     "tank_node_ke_share": 0.814,
+     "ke_x": 0.002
+    },
+    {
+     "Hz": 0.0867,
+     "aft_body_ke_share": 0.1135,
+     "lateral_ke_share": 0.998,
+     "tank_node_ke_share": 0.814,
+     "ke_x": 0.002
+    },
+    {
+     "Hz": 0.1622,
+     "aft_body_ke_share": 0.0,
+     "lateral_ke_share": 0.998,
+     "tank_node_ke_share": 0.905,
+     "ke_x": 0.002
+    },
+    {
+     "Hz": 0.2018,
+     "aft_body_ke_share": 0.1757,
+     "lateral_ke_share": 0.997,
+     "tank_node_ke_share": 0.788,
+     "ke_x": 0.003
+    },
+    {
+     "Hz": 0.2018,
+     "aft_body_ke_share": 0.1757,
+     "lateral_ke_share": 0.997,
+     "tank_node_ke_share": 0.788,
+     "ke_x": 0.003
+    },
+    {
+     "Hz": 0.2018,
+     "aft_body_ke_share": 0.0005,
+     "lateral_ke_share": 0.998,
+     "tank_node_ke_share": 0.981,
+     "ke_x": 0.002
+    },
+    {
+     "Hz": 0.2018,
+     "aft_body_ke_share": 0.1854,
+     "lateral_ke_share": 0.997,
+     "tank_node_ke_share": 0.777,
+     "ke_x": 0.003
+    },
+    {
+     "Hz": 0.2018,
+     "aft_body_ke_share": 0.1854,
+     "lateral_ke_share": 0.997,
+     "tank_node_ke_share": 0.777,
+     "ke_x": 0.003
+    },
+    {
+     "Hz": 0.2019,
+     "aft_body_ke_share": 0.0,
+     "lateral_ke_share": 0.998,
+     "tank_node_ke_share": 0.963,
+     "ke_x": 0.002
+    },
+    {
+     "Hz": 0.2019,
+     "aft_body_ke_share": 0.1872,
+     "lateral_ke_share": 0.997,
+     "tank_node_ke_share": 0.776,
+     "ke_x": 0.003
+    },
+    {
+     "Hz": 0.2019,
+     "aft_body_ke_share": 0.1872,
+     "lateral_ke_share": 0.997,
+     "tank_node_ke_share": 0.776,
+     "ke_x": 0.003
+    }
+   ],
+   "free_free_lowest_flexible_Hz": 0.054608923054466754,
+   "screens": {
+    "basis_Hz": 0.08666703943947966,
+    "above_3x_slosh_0p12": false,
+    "clear_of_spin_1x_2x": true,
+    "meets_0p2": false,
+    "lowest_mode_Hz": 0.05414744890650722,
+    "lowest_mode_in_slosh_band": false,
+    "lowest_mode_near_spin": false
+   }
+  },
+  {
+   "case": "F2c_tied_+_7.65m_frames",
+   "nodes": 2979,
+   "elements": 6119,
+   "tanks": 306,
+   "structure_t": 7319.641297158321,
+   "member_t": {
+    "hub_spoke": 43.58017329059771,
+    "keel_ring": 201.997059474166,
+    "outer_ring": 1715.696647174263,
+    "spoke": 849.0175673065562,
+    "spine": 31.31344140095975,
+    "keel": 126.24777683389188,
+    "longeron": 1844.7987373434435,
+    "lacing": 1444.7096233888738,
+    "vessel": 0.0,
+    "girder": 1062.28027094557
+   },
+   "stretch_mass_t": 75230.6868618896,
+   "cantilever_Hz": [
+    0.0542,
+    0.0542,
+    0.0589,
+    0.1757,
+    0.1928,
+    0.1928,
+    0.2909,
+    0.3863,
+    0.3863,
+    0.4015
+   ],
+   "cantilever_first_bending_Hz": 0.05419109265539179,
+   "cantilever_lowest_Hz": 0.05419109265539179,
+   "aft_body": {
+    "mass_kg": 41858339.68942333,
+    "centroid_x_m": -103.18568907354772,
+    "lever_from_J1_m": 243.93568907354774,
+    "I_lateral_kg_m2": 424231489863.0149,
+    "items_t": {
+     "drive": 16783.46346343562,
+     "radiators": 10230.995842003958,
+     "payload_rings": 6190.344078489993,
+     "other": 8653.536305493762
+    }
+   },
+   "free_free_flexible_Hz": [
+    0.0585,
+    0.0879,
+    0.0879,
+    0.1732,
+    0.2018,
+    0.2018,
+    0.2018,
+    0.2018,
+    0.2018,
+    0.2019
+   ],
+   "free_free_first_global_bending_Hz": 0.08785845689647907,
+   "free_free_first_lateral_Hz": 0.08785845689647907,
+   "free_free_modes": [
+    {
+     "Hz": 0.0585,
+     "aft_body_ke_share": 0.0,
+     "lateral_ke_share": 1.0,
+     "tank_node_ke_share": 0.843,
+     "ke_x": 0.0
+    },
+    {
+     "Hz": 0.0879,
+     "aft_body_ke_share": 0.1137,
+     "lateral_ke_share": 0.997,
+     "tank_node_ke_share": 0.782,
+     "ke_x": 0.003
+    },
+    {
+     "Hz": 0.0879,
+     "aft_body_ke_share": 0.1137,
+     "lateral_ke_share": 0.997,
+     "tank_node_ke_share": 0.782,
+     "ke_x": 0.003
+    },
+    {
+     "Hz": 0.1732,
+     "aft_body_ke_share": 0.0,
+     "lateral_ke_share": 0.998,
+     "tank_node_ke_share": 0.846,
+     "ke_x": 0.002
+    },
+    {
+     "Hz": 0.2018,
+     "aft_body_ke_share": 0.179,
+     "lateral_ke_share": 0.996,
+     "tank_node_ke_share": 0.756,
+     "ke_x": 0.004
+    },
+    {
+     "Hz": 0.2018,
+     "aft_body_ke_share": 0.179,
+     "lateral_ke_share": 0.996,
+     "tank_node_ke_share": 0.756,
+     "ke_x": 0.004
+    },
+    {
+     "Hz": 0.2018,
+     "aft_body_ke_share": 0.0002,
+     "lateral_ke_share": 0.999,
+     "tank_node_ke_share": 0.983,
+     "ke_x": 0.001
+    },
+    {
+     "Hz": 0.2018,
+     "aft_body_ke_share": 0.1854,
+     "lateral_ke_share": 0.996,
+     "tank_node_ke_share": 0.749,
+     "ke_x": 0.004
+    },
+    {
+     "Hz": 0.2018,
+     "aft_body_ke_share": 0.1854,
+     "lateral_ke_share": 0.996,
+     "tank_node_ke_share": 0.749,
+     "ke_x": 0.004
+    },
+    {
+     "Hz": 0.2019,
+     "aft_body_ke_share": 0.0,
+     "lateral_ke_share": 0.998,
+     "tank_node_ke_share": 0.949,
+     "ke_x": 0.002
+    },
+    {
+     "Hz": 0.202,
+     "aft_body_ke_share": 0.1866,
+     "lateral_ke_share": 0.996,
+     "tank_node_ke_share": 0.747,
+     "ke_x": 0.004
+    },
+    {
+     "Hz": 0.202,
+     "aft_body_ke_share": 0.1866,
+     "lateral_ke_share": 0.996,
+     "tank_node_ke_share": 0.747,
+     "ke_x": 0.004
+    }
+   ],
+   "free_free_lowest_flexible_Hz": 0.05845242570112132,
+   "screens": {
+    "basis_Hz": 0.08785845689647907,
+    "above_3x_slosh_0p12": false,
+    "clear_of_spin_1x_2x": true,
+    "meets_0p2": false,
+    "lowest_mode_Hz": 0.05419109265539179,
+    "lowest_mode_in_slosh_band": false,
+    "lowest_mode_near_spin": false
+   }
+  },
+  {
+   "case": "F2d_tied_+_7.65m_+_rings_spokes_x4",
+   "nodes": 2979,
+   "elements": 6119,
+   "tanks": 306,
+   "structure_t": 15750.51563889507,
+   "member_t": {
+    "hub_spoke": 174.32069316239085,
+    "keel_ring": 807.988237896664,
+    "outer_ring": 6862.786588697052,
+    "spoke": 3396.070269226225,
+    "spine": 31.31344140095975,
+    "keel": 126.24777683389188,
+    "longeron": 1844.7987373434435,
+    "lacing": 1444.7096233888738,
+    "vessel": 0.0,
+    "girder": 1062.28027094557
+   },
+   "stretch_mass_t": 75230.6868618896,
+   "cantilever_Hz": [
+    0.0548,
+    0.0548,
+    0.0683,
+    0.2032,
+    0.2032,
+    0.2039,
+    0.3376,
+    0.4123,
+    0.4123,
+    0.4668
+   ],
+   "cantilever_first_bending_Hz": 0.05484873373056231,
+   "cantilever_lowest_Hz": 0.05484873373056231,
+   "aft_body": {
+    "mass_kg": 41858339.68942333,
+    "centroid_x_m": -103.18568907354772,
+    "lever_from_J1_m": 243.93568907354774,
+    "I_lateral_kg_m2": 424231489863.0149,
+    "items_t": {
+     "drive": 16783.46346343562,
+     "radiators": 10230.995842003958,
+     "payload_rings": 6190.344078489993,
+     "other": 8653.536305493762
+    }
+   },
+   "free_free_flexible_Hz": [
+    0.0675,
+    0.0899,
+    0.0899,
+    0.1982,
+    0.2019,
+    0.2019,
+    0.2019,
+    0.202,
+    0.202,
+    0.202
+   ],
+   "free_free_first_global_bending_Hz": 0.08990523342120395,
+   "free_free_first_lateral_Hz": 0.08990523342120395,
+   "free_free_modes": [
+    {
+     "Hz": 0.0675,
+     "aft_body_ke_share": 0.0,
+     "lateral_ke_share": 1.0,
+     "tank_node_ke_share": 0.704,
+     "ke_x": 0.0
+    },
+    {
+     "Hz": 0.0899,
+     "aft_body_ke_share": 0.0978,
+     "lateral_ke_share": 0.995,
+     "tank_node_ke_share": 0.728,
+     "ke_x": 0.005
+    },
+    {
+     "Hz": 0.0899,
+     "aft_body_ke_share": 0.0978,
+     "lateral_ke_share": 0.995,
+     "tank_node_ke_share": 0.728,
+     "ke_x": 0.005
+    },
+    {
+     "Hz": 0.1982,
+     "aft_body_ke_share": 0.0,
+     "lateral_ke_share": 0.999,
+     "tank_node_ke_share": 0.706,
+     "ke_x": 0.001
+    },
+    {
+     "Hz": 0.2019,
+     "aft_body_ke_share": 0.1921,
+     "lateral_ke_share": 0.995,
+     "tank_node_ke_share": 0.695,
+     "ke_x": 0.005
+    },
+    {
+     "Hz": 0.2019,
+     "aft_body_ke_share": 0.1921,
+     "lateral_ke_share": 0.995,
+     "tank_node_ke_share": 0.695,
+     "ke_x": 0.005
+    },
+    {
+     "Hz": 0.2019,
+     "aft_body_ke_share": 0.0,
+     "lateral_ke_share": 1.0,
+     "tank_node_ke_share": 0.997,
+     "ke_x": 0.0
+    },
+    {
+     "Hz": 0.202,
+     "aft_body_ke_share": 0.2175,
+     "lateral_ke_share": 0.994,
+     "tank_node_ke_share": 0.658,
+     "ke_x": 0.006
+    },
+    {
+     "Hz": 0.202,
+     "aft_body_ke_share": 0.2175,
+     "lateral_ke_share": 0.994,
+     "tank_node_ke_share": 0.658,
+     "ke_x": 0.006
+    },
+    {
+     "Hz": 0.202,
+     "aft_body_ke_share": 0.0,
+     "lateral_ke_share": 0.999,
+     "tank_node_ke_share": 0.725,
+     "ke_x": 0.001
+    },
+    {
+     "Hz": 0.2021,
+     "aft_body_ke_share": 0.221,
+     "lateral_ke_share": 0.994,
+     "tank_node_ke_share": 0.654,
+     "ke_x": 0.006
+    },
+    {
+     "Hz": 0.2021,
+     "aft_body_ke_share": 0.221,
+     "lateral_ke_share": 0.994,
+     "tank_node_ke_share": 0.654,
+     "ke_x": 0.006
+    }
+   ],
+   "free_free_lowest_flexible_Hz": 0.06753504568849701,
+   "screens": {
+    "basis_Hz": 0.08990523342120395,
+    "above_3x_slosh_0p12": false,
+    "clear_of_spin_1x_2x": true,
+    "meets_0p2": false,
+    "lowest_mode_Hz": 0.05484873373056231,
+    "lowest_mode_in_slosh_band": false,
+    "lowest_mode_near_spin": false
+   }
+  },
+  {
+   "case": "F2e_tied_+_7.65m_+_18_longerons_r0.8",
+   "nodes": 4602,
+   "elements": 9560,
+   "tanks": 306,
+   "structure_t": 14097.797156541576,
+   "member_t": {
+    "hub_spoke": 43.58017329059771,
+    "keel_ring": 204.32567720667234,
+    "outer_ring": 1742.1640334639274,
+    "spoke": 1698.0351346131479,
+    "spine": 31.31344140095975,
+    "keel": 126.24777683389188,
+    "longeron": 6328.611314720545,
+    "lacing": 2889.4192467777493,
+    "vessel": 0.0,
+    "girder": 1034.1003582340845
+   },
+   "stretch_mass_t": 75230.6868618896,
+   "cantilever_Hz": [
+    0.0744,
+    0.0778,
+    0.0778,
+    0.2217,
+    0.2535,
+    0.2535,
+    0.3666,
+    0.4783,
+    0.4783,
+    0.5051
+   ],
+   "cantilever_first_bending_Hz": 0.07778311226542768,
+   "cantilever_lowest_Hz": 0.07435888768998028,
+   "aft_body": {
+    "mass_kg": 41858339.68942333,
+    "centroid_x_m": -103.18568907354772,
+    "lever_from_J1_m": 243.93568907354774,
+    "I_lateral_kg_m2": 424231489863.0149,
+    "items_t": {
+     "drive": 16783.46346343562,
+     "radiators": 10230.995842003958,
+     "payload_rings": 6190.344078489993,
+     "other": 8653.536305493762
+    }
+   },
+   "free_free_flexible_Hz": [
+    0.0739,
+    0.1206,
+    0.1206,
+    0.2017,
+    0.2017,
+    0.2017,
+    0.2017,
+    0.2017,
+    0.2017,
+    0.2017
+   ],
+   "free_free_first_global_bending_Hz": 0.12063558927567535,
+   "free_free_first_lateral_Hz": 0.12063558927567535,
+   "free_free_modes": [
+    {
+     "Hz": 0.0739,
+     "aft_body_ke_share": 0.0,
+     "lateral_ke_share": 1.0,
+     "tank_node_ke_share": 0.716,
+     "ke_x": 0.0
+    },
+    {
+     "Hz": 0.1206,
+     "aft_body_ke_share": 0.1632,
+     "lateral_ke_share": 0.999,
+     "tank_node_ke_share": 0.659,
+     "ke_x": 0.001
+    },
+    {
+     "Hz": 0.1206,
+     "aft_body_ke_share": 0.1632,
+     "lateral_ke_share": 0.999,
+     "tank_node_ke_share": 0.659,
+     "ke_x": 0.001
+    },
+    {
+     "Hz": 0.2017,
+     "aft_body_ke_share": 0.0,
+     "lateral_ke_share": 0.998,
+     "tank_node_ke_share": 0.967,
+     "ke_x": 0.002
+    },
+    {
+     "Hz": 0.2017,
+     "aft_body_ke_share": 0.0003,
+     "lateral_ke_share": 0.998,
+     "tank_node_ke_share": 0.963,
+     "ke_x": 0.002
+    },
+    {
+     "Hz": 0.2017,
+     "aft_body_ke_share": 0.0003,
+     "lateral_ke_share": 0.998,
+     "tank_node_ke_share": 0.963,
+     "ke_x": 0.002
+    },
+    {
+     "Hz": 0.2017,
+     "aft_body_ke_share": 0.0346,
+     "lateral_ke_share": 0.998,
+     "tank_node_ke_share": 0.858,
+     "ke_x": 0.002
+    },
+    {
+     "Hz": 0.2017,
+     "aft_body_ke_share": 0.0346,
+     "lateral_ke_share": 0.998,
+     "tank_node_ke_share": 0.858,
+     "ke_x": 0.002
+    },
+    {
+     "Hz": 0.2017,
+     "aft_body_ke_share": 0.0,
+     "lateral_ke_share": 0.999,
+     "tank_node_ke_share": 0.81,
+     "ke_x": 0.001
+    },
+    {
+     "Hz": 0.2017,
+     "aft_body_ke_share": 0.0006,
+     "lateral_ke_share": 0.998,
+     "tank_node_ke_share": 0.978,
+     "ke_x": 0.002
+    },
+    {
+     "Hz": 0.2017,
+     "aft_body_ke_share": 0.0026,
+     "lateral_ke_share": 0.999,
+     "tank_node_ke_share": 0.979,
+     "ke_x": 0.001
+    },
+    {
+     "Hz": 0.2017,
+     "aft_body_ke_share": 0.0026,
+     "lateral_ke_share": 0.999,
+     "tank_node_ke_share": 0.979,
+     "ke_x": 0.001
+    }
+   ],
+   "free_free_lowest_flexible_Hz": 0.07388957688034312,
+   "screens": {
+    "basis_Hz": 0.12063558927567535,
+    "above_3x_slosh_0p12": true,
+    "clear_of_spin_1x_2x": false,
+    "meets_0p2": false,
+    "lowest_mode_Hz": 0.07388957688034312,
+    "lowest_mode_in_slosh_band": false,
+    "lowest_mode_near_spin": true
+   }
+  },
+  {
+   "case": "F2x_tied_r44_462m",
+   "nodes": 1147,
+   "elements": 2553,
+   "tanks": 300,
+   "structure_t": 4048.5386850422933,
+   "member_t": {
+    "hub_spoke": 10.254158421317088,
+    "keel_ring": 47.528719876274685,
+    "outer_ring": 425.95938764659513,
+    "spoke": 212.483995808684,
+    "spine": 28.125325474026344,
+    "keel": 113.39410984436202,
+    "longeron": 1656.9742130057634,
+    "lacing": 448.5774836739886,
+    "vessel": 0.0,
+    "girder": 1105.241291291282
+   },
+   "stretch_mass_t": 75230.6868618896,
+   "cantilever_Hz": [
+    0.0591,
+    0.0633,
+    0.0637,
+    0.1754,
+    0.222,
+    0.2236,
+    0.2867,
+    0.3914,
+    0.4387,
+    0.4421
+   ],
+   "cantilever_first_bending_Hz": 0.06326457106745141,
+   "cantilever_lowest_Hz": 0.05909295499484528,
+   "aft_body": {
+    "mass_kg": 41858339.68942333,
+    "centroid_x_m": -103.18568907354772,
+    "lever_from_J1_m": 243.93568907354774,
+    "I_lateral_kg_m2": 424231489863.0149,
+    "items_t": {
+     "drive": 16783.46346343562,
+     "radiators": 10230.995842003958,
+     "payload_rings": 6190.344078489993,
+     "other": 8653.536305493762
+    }
+   },
+   "free_free_flexible_Hz": [
+    0.0587,
+    0.0991,
+    0.0998,
+    0.1729,
+    0.2011,
+    0.2011,
+    0.2012,
+    0.2013,
+    0.2014,
+    0.2015
+   ],
+   "free_free_first_global_bending_Hz": 0.09909552651978239,
+   "free_free_first_lateral_Hz": 0.09909552651978239,
+   "free_free_modes": [
+    {
+     "Hz": 0.0587,
+     "aft_body_ke_share": 0.0,
+     "lateral_ke_share": 1.0,
+     "tank_node_ke_share": 0.906,
+     "ke_x": 0.0
+    },
+    {
+     "Hz": 0.0991,
+     "aft_body_ke_share": 0.1268,
+     "lateral_ke_share": 0.998,
+     "tank_node_ke_share": 0.798,
+     "ke_x": 0.002
+    },
+    {
+     "Hz": 0.0998,
+     "aft_body_ke_share": 0.1265,
+     "lateral_ke_share": 0.998,
+     "tank_node_ke_share": 0.799,
+     "ke_x": 0.002
+    },
+    {
+     "Hz": 0.1729,
+     "aft_body_ke_share": 0.0001,
+     "lateral_ke_share": 0.998,
+     "tank_node_ke_share": 0.908,
+     "ke_x": 0.002
+    },
+    {
+     "Hz": 0.2011,
+     "aft_body_ke_share": 0.1745,
+     "lateral_ke_share": 0.998,
+     "tank_node_ke_share": 0.784,
+     "ke_x": 0.002
+    },
+    {
+     "Hz": 0.2011,
+     "aft_body_ke_share": 0.1656,
+     "lateral_ke_share": 0.997,
+     "tank_node_ke_share": 0.777,
+     "ke_x": 0.003
+    },
+    {
+     "Hz": 0.2012,
+     "aft_body_ke_share": 0.1708,
+     "lateral_ke_share": 0.998,
+     "tank_node_ke_share": 0.787,
+     "ke_x": 0.002
+    },
+    {
+     "Hz": 0.2013,
+     "aft_body_ke_share": 0.1114,
+     "lateral_ke_share": 0.998,
+     "tank_node_ke_share": 0.807,
+     "ke_x": 0.002
+    },
+    {
+     "Hz": 0.2014,
+     "aft_body_ke_share": 0.1774,
+     "lateral_ke_share": 0.997,
+     "tank_node_ke_share": 0.773,
+     "ke_x": 0.003
+    },
+    {
+     "Hz": 0.2015,
+     "aft_body_ke_share": 0.116,
+     "lateral_ke_share": 0.997,
+     "tank_node_ke_share": 0.848,
+     "ke_x": 0.003
+    },
+    {
+     "Hz": 0.2015,
+     "aft_body_ke_share": 0.1789,
+     "lateral_ke_share": 0.997,
+     "tank_node_ke_share": 0.774,
+     "ke_x": 0.003
+    },
+    {
+     "Hz": 0.2015,
+     "aft_body_ke_share": 0.1814,
+     "lateral_ke_share": 0.998,
+     "tank_node_ke_share": 0.773,
+     "ke_x": 0.002
+    }
+   ],
+   "free_free_lowest_flexible_Hz": 0.05865484134801793,
+   "screens": {
+    "basis_Hz": 0.09909552651978239,
+    "above_3x_slosh_0p12": false,
+    "clear_of_spin_1x_2x": true,
+    "meets_0p2": false,
+    "lowest_mode_Hz": 0.05865484134801793,
+    "lowest_mode_in_slosh_band": false,
+    "lowest_mode_near_spin": true
+   }
+  },
+  {
+   "case": "F2x_tied_r44_462m_+_18_longerons_r0.8",
+   "nodes": 1522,
+   "elements": 3342,
+   "tanks": 300,
+   "structure_t": 8718.264489560897,
+   "member_t": {
+    "hub_spoke": 10.254158421317088,
+    "keel_ring": 48.07662993098226,
+    "outer_ring": 432.53049779890864,
+    "spoke": 424.9679916173692,
+    "spine": 28.125325474026344,
+    "keel": 113.39410984436202,
+    "longeron": 5684.276306329499,
+    "lacing": 897.154967347979,
+    "vessel": 0.0,
+    "girder": 1079.4845027964527
+   },
+   "stretch_mass_t": 75230.6868618896,
+   "cantilever_Hz": [
+    0.065,
+    0.085,
+    0.0863,
+    0.1933,
+    0.2782,
+    0.2802,
+    0.3176,
+    0.4378,
+    0.5223,
+    0.5229
+   ],
+   "cantilever_first_bending_Hz": 0.08499713084558291,
+   "cantilever_lowest_Hz": 0.06500481069220801,
+   "aft_body": {
+    "mass_kg": 41858339.68942333,
+    "centroid_x_m": -103.18568907354772,
+    "lever_from_J1_m": 243.93568907354774,
+    "I_lateral_kg_m2": 424231489863.0149,
+    "items_t": {
+     "drive": 16783.46346343562,
+     "radiators": 10230.995842003958,
+     "payload_rings": 6190.344078489993,
+     "other": 8653.536305493762
+    }
+   },
+   "free_free_flexible_Hz": [
+    0.0647,
+    0.1265,
+    0.1286,
+    0.1909,
+    0.2009,
+    0.201,
+    0.201,
+    0.201,
+    0.2011,
+    0.2011
+   ],
+   "free_free_first_global_bending_Hz": 0.12646733729161078,
+   "free_free_first_lateral_Hz": 0.12646733729161078,
+   "free_free_modes": [
+    {
+     "Hz": 0.0647,
+     "aft_body_ke_share": 0.0,
+     "lateral_ke_share": 1.0,
+     "tank_node_ke_share": 0.787,
+     "ke_x": 0.0
+    },
+    {
+     "Hz": 0.1265,
+     "aft_body_ke_share": 0.1662,
+     "lateral_ke_share": 0.999,
+     "tank_node_ke_share": 0.696,
+     "ke_x": 0.001
+    },
+    {
+     "Hz": 0.1286,
+     "aft_body_ke_share": 0.1679,
+     "lateral_ke_share": 0.999,
+     "tank_node_ke_share": 0.694,
+     "ke_x": 0.001
+    },
+    {
+     "Hz": 0.1909,
+     "aft_body_ke_share": 0.0,
+     "lateral_ke_share": 0.999,
+     "tank_node_ke_share": 0.796,
+     "ke_x": 0.001
+    },
+    {
+     "Hz": 0.2009,
+     "aft_body_ke_share": 0.0002,
+     "lateral_ke_share": 0.997,
+     "tank_node_ke_share": 0.599,
+     "ke_x": 0.003
+    },
+    {
+     "Hz": 0.201,
+     "aft_body_ke_share": 0.0253,
+     "lateral_ke_share": 0.993,
+     "tank_node_ke_share": 0.797,
+     "ke_x": 0.007
+    },
+    {
+     "Hz": 0.201,
+     "aft_body_ke_share": 0.0338,
+     "lateral_ke_share": 0.991,
+     "tank_node_ke_share": 0.793,
+     "ke_x": 0.009
+    },
+    {
+     "Hz": 0.201,
+     "aft_body_ke_share": 0.0,
+     "lateral_ke_share": 0.999,
+     "tank_node_ke_share": 0.642,
+     "ke_x": 0.001
+    },
+    {
+     "Hz": 0.2011,
+     "aft_body_ke_share": 0.0,
+     "lateral_ke_share": 0.999,
+     "tank_node_ke_share": 0.989,
+     "ke_x": 0.001
+    },
+    {
+     "Hz": 0.2011,
+     "aft_body_ke_share": 0.0001,
+     "lateral_ke_share": 0.999,
+     "tank_node_ke_share": 0.986,
+     "ke_x": 0.001
+    },
+    {
+     "Hz": 0.2011,
+     "aft_body_ke_share": 0.0001,
+     "lateral_ke_share": 0.996,
+     "tank_node_ke_share": 0.952,
+     "ke_x": 0.004
+    },
+    {
+     "Hz": 0.2011,
+     "aft_body_ke_share": 0.0018,
+     "lateral_ke_share": 0.995,
+     "tank_node_ke_share": 0.922,
+     "ke_x": 0.005
+    }
+   ],
+   "free_free_lowest_flexible_Hz": 0.06472575968370123,
+   "screens": {
+    "basis_Hz": 0.12646733729161078,
+    "above_3x_slosh_0p12": true,
+    "clear_of_spin_1x_2x": false,
+    "meets_0p2": false,
+    "lowest_mode_Hz": 0.06472575968370123,
+    "lowest_mode_in_slosh_band": false,
+    "lowest_mode_near_spin": true
+   }
+  },
+  {
+   "case": "F2f_tied_+_18_longerons_r0.8",
+   "nodes": 1652,
+   "elements": 3610,
+   "tanks": 306,
+   "structure_t": 9471.711480236954,
+   "member_t": {
+    "hub_spoke": 11.535928223981728,
+    "keel_ring": 54.086208672354964,
+    "outer_ring": 461.1610676816229,
+    "spoke": 449.47988857406426,
+    "spine": 31.313441400959785,
+    "keel": 126.24777683389127,
+    "longeron": 6328.611314720281,
+    "lacing": 975.175495895714,
+    "vessel": 0.0,
+    "girder": 1034.1003582340845
+   },
+   "stretch_mass_t": 75230.6868618896,
+   "cantilever_Hz": [
+    0.0605,
+    0.0782,
+    0.0782,
+    0.1806,
+    0.2574,
+    0.2574,
+    0.2983,
+    0.4135,
+    0.4881,
+    0.4881
+   ],
+   "cantilever_first_bending_Hz": 0.07823333707937549,
+   "cantilever_lowest_Hz": 0.06053291346907422,
+   "aft_body": {
+    "mass_kg": 41858339.68942333,
+    "centroid_x_m": -103.18568907354772,
+    "lever_from_J1_m": 243.93568907354774,
+    "I_lateral_kg_m2": 424231489863.0149,
+    "items_t": {
+     "drive": 16783.46346343562,
+     "radiators": 10230.995842003958,
+     "payload_rings": 6190.344078489993,
+     "other": 8653.536305493762
+    }
+   },
+   "free_free_flexible_Hz": [
+    0.0603,
+    0.1192,
+    0.1192,
+    0.179,
+    0.2017,
+    0.2017,
+    0.2017,
+    0.2017,
+    0.2017,
+    0.2017
+   ],
+   "free_free_first_global_bending_Hz": 0.11916111701469627,
+   "free_free_first_lateral_Hz": 0.11916111701469627,
+   "free_free_modes": [
+    {
+     "Hz": 0.0603,
+     "aft_body_ke_share": 0.0,
+     "lateral_ke_share": 1.0,
+     "tank_node_ke_share": 0.781,
+     "ke_x": 0.0
+    },
+    {
+     "Hz": 0.1192,
+     "aft_body_ke_share": 0.1604,
+     "lateral_ke_share": 0.999,
+     "tank_node_ke_share": 0.701,
+     "ke_x": 0.001
+    },
+    {
+     "Hz": 0.1192,
+     "aft_body_ke_share": 0.1604,
+     "lateral_ke_share": 0.999,
+     "tank_node_ke_share": 0.701,
+     "ke_x": 0.001
+    },
+    {
+     "Hz": 0.179,
+     "aft_body_ke_share": 0.0,
+     "lateral_ke_share": 1.0,
+     "tank_node_ke_share": 0.788,
+     "ke_x": 0.0
+    },
+    {
+     "Hz": 0.2017,
+     "aft_body_ke_share": 0.0,
+     "lateral_ke_share": 0.996,
+     "tank_node_ke_share": 0.958,
+     "ke_x": 0.004
+    },
+    {
+     "Hz": 0.2017,
+     "aft_body_ke_share": 0.0002,
+     "lateral_ke_share": 0.996,
+     "tank_node_ke_share": 0.955,
+     "ke_x": 0.004
+    },
+    {
+     "Hz": 0.2017,
+     "aft_body_ke_share": 0.0002,
+     "lateral_ke_share": 0.996,
+     "tank_node_ke_share": 0.955,
+     "ke_x": 0.004
+    },
+    {
+     "Hz": 0.2017,
+     "aft_body_ke_share": 0.0444,
+     "lateral_ke_share": 0.997,
+     "tank_node_ke_share": 0.872,
+     "ke_x": 0.003
+    },
+    {
+     "Hz": 0.2017,
+     "aft_body_ke_share": 0.0444,
+     "lateral_ke_share": 0.997,
+     "tank_node_ke_share": 0.872,
+     "ke_x": 0.003
+    },
+    {
+     "Hz": 0.2017,
+     "aft_body_ke_share": 0.0,
+     "lateral_ke_share": 0.999,
+     "tank_node_ke_share": 0.895,
+     "ke_x": 0.001
+    },
+    {
+     "Hz": 0.2017,
+     "aft_body_ke_share": 0.0017,
+     "lateral_ke_share": 0.996,
+     "tank_node_ke_share": 0.962,
+     "ke_x": 0.004
+    },
+    {
+     "Hz": 0.2017,
+     "aft_body_ke_share": 0.0001,
+     "lateral_ke_share": 0.998,
+     "tank_node_ke_share": 0.971,
+     "ke_x": 0.002
+    }
+   ],
+   "free_free_lowest_flexible_Hz": 0.06030612608716886,
+   "screens": {
+    "basis_Hz": 0.11916111701469627,
+    "above_3x_slosh_0p12": false,
+    "clear_of_spin_1x_2x": false,
+    "meets_0p2": false,
+    "lowest_mode_Hz": 0.06030612608716886,
+    "lowest_mode_in_slosh_band": false,
+    "lowest_mode_near_spin": true
+   }
+  },
+  {
+   "case": "F2g_tied_+_9_longerons_r1.2",
+   "nodes": 1229,
+   "elements": 2719,
+   "tanks": 306,
+   "structure_t": 9571.017643400655,
+   "member_t": {
+    "hub_spoke": 11.535928223981728,
+    "keel_ring": 53.46980986080901,
+    "outer_ring": 454.15499484024724,
+    "spoke": 224.7399442870312,
+    "spine": 31.313441400959785,
+    "keel": 126.24777683389127,
+    "longeron": 7119.68772906031,
+    "lacing": 487.58774794785677,
+    "vessel": 0.0,
+    "girder": 1062.28027094557
+   },
+   "stretch_mass_t": 75230.6868618896,
+   "cantilever_Hz": [
+    0.0654,
+    0.0697,
+    0.0697,
+    0.1966,
+    0.2263,
+    0.2263,
+    0.3302,
+    0.4241,
+    0.4241,
+    0.4683
+   ],
+   "cantilever_first_bending_Hz": 0.06968797989206299,
+   "cantilever_lowest_Hz": 0.06536055631180694,
+   "aft_body": {
+    "mass_kg": 41858339.68942333,
+    "centroid_x_m": -103.18568907354772,
+    "lever_from_J1_m": 243.93568907354774,
+    "I_lateral_kg_m2": 424231489863.0149,
+    "items_t": {
+     "drive": 16783.46346343562,
+     "radiators": 10230.995842003958,
+     "payload_rings": 6190.344078489993,
+     "other": 8653.536305493762
+    }
+   },
+   "free_free_flexible_Hz": [
+    0.0649,
+    0.1162,
+    0.1162,
+    0.1928,
+    0.2021,
+    0.2021,
+    0.2021,
+    0.2021,
+    0.2021,
+    0.2022
+   ],
+   "free_free_first_global_bending_Hz": 0.11620691534428489,
+   "free_free_first_lateral_Hz": 0.11620691534428489,
+   "free_free_modes": [
+    {
+     "Hz": 0.0649,
+     "aft_body_ke_share": 0.0,
+     "lateral_ke_share": 1.0,
+     "tank_node_ke_share": 0.772,
+     "ke_x": 0.0
+    },
+    {
+     "Hz": 0.1162,
+     "aft_body_ke_share": 0.1387,
+     "lateral_ke_share": 0.999,
+     "tank_node_ke_share": 0.739,
+     "ke_x": 0.001
+    },
+    {
+     "Hz": 0.1162,
+     "aft_body_ke_share": 0.1387,
+     "lateral_ke_share": 0.999,
+     "tank_node_ke_share": 0.739,
+     "ke_x": 0.001
+    },
+    {
+     "Hz": 0.1928,
+     "aft_body_ke_share": 0.0,
+     "lateral_ke_share": 0.998,
+     "tank_node_ke_share": 0.778,
+     "ke_x": 0.002
+    },
+    {
+     "Hz": 0.2021,
+     "aft_body_ke_share": 0.0391,
+     "lateral_ke_share": 0.996,
+     "tank_node_ke_share": 0.887,
+     "ke_x": 0.004
+    },
+    {
+     "Hz": 0.2021,
+     "aft_body_ke_share": 0.0391,
+     "lateral_ke_share": 0.996,
+     "tank_node_ke_share": 0.887,
+     "ke_x": 0.004
+    },
+    {
+     "Hz": 0.2021,
+     "aft_body_ke_share": 0.0003,
+     "lateral_ke_share": 0.998,
+     "tank_node_ke_share": 0.977,
+     "ke_x": 0.002
+    },
+    {
+     "Hz": 0.2021,
+     "aft_body_ke_share": 0.0972,
+     "lateral_ke_share": 0.994,
+     "tank_node_ke_share": 0.781,
+     "ke_x": 0.006
+    },
+    {
+     "Hz": 0.2021,
+     "aft_body_ke_share": 0.0972,
+     "lateral_ke_share": 0.994,
+     "tank_node_ke_share": 0.781,
+     "ke_x": 0.006
+    },
+    {
+     "Hz": 0.2022,
+     "aft_body_ke_share": 0.0,
+     "lateral_ke_share": 0.998,
+     "tank_node_ke_share": 0.821,
+     "ke_x": 0.002
+    },
+    {
+     "Hz": 0.2023,
+     "aft_body_ke_share": 0.1034,
+     "lateral_ke_share": 0.994,
+     "tank_node_ke_share": 0.774,
+     "ke_x": 0.006
+    },
+    {
+     "Hz": 0.2023,
+     "aft_body_ke_share": 0.1034,
+     "lateral_ke_share": 0.994,
+     "tank_node_ke_share": 0.774,
+     "ke_x": 0.006
+    }
+   ],
+   "free_free_lowest_flexible_Hz": 0.06490994471949134,
+   "screens": {
+    "basis_Hz": 0.11620691534428489,
+    "above_3x_slosh_0p12": false,
+    "clear_of_spin_1x_2x": false,
+    "meets_0p2": false,
+    "lowest_mode_Hz": 0.06490994471949134,
+    "lowest_mode_in_slosh_band": false,
+    "lowest_mode_near_spin": true
+   }
+  },
+  {
+   "case": "F2h_tied_+_18_longerons_r1.0",
+   "nodes": 1652,
+   "elements": 3610,
+   "tanks": 306,
+   "structure_t": 13031.555344767065,
+   "member_t": {
+    "hub_spoke": 11.535928223981728,
+    "keel_ring": 54.086208672354964,
+    "outer_ring": 461.1610676816229,
+    "spoke": 449.47988857406426,
+    "spine": 31.313441400959785,
+    "keel": 126.24777683389127,
+    "longeron": 9888.455179250392,
+    "lacing": 975.175495895714,
+    "vessel": 0.0,
+    "girder": 1034.1003582340845
+   },
+   "stretch_mass_t": 75230.6868618896,
+   "cantilever_Hz": [
+    0.065,
+    0.0826,
+    0.0826,
+    0.1939,
+    0.2655,
+    0.2655,
+    0.3211,
+    0.4487,
+    0.4927,
+    0.4927
+   ],
+   "cantilever_first_bending_Hz": 0.08264888801349074,
+   "cantilever_lowest_Hz": 0.06495688600299915,
+   "aft_body": {
+    "mass_kg": 41858339.68942333,
+    "centroid_x_m": -103.18568907354772,
+    "lever_from_J1_m": 243.93568907354774,
+    "I_lateral_kg_m2": 424231489863.0149,
+    "items_t": {
+     "drive": 16783.46346343562,
+     "radiators": 10230.995842003958,
+     "payload_rings": 6190.344078489993,
+     "other": 8653.536305493762
+    }
+   },
+   "free_free_flexible_Hz": [
+    0.0647,
+    0.1279,
+    0.1279,
+    0.1915,
+    0.2017,
+    0.2017,
+    0.2017,
+    0.2017,
+    0.2017,
+    0.2017
+   ],
+   "free_free_first_global_bending_Hz": 0.12785442156700233,
+   "free_free_first_lateral_Hz": 0.12785442156700233,
+   "free_free_modes": [
+    {
+     "Hz": 0.0647,
+     "aft_body_ke_share": 0.0,
+     "lateral_ke_share": 1.0,
+     "tank_node_ke_share": 0.711,
+     "ke_x": 0.0
+    },
+    {
+     "Hz": 0.1279,
+     "aft_body_ke_share": 0.1676,
+     "lateral_ke_share": 0.999,
+     "tank_node_ke_share": 0.667,
+     "ke_x": 0.001
+    },
+    {
+     "Hz": 0.1279,
+     "aft_body_ke_share": 0.1676,
+     "lateral_ke_share": 0.999,
+     "tank_node_ke_share": 0.667,
+     "ke_x": 0.001
+    },
+    {
+     "Hz": 0.1915,
+     "aft_body_ke_share": 0.0,
+     "lateral_ke_share": 1.0,
+     "tank_node_ke_share": 0.723,
+     "ke_x": 0.0
+    },
+    {
+     "Hz": 0.2017,
+     "aft_body_ke_share": 0.0,
+     "lateral_ke_share": 0.996,
+     "tank_node_ke_share": 0.959,
+     "ke_x": 0.004
+    },
+    {
+     "Hz": 0.2017,
+     "aft_body_ke_share": 0.0001,
+     "lateral_ke_share": 0.996,
+     "tank_node_ke_share": 0.955,
+     "ke_x": 0.004
+    },
+    {
+     "Hz": 0.2017,
+     "aft_body_ke_share": 0.0001,
+     "lateral_ke_share": 0.996,
+     "tank_node_ke_share": 0.955,
+     "ke_x": 0.004
+    },
+    {
+     "Hz": 0.2017,
+     "aft_body_ke_share": 0.0192,
+     "lateral_ke_share": 0.995,
+     "tank_node_ke_share": 0.87,
+     "ke_x": 0.005
+    },
+    {
+     "Hz": 0.2017,
+     "aft_body_ke_share": 0.0192,
+     "lateral_ke_share": 0.995,
+     "tank_node_ke_share": 0.87,
+     "ke_x": 0.005
+    },
+    {
+     "Hz": 0.2017,
+     "aft_body_ke_share": 0.0,
+     "lateral_ke_share": 0.999,
+     "tank_node_ke_share": 0.797,
+     "ke_x": 0.001
+    },
+    {
+     "Hz": 0.2018,
+     "aft_body_ke_share": 0.0015,
+     "lateral_ke_share": 0.996,
+     "tank_node_ke_share": 0.967,
+     "ke_x": 0.004
+    },
+    {
+     "Hz": 0.2018,
+     "aft_body_ke_share": 0.0011,
+     "lateral_ke_share": 0.997,
+     "tank_node_ke_share": 0.971,
+     "ke_x": 0.003
+    }
+   ],
+   "free_free_lowest_flexible_Hz": 0.06469920336756171,
+   "screens": {
+    "basis_Hz": 0.12785442156700233,
+    "above_3x_slosh_0p12": true,
+    "clear_of_spin_1x_2x": false,
+    "meets_0p2": false,
+    "lowest_mode_Hz": 0.06469920336756171,
+    "lowest_mode_in_slosh_band": false,
+    "lowest_mode_near_spin": true
+   }
+  },
+  {
+   "case": "F2i_tied_+_18_longerons_r1.2",
+   "nodes": 1652,
+   "elements": 3610,
+   "tanks": 306,
+   "structure_t": 17382.47562363724,
+   "member_t": {
+    "hub_spoke": 11.535928223981728,
+    "keel_ring": 54.086208672354964,
+    "outer_ring": 461.1610676816229,
+    "spoke": 449.47988857406426,
+    "spine": 31.313441400959785,
+    "keel": 126.24777683389127,
+    "longeron": 14239.375458120569,
+    "lacing": 975.175495895714,
+    "vessel": 0.0,
+    "girder": 1034.1003582340845
+   },
+   "stretch_mass_t": 75230.6868618896,
+   "cantilever_Hz": [
+    0.0716,
+    0.0848,
+    0.0848,
+    0.2119,
+    0.2698,
+    0.2698,
+    0.3488,
+    0.4899,
+    0.4952,
+    0.4952
+   ],
+   "cantilever_first_bending_Hz": 0.08482823661697342,
+   "cantilever_lowest_Hz": 0.0716080942984683,
+   "aft_body": {
+    "mass_kg": 41858339.68942333,
+    "centroid_x_m": -103.18568907354772,
+    "lever_from_J1_m": 243.93568907354774,
+    "I_lateral_kg_m2": 424231489863.0149,
+    "items_t": {
+     "drive": 16783.46346343562,
+     "radiators": 10230.995842003958,
+     "payload_rings": 6190.344078489993,
+     "other": 8653.536305493762
+    }
+   },
+   "free_free_flexible_Hz": [
+    0.0713,
+    0.133,
+    0.133,
+    0.2018,
+    0.2018,
+    0.2018,
+    0.2019,
+    0.2019,
+    0.2019,
+    0.2019
+   ],
+   "free_free_first_global_bending_Hz": 0.13300858603286037,
+   "free_free_first_lateral_Hz": 0.13300858603286037,
+   "free_free_modes": [
+    {
+     "Hz": 0.0713,
+     "aft_body_ke_share": 0.0,
+     "lateral_ke_share": 1.0,
+     "tank_node_ke_share": 0.643,
+     "ke_x": 0.0
+    },
+    {
+     "Hz": 0.133,
+     "aft_body_ke_share": 0.17,
+     "lateral_ke_share": 0.999,
+     "tank_node_ke_share": 0.634,
+     "ke_x": 0.001
+    },
+    {
+     "Hz": 0.133,
+     "aft_body_ke_share": 0.17,
+     "lateral_ke_share": 0.999,
+     "tank_node_ke_share": 0.634,
+     "ke_x": 0.001
+    },
+    {
+     "Hz": 0.2018,
+     "aft_body_ke_share": 0.0,
+     "lateral_ke_share": 0.996,
+     "tank_node_ke_share": 0.959,
+     "ke_x": 0.004
+    },
+    {
+     "Hz": 0.2018,
+     "aft_body_ke_share": 0.0,
+     "lateral_ke_share": 0.996,
+     "tank_node_ke_share": 0.951,
+     "ke_x": 0.004
+    },
+    {
+     "Hz": 0.2018,
+     "aft_body_ke_share": 0.0,
+     "lateral_ke_share": 0.996,
+     "tank_node_ke_share": 0.951,
+     "ke_x": 0.004
+    },
+    {
+     "Hz": 0.2019,
+     "aft_body_ke_share": 0.0091,
+     "lateral_ke_share": 0.993,
+     "tank_node_ke_share": 0.851,
+     "ke_x": 0.007
+    },
+    {
+     "Hz": 0.2019,
+     "aft_body_ke_share": 0.0091,
+     "lateral_ke_share": 0.993,
+     "tank_node_ke_share": 0.851,
+     "ke_x": 0.007
+    },
+    {
+     "Hz": 0.2019,
+     "aft_body_ke_share": 0.0,
+     "lateral_ke_share": 0.999,
+     "tank_node_ke_share": 0.697,
+     "ke_x": 0.001
+    },
+    {
+     "Hz": 0.2019,
+     "aft_body_ke_share": 0.0013,
+     "lateral_ke_share": 0.997,
+     "tank_node_ke_share": 0.971,
+     "ke_x": 0.003
+    },
+    {
+     "Hz": 0.2019,
+     "aft_body_ke_share": 0.0021,
+     "lateral_ke_share": 0.997,
+     "tank_node_ke_share": 0.973,
+     "ke_x": 0.003
+    },
+    {
+     "Hz": 0.2019,
+     "aft_body_ke_share": 0.0021,
+     "lateral_ke_share": 0.997,
+     "tank_node_ke_share": 0.973,
+     "ke_x": 0.003
+    }
+   ],
+   "free_free_lowest_flexible_Hz": 0.0712939024395144,
+   "screens": {
+    "basis_Hz": 0.13300858603286037,
+    "above_3x_slosh_0p12": true,
+    "clear_of_spin_1x_2x": false,
+    "meets_0p2": false,
+    "lowest_mode_Hz": 0.0712939024395144,
+    "lowest_mode_in_slosh_band": false,
+    "lowest_mode_near_spin": true
+   }
+  }
+ ]
+}

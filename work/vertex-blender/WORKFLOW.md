@@ -95,3 +95,11 @@ takes under 1 s per generation). The review file is a product of the commit plus
   (default 4,000) sweeps the A1 leak cone over tilt azimuth and writes `checks.json` `gate_A1`.
 - `python3 work/vertex-blender/fe_s5n.py` (numpy, scipy) writes `fe_s5n.json`: frame FE of S5N, V4 full/dry, coupled mass,
   sensitivity cases. Report: `GATE_REPORT.md`; register rows in `ISSUES.md` "Feasibility gate register".
+
+## Feasibility gate 2 (2026-11-10)
+
+- `python3 work/vertex-blender/gate2.py` writes `gate2.json` (farm and shield envelopes by FDP-1's rim rule, the r 45 dust limit,
+  T00's A1 tilt rows, twin-nozzle concept). `python3 work/vertex-blender/gate2_fe.py` (numpy, scipy) writes `gate2_fe.json`
+  (parametric frame FE, cantilever and free-free with the aft ship on J1). `build_vertex.py` reads both when present: lanes
+  `GATE2_F2/F4/F6/F1/F3/TWIN`, `GATE2_T15`, `GATE2_RELAND` in `GATE_COMPARE` from z −560 down, scene `GATE2_TWIN`, cameras
+  CAM_VTX_51-54, `checks.json` `gate2_reland`. Report: `GATE2_REPORT.md`.

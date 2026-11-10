@@ -1293,6 +1293,21 @@
    ]
   ]
  },
+ "gate2_reland": {
+  "chosen_tilt_azimuth_deg": 90.0,
+  "rows": [
+   {
+    "strut": "V4_ES_Nozzle_Strut_Loop_1_4",
+    "turn_deg": -12.0,
+    "clears_C1_and_leak": true
+   },
+   {
+    "strut": "V4_ES_Nozzle_Strut_Loop_1_5",
+    "turn_deg": 12.0,
+    "clears_C1_and_leak": true
+   }
+  ]
+ },
  "canon_unchanged": {
   "objects": 6249,
   "identical_to_append": true
@@ -1333,18 +1348,18 @@
   "n": 2000000
  },
  "objects": {
-  "var_objects": 3893,
+  "var_objects": 3941,
   "missing_properties": [],
   "by_status": {
-   "CONCEPTUAL_ILLUSTRATION": 579,
+   "CONCEPTUAL_ILLUSTRATION": 627,
    "ENGINEERING_SUPPORTED": 346,
    "PARAMETRIC_PLACEHOLDER": 895,
    "PROTOTYPE": 2073
   },
   "by_generation": {
-   "ALL": 91,
+   "ALL": 99,
    "V0": 439,
-   "V4": 3354,
+   "V4": 3394,
    "V5": 9
   }
  },
@@ -1362,9 +1377,9 @@
   "S5N_longeron_to_tank_ok_ge_1m": true,
   "S5N_B2_shadow_margin_m": 4.38916309289202,
   "K2_to_keel30_m": 2.958898943540674,
-  "geometry_hash_t05_objects": "b08e25b6f7ddb917",
-  "object_count_t05": 3893,
-  "rev4_parts_with_trace": 1586,
+  "geometry_hash_t05_objects": "96a4929690af0d11",
+  "object_count_t05": 3941,
+  "rev4_parts_with_trace": 1626,
   "rev4_parts_missing_trace": []
  },
  "rev4_launcher": {

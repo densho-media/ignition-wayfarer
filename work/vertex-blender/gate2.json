@@ -1,0 +1,366 @@
+{
+ "study": "Vertex feasibility gate 2, Task C geometry (T05)",
+ "status": "MODEL, research only, NON-CANON",
+ "inputs": {
+  "t00": "9rsgog 43fac75 t05_handoff_gate.json",
+  "rim_rule": "FDP-1: atan(R/d_far + 1 m/d_shield) (T00 2026-11-10)",
+  "x_burn_m": -249.13947536652566,
+  "farm_x_near_m": 109.25,
+  "d_shield_m": 65.0,
+  "limit_deg": 7.5,
+  "leak_cone_deg": [
+   10.828821274840449,
+   2.9884841042408197
+  ],
+  "lambda_propellant": 2.7283315076694685,
+  "dust_shield_r_m": 45.0
+ },
+ "farms": [
+  {
+   "variant": "F0 V4 farm (reference, V4 mass)",
+   "farm_radius_m": 34.5,
+   "stretch_length_m": 275.4,
+   "stretch_x_m": [
+    140.75,
+    416.15
+   ],
+   "burn_point_moved_aft_m": 0.0,
+   "d_farm_near_m": 358.38947536652563,
+   "shield_rim_deg": 6.370610401270752,
+   "shield_radius_m_at_65.0_m": 7.257159191705032,
+   "shield_area_vs_V4": 0.998720750297221,
+   "meets_7p5_rim": true,
+   "leak_inner_edge_deg": 7.8403371705996285,
+   "leak_clearance_to_rim_deg": 1.4697267693288767,
+   "dust_clearance_m": 10.5,
+   "inside_dust_shield": true,
+   "pass_geometry": true,
+   "note": "V4 stretch 275 m carries 25 kt; at the coupled propellant it becomes F3"
+  },
+  {
+   "variant": "F1 wide (T00 coupled converged)",
+   "farm_radius_m": 56.985933150239674,
+   "stretch_length_m": 275.4,
+   "stretch_x_m": [
+    140.75,
+    416.15
+   ],
+   "burn_point_moved_aft_m": 0.0,
+   "d_farm_near_m": 358.38947536652563,
+   "shield_rim_deg": 9.892342035532232,
+   "shield_radius_m_at_65.0_m": 11.335363924895962,
+   "shield_area_vs_V4": 2.4365858024656295,
+   "meets_7p5_rim": false,
+   "leak_inner_edge_deg": 7.8403371705996285,
+   "leak_clearance_to_rim_deg": -2.052004864932604,
+   "dust_clearance_m": -11.985933150239674,
+   "inside_dust_shield": false,
+   "pass_geometry": false,
+   "note": "T00 gate preferred case"
+  },
+  {
+   "variant": "F2 cone-limited r 41.7",
+   "farm_radius_m": 41.66,
+   "stretch_length_m": 515.300701001332,
+   "stretch_x_m": [
+    140.75,
+    656.050701001332
+   ],
+   "burn_point_moved_aft_m": 0.0,
+   "d_farm_near_m": 358.38947536652563,
+   "shield_rim_deg": 7.498556557388279,
+   "shield_radius_m_at_65.0_m": 8.555746432650192,
+   "shield_area_vs_V4": 1.3881186314981264,
+   "meets_7p5_rim": true,
+   "leak_inner_edge_deg": 7.8403371705996285,
+   "leak_clearance_to_rim_deg": 0.3417806132113492,
+   "dust_clearance_m": 3.3400000000000034,
+   "inside_dust_shield": true,
+   "pass_geometry": true,
+   "note": "largest farm meeting the 7.5 deg rim with the farm end at X 109.25"
+  },
+  {
+   "variant": "F2x dust-limited r 44",
+   "farm_radius_m": 44.0,
+   "stretch_length_m": 461.94887257581985,
+   "stretch_x_m": [
+    140.75,
+    602.6988725758199
+   ],
+   "burn_point_moved_aft_m": 0.0,
+   "d_farm_near_m": 358.38947536652563,
+   "shield_rim_deg": 7.865966219124988,
+   "shield_radius_m_at_65.0_m": 8.980145056087578,
+   "shield_area_vs_V4": 1.5292464374017398,
+   "meets_7p5_rim": false,
+   "leak_inner_edge_deg": 7.8403371705996285,
+   "leak_clearance_to_rim_deg": -0.025629048525359188,
+   "dust_clearance_m": 1.0,
+   "inside_dust_shield": true,
+   "pass_geometry": false,
+   "note": "rim 7.9 deg: needs the burn point aft (F4)"
+  },
+  {
+   "variant": "F3 long (V4 section)",
+   "farm_radius_m": 34.5,
+   "stretch_length_m": 751.3824972121715,
+   "stretch_x_m": [
+    140.75,
+    892.1324972121715
+   ],
+   "burn_point_moved_aft_m": 0.0,
+   "d_farm_near_m": 358.38947536652563,
+   "shield_rim_deg": 6.370610401270752,
+   "shield_radius_m_at_65.0_m": 7.257159191705032,
+   "shield_area_vs_V4": 0.998720750297221,
+   "meets_7p5_rim": true,
+   "leak_inner_edge_deg": 7.8403371705996285,
+   "leak_clearance_to_rim_deg": 1.4697267693288767,
+   "dust_clearance_m": 10.5,
+   "inside_dust_shield": true,
+   "pass_geometry": true,
+   "note": "T00 long farm"
+  },
+  {
+   "variant": "F4 r 44 with the burn point 20.0 m aft",
+   "farm_radius_m": 44.0,
+   "stretch_length_m": 461.94887257581985,
+   "stretch_x_m": [
+    140.75,
+    602.6988725758199
+   ],
+   "burn_point_moved_aft_m": 20.04693515706589,
+   "d_farm_near_m": 378.4364105235916,
+   "shield_rim_deg": 7.499999999999998,
+   "shield_radius_m_at_65.0_m": 8.557412343180728,
+   "shield_area_vs_V4": 1.3886592521438033,
+   "meets_7p5_rim": true,
+   "leak_inner_edge_deg": 7.8403371705996285,
+   "leak_clearance_to_rim_deg": 0.3403371705996303,
+   "dust_clearance_m": 1.0,
+   "inside_dust_shield": true,
+   "pass_geometry": true,
+   "note": "drive, coils and aft spine move aft; longer aft spine"
+  },
+  {
+   "variant": "F4w wide r 57 with the burn point 132 m aft",
+   "farm_radius_m": 57.0,
+   "stretch_length_m": 275.2640865825753,
+   "stretch_x_m": [
+    140.75,
+    416.0140865825753
+   ],
+   "burn_point_moved_aft_m": 131.85769281176334,
+   "d_farm_near_m": 490.24716817828903,
+   "shield_rim_deg": 7.499999999999999,
+   "shield_radius_m_at_65.0_m": 8.55741234318073,
+   "shield_area_vs_V4": 1.3886592521438037,
+   "meets_7p5_rim": true,
+   "leak_inner_edge_deg": 7.8403371705996285,
+   "leak_clearance_to_rim_deg": 0.3403371705996294,
+   "dust_clearance_m": -12.0,
+   "inside_dust_shield": false,
+   "pass_geometry": false,
+   "note": "meets the rim but not the dust shield"
+  },
+  {
+   "variant": "F6_15 r 44, A1 tilt 15 deg, shield face at 68.2 m",
+   "farm_radius_m": 44.0,
+   "stretch_length_m": 461.94887257581985,
+   "stretch_x_m": [
+    140.75,
+    602.6988725758199
+   ],
+   "burn_point_moved_aft_m": 0.0,
+   "d_farm_near_m": 358.38947536652563,
+   "shield_rim_deg": 7.825377438483377,
+   "shield_radius_m_at_65.0_m": 8.980145056087578,
+   "shield_area_vs_V4": 1.5292464374017398,
+   "meets_7p5_rim": null,
+   "leak_inner_edge_deg": 8.68,
+   "leak_clearance_to_rim_deg": 0.8546225615166225,
+   "dust_clearance_m": 1.0,
+   "inside_dust_shield": true,
+   "pass_geometry": true,
+   "note": "T00 lane T15: the rim limit is 8.35 deg",
+   "tilt_deg": 15,
+   "rim_limit_deg": 8.35,
+   "meets_tilt_rim": true
+  },
+  {
+   "variant": "F6_16 r 44, A1 tilt 16 deg, shield face at 68.2 m",
+   "farm_radius_m": 44.0,
+   "stretch_length_m": 461.94887257581985,
+   "stretch_x_m": [
+    140.75,
+    602.6988725758199
+   ],
+   "burn_point_moved_aft_m": 0.0,
+   "d_farm_near_m": 358.38947536652563,
+   "shield_rim_deg": 7.825377438483377,
+   "shield_radius_m_at_65.0_m": 8.980145056087578,
+   "shield_area_vs_V4": 1.5292464374017398,
+   "meets_7p5_rim": null,
+   "leak_inner_edge_deg": 9.44,
+   "leak_clearance_to_rim_deg": 1.6146225615166223,
+   "dust_clearance_m": 1.0,
+   "inside_dust_shield": true,
+   "pass_geometry": true,
+   "note": "T00 lane T16: the rim limit is 9.09 deg",
+   "tilt_deg": 16,
+   "rim_limit_deg": 9.09,
+   "meets_tilt_rim": true
+  },
+  {
+   "variant": "F5 elliptical 77.9 x 41.7 (narrow in the tilt plane)",
+   "farm_radius_m": [
+    77.93280701945089,
+    41.66918530463149
+   ],
+   "shield_rim_deg_tilt_plane": 7.499999999999999,
+   "shield_rim_deg_across": 13.107074290828708,
+   "stretch_length_m": 275.4,
+   "dust_clearance_m": -32.93280701945089,
+   "inside_dust_shield": false,
+   "meets_7p5_rim": true,
+   "pass_geometry": false,
+   "note": "leak side passes, but the wide axis (78 m) is far outside the r 45 dust shield: REJECTED"
+  }
+ ],
+ "a1_tilts_T00": [
+  {
+   "tilt_deg": 14,
+   "beta_deg": 2.68,
+   "leak_centre_deg": 10.83,
+   "leak_radius_deg": 2.99,
+   "rim_limit_deg": 7.5,
+   "C1_near_polar_deg": 8.68,
+   "C1_near_z_m": 63.96,
+   "C1_near_r_m": 9.77,
+   "C1_envelope_polar_deg": 7.3,
+   "static_torque_GN_m": 52.6,
+   "shield_face_m": 65.0,
+   "valid": true
+  },
+  {
+   "tilt_deg": 15,
+   "beta_deg": 2.88,
+   "leak_centre_deg": 11.65,
+   "leak_radius_deg": 2.97,
+   "rim_limit_deg": 8.35,
+   "C1_near_polar_deg": 7.88,
+   "C1_near_z_m": 64.09,
+   "C1_near_r_m": 8.87,
+   "C1_envelope_polar_deg": 6.49,
+   "static_torque_GN_m": 60.1,
+   "shield_face_m": 68.2,
+   "valid": true
+  },
+  {
+   "tilt_deg": 16,
+   "beta_deg": 3.08,
+   "leak_centre_deg": 12.42,
+   "leak_radius_deg": 2.98,
+   "rim_limit_deg": 9.09,
+   "C1_near_polar_deg": 7.08,
+   "C1_near_z_m": null,
+   "C1_near_r_m": 7.98,
+   "C1_envelope_polar_deg": 5.69,
+   "static_torque_GN_m": 69.7,
+   "shield_face_m": 68.2,
+   "valid": true
+  },
+  {
+   "tilt_deg": 18,
+   "beta_deg": 3.51,
+   "leak_centre_deg": 13.92,
+   "leak_radius_deg": 2.98,
+   "rim_limit_deg": 10.6,
+   "C1_near_r_m": 6.22,
+   "static_torque_GN_m": 104.0,
+   "valid": false,
+   "note": "C1 inside the module (r 6.5 m)"
+  },
+  {
+   "tilt_deg": 20,
+   "valid": false,
+   "note": "C1 through the module and the bore"
+  },
+  {
+   "tilt_deg": 22,
+   "valid": false,
+   "note": "C1 through the module and the bore"
+  }
+ ],
+ "twin_nozzles": {
+  "loops_m": {
+   "L1": 56.03131196968548,
+   "L2": 97.04907914623745,
+   "L3": 168.0939359090564
+  },
+  "L1_radius_m": 56.03131196968548,
+  "rows": [
+   {
+    "case": "parallel outriggers, FDP-1 nozzle (each at full pulse energy, half rate)",
+    "loop_scale": 1.0,
+    "nozzle_separation_from_axis_m": 173.0939359090564,
+    "ship_angular_span_from_each_burn_deg": [
+     20.134113669290247,
+     30.935565303581225
+    ],
+    "shield_half_angle_deg": 5.400725817145489,
+    "channel_to_ship_clearance_deg": 16.134113669290247,
+    "wing_conflict": "in the wing plane the forward channel runs along the wing from its aft edge 70 m ahead of the burn; out of the plane the radiators see each burn face-on",
+    "structure": "outrigger diagonals on the burn rays (edge-on, shadowable); root bending F x s if not triangulated",
+    "force_torque": "axial thrust; differential thrust 1 % gives 7 MN m yaw",
+    "launcher": "rate per nozzle halves (230 Hz each), muzzle speed and barrel fall with it"
+   },
+   {
+    "case": "parallel outriggers, each nozzle at half pulse energy (loops x0.79)",
+    "loop_scale": 0.7937005259840998,
+    "nozzle_separation_from_axis_m": 138.4162453457556,
+    "ship_angular_span_from_each_burn_deg": [
+     15.102286467529987,
+     26.682787175143552
+    ],
+    "shield_half_angle_deg": 5.790250353806782,
+    "channel_to_ship_clearance_deg": 11.102286467529987,
+    "wing_conflict": "in the wing plane the forward channel runs along the wing from its aft edge 70 m ahead of the burn; out of the plane the radiators see each burn face-on",
+    "structure": "outrigger diagonals on the burn rays (edge-on, shadowable); root bending F x s if not triangulated",
+    "force_torque": "axial thrust; differential thrust 1 % gives 5 MN m yaw",
+    "launcher": "rate per nozzle halves (230 Hz each), muzzle speed and barrel fall with it"
+   },
+   {
+    "case": "splayed 8 deg (out of the wing plane, mirrored pair)",
+    "splay_deg": 8.0,
+    "cosine_thrust_loss": 0.009731931258429638,
+    "min_separation_for_L3_clear_m": 157.96624596794774,
+    "channel_clearance_vs_farm_deg": -2.6367427601236813,
+    "channel_clearance_band_edge_deg": -4.986742760123682,
+    "force_torque": "a mirrored pair out of the wing plane cancels the lateral force; two nozzles side by side in Y splayed in +/-Z also leave a roll couple unless four nozzles are used",
+    "note": "splaying outward at the bow moves the aft loops (L3 at z -97 m) inward: it does not ease loop interference"
+   },
+   {
+    "case": "splayed 12 deg (out of the wing plane, mirrored pair)",
+    "splay_deg": 12.0,
+    "cosine_thrust_loss": 0.02185239926619431,
+    "min_separation_for_L3_clear_m": 149.2651667021177,
+    "channel_clearance_vs_farm_deg": 1.3632572398763187,
+    "channel_clearance_band_edge_deg": -0.9867427601236818,
+    "force_torque": "a mirrored pair out of the wing plane cancels the lateral force; two nozzles side by side in Y splayed in +/-Z also leave a roll couple unless four nozzles are used",
+    "note": "splaying outward at the bow moves the aft loops (L3 at z -97 m) inward: it does not ease loop interference"
+   },
+   {
+    "case": "splayed 16 deg (out of the wing plane, mirrored pair)",
+    "splay_deg": 16.0,
+    "cosine_thrust_loss": 0.038738304061681106,
+    "min_separation_for_L3_clear_m": 139.8612420455988,
+    "channel_clearance_vs_farm_deg": 5.363257239876319,
+    "channel_clearance_band_edge_deg": 3.0132572398763173,
+    "force_torque": "a mirrored pair out of the wing plane cancels the lateral force; two nozzles side by side in Y splayed in +/-Z also leave a roll couple unless four nozzles are used",
+    "note": "splaying outward at the bow moves the aft loops (L3 at z -97 m) inward: it does not ease loop interference"
+   }
+  ],
+  "verdict": "BLOCKED with FDP-1-sized nozzles: L3 (R 168 m) forces about 170 m between the nozzle axes, the planar radiator wings either sit in the forward channel (in-plane) or face each burn (out of plane), and a mirrored splay needs four nozzles to cancel force and torque. A twin architecture needs a nozzle several times smaller (a different nozzle, T00) and a radiator layout that is edge-on to two burn points."
+ }
+}
