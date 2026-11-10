@@ -77,3 +77,4 @@ table.meta th { width: 170px; }
 .teaser .go:hover { text-decoration: none; background: var(--action-hover); }
 .teaser .pick { display: flex; flex-direction: column; gap: 2px; font-size: 13px; }
 @media (max-width: 760px) { .story section.teaser { grid-template-columns: 1fr; } }
+.card .st { white-space: normal; overflow-wrap: anywhere; }
