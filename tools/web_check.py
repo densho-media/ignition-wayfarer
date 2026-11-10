@@ -181,7 +181,9 @@ class Page:
         Path(path).write_bytes(base64.b64decode(self.send('Page.captureScreenshot', {'format': 'png'}, timeout)['data']))
 
     def centre_of(self, selector):
-        return self.js(f'(() => {{ const r = document.querySelector({json.dumps(selector)}).getBoundingClientRect(); '
+        # scrolled into view first, as a visitor would, so a choice below the fold is still clicked where it is drawn
+        return self.js(f'(() => {{ const e = document.querySelector({json.dumps(selector)}); '
+                       f"e.scrollIntoView({{block: 'center', behavior: 'instant'}}); const r = e.getBoundingClientRect(); "
                        f'return [r.x + r.width / 2, r.y + r.height / 2]; }})()')
 
 
@@ -589,7 +591,7 @@ def run_main(url, release, build, binary, sandbox, out, record_check, metrics):
         time.sleep(1)
         reqs, lines = traffic.since(mark)
         heavy = [u for u, *_ in reqs if any(h in u for h in HEAVY)]
-        names = sorted({u[len(url):] or 'index.html' for u, *_ in reqs})
+        names = sorted({u[len(url):] or 'index.html' for u, *_ in reqs if not u.startswith(('data:', 'blob:'))})     # inline images are no request
         record_check('start: loads only the page, its stylesheet and release.json', not heavy and names == ['index.html', 'release.json', 'site.css'],
                      requests=names, heavy=heavy)
         canvases = page.js("document.querySelectorAll('canvas').length")
@@ -827,7 +829,7 @@ def run_main(url, release, build, binary, sandbox, out, record_check, metrics):
                 back = page.wait("document.readyState === 'complete' && !!document.getElementById('start')", 30)
                 record_check(f'play: Exit from {name} returns to its launcher', back and page.js('location.pathname').endswith(f'/{name}/'),
                              path=page.js('location.pathname'))
-                page.click(*page.centre_of('header a'))
+                page.click(*page.centre_of('.sitebar .mark'))      # the site mark returns to the start page
                 page.wait("document.readyState === 'complete' && !!document.getElementById('go-viewer')", 30)
                 heaps.append((f'start after {name}', heap(settled)))
 
