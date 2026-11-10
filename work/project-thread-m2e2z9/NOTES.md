@@ -61,3 +61,6 @@ Task branch `claude/project-thread-m2e2z9`, based on main 0fc013d (Engineering 2
 
 - Radiation shielding has no function of its own (shadow shield is MAIN_PROPULSION in Blender, SHIELD is the dust shield); the site
   files WL-008 and P05 under SHIELD.
+- EVA suit and drone lettering read "G.U. WAYFARER 001" (was "G.U.C."); the marking objects are now `MARK_<KEY>_Suit_ShipName`
+  and `MARK_Drone_ShipName_L/R`. `references/p1_eva_suit.json` still lists the old names and triangle counts until the next
+  `workflow.py eva` run (needs the MPFB characters; CI builds the suit and drone from the generators).

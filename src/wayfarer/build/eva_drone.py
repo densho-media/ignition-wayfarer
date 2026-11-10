@@ -502,7 +502,7 @@ def service(M, f, rig):
     R(text('MARK_Drone_ID', 'EVA-CD 07', Vector((0, .080, zt)), Vector((-1, 0, 0)), Vector((0, 0, 1)), .0105, M['text_light']), 'mark', 'drone identification')
     for sx in (1, -1):
         x = sx*(xi-.035)
-        R(text(f'MARK_Drone_GUC_{"L" if sx > 0 else "R"}', 'G.U.C. WAYFARER 001', Vector((x, -.20, ztop(x, -.20)+.0008)), Vector((0, -sx, 0)),
+        R(text(f'MARK_Drone_ShipName_{"L" if sx > 0 else "R"}', 'G.U. WAYFARER 001', Vector((x, -.20, ztop(x, -.20)+.0008)), Vector((0, -sx, 0)),
                Vector((0, 0, 1)), .0062, M['text']), 'mark', 'official marking (small)')
     return slots
 
