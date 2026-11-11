@@ -10,6 +10,7 @@ import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 
 const VIEWER = '../../viewer/';
+const DATA = 'sequence.json';        // written by tools/story.py next to the page (engineering/build/), not beside this script
 const $ = id => document.getElementById(id);
 const stage = $('stage'), canvas = $('build-view'), gate = $('gate'), cstatus = $('cstatus');
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -240,7 +241,7 @@ function play(on) {
 }
 
 async function init() {
-  seq = await fetch('sequence.json').then(r => r.json());
+  seq = await fetch(DATA).then(r => r.json());
   SELECT = rules('select');
   FALLBACK = rules('fallback');
   massbar();
