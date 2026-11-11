@@ -1,0 +1,414 @@
+# Assembly sequence of G.U. WAYFARER 001: the order in which the approved model on main could be put together in orbit.
+# PROTOTYPE judgment (Claude, 2026-11-10, owner brief "building process"): no workbook owns an assembly sequence yet. Nothing here is canon.
+#
+# Each [[step]] installs the parts its selectors match. A selector is "field:pattern" (fnmatch, as shots/m5_subsystems.toml) on
+#   id    the part's component id (the Explore Ship pick label)
+#   kind  the part's kind
+#   sub   its M5 subsystem (S01..S12, CTX), from shots/m5_subsystems.toml
+#   group its exported component below the assembly (WF.ROTOR.1, WF.RADIATOR.02, ...)
+# Classification: the first step (file order) whose `select` matches wins; a part no `select` matches falls to the first step whose
+# `fallback` matches (whole subsystems), so a part added to the model later lands in its subsystem's step until a step claims it.
+#
+#   after    steps that must be complete first (each must come earlier in the file; site.py checks it)
+#   rests_on what carries this step's parts: the load path they hand their loads into
+#   why      why the step comes here and not earlier or later
+#   mass     mass-model parts (src/wayfarer/mass_model.py dry_parts names, fnmatch) this step completes; "propellant" is the mission
+#            propellant (operating_point.mission). Every mass-model part must be booked exactly once.
+#   detail   finer sub-steps, text only for now: the place to grow the sequence as the design gains detail
+#   open     what the step depends on that nobody has decided yet
+#   view     camera for the step: threequarter, side, top, front, aft
+
+[[phase]]
+id = "P1"
+name = "Backbone"
+note = "The structure every load path ends in, built first and held by the assembly yard."
+
+[[phase]]
+id = "P2"
+name = "Drive and power"
+note = "The heaviest package goes in at the open aft end, before anything crowds it."
+
+[[phase]]
+id = "P3"
+name = "Thermal"
+note = "Closed body first, then the radiator mounts, then the blades they carry."
+
+[[phase]]
+id = "P4"
+name = "Habitat"
+note = "Bearings on the spine, then the two rings built up segment by segment."
+
+[[phase]]
+id = "P5"
+name = "Propellant and forward defense"
+note = "Empty vessels onto the thrust deck, then the shield that closes the bow."
+
+[[phase]]
+id = "P6"
+name = "Crew access and services"
+note = "The route people use, the ports ships use, and the systems that point and talk."
+
+[[phase]]
+id = "P7"
+name = "Outfitting and commissioning"
+note = "Insides last, then propellant, spin-up and the first burn."
+
+# ---------------------------------------------------------------------------------------------------------------- P1 Backbone
+[[step]]
+id = "spine"
+phase = "P1"
+title = "Central spine and primary cage"
+select = ["id:Structural_Spine*", "id:Primary_Frame*", "id:Primary_Rail*", "id:Primary_XBrace*", "id:Body_Envelope_Reference*"]
+after = []
+rests_on = "the assembly yard's holding fixture (not modelled)"
+why = """The spine is the ship's keel: the drive pushes on its aft end and every other system hangs off it. Nothing can be aligned
+before it exists, so it is laid first and becomes the datum the rest is measured from. The frame-and-rail cage around it gives the
+body its stiffness and the keel lanes that later carry the radiator roots and the tank-farm loads."""
+detail = ["Spine sections joined end to end along the axis, aft to forward", "Primary frames at each station", "Longitudinal rails and cross-bracing between frames, closing the cage"]
+open = ["The assembly yard, its fixture and its attachment points are not designed", "Section length set by the launch vehicle that brings them"]
+view = "threequarter"
+
+[[step]]
+id = "thrust_ring"
+phase = "P1"
+title = "Thrust ring and aft hub"
+select = ["id:Central_Thrust_Hub*", "id:Hub_Web*", "id:Ring_Web*", "id:Thrust_Ring*", "kind:thrust_node*", "id:Nozzle_Pickup*"]
+after = ["spine"]
+rests_on = "the aft end of the spine and the three outer structural sectors"
+why = """The drive's thrust has to reach the spine through something. The central hub and the 12-node thrust ring are that something:
+they carry the drive's thrust (about 20 MN on the spine at departure) from the nozzle pickups into the spine. They must be in place, aligned and splice-bolted before the drive
+arrives, because the drive is mounted on them and cannot be shimmed afterwards."""
+detail = ["Central thrust hub and hub webs on the spine end", "Twelve bay segments of the thrust ring, joined by bolted splice sleeves", "Node diaphragm plates", "Four nozzle pickups"]
+open = ["Bolt and splice preload", "Alignment tolerance between pickups and nozzle yokes"]
+view = "aft"
+
+[[step]]
+id = "forward_structure"
+phase = "P1"
+title = "Bypass collar, thrust deck and forward mounts"
+select = ["kind:bypass_collar", "id:Forward_Mount_Strut*", "kind:shield_mount", "id:Fuel_Deck_*", "id:Fuel_Forward_*", "id:Fuel_Keel_Rail*"]
+after = ["spine"]
+rests_on = "the forward spine and the keel lanes of the primary cage"
+why = """The forward end needs its own load path before anything heavy hangs there. The bypass collar carries the tank farm's thrust
+load around the habitat rings at r 35 m, so the rings can later spin inside it untouched. The thrust deck the vessels will stand on
+cantilevers from the collar, and the forward mount struts are where the shield will sit. Building this now closes the structure
+from end to end: at the end of phase 1 the ship's primary load paths are complete and empty."""
+detail = ["Bypass girders and hoops", "Inner and outer deck trusses with their collar ties", "Keel rails for the vessels", "Shield mount struts"]
+open = ["Q45: how the collar splits its 23.5 MN axial load between the girders"]
+mass = ["main_structure"]
+view = "threequarter"
+
+# ---------------------------------------------------------------------------------------------------------------- P2 Drive and power
+[[step]]
+id = "shadow_shield"
+phase = "P2"
+title = "Reactor shadow shield"
+select = ["id:Reactor_Shadow_Shield*", "id:Engineering_Envelope*", "kind:spine_hub"]
+after = ["thrust_ring"]
+rests_on = "the central thrust hub"
+why = """The shadow shield is the wall between the fusion core and the rest of the ship. It goes in before the core so the core can be
+installed from behind it, and so every line that must cross it (fuel, hydrogen, laser bores) is drilled and sleeved in one place
+while both sides are still open."""
+detail = ["Shield mass on the hub", "Spine termination hub on its forward face", "Stepped sleeves for the D, He-3 and H2 lines", "Dog-leg laser bores A and B"]
+open = ["Shield material and thickness against the drive's neutron and X-ray spectrum"]
+view = "aft"
+
+[[step]]
+id = "drive_core"
+phase = "P2"
+title = "Fusion core, manifold and laser lattice"
+select = ["id:Fusion_Core*", "id:Magnetic_Manifold*", "id:Common_Plasma_Region*", "kind:seed_coil", "kind:lattice_*", "kind:pfc_liner",
+          "kind:optical_*", "kind:h2_injection_ring", "kind:plasma"]
+after = ["shadow_shield"]
+rests_on = "the thrust hub, behind the shadow shield"
+why = """The core and its magnetic manifold are the single heaviest and most delicate package on the ship. They are installed while
+the aft end is still completely open, so they can be brought in along the axis and aligned to the hub. The A and B laser trains go in
+with them because their mirrors and gates are aligned to the manifold, not to the structure."""
+detail = ["Core and plasma-facing liners", "Convergence throat and four flux channels", "Seed coils", "Lattice gates L1 to L4", "Laser sources, mirrors and distributor heads (routes A and B)", "Hydrogen injection ring"]
+open = ["Drive topology is still open in the lab (FDP-1, Vertex); this step follows today's four-nozzle model"]
+view = "aft"
+
+[[step]]
+id = "nozzles"
+phase = "P2"
+title = "Four magnetic nozzles"
+select = ["id:Nozzle_Coil*", "id:MagneticNozzle*", "kind:nozzle_*", "kind:pfc_band"]
+after = ["drive_core", "thrust_ring"]
+rests_on = "the nozzle pickups on the thrust ring, through warm yokes"
+why = """Each nozzle is hung on its pickup and connected to its flux channel. They come after the core because they are aligned to it,
+and they are the last thing at the aft end: once they are on, the drive is mechanically complete and the aft end closes."""
+detail = ["Nozzle coils and casings", "Warm yokes and straps on the pickups", "Service bosses and coolant, cryogen and power leads", "Handling posts and inspection covers"]
+mass = ["drive_package"]
+view = "aft"
+
+[[step]]
+id = "power"
+phase = "P2"
+title = "Power plant and energy storage"
+select = ["id:Brayton_Train*", "id:WF.POWER.MAIN*", "id:WF.POWER.PULSE*", "kind:generator_proxy", "kind:drive_power_lead", "kind:drive_quench_dump", "kind:ride_through"]
+fallback = ["sub:S08"]
+after = ["drive_core"]
+rests_on = "the primary cage beside the reactor"
+why = """The Brayton generators, the main battery and the pulse bank sit aft beside the reactor, where their heavy leads to the drive
+are shortest. They go in once the drive is placed so the leads can be cut to length and run in one pass, and before the casing
+closes over them."""
+detail = ["Brayton trains", "Main battery and pulse bank"]
+view = "side"
+
+# ---------------------------------------------------------------------------------------------------------------- P3 Thermal
+[[step]]
+id = "coolant"
+phase = "P3"
+title = "Coolant trunks and protected chases"
+select = ["kind:coolant_*", "id:Coolant_*"]
+after = ["power", "nozzles"]
+rests_on = "the primary cage keel lanes"
+why = """The loops that carry drive and plant heat to the radiators run inside the body. They are laid while the cage is still open,
+each in its own protected chase with an expansion loop, and pressure-tested before anything covers them."""
+detail = ["Feed and return trunks for each blade", "Bellows at every bay joint", "Chase plates"]
+view = "side"
+
+[[step]]
+id = "casing"
+phase = "P3"
+title = "Service casing"
+select = ["kind:hull_shell", "kind:casing_detail", "kind:casing_boot", "id:SP.CASING.*", "id:Casing_*"]
+after = ["coolant", "forward_structure"]
+rests_on = "the primary-cage frames, through the joint straps"
+why = """The casing closes the body over the cage, the power plant and the coolant runs. It goes on now, after everything inside it
+and before the radiator roots, because the roots must pass through its sealed boots and the boots are set into the casing panels."""
+detail = ["Aft body casing (r 6.0 m under the blades)", "Forward collar casing", "Sealed boots for every boom, stay and chase", "Access panels in every third frame bay"]
+view = "threequarter"
+
+[[step]]
+id = "radiator_roots"
+phase = "P3"
+title = "Radiator root booms, datum and sliding mounts"
+select = ["kind:root_boom", "kind:root_saddle", "kind:thermal_mount", "kind:slide_stop", "kind:datum_lug", "kind:deployed_lock", "kind:thermal_support"]
+after = ["casing"]
+rests_on = "the primary cage, through the casing boots"
+why = """The blades grow as they heat from cold to 1800 K, so they are held at one axial datum and allowed to
+slide everywhere else. That mount pattern must exist and be checked before a blade is hung on it; a blade installed on the wrong
+mounts would tear itself off at the first burn."""
+detail = ["Root booms and saddles", "Aft datum lugs", "Forward root and stay slide rails with their stops", "Bay stays"]
+open = ["Member sizing of booms and stays"]
+view = "side"
+
+[[step]]
+id = "radiator_blades"
+phase = "P3"
+title = "Hot radiator blades"
+select = ["id:Blade_*", "id:Forward_Leading_Spar*", "kind:radiator_cell", "kind:joint_shoe", "kind:leading_edge_proxy", "id:RAD.FRAME.*",
+          "kind:radiator_thermal_glow", "kind:radiator_health_marker"]
+after = ["radiator_roots"]
+rests_on = "the root booms and bay stays"
+why = """Each of the three 182 m blades is built bay by bay outward from its root: truss, then the sheet of radiator cells, then the
+non-emitting bay joints. They come after the heavy aft work and the casing so no later lift passes over them, and they are thin
+enough that they are the most damage-prone thing on the ship."""
+detail = ["Blade truss: chords, frames, diagonals", "Radiator cells bay by bay", "Nine bay joints with guided sliding shoes", "Edge guards, clamps and gussets"]
+view = "top"
+
+[[step]]
+id = "radiator_zones"
+phase = "P3"
+title = "WARM and LOW sections and the thermal bulkhead"
+select = ["kind:radiator_zone_*", "kind:radiator_bulkhead*"]
+fallback = ["sub:S09"]
+after = ["radiator_blades"]
+rests_on = "the blade roots and the bulkhead truss"
+why = """The cooler WARM and LOW sections continue each blade forward toward the rings, and the V-groove bulkhead stands between the
+hot blades and everything that must stay cold. They close the thermal system: from here on, nothing forward can see an 1800 K
+surface."""
+detail = ["WARM section cells and trunks", "LOW section cells and trunks", "Bulkhead truss, gores and gates"]
+mass = ["radiators_thermal"]
+view = "threequarter"
+
+# ---------------------------------------------------------------------------------------------------------------- P4 Habitat
+[[step]]
+id = "rotors"
+phase = "P4"
+title = "Rotor hubs, bearings and transfer drums"
+select = ["kind:rotor_*", "kind:ring_stop_lock", "id:Crew_Port_*", "kind:crew_vestibule", "id:M7.XFR.*", "id:RB.XFR.*", "id:WF.CREW.*"]
+after = ["forward_structure", "casing"]
+rests_on = "the spine, inside the bypass collar"
+why = """A ring can only be built on a bearing that already turns true. The hubs with their magnetic bearings, touchdown cartridges,
+motors and couplings go on the spine first and are run in; the despun transfer drums beside them are the crew's future way in."""
+detail = ["Magnetic bearings and touchdown cartridges", "Hub motors, power and data couplings, fluid couplings", "Ring-stop lock pins", "Transfer drums, seal planes and spine gates"]
+view = "side"
+
+[[step]]
+id = "ring_frames"
+phase = "P4"
+title = "Ring frames and spokes"
+select = ["kind:ring_frame", "kind:ring_spoke", "kind:ring_fill", "id:Crew_Tube_*", "kind:crew_bracket", "id:RA.EXT.*", "id:RB.EXT.*",
+          "id:M7.SPK.*", "id:RB.SPK.*"]
+after = ["rotors"]
+rests_on = "the rotor hubs, through six spokes per ring"
+why = """Each ring is built from 15 degree segments, added in opposite pairs so the rotor never carries more than one segment of
+imbalance. Both rings are built in step with each other, because they are meant to cancel each other's spin. Spokes first, then the
+inner and outer hoops between them, then the fill cassettes."""
+detail = ["Six spokes per ring, three of them crew spokes with tubes", "Hoops in 15 degree segments, opposite pairs", "Fill cassettes and exterior covers"]
+open = ["How much imbalance the bearings tolerate during assembly"]
+view = "threequarter"
+
+[[step]]
+id = "ring_sectors"
+phase = "P4"
+title = "Pressure sectors and ring corridors"
+select = ["kind:sector_pressure", "kind:sector_interior_deck", "kind:sector_interior_overhead", "kind:circulation_corridor", "kind:circulation_portal",
+          "kind:circulation_door", "id:Crew_Vestibule_*_Door*", "id:Crew_Tube_*_Hatch*", "id:Sector_Hatch_*"]
+fallback = ["sub:S03"]
+after = ["ring_frames"]
+rests_on = "the ring frames"
+why = """The three pressure sectors per ring are recessed into the finished frames, then joined by the continuous circulation corridor.
+This is the first pressure volume on the ship: from here the sectors can be leak-checked and held at pressure while the rest is
+built."""
+detail = ["Sector pressure envelopes", "Decks and overheads", "Circulation corridors, portals and doors", "Tube hatches and vestibule doors"]
+mass = ["main_structure@ring_*", "habitat_pressure_structure@*", "circ001@*"]
+view = "threequarter"
+
+# ---------------------------------------------------------------------------------------------------------------- P5 Propellant and forward defense
+[[step]]
+id = "tank_farm"
+phase = "P5"
+title = "Propellant vessels"
+select = ["kind:fuel_tank", "id:Fuel_Skirt*", "id:Fuel_Fwd_Link*", "id:Feed_Run_Tank*", "kind:tank_support"]
+fallback = ["sub:S05", "sub:S06"]
+after = ["forward_structure", "ring_frames"]
+rests_on = "the thrust deck, fixed aft and guided forward"
+why = """The thirteen vessels arrive empty and are set on the deck the collar already carries: the nine outer vessels (six He-3,
+three H2) radially from outside, the four inner ones (two H2 and the D2 pair) along the axis. They come after the rings because the outer vessels would block the ring
+segments' approach, and before the shield, which closes the bow over them."""
+detail = ["Four inner vessels along the axis", "Nine outer He-3 and H2 vessels, radially", "CFRP skirts aft, sliding links forward"]
+mass = ["tankage_*"]
+view = "threequarter"
+
+[[step]]
+id = "cryo"
+phase = "P5"
+title = "Cryocoolers, valves and transfer lines"
+select = ["kind:fuel_equipment", "kind:fuel_transfer_line", "kind:cryo_*", "kind:refrigeration_frame", "kind:transfer_pump_frame", "kind:vent_frame",
+          "kind:insulation_envelope", "kind:transfer_manifold"]
+fallback = ["sub:S07"]
+after = ["tank_farm", "coolant"]
+rests_on = "the vessels and the thrust deck"
+why = """With every vessel in place the cold plumbing joins them: valves, the cryocoolers that keep He-3 at 3 K, and the transfer lines
+that run aft along the body to the drive. They reject their heat into the LOW radiator section, which is already installed."""
+detail = ["Vessel outlets and valves", "He-3, H2 and D2 cryocoolers", "Transfer lines to the drive feed"]
+view = "threequarter"
+
+[[step]]
+id = "shield"
+phase = "P5"
+title = "Forward shield"
+select = ["kind:shield_*", "kind:truss_node", "kind:sector_frame", "kind:sector_keel", "kind:sector_tie", "kind:brow_panel_*", "kind:disruptor_*", "kind:bumper_*",
+          "kind:rim_guard", "id:M8.BROW.*", "kind:damage_cell"]
+after = ["forward_structure", "tank_farm"]
+rests_on = "the shield mount struts on the forward collar"
+why = """The 90 m conical shield closes the bow. It comes after the tank farm because it covers the vessels from forward, and it is
+built from the hub outward: spine column and hub plate, conical truss, then the replaceable Brow panels and the disruptor layer 2 m
+ahead of it."""
+detail = ["Shield spine column and hub plate", "Conical truss, spokes and nodes", "Sector keels and ties", "Brow panels and joints", "Disruptor layer and its posts"]
+open = ["OD-014: shield stack, material and mass"]
+mass = ["forward_impact_shielding"]
+view = "front"
+
+[[step]]
+id = "eyes_crown"
+phase = "P5"
+title = "EYE sensors, Crown and Dust Lance"
+select = ["kind:eye_*", "id:EYE_*", "id:WF.EYE.*", "kind:crown_*", "id:M8.CROWN.*", "kind:dust_lance*", "kind:field_display"]
+fallback = ["sub:S01"]
+after = ["shield"]
+rests_on = "the shield hub and rim"
+why = """The four EYE facets sit recessed in wells in the finished hub, the twelve Crown bays in the rim, and the Dust Lance on the
+axis ahead of everything. They are sensors and effectors, so they go in last on the bow, after the heavy panel work that could
+damage them."""
+detail = ["Four EYE facets, shells, shutters and lids", "Twelve Crown bays with launchers and shutters", "Dust Lance and tip cartridge"]
+open = ["OD-018: lance field and power"]
+mass = ["eye_sensors"]
+view = "front"
+
+# ---------------------------------------------------------------------------------------------------------------- P6 Crew access and services
+[[step]]
+id = "crew_route"
+phase = "P6"
+title = "Crew trunk, storm refuge and storeroom"
+select = ["kind:crew_trunk", "kind:crew_refuge", "kind:refuge_wall", "id:Refuge_*", "id:Survival_Refuge*", "kind:storeroom_shell", "id:Crew_Refuge_Port*",
+          "id:Crew_Store_Port*", "id:Crew_Connector_*", "id:M7.TRK.*", "id:WF.POWER.SURVIVAL*"]
+after = ["rotors", "casing"]
+rests_on = "the spine bore and the forward collar"
+why = """The 1.6 m trunk in the spine bore links the ports to both transfer drums and to the refuge rated for 12. It goes in once the
+drums exist, so the route can be pressurised end to end and crews can work inside the ship instead of outside it."""
+detail = ["Crew trunk sections", "Storm refuge shell and its water wall", "Survival power packs beside the refuge", "Storeroom shell", "Ports off the trunk"]
+mass = ["water_radiation_shielding@refuge"]
+view = "side"
+
+[[step]]
+id = "ports"
+phase = "P6"
+title = "Docking ports and EVA airlock"
+select = ["kind:service_fitting", "kind:dock_capture_ring", "id:Dock_*", "kind:eva_*", "id:M7.EXT.PORT.*", "id:M7.ENT.*"]
+after = ["crew_route"]
+rests_on = "the forward collar casing"
+why = """Until now crews and parts came in through the yard. The two docking ports with their capture rings and the EVA airlock give
+the ship its own way in and out, which every following step uses."""
+detail = ["Primary port, entry chamber and trunk node", "Service port", "EVA airlock with rails, anchors and foot restraints"]
+view = "side"
+
+[[step]]
+id = "avionics"
+phase = "P6"
+title = "Comms, navigation, attitude and lights"
+select = ["kind:comms_antenna", "kind:exterior_hardware", "kind:rcs_*", "kind:nav_light", "id:Survival_Lasercom*", "id:Survival_RF*", "id:Survival_Star_Tracker*",
+          "id:Ext_*", "kind:body_equipment", "kind:body_frame"]
+fallback = ["sub:S11"]
+after = ["thrust_ring", "casing", "shield"]
+rests_on = "the thrust-ring nodes, the casing and the shield rim"
+why = """The dishes, star trackers, RCS pods, control moment gyros and strobes are small, but they have to see or push past finished
+structure, so their fields of view and plume cones can only be checked once everything around them is in place."""
+detail = ["Ka-band dishes and optical terminal on aft booms", "Star trackers at the radiator bisectors", "Aft and rim RCS pods", "Control moment gyros", "Position strobes"]
+mass = ["power_computers_steering_comms"]
+view = "aft"
+
+# ---------------------------------------------------------------------------------------------------------------- P7 Outfitting and commissioning
+[[step]]
+id = "fitout"
+phase = "P7"
+title = "Interior fit-out, life support and stores"
+select = ["kind:route_fitout", "kind:entry_fixture", "kind:circulation_fixture", "kind:circulation_fitout", "kind:sector_interior_zone", "kind:storeroom_*",
+          "kind:dry_storage", "kind:survival_envelope", "kind:production_detail"]
+fallback = ["sub:S04", "sub:S12"]
+after = ["ring_sectors", "crew_route", "ports"]
+rests_on = "the pressure sectors, the trunk and the storeroom"
+why = """Rooms, racks, bunks, garden, life support, lighting and handrails come in through the finished ports into pressurised spaces.
+The ring frames are filled with water for radiation shielding now, once their structure is proven."""
+detail = ["Sector rooms and life support", "Trunk and corridor fit-out", "Storeroom racks and containers", "Water shielding fill in the ring frames"]
+mass = ["water_radiation_shielding@ring_*", "life_support_garden_medical@*", "workshop_spares_cargo"]
+view = "threequarter"
+
+[[step]]
+id = "drones"
+phase = "P7"
+title = "Maintenance drones and crawlers"
+select = ["kind:drone_proxy", "id:Survival_Crawler*"]
+after = ["fitout"]
+rests_on = "their docks on the hull and in the sectors"
+why = """The drones and crawlers that will maintain the ship arrive last among the hardware: they need their docks and rails, and
+from here on they help with the final checks."""
+view = "threequarter"
+
+[[step]]
+id = "commission"
+phase = "P7"
+title = "Propellant, spin-up and first ignition"
+select = []
+fallback = ["sub:CTX"]
+after = ["drones", "cryo", "eyes_crown", "avionics", "radiator_zones"]
+rests_on = "the whole ship"
+why = """No new hardware: the ship is finished. The vessels are filled with D2, He-3 and H2 reaction mass, food and consumables come
+aboard, the rings are spun up to 4 rpm, and the drive is lit for the first time on the 0 to 1.5 g ramp that is the ship's design load
+case. Only now does the ship carry its full departure mass."""
+detail = ["Propellant load", "Consumables and operating inventory", "Ring spin-up", "First ignition ramp"]
+mass = ["food_consumables", "operating_inventory", "design_margin", "propellant"]
+view = "threequarter"

@@ -6,6 +6,8 @@ Writes <site>/engineering/:
   <kind>/<name>/fig/          the entry's committed figures (SVG, or PNG where no SVG of the same name exists)
   compare/                    per open problem, today's ship beside what the problem needs, in 3D at one scale: compare.json from the
                               problem map's `site.py --compare`, drawn by web/engineering/compare.js over the Explore Ship model
+  build/                      the assembly sequence: the approved ship put together step by step, from the spine to first ignition,
+                              from the assembly-sequence study's `site.py --json`, drawn by web/engineering/build.js over the Explore Ship model
   baseline/ weakest-links/    Engineering 2.0 (tools/story_lab.py): the scientific reference, the ranked bottlenecks, the Breakthrough
   breakthrough-lab/           Lab over the precomputed scenario grid and true-scale envelopes, from the Breakthrough Lab study's
   evolution/                  `site.py --json` (lab/studies/breakthrough-lab), which validates its registries and stops the build on error
@@ -532,6 +534,91 @@ one camera and one scale, so a size difference is a real size difference.</p></h
     return True
 
 
+BUILD_HEAD = '''
+<link rel="stylesheet" href="../build.css">
+<script type="importmap">
+{ "imports": { "three": "../../viewer/vendor/three/three.module.min.js", "three/addons/": "../../viewer/vendor/three/addons/" } }
+</script>
+<script type="module" src="../build.js"></script>'''
+
+
+def build_page(e, seq, out_dir, revision, built):
+    """engineering/build/: the assembly sequence, step by step on the Explore Ship model (web/engineering/build.js). The step list
+    is written into the page, so it reads without WebGL; the 3D view adds the parts of each step to the ship built so far."""
+    out_dir.mkdir(parents=True, exist_ok=True)
+    (out_dir / 'sequence.json').write_text(json.dumps(seq, separators=(',', ':')))
+    phases = {p['id']: p for p in seq['phases']}
+    led = seq['ledger']
+    items, last = [], None
+    for st in seq['steps']:
+        if st['phase'] != last:
+            if last:
+                items.append('</ol></li>')
+            ph = phases[st['phase']]
+            items.append(f'<li class="phase" data-phase="{ph["id"]}"><h3><span>{ph["id"][1:]}</span> {esc(ph["name"])}</h3>'
+                         f'<p class="note">{esc(ph["note"])}</p><ol class="steps">')
+            last = st['phase']
+        m = st['mass']
+        mass = f'+{m["added_t"]:,.0f} t' if m['added_t'] >= 0.5 else ''
+        items.append(f'<li class="step" id="{st["id"]}" data-step="{st["id"]}"><button type="button" aria-controls="build-view">'
+                     f'<b>{st["n"]}</b><span class="t">{esc(st["title"])}</span><span class="m">{mass}</span></button></li>')
+    items.append('</ol></li>')
+    n = len(seq['steps'])
+    body = f'''<header><p class="eyebrow">Engineering · assembly</p><h1>How Wayfarer is built</h1>
+<p class="lead">The approved ship, put together in the order its load paths allow: first the spine everything hangs from, then the
+drive at the open aft end, the radiators, the habitat rings, the tank farm and the shield that closes the bow, and last the insides,
+the propellant and the first burn. {n} steps in {len(seq["phases"])} phases, each shown on the Explore Ship model.</p></header>
+<section class="build">
+  <div class="stage" id="stage">
+    <canvas id="build-view" aria-label="The ship as built up to the selected step"></canvas>
+    <div class="step-label" id="step-label"></div>
+    <div class="gate" id="gate"><button id="load" class="primary">Load the 3D build sequence</button>
+      <span class="meta">Loads the Explore Ship model (a few MB). The steps below read without it.</span></div>
+    <div class="cstatus" id="cstatus" hidden></div>
+  </div>
+  <div class="btools">
+    <span class="nav" role="toolbar" aria-label="Step"><button id="prev" aria-label="Previous step">◀</button>
+      <button id="play" aria-label="Play the sequence">▶ Play</button><button id="next" aria-label="Next step">▶</button></span>
+    <input type="range" id="scrub" min="1" max="{n}" value="1" aria-label="Step">
+    <label><input type="checkbox" id="ghost" checked> Show what comes later as a ghost</label>
+    <span class="views" role="toolbar" aria-label="Camera"><button data-view="auto" aria-pressed="true">Step</button><button data-view="threequarter">3/4</button>
+      <button data-view="side">Side</button><button data-view="top">Top</button><button data-view="front">Bow</button><button data-view="aft">Aft</button></span>
+  </div>
+  <div class="massbar" id="massbar" aria-hidden="true"></div>
+  <div class="bgrid">
+    <ol class="phases" id="steps">{"".join(items)}</ol>
+    <article class="caption" id="caption" aria-live="polite"></article>
+  </div>
+  <p class="note">The order is a {tag(seq["status"])} judgment from the model's load paths, not canon: no workbook owns an assembly
+    sequence yet. Mass comes from the placed mass model and the operating point: {led["dry_t"]:,.0f} t of hardware and stores plus
+    {led["propellant_t"]:,.0f} t of propellant is {led["total_t"]:,.0f} t, the departure mass of {led["departure_t"]:,.0f} t plus the
+    {led["circulation_t"]:,.0f} t ring corridors the operating point does not carry yet. The sequence will gain detail as the ship does;
+    the reasoning is in the <a href="../{e["kind_dir"]}/{e["folder"].name}/">assembly-sequence study</a>.</p>
+</section>'''
+    (out_dir / 'index.html').write_text(page('How Wayfarer is built · Wayfarer engineering',
+                                             'The assembly sequence of G.U. Wayfarer 001, step by step from the spine to first ignition.',
+                                             body, 2, revision, built, BUILD_HEAD))
+    return True
+
+
+def build_teaser(seq):
+    """The main page's entry to engineering/build/."""
+    phases = ''.join(f'<a href="build/#{next(s["id"] for s in seq["steps"] if s["phase"] == p["id"])}"><code>{p["id"][1:]}</code> {esc(p["name"])}</a>'
+                     for p in seq['phases'])
+    shot = ('<a class="shot" href="build/#radiator_blades"><img src="build_preview.jpg" alt="The ship part-built: spine, drive and casing '
+            'in place, the radiator blades going on" loading="lazy"></a>') if (ROOT / 'web/engineering/build_preview.jpg').exists() else ''
+    return f'''<section id="build" class="teaser build-teaser">
+  {shot}
+  <div>
+    <h2>How Wayfarer is built · step by step</h2>
+    <p>The approved ship assembled in the order its load paths allow, from the spine to the first burn: {len(seq["steps"])} steps on the
+      Explore Ship model, each with what it rests on, why it comes where it does and the mass it adds.</p>
+    <p><a class="go" href="build/">Open the build sequence</a></p>
+    <div class="pick">{phases}</div>
+  </div>
+</section>'''
+
+
 def compare_teaser(prob):
     """The main page's entry to engineering/compare/: a preview, one sentence and one link per problem."""
     links = ''.join(f'<a href="compare/#{r["id"]}" title="{esc(r["title"])}"><code>{r["id"]}</code> {esc(r["title"])}</a>' for r in prob['register'])
@@ -559,7 +646,7 @@ def lab_ship(spec):
             'length_m': spec['ship']['length']['value']}
 
 
-def main_page(site, spec, entries, dropped, problem, revision, built, play=True, lab2=None):
+def main_page(site, spec, entries, dropped, problem, revision, built, play=True, lab2=None, seq=None):
     import story_lab
     n = ship_numbers(spec)
     b, m, fi = n['burn'], n['mission'], n['fi']
@@ -638,8 +725,10 @@ def main_page(site, spec, entries, dropped, problem, revision, built, play=True,
 
 <nav class="toc"><a href="#goal">1 Goal</a><a href="#constraints">2 Constraints</a><a href="#ship">3 The ship today</a>
   <a href="#tried">4 What we tried</a><a href="#problems">5 Open problems</a><a href="#follow">6 Follow along</a>
-  {'<a href="compare/"><b>Compare in 3D</b></a>' if prob.get("compare") else ''}</nav>
+  {'<a href="compare/"><b>Compare in 3D</b></a>' if prob.get("compare") else ''}
+  {'<a href="build/"><b>Build sequence</b></a>' if seq else ''}</nav>
 {story_lab.teaser(lab2) if lab2 else ''}
+{build_teaser(seq) if seq else ''}
 {compare_teaser(prob) if prob.get("compare") else ''}
 
 <section id="goal"><h2>1 · The goal</h2>
@@ -737,7 +826,7 @@ def build(root, site, revision=None, built=None, play=True):
         if src.is_file():
             shutil.copy2(src, out / src.name)
     entries, dropped = lab_entries()
-    problem = lab2 = None
+    problem = lab2 = seq = None
     pages = ['engineering/index.html']
     for e in entries:
         d = out / e['kind_dir'] / e['folder'].name
@@ -752,12 +841,16 @@ def build(root, site, revision=None, built=None, play=True):
         pages.append(d.relative_to(site).as_posix() + '/index.html')
         if data and 'breakthroughs' in data:
             lab2 = data
+        if data and data.get('contract') == 'WF_ASSEMBLY_SEQUENCE' and seq is None:
+            seq = data
+            build_page(e, seq, out / 'build', revision, built)
+            pages.append('engineering/build/index.html')
     if problem is None:
         raise RuntimeError('no lab problem map with a site.py: the Engineering page needs one')
     if lab2 is not None:
         import story_lab
         pages += story_lab.build(Path(site), lab2, lab_ship(spec), page, revision, built)
-    main_page(Path(site), spec, entries, dropped, problem, revision, built, play, lab2)
+    main_page(Path(site), spec, entries, dropped, problem, revision, built, play, lab2, seq)
     files = sorted(p.relative_to(site).as_posix() for p in out.rglob('*') if p.is_file())
     return {'entry': 'engineering/', 'pages': pages, 'files': len(files),
             'bytes': sum((Path(site) / f).stat().st_size for f in files), 'lab_entries': len(entries),
