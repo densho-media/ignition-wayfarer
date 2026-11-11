@@ -481,7 +481,7 @@ candidates of all nine classes are separate accessory assets (docs/ACCESSORIES.m
   starts the Y155 suit on a PROTOTYPE magnetic walkway (per-boot attach, bounded pull and friction, gait, release, push-off; 10 EVA
   checks), the characters ride in the browser package (`workflow.py play-characters`). Open: the owner's hands-on review and a decision on
   the magnetic boots and walkway (PROTOTYPE, no owner row; FLIGHT_EVA HOLD); the locomotion speeds, jump and camera values; foot IK on
-  the deck and per-boot foot placement; touch controls for Explore Exterior; a hands-on run on a real phone and in Firefox and Safari.
+  the deck and per-boot foot placement; a hands-on run of both experiences by touch on a real phone (MOB-002 touch controls for Explore Exterior exist) and in Firefox and Safari.
   **Done when:** the owner has played both and accepted or changed the values and the boots.
 
 - [ ] **K01 — Set the pair's approved appearance. OWNER REVIEW; AFTER C01.** Consume Tale WTF-16, Art Style and Fashion for the
@@ -556,8 +556,7 @@ candidates of all nine classes are separate accessory assets (docs/ACCESSORIES.m
   exposure, embed/CSP permissions and browser performance/accessibility before a prototype. Reuse the GLB pipeline and stable IDs;
   keep Godot. Acceptance would include publication, desktop/mobile interaction, iframe/new-tab fallback, credits and update procedure.
 - [ ] **P05 — Website follow-ups (WEB-002). Optional, outside WF-R1.** The site, play build, checks, deploy and verify exist (rollback = revert on main) (docs/wayfarer-web-experience-plan.md); the first deploy (`b1db258`) passed the live verify job. Owner's order:
-  - Explore Exterior follow-ups (the two homepage experiences, 2026-11-07): touch controls for EVA Operations (the exterior page
-    says keyboard only); an in-game "back to the hatch" assist and a clearer end-of-session card; the canonical suit and drone
+  - Explore Exterior follow-ups (the two homepage experiences, 2026-11-07): an in-game "back to the hatch" assist and a clearer end-of-session card; the canonical suit and drone
     GLBs in the web package (proxies today); Interior: a free-roam mode switch that hides the guided goal once a ring is done.
   - Measure on real hardware: frame rates on real GPUs (viewer and Godot, desktop and phone); all numbers so far are software
     rendering. Record them in the plan §5–6.

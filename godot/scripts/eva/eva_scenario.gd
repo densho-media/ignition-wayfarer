@@ -35,7 +35,7 @@ func start() -> void:
 	stage = 0
 	done_flags = {}
 	t_stage = 0.0
-	ops.say("FIRST FLIGHT: a guided training EVA. Gas is finite; the reset (F5) is labelled training.")
+	ops.say("FIRST FLIGHT: a guided training EVA. Gas is finite; the reset (%s) is labelled training." % WfInput.label("evaops.reset"))
 
 func card() -> String:
 	if not running:

@@ -79,17 +79,20 @@ const GODOT_THREADS_ENABLED = $GODOT_THREADS_ENABLED;
   const bar = document.querySelector('#bar span');
   const EXPERIENCES = {
     interior: { title: 'EXPLORE INTERIOR', back: '../interior/', hash: '#interior',
-                hint: 'First you choose your own keys for walking, running and jumping; they are kept in this browser. Click the view to look. The goal at the top left says what to do next, with your keys; Controls (bottom left) shows and changes them.' },
+                hint: 'First you choose your own keys for walking, running and jumping; they are kept in this browser. Click the view to look. The goal at the top left says what to do next, with your keys; Controls (bottom left) shows and changes them.',
+                touch: 'Touch controls: the left thumb walks, the right thumb looks, buttons appear when they can act. ? explains them.' },
     exterior: { title: 'EXPLORE EXTERIOR', back: '../exterior/', hash: '#exterior',
-                hint: 'Your walking keys from Explore Interior carry over; you choose the keys still missing (turning and the magnetic boots). The key list on screen shows your keys; Controls (bottom left) shows and changes them.' },
+                hint: 'Your walking keys from Explore Interior carry over; you choose the keys still missing (turning and the magnetic boots). The key list on screen shows your keys; Controls (bottom left) shows and changes them.',
+                touch: 'Touch controls: the left stick thrusts (or walks on the boots), the right stick turns, buttons appear when they can act; More holds the rest.' },
   };
+  const touchFirst = matchMedia('(pointer: coarse)').matches && !matchMedia('(any-pointer: fine)').matches;
   const experienceOf = h => /eva|exterior/i.test(h || '') ? 'exterior' : 'interior';
   let experience = experienceOf(location.hash);
   function showExperience(name) {
     const x = EXPERIENCES[name] || EXPERIENCES.interior;
     experience = name in EXPERIENCES ? name : 'interior';
     document.getElementById('title').textContent = x.title;
-    document.getElementById('hint').textContent = x.hint;
+    document.getElementById('hint').textContent = touchFirst ? x.touch : x.hint;
     document.title = x.title.replace(/\w\S*/g, w => w[0] + w.slice(1).toLowerCase()) + ' · G.U. WAYFARER 001';
     document.getElementById('exit').href = x.back;
     // a start variant (#interior-excursion, #exterior-hatch, #exterior-first-flight) is kept while it names this experience
@@ -119,7 +122,6 @@ const GODOT_THREADS_ENABLED = $GODOT_THREADS_ENABLED;
   // (window.wayfarerSafe, CSS px), a user-started full screen with an optional landscape lock that may be refused, the portrait
   // suggestion, and a blur of the canvas when the page is hidden, so Godot releases every held input (Web sends it no other signal).
   const canvas = document.getElementById('canvas');
-  const touchFirst = matchMedia('(pointer: coarse)').matches && !matchMedia('(any-pointer: fine)').matches;
   const safeBox = document.getElementById('safe');
   function readSafe() {
     const cs = getComputedStyle(safeBox);

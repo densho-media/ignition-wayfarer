@@ -107,7 +107,7 @@ func evaluate() -> Dictionary:
 func request_rescue() -> void:
 	var e := evaluate()
 	if not e["ok"]:
-		say("RESCUE UNAVAILABLE: " + e["reason"] + (". Training: F5 resets the scenario." if ops.training else "."), false)
+		say("RESCUE UNAVAILABLE: " + e["reason"] + (". Training: %s resets the scenario." % WfInput.label("evaops.reset") if ops.training else "."), false)
 		return
 	mode = Mode.RESCUE
 	rescue_kind = e["kind"]
@@ -386,6 +386,6 @@ func _rescue_done() -> void:
 	set_mode(Mode.HOLD if not ops.docked else Mode.MANUAL)
 
 func _rescue_fail(why: String) -> void:
-	say("RESCUE FAILED: " + why + (". Tether and winch back, or abort. Training: F5 resets the scenario." if ops.training else ". Tether and winch back, or abort."), false)
+	say("RESCUE FAILED: " + why + (". Tether and winch back, or abort. Training: %s resets the scenario." % WfInput.label("evaops.reset") if ops.training else ". Tether and winch back, or abort."), false)
 	ops.rescue_failures += 1
 	set_mode(Mode.HOLD)
