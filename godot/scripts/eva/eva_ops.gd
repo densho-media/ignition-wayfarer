@@ -95,6 +95,8 @@ func _ready() -> void:
 	hud.setup(self)
 	scenario = WfEvaScenario.new(self)
 	WfInput.context = "evaops"
+	WfInput.touch_provider = touch_state          # MOB-002: sticks and contextual buttons on a touch device (wf_touch.gd)
+	tree_exiting.connect(func(): WfInput.touch_provider = Callable(); WfInput.release_touch())
 	start_kind = requested_start()
 	start_free(false)
 	if start_kind == "WALKWAY":
@@ -849,7 +851,7 @@ func do_action(id: String) -> void:
 			var c := _ctl()
 			c.mode = WfEvaControl.Mode.MANUAL if c.mode == WfEvaControl.Mode.ASSIST else WfEvaControl.Mode.ASSIST
 			say(("Manual: the stick drives the valves; nothing stops you but your own counter-thrust." if c.mode == WfEvaControl.Mode.MANUAL
-				else "Assisted: rate damping, attitude hold, brake (B) and position hold (P). Every correction uses gas."))
+				else "Assisted: rate damping, attitude hold, brake %s and position hold %s. Every correction uses gas." % [key("evaops.brake"), key("evaops.pos_hold")]))
 		"evaops.att_hold":
 			var c := _ctl()
 			c.attitude_hold = not c.attitude_hold
@@ -923,6 +925,73 @@ func do_action(id: String) -> void:
 		"evaops.exit":
 			WfWebPage.scene("interior")            # the page follows (its Exit link, title and hash), so a reload keeps the walk
 			get_tree().change_scene_to_file("res://scenes/excursion.tscn")
+
+# --------------------------------------------------------------------------------------------------------------------------- touch
+## MOB-002 touch controls now (wf_touch.gd draws and routes them; every button sends the same registry action as its key, so the
+## same checks apply): the left stick translates (or walks on the boots), the right stick turns, the buttons are the actions that can
+## act here, and More holds the rest of the keyboard list. Display and routing only: no physics input differs from a key press.
+func touch_state() -> Dictionary:
+	if pkg.is_empty():
+		return {}
+	var acts := []
+	var c := _ctl()
+	var assisted := c.mode == WfEvaControl.Mode.ASSIST
+	var reach := float(pkg["rules"]["reach_m"])
+	var surface := suit.standing and not suit.held
+	if active == "suit":
+		var h := world.hold_near(suit.global_position, reach + 0.6)
+		if suit.held or not h.is_empty():
+			acts.append(["evaops.grab", "Release" if suit.held else "Grab", "primary_game"])
+		if suit.held or (suit.boots != null and suit.boots.count() > 0):
+			acts.append(["evaops.push", "Push off", "game"])
+		if suit.boots != null:
+			acts.append(["evaops.boots", "Boots off" if suit.boots.armed else "Boots on", "game"])
+		var a := world.hold_near(suit.global_position, reach)
+		if suit.tether_on or (not a.is_empty() and a["kind"] != "station"):
+			acts.append(["evaops.tether", "Unclip" if suit.tether_on else "Tether", "game"])
+		if scenario.running or cartridge_seated != null or (suit.held and hold_id.begins_with("BROW_FIX")):
+			acts.append(["evaops.interact", "Use", "game"])
+	else:
+		if not docked:
+			acts.append(["evaops.interact", "Use", "primary_game"])
+			acts.append(["evaops.arms", "Arms", "game"])
+			acts.append(["evaops.gripper", "Gripper", "game"])
+			acts.append(["evaops.autopilot", "Drone mode", "game"])
+	if active == "drone" or scenario.running or not docked:
+		acts.append(["evaops.dock", "Undock" if docked else "Dock", "game"])
+	if not (active == "suit" and surface):
+		acts.append(["evaops.down", "Down", "hold"])          # the columns fill bottom up: Up stands above Down
+		acts.append(["evaops.up", "Up", "hold"])
+		if assisted:
+			acts.append(["evaops.brake", "Brake", "hold"])
+	var util := [["evaops.camera", "Cam"], ["evaops.astronaut", "Astronaut"] if active == "drone" else ["evaops.drone", "Drone"]]
+	var menu := [
+		["evaops.scenario", "Free exploration" if scenario.running else "Start First Flight"],
+		["evaops.assist", "Assisted -> manual" if assisted else "Manual -> assisted"],
+		["evaops.att_hold", "Attitude hold: %s" % ("on" if c.attitude_hold else "off")],
+		["evaops.pos_hold", "Position hold: %s" % ("on" if c.hold_pos else "off")],
+		["evaops.help", "Call drone (N2 resupply)"],
+		["evaops.frame", "Ship: next drift / burn preset"],
+		["evaops.training", "Operational rules" if training else "Training simulation"],
+		["evaops.reset", "Training reset (refill)"],
+		["evaops.checkpoint", "Back to checkpoint"],
+		["evaops.fault", "Inject valve fault"],
+		["evaops.exit", "Back to the walk (interior)"]]
+	var help := [
+		"Left thumb: stick on the left half - thrust forward, back and sideways; on magnetic boots it walks.",
+		"Right thumb: stick on the right half - turn (yaw and pitch); on the boots it turns your feet.",
+		"Right: Turn / Look (top right) switches the right thumb to looking around; your view also aims a push-off.",
+		"Up and Down thrust along your head axis; Brake (assisted) holds your velocity to the ship. Every burn uses N2.",
+		"Buttons appear only when they can act: Grab near a hold, Push off while holding, Tether near an anchor."]
+	return {"move": "2d", "look": true, "turn": ["evaops.yaw_left", "evaops.yaw_right", "evaops.pitch_up", "evaops.pitch_down"],
+		"actions": acts, "utility": util, "menu": menu, "help": help, "probe": touch_probe}
+
+## The EVA state a browser check reads (-- --touch-probe).
+func touch_probe() -> Dictionary:
+	return {"scene": "eva_ops", "active": active, "docked": docked, "held": suit.held, "standing": suit.standing,
+		"boots": suit.boots.armed if suit.boots != null else false, "scenario": scenario.running,
+		"v_suit": snappedf(suit.linear_velocity.length(), 0.001), "cam_yaw": snappedf(cam_yaw, 0.001),
+		"pos": [snappedf(suit.global_position.x, 0.001), snappedf(suit.global_position.y, 0.001), snappedf(suit.global_position.z, 0.001)]}
 
 func _ctl() -> WfEvaControl:
 	return suit_ctl if active == "suit" or docked else drone_ctl
@@ -1097,7 +1166,7 @@ func cycle_frame() -> void:
 
 func set_frame(m: String) -> void:
 	if m != "DRIFT" and not training:
-		say("Operational rules: no EVA under thrust. Burn exists only as a training simulation (F3).", false)
+		say("Operational rules: no EVA under thrust. Burn exists only as a training simulation (%s)." % WfInput.label("evaops.training"), false)
 		return
 	frame_mode = m
 	var md: Dictionary = pkg["modes"][m]

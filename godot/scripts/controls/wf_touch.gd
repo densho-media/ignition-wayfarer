@@ -8,6 +8,9 @@ extends CanvasLayer
 ## floor or rail to act on); a button sends WfInput.trigger(id), which reaches the same scene handler as the bound key with the same
 ## checks; looking goes through WfInput.add_look to the scene that takes it. The scene says what can be used now through
 ## WfInput.touch_provider ({move: "" | "1d" | "2d", actions: [[id, label, role]], utility: [[id, label]], look: bool}).
+## MOB-002 (Explore Exterior) adds, all optional: turn: [left, right, up, down] hold ids for a second stick under the right thumb
+## (the right thumb then turns; the "Right" utility button switches it to looking), menu: [[id, label]] behind a More button,
+## help: [lines] for the help panel, and the role "hold" for a button held like a key (Up, Down, Brake).
 ## On a touch-first device (coarse pointer, no fine pointer, or -- --touch) the 2-D interface is scaled to CSS pixels, a mobile 3-D
 ## resolution is chosen and adapted to the frame rate, and a touch welcome replaces the keyboard first launch. Desktop is unchanged.
 
@@ -47,6 +50,13 @@ var stick := Vector2.ZERO      # -1..1 after the dead zone (x right, y down)
 var stick_base := Vector2.ZERO
 var stick_touch := -1
 var looked := false            # the look hint disappears after the first look drag
+var rstick := Vector2.ZERO     # MOB-002 turn stick under the right thumb (state.turn), -1..1 like the move stick
+var rstick_base := Vector2.ZERO
+var rstick_touch := -1
+var rstick_rest := Vector2.ZERO
+var turn_ids: Array = []       # the hold ids the turn stick drives now (released when the scene changes them)
+var right_look := false        # the right thumb looks instead of turning (the "Right" utility button)
+var turned := false
 var scale_3d := 1.0
 var scale_cap := 1.0
 var fps_t := 0.0
@@ -174,7 +184,9 @@ func _input(e: InputEvent) -> void:
 			return
 		var b := _button_at(e.position)
 		if not b.is_empty():
-			if not e.pressed:
+			if b.role == "hold":
+				I.set_virtual(str(b.id), 1.0 if e.pressed else 0.0)
+			elif not e.pressed:
 				_fire(b)
 			get_viewport().set_input_as_handled()
 
@@ -196,6 +208,8 @@ func _classify(p: Vector2) -> String:
 	var vs := _size()
 	if str(state.get("move", "")) != "" and p.x < vs.x * ZONE and p.y > vs.y * 0.18:
 		return "stick"
+	if _turn_on() and p.x >= vs.x * 0.5 and p.y > vs.y * 0.18:
+		return "rstick"
 	if bool(state.get("look", I.look_wanted())) and I.look_wanted() and p.x >= vs.x * ZONE:
 		return "look"
 	return "none"
@@ -210,7 +224,10 @@ func _down(index: int, p: Vector2) -> void:
 			var b := _button_at(p)
 			c["button"] = b
 			_press_look(b, true)
-			if b.role in ["game", "primary_game"]:
+			if b.role == "hold":
+				I.set_virtual(str(b.id), 1.0)         # held like its key until this finger lifts
+				c["fired"] = true
+			elif b.role in ["game", "primary_game"]:
 				_fire(b)                              # game actions act on touch down (no tap delay)
 				c["fired"] = true
 		"stick":
@@ -220,6 +237,14 @@ func _down(index: int, p: Vector2) -> void:
 				stick_touch = index
 				stick_base = _fixed_base() if I.touch_stick == "fixed" else _clamp_base(p)
 				_stick_to(p)
+		"rstick":
+			if rstick_touch >= 0:
+				c["kind"] = "none"
+			else:
+				rstick_touch = index
+				turned = true
+				rstick_base = rstick_rest if I.touch_stick == "fixed" else _clamp_rbase(p)
+				_rstick_to(p)
 		"look":
 			looked = true
 	claims[index] = c
@@ -236,6 +261,8 @@ func _drag(index: int, p: Vector2, rel: Vector2) -> void:
 	match str(c.kind):
 		"stick":
 			_stick_to(p)
+		"rstick":
+			_rstick_to(p)
 		"look":
 			var ref := minf(_size().x, _size().y)
 			I.add_look(rel / maxf(ref, 1.0) * LOOK_RAD * I.touch_look)
@@ -254,9 +281,13 @@ func _up(index: int, p: Vector2, canceled: bool) -> void:
 	match str(c.kind):
 		"stick":
 			_stick_release()
+		"rstick":
+			_rstick_release()
 		"button":
 			var b: Dictionary = c.button
 			_press_look(b, false)
+			if b.role == "hold":
+				I.set_virtual(str(b.id), 0.0)
 			if not canceled and not c.get("fired", false) and _rect(b).grow(TAP_SLOP).has_point(p):
 				_fire(b)
 	log.append(["up", c.kind, canceled])
@@ -267,9 +298,12 @@ func release_all() -> void:
 		var c: Dictionary = claims[index]
 		if str(c.kind) == "button":
 			_press_look(c.button, false)
+			if c.button.role == "hold":
+				I.set_virtual(str(c.button.id), 0.0)
 	claims = {}
 	emulated = ""
 	_stick_release()
+	_rstick_release()
 
 func _stick_to(p: Vector2) -> void:
 	var d := p - stick_base
@@ -292,6 +326,45 @@ func _stick_release() -> void:
 	stick_touch = -1
 	stick = Vector2.ZERO
 	_apply_stick()
+
+## MOB-002: the turn stick (state.turn) under the right thumb; the same dead zone and travel as the move stick.
+func _turn_on() -> bool:
+	return state.get("turn", []).size() == 4 and not right_look
+
+func _rstick_to(p: Vector2) -> void:
+	var d := p - rstick_base
+	var r := d.length()
+	if I.touch_stick == "floating" and r > STICK_R * 1.6:
+		rstick_base = p - d / r * STICK_R * 1.6
+		d = p - rstick_base
+	var v := d / STICK_R
+	if v.length() > 1.0:
+		v = v.normalized()
+	var m := v.length()
+	rstick = Vector2.ZERO if m < DEAD else v / m * ((m - DEAD) / (1.0 - DEAD))
+	_apply_rstick()
+
+func _rstick_release() -> void:
+	rstick_touch = -1
+	rstick = Vector2.ZERO
+	_apply_rstick()
+
+func _apply_rstick() -> void:
+	var ids: Array = state.get("turn", []) if _turn_on() else []
+	if ids != turn_ids:
+		for id in turn_ids:
+			I.set_virtual(str(id), 0.0)
+		turn_ids = ids.duplicate()
+	if ids.size() == 4:
+		I.set_virtual(str(ids[0]), maxf(0.0, -rstick.x))
+		I.set_virtual(str(ids[1]), maxf(0.0, rstick.x))
+		I.set_virtual(str(ids[2]), maxf(0.0, -rstick.y))
+		I.set_virtual(str(ids[3]), maxf(0.0, rstick.y))
+	pad.queue_redraw()
+
+func _clamp_rbase(p: Vector2) -> Vector2:
+	var vs := _size()
+	return Vector2(clampf(p.x, vs.x * 0.5 + STICK_R, vs.x - safe[2] - STICK_R - 4.0), clampf(p.y, STICK_R + 4.0, vs.y - safe[3] - STICK_R - 4.0))
 
 func _apply_stick() -> void:
 	I.set_virtual("player.move_forward", maxf(0.0, -stick.y))
@@ -359,6 +432,12 @@ func _fire(b: Dictionary) -> void:
 	log.append(["fire", id])
 	if id == "touch.help":
 		open_help()
+	elif id == "touch.menu":
+		_open("menu")
+	elif id == "touch.right":
+		right_look = not right_look
+		_rstick_release()
+		signature = ""
 	elif state.get("local", {}).has(id):
 		(state.local[id] as Callable).call()          # a display toggle of the scene (not a registry action: no simulation effect)
 	else:
@@ -377,6 +456,10 @@ func _process(dt: float) -> void:
 		_stick_release()
 	if str(state.get("move", "")) == "" and stick_touch >= 0:
 		_stick_release()                             # the scene can no longer move the body: release at once
+	if rstick_touch >= 0 and not _turn_on():
+		_rstick_release()
+	elif rstick_touch < 0 and not turn_ids.is_empty() and state.get("turn", []) != turn_ids:
+		_apply_rstick()
 	if mode != "":
 		_layout_panel()                              # flow rows settle a frame after the width; a rotation re-fits the panel
 	if welcome_due() and not state.is_empty():
@@ -391,7 +474,8 @@ func _process(dt: float) -> void:
 
 func _refresh(force: bool) -> void:
 	var want := visible_controls()
-	var sig := "%s|%s|%s|%s|%s" % [want, state.get("actions", []), state.get("utility", []), _size(), safe]
+	var sig := "%s|%s|%s|%s|%s|%s|%s" % [want, state.get("actions", []), state.get("utility", []), _size(), safe, right_look,
+		state.has("menu")]
 	if sig == signature and not force:
 		pad.queue_redraw()
 		return
@@ -405,7 +489,12 @@ func _refresh(force: bool) -> void:
 		# utility row: top right, right to left (Help always last on the right)
 		var x: float = vs.x - safe[2] - EDGE
 		var util_y: float = safe[1] + EDGE + (56.0 if primary and vs.x < 640.0 else 0.0)    # upright phone: under the page's Exit row
-		var util: Array = state.get("utility", []) + [["touch.help", "?", "util"]]
+		var util: Array = state.get("utility", []).duplicate()
+		if state.get("turn", []).size() == 4:
+			util.append(["touch.right", "Right: Look" if right_look else "Right: Turn"])
+		if state.has("menu"):
+			util.append(["touch.menu", "More"])
+		util.append(["touch.help", "?", "util"])
 		util.reverse()
 		for u in util:
 			var bn := _make_button(str(u[1]), "util")
@@ -414,6 +503,10 @@ func _refresh(force: bool) -> void:
 			buttons.append({"node": bn, "id": u[0], "role": "util", "label": u[1]})
 		# actions: bottom right, a column of rows from the bottom up; the primary action largest and nearest the thumb
 		var acts: Array = state.get("actions", [])
+		if state.get("turn", []).size() == 4:
+			_columns(acts, util_y + TARGET + GAP)
+			pad.queue_redraw()
+			return
 		var y: float = vs.y - safe[3] - EDGE
 		var row_x: float = vs.x - safe[2] - EDGE
 		var row_h := 0.0
@@ -431,6 +524,29 @@ func _refresh(force: bool) -> void:
 			buttons.append({"node": bn, "id": a[0], "role": role, "label": a[1]})
 	pad.queue_redraw()
 
+## MOB-002 layout with a turn stick: the actions stand in columns at the right edge, bottom up (a column ends under the utility row),
+## and the turn stick rests left of them, where the right thumb lands.
+func _columns(acts: Array, top_y: float) -> void:
+	var vs := _size()
+	var bottom: float = vs.y - safe[3] - EDGE
+	var col_x: float = vs.x - safe[2] - EDGE
+	var y := bottom
+	var col_w := 0.0
+	var left := col_x
+	for a in acts:
+		var role := str(a[2]) if a.size() > 2 else "game"
+		var bn := _make_button(str(a[1]), role)
+		if y - bn.size.y < top_y and col_w > 0.0:
+			col_x -= col_w + GAP
+			y = bottom
+			col_w = 0.0
+		bn.position = Vector2(col_x - bn.size.x, y - bn.size.y)
+		y -= bn.size.y + GAP
+		col_w = maxf(col_w, bn.size.x)
+		left = minf(left, col_x - bn.size.x)
+		buttons.append({"node": bn, "id": a[0], "role": role, "label": a[1]})
+	rstick_rest = Vector2(maxf(vs.x * 0.5 + STICK_R, left - GAP - STICK_R * 1.5), bottom - STICK_R * 1.4)
+
 func _make_button(text: String, role: String) -> Button:
 	var bn := Button.new()
 	bn.text = text
@@ -438,7 +554,7 @@ func _make_button(text: String, role: String) -> Button:
 	bn.mouse_filter = Control.MOUSE_FILTER_IGNORE     # fingers are hit-tested here by touch index (multitouch), never by mouse emulation
 	var big := role in ["primary", "primary_game"]
 	bn.add_theme_font_size_override("font_size", 17 if big else 15)
-	var c: Color = WfReviewGuide.C_NEXT if big else (Color("5F5E5A") if role == "util" else WfReviewGuide.C_NOW)
+	var c: Color = WfReviewGuide.C_NEXT if big else (Color("5F5E5A") if role == "util" else (Color("3A8FD6") if role == "hold" else WfReviewGuide.C_NOW))
 	var bg := Color(0.07, 0.08, 0.09, 0.78)
 	for st in ["normal", "hover", "pressed", "disabled"]:
 		bn.add_theme_stylebox_override(st, WfReviewGuide._box(bg, c, 10, 12))
@@ -467,6 +583,16 @@ func _draw_pad() -> void:
 			hint.visible = true
 			hint.text = "move" if move == "2d" else "up / down"
 			hint.position = base + Vector2(-hint.get_combined_minimum_size().x / 2.0, STICK_R + 6.0)
+	if _turn_on():
+		var rb := rstick_base if rstick_touch >= 0 else rstick_rest
+		var ra := 0.30 if rstick_touch >= 0 else 0.14
+		pad.draw_circle(rb, STICK_R, Color(1, 1, 1, ra * 0.45))
+		pad.draw_arc(rb, STICK_R, 0, TAU, 48, Color(1, 1, 1, ra + 0.15), 2.0, true)
+		pad.draw_circle(rb + rstick * STICK_R, KNOB_R, Color(0.36, 0.62, 0.9, 0.55 if rstick_touch >= 0 else 0.25))
+		if rstick_touch < 0 and not turned:
+			pad.draw_string(ThemeDB.fallback_font, rb + Vector2(-14, STICK_R + 18.0), "turn", HORIZONTAL_ALIGNMENT_LEFT, -1, 13,
+				Color(1, 1, 1, 0.55))
+		return
 	if I.look_wanted() and bool(state.get("look", true)) and not looked:
 		pad.draw_string(ThemeDB.fallback_font, Vector2(vs.x * 0.62, vs.y * 0.55), "drag to look",
 			HORIZONTAL_ALIGNMENT_LEFT, -1, 14, Color(1, 1, 1, 0.45))
@@ -568,25 +694,37 @@ func _show_panel() -> void:
 	match mode:
 		"welcome":
 			panel_title.text = "WAYFARER — TOUCH CONTROLS"
-			panel_body.text = ("Left thumb: drag on the left half to walk or climb, where your body can.\n"
-				+ "Right thumb: drag on the right half to look around.\n"
-				+ "Buttons appear only when their action can be used: Grab, Push off, Release, Next …\n"
-				+ "Weightless, the stick does nothing: only a hand on a rail changes your motion.\n"
-				+ "? opens this help at any time. Turn the phone sideways for the widest view.\n\n"
-				+ "Show a short tip when a new action first appears?")
+			if I.experience == "exterior":
+				panel_body.text = ("Left thumb: a stick on the left half - thrust forward, back and sideways (on magnetic boots it walks).\n"
+					+ "Right thumb: a stick on the right half - turn. 'Right: Turn' at the top right switches it to looking around.\n"
+					+ "Buttons appear only when their action can be used: Grab, Push off, Boots, Tether, Up, Down, Brake …\n"
+					+ "More (top right) holds everything else: First Flight, assisted or manual flight, holds, resets.\n"
+					+ "? opens this help at any time. Turn the phone sideways for the widest view.\n\n"
+					+ "Show a short tip when a new action first appears?")
+			else:
+				panel_body.text = ("Left thumb: drag on the left half to walk or climb, where your body can.\n"
+					+ "Right thumb: drag on the right half to look around.\n"
+					+ "Buttons appear only when their action can be used: Grab, Push off, Release, Next …\n"
+					+ "Weightless, the stick does nothing: only a hand on a rail changes your motion.\n"
+					+ "? opens this help at any time. Turn the phone sideways for the widest view.\n\n"
+					+ "Show a short tip when a new action first appears?")
 			_panel_button("Start with tips (recommended)", finish_welcome.bind("SUGGESTED"), true)
 			_panel_button("Start without tips", finish_welcome.bind("EXPERIENCED"))
 		"help":
 			panel_title.text = "CONTROLS"
 			var lines := []
 			var move := str(state.get("move", ""))
-			if move == "2d":
+			if state.has("help"):
+				lines += state.help
+			elif move == "2d":
 				lines.append("Left thumb: stick — walk on the deck (spin gravity presses you onto it).")
 			elif move == "1d":
 				lines.append("Left thumb: stick up / down — along the line or the rungs.")
 			else:
 				lines.append("No stick here: weightless or guided, only rails and the chapter move you.")
-			if I.look_wanted():
+			if state.has("help"):
+				pass
+			elif I.look_wanted():
 				lines.append("Right thumb: drag to look; your view also aims a push-off.")
 			for a in state.get("actions", []):
 				var what: String = HELP.get(str(a[0]), I.action(str(a[0])).get("what", ""))
@@ -597,13 +735,27 @@ func _show_panel() -> void:
 				"on" if I.preference != "EXPERIENCED" else "off"])
 			panel_body.text = "\n".join(lines)
 			_panel_button("Close", close_panel, true)
+			if state.has("menu"):
+				_panel_button("More actions", _open.bind("menu"))
 			_panel_button("Look speed ×%.2f" % I.touch_look, _cycle_look)
 			_panel_button("Stick: %s" % I.touch_stick, _cycle_stick)
 			_panel_button("Tips: %s" % ("on" if I.preference != "EXPERIENCED" else "off"), _cycle_tips)
 			_panel_button("Touch controls: %s" % I.touch_controls, _cycle_controls)
 			_panel_button("Replay lessons", func(): I.replay_lessons(); _show_panel())
 			_panel_button("Keyboard / controller keys", func(): close_panel(); I.overlay.open_codex())
+		"menu":
+			panel_title.text = "MORE"
+			panel_body.text = "Everything the keyboard can do here that has no button on screen."
+			_panel_button("Close", close_panel, true)
+			for m in state.get("menu", []):
+				_panel_button(str(m[1]), _menu_pick.bind(str(m[0])))
 	_layout_panel.call_deferred()
+
+## A More item: close the panel (the scene runs again), then the action reaches the scene like its key.
+func _menu_pick(id: String) -> void:
+	close_panel()
+	log.append(["fire", id])
+	I.trigger(id)
 
 func _cycle_look() -> void:
 	var i: int = I.TOUCH_LOOKS.find(I.touch_look)
@@ -668,6 +820,7 @@ func snapshot() -> Dictionary:
 	var out := {"device": I.device, "primary": primary, "shown": shown, "dpr": dpr, "density": ui_density(), "ui": [_size().x, _size().y],
 		"safe": safe, "scale_3d": snappedf(scale_3d, 0.01), "modal": I.modal(), "mode": mode, "move": state.get("move", ""),
 		"look": I.look_wanted(), "stick": [snappedf(stick.x, 0.01), snappedf(stick.y, 0.01)], "claims": claims.size(),
+		"turn": [snappedf(rstick.x, 0.01), snappedf(rstick.y, 0.01)], "right_look": right_look,
 		"virtual": I.virtual, "fps": Engine.get_frames_per_second(), "triggered": I.triggered.slice(-12),
 		"buttons": buttons.map(func(b): var r := _rect(b); return [b.id, b.label, [r.position.x, r.position.y, r.size.x, r.size.y]]),
 		"preference": I.preference, "intro_done": I.touch_intro_done, "paused": get_tree().paused,

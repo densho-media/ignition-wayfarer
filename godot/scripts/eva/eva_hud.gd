@@ -48,6 +48,37 @@ func setup(o) -> void:
 	keys.offset_left = 16
 	keys.offset_bottom = -10
 	keys.add_theme_font_size_override("normal_font_size", 13)
+	if WfInput.compact():
+		_compact_layout()
+		get_viewport().size_changed.connect(_compact_layout)
+
+## MOB-002 phone and tablet layout (MOB-001 compact: one UI px per CSS px): the scenario card and one short status block under the
+## page's Exit row on the left, the messages at the bottom centre between the thumbs; the drone column and the key list give way (the
+## touch buttons and More replace the key list, the status block carries the drone line). The top right and the lower corners are the
+## touch controls'.
+func _compact_layout() -> void:
+	var sz := get_viewport().get_visible_rect().size
+	var w := clampf(sz.x * 0.46, 240.0, 440.0)
+	for l in [card, left, mid]:
+		l.add_theme_font_size_override("normal_font_size", 12)
+	left.add_theme_font_size_override("font_size", 12)
+	card.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	card.set_anchors_and_offsets_preset(Control.PRESET_TOP_LEFT)
+	card.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+	card.custom_minimum_size = Vector2(w, 0)
+	card.size.x = w
+	card.position = Vector2(12, 64)
+	left.position = Vector2(12, 64)                 # moved under the card each frame (the card's height follows its text)
+	top.visible = false
+	right.visible = false
+	keys.visible = false
+	mid.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	var mw := clampf(sz.x * 0.36, 200.0, 420.0)
+	mid.set_anchors_and_offsets_preset(Control.PRESET_TOP_LEFT)
+	mid.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	mid.custom_minimum_size = Vector2(mw, 0)
+	mid.size.x = mw
+	mid.position.x = (sz.x - mw) * 0.5 - sz.x * 0.04
 
 func _rich(c: Color, wrap: bool) -> RichTextLabel:
 	var l := WfKeyText.label(font_size, c, wrap)
@@ -64,6 +95,9 @@ func _panel(c: Color) -> Label:
 	return l
 
 func refresh() -> void:
+	if WfInput.compact():
+		_refresh_compact()
+		return
 	var s: WfEvaBody = ops.suit
 	var d: WfEvaBody = ops.drone
 	var md: Dictionary = ops.pkg["modes"][ops.frame_mode]
@@ -72,7 +106,7 @@ func refresh() -> void:
 		"%.2f g" % float(md["accel_g"]), "ASTRONAUT" if ops.active == "suit" else "DRONE", ops.CAMS[ops.active][ops.cam_mode[ops.active]]]
 	# ---- astronaut
 	var feed := "drone vessels (docked; reserve isolated)" if ops.docked else ("RC-1 cartridge, then reserve" if ops.cartridge_seated != null else "suit reserve")
-	var lines := ["ASTRONAUT %s" % ("◀ CONTROL" if ops.active == "suit" else ""), "Status: " + ops.suit_status(), "Feed: " + feed]
+	var lines := ["ASTRONAUT %s" % ("< CONTROL" if ops.active == "suit" else ""), "Status: " + ops.suit_status(), "Feed: " + feed]
 	if ops.docked:
 		lines.append("Dock line N2: %.3f kg usable (%.0f %%)" % [ops.drone_gas.usable(), ops.drone_gas.fraction() * 100.0])
 	elif ops.cartridge_seated != null:
@@ -102,7 +136,7 @@ func refresh() -> void:
 		lines.append("!! THRUSTERS STARVED: no gas in the feed")
 	left.text = "\n".join(lines)
 	# ---- drone
-	var dl := ["%s DRONE" % ("CONTROL ▶" if ops.active == "drone" else ""), "Mode: " + ("DOCKED" if ops.docked else ops.dops.name()),
+	var dl := ["%s DRONE" % ("CONTROL >" if ops.active == "drone" else ""), "Mode: " + ("DOCKED" if ops.docked else ops.dops.name()),
 		"N2: %.3f kg usable (%.0f %%)" % [ops.drone_gas.usable(), ops.drone_gas.fraction() * 100.0]]
 	if not ops.docked:
 		dl.append("Δv available: %.1f m/s · mass %.2f kg" % [d.dv_left(), d.total_mass()])
@@ -131,6 +165,67 @@ func refresh() -> void:
 	mid.text = WfKeyText.rich("\n".join(w))
 	card.text = WfKeyText.rich(ops.scenario.card())
 	keys.text = WfKeyText.rich(_keys(), "now")
+
+## The compact status: who is controlled and the numbers that decide the next move (gas, delta-v, velocity, contact), the drone in
+## one line. The same quantities as the desktop panels, fewer words.
+func _refresh_compact() -> void:
+	var s: WfEvaBody = ops.suit
+	var d: WfEvaBody = ops.drone
+	var md: Dictionary = ops.pkg["modes"][ops.frame_mode]
+	var sz := get_viewport().get_visible_rect().size
+	var lines := ["%s · %s · %s %s · cam %s" % ["TRAINING" if ops.training else "OPERATIONAL", "ASTRONAUT" if ops.active == "suit" else "DRONE",
+		md["label"], "%.2f g" % float(md["accel_g"]), ops.CAMS[ops.active][ops.cam_mode[ops.active]].to_lower()]]
+	var st: String = ops.suit_status()
+	var gas := ""
+	if ops.docked:
+		gas = "dock line %.3f kg (%.0f %%)" % [ops.drone_gas.usable(), ops.drone_gas.fraction() * 100.0]
+	elif ops.cartridge_seated != null:
+		gas = "cartridge %.3f kg (%.0f %%)" % [ops.cartridge_seated.tank.usable(), ops.cartridge_seated.tank.fraction() * 100.0]
+	else:
+		gas = "reserve %.3f kg (%.0f %%)" % [ops.reserve.usable(), ops.reserve.fraction() * 100.0]
+	lines.append("Suit %s · N2 %s · dv %.2f m/s" % [st, gas, s.dv_left()])
+	var contact := []
+	if s.held:
+		contact.append("holding")
+	if s.standing:
+		contact.append("standing" if s.mag_a <= 0.0 else "boots on the walkway")
+	if s.tether_on:
+		contact.append("tether %.1f m%s" % [s.global_position.distance_to(s.tether_anchor), " TAUT" if s.tether_taut else ""])
+	lines.append("v %.3f m/s · %.1f °/s · %s%s" % [s.linear_velocity.length(), rad_to_deg(s.angular_velocity.length()),
+		", ".join(contact) if not contact.is_empty() else "free", " · %s" % ("assisted" if ops.suit_ctl.mode == WfEvaControl.Mode.ASSIST else "MANUAL")])
+	if s.boots != null and (s.boots.armed or s.boots.slipping or s.boots.blocked != ""):
+		lines.append("Boots %s · L %s · R %s%s" % ["ON" if s.boots.armed else "OFF", s.boots.state_name(0), s.boots.state_name(1),
+			" · SLIPPING" if s.boots.slipping else ""])
+	if ops.docked:
+		lines.append("Drone docked · N2 %.3f kg" % ops.drone_gas.usable())
+	else:
+		lines.append("Drone %s · N2 %.3f kg (%.0f %%) · %.1f m away" % [ops.dops.name(), ops.drone_gas.usable(), ops.drone_gas.fraction() * 100.0,
+			d.global_position.distance_to(s.global_position)])
+	if s.gas_short:
+		lines.append("!! THRUSTERS STARVED: no gas in the feed")
+	left.text = "\n".join(lines)
+	card.text = WfKeyText.rich(ops.scenario.card())
+	left.position.y = card.position.y + card.get_combined_minimum_size().y + 4.0
+	var w := []
+	for k in ["suit", "drone"]:
+		var h: Dictionary = ops.hazard_now[k]
+		if not h.is_empty():
+			w.append("! %s %s: %s (%.1f m)" % ["INSIDE" if h["inside"] else "NEAR", "ASTRONAUT" if k == "suit" else "DRONE", h["label"], maxf(0.0, h["distance"])])
+	if st != "NOMINAL":
+		w.append("! ASTRONAUT N2: " + st)
+	if not ops.docked and ops.drone_gas.fraction() < float(ops.pkg["rules"]["low_fraction"]):
+		w.append("! DRONE N2 LOW (%.0f %%)" % (ops.drone_gas.fraction() * 100.0))
+	for m in ops.messages.slice(maxi(0, ops.messages.size() - 2)):
+		w.append(("" if m["ok"] else "! ") + m["t"])
+	mid.text = WfKeyText.rich("\n".join(w))
+	# between the thumbs: right of the move stick, left of where the turn stick rests (it moves with the button columns)
+	var t = WfInput.touch
+	var x0: float = t.safe[0] + t.EDGE + t.STICK_R * 2.4 + 8.0
+	var x1: float = t.rstick_rest.x - t.STICK_R - 8.0 if t.rstick_rest.x > 0.0 else sz.x * 0.6
+	var mw := maxf(160.0, x1 - x0)
+	mid.custom_minimum_size.x = mw
+	mid.size = Vector2(mw, 0)
+	mid.position = Vector2(x0, sz.y - 10.0 - mid.get_combined_minimum_size().y)
 
 func _keys() -> String:
 	var k = func(id): return ops.key(id)

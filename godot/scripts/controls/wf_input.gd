@@ -544,7 +544,7 @@ func apply() -> void:
 ## How strongly a hold action is held now (0..1): a latched toggle reads 1; a stick reads past the dead zone, scaled by the
 ## sensitivity. Gameplay uses this instead of Input.get_action_strength so the accessibility settings apply everywhere.
 func strength(id: String) -> float:
-	var v: float = virtual.get(id, 0.0)
+	var v: float = maxf(virtual.get(id, 0.0), virtual.get(source_of(id), 0.0))   # a shared action follows its source's touch stick
 	if toggles.has(id):
 		return maxf(1.0 if latched.has(id) else 0.0, v)
 	return maxf(clampf(Input.get_action_strength(id) * stick_sensitivity, 0.0, 1.0), v)
@@ -816,7 +816,17 @@ const TOUCH_LABELS := {"ui.confirm": "Next", "ui.codex": "Help", "player.move_fo
 	"player.move_left": "stick left", "player.move_right": "stick right", "player.grab": "Grab", "player.release": "Release",
 	"player.push": "Push off", "ship.map": "Map", "ship.card": "Systems", "demo.pause": "Pause", "demo.autoplay": "Auto",
 	"demo.occupants": "Occupant", "body.view": "View", "body.drop_tool": "Drop", "exc.use": "Use", "exc.ops": "Ops", "exc.view": "View",
-	"exc.map": "Map"}
+	"exc.map": "Map",
+	# MOB-002 Explore Exterior: the left stick translates (shared moves), the right stick turns, buttons for the rest
+	"evaops.fwd": "stick up", "evaops.back": "stick down", "evaops.left": "stick left", "evaops.right": "stick right",
+	"evaops.up": "Up", "evaops.down": "Down", "evaops.pitch_up": "turn stick up", "evaops.pitch_down": "turn stick down",
+	"evaops.yaw_left": "turn stick left", "evaops.yaw_right": "turn stick right", "evaops.roll_left": "More > Roll", "evaops.roll_right": "More > Roll",
+	"evaops.fine": "More > Fine", "evaops.brake": "Brake", "evaops.astronaut": "Astronaut", "evaops.drone": "Drone", "evaops.camera": "Cam",
+	"evaops.assist": "More > Assist", "evaops.att_hold": "More > Att hold", "evaops.pos_hold": "More > Pos hold", "evaops.grab": "Grab",
+	"evaops.tether": "Tether", "evaops.push": "Push off", "evaops.boots": "Boots", "evaops.dock": "Dock", "evaops.autopilot": "Drone mode",
+	"evaops.arms": "Arms", "evaops.gripper": "Gripper", "evaops.interact": "Use", "evaops.help": "Call drone", "evaops.frame": "More > Drift / burn",
+	"evaops.training": "More > Training", "evaops.scenario": "More > First Flight", "evaops.reset": "More > Reset", "evaops.checkpoint": "More > Checkpoint",
+	"evaops.fault": "More > Valve fault", "evaops.exit": "More > Back to the walk"}
 
 static func describe(d: Dictionary) -> String:
 	match str(d.t):

@@ -305,6 +305,31 @@ claimed for every device. The after-measurements are in §11.
 **Real devices: none tested.** Android Chrome, iOS Safari (iPhone and iPad) and a real tablet are **pending**. iOS full screen
 and the landscape lock are unsupported by design; the upright layout covers that case.
 
+## 11b. Explore Exterior (MOB-002, 2026-11-11)
+
+The owner opened Explore Exterior on a phone: the touch layer was there (Exit, ?, "drag to look") but EVA Operations gave it no
+controls, and its desktop HUD (three text panels and a 3-line key list in keyboard and controller labels) filled the landscape
+screen. EVA Operations now registers `touch_state()` like the walk:
+
+- **Left stick** (left half): the shared moves (`player.move_*`, read by `evaops.fwd/back/left/right` through
+  `WfInput.strength`, which follows a shared action's source): thrust in flight, the magnetic gait on the boots.
+- **Right stick** (right half, `turn` in the provider): yaw and pitch (`evaops.yaw_*`, `evaops.pitch_*`); on the boots, yaw turns
+  the feet. **Right: Turn / Look** (utility row) gives the right thumb to the camera instead (the push-off follows the view).
+- **Buttons** only when they can act, in columns at the right edge with the turn stick resting left of them: Grab/Release (a hold
+  in reach), Push off (held or boots attached), Boots on/off, Tether/Unclip (an anchor in reach), Use, Dock/Undock; the drone's
+  Use, Arms, Gripper, Drone mode; **Up**, **Down** and **Brake** (assisted) are *hold* buttons (role `hold`: held like the key).
+- **Utility row**: Cam, Drone/Astronaut, Right, **More** (a panel with every other keyboard action: First Flight, assisted or
+  manual, attitude and position hold, call drone, drift/burn, training/operational, reset, checkpoint, valve fault, back to the
+  walk), ?.
+- **Compact HUD** (`WfInput.compact()`): the scenario card and one 4-6 line status block under the Exit row, the last two
+  messages between the thumbs; the drone panel and the key list give way. Prompts name the buttons (`TOUCH_LABELS`, "More >
+  Reset"). Desktop, keyboard and controller are unchanged.
+
+Every button sends the registry action its key sends (`WfInput.trigger` / `set_virtual`), so the EVA physics and checks see the
+same input. Checked natively at 844 × 390 with synthetic touches (`work/` study during the branch): the left stick walked the suit
+0.67 m on the boots, Boots off released it, Up thrust it, Drone and Undock switched and released the drone, More and ? opened;
+`--check-eva-ops` and the controls check pass with and without `--touch`. A run on a real phone is still open (TODO P05).
+
 ## 12. Definition of done
 
 - [x] A separate branch (`claude/mobile-touch-controls`), pushed. `main` and the deployed site are unchanged.
