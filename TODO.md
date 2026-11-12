@@ -474,6 +474,12 @@ candidates of all nine classes are separate accessory assets (docs/ACCESSORIES.m
   after the whitebox review. **Done when:** the owner accepts or replaces the circulation, the conflicts are canonized or removed and a
   person completes both excursions in the desktop and web builds.
 
+- [ ] **DS — Deadship integration (owner brief 2026-11-12). DESIGN UNDER REVIEW.** Research and design report
+  `work/project-thread-dfyyv7/DEADSHIP_DESIGN.md` (branch `claude/project-thread-dfyyv7`): Deadship as a station-run training simulation
+  aboard Wayfarer inside Explore Interior, on a reusable conserving ship-systems model (Python reference, GDScript runtime with checkpoint
+  parity); first playable DS-1 "Scrubber" in ring A. Nothing implemented. **Open:** the owner's review and authorization, DS-Q1..Q8.
+  **Done when:** the owner accepts or changes the design and authorizes Phase 0.
+
 ## K — Finish the two characters, EVA training and production art
 
 - [ ] **LOCO — Character locomotion in both experiences (owner brief 2026-11-08; docs/LOCOMOTION.md).** Built and checked: Explore
