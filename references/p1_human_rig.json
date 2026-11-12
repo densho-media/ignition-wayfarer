@@ -73,7 +73,7 @@
     },
     "walk": {
      "frames": 33,
-     "max_edge_ratio": 2.395
+     "max_edge_ratio": 2.588
     },
     "sit": {
      "frames": 75,
@@ -89,7 +89,7 @@
     },
     "run": {
      "frames": 24,
-     "max_edge_ratio": 3.008
+     "max_edge_ratio": 3.004
     },
     "jump": {
      "frames": 8,
@@ -183,7 +183,7 @@
     },
     "walk": {
      "frames": 33,
-     "max_edge_ratio": 1.872
+     "max_edge_ratio": 2.094
     },
     "sit": {
      "frames": 75,
@@ -199,7 +199,7 @@
     },
     "run": {
      "frames": 24,
-     "max_edge_ratio": 2.2
+     "max_edge_ratio": 2.238
     },
     "jump": {
      "frames": 8,
@@ -293,7 +293,7 @@
     },
     "walk": {
      "frames": 33,
-     "max_edge_ratio": 3.423
+     "max_edge_ratio": 3.455
     },
     "sit": {
      "frames": 75,
@@ -309,7 +309,7 @@
     },
     "run": {
      "frames": 24,
-     "max_edge_ratio": 4.302
+     "max_edge_ratio": 4.244
     },
     "jump": {
      "frames": 8,
@@ -407,7 +407,7 @@
     },
     "walk": {
      "frames": 33,
-     "max_edge_ratio": 2.595
+     "max_edge_ratio": 2.601
     },
     "sit": {
      "frames": 75,
@@ -423,7 +423,7 @@
     },
     "run": {
      "frames": 24,
-     "max_edge_ratio": 3.032
+     "max_edge_ratio": 3.027
     },
     "jump": {
      "frames": 8,

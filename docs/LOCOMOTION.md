@@ -27,6 +27,17 @@ Everything here is PROTOTYPE or SIMULATION_ONLY. FLIGHT_EVA stays HOLD. The engi
   against the walk's own colliders. Where the overhead stops it, it tries the same bearing level with the follow point; with less than
   0.6 m of room (looking across a 0.9 m corridor) it switches to the eyes for that frame and hides the body rather than sit inside the head.
 - **Training reset (R).** Back to the landing, standing still; labelled and counted. Only on ring A's deck.
+- **Run** (LOCO-003). Run held runs in any direction but straight back. On a touch screen the stick pushed to its rim (90 % of its
+  radius) runs, and a Jump button shows while walking: the phone had neither, so a phone player could only walk.
+- **Doors** (LOCO-003). Use opens or closes the corridor or sector door in reach; the leaf slides aft into its pocket over 1.5 s and the
+  doorway's collider is solid until it is fully open. The leaves are found through the manifest's `source_name` (the package names
+  nodes by export id): looked up by source name directly they were never found, so Use only dropped an invisible wall and the shut
+  leaf stayed where it was, which read as walking through a closed door.
+- **Ladder** (LOCO-003). Use at the landing-well foot takes the crew-tube ladder and the trainee stays on the rungs; forward climbs and
+  back climbs down (forward descends only with the view more than 60° down the tube), the choice held while moving. Before, the body
+  stepped straight back onto the deck on the next frame, and a level view sent forward down rather than up. The climb clip's speed is
+  its vertical travel (0.36 m/s), so it plays at the hands' 0.5 m/s, not ten times too fast. The ring has one deck: there are no stairs
+  (owner, 2026-11-12: ladder only).
 
 | `data/characters.toml [locomotion]` (PROTOTYPE) | value | reason |
 | --- | --- | --- |
@@ -51,6 +62,31 @@ package's native reference), measured on 2026-11-08:
 | jump 1.4 m/s | rose 0.202 m (rotating-frame ballistics 0.203 m), landed after 0.85 s, 57 mm Coriolis drift; a second press in the air refused |
 | camera, 6 views along the corridor | room in all 6; across the corridor it falls back to the eyes |
 | training reset, body jump | back at the landing; at most 0.035 m beyond the body's own motion per step |
+| doors (LOCO-003, 2026-11-12) | the shut door ahead blocks; Use slides its leaf open (every opened leaf moved) |
+| ladder (LOCO-003, 2026-11-12) | Use at the foot keeps the trainee on the rungs; forward climbs 1.75 m in 4 s (climb clip); back returns to the deck, standing |
+
+## Movement design (LOCO-003): why the first walk read as a robot
+
+The owner found the trainee robotic (2026-11-12). The first clips moved the legs correctly but left out what the eye reads as a
+person, and the runtime switched clips by speed thresholds. What was changed, and the reason for each:
+
+| finding | change | source |
+| --- | --- | --- |
+| The pelvis travelled as a rigid block: no rotation, no drop, no side shift | walk and run carry the gait determinants: pelvic rotation ±4° (run ±6°), pelvic list ±4° (swing hip drops in single support), lateral shift over the stance foot 2.0 cm (run 1.0 cm) | Saunders, Inman & Eberhart, *J Bone Joint Surg* 35-A (1953), the six determinants of gait |
+| Flat feet planted and lifted like stamps | heel strike rolling down about the heel (10° toes up), flat foot, heel rise about the ball to 22° at toe-off (run 8° / 28°); the source holds a foot still only while flat, so contact slip stays 0.0 mm | Perry & Burnfield, *Gait Analysis* (2010), ankle rockers |
+| The arms swung a quarter cycle late (a sine against the legs' cosine) | each arm swings with the opposite leg, further forward than back; the elbow bends as the arm comes forward; the thorax turns against the pelvis (4.5°, run 8°); the head keeps facing ahead | Perry & Burnfield; Collins et al., *Proc R Soc B* 276 (2009), arm swing |
+| The pelvis dipped 9 cm in double support (knees bent, a crouching walk) | the flat foot passes under the hip at 25 % of the walk cycle, so the leading heel and the trailing toe are equally far from it: 2.7 cm of vertical travel, in the range of normal walking; the run rides higher with less tuck | inverted-pendulum walking, Kuo, *Science* 309 (2005) |
+| Walk and run were swapped at 1.28 m/s with a crossfade: two cycles of different length crossfaded scissor the legs, and the run played in slow motion just above the switch | an AnimationTree blends idle, walk and run by floor speed (walk→run over 1.3–1.9 m/s, around the Froude 0.5 walk-run change of 1.5 m/s at 0.50 g) with one shared gait phase that advances by distance over the blended stride, so the feet of both cycles strike together | the dynamic similarity of gaits, Alexander, *Physiol Rev* 69 (1989); Kram, Domingo & Ferris, *J Exp Biol* 200 (1997) for reduced gravity |
+| The body stayed bolt upright while speeding up, braking and turning | the model leans about its soles into its horizontal acceleration, tan θ = a / g with g the deck's support load, × 0.7, at most 12°, smoothed over 0.15 s: at 0.5 g the same push leans twice as far as on Earth, which is physics the visitor can see | |
+
+The values are PROTOTYPE display values (`GAIT` in `src/wayfarer/human_system.py`, `[locomotion]` in `data/characters.toml`),
+within normal adult ranges, not motion capture. The EVA suit keeps the plain clip player; its one walk pose for the suit fit uses
+the new walk.
+
+Not done, and the next steps if the walk still reads stiff: foot IK on the curved deck (the stance follows the clip, not the
+surface); the head turning toward where the camera looks (a LookAtModifier3D on the head bone); start and stop clips (a first step
+and a settling step instead of the blend from idle); motion-captured clips retargeted through the existing solver
+(`build/human.py` reads any armature through a bone map), for example a CC0 library, which would replace the procedural source.
 
 ## Explore Exterior: magnetic boots in drift
 
@@ -98,8 +134,8 @@ every key marked *setup* themselves, and the suggestion applies only when they p
 | context | key | action | note |
 | --- | --- | --- | --- |
 | excursion | W/A/S/D | walk (camera-relative, *setup*) (camera-relative) | `player.move_*` |
-| excursion | Shift | run (*setup*) | `exc.run`, held, pad L3 |
-| excursion | Space | jump (*setup*) | `exc.jump`, pad RB: pad A is `ui.confirm` |
+| excursion | Shift | run (*setup*) | `exc.run`, held, pad L3; touch: the stick at its rim |
+| excursion | Space | jump (*setup*) | `exc.jump`, pad RB: pad A is `ui.confirm`; touch: Jump button |
 | excursion | C (also V) | third / first person | `exc.view`; the brief's camera key stays C, V kept for old habits |
 | excursion | R | training reset | `exc.reset` |
 | evaops | W/A/S/D | walk on the boots, thrust when flying | `evaops.fwd/back/left/right` share the excursion moves |
@@ -123,6 +159,7 @@ boots walk, release and hand over to thrust.
 
 - Every value in both tables, the walkway and the boot pad are PROTOTYPE: no owner row defines crew locomotion speeds, suit boots or
   a magnetic walkway. FLIGHT_EVA HOLD.
+- The LOCO-003 gait and lean values (above) await the owner's hands-on review.
 - Foot IK on the curved deck and a per-boot foot placement: the stance follows the clip, not the surface, so a foot on a facet edge can
   float up to the 8 mm chord sag of the 64-sided colliders.
 - The suit has no run or jump of its own (it uses the unsuited shared actions under the burn presets); a suited hop needs suit mobility data.

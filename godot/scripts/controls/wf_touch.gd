@@ -581,7 +581,7 @@ func _draw_pad() -> void:
 		pad.draw_circle(base + stick * STICK_R, KNOB_R, Color(0.94, 0.62, 0.15, 0.55 if stick_touch >= 0 else 0.25))
 		if stick_touch < 0:
 			hint.visible = true
-			hint.text = "move" if move == "2d" else "up / down"
+			hint.text = str(state.get("stick_hint", "move" if move == "2d" else "up / down"))
 			hint.position = base + Vector2(-hint.get_combined_minimum_size().x / 2.0, STICK_R + 6.0)
 	if _turn_on():
 		var rb := rstick_base if rstick_touch >= 0 else rstick_rest
@@ -717,7 +717,7 @@ func _show_panel() -> void:
 			if state.has("help"):
 				lines += state.help
 			elif move == "2d":
-				lines.append("Left thumb: stick — walk on the deck (spin gravity presses you onto it).")
+				lines.append("Left thumb: stick — walk on the deck (spin gravity presses you onto it); push it to the rim to run.")
 			elif move == "1d":
 				lines.append("Left thumb: stick up / down — along the line or the rungs.")
 			else:

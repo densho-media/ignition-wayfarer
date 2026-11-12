@@ -122,11 +122,13 @@ func floor_speed() -> float:
 	var n := actor.floor_normal
 	return (v - n * v.dot(n)).length()
 
-## The clip for the current physics state, and its rate. Called every rendered frame.
-func animate() -> void:
+## The clip for the current physics state, and its rate. Called every rendered frame (dt: the frame time). With the gait tree (LOCO-003)
+## the deck clips are one speed-indexed blend; otherwise the clip is picked by speed and crossfaded (LOCO-001).
+func animate(dt := 1.0 / 60.0) -> void:
 	if not rig.ok:
 		return
 	var v := floor_speed()
+	_lean_step(dt)
 	match state:
 		S.TAKEOFF:
 			_play("jump", 1.0, 0.08)
@@ -136,6 +138,13 @@ func animate() -> void:
 			_play("land", 1.0, 0.06)
 		_:
 			var fwd_v := actor.linear_velocity.dot(heading)
+			if rig.tree != null:
+				if v < 0.08 and absf(turn_now) > deg_to_rad(25.0):
+					_play("step", 1.0, 0.2)
+				else:
+					rig.gait(v, backpedal and fwd_v < 0.0, dt, num("walk_run_from_m_s", 1.3), num("walk_run_to_m_s", 1.9))
+					clip = rig.current
+				return
 			if v < 0.08:
 				if absf(turn_now) > deg_to_rad(25.0):
 					_play("step", 1.0, 0.2)
@@ -148,6 +157,30 @@ func animate() -> void:
 			else:
 				_play("walk", rig.rate_for("walk", v), 0.25)
 
+## LOCO-003: the whole body leans into its horizontal acceleration (speeding up, braking, the centripetal pull of a turn) as a runner's
+## does: tan(lean) = a / g with g the deck's support load, so at 0.5 g the same push leans twice as far as on Earth. Smoothed over
+## about 0.15 s and capped; only while the feet are on the deck.
+var lean := Vector3.ZERO           # rotation vector (axis * angle, rad) of the model about its soles
+var _v_prev := Vector3.INF
+var _acc := Vector3.ZERO
+func _lean_step(dt: float) -> void:
+	if dt <= 0.0:
+		return
+	var up := deck_up()
+	var v := actor.linear_velocity - up * actor.linear_velocity.dot(up)
+	if _v_prev == Vector3.INF:
+		_v_prev = v
+	var a := (v - _v_prev) / dt
+	_v_prev = v
+	_acc = _acc.lerp(a - up * a.dot(up), 1.0 - exp(-dt / 0.15))
+	var want := Vector3.ZERO
+	if state in [S.GROUND, S.LAND] and actor.standing:
+		var g := maxf(actor.floor_load, 0.5)
+		var ang := minf(atan(_acc.length() / g) * num("lean_gain", 0.7), deg_to_rad(num("lean_max_deg", 12.0)))
+		if _acc.length() > 0.05:
+			want = up.cross(_acc.normalized()) * ang
+	lean = lean.lerp(want, 1.0 - exp(-dt / 0.1))
+
 func _play(c: String, rate: float, blend: float) -> void:
 	clip = c
 	rig.play(c, rate, blend)
@@ -158,7 +191,10 @@ func model_transform() -> Transform3D:
 	var z := heading
 	var x := up.cross(z).normalized()
 	var half: float = float(actor.profile["height_m"]) * 0.5
-	return Transform3D(Basis(x, up, z), actor.global_position - up * half)
+	var b := Basis(x, up, z)
+	if lean.length() > 1e-5:
+		b = Basis(lean.normalized(), lean.length()) * b
+	return Transform3D(b, actor.global_position - up * half)
 
 func record() -> Dictionary:
 	return {"state": S.keys()[state], "clip": clip, "speed": snappedf(floor_speed(), 0.01), "standing": actor.standing,

@@ -35,7 +35,8 @@ Two experiences consume the generated package; neither computes spacecraft geome
   styles (`representation.py holo-style`, `shots/m5_subsystems.toml`). A picked part shows its source name, geometry status, source
   status and source reference; a PROTOTYPE geometry label is never promoted by a sourced reference.
 - **Explore Interior** (`godot/scenes/excursion.tscn`, "Station-to-ring excursion" below): the Godot project's main scene, on the
-  DOCKED package and the rig. Start puts the newcomer on ring A's deck in spin gravity (walk, run, jump, LOCO-001); the full station
+  DOCKED package and the rig. Start puts the newcomer on ring A's deck in spin gravity (walk, run, jump, LOCO-001; working doors, the ladder and the
+  speed-blended gait, LOCO-003); the full station
   excursion is its other start. **Explore Exterior** (`godot/scenes/eva_ops.tscn`, [EVA_OPERATIONS.md](EVA_OPERATIONS.md)) starts the
   Y155 suit on a magnetic training walkway in drift (LOCO-002). Both: [LOCOMOTION.md](LOCOMOTION.md).
 

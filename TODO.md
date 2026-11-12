@@ -481,7 +481,8 @@ candidates of all nine classes are separate accessory assets (docs/ACCESSORIES.m
   starts the Y155 suit on a PROTOTYPE magnetic walkway (per-boot attach, bounded pull and friction, gait, release, push-off; 10 EVA
   checks), the characters ride in the browser package (`workflow.py play-characters`). Open: the owner's hands-on review and a decision on
   the magnetic boots and walkway (PROTOTYPE, no owner row; FLIGHT_EVA HOLD); the locomotion speeds, jump and camera values; foot IK on
-  the deck and per-boot foot placement; a hands-on run of both experiences by touch on a real phone (MOB-002 touch controls for Explore Exterior exist) and in Firefox and Safari.
+  the deck and per-boot foot placement; the LOCO-003 movement feel (new walk and run, speed-blended gait, lean, run on touch, doors,
+  ladder, 2026-11-12) to be played and judged; a hands-on run of both experiences by touch on a real phone (MOB-002 touch controls for Explore Exterior exist) and in Firefox and Safari.
   **Done when:** the owner has played both and accepted or changed the values and the boots.
 
 - [ ] **K01 — Set the pair's approved appearance. OWNER REVIEW; AFTER C01.** Consume Tale WTF-16, Art Style and Fashion for the

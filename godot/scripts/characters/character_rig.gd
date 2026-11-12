@@ -18,6 +18,15 @@ var clip_speed := {}              # clip -> authored travel speed (m/s), from th
 var current := ""
 var reversed := false
 var meta := {}                    # characters.json / eva_characters.json record of this character (loop flags, actions)
+# LOCO-003 gait tree (enable_gait(), Explore Interior only): idle, walk and run blended by the measured floor speed with one shared gait
+# phase, so the feet of the walk and the run strike together while the two mix (a speed-indexed blend space with phase-synchronised
+# cycles, the usual game technique; a plain crossfade between two cycles of different length scissors the legs). Every other clip goes
+# through a crossfading transition. The EVA suit keeps the plain AnimationPlayer.
+var tree: AnimationTree = null
+var phase := 0.0                  # 0..1 of the gait cycle; 0 = the right heel strikes
+var gait_w := 0.0                 # walk 0 .. run 1
+var move_w := 0.0                 # idle 0 .. moving 1
+const ACT_FADE := 0.2
 
 ## path: res:// GLB; record: the character's entry of characters.json (its "actions" give the loop flags).
 func setup(path: String, record: Dictionary) -> bool:
@@ -65,13 +74,92 @@ static func _strip_root(a: Animation) -> float:
 			var v := 0.0
 			if n > 1 and a.length > 0.0:
 				var d: Vector3 = a.track_get_key_value(i, n - 1) - a.track_get_key_value(i, 0)
-				d.y = 0.0                     # glTF +Y up: the vertical part is not travel
+				d.y = 0.0                     # glTF +Y up: the vertical part is not travel over the floor
 				# the last key is one frame short of the cycle: travel over (n - 1) frames in (n - 1) / n of the loop
 				var t1: float = a.track_get_key_time(i, n - 1) - a.track_get_key_time(i, 0)
-				v = d.length() / t1 if t1 > 0.0 else 0.0
+				var travel := d.length()
+				if travel < 1e-3:
+					# a vertical clip (the ladder climb carries the body up +Y): its travel is the climb (LOCO-003; read as 0 before, the
+					# climb then played at the 0.05 m/s floor, ten times too fast)
+					travel = absf(float((a.track_get_key_value(i, n - 1) - a.track_get_key_value(i, 0)).y))
+				v = travel / t1 if t1 > 0.0 else 0.0
 			a.remove_track(i)
 			return v
 	return 0.0
+
+## Build the gait tree over the AnimationPlayer's (root-stripped) clips; false if the idle, walk or run clip is missing.
+func enable_gait() -> bool:
+	if not ok or not (has("idle") and has("walk") and has("run")):
+		return false
+	var bt := AnimationNodeBlendTree.new()
+	var add_anim := func(name: String, clip: String) -> void:
+		var a := AnimationNodeAnimation.new()
+		a.animation = StringName(clip)
+		bt.add_node(name, a)
+	add_anim.call("walk", "walk")
+	add_anim.call("run", "run")
+	add_anim.call("idle", "idle")
+	for n in ["walk", "run"]:
+		bt.add_node(n + "_seek", AnimationNodeTimeSeek.new())
+		bt.connect_node(n + "_seek", 0, n)
+	bt.add_node("gait", AnimationNodeBlend2.new())
+	bt.connect_node("gait", 0, "walk_seek")
+	bt.connect_node("gait", 1, "run_seek")
+	bt.add_node("move", AnimationNodeBlend2.new())
+	bt.connect_node("move", 0, "idle")
+	bt.connect_node("move", 1, "gait")
+	var tr := AnimationNodeTransition.new()
+	tr.xfade_time = ACT_FADE
+	var others: Array = []
+	for n in anim.get_animation_list():
+		if not str(n) in ["walk", "run", "idle", "RESET"]:
+			others.append(str(n))
+	tr.input_count = 1 + others.size()
+	tr.set_input_name(0, "loco")
+	for i in others.size():
+		var c: String = others[i]
+		tr.set_input_name(i + 1, c)
+		tr.set_input_reset(i + 1, true)
+		add_anim.call("a_" + c, c)
+		bt.add_node("ts_" + c, AnimationNodeTimeScale.new())
+		bt.connect_node("ts_" + c, 0, "a_" + c)
+	bt.add_node("act", tr)
+	bt.connect_node("act", 0, "move")
+	for i in others.size():
+		bt.connect_node("act", i + 1, "ts_" + others[i])
+	bt.connect_node("output", 0, "act")
+	tree = AnimationTree.new()
+	tree.name = "GaitTree"
+	anim.get_parent().add_child(tree)
+	tree.anim_player = tree.get_path_to(anim)
+	tree.root_node = tree.get_path_to(anim.get_node(anim.root_node))
+	tree.tree_root = bt
+	anim.stop()
+	tree.active = true
+	return true
+
+## The gait at floor speed v (m/s; back: walking backward), for one rendered frame of dt s. The phase advances by the distance walked over
+## the blended stride, so neither cycle's planted foot slides by more than the two strides differ.
+func gait(v: float, back: bool, dt: float, run_from: float, run_to: float) -> void:
+	if tree == null:
+		return
+	var lw := length("walk")
+	var lr := length("run")
+	gait_w = 0.0 if back else smoothstep(run_from, run_to, v)
+	move_w = smoothstep(0.03, 0.35, v)
+	var stride := lerpf(float(clip_speed.get("walk", 1.0)) * lw, float(clip_speed.get("run", 2.4)) * lr, gait_w)
+	phase = fposmod(phase + (-1.0 if back else 1.0) * v * dt / maxf(stride, 0.05), 1.0)
+	tree.set("parameters/walk_seek/seek_request", phase * lw)
+	tree.set("parameters/run_seek/seek_request", phase * lr)
+	tree.set("parameters/gait/blend_amount", gait_w)
+	tree.set("parameters/move/blend_amount", move_w)
+	_act("loco")
+	current = "run" if gait_w > 0.5 and move_w > 0.5 else ("walk" if move_w > 0.5 else "idle")
+	reversed = back
+
+func _act(input: String) -> void:
+	if str(tree.get("parameters/act/current_state")) != input:
+		tree.set("parameters/act/transition_request", input)
 
 func has(clip: String) -> bool:
 	return anim != null and anim.has_animation(clip)
@@ -82,6 +170,14 @@ func length(clip: String) -> float:
 ## Play `clip` (crossfading over `blend` s) at `rate` x its authored speed; negative rate plays it backwards (walking backward).
 func play(clip: String, rate := 1.0, blend := 0.2) -> void:
 	if not ok or not has(clip):
+		return
+	if tree != null:
+		if clip in ["walk", "run", "idle"]:
+			return                     # the gait tree plays these (gait())
+		tree.set("parameters/ts_%s/scale" % clip, maxf(absf(rate), 0.05) * signf(rate) if rate != 0.0 else 0.05)
+		_act(clip)
+		current = clip
+		reversed = rate < 0.0
 		return
 	var back := rate < 0.0
 	if clip != current or back != reversed:
@@ -102,6 +198,8 @@ func finished() -> bool:
 	return anim == null or not anim.is_playing() or (anim.current_animation_position >= anim.current_animation_length - 1e-3 and not reversed)
 
 func position_of(clip: String) -> float:
+	if tree != null:
+		return phase * length(clip) if clip in ["walk", "run"] else 0.0
 	return anim.current_animation_position if current == clip and anim != null else 0.0
 
 ## World position of a bone's head (for foot checks).

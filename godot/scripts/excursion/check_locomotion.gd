@@ -162,6 +162,49 @@ func run(host: WfExcursion) -> void:
 	if h.actor.global_position.distance_to(h.spawn_at) > 0.15 or h.resets != 1:
 		fail("the training reset left the trainee %.2f m from the landing" % h.actor.global_position.distance_to(h.spawn_at))
 	h.walk_override = Vector3.INF
+	# LOCO-003 doors: every door opened on the way slid its visible leaf, and the leaf of a shut door sits where its collider is
+	var moved := 0
+	var opened := 0
+	for id in h.circ_doors:
+		var d: Dictionary = h.circ_doors[id]
+		if d["ring"] != 0:
+			continue
+		if d["node"] == null:
+			fail("door %s has no visible leaf" % id)
+			continue
+		if d["target"] >= 1.0:
+			opened += 1
+			if (d["node"] as Node3D).position.distance_to(d["rest"]) > 0.5 * float(d["travel"]):
+				moved += 1
+	notes["doors"] = {"opened": opened, "leaf_slid": moved}
+	if opened != moved:
+		fail("%d doors opened but only %d leaves slid open" % [opened, moved])
+	# LOCO-003 ladder: Use at the foot, then forward (the real key action) climbs; back climbs down onto the deck again
+	await _ticks(30)
+	var u := h.use()
+	if u != "ladder":
+		fail("Use at the landing did not take the ladder (%s)" % u)
+	await _ticks(10)
+	var s0 := h.ls
+	if h.move != "LINE":
+		fail("taking the ladder left the trainee on the deck")
+	Input.action_press("player.move_forward")
+	await _ticks(240)
+	Input.action_release("player.move_forward")
+	notes["ladder"] = {"climbed_m": snappedf(s0 - h.ls, 0.01), "move": h.move, "clip": h.char_rig.current}
+	if h.move != "LINE" or s0 - h.ls < 1.0:
+		fail("forward on the ladder climbed %.2f m in 4 s (%s)" % [s0 - h.ls, h.move])
+	Input.action_press("player.move_back")
+	for i in 900:
+		await _ticks(1)
+		if h.move == "WALK":
+			break
+	Input.action_release("player.move_back")
+	if h.move != "WALK":
+		fail("back on the ladder did not return to the deck")
+	await _ticks(60)
+	if h.move == "WALK" and not h.actor.standing:
+		fail("not standing after climbing down")
 	if h.max_jump > WfExcursionCheck.MAX_JUMP_M:
 		fail("the body jumped %.3f m beyond its own motion in one step (%s)" % [h.max_jump, h.max_jump_at])
 	var out := {"result": "PASS" if fails.is_empty() else "FAIL", "fails": fails, "notes": notes, "max_jump_m": snappedf(h.max_jump, 0.0001),

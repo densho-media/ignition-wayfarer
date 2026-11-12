@@ -165,4 +165,11 @@ turn_rate_deg_s = 360.0              # the body turns toward the requested direc
 jump_dv_m_s = 1.4                    # take-off speed along the body's up: 0.20 m of rise at 0.50 g (a light hop; the corridors are 2.1 m)
 camera_distance_m = 2.4
 camera_height_m = 0.55               # follow point above the body centre (about the shoulders)
+# LOCO-003 movement feel (docs/LOCOMOTION.md "Movement design"; PROTOTYPE display values). The walk blends into the run between these
+# floor speeds (the walk-run change of dynamically similar gaits falls near Froude 0.5, 1.5 m/s at 0.50 g); the body leans into its
+# horizontal acceleration by atan(a / g) times lean_gain, at most lean_max_deg.
+walk_run_from_m_s = 1.3
+walk_run_to_m_s = 1.9
+lean_gain = 0.7
+lean_max_deg = 12.0
 
