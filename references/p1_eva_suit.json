@@ -334,14 +334,14 @@
       "walk": {
        "l": {
         "abduct_deg": 24,
-        "flex_deg": 0,
-        "hand_moved_mm": 206.2,
+        "flex_deg": 10,
+        "hand_moved_mm": 207.6,
         "contacts_left": 0
        },
        "r": {
         "abduct_deg": 24,
         "flex_deg": 0,
-        "hand_moved_mm": 212.4,
+        "hand_moved_mm": 218.8,
         "contacts_left": 0
        }
       },
@@ -349,7 +349,7 @@
        "l": {
         "abduct_deg": 12,
         "flex_deg": 10,
-        "hand_moved_mm": 128.9,
+        "hand_moved_mm": 128.6,
         "contacts_left": 0
        }
       },
@@ -2347,7 +2347,7 @@
      "bone": "spine_03"
     },
     {
-     "name": "MARK_INSTRUCTOR_Suit_GUC",
+     "name": "MARK_INSTRUCTOR_Suit_ShipName",
      "assembly": "MARKINGS",
      "part_id": "WAYFARER_EVA_Y155/MARKINGS/SAFETY_MARKINGS",
      "job": "official marking (small, functional lettering)",
@@ -2846,7 +2846,7 @@
     "EVA_INSTRUCTOR_Arm_Band_r": 240,
     "N2_INSTRUCTOR_Reserve_Label": 1308,
     "LS_INSTRUCTOR_Label": 4044,
-    "MARK_INSTRUCTOR_Suit_GUC": 3488,
+    "MARK_INSTRUCTOR_Suit_ShipName": 2904,
     "MARK_INSTRUCTOR_Suit_ID_Plate": 8,
     "MARK_INSTRUCTOR_Role": 3976,
     "CHAR_INSTRUCTOR_Eyebrow001": 124,
@@ -3255,13 +3255,13 @@
        "l": {
         "abduct_deg": 30,
         "flex_deg": 10,
-        "hand_moved_mm": 246.0,
+        "hand_moved_mm": 239.1,
         "contacts_left": 0
        },
        "r": {
         "abduct_deg": 36,
         "flex_deg": 0,
-        "hand_moved_mm": 292.4,
+        "hand_moved_mm": 300.5,
         "contacts_left": 0
        }
       },
@@ -5275,7 +5275,7 @@
      "bone": "spine_03"
     },
     {
-     "name": "MARK_NEWCOMER_Suit_GUC",
+     "name": "MARK_NEWCOMER_Suit_ShipName",
      "assembly": "MARKINGS",
      "part_id": "WAYFARER_EVA_Y155/MARKINGS/SAFETY_MARKINGS",
      "job": "official marking (small, functional lettering)",
@@ -5774,7 +5774,7 @@
     "EVA_NEWCOMER_Arm_Band_r": 240,
     "N2_NEWCOMER_Reserve_Label": 1308,
     "LS_NEWCOMER_Label": 4044,
-    "MARK_NEWCOMER_Suit_GUC": 3488,
+    "MARK_NEWCOMER_Suit_ShipName": 2904,
     "MARK_NEWCOMER_Suit_ID_Plate": 8,
     "MARK_NEWCOMER_Role": 2868,
     "CHAR_NEWCOMER_Eyebrow001": 124,

@@ -22,6 +22,8 @@ const CLOSURE_S := 1.5           # PROTOTYPE display: a hatch, gate or door from
 const USE_REACH_S := 2.6         # PROTOTYPE: a hatch on the line is worked from its panel at the nearest rail stop, this far along the line
 const BRANCH_REACH_S := 0.8       # the ring B branch is taken from this far along the trunk (the hands carry the body to it)
 const USE_REACH_M := 1.4         # a corridor door or the ladder foot from this far
+const TOUCH_RUN_PUSH := 0.9     # LOCO-003: the touch stick this far out (of its radius) runs
+const LADDER_LOOK_DOWN := 0.5    # LOCO-003: forward descends the ladder only with the view this far down the tube (cos 60 deg)
 const LOOK_SENS := 0.0035
 const EYE_UP := 0.62             # eye above the body centre, along the body axis (display)
 const STATION_MOVE_S := 4.0      # PROTOTYPE display: the station's stand-off move at undock / dock
@@ -66,6 +68,8 @@ var move := "LINE"                # LINE or WALK
 var line: WfLine = null
 var ls := 0.0
 var lv := 0.0                     # the hands' speed along the line (m/s, + toward increasing s)
+var _lv_before := 0.0            # the line speed at the start of this step (arriving at the deck end while still moving down steps off)
+var ladder_dir := 0.0             # LOCO-003: on the ladder, the way forward moves along s (-1 climbs, +1 descends; 0 off the ladder)
 var coasting := false
 var walk_zone := ""
 var yaw := 0.0
@@ -247,10 +251,18 @@ func _mechanisms(by_name: Dictionary) -> void:
 	_apply_mechanisms()
 
 func _circ_doors(by_name: Dictionary) -> void:
+	# The package names its nodes by export id (WF_...); the rig names a door leaf by its source object, so map through the manifest.
+	# (Looking the leaf up by its source name found nothing: E dropped the invisible collider and the leaf never moved, LOCO-003.)
+	var by_source := {}
+	for record in manifest["nodes"]:
+		if by_name.has(record["node"]):
+			by_source[str(record.get("source_name", ""))] = by_name[record["node"]]
 	for k in 2:
 		var c: Dictionary = stages["circuit"]["RING_" + "AB"[k]]
 		for d in c["doors"]:
-			var node: Node3D = by_name.get(str(d["name"]))
+			var node: Node3D = by_source.get(str(d["name"]), by_name.get(str(d["name"])))
+			if node == null:
+				push_error("LOCO-003: circulation door %s has no leaf in the package" % d["id"])
 			circ_doors[d["id"]] = {"node": node, "rest": node.position if node != null else Vector3.ZERO, "travel": float(d["travel_m"]),
 				"value": 0.0, "target": 0.0, "collider": null, "rec": d, "ring": k}
 
@@ -441,6 +453,8 @@ func _character() -> void:
 		tag.modulate = Color(1.0, 0.35, 0.25)
 		body_vis.add_child(tag)
 	body_vis.add_child(char_rig)
+	if char_rig.ok and not char_rig.enable_gait():                # LOCO-003: idle / walk / run as one speed-indexed, phase-synced blend
+		push_warning("LOCO-003: no gait tree (idle, walk or run clip missing): clips crossfade by speed")
 	loco = WfLocomotion.new(actor, char_rig, loco_params)
 
 ## LOCO-001 development start: the trainee stands on ring A's deck at the foot of its crew-tube ladder (the landing in the landing sector),
@@ -786,6 +800,19 @@ func _line_cmd() -> float:
 	if absf(fwd) < 1e-6:
 		return 0.0
 	var t := line.tangent(ls)
+	# LOCO-003: on the ladder (the crew tube's radial run down to the landing well) forward climbs and back descends unless the view looks
+	# clearly down the tube; the choice holds while the body moves. An access line runs from the spine (s = 0) down to the deck, so
+	# climbing is toward smaller s. The old rule (the sign of the view along the line) sent W down whenever the view was level or a
+	# little lowered, as it is at the ladder foot, so the trainee stepped straight back onto the deck instead of climbing.
+	if line.zone != "SHIP" and absf(lv) > 1e-9 and ladder_dir != 0.0:
+		return fwd * ladder_dir                          # still moving on from the ladder (into the tube elbows too): no reversal
+	if on_ladder():
+		if absf(lv) > 1e-9:
+			ladder_dir = signf(lv) * signf(fwd)          # arriving on the ladder already moving: keep going the same way
+		else:
+			ladder_dir = 1.0 if t.dot(-look_basis().z) > LADDER_LOOK_DOWN else -1.0
+		return fwd * ladder_dir
+	ladder_dir = 0.0
 	var lk := -look_basis().z
 	var sgn := signf(t.dot(lk))
 	if sgn == 0.0:
@@ -834,6 +861,10 @@ func _limits() -> Array:
 			lo = float(c[1])
 	return [lo, hi]
 
+## On the ladder: an access line's radial run, from its top down to the deck.
+func on_ladder() -> bool:
+	return move == "LINE" and line.zone != "SHIP" and line.marks.has("run") and ls >= float(line.marks["run"]) - 1e-6
+
 func _brake(v_end: float, gap: float, dt: float) -> float:
 	var ad := line.accel * dt
 	return maxf(0.0, -ad + sqrt(ad * ad + v_end * v_end + 2.0 * line.accel * maxf(gap, 0.0)))
@@ -842,6 +873,7 @@ func _step_line(dt: float) -> void:
 	# body_tour._step_ladder, both ways: the hands carry the body at the review pace toward the command, braked to rest at the closures'
 	# limits and slowed before each turn so the velocity never changes faster than the line's accel; across a coast the speed holds.
 	_field_for_line()
+	_lv_before = lv
 	var pace: float = stages["tube"]["review_speed_m_s"]
 	var cmd := _line_cmd()
 	var lim := _limits()
@@ -916,7 +948,9 @@ func _line_transitions(cmd: float) -> void:
 			enter_line("BOARD", float(lines["BOARD"].marks["RING_" + "AB"[k]]))
 			lv = 0.0
 			return
-		if ls >= line.length() - 1e-6:
+		# onto the deck only by climbing down off the ladder's foot: taken from the deck (E at the foot) the body starts there, and must
+		# stay on the rungs until the trainee climbs (LOCO-003; it stepped straight back onto the deck before); arriving from above it steps off
+		if ls >= line.length() - 1e-6 and (cmd > 0.0 or _lv_before > 0.0):
 			enter_walk(line.zone)
 
 func _step_walk(dt: float) -> void:
@@ -933,7 +967,10 @@ func _step_walk(dt: float) -> void:
 		d -= b.z * f
 		d += b.x * r
 		back_only = f < -0.1 and absf(r) < 0.1
-		run = WfInput.held("exc.run") and f > 0.1
+		# LOCO-003: Run (held) in any direction but straight back; on a touch screen the stick pushed to its rim runs (the phone has no
+		# Shift, so the walk was all a phone player ever got)
+		var push := Vector2(r, f).length()
+		run = not back_only and push > 0.1 and (WfInput.held("exc.run") or (WfInput.device == "touch" and push >= TOUCH_RUN_PUSH))
 	loco.step(dt, d, run, back_only, jump_queued)
 	jump_queued = false
 	# the circuit record: the ring angle the body has covered
@@ -1215,8 +1252,8 @@ func _process(dt: float) -> void:
 ## in the climbing clip on a ladder run and the floating posture elsewhere.
 func _body_visual(up: Vector3) -> void:
 	if move == "WALK":
+		loco.animate(get_process_delta_time())
 		body_vis.transform = loco.model_transform()
-		loco.animate()
 		return
 	var t := line.tangent(ls)
 	var fwd := t - up * t.dot(up)
@@ -1655,9 +1692,9 @@ func _goal_text() -> String:
 	if move == "WALK":
 		var rec: Dictionary = progress[walk_zone]
 		if learning != null and learning.done.has("LS-UJ011-DEBRIEF"):     # UJ-011: checked out, the trainee leaves the way they came
-			return "DEBRIEF DONE: leave before First Ignition. Walk to the landing well, face the ladder and press %s, climb the crew tube (%s, look up), cross the drum to the trunk, ask the ship to dock (%s) and float back to the station." % [key("exc.use"), mv, key("exc.ops")]
+			return "DEBRIEF DONE: leave before First Ignition. Walk to the landing well, face the ladder and press %s, climb the crew tube (%s: forward climbs), cross the drum to the trunk, ask the ship to dock (%s) and float back to the station." % [key("exc.use"), mv, key("exc.ops")]
 		if rec["circuit"]:
-			return "CIRCUIT COMPLETE. Walk back to the landing well, face the ladder and press %s, then climb (%s, look up)." % [key("exc.use"), mv]
+			return "CIRCUIT COMPLETE. Walk back to the landing well, face the ladder and press %s, then climb (%s: forward climbs)." % [key("exc.use"), mv]
 		if start_mode == "RING":
 			return "RING %s, spin gravity %.2f g. %s%s%s%s walk, hold %s to run, %s jump, mouse look, %s camera, %s training reset. Doors and the ladder up to the full excursion: %s." % [
 				walk_zone.right(1), actor.field_now.length() / 9.80665, key("player.move_forward"), key("player.move_left"), key("player.move_back"),
@@ -1688,7 +1725,7 @@ func _goal_text() -> String:
 				return "RESTRAINED in the synchronized drum. %s: it shuts the tube door, despins to the spine and opens the port gate. Or go on out to the ring." % key("exc.use")
 			return "Transfer drum cycling (%s): stay restrained." % m
 		return "TRANSFER DRUM %s. Pull yourself to the restraint station (%s)%s." % ["AB"[k], mv, " - tucked: ring B's 0.9 m port" if tucked() else ""]
-	return "CREW TUBE %s. Climb the ladder rung by rung (%s; look down to descend, up to climb). Spin gravity grows toward the ring." % ["AB"[k], mv]
+	return "CREW TUBE %s. Climb the ladder rung by rung (%s: forward climbs, back climbs down). Spin gravity grows toward the ring." % ["AB"[k], mv]
 
 ## The short label of what E (the Use button) works now, "" when nothing is in reach (the same order as use()).
 func use_label() -> String:
@@ -1723,10 +1760,13 @@ func touch_state() -> Dictionary:
 	var u := use_label()
 	if u != "":
 		acts.append(["exc.use", u, "primary_game"])
+	if move == "WALK":
+		acts.append(["exc.jump", "Jump", "game"])     # LOCO-003: the phone had no jump; running is the stick pushed to its rim
 	if move == "LINE" and line.id == "BOARD" and ls > float(hatch["OUTER_HATCH"]["gate"][1]) and not ctl.busy():
 		acts.append(["exc.ops", "Ops · undock" if ctl.mode == "DOCKED" else "Ops · dock", "game"])
 	acts.append(["exc.view", "View", "nav"])
 	return {"move": "1d" if move == "LINE" else "2d", "look": true, "actions": acts, "utility": [["exc.map", "Map"]],
+		"stick_hint": ("climb / down" if on_ladder() else "up / down") if move == "LINE" else "move · rim runs",
 		"probe": touch_probe, "panels": [hud_goal, hud_prompt, ring_map]}
 
 ## The excursion state a browser check reads (-- --touch-probe).

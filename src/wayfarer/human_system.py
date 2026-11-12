@@ -124,27 +124,110 @@ def idle(H, a, fps):
     return dict(frames=out, loop=True, root_motion=False)
 
 
-def walk(H, a, fps):
-    """One gait cycle (two steps) at walk_speed_m_s and walk_cadence_steps_min: planted stance feet (60 % stance), swing arcs of
-    step_height_m, 2 cm pelvis bob, counter-swinging arms. Root motion along -Y."""
-    v = a['walk_speed_m_s']; T = 120.0/a['walk_cadence_steps_min']; n = round(T*fps); stride = v*T
-    l1, l2, la, _ = leg_lengths(H); reach = .985*(l1+l2); right = ch.frame(UP, FORWARD)[0]; out = []
+# LOCO-003 gait (docs/LOCOMOTION.md "Movement design"): the walk and the run carry Saunders, Inman and Eberhart's determinants of gait
+# (1953) that the first clips lacked, which is what made them read as a robot: pelvic rotation about the vertical, pelvic list (the swing
+# side's hip drops), lateral shift of the pelvis over the stance foot, the heel strike / flat foot / heel rise roll of the foot, the
+# thorax turning against the pelvis, and arms swinging in phase with the opposite leg. Angles are PROTOTYPE display values in the range
+# of normal adult gait (Perry & Burnfield, Gait Analysis, 2010), not mocap.
+GAIT = dict(
+    walk=dict(pelvis_yaw=4.0, pelvis_list=4.0, sway_m=.020, thorax=4.5, heel_up=10.0, toe_off=22.0, strike=.08, heel_off=.42,
+              arm=(6.0, 16.0), elbow=(14.0, .7), trunk=3.0, head=-3.0),
+    run=dict(pelvis_yaw=6.0, pelvis_list=5.0, sway_m=.010, thorax=8.0, heel_up=8.0, toe_off=28.0, strike=.05, heel_off=.20,
+             arm=(-4.0, 26.0), elbow=(72.0, .25), trunk=9.0, head=-6.0),
+)
+
+
+def _pivot_foot(plant, pitch, forward, up, lf, la, about):
+    """Ankle and toe direction of a foot planted with its flat-foot ankle at `plant`, pitched `pitch` deg (toes up +) about its floor
+    heel ('heel') or ball ('ball') point, so the pivot stays on the floor while the ankle lifts."""
+    c, sn = math.cos(math.radians(pitch)), math.sin(math.radians(pitch))
+    f2 = add(mul(forward, c), mul(up, sn)); u2 = add(mul(forward, -sn), mul(up, c))
+    lh, lb = lf*.25, lf*.75
+    if about == 'heel':
+        piv = sub(sub(plant, mul(forward, lh)), mul(up, la)); ank = add(piv, add(mul(f2, lh), mul(u2, la)))
+    else:
+        piv = sub(add(plant, mul(forward, lb)), mul(up, la)); ank = add(piv, add(mul(f2, -lb), mul(u2, la)))
+    return ank, f2
+
+
+def _foot(ph, st, g, plant_prev, plant_next, plant, lift_h, forward, up, lf, la, lift_pow=1.0):
+    """(ankle, toe direction, held) of one foot at its cycle phase: heel strike (rolling down about the heel), flat (held: the only frames
+    the source holds it still), heel rise (rolling up about the ball) and a swing from the toe-off pose to the next heel strike."""
+    if ph < g['strike']:
+        a, f = _pivot_foot(plant, g['heel_up']*(1-smooth(ph/g['strike'])), forward, up, lf, la, 'heel'); return a, f, False
+    if ph < g['heel_off']:
+        return plant, forward, True
+    if ph < st:
+        a, f = _pivot_foot(plant, -g['toe_off']*smooth((ph-g['heel_off'])/(st-g['heel_off'])), forward, up, lf, la, 'ball'); return a, f, False
+    s = (ph-st)/(1-st)
+    a0, _ = _pivot_foot(plant_prev, -g['toe_off'], forward, up, lf, la, 'ball')
+    a1, _ = _pivot_foot(plant_next, g['heel_up'], forward, up, lf, la, 'heel')
+    pitch = -g['toe_off']*(1-smooth(s/.5)) if s < .5 else g['heel_up']*smooth((s-.5)/.5)
+    c, sn = math.cos(math.radians(pitch)), math.sin(math.radians(pitch))
+    return add(lerp(a0, a1, smooth(s)), mul(up, lift_h*math.sin(math.pi*s)**lift_pow)), add(mul(forward, c), mul(up, sn)), False
+
+
+def _body(j, yaw, lst, sway, thorax, up, forward, right):
+    """Pelvis rotation (yaw about up, + turns the right hip forward), list (+ drops the left hip) and the lateral shift of the whole body
+    (+ toward the right); the shoulders and arms turn against the pelvis by `thorax` deg about the spine. The head keeps facing ahead."""
+    hc = j['hip_c']; sh = mul(right, sway); skip = ('head_up', 'face')
+    for k in list(j):
+        if k not in skip and isinstance(j[k], tuple) and len(j[k]) == 3 and all(isinstance(x, float) for x in j[k]):
+            j[k] = add(j[k], sh)
+    hc = j['hip_c']
+    for side in SIDES:
+        v = sub(j[f'hip_{side}'], hc)
+        v = ch.rot(v, up, yaw); v = ch.rot(v, forward, -lst)
+        j[f'hip_{side}'] = add(hc, v)
+    piv = j['chest']
+    for side in SIDES:
+        for part in ('shoulder', 'elbow', 'wrist', 'hand'):
+            k = f'{part}_{side}'
+            j[k] = add(piv, ch.rot(sub(j[k], piv), up, thorax))
+    return j
+
+
+def _gait(H, a, fps, v, T, st, lift_h, g, height_cap, lift_pow=1.0, mid=None):
+    """One gait cycle (two steps) at speed v and cycle time T, stance fraction st: the right foot strikes at t = 0, the left at T/2. The
+    flat foot passes under the hip at phase `mid` (default st / 2); a walk's 0.25 puts the leading heel and the trailing toe equally far
+    from the hip in double support, so the pelvis dips about 4 cm there instead of 9."""
+    mid = st/2 if mid is None else mid
+    n = round(T*fps); stride = v*T
+    l1, l2, la, lf = leg_lengths(H); reach = .985*(l1+l2); right = ch.frame(UP, FORWARD)[0]; out = []
+    hw = ch.P['hip_x']*H*(1.0 if st >= .5 else .8)
     for i in range(n):
-        t = i*T/n; y = v*t; contacts = []; ank = {}
+        t = i*T/n; y = v*t; contacts = []; ank = {}; toes = {}; stance = []
         for side, off, sg in (('right', 0.0, 1), ('left', .5, -1)):
-            ph = (t/T+off) % 1.0; cyc = math.floor(t/T+off); plant = v*(cyc+.3-off)*T
-            if ph < .6:
-                p, lift = plant, 0.0; contacts.append(f'foot_{side}')
-            else:
-                s = smooth((ph-.6)/.4); p, lift = plant+stride*s, a['step_height_m']*math.sin(math.pi*s)
-            ank[side] = add(mul(right, sg*ch.P['hip_x']*H), (0.0, -p, la+lift))
-        # The pelvis rides as high as the planted legs allow (it dips in double support), never above a near-straight leg.
-        h = min([reach*.97]+[math.sqrt(max(0.0, reach**2-(y-(-ank[f.split('_')[1]][1]))**2)) for f in contacts])+la
-        swing = 18.0*math.sin(2*math.pi*t/T)
-        pose = dict(ch.STAND, trunk=3.0, head=-3.0, arms=dict(right=dict(flex=-swing, abduct=8.0, elbow=18.0+.5*abs(swing)),
-                                                            left=dict(flex=swing, abduct=8.0, elbow=18.0+.5*abs(swing))))
+            ph = (t/T+off) % 1.0; cyc = math.floor(t/T+off)
+            P = lambda c: add(mul(right, sg*hw), (0.0, -v*(c+mid-off)*T, la))     # the flat-foot ankle of the step in cycle c
+            A, fd, held = _foot(ph, st, g, P(cyc), P(cyc+1), P(cyc), lift_h, FORWARD, UP, lf, la, lift_pow)
+            ank[side] = A; toes[side] = add(A, fd)
+            if held:
+                contacts.append(f'foot_{side}')
+            if ph < st:
+                stance.append(A)
+        # the pelvis rides as high as the stance legs allow (it dips in double support), capped by `height_cap`
+        h = min([height_cap(t)]+[A[2]-la+math.sqrt(max(0.0, reach**2-(y+A[1])**2)) for A in stance])+la
+        w = 2*math.pi*t/T
+        yaw = g['pelvis_yaw']*math.cos(w)                     # right hip forward at the right strike
+        lst = g['pelvis_list']*math.sin(w-2*math.pi*.05) * (1.0 if st >= .5 else .7)    # the swing side drops in single support
+        sway = g['sway_m']*math.sin(w-2*math.pi*.05)
+        arm0, arm1 = g['arm']; e0, ek = g['elbow']
+        flex_r = arm0-arm1*math.cos(w); flex_l = arm0+arm1*math.cos(w)                 # each arm with the opposite leg
+        arms = {sd: dict(flex=f, abduct=8.0 if st >= .5 else 10.0, elbow=e0+ek*max(0.0, f)) for sd, f in (('right', flex_r), ('left', flex_l))}
+        pose = dict(ch.STAND, trunk=g['trunk'], head=g['head'], arms=arms)
         j = ch.skeleton(figure(H), pose, (0.0, -y, h), UP, FORWARD)
-        out.append(frame_of(legs_to(j, H, ank, FORWARD, UP), (0.0, -y, 0.0), contacts))
+        j = _body(j, yaw, lst, sway, -g['thorax']*math.cos(w), UP, FORWARD, right)
+        out.append(frame_of(legs_to(j, H, ank, FORWARD, UP, toes), (0.0, -y, 0.0), contacts))
+    return out
+
+
+def walk(H, a, fps):
+    """One gait cycle (two steps) at walk_speed_m_s and walk_cadence_steps_min: 60 % stance with heel strike, flat foot and heel rise,
+    swing arcs of step_height_m, the pelvis riding over the stance leg, the gait determinants of GAIT['walk']. Root motion along -Y."""
+    v = a['walk_speed_m_s']; T = 120.0/a['walk_cadence_steps_min']
+    l1, l2, _, _ = leg_lengths(H); reach = .985*(l1+l2)
+    out = _gait(H, a, fps, v, T, .6, a['step_height_m'], GAIT['walk'], lambda t: reach*.97, mid=.25)
     return dict(frames=out, loop=True, root_motion=True, speed_m_s=v)
 
 
@@ -229,28 +312,14 @@ def climb(H, a, fps, pitch):
 
 
 def run(H, a, fps):
-    """One running cycle (two steps) at run_speed_m_s and run_cadence_steps_min (LOCO-001, PROTOTYPE): each foot planted for
-    run_stance_fraction of its cycle under the hip (so there are flight phases), swing arcs of run_step_height_m, a pelvis bob of one
-    dip per step at mid-stance, bent counter-swinging arms, the trunk leaning 7 deg into the run. Root motion along -Y."""
-    v = a['run_speed_m_s']; T = 120.0/a['run_cadence_steps_min']; n = round(T*fps); stride = v*T; st = a['run_stance_fraction']
-    l1, l2, la, _ = leg_lengths(H); reach = .985*(l1+l2); right = ch.frame(UP, FORWARD)[0]; out = []
-    for i in range(n):
-        t = i*T/n; y = v*t; contacts = []; ank = {}
-        for side, off, sg in (('right', 0.0, 1), ('left', .5, -1)):
-            ph = (t/T+off) % 1.0; cyc = math.floor(t/T+off); plant = v*(cyc+st/2-off)*T
-            if ph < st:
-                p, lift = plant, 0.0; contacts.append(f'foot_{side}')
-            else:
-                s = smooth((ph-st)/(1-st)); p, lift = plant+stride*s, a['run_step_height_m']*math.sin(math.pi*s)**.8
-            ank[side] = add(mul(right, sg*ch.P['hip_x']*H*.8), (0.0, -p, la+lift))
-        # one dip per step at mid-stance, highest in flight; a planted leg never stretches past `reach`
-        bob = .875*reach-.025*reach*math.cos(4*math.pi*(t/T-st/2))
-        h = min([bob]+[math.sqrt(max(0.0, reach**2-(y-(-ank[f.split('_')[1]][1]))**2)) for f in contacts])+la
-        swing = 32.0*math.sin(2*math.pi*t/T)
-        pose = dict(ch.STAND, trunk=7.0, head=-6.0, arms=dict(right=dict(flex=-swing+10.0, abduct=10.0, elbow=85.0),
-                                                            left=dict(flex=swing+10.0, abduct=10.0, elbow=85.0)))
-        j = ch.skeleton(figure(H), pose, (0.0, -y, h), UP, FORWARD)
-        out.append(frame_of(legs_to(j, H, ank, FORWARD, UP), (0.0, -y, 0.0), contacts))
+    """One running cycle (two steps) at run_speed_m_s and run_cadence_steps_min (LOCO-001, PROTOTYPE): each foot on the deck for
+    run_stance_fraction of its cycle (so there are flight phases), swing arcs of run_step_height_m, a pelvis bob of one dip per step at
+    mid-stance, bent arms swinging with the opposite leg, the trunk leaning 7 deg into the run, the determinants of GAIT['run']. Root
+    motion along -Y."""
+    v = a['run_speed_m_s']; T = 120.0/a['run_cadence_steps_min']; st = a['run_stance_fraction']
+    l1, l2, _, _ = leg_lengths(H); reach = .985*(l1+l2)
+    bob = lambda t: .95*reach-.025*reach*math.cos(4*math.pi*(t/T-st/2))      # one dip per step at mid-stance, highest in flight
+    out = _gait(H, a, fps, v, T, st, a['run_step_height_m'], GAIT['run'], bob, lift_pow=.8)
     return dict(frames=out, loop=True, root_motion=True, speed_m_s=v)
 
 

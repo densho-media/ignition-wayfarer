@@ -98,14 +98,14 @@
    "arm_A_vs_arm_B": 0,
    "tools_vs_drone": {},
    "drone_vs_astronaut": {
-    "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Channel": 24,
     "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PL": 24,
+    "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Channel": 24,
     "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Channel": 24,
     "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_SL": 24,
     "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PU": 24,
-    "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Channel": 24,
-    "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Channel": 24,
     "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Bolt_Socket_SU": 24,
+    "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Channel": 24,
     "DOCK_Drone_Keel x DOCK_INSTRUCTOR_Suit_Capture_Tongue": 18
    },
    "drone_vs_module": {
@@ -152,19 +152,19 @@
    "arm_A_vs_arm_B": 0,
    "tools_vs_drone": {},
    "drone_vs_astronaut": {
-    "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Channel": 24,
     "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PL": 24,
+    "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Channel": 24,
     "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Channel": 24,
     "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_SL": 24,
-    "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PU": 24,
     "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PU": 24,
     "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Channel": 24,
     "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Bolt_Socket_SU": 24,
     "DOCK_Drone_Keel x DOCK_INSTRUCTOR_Suit_Capture_Tongue": 18
    },
    "drone_vs_module": {
     "DOCK_Drone_Load_Pad_UR x LS_INSTRUCTOR_Module": 9,
-    "DOCK_Drone_Load_Pad_UL x LS_INSTRUCTOR_Module": 9,
+    "DOCK_Drone_Load_Pad_UL x LS_INSTRUCTOR_Module": 8,
     "DOCK_Drone_Load_Pad_LR x LS_INSTRUCTOR_Module": 7,
     "DOCK_Drone_Load_Pad_LL x LS_INSTRUCTOR_Module": 7
    },
@@ -175,13 +175,13 @@
    "drone_joint_limit_violations": [],
    "hand_controller": {
     "deployed": false,
-    "palm_to_grip_mm": 588.4,
+    "palm_to_grip_mm": 619.4,
     "yaw_deg": 0.0,
     "slide_m": 0.2747,
     "vs_suit": {},
     "vs_drone": {},
     "to_release_mm": 49.3,
-    "grip_gap_mm": 74.7
+    "grip_gap_mm": 71.6
    }
   },
   "reach": {
@@ -203,14 +203,14 @@
    "arm_A_vs_arm_B": 0,
    "tools_vs_drone": {},
    "drone_vs_astronaut": {
-    "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Channel": 24,
     "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PL": 24,
+    "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Channel": 24,
     "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Channel": 24,
     "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_SL": 24,
     "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PU": 24,
-    "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Channel": 24,
-    "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Channel": 24,
     "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Bolt_Socket_SU": 24,
+    "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Channel": 24,
     "DOCK_Drone_Keel x DOCK_INSTRUCTOR_Suit_Capture_Tongue": 18
    },
    "drone_vs_module": {
@@ -226,7 +226,7 @@
    "drone_joint_limit_violations": [],
    "hand_controller": {
     "deployed": false,
-    "palm_to_grip_mm": 486.4,
+    "palm_to_grip_mm": 487.1,
     "yaw_deg": 0.0,
     "slide_m": 0.2747,
     "vs_suit": {},
@@ -305,10 +305,10 @@
    "arm_A_vs_arm_B": 0,
    "tools_vs_drone": {},
    "drone_vs_astronaut": {
-    "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PL": 24,
     "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Channel": 24,
-    "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PL": 24,
     "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_SL": 24,
+    "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Channel": 24,
     "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PU": 24,
     "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Channel": 24,
     "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Channel": 24,
@@ -356,14 +356,14 @@
    "arm_A_vs_arm_B": 0,
    "tools_vs_drone": {},
    "drone_vs_astronaut": {
-    "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PL": 24,
-    "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Channel": 24,
-    "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Channel": 24,
-    "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_SL": 24,
     "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PU": 24,
     "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PL": 24,
+    "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Channel": 24,
     "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Channel": 24,
     "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Bolt_Socket_SU": 24,
+    "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_SL": 24,
     "DOCK_Drone_Keel x DOCK_INSTRUCTOR_Suit_Capture_Tongue": 18
    },
    "drone_vs_module": {
@@ -619,8 +619,8 @@
     "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Channel": 24,
     "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Channel": 24,
     "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_SL": 24,
-    "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Channel": 24,
     "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PU": 24,
+    "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Channel": 24,
     "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Channel": 24,
     "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Bolt_Socket_SU": 24,
     "DOCK_Drone_Keel x DOCK_INSTRUCTOR_Suit_Capture_Tongue": 18
@@ -670,8 +670,8 @@
     "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Channel": 24,
     "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Channel": 24,
     "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Bolt_Socket_SU": 24,
-    "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PL": 24,
     "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PL": 24,
     "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Channel": 24,
     "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_SL": 24,
     "DOCK_Drone_Keel x DOCK_INSTRUCTOR_Suit_Capture_Tongue": 18
@@ -759,21 +759,21 @@
    "arm_A_vs_arm_B": 0,
    "tools_vs_drone": {},
    "drone_vs_astronaut": {
+    "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PU": 24,
+    "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Channel": 24,
     "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Channel": 24,
     "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Bolt_Socket_SU": 24,
-    "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Channel": 24,
-    "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PU": 24,
-    "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PL": 24,
     "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PL": 24,
     "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Channel": 24,
     "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_SL": 24,
     "DOCK_Drone_Keel x DOCK_INSTRUCTOR_Suit_Capture_Tongue": 18
    },
    "drone_vs_module": {
-    "DOCK_Drone_Load_Pad_UL x LS_INSTRUCTOR_Module": 9,
     "DOCK_Drone_Load_Pad_UR x LS_INSTRUCTOR_Module": 9,
-    "DOCK_Drone_Load_Pad_LL x LS_INSTRUCTOR_Module": 7,
-    "DOCK_Drone_Load_Pad_LR x LS_INSTRUCTOR_Module": 7
+    "DOCK_Drone_Load_Pad_UL x LS_INSTRUCTOR_Module": 9,
+    "DOCK_Drone_Load_Pad_LR x LS_INSTRUCTOR_Module": 7,
+    "DOCK_Drone_Load_Pad_LL x LS_INSTRUCTOR_Module": 7
    },
    "arms_tools_vs_astronaut": {},
    "thrusters": "safed",
@@ -795,14 +795,14 @@
  "pair_contacts": {
   "ready": {
    "astronaut": {
-    "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Channel": 24,
     "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PL": 24,
+    "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Channel": 24,
     "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Channel": 24,
     "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_SL": 24,
     "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PU": 24,
-    "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Channel": 24,
-    "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Channel": 24,
     "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Bolt_Socket_SU": 24,
+    "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Channel": 24,
     "DOCK_Drone_Keel x DOCK_INSTRUCTOR_Suit_Capture_Tongue": 18
    },
    "module": {
@@ -814,33 +814,33 @@
   },
   "walk": {
    "astronaut": {
-    "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Channel": 24,
     "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PL": 24,
+    "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Channel": 24,
     "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Channel": 24,
     "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_SL": 24,
-    "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PU": 24,
     "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PU": 24,
     "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Channel": 24,
     "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Bolt_Socket_SU": 24,
     "DOCK_Drone_Keel x DOCK_INSTRUCTOR_Suit_Capture_Tongue": 18
    },
    "module": {
     "DOCK_Drone_Load_Pad_UR x LS_INSTRUCTOR_Module": 9,
-    "DOCK_Drone_Load_Pad_UL x LS_INSTRUCTOR_Module": 9,
+    "DOCK_Drone_Load_Pad_UL x LS_INSTRUCTOR_Module": 8,
     "DOCK_Drone_Load_Pad_LR x LS_INSTRUCTOR_Module": 7,
     "DOCK_Drone_Load_Pad_LL x LS_INSTRUCTOR_Module": 7
    }
   },
   "reach": {
    "astronaut": {
-    "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Channel": 24,
     "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PL": 24,
+    "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Channel": 24,
     "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Channel": 24,
     "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_SL": 24,
     "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PU": 24,
-    "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Channel": 24,
-    "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Channel": 24,
     "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Bolt_Socket_SU": 24,
+    "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Channel": 24,
     "DOCK_Drone_Keel x DOCK_INSTRUCTOR_Suit_Capture_Tongue": 18
    },
    "module": {
@@ -871,10 +871,10 @@
   },
   "climb": {
    "astronaut": {
-    "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PL": 24,
     "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Channel": 24,
-    "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PL": 24,
     "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_SL": 24,
+    "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Channel": 24,
     "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PU": 24,
     "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Channel": 24,
     "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Channel": 24,
@@ -890,14 +890,14 @@
   },
   "flight": {
    "astronaut": {
-    "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PL": 24,
-    "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Channel": 24,
-    "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Channel": 24,
-    "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_SL": 24,
     "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PU": 24,
     "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PL": 24,
+    "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Channel": 24,
     "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Channel": 24,
     "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Bolt_Socket_SU": 24,
+    "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_SL": 24,
     "DOCK_Drone_Keel x DOCK_INSTRUCTOR_Suit_Capture_Tongue": 18
    },
    "module": {
@@ -925,8 +925,8 @@
     "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Channel": 24,
     "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Channel": 24,
     "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_SL": 24,
-    "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Channel": 24,
     "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PU": 24,
+    "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Channel": 24,
     "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Channel": 24,
     "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Bolt_Socket_SU": 24,
     "DOCK_Drone_Keel x DOCK_INSTRUCTOR_Suit_Capture_Tongue": 18
@@ -944,8 +944,8 @@
     "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Channel": 24,
     "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Channel": 24,
     "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Bolt_Socket_SU": 24,
-    "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PL": 24,
     "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PL": 24,
     "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Channel": 24,
     "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_SL": 24,
     "DOCK_Drone_Keel x DOCK_INSTRUCTOR_Suit_Capture_Tongue": 18
@@ -963,21 +963,21 @@
   },
   "assist": {
    "astronaut": {
+    "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PU": 24,
+    "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Channel": 24,
     "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Channel": 24,
     "DOCK_Drone_Bolt_SU x DOCK_INSTRUCTOR_Suit_Bolt_Socket_SU": 24,
-    "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Channel": 24,
-    "DOCK_Drone_Bolt_PU x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PU": 24,
-    "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PL": 24,
     "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Channel": 24,
+    "DOCK_Drone_Bolt_PL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_PL": 24,
     "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Channel": 24,
     "DOCK_Drone_Bolt_SL x DOCK_INSTRUCTOR_Suit_Bolt_Socket_SL": 24,
     "DOCK_Drone_Keel x DOCK_INSTRUCTOR_Suit_Capture_Tongue": 18
    },
    "module": {
-    "DOCK_Drone_Load_Pad_UL x LS_INSTRUCTOR_Module": 9,
     "DOCK_Drone_Load_Pad_UR x LS_INSTRUCTOR_Module": 9,
-    "DOCK_Drone_Load_Pad_LL x LS_INSTRUCTOR_Module": 7,
-    "DOCK_Drone_Load_Pad_LR x LS_INSTRUCTOR_Module": 7
+    "DOCK_Drone_Load_Pad_UL x LS_INSTRUCTOR_Module": 9,
+    "DOCK_Drone_Load_Pad_LR x LS_INSTRUCTOR_Module": 7,
+    "DOCK_Drone_Load_Pad_LL x LS_INSTRUCTOR_Module": 7
    }
   }
  },
@@ -1046,17 +1046,17 @@
    },
    "walk": {
     "deployed": false,
-    "palm_to_grip_mm": 588.4,
+    "palm_to_grip_mm": 619.4,
     "yaw_deg": 0.0,
     "slide_m": 0.2747,
     "vs_suit": {},
     "vs_drone": {},
     "to_release_mm": 49.3,
-    "grip_gap_mm": 74.7
+    "grip_gap_mm": 71.6
    },
    "reach": {
     "deployed": false,
-    "palm_to_grip_mm": 486.4,
+    "palm_to_grip_mm": 487.1,
     "yaw_deg": 0.0,
     "slide_m": 0.2747,
     "vs_suit": {},
@@ -3727,15 +3727,15 @@
     ],
     "walk": [
      false,
-     588.4,
-     74.7,
+     619.4,
+     71.6,
      0,
      0,
      49.3
     ],
     "reach": [
      false,
-     486.4,
+     487.1,
      74.4,
      0,
      0,

@@ -6,7 +6,7 @@
   "test_a": {
    "height_macro": 0.607178,
    "bisection_stature_m": 1.8,
-   "generate_s": 3.49,
+   "generate_s": 5.84,
    "stature_m": 1.8,
    "contract": {
     "bones": 53,
@@ -210,12 +210,12 @@
     "scale": 1.0
    },
    "solver_vs_blender_m": 0.0,
-   "fingerprint": "844867a5cfb661f25593a61cc15d90c9f850799ab2661eee8ad50bfebcebc9b8"
+   "fingerprint": "9e1cc95749c49519487cc946b5f6b59c58f1f7149492a7288d06dcb0f54cb9b7"
   },
   "test_b": {
    "height_macro": 0.554016,
    "bisection_stature_m": 1.6181,
-   "generate_s": 4.31,
+   "generate_s": 7.06,
    "stature_m": 1.6181,
    "contract": {
     "bones": 53,
@@ -314,9 +314,11 @@
      "root_motion": true,
      "slip_mm": {
       "foot_right": 0.0,
-      "foot_left": 0.0
+      "foot_left": 2.3
      },
-     "reach_short_mm": {}
+     "reach_short_mm": {
+      "leg_l": 2.3
+     }
     },
     "sit": {
      "frames": 75,
@@ -420,12 +422,12 @@
      0.0744
     ]
    },
-   "fingerprint": "e55baa786fac56415ae3b5be11926c218e066dbea21c6a0354f443b065424bc8"
+   "fingerprint": "21783b7338680506f8d47a6e70063fdcef2b43b2dd18711618969b7f7659f081"
   },
   "instructor": {
    "height_macro": 0.545044,
    "bisection_stature_m": 1.78,
-   "generate_s": 2.75,
+   "generate_s": 4.51,
    "outfit": {
     "name": "instructor",
     "faces": {
@@ -695,12 +697,12 @@
    "stages": [
     "S004A"
    ],
-   "fingerprint": "7c691041b03bb7f13ecba44bcfbefc6b45b142667a08ac7dbb1af7ddd490e942"
+   "fingerprint": "b12e43be1309f33ad3b0eaf92eb8f838d3c7bc88fb59285e2167fc95938c4a05"
   },
   "newcomer": {
    "height_macro": 0.538025,
    "bisection_stature_m": 1.6999,
-   "generate_s": 3.43,
+   "generate_s": 6.08,
    "outfit": {
     "name": "newcomer",
     "faces": {
@@ -973,7 +975,7 @@
     "S004A",
     "S004B"
    ],
-   "fingerprint": "54d82d1bfd5de648c44f0bd78ab9c79e1254ad7f85c97e96bbeee881aa580a75"
+   "fingerprint": "0ce9f7032ce5802bd2b722fecc768f14f9a349c9042cfe6db29cdbd02c78934c"
   }
  }
 }
