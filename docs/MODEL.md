@@ -1974,6 +1974,23 @@ utility row.
   measured, at spawn). Both excursions take 88,000 physics frames, about 100 s headless natively; the same check passes in the
   WebAssembly build in headless Chromium with drawing off (about 1,470 s), and the scene draws there without errors.
 
+## Ring cabin CO₂ in the walk (SYS-001, Phase 0 systems proof)
+
+`src/wayfarer/cabin_air.py` is ring A's cabin CO₂ as one engineering state, with no game logic: one well-mixed free gas volume
+(PROTOTYPE 466.4 m³ = the three sectors' net volume + ring A's CIRC-001 corridor gross, crew tubes excluded), the cabin's 80 kPa
+(BASELINE), the 0.3 % target and 0.5 % control maximum (WORKING), 1.0 kg CO₂ per person-day (41!B15, STUDY), and PROTOTYPE values for
+six occupants, 295 K and a removal unit rated to hold twelve at the target (k ≈ 116 m³/h). The step is the exact solution of
+dm/dt = G − k·m/V. The unit's states are RUNNING, ISOLATED and FAILED; isolate and restore are the only operations, and FAILED is a
+consumer's fault input that cannot be restored. Bands by partial pressure: the control limit (WORKING), plus degraded habitability
+(0.8 kPa) and physiological danger (3.0 kPa), which are PROTOTYPE reference levels, never canon (medical limits OPEN, 12!G22).
+
+The export writes `wf_cabin_air.json`, with 33 checkpoints of an 8 h proof run and the tolerance (1e-9 relative + 1e-9 kg). In the walk,
+`WfCabinAir` (`godot/scripts/systems/cabin_air.gd`) must reproduce them before anything is shown. Only the opt-in start
+`#interior-systems` (`-- --systems`) creates `WfEquipment` (`scripts/excursion/equipment.gd`). At the sector 3 ECLSS bay
+(`Prod_RA3_GDN_ECLSS`), Ops isolates or restores the unit, and a board above the bay shows the readout at a labelled ×60 simulation rate.
+The default start is unchanged. Checks: `tests/test_cabin_air.py` (7) and the runtime check `systems` (`--systems --check-systems`,
+WF_GODOT_SYSTEMS). Design and roadmap: `work/project-thread-dfyyv7/DEADSHIP_DESIGN.md` (Deadship, on its branch).
+
 ## Retired runtime scenes
 
 The Godot review menu, the ship inspector, the guided induction walk, Demonstrator 01 with the Ship Navigator, its SPACE view and the

@@ -34,6 +34,8 @@ func run(host: WfExcursion) -> void:
 	var L := h.loco
 	if h.start_mode != "RING" or h.move != "WALK" or h.walk_zone != "RING_A":
 		fail("the start is %s %s %s, not standing on ring A" % [h.start_mode, h.move, h.walk_zone])
+	if h.equipment != null:
+		fail("the default start created the SYS-001 systems proof (only --systems / #interior-systems may)")
 	if h.char_rig == null or not h.char_rig.ok:
 		fail("the newcomer model is missing (%s): no proxy is allowed" % ("no rig" if h.char_rig == null else h.char_rig.missing))
 	else:

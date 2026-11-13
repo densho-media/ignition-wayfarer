@@ -355,11 +355,12 @@ python3 tools/workflow.py runtime-check [names|auto]      # the checks below aga
 godot --path godot                                         # the walk (main scene)
 timeout -s KILL 900 godot --headless --fixed-fps 60 --path godot res://scenes/excursion.tscn --quit-after 300000 -- --check-excursion   # WF_GODOT_EXCURSION
 timeout -s KILL 120 godot --headless --path godot --script res://scripts/check_export.gd [-- --docked]   # package integrity
+timeout -s KILL 900 godot --headless --fixed-fps 60 --path godot res://scenes/excursion.tscn --quit-after 120000 -- --systems --check-systems   # WF_GODOT_SYSTEMS (SYS-001)
 timeout -s KILL 120 godot --headless --path godot --script res://scripts/check_route.gd    # WF_GODOT_ROUTE (route playback against all rows)
 godot --path godot --script res://scripts/profile_views.gd -- --view=station|ship [--hide-assemblies=RA.EXT,..] [--hide-zone=INTERIOR]
 ```
 
-`runtime-export` runs `check`, `check-docked`, `route`, `excursion` and `characters` (CHECKS in `tools/runtime_export.py`); the
+`runtime-export` runs `check`, `check-docked`, `route`, `excursion`, `systems` and `characters` (CHECKS in `tools/runtime_export.py`); the
 characters check needs the MPFB humans (`workflow.py deps`). Always run headless Godot under `timeout -s KILL`: a script parse error
 hangs it otherwise. Godot's version comes from `WAYFARER_GODOT` (default `/snap/bin/godot-4`).
 

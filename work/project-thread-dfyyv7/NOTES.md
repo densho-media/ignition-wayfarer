@@ -1,13 +1,13 @@
-# Deadship integration: research and design (DS-000)
+# Deadship integration: design and Phase 0 (DS-000, DS-P0)
 
 | Field | Value |
 | --- | --- |
-| Kind | Design study (documentation only; no geometry, data, code or deployment change) |
-| Status | ACTIVE, awaiting owner review |
+| Kind | Design study plus the authorized Phase 0 systems proof (no geometry, canon, Drive or deployment change) |
+| Status | ACTIVE: Phase 0 built and validated (2026-11-13), awaiting owner review; Phase 1 not authorized |
 | Question | How should Deadship become part of the interactive Wayfarer so that it is enjoyable, teaches the ship's real systems and leaves a reusable systems foundation for the story? |
 | Model base | `main` at c77026d (LOCO-003), branch `claude/project-thread-dfyyv7` |
 | Report | [DEADSHIP_DESIGN.md](DEADSHIP_DESIGN.md) |
-| Owner questions | DS-Q1 to DS-Q8 in the report, section 12 |
+| Owner questions | DS-Q1 to DS-Q8 decided 2026-11-13; open items DS-O1 to DS-O6 in the report, section 12 |
 
 **Function.** A survival-engineering game inside Explore Interior: diagnose, prioritize, cannibalize, improvise, stabilize.
 
@@ -23,3 +23,9 @@ Heat Debt (OPEN), degraded modes (OD-010 OPEN), the First Ignition accident's se
 station-run training simulation); a lumped, conserving system simulation (fidelity level 2) with canon parameters where they exist;
 a Python reference stepper plus a GDScript runtime that must reproduce its checkpoints (the retired life-support simulator's
 pattern); no TypeScript, WebAssembly module or backend.
+
+**2026-11-13 (owner decisions applied).** Phase 0 built: ring A cabin CO₂ at the sector 3 ECLSS bay, Ops isolates or restores the
+unit, the runtime reproduces the Python reference within a packaged tolerance. The DS-000 1.4 h clock used the usable-space allocation
+(120 m³); the connected ring A gas volume is about 466 m³ (5.4 h target to control limit, six people, unit off). Three CO₂ tiers kept
+apart: control limit (canon WORKING), degraded habitability and danger (PROTOTYPE references). Door-coupled compartments are the main
+Phase 1 modelling step.

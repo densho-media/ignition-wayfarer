@@ -39,6 +39,7 @@ var ring_ids := ["", ""]          # rotor id of ring A, ring B
 var drum_ids := ["", ""]
 var check: WfExcursionCheck = null
 var loco_check: WfLocomotionCheck = null
+var systems_check: WfSystemsCheck = null
 var circ_doors := {}              # CIRC door id -> {node, rest, travel, value, target, collider, rec, ring}
 var world := Node3D.new()
 var builder: WfExcursionBuild
@@ -96,6 +97,7 @@ var hud_status := Label.new()
 var hud_check := Label.new()
 var ring_map: Control = null
 var learning: WfLearning = null   # UJ-013 learning stations (WHAT / WHY / SHOW ME), from the package
+var equipment: WfEquipment = null # SYS-001 Phase 0 proof (`--systems`, #interior-systems): the ECLSS bay operates ring A's CO2 model
 # LOCO-001 (docs/LOCOMOTION.md): the start (RING: on ring A's deck with the rings turning, the default; STATION: the full excursion from the
 # development station), the trainee's visible MPFB body and its locomotion on the decks.
 var start_mode := "RING"
@@ -116,6 +118,10 @@ static func eva_requested() -> bool:
 
 ## LOCO-001: where the walk begins. The excursion check and `--excursion` (web: #interior-excursion) run the full station-to-ring walk;
 ## everything else starts on ring A's deck.
+## SYS-001: the Phase 0 systems proof rides on the ring start; the default start never creates it.
+static func systems_requested() -> bool:
+	return "--systems" in OS.get_cmdline_user_args() or WfWebPage.start_variant() == "systems"
+
 static func requested_start() -> String:
 	var args := OS.get_cmdline_user_args()
 	if "--check-excursion" in args or "--excursion" in args or WfWebPage.start_variant() == "excursion":
@@ -185,6 +191,12 @@ func _ready() -> void:
 	learning = WfLearning.new(by_name, layer, self, manifest)
 	if learning.welcome() != "":
 		say("GU instructor: " + learning.welcome())
+	if systems_requested():
+		equipment = WfEquipment.new(by_name, manifest, self)
+		if equipment.air != null and not equipment.air.verified:
+			push_error("SYS-001: the runtime CO2 model does not reproduce its reference: %s" % str(equipment.air.errors))
+		elif equipment.ready():
+			say("SYSTEMS PROOF (simulation): ring A's CO2-removal unit lives in the sector 3 ECLSS bay. Walk there and press %s." % key("exc.ops"))
 	WfInput.context = "excursion"
 	WfInput.touch_provider = touch_state            # MOB-001: the stick, the look drag and the contextual buttons on a touch device
 	tree_exiting.connect(func(): WfInput.touch_provider = Callable(); WfInput.release_touch())
@@ -197,6 +209,9 @@ func _ready() -> void:
 	elif "--check-locomotion" in OS.get_cmdline_user_args():
 		loco_check = WfLocomotionCheck.new()
 		loco_check.run(self)
+	elif "--check-systems" in OS.get_cmdline_user_args():
+		systems_check = WfSystemsCheck.new()
+		systems_check.run(self)
 
 # ---- package ---------------------------------------------------------------------------------------------------------------------------------
 
@@ -639,6 +654,8 @@ func look_basis() -> Basis:
 func _physics_process(dt: float) -> void:
 	if actor == null:
 		return
+	if equipment != null:
+		equipment.step(dt)
 	_step_modes(dt)
 	_step_drums(dt)
 	_step_closures(dt)
@@ -1159,6 +1176,11 @@ func _toggle_door(id: String) -> String:
 
 ## O: the ship's operating change, asked at a trunk panel (the trainee holding still on a rail inside Wayfarer, in the SHIP frame).
 func ops() -> String:
+	if equipment != null and move == "WALK" and equipment.in_reach(actor.global_position, walk_zone):
+		var r := equipment.operate()
+		_log("equipment", equipment.record())
+		say(r)
+		return equipment.air.state
 	if not (move == "LINE" and line.id == "BOARD" and ls > float(hatch["OUTER_HATCH"]["gate"][1])):
 		say("Operations: ask from a panel inside Wayfarer's trunk (past the airlock).")
 		return ""
@@ -1219,6 +1241,8 @@ func _process(dt: float) -> void:
 			"g": snappedf(actor.field_now.length() / 9.80665, 0.001), "third_person": view_out}
 		if loco != null:
 			rec.merge(loco.record())
+		if equipment != null:
+			rec["systems"] = equipment.record()
 		WfWebPage.publish("wayfarerWalk", rec)
 	var rc: Dictionary = learning.remote_camera() if learning != null else {}
 	var f: Dictionary = _frame_pivot() if rc.is_empty() else frames["STATIONARY"]     # a station's remote camera rides the stationary ship
@@ -1762,6 +1786,8 @@ func touch_state() -> Dictionary:
 		acts.append(["exc.use", u, "primary_game"])
 	if move == "WALK":
 		acts.append(["exc.jump", "Jump", "game"])     # LOCO-003: the phone had no jump; running is the stick pushed to its rim
+	if equipment != null and move == "WALK" and equipment.in_reach(actor.global_position, walk_zone):
+		acts.append(["exc.ops", "Ops · " + equipment.op_label(), "game"])
 	if move == "LINE" and line.id == "BOARD" and ls > float(hatch["OUTER_HATCH"]["gate"][1]) and not ctl.busy():
 		acts.append(["exc.ops", "Ops · undock" if ctl.mode == "DOCKED" else "Ops · dock", "game"])
 	acts.append(["exc.view", "View", "nav"])
@@ -1798,6 +1824,8 @@ func _prompt_text() -> String:
 			out.append("%s take the ladder" % key("exc.use"))
 		elif d != "":
 			out.append("%s %s door %s" % [key("exc.use"), "close" if circ_doors[d]["target"] > 0.0 else "open", str(d).trim_prefix("CIRC.")])
+		if equipment != null and equipment.in_reach(actor.global_position, walk_zone):
+			out.append(equipment.prompt(key("exc.ops")))
 	out.append("%s view" % key("exc.view"))
 	var t := "  ·  ".join(out)
 	if prompt != "":
@@ -1827,6 +1855,8 @@ func _update_hud() -> void:
 			"[x]" if rec["boarded"] else "[ ]", "[x]" if rec["circuit"] else "[ ]", int(100.0 * rec["bins"].count(1) / BINS), "[x]" if rec["returned"] else "[ ]"])     # ASCII: the web font has no ballot boxes
 	if learning != null and not learning.stations.is_empty():
 		lines_out.append("Learning points %d/%d (ring A)" % [learning.done.size(), learning.stations.size()])
+	if equipment != null:
+		equipment.update()
 	hud_check.text = "\n".join(lines_out)
 	hud_prompt.text = WfKeyText.rich(_prompt_text())
 	if WfInput.compact():

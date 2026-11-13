@@ -155,7 +155,7 @@ const SCENE_ACTIONS := [
 	[["body", "demo"], [["body.view", "View from outside", [KEY_V], "Switch between first person and a view of the body from outside."]]],
 	# EXC-001: the station-to-ring excursion (one continuous player-controlled run; the moves are player.move_*).
 	[["excursion"], [["exc.use", "Use / operate", [KEY_E], "Operate what is in reach: a hatch or door, the transfer drum's cycle at its restraint station, the ladder foot, the trunk's ring B branch.", [{"t": "joyb", "b": JOY_BUTTON_X}]],
-		["exc.ops", "Ship operations", [KEY_O], "At a trunk panel: ask Wayfarer to undock and spin up its rings, or to spin down, lock and dock.", [{"t": "joyb", "b": JOY_BUTTON_Y}]],
+		["exc.ops", "Ship operations", [KEY_O], "At a trunk panel: ask Wayfarer to undock and spin up its rings, or to spin down, lock and dock. At equipment that has an operating state (the systems proof): isolate or restore it.", [{"t": "joyb", "b": JOY_BUTTON_Y}]],
 		["exc.view", "Camera: third / first person", [KEY_C, KEY_V], "Switch between the third-person follow camera and the trainee's own eyes."],
 		["exc.jump", "Jump", [KEY_SPACE], "On a ring deck: jump. The legs give one push; then spin gravity and the Coriolis effect carry you until the deck stops you.", [{"t": "joyb", "b": JOY_BUTTON_RIGHT_SHOULDER}], "press",
 			{"setup": ["interior"], "ask": "jump"}],

@@ -607,6 +607,10 @@ def export(root, preset='COAST', out=None, identity=None, draco=False):
     import learning_stations
     learning_stations.write(root, out / learning_stations.FILE)
     packaged.append(learning_stations.FILE)
+    # SYS-001: ring A's cabin CO2 model and the checkpoints the walk's runtime copy must reproduce before it shows the state.
+    import cabin_air
+    cabin_air.write(root, out / cabin_air.FILE)
+    packaged.append(cabin_air.FILE)
     if preset == 'COAST':
         # RT-003: the runtime plays the First Ignition timeline from this copy, checked against the rig's hash.
         timeline = root / rig['flight_timeline']['file']

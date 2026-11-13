@@ -1,51 +1,91 @@
-# Deadship in Wayfarer: research and design report (DS-000)
+# Deadship in Wayfarer: research, design and Phase 0 report (DS-000, DS-P0)
 
-Research, architecture and gameplay design only. Nothing here is implemented, nothing changes canon, the Blender model, generated
-geometry, engineering values, dependencies or the deployment. Written 2026-11-12 against `main` c77026d.
+DS-000 (2026-11-12, commit 6603e08) was research and design only. On 2026-11-13 the owner approved its direction with refinements
+and authorized **Phase 0 only**. This revision folds those decisions in, refines the scenario designs and the CO₂ assumptions, and
+reports the Phase 0 implementation, its validation and the regression runs. Phase 1 and later stay **design only** and need separate
+authorization. Nothing here changes canon, the Blender model, generated geometry, engineering values or the deployment, and no Drive
+workbook was written.
 
 Every significant statement carries one of these labels:
 
 | Label | Meaning |
 | --- | --- |
-| **[EXISTS]** | Implemented in the repository today (file path given) |
+| **[EXISTS]** | Implemented in the repository before this work (file path given) |
+| **[BUILT P0]** | Implemented by Phase 0 on this branch (file path given) |
 | **[LORE]** | Established IGNITION canon, with its Drive owner row |
 | **[ENG]** | Engineering assumption: physics or engineering judgment, not an owner row |
-| **[PROPOSAL]** | New gameplay or architecture proposal in this report |
+| **[PROPOSAL]** | Gameplay or architecture design, not implemented |
 | **[OPEN]** | Unresolved: needs the owner, a Drive owner row or a later decision |
 
 Complexity: **S** about 1–3 working days of one agent session, **M** about a week, **L** several weeks. Rough, for ordering only.
 
 ---
 
-## 0. Summary and recommendation
+## 0. Summary
 
-**Build Deadship as a Wayfarer systems game inside Explore Interior, starting with Concept B and growing along Concept D.**
+**Direction (owner-approved 2026-11-13).** One spacecraft engineering model, several consumers: engineering tools, Deadship and later
+the story. Deadship is a gameplay consumer of reusable engineering systems, never a separate fictional simulation.
+- Concept **B** first: Deadship training on the real Wayfarer, inside Explore Interior.
+- Concept **D** as the long-term progression (training → competitive Deadship → narrative survival).
+- Concept **C** later, on the same engineering systems, following the Tale's sequence.
+- Concept **A** (a separate training spacecraft) is not built for the MVP.
 
-1. The interactive experience is a Godot 4 Web export (GDScript, Jolt, `gl_compatibility`), not a TypeScript application. Explore
-   Interior already gives a walkable ring A in spin gravity with working doors, a ladder, both ring circuits and the station boarding
-   route, nine learning stations at real exported nodes (the ECLSS bay, ops screens, workbench), an action registry that respects
-   saved browser-local keys, and touch controls. Explore Exterior already has fault injection (failed valves), conserved resource
-   ledgers and a state-driven staged scenario. That is most of a Deadship runtime, minus a systems simulation and an interaction
-   registry.
-2. The repository has real engineering screens (life support stock/flow, cabin atmosphere rules, power storage and the nine-step
-   black start, the three heat loops, radiator health cells) but **no runtime systems simulation**: the life-support and thermal
-   simulators were retired (removed in cf1f953, restorable from `038ae90`). Their pattern is the right one: a pure Python module writes
-   a JSON package with checkpoints, and the GDScript runtime repeats the same step and proves it reproduces the checkpoints before
-   anything is shown.
-3. The canon leaves the decisive numbers OPEN (whole-ship electrical load, ECLSS internals and tolerances, loop heat capacities, Heat
-   Debt, degraded modes). Lore resolves this cleanly: **a Deadship scenario is a deliberately disabled ship whose organizers set the
-   numbers.** Scenario-owned values are labelled PROTOTYPE, the laws (conservation of mass and energy, Stefan–Boltzmann, ideal gas)
-   are never relaxed, and released owner values replace scenario values without code changes.
-4. Recommended first playable (**DS-1 "Scrubber"**, section 10): ring A, one CO₂-removal fault in the sector-3 ECLSS bay, a
-   diagnosis at the bay and the sector-2 ops screen, a replacement part carried from the sector-2 workbench through the circulation
-   corridor doors, and a "Stable" call checked by a projected watch. The CO₂ clock comes straight from canon numbers: with six people in
-   ring A, CO₂ rises from the 0.3 % target to the 0.5 % limit in about **1.4 h** of ship time (section 7.2).
-5. The engineering model (`ship_systems`) must not know Deadship. Deadship is one consumer of it; the story, the Engineering pages and
-   the Breakthrough Lab can be others.
+**Phase 0 (built on this branch, section 10).** The smallest engineering integration that works:
+- `src/wayfarer/cabin_air.py`: ring A's cabin CO₂ as one reusable engineering state, from canon pressure, control band and the 41 STUDY
+  CO₂ rate, with every PROTOTYPE value labelled. It has an exact deterministic step, a conserved ledger, three unit states and reference
+  checkpoints.
+- `godot/scripts/systems/cabin_air.gd`: the runtime copy. It must reproduce the checkpoints within a stated tolerance before anything
+  is shown.
+- `godot/scripts/excursion/equipment.gd`: Ops at the real ring A sector 3 ECLSS bay isolates or restores the CO₂-removal unit, and the
+  bay's status board shows the model's readout. Only the opt-in start `#interior-systems` (`-- --systems`) creates it, so the default
+  Explore Interior start is unchanged.
+- `godot/scripts/excursion/check_systems.gd`: a headless check through the player's own requests.
 
-Concept C (Deadship as the story's survival mechanic) is the long-term destination, but it waits for the Tale's First Ignition accident
-rows and the OD-010 degraded modes. Concept A (a separate simulator building) duplicates modeling and is not recommended as a first
-step.
+**What the refinement changed in the design.**
+- The CO₂ clock is not a survival deadline. Three tiers (operational control limit, degraded habitability, physiological danger) are
+  kept apart (section 7.2).
+- DS-000's 120 m³ was the canon *usable-space allocation*, not the connected gas volume. With ring A's corridors (CIRC-001) and doors
+  open, the free gas volume is about **466 m³**, so with six people and the unit off, CO₂ rises from the 0.3 % target to the 0.5 %
+  control limit in about **5.4 h**, not 1.4 h. With sector 3 sealed alone (about 46 m³ net), the same rise for the people inside
+  happens far faster. Door states therefore matter, and coupling them to the volume is a Phase 1 prerequisite (section 7.2).
+- The docking contradiction is resolved by a four-layer state model (section 4.1). The real ship stays DOCKED with its rings locked.
+  The training runs a **simulated COAST**, which is what the existing ring start already shows (boom retracted to stand-off, rings at
+  4 rpm).
+- DS-1 "Scrubber" becomes an unscored guided tutorial. DS-2 is designed as the first true Deadship challenge (section 5.8).
+
+---
+
+## Decisions applied (owner, 2026-11-13)
+
+| ID | Decision | Where applied |
+| --- | --- | --- |
+| DS-Q1 | Station-run Deadship training is approved as a gameplay concept. It is not an official Wayfarer crew qualification without more lore approval. | §2, §4 |
+| DS-Q2 | The First Ignition failure sequence is deferred to the Tale and engineering owner sources. No invented canon. | §9 Phase 5 |
+| DS-Q3 | Solo training is permitted. Competitive rules and scoring weights stay provisional. | §5.6, §5.7 |
+| DS-Q4 | The CO₂-removal architecture is a labelled prototype grounded in credible ECLSS engineering, with its unknowns kept. | §7.2, `cabin_air.PROTOTYPE` |
+| DS-Q5 | `data/deadship/` is approved for game-owned scenario definitions, separate from canon. It is created when first needed, not now. | §6 |
+| DS-Q6 | Browser-local progress and records only. No backend or shared leaderboard. | §6.7 |
+| DS-Q7 | A simulated COAST configuration is approved. The real docking and rotation constraints are kept. | §4.1 |
+| DS-Q8 | Resolved by reading the row (below). No owner decision was needed. | §2 |
+
+**DS-Q8 read 2026-11-13.** IGNITION — Sports (`1jTQwjXinvHve-1vBJ6mgmefPRos4adC4UCdZc9mEUU0`), `'Occupational Sports'!I2`, Deadship,
+ESTABLISHED: "Scoring: survivability + resource conservation + system stability + time. Wayfarer becomes the nightmare real-world
+version." Mechanics (F2): "Restore breathable atmosphere, thermal control, navigation, power etc. with deliberately insufficient
+parts/resources."
+
+**Traceability.** Decisions, sources and implementation tasks:
+
+| Item | Source or decision | Implemented as |
+| --- | --- | --- |
+| Cabin 80 kPa | spec `habitat.atmosphere` (BASELINE, `cabin_atmosphere`) | `cabin_air.spec_values` |
+| CO₂ target 0.3 %, control maximum 0.5 % | spec `habitat.atmosphere.control` (WORKING, `cabin_atmosphere_control`, 02!A49:H52) | `cabin_air.spec_values`, band CONTROL |
+| CO₂ 1.0 kg per person-day | `data/life_support.toml` `CO2_REMOVED` (41!B15, STUDY) | `cabin_air.co2_rate` |
+| Free gas volume 466.4 m³ | built rooms: `pressure_volumes.rooms` (sector net), `ring_circulation.budget` (corridor gross) | `cabin_air.volume` (PROTOTYPE) |
+| Occupants 6, 295 K, unit rated for 12, well mixed | DS-Q4 | `cabin_air.PROTOTYPE` |
+| Degraded 0.8 kPa, danger 3.0 kPa | DS-Q4, public reference levels | `cabin_air.BANDS` (PROTOTYPE) |
+| ECLSS bay `Prod_RA3_GDN_ECLSS` | `route_fitout` ECLSS_Bay, UJ-004 station | `cabin_air.BINDING` |
+| Simulated COAST | DS-Q7 | the ring start (existing) + `#interior-systems` |
+| No new key | owner §7 | `exc.ops` reused |
 
 ---
 
@@ -136,9 +176,9 @@ stocks, flows and component states stepping in time) and the interaction registr
   are technologies of survival that civilization eventually learns to play with."
 - *Occupational Sports*, Deadship row: status **ESTABLISHED**; culture "Spacer engineering / emergency response"; participants "Small
   technical teams"; environment "Disabled ship or high-fidelity simulator"; mechanics "Restore breathable atmosphere, thermal control,
-  navigation, power etc. with deliberately insufficient par[ts]…"; tests "Diagnosis, prioritization, cannibalization, teamwork, systems
+  navigation, power etc. with deliberately insufficient parts/resources"; tests "Diagnosis, prioritization, cannibalization, teamwork, systems
   thinking"; character link **Rian Osei**; note "Scoring: survivability + resource conservation + system stability + time. Wayfarer
-  becomes the nightmare …" (the cell text was cut in the read; the full sentence is DS-Q8).
+  becomes the nightmare real-world version." (Occupational Sports A2:I2, full row read 2026-11-13, DS-Q8.)
 - Hullrun row: **ESTABLISHED**; "Station maintenance / engineering"; "Ducts, trusses, micro-g chambers, tether lanes"; "Traverse a
   realistic ship-maintenance obstacle course, often carrying components/tools"; tests "Climbing, crawling, EVA-style movement, spatial
   awareness, tool handling"; Rian Osei; "Rian's physical sport; pairs naturally with Deadship."
@@ -168,7 +208,7 @@ Bolt-Sworn; the six occupants and the person-to-system mapping (Tale A13:G19) ar
    ritual. A navigation-loss Deadship scenario should not drift into Vector Run's identity.
 
 **[OPEN]** No Drive row describes a Deadship rulebook (team size, penalties, standard scenarios, league), the First Ignition accident's
-failure sequence, or whether a Deadship-style qualification is part of Wayfarer's crew acceptance. These are DS-Q1, DS-Q2 and DS-Q3.
+failure sequence, or whether a Deadship-style qualification is part of Wayfarer's crew acceptance. DS-Q1 to DS-Q3 were decided on 2026-11-13: training is a gameplay concept and not an official qualification, the accident waits for its owner sources, and solo training is allowed with provisional competitive rules.
 
 ---
 
@@ -198,26 +238,56 @@ failure sequence, or whether a Deadship-style qualification is part of Wayfarer'
 
 ## 4. Recommended experience
 
-**Recommendation [PROPOSAL]: Concept D as the roadmap, Concept B as the first implementation, Concept C after its inputs exist.**
-
-The player is a trainee (the walk's existing newcomer) during Wayfarer's commissioning at the development station. The GU instructor
-who already greets the trainee offers Deadship qualification runs: the ship's real compartments, real systems knowledge, faults injected
-into the simulated systems state by the instructors. Rian Osei, an experienced Deadship competitor, sets or reviews harder runs once his
-identity and appearance are released (K01; until then he is named in text only, no body).
+**Approved direction.** Concept D is the roadmap, Concept B the first implementation and Concept C comes after its inputs exist. The
+player is a trainee (the walk's existing newcomer) during Wayfarer's commissioning at the development station. The GU instructor who
+already greets the trainee offers station-run Deadship training on the real ship, with faults injected into the simulated systems state.
+This is a gameplay concept (DS-Q1). It is not an official Wayfarer crew qualification. Rian Osei, an experienced competitor, may set or
+review harder runs once his identity and appearance are released (K01). Until then he appears in text only, with no body.
 
 Why this answer:
-- It reuses the walk wholesale and adds no geometry for the MVP.
-- Learning comes from the ship itself: the trainee who repeatedly loses CO₂ control learns where the ECLSS bay is, that sector doors
-  isolate air, and that ring B mirrors ring A.
-- It matches canon (training origin, simulator or disabled ship, insufficient parts, the four scoring terms, Rian's sport).
-- The systems foundation it forces into existence (section 6) is exactly what Concept C needs later.
+- It reuses the walk wholesale and needs no geometry for the first phases.
+- Learning comes from the ship itself. A trainee who loses CO₂ control learns where the ECLSS bay is, that sector doors split the air,
+  and that ring B mirrors ring A.
+- It matches canon: the training origin, "disabled ship or high-fidelity simulator", deliberately insufficient parts, the four scoring
+  terms and Rian's sport.
+- The systems foundation it forces into existence is what Concept C needs later.
 
-Entry point **[PROPOSAL]**: a third start of Explore Interior, `#interior-deadship` (`-- --deadship` natively), plus an in-walk offer
-from the instructor at spawn. The default `#interior` start stays exactly as it is. Explore Exterior gains Deadship tasks only in Phase 4+.
+**Entry points.** Explore Interior's default `#interior` start stays exactly as it is.
+- **[BUILT P0]** `#interior-systems` (`-- --systems` natively) is the Phase 0 proof start.
+- **[PROPOSAL]** `#interior-deadship` (`-- --deadship`) would be the training start from Phase 1.
+- Explore Exterior gains Deadship tasks only in Phase 4 or later.
+
+### 4.1 State model: the real ship, the simulated configuration, the gameplay, the simulated systems
+
+The contradiction in DS-000: the real ship at the development station is DOCKED, with both rings stopped and locked (14!A8, BASELINE).
+Deadship training wants rotating rings. The resolution keeps four layers apart:
+
+| Layer | What it is | Where it lives | Phase 0 |
+| --- | --- | --- | --- |
+| 1. Real spacecraft configuration | Wayfarer at the station: DOCKED, rings stopped and locked, boom extended. Never changed by training. | Canon (14!A8); the walk's STATION start shows it (`excursion.gd` `ctl` DOCKED) | Untouched |
+| 2. Simulated training configuration | COAST: undocked at the boom's 25 m stand-off with the boom retracted (STN-002), rings at 4 rpm. A physically valid state the real ship can reach through the owner's sequence. | `WfModeController` in COAST from the first frame (`excursion.gd` `_ring_start`, existing). No transition is played. | **[EXISTS]** reused as is |
+| 3. Player experience | Walk, doors, ladder and learning in spin gravity; the HUD says SIMULATION | `excursion.gd`, `locomotion.gd` | Unchanged; the board says "SIMULATION x60" |
+| 4. Simulated systems | Engineering states (Phase 0: ring A cabin CO₂) | `cabin_air.py` → `wf_cabin_air.json` → `WfCabinAir` | **[BUILT P0]** |
+
+Facts from the audit that make this clean:
+- **[EXISTS]** The default ring start already builds layer 2. `_ring_start()` creates the mode controller in COAST, puts the station at
+  its stand-off (`station_offset = 1.0`, boom retracted) and synchronizes drum A with the ring. It never shows a docked ship with
+  spinning rings, so no impossible configuration has to be created or removed.
+- **[EXISTS]** The station start (`#interior-excursion`) builds layer 1 and plays the owner's DOCKED → COAST order through Ops at the
+  trunk. It is untouched.
+
+**Transitions [PROPOSAL from Phase 1].**
+- *Into training*: only through the training start. The run begins in COAST at t = 0, as the ring start does. The real ship's
+  undocking is never played as part of a training run, so the simulation cannot imply that the docked ship spins.
+- *During a run*: the trunk's Ops mode requests are refused with "the simulator holds Wayfarer in COAST". Equipment operations (Ops at
+  equipment) are allowed.
+- *Out of training*: the run ends in a debrief. The player then either restarts the run or leaves the experience. A free walk after the
+  run continues in the same COAST, and any return to the station uses the existing spin-down, lock and dock order.
+- The systems state is session-local. It is never written to canon, the manifest, the rig or the controls profile.
 
 ---
 
-## 5. Gameplay mechanics
+## 5. Gameplay mechanics (design; Phase 0 builds none of this)
 
 ### 5.1 The loop
 
@@ -232,6 +302,9 @@ from the instructor at spawn. The default `#interior` start stays exactly as it 
 6. **Stabilize**: call "Stable". The simulator runs the **watch** (5.6) and the debrief explains what happened and why.
 
 ### 5.2 System graph (first version) [PROPOSAL, ENG]
+
+*Long-term illustration of the couplings Deadship needs, not a framework to build up front (owner 2026-11-13: no ship-wide graph or
+generic port/flow framework before a scenario needs it). Each phase adds only the stocks its scenario uses (section 9).*
 
 A lumped, directed graph of **components** with **ports** carrying typed flows. Small enough to explain, real enough that consequences
 emerge.
@@ -297,7 +370,7 @@ Physical where the body matters, technical interface where a panel is the real w
 Avoid abstract button pressing: a repair is a *sequence in space* (isolate here, fetch there, install, restore), and every step is
 something a real technician does.
 
-### 5.6 Scoring [PROPOSAL; weights OPEN for the Sports owner]
+### 5.6 Scoring [PROPOSAL; provisional, DS-Q3]
 
 Canon terms: survivability + resource conservation + system stability + time.
 
@@ -327,111 +400,155 @@ isolates the faulty unit, uses one spare and leaves a non-critical fault documen
 
 ### 5.7 Modes
 
-| Mode | In MVP? | Notes |
+| Mode | Phase | Notes |
 | --- | --- | --- |
-| Training | **Yes** | No time pressure beyond the physics, hints on, the instructor explains WHAT/WHY (reuse the learning panel) |
-| Challenge | Phase 3 | One emergency, limited parts, scored |
+| Training | Phase 1 (DS-1, unscored) | No time pressure beyond the physics, hints on, the instructor explains WHAT/WHY (reuse the learning panel) |
+| Challenge | Phase 2 (DS-2) | Two interacting problems, insufficient parts, provisional score |
 | Competition | Phase 4 | Standardized scenario set, fixed seeds, replay codes, local best scores; no backend |
 | Survival | Phase 4–5 | Cascading faults over a long watch |
 | Story | Phase 5 | No scores, no Deadship branding (section 2, point 5) |
 
 ---
 
+
+### 5.8 Refined scenarios (design only, not implemented)
+
+#### DS-1 "Scrubber": unscored guided tutorial (Phase 1)
+
+Purpose: teach the loop on one fault, with no competing problems, no inventory management and no score.
+
+| Step | What the player does | What it teaches | Uses |
+| --- | --- | --- | --- |
+| 1 Recognize | The sector 3 board turns amber (ABOVE TARGET). The instructor points at it. | A warning is a band, not a verdict: what the control band is | Board (built P0), bands |
+| 2 Inspect | Use at the bay: fan current 0 A, bed temperature low, controller healthy | Symptoms are measurements | Learning panel, part readouts |
+| 3 Interpret | The ops screen shows the unit powered and the CO₂ trend rising at about +0.04 %/h | Powered but not scrubbing points at the fan, not the bed or the supply | Readout `dxdt_per_h` (built P0) |
+| 4 Isolate | Ops at the bay: ISOLATED | Isolate before maintenance. Working on a live unit is refused with the reason. | `operate('isolate')` (built P0) |
+| 5 Navigate | Walk to the sector 2 workbench through the CIRC doors and carry the one spare fan | Where things are; doors split the air | Walk, doors (existing) |
+| 6 Repair | Use at the bay: install the fan | Physical repair at the equipment | Part state (Phase 1) |
+| 7 Restore | Ops at the bay: RUNNING | Restoring service is a deliberate step | `operate('restore')` (built P0) |
+| 8 Verify | Watch the trend turn negative, then a short projected watch confirms the CO₂ returns below the target and stays there | Stable means stable over time, not just at one moment | Exact step, the watch |
+
+Crossing the 0.5 % control limit ends the tutorial as an **operational failure**. The screen then says plainly that the crew is not
+harmed, that the limit is where corrective action is required, and how far the degraded-habitability and danger levels still are
+(section 7.2). The tutorial teaches the difference instead of hiding it.
+
+#### DS-2 "Borrowed Air": the first true Deadship challenge (Phase 2)
+
+Principle: **you cannot save everything.** Two interconnected problems, too few parts, at least two valid stabilizations, each with
+consequences the model computes.
+
+Situation (scenario-owned values, PROTOTYPE):
+- **Problem 1:** ring A's CO₂-removal fan fails. There is no spare fan, because the scenario's manifest has none.
+- **Problem 2:** ring A's cabin cooling runs on one of its two cold-loop pumps (the other has failed). Heat removal from the ring is
+  limited, and the condensing heat exchanger that removes humidity shares that loop.
+- Six people are in ring A. Ring B is empty and healthy.
+
+Valid strategies, and what the model shows for each:
+
+| Strategy | Immediate effect | Consequence the model computes | Resources | Long-term stability |
+| --- | --- | --- | --- | --- |
+| S1 Cannibalize ring A's condensing-HX fan into the CO₂ unit | CO₂ falls within the hour | Humidity removal stops: the crew's vapour (roughly 2 kg per person-day, ENG estimate) accumulates and RH passes the 50 % band in about an hour (condensation risk); latent heat stays in the ring | No parts used; ring A loses dehumidification | Poor: a second problem now grows |
+| S2 Fetch ring B's CO₂ fan through the trunk and drum (a Hullrun carry) | CO₂ falls after the carry time | Ring B can no longer hold anyone; the cold-loop limit is unchanged | Uses ring B's redundancy; time | Good while everyone stays in ring A |
+| S3 Move the crew to ring B and seal ring A | Ring A's CO₂ no longer matters | Ring B's unit carries six at its rating; ring A's heat still has to go somewhere; drum cycles and time | No parts; time; ring A unattended | Good, but ring A's faults stay unresolved |
+| S4 Shed heat load in ring A (lab, Garden lights) and run on one pump | Temperature margin restored | CO₂ still rises: on its own it does not stabilize the ring | Power; lost functions | Fails the watch unless combined |
+
+A competent player combines strategies (for example S2 with S4), and the score reflects that. Everything in the table must come from
+model state: humidity is a stock with sources (crew vapour) and a sink (the condensing HX), heat is a stock with a cooling limit, parts
+are entities that can be moved, and occupancy is per ring. No penalty is scripted.
+
+What Phase 2 must add to the model (prerequisites, section 9): two ring air volumes, door-coupled compartments, a water-vapour stock,
+a lumped heat stock with the cold-loop limit, parts as model entities, per-ring occupancy, and the watch.
+
+---
+
 ## 6. Technical architecture
 
-### 6.1 Layers [PROPOSAL]
+### 6.1 Layers, as built in Phase 0 and as they will grow
+
+The DS-000 proposal (a ship-wide component graph, a generic port/flow framework and a scenario compiler) is **not** built. The owner
+asked for proof first. Phase 0 shows that a simpler shape gives the same validated function, and each later phase adds only what its
+scenario needs.
 
 ```
- data/  (canon + PROTOTYPE parameters)          data/deadship/  (scenarios: PROTOTYPE, game-owned)
-   │                                               │
-   ▼                                               ▼
- src/wayfarer/ship_systems.py  ───────►   src/wayfarer/deadship.py
- (ENGINEERING MODEL: components, ports,     (SCENARIO compiler: faults, inventory, objectives,
-  flows, limits, from spec and life_support;  scoring weights; scenario screens)
-  knows nothing of Deadship)                     │
-   │  systems_sim.py (reference stepper,         │
-   │  fixed dt, deterministic, checkpoints)      │
-   ▼                                             ▼
- package: wf_ship_systems.json        package: wf_deadship.json          (written by runtime-export / web build)
-   │                                             │
-   ▼                                             ▼
- godot/scripts/systems/  WfShipSystems     godot/scripts/deadship/  WfDeadship (scenario engine, scoring, debrief)
- (SIMULATION: same step as Python,          ├─ interaction layer: WfInteractables (registry by exported node)
-  proves the checkpoints at load)           ├─ visualization: cue panels, board, schematic, alarms
-                                            └─ gameplay: objectives, hints, the watch, score, local records
+ data/wayfarer_3d.toml, data/life_support.toml          (canon + statuses)          data/deadship/   (created when Phase 1 needs it)
+        │                                                                                │
+        ▼                                                                                ▼
+ ENGINEERING MODEL  src/wayfarer/cabin_air.py   [BUILT P0]                     SCENARIO LAYER  (future consumer; not built)
+   state, exact step, operations, readout, bands,                                faults (cabin_air.fail), objectives, the watch,
+   checkpoints; knows nothing of games                                           scoring, debrief
+        │  export/godot.py writes wf_cabin_air.json into the runtime package [BUILT P0]
+        ▼
+ RUNTIME MODEL  godot/scripts/systems/cabin_air.gd  WfCabinAir   [BUILT P0]
+   same step; verify() against the checkpoints before use
+        │                                   ▲
+        ▼                                   │ operate("isolate" / "restore")
+ VISUALIZATION  board (Label3D on the bay),  INTERACTION  godot/scripts/excursion/equipment.gd  WfEquipment  [BUILT P0]
+ HUD prompt, touch label  [BUILT P0]         binds the packaged node, reach, Ops → the model; ~5 hook lines in excursion.gd
 ```
 
-### 6.2 Engineering model (`ship_systems.py`, pure Python, standard library) [PROPOSAL, M]
-
-- Builds the component graph from `data/wayfarer_3d.toml` and `data/life_support.toml` through the existing modules
-  (`cabin_atmosphere`, `life_support`, `power_storage`, `thermal_budget`, `heat_rejection`, `materials`): every parameter carries its
-  `source_ref` and status; `known = false` stays unknown and must be supplied by the consumer (a scenario) with a PROTOTYPE label.
-- Binds components to exported nodes (`Prod_RA3_GDN_ECLSS`, …) through the manifest's `source_name`, like `learning_stations.py`.
-- Exposes a generic override interface (component state, part state, parameter override) so any consumer (Deadship, story, an
-  Engineering page) can apply faults without the model knowing why.
-- Writes `wf_ship_systems.json` with its own checkpoints: given a stated initial state and a stated sequence of overrides, the state
-  after N steps.
-
-### 6.3 Simulation (`systems_sim.py` and `WfShipSystems`) [PROPOSAL, M]
-
-- Lumped stocks (gas moles per air volume and species, battery Wh, thermal energy per lumped mass, coolant flow) and flows per step.
-- Fixed step (1 s ship time), time compression as a labelled display factor (as the walk's ×90 ring ramp), no randomness at run time:
-  every fault time comes from the scenario (seeded at compile time).
-- GDScript repeats the exact step; at load it runs the package's checkpoints and refuses to start Deadship if any differs (the retired
-  `life_support.gd` did this). Cost: a few hundred components at 1–10 Hz is negligible in GDScript even in the Web build.
-- Ledgers per resource; a conservation check every step in debug builds and in the headless check.
-
-### 6.4 Scenario engine (`deadship.py` → `wf_deadship.json` → `WfDeadship`) [PROPOSAL, M]
-
-A scenario is data (TOML under `data/deadship/`, a new subfolder of `data/`; DS-Q5): ship configuration (COAST, DOCKED), occupants and
-their positions per ring, scenario-owned PROTOTYPE values for anything OPEN, fault schedule (component, part, time or trigger), inventory
-(parts, consumables, tools, where they are), objectives, hint texts, watch length, scoring weights. The engine advances like
-`WfEvaScenario`: on real state, never on timers, except the faults the scenario schedules.
-
-### 6.5 Interaction layer (`WfInteractables`) [PROPOSAL, S–M]
-
-A registry of `{node, reach, verbs, condition}` entries built from `wf_deadship.json` and the manifest. `excursion.gd`'s `use()`
-consults it first when Deadship is active; the label shown on touch ("Use · isolate CO₂ unit") comes from it. Verbs call the systems
-model's override interface. Physical props (a carried fan, a jumper) are Godot-authored presentation scenes under `godot/scenes/deadship/`
-(display only, never spacecraft facts); equipment covers become bound mechanisms only after a detail pack adds them (Phase 3+).
-
-### 6.6 Visualization and gameplay UI [PROPOSAL, S–M]
-
-- Status colours on the existing SP-54 cue panels and the ECLSS board (emission changes at runtime: presentation only).
-- A systems schematic (2-D Control, like the ring map) drawn from the graph, opened at an ops screen or by its action.
-- Alarms as sound and text; the HUD shows at most three clocks.
-- The debrief reuses the learning panel: WHAT happened, WHY (the dependency that bit), SHOW ME (the schematic replay of the run).
-
-### 6.7 Controls, persistence, deployment [PROPOSAL]
-
-- **Controls.** A new `deadship` context in `SCENE_ACTIONS`, active together with `excursion`; physical operations reuse `exc.use`.
-  New rows: `deadship.scan` (handheld readout), `deadship.schematic`, `deadship.stable` (hold), `deadship.drop`. None marked `setup`, so
-  no existing profile is asked anything new; conflict checks cover them automatically; touch gets context buttons (`wf_touch.gd`). No key
-  is hard-coded; every prompt prints `WfInput.keys(...)`.
-- **Persistence.** A separate `user://wayfarer_deadship.cfg` (runs, best scores, replay codes, training progress). The controls profile
-  (schema 4) is not touched. Same IndexedDB behaviour and the same "this visit only" notice when storage is not persistent.
-- **Replay and competition.** A replay code = scenario id + scenario hash + semantic action log (ship-time stamped). Local only; a
-  shared leaderboard is not needed until the owner asks (it would be the first backend; DS-Q6).
-- **Deployment.** Nothing new: the package files ride in the existing Godot pack; Pages from `main` after the owner's squash.
-- **Checks.** A headless `--check-deadship` drives the scenario through semantic actions (like `--check-excursion`): checkpoint parity,
-  ledger invariants, the scripted reference solution stabilizes, the "do nothing" run is lost at the expected time, the default
-  Explore Interior start is unchanged. The browser check only confirms the scene loads and one action works.
-
-### 6.8 What goes where
-
-| Part | Place | Why |
+| Layer | Owns | Must not |
 | --- | --- | --- |
-| Systems graph, reference stepper | `src/wayfarer/ship_systems.py`, `systems_sim.py` | Pure, testable, shared with the Engineering pages and story |
-| Scenario data | `data/deadship/*.toml` | Data, not code; owner-reviewable |
-| Scenario compiler and screens | `src/wayfarer/deadship.py` | Pure; writes the package; runs the solvability screen on demand |
-| Runtime simulation | `godot/scripts/systems/` | Reusable by any scene |
-| Deadship gameplay | `godot/scripts/deadship/`, `godot/scenes/deadship/` | Separate from `excursion.gd` |
-| Blender | Nothing for the MVP; later a detail pack for service covers and spares racks (`docs/MODULES.md`) | Geometry stays generator-owned |
-| TypeScript / WebAssembly / backend | **None** | The runtime is Godot; the simulation is tiny; single-player is local |
+| Engineering model (`cabin_air.py`, `WfCabinAir`) | Physical state, step, allowed transitions, readout, bands, reference checkpoints | Know about games, scenarios, scores, keys or nodes beyond its binding record |
+| Interaction (`WfEquipment`) | Which node, the reach, which operation Ops requests now | Compute numbers or bypass a refused transition |
+| Visualization (board, prompt, touch label) | Showing the readout and the band, labelled SIMULATION | Show anything the model did not read out |
+| Scenario (future, `data/deadship/`) | Faults, objectives, the watch, scoring | Change the model's laws or write back to canon |
 
-**Separation principle.** `ship_systems` never imports `deadship`; `WfShipSystems` never references `WfDeadship`. Deadship only applies
-overrides and reads state. A unit test protects the physical invariants of `ship_systems` (conservation, canon parameter agreement), not
-Deadship content (AGENTS.md: tests protect owner numbers and physical invariants).
+**Independence check (built).** `cabin_air.py` imports only the spec, `life_support`, `pressure_volumes` and `ring_circulation`.
+`WfCabinAir` references no scene, no `WfInput` and no Deadship term. The interaction layer calls only `operate`, `step` and `readout`.
+`cabin_air.fail()` is the fault entry point that a scenario or story beat would use; Phase 0 does not call it at runtime.
+
+### 6.2 Python reference and GDScript runtime
+
+- **Minimum interface.** One JSON file per engineering state, written by the export: parameters with statuses, the binding, the states
+  and allowed operations, the bands, the tolerance and the proof run (events plus checkpoints). Godot reads it and computes no parameter.
+- **Exact step.** For constant generation and removal over a step, the CO₂ balance has a closed-form solution, so both sides evaluate
+  the same formula and the result does not depend on the step length (verified at 1 s and 60 s).
+- **Tolerance, not bit-equality.** Python and Godot both use IEEE 754 doubles, but their `exp()` may differ in the last place.
+  Checkpoint agreement is `|got − want| ≤ 1e-9 kg + 1e-9 × |want|`. The justification and the measured margins are in section 13.
+  A checkpoint outside the tolerance sets `verified = false`: the board says REFERENCE CHECK FAILED, the walk logs an error, the bay
+  offers no operation and the check fails.
+
+### 6.3 Interaction architecture
+
+The smallest reusable abstraction: `WfEquipment` is "a piece of equipment bound to a packaged node, with a reach and an operating state".
+- It reuses `WfLearning`'s node lookup (`_mesh`, manifest `source_name`) and the same ring-pivot rule for its centre.
+- `excursion.gd` changes only by hooks: a variable, creation behind `systems_requested()`, a step in `_physics_process`, a branch at
+  the top of `ops()`, a touch button, a prompt line, a board update and a page-record field.
+- Doors, hatches, the ladder, learning stations and Use are not touched. Ops elsewhere behaves as before.
+- **Why Ops, not Use.** Use at the bay already steps the UJ-004 learning station (WHAT / WHY / SHOW ME). Ops is the existing "operating
+  change" action, so its meaning extends naturally from the trunk panel to equipment panels. No new action, key or setup question is
+  needed. The description text of `exc.ops` now names both uses.
+- A general registry (several equipment kinds, verbs, conditions) waits until a second piece of equipment exists (Phase 1 adds the
+  workbench and a part). Then `WfEquipment` becomes a list.
+
+### 6.4 Controls
+
+- No new action, no hard-coded key and no new `setup` row. Ops (`exc.ops`) is reused, and every prompt prints the player's binding
+  through `key()` / `WfInput.label`. Saved profiles (schema 4) are untouched, because profiles store bindings by action id and the
+  description text is not stored.
+- Touch: the existing contextual-button mechanism (`touch_state()` → `wf_touch.gd`) shows "Ops · isolate CO2 unit" or "Ops · restore
+  CO2 unit" while the bay is in reach.
+- **Legacy contexts.** The retired contexts in `wf_input.gd` (`walk`, `life`, `thermal`, …) are not needed for Phase 0 and are left
+  untouched. Pruning them stays separate maintenance (TODO J05).
+- Phase 1 may add `deadship.*` actions (for example a hold-to-confirm "Stable"). Each would be a new non-setup row in the registry,
+  checked by the existing conflict checker, with a touch button.
+
+### 6.5 Persistence, deployment, what goes where
+
+- Phase 0 persists nothing. From Phase 1, browser-local progress goes in a separate `user://wayfarer_deadship.cfg` (DS-Q6), never in the
+  controls profile.
+- No backend, no TypeScript, no WebAssembly module and no new dependency. Nothing is deployed: Pages deploys only from `main`.
+
+| Part | Place | Status |
+| --- | --- | --- |
+| Engineering state and reference | `src/wayfarer/cabin_air.py`, `tests/test_cabin_air.py` | BUILT P0 |
+| Package file | `wf_cabin_air.json`, written by `src/wayfarer/export/godot.py` | BUILT P0 |
+| Runtime model | `godot/scripts/systems/cabin_air.gd` | BUILT P0 |
+| Interaction and display | `godot/scripts/excursion/equipment.gd` + hooks in `excursion.gd`; `web_page.gd` (`#interior-systems`) | BUILT P0 |
+| Headless check | `godot/scripts/excursion/check_systems.gd`; runtime check `systems` in `tools/runtime_export.py` | BUILT P0 |
+| Scenario data | `data/deadship/*.toml` | Phase 1 (DS-Q5) |
+| Scenario engine, the watch, debrief | `godot/scripts/deadship/` | Phase 1–2 |
+| Service covers, a spares rack | A detail pack (`docs/MODULES.md`) | Phase 3+ |
 
 ---
 
@@ -449,18 +566,67 @@ Deadship content (AGENTS.md: tests protect owner numbers and physical invariants
 so moving a component from a scenario value to a released owner value changes data, not code. Level 1 is used only for tutorial
 scaffolding (a hint sequence), never for outcomes.
 
-### 7.2 What the canon already gives (worked example) [ENG, DERIVED from canon]
+### 7.2 CO₂: equations, volume, the three tiers and the uncertainty [ENG; values as labelled]
 
-Air volume per ring: 120 m³ usable (`[habitat.layout] usable_per_ring_m3`, WORKING), 80 kPa, assumed 295 K (cabin temperature not
-found in the spec: **[ENG]** assumption). Ideal gas: n = PV/RT ≈ 3,914 mol.
-- CO₂ at the 0.3 % target ≈ 0.52 kg; at the 0.5 % max ≈ 0.86 kg; the window is 0.34 kg.
-- At the 41 STUDY rate of 1.0 kg CO₂ per person-day: **six people in ring A take about 1.4 h** from target to max, three people about
-  2.8 h, twelve about 0.7 h.
-- O₂ at 20 kPa in the same volume ≈ 31 kg; at 0.84 kg per person-day, six people consume about 5 kg a day, so O₂ is a slow clock and
-  CO₂ the fast one. That is the real lesson of spacecraft air (CO₂ removal, not oxygen, is what fails first in a closed cabin), and it
-  falls out of canon numbers without tuning.
+**Equations (as built in `cabin_air.py`).** CO₂ stays below 1 % of the cabin gas, so it is treated as a trace gas. The total amount
+n = PV/(RT) is held fixed and the CO₂ mass m carries the state:
 
-Using the usable rather than gross volume is conservative (shorter clock); the scenario can state which it uses.
+- dm/dt = G − k·m/V, with G = occupants × 1.0 kg per person-day, and k the unit's effective scrubbed flow (0 unless RUNNING).
+- Exact step for constant G and k: m(t+Δt) = m_ss + (m − m_ss)·e^(−kΔt/V), where m_ss = G·V/k. With k = 0: m(t+Δt) = m + G·Δt.
+- Mole fraction x = (m/M_CO₂)/n. Partial pressure p = x·P.
+- Unit rating (PROTOTYPE): k is set so that the rated twelve are held exactly at the target, k = G₁₂·RT/(P·M·x_target) ≈ **116 m³/h**
+  of fully scrubbed air. That is a plausible order for a regenerable sorbent unit with a process-air fan. With six aboard, the steady
+  state is 0.15 %.
+
+**What the 120 m³ in DS-000 was.** It is the canon *usable volume allocation per ring* (`habitat.layout.usable_per_ring_m3`, 12!A2:A4,
+WORKING): a space-planning figure. It is neither the pressurized volume nor the connected gas volume. The built PROTOTYPE rooms give:
+
+| Volume (PROTOTYPE geometry) | m³ | Source |
+| --- | --- | --- |
+| Ring A sectors, net (deck to overhead less modelled fit-out; subfloor excluded) | 37.7 + 44.2 + 46.0 = 127.9 | `pressure_volumes.rooms` |
+| Ring A sectors, gross (inside the skin) | 3 × 72.4 = 217.2 | `pressure_volumes.rooms` |
+| Ring A circulation corridor (CIRC-001), gross clear cavity | 338.5 | `ring_circulation.budget` |
+| Crew tubes (each, excluded) | about 49 | `pressure_volumes.rooms` |
+| **Phase 0 free gas volume: sectors net + corridor gross** | **466.4** | `cabin_air.volume` |
+
+The connected volume depends on the doors. With the CIRC doors open and ventilation mixing the ring, ring A is one volume of roughly
+466–556 m³. With sector 3 sealed it is about 46–72 m³. Phase 0 models the first case as one well-mixed volume (PROTOTYPE `mixing`), and
+the door states are not coupled yet. Coupling them is a Phase 1 prerequisite. Without it, closing a door would leave the model's
+volume wrong.
+
+**Hours from the 0.3 % target to the 0.5 % control limit with the unit off** (linear rise):
+
+| Volume case | 6 people | 3 people | 2 people | 1 person |
+| --- | --- | --- | --- | --- |
+| Ring connected, Phase 0 (466 m³) | **5.4** | 10.7 | 16.1 | 32.1 |
+| Ring all gross (556 m³) | 6.4 | 12.8 | 19.1 | 38.3 |
+| Canon usable allocation (120 m³, DS-000) | 1.4 | 2.8 | 4.1 | 8.3 |
+| Sector 3 sealed, net (46 m³) | 0.5 | 1.1 | 1.6 | 3.2 |
+| Sector 3 sealed, gross (72 m³) | 0.8 | 1.7 | 2.5 | 5.0 |
+
+Lesson for the design: isolating a compartment (against a leak, a fire or contamination) also shrinks the CO₂ buffer of the people
+inside it. That is a real engineering trade-off, and it falls out of the model without any tuning.
+
+**Three tiers, kept apart** (bands by partial pressure, because the body responds to partial pressure, not to the fraction):
+
+| Tier | Level here (80 kPa) | Status | Meaning | Tutorial behaviour |
+| --- | --- | --- | --- | --- |
+| Operational control limit | x > 0.5 % (0.40 kPa) | WORKING canon (02!A49:H52: "not final medical/ECLSS limits") | Outside the normal operating range: corrective action required | Ends the run as an operational failure, and says so |
+| Degraded habitability | p ≥ 0.8 kPa (1.0 % here) | PROTOTYPE reference: the order of long-duration submarine practice (about 0.8 % at one atmosphere) | Safety margin reduced; headaches and lower performance likely over hours | Shown as the next band |
+| Physiological danger | p ≥ 3.0 kPa (3.75 % here) | PROTOTYPE reference: the order of the 15-minute occupational limit (3 % at one atmosphere) | Clinically meaningful risk | Shown as the band to avoid |
+
+Medical limits are OPEN in canon (12!G22), so the second and third tiers are teaching references, never canon values. Times from the
+steady state with six aboard and the unit off: control limit about 9.4 h, degraded habitability about 23 h, danger about 96 h. A failed
+scrubber is therefore a slow, manageable emergency in a ventilated ring, which is the correct engineering lesson. It becomes urgent only
+in a small sealed volume or with many people.
+
+**Uncertainty.**
+- The volume is PROTOTYPE geometry. It could vary by about −0 % / +19 % (net versus gross), and much more if the doors close.
+- The 1.0 kg per person-day rate is a STUDY hypothesis (it depends on metabolism and activity; 0.8–1.2 is a common range).
+- Temperature (295 K) is PROTOTYPE, but it enters only through n, as about 0.3 % per kelvin.
+- Mixing is idealized: real cabins have local pockets, for example near sleepers.
+- The unit rating is PROTOTYPE, and the technology and its parts are OPEN (12!G26:G27, DS-Q4).
+- Not modelled: O₂ drawdown (slow: a week-scale clock), humidity, leaks and the sorbent's own capacity and regeneration cycle.
 
 ### 7.3 Limits and what stays honest [ENG]
 
@@ -470,8 +636,8 @@ Using the usable rather than gross volume is conservative (shorter clock); the s
   `heat_rejection.py` are used as published; temperatures shown are labelled simulation values.
 - **ECLSS internals are OPEN.** The CO₂ unit's parts (fan, bed, valve, controller) are a PROTOTYPE taxonomy; the technology
   (regenerable sorbent) is an engineering assumption to put to the owner (DS-Q4).
-- **Medical limits are OPEN** (12!G22). The run ends at the WORKING control band with a labelled safety margin, not at a claimed
-  physiological limit.
+- **Medical limits are OPEN** (12!G22). The control band (WORKING) is an operational limit. The degraded-habitability and danger
+  levels are PROTOTYPE teaching references (section 7.2), never claimed as physiological canon.
 - **Fiji/Lattice.** Its internals stay out of repair gameplay; where it appears (black start), the energy flows follow the published
   steps and the pulse bank's 200 kWh / 50 MW. Fictional technology never creates energy, removes heat or skips a pressure rule.
 - **Not modelled:** fluid transients, fire chemistry, structural failure, radiation dose. A scenario that needs one is out of scope until
@@ -500,60 +666,79 @@ Drawn from general knowledge of these games and practices; no external code or a
 
 ## 9. Development roadmap
 
-| Phase | Content | Depends on | Acceptance | Size |
-| --- | --- | --- | --- | --- |
-| **0 Foundations** | Prune retired contexts from `wf_input.gd` (TODO J05); extract an interaction registry hook from `excursion.gd`; `ship_systems.py` skeleton with the ring A air volume only | Owner approval of this report | Explore Interior unchanged (all existing checks pass); registry used by one existing interaction | S |
-| **1 Minimal prototype (DS-1)** | Section 10 | Phase 0 | Section 10 criteria | M |
-| **2 Connected systems** | Bus A/B power, the CO₂ unit, fans, the ring cold loop, cabin heat, RH; load shedding at the ops screen; door isolation of air volumes | DS-1; PROTOTYPE loads (DS-Q4) | Two faults whose fixes interact (e.g. bus fault stops the coolant pump; restoring power overheats until flow returns); conservation checks pass | M |
-| **3 Resource decisions** | Insufficient parts; cannibalize ring B's mirrored unit through the trunk and drum (a Hullrun carry); jury-rig with reliability; the watch scoring; Challenge mode; first detail pack (service covers, spares rack) | Phase 2; detail pack via `docs/MODULES.md` | At least two valid stabilizations with different scores; scenario screen proves no full repair is possible | M–L |
-| **4 Full Deadship** | Both rings, station briefing at the boarding node, black-start procedure scenario, Competition mode with standard scenarios, replay codes, local records; Survival mode; Hullrun timed carry mode; optional exterior task (radiator cell isolation) | Phase 3; walk lines to SP-45 storeroom (geometry already exists) | Standard scenario set replays identically native and Web; scores stable across runs | L |
-| **5 Narrative** | First Ignition / voyage events driven by the same systems model; no scores, no branding | Tale rows for the accident (DS-Q2), OD-010 degraded modes, heat capacities | Story beats played on the same model; no canon invented | L+ |
+A dependency-based roadmap, not a commitment to build every feature.
 
----
+| Phase | Status | Content | Depends on | Acceptance | Size |
+| --- | --- | --- | --- | --- | --- |
+| **0 Minimal engineering integration proof** | **DONE on this branch, awaiting review** | One engineering state (ring A cabin CO₂), one real component (sector 3 ECLSS bay), one interaction (Ops: isolate / restore), one diagnostic display (the bay's board, the prompt, the touch label), deterministic validation | Owner authorization (given 2026-11-13) | Section 13 and section 14 | S |
+| **1 Scrubber tutorial** | DESIGN ONLY | DS-1 (section 5.8): unscored and guided; a FAILED unit with part states (fan, bed, controller); the spare fan at the workbench; door-coupled air volumes; a short watch; the tier explanation on failure | Phase 0 approved; the prerequisites below | All eight DS-1 steps play through player actions in a headless check; the default start unchanged; the tutorial explains the three tiers | M |
+| **2 First true Deadship challenge** | DESIGN ONLY | DS-2 "Borrowed Air" (section 5.8): two interacting problems, insufficient parts, at least two valid stabilizations with model-computed consequences; the watch and provisional scoring | Phase 1; humidity and heat stocks; two rings; parts as entities | A scenario screen shows ≥ 2 stabilizing strategies, no full repair, and different scores from model state alone | M–L |
+| **3 Broader engineering systems** | DESIGN ONLY | Bus A/B power and the survival-reserve loads, cold-loop limits, load shedding, longer watches, ring B through the trunk and drum | Phase 2; PROTOTYPE electrical loads (power.rating OPEN) | Trade-offs between power, heat and air reproduce in Python and Godot within tolerance | L |
+| **4 Competitive Deadship and Hullrun** | DESIGN ONLY | Standard scenarios, repeatability (seeds, replay codes), provisional scoring, browser-local records (DS-6), Hullrun timed carries, the station briefing | Phase 3; walk lines to the SP-45 storeroom | Replays identical native and Web; records stay in browser storage only | L |
+| **5 Narrative survival** | DESIGN ONLY | First Ignition and the voyage on the same model; no scores and no Deadship branding | Tale and engineering owner rows for the accident (DS-Q2); OD-010 degraded modes; heat capacities | Story beats run on the model with no invented canon | L+ |
 
-## 10. First playable prototype: DS-1 "Scrubber"
+**Exact prerequisites for Phase 1:**
+1. The owner reviews and approves Phase 0, including the volume and band choices in section 7.2.
+2. The FAILED state reachable through a fault input (`cabin_air.fail` exists) and a `repair` transition with part states, added to
+   the model, its checkpoints and its tests.
+3. Door states coupled to the air volume: each CIRC door joins or splits compartments. This is the main modelling step: compartment
+   volumes, occupancy per compartment, and mixing across open doors.
+4. A second interaction point (the sector 2 workbench, carrying one part). This is when `WfEquipment` becomes a small registry.
+5. `data/deadship/` created for the DS-1 definition (DS-Q5), with a scenario loader that only calls the model's public operations.
+6. A `#interior-deadship` start and the transitions of section 4.1 (the trunk's Ops refused during a run).
+7. A projected watch: running the same exact step forward with no input, which is cheap because the step is exact for any Δt.
 
-**Goal.** One compartment set, one malfunction, one diagnosis and repair sequence, one success condition, on the existing walk.
+## 10. Phase 0: what was built
 
-**Setting [PROPOSAL].** Explore Interior, `#interior-deadship`. Wayfarer docked at the station, ring A spinning for the training run
-(scenario choice; the docked rule keeps rings stopped and locked (14!A8), so the run states it is a COAST configuration in simulation
-only, or the run uses the DOCKED-locked ship with the deck in the rig's training gravity: **[OPEN]** DS-Q7; the walk already starts on
-ring A's deck in spin gravity, so COAST-in-simulation is the low-cost reading). Six simulated occupants in ring A.
+**Selection: the ring A sector 3 ECLSS bay.** It was the lowest-risk point:
+- It is a real exported node (`Prod_RA3_GDN_ECLSS`) that the walk already finds and follows as the ring turns (UJ-004 learning
+  station).
+- It is on the ring A circuit that the default start already walks.
+- Its system (cabin CO₂) has canon pressure and a canon control band, a sourced STUDY rate, and an exact closed-form model.
 
-**Fault.** The sector-3 CO₂ removal unit (at `Prod_RA3_GDN_ECLSS`) stops removing CO₂: its fan has failed (cause), visible as zero fan
-current and a cold bed (symptoms).
+No other component was easier: the power and thermal systems have their decisive values OPEN, and the trunk panels belong to the
+docking sequence.
 
-**Sequence.**
-1. Briefing by the instructor: "Ring A's board shows CO₂ rising. Find out why and stabilize the ring."
-2. The sector-3 board shows ppCO₂ rising; the HUD shows one clock (time to the 0.5 % limit, about 1.4 h ship time at the scenario's
-   labelled compression, e.g. ×8 gives about 10 minutes of play).
-3. Inspect the unit (Use): fan current 0 A, bed temperature low, controller healthy. The schematic at the sector-2 ops screen shows
-   the unit powered.
-4. Isolate the unit (Use: power off at the unit). Working on it live is refused with the reason ("isolate before opening").
-5. Fetch the spare fan from the sector-2 workbench: walk through the CIRC corridor and its doors, carry one item.
-6. Install, restore power: CO₂ starts to fall.
-7. Call "Stable" (hold): a 12 h watch runs in seconds; the debrief shows the CO₂ curve, what the fan does, and that a sector door left
-   open or closed changed nothing here but would have in a leak (a teaser for Phase 2).
+**How to see it.**
+- Natively: `godot --path godot -- --systems`.
+- In a browser build: `play/…#interior-systems`.
 
-**Success.** CO₂ back below the 0.3 % target within the watch and no out-of-band exposure beyond the scenario allowance.
-**Failure.** CO₂ reaches the limit: the run stops with a debrief (no harm to the walk).
+Walk to the sector 3 ECLSS bay. The board above the bay shows ring A's CO₂ (fraction, partial pressure, trend, unit state, band and
+time to the control limit, at a labelled ×60 simulation rate). Ops there isolates the unit, and the CO₂ starts rising. Ops again
+restores it. Nothing is deployed: the owner's review path is the screenshots in the project Library.
 
-**Optional second solution (if cheap).** Take the Garden circulation fan (same family) instead of walking to the workbench: faster, but
-the watch shows RH climbing in sector 3 over hours (stability term lower). This demonstrates the Deadship idea from the first scenario.
+**Data flow.**
+1. `data/` → `cabin_air.params()`: canon pressure, control band and CO₂ rate, plus the PROTOTYPE volume, occupants, temperature and
+   rating.
+2. `export/godot.py` → `wf_cabin_air.json` in the runtime package. This includes the proof run's 33 checkpoints and the tolerance.
+3. `WfCabinAir.load_package()` → `verify()` replays the proof run and compares every checkpoint and the ledger. Only a verified model is
+   offered.
+4. `WfEquipment` binds the packaged node and the reach. In `_physics_process` it steps the model by Δt × 60.
+5. The player presses Ops (their own binding, or the touch button) → `excursion.ops()` → `WfEquipment.operate()` →
+   `WfCabinAir.operate("isolate" | "restore")`. The model accepts the operation or refuses it by its transition table.
+6. `readout()` → the board text and colour, the prompt line and the touch label; `record()` → `window.wayfarerWalk.systems` and the
+   check.
 
-**What it builds.** The air-volume part of `ship_systems.py` and its stepper with checkpoints; `WfShipSystems`; `WfDeadship` with one
-scenario; `WfInteractables` with four verbs; four new actions in the `deadship` context; the debrief panel reusing the learning panel;
-`--check-deadship`. No geometry, no Blender change, no canon change, no new dependency.
+**Files.**
 
-**Acceptance criteria.**
-- Godot reproduces the Python checkpoints exactly (tolerance stated), or Deadship refuses to start.
-- The CO₂ ledger closes every step (produced = removed + accumulated).
-- With no action the run is lost at the predicted ship time (±1 step); the reference solution stabilizes.
-- The default `#interior` start, `--check-excursion`, `--check-locomotion` and `controls` checks are unchanged and pass.
-- All prompts print the player's bindings; touch shows a context button for each verb; no new setup question for existing profiles.
-- The Web build loads and plays it; headless check native and Web.
+| File | Change |
+| --- | --- |
+| `src/wayfarer/cabin_air.py` | new: the engineering state and reference |
+| `tests/test_cabin_air.py` | new: 7 invariant tests |
+| `src/wayfarer/export/godot.py` | writes `wf_cabin_air.json` into the package (4 lines) |
+| `godot/scripts/systems/cabin_air.gd` (+ `.uid`) | new: runtime model with `verify()` |
+| `godot/scripts/excursion/equipment.gd` (+ `.uid`) | new: the bay binding, Ops, the board |
+| `godot/scripts/excursion/check_systems.gd` (+ `.uid`) | new: the headless check |
+| `godot/scripts/excursion/excursion.gd` | hooks only, behind `systems_requested()` |
+| `godot/scripts/excursion/check_locomotion.gd` | one assertion: the default start creates no systems proof |
+| `godot/scripts/web_page.gd` | `#interior-systems` start variant |
+| `godot/scripts/controls/wf_input.gd` | the `exc.ops` description names equipment panels (text only) |
+| `tools/runtime_export.py` | the `systems` runtime check |
+| `docs/MODEL.md`, `docs/IMPLEMENTATION.md`, `TODO.md` | the SYS-001 entries |
 
-**Size.** M (about a week of focused sessions), most of it in the reusable systems layer.
+**Deliberately not built:** a scenario engine, faults at runtime, part states, repairs, door coupling, a second ring, humidity, heat,
+power, scoring, the watch, persistence, new actions, Deadship branding, any geometry or Blender change, any Drive write and any
+deployment.
 
 ---
 
@@ -577,28 +762,150 @@ scenario; `WfInteractables` with four verbs; four new actions in the `deadship` 
 
 ---
 
-## 12. Unresolved decisions (owner questions, drafted locally)
+## 12. Open items after the 2026-11-13 decisions
 
-| ID | Question | Recommended default while open |
+DS-Q1 to DS-Q8 are decided (see "Decisions applied"). What remains open:
+
+| ID | Item | Default until decided |
 | --- | --- | --- |
-| DS-Q1 | Is a Deadship-style qualification part of Wayfarer's crew acceptance at the development station? | Treat it as a GU training exercise (PROTOTYPE framing) |
-| DS-Q2 | What fails in the First Ignition accident, in what order (Tale)? | Phase 5 waits; no invention |
-| DS-Q3 | Deadship rules: team size, solo training allowed, penalties, standard scenarios, scoring weights | Solo training; weights 40/30/20/10 as a proposal |
-| DS-Q4 | ECLSS CO₂ removal technology and its serviceable parts; PROTOTYPE electrical loads per device for training | Regenerable sorbent unit with fan/bed/valve/controller; scenario loads |
-| DS-Q5 | May scenario data live in `data/deadship/` (a new subfolder of `data/`)? | Yes, as game-owned PROTOTYPE data |
-| DS-Q6 | Is a shared leaderboard ever wanted (first backend)? | No; local records and replay codes |
-| DS-Q7 | DS-1 ship state: COAST in simulation while docked, or DOCKED-locked? | COAST in simulation, labelled |
-| DS-Q8 | The full Sports note "Wayfarer becomes the nightmare …" (cell cut in the read) | Read it before Phase 5 framing |
+| DS-O1 | Phase 0 review: the PROTOTYPE volume (sectors net + corridor gross), six occupants in ring A, 295 K, the unit rated for twelve | As built |
+| DS-O2 | The degraded-habitability (0.8 kPa) and danger (3.0 kPa) reference levels: keep, or replace when ECLSS and medical owner rows exist (12!G22) | As built, labelled PROTOTYPE |
+| DS-O3 | The ×60 display rate of the proof (DS-1 may want its own rate, or a compressed clock with a pause) | ×60 in the proof only |
+| DS-O4 | Authorization for Phase 1 | Not started |
+| DS-O5 | Medical limits, ECLSS technology and its serviceable parts, whole-ship electrical load, heat capacities, OD-010 degraded modes | OPEN in canon; scenario values labelled |
+| DS-O6 | Deadship as an official Wayfarer crew qualification | Not established (DS-Q1) |
 
 ---
 
-## 13. Final recommendation
+## 13. Engineering validation (Phase 0)
 
-Integrate Deadship as **a systems game played on the real Wayfarer**: start as a station-run training simulation inside Explore
-Interior (Concept B), grow it through connected systems, scarcity and competition (Concept D), and only then let the same systems carry
-the First Ignition story (Concept C) once the Tale gives the accident. Build one reusable, conserving, deterministic **ship systems
-model** fed by the canon data, with a Python reference and a GDScript runtime that must agree, and keep Deadship as a thin scenario,
-interaction and scoring layer on top of it. Judge every run by the canon's four terms through a projected **watch**, so a lean, stable
-ship beats a fully repaired, stripped one. The first step is DS-1 "Scrubber": one CO₂ fault in ring A, diagnosed at the bay, fixed with a
-part carried through the ring's own doors, clocked by numbers that come straight from the ship's canon. It needs no new geometry, no
-dependency and no canon change, and everything it builds is the foundation the story will use.
+All commands ran from the repository root on 2026-11-13 on this branch, in the cloud container (Blender 4.x snap, Godot 4.7.2).
+
+**13.1 The reference model (Python, `src/wayfarer/cabin_air.py`).**
+
+| Check | Command | Result |
+| --- | --- | --- |
+| Invariant tests | `python3 -m unittest discover -s tests -k cabin_air` | 7 tests, OK |
+| Canon inputs read, not copied | test `canon parameters read` | 80 kPa, 0.3 % target, 0.5 % control limit, 1.0 kg CO₂ per person-day come from `data/` through `spec` and `life_support` |
+| Rated crew held at the target | test `rated crew held at target` | 12 people → steady state 0.300 % exactly |
+| Exact step, independent of Δt | test `exact and dt-independent` | 60 s and 1 s steps and the analytic solution agree to 1e-12 relative |
+| Mass ledger closes | test `ledger` | m = m₀ + generated − removed to < 1e-9 kg over the proof run |
+| Isolated rise rate | test `isolated rise rate` | k = 0 gives dm/dt = G exactly (+0.037 %/h with six aboard) |
+| Transitions | test `transitions` | restore while RUNNING refused, double isolate refused, FAILED cannot be restored, an unknown operation refused; refusals leave the state unchanged |
+| Bands ordered | test `bands ordered` | control < degraded < danger by partial pressure |
+| Module summary | `python3 src/wayfarer/cabin_air.py` | 466.4 m³, n 15 211 mol, k 116.1 m³/h, 0.150 % steady with six; target → limit 5.36 h unit off; 33 checkpoints |
+
+**13.2 The runtime copy (GDScript, `godot/scripts/systems/cabin_air.gd`) against the reference.** `WfCabinAir.verify()` replays the
+packaged proof run (8 h, isolate at 0.5 h, restore at 4.5 h, Δt 1 s) and compares all 33 checkpoints and the ledger at every step with
+the packaged tolerance (1e-9 relative + 1e-9 kg absolute). The walk offers the model only when `verify()` passes; otherwise the board
+turns red and an error is pushed.
+
+| Check | How | Result |
+| --- | --- | --- |
+| Reproduces the reference | `verify()` on the published package (in the `systems` runtime check and a direct script run) | 33 of 33 checkpoints, worst relative deviation 0.0 |
+| Ledger in Godot | same run | −2e-13 kg |
+| Rejects a wrong reference | a checkpoint altered by 1e-8 relative | rejected with the checkpoint named |
+| Accepts noise inside tolerance | a checkpoint altered by 5e-10 relative | accepted |
+| Determinism | `check_systems.gd`: 1 s steps vs 60 s steps vs a repeated run | 1.39394102129855 / …843 / …855 kg (agree to 1e-13 relative) |
+
+**13.3 The interaction in the walk (`godot/scripts/excursion/check_systems.gd`).** Run inside `runtime-export` as the `systems` check
+(`--fixed-fps 60 res://scenes/excursion.tscn -- --systems --check-systems`), and again with stills under a virtual display.
+
+| Step | Result |
+| --- | --- |
+| Ops away from the bay | changes nothing (state and operation count unchanged) |
+| Walk the ring A circuit as a player (Use opens the doors) | the bay reached, 2.2 m from its centre (reach 2.4 m), 49 walked bins |
+| Prompt and touch button at the bay | "Ops · isolate CO2 unit", then "Ops · restore CO2 unit" |
+| Ops → ISOLATED | the model's state, the board text and the button change |
+| 600 frames isolated (10 s of play, 600 s simulated at ×60) | m = 1.04580580503923 kg against the closed form 1.04580580503922 kg; the trend positive |
+| Ops → RUNNING, 600 frames | the exponential closed form met within tolerance; the trend negative |
+| Ledger and transition log | closed; exactly 2 transitions |
+| Result | `"result":"PASS"`, 8 673 physics frames, 14.4 s wall (final run) |
+
+**What the validation does not show.** It shows that the runtime reproduces the reference and that the interaction drives the model
+through its own transitions. It does not validate the PROTOTYPE values (volume, occupancy, rating, the two reference bands) against
+reality: those are labelled in the package and listed in DS-O1 and DS-O2.
+
+## 14. Regression report
+
+| Area | Command | Result |
+| --- | --- | --- |
+| Data validation and selected tests | `python3 tools/workflow.py checks --run` | 39 tests OK (1 skipped, pre-existing); selection: test_cabin_air, test_drive_sync, test_frames_import, test_hooks, test_modules, test_route_import; no build target, no inspection group |
+| All unit tests | `python3 -m unittest discover -s tests` | 235 tests OK (1 skipped), 243 s |
+| Ship build | `/snap/bin/blender --background --factory-startup --python-exit-code 1 --python src/wayfarer/build/build.py` (the saved assets were missing in this fresh container) | exit 0; no generator, data or geometry file changed, so the change selects no geometry check |
+| Characters (needed by the runtime package) | `python3 tools/workflow.py characters` | PASS |
+| EVA loop | `python3 tools/workflow.py eva` | PASS, "FULL EVA loop" |
+| Runtime package and all Godot checks | `python3 tools/workflow.py runtime-export` | PASS, 9 checks, first run `20261113T102531048530Z-runtime`; rerun on the final code (after the board-placement fix below) `20261113T111529180970Z-runtime`, PASS, 9 checks |
+| · COAST and DOCKED import | `check`, `check-docked` | PASS (5 287 and 5 264 meshes, 242 lights) |
+| · Boarding route | `route` | PASS |
+| · Interior walk, doors, hatches, learning stations | `excursion` (default start, both rings and back) | PASS |
+| · EVA Operations | `eva-ops` | PASS |
+| · Locomotion (ladder, gait, run, mag boots); default start has no systems proof | `locomotion` | PASS (the new assertion included) |
+| · Phase 0 systems proof | `systems` | PASS |
+| · Controls: profiles, setup rows, conflicts, rebinding, touch | `controls` | PASS |
+| · Characters in Godot | `characters` | PASS |
+| Browser smoke: website build | `python3 tools/workflow.py play-characters --out <dir>`, then `python3 tools/workflow.py web --out <site> --characters <dir>` | PASS (both) |
+| Browser smoke: main browser check | `python3 tools/web_check.py <site> --part main --chrome /opt/pw-browsers/chromium --no-sandbox` | PASS, 67 of 67: start page, Explore Ship viewer (28), Explore Interior and Exterior boot and play (15 + 2), controls (8), switching and memory (4), phone (5), status page |
+
+**Compatibility, by the owner's list.**
+- *Doors and hatches:* untouched code; the systems check opens the ring A CIRC doors through Use on its way to the bay.
+- *Actions and bindings:* no new action, key or context row; Ops (`exc.ops`) is reused at the bay, so whatever key, pad button or touch
+  button the player bound works there. Only the action's description text names the new use. No key is hardcoded; the prompt and the
+  touch label take the key text from the existing `WfInput` label utilities.
+- *Profiles and setup:* the schema-4 profile file and the setup rows are unchanged; the `controls` check passes.
+- *Touch:* the existing context button shows "Ops · isolate CO2 unit" at the bay (checked by `_ui_says`).
+- *Learning stations:* Use at the bay still opens the UJ-004 life-support station; Ops was chosen precisely so the two do not compete.
+- *Movement:* no change to the walk, ladder, run or mag boots.
+- *Station walkthrough and default start:* the systems proof exists only with `--systems` or `#interior-systems`; the locomotion check
+  fails if the default start ever creates it.
+- *Legacy contexts:* none touched.
+
+**Not run, with the reason.**
+- The full `pipeline` (Cycles previews, whole-ship inspection, baseline diff): no geometry, generator or `data/` file changed and the
+  check selection names no build target, so AGENTS.md step 4 does not require it. The build above confirms the generators still run.
+- The browser `equivalence` and `walk` (touch walk) parts of `web_check.py`: CI runs them on their own runners and they take much
+  longer; the `controls` runtime check and the `systems` check's touch-label assertion cover the touch path natively. The browser site
+  was built while the board placement was still being fixed; the systems proof is off in the default start, so the browser check
+  exercised the unchanged default walk.
+- The `#interior-systems` start was not opened in a browser; it is the same scene with one start flag, checked natively.
+
+**Fix found during validation.** The first stills showed the board sideways or mirrored, because world Y is not "up" in a spinning
+ring. The board now faces the viewer upright and sits above the bay towards the ring's spin axis, in narrower lines; "Control limit
+… in -" became "not approaching". Display only; the model and checks were unchanged and rerun.
+
+## 15. Handoff
+
+**F1. What was implemented.** One engineering state (ring A cabin CO₂ in a well-mixed volume), one physical component (the sector 3
+ECLSS bay, `Prod_RA3_GDN_ECLSS`), one interaction (Ops: isolate or restore the CO₂ unit), one diagnostic display (the bay's board, the
+prompt line and the touch label), and one deterministic validation (the packaged reference with tolerance, plus the `systems` check).
+Files and data flow: section 10.
+
+**F2. What was not implemented.** Everything in Phase 1 and later: no scenario, tutorial, fault injection at runtime, part states,
+repairs, door coupling, second ring, humidity, heat, power, watch, scoring, persistence, Deadship branding or `data/deadship/`. No
+geometry, Blender, canon, Drive, deployment or `main` change.
+
+**F3. What can be reused.** `WfCabinAir` is a model with public operations only and no game knowledge; a tutorial or scenario calls
+`operate()` and reads `readout()`. The reference-and-checkpoint pattern (Python writes the proof run, Godot replays it with a packaged
+tolerance) is the template for every later system. `WfEquipment` is the binding pattern from a packaged node to an operable state; it
+becomes a small registry at the second interaction point (Phase 1 prerequisite 4).
+
+**F4. Independence.** Dependencies run one way: `data/` → `cabin_air.py` → package JSON → `WfCabinAir` → `WfEquipment` → the walk's
+existing Ops hook. The model knows nothing about the walk, and the walk knows nothing about CO₂ beyond the readout. Removing the
+`--systems` start removes the feature with no trace in the default walk.
+
+**F5. Walkthrough and controls intact.** Section 14: every existing runtime check passes, the default start is asserted free of the
+proof, and no action, binding, profile or setup row changed.
+
+**F6. Uncertainties.** The PROTOTYPE volume (466 m³, and the door coupling that makes it change), six occupants, 295 K, the unit rated
+for twelve, the two reference bands (0.8 and 3.0 kPa), the ×60 display rate, and the STUDY CO₂ rate (section 7.2). Medical limits and
+the ECLSS technology stay OPEN in canon.
+
+**F7. Phase 1 readiness.** Technically ready to start once authorized: the model, the validation pattern and the binding exist. Before
+Phase 1 starts, the seven prerequisites in section 9 apply; the first is the owner's review of Phase 0 (DS-O1, DS-O2), and the main
+modelling step is door-coupled compartments.
+
+## 16. Final recommendation
+
+Review Phase 0 through the stills in the project Library (the board RUNNING, ISOLATED and restored), and decide DS-O1 and DS-O2. If
+they stand, authorize Phase 1 with door-coupled compartments as its first step, since DS-1's lesson (isolating a compartment shrinks
+its air buffer) depends on it. Keep the branch unsquashed until then.

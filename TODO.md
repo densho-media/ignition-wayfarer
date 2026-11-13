@@ -474,11 +474,14 @@ candidates of all nine classes are separate accessory assets (docs/ACCESSORIES.m
   after the whitebox review. **Done when:** the owner accepts or replaces the circulation, the conflicts are canonized or removed and a
   person completes both excursions in the desktop and web builds.
 
-- [ ] **DS — Deadship integration (owner brief 2026-11-12). DESIGN UNDER REVIEW.** Research and design report
+- [ ] **DS — Deadship integration (owner briefs 2026-11-12 and 2026-11-13). PHASE 0 BUILT, AWAITING REVIEW.** Report
   `work/project-thread-dfyyv7/DEADSHIP_DESIGN.md` (branch `claude/project-thread-dfyyv7`): Deadship as a station-run training simulation
-  aboard Wayfarer inside Explore Interior, on a reusable conserving ship-systems model (Python reference, GDScript runtime with checkpoint
-  parity); first playable DS-1 "Scrubber" in ring A. Nothing implemented. **Open:** the owner's review and authorization, DS-Q1..Q8.
-  **Done when:** the owner accepts or changes the design and authorizes Phase 0.
+  aboard Wayfarer (B first, D long-term, C later) on a reusable conserving ship-systems model. Phase 0 (SYS-001, docs/MODEL.md) is built:
+  ring A cabin CO₂ (`cabin_air.py` reference, `WfCabinAir` runtime verified against packaged checkpoints), Ops at the sector 3 ECLSS bay
+  isolates or restores the unit, a status board, the `systems` runtime check; only with `#interior-systems` / `--systems`. DS-1
+  "Scrubber" (unscored eight-step tutorial) and DS-2 "Borrowed Air" are design only. **Open:** the owner's review of Phase 0 and of
+  DS-O1 (PROTOTYPE volume, occupancy, rating) and DS-O2 (0.8 and 3.0 kPa reference bands); Phase 1 is not authorized; its seven
+  prerequisites are in the report, section 9. **Done when:** the owner accepts Phase 0 and authorizes or declines Phase 1.
 
 ## K — Finish the two characters, EVA training and production art
 
