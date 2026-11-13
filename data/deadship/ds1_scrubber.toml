@@ -1,0 +1,151 @@
+# DS-1 "Scrubber": the unscored Deadship training tutorial (owner brief 2026-11-13, Phase 1; design: work/project-thread-dfyyv7/
+# DEADSHIP_DESIGN.md section 5.8). A station-run training simulation aboard Wayfarer in simulated COAST (the walk's ring start).
+#
+# Scenario-owned values only. Every engineering value (cabin pressure, the CO2 target and control limit, the CO2 rate, the ring's gas
+# volume, the occupants, the unit's rating and the habitability bands) comes from the CO2 model, src/wayfarer/cabin_air.py; texts name
+# them as {placeholders} that the runtime fills from the model's present state. src/wayfarer/deadship.py refuses a scenario that sets
+# one. Every value below is PROTOTYPE: a training choice, not canon.
+
+[scenario]
+id = "DS-1"
+name = "Scrubber"
+kind = "TUTORIAL"
+scored = false
+status = "PROTOTYPE"
+system = "RING_A_CABIN_CO2"
+note = "Unscored guided tutorial: one fault (ring A's CO2-removal fan), one spare, no competing problems. Deadship training is approved as training, not as an official Wayfarer qualification (DS-Q1)."
+
+[initial]
+# The unit starts at its running steady state with the spare fan at the sector 2 workbench. The fan failed `fault_lead_h` ship hours
+# before the trainee arrives: the model runs those hours with no removal, so the starting CO2 is a model result, not a set value.
+mode = "RUNNING"
+fan = "OK"
+spare = "BENCH"
+fault = "fault_fan"
+fault_lead_h = 4.5
+
+[time]
+# Ship time runs `scale` simulated seconds per real second while playing and `watch_scale` during the stability watch. Only the CO2
+# model's clock is scaled: walking, the rings' rotation, doors and animations keep real time.
+scale = 30.0
+watch_scale = 1800.0
+pause = "The model's clock stops while a tutorial page (inspection, evidence, debrief) or the controls menu is open, and after the run ends; it runs otherwise, including while walking."
+
+[watch]
+# The projected stability watch: the same model, advanced `ship_h` ship hours at watch_scale with no further input. It passes when the
+# unit is removing, the CO2 never reaches the control limit, ends at or below the target, and the steady state is at or below the target.
+ship_h = 6.0
+
+[failure]
+# Crossing the operational control limit ends the run as an operational failure. It is not an injury: the debrief says how far the
+# degraded-habitability and danger reference levels still were.
+band = "CONTROL"
+
+[bench]
+# The second interaction point: the spare fan waits on the sector 2 workbench (an existing exported node; no new geometry).
+node = "Prod_RA2_WRK_Tools_Workbench"
+reach_m = 2.4
+part = "spare fan"
+
+[reference]
+# A model-level replay of an ideal run (ship seconds after the trainee's start, operations only): the deterministic replay Godot must
+# reproduce within the CO2 model's tolerance (deadship.reference). Walking times are not part of it.
+events = [[1500.0, "isolate"], [4500.0, "take_spare"], [7200.0, "install_spare"], [7500.0, "restore"]]
+
+[[steps]]
+id = "recognize"
+title = "Recognize"
+done = ["at:bay"]
+objective = "Ring A's CO2 is rising. Go to the sector 3 ECLSS bay (the Garden sector) and find out why."
+brief = [
+  "Station simulator: Wayfarer in coast, six people aboard ring A. Its air reads {x} % CO2, rising {trend} per hour",
+  "(target {target} %, control limit {limit} %). At this rate the limit is {limit_time} away, counted from now:",
+  "the limit calls for corrective action; it does not mean anyone is hurt.",
+]
+hint = "Follow the corridor to sector 3. The bay's board shows the ring's CO2."
+
+[[steps]]
+id = "inspect"
+title = "Inspect"
+done = ["flag:inspected"]
+objective = "Inspect the CO2-removal unit: {use} at the ECLSS bay."
+hint = "Symptoms first: what does the unit itself report?"
+
+[[steps]]
+id = "diagnose"
+title = "Diagnose"
+done = ["flag:diagnosed"]
+objective = "Compare the readings: {use} again shows each piece of evidence."
+hint = "Four things can stop removal: the supply, the fan, the sorbent bed, the controller. Rule them out one by one."
+
+[[steps]]
+id = "isolate"
+title = "Isolate"
+done = ["mode:ISOLATED"]
+objective = "Isolate the unit before maintenance: {ops} at the bay."
+hint = "Never open a live unit: its fan is energized and its process duct is under flow."
+
+[[steps]]
+id = "retrieve"
+title = "Navigate and retrieve"
+done = ["spare:CARRIED", "at:bay"]
+objective = "Fetch the spare fan from the sector 2 workbench ({use} there) and carry it back to the bay."
+hint = "The CIRC doors open with {use}. The workbench is in sector 2, the work sector."
+
+[[steps]]
+id = "repair"
+title = "Repair"
+done = ["fan:OK"]
+objective = "Install the spare fan: {use} at the bay."
+hint = "The unit must stay isolated while it is open."
+
+[[steps]]
+id = "restore"
+title = "Restore"
+done = ["mode:RUNNING", "fan:OK"]
+objective = "Restore the unit to service: {ops} at the bay. Watch the trend on the board."
+hint = "A repaired unit stays off until someone deliberately restores it."
+
+[[steps]]
+id = "verify"
+title = "Verify"
+done = ["flag:watch_passed"]
+objective = "Confirm it is stable: {ops} at the bay runs a {watch_h} h stability watch on the model."
+hint = "One good reading is not stability. The watch runs the same air model forward with nobody touching anything."
+
+# The evidence pages of the Diagnose step, in order. Each shows the unit's live reading (from the model) and what it rules in or out.
+[[evidence]]
+id = "supply"
+reading = "Supply: {supply}. Controller: {controller}."
+meaning = "Power is present and the controller passes its self-test. A supply loss would leave every reading dark; a controller or instrument fault would show a failed self-test or readings that disagree. Neither is the case."
+
+[[evidence]]
+id = "fan"
+reading = "Process-air fan: commanded {fan_command}, speed {fan_speed} % of rated. Scrubbed flow {flow} m3/h."
+meaning = "The fan is told to run but does not turn, so no air reaches the bed. A powered unit with a still fan points at the fan itself."
+
+[[evidence]]
+id = "bed"
+reading = "Sorbent bed: {bed}. Removal now {removal} kg CO2 per hour."
+meaning = "The bed looks healthy, but with no airflow it cannot take anything out. A spent bed would show full airflow and still no CO2 removed: here the flow is the missing piece."
+
+[[evidence]]
+id = "conclusion"
+reading = "Diagnosis: the process-air fan has failed."
+meaning = "The ring's six people add CO2 at {gen} kg per hour and nothing removes it, so it climbs {trend} per hour. Replace the fan. First isolate the unit."
+
+[debrief]
+title = "Debrief"
+pass = [
+  "What failed: the CO2-removal unit's process-air fan. The unit stayed powered, so nothing looked dark: only the CO2 trend gave it away.",
+  "What found it: the unit was energized and its controller healthy, but the fan stood still and the scrubbed flow was zero.",
+  "Why isolate: an energized unit has a live fan and a flowing duct. Isolation made it safe to open and kept a half-fitted fan from starting.",
+  "What the repair changed: with a working fan, air flows through the bed again and removal grows with the CO2 itself.",
+  "Why it is stable: removal ({k} m3/h of scrubbed air) now balances the crew's CO2 at {steady} %, below the {target} % target. The watch ran {watch_h} ship hours and ended at {x} %.",
+]
+fail = [
+  "Operational failure: ring A's CO2 passed the {limit} % control limit. In service this means corrective action is overdue, not that the crew is harmed.",
+  "With no removal the degraded-habitability reference ({degraded_kpa} kPa) would still be {to_degraded} away and the danger reference ({danger_kpa} kPa) {to_danger}. Those references are PROTOTYPE teaching levels; medical limits are open in canon.",
+  "The fault was the process-air fan. Isolate, fetch the spare from the sector 2 workbench, install it and restore the unit.",
+]
+replay = "{ops} at the bay runs the training again."

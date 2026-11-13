@@ -154,8 +154,8 @@ const SCENE_ACTIONS := [
 		["body.drop_tool", "Drop the tool", [KEY_T], "Drop a tool on a ring deck and watch where it lands (Coriolis)."]]],
 	[["body", "demo"], [["body.view", "View from outside", [KEY_V], "Switch between first person and a view of the body from outside."]]],
 	# EXC-001: the station-to-ring excursion (one continuous player-controlled run; the moves are player.move_*).
-	[["excursion"], [["exc.use", "Use / operate", [KEY_E], "Operate what is in reach: a hatch or door, the transfer drum's cycle at its restraint station, the ladder foot, the trunk's ring B branch.", [{"t": "joyb", "b": JOY_BUTTON_X}]],
-		["exc.ops", "Ship operations", [KEY_O], "At a trunk panel: ask Wayfarer to undock and spin up its rings, or to spin down, lock and dock. At equipment that has an operating state (the systems proof): isolate or restore it.", [{"t": "joyb", "b": JOY_BUTTON_Y}]],
+	[["excursion"], [["exc.use", "Use / operate", [KEY_E], "Operate what is in reach: a hatch or door, the transfer drum's cycle at its restraint station, the ladder foot, the trunk's ring B branch; in Deadship training, inspect equipment or take and fit a part.", [{"t": "joyb", "b": JOY_BUTTON_X}]],
+		["exc.ops", "Ship operations", [KEY_O], "At a trunk panel: ask Wayfarer to undock and spin up its rings, or to spin down, lock and dock. At equipment that has an operating state (the systems proof, Deadship training): isolate or restore it, or start a stability watch.", [{"t": "joyb", "b": JOY_BUTTON_Y}]],
 		["exc.view", "Camera: third / first person", [KEY_C, KEY_V], "Switch between the third-person follow camera and the trainee's own eyes."],
 		["exc.jump", "Jump", [KEY_SPACE], "On a ring deck: jump. The legs give one push; then spin gravity and the Coriolis effect carry you until the deck stops you.", [{"t": "joyb", "b": JOY_BUTTON_RIGHT_SHOULDER}], "press",
 			{"setup": ["interior"], "ask": "jump"}],
@@ -1222,7 +1222,7 @@ func publish_state() -> void:
 	for e in EXPERIENCES:
 		for id in setup_ids(e):
 			keys[id] = label_all(id)
-	for id in ["evaops.fwd", "exc.use", "ui.codex"]:
+	for id in ["evaops.fwd", "exc.use", "exc.ops", "ui.codex"]:
 		keys[id] = label_all(id)
 	WfWebPage.publish("wayfarerControls", {"schema": SCHEMA, "experience": experience, "state": overlay.state, "mode": overlay.mode,
 		"asking": overlay.current if overlay.state in ["listen", "conflict"] else "", "missing": setup_missing(experience) if experience != "" else [],

@@ -474,14 +474,14 @@ candidates of all nine classes are separate accessory assets (docs/ACCESSORIES.m
   after the whitebox review. **Done when:** the owner accepts or replaces the circulation, the conflicts are canonized or removed and a
   person completes both excursions in the desktop and web builds.
 
-- [ ] **DS — Deadship integration (owner briefs 2026-11-12 and 2026-11-13). PHASE 0 BUILT, AWAITING REVIEW.** Report
+- [ ] **DS — Deadship integration (owner briefs 2026-11-12 and 2026-11-13). PHASE 1 BUILT, AWAITING REVIEW.** Report
   `work/project-thread-dfyyv7/DEADSHIP_DESIGN.md` (branch `claude/project-thread-dfyyv7`): Deadship as a station-run training simulation
-  aboard Wayfarer (B first, D long-term, C later) on a reusable conserving ship-systems model. Phase 0 (SYS-001, docs/MODEL.md) is built:
-  ring A cabin CO₂ (`cabin_air.py` reference, `WfCabinAir` runtime verified against packaged checkpoints), Ops at the sector 3 ECLSS bay
-  isolates or restores the unit, a status board, the `systems` runtime check; only with `#interior-systems` / `--systems`. DS-1
-  "Scrubber" (unscored eight-step tutorial) and DS-2 "Borrowed Air" are design only. **Open:** the owner's review of Phase 0 and of
-  DS-O1 (PROTOTYPE volume, occupancy, rating) and DS-O2 (0.8 and 3.0 kPa reference bands); Phase 1 is not authorized; its seven
-  prerequisites are in the report, section 9. **Done when:** the owner accepts Phase 0 and authorizes or declines Phase 1.
+  aboard Wayfarer on a reusable conserving ship-systems model (SYS-001 v2, docs/MODEL.md). Built: Phase 0 (`#interior-systems`) and
+  Phase 1, the unscored DS-1 "Scrubber" tutorial (`#interior-deadship`: failed fan, inspect, diagnose, isolate, fetch the spare from the
+  sector 2 workbench, fit, restore, 6 h stability watch, debrief), with the `systems` and `deadship` runtime checks and the opt-in
+  browser part `web_check.py --part training`. **Open:** the owner's review of Phase 1 and of the working assumptions DS-O1 (volume,
+  occupancy, rating) and DS-O2 (0.8 and 3.0 kPa reference bands); Phase 2 (DS-2 "Borrowed Air") is not authorized; its prerequisites
+  are in the report, section 18 (compartment connectivity first). **Done when:** the owner accepts Phase 1 and squashes or declines it.
 
 ## K — Finish the two characters, EVA training and production art
 

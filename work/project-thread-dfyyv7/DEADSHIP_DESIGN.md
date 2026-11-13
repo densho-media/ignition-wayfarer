@@ -1,9 +1,9 @@
-# Deadship in Wayfarer: research, design and Phase 0 report (DS-000, DS-P0)
+# Deadship in Wayfarer: research, design, Phase 0 and Phase 1 report (DS-000, DS-P0, DS-P1)
 
 DS-000 (2026-11-12, commit 6603e08) was research and design only. On 2026-11-13 the owner approved its direction with refinements
 and authorized **Phase 0 only**. This revision folds those decisions in, refines the scenario designs and the CO₂ assumptions, and
-reports the Phase 0 implementation, its validation and the regression runs. Phase 1 and later stay **design only** and need separate
-authorization. Nothing here changes canon, the Blender model, generated geometry, engineering values or the deployment, and no Drive
+reports the Phase 0 implementation, its validation and the regression runs. **Phase 1** (the DS-1 "Scrubber" tutorial) was authorized
+later on 2026-11-13 and is reported in sections 17 to 21. Phase 2 and later stay **design only** and need separate authorization. Nothing here changes canon, the Blender model, generated geometry, engineering values or the deployment, and no Drive
 workbook was written.
 
 Every significant statement carries one of these labels:
@@ -12,6 +12,7 @@ Every significant statement carries one of these labels:
 | --- | --- |
 | **[EXISTS]** | Implemented in the repository before this work (file path given) |
 | **[BUILT P0]** | Implemented by Phase 0 on this branch (file path given) |
+| **[BUILT P1]** | Implemented by Phase 1 on this branch (file path given) |
 | **[LORE]** | Established IGNITION canon, with its Drive owner row |
 | **[ENG]** | Engineering assumption: physics or engineering judgment, not an owner row |
 | **[PROPOSAL]** | Gameplay or architecture design, not implemented |
@@ -671,7 +672,7 @@ A dependency-based roadmap, not a commitment to build every feature.
 | Phase | Status | Content | Depends on | Acceptance | Size |
 | --- | --- | --- | --- | --- | --- |
 | **0 Minimal engineering integration proof** | **DONE on this branch, awaiting review** | One engineering state (ring A cabin CO₂), one real component (sector 3 ECLSS bay), one interaction (Ops: isolate / restore), one diagnostic display (the bay's board, the prompt, the touch label), deterministic validation | Owner authorization (given 2026-11-13) | Section 13 and section 14 | S |
-| **1 Scrubber tutorial** | DESIGN ONLY | DS-1 (section 5.8): unscored and guided; a FAILED unit with part states (fan, bed, controller); the spare fan at the workbench; door-coupled air volumes; a short watch; the tier explanation on failure | Phase 0 approved; the prerequisites below | All eight DS-1 steps play through player actions in a headless check; the default start unchanged; the tutorial explains the three tiers | M |
+| **1 Scrubber tutorial** | **BUILT on this branch, awaiting review (sections 17–21)** | DS-1 (section 5.8): unscored and guided; a FAILED unit with part states (fan, bed, controller); the spare fan at the workbench; door-coupled air volumes; a short watch; the tier explanation on failure | Phase 0 approved; the prerequisites below | All eight DS-1 steps play through player actions in a headless check; the default start unchanged; the tutorial explains the three tiers | M |
 | **2 First true Deadship challenge** | DESIGN ONLY | DS-2 "Borrowed Air" (section 5.8): two interacting problems, insufficient parts, at least two valid stabilizations with model-computed consequences; the watch and provisional scoring | Phase 1; humidity and heat stocks; two rings; parts as entities | A scenario screen shows ≥ 2 stabilizing strategies, no full repair, and different scores from model state alone | M–L |
 | **3 Broader engineering systems** | DESIGN ONLY | Bus A/B power and the survival-reserve loads, cold-loop limits, load shedding, longer watches, ring B through the trunk and drum | Phase 2; PROTOTYPE electrical loads (power.rating OPEN) | Trade-offs between power, heat and air reproduce in Python and Godot within tolerance | L |
 | **4 Competitive Deadship and Hullrun** | DESIGN ONLY | Standard scenarios, repeatability (seeds, replay codes), provisional scoring, browser-local records (DS-6), Hullrun timed carries, the station briefing | Phase 3; walk lines to the SP-45 storeroom | Replays identical native and Web; records stay in browser storage only | L |
@@ -909,3 +910,161 @@ modelling step is door-coupled compartments.
 Review Phase 0 through the stills in the project Library (the board RUNNING, ISOLATED and restored), and decide DS-O1 and DS-O2. If
 they stand, authorize Phase 1 with door-coupled compartments as its first step, since DS-1's lesson (isolating a compartment shrinks
 its air buffer) depends on it. Keep the branch unsquashed until then.
+
+---
+
+# Phase 1: DS-1 "Scrubber" tutorial (built 2026-11-13)
+
+The owner authorized Phase 1 on 2026-11-13 (14:09Z) with approved working assumptions: 466 m³, six occupants, 295 K, a unit sized
+for twelve, the 0.5 % WORKING control limit and the 0.8 / 3.0 kPa PROTOTYPE reference bands. These are working assumptions, not
+canon. Phase 2 and later stay design only. Nothing in Phase 1 changes canon, geometry, Drive, the deployment or `main`.
+
+## 17. What Phase 1 built [BUILT P1]
+
+| Layer | File | Owns |
+| --- | --- | --- |
+| Engineering model | `src/wayfarer/cabin_air.py` (v2), `godot/scripts/systems/cabin_air.gd` | Physics and state transitions only: mode RUNNING / ISOLATED, fan OK / FAILED, spare NONE / BENCH / CARRIED / INSTALLED; one operation table (requires / sets), refusal reasons, component readings, time to the control limit from the present state. Knows no scenario. |
+| Equipment | `godot/scripts/excursion/equipment.gd` | A small registry of equipment points (the ECLSS bay, the sector 2 workbench) bound to packaged nodes, the bay's board, the ship clock (scale, pause). |
+| Scenario | `data/deadship/ds1_scrubber.toml`, `src/wayfarer/deadship.py`, `godot/scripts/deadship/scrubber.gd` | Start state and fault, eight steps whose completion reads the model's state or the player's actions, evidence pages, debrief, the watch. No engineering value: the loader refuses one. |
+| Checks | `tests/test_cabin_air.py` (12), `tests/test_deadship.py` (4), `check_deadship.gd` (`deadship` runtime check), `check_player.gd` (shared with `check_systems.gd`), `tools/web_check.py --part training` | |
+
+**The start is a model result.** The scenario injects `fault_fan` at the model's steady state (0.150 % with six people) and runs the
+same exact step for 4.5 h before the trainee arrives, so the board shows **0.318 %, ABOVE TARGET, the control limit in 4.87 h ship time
+from now** (about 9.7 min real at ×30). Wherever a time to a limit appears, its initial condition is stated: "from now, at the present
+trend". The control limit is called an operational limit; the 0.8 kPa and 3.0 kPa bands are labelled reference levels and the
+tutorial says that crossing 0.5 % is a procedure failure, not an injury.
+
+**The eight steps** (each completes on engineering state or a player action, never on a timer):
+
+| Step | Player | Completes when | Model call |
+| --- | --- | --- | --- |
+| 1 Recognize | reads the briefing (no cause given), walks to the bay | the trainee is at the bay | none |
+| 2 Inspect | Use at the bay | the inspection page was opened | `diagnostics` |
+| 3 Diagnose | reads supply, fan, bed and the conclusion (Use pages) | the conclusion page was read | `diagnostics` (supply ENERGIZED, controller SELF-TEST PASS, fan command ON at 0 % speed, flow 0 m³/h, bed NORMAL: the fan) |
+| 4 Isolate | Ops at the bay | mode ISOLATED | `operate("isolate")`; repair while RUNNING is refused |
+| 5 Retrieve | walks to the sector 2 workbench, Use takes the spare, walks back | spare CARRIED and at the bay | `operate("take_spare")` |
+| 6 Repair | Use at the bay | fan OK (spare INSTALLED; unit ISOLATED_READY, "repaired, not restored") | `operate("install_spare")` |
+| 7 Restore | Ops at the bay | RUNNING with fan OK | `operate("restore")`; refused while the fan is FAILED |
+| 8 Verify | Ops: stability watch | the watch passes | the same step for 6 h ship time |
+
+**States the trainee sees.** FAILED (RUNNING_NOT_REMOVING), ISOLATED with the fault (ISOLATED_FAULT), repaired but not restored
+(ISOLATED_READY) and OPERATING, as separate words on the board and in the prompt.
+
+**Watch.** 6 h of ship time with nobody touching the unit, on the same model, at ×1800 (12 s real). It passes when the unit is
+removing, never passed the control limit during the watch, ends at or below the 0.3 % target and its steady state is at or below the
+target. The reference replay ends at 0.205 % (steady 0.150 %). Unscored.
+
+**Debrief.** What failed (the fan), which measurements found it (fan command ON with 0 % speed and 0 m³/h flow while supply, controller
+and bed were normal), why isolation was needed (no fan replacement on an energized unit), what the replacement changed (the scrubbed
+flow and the removal rate), why it is now stable (removal exceeds generation until the steady state, with its number).
+Ops after the end replays the training from the same start. A run left past the control limit ends as an operational failure with
+the tiers explained and a replay offer.
+
+**Compartments (§5 of the brief).** Investigated: CIRC doors in ring A are normally CLOSED (`ring_circulation.doors`), and ring A has nine
+compartments in a loop (three sectors and six corridor segments). A door-coupled gas model would need per-compartment volumes,
+occupancy and a ventilation model that the canon does not hold. DS-1 does not need it: its lesson is a failed fan in a well-mixed ring.
+The model keeps one volume under a stated PROTOTYPE assumption (intermodule ventilation mixes the ring; at a few hundred m³/h the local
+excess over the ring average is roughly 0.05 to 0.1 % CO₂), and the walk claims no door effect. Compartment connectivity moves to
+Phase 2, where DS-2 needs it.
+
+**Time handling.** Ship time is a scenario multiplier (×30, the watch ×1800) on the CO₂ model only. Rings turn, the trainee walks and
+doors move in real time (checked: during the watch the ring turned at its real rate). The clock stops while a tutorial page or the
+controls overlay is open, and after the run ends; the board marks "(paused)".
+
+**Interaction.** No new key. Use (`exc.use`) inspects, reads the next page, takes and fits the part; Ops (`exc.ops`) isolates,
+restores, starts the watch and replays. Prompts and pages show the player's own bindings (`WfInput.label`), and the touch buttons carry
+the same labels. A door within reach keeps Use when the trainee faces it more than the point. The learning station at the bay yields
+to the training while it runs. The carried spare is a placeholder box on the trainee; no inventory.
+
+**Preserved.** `#interior` (default start: no equipment, no Deadship), `#interior-systems` (the Phase 0 proof, now on the v2 model),
+the walkthrough, Explore Exterior, movement, doors, ladders, learning stations; DOCKED, docking and the trunk are untouched.
+
+## 18. Phase 2 prerequisites
+
+1. The owner reviews Phase 1 and the working assumptions (DS-O1, DS-O2 remain the volume, occupancy, rating and reference bands).
+2. Compartment connectivity: per-compartment volumes from the built rooms, occupancy per compartment, door states and a stated
+   ventilation exchange per open door and duct. This is DS-2's first modelling step.
+3. Humidity and heat stocks next to CO₂ (DS-2 "Borrowed Air" trades between them), with PROTOTYPE capacities labelled.
+4. Parts as entities beyond one spare: a small part list per unit, with conserved counts, still without a general inventory.
+5. Ring B and the trunk as a second volume, if DS-2 crosses rings.
+6. Provisional scoring only after the owner confirms DS-Q3's weights; browser-local only (DS-Q6).
+
+## 19. Validation (Phase 1) [BUILT P1]
+
+**Python reference** (`tests/test_cabin_air.py` 12, `tests/test_deadship.py` 4): rated crew held at the target; the step is exact and
+independent of the step length (7.5 s, 60 s and 300 s against 1 s); the mass ledger closes; a failed fan removes nothing even while
+RUNNING; isolation repairs nothing; repair needs isolation and the carried spare (NONE, BENCH and INSTALLED refused); a restored unit
+returns to a stable steady state (96 × 1800 s, monotonic); every refused operation leaves the state untouched and has a stated reason;
+the time to the control limit counts from the present state (including the case where removal cannot hold 24 people); bands ordered.
+The scenario: owns no engineering value (a fixture with `co2_max` is refused); the trainee's start is the model's result
+(steady + 4.5 h × G = 0.318 %, RUNNING_NOT_REMOVING, between target and limit); the reference replay (isolate, take, install, restore)
+passes the watch at 0.205 % and is deterministic; an unrepaired ring fails the watch.
+
+**Python and Godot agree.** `WfCabinAir.verify()` replays the packaged 10 h proof (41 checkpoints, 11 events with their expected
+outcomes, refusals unchanged) within 1e-9 relative + 1e-9 kg; `WfDeadship` replays the scenario reference against the packaged
+Python result before it starts. In the play-through: the restored mass after 150 ship s, 2.77073302456862 kg against the closed form
+2.77073302456864 kg; the watch end 0.00209298480231069 against 0.00209298480231071 (CO₂ fraction); the watch ran exactly 6.0 ship h.
+
+**Runtime check `deadship`** (headless, `--fixed-fps 60`): PASS, about 20,100 physics frames. It plays all eight steps through the
+scene's Use and Ops; checks the start, the refusal of a restore with the failed fan (state unchanged), the carry, each status word, the
+restore exponential, the watch, the debrief contents, the ledger, the pause while a page is open, the touch buttons and prompt labels
+naming the player's keys; that the ring turned at its real rate (0.418878 rad/s) during the ×1800 watch; replay from the same start;
+and a run left past the limit ending as an operational failure. `systems`: PASS on the v2 model.
+`runtime-export`: 10 of 10 checks PASS (check, check-docked, route, excursion, eva-ops, locomotion, systems, deadship, controls,
+characters); 5,287 objects and 1,351,125 triangles, unchanged.
+
+**Browser (Google Chrome for Testing 153, headless, software WebGL), real input.** `web_check.py --part training` on the Phase 1
+site. The check walks the trainee by script; every action is the player's own input: the key the page publishes for that action
+(`window.wayfarerControls.keys`: E for Use, O for Ops), or on an emulated phone (844 × 390, touch) a tap on the on-screen button.
+
+| Training | Input | Result | Actions answered | Physics frames | Wall s |
+| --- | --- | --- | --- | --- | --- |
+| `#interior-systems` | keys | PASS | 2 (Ops isolate, Ops restore) | 8,713 | 411 |
+| `#interior-systems` | touch | PASS | 2 | 8,693 | 321 |
+| `#interior-deadship` | keys | PASS | 13 (inspect, 4 readings, close, isolate, refused restore, take spare, install, restore, watch, replay) | 20,797 | 683 |
+| `#interior-deadship` | touch | PASS | 13 | 20,938 | 586 |
+
+What this does not prove: the walking itself is scripted (movement keys were tested by the main part's walk); the browser frame
+rate is software WebGL, not a player's GPU.
+
+**Phase 0 browser gap (brief §2).** The 6d0f8f2 build could not be driven in a browser: its web shell passes only listed check
+arguments, and `--systems` / `--check-systems` were not listed, so the check never started (a visitor's `#interior-systems` start
+itself needs no argument). Fixed in isolation in `web/play/shell.html` (the five training arguments listed). Phase 0's behaviour was
+then verified in the browser on the Phase 1 build, where `#interior-systems` runs the Phase 0 proof on the v2 model (table above).
+
+## 20. Regression (Phase 1)
+
+| Area | How | Result |
+| --- | --- | --- |
+| All Python tests | `unittest discover -s tests` | 244 tests OK (1 skipped) |
+| Godot runtime checks | `runtime-export` (10 checks incl. excursion, eva-ops, locomotion, controls, characters) | 10/10 PASS |
+| Default interior and exterior, viewer, start page, controls setup, switching, phone | `web_check.py --part main` | 67/67 PASS (same count as Phase 0) |
+| `#interior` free of Deadship | the scene creates Deadship only for `#interior-deadship` / `--deadship` (excursion.gd), equipment only for those and `#interior-systems` | by construction, and the default walk checks above |
+| Geometry | none changed; the runtime export's object and triangle counts unchanged | unchanged |
+
+## 21. Handoff (Phase 1)
+
+**H1. Implemented.** The playable DS-1 tutorial at `#interior-deadship` (A); the model extension, independent mode / fan / spare
+with an operation table and refusals (B); the component interaction, Use and Ops at the bay and the bench, one carried part (C); the
+scenario definition in `data/deadship/` with its loader and reference (D); this report (E); validation (F, section 19); stills of the
+five moments (G, project Library `deadship_phase1_2026-11-13/`).
+
+**H2. Reused.** The walk, its doors, CIRC routing and learning-station conventions; `WfInput` Use / Ops with the player's bindings and
+the touch buttons; the Phase 0 reference-and-checkpoint pattern; the learning panel style; `check.gd`'s walking for the checks.
+
+**H3. Prototype or unresolved.** The 466 m³ well-mixed ring (ventilation assumed), six occupants, 295 K, the unit rated for twelve,
+the 0.8 / 3.0 kPa reference bands, the 4.5 h fault lead, the ×30 and ×1800 scales, the 6 h watch, the bench location, the spare's
+placeholder box. Medical limits, ECLSS technology and serviceable parts stay OPEN in canon.
+
+**H4. Deferred, and why.** Compartment connectivity and door-coupled air (DS-1 does not need it; the canon holds no compartment
+ventilation model; DS-2 does need it); humidity, heat, power; parts beyond one spare; scoring (unscored by brief); persistence of runs
+(none needed for a replayable tutorial); a proper spare-fan model; Phase 2.
+
+**H5. Walkthrough intact.** The default start and `#interior-systems` behave as before (sections 19 and 20); Deadship exists only on
+its own start; no binding, profile or setup row changed (two action descriptions name Deadship).
+
+**H6. Playable in the browser.** Yes: `#interior-deadship` on the play page, desktop and phone, as tested (section 19). Known rough
+edge: on a phone the training panel covers part of the HUD while a page is open.
+
+**H7. Phase 2 readiness.** Ready for design review: the model's operation table, refusals and reference replay extend to new
+components; the scenario layer holds steps and texts only. Prerequisites in section 18; the first is compartment connectivity.

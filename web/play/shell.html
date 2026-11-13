@@ -102,7 +102,8 @@ const GODOT_THREADS_ENABLED = $GODOT_THREADS_ENABLED;
   showExperience(experience);
   window.wayfarerScene = showExperience;          // called by the engine when a scene change switches the experience
   const ALLOWED = ['--disable-render-loop', '--fixed-fps', '30', '60', '--', '--touch', '--no-touch', '--touch-probe', '--check-excursion',
-                   '--eva', '--check-eva-ops', '--check-locomotion', '--excursion', '--hatch', '--first-flight'];
+                   '--eva', '--check-eva-ops', '--check-locomotion', '--excursion', '--hatch', '--first-flight',
+                   '--systems', '--check-systems', '--deadship', '--check-deadship', '--await-player'];   // SYS-001 / DS-1 browser checks
   const asked = new URLSearchParams(location.search).getAll('arg');
   const args = asked.filter(a => ALLOWED.includes(a));
   function fail(err) {

@@ -611,6 +611,10 @@ def export(root, preset='COAST', out=None, identity=None, draco=False):
     import cabin_air
     cabin_air.write(root, out / cabin_air.FILE)
     packaged.append(cabin_air.FILE)
+    # Deadship DS-1 (Phase 1): the training scenario and its model-level reference replay (data/deadship/, no engineering values).
+    import deadship
+    deadship.write(root, out / deadship.FILE)
+    packaged.append(deadship.FILE)
     if preset == 'COAST':
         # RT-003: the runtime plays the First Ignition timeline from this copy, checked against the rig's hash.
         timeline = root / rig['flight_timeline']['file']

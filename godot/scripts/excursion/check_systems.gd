@@ -10,14 +10,17 @@ var h: WfExcursion
 var fails: Array = []
 var notes := {}
 var t0 := 0
-var ex: WfExcursionCheck = null           # -- --shots=<dir>: stills of the bay's board (needs a display, e.g. xvfb-run)
+var pl: WfCheckPlayer = null              # walking, the player's actions (--await-player) and stills (--shots=<dir>, or the browser's)
 
-## A still looking at the bay's board (no-op headless or without --shots).
+## A still looking at the bay's board (no-op headless without --shots).
 func _shot(name: String) -> void:
-	if ex == null or ex.shots == "":
-		return
-	ex.face(h.equipment.to_body(h.equipment.board.global_position) - (h.actor.global_position + h.ref_basis().y * 1.6))
-	await ex.shot(name, h.yaw, h.pitch)
+	await pl.shot(name, h.equipment.to_body(h.equipment.board.global_position))
+
+func _increasing(v: Array) -> bool:
+	for i in range(1, v.size()):
+		if float(v[i]) <= float(v[i - 1]):
+			return false
+	return true
 
 func fail(msg: String) -> void:
 	fails.append(msg)
@@ -51,60 +54,46 @@ func run(host: WfExcursion) -> void:
 	var tol: Dictionary = eq.air.doc["tolerance"]
 	_determinism(tol)
 	# Ops away from the bay operates nothing
-	var s0 := eq.air.state
+	var s0 := eq.air.mode
 	h.ops()
-	if eq.air.state != s0 or eq.operations != 0:
-		fail("Ops away from the bay changed the unit (%s -> %s)" % [s0, eq.air.state])
+	if eq.air.mode != s0 or eq.operations != 0:
+		fail("Ops away from the bay changed the unit (%s -> %s)" % [s0, eq.air.mode])
 	# walk the ring A circuit, as a player, until the bay is in reach
-	ex = WfExcursionCheck.new()
-	ex.h = h
-	for a in OS.get_cmdline_user_args():
-		if a.begins_with("--shots="):
-			ex.shots = a.trim_prefix("--shots=")
-			DirAccess.make_dir_recursive_absolute(ex.shots)
-			h.get_viewport().disable_3d = true      # 3D is drawn only for the stills (software GL draws the whole ship slowly)
-	var c: Dictionary = h.stages["circuit"]["RING_A"]
-	var pts: Array = []
-	for q in c["circuit_m"]:
-		pts.append(WfLine.g(q))
-	var i0 := 0
-	for i in pts.size():
-		if (pts[i] as Vector3).distance_to(h.actor.global_position) < (pts[i0] as Vector3).distance_to(h.actor.global_position):
-			i0 = i
-	var reached := false
-	for j in pts.size() + 1:
-		if eq.in_reach(h.actor.global_position, h.walk_zone):
-			reached = true
-			break
-		if not await ex._walk_to(pts[(i0 + j) % pts.size()], 0.45, 90.0, 0):
-			break
-	if not reached:
-		# the circuit passes beside the bay: step towards it from the nearest point
-		var target := eq.centre()
-		await ex._walk_to(target, float(eq.binding["reach_m"]) - 0.4, 30.0, 0)
-		reached = eq.in_reach(h.actor.global_position, h.walk_zone)
-	fails.append_array(ex.fails)
+	pl = WfCheckPlayer.new(h)
+	var reached := await pl.walk_until(func(): return eq.in_reach(h.actor.global_position, h.walk_zone), func(): return eq.centre(),
+		float(eq.binding["reach_m"]))
+	fails.append_array(pl.fails)
+	pl.fails = []
 	notes["walked_m_bins"] = h.progress["RING_A"]["bins"].count(1)
 	if not reached:
 		fail("the ECLSS bay was not reached on the ring A circuit (%.2f m away)" % h.actor.global_position.distance_to(eq.centre()))
 		_finish()
 		return
 	notes["reach_distance_m"] = snappedf(h.actor.global_position.distance_to(eq.centre()), 0.01)
+	notes["input"] = "the player's own binding or touch button (await-player)" if pl.await_player else "the scene's Ops handler"
 	h.walk_override = Vector3.ZERO
 	await _ticks(10)
 	await _shot("SYS_1_running")
 	_ui_says("Ops · isolate CO2 unit")
-	# isolate: the model's state changes and CO2 rises linearly at the generation rate
+	# isolate: the model's state changes and CO2 rises linearly at the generation rate (from the steady state the running unit held)
 	var p: Dictionary = eq.air.p
 	var G := float(p["occupants"]) * float(p["per_person_kg_s"])
 	var m_a := eq.air.m_kg
-	var t_a := eq.air.t_s
-	if h.ops() != "ISOLATED" or eq.air.state != "ISOLATED":
-		fail("Ops at the bay did not isolate the unit (state %s)" % eq.air.state)
+	await pl.act("exc.ops", "Ops · isolate CO2 unit", h.ops, func(): return eq.air.mode == "ISOLATED")
+	var t_a: float = eq.air.history[-1][0] if not eq.air.history.is_empty() else eq.air.t_s
+	if eq.air.mode != "ISOLATED":
+		fail("Ops at the bay did not isolate the unit (state %s)" % eq.air.mode)
+	await _ticks(2)
 	if not eq.board.text.contains("ISOLATED"):
 		fail("the bay's board does not show ISOLATED: %s" % eq.board.text)
 	_ui_says("Ops · restore CO2 unit")
-	await _ticks(600)
+	var x_seen := [eq.air.x()]
+	for i in 6:
+		await _ticks(100)
+		x_seen.append(eq.air.x())
+	notes["board_x_rising"] = x_seen
+	if not _increasing(x_seen):
+		fail("isolated: the CO2 the board shows does not rise: %s" % str(x_seen))
 	await _shot("SYS_2_isolated")
 	var want_iso := m_a + G * (eq.air.t_s - t_a)
 	notes["isolated"] = {"ship_s": snappedf(eq.air.t_s - t_a, 0.01), "x_from": eq.air.readout()["x"], "m_kg": eq.air.m_kg, "want_kg": want_iso}
@@ -113,10 +102,11 @@ func run(host: WfExcursion) -> void:
 	if float(eq.air.readout()["dxdt_per_h"]) <= 0.0:
 		fail("isolated: the CO2 trend is not rising")
 	# restore: back to the exponential approach to the steady state
-	var m_b := eq.air.m_kg
-	var t_b := eq.air.t_s
-	if h.ops() != "RUNNING" or eq.air.state != "RUNNING":
-		fail("Ops at the bay did not restore the unit (state %s)" % eq.air.state)
+	await pl.act("exc.ops", "Ops · restore CO2 unit", h.ops, func(): return eq.air.mode == "RUNNING")
+	var t_b: float = eq.air.history[-1][0]
+	var m_b := m_a + G * (t_b - t_a)
+	if eq.air.mode != "RUNNING":
+		fail("Ops at the bay did not restore the unit (state %s)" % eq.air.mode)
 	await _ticks(600)
 	var V := float(p["V_m3"])
 	var k := float(p["k_m3_s"])
@@ -128,9 +118,10 @@ func run(host: WfExcursion) -> void:
 		fail("restored: the CO2 trend is not falling")
 	if absf(eq.air.ledger_error()) > float(tol["abs_kg"]):
 		fail("ledger open by %s kg" % str(eq.air.ledger_error()))
-	if eq.air.log.size() != 2:
-		fail("the unit's transition log has %d entries, want 2" % eq.air.log.size())
+	if eq.air.history.size() != 2:
+		fail("the unit's transition log has %d entries, want 2" % eq.air.history.size())
 	await _shot("SYS_3_restored")
+	fails.append_array(pl.fails)
 	notes["board"] = eq.board.text
 	notes["record"] = eq.record()
 	_finish()

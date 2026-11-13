@@ -20,7 +20,8 @@ static func requested() -> String:
 		return "interior"
 	return ""
 
-## LOCO-001: the start the page asked for within its experience: "systems" (#interior-systems: the ring start with the SYS-001 proof),
+## LOCO-001: the start the page asked for within its experience: "deadship" (#interior-deadship: the ring start with the DS-1 training),
+## "systems" (#interior-systems: the ring start with the SYS-001 proof),
 ## "excursion" (#interior-excursion: the full walk from the station),
 ## "hatch" (#exterior-hatch or the older #eva: EVA Operations at the EVA hatch), or "" (the default locomotion starts).
 static func start_variant() -> String:
@@ -28,6 +29,8 @@ static func start_variant() -> String:
 		return ""
 	var h = JavaScriptBridge.eval("location.hash", true)
 	var s := String(h).to_lower() if h != null else ""
+	if s.contains("deadship"):
+		return "deadship"
 	if s.contains("systems"):
 		return "systems"
 	if s.contains("excursion") or s.contains("station"):

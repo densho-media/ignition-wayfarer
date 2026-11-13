@@ -98,6 +98,8 @@ var hud_check := Label.new()
 var ring_map: Control = null
 var learning: WfLearning = null   # UJ-013 learning stations (WHAT / WHY / SHOW ME), from the package
 var equipment: WfEquipment = null # SYS-001 Phase 0 proof (`--systems`, #interior-systems): the ECLSS bay operates ring A's CO2 model
+var deadship: WfDeadship = null   # Deadship DS-1 "Scrubber" training (`--deadship`, #interior-deadship): owns `equipment` when present
+var deadship_check: WfDeadshipCheck = null
 # LOCO-001 (docs/LOCOMOTION.md): the start (RING: on ring A's deck with the rings turning, the default; STATION: the full excursion from the
 # development station), the trainee's visible MPFB body and its locomotion on the decks.
 var start_mode := "RING"
@@ -121,6 +123,10 @@ static func eva_requested() -> bool:
 ## SYS-001: the Phase 0 systems proof rides on the ring start; the default start never creates it.
 static func systems_requested() -> bool:
 	return "--systems" in OS.get_cmdline_user_args() or WfWebPage.start_variant() == "systems"
+
+## Deadship DS-1: the training rides on the ring start (simulated COAST); the default and systems starts never create it.
+static func deadship_requested() -> bool:
+	return "--deadship" in OS.get_cmdline_user_args() or WfWebPage.start_variant() == "deadship"
 
 static func requested_start() -> String:
 	var args := OS.get_cmdline_user_args()
@@ -191,7 +197,14 @@ func _ready() -> void:
 	learning = WfLearning.new(by_name, layer, self, manifest)
 	if learning.welcome() != "":
 		say("GU instructor: " + learning.welcome())
-	if systems_requested():
+	if deadship_requested():
+		deadship = WfDeadship.new(by_name, manifest, self, layer)
+		equipment = deadship.eq
+		if not deadship.verified:
+			push_error("DEADSHIP: the training is unavailable: %s" % str(deadship.errors))
+		else:
+			say("GU instructor: " + " ".join(deadship.sc["steps"][0]["brief"].map(func(l): return deadship.fill(str(l)))))
+	elif systems_requested():
 		equipment = WfEquipment.new(by_name, manifest, self)
 		if equipment.air != null and not equipment.air.verified:
 			push_error("SYS-001: the runtime CO2 model does not reproduce its reference: %s" % str(equipment.air.errors))
@@ -212,6 +225,9 @@ func _ready() -> void:
 	elif "--check-systems" in OS.get_cmdline_user_args():
 		systems_check = WfSystemsCheck.new()
 		systems_check.run(self)
+	elif "--check-deadship" in OS.get_cmdline_user_args():
+		deadship_check = WfDeadshipCheck.new()
+		deadship_check.run(self)
 
 # ---- package ---------------------------------------------------------------------------------------------------------------------------------
 
@@ -654,7 +670,9 @@ func look_basis() -> Basis:
 func _physics_process(dt: float) -> void:
 	if actor == null:
 		return
-	if equipment != null:
+	if deadship != null:
+		deadship.step(dt)
+	elif equipment != null:
 		equipment.step(dt)
 	_step_modes(dt)
 	_step_drums(dt)
@@ -1024,6 +1042,10 @@ func use() -> String:
 				return _open_port_gate(k)
 		say("Nothing in reach to operate here.")
 		return ""
+	if deadship != null:
+		var dr := deadship.use()
+		if dr != "":
+			return dr
 	var w := _walk_target()
 	var ls_i := _learning_in_reach()
 	if ls_i >= 0 and (learning.open == ls_i or w == ""):
@@ -1176,11 +1198,15 @@ func _toggle_door(id: String) -> String:
 
 ## O: the ship's operating change, asked at a trunk panel (the trainee holding still on a rail inside Wayfarer, in the SHIP frame).
 func ops() -> String:
-	if equipment != null and move == "WALK" and equipment.in_reach(actor.global_position, walk_zone):
+	if deadship != null:
+		var dr := deadship.ops()
+		if dr != "":
+			return dr
+	elif equipment != null and move == "WALK" and equipment.in_reach(actor.global_position, walk_zone):
 		var r := equipment.operate()
 		_log("equipment", equipment.record())
 		say(r)
-		return equipment.air.state
+		return equipment.air.mode
 	if not (move == "LINE" and line.id == "BOARD" and ls > float(hatch["OUTER_HATCH"]["gate"][1])):
 		say("Operations: ask from a panel inside Wayfarer's trunk (past the airlock).")
 		return ""
@@ -1243,6 +1269,8 @@ func _process(dt: float) -> void:
 			rec.merge(loco.record())
 		if equipment != null:
 			rec["systems"] = equipment.record()
+		if deadship != null:
+			rec["deadship"] = deadship.record()
 		WfWebPage.publish("wayfarerWalk", rec)
 	var rc: Dictionary = learning.remote_camera() if learning != null else {}
 	var f: Dictionary = _frame_pivot() if rc.is_empty() else frames["STATIONARY"]     # a station's remote camera rides the stationary ship
@@ -1703,6 +1731,8 @@ func where() -> String:
 	return "crew tube " + "AB"[k]
 
 func _goal_text() -> String:
+	if deadship != null:
+		return deadship.goal_text()
 	var w := where()
 	var mv := "%s/%s" % [key("player.move_forward"), key("player.move_back")]
 	if w == "station":
@@ -1765,6 +1795,8 @@ func use_label() -> String:
 				and closures[_port_gate(WfFrames.ring_index(line.zone))]["value"] < 0.999:
 			return "Use · open gate"
 		return ""
+	if deadship != null and deadship.use_label() != "":
+		return deadship.use_label()
 	var w := _walk_target()
 	var ls_i := _learning_in_reach()
 	if ls_i >= 0 and (learning.open == ls_i or w == ""):
@@ -1786,7 +1818,10 @@ func touch_state() -> Dictionary:
 		acts.append(["exc.use", u, "primary_game"])
 	if move == "WALK":
 		acts.append(["exc.jump", "Jump", "game"])     # LOCO-003: the phone had no jump; running is the stick pushed to its rim
-	if equipment != null and move == "WALK" and equipment.in_reach(actor.global_position, walk_zone):
+	if deadship != null:
+		if deadship.ops_label() != "":
+			acts.append(["exc.ops", deadship.ops_label(), "game"])
+	elif equipment != null and move == "WALK" and equipment.in_reach(actor.global_position, walk_zone):
 		acts.append(["exc.ops", "Ops · " + equipment.op_label(), "game"])
 	if move == "LINE" and line.id == "BOARD" and ls > float(hatch["OUTER_HATCH"]["gate"][1]) and not ctl.busy():
 		acts.append(["exc.ops", "Ops · undock" if ctl.mode == "DOCKED" else "Ops · dock", "game"])
@@ -1818,13 +1853,19 @@ func _prompt_text() -> String:
 	else:
 		var d := _walk_target()
 		var ls_i := _learning_in_reach()
-		if ls_i >= 0 and (learning.open == ls_i or d == ""):
+		var dl := deadship.use_label() if deadship != null else ""
+		if dl != "":
+			out.append("%s %s" % [key("exc.use"), dl.trim_prefix("Use · ")])
+		elif ls_i >= 0 and (learning.open == ls_i or d == ""):
 			out.append(("%s " + ("learning point: " + learning.title(ls_i) if learning.open != ls_i else learning.next_label())) % key("exc.use"))
 		elif d == "ladder":
 			out.append("%s take the ladder" % key("exc.use"))
 		elif d != "":
 			out.append("%s %s door %s" % [key("exc.use"), "close" if circ_doors[d]["target"] > 0.0 else "open", str(d).trim_prefix("CIRC.")])
-		if equipment != null and equipment.in_reach(actor.global_position, walk_zone):
+		if deadship != null:
+			if deadship.ops_label() != "":
+				out.append("%s %s" % [key("exc.ops"), deadship.ops_label().trim_prefix("Ops · ")])
+		elif equipment != null and equipment.in_reach(actor.global_position, walk_zone):
 			out.append(equipment.prompt(key("exc.ops")))
 	out.append("%s view" % key("exc.view"))
 	var t := "  ·  ".join(out)
@@ -1857,6 +1898,9 @@ func _update_hud() -> void:
 		lines_out.append("Learning points %d/%d (ring A)" % [learning.done.size(), learning.stations.size()])
 	if equipment != null:
 		equipment.update()
+	if deadship != null and deadship.verified:
+		lines_out.append_array(deadship.lines())
+		deadship.update_panel(get_viewport().get_visible_rect().size)
 	hud_check.text = "\n".join(lines_out)
 	hud_prompt.text = WfKeyText.rich(_prompt_text())
 	if WfInput.compact():

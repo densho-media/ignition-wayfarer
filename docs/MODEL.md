@@ -1974,22 +1974,41 @@ utility row.
   measured, at spawn). Both excursions take 88,000 physics frames, about 100 s headless natively; the same check passes in the
   WebAssembly build in headless Chromium with drawing off (about 1,470 s), and the scene draws there without errors.
 
-## Ring cabin CO₂ in the walk (SYS-001, Phase 0 systems proof)
+## Ring cabin CO₂ in the walk (SYS-001) and the Deadship scrubber tutorial (DS-1)
 
-`src/wayfarer/cabin_air.py` is ring A's cabin CO₂ as one engineering state, with no game logic: one well-mixed free gas volume
+`src/wayfarer/cabin_air.py` (v2) is ring A's cabin CO₂ as one engineering state, with no game logic: one well-mixed free gas volume
 (PROTOTYPE 466.4 m³ = the three sectors' net volume + ring A's CIRC-001 corridor gross, crew tubes excluded), the cabin's 80 kPa
 (BASELINE), the 0.3 % target and 0.5 % control maximum (WORKING), 1.0 kg CO₂ per person-day (41!B15, STUDY), and PROTOTYPE values for
 six occupants, 295 K and a removal unit rated to hold twelve at the target (k ≈ 116 m³/h). The step is the exact solution of
-dm/dt = G − k·m/V. The unit's states are RUNNING, ISOLATED and FAILED; isolate and restore are the only operations, and FAILED is a
-consumer's fault input that cannot be restored. Bands by partial pressure: the control limit (WORKING), plus degraded habitability
-(0.8 kPa) and physiological danger (3.0 kPa), which are PROTOTYPE reference levels, never canon (medical limits OPEN, 12!G22).
+dm/dt = G − k·m/V. The unit has three independent fields: mode RUNNING / ISOLATED, fan OK / FAILED and the spare fan's place
+NONE / BENCH / CARRIED / INSTALLED; it removes CO₂ only when RUNNING with its fan OK. Operations (isolate, restore, fault_fan, take_spare,
+install_spare) come from one table of requirements and effects; a refused operation changes nothing and has a stated reason (a fan is
+replaced only with the unit isolated and the spare carried; a unit with a failed fan is not restored). Component readings
+(`diagnostics`: supply, controller, fan command and speed, scrubbed flow, bed, removal rate) follow from the state. The time to the
+control limit counts from the present state at the present trend. Bands by partial pressure: the control limit (WORKING), plus degraded
+habitability (0.8 kPa) and physiological danger (3.0 kPa), PROTOTYPE reference levels, never canon (medical limits OPEN, 12!G22).
+The ring is one volume because its intermodule ventilation is assumed to mix it (PROTOTYPE); CIRC doors stand normally closed and do
+not change the gas here, so the walk claims no door effect.
 
-The export writes `wf_cabin_air.json`, with 33 checkpoints of an 8 h proof run and the tolerance (1e-9 relative + 1e-9 kg). In the walk,
-`WfCabinAir` (`godot/scripts/systems/cabin_air.gd`) must reproduce them before anything is shown. Only the opt-in start
-`#interior-systems` (`-- --systems`) creates `WfEquipment` (`scripts/excursion/equipment.gd`). At the sector 3 ECLSS bay
-(`Prod_RA3_GDN_ECLSS`), Ops isolates or restores the unit, and a board above the bay shows the readout at a labelled ×60 simulation rate.
-The default start is unchanged. Checks: `tests/test_cabin_air.py` (7) and the runtime check `systems` (`--systems --check-systems`,
-WF_GODOT_SYSTEMS). Design and roadmap: `work/project-thread-dfyyv7/DEADSHIP_DESIGN.md` (Deadship, on its branch).
+The export writes `wf_cabin_air.json` (the operation and refusal tables, 41 checkpoints of a 10 h proof run with its expected
+outcomes, the tolerance 1e-9 relative + 1e-9 kg). In the walk, `WfCabinAir` (`godot/scripts/systems/cabin_air.gd`) must reproduce
+them before anything is shown. `#interior-systems` (`-- --systems`) creates `WfEquipment` (`scripts/excursion/equipment.gd`, a small
+registry of equipment points): at the sector 3 ECLSS bay (`Prod_RA3_GDN_ECLSS`) Ops isolates or restores the unit, and a board above
+the bay shows the readout at a labelled ×60 rate.
+
+**DS-1 "Scrubber"** (`#interior-deadship`, `-- --deadship`; TUTORIAL, unscored) is a scenario on the same model. `data/deadship/
+ds1_scrubber.toml` holds only the scenario: start state, the injected fan fault and how long before the trainee arrives (4.5 h, so
+the ring starts at the model's 0.318 %), time scales, the bench node (`Prod_RA2_WRK_Tools_Workbench`), eight steps with their completion
+conditions on engineering state or player actions, evidence and debrief texts with placeholders filled from the model. It refuses any
+engineering value (`deadship.py`). The export writes `wf_deadship_ds1.json` with the Python reference replay; `WfDeadship`
+(`godot/scripts/deadship/scrubber.gd`) replays it against the runtime model before starting. The trainee recognizes the warning,
+inspects the unit (Use), reads supply, fan, bed and conclusion, isolates (Ops), fetches the spare fan from the sector 2 workbench (one
+carried item), fits it (Use), restores (Ops) and starts a stability watch (Ops): 6 h of ship time on the same model at ×1800, which
+passes when the ring is removing CO₂ and ends at or below the target, then a debrief. Ship time runs ×30 for the CO₂ model only (rings,
+locomotion and doors keep real time) and stops while a page or the controls overlay is open; Ops after the end replays the training.
+Checks: `tests/test_cabin_air.py` (12), `tests/test_deadship.py` (4), the runtime checks `systems` and `deadship`
+(`--deadship --check-deadship`, WF_GODOT_DEADSHIP) and the opt-in browser part `web_check.py --part training` (real keys and touch).
+The default start is unchanged. Design, decisions and Phase 2 prerequisites: `work/project-thread-dfyyv7/DEADSHIP_DESIGN.md`.
 
 ## Retired runtime scenes
 

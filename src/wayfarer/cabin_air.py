@@ -32,15 +32,41 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 FILE = 'wf_cabin_air.json'
 SCHEMA = 'WF_CABIN_AIR'
-VERSION = 1
+VERSION = 2
 R = 8.314462618          # J/(mol K), CODATA (exact since 2019)
 M_CO2 = 0.0440095        # kg/mol
 DAY_S = 86400.0
 
-STATES = ('RUNNING', 'ISOLATED', 'FAILED')
-# operation -> (states it is allowed from, the state it leaves). FAILED is set by a consumer (a fault), never by an operation, and a
-# FAILED unit cannot be restored without a repair, which this model does not have yet.
-OPERATIONS = {'isolate': (('RUNNING',), 'ISOLATED'), 'restore': (('ISOLATED',), 'RUNNING')}
+# The unit's state has three independent parts (one enum could not hold a failed fan inside an isolated unit):
+#   mode   RUNNING (energized, process air flowing through the bed) or ISOLATED (de-energized, its valves shut: safe to open)
+#   fan    the process-air fan's condition: OK or FAILED (a FAILED fan moves no air, so the bed removes nothing)
+#   spare  where the ring's replacement fan is: NONE (no spare), BENCH (at the sector 2 workbench), CARRIED (by a crew member),
+#          INSTALLED (fitted in the unit)
+# The unit removes CO2 only when RUNNING with its fan OK. "Repaired but not yet restored" is ISOLATED with the fan OK.
+FIELDS = dict(mode=('RUNNING', 'ISOLATED'), fan=('OK', 'FAILED'), spare=('NONE', 'BENCH', 'CARRIED', 'INSTALLED'))
+# operation -> the field values it requires (checked in this order) and the values it sets. Nothing else changes a field. Where the
+# crew member stands (at the bay, at the workbench) is the consumer's business; this model knows only where the part is.
+OPERATIONS = {
+    'isolate': dict(requires=dict(mode=['RUNNING']), sets=dict(mode='ISOLATED')),
+    'restore': dict(requires=dict(mode=['ISOLATED'], fan=['OK']), sets=dict(mode='RUNNING')),
+    'take_spare': dict(requires=dict(spare=['BENCH']), sets=dict(spare='CARRIED')),
+    'install_spare': dict(requires=dict(mode=['ISOLATED'], fan=['FAILED'], spare=['CARRIED']), sets=dict(fan='OK', spare='INSTALLED')),
+    'fault_fan': dict(requires=dict(fan=['OK']), sets=dict(fan='FAILED'), kind='FAULT'),
+}
+# Why an operation is refused: operation -> field -> the value that blocks it -> the engineering reason. A refusal changes nothing.
+REFUSALS = {
+    'isolate': dict(mode=dict(ISOLATED='The unit is already isolated.')),
+    'restore': dict(mode=dict(RUNNING='The unit is already running.'),
+                    fan=dict(FAILED='The process-air fan has failed: energizing the unit would move no air through the bed and remove no '
+                                    'CO2. Replace the fan first.')),
+    'take_spare': dict(spare=dict(NONE='There is no spare fan.', CARRIED='The spare fan is already being carried.',
+                                  INSTALLED='The spare fan is already installed.')),
+    'install_spare': dict(mode=dict(RUNNING='The unit is energized and its process duct is live: isolate it before opening it.'),
+                          fan=dict(OK='The fan is working: there is nothing to replace.'),
+                          spare=dict(NONE='There is no spare fan.', BENCH='The spare fan is still at the sector 2 workbench.',
+                                     INSTALLED='The spare fan is already installed.')),
+    'fault_fan': dict(fan=dict(FAILED='The fan has already failed.')),
+}
 
 # Godot must reproduce the checkpoints to this tolerance (|got - want| <= abs + rel |want|). Both sides evaluate the same closed-form
 # step in IEEE 754 doubles (GDScript float is 64-bit); the only differences are the last-place rounding of exp() between the two math
@@ -58,8 +84,10 @@ PROTOTYPE = {
                                       'either ring can carry everyone. Technology (a regenerable sorbent bed with a process-air fan) '
                                       'and its parts stay OPEN (12!G26:G27).'),
     'mixing': dict(value='WELL_MIXED_RING', status='PROTOTYPE',
-                   note='The ring\'s sectors and corridors are one well-mixed volume (ventilation assumed); door and hatch states are '
-                        'not coupled to the volume yet.'),
+                   note='The ring\'s sectors and corridor compartments are one well-mixed volume. The CIRC pressure doors are normally '
+                        'closed (ring_circulation.doors), so the connection is the ring\'s ventilation (an intermodule-ventilation duct '
+                        'loop with dampers, assumed open; ventilation is not in canon): a door neither joins nor splits the gas here. '
+                        'Local excess near the occupants is of order G / Q_vent, about 0.05-0.1 % CO2 at a few hundred m3/h.'),
 }
 
 # Habitability bands by CO2 partial pressure (the body responds to partial pressure, not to the fraction). The first is the spec's
@@ -127,37 +155,56 @@ def params(s=None, reg=None):
                 k_m3_s=k, co2_target=sv['co2_target'], co2_max=sv['co2_max'])
 
 
-def start(p, state='RUNNING', x0=None):
-    """A ring at the steady state of its current unit state (RUNNING) or at x0."""
+def removing(st):
+    """The unit removes CO2 only when it is energized and its fan moves air."""
+    return st['mode'] == 'RUNNING' and st['fan'] == 'OK'
+
+
+def steady_x(p):
+    """The fraction a removing unit holds the ring at with the present occupants."""
     G = p['occupants']*p['per_person_kg_s']
+    return G*p['V_m3']/p['k_m3_s']/(p['n_mol']*M_CO2)
+
+
+def start(p, mode='RUNNING', fan='OK', spare='NONE', x0=None):
+    """A ring at x0, or at the steady state when the unit is removing (else at the target)."""
+    st = dict(t_s=0.0, mode=mode, fan=fan, spare=spare, log=[])
+    for f, v in (('mode', mode), ('fan', fan), ('spare', spare)):
+        assert v in FIELDS[f], (f, v)
     if x0 is None:
-        x0 = G*p['V_m3']/p['k_m3_s']/(p['n_mol']*M_CO2) if state == 'RUNNING' else p['co2_target']
+        x0 = steady_x(p) if removing(st) else p['co2_target']
     m0 = x0*p['n_mol']*M_CO2
-    return dict(t_s=0.0, state=state, m_kg=m0, m0_kg=m0, generated_kg=0.0, removed_kg=0.0, log=[])
+    st.update(m_kg=m0, m0_kg=m0, generated_kg=0.0, removed_kg=0.0)
+    return st
+
+
+def blocked(st, op):
+    """'' if op is allowed now, else the field that blocks it ('op' for an unknown operation)."""
+    if op not in OPERATIONS:
+        return 'op'
+    for f, allowed in OPERATIONS[op]['requires'].items():
+        if st[f] not in allowed:
+            return f
+    return ''
 
 
 def operate(st, op):
     """Apply an operation; returns '' or the reason it is refused (the state is then unchanged)."""
-    if op not in OPERATIONS:
+    f = blocked(st, op)
+    if f == 'op':
         return f'unknown operation {op}'
-    allowed, to = OPERATIONS[op]
-    if st['state'] not in allowed:
-        return f"{op} refused: the unit is {st['state']}"
-    st['log'].append((st['t_s'], st['state'], to))
-    st['state'] = to
+    if f:
+        return REFUSALS.get(op, {}).get(f, {}).get(st[f], f'{op} refused: {f} is {st[f]}')
+    sets = OPERATIONS[op]['sets']
+    st['log'].append((st['t_s'], op, {k: st[k] for k in sets}, dict(sets)))
+    st.update(sets)
     return ''
-
-
-def fail(st):
-    """A consumer's fault input (a scenario, a story beat): the unit stops removing and only a repair could bring it back."""
-    st['log'].append((st['t_s'], st['state'], 'FAILED'))
-    st['state'] = 'FAILED'
 
 
 def step(st, p, dt):
     """Advance dt seconds with the exact solution for constant generation and removal."""
     G = p['occupants']*p['per_person_kg_s']; V = p['V_m3']
-    k = p['k_m3_s'] if st['state'] == 'RUNNING' else 0.0
+    k = p['k_m3_s'] if removing(st) else 0.0
     m = st['m_kg']
     if k > 0.0:
         m_ss = G*V/k
@@ -175,18 +222,48 @@ def ledger_error(st):
     return st['m_kg']-(st['m0_kg']+st['generated_kg']-st['removed_kg'])
 
 
+def status(st):
+    """One word for the unit's condition, from its fields."""
+    if st['mode'] == 'RUNNING':
+        return 'OPERATING' if st['fan'] == 'OK' else 'RUNNING_NOT_REMOVING'
+    return 'ISOLATED_READY' if st['fan'] == 'OK' else 'ISOLATED_FAULT'
+
+
 def readout(st, p):
-    """What a panel can show: fraction, partial pressure, trend, the band and the time to the control limit at the present trend."""
+    """What a panel can show: fraction, partial pressure, trend, the band and the time to the control limit, counted from the present
+    state at the present trend (no removal: the linear rise, exact; removing: the trend falls or holds, so no limit is approached)."""
     x = st['m_kg']/M_CO2/p['n_mol']; pp = x*p['P_Pa']/1000.0
-    G = p['occupants']*p['per_person_kg_s']; k = p['k_m3_s'] if st['state'] == 'RUNNING' else 0.0
+    G = p['occupants']*p['per_person_kg_s']; k = p['k_m3_s'] if removing(st) else 0.0
     dmdt = G-k*st['m_kg']/p['V_m3']
     dxdt_h = dmdt/M_CO2/p['n_mol']*3600.0
     band = 'NOMINAL' if x <= p['co2_target'] else ('ABOVE_TARGET' if x <= p['co2_max'] else 'CONTROL')
     for b in BANDS[1:]:
         if pp >= b['kpa']:
             band = b['id']
-    to_max = (p['co2_max']-x)/dxdt_h if dxdt_h > 0 and x < p['co2_max'] else None
-    return dict(x=x, pp_kpa=pp, dxdt_per_h=dxdt_h, band=band, state=st['state'], hours_to_control_limit=to_max)
+    # with removal the approach to the steady state is monotonic, so the limit is reached only if the steady state lies beyond it
+    to_max = None
+    if x < p['co2_max'] and dxdt_h > 0:
+        if k > 0.0:
+            x_ss = steady_x(p)
+            if x_ss > p['co2_max']:
+                to_max = -p['V_m3']/k*math.log((x_ss-p['co2_max'])/(x_ss-x))/3600.0
+        else:
+            to_max = (p['co2_max']-x)/dxdt_h
+    return dict(x=x, pp_kpa=pp, dxdt_per_h=dxdt_h, band=band, mode=st['mode'], fan=st['fan'], spare=st['spare'], status=status(st),
+                removing=removing(st), hours_to_control_limit=to_max, t_s=st['t_s'])
+
+
+def diagnostics(st, p):
+    """The unit's component readings a technician compares (derived from the state; only the fan can fail in this model). Supply and
+    controller are readings, not modelled faults: a supply loss would show every reading dark, a controller fault inconsistent or
+    failed self-test readings, a spent bed full airflow with no CO2 taken out."""
+    on = st['mode'] == 'RUNNING'
+    flow = p['k_m3_s']*3600.0 if removing(st) else 0.0
+    k = p['k_m3_s'] if removing(st) else 0.0
+    return dict(supply='ENERGIZED' if on else 'ISOLATED', controller='SELF-TEST PASS' if on else 'OFF (isolated)',
+                fan_command='ON' if on else 'OFF', fan_speed_pct=100.0 if removing(st) else 0.0, fan_condition=st['fan'],
+                scrubbed_flow_m3_h=flow, bed='NORMAL' if on else 'NORMAL (cold)', removal_kg_h=k*st['m_kg']/p['V_m3']*3600.0,
+                spare=st['spare'])
 
 
 def hours_between(p, x_from, x_to):
@@ -194,41 +271,57 @@ def hours_between(p, x_from, x_to):
     return (x_to-x_from)*p['n_mol']*M_CO2/(p['occupants']*p['per_person_kg_s'])/3600.0
 
 
-# The checkpoint run Godot must reproduce: steady state, isolated for 4 h, restored, 8 h in all, at the runtime's 1 s step.
-PROOF_EVENTS = [(1800.0, 'isolate'), (16200.0, 'restore')]
-PROOF_END_S = 28800.0
+# The checkpoint run Godot must reproduce, at the runtime's 1 s step: steady state with the spare at the workbench; the fan fails; the
+# unit is isolated; the spare is fetched and installed; the unit is restored; 10 h in all. Each event is (t, operation, expected
+# outcome): '' accepted, or the field that must refuse it (the state then must not change). The refusals probe the safety rules.
+PROOF_START = dict(mode='RUNNING', fan='OK', spare='BENCH')
+PROOF_EVENTS = [(600.0, 'fault_fan', ''), (900.0, 'restore', 'mode'), (1200.0, 'install_spare', 'mode'), (1800.0, 'isolate', ''),
+                (2100.0, 'restore', 'fan'), (2400.0, 'install_spare', 'spare'), (3600.0, 'take_spare', ''),
+                (5400.0, 'install_spare', ''), (5700.0, 'install_spare', 'fan'), (7200.0, 'restore', ''), (7500.0, 'take_spare', 'spare')]
+PROOF_END_S = 36000.0
 PROOF_EVERY_S = 900.0
 PROOF_DT_S = 1.0
 
 
+def run_events(st, p, events):
+    """Apply every event due now; asserts each has its expected outcome."""
+    while events and st['t_s'] >= events[0][0]-1e-9:
+        t, op, expect = events.pop(0)
+        got = blocked(st, op)
+        before = {f: st[f] for f in FIELDS}
+        reason = operate(st, op)
+        assert got == expect, (t, op, got, expect, reason)
+        assert expect == '' or {f: st[f] for f in FIELDS} == before, (t, op)
+
+
 def checkpoints(p, dt=PROOF_DT_S):
-    st = start(p); out = []; events = list(PROOF_EVENTS)
+    st = start(p, **PROOF_START); out = []; events = list(PROOF_EVENTS)
     steps = int(round(PROOF_END_S/dt)); every = int(round(PROOF_EVERY_S/dt))
     for i in range(steps+1):
-        while events and st['t_s'] >= events[0][0]-1e-9:
-            refused = operate(st, events.pop(0)[1])
-            assert not refused, refused
+        run_events(st, p, events)
         if i % every == 0:
             r = readout(st, p)
-            out.append(dict(t_s=st['t_s'], state=st['state'], m_kg=st['m_kg'], x=r['x'], generated_kg=st['generated_kg'],
-                            removed_kg=st['removed_kg']))
+            out.append(dict(t_s=st['t_s'], mode=st['mode'], fan=st['fan'], spare=st['spare'], m_kg=st['m_kg'], x=r['x'],
+                            generated_kg=st['generated_kg'], removed_kg=st['removed_kg']))
         if i < steps:
             step(st, p, dt)
     return out
 
 
 def analytic(p, t_s):
-    """Closed-form m(t) of the proof run, for the reference check (independent of the stepping)."""
-    st = start(p); G = p['occupants']*p['per_person_kg_s']; V = p['V_m3']; k = p['k_m3_s']
-    t_iso, t_res = PROOF_EVENTS[0][0], PROOF_EVENTS[1][0]
-    m0 = st['m_kg']
-    if t_s <= t_iso:
+    """Closed-form m(t) of the proof run, for the reference check (independent of the stepping): steady until the fan fails, the
+    linear rise until the unit is restored with a working fan, then the exponential approach to the steady state."""
+    G = p['occupants']*p['per_person_kg_s']; V = p['V_m3']; k = p['k_m3_s']
+    t_fail = next(t for t, op, e in PROOF_EVENTS if op == 'fault_fan' and not e)
+    t_back = next(t for t, op, e in PROOF_EVENTS if op == 'restore' and not e)
+    m0 = steady_x(p)*p['n_mol']*M_CO2
+    if t_s <= t_fail:
         return m0
-    m_iso = m0+G*(min(t_s, t_res)-t_iso)
-    if t_s <= t_res:
-        return m_iso
+    m_up = m0+G*(min(t_s, t_back)-t_fail)
+    if t_s <= t_back:
+        return m_up
     m_ss = G*V/k
-    return m_ss+(m_iso-m_ss)*math.exp(-k*(t_s-t_res)/V)
+    return m_ss+(m_up-m_ss)*math.exp(-k*(t_s-t_back)/V)
 
 
 def contract(s=None, reg=None):
@@ -243,13 +336,13 @@ def contract(s=None, reg=None):
     bands[0]['fraction'] = p['co2_max']; bands[0]['kpa'] = p['co2_max']*p['P_Pa']/1000.0
     return dict(schema=SCHEMA, version=VERSION, system='RING_A_CABIN_CO2',
                 notice='SIMULATION: an engineering model of ring A\'s cabin CO2. PROTOTYPE values are labelled; nothing here is canon.',
-                params=p, binding=BINDING, states=list(STATES), operations={k: dict(allowed=list(a), to=t) for k, (a, t) in OPERATIONS.items()},
+                params=p, binding=BINDING, fields={k: list(v) for k, v in FIELDS.items()}, operations=OPERATIONS, refusals=REFUSALS,
                 bands=bands, tolerance=TOLERANCE,
                 sources=dict(pressure=dict(value=sv['pressure_kpa'], unit='kPa', status=sv['pressure_status'], source_ref='cabin_atmosphere'),
                              control=dict(target=sv['co2_target'], max=sv['co2_max'], status=sv['control_status'], source_ref='cabin_atmosphere_control'),
                              co2_rate=co2_rate(reg), volume=vol, prototype=PROTOTYPE),
                 proof=dict(events=[list(e) for e in PROOF_EVENTS], end_s=PROOF_END_S, every_s=PROOF_EVERY_S, dt_s=PROOF_DT_S,
-                           initial='steady state, unit RUNNING', checkpoints=checkpoints(p)))
+                           start=PROOF_START, initial='steady state of the removing unit', checkpoints=checkpoints(p)))
 
 
 def write(root, out):
