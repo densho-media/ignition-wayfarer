@@ -628,9 +628,9 @@ def run_training(url, play_release, binary, sandbox, out, record_check, metrics,
                         rec = json.loads(text.split(' ', 1)[1])
                         if touch:
                             b = None
-                            for _ in range(120):
+                            for i in range(120):                 # the button showing the awaited label (the probe publishes every 0.25 s)
                                 st = page.js('window.wayfarerTouch || null') or {}
-                                b = next((b for b in st.get('buttons', []) if b[0] == rec['action']), None)
+                                b = next((b for b in st.get('buttons', []) if b[0] == rec['action'] and (i >= 8 or b[1] == rec.get('label'))), None)
                                 if b:
                                     break
                                 time.sleep(0.25)
@@ -644,6 +644,22 @@ def run_training(url, play_release, binary, sandbox, out, record_check, metrics,
                                 time.sleep(1.0)                  # the action's own frame first, then the phone turns upright
                                 page.send('Emulation.setDeviceMetricsOverride', PORTRAIT)
                                 answered.append({'action': 'rotate', 'label': 'portrait', 'input': 'turned upright'})
+                                stay = None                      # the shell asks once: turn sideways or continue upright; a person taps
+                                for _ in range(40):
+                                    stay = page.js("(() => { const t = document.getElementById('turn'), b = document.getElementById('turn-stay');"
+                                                   " if (!t || t.hidden || !b) return null; const r = b.getBoundingClientRect();"
+                                                   " return [r.x + r.width / 2, r.y + r.height / 2]; })()")
+                                    if stay:
+                                        break
+                                    time.sleep(0.25)
+                                if stay:
+                                    page.touch('touchStart', [tuple(stay)])
+                                    time.sleep(0.15)
+                                    page.send('Input.dispatchTouchEvent', {'type': 'touchEnd', 'touchPoints': []})
+                                    time.sleep(0.5)
+                                gone = page.js("document.getElementById('turn').hidden")
+                                answered.append({'action': 'turn prompt', 'label': 'Continue upright',
+                                                 'input': 'tap Continue upright' if stay and gone else 'NO PROMPT ANSWER'})
                         else:
                             label = (page.js('window.wayfarerControls && window.wayfarerControls.keys') or {}).get(rec['action'])
                             k = cdp_key(label)

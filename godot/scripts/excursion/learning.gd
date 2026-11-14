@@ -32,7 +32,7 @@ func _init(by_name: Dictionary, layer: CanvasLayer, owner: Node, manifest: Dicti
 			continue
 		stations.append({"rec": rec, "mesh": mesh})
 	var back := StyleBoxFlat.new()
-	back.bg_color = Color(0.02, 0.04, 0.08, 0.86)
+	back.bg_color = Color(0.02, 0.04, 0.08, 0.94)
 	back.border_color = Color(0.30, 0.45, 0.75)
 	back.set_border_width_all(2)
 	back.set_content_margin_all(14.0)

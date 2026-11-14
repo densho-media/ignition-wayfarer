@@ -361,7 +361,7 @@ func lines() -> Array:
 
 func _build_ui(layer: CanvasLayer) -> void:
 	var back := StyleBoxFlat.new()                 # the learning stations' panel look (WfLearning)
-	back.bg_color = Color(0.02, 0.04, 0.08, 0.86)
+	back.bg_color = Color(0.02, 0.04, 0.08, 0.94)
 	back.border_color = Color(0.75, 0.55, 0.25)
 	back.set_border_width_all(2)
 	back.set_content_margin_all(14.0)
