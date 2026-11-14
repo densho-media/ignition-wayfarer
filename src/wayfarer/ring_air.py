@@ -64,6 +64,13 @@ PROTOTYPE = {
 }
 
 
+# Where each kind of node, edge and boundary comes from (given once, not per item)
+SOURCES = dict(sector='pressure_volumes.rooms: net (deck to overhead less the modelled fit-out; subfloor not counted)',
+               corridor='ring_circulation.compartments: gross clear cavity of the corridor half (CIRC-001)',
+               door='ring_circulation.doors (CIRC-001)', imv='PROTOTYPE: one intermodule-ventilation duct pair through each bulkhead',
+               hatch='crew_transfer TUBE_HATCH (sector overhead)')
+
+
 # ---------- topology ----------------------------------------------------------------------------------------------------------------------------
 
 def topology(s):
@@ -75,22 +82,20 @@ def topology(s):
     for c in ring_circulation.compartments(s, 1):
         if c['kind'] == 'sector':
             room = rooms[f"Sector_1_{c['id'][1]}"]
-            nodes.append(dict(id=c['id'], kind='sector', V_m3=room['net_m3'], gross_m3=room['gross_m3'], basis='net',
-                              source='pressure_volumes.rooms (deck to overhead less the modelled fit-out; subfloor not counted)', status='PROTOTYPE'))
+            nodes.append(dict(id=c['id'], kind='sector', V_m3=room['net_m3'], gross_m3=room['gross_m3'], basis='net', status='PROTOTYPE'))
         else:
-            nodes.append(dict(id=c['id'], kind='corridor', V_m3=c['gross_m3'], gross_m3=c['gross_m3'], basis='gross',
-                              source='ring_circulation.compartments (clear cavity of the corridor half, CIRC-001)', status='PROTOTYPE'))
+            nodes.append(dict(id=c['id'], kind='corridor', V_m3=c['gross_m3'], gross_m3=c['gross_m3'], basis='gross', status='PROTOTYPE'))
     edges = []
     for d in ring_circulation.doors(s, 1):
         edges.append(dict(id=d['id'], kind='door', between=list(d['between']), leaf=d['name'], width_m=d['width'], height_m=d['height'],
-                          normally='CLOSED', source='ring_circulation.doors (CIRC-001)', status='PROTOTYPE'))
+                          normally='CLOSED', status='PROTOTYPE'))
     for d in ring_circulation.doors(s, 1):
         edges.append(dict(id='IMV.' + d['id'].split('.', 1)[1], kind='imv', between=list(d['between']), normally='OPEN', door=d['id'],
-                          source='PROTOTYPE: one intermodule-ventilation duct pair through the bulkhead beside the door', status='PROTOTYPE'))
+                          status='PROTOTYPE'))
     boundaries = [dict(id=f'TUBE.A{k}', kind='hatch', compartment=f'A{k}', outside=f'Crew_Tube_1_{k}', outside_m3=rooms[f'Crew_Tube_1_{k}']['gross_m3'],
-                       state='CLOSED', modelled=False, source='crew_transfer TUBE_HATCH (sector overhead)', status='PROTOTYPE')
+                       state='CLOSED', modelled=False, status='PROTOTYPE')
                   for k in (1, 2, 3)]
-    return dict(nodes=nodes, edges=edges, boundaries=boundaries)
+    return dict(nodes=nodes, edges=edges, boundaries=boundaries, sources=SOURCES)
 
 
 def door_flow(s, door):
@@ -321,7 +326,7 @@ PROOF_EVENTS = [(1800.0, 'vent', '', 'OFF'), (7200.0, 'edge', 'CIRC.A2N', True),
                 (14400.0, 'edge', 'CIRC.A3P', True), (14400.0, 'edge', 'CIRC.AC3', True), (14400.0, 'edge', 'CIRC.A1N', True),
                 (21600.0, 'occupants', '', [6, 0, 0, 0, 0, 0, 0, 0, 0]), (28800.0, 'vent', '', 'ON')]
 PROOF_END_S = 36000.0
-PROOF_EVERY_S = 900.0
+PROOF_EVERY_S = 3600.0     # hourly: every event of the run falls between two checkpoints
 PROOF_DT_S = 10.0
 
 
@@ -381,7 +386,8 @@ def contract(s=None, reg=None):
     return dict(schema=SCHEMA, version=VERSION, system='RING_A_AIR_CONNECTIVITY',
                 notice='SIMULATION: ring A\'s cabin CO2 by compartment. Exchange rates, occupants\' places and the ventilation are PROTOTYPE; '
                        'nothing here is canon.',
-                params=p, topology=topo, prototype=PROTOTYPE, tolerance=TOLERANCE, taylor_order=TAYLOR_ORDER, scale_norm=SCALE_NORM,
+                params=p, topology={k: v for k, v in topo.items() if k != 'edges'},   # the edges travel in params
+                prototype=PROTOTYPE, tolerance=TOLERANCE, taylor_order=TAYLOR_ORDER, scale_norm=SCALE_NORM,
                 proof=dict(events=[list(e) for e in PROOF_EVENTS], end_s=PROOF_END_S, every_s=PROOF_EVERY_S, dt_s=PROOF_DT_S,
                            initial='every compartment at the well-mixed steady state, doors closed, ventilation on, removal on',
                            checkpoints=checkpoints(p)),
@@ -391,7 +397,7 @@ def contract(s=None, reg=None):
 def write(root, out):
     import life_support
     import spec
-    Path(out).write_text(json.dumps(contract(spec.load(Path(root))[0], life_support.load(Path(root))), indent=1)+'\n')
+    Path(out).write_text(json.dumps(contract(spec.load(Path(root))[0], life_support.load(Path(root))), separators=(',', ':'))+'\n')    # compact: the play download has a byte budget
 
 
 def main(argv):

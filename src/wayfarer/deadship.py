@@ -128,7 +128,7 @@ def contract(root=ROOT):
 
 
 def write(root, out):
-    Path(out).write_text(json.dumps(contract(root), indent=1)+'\n')
+    Path(out).write_text(json.dumps(contract(root), separators=(',', ':'))+'\n')    # compact: the play download has a byte budget
 
 
 def main(argv):

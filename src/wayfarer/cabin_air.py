@@ -348,7 +348,7 @@ def contract(s=None, reg=None):
 def write(root, out):
     import life_support
     import spec
-    Path(out).write_text(json.dumps(contract(spec.load(Path(root))[0], life_support.load(Path(root))), indent=1)+'\n')
+    Path(out).write_text(json.dumps(contract(spec.load(Path(root))[0], life_support.load(Path(root))), separators=(',', ':'))+'\n')    # compact: the play download has a byte budget
 
 
 def main(argv):

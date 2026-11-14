@@ -96,7 +96,7 @@ class RingAirTests(unittest.TestCase):
             self.assertTrue(all(m >= 0.0 for m in st['m']))
         self.assertLedger(st)
         cp = ra.checkpoints(self.p)
-        self.assertEqual(len(cp), 41)
+        self.assertEqual(len(cp), 11)
         self.assertEqual(cp[-1]['m'], st['m'])
 
     def test_from_zero_co2_nothing_goes_negative(self):
