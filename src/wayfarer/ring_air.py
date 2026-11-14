@@ -23,6 +23,16 @@ removed, 1], with generated and removed integrated inside the same exponential (
 real check of the step, not a definition). The exponential is scaling and squaring of a fixed-order Taylor series, written so that Godot can
 repeat it operation for operation.
 
+SYS-002 v2 (2026-11-14): a second, trace species, ammonia (NH3), rides the same compartments and the same exchange flows (a trace gas
+in a balanced exchange is carried by the air, whatever the gas). Its own source and sink are separate from CO2's: a finite source that
+empties into one compartment at a first-order rate (inventory S, dS/dt = -S / tau while LEAKING, 0 once ISOLATED or empty) and a
+trace-contaminant control element (TCC) that draws from its compartment at its own flow and single-pass efficiency. NH3 mass c_i obeys
+    dc_i/dt = [i = s] S / tau - [i = t] eta Q_t c_i / V_i + sum_j C_ij (c_j / V_j - c_i / V_i)
+and is stepped exactly like CO2 on z = [c_1..c_N, S, released, removed, I_1..I_N], where I_i = integral of c_i dt (kg s) gives exact
+exposures (a crew member's mean concentration over any stay). CO2's equations, its matrix and its checkpoints are untouched: the two species
+share transport, not removal (the CO2 unit removes no NH3; the TCC removes no CO2). Exposure references (`NH3_SMAC`) are NASA JSC 20584
+Rev D; every source and sink value is PROTOTYPE (`TRACE`). The release itself is scenario data (`set_source`), never a model default.
+
 Statuses: pressure 80 kPa BASELINE; CO2 rate STUDY; compartment volumes PROTOTYPE (built rooms); the doorway exchange, the IMV flow, the
 occupants' places, the removal compartment and the closed tube hatches PROTOTYPE (`PROTOTYPE`). Nothing here is written back to canon.
 
@@ -38,7 +48,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 FILE = 'wf_ring_air.json'
 SCHEMA = 'WF_RING_AIR'
-VERSION = 1
+VERSION = 2               # 2: the trace species NH3 (SYS-002 v2); the CO2 part and its proof are unchanged from 1
 G0 = 9.80665              # m/s2 per g
 TAYLOR_ORDER = 18         # terms of the series after scaling to a norm of at most 0.5: truncation below 1e-22
 SCALE_NORM = 0.5
@@ -63,6 +73,35 @@ PROTOTYPE = {
     'leakage': dict(value=0.0, unit='m3/s', status='PROTOTYPE', note='A closed door or damper seals: no leakage path is modelled.'),
 }
 
+
+# SYS-002 v2: the trace species. Values sourced outside the project carry their reference; every engineering choice is PROTOTYPE.
+M_NH3 = 0.0170305         # kg/mol (standard atomic weights; JSC 20584 Rev D lists 17 g/mol)
+NH3_SMAC = dict(
+    value_ppm={'1h': 30.0, '24h': 20.0, '7d': 3.0, '30d': 3.0, '180d': 3.0, '1000d': 3.0},
+    status='EXTERNAL REFERENCE', basis='mole fraction (ppm by volume), applied unchanged at Wayfarer\'s cabin pressure as Rev D directs',
+    reference='NASA JSC 20584 Rev D, Spacecraft Maximum Allowable Concentrations for Airborne Contaminants (02/2026), p. 9, SMAC table, '
+              'Ammonia (7664-41-7): 1 h 30, 24 h 20 (off-nominal), 7 d 3, 30 d 3, 180 d 3, 1000 d 3 ppm (nominal); effects eye '
+              'irritation, CNS headache; citation NRC Vol. 5 (2008) pp. 48-61.',
+    note='Exposure-duration guidelines, not instantaneous thresholds: the 1 h and 24 h values apply to off-nominal events and permit minor, '
+         'reversible effects (mild mucosal irritation); the long-term values protect continuous occupancy. An exceedance means increased '
+         'risk to be evaluated, not certain harm (Rev D p. 7). Wayfarer\'s own medical limits stay OPEN (12!G22).')
+TRACE = {
+    'tcc_node': dict(value='A3', status='PROTOTYPE', note='A trace-contaminant control element in the sector 3 ECLSS bay beside the CO2 unit, '
+                                                          'with its own fan and bed: it shares the place, not the function.'),
+    'tcc_flow_m3_s': dict(value=15.3/3600.0, unit='m3/s', status='PROTOTYPE',
+                          note='Process air through the bed: 15.3 m3/h, the ISS trace-contaminant control charcoal bed\'s nominal flow '
+                               '(NASA NTRS 20070019823; about 15 m3/h also in NTRS 20100039332), one element per ring.'),
+    'tcc_efficiency': dict(value=0.95, unit='-', status='PROTOTYPE',
+                           note='Single-pass NH3 capture of a phosphoric-acid-treated activated-carbon bed (the ISS TCCS bed chemistry, NTRS '
+                                '20170006640): NH3 is held as an ammonium salt. Breakthrough and bed capacity are not modelled.'),
+    'co2_unit_nh3': dict(value=0.0, status='PROTOTYPE', note='The CO2 unit is credited with no NH3 removal (independent sinks).'),
+    'condensate_nh3': dict(value=0.0, status='PROTOTYPE',
+                           note='Cabin condensing heat exchangers dissolve NH3 into condensate on real spacecraft; there is no humidity model, '
+                                'so this sink is left out. Leaving it out over-predicts NH3 (conservative).'),
+    'background_ppm': dict(value=0.0, unit='ppm', status='PROTOTYPE',
+                           note='Metabolic and off-gassing NH3 in normal operation is neglected: the ring starts at 0 and exposures before '
+                                'an event count as 0.'),
+}
 
 # Where each kind of node, edge and boundary comes from (given once, not per item)
 SOURCES = dict(sector='pressure_volumes.rooms: net (deck to overhead less the modelled fit-out; subfloor not counted)',
@@ -132,7 +171,8 @@ def params(s=None, reg=None):
     return dict(P_Pa=base['P_Pa'], T_K=base['T_K'], R=cabin_air.R, M_CO2=cabin_air.M_CO2, ids=ids, V_m3=[n['V_m3'] for n in topo['nodes']],
                 edges=edges, occupants=[occ.get(i, 0) for i in ids], per_person_kg_s=base['per_person_kg_s'], k_m3_s=base['k_m3_s'],
                 removal=ids.index(PROTOTYPE['removal_node']['value']), co2_target=base['co2_target'], co2_max=base['co2_max'],
-                well_mixed_x=cabin_air.steady_x(base))
+                well_mixed_x=cabin_air.steady_x(base), M_NH3=M_NH3, tcc_node=ids.index(TRACE['tcc_node']['value']),
+                tcc_k_m3_s=TRACE['tcc_flow_m3_s']['value']*TRACE['tcc_efficiency']['value'], nh3_smac_ppm=NH3_SMAC['value_ppm'])
 
 
 def n_mol(p, i):
@@ -150,7 +190,15 @@ def start(p, x0=None, doors='CLOSED', vent='ON', removal='ON'):
     m = [xs[i]*n_mol(p, i)*p['M_CO2'] for i in range(len(p['ids']))]
     st = dict(t_s=0.0, m=m, m0=sum(m), generated=0.0, removed=0.0, vent=vent, removal=removal, occupants=list(p['occupants']),
               open={e['id']: (doors == 'OPEN') if e['kind'] == 'door' else True for e in p['edges']}, log=[], _cache={})
+    st.update(trace_start(p))
     return st
+
+
+def trace_start(p):
+    """The trace species' state: no NH3, no source, the TCC on."""
+    N = len(p['ids'])
+    return dict(c=[0.0]*N, S=0.0, c0=0.0, S0=0.0, released=0.0, nh3_removed=0.0, I=[0.0]*N, source=dict(node=None, tau_s=None, state='NONE'),
+                tcc='ON', _tcache={})
 
 
 def set_edge(st, eid, is_open):
@@ -158,7 +206,7 @@ def set_edge(st, eid, is_open):
     if st['open'][eid] != bool(is_open):
         st['open'][eid] = bool(is_open)
         st['log'].append((st['t_s'], 'edge', eid, bool(is_open)))
-        st['_cache'] = {}
+        st['_cache'] = {}; st['_tcache'] = {}
 
 
 def set_vent(st, on):
@@ -166,7 +214,7 @@ def set_vent(st, on):
     if st['vent'] != v:
         st['vent'] = v
         st['log'].append((st['t_s'], 'vent', '', v))
-        st['_cache'] = {}
+        st['_cache'] = {}; st['_tcache'] = {}
 
 
 def set_removal(st, on):
@@ -182,6 +230,34 @@ def set_occupants(st, occupants):
         st['occupants'] = list(occupants)
         st['log'].append((st['t_s'], 'occupants', '', list(occupants)))
         st['_cache'] = {}
+
+
+def set_source(st, p, node, inventory_kg, tau_s):
+    """A finite NH3 source starts releasing into `node`: inventory_kg (all of it releasable) emptying at the first-order rate 1 / tau_s.
+    Scenario data: the model has no default source."""
+    if inventory_kg < 0.0 or tau_s <= 0.0:
+        raise ValueError('a source needs a nonnegative inventory and a positive time constant')
+    st['S'] += inventory_kg; st['S0'] += inventory_kg
+    st['source'] = dict(node=p['ids'].index(node), tau_s=float(tau_s), state='LEAKING' if inventory_kg > 0.0 else 'NONE')
+    st['log'].append((st['t_s'], 'source', node, [inventory_kg, tau_s]))
+    st['_tcache'] = {}
+
+
+def isolate_source(st):
+    """Contain the source (the spill bagged, the container sealed): it releases nothing more; what it still holds stays in it, accounted."""
+    if st['source']['state'] == 'LEAKING':
+        st['source']['state'] = 'ISOLATED'
+        st['log'].append((st['t_s'], 'source', '', 'ISOLATED'))
+        st['_tcache'] = {}
+
+
+def set_tcc(st, on):
+    """The trace-contaminant control element, independent of the CO2 unit."""
+    v = 'ON' if on else 'OFF'
+    if st['tcc'] != v:
+        st['tcc'] = v
+        st['log'].append((st['t_s'], 'tcc', '', v))
+        st['_tcache'] = {}
 
 
 def flow(st, e):
@@ -262,14 +338,86 @@ def propagator(st, p, dt):
 
 
 def step(st, p, dt):
-    """Advance dt seconds exactly (constant connections, occupants and removal over the step)."""
+    """Advance dt seconds exactly (constant connections, occupants, removal and source state over the step)."""
     E = propagator(st, p, dt)
     N = len(p['ids'])
     y = st['m']+[st['generated'], st['removed'], 1.0]
     out = [sum(E[i][j]*y[j] for j in range(N+3)) for i in range(N+2)]
     st['m'] = out[:N]; st['generated'] = out[N]; st['removed'] = out[N+1]
+    trace_step(st, p, dt)
     st['t_s'] += dt
     return st
+
+
+# ---------- the trace species (SYS-002 v2) ------------------------------------------------------------------------------------------------------
+
+def trace_active(st):
+    return st['S'] > 0.0 or any(v != 0.0 for v in st['c'])
+
+
+def trace_rates(st, p):
+    """The matrix B of dz/dt = B z on z = [c_1..c_N, S, released, removed, I_1..I_N] (N + 3 + N)."""
+    N = len(p['ids']); V = p['V_m3']; n = 2*N+3
+    S, REL, REM = N, N+1, N+2
+    B = [[0.0]*n for _ in range(n)]
+    for e in p['edges']:
+        q = flow(st, e)
+        if q > 0.0:
+            i, j = e['i'], e['j']
+            B[i][j] += q/V[j]; B[i][i] -= q/V[i]
+            B[j][i] += q/V[i]; B[j][j] -= q/V[j]
+    src = st['source']
+    if src['state'] == 'LEAKING':
+        lam = 1.0/src['tau_s']
+        B[S][S] -= lam; B[src['node']][S] += lam; B[REL][S] += lam
+    if st['tcc'] == 'ON':
+        t = p['tcc_node']; kt = p['tcc_k_m3_s']/V[t]
+        B[t][t] -= kt; B[REM][t] += kt
+    for i in range(N):
+        B[N+3+i][i] = 1.0
+    return B
+
+
+def trace_step(st, p, dt):
+    if not trace_active(st):
+        return                          # nothing to carry: z stays 0 (integrals included), at no cost
+    key = repr(dt)
+    if key not in st['_tcache']:
+        B = trace_rates(st, p)
+        st['_tcache'][key] = expm([[b*dt for b in row] for row in B])
+    E = st['_tcache'][key]
+    N = len(p['ids']); n = 2*N+3
+    z = st['c']+[st['S'], st['released'], st['nh3_removed']]+st['I']
+    out = [sum(E[i][j]*z[j] for j in range(n)) for i in range(n)]
+    st['c'] = out[:N]; st['S'] = out[N]; st['released'] = out[N+1]; st['nh3_removed'] = out[N+2]; st['I'] = out[N+3:]
+    if st['source']['state'] == 'LEAKING' and st['S'] <= 0.0:
+        st['S'] = 0.0
+
+
+def trace_ledger_error(st):
+    """NH3 is only moved, never made: the source's inventory plus the air plus the bed holds what was there at the start."""
+    return (sum(st['c'])+st['S']+st['nh3_removed'])-(st['c0']+st['S0'])
+
+
+def release_ledger_error(st):
+    """What the source lost is what it released."""
+    return (st['S0']-st['S'])-st['released']
+
+
+def ppm(st, p, i):
+    """NH3 mole fraction in compartment i, parts per million."""
+    return st['c'][i]/M_NH3/n_mol(p, i)*1e6
+
+
+def trace_units(st, p, i):
+    """Every unit kept apart: mass, molar concentration, mole fraction, ppm and partial pressure."""
+    x = st['c'][i]/M_NH3/n_mol(p, i)
+    return dict(kg=st['c'][i], mol_m3=st['c'][i]/M_NH3/p['V_m3'][i], x=x, ppm=x*1e6, pp_Pa=x*p['P_Pa'])
+
+
+def exposure_ppm_s(st, p, i):
+    """The integral of compartment i's NH3 mole fraction over time so far, ppm s (exact: from the integral state)."""
+    return st['I'][i]/M_NH3/n_mol(p, i)*1e6
 
 
 def ledger_error(st):
@@ -310,9 +458,13 @@ def readout(st, p):
         g = group_of[i]
         out.append(dict(id=p['ids'][i], x=st['m'][i]/p['M_CO2']/nm, pp_kpa=st['m'][i]/p['M_CO2']/nm*p['P_Pa']/1000.0,
                         dxdt_per_h=dm/p['M_CO2']/nm*3600.0, group=groups.index(g), isolated=len(g) == 1,
-                        removal_reaches=st['removal'] == 'ON' and p['removal'] in g, occupants=st['occupants'][i]))
+                        removal_reaches=st['removal'] == 'ON' and p['removal'] in g, occupants=st['occupants'][i],
+                        nh3_ppm=ppm(st, p, i), tcc_reaches=st['tcc'] == 'ON' and p['tcc_node'] in g))
     total_n = sum(n_mol(p, i) for i in range(N))
-    return dict(nodes=out, x_mean=sum(st['m'])/p['M_CO2']/total_n, groups=len(groups), vent=st['vent'], removal=st['removal'],
+    src = st['source']
+    return dict(nodes=out, x_mean=sum(st['m'])/p['M_CO2']/total_n, groups=len(groups), vent=st['vent'], removal=st['removal'], tcc=st['tcc'],
+                nh3_ppm_mean=sum(st['c'])/M_NH3/total_n*1e6, source=dict(state=src['state'], inventory_kg=st['S'],
+                node=None if src['node'] is None else p['ids'][src['node']], released_kg=st['released']), nh3_removed_kg=st['nh3_removed'],
                 open=sorted(k for k, v in st['open'].items() if v and k.startswith('CIRC.')), t_s=st['t_s'])
 
 
@@ -330,7 +482,7 @@ PROOF_EVERY_S = 3600.0     # hourly: every event of the run falls between two ch
 PROOF_DT_S = 10.0
 
 
-def apply(st, ev):
+def apply(st, ev, p=None):
     _, kind, eid, v = ev
     if kind == 'vent':
         set_vent(st, v == 'ON')
@@ -340,6 +492,13 @@ def apply(st, ev):
         set_edge(st, eid, v)
     elif kind == 'occupants':
         set_occupants(st, v)
+    elif kind == 'tcc':
+        set_tcc(st, v == 'ON')
+    elif kind == 'source':
+        if v == 'ISOLATED':
+            isolate_source(st)
+        else:
+            set_source(st, p, eid, v[0], v[1])
     else:
         raise ValueError(kind)
 
@@ -349,10 +508,32 @@ def checkpoints(p, dt=PROOF_DT_S, events=None):
     steps = int(round(PROOF_END_S/dt)); every = int(round(PROOF_EVERY_S/dt))
     for i in range(steps+1):
         while events and st['t_s'] >= events[0][0]-1e-9:
-            apply(st, events.pop(0))
+            apply(st, events.pop(0), p)
         if i % every == 0:
             out.append(dict(t_s=st['t_s'], m=list(st['m']), generated=st['generated'], removed=st['removed'],
                             groups=len(components(st, p))))
+        if i < steps:
+            step(st, p, dt)
+    return out
+
+
+# SYS-002 v2: the trace reference run (a release in A1 with the ventilation running; the fans stopped; a door path to the TCC opened; the
+# source contained; the TCC off and on again; the whole loop opened). PROTOTYPE numbers chosen to exercise every term, not a scenario.
+TRACE_PROOF_EVENTS = [(0.0, 'source', 'A1', [0.007, 3600.0]), (900.0, 'vent', '', 'OFF'), (3600.0, 'edge', 'CIRC.A1N', True),
+                      (3600.0, 'edge', 'CIRC.AC3', True), (3600.0, 'edge', 'CIRC.A3P', True), (7200.0, 'source', '', 'ISOLATED'),
+                      (14400.0, 'tcc', '', 'OFF'), (21600.0, 'tcc', '', 'ON'), (21600.0, 'edge', 'CIRC.A1P', True),
+                      (21600.0, 'edge', 'CIRC.AC1', True), (21600.0, 'edge', 'CIRC.A2N', True), (28800.0, 'vent', '', 'ON')]
+
+
+def trace_checkpoints(p, dt=PROOF_DT_S, events=None):
+    st = start(p); out = []; events = list(TRACE_PROOF_EVENTS if events is None else events)
+    steps = int(round(PROOF_END_S/dt)); every = int(round(PROOF_EVERY_S/dt))
+    for i in range(steps+1):
+        while events and st['t_s'] >= events[0][0]-1e-9:
+            apply(st, events.pop(0), p)
+        if i % every == 0:
+            out.append(dict(t_s=st['t_s'], c=list(st['c']), S=st['S'], released=st['released'], removed=st['nh3_removed'], I=list(st['I']),
+                            m=list(st['m'])))
         if i < steps:
             step(st, p, dt)
     return out
@@ -391,6 +572,9 @@ def contract(s=None, reg=None):
                 proof=dict(events=[list(e) for e in PROOF_EVENTS], end_s=PROOF_END_S, every_s=PROOF_EVERY_S, dt_s=PROOF_DT_S,
                            initial='every compartment at the well-mixed steady state, doors closed, ventilation on, removal on',
                            checkpoints=checkpoints(p)),
+                trace=dict(species='NH3', smac=NH3_SMAC, prototype=TRACE,
+                           proof=dict(events=[list(e) for e in TRACE_PROOF_EVENTS], end_s=PROOF_END_S, every_s=PROOF_EVERY_S, dt_s=PROOF_DT_S,
+                                      initial='as the CO2 proof; no NH3; the TCC on', checkpoints=trace_checkpoints(p))),
                 ds1=dict(model='cabin_air (one well-mixed volume, unchanged)', gap=well_mixed_gap(p)))
 
 
@@ -414,6 +598,9 @@ def main(argv):
           f"to {100*gap['max_x']:.3f} % ({gap['max_id']}), mean {100*gap['mean_x']:.3f} %")
     cp = checkpoints(p)
     print(f"proof: {len(cp)} checkpoints, groups {[c['groups'] for c in cp]}")
+    print(f"NH3: TCC in {p['ids'][p['tcc_node']]} at {p['tcc_k_m3_s']*3600:.2f} m3/h effective; SMAC (JSC 20584 Rev D) {NH3_SMAC['value_ppm']}")
+    tc = trace_checkpoints(p)
+    print("trace proof ppm A1/A3 by hour: " + ', '.join(f"{c['c'][0]/M_NH3/n_mol(p, 0)*1e6:.1f}/{c['c'][2]/M_NH3/n_mol(p, 2)*1e6:.1f}" for c in tc))
     return 0
 
 
