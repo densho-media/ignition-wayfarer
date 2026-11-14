@@ -392,6 +392,10 @@ func _button_at(p: Vector2) -> Dictionary:
 			return b
 	return {}
 
+## The top of the utility row (Map, ?): under the page's Exit row on an upright phone. A scene places its corner panel under util_top + TARGET.
+func util_top(vs: Vector2) -> float:
+	return float(safe[1]) + EDGE + (56.0 if primary and vs.x < 640.0 else 0.0)
+
 ## Screen rects (UI px) already taken: the page's buttons, the touch buttons and the panels the scene names (state.panels).
 ## Transient cards (the lesson card) place themselves clear of these.
 func occupied() -> Array:
@@ -488,7 +492,7 @@ func _refresh(force: bool) -> void:
 		var vs := _size()
 		# utility row: top right, right to left (Help always last on the right)
 		var x: float = vs.x - safe[2] - EDGE
-		var util_y: float = safe[1] + EDGE + (56.0 if primary and vs.x < 640.0 else 0.0)    # upright phone: under the page's Exit row
+		var util_y := util_top(vs)
 		var util: Array = state.get("utility", []).duplicate()
 		if state.get("turn", []).size() == 4:
 			util.append(["touch.right", "Right: Look" if right_look else "Right: Turn"])

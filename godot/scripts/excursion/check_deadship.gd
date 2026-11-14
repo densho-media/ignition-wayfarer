@@ -55,32 +55,32 @@ func _walk_to(id: String) -> bool:
 	await _ticks(10)
 	return _need(ok, "the %s was not reached (%.2f m away)" % [id, h.actor.global_position.distance_to(d.eq.centre(id))])
 
+## The carried spare is inside the first-person view when the trainee looks level (usability review: at waist height it was not):
+## the angle from the level eye line (eyes 1.6 m above the feet) to the box is under half the camera's vertical field of view.
+func _carry_in_view() -> void:
+	await _ticks(2)
+	var up: Vector3 = h.actor.up_now
+	var eye := h.actor.global_position + up * 1.6
+	var to_box := d.carried.global_position - eye
+	var level := to_box - up * to_box.dot(up)
+	var below := rad_to_deg(atan2(-to_box.dot(up), level.length()))
+	var cam := h.get_viewport().get_camera_3d()
+	var half := (cam.fov if cam != null else 75.0) * 0.5
+	notes["carried_below_eye_deg"] = snappedf(below, 0.1)
+	notes["half_fov_deg"] = half
+	_need(below < half - 3.0, "the carried spare is %.1f deg under the eye line, outside the %.1f deg half view" % [below, half])
+
+func _goal_has(s: String) -> bool:
+	return h._goal_text().contains(s)
+
 func _shot(name: String, at: Vector3) -> void:
 	await pl.shot(name, at, _front() if _at("bay") else Vector3.INF, 0.9)     # left of the sector 3 ladder
 
-## A spot in front of the bay's face (along its thinnest axis, on the open side), where nothing stands between the eyes and the board.
 func _front() -> Vector3:
-	var m: MeshInstance3D = d.eq.points["bay"]["mesh"]
-	var box := m.get_aabb()
-	var ax := 0
-	for i in 3:
-		if box.size[i] < box.size[ax]:
-			ax = i
-	var c := d.eq.centre("bay")
-	var n := Vector3.ZERO
-	n[ax] = 1.0
-	var tip := d.eq.to_body(m.global_transform * (box.get_center() + n * 0.5), m)
-	var dir := (tip - c).normalized()
-	var up: Vector3 = h.actor.up_now
-	dir = (dir - up * dir.dot(up)).normalized()
-	var foot := h.actor.global_position
-	var a := c + dir * 1.7
-	var b := c - dir * 1.7
-	var pick := a if a.distance_to(foot) < b.distance_to(foot) else b
-	return pick + up * (foot - pick).dot(up)
+	return pl.front_of(d.eq)
 
 func _board() -> Vector3:
-	return d.eq.to_body(d.eq.board.global_transform * d.eq.board.get_aabb().get_center())   # the text's middle
+	return pl.board_mid(d.eq)
 
 func run(host: WfExcursion) -> void:
 	h = host
@@ -158,6 +158,8 @@ func run(host: WfExcursion) -> void:
 	_ui("exc.use", "Use · take spare fan")
 	await pl.act("exc.use", "Use · take spare fan", h.use, func(): return air.spare == "CARRIED")
 	await _ticks(2)
+	await _carry_in_view()
+	_need(_goal_has("Carrying: the spare fan"), "the goal line does not say the spare is carried")
 	_need(air.spare == "CARRIED" and d.carried.visible and not d.on_bench.visible, "the spare was not taken (%s)" % air.spare)
 	var doors_open := 0
 	for id in h.circ_doors:

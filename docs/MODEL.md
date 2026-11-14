@@ -2010,6 +2010,12 @@ Checks: `tests/test_cabin_air.py` (12), `tests/test_deadship.py` (4), the runtim
 (`--deadship --check-deadship`, WF_GODOT_DEADSHIP) and the opt-in browser part `web_check.py --part training` (real keys and touch).
 The default start is unchanged. Design, decisions and Phase 2 prerequisites: `work/project-thread-dfyyv7/DEADSHIP_DESIGN.md`.
 
+On a phone (`WfInput.compact`) a training page (DS-1 or a learning station) takes the free band between the page's top row and the
+touch buttons, full width inside the safe area, its type stepped down until it fits (`WfPagePanel`, one rule for every screen); the
+goal, prompt and map step aside while it is open and return when it closes. The map stays under the touch utility row, which an
+upright phone moves below the page's Exit row. A training's equipment points (the ECLSS bay, the workbench) are amber marks on the
+map's rim.
+
 ## Retired runtime scenes
 
 The Godot review menu, the ship inspector, the guided induction walk, Demonstrator 01 with the Ship Navigator, its SPACE view and the

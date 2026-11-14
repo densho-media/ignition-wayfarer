@@ -25,7 +25,7 @@ touch button, and saves their stills; --part training-scripted runs their script
 the same checks on the same 1/60 s frames, about ten times sooner than in real time.
 
     python3 tools/web_check.py <site dir> --out <dir> [--chrome google-chrome] [--record] [--part main|equivalence|walk ...] [--frame-shell <chrome-headless-shell>]
-    python3 tools/web_check.py <site dir> --out <dir> --part training [--training systems|deadship] [--no-touch]
+    python3 tools/web_check.py <site dir> --out <dir> --part training [--training systems|deadship] [--no-touch] [--rotate]
     python3 tools/web_check.py <site dir> --merge <part out dir> ... --out <dir> [--record]
 """
 import argparse
@@ -583,10 +583,16 @@ def cdp_key(label):
     return None
 
 
-def run_training(url, play_release, binary, sandbox, out, record_check, metrics, touch=False, scripted=False, names=None):
-    """Each training's own check in the browser. touch: an emulated phone answering by its on-screen buttons. scripted: no
-    --await-player (the check itself calls the handlers: an in-browser engine run, not player input; the Phase 0 site has no other)."""
-    how = 'scripted' if scripted else ('touch' if touch else 'keys')
+PORTRAIT = {'width': 390, 'height': 844, 'deviceScaleFactor': 3, 'mobile': True, 'screenOrientation': {'type': 'portraitPrimary', 'angle': 0}}
+LANDSCAPE = {'width': 844, 'height': 390, 'deviceScaleFactor': 3, 'mobile': True, 'screenOrientation': {'type': 'landscapePrimary', 'angle': 90}}
+ROTATE_AFTER = 3          # --rotate: the phone turns upright after this many answered actions
+
+
+def run_training(url, play_release, binary, sandbox, out, record_check, metrics, touch=False, scripted=False, names=None, rotate=False):
+    """Each training's own check in the browser. touch: an emulated phone answering by its on-screen buttons; rotate: that phone starts
+    in landscape and turns upright mid-run (the buttons then answer at their new places). scripted: no --await-player (the check itself
+    calls the handlers: an in-browser engine run, not player input; the Phase 0 site has no other)."""
+    how = 'scripted' if scripted else (('rotate' if rotate else 'touch') if touch else 'keys')
     profile = tempfile.mkdtemp(prefix=f'wf-web-training-{how}-')
     log = open(out / f'chrome-training-{how}.log', 'w')
     chrome = Chrome(binary, profile, log, sandbox)
@@ -596,8 +602,7 @@ def run_training(url, play_release, binary, sandbox, out, record_check, metrics,
     try:
         page, traffic = Page(chrome), Traffic(chrome)
         if touch:
-            page.send('Emulation.setDeviceMetricsOverride', {'width': 844, 'height': 390, 'deviceScaleFactor': 3, 'mobile': True,
-                                                              'screenOrientation': {'type': 'landscapePrimary', 'angle': 90}})
+            page.send('Emulation.setDeviceMetricsOverride', LANDSCAPE)
             page.send('Emulation.setTouchEmulationEnabled', {'enabled': True, 'maxTouchPoints': 5})
         else:
             page.send('Emulation.setDeviceMetricsOverride', {'width': 1280, 'height': 720, 'deviceScaleFactor': 1, 'mobile': False})
@@ -607,6 +612,8 @@ def run_training(url, play_release, binary, sandbox, out, record_check, metrics,
             mark = traffic.mark()
             t0 = time.monotonic()
             args = ['--disable-render-loop', '--fixed-fps', '60', '--', *flags, *([] if scripted else ['--await-player']), *(['--touch-probe'] if touch else [])]
+            if touch:
+                page.send('Emulation.setDeviceMetricsOverride', LANDSCAPE)
             page.send('Page.navigate', {'url': url + play_release['page'] + '?' + '&'.join(f'arg={a}' for a in args) + hash_})
             answered, seen, shots, line = [], 0, [], None
             beat = time.monotonic() + 30
@@ -632,6 +639,10 @@ def run_training(url, play_release, binary, sandbox, out, record_check, metrics,
                                 time.sleep(0.15)
                                 page.send('Input.dispatchTouchEvent', {'type': 'touchEnd', 'touchPoints': []})
                             answered.append({**rec, 'input': 'tap ' + (b[1] if b else 'NO BUTTON')})
+                            if rotate and len(answered) == ROTATE_AFTER:
+                                time.sleep(1.0)                  # the action's own frame first, then the phone turns upright
+                                page.send('Emulation.setDeviceMetricsOverride', PORTRAIT)
+                                answered.append({'action': 'rotate', 'label': 'portrait', 'input': 'turned upright'})
                         else:
                             label = (page.js('window.wayfarerControls && window.wayfarerControls.keys') or {}).get(rec['action'])
                             k = cdp_key(label)
@@ -671,7 +682,8 @@ def run_training(url, play_release, binary, sandbox, out, record_check, metrics,
             real = scripted or (answered and all(not a['input'].startswith('NO ') for a in answered))
             what = {'scripted': 'its scripted check passes in the browser (engine run, no player input)',
                     'keys': "every action answered by the player's own key in the browser",
-                    'touch': "every action answered by an on-screen button on an emulated phone"}[how]
+                    'touch': "every action answered by an on-screen button on an emulated phone",
+                    'rotate': "every action answered by an on-screen button on an emulated phone turned upright mid-run"}[how]
             record_check(f'training: {name}: {what}', res.get('result') == 'PASS' and real and not errors and not traffic.crashed,
                          result=res.get('result'), fails=res.get('fails', [])[:5], answered=answered, shots=shots, errors=errors[:3],
                          physics_frames=res.get('physics_frames'), seconds=seconds)
@@ -1229,7 +1241,7 @@ def merge(site, part_dirs, out, record=False):
 
 
 def check(site, out, binary, sandbox=True, record=False, play_seconds=900, live=None, recording=True, touch=True, parts=PARTS,
-          frame_shell=None, training_names=None):
+          frame_shell=None, training_names=None, rotate=False):
     """site: the local site directory, or None with live=<deployed URL ending in />, which reads release.json from there.
     parts: the sessions to run (PARTS); each part's check.json can be merged later (merge)."""
     out.mkdir(parents=True, exist_ok=True)
@@ -1272,6 +1284,8 @@ def check(site, out, binary, sandbox=True, record=False, play_seconds=900, live=
             run_training(url, play_release, binary, sandbox, out, record_check, metrics, names=training_names)
             if touch:
                 run_training(url, play_release, binary, sandbox, out, record_check, metrics, touch=True, names=training_names)
+            if rotate:
+                run_training(url, play_release, binary, sandbox, out, record_check, metrics, touch=True, rotate=True, names=training_names)
         if 'training-scripted' in parts and play_release:
             run_training(url, play_release, binary, sandbox, out, record_check, metrics, scripted=True, names=training_names)
     finally:
@@ -1303,6 +1317,7 @@ if __name__ == '__main__':
     parser.add_argument('--part', action='append', choices=PARTS + OPTIONAL_PARTS,
                         help='run only this part (repeatable; default the CI parts main, equivalence, walk); training: the systems proof and the '
                              'Deadship tutorial answered by real keys and touch; training-scripted: their scripted checks in the browser')
+    parser.add_argument('--rotate', action='store_true', help='with training: also a phone that turns from landscape to portrait mid-run')
     parser.add_argument('--training', action='append', choices=[t[0] for t in TRAINING], help='with training or training-scripted: only these trainings')
     parser.add_argument('--frame-shell', type=Path, help='Chrome headless shell binary: run the equivalence part there with frames on demand '
                         '(begin-frame control) instead of in real time; same checks, same frames')
@@ -1314,7 +1329,7 @@ if __name__ == '__main__':
         report = check(args.site and args.site.resolve(), args.out.resolve(), args.chrome, sandbox=not args.no_sandbox, record=args.record,
                        play_seconds=args.play_seconds, live=args.live, recording=not args.no_recording, touch=not args.no_touch,
                        parts=tuple(args.part or PARTS), frame_shell=args.frame_shell and str(args.frame_shell.resolve()),
-                       training_names=args.training)
+                       training_names=args.training, rotate=args.rotate)
     print(report['result'], f"{sum(r['ok'] for r in report['checks'])}/{len(report['checks'])} checks")
     if os.environ.get('GITHUB_ACTIONS'):
         loads = {r['check']: r.get('seconds') for r in report['checks'] if 'seconds' in r}

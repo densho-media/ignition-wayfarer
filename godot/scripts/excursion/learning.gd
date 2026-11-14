@@ -147,7 +147,8 @@ func update(p: Vector3, zone: String, size: Vector2) -> void:
 	if in_reach(p, zone) != open:
 		close()
 		return
-	panel.position = Vector2(size.x - panel.size.x - 18.0, clampf(size.y - panel.size.y - 18.0, 18.0, 262.0))     # a tall panel (the map) moves up
+	map.custom_minimum_size.x = minf(520.0, WfPagePanel.free_band(size, panel).size.x - 32.0) if WfInput.compact() else 520.0
+	WfPagePanel.place(panel, text, size, 520.0)
 
 func next_label() -> String:
 	return "close" if step == 2 else STEPS[step + 1]

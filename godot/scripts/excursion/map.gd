@@ -2,6 +2,7 @@ class_name WfExcursionMap
 extends Control
 ## The ring map of the excursion HUD (display only): the current ring seen from aft (dorsal up), its sectors, corridor halves, doors (green open,
 ## red shut), the stretch of circumference walked and the trainee; outside a ring, the ring the trainee last walked or ring A.
+## Training starts: an amber diamond on the rim marks each equipment point (the ECLSS bay, the DS-1 workbench).
 
 var host: WfExcursion
 
@@ -43,6 +44,16 @@ func _draw() -> void:
 		var p: Vector3 = WfLine.g(d["centre_m"]) - Vector3(c["centre_x_m"], 0, 0)
 		var ang := atan2(p.y, -p.z)
 		draw_circle(ctr + Vector2(-cos(ang), -sin(ang)) * (R - 9.0), 4.0, Color(0.3, 0.95, 0.4) if rec["value"] >= 0.999 else Color(0.95, 0.3, 0.25))
+	if host.equipment != null:                                     # the training's equipment points (the ECLSS bay, the workbench)
+		for id in host.equipment.points:
+			var pt: Dictionary = host.equipment.points[id]
+			if str(pt["ring"]) != zone:
+				continue
+			var pp: Vector3 = host.equipment.centre(id) - Vector3(c["centre_x_m"], 0, 0)
+			var a := atan2(pp.y, -pp.z)
+			var at := ctr + Vector2(-cos(a), -sin(a)) * (R + 1.0)
+			draw_colored_polygon(PackedVector2Array([at + Vector2(0, -7), at + Vector2(6, 0), at + Vector2(0, 7), at + Vector2(-6, 0)]), Color(1.0, 0.82, 0.30))
+			draw_string(ThemeDB.fallback_font, at + Vector2(-14, -9), {"bay": "ECLSS", "bench": "bench"}.get(id, str(id)), HORIZONTAL_ALIGNMENT_LEFT, -1, 11, Color(1.0, 0.85, 0.45))
 	if host.move == "WALK":
 		var pa := host.actor.global_position - Vector3(c["centre_x_m"], 0, 0)
 		var ang := atan2(pa.y, -pa.z)

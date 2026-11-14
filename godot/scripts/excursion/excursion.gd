@@ -76,6 +76,7 @@ var walk_zone := ""
 var yaw := 0.0
 var pitch := 0.0
 var view_out := false
+var map_hidden_by_page := false   # a training page on a phone set the ring map aside (_page_hud)
 var prompt := ""
 var refusal := ""
 var refusal_t := 0.0
@@ -644,7 +645,10 @@ func _unhandled_input(e: InputEvent) -> void:
 			get_tree().change_scene_to_file("res://scenes/eva_ops.tscn")
 		"exc.map":
 			if ring_map != null:
-				ring_map.visible = not ring_map.visible
+				if map_hidden_by_page:
+					map_hidden_by_page = false              # Map pressed while a page set it aside: the player keeps it hidden
+				else:
+					ring_map.visible = not ring_map.visible
 		_: return
 	get_viewport().set_input_as_handled()
 
@@ -1700,13 +1704,38 @@ func _layout() -> void:
 		hud_check.visible = false
 		hud_status.visible = false
 		ring_map.size = Vector2(150, 150)
-		ring_map.position = Vector2(sz.x - 162, 74)
+		var map_y := 74.0
+		if WfInput.touch != null:                 # under the touch utility row (an upright phone drops it below the page's Exit row)
+			map_y = maxf(map_y, WfInput.touch.util_top(sz) + WfInput.touch.TARGET + 10.0)
+		ring_map.position = Vector2(sz.x - 162, map_y)
 		return
 	hud_prompt.position = Vector2(18, sz.y - 150)
 	hud_prompt.custom_minimum_size.x = minf(900.0, sz.x - 36.0)
 	hud_status.position = Vector2(18, sz.y - 66)
 	hud_status.custom_minimum_size.x = sz.x - 36.0
 	ring_map.position = Vector2(sz.x - 250, 12)
+
+## The open training page (a learning station or Deadship), or null.
+func _page() -> Control:
+	if deadship != null and deadship.panel.visible:
+		return deadship.panel
+	if learning != null and learning.panel.visible:
+		return learning.panel
+	return null
+
+## On a phone a page takes the band between the top row and the touch buttons (WfPagePanel): the goal, prompt and map step aside while
+## it is open (the page names the step and the next action, the touch buttons the actions) and come back when it closes. The player's
+## own Map choice is kept.
+func _page_hud() -> void:
+	var hide := WfInput.compact() and _page() != null
+	hud_goal.visible = not hide
+	hud_prompt.visible = not hide
+	if hide and ring_map.visible:
+		ring_map.visible = false
+		map_hidden_by_page = true
+	elif not hide and map_hidden_by_page:
+		ring_map.visible = true
+		map_hidden_by_page = false
 
 func key(id: String) -> String:
 	return "[" + WfInput.label(id) + "]"
@@ -1828,7 +1857,7 @@ func touch_state() -> Dictionary:
 	acts.append(["exc.view", "View", "nav"])
 	return {"move": "1d" if move == "LINE" else "2d", "look": true, "actions": acts, "utility": [["exc.map", "Map"]],
 		"stick_hint": ("climb / down" if on_ladder() else "up / down") if move == "LINE" else "move · rim runs",
-		"probe": touch_probe, "panels": [hud_goal, hud_prompt, ring_map]}
+		"probe": touch_probe, "panels": [hud_goal, hud_prompt, ring_map] + ([_page()] if _page() != null else [])}
 
 ## The excursion state a browser check reads (-- --touch-probe).
 func touch_probe() -> Dictionary:
@@ -1901,6 +1930,7 @@ func _update_hud() -> void:
 	if deadship != null and deadship.verified:
 		lines_out.append_array(deadship.lines())
 		deadship.update_panel(get_viewport().get_visible_rect().size)
+	_page_hud()
 	hud_check.text = "\n".join(lines_out)
 	hud_prompt.text = WfKeyText.rich(_prompt_text())
 	if WfInput.compact():

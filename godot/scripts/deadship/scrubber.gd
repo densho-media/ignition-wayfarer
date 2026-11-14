@@ -37,6 +37,7 @@ var runs := 0
 var events: Array = []            # [real_s, ship_s, what] for the record and the debrief
 
 var panel := PanelContainer.new()
+var rendered_compact := false                     # the page's text was laid out for a touch-first screen
 var text := RichTextLabel.new()
 var carried := MeshInstance3D.new()   # small runtime placeholders (no exported geometry changes): the spare on the bench / in hand
 var on_bench := MeshInstance3D.new()
@@ -345,7 +346,8 @@ func goal_text() -> String:
 		return head + " · OPERATIONAL FAILURE: the control limit was passed. " + fill(str(sc["debrief"]["replay"]))
 	if watching:
 		return head + " · Step 8 · Verify: stability watch running (%.1f of %s ship hours)" % [(air.t_s - watch_t0) / 3600.0, str(sc["watch"]["ship_h"])]
-	return "%s · Step %d of 8 · %s: %s" % [head, index + 1, current()["title"], fill(str(current()["objective"]))]
+	var carry := " · Carrying: the spare fan." if air.spare == "CARRIED" else ""
+	return "%s · Step %d of 8 · %s: %s%s" % [head, index + 1, current()["title"], fill(str(current()["objective"])), carry]
 
 ## The hint and the step list for the HUD's side block.
 func lines() -> Array:
@@ -391,9 +393,14 @@ func _render() -> void:
 	for i in 8:
 		var st: Dictionary = sc["steps"][i]
 		tabs.append(("[b][color=#ffd27a]%d %s[/color][/b]" if i == mini(index, 7) and not ended() else "[color=#7f8fa8]%d %s[/color]") % [i + 1, st["title"]])
-	out.append("[b]DEADSHIP TRAINING · %s %s[/b]  [color=#9fb4d0](simulation, unscored)[/color]" % [sc["scenario"]["id"], sc["scenario"]["name"]])
-	out.append("[font_size=12]" + "  ".join(tabs) + "[/font_size]")
-	out.append("")
+	var small := WfInput.compact()                 # a phone: the step in the title, no tab row, no spacer lines, a one-line source note
+	if small:
+		out.append("[b]DEADSHIP · %s %s[/b] · %s" % [sc["scenario"]["id"], sc["scenario"]["name"],
+			"debrief" if ended() else "step %d of 8 · %s" % [mini(index, 7) + 1, sc["steps"][mini(index, 7)]["title"]]])
+	else:
+		out.append("[b]DEADSHIP TRAINING · %s %s[/b]  [color=#9fb4d0](simulation, unscored)[/color]" % [sc["scenario"]["id"], sc["scenario"]["name"]])
+		out.append("[font_size=12]" + "  ".join(tabs) + "[/font_size]")
+		out.append("")
 	if page == 100:
 		var pass_run := result == "PASS"
 		out.append("[b]%s · %s[/b]" % [sc["debrief"]["title"], "the ring is stable" if pass_run else "operational failure"])
@@ -421,16 +428,22 @@ func _render() -> void:
 		if page == ev.size():
 			out.append("")
 			out.append("[color=#9fb4d0]Next: " + fill(str(sc["steps"][3]["objective"])) + "[/color]")
-	out.append("")
-	out.append("[font_size=12][color=#8090a0]Engineering model: ring A cabin CO2 (src/wayfarer/cabin_air.py); volume, occupancy, unit rating and the "
-		+ "degraded / danger levels are PROTOTYPE, the 0.5 %% control limit is WORKING canon. Scenario %s: %s.[/color][/font_size]" % [doc["source"], sc["scenario"]["status"]])
+	if small:
+		out = out.filter(func(l): return l != "")
+		out.append("[color=#8090a0]Simulation, unscored · PROTOTYPE values · 0.5 % limit WORKING canon[/color]")
+	else:
+		out.append("")
+		out.append("[font_size=12][color=#8090a0]Engineering model: ring A cabin CO2 (src/wayfarer/cabin_air.py); volume, occupancy, unit rating and the "
+			+ "degraded / danger levels are PROTOTYPE, the 0.5 %% control limit is WORKING canon. Scenario %s: %s.[/color][/font_size]" % [doc["source"], sc["scenario"]["status"]])
 	text.text = "\n".join(out)
+	rendered_compact = small
 	panel.visible = true
 	panel.reset_size()
 
 func update_panel(size: Vector2) -> void:
-	if panel.visible:
-		panel.position = Vector2(size.x - panel.size.x - 18.0, clampf(size.y - panel.size.y - 18.0, 18.0, 262.0))
+	if panel.visible and WfInput.compact() != rendered_compact:
+		_render()                                  # the screen changed between desktop and touch layouts (a resize or a first touch)
+	WfPagePanel.place(panel, text, size, 540.0)
 
 # ---- the spare's placeholder ---------------------------------------------------------------------------------------------------------------------
 
@@ -445,7 +458,8 @@ func _build_parts() -> void:
 	var actor: Node3D = host.get("actor")
 	if actor != null:
 		actor.add_child(carried)
-		carried.position = Vector3(0.0, 1.0, -0.45)  # held in front at waist height (the actor's frame: -Z forward)
+		carried.position = Vector3(0.0, 1.3, -0.45)  # held in front at chest height (the actor's frame: -Z forward): about 34 deg under the
+		                                             # eyes, inside the 75 deg view (at waist height it was out of the first-person view)
 	var bench: MeshInstance3D = eq.points["bench"]["mesh"]
 	bench.add_child(on_bench)
 	on_bench.position = eq.above(bench, 0.16)

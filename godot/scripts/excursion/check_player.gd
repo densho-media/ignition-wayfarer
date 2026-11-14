@@ -129,3 +129,29 @@ func _shot(name: String) -> void:
 		n += 1
 	RenderingServer.render_loop_enabled = false     # the browser check runs without drawing between stills
 	h.get_viewport().disable_3d = true
+
+## A spot in front of an equipment point's face (along its thinnest axis, on the trainee's side), where nothing stands between the eyes
+## and its board.
+func front_of(eq: WfEquipment, id := "bay") -> Vector3:
+	var m: MeshInstance3D = eq.points[id]["mesh"]
+	var box := m.get_aabb()
+	var ax := 0
+	for i in 3:
+		if box.size[i] < box.size[ax]:
+			ax = i
+	var c := eq.centre(id)
+	var n := Vector3.ZERO
+	n[ax] = 1.0
+	var tip := eq.to_body(m.global_transform * (box.get_center() + n * 0.5), m)
+	var dir := (tip - c).normalized()
+	var up: Vector3 = h.actor.up_now
+	dir = (dir - up * dir.dot(up)).normalized()
+	var foot := h.actor.global_position
+	var a := c + dir * 1.7
+	var b := c - dir * 1.7
+	var pick := a if a.distance_to(foot) < b.distance_to(foot) else b
+	return pick + up * (foot - pick).dot(up)
+
+## The middle of an equipment point's board text, in the walking body's frame.
+func board_mid(eq: WfEquipment) -> Vector3:
+	return eq.to_body(eq.board.global_transform * eq.board.get_aabb().get_center())
