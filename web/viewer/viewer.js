@@ -28,6 +28,8 @@ const appearancePanel = document.getElementById('appearance');
 const appearanceToggle = document.getElementById('appearance-toggle');
 const drivePanel = document.getElementById('drive');
 const driveToggle = document.getElementById('drive-toggle');
+const enginePanel = document.getElementById('engine');
+const engineToggle = document.getElementById('engine-toggle');
 const legend = document.getElementById('legend');
 const focusBar = document.getElementById('focusbar');
 
@@ -501,7 +503,7 @@ function frameSelection() {
 
 // The bookmark: the camera part first (view= or cam=, as WEB-002/003 links have it), then the appearance state without defaults.
 function writeHash() {
-  const rest = A.encode(state);
+  const rest = [A.encode(state), driveHash(), inspector?.hash()].filter(Boolean).join('&');
   history.replaceState(null, '', `#${cameraHash}${rest ? '&' + rest : ''}`);
 }
 
@@ -512,12 +514,12 @@ function bookmark() {
   writeHash();
   for (const b of document.querySelectorAll('[data-view]')) b.setAttribute('aria-pressed', 'false');
 }
-function openBookmark() {
-  const view = /view=(\w+)/.exec(location.hash);
-  const cam = /cam=([-\d.,e]+)/.exec(location.hash);
+function openBookmark(hash = location.hash) {
+  const view = /view=(\w+)/.exec(hash);
+  const cam = /cam=([-\d.,e]+)/.exec(hash);
   const v = cam && cam[1].split(',').map(Number);
   // A focus or state whose target is not in this build is dropped (groups and subsystems are checked once the colours are in).
-  const asked = A.decode(location.hash, (kind, id) => kind === 'node' ? byId.has(id) : kind === 'assembly' ? groups.has(id) : true);
+  const asked = A.decode(hash, (kind, id) => kind === 'node' ? byId.has(id) : kind === 'assembly' ? groups.has(id) : true);
   if (v && v.length === 6 && v.every(Number.isFinite)) {
     frame('threequarter');
     camera.position.set(v[0], v[1], v[2]);
@@ -554,13 +556,22 @@ function assemblyOf(object) {
 // In Hybrid a pick also focuses the target in the current scope; elsewhere it only selects. A click on empty space clears the selection.
 const raycaster = new THREE.Raycaster();
 const visibleChain = o => { for (; o; o = o.parent) if (!o.visible) return false; return true; };
-function pickAt(x, y) {
+function pickHit(x, y) {
   const ndc = new THREE.Vector2((x / window.innerWidth) * 2 - 1, -(y / window.innerHeight) * 2 + 1);
   raycaster.setFromCamera(ndc, camera);
   const hits = raycaster.intersectObject(model, true).filter(h => h.object.isMesh && visibleChain(h.object));
   const recordOf = h => byId.get(nodeOf(h.object)?.name);
   const hit = hits.find(h => recordOf(h)?.res?.state !== 'GHOST') || hits[0];
-  return hit ? recordOf(hit) : null;
+  return hit ? { record: recordOf(hit), distance: hit.distance } : null;
+}
+function pickAt(x, y) { return pickHit(x, y)?.record ?? null; }
+// With the Engine drawer open, an engine part wins when its proxy is no more than 25 cm behind the nearest drawn surface (the render mesh
+// it stands for sits on it); anything clearly in front of it (the cluster frame, another engine) keeps the ordinary pick.
+function pickPart(x, y) {
+  if (!inspector?.active()) return null;
+  const hit = pickHit(x, y);
+  const part = inspector.pick(raycaster);
+  return part && (!hit || part.distance <= hit.distance + 0.25) ? part : null;
 }
 function select(r) {
   selected = r || null;
@@ -582,6 +593,9 @@ canvas.addEventListener('pointerup', e => {
   const quick = e.timeStamp - down.t < 500;
   down = null;
   if (moved > 6 || !quick) return;
+  const part = pickPart(e.clientX, e.clientY);
+  if (part) { inspector.selectPart(part.engine, part.name); return; }
+  if (inspector?.active() && inspector.hasPart()) inspector.selectPart(inspector.state().engine, null);
   select(pickAt(e.clientX, e.clientY));
 });
 
@@ -595,7 +609,7 @@ function setStyleLegend(name) {
 // ---- page controls -----------------------------------------------------------------------------------------------------------------
 // One drawer at a time, so a phone keeps the ship in view.
 function openDrawer(which) {
-  for (const [p, t] of [[panel, panelToggle], [appearancePanel, appearanceToggle], [drivePanel, driveToggle]]) {
+  for (const [p, t] of [[panel, panelToggle], [appearancePanel, appearanceToggle], [drivePanel, driveToggle], [enginePanel, engineToggle]]) {
     const open = p === which && p.hidden;
     p.hidden = !open;
     t.setAttribute('aria-expanded', String(open));
@@ -606,6 +620,7 @@ function openDrawer(which) {
 panelToggle.addEventListener('click', () => openDrawer(panel));
 appearanceToggle.addEventListener('click', () => openDrawer(appearancePanel));
 driveToggle.addEventListener('click', () => openDrawer(drivePanel));
+engineToggle.addEventListener('click', () => openEngine());
 document.getElementById('show-all').addEventListener('click', showAll);
 document.getElementById('show-all-2').addEventListener('click', showAll);
 document.getElementById('reset-appearance').addEventListener('click', resetAppearance);
@@ -632,13 +647,15 @@ window.addEventListener('keydown', e => {
   const keys = { '1': 'side', '2': 'top', '3': 'threequarter', '4': 'front', '5': 'aft', Home: 'threequarter' };
   if (keys[e.key]) frame(keys[e.key]);
   if (e.key === 'Escape') {
-    if (selected) select(null); else if (state.focus) update(s => { s.focus = null; });
+    if (inspector?.hasPart()) inspector.selectPart(inspector.state().engine, null);
+    else if (selected) select(null); else if (state.focus) update(s => { s.focus = null; });
   }
   const styles = { s: 'standard', h: 'subsystem', e: 'engine', x: 'hybrid' };
   const k = e.key.toLowerCase();
   if (styles[k]) setStyleLegend(styles[k]);
   if (k === 'f') frameSelection();
   if (k === 'd' && drive) openDrawer(drivePanel);
+  if (k === 'i' && buildInfo?.engine_file) openEngine();
 });
 window.addEventListener('resize', () => { resize(); });
 
@@ -653,12 +670,22 @@ function showBuild(build) {
   el.append('Build ', link, ` · ${(build.built_utc || '').slice(0, 10)} · ${build.preset} · ${(build.triangles || 0).toLocaleString('en')} tris`);
 }
 
-// ---- Vertex drive states (owner brief 2026-11-14) ------------------------------------------------------------------------------------
-// One shared effect definition, per-engine state: build.drive_file holds each named state's opacity (and plume length) per effect object
-// and the GLB nodes that carry it. Fields stay invisible; plasma, hot hardware and indicators are separate display layers.
+// ---- Vertex drive states (owner brief 2026-11-14; per-engine control, Vertex Engine 1.1) ------------------------------------------------
+// One shared effect definition (build.drive_file: each named state's opacity and plume length per effect object, and the GLB nodes that carry
+// it); every engine holds its own state. The chosen engines take the state buttons; Sequential start runs one fixed timeline (deterministic:
+// the same steps at the same offsets every time); Shut down sends the chosen engines to Shutdown. Fields stay invisible. Hot hardware follows
+// a first-order display temperature toward its state's level (heats with TAU_HEAT, cools with TAU_COOL) and shifts from a dull red to its
+// display colour as it warms; every other layer follows its state at once. The drive clock advances with the frames, or by driveTick in checks.
 let drive = null;
-const driveState = { name: 'OFF', engines: new Set(['N1', 'N2', 'N3', 'N4']) };
+const ENGINES = ['N1', 'N2', 'N3', 'N4'];
+const driveState = { engines: Object.fromEntries(ENGINES.map(e => [e, 'OFF'])), chosen: new Set(ENGINES) };
 const DRIVE_LABELS = { OFF: 'Off', PRE_IGNITION: 'Pre-ignition', IGNITION_PULSE: 'Ignition', SUSTAINED: 'Sustained', SHUTDOWN: 'Shutdown' };
+const TAU_HEAT = 4, TAU_COOL = 12;                   // s, PROTOTYPE display time constants (not a thermal simulation)
+const SEQUENCE = { stagger: 3, steps: [['PRE_IGNITION', 0], ['IGNITION_PULSE', 2], ['SUSTAINED', 3]] };   // s after each engine's slot
+const COLD = [0.55, 0.06, 0.02];                     // the dull red of barely glowing hardware
+let driveClock = 0, schedule = [];                   // [{t, engine, state}], sorted
+const hotLevel = new Map();                          // effect object -> its display temperature level, 0..1
+const hot = o => o.includes('FX_HOT_');
 async function loadDrive(build) {
   drive = build?.drive_file ? await fetch(build.drive_file).then(r => r.ok ? r.json() : null).catch(() => null) : null;
   if (!drive) return;
@@ -672,52 +699,175 @@ async function loadDrive(build) {
         const c = drive.colors?.[fx] || [1, 1, 1];
         m.material = new THREE.MeshBasicMaterial({ color: new THREE.Color(...c), transparent: true, opacity: 0, depthWrite: false,
                                                    blending: THREE.AdditiveBlending, side: THREE.DoubleSide, toneMapped: false });
-        m.material.userData.base = { opacity: peak[fx] ?? 0.9, emissive: 1 };
+        m.material.userData.base = { opacity: peak[fx] ?? 0.9, emissive: 1, color: c };
         m.userData.material = m.material;
       }
     }
   }
-  const asked = /drive=(\w+)/.exec(location.hash);
-  if (asked && drive.states[asked[1]]) driveState.name = asked[1];
+  for (const e of Object.keys(drive.engines)) if (!(e in driveState.engines)) driveState.engines[e] = 'OFF';
+  const asked = /(?:^|[#&])drive=([\w.,]+)/.exec(location.hash);
+  if (asked) {                                       // drive=SUSTAINED (every engine) or drive=N1.SUSTAINED,N2.OFF,...
+    for (const item of asked[1].split(',')) {
+      const [e, s] = item.includes('.') ? item.split('.') : [null, item];
+      if (!drive.states[s]) continue;
+      for (const n of e ? [e] : Object.keys(drive.engines)) if (n in drive.engines) driveState.engines[n] = s;
+    }
+  }
   const row = drivePanel.querySelector('.drive-states');
   for (const name of Object.keys(drive.states)) {
     const b = document.createElement('button'); b.textContent = DRIVE_LABELS[name] || name; b.dataset.drive = name;
-    b.title = drive.states[name].description; b.addEventListener('click', () => setDrive(name)); row.append(b);
+    b.title = `${drive.states[name].description} (the chosen engines)`; b.addEventListener('click', () => setDrive(name)); row.append(b);
   }
   const eng = drivePanel.querySelector('.drive-engines');
   for (const e of Object.keys(drive.engines)) {
-    const b = document.createElement('button'); b.textContent = e; b.dataset.engine = e; b.title = `Engine ${e} on or off`;
-    b.addEventListener('click', () => { driveState.engines.has(e) ? driveState.engines.delete(e) : driveState.engines.add(e); applyDrive(); });
+    const b = document.createElement('button'); b.dataset.engine = e; b.title = `Choose engine ${e} for the state buttons`;
+    b.addEventListener('click', () => { driveState.chosen.has(e) ? driveState.chosen.delete(e) : driveState.chosen.add(e); syncDrive(); });
     eng.append(b);
   }
+  for (const b of drivePanel.querySelectorAll('[data-sequence]')) b.addEventListener('click', () => sequence(b.dataset.sequence));
+  settleDrive();
   driveToggle.hidden = false;
 }
-function setDrive(name) { if (drive?.states[name]) { driveState.name = name; applyDrive(); } }
-function applyDrive() {
+// A command: the chosen engines (or `engines`) take `name` now; a running sequence step for them is dropped.
+function setDrive(name, engines = [...driveState.chosen]) {
+  if (!drive?.states[name]) return;
+  schedule = schedule.filter(s => !engines.includes(s.engine));
+  for (const e of engines) driveState.engines[e] = name;
+  applyDrive();
+}
+function sequence(kind) {
   if (!drive) return;
-  const st = drive.states[driveState.name];
+  const all = Object.keys(drive.engines);
+  if (kind === 'cluster') { driveState.chosen = new Set(all); setDrive('SUSTAINED', all); return; }
+  if (kind === 'shutdown') { setDrive('SHUTDOWN'); return; }
+  schedule = [];
+  for (const e of all) driveState.engines[e] = 'OFF';
+  all.forEach((e, k) => { for (const [st, dt] of SEQUENCE.steps) schedule.push({ t: driveClock + k * SEQUENCE.stagger + dt, engine: e, state: st }); });
+  schedule.sort((a, b) => a.t - b.t || a.engine.localeCompare(b.engine));
+  driveTick(0);                                      // the steps due now (N1's pre-ignition) apply at once
+  applyDrive();
+}
+function driveHash() {
+  if (!drive) return '';
+  const v = Object.values(driveState.engines);
+  if (v.every(s => s === 'OFF')) return '';
+  return v.every(s => s === v[0]) ? `drive=${v[0]}` : `drive=${Object.entries(driveState.engines).map(([e, s]) => `${e}.${s}`).join(',')}`;
+}
+// Every hot layer straight at its state's level (a bookmark opens settled, without a warm-up).
+function settleDrive() {
   for (const [engine, objects] of Object.entries(drive.engines)) {
-    const on = driveState.engines.has(engine);
+    const st = drive.states[driveState.engines[engine]];
+    for (const o of objects) if (hot(o)) hotLevel.set(o, st.opacity[o] ?? 0);
+  }
+  applyDrive();
+}
+// Advance the drive clock by dt seconds: due sequence steps, then the display temperatures. Returns true while anything still changes.
+function driveTick(dt) {
+  if (!drive) return false;
+  driveClock += dt;
+  let stepped = false;
+  while (schedule.length && schedule[0].t <= driveClock + 1e-9) {
+    const s = schedule.shift(); driveState.engines[s.engine] = s.state; stepped = true;
+  }
+  let moving = false, crossed = false;
+  for (const [engine, objects] of Object.entries(drive.engines)) {
+    const st = drive.states[driveState.engines[engine]];
     for (const o of objects) {
-      const a = on ? (st.opacity[o] ?? 0) : 0;
+      if (!hot(o)) continue;
+      const target = st.opacity[o] ?? 0, h = hotLevel.get(o) ?? 0;
+      if (Math.abs(target - h) < 1e-3) { if (h !== target) { hotLevel.set(o, target); crossed ||= (h > 0) !== (target > 0); } continue; }
+      const next = target + (h - target) * Math.exp(-dt / (target > h ? TAU_HEAT : TAU_COOL));
+      crossed ||= (h > 1e-3) !== (next > 1e-3);
+      hotLevel.set(o, next); moving = true;
+    }
+  }
+  if (stepped || crossed) applyDrive(); else if (moving) paintDrive();
+  return moving || stepped || schedule.length > 0;
+}
+// The effect materials for the current states and display temperatures (opacity, plume length, hot colour); no appearance pass.
+function paintDrive() {
+  let visibility = false;
+  for (const [engine, objects] of Object.entries(drive.engines)) {
+    const st = drive.states[driveState.engines[engine]];
+    for (const o of objects) {
+      const a = hot(o) ? (hotLevel.get(o) ?? 0) : (st.opacity[o] ?? 0);
       for (const id of drive.nodes[o] || []) {
         const r = byId.get(id); if (!r) continue;
         if (r.node && st.scale_x[o] !== undefined) r.node.scale.x = r.node.userData.baseScale * Math.max(st.scale_x[o], 1e-3);
         for (const m of r.meshes) {
-          m.userData.visible = a > 0;
+          const vis = a > 1e-3;
+          if (m.userData.visible !== vis) { m.userData.visible = vis; visibility = true; }
           // the FX material (userData.material); a style may show another material on the mesh meanwhile
-          for (const mat of [].concat(m.userData.material)) if (mat?.userData.base) mat.opacity = mat.userData.base.opacity * a;
+          for (const mat of [].concat(m.userData.material)) {
+            if (!mat?.userData.base) continue;
+            mat.opacity = mat.userData.base.opacity * a;
+            if (hot(o)) { const c = mat.userData.base.color; mat.color.setRGB(...COLD.map((v, i) => v + (c[i] - v) * Math.min(1, a))); }
+          }
         }
       }
     }
   }
-  for (const b of drivePanel.querySelectorAll('[data-drive]')) b.setAttribute('aria-pressed', String(b.dataset.drive === driveState.name));
-  for (const b of drivePanel.querySelectorAll('[data-engine]')) b.setAttribute('aria-pressed', String(driveState.engines.has(b.dataset.engine)));
+  return visibility;
+}
+function syncDrive() {
+  for (const b of drivePanel.querySelectorAll('[data-drive]')) {
+    const chosen = [...driveState.chosen].map(e => driveState.engines[e]);
+    b.setAttribute('aria-pressed', String(chosen.length > 0 && chosen.every(s => s === b.dataset.drive)));
+    b.disabled = driveState.chosen.size === 0;
+  }
+  for (const b of drivePanel.querySelectorAll('[data-engine]')) {
+    const e = b.dataset.engine;
+    b.setAttribute('aria-pressed', String(driveState.chosen.has(e)));
+    b.innerHTML = '';
+    const st = document.createElement('span'); st.className = 'st'; st.textContent = DRIVE_LABELS[driveState.engines[e]] || driveState.engines[e];
+    b.append(e, st);
+  }
+  const next = schedule[0];
+  drivePanel.querySelector('.drive-readout').textContent = next
+    ? `Sequential start: ${next.engine} to ${DRIVE_LABELS[next.state]} in ${Math.max(0, next.t - driveClock).toFixed(1)} s`
+    : Object.entries(driveState.engines).map(([e, s]) => `${e} ${DRIVE_LABELS[s] || s}`).join(' · ');
+}
+function applyDrive() {
+  if (!drive) return;
+  paintDrive();
+  syncDrive();
   update(() => {});
+}
+
+// ---- Vertex Engine 1.1 part inspection (inspect.js) ----------------------------------------------------------------------------------
+// inspect.js and the part records load only when someone opens the Engine drawer (or a link names a part): not part of the first view.
+let inspector = null, inspectorLoading = null;
+function ensureInspector() {
+  if (!buildInfo?.engine_file) return Promise.resolve(null);
+  inspectorLoading ??= import('./inspect.js').then(m => makeInspector(m.createInspector)).catch(err => { console.error(err); return null; });
+  return inspectorLoading;
+}
+async function openEngine() {
+  if (!(await ensureInspector())) return;
+  if (enginePanel.hidden) openDrawer(enginePanel);
+  else { openDrawer(enginePanel); writeHash(); return; }
+  if (!(await inspector.load(buildInfo))) {
+    enginePanel.querySelector('.inspect-body').textContent = 'The engine part records could not be loaded.';
+  }
+  writeHash();
+}
+function makeInspector(createInspector) {
+  inspector = createInspector({
+    scene, byId, records, labels, panel: enginePanel, camera, controls, fitBox,
+    changed: writeHash, bookmark,
+    isHidden: r => r.res?.state === 'HIDDEN' || !r.meshes.some(m => visibleChain(m)),
+    isGhost: r => r.res?.state === 'GHOST',
+    focusNode: id => update(s => { s.focus = id ? { kind: 'node', id } : null; }).then(() => inspector.render()),
+    focusedNode: () => state.focus?.kind === 'node' ? state.focus.id : null,
+    clearPick: () => { if (selected) { selected = null; applyAppearance(); } },
+    openDrawer: () => { if (enginePanel.hidden) openDrawer(enginePanel); },
+  });
+  return inspector;
 }
 
 let buildInfo = null;
 async function load() {
+  const openedHash = location.hash;     // the bookmark as opened (the first appearance pass rewrites the hash)
   const build = buildInfo = await fetch('build.json', { cache: 'no-store' }).then(r => r.ok ? r.json() : null).catch(() => null);
   const nodes = await fetch(build?.nodes_file || 'model/nodes.json').then(r => r.ok ? r.json() : {}).catch(() => ({}));
   labels = nodes;
@@ -756,16 +906,22 @@ async function load() {
   radius = box.getSize(new THREE.Vector3()).length() / 2;
   buildPanel();
   await loadDrive(build);
-  const asked = openBookmark();
+  engineToggle.hidden = !build?.engine_file;
+  const asked = openBookmark(openedHash);
   status.hidden = true;
   await update(s => Object.assign(s, asked));
   applyDrive();
+  if (/(?:^|[#&])(?:eng|part)=/.test(openedHash) && await ensureInspector()) await inspector.openFrom(openedHash, build);
   stats.ready_ms = Math.round(performance.now());
   window.wayfarer = { model, groups, camera, controls, frame, build, box, renderer, stats, records, byId, state,   // for inspection and the checks
                       style: () => appliedStyle, select: node => select(node ? byId.get(node.name || node) : null), update, pickAt,
                       setStyle: setStyleLegend, resetAppearance, showAll, frameSelection,
                       setScope: k => { scope = k; showPick(); }, holo: () => holo, selected: () => selected,
-                      recordOf: o => byId.get(nodeOf(o)?.name), srgb, THREE, drive: () => ({ ...driveState, engines: [...driveState.engines] }), setDrive };
+                      recordOf: o => byId.get(nodeOf(o)?.name), srgb, THREE, setDrive, sequence, driveTick, settleDrive, pickPart,
+                      drive: () => ({ engines: { ...driveState.engines }, chosen: [...driveState.chosen], schedule: schedule.length,
+                                      hot: Object.fromEntries(hotLevel), clock: driveClock }),
+                      chooseEngines: list => { driveState.chosen = new Set(list); syncDrive(); },
+                      inspect: () => inspector, openEngine };
 }
 
 // Diagnostics (always measured, shown with ?diag): frame time over the last 120 frames, draw calls, GPU objects and transfer sizes.
@@ -796,7 +952,12 @@ window.addEventListener('pagehide', () => { renderer.setAnimationLoop(null); ren
 window.addEventListener('pageshow', e => { if (e.persisted) location.reload(); });
 
 resize();
-renderer.setAnimationLoop(() => { controls.update(); renderer.render(scene, camera); measure(); });
+let lastFrame = performance.now(), readoutAt = 0;
+renderer.setAnimationLoop(() => {
+  const now = performance.now(), dt = Math.min(0.25, (now - lastFrame) / 1000); lastFrame = now;
+  if (drive && !window.wayfarer?.frozenDrive && driveTick(dt) && now - readoutAt > 200) { readoutAt = now; syncDrive(); }
+  controls.update(); renderer.render(scene, camera); measure();
+});
 load().catch(err => {
   console.error(err);
   status.textContent = `The model could not be loaded: ${err.message || err}`;

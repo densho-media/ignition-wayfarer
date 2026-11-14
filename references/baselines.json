@@ -1,6 +1,6 @@
 {
   "purpose": "Current production geometry baseline for tools/pipeline.py fingerprint diffs. Written only by `tools/workflow.py baseline`.",
-  "current": "references/baseline_vertex_cluster_lean",
+  "current": "references/baseline_vertex_engine_1_1",
   "history": [
     {
       "baseline": "references/baseline_fwd_eye_r30_hex",

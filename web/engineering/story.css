@@ -78,3 +78,8 @@ table.meta th { width: 170px; }
 .teaser .pick { display: flex; flex-direction: column; gap: 2px; font-size: 13px; }
 @media (max-width: 760px) { .story section.teaser { grid-template-columns: 1fr; } }
 .card .st { white-space: normal; overflow-wrap: anywhere; }
+
+/* engineering/vertex/ section 4, Engine anatomy: a functional review swatch beside each group's name (never the only cue) */
+.anatomy h3 .sw { display: inline-block; width: 12px; height: 12px; border-radius: 2px; vertical-align: baseline; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.25); }
+.anatomy details summary { cursor: pointer; color: var(--muted); }
+.anatomy:target { outline: 2px solid var(--accent); outline-offset: 2px; }

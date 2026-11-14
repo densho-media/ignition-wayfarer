@@ -590,7 +590,8 @@ candidates of all nine classes are separate accessory assets (docs/ACCESSORIES.m
   Compact Vertex Engines (docs/MODEL.md "Vertex propulsion cluster"); the Fiji canon is unchanged. Open: the inter-engine pulse force
   (about 68 MN, dipole order of magnitude) as a frame load case; 1.7 % radiator line of sight to the burn points; the design-point
   heat flux (29× research, VTX-S3) and pulse rate (5.7 kHz, VTX-S1/S2); whether canon adopts a Vertex drive (owner, Drive, not
-  authorized here); six-engine layouts (`propulsion_cluster.engine_count` stays 4 until the owner asks).
+  authorized here); six-engine layouts (`propulsion_cluster.engine_count` stays 4 until the owner asks). Vertex Engine 1.1 (part
+  inspection, mechanical detail) is in; still open there: member sizing of the tie rods and turrets under the magnetic load cases.
 
 ## Owner routing and question continuity
 

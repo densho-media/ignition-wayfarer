@@ -1,8 +1,10 @@
 """Vertex single-source regression (owner brief 2026-11-14), run on demand like verify_rebuild.py: never touches production.
 
 In a temporary copy of the project: change one shared engine parameter (closure coil C1 radius), ask tools/checks.py what to rebuild,
-rebuild exactly that, then verify the change in all four linked engine instances of the vehicle and in the exported runtime GLB. The
-copy is discarded (the restore); the production TOML and assets are checked unchanged afterwards.
+rebuild exactly that, then verify the change in all four linked engine instances of the vehicle, in the exported runtime GLB, in the
+Explore Ship part-inspection manifest and geometry (vertex_inspect), in the Engineering page's Engine anatomy section, and that a part
+link (part=N3.VTX_C1_Winding) resolves to the right engine: the inspection manifest's placement of each engine lands on that engine's GLB
+node. The copy is discarded (the restore); the production TOML and assets are checked unchanged afterwards.
 
     python3 tests/verify_vertex_propagation.py [--report references/evidence/vertex_propagation.json]
 """
@@ -62,6 +64,36 @@ def glb_radii(path, nodes):
     return out, doc
 
 
+def mat_mul(a, b):
+    return [[sum(a[i][k]*b[k][j] for k in range(4)) for j in range(4)] for i in range(4)]
+
+
+def local_matrix(node):
+    """A glTF node's local 4x4 (rows): its matrix, or translation x rotation x scale."""
+    if 'matrix' in node:
+        m = node['matrix']; return [[m[c*4+r] for c in range(4)] for r in range(4)]
+    x, y, z, w = node.get('rotation', [0, 0, 0, 1]); sx, sy, sz = node.get('scale', [1, 1, 1]); tx, ty, tz = node.get('translation', [0, 0, 0])
+    R = [[1-2*(y*y+z*z), 2*(x*y-z*w), 2*(x*z+y*w)], [2*(x*y+z*w), 1-2*(x*x+z*z), 2*(y*z-x*w)], [2*(x*z-y*w), 2*(y*z+x*w), 1-2*(x*x+y*y)]]
+    return [[R[r][0]*sx, R[r][1]*sy, R[r][2]*sz, (tx, ty, tz)[r]] for r in range(3)]+[[0, 0, 0, 1]]
+
+
+def world_centres(doc, names):
+    """World-space centre of each named node's mesh bounds (the GLB scene frame is the runtime frame)."""
+    parent = {c: i for i, n in enumerate(doc['nodes']) for c in n.get('children', [])}
+    out = []
+    for i, n in enumerate(doc['nodes']):
+        if n.get('name', '') not in names or 'mesh' not in n:
+            continue
+        m, j = local_matrix(n), i
+        while j in parent:
+            j = parent[j]; m = mat_mul(local_matrix(doc['nodes'][j]), m)
+        lo = [min(doc['accessors'][p['attributes']['POSITION']]['min'][k] for p in doc['meshes'][n['mesh']]['primitives']) for k in range(3)]
+        hi = [max(doc['accessors'][p['attributes']['POSITION']]['max'][k] for p in doc['meshes'][n['mesh']]['primitives']) for k in range(3)]
+        c = [(a+b)/2 for a, b in zip(lo, hi)]
+        out.append([sum(m[r][k]*c[k] for k in range(3))+m[r][3] for r in range(3)])
+    return out
+
+
 def main(report_path=None):
     t0 = time.time()
     before = {p: digest(ROOT/p) for p in ('data/wayfarer_3d.toml', 'assets/wayfarer/components/WF_VERTEX_ENGINE.blend', 'assets/wayfarer/WF_WAYFARER_001.blend')}
@@ -98,11 +130,39 @@ def main(report_path=None):
         radii, doc = glb_radii(glb, nodes)
         uses = sum(1 for n in doc['nodes'] if n.get('name', '') in nodes)
         assert uses >= 4 and radii and all(abs(r-want) < 2e-3 for r in radii), (uses, radii, want)
+        # Explore Ship's part inspection, from the same changed source: the record, its own mesh in the geometry buffer, the link per engine.
+        import vertex_inspect as vi; importlib.reload(vi)
+        man, geo = vi.manifest(s)
+        rec = next(p for p in man['parts'] if p['name'] == 'VTX_C1_Winding')
+        v0, nv = rec['geo'][:2]
+        pts = struct.unpack_from(f'<{3*nv}h', geo, 6*v0)
+        inspect_r = max(((pts[3*i+1]*vi.QUANTUM)**2+(pts[3*i+2]*vi.QUANTUM)**2)**0.5 for i in range(nv))    # runtime (x, z, -y): radius in y, z
+        assert abs(inspect_r-want) < 2e-3, (inspect_r, want)
+        assert abs(max(abs(rec['bounds'][0][2]), abs(rec['bounds'][1][2]))-want) < 2e-3, rec['bounds']
+        centre_local = [(a+b)/2 for a, b in zip(*rec['bounds'])]
+        drawn = world_centres(doc, nodes)
+        links = {}
+        for e in man['engines']:
+            m = e['matrix']; at = [sum(m[k*4+r]*centre_local[k] for k in range(3))+m[12+r] for r in range(3)]
+            near = min(drawn, key=lambda c: sum((a-b)**2 for a, b in zip(c, at)))
+            links[e['name']] = dict(offset_m=round(sum((a-b)**2 for a, b in zip(near, at))**0.5, 4), node=drawn.index(near))
+        assert len({v['node'] for v in links.values()}) == 4 and all(v['offset_m'] < 0.05 for v in links.values()), links
+        sys.path.insert(0, str(root/'tools'))
+        import story; importlib.reload(story)
+        section = story.engine_anatomy(s, vi)
+        assert 'id="anatomy-magnetic-coils"' in section and 'C1 winding' in section, 'Engine anatomy section lost the closure coil'
+        # The restore: the original source gives the original radius again (nothing generated stays behind).
+        orig = vi.manifest(spec_mod.load(ROOT)[0])[0]
+        restored = next(p for p in orig['parts'] if p['name'] == 'VTX_C1_Winding')['bounds']
+        assert abs(max(abs(restored[0][2]), abs(restored[1][2]))-(want-DELTA)) < 2e-3, restored
     after = {p: digest(ROOT/p) for p in before}
     assert after == before, 'production files changed'
     report = dict(check='VERTEX single-source propagation', status='PASS', change=f'vertex_engine.geometry.closure_coils C1 r_m 2.5 -> 2.9 (+{DELTA} m)',
                   selection=dict(build_target=target, tests=sel['tests'], note=sel['note']), vehicle_instances=found, expected_radius_m=want,
-                  glb=dict(file=glb.name, nodes=uses, radii_m=sorted(set(round(r, 4) for r in radii))), restore='temporary copy discarded; production hashes unchanged',
+                  glb=dict(file=glb.name, nodes=uses, radii_m=sorted(set(round(r, 4) for r in radii))),
+                  inspection=dict(part='VTX_C1_Winding', geometry_radius_m=round(inspect_r, 4), part_links=links,
+                                  engineering_page='engine_anatomy section names the C1 winding'),
+                  restore='temporary copy discarded; production hashes unchanged',
                   seconds=dict(targeted_build=round(build_s, 1), export=round(export_s, 1), total=round(time.time()-t0, 1)))
     if report_path:
         Path(report_path).write_text(json.dumps(report, indent=1)+'\n')

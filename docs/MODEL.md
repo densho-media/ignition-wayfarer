@@ -2100,14 +2100,20 @@ Three assets, one source each (`src/wayfarer/vertex_engine.py`, `vertex_cluster.
 
 - **A, Vertex Research Demonstrator** `WF-VTX-RD` V4-gate2 (`components/WF_VERTEX_RESEARCH.blend`). The Gate 2 result is kept:
   BLOCKED (`vertex_research.gate2_reason`). It is a reference asset and is never linked into the ship.
-- **B, Compact Vertex Engine** `WF-VTX-CE` 1.0.0 (`components/WF_VERTEX_ENGINE.blend`, build target `VERTEX_ENGINE`). The front is at
+- **B, Compact Vertex Engine** `WF-VTX-CE` 1.1.0 (`components/WF_VERTEX_ENGINE.blend`, build target `VERTEX_ENGINE`). The front is at
   local X 0, thrust +X, exit at X −31.2. From the front, it has a target cartridge and launcher, a collar, a 2.2 m X-ray shield,
-  closure coils C1–C3, the burn point 6.0 m aft of the shield, and four nozzle loops L1–L4. Envelope 31.9 m × r 11.40 m (limit 11.5).
-  It has 222 parts in 12 functional categories (`VTX_<CATEGORY>` collections, with functional colours separate from the physical
+  closure coils C1 and C2, the burn point 6.0 m aft of the shield, and four nozzle loops L1–L4. Envelope 31.9 m × r 11.40 m (limit 11.5).
+  Version 1.1 (owner brief 2026-11-14, `vertex_engine.refinements`) closes the mechanical gaps of the 1.0 audit without changing the
+  envelope or the triangle budget: eight shield tie rods carry the closure-coil reaction ring round the shield cone to the collar; every
+  coil has a lead turret where its HTS leads (az 270° for C1/C2, 90° for L1–L4) and its cryogen branch enter; each loop's armour shoes
+  share a lithium header fed by supply and return jumpers that arc round the cryostat (the hot and cold circuits never share a line);
+  the target path runs magazine → transfer → launcher, whose muzzle is held by an alignment ring with three actuators and closed by a
+  bore shutter between pulses (there is still no chamber). Unseen tessellation was lowered to pay for these parts.
+  It has 264 parts in 12 functional categories (`VTX_<CATEGORY>` collections, with functional colours separate from the physical
   materials). They are built as 22 objects: the closure coils and cryostats stay one object each, and every other part joins
   one object per category and material, `VTX_<CATEGORY>_<material>` (`vertex_engine.families`; `wf_units`, `wf_parts` list the
   parts). The cluster frame and distribution are built the same way as 9 `CL_<CATEGORY>_<material>` objects. Each exported node
-  costs about 0.43 kB in the play package, so this keeps the four placed engines inside the play download budget. The mass is about 1,084 t (drawn volume × density, ENGINEERING_PROTOTYPE). Interfaces are `IF_VTX_*`; cameras are
+  costs about 0.43 kB in the play package, so this keeps the four placed engines inside the play download budget. The mass is about 1,090 t (drawn volume × density, ENGINEERING_PROTOTYPE). Interfaces are `IF_VTX_*`; cameras are
   `CAM_VTX_MODULE_PERSPECTIVE`, `_CUTAWAY` and `CAM_VTX_ENGINE_REAR`. The scalings from the research engine (C-01..C-10,
   `vertex_engine.calculations`) hold the research armour fluence: 0.375 t TNT per pulse and 0.31 TW at the research rate
   (CALCULATED). The quarter-power design point needs 5.7 kHz and 29× the research areal heat load, which is SPECULATIVE (VTX-S1..S5,
@@ -2126,9 +2132,22 @@ Three assets, one source each (`src/wayfarer/vertex_engine.py`, `vertex_cluster.
 - **Effects.** One shared mesh per effect (burn core, plasma shell, ignition flash, plume, driver beams, hot loops and shield face,
   ready lamps) is placed four times as `N<j>_FX_*`. The drivers read the dm control props on `DRIVE_MANIFOLD_CTRL`, and each engine
   reads only its own share `s<j>`. The states are OFF, PRE_IGNITION, IGNITION_PULSE, SUSTAINED and SHUTDOWN
-  (`vertex_cluster.STATES`). Explore Ship replays them from `model/drive-<hash>.json` (the Drive panel, key D, `#drive=STATE`).
+  (`vertex_cluster.STATES`). Explore Ship replays them from `model/drive-<hash>.json` (the Drive panel, key D). Each engine holds its
+  own state: the state buttons command the chosen engines, Sequential start runs N1..N4 on one fixed timeline (3 s apart:
+  pre-ignition, ignition at +2 s, sustained at +3 s), Shut down sends the chosen engines to SHUTDOWN. Hot hardware follows a
+  first-order display temperature (about 4 s to heat, 12 s to cool, PROTOTYPE) and warms from dull red to its display colour; the
+  bookmark is `#drive=SUSTAINED` or `#drive=N1.SUSTAINED,N2.OFF,...`. Fields stay invisible; no field lines are drawn.
+- **Part inspection** (Vertex Engine 1.1). `vertex_inspect.py` derives from the same part list one record per logical part (stable id
+  `WF.VTX.CE.<part>`, category, material, evidence, note, ENGINEERING_PROTOTYPE mass, bounds, render object, related parts) with the
+  category anatomy (`[vertex_engine.anatomy]`: purpose, how, physics, speculative, open, interfaces, Weakest Links and Breakthrough Lab
+  ids) and the four engine placements, plus the parts' own meshes in one raw buffer (int16 at 1 mm, engine frame). The web export
+  writes them as `model/engine-<hash>.json` and `model/engine-parts-<hash>.bin`; Explore Ship loads them only when the Engine drawer
+  (key I) opens, picks against the part meshes placed by the engine matrices (about 1.5 cm off the Draco render mesh; hidden render
+  objects take no pick), highlights the part's own surface and links `#eng=N2&cat=<CATEGORY>&part=N2.<part>`. No node is added to
+  the export. engineering/vertex/ section 4 (Engine anatomy) shows the same categories and links the registries by id.
 - **Single source.** `tests/verify_vertex_propagation.py` changes C1 r 2.5 → 2.9 m in a copy, lets `tools/checks.py` select the
-  `VERTEX_ENGINE` target, and verifies the new radius in all four instances and in the exported GLB
+  `VERTEX_ENGINE` target, and verifies the new radius in all four instances, in the exported GLB, in the inspection manifest and
+  geometry, in the Engine anatomy section, and that each engine's part link lands on that engine's GLB node
   (`references/evidence/vertex_cluster.json`).
 
 ## Limits

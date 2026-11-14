@@ -109,11 +109,11 @@ def parts(s, scale=1.0):
     for i, l in enumerate(st['loops']):
         rr = l['r']+l['cryostat_minor_m']*k+g['cage_clearance_m']
         out.append(part(f'VTX_Cage_Hoop_{l["name"]}', 'STRUCTURE', 'torus', 'structure', note=f'Cage hoop at {l["name"]}: carries the loop seats',
-                        x=l['x'], R=rr, a=R(0.12), nu=64, nv=6))
+                        x=l['x'], R=rr, a=R(0.12), nu=48, nv=6))
         for j in range(g['cage_longerons']):
             az = 22.5+j*360/g['cage_longerons']
             out.append(part(f'VTX_Loop_Seat_{l["name"]}_{j+1}', 'STRUCTURE', 'tube', 'structure', note=f'{l["name"]} cryostat seat (cold-mass support behind)',
-                            points=[pol(l['x'], l['r']+l['cryostat_minor_m']*k, az), pol(l['x'], rr, az)], radius=R(0.10)))
+                            points=[pol(l['x'], l['r']+l['cryostat_minor_m']*k, az), pol(l['x'], rr, az)], radius=R(0.10), n=6))
     ring_r = R(g['shield_aft_radius_m'])-R(0.45)
     out.append(part('VTX_Coil_Reaction_Ring', 'STRUCTURE', 'torus', 'structure', note='Reaction ring on the shield aft face: C1/C2 axial force into the collar (research ISS-003)',
                     x=st['shield_aft']-R(0.15), R=ring_r, a=R(0.15), nu=48, nv=6))
@@ -153,7 +153,7 @@ def parts(s, scale=1.0):
     for i, l in enumerate(st['loops']):
         clock = 22.5*i; gap = g['segment_gap_deg']
         out.append(part(f'VTX_{l["name"]}_Winding', 'MAGNETIC_NOZZLE', 'torus', 'coil', note=f'Nozzle loop {l["name"]} winding pack',
-                        x=l['x'], R=l['r'], a=R(l['winding_minor_m']), nu=64, nv=8))
+                        x=l['x'], R=l['r'], a=R(l['winding_minor_m']), nu=48, nv=8))
         for j in range(n):
             a0 = clock+360*j/n+gap/2; a1 = a0+360/n-gap
             out.append(part(f'VTX_{l["name"]}_Segment_{j+1:02}', 'MAGNETIC_NOZZLE', 'torus', 'cryostat',
@@ -182,7 +182,7 @@ def parts(s, scale=1.0):
         out.append(part(f'VTX_Driver_Port_{j+1}', 'TARGET_INJECTION', 'tube', 'armour', note='Final-focus beam port through the shield, aimed at the burn point',
                         points=[port_fwd, port_aft], radius=R(g['driver_port_tube_m'])))
         out.append(part(f'VTX_Driver_Optic_{j+1}', 'TARGET_INJECTION', 'disc', 'sensor', note='Sacrificial final optic (renewed with the burn face)',
-                        center=(st['shield_aft']-R(0.04), port_aft[1], port_aft[2]), radius=R(0.32), depth=R(0.06)))
+                        center=(st['shield_aft']-R(0.04), port_aft[1], port_aft[2]), radius=R(0.32), depth=R(0.06), n=12))
     # --- fuel: magazine and feed ---
     out.append(part('VTX_Target_Magazine', 'FUEL', 'revolve', 'fuel', note='D-3He target magazine around the launcher breech',
                     profile=[(R(-2.2), R(0.5)), (R(-2.2), R(1.7)), (R(-5.6), R(1.7)), (R(-5.6), R(0.5))], closed=True, n=32))
@@ -248,7 +248,80 @@ def parts(s, scale=1.0):
     for j in range(4):
         az = 90*j
         out.append(part(f'VTX_Status_Lamp_{j+1}', 'INSTRUMENTATION', 'sphere', 'lamp', note='Status indicator (deliberately lit instrumentation)',
-                        center=pol(st['collar_fwd']+R(0.05), R(g['collar_outer_radius_m'])-R(0.25), az), radius=R(0.14), n=8))
+                        center=pol(st['collar_fwd']+R(0.05), R(g['collar_outer_radius_m'])-R(0.25), az), radius=R(0.14), n=6))
+    out += refinements(s, scale)
+    return out
+
+
+def refinements(s, scale=1.0):
+    """Vertex Engine 1.1 (owner brief 2026-11-14, mechanical register ME-01..ME-04): parts that close a load path, a circuit or the target
+    path the 1.0 engine left open. Every part joins an existing (category, material) family, so the built asset keeps its object count.
+    All ENGINEERING_PROTOTYPE and unsized: the shapes say where things connect, not how strong or how large they must be."""
+    g = config(s)['geometry']; st = stations(s, scale); k = scale; out = []
+    R = lambda v: v*k
+    sa, sf = st['shield_aft'], st['shield_fwd']
+    # ME-01 shield tie rods: the coil reaction ring's load goes round the LiH shield (not structural) to the thrust collar.
+    ring_r = R(g['shield_aft_radius_m'])-R(0.45)
+    for j in range(8):
+        az = 11.25+45*j
+        out.append(part(f'VTX_Shield_Tie_Rod_{j+1}', 'STRUCTURE', 'tube', 'structure',
+                        note='Shield tie rod: C1/C2 reaction-ring load around the LiH shield into the thrust collar (the shield carries no coil load)',
+                        points=[pol(sa-R(0.15), ring_r, az), pol(sa+R(0.15), R(g['shield_aft_radius_m'])+R(0.22), az),
+                                pol(sf, R(g['shield_forward_radius_m'])+R(0.22), az)], radius=R(0.12), n=6))
+    # ME-02 lead and cryogen turrets: every coil gets its current leads and its cryogen at one turret on the cryostat.
+    cx = st['collar_aft']-R(0.35); crr = R(g['collar_outer_radius_m'])+R(0.55)
+    for c in st['coils']:
+        rt = c['r']+c['cryostat_minor_m']*k
+        out.append(part(f'VTX_{c["name"]}_Lead_Turret', 'ELECTRICAL', 'box', 'power',
+                        note=f'{c["name"]} lead turret: HTS current leads and the cryogen port enter the cryostat here (vacuum break, 80 K intercept)',
+                        center=pol(c['x'], rt+R(0.2), 270), size=(R(0.7), R(0.45), R(0.8)), az=270))
+        out.append(part(f'VTX_{c["name"]}_Lead_Branch', 'ELECTRICAL', 'tube', 'power', note=f'{c["name"]} current-lead pair from the collar to its turret',
+                        points=[pol(st['collar_aft'], R(g['collar_outer_radius_m'])-R(0.4), 263), pol(sa-R(0.3), R(g['shield_aft_radius_m'])+R(0.15), 263),
+                                pol(c['x']+R(0.25), rt+R(0.3), 265)], radius=R(0.06), n=6))
+    for l in st['loops']:
+        cm = l['cryostat_minor_m']*k; rt = l['r']+cm
+        out.append(part(f'VTX_{l["name"]}_Lead_Turret', 'ELECTRICAL', 'box', 'power',
+                        note=f'{l["name"]} lead turret: current leads and cryogen enter the loop cryostat between two seats',
+                        center=pol(l['x'], rt+R(0.2), 90.0), size=(R(0.9), R(0.45), R(0.7)), az=90.0))
+        out.append(part(f'VTX_{l["name"]}_Lead_Branch', 'ELECTRICAL', 'tube', 'power', note=f'{l["name"]} leads from the cage lead line to its turret',
+                        points=[pol(l['x']-R(0.25), rt+R(0.12), a) for a in (67.5, 75.0, 82.5, 88.0)], radius=R(0.06), n=6))
+        out.append(part(f'VTX_{l["name"]}_Cryo_Branch', 'CRYOGENIC', 'tube', 'cryo', note=f'{l["name"]} cryogen branch from the cage feed to its turret',
+                        points=[pol(l['x']+R(0.25), rt+R(0.12), a) for a in (112.5, 105.0, 97.5, 92.0)], radius=R(0.06), n=6))
+    # ME-03 armour coolant headers: the lithium supply and return reach every armour ring, so the hot circuit closes.
+    bx = st['burn']
+    for l in st['loops']:
+        cm = l['cryostat_minor_m']*k
+        phi = math.atan2(l['r'], l['x']-bx); off = cm+R(g['armour_offset_m'])+R(g['armour_minor_m'])
+        sx, sr = l['x']-off*math.cos(phi), l['r']-off*math.sin(phi)
+        t = (-math.sin(phi), math.cos(phi)) if math.cos(phi) >= 0 else (math.sin(phi), -math.cos(phi))
+        d = R(g['armour_minor_m'])+R(0.1)
+        hx_, hr_ = sx+d*t[0], sr+d*t[1]
+        out.append(part(f'VTX_{l["name"]}_Armour_Header', 'HOT_THERMAL', 'torus', 'hot',
+                        note=f'{l["name"]} armour coolant header: lithium to and from every shoe of the ring (hot circuit, about 1800 K class)',
+                        x=hx_, R=hr_, a=R(0.08), nu=32, nv=4))
+        # jumper: around the cryostat section, never through it
+        th0 = math.pi/2; th1 = math.atan2(hr_-l['r'], hx_-l['x'])
+        if th1 < -math.pi/2:
+            th1 += 2*math.pi
+        rad = cm+R(0.16)
+        arc = [(l['x']+rad*math.cos(th0+(th1-th0)*i/4), l['r']+rad*math.sin(th0+(th1-th0)*i/4)) for i in range(5)]
+        for tag, az in (('Supply', 22.5), ('Return', 202.5)):
+            out.append(part(f'VTX_{l["name"]}_Lithium_{tag}_Jumper', 'HOT_THERMAL', 'tube', 'hot',
+                            note=f'{l["name"]} lithium {tag.lower()} jumper from the cage feeder to the armour header',
+                            points=[pol(l['x'], l['r']+cm+R(0.03), az)]+[pol(x, r, az+4.0) for x, r in arc]+[pol(hx_, hr_, az+4.0)], radius=R(0.07), n=6))
+    # ME-04 target path: magazine -> transfer -> breech; the launcher is aligned at its muzzle; the bore closes between pulses.
+    out.append(part('VTX_Target_Transfer', 'FUEL', 'tube', 'fuel', note='Target transfer: the magazine indexes one target into the launcher breech',
+                    points=[pol(R(-2.2), R(1.1), 0), pol(R(-1.95), R(1.1), 0), pol(R(-1.75), R(0.45), 0)], radius=R(0.12), n=6))
+    lx = R(-7.2)
+    out.append(part('VTX_Launcher_Alignment_Ring', 'TARGET_INJECTION', 'torus', 'structure',
+                    note='Launcher alignment ring at the muzzle: three actuators trim the barrel onto the bore axis between bursts',
+                    x=lx, R=R(0.62), a=R(0.08), nu=24, nv=4))
+    for j in range(3):
+        az = 90+120*j
+        out.append(part(f'VTX_Launcher_Actuator_{j+1}', 'TARGET_INJECTION', 'tube', 'structure', note='Alignment actuator (muzzle ring to the cartridge frame)',
+                        points=[pol(lx, R(0.62), az), pol(lx+R(0.8), R(1.55), az)], radius=R(0.06), n=6))
+    out.append(part('VTX_Bore_Shutter', 'TARGET_INJECTION', 'disc', 'armour', note='Bore shutter on the burn face: closes the target bore between pulses',
+                    center=(sa-R(0.17), 0, 0), radius=R(0.38), depth=R(0.05), n=16))
     return out
 
 
