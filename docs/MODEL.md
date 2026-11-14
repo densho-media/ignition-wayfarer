@@ -2026,7 +2026,7 @@ gas amount stays P·V/(R·T) and no pressure state is needed. The occupants (PRO
 draws from sector 3 only, at SYS-001's k. The linear system is stepped exactly, y(t+Δt) = exp(AΔt)·y(t), with the generated and removed
 totals inside the same exponential, so the ledger is a check, not a definition. In DS-1's configuration (doors shut, ventilation on)
 the steady state runs from 0.150 % in sector 3 to 0.223 % in sector 2 (well-mixed: 0.150 %); DS-1 keeps its one well-mixed volume.
-The export writes `wf_ring_air.json` (topology, exchange rates, 41 checkpoints of a 10 h run through cases C, D, E, B and F); `WfRingAir`
+The export writes `wf_ring_air.json` (topology, exchange rates, 11 hourly checkpoints of a 10 h run through cases C, D, E, B and F); `WfRingAir`
 (`godot/scripts/systems/ring_air.gd`) repeats the step operation for operation and must reproduce them first. `#interior-airflow`
 (`-- --airflow`) creates `WfAirflow` (`scripts/excursion/airflow.gd`, a WfEquipment): the walk's CIRC door leaves are the door edges
 (off the seat = open, read every frame, no second door state), Ops at the ECLSS bay switches the ventilation, the bay's board lists the

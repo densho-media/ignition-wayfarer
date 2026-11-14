@@ -1,4 +1,18 @@
-# Deadship in Wayfarer: research, design, Phase 0 and Phase 1 report (DS-000, DS-P0, DS-P1)
+# Deadship in Wayfarer: research, design, Phase 0, Phase 1 and Phase 2A report (DS-000, DS-P0, DS-P1, DS-P2A)
+
+**Status (2026-11-14).** One branch, `claude/project-thread-dfyyv7`, not squashed, not deployed.
+
+| Phase | Status | Where |
+| --- | --- | --- |
+| DS-000 research and design | Done (6603e08); direction approved 2026-11-13 | §0–§8 |
+| Phase 0 minimal engineering integration (SYS-001, `#interior-systems`) | **Implemented and validated**; browser-verified on the Phase 1 build | §10, §13, §14, §19 |
+| Phase 1 DS-1 "Scrubber" tutorial (`#interior-deadship`) | **Implemented and browser-tested** (f5e6031); finalized 2026-11-14: phone layout, usability fixes | §17–§21, §22 |
+| Phase 2A atmospheric connectivity (SYS-002, `#interior-airflow`) | **Implemented and validated** 2026-11-14 | §23 |
+| Phase 2B DS-2 "Borrowed Air" (first playable challenge) | **Design proposal only; not authorized** | §24 |
+| Phase 2C and later | Design only | §9, §24 |
+
+Sections written before a phase was built are kept as written and marked **[HISTORICAL]** where later work changed them; their
+calculations stand unless a note says otherwise.
 
 DS-000 (2026-11-12, commit 6603e08) was research and design only. On 2026-11-13 the owner approved its direction with refinements
 and authorized **Phase 0 only**. This revision folds those decisions in, refines the scenario designs and the CO₂ assumptions, and
@@ -13,6 +27,8 @@ Every significant statement carries one of these labels:
 | **[EXISTS]** | Implemented in the repository before this work (file path given) |
 | **[BUILT P0]** | Implemented by Phase 0 on this branch (file path given) |
 | **[BUILT P1]** | Implemented by Phase 1 on this branch (file path given) |
+| **[BUILT P2A]** | Implemented by Phase 2A on this branch (file path given) |
+| **[HISTORICAL]** | Written before later work changed it; kept for the record, with a note on what changed |
 | **[LORE]** | Established IGNITION canon, with its Drive owner row |
 | **[ENG]** | Engineering assumption: physics or engineering judgment, not an owner row |
 | **[PROPOSAL]** | Gameplay or architecture design, not implemented |
@@ -49,6 +65,9 @@ the story. Deadship is a gameplay consumer of reusable engineering systems, neve
   open, the free gas volume is about **466 m³**, so with six people and the unit off, CO₂ rises from the 0.3 % target to the 0.5 %
   control limit in about **5.4 h**, not 1.4 h. With sector 3 sealed alone (about 46 m³ net), the same rise for the people inside
   happens far faster. Door states therefore matter, and coupling them to the volume is a Phase 1 prerequisite (section 7.2).
+  **[HISTORICAL]** Door coupling moved out of Phase 1 (DS-1 does not need it, §17) and was built as Phase 2A (§23). The 466 m³ is
+  the sum of ring A's nine compartments and remains a **model assumption** (sectors net plus corridors gross, everything joined by an
+  assumed ventilation), not a finalized ventilation design.
 - The docking contradiction is resolved by a four-layer state model (section 4.1). The real ship stays DOCKED with its rings locked.
   The training runs a **simulated COAST**, which is what the existing ring start already shows (boom retracted to stand-off, rings at
   4 rpm).
@@ -671,23 +690,26 @@ A dependency-based roadmap, not a commitment to build every feature.
 
 | Phase | Status | Content | Depends on | Acceptance | Size |
 | --- | --- | --- | --- | --- | --- |
-| **0 Minimal engineering integration proof** | **DONE on this branch, awaiting review** | One engineering state (ring A cabin CO₂), one real component (sector 3 ECLSS bay), one interaction (Ops: isolate / restore), one diagnostic display (the bay's board, the prompt, the touch label), deterministic validation | Owner authorization (given 2026-11-13) | Section 13 and section 14 | S |
-| **1 Scrubber tutorial** | **BUILT on this branch, awaiting review (sections 17–21)** | DS-1 (section 5.8): unscored and guided; a FAILED unit with part states (fan, bed, controller); the spare fan at the workbench; door-coupled air volumes; a short watch; the tier explanation on failure | Phase 0 approved; the prerequisites below | All eight DS-1 steps play through player actions in a headless check; the default start unchanged; the tutorial explains the three tiers | M |
-| **2 First true Deadship challenge** | DESIGN ONLY | DS-2 "Borrowed Air" (section 5.8): two interacting problems, insufficient parts, at least two valid stabilizations with model-computed consequences; the watch and provisional scoring | Phase 1; humidity and heat stocks; two rings; parts as entities | A scenario screen shows ≥ 2 stabilizing strategies, no full repair, and different scores from model state alone | M–L |
+| **0 Minimal engineering integration proof** | **IMPLEMENTED AND VALIDATED** (browser-verified on the Phase 1 build, §19) | One engineering state (ring A cabin CO₂), one real component (sector 3 ECLSS bay), one interaction (Ops: isolate / restore), one diagnostic display (the bay's board, the prompt, the touch label), deterministic validation | Owner authorization (given 2026-11-13) | Section 13 and section 14 | S |
+| **1 Scrubber tutorial** | **IMPLEMENTED AND BROWSER-TESTED** (§17–§21); finalized 2026-11-14 (§22) | DS-1 (section 5.8): unscored and guided; a FAILED unit with part states (fan, bed, controller); the spare fan at the workbench; ~~door-coupled air volumes~~ (moved to 2A); a short watch; the tier explanation on failure | Phase 0 approved; the prerequisites below | All eight DS-1 steps play through player actions in a headless check; the default start unchanged; the tutorial explains the three tiers | M |
+| **2A Atmospheric connectivity** | **IMPLEMENTED AND VALIDATED** 2026-11-14 (§23) | Ring A's nine compartments, doors and ventilation as a graph; the walk's doors are the connections; Ops at the bay switches the ventilation; `#interior-airflow` demo | Phase 1 | Cases A–G, conservation, Python/Godot parity, door truth, browser demo | M |
+| **2B "You cannot save everything"** | **DESIGN PROPOSAL ONLY** (§24) | The smallest playable DS-2 step: one removal unit for a crew split across compartments, a door/ventilation choice with model-computed consequences; unscored | Phase 2A; owner authorization | ≥ 2 valid configurations with different, model-computed outcomes; no full repair possible | M |
+| **2C "Borrowed Air"** | DESIGN ONLY | The full DS-2 (section 5.8): two interacting problems, insufficient parts, the watch and provisional scoring | 2B; humidity and heat stocks; parts as entities; possibly two rings | A scenario screen shows ≥ 2 stabilizing strategies, no full repair, and different scores from model state alone | M–L |
 | **3 Broader engineering systems** | DESIGN ONLY | Bus A/B power and the survival-reserve loads, cold-loop limits, load shedding, longer watches, ring B through the trunk and drum | Phase 2; PROTOTYPE electrical loads (power.rating OPEN) | Trade-offs between power, heat and air reproduce in Python and Godot within tolerance | L |
 | **4 Competitive Deadship and Hullrun** | DESIGN ONLY | Standard scenarios, repeatability (seeds, replay codes), provisional scoring, browser-local records (DS-6), Hullrun timed carries, the station briefing | Phase 3; walk lines to the SP-45 storeroom | Replays identical native and Web; records stay in browser storage only | L |
 | **5 Narrative survival** | DESIGN ONLY | First Ignition and the voyage on the same model; no scores and no Deadship branding | Tale and engineering owner rows for the accident (DS-Q2); OD-010 degraded modes; heat capacities | Story beats run on the model with no invented canon | L+ |
 
-**Exact prerequisites for Phase 1:**
-1. The owner reviews and approves Phase 0, including the volume and band choices in section 7.2.
+**Exact prerequisites for Phase 1** **[HISTORICAL, 2026-11-13; status 2026-11-14 in brackets]:**
+1. The owner reviews and approves Phase 0, including the volume and band choices in section 7.2. [Done: approved 2026-11-13 as
+   prototype working assumptions, not canon.]
 2. The FAILED state reachable through a fault input (`cabin_air.fail` exists) and a `repair` transition with part states, added to
-   the model, its checkpoints and its tests.
+   the model, its checkpoints and its tests. [Done in Phase 1: `fault_fan`, `install_spare`, the mode / fan / spare fields.]
 3. Door states coupled to the air volume: each CIRC door joins or splits compartments. This is the main modelling step: compartment
-   volumes, occupancy per compartment, and mixing across open doors.
-4. A second interaction point (the sector 2 workbench, carrying one part). This is when `WfEquipment` becomes a small registry.
-5. `data/deadship/` created for the DS-1 definition (DS-Q5), with a scenario loader that only calls the model's public operations.
-6. A `#interior-deadship` start and the transitions of section 4.1 (the trunk's Ops refused during a run).
-7. A projected watch: running the same exact step forward with no input, which is cheap because the step is exact for any Δt.
+   volumes, occupancy per compartment, and mixing across open doors. [Obsolete for Phase 1 (§17); built as Phase 2A (§23).]
+4. A second interaction point (the sector 2 workbench, carrying one part). This is when `WfEquipment` becomes a small registry. [Done.]
+5. `data/deadship/` created for the DS-1 definition (DS-Q5), with a scenario loader that only calls the model's public operations. [Done.]
+6. A `#interior-deadship` start and the transitions of section 4.1 (the trunk's Ops refused during a run). [Done.]
+7. A projected watch: running the same exact step forward with no input, which is cheap because the step is exact for any Δt. [Done.]
 
 ## 10. Phase 0: what was built
 
@@ -763,16 +785,19 @@ deployment.
 
 ---
 
-## 12. Open items after the 2026-11-13 decisions
+## 12. Open items (updated 2026-11-14)
 
-DS-Q1 to DS-Q8 are decided (see "Decisions applied"). What remains open:
+DS-Q1 to DS-Q8 are decided (see "Decisions applied"). Status of the open items:
 
-| ID | Item | Default until decided |
+| ID | Item | Status |
 | --- | --- | --- |
-| DS-O1 | Phase 0 review: the PROTOTYPE volume (sectors net + corridor gross), six occupants in ring A, 295 K, the unit rated for twelve | As built |
-| DS-O2 | The degraded-habitability (0.8 kPa) and danger (3.0 kPa) reference levels: keep, or replace when ECLSS and medical owner rows exist (12!G22) | As built, labelled PROTOTYPE |
-| DS-O3 | The ×60 display rate of the proof (DS-1 may want its own rate, or a compressed clock with a pause) | ×60 in the proof only |
-| DS-O4 | Authorization for Phase 1 | Not started |
+| DS-O1 | The PROTOTYPE volume (sectors net + corridor gross), six occupants in ring A, 295 K, the unit rated for twelve | **Approved 2026-11-13 as prototype working assumptions, not canon.** The 466 m³ is a model assumption, not a ventilation design (§23.1) |
+| DS-O2 | The degraded-habitability (0.8 kPa) and danger (3.0 kPa) reference levels | **Approved 2026-11-13 as PROTOTYPE working assumptions**; replace when ECLSS and medical owner rows exist (12!G22) |
+| DS-O3 | Display rates | Decided by build: ×60 in the Phase 0 proof, ×30 and the ×1800 watch in DS-1, ×120 in the Phase 2A demo |
+| DS-O4 | Authorization for Phase 1 | **Given 2026-11-13; Phase 1 built.** Phase 2A authorized and built 2026-11-14 |
+| DS-O7 | Ring ventilation: none is in canon. Phase 2A assumes one intermodule-ventilation duct pair per bulkhead at about 240 m³/h, with dampers | PROTOTYPE (§23.2); an ECLSS owner row would replace it |
+| DS-O8 | The crew-tube hatches: closed in the model, not animated in the walk; the tubes (3 × 49 m³) and the vestibule are a second path between sectors | Held CLOSED (§23.1) |
+| DS-O9 | Authorization for Phase 2B | Not authorized |
 | DS-O5 | Medical limits, ECLSS technology and its serviceable parts, whole-ship electrical load, heat capacities, OD-010 degraded modes | OPEN in canon; scenario values labelled |
 | DS-O6 | Deadship as an official Wayfarer crew qualification | Not established (DS-Q1) |
 
@@ -907,7 +932,7 @@ modelling step is door-coupled compartments.
 
 ## 16. Final recommendation
 
-Review Phase 0 through the stills in the project Library (the board RUNNING, ISOLATED and restored), and decide DS-O1 and DS-O2. If
+**[HISTORICAL, Phase 0]** Review Phase 0 through the stills in the project Library (the board RUNNING, ISOLATED and restored), and decide DS-O1 and DS-O2. If
 they stand, authorize Phase 1 with door-coupled compartments as its first step, since DS-1's lesson (isolating a compartment shrinks
 its air buffer) depends on it. Keep the branch unsquashed until then.
 
@@ -960,12 +985,14 @@ flow and the removal rate), why it is now stable (removal exceeds generation unt
 Ops after the end replays the training from the same start. A run left past the control limit ends as an operational failure with
 the tiers explained and a replay offer.
 
-**Compartments (§5 of the brief).** Investigated: CIRC doors in ring A are normally CLOSED (`ring_circulation.doors`), and ring A has nine
+**Compartments (§5 of the brief).** **[HISTORICAL; superseded by Phase 2A, §23.]** Investigated: CIRC doors in ring A are normally CLOSED (`ring_circulation.doors`), and ring A has nine
 compartments in a loop (three sectors and six corridor segments). A door-coupled gas model would need per-compartment volumes,
 occupancy and a ventilation model that the canon does not hold. DS-1 does not need it: its lesson is a failed fan in a well-mixed ring.
 The model keeps one volume under a stated PROTOTYPE assumption (intermodule ventilation mixes the ring; at a few hundred m³/h the local
 excess over the ring average is roughly 0.05 to 0.1 % CO₂), and the walk claims no door effect. Compartment connectivity moves to
-Phase 2, where DS-2 needs it.
+Phase 2, where DS-2 needs it. *(2026-11-14: Phase 2A computed it. In DS-1's configuration, doors shut and ventilation on, the
+compartments settle between 0.150 % (sector 3, the unit's own) and 0.223 % (sector 2), 0.073 points above the well-mixed value: inside
+the 0.05–0.1 % estimated here. DS-1 keeps the well-mixed model, §23.6.)*
 
 **Time handling.** Ship time is a scenario multiplier (×30, the watch ×1800) on the CO₂ model only. Rings turn, the trainee walks and
 doors move in real time (checked: during the watch the ring turned at its real rate). The clock stops while a tutorial page or the
@@ -980,6 +1007,8 @@ to the training while it runs. The carried spare is a placeholder box on the tra
 the walkthrough, Explore Exterior, movement, doors, ladders, learning stations; DOCKED, docking and the trunk are untouched.
 
 ## 18. Phase 2 prerequisites
+
+**[HISTORICAL, 2026-11-13]** Item 2 was built as Phase 2A (§23); the rest moves to Phase 2B/2C (§24).
 
 1. The owner reviews Phase 1 and the working assumptions (DS-O1, DS-O2 remain the volume, occupancy, rating and reference bands).
 2. Compartment connectivity: per-compartment volumes from the built rooms, occupancy per compartment, door states and a stated
@@ -1064,7 +1093,346 @@ ventilation model; DS-2 does need it); humidity, heat, power; parts beyond one s
 its own start; no binding, profile or setup row changed (two action descriptions name Deadship).
 
 **H6. Playable in the browser.** Yes: `#interior-deadship` on the play page, desktop and phone, as tested (section 19). Known rough
-edge: on a phone the training panel covers part of the HUD while a page is open.
+edge: on a phone the training panel covers part of the HUD while a page is open. *(Fixed 2026-11-14, §22.1.)*
 
 **H7. Phase 2 readiness.** Ready for design review: the model's operation table, refusals and reference replay extend to new
 components; the scenario layer holds steps and texts only. Prerequisites in section 18; the first is compartment connectivity.
+
+---
+
+# Phase 1 finalization and Phase 2A (2026-11-14)
+
+The owner's brief of 2026-11-14 asked for two packages: finish Phase 1 (phone layout, this document, a usability review) and build
+Phase 2A, atmospheric connectivity. Phase 2B and the full "Borrowed Air" scenario were not authorized and were not started. The working
+assumptions of 2026-11-13 stand as **prototype assumptions, not canon**: 466 m³, six occupants, 295 K, a unit rated for twelve, the
+0.5 % WORKING control limit, the 0.8 kPa and 3.0 kPa PROTOTYPE reference bands.
+
+## 22. Phase 1 finalization [BUILT P1]
+
+### 22.1 Phone layout
+
+**The defect.** On a phone the training page took the desktop's right column at desktop type, so it lay over the HUD's goal and
+prompt and could cover the touch buttons.
+
+**The fix: one layout rule for every page** (`godot/scripts/excursion/page_panel.gd`, `WfPagePanel`), used by DS-1 and the learning
+stations alike. No separate mobile page or component.
+- Desktop keeps the right column and its type (15/16 px).
+- On a touch-first device (`WfInput.compact`) the page takes the **free band**: below the page's top row (Exit, Full screen, Map, ?),
+  above the lowest controls (the touch buttons and the stick's circle), the full width inside the safe area (CSS
+  `env(safe-area-inset-*)`, as the touch layer already reads it). The type steps down 13/14 → 12/13 → 11/12 px until the text fits.
+- While a page is open on a phone, the goal, prompt and map step aside (the page names the step and the next action; the buttons carry
+  the actions). They come back on the next frame after the page closes. The player's own Map choice is kept.
+- In compact form the DS-1 page puts "step k of 8 · title" in its header, drops the tab row and blank lines, and shortens the footer.
+- The map now sits under the touch utility row. On an upright phone that row drops below the page's Exit row, and the map used to lie
+  under the Map and ? buttons (a defect older than Phase 1; fixed here because it is the same screen).
+- The pause rule is unchanged: ship time stops while a page or the controls overlay is open.
+
+Also fixed: on an upright phone the bay's 3D status board above the bay showed through the page and crossed its first lines; the page's
+background is now 94 % opaque (was 86 %), on every screen. And the compact footer printed "0.5 %% limit" (a format string shown without formatting).
+
+### 22.2 Usability review
+
+**Method.** A reading of the scenario, the code paths and the stills of every step (desktop 1280 × 720; phone 844 × 390 and
+390 × 844), plus the scripted play-throughs of §22.3. **This is not a human playtest.** The walking is scripted, and the browser
+runs press the player's real key or tap the real button only at the action points. The owner's playtest (§22.4) is still to come.
+
+| Point | Finding | Action |
+| --- | --- | --- |
+| Objective | The goal line names the step (k of 8), its title and objective; the briefing gives the symptom, not the cause | None |
+| Finding the ECLSS bay | Text only: the goal names "the sector 3 ECLSS bay" and the map labels A1–A3, but nothing marked the bay itself | **Fixed:** amber marks on the map's rim for the bay ("ECLSS") and the workbench ("bench"), read from the equipment points |
+| Workbench discoverability | The bench is a real fit-out node in sector 2 with the spare's placeholder box on it; the map gave no hint | **Fixed** by the same map mark (stills of the map show it). A still of the bench itself was attempted and not usable (the camera framing in the sector 2 fit-out); the owner checklist covers it |
+| Prompts | Every prompt names the player's own binding as a key chip; touch buttons carry the same words; a door in reach keeps Use when the trainee faces it | None |
+| Component states | FAILED (running, removal 0), ISOLATED with the fault, repaired not restored, OPERATING: four words on the board and in the prompt | None |
+| Diagnosis from evidence | Four pages (supply, fan, bed, conclusion) give the readings with numbers before the conclusion names the fan. The trainee cannot choose wrongly, which suits a tutorial; DS-2 should make the diagnosis a choice | Noted for 2B |
+| Refusals | Every refusal is the model's stated reason (restore with a failed fan, repair while energized, a second spare) | None |
+| Carried spare | **Defect:** the box hung at waist height, about 53° under the eye line, outside the 75° first-person view; the trainee could not see what they carried | **Fixed:** carried at chest height (about 34° under the eyes) and the goal line adds "Carrying: the spare fan". Verified geometrically, not visually: the `deadship` check asserts the carried box lies inside the first-person view when the trainee looks level (33.7° under the eye line against a 37.5° half-angle, 3° kept as margin) |
+| Watch and debrief | The watch runs 12 s real with the board ticking; the debrief explains what failed, how it was found, why isolation, what changed, why stable | None |
+| Replay | Ops at the bay after the end replays from the same start; the goal line says so | None |
+| Phone | Page over the HUD; map under the Map and ? buttons on an upright phone; "%%" in the footer | **Fixed** (§22.1) |
+
+### 22.3 Validation (Phase 1 finalization)
+
+What ran, with its result. Nothing here is a human playtest.
+
+| Check | Result |
+| --- | --- |
+| Python tests (whole suite) | 258 OK, 1 skipped |
+| `runtime-export` (rebuild, all Godot checks, publication) | 11/11 PASS; 5,287 objects, 1,351,125 triangles, unchanged |
+| `runtime-check auto` after the last Godot edit | 6/6 PASS against the current package |
+| `deadship` Godot check: the carried spare inside the view | PASS (33.7° under the eye line, half-angle 37.5°) |
+| Native renders, DS-1 steps 1–5: desktop 1280 × 720, phone 844 × 390 and 390 × 844 with touch | Rendered and read; page in the free band, no touch button covered, HUD back after closing |
+| Browser `--part main` (site, viewer, launchers, controls, Explore Interior and Exterior, phone) | 67/67 PASS |
+| Browser, DS-1 by the player's own keys | PASS: 13 actions, 569 s (final build) |
+| Browser, DS-1 by on-screen buttons, phone in landscape | PASS: 13 actions, 506 s (final build) |
+| Browser, DS-1 by on-screen buttons, phone turned upright after the 3rd action | PASS on the rerun: 13 actions plus the turn and the "Continue upright" tap, 485 s, every tap on the button showing the awaited label |
+| Browser, learning station (`systems`), keys and touch | PASS both |
+
+**The rotated phone, first attempt.** It failed: after the phone turned upright, the web shell's own "Turn your phone sideways"
+prompt (with "Continue upright") covered the canvas, and the check kept tapping the game's buttons underneath it. The prompt is the
+shell's intended behaviour, older than Phase 1, so the game was not changed. The check now answers it as a person would, with a tap on
+"Continue upright", and it waits for the button that shows the awaited label (the touch probe publishes every 0.25 s, so a label could
+lag one action). The rerun is the row above.
+
+### 22.4 Owner playtest checklist
+
+For ApeDevil, on a real desktop and a real phone (the branch build; nothing is deployed). Tick, or note what happened.
+
+**DS-1 `#interior-deadship`, desktop**
+1. [ ] The briefing makes clear what is wrong (CO₂ rising) without telling you the cause.
+2. [ ] You find the sector 3 ECLSS bay from the goal line and the map's amber "ECLSS" mark, without help.
+3. [ ] Use at the bay opens the inspection; the four evidence pages read as evidence, and you could name the failed part before the
+   conclusion page.
+4. [ ] Trying Ops to restore before the repair is refused with a reason you understand.
+5. [ ] Ops isolates; the board's state word changes to ISOLATED.
+6. [ ] You find the sector 2 workbench (map mark "bench"), see the spare on it, take it, and **can see it in your hands** walking
+   back.
+7. [ ] Use fits the spare; the board says repaired but not restored; Ops restores; the CO₂ trend turns negative.
+8. [ ] The stability watch and the debrief are clear; Ops after the end replays the training.
+9. [ ] Nothing felt like a timer you could not see; the pause while a page is open feels right.
+
+**DS-1 on a phone (landscape, then upright)**
+10. [ ] An open page leaves every touch button visible and tappable, and its text is complete (nothing cut off), in both
+    orientations.
+11. [ ] Closing the page brings the goal line, prompt and map back.
+12. [ ] Turning the phone with a page open re-lays the page without losing your place.
+13. [ ] On an upright phone the map no longer covers the Map and ? buttons.
+
+**Phase 2A `#interior-airflow`**
+14. [ ] The map's compartment colours and numbers are readable; the bulkhead marks (green door, blue duct, red none) make sense.
+15. [ ] Walk to the bay with ventilation on: closing doors behind you changes nothing (the ducts still join the compartments).
+16. [ ] Ops at the bay turns ventilation off; compartments behind closed doors show "isolated" on the board and red bulkhead marks.
+17. [ ] Opening a door joins two compartments and their numbers move toward each other over tens of seconds, not instantly.
+18. [ ] The labels (SIMULATION, PROTOTYPE exchange) are visible enough that nobody takes the numbers for canon.
+
+**Everywhere**
+19. [ ] `#interior` (the default) and Explore Exterior look and play as before.
+
+## 23. Phase 2A: atmospheric connectivity [BUILT P2A]
+
+### 23.1 Topology audit (ring A)
+
+**Principle.** The layout defines the volumes, doors and hatches the connections, ventilation the mechanical exchange. Every number below
+comes from an existing module; none is new canon.
+
+| Node | Location | Volume used (m³) | Basis and source | Status | Doors | Ventilation | Unknowns |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| A1 | Ring A sector 1 | 37.73 | net (deck to overhead less modelled fit-out; subfloor 14.46 m³ not counted): `pressure_volumes.rooms` Sector_1_1 (gross 72.38) | PROTOTYPE | CIRC.A1P → AC1a, CIRC.A1N → AC3b; tube hatch TUBE.A1 (closed) | IMV pairs at A1P and A1N | Fit-out is whitebox; real free volume OPEN |
+| A2 | Ring A sector 2 | 44.19 | net, Sector_1_2 | PROTOTYPE | CIRC.A2N ← AC1b, CIRC.A2P → AC2a; TUBE.A2 | IMV at A2N, A2P | as A1 |
+| A3 | Ring A sector 3 (ECLSS bay) | 45.96 | net, Sector_1_3 | PROTOTYPE | CIRC.A3N ← AC2b, CIRC.A3P → AC3a; TUBE.A3 | IMV at A3N, A3P | as A1 |
+| AC1a, AC1b | Fill 1 corridor, either side of the spoke-node bulkhead | 56.41 each | gross clear cavity: `ring_circulation.compartments` (CIRC-001) | PROTOTYPE (CIRC-001 is an owner design direction, not canon) | AC1a: A1P, AC1; AC1b: AC1, A2N | IMV at each door | Utility-zone fill of the cavity |
+| AC2a, AC2b | Fill 2 corridor | 56.41 each | as AC1 | PROTOTYPE | A2P, AC2 / AC2, A3N | as AC1 | as AC1 |
+| AC3a, AC3b | Fill 3 corridor | 56.41 each | as AC1 | PROTOTYPE | A3P, AC3 / AC3, A1N | as AC1 | as AC1 |
+| *Crew_Tube_1_1..3* | Sector overhead hatch to the despun vestibule | 49.04 each | `pressure_volumes.rooms` (gross) | **Outside the model** | TUBE_HATCH at the sector, DRUM_DOOR at the vestibule (`crew_transfer`) | none known | Hatch states in operation; the walk does not animate them |
+| *Crew_Vestibule_1* | Despun drum | 15.85 | gross | **Outside** | the three tube doors; the trunk port gate | none known | Whether it joins rings A and B in normal operation |
+
+**Doors.** Nine CIRC pressure doors form **one loop** round the ring: sector → corridor half → node bulkhead → corridor half → next
+sector. Each is 0.75 × 2.0 m, normally CLOSED (PROTOTYPE, `ring_circulation.doors`), sliding into a pocket. A closed door is a pressure
+boundary; a closed loop door does not isolate a compartment while the other way round is open (case B).
+
+**Ventilation.** None is in canon: `life_support.toml` holds no air flows, and the only duct-like item in the model is the DS-06/08
+duct-crawler door on the ECLSS bay (a drone dock, not air). The visual ducts in the corridors are greybox. Phase 2A therefore
+assumes one intermodule-ventilation (IMV) duct pair per bulkhead (DS-O7, PROTOTYPE).
+
+**Double counting.** None. The nine nodes sum to **466.36 m³**, exactly SYS-001's volume: three sectors' net 127.88 m³ and six corridor
+halves' gross 338.48 m³ (= `ring_circulation.budget` corridor gross per ring). No room is in two nodes; the tubes and vestibule are in
+none. The mix of bases (sectors net, corridors gross) is kept from SYS-001. It is suitable as a model assumption: the corridors' fit-out
+is not modelled, so their net free volume is unknown, and the sector subfloor is excluded because its ventilation is unknown. **It is a
+model assumption, not a finalized ventilation design.**
+
+**The 466 m³ basis is still the right well-mixed total** for DS-1: it is what the nine compartments hold together when the ventilation
+joins them. With every door shut and the ventilation off, the volume a compartment's occupants breathe is that compartment alone
+(37.7–56.4 m³), and that is what Phase 2A now models.
+
+**Ring B** has the same structure (B1–B3, BC1a–BC3b, nine CIRC doors) and is not modelled; nothing in Phase 2A crosses rings. **Godot
+door state:** `excursion.gd` `circ_doors[id]` holds `value` (0 seated … 1 open) and `target`; the leaf and its collider follow
+`value`. `_toggle_door` refuses a close while the doorway is occupied, leaving `target` unchanged.
+
+### 23.2 The model [BUILT P2A, ENG]
+
+`src/wayfarer/ring_air.py` (SYS-002, `WF_RING_AIR` v1). An engineering state with no game logic: consumers set connections
+(`set_edge`, `set_vent`), removal and occupants, and read `readout`.
+
+**Graph.** Nodes: the nine compartments above, each with V, its CO₂ mass m_i, fraction x_i = (m_i/M)/n_i, partial pressure x_i·P,
+occupants and trend. Edges: 9 doors (state from the walk) and 9 IMV duct pairs (state = ventilation ON and damper OPEN). Boundaries:
+three tube hatches, CLOSED, unmodelled.
+
+**Equation.** dm_i/dt = G_i − [i = r]·k·m_i/V_i + Σ_j C_ij·(m_j/V_j − m_i/V_i), with G_i = occupants_i × 1.0 kg/day (41!B15, STUDY), k the
+unit's scrubbed flow (SYS-001: 116 m³/h, rated for twelve at the target) drawing from sector 3 only, and C_ij the exchange flow of every
+open edge between i and j.
+
+**Connectivity is not mixing.** An open edge carries a finite flow. The exchange time V/C of one compartment through one door is
+0.27–0.41 h, through one duct pair 0.16–0.24 h, and a pulse that has to go the long way round (eight doors) needs hours (test B).
+
+**Exchange values (all PROTOTYPE, configurable in `ring_air.PROTOTYPE`, SI units).**
+
+| Edge | Value | Basis |
+| --- | --- | --- |
+| Open door | 0.0387 m³/s (139 m³/h) each way | Two-way buoyant doorway exchange Q = (C_d/3)·W·H·√(g·H·ΔT/T), C_d 0.6, W 0.75 m, H 2.0 m, g = ring A floor gravity, ΔT 0.5 K, T 295 K. A floor: cabin fans and people walking through add to it |
+| IMV duct pair | 0.066 m³/s (238 m³/h) each way | The order of a spacecraft intermodule-ventilation fan (about 140 cfm); runs only with ventilation ON and the damper OPEN |
+| Closed door or damper | 0 | Sealed; no leakage path (PROTOTYPE) |
+
+**Why no pressure state.** Every exchange is balanced (a doorway's two-way flow, a duct pair's supply and return), so no compartment
+gains or loses gas in total: n_i = P·V_i/(R·T) stays fixed and CO₂ is carried as a trace (below 1 %). Forced flow (the ducts, ON/OFF)
+is distinct from passive exchange (an open door). No O₂, humidity, heat, fire or pressure loss is modelled.
+
+**The exact step.** The system is linear with constant coefficients between changes, so y(t+Δt) = exp(A·Δt)·y(t) on
+y = [m_1 … m_9, generated, removed, 1]. The generated and removed totals are integrated **inside the same exponential**, independently of
+the masses, so the ledger initial + generated − removed = final is a real check of the step, not a definition. exp is scaling and squaring
+of an 18-term Taylor series after halving to a norm ≤ 0.5 (truncation below 1e-22), written so that Godot repeats it operation for
+operation. One propagator per (configuration, Δt) is cached; a change of a door, the ventilation, removal or occupants clears it. The
+step is exact for any Δt: 1 s, 10 s, 600 s and 3600 s steps agree to 1e-10 relative.
+
+**Reference run** (11 hourly checkpoints, 10 h at the runtime's 10 s step): from the well-mixed state with doors closed and ventilation on
+(case C); ventilation off at 0.5 h (D: nine groups); A2N opens at 2 h (E: eight groups); at 4 h every door but AC1 opens (B: one group
+the long way round); at 6 h all six occupants move to A1 (F); at 8 h the ventilation returns. End: 2.5000 kg generated, 1.9526 kg removed,
+ledger closed to 1e-12 relative.
+
+**Steady states** (two per sector, unit in A3; CO₂ %):
+
+| Configuration | A1 | A2 | A3 | Corridors | Ring mean |
+| --- | --- | --- | --- | --- | --- |
+| Well-mixed (SYS-001, DS-1) | 0.150 | 0.150 | 0.150 | 0.150 | 0.150 |
+| Doors closed, ventilation on (the walk's normal state) | 0.223 | 0.223 | 0.150 | 0.174–0.223 | 0.198 |
+| All doors open, ventilation on | 0.196 | 0.196 | 0.150 | 0.165–0.196 | 0.180 |
+| All doors open, ventilation off | 0.275 | 0.275 | 0.150 | 0.192–0.275 | 0.232 |
+| Six in A1, ventilation on, doors closed | 0.297 | 0.223 | 0.150 | 0.174–0.272 | 0.222 |
+| Doors closed, ventilation off | rises 0.154 %/h | rises 0.131 %/h | 0.050 | unchanged | — |
+
+The unit's compartment always settles at the well-mixed value G/k (removal equals generation), and every other compartment sits above it.
+Isolated with two people, sector 1 climbs from 0.15 % to the 0.5 % control limit in **2.3 h**, sector 2 in 2.7 h; six people sealed
+in sector 1 reach it in **0.76 h**. In a well-mixed ring with the unit off the same climb takes about 5.4 h (§7.2).
+
+### 23.3 Godot integration [BUILT P2A]
+
+- `godot/scripts/systems/ring_air.gd` (`WfRingAir`): the runtime copy. It loads `wf_ring_air.json`, replays the packaged reference run
+  and compares all 11 checkpoints (nine masses, the two ledger sums, the number of groups) within 1e-9 relative + 1e-12 kg before
+  anything is shown (`verify()`). It is testable without 3D: the `airflow` check's determinism part runs fresh copies with no scene.
+- `godot/scripts/excursion/airflow.gd` (`WfAirflow`, a `WfEquipment`): the consumer. Every frame it reads the walk's nine ring A door
+  leaves (`circ_doors[id].value > 0`: the leaf off its seat passes air) and passes them to the model. **There is no second door state**:
+  the walk owns the doors (animation, collision, controls unchanged), the model is told. A refused door operation (the doorway occupied)
+  leaves `target` and `value` unchanged, so the model sees nothing. A door that is moving counts as open until its leaf seats.
+- Ship time runs ×120 in fixed 10 s model steps (the reference's step) with an accumulator.
+- `excursion.gd` changed by three hooks only: the start branch, the goal line (`equipment.goal_text()`, empty for the other starts) and
+  the check. Ops, the prompt, the touch button and the page record go through the existing equipment hooks.
+- **Visualization** (minimal, all read from the model): the ring map colours each compartment's arc by its CO₂ (teal → yellow at the
+  0.3 % target → orange → red at the 0.5 % limit) with its value, and marks every bulkhead with what joins its two sides now: green an
+  open door, blue a running duct pair, red nothing. The caption gives the ventilation state and the number of groups; the header says
+  SIMULATION, PROTOTYPE. The bay's board lists the nine compartments with "isolated" where true, the ventilation state, the open doors
+  and the groups.
+
+### 23.4 The demo `#interior-airflow` (`-- --airflow`) [BUILT P2A]
+
+An opt-in start like `#interior-systems`; the default `#interior` and DS-1 never create it. The ring starts in its normal state:
+doors closed, ventilation on, one group, two people per sector, the unit running in sector 3. The goal line explains the map and the two
+controls. **One new interaction, no new binding:** Ops at the ECLSS bay switches the ring's ventilation off or on (the existing Ops key
+and touch button; prompt "ventilation off / on"). Doors are opened and closed with Use as always.
+
+What the player can observe: with ventilation on, closing doors changes nothing (the ducts join every compartment). Switch it off and
+every compartment behind closed doors becomes isolated: the occupied sectors climb, the empty corridors freeze, the unit's sector falls,
+and the map shows red bulkheads. Open a door and the two compartments' numbers drift toward each other over tens of seconds of real time
+(minutes of ship time). Open the whole loop and everything joins again, more slowly than through the ducts.
+
+### 23.5 Validation (Phase 2A)
+
+| Check | Result |
+| --- | --- |
+| `tests/test_ring_air.py` (14 tests) | OK. Volumes sum to DS-1's 466.36 m³ with no double counting; one loop of nine doors; the doorway formula; the step exact for any length; conservation and non-negativity on the reference run and from zero CO₂ |
+| Case A, fully connected | Settles where removal balances generation; max 0.196 % with ventilation on, 0.275 % with it off |
+| Case B, a closed door with the other way round open | Still one group; the two sides converge the long way |
+| Case C, closed doors, ventilation on | Still exchange through the ducts; one group; A3 0.150 %, A1/A2 0.223 % |
+| Case D, closed doors, ventilation off | Nine isolated compartments; sealed corridors stay bit-exact; A1 reaches 0.5 % in 2.3 h, A2 in 2.7 h |
+| Case E, a door reopened | The two compartments join gradually, never in one step |
+| Case F, occupants apart | A gradient along the path; six people sealed in A1 reach 0.5 % in 0.76 h |
+| Case G, removal elsewhere | Removal in A3 lowers another compartment only through a connection |
+| Ledger (generated − removed − change in stored CO₂) | About 5e-14 kg on the reference run; tolerance 1e-9 relative + 1e-12 kg |
+| Python ↔ GDScript parity | 11 hourly checkpoints over 3,600 steps of 10 s, within the tolerance (`WfRingAir.verify()`) |
+| `airflow` Godot check in the walk | PASS: ventilation off after six doors opened gives 3 groups; sealed corridor bit-exact; reopening gradual; a refused close changes nothing |
+| Browser `#interior-airflow`, player's keys / on-screen buttons | PASS (4 actions, 452 s) / PASS (4 actions, 389 s) |
+| Desktop stills | Connected, isolated and reconnected states rendered and read |
+| DS-1 regression | `cabin_air` and `deadship` tests unchanged and OK; the DS-1 browser runs above PASS |
+
+**Play download budget.** The first site build of Phase 2A went 21.6 kB over the 90,000,000-byte play budget
+(`tools/web_export.py`). Fixed without dropping anything the runtime reads: the three model packages are written as compact JSON, the
+ring reference keeps hourly checkpoints (11, was 61) and gives its sources once. 25 kB saved, 3.4 kB margin. The values are unchanged.
+
+### 23.6 DS-1 is protected
+
+DS-1 runs on `cabin_air` exactly as before: one well-mixed 466 m³ volume (its documented configuration: ventilation on). Its physics, scenario and
+reference are unchanged: `cabin_air.py` and `deadship.py` changed only in how their packages are written (compact JSON, to fit the
+play download budget, §23.5), and their checkpoints and reference replay hold the same values. **The difference, reported, not bent:** in DS-1's configuration the compartment model's steady state is 0.150 %
+in sector 3 and up to 0.223 % in sectors 1 and 2 (ring mean 0.198 %), against the well-mixed 0.150 %. DS-1's lesson (a failed fan
+stops removal; isolate, repair, restore) holds in both models. Its numbers are the well-mixed ring's, and its debrief says so.
+
+### 23.7 Limitations [ENG]
+
+- Every exchange value is PROTOTYPE. The doorway formula is a floor (pure buoyancy at ΔT 0.5 K); people walking and cabin fans mix more.
+  The IMV flow is an order of magnitude from spacecraft practice, not a Wayfarer design.
+- Each compartment is well mixed inside. The local excess near a breathing person, and stratification, are not modelled.
+- No leakage, no pressure difference, no O₂, humidity, heat, fire or contamination. Total gas per compartment is fixed.
+- The crew-tube hatches are held closed and unmodelled; the tubes are a real second path in the ship.
+- Ring B, the trunk and the vestibule are outside the model.
+- Occupants are numbers per compartment, not the walking trainee; the trainee's own breath is not added.
+- The demo's ×120 clock and the 10 s model step are display choices; the step itself is exact for any length.
+
+## 24. DS-2 reassessed and the Phase 2B proposal [PROPOSAL; not authorized]
+
+**What Phase 2A changes for "Borrowed Air".** DS-2 as designed (§5.8) trades two interacting problems with insufficient parts and
+needs humidity and heat stocks, parts as entities and perhaps two rings. That is still an M–L step. Phase 2A already supplies the
+mechanism a first real choice needs: where the crew is, which doors stand open and whether the ducts run decide who breathes what,
+computed and conserved. Recommendation: build a **smaller playable milestone first, Phase 2B "You cannot save everything"**, on
+SYS-002 alone, and keep humidity, heat and parts for 2C.
+
+**Phase 2B premise (all scenario values PROTOTYPE; no canon event invented).** Ring A's intermodule fans have failed and no spare is
+aboard (ventilation OFF for the scenario). A slow leak is suspected in fill 2, so its doors (A2P, AC2, A3N) are held shut by
+procedure. Two crew per sector; the unit in sector 3 works. Every number below is the model's steady state (`ring_air`, CO₂ %):
+
+| Choice | A1 | A2 | A3 | Cost |
+| --- | --- | --- | --- | --- |
+| Keep everyone in place, open the rest of the loop | 0.400 | **0.525** (above the control limit, slowly) | 0.150 | Sector 2's air has to go the long way round through six doors; it cannot reach the unit fast enough |
+| Move sector 2's two people to sector 1 | 0.400 | 0.400 | 0.150 | Sector 1 crowded (4 in 37.7 m³ net); everyone below the limit, above the target |
+| Move them to sector 3 | 0.275 | 0.275 | 0.150 | The ECLSS sector crowded (4 people); everyone below the target |
+| Open fill 2 as well | 0.275 | 0.275 | 0.150 | Breaks the leak isolation: the cost is a procedure the model does not score |
+| Keep the doors shut | climbs 0.154 %/h | climbs 0.131 %/h | 0.050 | Sectors 1 and 2 reach the control limit in 2.3 h and 2.7 h |
+
+No choice keeps everything: quarters, leak isolation and air quality cannot all be held. The player decides with the map and the board,
+and the watch shows the consequence. The model needs **no new physics**: occupants per compartment (`set_occupants`) already exist. 2B
+would add a scenario file (`data/deadship/ds2a_*.toml`, as DS-1), the "move crew" action (Use at a sector's crew point, or a choice on
+the page), a door held by procedure (a refusal with its reason), the watch on the compartment model, and an unscored debrief that names
+the trade made. Size M. **Prerequisite: the owner's authorization and review of Phase 2A's PROTOTYPE ventilation and doorway values.**
+
+**Phase 2C "Borrowed Air"** then adds humidity and heat stocks (PROTOTYPE capacities), parts as entities, and the provisional scoring
+after DS-Q3's weights; ring B through the trunk only if the scenario crosses rings.
+
+**Revised roadmap after 2A:** 2B "You cannot save everything" (M, SYS-002 only) → 2C "Borrowed Air" (M–L) → 3 broader systems (power,
+thermal) → 4 competitive and Hullrun → 5 narrative. Phase 2B requires separate authorization.
+
+**Canon gaps the owner could close** (each would replace a PROTOTYPE value, none blocks the demo): ring ventilation architecture and flow
+(DS-O7); the crew-tube hatch rule in normal operation (DS-O8); the corridor fit-out (net volume); ECLSS technology and its serviceable
+parts (12!G26:G27); medical CO₂ limits (12!G22).
+
+## 25. Handoff (Phase 1 finalization and Phase 2A)
+
+1. **Implemented.** Phase 1 finalization: one page layout for every screen (`WfPagePanel`); the HUD steps aside on a phone and
+   returns; the map clear of the touch row; the carried spare visible; bay and bench marks on the map; the footer fix. Phase 2A: ring A's
+   air by compartment (`ring_air.py`, `ring_air.gd`), the walk's doors as its connections (`airflow.gd`), the ventilation switch at the
+   bay, the map's air layer and the bay's board, the `#interior-airflow` demo, its runtime and browser checks.
+2. **Reused.** The CIRC compartments and doors (`ring_circulation`), the room volumes (`pressure_volumes`), SYS-001's parameters
+   (`cabin_air.params`: pressure, CO₂ rate, k, temperature), the reference-and-checkpoint pattern, `WfEquipment` (the bay point, board,
+   Ops, prompt, touch button, record), the walk's door mechanism unchanged, the ring map, `WfCheckPlayer`, `web_check.py --part training`.
+3. **Prototype or unresolved.** The doorway exchange (C_d 0.6, ΔT 0.5 K), the IMV duct pair and its 0.066 m³/s, dampers, the occupants'
+   places (two per sector), the removal drawing from sector 3 only, the closed tube hatches, no leakage, the ×120 demo clock. Canon gaps:
+   §24.
+4. **Validated.** §22.3 and §23.5: Python cases A–G and conservation, Python/Godot parity at 11 checkpoints over 3,600 steps, the door truth in the
+   walk, the runtime checks, the browser runs with real keys, touch and a rotated phone, regression.
+5. **Not validated.** No human playtest (the checklist in §22.4 is for the owner); real phones and GPUs (software WebGL only);
+   performance on a slow device (the model costs one 12 × 12 matrix-vector product per 10 s ship step, about 12 a second at ×120); the
+   physical exchange values themselves.
+6. **DS-1 unchanged.** It runs on the well-mixed `cabin_air` as documented; the compartment model's difference is reported in §23.6,
+   not applied.
+7. **Default start unchanged.** `#interior`, `#interior-systems`, `#interior-deadship` and Explore Exterior create no air model.
+8. **Commits.** Phase 1 finalization, Phase 2A and this report are separate commits on `claude/project-thread-dfyyv7`, pushed; not
+   squashed, not merged, not deployed. No Drive write, no canon change, no geometry or Blender asset change.
+9. **Next step proposed.** Phase 2B "You cannot save everything" (§24), on SYS-002 alone, after the owner's review of Phase 2A's
+   PROTOTYPE values. Not authorized; not started.
+10. **Owner questions.** Accept the Phase 1 finalization and Phase 2A? Keep the IMV duct-pair assumption and the doorway floor (DS-O7)?
+    Hold the crew-tube hatches closed (DS-O8)? Authorize Phase 2B?
