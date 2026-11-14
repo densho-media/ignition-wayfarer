@@ -102,6 +102,8 @@ var equipment: WfEquipment = null # SYS-001 Phase 0 proof (`--systems`, #interio
 var deadship: WfDeadship = null   # Deadship DS-1 "Scrubber" training (`--deadship`, #interior-deadship): owns `equipment` when present
 var deadship_check: WfDeadshipCheck = null
 var airflow_check: WfAirflowCheck = null   # SYS-002 (`--airflow`, #interior-airflow): `equipment` is then a WfAirflow
+var shared_air: WfSharedAir = null   # Deadship DS-2B "Shared Air" (`--shared-air`, #interior-shared-air): owns `equipment` (its WfAirflow)
+var shared_air_check: WfSharedAirCheck = null
 # LOCO-001 (docs/LOCOMOTION.md): the start (RING: on ring A's deck with the rings turning, the default; STATION: the full excursion from the
 # development station), the trainee's visible MPFB body and its locomotion on the decks.
 var start_mode := "RING"
@@ -131,6 +133,9 @@ static func deadship_requested() -> bool:
 	return "--deadship" in OS.get_cmdline_user_args() or WfWebPage.start_variant() == "deadship"
 
 ## SYS-002 (Deadship Phase 2A): ring A's air by compartment rides on the ring start; the default, systems and DS-1 starts never create it.
+static func shared_air_requested() -> bool:
+	return "--shared-air" in OS.get_cmdline_user_args() or WfWebPage.start_variant() == "shared-air"
+
 static func airflow_requested() -> bool:
 	return "--airflow" in OS.get_cmdline_user_args() or WfWebPage.start_variant() == "airflow"
 
@@ -210,6 +215,13 @@ func _ready() -> void:
 			push_error("DEADSHIP: the training is unavailable: %s" % str(deadship.errors))
 		else:
 			say("GU instructor: " + " ".join(deadship.sc["steps"][0]["brief"].map(func(l): return deadship.fill(str(l)))))
+	elif shared_air_requested():
+		shared_air = WfSharedAir.new(by_name, manifest, self, layer)
+		equipment = shared_air.eq
+		if not shared_air.verified:
+			push_error("SHARED AIR: the training is unavailable: %s" % str(shared_air.errors))
+		else:
+			say("GU instructor: Shared Air, a training run on ring A's air model. You are sector 1's crew with your partner; pairs B and C are in sectors 2 and 3. Ship time runs x%d. Walk your sector; the map (%s) shows the air." % [int(shared_air.scale()), key("exc.map")])
 	elif airflow_requested():
 		equipment = WfAirflow.new(by_name, manifest, self)
 		var af := equipment as WfAirflow
@@ -244,6 +256,9 @@ func _ready() -> void:
 	elif "--check-airflow" in OS.get_cmdline_user_args():
 		airflow_check = WfAirflowCheck.new()
 		airflow_check.run(self)
+	elif "--check-shared-air" in OS.get_cmdline_user_args():
+		shared_air_check = WfSharedAirCheck.new()
+		shared_air_check.run(self)
 
 # ---- package ---------------------------------------------------------------------------------------------------------------------------------
 
@@ -689,7 +704,9 @@ func look_basis() -> Basis:
 func _physics_process(dt: float) -> void:
 	if actor == null:
 		return
-	if deadship != null:
+	if shared_air != null:
+		shared_air.step(dt)
+	elif deadship != null:
 		deadship.step(dt)
 	elif equipment != null:
 		equipment.step(dt)
@@ -1065,6 +1082,10 @@ func use() -> String:
 		var dr := deadship.use()
 		if dr != "":
 			return dr
+	if shared_air != null:
+		var sr := shared_air.use()
+		if sr != "":
+			return sr
 	var w := _walk_target()
 	var ls_i := _learning_in_reach()
 	if ls_i >= 0 and (learning.open == ls_i or w == ""):
@@ -1200,6 +1221,11 @@ func _door_in_reach() -> String:
 
 func _toggle_door(id: String) -> String:
 	var d: Dictionary = circ_doors[id]
+	if shared_air != null:                          # DS-2B: the watch holds the ring as declared; an ordered pair in the doorway blocks a close
+		var why := shared_air.door_refusal(id, d["target"] < 1.0)
+		if why != "":
+			say(why)
+			return ""
 	if d["target"] < 1.0:
 		d["target"] = 1.0
 		_log("door", {"id": id, "open": true})
@@ -1217,7 +1243,11 @@ func _toggle_door(id: String) -> String:
 
 ## O: the ship's operating change, asked at a trunk panel (the trainee holding still on a rail inside Wayfarer, in the SHIP frame).
 func ops() -> String:
-	if deadship != null:
+	if shared_air != null:
+		var sr := shared_air.ops()
+		if sr != "":
+			return sr
+	elif deadship != null:
 		var dr := deadship.ops()
 		if dr != "":
 			return dr
@@ -1290,6 +1320,8 @@ func _process(dt: float) -> void:
 			rec["systems"] = equipment.record()
 		if deadship != null:
 			rec["deadship"] = deadship.record()
+		if shared_air != null:
+			rec["sharedAir"] = shared_air.record()
 		WfWebPage.publish("wayfarerWalk", rec)
 	var rc: Dictionary = learning.remote_camera() if learning != null else {}
 	var f: Dictionary = _frame_pivot() if rc.is_empty() else frames["STATIONARY"]     # a station's remote camera rides the stationary ship
@@ -1734,6 +1766,8 @@ func _layout() -> void:
 func _page() -> Control:
 	if deadship != null and deadship.panel.visible:
 		return deadship.panel
+	if shared_air != null and shared_air.panel.visible:
+		return shared_air.panel
 	if learning != null and learning.panel.visible:
 		return learning.panel
 	return null
@@ -1775,6 +1809,8 @@ func where() -> String:
 	return "crew tube " + "AB"[k]
 
 func _goal_text() -> String:
+	if shared_air != null:
+		return shared_air.goal_text()
 	if deadship != null:
 		return deadship.goal_text()
 	if equipment != null and equipment.goal_text() != "":
@@ -1843,6 +1879,8 @@ func use_label() -> String:
 		return ""
 	if deadship != null and deadship.use_label() != "":
 		return deadship.use_label()
+	if shared_air != null and shared_air.use_label() != "":
+		return shared_air.use_label()
 	var w := _walk_target()
 	var ls_i := _learning_in_reach()
 	if ls_i >= 0 and (learning.open == ls_i or w == ""):
@@ -1864,7 +1902,10 @@ func touch_state() -> Dictionary:
 		acts.append(["exc.use", u, "primary_game"])
 	if move == "WALK":
 		acts.append(["exc.jump", "Jump", "game"])     # LOCO-003: the phone had no jump; running is the stick pushed to its rim
-	if deadship != null:
+	if shared_air != null:
+		if shared_air.ops_label() != "":
+			acts.append(["exc.ops", shared_air.ops_label(), "game"])
+	elif deadship != null:
 		if deadship.ops_label() != "":
 			acts.append(["exc.ops", deadship.ops_label(), "game"])
 	elif equipment != null and move == "WALK" and equipment.in_reach(actor.global_position, walk_zone):
@@ -1899,7 +1940,7 @@ func _prompt_text() -> String:
 	else:
 		var d := _walk_target()
 		var ls_i := _learning_in_reach()
-		var dl := deadship.use_label() if deadship != null else ""
+		var dl := deadship.use_label() if deadship != null else (shared_air.use_label() if shared_air != null else "")
 		if dl != "":
 			out.append("%s %s" % [key("exc.use"), dl.trim_prefix("Use · ")])
 		elif ls_i >= 0 and (learning.open == ls_i or d == ""):
@@ -1908,7 +1949,10 @@ func _prompt_text() -> String:
 			out.append("%s take the ladder" % key("exc.use"))
 		elif d != "":
 			out.append("%s %s door %s" % [key("exc.use"), "close" if circ_doors[d]["target"] > 0.0 else "open", str(d).trim_prefix("CIRC.")])
-		if deadship != null:
+		if shared_air != null:
+			if shared_air.ops_label() != "":
+				out.append("%s %s" % [key("exc.ops"), shared_air.ops_label().trim_prefix("Ops · ")])
+		elif deadship != null:
 			if deadship.ops_label() != "":
 				out.append("%s %s" % [key("exc.ops"), deadship.ops_label().trim_prefix("Ops · ")])
 		elif equipment != null and equipment.in_reach(actor.global_position, walk_zone):
@@ -1947,6 +1991,9 @@ func _update_hud() -> void:
 	if deadship != null and deadship.verified:
 		lines_out.append_array(deadship.lines())
 		deadship.update_panel(get_viewport().get_visible_rect().size)
+	if shared_air != null and shared_air.verified:
+		lines_out.append_array(shared_air.lines())
+		shared_air.update_panel(get_viewport().get_visible_rect().size)
 	_page_hud()
 	hud_check.text = "\n".join(lines_out)
 	hud_prompt.text = WfKeyText.rich(_prompt_text())
