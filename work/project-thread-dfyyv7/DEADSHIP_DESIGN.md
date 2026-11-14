@@ -1148,6 +1148,7 @@ runs press the player's real key or tap the real button only at the action point
 | Carried spare | **Defect:** the box hung at waist height, about 53° under the eye line, outside the 75° first-person view; the trainee could not see what they carried | **Fixed:** carried at chest height (about 34° under the eyes) and the goal line adds "Carrying: the spare fan". Verified geometrically, not visually: the `deadship` check asserts the carried box lies inside the first-person view when the trainee looks level (33.7° under the eye line against a 37.5° half-angle, 3° kept as margin) |
 | Watch and debrief | The watch runs 12 s real with the board ticking; the debrief explains what failed, how it was found, why isolation, what changed, why stable | None |
 | Replay | Ops at the bay after the end replays from the same start; the goal line says so | None |
+| Bay board on an upright phone | Standing at the bay, the 3D status board (a billboard above the bay, world text) is large on a narrow screen and crosses the Map and ? buttons and the map. Buttons stay tappable (they are drawn above it) | **Open (DS-O10):** a world-space design choice, not a layout bug; options are a smaller board on compact screens or a board fixed to the bay face. Left for the owner's playtest |
 | Phone | Page over the HUD; map under the Map and ? buttons on an upright phone; "%%" in the footer | **Fixed** (§22.1) |
 
 ### 22.3 Validation (Phase 1 finalization)
