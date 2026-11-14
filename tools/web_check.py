@@ -215,9 +215,11 @@ HIDDEN_PICK = ('(async () => { const w = window.wayfarer; await w.update(s => { 
                'await w.update(s => { s.overrides.set("a:" + before.assembly, "HIDDEN"); }); const after = w.pickAt({x}, {y}); '
                'await w.update(s => { s.overrides.delete("a:" + before.assembly); }); '
                'return {hidden_assembly: before.assembly, picked_after: after && after.id, ok: !after || after.assembly !== before.assembly}; })()')
+# the propulsion assembly the vehicle links: the Vertex cluster or the historical Fiji drive (propulsion_representation)
 GHOST_PICK = ('(async () => { const w = window.wayfarer, T = w.THREE; '
-              'await w.update(s => { s.focus = {kind: "assembly", id: "Assembly_PROPULSION001"}; }); w.frameSelection(); '
-              'const subject = w.records.filter(r => r.assembly === "Assembly_PROPULSION001"); const box = new T.Box3(); '
+              'const prop = [...w.groups.keys()].find(k => k.startsWith("Assembly_PROPULSION")); '
+              'await w.update(s => { s.focus = {kind: "assembly", id: prop}; }); w.frameSelection(); '
+              'const subject = w.records.filter(r => r.assembly === prop); const box = new T.Box3(); '
               'for (const r of subject) for (const m of r.meshes) box.expandByObject(m); '
               'const sx = [], sy = []; for (let i = 0; i < 8; i++) { const v = new T.Vector3(i & 1 ? box.max.x : box.min.x, i & 2 ? box.max.y : box.min.y, '
               'i & 4 ? box.max.z : box.min.z).project(w.camera); sx.push((v.x + 1) / 2 * innerWidth); sy.push((1 - v.y) / 2 * innerHeight); } '

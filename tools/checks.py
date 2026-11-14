@@ -34,10 +34,15 @@ TARGET_ENTRIES = {
     'INTERIOR_HABITATION': ('interior',), 'INTERIOR_WORK': ('interior',), 'INTERIOR_GARDEN': ('interior',),
     'FORWARD_SHIELD': ('forward',), 'HULL': ('hull',), 'SERVICE': ('hull',), 'POWER_STORAGE': ('power',),
     'ROTOR_INTERFACE': ('rotor',), 'CREW_TRANSFER': ('crew',), 'DRONES': ('drones',), 'CHARACTERS': ('figures',),
+    'VERTEX_ENGINE': ('vertex',), 'VERTEX_RESEARCH': ('vertex',), 'PROPULSION_CLUSTER': ('vertex',),
 }
+# Parameter tables of data/wayfarer_3d.toml that one asset owns (owner brief 2026-11-14, Vertex): a change confined to them rebuilds that
+# asset and what links it (build.py dependencies: the engine -> the cluster -> the vehicle) instead of every asset. The other assets'
+# spec stamps go stale, so a scoped inspection is skipped and the full pipeline (full build) stays the pre-commit gate.
+TABLE_TARGETS = {'vertex_engine': 'VERTEX_ENGINE', 'vertex_research': 'VERTEX_RESEARCH', 'propulsion_cluster': 'PROPULSION_CLUSTER'}
 # Inspection groups (validation/inspect.py GROUPS) by the modules whose geometry or state they check.
 INSPECT_GROUPS = {
-    'drive': {'drive_manifold', 'drive_hot_section', 'drive', 'first_ignition'},
+    'drive': {'drive_manifold', 'drive_hot_section', 'drive', 'first_ignition', 'vertex_engine', 'vertex_cluster', 'vertex'},
     'rotation': {'habitat_ring', 'habitat_interior', 'rotor_interface', 'rotor', 'interior', 'sector_whitebox', 'route_fitout', 'revision',
                  'crew_transfer', 'crew', 'production_detail', 'production'},
     'hull': {'hull_geometry', 'hull', 'human_entry', 'survival', 'survival_fit', 'storeroom', 'power', 'power_storage', 'fitout'},
@@ -207,7 +212,7 @@ def plan(root=ROOT, paths=None, base='HEAD'):
             reverse[d].add(p)
     tests = sorted(p for p in g if p.parent == Path('tests') and p.name.startswith('test_'))
     widen = {}                      # reason -> True: run everything of that kind
-    touched = set(); reasons = {}; godot_changed = []; data_files = []; data_values = False; packs_touched = set(); materials_changed = []
+    touched = set(); reasons = {}; godot_changed = []; data_files = []; data_values = False; table_targets = set(); test_only = set(); packs_touched = set(); materials_changed = []
     for rel in paths:
         p = Path(rel)
         pack = pack_name(rel)
@@ -244,18 +249,21 @@ def plan(root=ROOT, paths=None, base='HEAD'):
             continue
         if keys is None:
             widen[f'{rel} not comparable with {base}'] = True; reasons[rel] = 'new or unreadable at base: everything'; continue
-        named = []
+        named = []; owned = {table for table, _ in keys if table in TABLE_TARGETS}
         for table, key in sorted(keys, key=str):
-            needle = f"'{key}'" if key else f"'{table}'"
+            needle = f"'{key}'" if key and table not in TABLE_TARGETS else f"'{table}'"     # an asset-owned table's keys are read through the table
             users = {q for q in g if q.parts[0] == 'src' and needle in (root/q).read_text(errors='replace')}
             if not users and key:
                 users = {q for q in g if q.parts[0] == 'src' and f"'{table}'" in (root/q).read_text(errors='replace')}
             if not users:
                 widen[f'no module names {table}.{key}'] = True
-            touched.update(users); named.append(f'{table}.{key}' if key else table)
+            (test_only if table in TABLE_TARGETS else touched).update(users); named.append(f'{table}.{key}' if key else table)
         if named:
             touched.update(q for q in g if q.stem in ('test_spec', 'test_owner_targets'))      # owner numbers and spec validation
-            data_values = True
+            if owned == {table for table, _ in keys}:
+                table_targets |= {TABLE_TARGETS[x] for x in owned}
+            else:
+                data_values = True
         reasons[rel] = 'changed keys ' + ', '.join(named[:12]) + (' ...' if len(named) > 12 else '') if named else 'no value change'
     # Tests: a test is selected when its import closure reaches a touched module. The spec loader is a boundary: every test loads the
     # spec, whose validation imports the shared formulas, so a change there selects the spec and owner-target tests (and the pipeline's
@@ -263,8 +271,8 @@ def plan(root=ROOT, paths=None, base='HEAD'):
     spec_paths = [q for q in g if q.stem == 'spec' and q.parts[0] == 'src']
     cut = {q: (set() if q in spec_paths else ds) for q, ds in g.items()}
     everything = bool(widen)
-    selected = set(tests) if everything else {t for t in tests if closure(cut, [t]) & touched}
-    if touched & closure(g, spec_paths):
+    selected = set(tests) if everything else {t for t in tests if closure(cut, [t]) & (touched | test_only)}
+    if (touched | test_only) & closure(g, spec_paths):
         selected.update(t for t in tests if t.stem in ('test_spec', 'test_owner_targets'))
     stems = {q.stem for q in touched}
     # Inspection groups: the touched modules' groups and their neighbours; the generators importing a touched module count too
@@ -294,7 +302,9 @@ def plan(root=ROOT, paths=None, base='HEAD'):
             pmds_targets = set(hit)
             for rel in materials_changed:
                 reasons[rel] += f": {', '.join(hit) or 'no bound asset'}"
-    targets = sorted(set(targets) | pack_targets | pmds_targets)
+    targets = sorted(set(targets) | pack_targets | pmds_targets | table_targets)
+    if table_targets and not used_by_build:
+        used_by_build = {True}
     groups |= pack_groups
     for k in list(groups):
         groups |= NEIGHBOURS[k]
@@ -319,11 +329,12 @@ def plan(root=ROOT, paths=None, base='HEAD'):
     return {
         'changed': paths, 'reasons': reasons, 'widened_by': sorted(widen),
         'tests': sorted(t.stem for t in selected), 'tests_total': len(tests),
-        'build_target': target, 'inspect_groups': sorted(groups) if target else [],
+        'build_target': target, 'inspect_groups': sorted(groups) if target and not (table_targets and target != 'all') else [],
         'runtime_checks': runtime,
         'runtime_package': 'rebuild with runtime-export (geometry, exporter or rig inputs changed)' if export_inputs else
                            'reuse the published package if runtime-check reports it current' if runtime else None,
-        'note': 'scoped selection; the full pipeline remains the pre-commit gate' if not everything else 'full selection',
+        'note': ('full selection' if everything else 'scoped selection; the full pipeline remains the pre-commit gate'
+                 + ('; asset-owned parameter tables ' + ', '.join(sorted(table_targets)) + ': the other assets\' spec stamps are stale until the full build, so no scoped inspection' if table_targets and target != 'all' else '')),
     }
 
 

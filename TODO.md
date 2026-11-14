@@ -586,6 +586,12 @@ candidates of all nine classes are separate accessory assets (docs/ACCESSORIES.m
 - [ ] **P04 — Full-gate policy relaxation. PARKED, optional process change.** Retain the existing full pre-commit geometry gate. Consider
   relaxation only after scoped-versus-full evidence over several real changes demonstrates no misses. No special benchmark project.
 
+- [ ] **P06 — Vertex Propulsion Cluster (2026-11-14). SPECULATIVE working representation, owner review.** The ship shows four
+  Compact Vertex Engines (docs/MODEL.md "Vertex propulsion cluster"); the Fiji canon is unchanged. Open: the inter-engine pulse force
+  (about 68 MN, dipole order of magnitude) as a frame load case; 1.7 % radiator line of sight to the burn points; the design-point
+  heat flux (29× research, VTX-S3) and pulse rate (5.7 kHz, VTX-S1/S2); whether canon adopts a Vertex drive (owner, Drive, not
+  authorized here); six-engine layouts (`propulsion_cluster.engine_count` stays 4 until the owner asks).
+
 ## Owner routing and question continuity
 
 Canonical route: IGNITION TOC → owner workbook → S&E `15_MODEL_INTERFACES`. Request Doc is the temporary queue; Model Status

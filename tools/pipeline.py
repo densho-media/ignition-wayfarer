@@ -129,10 +129,13 @@ def scene_report(validation, derived=None, root=None):
         report['spec'] = {k: derived[k] for k in ('length_m', 'body_diameter_m', 'ring_outer_radius_m', 'ring_com_radius_m',
                                                    'floor_gravity_g', 'flight_thrust_N') if k in derived}
         checks = []
-        coast = validation.get('configurations', {}).get('COAST', {}).get('body_bounds', {}).get('size_m')
+        bounds = validation.get('configurations', {}).get('COAST', {}).get('body_bounds', {})
+        coast = bounds.get('size_m')
         if coast and 'length_m' in derived:
+            # Measured from the aft datum: with the Vertex cluster installed the body itself ends at the thrust ring, inside the datum.
+            length = bounds['max_m'][0] - min(bounds['min_m'][0], -derived['length_m'] / 2) if validation.get('vertex', {}).get('vehicle') else coast[0]
             checks.append({'check': 'COAST body length = spec length', 'expected': derived['length_m'],
-                           'measured': round(coast[0], 4), 'ok': abs(coast[0] - derived['length_m']) < 1e-3})
+                           'measured': round(length, 4), 'ok': abs(length - derived['length_m']) < 1e-3})
         if coast and 'body_diameter_m' in derived:
             checks.append({'check': 'COAST body width <= spec diameter', 'expected': derived['body_diameter_m'],
                            'measured': round(max(coast[1:]), 4), 'ok': max(coast[1:]) <= derived['body_diameter_m'] + 1e-3})

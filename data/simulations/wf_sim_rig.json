@@ -3,7 +3,7 @@
  "contract_version": 43,
  "asset_id": "WF.WAYFARER.001",
  "spec_schema": 5,
- "spec_hash": "1dd3e51ddba149c64caaaa54b978064ba8e7104413347099cc680fa48723fdfa",
+ "spec_hash": "c7ddb94864c7efb17fdaad1cfa0db528e546ffa319164b5803bb880a853fc4b8",
  "source_map_hash": "fc3d72d053f9141c26c8248844df7159101221c41e998ab051243dc008137806",
  "generated_by": "WF_PROXY_P1_001",
  "coordinates": {
@@ -200,7 +200,7 @@
    "role": "nominal line of action of the four equal nozzle thrusts",
    "known": true,
    "position_m": [
-    -136.75,
+    -165.780994,
     0.0,
     0.0
    ],
@@ -223,19 +223,19 @@
    "relation": "CENTROID",
    "interface_refs": [
     {
-     "asset": "WF_PROPULSION.blend",
+     "asset": "WF_PROPULSION_CLUSTER.blend",
      "object": "IF_NOZZLE_01"
     },
     {
-     "asset": "WF_PROPULSION.blend",
+     "asset": "WF_PROPULSION_CLUSTER.blend",
      "object": "IF_NOZZLE_02"
     },
     {
-     "asset": "WF_PROPULSION.blend",
+     "asset": "WF_PROPULSION_CLUSTER.blend",
      "object": "IF_NOZZLE_03"
     },
     {
-     "asset": "WF_PROPULSION.blend",
+     "asset": "WF_PROPULSION_CLUSTER.blend",
      "object": "IF_NOZZLE_04"
     }
    ],
@@ -288,7 +288,7 @@
    "relation": "COINCIDENT",
    "interface_refs": [
     {
-     "asset": "WF_PROPULSION.blend",
+     "asset": "WF_PROPULSION_CLUSTER.blend",
      "object": "IF_REACTOR_MOUNT"
     }
    ],
@@ -431,9 +431,9 @@
    "role": "force on the ship (+X); exhaust leaves along -X",
    "known": true,
    "position_m": [
-    -136.75,
-    2.6,
-    2.6
+    -165.780994,
+    17.740506,
+    17.740506
    ],
    "axis": [
     1.0,
@@ -454,7 +454,7 @@
    "relation": "COINCIDENT",
    "interface_refs": [
     {
-     "asset": "WF_PROPULSION.blend",
+     "asset": "WF_PROPULSION_CLUSTER.blend",
      "object": "IF_NOZZLE_01"
     }
    ],
@@ -523,9 +523,9 @@
    "role": "force on the ship (+X); exhaust leaves along -X",
    "known": true,
    "position_m": [
-    -136.75,
-    -2.6,
-    2.6
+    -165.780994,
+    -17.740506,
+    17.740506
    ],
    "axis": [
     1.0,
@@ -546,7 +546,7 @@
    "relation": "COINCIDENT",
    "interface_refs": [
     {
-     "asset": "WF_PROPULSION.blend",
+     "asset": "WF_PROPULSION_CLUSTER.blend",
      "object": "IF_NOZZLE_02"
     }
    ],
@@ -615,9 +615,9 @@
    "role": "force on the ship (+X); exhaust leaves along -X",
    "known": true,
    "position_m": [
-    -136.75,
-    2.6,
-    -2.6
+    -165.780994,
+    17.740506,
+    -17.740506
    ],
    "axis": [
     1.0,
@@ -638,7 +638,7 @@
    "relation": "COINCIDENT",
    "interface_refs": [
     {
-     "asset": "WF_PROPULSION.blend",
+     "asset": "WF_PROPULSION_CLUSTER.blend",
      "object": "IF_NOZZLE_03"
     }
    ],
@@ -707,9 +707,9 @@
    "role": "force on the ship (+X); exhaust leaves along -X",
    "known": true,
    "position_m": [
-    -136.75,
-    -2.6,
-    -2.6
+    -165.780994,
+    -17.740506,
+    -17.740506
    ],
    "axis": [
     1.0,
@@ -730,7 +730,7 @@
    "relation": "COINCIDENT",
    "interface_refs": [
     {
-     "asset": "WF_PROPULSION.blend",
+     "asset": "WF_PROPULSION_CLUSTER.blend",
      "object": "IF_NOZZLE_04"
     }
    ],
@@ -2664,8 +2664,8 @@
    "name": "WF_SIMPROXY_PLUME_STUDY",
    "anchor": "WF_SIM_THRUST_CENTER",
    "shape": "frustum",
-   "x0_m": -8.0,
-   "x1_m": -58.0,
+   "x0_m": 21.030993999999993,
+   "x1_m": -28.969006000000007,
    "radius0_m": 5.426955262170047,
    "radius1_m": 18.82441488372618,
    "purpose": "hypothetical 15 deg plume keep-out around all four nozzle exits, drawn aft of the exit plane for a PROTOTYPE display reach (the radiator blades lie wholly ahead of that plane)",
@@ -2974,7 +2974,7 @@
    "reason": "Strong-field exclusion boundary not supplied by inspected owner ranges."
   },
   "drive_manifold": {
-   "control": "WF_PROPULSION.blend:DRIVE_MANIFOLD_CTRL",
+   "control": "WF_PROPULSION_CLUSTER.blend:DRIVE_MANIFOLD_CTRL",
    "units": "normalized 0-1; no physical rating",
    "status": "PROTOTYPE rig over the WORKING optical control layer and the LOCKED four-way topology",
    "causal_chain": "laser A/B -> distributor -> optical_gate_n -> LATTICE_SECTOR_n -> flux domain n -> PLASMA_BRANCH_n -> Nozzle_0n",
@@ -19591,7 +19591,7 @@
   "file": "data/simulations/wf_first_ignition_timeline.json",
   "schema": "WF_FLIGHT_TIMELINE",
   "timeline_version": 2,
-  "sha256": "de9ad93a9df10ec185fc20561a8221f89316e9ec635115e7578a626d7967abd6",
+  "sha256": "c344ac1fa3ba5803b9a79ca6eeab2e99443fdd6b58c4cd4d7a8ad9ce335494b8",
   "status": "PROTOTYPE",
   "fps": 24,
   "frame_range": [

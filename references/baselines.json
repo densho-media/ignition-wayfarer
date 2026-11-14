@@ -1,6 +1,6 @@
 {
   "purpose": "Current production geometry baseline for tools/pipeline.py fingerprint diffs. Written only by `tools/workflow.py baseline`.",
-  "current": "references/baseline_forward_shield_eye_window",
+  "current": "references/baseline_vertex_cluster_lean",
   "history": [
     {
       "baseline": "references/baseline_fwd_eye_r30_hex",
@@ -81,6 +81,10 @@
     {
       "baseline": "references/baseline_hero_camera_lighting",
       "replaced_utc": "2026-11-05T07:44:26Z"
+    },
+    {
+      "baseline": "references/baseline_forward_shield_eye_window",
+      "replaced_utc": "2026-11-14T10:13:32Z"
     }
   ],
   "pruned": "2026-11-06: every history baseline folder was removed from the tree; restore one with `git checkout 9115cc8 -- <baseline>`."

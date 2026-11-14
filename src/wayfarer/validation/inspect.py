@@ -29,6 +29,8 @@ import production_detail
 import modules
 import habitat_ring
 import drive_manifold
+import vertex_cluster
+import vertex_engine
 import drive_hot_section
 import power_storage
 import rotor_interface
@@ -44,6 +46,7 @@ forward_inspect=importlib.util.module_from_spec(_spec);_spec.loader.exec_module(
 _spec=importlib.util.spec_from_file_location('radiator_inspect',Path(__file__).resolve().with_name('radiator_inspect.py'))
 radiator_inspect=importlib.util.module_from_spec(_spec);_spec.loader.exec_module(radiator_inspect)
 import time
+PROPULSION_CLUSTER_LIBS={'WF_PROPULSION_CLUSTER.blend','WF_VERTEX_ENGINE.blend'}
 _STAGE=[time.monotonic()]
 def stage(name):
     """Print the seconds spent since the previous stage (WF_INSPECT_STAGE), for profiling the inspection."""
@@ -168,7 +171,63 @@ def drive_mismatch(s,values):
     """Pose the linked drive control in memory; largest difference between evaluated drivers and drive_manifold.display().
     Settings the state leaves out (debug toggles, thrust_level) return to their saved values, as display() assumes."""
     pose_drive_state({**drive_manifold.SAVED_SETTINGS,**values});deps=bpy.context.evaluated_depsgraph_get()
-    return max(abs(drive_readback(bpy.data.objects[n],p,i,deps)-want) for (n,p,i),want in drive_manifold.display(s,values).items())
+    return max(abs(drive_readback(bpy.data.objects[n],p,i,deps)-want) for (n,p,i),want in drive_display(s,values).items())
+
+
+def vertex_active(s):
+    return vertex_cluster.active(s)=='VERTEX_CLUSTER'
+
+
+def drive_display(s,values):
+    """The linked propulsion representation's display: the Fiji drive's drivers, or the Vertex cluster's per-engine effects."""
+    return (vertex_cluster.display if vertex_active(s) else drive_manifold.display)(s,values)
+
+
+def vertex_engine_checks(s,objects):
+    """Asset B: every part of vertex_engine.parts is in the file, in its functional sub-collection, with its evidence class; the drawn
+    envelope stays inside the engine's declared limit."""
+    fam=vertex_engine.families(vertex_engine.parts(s))
+    want={name:ps[0] for name,ps in fam};by={o.name:o for o in objects}
+    assert set(want)<=set(by),f'Missing engine parts: {sorted(set(want)-set(by))[:6]}'
+    for name,p in want.items():
+        o=by[name];assert o['wf_category']==p['category'] and o['wf_evidence']==p['evidence'] and o.users_collection[0].name==vertex_engine.CATEGORIES[p['category']][0],name
+        assert o.get('wf_function')==vertex_engine.CATEGORIES[p['category']][1],(name,o.get('wf_function'))
+    rr=max(math.hypot(v.co.y,v.co.z) for n in want for v in by[n].data.vertices)
+    assert rr<=vertex_engine.config(s)['geometry']['max_radius_m']+1e-5,rr
+    assert all(i['name'] in by for i in vertex_engine.interfaces(s)),'Engine interfaces'
+    root=bpy.data.collections['WF_VERTEX_ENGINE'];e=vertex_engine.config(s)
+    assert root['wf_asset_id']==e['id'] and root['wf_asset_version']==e['version'],'Engine identity'
+    assert all(by[name].get('wf_units',1)==len(ps) for name,ps in fam),'Engine exchange-unit families'
+    return {'parts':sum(len(ps) for _,ps in fam),'objects':len(want),'max_radius_m':round(rr,4),'categories':sorted({p['category'] for p in want.values()})}
+
+
+def vertex_cluster_checks(s,objects):
+    """Asset C: four collection instances of WF_VERTEX_ENGINE at vertex_cluster.placements, one effect object per engine and effect sharing
+    one mesh, the drivers and actions of the cluster control, and the cluster interfaces."""
+    ob=bpy.data.objects;by={o.name:o for o in objects}
+    for pl in vertex_cluster.placements(s):
+        inst=ob[pl['name']];col=inst.instance_collection
+        assert inst.instance_type=='COLLECTION' and col.name=='WF_VERTEX_ENGINE' and col.library and col.library.filepath.endswith('WF_VERTEX_ENGINE.blend'),pl['name']
+        assert inst['component_id']==pl['ident'],pl['name']
+        assert all(math.isclose(a,b,abs_tol=1e-6) for r1,r2 in zip(inst.matrix_world,Matrix(vertex_cluster.matrix(pl))) for a,b in zip(r1,r2)),f'{pl["name"]} placement'
+    fx=vertex_cluster.effect_objects(s)
+    assert all(o['object'] in by for o in fx),'Effect objects'
+    for name in {o['name'] for o in fx}:
+        assert len({by[o['object']].data.name for o in fx if o['name']==name})==1,f'{name}: one shared mesh across engines'
+    ctrl=ob[drive_manifold.CONTROL]
+    assert all(math.isclose(ctrl[k],v) for k,v in {**drive_manifold.neutral(s),**drive_manifold.SAVED_SETTINGS}.items()) and ctrl.animation_data is None,'Cluster control saved neutral'
+    drivers=0
+    for name,path,index,expression in vertex_cluster.drivers(s):
+        fc=next(f for f in ob[name].animation_data.drivers if f.data_path==path and (index==-1 or f.array_index==index))
+        assert fc.driver.expression==expression and fc.driver.is_valid and fc.driver.is_simple_expression,(name,path,index)
+        assert all(v.targets[0].id==ctrl for v in fc.driver.variables),(name,path)
+        drivers+=1
+    owned=[a for a in bpy.data.actions if a.get('wf_owner')=='wayfarer.p0']
+    assert sorted(a.name for a in owned)==sorted(drive_manifold.actions(s)),'Cluster actions'
+    for i in vertex_cluster.interfaces(s):
+        assert (by[i['name']].matrix_world.translation-Vector(i['at'])).length<1e-5,i['name']
+    assert not any(n.startswith(('Nozzle_','PLASMA_','DRIVE_DEBUG')) for n in by),'Fiji drive objects in the cluster'
+    return {'engines':4,'effects':len(fx),'drivers':drivers,'check':vertex_cluster.check(s)}
 
 
 def propulsion_checks(s,objects):
@@ -275,7 +334,7 @@ def hot_section_checks(s,objects,name):
             if tiles:o=by[f'PFC_NOZZLE_STRIKE_{c["index"]:02}'];pfc_ok(o,'nozzle_adjacent',tiles,1);assert o['strike_module'] and o['liner_performance'].startswith('UNKNOWN'),o.name
         assert len([o for o in objects if o.get('kind')=='pfc_band'])==len(s['drive_hot_section']['nozzle_strike_module_coils'])
         report['bands']=len(bands)
-    elif name=='WF_STRUCTURE.blend':
+    elif name=='WF_STRUCTURE.blend' and not vertex_active(s):
         for q in drive_manifold.nozzle_pickups(s):
             pts=curve_points(by[q['name']]);assert len(pts)==2 and (Vector(pts[0])-Vector(q['a'])).length<1e-5 and (Vector(pts[1])-Vector(q['b'])).length<1e-5,q['name']
         sp=drive_manifold.spine_span(s);xs=[v.co.x for v in by['Structural_Spine'].data.vertices]
@@ -600,8 +659,12 @@ def timeline_checks(s,root,blades):
             if rotor['spin_fraction']==0:
                 assert abs(math.remainder(turn[0][j]-math.radians(s['prototype']['rotor_phase_deg'][j]),math.tau))<1e-5,(name,j,'off the index angle at rest')
         drive=by[drive_manifold.CONTROL];worst=drive_mismatch(s,drive);assert worst<1e-5,f'{name}: drive drivers off by {worst}'
-        end=bpy.data.objects['PLASMA_EXHAUST_1'].evaluated_get(bpy.context.evaluated_depsgraph_get()).data.splines[0].points[4].co[0]
-        assert abs(end-drive_manifold.exhaust_end_x(s,drive['thrust_level']))<1e-5,f'{name}: exhaust run end {end}'
+        if not vertex_active(s):
+            end=bpy.data.objects['PLASMA_EXHAUST_1'].evaluated_get(bpy.context.evaluated_depsgraph_get()).data.splines[0].points[4].co[0]
+            assert abs(end-drive_manifold.exhaust_end_x(s,drive['thrust_level']))<1e-5,f'{name}: exhaust run end {end}'
+        else:     # Vertex cluster: the N1 plume's aft end, from its evaluated length (the drivers are already compared above)
+            plume=bpy.data.objects['N1_FX_PLUME'].evaluated_get(bpy.context.evaluated_depsgraph_get())
+            end=min((plume.matrix_world@v.co).x for v in plume.data.vertices) if plume.scale[0]>0 else bpy.data.objects['N1_FX_PLUME'].matrix_world.translation.x
         radiator=radiator_inspect.check_state(s,name,by[radiator_health.CONTROL])
         forward_inspect.check_state(s,name,by[forward_shield.CONTROL])
         assert blade_matrices()==blades,f'{name}: radiator blade matrices moved'
@@ -640,7 +703,7 @@ def inspect(root=ROOT, output=None, scope=None):
     pmds_db=materials.load(root,src_doc['sources'],s['production']['exterior']['families'])
     studies={}
     blade_registry={}
-    hot_report={};summaries={};graph={};area=0;detail_report={};interfaces={};interior_report={};drive_report=None;power_report=None;rotor_report={};crew_report={}
+    vertex_report={};hot_report={};summaries={};graph={};area=0;detail_report={};interfaces={};interior_report={};drive_report=None;power_report=None;rotor_report={};crew_report={}
     interior_files={f'WF_{v}.blend':k for k,v in s['interior']['components'].items()}
     prev=None
     for path in files:
@@ -842,6 +905,10 @@ def inspect(root=ROOT, output=None, scope=None):
             assert len([o for o in objects if o.get('component_id','').startswith('WF.FLUX.')])==4
             drive_report=propulsion_checks(s,objects)
             hot_report[path.name]=hot_section_checks(s,objects,path.name)
+        if path.name=='WF_VERTEX_ENGINE.blend':
+            vertex_report['engine']=vertex_engine_checks(s,objects)
+        if path.name=='WF_PROPULSION_CLUSTER.blend':
+            vertex_report['cluster']=vertex_cluster_checks(s,objects)
         if path.name=='WF_POWER_STORAGE.blend':
             power_report=power_storage_checks(s,objects)
         if path.name in (rotor_interface.SUBSYSTEM,'WF_HABITAT.blend'):
@@ -990,7 +1057,7 @@ def inspect(root=ROOT, output=None, scope=None):
             data=obj.to_mesh();vs=[instance.matrix_world@v.co for v in data.vertices];faces=len(data.polygons);obj.to_mesh_clear()
             if faces:out.extend(vs)
         return out
-    points=[];body=[];forward_points=[];fitting_points=[];appendage_points=[];thermal_points=[];blade_cells=[];stay_names=set();counts=collections.Counter();sector_centers=[];sector_volume=0.0;spinning=[];refuge_mesh=[];capture_centres={}
+    points=[];body=[];forward_points=[];fitting_points=[];appendage_points=[];thermal_points=[];propulsion_points=[];engine_points=[];blade_cells=[];stay_names=set();counts=collections.Counter();sector_centers=[];sector_volume=0.0;spinning=[];refuge_mesh=[];capture_centres={}
     for instance in bpy.context.evaluated_depsgraph_get().object_instances:
         obj=instance.object
         if obj.type not in {'MESH','CURVE'} or obj.get('kind')=='scale_reference':continue
@@ -1005,6 +1072,10 @@ def inspect(root=ROOT, output=None, scope=None):
         if obj.get('kind')=='crew_refuge':refuge_mesh.append((abs(volume),min(v.x for v in transformed),max(v.x for v in transformed)))
         if obj.get('kind')=='dock_capture_ring':capture_centres[obj.name]=list(transformed)
         library=library_of(obj.original.library)
+        if library in PROPULSION_CLUSTER_LIBS:
+            propulsion_points.extend(transformed)
+            if library=='WF_VERTEX_ENGINE.blend':engine_points.extend(transformed)
+            continue
         if library not in excluded:
             # Service fittings are radial tubes on the stationary structure (collar to r ~6.8 m); the body zone excludes them and they are
             # bounded separately by the 14 m BASELINE maximum body diameter.
@@ -1032,18 +1103,34 @@ def inspect(root=ROOT, output=None, scope=None):
         if obj.name.startswith('Blade_Stay_'):stay_names.add(obj.name)
     stage('instance_sweep')
     full=extent(points);body_bounds=extent(body)
+    if vertex_active(s):
+        # The installed Vertex cluster is bounded separately (owner brief 2026-11-14): the engines wholly aft of the radiators, inside the forward
+        # shield's radius, its aft end inside the overall length envelope.
+        assert propulsion_points,'The Vertex cluster is not in the vehicle'
+        assert engine_points and max(v.x for v in engine_points)<min(v.x for v in thermal_points),'Engines must sit wholly aft of the radiator blades'
+        assert max(math.hypot(v.y,v.z) for v in propulsion_points)<=s['forward_shield']['diameter']['value']/2,'Cluster leaves the forward shield radius'
+        L=s['ship']['length'];overall=L['value']/2+s['forward_defense']['dust_lance']['length']['value']-min(v.x for v in propulsion_points)
+        assert overall<=L['max'],f'Overall hardware length {overall}'
+        vertex_report['vehicle']={'aft_x_m':round(min(v.x for v in propulsion_points),3),'outer_radius_m':round(max(math.hypot(v.y,v.z) for v in propulsion_points),3),'overall_hardware_length_m':round(overall,3)}
+        assert 'Assembly_PROPULSION' not in bpy.data.objects and 'Nozzle_01' not in bpy.data.objects,'Fiji and Vertex must never render together'
     plume_margins={}
     for angle in [5,10,15,20]:
         # Aft of the exit plane: radial distance outside the cone; ahead of it no cone reaches the geometry, so the margin is the axial
         # distance from the exit plane (a lower bound). Thermal members and blades lie wholly ahead of the plane in this layout.
         exit_x=-s['ship']['length']['value']/2
+        if vertex_active(s):exit_x=max(i['at'][0] for i in vertex_cluster.interfaces(s) if i['name'].startswith('IF_NOZZLE_'))
         margins=[(v.x-exit_x) if v.x>=exit_x else math.hypot(v.y,v.z)-(math.sqrt(2)*s['prototype']['nozzle_offset_m']+s['prototype']['nozzle_exit_radius_m']+(exit_x-v.x)*math.tan(math.radians(angle))) for v in thermal_points]
         plume_margins[str(angle)]=min(margins)
     assert plume_margins['15']>s['prototype']['radiator_member_clearance_m'],plume_margins
     for v in thermal_points:
         if any(abs(v.x-x)<habitat_ring.sweep_half(s) for x in habitat_ring.centers(s)):
             assert math.hypot(v.y,v.z)>habitat_ring.outer(s)+s['prototype']['radiator_member_clearance_m'],'Thermal geometry intersects rotor swept envelope'
-    assert math.isclose(body_bounds['size_m'][0],s['ship']['length']['value'],abs_tol=.002),body_bounds
+    if vertex_active(s):
+        # The body length is measured from the aft datum (the Fiji nozzle exit plane); without the nozzles the body ends at the thrust ring,
+        # inside that datum, and the installed cluster is bounded above.
+        assert math.isclose(body_bounds['max_m'][0],s['ship']['length']['value']/2,abs_tol=.002) and body_bounds['min_m'][0]>=-s['ship']['length']['value']/2-.002,body_bounds
+    else:
+        assert math.isclose(body_bounds['size_m'][0],s['ship']['length']['value'],abs_tol=.002),body_bounds
     assert max(body_bounds['size_m'][1:]) <= s['ship']['body_diameter']['value']+.002,body_bounds
     assert fitting_points and max(math.hypot(v.y,v.z) for v in fitting_points)<=s['ship']['body_diameter']['max']/2+1e-6,'Service fittings exceed the 14 m BASELINE maximum body diameter'
     assert all(math.hypot(v.y,v.z)<=s['forward_shield']['diameter']['value']/2-s['forward_shield']['radiator_shadow_margin']['value']+1e-6 for v in appendage_points),'Comms appendages leave the shield shadow (radius less the radiator shadow margin)'
@@ -1109,7 +1196,7 @@ def inspect(root=ROOT, output=None, scope=None):
     # FGR-006 forward structure at the saved pose: shield, wells, Lance, Crown, displays and the control, against forward_shield.py.
     assert forward_points,'Forward structure missing from the vehicle'
     stage('eye_rays')
-    forward_report=forward_inspect.check_saved(s,dict(body_min_x=min(v.x for v in body),thermal=thermal_points,blade_cells=blade_cells,spinning=spinning,interfaces=interfaces))
+    forward_report=forward_inspect.check_saved(s,dict(body_min_x=min(v.x for v in body) if not vertex_active(s) else min(min(v.x for v in body),-s['ship']['length']['value']/2),thermal=thermal_points,blade_cells=blade_cells,spinning=spinning,interfaces=interfaces))
     forward_states={}
     # AFT-005 radiator health display at the saved pose: overlays hidden, drivers exact, the control neutral; records the fixed-object snapshot.
     stage('forward_saved')
@@ -1135,7 +1222,7 @@ def inspect(root=ROOT, output=None, scope=None):
     assert not debug_layers_shown(deps),'Debug layers must be saved hidden'
     # Each toggle shows exactly its own layer through the linked drivers, and switching it off hides it again.
     toggles={};action_keys=0
-    for layer,toggle in drive_manifold.DEBUG_LAYERS.items() if in_scope('drive') else ():
+    for layer,toggle in drive_manifold.DEBUG_LAYERS.items() if in_scope('drive') and not vertex_active(s) else ():
         pose_drive_state({toggle:1.0});shown=debug_layers_shown(bpy.context.evaluated_depsgraph_get())
         assert shown=={f'WF_{layer}'},f'{toggle} shows {shown}'
         pose_drive_state({toggle:0.0});toggles[toggle]=f'WF_{layer}'
@@ -1151,7 +1238,7 @@ def inspect(root=ROOT, output=None, scope=None):
         _,contacts=hull_contacts(1)
         assert not contacts,f'Hull intersects the active drive: {contacts[:8]}'
     pose_drive_state({**drive_manifold.SAVED_SETTINGS,**drive_manifold.neutral(s)})
-    assert all(v==0 for (n,p,i),v in drive_manifold.display(s,drive_manifold.neutral(s)).items() if not p.startswith('hide') and p!=drive_manifold.EXHAUST_END and (p!='color' or n.startswith('PLASMA'))),'Neutral drive must collapse'
+    assert all(v==0 for (n,p,i),v in drive_display(s,drive_manifold.neutral(s)).items() if not p.startswith('hide') and p!=drive_manifold.EXHAUST_END and (p!='color' or n.startswith(('PLASMA','N1_','N2_','N3_','N4_')))),'Neutral drive must collapse'
     stage('drive_actions')
     for name in presets:
         cfg=s['configuration'][name];rotating=cfg['habitat']=='ROTATING'
@@ -1219,8 +1306,10 @@ def inspect(root=ROOT, output=None, scope=None):
         if in_scope('drive'):
           state_values=drive_manifold.configuration_state(s,name)
           worst_drive=drive_mismatch(s,state_values);assert worst_drive<1e-5,f'{name}: drive drivers off by {worst_drive}'
-          level=drive_manifold.thrust_level(s,name);end=bpy.data.objects['PLASMA_EXHAUST_1'].evaluated_get(bpy.context.evaluated_depsgraph_get()).data.splines[0].points[4].co[0]
-          assert abs(end-drive_manifold.exhaust_end_x(s,level))<1e-5,f'{name}: exhaust run end {end}'
+          level=drive_manifold.thrust_level(s,name)
+          if not vertex_active(s):
+            end=bpy.data.objects['PLASMA_EXHAUST_1'].evaluated_get(bpy.context.evaluated_depsgraph_get()).data.splines[0].points[4].co[0]
+            assert abs(end-drive_manifold.exhaust_end_x(s,level))<1e-5,f'{name}: exhaust run end {end}'
           drive_state={'state':'ACTIVE' if state_values['drive_active'] else 'OFF','thrust_level':round(level,6),'action_keys_checked':action_keys,'debug_toggles':toggles}
         stage(f'{name}:drive')
         if s['hull']['enabled'] and in_scope('hull'):
@@ -1262,6 +1351,7 @@ def inspect(root=ROOT, output=None, scope=None):
             'crew_transfer':{'assets':crew_report,'check_pass':crew_transfer.check(s)['passed'],'report':'references/p1_crew_transfer.json'},
             'human_entry':{'route_sweep':entry_route,'check_pass':human_entry.check(s)['passed'],'report':'references/p1_human_entry.json'},
             'power_storage':{**(power_report or {}),'check_pass':power_storage.check(s)['passed'],'report':'references/p1_power_storage.json'},
+            'vertex':vertex_report,
             'drive_manifold':{**(drive_report or {}),'hot_section':hot_report,'screen_pass':drive_manifold.check(s,derived(s))['passed'],'report':'references/p1_drive_manifold.json'},
             'forward_shield':{**forward_report,'preset_states':forward_states,'display_poses':forward_poses,'contract_section':'forward_defense'},
             'radiator_health':{**radiator_report,'preset_states':radiator_states,'display_poses':radiator_poses,'control_sweep':radiator_sweep,'contract_section':'radiator_health'},

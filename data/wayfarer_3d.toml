@@ -5105,3 +5105,189 @@ housing_diameter_m = 1.10
 gimbal_diameter_m = 1.30
 rotor_rpm = 6000.0
 rotor_radius_m = 0.42
+
+# ======================================================================================================================================
+# Vertex propulsion family (owner brief 2026-11-14, "Modular Vertex Engine & Integrated Propulsion Cluster"). Three assets, one direction
+# of dependency: the research demonstrator (A) is the reference the compact engine (B) is derived from; the cluster (C) places four linked
+# instances of B; the vehicle links C. Nothing here is IGNITION canon: the Fiji Drive tables above ([propulsion], [drive_manifold],
+# [prototype] nozzle_*) stay unchanged and are still built (WF_PROPULSION) as the historical four-nozzle representation. Evidence classes
+# (owner brief section 5): CALCULATED (a stated formula inside its validity range), ENGINEERING_PROTOTYPE (an arrangement chosen by
+# engineering judgment, not validated) and SPECULATIVE (needs a declared fictional capability). Detail: docs/MODEL.md "Vertex propulsion".
+[propulsion_representation]
+active = "VERTEX_CLUSTER"                     # VERTEX_CLUSTER | FIJI_FOUR_NOZZLE; the other one is built but never linked into the vehicle
+alternatives = ["FIJI_FOUR_NOZZLE", "VERTEX_CLUSTER"]
+status = "SPECULATIVE_WORKING_REPRESENTATION"
+authority = "Owner brief 2026-11-14: working ship geometry and the deployed visual representation only. No IGNITION lore, mission physics or canonical workbook value changes; the Fiji Drive canon (S&E 06, Fiji 25) stays the canon drive until the owner decides otherwise."
+
+# --- Asset A: Vertex Research Demonstrator (V4 principal generation) ------------------------------------------------------------------
+# Values copied from the pinned research imports on main (lab/studies/breakthrough-lab/imports/t05-f497778/screen.json generations.V4 and
+# imports/t00-030fc14/results/convergence.json generations.V4.summary). Engine frame: +X forward, origin at the equipment module's forward
+# face, which sits on Wayfarer's aft datum (ship X = -L/2 = -144.75 m), so local x = ship x + 144.75.
+[vertex_research]
+id = "WF-VTX-RD"
+version = "V4-gate2"
+name = "Vertex Research Demonstrator"
+generation = "V4"
+gate2_verdict = "BLOCKED"
+gate2_reason = "Feasibility Gate 2 (T05 f497778, T00 030fc14): the coupled ship diverges past 400 kt on every farm that fits the r 45 dust shadow; structure saturates near 0.13 Hz against a 0.12-0.2 Hz screen; twin nozzles do not fit. The demonstrator cannot currently meet Wayfarer's mission requirements."
+research_status = "RESEARCH_TARGET (V4) - NON_CANON"
+research_branches = ["claude/project-thread-ctwplp@f497778 (T05 geometry)", "claude/project-thread-9rsgog@030fc14 (T00 engineering, integrated baseline)"]
+import_files = ["lab/studies/breakthrough-lab/imports/t05-f497778/screen.json", "lab/studies/breakthrough-lab/imports/t00-030fc14/results/convergence.json"]
+unit = "m"
+module_length_m = 36.0                # X -180.75 to -144.75 (GEOMETRY_SPEC 01C)
+module_radius_m = 6.5
+shield_thickness_m = 3.65             # X -184.4 to -180.75 (06A)
+shield_radius_m = 7.23
+burn_x_local_m = -104.38947536652566  # x_burn -249.13947536652566 + 144.75
+closure_coils = [
+  { name = "C1", x_local_m = -43.59193968133437, r_m = 22.12849330614687, winding_minor_m = 1.5860273449859659, envelope_m = [3.0014602883648545, 4.802336461383767] },
+  { name = "C2", x_local_m = -54.82687017333294, r_m = 41.58796373779316, winding_minor_m = 0.12748817755917513, envelope_m = [3.0014602883648545, 4.802336461383767] },
+]
+loops = [
+  { name = "L1", x_local_m = -72.03978231777984, r_m = 56.03131196968549, envelope_m = 0.716763429847836 },
+  { name = "L2", x_local_m = -104.38947536652566, r_m = 97.04907914623746, envelope_m = 0.716763429847836 },
+  { name = "L3", x_local_m = -201.43855451276306, r_m = 168.09393590905643, envelope_m = 0.716763429847836 },
+]
+launcher_barrel_m = 20.0              # PR, UNKNOWN 10-20 m (01H)
+driver_galleries_deg = [90.0, 225.0, 315.0]
+loop_struts_per_loop = 6
+replaceable_segments_per_loop = 12
+# T00 convergence.json generations.V4.summary (converged, RESEARCH_TARGET)
+yield_t_TNT = 43.615613
+pulse_rate_Hz = 195.73780
+fusion_TW = 35.719794
+jet_TW = 27.861639
+thrust_MN = 2.9021
+exhaust_velocity_km_s = 19201.17208
+shield_t = 513.8942
+drive_t = 7357.6635
+departure_t = 42915.7839
+
+# --- Asset B: Compact Vertex Engine module ------------------------------------------------------------------------------------------
+# One authoritative definition. Engine frame: +X forward (toward the ship), origin at the forward face of the drive cartridge; the engine
+# lies along -X. Geometry tables hold drawn sizes only; performance lives in [vertex_engine.engineering] and every fictional capability in
+# [vertex_engine.speculative]. A smaller coil does not imply a stronger field or the research thrust (owner brief section 4).
+[vertex_engine]
+id = "WF-VTX-CE"
+version = "1.0.0"
+name = "Compact Vertex Engine"
+derived_from = "WF-VTX-RD"
+status = "SPECULATIVE_WORKING_REPRESENTATION"
+asset = "WF_VERTEX_ENGINE"
+unit = "m"
+evidence = "ENGINEERING_PROTOTYPE"     # the geometry as a whole; individual rows below carry their own class
+
+[vertex_engine.geometry]
+evidence = "ENGINEERING_PROTOTYPE"
+cartridge_length_m = 9.2              # drive cartridge: pulse conditioning, target magazine and launcher breech, driver final stage
+cartridge_radius_m = 3.4
+nose_length_m = 1.2                   # forward service nose with the cartridge access hatch
+collar_x_m = -9.2                     # thrust collar forward face: the four trunnions and the service panel (the cluster mount plane)
+collar_length_m = 1.4
+collar_outer_radius_m = 5.6
+trunnion_azimuths_deg = [45.0, 135.0, 225.0, 315.0]
+service_panel_azimuth_deg = 180.0     # engine-frame azimuth of the quick-disconnect panel; the cluster turns it to face the ship axis
+shield_forward_radius_m = 4.4         # conical shadow shield: forward and aft (burn-facing) radii, thickness
+shield_aft_radius_m = 5.4
+shield_thickness_m = 2.2
+standoff_m = 6.0                      # burn point to the shield's aft face (R_s)
+closure_coils = [
+  { name = "C1", dx_from_shield_m = -1.0, r_m = 2.5, winding_minor_m = 0.28, cryostat_minor_m = 0.50 },
+  { name = "C2", dx_from_shield_m = -3.0, r_m = 4.2, winding_minor_m = 0.30, cryostat_minor_m = 0.55 },
+]
+# nozzle loops: x relative to the burn point (+ forward); L4 is the compact engine's added collimation loop
+loops = [
+  { name = "L1", dx_from_burn_m = 2.3, r_m = 6.4, winding_minor_m = 0.34, cryostat_minor_m = 0.62 },
+  { name = "L2", dx_from_burn_m = 0.0, r_m = 7.6, winding_minor_m = 0.36, cryostat_minor_m = 0.66 },
+  { name = "L3", dx_from_burn_m = -5.6, r_m = 8.9, winding_minor_m = 0.34, cryostat_minor_m = 0.64 },
+  { name = "L4", dx_from_burn_m = -12.4, r_m = 9.9, winding_minor_m = 0.30, cryostat_minor_m = 0.60 },
+]
+segments_per_loop = 8                 # replaceable cryostat segments (exchange units), trim joints clocked 22.5 deg loop to loop
+segment_gap_deg = 1.6
+armour_offset_m = 0.16                # burn-facing armour shoe stand-off from the cryostat
+armour_minor_m = 0.22
+cage_longerons = 8                    # nozzle cage: axial longerons outside the loops, from the collar to L4
+cage_longeron_radius_m = 0.22
+cage_clearance_m = 0.45               # longeron centreline outside each loop's cryostat
+coil_struts_per_coil = 6
+coil_strut_radius_m = 0.16
+launcher_x_m = [-1.6, -9.0]           # target launcher barrel inside the cartridge (on the axis)
+launcher_radius_m = 0.30
+bore_radius_m = 0.22                  # target bore through the shadow shield
+driver_ports = 6                      # final-focus beam ports through the shield ring
+driver_port_radius_m = 2.6
+driver_port_tube_m = 0.18
+pulse_pods = 4                        # pulsed-power pods on the cartridge
+pulse_pod_size_m = [5.2, 1.3, 1.1]
+max_radius_m = 11.5                   # drawn envelope including the cage and the L4 armour (checked by vertex_engine.envelope)
+maintenance_clearance_m = 1.5         # removal and access envelope beyond max_radius, kept clear by the cluster
+
+[vertex_engine.engineering]
+evidence = "ENGINEERING_PROTOTYPE"
+fuel = "D-3He fusion targets (research fuel cycle, VTX-01); targets made in the cluster target factory and fed through the service panel"
+field_assumption = "Static superconducting closure coils C1-C2 and nozzle loops L1-L4 (REBCO class), cryogenic at 20-40 K; the loops stop and turn the burn plasma, the closure coils shape the field zero ahead of the burn (research VTX-03D)."
+thermal_interface = "Burn-facing armour shoes and the shield aft face are cooled by a liquid-lithium loop (research coil plant, ISS-014); hot supply and return through the service panel to the ship's hot circuit (1800 K radiators, HOT_RADIATOR)."
+cryogenic_interface = "Coil cryostats on their own cold loop (LOW_RADIATOR class), separate from the lithium loop; one supply/return pair through the panel."
+electrical_interface = "Driver pulse energy and coil power arrive on one bus through the panel; the pulse pods on the cartridge hold one pulse train."
+fuel_interface = "One target feed line through the panel to the magazine; the launcher fires on the engine axis through the shield bore."
+structural_arrangement = "Loads go loops -> eight cage longerons -> thrust collar -> four trunnions -> cluster cradle ring. Closure coils react on the shield aft face through six struts each. The cartridge is carried by the collar only."
+cooling_assumption = "Same armour fluence limit as the research demonstrator (CALCULATED scaling below); the absorbed heat flux is the SPECULATIVE item VTX-S3."
+mass_basis = "Drawn volume x assumed material density x solid fraction per part (vertex_engine.mass_estimate); an ENGINEERING_PROTOTYPE estimate, not a design mass."
+service = "Segment exchange from the cage rail between burns; cartridge access through the nose hatch; the whole engine leaves aft along its axis after the four trunnion pins and the panel are released."
+shield_material = "LiH body with a W/B4C burn face (research 06A/06B)"
+coil_material = "REBCO tape windings in a steel case, cryostat with MLI and an 80 K screen (research VTX-03D)"
+armour_material = "W/B4C sacrificial tiles on a CFC/Li-cooled back plate (research VTX-06B, ISS-017: CFC/Li survive all spectra)"
+structure_material = "Ti-6Al-4V and CFRP struts (ENGINEERING_PROTOTYPE)"
+
+# Material densities and solid fractions behind the mass estimate (ENGINEERING_PROTOTYPE).
+[vertex_engine.materials]
+evidence = "ENGINEERING_PROTOTYPE"
+density_kg_m3 = { structure = 4430.0, coil = 7800.0, cryostat = 600.0, shield = 820.0, armour = 12000.0, hot = 2000.0, cryo = 900.0, power = 3000.0, fuel = 1500.0, service = 2700.0, sensor = 2000.0 }
+solid_fraction = { structure = 0.25, coil = 0.55, cryostat = 0.20, shield = 1.0, armour = 0.6, hot = 0.3, cryo = 0.3, power = 0.35, fuel = 0.2, service = 0.3, sensor = 0.3 }
+
+# Fictional capabilities the compact engine needs, each tied to the Breakthrough Lab record it extends (lab/studies/breakthrough-lab,
+# registry/breakthroughs.toml). None is canon, none is selected for experiment; the CALCULATED consequences (vertex_engine.calculations)
+# say how far each one reaches beyond the research demonstrator.
+[vertex_engine.speculative]
+design_power_share = 0.25             # each engine is sized to a quarter of the V4 research fusion power (the cluster equals one V4 drive)
+items = [
+  { id = "VTX-S1", name = "Low-yield high-gain micro-pulse ignition", extends = "BT-001", effect = "D-3He targets ignite with useful gain at about 1/1000 of the research yield per pulse, so the X-ray stand-off shrinks from 64.7 m to 6 m." },
+  { id = "VTX-S2", name = "Kilohertz target delivery", extends = "BT-005", effect = "Targets arrive at tens of kHz without surviving targets meeting the previous pulse; the research rule of one target in flight is replaced by a protected multi-target injection train." },
+  { id = "VTX-S3", name = "High-flux renewable first wall", extends = "BT-002, BT-004", effect = "Armour, shield face and coil noses carry the areal heat load of a quarter-power burn at 6 m (CALCULATED ratio against the research) with lithium film cooling and continuous tile renewal." },
+  { id = "VTX-S4", name = "Compact collimating nozzle control", extends = "BT-003", effect = "A four-loop nozzle detaches the plasma at the research ideal-model efficiency inside r 10 m and keeps the field zero off the shield." },
+  { id = "VTX-S5", name = "Lightweight pulsed-power driver hall", extends = "BT-006", effect = "The shared driver hall in the former drive bay feeds four engines at the research specific mass or better." },
+]
+
+# --- Asset C: Wayfarer propulsion cluster -----------------------------------------------------------------------------------------------
+[propulsion_cluster]
+id = "WF-VTX-CL4"
+version = "1.0.0"
+name = "Wayfarer Propulsion Cluster"
+status = "SPECULATIVE_WORKING_REPRESENTATION"
+asset = "WF_PROPULSION_CLUSTER"
+evidence = "ENGINEERING_PROTOTYPE"
+engine_count = 4
+order = "N1..N4 at the owner nozzle map: +Y+Z, -Y+Z, +Y-Z, -Y-Z (propulsion.manifold.nozzle_map; EYE F1-F4 order)"
+pitch_radius_m = 24.0                 # selected by vertex_cluster.study (candidates below)
+cant_deg = 2.0                        # outward cant of each engine axis (exhaust leaves outward); axial loss 1 - cos
+front_x_m = -134.6                    # ship X of each cartridge's forward face: 1.35 m aft of the radiator blades' aft edge
+polarity = [1, -1, -1, 1]             # coil current sense per engine: adjacent engines opposite, diagonal engines equal (a magnetic quadrupole)
+hub_radius_m = 5.6                    # central magnetic reaction hub (aft of the hull, on the ship axis)
+hub_length_m = 3.0
+cradle_radius_m = 6.6                 # cradle ring around each engine at the collar station
+member_radius_m = 0.42                # spokes and chords
+thrust_strut_radius_m = 0.36          # hub -> aft thrust ring struts
+thrust_ring_nodes = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]   # thrust-ring nodes the engine thrust struts may land on; each engine takes the two nearest that clear the comms sweeps
+service_line_radius_m = 0.11
+service_line_spacing_m = 0.34
+# candidate grid the study screens (owner brief 6.1); the selection above must be one of the passing candidates
+candidate_pitch_radii_m = [18.0, 21.0, 24.0, 27.0, 30.0]
+candidate_cant_deg = [0.0, 2.0, 4.0]
+candidate_module_scales = [0.85, 1.0, 1.15]
+candidate_front_x_m = [-134.6, -137.0, -140.0]
+min_engine_gap_m = 8.0                # between adjacent maintenance envelopes' cages: service corridor (ENGINEERING_PROTOTYPE)
+min_central_opening_m = 12.5          # free radius around the ship axis (hub, HGA and telescope field, aft thrust struts)
+visual_ratio_target = [0.72, 0.92]    # cluster outer diameter / forward shield diameter (owner: comparable, not exact)
+future_configurations = [
+  { name = "SIX_ENGINE", engine_count = 6, pitch_radius_m = 28.0, note = "PARKED: parametric alternative; not built or validated" },
+]

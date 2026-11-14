@@ -177,7 +177,10 @@ are not modeled; the ring sectors carry only rough PROTOTYPE interior blocking.
 - **Power:** layered electrical storage (main battery and pulse bank aft beside the
   reactor, survival packs forward beside the refuge) and the owner's nine-step black
   start.
-- **Drive:** the optically gated Fiji/lattice magnetic manifold, rigged. It runs
+- **Drive (shown):** since 2026-11-14 the ship shows the Vertex Propulsion Cluster, a SPECULATIVE working representation (see
+  "Vertex propulsion cluster"). The Fiji drive below stays the canon drive and is rebuilt with
+  `propulsion_representation.active = "FIJI_FOUR_NOZZLE"`; the two never render together.
+- **Drive (canon):** the optically gated Fiji/lattice magnetic manifold, rigged. It runs
   from the core through a solid common plasma and a convergence throat to four
   flux channels and nozzles. The spine ends on a hub at the reactor shadow
   shield, and the three outer structural sectors carry the drive's thrust ring
@@ -2085,6 +2088,48 @@ change which input triggers an action, never forces, speeds, propellant or permi
 Controller prompts are text, not glyphs. The keyboard-layout labels were checked only on a US layout in a browser (the Web build
 reports the position's US name for keys it has no captured character for). The controller and accessibility review stays OPEN
 (49 NAV-019). Audit, library decision and stages: [references/ACI_PLAN_2026-10-17.md](../references/ACI_PLAN_2026-10-17.md).
+
+## Vertex propulsion cluster
+
+`[propulsion_representation]` selects what the vehicle links: `VERTEX_CLUSTER` (today) links `WF_PROPULSION_CLUSTER`,
+`FIJI_FOUR_NOZZLE` links the historical `WF_PROPULSION`. The status is SPECULATIVE_WORKING_REPRESENTATION by the owner brief of
+2026-11-14: working geometry and the deployed visual only; lore, mission physics and workbook values are unchanged, and the Fiji
+canon (S&E 06, Fiji 25) remains the drive of record.
+
+Three assets, one source each (`src/wayfarer/vertex_engine.py`, `vertex_cluster.py`, `components/vertex.py`):
+
+- **A, Vertex Research Demonstrator** `WF-VTX-RD` V4-gate2 (`components/WF_VERTEX_RESEARCH.blend`). The Gate 2 result is kept:
+  BLOCKED (`vertex_research.gate2_reason`). It is a reference asset and is never linked into the ship.
+- **B, Compact Vertex Engine** `WF-VTX-CE` 1.0.0 (`components/WF_VERTEX_ENGINE.blend`, build target `VERTEX_ENGINE`). The front is at
+  local X 0, thrust +X, exit at X −31.2. From the front, it has a target cartridge and launcher, a collar, a 2.2 m X-ray shield,
+  closure coils C1–C3, the burn point 6.0 m aft of the shield, and four nozzle loops L1–L4. Envelope 31.9 m × r 11.40 m (limit 11.5).
+  It has 222 parts in 12 functional categories (`VTX_<CATEGORY>` collections, with functional colours separate from the physical
+  materials). They are built as 22 objects: the closure coils and cryostats stay one object each, and every other part joins
+  one object per category and material, `VTX_<CATEGORY>_<material>` (`vertex_engine.families`; `wf_units`, `wf_parts` list the
+  parts). The cluster frame and distribution are built the same way as 9 `CL_<CATEGORY>_<material>` objects. Each exported node
+  costs about 0.43 kB in the play package, so this keeps the four placed engines inside the play download budget. The mass is about 1,084 t (drawn volume × density, ENGINEERING_PROTOTYPE). Interfaces are `IF_VTX_*`; cameras are
+  `CAM_VTX_MODULE_PERSPECTIVE`, `_CUTAWAY` and `CAM_VTX_ENGINE_REAR`. The scalings from the research engine (C-01..C-10,
+  `vertex_engine.calculations`) hold the research armour fluence: 0.375 t TNT per pulse and 0.31 TW at the research rate
+  (CALCULATED). The quarter-power design point needs 5.7 kHz and 29× the research areal heat load, which is SPECULATIVE (VTX-S1..S5,
+  each extending a Breakthrough Lab entry).
+- **C, Propulsion Cluster** `WF-VTX-CL4` 1.0.0 (`subsystems/WF_PROPULSION_CLUSTER.blend`, in `12_DRIVE`). Four linked instances
+  `ENGINE_N1..N4` of asset B sit in the owner nozzle order (+Y+Z, −Y+Z, +Y−Z, −Y−Z) at azimuth 45°, 135°, −45° and −135° on a
+  24 m pitch circle, canted 2°, with their fronts at X −134.6. Neighbours have opposite polarity (a quadrupole, so the net torque is
+  zero). The frame has a hub, cradles with trunnion pins, spokes and chords, cross-fire vanes and per-engine thrust struts to the
+  two nearest of the 12 thrust-ring nodes that clear the comms gimbal sweeps. The power bay sits at X −118.25 with
+  `IF_REACTOR_MOUNT`, six trunk lines, and six service lines per engine. Gap 12.7 m, central opening 13.7 m, outer radius 36.5 m
+  (0.81 of the shield radius), overall hardware length 323.2 m (ship max 330). Screens (`vertex_cluster.check`, `radiation`):
+  135 layouts, 57 pass. The radiator line of sight to a burn point is 1.7 %, and neighbour exhaust onto the loops is 0.48 % with
+  the baffle. The pulse force between neighbours is about 68 MN in a dipole approximation (CALCULATED order of magnitude, OPEN as a
+  load). Six engines stay parametric (`vertex_cluster.arrangement(6)`, `six_engine()`). This is a screen only: at the 24 m pitch the gap
+  is 2.3 m, so the layout fails, and it needs a 30 m pitch, which gives an outer radius of 42.5 m inside the 45 m shield radius.
+- **Effects.** One shared mesh per effect (burn core, plasma shell, ignition flash, plume, driver beams, hot loops and shield face,
+  ready lamps) is placed four times as `N<j>_FX_*`. The drivers read the dm control props on `DRIVE_MANIFOLD_CTRL`, and each engine
+  reads only its own share `s<j>`. The states are OFF, PRE_IGNITION, IGNITION_PULSE, SUSTAINED and SHUTDOWN
+  (`vertex_cluster.STATES`). Explore Ship replays them from `model/drive-<hash>.json` (the Drive panel, key D, `#drive=STATE`).
+- **Single source.** `tests/verify_vertex_propagation.py` changes C1 r 2.5 → 2.9 m in a copy, lets `tools/checks.py` select the
+  `VERTEX_ENGINE` target, and verifies the new radius in all four instances and in the exported GLB
+  (`references/evidence/vertex_cluster.json`).
 
 ## Limits
 

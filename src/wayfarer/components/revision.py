@@ -191,7 +191,8 @@ def structure(c,s):
     for j,n in enumerate(st['nozzle_pickup_nodes']):
         a=phase+n*math.tau/nodes
         line(c,f'Hub_Web_{j}',[radial(xring,st['hub_diameter_m']/2,a),radial(xring,node_r,a)],.15,metal)
-    for q in drive_manifold.nozzle_pickups(s):
+    # The Fiji nozzle pickups belong to the four-nozzle representation; the Vertex cluster lands its own thrust struts on the ring nodes.
+    for q in (drive_manifold.nozzle_pickups(s) if s.get('propulsion_representation',{}).get('active','FIJI_FOUR_NOZZLE')=='FIJI_FOUR_NOZZLE' else []):
         obj=line(c,q['name'],[q['a'],q['b']],q['radius'],gold)
         obj['attach_yoke']=f"Nozzle_Yoke_{q['nozzle']}_{q['yoke']}";obj['geometry_basis']=q['geometry_basis']
     # End the fixed outer cage before the rotor sweep region.

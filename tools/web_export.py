@@ -34,6 +34,8 @@ import web_identity
 import web_play
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'src/wayfarer'))
 import representation
+import vertex_cluster
+from spec import load as load_spec
 from workflow import write_lock
 
 THREE = {'version': '0.170.0', 'url': 'https://registry.npmjs.org/three/-/three-0.170.0.tgz',
@@ -201,13 +203,29 @@ def run(root, out=None, pipeline_run=None, draco=True, with_play=True, native=Fa
         shield_file = f'model/shield-{hashlib.sha256(shield_text.encode()).hexdigest()[:12]}.glsl'
         (viewer / shield_file).write_text(shield_text)
         shield = manifest['look']['exterior']['grammar'].get('fractal_shield')
+        # Vertex drive states (owner brief 2026-11-14): the one shared effect definition's opacities per named state and engine, keyed by
+        # the GLB nodes that carry each effect object (vertex_cluster.effect_states); none when the Fiji representation is active.
+        drive_file = None
+        spec = load_spec(root)[0]
+        if vertex_cluster.active(spec) == vertex_cluster.VERTEX:
+            effects = vertex_cluster.effect_states(spec)
+            effects['nodes'] = {}
+            for r in manifest['nodes']:
+                if r['source_name'] in effects['layers'] or r['source_name'][3:] in effects['layers']:
+                    effects['nodes'].setdefault(r['source_name'], []).append(r['node'])
+            missing = sorted({o for e in effects['engines'].values() for o in e} - set(effects['nodes']))
+            if missing:
+                return {'result': 'FAIL', 'step': 'drive-states', 'reason': f'effect objects missing from the GLB: {missing[:6]}', 'run_dir': str(run_dir)}
+            drive_text = json.dumps(effects, separators=(',', ':'))
+            drive_file = f'model/drive-{hashlib.sha256(drive_text.encode()).hexdigest()[:12]}.json'
+            (viewer / drive_file).write_text(drive_text)
         build = {'contract': 'WF_WEB_EXPLORER', 'version': 2, 'vessel': 'G.U. WAYFARER 001', 'project': 'IGNITION',
                  'git_revision': revision, 'git_dirty': dirty, 'built_utc': pipeline.utc_now(),
                  'representation': manifest['representation'], 'preset': manifest['preset'], 'blender': manifest['blender'],
                  'three': THREE['version'], 'draco': draco, 'spec_hash': manifest['spec_hash'], 'source_map_hash': manifest['source_map_hash'],
                  'coordinates': manifest['coordinates'], 'bounds_runtime_m': manifest['bounds_runtime_m'], 'triangles': manifest['triangles'],
                  'glb': {k: glb[k] for k in ('bytes', 'nodes', 'mesh_nodes', 'meshes', 'materials', 'extensions_required')},
-                 'glb_sha256': glb_sha, 'glb_file': glb_file, 'nodes_file': nodes_file, 'holo_file': holo_file, 'shield_file': shield_file,
+                 'glb_sha256': glb_sha, 'glb_file': glb_file, 'nodes_file': nodes_file, 'holo_file': holo_file, 'shield_file': shield_file, 'drive_file': drive_file,
                  'shield': shield, 'pipeline': built}
         (viewer / 'build.json').write_text(json.dumps(build, indent=2) + '\n')
         play = None

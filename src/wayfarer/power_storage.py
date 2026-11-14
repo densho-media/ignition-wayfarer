@@ -125,7 +125,7 @@ def ride_through_points(s):
     for j, x in enumerate(habitat_ring.centers(s), 1):
         where[f'ROTOR_TRANSFER_{j}'] = (('WF_STRUCTURE.blend', f'IF_ROTOR_TRANSFER_{j}'), (x, 0.0, 0.0))
     where['EYE_MOUNT'] = (('WF_EYE.blend', 'IF_EYE_MOUNT'), (L/2-p['eye_front_inset_m']-p['eye_module_depth_m'], 0.0, 0.0))
-    where['REACTOR_MOUNT'] = (('WF_PROPULSION.blend', 'IF_REACTOR_MOUNT'), (layout.at(s, p['reactor_center_x']), 0.0, 0.0))
+    where['REACTOR_MOUNT'] = ((__import__('vertex_cluster').propulsion_asset(s)+'.blend', 'IF_REACTOR_MOUNT'), (layout.at(s, p['reactor_center_x']), 0.0, 0.0))
     where['CREW_REFUGE'] = (('WF_SERVICE.blend', 'IF_CREW_REFUGE'), ((ref['x0']+ref['x1'])/2, 0.0, 0.0))
     return [dict(name=f'IF_RIDE_THROUGH_{k}', load=k, at=where[k][1], pairs_with=where[k][0]) for k in s['power_storage']['ride_through_loads']]
 

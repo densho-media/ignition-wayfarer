@@ -66,7 +66,7 @@ Picking. Hidden meshes are never hit. With a focus, the nearest Solid or Hologra
 picked only where the ray meets nothing else. A click on empty space clears the selection, not the focus.
 
 Bookmarks keep the camera part first (`#view=` or `#cam=`, as before) and add only non-default state:
-`style=hybrid&focus=a:Assembly_PROPULSION001&look=cyan&ctx=hologram&ghost=12&outl=0&ov=a:Assembly_HULL001.x,n:WF_….g`
+`style=hybrid&focus=a:Assembly_PROPULSION_CLUSTER001&look=cyan&ctx=hologram&ghost=12&outl=0&ov=a:Assembly_HULL001.x,n:WF_….g`
 (`n`/`g`/`a`/`s` = part, group, assembly, subsystem; `s`/`h`/`g`/`x` = solid, hologram, ghost, hidden). A target that a later
 build no longer has is dropped. WEB-003 links (`&style=subsystem`) still open.
 

@@ -26,6 +26,8 @@ const panel = document.getElementById('panel');
 const panelToggle = document.getElementById('panel-toggle');
 const appearancePanel = document.getElementById('appearance');
 const appearanceToggle = document.getElementById('appearance-toggle');
+const drivePanel = document.getElementById('drive');
+const driveToggle = document.getElementById('drive-toggle');
 const legend = document.getElementById('legend');
 const focusBar = document.getElementById('focusbar');
 
@@ -593,7 +595,7 @@ function setStyleLegend(name) {
 // ---- page controls -----------------------------------------------------------------------------------------------------------------
 // One drawer at a time, so a phone keeps the ship in view.
 function openDrawer(which) {
-  for (const [p, t] of [[panel, panelToggle], [appearancePanel, appearanceToggle]]) {
+  for (const [p, t] of [[panel, panelToggle], [appearancePanel, appearanceToggle], [drivePanel, driveToggle]]) {
     const open = p === which && p.hidden;
     p.hidden = !open;
     t.setAttribute('aria-expanded', String(open));
@@ -603,6 +605,7 @@ function openDrawer(which) {
 }
 panelToggle.addEventListener('click', () => openDrawer(panel));
 appearanceToggle.addEventListener('click', () => openDrawer(appearancePanel));
+driveToggle.addEventListener('click', () => openDrawer(drivePanel));
 document.getElementById('show-all').addEventListener('click', showAll);
 document.getElementById('show-all-2').addEventListener('click', showAll);
 document.getElementById('reset-appearance').addEventListener('click', resetAppearance);
@@ -635,6 +638,7 @@ window.addEventListener('keydown', e => {
   const k = e.key.toLowerCase();
   if (styles[k]) setStyleLegend(styles[k]);
   if (k === 'f') frameSelection();
+  if (k === 'd' && drive) openDrawer(drivePanel);
 });
 window.addEventListener('resize', () => { resize(); });
 
@@ -647,6 +651,69 @@ function showBuild(build) {
   link.target = '_blank'; link.rel = 'noopener';
   link.textContent = rev + (build.git_dirty ? '+dirty' : '');
   el.append('Build ', link, ` · ${(build.built_utc || '').slice(0, 10)} · ${build.preset} · ${(build.triangles || 0).toLocaleString('en')} tris`);
+}
+
+// ---- Vertex drive states (owner brief 2026-11-14) ------------------------------------------------------------------------------------
+// One shared effect definition, per-engine state: build.drive_file holds each named state's opacity (and plume length) per effect object
+// and the GLB nodes that carry it. Fields stay invisible; plasma, hot hardware and indicators are separate display layers.
+let drive = null;
+const driveState = { name: 'OFF', engines: new Set(['N1', 'N2', 'N3', 'N4']) };
+const DRIVE_LABELS = { OFF: 'Off', PRE_IGNITION: 'Pre-ignition', IGNITION_PULSE: 'Ignition', SUSTAINED: 'Sustained', SHUTDOWN: 'Shutdown' };
+async function loadDrive(build) {
+  drive = build?.drive_file ? await fetch(build.drive_file).then(r => r.ok ? r.json() : null).catch(() => null) : null;
+  if (!drive) return;
+  const peak = { FX_PLUME: 0.35, FX_PLASMA_SHELL: 0.35, FX_DRIVER_BEAMS: 0.6 };    // additive: soft volumes stay below a solid white
+  for (const [obj, nodes] of Object.entries(drive.nodes)) {
+    const fx = obj.replace(/^N\d+_/, '');
+    for (const id of nodes) {
+      const r = byId.get(id); if (!r) continue;
+      if (r.node) r.node.userData.baseScale ??= r.node.scale.x;
+      for (const m of r.meshes) {          // each engine's effect gets its own unlit, additive material in the First Ignition palette
+        const c = drive.colors?.[fx] || [1, 1, 1];
+        m.material = new THREE.MeshBasicMaterial({ color: new THREE.Color(...c), transparent: true, opacity: 0, depthWrite: false,
+                                                   blending: THREE.AdditiveBlending, side: THREE.DoubleSide, toneMapped: false });
+        m.material.userData.base = { opacity: peak[fx] ?? 0.9, emissive: 1 };
+        m.userData.material = m.material;
+      }
+    }
+  }
+  const asked = /drive=(\w+)/.exec(location.hash);
+  if (asked && drive.states[asked[1]]) driveState.name = asked[1];
+  const row = drivePanel.querySelector('.drive-states');
+  for (const name of Object.keys(drive.states)) {
+    const b = document.createElement('button'); b.textContent = DRIVE_LABELS[name] || name; b.dataset.drive = name;
+    b.title = drive.states[name].description; b.addEventListener('click', () => setDrive(name)); row.append(b);
+  }
+  const eng = drivePanel.querySelector('.drive-engines');
+  for (const e of Object.keys(drive.engines)) {
+    const b = document.createElement('button'); b.textContent = e; b.dataset.engine = e; b.title = `Engine ${e} on or off`;
+    b.addEventListener('click', () => { driveState.engines.has(e) ? driveState.engines.delete(e) : driveState.engines.add(e); applyDrive(); });
+    eng.append(b);
+  }
+  driveToggle.hidden = false;
+}
+function setDrive(name) { if (drive?.states[name]) { driveState.name = name; applyDrive(); } }
+function applyDrive() {
+  if (!drive) return;
+  const st = drive.states[driveState.name];
+  for (const [engine, objects] of Object.entries(drive.engines)) {
+    const on = driveState.engines.has(engine);
+    for (const o of objects) {
+      const a = on ? (st.opacity[o] ?? 0) : 0;
+      for (const id of drive.nodes[o] || []) {
+        const r = byId.get(id); if (!r) continue;
+        if (r.node && st.scale_x[o] !== undefined) r.node.scale.x = r.node.userData.baseScale * Math.max(st.scale_x[o], 1e-3);
+        for (const m of r.meshes) {
+          m.userData.visible = a > 0;
+          // the FX material (userData.material); a style may show another material on the mesh meanwhile
+          for (const mat of [].concat(m.userData.material)) if (mat?.userData.base) mat.opacity = mat.userData.base.opacity * a;
+        }
+      }
+    }
+  }
+  for (const b of drivePanel.querySelectorAll('[data-drive]')) b.setAttribute('aria-pressed', String(b.dataset.drive === driveState.name));
+  for (const b of drivePanel.querySelectorAll('[data-engine]')) b.setAttribute('aria-pressed', String(driveState.engines.has(b.dataset.engine)));
+  update(() => {});
 }
 
 let buildInfo = null;
@@ -688,15 +755,17 @@ async function load() {
   box = new THREE.Box3().setFromObject(model);
   radius = box.getSize(new THREE.Vector3()).length() / 2;
   buildPanel();
+  await loadDrive(build);
   const asked = openBookmark();
   status.hidden = true;
   await update(s => Object.assign(s, asked));
+  applyDrive();
   stats.ready_ms = Math.round(performance.now());
   window.wayfarer = { model, groups, camera, controls, frame, build, box, renderer, stats, records, byId, state,   // for inspection and the checks
                       style: () => appliedStyle, select: node => select(node ? byId.get(node.name || node) : null), update, pickAt,
                       setStyle: setStyleLegend, resetAppearance, showAll, frameSelection,
                       setScope: k => { scope = k; showPick(); }, holo: () => holo, selected: () => selected,
-                      recordOf: o => byId.get(nodeOf(o)?.name), srgb, THREE };
+                      recordOf: o => byId.get(nodeOf(o)?.name), srgb, THREE, drive: () => ({ ...driveState, engines: [...driveState.engines] }), setDrive };
 }
 
 // Diagnostics (always measured, shown with ?diag): frame time over the last 120 frames, draw calls, GPU objects and transfer sizes.

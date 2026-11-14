@@ -601,6 +601,100 @@ the propellant and the first burn. {n} steps in {len(seq["phases"])} phases, eac
     return True
 
 
+def vertex_page(spec, out_dir, revision, built):
+    """engineering/vertex/: the propulsion lineage, Vertex Research Demonstrator -> Compact Vertex Engine -> Propulsion Cluster,
+    with every number from the pure modules (vertex_engine, vertex_cluster) and each row's evidence class."""
+    import vertex_cluster as vc
+    import vertex_engine as ve
+    if not vc.active(spec):
+        return False
+    out_dir.mkdir(parents=True, exist_ok=True)
+    r, eng, cl = spec['vertex_research'], spec['vertex_engine'], spec['propulsion_cluster']
+    fit, chk, rad = ve.fit_screen(spec), vc.check(spec), vc.radiation(spec)
+    env, mass, mag, gaps = fit['envelope'], ve.mass_estimate(spec), chk['magnetics'], chk['gaps']
+    num = lambda v: '—' if v is None else f'{v:,.4g}'
+    calc_rows = ''.join(
+        f'<tr><td><code>{c["id"]}</code> {esc(c["quantity"])}</td>'
+        f'<td class="num">{num(c["research"])}</td>'
+        f'<td class="num">{num(c["compact"])}</td><td>{esc(c["unit"])}</td><td>{tag(c["evidence"])}</td>'
+        f'<td>{esc(c["formula"])}<br><span class="meta">{esc(c["validity"])}</span></td></tr>' for c in ve.calculations(spec))
+    spec_rows = ''.join(
+        f'<tr><td><code>{esc(x["id"])}</code> {esc(x["name"])}</td><td>{tag("SPECULATIVE")}</td><td>{esc(x["effect"])}</td>'
+        f'<td>' + ', '.join(f'<a href="../breakthrough-lab/#{b.strip()}"><code>{b.strip()}</code></a>' for b in x['extends'].split(',')) + '</td></tr>'
+        for x in eng['speculative']['items'])
+    mass_rows = ''.join(f'<tr><td>{esc(k.replace("_", " ").lower())}</td><td class="num">{v / 1e3:,.0f} t</td></tr>'
+                        for k, v in sorted(mass['by_category'].items(), key=lambda kv: -kv[1]) if v >= 500)
+    figs = ''.join(f'<figure><img src="../{f}" alt="{esc(a)}" loading="lazy"><figcaption>{esc(a)}</figcaption></figure>'
+                   for f, a in (('vertex_engine.jpg', 'The Compact Vertex Engine, cut away: cartridge, collar, shield, closure coils, four nozzle loops'),
+                                ('vertex_cluster.jpg', 'The four-engine cluster at the aft end of the ship, N1..N4 in the owner nozzle order'))
+                   if (ROOT / 'web/engineering' / f).exists())
+    body = f"""<header><p class="eyebrow">Engineering · propulsion</p><h1>From the Vertex demonstrator to the four-engine cluster</h1>
+<p class="lead">The ship now shows a {tag(spec["propulsion_representation"]["status"])} drive: four copies of one reusable Compact Vertex Engine,
+  linked from a single source into a Propulsion Cluster behind the {spec["forward_shield"]["diameter"]["value"]:.0f} m shield. It is a working representation,
+  not canon: the Fiji Drive canon and every mission number stay as they are, and the research demonstrator it comes from stays BLOCKED.</p>
+  <p><a class="go" href="../../viewer/#drive=SUSTAINED">See the cluster firing in Explore Ship</a> ·
+  <a href="../breakthrough-lab/">Breakthrough Lab</a></p></header>
+{f'<section class="figs">{figs}</section>' if figs else ''}
+<section><h2>1 · Lineage</h2>
+<div class="grid2">
+ <div class="panel"><h3>A · {esc(r["name"])} <code>{esc(r["id"])}</code> {esc(r["version"])}</h3>
+  <p>{tag(r["gate2_verdict"])} {esc(r["gate2_reason"])}</p>
+  <p class="meta">{r["module_length_m"]:.0f} m module, r {r["module_radius_m"]:.1f} m, burn point {-r["burn_x_local_m"]:.0f} m aft,
+   {r["yield_t_TNT"]:.1f} t TNT at {r["pulse_rate_Hz"]:.0f} Hz, {r["fusion_TW"]:.1f} TW, {r["thrust_MN"]:.2f} MN. Kept unchanged as asset
+   <code>WF_VERTEX_RESEARCH</code>.</p></div>
+ <div class="panel"><h3>B · {esc(eng["name"])} <code>{esc(eng["id"])}</code> {esc(eng["version"])}</h3>
+  <p>{env["length"]:.1f} m long, r {env["max_radius"]:.2f} m (limit {fit["max_radius_limit"]:.1f} m), {fit["parts"]} parts in
+   {len(ve.CATEGORIES)} functional categories, about {mass["total_kg"] / 1e3:,.0f} t {tag(mass["evidence"])}. One asset,
+   <code>{esc(eng["asset"])}</code>; the cluster links it, never copies it.</p></div>
+ <div class="panel"><h3>C · {esc(cl["name"])} <code>{esc(cl["id"])}</code> {esc(cl["version"])}</h3>
+  <p>{cl["engine_count"]} engines on a {cl["pitch_radius_m"]:.0f} m pitch circle, canted {cl["cant_deg"]:.0f}°, {esc(cl["order"])}.
+   Neighbour gap {gaps["adjacent_gap_m"]:.1f} m, central opening {gaps["central_opening_m"]:.1f} m, outer radius {gaps["outer_radius_m"]:.1f} m
+   ({chk["visual_ratio"]:.2f} of the shield radius), overall hardware length {chk["overall_hardware_length_m"]:.1f} m.</p></div>
+</div>
+<h3>What changed on the way</h3>
+<ul class="plain">
+ <li><b>Retained:</b> the Vertex architecture (target cartridge and launcher, X-ray shield, closure coils, a four-loop magnetic nozzle) and the
+  research armour fluence, so the compact yield follows from the stand-off by the inverse-square law.</li>
+ <li><b>Redesigned:</b> the 104 m stand-off became {fit["stations"]["shield_aft"] - fit["stations"]["burn"]:.0f} m; the loops are re-proportioned,
+  not scaled (the loop-radius to stand-off ratios spread by more than 1.5×); the frame hands the thrust to the twelve aft thrust-ring nodes clear of
+  the antenna sweeps.</li>
+ <li><b>Miniaturized:</b> one engine is about a hundredth of the research yield per pulse and runs a quarter of the design power.</li>
+ <li><b>Speculative:</b> the five items below. Each extends a Breakthrough Lab entry and stays SPECULATIVE until that entry is resolved.</li>
+ <li><b>Unresolved:</b> the inter-engine pulse force (about {mag["adjacent_force_MN"]:.0f} MN between neighbours in a dipole approximation,
+  {mag["thrust_per_engine_MN"]:.2f} MN thrust per engine), the radiator line of sight to the burn points ({100 * rad["radiator_fraction"]:.1f} %), and the heat flux at
+  the design point, {next(c["compact"] for c in ve.calculations(spec) if c["id"] == "C-05"):.0f}× the research load.</li>
+</ul></section>
+<section><h2>2 · The numbers</h2>
+<p>Research values are the V4 demonstrator; compact values follow from the drawn geometry. {tag("CALCULATED")} rows are formulas on sourced or drawn
+  inputs, {tag("ENGINEERING_PROTOTYPE")} rows are our unsourced choices, {tag("SPECULATIVE")} rows need a breakthrough.</p>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Quantity</th><th>Research</th><th>Compact</th><th>Unit</th><th>Evidence</th><th>Formula</th></tr></thead>
+<tbody>{calc_rows}</tbody></table></div>
+<div class="grid2"><div class="panel"><h3>Engine mass by function</h3><table>{mass_rows}</table><p class="meta">{esc(mass["basis"])}</p></div>
+<div class="panel"><h3>Cluster screens</h3><table>
+ <tr><td>Layouts screened</td><td class="num">{chk["study"]["candidates"]} ({chk["study"]["passing"]} pass)</td></tr>
+ <tr><td>Neighbour exhaust seen by an engine</td><td class="num">{100 * rad["neighbour_loop_fraction"]:.2f} %</td></tr>
+ <tr><td>Radiator area seeing a burn point</td><td class="num">{100 * rad["radiator_fraction"]:.1f} %</td></tr>
+ <tr><td>Six engines instead of four</td><td class="num">pitch {chk["six_engine"]["passing_pitch_m"]:.0f} m, outer r {chk["six_engine"]["passing_outer_radius_m"]:.1f} m</td></tr>
+ <tr><td>Net magnetic torque</td><td>{esc(mag["net_torque"])}</td></tr></table>
+ <p class="meta">{esc(mag["note"])}</p></div></div></section>
+<section><h2>3 · Speculative items</h2>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Item</th><th>Status</th><th>What it assumes</th><th>Breakthrough Lab</th></tr></thead>
+<tbody>{spec_rows}</tbody></table></div>
+<p class="note">{esc(spec["propulsion_representation"]["authority"])}</p></section>"""
+    (out_dir / 'index.html').write_text(page('Vertex propulsion lineage · Wayfarer engineering',
+                                             'How the Vertex research demonstrator became the Compact Vertex Engine and the four-engine Propulsion Cluster.',
+                                             body, 2, revision, built))
+    return True
+
+
+def vertex_teaser():
+    return """<section id="vertex" class="teaser"><div>
+    <h2>Vertex propulsion · demonstrator → engine → cluster</h2>
+    <p>The drive the ship shows now: one reusable Compact Vertex Engine, four linked copies in a cluster behind the shield, every step with its
+      evidence class. A speculative working representation; the research demonstrator stays BLOCKED and the Fiji canon is unchanged.</p>
+    <p><a class="go" href="vertex/">Open the propulsion lineage</a> · <a href="breakthrough-lab/">Breakthrough Lab</a></p></div></section>"""
+
+
 def build_teaser(seq):
     """The main page's entry to engineering/build/."""
     phases = ''.join(f'<a href="build/#{next(s["id"] for s in seq["steps"] if s["phase"] == p["id"])}"><code>{p["id"][1:]}</code> {esc(p["name"])}</a>'
@@ -646,7 +740,7 @@ def lab_ship(spec):
             'length_m': spec['ship']['length']['value']}
 
 
-def main_page(site, spec, entries, dropped, problem, revision, built, play=True, lab2=None, seq=None):
+def main_page(site, spec, entries, dropped, problem, revision, built, play=True, lab2=None, seq=None, vertex=False):
     import story_lab
     n = ship_numbers(spec)
     b, m, fi = n['burn'], n['mission'], n['fi']
@@ -729,6 +823,7 @@ def main_page(site, spec, entries, dropped, problem, revision, built, play=True,
   {'<a href="build/"><b>Build sequence</b></a>' if seq else ''}</nav>
 {story_lab.teaser(lab2) if lab2 else ''}
 {build_teaser(seq) if seq else ''}
+{vertex_teaser() if vertex else ''}
 {compare_teaser(prob) if prob.get("compare") else ''}
 
 <section id="goal"><h2>1 · The goal</h2>
@@ -850,7 +945,10 @@ def build(root, site, revision=None, built=None, play=True):
     if lab2 is not None:
         import story_lab
         pages += story_lab.build(Path(site), lab2, lab_ship(spec), page, revision, built)
-    main_page(Path(site), spec, entries, dropped, problem, revision, built, play, lab2, seq)
+    vertex = vertex_page(spec, out / 'vertex', revision, built)
+    if vertex:
+        pages.append('engineering/vertex/index.html')
+    main_page(Path(site), spec, entries, dropped, problem, revision, built, play, lab2, seq, vertex)
     files = sorted(p.relative_to(site).as_posix() for p in out.rglob('*') if p.is_file())
     return {'entry': 'engineering/', 'pages': pages, 'files': len(files),
             'bytes': sum((Path(site) / f).stat().st_size for f in files), 'lab_entries': len(entries),

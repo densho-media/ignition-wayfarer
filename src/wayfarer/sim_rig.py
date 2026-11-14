@@ -25,6 +25,7 @@ import forward_shield
 import radiator_health
 import habitat_ring
 import layout
+import vertex_cluster
 import crew_dynamics
 import ship_navigator
 import space_navigator
@@ -111,6 +112,10 @@ def anchors(s):
     p=s['prototype'];st=s['structure'];d=derived(s);length=s['ship']['length']['value']
     inlet=-length/2+p['nozzle_length_m'];q=p['nozzle_offset_m']
     nozzles=[(inlet,yy*q,zz*q) for yy,zz in drive_manifold.quadrants(s)]
+    prop=vertex_cluster.propulsion_asset(s)+'.blend'      # the linked propulsion representation (owner brief 2026-11-14)
+    if prop=='WF_PROPULSION_CLUSTER.blend':
+        at={i['name']:i['at'] for i in vertex_cluster.interfaces(s)}
+        nozzles=[tuple(round(c,6)+0.0 for c in at[f'IF_NOZZLE_{j:02}']) for j in range(1,5)]     # symmetric to the mm, so the centroid is on the axis
     bearings=[(x,0.0,0.0) for x in habitat_ring.centers(s)]
     eye=(length/2-p['eye_front_inset_m']-p['eye_module_depth_m'],0.0,0.0)
     mean=lambda pts:[sum(v[i] for v in pts)/len(pts) for i in range(3)]
@@ -121,11 +126,11 @@ def anchors(s):
                 center_of_mass=quantity(s['physics']['center_of_mass']),inertia=quantity(s['physics']['inertia']),
                 mass_distribution=quantity(s['physics']['mass_distribution'])),
          anchor('WF_SIM_THRUST_CENTER','nominal line of action of the four equal nozzle thrusts',mean(nozzles),X,Z,'CENTROID',
-                [('WF_PROPULSION.blend',f'IF_NOZZLE_{j:02}') for j in range(1,5)],'DERIVED',
+                [(prop,f'IF_NOZZLE_{j:02}') for j in range(1,5)],'DERIVED',
                 flight_thrust=flight,structural_design_load=structural,
                 assumption='Nominal equal thrust per nozzle; only the line of action is meaningful, not the point along it. Use flight_thrust for flight dynamics and structural_design_load only for structural proof (15_MODEL_INTERFACES S3a).'),
          anchor('WF_SIM_REACTOR_CENTER','geometric centre of the PROTOTYPE fusion-core envelope; not a mass or heat centre',
-                (layout.at(s,p['reactor_center_x']),0,0),X,Z,'COINCIDENT',[('WF_PROPULSION.blend','IF_REACTOR_MOUNT')],'PROTOTYPE'),
+                (layout.at(s,p['reactor_center_x']),0,0),X,Z,'COINCIDENT',[(prop,'IF_REACTOR_MOUNT')],'PROTOTYPE'),
          anchor('WF_SIM_HABITAT_CENTER','midpoint of the two rotor planes; not a centre of mass',mean(bearings),X,Z,'MIDPOINT',
                 [('WF_STRUCTURE.blend','IF_ROTOR_BEARING_1'),('WF_STRUCTURE.blend','IF_ROTOR_BEARING_2')],'PROTOTYPE'),
          anchor('WF_SIM_EYE_CENTER','shared mount of the four LOCKED EYE facets',eye,X,Z,'COINCIDENT',[('WF_EYE.blend','IF_EYE_MOUNT')],'PROTOTYPE',
@@ -140,7 +145,7 @@ def anchors(s):
                   'use':'Limits only (15!G76): no vector pose is keyed and no gimbal hardware is modelled; the nozzles are mounted on the 15!A67 load path (yokes and pickups). The magnetic steering principle is grounded (Fiji 25!D64); the electromagnetic/mechanical vector authority is OPEN (06!E52).'}
     for j,(position,node) in enumerate(zip(nozzles,st['nozzle_pickup_nodes']),1):
         out.append(anchor(f'WF_SIM_NOZZLE_{j:02}_VECTOR','force on the ship (+X); exhaust leaves along -X',position,X,Z,'COINCIDENT',
-                          [('WF_PROPULSION.blend',f'IF_NOZZLE_{j:02}')],'PROTOTYPE',
+                          [(prop,f'IF_NOZZLE_{j:02}')],'PROTOTYPE',
                           flight_thrust_share={'known':True,'value':share,'unit':'N','canon_status':'DERIVED','evidence_ref':'flight_thrust',
                                                'basis':'Equal quarter share of the DERIVED peak flight thrust; the workbook notes 4.045 MN per nozzle.'},
                           structural_design_load_share={'known':True,'value':load,'unit':'N','canon_status':'DERIVED','evidence_ref':'design_thrust',
@@ -283,7 +288,7 @@ def drive_manifold_contract(s):
             'channel_loss_recovery_F3':dm.channel_loss_shares(s,failed)}
     survivors=[j for j,x in enumerate(shares['channel_loss_recovery_F3'],1) if x>0]
     study=s['propulsion']['nozzle_vector_study']
-    return {'control':f'WF_PROPULSION.blend:{dm.CONTROL}','units':'normalized 0-1; no physical rating',
+    return {'control':f'{vertex_cluster.propulsion_asset(s)}.blend:{dm.CONTROL}','units':'normalized 0-1; no physical rating',
             'status':'PROTOTYPE rig over the WORKING optical control layer and the LOCKED four-way topology',
             'causal_chain':'laser A/B -> distributor -> optical_gate_n -> LATTICE_SECTOR_n -> flux domain n -> PLASMA_BRANCH_n -> Nozzle_0n',
             'properties':dict(dm.PROPS),'display_requests':dict(dm.DEBUG_TOGGLES),

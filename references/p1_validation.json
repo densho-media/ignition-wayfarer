@@ -1,8 +1,8 @@
 {
   "result": "PASS",
   "blender": "5.2.2 LTS",
-  "spec_hash": "5f7f4ffded263007bd8f5e131ff13d3d77851787d40b92a32c280ca6a8293e58",
-  "source_map_hash": "e3fce6ca39b9e490d922a2575401d7bdff240515f613614cc960b78c5b629b4f",
+  "spec_hash": "c7ddb94864c7efb17fdaad1cfa0db528e546ffa319164b5803bb880a853fc4b8",
+  "source_map_hash": "fc3d72d053f9141c26c8248844df7159101221c41e998ab051243dc008137806",
   "configurations": {
     "COAST": {
       "realizes": [
@@ -71,7 +71,7 @@
       },
       "body_bounds": {
         "min_m": [
-          -144.75,
+          -136.38499450683594,
           -6.5,
           -6.5
         ],
@@ -81,14 +81,14 @@
           6.5
         ],
         "size_m": [
-          289.5,
+          281.13499450683594,
           13.0,
           13.0
         ]
       },
       "deployed_bounds": {
         "min_m": [
-          -144.75,
+          -166.77098083496094,
           -45.00429916381836,
           -45.004234313964844
         ],
@@ -98,14 +98,14 @@
           45.00429916381836
         ],
         "size_m": [
-          301.5,
+          323.52098083496094,
           90.00859832763672,
           90.0085334777832
         ]
       },
       "clear_eye_rays": 20,
       "evaluated_geometry_counts": {
-        "geometry": 1701,
+        "geometry": 1654,
         "thrust_node": 12,
         "thrust_node_plate": 24,
         "hull_envelope": 2,
@@ -121,27 +121,19 @@
         "cryo_feed_line": 8,
         "body_equipment": 6,
         "power_storage": 4,
-        "magnetic_field": 10,
-        "plasma": 2,
-        "spine_hub": 1,
-        "seed_coil": 4,
-        "pfc_liner": 2,
-        "lattice_sector": 4,
-        "lattice_cells": 8,
-        "pfc_band": 8,
-        "nozzle_construction": 16,
-        "nozzle_yoke": 16,
-        "nozzle_yoke_strap": 32,
-        "nozzle_service_line": 24,
-        "nozzle_service_boss": 4,
-        "nozzle_pickup_lug": 8,
-        "h2_injection_ring": 2,
-        "optical_source": 2,
-        "optical_channel": 4,
-        "optical_mirror": 18,
-        "optical_distributor": 4,
-        "optical_window": 8,
-        "optical_gate": 4,
+        "vtx_structure": 5,
+        "vtx_shielding": 10,
+        "vtx_hot_thermal": 5,
+        "vtx_cryogenic": 5,
+        "vtx_electrical": 5,
+        "vtx_fuel": 5,
+        "vtx_service": 5,
+        "vtx_instrumentation": 9,
+        "vtx_visual_effects": 56,
+        "vtx_magnetic_coils": 16,
+        "vtx_fusion_reaction": 4,
+        "vtx_target_injection": 16,
+        "vtx_magnetic_nozzle": 12,
         "radiator_cell": 480,
         "leading_edge_proxy": 6,
         "coolant_proxy": 24,
@@ -320,19 +312,15 @@
         "state": "OFF",
         "thrust_level": 1.0,
         "action_keys_checked": 86,
-        "debug_toggles": {
-          "magnetic_field_debug": "WF_DEBUG_MAGNETICS",
-          "separatrix_debug": "WF_DEBUG_SEPARATRICES",
-          "optical_debug": "WF_DEBUG_OPTICS"
-        }
+        "debug_toggles": {}
       },
       "rotation_quarter_period_verified": true,
       "rotation_locked_at_index_angle": false,
       "hypothetical_plume_vertex_margins_m": {
-        "5": 11.39990234375,
-        "10": 11.39990234375,
-        "15": 11.39990234375,
-        "20": 11.39990234375
+        "5": 32.430896146745795,
+        "10": 32.430896146745795,
+        "15": 32.430896146745795,
+        "20": 32.430896146745795
       }
     },
     "LOW_THRUST": {
@@ -402,7 +390,7 @@
       },
       "body_bounds": {
         "min_m": [
-          -144.75,
+          -136.38499450683594,
           -6.5,
           -6.5
         ],
@@ -412,14 +400,14 @@
           6.5
         ],
         "size_m": [
-          289.5,
+          281.13499450683594,
           13.0,
           13.0
         ]
       },
       "deployed_bounds": {
         "min_m": [
-          -144.75,
+          -166.77098083496094,
           -45.00429916381836,
           -45.004234313964844
         ],
@@ -429,14 +417,14 @@
           45.00429916381836
         ],
         "size_m": [
-          301.5,
+          323.52098083496094,
           90.00859832763672,
           90.0085334777832
         ]
       },
       "clear_eye_rays": 20,
       "evaluated_geometry_counts": {
-        "geometry": 1701,
+        "geometry": 1654,
         "thrust_node": 12,
         "thrust_node_plate": 24,
         "hull_envelope": 2,
@@ -452,27 +440,19 @@
         "cryo_feed_line": 8,
         "body_equipment": 6,
         "power_storage": 4,
-        "magnetic_field": 10,
-        "plasma": 2,
-        "spine_hub": 1,
-        "seed_coil": 4,
-        "pfc_liner": 2,
-        "lattice_sector": 4,
-        "lattice_cells": 8,
-        "pfc_band": 8,
-        "nozzle_construction": 16,
-        "nozzle_yoke": 16,
-        "nozzle_yoke_strap": 32,
-        "nozzle_service_line": 24,
-        "nozzle_service_boss": 4,
-        "nozzle_pickup_lug": 8,
-        "h2_injection_ring": 2,
-        "optical_source": 2,
-        "optical_channel": 4,
-        "optical_mirror": 18,
-        "optical_distributor": 4,
-        "optical_window": 8,
-        "optical_gate": 4,
+        "vtx_structure": 5,
+        "vtx_shielding": 10,
+        "vtx_hot_thermal": 5,
+        "vtx_cryogenic": 5,
+        "vtx_electrical": 5,
+        "vtx_fuel": 5,
+        "vtx_service": 5,
+        "vtx_instrumentation": 9,
+        "vtx_visual_effects": 56,
+        "vtx_magnetic_coils": 16,
+        "vtx_fusion_reaction": 4,
+        "vtx_target_injection": 16,
+        "vtx_magnetic_nozzle": 12,
         "radiator_cell": 480,
         "leading_edge_proxy": 6,
         "coolant_proxy": 24,
@@ -651,19 +631,15 @@
         "state": "ACTIVE",
         "thrust_level": 0.066667,
         "action_keys_checked": 86,
-        "debug_toggles": {
-          "magnetic_field_debug": "WF_DEBUG_MAGNETICS",
-          "separatrix_debug": "WF_DEBUG_SEPARATRICES",
-          "optical_debug": "WF_DEBUG_OPTICS"
-        }
+        "debug_toggles": {}
       },
       "rotation_quarter_period_verified": true,
       "rotation_locked_at_index_angle": false,
       "hypothetical_plume_vertex_margins_m": {
-        "5": 11.39990234375,
-        "10": 11.39990234375,
-        "15": 11.39990234375,
-        "20": 11.39990234375
+        "5": 32.430896146745795,
+        "10": 32.430896146745795,
+        "15": 32.430896146745795,
+        "20": 32.430896146745795
       }
     },
     "EVA": {
@@ -733,7 +709,7 @@
       },
       "body_bounds": {
         "min_m": [
-          -144.75,
+          -136.38499450683594,
           -6.5,
           -6.5
         ],
@@ -743,14 +719,14 @@
           6.5
         ],
         "size_m": [
-          289.5,
+          281.13499450683594,
           13.0,
           13.0
         ]
       },
       "deployed_bounds": {
         "min_m": [
-          -144.75,
+          -166.77098083496094,
           -45.00429916381836,
           -45.004234313964844
         ],
@@ -760,14 +736,14 @@
           45.00429916381836
         ],
         "size_m": [
-          301.5,
+          323.52098083496094,
           90.00859832763672,
           90.0085334777832
         ]
       },
       "clear_eye_rays": 20,
       "evaluated_geometry_counts": {
-        "geometry": 1701,
+        "geometry": 1654,
         "thrust_node": 12,
         "thrust_node_plate": 24,
         "hull_envelope": 2,
@@ -783,27 +759,19 @@
         "cryo_feed_line": 8,
         "body_equipment": 6,
         "power_storage": 4,
-        "magnetic_field": 10,
-        "plasma": 2,
-        "spine_hub": 1,
-        "seed_coil": 4,
-        "pfc_liner": 2,
-        "lattice_sector": 4,
-        "lattice_cells": 8,
-        "pfc_band": 8,
-        "nozzle_construction": 16,
-        "nozzle_yoke": 16,
-        "nozzle_yoke_strap": 32,
-        "nozzle_service_line": 24,
-        "nozzle_service_boss": 4,
-        "nozzle_pickup_lug": 8,
-        "h2_injection_ring": 2,
-        "optical_source": 2,
-        "optical_channel": 4,
-        "optical_mirror": 18,
-        "optical_distributor": 4,
-        "optical_window": 8,
-        "optical_gate": 4,
+        "vtx_structure": 5,
+        "vtx_shielding": 10,
+        "vtx_hot_thermal": 5,
+        "vtx_cryogenic": 5,
+        "vtx_electrical": 5,
+        "vtx_fuel": 5,
+        "vtx_service": 5,
+        "vtx_instrumentation": 9,
+        "vtx_visual_effects": 56,
+        "vtx_magnetic_coils": 16,
+        "vtx_fusion_reaction": 4,
+        "vtx_target_injection": 16,
+        "vtx_magnetic_nozzle": 12,
         "radiator_cell": 480,
         "leading_edge_proxy": 6,
         "coolant_proxy": 24,
@@ -982,19 +950,15 @@
         "state": "OFF",
         "thrust_level": 1.0,
         "action_keys_checked": 86,
-        "debug_toggles": {
-          "magnetic_field_debug": "WF_DEBUG_MAGNETICS",
-          "separatrix_debug": "WF_DEBUG_SEPARATRICES",
-          "optical_debug": "WF_DEBUG_OPTICS"
-        }
+        "debug_toggles": {}
       },
       "rotation_quarter_period_verified": true,
       "rotation_locked_at_index_angle": false,
       "hypothetical_plume_vertex_margins_m": {
-        "5": 11.39990234375,
-        "10": 11.39990234375,
-        "15": 11.39990234375,
-        "20": 11.39990234375
+        "5": 32.430896146745795,
+        "10": 32.430896146745795,
+        "15": 32.430896146745795,
+        "20": 32.430896146745795
       }
     },
     "HIGH_POWER": {
@@ -1061,7 +1025,7 @@
       },
       "body_bounds": {
         "min_m": [
-          -144.75,
+          -136.38499450683594,
           -6.5,
           -6.5
         ],
@@ -1071,14 +1035,14 @@
           6.5
         ],
         "size_m": [
-          289.5,
+          281.13499450683594,
           13.0,
           13.0
         ]
       },
       "deployed_bounds": {
         "min_m": [
-          -144.75,
+          -166.77098083496094,
           -45.00429916381836,
           -45.004234313964844
         ],
@@ -1088,14 +1052,14 @@
           45.00429916381836
         ],
         "size_m": [
-          301.5,
+          323.52098083496094,
           90.00859832763672,
           90.0085334777832
         ]
       },
       "clear_eye_rays": 20,
       "evaluated_geometry_counts": {
-        "geometry": 1701,
+        "geometry": 1654,
         "thrust_node": 12,
         "thrust_node_plate": 24,
         "hull_envelope": 2,
@@ -1111,27 +1075,19 @@
         "cryo_feed_line": 8,
         "body_equipment": 6,
         "power_storage": 4,
-        "magnetic_field": 10,
-        "plasma": 2,
-        "spine_hub": 1,
-        "seed_coil": 4,
-        "pfc_liner": 2,
-        "lattice_sector": 4,
-        "lattice_cells": 8,
-        "pfc_band": 8,
-        "nozzle_construction": 16,
-        "nozzle_yoke": 16,
-        "nozzle_yoke_strap": 32,
-        "nozzle_service_line": 24,
-        "nozzle_service_boss": 4,
-        "nozzle_pickup_lug": 8,
-        "h2_injection_ring": 2,
-        "optical_source": 2,
-        "optical_channel": 4,
-        "optical_mirror": 18,
-        "optical_distributor": 4,
-        "optical_window": 8,
-        "optical_gate": 4,
+        "vtx_structure": 5,
+        "vtx_shielding": 10,
+        "vtx_hot_thermal": 5,
+        "vtx_cryogenic": 5,
+        "vtx_electrical": 5,
+        "vtx_fuel": 5,
+        "vtx_service": 5,
+        "vtx_instrumentation": 9,
+        "vtx_visual_effects": 56,
+        "vtx_magnetic_coils": 16,
+        "vtx_fusion_reaction": 4,
+        "vtx_target_injection": 16,
+        "vtx_magnetic_nozzle": 12,
         "radiator_cell": 480,
         "leading_edge_proxy": 6,
         "coolant_proxy": 24,
@@ -1310,19 +1266,15 @@
         "state": "ACTIVE",
         "thrust_level": 1.0,
         "action_keys_checked": 86,
-        "debug_toggles": {
-          "magnetic_field_debug": "WF_DEBUG_MAGNETICS",
-          "separatrix_debug": "WF_DEBUG_SEPARATRICES",
-          "optical_debug": "WF_DEBUG_OPTICS"
-        }
+        "debug_toggles": {}
       },
       "rotation_quarter_period_verified": false,
       "rotation_locked_at_index_angle": true,
       "hypothetical_plume_vertex_margins_m": {
-        "5": 11.39990234375,
-        "10": 11.39990234375,
-        "15": 11.39990234375,
-        "20": 11.39990234375
+        "5": 32.430896146745795,
+        "10": 32.430896146745795,
+        "15": 32.430896146745795,
+        "20": 32.430896146745795
       }
     },
     "FIRST_IGNITION": {
@@ -1389,7 +1341,7 @@
       },
       "body_bounds": {
         "min_m": [
-          -144.75,
+          -136.38499450683594,
           -6.5,
           -6.5
         ],
@@ -1399,14 +1351,14 @@
           6.5
         ],
         "size_m": [
-          289.5,
+          281.13499450683594,
           13.0,
           13.0
         ]
       },
       "deployed_bounds": {
         "min_m": [
-          -144.75,
+          -166.77098083496094,
           -45.00429916381836,
           -45.004234313964844
         ],
@@ -1416,14 +1368,14 @@
           45.00429916381836
         ],
         "size_m": [
-          301.5,
+          323.52098083496094,
           90.00859832763672,
           90.0085334777832
         ]
       },
       "clear_eye_rays": 20,
       "evaluated_geometry_counts": {
-        "geometry": 1701,
+        "geometry": 1654,
         "thrust_node": 12,
         "thrust_node_plate": 24,
         "hull_envelope": 2,
@@ -1439,27 +1391,19 @@
         "cryo_feed_line": 8,
         "body_equipment": 6,
         "power_storage": 4,
-        "magnetic_field": 10,
-        "plasma": 2,
-        "spine_hub": 1,
-        "seed_coil": 4,
-        "pfc_liner": 2,
-        "lattice_sector": 4,
-        "lattice_cells": 8,
-        "pfc_band": 8,
-        "nozzle_construction": 16,
-        "nozzle_yoke": 16,
-        "nozzle_yoke_strap": 32,
-        "nozzle_service_line": 24,
-        "nozzle_service_boss": 4,
-        "nozzle_pickup_lug": 8,
-        "h2_injection_ring": 2,
-        "optical_source": 2,
-        "optical_channel": 4,
-        "optical_mirror": 18,
-        "optical_distributor": 4,
-        "optical_window": 8,
-        "optical_gate": 4,
+        "vtx_structure": 5,
+        "vtx_shielding": 10,
+        "vtx_hot_thermal": 5,
+        "vtx_cryogenic": 5,
+        "vtx_electrical": 5,
+        "vtx_fuel": 5,
+        "vtx_service": 5,
+        "vtx_instrumentation": 9,
+        "vtx_visual_effects": 56,
+        "vtx_magnetic_coils": 16,
+        "vtx_fusion_reaction": 4,
+        "vtx_target_injection": 16,
+        "vtx_magnetic_nozzle": 12,
         "radiator_cell": 480,
         "leading_edge_proxy": 6,
         "coolant_proxy": 24,
@@ -1638,19 +1582,15 @@
         "state": "ACTIVE",
         "thrust_level": 1.0,
         "action_keys_checked": 86,
-        "debug_toggles": {
-          "magnetic_field_debug": "WF_DEBUG_MAGNETICS",
-          "separatrix_debug": "WF_DEBUG_SEPARATRICES",
-          "optical_debug": "WF_DEBUG_OPTICS"
-        }
+        "debug_toggles": {}
       },
       "rotation_quarter_period_verified": false,
       "rotation_locked_at_index_angle": true,
       "hypothetical_plume_vertex_margins_m": {
-        "5": 11.39990234375,
-        "10": 11.39990234375,
-        "15": 11.39990234375,
-        "20": 11.39990234375
+        "5": 32.430896146745795,
+        "10": 32.430896146745795,
+        "15": 32.430896146745795,
+        "20": 32.430896146745795
       }
     },
     "DOCKED": {
@@ -1717,7 +1657,7 @@
       },
       "body_bounds": {
         "min_m": [
-          -144.75,
+          -136.38499450683594,
           -6.5,
           -6.5
         ],
@@ -1727,14 +1667,14 @@
           6.5
         ],
         "size_m": [
-          289.5,
+          281.13499450683594,
           13.0,
           13.0
         ]
       },
       "deployed_bounds": {
         "min_m": [
-          -144.75,
+          -166.77098083496094,
           -45.00429916381836,
           -45.004234313964844
         ],
@@ -1744,14 +1684,14 @@
           45.00429916381836
         ],
         "size_m": [
-          301.5,
+          323.52098083496094,
           90.00859832763672,
           90.0085334777832
         ]
       },
       "clear_eye_rays": 20,
       "evaluated_geometry_counts": {
-        "geometry": 1701,
+        "geometry": 1654,
         "thrust_node": 12,
         "thrust_node_plate": 24,
         "hull_envelope": 2,
@@ -1767,27 +1707,19 @@
         "cryo_feed_line": 8,
         "body_equipment": 6,
         "power_storage": 4,
-        "magnetic_field": 10,
-        "plasma": 2,
-        "spine_hub": 1,
-        "seed_coil": 4,
-        "pfc_liner": 2,
-        "lattice_sector": 4,
-        "lattice_cells": 8,
-        "pfc_band": 8,
-        "nozzle_construction": 16,
-        "nozzle_yoke": 16,
-        "nozzle_yoke_strap": 32,
-        "nozzle_service_line": 24,
-        "nozzle_service_boss": 4,
-        "nozzle_pickup_lug": 8,
-        "h2_injection_ring": 2,
-        "optical_source": 2,
-        "optical_channel": 4,
-        "optical_mirror": 18,
-        "optical_distributor": 4,
-        "optical_window": 8,
-        "optical_gate": 4,
+        "vtx_structure": 5,
+        "vtx_shielding": 10,
+        "vtx_hot_thermal": 5,
+        "vtx_cryogenic": 5,
+        "vtx_electrical": 5,
+        "vtx_fuel": 5,
+        "vtx_service": 5,
+        "vtx_instrumentation": 9,
+        "vtx_visual_effects": 56,
+        "vtx_magnetic_coils": 16,
+        "vtx_fusion_reaction": 4,
+        "vtx_target_injection": 16,
+        "vtx_magnetic_nozzle": 12,
         "radiator_cell": 480,
         "leading_edge_proxy": 6,
         "coolant_proxy": 24,
@@ -1966,19 +1898,15 @@
         "state": "OFF",
         "thrust_level": 1.0,
         "action_keys_checked": 86,
-        "debug_toggles": {
-          "magnetic_field_debug": "WF_DEBUG_MAGNETICS",
-          "separatrix_debug": "WF_DEBUG_SEPARATRICES",
-          "optical_debug": "WF_DEBUG_OPTICS"
-        }
+        "debug_toggles": {}
       },
       "rotation_quarter_period_verified": false,
       "rotation_locked_at_index_angle": true,
       "hypothetical_plume_vertex_margins_m": {
-        "5": 11.39990234375,
-        "10": 11.39990234375,
-        "15": 11.39990234375,
-        "20": 11.39990234375
+        "5": 32.430896146745795,
+        "10": 32.430896146745795,
+        "15": 32.430896146745795,
+        "20": 32.430896146745795
       }
     }
   },
@@ -2736,6 +2664,130 @@
     "check_pass": true,
     "report": "references/p1_power_storage.json"
   },
+  "vertex": {
+    "engine": {
+      "parts": 222,
+      "objects": 22,
+      "max_radius_m": 11.395,
+      "categories": [
+        "CRYOGENIC",
+        "ELECTRICAL",
+        "FUEL",
+        "FUSION_REACTION",
+        "HOT_THERMAL",
+        "INSTRUMENTATION",
+        "MAGNETIC_COILS",
+        "MAGNETIC_NOZZLE",
+        "SERVICE",
+        "SHIELDING",
+        "STRUCTURE",
+        "TARGET_INJECTION"
+      ]
+    },
+    "cluster": {
+      "engines": 4,
+      "effects": 56,
+      "drivers": 232,
+      "check": {
+        "gaps": {
+          "adjacent_gap_m": 12.691,
+          "central_opening_m": 13.694,
+          "outer_radius_m": 36.484,
+          "aft_x_m": -166.481
+        },
+        "overall_hardware_length_m": 323.23,
+        "visual_ratio": 0.811,
+        "study": {
+          "evidence": "ENGINEERING_PROTOTYPE",
+          "candidates": 135,
+          "passing": 57,
+          "selection": {
+            "pitch": 24.0,
+            "cant": 2.0,
+            "scale": 1.0,
+            "front_x": -134.6,
+            "ratio": 0.811,
+            "adjacent_gap_m": 12.69,
+            "central_opening_m": 13.69,
+            "outer_radius_m": 36.48,
+            "aft_x_m": -166.48,
+            "axial_loss": 0.00061,
+            "passes": true,
+            "failed": []
+          },
+          "rule_choice": {
+            "pitch": 24.0,
+            "cant": 2.0,
+            "scale": 1.0,
+            "front_x": -134.6,
+            "ratio": 0.811,
+            "adjacent_gap_m": 12.69,
+            "central_opening_m": 13.69,
+            "outer_radius_m": 36.48,
+            "aft_x_m": -166.48,
+            "axial_loss": 0.00061,
+            "passes": true,
+            "failed": []
+          },
+          "rule": "scale 1 (the engine as defined), the smallest pitch that passes, the front station nearest the hull, cant nearest 2 deg (exhaust spreads outward)",
+          "shield_diameter_m": 90.0
+        },
+        "magnetics": {
+          "evidence": "CALCULATED",
+          "field_T": 1.4637069661996522,
+          "dipole_moment_Am2": 17391678349.966297,
+          "adjacent_distance_m": 33.941125496954285,
+          "diagonal_distance_m": 48.0,
+          "adjacent_force_MN": 68.37530649339155,
+          "diagonal_force_MN": 17.093826623347894,
+          "polarity": [
+            1,
+            -1,
+            -1,
+            1
+          ],
+          "net_torque": "zero by symmetry (quadrupole arrangement)",
+          "note": "Broadside dipole approximation at the stopping field; a pulse transient, not a steady load. Chords and the hub carry it.",
+          "thrust_per_engine_MN": 0.725525
+        },
+        "six_engine": {
+          "evidence": "ENGINEERING_PROTOTYPE",
+          "engines": 6,
+          "passing_pitch_m": 30.0,
+          "passing_outer_radius_m": 42.484,
+          "azimuth_deg": {
+            "1": 60.0,
+            "2": 0.0,
+            "3": -60.0,
+            "4": -120.0,
+            "5": -180.0,
+            "6": 120.0
+          },
+          "polarity": [
+            -1,
+            1,
+            -1,
+            1,
+            -1,
+            1
+          ],
+          "gaps": {
+            "adjacent_gap_m": 2.299,
+            "central_opening_m": 13.694,
+            "outer_radius_m": 36.484,
+            "aft_x_m": -166.481
+          },
+          "passes": false,
+          "note": "Screen only: six engines at the four-engine pitch. Building it needs the frame, the shares (dm has four) and an owner decision."
+        }
+      }
+    },
+    "vehicle": {
+      "aft_x_m": -166.771,
+      "outer_radius_m": 36.138,
+      "overall_hardware_length_m": 323.521
+    }
+  },
   "drive_manifold": {
     "drivers": 74,
     "actions": [
@@ -2767,13 +2819,7 @@
       "WF_STORAGE.blend": {
         "feed_lines": 4
       },
-      "WF_STRUCTURE.blend": {
-        "pickups": 4,
-        "spine_x": [
-          -112.05,
-          140.75
-        ]
-      }
+      "WF_STRUCTURE.blend": {}
     },
     "screen_pass": true,
     "report": "references/p1_drive_manifold.json"
@@ -3164,7 +3210,7 @@
         "ring_locks": 0.0,
         "drive_active": 0.0,
         "thrust_level": 1.0,
-        "exhaust_end_x_m": -150.75,
+        "exhaust_end_x_m": -165.781006,
         "radiator_step": "HEAT_ADMITTED",
         "acceleration_g": 0.0,
         "speed_c": 0.0,
@@ -3177,7 +3223,7 @@
         "ring_locks": 0.0,
         "drive_active": 0.0,
         "thrust_level": 1.0,
-        "exhaust_end_x_m": -150.75,
+        "exhaust_end_x_m": -165.781006,
         "radiator_step": "HEAT_ADMITTED",
         "acceleration_g": 0.0,
         "speed_c": 0.0,
@@ -3190,7 +3236,7 @@
         "ring_locks": 1.0,
         "drive_active": 0.0,
         "thrust_level": 1.0,
-        "exhaust_end_x_m": -150.75,
+        "exhaust_end_x_m": -165.781006,
         "radiator_step": "HEAT_ADMITTED",
         "acceleration_g": 0.0,
         "speed_c": 0.0,
@@ -3203,7 +3249,7 @@
         "ring_locks": 1.0,
         "drive_active": 1.0,
         "thrust_level": 0.499444,
-        "exhaust_end_x_m": -148.99028,
+        "exhaust_end_x_m": -209.093048,
         "radiator_step": "HIGH_POWER_REJECTION",
         "acceleration_g": 0.7491657397107898,
         "speed_c": 0.003991106172845617,
@@ -3216,7 +3262,7 @@
         "ring_locks": 1.0,
         "drive_active": 1.0,
         "thrust_level": 1.0,
-        "exhaust_end_x_m": -150.75,
+        "exhaust_end_x_m": -221.183746,
         "radiator_step": "HIGH_POWER_REJECTION",
         "acceleration_g": 1.5000000000000002,
         "speed_c": 0.016000000000000004,
@@ -3229,7 +3275,7 @@
         "ring_locks": 0.0,
         "drive_active": 0.0,
         "thrust_level": 1.0,
-        "exhaust_end_x_m": -150.75,
+        "exhaust_end_x_m": -165.781006,
         "radiator_step": "POST_SHUTDOWN_COOLDOWN",
         "acceleration_g": 0.0,
         "speed_c": 0.016000000000000004,
@@ -3242,7 +3288,7 @@
         "ring_locks": 0.0,
         "drive_active": 0.0,
         "thrust_level": 1.0,
-        "exhaust_end_x_m": -150.75,
+        "exhaust_end_x_m": -165.781006,
         "radiator_step": "HEAT_ADMITTED",
         "acceleration_g": 0.0,
         "speed_c": 0.016000000000000004,
@@ -3479,7 +3525,7 @@
         "WF.SUBSYSTEM.HABITAT",
         "WF.SUBSYSTEM.HULL",
         "WF.SUBSYSTEM.POWER_STORAGE",
-        "WF.SUBSYSTEM.PROPULSION",
+        "WF.SUBSYSTEM.PROPULSION_CLUSTER",
         "WF.SUBSYSTEM.ROTOR_INTERFACE",
         "WF.SUBSYSTEM.SERVICE",
         "WF.SUBSYSTEM.SHIELDING",
@@ -3505,7 +3551,7 @@
         "subsystems/WF_HABITAT.blend",
         "subsystems/WF_HULL.blend",
         "subsystems/WF_POWER_STORAGE.blend",
-        "subsystems/WF_PROPULSION.blend",
+        "subsystems/WF_PROPULSION_CLUSTER.blend",
         "subsystems/WF_ROTOR_INTERFACE.blend",
         "subsystems/WF_SERVICE.blend",
         "subsystems/WF_SHIELDING.blend",
@@ -4124,6 +4170,124 @@
         "Sector_Thrust_Step_Rungs",
         "Sector_Thrust_Step_Stile_1",
         "Sector_Thrust_Step_Stile_2"
+      ],
+      "direct_links": []
+    },
+    "components/WF_VERTEX_ENGINE.blend": {
+      "generated_objects": 39,
+      "ids": [
+        "CAM_VTX_ENGINE_REAR",
+        "CAM_VTX_MODULE_CUTAWAY",
+        "CAM_VTX_MODULE_PERSPECTIVE",
+        "WF.VTX.CE.IF_VTX_BURN_POINT",
+        "WF.VTX.CE.IF_VTX_CRYOGEN",
+        "WF.VTX.CE.IF_VTX_DATA",
+        "WF.VTX.CE.IF_VTX_EXIT",
+        "WF.VTX.CE.IF_VTX_LITHIUM_RETURN",
+        "WF.VTX.CE.IF_VTX_LITHIUM_SUPPLY",
+        "WF.VTX.CE.IF_VTX_POWER",
+        "WF.VTX.CE.IF_VTX_REMOVAL_AXIS",
+        "WF.VTX.CE.IF_VTX_TARGET_FEED",
+        "WF.VTX.CE.IF_VTX_THRUST_LINE",
+        "WF.VTX.CE.IF_VTX_TRUNNION_1",
+        "WF.VTX.CE.IF_VTX_TRUNNION_2",
+        "WF.VTX.CE.IF_VTX_TRUNNION_3",
+        "WF.VTX.CE.IF_VTX_TRUNNION_4",
+        "WF.VTX.CE.VTX_C1_Cryostat",
+        "WF.VTX.CE.VTX_C1_Winding",
+        "WF.VTX.CE.VTX_C2_Cryostat",
+        "WF.VTX.CE.VTX_C2_Winding",
+        "WF.VTX.CE.VTX_CRYOGENIC_cryo",
+        "WF.VTX.CE.VTX_ELECTRICAL_power",
+        "WF.VTX.CE.VTX_FUEL_fuel",
+        "WF.VTX.CE.VTX_FUSION_REACTION_sensor",
+        "WF.VTX.CE.VTX_HOT_THERMAL_hot",
+        "WF.VTX.CE.VTX_INSTRUMENTATION_lamp",
+        "WF.VTX.CE.VTX_INSTRUMENTATION_sensor",
+        "WF.VTX.CE.VTX_MAGNETIC_NOZZLE_coil",
+        "WF.VTX.CE.VTX_MAGNETIC_NOZZLE_cryostat",
+        "WF.VTX.CE.VTX_MAGNETIC_NOZZLE_structure",
+        "WF.VTX.CE.VTX_SERVICE_service",
+        "WF.VTX.CE.VTX_SHIELDING_armour",
+        "WF.VTX.CE.VTX_SHIELDING_shield",
+        "WF.VTX.CE.VTX_STRUCTURE_structure",
+        "WF.VTX.CE.VTX_TARGET_INJECTION_armour",
+        "WF.VTX.CE.VTX_TARGET_INJECTION_power",
+        "WF.VTX.CE.VTX_TARGET_INJECTION_sensor",
+        "WF.VTX.CE.VTX_TARGET_INJECTION_structure"
+      ],
+      "direct_links": []
+    },
+    "components/WF_VERTEX_RESEARCH.blend": {
+      "generated_objects": 67,
+      "ids": [
+        "CAM_VRD_SIDE",
+        "WF.VTX.RD.VRD_Burn_Point",
+        "WF.VTX.RD.VRD_C1_Envelope",
+        "WF.VTX.RD.VRD_C1_Winding",
+        "WF.VTX.RD.VRD_C2_Envelope",
+        "WF.VTX.RD.VRD_C2_Winding",
+        "WF.VTX.RD.VRD_Driver_Gallery_225",
+        "WF.VTX.RD.VRD_Driver_Gallery_315",
+        "WF.VTX.RD.VRD_Driver_Gallery_90",
+        "WF.VTX.RD.VRD_Equipment_Module",
+        "WF.VTX.RD.VRD_L1_Segment_01",
+        "WF.VTX.RD.VRD_L1_Segment_02",
+        "WF.VTX.RD.VRD_L1_Segment_03",
+        "WF.VTX.RD.VRD_L1_Segment_04",
+        "WF.VTX.RD.VRD_L1_Segment_05",
+        "WF.VTX.RD.VRD_L1_Segment_06",
+        "WF.VTX.RD.VRD_L1_Segment_07",
+        "WF.VTX.RD.VRD_L1_Segment_08",
+        "WF.VTX.RD.VRD_L1_Segment_09",
+        "WF.VTX.RD.VRD_L1_Segment_10",
+        "WF.VTX.RD.VRD_L1_Segment_11",
+        "WF.VTX.RD.VRD_L1_Segment_12",
+        "WF.VTX.RD.VRD_L1_Strut_1",
+        "WF.VTX.RD.VRD_L1_Strut_2",
+        "WF.VTX.RD.VRD_L1_Strut_3",
+        "WF.VTX.RD.VRD_L1_Strut_4",
+        "WF.VTX.RD.VRD_L1_Strut_5",
+        "WF.VTX.RD.VRD_L1_Strut_6",
+        "WF.VTX.RD.VRD_L2_Segment_01",
+        "WF.VTX.RD.VRD_L2_Segment_02",
+        "WF.VTX.RD.VRD_L2_Segment_03",
+        "WF.VTX.RD.VRD_L2_Segment_04",
+        "WF.VTX.RD.VRD_L2_Segment_05",
+        "WF.VTX.RD.VRD_L2_Segment_06",
+        "WF.VTX.RD.VRD_L2_Segment_07",
+        "WF.VTX.RD.VRD_L2_Segment_08",
+        "WF.VTX.RD.VRD_L2_Segment_09",
+        "WF.VTX.RD.VRD_L2_Segment_10",
+        "WF.VTX.RD.VRD_L2_Segment_11",
+        "WF.VTX.RD.VRD_L2_Segment_12",
+        "WF.VTX.RD.VRD_L2_Strut_1",
+        "WF.VTX.RD.VRD_L2_Strut_2",
+        "WF.VTX.RD.VRD_L2_Strut_3",
+        "WF.VTX.RD.VRD_L2_Strut_4",
+        "WF.VTX.RD.VRD_L2_Strut_5",
+        "WF.VTX.RD.VRD_L2_Strut_6",
+        "WF.VTX.RD.VRD_L3_Segment_01",
+        "WF.VTX.RD.VRD_L3_Segment_02",
+        "WF.VTX.RD.VRD_L3_Segment_03",
+        "WF.VTX.RD.VRD_L3_Segment_04",
+        "WF.VTX.RD.VRD_L3_Segment_05",
+        "WF.VTX.RD.VRD_L3_Segment_06",
+        "WF.VTX.RD.VRD_L3_Segment_07",
+        "WF.VTX.RD.VRD_L3_Segment_08",
+        "WF.VTX.RD.VRD_L3_Segment_09",
+        "WF.VTX.RD.VRD_L3_Segment_10",
+        "WF.VTX.RD.VRD_L3_Segment_11",
+        "WF.VTX.RD.VRD_L3_Segment_12",
+        "WF.VTX.RD.VRD_L3_Strut_1",
+        "WF.VTX.RD.VRD_L3_Strut_2",
+        "WF.VTX.RD.VRD_L3_Strut_3",
+        "WF.VTX.RD.VRD_L3_Strut_4",
+        "WF.VTX.RD.VRD_L3_Strut_5",
+        "WF.VTX.RD.VRD_L3_Strut_6",
+        "WF.VTX.RD.VRD_Shadow_Shield",
+        "WF.VTX.RD.VRD_Standoff_Sphere",
+        "WF.VTX.RD.VRD_Target_Launcher"
       ],
       "direct_links": []
     },
@@ -7082,6 +7246,126 @@
       ],
       "material_bound_objects": 55
     },
+    "subsystems/WF_PROPULSION_CLUSTER.blend": {
+      "generated_objects": 112,
+      "ids": [
+        "CAM_CLUSTER_FRONT",
+        "CAM_CLUSTER_REAR",
+        "WF.DRIVE.STATE_CONTROL",
+        "WF.VTX.CL4.CL_CRYOGENIC_cryo",
+        "WF.VTX.CL4.CL_ELECTRICAL_power",
+        "WF.VTX.CL4.CL_FUEL_fuel",
+        "WF.VTX.CL4.CL_HOT_THERMAL_hot",
+        "WF.VTX.CL4.CL_INSTRUMENTATION_sensor",
+        "WF.VTX.CL4.CL_SERVICE_service",
+        "WF.VTX.CL4.CL_SHIELDING_armour",
+        "WF.VTX.CL4.CL_SHIELDING_shield",
+        "WF.VTX.CL4.CL_STRUCTURE_structure",
+        "WF.VTX.CL4.ENGINE.N1",
+        "WF.VTX.CL4.ENGINE.N2",
+        "WF.VTX.CL4.ENGINE.N3",
+        "WF.VTX.CL4.ENGINE.N4",
+        "WF.VTX.CL4.IF_CLUSTER_HEAT_REJECTION",
+        "WF.VTX.CL4.IF_CLUSTER_HUB",
+        "WF.VTX.CL4.IF_CLUSTER_POWER_BAY",
+        "WF.VTX.CL4.IF_CLUSTER_RING_SEAT_00",
+        "WF.VTX.CL4.IF_CLUSTER_RING_SEAT_01",
+        "WF.VTX.CL4.IF_CLUSTER_RING_SEAT_02",
+        "WF.VTX.CL4.IF_CLUSTER_RING_SEAT_03",
+        "WF.VTX.CL4.IF_CLUSTER_RING_SEAT_04",
+        "WF.VTX.CL4.IF_CLUSTER_RING_SEAT_05",
+        "WF.VTX.CL4.IF_CLUSTER_RING_SEAT_06",
+        "WF.VTX.CL4.IF_CLUSTER_RING_SEAT_07",
+        "WF.VTX.CL4.IF_CLUSTER_RING_SEAT_08",
+        "WF.VTX.CL4.IF_CLUSTER_RING_SEAT_09",
+        "WF.VTX.CL4.IF_CLUSTER_RING_SEAT_10",
+        "WF.VTX.CL4.IF_CLUSTER_RING_SEAT_11",
+        "WF.VTX.CL4.IF_NOZZLE_01",
+        "WF.VTX.CL4.IF_NOZZLE_02",
+        "WF.VTX.CL4.IF_NOZZLE_03",
+        "WF.VTX.CL4.IF_NOZZLE_04",
+        "WF.VTX.CL4.IF_REACTOR_MOUNT",
+        "WF.VTX.CL4.IF_VTX_ENGINE_01_MOUNT",
+        "WF.VTX.CL4.IF_VTX_ENGINE_01_REMOVAL",
+        "WF.VTX.CL4.IF_VTX_ENGINE_01_SERVICE",
+        "WF.VTX.CL4.IF_VTX_ENGINE_01_THRUST",
+        "WF.VTX.CL4.IF_VTX_ENGINE_02_MOUNT",
+        "WF.VTX.CL4.IF_VTX_ENGINE_02_REMOVAL",
+        "WF.VTX.CL4.IF_VTX_ENGINE_02_SERVICE",
+        "WF.VTX.CL4.IF_VTX_ENGINE_02_THRUST",
+        "WF.VTX.CL4.IF_VTX_ENGINE_03_MOUNT",
+        "WF.VTX.CL4.IF_VTX_ENGINE_03_REMOVAL",
+        "WF.VTX.CL4.IF_VTX_ENGINE_03_SERVICE",
+        "WF.VTX.CL4.IF_VTX_ENGINE_03_THRUST",
+        "WF.VTX.CL4.IF_VTX_ENGINE_04_MOUNT",
+        "WF.VTX.CL4.IF_VTX_ENGINE_04_REMOVAL",
+        "WF.VTX.CL4.IF_VTX_ENGINE_04_SERVICE",
+        "WF.VTX.CL4.IF_VTX_ENGINE_04_THRUST",
+        "WF.VTX.CL4.N1.FX_BURN_CORE",
+        "WF.VTX.CL4.N1.FX_DRIVER_BEAMS",
+        "WF.VTX.CL4.N1.FX_FIELD_ENVELOPE",
+        "WF.VTX.CL4.N1.FX_HOT_L1",
+        "WF.VTX.CL4.N1.FX_HOT_L2",
+        "WF.VTX.CL4.N1.FX_HOT_L3",
+        "WF.VTX.CL4.N1.FX_HOT_L4",
+        "WF.VTX.CL4.N1.FX_HOT_SHIELD_FACE",
+        "WF.VTX.CL4.N1.FX_IGNITION_FLASH",
+        "WF.VTX.CL4.N1.FX_PLASMA_SHELL",
+        "WF.VTX.CL4.N1.FX_PLUME",
+        "WF.VTX.CL4.N1.FX_READY_L1",
+        "WF.VTX.CL4.N1.FX_READY_L2",
+        "WF.VTX.CL4.N1.FX_READY_L3",
+        "WF.VTX.CL4.N1.FX_READY_L4",
+        "WF.VTX.CL4.N2.FX_BURN_CORE",
+        "WF.VTX.CL4.N2.FX_DRIVER_BEAMS",
+        "WF.VTX.CL4.N2.FX_FIELD_ENVELOPE",
+        "WF.VTX.CL4.N2.FX_HOT_L1",
+        "WF.VTX.CL4.N2.FX_HOT_L2",
+        "WF.VTX.CL4.N2.FX_HOT_L3",
+        "WF.VTX.CL4.N2.FX_HOT_L4",
+        "WF.VTX.CL4.N2.FX_HOT_SHIELD_FACE",
+        "WF.VTX.CL4.N2.FX_IGNITION_FLASH",
+        "WF.VTX.CL4.N2.FX_PLASMA_SHELL",
+        "WF.VTX.CL4.N2.FX_PLUME",
+        "WF.VTX.CL4.N2.FX_READY_L1",
+        "WF.VTX.CL4.N2.FX_READY_L2",
+        "WF.VTX.CL4.N2.FX_READY_L3",
+        "WF.VTX.CL4.N2.FX_READY_L4",
+        "WF.VTX.CL4.N3.FX_BURN_CORE",
+        "WF.VTX.CL4.N3.FX_DRIVER_BEAMS",
+        "WF.VTX.CL4.N3.FX_FIELD_ENVELOPE",
+        "WF.VTX.CL4.N3.FX_HOT_L1",
+        "WF.VTX.CL4.N3.FX_HOT_L2",
+        "WF.VTX.CL4.N3.FX_HOT_L3",
+        "WF.VTX.CL4.N3.FX_HOT_L4",
+        "WF.VTX.CL4.N3.FX_HOT_SHIELD_FACE",
+        "WF.VTX.CL4.N3.FX_IGNITION_FLASH",
+        "WF.VTX.CL4.N3.FX_PLASMA_SHELL",
+        "WF.VTX.CL4.N3.FX_PLUME",
+        "WF.VTX.CL4.N3.FX_READY_L1",
+        "WF.VTX.CL4.N3.FX_READY_L2",
+        "WF.VTX.CL4.N3.FX_READY_L3",
+        "WF.VTX.CL4.N3.FX_READY_L4",
+        "WF.VTX.CL4.N4.FX_BURN_CORE",
+        "WF.VTX.CL4.N4.FX_DRIVER_BEAMS",
+        "WF.VTX.CL4.N4.FX_FIELD_ENVELOPE",
+        "WF.VTX.CL4.N4.FX_HOT_L1",
+        "WF.VTX.CL4.N4.FX_HOT_L2",
+        "WF.VTX.CL4.N4.FX_HOT_L3",
+        "WF.VTX.CL4.N4.FX_HOT_L4",
+        "WF.VTX.CL4.N4.FX_HOT_SHIELD_FACE",
+        "WF.VTX.CL4.N4.FX_IGNITION_FLASH",
+        "WF.VTX.CL4.N4.FX_PLASMA_SHELL",
+        "WF.VTX.CL4.N4.FX_PLUME",
+        "WF.VTX.CL4.N4.FX_READY_L1",
+        "WF.VTX.CL4.N4.FX_READY_L2",
+        "WF.VTX.CL4.N4.FX_READY_L3",
+        "WF.VTX.CL4.N4.FX_READY_L4"
+      ],
+      "direct_links": [
+        "components/WF_VERTEX_ENGINE.blend"
+      ]
+    },
     "subsystems/WF_ROTOR_INTERFACE.blend": {
       "generated_objects": 92,
       "ids": [
@@ -7752,7 +8036,7 @@
       "material_bound_objects": 59
     },
     "subsystems/WF_STRUCTURE.blend": {
-      "generated_objects": 742,
+      "generated_objects": 738,
       "ids": [
         "Body_Envelope_Reference",
         "Brayton_Train_1",
@@ -7983,10 +8267,6 @@
         "IF_THRUST_NODE_10",
         "IF_THRUST_NODE_11",
         "IF_THRUST_RING_CENTER",
-        "Nozzle_Pickup_0",
-        "Nozzle_Pickup_1",
-        "Nozzle_Pickup_2",
-        "Nozzle_Pickup_3",
         "Primary_Frame_00",
         "Primary_Frame_01",
         "Primary_Frame_02",

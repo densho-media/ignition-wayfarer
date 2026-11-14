@@ -11,13 +11,16 @@ from common import begin, empty, save, link_instance, group, move
 from recipes import build_component, build_subsystem, entry_guides, human_reference, hero_cameras
 from rig import rig
 import sim_rig
+import vertex_cluster
 import flight_timeline
 import modules
 import detail
 
-COMPONENTS=['NOZZLE','RADIATOR','RING_SECTOR','INTERIOR_HABITATION','INTERIOR_WORK','INTERIOR_GARDEN']
-SUBSYSTEMS=['STRUCTURE','HABITAT_A','HABITAT_B','HABITAT','STORAGE','SHIELDING','SERVICE','POWER_STORAGE','ROTOR_INTERFACE','CREW_TRANSFER','EYE','FORWARD_SHIELD','DEBUG_MAGNETICS','DEBUG_SEPARATRICES','DEBUG_OPTICS','PROPULSION','THERMAL','HULL','DRONES']
+COMPONENTS=['VERTEX_ENGINE','VERTEX_RESEARCH','NOZZLE','RADIATOR','RING_SECTOR','INTERIOR_HABITATION','INTERIOR_WORK','INTERIOR_GARDEN']
+SUBSYSTEMS=['STRUCTURE','HABITAT_A','HABITAT_B','HABITAT','STORAGE','SHIELDING','SERVICE','POWER_STORAGE','ROTOR_INTERFACE','CREW_TRANSFER','EYE','FORWARD_SHIELD','DEBUG_MAGNETICS','DEBUG_SEPARATRICES','DEBUG_OPTICS','PROPULSION','PROPULSION_CLUSTER','THERMAL','HULL','DRONES']
 HULL_FAMILY={'HULL'}
+# The two propulsion representations ([propulsion_representation]): the vehicle links only the active one.
+PROPULSION_FAMILY={'PROPULSION','PROPULSION_CLUSTER'}
 # P1F engineering overlays: built before PROPULSION, which links them as DRIVE_DEBUG_* instances whose hide flags follow
 # the drive control's toggles (saved off). Vehicles never link them directly.
 DEBUG_FAMILY=['DEBUG_MAGNETICS','DEBUG_SEPARATRICES','DEBUG_OPTICS']
@@ -28,7 +31,7 @@ RING_FAMILY=['HABITAT_A','HABITAT_B']
 # The vehicle file's outliner (AGENTS.md "Where things go"): each linked assembly in its system group under 10_SHIP; the scale
 # figures (one group each), the review cameras and the simulation rig in their own groups. Grouping only: no object, transform or
 # link changes, so the geometry fingerprint is unaffected.
-SYSTEM_GROUPS={'STRUCTURE':['STRUCTURE','HULL'],'DRIVE':['PROPULSION','SHIELDING','POWER_STORAGE','STORAGE'],'THERMAL':['THERMAL'],
+SYSTEM_GROUPS={'STRUCTURE':['STRUCTURE','HULL'],'DRIVE':['PROPULSION','PROPULSION_CLUSTER','SHIELDING','POWER_STORAGE','STORAGE'],'THERMAL':['THERMAL'],
                'HABITAT':['HABITAT','ROTOR_INTERFACE','CREW_TRANSFER'],'FORWARD':['FORWARD_SHIELD','EYE'],'SERVICE':['SERVICE','DRONES']}
 # Outliner colour per system (Blender COLOR_01..08: red, orange, yellow, green, blue, violet, pink, brown); helpers stay uncoloured.
 SYSTEM_COLORS={'STRUCTURE':'COLOR_08','DRIVE':'COLOR_01','THERMAL':'COLOR_02','HABITAT':'COLOR_04','FORWARD':'COLOR_05','SERVICE':'COLOR_03'}
@@ -183,7 +186,7 @@ def build(root=ROOT, target='all', rebind=False):
         for name in rings:build_one_subsystem(assets,name,s,spec_text,source_text,root)
         modules.write(s,root);return
     if set(s['interior']['components'].values())!={c for c in COMPONENTS if c.startswith('INTERIOR_')}:raise ValueError('interior.components must match the INTERIOR_ components')
-    dependencies={'NOZZLE':['PROPULSION'],'RADIATOR':['THERMAL'],'RING_SECTOR':RING_FAMILY}
+    dependencies={'NOZZLE':['PROPULSION'],'VERTEX_ENGINE':['PROPULSION_CLUSTER'],'VERTEX_RESEARCH':[],'RADIATOR':['THERMAL'],'RING_SECTOR':RING_FAMILY}
     dependencies|={c:RING_FAMILY for c in COMPONENTS if c.startswith('INTERIOR_')}
     parts,systems=[],[]
     for n in names:
@@ -220,6 +223,8 @@ def build(root=ROOT, target='all', rebind=False):
         # A disabled hull is still built (never stale) but not linked.
         if name in HULL_FAMILY and not s['hull']['enabled']:continue
         if name in DEBUG_FAMILY or name in RING_FAMILY:continue
+        # One propulsion representation in the ship (owner brief 2026-11-14): the other one is still built (reproducible), never linked.
+        if name in PROPULSION_FAMILY and name!=vertex_cluster.propulsion_asset(s)[3:]:continue
         obj=link_instance(c,assets/f'subsystems/WF_{name}.blend',f'WF_{name}',f'Assembly_{name}',ident=f'WF.SUBSYSTEM.{name}')
         obj.parent=root_obj
     human_reference(c,s)

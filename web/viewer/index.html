@@ -34,6 +34,7 @@
   <button data-style="engine" aria-pressed="false" title="Engine exposition hologram: one colour, rim glow and wire edges (E)">Engine holo</button>
   <button data-style="hybrid" aria-pressed="false" title="Hybrid / X-ray: a click focuses the part, the rest becomes a faint ghost (X)">Hybrid</button>
   <button id="appearance-toggle" aria-expanded="false" aria-controls="appearance" title="Ghost, context and reset">Appearance</button>
+  <button id="drive-toggle" aria-expanded="false" aria-controls="drive" title="Vertex drive display states (D)" hidden>Drive</button>
 </div>
 <div id="focusbar" class="focusbar" role="group" aria-label="Focus" hidden>
   <span class="label">Focus</span><b id="focus-name"></b>
@@ -67,6 +68,14 @@
   <div class="row buttons"><button id="show-all-2" title="Lift every Hidden state">Show all</button>
     <button id="reset-appearance" title="Standard style, no focus, no assembly or part states, default ghost">Reset appearance</button></div>
   <p class="note">PROTOTYPE display settings: presentation only, no geometry or engineering value changes.</p>
+</aside>
+<aside id="drive" class="panel appearance" hidden>
+  <div class="panel-head"><span>Vertex drive</span></div>
+  <div class="row"><span>State</span></div>
+  <div class="row buttons drive-states"></div>
+  <div class="row"><span>Engines</span><span class="chips drive-engines"></span></div>
+  <p class="note">SPECULATIVE working representation: four Compact Vertex Engines. Plasma, hot hardware and indicators are a display;
+    magnetic fields stay invisible; colours are not a spectrum. <a href="../engineering/vertex/">Engine lineage</a></p>
 </aside>
 <div id="pick" class="pick" hidden></div>
 <div id="status" class="status" role="status">Loading model…</div>

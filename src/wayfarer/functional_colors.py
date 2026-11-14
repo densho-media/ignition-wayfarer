@@ -28,12 +28,17 @@ PALETTE = {
 ASSET_DEFAULT = {
     'STRUCTURE': 'STRUCTURE', 'HULL': 'STRUCTURE', 'PROPULSION': 'MAIN_PROPULSION', 'NOZZLE': 'MAIN_PROPULSION', 'SHIELDING': 'MAIN_PROPULSION',
     'DEBUG_MAGNETICS': 'MAIN_PROPULSION', 'DEBUG_SEPARATRICES': 'MAIN_PROPULSION', 'DEBUG_OPTICS': 'MAIN_PROPULSION',
+    'VERTEX_ENGINE': 'MAIN_PROPULSION', 'VERTEX_RESEARCH': 'MAIN_PROPULSION', 'PROPULSION_CLUSTER': 'MAIN_PROPULSION',
     'POWER_STORAGE': 'POWER', 'STORAGE': 'STRUCTURE', 'THERMAL': 'HOT_RADIATOR', 'RADIATOR': 'HOT_RADIATOR',
     'FORWARD_SHIELD': 'SHIELD', 'EYE': 'SENSORS_COMMS', 'SERVICE': 'SERVICE', 'DRONES': 'SERVICE',
     'HABITAT': 'HABITAT', 'HABITAT_A': 'HABITAT', 'HABITAT_B': 'HABITAT', 'ROTOR_INTERFACE': 'HABITAT', 'CREW_TRANSFER': 'HABITAT',
     'RING_SECTOR': 'HABITAT', 'INTERIOR_GARDEN': 'HABITAT', 'INTERIOR_HABITATION': 'HABITAT', 'INTERIOR_WORK': 'HABITAT',
 }
 DETAIL_DEFAULT = {'M8_BROW_AFT': 'SHIELD', 'M8_CROWN_RIM': 'SHIELD', 'RAD_FRAME': 'HOT_RADIATOR', 'SP_CASING': 'STRUCTURE'}
+# Vertex functional categories (vertex_engine.CATEGORIES, owner brief 2026-11-14) -> function key; fields and plasma read as main propulsion.
+VERTEX_CATEGORY = {'STRUCTURE': 'STRUCTURE', 'MAGNETIC_COILS': 'MAIN_PROPULSION', 'FUSION_REACTION': 'MAIN_PROPULSION', 'TARGET_INJECTION': 'MAIN_PROPULSION',
+                   'MAGNETIC_NOZZLE': 'MAIN_PROPULSION', 'SHIELDING': 'SHIELD', 'HOT_THERMAL': 'HOT_RADIATOR', 'CRYOGENIC': 'LOW_RADIATOR', 'ELECTRICAL': 'POWER',
+                   'FUEL': 'HELIUM3', 'SERVICE': 'SERVICE', 'INSTRUMENTATION': 'SENSORS_COMMS', 'VISUAL_EFFECTS': 'MAIN_PROPULSION'}
 SPECIES = {'hydrogen': 'HYDROGEN', 'deuterium': 'DEUTERIUM', 'helium-3': 'HELIUM3'}
 
 
@@ -50,6 +55,9 @@ def classify(asset, name, kind='', species='', section='', bank=''):
         return DETAIL_DEFAULT.get(d, 'HABITAT')
     if k in ('scale_reference', 'first_person_camera') or n.startswith(('WF_SIM', 'Human_', 'CAM_')):
         return None
+    # Vertex engine, research demonstrator and cluster: the part's functional category (vertex_engine.CATEGORIES) sets its colour
+    if k.startswith('vtx_'):
+        return VERTEX_CATEGORY[k[4:].upper()]
     # radiator sections and the thermal bulkhead
     if n.startswith('Radiator_Zone_'):
         if n.endswith('_Root_Strip') or '_Root_Boom_' in n:

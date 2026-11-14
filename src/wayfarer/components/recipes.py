@@ -15,9 +15,12 @@ import rotor
 import crew
 import forward
 import forward_shield
+import vertex
 
 
 def build_component(kind, c, s):
+    if kind=='VERTEX_ENGINE':return vertex.engine(c,s)
+    if kind=='VERTEX_RESEARCH':return vertex.research(c,s)
     if kind=='RING_SECTOR':return revision.sector(c,s)
     if kind=='RADIATOR':return revision.radiator(c,s)
     functions={v:k for k,v in s['interior']['components'].items()}
@@ -49,6 +52,7 @@ def build_subsystem(kind, c, s, asset_dir):
     structure=material('Structure',(.30,.40,.48))
     shield=material('Shield',(.48,.43,.28))
     if kind=='STRUCTURE':return revision.structure(c,s)
+    elif kind=='PROPULSION_CLUSTER':return vertex.cluster(c,s,asset_dir)
     elif kind=='HABITAT':return revision.habitat(c,s,asset_dir)
     elif kind in revision.RINGS:return revision.ring_asset(c,s,asset_dir,revision.RINGS.index(kind)+1)
     elif kind=='STORAGE':
