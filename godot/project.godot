@@ -28,3 +28,11 @@ renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
 environment/defaults/default_clear_color=Color(0.025, 0.035, 0.05, 1)
 anti_aliasing/quality/msaa_3d=2
+
+[importer_defaults]
+
+; WEB-SIZE (2026-11-14): no light in the walk or EVA casts shadows, so the importer's separate shadow meshes were never drawn; they
+; were 10.8 MB of the 31.8 MB imported ship scene in the play pack. LODs, tangents and surface deduplication stay as they were.
+scene={
+"meshes/create_shadow_meshes": false
+}

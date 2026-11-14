@@ -126,6 +126,11 @@ Measured 2026-10-22 in Claude Code cloud (4 vCPU, no GPU):
 | Enter Wayfarer, Start | engine `.wasm` 39.5 MB, `.js` 0.28 MB, pack 23.1 MB, shell, worklets | **62.9 MB, 5 requests** | wasm 10.1 MB, pack 18.7 MB, js 0.07 MB (about 29 MB in all) | 90 MB |
 | Whole site | 29 files | 70.4 MB | — | 900 MB (Pages: 1 GB) |
 
+2026-11-14 (Deadship branch): Enter Wayfarer had grown to 89.997 MB against the 90 MB budget. The imported scenes carried a shadow mesh
+for every mesh that no light ever used (10.8 MB of the 31.8 MB ship scene); `godot/project.godot` now sets the importer default
+`meshes/create_shadow_meshes = false`. Start download 78.13 MB (pack 50.18 → 38.31 MB, gzip -9 45.3 → 33.5 MB), 11.87 MB under the
+budget, which stays at 90 MB. Keep at least 5 MB of headroom.
+
 **Time and frames** (headless software rendering; a measure of the pipeline, not of visitor hardware):
 
 | Measure | Value |
