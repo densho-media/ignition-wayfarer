@@ -1,4 +1,4 @@
-# Deadship in Wayfarer: research, design, Phase 0, Phase 1 and Phase 2A report (DS-000, DS-P0, DS-P1, DS-P2A)
+# Deadship in Wayfarer: research, design, Phase 0, Phase 1, Phase 2A and the Phase 2B gate (DS-000, DS-P0, DS-P1, DS-P2A, DS-P2B)
 
 **Status (2026-11-14).** One branch, `claude/project-thread-dfyyv7`, not squashed, not deployed.
 
@@ -7,8 +7,8 @@
 | DS-000 research and design | Done (6603e08); direction approved 2026-11-13 | §0–§8 |
 | Phase 0 minimal engineering integration (SYS-001, `#interior-systems`) | **Implemented and validated**; browser-verified on the Phase 1 build | §10, §13, §14, §19 |
 | Phase 1 DS-1 "Scrubber" tutorial (`#interior-deadship`) | **Implemented and browser-tested** (f5e6031); finalized 2026-11-14: phone layout, usability fixes | §17–§21, §22 |
-| Phase 2A atmospheric connectivity (SYS-002, `#interior-airflow`) | **Implemented and validated** 2026-11-14 | §23 |
-| Phase 2B DS-2 "Borrowed Air" (first playable challenge) | **Design proposal only; not authorized** | §24 |
+| Phase 2A atmospheric connectivity (SYS-002, `#interior-airflow`) | **Implemented and validated** 2026-11-14; finalized 2026-11-14 (bay instrument panel DS-O10, web-export size) | §23, §26 |
+| Phase 2B DS-2 first playable challenge | **Authorized 2026-11-14 subject to an engineering gate; the gate FAILED on SYS-002, so no gameplay was built.** Findings, revised design and the smallest next requirement are in §27 | §24 [HISTORICAL], §27 |
 | Phase 2C and later | Design only | §9, §24 |
 
 Sections written before a phase was built are kept as written and marked **[HISTORICAL]** where later work changed them; their
@@ -795,9 +795,10 @@ DS-Q1 to DS-Q8 are decided (see "Decisions applied"). Status of the open items:
 | DS-O2 | The degraded-habitability (0.8 kPa) and danger (3.0 kPa) reference levels | **Approved 2026-11-13 as PROTOTYPE working assumptions**; replace when ECLSS and medical owner rows exist (12!G22) |
 | DS-O3 | Display rates | Decided by build: ×60 in the Phase 0 proof, ×30 and the ×1800 watch in DS-1, ×120 in the Phase 2A demo |
 | DS-O4 | Authorization for Phase 1 | **Given 2026-11-13; Phase 1 built.** Phase 2A authorized and built 2026-11-14 |
-| DS-O7 | Ring ventilation: none is in canon. Phase 2A assumes one intermodule-ventilation duct pair per bulkhead at about 240 m³/h, with dampers | PROTOTYPE (§23.2); an ECLSS owner row would replace it |
-| DS-O8 | The crew-tube hatches: closed in the model, not animated in the walk; the tubes (3 × 49 m³) and the vestibule are a second path between sectors | Held CLOSED (§23.1) |
-| DS-O9 | Authorization for Phase 2B | Not authorized |
+| DS-O7 | Ring ventilation: none is in canon. Phase 2A assumes one intermodule-ventilation duct pair per bulkhead at about 240 m³/h, with dampers; doorway exchange 139 m³/h; 9 compartments, 466.36 m³ | **Kept 2026-11-14 as PROTOTYPE, not canon, configurable** (`ring_air.params`). Finding (§27.4): with twelve crew in one ring these values hold sectors 1 and 2 at 0.447 % with everything working, under the 0.5 % limit but far above the 0.3 % target; an ECLSS owner row would replace them |
+| DS-O8 | The crew-tube hatches: closed in the model, not animated in the walk; the tubes (3 × 49 m³) and the vestibule are a second path between sectors | **Decided 2026-11-14: closed and outside the model.** A boundary assumption: the tubes exchange no air with ring A in any scenario (§23.1) |
+| DS-O9 | Authorization for Phase 2B | **Authorized 2026-11-14 subject to the engineering gate (§27). The gate failed on SYS-002; no gameplay built.** The next requirement is in §27.6 |
+| DS-O10 | The ECLSS bay's board crossed the Map and ? buttons on an upright phone | **Resolved 2026-11-14** (§26.1): a tilted instrument panel mounted on the bay's top edge, measured clear of the touch row |
 | DS-O5 | Medical limits, ECLSS technology and its serviceable parts, whole-ship electrical load, heat capacities, OD-010 degraded modes | OPEN in canon; scenario values labelled |
 | DS-O6 | Deadship as an official Wayfarer crew qualification | Not established (DS-Q1) |
 
@@ -1145,10 +1146,10 @@ runs press the player's real key or tap the real button only at the action point
 | Component states | FAILED (running, removal 0), ISOLATED with the fault, repaired not restored, OPERATING: four words on the board and in the prompt | None |
 | Diagnosis from evidence | Four pages (supply, fan, bed, conclusion) give the readings with numbers before the conclusion names the fan. The trainee cannot choose wrongly, which suits a tutorial; DS-2 should make the diagnosis a choice | Noted for 2B |
 | Refusals | Every refusal is the model's stated reason (restore with a failed fan, repair while energized, a second spare) | None |
-| Carried spare | **Defect:** the box hung at waist height, about 53° under the eye line, outside the 75° first-person view; the trainee could not see what they carried | **Fixed:** carried at chest height (about 34° under the eyes) and the goal line adds "Carrying: the spare fan". Verified geometrically, not visually: the `deadship` check asserts the carried box lies inside the first-person view when the trainee looks level (33.7° under the eye line against a 37.5° half-angle, 3° kept as margin) |
+| Carried spare | **Defect:** the box hung at waist height, about 53° under the eye line, outside the 75° first-person view; the trainee could not see what they carried | **Fixed:** carried at chest height (about 34° under the eyes) and the goal line adds "Carrying: the spare fan". Verified geometrically, not visually: the `deadship` check asserts the carried box lies inside the first-person view when the trainee looks level (33.7° under the eye line against a 37.5° half-angle, 3° kept as margin). **[HISTORICAL]** That measure used a wrong eye height; the spare was in fact above the head. Corrected 2026-11-14 (§26.1) |
 | Watch and debrief | The watch runs 12 s real with the board ticking; the debrief explains what failed, how it was found, why isolation, what changed, why stable | None |
 | Replay | Ops at the bay after the end replays from the same start; the goal line says so | None |
-| Bay board on an upright phone | Standing at the bay, the 3D status board (a billboard above the bay, world text) is large on a narrow screen and crosses the Map and ? buttons and the map. Buttons stay tappable (they are drawn above it) | **Open (DS-O10):** a world-space design choice, not a layout bug; options are a smaller board on compact screens or a board fixed to the bay face. Left for the owner's playtest |
+| Bay board on an upright phone | Standing at the bay, the 3D status board (a billboard above the bay, world text) is large on a narrow screen and crosses the Map and ? buttons and the map. Buttons stay tappable (they are drawn above it) **Resolved (DS-O10, §26.1):** the board is now a tilted instrument panel fixed to the bay's top edge |
 | Phone | Page over the HUD; map under the Map and ? buttons on an upright phone; "%%" in the footer | **Fixed** (§22.1) |
 
 ### 22.3 Validation (Phase 1 finalization)
@@ -1375,7 +1376,11 @@ stops removal; isolate, repair, restore) holds in both models. Its numbers are t
 - Occupants are numbers per compartment, not the walking trainee; the trainee's own breath is not added.
 - The demo's ×120 clock and the 10 s model step are display choices; the step itself is exact for any length.
 
-## 24. DS-2 reassessed and the Phase 2B proposal [PROPOSAL; not authorized]
+## 24. DS-2 reassessed and the Phase 2B proposal [HISTORICAL; superseded by §27]
+
+> **[HISTORICAL]** Written before the Phase 2B gate. §27 tests this proposal: the strategy search shows that moving everyone to
+> sector 3 dominates every other choice, and the "crowded" and "leak" costs in the table are not computed by any model. Kept as
+> written; do not build from it.
 
 **What Phase 2A changes for "Borrowed Air".** DS-2 as designed (§5.8) trades two interacting problems with insufficient parts and
 needs humidity and heat stocks, parts as entities and perhaps two rings. That is still an M–L step. Phase 2A already supplies the
@@ -1437,3 +1442,260 @@ parts (12!G26:G27); medical CO₂ limits (12!G22).
    PROTOTYPE values. Not authorized; not started.
 10. **Owner questions.** Accept the Phase 1 finalization and Phase 2A? Keep the IMV duct-pair assumption and the doorway floor (DS-O7)?
     Hold the crew-tube hatches closed (DS-O8)? Authorize Phase 2B?
+
+---
+
+# Phase 2A finalization and the Phase 2B gate (2026-11-14, second brief)
+
+The owner's decisions of 2026-11-14: DS-O7 keeps the PROTOTYPE ventilation and doorway values (238 m³/h, 139 m³/h, 9 compartments,
+466.36 m³), not canon and configurable; DS-O8 keeps the crew-tube hatches closed and outside the model; DS-O1 and DS-O2 stay as
+approved. Phase 2B was authorized subject to the engineering gate of §27.
+
+## 26. Phase 2A finalization [BUILT P2A]
+
+### 26.1 DS-O10: the bay's display
+
+**Problem.** The bay's status text was a billboard 0.35 m above the bay, with capitals about 49 mm high. From the stand in front of the
+bay it filled the top of an upright phone's screen and lay across the Map and ? buttons and the map (before: §26.4 stills).
+
+**Design.** A fixed instrument panel on the bay, in the same place for every device (`WfEquipment.mount_display`, shared by SYS-001's
+readout in `#interior-systems`/`#interior-deadship` and SYS-002's in `#interior-airflow`):
+
+- a dark screen with the text on it, flush on the bay's face 3 cm proud, from 0.95 m above the deck up to just under the eyes (about 1.43 m;
+  the walk camera's eye is 1.47 m), its left edge at the bay's middle, so a trainee who stands at the bay and looks level sees it just under and
+  right of the centre of the screen, like a rack's own chest-height display;
+- capitals about 31 mm (an em of 44 mm, PROTOTYPE), lines of at most about 30 characters, so the panel is about 0.6–0.7 m wide and
+  0.45–0.55 m tall;
+- one-sided, not a billboard: it rides the ring with the bay, like the rest of the rack;
+- the same words as before, regrouped into short lines; the airflow panel lists one sector per row with its two corridor halves.
+
+**A measuring error found on the way, and a Phase 1 defect it hid.** The checks and the scripted stills put the trainee's eyes 1.6 m
+above the walking body's origin, but that origin is the body's centre (0.85 m above the deck); the walk camera sits `EYE_UP` = 0.62 m
+above it, 1.47 m above the deck. So the earlier stills looked down at the bay from 2.45 m, which put anything at eye level near the top of
+the screen, and the Phase 1 check that "the carried spare is 33.7° under the eyes" (§22.2) measured from the same wrong eye: the spare,
+placed 1.3 m above the origin, was in fact held at 2.15 m, above the trainee's head. Both are fixed: the checks and stills use `EYE_UP`
+(`check_player.gd`, `check_deadship.gd`, `check_airflow.gd`), the spare is held 0.30 m under the eye (`scrubber.gd`), and the check now
+requires it to be under the eye line (more than 10°) as well as inside the view; it measures 33.7° under the true eye.
+
+Presentation only (a Label3D and a quad). No ship geometry, camera, interaction distance, ring rotation, touch control, Phase 1
+page or Phase 2A map changed. An intermediate version (a panel tilted on the bay's top edge, capitals 22 mm) was rejected after its
+stills: still at the top of a phone's screen and too small to read on a desktop.
+
+**Measured clearance.** `check_deadship` (`_board_clear`, runtime check `deadship`) puts the eye at the walk camera (1.47 m) over the stand in front of the
+bay, looks level at the bay and measures the panel's corners against the lower edge of the screen's top row on the current viewport:
+
+| Viewport | Panel top over the eye line | Panel bottom | Top row's lower edge | Result |
+| --- | --- | --- | --- | --- |
+| Desktop 1280 × 720 | −1.0° | −17.5° | 37.5° (no touch row) | Clear; capitals about 9 px at the 1.76 m stand |
+| Phone on its side 844 × 390 | −1.0° | −17.5° | 27.3° | Clear of the top row and the buttons; **text small** (about 5 px capitals at 1.76 m): readable from about a metre |
+| Phone upright 390 × 844 | −1.0° | −17.5° | 28.8° | Clear of the Map and ? row, the map, the goal box and the touch buttons (still: §26.4); capitals about 11 px |
+
+The panel is 0.61 × 0.48 m (DS-1 text) and lies 0–20° right of the gaze. The angles hold for every screen shape, because the camera
+keeps its vertical field of view; only the top row's position changes. The runtime check fails if the panel reaches the top row. The
+stills of §26.4 look level at the bay from the same stand, as a trainee does; the earlier stills looked down at the display from a wrong
+eye height (below).
+
+### 26.2 Web-export size
+
+The budget the repository validates is the download of Enter Wayfarer (`PLAY_BUDGET = 90,000,000` bytes in `tools/web_export.py`:
+engine, shell and pack). Before this work it stood at 89,996,565 bytes, 3.4 kB under the budget.
+
+| Measure | Before | After | Change |
+| --- | --- | --- | --- |
+| Raw download validated against `PLAY_BUDGET` | 89,996,565 B | 78,129,509 B | −11,867,056 B (−13.2 %) |
+| Headroom under the 90 MB budget | 3.4 kB | **11.87 MB** | |
+| `walk-*.pck` (the play pack) | 50,179,100 B | 38,312,044 B | −11,867,056 B |
+| `walk-*.pck` gzip −9 (what a compressing server could send) | 45.3 MB | 33.5 MB | −11.8 MB |
+| `engine-*.wasm` (unchanged) | 39,514,754 B (gzip 10.1 MB) | same | 0 |
+| Cached data on a returning visit | the pack and the engine are content-named; a release that changes only the pack re-downloads 38.3 MB instead of 50.2 MB, the engine stays cached | | |
+| Runtime memory | not measured; the shadow meshes were loaded with the scene, so the change should lower it, but no number is claimed | | |
+
+**What was removed.** The imported scenes carried a second "shadow mesh" for every mesh. No light in the walk or Explore Exterior casts
+shadows, so they were never drawn. In the ship scene they were 10.8 MB of 31.8 MB. `godot/project.godot` now sets the importer default
+`meshes/create_shadow_meshes = false`; the runtime export writes fresh imports, so every scene (ship, docked, characters, EVA) follows.
+LODs, tangents, surface deduplication, textures and the simulation checkpoints are unchanged; the budget was not raised and no
+validation was weakened. Visual trade-off: none, as nothing cast shadows; the runtime export's 11 checks and the web build's native
+walk, locomotion and EVA checks pass on the new package (§26.3).
+
+**Recommended target.** Keep `PLAY_BUDGET` at 90 MB and keep at least 5 MB of headroom; a feature that would eat into the last 5 MB
+should bring its own saving. Measured candidates for later, not applied: compact JSON for `manifest_docked.json` (about −0.65 MB),
+`wf_sim_rig.json` (about −0.29 MB) and `characters.json` (about −0.23 MB); one copy of the characters' identical eye textures (about
+−0.8 MB).
+
+### 26.3 Validation (Phase 2A finalization)
+
+Automated runs, not human playtests. All on this branch's working tree, 2026-11-14:
+
+| Check | Command | Result |
+| --- | --- | --- |
+| Python tests | `python3 -m unittest discover -s tests` | 258 run, OK (1 skipped) |
+| Runtime export (fresh import, no shadow meshes) | `python3 tools/workflow.py runtime-export` | PASS, 11 checks (run `20261114T120348956168Z-runtime`) |
+| Godot checks after the panel and eye fixes | `python3 tools/workflow.py runtime-check auto` | PASS: excursion, eva-ops, locomotion, systems, deadship, airflow (package CURRENT) |
+| Native stills, four screens | `godot --resolution <w>x<h> res://scenes/excursion.tscn -- --deadship --check-deadship [--touch] --shots=<dir>` (and `--airflow --check-airflow`) | PASS at 390 × 844, 844 × 390, 1280 × 720; panel angles above |
+| Web build | `python3 tools/workflow.py web --out <site> --characters <chars>` | PASS; Enter Wayfarer 78.13 MB; native walk, locomotion and EVA checks PASS |
+| Browser, main | `python3 tools/web_check.py <site> --part main --out <dir> --chrome /opt/pw-browsers/chromium --no-sandbox` | PASS 67/67 |
+| Browser, DS-1 by keys, touch and a phone turned upright | `python3 tools/web_check.py <site> --out <dir> --part training --training deadship --rotate` | PASS 3/3 (every action by the player's key or touch button; the turn prompt answered by a tap) |
+| Browser, airflow and systems | `... --part training --training airflow`, `... --training systems` | PASS 2/2 each |
+| Phase 2B gate | `python3 work/project-thread-dfyyv7/ds2_gate.py` | Deterministic; ledger ≤ 1.4 × 10⁻¹³ kg; step-independent to 6.4 × 10⁻¹⁴ (§27) |
+
+DS-1 and the default start were run unchanged by the browser and runtime checks; DS-1 still uses the well-mixed model.
+
+### 26.4 Stills
+
+`/mnt/project-files/deadship_phase2b_2026-11-14/`: before and after of the bay on an upright phone (390 × 844), a phone on its side
+(844 × 390), a desktop (1280 × 720) and the airflow demo, rendered natively at the scenario's Restore and Isolated steps.
+
+---
+
+## 27. Phase 2B: the engineering gate [ENG; gate FAILED, no gameplay built]
+
+Phase 2B was authorized on 2026-11-14 on one condition: a scenario is built only if the existing model produces a genuine decision,
+with at least two valid strategies whose consequences the model computes, no trivially ideal strategy and no hidden unmodelled
+penalty. This section tests that. **The gate fails on SYS-002 as it stands, so Part C (the playable scenario) was not built.** What
+follows is the evidence, a revised design and the smallest requirement that would let it pass.
+
+Study: `work/project-thread-dfyyv7/ds2_gate.py` (task study; it calls `ring_air`'s public functions and changes nothing), results in
+`ds2_gate.json`. Run: `python3 work/project-thread-dfyyv7/ds2_gate.py` (about 15 minutes, deterministic).
+
+### 27.1 What each §24 consequence actually is (§5 of the brief)
+
+| §24 consequence | Class | Why |
+| --- | --- | --- |
+| Sector 2 at 0.525 % with fill 2 shut and nobody moving | **Computed** | `ring_air` steady state, conserved, Python/Godot parity |
+| Sectors 1 and 2 reach 0.5 % in 2.3 h and 2.7 h with the doors shut | **Computed** | Same model, transient |
+| Which doors can open, and the route a crew walks | **Physically constrained** | The CIRC door graph and the walk's doors; routes are the graph's shortest paths |
+| The doorway and duct flows (139 m³/h, 238 m³/h) | **Computed from PROTOTYPE values** | DS-O7: kept, not canon |
+| Crew transit time (40 s per compartment) | **Scenario rule (PROTOTYPE)** | No locomotion model; a fixed time per compartment passed |
+| Fill 2's doors held shut for a suspected leak | **Scenario rule** | A procedure, enforced as a refusal; there is no leak in the model |
+| "Breaks the leak isolation" as the cost of opening fill 2 | **Unmodelled** | No pressure or leak physics (out of scope by the brief). Presenting it as a cost would be a hidden penalty |
+| "Sector 1 crowded", "the ECLSS sector crowded" | **Unmodelled** | The only effect of four people in a sector that any model computes is their CO₂, which is already in the numbers. Comfort, heat, humidity and work-space interference are not modelled |
+| "Above the target" as harm | **Unmodelled** | 0.3 % and 0.5 % are PROTOTYPE control levels (DS-O1, DS-O2), not injury thresholds. The study reports hours above them, never harm |
+
+So the §24 table's real trade was between one computed cost (CO₂) and two unmodelled ones (crowding, leak). Remove the unmodelled ones
+and only CO₂ is left.
+
+### 27.2 The search
+
+Every strategy is the same three things: which doors stand open, where each crew goes, when. A strategy is applied half an hour
+after the fault (PROTOTYPE reaction time) with transit included, then the model runs to the horizon with no further input. Each run is
+scored only on what the model computes: the worst compartment CO₂ after the action, crew-hours above the target, whether the state
+settles (bounded) or keeps climbing, the first time any occupied compartment reaches the limit, and the CO₂ mass held outside the
+unit's sector. The Pareto front over those objectives is the set of strategies that no other strategy beats on every count.
+
+| Variant | Premise (every value PROTOTYPE) | Configurations | Viable (no occupied compartment over 0.5 % in the horizon) | Pareto set |
+| --- | --- | --- | --- | --- |
+| V0 | §24 as written: fans failed, fill 2 held shut, three crews of two free to go anywhere | 1,728 | 297 at 6 h; 146 at 12 h | **1**: everyone to sector 3, 0.215 %, 0 h above target |
+| V1 | Refined: fans failed, every door free, sector 2's crew held at the repair, sector 1's crew may go to sector 3 | 1,024 | 376 at 6 h; 172 at 12 h | **1**: all doors open, sector 1's crew to sector 3, 0.216 % (6 h) and 0.226 % (12 h) |
+| V3 | V1 with the unit at half duty | 1,024 | 376 at 6 h; 165 at 12 h | **1**: the same strategy, 0.266 % and 0.313 % |
+| V4 | Twelve crew in ring A (four per sector), unit at half duty, fans failed, sectors 1 and 2 may each go to sector 3 | 2,048 | 124 at 6 h; **0 at 12 h** | 9 at 6 h (below) |
+
+V1's search also counts the configurations that keep two crews in separate air: 283 of them are viable at 6 h, **none is bounded**.
+Every configuration that settles puts every crew in one air group with the unit.
+
+Named strategies (V1 at 12 h), for the debrief a scenario would need:
+
+| Strategy | Doors open | Result |
+| --- | --- | --- |
+| Seal every sector | 0 | Sector 1 reaches 0.5 % at 2.3 h; not viable |
+| Buffer sector 2 with two doors | 2 | Reaches 0.5 % at 9.2 h; not viable at 12 h |
+| Buffer sector 2 with all four of its corridor doors | 4 | Viable, still climbing, 0.426 % at 12 h |
+| Join sector 2 to the unit (3 doors), sector 1's crew to sector 3 | 3 | Settles, 0.273 % |
+| Join both arcs | 6 | Settles, 0.269 % |
+| Open the whole loop | 9 | Settles, 0.259 % |
+
+V4's front (6 h): pooling all twelve at the unit gives 0.436 % everywhere and a 0.363 % crew-weighted mean; keeping sector 2's four
+in place gives a lower mean (0.335–0.361 %) at the price of a worse compartment (0.458–0.498 %). The trade is real but small (0.03 % of
+mean against 0.06 % of peak), and it vanishes if the repair slips: at 12 h no configuration stays under the limit.
+
+### 27.3 Why the gate fails
+
+The model has one species and one sink. CO₂ is removed in proportion to its concentration at the unit, so bringing more air or more
+people to the unit is never worse for anyone: pooling dominates. The only thing that makes separation worthwhile is something the
+model does not carry. Separate results by criterion:
+
+| Gate criterion | Result |
+| --- | --- |
+| At least two valid strategies with computed, measurably different consequences | **Fails** in V0, V1 and V3 (one Pareto point). V4 has nine, but in two families 0.03 % of mean apart, and none survives the 12 h slip |
+| No trivially ideal strategy | **Fails**: "everyone to sector 3, open the doors" is ideal in every variant but V4 |
+| No hidden unmodelled penalty | **Fails** for §24 (crowding, leak). V1 to V4 pass: they score CO₂ only |
+| An unavoidable sacrifice | **Fails**: pooling saves everything in V0 to V3; in V4 the sacrifice is a few hundredths of a percent |
+| Conservation and determinism | **Pass**: ledger error at most 1.4 × 10⁻¹³ kg; identical results on rerun |
+| Time-step independence | **Pass**: 10, 60 and 300 s steps agree to 6.4 × 10⁻¹⁴ relative |
+| Fits the architecture | Pass (no new physics), but moot |
+
+Building Part C on this would teach the player one rule ("take everyone to the scrubber"), dressed as a dilemma. Per the brief, nothing
+was implemented.
+
+### 27.4 A finding for DS-O7
+
+With twelve crew in ring A and every system working (V4's start), the PROTOTYPE ventilation holds sectors 1 and 2 at 0.447 % and the
+corridor arcs between 0.35 % and 0.45 % at steady state. That is under the 0.5 % limit but well above the 0.3 % target, with no fault at
+all. The ship is designed for twelve (owner, 2026-11-08), split six per ring in DS-1 and Phase 2A, so this is not a defect of the
+modelled baseline. It does show that the 238 m³/h duct assumption has little margin if a ring has to carry the whole crew. Recorded
+under DS-O7; no value was changed.
+
+### 27.5 Revised DS-2 design: "Shared Air" [PROPOSAL; not built]
+
+The smallest mechanism that makes separation matter physically is **a second airborne species with a source and its own sink**. The
+probe V2 (same graph, same flows, PROTOTYPE values: a trace contaminant released in sector 2 that would reach its limit in 4 h in a
+sealed sector, removed only by a 15 m³/h trace-contaminant flow at the unit in sector 3) gives a real trade at 12 h:
+
+| Strategy | Sector 2's crew (× contaminant limit) | The other crews | CO₂ |
+| --- | --- | --- | --- |
+| Seal every sector | 3.0 | 0 | Sectors 1 and 2 over 0.5 % at 2.3 h |
+| Buffer sector 2 with two doors | 0.87 | 0 | Over 0.5 % at 9.2 h |
+| Buffer sector 2 with four doors | 0.53 | 0 | Viable, climbing (0.426 %) |
+| Join sector 2 to the unit, sector 1's crew to sector 3 | 0.57 | 0.39 | Settles (0.273 %) |
+| Open the whole loop | 0.31 | 0.21–0.23 | Settles (0.259 %) |
+
+Now the choices are non-dominated: opening spreads the contaminant to people who were clean, while closing keeps them clean and lets
+CO₂ build where the repair crew works. Neither is free. The sacrifice is computed, not narrated. The probe is indicative only: it was not
+searched to a full Pareto front, and its species, source and limit are placeholders.
+
+### 27.6 The smallest next requirement
+
+1. **SYS-002 v2: a vector of transported species.** The same transport matrix applied to a second concentration vector, each species
+   with its own per-compartment sources and its own removal node and flow. Linear, conserved, exact-step, the same parity and
+   checkpoint tests. No thermal, humidity, fire, pressure or electrical physics. Size S in Python and GDScript.
+2. **Owner choices** before any build: which trace species and source (a credible ECLSS or equipment off-gas, not an invented canon
+   event), its exposure limit and reference (for example a spacecraft maximum allowable concentration, labelled PROTOTYPE until an
+   owner row exists), and whether the trace-contaminant control sits with the CO₂ unit in sector 3.
+3. **Then rerun this gate** with the new species. Part C (the playable scenario) follows only if the full search finds at least two
+   non-dominated, viable strategies at both horizons.
+
+The weaker alternative, a capacity state on the unit with twelve crew (V4), needs no new species but gives a small trade that
+disappears at 12 h and depends on the DS-O7 margin finding above. Not recommended.
+
+### 27.7 Roadmap after the gate
+
+2B "Shared Air" needs the requirement above and a second gate (S, then M for the scenario) → 2C "Borrowed Air" (humidity, heat, parts;
+M–L) → 3 broader systems → 4 competitive and Hullrun → 5 narrative. Each needs separate authorization.
+
+## 28. Handoff (Phase 2A finalization and the Phase 2B gate)
+
+1. **Implemented.** DS-O10: the bay's readout is a fixed chest-height instrument panel on the bay (`equipment.gd` `mount_display`,
+   shared by `#interior-systems`, `#interior-deadship` and `#interior-airflow`), with short lines (`equipment.gd`, `airflow.gd`), and
+   the `deadship` check measures its clearance (§26.1). The checks and stills now use the walk camera's real eye height, and the carried
+   spare is held at chest height, no longer above the head (§26.1). Web export: shadow meshes off by importer default
+   (`godot/project.godot`), 11.87 MB less to download (§26.2). Phase 2B: the engineering gate study (`ds2_gate.py`, `ds2_gate.json`) and
+   this report (§27).
+2. **Reused.** `WfEquipment` and its board, the ring map, the walk's doors, `ring_air` unchanged (the gate calls its public functions),
+   the runtime and browser checks, the existing web budget.
+3. **Not built, by the gate.** No Phase 2B scenario, crew relocation, stability watch on SYS-002 or debrief. §27.3 says why; §27.5–27.6
+   give the revised design ("Shared Air") and the smallest next requirement (a second transported species, with owner-chosen source and
+   limit, then a second gate).
+4. **Decisions applied.** DS-O7 kept as PROTOTYPE (with the twelve-crew margin finding, §27.4); DS-O8 hatches closed and outside the
+   model; DS-O1 and DS-O2 unchanged; DS-O9 authorized subject to the gate (failed); DS-O10 resolved.
+5. **Validated.** §26.3: Python tests, the runtime export's 11 checks, the web build's native checks, the browser runs, the native
+   stills; §27: the gate's determinism, conservation and time-step independence.
+6. **Not validated.** No human playtest; no real phone or GPU (software WebGL); runtime memory not measured; the panel's readability on
+   a landscape phone from more than about a metre (small text, §26.1); the Shared Air probe is indicative, not a full search.
+7. **Unchanged.** DS-1 keeps its well-mixed model; `#interior`, Explore Exterior, the Engineering pages, canon, Drive, Blender and ship
+   geometry, the deployment.
+8. **Commits** on `claude/project-thread-dfyyv7`, pushed, not squashed, not merged, not deployed: the bay panel (DS-O10) with the eye
+   height and carried-spare fixes; the export size; the Phase 2B gate study and report.
+9. **Owner checklist** (additions to §22.4): on a phone held upright and on its side, stand at the ECLSS bay and read the panel; look
+   for anything it hides; carry the spare and confirm it is in front of the chest; open Enter Wayfarer on a slow connection and compare
+   the load time.
+10. **Owner questions.** Accept the panel (DS-O10) and the export change? For Phase 2B, choose: (a) the "Shared Air" requirement
+    (a second species: which source, which limit), (b) the weaker twelve-crew variant, or (c) park Phase 2B.
