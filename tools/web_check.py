@@ -25,7 +25,7 @@ touch button, and saves their stills; --part training-scripted runs their script
 the same checks on the same 1/60 s frames, about ten times sooner than in real time.
 
     python3 tools/web_check.py <site dir> --out <dir> [--chrome google-chrome] [--record] [--part main|equivalence|walk ...] [--frame-shell <chrome-headless-shell>]
-    python3 tools/web_check.py <site dir> --out <dir> --part training [--training systems|deadship] [--no-touch] [--rotate]
+    python3 tools/web_check.py <site dir> --out <dir> --part training [--training systems|deadship|airflow] [--no-touch] [--rotate]
     python3 tools/web_check.py <site dir> --merge <part out dir> ... --out <dir> [--record]
 """
 import argparse
@@ -565,7 +565,8 @@ def run_touch_walk(url, play_release, binary, sandbox, out, record_check, metric
 # The scene's own input handling then performs the action; a still asked for (WF_SHOT) is a DevTools screenshot of the page. The engine
 # runs with --disable-render-loop (software WebGL draws the ship at about 1 frame/s) and draws only for each still.
 TRAINING = (('systems', '#interior-systems', ('--systems', '--check-systems'), 'WF_GODOT_SYSTEMS '),
-            ('deadship', '#interior-deadship', ('--deadship', '--check-deadship'), 'WF_GODOT_DEADSHIP '))
+            ('deadship', '#interior-deadship', ('--deadship', '--check-deadship'), 'WF_GODOT_DEADSHIP '),
+            ('airflow', '#interior-airflow', ('--airflow', '--check-airflow'), 'WF_GODOT_AIRFLOW '))
 TRAINING_SECONDS = 2400
 
 

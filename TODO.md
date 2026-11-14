@@ -474,14 +474,14 @@ candidates of all nine classes are separate accessory assets (docs/ACCESSORIES.m
   after the whitebox review. **Done when:** the owner accepts or replaces the circulation, the conflicts are canonized or removed and a
   person completes both excursions in the desktop and web builds.
 
-- [ ] **DS — Deadship integration (owner briefs 2026-11-12 and 2026-11-13). PHASE 1 BUILT, AWAITING REVIEW.** Report
+- [ ] **DS — Deadship integration (owner briefs 2026-11-12, 2026-11-13 and 2026-11-14). PHASE 2A BUILT, AWAITING REVIEW.** Report
   `work/project-thread-dfyyv7/DEADSHIP_DESIGN.md` (branch `claude/project-thread-dfyyv7`): Deadship as a station-run training simulation
-  aboard Wayfarer on a reusable conserving ship-systems model (SYS-001 v2, docs/MODEL.md). Built: Phase 0 (`#interior-systems`) and
-  Phase 1, the unscored DS-1 "Scrubber" tutorial (`#interior-deadship`: failed fan, inspect, diagnose, isolate, fetch the spare from the
-  sector 2 workbench, fit, restore, 6 h stability watch, debrief), with the `systems` and `deadship` runtime checks and the opt-in
-  browser part `web_check.py --part training`. **Open:** the owner's review of Phase 1 and of the working assumptions DS-O1 (volume,
-  occupancy, rating) and DS-O2 (0.8 and 3.0 kPa reference bands); Phase 2 (DS-2 "Borrowed Air") is not authorized; its prerequisites
-  are in the report, section 18 (compartment connectivity first). **Done when:** the owner accepts Phase 1 and squashes or declines it.
+  aboard Wayfarer on reusable conserving ship-systems models (SYS-001 v2, SYS-002, docs/MODEL.md). Built: Phase 0 (`#interior-systems`),
+  Phase 1, the unscored DS-1 "Scrubber" tutorial (`#interior-deadship`), finalized for phones, and Phase 2A, ring A's air by compartment
+  with the walk's doors as connections (`#interior-airflow`), with the `systems`, `deadship` and `airflow` runtime checks and the opt-in
+  browser part `web_check.py --part training`. **Open:** the owner's review and playtest (checklist in the report, §22.4); ring
+  ventilation and the crew-tube hatches are PROTOTYPE (DS-O7, DS-O8); Phase 2B ("You cannot save everything", report §24) is not
+  authorized. **Done when:** the owner accepts Phases 1 and 2A and squashes or declines them.
 
 ## K — Finish the two characters, EVA training and production art
 

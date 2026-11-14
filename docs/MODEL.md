@@ -1974,7 +1974,7 @@ utility row.
   measured, at spawn). Both excursions take 88,000 physics frames, about 100 s headless natively; the same check passes in the
   WebAssembly build in headless Chromium with drawing off (about 1,470 s), and the scene draws there without errors.
 
-## Ring cabin CO₂ in the walk (SYS-001) and the Deadship scrubber tutorial (DS-1)
+## Ring cabin CO₂ in the walk (SYS-001, SYS-002) and the Deadship scrubber tutorial (DS-1)
 
 `src/wayfarer/cabin_air.py` (v2) is ring A's cabin CO₂ as one engineering state, with no game logic: one well-mixed free gas volume
 (PROTOTYPE 466.4 m³ = the three sectors' net volume + ring A's CIRC-001 corridor gross, crew tubes excluded), the cabin's 80 kPa
@@ -2008,13 +2008,31 @@ passes when the ring is removing CO₂ and ends at or below the target, then a d
 locomotion and doors keep real time) and stops while a page or the controls overlay is open; Ops after the end replays the training.
 Checks: `tests/test_cabin_air.py` (12), `tests/test_deadship.py` (4), the runtime checks `systems` and `deadship`
 (`--deadship --check-deadship`, WF_GODOT_DEADSHIP) and the opt-in browser part `web_check.py --part training` (real keys and touch).
-The default start is unchanged. Design, decisions and Phase 2 prerequisites: `work/project-thread-dfyyv7/DEADSHIP_DESIGN.md`.
+The default start is unchanged. Design, decisions and the Phase 2B proposal: `work/project-thread-dfyyv7/DEADSHIP_DESIGN.md`.
 
 On a phone (`WfInput.compact`) a training page (DS-1 or a learning station) takes the free band between the page's top row and the
 touch buttons, full width inside the safe area, its type stepped down until it fits (`WfPagePanel`, one rule for every screen); the
 goal, prompt and map step aside while it is open and return when it closes. The map stays under the touch utility row, which an
 upright phone moves below the page's Exit row. A training's equipment points (the ECLSS bay, the workbench) are amber marks on the
 map's rim.
+
+**Ring A air by compartment (SYS-002, Deadship Phase 2A).** `src/wayfarer/ring_air.py` splits the same CO₂ into ring A's nine pressure
+compartments: sectors A1–A3 at their net volume and the six corridor halves AC1a–AC3b at their gross cavity, 466.36 m³ in all (the
+SYS-001 volume, nothing counted twice; crew tubes and vestibule outside, their hatches held CLOSED, PROTOTYPE). Connections: the nine
+CIRC doors, one loop round the ring, and one PROTOTYPE intermodule-ventilation duct pair per bulkhead (balanced supply and return,
+0.066 m³/s, with a damper; no ventilation is in canon). An open door exchanges Q = (Cd/3)·W·H·√(g·H·ΔT/T) both ways (Cd 0.6, ΔT 0.5 K,
+PROTOTYPE: about 139 m³/h at ring A's floor gravity); a closed door or damper seals. Every exchange is balanced, so each compartment's
+gas amount stays P·V/(R·T) and no pressure state is needed. The occupants (PROTOTYPE two per sector) add CO₂ where they are; the unit
+draws from sector 3 only, at SYS-001's k. The linear system is stepped exactly, y(t+Δt) = exp(AΔt)·y(t), with the generated and removed
+totals inside the same exponential, so the ledger is a check, not a definition. In DS-1's configuration (doors shut, ventilation on)
+the steady state runs from 0.150 % in sector 3 to 0.223 % in sector 2 (well-mixed: 0.150 %); DS-1 keeps its one well-mixed volume.
+The export writes `wf_ring_air.json` (topology, exchange rates, 41 checkpoints of a 10 h run through cases C, D, E, B and F); `WfRingAir`
+(`godot/scripts/systems/ring_air.gd`) repeats the step operation for operation and must reproduce them first. `#interior-airflow`
+(`-- --airflow`) creates `WfAirflow` (`scripts/excursion/airflow.gd`, a WfEquipment): the walk's CIRC door leaves are the door edges
+(off the seat = open, read every frame, no second door state), Ops at the ECLSS bay switches the ventilation, the bay's board lists the
+nine compartments and the ring map colours them by CO₂ with each bulkhead's connection (green door, blue duct, red none). Checks:
+`tests/test_ring_air.py` (14) and the runtime check `airflow` (`--airflow --check-airflow`, WF_GODOT_AIRFLOW), also in
+`web_check.py --part training`.
 
 ## Retired runtime scenes
 

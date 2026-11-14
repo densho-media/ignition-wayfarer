@@ -167,6 +167,10 @@ func prompt(key_text: String) -> String:
 	var r := air.readout()
 	return "%s %s  ·  CO2 %.3f %% (%s)" % [key_text, op_label(), 100.0 * float(r["x"]), air.band_meaning(str(r["band"])) if r["band"] != "NOMINAL" else "within the control band"]
 
+## A goal line for the HUD while this equipment leads the start ("" keeps the walk's own).
+func goal_text() -> String:
+	return ""
+
 ## The browser/headless record (window.wayfarerWalk.systems).
 func record() -> Dictionary:
 	if air == null:

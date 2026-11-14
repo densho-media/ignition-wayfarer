@@ -101,6 +101,7 @@ var learning: WfLearning = null   # UJ-013 learning stations (WHAT / WHY / SHOW 
 var equipment: WfEquipment = null # SYS-001 Phase 0 proof (`--systems`, #interior-systems): the ECLSS bay operates ring A's CO2 model
 var deadship: WfDeadship = null   # Deadship DS-1 "Scrubber" training (`--deadship`, #interior-deadship): owns `equipment` when present
 var deadship_check: WfDeadshipCheck = null
+var airflow_check: WfAirflowCheck = null   # SYS-002 (`--airflow`, #interior-airflow): `equipment` is then a WfAirflow
 # LOCO-001 (docs/LOCOMOTION.md): the start (RING: on ring A's deck with the rings turning, the default; STATION: the full excursion from the
 # development station), the trainee's visible MPFB body and its locomotion on the decks.
 var start_mode := "RING"
@@ -128,6 +129,10 @@ static func systems_requested() -> bool:
 ## Deadship DS-1: the training rides on the ring start (simulated COAST); the default and systems starts never create it.
 static func deadship_requested() -> bool:
 	return "--deadship" in OS.get_cmdline_user_args() or WfWebPage.start_variant() == "deadship"
+
+## SYS-002 (Deadship Phase 2A): ring A's air by compartment rides on the ring start; the default, systems and DS-1 starts never create it.
+static func airflow_requested() -> bool:
+	return "--airflow" in OS.get_cmdline_user_args() or WfWebPage.start_variant() == "airflow"
 
 static func requested_start() -> String:
 	var args := OS.get_cmdline_user_args()
@@ -205,6 +210,13 @@ func _ready() -> void:
 			push_error("DEADSHIP: the training is unavailable: %s" % str(deadship.errors))
 		else:
 			say("GU instructor: " + " ".join(deadship.sc["steps"][0]["brief"].map(func(l): return deadship.fill(str(l)))))
+	elif airflow_requested():
+		equipment = WfAirflow.new(by_name, manifest, self)
+		var af := equipment as WfAirflow
+		if af.ring != null and not af.ring.verified:
+			push_error("SYS-002: the runtime air model does not reproduce its reference: %s" % str(af.ring.errors))
+		elif af.ready():
+			say("RING A AIR (simulation): the ring map colours each compartment by its CO2. Ventilation is on, so closed doors still exchange air. Walk to the sector 3 ECLSS bay and press %s to switch it off." % key("exc.ops"))
 	elif systems_requested():
 		equipment = WfEquipment.new(by_name, manifest, self)
 		if equipment.air != null and not equipment.air.verified:
@@ -229,6 +241,9 @@ func _ready() -> void:
 	elif "--check-deadship" in OS.get_cmdline_user_args():
 		deadship_check = WfDeadshipCheck.new()
 		deadship_check.run(self)
+	elif "--check-airflow" in OS.get_cmdline_user_args():
+		airflow_check = WfAirflowCheck.new()
+		airflow_check.run(self)
 
 # ---- package ---------------------------------------------------------------------------------------------------------------------------------
 
@@ -1762,6 +1777,8 @@ func where() -> String:
 func _goal_text() -> String:
 	if deadship != null:
 		return deadship.goal_text()
+	if equipment != null and equipment.goal_text() != "":
+		return equipment.goal_text()
 	var w := where()
 	var mv := "%s/%s" % [key("player.move_forward"), key("player.move_back")]
 	if w == "station":

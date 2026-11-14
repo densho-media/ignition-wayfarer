@@ -42,6 +42,9 @@ CHECKS = [
     # Deadship DS-1 (Phase 1): the Scrubber tutorial played through the trainee's Use and Ops, watch and debrief; WF_GODOT_DEADSHIP.
     dict(name='deadship', args=['--fixed-fps', '60', 'res://scenes/excursion.tscn', '--quit-after', '120000', '--', '--deadship', '--check-deadship'],
          scene='scenes/excursion.tscn', marker='"result":"PASS"'),
+    # SYS-002 (Deadship Phase 2A): ring A's air by compartment; the walk's doors and the bay's ventilation switch connect it; WF_GODOT_AIRFLOW.
+    dict(name='airflow', args=['--fixed-fps', '60', 'res://scenes/excursion.tscn', '--quit-after', '120000', '--', '--airflow', '--check-airflow'],
+         scene='scenes/excursion.tscn', marker='"result":"PASS"'),
     # CTRL-001: the player-action registry, the first-visit controls setup, the Controls menu, conflicts, persistence, migration and
     # storage failures, on isolated profiles (needs no package); WF_GODOT_CONTROLS.
     dict(name='controls', args=['--script', 'res://scripts/check_controls.gd'], script='scripts/check_controls.gd', marker='"result":"PASS"',

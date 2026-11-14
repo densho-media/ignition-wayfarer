@@ -611,6 +611,10 @@ def export(root, preset='COAST', out=None, identity=None, draco=False):
     import cabin_air
     cabin_air.write(root, out / cabin_air.FILE)
     packaged.append(cabin_air.FILE)
+    # SYS-002 (Deadship Phase 2A): ring A's CO2 by compartment (doors and ventilation as connections) and its reference checkpoints.
+    import ring_air
+    ring_air.write(root, out / ring_air.FILE)
+    packaged.append(ring_air.FILE)
     # Deadship DS-1 (Phase 1): the training scenario and its model-level reference replay (data/deadship/, no engineering values).
     import deadship
     deadship.write(root, out / deadship.FILE)
