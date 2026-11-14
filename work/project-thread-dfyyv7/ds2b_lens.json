@@ -1,0 +1,2388 @@
+{
+ "base": {
+  "within": 3588,
+  "within_contain": 3588,
+  "within_families": [
+   "contain / A1 own corridor / S1 crew to A1 / reconnect",
+   "contain / A1 own corridor / S1 crew to A2",
+   "contain / A1 own corridor / S1 crew to A2 / reconnect",
+   "contain / A1 own corridor / S1 crew to A3",
+   "contain / A1 own corridor / S1 crew to A3 / reconnect",
+   "contain / A1 sealed / S1 crew to A2",
+   "contain / A1 sealed / S1 crew to A2 / reconnect",
+   "contain / A1 sealed / S1 crew to A3",
+   "contain / A1 sealed / S1 crew to A3 / reconnect",
+   "contain / A1 to A2 / S1 crew to A1",
+   "contain / A1 to A2 / S1 crew to A1 / reconnect",
+   "contain / A1 to A2 / S1 crew to A2",
+   "contain / A1 to A2 / S1 crew to A2 / reconnect",
+   "contain / A1 to A2 / S1 crew to A3",
+   "contain / A1 to A2 / S1 crew to A3 / reconnect",
+   "contain / A1 to TCC / S1 crew to A1",
+   "contain / A1 to TCC / S1 crew to A1 / reconnect",
+   "contain / A1 to TCC / S1 crew to A2",
+   "contain / A1 to TCC / S1 crew to A2 / reconnect",
+   "contain / A1 to TCC / S1 crew to A3",
+   "contain / A1 to TCC / S1 crew to A3 / reconnect"
+  ],
+  "front": 32,
+  "front_families": {
+   "contain / A1 own corridor / S1 crew to A3": {
+    "family": "contain / A1 own corridor / S1 crew to A3",
+    "arcs": "12:Ha 23:Ha 31:Hb",
+    "dest": [
+     "A3",
+     "A3",
+     "A3"
+    ],
+    "contain": 1,
+    "t2": 0,
+    "r1": 0.259,
+    "r24": 0.018,
+    "dose": 2.623,
+    "co2_ch": 0.0,
+    "r7d": 0.536,
+    "restore_h": 56.0,
+    "co2_peak_pct": 0.162
+   },
+   "contain / A1 to A2 / S1 crew to A3": {
+    "family": "contain / A1 to A2 / S1 crew to A3",
+    "arcs": "12:B 23:Ha 31:Hb",
+    "dest": [
+     "A3",
+     "A3",
+     "A3"
+    ],
+    "contain": 1,
+    "t2": 0,
+    "r1": 0.244,
+    "r24": 0.017,
+    "dose": 2.552,
+    "co2_ch": 0.0,
+    "r7d": 0.527,
+    "restore_h": 56.0,
+    "co2_peak_pct": 0.162
+   },
+   "contain / A1 to TCC / S1 crew to A2 / reconnect": {
+    "family": "contain / A1 to TCC / S1 crew to A2 / reconnect",
+    "arcs": "12:Hb 23:Ha 31:B",
+    "dest": [
+     "A2",
+     "A2",
+     "A2"
+    ],
+    "contain": 1,
+    "t2": 1,
+    "r1": 0.303,
+    "r24": 0.221,
+    "dose": 99.94,
+    "co2_ch": 82.5,
+    "r7d": 0.436,
+    "restore_h": 28.0,
+    "co2_peak_pct": 0.433
+   },
+   "contain / A1 to TCC / S1 crew to A3": {
+    "family": "contain / A1 to TCC / S1 crew to A3",
+    "arcs": "12:O 23:O 31:Hb",
+    "dest": [
+     "A3",
+     "A3",
+     "A3"
+    ],
+    "contain": 1,
+    "t2": 0,
+    "r1": 0.272,
+    "r24": 0.218,
+    "dose": 98.581,
+    "co2_ch": 0.0,
+    "r7d": 0.518,
+    "restore_h": 39.0,
+    "co2_peak_pct": 0.162
+   },
+   "contain / A1 to TCC / S1 crew to A3 / reconnect": {
+    "family": "contain / A1 to TCC / S1 crew to A3 / reconnect",
+    "arcs": "12:Hb 23:Ha 31:D",
+    "dest": [
+     "A3",
+     "A2",
+     "A2"
+    ],
+    "contain": 1,
+    "t2": 1,
+    "r1": 0.487,
+    "r24": 0.3,
+    "dose": 113.363,
+    "co2_ch": 5.667,
+    "r7d": 0.515,
+    "restore_h": 29.0,
+    "co2_peak_pct": 0.341
+   }
+  },
+  "ideal": {
+   "r1": 0.242,
+   "r24": 0.017,
+   "dose": 2.552,
+   "co2_ch": 0.0,
+   "r7d": 0.436,
+   "restore_h": 23.75
+  },
+  "trivial": 0,
+  "restore_range_h": [
+   28.0,
+   56.0
+  ]
+ },
+ "inventory 3 g": {
+  "within": 7219,
+  "within_contain": 3722,
+  "within_families": [
+   "contain / A1 own corridor / S1 crew to A1 / reconnect",
+   "contain / A1 own corridor / S1 crew to A2",
+   "contain / A1 own corridor / S1 crew to A2 / reconnect",
+   "contain / A1 own corridor / S1 crew to A3",
+   "contain / A1 own corridor / S1 crew to A3 / reconnect",
+   "contain / A1 sealed / S1 crew to A2",
+   "contain / A1 sealed / S1 crew to A2 / reconnect",
+   "contain / A1 sealed / S1 crew to A3",
+   "contain / A1 sealed / S1 crew to A3 / reconnect",
+   "contain / A1 to A2 / S1 crew to A1",
+   "contain / A1 to A2 / S1 crew to A1 / reconnect",
+   "contain / A1 to A2 / S1 crew to A2",
+   "contain / A1 to A2 / S1 crew to A2 / reconnect",
+   "contain / A1 to A2 / S1 crew to A3",
+   "contain / A1 to A2 / S1 crew to A3 / reconnect",
+   "contain / A1 to TCC / S1 crew to A1",
+   "contain / A1 to TCC / S1 crew to A1 / reconnect",
+   "contain / A1 to TCC / S1 crew to A2",
+   "contain / A1 to TCC / S1 crew to A2 / reconnect",
+   "contain / A1 to TCC / S1 crew to A3",
+   "contain / A1 to TCC / S1 crew to A3 / reconnect",
+   "no contain / A1 own corridor / S1 crew to A1 / reconnect",
+   "no contain / A1 own corridor / S1 crew to A2",
+   "no contain / A1 own corridor / S1 crew to A2 / reconnect",
+   "no contain / A1 own corridor / S1 crew to A3",
+   "no contain / A1 own corridor / S1 crew to A3 / reconnect",
+   "no contain / A1 sealed / S1 crew to A2",
+   "no contain / A1 sealed / S1 crew to A2 / reconnect",
+   "no contain / A1 sealed / S1 crew to A3",
+   "no contain / A1 sealed / S1 crew to A3 / reconnect",
+   "no contain / A1 to A2 / S1 crew to A1 / reconnect",
+   "no contain / A1 to A2 / S1 crew to A2 / reconnect",
+   "no contain / A1 to A2 / S1 crew to A3",
+   "no contain / A1 to A2 / S1 crew to A3 / reconnect",
+   "no contain / A1 to TCC / S1 crew to A1",
+   "no contain / A1 to TCC / S1 crew to A1 / reconnect",
+   "no contain / A1 to TCC / S1 crew to A2",
+   "no contain / A1 to TCC / S1 crew to A2 / reconnect",
+   "no contain / A1 to TCC / S1 crew to A3",
+   "no contain / A1 to TCC / S1 crew to A3 / reconnect"
+  ],
+  "front": 208,
+  "front_families": {
+   "contain / A1 own corridor / S1 crew to A2": {
+    "family": "contain / A1 own corridor / S1 crew to A2",
+    "arcs": "12:Ha 23:B 31:Hb",
+    "dest": [
+     "A2",
+     "A2",
+     "A3"
+    ],
+    "contain": 1,
+    "t2": 0,
+    "r1": 0.11,
+    "r24": 0.008,
+    "dose": 1.513,
+    "co2_ch": 0.0,
+    "r7d": 0.23,
+    "restore_h": 27.0,
+    "co2_peak_pct": 0.242
+   },
+   "contain / A1 own corridor / S1 crew to A3": {
+    "family": "contain / A1 own corridor / S1 crew to A3",
+    "arcs": "12:Hb 23:Ha 31:Hb",
+    "dest": [
+     "A3",
+     "A3",
+     "A3"
+    ],
+    "contain": 1,
+    "t2": 0,
+    "r1": 0.128,
+    "r24": 0.009,
+    "dose": 1.211,
+    "co2_ch": 0.0,
+    "r7d": 0.229,
+    "restore_h": 27.0,
+    "co2_peak_pct": 0.165
+   },
+   "contain / A1 sealed / S1 crew to A3": {
+    "family": "contain / A1 sealed / S1 crew to A3",
+    "arcs": "12:Hb 23:Ha 31:S",
+    "dest": [
+     "A3",
+     "A3",
+     "A3"
+    ],
+    "contain": 1,
+    "t2": 0,
+    "r1": 0.153,
+    "r24": 0.01,
+    "dose": 1.333,
+    "co2_ch": 0.0,
+    "r7d": 0.237,
+    "restore_h": 27.0,
+    "co2_peak_pct": 0.175
+   },
+   "contain / A1 to A2 / S1 crew to A3": {
+    "family": "contain / A1 to A2 / S1 crew to A3",
+    "arcs": "12:B 23:Ha 31:Hb",
+    "dest": [
+     "A3",
+     "A3",
+     "A3"
+    ],
+    "contain": 1,
+    "t2": 0,
+    "r1": 0.105,
+    "r24": 0.007,
+    "dose": 1.094,
+    "co2_ch": 0.0,
+    "r7d": 0.226,
+    "restore_h": 27.0,
+    "co2_peak_pct": 0.162
+   },
+   "contain / A1 to TCC / S1 crew to A2 / reconnect": {
+    "family": "contain / A1 to TCC / S1 crew to A2 / reconnect",
+    "arcs": "12:Hb 23:Ha 31:B",
+    "dest": [
+     "A2",
+     "A2",
+     "A2"
+    ],
+    "contain": 1,
+    "t2": 1,
+    "r1": 0.13,
+    "r24": 0.095,
+    "dose": 42.831,
+    "co2_ch": 82.5,
+    "r7d": 0.187,
+    "restore_h": 4.833,
+    "co2_peak_pct": 0.433
+   },
+   "contain / A1 to TCC / S1 crew to A3": {
+    "family": "contain / A1 to TCC / S1 crew to A3",
+    "arcs": "12:D 23:O 31:Hb",
+    "dest": [
+     "A3",
+     "A3",
+     "A3"
+    ],
+    "contain": 1,
+    "t2": 0,
+    "r1": 0.112,
+    "r24": 0.097,
+    "dose": 44.236,
+    "co2_ch": 0.0,
+    "r7d": 0.221,
+    "restore_h": 10.083,
+    "co2_peak_pct": 0.162
+   },
+   "contain / A1 to TCC / S1 crew to A3 / reconnect": {
+    "family": "contain / A1 to TCC / S1 crew to A3 / reconnect",
+    "arcs": "12:S 23:Ha 31:B",
+    "dest": [
+     "A3",
+     "A2",
+     "A2"
+    ],
+    "contain": 1,
+    "t2": 1,
+    "r1": 0.227,
+    "r24": 0.129,
+    "dose": 46.467,
+    "co2_ch": 11.333,
+    "r7d": 0.22,
+    "restore_h": 4.917,
+    "co2_peak_pct": 0.467
+   },
+   "no contain / A1 own corridor / S1 crew to A2": {
+    "family": "no contain / A1 own corridor / S1 crew to A2",
+    "arcs": "12:S 23:B 31:Hb",
+    "dest": [
+     "A2",
+     "A2",
+     "A3"
+    ],
+    "contain": 0,
+    "t2": 0,
+    "r1": 0.041,
+    "r24": 0.004,
+    "dose": 1.166,
+    "co2_ch": 0.0,
+    "r7d": 0.786,
+    "restore_h": 69.0,
+    "co2_peak_pct": 0.242
+   },
+   "no contain / A1 own corridor / S1 crew to A3": {
+    "family": "no contain / A1 own corridor / S1 crew to A3",
+    "arcs": "12:Hb 23:Ha 31:Hb",
+    "dest": [
+     "A3",
+     "A3",
+     "A3"
+    ],
+    "contain": 0,
+    "t2": 0,
+    "r1": 0.042,
+    "r24": 0.003,
+    "dose": 0.779,
+    "co2_ch": 0.0,
+    "r7d": 0.785,
+    "restore_h": 69.0,
+    "co2_peak_pct": 0.154
+   },
+   "no contain / A1 sealed / S1 crew to A2": {
+    "family": "no contain / A1 sealed / S1 crew to A2",
+    "arcs": "12:S 23:B 31:S",
+    "dest": [
+     "A2",
+     "A2",
+     "A3"
+    ],
+    "contain": 0,
+    "t2": 0,
+    "r1": 0.041,
+    "r24": 0.004,
+    "dose": 1.166,
+    "co2_ch": 0.0,
+    "r7d": 0.817,
+    "restore_h": 70.0,
+    "co2_peak_pct": 0.242
+   },
+   "no contain / A1 sealed / S1 crew to A3": {
+    "family": "no contain / A1 sealed / S1 crew to A3",
+    "arcs": "12:Hb 23:Ha 31:S",
+    "dest": [
+     "A3",
+     "A3",
+     "A3"
+    ],
+    "contain": 0,
+    "t2": 0,
+    "r1": 0.042,
+    "r24": 0.003,
+    "dose": 0.778,
+    "co2_ch": 0.0,
+    "r7d": 0.816,
+    "restore_h": 70.0,
+    "co2_peak_pct": 0.153
+   },
+   "no contain / A1 to A2 / S1 crew to A3": {
+    "family": "no contain / A1 to A2 / S1 crew to A3",
+    "arcs": "12:B 23:Ha 31:Hb",
+    "dest": [
+     "A3",
+     "A3",
+     "A3"
+    ],
+    "contain": 0,
+    "t2": 0,
+    "r1": 0.042,
+    "r24": 0.003,
+    "dose": 0.779,
+    "co2_ch": 0.0,
+    "r7d": 0.778,
+    "restore_h": 70.0,
+    "co2_peak_pct": 0.154
+   }
+  },
+  "ideal": {
+   "r1": 0.04,
+   "r24": 0.003,
+   "dose": 0.778,
+   "co2_ch": 0.0,
+   "r7d": 0.187,
+   "restore_h": 3.5
+  },
+  "trivial": 0,
+  "restore_range_h": [
+   4.833333333333333,
+   70.0
+  ]
+ },
+ "inventory 20 g": {
+  "within": 0,
+  "within_contain": 0,
+  "within_families": [],
+  "least_exceedance": {
+   "family": "contain / A1 to TCC / S1 crew to A2 / reconnect",
+   "arcs": "12:Hb 23:Ha 31:B",
+   "dest": [
+    "A2",
+    "A2",
+    "A2"
+   ],
+   "contain": 1,
+   "t2": 1,
+   "r1": 0.865,
+   "r24": 0.631,
+   "dose": 285.542,
+   "co2_ch": 82.5,
+   "r7d": 1.245,
+   "restore_h": 64.0,
+   "co2_peak_pct": 0.433
+  }
+ },
+ "release tau 15 min": {
+  "within": 0,
+  "within_contain": 0,
+  "within_families": [],
+  "least_exceedance": {
+   "family": "contain / A1 to TCC / S1 crew to A2 / reconnect",
+   "arcs": "12:Hb 23:Ha 31:B",
+   "dest": [
+    "A2",
+    "A2",
+    "A2"
+   ],
+   "contain": 1,
+   "t2": 1,
+   "r1": 0.878,
+   "r24": 0.595,
+   "dose": 268.711,
+   "co2_ch": 82.5,
+   "r7d": 1.159,
+   "restore_h": 61.0,
+   "co2_peak_pct": 0.433
+  }
+ },
+ "release tau 4 h": {
+  "within": 3722,
+  "within_contain": 3722,
+  "within_families": [
+   "contain / A1 own corridor / S1 crew to A1 / reconnect",
+   "contain / A1 own corridor / S1 crew to A2",
+   "contain / A1 own corridor / S1 crew to A2 / reconnect",
+   "contain / A1 own corridor / S1 crew to A3",
+   "contain / A1 own corridor / S1 crew to A3 / reconnect",
+   "contain / A1 sealed / S1 crew to A2",
+   "contain / A1 sealed / S1 crew to A2 / reconnect",
+   "contain / A1 sealed / S1 crew to A3",
+   "contain / A1 sealed / S1 crew to A3 / reconnect",
+   "contain / A1 to A2 / S1 crew to A1",
+   "contain / A1 to A2 / S1 crew to A1 / reconnect",
+   "contain / A1 to A2 / S1 crew to A2",
+   "contain / A1 to A2 / S1 crew to A2 / reconnect",
+   "contain / A1 to A2 / S1 crew to A3",
+   "contain / A1 to A2 / S1 crew to A3 / reconnect",
+   "contain / A1 to TCC / S1 crew to A1",
+   "contain / A1 to TCC / S1 crew to A1 / reconnect",
+   "contain / A1 to TCC / S1 crew to A2",
+   "contain / A1 to TCC / S1 crew to A2 / reconnect",
+   "contain / A1 to TCC / S1 crew to A3",
+   "contain / A1 to TCC / S1 crew to A3 / reconnect"
+  ],
+  "front": 5,
+  "front_families": {
+   "contain / A1 to A2 / S1 crew to A3": {
+    "family": "contain / A1 to A2 / S1 crew to A3",
+    "arcs": "12:B 23:Ha 31:Hb",
+    "dest": [
+     "A3",
+     "A3",
+     "A3"
+    ],
+    "contain": 1,
+    "t2": 0,
+    "r1": 0.067,
+    "r24": 0.005,
+    "dose": 0.679,
+    "co2_ch": 0.0,
+    "r7d": 0.149,
+    "restore_h": 1.583,
+    "co2_peak_pct": 0.162
+   }
+  },
+  "ideal": {
+   "r1": 0.066,
+   "r24": 0.005,
+   "dose": 0.679,
+   "co2_ch": 0.0,
+   "r7d": 0.122,
+   "restore_h": 0.583
+  },
+  "trivial": 3,
+  "restore_range_h": [
+   1.5833333333333333,
+   3.4166666666666665
+  ]
+ },
+ "ventilation x0.5": {
+  "within": 3229,
+  "within_contain": 3229,
+  "within_families": [
+   "contain / A1 own corridor / S1 crew to A1 / reconnect",
+   "contain / A1 own corridor / S1 crew to A2",
+   "contain / A1 own corridor / S1 crew to A2 / reconnect",
+   "contain / A1 own corridor / S1 crew to A3",
+   "contain / A1 own corridor / S1 crew to A3 / reconnect",
+   "contain / A1 sealed / S1 crew to A2",
+   "contain / A1 sealed / S1 crew to A2 / reconnect",
+   "contain / A1 sealed / S1 crew to A3",
+   "contain / A1 sealed / S1 crew to A3 / reconnect",
+   "contain / A1 to A2 / S1 crew to A1 / reconnect",
+   "contain / A1 to A2 / S1 crew to A2 / reconnect",
+   "contain / A1 to A2 / S1 crew to A3",
+   "contain / A1 to A2 / S1 crew to A3 / reconnect",
+   "contain / A1 to TCC / S1 crew to A1",
+   "contain / A1 to TCC / S1 crew to A1 / reconnect",
+   "contain / A1 to TCC / S1 crew to A2",
+   "contain / A1 to TCC / S1 crew to A2 / reconnect",
+   "contain / A1 to TCC / S1 crew to A3",
+   "contain / A1 to TCC / S1 crew to A3 / reconnect"
+  ],
+  "front": 40,
+  "front_families": {
+   "contain / A1 own corridor / S1 crew to A2": {
+    "family": "contain / A1 own corridor / S1 crew to A2",
+    "arcs": "12:Ha 23:B 31:Hb",
+    "dest": [
+     "A2",
+     "A2",
+     "A3"
+    ],
+    "contain": 1,
+    "t2": 0,
+    "r1": 0.336,
+    "r24": 0.022,
+    "dose": 2.601,
+    "co2_ch": 0.0,
+    "r7d": 0.579,
+    "restore_h": 58.0,
+    "co2_peak_pct": 0.285
+   },
+   "contain / A1 own corridor / S1 crew to A3": {
+    "family": "contain / A1 own corridor / S1 crew to A3",
+    "arcs": "12:Ha 23:D 31:Hb",
+    "dest": [
+     "A3",
+     "A2",
+     "A3"
+    ],
+    "contain": 1,
+    "t2": 0,
+    "r1": 0.336,
+    "r24": 0.022,
+    "dose": 2.595,
+    "co2_ch": 0.0,
+    "r7d": 0.579,
+    "restore_h": 58.0,
+    "co2_peak_pct": 0.296
+   },
+   "contain / A1 to A2 / S1 crew to A3": {
+    "family": "contain / A1 to A2 / S1 crew to A3",
+    "arcs": "12:B 23:Ha 31:Hb",
+    "dest": [
+     "A3",
+     "A3",
+     "A3"
+    ],
+    "contain": 1,
+    "t2": 0,
+    "r1": 0.308,
+    "r24": 0.02,
+    "dose": 2.286,
+    "co2_ch": 0.0,
+    "r7d": 0.562,
+    "restore_h": 58.0,
+    "co2_peak_pct": 0.167
+   },
+   "contain / A1 to TCC / S1 crew to A2": {
+    "family": "contain / A1 to TCC / S1 crew to A2",
+    "arcs": "12:Hb 23:D 31:D",
+    "dest": [
+     "A2",
+     "A2",
+     "A3"
+    ],
+    "contain": 1,
+    "t2": 0,
+    "r1": 0.389,
+    "r24": 0.257,
+    "dose": 117.0,
+    "co2_ch": 79.667,
+    "r7d": 0.509,
+    "restore_h": 33.0,
+    "co2_peak_pct": 0.43
+   },
+   "contain / A1 to TCC / S1 crew to A2 / reconnect": {
+    "family": "contain / A1 to TCC / S1 crew to A2 / reconnect",
+    "arcs": "12:Hb 23:Ha 31:B",
+    "dest": [
+     "A2",
+     "A2",
+     "A2"
+    ],
+    "contain": 1,
+    "t2": 1,
+    "r1": 0.351,
+    "r24": 0.216,
+    "dose": 95.928,
+    "co2_ch": 135.5,
+    "r7d": 0.447,
+    "restore_h": 30.0,
+    "co2_peak_pct": 0.471
+   },
+   "contain / A1 to TCC / S1 crew to A3": {
+    "family": "contain / A1 to TCC / S1 crew to A3",
+    "arcs": "12:D 23:D 31:Hb",
+    "dest": [
+     "A3",
+     "A3",
+     "A3"
+    ],
+    "contain": 1,
+    "t2": 0,
+    "r1": 0.338,
+    "r24": 0.212,
+    "dose": 94.116,
+    "co2_ch": 0.0,
+    "r7d": 0.541,
+    "restore_h": 41.0,
+    "co2_peak_pct": 0.167
+   }
+  },
+  "ideal": {
+   "r1": 0.307,
+   "r24": 0.02,
+   "dose": 2.286,
+   "co2_ch": 0.0,
+   "r7d": 0.447,
+   "restore_h": 24.0
+  },
+  "trivial": 0,
+  "restore_range_h": [
+   30.0,
+   59.0
+  ]
+ },
+ "ventilation x1.5": {
+  "within": 3753,
+  "within_contain": 3753,
+  "within_families": [
+   "contain / A1 own corridor / S1 crew to A1 / reconnect",
+   "contain / A1 own corridor / S1 crew to A2",
+   "contain / A1 own corridor / S1 crew to A2 / reconnect",
+   "contain / A1 own corridor / S1 crew to A3",
+   "contain / A1 own corridor / S1 crew to A3 / reconnect",
+   "contain / A1 sealed / S1 crew to A2",
+   "contain / A1 sealed / S1 crew to A2 / reconnect",
+   "contain / A1 sealed / S1 crew to A3",
+   "contain / A1 sealed / S1 crew to A3 / reconnect",
+   "contain / A1 to A2 / S1 crew to A1",
+   "contain / A1 to A2 / S1 crew to A1 / reconnect",
+   "contain / A1 to A2 / S1 crew to A2",
+   "contain / A1 to A2 / S1 crew to A2 / reconnect",
+   "contain / A1 to A2 / S1 crew to A3",
+   "contain / A1 to A2 / S1 crew to A3 / reconnect",
+   "contain / A1 to TCC / S1 crew to A1",
+   "contain / A1 to TCC / S1 crew to A1 / reconnect",
+   "contain / A1 to TCC / S1 crew to A2",
+   "contain / A1 to TCC / S1 crew to A2 / reconnect",
+   "contain / A1 to TCC / S1 crew to A3",
+   "contain / A1 to TCC / S1 crew to A3 / reconnect"
+  ],
+  "front": 33,
+  "front_families": {
+   "contain / A1 own corridor / S1 crew to A3": {
+    "family": "contain / A1 own corridor / S1 crew to A3",
+    "arcs": "12:Hb 23:O 31:Hb",
+    "dest": [
+     "A3",
+     "A3",
+     "A3"
+    ],
+    "contain": 1,
+    "t2": 0,
+    "r1": 0.26,
+    "r24": 0.068,
+    "dose": 26.963,
+    "co2_ch": 0.0,
+    "r7d": 0.518,
+    "restore_h": 51.0,
+    "co2_peak_pct": 0.162
+   },
+   "contain / A1 to A2 / S1 crew to A3": {
+    "family": "contain / A1 to A2 / S1 crew to A3",
+    "arcs": "12:B 23:Ha 31:Hb",
+    "dest": [
+     "A3",
+     "A3",
+     "A3"
+    ],
+    "contain": 1,
+    "t2": 0,
+    "r1": 0.213,
+    "r24": 0.016,
+    "dose": 3.255,
+    "co2_ch": 0.0,
+    "r7d": 0.514,
+    "restore_h": 55.0,
+    "co2_peak_pct": 0.16
+   },
+   "contain / A1 to TCC / S1 crew to A2 / reconnect": {
+    "family": "contain / A1 to TCC / S1 crew to A2 / reconnect",
+    "arcs": "12:Hb 23:Ha 31:B",
+    "dest": [
+     "A2",
+     "A2",
+     "A2"
+    ],
+    "contain": 1,
+    "t2": 1,
+    "r1": 0.274,
+    "r24": 0.222,
+    "dose": 101.668,
+    "co2_ch": 16.5,
+    "r7d": 0.432,
+    "restore_h": 28.0,
+    "co2_peak_pct": 0.42
+   },
+   "contain / A1 to TCC / S1 crew to A3": {
+    "family": "contain / A1 to TCC / S1 crew to A3",
+    "arcs": "12:B 23:S 31:D",
+    "dest": [
+     "A3",
+     "A3",
+     "A3"
+    ],
+    "contain": 1,
+    "t2": 0,
+    "r1": 0.362,
+    "r24": 0.314,
+    "dose": 146.667,
+    "co2_ch": 0.0,
+    "r7d": 0.505,
+    "restore_h": 25.0,
+    "co2_peak_pct": 0.16
+   },
+   "contain / A1 to TCC / S1 crew to A3 / reconnect": {
+    "family": "contain / A1 to TCC / S1 crew to A3 / reconnect",
+    "arcs": "12:Hb 23:Ha 31:D",
+    "dest": [
+     "A3",
+     "A2",
+     "A2"
+    ],
+    "contain": 1,
+    "t2": 1,
+    "r1": 0.494,
+    "r24": 0.3,
+    "dose": 114.379,
+    "co2_ch": 4.0,
+    "r7d": 0.507,
+    "restore_h": 28.0,
+    "co2_peak_pct": 0.332
+   }
+  },
+  "ideal": {
+   "r1": 0.208,
+   "r24": 0.016,
+   "dose": 3.255,
+   "co2_ch": 0.0,
+   "r7d": 0.432,
+   "restore_h": 23.083
+  },
+  "trivial": 0,
+  "restore_range_h": [
+   25.0,
+   55.0
+  ]
+ },
+ "door flow x0.5": {
+  "within": 3373,
+  "within_contain": 3373,
+  "within_families": [
+   "contain / A1 own corridor / S1 crew to A1 / reconnect",
+   "contain / A1 own corridor / S1 crew to A2",
+   "contain / A1 own corridor / S1 crew to A2 / reconnect",
+   "contain / A1 own corridor / S1 crew to A3",
+   "contain / A1 own corridor / S1 crew to A3 / reconnect",
+   "contain / A1 sealed / S1 crew to A2",
+   "contain / A1 sealed / S1 crew to A2 / reconnect",
+   "contain / A1 sealed / S1 crew to A3",
+   "contain / A1 sealed / S1 crew to A3 / reconnect",
+   "contain / A1 to A2 / S1 crew to A1 / reconnect",
+   "contain / A1 to A2 / S1 crew to A2 / reconnect",
+   "contain / A1 to A2 / S1 crew to A3",
+   "contain / A1 to A2 / S1 crew to A3 / reconnect",
+   "contain / A1 to TCC / S1 crew to A1",
+   "contain / A1 to TCC / S1 crew to A1 / reconnect",
+   "contain / A1 to TCC / S1 crew to A2",
+   "contain / A1 to TCC / S1 crew to A2 / reconnect",
+   "contain / A1 to TCC / S1 crew to A3",
+   "contain / A1 to TCC / S1 crew to A3 / reconnect"
+  ],
+  "front": 44,
+  "front_families": {
+   "contain / A1 own corridor / S1 crew to A3": {
+    "family": "contain / A1 own corridor / S1 crew to A3",
+    "arcs": "12:Hb 23:Hb 31:Hb",
+    "dest": [
+     "A3",
+     "A3",
+     "A3"
+    ],
+    "contain": 1,
+    "t2": 0,
+    "r1": 0.296,
+    "r24": 0.021,
+    "dose": 3.023,
+    "co2_ch": 0.0,
+    "r7d": 0.536,
+    "restore_h": 56.0,
+    "co2_peak_pct": 0.165
+   },
+   "contain / A1 to A2 / S1 crew to A3": {
+    "family": "contain / A1 to A2 / S1 crew to A3",
+    "arcs": "12:B 23:Ha 31:Hb",
+    "dest": [
+     "A3",
+     "A3",
+     "A3"
+    ],
+    "contain": 1,
+    "t2": 0,
+    "r1": 0.251,
+    "r24": 0.017,
+    "dose": 2.585,
+    "co2_ch": 0.0,
+    "r7d": 0.527,
+    "restore_h": 56.0,
+    "co2_peak_pct": 0.162
+   },
+   "contain / A1 to TCC / S1 crew to A2 / reconnect": {
+    "family": "contain / A1 to TCC / S1 crew to A2 / reconnect",
+    "arcs": "12:Hb 23:Ha 31:B",
+    "dest": [
+     "A2",
+     "A2",
+     "A2"
+    ],
+    "contain": 1,
+    "t2": 1,
+    "r1": 0.313,
+    "r24": 0.222,
+    "dose": 100.455,
+    "co2_ch": 84.0,
+    "r7d": 0.438,
+    "restore_h": 28.0,
+    "co2_peak_pct": 0.433
+   },
+   "contain / A1 to TCC / S1 crew to A3": {
+    "family": "contain / A1 to TCC / S1 crew to A3",
+    "arcs": "12:D 23:O 31:Hb",
+    "dest": [
+     "A3",
+     "A3",
+     "A3"
+    ],
+    "contain": 1,
+    "t2": 0,
+    "r1": 0.258,
+    "r24": 0.196,
+    "dose": 88.024,
+    "co2_ch": 0.0,
+    "r7d": 0.518,
+    "restore_h": 41.0,
+    "co2_peak_pct": 0.162
+   },
+   "contain / A1 to TCC / S1 crew to A3 / reconnect": {
+    "family": "contain / A1 to TCC / S1 crew to A3 / reconnect",
+    "arcs": "12:Hb 23:Ha 31:D",
+    "dest": [
+     "A3",
+     "A2",
+     "A2"
+    ],
+    "contain": 1,
+    "t2": 1,
+    "r1": 0.487,
+    "r24": 0.3,
+    "dose": 113.363,
+    "co2_ch": 5.667,
+    "r7d": 0.515,
+    "restore_h": 29.0,
+    "co2_peak_pct": 0.341
+   }
+  },
+  "ideal": {
+   "r1": 0.248,
+   "r24": 0.017,
+   "dose": 2.585,
+   "co2_ch": 0.0,
+   "r7d": 0.438,
+   "restore_h": 24.0
+  },
+  "trivial": 0,
+  "restore_range_h": [
+   28.0,
+   56.0
+  ]
+ },
+ "door flow x2": {
+  "within": 3818,
+  "within_contain": 3818,
+  "within_families": [
+   "contain / A1 own corridor / S1 crew to A1 / reconnect",
+   "contain / A1 own corridor / S1 crew to A2",
+   "contain / A1 own corridor / S1 crew to A2 / reconnect",
+   "contain / A1 own corridor / S1 crew to A3",
+   "contain / A1 own corridor / S1 crew to A3 / reconnect",
+   "contain / A1 sealed / S1 crew to A2",
+   "contain / A1 sealed / S1 crew to A2 / reconnect",
+   "contain / A1 sealed / S1 crew to A3",
+   "contain / A1 sealed / S1 crew to A3 / reconnect",
+   "contain / A1 to A2 / S1 crew to A1",
+   "contain / A1 to A2 / S1 crew to A1 / reconnect",
+   "contain / A1 to A2 / S1 crew to A2",
+   "contain / A1 to A2 / S1 crew to A2 / reconnect",
+   "contain / A1 to A2 / S1 crew to A3",
+   "contain / A1 to A2 / S1 crew to A3 / reconnect",
+   "contain / A1 to TCC / S1 crew to A1",
+   "contain / A1 to TCC / S1 crew to A1 / reconnect",
+   "contain / A1 to TCC / S1 crew to A2",
+   "contain / A1 to TCC / S1 crew to A2 / reconnect",
+   "contain / A1 to TCC / S1 crew to A3",
+   "contain / A1 to TCC / S1 crew to A3 / reconnect"
+  ],
+  "front": 41,
+  "front_families": {
+   "contain / A1 own corridor / S1 crew to A3": {
+    "family": "contain / A1 own corridor / S1 crew to A3",
+    "arcs": "12:Hb 23:O 31:Hb",
+    "dest": [
+     "A3",
+     "A3",
+     "A3"
+    ],
+    "contain": 1,
+    "t2": 0,
+    "r1": 0.303,
+    "r24": 0.064,
+    "dose": 24.032,
+    "co2_ch": 0.0,
+    "r7d": 0.532,
+    "restore_h": 52.0,
+    "co2_peak_pct": 0.165
+   },
+   "contain / A1 own corridor / S1 crew to A3 / reconnect": {
+    "family": "contain / A1 own corridor / S1 crew to A3 / reconnect",
+    "arcs": "12:Ha 23:Ha 31:S",
+    "dest": [
+     "A3",
+     "A3",
+     "A3"
+    ],
+    "contain": 1,
+    "t2": 1,
+    "r1": 0.293,
+    "r24": 0.244,
+    "dose": 110.357,
+    "co2_ch": 0.0,
+    "r7d": 0.517,
+    "restore_h": 36.0,
+    "co2_peak_pct": 0.167
+   },
+   "contain / A1 to A2 / S1 crew to A3": {
+    "family": "contain / A1 to A2 / S1 crew to A3",
+    "arcs": "12:B 23:Ha 31:Hb",
+    "dest": [
+     "A3",
+     "A3",
+     "A3"
+    ],
+    "contain": 1,
+    "t2": 0,
+    "r1": 0.234,
+    "r24": 0.016,
+    "dose": 2.5,
+    "co2_ch": 0.0,
+    "r7d": 0.526,
+    "restore_h": 56.0,
+    "co2_peak_pct": 0.162
+   },
+   "contain / A1 to A2 / S1 crew to A3 / reconnect": {
+    "family": "contain / A1 to A2 / S1 crew to A3 / reconnect",
+    "arcs": "12:B 23:S 31:S",
+    "dest": [
+     "A3",
+     "A3",
+     "A3"
+    ],
+    "contain": 1,
+    "t2": 1,
+    "r1": 0.256,
+    "r24": 0.242,
+    "dose": 110.294,
+    "co2_ch": 0.0,
+    "r7d": 0.515,
+    "restore_h": 36.0,
+    "co2_peak_pct": 0.164
+   },
+   "contain / A1 to TCC / S1 crew to A2 / reconnect": {
+    "family": "contain / A1 to TCC / S1 crew to A2 / reconnect",
+    "arcs": "12:Hb 23:Ha 31:B",
+    "dest": [
+     "A2",
+     "A2",
+     "A2"
+    ],
+    "contain": 1,
+    "t2": 1,
+    "r1": 0.288,
+    "r24": 0.219,
+    "dose": 99.3,
+    "co2_ch": 81.0,
+    "r7d": 0.432,
+    "restore_h": 28.0,
+    "co2_peak_pct": 0.433
+   },
+   "contain / A1 to TCC / S1 crew to A3": {
+    "family": "contain / A1 to TCC / S1 crew to A3",
+    "arcs": "12:D 23:D 31:Hb",
+    "dest": [
+     "A3",
+     "A3",
+     "A3"
+    ],
+    "contain": 1,
+    "t2": 0,
+    "r1": 0.268,
+    "r24": 0.243,
+    "dose": 110.622,
+    "co2_ch": 0.0,
+    "r7d": 0.516,
+    "restore_h": 36.0,
+    "co2_peak_pct": 0.162
+   }
+  },
+  "ideal": {
+   "r1": 0.231,
+   "r24": 0.016,
+   "dose": 2.5,
+   "co2_ch": 0.0,
+   "r7d": 0.432,
+   "restore_h": 23.417
+  },
+  "trivial": 0,
+  "restore_range_h": [
+   28.0,
+   56.0
+  ]
+ },
+ "TCC efficiency 0.5": {
+  "within": 3400,
+  "within_contain": 3400,
+  "within_families": [
+   "contain / A1 own corridor / S1 crew to A2",
+   "contain / A1 own corridor / S1 crew to A2 / reconnect",
+   "contain / A1 own corridor / S1 crew to A3",
+   "contain / A1 own corridor / S1 crew to A3 / reconnect",
+   "contain / A1 sealed / S1 crew to A2",
+   "contain / A1 sealed / S1 crew to A2 / reconnect",
+   "contain / A1 sealed / S1 crew to A3",
+   "contain / A1 sealed / S1 crew to A3 / reconnect",
+   "contain / A1 to A2 / S1 crew to A1 / reconnect",
+   "contain / A1 to A2 / S1 crew to A2 / reconnect",
+   "contain / A1 to A2 / S1 crew to A3",
+   "contain / A1 to A2 / S1 crew to A3 / reconnect",
+   "contain / A1 to TCC / S1 crew to A1",
+   "contain / A1 to TCC / S1 crew to A1 / reconnect",
+   "contain / A1 to TCC / S1 crew to A2",
+   "contain / A1 to TCC / S1 crew to A2 / reconnect",
+   "contain / A1 to TCC / S1 crew to A3",
+   "contain / A1 to TCC / S1 crew to A3 / reconnect"
+  ],
+  "front": 39,
+  "front_families": {
+   "contain / A1 own corridor / S1 crew to A3": {
+    "family": "contain / A1 own corridor / S1 crew to A3",
+    "arcs": "12:Ha 23:Ha 31:Hb",
+    "dest": [
+     "A3",
+     "A3",
+     "A3"
+    ],
+    "contain": 1,
+    "t2": 0,
+    "r1": 0.259,
+    "r24": 0.019,
+    "dose": 3.415,
+    "co2_ch": 0.0,
+    "r7d": 0.886,
+    "restore_h": 83.0,
+    "co2_peak_pct": 0.162
+   },
+   "contain / A1 to A2 / S1 crew to A3": {
+    "family": "contain / A1 to A2 / S1 crew to A3",
+    "arcs": "12:B 23:Ha 31:Hb",
+    "dest": [
+     "A3",
+     "A3",
+     "A3"
+    ],
+    "contain": 1,
+    "t2": 0,
+    "r1": 0.245,
+    "r24": 0.018,
+    "dose": 3.344,
+    "co2_ch": 0.0,
+    "r7d": 0.878,
+    "restore_h": 83.0,
+    "co2_peak_pct": 0.162
+   },
+   "contain / A1 to TCC / S1 crew to A2 / reconnect": {
+    "family": "contain / A1 to TCC / S1 crew to A2 / reconnect",
+    "arcs": "12:Hb 23:Ha 31:B",
+    "dest": [
+     "A2",
+     "A2",
+     "A2"
+    ],
+    "contain": 1,
+    "t2": 1,
+    "r1": 0.303,
+    "r24": 0.269,
+    "dose": 122.884,
+    "co2_ch": 82.5,
+    "r7d": 0.811,
+    "restore_h": 55.0,
+    "co2_peak_pct": 0.433
+   },
+   "contain / A1 to TCC / S1 crew to A3": {
+    "family": "contain / A1 to TCC / S1 crew to A3",
+    "arcs": "12:O 23:O 31:Hb",
+    "dest": [
+     "A3",
+     "A3",
+     "A3"
+    ],
+    "contain": 1,
+    "t2": 0,
+    "r1": 0.273,
+    "r24": 0.263,
+    "dose": 120.048,
+    "co2_ch": 0.0,
+    "r7d": 0.894,
+    "restore_h": 65.0,
+    "co2_peak_pct": 0.162
+   },
+   "contain / A1 to TCC / S1 crew to A3 / reconnect": {
+    "family": "contain / A1 to TCC / S1 crew to A3 / reconnect",
+    "arcs": "12:Hb 23:Ha 31:D",
+    "dest": [
+     "A3",
+     "A2",
+     "A2"
+    ],
+    "contain": 1,
+    "t2": 1,
+    "r1": 0.493,
+    "r24": 0.36,
+    "dose": 137.812,
+    "co2_ch": 5.667,
+    "r7d": 0.901,
+    "restore_h": 56.0,
+    "co2_peak_pct": 0.341
+   }
+  },
+  "ideal": {
+   "r1": 0.242,
+   "r24": 0.018,
+   "dose": 3.269,
+   "co2_ch": 0.0,
+   "r7d": 0.811,
+   "restore_h": 38.0
+  },
+  "trivial": 0,
+  "restore_range_h": [
+   40.0,
+   83.0
+  ]
+ },
+ "TCC efficiency 1.0 at 2x flow": {
+  "within": 5064,
+  "within_contain": 3588,
+  "within_families": [
+   "contain / A1 own corridor / S1 crew to A1 / reconnect",
+   "contain / A1 own corridor / S1 crew to A2",
+   "contain / A1 own corridor / S1 crew to A2 / reconnect",
+   "contain / A1 own corridor / S1 crew to A3",
+   "contain / A1 own corridor / S1 crew to A3 / reconnect",
+   "contain / A1 sealed / S1 crew to A2",
+   "contain / A1 sealed / S1 crew to A2 / reconnect",
+   "contain / A1 sealed / S1 crew to A3",
+   "contain / A1 sealed / S1 crew to A3 / reconnect",
+   "contain / A1 to A2 / S1 crew to A1",
+   "contain / A1 to A2 / S1 crew to A1 / reconnect",
+   "contain / A1 to A2 / S1 crew to A2",
+   "contain / A1 to A2 / S1 crew to A2 / reconnect",
+   "contain / A1 to A2 / S1 crew to A3",
+   "contain / A1 to A2 / S1 crew to A3 / reconnect",
+   "contain / A1 to TCC / S1 crew to A1",
+   "contain / A1 to TCC / S1 crew to A1 / reconnect",
+   "contain / A1 to TCC / S1 crew to A2",
+   "contain / A1 to TCC / S1 crew to A2 / reconnect",
+   "contain / A1 to TCC / S1 crew to A3",
+   "contain / A1 to TCC / S1 crew to A3 / reconnect",
+   "no contain / A1 own corridor / S1 crew to A2",
+   "no contain / A1 own corridor / S1 crew to A2 / reconnect",
+   "no contain / A1 own corridor / S1 crew to A3",
+   "no contain / A1 own corridor / S1 crew to A3 / reconnect",
+   "no contain / A1 sealed / S1 crew to A2 / reconnect",
+   "no contain / A1 sealed / S1 crew to A3 / reconnect",
+   "no contain / A1 to A2 / S1 crew to A3",
+   "no contain / A1 to A2 / S1 crew to A3 / reconnect",
+   "no contain / A1 to TCC / S1 crew to A2",
+   "no contain / A1 to TCC / S1 crew to A2 / reconnect",
+   "no contain / A1 to TCC / S1 crew to A3",
+   "no contain / A1 to TCC / S1 crew to A3 / reconnect"
+  ],
+  "front": 41,
+  "front_families": {
+   "contain / A1 own corridor / S1 crew to A3": {
+    "family": "contain / A1 own corridor / S1 crew to A3",
+    "arcs": "12:Ha 23:Ha 31:Hb",
+    "dest": [
+     "A3",
+     "A3",
+     "A3"
+    ],
+    "contain": 1,
+    "t2": 0,
+    "r1": 0.258,
+    "r24": 0.017,
+    "dose": 2.166,
+    "co2_ch": 0.0,
+    "r7d": 0.299,
+    "restore_h": 41.0,
+    "co2_peak_pct": 0.162
+   },
+   "contain / A1 to A2 / S1 crew to A3": {
+    "family": "contain / A1 to A2 / S1 crew to A3",
+    "arcs": "12:B 23:Ha 31:Hb",
+    "dest": [
+     "A3",
+     "A3",
+     "A3"
+    ],
+    "contain": 1,
+    "t2": 0,
+    "r1": 0.244,
+    "r24": 0.016,
+    "dose": 2.095,
+    "co2_ch": 0.0,
+    "r7d": 0.29,
+    "restore_h": 41.0,
+    "co2_peak_pct": 0.162
+   },
+   "contain / A1 to TCC / S1 crew to A2 / reconnect": {
+    "family": "contain / A1 to TCC / S1 crew to A2 / reconnect",
+    "arcs": "12:Ha 23:Ha 31:O",
+    "dest": [
+     "A2",
+     "A3",
+     "A3"
+    ],
+    "contain": 1,
+    "t2": 1,
+    "r1": 0.269,
+    "r24": 0.19,
+    "dose": 87.516,
+    "co2_ch": 0.5,
+    "r7d": 0.252,
+    "restore_h": 17.5,
+    "co2_peak_pct": 0.307
+   },
+   "contain / A1 to TCC / S1 crew to A3": {
+    "family": "contain / A1 to TCC / S1 crew to A3",
+    "arcs": "12:O 23:O 31:Hb",
+    "dest": [
+     "A3",
+     "A3",
+     "A3"
+    ],
+    "contain": 1,
+    "t2": 0,
+    "r1": 0.272,
+    "r24": 0.16,
+    "dose": 70.75,
+    "co2_ch": 0.0,
+    "r7d": 0.274,
+    "restore_h": 26.0,
+    "co2_peak_pct": 0.162
+   },
+   "no contain / A1 own corridor / S1 crew to A3": {
+    "family": "no contain / A1 own corridor / S1 crew to A3",
+    "arcs": "12:Hb 23:Ha 31:Hb",
+    "dest": [
+     "A3",
+     "A3",
+     "A3"
+    ],
+    "contain": 0,
+    "t2": 0,
+    "r1": 0.097,
+    "r24": 0.007,
+    "dose": 1.361,
+    "co2_ch": 0.0,
+    "r7d": 0.996,
+    "restore_h": 63.0,
+    "co2_peak_pct": 0.154
+   },
+   "no contain / A1 to A2 / S1 crew to A3": {
+    "family": "no contain / A1 to A2 / S1 crew to A3",
+    "arcs": "12:B 23:Ha 31:Hb",
+    "dest": [
+     "A3",
+     "A3",
+     "A3"
+    ],
+    "contain": 0,
+    "t2": 0,
+    "r1": 0.097,
+    "r24": 0.007,
+    "dose": 1.361,
+    "co2_ch": 0.0,
+    "r7d": 0.98,
+    "restore_h": 63.0,
+    "co2_peak_pct": 0.154
+   }
+  },
+  "ideal": {
+   "r1": 0.094,
+   "r24": 0.007,
+   "dose": 1.358,
+   "co2_ch": 0.0,
+   "r7d": 0.206,
+   "restore_h": 12.667
+  },
+  "trivial": 0,
+  "restore_range_h": [
+   13.833333333333334,
+   63.0
+  ]
+ },
+ "sector 1 pair awake in sector 2": {
+  "within": 3587,
+  "within_contain": 3587,
+  "within_families": [
+   "contain / A1 own corridor / S1 crew to A1 / reconnect",
+   "contain / A1 own corridor / S1 crew to A2",
+   "contain / A1 own corridor / S1 crew to A2 / reconnect",
+   "contain / A1 own corridor / S1 crew to A3",
+   "contain / A1 own corridor / S1 crew to A3 / reconnect",
+   "contain / A1 sealed / S1 crew to A2",
+   "contain / A1 sealed / S1 crew to A2 / reconnect",
+   "contain / A1 sealed / S1 crew to A3",
+   "contain / A1 sealed / S1 crew to A3 / reconnect",
+   "contain / A1 to A2 / S1 crew to A1 / reconnect",
+   "contain / A1 to A2 / S1 crew to A2",
+   "contain / A1 to A2 / S1 crew to A2 / reconnect",
+   "contain / A1 to A2 / S1 crew to A3",
+   "contain / A1 to A2 / S1 crew to A3 / reconnect",
+   "contain / A1 to TCC / S1 crew to A1",
+   "contain / A1 to TCC / S1 crew to A1 / reconnect",
+   "contain / A1 to TCC / S1 crew to A2",
+   "contain / A1 to TCC / S1 crew to A2 / reconnect",
+   "contain / A1 to TCC / S1 crew to A3",
+   "contain / A1 to TCC / S1 crew to A3 / reconnect"
+  ],
+  "front": 31,
+  "front_families": {
+   "contain / A1 own corridor / S1 crew to A3": {
+    "family": "contain / A1 own corridor / S1 crew to A3",
+    "arcs": "12:Ha 23:Ha 31:Hb",
+    "dest": [
+     "A3",
+     "A3",
+     "A3"
+    ],
+    "contain": 1,
+    "t2": 0,
+    "r1": 0.193,
+    "r24": 0.013,
+    "dose": 1.84,
+    "co2_ch": 0.0,
+    "r7d": 0.575,
+    "restore_h": 58.0,
+    "co2_peak_pct": 0.157
+   },
+   "contain / A1 to A2 / S1 crew to A3": {
+    "family": "contain / A1 to A2 / S1 crew to A3",
+    "arcs": "12:B 23:Ha 31:Hb",
+    "dest": [
+     "A3",
+     "A3",
+     "A3"
+    ],
+    "contain": 1,
+    "t2": 0,
+    "r1": 0.175,
+    "r24": 0.012,
+    "dose": 1.752,
+    "co2_ch": 0.0,
+    "r7d": 0.565,
+    "restore_h": 58.0,
+    "co2_peak_pct": 0.158
+   },
+   "contain / A1 to TCC / S1 crew to A2 / reconnect": {
+    "family": "contain / A1 to TCC / S1 crew to A2 / reconnect",
+    "arcs": "12:Hb 23:Ha 31:B",
+    "dest": [
+     "A2",
+     "A2",
+     "A2"
+    ],
+    "contain": 1,
+    "t2": 1,
+    "r1": 0.251,
+    "r24": 0.232,
+    "dose": 106.418,
+    "co2_ch": 84.0,
+    "r7d": 0.465,
+    "restore_h": 31.0,
+    "co2_peak_pct": 0.435
+   },
+   "contain / A1 to TCC / S1 crew to A3": {
+    "family": "contain / A1 to TCC / S1 crew to A3",
+    "arcs": "12:Ha 23:Ha 31:D",
+    "dest": [
+     "A3",
+     "A3",
+     "A3"
+    ],
+    "contain": 1,
+    "t2": 0,
+    "r1": 0.385,
+    "r24": 0.359,
+    "dose": 168.009,
+    "co2_ch": 0.0,
+    "r7d": 0.55,
+    "restore_h": 25.0,
+    "co2_peak_pct": 0.157
+   },
+   "contain / A1 to TCC / S1 crew to A3 / reconnect": {
+    "family": "contain / A1 to TCC / S1 crew to A3 / reconnect",
+    "arcs": "12:Hb 23:Ha 31:B",
+    "dest": [
+     "A3",
+     "A2",
+     "A2"
+    ],
+    "contain": 1,
+    "t2": 1,
+    "r1": 0.556,
+    "r24": 0.322,
+    "dose": 120.85,
+    "co2_ch": 6.0,
+    "r7d": 0.55,
+    "restore_h": 31.0,
+    "co2_peak_pct": 0.344
+   }
+  },
+  "ideal": {
+   "r1": 0.172,
+   "r24": 0.012,
+   "dose": 1.752,
+   "co2_ch": 0.0,
+   "r7d": 0.465,
+   "restore_h": 24.0
+  },
+  "trivial": 0,
+  "restore_range_h": [
+   25.0,
+   59.0
+  ]
+ },
+ "twelve crew (4/4/4)": {
+  "within": 1466,
+  "within_contain": 1466,
+  "within_families": [
+   "contain / A1 own corridor / S1 crew to A2",
+   "contain / A1 own corridor / S1 crew to A2 / reconnect",
+   "contain / A1 own corridor / S1 crew to A3",
+   "contain / A1 own corridor / S1 crew to A3 / reconnect",
+   "contain / A1 sealed / S1 crew to A2",
+   "contain / A1 sealed / S1 crew to A2 / reconnect",
+   "contain / A1 sealed / S1 crew to A3",
+   "contain / A1 sealed / S1 crew to A3 / reconnect",
+   "contain / A1 to A2 / S1 crew to A3",
+   "contain / A1 to A2 / S1 crew to A3 / reconnect",
+   "contain / A1 to TCC / S1 crew to A1",
+   "contain / A1 to TCC / S1 crew to A1 / reconnect",
+   "contain / A1 to TCC / S1 crew to A2",
+   "contain / A1 to TCC / S1 crew to A2 / reconnect",
+   "contain / A1 to TCC / S1 crew to A3",
+   "contain / A1 to TCC / S1 crew to A3 / reconnect"
+  ],
+  "front": 26,
+  "front_families": {
+   "contain / A1 own corridor / S1 crew to A2": {
+    "family": "contain / A1 own corridor / S1 crew to A2",
+    "arcs": "12:Hb 23:D 31:Hb",
+    "dest": [
+     "A2",
+     "A3",
+     "A3"
+    ],
+    "contain": 1,
+    "t2": 0,
+    "r1": 0.324,
+    "r24": 0.073,
+    "dose": 24.812,
+    "co2_ch": 96.756,
+    "r7d": 0.54,
+    "restore_h": 52.0,
+    "co2_peak_pct": 0.448
+   },
+   "contain / A1 own corridor / S1 crew to A3": {
+    "family": "contain / A1 own corridor / S1 crew to A3",
+    "arcs": "12:Hb 23:D 31:Hb",
+    "dest": [
+     "A3",
+     "A2",
+     "A3"
+    ],
+    "contain": 1,
+    "t2": 0,
+    "r1": 0.302,
+    "r24": 0.064,
+    "dose": 24.842,
+    "co2_ch": 96.922,
+    "r7d": 0.532,
+    "restore_h": 52.0,
+    "co2_peak_pct": 0.447
+   },
+   "contain / A1 own corridor / S1 crew to A3 / reconnect": {
+    "family": "contain / A1 own corridor / S1 crew to A3 / reconnect",
+    "arcs": "12:Ha 23:Ha 31:S",
+    "dest": [
+     "A3",
+     "A3",
+     "A3"
+    ],
+    "contain": 1,
+    "t2": 1,
+    "r1": 0.293,
+    "r24": 0.244,
+    "dose": 109.868,
+    "co2_ch": 241.678,
+    "r7d": 0.517,
+    "restore_h": 36.0,
+    "co2_peak_pct": 0.455
+   },
+   "contain / A1 to A2 / S1 crew to A3": {
+    "family": "contain / A1 to A2 / S1 crew to A3",
+    "arcs": "12:B 23:Ha 31:Hb",
+    "dest": [
+     "A3",
+     "A3",
+     "A3"
+    ],
+    "contain": 1,
+    "t2": 0,
+    "r1": 0.244,
+    "r24": 0.017,
+    "dose": 2.185,
+    "co2_ch": 1.678,
+    "r7d": 0.527,
+    "restore_h": 56.0,
+    "co2_peak_pct": 0.446
+   },
+   "contain / A1 to A2 / S1 crew to A3 / reconnect": {
+    "family": "contain / A1 to A2 / S1 crew to A3 / reconnect",
+    "arcs": "12:B 23:S 31:S",
+    "dest": [
+     "A3",
+     "A3",
+     "A3"
+    ],
+    "contain": 1,
+    "t2": 1,
+    "r1": 0.271,
+    "r24": 0.243,
+    "dose": 109.935,
+    "co2_ch": 241.678,
+    "r7d": 0.516,
+    "restore_h": 36.0,
+    "co2_peak_pct": 0.454
+   },
+   "contain / A1 to TCC / S1 crew to A1": {
+    "family": "contain / A1 to TCC / S1 crew to A1",
+    "arcs": "12:B 23:S 31:D",
+    "dest": [
+     "A1",
+     "A3",
+     "A3"
+    ],
+    "contain": 1,
+    "t2": 0,
+    "r1": 0.534,
+    "r24": 0.361,
+    "dose": 152.605,
+    "co2_ch": 96.756,
+    "r7d": 0.561,
+    "restore_h": 27.0,
+    "co2_peak_pct": 0.447
+   },
+   "contain / A1 to TCC / S1 crew to A2": {
+    "family": "contain / A1 to TCC / S1 crew to A2",
+    "arcs": "12:O 23:D 31:Hb",
+    "dest": [
+     "A2",
+     "A3",
+     "A3"
+    ],
+    "contain": 1,
+    "t2": 0,
+    "r1": 0.324,
+    "r24": 0.282,
+    "dose": 113.169,
+    "co2_ch": 96.756,
+    "r7d": 0.564,
+    "restore_h": 37.0,
+    "co2_peak_pct": 0.448
+   },
+   "contain / A1 to TCC / S1 crew to A2 / reconnect": {
+    "family": "contain / A1 to TCC / S1 crew to A2 / reconnect",
+    "arcs": "12:Hb 23:B 31:O",
+    "dest": [
+     "A2",
+     "A2",
+     "A3"
+    ],
+    "contain": 1,
+    "t2": 1,
+    "r1": 0.35,
+    "r24": 0.273,
+    "dose": 123.81,
+    "co2_ch": 207.333,
+    "r7d": 0.515,
+    "restore_h": 32.0,
+    "co2_peak_pct": 0.5
+   },
+   "contain / A1 to TCC / S1 crew to A3": {
+    "family": "contain / A1 to TCC / S1 crew to A3",
+    "arcs": "12:O 23:O 31:Hb",
+    "dest": [
+     "A3",
+     "A3",
+     "A3"
+    ],
+    "contain": 1,
+    "t2": 0,
+    "r1": 0.272,
+    "r24": 0.218,
+    "dose": 98.144,
+    "co2_ch": 286.511,
+    "r7d": 0.518,
+    "restore_h": 39.0,
+    "co2_peak_pct": 0.446
+   }
+  },
+  "ideal": {
+   "r1": 0.242,
+   "r24": 0.017,
+   "dose": 2.185,
+   "co2_ch": 1.678,
+   "r7d": 0.504,
+   "restore_h": 23.75
+  },
+  "trivial": 0,
+  "restore_range_h": [
+   27.0,
+   56.0
+  ]
+ },
+ "reaction 5 min": {
+  "within": 3722,
+  "within_contain": 3722,
+  "within_families": [
+   "contain / A1 own corridor / S1 crew to A1 / reconnect",
+   "contain / A1 own corridor / S1 crew to A2",
+   "contain / A1 own corridor / S1 crew to A2 / reconnect",
+   "contain / A1 own corridor / S1 crew to A3",
+   "contain / A1 own corridor / S1 crew to A3 / reconnect",
+   "contain / A1 sealed / S1 crew to A2",
+   "contain / A1 sealed / S1 crew to A2 / reconnect",
+   "contain / A1 sealed / S1 crew to A3",
+   "contain / A1 sealed / S1 crew to A3 / reconnect",
+   "contain / A1 to A2 / S1 crew to A1",
+   "contain / A1 to A2 / S1 crew to A1 / reconnect",
+   "contain / A1 to A2 / S1 crew to A2",
+   "contain / A1 to A2 / S1 crew to A2 / reconnect",
+   "contain / A1 to A2 / S1 crew to A3",
+   "contain / A1 to A2 / S1 crew to A3 / reconnect",
+   "contain / A1 to TCC / S1 crew to A1",
+   "contain / A1 to TCC / S1 crew to A1 / reconnect",
+   "contain / A1 to TCC / S1 crew to A2",
+   "contain / A1 to TCC / S1 crew to A2 / reconnect",
+   "contain / A1 to TCC / S1 crew to A3",
+   "contain / A1 to TCC / S1 crew to A3 / reconnect"
+  ],
+  "front": 77,
+  "front_families": {
+   "contain / A1 own corridor / S1 crew to A2": {
+    "family": "contain / A1 own corridor / S1 crew to A2",
+    "arcs": "12:Ha 23:B 31:Hb",
+    "dest": [
+     "A2",
+     "A2",
+     "A3"
+    ],
+    "contain": 1,
+    "t2": 0,
+    "r1": 0.168,
+    "r24": 0.011,
+    "dose": 1.171,
+    "co2_ch": 0.0,
+    "r7d": 0.417,
+    "restore_h": 48.0,
+    "co2_peak_pct": 0.242
+   },
+   "contain / A1 own corridor / S1 crew to A3": {
+    "family": "contain / A1 own corridor / S1 crew to A3",
+    "arcs": "12:Ha 23:O 31:Hb",
+    "dest": [
+     "A3",
+     "A2",
+     "A3"
+    ],
+    "contain": 1,
+    "t2": 0,
+    "r1": 0.168,
+    "r24": 0.011,
+    "dose": 1.169,
+    "co2_ch": 0.0,
+    "r7d": 0.416,
+    "restore_h": 48.0,
+    "co2_peak_pct": 0.275
+   },
+   "contain / A1 to A2 / S1 crew to A3": {
+    "family": "contain / A1 to A2 / S1 crew to A3",
+    "arcs": "12:B 23:Ha 31:Hb",
+    "dest": [
+     "A3",
+     "A3",
+     "A3"
+    ],
+    "contain": 1,
+    "t2": 0,
+    "r1": 0.155,
+    "r24": 0.01,
+    "dose": 1.02,
+    "co2_ch": 0.0,
+    "r7d": 0.41,
+    "restore_h": 47.0,
+    "co2_peak_pct": 0.159
+   },
+   "contain / A1 to TCC / S1 crew to A2 / reconnect": {
+    "family": "contain / A1 to TCC / S1 crew to A2 / reconnect",
+    "arcs": "12:Hb 23:Ha 31:B",
+    "dest": [
+     "A2",
+     "A2",
+     "A2"
+    ],
+    "contain": 1,
+    "t2": 1,
+    "r1": 0.195,
+    "r24": 0.16,
+    "dose": 72.37,
+    "co2_ch": 85.5,
+    "r7d": 0.323,
+    "restore_h": 19.5,
+    "co2_peak_pct": 0.436
+   },
+   "contain / A1 to TCC / S1 crew to A3": {
+    "family": "contain / A1 to TCC / S1 crew to A3",
+    "arcs": "12:O 23:O 31:Hb",
+    "dest": [
+     "A3",
+     "A3",
+     "A3"
+    ],
+    "contain": 1,
+    "t2": 0,
+    "r1": 0.183,
+    "r24": 0.168,
+    "dose": 76.413,
+    "co2_ch": 0.0,
+    "r7d": 0.402,
+    "restore_h": 31.0,
+    "co2_peak_pct": 0.16
+   },
+   "contain / A1 to TCC / S1 crew to A3 / reconnect": {
+    "family": "contain / A1 to TCC / S1 crew to A3 / reconnect",
+    "arcs": "12:Ha 23:Ha 31:D",
+    "dest": [
+     "A3",
+     "A2",
+     "A2"
+    ],
+    "contain": 1,
+    "t2": 1,
+    "r1": 0.289,
+    "r24": 0.219,
+    "dose": 86.227,
+    "co2_ch": 11.333,
+    "r7d": 0.399,
+    "restore_h": 23.0,
+    "co2_peak_pct": 0.473
+   }
+  },
+  "ideal": {
+   "r1": 0.155,
+   "r24": 0.01,
+   "dose": 1.02,
+   "co2_ch": 0.0,
+   "r7d": 0.323,
+   "restore_h": 19.5
+  },
+  "trivial": 0,
+  "restore_range_h": [
+   19.5,
+   48.0
+  ]
+ },
+ "reaction 30 min": {
+  "within": 3089,
+  "within_contain": 3089,
+  "within_families": [
+   "contain / A1 own corridor / S1 crew to A2",
+   "contain / A1 own corridor / S1 crew to A2 / reconnect",
+   "contain / A1 own corridor / S1 crew to A3",
+   "contain / A1 own corridor / S1 crew to A3 / reconnect",
+   "contain / A1 sealed / S1 crew to A2",
+   "contain / A1 sealed / S1 crew to A2 / reconnect",
+   "contain / A1 sealed / S1 crew to A3",
+   "contain / A1 sealed / S1 crew to A3 / reconnect",
+   "contain / A1 to A2 / S1 crew to A1 / reconnect",
+   "contain / A1 to A2 / S1 crew to A2 / reconnect",
+   "contain / A1 to A2 / S1 crew to A3",
+   "contain / A1 to A2 / S1 crew to A3 / reconnect",
+   "contain / A1 to TCC / S1 crew to A1",
+   "contain / A1 to TCC / S1 crew to A1 / reconnect",
+   "contain / A1 to TCC / S1 crew to A2",
+   "contain / A1 to TCC / S1 crew to A2 / reconnect",
+   "contain / A1 to TCC / S1 crew to A3",
+   "contain / A1 to TCC / S1 crew to A3 / reconnect"
+  ],
+  "front": 30,
+  "front_families": {
+   "contain / A1 own corridor / S1 crew to A3": {
+    "family": "contain / A1 own corridor / S1 crew to A3",
+    "arcs": "12:Hb 23:O 31:Hb",
+    "dest": [
+     "A3",
+     "A3",
+     "A3"
+    ],
+    "contain": 1,
+    "t2": 0,
+    "r1": 0.696,
+    "r24": 0.219,
+    "dose": 91.392,
+    "co2_ch": 0.0,
+    "r7d": 0.913,
+    "restore_h": 66.0,
+    "co2_peak_pct": 0.17
+   },
+   "contain / A1 sealed / S1 crew to A3": {
+    "family": "contain / A1 sealed / S1 crew to A3",
+    "arcs": "12:Hb 23:O 31:Ha",
+    "dest": [
+     "A3",
+     "A3",
+     "A3"
+    ],
+    "contain": 1,
+    "t2": 0,
+    "r1": 0.787,
+    "r24": 0.314,
+    "dose": 136.255,
+    "co2_ch": 0.0,
+    "r7d": 0.922,
+    "restore_h": 62.0,
+    "co2_peak_pct": 0.183
+   },
+   "contain / A1 to A2 / S1 crew to A3": {
+    "family": "contain / A1 to A2 / S1 crew to A3",
+    "arcs": "12:B 23:Ha 31:Hb",
+    "dest": [
+     "A3",
+     "A3",
+     "A3"
+    ],
+    "contain": 1,
+    "t2": 0,
+    "r1": 0.657,
+    "r24": 0.063,
+    "dose": 17.679,
+    "co2_ch": 0.0,
+    "r7d": 0.914,
+    "restore_h": 73.0,
+    "co2_peak_pct": 0.17
+   },
+   "contain / A1 to TCC / S1 crew to A2 / reconnect": {
+    "family": "contain / A1 to TCC / S1 crew to A2 / reconnect",
+    "arcs": "12:Ha 23:Ha 31:B",
+    "dest": [
+     "A2",
+     "A2",
+     "A3"
+    ],
+    "contain": 1,
+    "t2": 1,
+    "r1": 0.649,
+    "r24": 0.456,
+    "dose": 199.309,
+    "co2_ch": 8.667,
+    "r7d": 0.832,
+    "restore_h": 49.0,
+    "co2_peak_pct": 0.439
+   },
+   "contain / A1 to TCC / S1 crew to A3": {
+    "family": "contain / A1 to TCC / S1 crew to A3",
+    "arcs": "12:O 23:O 31:S",
+    "dest": [
+     "A3",
+     "A3",
+     "A3"
+    ],
+    "contain": 1,
+    "t2": 0,
+    "r1": 0.708,
+    "r24": 0.383,
+    "dose": 169.961,
+    "co2_ch": 0.0,
+    "r7d": 0.901,
+    "restore_h": 57.0,
+    "co2_peak_pct": 0.178
+   }
+  },
+  "ideal": {
+   "r1": 0.647,
+   "r24": 0.063,
+   "dose": 17.679,
+   "co2_ch": 0.0,
+   "r7d": 0.831,
+   "restore_h": 43.0
+  },
+  "trivial": 0,
+  "restore_range_h": [
+   48.0,
+   73.0
+  ]
+ },
+ "containment 20 min": {
+  "within": 3339,
+  "within_contain": 3339,
+  "within_families": [
+   "contain / A1 own corridor / S1 crew to A1 / reconnect",
+   "contain / A1 own corridor / S1 crew to A2",
+   "contain / A1 own corridor / S1 crew to A2 / reconnect",
+   "contain / A1 own corridor / S1 crew to A3",
+   "contain / A1 own corridor / S1 crew to A3 / reconnect",
+   "contain / A1 sealed / S1 crew to A2",
+   "contain / A1 sealed / S1 crew to A2 / reconnect",
+   "contain / A1 sealed / S1 crew to A3",
+   "contain / A1 sealed / S1 crew to A3 / reconnect",
+   "contain / A1 to A2 / S1 crew to A1 / reconnect",
+   "contain / A1 to A2 / S1 crew to A2 / reconnect",
+   "contain / A1 to A2 / S1 crew to A3",
+   "contain / A1 to A2 / S1 crew to A3 / reconnect",
+   "contain / A1 to TCC / S1 crew to A1",
+   "contain / A1 to TCC / S1 crew to A1 / reconnect",
+   "contain / A1 to TCC / S1 crew to A2",
+   "contain / A1 to TCC / S1 crew to A2 / reconnect",
+   "contain / A1 to TCC / S1 crew to A3",
+   "contain / A1 to TCC / S1 crew to A3 / reconnect"
+  ],
+  "front": 22,
+  "front_families": {
+   "contain / A1 own corridor / S1 crew to A3": {
+    "family": "contain / A1 own corridor / S1 crew to A3",
+    "arcs": "12:Ha 23:Ha 31:Hb",
+    "dest": [
+     "A3",
+     "A3",
+     "A3"
+    ],
+    "contain": 1,
+    "t2": 0,
+    "r1": 0.446,
+    "r24": 0.029,
+    "dose": 3.558,
+    "co2_ch": 0.0,
+    "r7d": 0.749,
+    "restore_h": 67.0,
+    "co2_peak_pct": 0.163
+   },
+   "contain / A1 to A2 / S1 crew to A3": {
+    "family": "contain / A1 to A2 / S1 crew to A3",
+    "arcs": "12:B 23:Ha 31:Hb",
+    "dest": [
+     "A3",
+     "A3",
+     "A3"
+    ],
+    "contain": 1,
+    "t2": 0,
+    "r1": 0.409,
+    "r24": 0.027,
+    "dose": 3.373,
+    "co2_ch": 0.0,
+    "r7d": 0.736,
+    "restore_h": 67.0,
+    "co2_peak_pct": 0.162
+   },
+   "contain / A1 to TCC / S1 crew to A2 / reconnect": {
+    "family": "contain / A1 to TCC / S1 crew to A2 / reconnect",
+    "arcs": "12:Hb 23:Ha 31:B",
+    "dest": [
+     "A2",
+     "A2",
+     "A2"
+    ],
+    "contain": 1,
+    "t2": 1,
+    "r1": 0.52,
+    "r24": 0.305,
+    "dose": 135.083,
+    "co2_ch": 81.0,
+    "r7d": 0.601,
+    "restore_h": 39.0,
+    "co2_peak_pct": 0.431
+   },
+   "contain / A1 to TCC / S1 crew to A3": {
+    "family": "contain / A1 to TCC / S1 crew to A3",
+    "arcs": "12:O 23:O 31:Hb",
+    "dest": [
+     "A3",
+     "A3",
+     "A3"
+    ],
+    "contain": 1,
+    "t2": 0,
+    "r1": 0.483,
+    "r24": 0.308,
+    "dose": 136.636,
+    "co2_ch": 0.0,
+    "r7d": 0.725,
+    "restore_h": 50.0,
+    "co2_peak_pct": 0.164
+   }
+  },
+  "ideal": {
+   "r1": 0.407,
+   "r24": 0.027,
+   "dose": 3.373,
+   "co2_ch": 0.0,
+   "r7d": 0.601,
+   "restore_h": 24.0
+  },
+  "trivial": 0,
+  "restore_range_h": [
+   25.0,
+   67.0
+  ]
+ },
+ "transit 80 s per compartment": {
+  "within": 3587,
+  "within_contain": 3587,
+  "within_families": [
+   "contain / A1 own corridor / S1 crew to A1 / reconnect",
+   "contain / A1 own corridor / S1 crew to A2",
+   "contain / A1 own corridor / S1 crew to A2 / reconnect",
+   "contain / A1 own corridor / S1 crew to A3",
+   "contain / A1 own corridor / S1 crew to A3 / reconnect",
+   "contain / A1 sealed / S1 crew to A2",
+   "contain / A1 sealed / S1 crew to A2 / reconnect",
+   "contain / A1 sealed / S1 crew to A3",
+   "contain / A1 sealed / S1 crew to A3 / reconnect",
+   "contain / A1 to A2 / S1 crew to A1",
+   "contain / A1 to A2 / S1 crew to A1 / reconnect",
+   "contain / A1 to A2 / S1 crew to A2",
+   "contain / A1 to A2 / S1 crew to A2 / reconnect",
+   "contain / A1 to A2 / S1 crew to A3",
+   "contain / A1 to A2 / S1 crew to A3 / reconnect",
+   "contain / A1 to TCC / S1 crew to A1",
+   "contain / A1 to TCC / S1 crew to A1 / reconnect",
+   "contain / A1 to TCC / S1 crew to A2",
+   "contain / A1 to TCC / S1 crew to A2 / reconnect",
+   "contain / A1 to TCC / S1 crew to A3",
+   "contain / A1 to TCC / S1 crew to A3 / reconnect"
+  ],
+  "front": 36,
+  "front_families": {
+   "contain / A1 own corridor / S1 crew to A3": {
+    "family": "contain / A1 own corridor / S1 crew to A3",
+    "arcs": "12:Ha 23:Ha 31:Hb",
+    "dest": [
+     "A3",
+     "A3",
+     "A3"
+    ],
+    "contain": 1,
+    "t2": 0,
+    "r1": 0.267,
+    "r24": 0.018,
+    "dose": 2.682,
+    "co2_ch": 0.0,
+    "r7d": 0.536,
+    "restore_h": 56.0,
+    "co2_peak_pct": 0.162
+   },
+   "contain / A1 to A2 / S1 crew to A3": {
+    "family": "contain / A1 to A2 / S1 crew to A3",
+    "arcs": "12:B 23:Ha 31:Hb",
+    "dest": [
+     "A3",
+     "A3",
+     "A3"
+    ],
+    "contain": 1,
+    "t2": 0,
+    "r1": 0.252,
+    "r24": 0.017,
+    "dose": 2.608,
+    "co2_ch": 0.0,
+    "r7d": 0.528,
+    "restore_h": 56.0,
+    "co2_peak_pct": 0.162
+   },
+   "contain / A1 to TCC / S1 crew to A2 / reconnect": {
+    "family": "contain / A1 to TCC / S1 crew to A2 / reconnect",
+    "arcs": "12:Hb 23:Ha 31:B",
+    "dest": [
+     "A2",
+     "A2",
+     "A2"
+    ],
+    "contain": 1,
+    "t2": 1,
+    "r1": 0.305,
+    "r24": 0.221,
+    "dose": 99.96,
+    "co2_ch": 82.5,
+    "r7d": 0.436,
+    "restore_h": 28.0,
+    "co2_peak_pct": 0.433
+   },
+   "contain / A1 to TCC / S1 crew to A3": {
+    "family": "contain / A1 to TCC / S1 crew to A3",
+    "arcs": "12:O 23:O 31:Hb",
+    "dest": [
+     "A3",
+     "A3",
+     "A3"
+    ],
+    "contain": 1,
+    "t2": 0,
+    "r1": 0.281,
+    "r24": 0.219,
+    "dose": 98.643,
+    "co2_ch": 0.0,
+    "r7d": 0.518,
+    "restore_h": 39.0,
+    "co2_peak_pct": 0.163
+   },
+   "contain / A1 to TCC / S1 crew to A3 / reconnect": {
+    "family": "contain / A1 to TCC / S1 crew to A3 / reconnect",
+    "arcs": "12:Hb 23:Ha 31:D",
+    "dest": [
+     "A3",
+     "A2",
+     "A2"
+    ],
+    "contain": 1,
+    "t2": 1,
+    "r1": 0.494,
+    "r24": 0.301,
+    "dose": 113.415,
+    "co2_ch": 5.667,
+    "r7d": 0.515,
+    "restore_h": 29.0,
+    "co2_peak_pct": 0.341
+   }
+  },
+  "ideal": {
+   "r1": 0.25,
+   "r24": 0.017,
+   "dose": 2.608,
+   "co2_ch": 0.0,
+   "r7d": 0.436,
+   "restore_h": 23.75
+  },
+  "trivial": 0,
+  "restore_range_h": [
+   28.0,
+   56.0
+  ]
+ },
+ "reconnect at 8 h": {
+  "within": 3363,
+  "within_contain": 3363,
+  "within_families": [
+   "contain / A1 own corridor / S1 crew to A1 / reconnect",
+   "contain / A1 own corridor / S1 crew to A2",
+   "contain / A1 own corridor / S1 crew to A2 / reconnect",
+   "contain / A1 own corridor / S1 crew to A3",
+   "contain / A1 own corridor / S1 crew to A3 / reconnect",
+   "contain / A1 sealed / S1 crew to A2",
+   "contain / A1 sealed / S1 crew to A2 / reconnect",
+   "contain / A1 sealed / S1 crew to A3",
+   "contain / A1 sealed / S1 crew to A3 / reconnect",
+   "contain / A1 to A2 / S1 crew to A1",
+   "contain / A1 to A2 / S1 crew to A1 / reconnect",
+   "contain / A1 to A2 / S1 crew to A2",
+   "contain / A1 to A2 / S1 crew to A2 / reconnect",
+   "contain / A1 to A2 / S1 crew to A3",
+   "contain / A1 to A2 / S1 crew to A3 / reconnect",
+   "contain / A1 to TCC / S1 crew to A1",
+   "contain / A1 to TCC / S1 crew to A1 / reconnect",
+   "contain / A1 to TCC / S1 crew to A2",
+   "contain / A1 to TCC / S1 crew to A2 / reconnect",
+   "contain / A1 to TCC / S1 crew to A3",
+   "contain / A1 to TCC / S1 crew to A3 / reconnect"
+  ],
+  "front": 36,
+  "front_families": {
+   "contain / A1 own corridor / S1 crew to A3": {
+    "family": "contain / A1 own corridor / S1 crew to A3",
+    "arcs": "12:Ha 23:Ha 31:Hb",
+    "dest": [
+     "A3",
+     "A3",
+     "A3"
+    ],
+    "contain": 1,
+    "t2": 0,
+    "r1": 0.259,
+    "r24": 0.018,
+    "dose": 2.623,
+    "co2_ch": 0.0,
+    "r7d": 0.536,
+    "restore_h": 56.0,
+    "co2_peak_pct": 0.162
+   },
+   "contain / A1 own corridor / S1 crew to A3 / reconnect": {
+    "family": "contain / A1 own corridor / S1 crew to A3 / reconnect",
+    "arcs": "12:Ha 23:Ha 31:S",
+    "dest": [
+     "A3",
+     "A3",
+     "A3"
+    ],
+    "contain": 1,
+    "t2": 1,
+    "r1": 0.293,
+    "r24": 0.208,
+    "dose": 93.089,
+    "co2_ch": 0.0,
+    "r7d": 0.519,
+    "restore_h": 40.0,
+    "co2_peak_pct": 0.167
+   },
+   "contain / A1 to A2 / S1 crew to A3": {
+    "family": "contain / A1 to A2 / S1 crew to A3",
+    "arcs": "12:B 23:Ha 31:Hb",
+    "dest": [
+     "A3",
+     "A3",
+     "A3"
+    ],
+    "contain": 1,
+    "t2": 0,
+    "r1": 0.244,
+    "r24": 0.017,
+    "dose": 2.552,
+    "co2_ch": 0.0,
+    "r7d": 0.527,
+    "restore_h": 56.0,
+    "co2_peak_pct": 0.162
+   },
+   "contain / A1 to A2 / S1 crew to A3 / reconnect": {
+    "family": "contain / A1 to A2 / S1 crew to A3 / reconnect",
+    "arcs": "12:B 23:S 31:S",
+    "dest": [
+     "A3",
+     "A3",
+     "A3"
+    ],
+    "contain": 1,
+    "t2": 1,
+    "r1": 0.271,
+    "r24": 0.207,
+    "dose": 93.118,
+    "co2_ch": 0.0,
+    "r7d": 0.518,
+    "restore_h": 40.0,
+    "co2_peak_pct": 0.165
+   },
+   "contain / A1 to TCC / S1 crew to A2 / reconnect": {
+    "family": "contain / A1 to TCC / S1 crew to A2 / reconnect",
+    "arcs": "12:Hb 23:Ha 31:O",
+    "dest": [
+     "A2",
+     "A3",
+     "A3"
+    ],
+    "contain": 1,
+    "t2": 1,
+    "r1": 0.419,
+    "r24": 0.3,
+    "dose": 123.969,
+    "co2_ch": 3.833,
+    "r7d": 0.497,
+    "restore_h": 26.0,
+    "co2_peak_pct": 0.331
+   },
+   "contain / A1 to TCC / S1 crew to A3 / reconnect": {
+    "family": "contain / A1 to TCC / S1 crew to A3 / reconnect",
+    "arcs": "12:Hb 23:Ha 31:O",
+    "dest": [
+     "A3",
+     "A2",
+     "A3"
+    ],
+    "contain": 1,
+    "t2": 1,
+    "r1": 0.427,
+    "r24": 0.319,
+    "dose": 123.997,
+    "co2_ch": 3.833,
+    "r7d": 0.515,
+    "restore_h": 26.0,
+    "co2_peak_pct": 0.332
+   }
+  },
+  "ideal": {
+   "r1": 0.242,
+   "r24": 0.017,
+   "dose": 2.552,
+   "co2_ch": 0.0,
+   "r7d": 0.489,
+   "restore_h": 23.75
+  },
+  "trivial": 0,
+  "restore_range_h": [
+   26.0,
+   56.0
+  ]
+ },
+ "elapsed_s": 1174
+}

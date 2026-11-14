@@ -28,8 +28,9 @@ class Track:
         self._mark = None           # the compartment integral when they entered their place
 
     def begin(self, X, ppm_now):
+        """Start at the current state: X the compartments' running integrals (ppm s), ppm_now their concentrations."""
         self._mark = X[self.node] if self.node is not None else 0.0
-        self.ppm[-1] = ppm_now
+        self.ppm[-1] = ppm_now[self.node] if self.node is not None else 0.0
 
     def sample(self, t_s, X, ppm_now):
         """After a step: X are the compartments' running integrals (ppm s), ppm_now the concentrations."""
