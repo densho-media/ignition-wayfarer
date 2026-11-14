@@ -619,6 +619,10 @@ def export(root, preset='COAST', out=None, identity=None, draco=False):
     import deadship
     deadship.write(root, out / deadship.FILE)
     packaged.append(deadship.FILE)
+    # Deadship DS-2B "Shared Air" (Phase 2B): the scenario over the two-gas ring model and its reference cases (Godot replays them).
+    import shared_air
+    shared_air.write(root, out / shared_air.FILE)
+    packaged.append(shared_air.FILE)
     if preset == 'COAST':
         # RT-003: the runtime plays the First Ignition timeline from this copy, checked against the rig's hash.
         timeline = root / rig['flight_timeline']['file']
