@@ -1699,3 +1699,325 @@ M–L) → 3 broader systems → 4 competitive and Hullrun → 5 narrative. Each
    the load time.
 10. **Owner questions.** Accept the panel (DS-O10) and the export change? For Phase 2B, choose: (a) the "Shared Air" requirement
     (a second species: which source, which limit), (b) the weaker twelve-crew variant, or (c) park Phase 2B.
+
+# SYS-002 v2 and the Phase 2B gate, second attempt (2026-11-14, third brief)
+
+The owner's brief of 2026-11-14 15:21Z: extend SYS-002 to carry CO₂ and NH₃, with a finite NH₃ source and an NH₃ sink separate from
+the CO₂ unit; apply NASA JSC 20584 Rev D's ammonia SMACs as duration-specific exposure references (never as injury); extend the Python
+and Godot verification; rerun and strengthen the Phase 2B gate; prepare, but not build, the gameplay design. Accepted decisions carried
+over: DS-O7 (PROTOTYPE ventilation and doorway values), DS-O8 (hatches closed, outside the model), DS-O10 (panel), the 90 MB web budget
+with at least 5 MB headroom, and the rejection of the single-gas 2B.
+
+## 29. SYS-002 v2: CO₂ and NH₃ [BUILT]
+
+### 29.1 Why ammonia, and which source
+
+The first gate failed because one species with one sink makes pooling at the sink always right (§27.3). A second species matters only if
+its source and its sink are in different places, so that the connections that help one gas hurt the other. Ammonia fits without
+inventing a ship system: it is one of the best documented spacecraft cabin contaminants, it has its own removal path on the ISS (the
+trace-contaminant control system's phosphoric-acid-treated carbon bed, separate from CO₂ removal), and it has 1 h, 24 h and long-term
+SMACs.
+
+**Source substitution.** The brief's starting idea was a leaking cartridge. No Wayfarer or ISS cartridge holds free ammonia in the cabin,
+and an ammonia coolant loop is excluded by the brief (and the cabin loops are not ammonia in canon), so the source is **stored urine in
+sector 1's hygiene compartment whose pretreatment failed**. Urine's urea hydrolyses (urease from bacteria) to ammonia,
+CO(NH₂)₂ + H₂O → 2 NH₃ + CO₂; the ISS adds a pretreatment to stored urine precisely to stop this. At about 20 g/L urea a fully
+hydrolysed litre holds up to about 11 g of ammonia, far more than the cabin air carries, so the release is limited by evaporation from
+the spill, not by the air. Modelled as a spill: a finite volatile inventory M₀ leaving at a first-order rate S/τ. **M₀ = 7 g, τ = 1 h are
+PROTOTYPE order-of-magnitude values** (about a litre spilled, a fraction of its ammonia leaving before it is bagged); the share that
+evaporates depends on pH, temperature, wetted area and airflow, none of which is modelled, so the uncertainty sits in M₀ (3–20 g) and
+τ (0.25–4 h), and the gate (§30.6) tests both ends. The values were fixed before the strategy search and were not adjusted after it.
+Scale: 7 g is 334 ppm in a sealed A1 and about 27 ppm spread through the whole ring.
+
+### 29.2 Values: external references and PROTOTYPE choices
+
+| Quantity | Value | Status | Source |
+| --- | --- | --- | --- |
+| NH₃ SMAC | 1 h 30, 24 h 20, 7 d 3, 30 d 3, 180 d 3, 1000 d 3 ppm | EXTERNAL REFERENCE | NASA JSC 20584 Rev D (02/2026) p. 9; read from the document. The 1 h and 24 h values are off-nominal and allow minor reversible effects; an exceedance is a risk to evaluate (p. 7), not an injury |
+| TCC process flow | 15.3 m³/h, one element per ring, in the sector 3 ECLSS bay | PROTOTYPE (ISS value) | NASA NTRS 20070019823 (15.3 m³/h); about 15 m³/h in NTRS 20100039332 |
+| TCC single-pass NH₃ capture | 0.95 | PROTOTYPE | Phosphoric-acid-treated activated carbon holds NH₃ as an ammonium salt (NTRS 20170006640, 20160009022); bed capacity and breakthrough not modelled |
+| CO₂ unit NH₃ removal | 0 | PROTOTYPE | The sinks are independent by construction |
+| Condensate NH₃ removal | 0 | PROTOTYPE, conservative | Real condensing heat exchangers dissolve NH₃; there is no humidity model, so leaving it out over-predicts NH₃ |
+| Background NH₃ | 0 ppm | PROTOTYPE | Metabolic and off-gassing NH₃ neglected |
+| Source M₀, τ, place | 7 g, 1 h, A1 (hygiene A) | PROTOTYPE, scenario data | §29.1; the model has no default source |
+| Cabin P, T | 80 kPa, 295 K | unchanged | SYS-002 v1 |
+| Exchange flows | 139 m³/h per open door, 238 m³/h per damper pair | PROTOTYPE (DS-O7) | unchanged |
+
+### 29.3 Equations, units and the exact step
+
+The NH₃ state is z = [c₁…c₉ (kg per compartment), S (kg left in the source), released, removed, ∫c₁…∫c₉], 21 values, and
+dz/dt = B·z with B built from the same flows as the CO₂ matrix A: each open edge exchanges Q both ways (B[i][j] += Q/Vⱼ, B[i][i] −= Q/Vᵢ),
+the LEAKING source moves λ = 1/τ of S per second into its compartment and into `released`, the TCC removes k = Q_TCC·η/V_A3 of c_A3 into
+`removed`, and each ∫cᵢ integrates cᵢ. The step is exact, z(t+Δt) = exp(BΔt)·z(t), by the same scaling-and-squaring series as CO₂, so a
+step of any length gives the same state, and exposures come from the integral states rather than from sampled concentrations. NH₃ never
+enters A: the CO₂ equations, their reference run and their checkpoints are byte-identical to v1 (checked). The NH₃ step costs nothing
+while there is no NH₃ and no source.
+
+Units are kept apart (`trace_units`): kg in the compartment, mol/m³ = c/(M·V), mole fraction x = c/(M·n) with n = PV/(RT), ppm = 10⁶·x,
+partial pressure x·P. The SMACs are mole-fraction values and Rev D applies them unchanged at reduced cabin pressure, so ppm is compared
+directly. Source states: NONE, LEAKING, ISOLATED (what the source still holds stays in it, accounted); a negative inventory or τ ≤ 0 is
+refused; the first-order release empties the source asymptotically and S is clamped at 0 so it never goes negative.
+
+### 29.4 Exposure
+
+`src/wayfarer/air_exposure.py` follows a person through the compartments they are actually in, one at a time (a walk is a sequence of
+short stays, never two places at once), adding each compartment's exact integral over the stay. Each reference is compared with the
+largest time-weighted mean over its own duration, (E(t) − E(t − w))/w with E = 0 before the event, never with one instant. A 24 h value
+is reported only from a run covering 24 h, a 7 d value only from a run covering 7 d. Per person: current and peak concentration, dose,
+largest 1 h and 24 h means, the 7 d mean, transit dose, and time above the CO₂ target.
+
+### 29.5 Validation
+
+| Requirement | Test (`tests/test_ring_air_nh3.py`, 21) or check | Result |
+| --- | --- | --- |
+| Isolated release; door spread; ventilation spread; confinement | `release_into_an_isolated_compartment_stays_there`, `an_open_door_carries_it_to_the_next_compartment_only`, `ventilation_spreads_it_with_every_door_closed`, `closing_a_compartments_doors_and_dampers_confines_it` | pass |
+| TCC removal; reach | `the_tcc_removes_it_at_its_own_flow`, `the_tcc_reaches_only_what_is_connected_to_it` | pass |
+| Both species on the same flows; sinks independent; NH₃ leaves CO₂ unchanged | `both_species_ride_the_same_flows`, `co2_and_nh3_removal_are_independent`, `a_release_does_not_change_the_co2_equations` | pass (same-flow agreement 1e-14 kg) |
+| Exhaustion; isolation; nonnegativity; zero source | `the_source_runs_out_and_never_goes_negative`, `isolating_the_source_stops_the_release_and_keeps_its_rest`, `no_source_and_an_empty_source_cost_nothing` | pass |
+| Conservation per species | `each_species_is_conserved_through_every_kind_of_change` | ledger ≤ 1e-15 + 1e-10 × scale |
+| Time-step independence; 30-day stability | `the_step_length_does_not_change_the_result`, `thirty_days_stay_stable_and_the_tcc_clears_the_ring` | 1e-11 × S₀ |
+| Units; exposure; durations; references | `units_are_kept_apart_and_agree`, `the_exposure_integral_is_exact`, `a_person_is_exposed_only_where_they_are`, `duration_windows_are_time_weighted_not_instantaneous`, `the_reference_values_are_rev_d` | pass |
+| Existing CO₂ cases | `tests/test_ring_air.py` (14) unchanged | pass |
+| Full suite | `python3 -m unittest discover -s tests` | 279 tests OK (1 skipped) |
+
+**Python/Godot parity.** The package (`wf_ring_air.json`, version 2, 19,415 bytes, was 9,514) carries both reference runs. `WfRingAir.verify`
+replays them before the model is used; `godot/scripts/systems/verify_ring_air.gd` runs the same replay headless with no scene and
+reports:
+
+| Run | Checkpoints | Largest absolute deviation | Largest relative deviation | Largest ledger error |
+| --- | --- | --- | --- | --- |
+| CO₂ (v1 proof, unchanged) | 11 | 4.1 × 10⁻¹⁴ kg | 3.1 × 10⁻¹⁴ | 3.7 × 10⁻¹³ kg |
+| NH₃ (trace proof: release, fans off, a door path to the TCC, isolation, TCC off and on, whole loop, fans on) | 11 | 9.9 × 10⁻¹⁸ kg | 8.1 × 10⁻¹⁴ | 2.7 × 10⁻¹⁴ kg |
+
+Documented tolerance: 1e-9 relative plus 1e-12 kg absolute for CO₂ (v1), and for NH₃ 1e-3 × 1e-12 kg absolute plus 1e-9 relative
+(NH₃ masses are grams, so the absolute floor is scaled down). Measured cost in Godot 4.7 (headless, this container): a CO₂-only step
+8.0 µs, a step carrying NH₃ 31.6 µs; building the propagators on a topology change (a door, a damper, the fans, the source or the TCC)
+1.1 ms for CO₂ and 4.6 ms for NH₃. Propagators are cached per configuration and step length, so the matrix exponential is never
+recomputed per frame.
+
+## 30. Phase 2B Gate — Second Attempt [ENG; PASSED for the base scenario, with stated limits]
+
+Study: `work/project-thread-dfyyv7/ds2b_gate.py` (results `ds2b_gate.json`, about 20 minutes on 4 cores) and its reference lens
+`ds2b_lens.py` (`ds2b_lens.json`). Both call `ring_air`'s public functions only, change nothing and are deterministic.
+
+### 30.1 The event
+
+At t = 0 the urine spill in A1 begins releasing (M₀ 7 g, τ 1 h). The ring is normal: doors closed, fans and dampers open, CO₂ unit and
+TCC on, CO₂ at its steady state. Crew 2/2/2 in sectors 1/2/3 (sector 1's pair off shift in their berths, in the source compartment). At
+d = 10 min (PROTOTYPE: smell or sensor) the crew act: Ops sets every damper and door; each pair walks to its destination by the shortest
+door route at 40 s per compartment passed (PROTOTYPE; doors cycled behind them, the exchange during cycling neglected); optionally the
+person nearest the spill contains it, 10 min of work in A1 (PROTOTYPE: bag the liquid and the absorbent), which sets the source
+ISOLATED. Optionally at T₂ = 4 h the ring returns to normal ventilation with the crew where they are. At 24 h the projection puts the ring
+back to normal and everybody home and runs to 7 d with no input. Nothing teleports and every exposure is taken along the actual route.
+
+### 30.2 The strategy space
+
+Each of the three sector-to-sector arcs (a door and a damper pair on each of its three links) takes one of six states: normal (dampers
+open, doors closed), sealed, dampers and doors open, doors only, or its corridor joined to one end only. 6³ = 216 ring configurations ×
+sector 1's pair to A1, A2 or A3 × sector 2's pair to A2 or A3 × sector 3's pair to A3 or A2 × contain or not × reconnect at T₂ or not:
+**10,344 strategies** per parameter set, each run to 7 d. The brief's named strategies are members (§30.4). Search cost: 94 s for the base
+set on 4 cores (about 30 ms per strategy for 7 days).
+
+### 30.3 Objectives and what each one is
+
+| Objective (minimised) | Class |
+| --- | --- |
+| Largest 1 h mean NH₃ of any person / 30 ppm | Computed, against an external reference |
+| Largest 24 h mean NH₃ of any person / 20 ppm (below 24 h: dose so far / 24 h, a lower bound) | Computed, against an external reference |
+| Crew mean NH₃ dose (ppm·h) | Computed |
+| Crew-hours above the CO₂ target 0.3 % | Computed, against a PROTOTYPE control level (DS-O1) |
+| NH₃ still airborne at 6 h and 12 h | Computed |
+| Largest 7 d mean of any person / 3 ppm (24 h horizon, through the projection) | Computed, against an external reference |
+| Time until every compartment is under 3 ppm | Computed. Its meaning, that A1's berths and hygiene are not fit for continuous occupancy until then, is the long-term SMAC's purpose, not a modelled penalty |
+| Viability: no occupied compartment over 0.5 % CO₂ | Constraint, PROTOTYPE control limit (DS-O2), never harm |
+
+A difference counts only if it exceeds ε: 0.05 of a reference ratio, 0.5 ppm·h of dose, 0.5 crew-hours, 0.1 g, 2 h of restoration.
+
+### 30.4 Base results
+
+| Horizon | Viable | ε-Pareto set | Strategy families on it | Trivial optimum (within ε of the best on every objective) |
+| --- | --- | --- | --- | --- |
+| 6 h | 8,452 | 174 | 10 | none |
+| 12 h | 7,756 | 157 | 12 | none |
+| 24 h (with the 7 d projection) | 7,444 | 59 | 7 | none |
+
+The brief's named strategies (24 h, with the 7 d projection):
+
+| Strategy | Viable | Worst 1 h / 30 | Worst 24 h / 20 | Worst 7 d / 3 | Crew-h above CO₂ target | Ring under 3 ppm after |
+| --- | --- | --- | --- | --- | --- | --- |
+| Do nothing (fans on, nobody moves) | yes | **1.16** | **1.05** | **1.92** | 0 | 75 h |
+| Seal and stay (every sector sealed) | no (CO₂ 3.8 % in A1) | **10.2** | **14.7** | **15.9** | 92 | 98 h |
+| Seal A1, its crew to sector 2 / 3 | yes | 0.14 / 0.13 | 0.09 / 0.08 | **1.91 / 1.90** | 0 | 97 h |
+| Seal A1 4 h, then reconnect | yes | 0.85 | 0.86 | **1.82** | 0 | 78 h |
+| Ventilation off, crew stay | no | **2.54** | **3.14** | **4.84** | 87 | 99 h |
+| Limited doors: A1 to the TCC the short way, everyone in A2 | no (A2 sealed with six) | 0.10 | 0.02 | 0.44 | 141 | 48 h |
+| Full loop open | yes | 0.94 | 1.00 | **1.86** | 0 | 75 h |
+| Everyone to the scrubber (sector 3) | yes | 0.77 | 0.89 | **1.77** | 0 | 75 h |
+| Preserve the clean sectors (A1 sealed, 2–3 joined) | yes | 0.13 | 0.08 | **1.90** | 0 | 97 h |
+| Contain the spill, fans on | yes | 0.57 | 0.30 | 0.54 | 0 | 32 h |
+| Contain the spill, A1 sealed, reconnect at 4 h | yes | 0.39 | 0.27 | 0.53 | 0 | 35 h |
+
+Bold: over the reference. Sealing A1 without containing only postpones the dose: the 7 g stay in A1, which has no sink, and spread when
+the ring is reconnected. Every named strategy without containment exceeds at least the 7 d reference.
+
+### 30.5 The reference lens
+
+The ε-front counts differences far below every reference as trades. The sharper question is the trainee's: which strategies keep every
+person inside every reference (CO₂ viable; 1 h, 24 h and 7 d NH₃ means under their SMACs), and is there still a choice among them?
+
+**Base: 3,588 strategies keep everyone inside every reference, and every one of them contains the spill.** Containment is a forced
+first move, not a choice, at these values. After it, five families remain non-dominated, and the trade between them is real:
+
+| Family (representative) | Worst 1 h / 30 | Worst 24 h / 20 | Crew dose (ppm·h) | Crew-h above CO₂ target | Worst 7 d / 3 | Ring under 3 ppm after |
+| --- | --- | --- | --- | --- | --- | --- |
+| Contain, keep A1 and its corridor apart, everyone to sector 3 | 0.26 | 0.02 | 2.6 | 0 | 0.54 | 56 h |
+| Contain, A1 joined to A2 only, everyone to sector 3 | 0.24 | 0.02 | 2.6 | 0 | 0.53 | 56 h |
+| Contain, A1's air sent round to the TCC through the doors, everyone to sector 3 | 0.27 | 0.22 | 98.6 | 0 | 0.52 | 39 h |
+| Contain, A1's arc joined to the TCC, sector 2 sealed with all six, reconnect at 4 h | 0.30 | 0.22 | 99.9 | 82.5 (peak 0.43 %) | 0.44 | 28 h |
+| Contain, A1 to the TCC, crews split, reconnect at 4 h | 0.49 | 0.30 | 113.4 | 5.7 (peak 0.34 %) | 0.52 | 29 h |
+
+So the decision is: **keep the residue sealed in sector 1** (the crew breathes clean air, the habitation sector is out of use for
+about 56 h), **send it through the occupied ring to the TCC** (everyone breathes about 4 ppm for a day, under the 24 h reference but above
+the long-term level, and the habitation sector is back after about 39 h), or **seal the crew away from the purge** (back after about 28 h,
+at the price of a day above the CO₂ target in a crowded sector). The person who contains the spill carries the largest 1 h exposure in
+every family (7 to 15 ppm mean over the hour, under 30 ppm). No family is within ε of the best on every count.
+
+### 30.6 Sensitivity (criterion F)
+
+One value at a time, the whole search rerun for each (17 sets, 175,848 runs):
+
+| Variation | ε-Pareto families 6 / 12 / 24 h | Trivial optimum at 6 / 12 / 24 h | Inside every reference (of which contain) | Families inside | Restoration on that front |
+| --- | --- | --- | --- | --- | --- |
+| Base | 10 / 12 / 7 | none | 3,588 (3,588) | 5 | 28–56 h |
+| Inventory 3 g | 11 / 11 / 12 | none | 7,219 (3,722) | 12 | 5–70 h |
+| Inventory 20 g | 12 / 10 / 6 | none | **0** | 0 | — |
+| Release τ 15 min | 14 / 12 / 7 | none | **0** | 0 | — |
+| Release τ 4 h | 5 / 5 / 1 | **3 at 24 h** | 3,722 (3,722) | **1** | 2–3 h |
+| Ventilation ×0.5 / ×1.5 | 12 / 12 / 9 and 9 / 9 / 7 | none | 3,229 and 3,753 (all contain) | 6 and 5 | 30–59 h and 25–55 h |
+| Door flow ×0.5 / ×2 | 10 / 11 / 7 and 10 / 13 / 8 | none | 3,373 and 3,818 (all contain) | 5 and 6 | 28–56 h |
+| TCC efficiency 0.5 | 9 / 12 / 7 | none | 3,400 (all contain) | 5 | 40–83 h |
+| TCC at twice the flow, η 0.95 | 10 / 10 / 6 | none | 5,064 (3,588) | 6 | 14–63 h |
+| Sector 1's pair awake in sector 2 | 10 / 11 / 7 | none | 3,587 (all contain) | 5 | 25–59 h |
+| Twelve crew (4/4/4) | 6 / 10 / 11 | none | 1,466 (all contain) | 9 | 27–56 h |
+| Reaction 5 min / 30 min | 10 / 12 / 9 and 8 / 10 / 8 | none | 3,722 and 3,089 (all contain) | 6 and 5 | 20–48 h and 48–73 h |
+| Containment takes 20 min | 12 / 11 / 6 | none | 3,339 (all contain) | 4 | 25–67 h |
+| Transit 80 s per compartment | 10 / 12 / 7 | none | 3,587 (all contain) | 5 | 28–56 h |
+| Reconnect at 8 h | 20 / 10 / 8 | none | 3,363 (all contain) | 6 | 26–56 h |
+
+The decision survives every change to the ship's side of the problem: ventilation, door flow, TCC performance, crew positions and number,
+reaction time, containment time, walking time and reconnect time. It does **not** survive large changes to the source itself:
+
+- a slow release (τ 4 h): containment catches almost everything and "contain, then anything" is trivially best;
+- a fast or large release (τ 15 min, 20 g): no strategy keeps everyone inside every reference; the front is then a choice of whose
+  exceedance and which reference, which a training scenario should not be built on without the owner.
+
+So the scenario must fix its source values (§31) and say why; a different source makes a different exercise, not a harder one.
+
+### 30.7 The gate, criterion by criterion
+
+| Criterion | Result |
+| --- | --- |
+| A. Multiple viable strategies | **Pass.** 7,444 viable at 24 h; 3,588 inside every reference |
+| B. Non-dominated | **Pass.** Five families inside every reference, ten to twelve on the 6 h and 12 h fronts; the axes are the crew's 24 h exposure and CO₂ burden against how soon the habitation sector is clean |
+| C. Physical consequences only | **Pass.** Every objective is a model output; references are external (SMAC) or the PROTOTYPE CO₂ levels already in DS-O1/DS-O2; nothing scores crowding, leaks or comfort |
+| D. No trivial optimum | **Pass, with one forced move.** No strategy is within ε of the best on every objective, but containment is necessary to stay inside the references at the base values. The scenario should treat it as the procedure it is (the first action of the exercise), with the choice after it |
+| E. Defensibility | **Pass, PROTOTYPE.** SMACs read from Rev D; TCC flow and chemistry from ISS papers; the source is a documented failure mode with order-of-magnitude values, fixed before the search and exposed in the sensitivity |
+| F. Robustness | **Pass for 14 of 17 variations.** Fails for the source's own extremes (τ 4 h trivial; τ 15 min and 20 g leave nothing inside the references) |
+| G. Repeatability | **Pass.** Reruns identical; 300 s against 60 s steps agree to 3.1 × 10⁻¹¹ relative; ledgers at most 8.0 × 10⁻¹³ kg CO₂, 1.8 × 10⁻¹³ kg NH₃, 1.0 × 10⁻¹⁵ kg release |
+
+**Verdict: the gate passes for the base scenario.** With a second species whose source and sink are in different places, SYS-002 v2
+produces a decision with no right answer that the model does not compute, inside a stated range of source values. What it does not do:
+model where the crew sleep while A1 is out of use, the bed's capacity, condensate removal, or anything thermal, humid or pressurized. No
+gameplay was built (§31).
+
+## 31. Phase 2B Gameplay Proposal: "Shared Air" [PROPOSAL; not built, needs separate authorization]
+
+### 31.1 The smallest valid scenario
+
+| Field | Value |
+| --- | --- |
+| ID, name | DS-2B "Shared Air" (the second Deadship training, after DS-1) |
+| Start | `#interior-shared-air`, ring A, Ops on the newcomer; the station's training frame as DS-1 |
+| Premise | Hygiene A's stored urine was not pretreated; its bag splits and ammonia evaporates in sector 1 |
+| Model | SYS-002 v2 (`ring_air`), unchanged values; SYS-001 not used |
+| Initial state | Ring normal: doors closed, fans and dampers open, CO₂ unit and TCC on, CO₂ at steady state, NH₃ 0 |
+| Crew | Six, 2/2/2; the trainee is one of sector 1's pair (the person nearest the spill) |
+| Source | A1, M₀ 7 g, τ 1 h, LEAKING at t = 0 (PROTOTYPE; the scenario file states both and their basis) |
+| Trigger to act | 10 min after the release (the smell); before that the clock runs with no input |
+| Actions | Contain the spill (stand at hygiene A, 10 min); walk; open or close any CIRC door by hand (existing doors); at the ECLSS bay: each damper pair, the fans, the TCC; order each other pair to a sector (they walk the route) |
+| Refusals | Opening a crew-tube hatch (DS-O8); acting on the TCC or dampers away from the bay; ordering a pair through a door that is held |
+| Time | ×30 while acting, ×1800 for the watch, as DS-1 |
+| Watch | The trainee ends the setup; the model runs to 24 h, then the 7 d projection, with no input |
+| End | After the projection, or when the trainee stops |
+| Debrief | Per person: route, peak, largest 1 h and 24 h means against 30 and 20 ppm, 7 d mean against 3 ppm, time above the CO₂ target; ring: NH₃ released, held in the bag, removed by the TCC, still airborne; when each sector is back under 3 ppm. Each shown against the five families of §30.5, never as a grade |
+| Scoring | None (unscored, as DS-1) |
+| Not modelled, said in the debrief | Where the crew sleep while A1 is out of use; TCC capacity; condensate; heat, humidity, pressure |
+| Owner sign-off before build | The source and its values; using the SMACs as the debrief's references; whether the trainee may order other pairs |
+
+### 31.2 UI and interaction requirements (requirements only)
+
+1. **Ring map:** each compartment coloured by NH₃ and by CO₂ on two separate layers the trainee switches, each connection drawn as now
+   (door, duct, none); the source's compartment marked with its state (LEAKING, ISOLATED).
+2. **Bay panel** (DS-O10 layout): per compartment CO₂ % and NH₃ ppm on one line, the fans, each damper pair, the TCC; short lines,
+   readable at the stand.
+3. **Person readout:** for the trainee always, for each pair on the map, the current NH₃ ppm, the 1 h mean so far and the 24 h mean so
+   far as fractions of 30 and 20 ppm, plus the CO₂ where they are. No health words; the references named by duration.
+4. **Containment:** a context action at hygiene A (key and touch), a 10 min progress at ×30, interruptible; the source state on the map
+   and the panel.
+5. **Orders:** a pair is ordered from the map to a sector; the route is shown and walked (40 s per compartment); refused orders say why.
+6. **Doors:** the walk's doors stay the door edges; a door the trainee leaves open stays open in the model.
+7. **Watch and debrief:** the watch shows the clock, both gases and each person's means; the debrief shows §31.1's numbers and the
+   trainee's place among the §30.5 families.
+8. **Verification:** the scenario's reference replay (events and checkpoints, both species, per-person exposures) in its package and
+   in a headless runtime check, as DS-1; Python/Godot parity within §29.5's tolerances.
+9. **Phones:** every action reachable by touch; text within the phone free band (§22).
+10. **Budget:** the scenario's data fits in the remaining web headroom with at least 5 MB to spare.
+
+## 32. Roadmap
+
+| Phase | Status |
+| --- | --- |
+| 0 Minimal engineering integration proof | Complete |
+| 1 DS-1 "Scrubber" tutorial | Complete (finalized 2026-11-14) |
+| 2A Atmospheric connectivity | Complete (finalized 2026-11-14) |
+| SYS-002 v2 (CO₂ and NH₃) and the second 2B gate | This assignment: built and validated; gate passed for the base scenario |
+| 2B "Shared Air" | Awaiting authorization (§31) |
+| 2C "Borrowed Air" (humidity, heat, parts) | Design only, after 2B |
+| 3 Broader systems | Design only |
+| 4 Competitive Deadship and Hullrun | Design only |
+| 5 Narrative survival | Design only |
+
+## 33. Handoff (SYS-002 v2 and the second Phase 2B gate)
+
+1. **Implemented.** SYS-002 v2: NH₃ as a second species in `ring_air.py` and `ring_air.gd` (finite source, separate TCC, exact step,
+   integral exposures), `air_exposure.py`, 21 tests, a second reference run in the package, a headless verifier
+   (`verify_ring_air.gd`), the gate study and its reference lens, this report (§29–§33), `docs/MODEL.md`, TODO.
+2. **Reused.** The CO₂ model, its exact step and its checkpoints (unchanged), the exchange graph and flows (DS-O7), the export path, the
+   runtime checks.
+3. **Not built.** No Phase 2B scenario, UI, orders, containment action, map layers or debrief (§31 is a proposal).
+4. **Source substitution.** A leaking cartridge became a urine pretreatment failure in hygiene A (§29.1); no ammonia cooling system.
+5. **Validated.** 279 unit tests; Python/Godot parity at 8 × 10⁻¹⁴ relative; the gate's repeatability, step independence and ledgers;
+   the runtime export and web size (§33.11).
+6. **Not validated.** No playtest (nothing to play); the source values are PROTOTYPE; the TCC's capacity, condensate removal and the
+   crew's sleeping places are not modelled; Godot cost measured headless in this container, not on a phone.
+7. **Unchanged.** Canon, Drive, Blender and ship geometry, DS-1, `#interior-airflow`'s behaviour, the deployment.
+8. **Commits** on `claude/project-thread-dfyyv7`, pushed, not squashed, not merged, not deployed.
+9. **Correction.** Rev D p. 9 gives 3 ppm for 7 d, as the brief said; earlier SMAC tables used other long-term values, which do not apply.
+10. **Owner questions.** Accept SYS-002 v2? Accept the urine source and its PROTOTYPE values (M₀ 7 g, τ 1 h)? Authorize building 2B
+    "Shared Air" as §31, and say whether containment is taught as the procedure (the forced first move) and whether the trainee may
+    order the other pairs.
+
+### 33.11 Validation (SYS-002 v2)
+
+| Check | Result |
+| --- | --- |
+| Unit tests (`python3 -m unittest discover -s tests`) | 279 OK, 1 skipped (was 258 before this work; +21 NH₃) |
+| Python/Godot parity, headless, no scene (`verify_ring_air.gd` on the published package) | PASS; CO₂ 3.1 × 10⁻¹⁴, NH₃ 8.1 × 10⁻¹⁴ largest relative deviation (§29.5) |
+| `workflow.py runtime-export` (rebuild, 11 runtime checks including `airflow`, `systems`, `deadship`) | PASS, 11/11 |
+| `workflow.py web --native` (native walk, locomotion and EVA Operations checks on the web package) | PASS |
+| Browser, `web_check.py --part training --training airflow` (keys, then touch on an emulated phone; the package must verify before the demo runs) | PASS 2/2 |
+| Enter Wayfarer download against `PLAY_BUDGET` 90,000,000 B | 78,148,545 B (was 78,129,509 B; +19,036 B for the NH₃ reference run); headroom **11.85 MB**, above the 5 MB floor |
+| Gate repeatability, step independence, ledgers | §30.7 G |
+
+Not rerun: the browser `main` part and the `systems` and `deadship` training parts (their models and pages are unchanged; their native
+checks ran in the runtime export).

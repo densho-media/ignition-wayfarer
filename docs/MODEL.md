@@ -2034,6 +2034,19 @@ shared with SYS-001's readout, `WfEquipment.mount_display`) lists the nine compa
 `tests/test_ring_air.py` (14) and the runtime check `airflow` (`--airflow --check-airflow`, WF_GODOT_AIRFLOW), also in
 `web_check.py --part training`.
 
+**A trace species: NH₃ (SYS-002 v2).** The same compartments and exchange flows carry ammonia as a second, independent species with
+its own state z = [c₁…c₉ (kg), S (kg left in the source), released, removed, ∫c₁…∫c₉], stepped exactly as z(t+Δt) = exp(BΔt)·z(t); the CO₂
+equations and their checkpoints are unchanged (NH₃ never enters A). A source is scenario data, never a default: a finite inventory in one
+compartment releasing at the first-order rate S/τ, LEAKING until it is empty or ISOLATED (what it still holds stays in it, accounted).
+The only NH₃ sink is a trace-contaminant control element (TCC) in the sector 3 ECLSS bay, independent of the CO₂ unit: 15.3 m³/h through
+a phosphoric-acid-treated carbon bed at 0.95 single-pass capture (ISS TCCS values, NASA NTRS 20070019823 and 20170006640; PROTOTYPE for
+Wayfarer). Left out, both conservative: NH₃ dissolving in cabin condensate, and the bed's capacity. Concentrations are kept in kg, mol/m³,
+mole fraction, ppm and Pa (`trace_units`) at the ring's 80 kPa and 295 K. The integral states give each compartment's exact exposure
+(ppm·s); `src/wayfarer/air_exposure.py` adds them along a person's places and takes time-weighted means over the reference durations of
+NASA JSC 20584 Rev D (02/2026) p. 9, ammonia: 1 h 30, 24 h 20, 7 d to 1000 d 3 ppm (`NH3_SMAC`, an external reference, not Wayfarer's
+medical limit, which stays OPEN). The package carries a second checkpoint run (`trace.proof`); `WfRingAir.verify` reproduces both, and
+`godot/scripts/systems/verify_ring_air.gd` reports the deviations and the cost without a scene. Tests: `tests/test_ring_air_nh3.py` (21).
+
 ## Retired runtime scenes
 
 The Godot review menu, the ship inspector, the guided induction walk, Demonstrator 01 with the Ship Navigator, its SPACE view and the

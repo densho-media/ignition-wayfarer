@@ -474,15 +474,17 @@ candidates of all nine classes are separate accessory assets (docs/ACCESSORIES.m
   after the whitebox review. **Done when:** the owner accepts or replaces the circulation, the conflicts are canonized or removed and a
   person completes both excursions in the desktop and web builds.
 
-- [ ] **DS — Deadship integration (owner briefs 2026-11-12, 2026-11-13 and 2026-11-14). PHASE 2A BUILT AND FINALIZED; PHASE 2B GATE FAILED, AWAITING REVIEW.** Report
+- [ ] **DS — Deadship integration (owner briefs 2026-11-12, 2026-11-13 and 2026-11-14). PHASE 2A BUILT AND FINALIZED; SYS-002 v2 BUILT; SECOND PHASE 2B GATE PASSED, AWAITING REVIEW.** Report
   `work/project-thread-dfyyv7/DEADSHIP_DESIGN.md` (branch `claude/project-thread-dfyyv7`): Deadship as a station-run training simulation
-  aboard Wayfarer on reusable conserving ship-systems models (SYS-001 v2, SYS-002, docs/MODEL.md). Built: Phase 0 (`#interior-systems`),
-  Phase 1, the unscored DS-1 "Scrubber" tutorial (`#interior-deadship`), finalized for phones, and Phase 2A, ring A's air by compartment
-  with the walk's doors as connections (`#interior-airflow`), with the `systems`, `deadship` and `airflow` runtime checks and the opt-in
-  browser part `web_check.py --part training`. **Open:** the owner's review and playtest (checklist in the report, §22.4); ring
-  ventilation stays PROTOTYPE (DS-O7) and the crew-tube hatches are outside the model (DS-O8). Phase 2B was authorized subject to an
-  engineering gate, which failed on SYS-002 (report §27: pooling at the unit dominates every strategy); the next requirement is a second
-  transported species with owner-chosen source and limit (report §27.6), then a second gate. **Done when:** the owner accepts Phases 1 and 2A and squashes or declines them.
+  aboard Wayfarer on reusable conserving ship-systems models (SYS-001 v2, SYS-002 v2, docs/MODEL.md). Built: Phase 0 (`#interior-systems`),
+  Phase 1, the unscored DS-1 "Scrubber" tutorial (`#interior-deadship`), finalized for phones, Phase 2A, ring A's air by compartment
+  with the walk's doors as connections (`#interior-airflow`), and SYS-002 v2 (NH₃ beside CO₂: a finite source, a TCC in the sector 3
+  bay, exposures against the Rev D SMACs). The first Phase 2B gate failed on CO₂ alone (report §27); the second, on SYS-002 v2 with a
+  urine pretreatment failure in hygiene A, passed for the base scenario (report §30: containment is forced, then a real choice between
+  keeping the crew's air clean and clearing the habitation sector sooner), not for the source's extremes. **Open:** the owner's review
+  of Phases 1 and 2A (checklist §22.4), SYS-002 v2 and the source's PROTOTYPE values; authorization to build 2B "Shared Air" (§31);
+  ring ventilation stays PROTOTYPE (DS-O7), the crew-tube hatches outside the model (DS-O8). **Done when:** the owner accepts or
+  declines the phases and SYS-002 v2 and squashes or declines them.
 
 ## K — Finish the two characters, EVA training and production art
 
