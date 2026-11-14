@@ -606,6 +606,7 @@ def vertex_page(spec, out_dir, revision, built):
     with every number from the pure modules (vertex_engine, vertex_cluster) and each row's evidence class."""
     import vertex_cluster as vc
     import vertex_engine as ve
+    import vertex_inspect as vi
     if not vc.active(spec):
         return False
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -624,6 +625,7 @@ def vertex_page(spec, out_dir, revision, built):
         for x in eng['speculative']['items'])
     mass_rows = ''.join(f'<tr><td>{esc(k.replace("_", " ").lower())}</td><td class="num">{v / 1e3:,.0f} t</td></tr>'
                         for k, v in sorted(mass['by_category'].items(), key=lambda kv: -kv[1]) if v >= 500)
+    anatomy = engine_anatomy(spec, vi)
     figs = ''.join(f'<figure><img src="../{f}" alt="{esc(a)}" loading="lazy"><figcaption>{esc(a)}</figcaption></figure>'
                    for f, a in (('vertex_engine.jpg', 'The Compact Vertex Engine, cut away: cartridge, collar, shield, closure coils, four nozzle loops'),
                                 ('vertex_cluster.jpg', 'The four-engine cluster at the aft end of the ship, N1..N4 in the owner nozzle order'))
@@ -680,11 +682,38 @@ def vertex_page(spec, out_dir, revision, built):
 <section><h2>3 · Speculative items</h2>
 <div class="scroll" tabindex="0"><table><thead><tr><th>Item</th><th>Status</th><th>What it assumes</th><th>Breakthrough Lab</th></tr></thead>
 <tbody>{spec_rows}</tbody></table></div>
-<p class="note">{esc(spec["propulsion_representation"]["authority"])}</p></section>"""
+<p class="note">{esc(spec["propulsion_representation"]["authority"])}</p></section>
+{anatomy}"""
     (out_dir / 'index.html').write_text(page('Vertex propulsion lineage · Wayfarer engineering',
                                              'How the Vertex research demonstrator became the Compact Vertex Engine and the four-engine Propulsion Cluster.',
                                              body, 2, revision, built))
     return True
+
+
+def engine_anatomy(spec, vi):
+    """Section 4 of engineering/vertex/: the engine's functional categories from vertex_inspect (the same records Explore Ship inspects),
+    each linking to its Weakest Links and Breakthrough Lab records by id (the registries stay on their own pages) and to the viewer."""
+    recs = vi.records(spec)
+    swatch = lambda rgb: f'<i class="sw" style="background:rgb({",".join(str(round(255 * c)) for c in rgb)})" aria-hidden="true"></i>'
+    cards = []
+    for c in vi.categories(spec):
+        parts = [r for r in recs if r['category'] == c['id']]
+        stems = list(dict.fromkeys((r['stem'], r['units']) for r in parts))
+        names = ', '.join(f'{esc(vi.display_name(s))}{f" ×{n}" if n > 1 else ""}' for s, n in stems)
+        links = ', '.join([f'<a href="../weakest-links/#{w}"><code>{w}</code></a>' for w in c['weakest_links']]
+                          + [f'<a href="../breakthrough-lab/#{b}"><code>{b}</code></a>' for b in c['breakthroughs']]) or 'none declared'
+        cards.append(f'''<div class="panel anatomy" id="anatomy-{c["id"].lower().replace("_", "-")}">
+ <h3>{swatch(c["color"])} {esc(c["title"])} <span class="meta">{c["parts"]} part{"s" if c["parts"] != 1 else ""}</span></h3>
+ <p>{esc(c["purpose"])}</p><p><b>How it works:</b> {esc(c["how"])}</p>
+ <p class="meta"><b>Physics:</b> {esc(c["physics"])} <b>Speculative:</b> {esc(c["speculative"])} <b>Open:</b> {esc(c["open"])}</p>
+ <p class="meta"><b>Interfaces:</b> {", ".join(f"<code>{esc(i)}</code>" for i in c["interfaces"]) or "none"} · <b>Research records:</b> {links}</p>
+ <details><summary>Parts</summary><p class="meta">{names}</p></details>
+ <p><a href="../../viewer/#view=aft&amp;eng=N1&amp;cat={c["id"]}">Inspect in Explore Ship</a></p></div>''')
+    return f"""<section id="anatomy"><h2>4 · Engine anatomy</h2>
+<p>The {len(recs)} logical parts of one Compact Vertex Engine in {len(cards)} functional groups. Explore Ship opens the same records: pick an engine,
+  a group or a part, and it is highlighted on the model with its material, evidence class and interfaces. The swatches are functional review
+  colours, never material colours, and every group is named in text. Masses are {tag("ENGINEERING_PROTOTYPE")} estimates from the drawn volume.</p>
+<div class="grid2">{''.join(cards)}</div></section>"""
 
 
 def vertex_teaser():

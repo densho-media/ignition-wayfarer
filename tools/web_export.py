@@ -35,6 +35,7 @@ import web_play
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'src/wayfarer'))
 import representation
 import vertex_cluster
+import vertex_inspect
 from spec import load as load_spec
 from workflow import write_lock
 
@@ -54,6 +55,8 @@ SITE_LIMIT = 900_000_000        # GitHub Pages: a published site may be at most 
 START_BUDGET = 60_000
 VIEWER_BUDGET = 12_000_000
 PLAY_BUDGET = 90_000_000
+# Explore Ship's engine part inspection (Vertex Engine 1.1), fetched only when someone opens it: the part records and their meshes.
+INSPECT_BUDGET = 600_000
 LIMITATIONS = [
     'REP_PROXY geometry throughout: a display model generated from the parameters, not a measurement source (Draco quantizes '
     'viewer positions to about 1.5 cm).',
@@ -205,7 +208,7 @@ def run(root, out=None, pipeline_run=None, draco=True, with_play=True, native=Fa
         shield = manifest['look']['exterior']['grammar'].get('fractal_shield')
         # Vertex drive states (owner brief 2026-11-14): the one shared effect definition's opacities per named state and engine, keyed by
         # the GLB nodes that carry each effect object (vertex_cluster.effect_states); none when the Fiji representation is active.
-        drive_file = None
+        drive_file = engine_file = geometry_file = None
         spec = load_spec(root)[0]
         if vertex_cluster.active(spec) == vertex_cluster.VERTEX:
             effects = vertex_cluster.effect_states(spec)
@@ -219,6 +222,19 @@ def run(root, out=None, pipeline_run=None, draco=True, with_play=True, native=Fa
             drive_text = json.dumps(effects, separators=(',', ':'))
             drive_file = f'model/drive-{hashlib.sha256(drive_text.encode()).hexdigest()[:12]}.json'
             (viewer / drive_file).write_text(drive_text)
+            # Vertex Engine 1.1 part inspection: the logical parts' records and their own meshes, loaded only when someone inspects an
+            # engine (vertex_inspect). Every record's render object must be in the GLB, or a part would point at nothing.
+            inspect, geometry = vertex_inspect.manifest(spec)
+            sources = {r['source_name'] for r in manifest['nodes']}
+            lost = sorted({r['render_object'] for r in inspect['parts']} - sources)
+            if lost:
+                return {'result': 'FAIL', 'step': 'engine-inspection', 'reason': f'render objects missing from the GLB: {lost[:6]}', 'run_dir': str(run_dir)}
+            geometry_file = f'model/engine-parts-{hashlib.sha256(geometry).hexdigest()[:12]}.bin'
+            (viewer / geometry_file).write_bytes(geometry)
+            inspect['geometry']['file'] = geometry_file
+            engine_text = json.dumps(inspect, separators=(',', ':'))
+            engine_file = f'model/engine-{hashlib.sha256(engine_text.encode()).hexdigest()[:12]}.json'
+            (viewer / engine_file).write_text(engine_text)
         build = {'contract': 'WF_WEB_EXPLORER', 'version': 2, 'vessel': 'G.U. WAYFARER 001', 'project': 'IGNITION',
                  'git_revision': revision, 'git_dirty': dirty, 'built_utc': pipeline.utc_now(),
                  'representation': manifest['representation'], 'preset': manifest['preset'], 'blender': manifest['blender'],
@@ -226,6 +242,7 @@ def run(root, out=None, pipeline_run=None, draco=True, with_play=True, native=Fa
                  'coordinates': manifest['coordinates'], 'bounds_runtime_m': manifest['bounds_runtime_m'], 'triangles': manifest['triangles'],
                  'glb': {k: glb[k] for k in ('bytes', 'nodes', 'mesh_nodes', 'meshes', 'materials', 'extensions_required')},
                  'glb_sha256': glb_sha, 'glb_file': glb_file, 'nodes_file': nodes_file, 'holo_file': holo_file, 'shield_file': shield_file, 'drive_file': drive_file,
+                 'engine_file': engine_file, 'engine_parts_file': geometry_file,
                  'shield': shield, 'pipeline': built}
         (viewer / 'build.json').write_text(json.dumps(build, indent=2) + '\n')
         play = None
@@ -277,6 +294,7 @@ def release_record(root, site, build, play, revision, dirty, built, engineering=
     viewer_files = ['viewer/index.html', 'viewer/viewer.css', 'viewer/viewer.js', 'viewer/appearance.js', 'viewer/shield.js', 'viewer/build.json',
                     f"viewer/{build['nodes_file']}", f"viewer/{build['shield_file']}",
                     f"viewer/{build['glb_file']}", *[n for n in files if n.startswith('viewer/vendor/') and n.endswith(('.js', '.wasm'))]]
+    inspect_files = [f"viewer/{build['engine_file']}", f"viewer/{build['engine_parts_file']}", 'viewer/inspect.js'] if build.get('engine_file') else []
     release = {
         'contract': 'WF_WEB_RELEASE', 'version': 1, 'vessel': 'G.U. WAYFARER 001', 'project': 'IGNITION',
         'release': f"{build['built_utc'][:10].replace('-', '')}-{revision[:7]}{'-dirty' if dirty else ''}",
@@ -294,7 +312,9 @@ def release_record(root, site, build, play, revision, dirty, built, engineering=
                       'loads': ['index.html', 'site.css', 'release.json']},
             'viewer': {'entry': 'viewer/', 'download_bytes': size(viewer_files), 'three': THREE['version'],
                        'glb_file': f"viewer/{build['glb_file']}", 'glb_sha256': build['glb_sha256'],
-                       'mesh_nodes': build['glb']['mesh_nodes'], 'assemblies': 14, 'triangles': build['triangles']},
+                       'mesh_nodes': build['glb']['mesh_nodes'], 'assemblies': 14, 'triangles': build['triangles'],
+                       # The engine part inspection loads only when someone opens it, so it is counted apart from the first view.
+                       **({'inspection': {'loads': inspect_files, 'download_bytes': size(inspect_files)}} if build.get('engine_file') else {})},
             # Explore Interior and Explore Exterior share the play package: one engine, one pack, the hash picks the scene.
             **({'interior': {'entry': 'interior/', 'page': f"play/{play['entry']}#interior", 'scene': web_play.SCENE,
                              'download_bytes': size([f'play/{f}' for f in play['files'].values()])},
@@ -347,6 +367,9 @@ def verify_site(site, release):
     for name, budget in (('start', START_BUDGET), ('viewer', VIEWER_BUDGET), ('play', PLAY_BUDGET)):
         if name in ex and ex[name]['download_bytes'] > budget:
             problems.append(f'{name} downloads {ex[name]["download_bytes"]} bytes, over its {budget} budget')
+    inspection = ex.get('viewer', {}).get('inspection')
+    if inspection and inspection['download_bytes'] > INSPECT_BUDGET:
+        problems.append(f'engine inspection downloads {inspection["download_bytes"]} bytes, over its {INSPECT_BUDGET} budget')
     start = (site / 'index.html').read_text().replace('three.js', '')
     for heavy in ('.glb', '.wasm', '.pck', 'vendor/', 'engine-', '<script src', 'type="module"'):
         if heavy in start:

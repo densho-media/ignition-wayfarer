@@ -39782,12 +39782,12 @@
    },
    "VTX_CRYOGENIC_cryo": {
     "centroid": [
-     -12.90370367191456,
-     -3.705406986183597e-17,
-     -0.576851859136864
+     -14.64393935059056,
+     -0.328273048172846,
+     1.1067456295996
     ],
     "component_id": "WF.VTX.CE.VTX_CRYOGENIC_cryo",
-    "faces": 408,
+    "faces": 488,
     "instance": null,
     "kind": "vtx_cryogenic",
     "matrix_world": [
@@ -39819,7 +39819,7 @@
     "max": [
      -10.552054405212402,
      6.236602306365967,
-     9.885062217712402
+     10.673324584960938
     ],
     "min": [
      -31.20978546142578,
@@ -39828,16 +39828,16 @@
     ],
     "parent": null,
     "type": "MESH",
-    "vertices": 432
+    "vertices": 528
    },
    "VTX_ELECTRICAL_power": {
     "centroid": [
-     -12.061538476210375,
-     0.2979094684123993,
-     3.494196043564723
+     -17.19366194496692,
+     0.6486729093315736,
+     4.37595169141259
     ],
     "component_id": "WF.VTX.CE.VTX_ELECTRICAL_power",
-    "faces": 84,
+    "faces": 228,
     "instance": null,
     "kind": "vtx_electrical",
     "matrix_world": [
@@ -39869,25 +39869,25 @@
     "max": [
      -3.200000047683716,
      4.699999809265137,
-     9.811023712158203
+     10.925000190734863
     ],
     "min": [
-     -31.212581634521484,
+     -31.649999618530273,
      -5.9178009033203125,
-     -4.699999809265137
+     -5.56860876083374
     ],
     "parent": null,
     "type": "MESH",
-    "vertices": 104
+    "vertices": 284
    },
    "VTX_FUEL_fuel": {
     "centroid": [
-     -3.899999976158142,
-     -4.209723245568785e-18,
-     4.209723348966361e-18
+     -3.661643818633197,
+     0.1089041098339917,
+     3.6907163607376316e-18
     ],
     "component_id": "WF.VTX.CE.VTX_FUEL_fuel",
-    "faces": 128,
+    "faces": 142,
     "instance": null,
     "kind": "vtx_fuel",
     "matrix_world": [
@@ -39917,7 +39917,7 @@
      ]
     ],
     "max": [
-     -2.200000047683716,
+     -1.6506725549697876,
      1.7000000476837158,
      1.7000000476837158
     ],
@@ -39928,7 +39928,7 @@
     ],
     "parent": null,
     "type": "MESH",
-    "vertices": 128
+    "vertices": 146
    },
    "VTX_FUSION_REACTION_sensor": {
     "centroid": [
@@ -39982,12 +39982,12 @@
    },
    "VTX_HOT_THERMAL_hot": {
     "centroid": [
-     -12.693939194534764,
-     -0.5272727301626494,
-     1.066927122017882e-17
+     -18.78974540566289,
+     -0.20232558250427246,
+     1.4728825578859572e-17
     ],
     "component_id": "WF.VTX.CE.VTX_HOT_THERMAL_hot",
-    "faces": 504,
+    "faces": 1320,
     "instance": null,
     "kind": "vtx_hot_thermal",
     "matrix_world": [
@@ -40019,25 +40019,25 @@
     "max": [
      -10.380000114440918,
      9.82937240600586,
-     5.949999809265137
+     9.618626594543457
     ],
     "min": [
-     -31.215377807617188,
+     -31.260622024536133,
      -9.82937240600586,
-     -5.949999809265137
+     -9.618626594543457
     ],
     "parent": null,
     "type": "MESH",
-    "vertices": 528
+    "vertices": 1376
    },
    "VTX_INSTRUMENTATION_lamp": {
     "centroid": [
-     -9.150000028442918,
-     -2.3367028084446356e-17,
-     2.3367027549318546e-17
+     -9.149999818494242,
+     -3.221856905365467e-17,
+     3.221856755939292e-17
     ],
     "component_id": "WF.VTX.CE.VTX_INSTRUMENTATION_lamp",
-    "faces": 512,
+    "faces": 288,
     "instance": null,
     "kind": "vtx_instrumentation",
     "matrix_world": [
@@ -40078,7 +40078,7 @@
     ],
     "parent": null,
     "type": "MESH",
-    "vertices": 456
+    "vertices": 248
    },
    "VTX_INSTRUMENTATION_sensor": {
     "centroid": [
@@ -40133,11 +40133,11 @@
    "VTX_MAGNETIC_NOZZLE_coil": {
     "centroid": [
      -22.72499990463257,
-     -1.5690787255910186e-17,
-     1.5690787126663215e-17
+     -2.0921049674546915e-17,
+     2.0921049502217622e-17
     ],
     "component_id": "WF.VTX.CE.VTX_MAGNETIC_NOZZLE_coil",
-    "faces": 2048,
+    "faces": 1536,
     "instance": null,
     "kind": "vtx_magnetic_nozzle",
     "matrix_world": [
@@ -40178,7 +40178,7 @@
     ],
     "parent": null,
     "type": "MESH",
-    "vertices": 2048
+    "vertices": 1536
    },
    "VTX_MAGNETIC_NOZZLE_cryostat": {
     "centroid": [
@@ -40432,12 +40432,12 @@
    },
    "VTX_STRUCTURE_structure": {
     "centroid": [
-     -19.285499980151652,
-     -1.1461852139874937e-17,
-     1.0166788098642796e-17
+     -18.29661017723676,
+     -1.295124535579089e-17,
+     1.1487896156658527e-17
     ],
     "component_id": "WF.VTX.CE.VTX_STRUCTURE_structure",
-    "faces": 2825,
+    "faces": 2489,
     "instance": null,
     "kind": "vtx_structure",
     "matrix_world": [
@@ -40478,16 +40478,16 @@
     ],
     "parent": null,
     "type": "MESH",
-    "vertices": 3200
+    "vertices": 2832
    },
    "VTX_TARGET_INJECTION_armour": {
     "centroid": [
-     -12.431875005364418,
-     -1.789132495689007e-18,
-     7.233070129284206e-18
+     -12.539499962329865,
+     -1.7221595950888616e-18,
+     6.077309722644536e-18
     ],
     "component_id": "WF.VTX.CE.VTX_TARGET_INJECTION_armour",
-    "faces": 214,
+    "faces": 262,
     "instance": null,
     "kind": "vtx_target_injection",
     "matrix_world": [
@@ -40528,7 +40528,7 @@
     ],
     "parent": null,
     "type": "MESH",
-    "vertices": 256
+    "vertices": 320
    },
    "VTX_TARGET_INJECTION_power": {
     "centroid": [
@@ -40584,10 +40584,10 @@
     "centroid": [
      -12.84000015258789,
      0.0,
-     2.9017324489644116e-17
+     3.15006360457579e-17
     ],
     "component_id": "WF.VTX.CE.VTX_TARGET_INJECTION_sensor",
-    "faces": 432,
+    "faces": 216,
     "instance": null,
     "kind": "vtx_target_injection",
     "matrix_world": [
@@ -40628,16 +40628,16 @@
     ],
     "parent": null,
     "type": "MESH",
-    "vertices": 576
+    "vertices": 288
    },
    "VTX_TARGET_INJECTION_structure": {
     "centroid": [
-     -5.300000011920929,
-     -4.5924256971943795e-18,
-     4.592425283604073e-18
+     -6.897297240592338,
+     -2.5485893869779912e-18,
+     8.054681751890031e-10
     ],
     "component_id": "WF.VTX.CE.VTX_TARGET_INJECTION_structure",
-    "faces": 10,
+    "faces": 130,
     "instance": null,
     "kind": "vtx_target_injection",
     "matrix_world": [
@@ -40668,17 +40668,17 @@
     ],
     "max": [
      -1.600000023841858,
-     0.30000001192092896,
-     0.30000001192092896
+     1.3866853713989258,
+     1.5838857889175415
     ],
     "min": [
      -9.0,
-     -0.30000001192092896,
-     -0.30000001192092896
+     -1.3866853713989258,
+     -0.8269615173339844
     ],
     "parent": null,
     "type": "MESH",
-    "vertices": 16
+    "vertices": 148
    }
   }
  },

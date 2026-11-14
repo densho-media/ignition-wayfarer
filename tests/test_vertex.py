@@ -11,6 +11,7 @@ from spec import load
 import drive_manifold as dm
 import vertex_engine as ve
 import vertex_cluster as vc
+import vertex_inspect as vi
 
 S = load(ROOT)[0]
 
@@ -114,6 +115,52 @@ class ClusterTests(unittest.TestCase):
         for pl in vc.placements(S):
             a = vc.to_ship(pl, ve.pol(part(S)['x'], part(S)['R'], 0)); b = vc.to_ship(pl, ve.pol(part(s2)['x'], part(s2)['R'], 0))
             self.assertAlmostEqual(math.dist(a, b), 0.4)
+
+
+class InspectionTests(unittest.TestCase):
+    """Vertex Engine 1.1 (owner brief 2026-11-14): every logical part stays inspectable while the engine is drawn from few render objects."""
+    @classmethod
+    def setUpClass(cls):
+        cls.m, cls.geo = vi.manifest(S)
+
+    def test_every_part_has_one_record_and_a_render_object(self):
+        parts = ve.parts(S)
+        self.assertEqual([r['name'] for r in self.m['parts']], [p['name'] for p in parts])
+        self.assertEqual({r['render_object'] for r in self.m['parts']}, {name for name, _ in ve.families(parts)})
+        self.assertEqual(len({r['id'] for r in self.m['parts']}), len(parts))
+
+    def test_geometry_ranges_cover_the_buffer(self):
+        nv = self.m['geometry']['vertices']; ni = 0
+        for r in self.m['parts']:
+            v0, n, i0, k = r['geo']
+            self.assertTrue(0 <= v0 and v0+n <= nv and k % 3 == 0 and k > 0)
+            self.assertEqual(i0, ni); ni += k
+        self.assertEqual(len(self.geo), 6*nv+2*ni)
+
+    def test_records_sit_inside_the_engine_envelope(self):
+        env = ve.envelope(S)
+        for r in self.m['parts']:
+            lo, hi = r['bounds']
+            self.assertLessEqual(max(abs(lo[1]), abs(hi[1]), abs(lo[2]), abs(hi[2])), env['max_radius']+1e-3, r['name'])
+
+    def test_engine_placements_match_the_cluster(self):
+        for e, pl in zip(self.m['engines'], vc.placements(S)):
+            m = e['matrix']; o = vc.to_ship(pl, (0.0, 0.0, 0.0))
+            self.assertTrue(all(abs(a-b) < 1e-4 for a, b in zip(m[12:15], vi.runtime(o))))
+
+    def test_hot_and_cryogenic_circuits_stay_apart(self):
+        """The lithium (hot) and cryogen (cold) circuits are separate categories and materials, never one line."""
+        by = {p['name']: p for p in ve.parts(S)}
+        hot = {n for n, p in by.items() if p['category'] == 'HOT_THERMAL'}
+        cold = {n for n, p in by.items() if p['category'] == 'CRYOGENIC'}
+        self.assertTrue(hot and cold and not hot & cold)
+        self.assertTrue(all(by[n]['material'] == 'hot' for n in hot if 'Lithium' in n or 'Header' in n))
+        self.assertTrue(all(by[n]['material'] == 'cryo' for n in cold))
+
+    def test_categories_name_their_research_records(self):
+        for c in self.m['categories']:
+            self.assertTrue(all(w.startswith('WL-') for w in c['weakest_links']) and all(b.startswith('BT-') for b in c['breakthroughs']))
+            self.assertTrue(set(c['interfaces']) <= set(self.m['interfaces']), c['id'])
 
 
 class SelectionTests(unittest.TestCase):

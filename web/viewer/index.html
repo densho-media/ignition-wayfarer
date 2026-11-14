@@ -35,6 +35,7 @@
   <button data-style="hybrid" aria-pressed="false" title="Hybrid / X-ray: a click focuses the part, the rest becomes a faint ghost (X)">Hybrid</button>
   <button id="appearance-toggle" aria-expanded="false" aria-controls="appearance" title="Ghost, context and reset">Appearance</button>
   <button id="drive-toggle" aria-expanded="false" aria-controls="drive" title="Vertex drive display states (D)" hidden>Drive</button>
+  <button id="engine-toggle" aria-expanded="false" aria-controls="engine" title="Inspect the Vertex engines part by part (I)" hidden>Engine</button>
 </div>
 <div id="focusbar" class="focusbar" role="group" aria-label="Focus" hidden>
   <span class="label">Focus</span><b id="focus-name"></b>
@@ -71,11 +72,22 @@
 </aside>
 <aside id="drive" class="panel appearance" hidden>
   <div class="panel-head"><span>Vertex drive</span></div>
+  <div class="row"><span>Engines</span><span class="chips drive-engines" role="group" aria-label="Engines the commands apply to"></span></div>
   <div class="row"><span>State</span></div>
-  <div class="row buttons drive-states"></div>
-  <div class="row"><span>Engines</span><span class="chips drive-engines"></span></div>
-  <p class="note">SPECULATIVE working representation: four Compact Vertex Engines. Plasma, hot hardware and indicators are a display;
-    magnetic fields stay invisible; colours are not a spectrum. <a href="../engineering/vertex/">Engine lineage</a></p>
+  <div class="row buttons drive-states" role="group" aria-label="Drive state of the chosen engines"></div>
+  <div class="row buttons drive-sequence">
+    <button data-sequence="start" title="Start N1, N2, N3, N4 one after another on a fixed timeline">Sequential start</button>
+    <button data-sequence="cluster" title="Every engine to Sustained at once">Full cluster</button>
+    <button data-sequence="shutdown" title="Shut down the chosen engines">Shut down</button>
+  </div>
+  <p class="drive-readout note" aria-live="polite"></p>
+  <p class="note">SPECULATIVE working representation: four Compact Vertex Engines. Plasma, hot hardware and indicators are a display, not a plasma
+    simulation; magnetic fields stay invisible (no field lines are drawn); colours are not a spectrum. Hot hardware follows a first-order display
+    temperature (heats in about 4 s, cools in about 12 s): PROTOTYPE timing. <a href="../engineering/vertex/">Engine lineage</a></p>
+</aside>
+<aside id="engine" class="panel appearance inspect" hidden>
+  <div class="panel-head"><span>Vertex engine parts</span><a href="../engineering/vertex/#anatomy">Anatomy</a></div>
+  <div class="inspect-body"><p class="note">Loading the part records…</p></div>
 </aside>
 <div id="pick" class="pick" hidden></div>
 <div id="status" class="status" role="status">Loading model…</div>

@@ -319,6 +319,114 @@ class Traffic:
 # The walk check in the Web build takes about 1,470 s in headless Chromium with drawing off (docs/MODEL.md EXC-001), so the
 # equivalence part waits longer than the other play sessions.
 EQUIVALENCE_SECONDS = 2700
+# Vertex Engine 1.1 part inspection (owner brief 2026-11-14), in the page: the drawer loads the records lazily; every engine's render
+# objects are found at the manifest placements; a pick on a part's own surface names that part on that engine; a hidden render object takes
+# no pick; filter, search, keyboard and the bookmark work; the highlight never takes a pick. Returns a dict; 'ok' sums it up.
+INSPECT = r'''(async () => {
+  const w = window.wayfarer, T = w.THREE, out = {};
+  const lazy = () => performance.getEntriesByType('resource').filter(e => e.name.includes('/model/engine') || e.name.endsWith('/inspect.js')).length;
+  const before = lazy();
+  await w.openEngine();
+  const ins = w.inspect();
+  if (!ins || !ins.data()) return { ok: false, reason: 'no inspector or records (build has no engine_file?)' };
+  const data = ins.data();
+  out.lazy = before === 0 && lazy() === 3;
+  const al = ins.alignment();
+  out.render_objects = al.length; out.max_offset_m = Math.max(...al.map(a => a.metres));
+  out.engines = [...new Set(al.map(a => a.engine))].sort();
+  const objects = new Set(data.parts.map(p => p.render_object)).size;
+  out.mapped = al.length === 4 * objects && out.engines.length === 4 && out.max_offset_m < 0.05;
+  // a pick on each engine: frame the shield burn face (it faces aft) and scan its projected box for a pick that names it on that engine
+  const picks = {}, TARGET = 'VTX_Shield_Burn_Face';
+  for (const e of data.engines) {
+    ins.selectPart(e.name, TARGET, { frame: true });
+    const box = new T.Box3().setFromObject(w.inspect().overlay().children[0]);
+    const pts = [];
+    for (let i = 0; i < 8; i++) pts.push(new T.Vector3(i & 1 ? box.max.x : box.min.x, i & 2 ? box.max.y : box.min.y, i & 4 ? box.max.z : box.min.z).project(w.camera));
+    const x0 = Math.max(-0.95, Math.min(...pts.map(q => q.x))), x1 = Math.min(0.95, Math.max(...pts.map(q => q.x)));
+    const y0 = Math.max(-0.95, Math.min(...pts.map(q => q.y))), y1 = Math.min(0.95, Math.max(...pts.map(q => q.y)));
+    ins.selectPart(e.name, null);
+    let found = null, tried = 0;
+    for (let gy = 1; gy < 8 && !found; gy++) for (let gx = 1; gx < 8 && !found; gx++) {
+      const sx = x0 + (x1 - x0) * gx / 8, sy = y0 + (y1 - y0) * gy / 8;
+      const x = (sx + 1) / 2 * innerWidth, y = (1 - sy) / 2 * innerHeight;
+      const hit = w.pickPart(x, y); tried++;
+      if (hit && hit.engine === e.name && hit.name === TARGET) found = { engine: hit.engine, part: hit.name, x: Math.round(x), y: Math.round(y) };
+    }
+    picks[e.name] = found || { tried };
+  }
+  out.picks = picks;
+  out.picked_right = Object.entries(picks).every(([e, h]) => h.engine === e && h.part === TARGET);
+  // hiding that engine's render object: the same pixel no longer names the hidden part
+  const p2 = picks.N2;
+  if (p2.engine) {
+    const id = ins.renderOf('N2', data.parts.find(p => p.name === TARGET).render_object);
+    await w.update(s => { s.overrides.set('n:' + id, 'HIDDEN'); });
+    const hit = w.pickPart(p2.x, p2.y);
+    out.hidden_pick = hit ? { engine: hit.engine, part: hit.name } : null;
+    out.hidden_ok = !hit || !(hit.engine === 'N2' && hit.part === TARGET);
+    await w.update(s => { s.overrides.delete('n:' + id); });
+  }
+  // the highlight takes no pick: the overlay meshes have no raycast
+  ins.selectPart('N2', 'VTX_C1_Winding');
+  const rc = new T.Raycaster(); rc.setFromCamera(new T.Vector2(0, 0), w.camera);
+  out.overlay_pickless = rc.intersectObject(ins.overlay(), true).length === 0;
+  // filter and search
+  const panel = document.getElementById('engine');
+  panel.querySelector('[data-cat="MAGNETIC_COILS"]').click();
+  const nCoils = data.parts.filter(p => p.category === 'MAGNETIC_COILS').length;
+  out.filter_ok = panel.querySelectorAll('.part-list button').length === nCoils;
+  panel.querySelector('[data-cat=""]').click();
+  const search = panel.querySelector('input[type=search]');
+  search.value = 'lithium'; search.dispatchEvent(new Event('input'));
+  const found = [...panel.querySelectorAll('.part-list button')];
+  out.search_hits = found.length;
+  out.search_ok = found.length > 0 && found.length < data.parts.length;
+  // keyboard: arrows walk the list, Enter (a button click) selects and frames
+  found[0].focus();
+  found[0].dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true }));
+  out.keyboard_ok = document.activeElement === found[1];
+  document.activeElement.click();
+  out.selected = ins.state();
+  search.value = ''; search.dispatchEvent(new Event('input'));
+  out.hash = location.hash;
+  out.hash_ok = location.hash.includes(`part=N2.${out.selected.part}`);
+  out.details = panel.querySelector('.part-details').innerText.slice(0, 400);
+  out.details_ok = /Material/.test(out.details) && /Evidence/.test(out.details) && /Research|Interfaces/.test(out.details);
+  out.ok = out.lazy && out.mapped && out.picked_right && out.hidden_ok !== false && out.overlay_pickless && out.filter_ok && out.search_ok
+           && out.keyboard_ok && out.hash_ok && out.details_ok;
+  return out;
+})()'''
+# Per-engine drive control (owner brief 2026-11-14 section 8): one engine alone, the deterministic sequential start, one engine's shutdown,
+# the hot-hardware display temperature ramp and the drive part of the bookmark. The frame clock is held so the timeline runs on driveTick only.
+DRIVE = r'''(async () => {
+  const w = window.wayfarer, out = {};
+  if (!w.inspect || !w.drive().engines.N1) return { ok: false, reason: 'no drive' };
+  w.frozenDrive = true;
+  w.chooseEngines(['N1', 'N2', 'N3', 'N4']); w.setDrive('OFF'); w.settleDrive();
+  w.chooseEngines(['N2']); w.setDrive('SUSTAINED');
+  const d0 = w.drive();
+  out.single = d0.engines;
+  out.single_ok = d0.engines.N2 === 'SUSTAINED' && ['N1', 'N3', 'N4'].every(e => d0.engines[e] === 'OFF');
+  const hot0 = d0.hot['N2_FX_HOT_L2'] ?? 0; w.driveTick(4); const hot4 = w.drive().hot['N2_FX_HOT_L2'];
+  w.driveTick(60); const hot64 = w.drive().hot['N2_FX_HOT_L2'];
+  out.ramp = [hot0, hot4, hot64];
+  out.ramp_ok = hot0 < 0.01 && hot4 > 0.5 && hot4 < 0.75 && hot64 > 0.99 && (w.drive().hot['N1_FX_HOT_L2'] ?? 0) === 0;
+  out.hash_single = location.hash.match(/drive=[^&]*/)?.[0];
+  out.hash_ok = out.hash_single === 'drive=N1.OFF,N2.SUSTAINED,N3.OFF,N4.OFF';
+  const run = () => { const log = []; w.sequence('start'); for (let k = 0; k <= 30; k++) { if (k) w.driveTick(0.5); log.push(Object.values(w.drive().engines).join(' ')); } return log; };
+  const a = run(); w.chooseEngines(['N1', 'N2', 'N3', 'N4']); w.setDrive('OFF'); w.settleDrive(); const b = run();
+  out.sequence = [a[0], a[4], a[6], a[12], a[30]];
+  out.sequence_ok = JSON.stringify(a) === JSON.stringify(b) && a[30] === 'SUSTAINED SUSTAINED SUSTAINED SUSTAINED'
+                    && a[0].startsWith('PRE_IGNITION OFF') && a[6] === 'SUSTAINED PRE_IGNITION OFF OFF';
+  w.chooseEngines(['N3']); w.setDrive('SHUTDOWN');
+  const s = w.drive().engines;
+  out.shutdown_ok = s.N3 === 'SHUTDOWN' && s.N1 === 'SUSTAINED' && s.N4 === 'SUSTAINED';
+  w.chooseEngines(['N1', 'N2', 'N3', 'N4']); w.setDrive('OFF'); w.settleDrive();
+  w.frozenDrive = false;
+  out.ok = out.single_ok && out.ramp_ok && out.hash_ok && out.sequence_ok && out.shutdown_ok;
+  return out;
+})()'''
 HEAVY = ('.glb', '.wasm', '.pck', '/vendor/', 'engine-', 'walk-', 'viewer.js', 'draco')
 # Frames per second of the page's own animation frames (Godot's main loop runs on them too) over a few seconds.
 RAF_FPS = ('new Promise(r => { const t0 = performance.now(); let n = 0; const ts = []; let last = t0; '
@@ -753,6 +861,38 @@ def run_main(url, release, build, binary, sandbox, out, record_check, metrics):
                      and restored_state['focus'] == {'kind': 'assembly', 'id': first} and abs(restored_state['ghost'] - 0.12) < 1e-9
                      and len(restored_state['overrides']) == 1 and restored_state['overrides'][0][1] == 'HIDDEN', bookmark=mark_state, state=restored_state)
 
+        # Vertex Engine 1.1: part inspection and per-engine drive control, then a bookmark that names both.
+        if build.get('engine_file'):
+            page.send('Page.navigate', {'url': url + 'viewer/?inspect#view=aft'})
+            page.wait("!!(window.wayfarer && window.wayfarer.model && window.wayfarer.records.every(r => r.res))", 240)
+            page.js('window.wayfarer.controls.enableDamping = false')
+            mark_i = traffic.mark()
+            insp = page.js(INSPECT, timeout=300)
+            record_check('viewer: engine part inspection (lazy records, placements, picks per engine, hidden, filter, search, keyboard, link)',
+                         insp.get('ok'), **details(insp))
+            page.frames()
+            page.screenshot(out / 'desktop_engine_inspect.png')
+            drv = page.js(DRIVE, timeout=180)
+            record_check('viewer: per-engine drive control (single engine, sequence, shutdown, thermal ramp, bookmark)', drv.get('ok'), **details(drv))
+            link = '#view=aft&drive=N1.SUSTAINED,N2.OFF,N3.OFF,N4.OFF&part=N3.VTX_C1_Winding'
+            page.send('Page.navigate', {'url': url + 'viewer/?partlink' + link})
+            page.wait("!!(window.wayfarer && window.wayfarer.inspect() && window.wayfarer.inspect().data() && window.wayfarer.inspect().hasPart())", 240)
+            opened = page.js("(() => { const w = window.wayfarer, i = w.inspect(), s = i.state(), o = i.overlay(); const T = w.THREE; "
+                             "const id = i.renderOf(s.engine, 'VTX_C1_Winding'); const r = w.byId.get(id); const b = new T.Box3(); "
+                             "for (const m of r.meshes) b.expandByObject(m); const c = new T.Box3().setFromObject(o.children[0]); "
+                             "return {engine: s.engine, part: s.part, drive: w.drive().engines, offset_m: b.getCenter(new T.Vector3())"
+                             ".distanceTo(c.getCenter(new T.Vector3())), drawer: !document.getElementById('engine').hidden}; })()")
+            record_check('viewer: a part link opens that part on that engine, with the drive states', opened['engine'] == 'N3'
+                         and opened['part'] == 'VTX_C1_Winding' and opened['offset_m'] < 0.1 and opened['drawer']
+                         and opened['drive'] == {'N1': 'SUSTAINED', 'N2': 'OFF', 'N3': 'OFF', 'N4': 'OFF'}, link=link, **opened)
+            page.screenshot(out / 'desktop_engine_link.png')
+            reqs_i, lines_i = traffic.since(mark_i)
+            errors_i = [text for kind, text in lines_i if kind in ('error', 'assert', 'exception')]
+            record_check('viewer: inspection and drive run without script errors', not errors_i, errors=errors_i[:5])
+            inspected = release['experiences']['viewer'].get('inspection', {})
+            metrics['inspection'] = {'download_bytes': inspected.get('download_bytes'), 'loads': inspected.get('loads'),
+                                     'transferred_bytes': sum(b for u, _, b, _ in reqs_i if '/model/engine' in u or 'inspect.js' in u)}
+
         # Back to the start page: the viewer's context is released (pagehide) and nothing of it stays loaded.
         page.click(*page.centre_of('a.back'))
         page.wait("document.readyState === 'complete' && !!document.getElementById('go-interior')", 30)
@@ -1031,6 +1171,17 @@ def run_main(url, release, build, binary, sandbox, out, record_check, metrics):
             record_check('phone: pinch zooms in', pinch['d'] < 0.9 * spun['d'], distance=[round(spun['d'], 1), round(pinch['d'], 1)])
             record_check('phone: no horizontal overflow', not page.js('document.documentElement.scrollWidth > window.innerWidth'))
             page.screenshot(out / 'phone_zoomed.png')
+            if build.get('engine_file'):
+                page.click(*page.centre_of('#engine-toggle'))
+                page.wait("!!(window.wayfarer.inspect().data())", 120)
+                page.js("window.wayfarer.inspect().selectPart('N1', 'VTX_C1_Winding', {frame: true})")
+                page.frames()
+                fit = page.js("(() => { const r = document.getElementById('engine').getBoundingClientRect(); "
+                              "return {left: r.left, right: r.right, top: r.top, bottom: r.bottom, w: innerWidth, h: innerHeight, "
+                              "overflow: document.documentElement.scrollWidth > innerWidth}; })()")
+                record_check('phone: the Engine drawer fits the screen', fit['left'] >= 0 and fit['right'] <= fit['w'] and fit['bottom'] <= fit['h']
+                             and not fit['overflow'], **fit)
+                page.screenshot(out / 'phone_engine_inspect.png')
         else:
             record_check('phone: model loaded', False)
         page.send('Page.navigate', {'url': url + 'status/'})

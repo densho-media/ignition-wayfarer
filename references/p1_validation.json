@@ -1,7 +1,7 @@
 {
   "result": "PASS",
   "blender": "5.2.2 LTS",
-  "spec_hash": "c7ddb94864c7efb17fdaad1cfa0db528e546ffa319164b5803bb880a853fc4b8",
+  "spec_hash": "b452c0d0af104293e4c7a22f164edb8bebe73f1dd14cf566fb84615f57513b4b",
   "source_map_hash": "fc3d72d053f9141c26c8248844df7159101221c41e998ab051243dc008137806",
   "configurations": {
     "COAST": {
@@ -2666,7 +2666,7 @@
   },
   "vertex": {
     "engine": {
-      "parts": 222,
+      "parts": 264,
       "objects": 22,
       "max_radius_m": 11.395,
       "categories": [
