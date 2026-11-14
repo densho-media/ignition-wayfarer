@@ -215,7 +215,7 @@ func _to_door(id: String, back: float) -> void:
 	await pl.ex._walk_to(c + normal * side * back, 0.3, 30.0, 0)
 	pl.ex.fails = []
 	h.walk_override = Vector3.ZERO
-	pl.ex.face(c - (h.actor.global_position + h.ref_basis().y * 1.6))
+	pl.ex.face(c - (h.actor.global_position + h.ref_basis().y * h.EYE_UP))
 	await _ticks(10)
 
 func _to_bay() -> void:

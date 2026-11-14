@@ -56,11 +56,11 @@ func _walk_to(id: String) -> bool:
 	return _need(ok, "the %s was not reached (%.2f m away)" % [id, h.actor.global_position.distance_to(d.eq.centre(id))])
 
 ## The carried spare is inside the first-person view when the trainee looks level (usability review: at waist height it was not):
-## the angle from the level eye line (eyes 1.6 m above the feet) to the box is under half the camera's vertical field of view.
+## the angle from the level eye line (the walk camera's eye, EYE_UP over the body centre) to the box is under half the camera's vertical field of view.
 func _carry_in_view() -> void:
 	await _ticks(2)
 	var up: Vector3 = h.actor.up_now
-	var eye := h.actor.global_position + up * 1.6
+	var eye := h.actor.global_position + up * h.EYE_UP          # the walk camera's eye over the body centre
 	var to_box := d.carried.global_position - eye
 	var level := to_box - up * to_box.dot(up)
 	var below := rad_to_deg(atan2(-to_box.dot(up), level.length()))
@@ -68,7 +68,59 @@ func _carry_in_view() -> void:
 	var half := (cam.fov if cam != null else 75.0) * 0.5
 	notes["carried_below_eye_deg"] = snappedf(below, 0.1)
 	notes["half_fov_deg"] = half
-	_need(below < half - 3.0, "the carried spare is %.1f deg under the eye line, outside the %.1f deg half view" % [below, half])
+	_need(below > 10.0 and below < half - 3.0, "the carried spare is %.1f deg under the eye line: not held in front of the chest inside the %.1f deg half view" % [below, half])
+
+## DS-O10: the bay's status display, seen from the standard stand in front of the bay with a level gaze at the bay, stays under
+## the screen's top row of controls (the page row, Map and ?) on this viewport. Geometry, not pixels: the panel's highest corner's angle
+## over the eye line against the angle of the top row's lower edge (vertical field of view kept, as the camera does).
+func _board_clear() -> void:
+	await _ticks(2)
+	var up: Vector3 = h.actor.up_now
+	var stand := _front()
+	var eye := stand + up * h.EYE_UP
+	var q := d.eq.screen_back.mesh as QuadMesh
+	var top := -INF
+	var bottom := INF
+	var side := 0.0
+	var ahead := d.eq.centre() - eye
+	ahead = (ahead - up * ahead.dot(up)).normalized()
+	for c in [Vector2(-0.5, -0.5), Vector2(0.5, -0.5), Vector2(-0.5, 0.5), Vector2(0.5, 0.5)]:
+		var g := d.eq.to_body(d.eq.screen_back.global_transform * Vector3(c.x * q.size.x, c.y * q.size.y, 0.0))
+		var v := g - eye
+		var lvl := v - up * v.dot(up)
+		top = maxf(top, rad_to_deg(atan2(v.dot(up), lvl.dot(ahead))))
+		bottom = minf(bottom, rad_to_deg(atan2(v.dot(up), lvl.dot(ahead))))
+		side = maxf(side, absf(rad_to_deg(atan2(lvl.dot(ahead.cross(up)), lvl.dot(ahead)))))
+	var vs := h.get_viewport().get_visible_rect().size
+	var cam := h.get_viewport().get_camera_3d()
+	var half := deg_to_rad((cam.fov if cam != null else 75.0) * 0.5)
+	var band := 0.0
+	if WfInput.touch != null and WfInput.compact():
+		band = WfInput.touch.util_top(vs) + float(WfInput.touch.TARGET)       # the Map and ? row's lower edge
+	var limit := rad_to_deg(atan((1.0 - 2.0 * band / vs.y) * tan(half)))
+	notes["board_top_deg"] = snappedf(top, 0.1)
+	notes["board_bottom_deg"] = snappedf(bottom, 0.1)
+	notes["board_side_deg"] = snappedf(side, 0.1)
+	notes["board_distance_m"] = snappedf((d.eq.centre() - eye).length(), 0.01)
+	var lo := INF
+	var hi := -INF
+	for c in [Vector2(0.0, -0.5), Vector2(0.0, 0.5)]:
+		var g := d.eq.to_body(d.eq.screen_back.global_transform * Vector3(0.0, c.y * q.size.y, 0.0))
+		lo = minf(lo, (g - stand).dot(up))
+		hi = maxf(hi, (g - stand).dot(up))
+	notes["board_over_stand_m"] = [snappedf(lo, 0.01), snappedf(hi, 0.01)]
+	var bay: MeshInstance3D = d.eq.points["bay"]["mesh"]
+	var bb := bay.get_aabb()
+	var ys := []
+	for i in 8:
+		var corner := bb.position + Vector3(bb.size.x * float(i & 1), bb.size.y * float((i >> 1) & 1), bb.size.z * float((i >> 2) & 1))
+		ys.append((d.eq.to_body(bay.global_transform * corner, bay) - stand).dot(up))
+	notes["bay_over_stand_m"] = [snappedf(ys.min(), 0.01), snappedf(ys.max(), 0.01)]
+	if cam != null:
+		notes["camera_over_stand_m"] = snappedf((d.eq.to_body(cam.global_position) - stand).dot(up), 0.01)
+	notes["top_row_deg"] = snappedf(limit, 0.1)
+	notes["board_size_m"] = [snappedf(q.size.x, 0.01), snappedf(q.size.y, 0.01)]
+	_need(top < limit, "the bay's display reaches %.1f deg over the eye line, into the screen's top row (%.1f deg) at %s" % [top, limit, str(vs)])
 
 func _goal_has(s: String) -> bool:
 	return h._goal_text().contains(s)
@@ -79,8 +131,12 @@ func _shot(name: String, at: Vector3) -> void:
 func _front() -> Vector3:
 	return pl.front_of(d.eq)
 
+## Where the stills look: level, at the bay's middle (a trainee standing at the bay looks at the bay, not down at its display; DS-O10).
 func _board() -> Vector3:
-	return pl.board_mid(d.eq)
+	var up: Vector3 = h.actor.up_now
+	var c := d.eq.centre()
+	var eye := h.actor.global_position + up * h.EYE_UP
+	return c + up * (eye - c).dot(up)
 
 func run(host: WfExcursion) -> void:
 	h = host
@@ -123,6 +179,7 @@ func run(host: WfExcursion) -> void:
 		_finish()
 		return
 	_need(d.index == 1, "arriving at the bay did not complete Recognize (step %d)" % d.index)
+	await _board_clear()
 	_ui("exc.use", "Use · inspect")
 	_ui("exc.ops", "Ops · isolate unit")
 	# 2 Inspect, 3 Diagnose: Use opens the overview, then each evidence page; the model's clock stops while a page is open

@@ -37,15 +37,70 @@ func _init(by_name: Dictionary, manifest: Dictionary, owner: Node) -> void:
 	if not add_point("bay", str(binding["node"]), float(binding["reach_m"]), str(binding["ring"])):
 		return
 	mesh = points["bay"]["mesh"]
-	board.pixel_size = 0.0022
-	board.font_size = 32
-	board.outline_size = 10
-	board.billboard = BaseMaterial3D.BILLBOARD_ENABLED   # faces the viewer, upright in their view (world Y is not up in a spinning ring)
+	mount_display()
+	update()
+
+## DS-O10 (2026-11-14): the bay's status display is a fixed panel mounted on the bay's face at eye level, like a rack's own display, not
+## floating text. Its bottom edge is 0.95 m above the deck and it grows upwards to just under the eyes (about 1.43 m; the walk camera's
+## eye is 1.47 m); its left edge is the bay's middle. A trainee who stands at the bay and looks level sees it just under and right of the centre
+## of the screen: on an upright phone between the HUD's goal box, the Map and ? row and the touch buttons, clear of all of them. Short lines keep it narrow (about 0.5-0.65 m). A dark screen behind the text;
+## capitals about 31 mm (DISPLAY_EM). The same size on every device (a real panel does not resize). It rides the ring with the bay.
+## Presentation only: a Label3D and a quad, no ship geometry. All lengths in metres, in the bay mesh's frame.
+const DISPLAY_EM := 0.044            # PROTOTYPE display: the em height (pixel_size x font_size); capitals about 31 mm
+const DISPLAY_TILT_DEG := 0.0        # flush with the face (it is at eye level)
+const DISPLAY_BASE := 0.95           # the panel's bottom edge above the deck (PROTOTYPE, chest height)
+const DISPLAY_PROUD := 0.03          # in front of the bay face
+const DISPLAY_PAD := 0.025
+var screen := Node3D.new()
+var screen_back := MeshInstance3D.new()
+
+func mount_display() -> void:
+	board.font_size = 48
+	board.pixel_size = DISPLAY_EM / 48.0
+	board.outline_size = 4
+	board.outline_modulate = Color(0.0, 0.0, 0.0, 0.85)
+	board.billboard = BaseMaterial3D.BILLBOARD_DISABLED
+	board.double_sided = false
 	board.no_depth_test = false
 	board.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
-	mesh.add_child(board)                      # rides the ring with the bay
-	board.position = above(mesh, 0.35)
-	update()
+	board.vertical_alignment = VERTICAL_ALIGNMENT_BOTTOM
+	var quad := QuadMesh.new()
+	screen_back.mesh = quad
+	var mat := StandardMaterial3D.new()
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mat.albedo_color = Color(0.025, 0.035, 0.05)
+	screen_back.material_override = mat
+	screen.add_child(screen_back)
+	screen.add_child(board)
+	mesh.add_child(screen)                     # rides the ring with the bay
+	var box := mesh.get_aabb()
+	var up := inward(mesh)
+	var ax := 0                                # the face normal: the box's thinnest axis that is not up
+	for i in 3:
+		if absf(up[i]) < 0.5 and (absf(up[ax]) >= 0.5 or box.size[i] < box.size[ax]):
+			ax = i
+	var n := Vector3.ZERO
+	n[ax] = -signf(box.get_center()[ax])       # towards the sector's centre line (the aisle)
+	var right := up.cross(n).normalized()      # the reader looks along -n with up overhead: their right is (-n) x up
+	var t := deg_to_rad(DISPLAY_TILT_DEG)
+	var z := (n * cos(t) - up * sin(t)).normalized()
+	var y := (up * cos(t) + n * sin(t)).normalized()
+	var face := box.get_center() + n * (0.5 * absf(box.size[ax]) + DISPLAY_PROUD)
+	var deck := minf(box.position.dot(up), box.end.dot(up))               # the bay stands on the deck
+	var base := up * (deck + DISPLAY_BASE - box.get_center().dot(up))
+	screen.transform = Transform3D(Basis(right, y, z), face + base - right * 0.02)
+
+func inward(m: MeshInstance3D) -> Vector3:
+	var box := m.get_aabb()
+	var a := above(m, 0.0) - box.get_center()
+	return a.normalized() if a.length() > 0.0 else Vector3.UP
+
+## The screen behind the text, sized to it; the panel's bottom-left corner is the screen node's origin.
+func fit_display() -> void:
+	var b := board.get_aabb()
+	board.position = Vector3(DISPLAY_PAD - b.position.x, DISPLAY_PAD - b.position.y, 0.004)
+	(screen_back.mesh as QuadMesh).size = Vector2(b.size.x + 2.0 * DISPLAY_PAD, b.size.y + 2.0 * DISPLAY_PAD)
+	screen_back.position = Vector3(0.5 * b.size.x + DISPLAY_PAD, 0.5 * b.size.y + DISPLAY_PAD, 0.0)
 
 ## Above a ring mesh in spin gravity: towards the ring's spin axis from its centre, past its top, by gap metres, in the mesh's frame.
 func above(m: MeshInstance3D, gap: float) -> Vector3:
@@ -149,11 +204,11 @@ func text() -> String:
 		return "RING A CO2 MODEL\nREFERENCE CHECK FAILED\n" + str(air.errors[0])
 	var r := air.readout()
 	var trend := "%+.3f %%/h" % (100.0 * float(r["dxdt_per_h"]))
-	var limit := "Control limit %.1f %%: %s" % [100.0 * float(air.p["co2_max"]),
-		"in " + _hm(r["hours_to_control_limit"]) + " from now" if r["hours_to_control_limit"] != null else "not approaching"]
+	var limit := "Limit %.1f %%: %s" % [100.0 * float(air.p["co2_max"]),
+		"in " + _hm(r["hours_to_control_limit"]) if r["hours_to_control_limit"] != null else "not approaching"]
 	var unit: String = {"OPERATING": "Unit RUNNING", "RUNNING_NOT_REMOVING": "Unit RUNNING · removal 0", "ISOLATED_FAULT": "Unit ISOLATED",
 		"ISOLATED_READY": "Unit ISOLATED · ready"}[r["status"]]
-	return "RING A CABIN CO2\nSIMULATION x%d%s\n%.3f %%  ·  %.2f kPa\ntrend %s\n%s  ·  %s\n%s" % [int(timelapse), " (paused)" if paused else "",
+	return "RING A CABIN CO2\nSIMULATION x%d%s\n%.3f %%  ·  %.2f kPa\ntrend %s\n%s\n%s\n%s" % [int(timelapse), " (paused)" if paused else "",
 		100.0 * float(r["x"]), float(r["pp_kpa"]), trend, unit, str(r["band"]).replace("_", " "), limit]
 
 func update() -> void:
@@ -161,6 +216,7 @@ func update() -> void:
 		return
 	board.text = text()
 	board.modulate = BAND_COLOURS.get(str(air.readout()["band"]), Color.WHITE) if air.verified else Color(1, 0.3, 0.3)
+	fit_display()
 
 ## The HUD prompt line while the bay is in reach.
 func prompt(key_text: String) -> String:

@@ -81,11 +81,22 @@ func text() -> String:
 	if not ring.verified:
 		return "RING A AIR MODEL\nREFERENCE CHECK FAILED\n" + str(ring.errors[0])
 	var r := ring.readout()
-	var rows := []
+	var by_id := {}
+	var any_isolated := false
 	for q in r["nodes"]:
-		rows.append(node_text(q) + (" · unit" if q["id"] == ring.ids[int(ring.p["removal"])] else ""))
-	return "RING A AIR BY COMPARTMENT\nSIMULATION x%d · PROTOTYPE exchange\nVentilation %s · doors open %d/9 · %d group%s\n%s" % [int(timelapse),
-		r["vent"], open_doors(), r["groups"], "" if r["groups"] == 1 else "s", "\n".join(rows)]
+		by_id[q["id"]] = q
+		any_isolated = any_isolated or bool(q["isolated"])
+	var rows := []                                 # one row per sector: the sector and its two corridor compartments (DS-O10: a compact panel)
+	for k in ["1", "2", "3"]:
+		var cells := []
+		for id in ["A" + k, "AC%sa" % k, "AC%sb" % k]:
+			if by_id.has(id):
+				var q: Dictionary = by_id[id]
+				cells.append("%s %.3f%s" % [id, 100.0 * float(q["x"]), "*" if q["isolated"] else ""])
+		rows.append("  ".join(cells))
+	return "RING A AIR · CO2 %%\nSIMULATION x%d · PROTOTYPE\nVentilation %s · unit %s\ndoors open %d/9 · %d group%s\n%s%s" % [
+		int(timelapse), r["vent"], ring.ids[int(ring.p["removal"])], open_doors(), r["groups"], "" if r["groups"] == 1 else "s",
+		"\n".join(rows), "\n* isolated: no open door or duct" if any_isolated else ""]
 
 func open_doors() -> int:
 	var n := 0
@@ -100,6 +111,7 @@ func update() -> void:
 	sync_doors()
 	board.text = text()
 	board.modulate = Color(0.75, 0.88, 1.0) if ring.verified else Color(1, 0.3, 0.3)
+	fit_display()
 
 func prompt(key_text: String) -> String:
 	return "%s %s  ·  %s" % [key_text, op_label(), "the fans join every compartment through closed doors" if ring.vent == "ON" else "only open doors join compartments"]

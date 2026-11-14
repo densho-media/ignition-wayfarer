@@ -97,12 +97,12 @@ func act(action: String, label: String, handler: Callable, done: Callable, limit
 func shot(name: String, look_at: Vector3, from := Vector3.INF, side := 0.0) -> void:
 	if from != Vector3.INF and (shots != "" or (await_player and OS.has_feature("web"))):
 		await ex._walk_to(from, 0.3, 20.0, 0)
-		ex.face(look_at - (h.actor.global_position + h.ref_basis().y * 1.6))
+		ex.face(look_at - (h.actor.global_position + h.ref_basis().y * h.EYE_UP))
 		await ex._walk_to(h.actor.global_position - h.look_basis().x * side, 0.25, 10.0, 0)   # beside what stands in front of it
 		ex.fails = []
 		h.walk_override = Vector3.ZERO
 		await ticks(20)
-	ex.face(look_at - (h.actor.global_position + h.ref_basis().y * 1.6))
+	ex.face(look_at - (h.actor.global_position + h.ref_basis().y * h.EYE_UP))
 	var third := h.view_out
 	h.view_out = false                         # the trainee's own eyes: a follow camera behind them sees the wall, not the board
 	await _shot(name)

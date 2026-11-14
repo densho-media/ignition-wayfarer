@@ -458,8 +458,9 @@ func _build_parts() -> void:
 	var actor: Node3D = host.get("actor")
 	if actor != null:
 		actor.add_child(carried)
-		carried.position = Vector3(0.0, 1.3, -0.45)  # held in front at chest height (the actor's frame: -Z forward): about 34 deg under the
-		                                             # eyes, inside the 75 deg view (at waist height it was out of the first-person view)
+		# held in front at chest height, 0.30 m under the walk camera's eye (the actor's origin is the body centre, -Z forward): about
+		# 34 deg under the eyes, inside the 75 deg view. (1.3 m over the origin, as first set, put it above the head.)
+		carried.position = Vector3(0.0, 0.62 - 0.30, -0.45)   # 0.62: WfExcursion.EYE_UP
 	var bench: MeshInstance3D = eq.points["bench"]["mesh"]
 	bench.add_child(on_bench)
 	on_bench.position = eq.above(bench, 0.16)

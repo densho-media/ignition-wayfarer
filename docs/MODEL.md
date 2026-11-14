@@ -2029,8 +2029,8 @@ the steady state runs from 0.150 % in sector 3 to 0.223 % in sector 2 (well-mixe
 The export writes `wf_ring_air.json` (topology, exchange rates, 11 hourly checkpoints of a 10 h run through cases C, D, E, B and F); `WfRingAir`
 (`godot/scripts/systems/ring_air.gd`) repeats the step operation for operation and must reproduce them first. `#interior-airflow`
 (`-- --airflow`) creates `WfAirflow` (`scripts/excursion/airflow.gd`, a WfEquipment): the walk's CIRC door leaves are the door edges
-(off the seat = open, read every frame, no second door state), Ops at the ECLSS bay switches the ventilation, the bay's board lists the
-nine compartments and the ring map colours them by CO₂ with each bulkhead's connection (green door, blue duct, red none). Checks:
+(off the seat = open, read every frame, no second door state), Ops at the ECLSS bay switches the ventilation, the bay's instrument panel (a chest-height screen on the bay's face,
+shared with SYS-001's readout, `WfEquipment.mount_display`) lists the nine compartments by sector and the ring map colours them by CO₂ with each bulkhead's connection (green door, blue duct, red none). Checks:
 `tests/test_ring_air.py` (14) and the runtime check `airflow` (`--airflow --check-airflow`, WF_GODOT_AIRFLOW), also in
 `web_check.py --part training`.
 
