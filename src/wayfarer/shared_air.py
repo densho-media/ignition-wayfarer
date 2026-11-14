@@ -358,6 +358,8 @@ class Run:
         unbounded = [[self.ids[i] for i in g] for g in occ if p['removal'] not in g or st['removal'] != 'ON']
         tcc = p['tcc_node']
         away = sum(st['c'][i] for g in gs if tcc not in g or st['tcc'] != 'ON' for i in g)
+        reuse = float(self.sc['reuse']['ppm'])
+        residue = [self.ids[i] for g in gs if tcc not in g or st['tcc'] != 'ON' for i in g if ring_air.ppm(st, p, i) > reuse]
         crossed = self.co2_limit_crossed_at is not None              # where anybody was, before or during the watch
         if st['source']['state'] == 'LEAKING':
             result = 'NOT_CONTAINED'
@@ -365,10 +367,12 @@ class Run:
             result = 'CO2_LIMIT'
         elif unbounded:
             result = 'TEMPORARY'
+        elif residue:
+            result = 'STABLE_RESIDUE'               # CO2 held, but NH3 above the reuse criterion where nothing removes it
         else:
             result = 'STABLE'
         return dict(result=result, co2_limit_crossed_at_h=None if self.co2_limit_crossed_at is None else self.co2_limit_crossed_at/H,
-                    co2_unremoved_groups=unbounded, nh3_airborne_g=sum(st['c'])*1000.0, nh3_away_from_tcc_g=away*1000.0,
+                    co2_unremoved_groups=unbounded, nh3_residue=residue, nh3_airborne_g=sum(st['c'])*1000.0, nh3_away_from_tcc_g=away*1000.0,
                     source=st['source']['state'], t_h=self.t/H,
                     max_occupied_co2_pct=100.0*max(self.x(q['node']) for q in self.people))
 

@@ -173,7 +173,9 @@ class SharedAirTests(unittest.TestCase):
         self.assertEqual(self.deb('separate')['watch']['verdict']['result'], 'CO2_LIMIT')
         self.assertEqual(self.deb('vent_off')['watch']['verdict']['result'], 'CO2_LIMIT')
         self.assertEqual(self.deb('no_containment')['watch']['verdict']['result'], 'NOT_CONTAINED')
-        self.assertEqual(self.deb('isolate')['watch']['verdict']['result'], 'STABLE')
+        self.assertEqual(self.deb('isolate')['watch']['verdict']['result'], 'STABLE_RESIDUE')
+        self.assertEqual(self.deb('tcc_off')['watch']['verdict']['result'], 'STABLE_RESIDUE')
+        self.assertEqual(self.deb('purge')['watch']['verdict']['result'], 'STABLE')
 
     def test_trades_come_from_the_model(self):
         iso, pur, sep = self.deb('isolate'), self.deb('purge'), self.deb('separate')
