@@ -334,12 +334,13 @@ def _dirs(n):
     return out
 
 
-def push(s, cs, I, sp, v, d, hw, dt_gyro=40, tmax=None):
-    """Boris push of one particle (species sp at speed v, direction d) from the burn point until it hits an obstacle, leaves aft past
-    the exit by its exit margin, or leaves radially. Returns the outcome, final velocity and energy error."""
+def push(s, cs, I, sp, v, d, hw, dt_gyro=40, tmax=None, origin=(0.0, 0.0, 0.0)):
+    """Boris push of one particle (species sp at speed v, direction d) from the burn point (plus an origin offset) until it hits an
+    obstacle, leaves aft past the exit by its exit margin, or leaves radially. Returns the outcome, final velocity, energy error and the
+    axial extremes of the path (xmin: how far aft it went before its outcome; a forward hit after xmin < burn is a returned particle)."""
     st = ve.stations(s); c = config(s)
     m = sp['mass_amu']*AMU; q = sp['charge']*E_CHARGE
-    x = [st['burn'], 0.0, 0.0]; u = [v*d[0], v*d[1], v*d[2]]
+    x = [st['burn']+origin[0], origin[1], origin[2]]; u = [v*d[0], v*d[1], v*d[2]]; xmin = x[0]
     Bref = max(abs(field(cs, I, st['burn'], 0.0)[1]), 0.05)
     dt = min(2*math.pi*m/(q*Bref)/dt_gyro, 0.02/v)
     tmax = tmax or 6*abs(st['exit']-st['burn']-c['exit_margin_m'])/v+4*c['radial_limit_m']/v
@@ -351,15 +352,15 @@ def push(s, cs, I, sp, v, d, hw, dt_gyro=40, tmax=None):
         up = [u[0]+(u[1]*tv[2]-u[2]*tv[1]), u[1]+(u[2]*tv[0]-u[0]*tv[2]), u[2]+(u[0]*tv[1]-u[1]*tv[0])]
         u = [u[0]+(up[1]*sv[2]-up[2]*sv[1]), u[1]+(up[2]*sv[0]-up[0]*sv[2]), u[2]+(up[0]*sv[1]-up[1]*sv[0])]
         step = dt if b == 0 else min(dt, 2*math.pi*m/(q*b)/dt_gyro)
-        x = [x[k]+u[k]*step for k in range(3)]; t += step
+        x = [x[k]+u[k]*step for k in range(3)]; t += step; xmin = min(xmin, x[0])
         rho = math.hypot(x[1], x[2]); n = obstacle(hw, x[0], rho)
         if n:
-            return dict(outcome='HIT', obstacle=n, u=u, x=x, err=abs(math.sqrt(sum(a*a for a in u))/v0-1))
+            return dict(outcome='HIT', obstacle=n, u=u, x=x, xmin=xmin, err=abs(math.sqrt(sum(a*a for a in u))/v0-1))
         if x[0] < st['exit']-c['exit_margin_m']:
-            return dict(outcome='AFT', u=u, x=x, err=abs(math.sqrt(sum(a*a for a in u))/v0-1))
+            return dict(outcome='AFT', u=u, x=x, xmin=xmin, err=abs(math.sqrt(sum(a*a for a in u))/v0-1))
         if rho > c['radial_limit_m'] or x[0] > st['front']:
-            return dict(outcome='OUT', u=u, x=x, err=abs(math.sqrt(sum(a*a for a in u))/v0-1))
-    return dict(outcome='TRAPPED', u=u, x=x, err=abs(math.sqrt(sum(a*a for a in u))/v0-1))
+            return dict(outcome='OUT', u=u, x=x, xmin=xmin, err=abs(math.sqrt(sum(a*a for a in u))/v0-1))
+    return dict(outcome='TRAPPED', u=u, x=x, xmin=xmin, err=abs(math.sqrt(sum(a*a for a in u))/v0-1))
 
 
 def particles(s, cs, I, n=None, species=None):

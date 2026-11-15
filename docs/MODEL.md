@@ -2211,6 +2211,29 @@ Three assets, one source each (`src/wayfarer/vertex_engine.py`, `vertex_cluster.
     --evidence`; the tests fail when its input hash is stale). Explore Ship's Engine drawer shows each coil's current, force, conductor field
     and case utilisation for M0-NOMINAL and M2, and an optional field-line overlay (`#fl=M2`), fetched only when switched on and drawn as one
     line object: computed vacuum field lines, not light and not plasma.
+- **Coupled plasma (Engine 1.4, `vertex_plasma.py`, `[vertex_engine.plasma]`).** The bounded D-21 study of how the pulse and the coils
+  act on each other, for M0-NOMINAL and M2. Verdict **Outcome D** (`PROPULSION_FEASIBILITY_BLOCKED`, `THRUST_UNPROVEN`, `DETACHMENT_OPEN`):
+  no architecture is shown to work, and the 1.2 geometry and NOMINAL currents stay the engine.
+  - *1.3 audit:* the M2 shield share of 18.5 % is the adiabatic mirror loss cone, the same for every species (14.7 MeV p, 3.6 MeV α,
+    debris), timestep, origin and speed, count- and energy-weighted alike; NOMINAL puts 68 % of test particles on the shield (cusp).
+  - *Model:* a sharp-boundary diamagnetic cavity (Lagrangian thin-shell markers; sheet currents solved against flux-conserving coils;
+    sphere benchmark 0.2 %; energy ledger 1.1 % for M2, 0.3 % for NOMINAL; Newton-3 between sheet and coils 6 %). Fast products are
+    collective (interaction radius 2–4 m, inside the hardware), so a hybrid-PIC run is the next tool: about 11 core-hours in 2D, about
+    12,500 core-hours and 1 TB in 3D (cost only, not run).
+  - *Results:* on first pass M2 puts 1–2 % of the pulse mass on the shield and none on other hardware; NOMINAL hits the C2 cryostat at
+    0.23 µs and 15–25 % reaches hardware. About 89 % stagnates inside; where it goes next is a closure, not a result: 1 %, 9 % or 28 % on
+    the shield (aft, isotropic, channelled). The coils take the pulse: C2 current +37 %, peak coil force 167 MN against 106 MN static,
+    conductor 11.0 T against 9.2 T. Impulse 92–126 N s per pulse against 127 assumed.
+  - *Heat:* hardware covers 87 % of the burn's sky, so X-rays alone put about 1.6 TW per engine into it (1.8 GW/m² on the shield face, about
+    100× a tungsten divertor); the charged share adds 0.7–21 GW/m². The shield needs about 0.02 % or less of the charged energy to survive,
+    far below what any closure gives. Eddy heat in the 20 K cryostat walls 0.1–5 GW per engine. Regenerative cooling (T-REG) does not
+    replace radiators: a lithium loop needs about 160× the ship's radiator area, hydrogen expelled as propellant millions of times the
+    engine flow.
+  - *Alternatives:* A1 non-axisymmetric fields cannot remove the cavity's leak points (hairy-ball), only move them, and the free sky is
+    only at 134–139° and 143–180°; A2 moving the burn 2 m aft lowers the shield share to 0.2–28 %, a quarter pulse does not help; A3 liner
+    and FRC families give exhausts of 30–200 km/s, far below the mission; A4, a renewable lithium-film first wall (VTX-S6, NON_CANON), only moves the heat to radiators the ship
+    lacks. engineering/vertex/
+    section 7 reads `references/evidence/vertex_plasma.json` (written by `python3 src/wayfarer/vertex_plasma.py --evidence`).
 
 ## Limits
 

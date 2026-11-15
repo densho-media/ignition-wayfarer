@@ -91,3 +91,7 @@ table.meta th { width: 170px; }
 .figure-svg.field .coil { fill: var(--warn); }
 .figure-svg.field .shield { fill: var(--muted); }
 .figure-svg.field .burn { fill: var(--bad); }
+.figure-svg.cavity .sheet { fill: none; stroke: var(--ink); stroke-width: 1; opacity: 0.6; }
+.figure-svg.cavity .c-st { fill: var(--info); }
+.figure-svg.cavity .c-af { fill: var(--good); }
+.figure-svg.cavity .c-hw { fill: var(--bad); }

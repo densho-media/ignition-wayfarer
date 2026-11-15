@@ -640,8 +640,10 @@ candidates of all nine classes are separate accessory assets (docs/ACCESSORIES.m
   Compact Vertex Engines (docs/MODEL.md "Vertex propulsion cluster"); the Fiji canon is unchanged. Engine 1.2 sized the members for
   the NOMINAL coil forces (Structure in MODEL.md). Engine 1.3 (Magnetic design in MODEL.md) found no current set or coil geometry that
   closes the field's functions (Outcome B). Open: the forward loss cone onto the shield (WL-002, BT-003); the reversed closure-coil loads of a
-  mirror field (struts and reaction ring 3–4× their 1.2 sizes); detachment (DETACHMENT_OPEN, a coupled plasma model, D-21 not
-  authorised); cryostat-wall heating from the pulse-rate field swing; REBCO critical current at the conductor field (OD-024); the
+  mirror field (struts and reaction ring 3–4× their 1.2 sizes); detachment (DETACHMENT_OPEN). Engine 1.4 (Coupled plasma in MODEL.md) ran the bounded D-21 study: Outcome D, no
+  architecture shown to work. Next, each needing the owner's go: a 2D hybrid-PIC run (about 11 core-hours) and a 3D one (about 12,500
+  core-hours, 1 TB); the X-ray load on hardware covering 87 % of the burn's sky (about 1.6 TW per engine); A1 pole steering and A2 aft or
+  anisotropic sourcing in that model; the 0.1–5 GW eddy heat in the 20 K cryostat walls; REBCO critical current at the conductor field (OD-024); the
   CONSERVATIVE and EXTREME coil currents, which no member of this envelope survives; the cold-mass supports behind the loop seats and their
   heat leak; the lithium circuit at 1,800 K (no rated alloy) and its capacity; the bore shutter (tungsten chopper strength OPEN); pulse
   fatigue at 5.7 kHz; the collar's local design; the +1.3 kt engine and frame mass against the ship's mass budget (owner); 1.7 %

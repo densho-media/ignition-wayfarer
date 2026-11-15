@@ -687,7 +687,8 @@ def vertex_page(spec, out_dir, revision, built):
 <p class="note">{esc(spec["propulsion_representation"]["authority"])}</p></section>
 {anatomy}
 {structure_section(spec, vs)}
-{magnet_section(spec)}"""
+{magnet_section(spec)}
+{plasma_section(spec)}"""
     (out_dir / 'index.html').write_text(page('Vertex propulsion lineage · Wayfarer engineering',
                                              'How the Vertex research demonstrator became the Compact Vertex Engine and the four-engine Propulsion Cluster.',
                                              body, 2, revision, built))
@@ -912,6 +913,173 @@ def magnet_section(spec):
 <div class="scroll" tabindex="0"><table><thead><tr><th>Mode</th><th>Capture margin</th><th>Peak force MN</th><th>Largest force change MN</th></tr></thead><tbody>{deg}</tbody></table></div>
 <p class="meta">Evidence file <code>references/evidence/vertex_magnet.json</code> (input hash <code>{esc(R["input_hash"])}</code>), written by
   <code>python3 src/wayfarer/vertex_magnet.py --evidence</code>; the stored candidates are re-optimised by <code>--optimise</code>.</p>
+</section>"""
+
+
+def cavity_svg(M, P, cid, title):
+    """Inline figure: the coupled cavity at the end of its first pass (engine (x, r) half-plane, mirrored, aft to the left): the sheet
+    through the surface markers, each marker coloured by its outcome, with the coil cryostats, shield and burn point. From the evidence."""
+    cv = P['coupled'].get(cid); row = next((r for r in M['candidates'] if r['id'] == cid), None)
+    if not cv or not cv.get('markers') or not row:
+        return ''
+    x0, x1, h = -46.0, -9.0, 15.0; W, H = 560, 2*h*560/(x1-x0)
+    X = lambda x: (x-x0)/(x1-x0)*W; Y = lambda r: H/2-r*(H/2)/h
+    mk = cv['markers']; cls = {'STOPPED': 'c-st', 'AFT': 'c-af', 'OUT': 'c-af'}
+    line = lambda sg: 'M' + ' L'.join(f'{X(min(max(q["x"], x0), x1)):.1f},{Y(sg*min(q["rho"], h)):.1f}' for q in mk)
+    dots = ''.join(f'<circle class="{cls.get(q["outcome"], "c-hw")}" cx="{X(min(max(q["x"], x0), x1)):.1f}" cy="{Y(sg*min(q["rho"], h)):.1f}" r="2.6"/>'
+                   for q in mk for sg in (1, -1))
+    coils = ''.join(f'<circle class="coil" cx="{X(c["x"]):.1f}" cy="{Y(sg*c["r"]):.1f}" r="{c["cryostat"]*(W/(x1-x0)):.1f}"/>'
+                    for c in row['coils'] for sg in (1, -1))
+    st = M['stations']
+    shield = (f'<polygon class="shield" points="{X(st["shield_fwd"]):.1f},{Y(4.4):.1f} {X(st["shield_aft"]):.1f},{Y(5.4):.1f} '
+              f'{X(st["shield_aft"]):.1f},{Y(-5.4):.1f} {X(st["shield_fwd"]):.1f},{Y(-4.4):.1f}"/>')
+    burn = f'<circle class="burn" cx="{X(st["burn"] + cv["burn_shift_m"]):.1f}" cy="{Y(0):.1f}" r="4"/>'
+    return (f'<figure><svg class="figure-svg field cavity" viewBox="0 0 {W} {H:.0f}" role="img" aria-label="{esc(title)}">'
+            f'<rect class="bg" width="{W}" height="{H:.0f}"/><line class="axis" x1="0" y1="{Y(0):.1f}" x2="{W}" y2="{Y(0):.1f}"/>'
+            f'<path class="sheet" d="{line(1)} {line(-1)}"/>{shield}{coils}{burn}{dots}'
+            f'<text class="ax" x="6" y="14">aft (exit)</text><text class="ax" x="{W-70}" y="14">shield</text></svg>'
+            f'<figcaption>{esc(title)}. The cavity sheet at the end of its first pass: blue markers stagnated in the field, green left aft, '
+            f'red reached hardware. Coil cryostats (circles), shield (grey), burn point (dot). A model diagram, not light or plasma.</figcaption></figure>')
+
+
+def plasma_section(spec):
+    """Section 7 of engineering/vertex/: Engine 1.4 coupled plasma and the architecture decision, read from
+    references/evidence/vertex_plasma.json (written by `python3 src/wayfarer/vertex_plasma.py --evidence`; tests/test_vertex_plasma.py
+    fails when it is stale against the inputs)."""
+    import json
+    p = ROOT / 'references/evidence/vertex_plasma.json'; pm = ROOT / 'references/evidence/vertex_magnet.json'
+    if not p.exists() or not pm.exists():
+        return ''
+    P = json.loads(p.read_text()); M = json.loads(pm.read_text()); pc = spec['vertex_engine']['plasma']
+    f = lambda v, d=2: '—' if v is None else f'{v:,.{d}f}'
+    pct = lambda v, d=1: '—' if v is None else f'{100*v:,.{d}f} %'
+    ids = list(P['coupled'])
+    base = ''.join(f'<tr><td><code>{esc(k)}</code></td><td class="num">{f(b["capture_margin"])}</td><td class="num">{pct(b["shield_particles"])}</td>'
+                   f'<td class="num">{b["peak_force_N"]/1e6:,.0f}</td><td class="num">{b["stored_energy_J"]/1e9:.1f}</td><td class="num">{f(b["axial_fraction"])}</td>'
+                   f'<td class="num">{f(b["divergence_p90_deg"], 0)}°</td></tr>' for k, b in P['baseline_1_3'].items())
+    aud = ''
+    for k in ids:
+        a = P['audit']['candidates'][k]; w = a['weights']; mid = str(pc['fast_product_share'][1])
+        conv = ', '.join(f'{x["n"]}: {pct(x["shield"])}' for x in a['convergence']['D_debris'])
+        aud += (f'<tr><td><code>{esc(k)}</code></td><td>{esc(conv)}</td><td class="num">{pct(a["count_weighted"])} ± {pct(a["uncertainty"])}</td>'
+                f'<td class="num">{pct(w[mid]["energy"])}</td><td class="num">{pct(w[mid]["momentum"])}</td><td class="num">{pct(a["mirror"]["forward_loss"])}</td>'
+                f'<td class="num">{f(a["mirror"]["mirror_ratio"])}</td><td class="num">{pct(a["best"]["D_debris"]["shield_returned"], 0)}</td></tr>')
+    reg = P['regime']['M2']
+    models = ''.join(f'<tr><td><code>{esc(m["id"])}</code></td><td>{"fits" if m["fits"] else "does not fit"}{" · selected" if m["id"] == reg["selected"] else ""}</td>'
+                     f'<td>{esc(m["why"])}</td></tr>' for m in reg['models'])
+    hc = P['hybrid_cost']
+    coup = ''
+    for k in ids:
+        cv = P['coupled'][k]; fp = cv['first_pass']
+        hard = sum(v for q, v in fp.items() if q not in ('AFT', 'OUT', 'STOPPED'))
+        for q, l in cv['ledger'].items():
+            coup += (f'<tr><td><code>{esc(k)}</code></td><td>{esc(q)}</td><td class="num">{pct(l["shield"])}</td><td class="num">{pct(l["hardware"])}</td>'
+                     f'<td class="num">{pct(l["aft"])}</td><td class="num">{l["impulse_Ns"]:,.0f}</td></tr>')
+    led = ''.join(f'<tr><td><code>{esc(k)}</code></td><td class="num">{pct(sum(v for q, v in P["coupled"][k]["first_pass"].items() if q not in ("AFT", "OUT", "STOPPED")))}</td>'
+                  f'<td class="num">{pct(P["coupled"][k]["first_pass"].get("STOPPED", 0))}</td><td class="num">{P["coupled"][k]["energy_error"]:+.2%}</td>'
+                  f'<td class="num">{P["coupled"][k]["momentum_error"]:.1%}</td><td class="num">{max(P["coupled"][k]["dI_rel"], key=abs):+.0%}</td>'
+                  f'<td class="num">{max(P["coupled"][k]["F_peak_N"])/1e6:,.0f}</td><td class="num">{P["coupled"][k]["conductor_peak_T"]:.1f}</td>'
+                  f'<td>{esc(P["coupled"][k]["coil_contact"]["coil"]) + " cryostat touched" if P["coupled"][k]["coil_contact"] else "none"}</td></tr>' for k in ids)
+    cvr = ''.join(f'<tr><td><code>{esc(k)}</code></td>' + ''.join(f'<td class="num">{x["n"]}/{x["ds_m"]:.2f}: {pct(x["shield_first"])} ({pct(x["hardware_first"])})</td>' for x in P['convergence'][k]['rows'])
+                  + '</tr>' for k in ids)
+    d2 = P['detachment']['M2']
+    ext = ''.join(f'<tr><td class="num">{x["downstream_m"]:.0f}</td><td class="num">{pct(x["aft_first_pass"])}</td><td class="num">{pct(x["stopped"])}</td></tr>' for x in d2['domain_extension'])
+    plume = ''.join(f'<tr><td class="num">{x["downstream_m"]:.0f}</td><td class="num">{x["B_axis_T"]:.3f}</td><td class="num">{x["field_energy_J"]/1e9:.2f}</td>'
+                    f'<td class="num">{f(x["interaction"]["isotropic"])} – {f(x["interaction"]["aft"])}</td></tr>' for x in d2['plume'])
+    th = P['thermal']['M2']; e = th['eddy']; tr = P['treg']; alt = P['alternatives']
+    dep = ''.join(f'<tr><td>{esc(q)}</td><td class="num">{pct(th["ledger"][q]["shield"])}</td><td class="num">{th["shield_heat_flux_W_m2"][q]/1e6:,.0f}</td></tr>' for q in th['ledger'])
+    gates = ''.join(f'<tr><td><code>{esc(g["id"])}</code></td><td>{esc(g["name"])}</td><td>{tag(g["status"])}</td><td>{esc(g["value"])}</td><td class="meta">{esc(g["note"])}</td></tr>'
+                    for g in P['gates'])
+    a3 = ''.join(f'<tr><td>{esc(r["name"])}</td><td class="num">{r["exhaust_m_s"]/1e3:,.0f}</td><td>{esc(r["maturity"])}</td><td>{esc(r["nozzle"])}</td><td>{esc(r["mission"])}</td></tr>'
+                 for r in alt['A3']['rows'])
+    a2 = ''.join(f'<tr><td>{esc(k)}</td><td class="num">{v["burn_shift_m"]:+.0f}</td><td class="num">{v["energy_J"]/1e9:.2f}</td>'
+                 f'<td class="num">{pct(min(v["shield"].values()))} – {pct(max(v["shield"].values()))}</td></tr>' for k, v in alt['A2']['runs'].items())
+    plate = ''.join(f'<tr><td class="num">{x["mass_ratio"]:.0f}×</td><td class="num">{x["exhaust_m_s"]/1e3:,.0f}</td><td class="num">{x["mass_ratio_mission"]:,.1f}</td></tr>'
+                    for x in alt['A2']['plate'])
+    figs = cavity_svg(M, P, 'M0-NOMINAL', 'M0: the 1.2 cusp') + cavity_svg(M, P, 'M2', 'M2: the 1.3 mirror')
+    m2 = P['coupled']['M2']; lim = spec['vertex_engine']['magnet']['particle_hit_limit']
+    lo = min(x['shield'] for x in m2['ledger'].values()); hi = max(x['shield'] for x in m2['ledger'].values())
+    return f"""<section id="plasma"><h2>7 · Plasma coupling and propulsion feasibility (Engine {esc(P["version"])})</h2>
+<p class="lead">Does the plasma's own response rescue the magnetic nozzle, and if not, what is the smallest defensible change? Outcome
+  {tag(P["decision"]["outcome"])}: no feasible architecture demonstrated. Verdict {tag(P["decision"]["verdict"])}, {tag(P["decision"]["thrust"])},
+  {tag(P["decision"]["detachment"])}. Active configuration <code>{esc(P["decision"]["selected"])}</code>, unchanged. See also
+  <a href="#anatomy">Anatomy</a>, <a href="#structure">Structure</a>, <a href="#magnet">Magnetic design</a>, <a href="../weakest-links/">Weakest Links</a>
+  and <a href="../breakthrough-lab/">Breakthrough Lab</a>.</p>
+<h3>Why the 1.3 designs failed, and what the particle model really measured</h3>
+<div class="scroll" tabindex="0"><table><thead><tr><th>1.3 reference</th><th>Capture margin</th><th>Particles to shield</th><th>Peak force MN</th><th>Stored GJ</th>
+<th>Axial share</th><th>Divergence p90</th></tr></thead><tbody>{base}</tbody></table></div>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Audit</th><th>Shield share by directions (deuterons)</th><th>Count-weighted ± uncertainty</th>
+<th>Energy-weighted</th><th>Momentum-weighted</th><th>Mirror loss cone</th><th>Mirror ratio</th><th>Shield hits that first went aft</th></tr></thead><tbody>{aud}</tbody></table></div>
+<p>The 1.3 number is converged and robust to timestep, target position and speed, and it is the same for all four species because it is the
+  adiabatic mirror loss cone: an isotropic source between {f(P["audit"]["candidates"]["M2"]["mirror"]["mirror_ratio"])}× mirrors loses
+  {pct(P["audit"]["candidates"]["M2"]["mirror"]["forward_loss"])} forward whatever its rigidity. Weighting by energy or momentum does not change it.
+  It describes a plasma too thin to push the field. The real pulse is not that.</p>
+<h3>Which plasma model applies</h3>
+<p>At the burn point the pulse has β ≈ {reg["beta_burn"]:,.0f}: it pushes the field out of its way. It is collisionless (mean free path
+  {reg["mfp_m"]:.1e} m), its ion skin depth is {reg["ion_skin_m"]:.2f} m and its debris Larmor radius {reg["larmor_m"]["D_debris"]:.2f} m against a cavity of about
+  {reg["radius_m"]:.1f} m. Electrons are strongly magnetised (r<sub>Le</sub> {reg["electron_larmor_m"]*1e3:.2f} mm).</p>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Model</th><th>Fit</th><th>Why</th></tr></thead><tbody>{models}</tbody></table></div>
+<p class="meta">A hybrid-PIC run that resolves the skin depth would need about {hc["2D"]["core_hours"]:,.0f} core-hours in 2D and
+  {hc["3D"]["core_hours"]:,.0f} core-hours ({hc["3D"]["memory_GB"]:,.0f} GB) in 3D ({esc(hc["assumptions"])}). Not executed: it needs separate approval.</p>
+<h3>The coupled cavity (D21-B)</h3>
+<p>{tag("COUPLED_CAVITY_MODEL")} The pulse as a perfectly diamagnetic sharp boundary: no field inside, the sheet current and all six
+  flux-conserving coils solved together every step, Lagrangian surface markers pushed by the magnetic pressure. Validated on a diamagnetic sphere in a
+  uniform field (surface field within {pct(P["validation"]["sphere"]["max_error"], 2)} of 1.5 B<sub>0</sub> sin θ). Each candidate's energy closes
+  to within 2 %, and Newton's third law between the sheet and the coils holds to within the error shown.</p>
+<div class="grid2">{figs}</div>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Candidate</th><th>Hardware, first pass</th><th>Stagnated</th><th>Energy error</th><th>Momentum error</th>
+<th>Largest coil current change</th><th>Peak coil force MN</th><th>Conductor T</th><th>Contact</th></tr></thead><tbody>{led}</tbody></table></div>
+<p>Most of the pulse stagnates in the compressed field. Where it goes next is outside a sharp-boundary model, so three closures bracket it:
+  <b>aft</b> (the nozzle sends all of it aft), <b>isotropic</b> (it re-expands like the first pass) and <b>channelled</b> (it streams along the
+  surface the way it was moving at stagnation).</p>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Candidate</th><th>Closure</th><th>Shield (energy)</th><th>All hardware</th><th>Aft</th><th>Impulse N s / pulse</th></tr></thead>
+<tbody>{coup}</tbody></table></div>
+<p class="meta">Convergence of the first-pass shield share, all hardware in brackets (markers / step m). Each marker carries a fixed
+  solid angle, so a share moves in steps of one marker; M2 holds within {pct(P["convergence"]["M2"]["spread"])}, M0's shield share does not converge
+  (its hardware share changes {pct(P["convergence"]["M0-NOMINAL"]["finest_change"])} between the two finest counts).</p>
+<div class="scroll" tabindex="0"><table><tbody>{cvr}</tbody></table></div>
+<p><b>Result.</b> Coupling does not rescue M0: its cusp puts plasma on the shield and on the C1/C2 cryostats. For M2 it removes most of the
+  test-particle loss cone on the first pass, but the stagnated plasma decides the outcome: the shield's energy share is {pct(lo)}–{pct(hi)}
+  across closures, against a {pct(lim, 0)} screening limit. The forward pole of the cavity is topological, so the leak can be moved but not closed (A1).</p>
+<h3>Detachment and thrust</h3>
+<p>{esc(d2["reading"])}</p>
+<div class="grid2"><div class="panel"><table><thead><tr><th>Escape plane m past exit</th><th>Aft, first pass</th><th>Stagnated</th></tr></thead><tbody>{ext}</tbody></table></div>
+<div class="panel"><table><thead><tr><th>m past exit</th><th>B on axis T</th><th>Field energy aft GJ</th><th>Plume / field energy</th></tr></thead><tbody>{plume}</tbody></table></div></div>
+<p>Impulse per pulse follows from momentum conservation: the ship gains what leaves aft. For M2 that is
+  {min(x["impulse_Ns"] for x in m2["ledger"].values()):,.0f}–{max(x["impulse_Ns"] for x in m2["ledger"].values()):,.0f} N s against the
+  {m2["mass_kg"]*m2["speed_m_s"]:,.0f} N s the C-10 thrust assumes, before any divergence loss. {tag("THRUST_UNPROVEN")}</p>
+<h3>Where the rest of the energy goes</h3>
+<div class="grid2"><div class="panel"><table><thead><tr><th>M2 closure</th><th>Shield share</th><th>Shield face MW/m²</th></tr></thead><tbody>{dep}</tbody></table>
+<p class="meta">Tungsten plasma-facing class: {pc["pfc_heat_flux_W_m2"][0]/1e6:.0f}–{pc["pfc_heat_flux_W_m2"][1]/1e6:.0f} MW/m² (ITER divertor targets). Even the
+  optimistic closure is far above it: a 5 % particle limit says nothing about survival.</p></div>
+<div class="panel"><ul class="plain">
+ <li>X-rays and neutrons are not deflected by any field. The hardware covers {pct(th["hardware_sky"])} of the sky from the burn point, so it absorbs about
+  {th["xray_absorbed_W"]/1e9:,.0f} GW of X-rays per engine; on the shield face that is {th["xray_shield_flux_W_m2"]/1e6:,.0f} MW/m². The ship's 1800 K radiators reject
+  about {th["ship_radiator_W"]/1e9:.0f} GW in total.</li>
+ <li>The cryostat walls screen the pulse: their diffusion time ({e["wall_diffusion_s"]*1e3:.1f} ms) is longer than the pulse period, so the windings see a
+  steady field and the walls take {e["power_W"][0]/1e9:,.1f}–{e["power_W"][1]/1e9:,.0f} GW of eddy heat at 20 K per engine
+  ({e["refrigeration_W"][0]/1e12:,.1f}–{e["refrigeration_W"][1]/1e12:,.0f} TW of refrigeration input).</li></ul></div></div>
+<h3>Regenerative cooling (T-REG)</h3>
+<ul class="plain">
+ <li><b>T0</b> radiators: the absorbed {tr["absorbed_W"]/1e9:,.0f} GW per engine needs {tr["T0"]["radiator_m2"]/1e6:,.2f} km² at 1800 K,
+  {tr["T0"]["ratio"]:,.0f}× the ship's radiator area.</li>
+ <li><b>T1</b> hydrogen heated by the lithium loop and expelled: {tr["T1"]["hydrogen_kg_s"]:,.0f} kg/s at {tr["T1"]["exhaust_m_s"]/1e3:.1f} km/s, against the engine's
+  {tr["T1"]["engine_propellant_kg_s"]*1e3:.0f} g/s at {P["coupled"]["M2"]["speed_m_s"]/1e3:,.0f} km/s. {esc(tr["T1"]["verdict"])}</li>
+ <li><b>T2</b> Brayton conversion: {tr["T2"]["electric_W"]/1e9:,.0f} GW electric, but {tr["T2"]["radiator_m2"]/1e6:,.1f} km² of radiator at {tr["T2"]["cold_side_K"]:.0f} K. {esc(tr["T2"]["verdict"])}</li>
+ <li>Verdict {tag(tr["verdict"])}. Unchanged: {esc(", ".join(tr["blocked_unchanged"]))}.</li></ul>
+<h3>Alternative architectures</h3>
+<div class="grid2"><div class="panel"><h4>A1 · {esc(alt["A1"]["name"])} {tag(alt["A1"]["status"])}</h4><p>{esc(alt["A1"]["topology"])}</p>
+ <p>{esc(alt["A1"]["result"])}. {esc(alt["A1"]["cost"])}</p></div>
+<div class="panel"><h4>A2 · {esc(alt["A2"]["name"])}</h4><table><thead><tr><th>Run</th><th>Burn shift m</th><th>Pulse GJ</th><th>Shield share</th></tr></thead><tbody>{a2}</tbody></table>
+ <table><thead><tr><th>Inert loading</th><th>Exhaust km/s</th><th>Mission mass ratio</th></tr></thead><tbody>{plate}</tbody></table><p class="meta">{esc(alt["A2"]["reading"])}</p></div></div>
+<div class="scroll" tabindex="0"><table><thead><tr><th>A3 family</th><th>Exhaust km/s</th><th>Maturity</th><th>Nozzle interface</th><th>Mission</th></tr></thead><tbody>{a3}</tbody></table></div>
+<p class="meta">{esc(alt["A3"]["reading"])}</p>
+<p><b>A4</b> {tag(alt["A4"]["status"])} {esc(alt["A4"]["proposal"])}</p>
+<h3>Gates and decision</h3>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Gate</th><th></th><th>Status</th><th>Result</th><th>Limit</th></tr></thead><tbody>{gates}</tbody></table></div>
+<p><b>Direction:</b> {esc(P["decision"]["direction"])}</p>
+<p class="meta">Evidence file <code>references/evidence/vertex_plasma.json</code> (input hash <code>{esc(P["input_hash"])}</code>), written by
+  <code>python3 src/wayfarer/vertex_plasma.py --evidence</code>.</p>
 </section>"""
 
 
