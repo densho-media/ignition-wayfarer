@@ -1,0 +1,2814 @@
+{
+ "check": "Vertex Engine 1.2 structural validation (vertex_structure.report)",
+ "generated_by": "python3 src/wayfarer/vertex_structure.py",
+ "gate2_verdict": "BLOCKED",
+ "note": "First-order screens: linear elastic frame FE and closed forms. Not evidence that the fusion drive works; Gate 2 stays BLOCKED.",
+ "report": {
+  "version": "1.2.0",
+  "load_cases": [
+   {
+    "id": "LC-01",
+    "title": "Thrust",
+    "evidence": "SPECULATIVE",
+    "value_N": 725525.0,
+    "size": [
+     [
+      "thrust per engine",
+      0.725525,
+      "MN"
+     ]
+    ],
+    "path": "burn -> field -> loops -> cage -> collar -> trunnions -> cradle -> struts -> thrust ring",
+    "note": "C-10 thrust per engine; SPECULATIVE (research exhaust velocity carried over). It acts on the loops as part of their field load."
+   },
+   {
+    "id": "LC-02",
+    "title": "Coil forces (steady, coils energised)",
+    "evidence": "CALCULATED",
+    "value_N": 271466494.924455,
+    "size": [
+     [
+      "largest coil force NOMINAL",
+      271.466495,
+      "MN"
+     ],
+     [
+      "largest coil force CONSERVATIVE",
+      1081.218226,
+      "MN"
+     ],
+     [
+      "largest coil force EXTREME",
+      4156.932818,
+      "MN"
+     ]
+    ],
+    "path": "C1/C2 -> struts -> reaction ring -> tie rods -> collar; L1-L4 -> seats -> hoops -> longerons -> collar",
+    "note": "Exact loop-to-loop forces of the six coils (no third closure coil). Internal to one engine: they sum to zero, but every member between the coils carries them. They exceed the thrust by about 300 times."
+   },
+   {
+    "id": "LC-03",
+    "title": "Inter-engine field force (steady)",
+    "evidence": "CALCULATED",
+    "value_N": 13937278.279952,
+    "size": [
+     [
+      "pull on each engine NOMINAL",
+      13.937278,
+      "MN"
+     ],
+     [
+      "pull on each engine CONSERVATIVE",
+      55.510494,
+      "MN"
+     ]
+    ],
+    "path": "coils -> engine -> trunnions -> cradle -> spokes / chords -> hub",
+    "note": "Exact coil-set forces: each engine is pulled toward the axis (neighbours of opposite polarity attract side by side). The 1.1 cluster note called it repulsion and a pulse transient; it is attraction and steady while the coils are energised. Point-dipole pair estimate 15.8 MN adjacent. Net external force zero by symmetry; internal frame loads remain."
+   },
+   {
+    "id": "LC-04",
+    "title": "Pulse loads at 5.7 kHz",
+    "evidence": "SPECULATIVE",
+    "value_N": 127.35067,
+    "size": [
+     [
+      "impulse per pulse",
+      127.35067,
+      "N s"
+     ],
+     [
+      "pulse rate",
+      5697.064656,
+      "Hz"
+     ]
+    ],
+    "path": "field compression on the windings each pulse; mount transmits the ripple",
+    "note": "Each pulse delivers thrust/f of impulse. Cycle count per firing hour exceeds measured S-N data for every catalogue structural alloy; the pulse field change on the windings (EXTREME case) is a fatigue load with an OPEN pulse shape."
+   },
+   {
+    "id": "LC-05",
+    "title": "Thermal",
+    "evidence": "CALCULATED",
+    "value_N": null,
+    "size": [
+     [
+      "heat flux against research",
+      29.105553,
+      "x"
+     ]
+    ],
+    "path": "armour -> lithium headers -> manifold -> service panel -> cluster heat exchanger",
+    "note": "The design areal heat load is 29 times the research armour value (VTX-S3). Cold-mass contraction, hot headers and the LiH shield each need sliding or flexible joints."
+   },
+   {
+    "id": "LC-06",
+    "title": "Operations: single engine, coil loss, maintenance",
+    "evidence": "CALCULATED",
+    "value_N": 17412600.0,
+    "size": [
+     [
+      "one engine's thrust moment",
+      17.4126,
+      "MN m"
+     ]
+    ],
+    "path": "cluster frame; ship attitude control",
+    "note": "One engine firing gives a thrust moment about the ship axis; one engine's coils off unbalances the field forces on its neighbours."
+   }
+  ],
+  "sizing": {
+   "engine": {
+    "NOMINAL": {
+     "longeron": {
+      "rows": [
+       {
+        "N": 13772129.306219,
+        "M": 0.0,
+        "L": 4.553296,
+        "r": 0.31,
+        "stress": 182468466.67934,
+        "allowable": 586666666.666667,
+        "u_strength": 0.311026,
+        "u_buckling": 0.0,
+        "u": 0.311026,
+        "Pcr": 171911546.596958,
+        "governs": "strength",
+        "segment": "collar|L1"
+       },
+       {
+        "N": -25149442.704067,
+        "M": 0.0,
+        "L": 2.612968,
+        "r": 0.31,
+        "stress": 333207752.121424,
+        "allowable": 586666666.666667,
+        "u_strength": 0.567968,
+        "u_buckling": 0.144531,
+        "u": 0.567968,
+        "Pcr": 522021814.37422,
+        "governs": "strength",
+        "segment": "L1|L2"
+       },
+       {
+        "N": -24116014.521775,
+        "M": 0.0,
+        "L": 6.722976,
+        "r": 0.31,
+        "stress": 319515747.664221,
+        "allowable": 586666666.666667,
+        "u_strength": 0.544629,
+        "u_buckling": 0.917473,
+        "u": 0.917473,
+        "Pcr": 78855803.298821,
+        "governs": "buckling",
+        "segment": "L2|L3"
+       },
+       {
+        "N": -23683181.093243,
+        "M": 0.0,
+        "L": 5.878911,
+        "r": 0.31,
+        "stress": 313781089.625812,
+        "allowable": 586666666.666667,
+        "u_strength": 0.534854,
+        "u_buckling": 0.688967,
+        "u": 0.688967,
+        "Pcr": 103124743.64096,
+        "governs": "buckling",
+        "segment": "L3|L4"
+       }
+      ],
+      "u": 0.917473,
+      "radius": 0.31,
+      "count": 8
+     },
+     "seat": {
+      "rows": [
+       {
+        "N": 35577018.292708,
+        "M": 0.0,
+        "L": 2.096879,
+        "r": 0.28,
+        "stress": 577781461.403597,
+        "allowable": 586666666.666667,
+        "u_strength": 0.984855,
+        "u_buckling": 0.0,
+        "u": 0.984855,
+        "Pcr": 539505011.334968,
+        "governs": "strength",
+        "loop": "L1",
+        "axial_share_N": -33933311.865557,
+        "radial_N": 10688993.23765,
+        "inclined": true
+       },
+       {
+        "N": 1612200.924592,
+        "M": 0.0,
+        "L": 2.096879,
+        "r": 0.28,
+        "stress": 26182627.184292,
+        "allowable": 586666666.666667,
+        "u_strength": 0.044629,
+        "u_buckling": 0.0,
+        "u": 0.044629,
+        "Pcr": 539505011.334968,
+        "governs": "strength",
+        "loop": "L2",
+        "axial_share_N": -1537715.058468,
+        "radial_N": 484380.243418,
+        "inclined": true
+       },
+       {
+        "N": -365920.245728,
+        "M": 0.0,
+        "L": 1.181905,
+        "r": 0.28,
+        "stress": 5942654.682148,
+        "allowable": 586666666.666667,
+        "u_strength": 0.01013,
+        "u_buckling": 0.000646,
+        "u": 0.01013,
+        "Pcr": 1698152755.629405,
+        "governs": "strength",
+        "loop": "L3",
+        "axial_share_N": 309602.016189,
+        "radial_N": -195049.270199,
+        "inclined": true
+       },
+       {
+        "N": -24497084.946442,
+        "M": 0.0,
+        "L": 2.096879,
+        "r": 0.28,
+        "stress": 397840016.384529,
+        "allowable": 586666666.666667,
+        "u_strength": 0.678136,
+        "u_buckling": 0.13622,
+        "u": 0.678136,
+        "Pcr": 539505011.334968,
+        "governs": "strength",
+        "loop": "L4",
+        "axial_share_N": 23365286.445465,
+        "radial_N": -7360065.230322,
+        "inclined": true
+       }
+      ],
+      "u": 0.984855,
+      "radius": 0.28,
+      "count": 32
+     },
+     "hoop": {
+      "rows": [
+       {
+        "N": 13965842.696128,
+        "M": 5407728.867041,
+        "L": 6.008296,
+        "r": 0.35,
+        "stress": 512222949.379079,
+        "allowable": 586666666.666667,
+        "u_strength": 0.873107,
+        "u_buckling": 0.0,
+        "u": 0.873107,
+        "Pcr": 160427749.251008,
+        "governs": "strength",
+        "loop": "L1",
+        "R": 7.65,
+        "point_load_N": 10688993.23765
+       },
+       {
+        "N": 632873.286967,
+        "M": 284776.962498,
+        "L": 6.98219,
+        "r": 0.35,
+        "stress": 25907994.722079,
+        "allowable": 586666666.666667,
+        "u_strength": 0.044161,
+        "u_buckling": 0.0,
+        "u": 0.044161,
+        "Pcr": 118795185.191108,
+        "governs": "strength",
+        "loop": "L2",
+        "R": 8.89,
+        "point_load_N": 484380.243418
+       },
+       {
+        "N": 254844.152769,
+        "M": 131184.327699,
+        "L": 7.987499,
+        "r": 0.35,
+        "stress": 11553304.219226,
+        "allowable": 586666666.666667,
+        "u_strength": 0.019693,
+        "u_buckling": 0.0,
+        "u": 0.019693,
+        "Pcr": 90773787.167244,
+        "governs": "strength",
+        "loop": "L3",
+        "R": 10.17,
+        "point_load_N": 195049.270199
+       },
+       {
+        "N": 9616388.649012,
+        "M": 5417432.378337,
+        "L": 8.741482,
+        "r": 0.35,
+        "stress": 467674281.078965,
+        "allowable": 586666666.666667,
+        "u_strength": 0.797172,
+        "u_buckling": 0.0,
+        "u": 0.797172,
+        "Pcr": 75790021.832498,
+        "governs": "strength",
+        "loop": "L4",
+        "R": 11.13,
+        "point_load_N": 7360065.230322
+       }
+      ],
+      "u": 0.873107,
+      "radius": 0.35,
+      "count": 4
+     },
+     "strut": {
+      "rows": [
+       {
+        "N": -1194555.083173,
+        "M": 0.0,
+        "L": 2.494674,
+        "r": 0.19,
+        "stress": 42131711.087547,
+        "allowable": 586666666.666667,
+        "u_strength": 0.071815,
+        "u_buckling": 0.044344,
+        "u": 0.071815,
+        "Pcr": 80815866.629867,
+        "governs": "strength",
+        "coil": "C1",
+        "axial_share_N": 225055.785004
+       },
+       {
+        "N": -16202064.062843,
+        "M": 0.0,
+        "L": 2.581356,
+        "r": 0.19,
+        "stress": 571443453.49429,
+        "allowable": 586666666.666667,
+        "u_strength": 0.974051,
+        "u_buckling": 0.643966,
+        "u": 0.974051,
+        "Pcr": 75479404.565885,
+        "governs": "strength",
+        "coil": "C2",
+        "axial_share_N": 15503128.831491
+       }
+      ],
+      "u": 0.974051,
+      "radius": 0.19,
+      "count": 12
+     },
+     "ring": {
+      "rows": [
+       {
+        "N": 3951167.799319,
+        "M": 9607718.631772,
+        "L": 0.323919,
+        "r": 0.39,
+        "stress": 504441782.281808,
+        "allowable": 586666666.666667,
+        "u_strength": 0.859844,
+        "u_buckling": 0.0,
+        "u": 0.859844,
+        "Pcr": 85093373790.0219,
+        "governs": "strength"
+       }
+      ],
+      "u": 0.859844,
+      "radius": 0.39,
+      "count": 1,
+      "fe": {
+       "nodes": 128,
+       "elements": 128,
+       "dof": 720,
+       "grid_deg": 3.75,
+       "ring_peak_M": 9607718.631772,
+       "ring_peak_N": 3951167.799319,
+       "tie_N": -11255900.343866,
+       "tie_M": 7183280.939413,
+       "reaction_sum_N": [
+        -94369107.698971,
+        1e-06,
+        0.0
+       ],
+       "applied_sum_N": [
+        94369107.698966,
+        -0.0,
+        0.0
+       ]
+      }
+     },
+     "tie_rod": {
+      "rows": [
+       {
+        "N": -11255900.343866,
+        "M": 7183280.939413,
+        "L": 3.235519,
+        "r": 0.36,
+        "stress": 558653826.089327,
+        "allowable": 586666666.666667,
+        "u_strength": 0.952251,
+        "u_buckling": 0.054534,
+        "u": 0.952251,
+        "Pcr": 619201447.187043,
+        "governs": "strength",
+        "peak_stress_fe": 558653826.089327
+       }
+      ],
+      "u": 0.952251,
+      "radius": 0.36,
+      "count": 8,
+      "fe": {
+       "nodes": 128,
+       "elements": 128,
+       "dof": 720,
+       "grid_deg": 3.75,
+       "ring_peak_M": 9607718.631772,
+       "ring_peak_N": 3951167.799319,
+       "tie_N": -11255900.343866,
+       "tie_M": 7183280.939413,
+       "reaction_sum_N": [
+        -94369107.698971,
+        1e-06,
+        0.0
+       ],
+       "applied_sum_N": [
+        94369107.698966,
+        -0.0,
+        0.0
+       ]
+      }
+     },
+     "winding": {
+      "rows": [
+       {
+        "name": "C1",
+        "stress": -16826991.95027,
+        "allowable": 666666666.666667,
+        "u": -0.02524,
+        "hoop_N": -2072251.328285,
+        "current_At": -3190746.231585,
+        "Fz_N": 1350334.710023,
+        "a": 0.28
+       },
+       {
+        "name": "C2",
+        "stress": -239019119.168735,
+        "allowable": 666666666.666667,
+        "u": -0.358529,
+        "hoop_N": -33790531.89816,
+        "current_At": -5360453.669063,
+        "Fz_N": 93018772.988944,
+        "a": 0.3
+       },
+       {
+        "name": "L1",
+        "stress": 424398417.395096,
+        "allowable": 666666666.666667,
+        "u": 0.636598,
+        "hoop_N": 77063985.72639,
+        "current_At": 7470603.452227,
+        "Fz_N": -271466494.924455,
+        "a": 0.34
+       },
+       {
+        "name": "L2",
+        "stress": 293032470.945036,
+        "allowable": 666666666.666667,
+        "u": 0.439549,
+        "hoop_N": 59654145.037375,
+        "current_At": 8871341.59952,
+        "Fz_N": -12301720.467747,
+        "a": 0.36
+       },
+       {
+        "name": "L3",
+        "stress": 434925316.565806,
+        "allowable": 666666666.666667,
+        "u": 0.652388,
+        "hoop_N": 78975502.768358,
+        "current_At": 10388807.925753,
+        "Fz_N": 2476816.129515,
+        "a": 0.34
+       },
+       {
+        "name": "L4",
+        "stress": 577705893.361163,
+        "allowable": 666666666.666667,
+        "u": 0.866559,
+        "hoop_N": 81671246.573353,
+        "current_At": 11556089.715164,
+        "Fz_N": 186922291.56372,
+        "a": 0.3
+       }
+      ],
+      "count": 6,
+      "u": 0.866559
+     },
+     "collar": {
+      "closure_in_N": 94369107.698966,
+      "cage_out_N": -94369107.698967,
+      "net_N": -0.0,
+      "count": 1
+     }
+    },
+    "CONSERVATIVE": {
+     "longeron": {
+      "rows": [
+       {
+        "N": 54852725.819954,
+        "M": 0.0,
+        "L": 4.553296,
+        "r": 0.31,
+        "stress": 726749840.275551,
+        "allowable": 586666666.666667,
+        "u_strength": 1.238778,
+        "u_buckling": 0.0,
+        "u": 1.238778,
+        "Pcr": 171911546.596958,
+        "governs": "strength",
+        "segment": "collar|L1"
+       },
+       {
+        "N": -100167189.437281,
+        "M": 0.0,
+        "L": 2.612968,
+        "r": 0.31,
+        "stress": 1327126188.101183,
+        "allowable": 586666666.666667,
+        "u_strength": 2.262147,
+        "u_buckling": 0.575649,
+        "u": 2.262147,
+        "Pcr": 522021814.37422,
+        "governs": "strength",
+        "segment": "L1|L2"
+       },
+       {
+        "N": -96051169.940408,
+        "M": 0.0,
+        "L": 6.722976,
+        "r": 0.31,
+        "stress": 1272592589.866858,
+        "allowable": 586666666.666667,
+        "u_strength": 2.169192,
+        "u_buckling": 3.654183,
+        "u": 3.654183,
+        "Pcr": 78855803.298821,
+        "governs": "buckling",
+        "segment": "L2|L3"
+       },
+       {
+        "N": -94327246.729036,
+        "M": 0.0,
+        "L": 5.878911,
+        "r": 0.31,
+        "stress": 1249752140.285109,
+        "allowable": 586666666.666667,
+        "u_strength": 2.130259,
+        "u_buckling": 2.744072,
+        "u": 2.744072,
+        "Pcr": 103124743.64096,
+        "governs": "buckling",
+        "segment": "L3|L4"
+       }
+      ],
+      "u": 3.654183,
+      "radius": 0.31,
+      "count": 8
+     },
+     "seat": {
+      "rows": [
+       {
+        "N": 141698962.194619,
+        "M": 0.0,
+        "L": 2.096879,
+        "r": 0.28,
+        "stress": 2301233700.435221,
+        "allowable": 586666666.666667,
+        "u_strength": 3.922557,
+        "u_buckling": 0.0,
+        "u": 3.922557,
+        "Pcr": 539505011.334968,
+        "governs": "strength",
+        "loop": "L1",
+        "axial_share_N": -135152278.238036,
+        "radial_N": 42572967.644981,
+        "inclined": true
+       },
+       {
+        "N": 6421201.349261,
+        "M": 0.0,
+        "L": 2.096879,
+        "r": 0.28,
+        "stress": 104282238.29829,
+        "allowable": 586666666.666667,
+        "u_strength": 0.177754,
+        "u_buckling": 0.0,
+        "u": 0.177754,
+        "Pcr": 539505011.334968,
+        "governs": "strength",
+        "loop": "L2",
+        "axial_share_N": -6124533.150679,
+        "radial_N": 1929227.942464,
+        "inclined": true
+       },
+       {
+        "N": -1457416.094825,
+        "M": 0.0,
+        "L": 1.181905,
+        "r": 0.28,
+        "stress": 23668875.064606,
+        "allowable": 586666666.666667,
+        "u_strength": 0.040345,
+        "u_buckling": 0.002575,
+        "u": 0.040345,
+        "Pcr": 1698152755.629405,
+        "governs": "strength",
+        "loop": "L3",
+        "axial_share_N": 1233107.396085,
+        "radial_N": -776857.659534,
+        "inclined": true
+       },
+       {
+        "N": -97568927.366119,
+        "M": 0.0,
+        "L": 2.096879,
+        "r": 0.28,
+        "stress": 1584548681.886938,
+        "allowable": 586666666.666667,
+        "u_strength": 2.700935,
+        "u_buckling": 0.542547,
+        "u": 2.700935,
+        "Pcr": 539505011.334968,
+        "governs": "strength",
+        "loop": "L4",
+        "axial_share_N": 93061110.784008,
+        "radial_N": -29314249.896963,
+        "inclined": true
+       }
+      ],
+      "u": 3.922557,
+      "radius": 0.28,
+      "count": 32
+     },
+     "hoop": {
+      "rows": [
+       {
+        "N": 55624262.829813,
+        "M": 21538330.221637,
+        "L": 6.008296,
+        "r": 0.35,
+        "stress": 2040122073.809623,
+        "allowable": 586666666.666667,
+        "u_strength": 3.477481,
+        "u_buckling": 0.0,
+        "u": 3.477481,
+        "Pcr": 160427749.251008,
+        "governs": "strength",
+        "loop": "L1",
+        "R": 7.65,
+        "point_load_N": 42572967.644981
+       },
+       {
+        "N": 2520657.780428,
+        "M": 1134232.208865,
+        "L": 6.98219,
+        "r": 0.35,
+        "stress": 103188410.407476,
+        "allowable": 586666666.666667,
+        "u_strength": 0.175889,
+        "u_buckling": 0.0,
+        "u": 0.175889,
+        "Pcr": 118795185.191108,
+        "governs": "strength",
+        "loop": "L2",
+        "R": 8.89,
+        "point_load_N": 1929227.942464
+       },
+       {
+        "N": 1015013.446927,
+        "M": 522491.315553,
+        "L": 7.987499,
+        "r": 0.35,
+        "stress": 46015413.77959,
+        "allowable": 586666666.666667,
+        "u_strength": 0.078435,
+        "u_buckling": 0.0,
+        "u": 0.078435,
+        "Pcr": 90773787.167244,
+        "governs": "strength",
+        "loop": "L3",
+        "R": 10.17,
+        "point_load_N": 776857.659534
+       },
+       {
+        "N": 38300913.258503,
+        "M": 21576978.133865,
+        "L": 8.741482,
+        "r": 0.35,
+        "stress": 1862690114.409803,
+        "allowable": 586666666.666667,
+        "u_strength": 3.17504,
+        "u_buckling": 0.0,
+        "u": 3.17504,
+        "Pcr": 75790021.832498,
+        "governs": "strength",
+        "loop": "L4",
+        "R": 11.13,
+        "point_load_N": 29314249.896963
+       }
+      ],
+      "u": 3.477481,
+      "radius": 0.35,
+      "count": 4
+     },
+     "strut": {
+      "rows": [
+       {
+        "N": -4757768.461013,
+        "M": 0.0,
+        "L": 2.494674,
+        "r": 0.19,
+        "stress": 167805511.059723,
+        "allowable": 586666666.666667,
+        "u_strength": 0.286032,
+        "u_buckling": 0.176615,
+        "u": 0.286032,
+        "Pcr": 80815866.629867,
+        "governs": "strength",
+        "coil": "C1",
+        "axial_share_N": 896369.979872
+       },
+       {
+        "N": -64530862.148898,
+        "M": 0.0,
+        "L": 2.581356,
+        "r": 0.19,
+        "stress": 2275990181.26953,
+        "allowable": 586666666.666667,
+        "u_strength": 3.879529,
+        "u_buckling": 2.56484,
+        "u": 3.879529,
+        "Pcr": 75479404.565885,
+        "governs": "strength",
+        "coil": "C2",
+        "axial_share_N": 61747087.631623
+       }
+      ],
+      "u": 3.879529,
+      "radius": 0.19,
+      "count": 12
+     },
+     "ring": {
+      "rows": [
+       {
+        "N": 15737023.603663,
+        "M": 38266381.628141,
+        "L": 0.323919,
+        "r": 0.39,
+        "stress": 2009130626.092674,
+        "allowable": 586666666.666667,
+        "u_strength": 3.424654,
+        "u_buckling": 0.0,
+        "u": 3.424654,
+        "Pcr": 85093373790.0219,
+        "governs": "strength"
+       }
+      ],
+      "u": 3.424654,
+      "radius": 0.39,
+      "count": 1,
+      "fe": {
+       "nodes": 128,
+       "elements": 128,
+       "dof": 720,
+       "grid_deg": 3.75,
+       "ring_peak_M": 38266381.628141,
+       "ring_peak_N": 15737023.603663,
+       "tie_N": -44830890.103534,
+       "tie_M": 28610139.441503,
+       "reaction_sum_N": [
+        -375860745.668985,
+        5e-06,
+        0.0
+       ],
+       "applied_sum_N": [
+        375860745.668969,
+        -0.0,
+        0.0
+       ]
+      }
+     },
+     "tie_rod": {
+      "rows": [
+       {
+        "N": -44830890.103534,
+        "M": 28610139.441503,
+        "L": 3.235519,
+        "r": 0.36,
+        "stress": 2225050641.726653,
+        "allowable": 586666666.666667,
+        "u_strength": 3.7927,
+        "u_buckling": 0.217203,
+        "u": 3.7927,
+        "Pcr": 619201447.187043,
+        "governs": "strength",
+        "peak_stress_fe": 2225050641.726653
+       }
+      ],
+      "u": 3.7927,
+      "radius": 0.36,
+      "count": 8,
+      "fe": {
+       "nodes": 128,
+       "elements": 128,
+       "dof": 720,
+       "grid_deg": 3.75,
+       "ring_peak_M": 38266381.628141,
+       "ring_peak_N": 15737023.603663,
+       "tie_N": -44830890.103534,
+       "tie_M": 28610139.441503,
+       "reaction_sum_N": [
+        -375860745.668985,
+        5e-06,
+        0.0
+       ],
+       "applied_sum_N": [
+        375860745.668969,
+        -0.0,
+        0.0
+       ]
+      }
+     },
+     "winding": {
+      "rows": [
+       {
+        "name": "C1",
+        "stress": -67019874.363648,
+        "allowable": 666666666.666667,
+        "u": -0.10053,
+        "hoop_N": -8253526.481858,
+        "current_At": -6367820.697072,
+        "Fz_N": 5378219.879231,
+        "a": 0.28
+       },
+       {
+        "name": "C2",
+        "stress": -951984251.525191,
+        "allowable": 666666666.666667,
+        "u": -1.427976,
+        "hoop_N": -134583602.891612,
+        "current_At": -10697938.771081,
+        "Fz_N": 370482525.789738,
+        "a": 0.3
+       },
+       {
+        "name": "L1",
+        "stress": 1690327581.899963,
+        "allowable": 666666666.666667,
+        "u": 2.535491,
+        "hoop_N": 306936537.237822,
+        "current_At": 14909196.730158,
+        "Fz_N": -1081218225.904284,
+        "a": 0.34
+       },
+       {
+        "name": "L2",
+        "stress": 1167112900.82303,
+        "allowable": 666666666.666667,
+        "u": 1.750669,
+        "hoop_N": 237595246.820781,
+        "current_At": 17704671.117062,
+        "Fz_N": -48996265.205433,
+        "a": 0.36
+       },
+       {
+        "name": "L3",
+        "stress": 1732254948.475333,
+        "allowable": 666666666.666667,
+        "u": 2.598382,
+        "hoop_N": 314549878.491876,
+        "current_At": 20733101.702876,
+        "Fz_N": 9864859.168681,
+        "a": 0.34
+       },
+       {
+        "name": "L4",
+        "stress": 2300932722.059243,
+        "allowable": 666666666.666667,
+        "u": 3.451399,
+        "hoop_N": 325286700.121156,
+        "current_At": 23062663.691963,
+        "Fz_N": 744488886.272068,
+        "a": 0.3
+       }
+      ],
+      "count": 6,
+      "u": 3.451399
+     },
+     "collar": {
+      "closure_in_N": 375860745.668969,
+      "cage_out_N": -375860745.668969,
+      "net_N": 0.0,
+      "count": 1
+     }
+    },
+    "EXTREME": {
+     "longeron": {
+      "rows": [
+       {
+        "N": 210890910.495785,
+        "M": 0.0,
+        "L": 4.553296,
+        "r": 0.31,
+        "stress": 2794117032.970208,
+        "allowable": 586666666.666667,
+        "u_strength": 4.762699,
+        "u_buckling": 0.0,
+        "u": 4.762699,
+        "Pcr": 171911546.596958,
+        "governs": "strength",
+        "segment": "collar|L1"
+       },
+       {
+        "N": -385110301.565861,
+        "M": 0.0,
+        "L": 2.612968,
+        "r": 0.31,
+        "stress": 5102369043.064909,
+        "allowable": 586666666.666667,
+        "u_strength": 8.69722,
+        "u_buckling": 2.213185,
+        "u": 8.69722,
+        "Pcr": 522021814.37422,
+        "governs": "strength",
+        "segment": "L1|L2"
+       },
+       {
+        "N": -369285543.792419,
+        "M": 0.0,
+        "L": 6.722976,
+        "r": 0.31,
+        "stress": 4892705074.459276,
+        "allowable": 586666666.666667,
+        "u_strength": 8.339838,
+        "u_buckling": 14.049145,
+        "u": 14.049145,
+        "Pcr": 78855803.298821,
+        "governs": "buckling",
+        "segment": "L2|L3"
+       },
+       {
+        "N": -362657619.104329,
+        "M": 0.0,
+        "L": 5.878911,
+        "r": 0.31,
+        "stress": 4804890966.109608,
+        "allowable": 586666666.666667,
+        "u_strength": 8.190155,
+        "u_buckling": 10.550066,
+        "u": 10.550066,
+        "Pcr": 103124743.64096,
+        "governs": "buckling",
+        "segment": "L3|L4"
+       }
+      ],
+      "u": 14.049145,
+      "radius": 0.31,
+      "count": 8
+     },
+     "seat": {
+      "rows": [
+       {
+        "N": 544786475.181156,
+        "M": 0.0,
+        "L": 2.096879,
+        "r": 0.28,
+        "stress": 8847495964.7644,
+        "allowable": 586666666.666667,
+        "u_strength": 15.080959,
+        "u_buckling": 0.0,
+        "u": 15.080959,
+        "Pcr": 539505011.334968,
+        "governs": "strength",
+        "loop": "L1",
+        "axial_share_N": -519616602.222359,
+        "radial_N": 163679229.700043,
+        "inclined": true
+       },
+       {
+        "N": 24687433.099812,
+        "M": 0.0,
+        "L": 2.096879,
+        "r": 0.28,
+        "stress": 400931327.559747,
+        "allowable": 586666666.666667,
+        "u_strength": 0.683406,
+        "u_buckling": 0.0,
+        "u": 0.683406,
+        "Pcr": 539505011.334968,
+        "governs": "strength",
+        "loop": "L2",
+        "axial_share_N": -23546840.25636,
+        "radial_N": 7417254.680753,
+        "inclined": true
+       },
+       {
+        "N": -5603291.40648,
+        "M": 0.0,
+        "L": 1.181905,
+        "r": 0.28,
+        "stress": 90999135.196488,
+        "allowable": 586666666.666667,
+        "u_strength": 0.155112,
+        "u_buckling": 0.009899,
+        "u": 0.155112,
+        "Pcr": 1698152755.629405,
+        "governs": "strength",
+        "loop": "L3",
+        "axial_share_N": 4740897.332123,
+        "radial_N": -2986765.319237,
+        "inclined": true
+       },
+       {
+        "N": -375120828.012762,
+        "M": 0.0,
+        "L": 2.096879,
+        "r": 0.28,
+        "stress": 6092074901.526096,
+        "allowable": 586666666.666667,
+        "u_strength": 10.384219,
+        "u_buckling": 2.085917,
+        "u": 10.384219,
+        "Pcr": 539505011.334968,
+        "governs": "strength",
+        "loop": "L4",
+        "axial_share_N": 357789737.731674,
+        "radial_N": -112703767.385478,
+        "inclined": true
+       }
+      ],
+      "u": 15.080959,
+      "radius": 0.28,
+      "count": 32
+     },
+     "hoop": {
+      "rows": [
+       {
+        "N": 213857219.64557,
+        "M": 82807882.436129,
+        "L": 6.008296,
+        "r": 0.35,
+        "stress": 7843606589.041228,
+        "allowable": 586666666.666667,
+        "u_strength": 13.369784,
+        "u_buckling": 0.0,
+        "u": 13.369784,
+        "Pcr": 160427749.251008,
+        "governs": "strength",
+        "loop": "L1",
+        "R": 7.65,
+        "point_load_N": 163679229.700043
+       },
+       {
+        "N": 9691110.266928,
+        "M": 4360754.359341,
+        "L": 6.98219,
+        "r": 0.35,
+        "stress": 396725914.676956,
+        "allowable": 586666666.666667,
+        "u_strength": 0.676237,
+        "u_buckling": 0.0,
+        "u": 0.676237,
+        "Pcr": 118795185.191108,
+        "governs": "strength",
+        "loop": "L2",
+        "R": 8.89,
+        "point_load_N": 7417254.680753
+       },
+       {
+        "N": 3902396.950893,
+        "M": 2008809.363911,
+        "L": 7.987499,
+        "r": 0.35,
+        "stress": 176914316.722761,
+        "allowable": 586666666.666667,
+        "u_strength": 0.301558,
+        "u_buckling": 0.0,
+        "u": 0.301558,
+        "Pcr": 90773787.167244,
+        "governs": "strength",
+        "loop": "L3",
+        "R": 10.17,
+        "point_load_N": 2986765.319237
+       },
+       {
+        "N": 147254568.467907,
+        "M": 82956471.102902,
+        "L": 8.741482,
+        "r": 0.35,
+        "stress": 7161438348.365256,
+        "allowable": 586666666.666667,
+        "u_strength": 12.206997,
+        "u_buckling": 0.0,
+        "u": 12.206997,
+        "Pcr": 75790021.832498,
+        "governs": "strength",
+        "loop": "L4",
+        "R": 11.13,
+        "point_load_N": 112703767.385478
+       }
+      ],
+      "u": 13.369784,
+      "radius": 0.35,
+      "count": 4
+     },
+     "strut": {
+      "rows": [
+       {
+        "N": -18292074.052339,
+        "M": 0.0,
+        "L": 2.494674,
+        "r": 0.19,
+        "stress": 645157674.201166,
+        "allowable": 586666666.666667,
+        "u_strength": 1.099701,
+        "u_buckling": 0.679028,
+        "u": 1.099701,
+        "Pcr": 80815866.629867,
+        "governs": "strength",
+        "coil": "C1",
+        "axial_share_N": 3446251.364367
+       },
+       {
+        "N": -248100200.49557,
+        "M": 0.0,
+        "L": 2.581356,
+        "r": 0.19,
+        "stress": 8750442834.561823,
+        "allowable": 586666666.666667,
+        "u_strength": 14.915528,
+        "u_buckling": 9.860976,
+        "u": 14.915528,
+        "Pcr": 75479404.565885,
+        "governs": "strength",
+        "coil": "C2",
+        "axial_share_N": 237397491.855529
+       }
+      ],
+      "u": 14.915528,
+      "radius": 0.19,
+      "count": 12
+     },
+     "ring": {
+      "rows": [
+       {
+        "N": 60503743.189789,
+        "M": 147121805.567631,
+        "L": 0.323919,
+        "r": 0.39,
+        "stress": 7724454540.917607,
+        "allowable": 586666666.666667,
+        "u_strength": 13.166684,
+        "u_buckling": 0.0,
+        "u": 13.166684,
+        "Pcr": 85093373790.0219,
+        "governs": "strength"
+       }
+      ],
+      "u": 13.166684,
+      "radius": 0.39,
+      "count": 1,
+      "fe": {
+       "nodes": 128,
+       "elements": 128,
+       "dof": 720,
+       "grid_deg": 3.75,
+       "ring_peak_M": 147121805.567631,
+       "ring_peak_N": 60503743.189789,
+       "tie_N": -172360208.010512,
+       "tie_M": 109996691.432153,
+       "reaction_sum_N": [
+        -1445062459.319437,
+        1.8e-05,
+        0.0
+       ],
+       "applied_sum_N": [
+        1445062459.319373,
+        -0.0,
+        0.0
+       ]
+      }
+     },
+     "tie_rod": {
+      "rows": [
+       {
+        "N": -172360208.010512,
+        "M": 109996691.432153,
+        "L": 3.235519,
+        "r": 0.36,
+        "stress": 8554596854.004817,
+        "allowable": 586666666.666667,
+        "u_strength": 14.581699,
+        "u_buckling": 0.835077,
+        "u": 14.581699,
+        "Pcr": 619201447.187043,
+        "governs": "strength",
+        "peak_stress_fe": 8554596854.004815
+       }
+      ],
+      "u": 14.581699,
+      "radius": 0.36,
+      "count": 8,
+      "fe": {
+       "nodes": 128,
+       "elements": 128,
+       "dof": 720,
+       "grid_deg": 3.75,
+       "ring_peak_M": 147121805.567631,
+       "ring_peak_N": 60503743.189789,
+       "tie_N": -172360208.010512,
+       "tie_M": 109996691.432153,
+       "reaction_sum_N": [
+        -1445062459.319437,
+        1.8e-05,
+        0.0
+       ],
+       "applied_sum_N": [
+        1445062459.319373,
+        -0.0,
+        0.0
+       ]
+      }
+     },
+     "winding": {
+      "rows": [
+       {
+        "name": "C1",
+        "stress": -257669643.843322,
+        "allowable": 666666666.666667,
+        "u": -0.386504,
+        "hoop_N": -31732127.95793,
+        "current_At": -6367820.697072,
+        "Fz_N": 20677508.186201,
+        "a": 0.28
+       },
+       {
+        "name": "C2",
+        "stress": -3660070171.184895,
+        "allowable": 666666666.666667,
+        "u": -5.490105,
+        "hoop_N": -517430230.263792,
+        "current_At": -10697938.771081,
+        "Fz_N": 1424384951.133172,
+        "a": 0.3
+       },
+       {
+        "name": "L1",
+        "stress": 6498760407.150952,
+        "allowable": 666666666.666667,
+        "u": 9.748141,
+        "hoop_N": 1180071269.657139,
+        "current_At": 14909196.730158,
+        "Fz_N": -4156932817.778871,
+        "a": 0.34
+       },
+       {
+        "name": "L2",
+        "stress": 4487169937.804805,
+        "allowable": 666666666.666667,
+        "u": 6.730755,
+        "hoop_N": 913476535.258672,
+        "current_At": 17704671.117062,
+        "Fz_N": -188374722.050878,
+        "a": 0.36
+       },
+       {
+        "name": "L3",
+        "stress": 6659957510.47802,
+        "allowable": 666666666.666667,
+        "u": 9.989936,
+        "hoop_N": 1209342093.394372,
+        "current_At": 20733101.702876,
+        "Fz_N": 37927178.656983,
+        "a": 0.34
+       },
+       {
+        "name": "L4",
+        "stress": 8846338800.689133,
+        "allowable": 666666666.666667,
+        "u": 13.269508,
+        "hoop_N": 1250621684.433509,
+        "current_At": 23062663.691963,
+        "Fz_N": 2862317901.853395,
+        "a": 0.3
+       }
+      ],
+      "count": 6,
+      "u": 13.269508
+     },
+     "collar": {
+      "closure_in_N": 1445062459.319373,
+      "cage_out_N": -1445062459.319372,
+      "net_N": 1e-06,
+      "count": 1
+     }
+    }
+   },
+   "cluster": {
+    "cases": {
+     "LC01_THRUST_ALL": {
+      "groups": {
+       "hub_thrust_strut": {
+        "u": 0.000692,
+        "row": {
+         "N": 42393.971363,
+         "M": 19006.756247,
+         "L": 6.87413,
+         "r": 0.6,
+         "stress": 406024.284447,
+         "allowable": 586666666.666667,
+         "u_strength": 0.000692,
+         "u_buckling": 0.0,
+         "u": 0.000692,
+         "Pcr": 1058472320.496456,
+         "governs": "strength",
+         "name": "CL_Hub_Thrust_Strut_06A",
+         "group": "hub_thrust_strut"
+        },
+        "count": 24
+       },
+       "spoke": {
+        "u": 0.014233,
+        "row": {
+         "N": 742593.473096,
+         "M": 681221.633211,
+         "L": 14.947649,
+         "r": 0.68,
+         "stress": 8349890.860809,
+         "allowable": 586666666.666667,
+         "u_strength": 0.014233,
+         "u_buckling": 0.0,
+         "u": 0.014233,
+         "Pcr": 369317440.252205,
+         "governs": "strength",
+         "name": "CL_N2_Spoke_A",
+         "group": "spoke"
+        },
+        "count": 8
+       },
+       "engine_thrust_strut": {
+        "u": 0.02132,
+        "row": {
+         "N": -957369.965999,
+         "M": 1302554.318503,
+         "L": 16.322042,
+         "r": 0.72,
+         "stress": 12507571.997316,
+         "allowable": 586666666.666667,
+         "u_strength": 0.02132,
+         "u_buckling": 0.007378,
+         "u": 0.02132,
+         "Pcr": 389305888.606703,
+         "governs": "strength",
+         "name": "CL_N3_Thrust_Strut_10",
+         "group": "engine_thrust_strut"
+        },
+        "count": 8
+       },
+       "ring_tie": {
+        "u": 0.028207,
+        "row": {
+         "N": -493618.268754,
+         "M": 149295.379688,
+         "L": 25.373271,
+         "r": 0.544,
+         "stress": 4822619.275923,
+         "allowable": 586666666.666667,
+         "u_strength": 0.00822,
+         "u_buckling": 0.028207,
+         "u": 0.028207,
+         "Pcr": 52499193.234979,
+         "governs": "buckling",
+         "name": "CL_N4_Strut_Ring_Tie",
+         "group": "ring_tie"
+        },
+        "count": 4
+       },
+       "chord": {
+        "u": 0.014838,
+        "row": {
+         "N": 572637.709521,
+         "M": 770177.358848,
+         "L": 21.283628,
+         "r": 0.68,
+         "stress": 8705249.922032,
+         "allowable": 586666666.666667,
+         "u_strength": 0.014838,
+         "u_buckling": 0.0,
+         "u": 0.014838,
+         "Pcr": 182160525.257836,
+         "governs": "strength",
+         "name": "CL_Chord_N2_N4",
+         "group": "chord"
+        },
+        "count": 4
+       }
+      },
+      "dof": 30,
+      "elements": 48
+     },
+     "LC03_FIELD_NOMINAL+THRUST": {
+      "groups": {
+       "hub_thrust_strut": {
+        "u": 0.011047,
+        "row": {
+         "N": -1255379.474242,
+         "M": 151482.128773,
+         "L": 6.87413,
+         "r": 0.6,
+         "stress": 6480981.154663,
+         "allowable": 586666666.666667,
+         "u_strength": 0.011047,
+         "u_buckling": 0.003558,
+         "u": 0.011047,
+         "Pcr": 1058472320.496456,
+         "governs": "strength",
+         "name": "CL_Hub_Thrust_Strut_04A",
+         "group": "hub_thrust_strut"
+        },
+        "count": 24
+       },
+       "spoke": {
+        "u": 0.724729,
+        "row": {
+         "N": -23362301.567823,
+         "M": 38986642.289907,
+         "L": 14.947649,
+         "r": 0.68,
+         "stress": 425174551.685592,
+         "allowable": 586666666.666667,
+         "u_strength": 0.724729,
+         "u_buckling": 0.189774,
+         "u": 0.724729,
+         "Pcr": 369317440.252205,
+         "governs": "strength",
+         "name": "CL_N3_Spoke_B",
+         "group": "spoke"
+        },
+        "count": 8
+       },
+       "engine_thrust_strut": {
+        "u": 0.81513,
+        "row": {
+         "N": 14912814.370149,
+         "M": 56634002.700758,
+         "L": 16.322042,
+         "r": 0.72,
+         "stress": 478209760.702923,
+         "allowable": 586666666.666667,
+         "u_strength": 0.81513,
+         "u_buckling": 0.0,
+         "u": 0.81513,
+         "Pcr": 389305888.606703,
+         "governs": "strength",
+         "name": "CL_N3_Thrust_Strut_10",
+         "group": "engine_thrust_strut"
+        },
+        "count": 8
+       },
+       "ring_tie": {
+        "u": 0.271958,
+        "row": {
+         "N": 19957795.573873,
+         "M": 4075918.021028,
+         "L": 25.373271,
+         "r": 0.544,
+         "stress": 159548620.728158,
+         "allowable": 586666666.666667,
+         "u_strength": 0.271958,
+         "u_buckling": 0.0,
+         "u": 0.271958,
+         "Pcr": 52499193.234979,
+         "governs": "strength",
+         "name": "CL_N4_Strut_Ring_Tie",
+         "group": "ring_tie"
+        },
+        "count": 4
+       },
+       "chord": {
+        "u": 0.397726,
+        "row": {
+         "N": -24150015.613238,
+         "M": 15207161.873422,
+         "L": 21.283628,
+         "r": 0.68,
+         "stress": 207249821.45505,
+         "allowable": 586666666.666667,
+         "u_strength": 0.353267,
+         "u_buckling": 0.397726,
+         "u": 0.397726,
+         "Pcr": 182160525.257836,
+         "governs": "buckling",
+         "name": "CL_Chord_N4_N3",
+         "group": "chord"
+        },
+        "count": 4
+       }
+      },
+      "dof": 30,
+      "elements": 48
+     },
+     "LC03_FIELD_CONSERVATIVE+THRUST": {
+      "groups": {
+       "hub_thrust_strut": {
+        "u": 0.045958,
+        "row": {
+         "N": -5394081.579909,
+         "M": 585192.30701,
+         "L": 6.87413,
+         "r": 0.6,
+         "stress": 26962211.164179,
+         "allowable": 586666666.666667,
+         "u_strength": 0.045958,
+         "u_buckling": 0.015288,
+         "u": 0.045958,
+         "Pcr": 1058472320.496456,
+         "governs": "strength",
+         "name": "CL_Hub_Thrust_Strut_05A",
+         "group": "hub_thrust_strut"
+        },
+        "count": 24
+       },
+       "spoke": {
+        "u": 2.926563,
+        "row": {
+         "N": -95530441.359713,
+         "M": 157079705.493916,
+         "L": 14.947649,
+         "r": 0.68,
+         "stress": 1716916857.394384,
+         "allowable": 586666666.666667,
+         "u_strength": 2.926563,
+         "u_buckling": 0.776003,
+         "u": 2.926563,
+         "Pcr": 369317440.252205,
+         "governs": "strength",
+         "name": "CL_N3_Spoke_B",
+         "group": "spoke"
+        },
+        "count": 8
+       },
+       "engine_thrust_strut": {
+        "u": 3.305931,
+        "row": {
+         "N": 62251655.359498,
+         "M": 229133588.208593,
+         "L": 16.322042,
+         "r": 0.72,
+         "stress": 1939479505.761676,
+         "allowable": 586666666.666667,
+         "u_strength": 3.305931,
+         "u_buckling": 0.0,
+         "u": 3.305931,
+         "Pcr": 389305888.606703,
+         "governs": "strength",
+         "name": "CL_N3_Thrust_Strut_10",
+         "group": "engine_thrust_strut"
+        },
+        "count": 8
+       },
+       "ring_tie": {
+        "u": 1.107637,
+        "row": {
+         "N": 80961890.258416,
+         "M": 16677301.013133,
+         "L": 25.373271,
+         "r": 0.544,
+         "stress": 649813488.222298,
+         "allowable": 586666666.666667,
+         "u_strength": 1.107637,
+         "u_buckling": 0.0,
+         "u": 1.107637,
+         "Pcr": 52499193.234979,
+         "governs": "strength",
+         "name": "CL_N4_Strut_Ring_Tie",
+         "group": "ring_tie"
+        },
+        "count": 4
+       },
+       "chord": {
+        "u": 1.631192,
+        "row": {
+         "N": -99046265.08571,
+         "M": 62201587.14192,
+         "L": 21.283628,
+         "r": 0.68,
+         "stress": 848442418.658614,
+         "allowable": 586666666.666667,
+         "u_strength": 1.446209,
+         "u_buckling": 1.631192,
+         "u": 1.631192,
+         "Pcr": 182160525.257836,
+         "governs": "buckling",
+         "name": "CL_Chord_N4_N3",
+         "group": "chord"
+        },
+        "count": 4
+       }
+      },
+      "dof": 30,
+      "elements": 48
+     },
+     "LC06_N2_COILS_OFF": {
+      "groups": {
+       "hub_thrust_strut": {
+        "u": 0.063492,
+        "row": {
+         "N": 2965765.196279,
+         "M": 1986072.590517,
+         "L": 6.87413,
+         "r": 0.6,
+         "stress": 37248467.32423,
+         "allowable": 586666666.666667,
+         "u_strength": 0.063492,
+         "u_buckling": 0.0,
+         "u": 0.063492,
+         "Pcr": 1058472320.496456,
+         "governs": "strength",
+         "name": "CL_Hub_Thrust_Strut_08A",
+         "group": "hub_thrust_strut"
+        },
+        "count": 24
+       },
+       "spoke": {
+        "u": 0.906445,
+        "row": {
+         "N": -34693210.596536,
+         "M": 47133724.514985,
+         "L": 14.947649,
+         "r": 0.68,
+         "stress": 531780991.564424,
+         "allowable": 586666666.666667,
+         "u_strength": 0.906445,
+         "u_buckling": 0.281816,
+         "u": 0.906445,
+         "Pcr": 369317440.252205,
+         "governs": "strength",
+         "name": "CL_N3_Spoke_B",
+         "group": "spoke"
+        },
+        "count": 8
+       },
+       "engine_thrust_strut": {
+        "u": 0.990404,
+        "row": {
+         "N": 17053701.647117,
+         "M": 69147492.865028,
+         "L": 16.322042,
+         "r": 0.72,
+         "stress": 581037246.725163,
+         "allowable": 586666666.666667,
+         "u_strength": 0.990404,
+         "u_buckling": 0.0,
+         "u": 0.990404,
+         "Pcr": 389305888.606703,
+         "governs": "strength",
+         "name": "CL_N3_Thrust_Strut_10",
+         "group": "engine_thrust_strut"
+        },
+        "count": 8
+       },
+       "ring_tie": {
+        "u": 0.332526,
+        "row": {
+         "N": 22820595.40199,
+         "M": 5360197.223929,
+         "L": 25.373271,
+         "r": 0.544,
+         "stress": 195081970.711955,
+         "allowable": 586666666.666667,
+         "u_strength": 0.332526,
+         "u_buckling": 0.0,
+         "u": 0.332526,
+         "Pcr": 52499193.234979,
+         "governs": "strength",
+         "name": "CL_N3_Strut_Ring_Tie",
+         "group": "ring_tie"
+        },
+        "count": 4
+       },
+       "chord": {
+        "u": 0.49452,
+        "row": {
+         "N": -18890854.750322,
+         "M": 25725104.63167,
+         "L": 21.283628,
+         "r": 0.68,
+         "stress": 290118519.684107,
+         "allowable": 586666666.666667,
+         "u_strength": 0.49452,
+         "u_buckling": 0.311113,
+         "u": 0.49452,
+         "Pcr": 182160525.257836,
+         "governs": "strength",
+         "name": "CL_Chord_N4_N3",
+         "group": "chord"
+        },
+        "count": 4
+       }
+      },
+      "dof": 30,
+      "elements": 48
+     },
+     "LC06_SINGLE_ENGINE_N1": {
+      "groups": {
+       "hub_thrust_strut": {
+        "u": 0.00486,
+        "row": {
+         "N": 253055.687436,
+         "M": 145169.991883,
+         "L": 6.87413,
+         "r": 0.6,
+         "stress": 2850939.765006,
+         "allowable": 586666666.666667,
+         "u_strength": 0.00486,
+         "u_buckling": 0.0,
+         "u": 0.00486,
+         "Pcr": 1058472320.496456,
+         "governs": "strength",
+         "name": "CL_Hub_Thrust_Strut_06A",
+         "group": "hub_thrust_strut"
+        },
+        "count": 24
+       },
+       "spoke": {
+        "u": 0.015192,
+        "row": {
+         "N": 909053.073316,
+         "M": 692487.592118,
+         "L": 14.947649,
+         "r": 0.68,
+         "stress": 8912518.37023,
+         "allowable": 586666666.666667,
+         "u_strength": 0.015192,
+         "u_buckling": 0.0,
+         "u": 0.015192,
+         "Pcr": 369317440.252205,
+         "governs": "strength",
+         "name": "CL_N1_Spoke_B",
+         "group": "spoke"
+        },
+        "count": 8
+       },
+       "engine_thrust_strut": {
+        "u": 0.017441,
+        "row": {
+         "N": -961074.313248,
+         "M": 1009518.324822,
+         "L": 16.322042,
+         "r": 0.72,
+         "stress": 10231831.556993,
+         "allowable": 586666666.666667,
+         "u_strength": 0.017441,
+         "u_buckling": 0.007406,
+         "u": 0.017441,
+         "Pcr": 389305888.606703,
+         "governs": "strength",
+         "name": "CL_N1_Thrust_Strut_01",
+         "group": "engine_thrust_strut"
+        },
+        "count": 8
+       },
+       "ring_tie": {
+        "u": 0.015168,
+        "row": {
+         "N": -265442.440954,
+         "M": 116299.560925,
+         "L": 25.373271,
+         "r": 0.544,
+         "stress": 3244434.343704,
+         "allowable": 586666666.666667,
+         "u_strength": 0.00553,
+         "u_buckling": 0.015168,
+         "u": 0.015168,
+         "Pcr": 52499193.234979,
+         "governs": "buckling",
+         "name": "CL_N1_Strut_Ring_Tie",
+         "group": "ring_tie"
+        },
+        "count": 4
+       },
+       "chord": {
+        "u": 0.006143,
+        "row": {
+         "N": 172112.45151,
+         "M": 338180.769641,
+         "L": 21.283628,
+         "r": 0.68,
+         "stress": 3603990.811901,
+         "allowable": 586666666.666667,
+         "u_strength": 0.006143,
+         "u_buckling": 0.0,
+         "u": 0.006143,
+         "Pcr": 182160525.257836,
+         "governs": "strength",
+         "name": "CL_Chord_N3_N1",
+         "group": "chord"
+        },
+        "count": 4
+       }
+      },
+      "dof": 30,
+      "elements": 48
+     }
+    },
+    "stiffness_N_m": {
+     "radial": 3330148228.415544,
+     "axial": 153154285.307839,
+     "tangential": 153937587.800999
+    },
+    "engine_mass_kg": 1243705.621562,
+    "frequency_Hz": {
+     "radial": 8.23556,
+     "axial": 1.766143,
+     "tangential": 1.770654
+    },
+    "magnetic_stiffness_N_m": 2084875.110169,
+    "magnetic_margin": 1597.289071,
+    "magnetics": {
+     "nominal": {
+      "1": [
+       [
+        -3e-05,
+        -9855143.983038,
+        -9855143.983038
+       ],
+       [
+        0.0,
+        -159939326.622467,
+        159939326.622467
+       ]
+      ],
+      "2": [
+       [
+        -3e-05,
+        9855143.983038,
+        -9855143.983038
+       ],
+       [
+        0.0,
+        -159939326.622467,
+        -159939326.622467
+       ]
+      ],
+      "3": [
+       [
+        -3e-05,
+        -9855143.983038,
+        9855143.983038
+       ],
+       [
+        0.0,
+        159939326.622467,
+        159939326.622467
+       ]
+      ],
+      "4": [
+       [
+        -3e-05,
+        9855143.983038,
+        9855143.983038
+       ],
+       [
+        0.0,
+        159939326.622467,
+        -159939326.622467
+       ]
+      ]
+     },
+     "conservative": {
+      "1": [
+       [
+        -0.00012,
+        -39251846.885699,
+        -39251846.885699
+       ],
+       [
+        -0.0,
+        -637018999.457717,
+        637018999.457717
+       ]
+      ],
+      "2": [
+       [
+        -0.00012,
+        39251846.885699,
+        -39251846.885699
+       ],
+       [
+        -0.0,
+        -637018999.457717,
+        -637018999.457717
+       ]
+      ],
+      "3": [
+       [
+        -0.00012,
+        -39251846.885699,
+        39251846.885699
+       ],
+       [
+        0.0,
+        637018999.457717,
+        637018999.457718
+       ]
+      ],
+      "4": [
+       [
+        -0.00012,
+        39251846.885699,
+        39251846.885699
+       ],
+       [
+        0.0,
+        637018999.457717,
+        -637018999.457718
+       ]
+      ]
+     },
+     "n2_off": {
+      "1": [
+       [
+        -1.5e-05,
+        2283778.997436,
+        -9855143.983039
+       ],
+       [
+        -4820150.533657,
+        -159939326.622473,
+        -35266058.499077
+       ]
+      ],
+      "3": [
+       [
+        -3e-05,
+        -12138922.980474,
+        12138922.980474
+       ],
+       [
+        0.0,
+        195205385.121538,
+        195205385.121538
+       ]
+      ],
+      "4": [
+       [
+        -1.5e-05,
+        9855143.983039,
+        -2283778.997436
+       ],
+       [
+        4820150.533657,
+        -35266058.499077,
+        -159939326.622473
+       ]
+      ]
+     },
+     "thrust_N": 725525.0
+    }
+   },
+   "trunnion": {
+    "load_N": 55540547.860136,
+    "radius": 0.22,
+    "shear": 91317693.532775,
+    "allowable": 338712157.92458,
+    "u": 0.269603
+   },
+   "electrical": {
+    "rows": [
+     {
+      "name": "C1",
+      "turns": 46.922739,
+      "energy_J": 18504052.482926,
+      "dump_voltage_V": 54.423684,
+      "pair_force_N_m": 9248.0,
+      "field_force_N_m": 54530.695568,
+      "field_T": 0.801922,
+      "couple_Nm_m": 5453.069557
+     },
+     {
+      "name": "C2",
+      "turns": 78.830201,
+      "energy_J": -28577747.224143,
+      "dump_voltage_V": 84.052198,
+      "pair_force_N_m": 9248.0,
+      "field_force_N_m": 54530.695568,
+      "field_T": 0.801922,
+      "couple_Nm_m": 5453.069557
+     },
+     {
+      "name": "L1",
+      "turns": 109.861815,
+      "energy_J": 1097342712.358895,
+      "dump_voltage_V": 3227.478566,
+      "pair_force_N_m": 9248.0,
+      "field_force_N_m": 49872.884962,
+      "field_T": 0.733425,
+      "couple_Nm_m": 4987.288496
+     },
+     {
+      "name": "L2",
+      "turns": 130.460906,
+      "energy_J": 1915103431.439264,
+      "dump_voltage_V": 5632.657151,
+      "pair_force_N_m": 9248.0,
+      "field_force_N_m": 49872.884962,
+      "field_T": 0.733425,
+      "couple_Nm_m": 4987.288496
+     },
+     {
+      "name": "L3",
+      "turns": 152.776587,
+      "energy_J": 2968778636.587971,
+      "dump_voltage_V": 8731.701872,
+      "pair_force_N_m": 9248.0,
+      "field_force_N_m": 49872.884962,
+      "field_T": 0.733425,
+      "couple_Nm_m": 4987.288496
+     },
+     {
+      "name": "L4",
+      "turns": 169.942496,
+      "energy_J": 3752159103.913404,
+      "dump_voltage_V": 11035.76207,
+      "pair_force_N_m": 9248.0,
+      "field_force_N_m": 49872.884962,
+      "field_T": 0.733425,
+      "couple_Nm_m": 4987.288496
+     }
+    ],
+    "energy_J": 9723310189.558317,
+    "lead_current_A": 68000.0
+   },
+   "lithium": {
+    "line_inner_radius_m": 0.106,
+    "capacity_W": 200144961.766017,
+    "fusion_power_W": 8929948500000.0,
+    "capacity_fraction": 2.2e-05,
+    "hoop_stress_Pa": 26500000.0,
+    "temperature_K": 1800.0,
+    "materials": {
+     "MAT-NB1ZR": {
+      "status": "OK",
+      "low": 1300.0,
+      "high": 1400.0,
+      "verdict": "BELOW_1800K"
+     },
+     "MAT-TZM": {
+      "status": "OPEN",
+      "low": null,
+      "high": null,
+      "verdict": "OPEN"
+     },
+     "MAT-MORE": {
+      "status": "OPEN",
+      "low": null,
+      "high": null,
+      "verdict": "OPEN"
+     },
+     "MAT-W": {
+      "status": "OK",
+      "low": 1300.0,
+      "high": 1600.0,
+      "verdict": "BELOW_1800K"
+     }
+    }
+   },
+   "target": {
+    "pulse_Hz": 5697.064656,
+    "speed_m_s": 46715.930177,
+    "flight_m": 9.8,
+    "time_of_flight_s": 0.00021,
+    "pointing_rad": 0.000102,
+    "recoil_N_per_g": 266143.674674,
+    "shutter_rev_s": 237.377694,
+    "shutter_rim_m_s": 566.765455,
+    "rim_limit_m_s": 700.0,
+    "cycles_per_hour": 20509432.760764,
+    "cycles_basis": 20509432760.763557,
+    "shutter_rim_stress_W_Pa": 6183544306.059145,
+    "shutter_w_strength": "OPEN",
+    "shutter_rim_stress_cfrp_Pa": 530018083.376498,
+    "cfrp_allowable_Pa": 858000000.0
+   },
+   "thermal": {
+    "coil_contraction_m": {
+     "C1": 0.00725,
+     "C2": 0.01218,
+     "L1": 0.01856,
+     "L2": 0.02204,
+     "L3": 0.02581,
+     "L4": 0.02871
+    },
+    "shield_vs_titanium_per_100K_m": 0.018036,
+    "header_growth_m": {
+     "VTX_L1_Armour_Header": [
+      0.041948,
+      0.075507
+     ],
+     "VTX_L2_Armour_Header": [
+      0.04943,
+      0.088973
+     ],
+     "VTX_L3_Armour_Header": [
+      0.06184,
+      0.111313
+     ],
+     "VTX_L4_Armour_Header": [
+      0.071874,
+      0.129372
+     ]
+    },
+    "header_alpha_basis": "ESTIMATE 5-9e-6 /K (refractory alloys near 1800 K; not in the catalogue: every candidate's expansion is OPEN there)"
+   },
+   "dynamics": {
+    "pulse_Hz": 5697.064656,
+    "cycles_per_hour": 20509432.760764,
+    "cycles_basis": 20509432760.763557,
+    "basis_h": 1000.0,
+    "lowest_mount_Hz": 1.766143,
+    "ratio": 3225.709393,
+    "transmissibility": 0.0,
+    "winding_breathing_Hz": {
+     "C1": null,
+     "C2": null,
+     "L1": null,
+     "L2": null,
+     "L3": null,
+     "L4": null
+    },
+    "winding_note": "316LN cryogenic modulus is OPEN in the catalogue, so the winding breathing modes are not computed; the windings take the pulse field change directly, so mount isolation does not protect them"
+   },
+   "stiffness": [
+    {
+     "name": "C1",
+     "kz_N_m": -2386284.334879,
+     "kr_N_m": 1193142.167439
+    },
+    {
+     "name": "C2",
+     "kz_N_m": -31740494.835219,
+     "kr_N_m": 15870247.417609
+    },
+    {
+     "name": "L1",
+     "kz_N_m": -100335214.519918,
+     "kr_N_m": 50167607.259959
+    },
+    {
+     "name": "L2",
+     "kz_N_m": -87686134.560693,
+     "kr_N_m": 43843067.280347
+    },
+    {
+     "name": "L3",
+     "kz_N_m": -66267802.182639,
+     "kr_N_m": 33133901.091319
+    },
+    {
+     "name": "L4",
+     "kz_N_m": -38719782.16722,
+     "kr_N_m": 19359891.08361
+    }
+   ]
+  },
+  "notes": {
+   "longeron": "Compression and Euler buckling between hoops under the loop forces; NOMINAL coils.",
+   "hoop": "Ring bending under the eight seats' radial share (closed form P R/2 (1/a - cot a)).",
+   "seat": "Inclined strut carrying its loop's axial share. The cold-mass support behind it carries the same force; its heat leak is OPEN.",
+   "strut": "Compression and buckling: the closure coil is pushed forward by the loops.",
+   "ring": "Frame FE (ring + tie rods, converged on 3.75 deg): twelve strut seats, eight tie rods.",
+   "tie_rod": "Frame FE: the kink round the shield rim puts the rods in bending as well as compression.",
+   "winding": "Hoop tension in the steel case share (316LN, 2/3 of the 4.2 K proof stress); sized for NOMINAL only.",
+   "collar": "Balance point: 94 MN in from the closure struts, the same out through the cage. Flange and lug design OPEN.",
+   "trunnion": "Pin shear: worst engine reaction 56 MN over four pins, utilisation 0.27.",
+   "shield": "Carries no coil load by design (tie rods go round it). LiH grows 18 mm more than titanium per 100 K at the rim: sliding seats.",
+   "heat": "Design heat flux 29x the research armour load (VTX-S3): no material in the catalogue covers it.",
+   "cryostat": "Vacuum vessel; the cold-mass supports inside carry the coil forces (OPEN).",
+   "joint": "Segment split flange; the winding inside is continuous, so the joint carries no hoop load. Local design OPEN.",
+   "burn": "No hardware: the burn is in the open field.",
+   "launcher": "46.7 km/s at 5697 Hz (VTX-S2); recoil 266 kN per gram of target (target mass OPEN).",
+   "shutter": "As a 24-slot tungsten chopper the rim runs 567 m/s: rho v^2 = 6.2 GPa, tungsten strength OPEN. A CFRP rotor would see 530 MPa (allowable 858), radiation tolerance OPEN.",
+   "alignment": "Pointing 102 microrad holds a 1 mm miss over 9.8 m; actuator loads OPEN (target mass).",
+   "driver": "Driver and final optics: SPECULATIVE (VTX-S1).",
+   "pulsed": "Pulsed power at the design rate: SPECULATIVE.",
+   "leads": "68 kA leads; 9.7 GJ stored per engine; go/return pair force 9.2 kN/m (clamped pair).",
+   "lithium": "At 1800 K no catalogue alloy has a service rating (Nb-1Zr stops near 1400 K); one supply line carries 0.0022 % of the fusion power (VTX-S3).",
+   "cryo": "Cryogen flow and the cold heat budget are OPEN.",
+   "nonstructural": "Not on a primary load path; not sized."
+  },
+  "mass": {
+   "engine_1_1_kg": 1088881.078332,
+   "engine_1_2_kg": 1243705.621562,
+   "by_category_1_1": {
+    "STRUCTURE": 161164.31567,
+    "SHIELDING": 422612.09061,
+    "MAGNETIC_COILS": 53096.892541,
+    "MAGNETIC_NOZZLE": 348115.519085,
+    "FUSION_REACTION": 4.342938,
+    "TARGET_INJECTION": 50345.502492,
+    "FUEL": 8472.303358,
+    "ELECTRICAL": 34136.347539,
+    "SERVICE": 4247.117968,
+    "HOT_THERMAL": 5752.734966,
+    "CRYOGENIC": 546.325469,
+    "INSTRUMENTATION": 387.585697
+   },
+   "by_category_1_2": {
+    "STRUCTURE": 315937.978011,
+    "SHIELDING": 422612.09061,
+    "MAGNETIC_COILS": 53096.892541,
+    "MAGNETIC_NOZZLE": 348115.519085,
+    "FUSION_REACTION": 4.342938,
+    "TARGET_INJECTION": 50345.502492,
+    "FUEL": 8472.303358,
+    "ELECTRICAL": 34182.026689,
+    "SERVICE": 4203.649174,
+    "HOT_THERMAL": 5799.49433,
+    "CRYOGENIC": 548.236638,
+    "INSTRUMENTATION": 387.585697
+   },
+   "frame_1_1_kg": 633387.661233,
+   "frame_1_2_kg": 1353128.917507,
+   "engines": 4
+  },
+  "materials": [
+   {
+    "material": "MAT-TI6AL4V",
+    "property": "density",
+    "status": "OK",
+    "value": 4430.0,
+    "low": 4430.0,
+    "high": 4430.0,
+    "unit": "kg/m3",
+    "at_K": 293.0,
+    "basis": "TYPICAL",
+    "confidence": "HIGH",
+    "source": "asm",
+    "level": "A"
+   },
+   {
+    "material": "MAT-TI6AL4V",
+    "property": "elastic_modulus",
+    "status": "OK",
+    "value": 113800000000.0,
+    "low": 113800000000.0,
+    "high": 113800000000.0,
+    "unit": "Pa",
+    "at_K": 293.0,
+    "basis": "TYPICAL",
+    "confidence": "HIGH",
+    "source": "asm",
+    "level": "A"
+   },
+   {
+    "material": "MAT-TI6AL4V",
+    "property": "yield_strength",
+    "status": "OK",
+    "value": 880000000.0,
+    "low": 880000000.0,
+    "high": 880000000.0,
+    "unit": "Pa",
+    "at_K": 293.0,
+    "basis": "TYPICAL",
+    "confidence": "MEDIUM",
+    "source": "asm",
+    "level": "A"
+   },
+   {
+    "material": "MAT-TI6AL4V",
+    "property": "ultimate_strength",
+    "status": "OK",
+    "value": 950000000.0,
+    "low": 950000000.0,
+    "high": 950000000.0,
+    "unit": "Pa",
+    "at_K": 293.0,
+    "basis": "TYPICAL",
+    "confidence": "MEDIUM",
+    "source": "asm",
+    "level": "A"
+   },
+   {
+    "material": "MAT-TI6AL4V",
+    "property": "thermal_expansion",
+    "status": "OK",
+    "value": 9e-06,
+    "low": 9e-06,
+    "high": 9e-06,
+    "unit": "1/K",
+    "at_K": 293.0,
+    "basis": "TYPICAL",
+    "confidence": "MEDIUM",
+    "source": "asm",
+    "level": "A"
+   },
+   {
+    "material": "MAT-TI6AL4V",
+    "property": "max_service_temperature",
+    "status": "OK",
+    "value": 673.0,
+    "low": 673.0,
+    "high": 673.0,
+    "unit": "K",
+    "at_K": 293.0,
+    "basis": "TYPICAL",
+    "confidence": "MEDIUM",
+    "source": "asm",
+    "level": "A"
+   },
+   {
+    "material": "MAT-INCONEL-718",
+    "property": "density",
+    "status": "OK",
+    "value": 8190.0,
+    "low": 8190.0,
+    "high": 8190.0,
+    "unit": "kg/m3",
+    "at_K": 293.0,
+    "basis": "TYPICAL",
+    "confidence": "HIGH",
+    "source": "special_metals_718",
+    "level": "A"
+   },
+   {
+    "material": "MAT-INCONEL-718",
+    "property": "elastic_modulus",
+    "status": "OK",
+    "value": 200000000000.0,
+    "low": 200000000000.0,
+    "high": 200000000000.0,
+    "unit": "Pa",
+    "at_K": 293.0,
+    "basis": "TYPICAL",
+    "confidence": "MEDIUM",
+    "source": "special_metals_718",
+    "level": "A"
+   },
+   {
+    "material": "MAT-INCONEL-718",
+    "property": "yield_strength",
+    "status": "OK",
+    "value": 1034000000.0,
+    "low": 1034000000.0,
+    "high": 1034000000.0,
+    "unit": "Pa",
+    "at_K": 293.0,
+    "basis": "TYPICAL",
+    "confidence": "MEDIUM",
+    "source": "special_metals_718",
+    "level": "A"
+   },
+   {
+    "material": "MAT-INCONEL-718",
+    "property": "thermal_expansion",
+    "status": "OUT_OF_RANGE",
+    "value": null,
+    "low": null,
+    "high": null,
+    "unit": "1/K",
+    "at_K": 293.0,
+    "basis": "TYPICAL",
+    "confidence": "MEDIUM",
+    "source": "special_metals_718",
+    "level": "A"
+   },
+   {
+    "material": "MAT-INCONEL-718",
+    "property": "max_service_temperature",
+    "status": "OK",
+    "value": 923.0,
+    "low": 923.0,
+    "high": 923.0,
+    "unit": "K",
+    "at_K": 293.0,
+    "basis": "TYPICAL",
+    "confidence": "MEDIUM",
+    "source": "special_metals_718",
+    "level": "A"
+   },
+   {
+    "material": "MAT-CFRP",
+    "property": "density",
+    "status": "OK",
+    "value": null,
+    "low": 1500.0,
+    "high": 1650.0,
+    "unit": "kg/m3",
+    "at_K": 293.0,
+    "basis": "TYPICAL",
+    "confidence": "MEDIUM",
+    "source": "asm",
+    "level": "A"
+   },
+   {
+    "material": "MAT-CFRP",
+    "property": "elastic_modulus",
+    "status": "OK",
+    "value": 134000000000.0,
+    "low": 134000000000.0,
+    "high": 134000000000.0,
+    "unit": "Pa",
+    "at_K": 293.0,
+    "basis": "TYPICAL",
+    "confidence": "MEDIUM",
+    "source": "toray_t700s",
+    "level": "A"
+   },
+   {
+    "material": "MAT-CFRP",
+    "property": "ultimate_strength",
+    "status": "OK",
+    "value": 2860000000.0,
+    "low": 2860000000.0,
+    "high": 2860000000.0,
+    "unit": "Pa",
+    "at_K": 293.0,
+    "basis": "TYPICAL",
+    "confidence": "MEDIUM",
+    "source": "toray_t700s",
+    "level": "A"
+   },
+   {
+    "material": "MAT-CFRP",
+    "property": "compressive_strength",
+    "status": "OK",
+    "value": 1450000000.0,
+    "low": 1450000000.0,
+    "high": 1450000000.0,
+    "unit": "Pa",
+    "at_K": 293.0,
+    "basis": "TYPICAL",
+    "confidence": "MEDIUM",
+    "source": "toray_t700s",
+    "level": "A"
+   },
+   {
+    "material": "MAT-SS-316LN",
+    "property": "density",
+    "status": "OUT_OF_RANGE",
+    "value": null,
+    "low": null,
+    "high": null,
+    "unit": "kg/m3",
+    "at_K": 20.0,
+    "basis": "TYPICAL",
+    "confidence": "MEDIUM",
+    "source": "asm",
+    "level": "A"
+   },
+   {
+    "material": "MAT-SS-316LN",
+    "property": "yield_strength",
+    "status": "OK",
+    "value": null,
+    "low": 1000000000.0,
+    "high": 1080000000.0,
+    "unit": "Pa",
+    "at_K": 20.0,
+    "basis": "MEASURED",
+    "confidence": "MEDIUM",
+    "source": "nims_316ln_4k",
+    "level": "A"
+   },
+   {
+    "material": "MAT-SS-316LN",
+    "property": "elastic_modulus",
+    "status": "OPEN",
+    "value": null,
+    "low": null,
+    "high": null,
+    "unit": "Pa",
+    "at_K": 20.0,
+    "basis": null,
+    "confidence": null,
+    "source": null,
+    "level": "A"
+   },
+   {
+    "material": "MAT-LIH",
+    "property": "density",
+    "status": "OK",
+    "value": 780.0,
+    "low": 780.0,
+    "high": 780.0,
+    "unit": "kg/m3",
+    "at_K": 293.0,
+    "basis": "HANDBOOK",
+    "confidence": "MEDIUM",
+    "source": "crc",
+    "level": "A"
+   },
+   {
+    "material": "MAT-LIH",
+    "property": "thermal_expansion",
+    "status": "OK",
+    "value": 4.2e-05,
+    "low": 4.2e-05,
+    "high": 4.2e-05,
+    "unit": "1/K",
+    "at_K": 293.0,
+    "basis": "HANDBOOK",
+    "confidence": "LOW",
+    "source": "crc",
+    "level": "A"
+   },
+   {
+    "material": "MAT-LIH",
+    "property": "melting_point",
+    "status": "OK",
+    "value": 961.8,
+    "low": 961.8,
+    "high": 961.8,
+    "unit": "K",
+    "at_K": 293.0,
+    "basis": "HANDBOOK",
+    "confidence": "MEDIUM",
+    "source": "crc",
+    "level": "A"
+   },
+   {
+    "material": "MAT-NB1ZR",
+    "property": "max_service_temperature",
+    "status": "OK",
+    "value": null,
+    "low": 1300.0,
+    "high": 1400.0,
+    "unit": "K",
+    "at_K": null,
+    "basis": "ESTIMATE",
+    "confidence": "MEDIUM",
+    "source": "angelo_buden",
+    "level": "A"
+   },
+   {
+    "material": "MAT-NB1ZR",
+    "property": "yield_strength",
+    "status": "OPEN",
+    "value": null,
+    "low": null,
+    "high": null,
+    "unit": "Pa",
+    "at_K": null,
+    "basis": null,
+    "confidence": null,
+    "source": null,
+    "level": "A"
+   },
+   {
+    "material": "MAT-NB1ZR",
+    "property": "thermal_expansion",
+    "status": "OPEN",
+    "value": null,
+    "low": null,
+    "high": null,
+    "unit": "1/K",
+    "at_K": null,
+    "basis": null,
+    "confidence": null,
+    "source": null,
+    "level": "A"
+   },
+   {
+    "material": "MAT-TZM",
+    "property": "yield_strength",
+    "status": "OPEN",
+    "value": null,
+    "low": null,
+    "high": null,
+    "unit": "Pa",
+    "at_K": null,
+    "basis": null,
+    "confidence": null,
+    "source": null,
+    "level": "A"
+   },
+   {
+    "material": "MAT-TZM",
+    "property": "max_service_temperature",
+    "status": "OPEN",
+    "value": null,
+    "low": null,
+    "high": null,
+    "unit": "K",
+    "at_K": null,
+    "basis": null,
+    "confidence": null,
+    "source": null,
+    "level": "A"
+   },
+   {
+    "material": "MAT-MORE",
+    "property": "yield_strength",
+    "status": "OPEN",
+    "value": null,
+    "low": null,
+    "high": null,
+    "unit": "Pa",
+    "at_K": null,
+    "basis": null,
+    "confidence": null,
+    "source": null,
+    "level": "A"
+   },
+   {
+    "material": "MAT-MORE",
+    "property": "max_service_temperature",
+    "status": "OPEN",
+    "value": null,
+    "low": null,
+    "high": null,
+    "unit": "K",
+    "at_K": null,
+    "basis": null,
+    "confidence": null,
+    "source": null,
+    "level": "A"
+   },
+   {
+    "material": "MAT-W",
+    "property": "elastic_modulus",
+    "status": "OK",
+    "value": 411000000000.0,
+    "low": 411000000000.0,
+    "high": 411000000000.0,
+    "unit": "Pa",
+    "at_K": 293.0,
+    "basis": "HANDBOOK",
+    "confidence": "HIGH",
+    "source": "crc",
+    "level": "A"
+   },
+   {
+    "material": "MAT-W",
+    "property": "max_service_temperature",
+    "status": "OK",
+    "value": null,
+    "low": 1300.0,
+    "high": 1600.0,
+    "unit": "K",
+    "at_K": 293.0,
+    "basis": "ESTIMATE",
+    "confidence": "LOW",
+    "source": "hirai2016",
+    "level": "A"
+   },
+   {
+    "material": "MAT-W",
+    "property": "ductile_brittle_transition",
+    "status": "OK",
+    "value": null,
+    "low": 400.0,
+    "high": 700.0,
+    "unit": "K",
+    "at_K": 293.0,
+    "basis": "TYPICAL",
+    "confidence": "MEDIUM",
+    "source": "hirai2016",
+    "level": "A"
+   }
+  ],
+  "ring_convergence": [
+   {
+    "grid_deg": 7.5,
+    "elements": 80,
+    "ring_peak_M": 9585271.468295,
+    "tie_N": -11306431.610228,
+    "tie_M": 7135899.308501
+   },
+   {
+    "grid_deg": 3.75,
+    "elements": 128,
+    "ring_peak_M": 9607718.631772,
+    "tie_N": -11255900.343866,
+    "tie_M": 7183280.939413
+   },
+   {
+    "grid_deg": 1.875,
+    "elements": 224,
+    "ring_peak_M": 9609767.600562,
+    "tie_N": -11255858.549005,
+    "tie_M": 7183819.28386
+   }
+  ],
+  "case_allowable": {
+   "material": "MAT-SS-316LN",
+   "yield_low": 1000000000.0,
+   "allowable": 666666666.666667,
+   "source": "nims_316ln_4k",
+   "status": "OK",
+   "note": "0.2 % proof stress of ITER-grade plate at 4.2 K; held to 20 K as a screening value (austenitic proof stress rises on cooling, so the 4 K value bounds the 20 K one only approximately)"
+  },
+  "dipole": {
+   "moment_Am2": 8354795077.801449,
+   "adjacent_N": 15779306.096294,
+   "diagonal_N": 3944826.524074,
+   "adjacent_m": 33.941125,
+   "diagonal_m": 48.0
+  }
+ },
+ "runtime": {
+  "protocol": "docs/IMPLEMENTATION.md \"Runtime benchmark protocol\"; tools: headless Chromium, 1280x800, DPR 1, 30 frames, 1 run per view",
+  "warning": "SwiftShader software WebGL in a cloud container: frame times are not GPU performance; draw calls, triangles, geometries and bytes are renderer-independent.",
+  "views": {
+   "exterior_default": {
+    "ready_ms": 2035,
+    "frame_p50_ms": 2111.199999999255,
+    "frame_p95_ms": 8558.10000000149,
+    "draw_calls": 5241,
+    "triangles": 1417173,
+    "geometries": 3730,
+    "js_heap_mb": 56.8,
+    "transferred_bytes": 11399571,
+    "requests": 18,
+    "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+    "software_webgl": true
+   },
+   "aft_cluster": {
+    "ready_ms": 1830,
+    "frame_p50_ms": 2205.5,
+    "frame_p95_ms": 6462.699999999255,
+    "draw_calls": 5241,
+    "triangles": 1417173,
+    "geometries": 3730,
+    "js_heap_mb": 56.8,
+    "transferred_bytes": 11399571,
+    "requests": 18,
+    "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+    "software_webgl": true
+   },
+   "aft_engine_overlay": {
+    "ready_ms": 1747,
+    "frame_p50_ms": 2291.5999999996275,
+    "frame_p95_ms": 8879,
+    "draw_calls": 5769,
+    "triangles": 1467073,
+    "geometries": 3994,
+    "js_heap_mb": 56.8,
+    "transferred_bytes": 11847798,
+    "requests": 21,
+    "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+    "software_webgl": true
+   }
+  },
+  "overlay_merged": {
+   "change": "engineering overlay: one merged mesh per status instead of one mesh per part",
+   "before": {
+    "ready_ms": 1747,
+    "frame_p50_ms": 2291.5999999996275,
+    "frame_p95_ms": 8879,
+    "draw_calls": 5769,
+    "triangles": 1467073,
+    "geometries": 3994,
+    "js_heap_mb": 56.8,
+    "transferred_bytes": 11847798,
+    "requests": 21,
+    "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+    "software_webgl": true
+   },
+   "after": {
+    "ready_ms": 2415,
+    "frame_p50_ms": 2224.199999999255,
+    "frame_p95_ms": 6640.0999999996275,
+    "draw_calls": 5253,
+    "triangles": 1467073,
+    "geometries": 3736,
+    "js_heap_mb": 53.5,
+    "transferred_bytes": 11849152,
+    "requests": 21,
+    "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+    "software_webgl": true
+   }
+  },
+  "bytes": {
+   "glb": 9682932,
+   "inspection_download": 448681,
+   "inspection_download_1_1": 421372,
+   "inspect_budget": 600000,
+   "viewer_download": 11377130,
+   "viewer_budget": 12000000,
+   "engine_manifest": 196004,
+   "engine_geometry": 228228,
+   "glb_nodes": 5271
+  }
+ }
+}

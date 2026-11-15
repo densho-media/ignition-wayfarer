@@ -189,8 +189,9 @@ table. No existing physics model was changed for this system, and none may be ch
 
 Canon keeps authority: a material-specific spec value is compared with the catalogue, a difference becomes an engineering review item,
 and approved changes travel through the source process (Drive → spec → formulas). `material_physics.INTEGRATION` is the dependency table;
-`spec_crosscheck(s)` evaluates it on every run (`test_materials` names the known differences, so a new one fails). No Wayfarer
-calculation reads the catalogue directly yet. The table's `usage` keeps four kinds of interface apart:
+`spec_crosscheck(s)` evaluates it on every run (`test_materials` names the known differences, so a new one fails). The Vertex Engine 1.2
+structure screen (`vertex_structure.material`) is the first Wayfarer calculation that reads the catalogue directly. The table's `usage`
+keeps four kinds of interface apart:
 
 - DIRECT_LOOKUP: the calculation takes the catalogue value through `get_property`/`reference_value` (today only the ITER reference
   conduction case in `material_physics`).
@@ -213,6 +214,7 @@ calculation reads the catalogue directly yet. The table's `usage` keeps four kin
 | radiator_zones | standoff k 2.0 W/(m K) | MAT-YSZ | cross-check: consistent (room temperature) | needs k(T) of the chosen standoff material |
 | heat_rejection, forward_shield | warm-loop example emissivity, bumper seam CTE | none named | not linked | name the material |
 | material_physics | ITER reference conduction case | MAT-W | direct lookup | reference case only |
+| vertex_structure | member E, yield, density; winding-case proof stress; shield expansion | MAT-TI6AL4V, MAT-INCONEL-718, MAT-CFRP, MAT-SS-316LN, MAT-LIH | direct lookup | allowables away from 293 K (4.2 K for 316LN) OPEN; CFRP values are unidirectional datasheet values knocked down by `composite_knockdown` |
 
 `reference_value(material, property, T, bound)` is the read-only adapter a module uses when a value is linked (it raises on OPEN,
 out-of-range or speculative data and returns the quantity with its provenance); `compare_to_reference(value, ...)` is the comparison the

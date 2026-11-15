@@ -1,10 +1,13 @@
-// Vertex Engine 1.1 part inspection (owner brief 2026-11-14). The four engines are drawn from 22 merged render objects each, so the play
+// Vertex Engine part inspection (owner briefs 1.1 and 1.2, 2026-11-14). The four engines are drawn from 22 merged render objects each, so the play
 // package stays inside its budget; this module makes every one of the engine's logical parts inspectable without exporting more nodes.
 // It loads, only when someone opens the Engine drawer, build.engine_file (the part records, categories, materials and the four engine
 // placements, written by src/wayfarer/vertex_inspect.py) and its part geometry (one raw buffer: int16 positions in 1 mm steps in the
 // engine frame, uint16 indices). Each part's mesh is placed by the engine matrices as an invisible pick proxy and drawn as the highlight.
 // Honest limits: the proxies are the source part meshes, not the Draco-compressed render mesh, so a pick can sit about 1.5 cm off what is
 // drawn; a part whose render object is hidden takes no pick; the highlight shows the part's own surface, never more than one part.
+// 1.2: every part record carries its engineering record (sizing status, note, utilisation per current case) and the manifest an engineering
+// block, both written by src/wayfarer/vertex_structure.py; the optional engineering overlay colours one engine's parts by sizing status. It
+// marks status only: no field, stress or load is drawn, and the legend names every colour in text.
 import * as THREE from 'three';
 
 const PUSH = 0.03;              // the highlight surface sits 3 cm toward the camera (above the Draco render mesh, no z-fighting)
@@ -19,9 +22,10 @@ export function createInspector(ctx) {
   const renderOf = new Map();   // `${engine}|${render object}` -> viewer record
   const parts = new Map();      // part name -> record
   const cats = new Map();       // category id -> category
-  const sel = { engine: 'N1', part: null, cat: '', query: '' };
+  const sel = { engine: 'N1', part: null, cat: '', query: '', overlay: false, status: '' };
   const alignment = [];         // per render object: metres between the GLB node and the manifest placement (checked by web_check)
-  let overlay = null, back = null;
+  let overlay = null, back = null, engOverlay = null;
+  const statusMaterials = new Map();   // status id -> overlay material (engineering overlay)
   const overlayMaterial = new THREE.MeshBasicMaterial({ color: SELECTED, transparent: true, opacity: 0.5, depthWrite: false,
                                                         side: THREE.DoubleSide, toneMapped: false });
   overlayMaterial.onBeforeCompile = sh => {
@@ -101,6 +105,12 @@ export function createInspector(ctx) {
         alignment.push({ engine: best.name, object: obj, metres: best.d });
       }
       data = manifest;
+      for (const s of data.engineering.statuses) {
+        const m = new THREE.MeshBasicMaterial({ color: new THREE.Color(...s.color), transparent: true, opacity: 0.55, depthWrite: false,
+                                                side: THREE.DoubleSide, toneMapped: false });
+        m.onBeforeCompile = overlayMaterial.onBeforeCompile;
+        statusMaterials.set(s.id, m);
+      }
       buildPanel();
       return true;
     })();
@@ -139,12 +149,65 @@ export function createInspector(ctx) {
     overlay.updateMatrixWorld(true);
   }
 
+  // Engineering overlay: the selected engine's parts in their sizing-status colours (one engine at a time; picks pass through it).
+  const statusGeos = new Map();
+  function statusGeometry(status) {
+    if (statusGeos.has(status)) return statusGeos.get(status);
+    const members = data.parts.filter(p => p.eng[0] === status).map(p => p.name);
+    let nv = 0, ni = 0;
+    for (const n of members) { nv += geos.get(n).attributes.position.count; ni += geos.get(n).index.count; }
+    let g = null;
+    if (members.length) {
+      const pos = new Float32Array(nv * 3), nor = new Float32Array(nv * 3), idx = new Uint32Array(ni);
+      let v = 0, i = 0;
+      for (const n of members) {
+        const s = geos.get(n), sp = s.attributes.position, si = s.index;
+        pos.set(sp.array, v * 3); nor.set(s.attributes.normal.array, v * 3);
+        for (let k = 0; k < si.count; k++) idx[i + k] = si.array[k] + v;
+        v += sp.count; i += si.count;
+      }
+      g = new THREE.BufferGeometry();
+      g.setAttribute('position', new THREE.BufferAttribute(pos, 3)); g.setAttribute('normal', new THREE.BufferAttribute(nor, 3));
+      g.setIndex(new THREE.BufferAttribute(idx, 1)); g.computeBoundingSphere();
+      g.userData.parts = members;
+    }
+    statusGeos.set(status, g);
+    return g;
+  }
+  function setEngineering() {
+    if (engOverlay) { engOverlay.removeFromParent(); engOverlay = null; }
+    if (!sel.overlay) return;
+    engOverlay = new THREE.Group();
+    engOverlay.name = 'inspect_engineering';
+    // one merged mesh per status (1.2 runtime: about six draw calls instead of one per part), built once and shared by the engines
+    for (const st of data.engineering.statuses) {
+      if (sel.status && st.id !== sel.status) continue;
+      const g = statusGeometry(st.id);
+      if (!g) continue;
+      const m = new THREE.Mesh(g, statusMaterials.get(st.id));
+      m.renderOrder = 3; m.raycast = () => {};
+      m.userData = { status: st.id, parts: g.userData.parts };
+      engOverlay.add(m);
+    }
+    roots.get(sel.engine).add(engOverlay);
+    engOverlay.updateMatrixWorld(true);
+  }
+  function setEngineeringMode(on, status = sel.status) {
+    if (!data) return false;
+    sel.overlay = !!on; sel.status = data.engineering.statuses.some(s => s.id === status) ? status : '';
+    setEngineering(); render(); changed();
+    return true;
+  }
+
   function selectPart(engine, name, { frame = false } = {}) {
     if (!data || (name && !parts.has(name)) || !matrices.has(engine)) return false;
+    const moved = engine !== sel.engine;
     sel.engine = engine; sel.part = name || null;
     if (name && sel.cat && parts.get(name).category !== sel.cat) sel.cat = '';
+    if (name && sel.status && parts.get(name).eng[0] !== sel.status) sel.status = '';
     clearPick();
     setOverlay();
+    if (moved || sel.overlay) setEngineering();
     render();
     if (frame && name) framePart();
     changed();
@@ -189,7 +252,7 @@ export function createInspector(ctx) {
   }
 
   // ---- the drawer ------------------------------------------------------------------------------------------------------------------
-  let engineRow, catRow, search, list, details, countLine;
+  let engineRow, catRow, search, list, details, countLine, engRow, legend;
   function buildPanel() {
     panel.querySelector('.inspect-body').innerHTML = '';
     engineRow = el('span', { className: 'chips', role: 'group', 'aria-label': 'Engine' });
@@ -219,8 +282,20 @@ export function createInspector(ctx) {
     const actions = el('div', { className: 'chips actions' },
       el('button', { textContent: 'Frame engine', data: { act: 'frame-engine' }, on: () => frameEngine() }),
       el('button', { textContent: 'Back', title: 'The camera before framing, no isolation', data: { act: 'back' }, on: goBack }));
+    const E = data.engineering, count = id => data.parts.filter(p => p.eng[0] === id).length;
+    engRow = el('div', { className: 'chips actions' },
+      el('button', { textContent: 'Engineering overlay', title: E.disclaimer, data: { act: 'eng-overlay' },
+                     on: () => setEngineeringMode(!sel.overlay) }));
+    legend = el('div', { className: 'chips cats status-legend', role: 'group', 'aria-label': 'Sizing status (engineering overlay)' });
+    for (const s of E.statuses) {
+      legend.append(el('button', { title: `${s.id}: ${count(s.id)} parts. Show only these.`, data: { status: s.id },
+                                   on: () => setEngineeringMode(true, sel.status === s.id ? '' : s.id) },
+                       el('i', { className: 'sw', 'aria-hidden': 'true', style: `background:${rgb(s.color)}` }), `${s.label} ${count(s.id)}`));
+    }
     panel.querySelector('.inspect-body').append(
       el('div', { className: 'row' }, el('span', { textContent: 'Engine' }), engineRow), actions, details,
+      el('div', { className: 'row' }, el('span', { textContent: 'Structure' })), engRow, legend,
+      el('p', { className: 'note eng-note', textContent: `${E.disclaimer} Design case ${E.design_case}; utilisation 1 is the allowable.` }),
       el('div', { className: 'row' }, el('span', { textContent: 'Group' })), catRow, search, countLine, list,
       el('p', { className: 'note', textContent: `${data.picking} Swatches are functional review colours, never material colours; `
         + 'every group is named in text. Masses are ENGINEERING_PROTOTYPE estimates.' }));
@@ -229,7 +304,7 @@ export function createInspector(ctx) {
 
   function renderList() {
     const q = sel.query;
-    const shown = data.parts.filter(p => (!sel.cat || p.category === sel.cat)
+    const shown = data.parts.filter(p => (!sel.cat || p.category === sel.cat) && (!sel.overlay || !sel.status || p.eng[0] === sel.status)
       && (!q || `${p.label} ${p.name} ${data.materials[p.material]?.name || p.material} ${cats.get(p.category).title}`.toLowerCase().includes(q)));
     list.innerHTML = '';
     for (const p of shown) {
@@ -260,6 +335,13 @@ export function createInspector(ctx) {
     }
     const row = (k, ...v) => el('div', { className: 'kv' }, el('span', { className: 'k', textContent: k }), el('span', {}, ...v));
     const join = items => items.flatMap((x, i) => i ? [', ', x] : [x]);
+    const E = data.engineering, [status, noteKey, uN, uC, grp] = p.eng, st = E.statuses.find(s => s.id === status), g = grp && E.groups[grp];
+    const fmt = u => u === null || u === undefined ? '—' : u.toFixed(2);
+    const eng = [
+      row('Sizing', el('i', { className: 'sw', 'aria-hidden': 'true', style: `background:${rgb(st.color)}` }), `${st.label} `, el('code', { textContent: status })),
+      g ? row('Member', `${g.title}: ${g.material}${g.radius_m ? `, outer radius ${g.radius_m} m` : ''}, governed by ${g.governs}`) : null,
+      uN !== null ? row('Utilisation', `${fmt(uN)} ${E.design_case}${uC !== null ? ` · ${fmt(uC)} CONSERVATIVE` : ''} (1 = allowable)`) : null,
+      row('Engineering', E.notes[noteKey], ' ', el('a', { href: '../engineering/vertex/#structure', textContent: 'Structure' }))].filter(Boolean);
     details.append(
       el('h3', { textContent: p.label }),
       el('p', { className: 'meta' }, el('code', { textContent: p.id }), ` · engine ${sel.engine}`,
@@ -269,7 +351,7 @@ export function createInspector(ctx) {
       row('Function', `${c.purpose} ${p.note}`),
       row('Material', el('i', { className: 'sw', 'aria-hidden': 'true', style: `background:${rgb(mat?.color || [0.5, 0.5, 0.5])}` }),
           mat?.name || p.material),
-      row('Evidence', el('b', { textContent: p.evidence })),
+      row('Evidence', el('b', { textContent: p.evidence })), ...eng,
       row('Mass', `≈ ${p.mass_kg >= 1000 ? (p.mass_kg / 1000).toFixed(1) + ' t' : Math.round(p.mass_kg) + ' kg'} (estimate: drawn volume × assumed density)`),
       row('Interfaces', iface.join(', ') || 'none'),
       row('Research', ...(research.length ? join(research) : ['none declared'])),
@@ -285,6 +367,8 @@ export function createInspector(ctx) {
     if (!data) return;
     for (const b of engineRow.querySelectorAll('button')) b.setAttribute('aria-pressed', String(b.dataset.inspectEngine === sel.engine));
     for (const b of catRow.querySelectorAll('button')) b.setAttribute('aria-pressed', String(b.dataset.cat === sel.cat));
+    engRow.querySelector('button').setAttribute('aria-pressed', String(sel.overlay));
+    for (const b of legend.querySelectorAll('button')) b.setAttribute('aria-pressed', String(sel.overlay && (!sel.status || b.dataset.status === sel.status)));
     renderDetails();
     renderList();
   }
@@ -295,12 +379,14 @@ export function createInspector(ctx) {
     const out = [`eng=${sel.engine}`];
     if (sel.cat) out.push(`cat=${sel.cat}`);
     if (sel.part) out.push(`part=${sel.engine}.${sel.part}`);
+    if (sel.overlay) out.push(`ov=eng${sel.status ? '.' + sel.status : ''}`);
     return out.join('&');
   }
   function asked(h) {
     const p = new URLSearchParams(h.replace(/^#/, ''));
     const part = /^(N\d)\.(\w+)$/.exec(p.get('part') || '');
-    return { engine: part?.[1] || p.get('eng'), part: part?.[2] || null, cat: p.get('cat') || '' };
+    const ov = /^eng(?:\.(\w+))?$/.exec(p.get('ov') || '');
+    return { engine: part?.[1] || p.get('eng'), part: part?.[2] || null, cat: p.get('cat') || '', overlay: !!ov, status: ov?.[1] || '' };
   }
   async function openFrom(h, build) {
     const a = asked(h);
@@ -309,11 +395,13 @@ export function createInspector(ctx) {
     if (a.cat && cats.has(a.cat)) sel.cat = a.cat;
     ctx.openDrawer();
     selectPart(matrices.has(a.engine) ? a.engine : 'N1', parts.has(a.part) ? a.part : null);
+    if (a.overlay) setEngineeringMode(true, a.status);
     return true;
   }
 
   return {
-    load, pick, selectPart, frameEngine, framePart, goBack, isolate, hash, openFrom, render,
+    load, pick, selectPart, frameEngine, framePart, goBack, isolate, hash, openFrom, render, setEngineeringMode,
+    engineering: () => engOverlay,
     active: () => !!data && !panel.hidden,
     hasPart: () => !!sel.part,
     state: () => ({ ...sel }),

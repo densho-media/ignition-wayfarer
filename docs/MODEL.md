@@ -2100,9 +2100,9 @@ Three assets, one source each (`src/wayfarer/vertex_engine.py`, `vertex_cluster.
 
 - **A, Vertex Research Demonstrator** `WF-VTX-RD` V4-gate2 (`components/WF_VERTEX_RESEARCH.blend`). The Gate 2 result is kept:
   BLOCKED (`vertex_research.gate2_reason`). It is a reference asset and is never linked into the ship.
-- **B, Compact Vertex Engine** `WF-VTX-CE` 1.1.0 (`components/WF_VERTEX_ENGINE.blend`, build target `VERTEX_ENGINE`). The front is at
+- **B, Compact Vertex Engine** `WF-VTX-CE` 1.2.0 (`components/WF_VERTEX_ENGINE.blend`, build target `VERTEX_ENGINE`). The front is at
   local X 0, thrust +X, exit at X −31.2. From the front, it has a target cartridge and launcher, a collar, a 2.2 m X-ray shield,
-  closure coils C1 and C2, the burn point 6.0 m aft of the shield, and four nozzle loops L1–L4. Envelope 31.9 m × r 11.40 m (limit 11.5).
+  closure coils C1 and C2, the burn point 6.0 m aft of the shield, and four nozzle loops L1–L4. Envelope 31.9 m × r 11.44 m (limit 11.5).
   Version 1.1 (owner brief 2026-11-14, `vertex_engine.refinements`) closes the mechanical gaps of the 1.0 audit without changing the
   envelope or the triangle budget: eight shield tie rods carry the closure-coil reaction ring round the shield cone to the collar; every
   coil has a lead turret where its HTS leads (az 270° for C1/C2, 90° for L1–L4) and its cryogen branch enter; each loop's armour shoes
@@ -2113,7 +2113,7 @@ Three assets, one source each (`src/wayfarer/vertex_engine.py`, `vertex_cluster.
   materials). They are built as 22 objects: the closure coils and cryostats stay one object each, and every other part joins
   one object per category and material, `VTX_<CATEGORY>_<material>` (`vertex_engine.families`; `wf_units`, `wf_parts` list the
   parts). The cluster frame and distribution are built the same way as 9 `CL_<CATEGORY>_<material>` objects. Each exported node
-  costs about 0.43 kB in the play package, so this keeps the four placed engines inside the play download budget. The mass is about 1,090 t (drawn volume × density, ENGINEERING_PROTOTYPE). Interfaces are `IF_VTX_*`; cameras are
+  costs about 0.43 kB in the play package, so this keeps the four placed engines inside the play download budget. The mass is about 1,244 t (drawn volume × density, ENGINEERING_PROTOTYPE; 1,090 t before the 1.2 sizing). Interfaces are `IF_VTX_*`; cameras are
   `CAM_VTX_MODULE_PERSPECTIVE`, `_CUTAWAY` and `CAM_VTX_ENGINE_REAR`. The scalings from the research engine (C-01..C-10,
   `vertex_engine.calculations`) hold the research armour fluence: 0.375 t TNT per pulse and 0.31 TW at the research rate
   (CALCULATED). The quarter-power design point needs 5.7 kHz and 29× the research areal heat load, which is SPECULATIVE (VTX-S1..S5,
@@ -2126,8 +2126,9 @@ Three assets, one source each (`src/wayfarer/vertex_engine.py`, `vertex_cluster.
   `IF_REACTOR_MOUNT`, six trunk lines, and six service lines per engine. Gap 12.7 m, central opening 13.7 m, outer radius 36.5 m
   (0.81 of the shield radius), overall hardware length 323.2 m (ship max 330). Screens (`vertex_cluster.check`, `radiation`):
   135 layouts, 57 pass. The radiator line of sight to a burn point is 1.7 %, and neighbour exhaust onto the loops is 0.48 % with
-  the baffle. The pulse force between neighbours is about 68 MN in a dipole approximation (CALCULATED order of magnitude, OPEN as a
-  load). Six engines stay parametric (`vertex_cluster.arrangement(6)`, `six_engine()`). This is a screen only: at the 24 m pitch the gap
+  the baffle. The field force between the engines is steady while the coils are energised and pulls each engine toward the axis
+  (side-by-side neighbours of opposite polarity attract): 13.9 MN and 160 MN·m about its collar (exact coil sets, NOMINAL currents;
+  Structure below). The 1.1 dipole estimate of 68 MN "repulsion, a pulse transient" is superseded. Six engines stay parametric (`vertex_cluster.arrangement(6)`, `six_engine()`). This is a screen only: at the 24 m pitch the gap
   is 2.3 m, so the layout fails, and it needs a 30 m pitch, which gives an outer radius of 42.5 m inside the 45 m shield radius.
 - **Effects.** One shared mesh per effect (burn core, plasma shell, ignition flash, plume, driver beams, hot loops and shield face,
   ready lamps) is placed four times as `N<j>_FX_*`. The drivers read the dm control props on `DRIVE_MANIFOLD_CTRL`, and each engine
@@ -2148,7 +2149,38 @@ Three assets, one source each (`src/wayfarer/vertex_engine.py`, `vertex_cluster.
 - **Single source.** `tests/verify_vertex_propagation.py` changes C1 r 2.5 → 2.9 m in a copy, lets `tools/checks.py` select the
   `VERTEX_ENGINE` target, and verifies the new radius in all four instances, in the exported GLB, in the inspection manifest and
   geometry, in the Engine anatomy section, and that each engine's part link lands on that engine's GLB node
-  (`references/evidence/vertex_cluster.json`).
+  (`references/evidence/vertex_cluster.json`). Since 1.2 it also follows the change through the structural calculation (coil forces,
+  C1 strut loads, the manifest's engineering records and the Structure section).
+- **Structure (Engine 1.2, `vertex_structure.py`, `fe_frame.py`).** What the engine has to carry if the drive worked, sized against
+  PMDS data (`material_physics.get_property`, never typed values). It is a screening calculation, not a certified analysis, and never
+  propulsion evidence: the drive stays SPECULATIVE and Gate 2 BLOCKED.
+  - *Loads.* Exact circular-loop fields of C1, C2, L1–L4 (elliptic integrals; no third closure coil) under three current sets in
+    `[vertex_engine.structure]`: NOMINAL (the C-07 field at the burn point, a null at the shield face), CONSERVATIVE (each loop alone gives
+    C-07 at its centre, the cluster study's rule) and EXTREME (conservative with flux compression). The coil-to-coil forces are steady and
+    internal: closure coils push L1 aft with 272 MN, L4 is pulled forward with 187 MN, C2 is pushed forward with 93 MN, against a
+    0.73 MN thrust. Load cases LC-01..06 (`load_cases`) name each load, its size, its path and its evidence.
+  - *Members* (Ti-6Al-4V tubes at the mass model's solid fraction; yield/1.5, buckling factor 3): longerons r 0.31 m, inclined loop seats
+    r 0.28 m (the loop's hoop sits `seat_offset_m` forward of it: 2, 2, 1, 2 m, so the seat is a strut; a radial seat would have taken
+    the axial force in bending at up to 75× its allowable), hoops 0.35 m, closure struts 0.19 m (C1 set turned 15° to free 270° for its
+    feed), reaction ring 0.39 m and tie rods 0.36 m (frame FE, converged on a 3.75° grid; the ring now sits clear of the burn face it cut
+    in 1.1). The cage lines (feeders, leads, cryogen, exchange rails) ride 6° round from their longeron inside the hoops, and the lithium
+    manifold and cryogen header moved forward of the collar (feeders cross it through penetrations). The cage clearance follows
+    (0.63 m), and every structural member clears every other line (`clearances`). NOMINAL utilisation 0.86–0.98; CONSERVATIVE about
+    3.4–3.9 and EXTREME about 13–15: no member of this envelope survives those cases. Windings: hoop stress in the 50 % steel case share
+    578 MPa on L4 against 667 MPa (2/3 of 316LN's 4.2 K proof stress), CONDITIONALLY_SIZED for NOMINAL only.
+  - *Cluster frame:* one FE model of every frame member with the hub and engines rigid; members r 0.68 m (spokes, chords; ring ties
+    ×0.8) and thrust struts 0.60 m (engine struts ×1.2; their feet land on the node's inboard face, `strut_foot`, so they stay below the
+    aft RCS pods on the node fittings), sized for thrust, nominal field forces, one engine's coils off and one engine
+    firing alone. Engine mount modes 1.8–8.2 Hz, far below the 5.7 kHz pulse; the frame is about 1,600 times stiffer than the field's
+    pull grows. One engine firing alone turns the ship with 17.4 MN·m; diagonal pairs cancel it.
+  - *Blocked or open:* the lithium circuit (no catalogue alloy rated at 1,800 K; a drawn line carries 0.002 % of the fusion power), the
+    bore shutter as a tungsten chopper (6.2 GPa rim stress; W strength OPEN), the armour heat flux (VTX-S3), pulse fatigue (2.05e7 cycles
+    per firing hour), the cold-mass supports behind the seats and their heat leak, the collar's local design. Every part carries a
+    status (ANALYTICALLY_SIZED, CONDITIONALLY_SIZED, FEA_SCREENED, UNSIZED, BLOCKED, SPECULATIVE; `part_engineering`).
+  - *Mass:* about 1,244 t per engine (1,090 t before) and 1,353 t of cluster frame (633 t), +1.3 kt in all; ENGINEERING_PROTOTYPE, not
+    read by the ship's mass budget or the mission numbers, which are unchanged.
+  - Explore Ship shows each part's status, utilisation and note in the Engine drawer, and an optional engineering overlay colours one
+    engine's parts by status (legend in text; `#ov=eng` or `#ov=eng.BLOCKED`); engineering/vertex/ section 5 shows the tables.
 
 ## Limits
 

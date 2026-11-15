@@ -1,4 +1,4 @@
-"""Vertex Engine 1.1 part inspection (owner brief 2026-11-14). Pure, standard library only.
+"""Vertex Engine part inspection (owner briefs 1.1 and 1.2, 2026-11-14). Pure, standard library only.
 
 The built engine draws its logical parts merged into a few render objects (vertex_engine.families), so the play package stays inside
 its download budget. This module keeps every logical part inspectable without exporting more nodes. It derives three things from the
@@ -9,6 +9,8 @@ same engine definition the generator draws:
   geometry(s)    the parts' own meshes in one small raw buffer (engine frame, runtime axes, 1 mm int16 steps): the viewer loads it
                  only when someone inspects an engine, picks against it and draws the highlight from it. The play package never reads it.
   manifest(s)    the records, the categories with their anatomy text and colours, and the four engine instances; returns the buffer too.
+                 1.2: every record carries its engineering record (vertex_structure.inspection: sizing status, note, utilisation per case) and
+                 the manifest an `engineering` block (statuses, member groups, load cases, mass), so the viewer never types a number.
 
 Picking runs against the source part geometry, not the Draco-compressed render mesh, so a pick can sit about 1.5 cm off what is
 drawn. A pick never claims more than the part whose surface the ray meets first.
@@ -22,6 +24,7 @@ import struct
 import functional_colors
 import vertex_cluster as vc
 import vertex_engine as ve
+import vertex_structure as vs
 
 CONTRACT = 'WF_VTX_INSPECT'
 VERSION = 1
@@ -138,14 +141,15 @@ def manifest(s):
     """(manifest, geometry bytes): the manifest's part records carry their geo ranges into the geometry buffer."""
     e = ve.config(s)
     data, ranges, nverts = geometry(s)
-    parts_ = [dict(r, geo=ranges[r['name']]) for r in records(s)]
+    eng, recs = vs.inspection(s)
+    parts_ = [dict(r, geo=ranges[r['name']], eng=x) for r, x in zip(records(s), recs)]
     return dict(contract=CONTRACT, version=VERSION, asset=e['id'], asset_version=e['version'], name=e['name'], status=e['status'],
                 axes='runtime: metres, bow +X, dorsal +Y (Blender (x, y, z) -> (x, z, -y)); part geometry in the engine frame',
                 picking='Rays meet the source part meshes (the geometry buffer), not the Draco render mesh: a pick can be about 1.5 cm off the drawn surface.',
                 interfaces={i['name']: dict(at=[round(v, 3) for v in runtime(i['at'])], kind=i['kind'], note=i['note']) for i in ve.interfaces(s)},
                 mass_basis='ENGINEERING_PROTOTYPE estimate per part: drawn volume x assumed density x solid fraction (vertex_engine.materials)',
                 materials={k: dict(name=v, color=[round(c, 3) for c in ve.MATERIALS[k][0]]) for k, v in e['material_names'].items()},
-                engines=engines(s), categories=categories(s), parts=parts_, speculative=e['speculative']['items'],
+                engines=engines(s), categories=categories(s), parts=parts_, speculative=e['speculative']['items'], engineering=eng,
                 geometry=dict(quantum_m=QUANTUM, vertices=nverts, layout='int16 positions (x, y, z) for every vertex, then uint16 indices; '
                               'part.geo = [first vertex, vertices, first index, indices]')), data
 

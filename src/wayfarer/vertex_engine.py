@@ -82,8 +82,30 @@ def cage_points(s, scale=1.0):
     """(x, r) path of one nozzle-cage longeron: collar, shield rim, then outside each loop's cryostat."""
     g = config(s)['geometry']; st = stations(s, scale); c = g['cage_clearance_m']
     pts = [(st['collar_aft'], g['collar_outer_radius_m']*scale-0.3)]
-    pts += [(l['x'], l['r']+l['cryostat_minor_m']*scale+c) for l in st['loops']]
+    pts += [(hoop_x(l, scale), l['r']+l['cryostat_minor_m']*scale+c) for l in st['loops']]
     return pts
+
+
+def hoop_x(l, scale=1.0):
+    """Station of a loop's cage hoop: the loop station moved by its seat offset (1.2: inclined seats carry the loop's axial force as struts)."""
+    return l['x']+l.get('seat_offset_m', 0.0)*scale
+
+
+LINE_AZ_DEG = 6.0                    # cage lines ride this far round from their longeron, clear of its inclined seats
+LINE_GAP_M = 0.19                    # a cage line's centre inside the hoop surface: the largest line (0.11 m lithium feeder) plus 0.08 m (kinks)
+
+
+def service_offsets(s, scale=1.0):
+    """Radial offsets (inward, from the cage centreline) of the lines that ride the cage: feeders, leads, cryogen and the exchange rails all
+    pass inside the hoops at LINE_GAP_M from the hoop surface (1.2). The hoops sit forward of their loops, so the lines clear the cryostats."""
+    d = (config(s)['geometry']['cage_hoop_minor_m']+LINE_GAP_M)*scale
+    return dict(feed=d, cryo=d, rail=-d)
+
+
+def ring_station(s, scale=1.0):
+    """(x, R) of the coil reaction ring: clear of the burn face (to sa - 0.12) by its own section, inside the shield aft rim."""
+    g = config(s)['geometry']; sa = stations(s, scale)['shield_aft']
+    return sa-0.14*scale-g['reaction_ring_minor_m']*scale, (g['shield_aft_radius_m']-0.45)*scale
 
 
 def parts(s, scale=1.0):
@@ -107,22 +129,22 @@ def parts(s, scale=1.0):
                         note='Nozzle cage longeron: loop thrust and hoop-support loads to the collar',
                         points=[pol(x, r, az) for x, r in cage_points(s, scale)], radius=R(g['cage_longeron_radius_m'])))
     for i, l in enumerate(st['loops']):
-        rr = l['r']+l['cryostat_minor_m']*k+g['cage_clearance_m']
+        rr = l['r']+l['cryostat_minor_m']*k+g['cage_clearance_m']*k
         out.append(part(f'VTX_Cage_Hoop_{l["name"]}', 'STRUCTURE', 'torus', 'structure', note=f'Cage hoop at {l["name"]}: carries the loop seats',
-                        x=l['x'], R=rr, a=R(0.12), nu=48, nv=6))
+                        x=hoop_x(l, scale), R=rr, a=R(g['cage_hoop_minor_m']), nu=48, nv=6))
         for j in range(g['cage_longerons']):
             az = 22.5+j*360/g['cage_longerons']
             out.append(part(f'VTX_Loop_Seat_{l["name"]}_{j+1}', 'STRUCTURE', 'tube', 'structure', note=f'{l["name"]} cryostat seat (cold-mass support behind)',
-                            points=[pol(l['x'], l['r']+l['cryostat_minor_m']*k, az), pol(l['x'], rr, az)], radius=R(0.10), n=6))
-    ring_r = R(g['shield_aft_radius_m'])-R(0.45)
+                            points=[pol(l['x'], l['r']+l['cryostat_minor_m']*k, az), pol(hoop_x(l, scale), rr, az)], radius=R(g['loop_seat_radius_m']), n=6))
+    ring_x, ring_r = ring_station(s, scale)
     out.append(part('VTX_Coil_Reaction_Ring', 'STRUCTURE', 'torus', 'structure', note='Reaction ring on the shield aft face: C1/C2 axial force into the collar (research ISS-003)',
-                    x=st['shield_aft']-R(0.15), R=ring_r, a=R(0.15), nu=48, nv=6))
+                    x=ring_x, R=ring_r, a=R(g['reaction_ring_minor_m']), nu=48, nv=6))
     for c in st['coils']:
         for j in range(g['coil_struts_per_coil']):
-            az = 30+j*360/g['coil_struts_per_coil']+(0 if c['name'] == 'C1' else 30)
+            az = j*360/g['coil_struts_per_coil']+(45 if c['name'] == 'C1' else 60)     # 1.2: C1 set turned 15 deg so 270 deg stays free for the C1/C2 feed and leads
             out.append(part(f'VTX_{c["name"]}_Strut_{j+1}', 'STRUCTURE', 'tube', 'structure',
-                            note=f'{c["name"]} -> shield reaction ring compression strut (inter-coil attraction); unsized',
-                            points=[pol(c['x'], c['r'], az), pol(st['shield_aft']-R(0.15), ring_r, az)], radius=R(g['coil_strut_radius_m'])))
+                            note=f'{c["name"]} -> shield reaction ring compression strut (the closure coil is pushed forward by the loops)',
+                            points=[pol(c['x'], c['r'], az), pol(ring_x, ring_r, az)], radius=R(g['coil_strut_radius_m'])))
     # --- shielding: conical shadow shield, burn face, armour shoes ---
     out.append(part('VTX_Shadow_Shield', 'SHIELDING', 'revolve', 'shield', note='Conical LiH shadow shield; everything forward sits in its shadow cone',
                     profile=[(st['shield_fwd'], 0.0), (st['shield_fwd'], R(g['shield_forward_radius_m'])), (st['shield_aft'], R(g['shield_aft_radius_m'])), (st['shield_aft'], 0.0)],
@@ -206,37 +228,41 @@ def parts(s, scale=1.0):
                         points=[pol(st['nose']+R(0.3), cr, az), pol(st['nose']+R(0.3), cr+R(0.6), az)], radius=R(0.12)))
     for j in (3, 7):
         az = 22.5+j*360/g['cage_longerons']
-        pts = [(x, r+R(0.38)) for x, r in cage_points(s, scale)]
+        pts = [(x, r+service_offsets(s, scale)['rail']) for x, r in cage_points(s, scale)]
         out.append(part(f'VTX_Exchange_Rail_{j+1}', 'SERVICE', 'tube', 'service', note='Segment exchange rail on the cage (crawler path between burns)',
-                        points=[pol(x, r, az+3.0) for x, r in pts], radius=R(0.07)))
+                        points=[pol(x, r, az+LINE_AZ_DEG) for x, r in pts], radius=R(0.07)))
     # --- hot thermal: lithium manifold and armour feeders ---
-    hx = st['shield_fwd']-R(0.8); hr = R(g['collar_outer_radius_m'])+R(0.15)
+    # 1.2: the manifold and the cryogen header sit forward of the collar (the sized longerons and tie rods fill the space aft of it); their
+    # feeders cross the collar through penetrations
+    hx = st['collar_fwd']+R(0.3); hr = cr+R(1.2)
     out.append(part('VTX_Lithium_Manifold', 'HOT_THERMAL', 'torus', 'hot', note='Lithium loop ring manifold (armour, shield face and coil noses)',
                     x=hx, R=hr, a=R(0.20), nu=48, nv=8))
     for j, tag in ((0, 'Supply'), (4, 'Return')):
         az = 22.5+j*360/g['cage_longerons']
-        pts = [(x, r-R(0.42)) for x, r in cage_points(s, scale)]
+        pts = [(x, r-service_offsets(s, scale)['feed']) for x, r in cage_points(s, scale)]
         out.append(part(f'VTX_Lithium_{tag}', 'HOT_THERMAL', 'tube', 'hot', note=f'Lithium {tag.lower()} feeder along the cage to every armour ring',
-                        points=[pol(hx, hr, az)]+[pol(x, r, az) for x, r in pts], radius=R(0.11)))
+                        points=[pol(hx, hr, az+LINE_AZ_DEG)]+[pol(x, r, az+LINE_AZ_DEG) for x, r in pts], radius=R(0.11)))
     for tag, dz in (('Supply', -0.5), ('Return', 0.5)):
         out.append(part(f'VTX_Lithium_Panel_{tag}', 'HOT_THERMAL', 'tube', 'hot', note=f'Lithium {tag.lower()} between the manifold and the service panel',
-                        points=[(hx, -hr, R(dz)), (st['collar_aft']+R(0.1), -hr, R(dz)), (st['collar_aft']+R(0.1), -R(g['collar_outer_radius_m'])-R(0.3), R(dz))], radius=R(0.12)))
+                        points=[(hx, -hr, R(dz)), (hx, -R(g['collar_outer_radius_m'])-R(0.25), R(dz)), (st['collar_fwd']-R(0.1), -R(g['collar_outer_radius_m'])-R(0.25), R(dz))], radius=R(0.12)))
     # --- cryogenic: header and coil feeds ---
-    cx = st['collar_aft']-R(0.35); crr = R(g['collar_outer_radius_m'])+R(0.55)
+    cx = st['collar_fwd']+R(0.6); crr = cr+R(1.8)
+    ring_x, ring_r = ring_station(s, scale); ra = R(g['reaction_ring_minor_m'])
+    via = pol(ring_x-ra-R(0.2), ring_r+ra+R(0.15), 270)            # round the reaction ring's aft side
     out.append(part('VTX_Cryo_Header', 'CRYOGENIC', 'torus', 'cryo', note='Coil cryogen header (separate cold loop)', x=cx, R=crr, a=R(0.10), nu=48, nv=6))
     for j in (2, 6):
         az = 22.5+j*360/g['cage_longerons']
-        pts = [(x, r-R(0.32)) for x, r in cage_points(s, scale)]
+        pts = [(x, r-service_offsets(s, scale)['cryo']) for x, r in cage_points(s, scale)]
         out.append(part(f'VTX_Cryo_Feed_{j+1}', 'CRYOGENIC', 'tube', 'cryo', note='Cryogen feed to the loop cryostats',
-                        points=[pol(cx, crr, az)]+[pol(x, r, az) for x, r in pts], radius=R(0.07)))
+                        points=[pol(cx, crr, az-LINE_AZ_DEG)]+[pol(x, r, az-LINE_AZ_DEG) for x, r in pts], radius=R(0.07)))
     for c in st['coils']:
         out.append(part(f'VTX_Cryo_Feed_{c["name"]}', 'CRYOGENIC', 'tube', 'cryo', note=f'Cryogen feed to {c["name"]} along its strut',
-                        points=[pol(cx, crr, 270), pol(st['shield_aft']-R(0.3), R(g['shield_aft_radius_m'])+R(0.15), 270), pol(c['x'], c['r']+c['cryostat_minor_m']*k, 270)], radius=R(0.06)))
+                        points=[pol(cx, crr, 270), pol(st['shield_aft']-R(0.3), R(g['shield_aft_radius_m'])+R(0.15), 270), via, pol(c['x'], c['r']+c['cryostat_minor_m']*k, 270)], radius=R(0.06)))
     # --- electrical: coil current leads ---
     az = 22.5+1*360/g['cage_longerons']
-    pts = [(x, r-R(0.42)) for x, r in cage_points(s, scale)]
+    pts = [(x, r-service_offsets(s, scale)['feed']) for x, r in cage_points(s, scale)]
     out.append(part('VTX_Coil_Current_Leads', 'ELECTRICAL', 'tube', 'power', note='Coil current leads (HTS) from the panel along the cage',
-                    points=[pol(st['collar_aft'], R(g['collar_outer_radius_m']), az)]+[pol(x, r, az) for x, r in pts], radius=R(0.09)))
+                    points=[pol(st['collar_aft'], R(g['collar_outer_radius_m']), az+LINE_AZ_DEG)]+[pol(x, r, az+LINE_AZ_DEG) for x, r in pts], radius=R(0.09)))
     out.append(part('VTX_Power_Bus', 'ELECTRICAL', 'tube', 'power', note='Driver and pulse-pod bus from the service panel',
                     points=[(st['collar_fwd']+R(0.1), -R(g['collar_outer_radius_m'])-R(0.3), R(1.0)), (st['collar_fwd']+R(0.4), -cr-R(0.5), R(1.0)), (st['cartridge_aft']+R(6.0), -cr-R(0.5), R(1.0))], radius=R(0.12)))
     # --- instrumentation: diagnostics and indicator lamps ---
@@ -261,15 +287,15 @@ def refinements(s, scale=1.0):
     R = lambda v: v*k
     sa, sf = st['shield_aft'], st['shield_fwd']
     # ME-01 shield tie rods: the coil reaction ring's load goes round the LiH shield (not structural) to the thrust collar.
-    ring_r = R(g['shield_aft_radius_m'])-R(0.45)
+    ring_x, ring_r = ring_station(s, scale)
     for j in range(8):
         az = 11.25+45*j
         out.append(part(f'VTX_Shield_Tie_Rod_{j+1}', 'STRUCTURE', 'tube', 'structure',
                         note='Shield tie rod: C1/C2 reaction-ring load around the LiH shield into the thrust collar (the shield carries no coil load)',
-                        points=[pol(sa-R(0.15), ring_r, az), pol(sa+R(0.15), R(g['shield_aft_radius_m'])+R(0.22), az),
-                                pol(sf, R(g['shield_forward_radius_m'])+R(0.22), az)], radius=R(0.12), n=6))
+                        points=[pol(ring_x, ring_r, az), pol(sa+R(0.15), R(g['shield_aft_radius_m'])+R(0.22), az),
+                                pol(sf, R(g['shield_forward_radius_m'])+R(0.22), az)], radius=R(g['tie_rod_radius_m']), n=6))
     # ME-02 lead and cryogen turrets: every coil gets its current leads and its cryogen at one turret on the cryostat.
-    cx = st['collar_aft']-R(0.35); crr = R(g['collar_outer_radius_m'])+R(0.55)
+    ra = R(g['reaction_ring_minor_m'])
     for c in st['coils']:
         rt = c['r']+c['cryostat_minor_m']*k
         out.append(part(f'VTX_{c["name"]}_Lead_Turret', 'ELECTRICAL', 'box', 'power',
@@ -277,16 +303,17 @@ def refinements(s, scale=1.0):
                         center=pol(c['x'], rt+R(0.2), 270), size=(R(0.7), R(0.45), R(0.8)), az=270))
         out.append(part(f'VTX_{c["name"]}_Lead_Branch', 'ELECTRICAL', 'tube', 'power', note=f'{c["name"]} current-lead pair from the collar to its turret',
                         points=[pol(st['collar_aft'], R(g['collar_outer_radius_m'])-R(0.4), 263), pol(sa-R(0.3), R(g['shield_aft_radius_m'])+R(0.15), 263),
-                                pol(c['x']+R(0.25), rt+R(0.3), 265)], radius=R(0.06), n=6))
+                                pol(ring_x-ra-R(0.2), ring_r+ra+R(0.15), 264), pol(c['x']+R(0.25), rt+R(0.3), 265)], radius=R(0.06), n=6))
+    so = service_offsets(s, scale)
     for l in st['loops']:
-        cm = l['cryostat_minor_m']*k; rt = l['r']+cm
+        cm = l['cryostat_minor_m']*k; rt = l['r']+cm; rr = rt+R(g['cage_clearance_m'])
         out.append(part(f'VTX_{l["name"]}_Lead_Turret', 'ELECTRICAL', 'box', 'power',
                         note=f'{l["name"]} lead turret: current leads and cryogen enter the loop cryostat between two seats',
                         center=pol(l['x'], rt+R(0.2), 90.0), size=(R(0.9), R(0.45), R(0.7)), az=90.0))
         out.append(part(f'VTX_{l["name"]}_Lead_Branch', 'ELECTRICAL', 'tube', 'power', note=f'{l["name"]} leads from the cage lead line to its turret',
-                        points=[pol(l['x']-R(0.25), rt+R(0.12), a) for a in (67.5, 75.0, 82.5, 88.0)], radius=R(0.06), n=6))
+                        points=[pol(hoop_x(l, scale), rr-so['feed'], 67.5+LINE_AZ_DEG)]+[pol(l['x']-R(0.25), rt+R(0.12), a) for a in (75.0, 82.5, 88.0)], radius=R(0.06), n=6))
         out.append(part(f'VTX_{l["name"]}_Cryo_Branch', 'CRYOGENIC', 'tube', 'cryo', note=f'{l["name"]} cryogen branch from the cage feed to its turret',
-                        points=[pol(l['x']+R(0.25), rt+R(0.12), a) for a in (112.5, 105.0, 97.5, 92.0)], radius=R(0.06), n=6))
+                        points=[pol(hoop_x(l, scale), rr-so['cryo'], 112.5-LINE_AZ_DEG)]+[pol(l['x']+R(0.25), rt+R(0.12), a) for a in (105.0, 97.5, 92.0)], radius=R(0.06), n=6))
     # ME-03 armour coolant headers: the lithium supply and return reach every armour ring, so the hot circuit closes.
     bx = st['burn']
     for l in st['loops']:
@@ -308,7 +335,7 @@ def refinements(s, scale=1.0):
         for tag, az in (('Supply', 22.5), ('Return', 202.5)):
             out.append(part(f'VTX_{l["name"]}_Lithium_{tag}_Jumper', 'HOT_THERMAL', 'tube', 'hot',
                             note=f'{l["name"]} lithium {tag.lower()} jumper from the cage feeder to the armour header',
-                            points=[pol(l['x'], l['r']+cm+R(0.03), az)]+[pol(x, r, az+4.0) for x, r in arc]+[pol(hx_, hr_, az+4.0)], radius=R(0.07), n=6))
+                            points=[pol(hoop_x(l, scale), l['r']+cm+R(g['cage_clearance_m'])-so['feed'], az+LINE_AZ_DEG)]+[pol(x, r, az+LINE_AZ_DEG) for x, r in arc]+[pol(hx_, hr_, az+LINE_AZ_DEG)], radius=R(0.07), n=6))
     # ME-04 target path: magazine -> transfer -> breech; the launcher is aligned at its muzzle; the bore closes between pulses.
     out.append(part('VTX_Target_Transfer', 'FUEL', 'tube', 'fuel', note='Target transfer: the magazine indexes one target into the launcher breech',
                     points=[pol(R(-2.2), R(1.1), 0), pol(R(-1.95), R(1.1), 0), pol(R(-1.75), R(0.45), 0)], radius=R(0.12), n=6))

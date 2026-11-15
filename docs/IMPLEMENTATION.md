@@ -202,6 +202,10 @@ A geometry-neutral change shows 0 changed/added/removed objects in the pipeline'
 - `vertex_inspect.py`: the Explore Ship part inspection of the Compact Vertex Engine (records, categories with anatomy, engine placements,
   the parts' raw mesh buffer; `manifest()`); `tools/web_export.py` writes it lazily beside the GLB (`INSPECT_BUDGET`, counted apart from
   the first view), `web/viewer/inspect.js` reads it, `tools/story.py` shows its categories on engineering/vertex/.
+- `vertex_structure.py` (with `fe_frame.py`): Vertex Engine 1.2 structural screen. Exact loop fields and coil forces, the inter-engine
+  forces, load cases LC-01..06, member sizing against PMDS values, the reaction-ring and cluster-frame FE screens, statuses per part,
+  the mass rollup, a clearance screen and the inspection block `vertex_inspect.manifest` carries. `python3 src/wayfarer/vertex_structure.py`
+  prints the tables (about 9 s). `iterate_sizes` is the design loop used to choose the 1.2 radii; the build reads only the TOML.
 - `vertex_engine.py` / `vertex_cluster.py`: the Vertex assets (docs/MODEL.md "Vertex propulsion cluster"). `vertex_engine` holds the Compact Vertex Engine stations, parts (category, material, evidence), interfaces, effects, mass estimate and the C-01..C-10 scalings; `vertex_cluster` the placements in the owner nozzle order, the frame and distribution routed clear of the comms sweeps, the cluster interfaces, the shared effect drivers and states, and the gap, magnetic, radiation and layout screens (`check()`). `components/vertex.py` builds VERTEX_ENGINE, VERTEX_RESEARCH and PROPULSION_CLUSTER from them; `propulsion_representation.active` chooses what the vehicle links. `tools/checks.py` maps a change inside `[vertex_engine*]`, `[vertex_research]` or `[propulsion_cluster]` to its own build target (`TABLE_TARGETS`).
 - `drive_manifold.py`: the optically gated drive manifold. It holds the `[drive_manifold]` PROTOTYPE geometry (throat, smooth branch paths, lattice, seed coils, lasers, shield-plug chicane, optics, gate beams, separatrices), the normalized control properties and the single source of driver expressions (`drivers()`), `configuration_state()`, the 12 action key tables (`actions()`, `action_state()`), `couple_arm()` and the clearance screen `check()` with its findings. Shared by spec, `components/drive.py`, inspect, the rig contract and the previews.
 - `drive_hot_section.py` (AFT-002): the PROTOTYPE `[drive_hot_section]` geometry around the plasma: replaceable core and throat liner tiles and the Q40 nozzle strike modules at the throat-side coils (`liner_tiles()`), the four cryogenic feed lines with their stepped shadow-shield sleeves (`cryo_feed()`), and the screen `check()`, called from `drive_manifold.check()`. The screen covers liner-to-plasma, coil, lattice and gate-beam gaps, feed clearances over the whole polyline, and `sleeve_sight_lines()`, a 3D check that no straight line passes a sleeve bore. Every OD-024/025/026 quantity stays `known = false`.
@@ -310,6 +314,24 @@ Higher levels reference lower ones as **linked collection instances with relativ
 - keeps `flight_thrust` (16.18 MN) separate from `structural_design_load` (29.42 MN); never use the latter as flight thrust;
 - exposes the budget, EYE loads, drive-heat calibration and low-thrust tilt without deriving a COM.
 
+
+## Runtime benchmark protocol
+
+Profile before optimizing, and compare like with like (Vertex Engine 1.2 brief, section 9).
+
+- **Inputs.** Two sites built by `workflow.py web --pipeline-run <run>` from the two states being compared, served locally the same way,
+  on the same machine. Download sizes come from the built release (`release.json`) and, for the deployed site, from the "Verify the live
+  site" job log; never from estimates.
+- **Browser.** Chromium (Playwright), 1280 × 800 at deviceScaleFactor 1, a fresh context per run, three runs per view, the median kept.
+  Record the WebGL renderer string (`WEBGL_debug_renderer_info`). In the cloud container it is SwiftShader: those frame times are
+  **software WebGL** and say nothing about GPU performance; only relative changes between the two states on the same renderer count, and
+  a real-GPU measurement needs a workstation run.
+- **Views.** Explore Ship default exterior; `#view=aft` (the cluster); `#view=aft&eng=N1&ov=eng` (engine drawer with the engineering overlay).
+- **Measures** (from the viewer's always-on `stats` and `renderer.info`): time to ready, frame time p50 and p95 over 120 frames after a
+  3 s settle, draw calls, triangles, geometries, textures, JS heap, bytes transferred and decoded, request count. The play package is
+  measured by its bytes and the play checks' interactive time in CI.
+- **Budgets** stay as set in `tools/web_export.py` (start, viewer, play, inspection); a change that needs more is reported to the owner,
+  never absorbed by raising a limit.
 
 ## Production layer (M7)
 

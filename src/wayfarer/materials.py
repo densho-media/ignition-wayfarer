@@ -24,7 +24,7 @@ UNITS = {'density': 'kg/m3', 'specific_heat': 'J/(kg K)', 'thermal_conductivity'
          'yield_strength': 'Pa', 'ultimate_strength': 'Pa', 'elastic_modulus': 'Pa', 'fracture_toughness': 'Pa m^0.5',
          'electrical_resistivity': 'ohm m', 'melting_point': 'K', 'max_service_temperature': 'K', 'ductile_brittle_transition': 'K',
          'emissivity': '1', 'solar_absorptance': '1', 'critical_temperature': 'K', 'hydrogen_content': '1',
-         'min_service_temperature': 'K'}
+         'min_service_temperature': 'K', 'compressive_strength': 'Pa'}
 TEMPERATURE_PROPERTIES = {'melting_point', 'max_service_temperature', 'min_service_temperature', 'ductile_brittle_transition',
                           'critical_temperature'}
 # A service-temperature limit is a SCREENING_ESTIMATE (a literature threshold for screening) unless a qualified long-life rating for the
@@ -55,7 +55,7 @@ IRRADIATION = {'UNIRRADIATED', 'IRRADIATED'}
 # When a limit applies (default ALWAYS); an IRRADIATED limit (CuCrZr embrittlement floor) is checked only under a stated fluence.
 APPLIES = {'ALWAYS', 'IRRADIATED'}
 # Properties that differ with direction in a fibre composite or textured product: an `anisotropic` material names `direction` for them.
-DIRECTIONAL = {'thermal_conductivity', 'thermal_expansion', 'yield_strength', 'ultimate_strength', 'elastic_modulus', 'fracture_toughness',
+DIRECTIONAL = {'thermal_conductivity', 'thermal_expansion', 'yield_strength', 'ultimate_strength', 'compressive_strength', 'elastic_modulus', 'fracture_toughness',
                'electrical_resistivity'}
 PHASE = {'melting', 'decomposition', 'sublimation'}
 LEVELS = {'A', 'B', 'C'}

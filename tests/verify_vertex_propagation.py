@@ -4,7 +4,10 @@ In a temporary copy of the project: change one shared engine parameter (closure 
 rebuild exactly that, then verify the change in all four linked engine instances of the vehicle, in the exported runtime GLB, in the
 Explore Ship part-inspection manifest and geometry (vertex_inspect), in the Engineering page's Engine anatomy section, and that a part
 link (part=N3.VTX_C1_Winding) resolves to the right engine: the inspection manifest's placement of each engine lands on that engine's GLB
-node. The copy is discarded (the restore); the production TOML and assets are checked unchanged afterwards.
+node. Engine 1.2 extends the chain through the structural calculation: the changed coil changes the coil forces and the C1 strut loads
+(vertex_structure), the inspection manifest's engineering records and the Engineering page's Structure section carry the new numbers, and
+the production source still gives the old ones. The copy is discarded (the restore); the production TOML and assets are checked
+unchanged afterwards.
 
     python3 tests/verify_vertex_propagation.py [--report references/evidence/vertex_propagation.json]
 """
@@ -151,6 +154,24 @@ def main(report_path=None):
         import story; importlib.reload(story)
         section = story.engine_anatomy(s, vi)
         assert 'id="anatomy-magnetic-coils"' in section and 'C1 winding' in section, 'Engine anatomy section lost the closure coil'
+        # Engine 1.2: the structural calculation follows the same source change (coil forces -> strut loads -> manifest -> page).
+        import vertex_structure as vs; importlib.reload(vs)
+        prod = spec_mod.load(ROOT)[0]
+        f_new = {c['name']: c['Fz_N'] for c in vs.coil_forces(s, 'NOMINAL')}; f_old = {c['name']: c['Fz_N'] for c in vs.coil_forces(prod, 'NOMINAL')}
+        assert abs(f_new['C1']/f_old['C1']-1) > 0.05, (f_new['C1'], f_old['C1'])
+        strut_new = next(r for r in vs.engine_members(s, 'NOMINAL')['strut']['rows'] if r['coil'] == 'C1')
+        strut_old = next(r for r in vs.engine_members(prod, 'NOMINAL')['strut']['rows'] if r['coil'] == 'C1')
+        assert abs(strut_new['N']-strut_old['N']) > 1e3 and abs(strut_new['L']-strut_old['L']) > 1e-3, (strut_new, strut_old)
+        eng_new = next(p['eng'] for p in man['parts'] if p['name'] == 'VTX_C1_Strut_1')
+        want_eng = next(r for r in vs.part_engineering(s) if r['name'] == 'VTX_C1_Strut_1')
+        assert eng_new[0] == want_eng['status'] and abs(eng_new[2]-round(want_eng['u_nominal'], 3)) < 1e-9, (eng_new, want_eng)
+        page_new = story.structure_section(s, vs); page_old = story.structure_section(prod, vs)
+        row_new = page_new[page_new.index('<td>C1</td>'):][:200]; row_old = page_old[page_old.index('<td>C1</td>'):][:200]
+        assert f'{f_new["C1"] / 1e6:,.1f}' in row_new and row_new != row_old, (row_new, row_old)
+        structure = dict(c1_force_MN=dict(changed=round(f_new['C1']/1e6, 3), production=round(f_old['C1']/1e6, 3)),
+                         c1_strut=dict(force_MN=round(strut_new['N']/1e6, 3), production_MN=round(strut_old['N']/1e6, 3),
+                                       length_m=round(strut_new['L'], 3), production_length_m=round(strut_old['L'], 3)),
+                         manifest_record=eng_new, engineering_page='Structure section coil table carries the changed C1 force')
         # The restore: the original source gives the original radius again (nothing generated stays behind).
         orig = vi.manifest(spec_mod.load(ROOT)[0])[0]
         restored = next(p for p in orig['parts'] if p['name'] == 'VTX_C1_Winding')['bounds']
@@ -162,6 +183,7 @@ def main(report_path=None):
                   glb=dict(file=glb.name, nodes=uses, radii_m=sorted(set(round(r, 4) for r in radii))),
                   inspection=dict(part='VTX_C1_Winding', geometry_radius_m=round(inspect_r, 4), part_links=links,
                                   engineering_page='engine_anatomy section names the C1 winding'),
+                  structure=structure,
                   restore='temporary copy discarded; production hashes unchanged',
                   seconds=dict(targeted_build=round(build_s, 1), export=round(export_s, 1), total=round(time.time()-t0, 1)))
     if report_path:

@@ -1,7 +1,7 @@
 {
   "result": "PASS",
   "blender": "5.2.2 LTS",
-  "spec_hash": "b452c0d0af104293e4c7a22f164edb8bebe73f1dd14cf566fb84615f57513b4b",
+  "spec_hash": "d1fbd646c5f527e81a9d444386352bcb5e425a24a10105bae2b44e89c1bc0e1e",
   "source_map_hash": "fc3d72d053f9141c26c8248844df7159101221c41e998ab051243dc008137806",
   "configurations": {
     "COAST": {
@@ -2668,7 +2668,7 @@
     "engine": {
       "parts": 264,
       "objects": 22,
-      "max_radius_m": 11.395,
+      "max_radius_m": 11.4358,
       "categories": [
         "CRYOGENIC",
         "ELECTRICAL",
@@ -2690,27 +2690,27 @@
       "drivers": 232,
       "check": {
         "gaps": {
-          "adjacent_gap_m": 12.691,
-          "central_opening_m": 13.694,
-          "outer_radius_m": 36.484,
-          "aft_x_m": -166.481
+          "adjacent_gap_m": 12.511,
+          "central_opening_m": 13.583,
+          "outer_radius_m": 36.455,
+          "aft_x_m": -164.482
         },
-        "overall_hardware_length_m": 323.23,
-        "visual_ratio": 0.811,
+        "overall_hardware_length_m": 321.23,
+        "visual_ratio": 0.81,
         "study": {
           "evidence": "ENGINEERING_PROTOTYPE",
           "candidates": 135,
-          "passing": 57,
+          "passing": 54,
           "selection": {
             "pitch": 24.0,
             "cant": 2.0,
             "scale": 1.0,
             "front_x": -134.6,
-            "ratio": 0.811,
-            "adjacent_gap_m": 12.69,
-            "central_opening_m": 13.69,
-            "outer_radius_m": 36.48,
-            "aft_x_m": -166.48,
+            "ratio": 0.81,
+            "adjacent_gap_m": 12.51,
+            "central_opening_m": 13.58,
+            "outer_radius_m": 36.45,
+            "aft_x_m": -164.48,
             "axial_loss": 0.00061,
             "passes": true,
             "failed": []
@@ -2720,11 +2720,11 @@
             "cant": 2.0,
             "scale": 1.0,
             "front_x": -134.6,
-            "ratio": 0.811,
-            "adjacent_gap_m": 12.69,
-            "central_opening_m": 13.69,
-            "outer_radius_m": 36.48,
-            "aft_x_m": -166.48,
+            "ratio": 0.81,
+            "adjacent_gap_m": 12.51,
+            "central_opening_m": 13.58,
+            "outer_radius_m": 36.45,
+            "aft_x_m": -164.48,
             "axial_loss": 0.00061,
             "passes": true,
             "failed": []
@@ -2746,15 +2746,15 @@
             -1,
             1
           ],
-          "net_torque": "zero by symmetry (quadrupole arrangement)",
-          "note": "Broadside dipole approximation at the stopping field; a pulse transient, not a steady load. Chords and the hub carry it.",
+          "net_torque": "zero by symmetry (quadrupole arrangement); each engine still carries its own field force and torque",
+          "note": "Broadside dipole approximation of the loops at the stopping field (1.1 estimate). Neighbours attract, the diagonal pair repels; the load is steady while the coils are energised, not a pulse transient. The exact coil-set force is in the Engine 1.2 structure section.",
           "thrust_per_engine_MN": 0.725525
         },
         "six_engine": {
           "evidence": "ENGINEERING_PROTOTYPE",
           "engines": 6,
           "passing_pitch_m": 30.0,
-          "passing_outer_radius_m": 42.484,
+          "passing_outer_radius_m": 42.455,
           "azimuth_deg": {
             "1": 60.0,
             "2": 0.0,
@@ -2772,10 +2772,10 @@
             1
           ],
           "gaps": {
-            "adjacent_gap_m": 2.299,
-            "central_opening_m": 13.694,
-            "outer_radius_m": 36.484,
-            "aft_x_m": -166.481
+            "adjacent_gap_m": 2.147,
+            "central_opening_m": 13.583,
+            "outer_radius_m": 36.455,
+            "aft_x_m": -164.482
           },
           "passes": false,
           "note": "Screen only: six engines at the four-engine pitch. Building it needs the frame, the shares (dm has four) and an owner decision."
@@ -2784,7 +2784,7 @@
     },
     "vehicle": {
       "aft_x_m": -166.771,
-      "outer_radius_m": 36.138,
+      "outer_radius_m": 36.451,
       "overall_hardware_length_m": 323.521
     }
   },

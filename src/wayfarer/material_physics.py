@@ -300,7 +300,14 @@ INTEGRATION = [
     ('forward_shield', ('forward_shield', 'bumper_facing', 'seam_cte_per_K'), None, 'thermal_expansion', None, 0.0, 'NOT_LINKED',
      'deferred: the bumper facing material is not named; 2.3e-5 /K is aluminium-class'),
     ('material_physics.iter_reference_case', None, 'MAT-W', 'thermal_conductivity', None, 0.0, 'DIRECT_LOOKUP',
-     'a published ITER reference case only; no Wayfarer calculation reads the catalogue yet'),
+     'a published ITER reference case only'),
+    ('vertex_structure', None, 'MAT-TI6AL4V', 'yield_strength', None, 0.0, 'DIRECT_LOOKUP',
+     'Vertex Engine 1.2 member sizing (with E and density; Inconel 718 and CFRP as compared alternatives): room-temperature typical values '
+     'for a structure held near 293 K; allowables at other temperatures OPEN'),
+    ('vertex_structure', None, 'MAT-SS-316LN', 'yield_strength', 20.0, 0.0, 'DIRECT_LOOKUP',
+     'winding-case allowable from the 4.2 K proof stress, held to 20 K as a screening value'),
+    ('vertex_structure', None, 'MAT-LIH', 'thermal_expansion', None, 0.0, 'DIRECT_LOOKUP',
+     'shield-to-titanium movement per 100 K at room temperature; no expansion table recorded'),
 ]
 SPEC_LINKS = [(path, mid, name, tol) for _, path, mid, name, T, tol, usage, _ in INTEGRATION if usage == 'CROSS_CHECK' and T is None]
 

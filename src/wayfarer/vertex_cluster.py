@@ -114,6 +114,14 @@ def ring_nodes(s):
     return [dm.radial(x, st['ring_node_radius_m'], math.radians(p['ring_phase_deg'])+k*math.tau/st['ring_nodes']) for k in range(st['ring_nodes'])]
 
 
+def strut_foot(s, node, radius):
+    """Where a thrust strut of this radius lands on a thrust-ring node: on the node's radial line, pulled inboard so the tube stays below the
+    node fitting's outer face (node radius + 0.2 m, exterior_hardware.thrust_ring), where the aft RCS pods and comms booms stand. 1.2: the
+    sized struts would otherwise stand proud of the ring into the pods. The foot is a clevis on the node's inboard face (PROTOTYPE)."""
+    r = math.hypot(node[1], node[2]); r1 = min(r, r+0.2-radius)
+    return (node[0], node[1]*r1/r, node[2]*r1/r)
+
+
 def stations(s):
     """Ship-frame stations of the cluster."""
     c = config(s); est = ve.stations(s); pl = placements(s)[0]
@@ -162,7 +170,7 @@ def frame(s):
         a = math.atan2(node[2], node[1])
         for side, d in (('A', -15), ('B', 15)):
             P(f'CL_Hub_Thrust_Strut_{k:02}{side}', 'STRUCTURE', 'tube', 'structure', f'Thrust strut: hub forward rim to thrust-ring node {k}',
-              points=[node, dm.radial(st['hub_fwd'], rh-0.5, a+math.radians(d))], radius=c['thrust_strut_radius_m'])
+              points=[strut_foot(s, node, c['thrust_strut_radius_m']), dm.radial(st['hub_fwd'], rh-0.5, a+math.radians(d))], radius=c['thrust_strut_radius_m'])
     used = set()
     for pl in pls:
         j = pl['n']
@@ -190,7 +198,7 @@ def frame(s):
         for k, loc in pick:
             used.add(k)
             P(f'CL_N{j}_Thrust_Strut_{k:02}', 'STRUCTURE', 'tube', 'structure', f'N{j} thrust strut: cradle to thrust-ring node {k} (primary thrust path)',
-              points=[cradle_point(s, pl, loc), nodes[k]], radius=c['thrust_strut_radius_m']*1.2)
+              points=[cradle_point(s, pl, loc), strut_foot(s, nodes[k], c['thrust_strut_radius_m']*1.2)], radius=c['thrust_strut_radius_m']*1.2)
         P(f'CL_N{j}_Strut_Ring_Tie', 'STRUCTURE', 'tube', 'structure', f'N{j} outboard thrust tie: cradle outer side to the hub rim (closes the triangle)',
           points=[cradle_point(s, pl, 0), dm.radial(st['hub_fwd'], rh, az_e)], radius=c['member_radius_m']*0.8)
     # chords between adjacent cradles
@@ -200,7 +208,7 @@ def frame(s):
         cb = to_ship(pa, ((est['collar_fwd']+est['collar_aft'])/2, 0, 0))
         qa = min((cradle_point(s, pa, k*10) for k in range(36)), key=lambda q: math.dist(q, ca))
         qb = min((cradle_point(s, pb, k*10) for k in range(36)), key=lambda q: math.dist(q, cb))
-        P(f'CL_Chord_N{a}_N{b}', 'STRUCTURE', 'tube', 'structure', f'Chord N{a}-N{b}: ties neighbouring cradles (repulsion between opposite-polarity neighbours)',
+        P(f'CL_Chord_N{a}_N{b}', 'STRUCTURE', 'tube', 'structure', f'Chord N{a}-N{b}: ties neighbouring cradles (opposite-polarity neighbours attract: the chord takes compression)',
           points=[qa, qb], radius=c['member_radius_m'])
     # cross-fire baffle: cruciform vanes in the four planes between neighbouring engines, and a core post on the axis
     r0, r1 = 6.0, c['pitch_radius_m']+4.0
@@ -375,7 +383,8 @@ def gaps(s, pitch=None, cant=None, front_x=None, scale=1.0, n=None):
 
 def magnetics(s, pitch=None):
     """Inter-engine magnetic loads, dipole approximation of the four loops (CALCULATED, order of magnitude): each engine's loops carry
-    I = 2 B R / mu0 at the C-07 stopping field; neighbours with opposite polarity repel, the diagonal pair (same polarity) attracts."""
+    I = 2 B R / mu0 at the C-07 stopping field. Side by side, neighbours with opposite polarity attract and the diagonal pair (same polarity)
+    repels. vertex_structure.inter_engine computes the exact coil-set forces (1.2); this estimate is kept as the 1.1 record."""
     c = config(s); pitch = c['pitch_radius_m'] if pitch is None else pitch
     calc = {r['id']: r for r in ve.calculations(s)}; B = calc['C-07']['compact']; st = ve.stations(s)
     m = sum(2*B*l['r']/MU0*math.pi*l['r']**2 for l in st['loops'])          # A m^2
@@ -385,7 +394,9 @@ def magnetics(s, pitch=None):
     pol = c['polarity']
     return dict(evidence='CALCULATED', field_T=B, dipole_moment_Am2=m, adjacent_distance_m=d_adj, diagonal_distance_m=d_diag,
                 adjacent_force_MN=F(d_adj)/1e6, diagonal_force_MN=F(d_diag)/1e6, polarity=pol,
-                net_torque='zero by symmetry (quadrupole arrangement)', note='Broadside dipole approximation at the stopping field; a pulse transient, not a steady load. Chords and the hub carry it.',
+                net_torque='zero by symmetry (quadrupole arrangement); each engine still carries its own field force and torque',
+                note='Broadside dipole approximation of the loops at the stopping field (1.1 estimate). Neighbours attract, the diagonal pair repels; '
+                     'the load is steady while the coils are energised, not a pulse transient. The exact coil-set force is in the Engine 1.2 structure section.',
                 thrust_per_engine_MN=calc['C-10']['compact'])
 
 

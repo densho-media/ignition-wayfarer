@@ -115,6 +115,22 @@ date = "2004"
 kind = "journal"
 verification = "TRANSCRIBED"
 
+[reference.nims_316ln_4k]
+title = "T. Sakurai et al. (NIMS), 4 K tensile properties of ITER-grade 316LN plate; also Sas et al. (KIT), 4.2 K tests of modified 316LN conduit tube"
+publisher = "NIMS Materials Data Repository / KIT"
+date = "read 2026-11-14"
+kind = "journal"
+verification = "TRANSCRIBED"
+note = "4.2 K 0.2 % proof stress about 1000-1080 MPa for ITER-grade plate (tube grades up to about 1350 MPa after treatment), read in search-result summaries."
+
+[reference.toray_t700s]
+title = "Toray Composite Materials America, T700S technical data sheet (unidirectional composite, 60 % fibre volume, 130 C epoxy)"
+publisher = "Toray"
+date = "read 2026-11-14 (revision 2025-04)"
+kind = "manufacturer"
+verification = "TRANSCRIBED"
+note = "Reference values for material selection only (the sheet says so); earlier revisions list 2450-2550 MPa tensile."
+
 [reference.sparc_tfmc]
 title = "Z.S. Hartwig et al., The SPARC Toroidal Field Model Coil Program, IEEE Trans. Appl. Supercond. (2024)"
 publisher = "IEEE"
@@ -426,7 +442,7 @@ level = "A"
 family = "austenitic stainless steel"
 composition = "316L with controlled nitrogen addition"
 form = "Forged and plate sections for magnet cases (ITER TF coil cases)"
-open = ["specific_heat", "thermal_conductivity", "thermal_expansion", "elastic_modulus", "yield_strength", "fracture_toughness", "electrical_resistivity", "melting_point", "max_service_temperature", "emissivity"]
+open = ["specific_heat", "thermal_conductivity", "thermal_expansion", "elastic_modulus", "fracture_toughness", "electrical_resistivity", "melting_point", "max_service_temperature", "emissivity"]
 manufacturing = "Forging, plate, machining of large sections."
 joining = "Narrow-gap TIG and electron-beam welding of thick sections."
 availability_cost = "Industrial, specialist cryogenic qualification."
@@ -438,6 +454,7 @@ evidence_refs = ["iter_mph"]
 
 [material.MAT-SS-316LN.properties]
 density = { value = 8000.0, unit = "kg/m3", at_K = 293.0, basis = "TYPICAL", confidence = "MEDIUM", source = "asm" }
+yield_strength = { min = 1000.0e6, max = 1080.0e6, unit = "Pa", at_K = 4.2, valid_K = [4.0, 20.0], basis = "MEASURED", confidence = "MEDIUM", source = "nims_316ln_4k", note = "0.2 % proof stress of ITER-grade plate at 4.2 K; held to 20 K as a screening value (austenitic proof stress rises on cooling, so the 4 K value bounds the 20 K one only approximately)" }
 
 [material.MAT-SS-316LN.behaviour]
 creep = "Not relevant at cryogenic temperature."
@@ -579,7 +596,7 @@ family = "polymer-matrix composite"
 composition = "Carbon fibre in epoxy (or cyanate-ester) matrix; properties depend on fibre, layup and matrix"
 form = "Filament-wound or laid-up tubes and skirts"
 anisotropic = true                  # fibre composite: directional properties must name their direction
-open = ["specific_heat", "thermal_conductivity", "thermal_expansion", "yield_strength", "elastic_modulus", "fracture_toughness", "electrical_resistivity", "melting_point", "max_service_temperature", "emissivity"]
+open = ["specific_heat", "thermal_conductivity", "thermal_expansion", "yield_strength", "fracture_toughness", "electrical_resistivity", "melting_point", "max_service_temperature", "emissivity"]
 manufacturing = "Filament winding, automated fibre placement, autoclave or out-of-autoclave cure."
 joining = "Bonded and bolted joints; bonded metal end fittings."
 availability_cost = "Industrial aerospace."
@@ -591,6 +608,9 @@ evidence_refs = ["asm", "wayfarer_spec"]
 
 [material.MAT-CFRP.properties]
 density = { min = 1500.0, max = 1650.0, unit = "kg/m3", at_K = 293.0, basis = "TYPICAL", confidence = "MEDIUM", source = "asm" }
+elastic_modulus = { value = 134.0e9, unit = "Pa", at_K = 293.0, direction = "fibre (0 deg), unidirectional, 60 % fibre volume", basis = "TYPICAL", confidence = "MEDIUM", source = "toray_t700s", note = "T700S unidirectional laminate; a strut layup with off-axis plies is lower" }
+ultimate_strength = { value = 2860.0e6, unit = "Pa", at_K = 293.0, direction = "fibre (0 deg) tension, unidirectional, 60 % fibre volume", basis = "TYPICAL", confidence = "MEDIUM", source = "toray_t700s", note = "older sheet revisions 2450-2550 MPa" }
+compressive_strength = { value = 1450.0e6, unit = "Pa", at_K = 293.0, direction = "fibre (0 deg) compression, unidirectional, 60 % fibre volume", basis = "TYPICAL", confidence = "MEDIUM", source = "toray_t700s", note = "SACMA SRM 1R-94" }
 
 [material.MAT-CFRP.behaviour]
 creep = "Matrix-dominated creep at elevated temperature."
@@ -771,7 +791,7 @@ level = "A"
 family = "hydride neutron moderator"
 composition = "LiH (natural or 7Li-enriched lithium)"
 form = "Cast or pressed blocks in sealed stainless-steel cans (SNAP reactor shields)"
-open = ["specific_heat", "thermal_conductivity", "thermal_expansion", "yield_strength", "elastic_modulus", "fracture_toughness", "electrical_resistivity", "max_service_temperature", "emissivity"]
+open = ["specific_heat", "thermal_conductivity", "yield_strength", "elastic_modulus", "fracture_toughness", "electrical_resistivity", "max_service_temperature", "emissivity"]
 manufacturing = "Melt casting under inert gas into cans."
 joining = "Canned."
 availability_cost = "Industrial chemical; flight heritage in shields."
@@ -785,6 +805,7 @@ evidence_refs = ["welch1974", "crc"]
 density = { value = 780.0, unit = "kg/m3", at_K = 293.0, basis = "HANDBOOK", confidence = "MEDIUM", source = "crc", verification = "SECONDARY_VERIFIED", verified = "0.78 g/cm3 (2026-11-05 web search)", verified_against = "sec_crc_listing", condition = "LiH, natural lithium, room temperature" }
 melting_point = { value = 961.8, unit = "K", phase_change = "melting", basis = "HANDBOOK", confidence = "MEDIUM", source = "crc", verification = "SECONDARY_VERIFIED", verified = "688.7 C (961.9 K) (2026-11-05 web search)", verified_against = "sec_crc_listing", condition = "LiH" }
 hydrogen_content = { value = 0.127, unit = "1", at_K = 293.0, valid_K = [0.0, 700.0], basis = "THEORETICAL", confidence = "HIGH", source = "crc", note = "mass fraction from the formula LiH (1.008 / 7.95)" }
+thermal_expansion = { value = 4.2e-5, unit = "1/K", at_K = 293.0, basis = "HANDBOOK", confidence = "LOW", source = "crc", note = "room-temperature linear coefficient as listed (secondary listings agree); no temperature table recorded" }
 
 [material.MAT-LIH.behaviour]
 creep = "Weak; relies on the can."

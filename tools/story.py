@@ -607,6 +607,7 @@ def vertex_page(spec, out_dir, revision, built):
     import vertex_cluster as vc
     import vertex_engine as ve
     import vertex_inspect as vi
+    import vertex_structure as vs
     if not vc.active(spec):
         return False
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -662,8 +663,9 @@ def vertex_page(spec, out_dir, revision, built):
   the antenna sweeps.</li>
  <li><b>Miniaturized:</b> one engine is about a hundredth of the research yield per pulse and runs a quarter of the design power.</li>
  <li><b>Speculative:</b> the five items below. Each extends a Breakthrough Lab entry and stays SPECULATIVE until that entry is resolved.</li>
- <li><b>Unresolved:</b> the inter-engine pulse force (about {mag["adjacent_force_MN"]:.0f} MN between neighbours in a dipole approximation,
-  {mag["thrust_per_engine_MN"]:.2f} MN thrust per engine), the radiator line of sight to the burn points ({100 * rad["radiator_fraction"]:.1f} %), and the heat flux at
+ <li><b>Unresolved:</b> the coil and inter-engine field forces (section 5: up to {max(abs(c["Fz_N"]) for c in vs.coil_forces(spec, "NOMINAL")) / 1e6:.0f} MN on one loop
+  and {abs(vs.inter_engine(spec)[0]["radial_N"]) / 1e6:.1f} MN pulling each engine toward the axis, against {mag["thrust_per_engine_MN"]:.2f} MN thrust per engine),
+  the radiator line of sight to the burn points ({100 * rad["radiator_fraction"]:.1f} %), and the heat flux at
   the design point, {next(c["compact"] for c in ve.calculations(spec) if c["id"] == "C-05"):.0f}× the research load.</li>
 </ul></section>
 <section><h2>2 · The numbers</h2>
@@ -683,11 +685,99 @@ def vertex_page(spec, out_dir, revision, built):
 <div class="scroll" tabindex="0"><table><thead><tr><th>Item</th><th>Status</th><th>What it assumes</th><th>Breakthrough Lab</th></tr></thead>
 <tbody>{spec_rows}</tbody></table></div>
 <p class="note">{esc(spec["propulsion_representation"]["authority"])}</p></section>
-{anatomy}"""
+{anatomy}
+{structure_section(spec, vs)}"""
     (out_dir / 'index.html').write_text(page('Vertex propulsion lineage · Wayfarer engineering',
                                              'How the Vertex research demonstrator became the Compact Vertex Engine and the four-engine Propulsion Cluster.',
                                              body, 2, revision, built))
     return True
+
+
+def structure_section(spec, vs):
+    """Section 5 of engineering/vertex/: Engine 1.2 structural validation, every number from vertex_structure.report."""
+    R = vs.report(spec); sz = R['sizing']; cases = spec['vertex_engine']['structure']['current_cases']; old = vs.ENGINE_1_1
+    f = lambda v, d=1: '—' if v is None else f'{v:,.{d}f}'
+    lc_rows = ''.join(f'<tr><td><code>{x["id"]}</code> {esc(x["title"])}</td><td>{tag(x["evidence"])}</td>'
+                      f'<td>{"; ".join(f"{esc(a)} {v:,.4g} {esc(u)}" for a, v, u in x["size"])}</td><td>{esc(x["note"])}</td></tr>' for x in R['load_cases'])
+    coil_rows = ''.join(f'<tr><td>{c["name"]}</td><td class="num">{c["current_At"] / 1e6:,.2f}</td><td class="num">{c["Fz_N"] / 1e6:,.1f}</td>'
+                        f'<td class="num">{c["hoop_N"] / 1e6:,.1f}</td><td class="num">{c["case_stress_Pa"] / 1e6:,.0f}</td>'
+                        f'<td class="num">{k["case_stress_Pa"] / 1e6:,.0f}</td></tr>'
+                        for c, k in zip(vs.coil_forces(spec, 'NOMINAL'), vs.coil_forces(spec, 'CONSERVATIVE')))
+    g = spec['vertex_engine']['geometry']
+    mem_rows = ''.join(f'<tr><td>{esc(vs.GROUP_TITLES[k])}</td><td class="num">{old[key]:.2f} → {g[key]:.2f}</td>'
+                       + ''.join(f'<td class="num">{sz["engine"][c][k]["u"]:.2f}</td>' for c in cases)
+                       + f'<td>{esc(max(sz["engine"]["NOMINAL"][k]["rows"], key=lambda r: r["u"]).get("governs", ""))}</td><td>{tag(vs.GROUP_STATUS[k])}</td></tr>'
+                       for k, key in vs.ENGINE_KEYS.items())
+    mem_rows += (f'<tr><td>Coil windings (case)</td><td class="num">—</td>' + ''.join(f'<td class="num">{sz["engine"][c]["winding"]["u"]:.2f}</td>' for c in cases)
+                 + f'<td>hoop stress</td><td>{tag("CONDITIONALLY_SIZED")}</td></tr>')
+    cl = sz['cluster']; groups = ('spoke', 'chord', 'ring_tie', 'engine_thrust_strut', 'hub_thrust_strut')
+    cl_rows = ''.join(f'<tr><td>{esc(n.replace("_", " "))}</td>' + ''.join(f'<td class="num">{c["groups"][k]["u"]:.2f}</td>' for k in groups) + '</tr>'
+                      for n, c in cl['cases'].items())
+    ie = vs.inter_engine(spec); dip = R['dipole']; ti = sz['target']; li = sz['lithium']; el = sz['electrical']; dy = sz['dynamics']; th = sz['thermal']
+    m = R['mass']
+    counts = {}
+    for p in R['parts']:
+        counts[p['status']] = counts.get(p['status'], 0)+1
+    conv = ''.join(f'<tr><td class="num">{c["grid_deg"]}°</td><td class="num">{c["elements"]}</td><td class="num">{c["ring_peak_M"] / 1e6:.3f}</td>'
+                   f'<td class="num">{c["tie_N"] / 1e6:.3f}</td></tr>' for c in R['ring_convergence'])
+    status_rows = ''.join(f'<tr><td>{tag(k)}</td><td>{esc(vs.STATUS_STYLE[k][0])}</td><td class="num">{counts.get(k, 0)}</td></tr>' for k in vs.STATUSES)
+    return f"""<section id="structure"><h2>5 · Structure (Engine {esc(R["version"])})</h2>
+<p class="lead">What the drawn engine has to carry if the drive worked, and how large its members must be to carry it. This is a screening
+  calculation on PMDS material data, not a certified stress analysis, and it is not propulsion evidence: the drive stays {tag("SPECULATIVE")} and the
+  research demonstrator's Gate 2 stays {tag("BLOCKED")}. <a href="../../viewer/#view=aft&amp;eng=N1&amp;ov=eng">See the sizing status in Explore Ship</a>.</p>
+<h3>Load cases</h3>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Case</th><th>Evidence</th><th>Size</th><th>Treatment</th></tr></thead><tbody>{lc_rows}</tbody></table></div>
+<p>The six coils' forces on each other are steady whenever the coils are energised and dwarf the thrust: the closure coils push the first loop aft
+  with {abs(vs.coil_forces(spec, "NOMINAL")[2]["Fz_N"]) / 1e6:,.0f} MN while one engine's thrust is {sz["cluster"]["magnetics"]["thrust_N"] / 1e6:.2f} MN.
+  Three current sets bound them: NOMINAL (the C-07 stopping field at the burn point and a null at the shield face), CONSERVATIVE (each loop alone
+  gives that field at its own centre) and EXTREME (conservative currents with plasma flux compression).</p>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Coil</th><th>MA-turns</th><th>Axial force MN</th><th>Hoop tension MN</th><th>Case stress MPa</th>
+<th>Conservative MPa</th></tr></thead><tbody>{coil_rows}</tbody></table></div>
+<p class="meta">Exact circular-loop fields (elliptic integrals). Case stress: hoop tension over the steel share of the winding pack
+  ({spec["vertex_engine"]["structure"]["coil_case_fraction"]:.0%}); allowable {R["case_allowable"]["allowable"] / 1e6:,.0f} MPa (two thirds of 316LN's 4.2 K proof stress,
+  {esc(R["case_allowable"]["source"])}). Negative: the closure coils are crushed inward.</p>
+<h3>Engine members</h3>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Member</th><th>Radius 1.1 → 1.2 (m)</th>{"".join(f"<th>{c}</th>" for c in cases)}<th>Governs</th><th>Status</th></tr></thead>
+<tbody>{mem_rows}</tbody></table></div>
+<p>Utilisation 1 is the allowable (Ti-6Al-4V yield / {spec["vertex_engine"]["structure"]["yield_safety_factor"]}, buckling with a factor
+  {spec["vertex_engine"]["structure"]["buckling_safety_factor"]}). Members are sized for NOMINAL; CONSERVATIVE and EXTREME are reported, and no member of this
+  envelope survives them. The loop seats now lean {", ".join(f'{l["name"]} {l.get("seat_offset_m", 0):g} m' for l in g["loops"])} forward to their hoops, so
+  they carry the loop forces as struts; radial seats would have carried them in bending at up to 75 times their allowable.</p>
+<h3>Cluster frame</h3>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Load set</th>{"".join(f"<th>{k.replace('_', ' ')}</th>" for k in groups)}</tr></thead><tbody>{cl_rows}</tbody></table></div>
+<p>Exact coil-set forces between the engines: each is pulled {abs(ie[0]["radial_N"]) / 1e6:.1f} MN toward the axis (NOMINAL) and turned by
+  {max(abs(v) for v in ie[0]["torque_Nm"]) / 1e6:.0f} MN·m about its collar, because side-by-side neighbours of opposite polarity attract. The 1.1 cluster
+  note called this repulsion and a pulse transient; it is attraction and steady. A point-dipole pair estimate gives {dip["adjacent_N"] / 1e6:.1f} MN.
+  The frame is one FE model of every member, hub and engines rigid: lowest engine mount modes {", ".join(f"{k} {v:.1f} Hz" for k, v in cl["frequency_Hz"].items())},
+  far below the {dy["pulse_Hz"]:,.0f} Hz pulse rate, so the mount passes about {dy["transmissibility"]:.1e} of the pulse ripple. The frame is
+  {cl["magnetic_margin"]:,.0f} times stiffer than the field's pull grows as an engine moves in. One engine firing alone turns the ship with
+  {sz["cluster"]["magnetics"]["thrust_N"] * spec["propulsion_cluster"]["pitch_radius_m"] / 1e6:.1f} MN·m; diagonal pairs cancel it.</p>
+<h3>Other components</h3>
+<ul class="plain">
+ <li><b>Electrical (ME-03):</b> {el["energy_J"] / 1e9:.1f} GJ stored per engine; {el["lead_current_A"] / 1e3:.0f} kA leads (ITER class); dump voltage up to
+  {max(r["dump_voltage_V"] for r in el["rows"]) / 1e3:.1f} kV for a {spec["vertex_engine"]["structure"]["quench_dump_time_s"]:.0f} s dump; lead pairs clamped against
+  {el["rows"][0]["pair_force_N_m"] / 1e3:.1f} kN/m. {tag("CONDITIONALLY_SIZED")}</li>
+ <li><b>Lithium (ME-04):</b> at {li["temperature_K"]:.0f} K no catalogue alloy is rated (Nb-1Zr stops near 1,400 K; TZM and Mo-Re are OPEN); one drawn line carries
+  {li["capacity_W"] / 1e6:,.0f} MW, {100 * li["capacity_fraction"]:.4f} % of an engine's fusion power. {tag("BLOCKED")}</li>
+ <li><b>Target injection (ME-05):</b> {ti["speed_m_s"] / 1e3:.1f} km/s over {ti["flight_m"]:.1f} m in {ti["time_of_flight_s"] * 1e3:.2f} ms; holding a
+  {spec["vertex_engine"]["structure"]["target_miss_tolerance_m"] * 1e3:.0f} mm miss needs {ti["pointing_rad"] * 1e6:.0f} µrad pointing. The bore shutter as a tungsten chopper
+  would see {ti["shutter_rim_stress_W_Pa"] / 1e9:.1f} GPa at its rim. {tag("BLOCKED")}</li>
+ <li><b>Thermal (LC-05):</b> the L4 cold mass shrinks {th["coil_contraction_m"]["L4"] * 1e3:.0f} mm in radius on cooldown; LiH grows
+  {th["shield_vs_titanium_per_100K_m"] * 1e3:.0f} mm more than titanium per 100 K at the shield rim; hot headers grow by tens of millimetres. All need sliding seats.</li>
+ <li><b>Fatigue (LC-04):</b> {dy["cycles_per_hour"]:,.0f} pulses per firing hour, beyond measured S-N data for every catalogue alloy; the windings take the pulse
+  field change directly. OPEN.</li>
+</ul>
+<div class="grid2"><div class="panel"><h3>Mass</h3><table>
+ <tr><td>One engine</td><td class="num">{m["engine_1_1_kg"] / 1e3:,.0f} t → {m["engine_1_2_kg"] / 1e3:,.0f} t</td></tr>
+ <tr><td>Cluster frame</td><td class="num">{m["frame_1_1_kg"] / 1e3:,.0f} t → {m["frame_1_2_kg"] / 1e3:,.0f} t</td></tr>
+ <tr><td>Four engines and frame</td><td class="num">+{(4 * (m["engine_1_2_kg"] - m["engine_1_1_kg"]) + m["frame_1_2_kg"] - m["frame_1_1_kg"]) / 1e3:,.0f} t</td></tr></table>
+ <p class="meta">{tag("ENGINEERING_PROTOTYPE")} estimates from the drawn volumes. The ship's mass budget and mission numbers do not read them and are unchanged.</p></div>
+<div class="panel"><h3>Status of the 264 parts</h3><table>{status_rows}</table></div></div>
+<h3>Method</h3>
+<p class="meta">Members are thin-walled Ti-6Al-4V tubes with the mass model's solid fraction. The reaction ring and the cluster frame are frame FE models
+  (3D beams, rigid hubs, skyline Cholesky), checked against a cantilever and the closed-form ring under equal radial loads; the ring model converges:</p>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Grid</th><th>Elements</th><th>Peak ring moment MN·m</th><th>Tie-rod force MN</th></tr></thead><tbody>{conv}</tbody></table></div>
+</section>"""
 
 
 def engine_anatomy(spec, vi):

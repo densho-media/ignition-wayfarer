@@ -14,7 +14,8 @@
    "test_route_import",
    "test_sim_rig",
    "test_spec",
-   "test_vertex"
+   "test_vertex",
+   "test_vertex_structure"
   ],
   "note": "scoped selection; the full pipeline remains the pre-commit gate; asset-owned parameter tables VERTEX_ENGINE: the other assets' spec stamps are stale until the full build, so no scoped inspection"
  },
@@ -67,10 +68,30 @@
   },
   "engineering_page": "engine_anatomy section names the C1 winding"
  },
+ "structure": {
+  "c1_force_MN": {
+   "changed": 2.085,
+   "production": 1.35
+  },
+  "c1_strut": {
+   "force_MN": -1.555,
+   "production_MN": -1.195,
+   "length_m": 2.103,
+   "production_length_m": 2.495
+  },
+  "manifest_record": [
+   "ANALYTICALLY_SIZED",
+   "strut",
+   0.093,
+   0.366,
+   "strut"
+  ],
+  "engineering_page": "Structure section coil table carries the changed C1 force"
+ },
  "restore": "temporary copy discarded; production hashes unchanged",
  "seconds": {
-  "targeted_build": 55.8,
-  "export": 113.7,
-  "total": 189.2
+  "targeted_build": 47.5,
+  "export": 89.8,
+  "total": 159.8
  }
 }

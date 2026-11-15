@@ -391,10 +391,33 @@ INSPECT = r'''(async () => {
   search.value = ''; search.dispatchEvent(new Event('input'));
   out.hash = location.hash;
   out.hash_ok = location.hash.includes(`part=N2.${out.selected.part}`);
-  out.details = panel.querySelector('.part-details').innerText.slice(0, 400);
+  out.details = panel.querySelector('.part-details').innerText.slice(0, 1200);
   out.details_ok = /Material/.test(out.details) && /Evidence/.test(out.details) && /Research|Interfaces/.test(out.details);
+  // Engine 1.2 engineering fields and overlay: the details name the sizing status and the manifest's utilisation, the overlay colours one
+  // engine's parts by status (no picks), a legend status filters the overlay and the list, and the bookmark carries it.
+  const E = data.engineering, member = data.parts.find(p => p.name === 'VTX_Cage_Longeron_1');
+  ins.selectPart('N2', member.name);
+  const det = panel.querySelector('.part-details').innerText;
+  out.eng_details_ok = det.includes(member.eng[0]) && det.includes(member.eng[2].toFixed(2)) && det.includes(E.notes[member.eng[1]].slice(0, 30));
+  panel.querySelector('[data-act="eng-overlay"]').click();
+  const ov = ins.engineering();
+  const covered = o => o ? o.children.reduce((a, c) => a + c.userData.parts.length, 0) : 0;
+  out.eng_overlay_parts = covered(ov); out.eng_overlay_meshes = ov ? ov.children.length : 0;
+  const rc2 = new T.Raycaster(); rc2.setFromCamera(new T.Vector2(0, 0), w.camera);
+  out.eng_overlay_ok = out.eng_overlay_parts === data.parts.length && out.eng_overlay_meshes <= E.statuses.length && ov.parent && ov.parent.name === 'inspect_N2'
+                       && rc2.intersectObject(ov, true).length === 0;
+  const blocked = data.parts.filter(p => p.eng[0] === 'BLOCKED').length;
+  panel.querySelector('.status-legend [data-status="BLOCKED"]').click();
+  out.eng_filter = { overlay: covered(ins.engineering()), list: panel.querySelectorAll('.part-list button').length, blocked };
+  out.eng_filter_ok = blocked > 0 && out.eng_filter.overlay === blocked && out.eng_filter.list === blocked;
+  out.eng_hash_ok = location.hash.includes('ov=eng.BLOCKED');
+  panel.querySelector('[data-act="eng-overlay"]').click();
+  out.eng_off_ok = ins.engineering() === null;
+  ins.setEngineeringMode(false, '');
+  ins.selectPart('N2', out.selected.part);
   out.ok = out.lazy && out.mapped && out.picked_right && out.hidden_ok !== false && out.overlay_pickless && out.filter_ok && out.search_ok
-           && out.keyboard_ok && out.hash_ok && out.details_ok;
+           && out.keyboard_ok && out.hash_ok && out.details_ok && out.eng_details_ok && out.eng_overlay_ok && out.eng_filter_ok && out.eng_hash_ok
+           && out.eng_off_ok;
   return out;
 })()'''
 # Per-engine drive control (owner brief 2026-11-14 section 8): one engine alone, the deterministic sequential start, one engine's shutdown,
@@ -868,7 +891,7 @@ def run_main(url, release, build, binary, sandbox, out, record_check, metrics):
             page.js('window.wayfarer.controls.enableDamping = false')
             mark_i = traffic.mark()
             insp = page.js(INSPECT, timeout=300)
-            record_check('viewer: engine part inspection (lazy records, placements, picks per engine, hidden, filter, search, keyboard, link)',
+            record_check('viewer: engine part inspection (lazy records, placements, picks per engine, hidden, filter, search, keyboard, link, engineering overlay)',
                          insp.get('ok'), **details(insp))
             page.frames()
             page.screenshot(out / 'desktop_engine_inspect.png')
