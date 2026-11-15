@@ -2047,6 +2047,16 @@ NASA JSC 20584 Rev D (02/2026) p. 9, ammonia: 1 h 30, 24 h 20, 7 d to 1000 d 3 p
 medical limit, which stays OPEN). The package carries a second checkpoint run (`trace.proof`); `WfRingAir.verify` reproduces both, and
 `godot/scripts/systems/verify_ring_air.gd` reports the deviations and the cost without a scene. Tests: `tests/test_ring_air_nh3.py` (21).
 
+**Deadship DS-2B "Shared Air" (training, unscored).** `#interior-shared-air` (`-- --shared-air`) runs a scenario layer over SYS-002 v2
+without changing it: `data/deadship/ds2_shared_air.toml` (scenario values only, PROTOTYPE; `shared_air.load` refuses engineering keys) sets
+the hygiene A urine source (7 g, τ = 1 h), the alert, the trainee's containment work at the store, three crew pairs and the 3 ppm reuse
+criterion. `src/wayfarer/shared_air.py` (`Run`) is the deterministic reference: a fixed 10 s step; pairs ordered by intercom walk door
+routes at 40 s per compartment and never cross a sealed bulkhead (door and damper pair shut); each person's exposure is the model's
+compartment integral; a watch continues the same model at ×1800 to 24 h, takes a verdict (NOT_CONTAINED, CO2_LIMIT, TEMPORARY,
+STABLE_RESIDUE, STABLE) and projects to 7 d, applying only a declared RESTORE plan. The package `wf_deadship_ds2.json` carries 16 reference
+cases with checkpoints; `godot/scripts/deadship/shared_air.gd` (`WfSharedAir`) mirrors the machine and `check_shared_air.gd` replays all
+16 within the model's tolerance and plays four strategies through Use and Ops. Tests: `tests/test_shared_air.py` (18).
+
 ## Retired runtime scenes
 
 The Godot review menu, the ship inspector, the guided induction walk, Demonstrator 01 with the Ship Navigator, its SPACE view and the

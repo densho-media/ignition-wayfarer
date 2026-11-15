@@ -1818,6 +1818,12 @@ sector 1's pair to A1, A2 or A3 × sector 2's pair to A2 or A3 × sector 3's pai
 **10,344 strategies** per parameter set, each run to 7 d. The brief's named strategies are members (§30.4). Search cost: 94 s for the base
 set on 4 cores (about 30 ms per strategy for 7 days).
 
+*Count reconciliation (Phase 2B brief §16).* The factors multiply to 216 × 3 × 2 × 2 × 2 × 2 = **10,368**. `ds2b_gate.strategies()`
+skips one combination per pair destination set and containment choice: reconnecting at T₂ from the all-normal ring (every arc `D`) is
+the same run as not reconnecting, so it is generated once. That removes 3 × 2 × 2 (destinations) × 2 (contain) = 24 duplicates:
+10,368 − 24 = **10,344 distinct strategies**, the number searched. No strategy was lost; the two figures count the same set with and
+without the 24 no-op duplicates.
+
 ### 30.3 Objectives and what each one is
 
 | Objective (minimised) | Class |
@@ -1980,8 +1986,8 @@ gameplay was built (§31).
 | 0 Minimal engineering integration proof | Complete |
 | 1 DS-1 "Scrubber" tutorial | Complete (finalized 2026-11-14) |
 | 2A Atmospheric connectivity | Complete (finalized 2026-11-14) |
-| SYS-002 v2 (CO₂ and NH₃) and the second 2B gate | This assignment: built and validated; gate passed for the base scenario |
-| 2B "Shared Air" | Awaiting authorization (§31) |
+| SYS-002 v2 (CO₂ and NH₃) and the second 2B gate | Built and validated; gate passed for the base scenario; SYS-002 v2 accepted by the owner (2026-11-14) |
+| 2B "Shared Air" | Built and validated on the task branch (§34); awaiting owner playtest and review |
 | 2C "Borrowed Air" (humidity, heat, parts) | Design only, after 2B |
 | 3 Broader systems | Design only |
 | 4 Competitive Deadship and Hullrun | Design only |
@@ -2021,3 +2027,419 @@ gameplay was built (§31).
 
 Not rerun: the browser `main` part and the `systems` and `deadship` training parts (their models and pages are unchanged; their native
 checks ran in the runtime export).
+
+## 34. Phase 2B "Shared Air": implementation [BUILT P2B]
+
+Owner brief 2026-11-14 20:59Z. A browser-playable, unscored training on ring A's two-gas model, `#interior-shared-air`
+(`-- --shared-air`). The default Explore Interior start, DS-1 and `#interior-airflow` are unchanged. Phase 2C is not started.
+
+### 34.1 Assumptions
+
+- **Approved values, unchanged.** The source is stored urine in hygiene A (A1) whose pretreatment failed: 7 g NH₃, τ = 1 h, first
+  order (PROTOTYPE, training only). The SMACs are 1 h 30, 24 h 20 and 7 d 3 ppm (JSC 20584 Rev D). They are duration references,
+  not injury thresholds, so the debrief names exceedances but invents no medical consequence. SYS-002 v2 is used only through its
+  public operations; not one of its lines changed.
+- **Scenario values** (`data/deadship/ds2_shared_air.toml`, every one PROTOTYPE):
+  - the alert at 10 ship min, while the source leaks from t = 0;
+  - containment work of 10 ship min;
+  - ×30 play and ×1800 watch;
+  - a 10 s step live and in the watch, 300 s in the projection;
+  - 40 s of transit per compartment, of which the last 10 s count as standing in the doorway;
+  - a watch to 24 h after the release (at least 1 h more), then a projection to 7 d;
+  - the 3 ppm reuse criterion.
+
+  `shared_air.load` refuses a scenario that sets any engineering key.
+- **Crew.** Three pairs (A with the trainee, B and C), home in A1, A2 and A3. The five others are abstract places with orders,
+  not figures. A pair cycles a shut door; the door's brief exchange is neglected and the walk's leaves do not move. No route crosses
+  a **sealed bulkhead** (door shut and its damper pair shut), because that is the trainee's own boundary.
+- **The trainee's modelled place.** Live, it is the compartment the body stands in, computed from the body's angle between the
+  CIRC door angles (the map's frame). From the watch on it stays where the trainee stood (§34.8). The walk's start (the ring A
+  landing) lies in A1 and within reach of the store.
+
+### 34.2 Architecture
+
+The work is in four layers, and each owns one thing.
+
+| Layer | Python | Godot | Owns |
+| --- | --- | --- | --- |
+| Engineering model | `ring_air.py` (SYS-002 v2) | `WfRingAir` | every equation, value, removal and exposure integral |
+| Scenario state | `shared_air.py` (`Run`) | `WfSharedAir` machine (§1 of the script) | the run: people, routes, containment, the watch phases, the log, the debrief |
+| Equipment interaction | — | `WfSharedAir` play section, `WfAirflow` points (`bay`, `hygiene`) | what Use and Ops mean at each point, the door hook |
+| Interface | — | the pages, HUD lines, the bay's board, `map.gd` layers | display only |
+
+**The machine.** It runs on a fixed 10 s step and does the same things at every boundary, in this order:
+
+1. Apply the due actions (in arrival order).
+2. Advance the pairs' walks.
+3. Isolate the source if the containment work is complete.
+4. Count the occupants.
+5. Step the model.
+6. Add each person's exposure from the model's exact integral of their compartment.
+
+The same order in both languages is what makes parity exact.
+
+**Hooks in `excursion.gd`.** There are ten minimal hooks (a `shared_air` variable beside `deadship`): creation, step, Use, Ops,
+`_toggle_door`, the record, the page, the goal, the labels and prompt, and the HUD update. No Deadship logic lives in the walk.
+
+**The package.** `wf_deadship_ds2.json` holds the scenario, the 16 reference cases with hourly checkpoints, and their debriefs
+(490 kB).
+
+### 34.3 Containment
+
+Containment is never automatic. **Ops at the store** starts the work, but only within its 2.2 m reach. The work accrues only while
+the trainee stays in reach. Stepping out of reach, or Ops again, pauses it. Progress is kept and the store keeps releasing at the full
+first-order rate until the last bag is sealed (rule: `[containment] rule`). Asking for containment from anywhere else is refused with
+the reason, by the intercom item or in a reference script, and the state does not change. Opening the hygiene page (Use) only shows
+the store's state and pauses the clock; it never grants progress. The checks confirm that containment takes at least 600 ship seconds
+of work and that `released` then equals 7 g × (1 − e^(−t/τ)) to 10⁻¹² kg.
+
+### 34.4 Crew model and orders
+
+The intercom offers these orders:
+
+- **Send.** Send pair B or C, or the trainee's partner, to a sector.
+- **Hold.** Tell a walking pair to stop where it is.
+- **Report.** Show the crew report.
+
+How an order runs:
+
+- A route is the shortest door path that crosses no sealed bulkhead.
+- Each compartment takes 40 s, the first 40 s being spent leaving its own.
+- Occupancy, and with it the CO₂ source, follows each person.
+- NH₃ exposure accrues in transit, compartment by compartment.
+
+These orders are refused, and nothing changes:
+
+- a corridor or other non-sector destination;
+- a pair's own sector;
+- an unknown pair;
+- a route across a seal.
+
+A pair whose next door is sealed after the order stops and waits (`stopped` in the log). Moving pair A moves only the partner; the
+trainee is never moved.
+
+### 34.5 Controls
+
+No new action or binding was added. Every prompt shows the player's own key, and touch shows the same labels as buttons.
+
+| Where | Use | Ops |
+| --- | --- | --- |
+| Hygiene A (store in reach) | inspect the store (page) | start, pause or resume containment |
+| Sector 3 ECLSS bay | open the control page, then move down it | open the page; on it, operate the selected control |
+| Anywhere else on ring A | (doors and the ladder keep Use) | the intercom |
+| After the run | page through the debrief | replay |
+
+**The bay page** lists the fans (IMV), each of the nine damper pairs, the CO₂ unit, the TCC, the intercom and Close. The walk's
+doors stay the only door state (`_sync_doors` reads their leaves).
+
+**Refusals** come back with a reason and leave the state unchanged:
+
+- a door close while an ordered pair is in its doorway: "The doorway is occupied by B-1, B-2…";
+- any door during the watch;
+- a contradictory order.
+
+The walk's own "doorway occupied" refusal for the trainee's body is kept.
+
+### 34.6 Two-gas visualization
+
+The ring map draws one layer at a time, never a merged scale. The intercom's first item switches between them.
+
+| Layer | Unit | Colour scale | Corner label |
+| --- | --- | --- | --- |
+| CO₂ | % | the Phase 2A target and limit | `CO2 %` |
+| NH₃ | ppm | teal at 0, yellow at the 3 ppm reuse criterion, orange to the 24 h reference, red at the 1 h reference | `NH3 ppm`, in amber |
+
+On top of the layer, the map shows:
+
+- compartment IDs where they fit;
+- each bulkhead's connection (door, duct or nothing, from Phase 2A);
+- the store as the HYG diamond, with the source state in the caption;
+- the pairs as lettered discs, hollow and with a line to the destination while walking (no figures).
+
+**The bay's board** is the diegetic summary, six short lines: the CO₂ maximum and the unit, the NH₃ maximum and the TCC, the fans
+and the shut dampers, the source and what is left, and the groups and open doors. Its place is the DS-O10 panel. Detail is on the
+bay page (the compartment table) and in the crew report.
+
+### 34.7 Exposure
+
+Each person carries the model's integral of their compartment:
+
+- E, in ppm·s, added at every step;
+- the current value;
+- the peak;
+- the running largest completed 1 h mean and 24 h mean (an incremental window, the same rule as `air_exposure.window_max`; the tests
+  compare the two);
+- the time above the CO₂ target.
+
+The crew report keeps four kinds of number apart:
+
+- **measured now:** the place, the NH₃ now, the CO₂ at the person's place;
+- **accumulated:** the peak, the largest completed 1 h mean (or "<1h" before an hour has passed), the running dose and the CO₂ hours;
+- **completed windows:** the 24 h and 7 d windows appear only in the debrief, once they are complete;
+- **HYPOTHETICAL**, in amber: the 24 h mean ahead and the CO₂ at 24 h, if nothing changes. This is computed on a copy of the model
+  and never touches the run.
+
+### 34.8 Watch semantics
+
+**Declaring.** Declaring the ring set (an intercom item) snapshots the exact present state and continues the same model at ×1800.
+Nothing is reset or tuned. The snapshot covers:
+
+- the inventories;
+- the component states;
+- the people's places and walks;
+- the doors and vents;
+- the remaining source.
+
+**Plans.** There are two:
+
+- **NONE:** nothing changes.
+- **RESTORE:** at the end of the watch, and only because the trainee declared it, the ring returns to normal ventilation (fans and
+  dampers open, doors closed, both units on). Each person then walks home once every compartment on their way is under the reuse
+  criterion, checked hourly, so nobody is moved into unsafe air. The log records `restore` and each `home`; the checks confirm that
+  nothing else appears after the watch starts.
+
+**During the watch**, doors are refused and no request changes the run. The trainee's modelled place stays where they stood.
+
+**At the watch's end** (24 h after the release, or 1 h more if declared later), the verdict is taken:
+
+| Verdict | Meaning |
+| --- | --- |
+| NOT_CONTAINED | the store still leaks |
+| CO2_LIMIT | the 0.5 % control limit was passed where people were, at any time |
+| TEMPORARY | an occupied group has no CO₂ removal |
+| STABLE_RESIDUE | CO₂ held, but NH₃ above the reuse criterion is held where nothing removes it |
+| STABLE | stable under the stated assumptions |
+
+The projection then runs to 7 days. It uses 300 s steps, and 10 s steps while anyone walks. None of these is called permanent; the
+debrief says what each depends on.
+
+### 34.9 Debrief
+
+The debrief is three pages, and every number on them is the run's own.
+
+**Page 1: the ship.**
+
+- The verdict, with the configuration and family at the watch (isolate, route to the TCC, separate, or uncontained).
+- The plan, and whether it ran.
+- NH₃: the inventory, the amount released, the amount still in the bag, the amount captured by the TCC, the amount still airborne.
+- When the store was contained.
+- CO₂ at 7 days: mean and maximum, and when the limit was crossed.
+- Per compartment, the time until it stays under the 3 ppm reuse criterion, or "not within 7 d". The criterion is labelled a
+  conservative training rule, not a NASA clearance.
+
+**Page 2: per person.**
+
+- Peak, largest 1 h mean, largest 24 h mean, 7 d mean.
+- Dose in ppm·h and CO₂ hours above the target.
+- The SMACs exceeded, and the route.
+- The SMACs are labelled separately as duration references.
+
+**Page 3: the three reference strategies, against the trainee's run.** The reference strategies are the packaged `isolate`, `purge`
+and `separate` cases, from the same model. For each one the page gives the worst 1 h and 24 h, the crew-hours above the CO₂ target,
+when A1 becomes reusable, and the verdict. It closes with the references text and the replay line. Nothing is hardcoded, and there is
+no score or rank.
+
+### 34.10 Parity
+
+`shared_air.py` packages the 16 cases the brief lists (`cases()`); case 16 replays case 1 from the exact initial state. The checkpoints
+are hourly in the live phase and the watch, plus the end of the watch and the end of the projection.
+
+| Case | Family | Verdict | NH₃ released / captured / airborne at 7 d (g) | worst 1 h / 24 h / 7 d (ppm) | CO₂ crew-h above target | A1 reusable after | refusals |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 1 isolate | ISOLATE | STABLE_RESIDUE | 2.39 / 1.90 / 0.49 | 14.8 / 5.7 / 1.53 | 0 | not within 7 d | 0 |
+| 2 purge | ROUTE | STABLE | 2.39 / 2.37 / 0.02 | 13.9 / 6.6 / 1.81 | 0 | 38 h | 0 |
+| 3 separate | SEPARATE | CO2_LIMIT | 2.39 / 2.37 / 0.02 | 13.9 / 7.0 / 2.00 | 239 | 41 h | 0 |
+| 4 no containment | UNCONTAINED | NOT_CONTAINED | 7.00 / 1.04 / 5.96 | 7.1 / 3.1 / 0.83 | 0 | not within 7 d | 0 |
+| 5 delayed containment (1 h) | ROUTE | STABLE | 4.82 / 4.79 / 0.03 | 33.9 / 14.6 / 3.96 | 0 | 63 h | 0 |
+| 6 invalid containment | ROUTE | STABLE | 2.75 / 2.74 / 0.02 | 22.9 / 8.4 / 2.26 | 0 | 44 h | 1 |
+| 7 invalid orders | ISOLATE | CO2_LIMIT | 2.39 / 1.84 / 0.55 | 26.9 / 25.9 / 25.83 | 166 | not within 7 d | 4 |
+| 8 doorway refusal | ROUTE | STABLE | 2.39 / 2.37 / 0.02 | 20.2 / 7.3 / 1.96 | 0 | 39 h | 1 |
+| 9 ventilation off | ISOLATE | CO2_LIMIT | 2.39 / 0.09 / 2.29 | 26.9 / 25.9 / 25.83 | 499 | not within 7 d | 0 |
+| 10 TCC off | ISOLATE | STABLE_RESIDUE | 2.39 / 0.00 / 2.38 | 20.3 / 9.7 / 9.27 | 0 | not within 7 d | 0 |
+| 11 CO₂ held, NH₃ spread | UNCONTAINED | NOT_CONTAINED | 7.00 / 6.96 / 0.04 | 23.5 / 18.3 / 5.15 | 0 | 74 h | 0 |
+| 12 clean air, slow recovery | ISOLATE | STABLE_RESIDUE | 2.39 / 1.84 / 0.55 | 13.9 / 5.9 / 1.54 | 0 | not within 7 d | 0 |
+| 13 interrupted containment | ROUTE | STABLE | 2.52 / 2.51 / 0.02 | 21.3 / 7.7 / 2.07 | 0 | 41 h | 1 |
+| 14 watch, no plan | ROUTE | STABLE | 2.39 / 2.37 / 0.02 | 20.3 / 7.3 / 1.96 | 0 | 39 h | 0 |
+| 15 watch, restore plan | ISOLATE | STABLE_RESIDUE | 2.39 / 2.37 / 0.02 | 13.9 / 5.9 / 1.93 | 0 | 45 h | 0 |
+| 16 replay of 1 | ISOLATE | STABLE_RESIDUE | identical to case 1 (the test compares every checkpoint) | | | | |
+
+**Reading the cases.**
+
+- Cases 7 and 9 leave the partner in a sealed, unventilated sector 1. That is why they show high NH₃ means and CO₂ above its target;
+  the model computes this and nothing was added.
+- Case 14 shows that the ring's normal state (doors closed, ducts open) already routes the residue through the ducts to the TCC.
+- Case 15 shows that isolation followed by the declared restore clears sector 1 at 45 h. Isolation without a plan (case 1) keeps it
+  out of use for the whole week.
+
+**The ledgers.** The CO₂ mass ledger, the NH₃ ledger (air + source + bed), the release ledger, and the released = airborne + captured
+check all close in every case (tests, and the Godot debrief check).
+
+**Godot parity.** `check_shared_air.gd` replays all 16 cases in Godot, about 1 s each headless. It compares every checkpoint, within
+the model's relative 10⁻⁹ on the masses and the exposures, and the debrief numbers to 10⁻⁸ relative. It also compares the families,
+the verdicts and the refusal counts. The result is PASS, 16/16. At load the scenario replays case 1 to 3 h, in about 0.2 s headless.
+
+### 34.11 Browser validation
+
+All runs used the site built from this branch: `workflow.py web --native`, served locally, in headless Chromium with software WebGL.
+
+| Run | Input | Result |
+| --- | --- | --- |
+| `runtime-export` (rebuild, publication, every runtime check) | headless Godot | PASS, 12/12, including the new `shared_air` check (isolate, with the 16-case parity and the replay) |
+| `web_check --part training --training shared-air` | the player's own keys (desktop, 1280 × 720) | PASS, 122 actions, each answered by a key |
+| the same | emulated phone touch (844 × 390, DPR 3) | PASS, 122 actions, each answered by an on-screen button |
+| the same, `--rotate` | the phone turned upright mid-run ("Continue upright") | PASS, 124 actions |
+| `--training shared-air-purge` | keys | PASS, 80 actions; route to the TCC, the doorway refusal |
+| `--training shared-air-separate` | keys | PASS, 95 actions; sector 2 sealed with four people, the RESTORE plan ran (`restore`, `home`) |
+| `--training shared-air-nocontain` | keys | PASS, 120 actions; uncontained, NOT_CONTAINED |
+| Regression: `--training systems`, `deadship`, `airflow` (keys and touch) | | PASS, 2/2 each |
+| Regression: `--part main` | | PASS, 67/67 |
+| Regression: `--part walk` | | PASS, 8/8 |
+| Play size | | 78.71 MB of the 90 MB budget, 11.3 MB headroom (Phase 2A: 78.15 MB) |
+
+The stills `SA_1`–`SA_6` (containing, the bay, the crew report, the three debrief pages) come from the browser run with keys.
+
+### 34.12 Performance
+
+These are headless measurements in this container, at 60 fixed fps. They are not measurements on a phone.
+
+| Item | Cost |
+| --- | --- |
+| Model step, CO₂ and NH₃ | about 32 µs (SYS-002 v2, §29) |
+| Scenario per frame (mean over a whole run, 9,600–15,300 frames) | 150–190 µs |
+| Worst frame, live | 10–12 ms (11.7 ms in the runtime-export check); a frame where someone changes compartment rebuilds both propagators (~6 ms) |
+| Worst frame, projection | bounded by a 6 ms frame budget (it had peaked at 45 ms with 60 steps a frame and people walking home) |
+| The 24 h watch | 22 ship h at ×1800 is about 45 s of real play; headless at fixed fps it finished in 8 s |
+| The projection | about 0.3 s |
+| Reference check at load | about 0.2 s |
+| Memory | the exposure samples, one shared time array and six exposures per 10 s step: under 5 MB for 7 days |
+
+Propagators are computed only when something changes (the model's own cache by step length); the hypothetical projection runs only
+when the crew report opens.
+
+### 34.13 Limitations and the manual playtest checklist
+
+**Limitations.**
+
+- Pairs are abstract, with no figures or AI.
+- The doors a pair cycles leave no exchange.
+- The trainee's place is frozen from the watch on.
+- Sleeping places, condensate uptake and the TCC bed's capacity are not modelled (SYS-002 v2).
+- The source values are PROTOTYPE.
+- The stability verdict covers CO₂ removal, containment and the NH₃ residue only; there is no power, thermal or humidity model
+  (Phase 2C).
+- The doorway rule (the last 10 s of a compartment) is a training abstraction.
+- Timing is measured headless, not on a phone.
+
+**Playtest checklist for the owner** (`#interior-shared-air`, desktop and phone):
+
+1. Start: the HUD says "Routine shift in sector 1" with ship time ×30 and real time shown apart. The map shows NH₃ ppm in amber in its
+   corner.
+2. At ship 0:10 the CAUTION alert appears. Ops opens the intercom and the clock stops; "Contain the spill" from there is refused.
+3. At the store (the HYG diamond, sector 1): Use shows the store's state. Ops starts containment; step away and it pauses, keeping
+   its progress; come back and Ops resumes. After 10 ship minutes it reports CONTAINED with the grams in the air and in the bag.
+4. Walk to the sector 3 ECLSS bay. The board shows both gases. Use or Ops opens the control page; Use moves down it and Ops toggles
+   (shut damper pairs A1P and A1N).
+5. Intercom from the bay page: send your partner to A3 and watch the hollow disc walk the map. Try sending them back across the seal:
+   refused, with the reason. Open the crew report: measured values apart from the amber hypothetical ones.
+6. Try closing a door while pair B walks through it (send B to A3 first and leave A2P open): refused, "the doorway is occupied".
+7. Declare the ring set (the watch): doors are refused, the HUD counts to 24 h at ×1800, then the 7-day projection, then the debrief.
+   Read its three pages, comparing your run with the three reference strategies.
+8. Ops replays from the same start.
+9. On a phone: the same steps with the touch buttons. Turn the phone upright mid-run; the pages and board stay legible.
+
+## 35. Handoff (Phase 2B "Shared Air")
+
+| Deliverable | Where |
+| --- | --- |
+| A Playable DS-2 "Shared Air" | `#interior-shared-air` |
+| B Containment interaction | §34.3 |
+| C Crew commands | §34.4 |
+| D Atmospheric controls | §34.5 (bay page, the walk's doors) |
+| E Two-gas interface | §34.6 and §34.7 |
+| F Stability watch | §34.8 |
+| G Engineering debrief | §34.9 |
+| H Validation | §34.10 and §34.11 |
+| I Documentation | this section, §34.13, the roadmap §32, docs/MODEL.md |
+| J Final handoff | below |
+
+1. **What was implemented.**
+   - `#interior-shared-air`: the complete Phase 2B slice on SYS-002 v2, unchanged. It covers the scenario data, the deterministic Python
+     reference (`shared_air.py`, 16 cases, 18 tests) and its Godot mirror (`WfSharedAir`).
+   - In play: the containment at the store, the pair orders and the bay page, the two-gas map, the bay board and the crew report, the
+     watch and the projection, the three-page debrief, and the replay.
+   - Validation: the parity check and four played strategies. The default experience is unchanged.
+2. **Player actions.**
+   - Walk, and open and close doors (Use).
+   - At the store: inspect it (Use), and start, pause or resume the containment (Ops).
+   - At the bay: switch the fans, the nine damper pairs, the CO₂ unit and the TCC.
+   - On the intercom, anywhere on ring A:
+     - switch the map layer;
+     - send pair A (the partner), B or C to a sector, or tell a walking pair to hold;
+     - try the containment (refused away from the store);
+     - open the crew report;
+     - set the plan (NONE or RESTORE);
+     - declare the ring set (the watch).
+   - Read the debrief, and replay.
+   - Every action has a key and a touch button.
+3. **Containment.** It needs the trainee's body within reach of the store, Ops, and 10 ship minutes of uninterrupted work. Stepping
+   away or Ops pauses it and keeps its progress, and the store keeps leaking at the first-order rate until the work is done. Then
+   `isolate_source` is called once, and what remains stays in the bag, accounted for. Nothing else grants it: no page, no order, and
+   not the watch (§34.3).
+4. **Crew commands.**
+   - Orders go by intercom.
+   - A route is the shortest path through doors that crosses no sealed bulkhead, at 40 s per compartment.
+   - A door a pair stands in cannot be closed.
+   - Occupancy, CO₂ and exposure follow each person step by step.
+   - A refused order changes nothing.
+   - The trainee is never moved (§34.4).
+5. **Competing strategies remain possible.** All four families are reachable through play, and each was played to its debrief in the
+   browser and headless:
+   - isolate: STABLE_RESIDUE; sector 1 is still unusable after 7 d; nobody above the CO₂ target;
+   - route to the TCC: STABLE; sector 1 is usable at 38–44 h; worst 1 h 13.9–20 ppm;
+   - separate: CO2_LIMIT; 239 crew-hours above the CO₂ target; sector 1 usable at 41 h;
+   - uncontained: NOT_CONTAINED.
+
+   No family dominates: what clears sector 1 sooner either costs NH₃ exposure or CO₂.
+6. **Model and gameplay agree.** All 16 reference cases replayed in Godot within the model's tolerance (10⁻⁹ relative), checkpoint by
+   checkpoint, including the families, the verdicts, the refusal counts and the debrief numbers. Each played strategy reached its
+   reference family and verdict. Every ledger closes in every case.
+7. **The stability watch is physically consistent.** It continues the same state of the same model with the same step. It resets
+   nothing and tunes nothing, and it changes nothing without a declared plan (the check confirms an empty post-watch log). A RESTORE
+   plan runs only its listed actions, at the watch's end, and moves nobody into air above 3 ppm. The verdict never calls a
+   configuration permanent.
+8. **The debrief.**
+   - Page 1, the ship:
+     - the verdict, the family and the plan;
+     - the NH₃ budget (released, retained, captured, airborne), checked against the inventory;
+     - the containment time and CO₂ at 7 d;
+     - the time each compartment takes to reach the reuse criterion.
+   - Page 2, per person: the peak, the 1 h, 24 h and 7 d means against the SMACs, the dose, the CO₂ hours and the route.
+   - Page 3: the trainee's run against the packaged isolate, purge and separate cases.
+
+   Completed windows only. The 3 ppm criterion is labelled a training rule, not a NASA clearance. There is no score.
+9. **Browser tests passed.** Everything in §34.11:
+   - Shared Air with desktop keys, emulated-phone touch in landscape, and the phone turned upright mid-run;
+   - the purge, separate and uncontained strategies with keys;
+   - the systems, deadship and airflow trainings;
+   - the main site (67/67) and the touch walk (8/8);
+   - the play size, 78.71 MB.
+10. **Unverified on real devices.**
+    - A real phone and tablet: frame rate, the touch hit areas at real size, and page legibility in daylight. The tests run on
+      software WebGL with drawing mostly off, so frame rates were not measured.
+    - The watch's real duration on a phone (about 45 s by design).
+    - The cost of the propagator rebuild (~6 ms headless) on a slow phone.
+    - Gamepad input (the bindings exist but were not exercised).
+    - A person's first playthrough without guidance: the owner's checklist, §34.13.
+11. **Still PROTOTYPE.**
+    - The source: 7 g, τ = 1 h, in hygiene A.
+    - The scenario timings: the 10 min alert, the 10 min containment work, the 40 s per compartment, the 10 s doorway, ×30 and ×1800.
+    - The 3 ppm reuse criterion and the 24 h watch with the 7 d projection.
+    - The three-pair crew placement.
+    - From earlier phases: the TCC (15.3 m³/h, 0.95), the IMV values (DS-O7), and the ring's volumes and occupancy (DS-O1).
+    - The SMACs are an external reference, not Wayfarer's medical limit (OPEN).
+12. **Phase 2C** (proposal only; it needs its own authorization).
+    - Keep the shared-air model fixed and add only what the debrief currently names as "not modelled". The first candidate is the TCC
+      bed's finite capacity, which makes routing to the TCC cost something.
+    - Then, with the owner's sign-off, real crew rest and sleeping places, so that separation has a time cost.
+    - Power, thermal and humidity stay outside until a gate shows that a choice in this scenario depends on them.
+    - Before any of this, the owner's playtest (§34.13) should confirm that the four strategies read as real choices.
