@@ -2053,9 +2053,13 @@ the hygiene A urine source (7 g, τ = 1 h), the alert, the trainee's containment
 criterion. `src/wayfarer/shared_air.py` (`Run`) is the deterministic reference: a fixed 10 s step; pairs ordered by intercom walk door
 routes at 40 s per compartment and never cross a sealed bulkhead (door and damper pair shut); each person's exposure is the model's
 compartment integral; a watch continues the same model at ×1800 to 24 h, takes a verdict (NOT_CONTAINED, CO2_LIMIT, TEMPORARY,
-STABLE_RESIDUE, STABLE) and projects to 7 d, applying only a declared RESTORE plan. The package `wf_deadship_ds2.json` carries 16 reference
-cases with checkpoints; `godot/scripts/deadship/shared_air.gd` (`WfSharedAir`) mirrors the machine and `check_shared_air.gd` replays all
-16 within the model's tolerance and plays four strategies through Use and Ops. Tests: `tests/test_shared_air.py` (18).
+STABLE_RESIDUE, STABLE) and projects to 7 d, applying only what the trainee declared: a duct reconnection scheduled at the ECLSS bay (every damper pair
+opens and the fans run at that ship time, doors untouched; `[watch] reconnect_options_h`) and the RESTORE plan at 24 h (dampers, fans
+and both units; doors stay as left). The verdict also reports the CO₂ peak where people were and the crew-hours above the 0.3 %
+target (`degraded`); 0.5 % stays the limit. Three strategies are viable and non-dominated in play: isolate, purge, and separate with
+a timely reconnection (report §36). The package `wf_deadship_ds2.json` carries 21 reference cases with checkpoints;
+`godot/scripts/deadship/shared_air.gd` (`WfSharedAir`) mirrors the machine and `check_shared_air.gd` replays all 21 within the
+model's tolerance and plays five strategies through Use and Ops. Tests: `tests/test_shared_air.py` (23).
 
 ## Retired runtime scenes
 

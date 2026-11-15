@@ -481,8 +481,8 @@ candidates of all nine classes are separate accessory assets (docs/ACCESSORIES.m
   with the walk's doors as connections (`#interior-airflow`), and SYS-002 v2 (NH₃ beside CO₂: a finite source, a TCC in the sector 3
   bay, exposures against the Rev D SMACs). The first Phase 2B gate failed on CO₂ alone (report §27); the second, on SYS-002 v2 with a
   urine pretreatment failure in hygiene A, passed for the base scenario (report §30: containment is forced, then a real choice between
-  keeping the crew's air clean and clearing the habitation sector sooner), not for the source's extremes. Phase 2B "Shared Air" is built (`#interior-shared-air`, report §34, handoff §35). **Open:** the owner's review
-  of Phases 1 and 2A (checklist §22.4), SYS-002 v2 and the source's PROTOTYPE values; the owner's playtest of 2B (checklist §34.13) and the handoff questions (§35); Phase 2C needs its own authorization;
+  keeping the crew's air clean and clearing the habitation sector sooner), not for the source's extremes. Phase 2B "Shared Air" is built and finalized (`#interior-shared-air`, report §34–§36, handoffs §35 and §38; separation now viable with a scheduled reconnection). **Open:** the owner's review
+  of Phases 1 and 2A (checklist §22.4), SYS-002 v2 and the source's PROTOTYPE values; the owner's playtest of 2B (guide §36.10) and release (§36.11); Phase 2C (finite TCC bed, research §37: gate first) needs its own authorization;
   ring ventilation stays PROTOTYPE (DS-O7), the crew-tube hatches outside the model (DS-O8). **Done when:** the owner accepts or
   declines the phases and SYS-002 v2 and squashes or declines them.
 

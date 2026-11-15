@@ -358,8 +358,8 @@ timeout -s KILL 120 godot --headless --path godot --script res://scripts/check_e
 timeout -s KILL 900 godot --headless --fixed-fps 60 --path godot res://scenes/excursion.tscn --quit-after 120000 -- --systems --check-systems   # WF_GODOT_SYSTEMS (SYS-001)
 timeout -s KILL 900 godot --headless --fixed-fps 60 --path godot res://scenes/excursion.tscn --quit-after 120000 -- --deadship --check-deadship   # WF_GODOT_DEADSHIP (DS-1)
 timeout -s KILL 900 godot --headless --fixed-fps 60 --path godot res://scenes/excursion.tscn --quit-after 120000 -- --airflow --check-airflow   # WF_GODOT_AIRFLOW (SYS-002)
-timeout -s KILL 1800 godot --headless --fixed-fps 60 --path godot res://scenes/excursion.tscn --quit-after 300000 -- --shared-air --check-shared-air [--strategy=purge|separate|nocontain]   # WF_GODOT_SHARED_AIR (DS-2B: 16-case parity, a strategy played by Use and Ops)
-python3 tools/web_check.py <site> --out <dir> --part training [--training systems|deadship|airflow|shared-air[-purge|-separate|-nocontain]] [--no-touch] [--rotate]   # in Chrome, every action by the player's key or touch button; --rotate turns the phone upright mid-run
+timeout -s KILL 1800 godot --headless --fixed-fps 60 --path godot res://scenes/excursion.tscn --quit-after 300000 -- --shared-air --check-shared-air [--strategy=purge|separate|separate_late|nocontain]   # WF_GODOT_SHARED_AIR (DS-2B: 21-case parity, a strategy played by Use and Ops)
+python3 tools/web_check.py <site> --out <dir> --part training [--training systems|deadship|airflow|shared-air[-purge|-separate|-separate-late|-nocontain]] [--no-touch] [--rotate] [--desktop WxH]   # in Chrome, every action by the player's key or touch button; --rotate turns the phone upright mid-run
 timeout -s KILL 120 godot --headless --path godot --script res://scripts/check_route.gd    # WF_GODOT_ROUTE (route playback against all rows)
 godot --path godot --script res://scripts/profile_views.gd -- --view=station|ship [--hide-assemblies=RA.EXT,..] [--hide-zone=INTERIOR]
 ```

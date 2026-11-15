@@ -1987,8 +1987,8 @@ gameplay was built (§31).
 | 1 DS-1 "Scrubber" tutorial | Complete (finalized 2026-11-14) |
 | 2A Atmospheric connectivity | Complete (finalized 2026-11-14) |
 | SYS-002 v2 (CO₂ and NH₃) and the second 2B gate | Built and validated; gate passed for the base scenario; SYS-002 v2 accepted by the owner (2026-11-14) |
-| 2B "Shared Air" | Built and validated on the task branch (§34); awaiting owner playtest and review |
-| 2C "Borrowed Air" (humidity, heat, parts) | Design only, after 2B |
+| 2B "Shared Air" | Built, finalized and validated on the task branch (§34, §36: separation viable with a scheduled reconnection); awaiting owner playtest and review |
+| 2C "Borrowed Air" (humidity, heat, parts) | Research only (§37): a finite TCC bed is the recommended first model, behind its own gate; not authorized |
 | 3 Broader systems | Design only |
 | 4 Competitive Deadship and Hullrun | Design only |
 | 5 Narrative survival | Design only |
@@ -2443,3 +2443,378 @@ when the crew report opens.
     - Then, with the owner's sign-off, real crew rest and sleeping places, so that separation has a time cost.
     - Power, thermal and humidity stay outside until a gate shows that a choice in this scenario depends on them.
     - Before any of this, the owner's playtest (§34.13) should confirm that the four strategies read as real choices.
+
+## 36. Phase 2B finalization [BUILT P2B-F; owner brief 2026-11-15]
+
+The validated engineering model (SYS-002 v2) is unchanged. §34 and §35 keep their historical results; this section records what
+changed after them and why.
+
+### 36.1 Gate versus play: why the separation failed
+
+The gate's representative separation (§30.5, `ds2b_gate.py`, arcs `12:Hb 23:Ha 31:B`, all six to sector 2, reconnect at 4 h) was viable.
+The playable reference `separate` (§34.10, case 3) ended in CO2_LIMIT with 239 crew-hours above the target. Both were rerun and scored
+on the gate's own definitions (`ds2b_reconcile.py`, `ds2b_reconcile.json`). The gate's metrics are 24 h figures; the debrief's dose and
+crew-hours are 7-day figures, which is why §34.10 shows 239 crew-hours where the 24 h figure is 131.
+
+| Property | Engineering gate (§30.5) | Playable case 3, before | Playable case 17, after |
+| --- | --- | --- | --- |
+| Initial state | ring normal (doors closed, fans and dampers open, both units on), CO₂ steady state, crew 2/2/2, 7 g at τ 1 h from t = 0 | the same (`ring_air.start`, the same source) | the same |
+| Containment | 10–20 min, by sector 1's off-shift pair member, **in parallel** with the ring being set | 15–25 min, by the trainee, **before** anything else (the Godot play: 11.5–31 min) | 15–25 min |
+| When the ring is set | at 10 min, **every door and damper at once by remote "Ops"** | the trainee reaches the bay at 27.5 min and shuts the dampers at 30 min | the same |
+| Crew positions | all six to sector 2; the containing person walks A1 → A2 **through the sealed A1P** (the gate cycles any door) | partner, B, C and the trainee in sector 2; the trainee reaches it by sector 3 (the purge path) and A3N | the same |
+| Doors | arc 3–1 doors open (`B`), corridors AC1/AC2 joined to sector 2, A1P and A3N sealed | every door closed behind the trainee; A1P and A3N sealed by their dampers | arc 3–1 doors left open by the trainee (the gate's `B`); A1P and A3N sealed |
+| Ventilation | per arc state at 10 min | fans on; dampers A1P and A3N shut at 30 min | the same |
+| Reconnection | at 4 h: every damper open **and every door closed (remotely)** | **none until the watch's end at 24 h**; the CO₂ limit passed at 5.29 h | at 4 h, scheduled at the bay: every damper pair open, fans on, **doors untouched** |
+| At 24 h | ring normal, **everyone placed at home instantly** | RESTORE: dampers, fans and units, doors closed remotely, people walk home under 3 ppm | RESTORE: dampers, fans and units only, people walk home under 3 ppm |
+| CO₂ peak where people were | 0.433 % | 1.708 % | 0.419 % |
+| CO₂ crew-hours above 0.3 % (24 h) | 82.5 | 130.9 | 39.6 |
+| NH₃ worst 1 h / worst 24 h mean | 9.1 / 4.4 ppm | 13.9 / 7.0 ppm | 13.9 / 6.5 ppm |
+| Crew mean 24 h NH₃ dose | 99.9 ppm·h | 162.1 ppm·h | 148.8 ppm·h |
+| Every compartment under 3 ppm after | 28 h | 41.5 h | 37.3 h (A1 36.9 h) |
+| Verdict | viable | CO2_LIMIT | STABLE, with degraded CO₂ control |
+
+**Root causes, in order of effect:**
+
+1. **No reconnection before the limit.** The play offered only the RESTORE plan, at the end of the 24 h watch. Sector 2, sealed with
+   its crew and without the CO₂ unit, passes 0.5 % at 5.29 h. The gate reconnected at 4 h, at 0.43 %. This alone turns the verdict:
+   with a reconnection at 4 h, case 3's own configuration is STABLE (peak 0.42 %).
+2. **Configuration time.** The gate sets the whole ring at 10 min by remote control while another person contains the spill. A single
+   trainee must contain the spill first and then walk to the bay, so the ring is set at about 30 min, after the ducts have carried NH₃ into every compartment. The
+   gate's own separation, rerun with the crew acting at 15 and 30 min, restores the ring in 35 h and 48 h instead of 28 h. This is why
+   the separation's advantage over the purge shrinks in play; it is the play's honest consequence of one trainee, not a model error.
+3. **The purge path's doors.** The gate opens the arc 3–1 doors; case 3 closed them behind the trainee. Leaving them open (case 17) cuts
+   the CO₂ crew-hours from 74.7 to 39.6 and restores A1 0.7 h sooner.
+4. **Remote doors and instant homecoming.** The gate's reconnection and its 24 h return close doors remotely and place everyone at home.
+   The play keeps doors physical (§36.2) and walks people home through air under 3 ppm. This changes the late projection only slightly.
+5. **Smaller differences:** containment 5 min later (2.39 g released instead of 1.98 g); the trainee's route through sector 3.
+
+### 36.2 The selected solution: a scheduled reconnection (Option A)
+
+The gate's reconnection moves dampers and fans, which are remote equipment at the sector 3 ECLSS bay. Its door closing is a gate
+abstraction and is not needed for the result. So the smallest faithful change is Option A, a scheduled operation at the bay. Option B
+(an intervention checkpoint) would be needed only if the recovery required doors; it does not, and it was not built.
+
+- **At the bay:** the item "Scheduled reconnection: none -> T+2:00 ..." sets the next offered time (2, 3, 4, 5, 6 or 8 h after the
+  release, `[watch] reconnect_options_h`) or cancels it.
+- **What it does:** at that ship time, in any phase, the bay opens every damper pair and runs the fans. Doors are never moved remotely.
+- **Refusals:** a schedule is refused if its time has passed, if it is off the 10 s step, if it is after the watch's end, or if it is
+  changed during the watch.
+- **Visibility:** it is logged (`reconnect`), shown in the watch's HUD line, the watch announcement, the bay page and the debrief's
+  decisions. It runs only because the trainee declared it, and nothing else changes.
+- **Order at a step boundary:** the due actions, then the due reconnection, then the walks and the model step. A test confirms that a
+  damper shut at the same boundary is reopened by the reconnection.
+- **RESTORE now moves remote equipment only:** every damper pair, the fans, the CO₂ unit and the TCC. The doors stay as the trainee left
+  them. In the existing cases the doors were already closed, so their numbers are unchanged.
+
+### 36.3 Operational target versus control limit
+
+- **Verdict:** it stays as defined in §34.8. CO2_LIMIT means 0.5 % was passed where people were. Exceeding the 0.3 % target is not a
+  failure.
+- **New verdict fields:** `co2_peak_pct` and `co2_peak_h` (the highest CO₂ where anybody was, live and in the watch),
+  `co2_above_target_crew_h`, and `degraded` (stable, but above the target for a time).
+- **Debrief:** it shows the peak, the crew-hours above the target, and the 0.3 % / 0.5 % levels as Wayfarer's PROTOTYPE operating
+  levels, not injury thresholds. The headline reads "Stable, with degraded CO₂ control" or "Operational failure: CO2 control limit".
+- **Unchanged:** the NH₃ SMACs and their duration-specific wording.
+
+### 36.4 Reference results, before and after
+
+Cases 1–16 are unchanged, and so are their numbers (§34.10). The new cases are listed below.
+
+| Case | Family | Verdict | CO₂ peak | CO₂ crew-h above target (7 d) | worst 1 h / 24 h / 7 d (ppm) | A1 reusable | Refusals |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 3 separate (no reconnection, historical) | SEPARATE | CO2_LIMIT | 1.71 % | 239.5 | 13.9 / 7.0 / 2.00 | 41 h | 0 |
+| 17 separate_reconnect (4 h) | SEPARATE | STABLE, degraded | 0.42 % | 39.6 | 13.9 / 6.5 / 1.80 | 37 h | 0 |
+| 18 separate_late (6 h) | SEPARATE | CO2_LIMIT | 0.55 % | 89.5 | 13.9 / 6.4 / 1.77 | 37 h | 0 |
+| 19 reconnect_refused | SEPARATE | STABLE, degraded (identical to 17, every checkpoint) | 0.42 % | 39.6 | 13.9 / 6.5 / 1.80 | 37 h | 4 |
+| 20 reconnect_cancelled | SEPARATE | CO2_LIMIT | 1.71 % | 233.1 | 13.9 / 7.0 / 1.98 | 41 h | 0 |
+| 21 replay_reconnect | identical to 17 | | | | | | |
+
+The reference player (`shared_air.play`, and its Godot mirror) now also delivers actions after the watch begins, so each one is
+refused and logged as the runtime does. Case 19's cancellation during the watch exercises this.
+
+### 36.5 Strategy viability
+
+The scoring follows the gate's rules (§30.3): ε on each objective, viability being no occupied compartment over 0.5 % within 24 h, and
+`ds2b_reconcile.json` as the source.
+
+| Strategy (reference timing) | Viable | Worst 1 h | Crew 24 h dose | CO₂ crew-h above target (24 h) | CO₂ peak | Every compartment under 3 ppm | Dominated? |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Isolate, no plan (case 1) | yes | 14.8 | 131.9 | 0 | 0.22 % | not within 7 d | no |
+| Isolate, restore at 24 h (case 15) | yes | 13.9 | 129.3 | 0 | 0.26 % | 44.9 h | no |
+| Purge (case 2) | yes | 13.9 | 152.5 | 0 | 0.17 % | 38.4 h | no |
+| Separate, reconnect at 4 h (case 17) | yes | 13.9 | 148.8 | 39.6 | 0.42 % | 37.3 h | no |
+| Separate, reconnect at 6 h (case 18) | **no** (0.55 %) | | | | | | |
+| Separate, no reconnection (case 3) | **no** (1.71 %) | | | | | | |
+
+With the trainee containing at the alert (the fastest a single trainee can be), the same three are viable and non-dominated:
+
+| Strategy | Crew 24 h dose | CO₂ crew-h | Restore (h) |
+| --- | --- | --- | --- |
+| Isolate, restore | 104.1 | 0 | 39.4 |
+| Purge | 126.7 | 0 | 32.3 |
+| Separate, reconnect at 4 h | 122.3 | 42.2 | 31.1 |
+
+**The trade, honestly stated.**
+
+- **Isolation** gives the lowest crew dose and keeps sector 1 out of use longest.
+- **The purge** costs no CO₂ and clears sooner.
+- **Separation with a timely reconnection** clears soonest with a slightly lower dose than the purge, at the price of hours of degraded
+  CO₂ control and a hard deadline (about 5 h for six people sealed, about 6.4 h for five).
+
+In play the separation's margin over the purge is small: about 1 h of restoration and 3–4 ppm·h of dose. The reason is root cause 2: a
+single trainee sets the ring 20 minutes later than the gate's crew. The physics was not changed to widen the margin.
+
+### 36.6 Gameplay and usability review
+
+Method: the stills from each browser run and the HUD and page texts in every phase were read as a first-time player would see them,
+checking what is shown against what the model does. This is a review of what appears on screen, not a human playtest; the owner's
+playtest (§36.10) remains to do.
+
+**Found and fixed:**
+
+| Problem | Fix |
+| --- | --- |
+| The walk's tour checklist ("Ring A [x] board … Learning points 0/9") filled the left panel in Shared Air, unrelated to the task | Hidden while Shared Air runs; the panel shows the seven stages, the source line and the hint |
+| Nothing told the player that a pair had arrived, or that a pair stopped at a sealed door | HUD news: "Intercom: pair C arrived in A2." or "… stopped in A3: the next bulkhead, A3N, is sealed" |
+| Damper items did not say what shutting one does when its door is shut or open | Each item says the consequence: "door shut, so this seals A1P", "door open, so air still passes", "unseals …" |
+| Doors, dampers and units were not related anywhere on the bay page | One line: air crosses a bulkhead by its door if open and its damper pair if open; sealed only when both are shut; doors are worked where they are, dampers and units from the bay. The unit line says which gas each unit removes |
+| Separation could not succeed; the debrief's family text promised it "clears soonest" without the CO₂ cost being survivable | The scheduled reconnection (§36.2); the family texts name the deadline; the comparison page shows separation with and without reconnection |
+| The watch's HUD line used decimal hours and did not say what was declared | "Verify: stability watch, ship T+h:mm of 24 h (x1800), plan …, reconnection scheduled at T+4:00 · real m:ss"; the projection line says "computed ahead" |
+| The debrief opened on a dense ship table | A first page answers what happened, what you did, what was saved, what was sacrificed and whether it holds; then the ship, the crew, the alternatives (4 pages) |
+| After the projection the HUD still said "the 7-day projection runs now" (fixed in 4190a8a) | "7-day projection complete: … The debrief shows what was saved and what it cost." |
+| Stepping the reconnection time to 4 h listed each step ("set for T+2:00 · T+3:00 · T+4:00") in the debrief's "What you did" | Consecutive settings count once, as the last value (Python and Godot) |
+| In a 1024×600 window the bay page ran past the bottom of the screen and the checklist's hint ran into the prompt | On a desktop the page's type steps down (15 to 12 px) until it fits; the checklist shows only the lines that fit above the prompt |
+
+**Reviewed and kept:**
+
+| Area | Why kept |
+| --- | --- |
+| The alert | The CAUTION banner, the "odour … in A1" text, and the NH₃ layer as the map's default |
+| Onboarding | The stage objectives name tools and constraints, not a solution ("Choose how to handle the residue: doors, ducts and units at the ECLSS bay, the other pairs by intercom") |
+| The NH₃ explanation | Hygiene A's page states what the source is (hydrolysed urine giving off ammonia) and that only the TCC removes it |
+| The map | It shows one gas at a time, with its unit in the corner, and the pairs as discs that are hollow while walking, with a line to the destination |
+| Pairs passing doors | The leaves do not move. The map shows the pair crossing, the door's state is the trainee's, and the model counts no exchange (§34.1). Animating leaves would need figures and was not added |
+| Gamepad | Untested here (no device in the container) |
+| The bottom prompt partly behind an open page on a desktop | The open page repeats what the prompt says; the prompt shows in full when the page closes |
+
+### 36.7 Validation results
+
+| Check | Result |
+| --- | --- |
+| Python tests | 302 OK (1 skipped); `tests/test_shared_air.py` 23 (5 new: reconnection outcome, remote-only, refused/cancelled, boundary, event order) |
+| Python/Godot parity (headless, all 21 cases) | 21/21 within the model's tolerance, plus the debrief's CO₂ peak |
+| Godot strategies played through Use and Ops (headless) | isolate ISOLATE/STABLE_RESIDUE (with replay); purge ROUTE/STABLE; separate (reconnect 4 h) SEPARATE/STABLE, degraded, peak 0.35 %; separate_late (8 h) SEPARATE/CO2_LIMIT, peak 0.56 %; nocontain UNCONTAINED/NOT_CONTAINED — all PASS, the watch running only declared operations |
+| runtime-export, web build, browser runs | §36.8 |
+
+### 36.8 Browser, runtime, performance and size
+
+The checks below were run on the branch with the web build `workflow.py web --native` and `tools/web_check.py`. They use headless
+Chromium with software WebGL. The stills from the browser runs are in
+`/mnt/project-files/deadship_phase2b_final_2026-11-15/` (not committed).
+
+| Check | Result |
+| --- | --- |
+| `runtime-export` | PASS, 12 Godot checks including `shared_air` (run `20261115T081935257749Z-runtime`) |
+| Web build | PASS; `play/` 79.0 MB of the 90 MB budget (11.0 MB headroom; was 78.7 MB before this finalization) |
+| Shared Air, keys, 1280×720 (isolate, then replay) | PASS: ISOLATE / STABLE_RESIDUE, replay restarts at A1 |
+| Shared Air, emulated phone landscape with touch buttons | PASS (same strategy) |
+| Shared Air, emulated phone turned upright mid-run | PASS (same strategy; the page and the HUD re-place themselves) |
+| Shared Air, keys, 1024×600 (`--desktop`) | PASS (same strategy) |
+| Purge, keys | PASS: ROUTE / STABLE, CO₂ peak 0.18 % |
+| Separate with reconnection at 4 h, keys | PASS: SEPARATE / STABLE, degraded, peak 0.35 %; after the watch only the declared reconnection, RESTORE and the walks home |
+| Separate with reconnection at 8 h, keys | PASS: SEPARATE / CO2_LIMIT, peak 0.56 % (over 0.5 % at T+6.9 h) |
+| No containment, keys | PASS: UNCONTAINED / NOT_CONTAINED |
+| Regression: systems, Scrubber (`deadship`), airflow (keys and touch) | PASS |
+| Regression: `--part main` (start page, Explore Ship, Interior and Exterior launchers, controls, phone viewer) | PASS 67/67 |
+| Regression: `--part walk` (the touch walk, boarding hatch) | PASS 8/8 |
+
+The ring tour, boarding, doors, ladders and bindings are covered by `runtime-export`'s Godot checks. The phone runs emulate an
+844×390 landscape screen and its 390×844 upright turn with touch input. They are not a real device.
+
+**Simulation cost per frame.** This is the Shared Air machine's own time inside a frame, measured by the scene.
+
+| Where | Largest single frame | Total over the whole run |
+| --- | --- | --- |
+| Godot headless | 8.7–14.5 ms | 1.6–2.9 s over 9.7k–15.3k frames |
+| Browser, software WebGL, keys | 11–19 ms | 2.9–3.6 s |
+| Browser, software WebGL, touch | 22.7 ms | |
+
+The largest frame is the projection step. The watch and the projection are spread over frames, as before (§34.11). Software rendering
+on a container CPU is not a phone measurement, so real-device frame rates remain untested (§38 question 13).
+
+### 36.9 Remaining PROTOTYPE limitations
+
+§34.13 still applies, with these additions:
+
+- The reconnection options are whole hours (2–8 h).
+- A single trainee cannot act as fast as the gate's crew.
+- The separation's advantage in play is small (§36.5).
+- Doors that pairs cycle remain an abstraction.
+- Gamepad input and real phones are untested.
+
+### 36.10 Owner playtest guide
+
+**How to play.** Before deployment there is no public URL. On the workstation, build and serve the site locally:
+
+```
+python3 tools/workflow.py web --native --characters <play-characters dir> --out /tmp/wf-site
+cd /tmp/wf-site && python3 -m http.server 8000
+```
+
+Then open `http://localhost:8000/play/#interior-shared-air`. The release sequence: approve the squash, deploy through the established
+workflow, then play on real devices; corrections come in a separate change.
+
+**Sessions to play:**
+
+1. **Desktop keys, first time, no coaching.** Read only the HUD.
+   - Does the alert make you look at the map?
+   - Can you find hygiene A and contain the spill?
+   - Do you know when it is contained?
+   - Is the step from containment to the decision clear?
+2. **Isolate.** Send your partner to A3, shut A1P and A1N at the bay, and declare the watch. Read all four debrief pages.
+3. **Replay as a separation.**
+   - Leave the short way open.
+   - Send the partner and pair C to A2.
+   - Shut A1P and A3N.
+   - Schedule the reconnection at 4 h.
+   - Declare the watch with RESTORE.
+
+   Watch the reconnection appear at T+4:00, and compare the debrief's CO₂ cost and A1 time with session 2.
+4. **Replay too late.** The same as session 3, with the reconnection at 8 h. Expect "Operational failure: CO2 control limit".
+5. **Phone, landscape then portrait.**
+   - Repeat session 3 with the touch buttons.
+   - Turn the phone upright on the bay page and in the debrief.
+   - Check that the buttons, the map and the page do not overlap, and that the HUD returns after closing a page.
+
+**For each session, judge:**
+
+- Is it understandable?
+- Does navigation feel natural?
+- Is containment satisfying?
+- Are the orders intuitive?
+- Does the choice feel meaningful?
+- Is the watch clear?
+- Does the debrief explain the outcome?
+
+### 36.11 Release recommendation
+
+The branch is ready for the owner's review and playtest. If it is approved:
+
+1. Squash `claude/project-thread-dfyyv7` onto `main` as one commit (AGENTS.md step 5).
+2. Run the full pipeline gate if any geometry changed. None did: Deadship touches no geometry.
+3. Deploy through the established Pages workflow.
+4. Play on real devices.
+5. Make corrections as a new change.
+
+## 37. Phase 2C research: a finite TCC bed? [RESEARCH ONLY; nothing implemented]
+
+The question: does a finite NH₃ capacity in the trace-contaminant-control bed create a new, real decision, without shrinking the bed to
+make one?
+
+### 37.1 Sources
+
+| Source | What it gives |
+| --- | --- |
+| ISS TCCS charcoal bed | About 22.7 kg (50 lb) of phosphoric-acid-treated activated carbon (Barnebey-Sutcliffe 3032), expendable, not regenerated, replaced periodically; pre-flight service life one year; flight experience longer than two years; ~15 m³/h process flow (Perry et al., NASA TCCS status papers; NASA/TP-2017-218235; SAE 2009-01-2353) |
+| Post-flight bed analysis | The flight carbon held 11.9 mg NH₃/g at the ISS cabin's ~0.2 ppm (SAE 2003-01-2487, as cited in NASA NTRS 20180004945) |
+| Ammonia sorbent comparison | At 5 ppm moist NH₃: Chemsorb 1425 21.8 mg/g, Ammonasorb II 21.1 mg/g, Barnebey-Sutcliffe 3032 12.9 mg/g; humidity lowers capacity (water in the pores) (NASA NTRS 20180004945) |
+| Humidity and impregnants | Phosphoric-acid impregnants are hygroscopic; above ~20 % impregnant beds can condense and leak acid in humid air (US patent literature on acid-impregnated carbon) |
+| Crew load | Metabolic NH₃ about 50 mg per person per day (48.6 in a later review) (NASA NTRS 20190030376, trace-contaminant load model) |
+
+ntrs.nasa.gov is not reachable from this container, so the figures come from the search engine's extracts of those papers. They need a
+direct reading before any value becomes canon.
+
+### 37.2 Capacity against the scenario
+
+- **A bed like the ISS one** (22.7 kg at 12–22 mg/g) holds about **270–500 g of NH₃**. A design would derate it for the
+  breakthrough front, so call it about 200–400 g usable.
+- **Shared Air captures 1.9–2.4 g** in the playable strategies, and 7 g at most (the whole inventory). That is **0.5–3 % of a fresh
+  bed**.
+- **Twelve crew at 50 mg per person per day load 0.6 g/day.** A bed then lasts about 1–2 years, which is consistent with the ISS's
+  observed service life.
+
+**Conclusion.** A realistically sized, ordinarily serviced bed does not notice this event: finite capacity is irrelevant to Shared Air.
+It matters only for a bed near the end of its service interval, or in a much larger release. Shrinking the bed to create a constraint
+is excluded.
+
+### 37.3 Options compared
+
+| Option | Physical plausibility | Complexity | Reuse | Gameplay significance |
+| --- | --- | --- | --- | --- |
+| A Finite capacity (loading L, capture efficiency falling as the front nears the outlet) | High; standard constant-pattern breakthrough | Low: one state, one efficiency curve, a ledger term | Every trace species, every scenario | Low for Shared Air with a fresh bed; real only near end of life |
+| B Limited replacement media | High for a multi-year voyage: ~0.6 g/day of NH₃ alone uses roughly one 23 kg bed every 1–2 years | Low as logistics, none in the air model | Mission logistics, a ship-level consumables budget | Long-term, not inside a 7-day scenario |
+| C Degraded or nearly spent bed (a prior event, humidity, age) | High: beds are replaced on loading, and humidity cuts capacity | A as its basis, plus an initial loading | Scenarios that start "the bed is due" | **Real:** with a bed near breakthrough, purging through the TCC risks breakthrough and a bed change takes time and a spare, so isolation, the purge and the separation trade differently |
+| D Defer | — | — | — | A neighbour such as humidity is ruled out by the Phase 2B brief's scope |
+
+### 37.4 Recommendation
+
+**Finite capacity is a justified model, but a scenario should not be built on it before a gate.** The smallest useful Phase 2C
+milestone:
+
+1. **A bed-loading state in SYS-002.** L (kg of NH₃), with a source-backed capacity and a breakthrough efficiency η(L), for example
+   constant η until the front reaches the outlet and then a logistic fall. It is PROTOTYPE until the owner picks the media.
+2. **A gate study** like §30. Run Shared Air from a bed at 0, 90 and 98 % loading, and ask whether a new non-dominated decision appears
+   (for example, isolate and change the bed first, against purge through a nearly spent bed).
+3. **Only if it passes,** a scenario variant. The bed change is a physical task at the bay with a spare from stores.
+
+The answer to "Is finite capacity justified as Phase 2C's first feature?": as a model, yes; as a gameplay feature, only with a bed near
+the end of its life, which the gate must show creates a real choice. Fresh-bed Shared Air would not change.
+
+## 38. Handoff (Phase 2B finalization)
+
+Answers to the brief's questions 1–15. Evidence is in §36 and §37.
+
+**Commits on `claude/project-thread-dfyyv7`:**
+
+| Commit | Change |
+| --- | --- |
+| 6034ad9 | Reconciliation study (`ds2b_reconcile.py` and `.json`) |
+| 9d7fe28 | The scheduled reconnection, remote-only RESTORE, CO₂ peak, tests |
+| 70c9657 | Godot mirror and UI |
+| 60cee05 | `web_check --desktop` |
+| 1687fd4 | Debrief de-duplication |
+| 624c4e4 | Small-window layout |
+| The docs commit after 624c4e4 | This report, MODEL, TODO, IMPLEMENTATION |
+
+1. **Why did the separation exceed the CO₂ limit?** Sector 2, sealed with its crew and without the CO₂ unit, passes 0.5 % about 5.3 h
+   after the release. The play offered no way to reconnect before the watch's end at 24 h (§36.1).
+2. **Which differences caused it?**
+   - The missing reconnection at 4 h. This decides the verdict.
+   - The configuration time: the gate sets every door and damper at 10 min, the trainee sets them at about 30 min. This decides the
+     size of the advantage.
+   - The purge path's doors, the remote door closing and instant homecoming in the gate, and a 5 min later containment (§36.1).
+3. **What solution was selected?** A scheduled duct reconnection at the ECLSS bay (Option A). It moves dampers and fans only, is
+   declared and logged, and runs in any phase. RESTORE no longer moves doors (§36.2).
+4. **Can the player now execute a viable separation strategy?** Yes. It was played through Use and Ops (headless and in the browser)
+   with the reconnection at 4 h: STABLE, with degraded CO₂ control.
+5. **What are its measured consequences?**
+   - Reference case 17: CO₂ peak 0.42 %, 39.6 crew-hours above the target, under the limit; worst 1 h NH₃ 13.9 ppm, worst 24 h
+     6.5 ppm; crew 24 h dose 148.8 ppm·h; A1 reusable after 37 h.
+   - Godot play (five sealed, the trainee at the bay): peak 0.35 %.
+   - Reconnecting at 6 h (six sealed) or 8 h (five sealed) passes the limit.
+6. **Do at least two successful non-dominated strategies remain playable?** Three do: isolation, the purge, and separation with
+   reconnection, at the reference timing and at the fastest timing (§36.5). The separation's margin over the purge is small (§36.5).
+7. **Which usability problems were found and fixed?** See §36.6.
+8. **Does the watch execute only authorized operations?** Yes. The Python tests and the Godot check fail on any post-watch operation
+   other than a declared reconnection, the RESTORE plan's own actions and the walks home. Changes during the watch are refused and
+   logged.
+9. **Are all atmospheric inventories conserved?** Yes. The CO₂, NH₃ and release ledgers close in all 21 cases (tests), and the Godot
+   debrief check confirms them in play.
+10. **Do Python and Godot agree?** Yes: 21/21 cases checkpoint by checkpoint at relative 10⁻⁹, plus the debriefs, verdicts, families
+    and refusal counts.
+11. **Which browser and runtime checks passed?** Every check passed (§36.8):
+    - `runtime-export`: 12 Godot checks.
+    - Shared Air in Chrome, all five strategies: keys, touch, the upright turn and a 1024×600 window.
+    - Regression: systems, Scrubber, airflow, main (67/67) and walk (8/8).
+12. **What was measured for performance and download size?**
+    - `play/` is 79.0 MB of the 90 MB budget, leaving 11.0 MB headroom.
+    - The largest Shared Air frame is 8.7–14.5 ms headless and 11–23 ms in software-rendered Chrome (§36.8).
+13. **What is untested on real hardware?**
+    - Phones and tablets: frame rate, touch sizes, readability.
+    - Gamepads.
+    - The watch's real duration.
+    - A first-time human player.
+14. **Is the branch ready for a squash and release review?** Yes, for the owner's review and playtest (§36.11). Nothing was squashed,
+    merged or deployed.
+15. **Is finite TCC capacity justified as Phase 2C's first feature?** As a model, yes. As a gameplay feature, only for a bed near the
+    end of its service life, and only after a gate shows it creates a real choice (§37.4).
