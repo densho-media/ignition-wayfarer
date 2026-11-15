@@ -825,6 +825,7 @@ func _end_watch() -> void:
 func _finish() -> void:
 	debrief_cache = debrief()
 	_event("debrief")
+	_say("7-day projection complete: %s. The debrief shows what was saved and what it cost." % _verdict_text(str(watch["verdict"]["result"])))
 	page = "debrief"
 	deb_page = 0
 	_render()

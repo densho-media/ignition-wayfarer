@@ -167,6 +167,10 @@ func _close_page() -> void:
 		if sa.page != "":
 			await _do("close", [], func(): return sa.page == "")
 
+## A still for the owner's review (browser runs only; it faces the point and never walks, so the run is unchanged).
+func _still(name: String, point: String) -> void:
+	await pl.shot(name, sa.eq.centre(point))
+
 func _trace(m: String) -> void:
 	print("SA_TRACE %.1f s real, ship %.0f s, %s: %s" % [(Time.get_ticks_msec() - t0) / 1000.0, sa.t(), sa.phase, m])
 
@@ -370,6 +374,11 @@ func _play() -> void:
 			await _separate()
 		"nocontain":
 			await _isolate()
+	await _page("bay")
+	await _still("SA_2_bay", "bay")
+	await _intercom("report", [], func(): return sa.page == "report")
+	await _still("SA_3_report", "bay")
+	await _close_page()
 	await _watch()
 	await _debrief()
 	if strategy == "isolate":
@@ -390,6 +399,7 @@ func _contain() -> void:
 		fail("opening the hygiene page changed the containment (%s, %s)" % [sa.contain["state"], sa.ring.source["state"]])
 	await _ops("Ops · contain spill", func(): return str(sa.contain["state"]) == "WORKING")
 	var t_start := sa.t()
+	await _still("SA_1_containing", "hygiene")
 	notes["contain_start_s"] = t_start
 	# step out of reach halfway: the work pauses and keeps its progress, the store keeps releasing
 	await _wait(func(): return float(sa.contain["progress_s"]) >= 300.0, 60.0, "half the containment work")
@@ -533,6 +543,7 @@ func _watch() -> void:
 	for e in post:
 		kinds[str(e[1])] = true
 	notes["after_watch"] = kinds.keys()
+	await _still("SA_4_debrief", "bay")
 	if sa.plan == "NONE" and not kinds.is_empty():
 		fail("with no plan the watch changed the run: %s" % str(post.slice(0, 3)))
 	if sa.plan == "RESTORE" and not kinds.has("restore"):
@@ -564,6 +575,8 @@ func _debrief() -> void:
 	notes["frame_cost_us"] = sa.frame_cost
 	for k in 3:
 		var pg := sa.deb_page
+		if k > 0:
+			await _still("SA_%d_debrief_%d" % [4 + k, k + 1], "bay")
 		await _use("Use · next page" if pg < 2 else "Use · close", func(): return sa.deb_page != pg)
 	if sa.page != "":
 		fail("the debrief did not close after its third page")
