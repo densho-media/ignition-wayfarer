@@ -87,6 +87,9 @@ def stop_field(s):
 
 def currents(s, case):
     """Ampere-turns of C1, C2, L1-L4 (closure coils opposed). I is proportional to r inside each group (equal own-centre field)."""
+    ex = config(s).get('explicit_currents', {})
+    if case in ex:                       # 1.3: a magnetic candidate's own current set (vertex_magnet.scaled_spec), never set in the data
+        return list(ex[case])
     cs = coils(s); st = ve.stations(s); B = stop_field(s)
     shape = [(-1.0 if c['group'] == 'closure' else 1.0)*2*B*c['r']/MU0 for c in cs]
     loops = [v if c['group'] == 'loop' else 0.0 for c, v in zip(cs, shape)]

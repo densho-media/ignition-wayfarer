@@ -414,8 +414,25 @@ INSPECT = r'''(async () => {
   panel.querySelector('[data-act="eng-overlay"]').click();
   out.eng_off_ok = ins.engineering() === null;
   ins.setEngineeringMode(false, '');
+  // Engine 1.3 magnet: a coil's details carry the manifest's numbers; the field overlay file is fetched only when switched on, drawn as one
+  // line object on the selected engine, takes no pick, and the bookmark carries it.
+  const M = data.magnet;
+  if (M) {
+    ins.selectPart('N2', 'VTX_C1_Winding');
+    const c1 = M.configs[M.active].coils.C1;
+    out.coil_details_ok = panel.querySelector('.part-details').innerText.includes(`${c1[0].toFixed(2)} MA-turns`);
+    const fields = () => performance.getEntriesByType('resource').filter(e => e.name.includes('/model/field-')).length;
+    const f0 = fields();
+    await ins.setField(M.compare);
+    const fo = ins.field(), rc3 = new T.Raycaster(); rc3.setFromCamera(new T.Vector2(0, 0), w.camera);
+    out.field = { lazy: f0 === 0 && fields() === 1, lines: fo ? fo.userData.lines : 0, parent: fo?.parent?.name };
+    out.field_ok = out.field.lazy && !!fo && out.field.parent === 'inspect_N2' && out.field.lines > 0 && rc3.intersectObject(fo, true).length === 0
+                   && location.hash.includes(`fl=${M.compare}`);
+    await ins.setField('');
+    out.field_ok = out.field_ok && ins.field() === null;
+  }
   ins.selectPart('N2', out.selected.part);
-  out.ok = out.lazy && out.mapped && out.picked_right && out.hidden_ok !== false && out.overlay_pickless && out.filter_ok && out.search_ok
+  out.ok = (!M || out.coil_details_ok && out.field_ok) && out.lazy && out.mapped && out.picked_right && out.hidden_ok !== false && out.overlay_pickless && out.filter_ok && out.search_ok
            && out.keyboard_ok && out.hash_ok && out.details_ok && out.eng_details_ok && out.eng_overlay_ok && out.eng_filter_ok && out.eng_hash_ok
            && out.eng_off_ok;
   return out;
@@ -891,7 +908,7 @@ def run_main(url, release, build, binary, sandbox, out, record_check, metrics):
             page.js('window.wayfarer.controls.enableDamping = false')
             mark_i = traffic.mark()
             insp = page.js(INSPECT, timeout=300)
-            record_check('viewer: engine part inspection (lazy records, placements, picks per engine, hidden, filter, search, keyboard, link, engineering overlay)',
+            record_check('viewer: engine part inspection (lazy records, placements, picks per engine, hidden, filter, search, keyboard, link, engineering overlay, coil data, lazy field overlay)',
                          insp.get('ok'), **details(insp))
             page.frames()
             page.screenshot(out / 'desktop_engine_inspect.png')

@@ -686,7 +686,8 @@ def vertex_page(spec, out_dir, revision, built):
 <tbody>{spec_rows}</tbody></table></div>
 <p class="note">{esc(spec["propulsion_representation"]["authority"])}</p></section>
 {anatomy}
-{structure_section(spec, vs)}"""
+{structure_section(spec, vs)}
+{magnet_section(spec)}"""
     (out_dir / 'index.html').write_text(page('Vertex propulsion lineage · Wayfarer engineering',
                                              'How the Vertex research demonstrator became the Compact Vertex Engine and the four-engine Propulsion Cluster.',
                                              body, 2, revision, built))
@@ -777,6 +778,140 @@ def structure_section(spec, vs):
 <p class="meta">Members are thin-walled Ti-6Al-4V tubes with the mass model's solid fraction. The reaction ring and the cluster frame are frame FE models
   (3D beams, rigid hubs, skyline Cholesky), checked against a cantilever and the closed-form ring under equal radial loads; the ring model converges:</p>
 <div class="scroll" tabindex="0"><table><thead><tr><th>Grid</th><th>Elements</th><th>Peak ring moment MN·m</th><th>Tie-rod force MN</th></tr></thead><tbody>{conv}</tbody></table></div>
+</section>"""
+
+
+def field_svg(R, cid, title):
+    """Inline figure: one configuration's computed vacuum field lines in the engine's (x, r) half-plane, mirrored, with the coil cryostats,
+    the shadow shield and the burn point (engine frame, aft to the left). Drawn from the evidence file's overlay lines."""
+    import vertex_engine as ve
+    row = next(r for r in R['candidates'] if r['id'] == cid); ov = R['overlay'].get(cid)
+    if not ov:
+        return ''
+    x0, x1, h = -46.0, -9.0, 15.0; W, H = 560, 2*h*560/(x1-x0)
+    X = lambda x: (x-x0)/(x1-x0)*W; Y = lambda r: H/2-r*(H/2)/h
+    paths = []
+    for line in ov['lines']:
+        pts = list(zip(line[0::2], line[1::2]))
+        for sg in (1, -1):
+            paths.append('M' + ' L'.join(f'{X(x):.1f},{Y(sg*r):.1f}' for x, r in pts))
+    coils = ''.join(f'<circle class="coil" cx="{X(c["x"]):.1f}" cy="{Y(sg*c["r"]):.1f}" r="{c["cryostat"]*(W/(x1-x0)):.1f}"/>'
+                    for c in row['coils'] for sg in (1, -1))
+    st = R['stations']
+    shield = (f'<polygon class="shield" points="{X(st["shield_fwd"]):.1f},{Y(4.4):.1f} {X(st["shield_aft"]):.1f},{Y(5.4):.1f} '
+              f'{X(st["shield_aft"]):.1f},{Y(-5.4):.1f} {X(st["shield_fwd"]):.1f},{Y(-4.4):.1f}"/>')
+    burn = f'<circle class="burn" cx="{X(st["burn"]):.1f}" cy="{Y(0):.1f}" r="4"/>'
+    return (f'<figure><svg class="figure-svg field" viewBox="0 0 {W} {H:.0f}" role="img" aria-label="{esc(title)}">'
+            f'<rect class="bg" width="{W}" height="{H:.0f}"/><line class="axis" x1="0" y1="{Y(0):.1f}" x2="{W}" y2="{Y(0):.1f}"/>'
+            f'<path class="fl" d="{" ".join(paths)}"/>{shield}{coils}{burn}'
+            f'<text class="ax" x="6" y="14">aft (exit)</text><text class="ax" x="{W-70}" y="14">shield</text></svg>'
+            f'<figcaption>{esc(title)}. Burn point (dot), coil cryostats (circles), shield (grey). Computed vacuum field lines, '
+            f'B at the burn point {ov["B_burn_T"]:+.2f} T. A diagram, not light or plasma.</figcaption></figure>')
+
+
+def magnet_section(spec):
+    """Section 6 of engineering/vertex/: Engine 1.3 magnetic design closure, read from references/evidence/vertex_magnet.json (written by
+    `python3 src/wayfarer/vertex_magnet.py --evidence`; tests/test_vertex_magnet.py fails when it is stale against the inputs)."""
+    import json
+    p = ROOT / 'references/evidence/vertex_magnet.json'
+    if not p.exists():
+        return ''
+    R = json.loads(p.read_text()); mc = spec['vertex_engine']['magnet']
+    f = lambda v, d=2: '—' if v is None else f'{v:,.{d}f}'
+    rows = R['candidates']; ok = lambda r: all(c['passed'] for c in r['checks'].values())
+    def topo(e):
+        return 'cusp (null at the shield)' if abs(e['B_shield_T']) < 0.05 else ('forward mirror' if e['B_shield_T']*e['B_burn_T'] > 0 else 'reversed')
+    head = ('<tr><th>Candidate</th><th>Status</th><th>Topology</th><th>Capture margin</th><th>Peak coil force MN</th><th>Stored GJ</th>'
+            '<th>Conductor T</th><th>Case u</th><th>Members u (design / upper)</th><th>Inter-engine MN</th><th>Particles to shield</th>'
+            '<th>Exhaust axial share</th><th>Hard requirements</th></tr>')
+    body = ''
+    for r in rows:
+        e, s_ = r['eval'], r.get('structure', {}); pa = e.get('particles', {}); d = pa.get('D_debris', {})
+        fails = [k for k, c in r['checks'].items() if not c['passed']]
+        body += (f'<tr><td><code>{esc(r["id"])}</code> {esc(r["name"])}</td><td>{tag(r["status"])}</td><td>{esc(topo(e))}</td>'
+                 f'<td class="num">{f(e["capture"]["worst"])}</td><td class="num">{e["peak_force_N"]/1e6:,.0f}</td><td class="num">{e["energy_J"]/1e9:,.1f}</td>'
+                 f'<td class="num">{e["peak_conductor_T"]:.1f}</td><td class="num">{e["peak_case_u"]:.2f}</td>'
+                 f'<td class="num">{f(s_.get("peak_u_design"))} / {f(s_.get("peak_u_upper"))}</td><td class="num">{f(s_.get("inter_engine_N", 0)/1e6, 1)}</td>'
+                 f'<td class="num">{f(100*d.get("hits", {}).get("SHIELD", 0), 0)} %</td><td class="num">{f(d.get("axial_fraction"))}</td>'
+                 f'<td>{"all pass" if not fails else "fails: " + esc("; ".join(fails))}</td></tr>')
+    par = ''.join(f'<tr><td class="num">{p_["margin_required"]:.2f}</td><td class="num">{f(p_["margin"])}</td><td class="num">{p_["peak_force_MN"]:,.0f}</td>'
+                  f'<td class="num">{p_["energy_GJ"]:.1f}</td><td class="num">{p_["case_u"]:.2f}</td><td class="num">{p_["conductor_T"]:.1f}</td></tr>'
+                  for p_ in (R.get('pareto') or []))
+    sp = ''.join(f'<tr><td>{esc(x["name"])}</td><td class="num">{x["speed_m_s"]/1e3:,.0f}</td><td class="num">{x["larmor_at_burn_m"]:.2f}</td></tr>' for x in R['species'])
+    pz = R['plasma']; nom = rows[0]; best = max(rows[3:], key=lambda r: (ok(r), r['eval']['capture']['worst'] or 0))
+    dt = nom['detachment']; fc = nom['flux_compression']; me = best['magnet']
+    deg = ''.join(f'<tr><td>{esc(x["off"])} off</td><td class="num">{f(x["margin"])}</td><td class="num">{x["peak_force_N"]/1e6:,.0f}</td>'
+                  f'<td class="num">{x["max_change_N"]/1e6:,.0f}</td></tr>' for x in best['degraded'])
+    sens = min(min(x['up'] or 0, x['down'] or 0) for x in best['sensitivity'])
+    figs = field_svg(R, nom['id'], f'{nom["id"]}: the 1.2 NOMINAL currents') + field_svg(R, best['id'], f'{best["id"]}: {best["name"]}')
+    verdict = mc['verdict']
+    return f"""<section id="magnet"><h2>6 · Magnetic design (Engine {esc(R["version"])})</h2>
+<p class="lead">What the six coils have to do, whether any current set or coil geometry inside the drawn engine does it, and what that costs.
+  Verdict: {tag(verdict)}. Active configuration <code>{esc(R["selected"])}</code>: no candidate is made the engine unless it passes every hard
+  requirement, and the propulsion stays {tag("SPECULATIVE")} with the research Gate 2 {tag("BLOCKED")}. See also
+  <a href="#anatomy">Anatomy</a>, <a href="#structure">Structure</a>, <a href="../weakest-links/">Weakest Links</a> and
+  <a href="../breakthrough-lab/">Breakthrough Lab</a>; <a href="../../viewer/#view=aft&amp;eng=N1&amp;fl={esc(best["id"])}">field lines in Explore Ship</a>.</p>
+<h3>Evidence levels</h3>
+<ul class="plain">
+ <li>{tag("VACUUM_FIELD_SOLVED")} Exact loop fields, finite windings near conductors, forces checked against the energy gradient; validated against the
+  axis formula, superposition, symmetry and zero divergence.</li>
+ <li>{tag("REDUCED_PLASMA_MODEL")} Energy-balance stopping of the expanding pulse in every direction, and a flux-conserving coil response to the
+  diamagnetic pulse. Isotropic pulse energy; no favourable distribution assumed.</li>
+ <li>{tag("PARTICLE_TRAJECTORY_SCREENED")} Test particles in the prescribed vacuum field (Boris pusher, energy conserved to 1e-9). They show where
+  late, low-density plasma goes along the field; they have no self-consistent response.</li>
+ <li>{tag("PLASMA_COUPLING_OPEN")} {tag("DETACHMENT_OPEN")} {tag("PROPULSION_FEASIBILITY_BLOCKED")} What none of these can establish: the high-beta
+  bubble's own dynamics, instabilities, detachment and therefore any nozzle efficiency or thrust.</li></ul>
+<h3>Audit of the 1.2 cases</h3>
+<ul class="plain">
+ <li><b>NOMINAL</b> sets two conditions (C-07 at the burn point, zero on the shield face) and so makes a cusp: the field is zero where plasma heads
+  for the shield and the bore. Under the energy-balance screen it cannot stop forward plasma before the shield or C1 (margin {f(nom["eval"]["capture"]["worst"])}).
+  It is structurally convenient, not magnetically closed.</li>
+ <li><b>CONSERVATIVE</b> doubles the currents with the same null; it is a load bound, not a better field (margin {f(rows[1]["eval"]["capture"]["worst"])},
+  winding case at {rows[1]["eval"]["peak_case_u"]:.1f}× allowable).</li>
+ <li><b>EXTREME</b> multiplied forces by a fixed flux-compression factor. 1.3 replaces that with a model: the pulse as a diamagnetic bubble of
+  {fc["radius_m"]:.1f} m at the burn point. For NOMINAL that bubble reaches within {fc["nearest_cryostat_m"]:.1f} m of a cryostat, so the coils sit inside the
+  compressed field and the point-dipole response is {"valid" if fc["valid"] else "not valid"}: only a coupled plasma model can give their pulse load.
+  For the mirror candidates the flux-conserving bound is {100*best["magnet"]["pulse"]["max_current_swing"]:.0f} % of a coil's current per pulse, which the cryostat walls screen.</li>
+ <li>Labels kept, history kept: the three cases stay reproducible as <code>M0</code>.</li></ul>
+<h3>Requirements</h3>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Id</th><th>Function</th><th>Screen</th></tr></thead><tbody>
+<tr><td>MF-01</td><td>Capture the pulse</td><td>Stopping distance in every direction against the hardware, margin ≥ {mc["capture_margin"]}; pulse {pz["energy_J"]["design"]/1e9:.2f} GJ
+  charged ({100*pz["charged_share"]:.0f} % of {pz["yield_J"]/1e9:.2f} GJ), about {pz["mass_kg"]*1e6:.1f} mg at {pz["exhaust_m_s"]/1e3:,.0f} km/s.</td></tr>
+<tr><td>MF-02</td><td>Protect shield face, coils, cage</td><td>Strict: shield, cryostats and cage; relaxed: the burn face as armour. Fields do not deflect X-rays or
+  neutrons: the shield and VTX-S3 still carry those.</td></tr>
+<tr><td>MF-03</td><td>Redirect aft</td><td>Test particles: share that leaves aft, share that reaches hardware.</td></tr>
+<tr><td>MF-04</td><td>Collimate</td><td>Axial momentum share and 90th-percentile divergence of the aft particles; no efficiency claimed.</td></tr>
+<tr><td>MF-05</td><td>Detach</td><td>Ion demagnetisation and Alfvén Mach number at the exit: {tag(dt["verdict"])}.</td></tr>
+<tr><td>MF-06</td><td>Stable and tolerant</td><td>Nulls, ±5 % current sensitivity, each coil off in turn.</td></tr>
+<tr><td>MF-07</td><td>Within the hardware</td><td>Winding case ≤ allowable, ≤ {mc["conductor_field_limit_T"]:.0f} T at the conductor and ≤ {mc["winding_current_density_A_m2"]/1e6:.0f} A/mm² (SPARC TFMC demonstrated
+  envelope, {tag(mc["conductor_status"])}; REBCO critical current stays OPEN), four engines' coupled field.</td></tr>
+</tbody></table></div>
+<h3>Candidates</h3>
+<div class="scroll" tabindex="0"><table><thead>{head}</thead><tbody>{body}</tbody></table></div>
+<p class="meta">Capture margin: obstacle distance over stopping distance in the worst protected direction. Members: the 1.2 engine members at their 1.2
+  sizes under the candidate's design currents (charged energy) and upper currents (the whole yield as plasma). Particles: deuterons, {R["candidates"][0]["eval"]["particles"]["D_debris"]["n"]} directions;
+  the four species give the same shares within a few per cent because every one of them is magnetised (Larmor radius ≪ field scale), so pitch angle alone decides.</p>
+<div class="grid2">{figs}</div>
+<h3>Margin against cost</h3>
+<p>The currents-only optimum on the 1.2 coils for each required margin (Nelder–Mead, deterministic starts, every constraint as a penalty):</p>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Required</th><th>Reached</th><th>Peak force MN</th><th>Stored GJ</th><th>Case u</th><th>Conductor T</th></tr></thead><tbody>{par}</tbody></table></div>
+<h3>Plasma</h3>
+<div class="grid2"><div class="panel"><table><thead><tr><th>Species</th><th>Speed km/s</th><th>Larmor radius at C-07 m</th></tr></thead><tbody>{sp}</tbody></table></div>
+<div class="panel"><p>At the exit plane of NOMINAL the field is {dt["B_exit_T"]:.2f} T; the pulse spread over the nozzle has β ≈ {dt["beta_exit"]:,.1f} and
+  Alfvén Mach number {dt["alfven_mach"]:,.1f}. Electrons stay magnetised (Larmor radius {dt["electron_larmor_exit_m"]*1e3:.2f} mm), so whether the
+  plasma leaves the field lines is {tag("DETACHMENT_OPEN")}: no nozzle efficiency or thrust follows from these fields.</p></div></div>
+<h3>Magnet engineering ({esc(best["id"])})</h3>
+<ul class="plain">
+ <li>{me["energy_J"]/1e9:.1f} GJ stored per engine; at {me["lead_current_A"]/1e3:.0f} kA leads the coils need {", ".join(f'{x["name"]} {x["turns"]:.0f}' for x in me["rows"])} turns;
+  dump voltage up to {max(x["dump_voltage_V"] for x in me["rows"])/1e3:.1f} kV; charging at {me["ramp_supply_V"]:.0f} V takes up to {max(x["ramp_s"] for x in me["rows"])/60:.0f} min.
+  The magnets are steady; only the ramps, a dump and the pulse ripple change them.</li>
+ <li>Pulse train at {me["pulse"]["rate_Hz"]:,.0f} Hz: the cryostat wall's skin depth is {me["pulse"]["skin_depth_m"]*1e3:.1f} mm against a {me["pulse"]["wall_m"]*1e3:.0f} mm wall, so the windings
+  see little of it; the walls take it as eddy heat instead. Every 0.1 % of the {me["pulse"]["charged_power_W"]/1e12:.1f} TW charged power that couples into them is
+  {me["pulse"]["heat_per_permille_W"]/1e9:.1f} GW per engine, far beyond any cryoplant: a weakest link, not a solved interface.</li>
+ <li>Degraded modes and sensitivity: worst margin with one coil 5 % off {f(sens)}; one coil off:</li></ul>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Mode</th><th>Capture margin</th><th>Peak force MN</th><th>Largest force change MN</th></tr></thead><tbody>{deg}</tbody></table></div>
+<p class="meta">Evidence file <code>references/evidence/vertex_magnet.json</code> (input hash <code>{esc(R["input_hash"])}</code>), written by
+  <code>python3 src/wayfarer/vertex_magnet.py --evidence</code>; the stored candidates are re-optimised by <code>--optimise</code>.</p>
 </section>"""
 
 

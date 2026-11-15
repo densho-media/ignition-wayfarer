@@ -36,6 +36,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'src/wayfarer'))
 import representation
 import vertex_cluster
 import vertex_inspect
+import vertex_magnet
 from spec import load as load_spec
 from workflow import write_lock
 
@@ -232,6 +233,11 @@ def run(root, out=None, pipeline_run=None, draco=True, with_play=True, native=Fa
             geometry_file = f'model/engine-parts-{hashlib.sha256(geometry).hexdigest()[:12]}.bin'
             (viewer / geometry_file).write_bytes(geometry)
             inspect['geometry']['file'] = geometry_file
+            # Vertex Engine 1.3: the vacuum field lines for the optional field overlay, fetched only when someone switches it on
+            field_text = json.dumps(vertex_magnet.overlay(spec), separators=(',', ':'))
+            field_file = f'model/field-{hashlib.sha256(field_text.encode()).hexdigest()[:12]}.json'
+            (viewer / field_file).write_text(field_text)
+            inspect['magnet']['field_file'] = field_file
             engine_text = json.dumps(inspect, separators=(',', ':'))
             engine_file = f'model/engine-{hashlib.sha256(engine_text.encode()).hexdigest()[:12]}.json'
             (viewer / engine_file).write_text(engine_text)
