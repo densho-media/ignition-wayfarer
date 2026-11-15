@@ -696,7 +696,7 @@ A dependency-based roadmap, not a commitment to build every feature.
 | **2B "You cannot save everything"** | **DESIGN PROPOSAL ONLY** (§24) | The smallest playable DS-2 step: one removal unit for a crew split across compartments, a door/ventilation choice with model-computed consequences; unscored | Phase 2A; owner authorization | ≥ 2 valid configurations with different, model-computed outcomes; no full repair possible | M |
 | **2C "Borrowed Air"** | DESIGN ONLY | The full DS-2 (section 5.8): two interacting problems, insufficient parts, the watch and provisional scoring | 2B; humidity and heat stocks; parts as entities; possibly two rings | A scenario screen shows ≥ 2 stabilizing strategies, no full repair, and different scores from model state alone | M–L |
 | **3 Broader engineering systems** | DESIGN ONLY | Bus A/B power and the survival-reserve loads, cold-loop limits, load shedding, longer watches, ring B through the trunk and drum | Phase 2; PROTOTYPE electrical loads (power.rating OPEN) | Trade-offs between power, heat and air reproduce in Python and Godot within tolerance | L |
-| **4 Competitive Deadship and Hullrun** | DESIGN ONLY | Standard scenarios, repeatability (seeds, replay codes), provisional scoring, browser-local records (DS-6), Hullrun timed carries, the station briefing | Phase 3; walk lines to the SP-45 storeroom | Replays identical native and Web; records stay in browser storage only | L |
+| **4 Competitive Deadship and Hullrun** | **PARKED** (owner 2026-11-15; §57) | Standard scenarios, repeatability (seeds, replay codes), provisional scoring, browser-local records (DS-6), Hullrun timed carries, the station briefing | Phase 3; walk lines to the SP-45 storeroom | Replays identical native and Web; records stay in browser storage only | L |
 | **5 Narrative survival** | DESIGN ONLY | First Ignition and the voyage on the same model; no scores and no Deadship branding | Tale and engineering owner rows for the accident (DS-Q2); OD-010 degraded modes; heat capacities | Story beats run on the model with no invented canon | L+ |
 
 **Exact prerequisites for Phase 1** **[HISTORICAL, 2026-11-13; status 2026-11-14 in brackets]:**
@@ -1990,7 +1990,7 @@ gameplay was built (§31).
 | 2B "Shared Air" | Built, finalized and validated on the task branch (§34, §36: separation viable with a scheduled reconnection); awaiting owner playtest and review |
 | 2C "Borrowed Air" (humidity, heat, parts) | Research only (§37): a finite TCC bed is the recommended first model, behind its own gate; not authorized |
 | 3 Broader systems | Design only |
-| 4 Competitive Deadship and Hullrun | Design only |
+| 4 Competitive Deadship and Hullrun | PARKED (owner 2026-11-15; §57) |
 | 5 Narrative survival | Design only |
 
 ## 33. Handoff (SYS-002 v2 and the second Phase 2B gate)
@@ -3156,7 +3156,7 @@ story events.
 | SYS-003 ring services | VALIDATED (Python, Godot parity) |
 | 2C "Borrowed Air" | PLAYABLE (§41) |
 | 3 "Dark Bus" (power, thermal, atmosphere) | PLAYABLE (§42) |
-| 4 Competitive Deadship and Hullrun | DESIGNED only; not started (excluded by the brief) |
+| 4 Competitive Deadship and Hullrun | PARKED (owner 2026-11-15; superseded by §57) |
 | 5 Narrative survival | DESIGNED only; not started (excluded by the brief) |
 
 **Next steps, each needing the owner:**

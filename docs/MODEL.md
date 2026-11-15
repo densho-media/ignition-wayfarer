@@ -2088,8 +2088,22 @@ side and never weighted.
   economy. Each ends with a different battery margin against the restart's 200 kWh.
 
 The packages `wf_deadship_ds2c.json` (11 reference cases) and `wf_deadship_ds3.json` (9) carry checkpoints and debriefs. Godot replays
-one case at load and all of them in the runtime checks `borrowed_air` and `dark_bus`. Tests: `tests/test_ship_ops.py` (16). Design and
-evidence: report §39–§46 on the task branch.
+one case at load and all of them in the runtime checks `borrowed_air` and `dark_bus`. Tests: `tests/test_ship_ops.py` (18).
+
+*Model validity.* SYS-003 is a cabin balance with the CHX as its only heat path. It is valid for cabins between 10 °C and 35 °C
+(the habitability limits ±8 K). Outside that range the omitted mechanisms would act: passive exchange with the lining and hull,
+cabin heaters, and equipment cutouts. Where people live, `ship_ops` records the first step outside the range and the last valid
+state, and keeps peaks inside it. The debrief and readouts show the bound, never an extrapolated temperature. The state is not
+clipped, so the ledgers still close. Every viable strategy stays inside the range. The ring cabins' passive exchange and heater
+power are OPEN.
+
+*Sensitivity.* Dark Bus's viable set depends on three PROTOTYPE or OPEN values within a narrow band: the converter rating
+(≥ ~37.5 kW), the lumped ship load (≤ ~16 kW per bus), and the battery and restart window (within about ±10 % and ±6 h). The
+lessons and the ranking of the strategies' margins hold across every variation. Borrowed Air is insensitive to the electrical values.
+Its one-pump "shed" requirement is a 0.3 K margin result that any passive hull loss would remove.
+
+Phases 2 and 3 are TECHNICALLY COMPLETE, awaiting owner acceptance. Phase 4 (competitive Deadship, Hullrun) is PARKED until the
+spacecraft model is complete and the owner reauthorizes game work. Design and evidence: report §39–§58 on the task branch.
 
 ## Retired runtime scenes
 
