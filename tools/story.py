@@ -688,7 +688,8 @@ def vertex_page(spec, out_dir, revision, built):
 {anatomy}
 {structure_section(spec, vs)}
 {magnet_section(spec)}
-{plasma_section(spec)}"""
+{plasma_section(spec)}
+{radiation_section(spec)}"""
     (out_dir / 'index.html').write_text(page('Vertex propulsion lineage · Wayfarer engineering',
                                              'How the Vertex research demonstrator became the Compact Vertex Engine and the four-engine Propulsion Cluster.',
                                              body, 2, revision, built))
@@ -1043,8 +1044,8 @@ def plasma_section(spec):
   across closures, against a {pct(lim, 0)} screening limit. The forward pole of the cavity is topological, so the leak can be moved but not closed (A1).</p>
 <h3>Detachment and thrust</h3>
 <p>{esc(d2["reading"])}</p>
-<div class="grid2"><div class="panel"><table><thead><tr><th>Escape plane m past exit</th><th>Aft, first pass</th><th>Stagnated</th></tr></thead><tbody>{ext}</tbody></table></div>
-<div class="panel"><table><thead><tr><th>m past exit</th><th>B on axis T</th><th>Field energy aft GJ</th><th>Plume / field energy</th></tr></thead><tbody>{plume}</tbody></table></div></div>
+<div class="grid2"><div class="panel scroll" tabindex="0"><table><thead><tr><th>Escape plane m past exit</th><th>Aft, first pass</th><th>Stagnated</th></tr></thead><tbody>{ext}</tbody></table></div>
+<div class="panel scroll" tabindex="0"><table><thead><tr><th>m past exit</th><th>B on axis T</th><th>Field energy aft GJ</th><th>Plume / field energy</th></tr></thead><tbody>{plume}</tbody></table></div></div>
 <p>Impulse per pulse follows from momentum conservation: the ship gains what leaves aft. For M2 that is
   {min(x["impulse_Ns"] for x in m2["ledger"].values()):,.0f}–{max(x["impulse_Ns"] for x in m2["ledger"].values()):,.0f} N s against the
   {m2["mass_kg"]*m2["speed_m_s"]:,.0f} N s the C-10 thrust assumes, before any divergence loss. {tag("THRUST_UNPROVEN")}</p>
@@ -1070,7 +1071,7 @@ def plasma_section(spec):
 <h3>Alternative architectures</h3>
 <div class="grid2"><div class="panel"><h4>A1 · {esc(alt["A1"]["name"])} {tag(alt["A1"]["status"])}</h4><p>{esc(alt["A1"]["topology"])}</p>
  <p>{esc(alt["A1"]["result"])}. {esc(alt["A1"]["cost"])}</p></div>
-<div class="panel"><h4>A2 · {esc(alt["A2"]["name"])}</h4><table><thead><tr><th>Run</th><th>Burn shift m</th><th>Pulse GJ</th><th>Shield share</th></tr></thead><tbody>{a2}</tbody></table>
+<div class="panel scroll" tabindex="0"><h4>A2 · {esc(alt["A2"]["name"])}</h4><table><thead><tr><th>Run</th><th>Burn shift m</th><th>Pulse GJ</th><th>Shield share</th></tr></thead><tbody>{a2}</tbody></table>
  <table><thead><tr><th>Inert loading</th><th>Exhaust km/s</th><th>Mission mass ratio</th></tr></thead><tbody>{plate}</tbody></table><p class="meta">{esc(alt["A2"]["reading"])}</p></div></div>
 <div class="scroll" tabindex="0"><table><thead><tr><th>A3 family</th><th>Exhaust km/s</th><th>Maturity</th><th>Nozzle interface</th><th>Mission</th></tr></thead><tbody>{a3}</tbody></table></div>
 <p class="meta">{esc(alt["A3"]["reading"])}</p>
@@ -1080,6 +1081,151 @@ def plasma_section(spec):
 <p><b>Direction:</b> {esc(P["decision"]["direction"])}</p>
 <p class="meta">Evidence file <code>references/evidence/vertex_plasma.json</code> (input hash <code>{esc(P["input_hash"])}</code>), written by
   <code>python3 src/wayfarer/vertex_plasma.py --evidence</code>.</p>
+</section>"""
+
+
+def radiation_section(spec):
+    """Section 8 of engineering/vertex/: Engine 1.5 radiation physics, 3D exposure and thermal feasibility, read from
+    references/evidence/vertex_radiation.json (written by `python3 src/wayfarer/vertex_radiation.py --evidence`;
+    tests/test_vertex_radiation.py fails when it is stale against the inputs)."""
+    import json
+    p = ROOT / 'references/evidence/vertex_radiation.json'
+    if not p.exists():
+        return ''
+    R = json.loads(p.read_text()); A = R['audit']; S = R['sources']; G = R['geometry']; T = R['thermal']
+    pct = lambda v, d=1: '—' if v is None else f'{100*v:,.{d}f} %'
+    gw = lambda v: '—' if v is None else (f'{v/1e12:,.1f} TW' if v >= 1e12 else f'{v/1e9:,.1f} GW')
+    sci = lambda v: '—' if v is None else f'{v:.2g}'
+    cases = S['cases']; ids = list(cases)
+    led = ''.join(f'<tr><td><code>{esc(k)}</code> {esc(v["model"])}</td><td class="num">{pct(v["photon_share"])}</td><td class="num">{pct(v["neutron_share"], 2)}</td>'
+                  f'<td class="num">{pct(v["ledger"]["gamma_J"]/v["ledger"]["total_J"], 3)}</td><td class="num">{pct(v["ledger"]["charged_J"]/v["ledger"]["total_J"])}</td>'
+                  f'<td class="num">{pct(v["ledger"]["jet_J"]/v["ledger"]["total_J"])}</td><td>{"yes" if v["ledger"]["jet_fits"] else "<b>no</b>"}</td>'
+                  f'<td class="num">{pct(v["neutron_lines"]["DD_2_45MeV"], 2)} / {pct(v["neutron_lines"]["DT_14_1MeV"], 2)}</td><td class="meta">{esc(v["note"])}</td></tr>'
+                  for k, v in cases.items())
+    edges = [(b['lo_keV'], b['hi_keV']) for b in cases[ids[0]]['spectrum']]
+    spec_rows = ''.join(f'<tr><td class="num">{lo:g}–{hi:g}</td>' + ''.join(f'<td class="num">{pct(cases[k]["spectrum"][j]["share"])}</td>' for k in ids) + '</tr>'
+                        for j, (lo, hi) in enumerate(edges))
+    sens = ''.join(f'<tr><td>{esc(r["param"])}</td><td class="num">{r["value"]}</td><td class="num">{pct(r["photon_share"])}</td><td class="num">{pct(r["burn_fraction"])}</td>'
+                   f'<td class="num">{r["fusion_J"]/1e9:.2f}</td><td class="num">{r["Ti_peak_keV"]:.0f}</td></tr>' for r in R['sensitivity'] if r['model'] == 'R2-B')
+    scan = [r for r in R['sensitivity'] if r['model'] == 'R2-A']; tis = sorted({r['value'][0] for r in scan}); rat = sorted({r['value'][1] for r in scan})
+    scan_rows = ''.join(f'<tr><td class="num">{ti:g}</td>' + ''.join(f'<td class="num">{pct(next(r["photon_share"] for r in scan if r["value"] == [ti, q]))}</td>' for q in rat) + '</tr>' for ti in tis)
+    lad = G['ladder']; ns = sorted(lad, key=int); best = lad[ns[-1]]
+    ladder = ''.join(f'<tr><td class="num">{int(n):,}</td><td class="num">{pct(lad[n]["intercepted"], 2)}</td><td class="num">± {pct(lad[n]["stat_error"], 2)}</td></tr>' for n in ns)
+    mr = G['mesh_refinement']
+    diff = ''.join(f'<tr><td>{esc(d["obstacle"])}</td><td class="num">{pct(d["axisymmetric_1_4"])}</td><td class="num">{pct(d["traced_3d"])}</td></tr>' for d in G['difference'])
+    comp = R['components']; ms = R['materials']
+    order = sorted(comp, key=lambda g: -comp[g]['sky'])
+    crow = ''
+    for g in order:
+        v = comp[g]
+        if v['sky'] <= 0 and not v.get('charged_W'):
+            continue
+        m = ms.get(g, {}); low = m.get('cases', {}).get('LOW', {})
+        ch = v.get('charged_W')
+        crow += (f'<tr><td>{esc(g.replace("_", " ").capitalize())}{" · 20 K" if v["cold"] else ""}</td><td class="num">{pct(v["sky"], 2)}</td>'
+                 f'<td class="num">{gw(v["photon"]["LOW"]["low"])} – {gw(v["photon"]["LOW"]["high"])}</td>'
+                 f'<td class="num">{gw(v["photon"]["NOMINAL"]["low"])} – {gw(v["photon"]["NOMINAL"]["high"])}</td>'
+                 f'<td class="num">{gw(v["neutron_upper"]["NOMINAL"])}</td><td class="num">{(gw(ch["low"]) + " – " + gw(ch["high"])) if ch else "—"}</td>'
+                 f'<td class="num">{sci(low.get("avg_flux_W_m2"))}</td><td class="num">{sci(low.get("pulse_fluence_J_m2"))}</td>'
+                 f'<td>{esc(m.get("pmds") or "—")} {tag(m.get("status", "MATERIAL_LIMIT_OPEN"))}</td></tr>')
+    cl = R['cluster']
+    clrow = ''.join(f'<tr><td>{esc(k.replace("_", " ").capitalize())}</td><td class="num">{pct(v, 2)}</td><td class="num">{pct(cl["behind_first"].get(k), 2)}</td></tr>' for k, v in cl['first_hit'].items())
+    throws = ''
+    for cid in ids:
+        r = T['cases'][cid]
+        throws += (f'<tr><td><code>{esc(cid)}</code></td>' + ''.join(f'<td class="num">{gw(r[k]["four_W"])}<br><span class="meta">{r[k]["ratio"]:,.0f}×</span></td>'
+                   for k in ('RADIATION_low', 'RADIATION_high', 'ALL_low', 'ALL_high')) + '</tr>')
+    tr = R['treg']
+    cand = ''.join(f'<tr><td>{esc(r["name"])}</td><td class="num">{pct(r["intercepted"])}</td><td class="num">{pct(r["absorbed"][0])} – {pct(r["absorbed"][1])}</td>'
+                   f'<td class="num">{r["vs_capacity"][0]:,.0f}× – {r["vs_capacity"][1]:,.0f}×</td><td class="num">{r["cold_shielded_vs_capacity"][0]:,.0f}× – {r["cold_shielded_vs_capacity"][1]:,.0f}×</td>'
+                   f'<td class="meta">{esc(r["magnetic"])}</td><td class="meta">{esc(r["structural"])}</td><td>{tag("FAIL")}</td></tr>' for r in R['pareto'])
+    pl = R['pulse_loading']['NOMINAL']['RADIATION']; sd = R['standoff']
+    stand = ''.join(f'<tr><td><code>{esc(k)}</code></td><td class="num">{pct(v["max_shield_fraction"], 3)}</td><td class="num">{v["max_half_angle_deg"]:.1f}°</td>'
+                    + ''.join(f'<td class="num">{d:,.0f} m</td>' for d in v['standoff_m'].values()) + '</tr>' for k, v in sd.items())
+    alts = ''.join(f'<tr><td><code>{esc(a["id"])}</code> {esc(a["name"])}</td><td>{esc(a["changes"])}</td><td>{esc(a["physics"])}</td><td>{esc(a["maturity"])}</td>'
+                   f'<td>{esc(a["verdict"])}</td></tr>' for a in R['alternatives'])
+    srs = ''.join(f'<tr><td><code>{esc(x["id"])}</code> {esc(x["quantity"])}</td><td>{esc(x["required"])}</td><td>{esc(x["current"])}</td>'
+                  f'<td class="num">{" – ".join(f"{v:,.0f}×" for v in x["factor"])}</td><td>{esc(x["energy"])}; momentum: {esc(x["momentum"])}</td>'
+                  f'<td>{esc(x["machinery"])}</td><td>{esc(x["harder"])}</td><td>{esc(x["lore"])}</td></tr>' for x in R['speculative'])
+    gates = ''.join(f'<tr><td><code>{esc(g["id"])}</code></td><td>{esc(g["name"])}</td><td>{tag(g["status"])}</td><td>{esc(g["value"])}</td></tr>' for g in R['gates'])
+    gp = R['gap']; cs = gp['cold_shielded']; cb = R['combined']; nom = cases['NOMINAL']
+    return f"""<section id="radiation"><h2>8 · Radiation and thermal feasibility (Engine {esc(R["version"])})</h2>
+<p class="lead">Can the engine keep the radiation its own hardware absorbs within what its materials, cooling and radiators can take, without giving up the
+  fusion exhaust? Outcome {tag("OUTCOME_" + R["outcome"])}: no conventional architecture closes; the missing capability is quantified below. Verdict
+  {tag(R["verdict"])}, {tag(R["thermal_verdict"])}. The active engine stays <code>M0-NOMINAL</code> with the Engine 1.2 geometry. See also
+  <a href="#anatomy">Engine anatomy</a>, <a href="#structure">Structural validation</a>, <a href="#magnet">Magnetic design</a>, <a href="#plasma">Plasma coupling</a>,
+  <a href="../weakest-links/">Weakest Links</a> and <a href="../breakthrough-lab/">Breakthrough Lab</a>.</p>
+<h3>What Engine 1.4 assumed</h3>
+<ul class="plain">{''.join(f'<li>{esc(x)}</li>' for x in A["findings"])}</ul>
+<p>So 1.4 booked {pct(A["xray_share"])} of the yield as X-rays ({gw(A["xray_J"]*A["pulse_Hz"])} per engine) and put {pct(A["hardware_sky"])} of it into the hardware.</p>
+<h3>Where the fusion energy goes</h3>
+<p>The ledger is E<sub>total</sub> = E<sub>charged</sub> + E<sub>photons</sub> + E<sub>gamma</sub> + E<sub>neutrons</sub>, with nothing left unassigned. Photons are
+  bremsstrahlung (relativistic, Z<sub>eff</sub> of the fuel); gammas are the 16.4 MeV D-³He branch; neutrons come from D-D side reactions and the tritium they
+  breed. {tag("ANALYTIC")} R2-A holds a burn at fixed temperature; {tag("REDUCED_MODEL")} R2-B burns a uniform expanding sphere sized to the demonstrator yield
+  (ρR {S["rhoR_solved"]:.0f} g/cm², burn fraction {pct(cases["CONSERVATIVE"]["burn"]["burn_fraction"], 0)}), with ion and electron temperatures, Spitzer
+  equilibration and fast-product heating; it runs away to Ti ≈ {cases["CONSERVATIVE"]["burn"]["Ti_peak_keV"]:.0f} keV, where bremsstrahlung wins.</p>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Case</th><th>Photons</th><th>Neutrons</th><th>Gamma</th><th>Charged</th><th>Design jet</th><th>Jet fits</th>
+<th>n 2.45 / 14.1 MeV</th><th>Basis</th></tr></thead><tbody>{led}</tbody></table></div>
+<p>The 1.4 share sits inside the bracket ({esc(S["verdict_1_4"])}), but the brackets say something sharper: the jet's {pct(A["jet_share"], 0)} leaves room for at most
+  {pct(S["photon_room_for_jet"])} photons. Only the idealised hot-ion case fits; a thermal or self-consistent burn radiates more than the design jet allows.
+  Literature agrees (thermal D-³He bremsstrahlung is a fifth or more of the fusion power near its optimum).</p>
+<div class="grid2"><div class="panel"><h4>Photon spectrum (keV)</h4><table><thead><tr><th>Band</th>{''.join(f"<th>{esc(k)}</th>" for k in ids)}</tr></thead><tbody>{spec_rows}</tbody></table>
+ <p class="meta">Mostly 30–1000 keV: hard X-rays that cross centimetres of steel. Neutrons: 2.45 MeV (D-D) and 14.1 MeV (bred D-T); a transport code is needed
+ for their deposition, so the neutron rows below are an upper bound (all intercepted energy stays in the first part) with their own geometry, not the photon sky.</p></div>
+<div class="panel"><h4>R2-A photon / fusion power</h4><table><thead><tr><th>Ti keV</th>{''.join(f"<th>Te/Ti {q:g}</th>" for q in rat)}</tr></thead><tbody>{scan_rows}</tbody></table></div></div>
+<div class="scroll" tabindex="0"><table><thead><tr><th>R2-B change</th><th>Value</th><th>Photons</th><th>Burn fraction</th><th>Yield GJ</th><th>Peak Ti keV</th></tr></thead><tbody>{sens}</tbody></table></div>
+<p class="meta">A photon share above 100 % means the target did not ignite: the radiation carries off the heat it started with. The design yield needs the
+  ρR the R2-B case solves for; at lower ρR the yield falls with it.</p>
+<h3>True 3D exposure</h3>
+<p>{tag("RAY_TRACED")} Rays from the burn point through the engine's own {G["parts"]} part meshes ({G["triangles"]:,} triangles, the ones Blender builds),
+  every crossing recorded: closed solids pair into entry and exit, open shells count their thickness. Validated on a sphere, a torus band, a slab, an open
+  shell and a translated scene (tests). {pct(best["intercepted"])} of the sky meets hardware, against {pct(G["legacy_hardware"])} in 1.4: the eight cage longerons
+  are bars, not a surface of revolution. Doubling every mesh's facets changes it by {mr["difference"]:+.2%}.</p>
+<div class="grid2"><div class="panel"><table><thead><tr><th>Rays</th><th>Intercepted</th><th>Statistical</th></tr></thead><tbody>{ladder}</tbody></table></div>
+<div class="panel"><table><thead><tr><th>1.4 obstacle</th><th>1.4 axisymmetric</th><th>1.5 traced</th></tr></thead><tbody>{diff}</tbody></table></div></div>
+<p>Across the four-engine cluster (engine N1's burn point, ship frame, radiator blades on their planes):</p>
+<div class="scroll" tabindex="0"><table><thead><tr><th>First owner hit</th><th>Share of sky</th><th>Reached next, behind the first</th></tr></thead><tbody>{clrow}</tbody></table></div>
+<h3>Absorption, by energy</h3>
+<p>{tag("BRACKETED")} Interception is not deposition. The low bound keeps only Compton (Klein-Nishina) energy transfer and lets scattered photons leave;
+  the high bound puts every intercepted photon's energy in the first part (the photoelectric limit, 1.4's rule). For the NOMINAL spectrum the engine absorbs
+  {pct(R["transport"]["nominal"]["low"])} – {pct(R["transport"]["nominal"]["high"])} of the photon energy; {pct(R["transport"]["nominal"]["scattered"])} scatters
+  and {pct(R["transport"]["nominal"]["transmitted"])} passes through. Photoelectric and pair cross sections need reference data this build could not load
+  (xraylib not installed, NIST XCOM not reachable); Geant4 and OpenMC are free and named as the next step, not run.</p>
+<h3>Component loads (per engine)</h3>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Group</th><th>Sky</th><th>Photons LOW</th><th>Photons NOMINAL</th><th>Neutrons ≤</th><th>Charged (1.4)</th>
+<th>Peak W/m² (LOW)</th><th>J/m² per pulse</th><th>Material</th></tr></thead><tbody>{crow}</tbody></table></div>
+<p class="meta">Pulse versus steady load: per-pulse fluence is the average flux divided by {A["pulse_Hz"]:.0f} Hz. A tungsten plasma-facing component takes about
+  10 MW/m² steady; the burn armour's peak is several hundred times that even at the LOW source.</p>
+<h3>Heat rejection, four engines</h3>
+<p>The installed hot radiator rejects {gw(T["capacity_W"])} at 1800 K (both faces, view factor 0.9), with nothing reserved for the ship's own hot loads. Cold
+  heat at 20 K costs {1/T["cop"]:,.0f} W of radiator per watt lifted (30 % of Carnot). Radiation only, then with 1.4's charged-plasma and eddy heat:</p>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Source</th><th>Radiation, low</th><th>Radiation, high</th><th>All, low</th><th>All, high</th></tr></thead><tbody>{throws}</tbody></table></div>
+<ul class="plain">
+ <li><b>T0</b> radiators alone: {tr["T0"]["ratio"]:,.0f}× the ship's whole radiator area for one engine's most favourable load.</li>
+ <li><b>T1</b> heat out with hydrogen: {esc(tr["T1"]["verdict"])}</li>
+ <li><b>T2</b> conversion: {esc(tr["T2"]["verdict"])}</li>
+ <li><b>T3</b> storage: the whole engine heated by {tr["T3"]["dT_K"]:.0f} K holds {tr["T3"]["seconds"]*1e3:.1f} ms of that heat. Storage is not closure.</li></ul>
+<h3>Radiation-aware candidates</h3>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Candidate</th><th>Intercepted</th><th>Absorbed</th><th>Radiator ×</th><th>Coils shielded ×</th><th>Magnetic</th>
+<th>Structure</th><th>Verdict</th></tr></thead><tbody>{cand}</tbody></table></div>
+<p>NOMINAL photons only, neutrons and charged heat left out, which favours every row. A5 (less power): at the installed radiator the engines could run at
+  {pct(pl["power_factor"][1], 2)} of design power with the most favourable bracket; thrust falls and burn time grows {1/pl["power_factor"][1]:,.0f}×.</p>
+<h3>Other architectures</h3>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Alternative</th><th>Changes</th><th>Physics</th><th>Maturity</th><th>Verdict</th></tr></thead><tbody>{alts}</tbody></table></div>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Pusher standoff</th><th>Shield sky share allowed</th><th>Half angle</th><th>D for r 37 m</th><th>D for r 6.5 m</th></tr></thead><tbody>{stand}</tbody></table></div>
+<h3>The speculative gap</h3>
+<p>For four engines to fit the radiators even with neutrons and charged heat at zero and the most favourable transport bound, photons may be at most
+  {pct(cs["photon_share_needed"], 2)} of the yield (cold parts behind a perfect warm shield; {pct(gp["as_drawn"]["photon_share_needed"], 3)} as drawn). The source
+  bracket is {cs["factor_low"]:,.0f}–{cs["factor_high"]:,.0f}× above it, and the lowest point of the plasma scan (Ti {gp["scan_min"]["Ti_keV"]:g} keV, Te/Ti
+  {gp["scan_min"]["Te_over_Ti"]:g}) is still {gp["scan_min"]["factor"]:.0f}× above. The best conventional combination (no structure, burn point 6 m aft, coils
+  shielded) needs {cb["vs_capacity"][0]:,.0f}× the radiator.</p>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Requirement</th><th>Needed</th><th>Now</th><th>Gap</th><th>Energy and momentum</th><th>Machinery</th><th>Harder</th><th>Lore</th></tr></thead>
+<tbody>{srs}</tbody></table></div>
+<p class="meta">Recorded as requirements for the <a href="../breakthrough-lab/">Breakthrough Lab</a>; none is canon, and none is assigned to Fiji technology.</p>
+<h3>Gates and decision</h3>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Gate</th><th></th><th>Status</th><th>Result</th></tr></thead><tbody>{gates}</tbody></table></div>
+<p class="meta">Evidence file <code>references/evidence/vertex_radiation.json</code> (input hash <code>{esc(R["input_hash"])}</code>), written by
+  <code>python3 src/wayfarer/vertex_radiation.py --evidence</code> in {R["cost"]["wall_s"]:.0f} s ({R["cost"]["workers"]} workers, peak {R["cost"]["peak_rss_MB"]:.0f} MB).</p>
 </section>"""
 
 

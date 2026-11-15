@@ -95,3 +95,5 @@ table.meta th { width: 170px; }
 .figure-svg.cavity .c-st { fill: var(--info); }
 .figure-svg.cavity .c-af { fill: var(--good); }
 .figure-svg.cavity .c-hw { fill: var(--bad); }
+/* Vertex page photographs: keep them inside the column at phone width */
+.figs img { max-width: 100%; height: auto; display: block; }

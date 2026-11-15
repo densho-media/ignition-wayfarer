@@ -5465,6 +5465,62 @@ service = "Service hardware (safety-marked)"
 sensor = "Diagnostic sensor housing"
 lamp = "Status indicator lamp"
 
+# Vertex Engine 1.5 (owner brief 2026-11-15): radiation physics, 3D exposure geometry and thermal feasibility (vertex_radiation.py). A
+# research configuration: it reads the engine, cluster, plasma and radiator inputs and never changes them (its own table, so the 1.3 and
+# 1.4 evidence hashes stay valid). Every unsourced physical choice is PROTOTYPE; the source cases are bounds, not a target design.
+[vertex_radiation]
+evidence = "ENGINEERING_PROTOTYPE"
+version = "1.5.0"
+# R-02/R-03 source cases. R2-A (ANALYTIC): bremsstrahlung / fusion power of a thermal D-3He plasma held at one temperature (density
+# cancels); R2-B (REDUCED_MODEL): one target's self-consistent burn as a uniform sphere of the implied target mass expanding at
+# expansion x the plasma sound speed, its initial areal density solved so the burn gives the demonstrator yield; Bosch-Hale reactivities
+# (D-3He, both D-D branches, D-T for bred tritium; held at the fits' upper limits above them), relativistic bremsstrahlung, Spitzer
+# electron-ion exchange, fast-product slowing split between ions and electrons (critical energy), adiabatic cooling. Bremsstrahlung
+# escapes: the hard spectrum meets Compton scattering only (no true absorption at these temperatures), which delays it, not keeps it.
+# The demonstrator gives yield, rate and jet share only, so the plasma state is a bounded choice (PROTOTYPE).
+cases = [
+  { id = "LOW", model = "R2-A", Ti_keV = 110.0, Te_over_Ti = 0.5, D_per_He3 = 1.0, note = "burn held at the D-3He optimum in hot-ion mode (electrons at half the ion temperature): a lower bound, not a demonstrated burn" },
+  { id = "NOMINAL", model = "R2-A", Ti_keV = 100.0, Te_over_Ti = 1.0, D_per_He3 = 1.0, note = "equilibrated thermal burn held at the D-3He optimum" },
+  { id = "CONSERVATIVE", model = "R2-B", Ti_keV = 70.0, Te_over_Ti = 1.0, D_per_He3 = 1.0, deposition = 1.0, expansion = 1.0, note = "self-consistent burn of the implied target to the demonstrator yield: the fusion protons heat the electrons, which radiate" },
+]
+sens_Ti_keV = [30.0, 50.0, 70.0, 100.0, 150.0]
+sens_Te_over_Ti = [0.1, 0.3, 0.5, 1.0]
+sens_rhoR_g_cm2 = [1.0, 3.0, 10.0, 30.0, 100.0, 300.0]
+sens_D_per_He3 = [2.0, 1.0, 0.5]
+sens_expansion = [0.5, 1.0, 2.0]
+# D(3He,gamma)5Li capture branch per D-3He reaction (LITERATURE_RANGE, order 1e-5 to 1e-4) and its photon energy (MeV).
+gamma_branch = [1.0e-5, 5.0e-5, 1.0e-4]
+gamma_MeV = 16.4
+# Photon spectrum bins (keV edges): soft below 10 keV, hard 10-1000 keV, gamma above.
+spectrum_edges_keV = [1.0, 3.0, 10.0, 30.0, 100.0, 300.0, 1000.0, 3000.0, 10000.0, 30000.0]
+# G-01 geometry: deterministic Fibonacci-sphere directions from the burn point through the engine's own part meshes (vertex_engine.mesh_of,
+# the meshes Blender builds). Parts that are not hardware (the burn fiducial) are excluded; open revolve shells get shell_thickness_m
+# (PROTOTYPE: the drawn shells carry no thickness).
+rays = 16384
+ray_convergence = [1024, 4096, 16384, 65536]
+cluster_rays = 16384
+exclude_parts = ["VTX_Burn_Chamber_Marker"]
+shell_thickness_m = 0.01
+# R-04 transport: Level A/B brackets without tabulated photoelectric data (NIST XCOM and xraylib were not reachable in this session):
+# Compton interaction (Klein-Nishina, exact) is the least a photon can interact; all attenuated energy absorbed is the most. Electrons per
+# unit mass (Z/A) and PMDS materials per engine material class; smeared density = vertex_engine.materials density x solid fraction.
+z_over_a = { structure = 0.461, coil = 0.458, cryostat = 0.464, shield = 0.503, armour = 0.403, hot = 0.445, cryo = 0.470, power = 0.456, fuel = 0.55, service = 0.482, sensor = 0.49, lamp = 0.49 }
+pmds = { structure = "MAT-TI6AL4V", coil = "MAT-REBCO", cryostat = "MAT-SS-316LN", shield = "MAT-LIH", armour = "MAT-W", hot = "MAT-NB1ZR", power = "MAT-CU-OF" }
+cold_materials = ["coil", "cryostat", "cryo"]
+# Neutrons: no transport here. Upper bound: every intercepted neutron deposits its energy in the part it meets (OpenMC/MCNP class OPEN).
+# T-01 thermal: cryogenic heat lifted from 20 K to the radiator temperature at carnot_fraction of the Carnot COP; hot hardware rejects at the
+# 1800 K hot radiators (radiators.effective_area, emissivity, temperature: 14.4 GW); WARM and LOW sections keep their own loads.
+cold_K = 20.0
+carnot_fraction = 0.3
+# A-01 candidates (research configurations only): burn-point shifts along the engine axis (m), loop radius scale, standoff of a pusher
+# shield that keeps the ship inside a cone of half-angle atan(ship_radius / standoff).
+burn_shifts_m = [-6.0, -4.0, -2.0, 0.0, 2.0]
+loop_radius_scale = [1.25, 1.5]
+ship_shadow_radius_m = 37.0
+outcome = "C"
+verdict = "PROPULSION_FEASIBILITY_BLOCKED"
+thermal = "THERMAL_CLOSURE_FAILED"
+
 # --- Asset C: Wayfarer propulsion cluster -----------------------------------------------------------------------------------------------
 [propulsion_cluster]
 id = "WF-VTX-CL4"

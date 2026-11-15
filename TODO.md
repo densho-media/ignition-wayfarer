@@ -641,8 +641,12 @@ candidates of all nine classes are separate accessory assets (docs/ACCESSORIES.m
   the NOMINAL coil forces (Structure in MODEL.md). Engine 1.3 (Magnetic design in MODEL.md) found no current set or coil geometry that
   closes the field's functions (Outcome B). Open: the forward loss cone onto the shield (WL-002, BT-003); the reversed closure-coil loads of a
   mirror field (struts and reaction ring 3–4× their 1.2 sizes); detachment (DETACHMENT_OPEN). Engine 1.4 (Coupled plasma in MODEL.md) ran the bounded D-21 study: Outcome D, no
-  architecture shown to work. Next, each needing the owner's go: a 2D hybrid-PIC run (about 11 core-hours) and a 3D one (about 12,500
-  core-hours, 1 TB); the X-ray load on hardware covering 87 % of the burn's sky (about 1.6 TW per engine); A1 pole steering and A2 aft or
+  architecture shown to work. Engine 1.5 (Radiation and thermal in MODEL.md): Outcome C, THERMAL_CLOSURE_FAILED; the real hardware covers
+  62 % of the sky, not 87 %, but photons are 12.5–85 % of the yield and the radiators would need 854× their capacity even at the most
+  favourable bounds; the requirement is a photon share of at most 0.59 % (SR-1, 21–144× below the source). Next, each needing the owner's
+  go: Geant4 or OpenMC transport with photoelectric and pair data (and the neutron channel), or xraylib for the attenuation tables; a
+  decision whether to record SR-1..4 in the Breakthrough Lab registry; a 2D hybrid-PIC run (about 11 core-hours) and a 3D one (about 12,500
+  core-hours, 1 TB); A1 pole steering and A2 aft or
   anisotropic sourcing in that model; the 0.1–5 GW eddy heat in the 20 K cryostat walls; REBCO critical current at the conductor field (OD-024); the
   CONSERVATIVE and EXTREME coil currents, which no member of this envelope survives; the cold-mass supports behind the loop seats and their
   heat leak; the lithium circuit at 1,800 K (no rated alloy) and its capacity; the bore shutter (tungsten chopper strength OPEN); pulse
