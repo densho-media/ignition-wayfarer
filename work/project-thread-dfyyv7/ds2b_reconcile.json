@@ -1,0 +1,229 @@
+{
+ "gate": {
+  "gate: separate, reconnect 4 h (section 30.5)": {
+   "viable": true,
+   "peak_pct": 0.43253896339581854,
+   "co2_ch": 82.5,
+   "r1": 0.3029022378048764,
+   "r24": 0.2208276050254058,
+   "dose": 99.93978189267311,
+   "r7d": 0.43579664595619,
+   "restore_h": 28.0,
+   "contain_min": 20.0
+  },
+  "gate: separate, no reconnect": {
+   "viable": false,
+   "peak_pct": 1.7214830432768673,
+   "co2_ch": 132.5,
+   "r1": 0.3029022378048764,
+   "r24": 0.108632196969172,
+   "dose": 46.085986025680825,
+   "r7d": 0.25691115696865485,
+   "restore_h": 23.75,
+   "contain_min": 20.0
+  },
+  "gate: separate, reconnect 4 h, crew act at 15 min": {
+   "viable": true,
+   "peak_pct": 0.4284941835766213,
+   "co2_ch": 79.5,
+   "r1": 0.4114589901931796,
+   "r24": 0.2803094944545678,
+   "dose": 126.78602528270255,
+   "r7d": 0.5436747632611193,
+   "restore_h": 35.0,
+   "contain_min": 25.0
+  },
+  "gate: separate, reconnect 4 h, crew act at 30 min": {
+   "viable": true,
+   "peak_pct": 0.41587023948050944,
+   "co2_ch": 67.5,
+   "r1": 0.711728113874862,
+   "r24": 0.44077082633940395,
+   "dose": 198.89610907469728,
+   "r7d": 0.8308347842378178,
+   "restore_h": 48.0,
+   "contain_min": 40.0
+  },
+  "gate: purge to the TCC, all to A3": {
+   "viable": true,
+   "peak_pct": 0.16239261924381004,
+   "co2_ch": 0.0,
+   "r1": 0.27246665199165154,
+   "r24": 0.2182263342573662,
+   "dose": 98.58055332098043,
+   "r7d": 0.5177846765956353,
+   "restore_h": 39.0,
+   "contain_min": 20.0
+  },
+  "gate: isolate A1, all to A3": {
+   "viable": true,
+   "peak_pct": 0.16233432081963103,
+   "co2_ch": 0.0,
+   "r1": 0.2585959250753932,
+   "r24": 0.0176126213211826,
+   "dose": 2.623159741890776,
+   "r7d": 0.5357185586597409,
+   "restore_h": 56.0,
+   "contain_min": 20.0
+  }
+ },
+ "play": {
+  "play 3 separate (no reconnection)": {
+   "viable": false,
+   "verdict": "CO2_LIMIT",
+   "family": "SEPARATE",
+   "peak_pct": 1.7079451460451385,
+   "co2_ch": 130.9,
+   "r1": 0.4631810877679214,
+   "r24": 0.3520622156715478,
+   "dose": 162.09127271003524,
+   "r7d": 0.6675113803767521,
+   "restore_h": 41.5,
+   "a1_h": 41.25,
+   "contain_min": 25.0,
+   "released_g": 2.3853155885971287
+  },
+  "play 17 separate_reconnect (4 h)": {
+   "viable": true,
+   "verdict": "STABLE",
+   "family": "SEPARATE",
+   "peak_pct": 0.41949621565185535,
+   "co2_ch": 39.583333333333336,
+   "r1": 0.4627931336009639,
+   "r24": 0.3244556075851323,
+   "dose": 148.845278151507,
+   "r7d": 0.5985231503774575,
+   "restore_h": 37.333333333333336,
+   "a1_h": 36.916666666666664,
+   "contain_min": 25.0,
+   "released_g": 2.3853155885971287
+  },
+  "play 18 separate_late (6 h)": {
+   "viable": false,
+   "verdict": "CO2_LIMIT",
+   "family": "SEPARATE",
+   "peak_pct": 0.5481041621055224,
+   "co2_ch": 89.46666666666667,
+   "r1": 0.4627931336009639,
+   "r24": 0.3177707661634444,
+   "dose": 145.6365542690965,
+   "r7d": 0.5891001763316003,
+   "restore_h": 37.06111111111111,
+   "a1_h": 36.583333333333336,
+   "contain_min": 25.0,
+   "released_g": 2.3853155885971287
+  },
+  "play 1 isolate (no plan)": {
+   "viable": true,
+   "verdict": "STABLE_RESIDUE",
+   "family": "ISOLATE",
+   "peak_pct": 0.22252631393679792,
+   "co2_ch": 0.0,
+   "r1": 0.4937135322185071,
+   "r24": 0.28313995609784437,
+   "dose": 131.92810359345665,
+   "r7d": 0.5090149235431746,
+   "restore_h": 168.0,
+   "a1_h": null,
+   "contain_min": 25.0,
+   "released_g": 2.3853155885971287
+  },
+  "play 15 watch_restore (isolate, restore at 24 h)": {
+   "viable": true,
+   "verdict": "STABLE_RESIDUE",
+   "family": "ISOLATE",
+   "peak_pct": 0.2587492287651657,
+   "co2_ch": 0.0,
+   "r1": 0.4640446027189962,
+   "r24": 0.29487586022197154,
+   "dose": 129.34009598049954,
+   "r7d": 0.6439716248222791,
+   "restore_h": 44.916666666666664,
+   "a1_h": 44.583333333333336,
+   "contain_min": 25.0,
+   "released_g": 2.3853155885971287
+  },
+  "play 2 purge": {
+   "viable": true,
+   "verdict": "STABLE",
+   "family": "ROUTE",
+   "peak_pct": 0.16882095821173726,
+   "co2_ch": 0.0,
+   "r1": 0.46387168594565037,
+   "r24": 0.3320563731438268,
+   "dose": 152.49108524205317,
+   "r7d": 0.6027898262751551,
+   "restore_h": 38.416666666666664,
+   "a1_h": 38.333333333333336,
+   "contain_min": 25.0,
+   "released_g": 2.3853155885971287
+  }
+ },
+ "fast": {
+  "fast: isolate, restore at 24 h": {
+   "viable": true,
+   "verdict": "STABLE_RESIDUE",
+   "family": "ISOLATE",
+   "peak_pct": 0.25875136099674184,
+   "co2_ch": 0.0,
+   "r1": 0.36324860916340174,
+   "r24": 0.2366458898547724,
+   "dose": 104.11006116450649,
+   "r7d": 0.5338027839427549,
+   "restore_h": 39.416666666666664,
+   "a1_h": 39.166666666666664,
+   "contain_min": 20.0,
+   "released_g": 1.9842808259836344
+  },
+  "fast: purge": {
+   "viable": true,
+   "verdict": "STABLE",
+   "family": "ROUTE",
+   "peak_pct": 0.16717886459301265,
+   "co2_ch": 0.0,
+   "r1": 0.3662078549986353,
+   "r24": 0.2748522816168879,
+   "dose": 126.7198292230899,
+   "r7d": 0.49986873168486934,
+   "restore_h": 32.333333333333336,
+   "a1_h": 32.166666666666664,
+   "contain_min": 20.0,
+   "released_g": 1.9842808259836344
+  },
+  "fast: separate, reconnect 4 h": {
+   "viable": true,
+   "verdict": "STABLE",
+   "family": "SEPARATE",
+   "peak_pct": 0.42381541601060413,
+   "co2_ch": 42.166666666666664,
+   "r1": 0.3618626635768481,
+   "r24": 0.26565923161684846,
+   "dose": 122.30958391494124,
+   "r7d": 0.4920522097553808,
+   "restore_h": 31.083333333333332,
+   "a1_h": 30.583333333333332,
+   "contain_min": 20.0,
+   "released_g": 1.9842808259836344
+  }
+ },
+ "front_play": {
+  "play 1 isolate (no plan)": [],
+  "play 15 watch_restore (isolate, restore at 24 h)": [],
+  "play 2 purge": [],
+  "play 17 separate_reconnect (4 h)": []
+ },
+ "front_fast": {
+  "fast: isolate, restore at 24 h": [],
+  "fast: purge": [],
+  "fast: separate, reconnect 4 h": []
+ },
+ "eps": {
+  "r1": 0.05,
+  "r24": 0.05,
+  "dose": 0.5,
+  "co2_ch": 0.5,
+  "airborne_g": 0.1,
+  "r7d": 0.05,
+  "restore_h": 2.0
+ }
+}
