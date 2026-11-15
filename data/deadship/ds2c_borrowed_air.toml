@@ -1,0 +1,117 @@
+# DS-2C "Borrowed Air": the first true Deadship challenge (owner briefs 2026-11-13 and 2026-11-15; design DEADSHIP_DESIGN.md
+# section 5.8, built in section 39). A station-run training simulation aboard Wayfarer in simulated COAST (the walk's ring start).
+#
+# Scenario-owned values only. Every engineering value (cabin heat capacity, crew heat, vapour and CO2, the CO2 unit, the cooling chain,
+# the buses and stores, the parts and their interfaces, the limits) comes from the ring services model, src/wayfarer/ring_services.py
+# (SYS-003), and its package. src/wayfarer/ship_ops.py refuses a scenario that sets one. Every value below is PROTOTYPE: a training
+# choice, not canon.
+
+[scenario]
+id = "DS-2C"
+name = "Borrowed Air"
+kind = "CHALLENGE"
+scored = false
+status = "PROTOTYPE"
+system = "RING_SERVICES"
+note = "Two faults in ring A at once and no spare for either. Every way out borrows from somewhere: ring B's redundancy, the Garden, ring A itself. The metrics are shown, not weighted: no points, no ranking."
+
+[premise]
+# What failed, when, and why there is no spare (the premise the challenge rests on).
+faults = [["A.CO2.FAN", 0.0], ["A.P1.PUMP", 0.0]]
+fusion = true
+occupants = { A = 6, B = 0 }
+spares = []
+# Ring B is unoccupied and in coast setback: its CO2 unit, lights, lab, galley and Garden lights are off; its cooling runs at the valve's
+# minimum, so its cabin has settled where the remaining loads balance the coil (the model's own equilibrium, 72 h from 23 C).
+setback = { ring = "B", T_K = 285.45, rh = 0.60, off = ["CO2", "LIGHT", "LAB", "GALLEY", "GARDEN"] }
+basis = "Ring A's CO2-removal fan stops and coolant pump 1 seizes in the same hour. The rings carry no spare fan or pump: the one spare ECLSS fan went into this unit at the last repair (the DS-1 'Scrubber' exercise), and pumps are kept in the service module's stores, out of reach while the rings turn. Ring B is empty and whole but in coast setback, cold (about 12 C) with its CO2 unit and discretionary loads off: it has its own unit, its own heat exchanger fan and two pumps, and must be brought up before anyone lives there. Both rings' ECLSS fans are one family (the CO2 unit's and the heat exchanger's), and so are their pumps."
+
+[crew]
+# Three pairs in ring A; the trainee is pair A's first member, physically controlled; the other five are abstract (a place, an order).
+pairs = [["A", "A1"], ["B", "A2"], ["C", "A3"]]
+transfer_s = 900.0
+transfer_note = "A crossing between the rings: up the crew tube, the drum's transfer cycle at the despun vestibule, down the other ring's tube. People in the crossing are in neither ring's air (the tubes and the vestibule are outside the model)."
+fetch_work_s = 600.0
+fetch_note = "At ring B's bay the pair isolates the machine, removes the part and packs it for the crossing. The machine stays isolated and without the part: ring B loses that function."
+deliver_to = "A.SHELF"
+
+[work]
+# The trainee's own work at ring A's sector 3 bay: removing or installing a part. The machine must be isolated first. Progress is kept
+# when interrupted; the part moves when the work completes.
+remove_s = 300.0
+install_s = 300.0
+rule = "Working on a running machine is refused: isolate it first. One part in hand at a time."
+
+[places]
+# Where the trainee's actions are done (existing exported nodes; no new geometry).
+bay = { node = "Prod_RA3_GDN_ECLSS", compartment = "A3", reach_m = 2.6, holds = ["CO2", "CHX", "P1", "P2", "HP"], note = "Ring A's ECLSS bay: the CO2 unit, the cabin heat exchanger, the coolant pumps and the heat pump, and the parts shelf." }
+console = { node = "Prod_RA2_WRK_Ops_1", compartment = "A2", reach_m = 2.2, note = "An ops console: the rings' load switching (remote power controllers) and the electrical overview." }
+
+[time]
+scale = 30.0
+watch_scale = 1800.0
+dt_s = 10.0
+watch_dt_s = 60.0
+projection_dt_s = 300.0
+alert_s = 60.0
+pause = "The scenario's clock stops while a page or the controls menu is open, while the trainee is off ring A's deck, and after the run ends."
+
+[watch]
+ship_h = 24.0
+min_h = 1.0
+projection_h = 168.0
+
+[alert]
+text = "CAUTION · RING A ECLSS: CO2 unit process flow LOW. Cooling: coolant pump 1 NO FLOW. Cabin temperature rising."
+
+[[stages]]
+id = "recognize"
+title = "Recognize"
+objective = "Two alarms in ring A at once. Look at the ring readings ({map}) and go to the ECLSS bay in sector 3."
+hint = "CO2 rises when nothing removes it; the cabin warms when the cooling cannot carry the heat. Which is faster?"
+
+[[stages]]
+id = "diagnose"
+title = "Diagnose"
+objective = "Inspect the machines at the bay ({use}): what has failed, and what still works?"
+hint = "A fan or a pump that has failed shows no flow with its power on. The heat exchanger's fan does two jobs: cooling and drying the air."
+
+[[stages]]
+id = "assess"
+title = "Assess"
+objective = "Check the parts: the shelf at the bay, and ring B's machines by intercom ({ops} away from equipment)."
+hint = "There is no spare. A part can come from another machine of the same family, here or in ring B: that machine then stops."
+
+[[stages]]
+id = "act"
+title = "Decide and act"
+objective = "Choose what to borrow and what to give up: isolate before you work, move parts, shed loads at the ops console in sector 2, or move the crew."
+hint = "The CO2 unit and the heat exchanger take the same fan. Ring B's machines can be fetched by a pair (a crossing takes 15 minutes each way). The Garden lights are the largest heat load."
+
+[[stages]]
+id = "stabilize"
+title = "Stabilize"
+objective = "When CO2, temperature and humidity are under control where people are, declare the watch ({ops} at the intercom)."
+hint = "Stable means it holds without you: a falling CO2 trend, a temperature that settles under the limit, humidity in its band."
+
+[[stages]]
+id = "verify"
+title = "Verify"
+objective = "The stability watch runs the model for 24 hours, then the 7-day projection."
+hint = "Nothing changes during the watch: what you set is what is tested."
+
+[[stages]]
+id = "debrief"
+title = "Debrief"
+objective = "Read what held, what it cost and what you borrowed."
+hint = "Replay ({ops}) to try another way."
+
+[debrief]
+families = [
+  "Borrow ring B's CO2 fan and shed heat in ring A: ring A runs on one pump with the Garden and lab dark; ring B can no longer host the crew.",
+  "Borrow ring B's CO2 fan and a pump: ring A is whole again; ring B has lost CO2 removal and half its cooling.",
+  "Bring ring B out of setback and move the crew there: no part is moved; ring A's faults stay and ring A stands empty. Moving before ring B is warm puts people in a cold cabin.",
+  "Take ring A's heat exchanger fan for the CO2 unit: CO2 is removed, but the cabin loses all cooling and drying.",
+  "Shed loads only, or wait: the cabin cools, but nothing removes the CO2.",
+]
+notes = "Metrics are shown side by side and never weighted (no official weights exist; PROTOTYPE evaluation only)."
