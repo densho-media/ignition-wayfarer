@@ -3328,3 +3328,218 @@ playtest. Deploy only with the owner's OK.
 
 **Not done, by the brief.** No canon, Drive, geometry or Blender change. No Phase 4 or 5. No multiplayer or leaderboards. No invented
 accident details or injuries.
+
+## 49. Phases 2 and 3 closeout: scope and baseline [owner brief 2026-11-15 18:47Z]
+
+The brief asks Phases 2 and 3 to be finished, validated and closed, not expanded. No mission, strategy family, subsystem or game
+feature was added. The changes are:
+
+- the model-validity policy (§50);
+- two invariant tests (§54);
+- the sensitivity study in `work/` (§51, §52);
+- this documentation.
+
+**Baseline at 201ca74, before any change.** The full suite, `python3 -m unittest discover -s tests`, ran 326 tests in 245 s: 325
+passed, 1 skipped (an EVA envelope test that needs `workflow.py eva` output first; it is not new) and 0 failed.
+
+## 50. Thermal model validity policy [BUILT; VALIDATED]
+
+**Valid range.** SYS-003's cabin balance, C dT/dt = crew heat + electrical heat − CHX heat, is the whole thermal model. It is
+defensible while the CHX path dominates the cabin's exchange: around the habitability band (18–27 °C), where the coil, the valve and
+the heat pump act.
+
+It leaves out three mechanisms:
+1. passive exchange with the cabin's lining and structure (hull loss);
+2. cabin heaters;
+3. equipment over-temperature cutouts.
+
+These matter only once the cabin is far from that band. The range is set at the habitability limits ±8 K, which is **10–35 °C**.
+
+**Do any normal or successful strategies come near it?** No. Every viable strategy in both scenarios peaks at 22.8–24.7 °C and never
+leaves the range (tested). The cases that leave it are all failures:
+
+| Scenario | Case | Leaves the range at |
+| --- | --- | --- |
+| DS-2C | cannibalize | 1.3 h, after crossing the heat limit at 0.5 h |
+| DS-3 | nothing | 11.7 h |
+| DS-3 | tie_only | 15.8 h |
+| DS-3 | keep_garden | 14.5 h |
+| DS-3 | short_reserve | 68.2 h, in the projection after its failed restart |
+
+**The policy, built in `ship_ops.py` and mirrored in `ship_ops.gd`.**
+- Wherever people live, each step records the last state inside the range.
+- The first step outside it is recorded as `range_exit`: when, which ring, in which phase, high or low, and the last valid state
+  (time, temperature, RH, CO₂).
+- Peaks are taken only inside the range, so no extrapolated peak is reported. `beyond_validity` is now true exactly when `range_exit`
+  exists.
+- The debrief keeps the three facts apart:
+  - the limit crossing ("Temperature limit passed at T+0:32");
+  - the exit ("at T+1:18 ring A left the model's valid range (above 35 C)");
+  - the last valid state.
+  It then says that later temperatures, and the humidity that follows them, are outside the model and are not shown.
+- The live readouts and the 7-day ring states show "above 35 C (outside the model)" instead of a number.
+
+**Conservation.** The state itself is not clipped. The model keeps integrating, and every ledger still closes. Only what is *shown*
+changes. The verdicts and limit crew-hours are unchanged. Hours above a limit after the exit are counted as above the limit; that is
+the direction every omitted mechanism would only shorten, so it is stated as an upper bound.
+
+**Package.** The scenario package version went from 1 to 2. Godot compares `range_exit` (time and ring) case by case.
+
+Tests: `test_model_validity_is_reported_not_extrapolated`.
+
+**Equipment cutouts were not needed for correctness.** Every viable outcome stays inside the range, and every failure is decided by
+its limit crossing, which happens inside the range. Cutouts would change what a failed cabin does afterwards, not whether it failed.
+
+## 51. Electrical PROTOTYPE sensitivity [RESEARCHED]
+
+`work/project-thread-dfyyv7/ds3_sensitivity.py` (about 5 min) writes `ds3_sensitivity.json`.
+
+**Method.**
+- One value changes at a time. The packaged reference scripts are replayed unchanged, as a player would execute them; they are not
+  re-optimized for each value.
+- Ranges are EXPLORATORY unless a physical bound is named. No source gives an uncertainty band for an OPEN value.
+- Each run records:
+  - the family and verdict, and any trips;
+  - the battery at the restart window minus the restart demand (the margin);
+  - the tightest bus-group margin (sources minus demand) while the watch holds the declared state.
+
+**Baseline margins.**
+
+| Strategy | Tie headroom on BC-A's 40 kW | Restart margin over 200 kWh |
+| --- | --- | --- |
+| shed_garden | 2.9 kW | +75 kWh |
+| shed_dark_b | 2.5 kW | +26 kWh |
+| shed_economy | 4.3 kW | +88 kWh |
+| short_reserve | 0.9 kW | −50 kWh (the restart fails) |
+
+### 51.1 Purpose, basis and plausibility
+
+| Parameter (baseline) | Purpose | Basis | Plausibility, conflicts |
+| --- | --- | --- | --- |
+| Survival packs, 8 kWh per ring | Carry a ring's survival loads while its bus is dead | survival_reserve loads, isolation and distribution BASELINE; capacity OPEN | Plausible: 8.4 h of the 0.95 kW bus-B survival loads. No conflict (survival power is separate from restart: `survival_power_implies_restart = false`) |
+| Converter BC-A/BC-B, 40 kW each | Battery to bus, one per bus | None; the two-bus architecture is BASELINE (`power.bus_names`) | Dimensionally sound (W). At 2 MWh it is a 0.02 C rate, very conservative for a battery. The converter, not the battery, is the limit, as a PROTOTYPE architecture choice |
+| Generator, 80 kW each | Each bus's hotel feed while the plant runs | `power.generator_count = 2` BASELINE; rating OPEN (`power.rating`, `power.hotel_source` OPEN) | A scale placeholder. It does not claim the generators' real output, which serves a TW-class drive |
+| Unmodelled ship load, 15 kW per bus | Flight computers, communications, propellant conditioning, drive standby, lumped | None; `power.rating` OPEN | Placeholder. Rings plus ship give 40–47 kW in coast; whole-ship OPEN (OD-009) |
+| Restart demand, the full 200 kWh bank | The black start's step 2: the battery charges the pulse bank | Bank capacity WORKING; ignition energy OPEN | Upper bound: the bank cannot hold more. The real demand may be less |
+| Main battery, 2 MWh | Fusion-off endurance and black start | WORKING (not changed) | — |
+
+### 51.2 Sensitivity matrix (DS-3, unless marked DS-2C)
+
+Cells give the verdict with the restart margin in kWh; "T" means a bus tripped.
+
+| Parameter | Tested | Effect on the strategies | Confidence | Recommendation |
+| --- | --- | --- | --- | --- |
+| Survival packs | 2, 4, 8, 16, 32 kWh | **No verdict changes anywhere.** The viable strategies keep their buses live, so the packs only bridge the first minutes. Only the do-nothing case's timing moves: heat limit at 3.3 / 5.4 / 9.6 / 18 / 35 h | Low influence | Keep as PROTOTYPE. It only times the failure path |
+| Converter rating | 25, 30, 35, 40, 50, 60 kW | **≤ 35 kW: every strategy trips at the tie and nothing is viable. ≥ 40 kW: the three viable strategies hold.** At ≥ 50 kW the tie with everything on also holds, but it drains the battery and the restart fails | **High, and narrow.** Viability needs at least ~37.5 kW (2.5 kW headroom at 40) | The scenario depends on this assumption. State it, and keep it PROTOTYPE until a converter rating is sourced |
+| Ship load per bus | 5, 10, 15, 20, 25 kW | **≥ 20 kW: every strategy trips.** At 10 kW everything except the do-nothing and tie cases is STABLE, so the trade-off between strategies largely vanishes. At 5 kW even the tie with everything on is stable | **High, narrow:** about 13–16 kW gives the designed trade-offs | The same: the challenge exists in a band of an OPEN value |
+| Generator (DS-3) | 20–120 kW | No change. After the restart the battery covers any shortfall over the 7 days | Low | Keep |
+| Generator (DS-2C) | 20–120 kW | ≥ 30 kW no change. At 20 kW relocate becomes TEMPORARY: two rings' loads exceed the generators, the battery drains, and the tie trips at 91 h | Low | Keep |
+| Ship load (DS-2C) | 5–25 kW | No change (the generators have 88–100 kW of headroom) | Low | Keep |
+| Restart demand | 50, 100, 150, 200, 250 kWh | The viable strategies hold through 200 kWh. shed_dark_b fails at 250 (a stress case beyond the bank). short_reserve becomes STABLE at ≤ 100 kWh. **The ordering of margins (economy > Garden > dark ring B) holds at every value** | Medium | Keep the full bank as the conservative upper bound; ignition energy stays OPEN |
+| Main battery | 1.6, 1.8, 2.0, 2.2 MWh | **−10 % (1.8 MWh): every viable strategy fails its restart**; 1.6 MWh empties the battery. +10 %: short_reserve also passes | **High** (the margins are 1.3–4.4 % of capacity) | 2 MWh is WORKING and is not changed. A derating policy (age, depth of discharge) would change the scenario |
+| Restart window (scenario value) | 36, 42, 48, 54, 60 h | 42 h: every shed strategy passes, short_reserve too. **54 h: every viable strategy fails its restart.** 60 h: the battery empties and the cabins fail | **High** | A scenario value, stated as such |
+
+### 51.3 What this shows
+
+**The lessons are robust; the outcomes are not.**
+- **Robust.** Shed until the tie fits the surviving converter, protect the restart reserve, and accept the economy setpoint's humidity
+  as the price of the largest margin. These lessons hold across every variation, and so does the ranking of the three viable
+  strategies' margins.
+- **Not robust.** *Which* strategies are viable lives in a narrow band of three OPEN or PROTOTYPE values: converter ≥ ~37.5 kW, ship
+  load ≤ ~16 kW per bus, and battery and window within about ±10 % and ±6 h.
+- **These values were not tuned for the result.** They were set before the scenario existed and are left unchanged here.
+
+**Are the current PROTOTYPE power values defensible for testing?** Yes. They are dimensionally sound and in plausible proportion, and
+none conflicts with a spec value. They are not defensible as engineering findings. A Dark Bus result says "with these assumptions",
+never "Wayfarer can".
+
+**When `power.rating`, a converter rating or a battery derating is sourced,** rerun the study. If no viable strategy remains, the
+scenario's premise (for example the service window) is a scenario value that may be re-posed; the engineering values may not.
+
+## 52. The omitted hull path and cabin heaters [RESEARCHED; documented, not built]
+
+The study adds a what-if term, UA (T − 5 °C), to each cabin. It is study-only; the ledgers are not closed for it.
+
+| Hull UA per ring | DS-2C | DS-3 |
+| --- | --- | --- |
+| 0 W/K (the model) | as §41.3 | as §42.3 |
+| 50 W/K | **borrow_fan (no shedding) becomes STABLE** (peak 25.4 °C); everything else unchanged | Viable strategies unchanged. keep_garden no longer trips; it fails its restart instead |
+| 150 W/K | the same | **shed_garden reaches the cold limit (6.1 h): the model has no cabin heaters** |
+| 300 W/K | borrow_fan_shed and late_fetch reach the cold limit | More cold-limit results |
+
+**Material findings.**
+1. **borrow_fan fails today by 0.3 K** (peak 27.3 °C against the 27.0 °C limit). Any modest passive loss makes it stable, and then it
+   would dominate borrow_fan_shed (the same part, nothing shed). The claim that "shedding is required with one pump" is therefore not
+   proven. It is an artefact of the omitted hull path at the margin. The three listed viable families still differ from each other;
+   the "shed" in the first family is a choice, not a proven necessity.
+2. **No cabin heaters.** A real habitat in low-power coast heats its cabin. Without heaters, a shed ring can only cool. That is
+   harmless with no hull loss and decisive with a large one.
+3. **The UA is unsourced.** A rough ISS-class shell-loss estimate (order 30–60 W/K for a ring of this volume) is not a Wayfarer value.
+   No geometry or canon defines the lining, the multi-layer insulation or the inner-structure temperature.
+
+**Decision: not built.** Adding an unsourced UA would change verdicts by assumption (it would flip borrow_fan), which is the kind of
+tuning the brief excludes. Heaters without a hull path would never switch on. Both belong with the spacecraft's thermal design (the
+lining, the multi-layer insulation, the cabin heater power). Until then:
+- the ring cabins' passive exchange is **OPEN** (a new open item, not a value);
+- the debrief and report say that DS-2C's "shed" requirement and DS-3's "keep the Garden" failure are margin results;
+- SYS-003 stays adiabatic but for the CHX.
+
+## 53. SYS-002 and SYS-003: consistency and the interface boundary [VALIDATED; interface DESIGNED]
+
+**Shared inputs (checked in code, 2026-11-15).**
+
+| Quantity | SYS-002 (`ring_air`, `cabin_air`) | SYS-003 (`ring_services`) | Consistent? |
+| --- | --- | --- | --- |
+| Ring A gas volume | 466.36 m³ (sum of nine compartments) | 466.36 m³ (same sum; ring B the mirror) | Yes |
+| Pressure | 80 kPa (`habitat.atmosphere`) | 80 kPa | Yes |
+| CO₂ per person | 1.0 kg/d (owner, SYS-001) | the same `cabin_air` value | Yes |
+| CO₂ unit | removal flow k = 0.0323 m³/s, first order | the same k, the same form | Yes |
+| CO₂ limits | 0.3 % target, 0.5 % limit | the same | Yes |
+| Temperature | fixed 295 K (`cabin_air` PROTOTYPE) | the cabin's own T | **Small inconsistency:** the same CO₂ mass reads 0.4 % (relative) higher in SYS-003 at 23 °C. Not material to any verdict |
+| Crew heat and vapour | not modelled | BVAD 73.0 W and 2.27 kg/d | SYS-002 has no thermal state |
+| NH₃, TCC | modelled | not modelled (TCC is only a 150 W load) | By design |
+
+**Boundary for a future ship-wide simulator** (documented; not built, because no Phase 2 or 3 scenario needs both together):
+
+- **Ownership.**
+  - SYS-002 owns *where* the gas is: per-compartment CO₂ and NH₃ masses, door and damper states, and transport.
+  - SYS-003 owns *the ring's thermal and moisture state and its machines*: cabin T, the vapour mass, the CHX, the pumps, the heat
+    pump, the buses, the stores and the parts.
+  - The CO₂ removal unit is shared. Its *availability* (powered, isolated, its fan installed) is SYS-003's; its *flow and the
+    compartment it draws from* are SYS-002's.
+- **Exchanged each coupling step.**
+  - SYS-003 to SYS-002:
+    - the CO₂ unit's availability;
+    - the ventilation fans' power state (VENT);
+    - the TCC's availability;
+    - the cabin T, which replaces SYS-002's fixed 295 K in the gas law.
+  - SYS-002 to SYS-003:
+    - the total ring CO₂ mass (the sum of the compartments), which replaces SYS-003's single m_c;
+    - the occupants per compartment, summed per ring.
+- **Coupling frequency.** SYS-002's step (10 s in play). The thermal state changes over hours (C = 4.4 MJ/K), so holding T over a
+  10 s step changes nothing measurable. Machine states change only at the switchboard settle, which already happens at each step's
+  start.
+- **Conservation.**
+  - CO₂ has one owner (SYS-002's compartments). SYS-003's m_c becomes a derived sum, and its CO₂ ledger is replaced by SYS-002's.
+  - Vapour stays one ring volume in SYS-003 unless a scenario needs compartment humidity.
+  - Heat: crew heat is attributed per ring from the same occupant counts, so no person is counted in two models.
+- **Not to build now:** a generic framework. The coupling is two function calls per step between two existing pure modules.
+
+## 54. Ring B transfers and component conservation [VALIDATED]
+
+| Requirement | How it holds | Evidence |
+| --- | --- | --- |
+| Transfer times represented | A fetch is a crossing (15 min), the work at ring B's bay (10 min) and a crossing back. Moving is a crossing. People in a crossing are in neither ring's air | `test_fetch_takes_the_crossings_and_strips_ring_b` (2T + W to the step) |
+| Nothing moves instantly | Parts move only when a job completes (5 min remove or install) or when a crew task's phase ends | `_work`, `_tasks` |
+| No part in two rings | A part has exactly one location (slot, shelf, carrier); slots and hands hold one part | `test_parts_are_conserved` and the new `test_parts_and_crew_stay_consistent_throughout` (every checkpoint of all 11 cases, including the watch and projection) |
+| The donor ring loses function | The fetching pair isolates ring B's machine before removing the part. The machine stays isolated and without it. `hostable(B)` turns false | Same fetch test; the debrief's "rings able to host the crew" |
+| Ring B habitable before relocation | Not enforced as a rule. Moving into the cold setback ring is allowed and fails at the cold limit (relocate_cold), which is the lesson. relocate warms ring B for 1.5 h first | §41.3 |
+| Relocation changes the loads | Crew heat, vapour and CO₂ follow the occupant count per ring each step | relocate's ring B CO₂ and vapour generation, ledgers closed |
+| Refused operations change nothing | Work on a running machine, switching away from the console, a busy pair, a ring A part ordered from ring B, an incompatible part | `test_refusals_change_nothing`, `test_incompatible_part_is_refused`; Godot checks the same in play |
+| Replay and reset | A replay rebuilds the run from the package's start | `test_replay_is_identical`; Godot replays and compares the start configuration |
+
+**The abstraction stays.**
+- Pairs B and C, and the trainee's partner, are abstract crew: a place, an order and a timed task.
+- The trainee's own movement is the walk on ring A's deck.
+- After an "everyone" relocation the trainee can only use the intercom, and the page says so. The walk does not pretend to be ring B.
+- Ring B's traversal, visible crew and hand-carrying between rings wait for the ship's traversal infrastructure.

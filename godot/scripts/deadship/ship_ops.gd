@@ -21,7 +21,8 @@ const DEB_PAGES := 4
 const BAY_MACHINES := ["CO2", "CHX", "P1", "P2", "HP"]
 const BAY_SLOTS := ["CO2.FAN", "CHX.FAN", "P1.PUMP", "P2.PUMP"]
 const POWER_ITEMS := ["BUS.A", "BUS.B", "BC-A", "BC-B", "BATTERY", "PACKS", "TIE"]
-const VALID_ABOVE_LIMIT_K := 8.0
+const VALID_ABOVE_LIMIT_K := 8.0   # the model's valid cabin range (as ship_ops.py): T_min - 8 K .. T_max + 8 K
+const VALID_BELOW_LIMIT_K := 8.0
 const FILES := {"ds2c": "res://generated/wf_deadship_ds2c.json", "ds3": "res://generated/wf_deadship_ds3.json"}
 const TITLES := {"CO2": "CO2 unit", "CHX": "heat exchanger fan", "P1": "coolant pump 1", "P2": "coolant pump 2", "HP": "heat pump",
 	"TCC": "trace-contaminant control", "VENT": "ventilation fans", "AV": "avionics, comms", "LIGHT": "cabin lights", "GALLEY": "galley",
@@ -58,6 +59,8 @@ var alerted := false
 var first_cross := {}
 var after24 := {}
 var peak := {}
+var range_exit = null   # where people live: the first step outside the valid range, with the last valid state
+var last_valid := {}
 var shed_J := 0.0
 var start_parts := {}
 
@@ -159,6 +162,8 @@ func begin_run() -> void:
 	first_cross = {"co2": null, "hot": null, "wet": null, "cold": null}
 	after24 = {"co2": null, "hot": null, "wet": null, "cold": null}
 	peak = {"co2": 0.0, "T": 0.0, "rh": 0.0}
+	range_exit = null
+	last_valid = {"A": null, "B": null}
 	shed_J = 0.0
 	start_parts = {}
 	for k in st["parts"]:
@@ -444,13 +449,18 @@ func _account(dt: float) -> void:
 			q["band_s"] = float(q["band_s"]) + (dt if h > float(p["rh_max"]) else 0.0)
 			q["target_s"] = float(q["target_s"]) + (dt if x > float(p["co2_target"]) else 0.0)
 		if not ppl.is_empty() and phase in ["LIVE", "WATCH", "PROJECTION"]:
+			var out: bool = T > float(p["T_max"]) + VALID_ABOVE_LIMIT_K or T < float(p["T_min"]) - VALID_BELOW_LIMIT_K
+			if not out:
+				last_valid[r] = {"t_h": t() / H, "T_C": T - 273.15, "rh": h, "co2_pct": 100.0 * x}
+			elif range_exit == null:
+				range_exit = {"t_h": t() / H, "ring": r, "phase": phase, "high": T > float(p["T_max"]), "last": last_valid[r]}
 			for k in ["co2", "hot", "wet", "cold"]:
 				if fl[k]:
 					if phase != "PROJECTION" and first_cross[k] == null:
 						first_cross[k] = t()
 					if phase == "PROJECTION" and after24[k] == null:
 						after24[k] = t()
-			if phase != "PROJECTION":
+			if phase != "PROJECTION" and not out:
 				peak["co2"] = maxf(float(peak["co2"]), x)
 				peak["T"] = maxf(float(peak["T"]), T)
 				peak["rh"] = maxf(float(peak["rh"]), h)
@@ -578,6 +588,7 @@ func verdict(limit_only := false) -> Dictionary:
 			s += float(q[k])
 		return s / H
 	var degraded: bool = res == "STABLE" and (float(ch.call("band_s")) > 0.0 or float(ch.call("target_s")) > 0.0)
+	var ex = range_exit if range_exit != null and (not limit_only or str(range_exit["phase"]) != "PROJECTION") else null
 	var fch := {}
 	var aw := {}
 	for k in ["co2", "hot", "wet", "cold"]:
@@ -586,8 +597,8 @@ func verdict(limit_only := false) -> Dictionary:
 	return {"result": res, "degraded": degraded, "first_cross_h": fch, "after_watch_h": aw,
 		"crew_h": {"co2_limit": ch.call("co2_s"), "heat_limit": ch.call("hot_s"), "humidity_limit": ch.call("wet_s"), "cold_limit": ch.call("cold_s"),
 			"humidity_band": ch.call("band_s"), "co2_target": ch.call("target_s")},
-		"peak": {"co2_pct": 100.0 * float(peak["co2"]), "T_C": float(peak["T"]) - 273.15, "rh": peak["rh"],
-			"beyond_validity": float(peak["T"]) > float(p["T_max"]) + VALID_ABOVE_LIMIT_K}}
+		"peak": {"co2_pct": 100.0 * float(peak["co2"]), "T_C": float(peak["T"]) - 273.15, "rh": peak["rh"], "beyond_validity": ex != null},
+		"range_exit": ex, "valid_range_C": [float(p["T_min"]) - VALID_BELOW_LIMIT_K - 273.15, float(p["T_max"]) + VALID_ABOVE_LIMIT_K - 273.15]}
 
 func metrics() -> Dictionary:
 	var moved := []
@@ -749,6 +760,8 @@ func compare_debrief(got: Dictionary, want: Dictionary, label: String) -> Array:
 	for k in ["co2_pct", "T_C", "rh"]:
 		if not _close(float(gv["peak"][k]), float(wv["peak"][k]), tol):
 			bad.append("%s: peak.%s %s, the module %s" % [label, k, float(gv["peak"][k]), float(wv["peak"][k])])
+	if (gv.get("range_exit") == null) != (wv.get("range_exit") == null) or (wv.get("range_exit") != null and (not _close(float(gv["range_exit"]["t_h"]), float(wv["range_exit"]["t_h"]), tol) or str(gv["range_exit"]["ring"]) != str(wv["range_exit"]["ring"]))):
+		bad.append("%s: left the valid range %s, the module %s" % [label, str(gv.get("range_exit")), str(wv.get("range_exit"))])
 	var gm: Dictionary = got["metrics"]
 	var wm: Dictionary = want["metrics"]
 	for k in ["shed_kWh", "battery_kWh", "battery_used_kWh"]:
@@ -1275,9 +1288,19 @@ func lines() -> Array:
 		out.append("Hint: " + fill(str(sc["stages"][stage()]["hint"])))
 	return out
 
+## A cabin temperature and humidity as shown: outside the model's valid range only the bound, never the extrapolated number.
+func _th_text(T_C: float, rh_: float) -> String:
+	var hi := float(p["T_max"]) + VALID_ABOVE_LIMIT_K - 273.15
+	var lo := float(p["T_min"]) - VALID_BELOW_LIMIT_K - 273.15
+	if T_C > hi:
+		return "above %.0f C (outside the model)" % hi
+	if T_C < lo:
+		return "below %.0f C (outside the model)" % lo
+	return "%.1f C RH %d%%" % [T_C, int(round(100.0 * rh_))]
+
 func _ring_line(r: String) -> String:
 	var rr: Dictionary = st["ring"][r]
-	return "Ring %s (%d) %.1f C RH %d%% CO2 %.2f%%" % [r, int(st["occ"][r]), float(rr["T"]) - 273.15, int(round(100.0 * rs.rh(float(rr["T"]), float(rr["m_w"])))),
+	return "Ring %s (%d) %s CO2 %.2f%%" % [r, int(st["occ"][r]), _th_text(float(rr["T"]) - 273.15, rs.rh(float(rr["T"]), float(rr["m_w"]))),
 		100.0 * rs.x_co2(float(rr["T"]), float(rr["m_c"]))]
 
 func _power_line() -> String:
@@ -1317,6 +1340,22 @@ func use_label() -> String:
 		return "Use · ops console"
 	return ""
 
+## A run that left the model's valid cabin range: the limit crossing, the exit, the last valid state; no extrapolated temperature.
+func _range_exit_line(v: Dictionary, ex: Dictionary, lim: Array) -> String:
+	var rng: Array = v["valid_range_C"]
+	var fc: Dictionary = v["first_cross_h"]
+	var cross := ""
+	for k in ["hot", "cold", "co2", "wet"]:
+		if fc[k] != null:
+			cross = "%s limit passed at T+%s; " % [{"hot": "Temperature", "cold": "Cold", "co2": "CO2", "wet": "Humidity"}[k], _hm(float(fc[k]) * H)]
+			break
+	var last = ex["last"]
+	var lv := "" if last == null else " Last valid state (T+%s): %.1f C, RH %d %%, CO2 %.2f %%." % [_hm(float(last["t_h"]) * H), float(last["T_C"]),
+		int(round(100.0 * float(last["rh"]))), float(last["co2_pct"])]
+	return "Where people lived: %sat T+%s ring %s left the model's valid range (%s %.0f C).%s Later temperatures, and the humidity that follows them, are outside the model (no hull exchange, cabin heaters or equipment cutouts are modelled) and are not shown.%s" % [
+		cross, _hm(float(ex["t_h"]) * H), ex["ring"], "above" if bool(ex["high"]) else "below", float(rng[1]) if bool(ex["high"]) else float(rng[0]), lv,
+		"" if lim.is_empty() else " Over a limit: " + ", ".join(lim) + "."]
+
 func ops_label() -> String:
 	if not verified or not on_ring_a():
 		return ""
@@ -1344,8 +1383,8 @@ func board_text() -> String:
 	var m := []
 	for e in ["CO2", "CHX", "P1", "P2", "HP"]:
 		m.append("%s %s" % [e, _state_of("A", e)])
-	return "RING A SERVICES · SIM x%d%s\n%.1f C · RH %d %% · dew %.1f C\nCO2 %.2f %% · %d aboard\ncoil %.1f kW · %.2f kg/h water\n%s\n%s" % [
-		int(scale()), " (paused)" if paused() else "", float(rr["T"]) - 273.15, int(round(100.0 * rs.rh(float(rr["T"]), float(rr["m_w"])))),
+	return "RING A SERVICES · SIM x%d%s\n%s · dew %.1f C\nCO2 %.2f %% · %d aboard\ncoil %.1f kW · %.2f kg/h water\n%s\n%s" % [
+		int(scale()), " (paused)" if paused() else "", _th_text(float(rr["T"]) - 273.15, rs.rh(float(rr["T"]), float(rr["m_w"]))),
 		rs.dew_point(float(rr["T"]), float(rr["m_w"])) - 273.15, 100.0 * rs.x_co2(float(rr["T"]), float(rr["m_c"])), int(st["occ"]["A"]),
 		float(c["Q_s"]) / 1000.0, float(c["cond"]) * 3600.0, " · ".join(m.slice(0, 3)), " · ".join(m.slice(3))]
 
@@ -1510,14 +1549,17 @@ func _debrief_lines(small: bool) -> Array:
 		for k in ["co2_limit", "heat_limit", "humidity_limit", "cold_limit"]:
 			if float(v["crew_h"][k]) > 0.0:
 				lim.append("%s %.0f crew-h" % [k.replace("_limit", ""), float(v["crew_h"][k])])
-		out.append("Where people lived: peak CO2 %.2f %%, peak %.1f C%s, peak RH %d %%%s." % [float(v["peak"]["co2_pct"]), float(v["peak"]["T_C"]),
-			" (beyond the model's range: no equipment trips or hull losses are modelled there)" if v["peak"]["beyond_validity"] else "", int(round(100.0 * float(v["peak"]["rh"]))),
-			"" if lim.is_empty() else " · over a limit: " + ", ".join(lim)])
+		var ex = v.get("range_exit")
+		if ex == null:
+			out.append("Where people lived: peak CO2 %.2f %%, peak %.1f C, peak RH %d %%%s." % [float(v["peak"]["co2_pct"]), float(v["peak"]["T_C"]),
+				int(round(100.0 * float(v["peak"]["rh"]))), "" if lim.is_empty() else " · over a limit: " + ", ".join(lim)])
+		else:
+			out.append(_range_exit_line(v, ex, lim))
 	elif deb_page == 1:
 		out.append("[b]The ship at 7 days[/b]")
 		for r in rs.RINGS:
 			var q: Dictionary = d["rings"][r]
-			out.append("Ring %s: %d aboard, %.1f C, RH %d %%, CO2 %.2f %%" % [r, int(q["occupants"]), float(q["T_C"]), int(round(100.0 * float(q["rh"]))), float(q["co2_pct"])])
+			out.append("Ring %s: %d aboard, %s, CO2 %.2f %%" % [r, int(q["occupants"]), _th_text(float(q["T_C"]), float(q["rh"])), float(q["co2_pct"])])
 		out.append("Battery %.0f kWh (used %.0f) · packs %.1f / %.1f kWh%s%s" % [float(m["battery_kWh"]), float(m["battery_used_kWh"]), float(m["packs_kWh"]["A"]),
 			float(m["packs_kWh"]["B"]), "" if m["restart"] == null else " · restart window: battery %.0f kWh, %s" % [float(m["restart"]["battery_kWh"]), "fired" if m["restart"]["ok"] else "NOT ENOUGH"],
 			"" if (m["trips"] as Array).is_empty() else " · trips: " + ", ".join((m["trips"] as Array).map(func(x): return "bus %s at T+%s" % [x[1], _hm(float(x[0]) * H)]))])

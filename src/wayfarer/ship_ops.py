@@ -44,14 +44,16 @@ import ring_services as rs   # noqa: E402
 SCENARIOS = {'ds2c': 'data/deadship/ds2c_borrowed_air.toml', 'ds3': 'data/deadship/ds3_dark_bus.toml'}
 FILES = {'ds2c': 'wf_deadship_ds2c.json', 'ds3': 'wf_deadship_ds3.json'}
 SCHEMA = 'WF_DEADSHIP_SCENARIO'
-VERSION = 1
+VERSION = 2
 H = 3600.0
 EPS = 1e-6
 VERIFY_AT_LOAD = {'ds2c': 'borrow_fan_pump', 'ds3': 'shed_garden'}   # replayed by Godot to VERIFY_UNTIL_S before the scenario is shown
 VERIFY_UNTIL_S = 3600.0
 ENGINEERING_KEYS = {'C', 'V_m3', 'Q_air', 'UA', 'pump', 'T_s', 'hp_max', 'conv_W', 'gen_W', 'pack_Wh', 'ship_W', 'g_c', 'g_w', 'q_sens',
                     'k_m3_s', 'co2_max', 'co2_target', 'T_max', 'rh_max', 'rh_limit', 'battery_Wh'}
-VALID_ABOVE_LIMIT_K = 8.0   # past T_max + this the model's cabin has left its range: no equipment over-temperature trips, no passive loss
+VALID_ABOVE_LIMIT_K = 8.0   # the model's valid cabin range: T_min - VALID_BELOW_LIMIT_K .. T_max + VALID_ABOVE_LIMIT_K (10-35 C). Past it the
+VALID_BELOW_LIMIT_K = 8.0   # omitted mechanisms (passive hull exchange, cabin heaters, equipment over-temperature cutouts) would act: later
+                            # temperatures, and the humidity that follows them, are extrapolation, never a prediction (report §50)
 POWER_ITEMS = ('BUS.A', 'BUS.B', 'BC-A', 'BC-B', 'BATTERY', 'PACKS', 'TIE')
 BAY_SLOTS = ('CO2.FAN', 'CHX.FAN', 'P1.PUMP', 'P2.PUMP')
 
@@ -135,7 +137,9 @@ class Run:
         self.alerted = False
         self.first_cross = dict(co2=None, hot=None, wet=None, cold=None)
         self.after24 = dict(co2=None, hot=None, wet=None, cold=None)
-        self.peak = dict(co2=0.0, T=0.0, rh=0.0)
+        self.peak = dict(co2=0.0, T=0.0, rh=0.0)      # peaks where people live, inside the model's valid range only
+        self.range_exit = None                        # where people live: the first step outside the valid range, with the last valid state
+        self.last_valid = {r: None for r in rs.RINGS}
         self.shed_J = 0.0                         # discretionary service not delivered (switched off), J
         self.start_parts = {k: v['at'] for k, v in self.st['parts'].items()}
         self._occupy()
@@ -390,13 +394,18 @@ class Run:
                 q['band_s'] += dt if h > p['rh_max'] else 0.0
                 q['target_s'] += dt if x > p['co2_target'] else 0.0
             if people and self.phase in ('LIVE', 'WATCH', 'PROJECTION'):
+                out = T > p['T_max'] + VALID_ABOVE_LIMIT_K or T < p['T_min'] - VALID_BELOW_LIMIT_K
+                if not out:
+                    self.last_valid[r] = dict(t_h=self.t/H, T_C=T - 273.15, rh=h, co2_pct=100.0*x)
+                elif self.range_exit is None:
+                    self.range_exit = dict(t_h=self.t/H, ring=r, phase=self.phase, high=T > p['T_max'], last=self.last_valid[r])
                 for k, v in flags.items():
                     if v:
                         if self.phase != 'PROJECTION' and self.first_cross[k] is None:
                             self.first_cross[k] = self.t
                         if self.phase == 'PROJECTION' and self.after24[k] is None:
                             self.after24[k] = self.t
-                if self.phase != 'PROJECTION':
+                if self.phase != 'PROJECTION' and not out:
                     self.peak['co2'] = max(self.peak['co2'], x); self.peak['T'] = max(self.peak['T'], T)
                     self.peak['rh'] = max(self.peak['rh'], h)
 
@@ -496,7 +505,10 @@ class Run:
                     crew_h=dict(co2_limit=ch('co2_s'), heat_limit=ch('hot_s'), humidity_limit=ch('wet_s'), cold_limit=ch('cold_s'),
                                 humidity_band=ch('band_s'), co2_target=ch('target_s')),
                     peak=dict(co2_pct=100.0*self.peak['co2'], T_C=self.peak['T'] - 273.15, rh=self.peak['rh'],
-                              beyond_validity=self.peak['T'] > self.p['T_max'] + VALID_ABOVE_LIMIT_K))
+                              beyond_validity=self.range_exit is not None and (not limit_only or self.range_exit['phase'] != 'PROJECTION')),
+                    range_exit=self.range_exit if (self.range_exit is not None and (not limit_only or self.range_exit['phase'] != 'PROJECTION'))
+                    else None,
+                    valid_range_C=[self.p['T_min'] - VALID_BELOW_LIMIT_K - 273.15, self.p['T_max'] + VALID_ABOVE_LIMIT_K - 273.15])
 
     def metrics(self):
         st = self.st
@@ -688,7 +700,8 @@ def main(argv):
         db = r.debrief(); v = db['watch']['verdict']; m = db['metrics']
         led = max(abs(x) for x in db['ledgers'].values())
         print(f"{n:24s} {db['watch']['family']:16s} {v['result']:15s}{' degraded' if v['degraded'] else '':9s} "
-              f"peak CO2 {v['peak']['co2_pct']:.3f} % T {v['peak']['T_C']:.1f} C RH {v['peak']['rh']:.2f} | "
+              f"peak CO2 {v['peak']['co2_pct']:.3f} % T {v['peak']['T_C']:.1f} C RH {v['peak']['rh']:.2f}"
+              f"{'' if v['range_exit'] is None else ' (left the valid range at %.1f h)' % v['range_exit']['t_h']} | "
               f"limit crew-h co2 {v['crew_h']['co2_limit']:.1f} heat {v['crew_h']['heat_limit']:.1f} | from B {m['parts_from_ring_b']} "
               f"hostable {m['hostable']} restart {m['restart'] and round(m['restart']['battery_kWh'])} trips {m['trips']} shed {m['shed_kWh']:.0f} kWh crossings {m['crossings']} refusals {m['refusals']} | ledger {led:.1e}")
 

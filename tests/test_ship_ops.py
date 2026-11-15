@@ -96,6 +96,26 @@ class BorrowedAirTests(unittest.TestCase):
         for n, d in viable.items():
             self.assertEqual(sum(d['metrics']['hostable'].values()), 1, n)   # no strategy keeps both rings able to host
 
+    def test_parts_and_crew_stay_consistent_throughout(self):
+        start = sorted(rs.start(self.p)['parts'])
+        crew = self.sc['premise']['occupants']['A'] + self.sc['premise']['occupants']['B']
+        for n, (r, cps) in self.runs.items():
+            for c in cps:
+                self.assertEqual(sorted(c['parts']), start, n)
+                held = [a for a in c['parts'].values() if a in rs.SLOTS_ALL() or a.startswith('CARRY.')]
+                self.assertEqual(len(held), len(set(held)), f"{n} at {c['t_s']}")
+                self.assertLessEqual(c['occ']['A'] + c['occ']['B'], crew, n)      # people in a crossing are in neither ring
+
+    def test_model_validity_is_reported_not_extrapolated(self):
+        v = self.deb('cannibalize')['watch']['verdict']
+        ex = v['range_exit']
+        self.assertIsNotNone(ex)
+        self.assertGreater(ex['t_h'], v['first_cross_h']['hot'])           # the limit is crossed first, inside the model
+        self.assertLessEqual(ex['last']['T_C'], v['valid_range_C'][1])
+        self.assertLessEqual(v['peak']['T_C'], v['valid_range_C'][1])      # no extrapolated peak is reported
+        for n in ('borrow_fan_shed', 'borrow_fan_pump', 'relocate', 'late_fetch'):
+            self.assertIsNone(self.deb(n)['watch']['verdict']['range_exit'], n)
+
     def test_replay_is_identical(self):
         self.assertEqual(self.runs['replay_borrow_fan_shed'][1], self.runs['borrow_fan_shed'][1])
         self.assertEqual(self.deb('replay_borrow_fan_shed'), self.deb('borrow_fan_shed'))
