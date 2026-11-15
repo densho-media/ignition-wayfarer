@@ -2257,6 +2257,26 @@ Three assets, one source each (`src/wayfarer/vertex_engine.py`, `vertex_cluster.
   - *Gap (SR-1..4, Breakthrough Lab requirement):* photons at most 0.59 % of the yield, against 12.5–85 % (21–144×); the lowest point of the
     plasma scan (Ti 150 keV, Te/Ti 0.1) is still 8× above. engineering/vertex/ section 8 reads `references/evidence/vertex_radiation.json`
     (written by `python3 src/wayfarer/vertex_radiation.py --evidence`, about 30 s).
+- **Fiji-assisted advanced fusion and nanomaterials (Engine 1.6, `vertex_fiji.py`, `[vertex_fiji]`).** Research only; outcome
+  **NEGATIVE**: no configuration closes. Four independent engines, M0-NOMINAL and the 1.2 geometry are unchanged; nothing is canon.
+  - *Fiji model:* M = Ms(T, S) tanh(B_seed/B_align). The temperature shape is the Fiji workbook's lattice law (WORKING: activation 650 K,
+    saturation 1100 K, release 550 K, quench 1400 K, A_max 30 as the hot/cold magnetization ratio). Bounded, seed-dependent, hysteretic,
+    collapsing at quench or beyond 0.2 % strain, inversely magnetocaloric. μ0Ms is held at or below the atomic-moment bound (about 3.5 T),
+    because more would be a second extraordinary property.
+  - *Field:* the exact dipole-kernel integral with optimal orientation. Fiji liners add millitesla at the burn point; even a solid 2–30 m shell
+    adds at most 13 T. The canon law (5 T × 26.3 = 132 T) would need μ0Ms of about 35 T in that shell and about 5×10⁴ T in liners
+    (CANON_CONFLICT, reconciliation REC-1..5 for the owner).
+  - *Assembly:* thermal isolation from REBCO works (foils, a 300 K shield, MLI). The liner fails: hysteresis from the pulse-rate ripple costs
+    GW, and the burn's photon flux on its face is 20–480× what a cooled tungsten face carries, so it collapses.
+  - *REBCO:* Jc margin of 6× or more at ≤ 8 T. The fast-neutron fluence at the closure coils reaches a typical limit within seconds; about
+    10⁵ attenuation (about 1.7 m of shield) is needed.
+  - *Fusion:* spin polarization gives at most ×1.5 (THEORETICAL). The hot-ion electron-balance floor is ≥ 16 % photons even with
+    polarization and 90 % channeling, above 1.5's held LOW case (12.5 %); coupled R2-B burns give 51–85 %. The channeling drive costs
+    67–300 GW per engine.
+  - *Closure (F0–F6):* 854× (F0), 23× (Fiji liner), 18× (an ordinary W liner at 1300 K, which beats Fiji), 43× integrated (24× without
+    the channeling and liner overheads). An emissivity of 0.98 adds 8.9 %. Regenerative hydrogen for F6's excess needs 7–40 Mt.
+    engineering/vertex/ section 9 reads `references/evidence/vertex_fiji.json` (written by `python3 src/wayfarer/vertex_fiji.py --evidence`,
+    about 10 s).
 
 ## Limits
 

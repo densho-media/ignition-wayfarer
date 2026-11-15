@@ -689,7 +689,8 @@ def vertex_page(spec, out_dir, revision, built):
 {structure_section(spec, vs)}
 {magnet_section(spec)}
 {plasma_section(spec)}
-{radiation_section(spec)}"""
+{radiation_section(spec)}
+{fiji_section(spec)}"""
     (out_dir / 'index.html').write_text(page('Vertex propulsion lineage · Wayfarer engineering',
                                              'How the Vertex research demonstrator became the Compact Vertex Engine and the four-engine Propulsion Cluster.',
                                              body, 2, revision, built))
@@ -1226,6 +1227,134 @@ def radiation_section(spec):
 <div class="scroll" tabindex="0"><table><thead><tr><th>Gate</th><th></th><th>Status</th><th>Result</th></tr></thead><tbody>{gates}</tbody></table></div>
 <p class="meta">Evidence file <code>references/evidence/vertex_radiation.json</code> (input hash <code>{esc(R["input_hash"])}</code>), written by
   <code>python3 src/wayfarer/vertex_radiation.py --evidence</code> in {R["cost"]["wall_s"]:.0f} s ({R["cost"]["workers"]} workers, peak {R["cost"]["peak_rss_MB"]:.0f} MB).</p>
+</section>"""
+
+
+def fiji_section(spec):
+    """Section 9 of engineering/vertex/: Engine 1.6 Fiji-assisted advanced fusion and nanomaterials, read from
+    references/evidence/vertex_fiji.json (written by `python3 src/wayfarer/vertex_fiji.py --evidence`; tests/test_vertex_fiji.py fails when
+    it is stale against the inputs). Research only: nothing here changes the engine."""
+    import json
+    p = ROOT / 'references/evidence/vertex_fiji.json'
+    if not p.exists():
+        return ''
+    R = json.loads(p.read_text()); F = R['field']; A = R['assembly']; B = R['rebco']; U = R['fusion']; c = spec['vertex_fiji']
+    pct = lambda v, d=1: '—' if v is None else f'{100*v:,.{d}f} %'
+    gw = lambda v: '—' if v is None else (f'{v/1e12:,.2f} TW' if abs(v) >= 1e12 else f'{v/1e9:,.1f} GW' if abs(v) >= 1e9 else f'{v/1e6:,.1f} MW')
+    sci = lambda v: '—' if v is None else f'{v:.2g}'
+    x = lambda v: f'{v:,.0f}×' if v >= 10 else f'{v:,.1f}×'
+    cur = ''.join(f'<tr><td class="num">{r["T_K"]}</td><td class="num">{r["heating_mu0M_T"]:.2f}</td><td class="num">{r["cooling_mu0M_T"]:.2f}</td>'
+                  f'<td>{esc(r["state"].lower())}</td><td class="num">{r["canon_A_B"]:.1f}</td></tr>' for r in R['model']['curve'] if r['T_K'] % 100 == 0)
+    th = R['model']['thermodynamics'][1]
+    tg = ''
+    for name, t in F['targets'].items():
+        for sec, v in t['cases'].items():
+            tg += (f'<tr><td>{esc(name)}</td><td class="num">{abs(t["B_coil_T"]):.2f} T</td><td>liners {esc(sec)} m</td><td class="num">{v["G_optimal"]:.4f}</td>'
+                   f'<td class="num">{v["G_axial"]:+.4f}</td><td class="num">{1e3*v["B_fiji_T"][2]:.1f}–{1e3*v["B_fiji_T"][0]:.1f} mT</td><td class="num">{v["mu0Ms_for_canon_T"]:,.0f} T</td></tr>')
+        for ro, v in t['shell'].items():
+            tg += (f'<tr><td>{esc(name)}</td><td class="num">{abs(t["B_coil_T"]):.2f} T</td><td>solid shell {c["bound_inner_m"]:g}–{esc(ro)} m (bound)</td><td class="num">{v["G"]:.2f}</td>'
+                   f'<td class="num">—</td><td class="num">{v["B_fiji_T"]:.1f} T</td><td class="num">{v["mu0Ms_for_canon_T"]:,.0f} T</td></tr>')
+    ln = ''.join(f'<tr><td>{esc(k)}</td><td class="num">{v["R_m"]:.2f}</td><td class="num">{v["mass_kg"]/1e3:,.1f} t</td><td class="num">{v["force_x_N"]/1e6:+.2f}</td>'
+                 f'<td class="num">{v["force_r_N"]/1e6:+.2f}</td><td class="num">{v["hoop_stress_Pa"]/1e6:.1f}</td><td class="num">{v["interaction_J"]/1e6:+.1f}</td></tr>' for k, v in F['liners'].items())
+    rb = ''.join(f'<tr><td>{esc(r["coil"])}</td><td class="num">{r["B_peak_T"]:.1f}</td><td class="num">{r["J_op_A_m2"]/1e6:.1f}</td>'
+                 f'<td class="num">{min(r["margin"]):.1f}–{max(r["margin"]):.1f}×</td><td class="num">{min(r["apc_margin"]):.0f}–{max(r["apc_margin"]):.0f}×</td>'
+                 f'<td class="num">{r["fiji_dB_T"]*1e3:.0f} mT</td><td class="num">{sci(r["fluence_rate_n_m2s"])}</td>'
+                 f'<td class="num">{min(r["lifetime_s"]):.0f}–{max(r["lifetime_s"]):.0f} s</td></tr>' for r in B['rows'])
+    pol = ''.join(f'<tr><td>{["optimistic", "nominal", "pessimistic"][r["k"]]}</td><td class="num">×{r["factor"]:.3f}</td><td class="num">{r["dd"]:g}</td>'
+                  f'<td class="num">{pct(r["photon_share"])}</td><td class="num">{pct(r["neutron_share"], 2)}</td></tr>' for r in U['polarization'])
+    etas = list(U['floor']); tis = [r['Ti_keV'] for r in U['floor'][etas[0]]]
+    fl = ''.join(f'<tr><td class="num">{ti:g}</td>' + ''.join(f'<td class="num">{pct(U["floor"][e][i]["photon_share"])}<br><span class="meta">Te/Ti {U["floor"][e][i]["Te_over_Ti"]:.2f}</span></td>' for e in etas)
+                 + f'<td class="num">{pct(U["floor_polarized"][i]["photon_share"])}</td></tr>' for i, ti in enumerate(tis))
+    cp = ''.join(f'<tr><td><code>{esc(r["case"])}</code></td><td class="num">×{r["pol"]:.2f}</td><td class="num">{r["dd"]:g}</td><td class="num">{r["channel"]:g}</td>'
+                 f'<td class="num">{r["rhoR_g_cm2"]:.0f}</td><td class="num">{pct(r["photon_share"])}</td><td class="num">{r["Te_peak_keV"]:.0f}</td><td class="num">{r["Ti_peak_keV"]:.0f}</td></tr>' for r in U['coupled'])
+    mats = ''.join(f'<tr><td>{esc(m["material"])}</td><td>{esc(m["use"])}</td><td>{esc(m.get("level", ""))}</td>' + ''.join(
+        f'<td class="num">{esc(m[k] if isinstance(m[k], str) else (f"{m[k][0]:g}–{m[k][1]:g}" if isinstance(m[k], list) else f"{m[k]:g}"))}</td>'
+        for k in ('max_service_temperature', 'thermal_conductivity', 'yield_strength', 'density')) + '</tr>' for m in R['materials'])
+    var = ''
+    for v in R['variants']:
+        e = v['per_engine']; need = v['sr1_photon_share_needed']
+        var += (f'<tr><td><code>{esc(v["id"])}</code> {esc(v["name"])}</td><td class="num">{pct(v["photon_share"])}</td><td class="num">{pct(v["neutron_share"], 2)}</td>'
+                f'<td class="num">{gw(e["exhaust_W"])}<br><span class="meta">{e["thrust_N"]/1e6:.3f} MN</span></td><td class="num">{gw(e["hardware_W"])}</td>'
+                f'<td class="num">{gw(e["refrigeration_W"])}</td><td class="num">{gw(e["hot_radiator_W"])}</td>'
+                f'<td class="num">{x(v["ratio"][0])} – {x(v["ratio"][1])}</td><td class="num">{pct(need, 3) if need else "none: fixed loads exceed"}</td>'
+                f'<td>{tag("FAIL") if not v["closes"] else tag("PASS")}</td></tr>')
+    h2 = R['hydrogen']; hy = ''.join(f'<li>{c_["enthalpy_J_kg"]/1e6:.0f} MJ/kg: {c_["mdot_kg_s"]:,.0f} kg/s, {c_["mass_kg"]/1e9:,.1f} Mt over the four burns, exhaust '
+                                      f'{c_["v_exhaust_m_s"]/1e3:.1f} km/s</li>' for c_ in h2['cases'])
+    rec = ''.join(f'<tr><td style="white-space:nowrap"><code>{esc(r["id"])}</code></td><td>{esc(r["canon"])}</td><td>{esc(r["proposal"])}</td><td class="meta">{esc(r["destination"])}</td></tr>' for r in R['reconciliation'])
+    gates = ''.join(f'<tr><td style="white-space:nowrap"><code>{esc(g["id"])}</code></td><td>{esc(g["name"])}</td><td>{tag(g["status"])}</td><td>{esc(g["value"])}</td></tr>' for g in R['gates'])
+    ar = R['armour']; sh = R['shielding']['rows']; ins = R['insulation']
+    f0 = next(v for v in R['variants'] if v['id'] == 'F0'); f6 = next(v for v in R['variants'] if v['id'] == 'F6')
+    return f"""<section id="fiji"><h2>9 · Fiji-assisted advanced fusion and nanomaterials (Engine {esc(R["version"])})</h2>
+<p class="lead">Can Fiji's one extraordinary property, magnetization that rises with temperature, together with nanoengineered materials and advanced fusion
+  physics, close the radiation and heat balance that Engine 1.5 failed? Outcome {tag(R["outcome"])}: no configuration closes. The four independent engines stay,
+  the released engine and its geometry are unchanged, and nothing on this page is canon. The best integrated case still needs {x(f6["ratio"][0])} the radiator
+  (Engine 1.5: {x(f0["ratio"][0])}). See also <a href="#radiation">Radiation and thermal feasibility</a> and <a href="../breakthrough-lab/">Breakthrough Lab</a>.</p>
+<h3>Fiji as a material</h3>
+<p>{tag("CANON_WORKING")} The temperature shape is the Fiji workbook's lattice law: activation {c["T_activation_K"]:g} K, saturation {c["T_saturation_K"]:g} K,
+  release on cooling {c["T_release_K"]:g} K, quench {c["T_quench_K"]:g} K, A<sub>max</sub> {c["A_max"]:g}. Here A is the ratio of hot to cold magnetization, not a
+  field multiplier. M = M<sub>s</sub>(T, S) tanh(B<sub>seed</sub>/B<sub>align</sub>): bounded, zero without a seed field, hysteretic, collapsing at quench and
+  beyond a {pct(c["strain_limit"], 1)} strain. {tag("PROTOTYPE")} μ<sub>0</sub>M<sub>s</sub> is held at or below about {c["mu0_Ms_T"][0]:g} T, the atomic-moment bound of ordinary
+  matter, because a larger value would be a second extraordinary property. The Maxwell relation makes Fiji inversely magnetocaloric: switching on the seed field absorbs
+  {th["isothermal_heat_J_m3"]/1e6:,.1f} MJ/m³ at 1000 K, and the seed circuit supplies {th["seed_work_J_m3"]/1e6:,.1f} MJ/m³ of work, which comes back on collapse.</p>
+<div class="scroll" tabindex="0"><table><thead><tr><th>T (K)</th><th>μ₀M heating (T)</th><th>μ₀M cooling (T)</th><th>State</th><th>Canon A_B</th></tr></thead><tbody>{cur}</tbody></table></div>
+<h3>Field from currents plus magnetization</h3>
+<p>{tag("ANALYTIC")} The field a magnetized volume adds at a point is the exact dipole-kernel integral. With every cell oriented the best possible way (a ceiling for
+  nanofabricated orientation, here at {pct(F["efficiency"], 0)} for texture and {c["orientation_segments"]} segments), B = μ<sub>0</sub>M<sub>s</sub>·G. A solid spherical
+  shell gives G = 1.38 ln(r<sub>o</sub>/r<sub>i</sub>); a uniformly axial liner gives almost nothing, because geometry, not the material, sets the field. The canon law
+  ({c["canon_seed_T"]:g} T × {F["canon_A_B"]:.1f} = {F["canon_field"]["B_T"]:.0f} T) would need the magnetization in the last column.</p>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Target</th><th>Coil field</th><th>Fiji volume</th><th>G optimal</th><th>G axial</th><th>Fiji adds</th><th>μ₀M<sub>s</sub> for canon</th></tr></thead><tbody>{tg}</tbody></table></div>
+<p>Liner forces at the atomic bound (per engine, nominal {A["liner_section_m"]:g} m liners), reacted through warm struts:</p>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Liner</th><th>R (m)</th><th>Mass</th><th>F<sub>x</sub> (MN)</th><th>F<sub>r</sub> (MN)</th><th>Hoop (MPa)</th><th>Interaction (MJ)</th></tr></thead><tbody>{ln}</tbody></table></div>
+<p class="meta">At the canon field the throat region would hold {F["canon_field"]["energy_J"]/1e9:,.0f} GJ at {F["canon_field"]["pressure_Pa"]/1e9:.1f} GPa, which takes at least
+  {F["canon_field"]["virial_mass_kg"]/1e3:,.0f} t of titanium structure (virial bound).</p>
+<h3>The lattice assembly</h3>
+<p>The isolation stack between the {c["T_operating_K"]:g} K liner and the 20 K windings works: {c["foil_layers"]} refractory foils pass {A["radiative_W_m2"]:.0f} W/m²
+  to a {c["intermediate_K"]:g} K shield, MLI the rest. What does not work is the liner's own heat. Field ripple at the pulse rate costs {gw(A["hysteresis_W"])} of hysteresis
+  per engine, and in the line of sight of the burn the inboard face takes {sci(A["inboard_flux_W_m2"][0])}–{sci(A["inboard_flux_W_m2"][1])} W/m², which is
+  {A["vs_armour"][0]:.0f}–{A["vs_armour"][1]:.0f}× what a cooled 5 mm tungsten face carries. The lattice would pass quench and collapse.</p>
+<h3>REBCO</h3>
+<p>{tag("LITERATURE_RANGE")} Critical current is not the limit. Scaled from the demonstrated 20 T, 20 K point, each coil runs with several times margin, and APC tape
+  (PMDS Level B) adds more. Fast neutrons are the limit: with only the drawn cryostat, the closure coils reach a typical REBCO fluence limit within seconds of a
+  {c["burn_time_s"]/86400:.1f}-day burn. That needs about {B["attenuation_needed"]:.0e} attenuation (≈ {B["shield_m"]:.1f} m of shield) inside a cryostat about half a metre thick.
+  Stored energy {B["stored_J"]/1e9:.2f} GJ per engine.</p>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Coil</th><th>B peak (T)</th><th>J (A/mm²)</th><th>Jc margin</th><th>APC margin</th><th>Fiji adds</th><th>n/m²/s</th><th>To fluence limit</th></tr></thead><tbody>{rb}</tbody></table></div>
+<h3>Advanced fusion</h3>
+<p>{tag("THEORETICAL")} Spin polarization raises σ(D-³He) by at most 1.5× for fully parallel spins that survive to burn. Fiji does not preserve polarization.
+  Polarizing the fuel costs about {gw(U["polarization_power_W"])} per engine, which is small.</p>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Polarization</th><th>σ factor</th><th>D-D factor</th><th>Photons</th><th>Neutrons</th></tr></thead><tbody>{pol}</tbody></table></div>
+<p>{tag("ANALYTIC")} Hot ions and cool electrons cannot be held by choice. Electron-ion exchange heats the electrons faster the colder they are, so a burn at
+  T<sub>i</sub> has a floor where exchange plus product heating equals bremsstrahlung. Energy channeling (sending the products' electron share to ions) lowers the floor
+  but cannot remove exchange. The best sustained floor is {pct(U["best_floor_polarized"]["photon_share"])} of the yield (polarized, channelled). That is above
+  Engine 1.5's LOW case ({pct(U["reference"]["photon_share"])}), which holds T<sub>e</sub>/T<sub>i</sub> 0.5 by assumption. The channeling drive itself
+  costs {gw(U["channel_cost_W"][0])}–{gw(U["channel_cost_W"][2])} per engine.</p>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Ti keV</th>{''.join(f"<th>channel {esc(e)}</th>" for e in etas)}<th>polarized + 0.9</th></tr></thead><tbody>{fl}</tbody></table></div>
+<p>{tag("REDUCED_MODEL")} The 1.5 R2-B burn with the levers inside it. It is a pulse, not a held state: the electrons heat up and the photon share is time-integrated.</p>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Burn</th><th>σ</th><th>D-D</th><th>Channel</th><th>ρR g/cm²</th><th>Photons</th><th>Te peak keV</th><th>Ti peak keV</th></tr></thead><tbody>{cp}</tbody></table></div>
+<h3>Materials</h3>
+<p>PMDS values only. Speculative (Level C) data never feeds a number; Level B variants carry no number until measured. Radiation tolerance and heat removal are
+  different things. A 5 mm W face from its {ar["T_limit_K"]:g} K service limit to an {ar["coolant_K"]:g} K coolant carries {ar["q_max_W_m2"]/1e6:.0f} MW/m², and the 1.5
+  peak is {ar["shortfall"]:.0f}× that. Shields keep their heat: at {sh[0]["T_K"]:g} K a hydride shield's heat costs {1+1/sh[0]["cop"]:.1f} W of radiator per watt, and at a
+  polymer's {sh[1]["T_K"]:g} K it costs {1+1/sh[1]["cop"]:.1f} W. A nanophotonic radiator at emissivity {c["radiator_emissivity_nano"]} adds
+  {pct(R["radiator"]["capacity_gain"])} capacity. Tank insulation leaks are {ins["aerogel_mli_W_m2"][0]}–{ins["aerogel_mli_W_m2"][2]} W/m², which is real for boil-off and
+  irrelevant to closure.</p>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Material</th><th>Use</th><th>Level</th><th>Service K</th><th>k W/(m K)</th><th>Yield Pa</th><th>kg/m³</th></tr></thead><tbody>{mats}</tbody></table></div>
+<h3>Hydrogen reaction mass</h3>
+<p>Heat leaves the ship only if the hydrogen that carries it leaves too. Carrying F6's excess ({gw(h2["excess_W"])} over four engines) takes:</p>
+<ul class="plain">{hy}</ul>
+<p>Wayfarer departs at about 4.6 kt. Regenerative hydrogen stays a research option for small loads, not this one.</p>
+<h3>F0–F6: radiation and thermal closure (per engine, LOW source)</h3>
+<p>Each lever runs on its own, then all together in one calculation. Nothing is multiplied, and heat a liner moves is still counted. The radiator column gives the
+  four engines' demand over the installed radiator (low and high bracket). The SR-1 column gives the photon share the configuration could tolerate.</p>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Configuration</th><th>Photons</th><th>Neutrons</th><th>Exhaust, thrust</th><th>Into hardware</th><th>Refrigeration</th>
+<th>Hot radiator load</th><th>Radiator ×</th><th>SR-1 allows</th><th></th></tr></thead><tbody>{var}</tbody></table></div>
+<p class="meta">Machine-readable: <code>references/evidence/vertex_fiji.json</code> → <code>variants</code>. A Fiji liner is a shield that runs hot, and an ordinary tungsten
+  liner at its own service limit (F1-REF) does better, because Fiji's 1000 K operating point needs a heat pump to reach the 1800 K radiator.</p>
+<h3>Canon reconciliation (for owner review; nothing edited)</h3>
+<div class="scroll" tabindex="0"><table><thead><tr><th></th><th>Canon</th><th>Proposal</th><th>Destination</th></tr></thead><tbody>{rec}</tbody></table></div>
+<h3>Gates</h3>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Gate</th><th></th><th>Status</th><th>Result</th></tr></thead><tbody>{gates}</tbody></table></div>
+<p class="meta">Evidence file <code>references/evidence/vertex_fiji.json</code> (input hash <code>{esc(R["input_hash"])}</code>), written by
+  <code>python3 src/wayfarer/vertex_fiji.py --evidence</code> in {R["cost"]["wall_s"]:.0f} s.</p>
 </section>"""
 
 
