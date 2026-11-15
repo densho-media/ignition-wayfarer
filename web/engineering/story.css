@@ -97,3 +97,6 @@ table.meta th { width: 170px; }
 .figure-svg.cavity .c-hw { fill: var(--bad); }
 /* Vertex page photographs: keep them inside the column at phone width */
 .figs img { max-width: 100%; height: auto; display: block; }
+.figure-svg.field .fiji { fill: var(--wf-violet); opacity: 0.85; }
+.figure-svg.field .fiji.g2 { fill: var(--good); } .figure-svg.field .fiji.g3 { fill: var(--accent); } .figure-svg.field .fiji.g4 { fill: var(--info); } .figure-svg.field .fiji.g5 { fill: var(--wf-radiator); }
+.figure-svg.field .lbl { font: 10px var(--mono); fill: var(--ink); }

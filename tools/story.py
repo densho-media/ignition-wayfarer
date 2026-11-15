@@ -690,7 +690,8 @@ def vertex_page(spec, out_dir, revision, built):
 {magnet_section(spec)}
 {plasma_section(spec)}
 {radiation_section(spec)}
-{fiji_section(spec)}"""
+{fiji_section(spec)}
+{fiji_a_section(spec)}"""
     (out_dir / 'index.html').write_text(page('Vertex propulsion lineage · Wayfarer engineering',
                                              'How the Vertex research demonstrator became the Compact Vertex Engine and the four-engine Propulsion Cluster.',
                                              body, 2, revision, built))
@@ -1229,6 +1230,148 @@ def radiation_section(spec):
   <code>python3 src/wayfarer/vertex_radiation.py --evidence</code> in {R["cost"]["wall_s"]:.0f} s ({R["cost"]["workers"]} workers, peak {R["cost"]["peak_rss_MB"]:.0f} MB).</p>
 </section>"""
 
+
+
+def fiji_a_svg(R, spec):
+    """Inline figure: the FG-0..FG-5 Fiji cells in the engine's (x, r) half-plane with the coil cryostats, shield and burn point."""
+    import vertex_engine as ve
+    import vertex_structure as vs
+    st = ve.stations(spec); cs = vs.coils(spec)
+    x0, x1, h = -34.0, -8.0, 12.0; W = 560; H = h*W/(x1-x0)
+    X = lambda x: (x-x0)/(x1-x0)*W; Y = lambda r: H-8-r*(H-8)/h
+    cells = ''; lab = ''
+    for k, g in R['geometries'].items():
+        cl = f'fiji g{k[-1]}'
+        cells += ''.join(f'<rect class="{cl}" x="{X(q["x0"]):.1f}" y="{Y(q["r1"]):.1f}" width="{X(q["x1"])-X(q["x0"]):.1f}" height="{Y(q["r0"])-Y(q["r1"]):.1f}"/>'
+                         for q in g['cells'])
+        if k == 'FG-0':
+            continue
+        c = max(g['cells'], key=lambda q: q['r1'])
+        lab += f'<text class="lbl" x="{X(c["x0"]):.1f}" y="{Y(c["r1"])-3:.1f}">{esc("FG-0/1" if k == "FG-1" else k)}</text>'
+    coils = ''.join(f'<circle class="coil" cx="{X(c["x"]):.1f}" cy="{Y(c["r"]):.1f}" r="{c["cryostat"]*W/(x1-x0):.1f}"/>' for c in cs)
+    shield = (f'<polygon class="shield" points="{X(st["shield_fwd"]):.1f},{Y(4.4):.1f} {X(st["shield_aft"]):.1f},{Y(5.4):.1f} '
+              f'{X(st["shield_aft"]):.1f},{Y(0):.1f} {X(st["shield_fwd"]):.1f},{Y(0):.1f}"/>')
+    return (f'<figure><svg class="figure-svg field" viewBox="0 0 {W} {H:.0f}" role="img" aria-label="Fiji geometries FG-0 to FG-5">'
+            f'<rect class="bg" width="{W}" height="{H:.0f}"/>{shield}{coils}{cells}{lab}'
+            f'<circle class="burn" cx="{X(st["burn"]):.1f}" cy="{Y(0):.1f}" r="4"/>'
+            f'<text class="ax" x="6" y="14">aft (exit)</text><text class="ax" x="{W-60}" y="14">shield</text></svg>'
+            f'<figcaption>The six Fiji geometries in one engine\'s (x, r) half-plane, axis at the bottom, burn point (dot), coil cryostats (circles), '
+            f'shadow shield (grey). Each rectangle is one ring cell of the solver. FG-0 (0.2 m) and FG-1 (0.5 m) sit inboard of every coil; FG-3 '
+            f'blocks take the places of C1 and C2, which FG-3 removes. Research geometry only: '
+            f'the visible engine is unchanged.</figcaption></figure>')
+
+
+def fiji_a_section(spec):
+    """Section 10 of engineering/vertex/: Engine 1.6A Fiji material limits and magnetic architecture, read from
+    references/evidence/vertex_fiji_a.json (written by `python3 src/wayfarer/vertex_fiji_a.py --evidence`; tests/test_vertex_fiji_a.py fails
+    when it is stale). Research only: the engine, its geometry and the Section 9 record are unchanged."""
+    import json
+    p = ROOT / 'references/evidence/vertex_fiji_a.json'
+    if not p.exists():
+        return ''
+    R = json.loads(p.read_text()); c = spec['vertex_fiji_a']; A = R['answers']; rec = R['reconciliation']; by = {r['id']: r for r in R['matrix']}
+    pct = lambda v, d=1: '—' if v is None else f'{100*v:,.{d}f} %'
+    gw = lambda v: '—' if v is None else (f'{v/1e12:,.2f} TW' if abs(v) >= 1e12 else f'{v/1e9:,.1f} GW' if abs(v) >= 1e9 else f'{v/1e6:,.1f} MW')
+    sci = lambda v: '—' if v is None else f'{v:.2g}'
+    x = lambda v: f'{v:,.0f}×' if abs(v) >= 10 else f'{v:,.2f}×' if abs(v) >= 0.01 else f'{v:.1e}×'
+    aud = ''.join(f'<tr><td class="num">{a["q"]}</td><td>{esc(a["question"])}</td><td>{esc(a["answer"])}</td><td>{tag(a["evidence"])}</td></tr>' for a in R['audit'])
+    mats = ''.join(f'<tr><td><code>{esc(m["id"])}</code></td><td class="num">{m["mu0_Ms_T"]:g} T</td><td class="num">{m["bohr_per_atom"]:.1f}</td>'
+                   f'<td>{tag(m["status"])}</td><td>{esc(m["note"])}</td></tr>' for m in R['materials']['rows'])
+    val = ''.join(f'<tr><td>{esc(v["case"])}</td><td class="num">{sci(v["rel_error"])}</td><td>{tag("PASS" if v["passes"] else "FAIL")}</td>'
+                  f'<td class="meta">{esc(v["note"])}</td></tr>' for v in R['validation']['rows'])
+    conv = ''.join(f'<tr><td>{esc(k)}</td>' + ''.join(f'<td class="num">{r["G"]:.4f}<br><span class="meta">{r["n_cells"]} cells</span></td>' for r in rows) + '</tr>'
+                   for k, rows in R['convergence'].items())
+    geo = ''.join(f'<tr><td><code>{esc(k)}</code></td><td>{esc(g["name"])}</td><td class="num">{g["volume_m3"]:,.0f} m³</td><td class="num">{g["mass_kg"]/1e3:,.0f} t</td>'
+                  f'<td class="num">{g["nearest_m"]:.1f} m</td><td>{"yes" if g["line_of_sight"] else "no"}</td></tr>' for k, g in R['geometries'].items())
+    mx = ''
+    for r in R['matrix']:
+        gt = r['gates']
+        mx += (f'<tr><td style="white-space:nowrap"><code>{esc(r["id"])}</code></td><td class="num">{r["B_fiji_burn_T"]*1e3:+,.0f} mT<br><span class="meta">{pct(r["share_of_stop"])}</span></td>'
+               f'<td class="num">{max(r["reverse_field_T"], 0):.1f} T</td><td class="num">{r["stress_max_Pa"]/1e6:,.0f} MPa</td><td class="num">{pct(r["collapse"]["dI_share"])}</td>'
+               f'<td class="num">{r["mass_four_kg"]/1e3:,.0f} t</td><td class="num">{x(r["ratio_low"])}</td>'
+               f'<td>{tag(gt["magnetic"])}</td><td>{tag(gt["radiation_survival"])}</td><td>{tag(gt["thermal_closure"])}</td><td>{tag(gt["mission"])}</td></tr>')
+    ex = ''.join(f'<tr><td><code>{esc(k)}</code></td><td class="num">{pct(e["fiji_sky"])}</td><td class="num">{pct(e["new_sky"])}</td>'
+                 f'<td class="num">{gw(e["brackets"]["low"]["fiji_photon_W"])}</td><td class="num">{sci(e["peak_photon_W_m2"])}</td>'
+                 f'<td class="num">{x(e["face_shortfall"]) if e["face_shortfall"] else "—"}</td><td class="num">{x(e["volumetric_shortfall"]) if e["volumetric_shortfall"] else "—"}</td>'
+                 f'<td class="num">{x(e["brackets"]["low"]["ratio"])} / {x(e["brackets"]["low"]["ratio_armour"])}</td><td class="num">{x(e["brackets"]["high"]["ratio"])}</td></tr>'
+                 for k, e in R['exposure'].items())
+    req = ''.join(f'<tr><td><code>{esc(k)}</code></td><td class="num">{v["T_per_T"]:.4f}</td><td class="num">{v["mu0Ms_useful_T"]:,.1f} T</td>'
+                  f'<td class="num">{v["mu0Ms_equal_T"]:,.0f} T</td><td class="num">{v["mu0Ms_canon_T"]:,.0f} T</td></tr>' for k, v in A['required'].items())
+    nn = R['neutrons']
+    nr = ''.join(f'<tr><td>{esc(r["coil"])}</td><td class="num">{r["distance_m"]:.2f}</td><td class="num">{sci(r["flux_n_m2s"])}</td>'
+                 f'<td class="num">{sci(min(r["burn_fluence_n_m2"]))}–{sci(max(r["burn_fluence_n_m2"]))}</td><td class="num">{min(r["dpa"]):,.0f}–{max(r["dpa"]):,.0f}</td>'
+                 f'<td class="num">{min(r["lifetime_s"]):,.0f}–{max(r["lifetime_s"]):,.0f} s</td></tr>' for r in nn['rows'])
+    mit = ''.join(f'<li>{esc(m["measure"])}' + (f' for {esc(m["coil"])}' if m.get('coil') and 'thickness_m' in m else '') +
+                  (f': λ {m["removal_length_m"]:g} m → {m["thickness_m"]:.1f} m, {m["mass_kg"]/1e3:,.0f} t, {gw(m["heat_W"])} into the shield, coil current ×{m["current_factor"]:.2f}' if 'thickness_m' in m else
+                   f': flux ×{m["flux_factor"]:.2f} ({esc(m["note"])})' if 'flux_factor' in m else f': {esc(m.get("note", ""))}' if m.get('note') else '') + '</li>'
+                  for m in nn['mitigations'])
+    gates = ''.join(f'<tr><td style="white-space:nowrap"><code>{esc(g["id"])}</code></td><td>{esc(g["name"])}</td><td>{tag(g["status"])}</td>'
+                    + (f'<td class="meta">{len(g["passing"])} of {len(R["matrix"])} rows' + (f' ({esc(", ".join(g["passing"][:4]))}{"…" if len(g["passing"]) > 4 else ""})' if g['passing'] else '')
+                       if g['id'] in ('G-MAG', 'G-SURV', 'G-THERM', 'G-MISSION') else f'<td class="meta">{esc(g.get("note", "whole study"))}') + '</td></tr>' for g in R['gates'])
+    interp = ''.join(f'<tr><td><code>{esc(i["id"])}</code></td><td>{esc(i["reading"])}</td><td>{esc(i["verdict"])}</td></tr>' for i in rec['interpretations'])
+    recs = ''.join(f'<tr><td style="white-space:nowrap"><code>{esc(r["id"])}</code></td><td>{tag(r["decision"])}</td><td>{esc(r["action"])}</td>'
+                   f'<td class="meta">{esc(r.get("finding", "") or "; ".join(ch["range"] for ch in r.get("changes", [])))}</td></tr>' for r in R['rec'])
+    f3 = R['fg3']; fg0 = by['FG-0/FM-2/ORIENTED']; fg2 = by['FG-2/FM-2/ORIENTED']; fg2s = by['FG-2/FM-2/SEEDED']; fg5 = by['FG-5/FM-2/ORIENTED']
+    return f"""<section id="fiji-a"><h2>10 · Fiji material limits and magnetic architecture (Engine {esc(R["version"])})</h2>
+<p class="lead">Section 9 held Fiji at about 3.5 T in thin liners and found it adds millitesla. Was that the material or the geometry? Here a validated field solver
+  tries six Fiji geometries with four polarizations, from today's best magnet (2.45 T) to an extreme speculative 10 T. The answer: geometry dominated. An open shell
+  close to the burn gives {x(A["fg2_over_fg0"])} the liner's field, and at 3.5 T it adds {pct(fg2["share_of_stop"], 0)} of the field that stops the plasma.
+  But it only works with a fixed orientation the one Fiji property does not provide, and nothing in sight of the burn survives its light.
+  {tag("RESEARCH")} The visible engine, its geometry, the four independent engines and the Section 9 record are unchanged; nothing here is canon.</p>
+{fiji_a_svg(R, spec)}
+<h3>Audit of Engine 1.6</h3>
+<div class="scroll" tabindex="0"><table><thead><tr><th>#</th><th>Question</th><th>Answer</th><th>Evidence</th></tr></thead><tbody>{aud}</tbody></table></div>
+<h3>Material cases</h3>
+<p>Every case keeps the canon temperature shape (activation {spec["vertex_fiji"]["T_activation_K"]:g} K, saturation {spec["vertex_fiji"]["T_saturation_K"]:g} K, collapse
+  {spec["vertex_fiji"]["T_quench_K"]:g} K); only the size of the magnetization changes. At Fiji's iron-like density one Bohr magneton per atom is
+  {R["materials"]["tesla_per_bohr"]:.2f} T. Aligning every electron would give {R["materials"]["formal_bound_T"]:.0f} T, which atomic structure forbids.
+  No case is claimed to exist and none is proposed as canon.</p>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Case</th><th>μ₀M<sub>s</sub></th><th>μ<sub>B</sub> per atom</th><th>Status</th><th>Where it stands</th></tr></thead><tbody>{mats}</tbody></table></div>
+<h3>What the canon law can mean</h3>
+<p>The Fiji workbook's B<sub>eff</sub> = B<sub>seed</sub>·A<sub>B</sub>(T) gives {rec["canon_B_T"]:.0f} T at 1000 K ({rec["canon_max_T"]:.0f} T at saturation). Three readings:</p>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Reading</th><th>Meaning</th><th>Verdict</th></tr></thead><tbody>{interp}</tbody></table></div>
+<p>{tag("REDUCED_MODEL")} Successor law, kept beside the canon law rather than replacing it: <code>{esc(rec["successor"]["law"])}</code>. {esc(rec["successor"]["A_sys"])}.
+  {esc(rec["status_150T"]["verdict"])}</p>
+<h3>Solver and validation</h3>
+<p>{esc(R["solver"]["chosen"])} Tools evaluated first: {esc("; ".join(f'{t["tool"]} ({t["status"]})' for t in R["solver"]["evaluated"]))}.</p>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Case</th><th>Relative error</th><th>Result</th><th>Note</th></tr></thead><tbody>{val}</tbody></table></div>
+<p class="meta">Convergence (geometry factor G at the burn, tesla per tesla of μ₀M<sub>s</sub>) at 0.5, 0.25 and 0.125 m cells:</p>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Geometry</th><th>0.5 m</th><th>0.25 m</th><th>0.125 m</th></tr></thead><tbody>{conv}</tbody></table></div>
+<h3>Geometries</h3>
+<div class="scroll" tabindex="0"><table><thead><tr><th>ID</th><th>Geometry</th><th>Volume / engine</th><th>Mass / engine</th><th>Nearest to burn</th><th>In sight of burn</th></tr></thead><tbody>{geo}</tbody></table></div>
+<p>Two constitutive modes. <b>Seeded</b>: Fiji magnetizes along the local field, as its one property says. Placed beside the axis it pulls flux away from the
+  burn ({fg2s["B_fiji_burn_T"]*1e3:+,.0f} mT for FG-2 at 3.5 T), because a dipole seen from more than 54.7° off its axis opposes the field there. Only the cones
+  toward the shield and the nozzle, which must stay open, would help. <b>Oriented</b>: a fixed easy axis, which adds field
+  ({fg2["B_fiji_burn_T"]*1e3:+,.0f} mT for FG-2 at 3.5 T) but sees reverse fields up to {fg2["reverse_field_T"]:.1f} T from the coils and its own
+  demagnetization. Holding that needs coercivity at 1000 K, and no known hard magnet keeps any there: Nd₂Fe₁₄B, FePt and SmCo₅ lose their order near 590, 750 and 1020 K.
+  That would be a second extraordinary property, so oriented rows are marked {tag("SPECULATIVE")}.</p>
+<p>FG-3 (Fiji replaces the closure coils C1 and C2, loops scaled to ×{f3["alpha"]:.2f}) needs μ₀M = {f3["mu0M_T"]:.1f} T in its 1.0 and 1.5 m blocks to give the stop field
+  and the shield null. That is more than every case at 1000 K, so FG-3 does not close. Seeded FG-3 cannot make the null at all.</p>
+<p class="meta">Matrix: Fiji field at the burn (share of the {by["FG-0/FM-1/SEEDED"]["B_coil_burn_T"]:.2f} T stop field), the reverse field an oriented magnet must resist,
+  peak stress, coil-current jump if Fiji collapses (flux conservation), added mass for four engines, radiator ratio (low bracket; 1.5: 854×) and the gates.</p>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Row</th><th>Fiji at burn</th><th>Reverse field</th><th>Stress</th><th>Collapse ΔI</th><th>Mass ×4</th><th>Radiator</th><th>Magnetic</th><th>Survival</th><th>Thermal</th><th>Mission</th></tr></thead><tbody>{mx}</tbody></table></div>
+<p>The μ₀M<sub>s</sub> each oriented geometry would need for a useful 10 % of the stop field, for an equal field, and for the canon field:</p>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Geometry</th><th>T per T</th><th>Useful (10 %)</th><th>Equal</th><th>Canon</th></tr></thead><tbody>{req}</tbody></table></div>
+<h3>Heat and radiation</h3>
+<p>{tag("REDUCED_MODEL")} A ray screen from the burn on the 1.5 hardware. Fiji in sight of the burn absorbs every photon that reaches it, at 1000 K, lifted to the
+  1800 K radiator. It shades cold coils, which helps in the full-absorption bracket, but its own heat dominates the low bracket. Tungsten in front (1300 K) costs less than
+  Fiji at 1000 K, so 1.6's finding holds. The face flux is thousands of times what a cooled face can carry. Only FG-5, hidden in the shield's shadow, survives, and it
+  adds {pct(fg5["share_of_stop"])} at 3.5 T (oriented).</p>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Geometry</th><th>Sky taken</th><th>New sky</th><th>Photon heat / engine</th><th>Face W/m²</th><th>Face vs limit</th><th>Neutron heat vs cooling</th><th>Radiator low / with W</th><th>Radiator high</th></tr></thead><tbody>{ex}</tbody></table></div>
+<p class="meta">Thermal feedback: photon and neutron heat do not depend on M, so the only loop is hysteresis loss rising with M; its gain is below
+  {max(r["feedback"]["loop_gain"] for r in R["matrix"]):.3f} in every row, with no runaway. Heating from 1000 K to saturation raises the field by
+  {pct(fg0["feedback"]["field_gain_to_saturation"], 0)}. After a cool-down the cooling branch keeps it {pct(fg0["feedback"]["cooling_branch_ratio"]-1, 0)} higher (hysteresis).
+  A collapse (quench or strain) hands the flux back to the coils within {fg0["feedback"]["response_s"]:g} s.</p>
+<h3>REBCO neutron damage {tag("OPEN")}</h3>
+<p>{tag("LITERATURE_RANGE")} {esc(nn["spectrum"])}: {sci(nn["neutrons_per_s"])} neutrons/s per engine. {esc(nn["limits"]["note"])} {esc(nn["separation"])}.</p>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Coil</th><th>Distance (m)</th><th>n/m²/s</th><th>Burn fluence</th><th>dpa (estimate)</th><th>To limit</th></tr></thead><tbody>{nr}</tbody></table></div>
+<ul>{mit}</ul>
+<h3>Gates</h3>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Gate</th><th>Question</th><th>Status</th><th>Rows passing</th></tr></thead><tbody>{gates}</tbody></table></div>
+<h3>Owner decisions applied</h3>
+<p class="meta">Prepared workbook changes are listed in the evidence file with their cells and current contents. None has been written.</p>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Item</th><th>Decision</th><th>Action</th><th>Finding / cells</th></tr></thead><tbody>{recs}</tbody></table></div>
+</section>"""
 
 def fiji_section(spec):
     """Section 9 of engineering/vertex/: Engine 1.6 Fiji-assisted advanced fusion and nanomaterials, read from

@@ -2277,6 +2277,24 @@ Three assets, one source each (`src/wayfarer/vertex_engine.py`, `vertex_cluster.
     the channeling and liner overheads). An emissivity of 0.98 adds 8.9 %. Regenerative hydrogen for F6's excess needs 7–40 Mt.
     engineering/vertex/ section 9 reads `references/evidence/vertex_fiji.json` (written by `python3 src/wayfarer/vertex_fiji.py --evidence`,
     about 10 s).
+- **Fiji material limits and magnetic architecture (Engine 1.6A, `vertex_fiji_a.py`, `[vertex_fiji_a]`).** Research only; outcome
+  **BOUNDED**. Engine 1.6 and its evidence are kept as the record; the engine, its geometry and the four independent engines are unchanged.
+  - *Solver:* an axisymmetric bound-current integral solver (uniform-M ring cells, surface currents as Gauss-Legendre loops, exact loop
+    fields), validated against 14 closed-form cases (sphere, cylinder, thick ring, radial annulus, Biot-Savart loop, solenoid, Halbach and
+    optimal shells, Lorentz vs Kelvin vs virtual-work force, Newton's third law, the interaction-energy identity); open-source FEM tools could
+    not be installed. Two modes: SEEDED (M along the local H, the one Fiji property) and ORIENTED (a fixed easy axis).
+  - *Materials:* FM-1 2.45 T (measured), FM-2 3.5 T (screening bound), FM-3 5 T (speculative, a full d shell per atom), FM-4 10 T (extreme);
+    same canon temperature shape for each, none canon.
+  - *Geometry decides:* an open shell 3.5–4.5 m from the burn (FG-2) gives 76× the liner's field; at 3.5 T it adds 44 % of the stop field
+    (oriented), and 0.8 T of μ0Ms would already give 10 %. Seeded Fiji beside the axis lowers the burn field (−12 % for FG-2), because a dipole
+    seen beyond 54.7° opposes it. Oriented cells see 0.5–7.5 T reverse fields; holding them at 1000 K needs coercivity no known magnet keeps
+    (a second property, SPECULATIVE). Fiji replacing C1 and C2 (FG-3) needs 18.7 T. Nozzle rings (FG-4) do nothing at the burn.
+  - *Heat:* every geometry in sight of the burn takes 1,700–7,400× the face flux a cooled face carries; tungsten in front still beats Fiji.
+    Only FG-5 (shield shadow) survives, adding 2.6 % at 3.5 T. The radiator ratio stays 676–1,112× (1.5: 854×). REBCO neutron damage
+    stays OPEN (limit in 2 s–19 min; about 10⁵ attenuation, 1.2–2.4 m and 0.5–1.4 kt of shield per closure coil).
+  - *Canon:* B_eff = B_seed·A_B is kept as the single-core calibration; read as a field gain it needs 230–700 T in the best open geometry.
+    Successor: B_total = B_coils + B_Fiji(M(T)). REC-1/REC-4 workbook rows prepared cell by cell, not applied.
+    engineering/vertex/ section 10 reads `references/evidence/vertex_fiji_a.json` (`python3 src/wayfarer/vertex_fiji_a.py --evidence`, about 15 s).
 
 ## Limits
 

@@ -5626,6 +5626,76 @@ h2_nozzle_efficiency = 0.6
 burn_time_s = 2.46e6
 outcome = "NEGATIVE"
 
+# --- Vertex Engine 1.6A: Fiji magnetic physics, material limits and architecture reconciliation (research only) -----------------------
+# Owner brief 2026-11-15 21:52Z. Read by src/wayfarer/vertex_fiji_a.py, evidence references/evidence/vertex_fiji_a.json. The 1.6 table
+# [vertex_fiji] and its evidence stay as they are (historical record). Status words as in [vertex_fiji]; SPECULATIVE marks Fiji values beyond
+# established magnetic-material physics.
+[vertex_fiji_a]
+evidence = "RESEARCH_MODEL"
+version = "1.6A.0"
+# FM-1..FM-4 saturation polarization mu0 Ms at saturation (T), material values, not fields in the engine. The temperature shape is the
+# 1.6 model (canon lattice-law temperatures); only the magnitude changes.
+material_cases = [
+  { id = "FM-1", mu0_Ms_T = 2.45, status = "MEASURED_REFERENCE", note = "Fe65Co35, the highest room-temperature saturation of a bulk magnet" },
+  { id = "FM-2", mu0_Ms_T = 3.5, status = "SCREENING_BOUND", note = "about 10 Bohr magnetons per atom at metallic density: the 4f rare-earth moments (Dy, Ho about 3.7-3.9 T, measured only near 4 K); 1.6's bound" },
+  { id = "FM-3", mu0_Ms_T = 5.0, status = "SPECULATIVE", note = "about 5 Bohr magnetons per atom at iron atom density: every d-shell spin aligned, twice the Slater-Pauling maximum of itinerant alloys" },
+  { id = "FM-4", mu0_Ms_T = 10.0, status = "EXTREME_SPECULATIVE", note = "about 10 Bohr magnetons per atom at iron atom density: beyond any known ordering; below the formal bound of every electron's spin aligned (about 26 T)" },
+]
+# Atom and electron densities for the bounds (iron-like Fiji, density from [vertex_fiji]); Bohr magneton.
+atom_mass_amu = 55.85
+electrons_per_atom = 26
+# FG-0..FG-5 geometry parameters (PROTOTYPE; engine frame x forward, burn at stations.burn). Cells are rectangles in (x, r), rings about the axis.
+cell_m = 0.25
+quadrature = 4
+orientation_segments = 8
+fg0_section_m = 0.2
+fg1_block_m = 0.5
+fg2_shell_m = [3.5, 4.5]
+fg2_theta_deg = [12.0, 115.0]
+fg3_block_m = [1.0, 1.5]           # square sections replacing C1 and C2 (side, m)
+fg4_blocks = [
+  { x = [-22.4, -20.4], r = [7.6, 8.4] },
+  { x = [-28.6, -26.6], r = [8.7, 9.5] },
+  { x = [-17.6, -15.6], r = [6.9, 7.5] },
+]
+fg5_block = { x = [-10.6, -9.2], r = [3.4, 5.6] }
+# Recoil susceptibility of the ordered lattice along its easy axis (PROTOTYPE, hard-magnet class) and self-consistency iterations.
+recoil_chi = 0.05
+# Fiji stiffness (steel-like, PROTOTYPE) for the magnetic strain against the 1.6 collapse strain; neutron removal length in Fiji (m, as 1.6);
+# support strut length to the thrust structure (m, PROTOTYPE); clearance kept from every cryostat and the shield (m).
+young_Pa = 2.0e11
+fiji_removal_length_m = 0.15
+support_length_m = 1.0
+clearance_m = 0.15
+iterations = 3
+# Anisotropy fields of known hard magnets at room temperature (mu0 H_A, T) and their Curie temperatures (LITERATURE_RANGE): at the 1000 K
+# operating point none of them keeps any coercivity.
+anisotropy_reference = [
+  { name = "Nd2Fe14B", mu0_HA_T = 7.6, curie_K = 585.0 },
+  { name = "SmCo5", mu0_HA_T = 35.0, curie_K = 1020.0 },
+  { name = "FePt (L10)", mu0_HA_T = 11.6, curie_K = 750.0 },
+]
+specific_heat_J_kgK = 450.0
+# Plasma screening: a useful Fiji field is at least this share of the stop field at the burn point (PROTOTYPE threshold).
+useful_share = 0.1
+# Structural screening: titanium allowable share of yield for the virial support mass.
+allowable_share = 0.5
+# Mission screening: four engines' added Fiji and support mass against the departure envelope upper bound (kg, WORKING 4.6 kt).
+departure_kg = 4.6e6
+mission_share = 0.05                # PROTOTYPE screening share of the departure mass for four engines' added hardware
+# Thermal feedback: coolant temperature below the liner operating point (K) that sets the cooling conductance.
+coolant_dT_K = 50.0
+# F-08 neutron audit. Removal attenuation lengths of fast neutrons (m) in steel-like hardware and in a LiH/B4C/W shield (LITERATURE_RANGE,
+# order of the removal cross sections), intervening hardware thickness between the burn and the closure coils (m, PROTOTYPE bracket),
+# displacement cross section for fast neutrons in an oxide conductor (barn, ESTIMATE), and REBCO fluence limits (n/m2, E > 0.1 MeV).
+removal_length_m = [0.20, 0.16, 0.12]
+intervening_m = [0.3, 0.1, 0.0]
+shield_removal_length_m = [0.10, 0.15, 0.20]
+shield_density_kg_m3 = 2000.0
+displacement_barn = [500.0, 1000.0, 3000.0]
+fluence_limit_n_m2 = [3.0e22, 1.0e22, 3.0e21]
+outcome = "BOUNDED"
+
 # --- Asset C: Wayfarer propulsion cluster -----------------------------------------------------------------------------------------------
 [propulsion_cluster]
 id = "WF-VTX-CL4"
