@@ -3543,3 +3543,174 @@ lining, the multi-layer insulation, the cabin heater power). Until then:
 - The trainee's own movement is the walk on ring A's deck.
 - After an "everyone" relocation the trainee can only use the intercom, and the page says so. The walk does not pretend to be ring B.
 - Ring B's traversal, visible crew and hand-carrying between rings wait for the ship's traversal infrastructure.
+
+## 55. Scenario finalization review (Borrowed Air and Dark Bus) [VALIDATED]
+
+Checked against the code and the reference runs. No strategy family was added, and none was removed.
+
+**Borrowed Air.**
+
+| Check | Result |
+| --- | --- |
+| Diagnosis | The inspections show the CO₂ unit's FAILED fan (no process flow) and pump 1's FAILED part (no flow with power on). The heat exchanger shows that its one fan both cools and dries |
+| Maintenance rules | Isolate first, one part in hand, a 5 min removal and 5 min installation at the bay, pausing while a page is open. A part fits only its family |
+| Transfers | Each crossing takes 15 min, plus 10 min of work at ring B. The fetched part reaches the shelf only after both. People in a crossing are in neither ring |
+| Heat and humidity | From SYS-003 only (BVAD crew loads, the coil, the valve, the heat pump). The scenario sets no engineering value (test) |
+| Sacrifices visible | The debrief lists the parts taken from ring B, the energy shed where people live, and which rings can still host the crew |
+| Ring B's resulting capability | Each part taken leaves ring B's machine isolated and unfit; `hostable(B)` turns false |
+| Temporary fixes | The watch's 24 h verdict and the 7-day projection are separate. A limit crossed only after the watch is TEMPORARY |
+| What remains damaged | "Unresolved machines" (the failed parts, the stripped machines) on debrief page 2 |
+| Margin note (§52) | borrow_fan without shedding fails by 0.3 K. The report and handoff say so; the debrief's reference list shows it as HEAT_LIMIT, the model's own result |
+
+**Dark Bus.**
+
+| Check | Result |
+| --- | --- |
+| Bus trips | A live group whose demand at a step's start exceeds its sources trips every closed breaker in it. A breaker stays open until it is reset at the console (test) |
+| Converter limits | BC-A's 40 kW carries both buses only through the tie. BC-B is failed, and no spare is in reach |
+| Battery discharge | The generators carry the load first; the battery takes the rest of each live group. Its ledger closes |
+| Survival reserve isolation | The packs feed only their own ring's survival loads, and only while that ring's bus is dead. They never feed the buses, the battery or the restart (test; `survival_power_implies_restart = false`) |
+| Load shedding | A shed load draws nothing and adds no heat. The discretionary energy shed is counted only where people live |
+| Heat-pump power | Its draw is the coolant heat over its COP (0.5 of Carnot to the 320 K cold loop), recomputed every step. Economy raises the supply to 12 °C: less work, a warmer coil, less condensation |
+| Cooling and humidity | They follow the powered machines. A dead bus with empty packs leaves the cabin with no cooling path |
+| Restart reserve | At the window the battery must hold the pulse bank's charge. The model moves that energy from the battery into the bank (a ledger term) or refuses. **No restart happens because the clock reaches the window alone.** short_reserve, at 149.5 kWh, fails |
+| Restart power path | The charge path from the battery to the bank is the drive's own (black start step 2), not the hotel converters. Its rating is OPEN, so the charge is modelled as an energy transfer at the window; its duration is not modelled |
+| After the restart | G1 and G2 carry their buses; BC-B stays failed and the tie stays as left. **Omission:** canon's black start step 9 has the battery and bank recharge once fusion takes the load. The model does not recharge. No verdict depends on it (the restart is the only battery-gated event), but the 7-day battery figure is a lower bound |
+| Stability watch | The watch holds the declared state, opens the window, and runs the projection. Changes requested during it are refused and logged |
+
+**Usability and debrief corrections in this closeout.**
+- Temperatures outside the model's range are no longer shown as numbers, in the readouts or in the debrief (§50).
+- The debrief separates the limit crossing, the range exit and the last valid state.
+
+No other gameplay change was needed.
+
+## 56. Owner playtest checklist (2B, 2C, 3)
+
+Allow about 15 minutes per scenario. Use a desktop browser first, then a phone (both orientations), and a gamepad if you have one.
+
+1. **Shared Air** (`#interior-shared-air`). Contain the release, then try isolate, purge, and separate with a reconnection at 4 h.
+   Are the doors, dampers and reconnection readable?
+2. **Borrowed Air** (`#interior-borrowed-air`). Find both faults at the bay. Shed and borrow. Replay: borrow the fan and a pump.
+   Replay: warm ring B, then move. Are the 15 min crossings and the cost of each sacrifice clear on the debrief?
+3. **Dark Bus** (`#interior-dark-bus`). Read bus B and the packs at the console. Try the tie with everything on (it trips). Then
+   shed, tie and reset. Replay: darken ring B, or use economy. Is the restart margin understandable?
+4. For each: does a page open and close reliably by touch? Is any text too small? Does the watch feel too long or too short (43–59 s
+   on a desktop)?
+5. Values to accept or change: the 8 kWh packs, the 40 kW converters, the 80 kW generators, the 15 kW ship load per bus, the restart
+   needing the full 200 kWh bank, and the 48 h window (§51).
+
+## 57. Roadmap (final for this stage)
+
+| Phase | Status |
+| --- | --- |
+| 0 Engineering integration proof | VALIDATED; approved as Phase 1's base (2026-11-13) |
+| 1 DS-1 "Scrubber" | PLAYABLE; OWNER ACCEPTANCE PENDING |
+| 2A Atmospheric connectivity | VALIDATED; PLAYABLE; OWNER ACCEPTANCE PENDING |
+| 2B "Shared Air" | VALIDATED; PLAYABLE; OWNER ACCEPTANCE PENDING |
+| 2C "Borrowed Air" (SYS-003) | VALIDATED; PLAYABLE; OWNER ACCEPTANCE PENDING |
+| **Phase 2** | **TECHNICALLY COMPLETE**: awaiting owner acceptance |
+| 3 "Dark Bus" (power, thermal, atmosphere) | VALIDATED; PLAYABLE; OWNER ACCEPTANCE PENDING |
+| **Phase 3** | **TECHNICALLY COMPLETE**: awaiting owner acceptance |
+| **4 Competitive Deadship and Hullrun** | **PARKED** |
+| 5 Narrative survival | Planned; not authorized |
+
+**Phase 4 is PARKED** (owner, 2026-11-15). Game expansion pauses until the broader Wayfarer spacecraft design and model reach a
+sufficiently complete, owner-approved baseline.
+
+Not to be developed:
+- competitive Deadship, Hullrun competition, leaderboards, rankings or scoring leagues;
+- new challenge packs or repair minigames;
+- general NPC AI, multiplayer or progression systems.
+
+The existing scenarios stay in the repository as a test and demonstration platform for the ship's engineering models.
+
+**Phase 4 reopens only when:**
+1. the ship design and modelling are sufficiently complete;
+2. the physical routes and major engineering interfaces are stable;
+3. the owner explicitly reauthorizes game development.
+
+It does not start automatically after Phase 3.
+
+**Resume first, once the spacecraft model is ready:**
+1. Source the electrical values (`power.rating`, `hotel_source`, converter rating, survival reserve capacity, ignition energy) and
+   rerun `ds3_sensitivity.py`.
+2. Add the ring cabins' passive exchange and heater power from the thermal design, then rerun both scenarios.
+3. Couple SYS-002 and SYS-003 at the boundary in §53, if a scenario needs compartments and heat together.
+4. Add battery and bank recharge after a restart (black start step 9).
+5. Ring B traversal and visible crew, once the ship's traversal lines exist.
+
+## 58. Closeout validation and owner handoff (2026-11-15)
+
+### 58.1 Validation
+
+| Check | Command | Result |
+| --- | --- | --- |
+| Full Python suite | `python3 -m unittest discover -s tests` | **328 run, 327 pass, 1 skipped, 0 failed** (240 s). The skip is the EVA envelope test, which needs `workflow.py eva` output. Before the closeout: 326 run, 325 pass, 1 skipped |
+| Ship-ops and ring-services tests | `python3 -m unittest discover -s tests -k ship_ops` / `-k ring_services` | 18 + 8 pass, including the new invariant and validity tests |
+| Python/Godot parity | `check_ship_ops.gd` (DS-2C, DS-3) and `check_shared_air.gd` in the scratch project | DS-2C **11/11**, DS-3 **9/9**, DS-2B **21/21**; tolerances unchanged |
+| Headless strategies | `check_ship_ops.gd` walking each script | all 9 played strategies reach their Python verdict, no fails |
+| Runtime export | `python3 tools/workflow.py runtime-export` | **PASS, 14/14 checks** (run `runs/20261115T190448148354Z-runtime`) |
+| Web build size | `web/build.py` to a scratch site | `play/` **79.27 MB** of 90 MB (10.7 MB headroom; rule ≥ 5 MB) |
+| Electrical sensitivity | `python3 work/project-thread-dfyyv7/ds3_sensitivity.py` | `ds3_sensitivity.json`; §51 |
+
+**Browser (headless Chromium, `tools/web_check.py`, built from 0727145): 19 runs, all PASS.**
+
+| Experience | Keyboard | Phone landscape (touch) | Phone upright + rotation | Small window 1024×600 |
+| --- | --- | --- | --- | --- |
+| Borrowed Air, reference (shed + borrow) | PASS | PASS | PASS | PASS |
+| Borrowed Air, pump / relocate / cannibalize (failure) | PASS ×3 | | | |
+| Dark Bus, reference (shed Garden) | PASS | PASS | PASS | PASS |
+| Dark Bus, dark ring B / economy / keep Garden (failure) / short reserve (failure) | PASS ×4 | | | |
+| Regression: start page and Exterior (67 checks), walk (8), Shared Air, Scrubber, Airflow, Systems | PASS | | | |
+
+Each scenario run plays the strategy with the player's own inputs (no injected state), waits through the watch and the 7-day
+projection, pages through all four debrief pages, and presses replay. The failure runs check that the debrief names the failure,
+and the cannibalize debrief shows the new range-exit wording (still: `/mnt/project-files/deadship_closeout_2026-11-15/`).
+
+**Performance** (software-rendered Chrome, from the 2C/3 runs; the closeout changed only text): the ship-ops frame cost is at most
+11.1 ms; the watch takes 42–45 s (DS-2C) and 59 s (DS-3); the projection takes 1.3–2.5 s; the verify-at-load takes 33–220 ms.
+
+**Not verified:** real phones and tablets, a real gamepad, and real GPU frame rates. These are for the owner playtest (§56).
+
+### 58.2 Handoff answers
+
+1. **Technically complete?** Yes, against the scoped definitions (§39, §49). **Phases 2 and 3: TECHNICALLY COMPLETE — awaiting
+   owner acceptance.** Each scenario is VALIDATED and PLAYABLE; OWNER ACCEPTANCE PENDING.
+2. **Corrections.**
+   - Temperatures beyond the model's range were shown as numbers (up to 272 °C). Now they are reported as a range exit with the last
+     valid state, and peaks stop at the exit (§50; 21100cd).
+   - Two invariant tests were added (21100cd).
+   - The debrief now separates the limit crossing from the range exit.
+   - The earlier fixes: the `%e` ledger line (ce0ff4d) and the CO₂ capitalization (7a1924d).
+   - No value was tuned.
+3. **Original viable strategies?** All six (three per scenario) still pass, in Python, headless Godot and the browser.
+4. **Ledgers?** Mass (CO₂, water), energy (each store, the cabins, the bank) and parts close in every case (`test_every_ledger_closes`
+   ×2, `test_parts_and_crew_stay_consistent_throughout`).
+5. **Sensitivity?** The lessons and the margin ranking are robust. Which strategies are viable depends on three narrow bands:
+   converter ≥ ~37.5 kW, ship load ≤ ~16 kW per bus, battery and window within ±10 % and ±6 h (§51).
+6. **PROTOTYPE power values defensible?** Yes for testing, not as engineering findings (§51.3).
+7. **Thermal limitations.**
+   - The model has no passive hull exchange and no cabin heaters (§52). borrow_fan fails by only 0.3 K, a margin result.
+   - The valid range is 10–35 °C.
+   - The battery and bank are not recharged after the restart (§55).
+8. **SYS-002 and SYS-003?** The inputs are consistent. The fixed 295 K differs by 0.4 % relative CO₂, which is immaterial. The
+   ownership boundary and coupling are documented, not built (§53).
+9. **Ring B transfers?** Yes. Timed crossings, one location per part, the donor ring is disabled, and refusals change nothing (§54).
+10. **Full Python suite?** Yes: 328 run, 327 pass, 1 skipped, 0 failed.
+11. **Godot checks?** Yes: parity 11/11, 9/9 and 21/21, and runtime-export 14/14.
+12. **Browser?** Yes: 19/19 runs (58.1).
+13. **Size and performance?** 79.27 MB (10.7 MB headroom); a frame at most 11.1 ms in software rendering.
+14. **Unverified on real devices?** Real phones and tablets, a gamepad, GPU frame rates, and touch feel.
+15. **Open engineering questions.**
+    - `power.rating`, `hotel_source`, the converter rating, `survival_reserve.capacity` and the ignition energy;
+    - the ring cabins' passive exchange and heater power;
+    - recharge after the restart;
+    - DS-O1 and DS-O2;
+    - the TCC bed loading.
+16. **Ready for review and squash?** Ready for owner review. Squash only on the owner's explicit "squash"; nothing was deployed.
+17. **Phase 4 PARKED?** Yes: §57, TODO, MODEL.
+18. **Resume first?** The list at the end of §57: sourced electrical values and a rerun of the sensitivity study, then the hull and
+    heaters, the SYS-002/003 coupling, recharge, and ring B traversal.
+
+**Commits:** 5d4218b, d758d0f, 1b0b630, ce0ff4d, 7a1924d, 201ca74 (Phases 2C and 3); 21100cd and 0727145, plus this report commit
+(closeout).
