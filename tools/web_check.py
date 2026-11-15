@@ -595,11 +595,14 @@ LANDSCAPE = {'width': 844, 'height': 390, 'deviceScaleFactor': 3, 'mobile': True
 ROTATE_AFTER = 3          # --rotate: the phone turns upright after this many answered actions
 
 
-def run_training(url, play_release, binary, sandbox, out, record_check, metrics, touch=False, scripted=False, names=None, rotate=False):
+def run_training(url, play_release, binary, sandbox, out, record_check, metrics, touch=False, scripted=False, names=None, rotate=False,
+                 desktop=(1280, 720)):
     """Each training's own check in the browser. touch: an emulated phone answering by its on-screen buttons; rotate: that phone starts
     in landscape and turns upright mid-run (the buttons then answer at their new places). scripted: no --await-player (the check itself
     calls the handlers: an in-browser engine run, not player input; the Phase 0 site has no other)."""
     how = 'scripted' if scripted else (('rotate' if rotate else 'touch') if touch else 'keys')
+    if how == 'keys' and tuple(desktop) != (1280, 720):
+        how = f'keys{desktop[0]}x{desktop[1]}'
     profile = tempfile.mkdtemp(prefix=f'wf-web-training-{how}-')
     log = open(out / f'chrome-training-{how}.log', 'w')
     chrome = Chrome(binary, profile, log, sandbox)
@@ -612,7 +615,7 @@ def run_training(url, play_release, binary, sandbox, out, record_check, metrics,
             page.send('Emulation.setDeviceMetricsOverride', LANDSCAPE)
             page.send('Emulation.setTouchEmulationEnabled', {'enabled': True, 'maxTouchPoints': 5})
         else:
-            page.send('Emulation.setDeviceMetricsOverride', {'width': 1280, 'height': 720, 'deviceScaleFactor': 1, 'mobile': False})
+            page.send('Emulation.setDeviceMetricsOverride', {'width': desktop[0], 'height': desktop[1], 'deviceScaleFactor': 1, 'mobile': False})
         for name, hash_, flags, line_prefix in TRAINING:
             if names and name not in names:
                 continue
@@ -706,7 +709,8 @@ def run_training(url, play_release, binary, sandbox, out, record_check, metrics,
             what = {'scripted': 'its scripted check passes in the browser (engine run, no player input)',
                     'keys': "every action answered by the player's own key in the browser",
                     'touch': "every action answered by an on-screen button on an emulated phone",
-                    'rotate': "every action answered by an on-screen button on an emulated phone turned upright mid-run"}[how]
+                    'rotate': "every action answered by an on-screen button on an emulated phone turned upright mid-run"}.get(
+                        how, f"every action answered by the player's own key in a {desktop[0]}x{desktop[1]} desktop viewport")
             record_check(f'training: {name}: {what}', res.get('result') == 'PASS' and real and not errors and not traffic.crashed,
                          result=res.get('result'), fails=res.get('fails', [])[:5], answered=answered, shots=shots, errors=errors[:3],
                          physics_frames=res.get('physics_frames'), seconds=seconds)
@@ -1264,7 +1268,7 @@ def merge(site, part_dirs, out, record=False):
 
 
 def check(site, out, binary, sandbox=True, record=False, play_seconds=900, live=None, recording=True, touch=True, parts=PARTS,
-          frame_shell=None, training_names=None, rotate=False):
+          frame_shell=None, training_names=None, rotate=False, desktop=(1280, 720)):
     """site: the local site directory, or None with live=<deployed URL ending in />, which reads release.json from there.
     parts: the sessions to run (PARTS); each part's check.json can be merged later (merge)."""
     out.mkdir(parents=True, exist_ok=True)
@@ -1304,7 +1308,7 @@ def check(site, out, binary, sandbox=True, record=False, play_seconds=900, live=
         if 'main' in parts:
             run_main(url, release, build, binary, sandbox, out, record_check, metrics)
         if 'training' in parts and play_release:
-            run_training(url, play_release, binary, sandbox, out, record_check, metrics, names=training_names)
+            run_training(url, play_release, binary, sandbox, out, record_check, metrics, names=training_names, desktop=desktop)
             if touch:
                 run_training(url, play_release, binary, sandbox, out, record_check, metrics, touch=True, names=training_names)
             if rotate:
@@ -1341,6 +1345,7 @@ if __name__ == '__main__':
                         help='run only this part (repeatable; default the CI parts main, equivalence, walk); training: the systems proof and the '
                              'Deadship tutorial answered by real keys and touch; training-scripted: their scripted checks in the browser')
     parser.add_argument('--rotate', action='store_true', help='with training: also a phone that turns from landscape to portrait mid-run')
+    parser.add_argument('--desktop', default='1280x720', help='with training: the desktop viewport of the keyboard run, WxH (default 1280x720)')
     parser.add_argument('--training', action='append', choices=[t[0] for t in TRAINING], help='with training or training-scripted: only these trainings')
     parser.add_argument('--frame-shell', type=Path, help='Chrome headless shell binary: run the equivalence part there with frames on demand '
                         '(begin-frame control) instead of in real time; same checks, same frames')
@@ -1352,7 +1357,7 @@ if __name__ == '__main__':
         report = check(args.site and args.site.resolve(), args.out.resolve(), args.chrome, sandbox=not args.no_sandbox, record=args.record,
                        play_seconds=args.play_seconds, live=args.live, recording=not args.no_recording, touch=not args.no_touch,
                        parts=tuple(args.part or PARTS), frame_shell=args.frame_shell and str(args.frame_shell.resolve()),
-                       training_names=args.training, rotate=args.rotate)
+                       training_names=args.training, rotate=args.rotate, desktop=tuple(int(v) for v in args.desktop.split('x')))
     print(report['result'], f"{sum(r['ok'] for r in report['checks'])}/{len(report['checks'])} checks")
     if os.environ.get('GITHUB_ACTIONS'):
         loads = {r['check']: r.get('seconds') for r in report['checks'] if 'seconds' in r}
