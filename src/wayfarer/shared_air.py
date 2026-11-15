@@ -13,9 +13,12 @@ One run is a deterministic machine on a fixed 10 s step. Actions apply at step b
     tcc <bool>  removal <bool>   the trace-contaminant control and the CO2 unit (at the ECLSS bay: the caller checks the place)
     order <pair> <sector>   a pair walks to a sector (pair A: the trainee's partner)      hold <pair>   stop where they are
     contain_start / contain_stop   the trainee's work at hygiene A (refused away from the source's compartment)
+    schedule <t_s|None>     at the ECLSS bay: the ducts' reconnection (every IMV damper pair open, the fans on) at ship time t_s, or
+                            cancel it. Remote equipment only; doors are never operated remotely. Refused in the past, off the step grid
+                            or after the watch's end; it runs when due in any phase, logged, and it is part of what the watch tests
     watch <plan>            the stability watch from the exact present state (NONE or RESTORE), then the 7-day projection
 
-At each boundary: the due actions, then the pairs' walks, then a completed containment isolates the source, then the occupants are
+At each boundary: the due actions, then a due scheduled reconnection, then the pairs' walks, then a completed containment isolates the source, then the occupants are
 counted where everybody is; the model steps; each person's exposure adds their compartment's exact integral over the step.
 
     python3 src/wayfarer/shared_air.py      # check the scenario, run the reference cases, print their outcomes
@@ -93,6 +96,9 @@ class Run:
         self.contain = dict(state='NONE', progress_s=0.0)
         self.phase = 'LIVE'                       # LIVE, WATCH, PROJECTION, DONE
         self.plan = 'NONE'
+        self.schedule = None                      # the declared duct reconnection: dict(t_s, done)
+        self.co2_peak = 0.0                       # the highest CO2 mole fraction where anybody was (live and watch) and when
+        self.co2_peak_t = 0.0
         self.watch = {}
         self.log = []
         self.alerted = False
@@ -229,6 +235,17 @@ class Run:
             if self.contain['state'] == 'WORKING':
                 self.contain['state'] = 'PAUSED'
             return ''
+        if kind == 'schedule':
+            if a[0] is None:
+                self.schedule = None; return ''
+            ts = float(a[0])
+            if ts <= self.t + EPS:
+                return 'that time has passed: a reconnection is scheduled ahead of the ship clock'
+            if abs(ts/self.dt - round(ts/self.dt)) > 1e-9:
+                return f'a reconnection is scheduled on the {self.dt:.0f} s step'
+            if ts > float(self.sc['watch']['ship_h'])*H + EPS:
+                return f'a reconnection is scheduled before the watch ends ({float(self.sc["watch"]["ship_h"]):.0f} h)'
+            self.schedule = dict(t_s=ts, done=None); return ''
         if kind == 'watch':
             if a[0] not in self.sc['watch']['plans']:
                 return f'no plan {a[0]}'
@@ -252,6 +269,7 @@ class Run:
     def tick(self, dt=None):
         """One step: the walks, a completed containment, the occupants, the model, the exposures."""
         dt = self.dt if dt is None else dt
+        self._scheduled()
         self._walks()
         if self.contain['state'] in ('WORKING', 'PAUSED') and self.contain['progress_s'] >= float(self.sc['containment']['work_s']) - EPS:
             ring_air.isolate_source(self.st)
@@ -274,13 +292,32 @@ class Run:
             q['t'].append(self.t); q['Es'].append(q['E'])
             q['max1h'], q['j'] = _roll(q['t'], q['Es'], H, q['max1h'], q['j'])
             q['max24'], q['j24'] = _roll(q['t'], q['Es'], 24*H, q['max24'], q['j24'])
-        if self.co2_limit_crossed_at is None and self.phase in ('LIVE', 'WATCH') and max(self.x(q['node']) for q in self.people) > limit:
-            self.co2_limit_crossed_at = self.t
+        if self.phase in ('LIVE', 'WATCH'):
+            xo = max(self.x(q['node']) for q in self.people)
+            if xo > self.co2_peak:
+                self.co2_peak, self.co2_peak_t = xo, self.t
+            if self.co2_limit_crossed_at is None and xo > limit:
+                self.co2_limit_crossed_at = self.t
         self.samples.append((self.t, max(pp), sum(self.st['c'])))
         reuse = float(self.sc['reuse']['ppm'])
         for i, v in enumerate(pp):
             if v > reuse:
                 self.over_last[self.ids[i]] = self.t
+
+    def _scheduled(self):
+        """The declared duct reconnection, when due: the ECLSS controller opens every IMV damper pair and runs the fans. Doors stay as
+        they are. It runs at the first step boundary at or after its time, before the walks."""
+        s = self.schedule
+        if s is None or s['done'] is not None or self.t < s['t_s'] - EPS:
+            return
+        st = self.st
+        opened = [e['id'] for e in self.p['edges'] if e['kind'] == 'imv' and not st['open'][e['id']]]
+        for eid in opened:
+            ring_air.set_edge(st, eid, True)
+        fans = st['vent'] != 'ON'
+        ring_air.set_vent(st, True)
+        s['done'] = self.t
+        self.log.append([self.t, 'reconnect', [opened, fans], ''])
 
     def _start_watch(self, plan):
         self.plan = plan
@@ -289,7 +326,8 @@ class Run:
             self.contain['state'] = 'PAUSED'
         end = max(float(self.sc['watch']['ship_h'])*H, self.t + float(self.sc['watch']['min_h'])*H)
         end = -(-end // self.pdt)*self.pdt                          # on the projection grid
-        self.watch = dict(plan=plan, t0=self.t, end_s=end, config=self.config(), limit_crossed_at=None, family=self.family())
+        self.watch = dict(plan=plan, t0=self.t, end_s=end, config=self.config(), limit_crossed_at=None, family=self.family(),
+                          schedule=None if self.schedule is None else dict(self.schedule))
 
     def run_watch(self):
         """The watch at the live step to its end, then the verdict, the plan and the projection (the caller may instead tick the watch
@@ -304,7 +342,8 @@ class Run:
             st = self.st
             ring_air.set_vent(st, True)
             for e in self.p['edges']:
-                ring_air.set_edge(st, e['id'], e['kind'] == 'imv')
+                if e['kind'] == 'imv':
+                    ring_air.set_edge(st, e['id'], True)          # remote equipment only: the doors stay as the trainee left them
             ring_air.set_tcc(st, True); ring_air.set_removal(st, True)
             self.log.append([self.t, 'restore', [], ''])
         self.phase = 'PROJECTION'
@@ -335,6 +374,7 @@ class Run:
                     dampers_closed=sorted(e['id'] for e in self.p['edges'] if e['kind'] == 'imv' and not st['open'][e['id']]),
                     vent=st['vent'], tcc=st['tcc'], removal=st['removal'], source=st['source']['state'],
                     places={q['id']: self.ids[q['node']] for q in self.people},
+                    reconnect_at_s=None if self.schedule is None or self.schedule['done'] is not None else self.schedule['t_s'],
                     walking={q['id']: self.ids[q['route'][-1]] for q in self.people if q['route']})
 
     def family(self):
@@ -374,7 +414,10 @@ class Run:
         return dict(result=result, co2_limit_crossed_at_h=None if self.co2_limit_crossed_at is None else self.co2_limit_crossed_at/H,
                     co2_unremoved_groups=unbounded, nh3_residue=residue, nh3_airborne_g=sum(st['c'])*1000.0, nh3_away_from_tcc_g=away*1000.0,
                     source=st['source']['state'], t_h=self.t/H,
-                    max_occupied_co2_pct=100.0*max(self.x(q['node']) for q in self.people))
+                    max_occupied_co2_pct=100.0*max(self.x(q['node']) for q in self.people),
+                    co2_peak_pct=100.0*self.co2_peak, co2_peak_h=self.co2_peak_t/H,
+                    co2_above_target_crew_h=sum(q['co2_s'] for q in self.people)/H,
+                    degraded=crossed is False and sum(q['co2_s'] for q in self.people) > 0.0)
 
     def debrief(self):
         """What was saved and what it cost: every number from the run's own model state and exposure records."""
@@ -400,7 +443,15 @@ class Run:
         return dict(people=people, released_g=st['released']*1000.0, retained_g=st['S']*1000.0, removed_g=st['nh3_removed']*1000.0,
                     airborne_g=sum(st['c'])*1000.0, inventory_g=st['S0']*1000.0, co2_mean_pct=100.0*sum(st['m'])/p['M_CO2']/sum(ring_air.n_mol(p, i) for i in range(self.N)),
                     co2_max_pct=100.0*max(x), clear_h=clear, watch=self.watch, plan=self.plan, contained_at_h=next((e[0]/H for e in self.log if e[1] == 'contained'), None),
+                    co2_peak_pct=100.0*self.co2_peak, co2_peak_h=self.co2_peak_t/H, schedule=self.schedule, decisions=self.decisions(),
                     ledgers=self.ledgers())
+
+    def decisions(self):
+        """What the trainee decided and what the ship did on its own account, in order: [t_h, kind, args] (refused actions and the
+        trainee's own steps left out; the debrief counts refusals separately)."""
+        keep = ('contain_start', 'contained', 'door', 'damper', 'vent', 'tcc', 'removal', 'order', 'hold', 'schedule', 'watch', 'reconnect',
+                'restore', 'stopped')
+        return [[e[0]/H, e[1], e[2]] for e in self.log if e[1] in keep and not e[3]]
 
     def ledgers(self):
         return dict(co2_kg=ring_air.ledger_error(self.st), nh3_kg=ring_air.trace_ledger_error(self.st), release_kg=ring_air.release_ledger_error(self.st))
@@ -472,14 +523,21 @@ def cases():
     C0 = 900.0                                    # contain_start
     D = C0 + 610.0                                # the work completes at the boundary after 600 s of it
     at_bay = D + 140.0                            # the trainee, walking from hygiene A by A1N, is at the bay
+    separate = ([[C0, 'contain_start'], [D, 'order', 'A', 'A2'], [D, 'order', 'C', 'A2']] + walk(A1_TO_A3, D) + seal(D + 300.0, 'A1P', 'A3N')
+                + walk(A3_TO_A2, D + 310.0) + [[D + 1200.0, 'watch', 'RESTORE']])
+    # the gate's separation (report section 30.5): the short way A1-A3 left open by the trainee (doors and ducts: the purge path), sector 2
+    # sealed with the crew, the ducts reconnected later; the schedule is set at the bay after the seal, before the walk to sector 2
+    sep_open = ([[C0, 'contain_start'], [D, 'order', 'A', 'A2'], [D, 'order', 'C', 'A2']] + walk(A1_TO_A3, D, leave_open=True)
+                + seal(D + 300.0, 'A1P', 'A3N') + walk(A3_TO_A2, D + 310.0) + [[D + 1200.0, 'watch', 'RESTORE']])
+    k_sep = next(k for k, a in enumerate(sep_open) if a[0] > D + 300.0)
     return [
         ('isolate', '1. Containment, then isolation: the trainee walks to the bay and calls the partner over, then shuts sector 1\'s two damper pairs',
          [[C0, 'contain_start']] + walk(A1_TO_A3, D) + [[at_bay, 'order', 'A', 'A3']] + seal(at_bay + 130.0, 'A1P', 'A1N') + [[D + 1200.0, 'watch', 'NONE']]),
         ('purge', '2. Containment, then a controlled purge: the trainee leaves every door from A1 to A3 by sector 2 open; pair A and B to sector 3',
          [[C0, 'contain_start'], [D, 'order', 'A', 'A3'], [D, 'order', 'B', 'A3']] + walk(A1_A2_A3, D, leave_open=True) + [[D + 1200.0, 'watch', 'NONE']]),
-        ('separate', '3. Containment, then crew separation: A1 joined to the TCC by A1N, sector 2 sealed off (A1P, A3N) with partner, B and C in it; restore plan',
-         [[C0, 'contain_start'], [D, 'order', 'A', 'A2'], [D, 'order', 'C', 'A2']] + walk(A1_TO_A3, D) + seal(D + 300.0, 'A1P', 'A3N')
-         + walk(A3_TO_A2, D + 310.0) + [[D + 1200.0, 'watch', 'RESTORE']]),
+        ('separate', '3. Containment, then crew separation with no reconnection before the watch\'s end: A1 joined to the TCC by the ducts, '
+         'sector 2 sealed off (A1P, A3N) with partner, B and C in it; restore plan',
+         separate),
         ('no_containment', '4. No containment: the trainee goes straight to the bay, calls the partner over and shuts sector 1\'s dampers',
          walk(A1_TO_A3, 700.0) + [[840.0, 'order', 'A', 'A3']] + seal(970.0, 'A1P', 'A1N') + [[3600.0, 'watch', 'NONE']]),
         ('late_containment', '5. Delayed containment: started 1 h after the release, ventilation untouched',
@@ -508,7 +566,19 @@ def cases():
          [[C0, 'contain_start'], [D + 10.0, 'watch', 'NONE']]),
         ('watch_restore', '15. Watch with the declared restore plan: as case 12, then the ring returned to normal and everyone home once their way is under the reuse criterion',
          [[C0, 'contain_start'], [D, 'order', 'A', 'A2']] + walk(A1_TO_A3, D) + seal(at_bay + 10.0, 'A1P', 'A1N') + [[D + 1200.0, 'watch', 'RESTORE']]),
-        ('replay', '16. Replay: case 1 again from the exact initial state', None),
+        ('replay', '16. Replay: case 1 again from the exact initial state', 'isolate'),
+        ('separate_reconnect', '17. Crew separation with a scheduled reconnection: the short way A1-A3 left open (the purge path), sector 2 sealed with partner, B and C (as case 3); at the bay the trainee schedules the ducts\' '
+         'reconnection at 4 h (every damper pair open, the fans on; doors untouched), as the gate\'s reconnect at T2',
+         sep_open[:k_sep] + [[D + 305.0, 'schedule', 4*H]] + sep_open[k_sep:]),
+        ('separate_late', '18. Crew separation reconnected too late: the reconnection scheduled at 6 h, after the sealed sector passes the CO2 control limit',
+         sep_open[:k_sep] + [[D + 305.0, 'schedule', 6*H]] + sep_open[k_sep:]),
+        ('reconnect_refused', '19. Reconnections refused and changing nothing: a time already past, a time off the step grid, a time after the '
+         'watch, then the 4 h reconnection; during the watch a cancellation is refused',
+         sep_open[:k_sep] + [[D + 301.0, 'schedule', 1800.0], [D + 302.0, 'schedule', 4*H + 5.0], [D + 303.0, 'schedule', 30*H],
+                             [D + 305.0, 'schedule', 4*H]] + sep_open[k_sep:] + [[D + 1300.0, 'schedule', None]]),
+        ('reconnect_cancelled', '20. A scheduled reconnection cancelled before the watch: the sealed sector keeps its crew without CO2 removal',
+         sep_open[:k_sep] + [[D + 305.0, 'schedule', 4*H], [D + 600.0, 'schedule', None]] + sep_open[k_sep:]),
+        ('replay_reconnect', '21. Replay: case 17 again from the exact initial state', 'separate_reconnect'),
     ]
 
 
@@ -531,6 +601,9 @@ def play(sc, p, actions):
             raise ValueError('a reference script must start the watch')
     w0 = r.t
     while r.t < r.watch['end_s'] - EPS:
+        while k < len(todo) and todo[k][0] <= r.t + EPS:     # during the watch every action is refused and logged
+            a = todo[k]; k += 1
+            r.act(a[1], *a[2:])
         r.tick()
         if abs(r.t/H - round(r.t/H)) < 1e-9:
             cps.append(r.checkpoint())
@@ -544,8 +617,8 @@ def reference(sc, p):
     out = []
     scripts = {}
     for name, what, actions in cases():
-        if actions is None:
-            actions = scripts['isolate']
+        if isinstance(actions, str):
+            actions = scripts[actions]
         scripts[name] = actions
         r, cps, w0 = play(sc, p, actions)
         d = r.debrief()

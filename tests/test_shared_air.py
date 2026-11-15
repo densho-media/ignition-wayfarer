@@ -17,8 +17,9 @@ class SharedAirTests(unittest.TestCase):
     def setUpClass(cls):
         cls.sc = sa.load()
         cls.p = sa.params()
-        cls.scripts = {n: a for n, _, a in sa.cases()}
-        cls.scripts['replay'] = cls.scripts['isolate']
+        cls.scripts = {}
+        for n, _, a in sa.cases():
+            cls.scripts[n] = cls.scripts[a] if isinstance(a, str) else a
         cls.runs = {n: sa.play(cls.sc, cls.p, a) for n, a in cls.scripts.items()}
 
     def deb(self, name):
@@ -193,14 +194,99 @@ class SharedAirTests(unittest.TestCase):
         self.assertEqual(r.st['tcc'], 'OFF')
         self.assertGreater(off, 0.0)
 
+    # ---- the scheduled reconnection (finalization 2026-11-15) ---------------------------------------------------------------------------
+
+    def test_a_scheduled_reconnection_keeps_the_separation_under_the_limit(self):
+        ok, late, never = self.deb('separate_reconnect'), self.deb('separate_late'), self.deb('separate')
+        v = ok['watch']['verdict']
+        self.assertEqual((ok['watch']['family'], v['result']), ('SEPARATE', 'STABLE'))
+        self.assertTrue(v['degraded'])                            # above the 0.3 % target, under the 0.5 % control limit
+        self.assertGreater(ok['co2_peak_pct'], 100.0*self.p['co2_target'])
+        self.assertLess(ok['co2_peak_pct'], 100.0*self.p['co2_max'])
+        self.assertGreater(v['co2_above_target_crew_h'], 0.0)
+        self.assertEqual(late['watch']['verdict']['result'], 'CO2_LIMIT')
+        self.assertEqual(never['watch']['verdict']['result'], 'CO2_LIMIT')
+        self.assertFalse(late['watch']['verdict']['degraded'])
+
+    def test_the_reconnection_moves_only_remote_equipment(self):
+        r = self.runs['separate_reconnect'][0]
+        ev = [e for e in r.log if e[1] == 'reconnect']
+        self.assertEqual(len(ev), 1)
+        self.assertAlmostEqual(ev[0][0], 4*3600.0)
+        self.assertEqual(sorted(ev[0][2][0]), ['IMV.A1P', 'IMV.A3N'])
+        self.assertTrue(all(r.st['open'][e['id']] for e in self.p['edges'] if e['kind'] == 'imv'))
+        # the doors at the end are the doors the trainee left: none changed after the watch began
+        doors = sorted(e['id'] for e in self.p['edges'] if e['kind'] == 'door' and r.st['open'][e['id']])
+        self.assertEqual(doors, r.watch['config']['doors_open'])
+        for name in ('separate', 'watch_restore'):
+            r = self.runs[name][0]
+            doors = sorted(e['id'] for e in self.p['edges'] if e['kind'] == 'door' and r.st['open'][e['id']])
+            self.assertEqual(doors, r.watch['config']['doors_open'], name)
+
+    def test_refused_or_cancelled_reconnections(self):
+        a, b = self.runs['separate_reconnect'], self.runs['reconnect_refused']
+        self.assertEqual(a[1], b[1])                              # four refusals changed nothing
+        refused = [e for e in b[0].log if e[1] == 'schedule' and e[3]]
+        self.assertEqual(len(refused), 4)
+        self.assertIn('watch is running', refused[-1][3])
+        r = self.runs['reconnect_cancelled'][0]
+        self.assertFalse([e for e in r.log if e[1] == 'reconnect'])
+        self.assertEqual(r.debrief()['watch']['verdict']['result'], 'CO2_LIMIT')
+
+    def _sealed_to(self, until_h, sched=None, extra=()):
+        """The separation's live phase from case 17 without its watch, to `until_h`, with a reconnection at `sched` seconds."""
+        acts = [a for a in self.scripts['separate_reconnect'] if a[1] not in ('watch', 'schedule')]
+        if sched is not None:
+            acts.append([2700.0, 'schedule', sched])
+        acts = sorted(([float(a[0])] + list(a[1:]) for a in list(acts) + list(extra)), key=lambda a: a[0])
+        r = sa.Run(self.sc, self.p)
+        k = 0
+        while r.t < until_h*3600.0 - 1e-6:
+            while k < len(acts) and acts[k][0] <= r.t + 1e-6:
+                r.act(acts[k][1], *acts[k][2:]); k += 1
+            r.tick()
+        return r
+
+    def test_the_reconnection_boundary(self):
+        # without a reconnection the sealed sector passes 0.5 % at tc; mixing after a reconnection takes minutes, so the last reconnection
+        # that keeps everyone under the limit (t_ok, on the 10 s step) lies before tc; just before, at and just after it
+        tc = self._sealed_to(8.0).co2_limit_crossed_at
+        self.assertIsNotNone(tc)
+        lo, hi = tc - 600.0, tc                                   # lo stays under the limit, hi passes it
+        self.assertIsNone(self._sealed_to(8.0, lo).co2_limit_crossed_at)
+        self.assertIsNotNone(self._sealed_to(8.0, hi).co2_limit_crossed_at)
+        while hi - lo > 10.0 + 1e-6:
+            mid = lo + 10.0*round((hi - lo)/20.0)
+            if self._sealed_to(8.0, mid).co2_limit_crossed_at is None:
+                lo = mid
+            else:
+                hi = mid
+        t_ok = lo
+        self.assertLess(t_ok, tc)
+        for when, crossed in ((t_ok - 10.0, False), (t_ok, False), (t_ok + 10.0, True)):
+            r = self._sealed_to(8.0, when)
+            self.assertEqual(r.co2_limit_crossed_at is not None, crossed, when)
+            self.assertAlmostEqual(next(e[0] for e in r.log if e[1] == 'reconnect'), when)
+            self.assertLessEqual(r.co2_peak, self.p['co2_max'] if not crossed else 1.0)
+
+    def test_event_order_at_the_reconnection_boundary(self):
+        # an action at the same boundary applies first, then the scheduled reconnection: a damper shut at 2 h ends open
+        r = self._sealed_to(2.05, 7200.0, extra=[[7200.0, 'damper', 'A2P', False]])
+        i_act = next(k for k, e in enumerate(r.log) if e[1] == 'damper' and e[2] == ['A2P', False])
+        i_rec = next(k for k, e in enumerate(r.log) if e[1] == 'reconnect')
+        self.assertLess(i_act, i_rec)
+        self.assertEqual(r.log[i_act][0], r.log[i_rec][0])
+        self.assertTrue(r.st['open']['IMV.A2P'])
+
     def test_replay_is_exact(self):
         a, b = self.runs['isolate'][1], self.runs['replay'][1]
         self.assertEqual(a, b)
+        self.assertEqual(self.runs['separate_reconnect'][1], self.runs['replay_reconnect'][1])
         r1, r2 = sa.play(self.sc, self.p, self.scripts['isolate'])[0], self.runs['isolate'][0]
         self.assertEqual(r1.checkpoint(), r2.checkpoint())
 
     def test_every_reference_case_runs(self):
-        self.assertEqual(len(sa.cases()), 16)
+        self.assertEqual(len(sa.cases()), 21)
         for n, (r, cps, _) in self.runs.items():
             self.assertEqual(r.phase, 'DONE', n)
 

@@ -50,13 +50,17 @@ rule = "Progress is kept when interrupted; the source stays LEAKING until the wo
 
 [watch]
 # The stability watch runs the same model from the trainee's exact state to `ship_h` hours after the release (at least `min_h` more),
-# then the projection to `projection_h`. With no plan nothing changes after the watch starts; with the restore plan the ring returns to
-# normal at the end of the watch (fans and dampers open, doors closed, both units on) and each person walks home once their home
-# sector is under the reuse criterion, checked hourly.
+# then the projection to `projection_h`. With no plan nothing changes after the watch starts; with the restore plan, at the end of the
+# watch the ECLSS bay opens every damper pair and runs the fans and both units (remote equipment only: the doors stay as the trainee left
+# them) and each person walks home once every compartment on their way is under the reuse criterion, checked hourly.
+# A reconnection may also be scheduled at the bay before the watch (finalization brief 2026-11-15): at that ship time every damper pair
+# opens and the fans run, in any phase; doors are never moved remotely. The gate reconnected at 4 h (report section 30.5); the options
+# are the ship times the bay offers, in hours after the release.
 ship_h = 24.0
 min_h = 1.0
 projection_h = 168.0
 plans = ["NONE", "RESTORE"]
+reconnect_options_h = [2.0, 3.0, 4.0, 5.0, 6.0, 8.0]
 
 [reuse]
 # The scenario's conservative operating criterion for returning a compartment to service: under 3 ppm NH3, the level of the long-term
@@ -94,13 +98,13 @@ hint = "Nothing removes NH3 except the TCC in sector 3. Air reaches it only thro
 id = "decide"
 title = "Decide and stabilize"
 objective = "Choose how to handle the residue: doors ({use}), ducts and units at the ECLSS bay, the other pairs by intercom ({ops} away from equipment)."
-hint = "Keeping it in sector 1 keeps everyone else's air clean but leaves sector 1 out of use. Sending it to the TCC clears it sooner but spreads it. CO2 still needs removal wherever people are."
+hint = "Keeping it in sector 1 keeps everyone else's air clean but leaves sector 1 out of use. Sending it to the TCC clears it sooner but spreads it. CO2 still needs removal wherever people are: a sealed group without the CO2 unit needs its ducts reconnected (the bay can schedule it) before CO2 reaches 0.5 %."
 
 [[stages]]
 id = "verify"
 title = "Verify"
 objective = "When the ring is set up as you want it, declare it by intercom: the stability watch runs the model to {watch_h} h after the release, then the 7-day projection."
-hint = "The watch changes nothing unless you declared the restore plan."
+hint = "The watch changes nothing except what you declared: a reconnection you scheduled at the bay, and the restore plan at its end."
 
 [[stages]]
 id = "debrief"
@@ -112,7 +116,8 @@ hint = "There is no score. Every result comes from the same air model."
 families = [
   "Isolate the residue: sector 1 kept apart. The other sectors' air stays clean; sector 1 stays out of use until its air is cleared.",
   "Route it to the TCC: sector 1 joined to the ECLSS sector through occupied air. It clears sooner; more people breathe low levels for a day.",
-  "Separate the crew from the purge: the purge path joined to the TCC, the crew sealed away from it. It clears soonest; the sealed group's CO2 has no removal.",
+  "Separate, then reconnect at 4 h: the purge path joined to the TCC, the crew sealed away from it until the scheduled reconnection. It clears soonest; the sealed group's CO2 runs above its target until then.",
+  "Separate without reconnecting: the same separation, the ducts left shut until the watch's end. The sealed group's CO2 passes the control limit.",
 ]
 references = "NH3 references: NASA JSC 20584 Rev D (02/2026), ammonia, 1 h 30 ppm and 24 h 20 ppm (off-nominal events), 7 d 3 ppm (continuous occupancy). They are exposure-duration references, not injury thresholds; an exceedance is a risk to evaluate. CO2: target 0.3 %, control limit 0.5 % (PROTOTYPE control levels, not injury)."
 replay = "{ops} replays the challenge from the same start."
