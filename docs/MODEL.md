@@ -2181,6 +2181,36 @@ Three assets, one source each (`src/wayfarer/vertex_engine.py`, `vertex_cluster.
     read by the ship's mass budget or the mission numbers, which are unchanged.
   - Explore Ship shows each part's status, utilisation and note in the Engine drawer, and an optional engineering overlay colours one
     engine's parts by status (legend in text; `#ov=eng` or `#ov=eng.BLOCKED`); engineering/vertex/ section 5 shows the tables.
+- **Magnetic design (Engine 1.3, `vertex_magnet.py`, `[vertex_engine.magnet]`).** What the six coils have to do (MF-01 capture,
+  MF-02 protect the shield face, cryostats and cage, MF-03 redirect, MF-04 collimate, MF-05 detach, MF-06 stability and degraded modes,
+  MF-07 hardware limits and the four-engine field) and whether any current set or coil geometry inside the drawn engine does it. Verdict
+  **Outcome B**: no candidate passes every hard requirement, so the 1.2 geometry and NOMINAL currents stay the engine
+  (`selected = "M0-NOMINAL"`, `verdict = "PROPULSION_FEASIBILITY_BLOCKED"`) and the candidates are research records.
+  - *Evidence levels, reported apart:* VACUUM_FIELD_SOLVED (exact loop fields; finite windings at the conductor; forces checked against
+    the energy gradient), REDUCED_PLASMA_MODEL (energy-balance stopping of the 1.22 GJ charged pulse in every direction against the
+    distance to hardware, margin ≥ 1.25; a flux-conserving coil response to the diamagnetic pulse), PARTICLE_TRAJECTORY_SCREENED (Boris
+    test particles of four species in the vacuum field: no self-consistent response), PLASMA_COUPLING_OPEN, DETACHMENT_OPEN.
+  - *Audit:* the 1.2 NOMINAL rule (C-07 at the burn point and a null on the shield face) makes a cusp: nothing stops forward plasma
+    (margin 0; 68 % of test particles reach the shield). CONSERVATIVE is a load bound with the same null; the EXTREME flux-compression
+    factor is replaced by a model, whose point-dipole form is invalid where the bubble reaches the coils (NOMINAL). The three cases stay
+    reproducible as M0 and are still what the 1.2 members are sized for.
+  - *Candidates* (deterministic Nelder–Mead, starts and results stored in the TOML, `--optimise` re-runs them): M1 independent currents on
+    the 1.2 coils gives a forward mirror (closure coils in the loops' polarity) but stops at margin 1.23 because the C2 cryostat is 4.6 m
+    from the burn point; M2 moves C1, C2 and L1 (≤ 1 m, ≤ 10 % radius) and thickens the windings inside the drawn cryostats and passes the
+    capture screen at 1.27 with a 106 MN peak coil force (NOMINAL 272 MN), 9.3 T at the conductor and case utilisation 0.83; M3 adds the
+    net dipole moment to the objective (no gain: the moment is set by the field the capture needs); M4 (SPECULATIVE, VTX-S1 pushed to a
+    quarter yield at 22.8 kHz) keeps the capture at half the currents and a quarter of the forces. A Pareto sweep on the 1.2 coils: margin
+    1.0 needs only 48 MN peak force; nothing reaches 1.25.
+  - *Why it stays blocked:* every mirror candidate still sends about 19–20 % of the test particles onto the shield through the loss cone
+    (limit 5 %); the closure coils are pulled aft by about 100 MN each, so struts and reaction ring need about 3–4× their 1.2 sizes (M2
+    resized: struts 0.55 m, ring 0.80 m, +130 t per engine, inside the envelope; never applied); the exit is sub-Alfvénic and the electrons
+    stay magnetised, so detachment is OPEN; the pulse-rate field swing heats the cryostat walls at about 7 GW per engine for every 0.1 % of
+    the charged power it couples. Fields do not stop X-rays or neutrons: the shield and VTX-S3 still carry those. Breakthrough Lab Weakest
+    Link WL-002 (shield field zero, BT-003) carries these limits.
+  - engineering/vertex/ section 6 reads `references/evidence/vertex_magnet.json` (written by `python3 src/wayfarer/vertex_magnet.py
+    --evidence`; the tests fail when its input hash is stale). Explore Ship's Engine drawer shows each coil's current, force, conductor field
+    and case utilisation for M0-NOMINAL and M2, and an optional field-line overlay (`#fl=M2`), fetched only when switched on and drawn as one
+    line object: computed vacuum field lines, not light and not plasma.
 
 ## Limits
 

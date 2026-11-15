@@ -11,6 +11,8 @@ same engine definition the generator draws:
   manifest(s)    the records, the categories with their anatomy text and colours, and the four engine instances; returns the buffer too.
                  1.2: every record carries its engineering record (vertex_structure.inspection: sizing status, note, utilisation per case) and
                  the manifest an `engineering` block (statuses, member groups, load cases, mass), so the viewer never types a number.
+                 1.3: a `magnet` block (vertex_magnet.inspection: per coil current, force, conductor field and case utilisation for the
+                 active configuration and the compared candidate); the field lines go to their own lazily fetched file (web_export).
 
 Picking runs against the source part geometry, not the Draco-compressed render mesh, so a pick can sit about 1.5 cm off what is
 drawn. A pick never claims more than the part whose surface the ray meets first.
@@ -25,6 +27,7 @@ import functional_colors
 import vertex_cluster as vc
 import vertex_engine as ve
 import vertex_structure as vs
+import vertex_magnet as vm
 
 CONTRACT = 'WF_VTX_INSPECT'
 VERSION = 1
@@ -149,7 +152,7 @@ def manifest(s):
                 interfaces={i['name']: dict(at=[round(v, 3) for v in runtime(i['at'])], kind=i['kind'], note=i['note']) for i in ve.interfaces(s)},
                 mass_basis='ENGINEERING_PROTOTYPE estimate per part: drawn volume x assumed density x solid fraction (vertex_engine.materials)',
                 materials={k: dict(name=v, color=[round(c, 3) for c in ve.MATERIALS[k][0]]) for k, v in e['material_names'].items()},
-                engines=engines(s), categories=categories(s), parts=parts_, speculative=e['speculative']['items'], engineering=eng,
+                engines=engines(s), categories=categories(s), parts=parts_, speculative=e['speculative']['items'], engineering=eng, magnet=vm.inspection(s),
                 geometry=dict(quantum_m=QUANTUM, vertices=nverts, layout='int16 positions (x, y, z) for every vertex, then uint16 indices; '
                               'part.geo = [first vertex, vertices, first index, indices]')), data
 

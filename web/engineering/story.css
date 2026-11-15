@@ -83,3 +83,11 @@ table.meta th { width: 170px; }
 .anatomy h3 .sw { display: inline-block; width: 12px; height: 12px; border-radius: 2px; vertical-align: baseline; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.25); }
 .anatomy details summary { cursor: pointer; color: var(--muted); }
 .anatomy:target { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* Vertex Engine 1.3 field-line figures: computed vacuum field lines in review colours (a diagram, not light) */
+.figure-svg.field .bg { fill: var(--surface-1); }
+.figure-svg.field .axis { stroke: var(--line); stroke-dasharray: 4 4; }
+.figure-svg.field .fl { fill: none; stroke: var(--info); stroke-width: 0.8; opacity: 0.7; }
+.figure-svg.field .coil { fill: var(--warn); }
+.figure-svg.field .shield { fill: var(--muted); }
+.figure-svg.field .burn { fill: var(--bad); }

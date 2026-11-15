@@ -8,6 +8,9 @@
 // 1.2: every part record carries its engineering record (sizing status, note, utilisation per current case) and the manifest an engineering
 // block, both written by src/wayfarer/vertex_structure.py; the optional engineering overlay colours one engine's parts by sizing status. It
 // marks status only: no field, stress or load is drawn, and the legend names every colour in text.
+// 1.3: the manifest's magnet block (src/wayfarer/vertex_magnet.py) gives each coil part its current, force, conductor field and case
+// utilisation for the active configuration and the compared candidate. The optional field overlay draws that configuration's computed
+// vacuum field lines on one engine as one line object (fetched only when switched on); it is a diagram, not light and not plasma.
 import * as THREE from 'three';
 
 const PUSH = 0.03;              // the highlight surface sits 3 cm toward the camera (above the Draco render mesh, no z-fighting)
@@ -22,9 +25,10 @@ export function createInspector(ctx) {
   const renderOf = new Map();   // `${engine}|${render object}` -> viewer record
   const parts = new Map();      // part name -> record
   const cats = new Map();       // category id -> category
-  const sel = { engine: 'N1', part: null, cat: '', query: '', overlay: false, status: '' };
+  const sel = { engine: 'N1', part: null, cat: '', query: '', overlay: false, status: '', field: '' };
   const alignment = [];         // per render object: metres between the GLB node and the manifest placement (checked by web_check)
-  let overlay = null, back = null, engOverlay = null;
+  let overlay = null, back = null, engOverlay = null, fieldOverlay = null, fieldData = null;
+  const fieldMaterial = new THREE.LineBasicMaterial({ color: 0x8fb0c8, transparent: true, opacity: 0.55, depthWrite: false });   // review grey-blue, unlit
   const statusMaterials = new Map();   // status id -> overlay material (engineering overlay)
   const overlayMaterial = new THREE.MeshBasicMaterial({ color: SELECTED, transparent: true, opacity: 0.5, depthWrite: false,
                                                         side: THREE.DoubleSide, toneMapped: false });
@@ -199,6 +203,32 @@ export function createInspector(ctx) {
     return true;
   }
 
+  // ---- field overlay (1.3): one LineSegments per engine, the (x, rho) lines revolved about the engine axis at eight azimuths ----------
+  async function setField(id) {
+    const M = data?.magnet;
+    sel.field = M && M.configs[id] ? id : '';
+    if (fieldOverlay) { fieldOverlay.removeFromParent(); fieldOverlay.geometry.dispose(); fieldOverlay = null; }
+    if (sel.field) {
+      fieldData ??= await fetch(M.field_file).then(r => r.ok ? r.json() : null).catch(() => null);
+      const F = fieldData?.[sel.field];
+      if (F) {
+        const v = [];
+        for (const line of F.lines) for (let k = 0; k < 8; k++) {
+          const s = Math.sin(k * Math.PI / 4), c = Math.cos(k * Math.PI / 4);
+          for (let i = 0; i + 3 < line.length; i += 2) v.push(line[i], line[i + 1] * s, -line[i + 1] * c, line[i + 2], line[i + 3] * s, -line[i + 3] * c);
+        }
+        const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.Float32BufferAttribute(v, 3));
+        fieldOverlay = new THREE.LineSegments(g, fieldMaterial);
+        fieldOverlay.name = 'inspect_field'; fieldOverlay.raycast = () => {}; fieldOverlay.renderOrder = 2;
+        fieldOverlay.userData = { config: sel.field, lines: F.lines.length };
+        roots.get(sel.engine).add(fieldOverlay); fieldOverlay.updateMatrixWorld(true);
+      } else sel.field = '';
+    }
+    if (engineRow) render();
+    changed();
+    return !!fieldOverlay;
+  }
+
   function selectPart(engine, name, { frame = false } = {}) {
     if (!data || (name && !parts.has(name)) || !matrices.has(engine)) return false;
     const moved = engine !== sel.engine;
@@ -208,6 +238,7 @@ export function createInspector(ctx) {
     clearPick();
     setOverlay();
     if (moved || sel.overlay) setEngineering();
+    if (moved && sel.field) setField(sel.field);
     render();
     if (frame && name) framePart();
     changed();
@@ -252,7 +283,7 @@ export function createInspector(ctx) {
   }
 
   // ---- the drawer ------------------------------------------------------------------------------------------------------------------
-  let engineRow, catRow, search, list, details, countLine, engRow, legend;
+  let engineRow, catRow, search, list, details, countLine, engRow, legend, fieldRow;
   function buildPanel() {
     panel.querySelector('.inspect-body').innerHTML = '';
     engineRow = el('span', { className: 'chips', role: 'group', 'aria-label': 'Engine' });
@@ -292,8 +323,17 @@ export function createInspector(ctx) {
                                    on: () => setEngineeringMode(true, sel.status === s.id ? '' : s.id) },
                        el('i', { className: 'sw', 'aria-hidden': 'true', style: `background:${rgb(s.color)}` }), `${s.label} ${count(s.id)}`));
     }
+    const M = data.magnet;
+    fieldRow = M ? el('div', { className: 'chips actions field-row', role: 'group', 'aria-label': 'Field overlay' },
+      ...Object.entries(M.configs).map(([id, c]) => el('button', { textContent: `Field lines ${id}`, title: `${c.name}: computed vacuum field lines`,
+                                                                    data: { field: id }, on: () => setField(sel.field === id ? '' : id) }))) : null;
+    const verdicts = M ? Object.entries(M.configs).map(([id, c]) => `${id} (${c.name}${id === M.active ? ', active' : ''}): `
+      + (c.passed ? 'meets every hard requirement.' : `fails ${c.failed.join('; ')}.`)).join(' ') : '';
     panel.querySelector('.inspect-body').append(
       el('div', { className: 'row' }, el('span', { textContent: 'Engine' }), engineRow), actions, details,
+      M ? el('div', { className: 'row' }, el('span', { textContent: 'Magnet' })) : null, fieldRow,
+      M ? el('p', { className: 'note field-note' }, `${M.disclaimer} ${verdicts} `,
+             el('a', { href: '../engineering/vertex/#magnet', textContent: 'Magnetic design' })) : null,
       el('div', { className: 'row' }, el('span', { textContent: 'Structure' })), engRow, legend,
       el('p', { className: 'note eng-note', textContent: `${E.disclaimer} Design case ${E.design_case}; utilisation 1 is the allowable.` }),
       el('div', { className: 'row' }, el('span', { textContent: 'Group' })), catRow, search, countLine, list,
@@ -342,6 +382,14 @@ export function createInspector(ctx) {
       g ? row('Member', `${g.title}: ${g.material}${g.radius_m ? `, outer radius ${g.radius_m} m` : ''}, governed by ${g.governs}`) : null,
       uN !== null ? row('Utilisation', `${fmt(uN)} ${E.design_case}${uC !== null ? ` · ${fmt(uC)} CONSERVATIVE` : ''} (1 = allowable)`) : null,
       row('Engineering', E.notes[noteKey], ' ', el('a', { href: '../engineering/vertex/#structure', textContent: 'Structure' }))].filter(Boolean);
+    const coil = /_(C1|C2|L[1-4])(_|$)/.exec(p.name)?.[1], M = data.magnet;
+    if (coil && M) {
+      for (const [id, c] of Object.entries(M.configs)) {
+        const [I, F, B, u, n] = c.coils[coil];
+        eng.push(row(`Coil ${id}`, `${coil}: ${I.toFixed(2)} MA-turns (${n} turns), ${F.toFixed(0)} MN axial, ${B.toFixed(1)} T at the conductor, `
+                     + `case ${u.toFixed(2)} (1 = allowable)${id === M.active ? ' · active' : ''}`));
+      }
+    }
     details.append(
       el('h3', { textContent: p.label }),
       el('p', { className: 'meta' }, el('code', { textContent: p.id }), ` · engine ${sel.engine}`,
@@ -368,6 +416,7 @@ export function createInspector(ctx) {
     for (const b of engineRow.querySelectorAll('button')) b.setAttribute('aria-pressed', String(b.dataset.inspectEngine === sel.engine));
     for (const b of catRow.querySelectorAll('button')) b.setAttribute('aria-pressed', String(b.dataset.cat === sel.cat));
     engRow.querySelector('button').setAttribute('aria-pressed', String(sel.overlay));
+    if (fieldRow) for (const b of fieldRow.querySelectorAll('button')) b.setAttribute('aria-pressed', String(b.dataset.field === sel.field));
     for (const b of legend.querySelectorAll('button')) b.setAttribute('aria-pressed', String(sel.overlay && (!sel.status || b.dataset.status === sel.status)));
     renderDetails();
     renderList();
@@ -380,13 +429,14 @@ export function createInspector(ctx) {
     if (sel.cat) out.push(`cat=${sel.cat}`);
     if (sel.part) out.push(`part=${sel.engine}.${sel.part}`);
     if (sel.overlay) out.push(`ov=eng${sel.status ? '.' + sel.status : ''}`);
+    if (sel.field) out.push(`fl=${sel.field}`);
     return out.join('&');
   }
   function asked(h) {
     const p = new URLSearchParams(h.replace(/^#/, ''));
     const part = /^(N\d)\.(\w+)$/.exec(p.get('part') || '');
     const ov = /^eng(?:\.(\w+))?$/.exec(p.get('ov') || '');
-    return { engine: part?.[1] || p.get('eng'), part: part?.[2] || null, cat: p.get('cat') || '', overlay: !!ov, status: ov?.[1] || '' };
+    return { engine: part?.[1] || p.get('eng'), part: part?.[2] || null, cat: p.get('cat') || '', overlay: !!ov, status: ov?.[1] || '', field: p.get('fl') || '' };
   }
   async function openFrom(h, build) {
     const a = asked(h);
@@ -396,12 +446,14 @@ export function createInspector(ctx) {
     ctx.openDrawer();
     selectPart(matrices.has(a.engine) ? a.engine : 'N1', parts.has(a.part) ? a.part : null);
     if (a.overlay) setEngineeringMode(true, a.status);
+    if (a.field) await setField(a.field);
     return true;
   }
 
   return {
-    load, pick, selectPart, frameEngine, framePart, goBack, isolate, hash, openFrom, render, setEngineeringMode,
+    load, pick, selectPart, frameEngine, framePart, goBack, isolate, hash, openFrom, render, setEngineeringMode, setField,
     engineering: () => engOverlay,
+    field: () => fieldOverlay,
     active: () => !!data && !panel.hidden,
     hasPart: () => !!sel.part,
     state: () => ({ ...sel }),

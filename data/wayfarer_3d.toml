@@ -5313,6 +5313,72 @@ items = [
   { id = "VTX-S5", name = "Lightweight pulsed-power driver hall", extends = "BT-006", effect = "The shared driver hall in the former drive bay feeds four engines at the research specific mass or better." },
 ]
 
+# Vertex Engine 1.3 magnetic design closure (owner brief 2026-11-15 "Magnetic Design Closure, Coil Optimization & Plasma-Nozzle
+# Feasibility"): the inputs of vertex_magnet.py. The field is solved exactly (vacuum); the plasma is screened by bounded scenarios
+# (energy-balance stopping, test particles, flux-conserving coils), never by a favourable distribution. The 1.2 cases NOMINAL,
+# CONSERVATIVE and EXTREME stay the reference (M0); candidates are compared against them and none becomes the engine without passing.
+[vertex_engine.magnet]
+evidence = "ENGINEERING_PROTOTYPE"
+version = "1.3.0"
+# The pulse (MF-01). Design: the research jet share of the fusion yield (jet_TW / fusion_TW) is charged plasma the field must stop and turn.
+# Upper bound: the whole yield as plasma kinetic energy (no X-ray or neutron share), the most the field could ever have to hold.
+upper_energy_share = 1.0
+# Species the test particles screen: burn debris ions at the research exhaust speed (bulk_speed_factor x exhaust velocity) and the D-3He
+# fusion products at their birth energies (14.7 MeV p, 3.6 MeV alpha). Radiation (X-rays) and neutrons are not deflected by any field.
+species = [
+  { id = "D_debris", name = "Deuteron, burn debris", mass_amu = 2.01410, charge = 1, bulk_speed_factor = 1.0 },
+  { id = "He3_debris", name = "Helium-3 ion, burn debris", mass_amu = 3.01603, charge = 2, bulk_speed_factor = 1.0 },
+  { id = "p_14.7MeV", name = "Fusion proton 14.7 MeV", mass_amu = 1.00728, charge = 1, energy_MeV = 14.7 },
+  { id = "alpha_3.6MeV", name = "Fusion alpha 3.6 MeV", mass_amu = 4.00151, charge = 2, energy_MeV = 3.6 },
+]
+# Capture screen (MF-01, MF-02; PROTOTYPE rules): in every direction from the burn point the field must stop the pulse's share of the energy
+# before the first piece of hardware with this margin (obstacle distance / stopping distance). The margin covers the Larmor radius of the
+# stopped ions (about 0.3 m) and the bubble's overshoot. Strict protects the shield face, every cryostat and the cage; relaxed lets the burn
+# face (already the VTX-S3 armour that takes the X-ray load) take plasma too.
+capture_margin = 1.25
+protect_strict = ["SHIELD", "COILS", "CAGE"]
+protect_relaxed = ["COILS", "CAGE"]
+ray_step_deg = 5
+optimiser_ray_step_deg = 5
+optimiser_margin_buffer = 0.01         # the optimiser aims this far above the capture margin so the stored candidate passes on re-evaluation
+# Conductor limits (MF-07 hardware). Field at the conductor and winding-pack current density demonstrated by the SPARC toroidal field model
+# coil (sparc_tfmc: 20.1 T peak at 40.5 kA, 20 K; winding-pack design current density 153 A/mm2). REBCO critical current is not unlimited
+# and its Jc(B, T, angle) stays OPEN in PMDS (OD-024); these are the demonstrated envelope, not a margin to the critical surface.
+conductor_field_limit_T = 20.0
+winding_current_density_A_m2 = 1.53e8
+conductor_source = "sparc_tfmc"
+conductor_status = "TRANSCRIBED"
+# Test particles (PARTICLE_TRAJECTORY_SCREENED): directions per species, the aft escape plane past the exit, the radial escape limit.
+particles_per_species = 200
+particle_hit_limit = 0.05             # MF-02 by particles: at most this share of any species may reach the shield, a cryostat or the cage
+# Limit of the energy-balance screen: it weighs B^2 regardless of direction. Where the field meets the expanding plasma end-on (its poles on
+# the axis) there is no tangential field to confine it, so the axis is where the screen is optimistic; the particle screen covers it.
+exit_margin_m = 2.0
+radial_limit_m = 25.0
+detach_scan_m = 60.0                  # axial distance aft of the exit over which ion demagnetisation is searched
+# Optimiser (deterministic Nelder-Mead from recorded starts; python3 src/wayfarer/vertex_magnet.py --optimise re-runs it)
+optimiser_iterations = 600
+dipole_weight_MN = 100.0              # M3: objective weight of the net dipole moment (relative to the 1.2 NOMINAL moment)
+# Magnet engineering screens (PROTOTYPE): charging supply voltage for the ramp time, cryostat inner wall (316LN at 20 K, resistivity class
+# 5e-7 ohm m) that screens the pulse-rate field ripple from the windings and takes its eddy heat instead.
+ramp_supply_V = 500.0
+cryostat_wall_m = 0.02
+cryostat_wall_resistivity_ohm_m = 5.0e-7
+pareto_margins = [0.75, 1.0, 1.25, 1.5, 2.0]
+overlay_compare = "M2"                # the candidate Explore Ship's field overlay shows beside the active configuration
+selected = "M0-NOMINAL"               # the active engine configuration (unchanged unless a candidate passes every hard requirement)
+# Outcome B (1.3, 2026-11-15): no candidate passes every hard requirement. M2 closes the energy-balance capture screen inside the drawn
+# envelope at 106 MN peak coil force (1.2 NOMINAL: 272 MN, no capture), but about 19 % of the test particles still reach the shield through
+# the forward mirror's loss cone, the reversed closure-coil loads need struts and reaction ring at 3-4x their 1.2 sizes, and detachment
+# stays OPEN. The 1.2 geometry and currents stay the engine; the candidates are research records.
+verdict = "PROPULSION_FEASIBILITY_BLOCKED"
+candidates = [
+  { id = "M1", name = "Independent currents, shield protected", status = "CANDIDATE", evidence = "ENGINEERING_PROTOTYPE", protect = "strict", mode = "force", optimised = true, start_MAt = [8.87, 6.56, 13.2, 6.43, 13.67, 7.67], currents_MAt = [9.024, 6.788, 13.422, 6.106, 13.869, 6.603], note = "Six independent signed currents on the 1.2 coils; the shield face, cryostats and cage protected. The burn-face-as-armour variant finds the same optimum: the binding direction is C2 at 55 deg, not the shield. Capture stops at a margin of 1.22: the C2 cryostat is 4.6 m from the burn point." },
+  { id = "M2", name = "Coil geometry and currents", status = "CANDIDATE", evidence = "ENGINEERING_PROTOTYPE", protect = "strict", mode = "force", optimised = true, start_MAt = [8.87, 6.56, 13.2, 6.43, 13.67, 7.67], currents_MAt = [8.842, 6.409, 13.205, 6.467, 11.048, 5.9], geometry = { C1 = { x = -14.034, r = 2.521, a = 0.311 }, C2 = { x = -15.64, r = 4.306, a = 0.374 }, L1 = { x = -16.273, r = 5.922, a = 0.36 }, L2 = { a = 0.369 }, L3 = { a = 0.341 }, L4 = { a = 0.302 } }, capture_closed = true, geometry_free = ["C1.x", "C1.r", "C2.x", "C2.r", "L1.x", "L1.r", "C1.a", "C2.a", "L1.a", "L2.a", "L3.a", "L4.a"], max_shift_m = 1.0, max_radius_change = 0.1, min_strut_rake = 0.7, cryostat_gap_m = 0.15, note = "M1 with C1, C2 and L1 moved inside 1 m and 10 % of radius, and thicker winding packs inside the drawn cryostats (0.15 m left for the vacuum gap, 80 K screen and MLI); the closure-coil struts keep 70 % of their rake. Nothing outside the drawn envelope." },
+  { id = "M3", name = "Load-balanced currents", status = "CANDIDATE", evidence = "ENGINEERING_PROTOTYPE", protect = "strict", mode = "balanced", optimised = true, start_MAt = [8.87, 6.56, 13.2, 6.43, 13.67, 7.67], currents_MAt = [9.057, 6.788, 13.424, 6.156, 13.758, 6.436], note = "M1 with the net dipole moment (inter-engine force) in the objective." },
+  { id = "M4", name = "Speculative: quarter yield per pulse", status = "SPECULATIVE", evidence = "SPECULATIVE", protect = "strict", mode = "force", optimised = false, yield_share = 0.25, from = "M1", note = "VTX-S1 pushed further: a quarter of the C-02 yield per pulse at four times the rate (22.8 kHz, VTX-S2 harder). Field and capture unchanged at half the currents; forces and stored energy a quarter." },
+]
+
 # Engine anatomy (Vertex Engine 1.1, owner brief 2026-11-14): the explanation each functional category carries into Explore Ship's part
 # inspection and the Engineering vertex page. Prose for visitors, not engineering values; physics, speculation and open questions stay
 # apart. weakest_links and breakthroughs name records of lab/studies/breakthrough-lab (not canon; never copied here).
