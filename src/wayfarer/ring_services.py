@@ -98,6 +98,9 @@ PROTOTYPE = {
     'chx_UA_W_K': dict(value=1500.0, unit='W/K', status='PROTOTYPE', note='The coil\'s conductance (counterflow).'),
     'pump_kg_s': dict(value=0.2, unit='kg/s', status='PROTOTYPE', note='Coolant flow of one pump; two pumps per ring, each a part.'),
     'T_supply_K': dict(value=277.15, unit='K', status='PROTOTYPE', note='Chilled coolant supply (4 C, the ISS low-temperature loop).'),
+    'T_supply_economy_K': dict(value=285.15, unit='K', status='PROTOTYPE',
+                               note='The heat pump\'s economy setpoint (12 C supply): a better COP and less work, but a warmer coil that '
+                                    'condenses less, so the cabin dries less. The two setpoints are the only ones the controller offers.'),
     'T_set_K': dict(value=296.15, unit='K', status='PROTOTYPE', note='Cabin temperature setpoint (23 C; BVAD nominal 296 K).'),
     'control_band_K': dict(value=2.0, unit='K', status='PROTOTYPE',
                            note='The temperature control valve sends a share f = 0.5 + (T - T_set) / band of the fan\'s air over the coil '
@@ -171,7 +174,7 @@ def params(s=None, reg=None):
                 battery_Wh=float(st['main_battery']['usable_energy_Wh']), pulse_Wh=float(st['pulse_bank']['energy_Wh']),
                 survival_loads=list(st['survival_reserve']['loads']),
                 C=pv['heat_capacity_J_K'], T0=pv['T0_K'], rh0=pv['rh0'], Q_air=pv['chx_air_m3_s'], UA=pv['chx_UA_W_K'],
-                pump=pv['pump_kg_s'], T_s=pv['T_supply_K'], T_set=pv['T_set_K'], band=pv['control_band_K'], f_min=pv['coil_min_fraction'], hp_max=pv['heat_pump_W'], conv_W=pv['battery_converter_W'],
+                pump=pv['pump_kg_s'], T_s=pv['T_supply_K'], T_s_economy=pv['T_supply_economy_K'], T_set=pv['T_set_K'], band=pv['control_band_K'], f_min=pv['coil_min_fraction'], hp_max=pv['heat_pump_W'], conv_W=pv['battery_converter_W'],
                 gen_W=pv['generator_W'], pack_Wh=pv['pack_Wh'], ship_W=dict(pv['ship_load_W']), T_max=LIMITS['T_max_K'],
                 T_min=LIMITS['T_min_K'], rh_limit=LIMITS['rh_limit'],
                 equipment=[dict(id=e['id'], W=e['W'], bus=e['bus'], survival=e['survival'], shed=e['shed'], slots=list(e['slots']))
@@ -217,7 +220,7 @@ def eps_counterflow(ntu, cr):
     return (1.0 - e)/(1.0 - cr*e)
 
 
-def coil(p, T, m_w, fan, pumps, hp_on):
+def coil(p, T, m_w, fan, pumps, hp_on, T_s0=None):
     """The cabin heat exchanger now: sensible heat removed Q_s (W), water condensed (kg/s), heat taken by the heat pump (W), its work (W),
     the supply and mean coil temperatures (K)."""
     zero = dict(Q_s=0.0, cond=0.0, Q_hp=0.0, W_hp=0.0, T_s=T, T_coil=T, f=0.0)
@@ -230,13 +233,14 @@ def coil(p, T, m_w, fan, pumps, hp_on):
     cmin = min(Ca, Cc); cmax = max(Ca, Cc)
     eps = eps_counterflow(p['UA']/cmin, cmin/cmax)
     rho_v = m_w/p['V_m3']
-    T_s = p['T_s']; cond = 0.0; Q_s = 0.0; T_coil = T_s
+    T_s0 = p['T_s'] if T_s0 is None else T_s0
+    T_s = T_s0; cond = 0.0; Q_s = 0.0; T_coil = T_s
     for _ in range(ITERATIONS):
         Q_s = eps*cmin*max(T - T_s, 0.0)
         latent = H_FG*cond
         if Q_s + latent > p['hp_max']:
             # past the heat pump's capacity the supply warms until it takes no more than its capacity
-            T_s = max(p['T_s'], T - max(p['hp_max'] - latent, 0.0)/(eps*cmin))
+            T_s = max(T_s0, T - max(p['hp_max'] - latent, 0.0)/(eps*cmin))
             Q_s = eps*cmin*max(T - T_s, 0.0)
         T_coil = T_s + (Q_s + latent)/(2.0*Cc)
         cond = Qa*eps*max(rho_v - rho_sat(T_coil), 0.0)
@@ -255,7 +259,7 @@ def start(p, occupants=None, fusion=True):
     for r in RINGS:
         T = p['T0']
         x = occ[r]*p['g_c']/p['k_m3_s']*R*T/(p['P_Pa']*M_CO2) if occ[r] else 0.0004
-        ring[r] = dict(T=T, m_w=m_w_at(p, T, p['rh0']), m_c=m_c_at(p, T, x), on={e['id']: True for e in p['equipment']},
+        ring[r] = dict(T=T, m_w=m_w_at(p, T, p['rh0']), m_c=m_c_at(p, T, x), economy=False, on={e['id']: True for e in p['equipment']},
                        isolated={e['id']: False for e in p['equipment']})
     parts = {}
     for r in RINGS:
@@ -266,7 +270,7 @@ def start(p, occupants=None, fusion=True):
     st = dict(t_s=0.0, ring=ring, occ=occ, parts=parts, fusion=bool(fusion), gen={'A': True, 'B': True}, tie=False,
               breaker={'A': True, 'B': True}, conv_on={'A': True, 'B': True}, E=p['battery_Wh']*3600.0,
               pack={r: p['pack_Wh']*3600.0 for r in RINGS}, log=[], trips=[])
-    st['E0'] = st['E']; st['pack0'] = dict(st['pack'])
+    st['E0'] = st['E']; st['pack0'] = dict(st['pack']); st['pulse_J'] = 0.0
     st['acc'] = {k: 0.0 for k in ACC_KEYS}
     st['init'] = {r: dict(T=ring[r]['T'], m_w=ring[r]['m_w'], m_c=ring[r]['m_c']) for r in RINGS}
     return st
@@ -346,6 +350,27 @@ def set_converter(st, bus, on):
     st['log'].append((st['t_s'], 'converter', bus, bool(on)))
 
 
+def set_economy(st, ring, on):
+    """The ring heat pump's supply setpoint: normal or economy (T_supply_economy_K)."""
+    st['ring'][ring]['economy'] = bool(on)
+    st['log'].append((st['t_s'], 'economy', ring, bool(on)))
+
+
+def supply(p, st, ring):
+    return p['T_s_economy'] if st['ring'][ring]['economy'] else p['T_s']
+
+
+def charge_pulse(st, p):
+    """Charge the drive's pulse bank from the main battery for a plant restart (pulse_bank.energy_Wh). Refused (False) when the battery
+    holds less."""
+    need = p['pulse_Wh']*3600.0
+    if st['E'] < need:
+        return False
+    st['E'] -= need; st['pulse_J'] += need
+    st['log'].append((st['t_s'], 'pulse', '', need))
+    return True
+
+
 def set_fusion(st, on):
     st['fusion'] = bool(on)
     st['log'].append((st['t_s'], 'fusion', '', bool(on)))
@@ -389,7 +414,7 @@ def settle(p, st):
         pumps = sum(1 for e in p['equipment'] if e['id'] in ('P1', 'P2') and equipment_ready(p, st, r, e))
         fan = equipment_ready(p, st, r, eq(p, 'CHX'))
         hp = equipment_ready(p, st, r, eq(p, 'HP'))
-        coils[r] = coil(p, rr['T'], rr['m_w'], fan, pumps, hp)
+        coils[r] = coil(p, rr['T'], rr['m_w'], fan, pumps, hp, supply(p, st, r))
     src = sources(p, st)
     dem = demand(p, st, coils)
     live = {}
@@ -452,7 +477,7 @@ def derivs(p, st, plan, y):
         run = plan['run'][r]
         powered = lambda i: run[i] in ('BUS', 'PACK')
         pumps = (1 if powered('P1') else 0) + (1 if powered('P2') else 0)
-        c = coil(p, T, m_w, powered('CHX'), pumps, powered('HP'))
+        c = coil(p, T, m_w, powered('CHX'), pumps, powered('HP'), supply(p, st, r))
         elec = 0.0
         for e in p['equipment']:
             s = run[e['id']]
@@ -573,7 +598,7 @@ def ledgers(st, p):
         out[f'{r}.co2_kg'] = (rr['m_c'] + a[f'{r}.c_rem']) - (i0['m_c'] + a[f'{r}.c_gen'])
         out[f'{r}.heat_J'] = (p['C']*(rr['T'] - i0['T']) + a[f'{r}.q_rem']) - (a[f'{r}.q_crew'] + a[f'{r}.q_elec'])
         out[f'{r}.coolant_J'] = a[f'{r}.rejected'] - (a[f'{r}.q_rem'] + a[f'{r}.q_lat'] + a[f'{r}.w_hp'])
-    out['battery_J'] = (st['E0'] - st['E']) - a['E_batt']
+    out['battery_J'] = (st['E0'] - st['E']) - a['E_batt'] - st['pulse_J']
     out['packs_J'] = sum(st['pack0'][r] - st['pack'][r] for r in RINGS) - (a['E_pack.A'] + a['E_pack.B'])
     out['served_J'] = a['E_served'] - (a['E_gen'] + a['E_batt'] + a['E_pack.A'] + a['E_pack.B'])
     places = [q['at'] for q in st['parts'].values()]
@@ -589,7 +614,8 @@ def readout(st, p):
     for r in RINGS:
         rr = st['ring'][r]
         pumps = sum(1 for i in ('P1', 'P2') if plan['run'][r][i] in ('BUS', 'PACK'))
-        c = coil(p, rr['T'], rr['m_w'], plan['run'][r]['CHX'] in ('BUS', 'PACK'), pumps, plan['run'][r]['HP'] in ('BUS', 'PACK'))
+        c = coil(p, rr['T'], rr['m_w'], plan['run'][r]['CHX'] in ('BUS', 'PACK'), pumps, plan['run'][r]['HP'] in ('BUS', 'PACK'),
+                 supply(p, st, r))
         out['rings'][r] = dict(T_C=rr['T'] - 273.15, rh=rh(p, rr['T'], rr['m_w']), dew_C=dew_point(p, rr['T'], rr['m_w']) - 273.15,
                                co2_pct=100.0*x_co2(p, rr['T'], rr['m_c']), occupants=st['occ'][r], Q_s_W=c['Q_s'],
                                cond_kg_h=c['cond']*3600.0, hp_W=c['W_hp'], T_coil_C=c['T_coil'] - 273.15,

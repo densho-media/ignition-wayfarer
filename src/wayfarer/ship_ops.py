@@ -46,6 +46,7 @@ EPS = 1e-6
 ENGINEERING_KEYS = {'C', 'V_m3', 'Q_air', 'UA', 'pump', 'T_s', 'hp_max', 'conv_W', 'gen_W', 'pack_Wh', 'ship_W', 'g_c', 'g_w', 'q_sens',
                     'k_m3_s', 'co2_max', 'co2_target', 'T_max', 'rh_max', 'rh_limit', 'battery_Wh'}
 VALID_ABOVE_LIMIT_K = 8.0   # past T_max + this the model's cabin has left its range: no equipment over-temperature trips, no passive loss
+POWER_ITEMS = ('BUS.A', 'BUS.B', 'BC-A', 'BC-B', 'BATTERY', 'PACKS', 'TIE')
 BAY_SLOTS = ('CO2.FAN', 'CHX.FAN', 'P1.PUMP', 'P2.PUMP')
 
 
@@ -118,6 +119,8 @@ class Run:
             rs.set_on(self.st, e[0], e[1], False)
         for part, place in pr.get('spares', []):
             self.st['parts'][part] = dict(lru=place[0], at=place[1], ok=True)
+        self.restart_s = float(pr['restart_h'])*H if 'restart_h' in pr else None
+        self.restart = None                       # None until the window opens; then dict(ok, battery_kWh, t_s)
         self.trainee = self.people[0]
         self.job = None                           # the trainee's work: dict(kind, slot, part, done_s, need_s)
         self.hands = None                         # the part in the trainee's hands
@@ -173,6 +176,10 @@ class Run:
             return 'the watch is running: nothing can be changed now'
         if kind == 'trainee':
             self.trainee['node'] = a[0]; return ''
+        if kind == 'inspect' and a[0] in POWER_ITEMS:
+            if not self.at('console'):
+                return 'the electrical overview is at the ops console in sector 2'
+            self.inspected.setdefault(a[0], self.t); return ''
         if kind == 'inspect':
             if not self.at('bay'):
                 return 'the machines are in the ECLSS bay in sector 3: you have to be there'
@@ -228,7 +235,7 @@ class Run:
             if self.job is not None and self.job['part'] == self.hands:
                 return 'you are installing it'
             rs.move_part(st, self.hands, 'A.SHELF'); self.hands = None; return ''
-        if kind in ('switch', 'tie', 'reset', 'converter'):
+        if kind in ('switch', 'tie', 'reset', 'converter', 'economy'):
             if not self.at('console'):
                 return 'switching is done at the ops console in sector 2'
             if kind == 'switch':
@@ -240,6 +247,8 @@ class Run:
                 rs.set_tie(st, bool(a[0])); return ''
             if kind == 'reset':
                 rs.reset_breaker(st, a[0]); return ''
+            if kind == 'economy':
+                rs.set_economy(st, a[0], bool(a[1])); return ''
             rs.set_converter(st, a[0], bool(a[1])); return ''
         if kind == 'order':
             pair, what = a[0], a[1]
@@ -355,6 +364,13 @@ class Run:
         dt = self.dt if dt is None else dt
         while self.later_faults and self.later_faults[0][0] <= self.t + EPS:
             rs.fail_part(self.st, self.later_faults.pop(0)[1])
+        if self.restart_s is not None and self.restart is None and self.t >= self.restart_s - EPS:
+            E = self.st['E']
+            ok = rs.charge_pulse(self.st, self.p)
+            if ok:
+                rs.set_fusion(self.st, True)
+            self.restart = dict(ok=ok, battery_kWh=E/3.6e6, t_s=self.t)
+            self.log.append([self.t, 'restart', [ok, E/3.6e6], ''])
         self._work(dt)
         self._tasks(dt)
         self._occupy()
@@ -442,7 +458,14 @@ class Run:
         ok = lambda e: rs.equipment_ready(p, st, r, rs.eq(p, e))
         return ok('CO2') and ok('CHX') and (ok('P1') or ok('P2')) and ok('HP')
 
+    def dark(self, r):
+        """A ring with every survival load switched off: cold and dark, nothing running."""
+        on = self.st['ring'][r]['on']
+        return not any(on[e['id']] for e in self.p['equipment'] if e['survival'])
+
     def family(self):
+        if self.sc['_name'] == 'ds3':
+            return self.family_ds3()
         parts = self.st['parts']
         borrowed = [k for k, v in parts.items() if k.startswith('B.') and v['at'].startswith('A.')]
         in_co2 = next((k for k, v in parts.items() if v['at'] == 'A.CO2.FAN'), None)
@@ -457,9 +480,26 @@ class Run:
             return 'BORROW_FAN'
         return 'NO_REPAIR'
 
+    def family_ds3(self):
+        c = self.watch.get('config') or self.config()
+        if not c['tie']:
+            return 'PACKS_ONLY'
+        off_a = set(c['off']['A'])
+        if 'GARDEN' not in off_a:
+            return 'KEEP_GARDEN'
+        if self.dark('B'):
+            return 'SHED_DARK_B'
+        if self.st['ring']['A']['economy']:
+            return 'SHED_ECONOMY'
+        return 'SHED_GARDEN'
+
     def verdict(self, limit_only=False):
         fc = self.first_cross; late = self.after24
-        if fc['co2'] is not None:
+        failed_restart = self.restart is not None and not self.restart['ok']
+        first = min([v for v in fc.values() if v is not None], default=None)
+        if failed_restart and (first is None or first >= self.restart['t_s'] - EPS):
+            res = 'RESTART_FAILED'                # the limits that follow come from the restart that could not happen
+        elif fc['co2'] is not None:
             res = 'CO2_LIMIT'
         elif fc['hot'] is not None:
             res = 'HEAT_LIMIT'
@@ -495,7 +535,9 @@ class Run:
                     battery_kWh=st['E']/3.6e6, battery_used_kWh=(st['E0'] - st['E'])/3.6e6,
                     packs_kWh={r: st['pack'][r]/3.6e6 for r in rs.RINGS}, first_inspect_h=None if first_inspect is None else first_inspect/H,
                     last_action_h=(acts[-1][0]/H if acts else None), watch_declared_h=(self.watch['t0']/H if self.watch else None),
-                    refusals=sum(1 for e in self.log if e[3]))
+                    refusals=sum(1 for e in self.log if e[3]), restart=self.restart,
+                    trips=[[t/H, b] for t, b, _, _ in st['trips']], dark_rings=[r for r in rs.RINGS if self.dark(r)],
+                    economy=[r for r in rs.RINGS if st['ring'][r]['economy']])
 
     def debrief(self):
         return dict(watch=dict(family=self.family(), verdict=self.watch.get('verdict') or self.verdict(),
@@ -614,7 +656,35 @@ def cases(name):
 
 
 def cases_ds3():
-    return []
+    """The DS-3 reference scripts: every strategy family, failures (the packs run out, the tie trips, the battery is short at the
+    restart window, a load that grows trips the tie during the watch), refusals and a replay."""
+    T0 = 60.0
+    base = [[0.0, 'trainee', 'A1'], [T0, 'trainee', 'A2'], [T0 + 30.0, 'inspect', 'BUS.B'], [T0 + 40.0, 'inspect', 'BC-B'],
+            [T0 + 50.0, 'inspect', 'PACKS']]
+    D = T0 + 60.0
+    sw = lambda t, ring, loads: [[t, 'switch', ring, e, False] for e in loads]
+    tie = lambda t: [[t, 'tie', True], [t, 'reset', 'A'], [t, 'reset', 'B']]
+    dark_b = lambda t: sw(t, 'B', ['CHX', 'P1', 'P2', 'HP', 'TCC', 'VENT', 'AV'])
+    W = lambda t: [[t, 'watch']]
+    shed3 = sw(D, 'A', ['GARDEN', 'GALLEY', 'LAB'])
+    return [
+        ('nothing', 'No action: bus B stays on its survival packs.', base + W(D)),
+        ('tie_only', 'Close the tie with every load on: BC-A is asked for more than its rating.', base + tie(D) + W(D + 20.0)),
+        ('shed_garden', 'Shed the Garden lights, galley and lab in ring A, close the tie and reset the breakers.',
+         base + shed3 + tie(D + 10.0) + W(D + 30.0)),
+        ('shed_dark_b', 'Shed the Garden lights and galley in ring A, darken the empty ring B, close the tie.',
+         base + sw(D, 'A', ['GARDEN', 'GALLEY']) + dark_b(D) + tie(D + 10.0) + W(D + 30.0)),
+        ('shed_economy', 'Shed the Garden lights, galley and lab, set ring A\'s heat pump to economy, close the tie.',
+         base + shed3 + [[D, 'economy', 'A', True]] + tie(D + 10.0) + W(D + 30.0)),
+        ('short_reserve', 'Shed only the Garden lights and galley and close the tie: it holds, but the battery runs short of the restart '
+                          'reserve.', base + sw(D, 'A', ['GARDEN', 'GALLEY']) + tie(D + 10.0) + W(D + 30.0)),
+        ('keep_garden', 'Keep the Garden lit: darken ring B, shed the lab, galley and lights, economy in ring A, close the tie.',
+         base + sw(D, 'A', ['LAB', 'GALLEY', 'LIGHT']) + dark_b(D) + [[D, 'economy', 'A', True]] + tie(D + 10.0) + W(D + 30.0)),
+        ('refused', 'Refusals: switching at the bay, reading the overview away from the console; then shed_garden.',
+         [[0.0, 'trainee', 'A3'], [10.0, 'switch', 'A', 'GARDEN', False], [10.0, 'inspect', 'BC-B'], [20.0, 'tie', True]] + base[1:]
+         + shed3 + tie(D + 10.0) + W(D + 30.0)),
+        ('replay_shed_garden', 'Replay of shed_garden from the same start.', 'shed_garden'),
+    ]
 
 
 def contract(name='ds2c', root=ROOT):
@@ -641,7 +711,7 @@ def main(argv):
         print(f"{n:24s} {db['watch']['family']:16s} {v['result']:15s}{' degraded' if v['degraded'] else '':9s} "
               f"peak CO2 {v['peak']['co2_pct']:.3f} % T {v['peak']['T_C']:.1f} C RH {v['peak']['rh']:.2f} | "
               f"limit crew-h co2 {v['crew_h']['co2_limit']:.1f} heat {v['crew_h']['heat_limit']:.1f} | from B {m['parts_from_ring_b']} "
-              f"hostable {m['hostable']} shed {m['shed_kWh']:.0f} kWh crossings {m['crossings']} refusals {m['refusals']} | ledger {led:.1e}")
+              f"hostable {m['hostable']} restart {m['restart'] and round(m['restart']['battery_kWh'])} trips {m['trips']} shed {m['shed_kWh']:.0f} kWh crossings {m['crossings']} refusals {m['refusals']} | ledger {led:.1e}")
 
 
 if __name__ == '__main__':

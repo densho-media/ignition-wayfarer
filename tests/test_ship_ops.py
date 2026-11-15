@@ -103,3 +103,61 @@ class BorrowedAirTests(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+
+class DarkBusTests(unittest.TestCase):
+    """DS-3 "Dark Bus": a converter failure during a fusion-off coast. The tie trips when asked for more than BC-A's rating, the packs carry
+    only survival loads until they are empty, the restart draws the pulse bank from the battery or fails, a load that grows with the
+    cabin's temperature can trip the tie during the watch, and the viable strategies spend different things."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.sc = so.load('ds3')
+        cls.p = so.params()
+        cls.runs = {n: so.play(cls.sc, cls.p, a) for n, _, a in so.cases('ds3')}
+
+    def deb(self, n):
+        return self.runs[n][0].debrief()
+
+    def test_outcomes(self):
+        want = dict(nothing='HEAT_LIMIT', tie_only='CO2_LIMIT', shed_garden='STABLE', shed_dark_b='STABLE', shed_economy='STABLE',
+                    short_reserve='RESTART_FAILED', keep_garden='CO2_LIMIT')
+        for n, v in want.items():
+            self.assertEqual(self.deb(n)['watch']['verdict']['result'], v, n)
+
+    def test_trips_are_physical(self):
+        self.assertTrue(self.deb('tie_only')['metrics']['trips'])
+        late = self.deb('keep_garden')['metrics']['trips']
+        self.assertTrue(late and late[0][0] > 1.0)         # it held at first and tripped as the cabin warmed
+        self.assertFalse(self.deb('shed_garden')['metrics']['trips'])
+
+    def test_restart_draws_the_pulse_bank(self):
+        for n in ('shed_garden', 'short_reserve'):
+            r = self.runs[n][0]
+            ok = r.restart['ok']
+            self.assertEqual(ok, r.restart['battery_kWh'] >= self.p['pulse_Wh']/1000.0, n)
+            self.assertEqual(r.st['pulse_J'], self.p['pulse_Wh']*3600.0 if ok else 0.0, n)
+
+    def test_packs_only_carry_survival_loads(self):
+        r = self.runs['nothing'][0]
+        self.assertEqual(r.st['pack']['A'], 0.0)
+        self.assertGreater(r.st['acc']['E_unserved'], 0.0)
+
+    def test_viable_strategies_are_not_dominated(self):
+        rows = {}
+        for n in ('shed_garden', 'shed_dark_b', 'shed_economy'):
+            m = self.deb(n)['metrics']; v = self.deb(n)['watch']['verdict']
+            # lower is better in every column: service shed, reserve spent, humidity-band hours, rings left dark
+            rows[n] = (m['shed_kWh'], -m['restart']['battery_kWh'], v['crew_h']['humidity_band'], len(m['dark_rings']))
+        for a in rows:
+            for b in rows:
+                if a != b:
+                    self.assertFalse(all(x <= y for x, y in zip(rows[b], rows[a])) and rows[a] != rows[b], f'{a} dominated by {b}')
+
+    def test_every_ledger_closes(self):
+        for n, (r, _) in self.runs.items():
+            for k, v in rs.ledgers(r.st, self.p).items():
+                self.assertLess(abs(v), 1e3 if k.endswith('_J') else 1e-9, f'{n} {k}')
+
+    def test_replay_is_identical(self):
+        self.assertEqual(self.runs['replay_shed_garden'][1], self.runs['shed_garden'][1])
